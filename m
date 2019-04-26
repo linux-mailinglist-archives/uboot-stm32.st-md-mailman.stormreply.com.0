@@ -2,37 +2,38 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 050C6B315
+	by mail.lfdr.de (Postfix) with ESMTPS id 038DDB314
 	for <lists+uboot-stm32@lfdr.de>; Sat, 27 Apr 2019 10:15:15 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D0ADC36B3F
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A666DC35E04
 	for <lists+uboot-stm32@lfdr.de>; Sat, 27 Apr 2019 08:15:14 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78BC3C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C2503C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 26 Apr 2019 21:58:14 +0000 (UTC)
+ Fri, 26 Apr 2019 21:59:01 +0000 (UTC)
 X-Amp-Result: UNSCANNABLE
 X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 26 Apr 2019 14:58:12 -0700
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+ 26 Apr 2019 14:58:59 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.60,399,1549958400"; d="scan'208";a="294887650"
+X-IronPort-AV: E=Sophos;i="5.60,399,1549958400"; d="scan'208";a="139181077"
 Received: from smile.fi.intel.com (HELO smile) ([10.237.72.86])
- by orsmga004.jf.intel.com with ESMTP; 26 Apr 2019 14:58:00 -0700
+ by orsmga006.jf.intel.com with ESMTP; 26 Apr 2019 14:58:46 -0700
 Received: from andy by smile with local (Exim 4.92)
  (envelope-from <andriy.shevchenko@linux.intel.com>)
- id 1hK8qy-0003FP-Ja; Sat, 27 Apr 2019 00:57:56 +0300
-Date: Sat, 27 Apr 2019 00:57:56 +0300
+ id 1hK8ri-0003Fr-IU; Sat, 27 Apr 2019 00:58:42 +0300
+Date: Sat, 27 Apr 2019 00:58:42 +0300
 From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 To: Alex Kiernan <alex.kiernan@gmail.com>
-Message-ID: <20190426215756.GE9224@smile.fi.intel.com>
+Message-ID: <20190426215842.GF9224@smile.fi.intel.com>
 References: <20190419043859.16751-1-alex.kiernan@gmail.com>
+ <20190426215756.GE9224@smile.fi.intel.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190419043859.16751-1-alex.kiernan@gmail.com>
+In-Reply-To: <20190426215756.GE9224@smile.fi.intel.com>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Mailman-Approved-At: Sat, 27 Apr 2019 08:15:12 +0000
@@ -92,26 +93,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, Apr 19, 2019 at 04:38:59AM +0000, Alex Kiernan wrote:
-> This converts the following to Kconfig:
->    CONFIG_SUPPORT_EMMC_BOOT
+On Sat, Apr 27, 2019 at 12:57:56AM +0300, Andy Shevchenko wrote:
+> On Fri, Apr 19, 2019 at 04:38:59AM +0000, Alex Kiernan wrote:
+> > This converts the following to Kconfig:
+> >    CONFIG_SUPPORT_EMMC_BOOT
+> 
+> >  configs/edison_defconfig                         | 1 +
+> 
+> > diff --git a/configs/edison_defconfig b/configs/edison_defconfig
+> > index 22fc84a41e38..b99906a4d144 100644
+> > --- a/configs/edison_defconfig
+> > +++ b/configs/edison_defconfig
+> > @@ -30,6 +30,7 @@ CONFIG_ENV_IS_IN_MMC=y
+> >  CONFIG_CPU=y
+> >  CONFIG_DFU_MMC=y
+> >  CONFIG_DFU_RAM=y
+> > +CONFIG_SUPPORT_EMMC_BOOT=y
+> >  CONFIG_DM_PCI_COMPAT=y
+> >  CONFIG_RTC_MC146818=y
+> >  CONFIG_USB_DWC3_GADGET=y
+>
 
->  configs/edison_defconfig                         | 1 +
+Including
+ include/configs/edison.h                         | 1 -
 
-> diff --git a/configs/edison_defconfig b/configs/edison_defconfig
-> index 22fc84a41e38..b99906a4d144 100644
-> --- a/configs/edison_defconfig
-> +++ b/configs/edison_defconfig
-> @@ -30,6 +30,7 @@ CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_CPU=y
->  CONFIG_DFU_MMC=y
->  CONFIG_DFU_RAM=y
-> +CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_DM_PCI_COMPAT=y
->  CONFIG_RTC_MC146818=y
->  CONFIG_USB_DWC3_GADGET=y
-
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 
 -- 
 With Best Regards,

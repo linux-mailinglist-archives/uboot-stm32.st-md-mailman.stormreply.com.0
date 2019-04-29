@@ -2,61 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A67C0B3CA
-	for <lists+uboot-stm32@lfdr.de>; Sat, 27 Apr 2019 16:48:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6434DF55
+	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 11:23:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9615EC24023
-	for <lists+uboot-stm32@lfdr.de>; Sat, 27 Apr 2019 14:48:00 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
- [209.85.221.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F09FC35E03
+	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 09:23:50 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 68254C24021
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E333BC36B3F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 27 Apr 2019 14:47:59 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id c12so8632731wrt.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 27 Apr 2019 07:47:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=EWunzwYtRWdJ0FgQAykMi0R9vPxbRzTbzNSaHRDE/98=;
- b=uPFQhtK/8LwAybuQ2P9VrVmUgJnRhO3s1WPsMM31YCLzmwyI/BEq9ic284FRPIfnDx
- Sy4PsoCPgFk2TbKAFU8NHsQ5OMf6MOcdrPdBI07GinSnh35WGcsZF/OMntc5Wgx5k7QZ
- 6Mxaaz3CKug0VQZNtnYLHUGSqikvJzrESNCmo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=EWunzwYtRWdJ0FgQAykMi0R9vPxbRzTbzNSaHRDE/98=;
- b=a6vx6c9Bz1OmIya7i3BIOud9mHhCdHEMNr0GvoDAGd5Qv6yZSHez7t7fczZve8D306
- cWLQOgr+i5GcJLfhk0oqhpAogRGZndwueNp9xocd8KuzEztMcSjsSDIdcyxDpnVPZAov
- n/tR2SBSD2RP98kq6Bxi5boan1mT1+Nx9YYHCGsXfyMgPvz7Ss8J81umsrFy1Hh8ymVe
- g0YM+RbaJL6qH2DYHibiS248hDu7vcgdzIIkyRDQW8vF4gIQdRoLQ0QsGbCtW92WNeFQ
- qVqSar22oSGjDRHvufYG4rPVFCCBTYS2CC2t8NVLA9St9zUiE6UMNuSHBYBcGhggHmbn
- 8cTg==
-X-Gm-Message-State: APjAAAVNtDaYwaTBYaDFuZPRVxQGxVPlyWiHJygm36985Rkg9lUJEFzK
- 0rM0j6VEIewcqMbLQDhkFJXXYw==
-X-Google-Smtp-Source: APXvYqwc1o95MUydD7ELyX5yG6WAYyCxslWiO2q6S6G0MkiqiembpPmJwdvuT2PJ+/OnaVQH6gUKKw==
-X-Received: by 2002:a5d:69c7:: with SMTP id s7mr33191149wrw.71.1556376479006; 
- Sat, 27 Apr 2019 07:47:59 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-141-147.ec.res.rr.com.
- [65.184.141.147])
- by smtp.gmail.com with ESMTPSA id c2sm26137157wrr.13.2019.04.27.07.47.56
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 27 Apr 2019 07:47:57 -0700 (PDT)
-Date: Sat, 27 Apr 2019 10:47:54 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20190427144754.GY31207@bill-the-cat>
-References: <1555600582-29790-1-git-send-email-patrick.delaunay@st.com>
+ Mon, 29 Apr 2019 09:23:48 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x3T9Mugn026985; Mon, 29 Apr 2019 11:23:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=LL8/flEh3u2qFs8Scv1VKpSriON+yRaHAT0GsRS6Bac=;
+ b=pvENhkEIko/67SMlqb4MGzraXV+gERuwIUYT4EqKtcLOEp9kJ6u/4Uit5NIxQd9TSQnA
+ 8BuY2P8FyXETV5cgfy9RS9F5VX/fCEvoBLTexsJUJ4K/Lg8rVG0u5qIvIl9G7u1NsRvh
+ mc+kXlb6CG4ZCMa42wco8ebmFEKGgXtLLknLsIMiBxFnl4n7E0Rowefv1AHjaK0I2vRr
+ dbyWUJtqt+fVPhK92P5K/3TAxXy9L6kKmHGuDSAjHmRu9wDBbuVM/QTkMCer3+9Mfjkk
+ PBpQ/FyJSaBEyo7osOrKLCj2r62PHYvBjdkQo/WpNuaabAW781f7yFol7ik8EAJ1mPG/ RQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2s4c7441gk-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
+ Mon, 29 Apr 2019 11:23:46 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8CE8231;
+ Mon, 29 Apr 2019 09:23:44 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 69FFD1424;
+ Mon, 29 Apr 2019 09:23:44 +0000 (GMT)
+Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1347.2;
+ Mon, 29 Apr 2019 11:23:44 +0200
+From: Patrice Chotard <patrice.chotard@st.com>
+To: Simon Glass <sjg@chromium.org>, <michal.simek@xilinx.com>, <sr@denx.de>,
+ <u-boot@lists.denx.de>
+Date: Mon, 29 Apr 2019 11:23:21 +0200
+Message-ID: <1556529805-23820-1-git-send-email-patrice.chotard@st.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1555600582-29790-1-git-send-email-patrick.delaunay@st.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [U-Boot] sysreset: syscon: remove POWER reset
-	cause
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-04-29_05:, , signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 0/4] Add watchdog support for STM32MP1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,70 +64,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0387732191935618202=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============0387732191935618202==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="lgYgvhCDN3+WDmok"
-Content-Disposition: inline
+This series:
+  - sorts Kconfig entries in alphabetical order
+  - enable watchdog support in SPL for STM32MP1
+  - adds watchdog support to STM32MP1 boards
 
 
---lgYgvhCDN3+WDmok
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 18, 2019 at 05:16:21PM +0200, Patrick Delaunay wrote:
+Patrice Chotard (4):
+  watchdog: Kconfig: Sort entry alphabetically
+  ARM: dts: stm32mp: Add iwdg2 support for stm32mp157c
+  watchdog: stm32mp: Add watchdog driver
+  configs: stm32mp15: Enable WDT flags
 
-> The sysreset of 'POWER' type is a PMIC reset defined as
-> 'remove and restore power'.
-> So normally only COLD/WARN is supported by sysreset_syscon.
->=20
-> This modification allows to use the function sysreset_walk(SYSRESET_POWER)
-> when it is supported by PMIC driver (see example in stpmic1).
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+ MAINTAINERS                         |   1 +
+ arch/arm/dts/stm32mp157-u-boot.dtsi |   4 ++
+ arch/arm/mach-stm32mp/Kconfig       |   1 +
+ configs/stm32mp15_basic_defconfig   |   2 +
+ configs/stm32mp15_trusted_defconfig |   2 +
+ drivers/watchdog/Kconfig            |  91 +++++++++++++-----------
+ drivers/watchdog/Makefile           |   1 +
+ drivers/watchdog/stm32mp_wdt.c      | 135 ++++++++++++++++++++++++++++++++++++
+ 8 files changed, 196 insertions(+), 41 deletions(-)
+ create mode 100644 drivers/watchdog/stm32mp_wdt.c
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---lgYgvhCDN3+WDmok
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJcxGuaAAoJEIf59jXTHXZSEJkQAJ6s5TtRYXJdZbZHg0qbjHN6
-ki833MyYGlQnzsuJwesMhNWrGiGOk8OUZZNEoS4qpufjU9q3AZ+gUGk5B5yjRyPC
-Pl5f0kFw9YM8ydcM3KDYIn/YmG56wdCcXz/RQPFro+xxJQ3xJo8cWWxY20UHrA8f
-UBZXjeF1NwG+etCdbiJIKD0a3m4ciTv6i+7zKmHn572u9Xe7ecjOIrwQFU3/Q0Z0
-cwo3oYbgV6oBGerILjFzCzxFw1iDkQpYUC+cUuuhqDpVNw8NXhLmVXM/a1eEyDyL
-0s+PkALcpyGHcLfukLy4j4rmAK7C6rZ2MRQRo58AVCyEG5k4/6sMujIhhXExQGfN
-UaB8L4ajWnRMcjWvP0XBOFAGWb5wm1RI10PzZCN4TL2Oug6YC1sWLPX/t3pjJuXA
-z9Fr9RBNR/XyNXGzAFUG9uAONyxw9y8/w7hoGA/25f+2kdZYehx+MDcsaVSbec+g
-1OLDHUDLnD1U5yECJDKpldnslb7c4tvGXwlJsBZtdMVw3JI7hWVmk+fdLVftC358
-gk0zufqfK9F2jiWnC/q4TtdxEN/ltNb2P6T3EYNUaUEHx6wHR8IW5oy6S/giPLje
-LQCTF/eLkSi0cfGWjYTgwCV4T2bva4S5DL+0tJW2GUpE5FTmmH2B3HO1IQYwduM/
-7DmXOKOpok4oWB/sgf+o
-=VlVf
------END PGP SIGNATURE-----
-
---lgYgvhCDN3+WDmok--
-
---===============0387732191935618202==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+1.9.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0387732191935618202==--

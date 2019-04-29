@@ -2,40 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DDBBDFB5
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 11:44:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9422E222
+	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 14:21:22 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1EFD8C35E03
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 09:44:13 +0000 (UTC)
-Received: from mx2.mailbox.org (mx2.mailbox.org [80.241.60.215])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8D044C35E04
+	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Apr 2019 12:21:22 +0000 (UTC)
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+ [209.85.210.195])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6A4BCC36B3F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22C63C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 29 Apr 2019 09:44:11 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:105:465:1:1:0])
- (using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
- (No client certificate requested)
- by mx2.mailbox.org (Postfix) with ESMTPS id D7838A0167;
- Mon, 29 Apr 2019 11:44:10 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp1.mailbox.org ([80.241.60.240])
- by gerste.heinlein-support.de (gerste.heinlein-support.de [91.198.250.173])
- (amavisd-new, port 10030)
- with ESMTP id kIoUJDbyn9SX; Mon, 29 Apr 2019 11:43:44 +0200 (CEST)
-To: Patrice Chotard <patrice.chotard@st.com>, Simon Glass <sjg@chromium.org>, 
- michal.simek@xilinx.com, u-boot@lists.denx.de
-References: <1556529805-23820-1-git-send-email-patrice.chotard@st.com>
- <1556529805-23820-4-git-send-email-patrice.chotard@st.com>
-From: Stefan Roese <sr@denx.de>
-Message-ID: <1c6d6e80-ae83-f148-ff8f-d39775c8e895@denx.de>
-Date: Mon, 29 Apr 2019 11:43:43 +0200
+ Mon, 29 Apr 2019 12:04:16 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id z26so1328806pfg.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 29 Apr 2019 05:04:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ALOigroTVHuzKfLdVvYBGx6QjUV7wW9ziZOqB4v9bo0=;
+ b=qk1H8mGjAQIhz/zb2KvM1Sfy8A7dgeNPZJEWibaNuG6jKi+ifN0BIXAX7tYBWs4/bH
+ pt3CRZtU+Aw26e9cFF+yMyhhwEDJcMT/LApCe2qVsydXtAd9TM3HvfzzCDOv4qNtkXL7
+ zWYue5zpw/XpKxWRwKPqZ+xeO6rji4ySITUpdsl5hlNlOsCldUn0/mX33WBxK+r/4sFB
+ /bFXcCIWrnhVTB6IuNIzsrnwGN8qBMQ2QjO4hi0o/qkA3TffsJVxRNVmI7O2wgAe56dF
+ 27jx9pCiNU76p1dVUiYFy1PCMlZrFRCCLFYPaYztkeCBsolCGhXCdRNkisTiXYMKwMTH
+ kQOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ALOigroTVHuzKfLdVvYBGx6QjUV7wW9ziZOqB4v9bo0=;
+ b=qtgwBLXXIchEatq2slkdg0Netg5zLAd2/3tblAjWqR6LW8OCx49eu0cDUS8mxiXHJh
+ 634sT2G+kgFgjnksY1PgPvbJUobwva9cjf3/RH5qDqnZ53i/re85PrrulG/QMyVI/WiD
+ vTDnySmqEQP980xvBerrcIk6O3SpKuT57VDbihKKoccva5V1foROq2T5G+UL38ZYz8i9
+ 6KkuCgP1QzxEsXPnwbaBjpiXn/JK1ZGa62zIo7vHOSCZ9vRccljXAk3InRyspyRXUYEU
+ gN+Qf3xfPP0Q1YnWi6ykZThrneUtqDUEgflcEuO5AH1yxPbVHB0yjjYg+x3nRV0hUrFC
+ eoEQ==
+X-Gm-Message-State: APjAAAV7WIToVBK7ZcH+19/VR1twAd9rE6NmKwfIai2F7dIx0xxgMq5m
+ koQ0f9wiYundkLmNyA5udJB/
+X-Google-Smtp-Source: APXvYqxs2paf4eV8mYaxsUDt0+242E2EtOhtHDcdhIKL7b2PEg53qICHzryvY6HwSqROo5lPG1CK2Q==
+X-Received: by 2002:a63:da51:: with SMTP id l17mr16818131pgj.115.1556539454392; 
+ Mon, 29 Apr 2019 05:04:14 -0700 (PDT)
+Received: from localhost.localdomain ([2405:204:7241:e9f8:e0e7:64d9:38a4:57a4])
+ by smtp.gmail.com with ESMTPSA id u66sm3098277pfb.76.2019.04.29.05.04.09
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 29 Apr 2019 05:04:13 -0700 (PDT)
+From: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+To: patrick.delaunay@st.com, christophe.kerello@st.com, patrice.chotard@st.com,
+ trini@konsulko.com
+Date: Mon, 29 Apr 2019 17:33:56 +0530
+Message-Id: <20190429120359.23332-1-manivannan.sadhasivam@linaro.org>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1556529805-23820-4-git-send-email-patrice.chotard@st.com>
-Content-Language: en-US
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/4] watchdog: stm32mp: Add watchdog driver
+X-Mailman-Approved-At: Mon, 29 Apr 2019 12:21:21 +0000
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+Subject: [Uboot-stm32] [PATCH 0/3] Add Avenger96 board support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -47,130 +69,47 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMjkuMDQuMTkgMTE6MjMsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBUaGlzIHBhdGNoIGFk
-ZHMgSVdERyAoSW5kZXBlbmRlbnQgV2F0Y2hEb0cpIHN1cHBvcnQgZm9yCj4gU1RNMzJNUCBwbGF0
-Zm9ybS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RvcGhlIEtlcmVsbG8gPGNocmlzdG9waGUu
-a2VyZWxsb0BzdC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNl
-LmNob3RhcmRAc3QuY29tPgo+IC0tLQo+IAo+ICAgTUFJTlRBSU5FUlMgICAgICAgICAgICAgICAg
-ICAgIHwgICAxICsKPiAgIGFyY2gvYXJtL21hY2gtc3RtMzJtcC9LY29uZmlnICB8ICAgMSArCj4g
-ICBkcml2ZXJzL3dhdGNoZG9nL0tjb25maWcgICAgICAgfCAgIDggKysrCj4gICBkcml2ZXJzL3dh
-dGNoZG9nL01ha2VmaWxlICAgICAgfCAgIDEgKwo+ICAgZHJpdmVycy93YXRjaGRvZy9zdG0zMm1w
-X3dkdC5jIHwgMTM1ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4g
-ICA1IGZpbGVzIGNoYW5nZWQsIDE0NiBpbnNlcnRpb25zKCspCj4gICBjcmVhdGUgbW9kZSAxMDA2
-NDQgZHJpdmVycy93YXRjaGRvZy9zdG0zMm1wX3dkdC5jCj4gCj4gZGlmZiAtLWdpdCBhL01BSU5U
-QUlORVJTIGIvTUFJTlRBSU5FUlMKPiBpbmRleCAwOWYzMWNkLi5lZWMyNjAzIDEwMDY0NAo+IC0t
-LSBhL01BSU5UQUlORVJTCj4gKysrIGIvTUFJTlRBSU5FUlMKPiBAQCAtMzExLDYgKzMxMSw3IEBA
-IEY6CWRyaXZlcnMvcmFtL3N0bTMybXAxLwo+ICAgRjoJZHJpdmVycy9taXNjL3N0bTMyX3JjYy5j
-Cj4gICBGOglkcml2ZXJzL3Jlc2V0L3N0bTMyLXJlc2V0LmMKPiAgIEY6CWRyaXZlcnMvc3BpL3N0
-bTMyX3FzcGkuYwo+ICtGOglkcml2ZXJzL3dhdGNoZG9nL3N0bTMybXBfd2R0LmMKPiAgIAo+ICAg
-QVJNIFNUTSBTVFYwOTkxCj4gICBNOglWaWthcyBNYW5vY2hhIDx2aWthcy5tYW5vY2hhQHN0LmNv
-bT4KPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL0tjb25maWcgYi9hcmNoL2Fy
-bS9tYWNoLXN0bTMybXAvS2NvbmZpZwo+IGluZGV4IDczYWEzODIuLjRlN2NjMmUgMTAwNjQ0Cj4g
-LS0tIGEvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL0tjb25maWcKPiArKysgYi9hcmNoL2FybS9tYWNo
-LXN0bTMybXAvS2NvbmZpZwo+IEBAIC0xNyw2ICsxNyw3IEBAIGNvbmZpZyBTUEwKPiAgIAlzZWxl
-Y3QgU1BMX0RNX1JFU0VUCj4gICAJc2VsZWN0IFNQTF9TRVJJQUxfU1VQUE9SVAo+ICAgCXNlbGVj
-dCBTUExfU1lTQ09OCj4gKwlzZWxlY3QgU1BMX1dBVENIRE9HX1NVUFBPUlQKPiAgIAlpbXBseSBT
-UExfRElTUExBWV9QUklOVAo+ICAgCWltcGx5IFNQTF9MSUJESVNLX1NVUFBPUlQKPiAgIAo+IGRp
-ZmYgLS1naXQgYS9kcml2ZXJzL3dhdGNoZG9nL0tjb25maWcgYi9kcml2ZXJzL3dhdGNoZG9nL0tj
-b25maWcKPiBpbmRleCA0YTNmZjdhLi5kNTgyYWJlIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvd2F0
-Y2hkb2cvS2NvbmZpZwo+ICsrKyBiL2RyaXZlcnMvd2F0Y2hkb2cvS2NvbmZpZwo+IEBAIC0xNDcs
-NiArMTQ3LDE0IEBAIGNvbmZpZyBXRFRfU0FOREJPWAo+ICAgCSAgY2FuIGJlIHByb2JlZCBhbmQg
-c3VwcG9ydHMgYWxsIG9mIHRoZSBtZXRob2RzIG9mIFdEVCwgYnV0IGRvZXMgbm90Cj4gICAJICBy
-ZWFsbHkgZG8gYW55dGhpbmcuCj4gICAKPiArY29uZmlnIFdEVF9TVE0zMk1QCj4gKwlib29sICJJ
-V0RHIHdhdGNoZG9nIGRyaXZlciBmb3IgU1RNMzIgTVAncyBmYW1pbHkiCj4gKwlkZXBlbmRzIG9u
-IFdEVAo+ICsJaW1wbHkgV0FUQ0hET0cKPiArCWhlbHAKPiArCSAgRW5hYmxlIHRoZSBTVE0zMiB3
-YXRjaGRvZyAoSVdERykgZHJpdmVyLiBFbmFibGUgc3VwcG9ydCB0bwo+ICsJICBjb25maWd1cmUg
-U1RNMzIncyBvbi1Tb0Mgd2F0Y2hkb2cuCj4gKwo+ICAgY29uZmlnIFhJTElOWF9UQl9XQVRDSERP
-Rwo+ICAgCWJvb2wgIlhpbGlueCBBeGkgd2F0Y2hkb2cgdGltZXIgc3VwcG9ydCIKPiAgIAlkZXBl
-bmRzIG9uIFdEVAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3dhdGNoZG9nL01ha2VmaWxlIGIvZHJp
-dmVycy93YXRjaGRvZy9NYWtlZmlsZQo+IGluZGV4IDQwYjJmNGIuLmEzZWJmZjggMTAwNjQ0Cj4g
-LS0tIGEvZHJpdmVycy93YXRjaGRvZy9NYWtlZmlsZQo+ICsrKyBiL2RyaXZlcnMvd2F0Y2hkb2cv
-TWFrZWZpbGUKPiBAQCAtMjcsMyArMjcsNCBAQCBvYmotJChDT05GSUdfV0RUX0NETlMpICs9IGNk
-bnNfd2R0Lm8KPiAgIG9iai0kKENPTkZJR19XRFRfTVBDOHh4KSArPSBtcGM4eHhfd2R0Lm8KPiAg
-IG9iai0kKENPTkZJR19XRFRfTVQ3NjIxKSArPSBtdDc2MjFfd2R0Lm8KPiAgIG9iai0kKENPTkZJ
-R19XRFRfTVRLKSArPSBtdGtfd2R0Lm8KPiArb2JqLSQoQ09ORklHX1dEVF9TVE0zMk1QKSArPSBz
-dG0zMm1wX3dkdC5vCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvd2F0Y2hkb2cvc3RtMzJtcF93ZHQu
-YyBiL2RyaXZlcnMvd2F0Y2hkb2cvc3RtMzJtcF93ZHQuYwo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
-Cj4gaW5kZXggMDAwMDAwMC4uODJkYjJjNgo+IC0tLSAvZGV2L251bGwKPiArKysgYi9kcml2ZXJz
-L3dhdGNoZG9nL3N0bTMybXBfd2R0LmMKPiBAQCAtMCwwICsxLDEzNSBAQAo+ICsvLyBTUERYLUxp
-Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCsgT1IgQlNELTMtQ2xhdXNlCj4gKy8qCj4gKyAqIENv
-cHlyaWdodCAoQykgMjAxOSwgU1RNaWNyb2VsZWN0cm9uaWNzIC0gQWxsIFJpZ2h0cyBSZXNlcnZl
-ZAo+ICsgKi8KPiArCj4gKyNpbmNsdWRlIDxjb21tb24uaD4KPiArI2luY2x1ZGUgPGNsay5oPgo+
-ICsjaW5jbHVkZSA8ZG0uaD4KPiArI2luY2x1ZGUgPHN5c2Nvbi5oPgo+ICsjaW5jbHVkZSA8d2R0
-Lmg+Cj4gKyNpbmNsdWRlIDxhc20vaW8uaD4KPiArI2luY2x1ZGUgPGxpbnV4L2lvcG9sbC5oPgo+
-ICsKPiArLyogSVdERyByZWdpc3RlcnMgKi8KPiArI2RlZmluZSBJV0RHX0tSCQkweDAwCS8qIEtl
-eSByZWdpc3RlciAqLwo+ICsjZGVmaW5lIElXREdfUFIJCTB4MDQJLyogUHJlc2NhbGVyIFJlZ2lz
-dGVyICovCj4gKyNkZWZpbmUgSVdER19STFIJMHgwOAkvKiBSZUxvYWQgUmVnaXN0ZXIgKi8KPiAr
-I2RlZmluZSBJV0RHX1NSCQkweDBDCS8qIFN0YXR1cyBSZWdpc3RlciAqLwo+ICsKPiArLyogSVdE
-R19LUiByZWdpc3RlciBiaXQgbWFzayAqLwo+ICsjZGVmaW5lIEtSX0tFWV9SRUxPQUQJMHhBQUFB
-CS8qIFJlbG9hZCBjb3VudGVyIGVuYWJsZSAqLwo+ICsjZGVmaW5lIEtSX0tFWV9FTkFCTEUJMHhD
-Q0NDCS8qIFBlcmlwaGVyYWwgZW5hYmxlICovCj4gKyNkZWZpbmUgS1JfS0VZX0VXQQkweDU1NTUJ
-LyogV3JpdGUgYWNjZXNzIGVuYWJsZSAqLwo+ICsKPiArLyogSVdER19QUiByZWdpc3RlciBiaXQg
-dmFsdWVzICovCj4gKyNkZWZpbmUgUFJfMjU2CQkweDA2CS8qIFByZXNjYWxlciBzZXQgdG8gMjU2
-ICovCj4gKwo+ICsvKiBJV0RHX1JMUiByZWdpc3RlciB2YWx1ZXMgKi8KPiArI2RlZmluZSBSTFJf
-TUFYCQkweEZGRgkvKiBNYXggdmFsdWUgc3VwcG9ydGVkIGJ5IHJlbG9hZCByZWdpc3RlciAqLwo+
-ICsKPiArLyogSVdER19TUiByZWdpc3RlciBiaXQgdmFsdWVzICovCj4gKyNkZWZpbmUgU1JfUFZV
-CQlCSVQoMCkJLyogV2F0Y2hkb2cgcHJlc2NhbGVyIHZhbHVlIHVwZGF0ZSAqLwo+ICsjZGVmaW5l
-IFNSX1JWVQkJQklUKDEpCS8qIFdhdGNoZG9nIGNvdW50ZXIgcmVsb2FkIHZhbHVlIHVwZGF0ZSAq
-Lwo+ICsKPiArc3RydWN0IHN0bTMybXBfd2R0X3ByaXYgewo+ICsJZmR0X2FkZHJfdCBiYXNlOwkJ
-LyogcmVnaXN0ZXJzIGFkZHIgaW4gcGh5c2ljYWwgbWVtb3J5ICovCj4gKwl1bnNpZ25lZCBsb25n
-IHdkdF9jbGtfcmF0ZTsJLyogV2F0Y2hkb2cgZGVkaWNhdGVkIGNsb2NrIHJhdGUgKi8KPiArfTsK
-PiArCj4gK3N0YXRpYyBpbnQgc3RtMzJtcF93ZHRfcmVzZXQoc3RydWN0IHVkZXZpY2UgKmRldikK
-PiArewo+ICsJc3RydWN0IHN0bTMybXBfd2R0X3ByaXYgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2
-KTsKPiArCj4gKwl3cml0ZWwoS1JfS0VZX1JFTE9BRCwgcHJpdi0+YmFzZSArIElXREdfS1IpOwo+
-ICsKPiArCXJldHVybiAwOwo+ICt9Cj4gKwo+ICtzdGF0aWMgaW50IHN0bTMybXBfd2R0X3N0YXJ0
-KHN0cnVjdCB1ZGV2aWNlICpkZXYsIHU2NCB0aW1lb3V0LCB1bG9uZyBmbGFncykKCnMvdGltZW91
-dC90aW1lb3V0X21zIChzZWUgYmVsb3cpLgoKPiArewo+ICsJc3RydWN0IHN0bTMybXBfd2R0X3By
-aXYgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKPiArCWludCByZWxvYWQ7Cj4gKwl1MzIgdmFs
-Owo+ICsJaW50IHJldDsKPiArCj4gKwkvKiBQcmVzY2FsZXIgZml4ZWQgdG8gMjU2ICovCj4gKwly
-ZWxvYWQgPSB0aW1lb3V0ICogcHJpdi0+d2R0X2Nsa19yYXRlIC8gMjU2OwoKSnVzdCBjaGVja2lu
-ZywgaWYgdGhpcyB0YWtlcyBpbnRvIGFjY291bnQgdGhhdCB0aW1lb3V0IGlzIHBhc3NlZCBpbgpt
-cyAobWlsbGktc2Vjb25kcykgdG8gdGhlIERNIHdkdF9zdGFydCgpIGZ1bmN0aW9uLiBUaGF0J3Mg
-d2h5IEkgcHJlZmVyCnRvIHNlZSB0aW1lb3V0IGV4cGxpY2l0bHkgbmFtZWQgdG8gInRpbWVvdXRf
-bXMiIGluc3RlYWQuCgpUaGFua3MsClN0ZWZhbgoKPiArCWlmIChyZWxvYWQgPiBSTFJfTUFYICsg
-MSkKPiArCQkvKiBGb3JjZSB0byBtYXggd2F0Y2hkb2cgY291bnRlciByZWxvYWQgdmFsdWUgKi8K
-PiArCQlyZWxvYWQgPSBSTFJfTUFYICsgMTsKPiArCWVsc2UgaWYgKCFyZWxvYWQpCj4gKwkJLyog
-Rm9yY2UgdG8gbWluIHdhdGNoZG9nIGNvdW50ZXIgcmVsb2FkIHZhbHVlICovCj4gKwkJcmVsb2Fk
-ID0gcHJpdi0+d2R0X2Nsa19yYXRlIC8gMjU2Owo+ICsKPiArCS8qIFNldCBwcmVzY2FsZXIgJiBy
-ZWxvYWQgcmVnaXN0ZXJzICovCj4gKwl3cml0ZWwoS1JfS0VZX0VXQSwgcHJpdi0+YmFzZSArIElX
-REdfS1IpOwo+ICsJd3JpdGVsKFBSXzI1NiwgcHJpdi0+YmFzZSArIElXREdfUFIpOwo+ICsJd3Jp
-dGVsKHJlbG9hZCAtIDEsIHByaXYtPmJhc2UgKyBJV0RHX1JMUik7Cj4gKwo+ICsJLyogRW5hYmxl
-IHdhdGNoZG9nICovCj4gKwl3cml0ZWwoS1JfS0VZX0VOQUJMRSwgcHJpdi0+YmFzZSArIElXREdf
-S1IpOwo+ICsKPiArCS8qIFdhaXQgZm9yIHRoZSByZWdpc3RlcnMgdG8gYmUgdXBkYXRlZCAqLwo+
-ICsJcmV0ID0gcmVhZGxfcG9sbF90aW1lb3V0KHByaXYtPmJhc2UgKyBJV0RHX1NSLCB2YWwsCj4g
-KwkJCQkgdmFsICYgKFNSX1BWVSB8IFNSX1JWVSksIENPTkZJR19TWVNfSFopOwo+ICsKPiArCWlm
-IChyZXQgPCAwKSB7Cj4gKwkJcHJfZXJyKCJVcGRhdGluZyBJV0RHIHJlZ2lzdGVycyB0aW1lb3V0
-Iik7Cj4gKwkJcmV0dXJuIC1FVElNRURPVVQ7Cj4gKwl9Cj4gKwo+ICsJcmV0dXJuIDA7Cj4gK30K
-PiArCj4gK3N0YXRpYyBpbnQgc3RtMzJtcF93ZHRfcHJvYmUoc3RydWN0IHVkZXZpY2UgKmRldikK
-PiArewo+ICsJc3RydWN0IHN0bTMybXBfd2R0X3ByaXYgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2
-KTsKPiArCXN0cnVjdCBjbGsgY2xrOwo+ICsJaW50IHJldDsKPiArCj4gKwlkZWJ1ZygiSVdERyBp
-bml0XG4iKTsKPiArCj4gKwlwcml2LT5iYXNlID0gZGV2ZmR0X2dldF9hZGRyKGRldik7Cj4gKwlp
-ZiAocHJpdi0+YmFzZSA9PSBGRFRfQUREUl9UX05PTkUpCj4gKwkJcmV0dXJuIC1FSU5WQUw7Cj4g
-Kwo+ICsJLyogRW5hYmxlIGNsb2NrICovCj4gKwlyZXQgPSBjbGtfZ2V0X2J5X25hbWUoZGV2LCAi
-cGNsayIsICZjbGspOwo+ICsJaWYgKHJldCkKPiArCQlyZXR1cm4gcmV0Owo+ICsKPiArCXJldCA9
-IGNsa19lbmFibGUoJmNsayk7Cj4gKwlpZiAocmV0KQo+ICsJCXJldHVybiByZXQ7Cj4gKwo+ICsJ
-LyogR2V0IExTSSBjbG9jayAqLwo+ICsJcmV0ID0gY2xrX2dldF9ieV9uYW1lKGRldiwgImxzaSIs
-ICZjbGspOwo+ICsJaWYgKHJldCkKPiArCQlyZXR1cm4gcmV0Owo+ICsKPiArCXByaXYtPndkdF9j
-bGtfcmF0ZSA9IGNsa19nZXRfcmF0ZSgmY2xrKTsKPiArCj4gKwlkZWJ1ZygiSVdERyBpbml0IGRv
-bmVcbiIpOwo+ICsKPiArCXJldHVybiAwOwo+ICt9Cj4gKwo+ICtzdGF0aWMgY29uc3Qgc3RydWN0
-IHdkdF9vcHMgc3RtMzJtcF93ZHRfb3BzID0gewo+ICsJLnN0YXJ0ID0gc3RtMzJtcF93ZHRfc3Rh
-cnQsCj4gKwkucmVzZXQgPSBzdG0zMm1wX3dkdF9yZXNldCwKPiArfTsKPiArCj4gK3N0YXRpYyBj
-b25zdCBzdHJ1Y3QgdWRldmljZV9pZCBzdG0zMm1wX3dkdF9tYXRjaFtdID0gewo+ICsJeyAuY29t
-cGF0aWJsZSA9ICJzdCxzdG0zMm1wMS1pd2RnIiB9LAo+ICsJeyAvKiBzZW50aW5lbCAqLyB9Cj4g
-K307Cj4gKwo+ICtVX0JPT1RfRFJJVkVSKHN0bTMybXBfd2R0KSA9IHsKPiArCS5uYW1lID0gInN0
-bTMybXAtd2R0IiwKPiArCS5pZCA9IFVDTEFTU19XRFQsCj4gKwkub2ZfbWF0Y2ggPSBzdG0zMm1w
-X3dkdF9tYXRjaCwKPiArCS5wcml2X2F1dG9fYWxsb2Nfc2l6ZSA9IHNpemVvZihzdHJ1Y3Qgc3Rt
-MzJtcF93ZHRfcHJpdiksCj4gKwkucHJvYmUgPSBzdG0zMm1wX3dkdF9wcm9iZSwKPiArCS5vcHMg
-PSAmc3RtMzJtcF93ZHRfb3BzLAo+ICt9Owo+IAoKVmllbGUgR3LDvMOfZSwKU3RlZmFuCgotLSAK
-REVOWCBTb2Z0d2FyZSBFbmdpbmVlcmluZyBHbWJILCAgICAgIE1hbmFnaW5nIERpcmVjdG9yOiBX
-b2xmZ2FuZyBEZW5rCkhSQiAxNjUyMzUgTXVuaWNoLCBPZmZpY2U6IEtpcmNoZW5zdHIuNSwgRC04
-MjE5NCBHcm9lYmVuemVsbCwgR2VybWFueQpQaG9uZTogKCs0OSktODE0Mi02Njk4OS01MSBGYXg6
-ICgrNDkpLTgxNDItNjY5ODktODAgRW1haWw6IHNyQGRlbnguZGUKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVi
-b290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWls
-bWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+Hello,
+
+This patchset adds board support for Avenger96, a 96Boards Consumer
+Edition board from Arrow Electronics. This board is based on the
+STM32MP1 MPU and the board support is added under st boards since
+there are no significance changes required to boot u-boot on this
+board other than the dts.
+
+More information about this board can be found in 96Boards website:
+https://www.96boards.org/product/avenger96/
+
+PS: I only managed to boot u-boot as SSBL with TF-A as FSBL. U-boot
+SPL way of booting is not working.
+
+Thanks,
+Mani
+
+Manivannan Sadhasivam (3):
+  arm: dts: stm32mp157: Add missing pinctrl definitions
+  board: stm32mp1: Add Avenger96 board support
+  arm: mach-stm32mp: Add newline to the MAC error message
+
+ arch/arm/dts/Makefile                         |   1 +
+ arch/arm/dts/stm32mp157-pinctrl.dtsi          |  63 +++
+ .../arm/dts/stm32mp157a-avenger96-u-boot.dtsi | 177 +++++++++
+ arch/arm/dts/stm32mp157a-avenger96.dts        | 362 ++++++++++++++++++
+ arch/arm/mach-stm32mp/cpu.c                   |   2 +-
+ board/st/stm32mp1/README                      |  23 ++
+ 6 files changed, 627 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-avenger96.dts
+
+-- 
+2.17.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

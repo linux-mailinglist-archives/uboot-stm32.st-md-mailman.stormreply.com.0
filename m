@@ -2,59 +2,81 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3316FFD85
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Apr 2019 18:10:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62FE3113CF
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 09:11:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2793DC35E06
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Apr 2019 16:10:54 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 13638C0B77A
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 07:11:50 +0000 (UTC)
+Received: from 8.mo2.mail-out.ovh.net (8.mo2.mail-out.ovh.net [188.165.52.147])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 06E3AC35E04
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E74ABC36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Apr 2019 16:10:53 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x3UFpPgN005729; Tue, 30 Apr 2019 18:10:52 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=tXpfOABoZbqARWWRDN0ERqdpzeKj2nq6pxkcn4uuHFw=;
- b=i0U0jXJR00PAMso0eaS5WeSyu/tx5XEiKvK35buYDc72HEWBHPsUGChF9W3TdaWnPdiH
- 8FFl08VsxoBpAj4VyNttjHZh2apyY//Ids/y9EOYowkNI5bxSLAJUHbn8cmLKOGwXLNr
- o7pU1+odqdB9aDVpQ2/RB2sodzuDBHaGrBC4KyB3rxlxu1JS7vJQQRvlDvdYIPtnvNx2
- 0lBwYul7XY/G7BoBeGC/aXGz6BsDGKlOzs6xHWwtgdh57DGV8Lx3LzZyWi1v1skpYHrL
- NSPQHlM3wg10vQHB62mj552ODiVqc+dH3n+axp7ma0JxTZ1q+PvhCi2XPW93Aj5CrLYK zA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2s61r0f2kx-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 30 Apr 2019 18:10:51 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 88B263A;
- Tue, 30 Apr 2019 16:10:50 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7036E299F;
- Tue, 30 Apr 2019 16:10:50 +0000 (GMT)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1347.2;
- Tue, 30 Apr 2019 18:10:49 +0200
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 30 Apr 2019 18:09:38 +0200
-Message-ID: <1556640578-28033-1-git-send-email-patrice.chotard@st.com>
-X-Mailer: git-send-email 1.9.1
+ Tue, 30 Apr 2019 16:38:38 +0000 (UTC)
+Received: from player773.ha.ovh.net (unknown [10.108.35.13])
+ by mo2.mail-out.ovh.net (Postfix) with ESMTP id E04B018E312
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 30 Apr 2019 18:38:37 +0200 (CEST)
+Received: from armadeus.com (lfbn-1-7591-179.w90-126.abo.wanadoo.fr
+ [90.126.248.179])
+ (Authenticated sender: sebastien.szymanski@armadeus.com)
+ by player773.ha.ovh.net (Postfix) with ESMTPSA id E928154A316D;
+ Tue, 30 Apr 2019 16:37:35 +0000 (UTC)
+To: Alex Kiernan <alex.kiernan@gmail.com>, u-boot@lists.denx.de
+References: <20190419043859.16751-1-alex.kiernan@gmail.com>
+From: =?UTF-8?Q?S=c3=a9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Openpgp: preference=signencrypt
+Message-ID: <63ced8dd-c450-ad67-a778-d3ebe77bf439@armadeus.com>
+Date: Tue, 30 Apr 2019 18:37:48 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-04-30_08:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] board: stm32mp1: Update power supply check
-	via USB TYPE-C
+In-Reply-To: <20190419043859.16751-1-alex.kiernan@gmail.com>
+Content-Language: en-US
+X-Ovh-Tracer-Id: 8794404176285291562
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduuddrieehgdeggecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+X-Mailman-Approved-At: Thu, 02 May 2019 07:11:48 +0000
+Cc: Peng Fan <peng.fan@nxp.com>,
+ =?UTF-8?Q?J=c3=b6rg_Krause?= <joerg.krause@embedded.rocks>,
+ =?UTF-8?Q?Eric_B=c3=a9nard?= <eric@eukrea.com>,
+ Ramon Fried <ramon.fried@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Adrian Alonso <adrian.alonso@nxp.com>, Ken Lin <Ken.Lin@advantech.com.tw>,
+ Vanessa Maegima <vanessa.maegima@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Marcin Niestroj <m.niestroj@grinn-global.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Chris Packham <judge.packham@gmail.com>,
+ Richard Hu <richard.hu@technexion.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Marek Vasut <marex@denx.de>, Akshay Saraswat <akshay.s@samsung.com>,
+ Stephen Warren <swarren@nvidia.com>, Otavio Salvador <otavio@ossystems.com.br>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, Ian Ray <ian.ray@ge.com>,
+ Toradex ARM Support <support.arm@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Michal Simek <michal.simek@xilinx.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Uri Mashiach <uri.mashiach@compulab.co.il>,
+ Simone CIANNI <simone.cianni@bticino.it>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chander Kashyap <k.chander@samsung.com>,
+ Hannes Schmelzer <hannes.schmelzer@br-automation.com>,
+ Stefan Agner <stefan.agner@toradex.com>, Tim Harvey <tharvey@gateworks.com>,
+ Ryder Lee <ryder.lee@mediatek.com>,
+ Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
+ Gregory CLEMENT <gregory.clement@free-electrons.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Akshay Bhat <akshaybhat@timesys.com>, Ingo Schroeck <open-source@samtec.de>,
+ Stefano Babic <sbabic@denx.de>, Dmitry Lifshitz <lifshitz@compulab.co.il>,
+ Simon Glass <sjg@chromium.org>, "Andrew F. Davis" <afd@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Adam Ford <aford173@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] Convert CONFIG_SUPPORT_EMMC_BOOT to
+	Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,157 +88,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add 2 new checks:
- - detect when USB TYPE-C cable is not plugged correctly.
-   In this case, GND and VBUS pins are connected but not CC1
-   and CC2 pins.
-
- - detect is an USB Type-C charger supplies more than 3 Amps
-   which is not compliant with the USB Type-C specification
-
-In these 2 situations, stop the boot process and let red led
-blinks forever.
-
-   V cc1      |   V cc2     | power supply | red led | console message
-range (Volts) |range (Volts)|   (Amps)     | blinks  |
---------------|-------------|--------------|---------|-----------------------------------
-    > 2.15    |   < 0.2     |     > 3      | for ever| USB TYPE-C charger not compliant with specification
-[2.15 - 1.23[ |   < 0.2     |     3        |   NO    | NO
-[1.23 - 0.66[ |   < 0.2     |     1.5      | 3 times | WARNING 1.5A power supply detected
-[0.66 - 0]    |   < 0.2     |     0.5      | 2 times | WARNING 500mA power supply detected
-    < 0.2     |   < 0.2     |              | for ever| ERROR USB TYPE-C connection in unattached mode
-    > 0.2     |   > 0.2     |              | for ever| ERROR USB TYPE-C connection in unattached mode
-
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
----
-
- board/st/stm32mp1/stm32mp1.c | 69 +++++++++++++++++++++++++++++++++++---------
- 1 file changed, 56 insertions(+), 13 deletions(-)
-
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 76917b0..8c591a5 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -60,9 +60,10 @@
-  */
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#define USB_LOW_THRESHOLD_UV		200000
- #define USB_WARNING_LOW_THRESHOLD_UV	660000
- #define USB_START_LOW_THRESHOLD_UV	1230000
--#define USB_START_HIGH_THRESHOLD_UV	2100000
-+#define USB_START_HIGH_THRESHOLD_UV	2150000
- 
- int checkboard(void)
- {
-@@ -263,9 +264,10 @@ static int board_check_usb_power(void)
- 	ofnode node;
- 	unsigned int raw;
- 	int max_uV = 0;
-+	int min_uV = USB_START_HIGH_THRESHOLD_UV;
- 	int ret, uV, adc_count;
--	u8 i, nb_blink;
--
-+	u32 nb_blink;
-+	u8 i;
- 	node = ofnode_path("/config");
- 	if (!ofnode_valid(node)) {
- 		debug("%s: no /config node?\n", __func__);
-@@ -317,6 +319,8 @@ static int board_check_usb_power(void)
- 		if (!adc_raw_to_uV(adc, raw, &uV)) {
- 			if (uV > max_uV)
- 				max_uV = uV;
-+			if (uV < min_uV)
-+				min_uV = uV;
- 			pr_debug("%s: %s[%02d] = %u, %d uV\n", __func__,
- 				 adc->name, adc_args.args[0], raw, uV);
- 		} else {
-@@ -331,27 +335,66 @@ static int board_check_usb_power(void)
- 	 * continue.
- 	 */
- 	if (max_uV > USB_START_LOW_THRESHOLD_UV &&
--	    max_uV < USB_START_HIGH_THRESHOLD_UV)
-+	    max_uV <= USB_START_HIGH_THRESHOLD_UV &&
-+	    min_uV <= USB_LOW_THRESHOLD_UV)
- 		return 0;
- 
--	/* Display warning message and make u-boot,error-led blinking */
--	pr_err("\n*******************************************\n");
-+	pr_err("****************************************************\n");
-+
-+	/*
-+	 * If highest and lowest value are either both below
-+	 * USB_LOW_THRESHOLD_UV or both above USB_LOW_THRESHOLD_UV, that
-+	 * means USB TYPE-C is in unattached mode, this is an issue, make
-+	 * u-boot,error-led blinking and stop boot process.
-+	 */
-+	if ((max_uV > USB_LOW_THRESHOLD_UV &&
-+	     min_uV > USB_LOW_THRESHOLD_UV) ||
-+	     (max_uV <= USB_LOW_THRESHOLD_UV &&
-+	     min_uV <= USB_LOW_THRESHOLD_UV)) {
-+		pr_err("* ERROR USB TYPE-C connection in unattached mode   *\n");
-+		pr_err("* Check that USB TYPE-C cable is correctly plugged *\n");
-+		/* with 125ms interval, led will blink for 17.02 years ....*/
-+		nb_blink = U32_MAX;
-+	}
- 
--	if (max_uV < USB_WARNING_LOW_THRESHOLD_UV) {
--		pr_err("*   WARNING 500mA power supply detected   *\n");
-+	if (max_uV > USB_LOW_THRESHOLD_UV &&
-+	    max_uV <= USB_WARNING_LOW_THRESHOLD_UV &&
-+	    min_uV <= USB_LOW_THRESHOLD_UV) {
-+		pr_err("*        WARNING 500mA power supply detected       *\n");
- 		nb_blink = 2;
--	} else {
--		pr_err("* WARNING 1.5A power supply detected      *\n");
-+	}
-+
-+	if (max_uV > USB_WARNING_LOW_THRESHOLD_UV &&
-+	    max_uV <= USB_START_LOW_THRESHOLD_UV &&
-+	    min_uV <= USB_LOW_THRESHOLD_UV) {
-+		pr_err("*       WARNING 1.5mA power supply detected        *\n");
- 		nb_blink = 3;
- 	}
- 
--	pr_err("* Current too low, use a 3A power supply! *\n");
--	pr_err("*******************************************\n\n");
-+	/*
-+	 * If highest value is above 2.15 Volts that means that the USB TypeC
-+	 * supplies more than 3 Amp, this is not compliant with TypeC specification
-+	 */
-+	if (max_uV > USB_START_HIGH_THRESHOLD_UV) {
-+		pr_err("*      USB TYPE-C charger not compliant with       *\n");
-+		pr_err("*                   specification                  *\n");
-+		pr_err("****************************************************\n\n");
-+		/* with 125ms interval, led will blink for 17.02 years ....*/
-+		nb_blink = U32_MAX;
-+	} else {
-+		pr_err("*     Current too low, use a 3A power supply!      *\n");
-+		pr_err("****************************************************\n\n");
-+	}
- 
- 	ret = get_led(&led, "u-boot,error-led");
--	if (ret)
-+	if (ret) {
-+		/* in unattached case, the boot process must be stopped */
-+		if (nb_blink == U32_MAX)
-+			hang();
- 		return ret;
-+	}
- 
-+	/* make u-boot,error-led blinking */
- 	for (i = 0; i < nb_blink * 2; i++) {
- 		led_set_state(led, LEDST_TOGGLE);
- 		mdelay(125);
--- 
-1.9.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGksCgpPbiA0LzE5LzE5IDY6MzggQU0sIEFsZXggS2llcm5hbiB3cm90ZToKPiBUaGlzIGNvbnZl
+cnRzIHRoZSBmb2xsb3dpbmcgdG8gS2NvbmZpZzoKPiAgICBDT05GSUdfU1VQUE9SVF9FTU1DX0JP
+T1QKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbGV4IEtpZXJuYW4gPGFsZXgua2llcm5hbkBnbWFpbC5j
+b20+Cj4gLS0tCj4gR3JlZW4gdHJhdmlzIGJ1aWxkOgo+IAo+IGh0dHBzOi8vdHJhdmlzLWNpLm9y
+Zy9ha2llcm5hbi91LWJvb3QvYnVpbGRzLzUyMTkwNjg1MAo+IAo+IFRlc3RpbmcgYWZmZWN0ZWQg
+Ym9hcmRzIGZvciBjb25maWd1cmF0aW9uIGNoYW5nZXM6Cj4gCj4gICBib2FyZHMuY2ZnIGlzIHVw
+IHRvIGRhdGUuIE5vdGhpbmcgdG8gZG8uCj4gICBTdW1tYXJ5IG9mIDMgY29tbWl0cyBmb3IgOTUg
+Ym9hcmRzICg0IHRocmVhZHMsIDEgam9iIHBlciB0aHJlYWQpCj4gICAwMTogTWVyZ2UgdGFnICd1
+LWJvb3QtaW14LTIwMTkwNDE1JyBvZiBnaXQ6Ly9naXQuZGVueC5kZS91LWJvb3QtaW14Cj4gICAg
+ICBhYXJjaDY0OiAgdysgICB4aWxpbnhfenlucW1wX21pbmlfZW1tYzEgeGlsaW54X3p5bnFtcF9t
+aW5pX2VtbWMwIHhpbGlueF96eW5xbXBfbWluaV9xc3BpIGNsZWFyZm9nX2d0XzhrIGlteDhxeHBf
+bWVrIHhpbGlueF96eW5xbXBfbWluaSB4aWxpbnhfenlucW1wX21pbmlfbmFuZCBpbXg4bXFfZXZr
+Cj4gICAgICAgICAgYXJtOiAgdysgICBjbV90NTQgY2wtc29tLWlteDcgbWFyc2JvYXJkIGNsZWFy
+Zm9nIGFwYWxpc19pbXg2IHdhcnA3IHBpY28taG9iYml0LWlteDdkIHBpY28tcGktaW14NnVsIGRt
+cy1iYTE2IGFybmRhbGUgcmlvdGJvYXJkIHBpY28taG9iYml0LWlteDZ1bCBjb2xpYnJpX2lteDcg
+cGljby1pbXg3ZCB4cHJlc3Nfc3BsIG9wb3M2dWxkZXYgd2FycDdfYmwzMyBpbXg2ZGxfbWFtb2og
+Z2VfYng1MHYzIGRpc3BsYXk1IG14N2RzYWJyZXNkX3FzcGkgZGlzcGxheTVfZmFjdG9yeSBjb2xp
+YnJpX2lteDdfZW1tYyBnd3ZlbnRhbmFfbmFuZCBteDdkc2FicmVzZCBnd3ZlbnRhbmFfZ3c1OTA0
+IGd3dmVudGFuYV9lbW1jIGFtNTd4eF9oc19ldm1fdXNiIG9tYXA1X3Vldm0gYnJwcHQxX3NwaSB4
+aWxpbnhfenlucW1wX3I1IHZpbmNvIG14NnNhYnJlc2Qgd2FycCByaW90Ym9hcmRfc3BsIHZpbmlu
+Z18yMDAwIHpjNTYwMSB6YzUyMDIgeHByZXNzIHBpY28taW14NnVsIGRtcy1iYTE2LTFnIHBpY28t
+cGktaW14N2QKPiAgIDAyOiBjb25maWdzOiBSZXN5bmMgd2l0aCBzYXZlZGVmY29uZmlnCj4gICAw
+MzogQ29udmVydCBDT05GSUdfU1VQUE9SVF9FTU1DX0JPT1QgdG8gS2NvbmZpZwo+IAoKPiAgY29u
+Zmlncy9vcG9zNnVsZGV2X2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgICAgIHwgMSArCgo+ICBp
+bmNsdWRlL2NvbmZpZ3Mvb3BvczZ1bGRldi5oICAgICAgICAgICAgICAgICAgICAgfCAzIC0tLQoK
+ClRlc3RlZC1ieTogU8OpYmFzdGllbiBTenltYW5za2kgPHNlYmFzdGllbi5zenltYW5za2lAYXJt
+YWRldXMuY29tPgoKUmVnYXJkcywKCgotLSAKU8OpYmFzdGllbiBTenltYW5za2kKU29mdHdhcmUg
+ZW5naW5lZXIsIEFybWFkZXVzIFN5c3RlbXMKVGVsOiArMzMgKDApOSA3MiAyOSA0MSA0NApGYXg6
+ICszMyAoMCk5IDcyIDI4IDc5IDI2Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1t
+YWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

@@ -2,62 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A5231149E
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 09:57:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 249851149F
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 09:57:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DCC22C0B792
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 07:56:59 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4702C06B9A
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 May 2019 07:57:04 +0000 (UTC)
 Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
  [209.85.210.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BA7BEC0B791
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4080FC06B99
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  2 May 2019 07:56:58 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id 13so419809pfw.9
+ Thu,  2 May 2019 07:57:03 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id v80so737949pfa.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 02 May 2019 00:56:58 -0700 (PDT)
+ Thu, 02 May 2019 00:57:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GxBMIhSlZ0iN2r9oshAN0O8TfHfVGSNqeIrKU0PQGwI=;
- b=Q31brsvVYZlDlbgR0NZEQIR+vhz96ieDHZLqYmJ1hcSguFg0BiEXUflmx6Z++F/9ha
- WMxLESzozIMf/jaDxl+OptdpIZG0btIxGhs0WxtSvvsZcRIY4/scRReAP9xa7FoIqOrf
- fB8Ksc/dO5+UXrK+o5nIN4MkongopMmsup1mAQfeCLCiJDPt758Dg3GUDdjPbEXiSFic
- a7GVFg1iVfI/zEghSw8smjo5YAUgjMduADiNJANZ4IYirJF+ha+M1B4f+IsQYGB+Nefk
- zb81dymXv5EBQ8cURAMIcWv8BTK74fDM7ej+lTqLXLt7H66ic7mMmjorkLeotqNqFhVY
- FIiw==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=quigfaqe6tHIIcYc+9Cvv7X52eNSI2p5o4Zo7al3hcg=;
+ b=Yz2aO27Cs0TjbTqbbDTRZ2QGT3qUziprI5Syhrt+UWMjiaWRUPCovvcDAHdBFYJA2T
+ +kmVPmq9ESW+E/QTQlFspLya0h15Q4vU3+xyjE713Cd8+1qy667vm+laEaTeHhvXuzHc
+ CgaNLNJgpVFc/NTpXhX0LWCQ2B34MG2NJzbvrPhPgw9uTPMwCpKPE7espZfLLzfqIEb9
+ t0kpH3vdBxhwpUBYgY8TUcCBkFO1Ao2noyF8EABMvqwIopLXISeZG7KO4C6rEiRnSmTx
+ gulapzrKIsWItxvM0QYaMQUoxwbLWmKVxvB/6T2jCIYWp1mdXgOv6ywO1LccS9QsiVl9
+ 007A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=GxBMIhSlZ0iN2r9oshAN0O8TfHfVGSNqeIrKU0PQGwI=;
- b=rsAo+yuK0N5bNXZwXiN0QLuhuG/NF2O21SL3VDHdd/IanikA2+i8xZvWh7IAg7Vk95
- jE2aqsy+DkDSxgzGeSLsRX38g5kN/bZmv1FIESLuBcN6gFGOF0vFfN37u7F4H5xhm9db
- pj18d6mr6h5Y6dkZeCbH2f3zvs4MMGpDdfM3hiqwUzAsbW7bBWbUrLWDjXHFx6z416Jj
- huZ+DGV4h8/mMYJdWSzsx51n8X+0hyDxcuU6tmqgtR7B9NIy8GzqKAtDWRZyySKYlUNe
- y3cxD9oihGSfFEwbdcfqt8bq1JX6GPD/uMLsG1Pl87kv6Sp5tSeMRrJjdRpvk7LRug8O
- aqUA==
-X-Gm-Message-State: APjAAAU0hwW6zPeWU52Ct0hmaCjuLJrGJ0zgAvo6z151OQlFaON0QHfL
- KIFls7/OIdEpsp5IsuJ6hi4M
-X-Google-Smtp-Source: APXvYqw7MTe9VtY18L4LVHicWgJzprMzDXjsbZXCusI1EhqDjNf6qq30i2mjV5S0w1CHnDvY/Hlzug==
-X-Received: by 2002:a65:63d5:: with SMTP id n21mr2579623pgv.330.1556783817131; 
- Thu, 02 May 2019 00:56:57 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=quigfaqe6tHIIcYc+9Cvv7X52eNSI2p5o4Zo7al3hcg=;
+ b=HnIeYQVUtdbWadCWjsrtlmfmRTzn5LJ5jZ2b61I1DsH9RjGoe5Qz539ShZ/vnxBu+m
+ yN0CMwXUDUVqttgMVOpDrLRu04e9VWlHl47Hv1RsATkJQmy2NIAynRXklOFb5u9bv68A
+ vTmXwERtYJxX8Kzh7lvMmXHIxmov1K95yvuZ8HFk4tTbvuFpGBbt9NjzNG0HhUu8Mom5
+ Pr7f9r5BBDyUsRHHwlaBZpzOWvM0uoXxtT5j5LncP/vA4P0rWVFCYwJQkWgY5PFqMwHu
+ wGyuH+e7sLiRNxbXgZ6+pxRmds6Utjxv6BjvTRlWCI0FgBdRXcYsm4EOXPnyQQFVs1nd
+ p/5Q==
+X-Gm-Message-State: APjAAAVXjj+Y7HLuVyk6BLWIM1bwI7FLg2u4HqWQ1YXEKfO1c8WnRntC
+ jsebHdk568IqPcUWqr8DBGxX
+X-Google-Smtp-Source: APXvYqy8Pl97mu/WoYPan2OkpgEzg1LZ1W9P14XffGt58jzgZq+9syF4psriq9vO+EjQxsdGLBuPTg==
+X-Received: by 2002:a63:6b49:: with SMTP id g70mr2607617pgc.340.1556783821752; 
+ Thu, 02 May 2019 00:57:01 -0700 (PDT)
 Received: from localhost.localdomain
  ([2409:4072:6284:a261:31df:f367:f70b:ed86])
- by smtp.gmail.com with ESMTPSA id n18sm63780910pfi.48.2019.05.02.00.56.52
+ by smtp.gmail.com with ESMTPSA id n18sm63780910pfi.48.2019.05.02.00.56.57
  (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 02 May 2019 00:56:56 -0700 (PDT)
+ Thu, 02 May 2019 00:57:00 -0700 (PDT)
 From: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
 To: patrick.delaunay@st.com, christophe.kerello@st.com, patrice.chotard@st.com,
  trini@konsulko.com
-Date: Thu,  2 May 2019 13:26:42 +0530
-Message-Id: <20190502075645.19901-1-manivannan.sadhasivam@linaro.org>
+Date: Thu,  2 May 2019 13:26:43 +0530
+Message-Id: <20190502075645.19901-2-manivannan.sadhasivam@linaro.org>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
+In-Reply-To: <20190502075645.19901-1-manivannan.sadhasivam@linaro.org>
+References: <20190502075645.19901-1-manivannan.sadhasivam@linaro.org>
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [Uboot-stm32] [PATCH v2 0/3] Add Avenger96 board support
+Subject: [Uboot-stm32] [PATCH v2 1/3] arm: dts: stm32mp157: Add missing
+	pinctrl definitions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,45 +70,114 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello,
+Add missing pinctrl definitions for STM32MP157.
 
-This patchset adds board support for Avenger96, a 96Boards Consumer
-Edition board from Arrow Electronics. This board is based on the
-STM32MP1 MPU and the board support is added under st boards since
-there are no significance changes required to boot u-boot on this
-board other than the dts.
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+---
+ arch/arm/dts/stm32mp157-pinctrl.dtsi | 63 ++++++++++++++++++++++++++++
+ 1 file changed, 63 insertions(+)
 
-More information about this board can be found in 96Boards website:
-https://www.96boards.org/product/avenger96/
-
-Thanks,
-Mani
-
-Changes in v2:
-
-* Added missing `u-boot,dm-pre-reloc` property to UART and SDMMC nodes
-  and verified SPL boot.
-
-Manivannan Sadhasivam (3):
-  arm: dts: stm32mp157: Add missing pinctrl definitions
-  board: stm32mp1: Add Avenger96 board support
-  arm: mach-stm32mp: Add newline to the MAC error message
-
- arch/arm/dts/Makefile                         |   1 +
- arch/arm/dts/stm32mp157-pinctrl.dtsi          |  63 +++
- .../arm/dts/stm32mp157a-avenger96-u-boot.dtsi | 191 +++++++++
- arch/arm/dts/stm32mp157a-avenger96.dts        | 362 ++++++++++++++++++
- arch/arm/mach-stm32mp/cpu.c                   |   2 +-
- board/st/stm32mp1/README                      |  23 ++
- 6 files changed, 641 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp157a-avenger96.dts
-
+diff --git a/arch/arm/dts/stm32mp157-pinctrl.dtsi b/arch/arm/dts/stm32mp157-pinctrl.dtsi
+index 0aae69b0a04..200d2c00c5f 100644
+--- a/arch/arm/dts/stm32mp157-pinctrl.dtsi
++++ b/arch/arm/dts/stm32mp157-pinctrl.dtsi
+@@ -220,6 +220,16 @@
+ 				};
+ 			};
+ 
++			i2c1_pins_b: i2c1-1 {
++				pins {
++					pinmux = <STM32_PINMUX('F', 14, AF5)>, /* I2C1_SCL */
++						 <STM32_PINMUX('F', 15, AF5)>; /* I2C1_SDA */
++					bias-disable;
++					drive-open-drain;
++					slew-rate = <0>;
++				};
++			};
++
+ 			i2c2_pins_a: i2c2-0 {
+ 				pins {
+ 					pinmux = <STM32_PINMUX('H', 4, AF4)>, /* I2C2_SCL */
+@@ -230,6 +240,16 @@
+ 				};
+ 			};
+ 
++			i2c2_pins_b: i2c2-1 {
++				pins {
++					pinmux = <STM32_PINMUX('Z', 0, AF3)>, /* I2C2_SCL */
++						 <STM32_PINMUX('H', 5, AF4)>; /* I2C2_SDA */
++					bias-disable;
++					drive-open-drain;
++					slew-rate = <0>;
++				};
++			};
++
+ 			i2c5_pins_a: i2c5-0 {
+ 				pins {
+ 					pinmux = <STM32_PINMUX('A', 11, AF4)>, /* I2C5_SCL */
+@@ -375,6 +395,21 @@
+ 				};
+ 			};
+ 
++			spi2_pins_a: spi2-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 10, AF5)>, /* SPI2_SCK */
++						 <STM32_PINMUX('I', 0, AF5)>, /* SPI2_NSS */
++						 <STM32_PINMUX('I', 3, AF5)>; /* SPI2_MOSI */
++					bias-disable;
++					drive-push-pull;
++					slew-rate = <3>;
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('I', 2, AF5)>; /* SPI2_MISO */
++					bias-disable;
++				};
++			};
++
+ 			stusb1600_pins_a: stusb1600-0 {
+ 				pins {
+ 					pinmux = <STM32_PINMUX('I', 11, ANALOG)>;
+@@ -395,6 +430,34 @@
+ 				};
+ 			};
+ 
++			uart4_pins_b: uart4-1 {
++				pins1 {
++					pinmux = <STM32_PINMUX('D', 1, AF8)>; /* UART4_TX */
++					bias-disable;
++					drive-push-pull;
++					slew-rate = <0>;
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
++					bias-disable;
++				};
++			};
++
++			uart7_pins_a: uart7-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('E', 8, AF7)>; /* UART4_TX */
++					bias-disable;
++					drive-push-pull;
++					slew-rate = <0>;
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('E', 7, AF7)>, /* UART4_RX */
++						 <STM32_PINMUX('E', 10, AF7)>, /* UART4_CTS */
++						 <STM32_PINMUX('E', 9, AF7)>; /* UART4_RTS */
++					bias-disable;
++				};
++			};
++
+ 			usbotg_hs_pins_a: usbotg_hs-0 {
+ 				pins {
+ 					pinmux = <STM32_PINMUX('A', 10, ANALOG)>; /* OTG_ID */
 -- 
 2.17.1
 

@@ -2,133 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A9E61B086
+	by mail.lfdr.de (Postfix) with ESMTPS id DABE91B089
 	for <lists+uboot-stm32@lfdr.de>; Mon, 13 May 2019 09:00:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82DE8C06B74
-	for <lists+uboot-stm32@lfdr.de>; Mon, 13 May 2019 07:00:04 +0000 (UTC)
-Received: from esa6.microchip.iphmx.com (esa6.microchip.iphmx.com
- [216.71.154.253])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1BABC06B71
+	for <lists+uboot-stm32@lfdr.de>; Mon, 13 May 2019 07:00:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E6DD0C640F6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9897AC7128B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 May 2019 05:55:02 +0000 (UTC)
-Received-SPF: Pass (esa6.microchip.iphmx.com: domain of
- Eugen.Hristev@microchip.com designates 198.175.253.82 as
- permitted sender) identity=mailfrom;
- client-ip=198.175.253.82; receiver=esa6.microchip.iphmx.com;
- envelope-from="Eugen.Hristev@microchip.com";
- x-sender="Eugen.Hristev@microchip.com";
- x-conformance=spf_only; x-record-type="v=spf1";
- x-record-text="v=spf1 mx a:ushub1.microchip.com
- a:smtpout.microchip.com a:mx1.microchip.iphmx.com
- a:mx2.microchip.iphmx.com include:servers.mcsv.net
- include:mktomail.com include:spf.protection.outlook.com ~all"
-Received-SPF: None (esa6.microchip.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@email.microchip.com) identity=helo;
- client-ip=198.175.253.82; receiver=esa6.microchip.iphmx.com;
- envelope-from="Eugen.Hristev@microchip.com";
- x-sender="postmaster@email.microchip.com"; x-conformance=spf_only
-Authentication-Results: esa6.microchip.iphmx.com;
- spf=Pass smtp.mailfrom=Eugen.Hristev@microchip.com;
- spf=None smtp.helo=postmaster@email.microchip.com;
- dkim=pass (signature verified) header.i=@microchiptechnology.onmicrosoft.com;
- dmarc=pass (p=none dis=none) d=microchip.com
-X-IronPort-AV: E=Sophos;i="5.60,452,1549954800"; d="scan'208";a="29915751"
-Received: from smtpout.microchip.com (HELO email.microchip.com)
- ([198.175.253.82])
- by esa6.microchip.iphmx.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
- 09 May 2019 22:54:58 -0700
-Received: from NAM05-BY2-obe.outbound.protection.outlook.com (10.10.215.89) by
- email.microchip.com (10.10.76.106) with Microsoft SMTP Server (TLS)
- id 14.3.352.0; Thu, 9 May 2019 22:54:50 -0700
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=microchiptechnology.onmicrosoft.com;
- s=selector1-microchiptechnology-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mnFzpCpuAsvDkXC9rzPmHYHVexEg9ko2Br+d9/gxJgw=;
- b=qJLBvd/+a8wcdYQY92rnkaKCSBIZLQESZL3kQt+xRmBHGTOZdr+u5F2wuEQIY6xVmhBNgpjUYGK0o6Ir4OZ195Qvn4Gl1DwXFTlMxNsgjnk6aHB30z48QCI2QygYJmd9B/5dknGyEZk1VYTYYdSTqZ0H1Mlkr4luil49jhJjhsI=
-Received: from DM5PR11MB1242.namprd11.prod.outlook.com (10.168.108.8) by
- DM5PR11MB1356.namprd11.prod.outlook.com (10.168.108.17) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.1856.14; Fri, 10 May 2019 05:54:40 +0000
-Received: from DM5PR11MB1242.namprd11.prod.outlook.com
- ([fe80::e0e3:1d51:9e3e:6dc]) by DM5PR11MB1242.namprd11.prod.outlook.com
- ([fe80::e0e3:1d51:9e3e:6dc%3]) with mapi id 15.20.1856.012; Fri, 10 May 2019
- 05:54:40 +0000
-From: <Eugen.Hristev@microchip.com>
-To: <simon.k.r.goldschmidt@gmail.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH v2] spl: kconfig: separate sysreset and firmware drivers
- from misc
-Thread-Index: AQHVBda/98Q4vExBYku1vAD55vySzKZj3K6A
-Date: Fri, 10 May 2019 05:54:40 +0000
-Message-ID: <e7045757-ca3a-3038-b387-fd414eea29fe@microchip.com>
-References: <20190508194513.20462-1-simon.k.r.goldschmidt@gmail.com>
-In-Reply-To: <20190508194513.20462-1-simon.k.r.goldschmidt@gmail.com>
-Accept-Language: ro-RO, en-US
+ Fri, 10 May 2019 13:56:06 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x4ADpGfd017986; Fri, 10 May 2019 15:56:00 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=gwc7hC+ghxjt/1xbTQYn3xN5UkSHf5tLocsrpfA7/Sw=;
+ b=luFG1WYuNsT+py1b/eeScMByX/3MK62DmDR1E9LsMwcaskuiDjtLqrCQFmD+UOJuQHGm
+ KZr/rvGCNTHLPjofrG4eadNe73+FDNcf6wkpE9suX79ULPKomkWVBIpPbGj7wysh42jN
+ QPM5/6NHvHLWyEAiaMk4gjy6XD4VYTZ0JIIWbttzctnsgPw+lLXsFB+QFC4EBAV2TDlU
+ oJWGRoJMF5QrqHLhtBDNe+jSPtYgFoXKxz7R0EB6Xr5rYHYP0UIzLjy40OxTizqZAoH7
+ ZQ2XbSGD1LEPJk89GTGJEmBBE2YuyPnd7KLLkHsNJ0pXuweLZoeYdFwSzkZOZ228kfSa UA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2scfv2s1ut-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
+ Fri, 10 May 2019 15:56:00 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2F62B31;
+ Fri, 10 May 2019 13:55:58 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag5node1.st.com [10.75.127.13])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 14B3C29E9;
+ Fri, 10 May 2019 13:55:58 +0000 (GMT)
+Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG5NODE1.st.com
+ (10.75.127.13) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 10 May
+ 2019 15:55:57 +0200
+Received: from SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47]) by
+ SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47%20]) with mapi id
+ 15.00.1347.000; Fri, 10 May 2019 15:55:57 +0200
+From: Christophe ROULLIER <christophe.roullier@st.com>
+To: "joe.hershberger@ni.com" <joe.hershberger@ni.com>
+Thread-Topic: [U-Boot] [PATCH 2/5] net: dwc_eth_qos: add Ethernet stm32mp1
+ support
+Thread-Index: AQHU/BjH2XUez8J49kaBCxY/RRFmoaZjPJSAgAEZ4oA=
+Date: Fri, 10 May 2019 13:55:57 +0000
+Message-ID: <90190c83-f1be-21f8-4457-866aabb56f1e@st.com>
+References: <20190426101339.25442-1-christophe.roullier@st.com>
+ <20190426101339.25442-3-christophe.roullier@st.com>
+ <CANr=Z=YtH6wPuWvsZ8SyiCFb3ouUKFpmH2YJsWagouMACTGdMw@mail.gmail.com>
+In-Reply-To: <CANr=Z=YtH6wPuWvsZ8SyiCFb3ouUKFpmH2YJsWagouMACTGdMw@mail.gmail.com>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-clientproxiedby: VI1P195CA0043.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:5a::32) To DM5PR11MB1242.namprd11.prod.outlook.com
- (2603:10b6:3:14::8)
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 x-ms-exchange-messagesentrepresentingtype: 1
-x-tagtoolbar-keys: D20190510084949206
-x-originating-ip: [94.177.32.154]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 4c0183c5-9ba1-463c-97e7-08d6d50bfd65
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600141)(711020)(4605104)(2017052603328)(7193020);
- SRVR:DM5PR11MB1356; 
-x-ms-traffictypediagnostic: DM5PR11MB1356:
-x-microsoft-antispam-prvs: <DM5PR11MB13562056B973E874A54CE9C9E80C0@DM5PR11MB1356.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-forefront-prvs: 0033AAD26D
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(136003)(39860400002)(366004)(346002)(376002)(396003)(199004)(189003)(7416002)(53946003)(7406005)(7366002)(478600001)(5660300002)(72206003)(31686004)(6512007)(36756003)(68736007)(26005)(6436002)(71200400001)(71190400001)(256004)(4326008)(2501003)(14454004)(25786009)(229853002)(6486002)(6246003)(53936002)(31696002)(53546011)(386003)(102836004)(6506007)(6116002)(2616005)(476003)(73956011)(66476007)(66556008)(66446008)(64756008)(186003)(486006)(3846002)(7736002)(446003)(54906003)(52116002)(316002)(2906002)(110136005)(66946007)(99286004)(305945005)(30864003)(8676002)(66066001)(81166006)(11346002)(81156014)(8936002)(76176011)(86362001)(569006);
- DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR11MB1356;
- H:DM5PR11MB1242.namprd11.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: microchip.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: 0vTPDWgqjEFoHseo6CqYcumjoIG0jusxbogK68kHMlLehcN6sl95jFlxMmRweUHaX3+N5SVT1FSmOX+wjZoK1Y+D4hNmqn1UuJfFTfQNIjjwem8U3wWRzbFCnsmrH7Gdkyl2DYVxj/nvIwbiFU1VLeFz83qDEGS7VLkFlwSHnPCDmdsn4o3hjKCcOvPSDmnCCCLxKoqew/2Wvj50mbmpZvqes9ahqIN9OO9FtLUA/6HBIlCZuNRAP3XAsABgmWavQe9s7fjBOqBDH/xC32BAILqm6P6jzCHA0Pam1jPCqatM7rPozObyplHCSv0PiS+Hz/UgJ3GugDbUfvQ5gJu5Ds8yxakdhy/rOAHLmp532kk0IcEkyS0dxj3M4Jhc3Xx9PFuiuT/0Wk0W1CevPPJIoF06f/VdpeuNVZfUuNM5tTQ=
-Content-ID: <149AACF46B6F8048B3CD76215367BB07@namprd11.prod.outlook.com>
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.48]
+Content-ID: <503B49107F5CC54EB52542C0E24BAF66@st.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c0183c5-9ba1-463c-97e7-08d6d50bfd65
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 May 2019 05:54:40.1921 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR11MB1356
-X-OriginatorOrg: microchip.com
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-05-09_02:, , signatures=0
 X-Mailman-Approved-At: Mon, 13 May 2019 07:00:03 +0000
-Cc: peng.fan@nxp.com, christophe.kerello@st.com, vigneshr@ti.com,
- lokeshvutla@ti.com, weijie.gao@mediatek.com, kever.yang@rock-chips.com,
- alex.kiernan@gmail.com, yamada.masahiro@socionext.com,
- sjoerd.simons@collabora.co.uk, klaus.goger@theobroma-systems.com,
- patrick.delaunay@st.com, miquel.raynal@bootlin.com,
- uboot-stm32@st-md-mailman.stormreply.com,
- philipp.tomsich@theobroma-systems.com, festevam@gmail.com,
- ruchika.gupta@nxp.com, qiang.zhao@nxp.com, marex@denx.de,
- tien.fong.chee@intel.com, ryder.lee@mediatek.com, abel.vesa@nxp.com,
- sumit.garg@nxp.com, jagan@openedev.com, abrodkin@synopsys.com,
- michal.simek@xilinx.com, ley.foon.tan@intel.com, marek.behun@nic.cz,
- marcel.ziswiler@toradex.com, jens.wiklander@linaro.org, sbabic@denx.de,
- Shengzhou.Liu@nxp.com, jjhiblot@ti.com, york.sun@nxp.com,
- siva.durga.paladugu@xilinx.com, pbrobinson@gmail.com, otavio@ossystems.com.br,
- rajesh.bhagat@nxp.com, alison.wang@nxp.com, ykaukab@suse.de,
- ashish.kumar@nxp.com, jgebben@sweptlaser.com, maxime.ripard@bootlin.com,
- aford173@gmail.com, mingkai.hu@nxp.com, albert.u.boot@aribaud.net,
- bmeng.cn@gmail.com, joe.hershberger@ni.com, priyanka.jain@nxp.com,
- po.liu@nxp.com, patrice.chotard@st.com, afd@ti.com, prabhakar.kushwaha@nxp.com,
- lukma@denx.de, hanetzer@startmail.com, sjg@chromium.org,
- lukas.auer@aisec.fraunhofer.de
-Subject: Re: [Uboot-stm32] [PATCH v2] spl: kconfig: separate sysreset and
- firmware drivers from misc
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot <u-boot@lists.denx.de>, Joseph Hershberger <joseph.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 2/5] net: dwc_eth_qos: add
+ Ethernet stm32mp1 support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -145,2139 +88,800 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Joe,
 
+On 09/05/2019 23:07, Joe Hershberger wrote:
+> On Fri, Apr 26, 2019 at 6:16 AM Christophe Roullier
+> <christophe.roullier@st.com>  wrote:
+>> Synopsys GMAC 4.20 is used. And Phy mode for eval and disco is RMII
+>> with PHY Realtek RTL8211 (RGMII)
+>> We also support some other PHY config on stm32mp157c
+>> PHY_MODE        (MII,GMII, RMII, RGMII) and in normal,
+>> PHY wo crystal (25Mhz and 50Mhz), No 125Mhz from PHY config
+> Can you split this into separate logical patches?
 
-On 08.05.2019 22:45, Simon Goldschmidt wrote:
+If it is possible, I would like to keep this in same patch.
 
-> This adds separate kconfig options for drivers/sysreset and
-> drivers/firmware.
-> 
-> Up to now, CONFIG_SPL_DRIVERS_MISC_SUPPORT added drivers/misc to SPL
-> build but also added drivers/firmware and drivers/sysreset at the same
-> time.
-> 
-> Since that is confusing, this patch adds CONFIG_SPL_SYSRESET for
-> drivers/sysreset and CONFIG_SPL_FIRMWARE for
-> drivers/firmware (and accordingly for the TPL options).
-> 
-> To keep the binaries unchanged, this patch enables the 2 new options
-> on all boards where DRIVERS_MISC_SUPPORT has been enabled before.
-> 
-> While at it, change CONFIG_SPL_DRIVERS_MISC_SUPPORT to
-> CONFIG_SPL_MISC so that it matches the non-SPL config option.
-> 
-> Signed-off-by: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-> ---
+Because the choice to select phy-mode and with or without crystal is 
+only in eqos_probe_resources_stm32 and it is managed by DT properties.
 
-For sama5 configs:
-Acked-by: Eugen Hristev <eugen.hristev@microchip.com>
+Thanks in advance.
 
-> 
-> Changes in v2:
-> - adapt config names to match the non-SPL config options:
-> - changed CONFIG_SPL_SYSRESET_SUPPORT to CONFIG_SPL_SYSRESET
-> - changed CONFIG_SPL_DRIVERS_FIRMWARE_SUPPORT to CONFIG_SPL_FIRMWARE
-> - changed CONFIG_SPL_DRIVERS_MISC_SUPPORT to CONFIG_SPL_MISC
-> 
->   arch/Kconfig                                  |  4 +--
->   arch/arm/mach-rockchip/Kconfig                |  8 +++--
->   arch/arm/mach-rockchip/rk3288/Kconfig         | 12 +++++--
->   arch/arm/mach-stm32/Kconfig                   |  4 ++-
->   arch/arm/mach-stm32mp/Kconfig                 |  4 ++-
->   common/spl/Kconfig                            | 32 +++++++++++++++++--
->   configs/B4420QDS_NAND_defconfig               |  4 ++-
->   configs/B4860QDS_NAND_defconfig               |  4 ++-
->   configs/C29XPCIE_NAND_defconfig               |  4 ++-
->   configs/P1010RDB-PA_36BIT_NAND_defconfig      |  8 +++--
->   configs/P1010RDB-PA_36BIT_SDCARD_defconfig    |  4 ++-
->   configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig  |  4 ++-
->   configs/P1010RDB-PA_NAND_defconfig            |  8 +++--
->   configs/P1010RDB-PA_SDCARD_defconfig          |  4 ++-
->   configs/P1010RDB-PA_SPIFLASH_defconfig        |  4 ++-
->   configs/P1010RDB-PB_36BIT_NAND_defconfig      |  8 +++--
->   configs/P1010RDB-PB_36BIT_SDCARD_defconfig    |  4 ++-
->   configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig  |  4 ++-
->   configs/P1010RDB-PB_NAND_defconfig            |  8 +++--
->   configs/P1010RDB-PB_SDCARD_defconfig          |  4 ++-
->   configs/P1010RDB-PB_SPIFLASH_defconfig        |  4 ++-
->   configs/T1023RDB_NAND_defconfig               |  4 ++-
->   configs/T1023RDB_SDCARD_defconfig             |  4 ++-
->   configs/T1023RDB_SPIFLASH_defconfig           |  4 ++-
->   configs/T1024QDS_NAND_defconfig               |  4 ++-
->   configs/T1024QDS_SDCARD_defconfig             |  4 ++-
->   configs/T1024QDS_SPIFLASH_defconfig           |  4 ++-
->   configs/T1024RDB_NAND_defconfig               |  4 ++-
->   configs/T1024RDB_SDCARD_defconfig             |  4 ++-
->   configs/T1024RDB_SPIFLASH_defconfig           |  4 ++-
->   configs/T1040D4RDB_NAND_defconfig             |  4 ++-
->   configs/T1040D4RDB_SDCARD_defconfig           |  4 ++-
->   configs/T1040D4RDB_SPIFLASH_defconfig         |  4 ++-
->   configs/T1040RDB_NAND_defconfig               |  4 ++-
->   configs/T1040RDB_SDCARD_defconfig             |  4 ++-
->   configs/T1040RDB_SPIFLASH_defconfig           |  4 ++-
->   configs/T1042D4RDB_NAND_defconfig             |  4 ++-
->   configs/T1042D4RDB_SDCARD_defconfig           |  4 ++-
->   configs/T1042D4RDB_SPIFLASH_defconfig         |  4 ++-
->   .../T1042RDB_PI_NAND_SECURE_BOOT_defconfig    |  4 ++-
->   configs/T1042RDB_PI_NAND_defconfig            |  4 ++-
->   configs/T1042RDB_PI_SDCARD_defconfig          |  4 ++-
->   configs/T1042RDB_PI_SPIFLASH_defconfig        |  4 ++-
->   configs/T2080QDS_NAND_defconfig               |  4 ++-
->   configs/T2080QDS_SDCARD_defconfig             |  4 ++-
->   configs/T2080QDS_SPIFLASH_defconfig           |  4 ++-
->   configs/T2080RDB_NAND_defconfig               |  4 ++-
->   configs/T2080RDB_SDCARD_defconfig             |  4 ++-
->   configs/T2080RDB_SPIFLASH_defconfig           |  4 ++-
->   configs/T2081QDS_NAND_defconfig               |  4 ++-
->   configs/T2081QDS_SDCARD_defconfig             |  4 ++-
->   configs/T2081QDS_SPIFLASH_defconfig           |  4 ++-
->   configs/T4160QDS_NAND_defconfig               |  4 ++-
->   configs/T4160QDS_SDCARD_defconfig             |  4 ++-
->   configs/T4240QDS_NAND_defconfig               |  4 ++-
->   configs/T4240QDS_SDCARD_defconfig             |  4 ++-
->   configs/T4240RDB_SDCARD_defconfig             |  4 ++-
->   configs/am335x_guardian_defconfig             |  4 ++-
->   configs/am43xx_evm_defconfig                  |  4 ++-
->   configs/am65x_evm_a53_defconfig               |  4 ++-
->   configs/am65x_evm_r5_defconfig                |  4 ++-
->   configs/am65x_hs_evm_a53_defconfig            |  4 ++-
->   configs/am65x_hs_evm_r5_defconfig             |  4 ++-
->   configs/chromebook_link64_defconfig           |  4 ++-
->   configs/imx8qm_mek_defconfig                  |  4 ++-
->   configs/imx8qxp_mek_defconfig                 |  4 ++-
->   configs/lion-rk3368_defconfig                 |  8 +++--
->   configs/ls1021aqds_nand_defconfig             |  4 ++-
->   configs/ls1021aqds_sdcard_ifc_defconfig       |  4 ++-
->   configs/ls1021aqds_sdcard_qspi_defconfig      |  4 ++-
->   ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  4 ++-
->   configs/ls1043aqds_nand_defconfig             |  4 ++-
->   configs/ls1043aqds_sdcard_ifc_defconfig       |  4 ++-
->   configs/ls1043aqds_sdcard_qspi_defconfig      |  4 ++-
->   configs/ls1043ardb_nand_SECURE_BOOT_defconfig |  4 ++-
->   configs/ls1043ardb_nand_defconfig             |  4 ++-
->   .../ls1043ardb_sdcard_SECURE_BOOT_defconfig   |  4 ++-
->   configs/ls1043ardb_sdcard_defconfig           |  4 ++-
->   configs/ls1046aqds_sdcard_ifc_defconfig       |  4 ++-
->   configs/ls1046aqds_sdcard_qspi_defconfig      |  4 ++-
->   configs/ls1046ardb_emmc_defconfig             |  4 ++-
->   configs/ls1046ardb_qspi_spl_defconfig         |  4 ++-
->   .../ls1046ardb_sdcard_SECURE_BOOT_defconfig   |  4 ++-
->   configs/ls1046ardb_sdcard_defconfig           |  4 ++-
->   configs/ls1088aqds_sdcard_ifc_defconfig       |  4 ++-
->   configs/ls1088aqds_sdcard_qspi_defconfig      |  4 ++-
->   ...1088ardb_sdcard_qspi_SECURE_BOOT_defconfig |  4 ++-
->   configs/ls1088ardb_sdcard_qspi_defconfig      |  4 ++-
->   configs/ls2080aqds_nand_defconfig             |  4 ++-
->   configs/ls2080aqds_sdcard_defconfig           |  4 ++-
->   configs/ls2080ardb_nand_defconfig             |  4 ++-
->   configs/mt7629_rfb_defconfig                  |  4 ++-
->   configs/qemu-x86_64_defconfig                 |  4 ++-
->   configs/sama5d27_som1_ek_mmc1_defconfig       |  4 ++-
->   configs/sama5d27_som1_ek_mmc_defconfig        |  4 ++-
->   configs/sama5d2_icp_mmc_defconfig             |  4 ++-
->   configs/sama5d2_xplained_emmc_defconfig       |  4 ++-
->   configs/sama5d2_xplained_mmc_defconfig        |  4 ++-
->   configs/sama5d2_xplained_spiflash_defconfig   |  4 ++-
->   configs/sama5d3_xplained_mmc_defconfig        |  4 ++-
->   configs/sama5d3_xplained_nandflash_defconfig  |  4 ++-
->   configs/sama5d3xek_mmc_defconfig              |  4 ++-
->   configs/sama5d3xek_nandflash_defconfig        |  4 ++-
->   configs/sama5d3xek_spiflash_defconfig         |  4 ++-
->   configs/sama5d4_xplained_mmc_defconfig        |  4 ++-
->   configs/sama5d4_xplained_nandflash_defconfig  |  4 ++-
->   configs/sama5d4_xplained_spiflash_defconfig   |  4 ++-
->   configs/sama5d4ek_mmc_defconfig               |  4 ++-
->   configs/sama5d4ek_nandflash_defconfig         |  4 ++-
->   configs/sama5d4ek_spiflash_defconfig          |  4 ++-
->   configs/sandbox_spl_defconfig                 |  4 ++-
->   configs/sksimx6_defconfig                     |  4 ++-
->   doc/README.SPL                                |  4 ++-
->   drivers/Makefile                              |  4 ++-
->   include/configs/C29XPCIE.h                    |  4 ++-
->   include/configs/imx8mq_evk.h                  |  4 ++-
->   include/configs/ls1046a_common.h              |  4 ++-
->   include/configs/mx6_common.h                  |  4 ++-
->   include/configs/mx7_common.h                  |  4 ++-
->   include/configs/turris_omnia.h                |  4 ++-
->   120 files changed, 411 insertions(+), 129 deletions(-)
-> 
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index 0ad3867cd1..6104a80fb7 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -170,7 +170,7 @@ config X86
->   	# Thing to enable for when SPL/TPL are enabled: SPL
->   	imply SPL_DM
->   	imply SPL_OF_LIBFDT
-> -	imply SPL_DRIVERS_MISC_SUPPORT
-> +	imply SPL_MISC
->   	imply SPL_GPIO_SUPPORT
->   	imply SPL_LIBCOMMON_SUPPORT
->   	imply SPL_LIBGENERIC_SUPPORT
-> @@ -184,7 +184,7 @@ config X86
->   	# TPL
->   	imply TPL_DM
->   	imply TPL_OF_LIBFDT
-> -	imply TPL_DRIVERS_MISC_SUPPORT
-> +	imply TPL_MISC
->   	imply TPL_GPIO_SUPPORT
->   	imply TPL_LIBCOMMON_SUPPORT
->   	imply TPL_LIBGENERIC_SUPPORT
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 282d728b82..510ba56263 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -32,8 +32,10 @@ config ROCKCHIP_RK3188
->   	select SPL_REGMAP
->   	select SPL_SYSCON
->   	select SPL_RAM
-> -	select SPL_DRIVERS_MISC_SUPPORT
-> +	select SPL_FIRMWARE
-> +	select SPL_MISC
->   	select SPL_ROCKCHIP_EARLYRETURN_TO_BROM
-> +	select SPL_SYSRESET
->   	select BOARD_LATE_INIT
->   	select ROCKCHIP_BROM_HELPER
->   	help
-> @@ -131,7 +133,9 @@ config ROCKCHIP_RK3399
->   	select SPL
->   	select SPL_SEPARATE_BSS
->   	select SPL_SERIAL_SUPPORT
-> -	select SPL_DRIVERS_MISC_SUPPORT
-> +	select SPL_FIRMWARE
-> +	select SPL_MISC
-> +	select SPL_SYSRESET
->   	select BOARD_LATE_INIT
->   	select ROCKCHIP_BROM_HELPER
->   	help
-> diff --git a/arch/arm/mach-rockchip/rk3288/Kconfig b/arch/arm/mach-rockchip/rk3288/Kconfig
-> index 50680ce606..6fb9ce29d3 100644
-> --- a/arch/arm/mach-rockchip/rk3288/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3288/Kconfig
-> @@ -104,7 +104,8 @@ config TARGET_VYASA_RK3288
->   	select TPL_BOOTROM_SUPPORT
->   	select TPL_CLK
->   	select TPL_DM
-> -	select TPL_DRIVERS_MISC_SUPPORT
-> +	select TPL_FIRMWARE
-> +	select TPL_MISC
->   	select TPL_LIBCOMMON_SUPPORT
->   	select TPL_LIBGENERIC_SUPPORT
->   	select TPL_NEEDS_SEPARATE_TEXT_BASE if SPL
-> @@ -114,6 +115,7 @@ config TARGET_VYASA_RK3288
->   	select TPL_REGMAP
->   	select TPL_SERIAL_SUPPORT
->   	select TPL_SYSCON
-> +	select TPL_SYSRESET
->   	help
->   	  Vyasa is a RK3288-based development board with 2 USB ports,
->   	  HDMI, VGA, micro-SD card, audio, WiFi  and Gigabit Ethernet, It
-> @@ -153,7 +155,10 @@ config SYS_SOC
->   config SYS_MALLOC_F_LEN
->   	default 0x0800
->   
-> -config SPL_DRIVERS_MISC_SUPPORT
-> +config SPL_FIRMWARE
-> +	default y
-> +
-> +config SPL_MISC
->   	default y
->   
->   config SPL_LIBCOMMON_SUPPORT
-> @@ -165,6 +170,9 @@ config SPL_LIBGENERIC_SUPPORT
->   config SPL_SERIAL_SUPPORT
->   	default y
->   
-> +config SPL_SYSRESET
-> +	default y
-> +
->   source "board/amarula/vyasa-rk3288/Kconfig"
->   
->   source "board/chipspark/popmetal_rk3288/Kconfig"
-> diff --git a/arch/arm/mach-stm32/Kconfig b/arch/arm/mach-stm32/Kconfig
-> index cea5ee2ce5..30ab021df0 100644
-> --- a/arch/arm/mach-stm32/Kconfig
-> +++ b/arch/arm/mach-stm32/Kconfig
-> @@ -31,7 +31,8 @@ config STM32F7
->   	select SPL_DM
->   	select SPL_DM_RESET
->   	select SPL_DM_SEQ_ALIAS
-> -	select SPL_DRIVERS_MISC_SUPPORT
-> +	select SPL_FIRMWARE
-> +	select SPL_MISC
->   	select SPL_GPIO_SUPPORT
->   	select SPL_LIBCOMMON_SUPPORT
->   	select SPL_LIBGENERIC_SUPPORT
-> @@ -43,6 +44,7 @@ config STM32F7
->   	select SPL_RAM
->   	select SPL_SERIAL_SUPPORT
->   	select SPL_SYS_MALLOC_SIMPLE
-> +	select SPL_SYSRESET
->   	select SPL_TIMER
->   	select SPL_XIP_SUPPORT
->   	select STM32_RCC
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 73aa382712..54c6b939c5 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -5,7 +5,8 @@ config SPL
->   	select SPL_CLK
->   	select SPL_DM
->   	select SPL_DM_SEQ_ALIAS
-> -	select SPL_DRIVERS_MISC_SUPPORT
-> +	select SPL_FIRMWARE
-> +	select SPL_MISC
->   	select SPL_FRAMEWORK
->   	select SPL_GPIO_SUPPORT
->   	select SPL_LIBCOMMON_SUPPORT
-> @@ -17,6 +18,7 @@ config SPL
->   	select SPL_DM_RESET
->   	select SPL_SERIAL_SUPPORT
->   	select SPL_SYSCON
-> +	select SPL_SYSRESET
->   	imply SPL_DISPLAY_PRINT
->   	imply SPL_LIBDISK_SUPPORT
->   
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index dd078fe79d..f1ce3df082 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -360,7 +360,7 @@ config SPL_DMA_SUPPORT
->   	  the CPU moving the data. Enable this option to build the drivers
->   	  in drivers/dma as part of an SPL build.
->   
-> -config SPL_DRIVERS_MISC_SUPPORT
-> +config SPL_MISC
->   	bool "Support misc drivers"
->   	help
->   	  Enable miscellaneous drivers in SPL. These drivers perform various
-> @@ -368,6 +368,20 @@ config SPL_DRIVERS_MISC_SUPPORT
->   	  option to build the drivers in drivers/misc as part of an SPL
->   	  build, for those that support building in SPL (not all drivers do).
->   
-> +config SPL_FIRMWARE
-> +	bool "Support firmware drivers"
-> +	help
-> +	  Enable firmware drivers in SPL. Enable this option to build the
-> +	  drivers in drivers/firmware as part of an SPL build, for those that
-> +	  support building in SPL (not all drivers do).
-> +
-> +config SPL_SYSRESET
-> +	bool "Support sysreset drivers"
-> +	help
-> +	  Enable sysreset drivers in SPL. Enable this option to build the
-> +	  drivers in drivers/sysreset as part of an SPL build, for those that
-> +	  support building in SPL (not all drivers do).
-> +
->   config SPL_ENV_SUPPORT
->   	bool "Support an environment"
->   	help
-> @@ -1015,7 +1029,7 @@ config TPL_BOOTROM_SUPPORT
->   	  BOOT_DEVICE_BOOTROM (or fall-through to the next boot device in the
->   	  boot device list, if not implemented for a given board)
->   
-> -config TPL_DRIVERS_MISC_SUPPORT
-> +config TPL_MISC
->   	bool "Support misc drivers in TPL"
->   	help
->   	  Enable miscellaneous drivers in TPL. These drivers perform various
-> @@ -1023,6 +1037,20 @@ config TPL_DRIVERS_MISC_SUPPORT
->   	  option to build the drivers in drivers/misc as part of an TPL
->   	  build, for those that support building in TPL (not all drivers do).
->   
-> +config TPL_FIRMWARE
-> +	bool "Support firmware drivers"
-> +	help
-> +	  Enable firmware drivers in TPL. Enable this option to build the
-> +	  drivers in drivers/firmware as part of an TPL build, for those that
-> +	  support building in TPL (not all drivers do).
-> +
-> +config TPL_SYSRESET
-> +	bool "Support sysreset drivers"
-> +	help
-> +	  Enable sysreset drivers in TPL. Enable this option to build the
-> +	  drivers in drivers/sysreset as part of an TPL build, for those that
-> +	  support building in TPL (not all drivers do).
-> +
->   config TPL_ENV_SUPPORT
->   	bool "Support an environment"
->   	help
-> diff --git a/configs/B4420QDS_NAND_defconfig b/configs/B4420QDS_NAND_defconfig
-> index b3de724ce1..a3bf489a19 100644
-> --- a/configs/B4420QDS_NAND_defconfig
-> +++ b/configs/B4420QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_B4420QDS=y
-> diff --git a/configs/B4860QDS_NAND_defconfig b/configs/B4860QDS_NAND_defconfig
-> index bd427f3e19..b75711540c 100644
-> --- a/configs/B4860QDS_NAND_defconfig
-> +++ b/configs/B4860QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_B4860QDS=y
-> diff --git a/configs/C29XPCIE_NAND_defconfig b/configs/C29XPCIE_NAND_defconfig
-> index 44ab55ce4b..10ac959519 100644
-> --- a/configs/C29XPCIE_NAND_defconfig
-> +++ b/configs/C29XPCIE_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_SERIAL_SUPPORT=y
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_C29XPCIE=y
-> diff --git a/configs/P1010RDB-PA_36BIT_NAND_defconfig b/configs/P1010RDB-PA_36BIT_NAND_defconfig
-> index 3fc0136461..8b6bd995fe 100644
-> --- a/configs/P1010RDB-PA_36BIT_NAND_defconfig
-> +++ b/configs/P1010RDB-PA_36BIT_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_SERIAL_SUPPORT=y
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PA=y
-> @@ -20,7 +22,9 @@ CONFIG_BOARD_EARLY_INIT_R=y
->   CONFIG_SPL_TEXT_BASE=0xFF800000
->   CONFIG_SPL_NAND_SUPPORT=y
->   CONFIG_TPL=y
-> -CONFIG_TPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_TPL_MISC=y
-> +CONFIG_TPL_FIRMWARE=y
-> +CONFIG_TPL_SYSRESET=y
->   CONFIG_TPL_ENV_SUPPORT=y
->   CONFIG_TPL_I2C_SUPPORT=y
->   CONFIG_TPL_MPC8XXX_INIT_DDR_SUPPORT=y
-> diff --git a/configs/P1010RDB-PA_36BIT_SDCARD_defconfig b/configs/P1010RDB-PA_36BIT_SDCARD_defconfig
-> index 27ee0475df..4a5fd19581 100644
-> --- a/configs/P1010RDB-PA_36BIT_SDCARD_defconfig
-> +++ b/configs/P1010RDB-PA_36BIT_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PA=y
-> diff --git a/configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig b/configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig
-> index 57e175f131..65a39971bc 100644
-> --- a/configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig
-> +++ b/configs/P1010RDB-PA_36BIT_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/P1010RDB-PA_NAND_defconfig b/configs/P1010RDB-PA_NAND_defconfig
-> index 0efaa3b497..80175f982f 100644
-> --- a/configs/P1010RDB-PA_NAND_defconfig
-> +++ b/configs/P1010RDB-PA_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_SERIAL_SUPPORT=y
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PA=y
-> @@ -19,7 +21,9 @@ CONFIG_BOARD_EARLY_INIT_R=y
->   CONFIG_SPL_TEXT_BASE=0xFF800000
->   CONFIG_SPL_NAND_SUPPORT=y
->   CONFIG_TPL=y
-> -CONFIG_TPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_TPL_MISC=y
-> +CONFIG_TPL_FIRMWARE=y
-> +CONFIG_TPL_SYSRESET=y
->   CONFIG_TPL_ENV_SUPPORT=y
->   CONFIG_TPL_I2C_SUPPORT=y
->   CONFIG_TPL_MPC8XXX_INIT_DDR_SUPPORT=y
-> diff --git a/configs/P1010RDB-PA_SDCARD_defconfig b/configs/P1010RDB-PA_SDCARD_defconfig
-> index f5769d7756..545d9b0f4a 100644
-> --- a/configs/P1010RDB-PA_SDCARD_defconfig
-> +++ b/configs/P1010RDB-PA_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PA=y
-> diff --git a/configs/P1010RDB-PA_SPIFLASH_defconfig b/configs/P1010RDB-PA_SPIFLASH_defconfig
-> index 09c1fcf60c..ea89082e2d 100644
-> --- a/configs/P1010RDB-PA_SPIFLASH_defconfig
-> +++ b/configs/P1010RDB-PA_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/P1010RDB-PB_36BIT_NAND_defconfig b/configs/P1010RDB-PB_36BIT_NAND_defconfig
-> index aba47c3387..f2a9d5d98e 100644
-> --- a/configs/P1010RDB-PB_36BIT_NAND_defconfig
-> +++ b/configs/P1010RDB-PB_36BIT_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_SERIAL_SUPPORT=y
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PB=y
-> @@ -20,7 +22,9 @@ CONFIG_BOARD_EARLY_INIT_R=y
->   CONFIG_SPL_TEXT_BASE=0xFF800000
->   CONFIG_SPL_NAND_SUPPORT=y
->   CONFIG_TPL=y
-> -CONFIG_TPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_TPL_MISC=y
-> +CONFIG_TPL_FIRMWARE=y
-> +CONFIG_TPL_SYSRESET=y
->   CONFIG_TPL_ENV_SUPPORT=y
->   CONFIG_TPL_I2C_SUPPORT=y
->   CONFIG_TPL_MPC8XXX_INIT_DDR_SUPPORT=y
-> diff --git a/configs/P1010RDB-PB_36BIT_SDCARD_defconfig b/configs/P1010RDB-PB_36BIT_SDCARD_defconfig
-> index 7bd0ec0650..de9a2aedc1 100644
-> --- a/configs/P1010RDB-PB_36BIT_SDCARD_defconfig
-> +++ b/configs/P1010RDB-PB_36BIT_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PB=y
-> diff --git a/configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig b/configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig
-> index de63086c52..085c4499ec 100644
-> --- a/configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig
-> +++ b/configs/P1010RDB-PB_36BIT_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/P1010RDB-PB_NAND_defconfig b/configs/P1010RDB-PB_NAND_defconfig
-> index fb088b2c28..619f70c599 100644
-> --- a/configs/P1010RDB-PB_NAND_defconfig
-> +++ b/configs/P1010RDB-PB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_SERIAL_SUPPORT=y
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PB=y
-> @@ -19,7 +21,9 @@ CONFIG_BOARD_EARLY_INIT_R=y
->   CONFIG_SPL_TEXT_BASE=0xFF800000
->   CONFIG_SPL_NAND_SUPPORT=y
->   CONFIG_TPL=y
-> -CONFIG_TPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_TPL_MISC=y
-> +CONFIG_TPL_FIRMWARE=y
-> +CONFIG_TPL_SYSRESET=y
->   CONFIG_TPL_ENV_SUPPORT=y
->   CONFIG_TPL_I2C_SUPPORT=y
->   CONFIG_TPL_MPC8XXX_INIT_DDR_SUPPORT=y
-> diff --git a/configs/P1010RDB-PB_SDCARD_defconfig b/configs/P1010RDB-PB_SDCARD_defconfig
-> index 8a46d877aa..9e1939dac0 100644
-> --- a/configs/P1010RDB-PB_SDCARD_defconfig
-> +++ b/configs/P1010RDB-PB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_P1010RDB_PB=y
-> diff --git a/configs/P1010RDB-PB_SPIFLASH_defconfig b/configs/P1010RDB-PB_SPIFLASH_defconfig
-> index ae403b107d..3bcaef3463 100644
-> --- a/configs/P1010RDB-PB_SPIFLASH_defconfig
-> +++ b/configs/P1010RDB-PB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x11001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1023RDB_NAND_defconfig b/configs/T1023RDB_NAND_defconfig
-> index 80213d19e9..e4aae52918 100644
-> --- a/configs/T1023RDB_NAND_defconfig
-> +++ b/configs/T1023RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1023RDB=y
-> diff --git a/configs/T1023RDB_SDCARD_defconfig b/configs/T1023RDB_SDCARD_defconfig
-> index 41176c21ce..7075b4986f 100644
-> --- a/configs/T1023RDB_SDCARD_defconfig
-> +++ b/configs/T1023RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1023RDB=y
-> diff --git a/configs/T1023RDB_SPIFLASH_defconfig b/configs/T1023RDB_SPIFLASH_defconfig
-> index f3db41098f..da8450da7d 100644
-> --- a/configs/T1023RDB_SPIFLASH_defconfig
-> +++ b/configs/T1023RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1024QDS_NAND_defconfig b/configs/T1024QDS_NAND_defconfig
-> index 3d4099fda0..bc47d9603c 100644
-> --- a/configs/T1024QDS_NAND_defconfig
-> +++ b/configs/T1024QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1024QDS=y
-> diff --git a/configs/T1024QDS_SDCARD_defconfig b/configs/T1024QDS_SDCARD_defconfig
-> index 02226df657..a946de723e 100644
-> --- a/configs/T1024QDS_SDCARD_defconfig
-> +++ b/configs/T1024QDS_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1024QDS=y
-> diff --git a/configs/T1024QDS_SPIFLASH_defconfig b/configs/T1024QDS_SPIFLASH_defconfig
-> index 4077a2f728..5973c62255 100644
-> --- a/configs/T1024QDS_SPIFLASH_defconfig
-> +++ b/configs/T1024QDS_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1024RDB_NAND_defconfig b/configs/T1024RDB_NAND_defconfig
-> index ea00def211..55348a084f 100644
-> --- a/configs/T1024RDB_NAND_defconfig
-> +++ b/configs/T1024RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1024RDB=y
-> diff --git a/configs/T1024RDB_SDCARD_defconfig b/configs/T1024RDB_SDCARD_defconfig
-> index 6b966b60d7..6508df2eaa 100644
-> --- a/configs/T1024RDB_SDCARD_defconfig
-> +++ b/configs/T1024RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1024RDB=y
-> diff --git a/configs/T1024RDB_SPIFLASH_defconfig b/configs/T1024RDB_SPIFLASH_defconfig
-> index 59e1e77db4..6ebcf533d6 100644
-> --- a/configs/T1024RDB_SPIFLASH_defconfig
-> +++ b/configs/T1024RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1040D4RDB_NAND_defconfig b/configs/T1040D4RDB_NAND_defconfig
-> index 50757d939c..aca9ef615f 100644
-> --- a/configs/T1040D4RDB_NAND_defconfig
-> +++ b/configs/T1040D4RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1040D4RDB=y
-> diff --git a/configs/T1040D4RDB_SDCARD_defconfig b/configs/T1040D4RDB_SDCARD_defconfig
-> index 5d70e014e1..b42889e807 100644
-> --- a/configs/T1040D4RDB_SDCARD_defconfig
-> +++ b/configs/T1040D4RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1040D4RDB=y
-> diff --git a/configs/T1040D4RDB_SPIFLASH_defconfig b/configs/T1040D4RDB_SPIFLASH_defconfig
-> index 7b81373fe5..5dbf3bd519 100644
-> --- a/configs/T1040D4RDB_SPIFLASH_defconfig
-> +++ b/configs/T1040D4RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1040RDB_NAND_defconfig b/configs/T1040RDB_NAND_defconfig
-> index 991590e43f..5a7fd7691e 100644
-> --- a/configs/T1040RDB_NAND_defconfig
-> +++ b/configs/T1040RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1040RDB=y
-> diff --git a/configs/T1040RDB_SDCARD_defconfig b/configs/T1040RDB_SDCARD_defconfig
-> index bd0590b508..a8cd315a82 100644
-> --- a/configs/T1040RDB_SDCARD_defconfig
-> +++ b/configs/T1040RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1040RDB=y
-> diff --git a/configs/T1040RDB_SPIFLASH_defconfig b/configs/T1040RDB_SPIFLASH_defconfig
-> index 4ac5e8a484..e7d5ba9ea2 100644
-> --- a/configs/T1040RDB_SPIFLASH_defconfig
-> +++ b/configs/T1040RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1042D4RDB_NAND_defconfig b/configs/T1042D4RDB_NAND_defconfig
-> index 9d9e5602a4..86e5b38bf0 100644
-> --- a/configs/T1042D4RDB_NAND_defconfig
-> +++ b/configs/T1042D4RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1042D4RDB=y
-> diff --git a/configs/T1042D4RDB_SDCARD_defconfig b/configs/T1042D4RDB_SDCARD_defconfig
-> index fc3e188b1f..1eb5afa92d 100644
-> --- a/configs/T1042D4RDB_SDCARD_defconfig
-> +++ b/configs/T1042D4RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1042D4RDB=y
-> diff --git a/configs/T1042D4RDB_SPIFLASH_defconfig b/configs/T1042D4RDB_SPIFLASH_defconfig
-> index fdb894304c..8b4d4ac26a 100644
-> --- a/configs/T1042D4RDB_SPIFLASH_defconfig
-> +++ b/configs/T1042D4RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T1042RDB_PI_NAND_SECURE_BOOT_defconfig b/configs/T1042RDB_PI_NAND_SECURE_BOOT_defconfig
-> index f5614ebcff..b4e4b28821 100644
-> --- a/configs/T1042RDB_PI_NAND_SECURE_BOOT_defconfig
-> +++ b/configs/T1042RDB_PI_NAND_SECURE_BOOT_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SECURE_BOOT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1042RDB_PI=y
-> diff --git a/configs/T1042RDB_PI_NAND_defconfig b/configs/T1042RDB_PI_NAND_defconfig
-> index 8e32bb70ae..7ba7cafef4 100644
-> --- a/configs/T1042RDB_PI_NAND_defconfig
-> +++ b/configs/T1042RDB_PI_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1042RDB_PI=y
-> diff --git a/configs/T1042RDB_PI_SDCARD_defconfig b/configs/T1042RDB_PI_SDCARD_defconfig
-> index 5134f55d45..7dedab6732 100644
-> --- a/configs/T1042RDB_PI_SDCARD_defconfig
-> +++ b/configs/T1042RDB_PI_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T1042RDB_PI=y
-> diff --git a/configs/T1042RDB_PI_SPIFLASH_defconfig b/configs/T1042RDB_PI_SPIFLASH_defconfig
-> index 2060085984..483b5e455b 100644
-> --- a/configs/T1042RDB_PI_SPIFLASH_defconfig
-> +++ b/configs/T1042RDB_PI_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x30001000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T2080QDS_NAND_defconfig b/configs/T2080QDS_NAND_defconfig
-> index 4c39f66096..0b7d55bec2 100644
-> --- a/configs/T2080QDS_NAND_defconfig
-> +++ b/configs/T2080QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2080QDS=y
-> diff --git a/configs/T2080QDS_SDCARD_defconfig b/configs/T2080QDS_SDCARD_defconfig
-> index 5fe12da409..b82d8deb12 100644
-> --- a/configs/T2080QDS_SDCARD_defconfig
-> +++ b/configs/T2080QDS_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2080QDS=y
-> diff --git a/configs/T2080QDS_SPIFLASH_defconfig b/configs/T2080QDS_SPIFLASH_defconfig
-> index 899f61c8a8..8bb9e6a04c 100644
-> --- a/configs/T2080QDS_SPIFLASH_defconfig
-> +++ b/configs/T2080QDS_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T2080RDB_NAND_defconfig b/configs/T2080RDB_NAND_defconfig
-> index 1bb90f390d..4e97046c02 100644
-> --- a/configs/T2080RDB_NAND_defconfig
-> +++ b/configs/T2080RDB_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2080RDB=y
-> diff --git a/configs/T2080RDB_SDCARD_defconfig b/configs/T2080RDB_SDCARD_defconfig
-> index 1a7070c816..13e4a909a7 100644
-> --- a/configs/T2080RDB_SDCARD_defconfig
-> +++ b/configs/T2080RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2080RDB=y
-> diff --git a/configs/T2080RDB_SPIFLASH_defconfig b/configs/T2080RDB_SPIFLASH_defconfig
-> index ceb0230f93..f1ff01c047 100644
-> --- a/configs/T2080RDB_SPIFLASH_defconfig
-> +++ b/configs/T2080RDB_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T2081QDS_NAND_defconfig b/configs/T2081QDS_NAND_defconfig
-> index 91a719f11b..1e599f3811 100644
-> --- a/configs/T2081QDS_NAND_defconfig
-> +++ b/configs/T2081QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2081QDS=y
-> diff --git a/configs/T2081QDS_SDCARD_defconfig b/configs/T2081QDS_SDCARD_defconfig
-> index c1bc0972dd..43502752ad 100644
-> --- a/configs/T2081QDS_SDCARD_defconfig
-> +++ b/configs/T2081QDS_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T2081QDS=y
-> diff --git a/configs/T2081QDS_SPIFLASH_defconfig b/configs/T2081QDS_SPIFLASH_defconfig
-> index f6a3f61938..5e2689f6ae 100644
-> --- a/configs/T2081QDS_SPIFLASH_defconfig
-> +++ b/configs/T2081QDS_SPIFLASH_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_SPI_FLASH_SUPPORT=y
->   CONFIG_SPL_SPI_SUPPORT=y
-> diff --git a/configs/T4160QDS_NAND_defconfig b/configs/T4160QDS_NAND_defconfig
-> index 3021884826..5056b10def 100644
-> --- a/configs/T4160QDS_NAND_defconfig
-> +++ b/configs/T4160QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T4160QDS=y
-> diff --git a/configs/T4160QDS_SDCARD_defconfig b/configs/T4160QDS_SDCARD_defconfig
-> index b584638737..93c16e6420 100644
-> --- a/configs/T4160QDS_SDCARD_defconfig
-> +++ b/configs/T4160QDS_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T4160QDS=y
-> diff --git a/configs/T4240QDS_NAND_defconfig b/configs/T4240QDS_NAND_defconfig
-> index e66e5fd47f..5ffa539e83 100644
-> --- a/configs/T4240QDS_NAND_defconfig
-> +++ b/configs/T4240QDS_NAND_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_SYS_TEXT_BASE=0x00201000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T4240QDS=y
-> diff --git a/configs/T4240QDS_SDCARD_defconfig b/configs/T4240QDS_SDCARD_defconfig
-> index 715ec90304..9bb6538442 100644
-> --- a/configs/T4240QDS_SDCARD_defconfig
-> +++ b/configs/T4240QDS_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T4240QDS=y
-> diff --git a/configs/T4240RDB_SDCARD_defconfig b/configs/T4240RDB_SDCARD_defconfig
-> index eeab2ec720..07de65cb74 100644
-> --- a/configs/T4240RDB_SDCARD_defconfig
-> +++ b/configs/T4240RDB_SDCARD_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_MPC85xx=y
->   CONFIG_TARGET_T4240RDB=y
-> diff --git a/configs/am335x_guardian_defconfig b/configs/am335x_guardian_defconfig
-> index 5753b10526..2bfb7d3593 100644
-> --- a/configs/am335x_guardian_defconfig
-> +++ b/configs/am335x_guardian_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_AM33XX=y
->   CONFIG_TARGET_AM335X_GUARDIAN=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_SPL_LIBDISK_SUPPORT=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/am43xx_evm_defconfig b/configs/am43xx_evm_defconfig
-> index 526dda2a93..430c48aa5f 100644
-> --- a/configs/am43xx_evm_defconfig
-> +++ b/configs/am43xx_evm_defconfig
-> @@ -3,7 +3,9 @@ CONFIG_ARCH_OMAP2PLUS=y
->   CONFIG_TI_COMMON_CMD_OPTIONS=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_AM43XX=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_SPL_LOAD_FIT=y
-> diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
-> index 101fae1456..171145fcbc 100644
-> --- a/configs/am65x_evm_a53_defconfig
-> +++ b/configs/am65x_evm_a53_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SOC_K3_AM6=y
->   CONFIG_TARGET_AM654_A53_EVM=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL_STACK_R_ADDR=0x82000000
->   CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
-> index 8dce577cf7..1d727cb8fb 100644
-> --- a/configs/am65x_evm_r5_defconfig
-> +++ b/configs/am65x_evm_r5_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SOC_K3_AM6=y
->   CONFIG_TARGET_AM654_R5_EVM=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL_STACK_R_ADDR=0x82000000
->   CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/am65x_hs_evm_a53_defconfig b/configs/am65x_hs_evm_a53_defconfig
-> index 7af0046ee3..c4e3592f1e 100644
-> --- a/configs/am65x_hs_evm_a53_defconfig
-> +++ b/configs/am65x_hs_evm_a53_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SOC_K3_AM6=y
->   CONFIG_TARGET_AM654_A53_EVM=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL_STACK_R_ADDR=0x82000000
->   CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/am65x_hs_evm_r5_defconfig b/configs/am65x_hs_evm_r5_defconfig
-> index 8d5d3590b2..936bfef7b2 100644
-> --- a/configs/am65x_hs_evm_r5_defconfig
-> +++ b/configs/am65x_hs_evm_r5_defconfig
-> @@ -9,7 +9,9 @@ CONFIG_SOC_K3_AM6=y
->   CONFIG_TARGET_AM654_R5_EVM=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL_STACK_R_ADDR=0x82000000
->   CONFIG_SPL_FS_FAT=y
-> diff --git a/configs/chromebook_link64_defconfig b/configs/chromebook_link64_defconfig
-> index 0278353ef1..ca56223492 100644
-> --- a/configs/chromebook_link64_defconfig
-> +++ b/configs/chromebook_link64_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=8
->   CONFIG_DEBUG_UART_BOARD_INIT=y
->   CONFIG_DEBUG_UART_BASE=0x3f8
-> diff --git a/configs/imx8qm_mek_defconfig b/configs/imx8qm_mek_defconfig
-> index 238d44d1f5..a354b3b194 100644
-> --- a/configs/imx8qm_mek_defconfig
-> +++ b/configs/imx8qm_mek_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_TARGET_IMX8QM_MEK=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_NR_DRAM_BANKS=3
->   CONFIG_SPL_FIT_GENERATOR="arch/arm/mach-imx/mkimage_fit_atf.sh"
-> diff --git a/configs/imx8qxp_mek_defconfig b/configs/imx8qxp_mek_defconfig
-> index 59675e56b9..07d3556ae6 100644
-> --- a/configs/imx8qxp_mek_defconfig
-> +++ b/configs/imx8qxp_mek_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SYS_MALLOC_F_LEN=0x4000
->   CONFIG_TARGET_IMX8QXP_MEK=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=3
->   CONFIG_SPL=y
->   CONFIG_FIT=y
-> diff --git a/configs/lion-rk3368_defconfig b/configs/lion-rk3368_defconfig
-> index 75e85833a7..6201bf793d 100644
-> --- a/configs/lion-rk3368_defconfig
-> +++ b/configs/lion-rk3368_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_ROCKCHIP_RK3368=y
->   CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x0
->   CONFIG_TPL_LIBCOMMON_SUPPORT=y
->   CONFIG_TPL_LIBGENERIC_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL_STACK_R_ADDR=0x600000
->   CONFIG_SPL=y
-> @@ -41,7 +43,9 @@ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
->   CONFIG_SPL_ATF=y
->   CONFIG_TPL=y
->   CONFIG_TPL_BOOTROM_SUPPORT=y
-> -CONFIG_TPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_TPL_MISC=y
-> +CONFIG_TPL_FIRMWARE=y
-> +CONFIG_TPL_SYSRESET=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_SF=y
-> diff --git a/configs/ls1021aqds_nand_defconfig b/configs/ls1021aqds_nand_defconfig
-> index 8dd6ca4e2e..3cc960fd9e 100644
-> --- a/configs/ls1021aqds_nand_defconfig
-> +++ b/configs/ls1021aqds_nand_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SYS_TEXT_BASE=0x82000000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1021aqds_sdcard_ifc_defconfig b/configs/ls1021aqds_sdcard_ifc_defconfig
-> index c85c831b13..1f816e4ba6 100644
-> --- a/configs/ls1021aqds_sdcard_ifc_defconfig
-> +++ b/configs/ls1021aqds_sdcard_ifc_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1021aqds_sdcard_qspi_defconfig b/configs/ls1021aqds_sdcard_qspi_defconfig
-> index 7c574c72f4..40a7fcd1be 100644
-> --- a/configs/ls1021aqds_sdcard_qspi_defconfig
-> +++ b/configs/ls1021aqds_sdcard_qspi_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-> index 28db5286cd..962ac5063f 100644
-> --- a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-> +++ b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SECURE_BOOT=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1043aqds_nand_defconfig b/configs/ls1043aqds_nand_defconfig
-> index 6ba95bcb53..7bcec61687 100644
-> --- a/configs/ls1043aqds_nand_defconfig
-> +++ b/configs/ls1043aqds_nand_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1043aqds_sdcard_ifc_defconfig b/configs/ls1043aqds_sdcard_ifc_defconfig
-> index dd711282b4..40d155123a 100644
-> --- a/configs/ls1043aqds_sdcard_ifc_defconfig
-> +++ b/configs/ls1043aqds_sdcard_ifc_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1043aqds_sdcard_qspi_defconfig b/configs/ls1043aqds_sdcard_qspi_defconfig
-> index cc86b1f8d1..8172ae609a 100644
-> --- a/configs/ls1043aqds_sdcard_qspi_defconfig
-> +++ b/configs/ls1043aqds_sdcard_qspi_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1043ardb_nand_SECURE_BOOT_defconfig b/configs/ls1043ardb_nand_SECURE_BOOT_defconfig
-> index 9d96d22323..b4f8f57134 100644
-> --- a/configs/ls1043ardb_nand_SECURE_BOOT_defconfig
-> +++ b/configs/ls1043ardb_nand_SECURE_BOOT_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SECURE_BOOT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1043ardb_nand_defconfig b/configs/ls1043ardb_nand_defconfig
-> index a94c7b782c..414ebf237d 100644
-> --- a/configs/ls1043ardb_nand_defconfig
-> +++ b/configs/ls1043ardb_nand_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig b/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
-> index 90f3d251be..4be0779670 100644
-> --- a/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
-> +++ b/configs/ls1043ardb_sdcard_SECURE_BOOT_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SECURE_BOOT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1043ardb_sdcard_defconfig b/configs/ls1043ardb_sdcard_defconfig
-> index 418215ee9c..74d7948949 100644
-> --- a/configs/ls1043ardb_sdcard_defconfig
-> +++ b/configs/ls1043ardb_sdcard_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1046aqds_sdcard_ifc_defconfig b/configs/ls1046aqds_sdcard_ifc_defconfig
-> index 28ceabc31e..82a7aaca4e 100644
-> --- a/configs/ls1046aqds_sdcard_ifc_defconfig
-> +++ b/configs/ls1046aqds_sdcard_ifc_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1046aqds_sdcard_qspi_defconfig b/configs/ls1046aqds_sdcard_qspi_defconfig
-> index 2b11a38c3c..d21088c8eb 100644
-> --- a/configs/ls1046aqds_sdcard_qspi_defconfig
-> +++ b/configs/ls1046aqds_sdcard_qspi_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1046ardb_emmc_defconfig b/configs/ls1046ardb_emmc_defconfig
-> index 9b6e56dc0a..b6dc7027af 100644
-> --- a/configs/ls1046ardb_emmc_defconfig
-> +++ b/configs/ls1046ardb_emmc_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1046ardb_qspi_spl_defconfig b/configs/ls1046ardb_qspi_spl_defconfig
-> index f78786ae72..75335689d7 100644
-> --- a/configs/ls1046ardb_qspi_spl_defconfig
-> +++ b/configs/ls1046ardb_qspi_spl_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_FSL_LS_PPA=y
->   CONFIG_QSPI_AHB_INIT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig b/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
-> index 5afe6447c1..de6f3b2930 100644
-> --- a/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
-> +++ b/configs/ls1046ardb_sdcard_SECURE_BOOT_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SECURE_BOOT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1046ardb_sdcard_defconfig b/configs/ls1046ardb_sdcard_defconfig
-> index bf5e1a062c..d90dd72b0f 100644
-> --- a/configs/ls1046ardb_sdcard_defconfig
-> +++ b/configs/ls1046ardb_sdcard_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1088aqds_sdcard_ifc_defconfig b/configs/ls1088aqds_sdcard_ifc_defconfig
-> index 58a6795b6d..7ed0e2d0ff 100644
-> --- a/configs/ls1088aqds_sdcard_ifc_defconfig
-> +++ b/configs/ls1088aqds_sdcard_ifc_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1088aqds_sdcard_qspi_defconfig b/configs/ls1088aqds_sdcard_qspi_defconfig
-> index 186e309b64..d45bcaec9d 100644
-> --- a/configs/ls1088aqds_sdcard_qspi_defconfig
-> +++ b/configs/ls1088aqds_sdcard_qspi_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig b/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
-> index 3a0c55566e..fcf4672c76 100644
-> --- a/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
-> +++ b/configs/ls1088ardb_sdcard_qspi_SECURE_BOOT_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SECURE_BOOT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_DISTRO_DEFAULTS=y
-> diff --git a/configs/ls1088ardb_sdcard_qspi_defconfig b/configs/ls1088ardb_sdcard_qspi_defconfig
-> index 15d690240d..4b85ec592d 100644
-> --- a/configs/ls1088ardb_sdcard_qspi_defconfig
-> +++ b/configs/ls1088ardb_sdcard_qspi_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls2080aqds_nand_defconfig b/configs/ls2080aqds_nand_defconfig
-> index 48dbf62a35..868b838f84 100644
-> --- a/configs/ls2080aqds_nand_defconfig
-> +++ b/configs/ls2080aqds_nand_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SYS_TEXT_BASE=0x80400000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=3
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls2080aqds_sdcard_defconfig b/configs/ls2080aqds_sdcard_defconfig
-> index 651e45b573..8f07c01af4 100644
-> --- a/configs/ls2080aqds_sdcard_defconfig
-> +++ b/configs/ls2080aqds_sdcard_defconfig
-> @@ -6,7 +6,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_FSL_LS_PPA=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=3
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/ls2080ardb_nand_defconfig b/configs/ls2080ardb_nand_defconfig
-> index 56b78feab2..f724c566e5 100644
-> --- a/configs/ls2080ardb_nand_defconfig
-> +++ b/configs/ls2080ardb_nand_defconfig
-> @@ -4,7 +4,9 @@ CONFIG_SYS_TEXT_BASE=0x80400000
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=3
->   CONFIG_SPL=y
->   CONFIG_AHCI=y
-> diff --git a/configs/mt7629_rfb_defconfig b/configs/mt7629_rfb_defconfig
-> index 01b952fc15..71ca332b1f 100644
-> --- a/configs/mt7629_rfb_defconfig
-> +++ b/configs/mt7629_rfb_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SYS_TEXT_BASE=0x41e00000
->   CONFIG_SYS_MALLOC_F_LEN=0x4000
->   CONFIG_TARGET_MT7629=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
-> diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-> index 3ffcb4ae6f..d6bd79dd10 100644
-> --- a/configs/qemu-x86_64_defconfig
-> +++ b/configs/qemu-x86_64_defconfig
-> @@ -5,7 +5,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x1000
->   CONFIG_MAX_CPUS=2
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=8
->   CONFIG_DEBUG_UART_BASE=0x3f8
->   CONFIG_DEBUG_UART_CLOCK=1843200
-> diff --git a/configs/sama5d27_som1_ek_mmc1_defconfig b/configs/sama5d27_som1_ek_mmc1_defconfig
-> index 205a439941..76c76d25a2 100644
-> --- a/configs/sama5d27_som1_ek_mmc1_defconfig
-> +++ b/configs/sama5d27_som1_ek_mmc1_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
->   CONFIG_DEBUG_UART_BASE=0xf8020000
-> diff --git a/configs/sama5d27_som1_ek_mmc_defconfig b/configs/sama5d27_som1_ek_mmc_defconfig
-> index 0a0780066c..76929c20ae 100644
-> --- a/configs/sama5d27_som1_ek_mmc_defconfig
-> +++ b/configs/sama5d27_som1_ek_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d2_icp_mmc_defconfig b/configs/sama5d2_icp_mmc_defconfig
-> index 1fafb767af..ad51d0c35c 100644
-> --- a/configs/sama5d2_icp_mmc_defconfig
-> +++ b/configs/sama5d2_icp_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
->   CONFIG_DEBUG_UART_BASE=0xf801c000
-> diff --git a/configs/sama5d2_xplained_emmc_defconfig b/configs/sama5d2_xplained_emmc_defconfig
-> index f643b5a62f..61f11f6e25 100644
-> --- a/configs/sama5d2_xplained_emmc_defconfig
-> +++ b/configs/sama5d2_xplained_emmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
->   CONFIG_DEBUG_UART_BASE=0xf8020000
-> diff --git a/configs/sama5d2_xplained_mmc_defconfig b/configs/sama5d2_xplained_mmc_defconfig
-> index c25d67bfeb..1043ecb00c 100644
-> --- a/configs/sama5d2_xplained_mmc_defconfig
-> +++ b/configs/sama5d2_xplained_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d2_xplained_spiflash_defconfig b/configs/sama5d2_xplained_spiflash_defconfig
-> index ac5ae5133c..5f21e9133c 100644
-> --- a/configs/sama5d2_xplained_spiflash_defconfig
-> +++ b/configs/sama5d2_xplained_spiflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d3_xplained_mmc_defconfig b/configs/sama5d3_xplained_mmc_defconfig
-> index d5021eb76a..1bad1064e6 100644
-> --- a/configs/sama5d3_xplained_mmc_defconfig
-> +++ b/configs/sama5d3_xplained_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d3_xplained_nandflash_defconfig b/configs/sama5d3_xplained_nandflash_defconfig
-> index eaeb000d18..a34934a6ca 100644
-> --- a/configs/sama5d3_xplained_nandflash_defconfig
-> +++ b/configs/sama5d3_xplained_nandflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d3xek_mmc_defconfig b/configs/sama5d3xek_mmc_defconfig
-> index b770ac4668..34ed5ae383 100644
-> --- a/configs/sama5d3xek_mmc_defconfig
-> +++ b/configs/sama5d3xek_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d3xek_nandflash_defconfig b/configs/sama5d3xek_nandflash_defconfig
-> index dc8aaeb72f..969f5ce14f 100644
-> --- a/configs/sama5d3xek_nandflash_defconfig
-> +++ b/configs/sama5d3xek_nandflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d3xek_spiflash_defconfig b/configs/sama5d3xek_spiflash_defconfig
-> index 84bbf9c8c8..2d9f5d2135 100644
-> --- a/configs/sama5d3xek_spiflash_defconfig
-> +++ b/configs/sama5d3xek_spiflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4_xplained_mmc_defconfig b/configs/sama5d4_xplained_mmc_defconfig
-> index f673832dff..05340c73d4 100644
-> --- a/configs/sama5d4_xplained_mmc_defconfig
-> +++ b/configs/sama5d4_xplained_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4_xplained_nandflash_defconfig b/configs/sama5d4_xplained_nandflash_defconfig
-> index 1a481217c7..0b3a695523 100644
-> --- a/configs/sama5d4_xplained_nandflash_defconfig
-> +++ b/configs/sama5d4_xplained_nandflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4_xplained_spiflash_defconfig b/configs/sama5d4_xplained_spiflash_defconfig
-> index f10868900f..6c3e0bb853 100644
-> --- a/configs/sama5d4_xplained_spiflash_defconfig
-> +++ b/configs/sama5d4_xplained_spiflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4ek_mmc_defconfig b/configs/sama5d4ek_mmc_defconfig
-> index d7e1701a57..b43e0d681e 100644
-> --- a/configs/sama5d4ek_mmc_defconfig
-> +++ b/configs/sama5d4ek_mmc_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4ek_nandflash_defconfig b/configs/sama5d4ek_nandflash_defconfig
-> index e3b3f86eb5..94a13a7443 100644
-> --- a/configs/sama5d4ek_nandflash_defconfig
-> +++ b/configs/sama5d4ek_nandflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sama5d4ek_spiflash_defconfig b/configs/sama5d4ek_spiflash_defconfig
-> index 8db517d7b6..2a9ce3661c 100644
-> --- a/configs/sama5d4ek_spiflash_defconfig
-> +++ b/configs/sama5d4ek_spiflash_defconfig
-> @@ -7,7 +7,9 @@ CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SYS_MALLOC_F_LEN=0x2000
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_DEBUG_UART_BOARD_INIT=y
-> diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-> index a46edee634..4abc3681f0 100644
-> --- a/configs/sandbox_spl_defconfig
-> +++ b/configs/sandbox_spl_defconfig
-> @@ -2,7 +2,9 @@ CONFIG_SYS_TEXT_BASE=0
->   CONFIG_SPL_LIBCOMMON_SUPPORT=y
->   CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_SANDBOX_SPL=y
-> diff --git a/configs/sksimx6_defconfig b/configs/sksimx6_defconfig
-> index 164614decd..8ab4acdfdd 100644
-> --- a/configs/sksimx6_defconfig
-> +++ b/configs/sksimx6_defconfig
-> @@ -8,7 +8,9 @@ CONFIG_MX6_DDRCAL=y
->   CONFIG_TARGET_SKSIMX6=y
->   CONFIG_SPL_MMC_SUPPORT=y
->   CONFIG_SPL_SERIAL_SUPPORT=y
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT=y
-> +CONFIG_SPL_FIRMWARE=y
-> +CONFIG_SPL_MISC=y
-> +CONFIG_SPL_SYSRESET=y
->   CONFIG_NR_DRAM_BANKS=1
->   CONFIG_SPL=y
->   CONFIG_SPL_LIBDISK_SUPPORT=y
-> diff --git a/doc/README.SPL b/doc/README.SPL
-> index 7a30fefa96..1b2a30214a 100644
-> --- a/doc/README.SPL
-> +++ b/doc/README.SPL
-> @@ -58,7 +58,9 @@ CONFIG_SPL_FS_EXT4
->   CONFIG_SPL_LIBGENERIC_SUPPORT (lib/libgeneric.o)
->   CONFIG_SPL_POWER_SUPPORT (drivers/power/libpower.o)
->   CONFIG_SPL_NAND_SUPPORT (drivers/mtd/nand/raw/libnand.o)
-> -CONFIG_SPL_DRIVERS_MISC_SUPPORT (drivers/misc)
-> +CONFIG_SPL_MISC (drivers/misc)
-> +CONFIG_SPL_FIRMWARE (drivers/firmware)
-> +CONFIG_SPL_SYSRESET (drivers/sysreset)
->   CONFIG_SPL_DMA_SUPPORT (drivers/dma/libdma.o)
->   CONFIG_SPL_POST_MEM_SUPPORT (post/drivers/memory.o)
->   CONFIG_SPL_NAND_LOAD (drivers/mtd/nand/raw/nand_spl_load.o)
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index 6635dabd2c..da301e608b 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -4,10 +4,11 @@ obj-$(CONFIG_$(SPL_TPL_)CLK) += clk/
->   obj-$(CONFIG_$(SPL_TPL_)DM) += core/
->   obj-$(CONFIG_$(SPL_TPL_)DFU) += dfu/
->   obj-$(CONFIG_$(SPL_TPL_)GPIO_SUPPORT) += gpio/
-> -obj-$(CONFIG_$(SPL_TPL_)DRIVERS_MISC_SUPPORT) += misc/ sysreset/ firmware/
-> +obj-$(CONFIG_$(SPL_TPL_)FIRMWARE) += firmware/
->   obj-$(CONFIG_$(SPL_TPL_)I2C_SUPPORT) += i2c/
->   obj-$(CONFIG_$(SPL_TPL_)INPUT) += input/
->   obj-$(CONFIG_$(SPL_TPL_)LED) += led/
-> +obj-$(CONFIG_$(SPL_TPL_)MISC) += misc/
->   obj-$(CONFIG_$(SPL_TPL_)MMC_SUPPORT) += mmc/
->   obj-$(CONFIG_$(SPL_TPL_)NAND_SUPPORT) += mtd/nand/raw/
->   obj-$(CONFIG_$(SPL_TPL_)PCH_SUPPORT) += pch/
-> @@ -19,6 +20,7 @@ obj-$(CONFIG_$(SPL_TPL_)RTC_SUPPORT) += rtc/
->   obj-$(CONFIG_$(SPL_TPL_)SERIAL_SUPPORT) += serial/
->   obj-$(CONFIG_$(SPL_TPL_)SPI_FLASH_SUPPORT) += mtd/spi/
->   obj-$(CONFIG_$(SPL_TPL_)SPI_SUPPORT) += spi/
-> +obj-$(CONFIG_$(SPL_TPL_)SYSRESET) += sysreset/
->   obj-$(CONFIG_$(SPL_TPL_)TIMER) += timer/
->   obj-$(CONFIG_$(SPL_TPL_)VIRTIO) += virtio/
->   obj-$(CONFIG_$(SPL_)DM_MAILBOX) += mailbox/
-> diff --git a/include/configs/C29XPCIE.h b/include/configs/C29XPCIE.h
-> index b4a51a9528..0fcc145299 100644
-> --- a/include/configs/C29XPCIE.h
-> +++ b/include/configs/C29XPCIE.h
-> @@ -20,7 +20,9 @@
->   #define CONFIG_SPL_NAND_BOOT
->   #define CONFIG_SPL_FLUSH_IMAGE
->   #define CONFIG_SPL_NAND_INIT
-> -#define CONFIG_TPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_TPL_MISC
-> +#define CONFIG_TPL_FIRMWARE
-> +#define CONFIG_TPL_SYSRESET
->   #define CONFIG_SPL_COMMON_INIT_DDR
->   #define CONFIG_SPL_MAX_SIZE		(128 << 10)
->   #define CONFIG_TPL_TEXT_BASE		0xf8f81000
-> diff --git a/include/configs/imx8mq_evk.h b/include/configs/imx8mq_evk.h
-> index 7759bbf264..995da52f59 100644
-> --- a/include/configs/imx8mq_evk.h
-> +++ b/include/configs/imx8mq_evk.h
-> @@ -22,7 +22,9 @@
->   #ifdef CONFIG_SPL_BUILD
->   /*#define CONFIG_ENABLE_DDR_TRAINING_DEBUG*/
->   #define CONFIG_SPL_WATCHDOG_SUPPORT
-> -#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_SPL_MISC
-> +#define CONFIG_SPL_FIRMWARE
-> +#define CONFIG_SPL_SYSRESET
->   #define CONFIG_SPL_POWER_SUPPORT
->   #define CONFIG_SPL_I2C_SUPPORT
->   #define CONFIG_SPL_LDSCRIPT		"arch/arm/cpu/armv8/u-boot-spl.lds"
-> diff --git a/include/configs/ls1046a_common.h b/include/configs/ls1046a_common.h
-> index ea6209ad2e..4dce2f7e1c 100644
-> --- a/include/configs/ls1046a_common.h
-> +++ b/include/configs/ls1046a_common.h
-> @@ -111,7 +111,9 @@
->   #define CONFIG_SPL_MPC8XXX_INIT_DDR_SUPPORT
->   
->   #define CONFIG_SPL_NAND_SUPPORT
-> -#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_SPL_MISC
-> +#define CONFIG_SPL_FIRMWARE
-> +#define CONFIG_SPL_SYSRESET
->   #define CONFIG_SPL_MAX_SIZE		0x17000		/* 90 KiB */
->   #define CONFIG_SPL_STACK		0x1001f000
->   #define CONFIG_SYS_NAND_U_BOOT_DST	CONFIG_SYS_TEXT_BASE
-> diff --git a/include/configs/mx6_common.h b/include/configs/mx6_common.h
-> index 6b20c6db58..2407bc66a4 100644
-> --- a/include/configs/mx6_common.h
-> +++ b/include/configs/mx6_common.h
-> @@ -61,7 +61,9 @@
->   #ifdef CONFIG_SECURE_BOOT
->   #define CONFIG_CSF_SIZE			0x2000
->   #ifdef CONFIG_SPL_BUILD
-> -#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_SPL_MISC
-> +#define CONFIG_SPL_FIRMWARE
-> +#define CONFIG_SPL_SYSRESET
->   #endif
->   #endif
->   
-> diff --git a/include/configs/mx7_common.h b/include/configs/mx7_common.h
-> index cc7e87269e..f363e02165 100644
-> --- a/include/configs/mx7_common.h
-> +++ b/include/configs/mx7_common.h
-> @@ -50,7 +50,9 @@
->   #ifdef CONFIG_SECURE_BOOT
->   #define CONFIG_CSF_SIZE			0x2000
->   #ifdef CONFIG_SPL_BUILD
-> -#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_SPL_MISC
-> +#define CONFIG_SPL_FIRMWARE
-> +#define CONFIG_SPL_SYSRESET
->   #endif
->   #endif
->   
-> diff --git a/include/configs/turris_omnia.h b/include/configs/turris_omnia.h
-> index 018f54428b..665d60f3f8 100644
-> --- a/include/configs/turris_omnia.h
-> +++ b/include/configs/turris_omnia.h
-> @@ -51,7 +51,9 @@
->   
->   #define CONFIG_SPL_STACK		(0x40000000 + ((192 - 16) << 10))
->   #define CONFIG_SPL_BOOTROM_SAVE		(CONFIG_SPL_STACK + 4)
-> -#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-> +#define CONFIG_SPL_MISC
-> +#define CONFIG_SPL_FIRMWARE
-> +#define CONFIG_SPL_SYSRESET
->   
->   #ifdef CONFIG_MVEBU_SPL_BOOT_DEVICE_SPI
->   /* SPL related SPI defines */
-> 
+Christophe
+
+> Thanks,
+> -Joe
+>
+>> Signed-off-by: Christophe Roullier<christophe.roullier@st.com>
+>> ---
+>>
+>>   drivers/net/dwc_eth_qos.c | 435 +++++++++++++++++++++++++++++++++-----
+>>   1 file changed, 383 insertions(+), 52 deletions(-)
+>>
+>> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+>> index 9f1c5af46e9..a6546d5e5ce 100644
+>> --- a/drivers/net/dwc_eth_qos.c
+>> +++ b/drivers/net/dwc_eth_qos.c
+>> @@ -26,7 +26,6 @@
+>>    *    supports a single RGMII PHY. This configuration also has SW control over
+>>    *    all clock and reset signals to the HW block.
+>>    */
+>> -
+>>   #include <common.h>
+>>   #include <clk.h>
+>>   #include <dm.h>
+>> @@ -95,6 +94,7 @@ struct eqos_mac_regs {
+>>   #define EQOS_MAC_RXQ_CTRL0_RXQ0EN_MASK                 3
+>>   #define EQOS_MAC_RXQ_CTRL0_RXQ0EN_NOT_ENABLED          0
+>>   #define EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB          2
+>> +#define EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_AV           1
+>>
+>>   #define EQOS_MAC_RXQ_CTRL2_PSRQ0_SHIFT                 0
+>>   #define EQOS_MAC_RXQ_CTRL2_PSRQ0_MASK                  0xff
+>> @@ -108,6 +108,7 @@ struct eqos_mac_regs {
+>>   #define EQOS_MAC_MDIO_ADDRESS_RDA_SHIFT                        16
+>>   #define EQOS_MAC_MDIO_ADDRESS_CR_SHIFT                 8
+>>   #define EQOS_MAC_MDIO_ADDRESS_CR_20_35                 2
+>> +#define EQOS_MAC_MDIO_ADDRESS_CR_250_300               5
+>>   #define EQOS_MAC_MDIO_ADDRESS_SKAP                     BIT(4)
+>>   #define EQOS_MAC_MDIO_ADDRESS_GOC_SHIFT                        2
+>>   #define EQOS_MAC_MDIO_ADDRESS_GOC_READ                 3
+>> @@ -260,6 +261,29 @@ struct eqos_desc {
+>>
+>>   struct eqos_config {
+>>          bool reg_access_always_ok;
+>> +       int mdio_wait;
+>> +       int swr_wait;
+>> +       int config_mac;
+>> +       int config_mac_mdio;
+>> +       int (*interface)(struct udevice *dev);
+>> +       struct eqos_ops *ops;
+>> +};
+>> +
+>> +struct eqos_ops {
+>> +       void (*eqos_inval_desc)(void *desc);
+>> +       void (*eqos_flush_desc)(void *desc);
+>> +       void (*eqos_inval_buffer)(void *buf, size_t size);
+>> +       void (*eqos_flush_buffer)(void *buf, size_t size);
+>> +       int (*eqos_probe_resources)(struct udevice *dev);
+>> +       int (*eqos_remove_resources)(struct udevice *dev);
+>> +       int (*eqos_stop_resets)(struct udevice *dev);
+>> +       int (*eqos_start_resets)(struct udevice *dev);
+>> +       void (*eqos_stop_clks)(struct udevice *dev);
+>> +       int (*eqos_start_clks)(struct udevice *dev);
+>> +       int (*eqos_calibrate_pads)(struct udevice *dev);
+>> +       int (*eqos_disable_calibration)(struct udevice *dev);
+>> +       int (*eqos_set_tx_clk_speed)(struct udevice *dev);
+>> +       ulong (*eqos_get_tick_clk_rate)(struct udevice *dev);
+>>   };
+>>
+>>   struct eqos_priv {
+>> @@ -276,6 +300,7 @@ struct eqos_priv {
+>>          struct clk clk_rx;
+>>          struct clk clk_ptp_ref;
+>>          struct clk clk_tx;
+>> +       struct clk clk_ck;
+>>          struct clk clk_slave_bus;
+>>          struct mii_dev *mii;
+>>          struct phy_device *phy;
+>> @@ -327,7 +352,7 @@ static void eqos_free_descs(void *descs)
+>>   #endif
+>>   }
+>>
+>> -static void eqos_inval_desc(void *desc)
+>> +static void eqos_inval_desc_tegra186(void *desc)
+>>   {
+>>   #ifndef CONFIG_SYS_NONCACHED_MEMORY
+>>          unsigned long start = (unsigned long)desc & ~(ARCH_DMA_MINALIGN - 1);
+>> @@ -338,14 +363,36 @@ static void eqos_inval_desc(void *desc)
+>>   #endif
+>>   }
+>>
+>> -static void eqos_flush_desc(void *desc)
+>> +static void eqos_inval_desc_stm32(void *desc)
+>> +{
+>> +#ifndef CONFIG_SYS_NONCACHED_MEMORY
+>> +       unsigned long start = rounddown((unsigned long)desc, ARCH_DMA_MINALIGN);
+>> +       unsigned long end = roundup((unsigned long)desc + EQOS_DESCRIPTOR_SIZE,
+>> +                                   ARCH_DMA_MINALIGN);
+>> +
+>> +       invalidate_dcache_range(start, end);
+>> +#endif
+>> +}
+>> +
+>> +static void eqos_flush_desc_tegra186(void *desc)
+>>   {
+>>   #ifndef CONFIG_SYS_NONCACHED_MEMORY
+>>          flush_cache((unsigned long)desc, EQOS_DESCRIPTOR_SIZE);
+>>   #endif
+>>   }
+>>
+>> -static void eqos_inval_buffer(void *buf, size_t size)
+>> +static void eqos_flush_desc_stm32(void *desc)
+>> +{
+>> +#ifndef CONFIG_SYS_NONCACHED_MEMORY
+>> +       unsigned long start = rounddown((unsigned long)desc, ARCH_DMA_MINALIGN);
+>> +       unsigned long end = roundup((unsigned long)desc + EQOS_DESCRIPTOR_SIZE,
+>> +                                   ARCH_DMA_MINALIGN);
+>> +
+>> +       flush_dcache_range(start, end);
+>> +#endif
+>> +}
+>> +
+>> +static void eqos_inval_buffer_tegra186(void *buf, size_t size)
+>>   {
+>>          unsigned long start = (unsigned long)buf & ~(ARCH_DMA_MINALIGN - 1);
+>>          unsigned long end = ALIGN(start + size, ARCH_DMA_MINALIGN);
+>> @@ -353,11 +400,29 @@ static void eqos_inval_buffer(void *buf, size_t size)
+>>          invalidate_dcache_range(start, end);
+>>   }
+>>
+>> -static void eqos_flush_buffer(void *buf, size_t size)
+>> +static void eqos_inval_buffer_stm32(void *buf, size_t size)
+>> +{
+>> +       unsigned long start = rounddown((unsigned long)buf, ARCH_DMA_MINALIGN);
+>> +       unsigned long end = roundup((unsigned long)buf + size,
+>> +                                   ARCH_DMA_MINALIGN);
+>> +
+>> +       invalidate_dcache_range(start, end);
+>> +}
+>> +
+>> +static void eqos_flush_buffer_tegra186(void *buf, size_t size)
+>>   {
+>>          flush_cache((unsigned long)buf, size);
+>>   }
+>>
+>> +static void eqos_flush_buffer_stm32(void *buf, size_t size)
+>> +{
+>> +       unsigned long start = rounddown((unsigned long)buf, ARCH_DMA_MINALIGN);
+>> +       unsigned long end = roundup((unsigned long)buf + size,
+>> +                                   ARCH_DMA_MINALIGN);
+>> +
+>> +       flush_dcache_range(start, end);
+>> +}
+>> +
+>>   static int eqos_mdio_wait_idle(struct eqos_priv *eqos)
+>>   {
+>>          return wait_for_bit_le32(&eqos->mac_regs->mdio_address,
+>> @@ -386,14 +451,14 @@ static int eqos_mdio_read(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>>                  EQOS_MAC_MDIO_ADDRESS_C45E;
+>>          val |= (mdio_addr << EQOS_MAC_MDIO_ADDRESS_PA_SHIFT) |
+>>                  (mdio_reg << EQOS_MAC_MDIO_ADDRESS_RDA_SHIFT) |
+>> -               (EQOS_MAC_MDIO_ADDRESS_CR_20_35 <<
+>> +               (eqos->config->config_mac_mdio <<
+>>                   EQOS_MAC_MDIO_ADDRESS_CR_SHIFT) |
+>>                  (EQOS_MAC_MDIO_ADDRESS_GOC_READ <<
+>>                   EQOS_MAC_MDIO_ADDRESS_GOC_SHIFT) |
+>>                  EQOS_MAC_MDIO_ADDRESS_GB;
+>>          writel(val, &eqos->mac_regs->mdio_address);
+>>
+>> -       udelay(10);
+>> +       udelay(eqos->config->mdio_wait);
+>>
+>>          ret = eqos_mdio_wait_idle(eqos);
+>>          if (ret) {
+>> @@ -432,14 +497,14 @@ static int eqos_mdio_write(struct mii_dev *bus, int mdio_addr, int mdio_devad,
+>>                  EQOS_MAC_MDIO_ADDRESS_C45E;
+>>          val |= (mdio_addr << EQOS_MAC_MDIO_ADDRESS_PA_SHIFT) |
+>>                  (mdio_reg << EQOS_MAC_MDIO_ADDRESS_RDA_SHIFT) |
+>> -               (EQOS_MAC_MDIO_ADDRESS_CR_20_35 <<
+>> +               (eqos->config->config_mac_mdio <<
+>>                   EQOS_MAC_MDIO_ADDRESS_CR_SHIFT) |
+>>                  (EQOS_MAC_MDIO_ADDRESS_GOC_WRITE <<
+>>                   EQOS_MAC_MDIO_ADDRESS_GOC_SHIFT) |
+>>                  EQOS_MAC_MDIO_ADDRESS_GB;
+>>          writel(val, &eqos->mac_regs->mdio_address);
+>>
+>> -       udelay(10);
+>> +       udelay(eqos->config->mdio_wait);
+>>
+>>          ret = eqos_mdio_wait_idle(eqos);
+>>          if (ret) {
+>> @@ -509,6 +574,53 @@ err:
+>>          return ret;
+>>   }
+>>
+>> +static int eqos_start_clks_stm32(struct udevice *dev)
+>> +{
+>> +       struct eqos_priv *eqos = dev_get_priv(dev);
+>> +       int ret;
+>> +
+>> +       debug("%s(dev=%p):\n", __func__, dev);
+>> +
+>> +       ret = clk_enable(&eqos->clk_master_bus);
+>> +       if (ret < 0) {
+>> +               pr_err("clk_enable(clk_master_bus) failed: %d", ret);
+>> +               goto err;
+>> +       }
+>> +
+>> +       ret = clk_enable(&eqos->clk_rx);
+>> +       if (ret < 0) {
+>> +               pr_err("clk_enable(clk_rx) failed: %d", ret);
+>> +               goto err_disable_clk_master_bus;
+>> +       }
+>> +
+>> +       ret = clk_enable(&eqos->clk_tx);
+>> +       if (ret < 0) {
+>> +               pr_err("clk_enable(clk_tx) failed: %d", ret);
+>> +               goto err_disable_clk_rx;
+>> +       }
+>> +
+>> +       if (clk_valid(&eqos->clk_ck)) {
+>> +               ret = clk_enable(&eqos->clk_ck);
+>> +               if (ret < 0) {
+>> +                       pr_err("clk_enable(clk_ck) failed: %d", ret);
+>> +                       goto err_disable_clk_tx;
+>> +               }
+>> +       }
+>> +
+>> +       debug("%s: OK\n", __func__);
+>> +       return 0;
+>> +
+>> +err_disable_clk_tx:
+>> +       clk_disable(&eqos->clk_tx);
+>> +err_disable_clk_rx:
+>> +       clk_disable(&eqos->clk_rx);
+>> +err_disable_clk_master_bus:
+>> +       clk_disable(&eqos->clk_master_bus);
+>> +err:
+>> +       debug("%s: FAILED: %d\n", __func__, ret);
+>> +       return ret;
+>> +}
+>> +
+>>   void eqos_stop_clks_tegra186(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -524,6 +636,21 @@ void eqos_stop_clks_tegra186(struct udevice *dev)
+>>          debug("%s: OK\n", __func__);
+>>   }
+>>
+>> +void eqos_stop_clks_stm32(struct udevice *dev)
+>> +{
+>> +       struct eqos_priv *eqos = dev_get_priv(dev);
+>> +
+>> +       debug("%s(dev=%p):\n", __func__, dev);
+>> +
+>> +       clk_disable(&eqos->clk_tx);
+>> +       clk_disable(&eqos->clk_rx);
+>> +       clk_disable(&eqos->clk_master_bus);
+>> +       if (clk_valid(&eqos->clk_ck))
+>> +               clk_disable(&eqos->clk_ck);
+>> +
+>> +       debug("%s: OK\n", __func__);
+>> +}
+>> +
+>>   static int eqos_start_resets_tegra186(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -563,6 +690,11 @@ static int eqos_start_resets_tegra186(struct udevice *dev)
+>>          return 0;
+>>   }
+>>
+>> +static int eqos_start_resets_stm32(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_stop_resets_tegra186(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -573,6 +705,11 @@ static int eqos_stop_resets_tegra186(struct udevice *dev)
+>>          return 0;
+>>   }
+>>
+>> +static int eqos_stop_resets_stm32(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_calibrate_pads_tegra186(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -632,6 +769,23 @@ static ulong eqos_get_tick_clk_rate_tegra186(struct udevice *dev)
+>>          return clk_get_rate(&eqos->clk_slave_bus);
+>>   }
+>>
+>> +static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev)
+>> +{
+>> +       struct eqos_priv *eqos = dev_get_priv(dev);
+>> +
+>> +       return clk_get_rate(&eqos->clk_master_bus);
+>> +}
+>> +
+>> +static int eqos_calibrate_pads_stm32(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>> +static int eqos_disable_calibration_stm32(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_set_full_duplex(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -726,6 +880,11 @@ static int eqos_set_tx_clk_speed_tegra186(struct udevice *dev)
+>>          return 0;
+>>   }
+>>
+>> +static int eqos_set_tx_clk_speed_stm32(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_adjust_link(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -766,23 +925,23 @@ static int eqos_adjust_link(struct udevice *dev)
+>>          }
+>>
+>>          if (en_calibration) {
+>> -               ret = eqos_calibrate_pads_tegra186(dev);
+>> +               ret = eqos->config->ops->eqos_calibrate_pads(dev);
+>>                  if (ret < 0) {
+>> -                       pr_err("eqos_calibrate_pads_tegra186() failed: %d", ret);
+>> +                       pr_err("eqos_calibrate_pads() failed: %d",
+>> +                              ret);
+>>                          return ret;
+>>                  }
+>>          } else {
+>> -               ret = eqos_disable_calibration_tegra186(dev);
+>> +               ret = eqos->config->ops->eqos_disable_calibration(dev);
+>>                  if (ret < 0) {
+>> -                       pr_err("eqos_disable_calibration_tegra186() failed: %d",
+>> -                             ret);
+>> +                       pr_err("eqos_disable_calibration() failed: %d",
+>> +                              ret);
+>>                          return ret;
+>>                  }
+>>          }
+>> -
+>> -       ret = eqos_set_tx_clk_speed_tegra186(dev);
+>> +       ret = eqos->config->ops->eqos_set_tx_clk_speed(dev);
+>>          if (ret < 0) {
+>> -               pr_err("eqos_set_tx_clk_speed_tegra186() failed: %d", ret);
+>> +               pr_err("eqos_set_tx_clk_speed() failed: %d", ret);
+>>                  return ret;
+>>          }
+>>
+>> @@ -846,15 +1005,15 @@ static int eqos_start(struct udevice *dev)
+>>          eqos->tx_desc_idx = 0;
+>>          eqos->rx_desc_idx = 0;
+>>
+>> -       ret = eqos_start_clks_tegra186(dev);
+>> +       ret = eqos->config->ops->eqos_start_clks(dev);
+>>          if (ret < 0) {
+>> -               pr_err("eqos_start_clks_tegra186() failed: %d", ret);
+>> +               pr_err("eqos_start_clks() failed: %d", ret);
+>>                  goto err;
+>>          }
+>>
+>> -       ret = eqos_start_resets_tegra186(dev);
+>> +       ret = eqos->config->ops->eqos_start_resets(dev);
+>>          if (ret < 0) {
+>> -               pr_err("eqos_start_resets_tegra186() failed: %d", ret);
+>> +               pr_err("eqos_start_resets() failed: %d", ret);
+>>                  goto err_stop_clks;
+>>          }
+>>
+>> @@ -863,32 +1022,41 @@ static int eqos_start(struct udevice *dev)
+>>          eqos->reg_access_ok = true;
+>>
+>>          ret = wait_for_bit_le32(&eqos->dma_regs->mode,
+>> -                               EQOS_DMA_MODE_SWR, false, 10, false);
+>> +                               EQOS_DMA_MODE_SWR, false,
+>> +                               eqos->config->swr_wait, false);
+>>          if (ret) {
+>>                  pr_err("EQOS_DMA_MODE_SWR stuck");
+>>                  goto err_stop_resets;
+>>          }
+>>
+>> -       ret = eqos_calibrate_pads_tegra186(dev);
+>> +       ret = eqos->config->ops->eqos_calibrate_pads(dev);
+>>          if (ret < 0) {
+>> -               pr_err("eqos_calibrate_pads_tegra186() failed: %d", ret);
+>> +               pr_err("eqos_calibrate_pads() failed: %d", ret);
+>>                  goto err_stop_resets;
+>>          }
+>> +       rate = eqos->config->ops->eqos_get_tick_clk_rate(dev);
+>>
+>> -       rate = eqos_get_tick_clk_rate_tegra186(dev);
+>>          val = (rate / 1000000) - 1;
+>>          writel(val, &eqos->mac_regs->us_tic_counter);
+>>
+>> -       eqos->phy = phy_connect(eqos->mii, 0, dev, 0);
+>> +       /*
+>> +        * if PHY was already connected and configured,
+>> +        * don't need to reconnect/reconfigure again
+>> +        */
+>>          if (!eqos->phy) {
+>> -               pr_err("phy_connect() failed");
+>> -               goto err_stop_resets;
+>> -       }
+>> -       ret = phy_config(eqos->phy);
+>> -       if (ret < 0) {
+>> -               pr_err("phy_config() failed: %d", ret);
+>> -               goto err_shutdown_phy;
+>> +               eqos->phy = phy_connect(eqos->mii, 0, dev,
+>> +                                       eqos->config->interface(dev));
+>> +               if (!eqos->phy) {
+>> +                       pr_err("phy_connect() failed");
+>> +                       goto err_stop_resets;
+>> +               }
+>> +               ret = phy_config(eqos->phy);
+>> +               if (ret < 0) {
+>> +                       pr_err("phy_config() failed: %d", ret);
+>> +                       goto err_shutdown_phy;
+>> +               }
+>>          }
+>> +
+>>          ret = phy_startup(eqos->phy);
+>>          if (ret < 0) {
+>>                  pr_err("phy_startup() failed: %d", ret);
+>> @@ -993,7 +1161,7 @@ static int eqos_start(struct udevice *dev)
+>>          clrsetbits_le32(&eqos->mac_regs->rxq_ctrl0,
+>>                          EQOS_MAC_RXQ_CTRL0_RXQ0EN_MASK <<
+>>                          EQOS_MAC_RXQ_CTRL0_RXQ0EN_SHIFT,
+>> -                       EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB <<
+>> +                       eqos->config->config_mac <<
+>>                          EQOS_MAC_RXQ_CTRL0_RXQ0EN_SHIFT);
+>>
+>>          /* Set TX flow control parameters */
+>> @@ -1074,7 +1242,7 @@ static int eqos_start(struct udevice *dev)
+>>                                               (i * EQOS_MAX_PACKET_SIZE));
+>>                  rx_desc->des3 |= EQOS_DESC3_OWN | EQOS_DESC3_BUF1V;
+>>          }
+>> -       flush_cache((unsigned long)eqos->descs, EQOS_DESCRIPTORS_SIZE);
+>> +       eqos->config->ops->eqos_flush_desc(eqos->descs);
+>>
+>>          writel(0, &eqos->dma_regs->ch0_txdesc_list_haddress);
+>>          writel((ulong)eqos->tx_descs, &eqos->dma_regs->ch0_txdesc_list_address);
+>> @@ -1113,11 +1281,10 @@ static int eqos_start(struct udevice *dev)
+>>
+>>   err_shutdown_phy:
+>>          phy_shutdown(eqos->phy);
+>> -       eqos->phy = NULL;
+>>   err_stop_resets:
+>> -       eqos_stop_resets_tegra186(dev);
+>> +       eqos->config->ops->eqos_stop_resets(dev);
+>>   err_stop_clks:
+>> -       eqos_stop_clks_tegra186(dev);
+>> +       eqos->config->ops->eqos_stop_clks(dev);
+>>   err:
+>>          pr_err("FAILED: %d", ret);
+>>          return ret;
+>> @@ -1170,10 +1337,9 @@ void eqos_stop(struct udevice *dev)
+>>
+>>          if (eqos->phy) {
+>>                  phy_shutdown(eqos->phy);
+>> -               eqos->phy = NULL;
+>>          }
+>> -       eqos_stop_resets_tegra186(dev);
+>> -       eqos_stop_clks_tegra186(dev);
+>> +       eqos->config->ops->eqos_stop_resets(dev);
+>> +       eqos->config->ops->eqos_stop_clks(dev);
+>>
+>>          debug("%s: OK\n", __func__);
+>>   }
+>> @@ -1188,7 +1354,7 @@ int eqos_send(struct udevice *dev, void *packet, int length)
+>>                length);
+>>
+>>          memcpy(eqos->tx_dma_buf, packet, length);
+>> -       eqos_flush_buffer(eqos->tx_dma_buf, length);
+>> +       eqos->config->ops->eqos_flush_buffer(eqos->tx_dma_buf, length);
+>>
+>>          tx_desc = &(eqos->tx_descs[eqos->tx_desc_idx]);
+>>          eqos->tx_desc_idx++;
+>> @@ -1203,12 +1369,12 @@ int eqos_send(struct udevice *dev, void *packet, int length)
+>>           */
+>>          mb();
+>>          tx_desc->des3 = EQOS_DESC3_OWN | EQOS_DESC3_FD | EQOS_DESC3_LD | length;
+>> -       eqos_flush_desc(tx_desc);
+>> +       eqos->config->ops->eqos_flush_desc(tx_desc);
+>>
+>>          writel((ulong)(tx_desc + 1), &eqos->dma_regs->ch0_txdesc_tail_pointer);
+>>
+>>          for (i = 0; i < 1000000; i++) {
+>> -               eqos_inval_desc(tx_desc);
+>> +               eqos->config->ops->eqos_inval_desc(tx_desc);
+>>                  if (!(readl(&tx_desc->des3) & EQOS_DESC3_OWN))
+>>                          return 0;
+>>                  udelay(1);
+>> @@ -1238,7 +1404,7 @@ int eqos_recv(struct udevice *dev, int flags, uchar **packetp)
+>>          length = rx_desc->des3 & 0x7fff;
+>>          debug("%s: *packetp=%p, length=%d\n", __func__, *packetp, length);
+>>
+>> -       eqos_inval_buffer(*packetp, length);
+>> +       eqos->config->ops->eqos_inval_buffer(*packetp, length);
+>>
+>>          return length;
+>>   }
+>> @@ -1269,7 +1435,7 @@ int eqos_free_pkt(struct udevice *dev, uchar *packet, int length)
+>>           */
+>>          mb();
+>>          rx_desc->des3 |= EQOS_DESC3_OWN | EQOS_DESC3_BUF1V;
+>> -       eqos_flush_desc(rx_desc);
+>> +       eqos->config->ops->eqos_flush_desc(rx_desc);
+>>
+>>          writel((ulong)rx_desc, &eqos->dma_regs->ch0_rxdesc_tail_pointer);
+>>
+>> @@ -1304,7 +1470,7 @@ static int eqos_probe_resources_core(struct udevice *dev)
+>>                  ret = -ENOMEM;
+>>                  goto err_free_descs;
+>>          }
+>> -       debug("%s: rx_dma_buf=%p\n", __func__, eqos->rx_dma_buf);
+>> +       debug("%s: tx_dma_buf=%p\n", __func__, eqos->tx_dma_buf);
+>>
+>>          eqos->rx_dma_buf = memalign(EQOS_BUFFER_ALIGN, EQOS_RX_BUFFER_SIZE);
+>>          if (!eqos->rx_dma_buf) {
+>> @@ -1312,7 +1478,7 @@ static int eqos_probe_resources_core(struct udevice *dev)
+>>                  ret = -ENOMEM;
+>>                  goto err_free_tx_dma_buf;
+>>          }
+>> -       debug("%s: tx_dma_buf=%p\n", __func__, eqos->tx_dma_buf);
+>> +       debug("%s: rx_dma_buf=%p\n", __func__, eqos->rx_dma_buf);
+>>
+>>          eqos->rx_pkt = malloc(EQOS_MAX_PACKET_SIZE);
+>>          if (!eqos->rx_pkt) {
+>> @@ -1424,6 +1590,98 @@ err_free_reset_eqos:
+>>          return ret;
+>>   }
+>>
+>> +/* board-specific Ethernet Interface initializations. */
+>> +__weak int board_interface_eth_init(int interface_type, bool eth_clk_sel_reg,
+>> +                                   bool eth_ref_clk_sel_reg)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>> +static int eqos_probe_resources_stm32(struct udevice *dev)
+>> +{
+>> +       struct eqos_priv *eqos = dev_get_priv(dev);
+>> +       int ret;
+>> +       int interface;
+>> +       bool eth_clk_sel_reg = false;
+>> +       bool eth_ref_clk_sel_reg = false;
+>> +
+>> +       debug("%s(dev=%p):\n", __func__, dev);
+>> +
+>> +       interface = eqos->config->interface(dev);
+>> +
+>> +       if (interface == -1) {
+>> +               pr_err("Invalid PHY interface\n");
+>> +               return -EINVAL;
+>> +       }
+>> +
+>> +       /* Gigabit Ethernet 125MHz clock selection. */
+>> +       eth_clk_sel_reg = dev_read_bool(dev, "st,eth_clk_sel");
+>> +
+>> +       /* Ethernet 50Mhz RMII clock selection */
+>> +       eth_ref_clk_sel_reg =
+>> +               dev_read_bool(dev, "st,eth_ref_clk_sel");
+>> +
+>> +       ret = board_interface_eth_init(interface, eth_clk_sel_reg,
+>> +                                      eth_ref_clk_sel_reg);
+>> +       if (ret)
+>> +               return -EINVAL;
+>> +
+>> +       ret = clk_get_by_name(dev, "stmmaceth", &eqos->clk_master_bus);
+>> +       if (ret) {
+>> +               pr_err("clk_get_by_name(master_bus) failed: %d", ret);
+>> +               goto err_probe;
+>> +       }
+>> +
+>> +       ret = clk_get_by_name(dev, "mac-clk-rx", &eqos->clk_rx);
+>> +       if (ret) {
+>> +               pr_err("clk_get_by_name(rx) failed: %d", ret);
+>> +               goto err_free_clk_master_bus;
+>> +       }
+>> +
+>> +       ret = clk_get_by_name(dev, "mac-clk-tx", &eqos->clk_tx);
+>> +       if (ret) {
+>> +               pr_err("clk_get_by_name(tx) failed: %d", ret);
+>> +               goto err_free_clk_rx;
+>> +       }
+>> +
+>> +       /*  Get ETH_CLK clocks (optional) */
+>> +       ret = clk_get_by_name(dev, "eth-ck", &eqos->clk_ck);
+>> +       if (ret)
+>> +               pr_warn("No phy clock provided %d", ret);
+>> +
+>> +       debug("%s: OK\n", __func__);
+>> +       return 0;
+>> +
+>> +err_free_clk_rx:
+>> +       clk_free(&eqos->clk_rx);
+>> +err_free_clk_master_bus:
+>> +       clk_free(&eqos->clk_master_bus);
+>> +err_probe:
+>> +
+>> +       debug("%s: returns %d\n", __func__, ret);
+>> +       return ret;
+>> +}
+>> +
+>> +static int eqos_get_interface_stm32(struct udevice *dev)
+>> +{
+>> +       const char *phy_mode;
+>> +       int interface = -1;
+>> +
+>> +       debug("%s(dev=%p):\n", __func__, dev);
+>> +
+>> +       phy_mode = fdt_getprop(gd->fdt_blob, dev_of_offset(dev), "phy-mode",
+>> +                              NULL);
+>> +       if (phy_mode)
+>> +               interface = phy_get_interface_by_name(phy_mode);
+>> +
+>> +       return interface;
+>> +}
+>> +
+>> +static int eqos_get_interface_tegra186(struct udevice *dev)
+>> +{
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_remove_resources_tegra186(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -1442,6 +1700,22 @@ static int eqos_remove_resources_tegra186(struct udevice *dev)
+>>          return 0;
+>>   }
+>>
+>> +static int eqos_remove_resources_stm32(struct udevice *dev)
+>> +{
+>> +       struct eqos_priv *eqos = dev_get_priv(dev);
+>> +
+>> +       debug("%s(dev=%p):\n", __func__, dev);
+>> +
+>> +       clk_free(&eqos->clk_tx);
+>> +       clk_free(&eqos->clk_rx);
+>> +       clk_free(&eqos->clk_master_bus);
+>> +       if (clk_valid(&eqos->clk_ck))
+>> +               clk_free(&eqos->clk_ck);
+>> +
+>> +       debug("%s: OK\n", __func__);
+>> +       return 0;
+>> +}
+>> +
+>>   static int eqos_probe(struct udevice *dev)
+>>   {
+>>          struct eqos_priv *eqos = dev_get_priv(dev);
+>> @@ -1468,15 +1742,16 @@ static int eqos_probe(struct udevice *dev)
+>>                  return ret;
+>>          }
+>>
+>> -       ret = eqos_probe_resources_tegra186(dev);
+>> +       ret = eqos->config->ops->eqos_probe_resources(dev);
+>>          if (ret < 0) {
+>> -               pr_err("eqos_probe_resources_tegra186() failed: %d", ret);
+>> +               pr_err("eqos_probe_resources() failed: %d", ret);
+>>                  goto err_remove_resources_core;
+>>          }
+>>
+>>          eqos->mii = mdio_alloc();
+>>          if (!eqos->mii) {
+>>                  pr_err("mdio_alloc() failed");
+>> +               ret = -ENOMEM;
+>>                  goto err_remove_resources_tegra;
+>>          }
+>>          eqos->mii->read = eqos_mdio_read;
+>> @@ -1496,7 +1771,7 @@ static int eqos_probe(struct udevice *dev)
+>>   err_free_mdio:
+>>          mdio_free(eqos->mii);
+>>   err_remove_resources_tegra:
+>> -       eqos_remove_resources_tegra186(dev);
+>> +       eqos->config->ops->eqos_remove_resources(dev);
+>>   err_remove_resources_core:
+>>          eqos_remove_resources_core(dev);
+>>
+>> @@ -1512,7 +1787,8 @@ static int eqos_remove(struct udevice *dev)
+>>
+>>          mdio_unregister(eqos->mii);
+>>          mdio_free(eqos->mii);
+>> -       eqos_remove_resources_tegra186(dev);
+>> +       eqos->config->ops->eqos_remove_resources(dev);
+>> +
+>>          eqos_probe_resources_core(dev);
+>>
+>>          debug("%s: OK\n", __func__);
+>> @@ -1528,8 +1804,58 @@ static const struct eth_ops eqos_ops = {
+>>          .write_hwaddr = eqos_write_hwaddr,
+>>   };
+>>
+>> +static struct eqos_ops eqos_tegra186_ops = {
+>> +       .eqos_inval_desc = eqos_inval_desc_tegra186,
+>> +       .eqos_flush_desc = eqos_flush_desc_tegra186,
+>> +       .eqos_inval_buffer = eqos_inval_buffer_tegra186,
+>> +       .eqos_flush_buffer = eqos_flush_buffer_tegra186,
+>> +       .eqos_probe_resources = eqos_probe_resources_tegra186,
+>> +       .eqos_remove_resources = eqos_remove_resources_tegra186,
+>> +       .eqos_stop_resets = eqos_stop_resets_tegra186,
+>> +       .eqos_start_resets = eqos_start_resets_tegra186,
+>> +       .eqos_stop_clks = eqos_stop_clks_tegra186,
+>> +       .eqos_start_clks = eqos_start_clks_tegra186,
+>> +       .eqos_calibrate_pads = eqos_calibrate_pads_tegra186,
+>> +       .eqos_disable_calibration = eqos_disable_calibration_tegra186,
+>> +       .eqos_set_tx_clk_speed = eqos_set_tx_clk_speed_tegra186,
+>> +       .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_tegra186
+>> +};
+>> +
+>>   static const struct eqos_config eqos_tegra186_config = {
+>>          .reg_access_always_ok = false,
+>> +       .mdio_wait = 10,
+>> +       .swr_wait = 10,
+>> +       .config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
+>> +       .config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_20_35,
+>> +       .interface = eqos_get_interface_tegra186,
+>> +       .ops = &eqos_tegra186_ops
+>> +};
+>> +
+>> +static struct eqos_ops eqos_stm32_ops = {
+>> +       .eqos_inval_desc = eqos_inval_desc_stm32,
+>> +       .eqos_flush_desc = eqos_flush_desc_stm32,
+>> +       .eqos_inval_buffer = eqos_inval_buffer_stm32,
+>> +       .eqos_flush_buffer = eqos_flush_buffer_stm32,
+>> +       .eqos_probe_resources = eqos_probe_resources_stm32,
+>> +       .eqos_remove_resources = eqos_remove_resources_stm32,
+>> +       .eqos_stop_resets = eqos_stop_resets_stm32,
+>> +       .eqos_start_resets = eqos_start_resets_stm32,
+>> +       .eqos_stop_clks = eqos_stop_clks_stm32,
+>> +       .eqos_start_clks = eqos_start_clks_stm32,
+>> +       .eqos_calibrate_pads = eqos_calibrate_pads_stm32,
+>> +       .eqos_disable_calibration = eqos_disable_calibration_stm32,
+>> +       .eqos_set_tx_clk_speed = eqos_set_tx_clk_speed_stm32,
+>> +       .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32
+>> +};
+>> +
+>> +static const struct eqos_config eqos_stm32_config = {
+>> +       .reg_access_always_ok = false,
+>> +       .mdio_wait = 10000,
+>> +       .swr_wait = 50,
+>> +       .config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_AV,
+>> +       .config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
+>> +       .interface = eqos_get_interface_stm32,
+>> +       .ops = &eqos_stm32_ops
+>>   };
+>>
+>>   static const struct udevice_id eqos_ids[] = {
+>> @@ -1537,6 +1863,11 @@ static const struct udevice_id eqos_ids[] = {
+>>                  .compatible = "nvidia,tegra186-eqos",
+>>                  .data = (ulong)&eqos_tegra186_config
+>>          },
+>> +       {
+>> +               .compatible = "snps,dwmac-4.20a",
+>> +               .data = (ulong)&eqos_stm32_config
+>> +       },
+>> +
+>>          { }
+>>   };
+>>
+>> --
+>> 2.17.1
+>>
+>> _______________________________________________
+>> U-Boot mailing list
+>> U-Boot@lists.denx.de
+>> https://lists.denx.de/listinfo/u-boot
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

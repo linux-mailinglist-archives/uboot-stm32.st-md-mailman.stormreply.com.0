@@ -2,70 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E934D1A10C
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DE071A104
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B9421CA8E4E
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:56 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E0C9CA8E40
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:43 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E637ACA8E4C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0880EC9AE5D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 May 2019 16:11:55 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 10 May 2019 16:11:42 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4AG6CgY014692; Fri, 10 May 2019 18:11:40 +0200
+ x4AFuEFf032191; Fri, 10 May 2019 18:11:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=4xH7Cr02QbWSvh5iR6eXAZUdSs1K+Mx2yLFjz6bk9qc=;
- b=xmY2Vxv6D+F5JMV0LDXKrke0jvfV1Br45n7DNOPcJFLab0a/T71BpXxpkBWcsllu1XxF
- A3kPks8gWGkjFn76fB5yIMnbPo2CMTNrfgJl2LuPod8/R9cRWdIn/wopd5rnEL/9ttFp
- wra3JBEdVtvtmNNsvLm0lsf6uq5OiiSJYPiE3gBiCzyt98zouTlyeVsZA2+RA6Z+eaRe
- xTq24KU1TnyAc1dw2anlB9yq1+gq7CZoQHY6WUZ1XMbpR62rXCrPsc8Rg98UNOp5SOPf
- 9t2JL0etayb6zENlZhMA3LUnJirz93BRnIimzhbq14WqRb9Gmyk/i8c6lEMZ4b9veb6o ew== 
+ bh=gyIC3mMoMDlOjZ4ynddTTL25x6BIRC6NnEbpFLnY0ok=;
+ b=aXeCldlLfYp+Gco00Nx5gXh7CMIRZ/xL3NJLKubUIDqaRTD+Ps+u25pbQAq1t9G5FmFg
+ ULSbljLgbBoq4dxyVqUVWNbMbYBPuN8paoBb5CBBsBuSLIKcaG7UGD4btZLRtW6TkJiH
+ P0F1NU6KMWa4VeVvQ502YEyVRTqXb5UVTgsWMy0MgSUm+mkNr6a5qjxwehL5piBYsiW5
+ 2xu4nuT1RnUJlr/m3LCIJq8hadG/rS8AhnNznO14ff4F8OKqoVlXdpcamJeycWvsy5q1
+ 279toqlI4aE8wLQR9mZYZ4JuvFOFp2g8yHVmnQ5jpKhK4uDp1MrL3hwvngBewhSHMhMR xA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2scbkajk32-1
+ by mx07-00178001.pphosted.com with ESMTP id 2scdjpa2nv-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 10 May 2019 18:11:40 +0200
+ Fri, 10 May 2019 18:11:41 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D9A1B34;
- Fri, 10 May 2019 16:11:39 +0000 (GMT)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AFD3638;
+ Fri, 10 May 2019 16:11:40 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BA9182C1E;
- Fri, 10 May 2019 16:11:39 +0000 (GMT)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9DF542C1E;
+ Fri, 10 May 2019 16:11:40 +0000 (GMT)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1347.2;
- Fri, 10 May 2019 18:11:39 +0200
+ Fri, 10 May 2019 18:11:40 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 10 May 2019 18:11:24 +0200
-Message-ID: <1557504691-26188-8-git-send-email-patrice.chotard@st.com>
+Date: Fri, 10 May 2019 18:11:25 +0200
+Message-ID: <1557504691-26188-9-git-send-email-patrice.chotard@st.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 References: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG7NODE2.st.com (10.75.127.20) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-09_02:, , signatures=0
-Cc: Shyam Saini <mayhs11saini@gmail.com>,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Christophe KERELLO <christophe.kerello@st.com>,
- Quentin Schulz <quentin.schulz@bootlin.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Igor Grinberg <grinberg@compulab.co.il>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Yaniv Levinsky <yaniv.levinsky@compulab.co.il>,
- Neil Stainton <nstainton@asl-control.co.uk>
-Subject: [Uboot-stm32] [PATCH 07/14] env: enable saveenv command when one
-	CONFIG_ENV_IS_IN is activated
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 08/14] configs: stm32mp15: Enable
+	ENV_IS_IN_EXT4 and all relative flags
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,85 +77,54 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: Patrick Delaunay <patrick.delaunay@st.com>
 
-Introduce ENV_IS_IN_DEVICE to test if one the
-CONFIG_ENV_IS_IN_ is defined and support the command
-saveenv even if CONFIG_ENV_IS_NOWHERE is activated
+Enable ENV_IS_IN_EXT4 and all relative flags to be able to
+load/save environment in EXT4 partition.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+This will allows to load/save environment on both sdcard and eMMC.
+As for stm32mp15, bootfs has not the same partition number on sdcard
+and on eMMC, we use "auto" key which allows to find the first
+partition in device with bootable flag which is partition 4 on sdcard
+and partition 2 on eMMC.
+
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- cmd/nvedit.c | 36 +++++++++++++++++++++---------------
- 1 file changed, 21 insertions(+), 15 deletions(-)
+ configs/stm32mp15_basic_defconfig   | 5 +++++
+ configs/stm32mp15_trusted_defconfig | 5 +++++
+ 2 files changed, 10 insertions(+)
 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 24a6cf7..5d723ac 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -39,18 +39,24 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
--#if	!defined(CONFIG_ENV_IS_IN_EEPROM)	&& \
--	!defined(CONFIG_ENV_IS_IN_FLASH)	&& \
--	!defined(CONFIG_ENV_IS_IN_MMC)		&& \
--	!defined(CONFIG_ENV_IS_IN_FAT)		&& \
--	!defined(CONFIG_ENV_IS_IN_EXT4)		&& \
--	!defined(CONFIG_ENV_IS_IN_NAND)		&& \
--	!defined(CONFIG_ENV_IS_IN_NVRAM)	&& \
--	!defined(CONFIG_ENV_IS_IN_ONENAND)	&& \
--	!defined(CONFIG_ENV_IS_IN_SATA)		&& \
--	!defined(CONFIG_ENV_IS_IN_SPI_FLASH)	&& \
--	!defined(CONFIG_ENV_IS_IN_REMOTE)	&& \
--	!defined(CONFIG_ENV_IS_IN_UBI)		&& \
-+#if	defined(CONFIG_ENV_IS_IN_EEPROM)	|| \
-+	defined(CONFIG_ENV_IS_IN_FLASH)		|| \
-+	defined(CONFIG_ENV_IS_IN_MMC)		|| \
-+	defined(CONFIG_ENV_IS_IN_FAT)		|| \
-+	defined(CONFIG_ENV_IS_IN_EXT4)		|| \
-+	defined(CONFIG_ENV_IS_IN_NAND)		|| \
-+	defined(CONFIG_ENV_IS_IN_NVRAM)		|| \
-+	defined(CONFIG_ENV_IS_IN_ONENAND)	|| \
-+	defined(CONFIG_ENV_IS_IN_SATA)		|| \
-+	defined(CONFIG_ENV_IS_IN_SPI_FLASH)	|| \
-+	defined(CONFIG_ENV_IS_IN_REMOTE)	|| \
-+	defined(CONFIG_ENV_IS_IN_UBI)
-+
-+#define ENV_IS_IN_DEVICE
-+
-+#endif
-+
-+#if	!defined(ENV_IS_IN_DEVICE)		&& \
- 	!defined(CONFIG_ENV_IS_NOWHERE)
- # error Define one of CONFIG_ENV_IS_IN_{EEPROM|FLASH|MMC|FAT|EXT4|\
- NAND|NVRAM|ONENAND|SATA|SPI_FLASH|REMOTE|UBI} or CONFIG_ENV_IS_NOWHERE
-@@ -749,7 +755,7 @@ ulong env_get_ulong(const char *name, int base, ulong default_val)
- }
- 
- #ifndef CONFIG_SPL_BUILD
--#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_ENV_IS_NOWHERE)
-+#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
- static int do_env_save(cmd_tbl_t *cmdtp, int flag, int argc,
- 		       char * const argv[])
- {
-@@ -1205,7 +1211,7 @@ static cmd_tbl_t cmd_env_sub[] = {
- #if defined(CONFIG_CMD_RUN)
- 	U_BOOT_CMD_MKENT(run, CONFIG_SYS_MAXARGS, 1, do_run, "", ""),
- #endif
--#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_ENV_IS_NOWHERE)
-+#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
- 	U_BOOT_CMD_MKENT(save, 1, 0, do_env_save, "", ""),
- #endif
- 	U_BOOT_CMD_MKENT(set, CONFIG_SYS_MAXARGS, 0, do_env_set, "", ""),
-@@ -1280,7 +1286,7 @@ static char env_help_text[] =
- #if defined(CONFIG_CMD_RUN)
- 	"env run var [...] - run commands in an environment variable\n"
- #endif
--#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_ENV_IS_NOWHERE)
-+#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
- 	"env save - save environment\n"
- #endif
- #if defined(CONFIG_CMD_NVEDIT_EFI)
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index f5e13dd..051c1de 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -41,6 +41,11 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_MTDPARTS=y
+ # CONFIG_SPL_DOS_PARTITION is not set
+ CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_EXT4=y
++CONFIG_ENV_EXT4_INTERFACE="mmc"
++CONFIG_ENV_EXT4_DEVICE_AND_PART="0:auto"
++CONFIG_ENV_EXT4_FILE="/uboot.env"
+ CONFIG_STM32_ADC=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index cae3324..f09f0e4 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -33,6 +33,11 @@ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_MTDPARTS=y
+ CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_EXT4=y
++CONFIG_ENV_EXT4_INTERFACE="mmc"
++CONFIG_ENV_EXT4_DEVICE_AND_PART="0:auto"
++CONFIG_ENV_EXT4_FILE="/uboot.env"
+ CONFIG_STM32_ADC=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
 -- 
 1.9.1
 

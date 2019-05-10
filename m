@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9806D1A103
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AAA71A100
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:39 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6304FC9AE5E
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4DD48C9AE58
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:39 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 05B4AC9AE5A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D0596C9AE54
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 May 2019 16:11:42 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4AG6Tlt025459; Fri, 10 May 2019 18:11:36 +0200
+ Fri, 10 May 2019 16:11:37 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x4AG6CgX014692; Fri, 10 May 2019 18:11:37 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=oH8jFyx+shAdiAns0lrX2Ofn/vByXtuG6ZQzM1GICu8=;
- b=x/TD+Kd36OYpEdKIJPjYkM9bPhV8pQhX5pBKWabg7mlLr42Wvw4p343iug986uWCumug
- /ENLFkzPdKaByMqaB+yuz8ZgmhFH/AWEFEFeeNMPbOK4IPAl7fDb+d6UXCtyGY1P2b9a
- AXEo2AwN5qt0HbnryjntJeXNoDjJEW4rKJcURxoIU5oO1+GYHgfwQg2UCXi5pzgTTPFj
- Zc0hAhlrjnIxTI37PHpsx10y6rEXTi5et0WVZ47z0gWlJ402Sfq+Og/IN2vkFtzuIhNB
- wtNUMKEZxe3AC86BdA6Zhvn5Nixwfg/dx7AxtbtKq9tadYt8ecrWtOd9/mHjfeuolNiv hA== 
+ bh=AvlDMcc40x8Z7XIxo4OC8Nfz6sJVs5MtX9jX8VEP4Lc=;
+ b=lvx0JJxiDKtQpG7gug4qrbTT3kbvrZfAiw6boWYNc0W33k9I6UbErXOIwC/28bF4Buci
+ x7rNthe10ieOvGa3eEhz6vXw591bfhGSjLLh2MD7W+WsHfJ49jXOpZwYvd6txuD3WZCb
+ kVyugom4LiZDGHZSjmWWL6CvHJ8u8QGCdvEDBBjkAL8/DG5V1zaqO2NeB3fJAu97kSwa
+ 4339L81SGMnk/B/V2I2LofJaV3IH7LhQ5rHIzxk19tMVM3GkZnjrJHuuBTuDNQ8B8Nkc
+ ZeLmjlVcbHGLBmcRQdcxfjplHjq+Iwa4iMcN7rSFlzQcpBWJzdlOjsph+JP4+MvN/vfL +A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2sc9s4kekg-1
+ by mx07-00178001.pphosted.com with ESMTP id 2scbkajk2q-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 10 May 2019 18:11:36 +0200
+ Fri, 10 May 2019 18:11:37 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D626038;
- Fri, 10 May 2019 16:11:35 +0000 (GMT)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 701C234;
+ Fri, 10 May 2019 16:11:36 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B44F02C1E;
- Fri, 10 May 2019 16:11:35 +0000 (GMT)
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5E6F62C1E;
+ Fri, 10 May 2019 16:11:36 +0000 (GMT)
 Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1347.2;
  Fri, 10 May 2019 18:11:35 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 10 May 2019 18:11:19 +0200
-Message-ID: <1557504691-26188-3-git-send-email-patrice.chotard@st.com>
+Date: Fri, 10 May 2019 18:11:20 +0200
+Message-ID: <1557504691-26188-4-git-send-email-patrice.chotard@st.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 References: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG8NODE1.st.com (10.75.127.22) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-09_02:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
  Christophe KERELLO <christophe.kerello@st.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
  Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 02/14] stm32mp1: activate NAND and NOR support
-	on EV1
+Subject: [Uboot-stm32] [PATCH 03/14] stm32mp1: support dynamic MTDPARTS
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,256 +74,139 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Patrick Delaunay <patrick.delaunay@st.com>
-
-Add the necessary configuration to have NAND and NOR support on ev1 board
-for BASIC boot (with SPL) or for TRUSTED boot (with TF-A).
-
-STM32MP> nand info
-
-Device 0: nand0, sector size 256 KiB
-  Page size       4096 b
-  OOB size         224 b
-  Erase size    262144 b
-  subpagesize     4096 b
-  options     0x00184200
-  bbt options 0x00060000
-
-STM32MP> sf probe
-SF: Detected mx66l51235l with page size 256 Bytes, erase size 64 KiB, total 64 MiB
+This patch configure the default value for mtdids and mtparts
+dynamically according the presence of nor and nand in
+the board device tree
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Signed-off-by: Christophe Kerello <christophe.kerello@st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- arch/arm/dts/stm32mp157-pinctrl.dtsi | 44 ++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp157c-ev1.dts     | 16 +++++++++++++
- arch/arm/dts/stm32mp157c.dtsi        | 15 ++++++++++++
- configs/stm32mp15_basic_defconfig    | 17 ++++++++++++++
- configs/stm32mp15_trusted_defconfig  | 17 ++++++++++++++
- include/configs/stm32mp1.h           |  3 +++
- 6 files changed, 112 insertions(+)
+ board/st/stm32mp1/stm32mp1.c | 85 ++++++++++++++++++++++++++++++++++++++++++++
+ include/configs/stm32mp1.h   |  9 +++++
+ 2 files changed, 94 insertions(+)
 
-diff --git a/arch/arm/dts/stm32mp157-pinctrl.dtsi b/arch/arm/dts/stm32mp157-pinctrl.dtsi
-index 0aae69b..9d1d386 100644
---- a/arch/arm/dts/stm32mp157-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32mp157-pinctrl.dtsi
-@@ -210,6 +210,50 @@
- 				};
- 			};
- 
-+			fmc_pins_a: fmc-0 {
-+				pins1 {
-+					pinmux = <STM32_PINMUX('D', 4, AF12)>, /* FMC_NOE */
-+						 <STM32_PINMUX('D', 5, AF12)>, /* FMC_NWE */
-+						 <STM32_PINMUX('D', 11, AF12)>, /* FMC_A16_FMC_CLE */
-+						 <STM32_PINMUX('D', 12, AF12)>, /* FMC_A17_FMC_ALE */
-+						 <STM32_PINMUX('D', 14, AF12)>, /* FMC_D0 */
-+						 <STM32_PINMUX('D', 15, AF12)>, /* FMC_D1 */
-+						 <STM32_PINMUX('D', 0, AF12)>, /* FMC_D2 */
-+						 <STM32_PINMUX('D', 1, AF12)>, /* FMC_D3 */
-+						 <STM32_PINMUX('E', 7, AF12)>, /* FMC_D4 */
-+						 <STM32_PINMUX('E', 8, AF12)>, /* FMC_D5 */
-+						 <STM32_PINMUX('E', 9, AF12)>, /* FMC_D6 */
-+						 <STM32_PINMUX('E', 10, AF12)>, /* FMC_D7 */
-+						 <STM32_PINMUX('G', 9, AF12)>; /* FMC_NE2_FMC_NCE */
-+					bias-disable;
-+					drive-push-pull;
-+					slew-rate = <1>;
-+				};
-+				pins2 {
-+					pinmux = <STM32_PINMUX('D', 6, AF12)>; /* FMC_NWAIT */
-+					bias-pull-up;
-+				};
-+			};
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 76917b0..360b0df 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -504,3 +504,88 @@ void board_quiesce_devices(void)
+ {
+ 	setup_led(LEDST_OFF);
+ }
 +
-+			fmc_sleep_pins_a: fmc-sleep-0 {
-+				pins {
-+					pinmux = <STM32_PINMUX('D', 4, ANALOG)>, /* FMC_NOE */
-+						 <STM32_PINMUX('D', 5, ANALOG)>, /* FMC_NWE */
-+						 <STM32_PINMUX('D', 11, ANALOG)>, /* FMC_A16_FMC_CLE */
-+						 <STM32_PINMUX('D', 12, ANALOG)>, /* FMC_A17_FMC_ALE */
-+						 <STM32_PINMUX('D', 14, ANALOG)>, /* FMC_D0 */
-+						 <STM32_PINMUX('D', 15, ANALOG)>, /* FMC_D1 */
-+						 <STM32_PINMUX('D', 0, ANALOG)>, /* FMC_D2 */
-+						 <STM32_PINMUX('D', 1, ANALOG)>, /* FMC_D3 */
-+						 <STM32_PINMUX('E', 7, ANALOG)>, /* FMC_D4 */
-+						 <STM32_PINMUX('E', 8, ANALOG)>, /* FMC_D5 */
-+						 <STM32_PINMUX('E', 9, ANALOG)>, /* FMC_D6 */
-+						 <STM32_PINMUX('E', 10, ANALOG)>, /* FMC_D7 */
-+						 <STM32_PINMUX('D', 6, ANALOG)>, /* FMC_NWAIT */
-+						 <STM32_PINMUX('G', 9, ANALOG)>; /* FMC_NE2_FMC_NCE */
-+				};
-+			};
++#ifdef CONFIG_SYS_MTDPARTS_RUNTIME
 +
- 			i2c1_pins_a: i2c1-0 {
- 				pins {
- 					pinmux = <STM32_PINMUX('D', 12, AF5)>, /* I2C1_SCL */
-diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
-index a6ee379..69980ca 100644
---- a/arch/arm/dts/stm32mp157c-ev1.dts
-+++ b/arch/arm/dts/stm32mp157c-ev1.dts
-@@ -92,6 +92,22 @@
- 	};
- };
- 
-+&fmc {
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&fmc_pins_a>;
-+	pinctrl-1 = <&fmc_sleep_pins_a>;
-+	status = "okay";
-+	#address-cells = <1>;
-+	#size-cells = <0>;
++#define MTDPARTS_LEN		256
++#define MTDIDS_LEN		128
 +
-+	nand: nand@0 {
-+		reg = <0>;
-+		nand-on-flash-bbt;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+	};
-+};
++/**
++ * The mtdparts_nand0 and mtdparts_nor0 variable tends to be long.
++ * If we need to access it before the env is relocated, then we need
++ * to use our own stack buffer. gd->env_buf will be too small.
++ *
++ * @param buf temporary buffer pointer MTDPARTS_LEN long
++ * @return mtdparts variable string, NULL if not found
++ */
++static const char *env_get_mtdparts(const char *str, char *buf)
++{
++	if (gd->flags & GD_FLG_ENV_READY)
++		return env_get(str);
++	if (env_get_f(str, buf, MTDPARTS_LEN) != -1)
++		return buf;
 +
- &i2c2 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&i2c2_pins_a>;
-diff --git a/arch/arm/dts/stm32mp157c.dtsi b/arch/arm/dts/stm32mp157c.dtsi
-index 9463433..dd0f4e8 100644
---- a/arch/arm/dts/stm32mp157c.dtsi
-+++ b/arch/arm/dts/stm32mp157c.dtsi
-@@ -1033,6 +1033,21 @@
- 			dma-requests = <48>;
- 		};
- 
-+		fmc: nand-controller@58002000 {
-+			compatible = "st,stm32mp15-fmc2";
-+			reg = <0x58002000 0x1000>,
-+			      <0x80000000 0x1000>,
-+			      <0x88010000 0x1000>,
-+			      <0x88020000 0x1000>,
-+			      <0x81000000 0x1000>,
-+			      <0x89010000 0x1000>,
-+			      <0x89020000 0x1000>;
-+			interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&rcc FMC_K>;
-+			resets = <&rcc FMC_R>;
-+			stafmctus = "disabled";
-+		};
++	return NULL;
++}
 +
- 		qspi: spi@58003000 {
- 			compatible = "st,stm32f469-qspi";
- 			reg = <0x58003000 0x1000>, <0x70000000 0x10000000>;
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index bd75df8..f5e13dd 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -29,6 +29,7 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
-@@ -37,6 +38,7 @@ CONFIG_CMD_TIMER=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_MTDPARTS=y
- # CONFIG_SPL_DOS_PARTITION is not set
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
- CONFIG_STM32_ADC=y
-@@ -54,6 +56,18 @@ CONFIG_LED=y
- CONFIG_LED_GPIO=y
- CONFIG_DM_MMC=y
- CONFIG_STM32_SDMMC2=y
-+CONFIG_MTD=y
-+CONFIG_NAND=y
-+CONFIG_NAND_STM32_FMC2=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH=y
-+CONFIG_SPI_FLASH_BAR=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY=y
- CONFIG_PHY_STM32_USBPHYC=y
- CONFIG_PINCONF=y
-@@ -68,6 +82,9 @@ CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_STM32_QSPI=y
- CONFIG_USB=y
- CONFIG_DM_USB=y
- CONFIG_DM_USB_GADGET=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index f82b770..cae3324 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -22,6 +22,7 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
-@@ -30,6 +31,7 @@ CONFIG_CMD_TIMER=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_MTDPARTS=y
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
- CONFIG_STM32_ADC=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
-@@ -46,6 +48,18 @@ CONFIG_LED=y
- CONFIG_LED_GPIO=y
- CONFIG_DM_MMC=y
- CONFIG_STM32_SDMMC2=y
-+CONFIG_MTD=y
-+CONFIG_NAND=y
-+CONFIG_NAND_STM32_FMC2=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH=y
-+CONFIG_SPI_FLASH_BAR=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY=y
- CONFIG_PHY_STM32_USBPHYC=y
- CONFIG_PINCONF=y
-@@ -58,6 +72,9 @@ CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_STM32_QSPI=y
- CONFIG_USB=y
- CONFIG_DM_USB=y
- CONFIG_DM_USB_GADGET=y
++/**
++ * update the variables "mtdids" and "mtdparts" with content of mtdparts_<dev>
++ */
++static void board_get_mtdparts(const char *dev,
++			       char *mtdids,
++			       char *mtdparts)
++{
++	char env_name[32] = "mtdparts_";
++	char tmp_mtdparts[MTDPARTS_LEN];
++	const char *tmp;
++
++	/* name of env variable to read = mtdparts_<dev> */
++	strcat(env_name, dev);
++	tmp = env_get_mtdparts(env_name, tmp_mtdparts);
++	if (tmp) {
++		/* mtdids: "<dev>=<dev>, ...." */
++		if (mtdids[0] != '\0')
++			strcat(mtdids, ",");
++		strcat(mtdids, dev);
++		strcat(mtdids, "=");
++		strcat(mtdids, dev);
++
++		/* mtdparts: "mtdparts=<dev>:<mtdparts_<dev>>;..." */
++		if (mtdparts[0] != '\0')
++			strncat(mtdparts, ";", MTDPARTS_LEN);
++		else
++			strcat(mtdparts, "mtdparts=");
++		strncat(mtdparts, dev, MTDPARTS_LEN);
++		strncat(mtdparts, ":", MTDPARTS_LEN);
++		strncat(mtdparts, tmp, MTDPARTS_LEN);
++	}
++}
++
++void board_mtdparts_default(const char **mtdids, const char **mtdparts)
++{
++	struct udevice *dev;
++	static char parts[2 * MTDPARTS_LEN + 1];
++	static char ids[MTDIDS_LEN + 1];
++	static bool mtd_initialized;
++
++	if (mtd_initialized) {
++		*mtdids = ids;
++		*mtdparts = parts;
++		return;
++	}
++
++	memset(parts, 0, sizeof(parts));
++	memset(ids, 0, sizeof(ids));
++
++	if (!uclass_get_device(UCLASS_MTD, 0, &dev))
++		board_get_mtdparts("nand0", ids, parts);
++
++	if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev))
++		board_get_mtdparts("nor0", ids, parts);
++
++	mtd_initialized = true;
++	*mtdids = ids;
++	*mtdparts = parts;
++	debug("%s:mtdids=%s & mtdparts=%s\n", __func__, ids, parts);
++}
++#endif
 diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-index 3069373..a28b8b3 100644
+index a28b8b3..254aad1 100644
 --- a/include/configs/stm32mp1.h
 +++ b/include/configs/stm32mp1.h
-@@ -85,6 +85,9 @@
+@@ -115,6 +115,14 @@
  
- #if !defined(CONFIG_SPL_BUILD)
+ #include <config_distro_bootcmd.h>
  
-+/* NAND support */
-+#define CONFIG_SYS_NAND_ONFI_DETECTION
-+#define CONFIG_SYS_MAX_NAND_DEVICE	1
- #define BOOT_TARGET_DEVICES(func) \
- 	func(MMC, mmc, 1) \
- 	func(MMC, mmc, 0) \
++#if defined(CONFIG_STM32_QSPI) || defined(CONFIG_NAND_STM32_FMC)
++#define CONFIG_SYS_MTDPARTS_RUNTIME
++#endif
++
++#define STM32MP_MTDPARTS \
++	"mtdparts_nor0=256k(fsbl1),256k(fsbl2),2m(ssbl),-(nor_user)\0" \
++	"mtdparts_nand0=2m(fsbl),2m(ssbl),-(UBI)\0"
++
+ /*
+  * memory layout for 32M uncompressed/compressed kernel,
+  * 1M fdt, 1M script, 1M pxe and 1M for splashimage
+@@ -130,6 +138,7 @@
+ 	"fdt_high=0xffffffff\0" \
+ 	"initrd_high=0xffffffff\0" \
+ 	STM32MP_BOOTCMD \
++	STM32MP_MTDPARTS \
+ 	BOOTENV
+ 
+ #endif /* ifndef CONFIG_SPL_BUILD */
 -- 
 1.9.1
 

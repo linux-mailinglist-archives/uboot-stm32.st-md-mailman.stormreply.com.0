@@ -2,63 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C46B1A101
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B36021A106
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:11:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 54D7CC9AE58
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:40 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 80BE3CA8E43
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:11:44 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40B2DC9AE54
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4EF7EC9AE5A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 May 2019 16:11:39 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri, 10 May 2019 16:11:43 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4AG6dJU025543; Fri, 10 May 2019 18:11:38 +0200
+ x4AG6dEI020397; Fri, 10 May 2019 18:11:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=aD9IXD2emMRPepXHcZFzEEle8/CxqiP1CgCo/dwyOx0=;
- b=FIZCiHOWPR41AaiZeo8iwfcj1nxe5++ugj69H1miroXsqOybPclcjcc5a+WP879kOxCF
- KYi0f8/Zw397u9XjHoI0G3DvrP3eSb2wGKouJhbmzKA2ob/X+/2lzGUsc1dDgqe1SuSB
- s14sSKtQyYsPsaM7iXfC+1xnMuYH/Odbr0OLWdCU2JFh7Fq2gXlqU6V01+C69tILxiOe
- fetNOzhCgkzky1bQXiJkc3PEIdBwMHdkzccl4JlZMHUrW1xnes+iXmOT1xZaeyOS2fn8
- xv1S797GhVYMVF37LMHUVIqxXspLLhBIflq1/GrwCRm2Xa4Gtsjjjcp/+8inQnhLxzMN lw== 
+ bh=gCPI9nsZIRdQyxiy/jN5C95zgHZkx3J+49WnZSa1lvE=;
+ b=n+b3+6Rg7vbcQHjHIR0xZrDUXWdsYbT0F9lLD5DAljXzv74fGq2hgCbzblE/2Q5sUEUi
+ +DOZmkof3Y7MXXOZe92tKmI/OS04rbGN3VlbnyQYXsvPBID//Ec77zcMamQ2RKAXj+nC
+ BFSP4bSBpJsmH5CrAV5nZ0t63xk03q5e+wD4fUFPxkxkG1QMy2gV0MbtSKEypBVp889A
+ xatdkZTeLZZ4kNnKJ3Y0mmH1+R2vrAt/h8hRcMHqblHXHUTUODw4pLI8K+6H1a2QpGPA
+ tcgB2PZRya1qBNuGLilvm9AFxHkfOqr/sRne/LcHjQ8c1wz95tTRkVQEYsml4XjULrvz Lg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2sc9s4kekp-1
+ by mx08-00178001.pphosted.com with ESMTP id 2scfv2sptd-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 10 May 2019 18:11:38 +0200
+ Fri, 10 May 2019 18:11:39 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 074C934;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0043E31;
  Fri, 10 May 2019 16:11:38 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EA3E02C1E;
- Fri, 10 May 2019 16:11:37 +0000 (GMT)
-Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D54EC2C1E;
+ Fri, 10 May 2019 16:11:38 +0000 (GMT)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1347.2;
- Fri, 10 May 2019 18:11:37 +0200
+ Fri, 10 May 2019 18:11:38 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 10 May 2019 18:11:22 +0200
-Message-ID: <1557504691-26188-6-git-send-email-patrice.chotard@st.com>
+Date: Fri, 10 May 2019 18:11:23 +0200
+Message-ID: <1557504691-26188-7-git-send-email-patrice.chotard@st.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 References: <1557504691-26188-1-git-send-email-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG6NODE1.st.com (10.75.127.16) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG7NODE2.st.com (10.75.127.20) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-09_02:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Christophe KERELLO <christophe.kerello@st.com>,
+Cc: Christophe KERELLO <christophe.kerello@st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alexey Brodkin <abrodkin@synopsys.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 05/14] board: stm32mp1: Add
-	env_ext4_get_dev_part() and env_ext4_get_intf()
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Michal Simek <michal.simek@xilinx.com>, Shyam Saini <mayhs11saini@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ York Sun <york.sun@nxp.com>, Vipul Kumar <vipul.kumar@xilinx.com>
+Subject: [Uboot-stm32] [PATCH 06/14] env: allow ENV_IS_NOWHERE with other
+	storage target
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,63 +79,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This allows to :
-- select the current device to save the environment file
-- select the correct EXT4 boot device instance
-  and partition to save the environment file.
+Allow U-Boot to get default environment for some boot mode
+(USB for example), and to select storage location when it is
+booting from flash device;
+ENVL_NOWHERE is present in env_locations with other one.
 
-For EXT4, device is mmc, device instance is 0 for sdcard or 1 for eMMC.
-The partition is set to "auto" to select the first partition with
-bootable flag.
-
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- board/st/stm32mp1/stm32mp1.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ env/Kconfig | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 360b0df..316cd48 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -19,6 +19,7 @@
- #include <asm/io.h>
- #include <asm/gpio.h>
- #include <asm/arch/stm32.h>
-+#include <asm/arch/sys_proto.h>
- #include <power/regulator.h>
- #include <usb/dwc2_udc.h>
+diff --git a/env/Kconfig b/env/Kconfig
+index 7830066..ca889cc 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -2,18 +2,12 @@ menu "Environment"
  
-@@ -505,6 +506,29 @@ void board_quiesce_devices(void)
- 	setup_led(LEDST_OFF);
- }
- 
-+#if defined(CONFIG_ENV_IS_IN_EXT4)
-+const char *env_ext4_get_intf(void)
-+{
-+	u32 bootmode = get_bootmode();
-+
-+	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
-+	case BOOT_FLASH_SD:
-+	case BOOT_FLASH_EMMC:
-+		return "mmc";
-+	default:
-+		return "";
-+	}
-+}
-+
-+const char *env_ext4_get_dev_part(void)
-+{
-+	static char *const dev_part[] = {"0:auto", "1:auto", "2:auto"};
-+	u32 bootmode = get_bootmode();
-+
-+	return dev_part[(bootmode & TAMP_BOOT_INSTANCE_MASK) - 1];
-+}
-+#endif
-+
- #ifdef CONFIG_SYS_MTDPARTS_RUNTIME
- 
- #define MTDPARTS_LEN		256
+ config ENV_IS_NOWHERE
+ 	bool "Environment is not stored"
+-	depends on !ENV_IS_IN_EEPROM
+-	depends on !ENV_IS_IN_EXT4
+-	depends on !ENV_IS_IN_FAT
+-	depends on !ENV_IS_IN_FLASH
+-	depends on !ENV_IS_IN_MMC
+-	depends on !ENV_IS_IN_NAND
+-	depends on !ENV_IS_IN_NVRAM
+-	depends on !ENV_IS_IN_ONENAND
+-	depends on !ENV_IS_IN_REMOTE
+-	depends on !ENV_IS_IN_SPI_FLASH
+-	depends on !ENV_IS_IN_UBI
+-	default y
++	default y if !ENV_IS_IN_EEPROM && !ENV_IS_IN_EXT4 && \
++		     !ENV_IS_IN_FAT && !ENV_IS_IN_FLASH && \
++		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
++		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
++		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
++		     !ENV_IS_IN_UBI
+ 	help
+ 	  Define this if you don't want to or can't have an environment stored
+ 	  on a storage medium. In this case the environment will still exist
 -- 
 1.9.1
 

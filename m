@@ -2,62 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6C9D1A13D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:20:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE4A1A145
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 18:20:28 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 76405CA8E5F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:20:14 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B9680CA8E73
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 May 2019 16:20:28 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 56A2BCA8E5C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 67F41CA8E6B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 May 2019 16:20:13 +0000 (UTC)
+ Fri, 10 May 2019 16:20:26 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4AG6OvB020346; Fri, 10 May 2019 18:20:12 +0200
+ x4AG6dFU020397; Fri, 10 May 2019 18:20:15 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=AvlDMcc40x8Z7XIxo4OC8Nfz6sJVs5MtX9jX8VEP4Lc=;
- b=mmG561nBnsL1POgPsvoIKvAxiVs/u0W/PKru5MaRycFHTETgo76db35Dq2ZS2GhAOIc5
- qfMrfQGnoFKHGQS63KIdqXObS1EkSDZO8iiGzPmWh+YHqBSszBcR9XCKLt1dOMRSl4kq
- f59Arxro3VY3e06hYSh1+2lABckX3chV2Wb6iUcgW2IOexRWszOue0muAG4c7U3MN7ek
- r7PuR+OganXFwEVkrBjVNAyKYXPU4xzfC7mOitAtiPBuVNm9PDk2DGzlK47PE1osEugk
- IeArvyZwjFGTzSp8XQESWjrxorsXwlPrPTbL5etDbMG5TWbrYZ5fj9n5/P10w1aI1miX ng== 
+ bh=CTA1DfLAvaRrxl4DLtizcsX/++xc6a+yWkraPSu1AWo=;
+ b=cEKjVR2GOIR1RNBVtTrQmDjq05JUNq1Qmbp+zpPm4I7r+9WHo0y66t1js+k/XGw5DcTT
+ zjiaefZluTe0vhyuLKyzehTYGWJ6s46sY9blUxebCZg8P9R+he6rQJhXbvv6hGaH7kd2
+ z1+upSb2/4T0Y/g1e4GRXZ76Ir3Uypx0vWGkd7jQXT+YM/JiSaetedpoHJfV0dwlIsXW
+ ctwYmY4mLeoKxH/Nl7LHNN3X9Vl7J4iCY3Qf+nzoB0gc7euyRRZe69VnE6QZCNs0VwhI
+ XTcVzw8ky7IG86Vp9g5lqweu3TbEJaGhzeT37vKVmv2pV56V95QYb6mMCZzbDpO/+c2+ ag== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2scfv2sr2j-1
+ by mx08-00178001.pphosted.com with ESMTP id 2scfv2sr2n-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 10 May 2019 18:20:12 +0200
+ Fri, 10 May 2019 18:20:15 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EB80131;
- Fri, 10 May 2019 16:20:11 +0000 (GMT)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4AB6431;
+ Fri, 10 May 2019 16:20:14 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B7F792C4E;
- Fri, 10 May 2019 16:20:11 +0000 (GMT)
-Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E9297E74;
+ Fri, 10 May 2019 16:20:12 +0000 (GMT)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1347.2;
- Fri, 10 May 2019 18:20:11 +0200
+ Fri, 10 May 2019 18:20:12 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 10 May 2019 18:19:03 +0200
-Message-ID: <1557505154-3856-3-git-send-email-patrice.chotard@st.com>
+Date: Fri, 10 May 2019 18:19:04 +0200
+Message-ID: <1557505154-3856-4-git-send-email-patrice.chotard@st.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1557505154-3856-1-git-send-email-patrice.chotard@st.com>
 References: <1557505154-3856-1-git-send-email-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG8NODE3.st.com (10.75.127.24) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-09_02:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Christophe KERELLO <christophe.kerello@st.com>,
+Cc: Christophe KERELLO <christophe.kerello@st.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 02/13] stm32mp1: support dynamic MTDPARTS
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Igor Grinberg <grinberg@compulab.co.il>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>,
+ Yaniv Levinsky <yaniv.levinsky@compulab.co.il>
+Subject: [Uboot-stm32] [PATCH 03/13] env: ext4: Allow overriding interface,
+	device and partition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,139 +78,112 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This patch configure the default value for mtdids and mtparts
-dynamically according the presence of nor and nand in
-the board device tree
+For platform which can boot on different device, this allows
+to override interface, device and partition from board code.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-Signed-off-by: Christophe Kerello <christophe.kerello@st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- board/st/stm32mp1/stm32mp1.c | 85 ++++++++++++++++++++++++++++++++++++++++++++
- include/configs/stm32mp1.h   |  9 +++++
- 2 files changed, 94 insertions(+)
+ env/ext4.c | 34 +++++++++++++++++++++-------------
+ 1 file changed, 21 insertions(+), 13 deletions(-)
 
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 76917b0..360b0df 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -504,3 +504,88 @@ void board_quiesce_devices(void)
+diff --git a/env/ext4.c b/env/ext4.c
+index 388474a..9947381 100644
+--- a/env/ext4.c
++++ b/env/ext4.c
+@@ -30,6 +30,16 @@
+ #include <ext4fs.h>
+ #include <mmc.h>
+ 
++__weak const char *env_ext4_get_intf(void)
++{
++	return (const char *)CONFIG_ENV_EXT4_INTERFACE;
++}
++
++__weak const char *env_ext4_get_dev_part(void)
++{
++	return (const char *)CONFIG_ENV_EXT4_DEVICE_AND_PART;
++}
++
+ #ifdef CONFIG_CMD_SAVEENV
+ static int env_ext4_save(void)
  {
- 	setup_led(LEDST_OFF);
- }
-+
-+#ifdef CONFIG_SYS_MTDPARTS_RUNTIME
-+
-+#define MTDPARTS_LEN		256
-+#define MTDIDS_LEN		128
-+
-+/**
-+ * The mtdparts_nand0 and mtdparts_nor0 variable tends to be long.
-+ * If we need to access it before the env is relocated, then we need
-+ * to use our own stack buffer. gd->env_buf will be too small.
-+ *
-+ * @param buf temporary buffer pointer MTDPARTS_LEN long
-+ * @return mtdparts variable string, NULL if not found
-+ */
-+static const char *env_get_mtdparts(const char *str, char *buf)
-+{
-+	if (gd->flags & GD_FLG_ENV_READY)
-+		return env_get(str);
-+	if (env_get_f(str, buf, MTDPARTS_LEN) != -1)
-+		return buf;
-+
-+	return NULL;
-+}
-+
-+/**
-+ * update the variables "mtdids" and "mtdparts" with content of mtdparts_<dev>
-+ */
-+static void board_get_mtdparts(const char *dev,
-+			       char *mtdids,
-+			       char *mtdparts)
-+{
-+	char env_name[32] = "mtdparts_";
-+	char tmp_mtdparts[MTDPARTS_LEN];
-+	const char *tmp;
-+
-+	/* name of env variable to read = mtdparts_<dev> */
-+	strcat(env_name, dev);
-+	tmp = env_get_mtdparts(env_name, tmp_mtdparts);
-+	if (tmp) {
-+		/* mtdids: "<dev>=<dev>, ...." */
-+		if (mtdids[0] != '\0')
-+			strcat(mtdids, ",");
-+		strcat(mtdids, dev);
-+		strcat(mtdids, "=");
-+		strcat(mtdids, dev);
-+
-+		/* mtdparts: "mtdparts=<dev>:<mtdparts_<dev>>;..." */
-+		if (mtdparts[0] != '\0')
-+			strncat(mtdparts, ";", MTDPARTS_LEN);
-+		else
-+			strcat(mtdparts, "mtdparts=");
-+		strncat(mtdparts, dev, MTDPARTS_LEN);
-+		strncat(mtdparts, ":", MTDPARTS_LEN);
-+		strncat(mtdparts, tmp, MTDPARTS_LEN);
-+	}
-+}
-+
-+void board_mtdparts_default(const char **mtdids, const char **mtdparts)
-+{
-+	struct udevice *dev;
-+	static char parts[2 * MTDPARTS_LEN + 1];
-+	static char ids[MTDIDS_LEN + 1];
-+	static bool mtd_initialized;
-+
-+	if (mtd_initialized) {
-+		*mtdids = ids;
-+		*mtdparts = parts;
-+		return;
-+	}
-+
-+	memset(parts, 0, sizeof(parts));
-+	memset(ids, 0, sizeof(ids));
-+
-+	if (!uclass_get_device(UCLASS_MTD, 0, &dev))
-+		board_get_mtdparts("nand0", ids, parts);
-+
-+	if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev))
-+		board_get_mtdparts("nor0", ids, parts);
-+
-+	mtd_initialized = true;
-+	*mtdids = ids;
-+	*mtdparts = parts;
-+	debug("%s:mtdids=%s & mtdparts=%s\n", __func__, ids, parts);
-+}
-+#endif
-diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-index a28b8b3..254aad1 100644
---- a/include/configs/stm32mp1.h
-+++ b/include/configs/stm32mp1.h
-@@ -115,6 +115,14 @@
+@@ -38,13 +48,14 @@ static int env_ext4_save(void)
+ 	disk_partition_t info;
+ 	int dev, part;
+ 	int err;
++	const char *ifname = env_ext4_get_intf();
++	const char *dev_and_part = env_ext4_get_dev_part();
  
- #include <config_distro_bootcmd.h>
+ 	err = env_export(&env_new);
+ 	if (err)
+ 		return err;
  
-+#if defined(CONFIG_STM32_QSPI) || defined(CONFIG_NAND_STM32_FMC)
-+#define CONFIG_SYS_MTDPARTS_RUNTIME
-+#endif
-+
-+#define STM32MP_MTDPARTS \
-+	"mtdparts_nor0=256k(fsbl1),256k(fsbl2),2m(ssbl),-(nor_user)\0" \
-+	"mtdparts_nand0=2m(fsbl),2m(ssbl),-(UBI)\0"
-+
- /*
-  * memory layout for 32M uncompressed/compressed kernel,
-  * 1M fdt, 1M script, 1M pxe and 1M for splashimage
-@@ -130,6 +138,7 @@
- 	"fdt_high=0xffffffff\0" \
- 	"initrd_high=0xffffffff\0" \
- 	STM32MP_BOOTCMD \
-+	STM32MP_MTDPARTS \
- 	BOOTENV
+-	part = blk_get_device_part_str(CONFIG_ENV_EXT4_INTERFACE,
+-				       CONFIG_ENV_EXT4_DEVICE_AND_PART,
++	part = blk_get_device_part_str(ifname, dev_and_part,
+ 				       &dev_desc, &info, 1);
+ 	if (part < 0)
+ 		return 1;
+@@ -54,8 +65,7 @@ static int env_ext4_save(void)
  
- #endif /* ifndef CONFIG_SPL_BUILD */
+ 	if (!ext4fs_mount(info.size)) {
+ 		printf("\n** Unable to use %s %s for saveenv **\n",
+-		       CONFIG_ENV_EXT4_INTERFACE,
+-		       CONFIG_ENV_EXT4_DEVICE_AND_PART);
++		       ifname, dev_and_part);
+ 		return 1;
+ 	}
+ 
+@@ -65,8 +75,7 @@ static int env_ext4_save(void)
+ 
+ 	if (err == -1) {
+ 		printf("\n** Unable to write \"%s\" from %s%d:%d **\n",
+-			CONFIG_ENV_EXT4_FILE, CONFIG_ENV_EXT4_INTERFACE, dev,
+-			part);
++			CONFIG_ENV_EXT4_FILE, ifname, dev, part);
+ 		return 1;
+ 	}
+ 
+@@ -83,14 +92,15 @@ static int env_ext4_load(void)
+ 	int dev, part;
+ 	int err;
+ 	loff_t off;
++	const char *ifname = env_ext4_get_intf();
++	const char *dev_and_part = env_ext4_get_dev_part();
+ 
+ #ifdef CONFIG_MMC
+-	if (!strcmp(CONFIG_ENV_EXT4_INTERFACE, "mmc"))
++	if (!strcmp(ifname, "mmc"))
+ 		mmc_initialize(NULL);
+ #endif
+ 
+-	part = blk_get_device_part_str(CONFIG_ENV_EXT4_INTERFACE,
+-				       CONFIG_ENV_EXT4_DEVICE_AND_PART,
++	part = blk_get_device_part_str(ifname, dev_and_part,
+ 				       &dev_desc, &info, 1);
+ 	if (part < 0)
+ 		goto err_env_relocate;
+@@ -100,8 +110,7 @@ static int env_ext4_load(void)
+ 
+ 	if (!ext4fs_mount(info.size)) {
+ 		printf("\n** Unable to use %s %s for loading the env **\n",
+-		       CONFIG_ENV_EXT4_INTERFACE,
+-		       CONFIG_ENV_EXT4_DEVICE_AND_PART);
++		       ifname, dev_and_part);
+ 		goto err_env_relocate;
+ 	}
+ 
+@@ -111,8 +120,7 @@ static int env_ext4_load(void)
+ 
+ 	if (err == -1) {
+ 		printf("\n** Unable to read \"%s\" from %s%d:%d **\n",
+-			CONFIG_ENV_EXT4_FILE, CONFIG_ENV_EXT4_INTERFACE, dev,
+-			part);
++			CONFIG_ENV_EXT4_FILE, ifname, dev, part);
+ 		goto err_env_relocate;
+ 	}
+ 
 -- 
 1.9.1
 

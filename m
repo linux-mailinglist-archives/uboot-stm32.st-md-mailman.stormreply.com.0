@@ -2,73 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E8D01F8CA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 May 2019 18:40:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A9D41F971
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 May 2019 19:41:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5AD9AC05845
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 May 2019 16:40:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EC807C544EB
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 May 2019 17:41:56 +0000 (UTC)
+Received: from mail-it1-f181.google.com (mail-it1-f181.google.com
+ [209.85.166.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E4AF1C05844
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 170C9C349EC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 May 2019 16:40:08 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4FGVemK018772; Wed, 15 May 2019 18:40:01 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=GBZPdZUk0WP9U/rOoAmNcY61SYO17uzb1tT8jhiVqyk=;
- b=oZMOczu4dUx3trI8PX/ksRXpeACQF1tW86RFjgzfqFsIC2o531aRGcwgBg6/c0pvJjEE
- JxTY1Gu/h+0Yw0OTcTPf2ipyLZ5V9+tY9PETLYRmlCJgCI7XMfn7pMvtZgQ8AGELurTx
- kCbr46G290K8XsA8rSLwew/cK2Gv9nrzvoltd1XguYJ+U/7st2ihK4/5qWaZ1L1I46Qw
- kKVjPMSZTqGJSWBlXC+e4nuIcLBEgKKCqGUvf4uVGvanp2lcyX6UQryMf9WQRJ/oUzmD
- JpUGSj/ggE2WmJoKNDlZzscGGCA62S6tMXfrqGxs3+I2ylFqa8LVkcfMuTQCpW/054e5 ew== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2sg0an7mfj-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Wed, 15 May 2019 18:40:01 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7504931;
- Wed, 15 May 2019 16:40:00 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 59F5B2B95;
- Wed, 15 May 2019 16:40:00 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 15 May
- 2019 18:39:59 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1347.000; Wed, 15 May 2019 18:39:59 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, "Christophe
- KERELLO" <christophe.kerello@st.com>, Patrice CHOTARD
- <patrice.chotard@st.com>, "trini@konsulko.com" <trini@konsulko.com>
-Thread-Topic: [PATCH v2 3/3] arm: mach-stm32mp: Add newline to the MAC error
- message
-Thread-Index: AQHVALyrmKNmkUR6q02K8tTIN5npB6ZseAEA
-Date: Wed, 15 May 2019 16:39:59 +0000
-Message-ID: <defd044cb5f64aae825d1fff37e0b61e@SFHDAG6NODE3.st.com>
-References: <20190502075645.19901-1-manivannan.sadhasivam@linaro.org>
- <20190502075645.19901-4-manivannan.sadhasivam@linaro.org>
-In-Reply-To: <20190502075645.19901-4-manivannan.sadhasivam@linaro.org>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
+ Wed, 15 May 2019 17:41:55 +0000 (UTC)
+Received: by mail-it1-f181.google.com with SMTP id p18so6065828itm.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 15 May 2019 10:41:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=MUlsxVLVke/gH59duBiPq/+ypitrTOPVRY7HiTuCOWc=;
+ b=F45ub38zdzz4zdVzlhQC0F9tF/JZIw7ppKThN8WCjZAmm3CuzstCikRhNRGeFR+zH9
+ kGBE8j+oPXnodmcrXoJokBeqdL3LyovXVBTBiFB6m/DlXnQobqruEcAqw8kExm0LqBCu
+ WiYcjw4cRj6WVvRgA/PbcX5c1Q9UX1nbMqh1g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=MUlsxVLVke/gH59duBiPq/+ypitrTOPVRY7HiTuCOWc=;
+ b=qD8zmNX8U8jcPhoSpbP1kfGsm0LN0VFdUcX5e2fVRQ52fqR62fSTg5KqNVlN17Pu/u
+ YjDC74912JYemyMYTDO113cpbn2n15mHvB0RRlP5T7qwfelZJRn2rv/AmQxlBl2QfOnP
+ C/pXyWgWX7g8KPzUzZklSx9tJYhFrHhpf3DuOKPIxWY75tYyZb7MmXFVKYFayN9N1HmH
+ V+uOtmCdxHTqW6BrAl5D8n462wsB1iXBTdFYbE3AWntVgassr0cs2wRGSi9478zE9drG
+ c2DUsjdHjn2dwNabPGwMXA93VCVKvmB61rvd4jJuWzTuoUBlxlasQnX54/GoRiGMaFL2
+ GjYA==
+X-Gm-Message-State: APjAAAVuWTg9iJslObDMhosmfpUj88YapfrCiGn+IQP82rnuh8e+kFer
+ QeKHb57G4ckCzwCy8/KedtP9Pg==
+X-Google-Smtp-Source: APXvYqxd/l2qCFbjFQNiZJLxCwzcrSc3hIIPZjGZ0VoS0F7tMdO0pE7FPyzn1IuxYHcIY5vrr96ohA==
+X-Received: by 2002:a24:2489:: with SMTP id f131mr6393444ita.14.1557942113883; 
+ Wed, 15 May 2019 10:41:53 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-141-147.ec.res.rr.com.
+ [65.184.141.147])
+ by smtp.gmail.com with ESMTPSA id f20sm844473ioh.4.2019.05.15.10.41.52
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 15 May 2019 10:41:52 -0700 (PDT)
+Date: Wed, 15 May 2019 13:41:50 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@st.com>
+Message-ID: <20190515174150.GK22232@bill-the-cat>
+References: <13952811-6309-c39e-1251-8dcd2c15cdc6@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-05-15_11:, , signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 3/3] arm: mach-stm32mp: Add newline to
- the MAC error message
+In-Reply-To: <13952811-6309-c39e-1251-8dcd2c15cdc6@st.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Christophe KERELLO <christophe.kerello@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32]
+ =?utf-8?q?=5BU-Boot=5D=5BPULL=5D_u-boot-stm32_for_v?=
+ =?utf-8?b?MjAxOS4wN+KAiyAocm91bmQgMynigIs=?=
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,46 +71,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1326096112594233917=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Manivannan,
 
-> 
-> Without newline, the error message appears for non prgrammed OTP boards
-> looks messsy. Hence add it to look more clean.
-> 
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+--===============1326096112594233917==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="m1G908gh+QHqN0Gd"
+Content-Disposition: inline
 
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+--m1G908gh+QHqN0Gd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
+On Tue, May 14, 2019 at 02:59:07PM +0000, Patrice CHOTARD wrote:
 
+> Hi Tom
+>=20
+> Please find the pull request for STM32 round 3
+>=20
+> The following changes since commit a69120a0d7c8d4044cdaceea9eb03913ba4e49=
+c7:
+>=20
+>   Prepare v2019.07-rc1 (2019-04-29 21:54:04 -0400)
+>=20
+> are available in the git repository at:
+>=20
+>   https://github.com/pchotard/u-boot.git tags/u-boot-stm32-mcu-20190514
+>=20
+> for you to fetch changes up to 1aaac8e60042b1e132f84184cfd9aa0f1a4afdde:
+>=20
+>   configs: stm32f469-disco: Disable PINCTRL_FULL flag (2019-05-06
+> 11:15:16 +0200)
+>=20
 
-> ---
->  arch/arm/mach-stm32mp/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c index
-> 7b4431c9c75..e1a0a136809 100644
-> --- a/arch/arm/mach-stm32mp/cpu.c
-> +++ b/arch/arm/mach-stm32mp/cpu.c
-> @@ -481,7 +481,7 @@ static int setup_mac_address(void)
->  		enetaddr[i] = ((uint8_t *)&otp)[i];
-> 
->  	if (!is_valid_ethaddr(enetaddr)) {
-> -		pr_err("invalid MAC address in OTP %pM", enetaddr);
-> +		pr_err("invalid MAC address in OTP %pM\n", enetaddr);
->  		return -EINVAL;
->  	}
->  	pr_debug("OTP MAC address = %pM\n", enetaddr);
-> --
-> 2.17.1
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--m1G908gh+QHqN0Gd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJc3E9eAAoJEIf59jXTHXZSICMP/0VpstNiOCkZCQ/UZ7iXmrcw
+/4BCR1I/HfKoQhVnsQBeMEPBMg6WBzmRsSWZAQJ/tM7BGZ7P/KZaYBvXQtWrpx7h
+qNv24bnkHHcf3aC3PUr9QfDoJpeLu8s8PQwvCP8cMx2xhlTR6gF/oGfBp4mcC6p2
+W0TSEvlIGT+LAdNBz6iREcX7+n8gOFtGWHflqK7MYW3OiW0gc5CY4PsWu5DyPm8t
+tlWjuIOLNgar/xZlf2VKAlXPZom5xC2vl0Xnsoz2qwRmRmP23VlNmuGhqbwk3TTK
+eyN3EPkAjxDrajJTigKcyOu8e0uujg9AR5kr9I3AglBH5ynsfb4hrzYEzftWHTcp
+FsqMdWLsuF28xi0MEQrVt+pncS78Cb/kqwtdP6yJXqP9Tg6HCX2h2o+y/mmY//p7
+oqbj5/cWSphpQ+Ogb6vz/WYM/E5CFToUn7TaNRoU2zVhL3BT1YHCGjmBJPtauXd9
+ll7ogvpLuAWcq/3KVzuaevhw/Xs97odkXjwRK6qB1QWhuw1hnPqRb6MgwbTprB81
+wnQtF/PYjhnUZ1w36BFMO3YVg7P/gS7jOyt8UcNIvfWyl59X7JTyr7LXAB0LjAqk
+bal4N102bWvwP7LL+qTNGukio959J++7cxJmaUfhlv/e9z31l4I4tmubBtHtqMYg
+n9jFUTsOwbkdbM9X09dd
+=LgI/
+-----END PGP SIGNATURE-----
+
+--m1G908gh+QHqN0Gd--
+
+--===============1326096112594233917==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1326096112594233917==--

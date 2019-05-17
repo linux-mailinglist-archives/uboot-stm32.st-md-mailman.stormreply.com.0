@@ -2,63 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B040218E3
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 May 2019 15:09:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5485218DE
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 May 2019 15:08:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 19294C54B38
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 May 2019 13:09:02 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75883C54512
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 May 2019 13:08:54 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BD587C05842
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 28A63C29037
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 May 2019 13:09:00 +0000 (UTC)
+ Fri, 17 May 2019 13:08:53 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4HD72oS003558; Fri, 17 May 2019 15:08:51 +0200
+ x4HD72oT003558; Fri, 17 May 2019 15:08:52 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=2G8ZvLMtijOhH6k+pqNNmPDOh+n2G/cerDKxDnZftp4=;
- b=sk4A7HmQskzo6RL4z0QWOkdgU7gTmh+az5k7joenE0YEPV4kTDJ3Axt1hi/HT5bnPJ3+
- rSD2t79aqMJF6AHhIg6l29IB/If/qXUEpESYjY1vgwcqdTfB9HsfUkfAodmMo0XaL3Pm
- zCVJDoaXs09SeB7O/Vno8YpCk1bgN2sddwekPLIjBkQZIxyiV3fqQh4sZH+v10mAkfCg
- s+/fPS2GMNoz5WwWnz4M4iFM6rE7EXWFGioIA1kdhgQ+soL4xj5PShSpMp9Qut+rjrUE
- JmiM/wBPswpfc96/MJT+dxT7nRIIIM70fnjjN2c1OYqJ/4vsA9pnEml4SLKnLjIzHiS2 8Q== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=4QOdnlbLkjr9tmWCrGoA2zdYGZ47aOch85tzJV8DL9E=;
+ b=bLoCc7lhmDsSIt1Pc5ldwNmw0L1N3S2qKe6oEDLuDKB3+t55xqa8wh1oZQdULxCrwJbl
+ Rh6dcGgOVAW99KEPC3VmlhLOseyLzVMqBbdxgzAVGJC8XYfKsSBhQtXgqTMRGSp0/DR9
+ tr6JWQEh6fIqrbo+ngd5xPHD+niDiO5fo/sG2ejQNom1sBXENG0wGPL9NPZmBBbZ5Bb1
+ ZgsFoStpP3ylflifZm/yX0zoTgQSMiu5pHkJrXhoyliS8Q3YvrtLx3SjiYyy5wnYK3aW
+ 5y0mjrUEv+G25v6C29wT8l1hs4wKqX9j3qCxko6ymWiIatL3YkMcWbiXGj1lhbj/qHBz Mw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2sdkv0dv36-1
+ by mx07-00178001.pphosted.com with ESMTP id 2sdkv0dv38-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 17 May 2019 15:08:51 +0200
+ Fri, 17 May 2019 15:08:52 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F3ED93A;
- Fri, 17 May 2019 13:08:49 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D17332B19;
- Fri, 17 May 2019 13:08:49 +0000 (GMT)
-Received: from SAFEX1HUBCAS24.st.com (10.75.90.95) by Safex1hubcas22.st.com
- (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 17 May
- 2019 15:08:49 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8430431;
+ Fri, 17 May 2019 13:08:51 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7026E2B19;
+ Fri, 17 May 2019 13:08:51 +0000 (GMT)
+Received: from SAFEX1HUBCAS24.st.com (10.75.90.95) by SAFEX1HUBCAS23.st.com
+ (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 17 May
+ 2019 15:08:51 +0200
 Received: from localhost (10.201.22.222) by webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 17 May 2019 15:08:49
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 17 May 2019 15:08:50
  +0200
 From: Christophe Roullier <christophe.roullier@st.com>
 To: Christophe Roullier <christophe.roullier@st.com>, <u-boot@lists.denx.de>
-Date: Fri, 17 May 2019 15:08:41 +0200
-Message-ID: <20190517130847.13144-1-christophe.roullier@st.com>
+Date: Fri, 17 May 2019 15:08:42 +0200
+Message-ID: <20190517130847.13144-2-christophe.roullier@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20190517130847.13144-1-christophe.roullier@st.com>
+References: <20190517130847.13144-1-christophe.roullier@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.201.22.222]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-17_07:, , signatures=0
-Cc: Tom Rini <trini@konsulko.com>,
- Christophe KERELLO <christophe.kerello@st.com>, Albert
- Aribaud <albert.u.boot@aribaud.net>, Patrice CHOTARD <patrice.chotard@st.com>,
+Cc: Christophe KERELLO <christophe.kerello@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Vikas MANOCHA <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH v2 0/6] - Add Ethernet support for stm32mpu
+Subject: [Uboot-stm32] [PATCH v2 1/6] stm32mp1: clk: use the correct
+	identifier for ethck
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,34 +77,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-       Support all PHY config:
-         PHY_MODE (MII,GMII, RMII, RGMII)
-         Phy wo crystal (25Mhz and 50 Mhz), No 125Mhz from PHY config
+From: Patrick Delaunay <patrick.delaunay@st.com>
 
-Changes in v2:
--remark from Joe Hershberger to replace "int interface" with "phy_interface_t interface"
- and manage return values "-1", "0" with PHY_INTERFACE_MODE_NONE and PHY_INTERFACE_MODE_MII
+ETHCK_K is the identifier the kernel clock for ETH in kernel
+binding, selected by ETHKSELR / gated by ETHCKEN = BIT(7).
+U-Boot driver need to use the same identifier, so change ETHCK
+to ETHCK_K.
 
-Christophe Roullier (5):
-  board: stm32mp1: Add board_interface_eth_init
-  net: dwc_eth_qos: add Ethernet stm32mp1 support
-  ARM: dts: stm32: Add Ethernet support on stm32mp1
-  stm32mp1: Add Ethernet support for stm32mp1 board
-  configs: stm32mp15: Enable Ethernet feature
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
+---
 
-Patrick Delaunay (1):
-  stm32mp1: clk: use the correct identifier for ethck
+Changes in v2: None
 
- arch/arm/dts/stm32mp157-pinctrl.dtsi |   9 +-
- arch/arm/dts/stm32mp157c-ev1.dts     |   2 +-
- arch/arm/dts/stm32mp157c.dtsi        |  16 +-
- board/st/stm32mp1/stm32mp1.c         |  68 ++++-
- configs/stm32mp15_basic_defconfig    |   2 +
- drivers/clk/clk_stm32mp1.c           |   2 +-
- drivers/net/dwc_eth_qos.c            | 435 +++++++++++++++++++++++----
- include/configs/stm32mp1.h           |  12 +-
- 8 files changed, 480 insertions(+), 66 deletions(-)
+ drivers/clk/clk_stm32mp1.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
+index 24859fd054e..422176f3dde 100644
+--- a/drivers/clk/clk_stm32mp1.c
++++ b/drivers/clk/clk_stm32mp1.c
+@@ -555,7 +555,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
+ 
+ 	STM32MP1_CLK_SET_CLR(RCC_MP_AHB5ENSETR, 0, GPIOZ, _UNKNOWN_SEL),
+ 
+-	STM32MP1_CLK_SET_CLR(RCC_MP_AHB6ENSETR, 7, ETHCK, _ETH_SEL),
++	STM32MP1_CLK_SET_CLR(RCC_MP_AHB6ENSETR, 7, ETHCK_K, _ETH_SEL),
+ 	STM32MP1_CLK_SET_CLR(RCC_MP_AHB6ENSETR, 8, ETHTX, _UNKNOWN_SEL),
+ 	STM32MP1_CLK_SET_CLR(RCC_MP_AHB6ENSETR, 9, ETHRX, _UNKNOWN_SEL),
+ 	STM32MP1_CLK_SET_CLR_F(RCC_MP_AHB6ENSETR, 10, ETHMAC, _ACLK),
 -- 
 2.17.1
 

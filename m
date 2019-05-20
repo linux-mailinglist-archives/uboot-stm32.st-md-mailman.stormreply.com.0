@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE3A8236A6
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 May 2019 15:00:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2FF0236A7
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 May 2019 15:00:28 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7721FC0D2AB
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 May 2019 13:00:27 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 818F2C0D2AE
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 May 2019 13:00:28 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0F9B9C0D2A8
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E154BC0D2A8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Mon, 20 May 2019 13:00:26 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4KCfAvn021244; Mon, 20 May 2019 15:00:22 +0200
+ x4KCfAvo021244; Mon, 20 May 2019 15:00:23 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=o9FDPbaTKU7ObZVpXyYjfsSZwShnBgjQEKWUu5ema7Q=;
- b=UtY9mZRmLNPzNk0JKYrG50eBnbZGvopWv8I6L8OWxycjifymWIV0MmHoGNjhzQPeyaZZ
- yV1n/L3D/2C58dzbC/KFRnHxiDQEwjVtAe2uUGz1JN9kGKe/6LaL2YLS/AUFCQclJohy
- Ce8mUZqzQM3gbSUXCb9KTVrEKSCjESVH6DbKJXkVjMu1Dz0cqWnX23rNczDVx01Vfk04
- t/HMV0NIlTQjhH4Ty4Ly5V4xPXphY4eZvVe3EKfmVYPaUco/mC9KeFHeku8B8MxeS+/5
- s+ISTe8e68DDGNEwPyBWxbx6A3ZdKUeFTGdiyaqQ5zB774HBA3C2zqV5zWsQrYzOHF/t mg== 
+ bh=v6hRD2+C2T1zMW+UuD8ESsG23nSegeO+FLFEL9n0res=;
+ b=XxwpM8W/E/Jp0QSoX/B/kmChzE58baj2g7s3djACM/AUk0fCEVfLozY37q+ANtiXSJLr
+ 6PiQtJrvUJQi3QERdGXEkDyZ9k9vzHcprS94HbvOQZZXvY3e42qW6Ya0SDFF/bGiwBcC
+ izvHJcCXlT3uqi1iHMsXq0AygfWFc66/IWUkCeyhFa95Ez7ZDUeS3nP5CrQR1YRq0c9V
+ VI3skRLetGYPi0JTTDKNhaqtniuv7dC4+pZtE2yz7l4VuDgfLlKZ6cTK+oIXkYHiRnOx
+ Z0M/ZFkaLy+D1l2HTeDYRjHV1RVZXB1ge5+11z2lCXTmSsPUg2dvt/NbCwM+3VNnAvI4 uw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2sj7ttukvw-1
+ by mx07-00178001.pphosted.com with ESMTP id 2sj7ttukw2-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Mon, 20 May 2019 15:00:22 +0200
+ Mon, 20 May 2019 15:00:23 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7DEA631;
- Mon, 20 May 2019 13:00:21 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5CFA828C2;
- Mon, 20 May 2019 13:00:21 +0000 (GMT)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 20 May
- 2019 15:00:21 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8CE7431;
+ Mon, 20 May 2019 13:00:22 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas21.st.com [10.75.90.44])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7063B28B3;
+ Mon, 20 May 2019 13:00:22 +0000 (GMT)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS21.st.com
+ (10.75.90.44) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 20 May
+ 2019 15:00:22 +0200
 Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 20 May 2019 15:00:20
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 20 May 2019 15:00:21
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 20 May 2019 15:00:05 +0200
-Message-ID: <1558357207-7345-7-git-send-email-patrick.delaunay@st.com>
+Date: Mon, 20 May 2019 15:00:06 +0200
+Message-ID: <1558357207-7345-8-git-send-email-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
 References: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
@@ -54,13 +54,11 @@ MIME-Version: 1.0
 X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-20_06:, , signatures=0
-Cc: Eugeniu Rosca <roscaeugeniu@gmail.com>, Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH v2 6/8] test: check u-boot properties in SPL
-	device tree
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH v2 7/8] fdt: Allow indicating a node is for
+	U-Boot proper only
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,138 +75,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a test to check the management of the u-boot relocation properties
-(fdtgrep result) for platdata generation or device tree SPL generation:
-- 'dm-pre-proper' and 'dm-tpl' not included in SPL
-- 'dm-pre-reloc' and 'dm-spl' included in SPL
+This add missing parts for previous commit 06f94461a9f4
+("fdt: Allow indicating a node is for U-Boot proper only")
 
-This patch also executes the version test (test_000_version) to check
-the correct start of the U-Boot after SPL execution.
+At present it is not possible to specify that a node should be used before
+relocation (in U-Boot proper) without it also ending up in SPL and TPL
+device trees. Add a new "u-boot,dm-pre-proper" boolean property for this.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- add some test for SPL with device tree
+Changes in v2: None
 
- arch/sandbox/dts/test.dts        | 18 ++++++++++++++
- test/py/tests/test_ofplatdata.py | 53 ++++++++++++++++++++++++++++++++++++++++
- test/run                         |  5 ++++
- 3 files changed, 76 insertions(+)
+ drivers/core/util.c          | 2 ++
+ drivers/video/video-uclass.c | 4 +++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 1ac86d7..2d5bea3 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -621,6 +621,24 @@
- 		compatible = "sandbox,spl-test.2";
- 	};
+diff --git a/drivers/core/util.c b/drivers/core/util.c
+index 96e47dc..60b939a 100644
+--- a/drivers/core/util.c
++++ b/drivers/core/util.c
+@@ -42,6 +42,8 @@ bool dm_ofnode_pre_reloc(ofnode node)
+ #else
+ 	if (ofnode_read_bool(node, "u-boot,dm-pre-reloc"))
+ 		return true;
++	if (ofnode_read_bool(node, "u-boot,dm-pre-proper"))
++		return true;
  
-+	spl-test5 {
-+		u-boot,dm-tpl;
-+		compatible = "sandbox,spl-test";
-+		stringarray = "tpl";
-+	};
-+
-+	spl-test6 {
-+		u-boot,dm-pre-proper;
-+		compatible = "sandbox,spl-test";
-+		stringarray = "pre-proper";
-+	};
-+
-+	spl-test7 {
-+		u-boot,dm-spl;
-+		compatible = "sandbox,spl-test";
-+		stringarray = "spl";
-+	};
-+
- 	syscon0: syscon@0 {
- 		compatible = "sandbox,syscon0";
- 		reg = <0x10 16>;
-diff --git a/test/py/tests/test_ofplatdata.py b/test/py/tests/test_ofplatdata.py
-index 98103ee..bdabc5a 100644
---- a/test/py/tests/test_ofplatdata.py
-+++ b/test/py/tests/test_ofplatdata.py
-@@ -31,6 +31,50 @@ intarray 0 0 0 0
- longbytearray 00 00 00 00 00 00 00 00 00
- string <NULL>
- stringarray "one" "" ""
-+of-platdata probe:
-+bool 0
-+byte 00
-+bytearray 00 00 00
-+int 0
-+intarray 0 0 0 0
-+longbytearray 00 00 00 00 00 00 00 00 00
-+string <NULL>
-+stringarray "spl" "" ""
-+'''
-+
-+OF_EMBEDDED_OUTPUT = '''
-+	spl-test {
-+		compatible = "sandbox,spl-test";
-+		boolval;
-+		intval = <0x00000001>;
-+		intarray = <0x00000002 0x00000003 0x00000004>;
-+		byteval = [05];
-+		bytearray = [06];
-+		longbytearray = [09 0a 0b 0c 0d 0e 0f 10 11];
-+		stringval = "message";
-+		stringarray = "multi-word", "message";
-+	};
-+	spl-test2 {
-+		compatible = "sandbox,spl-test";
-+		intval = <0x00000003>;
-+		intarray = <0x00000005>;
-+		byteval = [08];
-+		bytearray = [01 23 34];
-+		longbytearray = <0x090a0b0c>;
-+		stringval = "message2";
-+		stringarray = "another", "multi-word", "message";
-+	};
-+	spl-test3 {
-+		compatible = "sandbox,spl-test";
-+		stringarray = "one";
-+	};
-+	spl-test4 {
-+		compatible = "sandbox,spl-test.2";
-+	};
-+	spl-test7 {
-+		compatible = "sandbox,spl-test";
-+		stringarray = "spl";
-+	};
- '''
- 
- @pytest.mark.buildconfigspec('spl_of_platdata')
-@@ -40,3 +84,12 @@ def test_ofplatdata(u_boot_console):
-     cons.restart_uboot_with_flags(['--show_of_platdata'])
-     output = cons.get_spawn_output().replace('\r', '')
-     assert OF_PLATDATA_OUTPUT in output
-+
-+@pytest.mark.buildconfigspec('of_embed')
-+@pytest.mark.buildconfigspec('spl_of_libfdt')
-+def test_ofembed(u_boot_console):
-+    """Test that device-tree can be generated and used in sandbox spl"""
-+    cons = u_boot_console
-+    cons.restart_uboot_with_flags(['--show_of_embedded'])
-+    output = cons.get_spawn_output().replace('\r', '')
-+    assert OF_EMBEDDED_OUTPUT in output
-diff --git a/test/run b/test/run
-index 5aceed7..4702c4d 100755
---- a/test/run
-+++ b/test/run
-@@ -26,6 +26,11 @@ run_test "sandbox_spl" ./test/py/test.py --bd sandbox_spl --build \
- 	--device-tree test \
- 	-k 'test_000_version or test_ofplatdata or test_handoff'
- 
-+# Run tests which require sandbox_spl_dtb , with test.dtb device tree
-+run_test "sandbox_spl_dtb" ./test/py/test.py --bd sandbox_spl_dtb --build \
-+	--device-tree test \
-+	-k 'test_000_version or test_ofplatdata'
-+
- # Run tests for the flat-device-tree version of sandbox. This is a special
- # build which does not enable CONFIG_OF_LIVE for the live device tree, so we can
- # check that functionality is the same. The standard sandbox build (above) uses
+ 	/*
+ 	 * In regular builds individual spl and tpl handling both
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index b19bfb4..d4071c0 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -291,7 +291,9 @@ static int video_post_bind(struct udevice *dev)
+ 		return 0;
+ 	size = alloc_fb(dev, &addr);
+ 	if (addr < gd->video_bottom) {
+-		/* Device tree node may need the 'u-boot,dm-pre-reloc' tag */
++		/* Device tree node may need the 'u-boot,dm-pre-reloc' or
++		 * 'u-boot,dm-pre-proper' tag
++		 */
+ 		printf("Video device '%s' cannot allocate frame buffer memory -ensure the device is set up before relocation\n",
+ 		       dev->name);
+ 		return -ENOSPC;
 -- 
 2.7.4
 

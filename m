@@ -2,66 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 015842567C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 19:19:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1283D2579A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 20:33:01 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5483C35E15
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 17:19:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F3995C6333C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 18:32:59 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D8B4DC35E0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 31DACC3F931
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 May 2019 17:19:37 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4LHHf3F023014; Tue, 21 May 2019 19:19:31 +0200
+ Tue, 21 May 2019 18:32:59 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x4LIVW6K013561; Tue, 21 May 2019 20:32:53 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=xdW3mP4BQI4TcJO0T5IFPJX79AdMuh7JmrFnKlWlNzA=;
- b=ntaSIgdvTON9yFWxrR4klwzqm1ELjqU6dzLOQxD4bQiu0Qf61B0tPClqf3VikgnCsvMD
- +8Po5t4qjqtDI2n/gzKqr6GwsMYH2kxISleEd4sqT/xdha2dhZZ8s6IlNgrTjVDl+NOv
- kad0yWyKOyzaH/JTAQ2FyxjJQ1L6MHMaJp/UOdSiyQokFYoZsVZ4Qw2t9SYvt28VU+ID
- PAeuoHXw1Q2Sjvde2I0EiUuUFLbLAByOnUZDQXfVARLWUK9t7aEbnzR3k3sut3fwps4z
- lwZzDppDSkHGq4xBU2MlUT3tECEL/qaCXUlOwgpcQL4iML1aCp1N9k2y/ENZHoazLbU2 Qw== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=Jc0hychjd4C3nhnOjTaxmgpPmBZaWuiUjeeA+U2xTv8=;
+ b=JVtjSFyLhxNVdA5Q5N4dwEPkJZ5ytxDhVo+279i28rPrcLVNs9E4ECgWWkSHod1ApPb/
+ //pzOUcehuOX5tl4ZBn4aSOyvust5plNMXLFEeUxpSNKoiwwiH4z9gGabgkPtiqScnzU
+ JDcF0mQ51T97PDfxOOkXhdM0nmWqhOs0XB0ySmwcRNsc+qeNNn0+BVuQ2P9YeJDbYSN2
+ SCDBRWzcuKxC78G2QjwawzL7HrzB/W1Pl6PcV4vpp2is4AjK7IIQzy4Du502AxAMEfjw
+ yeQrZUaRp6ZAJZkWDjuyF63iFhODXHbofyurxmbGw0P8OuNrGWVB0R2E0MRuSdvkRogz MA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2sj8xgaxxj-1
+ by mx07-00178001.pphosted.com with ESMTP id 2sj7h0udny-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 21 May 2019 19:19:31 +0200
+ Tue, 21 May 2019 20:32:53 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4E5FE31;
- Tue, 21 May 2019 17:19:31 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 331A44F13;
- Tue, 21 May 2019 17:19:31 +0000 (GMT)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 21 May
- 2019 19:19:31 +0200
-Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 21 May 2019 19:19:30
- +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 21 May 2019 19:19:13 +0200
-Message-ID: <1558459153-14104-4-git-send-email-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1558459153-14104-1-git-send-email-patrick.delaunay@st.com>
-References: <1558459153-14104-1-git-send-email-patrick.delaunay@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 116E331;
+ Tue, 21 May 2019 18:32:51 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D722150D3;
+ Tue, 21 May 2019 18:32:50 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 21 May
+ 2019 20:32:50 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1347.000; Tue, 21 May 2019 20:32:50 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Stephen Warren <swarren@wwwdotorg.org>
+Thread-Topic: [U-Boot] [PATCH v2 4/8] test: py: add option to select device
+ tree used during compilation
+Thread-Index: AQHVDwv62c4uksFpcE+F5gXOyvf9b6Z1ovQAgAAxqkA=
+Date: Tue, 21 May 2019 18:32:50 +0000
+Message-ID: <175631bffa4b40f38234fd328dcdc1a4@SFHDAG6NODE3.st.com>
+References: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
+ <1558357207-7345-5-git-send-email-patrick.delaunay@st.com>
+ <ac06f0cd-27cf-5878-f8f6-b2bcc5570e05@wwwdotorg.org>
+In-Reply-To: <ac06f0cd-27cf-5878-f8f6-b2bcc5570e05@wwwdotorg.org>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.48]
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-05-21_04:, , signatures=0
-Cc: Tien Fong Chee <tien.fong.chee@intel.com>, Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>, Chris Packham <judge.packham@gmail.com>
-Subject: [Uboot-stm32] [PATCH v3 3/3] dm: doc: add documentation for
-	pre-reloc properties in SPL and TPL
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, Igor Opaniuk <igor.opaniuk@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2 4/8] test: py: add option to
+ select device tree used during compilation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,130 +85,195 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add documentation for the pre-reloc property in SPL and TPL device-tree:
-- u-boot,dm-pre-proper
-- u-boot,dm-pre-reloc
-- u-boot,dm-spl
-- u-boot,dm-tpl
+Hi Stephen,
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+For information after the remarksSimon's  remark, 
+I simplify the test, so this part is no more needed
+See http://patchwork.ozlabs.org/patch/1102938/
 
-Changes in v3:
-- rebase on u-boot-dm/sandbox-working
+But I will answer with my status and my tests done on the python code.
 
-Changes in v2:
-- rebase on master
+> 
+> On 5/20/19 7:00 AM, Patrick Delaunay wrote:
+> > Only used for spl compilation which include the device tree (with
+> > platdata or embedded device tree).
+> > For U-boot, test use config.dtb, by default :
+> >     "build_dir + '/arch/sandbox/dts/test.dtb'"
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
+> > I need to force o_dt = 'all' to avoid make error:
+> >
+> > make: *** empty string invalid as file name.  Stop.
+> >
+> > But, I don't sure that it is the better solution for pytest.
+> 
+> This feels a bit odd. What board are you compiling for? I would expect the same
+> compilation commands to "just work" for all boards, and would initially claim that if
+> they don't, it's a bug in the makefiles that should be fixed there.
 
- doc/README.SPL              | 16 ++++++++++++++++
- doc/README.TPL              |  4 ++++
- doc/driver-model/README.txt |  4 ++++
- include/dm/ofnode.h         |  6 ++++--
- include/dm/util.h           |  6 ++++--
- 5 files changed, 32 insertions(+), 4 deletions(-)
+Yes, it is strange.
 
-diff --git a/doc/README.SPL b/doc/README.SPL
-index 7a30fef..6eed83f 100644
---- a/doc/README.SPL
-+++ b/doc/README.SPL
-@@ -66,6 +66,22 @@ CONFIG_SPL_SPI_LOAD (drivers/mtd/spi/spi_spl_load.o)
- CONFIG_SPL_RAM_DEVICE (common/spl/spl.c)
- CONFIG_SPL_WATCHDOG_SUPPORT (drivers/watchdog/libwatchdog.o)
- 
-+Device tree
-+-----------
-+The U-Boot device tree is filtered by the fdtgrep tools during the build
-+process to generate a much smaller device tree used in SPL (spl/u-boot-spl.dtb)
-+with:
-+- the mandatory nodes (/alias, /chosen, /config)
-+- the nodes with one pre-relocation property:
-+  'u-boot,dm-pre-reloc' or 'u-boot,dm-spl'
-+
-+ftgrep is also used to remove:
-+- the properties defined in CONFIG_OF_SPL_REMOVE_PROPS
-+- all the pre-relocation properties
-+  ('u-boot,dm-pre-reloc', 'u-boot,dm-spl' and 'u-boot,dm-tpl')
-+
-+All the nodes remaining in the SPL devicetree are bound
-+(see driver-model/README.txt).
- 
- Debugging
- ---------
-diff --git a/doc/README.TPL b/doc/README.TPL
-index 980debe..c94129f 100644
---- a/doc/README.TPL
-+++ b/doc/README.TPL
-@@ -34,6 +34,10 @@ determine which SPL options to choose based on whether CONFIG_TPL_BUILD
- is set. Source files can be compiled for TPL with options choosed in the
- board config file.
- 
-+TPL use a small device tree (u-boot-tpl.dtb), containing only the nodes with
-+the pre-relocation properties: 'u-boot,dm-pre-reloc' and 'u-boot,dm-tpl'
-+(see README.SPL for details).
-+
- For example:
- 
- spl/Makefile:
-diff --git a/doc/driver-model/README.txt b/doc/driver-model/README.txt
-index 07b120d..532a771 100644
---- a/doc/driver-model/README.txt
-+++ b/doc/driver-model/README.txt
-@@ -849,6 +849,10 @@ in the device tree node. For U-Boot proper you can use 'u-boot,dm-pre-proper'
- which means that it will be processed (and a driver bound) in U-Boot proper
- prior to relocation, but will not be available in SPL or TPL.
- 
-+To reduce the size of SPL and TPL, only the nodes with pre-relocation properties
-+('u-boot,dm-pre-reloc', 'u-boot,dm-spl' or 'u-boot,dm-tpl') are keept in their
-+device trees (see README.SPL for details); the remaining nodes are always bound.
-+
- Then post relocation we throw that away and re-init driver model again.
- For drivers which require some sort of continuity between pre- and
- post-relocation devices, we can provide access to the pre-relocation
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index d206ee2..b45da5e 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -662,12 +662,14 @@ int ofnode_read_simple_size_cells(ofnode node);
-  * After relocation and jumping into the real U-Boot binary it is possible to
-  * determine if a node was bound in one of SPL/TPL stages.
-  *
-- * There are 3 settings currently in use
-- * -
-+ * There are 4 settings currently in use
-+ * - u-boot,dm-pre-proper: U-Boot proper pre-relocation only
-  * - u-boot,dm-pre-reloc: legacy and indicates any of TPL or SPL
-  *   Existing platforms only use it to indicate nodes needed in
-  *   SPL. Should probably be replaced by u-boot,dm-spl for
-  *   new platforms.
-+ * - u-boot,dm-spl: SPL and U-Boot pre-relocation
-+ * - u-boot,dm-tpl: TPL and U-Boot pre-relocation
-  *
-  * @node: node to check
-  * @return true if node is needed in SPL/TL, false otherwise
-diff --git a/include/dm/util.h b/include/dm/util.h
-index 60d3b93..348c2ac 100644
---- a/include/dm/util.h
-+++ b/include/dm/util.h
-@@ -52,12 +52,14 @@ static inline void dm_dump_devres(void)
-  * it is possible to determine if a node was bound in one of
-  * SPL/TPL stages.
-  *
-- * There are 3 settings currently in use
-- * -
-+ * There are 4 settings currently in use
-+ * - u-boot,dm-pre-proper: U-Boot proper pre-relocation only
-  * - u-boot,dm-pre-reloc: legacy and indicates any of TPL or SPL
-  *   Existing platforms only use it to indicate nodes needed in
-  *   SPL. Should probably be replaced by u-boot,dm-spl for
-  *   existing platforms.
-+ * - u-boot,dm-spl: SPL and U-Boot pre-relocation
-+ * - u-boot,dm-tpl: TPL and U-Boot pre-relocation
-  * @node: of node
-  *
-  * Returns true if node is needed in SPL/TL, false otherwise.
--- 
-2.7.4
+When I compile the board I have not the problem, I have issue only when I use pytest.
+
+For example:
+
+./test/py/test.py --bd sandbox_spl --build --device-tree sandbox -k 'test_000_version'
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox_spl -s sandbox_spl_defconfig
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox_spl DEVICE_TREE=sandbox -s -j8
+
+=> it tis OK
+
+./test/py/test.py --bd sandbox --build  -k 'test_000_version'
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox -s sandbox_defconfig
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox all -s -j8
+
+=> it is OK
+
+But if I use =
+
+        if build_dir != source_dir:
+            o_opt = 'O=%s' % build_dir
+        else:
+            o_opt = 'all'
+
+        if device_tree:
+            o_dt = 'DEVICE_TREE=%s' % device_tree
+        else:
+            o_dt = ''
+
+Same result for the first command : 
+	./test/py/test.py --bd sandbox --build  -k 'test_000_version'
+	=> it is OK
+
+But the second command I have got the next error:
+
+./test/py/test.py --bd sandbox --build  -k 'test_000_version'
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox -s sandbox_defconfig
++make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox  -s -j8
+make: *** empty string invalid as file name.  Stop.
+Exit code: 2
+INTERNALERROR> Traceback (most recent call last):
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/main.py", line 86, in wrap_session
+INTERNALERROR>     config._do_configure()
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/config.py", line 830, in _do_configure
+INTERNALERROR>     self.hook.pytest_configure.call_historic(kwargs=dict(config=self))
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/vendored_packages/pluggy.py", line 729, in call_historic
+INTERNALERROR>     self._hookexec(self, self._nonwrappers + self._wrappers, kwargs)
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/vendored_packages/pluggy.py", line 338, in _hookexec
+INTERNALERROR>     return self._inner_hookexec(hook, methods, kwargs)
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/vendored_packages/pluggy.py", line 333, in <lambda>
+INTERNALERROR>     _MultiCall(methods, kwargs, hook.spec_opts).execute()
+INTERNALERROR>   File "/usr/lib/python2.7/dist-packages/_pytest/vendored_packages/pluggy.py", line 596, in execute
+INTERNALERROR>     res = hook_impl.function(*args)
+INTERNALERROR>   File "/local/home/frq07632/views/u-boot/u-boot/test/py/conftest.py", line 148, in pytest_configure
+INTERNALERROR>     runner.run(cmd, cwd=source_dir)
+INTERNALERROR>   File "/local/home/frq07632/views/u-boot/u-boot/test/py/multiplexed_log.py", line 173, in run
+INTERNALERROR>     raise exception
+INTERNALERROR> Exception: Exit code: 2
+
+
+Moreover when I execute the command manually (without python), the compilation is accepted.... 
+
+$> make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox -s sandbox_defconfig
+$> make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox  -s -j8
+
+
+I also try: 
+
+        options = []
+        if build_dir != source_dir:
+            options.append('O=%s ' % build_dir)
+        if device_tree:
+            options.append('DEVICE_TREE=%s ' % device_tree)
+        o_opt = ' '.join(options)
+
+        cmds = (
+            ['make', o_opt, '-s', board_type + '_defconfig'],
+            ['make', o_opt, '-s', '-j8'],
+        )
+
+
+Then the o_opt is correctly build but the DEVICE_TREE option is not used when the build is requested by python(it is done manually)
+
+make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox_spl  DEVICE_TREE=bad  -s -j8
+
+Device Tree Source is not correctly specified.
+Please define 'CONFIG_DEFAULT_DEVICE_TREE'
+or build with 'DEVICE_TREE=<device_tree>' argument
+
+./test/py/test.py --bd sandbox_spl --build --device-tree bad -k 'test_000_version'
+
+=> no error !
+
+> > diff --git a/test/py/conftest.py b/test/py/conftest.py
+> 
+> > +        if device_tree:
+> > +            o_dt = 'DEVICE_TREE=%s' % device_tree
+> > +        else:
+> > +            o_dt = 'all'
+> 
+> You might want to make o_dt be a list that's either empty or contains one string.
+> Then ...
+> 
+> >           cmds = (
+> >               ['make', o_opt, '-s', board_type + '_defconfig'],
+> > -            ['make', o_opt, '-s', '-j8'],
+> > +            ['make', o_opt, o_dt, '-s', '-j8'],
+> >           )
+> 
+> ... you can modify that line so that it doesn't add any additional options if o_dt is
+> empty, so there's no change to the command-line except in the case where a DT
+> is specified, to avoid the potential for any change to the existing flow:
+> 
+>              ['make', o_opt, *o_dt, '-s', '-j8'],
+
+Not OK for my setup :
+
+./test/py/test.py --bd sandbox_spl --build --device-tree sandbox -k 'test_000_version'
+
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/_pytest/config.py", line 319, in _importconftest
+    mod = conftestpath.pyimport()
+  File "/usr/lib/python2.7/dist-packages/py/_path/local.py", line 650, in pyimport
+    __import__(modname)
+  File "/local/home/frq07632/views/u-boot/u-boot/test/py/conftest.py", line 143
+    ['make', o_opt, *o_dt, '-s', '-j8'],
+                    ^
+SyntaxError: invalid syntax
+ERROR: could not load /local/home/frq07632/views/u-boot/u-boot/test/py/conftest.py
+
+> or:
+> 
+>              ['make', o_opt, '-s', '-j8'] + o_dt,
+
+Also invalid (mising list and string.
+
+So I am lost with my poor level of python.....
+
+The only working test is :
+
+    if config.getoption('build'):
+        if build_dir != source_dir:
+            o_opt = 'O=%s' % build_dir
+        else:
+            o_opt = ''
+
+        cmds = (
+            ['make', o_opt, '-s', board_type + '_defconfig'],
+            ['make', o_opt, '-s', '-j8'],
+        )
+        if device_tree:
+            cmds[1].append('DEVICE_TREE=%s' % device_tree)
+
+
+So command with 'empty' string in cmds list for "make" cause the error ?
+
+Anyway this patch is dropped in v3, I don't investigate more.
+
+Regards
+
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

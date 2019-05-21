@@ -2,81 +2,41 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31BD7254DF
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 18:07:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2CEE2556E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 18:21:55 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D3794C7BF8C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 16:07:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1E695C7BF9A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 16:21:54 +0000 (UTC)
+Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6BE7AC7BF8A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9623DC7BF98
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 May 2019 16:07:45 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4LG0xEg006256; Tue, 21 May 2019 18:07:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=wyoDJhWwiWA6o8/+vGaBL1beRxYStu2+JhmJaue/g/0=;
- b=qFVo15c8+DngWvkiO00eu7a7kV8E0DHrLSf1vm663T7C7rQs53X/Y76QR47id0KAjxpp
- JQLu8xrwJnvYbJ4pFbx3vDJznnxhIBZvscZc0yw3mX2JNFnqUd1x2jpI7yNObOqNumVf
- sR5LsyLq1kQOa+jAAX2TS+0rTzwpRr/FkxjgmAyzd0AiRsdMEgqu+Bc+ox7JlgnOJwzL
- NIpXT8t2QhIu3kymqxIhIa+MqgHxeTYg0tU2H84QzqThFre8hFubNa9wrdGplrxIE2uC
- mtKHU0vckgtIaYnaBHd9rJ2zLjHmNafYKXjD+vy7GhGQD5EERVQtIn1Ur0Xtz40mlNyW AQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2sj7h0tqv9-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 21 May 2019 18:07:22 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1212531;
- Tue, 21 May 2019 16:07:20 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 807922D6D;
- Tue, 21 May 2019 16:07:20 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 21 May
- 2019 18:07:20 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1347.000; Tue, 21 May 2019 18:07:20 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Simon Glass <sjg@chromium.org>
-Thread-Topic: [PATCH v2 0/8] fdt: Allow indicating a node is for U-Boot proper
- only
-Thread-Index: AQHVDwv1UXGLFLlh4kSWD3fXE8isXaZ0A8KAgAG2t9A=
-Date: Tue, 21 May 2019 16:07:20 +0000
-Message-ID: <f83446fc16414f1fa8d06ca6906dc906@SFHDAG6NODE3.st.com>
+ Tue, 21 May 2019 16:21:52 +0000 (UTC)
+Received: from [10.20.204.51] (unknown [216.228.112.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id 6229B1C0158;
+ Tue, 21 May 2019 10:21:50 -0600 (MDT)
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.100.3 at avon.wwwdotorg.org
+To: Patrick Delaunay <patrick.delaunay@st.com>
 References: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
- <CAPnjgZ12YVhUwTELM6D3R7FkSJAx+1Y5urnzxSsk5vA07dszdA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ12YVhUwTELM6D3R7FkSJAx+1Y5urnzxSsk5vA07dszdA@mail.gmail.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
+ <1558357207-7345-5-git-send-email-patrick.delaunay@st.com>
+From: Stephen Warren <swarren@wwwdotorg.org>
+Message-ID: <ac06f0cd-27cf-5878-f8f6-b2bcc5570e05@wwwdotorg.org>
+Date: Tue, 21 May 2019 10:21:48 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-05-21_03:, , signatures=0
-Cc: Tien Fong Chee <tien.fong.chee@intel.com>, Bin Meng <bmeng.cn@gmail.com>,
- Stephen Warren <swarren@nvidia.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>, Igor Opaniuk <igor.opaniuk@linaro.org>,
- Alexander Graf <agraf@suse.de>, Jens Wiklander <jens.wiklander@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Paul Burton <paul.burton@mips.com>,
- Mario Six <mario.six@gdsys.cc>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- Anatolij Gustschin <agust@denx.de>, Chris Packham <judge.packham@gmail.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 0/8] fdt: Allow indicating a node is
- for U-Boot proper only
+In-Reply-To: <1558357207-7345-5-git-send-email-patrick.delaunay@st.com>
+Content-Language: en-US
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Stephen Warren <swarren@nvidia.com>,
+ Igor Opaniuk <igor.opaniuk@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2 4/8] test: py: add option to
+ select device tree used during compilation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,68 +48,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
-
-I will reply for the serie
- 
-> Hi Patrick,
+On 5/20/19 7:00 AM, Patrick Delaunay wrote:
+> Only used for spl compilation which include the device tree
+> (with platdata or embedded device tree).
+> For U-boot, test use config.dtb, by default :
+>     "build_dir + '/arch/sandbox/dts/test.dtb'"
 > 
-> On Mon, 20 May 2019 at 07:00, Patrick Delaunay <patrick.delaunay@st.com>
-> wrote:
-> >
-> >
-> > Hi,
-> >
-> > I create this v2 serie with:
-> >
-> > 1/ documentation update for previous patch
-> >    [U-Boot,v2] dm: remove pre reloc properties in SPL and TPL device tree
-> >    http://patchwork.ozlabs.org/patch/1081155/
-> >
-> >    PS: Code is already merged in commit commit c7a88dae997f ("dm: remove
-> >        pre reloc properties in SPL and TPL device tree")
-> >        but not the documentation.
-> >
-> > 2/ missing part for (patch 1/2)
-> >    http://patchwork.ozlabs.org/project/uboot/list/?series=89846
-> >
-> > 3/ new tests for pre-reloc propertie in SPL as suggested by Simon
-> >    (http://patchwork.ozlabs.org/patch/1081155/#2156621)
-> >
-> > Tell me if is better to split the serie.
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> I need to force o_dt = 'all' to avoid make error:
 > 
-> Somehow this cover letter appears in a patch, hence some of my confusion. I see
-> what you are doing and it is a comprehensive approach.
+> make: *** empty string invalid as file name.  Stop.
 > 
-> But please see my comments about comparing the .dtb file instead of making
-> sandbox print it out.
+> But, I don't sure that it is the better solution for pytest.
 
-I will change the test to only compare the device tree : it is more simple.
+This feels a bit odd. What board are you compiling for? I would expect 
+the same compilation commands to "just work" for all boards, and would 
+initially claim that if they don't, it's a bug in the makefiles that 
+should be fixed there.
 
-=> v3 in few days
+> diff --git a/test/py/conftest.py b/test/py/conftest.py
 
-My first approach was complicated but it is to allow
-- check if sandbox SPL with devicetree and libfdt in working as is already done for platdata
-- check if sandbox SPL can start U-Boot in booth case 
-  (by executing the simple test_000_version in ./py/tests/test_000_version.py)
-- split test and normal device tree (I move the "spl-tests" nodes in test.dts)
+> +        if device_tree:
+> +            o_dt = 'DEVICE_TREE=%s' % device_tree
+> +        else:
+> +            o_dt = 'all'
 
-But it is too complicated just the purpose of this test.
+You might want to make o_dt be a list that's either empty or contains 
+one string. Then ...
 
-NB: the executable "u-boot-spl" for sandbox_spl_defconfig already 
-       include the devicetree information, with platdata.
+>           cmds = (
+>               ['make', o_opt, '-s', board_type + '_defconfig'],
+> -            ['make', o_opt, '-s', '-j8'],
+> +            ['make', o_opt, o_dt, '-s', '-j8'],
+>           )
 
+... you can modify that line so that it doesn't add any additional 
+options if o_dt is empty, so there's no change to the command-line 
+except in the case where a DT is specified, to avoid the potential for 
+any change to the existing flow:
 
-> Regards,
-> Simon
+             ['make', o_opt, *o_dt, '-s', '-j8'],
 
-Regards
-Patrick
+or:
+
+             ['make', o_opt, '-s', '-j8'] + o_dt,
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

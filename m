@@ -2,43 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 659E0259B1
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 23:10:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82AD625B5D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 May 2019 02:53:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1CC01C87EDA
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 May 2019 21:10:12 +0000 (UTC)
-Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFC67C54B0C
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 May 2019 21:10:09 +0000 (UTC)
-Received: from [10.20.204.51] (unknown [216.228.112.24])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33414C90084
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 May 2019 00:53:42 +0000 (UTC)
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by avon.wwwdotorg.org (Postfix) with ESMTPSA id 032A21C0192;
- Tue, 21 May 2019 15:10:07 -0600 (MDT)
-X-Virus-Status: Clean
-X-Virus-Scanned: clamav-milter 0.100.3 at avon.wwwdotorg.org
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-References: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
- <1558357207-7345-5-git-send-email-patrick.delaunay@st.com>
- <ac06f0cd-27cf-5878-f8f6-b2bcc5570e05@wwwdotorg.org>
- <175631bffa4b40f38234fd328dcdc1a4@SFHDAG6NODE3.st.com>
-From: Stephen Warren <swarren@wwwdotorg.org>
-Message-ID: <c14b1e7c-169a-cab2-0bc4-886899ea879e@wwwdotorg.org>
-Date: Tue, 21 May 2019 15:10:07 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CC895C90084
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 22 May 2019 00:53:40 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id w9so300644oic.9
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 21 May 2019 17:53:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=GkTfAoM6Ns9GQ8XXM9gWb7/5r6hVhCQVgA/49NWR664=;
+ b=iDtPpGN4hufjPCUYCgFqfp8ESdi4L3BiMjTPxwNH6pmmeJRk0td6BTUl43BHqlRC0j
+ AInQ+MZk0g4SR3wBmZSIpJvt0inp/LLjk81ibqjsGJPiBJsbfeGfS42vG9Z15j/Udgwk
+ bqyEVssTeuEMGkSYp7xYdHDix27EwDJXt8BsM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=GkTfAoM6Ns9GQ8XXM9gWb7/5r6hVhCQVgA/49NWR664=;
+ b=YN/WEPjqCDin9X7EtOStw1H4hH0gwqKIaXxX+wxqtTTBEeHPxt6vWz8uekbXmk0peB
+ 2AjwG7nu6RN34nEjNaf92pLgFroqh7a/EspY+TiOJbUnF2w7VJLfB9YrL35rdFJF4AU2
+ VHOkQps2vIWRjpTKGdMJJQzUHA2baHuA1urgSdiUZvGxtx3IdIRdlQmUrtSmqoUXdsvO
+ KZy38iBVg5CIm0XcgJokcejI3HCPffvD9m7N0Y0RbbsQTrYWyS9/U0xHKFro/LWUH9HO
+ w4Ojun7qGqVR+LP1WYH8yuFzO4bsTKaTFMVdei+BlVoaBckba0+uTV94ARzODLs3cFM7
+ NOlw==
+X-Gm-Message-State: APjAAAV/7TITAt3GWdb7896NW6YTEpk+5qKZ7ZkxcciINGuPSXo2tIFx
+ KHSJLJa6Hu/OyJexlCG36xCvZiv1iYhVz/si7kKZDg==
+X-Google-Smtp-Source: APXvYqwR16/OvZYhMI4rM4J+lFtni8wo7DsMPrprKByRtgQ40zEUcRJfpByOXfDKBrN7iLzJTtPSqaGwDEaUYpivD0c=
+X-Received: by 2002:aca:4e42:: with SMTP id c63mr5610370oib.170.1558486419125; 
+ Tue, 21 May 2019 17:53:39 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <175631bffa4b40f38234fd328dcdc1a4@SFHDAG6NODE3.st.com>
-Content-Language: en-US
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Igor Opaniuk <igor.opaniuk@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2 4/8] test: py: add option to
- select device tree used during compilation
+References: <1558357207-7345-1-git-send-email-patrick.delaunay@st.com>
+ <CAPnjgZ12YVhUwTELM6D3R7FkSJAx+1Y5urnzxSsk5vA07dszdA@mail.gmail.com>
+ <f83446fc16414f1fa8d06ca6906dc906@SFHDAG6NODE3.st.com>
+In-Reply-To: <f83446fc16414f1fa8d06ca6906dc906@SFHDAG6NODE3.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 21 May 2019 18:53:26 -0600
+Message-ID: <CAPnjgZ1PrHkY494iD8oqndNO2-niupBjrcs3c7dzvV1M1s3y3Q@mail.gmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+Cc: Tien Fong Chee <tien.fong.chee@intel.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Stephen Warren <swarren@nvidia.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Eugeniu Rosca <roscaeugeniu@gmail.com>, Igor Opaniuk <igor.opaniuk@linaro.org>,
+ Alexander Graf <agraf@suse.de>, Jens Wiklander <jens.wiklander@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Paul Burton <paul.burton@mips.com>,
+ Mario Six <mario.six@gdsys.cc>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>,
+ Anatolij Gustschin <agust@denx.de>, Chris Packham <judge.packham@gmail.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 0/8] fdt: Allow indicating a node is
+	for U-Boot proper only
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -50,93 +74,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 5/21/19 12:32 PM, Patrick DELAUNAY wrote:
-> Hi Stephen,
-> 
-> For information after the remarksSimon's  remark,
-> I simplify the test, so this part is no more needed
-> See http://patchwork.ozlabs.org/patch/1102938/
-> 
-> But I will answer with my status and my tests done on the python code.
-> 
->>
->> On 5/20/19 7:00 AM, Patrick Delaunay wrote:
->>> Only used for spl compilation which include the device tree (with
->>> platdata or embedded device tree).
->>> For U-boot, test use config.dtb, by default :
->>>      "build_dir + '/arch/sandbox/dts/test.dtb'"
->>>
->>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->>> ---
->>> I need to force o_dt = 'all' to avoid make error:
->>>
->>> make: *** empty string invalid as file name.  Stop.
->>>
->>> But, I don't sure that it is the better solution for pytest.
->>
->> This feels a bit odd. What board are you compiling for? I would expect the same
->> compilation commands to "just work" for all boards, and would initially claim that if
->> they don't, it's a bug in the makefiles that should be fixed there.
-> 
-> Yes, it is strange.
-> 
-> When I compile the board I have not the problem, I have issue only when I use pytest.
-...
-> But if I use =
-...
->          if device_tree:
->              o_dt = 'DEVICE_TREE=%s' % device_tree
->          else:
->              o_dt = ''
-...
-> But the second command I have got the next error:
-> 
-> ./test/py/test.py --bd sandbox --build  -k 'test_000_version'
-> +make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox -s sandbox_defconfig
-> +make O=/local/home/frq07632/views/u-boot/u-boot/build-sandbox  -s -j8
-> make: *** empty string invalid as file name.  Stop.
+Hi Patrick,
 
-Right, o_dt is '' so there's an extra zero-length parameter between the 
-"O=" and "-s" argument in that last command, which is what the error 
-message complains about.
+On Tue, 21 May 2019 at 10:07, Patrick DELAUNAY <patrick.delaunay@st.com> wrote:
+>
+> Hi Simon,
+>
+> I will reply for the serie
+>
+> > Hi Patrick,
+> >
+> > On Mon, 20 May 2019 at 07:00, Patrick Delaunay <patrick.delaunay@st.com>
+> > wrote:
+> > >
+> > >
+> > > Hi,
+> > >
+> > > I create this v2 serie with:
+> > >
+> > > 1/ documentation update for previous patch
+> > >    [U-Boot,v2] dm: remove pre reloc properties in SPL and TPL device tree
+> > >    http://patchwork.ozlabs.org/patch/1081155/
+> > >
+> > >    PS: Code is already merged in commit commit c7a88dae997f ("dm: remove
+> > >        pre reloc properties in SPL and TPL device tree")
+> > >        but not the documentation.
+> > >
+> > > 2/ missing part for (patch 1/2)
+> > >    http://patchwork.ozlabs.org/project/uboot/list/?series=89846
+> > >
+> > > 3/ new tests for pre-reloc propertie in SPL as suggested by Simon
+> > >    (http://patchwork.ozlabs.org/patch/1081155/#2156621)
+> > >
+> > > Tell me if is better to split the serie.
+> >
+> > Somehow this cover letter appears in a patch, hence some of my confusion. I see
+> > what you are doing and it is a comprehensive approach.
+> >
+> > But please see my comments about comparing the .dtb file instead of making
+> > sandbox print it out.
+>
+> I will change the test to only compare the device tree : it is more simple.
+>
+> => v3 in few days
+>
+> My first approach was complicated but it is to allow
+> - check if sandbox SPL with devicetree and libfdt in working as is already done for platdata
+> - check if sandbox SPL can start U-Boot in booth case
+>   (by executing the simple test_000_version in ./py/tests/test_000_version.py)
+> - split test and normal device tree (I move the "spl-tests" nodes in test.dts)
 
-But this is all with your patch applied. I still don't understand what 
-issue this was trying to solve in the first place, i.e. what is/was 
-wrong with u-boot.git's master branch. I can run test/py for both 
-sandbox and sandbox_spl with unmodified u-boot.git master branch; see 
-logs below. Is there still some bug I need to fix, that exists without 
-your patch series?
+Yes, certainly this is useful and it does provide an end-to-end sanity check.
 
-> [swarren@swarren-lx1 u-boot]$ ./test/py/test.py --bd sandbox --build -k test_000_version
-> +make O=/home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot/build-sandbox -s sandbox_defconfig
-> +make O=/home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot/build-sandbox -s -j8
-> ============================= test session starts ==============================
-> platform linux2 -- Python 2.7.12, pytest-2.8.7, py-1.4.31, pluggy-0.3.1
-> rootdir: /home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot, inifile: 
-> collected 503 items 
-> 
-> test/py/tests/test_000_version.py .
-> 
-> ================= 502 tests deselected by '-ktest_000_version' =================
-> =================== 1 passed, 502 deselected in 0.17 seconds ===================
+But if we do this I think it should be *in addition* to smaller test.
 
-> [swarren@swarren-lx1 u-boot]$ ./test/py/test.py --bd sandbox_spl --build -k test_000_version
-> +make O=/home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot/build-sandbox_spl -s sandbox_spl_defconfig
-> +make O=/home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot/build-sandbox_spl -s -j8
-> ============================= test session starts ==============================
-> platform linux2 -- Python 2.7.12, pytest-2.8.7, py-1.4.31, pluggy-0.3.1
-> rootdir: /home/swarren/shared/git_wa/tegra-uboot-flasher/u-boot, inifile: 
-> collected 492 items 
-> 
-> test/py/tests/test_000_version.py .
-> 
-> ================= 491 tests deselected by '-ktest_000_version' =================
-> =================== 1 passed, 491 deselected in 0.31 seconds ===================
+So could we start with the simpler, smaller test and then see how far
+that gets us? I am not saying that the functional test is bad, but if
+something goes wrong with the test, there are a lot of pieces to look
+at to figure out what went wrong.
+
+>
+> But it is too complicated just the purpose of this test.
+>
+> NB: the executable "u-boot-spl" for sandbox_spl_defconfig already
+>        include the devicetree information, with platdata.
+
+Yes.
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

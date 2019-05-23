@@ -2,50 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 620272732E
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 02:18:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 670042732F
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 02:18:36 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 22DDCCC10A3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 00:18:35 +0000 (UTC)
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
- [209.85.210.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2AFA9CC10A5
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 00:18:36 +0000 (UTC)
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+ [209.85.210.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 48CD9CC10A3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A3750CC10A2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 23 May 2019 00:18:33 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id 66so3835728otq.0
+ Thu, 23 May 2019 00:18:34 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id j49so3766511otc.13
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 May 2019 17:18:33 -0700 (PDT)
+ Wed, 22 May 2019 17:18:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=rKnvV9fYxPEG9fCwgCwWj/4MhaqRfXUurJLB25W8byc=;
- b=Q8UIvZkaRo7o5MfV5MrSnJf19RhpnsbIQNlZSik3zM9H11M4fI+3s5bjPyJqCW81Dw
- 8fUAXrMrOomnvA6zGJWt4dFIQI2leI9noizkzyWSj5j6AMz51K9jHpK8S/7QaLqXAG1O
- Le//sREvQhG+E242xrBIulqiKFyQValV6m4KM=
+ :cc; bh=g78eElmtuhsUE1gkhbHiDQPjU7QBkeH0F/s9BwaVlYQ=;
+ b=F49rqd8UKE/N0rOP9JNdRckg1RsqoUHZ+s80aKeJee6pUeV25zBjzMopIwSOzd6701
+ sxJmBcoHkcV0Q5dOVYkDQFwd1c0W5sQZjuRtdyFJEcbctB15/2v3epOK6jWgErYuZCch
+ M50haoCPtqn7Sk2AM/ftlvpP+iHdz9scixKYU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=rKnvV9fYxPEG9fCwgCwWj/4MhaqRfXUurJLB25W8byc=;
- b=kyjG1OS7+96k2lu/DBFGdpun/9DiKSu0IWi2Vqxc3IJjvOkEapPLMW9I4ST0rYfn33
- RzZNBVHVgvM70GGriNjX7DcpXbbR3bWCp8aAzg2QB1IBbLMM/Q9dPMSQQPdYbxdtsA6d
- iv4AdoteEpSB+UrTWupYZiqD8Ab5ishIspsMUgjv9mC3jc82ADfTud3pJMNMURIeZ+Vt
- P8A/zORODECNHQKWKWdsunBkyr9KAnJCuhwgWmPcm7iMLpzSHgvVH6W1u5QunJ+vGDYn
- 6QOIp49+dXrDl3ZIo9G6gt0tLizJMCDBEA3FeLHPmsicwzI8R9UQD25J/NIfeIEFohdb
- qqYA==
-X-Gm-Message-State: APjAAAUzYG2rsGTdcqBbCEoJGabbgb0toqryXPno0SkZAmlxqKCFRh7y
- nw9wMCHY5fxvIyxCRkgJhv2ImyW1f0b9Ta+3NyG/Aw==
-X-Google-Smtp-Source: APXvYqz3IngznQ8tZz+zzVtJPOF5nvybPCyVZSfYyIOvAbyqnrbUjaEeWz74UGhOLh4VImaraDxLhx7lEaBTazo94J4=
-X-Received: by 2002:a9d:400d:: with SMTP id m13mr20927345ote.100.1558570711732; 
- Wed, 22 May 2019 17:18:31 -0700 (PDT)
+ bh=g78eElmtuhsUE1gkhbHiDQPjU7QBkeH0F/s9BwaVlYQ=;
+ b=Ap9m/FrUav1ntBTqV5JrQd6Hahx8aAgOiBVzfDXBiAhAdrExFytPgCmvQ2IqYiXZIh
+ ZmO+XwOunyYiNEaSb0RC2GWWUY9eVjsNLp/2OGMiFXfzcAv5cIyjJjNPLem9cZirzTwI
+ kKsPwV+RKt+DkI0AryN9yXEHfoAzGbqYjXjw12wocSmrcwGufsGZ6abbzKC0UNFk+nYp
+ Vw/YMkxjPftQsB0FxhWBFE2Xtqmp/J1q7VBlVvgyVzJGWBDBZTL+VHTuagaFmJacDNxc
+ PydlK2Ml6Kyxtw42tRvS/7niKfDo0k2hbEKKGK4A3oP/ZRGbLbr+WSYp/T2021sYKEZg
+ pzpA==
+X-Gm-Message-State: APjAAAW9+iwkEOFRG09ivEMf112vlX2hy5DmeB5MSJJ5RQCHfxPbuurZ
+ tutCuTIWnQWh51bJH3srzxYGpa/TWpjZWwGaKWc/RQ==
+X-Google-Smtp-Source: APXvYqwJdPjyeEQP86sSrmwgANHEKgb/rx4E0JBJJ4EYdygdLSsAYxeG5uZmD2JnIHfmYCOm7+7RMjkYR6WRUyvRSr4=
+X-Received: by 2002:a05:6830:1408:: with SMTP id
+ v8mr1154794otp.48.1558570713131; 
+ Wed, 22 May 2019 17:18:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <1558512409-32376-1-git-send-email-fabien.dessenne@st.com>
- <1558512409-32376-3-git-send-email-fabien.dessenne@st.com>
-In-Reply-To: <1558512409-32376-3-git-send-email-fabien.dessenne@st.com>
+ <1558512409-32376-4-git-send-email-fabien.dessenne@st.com>
+In-Reply-To: <1558512409-32376-4-git-send-email-fabien.dessenne@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 May 2019 18:18:20 -0600
-Message-ID: <CAPnjgZ0ZdfOS4gA2VCtemko2z6T34+qe0djuRN6sNBZkCwooZg@mail.gmail.com>
+Date: Wed, 22 May 2019 18:18:21 -0600
+Message-ID: <CAPnjgZ1H_idk67E8emLodR4msCdg4S_WZSD3sN_jKrumGv-Cnw@mail.gmail.com>
 To: Fabien Dessenne <fabien.dessenne@st.com>
 Cc: Christophe Kerello <christophe.kerello@st.com>,
  Lokesh Vutla <lokeshvutla@ti.com>, Patrice Chotard <patrice.chotard@st.com>,
@@ -53,8 +54,7 @@ Cc: Christophe Kerello <christophe.kerello@st.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/7] dm: core: Introduce
-	xxx_translate_dma_address()
+Subject: Re: [Uboot-stm32] [PATCH 3/7] remoteproc: add da_to_pa ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,26 +75,45 @@ Hi Fabien,
 
 On Wed, 22 May 2019 at 02:07, Fabien Dessenne <fabien.dessenne@st.com> wrote:
 >
-> Add the following functions to translate DMA address to CPU address:
-> - dev_translate_dma_address()
-> - ofnode_translate_dma_address()
-> - of_translate_dma_address()
-> These functions work the same way as xxx_translate_address(), with the
-> difference that the translation relies on the "dma-ranges" property
-> instead of the "ranges" property.
+> This patch introduces da_to_pa function to allow translation
+> between device address (remote processor view) and physical
+> address (main processor view).
 >
-
-Looks good, but again, needs a test.
-
+> Signed-off-by: Loic Pallardy <loic.pallardy@st.com>
 > Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
 > ---
->  drivers/core/of_addr.c |  4 ++++
->  drivers/core/ofnode.c  |  8 ++++++++
->  drivers/core/read.c    |  5 +++++
->  include/dm/of_addr.h   | 18 ++++++++++++++++++
->  include/dm/ofnode.h    | 16 +++++++++++++++-
->  include/dm/read.h      | 20 +++++++++++++++++++-
->  6 files changed, 69 insertions(+), 2 deletions(-)
+>  include/remoteproc.h | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/include/remoteproc.h b/include/remoteproc.h
+> index a59dba8..58df11a 100644
+> --- a/include/remoteproc.h
+> +++ b/include/remoteproc.h
+> @@ -63,6 +63,8 @@ struct dm_rproc_uclass_pdata {
+>   *             Return 0 on success, 1 if not running, -ve on others errors
+>   * @ping:      Ping the remote device for basic communication check(optional)
+>   *             Return 0 on success, 1 if not responding, -ve on other errors
+> + * @da_to_pa:   Return translated physical address (device address different
+> + *              from physical address)
+
+How about device_addr_to_phys()?
+
+Also please add a full function comment here and below. This uclass
+header seems to be delinquent.
+
+>   */
+>  struct dm_rproc_ops {
+>         int (*init)(struct udevice *dev);
+> @@ -72,6 +74,7 @@ struct dm_rproc_ops {
+>         int (*reset)(struct udevice *dev);
+>         int (*is_running)(struct udevice *dev);
+>         int (*ping)(struct udevice *dev);
+> +       ulong (*da_to_pa)(struct udevice *dev, ulong da);
+>  };
+>
+>  /* Accessor */
+> --
+> 2.7.4
 >
 
 Regards,

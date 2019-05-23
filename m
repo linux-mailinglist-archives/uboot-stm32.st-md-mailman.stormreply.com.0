@@ -2,66 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15B4925F0B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 May 2019 10:07:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 300DA2732D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 02:18:34 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D889EC65591
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 May 2019 08:07:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1AA84CC10A2
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 May 2019 00:18:33 +0000 (UTC)
+Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
+ [209.85.210.68])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A6115C62B40
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 06A96CC10A0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 May 2019 08:07:22 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4M86k0Z002750; Wed, 22 May 2019 10:07:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=yhm4yihKvd+MHvpUooUH7ul59BB2jb1W/BasDHrDfI4=;
- b=Y44iFkyIRw+L1dFCgxm3M9CFuGH36ZwX1qP/ruDx3MfYmcKGvNXF2+hdT0hWy2CCViuN
- mvSUXhQzsHj3KTpfGL9auVjlHv0dGG9rXwH6uVCpQMAIUxOFboH5wgu55OzwL+88YgKm
- D/Pahpw/0hTu5bgdeJ7E+I+4RNfYTE568fLq1H0oBxUD3ADL+2qFeYrL8MUbFmKqgQii
- jJ5szzdn/QFADKs2yPWVTsmelIX6Ctvs+89RYjeWsyhzZdDAmCsbyqhXluld4VFWqT0M
- tk2BtmXpJ0z+7/XF1MlVHsjR4qvQD+CsYoaYAQOQNIddbtQfZh4B8UHiuauk5Pi0mrHP 0A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2sj77477ra-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Wed, 22 May 2019 10:07:21 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ED40F56;
- Wed, 22 May 2019 08:07:13 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D694618E2;
- Wed, 22 May 2019 08:07:13 +0000 (GMT)
-Received: from SAFEX1HUBCAS21.st.com (10.75.90.44) by Safex1hubcas22.st.com
- (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 22 May
- 2019 10:07:13 +0200
-Received: from localhost (10.201.23.25) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 22 May 2019 10:07:13
- +0200
-From: Fabien Dessenne <fabien.dessenne@st.com>
-To: Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Christophe Kerello <christophe.kerello@st.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Andreas Dannenberg <dannenberg@ti.com>,
- Loic Pallardy <loic.pallardy@st.com>
-Date: Wed, 22 May 2019 10:06:49 +0200
-Message-ID: <1558512409-32376-8-git-send-email-fabien.dessenne@st.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1558512409-32376-1-git-send-email-fabien.dessenne@st.com>
-References: <1558512409-32376-1-git-send-email-fabien.dessenne@st.com>
+ Thu, 23 May 2019 00:18:32 +0000 (UTC)
+Received: by mail-ot1-f68.google.com with SMTP id s19so3813531otq.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 22 May 2019 17:18:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=sC9k92OjnBlGV60lrgxrMpW1Ys5U+9oNvX88BCl9MQY=;
+ b=B1RIS57aNl02TtJ3EQ+lmDCYYmC/1ZPKVOitWmkShTrNvDhHkW4RWkXnJhnT5KAXzz
+ u58+cSzlCuJ9ns0n5Jne2H/sIT48KpOSkzvLImsX2MyjzlreLI1w0qE933ZaCzS1nhmY
+ F4E7KV2I9FhY1nw3ioKoco7tgxLtdKA+lVsxQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=sC9k92OjnBlGV60lrgxrMpW1Ys5U+9oNvX88BCl9MQY=;
+ b=AXmpnhspF8SbeYUMBXD2O6E/M1OLOYACHUGN/06uFV3nVkksNaxtTP0BcdxoRYo+oz
+ lWJlOclKvoXIneWIMBrqQYGCcniudvhCnLN3ddZNQXy4KswZmHlyQr093JrXT7Q2SgaT
+ /3squOYcjpCwKScDrXFk/W9c3aBHMhKBSVSvG1l3ey3Ypc0/sTkI07ymwG7VnxhkAv4f
+ hZMydvW6NLfzZLkhsxOBTQ9BKLRrnnsLpl8toIIWmID2PXpO2IAYCoYUeWLNsoSbqfw+
+ HZKCSnKc/k9UIkS2CXciScRnAN/WfFO6O3toD90WmnmuUwD6c1lqhCrN9ira2BuCVuqx
+ EO/g==
+X-Gm-Message-State: APjAAAXyzMf3wFqAdjqY1NOn6PXKuMyVDax3RqYCHw5Hq2WHYjYmYkqn
+ 3jFyS/HinH7qDlQedSqmYrK8NMBUi4cSVbh3fozbbg==
+X-Google-Smtp-Source: APXvYqysLHPTkTc0dor9X1Nde9yS9X2x7VxqecHpf4a3qN+iEZrRxzLaXaKJAvTfWd4hwwzzlAju2UgFYqbzudKfB5Q=
+X-Received: by 2002:a9d:a6e:: with SMTP id 101mr26511587otg.356.1558570710186; 
+ Wed, 22 May 2019 17:18:30 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.25]
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-05-22_03:, , signatures=0
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Fabien Dessenne <fabien.dessenne@st.com>
-Subject: [Uboot-stm32] [PATCH 7/7] configs: stm32mp15: enable stm32
-	remoteproc
+References: <1558512409-32376-1-git-send-email-fabien.dessenne@st.com>
+ <1558512409-32376-2-git-send-email-fabien.dessenne@st.com>
+In-Reply-To: <1558512409-32376-2-git-send-email-fabien.dessenne@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 22 May 2019 18:18:18 -0600
+Message-ID: <CAPnjgZ20ZNQVEus78oDhca1o7xr5LcGkX4XAp8Pb6QiVOoANMw@mail.gmail.com>
+To: Fabien Dessenne <fabien.dessenne@st.com>
+Cc: Christophe Kerello <christophe.kerello@st.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Andreas Dannenberg <dannenberg@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/7] fdt: Introduce
+	fdt_translate_dma_address()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,43 +71,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Activate the remote processor support for stm32mp15 configs.
+Hi Fabien,
 
-Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
----
- configs/stm32mp15_basic_defconfig   | 2 ++
- configs/stm32mp15_trusted_defconfig | 2 ++
- 2 files changed, 4 insertions(+)
+On Wed, 22 May 2019 at 02:07, Fabien Dessenne <fabien.dessenne@st.com> wrote:
+>
+> Add the fdt_translate_dma_address() function to translate DMA address to
+> CPU address.
+> This function works the same way as fdt_translate_address(), with the
+> difference that the translation relies on the "dma-ranges" property
+> instead of the "ranges" property.
+>
+> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
+> ---
+>  common/fdt_support.c  | 6 ++++++
+>  include/fdt_support.h | 2 ++
+>  2 files changed, 8 insertions(+)
 
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 0ea9dff..5185072 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -67,6 +67,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_REMOTEPROC=y
-+CONFIG_REMOTEPROC_STM32_COPRO=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_USB=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 3c2bb75..037d7e8 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -57,6 +57,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_REMOTEPROC=y
-+CONFIG_REMOTEPROC_STM32_COPRO=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_USB=y
--- 
-2.7.4
+Please can you add a simple test for this, and also a function comment
+in the header file?
 
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,67 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73A0230E9A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 31 May 2019 15:12:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA75C31B7D
+	for <lists+uboot-stm32@lfdr.de>; Sat,  1 Jun 2019 12:53:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 41535C0855A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 31 May 2019 13:12:00 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D4773C0C1D0
+	for <lists+uboot-stm32@lfdr.de>; Sat,  1 Jun 2019 10:53:36 +0000 (UTC)
+Received: from mail-it1-f196.google.com (mail-it1-f196.google.com
+ [209.85.166.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 563C5C08554
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5D601C0C1CF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 31 May 2019 13:11:59 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x4VDA60Q005076; Fri, 31 May 2019 15:11:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=yhm4yihKvd+MHvpUooUH7ul59BB2jb1W/BasDHrDfI4=;
- b=gYSQry9NMEQrG5RITKThmT3vP8gHQSjUq3dQp+8HiEeDjq9zwVKVJt3TeKAw6HyXqjnL
- FWqQwVgnum1wwL4AEZDy0YwHiBrKFwCnX+oBegJgkKba6UIYwUJYEC3KecmdHklt5fNA
- rfG7YGMy3W3CYGygdm5a33cCtYe45i4CvDlGpNm4ky5TjVjBK4nOH60Q0v9ofvclSfYF
- 8zcrp6Z4jN2TdvozjjhXqNyzmzCTVU2agorqtrQHMrqM90VwErn/wexIiHiEZ1hPyHYp
- 45V4jGGD3M2ehamWH76yncoLQk+kuf5p8aDQLgnUOnC3CaSOsGfghkeNOn8wdD7+ZTQa 0A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2spu60vaa1-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 31 May 2019 15:11:58 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0727831;
- Fri, 31 May 2019 13:11:52 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E4F4229C5;
- Fri, 31 May 2019 13:11:51 +0000 (GMT)
-Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by Safex1hubcas22.st.com
- (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 31 May
- 2019 15:11:51 +0200
-Received: from localhost (10.201.23.25) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 31 May 2019 15:11:51
- +0200
-From: Fabien Dessenne <fabien.dessenne@st.com>
-To: Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Christophe Kerello <christophe.kerello@st.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Andreas Dannenberg <dannenberg@ti.com>,
- Loic Pallardy <loic.pallardy@st.com>
-Date: Fri, 31 May 2019 15:11:36 +0200
-Message-ID: <1559308296-17027-8-git-send-email-fabien.dessenne@st.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
-References: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
+ Sat,  1 Jun 2019 10:53:36 +0000 (UTC)
+Received: by mail-it1-f196.google.com with SMTP id a186so20005054itg.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sat, 01 Jun 2019 03:53:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=euMBMWlWVueAkM24T6mSVQFLjpFNATK6bVqtdN1MGmw=;
+ b=XSFprewARg5joTZHpKfE4aRxMUgktKSTeTiXYHBUVVMyXPZ4yi6Xhf+cv09yg+qZrX
+ gEDbz+KWuwtzcDpqoHIvIuMGif3Xt/v3pYdElWqOQdGpIatL2xVMiCtnPGtH++1vl0rR
+ v+w/mjj0sSfZX/3TXiPLrj7ix8t6Ns+w2CgtY1jxoDMV4OYGITKsU/VCom7oQP9i1QEN
+ 91VDWfKveMFZhoO3AuLfxTAy/kP0Ml2wa/6Kj2/KHVGBrIIEDQjzUGr8Z9HyeA4ePqPZ
+ 7lO7NreqjesTnyn9FidjbwYY35UBjAp/cUP9YPQBDXSjNbPEEwq+q4Pm+Xj1/SqJu1u8
+ vfvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=euMBMWlWVueAkM24T6mSVQFLjpFNATK6bVqtdN1MGmw=;
+ b=JDLOvu70TBeB9hnljoWTorEn9+KU8UzZShaTBblPdJyP8QWwxAa2PTdxXxBq6tEpLT
+ JOVe3mxPLPMR0u7XIaMM1VFwQFy7wzThgeJv94/3qDruhtR/8YJYFQ8AYCxlx+n2r/B5
+ NXRVe+SovcBVYIjWY3UWQn5UBpuA2orAocKziWzw+rki6QgZ0UEXKHlB5ATWuQFv7Uw+
+ 2kGP7ctSth7UxDQnbXI/iq2UoPhl3LCy0reUAGEZPJvqaA6gcfpsxzhhFwX/8rm5HrC+
+ xtC+xxHEBe9hr1DwD1Fep0h3VGxPl0mqabvsu9eNwl58ibf4+DHMRgoifM6sCRv1JzEG
+ KFPg==
+X-Gm-Message-State: APjAAAXOOvEg0388123UivTX87pgVS0e1hfECzPpoOIj7XXT3taw2Dgb
+ 6XMn6/6s7yx44eFQxQli48YJzI43tJ0IhLeWF+g=
+X-Google-Smtp-Source: APXvYqyibXQTCCw2keA2K/++UN1Gi0VuDR0X8OaNnEIAVvIjFzwVhAhNEi2ADi2CJ5v5ylLxN3dG5yT/ZASBI6DKXm0=
+X-Received: by 2002:a24:610d:: with SMTP id s13mr4367870itc.156.1559386414610; 
+ Sat, 01 Jun 2019 03:53:34 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.25]
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-05-31_08:, , signatures=0
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Arnaud Pouliquen <arnaud.pouliquen@st.com>,
- Fabien Dessenne <fabien.dessenne@st.com>
-Subject: [Uboot-stm32] [PATCH v3 7/7] configs: stm32mp15: enable stm32
-	remoteproc
+References: <20190517130847.13144-1-christophe.roullier@st.com>
+ <20190517130847.13144-7-christophe.roullier@st.com>
+In-Reply-To: <20190517130847.13144-7-christophe.roullier@st.com>
+From: Joe Hershberger <joe.hershberger@gmail.com>
+Date: Sat, 1 Jun 2019 05:53:25 -0500
+Message-ID: <CANr=Z=YiXyNW7nFCZNZhyDLVO+-vBJv3OxFBb88kD3yYnBVXBg@mail.gmail.com>
+To: Christophe Roullier <christophe.roullier@st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2 6/6] configs: stm32mp15:
+	Enable Ethernet feature
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,43 +70,15 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Activate the remote processor support for stm32mp15 configs.
+On Fri, May 17, 2019 at 8:19 AM Christophe Roullier
+<christophe.roullier@st.com> wrote:
+>
+> This allows to enable Ethernet and use driver for
+> Synopsys Ethernet QoS device
+>
+> Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
 
-Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
----
- configs/stm32mp15_basic_defconfig   | 2 ++
- configs/stm32mp15_trusted_defconfig | 2 ++
- 2 files changed, 4 insertions(+)
-
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 0ea9dff..5185072 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -67,6 +67,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_REMOTEPROC=y
-+CONFIG_REMOTEPROC_STM32_COPRO=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_USB=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 3c2bb75..037d7e8 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -57,6 +57,8 @@ CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_REMOTEPROC=y
-+CONFIG_REMOTEPROC_STM32_COPRO=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_USB=y
--- 
-2.7.4
-
+Acked-by: Joe Hershberger <joe.hershberger@ni.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

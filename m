@@ -2,61 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9FB6327FE
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Jun 2019 07:33:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EB3F341DA
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jun 2019 10:32:14 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 752F0C98F74
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Jun 2019 05:33:20 +0000 (UTC)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D66C0C46D54
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jun 2019 08:32:13 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 68A8CC98F73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8BF2BC46D53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Jun 2019 05:33:19 +0000 (UTC)
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id x535XDPM031555;
- Mon, 3 Jun 2019 00:33:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1559539993;
- bh=uRNlHOVXZLdiIEhi0fBYeMGhPH117GycLuqlqv2lO34=;
- h=Subject:To:CC:References:From:Date:In-Reply-To;
- b=ybQXKqY/kZLlHdhDts+l1zYI4XV+5CtbZ81gIhrPe24WzVZD3KLxd+0oO9Fslb4bl
- EXzOyIkYuZaaJ+Auph0XXUpNukZvLJC61XrMG9KpyUKZui7rJnuQ0NcAM5nWn69U2U
- Vj9GaWSMnKCM84SJc2PEaltykBGBdE61TgCRL9Gs=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x535XDeU124805
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 3 Jun 2019 00:33:13 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5; Mon, 3 Jun
- 2019 00:33:13 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
- Frontend Transport; Mon, 3 Jun 2019 00:33:12 -0500
-Received: from [172.24.190.117] (ileax41-snat.itg.ti.com [10.172.224.153])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x535X9f1084770;
- Mon, 3 Jun 2019 00:33:10 -0500
-To: Fabien Dessenne <fabien.dessenne@st.com>, Simon Glass <sjg@chromium.org>, 
- Patrick Delaunay <patrick.delaunay@st.com>, Christophe Kerello
- <christophe.kerello@st.com>, Patrice Chotard <patrice.chotard@st.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Loic Pallardy <loic.pallardy@st.com>
+ Tue,  4 Jun 2019 08:32:12 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 45J4sl1v7vz1rXvq;
+ Tue,  4 Jun 2019 10:32:11 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 45J4sl0sVkz1qqkh;
+ Tue,  4 Jun 2019 10:32:11 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id 0zJvNYe4qL2g; Tue,  4 Jun 2019 10:32:09 +0200 (CEST)
+X-Auth-Info: VeMjKSqEsTVqL/zHewdHmNT14uMdQhWDUeeCCSWfpVA=
+Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Tue,  4 Jun 2019 10:32:09 +0200 (CEST)
+Date: Tue, 4 Jun 2019 10:32:03 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabien Dessenne <fabien.dessenne@st.com>
+Message-ID: <20190604103203.0983fbd3@jawa>
+In-Reply-To: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
 References: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
- <1559308296-17027-3-git-send-email-fabien.dessenne@st.com>
-From: Lokesh Vutla <lokeshvutla@ti.com>
-Message-ID: <0a23d9d7-48e7-e4ba-c873-51f9b4ed80b2@ti.com>
-Date: Mon, 3 Jun 2019 11:02:37 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.2.1
+Organization: denx.de
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <1559308296-17027-3-git-send-email-fabien.dessenne@st.com>
-Content-Language: en-US
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Arnaud Pouliquen <arnaud.pouliquen@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 2/7] remoteproc: fix function headers
+Cc: Christophe Kerello <christophe.kerello@st.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
+ Arnaud Pouliquen <arnaud.pouliquen@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Andreas Dannenberg <dannenberg@ti.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v3 0/7] Add STM32 Cortex-M4
+	remoteproc driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,217 +59,128 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8817849876893397290=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+--===============8817849876893397290==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/0v_+TRmsx3cw0GE+R.=FQXS"; protocol="application/pgp-signature"
+
+--Sig_/0v_+TRmsx3cw0GE+R.=FQXS
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Hi Fabien,
+
+> This patchset adds an STM32 remoteproc driver.
+>=20
+> Patch 1 adds the xxx_translate_dma_address() API which is the
+> equivalent of the xxx_translate_address() relying on the "dma-ranges"
+> property instead of the "ranges" property.
+>=20
+> Patch 2 fixes and completes function headers of remoteproc.h.
+>=20
+> Patch 3 & 4 add the support of the ELF image loading (the current
+> implementation supports only binary image loading).
+>=20
+> Patch 5 is about the driver, and patches 6 & 7 are about MAINTAINERS
+> and configs update.
+>=20
+
+Thank you for your work - the Vybrid VF610 also has Cortex-M4/M3
+embedded and (probably) in some future somebody will want to setup it
+in U-Boot. Those changes looks generic and shall be easily re-usable.
+
+Thanks one more time.
+
+> Changes since v2:
+> -Moved helpers to rproc-elf-loader.c
+> -Rename *elf* functions in *elf32*, preparing future support for elf64
+> Changes since v1:
+> -Added tests for rproc_elf*() and *_translate_dma_address()
+> -Changed memory translation ops from da_to_pa() to device_to_virt() :
+> the name is updated and the translation now converts to virtual
+> instead of physical. -Merged rproc_elf_is_valid() in
+> rproc_elf_sanity_check() -Used explicit error values in
+> rproc_elf_sanity_check() -Added and fix comments in various headers
+> -Misc minor changes
+>=20
+> Fabien Dessenne (7):
+>   dm: core: Introduce xxx_translate_dma_address()
+>   remoteproc: fix function headers
+>   remoteproc: add device_to_virt ops
+>   remoteproc: add elf file load support
+>   remoteproc: Introduce STM32 Cortex-M4 remoteproc driver
+>   MAINTAINERS: Add stm32 remoteproc driver
+>   configs: stm32mp15: enable stm32 remoteproc
+>=20
+>  MAINTAINERS                           |   1 +
+>  arch/sandbox/dts/test.dts             |   4 +
+>  common/fdt_support.c                  |   6 +
+>  configs/stm32mp15_basic_defconfig     |   2 +
+>  configs/stm32mp15_trusted_defconfig   |   2 +
+>  drivers/core/of_addr.c                |   4 +
+>  drivers/core/ofnode.c                 |   8 ++
+>  drivers/core/read.c                   |   5 +
+>  drivers/remoteproc/Kconfig            |  10 ++
+>  drivers/remoteproc/Makefile           |   3 +-
+>  drivers/remoteproc/rproc-elf-loader.c | 106 ++++++++++++++
+>  drivers/remoteproc/sandbox_testproc.c |  19 +++
+>  drivers/remoteproc/stm32_copro.c      | 257
+> ++++++++++++++++++++++++++++++++++
+> include/dm/of_addr.h                  |  18 +++
+> include/dm/ofnode.h                   |  16 ++-
+> include/dm/read.h                     |  20 ++-
+> include/fdt_support.h                 |  24 ++++
+> include/remoteproc.h                  | 146 +++++++++++++------
+> test/dm/remoteproc.c                  | 122 ++++++++++++++++
+> test/dm/test-fdt.c                    |  12 ++ 20 files changed, 743
+> insertions(+), 42 deletions(-) create mode 100644
+> drivers/remoteproc/rproc-elf-loader.c create mode 100644
+> drivers/remoteproc/stm32_copro.c
+>=20
 
 
-On 31/05/19 6:41 PM, Fabien Dessenne wrote:
-> Add full function comment headers.
-> Fix rproc_is_initialized() return value description.
-> 
-> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
 
 
-Reviewed-by: Lokesh Vutla <lokeshvutla@ti.com>
+Best regards,
 
-Thanks and regards,
-Lokesh
+Lukasz Majewski
 
+--
 
-> ---
->  include/remoteproc.h | 104 +++++++++++++++++++++++++++++++++------------------
->  1 file changed, 68 insertions(+), 36 deletions(-)
-> 
-> diff --git a/include/remoteproc.h b/include/remoteproc.h
-> index a59dba8..aa90a67 100644
-> --- a/include/remoteproc.h
-> +++ b/include/remoteproc.h
-> @@ -45,32 +45,73 @@ struct dm_rproc_uclass_pdata {
->  };
->  
->  /**
-> - * struct dm_rproc_ops - Operations that are provided by remote proc driver
-> - * @init:	Initialize the remoteproc device invoked after probe (optional)
-> - *		Return 0 on success, -ve error on fail
-> - * @load:	Load the remoteproc device using data provided(mandatory)
-> - *		This takes the following additional arguments.
-> - *			addr- Address of the binary image to be loaded
-> - *			size- Size of the binary image to be loaded
-> - *		Return 0 on success, -ve error on fail
-> - * @start:	Start the remoteproc device (mandatory)
-> - *		Return 0 on success, -ve error on fail
-> - * @stop:	Stop the remoteproc device (optional)
-> - *		Return 0 on success, -ve error on fail
-> - * @reset:	Reset the remote proc device (optional)
-> - *		Return 0 on success, -ve error on fail
-> - * @is_running:	Check if the remote processor is running(optional)
-> - *		Return 0 on success, 1 if not running, -ve on others errors
-> - * @ping:	Ping the remote device for basic communication check(optional)
-> - *		Return 0 on success, 1 if not responding, -ve on other errors
-> + * struct dm_rproc_ops - Driver model remote proc operations.
-> + *
-> + * This defines the operations provided by remote proc driver.
->   */
->  struct dm_rproc_ops {
-> +	/**
-> +	 * init() - Initialize the remoteproc device (optional)
-> +	 *
-> +	 * This is called after the probe is completed allowing the remote
-> +	 * processor drivers to split up the initializations between probe and
-> +	 * init if needed.
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 if all ok, else appropriate error value.
-> +	 */
->  	int (*init)(struct udevice *dev);
-> +
-> +	/**
-> +	 * load() - Load the remoteproc device using data provided (mandatory)
-> +	 *
-> +	 * Load the remoteproc device with an image, do not start the device.
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @addr:	Address of the image to be loaded
-> +	 * @size:	Size of the image to be loaded
-> +	 * @return 0 if all ok, else appropriate error value.
-> +	 */
->  	int (*load)(struct udevice *dev, ulong addr, ulong size);
-> +
-> +	/**
-> +	 * start() - Start the remoteproc device (mandatory)
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 if all ok, else appropriate error value.
-> +	 */
->  	int (*start)(struct udevice *dev);
-> +
-> +	/**
-> +	 * stop() - Stop the remoteproc device (optional)
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 if all ok, else appropriate error value.
-> +	 */
->  	int (*stop)(struct udevice *dev);
-> +
-> +	/**
-> +	 * reset() - Reset the remoteproc device (optional)
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 if all ok, else appropriate error value.
-> +	 */
->  	int (*reset)(struct udevice *dev);
-> +
-> +	/**
-> +	 * is_running() - Check if the remote processor is running (optional)
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 if running, 1 if not running, -ve on error.
-> +	 */
->  	int (*is_running)(struct udevice *dev);
-> +
-> +	/**
-> +	 * ping() - Ping the remote device for basic communication (optional)
-> +	 *
-> +	 * @dev:	Remote proc device
-> +	 * @return 0 on success, 1 if not responding, -ve on other errors.
-> +	 */
->  	int (*ping)(struct udevice *dev);
->  };
->  
-> @@ -80,23 +121,20 @@ struct dm_rproc_ops {
->  #ifdef CONFIG_REMOTEPROC
->  /**
->   * rproc_init() - Initialize all bound remote proc devices
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_init(void);
->  
->  /**
->   * rproc_dev_init() - Initialize a remote proc device based on id
->   * @id:		id of the remote processor
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_dev_init(int id);
->  
->  /**
->   * rproc_is_initialized() - check to see if remoteproc devices are initialized
-> - *
-> - * Return: 0 if all devices are initialized, else appropriate error value.
-> + * @return true if all devices are initialized, false otherwise.
->   */
->  bool rproc_is_initialized(void);
->  
-> @@ -105,55 +143,49 @@ bool rproc_is_initialized(void);
->   * @id:		id of the remote processor
->   * @addr:	address in memory where the binary image is located
->   * @size:	size of the binary image
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_load(int id, ulong addr, ulong size);
->  
->  /**
->   * rproc_start() - Start a remote processor
->   * @id:		id of the remote processor
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_start(int id);
->  
->  /**
->   * rproc_stop() - Stop a remote processor
->   * @id:		id of the remote processor
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_stop(int id);
->  
->  /**
->   * rproc_reset() - reset a remote processor
->   * @id:		id of the remote processor
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
-> + * @return 0 if all ok, else appropriate error value.
->   */
->  int rproc_reset(int id);
->  
->  /**
->   * rproc_ping() - ping a remote processor to check if it can communicate
->   * @id:		id of the remote processor
-> + * @return 0 if all ok, else appropriate error value.
->   *
->   * NOTE: this might need communication path available, which is not implemented
->   * as part of remoteproc framework - hook on to appropriate bus architecture to
->   * do the same
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
->   */
->  int rproc_ping(int id);
->  
->  /**
->   * rproc_is_running() - check to see if remote processor is running
->   * @id:		id of the remote processor
-> + * @return 0 if running, 1 if not running, -ve on error.
->   *
->   * NOTE: this may not involve actual communication capability of the remote
->   * processor, but just ensures that it is out of reset and executing code.
-> - *
-> - * Return: 0 if all ok, else appropriate error value.
->   */
->  int rproc_is_running(int id);
->  #else
-> 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/0v_+TRmsx3cw0GE+R.=FQXS
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAlz2LIMACgkQAR8vZIA0
+zr2b7wgA0Lm4B40ndphD2Cx0IUAXFgnjDCNMpw02hz+kX6q7nOspn5wxGflOJgQd
+ZXr81j5iojYiNenTwS1yorXuYiUDLXqYcZj7JUYZZ/v7JjSAcm4BVIFasYjF9Ve2
+EeYvUBs6EnShBptEcwqxllCwNhj3NPrCyQ0dbYYM0zxFRb/GHjac3F4ebtgPdZ6A
+Jl2F5yudkID3A2ehPncw4NfP8Gf83iiN2u/0WI3BnF/jWh9labFkrMzovWx3MalT
+5ObrAHfFAJmlkBJl6bec4J6zkOqHWnOvkf+qjCCsUriq+cPSepo8WMfVABG4iNgg
+hT/OF1yaCZ1nx+U9JSwG6iq/Bx31Bw==
+=Z/et
+-----END PGP SIGNATURE-----
+
+--Sig_/0v_+TRmsx3cw0GE+R.=FQXS--
+
+--===============8817849876893397290==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============8817849876893397290==--

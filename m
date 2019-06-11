@@ -2,52 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EB3F341DA
-	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jun 2019 10:32:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E5E13C525
+	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Jun 2019 09:31:56 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D66C0C46D54
-	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jun 2019 08:32:13 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5442CE6A3D
+	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Jun 2019 07:31:54 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8BF2BC46D53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DD98C07A27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  4 Jun 2019 08:32:12 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 45J4sl1v7vz1rXvq;
- Tue,  4 Jun 2019 10:32:11 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 45J4sl0sVkz1qqkh;
- Tue,  4 Jun 2019 10:32:11 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id 0zJvNYe4qL2g; Tue,  4 Jun 2019 10:32:09 +0200 (CEST)
-X-Auth-Info: VeMjKSqEsTVqL/zHewdHmNT14uMdQhWDUeeCCSWfpVA=
-Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue,  4 Jun 2019 10:32:09 +0200 (CEST)
-Date: Tue, 4 Jun 2019 10:32:03 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabien Dessenne <fabien.dessenne@st.com>
-Message-ID: <20190604103203.0983fbd3@jawa>
-In-Reply-To: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
-References: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+ Tue, 11 Jun 2019 07:31:53 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5B7VPjT032228; Tue, 11 Jun 2019 09:31:47 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=b2jXa82MCuNrNrcVPLPsiq+1ZbAlRvlthhrVXOsWQaw=;
+ b=jXM9/j/LP4jizGnStWuSWUjuZjV8vzwguuQ4tLY/83wiQ8qJZMie6VxF6FBEEylxSNLL
+ jIXoigYg7S0SUuuxliKtupLH7LQHJQdDJ/seydDUI6hPjl9i67m+yIaRekv2HHcutpA6
+ oBK8a/1tyG909oCIXBfYawtOJqWY2zeBUY7f9xg9K5N+rWvL8Wo++PGppW+dIKf6V5zS
+ l16kwS9ybNe9VMdrCYPtkNm8CxckN7i2QH+2vcoo8O1EoA5Y+0ZUyXJX9zD3fBLjglFZ
+ n5qqS5rcUAsDgzm0cK1S1jh2qKlCW/yuPDB/nDEeDy1BYoKpw5xWVJKG1LiFo3Na8Z+G Sg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2t26rjrddm-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
+ Tue, 11 Jun 2019 09:31:47 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D104638;
+ Tue, 11 Jun 2019 07:31:46 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B46DA160F;
+ Tue, 11 Jun 2019 07:31:46 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 11 Jun
+ 2019 09:31:46 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Tue, 11 Jun 2019 09:31:46 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, Patrick DELAUNAY
+ <patrick.delaunay@st.com>, Christophe KERELLO <christophe.kerello@st.com>,
+ "trini@konsulko.com" <trini@konsulko.com>
+Thread-Topic: [PATCH v2 1/3] arm: dts: stm32mp157: Add missing pinctrl
+ definitions
+Thread-Index: AQHVALyirt6KxGkowkCAQQAdbrPQ7qaWLGYA
+Date: Tue, 11 Jun 2019 07:31:46 +0000
+Message-ID: <31c18d6e-c4ba-64a0-d70f-f64c43f85d5f@st.com>
+References: <20190502075645.19901-1-manivannan.sadhasivam@linaro.org>
+ <20190502075645.19901-2-manivannan.sadhasivam@linaro.org>
+In-Reply-To: <20190502075645.19901-2-manivannan.sadhasivam@linaro.org>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.49]
+Content-ID: <2474BA82DF26B14A9220524D79545526@st.com>
 MIME-Version: 1.0
-Cc: Christophe Kerello <christophe.kerello@st.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
- Arnaud Pouliquen <arnaud.pouliquen@st.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v3 0/7] Add STM32 Cortex-M4
-	remoteproc driver
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-06-11_03:, , signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] arm: dts: stm32mp157: Add missing
+ pinctrl definitions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -59,128 +84,122 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8817849876893397290=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============8817849876893397290==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/0v_+TRmsx3cw0GE+R.=FQXS"; protocol="application/pgp-signature"
-
---Sig_/0v_+TRmsx3cw0GE+R.=FQXS
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Hi Fabien,
-
-> This patchset adds an STM32 remoteproc driver.
->=20
-> Patch 1 adds the xxx_translate_dma_address() API which is the
-> equivalent of the xxx_translate_address() relying on the "dma-ranges"
-> property instead of the "ranges" property.
->=20
-> Patch 2 fixes and completes function headers of remoteproc.h.
->=20
-> Patch 3 & 4 add the support of the ELF image loading (the current
-> implementation supports only binary image loading).
->=20
-> Patch 5 is about the driver, and patches 6 & 7 are about MAINTAINERS
-> and configs update.
->=20
-
-Thank you for your work - the Vybrid VF610 also has Cortex-M4/M3
-embedded and (probably) in some future somebody will want to setup it
-in U-Boot. Those changes looks generic and shall be easily re-usable.
-
-Thanks one more time.
-
-> Changes since v2:
-> -Moved helpers to rproc-elf-loader.c
-> -Rename *elf* functions in *elf32*, preparing future support for elf64
-> Changes since v1:
-> -Added tests for rproc_elf*() and *_translate_dma_address()
-> -Changed memory translation ops from da_to_pa() to device_to_virt() :
-> the name is updated and the translation now converts to virtual
-> instead of physical. -Merged rproc_elf_is_valid() in
-> rproc_elf_sanity_check() -Used explicit error values in
-> rproc_elf_sanity_check() -Added and fix comments in various headers
-> -Misc minor changes
->=20
-> Fabien Dessenne (7):
->   dm: core: Introduce xxx_translate_dma_address()
->   remoteproc: fix function headers
->   remoteproc: add device_to_virt ops
->   remoteproc: add elf file load support
->   remoteproc: Introduce STM32 Cortex-M4 remoteproc driver
->   MAINTAINERS: Add stm32 remoteproc driver
->   configs: stm32mp15: enable stm32 remoteproc
->=20
->  MAINTAINERS                           |   1 +
->  arch/sandbox/dts/test.dts             |   4 +
->  common/fdt_support.c                  |   6 +
->  configs/stm32mp15_basic_defconfig     |   2 +
->  configs/stm32mp15_trusted_defconfig   |   2 +
->  drivers/core/of_addr.c                |   4 +
->  drivers/core/ofnode.c                 |   8 ++
->  drivers/core/read.c                   |   5 +
->  drivers/remoteproc/Kconfig            |  10 ++
->  drivers/remoteproc/Makefile           |   3 +-
->  drivers/remoteproc/rproc-elf-loader.c | 106 ++++++++++++++
->  drivers/remoteproc/sandbox_testproc.c |  19 +++
->  drivers/remoteproc/stm32_copro.c      | 257
-> ++++++++++++++++++++++++++++++++++
-> include/dm/of_addr.h                  |  18 +++
-> include/dm/ofnode.h                   |  16 ++-
-> include/dm/read.h                     |  20 ++-
-> include/fdt_support.h                 |  24 ++++
-> include/remoteproc.h                  | 146 +++++++++++++------
-> test/dm/remoteproc.c                  | 122 ++++++++++++++++
-> test/dm/test-fdt.c                    |  12 ++ 20 files changed, 743
-> insertions(+), 42 deletions(-) create mode 100644
-> drivers/remoteproc/rproc-elf-loader.c create mode 100644
-> drivers/remoteproc/stm32_copro.c
->=20
 
 
+On 5/2/19 9:56 AM, Manivannan Sadhasivam wrote:
+> Add missing pinctrl definitions for STM32MP157.
+> 
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+> ---
+>  arch/arm/dts/stm32mp157-pinctrl.dtsi | 63 ++++++++++++++++++++++++++++
+>  1 file changed, 63 insertions(+)
+> 
+> diff --git a/arch/arm/dts/stm32mp157-pinctrl.dtsi b/arch/arm/dts/stm32mp157-pinctrl.dtsi
+> index 0aae69b0a04..200d2c00c5f 100644
+> --- a/arch/arm/dts/stm32mp157-pinctrl.dtsi
+> +++ b/arch/arm/dts/stm32mp157-pinctrl.dtsi
+> @@ -220,6 +220,16 @@
+>  				};
+>  			};
+>  
+> +			i2c1_pins_b: i2c1-1 {
+> +				pins {
+> +					pinmux = <STM32_PINMUX('F', 14, AF5)>, /* I2C1_SCL */
+> +						 <STM32_PINMUX('F', 15, AF5)>; /* I2C1_SDA */
+> +					bias-disable;
+> +					drive-open-drain;
+> +					slew-rate = <0>;
+> +				};
+> +			};
+> +
+>  			i2c2_pins_a: i2c2-0 {
+>  				pins {
+>  					pinmux = <STM32_PINMUX('H', 4, AF4)>, /* I2C2_SCL */
+> @@ -230,6 +240,16 @@
+>  				};
+>  			};
+>  
+> +			i2c2_pins_b: i2c2-1 {
+> +				pins {
+> +					pinmux = <STM32_PINMUX('Z', 0, AF3)>, /* I2C2_SCL */
+> +						 <STM32_PINMUX('H', 5, AF4)>; /* I2C2_SDA */
+> +					bias-disable;
+> +					drive-open-drain;
+> +					slew-rate = <0>;
+> +				};
+> +			};
+> +
+>  			i2c5_pins_a: i2c5-0 {
+>  				pins {
+>  					pinmux = <STM32_PINMUX('A', 11, AF4)>, /* I2C5_SCL */
+> @@ -375,6 +395,21 @@
+>  				};
+>  			};
+>  
+> +			spi2_pins_a: spi2-0 {
+> +				pins1 {
+> +					pinmux = <STM32_PINMUX('B', 10, AF5)>, /* SPI2_SCK */
+> +						 <STM32_PINMUX('I', 0, AF5)>, /* SPI2_NSS */
+> +						 <STM32_PINMUX('I', 3, AF5)>; /* SPI2_MOSI */
+> +					bias-disable;
+> +					drive-push-pull;
+> +					slew-rate = <3>;
+> +				};
+> +				pins2 {
+> +					pinmux = <STM32_PINMUX('I', 2, AF5)>; /* SPI2_MISO */
+> +					bias-disable;
+> +				};
+> +			};
+> +
+>  			stusb1600_pins_a: stusb1600-0 {
+>  				pins {
+>  					pinmux = <STM32_PINMUX('I', 11, ANALOG)>;
+> @@ -395,6 +430,34 @@
+>  				};
+>  			};
+>  
+> +			uart4_pins_b: uart4-1 {
+> +				pins1 {
+> +					pinmux = <STM32_PINMUX('D', 1, AF8)>; /* UART4_TX */
+> +					bias-disable;
+> +					drive-push-pull;
+> +					slew-rate = <0>;
+> +				};
+> +				pins2 {
+> +					pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
+> +					bias-disable;
+> +				};
+> +			};
+> +
+> +			uart7_pins_a: uart7-0 {
+> +				pins1 {
+> +					pinmux = <STM32_PINMUX('E', 8, AF7)>; /* UART4_TX */
+> +					bias-disable;
+> +					drive-push-pull;
+> +					slew-rate = <0>;
+> +				};
+> +				pins2 {
+> +					pinmux = <STM32_PINMUX('E', 7, AF7)>, /* UART4_RX */
+> +						 <STM32_PINMUX('E', 10, AF7)>, /* UART4_CTS */
+> +						 <STM32_PINMUX('E', 9, AF7)>; /* UART4_RTS */
+> +					bias-disable;
+> +				};
+> +			};
+> +
+>  			usbotg_hs_pins_a: usbotg_hs-0 {
+>  				pins {
+>  					pinmux = <STM32_PINMUX('A', 10, ANALOG)>; /* OTG_ID */
+> 
 
+Applied
 
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/0v_+TRmsx3cw0GE+R.=FQXS
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAlz2LIMACgkQAR8vZIA0
-zr2b7wgA0Lm4B40ndphD2Cx0IUAXFgnjDCNMpw02hz+kX6q7nOspn5wxGflOJgQd
-ZXr81j5iojYiNenTwS1yorXuYiUDLXqYcZj7JUYZZ/v7JjSAcm4BVIFasYjF9Ve2
-EeYvUBs6EnShBptEcwqxllCwNhj3NPrCyQ0dbYYM0zxFRb/GHjac3F4ebtgPdZ6A
-Jl2F5yudkID3A2ehPncw4NfP8Gf83iiN2u/0WI3BnF/jWh9labFkrMzovWx3MalT
-5ObrAHfFAJmlkBJl6bec4J6zkOqHWnOvkf+qjCCsUriq+cPSepo8WMfVABG4iNgg
-hT/OF1yaCZ1nx+U9JSwG6iq/Bx31Bw==
-=Z/et
------END PGP SIGNATURE-----
-
---Sig_/0v_+TRmsx3cw0GE+R.=FQXS--
-
---===============8817849876893397290==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Thanks
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============8817849876893397290==--

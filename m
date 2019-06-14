@@ -2,67 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B74F445B1D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jun 2019 13:06:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A85B45B23
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jun 2019 13:08:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8149FC5BAE0
-	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jun 2019 11:06:37 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 27CD7C5BAE9
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jun 2019 11:08:43 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE69BC5451D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B6B6AC5BAE7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 14 Jun 2019 11:06:35 +0000 (UTC)
+ Fri, 14 Jun 2019 11:08:38 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5EAusdp023636; Fri, 14 Jun 2019 13:06:30 +0200
+ x5EB7q1v031238; Fri, 14 Jun 2019 13:08:35 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=Q3WruIIiD8EDNT46v0p9QeaelvaTF/j4M+IAc1I5qNI=;
- b=wvUy5vhPy7s2vF1dvCkp2cXX1NSAk/PcfsCQsweH3Arf4vv0sYsG4Z3htBVRICobelCL
- murvqaVJUcDPxqINveNIYfgfvL+wSjeYOhKUWb8EDbKLvMUKNKvKMerhOMzlqW1a0y3F
- 87ItHHVx2AOQqCY97BDEkzfHK7E4RXRCZ0Ubh9yyr4VcpAdIfgnHbVOPGpjOWwWpODGW
- gdYzPxd0bzED64Hz0ZL7VYg/icpZXWfQc0PrzaRegm0etPsfx+OZG/Rr19MIFdPZS9qn
- Bjq2UwiRCqqO9PXc2q81nckfkN3zRrHbKNCh+htg/Qc/LxNEr7awKJiHGSxltUwhjdY9 xQ== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=u6g7v0hdYFpGtZGaYt90aDhrQp4lms8JExepu1x52yg=;
+ b=doiyu892M4vwKLuk9B+DeLPiIaQQQyH22sK35Gw8imTUU2j5CcaLy582AD/YjS2U9YMy
+ A83FC+KTzgk+KxQljtPf9p6kXtUNVh7z3Th4NFi1NMOSJxOvpQxu0V+oHFdkv35kv526
+ QzDMaJ/RHRyUBc62GADA/QQEWJkOIJtjBL28QdRK+C7w/EPDOkV4wY6zv7v2kXWAt/CZ
+ aa6DNBwhaOp8HywsAdSp0zU6OM868DW1FPwrvs7xlo7LKIgJUBm5gYapT0INik3bU1zP
+ f8Lg8aywRPzTnPDsNa332D20Wd0YIUvl+s0keLs8YQHIaEvxL+Q6xZjhkL3tJfoRDL5K ZQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2t2f8ehqv0-1
+ by mx08-00178001.pphosted.com with ESMTP id 2t2f8ehr7m-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 14 Jun 2019 13:06:21 +0200
+ Fri, 14 Jun 2019 13:08:35 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 61D753A;
- Fri, 14 Jun 2019 11:06:09 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4BBFD2820;
- Fri, 14 Jun 2019 11:06:09 +0000 (GMT)
-Received: from SAFEX1HUBCAS23.st.com (10.75.90.47) by Safex1hubcas24.st.com
- (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 14 Jun
- 2019 13:06:09 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3E9B134;
+ Fri, 14 Jun 2019 11:08:35 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas21.st.com [10.75.90.44])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1D159282A;
+ Fri, 14 Jun 2019 11:08:35 +0000 (GMT)
+Received: from SAFEX1HUBCAS23.st.com (10.75.90.47) by SAFEX1HUBCAS21.st.com
+ (10.75.90.44) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 14 Jun
+ 2019 13:08:35 +0200
 Received: from localhost (10.201.23.85) by webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 14 Jun 2019 13:06:08
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 14 Jun 2019 13:08:34
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 14 Jun 2019 13:05:59 +0200
-Message-ID: <1560510360-14446-3-git-send-email-patrick.delaunay@st.com>
+Date: Fri, 14 Jun 2019 13:08:31 +0200
+Message-ID: <1560510512-15015-1-git-send-email-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1560510360-14446-1-git-send-email-patrick.delaunay@st.com>
-References: <1560510360-14446-1-git-send-email-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-14_05:, , signatures=0
-Cc: Maxime Ripard <maxime.ripard@bootlin.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Patrice Chotard <patrice.chotard@st.com>,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
  Patrick Delaunay <patrick.delaunay@st.com>,
- Michal Simek <michal.simek@xilinx.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- York Sun <york.sun@nxp.com>, Vipul Kumar <vipul.kumar@xilinx.com>
-Subject: [Uboot-stm32] [PATCH 2/2] stm32mp1: move CONFIG_ENV in Kconfig
+ Albert Aribaud <albert.u.boot@aribaud.net>
+Subject: [Uboot-stm32] [PATCH 1/2] usb: dwc2: correctly handle binding for
+	g-tx-fifo-size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,72 +73,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Move 2 ENV configuration flags in board Kconfig
-- CONFIG_ENV_SECT_SIZE
-- CONFIG_ENV_OFFSET
+Manage g-tx-fifo-size as a array as specify in the binding.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- board/st/stm32mp1/Kconfig  | 6 ++++++
- env/Kconfig                | 5 ++---
- include/configs/stm32mp1.h | 5 -----
- 3 files changed, 8 insertions(+), 8 deletions(-)
+ arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi |  4 ----
+ drivers/usb/gadget/dwc2_udc_otg.c        | 17 ++++++++++++++++-
+ 2 files changed, 16 insertions(+), 5 deletions(-)
 
-diff --git a/board/st/stm32mp1/Kconfig b/board/st/stm32mp1/Kconfig
-index 5ab9415..5f81f94 100644
---- a/board/st/stm32mp1/Kconfig
-+++ b/board/st/stm32mp1/Kconfig
-@@ -9,4 +9,10 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "stm32mp1"
+diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+index 5b19e44..994092a 100644
+--- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+@@ -56,10 +56,6 @@
+ 	};
+ };
  
-+config ENV_SECT_SIZE
-+	default 0x40000 if ENV_IS_IN_SPI_FLASH
-+
-+config ENV_OFFSET
-+	default 0x280000 if ENV_IS_IN_SPI_FLASH
-+
- endif
-diff --git a/env/Kconfig b/env/Kconfig
-index 676d6eb..e03ec32 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -468,8 +468,7 @@ if ARCH_ROCKCHIP || ARCH_SUNXI || ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL || ARC
- 
- config ENV_OFFSET
- 	hex "Environment Offset"
--	depends on !ENV_IS_IN_UBI
--	depends on !ENV_IS_NOWHERE
-+	depends on (!ENV_IS_IN_UBI && !ENV_IS_NOWHERE) || ARCH_STM32MP
- 	default 0x3f8000 if ARCH_ROCKCHIP
- 	default 0x88000 if ARCH_SUNXI
- 	default 0xE0000 if ARCH_ZYNQ
-@@ -489,7 +488,7 @@ config ENV_SIZE
- 
- config ENV_SECT_SIZE
- 	hex "Environment Sector-Size"
--	depends on !ENV_IS_NOWHERE && (ARCH_ZYNQ || ARCH_ZYNQMP)
-+	depends on (!ENV_IS_NOWHERE && (ARCH_ZYNQ || ARCH_ZYNQMP)) || ARCH_STM32MP
- 	default 0x40000 if ARCH_ZYNQMP
- 	default 0x20000 if ARCH_ZYNQ
- 	help
-diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-index 0ce2fcb..637f9bf 100644
---- a/include/configs/stm32mp1.h
-+++ b/include/configs/stm32mp1.h
-@@ -38,11 +38,6 @@
-  */
- #define CONFIG_SYS_LOAD_ADDR			STM32_DDR_BASE
- 
--#if defined(CONFIG_ENV_IS_IN_SPI_FLASH)
--#define	CONFIG_ENV_SECT_SIZE			SZ_256K
--#define	CONFIG_ENV_OFFSET			0x00280000
--#endif
+-&usbotg_hs {
+-	g-tx-fifo-size = <576>;
+-};
 -
- /* ATAGs */
- #define CONFIG_CMDLINE_TAG
- #define CONFIG_SETUP_MEMORY_TAGS
+ &v3v3 {
+ 	regulator-always-on;
+ };
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 494ab53..7e6b5fc 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -1039,6 +1039,8 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
+ 	int node = dev_of_offset(dev);
+ 	ulong drvdata;
+ 	void (*set_params)(struct dwc2_plat_otg_data *data);
++	u32 tx_fifo_sz_array[DWC2_MAX_HW_ENDPOINTS];
++	int ret, i;
+ 
+ 	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
+ 		dev_dbg(dev, "Invalid mode\n");
+@@ -1050,7 +1052,20 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
+ 	platdata->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
+ 	platdata->np_tx_fifo_sz = dev_read_u32_default(dev,
+ 						       "g-np-tx-fifo-size", 0);
+-	platdata->tx_fifo_sz = dev_read_u32_default(dev, "g-tx-fifo-size", 0);
++
++	platdata->tx_fifo_sz_nb =
++		dev_read_size(dev, "g-tx-fifo-size") / sizeof(u32);
++	if (platdata->tx_fifo_sz_nb > DWC2_MAX_HW_ENDPOINTS)
++		platdata->tx_fifo_sz_nb = DWC2_MAX_HW_ENDPOINTS;
++	if (platdata->tx_fifo_sz_nb) {
++		ret = dev_read_u32_array(dev, "g-tx-fifo-size",
++					 tx_fifo_sz_array,
++					 platdata->tx_fifo_sz_nb);
++		if (ret)
++			return ret;
++		for (i = 0; i < platdata->tx_fifo_sz_nb; i++)
++			platdata->tx_fifo_sz_array[i] = tx_fifo_sz_array[i];
++	}
+ 
+ 	platdata->force_b_session_valid =
+ 		dev_read_bool(dev, "u-boot,force-b-session-valid");
 -- 
 2.7.4
 

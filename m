@@ -2,36 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33B7A4A76C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 18:46:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D4834A76D
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 18:46:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D7F45CB51E9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 16:46:40 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DEC03CB51EA
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 16:46:41 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2328CB51E8
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 364D4CB51EA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jun 2019 16:46:39 +0000 (UTC)
+ Tue, 18 Jun 2019 16:46:41 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 45Sv9p3vT7z1rJtC;
- Tue, 18 Jun 2019 18:46:38 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 45Sv9r2k8Sz1rbkh;
+ Tue, 18 Jun 2019 18:46:40 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 45Sv9p3Qwkz1qqkH;
- Tue, 18 Jun 2019 18:46:38 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 45Sv9r2Cn3z1qqkH;
+ Tue, 18 Jun 2019 18:46:40 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id gYQUOI52e4Hw; Tue, 18 Jun 2019 18:46:37 +0200 (CEST)
-X-Auth-Info: YWJg9+Tx+BQ+O3d7SrDa/ECISziBzEABx2xe8SfQoEk=
+ with ESMTP id MRUGD-1VDY1l; Tue, 18 Jun 2019 18:46:39 +0200 (CEST)
+X-Auth-Info: INZs9hEO7a2LjbE8o9kGv56yTtxK0nAR8wOH/X/5vQ4=
 Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 18 Jun 2019 18:46:37 +0200 (CEST)
+ Tue, 18 Jun 2019 18:46:39 +0200 (CEST)
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+ <1560869838-22025-3-git-send-email-patrick.delaunay@st.com>
 From: Marek Vasut <marex@denx.de>
 Openpgp: preference=signencrypt
 Autocrypt: addr=marex@denx.de; prefer-encrypt=mutual; keydata=
@@ -76,17 +77,17 @@ Autocrypt: addr=marex@denx.de; prefer-encrypt=mutual; keydata=
  tgPc2T/X/ETe5eCuhxMytIYbt1fK2pDXPoIKbbDK4uEmg9USXZ+pYrac4PFo1d+6D6vmTjRZ
  GRRITOVpKgBndfPyqofxeKNKGdNf9FS/x89RlnDWXsQHm+0pXguSRG9XdB16ZFNgeo8SeZVr
  qc9uLfhyQp/zB6qEnuX1TToug7PuDgcNZdjN3vgTXyno2TFMxp/LKHqg
-Message-ID: <19c2894d-a526-da83-3f93-20de1605cbaa@denx.de>
-Date: Tue, 18 Jun 2019 18:46:17 +0200
+Message-ID: <fdbe01c7-dc25-df9c-5f8f-a02b2f89cc47@denx.de>
+Date: Tue, 18 Jun 2019 18:46:24 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+In-Reply-To: <1560869838-22025-3-git-send-email-patrick.delaunay@st.com>
 Content-Language: en-US
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/3] usb: dwc2: correctly handle
- binding for g-tx-fifo-size
+Subject: Re: [Uboot-stm32] [PATCH v2 3/3] usb: dwc2: allow peripheral mode
+ for OTG configuration
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,56 +105,36 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 6/18/19 4:57 PM, Patrick Delaunay wrote:
-> Manage g-tx-fifo-size as a array as specify in the binding.
+> Allow device mode in DWC2 driver when device tree select the dr_mode
+> "peripheral" or "otg".
+> 
+> The device mode is not allowed when dr_mode = "host" in device tree.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
 Reviewed-by: Marek Vasut <marex@denx.de>
 
-I'm missing 2/3 , although I think it might be better if you take this
-whole series through u-boot-stm .
-
 > ---
 > 
-> Changes in v2:
-> - move dt update in a separate patch
-> - remove unecessary temporary variable
+> Changes in v2: None
 > 
->  drivers/usb/gadget/dwc2_udc_otg.c | 14 +++++++++++++-
->  1 file changed, 13 insertions(+), 1 deletion(-)
+>  drivers/usb/gadget/dwc2_udc_otg.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-> index 494ab53..023439c 100644
+> index 023439c..35f4147 100644
 > --- a/drivers/usb/gadget/dwc2_udc_otg.c
 > +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -1039,6 +1039,7 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
->  	int node = dev_of_offset(dev);
->  	ulong drvdata;
+> @@ -1041,7 +1041,8 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
 >  	void (*set_params)(struct dwc2_plat_otg_data *data);
-> +	int ret;
+>  	int ret;
 >  
->  	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
+> -	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
+> +	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL &&
+> +	    usb_get_dr_mode(node) != USB_DR_MODE_OTG) {
 >  		dev_dbg(dev, "Invalid mode\n");
-> @@ -1050,7 +1051,18 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
->  	platdata->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
->  	platdata->np_tx_fifo_sz = dev_read_u32_default(dev,
->  						       "g-np-tx-fifo-size", 0);
-> -	platdata->tx_fifo_sz = dev_read_u32_default(dev, "g-tx-fifo-size", 0);
-> +
-> +	platdata->tx_fifo_sz_nb =
-> +		dev_read_size(dev, "g-tx-fifo-size") / sizeof(u32);
-> +	if (platdata->tx_fifo_sz_nb > DWC2_MAX_HW_ENDPOINTS)
-> +		platdata->tx_fifo_sz_nb = DWC2_MAX_HW_ENDPOINTS;
-> +	if (platdata->tx_fifo_sz_nb) {
-> +		ret = dev_read_u32_array(dev, "g-tx-fifo-size",
-> +					 platdata->tx_fifo_sz_array,
-> +					 platdata->tx_fifo_sz_nb);
-> +		if (ret)
-> +			return ret;
-> +	}
->  
->  	platdata->force_b_session_valid =
->  		dev_read_bool(dev, "u-boot,force-b-session-valid");
+>  		return -ENODEV;
+>  	}
 > 
 
 

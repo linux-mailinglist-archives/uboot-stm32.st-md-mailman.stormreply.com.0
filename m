@@ -2,63 +2,91 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E78304A49D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 16:57:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33B7A4A76C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 18:46:41 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24BB9CB36E9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 14:57:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D7F45CB51E9
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 16:46:40 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83A3ACB36E4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2328CB51E8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jun 2019 14:57:26 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5IEtwjW027249; Tue, 18 Jun 2019 16:57:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=JjTOdGIelS2ulJqE0pQ9RAARDMFHAiIsDb0iTKio8iw=;
- b=TeBrezGYSjr+R7grwh5krPbK4C2u/OcGQz7xFNL/9cx2IJfGBRqW1B/XWUPOy2kHcbxW
- l2C3siSxXmUZIFJ5Ldd6E5F1fZhnTWfYvg43A4d2Fatoyd7Nv7jm3JfjbzUOVH1kPYHJ
- VPq9qMgfhcBUdTCRiHgvIqqS25Iw00o9Bw86jeCmjho0jB4+hUrP1wzc7u+01j1flML8
- 7MXiQyIc2yg4FCmTLWoE4OOM2QuaHOduMG0tbGPsQIwBwSNo0p09UyDbiGWhHz/APvdo
- qxq3lIhnD2YvnNPhdYymx8A2ktsOhJcJboxEt5gysmTAMs6AB3B2KGdUokY+6r1PwFXD lA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2t68n3qb8u-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 18 Jun 2019 16:57:24 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 158D334;
- Tue, 18 Jun 2019 14:57:24 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EFFB62B6E;
- Tue, 18 Jun 2019 14:57:23 +0000 (GMT)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 18 Jun
- 2019 16:57:24 +0200
-Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 18 Jun 2019 16:57:23
- +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 18 Jun 2019 16:57:18 +0200
-Message-ID: <1560869838-22025-3-git-send-email-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+ Tue, 18 Jun 2019 16:46:39 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 45Sv9p3vT7z1rJtC;
+ Tue, 18 Jun 2019 18:46:38 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 45Sv9p3Qwkz1qqkH;
+ Tue, 18 Jun 2019 18:46:38 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id gYQUOI52e4Hw; Tue, 18 Jun 2019 18:46:37 +0200 (CEST)
+X-Auth-Info: YWJg9+Tx+BQ+O3d7SrDa/ECISziBzEABx2xe8SfQoEk=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Tue, 18 Jun 2019 18:46:37 +0200 (CEST)
+To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+From: Marek Vasut <marex@denx.de>
+Openpgp: preference=signencrypt
+Autocrypt: addr=marex@denx.de; prefer-encrypt=mutual; keydata=
+ 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
+Message-ID: <19c2894d-a526-da83-3f93-20de1605cbaa@denx.de>
+Date: Tue, 18 Jun 2019 18:46:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.85]
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-06-18_07:, , signatures=0
+In-Reply-To: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+Content-Language: en-US
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v2 3/3] usb: dwc2: allow peripheral mode for
-	OTG configuration
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] usb: dwc2: correctly handle
+ binding for g-tx-fifo-size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,36 +103,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Allow device mode in DWC2 driver when device tree select the dr_mode
-"peripheral" or "otg".
+On 6/18/19 4:57 PM, Patrick Delaunay wrote:
+> Manage g-tx-fifo-size as a array as specify in the binding.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
-The device mode is not allowed when dr_mode = "host" in device tree.
+Reviewed-by: Marek Vasut <marex@denx.de>
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+I'm missing 2/3 , although I think it might be better if you take this
+whole series through u-boot-stm .
 
-Changes in v2: None
+> ---
+> 
+> Changes in v2:
+> - move dt update in a separate patch
+> - remove unecessary temporary variable
+> 
+>  drivers/usb/gadget/dwc2_udc_otg.c | 14 +++++++++++++-
+>  1 file changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+> index 494ab53..023439c 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -1039,6 +1039,7 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
+>  	int node = dev_of_offset(dev);
+>  	ulong drvdata;
+>  	void (*set_params)(struct dwc2_plat_otg_data *data);
+> +	int ret;
+>  
+>  	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
+>  		dev_dbg(dev, "Invalid mode\n");
+> @@ -1050,7 +1051,18 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
+>  	platdata->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
+>  	platdata->np_tx_fifo_sz = dev_read_u32_default(dev,
+>  						       "g-np-tx-fifo-size", 0);
+> -	platdata->tx_fifo_sz = dev_read_u32_default(dev, "g-tx-fifo-size", 0);
+> +
+> +	platdata->tx_fifo_sz_nb =
+> +		dev_read_size(dev, "g-tx-fifo-size") / sizeof(u32);
+> +	if (platdata->tx_fifo_sz_nb > DWC2_MAX_HW_ENDPOINTS)
+> +		platdata->tx_fifo_sz_nb = DWC2_MAX_HW_ENDPOINTS;
+> +	if (platdata->tx_fifo_sz_nb) {
+> +		ret = dev_read_u32_array(dev, "g-tx-fifo-size",
+> +					 platdata->tx_fifo_sz_array,
+> +					 platdata->tx_fifo_sz_nb);
+> +		if (ret)
+> +			return ret;
+> +	}
+>  
+>  	platdata->force_b_session_valid =
+>  		dev_read_bool(dev, "u-boot,force-b-session-valid");
+> 
 
- drivers/usb/gadget/dwc2_udc_otg.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 023439c..35f4147 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -1041,7 +1041,8 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
- 	void (*set_params)(struct dwc2_plat_otg_data *data);
- 	int ret;
- 
--	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
-+	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL &&
-+	    usb_get_dr_mode(node) != USB_DR_MODE_OTG) {
- 		dev_dbg(dev, "Invalid mode\n");
- 		return -ENODEV;
- 	}
 -- 
-2.7.4
-
+Best regards,
+Marek Vasut
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

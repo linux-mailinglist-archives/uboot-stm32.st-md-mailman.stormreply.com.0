@@ -2,89 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1344A48807
-	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Jun 2019 17:56:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF67849AA2
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 09:32:18 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C0486C66726
-	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Jun 2019 15:56:44 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4F893C94C18
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jun 2019 07:32:17 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 07262C66725
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8968C94C17
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 17 Jun 2019 15:56:43 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 45SG6g2VZ6z1rC0W;
- Mon, 17 Jun 2019 17:56:43 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 45SG6g228jz1qqkd;
- Mon, 17 Jun 2019 17:56:43 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id ejvONO4GL9UX; Mon, 17 Jun 2019 17:56:42 +0200 (CEST)
-X-Auth-Info: Gf3hABn4paqTgh3Q2HTxMIyuiW11tRTbmkyxXGSa048=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 17 Jun 2019 17:56:42 +0200 (CEST)
-To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
+ Tue, 18 Jun 2019 07:32:14 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5I7QlaB001442; Tue, 18 Jun 2019 09:32:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=51GFlYe9y3ATZa20zMCmApdfFjhoLKRqzQbFyHLHoaI=;
+ b=ELK02WaDjqqrsn3EQjf6exxjjbb5xv0fW/CX78lRVwMFL4LPw1EG75iFPgIx/WpzJMiM
+ WOJ7I0vQ80vqNEQ66Ey30XgJTsQ5KxaRTf2dmaRtuN70Ye8FFPgNWXdsrnjm/Wkr3LWk
+ Lab3pHmWAGXrC+OhOdtSyzYvAtMmLCU/6a5IJRWN7dvwSBoQ/JG6Kra9oZTnw6RRMX7M
+ Iv9JFs/Wo8YwdHRyKB70xDnpAFWdme1lje+bhl98hiDy67sa7/Ju/IXB0umUK8B28IIC
+ +jKR0CWSQ1dBgl3AlNERXi7S2eEt/iWX6oUlVA9wzJhbt8HotU82dBQJhvpvCoB5KamT QA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2t68n3myr5-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
+ Tue, 18 Jun 2019 09:32:08 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AE27D4D;
+ Tue, 18 Jun 2019 07:32:06 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6AE1C15C3;
+ Tue, 18 Jun 2019 07:32:06 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 18 Jun
+ 2019 09:32:05 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Tue, 18 Jun 2019 09:32:05 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH 1/2] usb: dwc2: correctly handle binding for
+ g-tx-fifo-size
+Thread-Index: AQHVIqGCAXdXZ24bvUmPX7KusNDYFqaf4vcAgAEk0ZA=
+Date: Tue, 18 Jun 2019 07:32:05 +0000
+Message-ID: <82d09e04026247b390ba89690bfdd719@SFHDAG6NODE3.st.com>
 References: <1560510512-15015-1-git-send-email-patrick.delaunay@st.com>
-From: Marek Vasut <marex@denx.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=marex@denx.de; prefer-encrypt=mutual; keydata=
- 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
-Message-ID: <7f9736b4-9be1-2b4f-b29b-5f612a092de9@denx.de>
-Date: Mon, 17 Jun 2019 17:54:00 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <1560510512-15015-1-git-send-email-patrick.delaunay@st.com>
+ <7f9736b4-9be1-2b4f-b29b-5f612a092de9@denx.de>
+In-Reply-To: <7f9736b4-9be1-2b4f-b29b-5f612a092de9@denx.de>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.49]
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-06-18_04:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>, Lukasz Majewski <lukma@denx.de>
+ Albert Aribaud <albert.u.boot@aribaud.net>, Lukasz Majewski <lukma@denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
 Subject: Re: [Uboot-stm32] [PATCH 1/2] usb: dwc2: correctly handle binding
  for g-tx-fifo-size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -98,87 +78,83 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 6/14/19 1:08 PM, Patrick Delaunay wrote:
-> Manage g-tx-fifo-size as a array as specify in the binding.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> 
->  arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi |  4 ----
->  drivers/usb/gadget/dwc2_udc_otg.c        | 17 ++++++++++++++++-
->  2 files changed, 16 insertions(+), 5 deletions(-)
-> 
-> diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
-> index 5b19e44..994092a 100644
-> --- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
-> @@ -56,10 +56,6 @@
->  	};
->  };
->  
-> -&usbotg_hs {
-> -	g-tx-fifo-size = <576>;
-
-Should this really be in this patch ?
-
-> -};
-> -
->  &v3v3 {
->  	regulator-always-on;
->  };
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-> index 494ab53..7e6b5fc 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -1039,6 +1039,8 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
->  	int node = dev_of_offset(dev);
->  	ulong drvdata;
->  	void (*set_params)(struct dwc2_plat_otg_data *data);
-> +	u32 tx_fifo_sz_array[DWC2_MAX_HW_ENDPOINTS];
-
-Can't you just read directly into platdata->tx_fifo_sz_array[] below,
-and thus drop this temporary variable ?
-
-btw is this fix for current release or next ?
-
-> +	int ret, i;
->  
->  	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
->  		dev_dbg(dev, "Invalid mode\n");
-> @@ -1050,7 +1052,20 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
->  	platdata->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
->  	platdata->np_tx_fifo_sz = dev_read_u32_default(dev,
->  						       "g-np-tx-fifo-size", 0);
-> -	platdata->tx_fifo_sz = dev_read_u32_default(dev, "g-tx-fifo-size", 0);
-> +
-> +	platdata->tx_fifo_sz_nb =
-> +		dev_read_size(dev, "g-tx-fifo-size") / sizeof(u32);
-> +	if (platdata->tx_fifo_sz_nb > DWC2_MAX_HW_ENDPOINTS)
-> +		platdata->tx_fifo_sz_nb = DWC2_MAX_HW_ENDPOINTS;
-> +	if (platdata->tx_fifo_sz_nb) {
-> +		ret = dev_read_u32_array(dev, "g-tx-fifo-size",
-> +					 tx_fifo_sz_array,
-> +					 platdata->tx_fifo_sz_nb);
-> +		if (ret)
-> +			return ret;
-> +		for (i = 0; i < platdata->tx_fifo_sz_nb; i++)
-> +			platdata->tx_fifo_sz_array[i] = tx_fifo_sz_array[i];
-> +	}
->  
->  	platdata->force_b_session_valid =
->  		dev_read_bool(dev, "u-boot,force-b-session-valid");
-> 
-
-
--- 
-Best regards,
-Marek Vasut
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgTWFyZWssDQoNCj4gRnJvbTogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+DQo+IFNlbnQ6
+IGx1bmRpIDE3IGp1aW4gMjAxOSAxNzo1NA0KPiANCj4gT24gNi8xNC8xOSAxOjA4IFBNLCBQYXRy
+aWNrIERlbGF1bmF5IHdyb3RlOg0KPiA+IE1hbmFnZSBnLXR4LWZpZm8tc2l6ZSBhcyBhIGFycmF5
+IGFzIHNwZWNpZnkgaW4gdGhlIGJpbmRpbmcuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBQYXRy
+aWNrIERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QHN0LmNvbT4NCj4gPiAtLS0NCj4gPg0KPiA+
+ICBhcmNoL2FybS9kdHMvc3RtMzJtcDE1N2MtZXYxLXUtYm9vdC5kdHNpIHwgIDQgLS0tLQ0KPiA+
+ICBkcml2ZXJzL3VzYi9nYWRnZXQvZHdjMl91ZGNfb3RnLmMgICAgICAgIHwgMTcgKysrKysrKysr
+KysrKysrKy0NCj4gPiAgMiBmaWxlcyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCA1IGRlbGV0
+aW9ucygtKQ0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1l
+djEtdS1ib290LmR0c2kNCj4gPiBiL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1ldjEtdS1ib290
+LmR0c2kNCj4gPiBpbmRleCA1YjE5ZTQ0Li45OTQwOTJhIDEwMDY0NA0KPiA+IC0tLSBhL2FyY2gv
+YXJtL2R0cy9zdG0zMm1wMTU3Yy1ldjEtdS1ib290LmR0c2kNCj4gPiArKysgYi9hcmNoL2FybS9k
+dHMvc3RtMzJtcDE1N2MtZXYxLXUtYm9vdC5kdHNpDQo+ID4gQEAgLTU2LDEwICs1Niw2IEBADQo+
+ID4gIAl9Ow0KPiA+ICB9Ow0KPiA+DQo+ID4gLSZ1c2JvdGdfaHMgew0KPiA+IC0JZy10eC1maWZv
+LXNpemUgPSA8NTc2PjsNCj4gDQo+IFNob3VsZCB0aGlzIHJlYWxseSBiZSBpbiB0aGlzIHBhdGNo
+ID8NCg0KQXMgSSBjaGFuZ2UgdGhlIGJpbmRpbmcgcGFyc2luZywgdGhlIHN0bTMybXAxIHdpbGwg
+ZG9uJ3Qgd29yayB3aXRob3V0IHRoaXMgcGF0Y2guDQpJIG1ha2UgYSBjb21tdW4gcGF0Y2ggb25s
+eSB0byBhbGxvdyBiaXNlYywgYnV0IEkgY2FuIHNwbGl0IHRoZSBzZXJpZSB3aXRoIDIgcGF0Y2hl
+cy4NCg0KPiANCj4gPiAtfTsNCj4gPiAtDQo+ID4gICZ2M3YzIHsNCj4gPiAgCXJlZ3VsYXRvci1h
+bHdheXMtb247DQo+ID4gIH07DQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdXNiL2dhZGdldC9k
+d2MyX3VkY19vdGcuYw0KPiA+IGIvZHJpdmVycy91c2IvZ2FkZ2V0L2R3YzJfdWRjX290Zy5jDQo+
+ID4gaW5kZXggNDk0YWI1My4uN2U2YjVmYyAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3VzYi9n
+YWRnZXQvZHdjMl91ZGNfb3RnLmMNCj4gPiArKysgYi9kcml2ZXJzL3VzYi9nYWRnZXQvZHdjMl91
+ZGNfb3RnLmMNCj4gPiBAQCAtMTAzOSw2ICsxMDM5LDggQEAgc3RhdGljIGludCBkd2MyX3VkY19v
+dGdfb2ZkYXRhX3RvX3BsYXRkYXRhKHN0cnVjdA0KPiB1ZGV2aWNlICpkZXYpDQo+ID4gIAlpbnQg
+bm9kZSA9IGRldl9vZl9vZmZzZXQoZGV2KTsNCj4gPiAgCXVsb25nIGRydmRhdGE7DQo+ID4gIAl2
+b2lkICgqc2V0X3BhcmFtcykoc3RydWN0IGR3YzJfcGxhdF9vdGdfZGF0YSAqZGF0YSk7DQo+ID4g
+Kwl1MzIgdHhfZmlmb19zel9hcnJheVtEV0MyX01BWF9IV19FTkRQT0lOVFNdOw0KPiANCj4gQ2Fu
+J3QgeW91IGp1c3QgcmVhZCBkaXJlY3RseSBpbnRvIHBsYXRkYXRhLT50eF9maWZvX3N6X2FycmF5
+W10gYmVsb3csIGFuZCB0aHVzIGRyb3ANCj4gdGhpcyB0ZW1wb3JhcnkgdmFyaWFibGUgPw0KDQpJ
+dCB3YXMgdGhlIGNhc2UgaW4gaW4gbXkgZmlyc3QgaW50ZXJuYWwgdmVyc2lvbi4NCg0KaWYgKHBs
+YXRkYXRhLT50eF9maWZvX3N6X25iKSB7DQoJCXJldCA9IGRldl9yZWFkX3UzMl9hcnJheShkZXYs
+ICJnLXR4LWZpZm8tc2l6ZSIsDQoJCQkJCSAmcGxhdGRhdGEtPnR4X2ZpZm9fc3pfYXJyYXksDQoJ
+CQkJCSBwbGF0ZGF0YS0+dHhfZmlmb19zel9uYik7DQoJCWlmIChyZXQpDQoJCQlyZXR1cm4gcmV0
+Ow0KCX0NCg0KQW5kIEkgYWRkIGl0IHRvIGF2b2lkIHRoZSB3YXJuaW5nIC8gcG90ZW50aWFsIGlz
+c3VlOg0KDQovbG9jYWwvaG9tZS9mcnEwNzYzMi92aWV3cy91LWJvb3QvdS1ib290L2RyaXZlcnMv
+dXNiL2dhZGdldC9kd2MyX3VkY19vdGcuYzoxMDYyOjc6IA0KCXdhcm5pbmc6IHBhc3NpbmcgYXJn
+dW1lbnQgMyBvZiDigJhkZXZfcmVhZF91MzJfYXJyYXnigJkgZnJvbSBpbmNvbXBhdGlibGUgcG9p
+bnRlciB0eXBlIFstV2luY29tcGF0aWJsZS1wb2ludGVyLXR5cGVzXQ0KICAgICAgICZwbGF0ZGF0
+YS0+dHhfZmlmb19zel9hcnJheSwNCiAgICAgICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4N
+CkluIGZpbGUgaW5jbHVkZWQgZnJvbSAvbG9jYWwvaG9tZS9mcnEwNzYzMi92aWV3cy91LWJvb3Qv
+dS1ib290L2luY2x1ZGUvZG0uaDoxMiwNCiAgICAgICAgICAgICBmcm9tIC9sb2NhbC9ob21lL2Zy
+cTA3NjMyL3ZpZXdzL3UtYm9vdC91LWJvb3QvZHJpdmVycy91c2IvZ2FkZ2V0L2R3YzJfdWRjX290
+Zy5jOjIyOg0KCS9sb2NhbC9ob21lL2ZycTA3NjMyL3ZpZXdzL3UtYm9vdC91LWJvb3QvaW5jbHVk
+ZS9kbS9yZWFkLmg6NzEwOjE1OiBub3RlOiBleHBlY3RlZCDigJh1MzIgKuKAmSB7YWthIOKAmHVu
+c2lnbmVkIGludCAq4oCZfSBidXQgYXJndW1lbnQgaXMgb2YgdHlwZSDigJh1bnNpZ25lZCBpbnQg
+KCopWzE2XeKAmQ0KICAgICAgICAgIHUzMiAqb3V0X3ZhbHVlcywgc2l6ZV90IHN6KQ0KICAgICAg
+ICAgIH5+fn5+Xn5+fn5+fn5+fg0KDQo+IGJ0dyBpcyB0aGlzIGZpeCBmb3IgY3VycmVudCByZWxl
+YXNlIG9yIG5leHQgPw0KDQpJIGhvcGUgaXQgZm9yIHRoZSB2MjAxOS4wNyAoYXMgaXQgaXMgb25s
+eSBpbXBhY3QgdGhlIHN0bTMybXAxIGFyY2gvYm9hcmQpLiANCkJ1dCBpdCBpcyBub3QgYmxvY2tp
+bmcuDQoNCj4gDQo+ID4gKwlpbnQgcmV0LCBpOw0KPiA+DQo+ID4gIAlpZiAodXNiX2dldF9kcl9t
+b2RlKG5vZGUpICE9IFVTQl9EUl9NT0RFX1BFUklQSEVSQUwpIHsNCj4gPiAgCQlkZXZfZGJnKGRl
+diwgIkludmFsaWQgbW9kZVxuIik7DQo+ID4gQEAgLTEwNTAsNyArMTA1MiwyMCBAQCBzdGF0aWMg
+aW50IGR3YzJfdWRjX290Z19vZmRhdGFfdG9fcGxhdGRhdGEoc3RydWN0DQo+IHVkZXZpY2UgKmRl
+dikNCj4gPiAgCXBsYXRkYXRhLT5yeF9maWZvX3N6ID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2
+LCAiZy1yeC1maWZvLXNpemUiLCAwKTsNCj4gPiAgCXBsYXRkYXRhLT5ucF90eF9maWZvX3N6ID0g
+ZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LA0KPiA+ICAJCQkJCQkgICAgICAgImctbnAtdHgtZmlm
+by1zaXplIiwgMCk7DQo+ID4gLQlwbGF0ZGF0YS0+dHhfZmlmb19zeiA9IGRldl9yZWFkX3UzMl9k
+ZWZhdWx0KGRldiwgImctdHgtZmlmby1zaXplIiwgMCk7DQo+ID4gKw0KPiA+ICsJcGxhdGRhdGEt
+PnR4X2ZpZm9fc3pfbmIgPQ0KPiA+ICsJCWRldl9yZWFkX3NpemUoZGV2LCAiZy10eC1maWZvLXNp
+emUiKSAvIHNpemVvZih1MzIpOw0KPiA+ICsJaWYgKHBsYXRkYXRhLT50eF9maWZvX3N6X25iID4g
+RFdDMl9NQVhfSFdfRU5EUE9JTlRTKQ0KPiA+ICsJCXBsYXRkYXRhLT50eF9maWZvX3N6X25iID0g
+RFdDMl9NQVhfSFdfRU5EUE9JTlRTOw0KPiA+ICsJaWYgKHBsYXRkYXRhLT50eF9maWZvX3N6X25i
+KSB7DQo+ID4gKwkJcmV0ID0gZGV2X3JlYWRfdTMyX2FycmF5KGRldiwgImctdHgtZmlmby1zaXpl
+IiwNCj4gPiArCQkJCQkgdHhfZmlmb19zel9hcnJheSwNCj4gPiArCQkJCQkgcGxhdGRhdGEtPnR4
+X2ZpZm9fc3pfbmIpOw0KPiA+ICsJCWlmIChyZXQpDQo+ID4gKwkJCXJldHVybiByZXQ7DQo+ID4g
+KwkJZm9yIChpID0gMDsgaSA8IHBsYXRkYXRhLT50eF9maWZvX3N6X25iOyBpKyspDQo+ID4gKwkJ
+CXBsYXRkYXRhLT50eF9maWZvX3N6X2FycmF5W2ldID0gdHhfZmlmb19zel9hcnJheVtpXTsNCj4g
+PiArCX0NCj4gPg0KPiA+ICAJcGxhdGRhdGEtPmZvcmNlX2Jfc2Vzc2lvbl92YWxpZCA9DQo+ID4g
+IAkJZGV2X3JlYWRfYm9vbChkZXYsICJ1LWJvb3QsZm9yY2UtYi1zZXNzaW9uLXZhbGlkIik7DQo+
+ID4NCj4gDQo+IA0KPiAtLQ0KPiBCZXN0IHJlZ2FyZHMsDQo+IE1hcmVrIFZhc3V0DQoNClJlZ2Fy
+ZHMNCg0KUGF0cmljaw0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4u
+c3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxt
+YW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

@@ -2,85 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B2204B910
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Jun 2019 14:48:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A200B4BC0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Jun 2019 16:51:02 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2B780C55187
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Jun 2019 12:48:27 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 50F45C57170
+	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Jun 2019 14:51:02 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9560C55187
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4FDF3C5716F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Jun 2019 12:48:25 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Wed, 19 Jun 2019 14:51:00 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5JCkTef028795; Wed, 19 Jun 2019 14:48:01 +0200
+ x5JEhIBe023636; Wed, 19 Jun 2019 16:50:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=GkyffGQHLPyzTILh9G15te4tqED2yJQrJYo46zwBD/k=;
- b=ZoCGm9N1vtpyqXG5RZWBXJQeO2btWLMVGfalslbHmh63egjJOpUEH+r2FoQK/jHwjcdr
- KmhUnFKXwG4ktJ7bauOodtFk2QREiI3nXH+WKQNpg27fXHriC7NBbuA4ehKdjpMjtNoM
- sM1yLI4m81QcyMWy14VzuwPNvfjqRIj4qFzYu+FcnbKKqeX6soIKhhQ8hnbuvL1Z3+L1
- 1Rv2BWMkmh2kSHpDODR56nIlNhNgcOxC6S6n4P6QyPi1VyfNHYG+1XI7+iwkIEO+BzVi
- QmtFIc5ssoZ6WrOyuYmlvudZUh/OUWeGWyM/0Uv6i9gmQ7xUTMgnvGmC1LFP5HWsoPOF xQ== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=uXmPfu/R/IhFZ9PwJSxU9L2qN4VZiendKrX0+t2/tJA=;
+ b=rUP86kEEHJNoRt+aIBBaAaReQ1SG2n0A3r2WdGi3evPppOWL7XqzPpNi4w+mLMf6PSiD
+ 8iFzQQ1RaM5lOKGE0YMqnIm11A8lwd3h0QqqFWYuYzZKdSxjVPJbLBEfYcXBQCXMipN8
+ TZNloGnupw8zaBA/CIbNdMiXRwb4h6SmZqE7pQBUtGHdTGT/Kuxp9Py2TjTchc8ehAAn
+ G6QIaR2ERwUA4hRDflERnkN80YX4Ml2tpaVJArC2/vFTbyPCS7VvTR15/5fbQv9xVNo7
+ EZ/s5XZ+xd835UY82yT90LTiCMBE6F8H7y67flTnLgUwuw2d858am6JiO5RrF2RemrW+ Cw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2t781uv0vw-1
+ by mx08-00178001.pphosted.com with ESMTP id 2t7812vmnn-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Wed, 19 Jun 2019 14:48:01 +0200
+ Wed, 19 Jun 2019 16:50:58 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 00F113A;
- Wed, 19 Jun 2019 12:47:58 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag7node2.st.com [10.75.127.20])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 69F222812;
- Wed, 19 Jun 2019 12:47:58 +0000 (GMT)
-Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG7NODE2.st.com
- (10.75.127.20) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 19 Jun
- 2019 14:47:57 +0200
-Received: from SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47]) by
- SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47%20]) with mapi id
- 15.00.1473.003; Wed, 19 Jun 2019 14:47:58 +0200
-From: Fabien DESSENNE <fabien.dessenne@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, Albert Aribaud
- <albert.u.boot@aribaud.net>,
- Christophe KERELLO <christophe.kerello@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, Alexander Graf
- <agraf@suse.de>, Stefan Roese <sr@denx.de>, Mario Six <mario.six@gdsys.cc>,
- Horatiu Vultur <horatiu.vultur@microchip.com>, "Andrew F . Davis"
- <afd@ti.com>, Michal Simek <michal.simek@xilinx.com>, Neil Armstrong
- <narmstrong@baylibre.com>, Ryder Lee <ryder.lee@mediatek.com>, Liviu Dudau
- <Liviu.Dudau@foss.arm.com>, Eugen Hristev <eugen.hristev@microchip.com>,
- Krzysztof Kozlowski <krzk@kernel.org>, York Sun <york.sun@nxp.com>,
- "Andreas Dannenberg" <dannenberg@ti.com>,
- Loic PALLARDY <loic.pallardy@st.com>, "Lokesh Vutla" <lokeshvutla@ti.com>
-Thread-Topic: [PATCH 0/4] mailbox: introduce stm32-ipcc driver for stm32mp157
-Thread-Index: AQHVCjZUUIO2ObciQ0ul6YaVLlFeDaajBHyA
-Date: Wed, 19 Jun 2019 12:47:58 +0000
-Message-ID: <3f7423e7-faf8-1307-68e2-79c94722065c@st.com>
-References: <1557825637-25153-1-git-send-email-fabien.dessenne@st.com>
-In-Reply-To: <1557825637-25153-1-git-send-email-fabien.dessenne@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8579238;
+ Wed, 19 Jun 2019 14:50:57 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5BB812AB4;
+ Wed, 19 Jun 2019 14:50:57 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 19 Jun
+ 2019 16:50:56 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 19 Jun 2019 16:50:56 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Thread-Topic: [PATCH v2 1/3] usb: dwc2: correctly handle binding for
+ g-tx-fifo-size
+Thread-Index: AQHVJeYhJ75E66g/rEKRlcrQjtNpuKahfV6AgAGTSoA=
+Date: Wed, 19 Jun 2019 14:50:56 +0000
+Message-ID: <bb45f66747ea42c9831c8400adce5cf1@SFHDAG6NODE3.st.com>
+References: <1560869838-22025-1-git-send-email-patrick.delaunay@st.com>
+ <19c2894d-a526-da83-3f93-20de1605cbaa@denx.de>
+In-Reply-To: <19c2894d-a526-da83-3f93-20de1605cbaa@denx.de>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.47]
-Content-ID: <7A0834D455C94646845AE545D900170D@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-06-19_07:, , signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 0/4] mailbox: introduce stm32-ipcc driver
-	for stm32mp157
+ definitions=2019-06-19_09:, , signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] usb: dwc2: correctly handle
+ binding for g-tx-fifo-size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,39 +83,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi
+Hi Marek,
 
+> From: Marek Vasut <marex@denx.de>
+> Sent: mardi 18 juin 2019 18:46
+> 
+> On 6/18/19 4:57 PM, Patrick Delaunay wrote:
+> > Manage g-tx-fifo-size as a array as specify in the binding.
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> 
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> 
+> I'm missing 2/3 , although I think it might be better if you take this whole series
+> through u-boot-stm .
 
-Are there any further comments?
+Ok thanks,
 
+We (Patrice or me) we will take the serie on u-boot-stm.
 
-BR
-
-Fabien
-
-
-On 14/05/2019 11:20 AM, Fabien Dessenne wrote:
-> This patchset adds the mailbox ipcc driver for the stm32mp1 SOC
-> and enables it for the stm32mp157 boards.
->
-> Fabien Dessenne (4):
->    mailbox: introduce stm32-ipcc driver
->    MAINTAINERS: Add stm32 mailbox IPPC driver
->    configs: stm32mp15: enable IPCC mailbox
->    ARM: dts: stm32: Add ipcc mailbox support on stm32mp1
->
->   MAINTAINERS                         |   1 +
->   arch/arm/dts/stm32mp157a-dk1.dts    |   4 +
->   arch/arm/dts/stm32mp157c-ed1.dts    |   4 +
->   arch/arm/dts/stm32mp157c.dtsi       |  13 +++
->   configs/stm32mp15_basic_defconfig   |   2 +
->   configs/stm32mp15_trusted_defconfig |   2 +
->   drivers/mailbox/Kconfig             |   7 ++
->   drivers/mailbox/Makefile            |   1 +
->   drivers/mailbox/stm32-ipcc.c        | 167 ++++++++++++++++++++++++++++++++++++
->   9 files changed, 201 insertions(+)
->   create mode 100644 drivers/mailbox/stm32-ipcc.c
->
+> > ---
+> >
+> > Changes in v2:
+> > - move dt update in a separate patch
+> > - remove unecessary temporary variable
+> >
+> >  drivers/usb/gadget/dwc2_udc_otg.c | 14 +++++++++++++-
+> >  1 file changed, 13 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/usb/gadget/dwc2_udc_otg.c
+> > b/drivers/usb/gadget/dwc2_udc_otg.c
+> > index 494ab53..023439c 100644
+> > --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> > +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> > @@ -1039,6 +1039,7 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct
+> udevice *dev)
+> >  	int node = dev_of_offset(dev);
+> >  	ulong drvdata;
+> >  	void (*set_params)(struct dwc2_plat_otg_data *data);
+> > +	int ret;
+> >
+> >  	if (usb_get_dr_mode(node) != USB_DR_MODE_PERIPHERAL) {
+> >  		dev_dbg(dev, "Invalid mode\n");
+> > @@ -1050,7 +1051,18 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct
+> udevice *dev)
+> >  	platdata->rx_fifo_sz = dev_read_u32_default(dev, "g-rx-fifo-size", 0);
+> >  	platdata->np_tx_fifo_sz = dev_read_u32_default(dev,
+> >  						       "g-np-tx-fifo-size", 0);
+> > -	platdata->tx_fifo_sz = dev_read_u32_default(dev, "g-tx-fifo-size", 0);
+> > +
+> > +	platdata->tx_fifo_sz_nb =
+> > +		dev_read_size(dev, "g-tx-fifo-size") / sizeof(u32);
+> > +	if (platdata->tx_fifo_sz_nb > DWC2_MAX_HW_ENDPOINTS)
+> > +		platdata->tx_fifo_sz_nb = DWC2_MAX_HW_ENDPOINTS;
+> > +	if (platdata->tx_fifo_sz_nb) {
+> > +		ret = dev_read_u32_array(dev, "g-tx-fifo-size",
+> > +					 platdata->tx_fifo_sz_array,
+> > +					 platdata->tx_fifo_sz_nb);
+> > +		if (ret)
+> > +			return ret;
+> > +	}
+> >
+> >  	platdata->force_b_session_valid =
+> >  		dev_read_bool(dev, "u-boot,force-b-session-valid");
+> >
+> 
+> 
+> --
+> Best regards,
+> Marek Vasut
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

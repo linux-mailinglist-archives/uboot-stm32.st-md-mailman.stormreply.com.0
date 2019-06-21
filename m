@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF1B24E90A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 15:27:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E48B4E90F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 15:27:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 967CBCA0281
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 13:27:14 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DF93ACA028A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 13:27:23 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E61DCA027E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AF801CA0285
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 21 Jun 2019 13:27:12 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 21 Jun 2019 13:27:22 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5LDGtfg032277; Fri, 21 Jun 2019 15:27:11 +0200
+ x5LDRG0g031158; Fri, 21 Jun 2019 15:27:20 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=scRKMtwvh4xfqogtwoZBwzfC1p/caRej9P9riJgU45w=;
- b=shM/US+xyTkEknGrtadGx6JnT2NzuaRMUroG/tKhTNduowZjqm9O8Pkn1fZpYb4jRjtn
- nStVYUzsLKjwI6H4+ls6jWiUaJMnwfCTDhtwJELEpzpvMvl16AQTkWaIUftbBrwckean
- E7fAKLm+SIfRs3YQf2eJ/Mbwk217lqj7yNjFZY0woZ0c//kDsagNaZ6Y6FdxXYYeDUXs
- 8bc1bcc507Tg4Cfy7L6b/uAHnicfQd0FylrokA9xYLH/NmGnWAlZNE9JtWih3sKa6H9g
- vekydodgJymxK80WGa5CzIvL18ObrsCfy2pyL6Wib+pVRjmAILhOXQxT02dgReB6328O ow== 
+ bh=XpYjz8oiFqDi3SomA2KRm8MLl45VbsWBxXIs+sdaz5E=;
+ b=xRZcmKsLi7FR96r/QKh9DD0LJHBnp5h3wii7Fos0pNH2HqhXE651D5kJUrpyKB5k4I38
+ PT9phaJeKbGEaMbAaRSbONmQIwKZejJenutzPEPy4R9tB1R+JmGZ1UooFH0eWdCfsPVE
+ qU7/a31XNt12WXHMIN+jvg7ez1ynmmG0u1QfIWZWPaVmGMuortBgMJre92t/tW9k29R/
+ rwhuBzOsTARszc47LahF1ybgdXBL+kiCTdXuoHal0Ov92TIEat3/fOAgnZN4RWaUEl1U
+ XeO9uv0+69OtZ+Ct11PsvQu22R8ZsboS9dYyOJ/CYDcpU9+SPeZD5dFxUxBdVkv7ZqIo eg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2t7wxss9jc-1
+ by mx07-00178001.pphosted.com with ESMTP id 2t7813qe9r-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 21 Jun 2019 15:27:11 +0200
+ Fri, 21 Jun 2019 15:27:20 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BDC5D58;
- Fri, 21 Jun 2019 13:27:10 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A9E232A50;
- Fri, 21 Jun 2019 13:27:10 +0000 (GMT)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by Safex1hubcas24.st.com
- (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun
- 2019 15:27:10 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F2A6158;
+ Fri, 21 Jun 2019 13:27:11 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D279F2A50;
+ Fri, 21 Jun 2019 13:27:11 +0000 (GMT)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
+ (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun
+ 2019 15:27:11 +0200
 Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun 2019 15:27:10
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun 2019 15:27:11
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 21 Jun 2019 15:26:46 +0200
-Message-ID: <1561123618-2029-8-git-send-email-patrick.delaunay@st.com>
+Date: Fri, 21 Jun 2019 15:26:47 +0200
+Message-ID: <1561123618-2029-9-git-send-email-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1561123618-2029-1-git-send-email-patrick.delaunay@st.com>
 References: <1561123618-2029-1-git-send-email-patrick.delaunay@st.com>
@@ -54,12 +54,11 @@ MIME-Version: 1.0
 X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-21_09:, , signatures=0
-Cc: Christophe Kerello <christophe.kerello@st.com>,
- Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH 08/20] gpio: stm32_gpio: Fix warnings when
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heiko Schocher <hs@denx.de>, Christophe Kerello <christophe.kerello@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 09/20] i2c: stm32f7_i2c: Fix warnings when
 	compiling with W=1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -79,31 +78,64 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 This patch solves the following warnings:
 
-drivers/gpio/stm32_gpio.c: In function 'stm32_offset_to_index':
-: comparison between signed and unsigned integer expressions [-Wsign-compare]
-    if (idx == offset)
-            ^~
+drivers/i2c/stm32f7_i2c.c: In function 'stm32_i2c_compute_solutions':
+warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    if (scldel < scldel_min)
+               ^
+warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if (((sdadel >= sdadel_min) &&
+                  ^~
+warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+          (sdadel <= sdadel_max)) &&
+                  ^~
+drivers/i2c/stm32f7_i2c.c: In function 'stm32_i2c_choose_solution':
+warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+      if (clk_error < clk_error_prev) {
+                    ^
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/gpio/stm32f7_gpio.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/i2c/stm32f7_i2c.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpio/stm32f7_gpio.c b/drivers/gpio/stm32f7_gpio.c
-index 5c9f2fe..e89707c 100644
---- a/drivers/gpio/stm32f7_gpio.c
-+++ b/drivers/gpio/stm32f7_gpio.c
-@@ -27,7 +27,7 @@
- int stm32_offset_to_index(struct udevice *dev, unsigned int offset)
- {
- 	struct stm32_gpio_priv *priv = dev_get_priv(dev);
--	int idx = 0;
-+	unsigned int idx = 0;
- 	int i;
+diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
+index 50c4fd0..2b18735 100644
+--- a/drivers/i2c/stm32f7_i2c.c
++++ b/drivers/i2c/stm32f7_i2c.c
+@@ -519,13 +519,13 @@ static int stm32_i2c_compute_solutions(struct stm32_i2c_setup *setup,
+ 	/* Compute possible values for PRESC, SCLDEL and SDADEL */
+ 	for (p = 0; p < STM32_PRESC_MAX; p++) {
+ 		for (l = 0; l < STM32_SCLDEL_MAX; l++) {
+-			u32 scldel = (l + 1) * (p + 1) * i2cclk;
++			int scldel = (l + 1) * (p + 1) * i2cclk;
  
- 	for (i = 0; i < STM32_GPIOS_PER_BANK; i++) {
+ 			if (scldel < scldel_min)
+ 				continue;
+ 
+ 			for (a = 0; a < STM32_SDADEL_MAX; a++) {
+-				u32 sdadel = (a * (p + 1) + 1) * i2cclk;
++				int sdadel = (a * (p + 1) + 1) * i2cclk;
+ 
+ 				if (((sdadel >= sdadel_min) &&
+ 				     (sdadel <= sdadel_max)) &&
+@@ -613,10 +613,12 @@ static int stm32_i2c_choose_solution(struct stm32_i2c_setup *setup,
+ 				if ((tscl >= clk_min) && (tscl <= clk_max) &&
+ 				    (tscl_h >= i2c_specs[setup->speed].h_min) &&
+ 				    (i2cclk < tscl_h)) {
+-					int clk_error = tscl - i2cbus;
++					u32 clk_error;
+ 
+-					if (clk_error < 0)
+-						clk_error = -clk_error;
++					if (tscl > i2cbus)
++						clk_error = tscl - i2cbus;
++					else
++						clk_error = i2cbus - tscl;
+ 
+ 					if (clk_error < clk_error_prev) {
+ 						clk_error_prev = clk_error;
 -- 
 2.7.4
 

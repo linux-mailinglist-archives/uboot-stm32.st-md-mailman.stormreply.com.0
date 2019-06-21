@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 012DC4E8D7
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 15:22:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09F874E8D8
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 15:22:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4D41CA0264
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 13:22:18 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CE077CA0266
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 13:22:19 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2F574CA0262
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 737D4CA0264
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 21 Jun 2019 13:22:18 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Fri, 21 Jun 2019 13:22:19 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5LDH43W024268; Fri, 21 Jun 2019 15:22:17 +0200
+ x5LDGtEw032276; Fri, 21 Jun 2019 15:22:18 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=C9zSAtkOspHHWk7KYQJupCGgZ2J4MUj8nORecMKD5Ko=;
- b=plIsSsOzIGrxZ2KxHJkvqljFggIVbVAnL50DjWsgOcJQ6e9V6n+H/4zIOdvz4KgSSyzk
- KEOsmIkvkI7utvSFsEAOfZowUM/mDviYJStn8+awGK5W2lpR98bEminKH6UuMaDKFQ3x
- BAWe9OlBB/3HwLmREJpm4A45WQpMIntEG4F1y4wudDK1xx5S6rkLPEm1M4JM3r99saxk
- 9oQrGMXGLQynEl2SxKY63aqr8cs2+h4+Y4nPm0GXYGMKf2fqvWjFU4BrrtA3yy2rbuoO
- 5eZ8uUJXYv9peejpQzVAESSILw61LprTm2ijJVfDe7wkkSEYSjKuWfU2KlmgdppUipD9 eA== 
+ bh=ato8A376Xvudlr5UNxpHE+45EWKhr8w7oQlCiw39inY=;
+ b=ZICRlNbswucbuDuvXt+zF2tINueQvbUKQgeEuHaFX8JjQ3TJssInIA0m6Jr9/1Wpybfl
+ py7mGUZoczr8IZcMBGfyCqFeCHHSRUoZkuSEukG5cBS2Yhpa8cpHn7c48OhbnratKxYQ
+ dpX4vdUgpvsRz13RuKyfE6mcJhxbo6AzMLG3vTREdgdzLzOQlVV1BTy1olpPZFf9M2/1
+ UCqZHczB+Qy1SxEwco+XxSFkqrekPPxRWXkvRaV+DcR8vLDI+eUhdG3yzb1KVvD1fqtR
+ u3GvQYwML7P5LBFyfqM8pNTNMSW2T20l6BgpsCFgsEJlk5E8bNE/x6F5VavBkR6YrBWT sw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2t7813qdjj-1
+ by mx07-00178001.pphosted.com with ESMTP id 2t7wxss8tp-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 21 Jun 2019 15:22:17 +0200
+ Fri, 21 Jun 2019 15:22:18 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DB97938;
- Fri, 21 Jun 2019 13:22:16 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C7A7D2A2E;
- Fri, 21 Jun 2019 13:22:16 +0000 (GMT)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun
- 2019 15:22:16 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0B60131;
+ Fri, 21 Jun 2019 13:22:18 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas21.st.com [10.75.90.44])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E65A92A2E;
+ Fri, 21 Jun 2019 13:22:17 +0000 (GMT)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS21.st.com
+ (10.75.90.44) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun
+ 2019 15:22:17 +0200
 Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun 2019 15:22:16
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 21 Jun 2019 15:22:17
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 21 Jun 2019 15:21:47 +0200
-Message-ID: <1561123314-709-10-git-send-email-patrick.delaunay@st.com>
+Date: Fri, 21 Jun 2019 15:21:48 +0200
+Message-ID: <1561123314-709-11-git-send-email-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1561123314-709-1-git-send-email-patrick.delaunay@st.com>
 References: <1561123314-709-1-git-send-email-patrick.delaunay@st.com>
@@ -55,8 +55,11 @@ X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-21_09:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Christophe Kerello <christophe.kerello@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 09/16] stm32mp1: add stboard command
+Subject: [Uboot-stm32] [PATCH 10/16] stm32mp1: key: add stm32key command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,196 +76,156 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Allow to update board identification in OTP 59.
+Add dedicated command to register in fuse a public hash
+key provided by keygen tool.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- board/st/stm32mp1/Kconfig       |   7 ++
- board/st/stm32mp1/Makefile      |   1 +
- board/st/stm32mp1/cmd_stboard.c | 145 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 153 insertions(+)
- create mode 100644 board/st/stm32mp1/cmd_stboard.c
+ arch/arm/mach-stm32mp/Kconfig        |   8 +++
+ arch/arm/mach-stm32mp/Makefile       |   1 +
+ arch/arm/mach-stm32mp/cmd_stm32key.c | 101 +++++++++++++++++++++++++++++++++++
+ 3 files changed, 110 insertions(+)
+ create mode 100644 arch/arm/mach-stm32mp/cmd_stm32key.c
 
-diff --git a/board/st/stm32mp1/Kconfig b/board/st/stm32mp1/Kconfig
-index 5ab9415..92d8f90 100644
---- a/board/st/stm32mp1/Kconfig
-+++ b/board/st/stm32mp1/Kconfig
-@@ -9,4 +9,11 @@ config SYS_VENDOR
- config SYS_CONFIG_NAME
- 	default "stm32mp1"
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index 9c5c93c..d13d76e 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -90,6 +90,14 @@ config STM32_ETZPC
+ 	help
+ 	  Say y to enable STM32 Extended TrustZone Protection
  
-+config CMD_STBOARD
-+	bool "stboard - command for OTP board information"
++config CMD_STM32KEY
++	bool "command stm32key to fuse public key hash"
 +	default y
++	depends on CMD_FUSE
 +	help
-+	  This compile the stboard command to
-+	  read and write the board in the OTP.
++		fuse public key hash in corresponding fuse used to authenticate
++		binary.
 +
- endif
-diff --git a/board/st/stm32mp1/Makefile b/board/st/stm32mp1/Makefile
-index 8188075..3c6c035 100644
---- a/board/st/stm32mp1/Makefile
-+++ b/board/st/stm32mp1/Makefile
-@@ -7,6 +7,7 @@ ifdef CONFIG_SPL_BUILD
+ config BOOTSTAGE_STASH_ADDR
+ 	default 0xC3000000
+ 
+diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+index e59bd81..7745060 100644
+--- a/arch/arm/mach-stm32mp/Makefile
++++ b/arch/arm/mach-stm32mp/Makefile
+@@ -11,6 +11,7 @@ ifdef CONFIG_SPL_BUILD
  obj-y += spl.o
  else
- obj-y += stm32mp1.o
-+obj-$(CONFIG_CMD_STBOARD) += cmd_stboard.o
+ obj-y += bsec.o
++obj-$(CONFIG_CMD_STM32KEY) += cmd_stm32key.o
+ ifndef CONFIG_STM32MP1_TRUSTED
+ obj-$(CONFIG_SYSRESET) += cmd_poweroff.o
  endif
- 
- obj-y += board.o
-diff --git a/board/st/stm32mp1/cmd_stboard.c b/board/st/stm32mp1/cmd_stboard.c
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
 new file mode 100644
-index 0000000..f781c36
+index 0000000..f1f26e7
 --- /dev/null
-+++ b/board/st/stm32mp1/cmd_stboard.c
-@@ -0,0 +1,145 @@
++++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
+@@ -0,0 +1,101 @@
 +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
 +/*
 + * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
 + */
 +
 +#include <common.h>
++#include <command.h>
 +#include <console.h>
 +#include <misc.h>
 +#include <dm/device.h>
 +#include <dm/uclass.h>
 +
-+static bool check_stboard(u16 board)
++#define STM32_OTP_HASH_KEY_START 24
++#define STM32_OTP_HASH_KEY_SIZE 8
++
++static void read_hash_value(u32 addr)
 +{
-+	unsigned int i;
-+	const u16 st_board_id[] = {
-+		0x1272,
-+		0x1263,
-+		0x1264,
-+		0x1298,
-+		0x1341,
-+		0x1497,
-+	};
++	int i;
 +
-+	for (i = 0; i < ARRAY_SIZE(st_board_id); i++)
-+		if (board == st_board_id[i])
-+			return true;
-+
-+	return false;
++	for (i = 0; i < STM32_OTP_HASH_KEY_SIZE; i++) {
++		printf("OTP value %i: %x\n", STM32_OTP_HASH_KEY_START + i,
++		       __be32_to_cpu(*(u32 *)addr));
++		addr += 4;
++	}
 +}
 +
-+static void display_stboard(u32 otp)
++static void fuse_hash_value(u32 addr, bool print)
 +{
-+	printf("Board: MB%04x Var%d Rev.%c-%02d\n",
-+	       otp >> 16,
-+	       (otp >> 12) & 0xF,
-+	       ((otp >> 8) & 0xF) - 1 + 'A',
-+	       otp & 0xF);
-+}
-+
-+static int do_stboard(cmd_tbl_t *cmdtp, int flag, int argc,
-+		      char * const argv[])
-+{
-+	int ret;
-+	u32 otp;
-+	u8 revision;
-+	unsigned long board, variant, bom;
 +	struct udevice *dev;
-+	int confirmed = argc == 6 && !strcmp(argv[1], "-y");
-+
-+	argc -= 1 + confirmed;
-+	argv += 1 + confirmed;
-+
-+	if (argc != 0 && argc != 4)
-+		return CMD_RET_USAGE;
++	u32 word, val;
++	int i, ret;
 +
 +	ret = uclass_get_device_by_driver(UCLASS_MISC,
 +					  DM_GET_DRIVER(stm32mp_bsec),
 +					  &dev);
-+
-+	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_BOARD),
-+			&otp, sizeof(otp));
-+
 +	if (ret) {
-+		puts("OTP read error");
-+		return CMD_RET_FAILURE;
++		pr_err("Can't find stm32mp_bsec driver\n");
++		return;
 +	}
 +
-+	if (argc == 0) {
-+		if (!otp)
-+			puts("Board : OTP board FREE\n");
-+		else
-+			display_stboard(otp);
-+		return CMD_RET_SUCCESS;
-+	}
++	for (i = 0; i < STM32_OTP_HASH_KEY_SIZE; i++) {
++		if (print)
++			printf("Fuse OTP %i : %x\n",
++			       STM32_OTP_HASH_KEY_START + i,
++			       __be32_to_cpu(*(u32 *)addr));
 +
-+	if (otp) {
-+		display_stboard(otp);
-+		printf("ERROR: OTP board not FREE\n");
-+		return CMD_RET_FAILURE;
-+	}
++		word = STM32_OTP_HASH_KEY_START + i;
++		val = __be32_to_cpu(*(u32 *)addr);
++		misc_write(dev, STM32_BSEC_OTP(word), &val, 4);
 +
-+	if (strict_strtoul(argv[0], 16, &board) < 0 ||
-+	    board == 0 || board > 0xFFFF) {
-+		printf("argument %d invalid: %s\n", 1, argv[0]);
++		addr += 4;
++	}
++}
++
++static int confirm_prog(void)
++{
++	puts("Warning: Programming fuses is an irreversible operation!\n"
++			"         This may brick your system.\n"
++			"         Use this command only if you are sure of what you are doing!\n"
++			"\nReally perform this fuse programming? <y/N>\n");
++
++	if (confirm_yesno())
++		return 1;
++
++	puts("Fuse programming aborted\n");
++	return 0;
++}
++
++static int do_stm32key(cmd_tbl_t *cmdtp, int flag, int argc,
++		       char * const argv[])
++{
++	u32 addr;
++	const char *op = argc >= 2 ? argv[1] : NULL;
++	int confirmed = argc > 3 && !strcmp(argv[2], "-y");
++
++	argc -= 2 + confirmed;
++	argv += 2 + confirmed;
++
++	if (argc < 1)
 +		return CMD_RET_USAGE;
-+	}
 +
-+	if (strict_strtoul(argv[1], 10, &variant) < 0 ||
-+	    variant == 0 || variant > 15) {
-+		printf("argument %d invalid: %s\n", 2, argv[1]);
++	addr = simple_strtoul(argv[0], NULL, 16);
++	if (!addr)
 +		return CMD_RET_USAGE;
-+	}
 +
-+	revision = argv[2][0] - 'A' + 1;
-+	if (strlen(argv[2]) > 1 || revision == 0 || revision > 15) {
-+		printf("argument %d invalid: %s\n", 3, argv[2]);
-+		return CMD_RET_USAGE;
-+	}
++	if (!strcmp(op, "read"))
++		read_hash_value(addr);
 +
-+	if (strict_strtoul(argv[3], 10, &bom) < 0 ||
-+	    bom == 0 || bom > 15) {
-+		printf("argument %d invalid: %s\n", 4, argv[3]);
-+		return CMD_RET_USAGE;
-+	}
-+
-+	otp = (board << 16) | (variant << 12) | (revision << 8) | bom;
-+	display_stboard(otp);
-+	printf("=> OTP[%d] = %08X\n", BSEC_OTP_BOARD, otp);
-+
-+	if (!check_stboard((u16)board)) {
-+		printf("Unknown board MB%04x\n", (u16)board);
-+		return CMD_RET_FAILURE;
-+	}
-+	if (!confirmed) {
-+		printf("Warning: Programming BOARD in OTP is irreversible!\n");
-+		printf("Really perform this OTP programming? <y/N>\n");
-+
-+		if (!confirm_yesno()) {
-+			puts("BOARD programming aborted\n");
++	if (!strcmp(op, "fuse")) {
++		if (!confirmed && !confirm_prog())
 +			return CMD_RET_FAILURE;
-+		}
++		fuse_hash_value(addr, !confirmed);
 +	}
-+
-+	ret = misc_write(dev, STM32_BSEC_OTP(BSEC_OTP_BOARD),
-+			 &otp, sizeof(otp));
-+
-+	if (ret) {
-+		puts("BOARD programming error\n");
-+		return CMD_RET_FAILURE;
-+	}
-+	puts("BOARD programming done\n");
 +
 +	return CMD_RET_SUCCESS;
 +}
 +
-+U_BOOT_CMD(stboard, 6, 0, do_stboard,
-+	   "read/write board reference in OTP",
-+	   "\n"
-+	   "  Print current board information\n"
-+	   "stboard [-y] <Board> <Variant> <Revision> <BOM>\n"
-+	   "  Write board information\n"
-+	   "  - Board: xxxx, example 1264 for MB1264\n"
-+	   "  - Variant: 1 ... 15\n"
-+	   "  - Revision: A...O\n"
-+	   "  - BOM: 1...15\n");
++U_BOOT_CMD(stm32key, 4, 1, do_stm32key,
++	   "Fuse ST Hash key",
++	   "read <addr>: Read the hash store at addr in memory\n"
++	   "stm32key fuse [-y] <addr> : Fuse hash store at addr in otp\n");
 -- 
 2.7.4
 

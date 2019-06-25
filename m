@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 783FA52696
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:28:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67CC8527C4
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 11:18:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3AAF4D12B73
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:28:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65856C5EC7F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 09:18:42 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3CAA1D12B72
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9315C5E2AC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 25 Jun 2019 08:28:14 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5P8LflE028292; Tue, 25 Jun 2019 10:28:10 +0200
+ Tue, 25 Jun 2019 09:18:40 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5P9Fo0i030909; Tue, 25 Jun 2019 11:18:35 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=RmyDKzDID1tj0/rh1RDv0z9D1dDDD5RpvOWLrsM6Rzg=;
- b=tOsONF4NBBuj7oP+RUVxBvy6qqpdM+GJwq8MxryDI8DdFMU977sMGavSUwTOJVbEUzpl
- /Qrpz6uLsYzZjY0v/9axChIAcZfJWbCtrcbrU/o9eb7m4/jEB41uNUUOwwJ6eAWNz5DL
- iXLA09Vl2Fn0ANaZ7JAxbFEs3XI+4AX0P4qPT6ggHrH7sJUCug+q1egNESWHPDVbfuFK
- L8Rf+fVvLNYoiAt3oOp7pMv7g5/9UT6AVCRW/XA4Wt9o9EGzQw7CRI4olXHGBL6Q4u6R
- srUIw7lxf1/gVWAGy4Q0ecd6MEdi/2XCOAQGCd+EzVlrNQo4L0tgLjb7te7kGgdax993 Pg== 
+ bh=diFTaHwsgL5+HwmBh8OASmC33h68yhPVGzEPeq30GZY=;
+ b=UGjsM4PveeuzF7YxuoYhiTD3ZEU4VaUx+MejgVPkNhlbd5mnmGzepTpS54jkvp+liT/X
+ VuHo/0hjyCaRbMeH7DlnXFPtoAKPDuR+v7piTYBzIOTZowNWDmLRCjGBn3scEHdaqfS7
+ fnvKEPM8w2ilSfgDUlAc4MKdq3nu7Bw0QsTrGB3s/RpLY3jkoz90IozVNt2qH51qdGqP
+ ZnH4SS6cWTa3klTMxC2BaooG2INvTk+jMH5b4DW4qyiBYBt6N/5b2Yh+xdZLCrWA+zC7
+ eWg6k3nMaYDauqNuHgH3eIMUlW3y5GvRDbummTZ+vd0e2xwa0LGMikf1czXtyvVIALnX Gw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2t9d2wg5f5-1
+ by mx07-00178001.pphosted.com with ESMTP id 2t9d2g881s-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 25 Jun 2019 10:28:09 +0200
+ Tue, 25 Jun 2019 11:18:35 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AC1FE34;
- Tue, 25 Jun 2019 08:28:04 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8FB772404;
- Tue, 25 Jun 2019 08:28:04 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 25 Jun
- 2019 10:28:04 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1182731;
+ Tue, 25 Jun 2019 09:18:34 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EAA4224DD;
+ Tue, 25 Jun 2019 09:18:33 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 25 Jun
+ 2019 11:18:33 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 25 Jun 2019 10:28:04 +0200
+ 15.00.1473.003; Tue, 25 Jun 2019 11:18:33 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 00/16] stm32m1 patches for v2017.10
-Thread-Index: AQHVKDRSJx68L7CZgUCA4Fh0++isY6al//yAgAYOknA=
-Date: Tue, 25 Jun 2019 08:28:04 +0000
-Message-ID: <7983bada2853436ea4f38e950526e58f@SFHDAG6NODE3.st.com>
-References: <1561123314-709-1-git-send-email-patrick.delaunay@st.com>
- <b4cb362b-f512-b810-c052-42a10fcf95a9@st.com>
-In-Reply-To: <b4cb362b-f512-b810-c052-42a10fcf95a9@st.com>
+Thread-Topic: [PATCH] mach-stm32: Fix MPU region size dedicated to SDRAM for
+ STM32F4
+Thread-Index: AQHVKy0UbrFypR5q6k+/vx9qFBvmDaasFb7w
+Date: Tue, 25 Jun 2019 09:18:33 +0000
+Message-ID: <3c271bb781a348ea9ebc40c465671561@SFHDAG6NODE3.st.com>
+References: <20190625080745.21813-1-patrice.chotard@st.com>
+In-Reply-To: <20190625080745.21813-1-patrice.chotard@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,10 +63,10 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-25_06:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Christophe
- KERELLO <christophe.kerello@st.com>, Albert
- Aribaud <albert.u.boot@aribaud.net>
-Subject: Re: [Uboot-stm32] [PATCH 00/16] stm32m1 patches for v2017.10
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Vikas MANOCHA <vikas.manocha@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] mach-stm32: Fix MPU region size dedicated
+ to SDRAM for STM32F4
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,82 +85,85 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrice,
 
+> -----Original Message-----
 > From: Patrice CHOTARD <patrice.chotard@st.com>
-> Sent: vendredi 21 juin 2019 15:55
+> Sent: mardi 25 juin 2019 10:08
+> To: u-boot@lists.denx.de
+> Cc: Patrice CHOTARD <patrice.chotard@st.com>; Patrick DELAUNAY
+> <patrick.delaunay@st.com>; U-Boot STM32 <uboot-stm32@st-md-
+> mailman.stormreply.com>; Albert Aribaud <albert.u.boot@aribaud.net>; Vikas
+> MANOCHA <vikas.manocha@st.com>
+> Subject: [PATCH] mach-stm32: Fix MPU region size dedicated to SDRAM for
+> STM32F4
+> Importance: High
 > 
-> for v2019.10 ;-)
-
-Yes Sorry :-)
-
-I mixed the first name (target as v2019.07) the new target v2019.10.
-I will update the serie title if I sent a v2.
-
+> The MPU region dedicated for SDRAM for STM32F4 SoCs family was set to
+> 16MB, but STM32F429 Evaluation board have 32MB of SDRAM.
 > 
-> On 6/21/19 3:21 PM, Patrick Delaunay wrote:
-> > Some remaining patches for stm32mp1
-> > - some cleanup in files
-> > - add 2 specific commands for stm32mp1 board
-> > - use OF_SYSTEM_SETUP to update kernel device tree
-> > - synchronization with latest device tree
-> >
-> >
-> >
-> > Patrick Delaunay (16):
-> >   stm32mp1: deactivate WATCHDOG in defconfig
-> >   stm32mp1: call regulators_enable_boot_on in board_init
-> >   stm32mp1: syscon: remove etzpc support
-> >   stm32mp1: syscon: remove stgen
-> >   dt-bindings: pinctrl: stm32: add new entry for package information
-> >   stm32mp1: export get_cpu_package function
-> >   stm32mp1: update package information in device tree
-> >   stm32mp1: update device tree with ETZPC status
-> >   stm32mp1: add stboard command
-> >   stm32mp1: key: add stm32key command
-> >   stm32mp1: udpate README
-> >   stm32mp1: cosmetic: remove unnecessary include
-> >   stm32mp1: configs: Add CONFIG_OF_SPL_REMOVE_PROPS
-> >   stm32mp1: add check for presence of environment in boot device
-> >   stm32mp1: force boot_net_usb_start
-> >   ARM: dts: stm32mp1: sync device tree with v5.2-rc4
-> >
-> >  arch/arm/Kconfig                                   |   1 +
-> >  arch/arm/dts/stm32mp15-ddr.dtsi                    |   2 +-
-> >  arch/arm/dts/stm32mp157-pinctrl.dtsi               | 270
-> ++++++++++++++++++++-
-> >  arch/arm/dts/stm32mp157-u-boot.dtsi                |  67 ++---
-> >  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi           |   4 -
-> >  arch/arm/dts/stm32mp157a-dk1.dts                   |  30 ++-
-> >  arch/arm/dts/stm32mp157c-dk2.dts                   |   1 +
-> >  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi           |  15 +-
-> >  arch/arm/dts/stm32mp157c-ed1.dts                   | 205 ++++------------
-> >  arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi           |   4 -
-> >  arch/arm/dts/stm32mp157c-ev1.dts                   |  12 +-
-> >  arch/arm/dts/stm32mp157c.dtsi                      | 199 +++++++++++----
-> >  arch/arm/mach-stm32mp/Kconfig                      |  15 ++
-> >  arch/arm/mach-stm32mp/Makefile                     |   2 +
-> >  arch/arm/mach-stm32mp/cmd_stm32key.c               | 101 ++++++++
-> >  arch/arm/mach-stm32mp/cpu.c                        |   7 +-
-> >  arch/arm/mach-stm32mp/fdt.c                        | 223 +++++++++++++++++
-> >  arch/arm/mach-stm32mp/include/mach/stm32.h         |   3 +-
-> >  arch/arm/mach-stm32mp/include/mach/sys_proto.h     |   9 +
-> >  arch/arm/mach-stm32mp/syscon.c                     |   2 -
-> >  board/st/stm32mp1/Kconfig                          |   7 +
-> >  board/st/stm32mp1/Makefile                         |   1 +
-> >  board/st/stm32mp1/README                           |  15 +-
-> >  board/st/stm32mp1/cmd_stboard.c                    | 145 +++++++++++
-> >  board/st/stm32mp1/spl.c                            |   1 -
-> >  board/st/stm32mp1/stm32mp1.c                       |   4 +
-> >  configs/stm32mp15_basic_defconfig                  |   3 +-
-> >  configs/stm32mp15_trusted_defconfig                |   2 -
-> >  .../pinctrl/st,stm32-pinctrl.txt                   | 101 +++++++-
-> >  drivers/clk/clk_stm32mp1.c                         |   3 +-
-> >  include/configs/stm32mp1.h                         |   7 +-
-> >  include/dt-bindings/pinctrl/stm32-pinfunc.h        |   6 +
-> >  32 files changed, 1158 insertions(+), 309 deletions(-)  create mode
-> > 100644 arch/arm/mach-stm32mp/cmd_stm32key.c
-> >  create mode 100644 arch/arm/mach-stm32mp/fdt.c  create mode 100644
-> > board/st/stm32mp1/cmd_stboard.c
-> >
+> When kernel starts, only first 16MB of SDRAM are configured with XN (eXecute
+> Never) bit disabled, whereas kernel is using 32MB.
+> 
+> It fixes the following user land exception on STM32F429 Evaluation board :
+> 
+> [    1.713002] VFS: Mounted root (ext4 filesystem) readonly on device 179:2.
+> [    1.722605] devtmpfs: mounted
+> [    1.733057] Freeing unused kernel memory: 72K
+> [    1.737622] This architecture does not have kernel memory protection.
+> [    1.744070] Run /sbin/init as init process
+> [    1.906850]
+> [    1.906850] Unhandled exception: IPSR = 00000004 LR = fffffffd
+> [    1.914282] CPU: 0 PID: 1 Comm: init Not tainted 5.1.0-00002-gcf9ca5719954 #6
+> [    1.921433] Hardware name: STM32 (Device Tree Support)
+> [    1.926601] PC is at 0x1a00b64
+> [    1.929642] LR is at   (null)
+> [    1.932669] pc : [<01a00b64>]    lr : [<00000000>]    psr: 01000000
+> [    1.938993] sp : 01a5cfb0  ip : 00000000  fp : 00000000
+> [    1.944269] r10: 01a43b00  r9 : 00000000  r8 : 00000000
+> [    1.949564] r7 : 00000000  r6 : 00000000  r5 : 00000000  r4 : 00000000
+> [    1.956168] r3 : 00000000  r2 : 00000000  r1 : 00000000  r0 : 00000000
+> [    1.962701] xPSR: 01000000
+> [    1.965506] CPU: 0 PID: 1 Comm: init Not tainted 5.1.0-00002-gcf9ca5719954 #6
+> [    1.972658] Hardware name: STM32 (Device Tree Support)
+> [    1.978132] [<0000c009>] (unwind_backtrace) from [<0000b24f>]
+> (show_stack+0xb/0xc)
+> [    1.986024] [<0000b24f>] (show_stack) from [<0000b947>]
+> (__invalid_entry+0x4b/0x4c)
+> 
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> ---
+> 
+>  arch/arm/mach-stm32/soc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-stm32/soc.c b/arch/arm/mach-stm32/soc.c index
+> 6ae31d3a1f..77bb18638f 100644
+> --- a/arch/arm/mach-stm32/soc.c
+> +++ b/arch/arm/mach-stm32/soc.c
+> @@ -18,7 +18,7 @@ int arch_cpu_init(void)
+>  		 */
+>  #if defined(CONFIG_STM32F4)
+>  		{ 0x00000000, REGION_0, XN_DIS, PRIV_RW_USR_RW,
+> -		O_I_WB_RD_WR_ALLOC, REGION_16MB },
+> +		O_I_WB_RD_WR_ALLOC, REGION_32MB },
+
+For these boards, SYSCFG_MEMRMP.MEM_MODE = 0x4
+
+./arch/arm/dts/stm32429i-eval-u-boot.dtsi:41:			st,mem_remap = <4>;
+./arch/arm/dts/stm32f469-disco-u-boot.dtsi:41:			st,mem_remap = <4>;
+
+=> 100: FMC/SDRAM Bank 1 mapped at 0x0000 0000
+
+So size when remap shoul be 512MB here to be ready with greter SDRAM size ?
+And only if remap is requested ?
+
+Else internal FLASH is used (000: Main Flash memory mapped at 0x0000 0000)
+=> max Size is 2MB  ?
+
+>  #endif
+> 
+>  		{ 0x90000000, REGION_1, XN_DIS, PRIV_RW_USR_RW,
+> --
+> 2.17.1
 
 Regards
 

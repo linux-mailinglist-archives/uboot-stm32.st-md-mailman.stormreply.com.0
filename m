@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12DE75266A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:22:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B8555266C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:23:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C6665C5F1FD
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:22:51 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DF0A6C6A57C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:23:25 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7B34DC5F1FC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4C12DC6A57B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 25 Jun 2019 08:22:49 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5P8LNZS028691; Tue, 25 Jun 2019 10:22:37 +0200
+ Tue, 25 Jun 2019 08:23:24 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5P8M1WR012676; Tue, 25 Jun 2019 10:23:23 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=IZ+JFnoc0jylGBN0mTT4HiRO5sQNBvlS7/2G8SN5/7Y=;
- b=H/CeXzYeYkw5OGbQIBR9rMfMfW1o6xtjyjxFOUoVLZf7KKObw0CMe1+8Hxc35P6+s/OH
- CaswoihjAAC1MPwSbZ0lXFUT1OCDpNXzBQnmR4w+oof6uszkn31Uki68iMPHwDztMCvN
- 0JSoaCWr24Z9vBo5D5dDmU0koZAZOUL3zunDePAMlYoGyXbSgEbz1MUNPvSFmJBM7oW/
- tOq8gWEOqw6Q8UxPXWIXyKwp9YgT/QOtSNJtFk2n+l141ZesnNXKrWhJttbuCh4OAAA8
- yGMzFT8DGRo8qA9ykDQz9maamiP9avkULG3wX7fNF7zS8OhaICmv42HecHg0cJA8Rc4w uQ== 
+ bh=s6APXSf7z815jVUWXL+AmCheZLBL7jmTRPv+wS7JYDs=;
+ b=ThXW0CniCivZYNbTsYeFpwyespM0No970hDDxa/7zT6m7nZYKiorgazCAuGHmO2Dkjhs
+ d5C2pVrEtpyJPdkKMdw1ooqMzQvXaOQ2MmgIguMlwwx40itR4zvxdMNBQYRev1LTqXUm
+ Czm4c11++G5MqzGt+fg6jFvP0ORzlngGUEw4FjWTmg79NFXnz8GKAnOIR+xJNuGptsSq
+ xhmBb9Bo7WYp/Hl5t6KCPsPnlNYQUWN7YJzyG8hOIXk1WYFKfYDl80Php6W4tb+cH6nS
+ NCMhVlPLLY8JSC968Jq31AtNEdm28v/Rzy22/zJgnemm35B3Az1/e+JvSZMa2P/RO3mT Rw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2tb1f3m0tb-1
+ by mx08-00178001.pphosted.com with ESMTP id 2t9d2jg5xj-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 25 Jun 2019 10:22:37 +0200
+ Tue, 25 Jun 2019 10:23:23 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 60AF834;
- Tue, 25 Jun 2019 08:22:36 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 34DEC23E5;
- Tue, 25 Jun 2019 08:22:36 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 25 Jun
- 2019 10:22:35 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1A0FA31;
+ Tue, 25 Jun 2019 08:23:21 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ECC6B23E1;
+ Tue, 25 Jun 2019 08:23:20 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 25 Jun
+ 2019 10:23:20 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 25 Jun 2019 10:22:35 +0200
+ 15.00.1473.003; Tue, 25 Jun 2019 10:23:20 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 1/4] gpio: stm32: Rename stm32f7_gpio to stm32_gpio
-Thread-Index: AQHVKDa/2iI+zgSJU0+nmAbHaku8x6asDaYQ
-Date: Tue, 25 Jun 2019 08:22:35 +0000
-Message-ID: <5412b291e6dc4a92a0f79203fc2329a3@SFHDAG6NODE3.st.com>
+Thread-Topic: [PATCH 2/4] pinctrl: stm32: update .bind callback
+Thread-Index: AQHVKDa/3XfOknq76UW+q8ICHHfqAqasDeCA
+Date: Tue, 25 Jun 2019 08:23:20 +0000
+Message-ID: <895885dbaa304f98a597a3f7053e630c@SFHDAG6NODE3.st.com>
 References: <20190621133925.8643-1-patrice.chotard@st.com>
- <20190621133925.8643-2-patrice.chotard@st.com>
-In-Reply-To: <20190621133925.8643-2-patrice.chotard@st.com>
+ <20190621133925.8643-3-patrice.chotard@st.com>
+In-Reply-To: <20190621133925.8643-3-patrice.chotard@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,16 +62,9 @@ x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-25_06:, , signatures=0
-Cc: Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Michal Simek <michal.simek@xilinx.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Lars Povlsen <lars.povlsen@microchip.com>,
- Marek Vasut <marek.vasut+renesas@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/4] gpio: stm32: Rename stm32f7_gpio to
-	stm32_gpio
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Christophe
+ KERELLO <christophe.kerello@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/4] pinctrl: stm32: update .bind callback
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,8 +86,8 @@ Hi Patrice,
 > From: Patrice CHOTARD <patrice.chotard@st.com>
 > Sent: vendredi 21 juin 2019 15:39
 > 
-> As this driver is used on stm32f4/f7/h7 and stm32mp1 SoCs, rename it with a
-> more generic name.
+> Update .bind callback in order to bind all pinctrl subnodes with "gpio-controller"
+> property to gpio_stm32 driver.
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 
@@ -102,53 +95,67 @@ Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
 
 > ---
 > 
->  drivers/gpio/Kconfig                          | 4 ++--
->  drivers/gpio/Makefile                         | 2 +-
->  drivers/gpio/{stm32f7_gpio.c => stm32_gpio.c} | 0
->  3 files changed, 3 insertions(+), 3 deletions(-)  rename
-> drivers/gpio/{stm32f7_gpio.c => stm32_gpio.c} (100%)
+>  drivers/pinctrl/pinctrl_stm32.c | 32 +++++++++++++++++++++++++++++++-
+>  1 file changed, 31 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig index
-> e36a8abc42..be073335c2 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -255,13 +255,13 @@ config PIC32_GPIO
->  	help
->  	  Say yes here to support Microchip PIC32 GPIOs.
+> diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c index
+> 43dbdd9d6a..e2e7be01ed 100644
+> --- a/drivers/pinctrl/pinctrl_stm32.c
+> +++ b/drivers/pinctrl/pinctrl_stm32.c
+> @@ -1,5 +1,6 @@
+>  #include <common.h>
+>  #include <dm.h>
+> +#include <dm/lists.h>
+>  #include <dm/pinctrl.h>
+>  #include <hwspinlock.h>
+>  #include <asm/arch/gpio.h>
+> @@ -364,6 +365,35 @@ static int stm32_pinctrl_config(int offset)
+>  	return 0;
+>  }
 > 
-> -config STM32F7_GPIO
-> +config STM32_GPIO
->  	bool "ST STM32 GPIO driver"
->  	depends on DM_GPIO && (STM32 || ARCH_STM32MP)
->  	default y
->  	help
->  	  Device model driver support for STM32 GPIO controller. It should be
-> -	  usable on many stm32 families like stm32f4 & stm32H7.
-> +	  usable on many stm32 families like stm32f4/f7/h7 and stm32mp1.
->  	  Tested on STM32F7.
-> 
->  config MVEBU_GPIO
-> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile index
-> 7337153e0e..4a8aa0ff6f 100644
-> --- a/drivers/gpio/Makefile
-> +++ b/drivers/gpio/Makefile
-> @@ -47,7 +47,7 @@ obj-$(CONFIG_ADI_GPIO2)	+= adi_gpio2.o
->  obj-$(CONFIG_TCA642X)		+= tca642x.o
->  obj-$(CONFIG_SUNXI_GPIO)	+= sunxi_gpio.o
->  obj-$(CONFIG_LPC32XX_GPIO)	+= lpc32xx_gpio.o
-> -obj-$(CONFIG_STM32F7_GPIO)	+= stm32f7_gpio.o
-> +obj-$(CONFIG_STM32_GPIO)	+= stm32_gpio.o
->  obj-$(CONFIG_GPIO_UNIPHIER)	+= gpio-uniphier.o
->  obj-$(CONFIG_ZYNQ_GPIO)		+= zynq_gpio.o
->  obj-$(CONFIG_VYBRID_GPIO)	+= vybrid_gpio.o
-> diff --git a/drivers/gpio/stm32f7_gpio.c b/drivers/gpio/stm32_gpio.c similarity
-> index 100% rename from drivers/gpio/stm32f7_gpio.c rename to
-> drivers/gpio/stm32_gpio.c
+> +static int stm32_pinctrl_bind(struct udevice *dev) {
+> +	ofnode node;
+> +	const char *name;
+> +	int ret;
+> +
+> +	dev_for_each_subnode(node, dev) {
+> +		debug("%s: bind %s\n", __func__, ofnode_get_name(node));
+> +
+> +		ofnode_get_property(node, "gpio-controller", &ret);
+> +		if (ret < 0)
+> +			continue;
+> +		/* Get the name of each gpio node */
+> +		name = ofnode_get_name(node);
+> +		if (!name)
+> +			return -EINVAL;
+> +
+> +		/* Bind each gpio node */
+> +		ret = device_bind_driver_to_node(dev, "gpio_stm32",
+> +						 name, node, NULL);
+> +		if (ret)
+> +			return ret;
+> +
+> +		debug("%s: bind %s\n", __func__, name);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  #if CONFIG_IS_ENABLED(PINCTRL_FULL)
+>  static int stm32_pinctrl_set_state(struct udevice *dev, struct udevice *config)  {
+> @@ -433,7 +463,7 @@ U_BOOT_DRIVER(pinctrl_stm32) = {
+>  	.id			= UCLASS_PINCTRL,
+>  	.of_match		= stm32_pinctrl_ids,
+>  	.ops			= &stm32_pinctrl_ops,
+> -	.bind			= dm_scan_fdt_dev,
+> +	.bind			= stm32_pinctrl_bind,
+>  	.probe			= stm32_pinctrl_probe,
+>  	.priv_auto_alloc_size	= sizeof(struct stm32_pinctrl_priv),
+>  };
 > --
 > 2.17.1
 
 Regards
-
 Patrick
 _______________________________________________
 Uboot-stm32 mailing list

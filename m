@@ -2,74 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ABA24E9FA
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 15:55:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EDBB952609
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:06:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2B66AC10CA4
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jun 2019 13:55:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A0DF2C5F1E8
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:06:35 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CBA97C10CA2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 85CE9C5F1E7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 21 Jun 2019 13:55:25 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5LDqJO2016546; Fri, 21 Jun 2019 15:55:23 +0200
+ Tue, 25 Jun 2019 08:06:34 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5P832FX029881; Tue, 25 Jun 2019 10:06:31 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=7qAgbxnJMlaBMzSUAu457PWhvZvXk096hs0A2/r6eu0=;
- b=PxuBc7Pj4nZRC2ePHGFpp9sMfx1Dv8CypPMcGtBoSC3bAL2Spz9KvLxLkO0ARU7eTatx
- o/zdbTON7kjknFnoCXy1Z+4kUUI5+0YTkxVRmhw3spZQIWrAndF2c2fdLlTwJiFQqHw9
- WU1pybckotB9BJrN4G4YIU1fD+z0OjVVagGRsKERAbo9u4CpAI4c/7q41Vgci6GFtLde
- C8Ufh7ZTXN7I/vwbrQUXvs2YkZERJIc4C93BLbKSdWz4GoLir2dGag26EE+RfhTN6wiD
- zOsYv9vrLhPYKijC4+kf4sI1GICnXjwqEK0G4adYC4W0+vBxOfcrH6PtbB9IKYj2v6fS vg== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=pHuCHXR8+Ay/W/hp6+OXWXubcFx7DKnRUWQeNRk1Mz0=;
+ b=hkchwu2qKeuKfJN0xT83QvXBwojQIZDsJN83GhB9WPTTGUi8FUKfiS+sUoCb3uPDsGh7
+ j4ZaUjZB6E4ngHOk7ysOxraQYd7wirDvWp6e1ImdQ3Yf0GiDbDT8/o6bOdZC2lQgdIJh
+ kenxLwtzQ8/bpXislAwOSH/RE04fY1itIPTevtmDworwVNigYXk4RnN27LK8P5J4O4g2
+ WzJh0Oh5Z/pfR/4qPJMuEErnBCqVss1zpZb+2gCMtEsJw7Hk/6k9yS+Bf8bRH2OFVs3D
+ jyv6vtILbJJq5duRhv7z7HrNoCd7p3SZ3FQchFnH20m5v6isH2J+fkY3ZaMCySKlgDM+ 4Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2t7813qjj3-1
+ by mx08-00178001.pphosted.com with ESMTP id 2t9d2jg2f9-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 21 Jun 2019 15:55:23 +0200
+ Tue, 25 Jun 2019 10:06:30 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 314994D;
- Fri, 21 Jun 2019 13:55:21 +0000 (GMT)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2542F61;
+ Tue, 25 Jun 2019 08:06:17 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 176A42ADE;
- Fri, 21 Jun 2019 13:55:21 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 21 Jun
- 2019 15:55:20 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 21 Jun 2019 15:55:20 +0200
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 00/16] stm32m1 patches for v2017.10
-Thread-Index: AQHVKDRSJx68L7CZgUCA4Fh0++isY6al//yA
-Date: Fri, 21 Jun 2019 13:55:20 +0000
-Message-ID: <b4cb362b-f512-b810-c052-42a10fcf95a9@st.com>
-References: <1561123314-709-1-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1561123314-709-1-git-send-email-patrick.delaunay@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
-Content-ID: <4FC439473B3EEE4CBA6F4D33A0C2AE03@st.com>
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D4E311BEB;
+ Tue, 25 Jun 2019 08:06:16 +0000 (GMT)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Tue, 25 Jun 2019 10:06:16 +0200
+From: Patrice Chotard <patrice.chotard@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 25 Jun 2019 10:06:04 +0200
+Message-ID: <20190625080606.21650-1-patrice.chotard@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG8NODE1.st.com (10.75.127.22) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-06-21_10:, , signatures=0
+ definitions=2019-06-25_06:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Christophe
- KERELLO <christophe.kerello@st.com>, Albert
- Aribaud <albert.u.boot@aribaud.net>
-Subject: Re: [Uboot-stm32] [PATCH 00/16] stm32m1 patches for v2017.10
+ Tom Rini <trini@konsulko.com>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>
+Subject: [Uboot-stm32] [PATCH 0/2] STM32 MCU dts fixes/cleanup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,72 +71,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-for v2019.10 ;-)
+  - Remove useless u-boot,dm-pre-reloc
+  - Add u-boot,dm-pre-reloc for usart1_pins_a for stm32f769-disco
 
-On 6/21/19 3:21 PM, Patrick Delaunay wrote:
-> Some remaining patches for stm32mp1
-> - some cleanup in files
-> - add 2 specific commands for stm32mp1 board
-> - use OF_SYSTEM_SETUP to update kernel device tree
-> - synchronization with latest device tree
->
->
->
-> Patrick Delaunay (16):
->   stm32mp1: deactivate WATCHDOG in defconfig
->   stm32mp1: call regulators_enable_boot_on in board_init
->   stm32mp1: syscon: remove etzpc support
->   stm32mp1: syscon: remove stgen
->   dt-bindings: pinctrl: stm32: add new entry for package information
->   stm32mp1: export get_cpu_package function
->   stm32mp1: update package information in device tree
->   stm32mp1: update device tree with ETZPC status
->   stm32mp1: add stboard command
->   stm32mp1: key: add stm32key command
->   stm32mp1: udpate README
->   stm32mp1: cosmetic: remove unnecessary include
->   stm32mp1: configs: Add CONFIG_OF_SPL_REMOVE_PROPS
->   stm32mp1: add check for presence of environment in boot device
->   stm32mp1: force boot_net_usb_start
->   ARM: dts: stm32mp1: sync device tree with v5.2-rc4
->
->  arch/arm/Kconfig                                   |   1 +
->  arch/arm/dts/stm32mp15-ddr.dtsi                    |   2 +-
->  arch/arm/dts/stm32mp157-pinctrl.dtsi               | 270 ++++++++++++++++++++-
->  arch/arm/dts/stm32mp157-u-boot.dtsi                |  67 ++---
->  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi           |   4 -
->  arch/arm/dts/stm32mp157a-dk1.dts                   |  30 ++-
->  arch/arm/dts/stm32mp157c-dk2.dts                   |   1 +
->  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi           |  15 +-
->  arch/arm/dts/stm32mp157c-ed1.dts                   | 205 ++++------------
->  arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi           |   4 -
->  arch/arm/dts/stm32mp157c-ev1.dts                   |  12 +-
->  arch/arm/dts/stm32mp157c.dtsi                      | 199 +++++++++++----
->  arch/arm/mach-stm32mp/Kconfig                      |  15 ++
->  arch/arm/mach-stm32mp/Makefile                     |   2 +
->  arch/arm/mach-stm32mp/cmd_stm32key.c               | 101 ++++++++
->  arch/arm/mach-stm32mp/cpu.c                        |   7 +-
->  arch/arm/mach-stm32mp/fdt.c                        | 223 +++++++++++++++++
->  arch/arm/mach-stm32mp/include/mach/stm32.h         |   3 +-
->  arch/arm/mach-stm32mp/include/mach/sys_proto.h     |   9 +
->  arch/arm/mach-stm32mp/syscon.c                     |   2 -
->  board/st/stm32mp1/Kconfig                          |   7 +
->  board/st/stm32mp1/Makefile                         |   1 +
->  board/st/stm32mp1/README                           |  15 +-
->  board/st/stm32mp1/cmd_stboard.c                    | 145 +++++++++++
->  board/st/stm32mp1/spl.c                            |   1 -
->  board/st/stm32mp1/stm32mp1.c                       |   4 +
->  configs/stm32mp15_basic_defconfig                  |   3 +-
->  configs/stm32mp15_trusted_defconfig                |   2 -
->  .../pinctrl/st,stm32-pinctrl.txt                   | 101 +++++++-
->  drivers/clk/clk_stm32mp1.c                         |   3 +-
->  include/configs/stm32mp1.h                         |   7 +-
->  include/dt-bindings/pinctrl/stm32-pinfunc.h        |   6 +
->  32 files changed, 1158 insertions(+), 309 deletions(-)
->  create mode 100644 arch/arm/mach-stm32mp/cmd_stm32key.c
->  create mode 100644 arch/arm/mach-stm32mp/fdt.c
->  create mode 100644 board/st/stm32mp1/cmd_stboard.c
->
+
+Patrice Chotard (2):
+  ARM: dts: stm32: Add u-boot,dm-pre-reloc for usart1_pins_a for
+    stm32f769-disco
+  ARM: dts: stm32: Remove useless u-boot,dm-pre-reloc in
+    stm32f746-disco-u-boot.dtsi
+
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi |  6 ------
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 6 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

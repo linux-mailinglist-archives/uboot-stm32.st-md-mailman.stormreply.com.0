@@ -2,57 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B8555266C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:23:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7698A52675
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 10:24:33 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DF0A6C6A57C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:23:25 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 98B29CDB43F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Jun 2019 08:24:22 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4C12DC6A57B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 520CCC6B44C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 25 Jun 2019 08:23:24 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x5P8M1WR012676; Tue, 25 Jun 2019 10:23:23 +0200
+ Tue, 25 Jun 2019 08:24:21 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x5P8LN9R028699; Tue, 25 Jun 2019 10:24:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=s6APXSf7z815jVUWXL+AmCheZLBL7jmTRPv+wS7JYDs=;
- b=ThXW0CniCivZYNbTsYeFpwyespM0No970hDDxa/7zT6m7nZYKiorgazCAuGHmO2Dkjhs
- d5C2pVrEtpyJPdkKMdw1ooqMzQvXaOQ2MmgIguMlwwx40itR4zvxdMNBQYRev1LTqXUm
- Czm4c11++G5MqzGt+fg6jFvP0ORzlngGUEw4FjWTmg79NFXnz8GKAnOIR+xJNuGptsSq
- xhmBb9Bo7WYp/Hl5t6KCPsPnlNYQUWN7YJzyG8hOIXk1WYFKfYDl80Php6W4tb+cH6nS
- NCMhVlPLLY8JSC968Jq31AtNEdm28v/Rzy22/zJgnemm35B3Az1/e+JvSZMa2P/RO3mT Rw== 
+ bh=pY15ID9G1NMVydDnrXSHXKuiyRqf8TjiO8MO3NIPzao=;
+ b=k+wP65MFTbL8somrhkxUtLJCMIKhl2Q2xySwDYoFberm/LXcbychMNV0dI5HIWAjhtYe
+ 1/c3qlGHH2XrOGDTemh7V9dLUKZcRGBpI9/+sHRgZKeKoGiw5H7N5GstrICoQo/2Ethc
+ 22l3H/qgarO+UqveJQTOqW0BtlsLCLQ0NOf/HrvkfuOu31uCvl2zG7Mc1Wu8ozRUfzhG
+ zSH5JRkIDved16yedRxU8WdF/0X9ciUKYwU/cywUf8faTgotGgOWDcztk9laiqJ/rLQy
+ NNuFZw5f7nA+rQoqw8PXO5YXYMHQCW7hLebf/B61a7YUFxtElplPIoasNLFfDd90sPc2 lA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2t9d2jg5xj-1
+ by mx07-00178001.pphosted.com with ESMTP id 2tb1f3m14p-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 25 Jun 2019 10:23:23 +0200
+ Tue, 25 Jun 2019 10:24:19 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1A0FA31;
- Tue, 25 Jun 2019 08:23:21 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ECC6B23E1;
- Tue, 25 Jun 2019 08:23:20 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 25 Jun
- 2019 10:23:20 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 17DA33F;
+ Tue, 25 Jun 2019 08:24:19 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EC5F123E8;
+ Tue, 25 Jun 2019 08:24:18 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 25 Jun
+ 2019 10:24:18 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 25 Jun 2019 10:23:20 +0200
+ 15.00.1473.003; Tue, 25 Jun 2019 10:24:18 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 2/4] pinctrl: stm32: update .bind callback
-Thread-Index: AQHVKDa/3XfOknq76UW+q8ICHHfqAqasDeCA
-Date: Tue, 25 Jun 2019 08:23:20 +0000
-Message-ID: <895885dbaa304f98a597a3f7053e630c@SFHDAG6NODE3.st.com>
+Thread-Topic: [PATCH 3/4] ARM: dts: stm32: Remove useless "st,stm32-gpio"
+ compatible string
+Thread-Index: AQHVKDbA+R6UD7vnkkScrmAIv6A+9aasDhZg
+Date: Tue, 25 Jun 2019 08:24:18 +0000
+Message-ID: <6664dc3cbea64acc930ff345269d2f18@SFHDAG6NODE3.st.com>
 References: <20190621133925.8643-1-patrice.chotard@st.com>
- <20190621133925.8643-3-patrice.chotard@st.com>
-In-Reply-To: <20190621133925.8643-3-patrice.chotard@st.com>
+ <20190621133925.8643-4-patrice.chotard@st.com>
+In-Reply-To: <20190621133925.8643-4-patrice.chotard@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,9 +63,10 @@ x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-06-25_06:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Christophe
- KERELLO <christophe.kerello@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/4] pinctrl: stm32: update .bind callback
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>
+Subject: Re: [Uboot-stm32] [PATCH 3/4] ARM: dts: stm32: Remove useless "st,
+ stm32-gpio" compatible string
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,72 +88,341 @@ Hi Patrice,
 > From: Patrice CHOTARD <patrice.chotard@st.com>
 > Sent: vendredi 21 juin 2019 15:39
 > 
-> Update .bind callback in order to bind all pinctrl subnodes with "gpio-controller"
-> property to gpio_stm32 driver.
+> Since pinctrl_stm32 driver update, each gpio bank is now binded by pinctrl driver.
+> The compatible string "st,stm32-gpio" becomes useless, remove it.
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-
 Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
 
 > ---
 > 
->  drivers/pinctrl/pinctrl_stm32.c | 32 +++++++++++++++++++++++++++++++-
->  1 file changed, 31 insertions(+), 1 deletion(-)
+>  arch/arm/dts/stm32429i-eval-u-boot.dtsi  | 11 -----------  arch/arm/dts/stm32f429-
+> disco-u-boot.dtsi | 11 -----------  arch/arm/dts/stm32f469-disco-u-boot.dtsi | 11 -----
+> ------
+>  arch/arm/dts/stm32f7-u-boot.dtsi         | 17 -----------------
+>  arch/arm/dts/stm32mp157-u-boot.dtsi      | 12 ------------
+>  5 files changed, 62 deletions(-)
 > 
-> diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c index
-> 43dbdd9d6a..e2e7be01ed 100644
-> --- a/drivers/pinctrl/pinctrl_stm32.c
-> +++ b/drivers/pinctrl/pinctrl_stm32.c
-> @@ -1,5 +1,6 @@
->  #include <common.h>
->  #include <dm.h>
-> +#include <dm/lists.h>
->  #include <dm/pinctrl.h>
->  #include <hwspinlock.h>
->  #include <asm/arch/gpio.h>
-> @@ -364,6 +365,35 @@ static int stm32_pinctrl_config(int offset)
->  	return 0;
->  }
-> 
-> +static int stm32_pinctrl_bind(struct udevice *dev) {
-> +	ofnode node;
-> +	const char *name;
-> +	int ret;
-> +
-> +	dev_for_each_subnode(node, dev) {
-> +		debug("%s: bind %s\n", __func__, ofnode_get_name(node));
-> +
-> +		ofnode_get_property(node, "gpio-controller", &ret);
-> +		if (ret < 0)
-> +			continue;
-> +		/* Get the name of each gpio node */
-> +		name = ofnode_get_name(node);
-> +		if (!name)
-> +			return -EINVAL;
-> +
-> +		/* Bind each gpio node */
-> +		ret = device_bind_driver_to_node(dev, "gpio_stm32",
-> +						 name, node, NULL);
-> +		if (ret)
-> +			return ret;
-> +
-> +		debug("%s: bind %s\n", __func__, name);
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  #if CONFIG_IS_ENABLED(PINCTRL_FULL)
->  static int stm32_pinctrl_set_state(struct udevice *dev, struct udevice *config)  {
-> @@ -433,7 +463,7 @@ U_BOOT_DRIVER(pinctrl_stm32) = {
->  	.id			= UCLASS_PINCTRL,
->  	.of_match		= stm32_pinctrl_ids,
->  	.ops			= &stm32_pinctrl_ops,
-> -	.bind			= dm_scan_fdt_dev,
-> +	.bind			= stm32_pinctrl_bind,
->  	.probe			= stm32_pinctrl_probe,
->  	.priv_auto_alloc_size	= sizeof(struct stm32_pinctrl_priv),
+> diff --git a/arch/arm/dts/stm32429i-eval-u-boot.dtsi b/arch/arm/dts/stm32429i-eval-
+> u-boot.dtsi
+> index 6da0a636c1..fe437bbfe2 100644
+> --- a/arch/arm/dts/stm32429i-eval-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32429i-eval-u-boot.dtsi
+> @@ -92,57 +92,46 @@
 >  };
+> 
+>  &gpioa {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiob {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioc {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiod {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioe {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiof {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiog {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioh {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioi {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioj {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiok {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+> diff --git a/arch/arm/dts/stm32f429-disco-u-boot.dtsi b/arch/arm/dts/stm32f429-
+> disco-u-boot.dtsi
+> index 0cc3100440..52f80320bc 100644
+> --- a/arch/arm/dts/stm32f429-disco-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32f429-disco-u-boot.dtsi
+> @@ -79,57 +79,46 @@
+>  };
+> 
+>  &gpioa {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiob {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioc {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiod {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioe {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiof {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiog {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioh {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioi {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioj {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiok {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+> diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-
+> disco-u-boot.dtsi
+> index 3da308e6a4..2409cf746a 100644
+> --- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+> @@ -94,57 +94,46 @@
+>  };
+> 
+>  &gpioa {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiob {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioc {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiod {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioe {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiof {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiog {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioh {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioi {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioj {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiok {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+> diff --git a/arch/arm/dts/stm32f7-u-boot.dtsi b/arch/arm/dts/stm32f7-u-boot.dtsi
+> index 29b157324e..3ba7f8410d 100644
+> --- a/arch/arm/dts/stm32f7-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32f7-u-boot.dtsi
+> @@ -65,58 +65,41 @@
+>  };
+> 
+>  &gpioa {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiob {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioc {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiod {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioe {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiof {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiog {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioh {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioi {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+> -&gpioj {
+> -	compatible = "st,stm32-gpio";
+> -};
+> -
+> -&gpiok {
+> -	compatible = "st,stm32-gpio";
+> -};
+> -
+>  &pinctrl {
+>  	u-boot,dm-pre-reloc;
+> 
+> diff --git a/arch/arm/dts/stm32mp157-u-boot.dtsi b/arch/arm/dts/stm32mp157-u-
+> boot.dtsi
+> index 09560e2d91..66dc6df787 100644
+> --- a/arch/arm/dts/stm32mp157-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157-u-boot.dtsi
+> @@ -82,62 +82,50 @@
+>  };
+> 
+>  &gpioa {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiob {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioc {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiod {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioe {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiof {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiog {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioh {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioi {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioj {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpiok {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
+>  &gpioz {
+> -	compatible = "st,stm32-gpio";
+>  	u-boot,dm-pre-reloc;
+>  };
+> 
 > --
 > 2.17.1
 

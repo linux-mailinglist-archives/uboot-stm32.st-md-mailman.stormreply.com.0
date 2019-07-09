@@ -2,70 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A781635FE
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Jul 2019 14:34:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AF0763621
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Jul 2019 14:45:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 492FEC8D899
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Jul 2019 12:34:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5789DC8E5E8
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Jul 2019 12:45:38 +0000 (UTC)
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+ [209.85.222.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A5EF6C8D898
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 84562C8E5E7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Jul 2019 12:34:25 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x69CVc5k031089; Tue, 9 Jul 2019 14:34:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=RJAZ4bCEOAR3FWkhcLypgAbDmqZHF77tkCUNGvGz+Sg=;
- b=1miSs83oXqY/WNXayQFx8Tc8MxFFdW7oYoQznzSPJrrDDXWtrzbQGoE991bM2a2JpoGp
- K3reJdqJyvj7DphRP4FGnL6PdAZaAI54jPfLov5Wfvh3tbU3xN6O4py91sYxIBWgfok0
- +WM4BZz4m4WeU0JJ7tvDbo3BESztBPC9Dv+eplHdla7e9RmhFbhLKbLivfhCz7OndFmA
- QLFOEDEYlRHict2H/7FOXIGW+BEpEgBjBLp+Qhj34nVhxLn0YtC/Wnw8kpSrsBBCNDNJ
- 9xBnCPgzpXMwacvOrbDT5YiB/j2R5zl0UzPNLuEQYqruM6ttntyBcDzDfmCHGEDoIRuP lg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2tmh513d2m-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 09 Jul 2019 14:34:24 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8D95F31;
- Tue,  9 Jul 2019 12:34:23 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 63CBD52DD;
- Tue,  9 Jul 2019 12:34:23 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 9 Jul
- 2019 14:34:22 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 9 Jul 2019 14:34:22 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Benjamin GAIGNARD <benjamin.gaignard@st.com>, Patrice CHOTARD
- <patrice.chotard@st.com>, "sjg@chromium.org" <sjg@chromium.org>
-Thread-Topic: [PATCH 2/2] rtc: Add rtc driver for stm32mp1
-Thread-Index: AQHVKzfEZOn6HlI1w02ak9KynJsFIabCMWzg
-Date: Tue, 9 Jul 2019 12:34:22 +0000
-Message-ID: <59064a2cd4b74f3e9921e4b4d8f07615@SFHDAG6NODE3.st.com>
+ Tue,  9 Jul 2019 12:45:36 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id 201so13734634qkm.9
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 09 Jul 2019 05:45:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=X9A6pRJNSwayqmoMs/xr6by7/MgcH0+P3N+pKvhLYrM=;
+ b=UeRcLlthuDTIpCzSB9HRomRZ5fGVqDs5oW4f2tkYnVcnCNuq9KEeyitR/e9uK8mucg
+ 0FJ0Wc+6hv3wCH1+YNnu8lIDyE7qzHOPH4UEivGjMQJv+uMHOzyJRkmy8ZtJ6icLdPAB
+ kW/lygOEKH5va11HRy0KHYGgUVc4P4WzrtK111jrGpK8ZVdzW0jkD/yqdJKlp1hr069w
+ 06H6anPBnpDIXtNUv6Eimq9ACYUPnJoUFBd815Rfup1a95HWYvWSk70lxKjzY0qTS2W/
+ kTMDqjxsNNaP0DhZmoJB+kk/ghSlWIkOfB8LYttz1i2T3rydlX15OshpdeXKxNPuuqOS
+ LTDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=X9A6pRJNSwayqmoMs/xr6by7/MgcH0+P3N+pKvhLYrM=;
+ b=CyBPGN3A9ipRmZgOFY5zHZmnMKZO2MJI1GatvfkOO0D+nXSyRtNr512D6ByLN7bKUv
+ EzBiPx9UAIEwgOtM/yMyqR4gKzP3070al9Xjamd3IBsGYzQCOopNiaHLTaalN6o/Ae8X
+ oLt84KJDAkIAslKpk6/qO7/pwj1OmVLjtI6jVGtzpJLocnXumqMIomWsK9Rn3Gt0scIy
+ 5DLZYRk2nUcifH57I3e5mRf0rmje4FhHGl/lz12xPdArQf/I9o5JEutX0ub87x76j27k
+ sQdqu8hpt5BguxmKuoSIsKll4rrOJeCt8/kLy1TANTUO8b4pm+NLWFrX2eKqTOIyDhlq
+ h+Kw==
+X-Gm-Message-State: APjAAAX9oHLN1mnuILDdo7nmxos8/oB2BOqkLhpqnKap+RtO9uR/UKTD
+ si0uk28OfC4SyfbEEg6e2pPx/BilcSJwlZUeRIAz0Q==
+X-Google-Smtp-Source: APXvYqyaNsSS2VOUULWEV4ZZ1Ksv5FKc2AUMdtV4gKnMIhlzsJbqUFk8I95fJLlwDTvXdFPmV0X5hy2GIaWf/aqXxfU=
+X-Received: by 2002:a05:620a:1286:: with SMTP id
+ w6mr17872643qki.219.1562676335379; 
+ Tue, 09 Jul 2019 05:45:35 -0700 (PDT)
+MIME-Version: 1.0
 References: <20190625092401.4573-1-benjamin.gaignard@st.com>
  <20190625092401.4573-3-benjamin.gaignard@st.com>
-In-Reply-To: <20190625092401.4573-3-benjamin.gaignard@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-09_05:, , signatures=0
+ <59064a2cd4b74f3e9921e4b4d8f07615@SFHDAG6NODE3.st.com>
+In-Reply-To: <59064a2cd4b74f3e9921e4b4d8f07615@SFHDAG6NODE3.st.com>
+From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+Date: Tue, 9 Jul 2019 14:45:24 +0200
+Message-ID: <CA+M3ks55taS6fm=u9jFDdKvhp49pa9199-C7pTQyZZUG9eY73Q@mail.gmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
 Cc: "uboot-stm32@st-md-mailman.stormreply.com"
  <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] rtc: Add rtc driver for stm32mp1
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 2/2] rtc: Add rtc driver for
+	stm32mp1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,403 +71,257 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Benjamin,
-
------Original Message-----
-From: Benjamin GAIGNARD <benjamin.gaignard@st.com> 
-Sent: mardi 25 juin 2019 11:24
-To: Patrick DELAUNAY <patrick.delaunay@st.com>; Patrice CHOTARD <patrice.chotard@st.com>; sjg@chromium.org
-Cc: uboot-stm32@st-md-mailman.stormreply.com; u-boot@lists.denx.de; Benjamin GAIGNARD <benjamin.gaignard@st.com>
-Subject: [PATCH 2/2] rtc: Add rtc driver for stm32mp1
-Importance: High
-
-Add support of STM32MP1 rtc driver.
-Enable it for basic and trusted configurations.
-
-Signed-off-by: Benjamin Gaignard <benjamin.gaignard@st.com>
----
- configs/stm32mp15_basic_defconfig   |   2 +
- configs/stm32mp15_trusted_defconfig |   2 +
- drivers/rtc/Kconfig                 |   6 +
- drivers/rtc/Makefile                |   1 +
- drivers/rtc/stm32_rtc.c             | 321 ++++++++++++++++++++++++++++++++++++
- 5 files changed, 332 insertions(+)
- create mode 100644 drivers/rtc/stm32_rtc.c
-
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 4aa184fb5b..6352075307 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -94,6 +94,8 @@ CONFIG_DM_REGULATOR_FIXED=y  CONFIG_DM_REGULATOR_GPIO=y  CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_SPI=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 66361c8715..e079adc3c4 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -84,6 +84,8 @@ CONFIG_DM_REGULATOR_FIXED=y  CONFIG_DM_REGULATOR_GPIO=y  CONFIG_DM_REGULATOR_STM32_VREFBUF=y
- CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_STM32=y
- CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_STM32_SERIAL=y
- CONFIG_SPI=y
-diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig index fd0009b2e2..a383e632ad 100644
---- a/drivers/rtc/Kconfig
-+++ b/drivers/rtc/Kconfig
-@@ -110,4 +110,10 @@ config RTC_M41T62
- 	  Enable driver for ST's M41T62 compatible RTC devices (like RV-4162).
- 	  It is a serial (I2C) real-time clock (RTC) with alarm.
- 
-+config RTC_STM32
-+	bool "Enable STM32 RTC driver"
-+	depends on DM_RTC
-+	help
-+	  Enable STM32 RTC driver. This driver supports the rtc that is present
-+	  on some STM32 SoCs.
- endmenu
-diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile index 1724602f1c..90e79fb30d 100644
---- a/drivers/rtc/Makefile
-+++ b/drivers/rtc/Makefile
-@@ -50,5 +50,6 @@ obj-$(CONFIG_RTC_RX8025) += rx8025.o
- obj-$(CONFIG_RTC_RX8010SJ) += rx8010sj.o
- obj-$(CONFIG_RTC_S3C24X0) += s3c24x0_rtc.o
- obj-$(CONFIG_RTC_S35392A) += s35392a.o
-+obj-$(CONFIG_RTC_STM32) += stm32_rtc.o
- obj-$(CONFIG_SANDBOX) += sandbox_rtc.o
- obj-$(CONFIG_RTC_X1205) += x1205.o
-diff --git a/drivers/rtc/stm32_rtc.c b/drivers/rtc/stm32_rtc.c new file mode 100644 index 0000000000..5d0ffdbc9f
---- /dev/null
-+++ b/drivers/rtc/stm32_rtc.c
-@@ -0,0 +1,321 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2019, STMicroelectronics - All Rights Reserved  */ 
-+#include <common.h> #include <clk.h> #include <dm.h> #include <rtc.h> 
-+#include <asm/io.h> #include <linux/iopoll.h>
-+
-+#define STM32_RTC_TR		0x00
-+#define STM32_RTC_DR		0x04
-+#define STM32_RTC_ISR		0x0C
-+#define STM32_RTC_PRER		0x10
-+#define STM32_RTC_CR		0x18
-+#define STM32_RTC_WPR		0x24
-+
-+/* STM32_RTC_TR bit fields  */
-+#define STM32_RTC_SEC_SHIFT	0
-+#define STM32_RTC_SEC		GENMASK(6, 0)
-+#define STM32_RTC_MIN_SHIFT	8
-+#define STM32_RTC_MIN		GENMASK(14, 8)
-+#define STM32_RTC_HOUR_SHIFT	16
-+#define STM32_RTC_HOUR		GENMASK(21, 16)
-+
-+/* STM32_RTC_DR bit fields */
-+#define STM32_RTC_DATE_SHIFT	0
-+#define STM32_RTC_DATE		GENMASK(5, 0)
-+#define STM32_RTC_MONTH_SHIFT	8
-+#define STM32_RTC_MONTH		GENMASK(12, 8)
-+#define STM32_RTC_WDAY_SHIFT	13
-+#define STM32_RTC_WDAY		GENMASK(15, 13)
-+#define STM32_RTC_YEAR_SHIFT	16
-+#define STM32_RTC_YEAR		GENMASK(23, 16)
-+
-+/* STM32_RTC_CR bit fields */
-+#define STM32_RTC_CR_FMT	BIT(6)
-+
-+/* STM32_RTC_ISR/STM32_RTC_ICSR bit fields */
-+#define STM32_RTC_ISR_INITS	BIT(4)
-+#define STM32_RTC_ISR_RSF	BIT(5)
-+#define STM32_RTC_ISR_INITF	BIT(6)
-+#define STM32_RTC_ISR_INIT	BIT(7)
-+
-+/* STM32_RTC_PRER bit fields */
-+#define STM32_RTC_PRER_PRED_S_SHIFT	0
-+#define STM32_RTC_PRER_PRED_S		GENMASK(14, 0)
-+#define STM32_RTC_PRER_PRED_A_SHIFT	16
-+#define STM32_RTC_PRER_PRED_A		GENMASK(22, 16)
-+
-+/* STM32_RTC_WPR key constants */
-+#define RTC_WPR_1ST_KEY		0xCA
-+#define RTC_WPR_2ND_KEY		0x53
-+#define RTC_WPR_WRONG_KEY	0xFF
-+
-+struct stm32_rtc_priv {
-+	fdt_addr_t base;
-+};
-+
-+static int stm32_rtc_get(struct udevice *dev, struct rtc_time *tm) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	u32 tr, dr;
-+
-+	tr = readl(priv->base + STM32_RTC_TR);
-+	dr = readl(priv->base + STM32_RTC_DR);
-+
-+	tm->tm_sec = bcd2bin((tr & STM32_RTC_SEC) >> STM32_RTC_SEC_SHIFT);
-+	tm->tm_min = bcd2bin((tr & STM32_RTC_MIN) >> STM32_RTC_MIN_SHIFT);
-+	tm->tm_hour = bcd2bin((tr & STM32_RTC_HOUR) >> STM32_RTC_HOUR_SHIFT);
-+
-+	tm->tm_mday = bcd2bin((dr & STM32_RTC_DATE) >> STM32_RTC_DATE_SHIFT);
-+	tm->tm_mon = bcd2bin((dr & STM32_RTC_MONTH) >> STM32_RTC_MONTH_SHIFT);
-+	tm->tm_year = bcd2bin((dr & STM32_RTC_YEAR) >> STM32_RTC_YEAR_SHIFT);
-+	tm->tm_wday = bcd2bin((dr & STM32_RTC_WDAY) >> STM32_RTC_WDAY_SHIFT);
-+	tm->tm_yday = 0;
-+	tm->tm_isdst = 0;
-+
-+	dev_dbg(dev, "Get DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
-+		tm->tm_year, tm->tm_mon, tm->tm_mday, tm->tm_wday,
-+		tm->tm_hour, tm->tm_min, tm->tm_sec);
-+
-+	return 0;
-+}
-+
-+static void stm32_rtc_unlock(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+
-+	writel(RTC_WPR_1ST_KEY, priv->base + STM32_RTC_WPR);
-+	writel(RTC_WPR_2ND_KEY, priv->base + STM32_RTC_WPR); }
-+
-+static void stm32_rtc_lock(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+
-+	writel(RTC_WPR_WRONG_KEY, priv->base + STM32_RTC_WPR); }
-+
-+static int stm32_rtc_enter_init_mode(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	u32 isr = readl(priv->base + STM32_RTC_ISR);
-+
-+	if (!(isr & STM32_RTC_ISR_INITF)) {
-+		isr |= STM32_RTC_ISR_INIT;
-+		writel(isr, priv->base + STM32_RTC_ISR);
-+
-+		return readl_poll_timeout(priv->base + STM32_RTC_ISR,
-+					  isr,
-+					  (isr & STM32_RTC_ISR_INITF),
-+					  100000);
-+	}
-+
-+	return 0;
-+}
-+
-+static int stm32_rtc_wait_sync(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	u32 isr = readl(priv->base + STM32_RTC_ISR);
-+
-+	isr &= ~STM32_RTC_ISR_RSF;
-+	writel(isr, priv->base + STM32_RTC_ISR);
-+
-+	/*
-+	 * Wait for RSF to be set to ensure the calendar registers are
-+	 * synchronised, it takes around 2 rtc_ck clock cycles
-+	 */
-+	return readl_poll_timeout(priv->base + STM32_RTC_ISR,
-+				  isr, (isr & STM32_RTC_ISR_RSF),
-+				  100000);
-+}
-+
-+static void stm32_rtc_exit_init_mode(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	u32 isr = readl(priv->base + STM32_RTC_ISR);
-+
-+	isr &= ~STM32_RTC_ISR_INIT;
-+	writel(isr, priv->base + STM32_RTC_ISR); }
-+
-+static int stm32_rtc_set_time(struct udevice *dev, u32 time, u32 date) 
-+{
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	stm32_rtc_unlock(dev);
-+
-+	ret = stm32_rtc_enter_init_mode(dev);
-+	if (ret)
-+		goto lock;
-+
-+	writel(time, priv->base + STM32_RTC_TR);
-+	writel(date, priv->base + STM32_RTC_DR);
-+
-+	stm32_rtc_exit_init_mode(dev);
-+
-+	ret = stm32_rtc_wait_sync(dev);
-+
-+lock:
-+	stm32_rtc_lock(dev);
-+	return ret;
-+}
-+
-+static int stm32_rtc_set(struct udevice *dev, const struct rtc_time 
-+*tm) {
-+	u32 t, d;
-+
-+	dev_dbg(dev, "Set DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
-+		tm->tm_year, tm->tm_mon, tm->tm_mday, tm->tm_wday,
-+		tm->tm_hour, tm->tm_min, tm->tm_sec);
-+
-+	/* Time in BCD format */
-+	t = (bin2bcd(tm->tm_sec) << STM32_RTC_SEC_SHIFT) & STM32_RTC_SEC;
-+	t |= (bin2bcd(tm->tm_min) << STM32_RTC_MIN_SHIFT) & STM32_RTC_MIN;
-+	t |= (bin2bcd(tm->tm_hour) << STM32_RTC_HOUR_SHIFT) & STM32_RTC_HOUR;
-+
-+	/* Date in BCD format */
-+	d = (bin2bcd(tm->tm_mday) << STM32_RTC_DATE_SHIFT) & STM32_RTC_DATE;
-+	d |= (bin2bcd(tm->tm_mon) << STM32_RTC_MONTH_SHIFT) & STM32_RTC_MONTH;
-+	d |= (bin2bcd(tm->tm_year) << STM32_RTC_YEAR_SHIFT) & STM32_RTC_YEAR;
-+	d |= (bin2bcd(tm->tm_wday) << STM32_RTC_WDAY_SHIFT) & STM32_RTC_WDAY;
-+
-+	return stm32_rtc_set_time(dev, t, d);
-+}
-+
-+static int stm32_rtc_reset(struct udevice *dev) {
-+	dev_dbg(dev, "Reset DATE\n");
-+
-+	return stm32_rtc_set_time(dev, 0, 0);
-+}
-+
-+static int stm32_rtc_init(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	unsigned int prer, pred_a, pred_s, pred_a_max, pred_s_max, cr;
-+	unsigned int rate;
-+	struct clk clk;
-+	int ret;
-+	u32 isr = readl(priv->base + STM32_RTC_ISR);
-+
-+	if (isr & STM32_RTC_ISR_INITS)
-+		return  0;
-+
-+	ret = clk_get_by_index(dev, 1, &clk);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&clk);
-+	if (ret) {
-+		clk_free(&clk);
-+		return ret;
-+	}
-+
-+	rate = clk_get_rate(&clk);
-+
-+	/* Find prediv_a and prediv_s to obtain the 1Hz calendar clock */
-+	pred_a_max = STM32_RTC_PRER_PRED_A >> STM32_RTC_PRER_PRED_A_SHIFT;
-+	pred_s_max = STM32_RTC_PRER_PRED_S >> STM32_RTC_PRER_PRED_S_SHIFT;
-+
-+	for (pred_a = pred_a_max; pred_a + 1 > 0; pred_a--) {
-+		pred_s = (rate / (pred_a + 1)) - 1;
-+
-+		if (((pred_s + 1) * (pred_a + 1)) == rate)
-+			break;
-+	}
-+
-+	/*
-+	 * Can't find a 1Hz, so give priority to RTC power consumption
-+	 * by choosing the higher possible value for prediv_a
-+	 */
-+	if (pred_s > pred_s_max || pred_a > pred_a_max) {
-+		pred_a = pred_a_max;
-+		pred_s = (rate / (pred_a + 1)) - 1;
-+	}
-+
-+	stm32_rtc_unlock(dev);
-+
-+	ret = stm32_rtc_enter_init_mode(dev);
-+	if (ret) {
-+		dev_err(dev,
-+			"Can't enter in init mode. Prescaler config failed.\n");
-+		goto unlock;
-+	}
-+
-+	prer = (pred_s << STM32_RTC_PRER_PRED_S_SHIFT) & STM32_RTC_PRER_PRED_S;
-+	prer |= (pred_a << STM32_RTC_PRER_PRED_A_SHIFT) & STM32_RTC_PRER_PRED_A;
-+	writel(prer, priv->base + STM32_RTC_PRER);
-+
-+	/* Force 24h time format */
-+	cr = readl(priv->base + STM32_RTC_CR);
-+	cr &= ~STM32_RTC_CR_FMT;
-+	writel(cr, priv->base + STM32_RTC_CR);
-+
-+	stm32_rtc_exit_init_mode(dev);
-+
-+	ret = stm32_rtc_wait_sync(dev);
-+
-+unlock:
-+	stm32_rtc_lock(dev);
-+
-+	clk_disable(&clk);
-+	clk_free(&clk);
-
-
-Clock free in all the case (even if ret = 0)
-=> the next request failed (err = -110 for timeout)
-
-	if (ret) {
-		clk_disable(&clk);
-		clk_free(&clk);
-	}
-
-+	return ret;
-+}
-+
-+static int stm32_rtc_probe(struct udevice *dev) {
-+	struct stm32_rtc_priv *priv = dev_get_priv(dev);
-+	struct clk clk;
-+	int ret;
-+
-+	priv->base = dev_read_addr(dev);
-+	if (priv->base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	ret = clk_get_by_index(dev, 0, &clk);
-+	if (ret)
-+		return ret;
-+
-+	ret = clk_enable(&clk);
-+	if (ret) {
-+		clk_free(&clk);
-+		return ret;
-+	}
-+
-+	ret = stm32_rtc_init(dev);
-+
-+	if (ret) {
-+		clk_disable(&clk);
-+		clk_free(&clk);
-+	}
-+
-+	return ret;
-+}
-+
-+static const struct rtc_ops stm32_rtc_ops = {
-+	.get = stm32_rtc_get,
-+	.set = stm32_rtc_set,
-+	.reset = stm32_rtc_reset,
-+};
-+
-+static const struct udevice_id stm32_rtc_ids[] = {
-+	{ .compatible = "st,stm32mp1-rtc" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(rtc_stm32) = {
-+	.name	= "rtc-stm32",
-+	.id	= UCLASS_RTC,
-+	.probe	= stm32_rtc_probe,
-+	.of_match = stm32_rtc_ids,
-+	.ops	= &stm32_rtc_ops,
-+	.priv_auto_alloc_size = sizeof(struct stm32_rtc_priv), };
---
-2.15.0
-
-Regards
-
-Patrick
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+TGUgbWFyLiA5IGp1aWwuIDIwMTkgw6AgMTQ6MzQsIFBhdHJpY2sgREVMQVVOQVkKPHBhdHJpY2su
+ZGVsYXVuYXlAc3QuY29tPiBhIMOpY3JpdCA6Cj4KPiBIaSBCZW5qYW1pbiwKPgo+IC0tLS0tT3Jp
+Z2luYWwgTWVzc2FnZS0tLS0tCj4gRnJvbTogQmVuamFtaW4gR0FJR05BUkQgPGJlbmphbWluLmdh
+aWduYXJkQHN0LmNvbT4KPiBTZW50OiBtYXJkaSAyNSBqdWluIDIwMTkgMTE6MjQKPiBUbzogUGF0
+cmljayBERUxBVU5BWSA8cGF0cmljay5kZWxhdW5heUBzdC5jb20+OyBQYXRyaWNlIENIT1RBUkQg
+PHBhdHJpY2UuY2hvdGFyZEBzdC5jb20+OyBzamdAY2hyb21pdW0ub3JnCj4gQ2M6IHVib290LXN0
+bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb207IHUtYm9vdEBsaXN0cy5kZW54LmRlOyBC
+ZW5qYW1pbiBHQUlHTkFSRCA8YmVuamFtaW4uZ2FpZ25hcmRAc3QuY29tPgo+IFN1YmplY3Q6IFtQ
+QVRDSCAyLzJdIHJ0YzogQWRkIHJ0YyBkcml2ZXIgZm9yIHN0bTMybXAxCj4gSW1wb3J0YW5jZTog
+SGlnaAo+Cj4gQWRkIHN1cHBvcnQgb2YgU1RNMzJNUDEgcnRjIGRyaXZlci4KPiBFbmFibGUgaXQg
+Zm9yIGJhc2ljIGFuZCB0cnVzdGVkIGNvbmZpZ3VyYXRpb25zLgo+Cj4gU2lnbmVkLW9mZi1ieTog
+QmVuamFtaW4gR2FpZ25hcmQgPGJlbmphbWluLmdhaWduYXJkQHN0LmNvbT4KPiAtLS0KPiAgY29u
+Zmlncy9zdG0zMm1wMTVfYmFzaWNfZGVmY29uZmlnICAgfCAgIDIgKwo+ICBjb25maWdzL3N0bTMy
+bXAxNV90cnVzdGVkX2RlZmNvbmZpZyB8ICAgMiArCj4gIGRyaXZlcnMvcnRjL0tjb25maWcgICAg
+ICAgICAgICAgICAgIHwgICA2ICsKPiAgZHJpdmVycy9ydGMvTWFrZWZpbGUgICAgICAgICAgICAg
+ICAgfCAgIDEgKwo+ICBkcml2ZXJzL3J0Yy9zdG0zMl9ydGMuYyAgICAgICAgICAgICB8IDMyMSAr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiAgNSBmaWxlcyBjaGFuZ2VkLCAz
+MzIgaW5zZXJ0aW9ucygrKQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ydGMvc3RtMzJf
+cnRjLmMKPgo+IGRpZmYgLS1naXQgYS9jb25maWdzL3N0bTMybXAxNV9iYXNpY19kZWZjb25maWcg
+Yi9jb25maWdzL3N0bTMybXAxNV9iYXNpY19kZWZjb25maWcKPiBpbmRleCA0YWExODRmYjViLi42
+MzUyMDc1MzA3IDEwMDY0NAo+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJtcDE1X2Jhc2ljX2RlZmNvbmZp
+Zwo+ICsrKyBiL2NvbmZpZ3Mvc3RtMzJtcDE1X2Jhc2ljX2RlZmNvbmZpZwo+IEBAIC05NCw2ICs5
+NCw4IEBAIENPTkZJR19ETV9SRUdVTEFUT1JfRklYRUQ9eSAgQ09ORklHX0RNX1JFR1VMQVRPUl9H
+UElPPXkgIENPTkZJR19ETV9SRUdVTEFUT1JfU1RNMzJfVlJFRkJVRj15Cj4gIENPTkZJR19ETV9S
+RUdVTEFUT1JfU1RQTUlDMT15Cj4gK0NPTkZJR19ETV9SVEM9eQo+ICtDT05GSUdfUlRDX1NUTTMy
+PXkKPiAgQ09ORklHX1NFUklBTF9SWF9CVUZGRVI9eQo+ICBDT05GSUdfU1RNMzJfU0VSSUFMPXkK
+PiAgQ09ORklHX1NQST15Cj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3Mvc3RtMzJtcDE1X3RydXN0ZWRf
+ZGVmY29uZmlnIGIvY29uZmlncy9zdG0zMm1wMTVfdHJ1c3RlZF9kZWZjb25maWcKPiBpbmRleCA2
+NjM2MWM4NzE1Li5lMDc5YWRjM2M0IDEwMDY0NAo+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJtcDE1X3Ry
+dXN0ZWRfZGVmY29uZmlnCj4gKysrIGIvY29uZmlncy9zdG0zMm1wMTVfdHJ1c3RlZF9kZWZjb25m
+aWcKPiBAQCAtODQsNiArODQsOCBAQCBDT05GSUdfRE1fUkVHVUxBVE9SX0ZJWEVEPXkgIENPTkZJ
+R19ETV9SRUdVTEFUT1JfR1BJTz15ICBDT05GSUdfRE1fUkVHVUxBVE9SX1NUTTMyX1ZSRUZCVUY9
+eQo+ICBDT05GSUdfRE1fUkVHVUxBVE9SX1NUUE1JQzE9eQo+ICtDT05GSUdfRE1fUlRDPXkKPiAr
+Q09ORklHX1JUQ19TVE0zMj15Cj4gIENPTkZJR19TRVJJQUxfUlhfQlVGRkVSPXkKPiAgQ09ORklH
+X1NUTTMyX1NFUklBTD15Cj4gIENPTkZJR19TUEk9eQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3J0
+Yy9LY29uZmlnIGIvZHJpdmVycy9ydGMvS2NvbmZpZyBpbmRleCBmZDAwMDliMmUyLi5hMzgzZTYz
+MmFkIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvcnRjL0tjb25maWcKPiArKysgYi9kcml2ZXJzL3J0
+Yy9LY29uZmlnCj4gQEAgLTExMCw0ICsxMTAsMTAgQEAgY29uZmlnIFJUQ19NNDFUNjIKPiAgICAg
+ICAgICAgRW5hYmxlIGRyaXZlciBmb3IgU1QncyBNNDFUNjIgY29tcGF0aWJsZSBSVEMgZGV2aWNl
+cyAobGlrZSBSVi00MTYyKS4KPiAgICAgICAgICAgSXQgaXMgYSBzZXJpYWwgKEkyQykgcmVhbC10
+aW1lIGNsb2NrIChSVEMpIHdpdGggYWxhcm0uCj4KPiArY29uZmlnIFJUQ19TVE0zMgo+ICsgICAg
+ICAgYm9vbCAiRW5hYmxlIFNUTTMyIFJUQyBkcml2ZXIiCj4gKyAgICAgICBkZXBlbmRzIG9uIERN
+X1JUQwo+ICsgICAgICAgaGVscAo+ICsgICAgICAgICBFbmFibGUgU1RNMzIgUlRDIGRyaXZlci4g
+VGhpcyBkcml2ZXIgc3VwcG9ydHMgdGhlIHJ0YyB0aGF0IGlzIHByZXNlbnQKPiArICAgICAgICAg
+b24gc29tZSBTVE0zMiBTb0NzLgo+ICBlbmRtZW51Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcnRj
+L01ha2VmaWxlIGIvZHJpdmVycy9ydGMvTWFrZWZpbGUgaW5kZXggMTcyNDYwMmYxYy4uOTBlNzlm
+YjMwZCAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3J0Yy9NYWtlZmlsZQo+ICsrKyBiL2RyaXZlcnMv
+cnRjL01ha2VmaWxlCj4gQEAgLTUwLDUgKzUwLDYgQEAgb2JqLSQoQ09ORklHX1JUQ19SWDgwMjUp
+ICs9IHJ4ODAyNS5vCj4gIG9iai0kKENPTkZJR19SVENfUlg4MDEwU0opICs9IHJ4ODAxMHNqLm8K
+PiAgb2JqLSQoQ09ORklHX1JUQ19TM0MyNFgwKSArPSBzM2MyNHgwX3J0Yy5vCj4gIG9iai0kKENP
+TkZJR19SVENfUzM1MzkyQSkgKz0gczM1MzkyYS5vCj4gK29iai0kKENPTkZJR19SVENfU1RNMzIp
+ICs9IHN0bTMyX3J0Yy5vCj4gIG9iai0kKENPTkZJR19TQU5EQk9YKSArPSBzYW5kYm94X3J0Yy5v
+Cj4gIG9iai0kKENPTkZJR19SVENfWDEyMDUpICs9IHgxMjA1Lm8KPiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ydGMvc3RtMzJfcnRjLmMgYi9kcml2ZXJzL3J0Yy9zdG0zMl9ydGMuYyBuZXcgZmlsZSBt
+b2RlIDEwMDY0NCBpbmRleCAwMDAwMDAwMDAwLi41ZDBmZmRiYzlmCj4gLS0tIC9kZXYvbnVsbAo+
+ICsrKyBiL2RyaXZlcnMvcnRjL3N0bTMyX3J0Yy5jCj4gQEAgLTAsMCArMSwzMjEgQEAKPiArLy8g
+U1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjArIE9SIEJTRC0zLUNsYXVzZQo+ICsvKgo+
+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMTksIFNUTWljcm9lbGVjdHJvbmljcyAtIEFsbCBSaWdodHMg
+UmVzZXJ2ZWQgICovCj4gKyNpbmNsdWRlIDxjb21tb24uaD4gI2luY2x1ZGUgPGNsay5oPiAjaW5j
+bHVkZSA8ZG0uaD4gI2luY2x1ZGUgPHJ0Yy5oPgo+ICsjaW5jbHVkZSA8YXNtL2lvLmg+ICNpbmNs
+dWRlIDxsaW51eC9pb3BvbGwuaD4KPiArCj4gKyNkZWZpbmUgU1RNMzJfUlRDX1RSICAgICAgICAg
+ICAweDAwCj4gKyNkZWZpbmUgU1RNMzJfUlRDX0RSICAgICAgICAgICAweDA0Cj4gKyNkZWZpbmUg
+U1RNMzJfUlRDX0lTUiAgICAgICAgICAweDBDCj4gKyNkZWZpbmUgU1RNMzJfUlRDX1BSRVIgICAg
+ICAgICAweDEwCj4gKyNkZWZpbmUgU1RNMzJfUlRDX0NSICAgICAgICAgICAweDE4Cj4gKyNkZWZp
+bmUgU1RNMzJfUlRDX1dQUiAgICAgICAgICAweDI0Cj4gKwo+ICsvKiBTVE0zMl9SVENfVFIgYml0
+IGZpZWxkcyAgKi8KPiArI2RlZmluZSBTVE0zMl9SVENfU0VDX1NISUZUICAgIDAKPiArI2RlZmlu
+ZSBTVE0zMl9SVENfU0VDICAgICAgICAgIEdFTk1BU0soNiwgMCkKPiArI2RlZmluZSBTVE0zMl9S
+VENfTUlOX1NISUZUICAgIDgKPiArI2RlZmluZSBTVE0zMl9SVENfTUlOICAgICAgICAgIEdFTk1B
+U0soMTQsIDgpCj4gKyNkZWZpbmUgU1RNMzJfUlRDX0hPVVJfU0hJRlQgICAxNgo+ICsjZGVmaW5l
+IFNUTTMyX1JUQ19IT1VSICAgICAgICAgR0VOTUFTSygyMSwgMTYpCj4gKwo+ICsvKiBTVE0zMl9S
+VENfRFIgYml0IGZpZWxkcyAqLwo+ICsjZGVmaW5lIFNUTTMyX1JUQ19EQVRFX1NISUZUICAgMAo+
+ICsjZGVmaW5lIFNUTTMyX1JUQ19EQVRFICAgICAgICAgR0VOTUFTSyg1LCAwKQo+ICsjZGVmaW5l
+IFNUTTMyX1JUQ19NT05USF9TSElGVCAgOAo+ICsjZGVmaW5lIFNUTTMyX1JUQ19NT05USCAgICAg
+ICAgICAgICAgICBHRU5NQVNLKDEyLCA4KQo+ICsjZGVmaW5lIFNUTTMyX1JUQ19XREFZX1NISUZU
+ICAgMTMKPiArI2RlZmluZSBTVE0zMl9SVENfV0RBWSAgICAgICAgIEdFTk1BU0soMTUsIDEzKQo+
+ICsjZGVmaW5lIFNUTTMyX1JUQ19ZRUFSX1NISUZUICAgMTYKPiArI2RlZmluZSBTVE0zMl9SVENf
+WUVBUiAgICAgICAgIEdFTk1BU0soMjMsIDE2KQo+ICsKPiArLyogU1RNMzJfUlRDX0NSIGJpdCBm
+aWVsZHMgKi8KPiArI2RlZmluZSBTVE0zMl9SVENfQ1JfRk1UICAgICAgIEJJVCg2KQo+ICsKPiAr
+LyogU1RNMzJfUlRDX0lTUi9TVE0zMl9SVENfSUNTUiBiaXQgZmllbGRzICovCj4gKyNkZWZpbmUg
+U1RNMzJfUlRDX0lTUl9JTklUUyAgICBCSVQoNCkKPiArI2RlZmluZSBTVE0zMl9SVENfSVNSX1JT
+RiAgICAgIEJJVCg1KQo+ICsjZGVmaW5lIFNUTTMyX1JUQ19JU1JfSU5JVEYgICAgQklUKDYpCj4g
+KyNkZWZpbmUgU1RNMzJfUlRDX0lTUl9JTklUICAgICBCSVQoNykKPiArCj4gKy8qIFNUTTMyX1JU
+Q19QUkVSIGJpdCBmaWVsZHMgKi8KPiArI2RlZmluZSBTVE0zMl9SVENfUFJFUl9QUkVEX1NfU0hJ
+RlQgICAgMAo+ICsjZGVmaW5lIFNUTTMyX1JUQ19QUkVSX1BSRURfUyAgICAgICAgICBHRU5NQVNL
+KDE0LCAwKQo+ICsjZGVmaW5lIFNUTTMyX1JUQ19QUkVSX1BSRURfQV9TSElGVCAgICAxNgo+ICsj
+ZGVmaW5lIFNUTTMyX1JUQ19QUkVSX1BSRURfQSAgICAgICAgICBHRU5NQVNLKDIyLCAxNikKPiAr
+Cj4gKy8qIFNUTTMyX1JUQ19XUFIga2V5IGNvbnN0YW50cyAqLwo+ICsjZGVmaW5lIFJUQ19XUFJf
+MVNUX0tFWSAgICAgICAgICAgICAgICAweENBCj4gKyNkZWZpbmUgUlRDX1dQUl8yTkRfS0VZICAg
+ICAgICAgICAgICAgIDB4NTMKPiArI2RlZmluZSBSVENfV1BSX1dST05HX0tFWSAgICAgIDB4RkYK
+PiArCj4gK3N0cnVjdCBzdG0zMl9ydGNfcHJpdiB7Cj4gKyAgICAgICBmZHRfYWRkcl90IGJhc2U7
+Cj4gK307Cj4gKwo+ICtzdGF0aWMgaW50IHN0bTMyX3J0Y19nZXQoc3RydWN0IHVkZXZpY2UgKmRl
+diwgc3RydWN0IHJ0Y190aW1lICp0bSkgewo+ICsgICAgICAgc3RydWN0IHN0bTMyX3J0Y19wcml2
+ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4gKyAgICAgICB1MzIgdHIsIGRyOwo+ICsKPiAr
+ICAgICAgIHRyID0gcmVhZGwocHJpdi0+YmFzZSArIFNUTTMyX1JUQ19UUik7Cj4gKyAgICAgICBk
+ciA9IHJlYWRsKHByaXYtPmJhc2UgKyBTVE0zMl9SVENfRFIpOwo+ICsKPiArICAgICAgIHRtLT50
+bV9zZWMgPSBiY2QyYmluKCh0ciAmIFNUTTMyX1JUQ19TRUMpID4+IFNUTTMyX1JUQ19TRUNfU0hJ
+RlQpOwo+ICsgICAgICAgdG0tPnRtX21pbiA9IGJjZDJiaW4oKHRyICYgU1RNMzJfUlRDX01JTikg
+Pj4gU1RNMzJfUlRDX01JTl9TSElGVCk7Cj4gKyAgICAgICB0bS0+dG1faG91ciA9IGJjZDJiaW4o
+KHRyICYgU1RNMzJfUlRDX0hPVVIpID4+IFNUTTMyX1JUQ19IT1VSX1NISUZUKTsKPiArCj4gKyAg
+ICAgICB0bS0+dG1fbWRheSA9IGJjZDJiaW4oKGRyICYgU1RNMzJfUlRDX0RBVEUpID4+IFNUTTMy
+X1JUQ19EQVRFX1NISUZUKTsKPiArICAgICAgIHRtLT50bV9tb24gPSBiY2QyYmluKChkciAmIFNU
+TTMyX1JUQ19NT05USCkgPj4gU1RNMzJfUlRDX01PTlRIX1NISUZUKTsKPiArICAgICAgIHRtLT50
+bV95ZWFyID0gYmNkMmJpbigoZHIgJiBTVE0zMl9SVENfWUVBUikgPj4gU1RNMzJfUlRDX1lFQVJf
+U0hJRlQpOwo+ICsgICAgICAgdG0tPnRtX3dkYXkgPSBiY2QyYmluKChkciAmIFNUTTMyX1JUQ19X
+REFZKSA+PiBTVE0zMl9SVENfV0RBWV9TSElGVCk7Cj4gKyAgICAgICB0bS0+dG1feWRheSA9IDA7
+Cj4gKyAgICAgICB0bS0+dG1faXNkc3QgPSAwOwo+ICsKPiArICAgICAgIGRldl9kYmcoZGV2LCAi
+R2V0IERBVEU6ICU0ZC0lMDJkLSUwMmQgKHdkYXk9JWQpICBUSU1FOiAlMmQ6JTAyZDolMDJkXG4i
+LAo+ICsgICAgICAgICAgICAgICB0bS0+dG1feWVhciwgdG0tPnRtX21vbiwgdG0tPnRtX21kYXks
+IHRtLT50bV93ZGF5LAo+ICsgICAgICAgICAgICAgICB0bS0+dG1faG91ciwgdG0tPnRtX21pbiwg
+dG0tPnRtX3NlYyk7Cj4gKwo+ICsgICAgICAgcmV0dXJuIDA7Cj4gK30KPiArCj4gK3N0YXRpYyB2
+b2lkIHN0bTMyX3J0Y191bmxvY2soc3RydWN0IHVkZXZpY2UgKmRldikgewo+ICsgICAgICAgc3Ry
+dWN0IHN0bTMyX3J0Y19wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4gKwo+ICsgICAg
+ICAgd3JpdGVsKFJUQ19XUFJfMVNUX0tFWSwgcHJpdi0+YmFzZSArIFNUTTMyX1JUQ19XUFIpOwo+
+ICsgICAgICAgd3JpdGVsKFJUQ19XUFJfMk5EX0tFWSwgcHJpdi0+YmFzZSArIFNUTTMyX1JUQ19X
+UFIpOyB9Cj4gKwo+ICtzdGF0aWMgdm9pZCBzdG0zMl9ydGNfbG9jayhzdHJ1Y3QgdWRldmljZSAq
+ZGV2KSB7Cj4gKyAgICAgICBzdHJ1Y3Qgc3RtMzJfcnRjX3ByaXYgKnByaXYgPSBkZXZfZ2V0X3By
+aXYoZGV2KTsKPiArCj4gKyAgICAgICB3cml0ZWwoUlRDX1dQUl9XUk9OR19LRVksIHByaXYtPmJh
+c2UgKyBTVE0zMl9SVENfV1BSKTsgfQo+ICsKPiArc3RhdGljIGludCBzdG0zMl9ydGNfZW50ZXJf
+aW5pdF9tb2RlKHN0cnVjdCB1ZGV2aWNlICpkZXYpIHsKPiArICAgICAgIHN0cnVjdCBzdG0zMl9y
+dGNfcHJpdiAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+ICsgICAgICAgdTMyIGlzciA9IHJl
+YWRsKHByaXYtPmJhc2UgKyBTVE0zMl9SVENfSVNSKTsKPiArCj4gKyAgICAgICBpZiAoIShpc3Ig
+JiBTVE0zMl9SVENfSVNSX0lOSVRGKSkgewo+ICsgICAgICAgICAgICAgICBpc3IgfD0gU1RNMzJf
+UlRDX0lTUl9JTklUOwo+ICsgICAgICAgICAgICAgICB3cml0ZWwoaXNyLCBwcml2LT5iYXNlICsg
+U1RNMzJfUlRDX0lTUik7Cj4gKwo+ICsgICAgICAgICAgICAgICByZXR1cm4gcmVhZGxfcG9sbF90
+aW1lb3V0KHByaXYtPmJhc2UgKyBTVE0zMl9SVENfSVNSLAo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGlzciwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAoaXNyICYgU1RNMzJfUlRDX0lTUl9JTklURiksCj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMTAwMDAwKTsKPiArICAgICAgIH0KPiArCj4g
+KyAgICAgICByZXR1cm4gMDsKPiArfQo+ICsKPiArc3RhdGljIGludCBzdG0zMl9ydGNfd2FpdF9z
+eW5jKHN0cnVjdCB1ZGV2aWNlICpkZXYpIHsKPiArICAgICAgIHN0cnVjdCBzdG0zMl9ydGNfcHJp
+diAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+ICsgICAgICAgdTMyIGlzciA9IHJlYWRsKHBy
+aXYtPmJhc2UgKyBTVE0zMl9SVENfSVNSKTsKPiArCj4gKyAgICAgICBpc3IgJj0gflNUTTMyX1JU
+Q19JU1JfUlNGOwo+ICsgICAgICAgd3JpdGVsKGlzciwgcHJpdi0+YmFzZSArIFNUTTMyX1JUQ19J
+U1IpOwo+ICsKPiArICAgICAgIC8qCj4gKyAgICAgICAgKiBXYWl0IGZvciBSU0YgdG8gYmUgc2V0
+IHRvIGVuc3VyZSB0aGUgY2FsZW5kYXIgcmVnaXN0ZXJzIGFyZQo+ICsgICAgICAgICogc3luY2hy
+b25pc2VkLCBpdCB0YWtlcyBhcm91bmQgMiBydGNfY2sgY2xvY2sgY3ljbGVzCj4gKyAgICAgICAg
+Ki8KPiArICAgICAgIHJldHVybiByZWFkbF9wb2xsX3RpbWVvdXQocHJpdi0+YmFzZSArIFNUTTMy
+X1JUQ19JU1IsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzciwgKGlzciAm
+IFNUTTMyX1JUQ19JU1JfUlNGKSwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+MTAwMDAwKTsKPiArfQo+ICsKPiArc3RhdGljIHZvaWQgc3RtMzJfcnRjX2V4aXRfaW5pdF9tb2Rl
+KHN0cnVjdCB1ZGV2aWNlICpkZXYpIHsKPiArICAgICAgIHN0cnVjdCBzdG0zMl9ydGNfcHJpdiAq
+cHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+ICsgICAgICAgdTMyIGlzciA9IHJlYWRsKHByaXYt
+PmJhc2UgKyBTVE0zMl9SVENfSVNSKTsKPiArCj4gKyAgICAgICBpc3IgJj0gflNUTTMyX1JUQ19J
+U1JfSU5JVDsKPiArICAgICAgIHdyaXRlbChpc3IsIHByaXYtPmJhc2UgKyBTVE0zMl9SVENfSVNS
+KTsgfQo+ICsKPiArc3RhdGljIGludCBzdG0zMl9ydGNfc2V0X3RpbWUoc3RydWN0IHVkZXZpY2Ug
+KmRldiwgdTMyIHRpbWUsIHUzMiBkYXRlKQo+ICt7Cj4gKyAgICAgICBzdHJ1Y3Qgc3RtMzJfcnRj
+X3ByaXYgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKPiArICAgICAgIGludCByZXQ7Cj4gKwo+
+ICsgICAgICAgc3RtMzJfcnRjX3VubG9jayhkZXYpOwo+ICsKPiArICAgICAgIHJldCA9IHN0bTMy
+X3J0Y19lbnRlcl9pbml0X21vZGUoZGV2KTsKPiArICAgICAgIGlmIChyZXQpCj4gKyAgICAgICAg
+ICAgICAgIGdvdG8gbG9jazsKPiArCj4gKyAgICAgICB3cml0ZWwodGltZSwgcHJpdi0+YmFzZSAr
+IFNUTTMyX1JUQ19UUik7Cj4gKyAgICAgICB3cml0ZWwoZGF0ZSwgcHJpdi0+YmFzZSArIFNUTTMy
+X1JUQ19EUik7Cj4gKwo+ICsgICAgICAgc3RtMzJfcnRjX2V4aXRfaW5pdF9tb2RlKGRldik7Cj4g
+Kwo+ICsgICAgICAgcmV0ID0gc3RtMzJfcnRjX3dhaXRfc3luYyhkZXYpOwo+ICsKPiArbG9jazoK
+PiArICAgICAgIHN0bTMyX3J0Y19sb2NrKGRldik7Cj4gKyAgICAgICByZXR1cm4gcmV0Owo+ICt9
+Cj4gKwo+ICtzdGF0aWMgaW50IHN0bTMyX3J0Y19zZXQoc3RydWN0IHVkZXZpY2UgKmRldiwgY29u
+c3Qgc3RydWN0IHJ0Y190aW1lCj4gKyp0bSkgewo+ICsgICAgICAgdTMyIHQsIGQ7Cj4gKwo+ICsg
+ICAgICAgZGV2X2RiZyhkZXYsICJTZXQgREFURTogJTRkLSUwMmQtJTAyZCAod2RheT0lZCkgIFRJ
+TUU6ICUyZDolMDJkOiUwMmRcbiIsCj4gKyAgICAgICAgICAgICAgIHRtLT50bV95ZWFyLCB0bS0+
+dG1fbW9uLCB0bS0+dG1fbWRheSwgdG0tPnRtX3dkYXksCj4gKyAgICAgICAgICAgICAgIHRtLT50
+bV9ob3VyLCB0bS0+dG1fbWluLCB0bS0+dG1fc2VjKTsKPiArCj4gKyAgICAgICAvKiBUaW1lIGlu
+IEJDRCBmb3JtYXQgKi8KPiArICAgICAgIHQgPSAoYmluMmJjZCh0bS0+dG1fc2VjKSA8PCBTVE0z
+Ml9SVENfU0VDX1NISUZUKSAmIFNUTTMyX1JUQ19TRUM7Cj4gKyAgICAgICB0IHw9IChiaW4yYmNk
+KHRtLT50bV9taW4pIDw8IFNUTTMyX1JUQ19NSU5fU0hJRlQpICYgU1RNMzJfUlRDX01JTjsKPiAr
+ICAgICAgIHQgfD0gKGJpbjJiY2QodG0tPnRtX2hvdXIpIDw8IFNUTTMyX1JUQ19IT1VSX1NISUZU
+KSAmIFNUTTMyX1JUQ19IT1VSOwo+ICsKPiArICAgICAgIC8qIERhdGUgaW4gQkNEIGZvcm1hdCAq
+Lwo+ICsgICAgICAgZCA9IChiaW4yYmNkKHRtLT50bV9tZGF5KSA8PCBTVE0zMl9SVENfREFURV9T
+SElGVCkgJiBTVE0zMl9SVENfREFURTsKPiArICAgICAgIGQgfD0gKGJpbjJiY2QodG0tPnRtX21v
+bikgPDwgU1RNMzJfUlRDX01PTlRIX1NISUZUKSAmIFNUTTMyX1JUQ19NT05USDsKPiArICAgICAg
+IGQgfD0gKGJpbjJiY2QodG0tPnRtX3llYXIpIDw8IFNUTTMyX1JUQ19ZRUFSX1NISUZUKSAmIFNU
+TTMyX1JUQ19ZRUFSOwo+ICsgICAgICAgZCB8PSAoYmluMmJjZCh0bS0+dG1fd2RheSkgPDwgU1RN
+MzJfUlRDX1dEQVlfU0hJRlQpICYgU1RNMzJfUlRDX1dEQVk7Cj4gKwo+ICsgICAgICAgcmV0dXJu
+IHN0bTMyX3J0Y19zZXRfdGltZShkZXYsIHQsIGQpOwo+ICt9Cj4gKwo+ICtzdGF0aWMgaW50IHN0
+bTMyX3J0Y19yZXNldChzdHJ1Y3QgdWRldmljZSAqZGV2KSB7Cj4gKyAgICAgICBkZXZfZGJnKGRl
+diwgIlJlc2V0IERBVEVcbiIpOwo+ICsKPiArICAgICAgIHJldHVybiBzdG0zMl9ydGNfc2V0X3Rp
+bWUoZGV2LCAwLCAwKTsKPiArfQo+ICsKPiArc3RhdGljIGludCBzdG0zMl9ydGNfaW5pdChzdHJ1
+Y3QgdWRldmljZSAqZGV2KSB7Cj4gKyAgICAgICBzdHJ1Y3Qgc3RtMzJfcnRjX3ByaXYgKnByaXYg
+PSBkZXZfZ2V0X3ByaXYoZGV2KTsKPiArICAgICAgIHVuc2lnbmVkIGludCBwcmVyLCBwcmVkX2Es
+IHByZWRfcywgcHJlZF9hX21heCwgcHJlZF9zX21heCwgY3I7Cj4gKyAgICAgICB1bnNpZ25lZCBp
+bnQgcmF0ZTsKPiArICAgICAgIHN0cnVjdCBjbGsgY2xrOwo+ICsgICAgICAgaW50IHJldDsKPiAr
+ICAgICAgIHUzMiBpc3IgPSByZWFkbChwcml2LT5iYXNlICsgU1RNMzJfUlRDX0lTUik7Cj4gKwo+
+ICsgICAgICAgaWYgKGlzciAmIFNUTTMyX1JUQ19JU1JfSU5JVFMpCj4gKyAgICAgICAgICAgICAg
+IHJldHVybiAgMDsKPiArCj4gKyAgICAgICByZXQgPSBjbGtfZ2V0X2J5X2luZGV4KGRldiwgMSwg
+JmNsayk7Cj4gKyAgICAgICBpZiAocmV0KQo+ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+
+ICsKPiArICAgICAgIHJldCA9IGNsa19lbmFibGUoJmNsayk7Cj4gKyAgICAgICBpZiAocmV0KSB7
+Cj4gKyAgICAgICAgICAgICAgIGNsa19mcmVlKCZjbGspOwo+ICsgICAgICAgICAgICAgICByZXR1
+cm4gcmV0Owo+ICsgICAgICAgfQo+ICsKPiArICAgICAgIHJhdGUgPSBjbGtfZ2V0X3JhdGUoJmNs
+ayk7Cj4gKwo+ICsgICAgICAgLyogRmluZCBwcmVkaXZfYSBhbmQgcHJlZGl2X3MgdG8gb2J0YWlu
+IHRoZSAxSHogY2FsZW5kYXIgY2xvY2sgKi8KPiArICAgICAgIHByZWRfYV9tYXggPSBTVE0zMl9S
+VENfUFJFUl9QUkVEX0EgPj4gU1RNMzJfUlRDX1BSRVJfUFJFRF9BX1NISUZUOwo+ICsgICAgICAg
+cHJlZF9zX21heCA9IFNUTTMyX1JUQ19QUkVSX1BSRURfUyA+PiBTVE0zMl9SVENfUFJFUl9QUkVE
+X1NfU0hJRlQ7Cj4gKwo+ICsgICAgICAgZm9yIChwcmVkX2EgPSBwcmVkX2FfbWF4OyBwcmVkX2Eg
+KyAxID4gMDsgcHJlZF9hLS0pIHsKPiArICAgICAgICAgICAgICAgcHJlZF9zID0gKHJhdGUgLyAo
+cHJlZF9hICsgMSkpIC0gMTsKPiArCj4gKyAgICAgICAgICAgICAgIGlmICgoKHByZWRfcyArIDEp
+ICogKHByZWRfYSArIDEpKSA9PSByYXRlKQo+ICsgICAgICAgICAgICAgICAgICAgICAgIGJyZWFr
+Owo+ICsgICAgICAgfQo+ICsKPiArICAgICAgIC8qCj4gKyAgICAgICAgKiBDYW4ndCBmaW5kIGEg
+MUh6LCBzbyBnaXZlIHByaW9yaXR5IHRvIFJUQyBwb3dlciBjb25zdW1wdGlvbgo+ICsgICAgICAg
+ICogYnkgY2hvb3NpbmcgdGhlIGhpZ2hlciBwb3NzaWJsZSB2YWx1ZSBmb3IgcHJlZGl2X2EKPiAr
+ICAgICAgICAqLwo+ICsgICAgICAgaWYgKHByZWRfcyA+IHByZWRfc19tYXggfHwgcHJlZF9hID4g
+cHJlZF9hX21heCkgewo+ICsgICAgICAgICAgICAgICBwcmVkX2EgPSBwcmVkX2FfbWF4Owo+ICsg
+ICAgICAgICAgICAgICBwcmVkX3MgPSAocmF0ZSAvIChwcmVkX2EgKyAxKSkgLSAxOwo+ICsgICAg
+ICAgfQo+ICsKPiArICAgICAgIHN0bTMyX3J0Y191bmxvY2soZGV2KTsKPiArCj4gKyAgICAgICBy
+ZXQgPSBzdG0zMl9ydGNfZW50ZXJfaW5pdF9tb2RlKGRldik7Cj4gKyAgICAgICBpZiAocmV0KSB7
+Cj4gKyAgICAgICAgICAgICAgIGRldl9lcnIoZGV2LAo+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICJDYW4ndCBlbnRlciBpbiBpbml0IG1vZGUuIFByZXNjYWxlciBjb25maWcgZmFpbGVkLlxuIik7
+Cj4gKyAgICAgICAgICAgICAgIGdvdG8gdW5sb2NrOwo+ICsgICAgICAgfQo+ICsKPiArICAgICAg
+IHByZXIgPSAocHJlZF9zIDw8IFNUTTMyX1JUQ19QUkVSX1BSRURfU19TSElGVCkgJiBTVE0zMl9S
+VENfUFJFUl9QUkVEX1M7Cj4gKyAgICAgICBwcmVyIHw9IChwcmVkX2EgPDwgU1RNMzJfUlRDX1BS
+RVJfUFJFRF9BX1NISUZUKSAmIFNUTTMyX1JUQ19QUkVSX1BSRURfQTsKPiArICAgICAgIHdyaXRl
+bChwcmVyLCBwcml2LT5iYXNlICsgU1RNMzJfUlRDX1BSRVIpOwo+ICsKPiArICAgICAgIC8qIEZv
+cmNlIDI0aCB0aW1lIGZvcm1hdCAqLwo+ICsgICAgICAgY3IgPSByZWFkbChwcml2LT5iYXNlICsg
+U1RNMzJfUlRDX0NSKTsKPiArICAgICAgIGNyICY9IH5TVE0zMl9SVENfQ1JfRk1UOwo+ICsgICAg
+ICAgd3JpdGVsKGNyLCBwcml2LT5iYXNlICsgU1RNMzJfUlRDX0NSKTsKPiArCj4gKyAgICAgICBz
+dG0zMl9ydGNfZXhpdF9pbml0X21vZGUoZGV2KTsKPiArCj4gKyAgICAgICByZXQgPSBzdG0zMl9y
+dGNfd2FpdF9zeW5jKGRldik7Cj4gKwo+ICt1bmxvY2s6Cj4gKyAgICAgICBzdG0zMl9ydGNfbG9j
+ayhkZXYpOwo+ICsKPiArICAgICAgIGNsa19kaXNhYmxlKCZjbGspOwo+ICsgICAgICAgY2xrX2Zy
+ZWUoJmNsayk7Cj4KPgo+IENsb2NrIGZyZWUgaW4gYWxsIHRoZSBjYXNlIChldmVuIGlmIHJldCA9
+IDApCj4gPT4gdGhlIG5leHQgcmVxdWVzdCBmYWlsZWQgKGVyciA9IC0xMTAgZm9yIHRpbWVvdXQp
+Cj4KPiAgICAgICAgIGlmIChyZXQpIHsKPiAgICAgICAgICAgICAgICAgY2xrX2Rpc2FibGUoJmNs
+ayk7Cj4gICAgICAgICAgICAgICAgIGNsa19mcmVlKCZjbGspOwo+ICAgICAgICAgfQo+CgpNeSBi
+YWQgOi0oCkkgd2lsbCBzZW5kIGEgdjIgZm9yIHRoaXMgcGF0Y2guCgpCZW5qYW1pbgo+ICsgICAg
+ICAgcmV0dXJuIHJldDsKPiArfQo+ICsKPiArc3RhdGljIGludCBzdG0zMl9ydGNfcHJvYmUoc3Ry
+dWN0IHVkZXZpY2UgKmRldikgewo+ICsgICAgICAgc3RydWN0IHN0bTMyX3J0Y19wcml2ICpwcml2
+ID0gZGV2X2dldF9wcml2KGRldik7Cj4gKyAgICAgICBzdHJ1Y3QgY2xrIGNsazsKPiArICAgICAg
+IGludCByZXQ7Cj4gKwo+ICsgICAgICAgcHJpdi0+YmFzZSA9IGRldl9yZWFkX2FkZHIoZGV2KTsK
+PiArICAgICAgIGlmIChwcml2LT5iYXNlID09IEZEVF9BRERSX1RfTk9ORSkKPiArICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gKwo+ICsgICAgICAgcmV0ID0gY2xrX2dldF9ieV9pbmRl
+eChkZXYsIDAsICZjbGspOwo+ICsgICAgICAgaWYgKHJldCkKPiArICAgICAgICAgICAgICAgcmV0
+dXJuIHJldDsKPiArCj4gKyAgICAgICByZXQgPSBjbGtfZW5hYmxlKCZjbGspOwo+ICsgICAgICAg
+aWYgKHJldCkgewo+ICsgICAgICAgICAgICAgICBjbGtfZnJlZSgmY2xrKTsKPiArICAgICAgICAg
+ICAgICAgcmV0dXJuIHJldDsKPiArICAgICAgIH0KPiArCj4gKyAgICAgICByZXQgPSBzdG0zMl9y
+dGNfaW5pdChkZXYpOwo+ICsKPiArICAgICAgIGlmIChyZXQpIHsKPiArICAgICAgICAgICAgICAg
+Y2xrX2Rpc2FibGUoJmNsayk7Cj4gKyAgICAgICAgICAgICAgIGNsa19mcmVlKCZjbGspOwo+ICsg
+ICAgICAgfQo+ICsKPiArICAgICAgIHJldHVybiByZXQ7Cj4gK30KPiArCj4gK3N0YXRpYyBjb25z
+dCBzdHJ1Y3QgcnRjX29wcyBzdG0zMl9ydGNfb3BzID0gewo+ICsgICAgICAgLmdldCA9IHN0bTMy
+X3J0Y19nZXQsCj4gKyAgICAgICAuc2V0ID0gc3RtMzJfcnRjX3NldCwKPiArICAgICAgIC5yZXNl
+dCA9IHN0bTMyX3J0Y19yZXNldCwKPiArfTsKPiArCj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdWRl
+dmljZV9pZCBzdG0zMl9ydGNfaWRzW10gPSB7Cj4gKyAgICAgICB7IC5jb21wYXRpYmxlID0gInN0
+LHN0bTMybXAxLXJ0YyIgfSwKPiArICAgICAgIHsgfQo+ICt9Owo+ICsKPiArVV9CT09UX0RSSVZF
+UihydGNfc3RtMzIpID0gewo+ICsgICAgICAgLm5hbWUgICA9ICJydGMtc3RtMzIiLAo+ICsgICAg
+ICAgLmlkICAgICA9IFVDTEFTU19SVEMsCj4gKyAgICAgICAucHJvYmUgID0gc3RtMzJfcnRjX3By
+b2JlLAo+ICsgICAgICAgLm9mX21hdGNoID0gc3RtMzJfcnRjX2lkcywKPiArICAgICAgIC5vcHMg
+ICAgPSAmc3RtMzJfcnRjX29wcywKPiArICAgICAgIC5wcml2X2F1dG9fYWxsb2Nfc2l6ZSA9IHNp
+emVvZihzdHJ1Y3Qgc3RtMzJfcnRjX3ByaXYpLCB9Owo+IC0tCj4gMi4xNS4wCj4KPiBSZWdhcmRz
+Cj4KPiBQYXRyaWNrCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KPiBVLUJvb3QgbWFpbGluZyBsaXN0Cj4gVS1Cb290QGxpc3RzLmRlbnguZGUKPiBodHRw
+czovL2xpc3RzLmRlbnguZGUvbGlzdGluZm8vdS1ib290Cl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1z
+dG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5z
+dG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

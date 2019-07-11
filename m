@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F223E65449
+	by mail.lfdr.de (Postfix) with ESMTPS id 05F9F65447
 	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Jul 2019 12:03:52 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BA793D1DEC8
-	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Jul 2019 10:03:52 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9E51D1DEC5
+	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Jul 2019 10:03:51 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6D2A3D1DEC5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E24FFD1DEC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 11 Jul 2019 10:03:51 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6BA22ht006944; Thu, 11 Jul 2019 12:03:48 +0200
+ Thu, 11 Jul 2019 10:03:49 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6BA2hrL005854; Thu, 11 Jul 2019 12:03:48 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=J3H/lTMhipyqSEOyoUa3VGcseM6/c0Jko/x/tNKfELs=;
- b=UtN2XNy99wjH5W/lOkqlipdqd2UpREP3UzFLAdRDjUbhgARS5215JpKSsVuMsM9l6a30
- LLOcM2Ssor75H7K1yW3CA+JvoV4I8mxzCtvn7qDsYUgiFL+rG6UgGHk4vEOsvMPbjPkL
- zWIDNEK1rdn/skW4+Gr4oYym9Z202754VtEUmL8seCAhKCAlkbmPcaeuX+r5juieJoMK
- I6Bps7koNWnbI7MRC19rYgkJ9mkgWUDRQg3r1T8TUnYE1wxU3Rt9X0rs7Wvcelt/JS1T
- iOsVV++Flu3hjJgWsgmBhTnHCNGh9LZzu9IPO+pGXEaZDTfXXVYUKbUe2LSrf0aY9Bie fw== 
+ bh=Jy6JXKvaXASU3TOSkSUsPg4PBySd2iL72+evk+/BgYM=;
+ b=UR7tzeYQvSrdw7hinQ0J3N8DWaiSAvIHnGr6hwG3Vln8WA+neC6VD4E9yN2WLJAJgi/e
+ 0LQCdldRVPM2R1SXgaXazYhjy56qfAlQPNrZAfMFVEG4N3+1q8S93JYwZWKBlWqDyfo0
+ C53jkxTmh+ajTubUwuK292ThaZ1yymYIFIsTzZN3UNb19BzcepDD3lpUObXBVOmh49Js
+ pSftKVpYqNnYXQH1hP8XkpNxTcywTG7TINYxqcQDVoWZVSqW6ZC3hGj+6I6q6POiiqMA
+ 6Ra5+iIAtoORG32wJzlo5BwyWrb/L0lHB4jbQyQY9OnzAiYJdeTb96oIcfiiERQAzA25 Ag== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2tmh51gppm-1
+ by mx08-00178001.pphosted.com with ESMTP id 2tjjhj29a5-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
  Thu, 11 Jul 2019 12:03:48 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 837E85D;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A56776F;
  Thu, 11 Jul 2019 10:03:47 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4C82E2569;
- Thu, 11 Jul 2019 10:03:45 +0000 (GMT)
-Received: from SAFEX1HUBCAS24.st.com (10.75.90.95) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 11 Jul
- 2019 12:03:45 +0200
+Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9BA4225A5;
+ Thu, 11 Jul 2019 10:03:46 +0000 (GMT)
+Received: from SAFEX1HUBCAS24.st.com (10.75.90.95) by Safex1hubcas22.st.com
+ (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 11 Jul
+ 2019 12:03:46 +0200
 Received: from localhost (10.201.20.122) by webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 11 Jul 2019 12:03:44
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Thu, 11 Jul 2019 12:03:46
  +0200
 From: Benjamin Gaignard <benjamin.gaignard@st.com>
 To: <patrick.delaunay@st.com>, <patrice.chotard@st.com>, <sjg@chromium.org>
-Date: Thu, 11 Jul 2019 12:03:37 +0200
-Message-ID: <20190711100338.1327-2-benjamin.gaignard@st.com>
+Date: Thu, 11 Jul 2019 12:03:38 +0200
+Message-ID: <20190711100338.1327-3-benjamin.gaignard@st.com>
 X-Mailer: git-send-email 2.15.0
 In-Reply-To: <20190711100338.1327-1-benjamin.gaignard@st.com>
 References: <20190711100338.1327-1-benjamin.gaignard@st.com>
@@ -55,7 +55,7 @@ X-Originating-IP: [10.201.20.122]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-07-11_01:, , signatures=0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
-Subject: [Uboot-stm32] [PATCH v3 1/2] clk: stm32mp1: Add RTC clock entry
+Subject: [Uboot-stm32] [PATCH v3 2/2] rtc: Add rtc driver for stm32mp1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,71 +72,403 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Patrick Delaunay <patrick.delaunay@st.com>
-
-Add RTCAPB and RTC clock support.
+Add support of STM32MP1 rtc driver.
+Enable it for basic and trusted configurations.
 
 Signed-off-by: Benjamin Gaignard <benjamin.gaignard@st.com>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
- drivers/clk/clk_stm32mp1.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+version 3:
+- release clock only on error cases.
 
-diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
-index f295e4864b..97d4a34deb 100644
---- a/drivers/clk/clk_stm32mp1.c
-+++ b/drivers/clk/clk_stm32mp1.c
-@@ -300,6 +300,7 @@ enum stm32mp1_parent_sel {
- 	_DSI_SEL,
- 	_ADC12_SEL,
- 	_SPI1_SEL,
-+	_RTC_SEL,
- 	_PARENT_SEL_NB,
- 	_UNKNOWN_SEL = 0xff,
- };
-@@ -534,6 +535,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB4ENSETR, 16, USBPHY_K, _USBPHY_SEL),
+ configs/stm32mp15_basic_defconfig   |   2 +
+ configs/stm32mp15_trusted_defconfig |   2 +
+ drivers/rtc/Kconfig                 |   6 +
+ drivers/rtc/Makefile                |   1 +
+ drivers/rtc/stm32_rtc.c             | 323 ++++++++++++++++++++++++++++++++++++
+ 5 files changed, 334 insertions(+)
+ create mode 100644 drivers/rtc/stm32_rtc.c
+
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index 79687d3dfd..5c75457cd5 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -95,6 +95,8 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+ CONFIG_DM_REGULATOR_STPMIC1=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_STM32_SERIAL=y
+ CONFIG_SPI=y
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index e1ab2ab0d5..a71afa4d81 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -85,6 +85,8 @@ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+ CONFIG_DM_REGULATOR_STPMIC1=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_STM32_SERIAL=y
+ CONFIG_SPI=y
+diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
+index fd0009b2e2..a383e632ad 100644
+--- a/drivers/rtc/Kconfig
++++ b/drivers/rtc/Kconfig
+@@ -110,4 +110,10 @@ config RTC_M41T62
+ 	  Enable driver for ST's M41T62 compatible RTC devices (like RV-4162).
+ 	  It is a serial (I2C) real-time clock (RTC) with alarm.
  
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 2, I2C4_K, _I2C46_SEL),
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 8, RTCAPB, _PCLK5),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 20, STGEN_K, _STGEN_SEL),
- 
- 	STM32MP1_CLK_SET_CLR_F(RCC_MP_AHB2ENSETR, 5, ADC12, _HCLK2),
-@@ -569,6 +571,8 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK_SET_CLR(RCC_MP_AHB6ENSETR, 24, USBH, _UNKNOWN_SEL),
- 
- 	STM32MP1_CLK(RCC_DBGCFGR, 8, CK_DBG, _UNKNOWN_SEL),
++config RTC_STM32
++	bool "Enable STM32 RTC driver"
++	depends on DM_RTC
++	help
++	  Enable STM32 RTC driver. This driver supports the rtc that is present
++	  on some STM32 SoCs.
+ endmenu
+diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
+index 1724602f1c..90e79fb30d 100644
+--- a/drivers/rtc/Makefile
++++ b/drivers/rtc/Makefile
+@@ -50,5 +50,6 @@ obj-$(CONFIG_RTC_RX8025) += rx8025.o
+ obj-$(CONFIG_RTC_RX8010SJ) += rx8010sj.o
+ obj-$(CONFIG_RTC_S3C24X0) += s3c24x0_rtc.o
+ obj-$(CONFIG_RTC_S35392A) += s35392a.o
++obj-$(CONFIG_RTC_STM32) += stm32_rtc.o
+ obj-$(CONFIG_SANDBOX) += sandbox_rtc.o
+ obj-$(CONFIG_RTC_X1205) += x1205.o
+diff --git a/drivers/rtc/stm32_rtc.c b/drivers/rtc/stm32_rtc.c
+new file mode 100644
+index 0000000000..abd339076a
+--- /dev/null
++++ b/drivers/rtc/stm32_rtc.c
+@@ -0,0 +1,323 @@
++// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++/*
++ * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
++ */
++#include <common.h>
++#include <clk.h>
++#include <dm.h>
++#include <rtc.h>
++#include <asm/io.h>
++#include <linux/iopoll.h>
 +
-+	STM32MP1_CLK(RCC_BDCR, 20, RTC, _RTC_SEL),
- };
- 
- static const u8 i2c12_parents[] = {_PCLK1, _PLL4_R, _HSI_KER, _CSI_KER};
-@@ -594,6 +598,7 @@ static const u8 dsi_parents[] = {_DSI_PHY, _PLL4_P};
- static const u8 adc_parents[] = {_PLL4_R, _CK_PER, _PLL3_Q};
- static const u8 spi_parents[] = {_PLL4_P, _PLL3_Q, _I2S_CKIN, _CK_PER,
- 				 _PLL3_R};
-+static const u8 rtc_parents[] = {_UNKNOWN_ID, _LSE, _LSI, _HSE};
- 
- static const struct stm32mp1_clk_sel stm32mp1_clk_sel[_PARENT_SEL_NB] = {
- 	STM32MP1_CLK_PARENT(_I2C12_SEL, RCC_I2C12CKSELR, 0, 0x7, i2c12_parents),
-@@ -619,6 +624,9 @@ static const struct stm32mp1_clk_sel stm32mp1_clk_sel[_PARENT_SEL_NB] = {
- 	STM32MP1_CLK_PARENT(_DSI_SEL, RCC_DSICKSELR, 0, 0x1, dsi_parents),
- 	STM32MP1_CLK_PARENT(_ADC12_SEL, RCC_ADCCKSELR, 0, 0x1, adc_parents),
- 	STM32MP1_CLK_PARENT(_SPI1_SEL, RCC_SPI2S1CKSELR, 0, 0x7, spi_parents),
-+	STM32MP1_CLK_PARENT(_RTC_SEL, RCC_BDCR, RCC_BDCR_RTCSRC_SHIFT,
-+			    (RCC_BDCR_RTCSRC_MASK >> RCC_BDCR_RTCSRC_SHIFT),
-+			    rtc_parents),
- };
- 
- #ifdef STM32MP1_CLOCK_TREE_INIT
-@@ -734,6 +742,7 @@ char * const stm32mp1_clk_parent_sel_name[_PARENT_SEL_NB] = {
- 	[_DSI_SEL] = "DSI",
- 	[_ADC12_SEL] = "ADC12",
- 	[_SPI1_SEL] = "SPI1",
-+	[_RTC_SEL] = "RTC",
- };
- 
- static const struct stm32mp1_clk_data stm32mp1_data = {
++#define STM32_RTC_TR		0x00
++#define STM32_RTC_DR		0x04
++#define STM32_RTC_ISR		0x0C
++#define STM32_RTC_PRER		0x10
++#define STM32_RTC_CR		0x18
++#define STM32_RTC_WPR		0x24
++
++/* STM32_RTC_TR bit fields  */
++#define STM32_RTC_SEC_SHIFT	0
++#define STM32_RTC_SEC		GENMASK(6, 0)
++#define STM32_RTC_MIN_SHIFT	8
++#define STM32_RTC_MIN		GENMASK(14, 8)
++#define STM32_RTC_HOUR_SHIFT	16
++#define STM32_RTC_HOUR		GENMASK(21, 16)
++
++/* STM32_RTC_DR bit fields */
++#define STM32_RTC_DATE_SHIFT	0
++#define STM32_RTC_DATE		GENMASK(5, 0)
++#define STM32_RTC_MONTH_SHIFT	8
++#define STM32_RTC_MONTH		GENMASK(12, 8)
++#define STM32_RTC_WDAY_SHIFT	13
++#define STM32_RTC_WDAY		GENMASK(15, 13)
++#define STM32_RTC_YEAR_SHIFT	16
++#define STM32_RTC_YEAR		GENMASK(23, 16)
++
++/* STM32_RTC_CR bit fields */
++#define STM32_RTC_CR_FMT	BIT(6)
++
++/* STM32_RTC_ISR/STM32_RTC_ICSR bit fields */
++#define STM32_RTC_ISR_INITS	BIT(4)
++#define STM32_RTC_ISR_RSF	BIT(5)
++#define STM32_RTC_ISR_INITF	BIT(6)
++#define STM32_RTC_ISR_INIT	BIT(7)
++
++/* STM32_RTC_PRER bit fields */
++#define STM32_RTC_PRER_PRED_S_SHIFT	0
++#define STM32_RTC_PRER_PRED_S		GENMASK(14, 0)
++#define STM32_RTC_PRER_PRED_A_SHIFT	16
++#define STM32_RTC_PRER_PRED_A		GENMASK(22, 16)
++
++/* STM32_RTC_WPR key constants */
++#define RTC_WPR_1ST_KEY		0xCA
++#define RTC_WPR_2ND_KEY		0x53
++#define RTC_WPR_WRONG_KEY	0xFF
++
++struct stm32_rtc_priv {
++	fdt_addr_t base;
++};
++
++static int stm32_rtc_get(struct udevice *dev, struct rtc_time *tm)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	u32 tr, dr;
++
++	tr = readl(priv->base + STM32_RTC_TR);
++	dr = readl(priv->base + STM32_RTC_DR);
++
++	tm->tm_sec = bcd2bin((tr & STM32_RTC_SEC) >> STM32_RTC_SEC_SHIFT);
++	tm->tm_min = bcd2bin((tr & STM32_RTC_MIN) >> STM32_RTC_MIN_SHIFT);
++	tm->tm_hour = bcd2bin((tr & STM32_RTC_HOUR) >> STM32_RTC_HOUR_SHIFT);
++
++	tm->tm_mday = bcd2bin((dr & STM32_RTC_DATE) >> STM32_RTC_DATE_SHIFT);
++	tm->tm_mon = bcd2bin((dr & STM32_RTC_MONTH) >> STM32_RTC_MONTH_SHIFT);
++	tm->tm_year = bcd2bin((dr & STM32_RTC_YEAR) >> STM32_RTC_YEAR_SHIFT);
++	tm->tm_wday = bcd2bin((dr & STM32_RTC_WDAY) >> STM32_RTC_WDAY_SHIFT);
++	tm->tm_yday = 0;
++	tm->tm_isdst = 0;
++
++	dev_dbg(dev, "Get DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
++		tm->tm_year, tm->tm_mon, tm->tm_mday, tm->tm_wday,
++		tm->tm_hour, tm->tm_min, tm->tm_sec);
++
++	return 0;
++}
++
++static void stm32_rtc_unlock(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++
++	writel(RTC_WPR_1ST_KEY, priv->base + STM32_RTC_WPR);
++	writel(RTC_WPR_2ND_KEY, priv->base + STM32_RTC_WPR);
++}
++
++static void stm32_rtc_lock(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++
++	writel(RTC_WPR_WRONG_KEY, priv->base + STM32_RTC_WPR);
++}
++
++static int stm32_rtc_enter_init_mode(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	u32 isr = readl(priv->base + STM32_RTC_ISR);
++
++	if (!(isr & STM32_RTC_ISR_INITF)) {
++		isr |= STM32_RTC_ISR_INIT;
++		writel(isr, priv->base + STM32_RTC_ISR);
++
++		return readl_poll_timeout(priv->base + STM32_RTC_ISR,
++					  isr,
++					  (isr & STM32_RTC_ISR_INITF),
++					  100000);
++	}
++
++	return 0;
++}
++
++static int stm32_rtc_wait_sync(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	u32 isr = readl(priv->base + STM32_RTC_ISR);
++
++	isr &= ~STM32_RTC_ISR_RSF;
++	writel(isr, priv->base + STM32_RTC_ISR);
++
++	/*
++	 * Wait for RSF to be set to ensure the calendar registers are
++	 * synchronised, it takes around 2 rtc_ck clock cycles
++	 */
++	return readl_poll_timeout(priv->base + STM32_RTC_ISR,
++				  isr, (isr & STM32_RTC_ISR_RSF),
++				  100000);
++}
++
++static void stm32_rtc_exit_init_mode(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	u32 isr = readl(priv->base + STM32_RTC_ISR);
++
++	isr &= ~STM32_RTC_ISR_INIT;
++	writel(isr, priv->base + STM32_RTC_ISR);
++}
++
++static int stm32_rtc_set_time(struct udevice *dev, u32 time, u32 date)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	stm32_rtc_unlock(dev);
++
++	ret = stm32_rtc_enter_init_mode(dev);
++	if (ret)
++		goto lock;
++
++	writel(time, priv->base + STM32_RTC_TR);
++	writel(date, priv->base + STM32_RTC_DR);
++
++	stm32_rtc_exit_init_mode(dev);
++
++	ret = stm32_rtc_wait_sync(dev);
++
++lock:
++	stm32_rtc_lock(dev);
++	return ret;
++}
++
++static int stm32_rtc_set(struct udevice *dev, const struct rtc_time *tm)
++{
++	u32 t, d;
++
++	dev_dbg(dev, "Set DATE: %4d-%02d-%02d (wday=%d)  TIME: %2d:%02d:%02d\n",
++		tm->tm_year, tm->tm_mon, tm->tm_mday, tm->tm_wday,
++		tm->tm_hour, tm->tm_min, tm->tm_sec);
++
++	/* Time in BCD format */
++	t = (bin2bcd(tm->tm_sec) << STM32_RTC_SEC_SHIFT) & STM32_RTC_SEC;
++	t |= (bin2bcd(tm->tm_min) << STM32_RTC_MIN_SHIFT) & STM32_RTC_MIN;
++	t |= (bin2bcd(tm->tm_hour) << STM32_RTC_HOUR_SHIFT) & STM32_RTC_HOUR;
++
++	/* Date in BCD format */
++	d = (bin2bcd(tm->tm_mday) << STM32_RTC_DATE_SHIFT) & STM32_RTC_DATE;
++	d |= (bin2bcd(tm->tm_mon) << STM32_RTC_MONTH_SHIFT) & STM32_RTC_MONTH;
++	d |= (bin2bcd(tm->tm_year) << STM32_RTC_YEAR_SHIFT) & STM32_RTC_YEAR;
++	d |= (bin2bcd(tm->tm_wday) << STM32_RTC_WDAY_SHIFT) & STM32_RTC_WDAY;
++
++	return stm32_rtc_set_time(dev, t, d);
++}
++
++static int stm32_rtc_reset(struct udevice *dev)
++{
++	dev_dbg(dev, "Reset DATE\n");
++
++	return stm32_rtc_set_time(dev, 0, 0);
++}
++
++static int stm32_rtc_init(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	unsigned int prer, pred_a, pred_s, pred_a_max, pred_s_max, cr;
++	unsigned int rate;
++	struct clk clk;
++	int ret;
++	u32 isr = readl(priv->base + STM32_RTC_ISR);
++
++	if (isr & STM32_RTC_ISR_INITS)
++		return  0;
++
++	ret = clk_get_by_index(dev, 1, &clk);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&clk);
++	if (ret) {
++		clk_free(&clk);
++		return ret;
++	}
++
++	rate = clk_get_rate(&clk);
++
++	/* Find prediv_a and prediv_s to obtain the 1Hz calendar clock */
++	pred_a_max = STM32_RTC_PRER_PRED_A >> STM32_RTC_PRER_PRED_A_SHIFT;
++	pred_s_max = STM32_RTC_PRER_PRED_S >> STM32_RTC_PRER_PRED_S_SHIFT;
++
++	for (pred_a = pred_a_max; pred_a + 1 > 0; pred_a--) {
++		pred_s = (rate / (pred_a + 1)) - 1;
++
++		if (((pred_s + 1) * (pred_a + 1)) == rate)
++			break;
++	}
++
++	/*
++	 * Can't find a 1Hz, so give priority to RTC power consumption
++	 * by choosing the higher possible value for prediv_a
++	 */
++	if (pred_s > pred_s_max || pred_a > pred_a_max) {
++		pred_a = pred_a_max;
++		pred_s = (rate / (pred_a + 1)) - 1;
++	}
++
++	stm32_rtc_unlock(dev);
++
++	ret = stm32_rtc_enter_init_mode(dev);
++	if (ret) {
++		dev_err(dev,
++			"Can't enter in init mode. Prescaler config failed.\n");
++		goto unlock;
++	}
++
++	prer = (pred_s << STM32_RTC_PRER_PRED_S_SHIFT) & STM32_RTC_PRER_PRED_S;
++	prer |= (pred_a << STM32_RTC_PRER_PRED_A_SHIFT) & STM32_RTC_PRER_PRED_A;
++	writel(prer, priv->base + STM32_RTC_PRER);
++
++	/* Force 24h time format */
++	cr = readl(priv->base + STM32_RTC_CR);
++	cr &= ~STM32_RTC_CR_FMT;
++	writel(cr, priv->base + STM32_RTC_CR);
++
++	stm32_rtc_exit_init_mode(dev);
++
++	ret = stm32_rtc_wait_sync(dev);
++
++unlock:
++	stm32_rtc_lock(dev);
++
++	if (ret) {
++		clk_disable(&clk);
++		clk_free(&clk);
++	}
++
++	return ret;
++}
++
++static int stm32_rtc_probe(struct udevice *dev)
++{
++	struct stm32_rtc_priv *priv = dev_get_priv(dev);
++	struct clk clk;
++	int ret;
++
++	priv->base = dev_read_addr(dev);
++	if (priv->base == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	ret = clk_get_by_index(dev, 0, &clk);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&clk);
++	if (ret) {
++		clk_free(&clk);
++		return ret;
++	}
++
++	ret = stm32_rtc_init(dev);
++
++	if (ret) {
++		clk_disable(&clk);
++		clk_free(&clk);
++	}
++
++	return ret;
++}
++
++static const struct rtc_ops stm32_rtc_ops = {
++	.get = stm32_rtc_get,
++	.set = stm32_rtc_set,
++	.reset = stm32_rtc_reset,
++};
++
++static const struct udevice_id stm32_rtc_ids[] = {
++	{ .compatible = "st,stm32mp1-rtc" },
++	{ }
++};
++
++U_BOOT_DRIVER(rtc_stm32) = {
++	.name	= "rtc-stm32",
++	.id	= UCLASS_RTC,
++	.probe	= stm32_rtc_probe,
++	.of_match = stm32_rtc_ids,
++	.ops	= &stm32_rtc_ops,
++	.priv_auto_alloc_size = sizeof(struct stm32_rtc_priv),
++};
 -- 
 2.15.0
 

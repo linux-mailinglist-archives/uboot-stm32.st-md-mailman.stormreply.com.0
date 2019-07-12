@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8AB1670D9
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 16:01:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3725A670E0
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 16:01:30 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A4459D40C0E
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 14:01:22 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F23BAC6A5F8
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 14:01:29 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4F738D40C0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 260B3D40C18
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Jul 2019 14:01:21 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri, 12 Jul 2019 14:01:28 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6CDvBHO013929; Fri, 12 Jul 2019 16:01:20 +0200
+ x6CDvN40025590; Fri, 12 Jul 2019 16:01:27 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=A3FNJ7hlJ3tKlio/Xmk3/eG/gj6JIUq5//76EdEg22Y=;
- b=1luwMEYGHskFDEKSg57ZGV60JcWSmk7dnE+66UUBmHQe/5RkI0WqYKMqfvfiuRbQavmg
- 7vwRmSEFo+4JAlh4ooOdtOTizSMo5Fk7qpUvOJTCIhuPQ1PMzhOqsqmV6zV59XnF6o5/
- iR3TmdPsstW6eY6+1EHF3ha6a1wEP6wTsEqS0zfqkRFIEf3G/7mPgRbCSW0hz9E0BCP0
- W5eS38Gf1lqc2tTcVdzhn0dWvDumAOI5c73tERcpfYq8NcvCPcV+0U2ZbSrdu2IGdhT9
- rMJ8xGe+6NAifdMUfgpgL32AWLjJudYBpS1zZ/VaVTzIfAQBa/M29YSitR986LedE4Z/ Ww== 
+ bh=XNxBQYyclnXJibLs3V41ZvWI0F5RzjZz2sR8dXtruBI=;
+ b=cY6c0xT7U3WdnwII82v8Aq4TNYmHAwl+gWtYb1rEi3QJlnh97lgudYQQS+ju4cUf5a4t
+ yQyNAHXmEtFlxSNrtzBOnwcF0k4hocZFYEp+1pyyzfvRFtPs3jaytCJRXA27q9Xn3MrD
+ KskcO6VBNH5SCEmYwbEpy3jXMck4QA+GLlJ/4ftbkQTL2NVm/qyxnUj5NOpEYDKDemdv
+ LbjIdNF+JJFEDGwOJ3xJemecf/QOa+jut1JTB83hj6joDamRZFVqBqontSC73KfUFSWQ
+ 7FEVSoCw2hNw0X5d3tU90msNnSbXc4R8wOQFXbUWDJ2cE1DtFwkmMUtlb9eG74Pp5Hey Mg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2tjjhjadjh-1
+ by mx08-00178001.pphosted.com with ESMTP id 2tjgsajhdd-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 12 Jul 2019 16:01:20 +0200
+ Fri, 12 Jul 2019 16:01:27 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 81CFD3F;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CBF8F43;
  Fri, 12 Jul 2019 14:01:19 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6B3B54E4E;
+Received: from Webmail-eu.st.com (sfhdag5node2.st.com [10.75.127.14])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B7AD44E4E;
  Fri, 12 Jul 2019 14:01:19 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 12 Jul
- 2019 16:01:18 +0200
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG5NODE2.st.com
+ (10.75.127.14) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 12 Jul
+ 2019 16:01:19 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 12 Jul 2019 16:01:18 +0200
+ 15.00.1473.003; Fri, 12 Jul 2019 16:01:19 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 08/20] gpio: stm32_gpio: Fix warnings when compiling with
+Thread-Topic: [PATCH 06/20] adc: stm32-adc: Fix warnings when compiling with
  W=1
-Thread-Index: AQHVKDUI3Ls2ANz/c0WnVHcoeqFccqbHIrBg
-Date: Fri, 12 Jul 2019 14:01:18 +0000
-Message-ID: <344d230c882844ebaee115fe59356e64@SFHDAG6NODE3.st.com>
+Thread-Index: AQHVKDUIJZW78Imq4EWh71DkEyK1F6bHIsyQ
+Date: Fri, 12 Jul 2019 14:01:19 +0000
+Message-ID: <e60892301bb54406ac9610c0c04fcff3@SFHDAG6NODE3.st.com>
 References: <1561123618-2029-1-git-send-email-patrick.delaunay@st.com>
- <1561123618-2029-8-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1561123618-2029-8-git-send-email-patrick.delaunay@st.com>
+ <1561123618-2029-6-git-send-email-patrick.delaunay@st.com>
+In-Reply-To: <1561123618-2029-6-git-send-email-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,10 +63,8 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-07-12_04:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Christophe KERELLO <christophe.kerello@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 08/20] gpio: stm32_gpio: Fix warnings when
+ Simon Glass <sjg@chromium.org>, Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 06/20] adc: stm32-adc: Fix warnings when
  compiling with W=1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -91,24 +89,25 @@ Hi,
 > 
 > This patch solves the following warnings:
 > 
-> drivers/gpio/stm32_gpio.c: In function 'stm32_offset_to_index':
-> : comparison between signed and unsigned integer expressions [-Wsign-compare]
->     if (idx == offset)
->             ^~
+> drivers/adc/stm32-adc.c: In function 'stm32_adc_chan_of_init':
+> warning: comparison between signed and unsigned integer expressions [-Wsign-
+> compare]
+>   if (num_channels > adc->cfg->max_channels) {
+>                    ^
 > Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 > 
->  drivers/gpio/stm32f7_gpio.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  drivers/adc/stm32-adc.c | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
 > 
-
 
 
 Applied to u-boot-stm32/master, thanks!
 
 Patrick
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

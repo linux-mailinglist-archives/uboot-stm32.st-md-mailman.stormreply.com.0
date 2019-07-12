@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3E87669B7
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 11:13:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FC2966C35
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 14:12:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1F10CC6507D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 09:13:43 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2174ED3FCE0
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 12:12:05 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 017D1C6507C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9064C06FBE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Jul 2019 09:13:41 +0000 (UTC)
+ Fri, 12 Jul 2019 12:12:03 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6C9CbTQ010083; Fri, 12 Jul 2019 11:13:25 +0200
+ x6CC5f4m011048; Fri, 12 Jul 2019 14:12:01 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=JDiVNcHCPRjIIUMD7k50tGFHJT+50nE49Bxx8NZCWgc=;
- b=otaXdthN3/z80aXAaskZ3SpGdBZC1gzY3r0TDLEjbeuFbO2bPO1XlQ0IlA+E9ohevRLC
- MNhUzSEDHFd5g/hbL9IfCpPUyZAXYAD/aQTwgW49j2bzbPrkeMR397+fZI25GBwRVQwf
- GufLBu0HYeeIPrUeedYrlSUrSDDf7Z7EtYRkZUmQ7LN0tSPXeQiKRVmG7PgbFq6oBUV1
- t/BhtZA063CAeH+2sv/NU6aNaQ9fYE3WBP6jIQcfBpJaflrX1kNZChM9yjoKfxomRagw
- yQJ4J3AFsNLfWqMCbInYOdY0LGqzMTpuCNU5NOTlFln76jhzPUa+u1cL3Czgnn+KEqCk AA== 
+ bh=m+peiFEaJOmu1LRaPUHlCTr4276XZbwqy6GnHBc9JR0=;
+ b=UYBnhE17wCdKor9Me1coCvoBCyb4NZKQtxUP2BHfWl0zOvWkaYob7cZi5dh7pn4kdS+E
+ W7MFW2tgSFmxeVdm9tsPWPESxBfAEEG5latO1Ys6oTM0ZlHzQYtODslQ7jikuAqIvrb3
+ 6VigL98+xq4I86jxWVfnGrbe8R7zawOh7EFkZeBARW8OOgei+ejBMa6amNxgC11ts989
+ UJjXnTA5XUo52T9hdsaRcOUbsFbKWaDKv0Z5OJMTEUG3QzMUD1unplIkAKIpfw+dUyOe
+ Y89DrZNd/9DxDsKtfuTLITSSt1PorZwLz/4/vQrN1E3W0QFuVH6ym4tQlD4OdroS39Am Zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2tpj3thvk2-1
+ by mx07-00178001.pphosted.com with ESMTP id 2tpj3tjvbu-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 12 Jul 2019 11:13:25 +0200
+ Fri, 12 Jul 2019 14:12:01 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4C33C43;
- Fri, 12 Jul 2019 09:13:24 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 100C926FF;
- Fri, 12 Jul 2019 09:13:24 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 12 Jul
- 2019 11:13:23 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9BF8443;
+ Fri, 12 Jul 2019 12:12:00 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7536B2B70;
+ Fri, 12 Jul 2019 12:12:00 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 12 Jul
+ 2019 14:12:00 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 12 Jul 2019 11:13:23 +0200
+ 15.00.1473.003; Fri, 12 Jul 2019 14:12:00 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 19/20] psci: Fix warnings when compiling with W=1
-Thread-Index: AQHVKDUQEWc/U7+4n0K3FnqVkzs0iqbG01mQ
-Date: Fri, 12 Jul 2019 09:13:23 +0000
-Message-ID: <a36277f27a1d4dd484f12056e6642bad@SFHDAG6NODE3.st.com>
-References: <1561123618-2029-1-git-send-email-patrick.delaunay@st.com>
- <1561123618-2029-19-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1561123618-2029-19-git-send-email-patrick.delaunay@st.com>
+Thread-Topic: [PATCH v2 01/16] stm32mp1: deactivate WATCHDOG in defconfig
+Thread-Index: AQHVM0Ut9hEp4mdvqki8j230ijSiK6bG7eUg
+Date: Fri, 12 Jul 2019 12:12:00 +0000
+Message-ID: <15b3c52505684ea7aeaac73855b9eeec@SFHDAG6NODE3.st.com>
+References: <1562340023-8516-1-git-send-email-patrick.delaunay@st.com>
+ <1562340023-8516-2-git-send-email-patrick.delaunay@st.com>
+In-Reply-To: <1562340023-8516-2-git-send-email-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -60,18 +60,10 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.49]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-12_03:, , signatures=0
-Cc: Albert Aribaud <albert.u.boot@aribaud.net>,
- Christophe KERELLO <christophe.kerello@st.com>,
- Stefan Agner <stefan.agner@toradex.com>, Anson Huang <Anson.Huang@nxp.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>, "NXP i.MX
- U-Boot Team" <uboot-imx@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Chee Hong Ang <chee.hong.ang@intel.com>, Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 19/20] psci: Fix warnings when compiling
-	with W=1
+ definitions=2019-07-12_04:, , signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 01/16] stm32mp1: deactivate WATCHDOG in
+	defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,127 +75,36 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksDQoNCj4gRnJvbTogUGF0cmljayBERUxBVU5BWSA8cGF0cmljay5kZWxhdW5heUBzdC5jb20+
-DQo+IFNlbnQ6IHZlbmRyZWRpIDIxIGp1aW4gMjAxOSAxNToyNw0KPiANCj4gVGhpcyBwYXRjaCBz
-b2x2ZXMgdGhlIGZvbGxvd2luZyB3YXJuaW5nczoNCj4gYXJjaC9hcm0vbWFjaC1zdG0zMm1wL3Bz
-Y2kuYzoNCj4gDQo+IHdhcm5pbmc6IG5vIHByZXZpb3VzIHByb3RvdHlwZSBmb3Ig4oCYcHNjaV9z
-ZXRfc3RhdGXigJkgWy1XbWlzc2luZy1wcm90b3R5cGVzXQ0KPiB3YXJuaW5nOiBubyBwcmV2aW91
-cyBwcm90b3R5cGUgZm9yIOKAmHBzY2lfYXJjaF9jcHVfZW50cnnigJkgWy1XbWlzc2luZy1wcm90
-b3R5cGVzXQ0KPiB3YXJuaW5nOiBubyBwcmV2aW91cyBwcm90b3R5cGUgZm9yIOKAmHBzY2lfZmVh
-dHVyZXPigJkgWy1XbWlzc2luZy1wcm90b3R5cGVzXQ0KPiB3YXJuaW5nOiBubyBwcmV2aW91cyBw
-cm90b3R5cGUgZm9yIOKAmHBzY2lfdmVyc2lvbuKAmSBbLVdtaXNzaW5nLXByb3RvdHlwZXNdDQo+
-IHdhcm5pbmc6IG5vIHByZXZpb3VzIHByb3RvdHlwZSBmb3Ig4oCYcHNjaV9hZmZpbml0eV9pbmZv
-4oCZIFstV21pc3NpbmctcHJvdG90eXBlc10NCj4gd2FybmluZzogbm8gcHJldmlvdXMgcHJvdG90
-eXBlIGZvciDigJhwc2NpX21pZ3JhdGVfaW5mb190eXBl4oCZIFstV21pc3NpbmctDQo+IHByb3Rv
-dHlwZXNdDQo+IHdhcm5pbmc6IG5vIHByZXZpb3VzIHByb3RvdHlwZSBmb3Ig4oCYcHNjaV9jcHVf
-b27igJkgWy1XbWlzc2luZy1wcm90b3R5cGVzXQ0KPiB3YXJuaW5nOiBubyBwcmV2aW91cyBwcm90
-b3R5cGUgZm9yIOKAmHBzY2lfY3B1X29mZuKAmSBbLVdtaXNzaW5nLXByb3RvdHlwZXNdDQo+IHdh
-cm5pbmc6IG5vIHByZXZpb3VzIHByb3RvdHlwZSBmb3Ig4oCYcHNjaV9zeXN0ZW1fcmVzZXTigJkg
-Wy1XbWlzc2luZy1wcm90b3R5cGVzXQ0KPiB3YXJuaW5nOiBubyBwcmV2aW91cyBwcm90b3R5cGUg
-Zm9yIOKAmHBzY2lfc3lzdGVtX29mZuKAmSBbLVdtaXNzaW5nLXByb3RvdHlwZXNdDQo+IA0KPiBT
-aWduZWQtb2ZmLWJ5OiBQYXRyaWNrIERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QHN0LmNvbT4N
-Cg0KQWZ0ZXIgcmViYXNlIHRoaXMgcGF0Y2ggY2F1c2UgY29tcGlsYXRpb24gaXNzdWUgd2l0aCBz
-dW5jaSBwbGF0Zm9ybTogaXQgbmVlZCB0byBiZSB1cGRhdGVkDQoNCithcmNoL2FybS9jcHUvYXJt
-djcvc3VueGkvcHNjaS5jOjI3OToxNTogZXJyb3I6IGNvbmZsaWN0aW5nIHR5cGVzIGZvciAncHNj
-aV9jcHVfb2ZmJw0KDQoNCj4gLS0tDQo+IA0KPiAgYXJjaC9hcm0vaW5jbHVkZS9hc20vc3lzdGVt
-LmggICAgICAgfCAxNCArKysrKysrKysrKysrKw0KPiAgYXJjaC9hcm0vbWFjaC1pbXgvbXg3L3Bz
-Y2ktbXg3LmMgICAgfCAgMiArLQ0KPiAgYXJjaC9hcm0vbWFjaC1zdG0zMm1wL3BzY2kuYyAgICAg
-ICAgfCAxOCArKysrKysrKystLS0tLS0tLS0NCj4gIGFyY2gvYXJtL21hY2gtdW5pcGhpZXIvYXJt
-MzIvcHNjaS5jIHwgIDQgKystLQ0KPiAgNCBmaWxlcyBjaGFuZ2VkLCAyNiBpbnNlcnRpb25zKCsp
-LCAxMiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9pbmNsdWRlL2Fz
-bS9zeXN0ZW0uaCBiL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3N5c3RlbS5oIGluZGV4DQo+IGFlZDJl
-M2MuLmFjNGZjMTEgMTAwNjQ0DQo+IC0tLSBhL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3N5c3RlbS5o
-DQo+ICsrKyBiL2FyY2gvYXJtL2luY2x1ZGUvYXNtL3N5c3RlbS5oDQo+IEBAIC01MTYsNiArNTE2
-LDIwIEBAIGVudW0gew0KPiAgICovDQo+ICB2b2lkIG1tdV9wYWdlX3RhYmxlX2ZsdXNoKHVuc2ln
-bmVkIGxvbmcgc3RhcnQsIHVuc2lnbmVkIGxvbmcgc3RvcCk7DQo+IA0KPiArI2lmZGVmIENPTkZJ
-R19BUk1WN19QU0NJDQo+ICt1MzIgcHNjaV92ZXJzaW9uKHZvaWQpOw0KPiArczMyIHBzY2lfZmVh
-dHVyZXModTMyIGZ1bmN0aW9uX2lkLCB1MzIgcHNjaV9maWQpOw0KPiArczMyIHBzY2lfY3B1X29m
-Zih2b2lkKTsNCj4gK3MzMiBwc2NpX2NwdV9vbih1MzIgZnVuY3Rpb25faWQsIHUzMiB0YXJnZXRf
-Y3B1LCB1MzIgcGMsDQo+ICsJCXUzMiBjb250ZXh0X2lkKTsNCj4gK3MzMiBwc2NpX2FmZmluaXR5
-X2luZm8odTMyIGZ1bmN0aW9uX2lkLCB1MzIgdGFyZ2V0X2FmZmluaXR5LA0KPiArCQkgICAgICAg
-dTMyICBsb3dlc3RfYWZmaW5pdHlfbGV2ZWwpOw0KPiArdTMyIHBzY2lfbWlncmF0ZV9pbmZvX3R5
-cGUodm9pZCk7DQo+ICt2b2lkIF9fbm9yZXR1cm4gcHNjaV9zeXN0ZW1fb2ZmKHZvaWQpOw0KPiAr
-dm9pZCBfX25vcmV0dXJuIHBzY2lfc3lzdGVtX3Jlc2V0KHZvaWQpOw0KPiArczMyIHBzY2lfZmVh
-dHVyZXModTMyIGZ1bmN0aW9uX2lkLCB1MzIgcHNjaV9maWQpOyAjZW5kaWYNCj4gKw0KPiAgI2Vu
-ZGlmIC8qIF9fQVNTRU1CTFlfXyAqLw0KPiANCj4gICNkZWZpbmUgYXJjaF9hbGlnbl9zdGFjayh4
-KSAoeCkNCj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL21hY2gtaW14L214Ny9wc2NpLW14Ny5jIGIv
-YXJjaC9hcm0vbWFjaC1pbXgvbXg3L3BzY2ktDQo+IG14Ny5jDQo+IGluZGV4IDM0YmEwYTkuLmM5
-OGQyZTkgMTAwNjQ0DQo+IC0tLSBhL2FyY2gvYXJtL21hY2gtaW14L214Ny9wc2NpLW14Ny5jDQo+
-ICsrKyBiL2FyY2gvYXJtL21hY2gtaW14L214Ny9wc2NpLW14Ny5jDQo+IEBAIC0yOTgsNyArMjk4
-LDcgQEAgX19zZWN1cmUgczMyIHBzY2lfYWZmaW5pdHlfaW5mbyh1MzIgX19hbHdheXNfdW51c2Vk
-DQo+IGZ1bmN0aW9uX2lkLA0KPiAgCXJldHVybiBwc2NpX3N0YXRlW2NwdV07DQo+ICB9DQo+IA0K
-PiAtX19zZWN1cmUgczMyIHBzY2lfbWlncmF0ZV9pbmZvX3R5cGUodTMyIGZ1bmN0aW9uX2lkKQ0K
-PiArX19zZWN1cmUgdTMyIHBzY2lfbWlncmF0ZV9pbmZvX3R5cGUodm9pZCkNCj4gIHsNCj4gIAkv
-KiBUcnVzdGVkIE9TIGlzIGVpdGhlciBub3QgcHJlc2VudCBvciBkb2VzIG5vdCByZXF1aXJlIG1p
-Z3JhdGlvbiAqLw0KPiAgCXJldHVybiAyOw0KPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vbWFjaC1z
-dG0zMm1wL3BzY2kuYyBiL2FyY2gvYXJtL21hY2gtc3RtMzJtcC9wc2NpLmMNCj4gaW5kZXggMTM5
-YmIwOS4uMWQ5MWIyZCAxMDA2NDQNCj4gLS0tIGEvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL3BzY2ku
-Yw0KPiArKysgYi9hcmNoL2FybS9tYWNoLXN0bTMybXAvcHNjaS5jDQo+IEBAIC0zMCw3ICszMCw3
-IEBAIHU4IHBzY2lfc3RhdGVbU1RNMzJNUDFfUFNDSV9OUl9DUFVTXSBfX3NlY3VyZV9kYXRhDQo+
-ID0gew0KPiAgCSBQU0NJX0FGRklOSVRZX0xFVkVMX09OLA0KPiAgCSBQU0NJX0FGRklOSVRZX0xF
-VkVMX09GRn07DQo+IA0KPiAtdm9pZCBfX3NlY3VyZSBwc2NpX3NldF9zdGF0ZShpbnQgY3B1LCB1
-OCBzdGF0ZSkNCj4gK3N0YXRpYyBpbmxpbmUgdm9pZCBwc2NpX3NldF9zdGF0ZShpbnQgY3B1LCB1
-OCBzdGF0ZSkNCj4gIHsNCj4gIAlwc2NpX3N0YXRlW2NwdV0gPSBzdGF0ZTsNCj4gIAlkc2IoKTsN
-Cj4gQEAgLTY3LDcgKzY3LDcgQEAgdm9pZCBfX3NlY3VyZSBwc2NpX2FyY2hfY3B1X2VudHJ5KHZv
-aWQpDQo+ICAJd3JpdGVsKDB4RkZGRkZGRkYsIFRBTVBfQkFDS1VQX01BR0lDX05VTUJFUik7ICB9
-DQo+IA0KPiAtaW50IF9fc2VjdXJlIHBzY2lfZmVhdHVyZXModTMyIGZ1bmN0aW9uX2lkLCB1MzIg
-cHNjaV9maWQpDQo+ICtzMzIgX19zZWN1cmUgcHNjaV9mZWF0dXJlcyh1MzIgZnVuY3Rpb25faWQs
-IHUzMiBwc2NpX2ZpZCkNCj4gIHsNCj4gIAlzd2l0Y2ggKHBzY2lfZmlkKSB7DQo+ICAJY2FzZSBB
-Uk1fUFNDSV8wXzJfRk5fUFNDSV9WRVJTSU9OOg0KPiBAQCAtODIsMTIgKzgyLDEyIEBAIGludCBf
-X3NlY3VyZSBwc2NpX2ZlYXR1cmVzKHUzMiBmdW5jdGlvbl9pZCwgdTMyIHBzY2lfZmlkKQ0KPiAg
-CXJldHVybiBBUk1fUFNDSV9SRVRfTkk7DQo+ICB9DQo+IA0KPiAtdW5zaWduZWQgaW50IF9fc2Vj
-dXJlIHBzY2lfdmVyc2lvbih1MzIgZnVuY3Rpb25faWQpDQo+ICt1MzIgX19zZWN1cmUgcHNjaV92
-ZXJzaW9uKHZvaWQpDQo+ICB7DQo+ICAJcmV0dXJuIEFSTV9QU0NJX1ZFUl8xXzA7DQo+ICB9DQo+
-IA0KPiAtaW50IF9fc2VjdXJlIHBzY2lfYWZmaW5pdHlfaW5mbyh1MzIgZnVuY3Rpb25faWQsIHUz
-MiB0YXJnZXRfYWZmaW5pdHksDQo+ICtzMzIgX19zZWN1cmUgcHNjaV9hZmZpbml0eV9pbmZvKHUz
-MiBmdW5jdGlvbl9pZCwgdTMyIHRhcmdldF9hZmZpbml0eSwNCj4gIAkJCQl1MzIgIGxvd2VzdF9h
-ZmZpbml0eV9sZXZlbCkNCj4gIHsNCj4gIAl1MzIgY3B1ID0gdGFyZ2V0X2FmZmluaXR5ICYgTVBJ
-RFJfQUZGMDsgQEAgLTEwNCw3ICsxMDQsNyBAQCBpbnQNCj4gX19zZWN1cmUgcHNjaV9hZmZpbml0
-eV9pbmZvKHUzMiBmdW5jdGlvbl9pZCwgdTMyIHRhcmdldF9hZmZpbml0eSwNCj4gIAlyZXR1cm4g
-cHNjaV9zdGF0ZVtjcHVdOw0KPiAgfQ0KPiANCj4gLWludCBfX3NlY3VyZSBwc2NpX21pZ3JhdGVf
-aW5mb190eXBlKHUzMiBmdW5jdGlvbl9pZCkNCj4gK3UzMiBfX3NlY3VyZSBwc2NpX21pZ3JhdGVf
-aW5mb190eXBlKHZvaWQpDQo+ICB7DQo+ICAJLyoNCj4gIAkgKiBpbiBQb3dlcl9TdGF0ZV9Db29y
-ZGluYXRpb25fSW50ZXJmYWNlX1BERF92MV8xX0RFTjAwMjJELnBkZg0KPiBAQCAtMTE2LDcgKzEx
-Niw3IEBAIGludCBfX3NlY3VyZSBwc2NpX21pZ3JhdGVfaW5mb190eXBlKHUzMiBmdW5jdGlvbl9p
-ZCkNCj4gIAlyZXR1cm4gMjsNCj4gIH0NCj4gDQo+IC1pbnQgX19zZWN1cmUgcHNjaV9jcHVfb24o
-dTMyIGZ1bmN0aW9uX2lkLCB1MzIgdGFyZ2V0X2NwdSwgdTMyIHBjLA0KPiArczMyIF9fc2VjdXJl
-IHBzY2lfY3B1X29uKHUzMiBmdW5jdGlvbl9pZCwgdTMyIHRhcmdldF9jcHUsIHUzMiBwYywNCj4g
-IAkJCSB1MzIgY29udGV4dF9pZCkNCj4gIHsNCj4gIAl1MzIgY3B1ID0gdGFyZ2V0X2NwdSAmIE1Q
-SURSX0FGRjA7DQo+IEBAIC0xNjEsNyArMTYxLDcgQEAgaW50IF9fc2VjdXJlIHBzY2lfY3B1X29u
-KHUzMiBmdW5jdGlvbl9pZCwgdTMyDQo+IHRhcmdldF9jcHUsIHUzMiBwYywNCj4gIAlyZXR1cm4g
-QVJNX1BTQ0lfUkVUX1NVQ0NFU1M7DQo+ICB9DQo+IA0KPiAtaW50IF9fc2VjdXJlIHBzY2lfY3B1
-X29mZih1MzIgZnVuY3Rpb25faWQpDQo+ICtzMzIgX19zZWN1cmUgcHNjaV9jcHVfb2ZmKHZvaWQp
-DQo+ICB7DQo+ICAJdTMyIGNwdTsNCj4gDQo+IEBAIC0xODEsNyArMTgxLDcgQEAgaW50IF9fc2Vj
-dXJlIHBzY2lfY3B1X29mZih1MzIgZnVuY3Rpb25faWQpDQo+ICAJCXdmaSgpOw0KPiAgfQ0KPiAN
-Cj4gLXZvaWQgX19zZWN1cmUgcHNjaV9zeXN0ZW1fcmVzZXQodTMyIGZ1bmN0aW9uX2lkKQ0KPiAr
-dm9pZCBfX3NlY3VyZSBwc2NpX3N5c3RlbV9yZXNldCh2b2lkKQ0KPiAgew0KPiAgCS8qIFN5c3Rl
-bSByZXNldCAqLw0KPiAgCXdyaXRlbChSQ0NfTVBfR1JTVENTRVRSX01QU1lTUlNULCBSQ0NfTVBf
-R1JTVENTRVRSKTsNCj4gQEAgLTE5MCw3ICsxOTAsNyBAQCB2b2lkIF9fc2VjdXJlIHBzY2lfc3lz
-dGVtX3Jlc2V0KHUzMiBmdW5jdGlvbl9pZCkNCj4gIAkJd2ZpKCk7DQo+ICB9DQo+IA0KPiAtdm9p
-ZCBfX3NlY3VyZSBwc2NpX3N5c3RlbV9vZmYodTMyIGZ1bmN0aW9uX2lkKQ0KPiArdm9pZCBfX3Nl
-Y3VyZSBwc2NpX3N5c3RlbV9vZmYodm9pZCkNCj4gIHsNCj4gIAkvKiBTeXN0ZW0gT2ZmIGlzIG5v
-dCBtYW5hZ2VkLCB3YWl0aW5nIHVzZXIgcG93ZXIgb2ZmDQo+ICAJICogVE9ETzogaGFuZGxlIEky
-QyB3cml0ZSBpbiBQTUlDIE1haW4gQ29udHJvbCByZWdpc3RlciBiaXQgMCA9IFNXT0ZGDQo+IGRp
-ZmYgLS1naXQgYS9hcmNoL2FybS9tYWNoLXVuaXBoaWVyL2FybTMyL3BzY2kuYyBiL2FyY2gvYXJt
-L21hY2gtDQo+IHVuaXBoaWVyL2FybTMyL3BzY2kuYw0KPiBpbmRleCAzZjY3ZWRmLi5lZjM1OTIz
-IDEwMDY0NA0KPiAtLS0gYS9hcmNoL2FybS9tYWNoLXVuaXBoaWVyL2FybTMyL3BzY2kuYw0KPiAr
-KysgYi9hcmNoL2FybS9tYWNoLXVuaXBoaWVyL2FybTMyL3BzY2kuYw0KPiBAQCAtMTMwLDcgKzEz
-MCw3IEBAIHZvaWQgcHNjaV9hcmNoX2luaXQodm9pZCkNCj4gDQo+ICB1MzIgdW5pcGhpZXJfcHNj
-aV9ob2xkaW5nX3Blbl9yZWxlYXNlIF9fc2VjdXJlX2RhdGEgPSAweGZmZmZmZmZmOw0KPiANCj4g
-LWludCBfX3NlY3VyZSBwc2NpX2NwdV9vbih1MzIgZnVuY3Rpb25faWQsIHUzMiBjcHVpZCwgdTMy
-IGVudHJ5X3BvaW50LA0KPiArczMyIF9fc2VjdXJlIHBzY2lfY3B1X29uKHUzMiBmdW5jdGlvbl9p
-ZCwgdTMyIGNwdWlkLCB1MzIgZW50cnlfcG9pbnQsDQo+ICAJCQkgdTMyIGNvbnRleHRfaWQpDQo+
-ICB7DQo+ICAJdTMyIGNwdSA9IGNwdWlkICYgMHhmZjsNCj4gQEAgLTE1NSw3ICsxNTUsNyBAQCBp
-bnQgX19zZWN1cmUgcHNjaV9jcHVfb24odTMyIGZ1bmN0aW9uX2lkLCB1MzIgY3B1aWQsIHUzMg0K
-PiBlbnRyeV9wb2ludCwNCj4gIAlyZXR1cm4gUFNDSV9SRVRfU1VDQ0VTUzsNCj4gIH0NCj4gDQo+
-IC12b2lkIF9fc2VjdXJlIHBzY2lfc3lzdGVtX3Jlc2V0KHUzMiBmdW5jdGlvbl9pZCkNCj4gK3Zv
-aWQgX19zZWN1cmUgcHNjaV9zeXN0ZW1fcmVzZXQodm9pZCkNCj4gIHsNCj4gIAlyZXNldF9jcHUo
-MCk7DQo+ICB9DQo+IC0tDQo+IDIuNy40DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBz
-dC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJl
-cGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+Hi,
+
+> From: Patrick DELAUNAY <patrick.delaunay@st.com>
+> Sent: vendredi 5 juillet 2019 17:20
+> 
+> Deactivate WATCHDOG by default in u-boot to avoid issue to boot kernel and
+> rootfs without the needed daemon to reload it.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> 
+> Changes in v2: None
+> 
+>  configs/stm32mp15_basic_defconfig   | 2 --
+>  configs/stm32mp15_trusted_defconfig | 2 --
+>  2 files changed, 4 deletions(-)
+
+Applied to u-boot-stm32/master, thanks!
+
+Patrick
+
+> --
+> 2.7.4
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

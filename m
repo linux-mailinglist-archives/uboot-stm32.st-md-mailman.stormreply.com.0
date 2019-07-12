@@ -2,57 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E9F766EE0
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 14:42:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5B0366F19
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 14:44:48 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 031DDC06908
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 12:42:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99F6DC06910
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Jul 2019 12:44:48 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1843EC06904
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 55DF9C0690F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Jul 2019 12:42:14 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6CCaoWO021425; Fri, 12 Jul 2019 14:42:12 +0200
+ Fri, 12 Jul 2019 12:44:47 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6CCgXn4005381; Fri, 12 Jul 2019 14:44:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=PFXdvFC/m98WBIXoroPjFSm8EOPBJ82WzzbAPyiJZi4=;
- b=PYOeHAFulJQhXSCnBjjq+6BOf53cvWqDEN7Lrc0BeIKagG/xbouiFWEvG9Pat/X9aspN
- Hd45GIrqlwdXQ7pa2vh/R10+M0TJTfKL2Gd5VXkppQUKhoguAuISI/rSWIvRpsGBzkhB
- ywxvyqIXhz7AHVrvE8wtn/TJqZAjL0r5HCRtewAYO5LBMw8Hxh0Vpw/ClvljsSp9tLc4
- sKcLNtxwlp3Gl+Gf/5CKnZJN/ONI58G7KBkj4JHDzqnYSq7YQOGSgHDpk2OrL97sccqP
- Mb3YZ8Y3YJl8IQsmsviJcwCmOtFdc2239IhUHea9Zi3ch69B4V+Y53ppkX0bsX90sxrj GA== 
+ bh=WLptXtMvKSa2ywIiGe/uWSw3ehWxjBPcmEgkv82Y04E=;
+ b=UQ9FiLFaXkpLLW5HD78tCp178p2BhXehgLirz2NnoyHmXm5TRIqbbw0ZHE5BKLjR1ULQ
+ 5gi1F9dqG+lrOM7QqmssGY3vMyUJbTjqH312XcYUOvCWj/a88jfx6K9JJ0ofpCNsSIlI
+ kHLfr89kqFvkl5XafCdnwigbwJ1fHija5+Qu9ukq4KJMb/iSZZjEmmYIubzQO1BBAsSp
+ c4lT2uuEjVR6HJqoU90V1fURtTBpRAXWPJJGQEUbHc/NNcQza1YQJWIFoJE3EyuL2IoF
+ PiqRKmvNWtS/2QlYkdF/9LCDButQ3QjrMc5kg7D1jvbqstj3NPCPRFlOOYYNWR9nfOQQ fA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2tjjhja0f3-1
+ by mx07-00178001.pphosted.com with ESMTP id 2tpj3tk1n6-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 12 Jul 2019 14:42:12 +0200
+ Fri, 12 Jul 2019 14:44:45 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9ECEC38;
- Fri, 12 Jul 2019 12:42:11 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8AE602C1F;
- Fri, 12 Jul 2019 12:42:11 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 12 Jul
- 2019 14:42:11 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DFA0838;
+ Fri, 12 Jul 2019 12:44:44 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C68FB2C26;
+ Fri, 12 Jul 2019 12:44:44 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 12 Jul
+ 2019 14:44:44 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 12 Jul 2019 14:42:11 +0200
+ 15.00.1473.003; Fri, 12 Jul 2019 14:44:44 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 3/3] stm32mp1: activate OF_BOARD_SETUP and
- FDT_FIXUP_PARTITIONS
-Thread-Index: AQHVMMj28BYt2MCb3EW7gEkWtQheNqbG/MNA
-Date: Fri, 12 Jul 2019 12:42:11 +0000
-Message-ID: <aa6ed02f58cf4bb38017b51c04f89a8a@SFHDAG6NODE3.st.com>
-References: <1562066767-8221-1-git-send-email-patrick.delaunay@st.com>
- <1562066767-8221-4-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1562066767-8221-4-git-send-email-patrick.delaunay@st.com>
+To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH 1/4] ARM: dts: stm32: Use kernel qspi compatible string
+ for stm32f7-uboot.dtsi
+Thread-Index: AQHVLbHZ8Z13I1Krik6aK1EQfJIjOqbHA1rw
+Date: Fri, 12 Jul 2019 12:44:44 +0000
+Message-ID: <01656d028b5744f6b212c118665e90ae@SFHDAG6NODE3.st.com>
+References: <20190628130301.18094-1-patrice.chotard@st.com>
+ <20190628130301.18094-2-patrice.chotard@st.com>
+In-Reply-To: <20190628130301.18094-2-patrice.chotard@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,10 +64,9 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-07-12_04:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] stm32mp1: activate OF_BOARD_SETUP and
- FDT_FIXUP_PARTITIONS
+ Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>
+Subject: Re: [Uboot-stm32] [PATCH 1/4] ARM: dts: stm32: Use kernel qspi
+ compatible string for stm32f7-uboot.dtsi
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,20 +85,19 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi,
 
-> From: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Sent: mardi 2 juillet 2019 13:26
+> From: Patrice CHOTARD <patrice.chotard@st.com>
+> Sent: vendredi 28 juin 2019 15:03
 > 
-> Update kernel MTD partition in device tree with U-Boot information.
+> For STM32 QSPI driver, "st,stm32-qspi" compatible string was first introduced in
+> U-boot. But later in kernel side, "st,stm32f469-qspi"
+> was used.
+> To simplify, align U-boot QSPI compatible string with kernel one.
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/Kconfig       |  1 +
->  board/st/stm32mp1/stm32mp1.c        | 18 ++++++++++++++++++
->  configs/stm32mp15_basic_defconfig   |  1 +
->  configs/stm32mp15_optee_defconfig   |  1 +
->  configs/stm32mp15_trusted_defconfig |  1 +
->  5 files changed, 22 insertions(+)
+>  arch/arm/dts/stm32f7-u-boot.dtsi | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 
 Applied to u-boot-stm32/master, thanks!

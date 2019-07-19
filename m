@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58F2E68B96
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jul 2019 15:42:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AA346E393
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jul 2019 11:39:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A6C60C5C802
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jul 2019 13:42:23 +0000 (UTC)
-Received: from mail-yw1-f53.google.com (mail-yw1-f53.google.com
- [209.85.161.53])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08390C628BE
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jul 2019 09:39:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9074EC5C21A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 67DB4C628AA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jul 2019 13:42:22 +0000 (UTC)
-Received: by mail-yw1-f53.google.com with SMTP id b143so7355244ywb.7
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jul 2019 06:42:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=OxSt3qWJXNoKaskYEyzstKLyRC1kZnO/wLszlv8qEZc=;
- b=CLnuAb3DRuTtcmVTN31WgN8q4Tv8D+0OTwKPah+kXDoIuwj4NP8IDauQFvC6zHWxsb
- HZQc+qPAdtgc8ZC/kQuIHWQHH8k68K3j1xm8yoYGqQWUP1zTSV0QE0xAOh4Vdnn9kL9P
- 1XlIrOFAhZLfHsrg367n+Ct6RRLKZ1KOClJ8I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=OxSt3qWJXNoKaskYEyzstKLyRC1kZnO/wLszlv8qEZc=;
- b=D/HHPFLTtx0ccEqWIlob3Vqm3imTV88E3Y6oYx6QzJUKNUI+oNQWabr5KDTC3X7Fzx
- 3n2QEm8T+BnHxnBfXhy6rRCjjgm4ziBzL50jK0GKiqDR7SgejeGqY9RFS6h0A0dYc9Wn
- ZgPEKGYnxZmkiBw0V+SpCkXQCsVGKUcMneQRvRen2pomBJs/ZtS00UnaF7oUs6uzHI13
- OcrSRPjrZe1dWSn4lN2fm1Laa+TePUmj/G0c+ikpN+ZMmIxPbs4nfswcQFSiJ4cYSVzs
- kAQrt8qelp+HwoPRgEZwSceO1tbS/acaMxmHIRo7Jy9hO1gYoNxjHBY1U8ytLXTeCD8p
- chrw==
-X-Gm-Message-State: APjAAAUqt5L/tCUBb0NThp2LzGV2IdXXiO8vjTbYN83KhNRCv0xZrB/Q
- 6tfR/1qVCvOQkiH+t7LSna8=
-X-Google-Smtp-Source: APXvYqwJMsAqeYIPfaFsfpTnVEyF0rm/khsFJAFwzjNDXFyjDfPO7iAZ9uESkCUC0ytWY+3KVaKUHA==
-X-Received: by 2002:a81:4ed3:: with SMTP id
- c202mr15318546ywb.355.1563198141397; 
- Mon, 15 Jul 2019 06:42:21 -0700 (PDT)
-Received: from bill-the-cat
- (cpe-2606-A000-1401-82DE-2C78-C450-AA66-877B.dyn6.twc.com.
- [2606:a000:1401:82de:2c78:c450:aa66:877b])
- by smtp.gmail.com with ESMTPSA id 82sm4331277ywr.52.2019.07.15.06.42.20
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 15 Jul 2019 06:42:20 -0700 (PDT)
-Date: Mon, 15 Jul 2019 09:42:18 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20190715134218.GN5621@bill-the-cat>
-References: <431c6ea182f54552a77b89282cf6284b@SFHDAG6NODE3.st.com>
+ Fri, 19 Jul 2019 09:39:55 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6J9amtk031390; Fri, 19 Jul 2019 11:39:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=ekI02RXFo8q4sBWNII0cUEcvmHXiJ8kXwOUJZ9/6jNI=;
+ b=MCyLUZjE57h2Fp9bWF+cgzjN4vVoJHfK6LI1Xm2PYu09n3VkGUMTjVXGMeu2Nn6fYx1Q
+ KjhPnTpQo9pogOMi0vWuW8L1F0bC9svAa6Fb3/1M/POg3R+rLfQmKS7QxfKpYPrrdsQG
+ xj7g7BryTIy7vbHSvbNW3Vz6lpZJvr+qIi3rRF7RCTVmLwepIYQ8U5FpCreEx3LNi6b/
+ hnBkp3rJnCgkYP6ojZQASQRW5iWwmMFc68LzTVqxFGZ7wLBM+RSij0CkoDiRmT2LHkp7
+ h/JVLVIOFwgEuGKJjat0DsQMt4QFzNpTImHd3pKmDOQZBjHXCjTFAa5KndgggRMWJX2g 7A== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2tq4e9g8xa-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
+ Fri, 19 Jul 2019 11:39:43 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C5E574D;
+ Fri, 19 Jul 2019 09:39:41 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6F8BD27ED;
+ Fri, 19 Jul 2019 09:39:41 +0000 (GMT)
+Received: from SAFEX1HUBCAS23.st.com (10.75.90.47) by Safex1hubcas22.st.com
+ (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 19 Jul
+ 2019 11:39:41 +0200
+Received: from localhost (10.201.23.85) by webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 19 Jul 2019 11:39:41
+ +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 19 Jul 2019 11:39:26 +0200
+Message-ID: <1563529171-16796-1-git-send-email-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <431c6ea182f54552a77b89282cf6284b@SFHDAG6NODE3.st.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PULL] u-boot-stm32/master for v2019.10-rc1:
- u-boot-stm32-20190712
+X-Originating-IP: [10.201.23.85]
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-07-19_06:, , signatures=0
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>,
+ Christophe Kerello <christophe.kerello@st.com>,
+ Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 0/5] misc: update drivers for stm32mp1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,91 +69,37 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1734632222691991596=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============1734632222691991596==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="g/o8sqaH6XVFI89B"
-Content-Disposition: inline
+Update the stm32mp1 drivers after the commit 8729b1ae2cbd
+("misc: Update read() and write() methods to return bytes xfered")
+And the introduction of NOP u-class.
 
 
---g/o8sqaH6XVFI89B
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 12, 2019 at 04:04:05PM +0000, Patrick DELAUNAY wrote:
+Patrick Delaunay (5):
+  bsec: update after MISC u-class update
+  pmu: stpmic1: change specific NVM api to MISC
+  stpmic1: simplify stpmic1_sysreset_request
+  stm32mp1: update test on misc_read result
+  misc: change RCC form MISC to NOP uclass
 
-> Hi Tom
->=20
-> please pull the STM32 related patches for v2019.10-rc1 =3D u-boot-stm32-2=
-0190712
->=20
-> Travis CI status:
-> 	https://travis-ci.org/patrickdelaunay/u-boot/builds/557765098
-> 	the 4 issues are not related to the patchsets : test_ut[ut_dm_pci_ep_bas=
-e]
->=20
-> Thanks,
-> Patrick
->=20
->=20
-> The following changes since commit 5acce685c9227b3d4b48f6fab6a33f6d74ca9c=
-14:
->=20
->   Merge branch '2019-07-11-master-imports' (2019-07-11 18:03:52 -0400)
->=20
-> are available in the git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20190712
->=20
-> for you to fetch changes up to 291f00bb3ea7e9f9acdddbe680991e76313732d6:
->=20
->   board: st: add missing gpio_request() for stm32f429-discovery (2019-07-=
-12 11:50:58 +0200)
->=20
+ arch/arm/mach-stm32mp/bsec.c |  31 +++++++------
+ board/st/stm32mp1/stm32mp1.c |   2 +-
+ drivers/misc/stm32_rcc.c     |   5 +-
+ drivers/misc/stm32mp_fuse.c  |  74 +++++++++++++++++++++++-------
+ drivers/power/pmic/stpmic1.c | 107 +++++++++++++++++++++++--------------------
+ include/power/stpmic1.h      |   7 ---
+ 6 files changed, 132 insertions(+), 94 deletions(-)
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---g/o8sqaH6XVFI89B
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJdLIK6AAoJEIf59jXTHXZSJe4QALbvYXqbYbbMZjbvGqzrVssc
-PVdaU+ZMyIkhVlZ31NduTYBpC30TAahXjkQz+uTFKsdedeJIvoA5BTKBa2HD6Y/x
-ehJOeeVd0Ec/dcGdfsOS10k6NeHjnGlasmBH3wQlQtpxEjjEz2KOaNl4bG2++TZr
-APZueAYcRCkyzpr9hPLrHtANPmb6FZtHYnWauISDB6ukLviACrnzXAo4o72oTYhs
-n9DxBxhBN9qxz4DNPH6vmVWZbgqdx4+SbU/SOZhbwYaT4ooGa3WZ3v2Sjwcum0xV
-Oz+W8ceLge0aiRIFjfXvvRGoO67qVn8tF8mkBeweAIqXd5skR8F9+gi55jK9iLuu
-UHAkl/IKB8uNuz5FsPwXSnS+NIFvdSdCXm5coFKr++dxyxRuradW4MGeF2FkTzD5
-Z4EnH8C4bZE9iCM03tFYEBu5oDLtEr3NA5OU+JX3gKNTVroSmbJML+BYhNpKa54O
-Qw1XECLyZRyA5Ljy82VeY0Wsddue3OLwe797PaodKECWK3hRb2rwak3VquulEUwW
-e9fjCmxFjX8B/UPiSJo+eDUQqnhSDuLGTkqslope8NEAZ5me/WzFv8zwuuoVYpxX
-5uyUVenoAjtVDjqK4V7KDu2BjhBdcoyR39llrJSrtlYO07UsO81w4AgnW6MWC8iS
-si7pMR8cPZ9cKVD0YaVm
-=7zCW
------END PGP SIGNATURE-----
-
---g/o8sqaH6XVFI89B--
-
---===============1734632222691991596==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.7.4
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1734632222691991596==--

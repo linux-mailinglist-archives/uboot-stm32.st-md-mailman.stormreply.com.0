@@ -2,62 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E696E5F9
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jul 2019 15:00:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7D4B6F9D9
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 08:58:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 21075C0E322
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jul 2019 13:00:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99B65CC0815
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 06:58:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C2E06C0EB38
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9BB4ACC0813
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Jul 2019 13:00:21 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6JD06bM021006; Fri, 19 Jul 2019 15:00:20 +0200
+ Mon, 22 Jul 2019 06:58:45 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6M6ueiq009265; Mon, 22 Jul 2019 08:58:44 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=EiFIC7VsJq0k0pGRV7dMHm5LCB02FIcOXZs/yOOvucI=;
- b=MQ6pUkLSwD/H4S8ZA622aHPij5Oq6M9XeoUHp7/wxefbz5oJirJm9zHGgnkXLZoDX6PS
- zlqIZpA2B7dh+9WcRJQ7IAeBKBZ++GuY9m+vJUT1XyXRFaH/BB/HuffI9F1dWkOdnH58
- qXLPfI/Dle05Xqro2MTeVqUH7S26yTqtcq4rt3dsACI84jkmGLlfRRvU/cewcXHhHlTs
- ZT1cMCBrQ6o3Y4xg+5ZqxzHm+ElJqPOJ6HAMUZcaJDnP8C+RyrbwMY4LlGWvPFcYwED9
- SVaWVczw+JEdw7I5Z/QxWJb+d9ES0ZcrgHngcBmRh2ZFMcjVIFAC3WTWJC2yACEi7KR1 /A== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=fcwiKWsYXWtI827spgTYcYDn/VmLK2LpVxI493+an0E=;
+ b=Cy1tIcyUjSWk1gMtEE7JveNXhY4Toxo/zhJVbp9EhFJ40RXwc6gJ3ej67aq5dPlBOzOQ
+ mptgX7dJWEAcKS5oxD63EdwjX0jhTcGK0lEifYQnR/K9Qzy7HzzWYeO/2aw5iGLLENO1
+ srYmq5qLDlkBkaXKYOQw79tUUGPYC0vqDfrRG3t8yBZPx5reHSP0bcInzGAQ4E7gvOnB
+ C4vHkbmQCrlY620ZCPlKQDdvu4RXMWzcJVMGNSZlLM3WYi3Ux1fc22Z4Pf9iLiQgZEkt
+ psiDq9DVXxS7pAw402NWEYtJeO+QkSI0HsO50VmzKosOjxYXD4e9yiTEIsQJOWpfJy7O eg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2tsdepv66k-1
+ by mx08-00178001.pphosted.com with ESMTP id 2tusuj1rka-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 19 Jul 2019 15:00:20 +0200
+ Mon, 22 Jul 2019 08:58:44 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 58A8172;
- Fri, 19 Jul 2019 12:57:46 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas21.st.com [10.75.90.44])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 44E032D53;
- Fri, 19 Jul 2019 12:57:46 +0000 (GMT)
-Received: from SAFEX1HUBCAS23.st.com (10.75.90.47) by SAFEX1HUBCAS21.st.com
- (10.75.90.44) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 19 Jul
- 2019 14:57:46 +0200
-Received: from localhost (10.201.23.85) by webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 19 Jul 2019 14:57:46
- +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 19 Jul 2019 14:57:26 +0200
-Message-ID: <1563541046-6432-15-git-send-email-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1563541046-6432-1-git-send-email-patrick.delaunay@st.com>
-References: <1563541046-6432-1-git-send-email-patrick.delaunay@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 20F6C38;
+ Mon, 22 Jul 2019 06:58:43 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DE517131B;
+ Mon, 22 Jul 2019 06:58:42 +0000 (GMT)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 22 Jul
+ 2019 08:58:42 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 22 Jul 2019 08:58:42 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Lokesh Vutla <lokeshvutla@ti.com>, Fabien DESSENNE
+ <fabien.dessenne@st.com>, Simon Glass <sjg@chromium.org>,
+ Christophe KERELLO <christophe.kerello@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Andreas Dannenberg <dannenberg@ti.com>,
+ Loic PALLARDY <loic.pallardy@st.com>
+Thread-Topic: [PATCH v3 4/7] remoteproc: add elf file load support
+Thread-Index: AQHVF7JnKg0acaG8WUuHpDKfZvfwoaaJSkKAgE0458A=
+Date: Mon, 22 Jul 2019 06:58:42 +0000
+Message-ID: <0867eb94c0c549e6822ac9dbf310c54b@SFHDAG6NODE3.st.com>
+References: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
+ <1559308296-17027-5-git-send-email-fabien.dessenne@st.com>
+ <fe7fd724-0c9e-bbf1-5542-608ffc467fa1@ti.com>
+In-Reply-To: <fe7fd724-0c9e-bbf1-5542-608ffc467fa1@ti.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.50]
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-19_09:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [RFC PATCH 14/14] stm32mp1: add support for virtual
-	partition read
+ definitions=2019-07-22_05:, , signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Arnaud POULIQUEN <arnaud.pouliquen@st.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 4/7] remoteproc: add elf file load
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,141 +89,115 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add read for OTP and PMIC NVM with alternates
-on virtual DFU device.
+Hi Lokesh,
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-# Conflicts:
-#	board/st/stm32mp1/stm32mp1.c
+Thanks for the review.
+Fabien is in vacation and I will integrate this serie in my next stm32 pull request.
 
----
+> From: Lokesh Vutla <lokeshvutla@ti.com>
+> Sent: lundi 3 juin 2019 07:31
+> 
+> 
+> 
+> On 31/05/19 6:41 PM, Fabien Dessenne wrote:
+> > The current implementation supports only binary file load.
+> > Add helpers to support ELF32 format (sanity check, and load).
+> > Note that since an ELF32 image is built for the remote processor, the
+> > load function uses the device_to_virt ops to translate the addresses.
+> > Implement a basic translation for sandbox_testproc.
+> >
+> > Add related tests. Test result:
+> > => ut dm remoteproc_elf
+> > Test: dm_test_remoteproc_elf: remoteproc.c
+> > Test: dm_test_remoteproc_elf: remoteproc.c (flat tree)
+> > Failures: 0
+> >
+> > Signed-off-by: Loic Pallardy <loic.pallardy@st.com>
+> > Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
+> > ---
+> 
+> [...snip...]
+> 
+> > +/* Basic function to verify ELF32 image format */ int
+> > +rproc_elf32_sanity_check(ulong addr, ulong size) {
+> > +	Elf32_Ehdr *ehdr;
+> > +	char class;
+> > +
+> > +	if (!addr) {
+> > +		pr_debug("Invalid fw address?\n");
+> > +		return -EFAULT;
+> > +	}
+> > +
+> > +	if (size < sizeof(Elf32_Ehdr)) {
+> > +		pr_debug("Image is too small\n");
+> > +		return -ENOSPC;
+> > +	}
+> > +
+> > +	ehdr = (Elf32_Ehdr *)addr;
+> > +	class = ehdr->e_ident[EI_CLASS];
+> > +
+> > +	if (!IS_ELF(*ehdr) || ehdr->e_type != ET_EXEC || class != ELFCLASS32) {
+> > +		pr_debug("Not an executable ELF32 image\n");
+> > +		return -EPROTONOSUPPORT;
+> > +	}
+> > +
+> > +	/* We assume the firmware has the same endianness as the host */ #
+> > +ifdef __LITTLE_ENDIAN
+> > +	if (ehdr->e_ident[EI_DATA] != ELFDATA2LSB) { # else /* BIG ENDIAN */
+> > +	if (ehdr->e_ident[EI_DATA] != ELFDATA2MSB) { # endif
+> > +		pr_debug("Unsupported firmware endianness\n");
+> > +		return -EILSEQ;
+> > +	}
+> > +
+> > +	if (size < ehdr->e_shoff + sizeof(Elf32_Shdr)) {
+> > +		pr_debug("Image is too small\n");
+> > +		return -ENOSPC;
+> > +	}
+> > +
+> > +	if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG)) {
+> > +		pr_debug("Image is corrupted (bad magic)\n");
+> > +		return -EBADF;
+> > +	}
+> > +
+> > +	if (ehdr->e_phnum == 0) {
+> > +		pr_debug("No loadable segments\n");
+> > +		return -ENOEXEC;
+> > +	}
+> > +
+> > +	if (ehdr->e_phoff > size) {
+> > +		pr_debug("Firmware size is too small\n");
+> > +		return -ENOSPC;
+> > +	}
+> > +
+> > +	return 0;
+> > +}
+> > +
+> > +/* A very simple elf loader, assumes the image is valid */ int
+> > +rproc_elf32_load_image(struct udevice *dev, unsigned long addr) {
+> > +	Elf32_Ehdr *ehdr; /* Elf header structure pointer */
+> > +	Elf32_Phdr *phdr; /* Program header structure pointer */
+> > +	const struct dm_rproc_ops *ops;
+> > +	unsigned int i;
+> > +
+> 
+> I would prefer to call  rproc_elf32_sanity_check() here and reduce the burden on
+> user. It's my preference and no strong objections.
 
- board/st/stm32mp1/stm32mp1.c        | 83 +++++++++++++++++++++++++++++++++++++
- configs/stm32mp15_basic_defconfig   |  1 +
- configs/stm32mp15_trusted_defconfig |  1 +
- 3 files changed, 85 insertions(+)
+Yes it is a possibility, but for my side I prefer the Fabien proposition.
+(we can perhaps reuse the check of ELF for other use case).
 
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 68bd06c..4d5cd70 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -819,7 +819,90 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 	if (!IS_ERR_OR_NULL(mtd))
- 		board_get_alt_info("spi-nand0", buf);
- 
-+#ifdef CONFIG_DFU_VIRT
-+	strncat(buf, "&virt 0=OTP", DFU_ALT_BUF_LEN);
-+
-+	if (IS_ENABLED(CONFIG_PMIC_STPMIC1))
-+		strncat(buf, "&virt 1=PMIC", DFU_ALT_BUF_LEN);
-+#endif
-+
- 	env_set("dfu_alt_info", buf);
- 	puts("DFU alt info setting: done\n");
- }
-+
-+#if CONFIG_IS_ENABLED(DFU_VIRT)
-+#include <dfu.h>
-+#include <power/stpmic1.h>
-+
-+int dfu_otp_read(u64 offset, u8 *buffer, long *size)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_GET_DRIVER(stm32mp_bsec),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, offset + STM32_BSEC_OTP_OFFSET, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+
-+	return 0;
-+}
-+
-+int dfu_pmic_read(u64 offset, u8 *buffer, long *size)
-+{
-+	int ret;
-+#ifdef CONFIG_PMIC_STPMIC1
-+	struct udevice *dev;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_GET_DRIVER(stpmic1_nvm),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, 0xF8 + offset, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+	if (ret == -EACCES) {
-+		*size = 0;
-+		ret = 0;
-+	}
-+#else
-+	pr_err("PMIC update not supported");
-+	ret = -EOPNOTSUPP;
-+#endif
-+
-+	return ret;
-+}
-+
-+int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
-+			 void *buf, long *len)
-+{
-+	switch (dfu->data.virt.dev_num) {
-+	case 0x0:
-+		return dfu_otp_read(offset, buf, len);
-+	case 0x1:
-+		return dfu_pmic_read(offset, buf, len);
-+	}
-+	*len = 0;
-+	return 0;
-+}
-+
-+int __weak dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
-+{
-+	*size = SZ_1K;
-+
-+	return 0;
-+}
-+
-+#endif
-+
- #endif
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 4728376..ba7b2f6 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -57,6 +57,7 @@ CONFIG_STM32_ADC=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_RAM=y
- CONFIG_DFU_MTD=y
-+CONFIG_DFU_VIRT=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
- CONFIG_FASTBOOT_BUF_SIZE=0x02000000
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 0d9e13e..25d9e4f 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -49,6 +49,7 @@ CONFIG_STM32_ADC=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_RAM=y
- CONFIG_DFU_MTD=y
-+CONFIG_DFU_VIRT=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
- CONFIG_FASTBOOT_BUF_SIZE=0x02000000
--- 
-2.7.4
+I will merge the patch with this version (to have the patch in v2019.10) .
+But I let Fabien conclude and potentially sent a minor update.
+
+> Other than that:
+> 
+> Reviewed-by: Lokesh Vutla <lokeshvutla@ti.com>
+> 
+> Thanks and regards,
+> Lokesh
+
+Thanks
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

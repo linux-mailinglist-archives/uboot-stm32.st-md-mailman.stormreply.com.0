@@ -2,48 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFAB16FABB
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 09:51:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED9FD6FAC4
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 09:54:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC7E7CC184D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 07:51:56 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4878ECC2125
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 07:54:06 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8C35CC184C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F2A00CC2123
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 Jul 2019 07:51:55 +0000 (UTC)
+ Mon, 22 Jul 2019 07:54:04 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 45sYj64cqRz1rKXM;
- Mon, 22 Jul 2019 09:51:54 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 45sYlc42SDz1rL13;
+ Mon, 22 Jul 2019 09:54:04 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 45sYj64L8Bz1qqkJ;
- Mon, 22 Jul 2019 09:51:54 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 45sYlc3ZGJz1qqkJ;
+ Mon, 22 Jul 2019 09:54:04 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id VFxrClroIkKi; Mon, 22 Jul 2019 09:51:53 +0200 (CEST)
-X-Auth-Info: F8vfqy7PvaT3u3Vc4V8GkOQzderpHUGAvVpif3KQ/SA=
+ with ESMTP id nl4bnHbbcMBk; Mon, 22 Jul 2019 09:54:03 +0200 (CEST)
+X-Auth-Info: 21KF5y8HTKN1HuAbXXViyUrSOIHULE9gRQ2kZbbNO+I=
 Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 22 Jul 2019 09:51:53 +0200 (CEST)
-Date: Mon, 22 Jul 2019 09:51:47 +0200
+ Mon, 22 Jul 2019 09:54:03 +0200 (CEST)
+Date: Mon, 22 Jul 2019 09:54:02 +0200
 From: Lukasz Majewski <lukma@denx.de>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20190722095147.12ed0f11@jawa>
-In-Reply-To: <1563541046-6432-2-git-send-email-patrick.delaunay@st.com>
+Message-ID: <20190722095402.2ba4ed64@jawa>
+In-Reply-To: <1563541046-6432-3-git-send-email-patrick.delaunay@st.com>
 References: <1563541046-6432-1-git-send-email-patrick.delaunay@st.com>
- <1563541046-6432-2-git-send-email-patrick.delaunay@st.com>
+ <1563541046-6432-3-git-send-email-patrick.delaunay@st.com>
 Organization: denx.de
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [RFC PATCH 01/14] dfu: cosmetic: cleanup sf to
- avoid checkpatch error
+ u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Andrew F. Davis" <afd@ti.com>
+Subject: Re: [Uboot-stm32] [RFC PATCH 02/14] dfu: sf: add partition support
+ for nor backend
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -55,81 +56,140 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8502897735955041149=="
+Content-Type: multipart/mixed; boundary="===============7989028883406313352=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============8502897735955041149==
+--===============7989028883406313352==
 Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/nlRky9=5Gf0GG6z0CV7roik"; protocol="application/pgp-signature"
+ boundary="Sig_/fs4bkpc02hPssk3=nGzlZSr"; protocol="application/pgp-signature"
 
---Sig_/nlRky9=5Gf0GG6z0CV7roik
+--Sig_/fs4bkpc02hPssk3=nGzlZSr
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
 Hi Patrick,
 
+> Copy the partition support from NAND backend to SF,
+> support part and partubi option.
+> In case of ubi partition, erase the rest of the
+> partition as it is mandatory for UBI.
+>=20
+> for example:
+>=20
+> U-Boot> env set dfu_alt_info "spl part 0 1;\
+> u-boot part 0 2;u-boot-env part 0 3;UBI partubi 0 4"
+> U-Boot> dfu 0 sf 0:0:10000000:0
+>=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >=20
->  drivers/dfu/dfu.c    | 7 ++++---
->  drivers/dfu/dfu_sf.c | 4 ++--
->  2 files changed, 6 insertions(+), 5 deletions(-)
+>  drivers/dfu/dfu_sf.c | 51
+> +++++++++++++++++++++++++++++++++++++++++++++++++++
+> include/dfu.h        |  2 ++ 2 files changed, 53 insertions(+)
 >=20
-> diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> index 3189495..eb3a3c6 100644
-> --- a/drivers/dfu/dfu.c
-> +++ b/drivers/dfu/dfu.c
-> @@ -477,14 +477,15 @@ int dfu_config_entities(char *env, char
-> *interface, char *devstr)=20
->  const char *dfu_get_dev_type(enum dfu_device_type t)
->  {
-> -	const char *dev_t[] =3D {NULL, "eMMC", "OneNAND", "NAND",
-> "RAM", "SF" };
-> +	const char *const dev_t[] =3D {NULL, "eMMC", "OneNAND",
-> "NAND", "RAM",
-> +				     "SF"};
->  	return dev_t[t];
->  }
-> =20
->  const char *dfu_get_layout(enum dfu_layout l)
->  {
-> -	const char *dfu_layout[] =3D {NULL, "RAW_ADDR", "FAT", "EXT2",
-> -					   "EXT3", "EXT4",
-> "RAM_ADDR" };
-> +	const char *const dfu_layout[] =3D {NULL, "RAW_ADDR", "FAT",
-> "EXT2",
-> +					  "EXT3", "EXT4",
-> "RAM_ADDR" }; return dfu_layout[l];
->  }
-> =20
 > diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
-> index 066e767..b78fcfd 100644
+> index b78fcfd..d401b76 100644
 > --- a/drivers/dfu/dfu_sf.c
 > +++ b/drivers/dfu/dfu_sf.c
-> @@ -19,7 +19,7 @@ static int dfu_get_medium_size_sf(struct dfu_entity
-> *dfu, u64 *size) }
+> @@ -10,6 +10,8 @@
+>  #include <dfu.h>
+>  #include <spi.h>
+>  #include <spi_flash.h>
+> +#include <jffs2/load_kernel.h>
+> +#include <linux/mtd/mtd.h>
 > =20
->  static int dfu_read_medium_sf(struct dfu_entity *dfu, u64 offset,
-> void *buf,
-> -		long *len)
-> +			      long *len)
+>  static int dfu_get_medium_size_sf(struct dfu_entity *dfu, u64 *size)
 >  {
->  	return spi_flash_read(dfu->data.sf.dev, dfu->data.sf.start +
-> offset, *len, buf);
-> @@ -32,7 +32,7 @@ static u64 find_sector(struct dfu_entity *dfu, u64
-> start, u64 offset) }
-> =20
->  static int dfu_write_medium_sf(struct dfu_entity *dfu,
-> -		u64 offset, void *buf, long *len)
-> +			       u64 offset, void *buf, long *len)
+> @@ -52,11 +54,33 @@ static int dfu_write_medium_sf(struct dfu_entity
+> *dfu,=20
+>  static int dfu_flush_medium_sf(struct dfu_entity *dfu)
 >  {
->  	int ret;
+> +	u64 off, length;
+> +
+> +	if (!dfu->data.sf.ubi)
+> +		return 0;
+> +
+> +	/* in case of ubi partition, erase rest of the partition */
+> +	off =3D find_sector(dfu, dfu->data.sf.start, dfu->offset);
+> +	/* last write ended with unaligned length jump to next */
+> +	if (off !=3D dfu->data.sf.start + dfu->offset)
+> +		off +=3D dfu->data.sf.dev->sector_size;
+> +	length =3D dfu->data.sf.start + dfu->data.sf.size - off;
+> +	if (length)
+> +		return spi_flash_erase(dfu->data.sf.dev, off,
+> length); +
+>  	return 0;
+>  }
 > =20
+>  static unsigned int dfu_polltimeout_sf(struct dfu_entity *dfu)
+>  {
+> +	/*
+> +	 * Currently, Poll Timeout !=3D 0 is only needed on nand
+							  ^^^^^ -
+							  please update
+							  the comment=20
 
-Thanks for fixing this.
+> +	 * ubi partition, as sectors which are not used need
+> +	 * to be erased
+> +	 */
+> +	if (dfu->data.sf.ubi)
+> +		return DFU_MANIFEST_POLL_TIMEOUT;
+> +
+>  	return DFU_DEFAULT_POLL_TIMEOUT;
+>  }
+> =20
+> @@ -133,6 +157,33 @@ int dfu_fill_entity_sf(struct dfu_entity *dfu,
+> char *devstr, char *s) dfu->data.sf.start =3D simple_strtoul(s, &s, 16);
+>  		s++;
+>  		dfu->data.sf.size =3D simple_strtoul(s, &s, 16);
+> +	} else if ((!strcmp(st, "part")) || (!strcmp(st,
+> "partubi"))) {
+> +		char mtd_id[32];
+> +		struct mtd_device *mtd_dev;
+> +		u8 part_num;
+> +		struct part_info *pi;
+> +		int ret, dev, part;
+> +
+> +		dfu->layout =3D DFU_RAW_ADDR;
+> +
+> +		dev =3D simple_strtoul(s, &s, 10);
+> +		s++;
+> +		part =3D simple_strtoul(s, &s, 10);
+> +
+> +		sprintf(mtd_id, "%s%d,%d", "nor", dev, part - 1);
+> +		printf("using id '%s'\n", mtd_id);
+> +
+> +		mtdparts_init();
+> +
+> +		ret =3D find_dev_and_part(mtd_id, &mtd_dev, &part_num,
+> &pi);
+> +		if (ret !=3D 0) {
+> +			printf("Could not locate '%s'\n", mtd_id);
+> +			return -1;
+> +		}
+> +		dfu->data.sf.start =3D pi->offset;
+> +		dfu->data.sf.size =3D pi->size;
+> +		if (!strcmp(st, "partubi"))
+> +			dfu->data.sf.ubi =3D 1;
+>  	} else {
+>  		printf("%s: Memory layout (%s) not supported!\n",
+> __func__, st); spi_flash_free(dfu->data.sf.dev);
+> diff --git a/include/dfu.h b/include/dfu.h
+> index 145a157..bf51ab7 100644
+> --- a/include/dfu.h
+> +++ b/include/dfu.h
+> @@ -77,6 +77,8 @@ struct sf_internal_data {
+>  	/* RAW programming */
+>  	u64 start;
+>  	u64 size;
+> +	/* for sf/ubi use */
+> +	unsigned int ubi;
+>  };
+> =20
+>  #define DFU_NAME_SIZE			32
 
-Acked-by: Lukasz Majewski <lukma@denx.de>
+
 
 
 Best regards,
@@ -142,25 +202,25 @@ DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
---Sig_/nlRky9=5Gf0GG6z0CV7roik
+--Sig_/fs4bkpc02hPssk3=nGzlZSr
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl01axMACgkQAR8vZIA0
-zr1XUwgAzrVbRfrP15h/E5QC9IaA/H78Hz7akMscC7rZM/yRNrpgvhFR5Q6DvR9w
-yebCK2asKfs/pbS5SHUQG2HWjg0s/aX1vls/Q9Kym7hQVrg6xgIeAfovfU1WOBy6
-XAHW3iFyGQuARKbVpjN7Wts68ftm+hoTvMM3nzkegd110zLRYm+7oG/oPatk9G3G
-WxSKjkWtKNaZSjeKw6PiP6HHFctEzVwnyMkQbBoZgNOs5RTBLWncpcEtkqx9LJaG
-Gi40tqFExg2yKBeFswdLljq0SVUBdLy5BiLtNzF9OyBMoeyg9HiKATDeiTQbm49i
-sWbkQzEEn7ylnCJ6o1MMa1UoHxQsKA==
-=W2TX
+iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl01a5oACgkQAR8vZIA0
+zr3SBAgAtp/O31zzi5ZjhEG8oddKfaP7fph5WKTO7XdrcfVfSbD0CZaSXKqntwOm
+6pktIpM/1MJbNp2nlyzE+uzTW0l/HMMdRjpephAYwBfsgAEIpYpMMQukJ0U8yi7Q
+DdfY/jJbDl6tULvGo49TuECZf5ZN7xHkw8vifksEGMxQpoCaih2n3w8MBTOYPcgS
+XwmKiP/HUavrqQpm3s6NUYaSBwESvuOUgJiMpZclVfPf76lEhGXNeTO1V8jDko1d
+5J98D/jKloaEJCmw2fe2unkfYh31OND4/D/Qk+0XgH+NTgXGnuIEFuvwG3o8C0ac
+gCnBO+owtSSG8gEYCC69uXOstI8beA==
+=ZqxD
 -----END PGP SIGNATURE-----
 
---Sig_/nlRky9=5Gf0GG6z0CV7roik--
+--Sig_/fs4bkpc02hPssk3=nGzlZSr--
 
---===============8502897735955041149==
+--===============7989028883406313352==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -171,4 +231,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============8502897735955041149==--
+--===============7989028883406313352==--

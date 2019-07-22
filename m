@@ -2,77 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7D4B6F9D9
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 08:58:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CFAB16FABB
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 09:51:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99B65CC0815
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 06:58:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC7E7CC184D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jul 2019 07:51:56 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9BB4ACC0813
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8C35CC184C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 Jul 2019 06:58:45 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6M6ueiq009265; Mon, 22 Jul 2019 08:58:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=fcwiKWsYXWtI827spgTYcYDn/VmLK2LpVxI493+an0E=;
- b=Cy1tIcyUjSWk1gMtEE7JveNXhY4Toxo/zhJVbp9EhFJ40RXwc6gJ3ej67aq5dPlBOzOQ
- mptgX7dJWEAcKS5oxD63EdwjX0jhTcGK0lEifYQnR/K9Qzy7HzzWYeO/2aw5iGLLENO1
- srYmq5qLDlkBkaXKYOQw79tUUGPYC0vqDfrRG3t8yBZPx5reHSP0bcInzGAQ4E7gvOnB
- C4vHkbmQCrlY620ZCPlKQDdvu4RXMWzcJVMGNSZlLM3WYi3Ux1fc22Z4Pf9iLiQgZEkt
- psiDq9DVXxS7pAw402NWEYtJeO+QkSI0HsO50VmzKosOjxYXD4e9yiTEIsQJOWpfJy7O eg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2tusuj1rka-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Mon, 22 Jul 2019 08:58:44 +0200
-Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 20F6C38;
- Mon, 22 Jul 2019 06:58:43 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DE517131B;
- Mon, 22 Jul 2019 06:58:42 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 22 Jul
- 2019 08:58:42 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 22 Jul 2019 08:58:42 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Lokesh Vutla <lokeshvutla@ti.com>, Fabien DESSENNE
- <fabien.dessenne@st.com>, Simon Glass <sjg@chromium.org>,
- Christophe KERELLO <christophe.kerello@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Loic PALLARDY <loic.pallardy@st.com>
-Thread-Topic: [PATCH v3 4/7] remoteproc: add elf file load support
-Thread-Index: AQHVF7JnKg0acaG8WUuHpDKfZvfwoaaJSkKAgE0458A=
-Date: Mon, 22 Jul 2019 06:58:42 +0000
-Message-ID: <0867eb94c0c549e6822ac9dbf310c54b@SFHDAG6NODE3.st.com>
-References: <1559308296-17027-1-git-send-email-fabien.dessenne@st.com>
- <1559308296-17027-5-git-send-email-fabien.dessenne@st.com>
- <fe7fd724-0c9e-bbf1-5542-608ffc467fa1@ti.com>
-In-Reply-To: <fe7fd724-0c9e-bbf1-5542-608ffc467fa1@ti.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
+ Mon, 22 Jul 2019 07:51:55 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 45sYj64cqRz1rKXM;
+ Mon, 22 Jul 2019 09:51:54 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 45sYj64L8Bz1qqkJ;
+ Mon, 22 Jul 2019 09:51:54 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id VFxrClroIkKi; Mon, 22 Jul 2019 09:51:53 +0200 (CEST)
+X-Auth-Info: F8vfqy7PvaT3u3Vc4V8GkOQzderpHUGAvVpif3KQ/SA=
+Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Mon, 22 Jul 2019 09:51:53 +0200 (CEST)
+Date: Mon, 22 Jul 2019 09:51:47 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20190722095147.12ed0f11@jawa>
+In-Reply-To: <1563541046-6432-2-git-send-email-patrick.delaunay@st.com>
+References: <1563541046-6432-1-git-send-email-patrick.delaunay@st.com>
+ <1563541046-6432-2-git-send-email-patrick.delaunay@st.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-22_05:, , signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Arnaud POULIQUEN <arnaud.pouliquen@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 4/7] remoteproc: add elf file load
-	support
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [RFC PATCH 01/14] dfu: cosmetic: cleanup sf to
+ avoid checkpatch error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,122 +55,120 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8502897735955041149=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Lokesh,
+--===============8502897735955041149==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/nlRky9=5Gf0GG6z0CV7roik"; protocol="application/pgp-signature"
 
-Thanks for the review.
-Fabien is in vacation and I will integrate this serie in my next stm32 pull request.
+--Sig_/nlRky9=5Gf0GG6z0CV7roik
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-> From: Lokesh Vutla <lokeshvutla@ti.com>
-> Sent: lundi 3 juin 2019 07:31
-> 
-> 
-> 
-> On 31/05/19 6:41 PM, Fabien Dessenne wrote:
-> > The current implementation supports only binary file load.
-> > Add helpers to support ELF32 format (sanity check, and load).
-> > Note that since an ELF32 image is built for the remote processor, the
-> > load function uses the device_to_virt ops to translate the addresses.
-> > Implement a basic translation for sandbox_testproc.
-> >
-> > Add related tests. Test result:
-> > => ut dm remoteproc_elf
-> > Test: dm_test_remoteproc_elf: remoteproc.c
-> > Test: dm_test_remoteproc_elf: remoteproc.c (flat tree)
-> > Failures: 0
-> >
-> > Signed-off-by: Loic Pallardy <loic.pallardy@st.com>
-> > Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
-> > ---
-> 
-> [...snip...]
-> 
-> > +/* Basic function to verify ELF32 image format */ int
-> > +rproc_elf32_sanity_check(ulong addr, ulong size) {
-> > +	Elf32_Ehdr *ehdr;
-> > +	char class;
-> > +
-> > +	if (!addr) {
-> > +		pr_debug("Invalid fw address?\n");
-> > +		return -EFAULT;
-> > +	}
-> > +
-> > +	if (size < sizeof(Elf32_Ehdr)) {
-> > +		pr_debug("Image is too small\n");
-> > +		return -ENOSPC;
-> > +	}
-> > +
-> > +	ehdr = (Elf32_Ehdr *)addr;
-> > +	class = ehdr->e_ident[EI_CLASS];
-> > +
-> > +	if (!IS_ELF(*ehdr) || ehdr->e_type != ET_EXEC || class != ELFCLASS32) {
-> > +		pr_debug("Not an executable ELF32 image\n");
-> > +		return -EPROTONOSUPPORT;
-> > +	}
-> > +
-> > +	/* We assume the firmware has the same endianness as the host */ #
-> > +ifdef __LITTLE_ENDIAN
-> > +	if (ehdr->e_ident[EI_DATA] != ELFDATA2LSB) { # else /* BIG ENDIAN */
-> > +	if (ehdr->e_ident[EI_DATA] != ELFDATA2MSB) { # endif
-> > +		pr_debug("Unsupported firmware endianness\n");
-> > +		return -EILSEQ;
-> > +	}
-> > +
-> > +	if (size < ehdr->e_shoff + sizeof(Elf32_Shdr)) {
-> > +		pr_debug("Image is too small\n");
-> > +		return -ENOSPC;
-> > +	}
-> > +
-> > +	if (memcmp(ehdr->e_ident, ELFMAG, SELFMAG)) {
-> > +		pr_debug("Image is corrupted (bad magic)\n");
-> > +		return -EBADF;
-> > +	}
-> > +
-> > +	if (ehdr->e_phnum == 0) {
-> > +		pr_debug("No loadable segments\n");
-> > +		return -ENOEXEC;
-> > +	}
-> > +
-> > +	if (ehdr->e_phoff > size) {
-> > +		pr_debug("Firmware size is too small\n");
-> > +		return -ENOSPC;
-> > +	}
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +/* A very simple elf loader, assumes the image is valid */ int
-> > +rproc_elf32_load_image(struct udevice *dev, unsigned long addr) {
-> > +	Elf32_Ehdr *ehdr; /* Elf header structure pointer */
-> > +	Elf32_Phdr *phdr; /* Program header structure pointer */
-> > +	const struct dm_rproc_ops *ops;
-> > +	unsigned int i;
-> > +
-> 
-> I would prefer to call  rproc_elf32_sanity_check() here and reduce the burden on
-> user. It's my preference and no strong objections.
+Hi Patrick,
 
-Yes it is a possibility, but for my side I prefer the Fabien proposition.
-(we can perhaps reuse the check of ELF for other use case).
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>=20
+>  drivers/dfu/dfu.c    | 7 ++++---
+>  drivers/dfu/dfu_sf.c | 4 ++--
+>  2 files changed, 6 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
+> index 3189495..eb3a3c6 100644
+> --- a/drivers/dfu/dfu.c
+> +++ b/drivers/dfu/dfu.c
+> @@ -477,14 +477,15 @@ int dfu_config_entities(char *env, char
+> *interface, char *devstr)=20
+>  const char *dfu_get_dev_type(enum dfu_device_type t)
+>  {
+> -	const char *dev_t[] =3D {NULL, "eMMC", "OneNAND", "NAND",
+> "RAM", "SF" };
+> +	const char *const dev_t[] =3D {NULL, "eMMC", "OneNAND",
+> "NAND", "RAM",
+> +				     "SF"};
+>  	return dev_t[t];
+>  }
+> =20
+>  const char *dfu_get_layout(enum dfu_layout l)
+>  {
+> -	const char *dfu_layout[] =3D {NULL, "RAW_ADDR", "FAT", "EXT2",
+> -					   "EXT3", "EXT4",
+> "RAM_ADDR" };
+> +	const char *const dfu_layout[] =3D {NULL, "RAW_ADDR", "FAT",
+> "EXT2",
+> +					  "EXT3", "EXT4",
+> "RAM_ADDR" }; return dfu_layout[l];
+>  }
+> =20
+> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+> index 066e767..b78fcfd 100644
+> --- a/drivers/dfu/dfu_sf.c
+> +++ b/drivers/dfu/dfu_sf.c
+> @@ -19,7 +19,7 @@ static int dfu_get_medium_size_sf(struct dfu_entity
+> *dfu, u64 *size) }
+> =20
+>  static int dfu_read_medium_sf(struct dfu_entity *dfu, u64 offset,
+> void *buf,
+> -		long *len)
+> +			      long *len)
+>  {
+>  	return spi_flash_read(dfu->data.sf.dev, dfu->data.sf.start +
+> offset, *len, buf);
+> @@ -32,7 +32,7 @@ static u64 find_sector(struct dfu_entity *dfu, u64
+> start, u64 offset) }
+> =20
+>  static int dfu_write_medium_sf(struct dfu_entity *dfu,
+> -		u64 offset, void *buf, long *len)
+> +			       u64 offset, void *buf, long *len)
+>  {
+>  	int ret;
+> =20
 
-I will merge the patch with this version (to have the patch in v2019.10) .
-But I let Fabien conclude and potentially sent a minor update.
+Thanks for fixing this.
 
-> Other than that:
-> 
-> Reviewed-by: Lokesh Vutla <lokeshvutla@ti.com>
-> 
-> Thanks and regards,
-> Lokesh
+Acked-by: Lukasz Majewski <lukma@denx.de>
 
-Thanks
-Patrick
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/nlRky9=5Gf0GG6z0CV7roik
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl01axMACgkQAR8vZIA0
+zr1XUwgAzrVbRfrP15h/E5QC9IaA/H78Hz7akMscC7rZM/yRNrpgvhFR5Q6DvR9w
+yebCK2asKfs/pbS5SHUQG2HWjg0s/aX1vls/Q9Kym7hQVrg6xgIeAfovfU1WOBy6
+XAHW3iFyGQuARKbVpjN7Wts68ftm+hoTvMM3nzkegd110zLRYm+7oG/oPatk9G3G
+WxSKjkWtKNaZSjeKw6PiP6HHFctEzVwnyMkQbBoZgNOs5RTBLWncpcEtkqx9LJaG
+Gi40tqFExg2yKBeFswdLljq0SVUBdLy5BiLtNzF9OyBMoeyg9HiKATDeiTQbm49i
+sWbkQzEEn7ylnCJ6o1MMa1UoHxQsKA==
+=W2TX
+-----END PGP SIGNATURE-----
+
+--Sig_/nlRky9=5Gf0GG6z0CV7roik--
+
+--===============8502897735955041149==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============8502897735955041149==--

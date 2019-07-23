@@ -2,67 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E58E6712AD
-	for <lists+uboot-stm32@lfdr.de>; Tue, 23 Jul 2019 09:20:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB7A47153A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 23 Jul 2019 11:31:51 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E574CEF054
-	for <lists+uboot-stm32@lfdr.de>; Tue, 23 Jul 2019 07:20:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8215C58499
+	for <lists+uboot-stm32@lfdr.de>; Tue, 23 Jul 2019 09:31:50 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 03740CEF052
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 039CBC57DFD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 23 Jul 2019 07:20:53 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6N7JxPa010724; Tue, 23 Jul 2019 09:20:51 +0200
+ Tue, 23 Jul 2019 09:31:48 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6N9R1nQ018688; Tue, 23 Jul 2019 11:31:44 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : content-type : content-transfer-encoding :
- mime-version; s=STMicroelectronics;
- bh=BW9sNsJCSlnO8stQUHSBaARzbn+kaV6vw2Bs344JP1I=;
- b=nnhdi8coUQMbQ2rHomAn9iQPdFn+ajJSBNhXtIM1/et/gbfz05Rtklh7nEV4y5zpxwjd
- 1zxjZ+ZcRbmFhW0aAsr0WBpPylEO3LPy4EO+pYAmOWRjT4SuN8iED4XZG3DyNSNbcPxw
- t6tjPOQOAwgHY3KsSHlLsKs+sCdpBzExF8JgF14rsnJAC6kkPSOTKFWb8TGDjM6qU0JT
- WLfNVOk59AuRTNHt25xmA5Mmo83LhNxmgWdNFN6EY72wpeNYVfanLeSCVTG/qYsk+dxB
- PXf2rn0IH6y3ujjJwq/KWty/V3Y2Z2O/fDIH71kHVRsjj4Rf4wL4wpUNbzEQCsJ0uiep fQ== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=5x6KfWkmKMLUSIf+NR5xqqc4iNkSj7iuYVVTOGxow30=;
+ b=h8iQcC5NH9D7BCfoykGIX9EGkKLmY/B2/+8WRium6wXE3QngnyAKqQlcFLu+2Tz1a3rO
+ 7tKbFJ84FCtw3sYRvd6KQYow7QFxGGHAMsNTJ9hOoc6mNHjLqbecpWt9flqYTW2oWDpp
+ ijJTFRZZy9a27xbqJ5OhwEXpNhlSLgYLa1M32dCCOd1MCZYARdaeDV2GssggjUgDUR0l
+ tL2lKgwK93D42Zbqb1xOrxBLqT1CvkP/ZmfNfAXmphd8Iqfva2romfyrIoNno4ZKsn/5
+ hZxnHaeqkPuiBRBt/Bm/5bjrSoGdsWp64TXLiTQ9L8iJ2yA1T44LaElx6BpUt3PS9vUO hQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2tur39g5s2-1
+ by mx07-00178001.pphosted.com with ESMTP id 2ture1gm7d-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 23 Jul 2019 09:20:51 +0200
+ Tue, 23 Jul 2019 11:31:44 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B2AD63F;
- Tue, 23 Jul 2019 07:20:50 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 88C35168E;
- Tue, 23 Jul 2019 07:20:50 +0000 (GMT)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 23 Jul
- 2019 09:20:50 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 23 Jul 2019 09:20:49 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Thread-Topic: [PULL] u-boot-stm32/master for v2019.10-rc1:
- u-boot-stm32-20190723
-Thread-Index: AdVBJQUz4vNsqVRGSZWSHfR3brrN0Q==
-Date: Tue, 23 Jul 2019 07:20:49 +0000
-Message-ID: <9e663e333ec0431793ca5d2a5d20c659@SFHDAG6NODE3.st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5AB9E38;
+ Tue, 23 Jul 2019 09:31:43 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 24C8528B1;
+ Tue, 23 Jul 2019 09:31:43 +0000 (GMT)
+Received: from SAFEX1HUBCAS23.st.com (10.75.90.47) by Safex1hubcas22.st.com
+ (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 23 Jul
+ 2019 11:31:42 +0200
+Received: from localhost (10.201.23.73) by webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 23 Jul 2019 11:31:42
+ +0200
+From: Patrice Chotard <patrice.chotard@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 23 Jul 2019 11:31:28 +0200
+Message-ID: <20190723093128.22007-1-patrice.chotard@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.201.23.73]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-07-23_04:, , signatures=0
+ definitions=2019-07-23_05:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: [Uboot-stm32] [PULL] u-boot-stm32/master for v2019.10-rc1:
-	u-boot-stm32-20190723
+ Peng Fan <peng.fan@nxp.com>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] mmc: sti_sdhci: Fix sdhci_setup_cfg() call.
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,88 +71,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+host->mmc and host->mmc->dev must be set before calling
+sdhci_setup_cfg() to avoid hang during mmc initialization.
 
-Hi Tom
+Thanks to commit 3d296365e4e8
+("mmc: sdhci: Add support for sdhci-caps-mask") which put
+this issue into evidence.
 
-please pull the STM32 related patches for v2019.10-rc1 = u-boot-stm32-20190723
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+---
 
-Travis CI status:
-	https://travis-ci.org/patrickdelaunay/u-boot/builds/562084625
-	the warnings are not related to the patchsets.
+ drivers/mmc/sti_sdhci.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks,
-Patrick
+diff --git a/drivers/mmc/sti_sdhci.c b/drivers/mmc/sti_sdhci.c
+index 8ed47e113d..c7f1947edd 100644
+--- a/drivers/mmc/sti_sdhci.c
++++ b/drivers/mmc/sti_sdhci.c
+@@ -97,14 +97,14 @@ static int sti_sdhci_probe(struct udevice *dev)
+ 		       SDHCI_QUIRK_NO_HISPD_BIT;
+ 
+ 	host->host_caps = MMC_MODE_DDR_52MHz;
++	host->mmc = &plat->mmc;
++	host->mmc->dev = dev;
+ 
+ 	ret = sdhci_setup_cfg(&plat->cfg, host, 50000000, 400000);
+ 	if (ret)
+ 		return ret;
+ 
+-	host->mmc = &plat->mmc;
+ 	host->mmc->priv = host;
+-	host->mmc->dev = dev;
+ 	upriv->mmc = host->mmc;
+ 
+ 	return sdhci_probe(dev);
+-- 
+2.17.1
 
-The following changes since commit 0de815356474912ef5bef9a69f0327a5a93bb2c2:
-
-  Merge branch '2019-07-17-master-imports' (2019-07-18 11:31:37 -0400)
-
-are available in the git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20190723
-
-for you to fetch changes up to 1f99eaff08f699472860c82480344e824a737d57:
-
-  rtc: Add rtc driver for stm32mp1 (2019-07-22 11:04:52 +0200)
-
-----------------------------------------------------------------
-- add rtc driver for stm32mp1
-- add remoteproc driver for stm32mp1
-- use kernel qspi compatible string for stm32
-
-----------------------------------------------------------------
-Fabien Dessenne (6):
-      dm: core: Introduce xxx_translate_dma_address()
-      remoteproc: fix function headers
-      remoteproc: add device_to_virt ops
-      remoteproc: add elf file load support
-      remoteproc: Introduce STM32 Cortex-M4 remoteproc driver
-      MAINTAINERS: Add stm32 remoteproc driver
-
-Patrice Chotard (4):
-      ARM: dts: stm32: Use kernel qspi compatible string for stm32f7-uboot.dtsi
-      ARM: dts: stm32: Use kernel qspi compatible string for stm32f469-disco-uboot.dtsi
-      spi: stm32_qspi: Remove "st, stm32-qspi" compatible string
-      doc: device-tree-bindings: alignment with v5.2-rc6 for spi-stm32-qspi.txt
-
-Patrick Delaunay (3):
-      configs: stm32mp15: enable stm32 remoteproc
-      clk: stm32mp1: Add RTC clock entry
-      rtc: Add rtc driver for stm32mp1
-
- MAINTAINERS                                     |   1 +
- arch/arm/dts/stm32f469-disco-u-boot.dtsi        |   2 +-
- arch/arm/dts/stm32f7-u-boot.dtsi                |   2 +-
- arch/sandbox/dts/test.dts                       |   4 +
- common/fdt_support.c                            |   6 ++
- configs/stm32mp15_basic_defconfig               |   3 +
- configs/stm32mp15_optee_defconfig               |   3 +
- configs/stm32mp15_trusted_defconfig             |   3 +
- doc/device-tree-bindings/spi/spi-stm32-qspi.txt |  71 +++++++++---------
- drivers/clk/clk_stm32mp1.c                      |   9 +++
- drivers/core/of_addr.c                          |   4 +
- drivers/core/ofnode.c                           |   8 ++
- drivers/core/read.c                             |   5 ++
- drivers/remoteproc/Kconfig                      |  10 +++
- drivers/remoteproc/Makefile                     |   3 +-
- drivers/remoteproc/rproc-elf-loader.c           | 106 ++++++++++++++++++++++++++
- drivers/remoteproc/sandbox_testproc.c           |  19 +++++
- drivers/remoteproc/stm32_copro.c                | 257 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/rtc/Kconfig                             |   6 ++
- drivers/rtc/Makefile                            |   1 +
- drivers/rtc/stm32_rtc.c                         | 323 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/spi/stm32_qspi.c                        |   1 -
- include/dm/of_addr.h                            |  18 +++++
- include/dm/ofnode.h                             |  16 +++-
- include/dm/read.h                               |  20 ++++-
- include/fdt_support.h                           |  24 ++++++
- include/remoteproc.h                            | 146 ++++++++++++++++++++++++++----------
- test/dm/remoteproc.c                            | 122 ++++++++++++++++++++++++++++++
- test/dm/test-fdt.c                              |  12 +++
- 29 files changed, 1127 insertions(+), 78 deletions(-)
- create mode 100644 drivers/remoteproc/rproc-elf-loader.c
- create mode 100644 drivers/remoteproc/stm32_copro.c
- create mode 100644 drivers/rtc/stm32_rtc.c
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

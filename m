@@ -2,62 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71B1B7AAF1
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 16:28:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C11D7AAF5
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 16:28:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3419FC36B3F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 14:28:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 46AB1C35E02
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 14:28:57 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22C90C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77A9FC36B3F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Jul 2019 14:28:46 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Tue, 30 Jul 2019 14:28:55 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x6UEPdht007876
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:45 +0200
+ x6UEQlQO010239
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:55 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=cL6QlHzK7VQ3IsCARe/A/mz2So2WVZbsXJQ1Kdyh6IA=;
- b=Vtq51XwLKsy2grUZ4rUk2GFTgy7vh/zSFuMVAxgPodpxAOQN6NqLqqtoRiQkP0doBzct
- kHhx7whc7xhH4EL4PGFO2irrU0HnK8/w6Mp96efq07YFXUqKTL8phm96qAnayPHvvuXL
- nWhcKmqrJFeJwTLbCrD9UdofNSlqVNQlCIH3sYBEADpH5e49zA/wpQk5xQxYa7kO095o
- zNgBBCsCAcWb4AhiAOzGcCScktWVwPIV8wr7YXDjtms1c1lqBGQ/934QuHcV9PXfLiq8
- XSOMFFDXUO2ldv8qfWaqGyMUsJPFXUmyXeIRiwLk01ERluCKzF02ItUj/41Ii0mI7TAs vQ== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=NhBFJ3Z4DSa7bZiE7vad9lWxCWv7xEL80AxBq6JyOqI=;
+ b=dGhtA78QYwUhW+DEZfjio/3CJbaP9A3ugOeufDBNIftsXEsZ0BZEr34p+H+sgjZuU8gu
+ Z6khXENrolRqHaDC2XzHmfgqWCtWN8FGopp6/3eEjuy1umZnN85r9NhJQhN1D8p7jSlZ
+ sOnLtPs6sOsqNdzlpifeHq2tZGCnPHl8Bba07rT6zw0QRF46XJAoJ//q3wYOT/Z1OmqK
+ nWuqNRX3TlwbiF69K9nVSLQgeGx13TjfzGM+9J71mne/OCvIHESuZBC17kQ7p3YZz/fN
+ f4MDxidOJihuvTaMyZYYq09WmfDw6dUFthxUI028OoJgkEs3u2sbgJkTwlGPm05hYLYd 5g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2u2jp49jm8-1
+ by mx08-00178001.pphosted.com with ESMTP id 2u0br9xwxu-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT)
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:45 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E51D93A
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:55 +0200
+Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 576D938
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Jul 2019 14:28:44 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D6476B6918
+ Tue, 30 Jul 2019 14:28:54 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
+ by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C80D51460
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Jul 2019 16:28:44 +0200 (CEST)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by Safex1hubcas24.st.com
- (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul
- 2019 16:28:44 +0200
+ Tue, 30 Jul 2019 14:28:45 +0000 (GMT)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
+ (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul
+ 2019 16:28:45 +0200
 Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul 2019 16:28:44
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul 2019 16:28:45
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>, Patrice CHOTARD
  <patrice.chotard@st.com>
-Date: Tue, 30 Jul 2019 16:28:38 +0200
-Message-ID: <1564496921-15594-1-git-send-email-patrick.delaunay@st.com>
+Date: Tue, 30 Jul 2019 16:28:39 +0200
+Message-ID: <1564496921-15594-2-git-send-email-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1564496921-15594-1-git-send-email-patrick.delaunay@st.com>
+References: <1564496921-15594-1-git-send-email-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.201.23.85]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-07-30_07:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [U-BOOT internal][PATCH 0/3] usb: host: dwc2: use
-	driver model for PHY, RESET and CLOCK configuration
+Subject: [Uboot-stm32] [U-BOOT internal][PATCH 1/3] usb: host: dwc2: add phy
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,83 +77,114 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Use generic phy to initialize the PHY associated to the
+DWC2 device and available in the device tree.
 
-In this serie I update the DWC2 host driver to use the device tree
-information and the associated PHY, RESET and CLOCK driver
-when they are available.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-I test this serie on stm32mp157c-ev1 board;
-The U-CLASS are provided by:
-- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
-- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
-- RESET by RCC reset driver = drivers/reset/stm32-reset.c
+ drivers/usb/host/dwc2.c | 60 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
 
-I activate the configuration
-+CONFIG_USB_DWC2=y
-
-PS: it is not the default configuration to avoid conflict with device
-    as OTG is not correctly handle by DWC2 driver (see DWC3 driver to
-    dynamic OTG role support: device or host).
-
-I also deactivate the gadget support (as the OTG/dual role is not
-supported in DWC U-Boot driver): only one driver is bound to the
-node usbotg_hs with "snps,dwc2" compatible, and today
-it is the device one (the first in the driver list).
-
-I also need to deactivate hnp-srp support with:
-
-&usbotg_hs {
-	/* need to disable ONLY for HOST support */
-	hnp-srp-disable;
-};
-
-The test executed on the target:
-
-
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000: USB DWC2
-Bus usbh-ehci@5800d000: USB EHCI 1.00
-scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
-scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
-       scanning usb for storage devices... 2 Storage Device(s) found
-STM32MP> usb tree
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |   U-Boot Root Hub
-  |
-  +-2  Mass Storage (480 Mb/s, 300mA)
-       Verbatim STORE N GO 070731C8ACD7EE97
-
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Hub (480 Mb/s, 2mA)
-    |
-    +-3  Mass Storage (480 Mb/s, 500mA)
-         Generic  USB Storage
-
-STM32MP> ls usb 0
-<DIR>       4096 .
-<DIR>       4096 ..
-<DIR>      16384 lost+found
-<DIR>       4096 record
-         1490212 xipImage
-        21058006 vmlinux
-
-STM32MP> load usb 0 0xC0000000 vmlinux
-21058006 bytes read in 10851 ms (1.9 MiB/s)
-
-
-
-Patrick Delaunay (3):
-  usb: host: dwc2: add phy support
-  usb: host: dwc2: add support for reset and clk
-  usb: host: dwc2: add trace to have clean usb start
-
- drivers/usb/host/dwc2.c | 116 +++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 115 insertions(+), 1 deletion(-)
-
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index a62a2f8..a06efad 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -7,6 +7,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <errno.h>
++#include <generic-phy.h>
+ #include <usb.h>
+ #include <malloc.h>
+ #include <memalign.h>
+@@ -35,6 +36,7 @@ struct dwc2_priv {
+ #ifdef CONFIG_DM_REGULATOR
+ 	struct udevice *vbus_supply;
+ #endif
++	struct phy phy;
+ #else
+ 	uint8_t *aligned_buffer;
+ 	uint8_t *status_buffer;
+@@ -1317,13 +1319,69 @@ static int dwc2_usb_ofdata_to_platdata(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int dwc2_setup_phy(struct udevice *dev)
++{
++	struct dwc2_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	ret = generic_phy_get_by_index(dev, 0, &priv->phy);
++	if (ret) {
++		if (ret != -ENOENT) {
++			dev_err(dev, "failed to get usb phy\n");
++			return ret;
++		}
++		return 0;
++	}
++
++	ret = generic_phy_init(&priv->phy);
++	if (ret) {
++		dev_err(dev, "failed to init usb phy\n");
++		return ret;
++	}
++
++	ret = generic_phy_power_on(&priv->phy);
++	if (ret) {
++		dev_err(dev, "failed to power on usb phy\n");
++		return generic_phy_exit(&priv->phy);
++	}
++
++	return 0;
++}
++
++static int dwc2_shutdown_phy(struct udevice *dev)
++{
++	struct dwc2_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	if (!generic_phy_valid(&priv->phy))
++		return 0;
++
++	ret = generic_phy_power_off(&priv->phy);
++	if (ret) {
++		dev_err(dev, "failed to power off usb phy\n");
++		return ret;
++	}
++
++	ret = generic_phy_exit(&priv->phy);
++	if (ret) {
++		dev_err(dev, "failed to power off usb phy\n");
++		return ret;
++	}
++	return 0;
++}
++
+ static int dwc2_usb_probe(struct udevice *dev)
+ {
+ 	struct dwc2_priv *priv = dev_get_priv(dev);
+ 	struct usb_bus_priv *bus_priv = dev_get_uclass_priv(dev);
++	int ret;
+ 
+ 	bus_priv->desc_before_addr = true;
+ 
++	ret = dwc2_setup_phy(dev);
++	if (ret)
++		return ret;
++
+ 	return dwc2_init_common(dev, priv);
+ }
+ 
+@@ -1336,6 +1394,8 @@ static int dwc2_usb_remove(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
++	dwc2_shutdown_phy(dev);
++
+ 	dwc2_uninit_common(priv->regs);
+ 
+ 	reset_release_bulk(&priv->resets);
 -- 
 2.7.4
 

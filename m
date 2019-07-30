@@ -2,58 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5865578597
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Jul 2019 08:57:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71B1B7AAF1
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 16:28:47 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 20E02C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Jul 2019 06:57:54 +0000 (UTC)
-Received: from regular1.263xmail.com (regular1.263xmail.com [211.150.70.196])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3419FC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Jul 2019 14:28:47 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2AE0BCFAC60
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22C90C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Jul 2019 09:12:51 +0000 (UTC)
-Received: from kever.yang?rock-chips.com (unknown [192.168.165.134])
- by regular1.263xmail.com (Postfix) with ESMTP id D873F83B;
- Wed, 24 Jul 2019 17:12:46 +0800 (CST)
-X-263anti-spam: KSV:0;BIG:0;
-X-MAIL-GRAY: 0
-X-MAIL-DELIVERY: 1
-X-KSVirus-check: 0
-X-ADDR-CHECKED4: 1
-X-ABS-CHECKED: 1
-X-SKE-CHECKED: 1
-X-ANTISPAM-LEVEL: 2
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.263.net (postfix) whith ESMTP id
- P20432T140407714391808S1563959562637857_; 
- Wed, 24 Jul 2019 17:12:47 +0800 (CST)
-X-IP-DOMAINF: 1
-X-UNIQUE-TAG: <00841c105c50934e97fb9851ce2f3f0d>
-X-RL-SENDER: kever.yang@rock-chips.com
-X-SENDER: yk@rock-chips.com
-X-LOGIN-NAME: kever.yang@rock-chips.com
-X-FST-TO: uboot-stm32@st-md-mailman.stormreply.com
-X-SENDER-IP: 103.29.142.67
-X-ATTACHMENT-NUM: 0
-X-DNS-TYPE: 0
-To: Patrice Chotard <patrice.chotard@st.com>, u-boot@lists.denx.de
-References: <20190724075102.26679-1-patrice.chotard@st.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-Message-ID: <4eb5f95b-026d-c965-e896-913e3af7c426@rock-chips.com>
-Date: Wed, 24 Jul 2019 17:12:40 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ Tue, 30 Jul 2019 14:28:46 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x6UEPdht007876
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:45 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=cL6QlHzK7VQ3IsCARe/A/mz2So2WVZbsXJQ1Kdyh6IA=;
+ b=Vtq51XwLKsy2grUZ4rUk2GFTgy7vh/zSFuMVAxgPodpxAOQN6NqLqqtoRiQkP0doBzct
+ kHhx7whc7xhH4EL4PGFO2irrU0HnK8/w6Mp96efq07YFXUqKTL8phm96qAnayPHvvuXL
+ nWhcKmqrJFeJwTLbCrD9UdofNSlqVNQlCIH3sYBEADpH5e49zA/wpQk5xQxYa7kO095o
+ zNgBBCsCAcWb4AhiAOzGcCScktWVwPIV8wr7YXDjtms1c1lqBGQ/934QuHcV9PXfLiq8
+ XSOMFFDXUO2ldv8qfWaqGyMUsJPFXUmyXeIRiwLk01ERluCKzF02ItUj/41Ii0mI7TAs vQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2u2jp49jm8-1
+ (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT)
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 30 Jul 2019 16:28:45 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E51D93A
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 30 Jul 2019 14:28:44 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D6476B6918
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 30 Jul 2019 16:28:44 +0200 (CEST)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by Safex1hubcas24.st.com
+ (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul
+ 2019 16:28:44 +0200
+Received: from localhost (10.201.23.85) by Webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Tue, 30 Jul 2019 16:28:44
+ +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>, Patrice CHOTARD
+ <patrice.chotard@st.com>
+Date: Tue, 30 Jul 2019 16:28:38 +0200
+Message-ID: <1564496921-15594-1-git-send-email-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20190724075102.26679-1-patrice.chotard@st.com>
-Content-Language: en-US
-X-Mailman-Approved-At: Mon, 29 Jul 2019 06:57:53 +0000
+X-Originating-IP: [10.201.23.85]
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
+ definitions=2019-07-30_07:, , signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32]
- =?utf-8?b?W1UtQm9vdF0gW1BBVENIIHYyXSBtbWM6IHN0aV9z?=
- =?utf-8?b?ZGhjaTogRml4IHNkaGNpX3NldHVwX2NmZygpIGNhbGwu44CQ6K+35rOo5oSP?=
- =?utf-8?b?77yM6YKu5Lu255SxdS1ib290LWJvdW5jZXNAbGlzdHMuZGVueC5kZeS7ow==?=
- =?utf-8?b?5Y+R44CR?=
+Subject: [Uboot-stm32] [U-BOOT internal][PATCH 0/3] usb: host: dwc2: use
+	driver model for PHY, RESET and CLOCK configuration
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -65,35 +69,92 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Ck9uIDIwMTkvNy8yNCDkuIvljYgzOjUxLCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4gaG9zdC0+
-bW1jLCBob3N0LT5tbWMtPmRldiBhbmQgaG9zdC0+bW1jLT5wcml2IG11c3QgYmUgc2V0Cj4gYmVm
-b3JlIGNhbGxpbmcgc2RoY2lfc2V0dXBfY2ZnKCkgdG8gYXZvaWQgaGFuZyBkdXJpbmcgbW1jCj4g
-aW5pdGlhbGl6YXRpb24uCj4KPiBUaGFua3MgdG8gY29tbWl0IDNkMjk2MzY1ZTRlOAo+ICgibW1j
-OiBzZGhjaTogQWRkIHN1cHBvcnQgZm9yIHNkaGNpLWNhcHMtbWFzayIpIHdoaWNoIHB1dAo+IHRo
-aXMgaXNzdWUgaW50byBldmlkZW5jZS4KPgo+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFy
-ZCA8cGF0cmljZS5jaG90YXJkQHN0LmNvbT4KPiAtLS0KPgo+IENoYW5nZXMgaW4gdjI6Cj4gICAg
-LSBtb3ZlIGhvc3QtPm1tYy0+cHJpdiBpbml0aWFsaXphdGlvbiBiZWZvcmUgc2RoY2lfc2V0dXBf
-Y2ZnKCkgY2FsbAo+Cj4gICBkcml2ZXJzL21tYy9zdGlfc2RoY2kuYyB8IDYgKysrLS0tCj4gICAx
-IGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvbW1jL3N0aV9zZGhjaS5jIGIvZHJpdmVycy9tbWMvc3RpX3NkaGNpLmMK
-PiBpbmRleCA4ZWQ0N2UxMTNkLi5kNmM3NWVhNjAxIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvbW1j
-L3N0aV9zZGhjaS5jCj4gKysrIGIvZHJpdmVycy9tbWMvc3RpX3NkaGNpLmMKPiBAQCAtOTcsMTQg
-Kzk3LDE0IEBAIHN0YXRpYyBpbnQgc3RpX3NkaGNpX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYp
-Cj4gICAJCSAgICAgICBTREhDSV9RVUlSS19OT19ISVNQRF9CSVQ7Cj4gICAKPiAgIAlob3N0LT5o
-b3N0X2NhcHMgPSBNTUNfTU9ERV9ERFJfNTJNSHo7Cj4gKwlob3N0LT5tbWMgPSAmcGxhdC0+bW1j
-Owo+ICsJaG9zdC0+bW1jLT5kZXYgPSBkZXY7Cj4gKwlob3N0LT5tbWMtPnByaXYgPSBob3N0Owo+
-ICAgCj4gICAJcmV0ID0gc2RoY2lfc2V0dXBfY2ZnKCZwbGF0LT5jZmcsIGhvc3QsIDUwMDAwMDAw
-LCA0MDAwMDApOwo+ICAgCWlmIChyZXQpCj4gICAJCXJldHVybiByZXQ7Cj4gICAKPiAtCWhvc3Qt
-Pm1tYyA9ICZwbGF0LT5tbWM7Cj4gLQlob3N0LT5tbWMtPnByaXYgPSBob3N0Owo+IC0JaG9zdC0+
-bW1jLT5kZXYgPSBkZXY7Cj4gICAJdXByaXYtPm1tYyA9IGhvc3QtPm1tYzsKCgpTYW1lIGlzc3Vl
-IGxpa2Ugcm9ja2NoaXBfc2RoY2kuYy4KClJldmlld2VkLWJ5OiBLZXZlciBZYW5nIDxrZXZlci55
-YW5nQHJvY2stY2hpcHMuY29tPgoKVGhhbmtzLAotIEtldmVyCj4gICAKPiAgIAlyZXR1cm4gc2Ro
-Y2lfcHJvYmUoZGV2KTsKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1h
-bi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFp
-bG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+
+In this serie I update the DWC2 host driver to use the device tree
+information and the associated PHY, RESET and CLOCK driver
+when they are available.
+
+I test this serie on stm32mp157c-ev1 board;
+The U-CLASS are provided by:
+- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
+- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
+- RESET by RCC reset driver = drivers/reset/stm32-reset.c
+
+I activate the configuration
++CONFIG_USB_DWC2=y
+
+PS: it is not the default configuration to avoid conflict with device
+    as OTG is not correctly handle by DWC2 driver (see DWC3 driver to
+    dynamic OTG role support: device or host).
+
+I also deactivate the gadget support (as the OTG/dual role is not
+supported in DWC U-Boot driver): only one driver is bound to the
+node usbotg_hs with "snps,dwc2" compatible, and today
+it is the device one (the first in the driver list).
+
+I also need to deactivate hnp-srp support with:
+
+&usbotg_hs {
+	/* need to disable ONLY for HOST support */
+	hnp-srp-disable;
+};
+
+The test executed on the target:
+
+
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000: USB DWC2
+Bus usbh-ehci@5800d000: USB EHCI 1.00
+scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
+scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 2 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Mass Storage (480 Mb/s, 300mA)
+       Verbatim STORE N GO 070731C8ACD7EE97
+
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Hub (480 Mb/s, 2mA)
+    |
+    +-3  Mass Storage (480 Mb/s, 500mA)
+         Generic  USB Storage
+
+STM32MP> ls usb 0
+<DIR>       4096 .
+<DIR>       4096 ..
+<DIR>      16384 lost+found
+<DIR>       4096 record
+         1490212 xipImage
+        21058006 vmlinux
+
+STM32MP> load usb 0 0xC0000000 vmlinux
+21058006 bytes read in 10851 ms (1.9 MiB/s)
+
+
+
+Patrick Delaunay (3):
+  usb: host: dwc2: add phy support
+  usb: host: dwc2: add support for reset and clk
+  usb: host: dwc2: add trace to have clean usb start
+
+ drivers/usb/host/dwc2.c | 116 +++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 115 insertions(+), 1 deletion(-)
+
+-- 
+2.7.4
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

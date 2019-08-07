@@ -2,65 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF4A9812F6
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Aug 2019 09:19:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 018AF851F7
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Aug 2019 19:20:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 69574C35E05
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Aug 2019 07:19:07 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2A9AAC35E01
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Aug 2019 17:20:15 +0000 (UTC)
+Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
+ [209.85.161.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F078CC35E01
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1ADC4C36B3F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  3 Aug 2019 21:08:15 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id x21so16154531otq.12
+ Wed,  7 Aug 2019 17:20:12 +0000 (UTC)
+Received: by mail-yw1-f66.google.com with SMTP id q128so32741714ywc.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 03 Aug 2019 14:08:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=di3cBJuX80DceX+s6OcONfLi8UQZswlw8/DBsWk7oYA=;
- b=fgGYAFUarFZgBvFPg2UJ9F0skC4EfcjE0lxiXuRNevNg7a0HGeYOn/oZ12XZHmylQt
- oFHpDJbBGUvdRIz0/ih2i1L6yOwKe06cpUnjTeuwwFdwtwAxtE3QUroM3S5L2RmKnUQa
- QkRWy8J7E9+ouCuFjAl3xASLEofElhZqtz4VRFgDiYHb3+BjmFKO7L2QjMJc5Wpqp+cr
- GAE77jrgA/Ydz7px8HPKxwP8KxjnHvUbvwhQvSo4dCmY63N6N7ywRgmRORBqNfXXR+UP
- sNBlnIjFD1gqVxlpty40+khnGGwpLiFigCeNbaNizlhWwsYWqdzSf7ZMkrt58DySQCuG
- bSeQ==
+ Wed, 07 Aug 2019 10:20:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=l1Fi1fCuQ2az+ziPS7Y75dY3yo6TXshq52Q0oe3xXCM=;
+ b=c1HnntBUyQAQbbZEptaxPWp+0TvR9/qclVPaEz1uF9lVp5QKk9tpsXK1T2KSI09fhN
+ f7aUV9aQdM+qy8Qmxu+XMFrSBjQ9Cy3CX7isnTT4PENUitMfkj3ttmyJZVUPjQvTHgIW
+ qM31Sns9I41wBmgyQl/TTmHsw2qh7I4p43aQk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=di3cBJuX80DceX+s6OcONfLi8UQZswlw8/DBsWk7oYA=;
- b=kQySfuAsf1WRX6imhucwidVPowfq10a26xBchPWF1eHrjL9jLCy4pKYa+DD/ZE8zv/
- AT0ee1A/D3u/Q4JkYOwMfTJoXEACKXBbstV2smGZNwQcPqJ3MC1qfNaDFeJ63owOk8mp
- kSDTUS9mlNeCTxYJeAn1RUVXOvYidSm2c6ZncJ8Karp9bbcap9IB7nmUWGKi5pDVYSeK
- q190T0nA3DTW4iTY40c6vFMA43WQb7HXyJqRkru2AIcw/oJzdCkMEvktLmjsTYjNH6En
- Vx5GsPXdH46iVwXbb32rtYYq1hO2BeNf7U7DuHh4Rzhjxgy4heIkefzq0i6wOzNBaWWE
- DN3A==
-X-Gm-Message-State: APjAAAWcUq8RNNL6EkQV9/JEi3s3yA6hWBT7Vu46Lye10NMJ9OqMPbPM
- EFubUcLmpqPqLmuAhJcoHJ6d00c6RfAhUCLgZtU=
-X-Google-Smtp-Source: APXvYqwqAQfoE3KFQaRj+kJG+L08vMzw20pczftdmcUQU8UmQM3VLRdBbMiCBJpII0zPR4jsCR/j/Lr8us4IALbPiHk=
-X-Received: by 2002:a05:6830:160c:: with SMTP id
- g12mr53086329otr.231.1564866494189; 
- Sat, 03 Aug 2019 14:08:14 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=l1Fi1fCuQ2az+ziPS7Y75dY3yo6TXshq52Q0oe3xXCM=;
+ b=klUs8OJCxlD7BUyjJWRHlcPDzaUHyWqH4WGfGZuBW5xJIDujBU+IbeiczEjXDgd+oq
+ 32JQi84r7tT3duUnZDj7k3S48aRKz2D7EIvSs6ned8gzelMOVy1CpkefPksZyt7AxROe
+ E/e1I+GH0ry7Cuspjd7/tUe/SRQphpFnm/faqFftWv06DSBuXzqrWK9i/D3e8XQCCa3O
+ F3JE7KeYZRjQOPv1iOai4ibvcxKT7iL/1WOAreuZRM5kFQlHgAOujvKsQgYzu1kKqpqd
+ cwFUb6u1DJN9/4ZlYbrKVk1fW7ts6YL4B7MMz2eyUT33MDit/2s0tc/DLNtDrhs2tgMC
+ AfUg==
+X-Gm-Message-State: APjAAAXszl+mYfdJBkBlpxqhFshH6tylXqQYW+O4iIDEhxxFbY4VOFAQ
+ 727F9nQ8in6gKXZl19joieqnIA==
+X-Google-Smtp-Source: APXvYqwNfu3mTXqTZlrCT3fA/dcJViieRmrmtbIog0SZ2ddcNlBkg/nuY+iHaIb8NjUioEr1iOuXHw==
+X-Received: by 2002:a81:4f8f:: with SMTP id d137mr6837178ywb.122.1565198411741; 
+ Wed, 07 Aug 2019 10:20:11 -0700 (PDT)
+Received: from bill-the-cat
+ (cpe-2606-A000-1401-82DE-5CE2-C4E2-4F31-D572.dyn6.twc.com.
+ [2606:a000:1401:82de:5ce2:c4e2:4f31:d572])
+ by smtp.gmail.com with ESMTPSA id 206sm20661939ywu.34.2019.08.07.10.20.09
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 07 Aug 2019 10:20:10 -0700 (PDT)
+Date: Wed, 7 Aug 2019 13:20:07 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Message-ID: <20190807172007.GA30533@bill-the-cat>
+References: <20190725071239.31398-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-References: <1564651743-28430-1-git-send-email-patrick.delaunay@st.com>
- <1564651743-28430-2-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1564651743-28430-2-git-send-email-patrick.delaunay@st.com>
-From: Ramon Fried <rfried.dev@gmail.com>
-Date: Sun, 4 Aug 2019 00:08:03 +0300
-Message-ID: <CAGi-RU+L_7DtGL9o2mM+8GE5EHayxOKQcQW+Yyz7Gjfd5Lho1g@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-X-Mailman-Approved-At: Mon, 05 Aug 2019 07:19:06 +0000
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrice Chotard <patrice.chotard@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] net: dwc_et_qos: update weak function
-	board_interface_eth_init
+In-Reply-To: <20190725071239.31398-1-patrice.chotard@st.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Sven Schwermer <sven@svenschwermer.de>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] regulator: fixed: Modify
+ enable-active-high behavior
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,147 +69,74 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6186895695690393622=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, Aug 1, 2019 at 12:32 PM Patrick Delaunay
-<patrick.delaunay@st.com> wrote:
->
-> Align the board and driver prototype for board_interface_eth_init
-> to avoid execution issue (the interface_type parameter is defined
-> as int or phy_interface_t).
->
-> To have a generic weak function (it should be reused by other driver)
-> I change the prototype to use directly udevice.
->
-> This prototype is added in netdev.h to allow compilation check
-> and avoid warning when compiling with W=1 on file
-> board/st/stm32mp1/stm32mp1.c
->
-> warning: no previous prototype for 'board_interface_eth_init'\
-> [-Wmissing-prototypes]
->      int board_interface_eth_init(int interface_type, ....
->          ^~~~~~~~~~~~~~~~~~~~~~~~
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  board/st/stm32mp1/stm32mp1.c | 17 +++++++++++++----
->  drivers/net/dwc_eth_qos.c    | 16 +++-------------
->  include/netdev.h             |  3 +++
->  3 files changed, 19 insertions(+), 17 deletions(-)
->
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index b99c6c0..2365dd1 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -16,6 +16,7 @@
->  #include <misc.h>
->  #include <mtd.h>
->  #include <mtd_node.h>
-> +#include <netdev.h>
->  #include <phy.h>
->  #include <reset.h>
->  #include <syscon.h>
-> @@ -560,13 +561,21 @@ void board_quiesce_devices(void)
->         setup_led(LEDST_OFF);
->  }
->
-> -/* board interface eth init */
-> -/* this is a weak define that we are overriding */
-> -int board_interface_eth_init(phy_interface_t interface_type,
-> -                            bool eth_clk_sel_reg, bool eth_ref_clk_sel_reg)
-> +/* eth init function : weak called in eqos driver */
-> +int board_interface_eth_init(struct udevice *dev,
-> +                            phy_interface_t interface_type)
->  {
->         u8 *syscfg;
->         u32 value;
-> +       bool eth_clk_sel_reg = false;
-> +       bool eth_ref_clk_sel_reg = false;
-> +
-> +       /* Gigabit Ethernet 125MHz clock selection. */
-> +       eth_clk_sel_reg = dev_read_bool(dev, "st,eth_clk_sel");
-> +
-> +       /* Ethernet 50Mhz RMII clock selection */
-> +       eth_ref_clk_sel_reg =
-> +               dev_read_bool(dev, "st,eth_ref_clk_sel");
->
->         syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
->
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index 6df9956..4557093 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -1591,8 +1591,8 @@ err_free_reset_eqos:
->  }
->
->  /* board-specific Ethernet Interface initializations. */
-> -__weak int board_interface_eth_init(int interface_type, bool eth_clk_sel_reg,
-> -                                   bool eth_ref_clk_sel_reg)
-> +__weak int board_interface_eth_init(struct udevice *dev,
-> +                                   phy_interface_t interface_type)
->  {
->         return 0;
->  }
-> @@ -1602,8 +1602,6 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->         struct eqos_priv *eqos = dev_get_priv(dev);
->         int ret;
->         phy_interface_t interface;
-> -       bool eth_clk_sel_reg = false;
-> -       bool eth_ref_clk_sel_reg = false;
->
->         debug("%s(dev=%p):\n", __func__, dev);
->
-> @@ -1614,15 +1612,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->                 return -EINVAL;
->         }
->
-> -       /* Gigabit Ethernet 125MHz clock selection. */
-> -       eth_clk_sel_reg = dev_read_bool(dev, "st,eth_clk_sel");
-> -
-> -       /* Ethernet 50Mhz RMII clock selection */
-> -       eth_ref_clk_sel_reg =
-> -               dev_read_bool(dev, "st,eth_ref_clk_sel");
-> -
-> -       ret = board_interface_eth_init(interface, eth_clk_sel_reg,
-> -                                      eth_ref_clk_sel_reg);
-> +       ret = board_interface_eth_init(dev, interface);
->         if (ret)
->                 return -EINVAL;
->
-> diff --git a/include/netdev.h b/include/netdev.h
-> index a40c4ad..68a3fce 100644
-> --- a/include/netdev.h
-> +++ b/include/netdev.h
-> @@ -10,6 +10,7 @@
->
->  #ifndef _NETDEV_H_
->  #define _NETDEV_H_
-> +#include <phy_interface.h>
->
->  /*
->   * Board and CPU-specific initialization functions
-> @@ -21,6 +22,8 @@
->   */
->
->  int board_eth_init(bd_t *bis);
-> +int board_interface_eth_init(struct udevice *dev,
-> +                            phy_interface_t interface_type);
->  int cpu_eth_init(bd_t *bis);
->
->  /* Driver initialization prototypes */
-> --
-> 2.7.4
->
 
-why can you just write a phy driver specific to this board and hook it
-to the eth
-driver in the dts ?
+--===============6186895695690393622==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
+Content-Disposition: inline
+
+
+--huq684BweRXVnRxX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Jul 25, 2019 at 09:12:39AM +0200, Patrice Chotard wrote:
+
+> Regulator should not be enabled at probe time if regulator-boot-on
+> property is not in the dt node.
+>=20
+> "enable-active-high" property is only used to indicate the GPIO
+> polarity.
+>=20
+> See kernel documentation :
+>  - Documentation/devicetree/bindings/regulator/fixed-regulator.yaml
+>  - Documentation/devicetree/bindings/regulator/gpio-regulator.yaml
+>=20
+> Signed-off-by: Christophe Kerello <christophe.kerello@st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+
+This breaks building on a number of platforms including khadas-vim
+
+--=20
+Tom
+
+--huq684BweRXVnRxX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJdSwhHAAoJEIf59jXTHXZSNvEP/Rs4AR9H4PmeCo3y9BOsaA3i
+kH2fUslY6l44VrAsUb0ZIkZECJMQWE5bDqCai51UDOcoTKoB37/Zu2cmjM9d4YkS
+Igcc/4eRPFUo0ea8usDIdcHw2x6DWGBzoh1vwTlgqwC0mKeZNkE2zY0YRJAIaUym
+Kzntq2P+j56VxE0Gz/rGHnRgNlZIxdiCMdJx0muchFjAxm3gXEO/i4i7NdBcOuLo
+YuzJ81PjKkZ2bf0EO6TgWDKZf8nXxLqhqtYd8JDzlRfrtoSdvorhiLR3hhOPgNsy
+Ecmz8ZyysTFWf+zeoKY2Rq5pbb9sU8oUcn3+CW4Ar7xRnBFHZZk4nHDl4RvN+15W
+a93i75sEh+LQPkPo6RcM6dmL0kdPOZ7rNAFRgGKwN5YD6NQJe4jexidB87RVNrmW
+RxVJUQ9g1VCIg9wpCCocnFg07NvjTetDBku9ea4l2RYc78ZaUGcSphR76+LXAwgb
+Q0k3WW73TJF2aQtqIJg4iev/GmRDjhZgXL+8lWHjeZEe1k6V0oFDHVAQXsKKWggN
+mBg/BCKPfWtYNaL4T4iEktdyCkOutjhqlzS0/QvkNNqOm2urcjAZzoyokBCxgk58
+mho42MEBXjb5tSIiq5tpyDJK7QVj+2p6zGtNVdsJNu5dICPc3mdU3EcUk2CvJgDZ
+FjN08o3beP77ExuuniQW
+=0Ke0
+-----END PGP SIGNATURE-----
+
+--huq684BweRXVnRxX--
+
+--===============6186895695690393622==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6186895695690393622==--

@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 887B485870
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Aug 2019 05:16:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E61F89782
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Aug 2019 09:08:12 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4FED6C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Aug 2019 03:16:47 +0000 (UTC)
-Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
- [209.85.219.194])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 27AEAC35E01
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Aug 2019 07:08:11 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 263A2C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40251C36B3F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Aug 2019 03:16:45 +0000 (UTC)
-Received: by mail-yb1-f194.google.com with SMTP id j199so33339611ybg.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 07 Aug 2019 20:16:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=GvxJOI2ibC2dXJErmHswXoXd5KY0nmOJlJ7dSPq+/W4=;
- b=mHqvuKgMWTcJcJK+UuMqnIg9YaboXLKJ4zKIsrMxVFiDtLqGdK9RJGA51+cupNWBfV
- 67U2sCWDvKKrCS5GWDoHlgmIDpJofZoAEiriCUXcpkK5oYxmKAQrmXR2OdWsCHw9/7I9
- JPq3Y4DePVZo5tyk+WXwfutstRV5XaR6SUY3I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=GvxJOI2ibC2dXJErmHswXoXd5KY0nmOJlJ7dSPq+/W4=;
- b=FX2sMNjFONW53orWBJMonVDz78erdMSR0IfJ4Fa+c6rOvukVPuCr4N7QWvpHSSWZRD
- uTqKlhQ3VplxZ5NspB1bnbkHYir+IpmFwIewrz+wWB0Kjse736OuA6stXHQAb+V3X3QV
- 3cshonQUW8f7rbVFBra2gcNYrInpvi2CSMEgYhZl4D4U0qlnoaLWm9e8JV2Lh+78kT1V
- YE7AgZZU94FgO6ZT/CELg73R0RebcMIMrImdn2Uen0UZYYRdLr+H2nYb0VQJqrLudkCU
- 8KqjevuHNa/6ohT47L9RyJvVfRHkSuOHeVC+qEFb8NvPmeg8fNJr8/TOGJRbFQVq+9Zp
- wxbA==
-X-Gm-Message-State: APjAAAVR9Itt/0/H6s1ZKHBtJ57RYuLzJt+aFcE4W8T1AoAHmah/k0xj
- sLqH85EUj+RuovDm4vYoWdJOWQ==
-X-Google-Smtp-Source: APXvYqz7NVkrwjGjLbWwb067/gqw7B2yabhu6z4RLca34xqua8qDW6ANc+EFYqMQTgDgXqAKFlDGLA==
-X-Received: by 2002:a25:d14c:: with SMTP id i73mr8629285ybg.367.1565234203906; 
- Wed, 07 Aug 2019 20:16:43 -0700 (PDT)
-Received: from bill-the-cat
- (cpe-2606-A000-1401-82DE-5CE2-C4E2-4F31-D572.dyn6.twc.com.
- [2606:a000:1401:82de:5ce2:c4e2:4f31:d572])
- by smtp.gmail.com with ESMTPSA id h5sm20839086ywa.6.2019.08.07.20.16.42
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 07 Aug 2019 20:16:42 -0700 (PDT)
-Date: Wed, 7 Aug 2019 23:16:40 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20190808031640.GE9594@bill-the-cat>
-References: <20190802125810.9808-1-patrice.chotard@st.com>
- <20190802125810.9808-3-patrice.chotard@st.com>
-MIME-Version: 1.0
-In-Reply-To: <20190802125810.9808-3-patrice.chotard@st.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 2/2] console: execute flush on
- uart when silent is removed
+ Mon, 12 Aug 2019 07:08:08 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 466Rks0sN3z1rKJN;
+ Mon, 12 Aug 2019 09:08:05 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 466Rkr3T8Dz1qqkT;
+ Mon, 12 Aug 2019 09:08:04 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id ToVnTrpOQL1d; Mon, 12 Aug 2019 09:08:01 +0200 (CEST)
+X-Auth-Info: zB97k0IKUQ3aNcC3eWrMDiiHrLDC+qOvvJx2s8UzJSE=
+Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
+ [85.222.111.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Mon, 12 Aug 2019 09:08:00 +0200 (CEST)
+From: Lukasz Majewski <lukma@denx.de>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>
+Date: Mon, 12 Aug 2019 09:07:43 +0200
+Message-Id: <20190812070748.7315-1-lukma@denx.de>
+X-Mailer: git-send-email 2.11.0
+Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
+ Mans Rullgard <mans@mansr.com>, Vignesh R <vigneshr@ti.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Pankit Garg <pankit.garg@nxp.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, Abel Vesa <abel.vesa@nxp.com>,
+ Sumit Garg <sumit.garg@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Vinitha V Pillai <vinitha.pillai@nxp.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Yinbo Zhu <yinbo.zhu@nxp.com>,
+ Heiko Schocher <hs@denx.de>, u-boot@lists.denx.de, Feng Li <feng.li_2@nxp.com>,
+ Rajesh Bhagat <rajesh.bhagat@nxp.com>, Alison Wang <alison.wang@nxp.com>,
+ Mian Yousaf Kaukab <ykaukab@suse.de>, Adam Ford <aford173@gmail.com>,
+ York Sun <york.sun@nxp.com>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Wen He <wen.he_1@nxp.com>, Masahiro Yamada <yamada.masahiro@socionext.com>,
+ "Andrew F. Davis" <afd@ti.com>,
+ Prabhakar Kushwaha <prabhakar.kushwaha@nxp.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>
+Subject: [Uboot-stm32] [PATCH v1 0/4] spi: Split CONFIG_DM_SPI* to
+	CONFIG_{SPL_TPL}DM_SPI*
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,78 +70,85 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1863482639846472932=="
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+This patch series introduces new SPL and TPL specific Kconfig entries for
+DM_SPI* options. Such change allows using the spi driver in SPL/TPL or
+U-Boot proper.
 
---===============1863482639846472932==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Dnvf+KcI+0MByPWJ"
-Content-Disposition: inline
+First two patches - related to ls10{42}* NXP soc fix some issues with
+defining the DM_SPI* defines in <board>.h file instead of Kconfig.
+
+This series doesn't introduce build breaks, but board maintainers are kindly
+asked to check if their boards still boots.
 
 
---Dnvf+KcI+0MByPWJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 02, 2019 at 02:58:10PM +0200, Patrice Chotard wrote:
+Lukasz Majewski (4):
+  kconfig: Update comment regarding CONFIG_IS_ENABLED(FOO) for TPL
+  spi: Move DM_SPI_FLASH to Kconfig (for NXP's ls1043a)
+  spi: Move DM_SPI_FLASH and SPI_FLASH_DATAFLASH to Kconfig (for
+    ls1021aXXX)
+  spi: Convert CONFIG_DM_SPI* to CONFIG_$(SPL_TPL_)DM_SPI*
 
-> From: Patrick Delaunay <patrick.delaunay@st.com>
->=20
-> Avoid to flush buffer when silent console is activated as the
-> console can be reactivate later, after relocation, when the env will
-> be updated with the saved one.
->=20
-> Solve issue (missing beginning of U-Boot trace) when:
-> - CONFIG_SILENT_CONSOLE is activated
-> - silent=3D1 is defined in default environment (CONFIG_EXTRA_ENV_SETTINGS)
-> - silent is removed in saved environment with:
->       > env delete silent; env save
->=20
-> Only functional when PRE_CONSOLE_BUFFER is activated.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+ arch/arm/Kconfig                            | 23 +++++++++++++++++++++--
+ board/l+g/vinco/vinco.c                     |  4 ++--
+ cmd/sf.c                                    |  4 ++--
+ cmd/spi.c                                   |  6 +++---
+ common/spl/Kconfig                          | 28 ++++++++++++++++++++++++++++
+ configs/am57xx_evm_defconfig                |  2 ++
+ configs/am57xx_hs_evm_defconfig             |  2 ++
+ configs/am57xx_hs_evm_usb_defconfig         |  2 ++
+ configs/axm_defconfig                       |  2 ++
+ configs/chromebook_link64_defconfig         |  2 ++
+ configs/chromebook_samus_tpl_defconfig      |  4 ++++
+ configs/dra7xx_evm_defconfig                |  2 ++
+ configs/dra7xx_hs_evm_defconfig             |  2 ++
+ configs/dra7xx_hs_evm_usb_defconfig         |  2 ++
+ configs/imx28_xea_defconfig                 |  2 ++
+ configs/j721e_evm_a72_defconfig             |  2 ++
+ configs/j721e_evm_r5_defconfig              |  2 ++
+ configs/ls1021aiot_qspi_defconfig           |  2 ++
+ configs/ls1021aiot_sdcard_defconfig         |  2 ++
+ configs/ls1021aqds_qspi_defconfig           |  1 +
+ configs/ls1021aqds_sdcard_qspi_defconfig    |  1 +
+ configs/ls1021atwr_qspi_defconfig           |  1 +
+ configs/sama5d2_xplained_spiflash_defconfig |  2 ++
+ configs/sama5d3xek_spiflash_defconfig       |  7 ++++---
+ configs/sama5d4_xplained_spiflash_defconfig |  2 ++
+ configs/sama5d4ek_spiflash_defconfig        |  2 ++
+ configs/stm32mp15_basic_defconfig           |  2 ++
+ configs/taurus_defconfig                    |  2 ++
+ drivers/mtd/spi/Makefile                    |  4 ++--
+ drivers/mtd/spi/sf_probe.c                  |  8 ++++----
+ drivers/net/fm/fm.c                         |  4 ++--
+ drivers/spi/Makefile                        |  2 +-
+ drivers/spi/atmel_spi.c                     |  4 ++--
+ drivers/spi/davinci_spi.c                   |  6 +++---
+ drivers/spi/fsl_dspi.c                      |  5 +++--
+ drivers/spi/kirkwood_spi.c                  |  2 +-
+ drivers/spi/mxc_spi.c                       |  6 +++---
+ drivers/spi/omap3_spi.c                     |  4 ++--
+ drivers/spi/sh_qspi.c                       |  4 ++--
+ env/sf.c                                    |  2 +-
+ include/configs/ls1021aiot.h                |  6 ------
+ include/configs/ls1021aqds.h                |  8 --------
+ include/configs/ls1021atwr.h                |  5 -----
+ include/configs/ls1043a_common.h            |  2 --
+ include/linux/kconfig.h                     |  2 ++
+ include/spi.h                               |  8 ++++----
+ include/spi_flash.h                         |  2 +-
+ test/dm/spi.c                               |  2 +-
+ 48 files changed, 137 insertions(+), 64 deletions(-)
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---Dnvf+KcI+0MByPWJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQIcBAEBAgAGBQJdS5QYAAoJEIf59jXTHXZSWVYP/0VetB/JFs/mTK7KJrFhCpQZ
-q3u9TR/Vxppk7fGZm4urcBHR9ttAQVn5A4jXZv13+VIogVxhgsisYJi1lEUG5fde
-AvBByZ5tIT+66EwT9AJvWwIb0+Tle8O20RzVcF0J+Hz9xnX4oONESLVP9f0OqB5E
-+u+QEbQ07vGui/FRj1958JEPibbB2Fhm9FtZlIXotcBkNhlBD35jwiVbVV1od7CS
-VRD7IgksjOYTSp7tg5ETIkWI/I+yFkA3wij2xjRUw6XB/EwxFHA/SAjzSgk7EACn
-3tEtlDBrjP+6yfnh7a8cvU2o9tbayMAmaDwQk7I8KJfQAyFD+n53nVHHIsCbZ39t
-aTds/aPRRBZLsuUE4cj29M/c3ADRPbt2zulXkMki7fokfpgAz1CprPqSfBkMcXI8
-CIgRLPiVwPbZ5uCqFaTEiSgiOSucTd3dS3XBJPV99FD62sQdgQ6HTkEisfycxk91
-y/cjt/XMDWOofqJQtdWwkmOESMJTfzo0hl9dR/xSH4RIwmlDQp0UwFH39zoC5vKY
-etIXCGaRf9hfZ4toHqM2j9afjsr7Z85vXXIqE6OFNSdBkrEpl8d53g9qQFFxfWbX
-42auzzhf//LSybKyl98BRfYxtTarWKez8dJHzMpoOw+pFAlcaGW2Bh6cjaBkiQ6m
-ddXYETL0bSSj6Qw1Kd+q
-=DO9Q
------END PGP SIGNATURE-----
-
---Dnvf+KcI+0MByPWJ--
-
---===============1863482639846472932==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.11.0
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1863482639846472932==--

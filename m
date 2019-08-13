@@ -2,61 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FF1E8B43C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Aug 2019 11:34:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B430B8BAB5
+	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Aug 2019 15:47:51 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6B389C35E02
-	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Aug 2019 09:34:41 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 66DD9C35E01
+	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Aug 2019 13:47:51 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB51BC35E02
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AC9E8C36B3F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Aug 2019 09:34:40 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id e12so25727084otp.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Aug 2019 02:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zNTrm8Zyd4TcmtsvHlEpgqbl6mVO86coLgxYwfszdJQ=;
- b=IqBXV1HnOg84ycVnQvGF9Hbyp3EtcfMeWfsRMoKQbGYgTcn9SNWApU4CCJuP5fzlJe
- FWM6mPrc1N8/C1TBirGlXd1+j3YWwNTC/lM8F98qEJK1l0rou/wyCx9AbiqsKDveZdZH
- RtFJMTN5Z6VHnENNa1iY6n2ZZ8bErrHFWRcSk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zNTrm8Zyd4TcmtsvHlEpgqbl6mVO86coLgxYwfszdJQ=;
- b=SJtZ5YiLf3v+yC/MNG5wLHetSgYYcj55Hmm54l0FAptpZixw0B+7oy+UuqlpXowKfO
- fwX9QNO0htdNTEkYtWXQ1xaticuqdV8EZzbjnjbUnfPF3di6UPK/Ytu8VmiJM37r5eSZ
- 36GomKvukcMuD9D0BUqrl+DCLB0/V/YROMzlNerMFf7RDqi1+U5EOYqgMP5Z+9p1Zz4m
- 7iaCjRH612ub/qWrphIK49/4IG2+yyHLr2fhOMomS4DFL4YbGD+zfcT1HS+WCjOd5ZRW
- iOBdGQ230qVFExcMC4wRYOjzYhU85/T6HSMoGqpVZ7YlY1KkyISnJnNcQPUxxcrwVecY
- pgfw==
-X-Gm-Message-State: APjAAAU/fOHJgjRKgQftYqXwyBExbqxBkib7f+oOdfDywjI5IraE/tEy
- Hs20mahPIE3uX8x6SzzVfLM0SxdimhBI5eZVrxMGgg==
-X-Google-Smtp-Source: APXvYqwA4bPM4mjEvnIkVCwaX4lRG9Xwefx+PYwmmVkJ2hxJDSUUvlK5yuPmsOzJ88nfknCcdJYQ2ivHwE5bPw2ZWOU=
-X-Received: by 2002:aca:be88:: with SMTP id o130mr812430oif.122.1565688878903; 
- Tue, 13 Aug 2019 02:34:38 -0700 (PDT)
-MIME-Version: 1.0
-References: <1564751242-683-1-git-send-email-patrick.delaunay@st.com>
- <1564751242-683-3-git-send-email-patrick.delaunay@st.com>
-In-Reply-To: <1564751242-683-3-git-send-email-patrick.delaunay@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Aug 2019 03:34:22 -0600
-Message-ID: <CAPnjgZ3cVQqcHYz_+xBDY-bzM-rS+xzEB5UHJbZ26ieEu54uug@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Ryder Lee <ryder.lee@mediatek.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Shawn Guo <shawn.guo@linaro.org>, Tien Fong Chee <tien.fong.chee@intel.com>,
- Fabien Dessenne <fabien.dessenne@st.com>,
- Alex Kiernan <alex.kiernan@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Julius Werner <jwerner@chromium.org>, Eugeniu Rosca <erosca@de.adit-jv.com>,
- Chris Packham <judge.packham@gmail.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 2/5] image: add new "copro" image type
+ Tue, 13 Aug 2019 13:47:49 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 467DYb1Ck9z1rFDY;
+ Tue, 13 Aug 2019 15:47:47 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 467DYZ4wwBz1qqkR;
+ Tue, 13 Aug 2019 15:47:46 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id xvOfcMvsmBir; Tue, 13 Aug 2019 15:47:43 +0200 (CEST)
+X-Auth-Info: qa6g0rkEdOAKhlqLGvvGOFGf27FRLfziHl+1jouj97k=
+Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
+ [85.222.111.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Tue, 13 Aug 2019 15:47:43 +0200 (CEST)
+From: Lukasz Majewski <lukma@denx.de>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>
+Date: Tue, 13 Aug 2019 15:47:27 +0200
+Message-Id: <20190813134731.25024-1-lukma@denx.de>
+X-Mailer: git-send-email 2.11.0
+Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
+ Vignesh R <vigneshr@ti.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Pankit Garg <pankit.garg@nxp.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>, Sumit Garg <sumit.garg@nxp.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
+ Yinbo Zhu <yinbo.zhu@nxp.com>, Heiko Schocher <hs@denx.de>,
+ u-boot@lists.denx.de, Feng Li <feng.li_2@nxp.com>,
+ Rajesh Bhagat <rajesh.bhagat@nxp.com>, Alison Wang <alison.wang@nxp.com>,
+ Mian Yousaf Kaukab <ykaukab@suse.de>, Adam Ford <aford173@gmail.com>,
+ York Sun <york.sun@nxp.com>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Wen He <wen.he_1@nxp.com>, Masahiro Yamada <yamada.masahiro@socionext.com>,
+ "Andrew F. Davis" <afd@ti.com>,
+ Prabhakar Kushwaha <prabhakar.kushwaha@nxp.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>
+Subject: [Uboot-stm32] [PATCH v2 0/4] spi: Split CONFIG_DM_SPI* to
+	CONFIG_{SPL_TPL}DM_SPI*
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,26 +69,86 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 2 Aug 2019 at 07:07, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Define new image type for coprocessor images.
-> It is used in FIT to identify the files loaded
-> with remoteproc command (elf or bin).
->
-> Signed-off-by: Loic Pallardy <loic.pallardy@st.com>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  common/image.c  | 1 +
->  include/image.h | 1 +
->  2 files changed, 2 insertions(+)
+This patch series introduces new SPL and TPL specific Kconfig entries for
+DM_SPI* options. Such change allows using the spi driver in SPL/TPL or
+U-Boot proper.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+First two patches - related to ls10{42}* NXP soc fix some issues with
+defining the DM_SPI* defines in <board>.h file instead of Kconfig.
+
+This series doesn't introduce build breaks, but board maintainers are kindly
+asked to check if their boards still boots.
+
+
+Changes in v2:
+- Resend patches with some not yet in mainline code removed as
+  suggested by Adam Ford
+
+Lukasz Majewski (4):
+  kconfig: doc: Update comment regarding CONFIG_IS_ENABLED(FOO) for TPL
+  spi: Move DM_SPI_FLASH to Kconfig (for NXP's ls1043a)
+  spi: Move DM_SPI_FLASH and SPI_FLASH_DATAFLASH to Kconfig (for
+    ls1021aXXX)
+  spi: Convert CONFIG_DM_SPI* to CONFIG_$(SPL_TPL_)DM_SPI*
+
+ arch/arm/Kconfig                            | 23 +++++++++++++++++++++--
+ board/l+g/vinco/vinco.c                     |  4 ++--
+ cmd/sf.c                                    |  4 ++--
+ cmd/spi.c                                   |  6 +++---
+ common/spl/Kconfig                          | 28 ++++++++++++++++++++++++++++
+ configs/am57xx_evm_defconfig                |  2 ++
+ configs/am57xx_hs_evm_defconfig             |  2 ++
+ configs/am57xx_hs_evm_usb_defconfig         |  2 ++
+ configs/axm_defconfig                       |  2 ++
+ configs/chromebook_link64_defconfig         |  2 ++
+ configs/chromebook_samus_tpl_defconfig      |  4 ++++
+ configs/dra7xx_evm_defconfig                |  2 ++
+ configs/dra7xx_hs_evm_defconfig             |  2 ++
+ configs/dra7xx_hs_evm_usb_defconfig         |  2 ++
+ configs/j721e_evm_a72_defconfig             |  2 ++
+ configs/j721e_evm_r5_defconfig              |  2 ++
+ configs/ls1021aiot_qspi_defconfig           |  2 ++
+ configs/ls1021aiot_sdcard_defconfig         |  2 ++
+ configs/ls1021aqds_qspi_defconfig           |  1 +
+ configs/ls1021aqds_sdcard_qspi_defconfig    |  1 +
+ configs/ls1021atwr_qspi_defconfig           |  1 +
+ configs/sama5d2_xplained_spiflash_defconfig |  2 ++
+ configs/sama5d3xek_spiflash_defconfig       |  7 ++++---
+ configs/sama5d4_xplained_spiflash_defconfig |  2 ++
+ configs/sama5d4ek_spiflash_defconfig        |  2 ++
+ configs/stm32mp15_basic_defconfig           |  2 ++
+ configs/taurus_defconfig                    |  2 ++
+ drivers/mtd/spi/Makefile                    |  4 ++--
+ drivers/mtd/spi/sf_probe.c                  |  8 ++++----
+ drivers/net/fm/fm.c                         |  4 ++--
+ drivers/spi/Makefile                        |  2 +-
+ drivers/spi/atmel_spi.c                     |  4 ++--
+ drivers/spi/davinci_spi.c                   |  6 +++---
+ drivers/spi/fsl_dspi.c                      |  5 +++--
+ drivers/spi/kirkwood_spi.c                  |  2 +-
+ drivers/spi/mxc_spi.c                       |  6 +++---
+ drivers/spi/omap3_spi.c                     |  4 ++--
+ drivers/spi/sh_qspi.c                       |  4 ++--
+ env/sf.c                                    |  2 +-
+ include/configs/ls1021aiot.h                |  6 ------
+ include/configs/ls1021aqds.h                |  8 --------
+ include/configs/ls1021atwr.h                |  5 -----
+ include/configs/ls1043a_common.h            |  2 --
+ include/linux/kconfig.h                     |  2 ++
+ include/spi.h                               |  8 ++++----
+ include/spi_flash.h                         |  2 +-
+ test/dm/spi.c                               |  2 +-
+ 47 files changed, 135 insertions(+), 64 deletions(-)
+
+-- 
+2.11.0
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

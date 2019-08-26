@@ -2,63 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6CC89CE94
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 13:50:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 262509D0FD
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 15:47:40 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2480CC36B3F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 11:50:59 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74742C36B3F
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 13:47:39 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 81705C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 747D4C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 26 Aug 2019 11:50:57 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Mon, 26 Aug 2019 13:47:37 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x7QBlCmC009093; Mon, 26 Aug 2019 13:50:49 +0200
+ x7QDlOgn018353; Mon, 26 Aug 2019 15:47:35 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=O5emuF/jtxboUrbFPZuDeAl4k+va/eAFfZl5Ss0aQy4=;
- b=hEAxsoGSMJO003F0253kyTGtUh5NPtPWZ+GZlF6yfIqOu0+xgF3jsSCApApf2dqk2m6W
- iCi79jipA/26QJC7hAYwetrDPQ68ilfSIj5HE/eJrebDDjRpPV3hAjPQAYRljtvTl1vP
- CqPthgBb7hxYFMgjXwkaHLUC2FJWyxrp1710FVGqn61iiRzuPQeFhcejHxbS2aXXad2H
- yZrgyFygK+xPzvtfzZMzVd98fDHeO7Y0cNTVb+5J2UgDlWTTRQYW0hddOWT8TRAaXTI8
- xQ2ccWPJ81AMynMz0b7Ga0vfmDt3+QrdaSWszmIfPMGRw6yVv911FvULwZqIapF4ExVd Ig== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=kCzk6OL4dQ+yqLISw6ASdLY1ivc32u0L819jHbX62fY=;
+ b=t/3BphIwyKWVouFE6fFeR5GSjVNnUDN7p5WYPkjzWbNLtE/AC6jcx2Zu8sDnUX7dOcXc
+ 2J+gQYd2zM0dijGgHz1JK9A72blXQnkJ3FgygCMFYY9i7YLuFPjnQFEVU33G8rX3tZAe
+ kOujNFEg+F449nTEsvfixUkDrc9S0qoZbdpH423z1tdmnjgZZJzoP94o9ixqJGpzFzXg
+ tgWG5rgToHWWq4HDIgbH2YyzK55isKTjZoFozzSrxzKBgwJ7O9F6fe4+PCJH7nt76pSe
+ 9/J+NhuVS+/tVdz42mrzP+rqVITwFIJQKudg0ag07HwESF9USzHiN5sUIdzbDdeIMrwf rQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2ujv4kkb2v-1
+ by mx08-00178001.pphosted.com with ESMTP id 2ujtcbc8kj-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Mon, 26 Aug 2019 13:50:49 +0200
+ Mon, 26 Aug 2019 15:47:34 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2CDC931;
- Mon, 26 Aug 2019 11:50:47 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 16D072DA0B8;
- Mon, 26 Aug 2019 13:50:47 +0200 (CEST)
-Received: from SAFEX1HUBCAS23.st.com (10.75.90.46) by Safex1hubcas22.st.com
- (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 26 Aug
- 2019 13:50:47 +0200
-Received: from localhost (10.201.23.73) by webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 26 Aug 2019 13:50:46
- +0200
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 26 Aug 2019 13:50:31 +0200
-Message-ID: <20190826115031.25099-1-patrice.chotard@st.com>
-X-Mailer: git-send-email 2.17.1
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 37A3231;
+ Mon, 26 Aug 2019 13:47:34 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1B3AD2220CA;
+ Mon, 26 Aug 2019 15:47:34 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 26 Aug
+ 2019 15:47:33 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 26 Aug 2019 15:47:33 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] mmc: stm32_sdmmc2: Increase SDMMC_BUSYD0END_TIMEOUT_US
+Thread-Index: AQHVQHGZLPzSLkKNDUuM/PE1+Yyrv6cNhzWA
+Date: Mon, 26 Aug 2019 13:47:33 +0000
+Message-ID: <b5433bd2-0372-b03c-7df0-957930587830@st.com>
+References: <20190722094110.7789-1-patrice.chotard@st.com>
+In-Reply-To: <20190722094110.7789-1-patrice.chotard@st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.45]
+Content-ID: <D733E3A9F1EDA64EB869BA823E58A075@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.201.23.73]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
- definitions=2019-08-26_06:, , signatures=0
-Cc: Christophe Kerello <christophe.kerello@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Lukasz
- Majewski <lukma@denx.de>, Jaehoon Chung <jh80.chung@samsung.com>,
- Sven Schwermer <sven@svenschwermer.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH v2] regulator: fixed: Modify
-	enable-active-high behavior
+ definitions=2019-08-26_07:, , signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Peng Fan <peng.fan@nxp.com>, Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] mmc: stm32_sdmmc2: Increase
+	SDMMC_BUSYD0END_TIMEOUT_US
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,50 +84,129 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Regulator should not be enabled at probe time if regulator-boot-on
-property is not in the dt node.
 
-"enable-active-high" property is only used to indicate the GPIO
-polarity.
+On 7/22/19 11:41 AM, Patrice Chotard wrote:
+> Increase SDMMC_BUSYD0END_TIMEOUT_US from 1s to 2s to
+> avoid timeout error during blocks erase on some sdcard
+>
+> Issue seen on Kingston 16GB :
+>   Device: STM32 SDMMC2
+>   Manufacturer ID: 27
+>   OEM: 5048
+>   Name: SD16G
+>   Bus Speed: 50000000
+>   Mode: SD High Speed (50MHz)
+>   card capabilities: widths [4, 1] modes [SD Legacy, SD High Speed (50MHz)]
+>   host capabilities: widths [4, 1] modes [MMC legacy, SD Legacy, MMC High Speed (26MHz), SD High Speed (50MHz), MMC High Speed (52MHz)]
+>   Rd Block Len: 512
+>   SD version 3.0
+>   High Capacity: Yes
+>   Capacity: 14.5 GiB
+>   Bus Width: 4-bit
+>   Erase Group Size: 512 Bytes
+>
+> Issue reproduced with following command:
+>
+> STM32MP> mmc erase 0 100000
+>
+> MMC erase: dev # 0, block # 0, count 1048576 ... mmc erase failed
+> 16384 blocks erased: ERROR
+>
+> By by setting SDMMC_BUSYD0END_TIMEOUT_US at 2 seconds and by adding
+> time measurement in stm32_sdmmc2_end_cmd() as shown below:
+>
+> 	+start = get_timer(0);
+> 	/* Polling status register */
+> 	ret = readl_poll_timeout(priv->base + SDMMC_STA,
+> 				 status, status & mask,
+>  				 SDMMC_BUSYD0END_TIMEOUT_US);
+>
+> 	+printf("time = %ld ms\n", get_timer(start));
+>
+> We get the following trace:
+>
+> STM32MP> mmc erase 0  100000
+>
+> MMC erase: dev # 0, block # 0, count 1048576 ...
+> time = 17 ms
+> time = 1 ms
+> time = 1025 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1021 ms
+> time = 57 ms
+> time = 56 ms
+> time = 1020 ms
+> time = 53 ms
+> time = 57 ms
+> time = 1021 ms
+> time = 53 ms
+> time = 57 ms
+> time = 1313 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1026 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1036 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1028 ms
+> time = 53 ms
+> time = 56 ms
+> time = 1027 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1024 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1020 ms
+> time = 54 ms
+> time = 57 ms
+> time = 1023 ms
+> time = 54 ms
+> time = 56 ms
+> time = 1033 ms
+> time = 53 ms
+> time = 57 ms
+> ....
+> time = 53 ms
+> time = 57 ms
+> time = 1021 ms
+> time = 56 ms
+> time = 56 ms
+> time = 1026 ms
+> time = 54 ms
+> time = 56 ms
+> 1048576 blocks erased: OK
+>
+> We see that 1 second timeout is not enough, we also see one measurement
+> up to 1313 ms. Set the timeout to 2 second to keep a security margin.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> ---
+>
+>  drivers/mmc/stm32_sdmmc2.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> index 867ed569eb..0ade1b160e 100644
+> --- a/drivers/mmc/stm32_sdmmc2.c
+> +++ b/drivers/mmc/stm32_sdmmc2.c
+> @@ -190,7 +190,7 @@ struct stm32_sdmmc2_ctx {
+>  #define SDMMC_IDMACTRL_IDMAEN		BIT(0)
+>  
+>  #define SDMMC_CMD_TIMEOUT		0xFFFFFFFF
+> -#define SDMMC_BUSYD0END_TIMEOUT_US	1000000
+> +#define SDMMC_BUSYD0END_TIMEOUT_US	2000000
+>  
+>  static void stm32_sdmmc2_start_data(struct stm32_sdmmc2_priv *priv,
+>  				    struct mmc_data *data,
 
-See kernel documentation :
- - Documentation/devicetree/bindings/regulator/fixed-regulator.yaml
- - Documentation/devicetree/bindings/regulator/gpio-regulator.yaml
 
-Signed-off-by: Christophe Kerello <christophe.kerello@st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
----
+Applied on STM32 tree
 
-Changes in v2:
-  - fix build issue
-
- drivers/power/regulator/regulator_common.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-index 3dabbe2a85..2041086567 100644
---- a/drivers/power/regulator/regulator_common.c
-+++ b/drivers/power/regulator/regulator_common.c
-@@ -12,10 +12,15 @@ int regulator_common_ofdata_to_platdata(struct udevice *dev,
- 	struct regulator_common_platdata *dev_pdata, const char *enable_gpio_name)
- {
- 	struct gpio_desc *gpio;
-+	struct dm_regulator_uclass_platdata *uc_pdata;
- 	int flags = GPIOD_IS_OUT;
- 	int ret;
- 
--	if (dev_read_bool(dev, "enable-active-high"))
-+	uc_pdata = dev_get_uclass_platdata(dev);
-+
-+	if (!dev_read_bool(dev, "enable-active-high"))
-+		flags |= GPIOD_ACTIVE_LOW;
-+	if (uc_pdata->boot_on)
- 		flags |= GPIOD_IS_OUT_ACTIVE;
- 
- 	/* Get optional enable GPIO desc */
--- 
-2.17.1
-
+Thanks
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

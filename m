@@ -2,55 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 011AB9D107
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 15:48:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 876159D119
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 15:51:58 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AE698C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 13:48:54 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E244FC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Aug 2019 13:51:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 26F4DC36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ACDF4C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 26 Aug 2019 13:48:53 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
- x7QDlEvj018145; Mon, 26 Aug 2019 15:48:51 +0200
+ Mon, 26 Aug 2019 13:51:56 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x7QDp38W019926; Mon, 26 Aug 2019 15:51:55 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=XNYMXn+8R4DJupILLt/9iAyG1LkYPu6T0tnBEpYlQRE=;
- b=dz1krGcJn3YTqwM7sEYqXo4jCRdXn4yFteTmZ+uzWJ8XvkdDcjofxh+tTLYapgtrfTe1
- IBS26lZXuW4+cHbbXv0uuTdJ1ASW/LAh4yBH0FjqKolfoxPS9KhGd7vzYPZuke06U+gC
- Z2149H1z/MgF7WgzHrGxoiedLzeBLu6AsvjzI3YGeEpOBHEh2uwuNZyv3sX/6pYoFk2H
- +78KDUp4m6bK1XIdm653gXMDIzxSlRghulVn43cIVTn8/g4ac/BbRfP4QRXeErAVOqDH
- ThKcpzrZT3yInAI9FG+wdoKsVPgFxqc7/9isr6YrsvA/YEnh1vXpyeO/rRIM+PiqLM++ 7Q== 
+ bh=3XFUyQry73p1K+sx/WpcKLlAqy5p6/PED1NbidIAzdY=;
+ b=Mf8Kgn6N9CcFjn+mK6M6q5+boOQrRPkhnMbwhiDT2SI/cJHWnGv3Yn8d2r52uId2ZHzw
+ XqwYRrZIYYKfYGYc8hhv4YBE9Y9HjSE2nkYU2QeV13YO0HRffbI7DXTFDkew6N/Ya28X
+ 1XgpgFenF9fl8EJfBW4fw2Cp31BAQIT3MrmHnU0RtVmXr8Es+OwjdrF/RQo9mukieZBY
+ oawihY647wJZzO4sBnc8mFxf0YUM4832VO02ovtvkwyAdvcrNARvQtPlN1inIvak4FDK
+ JChHW67Afu3dLXwGSkpzaDjXxdl8fCPwUe2bMQM5N4nrIeICBGSsSZHCAXT5hskrsebq sw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2ujtcbc8rf-1
+ by mx07-00178001.pphosted.com with ESMTP id 2ujtq14387-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Mon, 26 Aug 2019 15:48:51 +0200
+ Mon, 26 Aug 2019 15:51:55 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 900E13D;
- Mon, 26 Aug 2019 13:48:50 +0000 (GMT)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F2A2138;
+ Mon, 26 Aug 2019 13:51:54 +0000 (GMT)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 861162220D0;
- Mon, 26 Aug 2019 15:48:50 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EAD572220F9;
+ Mon, 26 Aug 2019 15:51:54 +0200 (CEST)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
  (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 26 Aug
- 2019 15:48:50 +0200
+ 2019 15:51:54 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 26 Aug 2019 15:48:50 +0200
+ 15.00.1473.003; Mon, 26 Aug 2019 15:51:54 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH v2] mmc: sti_sdhci: Fix sdhci_setup_cfg() call.
-Thread-Index: AQHVQfSNpEbBbX6G1ECocJKZVQ9S3KcNhImA
-Date: Mon, 26 Aug 2019 13:48:50 +0000
-Message-ID: <09ab2a9f-20cd-ba4e-3c7e-0e8a8ea73096@st.com>
-References: <20190724075102.26679-1-patrice.chotard@st.com>
-In-Reply-To: <20190724075102.26679-1-patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [U-Boot] [PATCH] rtc: stm32: manage 2 digit limitation on year
+Thread-Index: AQHVQLYs6i9TTEGzi0iUU6qKcs5nIKcNh+MA
+Date: Mon, 26 Aug 2019 13:51:54 +0000
+Message-ID: <5da9c50c-6899-b550-6b47-2ef1aad73c6c@st.com>
+References: <1563799821-25922-1-git-send-email-patrick.delaunay@st.com>
+In-Reply-To: <1563799821-25922-1-git-send-email-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -59,15 +60,14 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
-Content-ID: <B3915AC70E69704EB1DF4BC52ED5C3C5@st.com>
+x-originating-ip: [10.75.127.44]
+Content-ID: <7348FA2A6E8827409ADFA7168B8FDCA2@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:, ,
  definitions=2019-08-26_07:, , signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Peng Fan <peng.fan@nxp.com>, Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] mmc: sti_sdhci: Fix sdhci_setup_cfg()
-	call.
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] rtc: stm32: manage 2 digit
+	limitation on year
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,46 +85,55 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 7/24/19 9:51 AM, Patrice Chotard wrote:
-> host->mmc, host->mmc->dev and host->mmc->priv must be set
-> before calling sdhci_setup_cfg() to avoid hang during mmc
-> initialization.
+On 7/22/19 2:50 PM, Patrick Delaunay wrote:
+> STM32 RTC manages only 2 digits for YEAR
+> (Year tens and units in BCD format in RTC_DR register).
 >
-> Thanks to commit 3d296365e4e8
-> ("mmc: sdhci: Add support for sdhci-caps-mask") which put
-> this issue into evidence.
+> With this patch, RTC driver assumes that tm->tm_years is between
+> 2000 and 2099; tm->tm_year - 2000 have only 2 digit
+> (0 > and <= 99).
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
-> Changes in v2:
->   - move host->mmc->priv initialization before sdhci_setup_cfg() call
+>  drivers/rtc/stm32_rtc.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
->  drivers/mmc/sti_sdhci.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/mmc/sti_sdhci.c b/drivers/mmc/sti_sdhci.c
-> index 8ed47e113d..d6c75ea601 100644
-> --- a/drivers/mmc/sti_sdhci.c
-> +++ b/drivers/mmc/sti_sdhci.c
-> @@ -97,14 +97,14 @@ static int sti_sdhci_probe(struct udevice *dev)
->  		       SDHCI_QUIRK_NO_HISPD_BIT;
+> diff --git a/drivers/rtc/stm32_rtc.c b/drivers/rtc/stm32_rtc.c
+> index abd3390..2674714 100644
+> --- a/drivers/rtc/stm32_rtc.c
+> +++ b/drivers/rtc/stm32_rtc.c
+> @@ -72,7 +72,8 @@ static int stm32_rtc_get(struct udevice *dev, struct rtc_time *tm)
 >  
->  	host->host_caps = MMC_MODE_DDR_52MHz;
-> +	host->mmc = &plat->mmc;
-> +	host->mmc->dev = dev;
-> +	host->mmc->priv = host;
+>  	tm->tm_mday = bcd2bin((dr & STM32_RTC_DATE) >> STM32_RTC_DATE_SHIFT);
+>  	tm->tm_mon = bcd2bin((dr & STM32_RTC_MONTH) >> STM32_RTC_MONTH_SHIFT);
+> -	tm->tm_year = bcd2bin((dr & STM32_RTC_YEAR) >> STM32_RTC_YEAR_SHIFT);
+> +	tm->tm_year = 2000 +
+> +		      bcd2bin((dr & STM32_RTC_YEAR) >> STM32_RTC_YEAR_SHIFT);
+>  	tm->tm_wday = bcd2bin((dr & STM32_RTC_WDAY) >> STM32_RTC_WDAY_SHIFT);
+>  	tm->tm_yday = 0;
+>  	tm->tm_isdst = 0;
+> @@ -174,6 +175,9 @@ static int stm32_rtc_set(struct udevice *dev, const struct rtc_time *tm)
+>  		tm->tm_year, tm->tm_mon, tm->tm_mday, tm->tm_wday,
+>  		tm->tm_hour, tm->tm_min, tm->tm_sec);
 >  
->  	ret = sdhci_setup_cfg(&plat->cfg, host, 50000000, 400000);
->  	if (ret)
->  		return ret;
+> +	if (tm->tm_year < 2000 || tm->tm_year > 2099)
+> +		return -EINVAL;
+> +
+>  	/* Time in BCD format */
+>  	t = (bin2bcd(tm->tm_sec) << STM32_RTC_SEC_SHIFT) & STM32_RTC_SEC;
+>  	t |= (bin2bcd(tm->tm_min) << STM32_RTC_MIN_SHIFT) & STM32_RTC_MIN;
+> @@ -182,7 +186,8 @@ static int stm32_rtc_set(struct udevice *dev, const struct rtc_time *tm)
+>  	/* Date in BCD format */
+>  	d = (bin2bcd(tm->tm_mday) << STM32_RTC_DATE_SHIFT) & STM32_RTC_DATE;
+>  	d |= (bin2bcd(tm->tm_mon) << STM32_RTC_MONTH_SHIFT) & STM32_RTC_MONTH;
+> -	d |= (bin2bcd(tm->tm_year) << STM32_RTC_YEAR_SHIFT) & STM32_RTC_YEAR;
+> +	d |= (bin2bcd(tm->tm_year - 2000) << STM32_RTC_YEAR_SHIFT) &
+> +	      STM32_RTC_YEAR;
+>  	d |= (bin2bcd(tm->tm_wday) << STM32_RTC_WDAY_SHIFT) & STM32_RTC_WDAY;
 >  
-> -	host->mmc = &plat->mmc;
-> -	host->mmc->priv = host;
-> -	host->mmc->dev = dev;
->  	upriv->mmc = host->mmc;
->  
->  	return sdhci_probe(dev);
+>  	return stm32_rtc_set_time(dev, t, d);
+
 
 
 Applied on STM32 tree

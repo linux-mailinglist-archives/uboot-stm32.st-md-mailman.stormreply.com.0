@@ -2,77 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56741AFE22
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Sep 2019 15:54:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15337B0A25
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Sep 2019 10:22:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E0E40C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Sep 2019 13:54:33 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 96FACC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Sep 2019 08:22:34 +0000 (UTC)
+Received: from skedge03.snt-world.com (skedge03.snt-world.com [91.208.41.68])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 823D8C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2D793C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Sep 2019 13:54:31 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x8BDpUIN032125; Wed, 11 Sep 2019 15:54:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=6hl88Vc+jjr3PeNIzq4+EVQgB5YlU2BYRD3diaG63sk=;
- b=YTmz4EK+hnL2Hi71lBQc/WmmPyuYMRMd7UFSjbKJL2e8Gu4CHWqHcxa16DUcyJS2W6Ye
- jzb61OKJHaNFC7iFGvbZqvqZ7Yf1bXSNV7DXMnPaKOSzf+T9mVzlEUxq9u21YzUohIuV
- KxAMfrzYdpHKw83I9fTTSDGjj7nBAb503OGCEVC/nA9wPwaAJCnLQITZmJbmQUw9ibl0
- o6V+h3yk4cD5i5eIHZKZbaJJn1WndmPbVIzQo4XmzYScebcWHD8aZJJzq2ZxXxxTr9ML
- /ThVIjOEnapopRqgj9gAtsbWlkQavMaEJnam/HbfXsZQpS0My8swR3I2IHO7JF/mc8T9 LQ== 
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx08-00178001.pphosted.com with ESMTP id 2uv1paktvp-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Wed, 11 Sep 2019 15:54:22 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CB91C24;
- Wed, 11 Sep 2019 13:54:17 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 903FF2C7F3C;
- Wed, 11 Sep 2019 15:54:16 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 11 Sep
- 2019 15:54:16 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 11 Sep 2019 15:54:16 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Wolfgang Denk <wd@denx.de>
-Thread-Topic: [U-Boot] [PATCH] env: Add CONFIG_ENV_SUPPORT
-Thread-Index: AQHVYnpO9RDl78dH/0CQ7vwuqVbTS6cf/seAgASvGzCAAFXLgIABhDag
-Date: Wed, 11 Sep 2019 13:54:16 +0000
-Message-ID: <53ab8aba443a44e5802c0a2fb48add89@SFHDAG6NODE3.st.com>
-References: <1567530547-14331-1-git-send-email-patrick.delaunay@st.com>
- <20190907115149.42B2624009F@gemini.denx.de>
- <9c7801afb8c94c638933cf33746ae300@SFHDAG6NODE3.st.com>
- <20190910163039.984F9240039@gemini.denx.de>
-In-Reply-To: <20190910163039.984F9240039@gemini.denx.de>
-Accept-Language: fr-FR, en-US
+ Thu, 12 Sep 2019 08:22:32 +0000 (UTC)
+Received: from sntmail11s.snt-is.com (unknown [10.203.32.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by skedge03.snt-world.com (Postfix) with ESMTPS id 1263863EC6D;
+ Thu, 12 Sep 2019 10:22:31 +0200 (CEST)
+Received: from sntmail12r.snt-is.com (10.203.32.182) by sntmail11s.snt-is.com
+ (10.203.32.181) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5; Thu, 12 Sep
+ 2019 10:22:30 +0200
+Received: from sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305]) by
+ sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305%3]) with mapi id
+ 15.01.1713.004; Thu, 12 Sep 2019 10:22:30 +0200
+From: Schrempf Frieder <frieder.schrempf@kontron.de>
+To: Lukasz Majewski <lukma@denx.de>
+Thread-Topic: [U-Boot] [PATCH v3 0/3] spi: Split CONFIG_DM_SPI* to
+ CONFIG_{SPL_TPL}DM_SPI*
+Thread-Index: AQHVZBUYRxTl92hEQkyjZMEzXHVzD6cjFQ8AgAANjQCAAXblAIADAzyA
+Date: Thu, 12 Sep 2019 08:22:30 +0000
+Message-ID: <91c1e945-1c66-9349-5b2c-253ea0dd8144@kontron.de>
+References: <20190904221639.26469-1-lukma@denx.de>
+ <20190905180904.GA26850@bill-the-cat>
+ <e5d7e314-3cf9-687a-d638-19ebaef6279b@kontron.de>
+ <20190909140020.5099a79f@jawa> <20190910122208.6565be76@jawa>
+In-Reply-To: <20190910122208.6565be76@jawa>
+Accept-Language: de-DE, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.47]
+x-originating-ip: [172.25.9.193]
+x-c2processedorg: 51b406b7-48a2-4d03-b652-521f56ac89f3
+Content-ID: <E0106028186C164D8F7B8B8C412BE89D@snt-world.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.70,1.0.8
- definitions=2019-09-11_08:2019-09-11,2019-09-11 signatures=0
-Cc: Hamish Guthrie <hamish.guthrie@kistler.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Eugeniu
- Rosca <roscaeugeniu@gmail.com>, Michal Simek <michal.simek@xilinx.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] env: Add CONFIG_ENV_SUPPORT
+X-SnT-MailScanner-Information: Please contact the ISP for more information
+X-SnT-MailScanner-ID: 1263863EC6D.A35E0
+X-SnT-MailScanner: Not scanned: please contact your Internet E-Mail Service
+ Provider for details
+X-SnT-MailScanner-SpamCheck: 
+X-SnT-MailScanner-From: frieder.schrempf@kontron.de
+X-SnT-MailScanner-To: alison.wang@nxp.com, feng.li_2@nxp.com,
+ joe.hershberger@ni.com, lukma@denx.de, pankit.garg@nxp.com,
+ sr@denx.de, sumit.garg@nxp.com, tien.fong.chee@intel.com,
+ trini@konsulko.com, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, vinitha.pillai@nxp.com,
+ xypron.glpk@gmx.de, yinbo.zhu@nxp.com, york.sun@nxp.com
+X-Spam-Status: No
+Cc: Feng Li <feng.li_2@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Tien Fong Chee <tien.fong.chee@intel.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Sumit
+ Garg <sumit.garg@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Alison
+ Wang <alison.wang@nxp.com>, Pankit Garg <pankit.garg@nxp.com>, Vinitha V
+ Pillai <vinitha.pillai@nxp.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Yinbo Zhu <yinbo.zhu@nxp.com>,
+ Stefan Roese <sr@denx.de>, York Sun <york.sun@nxp.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v3 0/3] spi: Split CONFIG_DM_SPI*
+ to CONFIG_{SPL_TPL}DM_SPI*
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,71 +85,97 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Wolfgang an Tom,
+Hi Lukasz,
 
+On 10.09.19 12:22, Lukasz Majewski wrote:
+> Hi Frieder,
 > 
-> Dear Patrick,
+>> On Mon, 9 Sep 2019 11:11:50 +0000
+>> Schrempf Frieder <frieder.schrempf@kontron.de> wrote:
+>>
+>>> Hi Lukasz,
+>>>
+>>> On 05.09.19 20:09, Tom Rini wrote:
+>>>> On Thu, Sep 05, 2019 at 12:16:36AM +0200, Lukasz Majewski wrote:
+>>>>    
+>>>>> This patch series introduces new SPL and TPL specific Kconfig
+>>>>> entries for DM_SPI* options. Such change allows using the spi
+>>>>> driver in SPL/TPL or U-Boot proper.
+>>>>>
+>>>>> First two patches - related to ls10{42}* NXP soc fix some issues
+>>>>> with defining the DM_SPI* defines in <board>.h file instead of
+>>>>> Kconfig.
+>>>>>
+>>>>> This series doesn't introduce build breaks, but board maintainers
+>>>>> are kindly asked to check if their boards still boots.
+>>>>>
+>>>>> Buildman setup for binary size regression checking:
+>>>>>
+>>>>> ./tools/buildman/buildman.py -b HEAD --count=4 ls1043
+>>>>> --output-dir=../BUILD/ --force-build -CveE
+>>>>> ./tools/buildman/buildman.py -b HEAD --count=4 ls1043
+>>>>> --output-dir=../BUILD/ -Ssdel
+>>>>
+>>>> So you did fix the ls1043 problems but ls1046 is still a problem.
+>>>>     
+>>>
+>>> I was trying to clean up this config mess some weeks ago. I
+>>> stumbled over the same issues (size deltas below) when I tested
+>>> with buildman and finally gave up on it. This was my testing branch
+>>> for reference: [1].
+>>>
+>>> Thanks for your work and I hope you/we can get this sorted out
+>>> somehow...
+>>
+>> For now I've only posted the patch to introduce SPL_DM_SPI in Kconig:
+>> https://patchwork.ozlabs.org/patch/1159655/
 > 
-> In message <9c7801afb8c94c638933cf33746ae300@SFHDAG6NODE3.st.com>
-> you wrote:
-> >
-> > And I agree the name seens not perfect.
-> >
-> > > > - CONFIG_SPL_ENV_SUPPORT for SPL
-> > > > - CONFIG_TPL_ENV_SUPPORT for TPL
-> >
-> > These pre-existing name are defined in common/spl/Kconfig
-> >
-> > With the same issue (env/common.o env/env.o are always compiled for
-> > SPL/TPL so it is alo bad names)
+> However, I've looked on your patchset and IMHO this work could be
+> divided (as doing it at once is not feasible).
 > 
-> Correct.
+> For example the CONFIG_SPI_FLASH_MTD could be converted to
+> (SPL_TPL_)SPI_FLASH_MTD and then one could use
 > 
-> > > So please reconsider this whole implementation, and make sure that
-> > > only a single macro ise used everywhere to enable these features.
-> >
-> > But, if I use the same CONFIG for the 3 binary SPL,TPL and U-Boot, l
-> > increase the size of TPL/SPL for all the platforms when these
-> > additional features are not needed.
+> #if CONFIG_IS_ENABLED(SPI_FLASH_MTD) in drivers/mtd/spi/sf_probe.c (as
+> it is only used there).
 > 
-> Either the U-Boot environment makes use of these features, then they have to be
-> enabled, and exactly the same way in SPL, TPL and U-Boot proper.  Or you don't
-> need them, then they can be disabled, but again in a consistent way in SPL, TPL,
-> and U-Boot proper.
+> Then we could avoid situations where code is added as you remove it
+> here [1]:
+> https://github.com/fschrempf/u-boot/commit/b6489fb5928c2b41d7e4cb39933f078659b4f10e#diff-9d3e174d033b8b9c9d380a22a81600aaL136
 > 
-> It is not acceptable to have for example .flags support in U-Boot, but not is SPL.
-> If you cannot affort the size in SPL (and need environment there at all), then you
-> cannot have it in U-Boot either.
-> Yes, this is sad, but anything else would break the implementation of these
-> features, and given that they are often used to implement some level of protection
-> or security, introduce massive security issues.
-> 
-> 
-> So if SPL size is critical, you can try do not access the environment at all and omit
-> _all_ of the environment code there; or you can try to arrange for a read-only
-> implementation (omitting at least the code needed for "env save" including write
-> routines to storage).  But you CANNOT omit the extensions if these are present in
-> U-Boot proper.
+> What I'm afraid though, is that split of SPI_FLASH_MTD will require
+> adding unwillingly SPL_(TPL_)SPI_FLASH_MTD to all boards which already
+> define it (and only drop ones, which use in <config>.h file pattern as
+> [1]).
 
-I am working on a update of the first proposal and I will delivered it in 2 step:
+Yes, this looks like what I've tried to do separately in this branch [1].
 
-1- a  simple patch to solve the regression
-    (to have short term solution  / integration in master as requested by Tom)
+The problem with some socfpga boards is, that they enable 
+CONFIG_SPI_FLASH_MTD in socfpga_common.h, without enabling 
+CONFIG_SPI_FLASH, which is probably wrong. So I tried to correct this, 
+but looking at it again, this should be done separately.
 
-2- introduction of CONFGI_ENV_FULL_SUPPORT
-	=> compilation of attr / flags / callback for TPL/SPL/U-boot
-	=> feature can't be remove in SPL/TPL independently 
-	As proposed by Wolfgang
+So if I remove the added "CONFIG_SPI_FLASH=y" from my patches and 
+rebase, this should be ok.
 
+For this set I have still one question: Should I split the patches as 
+currently done in [1]? This would mean after the first patch some boards 
+miss SPI_FLASH_MTD code and the subsequent board config patches correct 
+it afterwards. Or should I merge all the changes to a single patch, to 
+not break the boards in between.
+Unfortunately I can't do it the other way round and apply the board 
+config changes first, as this breaks the build.
 
-> Best regards,
-> 
-> Wolfgang Denk
-> 
+> Frieder, would you be able to work on this topic any time soon?
 
-Regards
+I can try to find some time this weekend and try to get [1] ready. But I 
+probably won't be able to spend serious amounts of time anytime soon on 
+the remaining tasks.
 
-Patrick
+Thanks,
+Frieder
+
+[1]: https://github.com/fschrempf/u-boot/commits/spi_flash_mtd_cleanup
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,62 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33E71B21C6
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 16:19:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1AA7B2892
+	for <lists+uboot-stm32@lfdr.de>; Sat, 14 Sep 2019 00:43:47 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 020E9C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 14:19:57 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DFE2DC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 22:43:46 +0000 (UTC)
+Received: from skedge03.snt-world.com (skedge03.snt-world.com [91.208.41.68])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF99EC36B3F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C70FCC36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 13 Sep 2019 14:19:55 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x8DEGToR026073; Fri, 13 Sep 2019 16:19:55 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=XXdh2aitQFG7mrjgrzzcl7d3pbsVKDvJ+3vinOClhOQ=;
- b=Yj9a/KVs/cpKXi4uoMziLn7CfldTN+eNn+ss81O3WCeeq9MMXaNDZKBUZzea2YCPSehj
- I6FdSnB5MnJytrKs0e212sFP+9Zpdf9dE9i8XE+bDQW9NuWzgfaYS8OMTQuxodIaUz1L
- OlgFhsd53CGHYLyDu8Pa1dGJUBVawKYgBsmBjeHb0Kxr8AWx7YDiSCkDCSuTsR3I4nkc
- dL3LV3dLHMbEn9iwnl7DbtED+eHwcaKkNNvlg2TSUQcA33hW+O2SVRGMHiL2czw93gYn
- lcHtFQ2/fhrf9pK/njAOFjV5VLG8qfIc+u4wp4Cvjn57FrsbaPsx6+C9EbBkQ5tqwjgq ZA== 
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com with ESMTP id 2uytdxdde2-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 13 Sep 2019 16:19:55 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0630B55;
- Fri, 13 Sep 2019 14:19:52 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E16A72C7F46;
- Fri, 13 Sep 2019 16:19:50 +0200 (CEST)
-Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep
- 2019 16:19:51 +0200
-Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep 2019 16:19:49
- +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 13 Sep 2019 16:19:30 +0200
-Message-ID: <20190913141930.15784-15-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190913141930.15784-2-patrick.delaunay@st.com>
-References: <20190913141930.15784-2-patrick.delaunay@st.com>
+ Fri, 13 Sep 2019 22:43:44 +0000 (UTC)
+Received: from sntmail11s.snt-is.com (unknown [10.203.32.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by skedge03.snt-world.com (Postfix) with ESMTPS id D54FE67A887;
+ Sat, 14 Sep 2019 00:43:43 +0200 (CEST)
+Received: from sntmail12r.snt-is.com (10.203.32.182) by sntmail11s.snt-is.com
+ (10.203.32.181) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5; Sat, 14 Sep
+ 2019 00:43:43 +0200
+Received: from sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305]) by
+ sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305%3]) with mapi id
+ 15.01.1713.004; Sat, 14 Sep 2019 00:43:43 +0200
+From: Schrempf Frieder <frieder.schrempf@kontron.de>
+To: "lukma@denx.de" <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
+Thread-Topic: [PATCH 2/3] stm32mp1: configs: Add CONFIG_SPL_SPI_FLASH_MTD
+Thread-Index: AQHVaoSy12LfEaTQNUKdlZQmpgzfaA==
+Date: Fri, 13 Sep 2019 22:43:43 +0000
+Message-ID: <20190913224242.21054-2-frieder.schrempf@kontron.de>
+References: <20190913224242.21054-1-frieder.schrempf@kontron.de>
+In-Reply-To: <20190913224242.21054-1-frieder.schrempf@kontron.de>
+Accept-Language: de-DE, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: git-send-email 2.17.1
+x-originating-ip: [172.25.9.193]
+x-c2processedorg: 51b406b7-48a2-4d03-b652-521f56ac89f3
 MIME-Version: 1.0
-X-Originating-IP: [10.201.21.107]
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.70,1.0.8
- definitions=2019-09-13_07:2019-09-11,2019-09-13 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 14/14] stm32mp1: add support for virtual
-	partition read
+X-SnT-MailScanner-Information: Please contact the ISP for more information
+X-SnT-MailScanner-ID: D54FE67A887.AE62B
+X-SnT-MailScanner: Not scanned: please contact your Internet E-Mail Service
+ Provider for details
+X-SnT-MailScanner-SpamCheck: 
+X-SnT-MailScanner-From: frieder.schrempf@kontron.de
+X-SnT-MailScanner-To: lukma@denx.de, patrick.delaunay@st.com,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+X-Spam-Status: No
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Schrempf Frieder <frieder.schrempf@kontron.de>
+Subject: [Uboot-stm32] [PATCH 2/3] stm32mp1: configs: Add
+	CONFIG_SPL_SPI_FLASH_MTD
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,155 +72,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add read for OTP and PMIC NVM with alternates
-on virtual DFU device.
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Serie-cc: Boris Brezillon <boris.brezillon@bootlin.com>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+As SPI_FLASH_MTD is used in SPL and U-Boot proper, we enable both,
+now that a separate option for SPL was introduced.
+
+Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
+ configs/stm32mp15_basic_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- board/st/stm32mp1/stm32mp1.c        | 83 +++++++++++++++++++++++++++++
- configs/stm32mp15_basic_defconfig   |  1 +
- configs/stm32mp15_optee_defconfig   |  1 +
- configs/stm32mp15_trusted_defconfig |  1 +
- 4 files changed, 86 insertions(+)
-
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index e4bdf05cd7..6045850c05 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -975,9 +975,92 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 	if (!IS_ERR_OR_NULL(mtd))
- 		board_get_alt_info("spi-nand0", buf);
- 
-+#ifdef CONFIG_DFU_VIRT
-+	strncat(buf, "&virt 0=OTP", DFU_ALT_BUF_LEN);
-+
-+	if (IS_ENABLED(CONFIG_PMIC_STPMIC1))
-+		strncat(buf, "&virt 1=PMIC", DFU_ALT_BUF_LEN);
-+#endif
-+
- 	env_set("dfu_alt_info", buf);
- 	puts("DFU alt info setting: done\n");
- }
-+
-+#if CONFIG_IS_ENABLED(DFU_VIRT)
-+#include <dfu.h>
-+#include <power/stpmic1.h>
-+
-+int dfu_otp_read(u64 offset, u8 *buffer, long *size)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_GET_DRIVER(stm32mp_bsec),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, offset + STM32_BSEC_OTP_OFFSET, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+
-+	return 0;
-+}
-+
-+int dfu_pmic_read(u64 offset, u8 *buffer, long *size)
-+{
-+	int ret;
-+#ifdef CONFIG_PMIC_STPMIC1
-+	struct udevice *dev;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_GET_DRIVER(stpmic1_nvm),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, 0xF8 + offset, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+	if (ret == -EACCES) {
-+		*size = 0;
-+		ret = 0;
-+	}
-+#else
-+	pr_err("PMIC update not supported");
-+	ret = -EOPNOTSUPP;
-+#endif
-+
-+	return ret;
-+}
-+
-+int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
-+			 void *buf, long *len)
-+{
-+	switch (dfu->data.virt.dev_num) {
-+	case 0x0:
-+		return dfu_otp_read(offset, buf, len);
-+	case 0x1:
-+		return dfu_pmic_read(offset, buf, len);
-+	}
-+	*len = 0;
-+	return 0;
-+}
-+
-+int __weak dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
-+{
-+	*size = SZ_1K;
-+
-+	return 0;
-+}
-+
-+#endif
-+
- #endif
- 
- static void board_copro_image_process(ulong fw_image, size_t fw_size)
 diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 8e90505070..a15e3c32b1 100644
+index 09785b5dc1..390319657f 100644
 --- a/configs/stm32mp15_basic_defconfig
 +++ b/configs/stm32mp15_basic_defconfig
-@@ -66,6 +66,7 @@ CONFIG_STM32_ADC=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_RAM=y
- CONFIG_DFU_MTD=y
-+CONFIG_DFU_VIRT=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
- CONFIG_FASTBOOT_BUF_SIZE=0x02000000
-diff --git a/configs/stm32mp15_optee_defconfig b/configs/stm32mp15_optee_defconfig
-index 387de0ad35..3b8a90de2d 100644
---- a/configs/stm32mp15_optee_defconfig
-+++ b/configs/stm32mp15_optee_defconfig
-@@ -53,6 +53,7 @@ CONFIG_STM32_ADC=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_RAM=y
- CONFIG_DFU_MTD=y
-+CONFIG_DFU_VIRT=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
- CONFIG_FASTBOOT_BUF_SIZE=0x02000000
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 29c23c634d..bcbd8a5c4e 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -52,6 +52,7 @@ CONFIG_STM32_ADC=y
- CONFIG_DFU_MMC=y
- CONFIG_DFU_RAM=y
- CONFIG_DFU_MTD=y
-+CONFIG_DFU_VIRT=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
- CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
- CONFIG_FASTBOOT_BUF_SIZE=0x02000000
+@@ -7,10 +7,10 @@ CONFIG_TARGET_STM32MP1=y
+ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI_SUPPORT=y
+ # CONFIG_ARMV7_VIRT is not set
++CONFIG_SPL_TEXT_BASE=0x2FFC2500
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_FIT=y
+ CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+-CONFIG_SPL_TEXT_BASE=0x2FFC2500
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3
+ CONFIG_SPL_I2C_SUPPORT=y
+@@ -90,6 +90,7 @@ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_SPI_FLASH_WINBOND=y
+ # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+ CONFIG_SPI_FLASH_MTD=y
++CONFIG_SPL_SPI_FLASH_MTD=y
+ CONFIG_DM_ETH=y
+ CONFIG_DWC_ETH_QOS=y
+ CONFIG_PHY=y
 -- 
 2.17.1
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

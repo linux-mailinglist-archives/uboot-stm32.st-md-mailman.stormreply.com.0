@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB99AB21BE
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 16:19:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AEFCB21BF
+	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 16:19:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B55C4C35E03
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 14:19:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 32DD8C35E01
+	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Sep 2019 14:19:50 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CBEE7C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F302CC35E04
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 13 Sep 2019 14:19:46 +0000 (UTC)
+ Fri, 13 Sep 2019 14:19:47 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x8DEGIj9017350; Fri, 13 Sep 2019 16:19:45 +0200
+ x8DEGIwN017353; Fri, 13 Sep 2019 16:19:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=FvxrVxYIfXN7FqTidheXRONdws4Izvlkuz4kMz3CWzc=;
- b=cZURrli5w9HrFku7CAqmsyT60LhhvI0U2zLsIA/hzD89rHls1NTTz2yyEo63u00fT69S
- ltMjqUltBBnjb2sJL6eVK0YakyZcjOkC1bBklhZ4/Fr11mXnRfhpbRPbmw4P8VH5KC2A
- at74owfaLSuWENnUgUB3g0sOVSDKpAxJpI390LF4TWJn/rupjDoOaRLpeK70TEzO1lb1
- iKwmseiPAFW5uSXT7i4S0nOlYvv87fCvyVRmRpXLsviqGOmrimecxU27O18MZSit7tz1
- mYitk/6xPBirudcGRTrXea4P8yIasrSCQ+Gs8NzIM8RJzeAoO3fyv8PRsy83asks/Qlm SQ== 
+ bh=LBwRhd99loG596Xb1LsNIiHtoLos/8kmZkdTKWRd59g=;
+ b=IbJHkoRUDx1+7Bma8zpqW1bjtW2IHzeYSWdCQ0qRzOFYt1DkPPxyTBjLTYaXv8YNcR0J
+ l5UbWa7Eu2rYokKbjjkP+YNiIn3LBzKOnZ/wBYc92QMC/eeOL/G/WFEbJjyqIDMuZJz+
+ OGK2JQr6h2xlZ8C53P4Q5MqX67ad5fHKe5O+nvAaVJoaEkpLev7Bkq4XjLrsh+obDkMo
+ YKhxJA99HIe/BWdwL26J8KaQoxs6cxDbfv2FjKV7v5d4VxYuPvsInJM3eEbczlxy2jtA
+ VJKyptTVV6H5xdCoGM9JM0gCqL/cJlZcO3PzYVR3rRTqYzW0NAi+B3NcgRp6o89GBX3A mw== 
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com with ESMTP id 2uyte2wddb-1
+ by mx07-00178001.pphosted.com with ESMTP id 2uyte2wdde-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Fri, 13 Sep 2019 16:19:45 +0200
+ Fri, 13 Sep 2019 16:19:46 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B1C3F22;
- Fri, 13 Sep 2019 14:19:42 +0000 (GMT)
-Received: from Webmail-eu.st.com (Safex1hubcas22.st.com [10.75.90.92])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 708502C7F43;
- Fri, 13 Sep 2019 16:19:42 +0200 (CEST)
-Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by Safex1hubcas22.st.com
- (10.75.90.92) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep
- 2019 16:19:42 +0200
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D033755;
+ Fri, 13 Sep 2019 14:19:43 +0000 (GMT)
+Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8EC402C7F42;
+ Fri, 13 Sep 2019 16:19:43 +0200 (CEST)
+Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by Safex1hubcas24.st.com
+ (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep
+ 2019 16:19:43 +0200
 Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep 2019 16:19:41
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 13 Sep 2019 16:19:42
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 13 Sep 2019 16:19:23 +0200
-Message-ID: <20190913141930.15784-8-patrick.delaunay@st.com>
+Date: Fri, 13 Sep 2019 16:19:24 +0200
+Message-ID: <20190913141930.15784-9-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20190913141930.15784-2-patrick.delaunay@st.com>
 References: <20190913141930.15784-2-patrick.delaunay@st.com>
@@ -58,8 +58,7 @@ Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
  "Andrew F. Davis" <afd@ti.com>
-Subject: [Uboot-stm32] [PATCH 07/14] dfu: add partition support for MTD
-	backend
+Subject: [Uboot-stm32] [PATCH 08/14] dfu: add DFU virtual backend
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,157 +75,178 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add the support of MTD partition for the MTD backend.
-
-The expected dfu_alt_info for one alternate on the mtd device :
-	<name> part <part_id>
-        <name> partubi <part_id>
-
-"partubi" also erase up to the end of the partition after write operation.
-
-For example: dfu_alt_info = "spl part 1;u-boot part 2; UBI partubi 3"
-
-U-Boot> dfu 0 mtd nand0
+Add a virtual DFU backend to allow board specific read and write
+(for OTP update for example).
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/dfu/dfu_mtd.c | 78 ++++++++++++++++++++++++++++++++++++++++++-
- include/dfu.h         |  2 ++
- 2 files changed, 79 insertions(+), 1 deletion(-)
+ drivers/dfu/Kconfig    |  7 ++++++
+ drivers/dfu/Makefile   |  1 +
+ drivers/dfu/dfu.c      |  5 ++++-
+ drivers/dfu/dfu_virt.c | 49 ++++++++++++++++++++++++++++++++++++++++++
+ include/dfu.h          | 22 +++++++++++++++++++
+ 5 files changed, 83 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/dfu/dfu_virt.c
 
-diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
-index 1168a6e278..223b0fe977 100644
---- a/drivers/dfu/dfu_mtd.c
-+++ b/drivers/dfu/dfu_mtd.c
-@@ -10,6 +10,7 @@
- #include <common.h>
- #include <dfu.h>
- #include <mtd.h>
-+#include <jffs2/load_kernel.h>
+diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+index ee664a331b..c0e6e5d8f0 100644
+--- a/drivers/dfu/Kconfig
++++ b/drivers/dfu/Kconfig
+@@ -52,5 +52,12 @@ config DFU_MTD
+ 	help
+ 	  This option enables using DFU to read and write to on any MTD device.
  
- static bool mtd_is_aligned_with_block_size(struct mtd_info *mtd, u64 size)
- {
-@@ -181,11 +182,49 @@ static int dfu_write_medium_mtd(struct dfu_entity *dfu,
- 
- static int dfu_flush_medium_mtd(struct dfu_entity *dfu)
- {
-+	struct mtd_info *mtd = dfu->data.mtd.info;
-+	int ret;
++config DFU_VIRT
++	bool "VIRTUAL flash back end for DFU"
++	help
++	  This option enables using DFU to read and write to VIRTUAL device
++	  used at board level to manage specific behavior
++	  (OTP update for example).
 +
-+	/* in case of ubi partition, erase rest of the partition */
-+	if (dfu->data.nand.ubi) {
-+		struct erase_info erase_op = {};
-+
-+		erase_op.mtd = dfu->data.mtd.info;
-+		erase_op.addr = round_up(dfu->data.mtd.start + dfu->offset +
-+					 dfu->bad_skip, mtd->erasesize);
-+		erase_op.len = dfu->data.mtd.start + dfu->data.mtd.size -
-+			       erase_op.addr;
-+		erase_op.scrub = 0;
-+
-+		while (erase_op.len) {
-+			ret = mtd_erase(mtd, &erase_op);
-+			/* Abort if its not a bad block error */
-+			if (ret != -EIO)
-+				break;
-+
-+			printf("Skipping bad block at 0x%08llx\n",
-+			       erase_op.fail_addr);
-+
-+			/* Skip bad block and continue behind it */
-+			erase_op.addr = erase_op.fail_addr + mtd->erasesize;
-+			erase_op.len = dfu->data.mtd.start +
-+				       dfu->data.mtd.size -
-+				       erase_op.addr;
-+		}
-+	}
- 	return 0;
- }
- 
- static unsigned int dfu_polltimeout_mtd(struct dfu_entity *dfu)
- {
-+	/*
-+	 * Currently, Poll Timeout != 0 is only needed on nand
-+	 * ubi partition, as sectors which are not used need
-+	 * to be erased
-+	 */
-+	if (dfu->data.nand.ubi)
-+		return DFU_MANIFEST_POLL_TIMEOUT;
-+
- 	return DFU_DEFAULT_POLL_TIMEOUT;
- }
- 
-@@ -194,6 +233,7 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char *s)
- 	char *st;
- 	struct mtd_info *mtd;
- 	bool has_pages;
-+	int ret, part;
- 
- 	mtd = get_mtd_device_nm(devstr);
- 	if (IS_ERR_OR_NULL(mtd))
-@@ -212,11 +252,47 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char *s)
- 		dfu->data.mtd.start = simple_strtoul(s, &s, 16);
- 		s++;
- 		dfu->data.mtd.size = simple_strtoul(s, &s, 16);
-+	} else if ((!strcmp(st, "part")) || (!strcmp(st, "partubi"))) {
-+		char mtd_id[32];
-+		struct mtd_device *mtd_dev;
-+		u8 part_num;
-+		struct part_info *pi;
-+
-+		dfu->layout = DFU_RAW_ADDR;
-+
-+		part = simple_strtoul(s, &s, 10);
-+
-+		sprintf(mtd_id, "%s,%d", devstr, part - 1);
-+		printf("using id '%s'\n", mtd_id);
-+
-+		mtdparts_init();
-+
-+		ret = find_dev_and_part(mtd_id, &mtd_dev, &part_num, &pi);
-+		if (ret != 0) {
-+			printf("Could not locate '%s'\n", mtd_id);
+ endif
+ endmenu
+diff --git a/drivers/dfu/Makefile b/drivers/dfu/Makefile
+index ebb119f398..0d7925c083 100644
+--- a/drivers/dfu/Makefile
++++ b/drivers/dfu/Makefile
+@@ -10,3 +10,4 @@ obj-$(CONFIG_$(SPL_)DFU_NAND) += dfu_nand.o
+ obj-$(CONFIG_$(SPL_)DFU_RAM) += dfu_ram.o
+ obj-$(CONFIG_$(SPL_)DFU_SF) += dfu_sf.o
+ obj-$(CONFIG_$(SPL_)DFU_TFTP) += dfu_tftp.o
++obj-$(CONFIG_$(SPL_)DFU_VIRT) += dfu_virt.o
+diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
+index 4f4a07b790..2697235c24 100644
+--- a/drivers/dfu/dfu.c
++++ b/drivers/dfu/dfu.c
+@@ -474,6 +474,9 @@ static int dfu_fill_entity(struct dfu_entity *dfu, char *s, int alt,
+ 	} else if (strcmp(interface, "sf") == 0) {
+ 		if (dfu_fill_entity_sf(dfu, devstr, s))
+ 			return -1;
++	} else if (strcmp(interface, "virt") == 0) {
++		if (dfu_fill_entity_virt(dfu, devstr, s))
 +			return -1;
-+		}
-+
-+		dfu->data.mtd.start = pi->offset;
-+		dfu->data.mtd.size = pi->size;
-+		if (!strcmp(st, "partubi"))
-+			dfu->data.mtd.ubi = 1;
  	} else {
--		printf("%s: (%s) not supported!\n", __func__, st);
-+		printf("%s: Memory layout (%s) not supported!\n", __func__, st);
- 		return -1;
- 	}
+ 		printf("%s: Device %s not (yet) supported!\n",
+ 		       __func__,  interface);
+@@ -569,7 +572,7 @@ int dfu_config_entities(char *env, char *interface, char *devstr)
+ const char *dfu_get_dev_type(enum dfu_device_type t)
+ {
+ 	const char *const dev_t[] = {NULL, "eMMC", "OneNAND", "NAND", "RAM",
+-				     "SF", "MTD"};
++				     "SF", "MTD", "VIRT"};
+ 	return dev_t[t];
+ }
  
-+	if (!mtd_is_aligned_with_block_size(mtd, dfu->data.mtd.start)) {
-+		printf("Offset not aligned with a block (0x%x)\n",
-+		       mtd->erasesize);
-+		return -EINVAL;
-+	}
-+	if (!mtd_is_aligned_with_block_size(mtd, dfu->data.mtd.size)) {
-+		printf("Size not aligned with a block (0x%x)\n",
-+		       mtd->erasesize);
-+		return -EINVAL;
-+	}
+diff --git a/drivers/dfu/dfu_virt.c b/drivers/dfu/dfu_virt.c
+new file mode 100644
+index 0000000000..ea8c71f100
+--- /dev/null
++++ b/drivers/dfu/dfu_virt.c
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++/*
++ * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
++ */
++#include <common.h>
++#include <dfu.h>
++#include <errno.h>
++#include <malloc.h>
 +
- 	dfu->get_medium_size = dfu_get_medium_size_mtd;
- 	dfu->read_medium = dfu_read_medium_mtd;
- 	dfu->write_medium = dfu_write_medium_mtd;
++int __weak dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
++				 void *buf, long *len)
++{
++	debug("%s: off=0x%llx, len=0x%x\n", __func__, offset, (u32)*len);
++
++	return 0;
++}
++
++int __weak dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
++{
++	*size = 0;
++
++	return 0;
++}
++
++int __weak dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
++				void *buf, long *len)
++{
++	debug("%s: off=0x%llx, len=0x%x\n", __func__, offset, (u32)*len);
++	*len = 0;
++
++	return 0;
++}
++
++int dfu_fill_entity_virt(struct dfu_entity *dfu, char *devstr, char *s)
++{
++	debug("%s: devstr = %s\n", __func__, devstr);
++
++	dfu->dev_type = DFU_DEV_VIRT;
++	dfu->layout = DFU_RAW_ADDR;
++	dfu->data.virt.dev_num = simple_strtoul(devstr, NULL, 10);
++
++	dfu->write_medium = dfu_write_medium_virt;
++	dfu->get_medium_size = dfu_get_medium_size_virt;
++	dfu->read_medium = dfu_read_medium_virt;
++
++	dfu->inited = 0;
++
++	return 0;
++}
 diff --git a/include/dfu.h b/include/dfu.h
-index 924952f805..a90732cc43 100644
+index a90732cc43..4de7d35914 100644
 --- a/include/dfu.h
 +++ b/include/dfu.h
-@@ -62,6 +62,8 @@ struct mtd_internal_data {
- 	/* RAW programming */
- 	u64 start;
- 	u64 size;
-+	/* for ubi partition */
-+	unsigned int ubi;
+@@ -23,6 +23,7 @@ enum dfu_device_type {
+ 	DFU_DEV_RAM,
+ 	DFU_DEV_SF,
+ 	DFU_DEV_MTD,
++	DFU_DEV_VIRT,
  };
  
- struct nand_internal_data {
+ enum dfu_layout {
+@@ -92,6 +93,10 @@ struct sf_internal_data {
+ 	unsigned int ubi;
+ };
+ 
++struct virt_internal_data {
++	int dev_num;
++};
++
+ #define DFU_NAME_SIZE			32
+ #ifndef CONFIG_SYS_DFU_DATA_BUF_SIZE
+ #define CONFIG_SYS_DFU_DATA_BUF_SIZE		(1024*1024*8)	/* 8 MiB */
+@@ -120,6 +125,7 @@ struct dfu_entity {
+ 		struct nand_internal_data nand;
+ 		struct ram_internal_data ram;
+ 		struct sf_internal_data sf;
++		struct virt_internal_data virt;
+ 	} data;
+ 
+ 	int (*get_medium_size)(struct dfu_entity *dfu, u64 *size);
+@@ -272,6 +278,22 @@ static inline int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr,
+ }
+ #endif
+ 
++#ifdef CONFIG_DFU_VIRT
++int dfu_fill_entity_virt(struct dfu_entity *dfu, char *devstr, char *s);
++int dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
++			  void *buf, long *len);
++int dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size);
++int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
++			 void *buf, long *len);
++#else
++static inline int dfu_fill_entity_virt(struct dfu_entity *dfu, char *devstr,
++				       char *s)
++{
++	puts("VIRT support not available!\n");
++	return -1;
++}
++#endif
++
+ /**
+  * dfu_tftp_write - Write TFTP data to DFU medium
+  *
 -- 
 2.17.1
 

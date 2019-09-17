@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA0A4B4D5A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 14:04:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86433B4E7F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 14:52:23 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5CBBBC36B3F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 12:04:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BAC0C36B3F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 12:52:23 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 20C8DC36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E5B8C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 17 Sep 2019 12:04:03 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x8HC1bkQ027526; Tue, 17 Sep 2019 14:04:01 +0200
+ Tue, 17 Sep 2019 12:52:21 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x8HCkMk0015971; Tue, 17 Sep 2019 14:52:18 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=oQ/PqVVUMOdw8M80VgNB8553Y7f7vqG80dSDIP6ncHs=;
- b=SBFYur5gOSpeixwVvcxv7GZDDoW84yJ105GtLtbcT9fvjQ/+x+RZEkgXlS/pmNSfty8P
- gX45rCib/Lo3hJCt/dKQsfDsqgpI+AlZ7KGIiVuB+bOcl0oXv9nGY0hjdJZzKPzzpm9X
- cavgcBJ1ZpZVhQ2BikRqlqW9TZuhXd0DrL2uRBMeclO6/ZmxZyCPnAN0NEEt/JOVtopV
- mM6D8cQ9MInPtRklEXDawF9eYbu5fVB7s3g9ASYenKYl0f8MPCeBGY3I0clv6syMdbZ1
- ezcp3KBK+vYyA3DignNmrtwaWI229/a6bVj9m//4xz45n3EzIKqBpykAftJYrSWir07O Ig== 
+ bh=czzv9cH63k0hwfxiOafwdv4cQBgn/RByL9tq0lAfZ1Q=;
+ b=gDJI0mpZa4vVXu3Vb350HP9B17f+zqb1p+2DY2Kl7C1pfNLVXlxRcDezgSG7XZRMYOln
+ y74YfyQ+pV3Ehk4BFkq2UbwdFtWWJMfDPhXHZCLjxhAO4xycbfsZyxKNljAl9ivvB3aC
+ J4FkRQ5DiWeGoEcdsBBbRe5gMP30/CM9Mqfs6dcYNyoptFNx1glsQT+Kx3xcP3bAyJun
+ 1/oEb4NvW6/KfMdAbww/+gQEbZIqhPrkPASJXGrP7u7qlhxjdPNh9F8am0sDpllP3KKU
+ 8kC6YuS6LRMlanatE9j8W4JmJvY9Zt9ngZVwOnXL778ytLu58HSBwPb2RHR68IpCGsNU /g== 
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx08-00178001.pphosted.com with ESMTP id 2v0q3fs4xg-1
+ by mx07-00178001.pphosted.com with ESMTP id 2v0np11ncn-1
  (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 17 Sep 2019 14:04:01 +0200
+ Tue, 17 Sep 2019 14:52:17 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 48BB924;
- Tue, 17 Sep 2019 12:03:57 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7D5F32BA19F;
- Tue, 17 Sep 2019 14:03:56 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 17 Sep
- 2019 14:03:56 +0200
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C137E4E;
+ Tue, 17 Sep 2019 12:52:13 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 532472BE233;
+ Tue, 17 Sep 2019 14:52:13 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 17 Sep
+ 2019 14:52:13 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 17 Sep 2019 14:03:56 +0200
+ 15.00.1473.003; Tue, 17 Sep 2019 14:52:12 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: Lukasz Majewski <lukma@denx.de>
-Thread-Topic: [PATCH 07/14] dfu: add partition support for MTD backend
-Thread-Index: AQHVaj5Ju2oStS+7AE+fZ3GiuP91p6cvkisAgAA46FA=
-Date: Tue, 17 Sep 2019 12:03:56 +0000
-Message-ID: <73a6a313869240a5a50d2d77d4e40108@SFHDAG6NODE3.st.com>
+Thread-Topic: [PATCH 09/14] dfu: add callback for flush and initiated operation
+Thread-Index: AQHVaj5KNOTjZA3cFkmeBjoScs02Yacvk+AAgABEkqA=
+Date: Tue, 17 Sep 2019 12:52:12 +0000
+Message-ID: <e3e34b96103740d1866900db979d322a@SFHDAG6NODE3.st.com>
 References: <20190913141930.15784-2-patrick.delaunay@st.com>
- <20190913141930.15784-8-patrick.delaunay@st.com>
- <20190917123850.16f06fd8@jawa>
-In-Reply-To: <20190917123850.16f06fd8@jawa>
+ <20190913141930.15784-10-patrick.delaunay@st.com>
+ <20190917124456.7eb1be1b@jawa>
+In-Reply-To: <20190917124456.7eb1be1b@jawa>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -66,8 +66,8 @@ Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
  "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 07/14] dfu: add partition support for MTD
-	backend
+Subject: Re: [Uboot-stm32] [PATCH 09/14] dfu: add callback for flush and
+	initiated operation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,35 +87,102 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 > From: Lukasz Majewski <lukma@denx.de>
-> Sent: mardi 17 septembre 2019 12:39
+> Sent: mardi 17 septembre 2019 12:45
 > 
 > Hi Patrick,
 > 
-> > Add the support of MTD partition for the MTD backend.
+> > Add weak callback to allow board specific behavior
+> > - flush
+> > - initiated
 > >
-> > The expected dfu_alt_info for one alternate on the mtd device :
-> > 	<name> part <part_id>
-> >         <name> partubi <part_id>
-> >
-> > "partubi" also erase up to the end of the partition after write
-> > operation.
-> >
-> > For example: dfu_alt_info = "spl part 1;u-boot part 2; UBI partubi 3"
-> >
-> > U-Boot> dfu 0 mtd nand0
+> > This patch prepare usage of DFU back end for communication with
+> > STM32CubeProgrammer on stm32mp1 platform with stm32prog command.
 > 
-> The above information shall also be placed to dedicated ./doc/README.dfu file.
+> As I've said previously - please add this use case and info to ./doc/README.dtu.
 
-Yes, I will add informations in V2
+Yes
 
+> 
 > >
 > > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
+> >
+> >  drivers/dfu/dfu.c | 19 +++++++++++++++++++
+> >  include/dfu.h     |  2 ++
+> >  2 files changed, 21 insertions(+)
+> >
+> > diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c index
+> > 2697235c24..f12c5afc66 100644
+> > --- a/drivers/dfu/dfu.c
+> > +++ b/drivers/dfu/dfu.c
+> > @@ -22,6 +22,22 @@ static int dfu_alt_num;  static int alt_num_cnt;
+> > static struct hash_algo *dfu_hash_algo;
+> >
+> > +/*
+> > + * The purpose of the dfu_flush_callback() function is to
+> > + * provide callback for dfu user
+> > + */
+> > +__weak void dfu_flush_callback(struct dfu_entity *dfu) { }
+> > +
+> > +/*
+> > + * The purpose of the dfu_flush_callback() function is to
+> > + * provide callback for dfu user
 > 
-> Acked-by: Lukasz Majewski <lukma@denx.de>
+> Please update this repeated comment.
 
-Best regards,
+Yes, in V2
 
-Patrick Delaunay
+> 
+> > + */
+> > +__weak void dfu_initiated_callback(struct dfu_entity *dfu)
+> > +{
+> > +}
+> > +
+> >  /*
+> >   * The purpose of the dfu_usb_get_reset() function is to
+> >   * provide information if after USB_DETACH request
+> > @@ -263,6 +279,7 @@ int dfu_transaction_initiate(struct dfu_entity
+> > *dfu, bool read) }
+> >
+> >  	dfu->inited = 1;
+> > +	dfu_initiated_callback(dfu);
+> >
+> >  	return 0;
+> >  }
+> > @@ -282,6 +299,8 @@ int dfu_flush(struct dfu_entity *dfu, void *buf,
+> > int size, int blk_seq_num) printf("\nDFU complete %s: 0x%08x\n",
+> > dfu_hash_algo->name, dfu->crc);
+> >
+> > +	dfu_flush_callback(dfu);
+> > +
+> >  	dfu_transaction_cleanup(dfu);
+> >
+> >  	return ret;
+> > diff --git a/include/dfu.h b/include/dfu.h
+> > index 4de7d35914..5d85cc35ef 100644
+> > --- a/include/dfu.h
+> > +++ b/include/dfu.h
+> > @@ -182,6 +182,8 @@ bool dfu_usb_get_reset(void);
+> >  int dfu_read(struct dfu_entity *de, void *buf, int size, int
+> > blk_seq_num); int dfu_write(struct dfu_entity *de, void *buf, int
+> > size, int blk_seq_num); int dfu_flush(struct dfu_entity *de, void
+> > *buf, int size, int blk_seq_num); +void dfu_flush_callback(struct
+> > dfu_entity *dfu); +void dfu_initiated_callback(struct dfu_entity
+> > *dfu);
+> >  /*
+> >   * dfu_defer_flush - pointer to store dfu_entity for deferred
+> > flashing.
+> 
+> 
+> 
+> Best regards,
+> 
+> Lukasz Majewski
+> 
+> --
+
+Best regards
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

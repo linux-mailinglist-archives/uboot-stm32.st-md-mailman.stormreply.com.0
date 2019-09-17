@@ -2,72 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86433B4E7F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 14:52:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E570B5763
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 23:12:45 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BAC0C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 12:52:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A50EC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 21:12:45 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E5B8C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B1247C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 17 Sep 2019 12:52:21 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x8HCkMk0015971; Tue, 17 Sep 2019 14:52:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=czzv9cH63k0hwfxiOafwdv4cQBgn/RByL9tq0lAfZ1Q=;
- b=gDJI0mpZa4vVXu3Vb350HP9B17f+zqb1p+2DY2Kl7C1pfNLVXlxRcDezgSG7XZRMYOln
- y74YfyQ+pV3Ehk4BFkq2UbwdFtWWJMfDPhXHZCLjxhAO4xycbfsZyxKNljAl9ivvB3aC
- J4FkRQ5DiWeGoEcdsBBbRe5gMP30/CM9Mqfs6dcYNyoptFNx1glsQT+Kx3xcP3bAyJun
- 1/oEb4NvW6/KfMdAbww/+gQEbZIqhPrkPASJXGrP7u7qlhxjdPNh9F8am0sDpllP3KKU
- 8kC6YuS6LRMlanatE9j8W4JmJvY9Zt9ngZVwOnXL778ytLu58HSBwPb2RHR68IpCGsNU /g== 
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com with ESMTP id 2v0np11ncn-1
- (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
- Tue, 17 Sep 2019 14:52:17 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C137E4E;
- Tue, 17 Sep 2019 12:52:13 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 532472BE233;
- Tue, 17 Sep 2019 14:52:13 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 17 Sep
- 2019 14:52:13 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 17 Sep 2019 14:52:12 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Lukasz Majewski <lukma@denx.de>
-Thread-Topic: [PATCH 09/14] dfu: add callback for flush and initiated operation
-Thread-Index: AQHVaj5KNOTjZA3cFkmeBjoScs02Yacvk+AAgABEkqA=
-Date: Tue, 17 Sep 2019 12:52:12 +0000
-Message-ID: <e3e34b96103740d1866900db979d322a@SFHDAG6NODE3.st.com>
-References: <20190913141930.15784-2-patrick.delaunay@st.com>
- <20190913141930.15784-10-patrick.delaunay@st.com>
- <20190917124456.7eb1be1b@jawa>
-In-Reply-To: <20190917124456.7eb1be1b@jawa>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
+ Tue, 17 Sep 2019 21:12:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1568754754;
+ bh=ezzBLN3iBp8JI2wGQaJRIkBvDaqlr0b0+nYNdPUM8GE=;
+ h=X-UI-Sender-Class:Subject:To:References:From:Date:In-Reply-To;
+ b=GqW+a8mpH3jdM0ZQoMAy8UV6eOCE/9nohQAix779XC6rpSyWgBVnYvv1j1VQmqF7Q
+ 9zxYEjQIKQcQl0pbpC7Q9qk0LTH4FAnar3kwEx66yr6CdJ8t//kfm9iCbNaF4igWFz
+ CMPQK+9dttQa/SvFsQUXBnd01ColtI+2K9Zp4t/g=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.51] ([88.152.145.122]) by mail.gmx.com (mrgmx003
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 0Lj1Cw-1hf75o1ZXC-00dCD8; Tue, 17
+ Sep 2019 23:12:34 +0200
+To: =?UTF-8?Q?Yannick_Fertr=c3=a9?= <yannick.fertre@st.com>,
+ Vikas Manocha <vikas.manocha@st.com>,
+ Benjamin Gaignard <benjamin.gaignard@st.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Patrick Delaunay <patrick.delaunay@st.com>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>, Patrice Chotard
+ <patrice.chotard@st.com>, Philippe Cornu <philippe.cornu@st.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Eugen Hristev <eugen.hristev@microchip.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <1568368083-11075-1-git-send-email-yannick.fertre@st.com>
+ <1568368083-11075-2-git-send-email-yannick.fertre@st.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <4f087ff2-1abc-9783-354f-6febedae556c@gmx.de>
+Date: Tue, 17 Sep 2019 23:12:29 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.70,1.0.8
- definitions=2019-09-17_06:2019-09-17,2019-09-17 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "Andrew F. Davis" <afd@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 09/14] dfu: add callback for flush and
-	initiated operation
+In-Reply-To: <1568368083-11075-2-git-send-email-yannick.fertre@st.com>
+Content-Language: en-US
+X-Provags-ID: V03:K1:c4JrIofokKnE7KBlydaNv6zutkllWSMY8id5hRt9twko7hhuYBr
+ y7w/CmmdtxTwfryM1+unUloGH+eme05g9xxqGw+kqVpFdeVsORgCivdSsTM24ylNz4PcqNj
+ jigG2hTvvlzp6YOPJvjAKaIHoMmwS/HOK9rhEZGMvMZmCQgIXImBZVlOnLjbml6MV3wuCeP
+ NmtYLlkbgkFKbklt1IXmA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:s5NzmPG+bZE=:5o3o81PKJgBpW7IELm7EjY
+ r7xtmGwxTiIquG5XUP3St6VGfEu5UVZQx6g43TuyhG7PJ/x7OZJrpqcuxixuBvERXf8QoDfaa
+ 5YLhxAeM99xW+2mUMbSAJmi0VNPVN4pl21N8LUoXP07BodAfro9KRsXbNkvQ60IQ8G6Pr3b/W
+ p0sCUxKWbgONrG1VEaz9aCLOdUxJkKi7yykXTtVN705swcbeoUjosfJk9SpomujO4KOecvTAI
+ u67UflYo+iM+ieMR3U55lQWaFKsjNBgPIYnopF9JUsl86lWaw0WYjNVmN58ti2zh7oUR1LiF2
+ ZnSwT+XqvrAs66COSNFDproj2Ji2fPT2JI1E00O6O7V4mHVg/3OowwGERcslfQpFAyRey7F1a
+ NabRsfVLpksmPugVf/Uu3Ne7dnBJWw425YAj82o2vETYWFqNRjCH0kEjtGbx0PShOahGdPxo2
+ RRWynK2DJAsC+TYOkDMKezbaQ2dk3NfSbXPBcSyuu0GeGje0n9SH8jAUKmGR80Y6ngTWd/6pE
+ idgGkuicErt2o0OmcncUxXbxMWNwpP4noNnCSdIs2qyETxRAiryNTbdGdNtubqVkdIgb7wDOP
+ uxUFLcSnHI6q6uvbMFI/KwkBEMzULLastfHWZXu2TlliRgTMcfdD9bp3c3YVB4weiUtj+p6sE
+ udCe3c0r0kZl5DTIOqdph9GXqSi7BMUE2maH5GwKt4y+G83m6C/Mt2UyDUdG+hxogCDzNeZE/
+ Kr+KbR3whQvPlpSGtKA1JzkXNwOfbfr5mqydDXZA9WVdiSUYz9gy4AwT+NhxjYiXS4xt3v4UB
+ L+v8/6sKgc6GezPT7TG2YoQdzuWAz5OZFqlhyFfgiz4DFLUZFCnJCdkFfYHLVFjlkSpYrzn+e
+ buQezGFoqLdCP1py/bbyHWfi5m+aY9tsV4j2sr3gBOFOreKDlOpsSe7JeWsJwMyWv5ef0gI6o
+ hfr8CLK2/iHgC/CnNLnSVxLcBeXCCJkPO6w4+RyItHKJjaI9ZWRIfAjwzxsLmFQmyft7ided7
+ Wy9mqnbxS2hbM7CY+hmJkBjFssrftoyHFtZTeDIx1KwoeV81UQcvMWmfKIkcXfqSx0+0Fxi44
+ jRuM6Trc9OntjtGLz+iU/GuUbLUHEmWSjGYCEEeRghdEO0sejSp7iqgwQLf5TexERmOLEQoYu
+ iiCRqmfs1BWyjfxj05gTqtc7Yw0xRXxN6SjLJvBPgmctjkrtDik4VRvOwuT407PJuxaZpB5tq
+ oq6tdUVh9Pq0vxSu1Jl5s1VmmhfNpOvE0BLS3z1RSFLJdi9DrEaDlYttDZzg=
+Subject: Re: [Uboot-stm32] [PATCH v4 01/15] video: bmp: check resolutions of
+	panel/bitmap
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,111 +82,42 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-> From: Lukasz Majewski <lukma@denx.de>
-> Sent: mardi 17 septembre 2019 12:45
-> 
-> Hi Patrick,
-> 
-> > Add weak callback to allow board specific behavior
-> > - flush
-> > - initiated
-> >
-> > This patch prepare usage of DFU back end for communication with
-> > STM32CubeProgrammer on stm32mp1 platform with stm32prog command.
-> 
-> As I've said previously - please add this use case and info to ./doc/README.dtu.
-
-Yes
-
-> 
-> >
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > ---
-> >
-> >  drivers/dfu/dfu.c | 19 +++++++++++++++++++
-> >  include/dfu.h     |  2 ++
-> >  2 files changed, 21 insertions(+)
-> >
-> > diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c index
-> > 2697235c24..f12c5afc66 100644
-> > --- a/drivers/dfu/dfu.c
-> > +++ b/drivers/dfu/dfu.c
-> > @@ -22,6 +22,22 @@ static int dfu_alt_num;  static int alt_num_cnt;
-> > static struct hash_algo *dfu_hash_algo;
-> >
-> > +/*
-> > + * The purpose of the dfu_flush_callback() function is to
-> > + * provide callback for dfu user
-> > + */
-> > +__weak void dfu_flush_callback(struct dfu_entity *dfu) { }
-> > +
-> > +/*
-> > + * The purpose of the dfu_flush_callback() function is to
-> > + * provide callback for dfu user
-> 
-> Please update this repeated comment.
-
-Yes, in V2
-
-> 
-> > + */
-> > +__weak void dfu_initiated_callback(struct dfu_entity *dfu)
-> > +{
-> > +}
-> > +
-> >  /*
-> >   * The purpose of the dfu_usb_get_reset() function is to
-> >   * provide information if after USB_DETACH request
-> > @@ -263,6 +279,7 @@ int dfu_transaction_initiate(struct dfu_entity
-> > *dfu, bool read) }
-> >
-> >  	dfu->inited = 1;
-> > +	dfu_initiated_callback(dfu);
-> >
-> >  	return 0;
-> >  }
-> > @@ -282,6 +299,8 @@ int dfu_flush(struct dfu_entity *dfu, void *buf,
-> > int size, int blk_seq_num) printf("\nDFU complete %s: 0x%08x\n",
-> > dfu_hash_algo->name, dfu->crc);
-> >
-> > +	dfu_flush_callback(dfu);
-> > +
-> >  	dfu_transaction_cleanup(dfu);
-> >
-> >  	return ret;
-> > diff --git a/include/dfu.h b/include/dfu.h
-> > index 4de7d35914..5d85cc35ef 100644
-> > --- a/include/dfu.h
-> > +++ b/include/dfu.h
-> > @@ -182,6 +182,8 @@ bool dfu_usb_get_reset(void);
-> >  int dfu_read(struct dfu_entity *de, void *buf, int size, int
-> > blk_seq_num); int dfu_write(struct dfu_entity *de, void *buf, int
-> > size, int blk_seq_num); int dfu_flush(struct dfu_entity *de, void
-> > *buf, int size, int blk_seq_num); +void dfu_flush_callback(struct
-> > dfu_entity *dfu); +void dfu_initiated_callback(struct dfu_entity
-> > *dfu);
-> >  /*
-> >   * dfu_defer_flush - pointer to store dfu_entity for deferred
-> > flashing.
-> 
-> 
-> 
-> Best regards,
-> 
-> Lukasz Majewski
-> 
-> --
-
-Best regards
-Patrick
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gOS8xMy8xOSAxMTo0NyBBTSwgWWFubmljayBGZXJ0csOpIHdyb3RlOgo+IElmIHRoZSBzaXpl
+IG9mIHRoZSBiaXRtYXAgaXMgYmlnZ2VyIHRoYW4gdGhlIHNpemUgb2YKPiB0aGUgcGFuZWwgdGhl
+biBlcnJvcnMgYXBwZWFyIHdoZW4gY2FsY3VsYXRpbmcgYXhpcyBhbGlnbm1lbnQKPiBhbmQgdGhl
+IGNvcHkgb2YgYml0bWFwIGlzIGRvbmUgb3V0c2lkZSBvZiBmcmFtZWJ1ZmZlci4KPgo+IFNpZ25l
+ZC1vZmYtYnk6IFlhbm5pY2sgRmVydHLDqSA8eWFubmljay5mZXJ0cmVAc3QuY29tPgo+IC0tLQo+
+ICAgZHJpdmVycy92aWRlby92aWRlb19ibXAuYyB8IDE0ICsrKysrKysrKysrKysrCj4gICAxIGZp
+bGUgY2hhbmdlZCwgMTQgaW5zZXJ0aW9ucygrKQo+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmlk
+ZW8vdmlkZW9fYm1wLmMgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jCj4gaW5kZXggMTkzZjM3
+ZC4uNTQ0YmQ1ZiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jCj4gKysr
+IGIvZHJpdmVycy92aWRlby92aWRlb19ibXAuYwo+IEBAIC01NCw2ICs1NCwxMyBAQCBzdGF0aWMg
+dm9pZCB2aWRlb19kaXNwbGF5X3JsZThfYml0bWFwKHN0cnVjdCB1ZGV2aWNlICpkZXYsCj4gICAJ
+aGVpZ2h0ID0gZ2V0X3VuYWxpZ25lZF9sZTMyKCZibXAtPmhlYWRlci5oZWlnaHQpOwo+ICAgCWJt
+YXAgPSAodWNoYXIgKilibXAgKyBnZXRfdW5hbGlnbmVkX2xlMzIoJmJtcC0+aGVhZGVyLmRhdGFf
+b2Zmc2V0KTsKPgo+ICsJLyogY2hlY2sgaWYgcGljdHVyZSBzaXplIGV4Y2VlZCBwYW5lbCBzaXpl
+ICovCgolcy9leGNlZWQvZXhjZWVkcy8KCj4gKwlpZiAocHJpdi0+eHNpemUgPCB3aWR0aCkKPiAr
+CQl3aWR0aCA9IHByaXYtPnhzaXplOwoKSW4gY2FzZSBvZiBCTVBfUkxFOF9ERUxUQSB3aWR0aCBp
+cyBub3QgY2hlY2tlZCBiZWZvcmUgd3JpdGluZyB0byB0aGUKZnJhbWUgYnVmZmVyLiBTbyB0aGlz
+IG1vZGlmaWNhdGlvbiBvZiB3aWR0aCB3aWxsIGxlYWQgdG8gdW5leHBlY3RlZCBlZmZlY3RzLgoK
+SW4gdGhlICdkZWZhdWx0JyBjYXNlIHdpZHRoIGlzIGNoZWNrZWQgYW5kIHRoaXMgbWF5IGxlYWQg
+dG8gZGVjb2RpbmcgZXJyb3JzLgoKPiArCj4gKwlpZiAocHJpdi0+eXNpemUgPCBoZWlnaHQpCj4g
+KwkJaGVpZ2h0ID0gcHJpdi0+eXNpemU7Cj4gKwo+ICAgCXggPSAwOwo+ICAgCXkgPSBoZWlnaHQg
+LSAxOwo+Cj4gQEAgLTI0OSw2ICsyNTYsMTMgQEAgaW50IHZpZGVvX2JtcF9kaXNwbGF5KHN0cnVj
+dCB1ZGV2aWNlICpkZXYsIHVsb25nIGJtcF9pbWFnZSwgaW50IHgsIGludCB5LAo+Cj4gICAJcGFk
+ZGVkX3dpZHRoID0gKHdpZHRoICYgMHgzID8gKHdpZHRoICYgfjB4MykgKyA0IDogd2lkdGgpOwo+
+Cj4gKwkvKiBjaGVjayBpZiBwaWN0dXJlIHNpemUgZXhjZWVkIHBhbmVsIHNpemUgKi8KPiArCWlm
+IChwd2lkdGggPCB3aWR0aCkKPiArCQl3aWR0aCA9IHB3aWR0aDsKPiArCj4gKwlpZiAocHJpdi0+
+eXNpemUgPCBoZWlnaHQpCj4gKwkJaGVpZ2h0ID0gcHJpdi0+eXNpemU7Cj4gKwoKWW91IGZvcmdv
+dCB0byBjb25zaWRlciB0aGUgcG9zaXRpb24gKHgseSkgb2YgdGhlIHBpY3R1cmUuCgpCZXN0IHJl
+Z2FyZHMKCkhlaW5yaWNoCgo+ICAgCWlmIChhbGlnbikgewo+ICAgCQl2aWRlb19zcGxhc2hfYWxp
+Z25fYXhpcygmeCwgcHJpdi0+eHNpemUsIHdpZHRoKTsKPiAgIAkJdmlkZW9fc3BsYXNoX2FsaWdu
+X2F4aXMoJnksIHByaXYtPnlzaXplLCBoZWlnaHQpOwo+CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qt
+c3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4u
+c3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

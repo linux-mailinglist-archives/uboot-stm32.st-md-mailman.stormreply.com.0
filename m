@@ -2,48 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EBCEB4BFA
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 12:28:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F32A3B4C0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 12:35:51 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3D30FC36B3F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 10:28:57 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ABB21C36B3F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Sep 2019 10:35:51 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2137BC36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 49D32C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 17 Sep 2019 10:28:55 +0000 (UTC)
+ Tue, 17 Sep 2019 10:35:50 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 46XfTy3wMFz1rQBs;
- Tue, 17 Sep 2019 12:28:54 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 46Xfdx3Y9Jz1rTYR;
+ Tue, 17 Sep 2019 12:35:49 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 46XfTy3Xh4z1qqkH;
- Tue, 17 Sep 2019 12:28:54 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 46Xfdx2yy0z1qqkG;
+ Tue, 17 Sep 2019 12:35:49 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id 4ORL_v1IcdHF; Tue, 17 Sep 2019 12:28:53 +0200 (CEST)
-X-Auth-Info: QBQkFlWT5OM4cJxQJktJKFsv3cce5SAU1pmnWD5tPX0=
+ with ESMTP id TEG9wAGeG5M8; Tue, 17 Sep 2019 12:35:47 +0200 (CEST)
+X-Auth-Info: w1wy2pAYay2RjuoWjIeJ/Ld3lTnMZuWMij7xUDkpitY=
 Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 17 Sep 2019 12:28:53 +0200 (CEST)
-Date: Tue, 17 Sep 2019 12:28:52 +0200
+ Tue, 17 Sep 2019 12:35:47 +0200 (CEST)
+Date: Tue, 17 Sep 2019 12:35:46 +0200
 From: Lukasz Majewski <lukma@denx.de>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20190917122852.10d8c0f0@jawa>
-In-Reply-To: <20190913141930.15784-6-patrick.delaunay@st.com>
+Message-ID: <20190917123546.585d870a@jawa>
+In-Reply-To: <20190913141930.15784-7-patrick.delaunay@st.com>
 References: <20190913141930.15784-2-patrick.delaunay@st.com>
- <20190913141930.15784-6-patrick.delaunay@st.com>
+ <20190913141930.15784-7-patrick.delaunay@st.com>
 Organization: denx.de
 X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH 05/14] dfu: allow read with 0 data for EOF
-	indication
+ u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Andrew F. Davis" <afd@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 06/14] dfu: add backend for MTD device
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -55,50 +55,412 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4564345223805846032=="
+Content-Type: multipart/mixed; boundary="===============8329414080103078895=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============4564345223805846032==
+--===============8329414080103078895==
 Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/A4CjX1gRkTzNlqZ55ykhG+_"; protocol="application/pgp-signature"
+ boundary="Sig_/CsevWLcpjV3uKUNBAGo6mIW"; protocol="application/pgp-signature"
 
---Sig_/A4CjX1gRkTzNlqZ55ykhG+_
+--Sig_/CsevWLcpjV3uKUNBAGo6mIW
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
 Hi Patrick,
 
-> This patch allows into the DFU backend to indicate that there is no
-> remaining data (for EOF for example). That allows users to read a
-> buffer greater than the device size; the dfu stack stops the read
-> request when the backend return a length=3D0 without error.
+> Add DFU backend for MTD device: allow to read
+> and write on any MTD device (RAW or SPI)
+>=20
+> For example :
+> > set dfu_alt_info "nand_raw raw 0x0 0x100000"
+> > dfu 0 mtd nand0 =20
+>=20
+> This MTD backend provides the same level than dfu nand
+                                     ^^^^^ - shouldn't there be
+                                     "functionality" or such?
+
+> backend for NAND in RAW mode and sf backend for NOR;
+> So it can replace booth of them but it can also
+> add support of spi-nand.
+
+If I understood correctly - it allows reading "raw" data from MTD
+device - NAND, SPI-NOR and SPI-NAND?
+
+>=20
+> > set dfu_alt_info "nand_raw raw 0x0 0x100000"
+> > dfu 0 mtd spi-nand0 =20
+>=20
+> The backend code is based on the MTD command
+> introduced by commit 5db66b3aee6f ("cmd: mtd:
+> add 'mtd' command")
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >=20
->  drivers/dfu/dfu.c | 2 ++
->  1 file changed, 2 insertions(+)
+>  drivers/dfu/Kconfig   |   6 ++
+>  drivers/dfu/Makefile  |   1 +
+>  drivers/dfu/dfu.c     |   5 +-
+>  drivers/dfu/dfu_mtd.c | 230
+> ++++++++++++++++++++++++++++++++++++++++++ include/dfu.h         |
+> 21 ++++ 5 files changed, 262 insertions(+), 1 deletion(-)
+>  create mode 100644 drivers/dfu/dfu_mtd.c
 >=20
+> diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+> index 4692736c9d..ee664a331b 100644
+> --- a/drivers/dfu/Kconfig
+> +++ b/drivers/dfu/Kconfig
+> @@ -46,5 +46,11 @@ config DFU_SF
+>  	  This option enables using DFU to read and write to SPI
+> flash based storage.
+> =20
+> +config DFU_MTD
+> +	bool "MTD back end for DFU"
+> +	depends on MTD
+> +	help
+> +	  This option enables using DFU to read and write to on any
+> MTD device. +
+>  endif
+>  endmenu
+> diff --git a/drivers/dfu/Makefile b/drivers/dfu/Makefile
+> index 4164f342ac..ebb119f398 100644
+> --- a/drivers/dfu/Makefile
+> +++ b/drivers/dfu/Makefile
+> @@ -5,6 +5,7 @@
+> =20
+>  obj-$(CONFIG_$(SPL_)DFU) +=3D dfu.o
+>  obj-$(CONFIG_$(SPL_)DFU_MMC) +=3D dfu_mmc.o
+> +obj-$(CONFIG_$(SPL_)DFU_MTD) +=3D dfu_mtd.o
+>  obj-$(CONFIG_$(SPL_)DFU_NAND) +=3D dfu_nand.o
+>  obj-$(CONFIG_$(SPL_)DFU_RAM) +=3D dfu_ram.o
+>  obj-$(CONFIG_$(SPL_)DFU_SF) +=3D dfu_sf.o
 > diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> index 8bd5216017..50919fcae9 100644
+> index 50919fcae9..4f4a07b790 100644
 > --- a/drivers/dfu/dfu.c
 > +++ b/drivers/dfu/dfu.c
-> @@ -396,6 +396,8 @@ static int dfu_read_buffer_fill(struct dfu_entity
-> *dfu, void *buf, int size) debug("%s: Read error!\n", __func__);
->  				return ret;
->  			}
-> +			if (dfu->b_left =3D=3D 0)
-> +				break;
-
-I guess that this is the use case for sending commands?
-
-Could you provide a more descriptive use case for this change (the
-description in the above commit message is not enough for me to get it).
-
->  			dfu->offset +=3D dfu->b_left;
->  			dfu->r_left -=3D dfu->b_left;
+> @@ -462,6 +462,9 @@ static int dfu_fill_entity(struct dfu_entity
+> *dfu, char *s, int alt, if (strcmp(interface, "mmc") =3D=3D 0) {
+>  		if (dfu_fill_entity_mmc(dfu, devstr, s))
+>  			return -1;
+> +	} else if (strcmp(interface, "mtd") =3D=3D 0) {
+> +		if (dfu_fill_entity_mtd(dfu, devstr, s))
+> +			return -1;
+>  	} else if (strcmp(interface, "nand") =3D=3D 0) {
+>  		if (dfu_fill_entity_nand(dfu, devstr, s))
+>  			return -1;
+> @@ -566,7 +569,7 @@ int dfu_config_entities(char *env, char
+> *interface, char *devstr) const char *dfu_get_dev_type(enum
+> dfu_device_type t) {
+>  	const char *const dev_t[] =3D {NULL, "eMMC", "OneNAND",
+> "NAND", "RAM",
+> -				     "SF"};
+> +				     "SF", "MTD"};
+>  	return dev_t[t];
+>  }
 > =20
+> diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
+> new file mode 100644
+> index 0000000000..1168a6e278
+> --- /dev/null
+> +++ b/drivers/dfu/dfu_mtd.c
+> @@ -0,0 +1,230 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * dfu_mtd.c -- DFU for MTD device.
+> + *
+> + * Copyright (C) 2019,STMicroelectronics - All Rights Reserved
+> + *
+> + * Based on dfu_nand.c
+> + */
+> +
+> +#include <common.h>
+> +#include <dfu.h>
+> +#include <mtd.h>
+> +
+> +static bool mtd_is_aligned_with_block_size(struct mtd_info *mtd, u64
+> size) +{
+> +	return !do_div(size, mtd->erasesize);
+> +}
+> +
+> +static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
+> +			u64 offset, void *buf, long *len)
+> +{
+> +	u64 off, lim, remaining;
+> +	struct mtd_info *mtd =3D dfu->data.mtd.info;
+> +	struct mtd_oob_ops io_op =3D {};
+> +	int ret =3D 0;
+> +	bool has_pages =3D mtd->type =3D=3D MTD_NANDFLASH ||
+> +			 mtd->type =3D=3D MTD_MLCNANDFLASH;
+> +
+> +	/* if buf =3D=3D NULL return total size of the area */
+> +	if (!buf) {
+> +		*len =3D dfu->data.mtd.size;
+> +		return 0;
+> +	}
+> +
+> +	off =3D dfu->data.mtd.start + offset + dfu->bad_skip;
+> +	lim =3D dfu->data.mtd.start + dfu->data.mtd.size;
+> +
+> +	if (off >=3D lim) {
+> +		printf("Limit reached 0x%llx\n", lim);
+> +		*len =3D 0;
+> +		return op =3D=3D DFU_OP_READ ? 0 : -EIO;
+> +	}
+> +	/* limit request with the available size */
+> +	if (off + *len >=3D lim)
+> +		*len =3D lim - off;
+> +
+> +	if (!mtd_is_aligned_with_block_size(mtd, off)) {
+> +		printf("Offset not aligned with a block (0x%x)\n",
+> +		       mtd->erasesize);
+> +		return 0;
+> +	}
+> +
+> +	/* first erase */
+> +	if (op =3D=3D DFU_OP_WRITE) {
+> +		struct erase_info erase_op =3D {};
+> +
+> +		erase_op.mtd =3D mtd;
+> +		erase_op.addr =3D off;
+> +		erase_op.len =3D round_up(*len, mtd->erasesize);
+> +		erase_op.scrub =3D 0;
+> +
+> +		while (erase_op.len) {
+> +			if (erase_op.addr + erase_op.len > lim) {
+> +				printf("Limit reached 0x%llx while
+> erasing at offset 0x%llx\n",
+> +				       lim, off);
+> +				return -EIO;
+> +			}
+> +
+> +			ret =3D mtd_erase(mtd, &erase_op);
+> +			/* Abort if its not a bad block error */
+> +			if (ret !=3D -EIO)
+> +				break;
+> +
+> +			printf("Skipping bad block at 0x%08llx\n",
+> +			       erase_op.fail_addr);
+> +
+> +			/* Continue erase behind bad block */
+> +			erase_op.len -=3D erase_op.fail_addr -
+> erase_op.addr;
+> +			erase_op.addr =3D erase_op.fail_addr +
+> mtd->erasesize;
+> +		}
+> +		if (ret && ret !=3D -EIO) {
+> +			printf("Failure while erasing at offset
+> 0x%llx\n",
+> +			       erase_op.fail_addr);
+> +			return 0;
+> +		}
+> +	}
+> +
+> +	io_op.mode =3D MTD_OPS_AUTO_OOB;
+> +	io_op.len =3D *len;
+> +	if (has_pages && io_op.len > mtd->writesize)
+> +		io_op.len =3D mtd->writesize;
+> +	io_op.ooblen =3D 0;
+> +	io_op.datbuf =3D buf;
+> +	io_op.oobbuf =3D NULL;
+> +
+> +	/* Loop over to do the actual read/write */
+> +	remaining =3D *len;
+> +	while (remaining) {
+> +		if (off + remaining > lim) {
+> +			printf("Limit reached 0x%llx while %s at
+> offset 0x%llx\n",
+> +			       lim, op =3D=3D DFU_OP_READ ? "reading" :
+> "writing",
+> +			       off);
+> +			if (op =3D=3D DFU_OP_READ) {
+> +				*len -=3D remaining;
+> +				return 0;
+> +			} else {
+> +				return -EIO;
+> +			}
+> +		}
+> +
+> +		/* Skip the block if it is bad */
+> +		if (mtd_is_aligned_with_block_size(mtd, off) &&
+> +		    mtd_block_isbad(mtd, off)) {
+> +			off +=3D mtd->erasesize;
+> +			dfu->bad_skip +=3D mtd->erasesize;
+> +			continue;
+> +		}
+> +
+> +		if (op =3D=3D DFU_OP_READ)
+> +			ret =3D mtd_read_oob(mtd, off, &io_op);
+> +		else
+> +			ret =3D mtd_write_oob(mtd, off, &io_op);
+> +
+> +		if (ret) {
+> +			printf("Failure while %s at offset 0x%llx\n",
+> +			       op =3D=3D DFU_OP_READ ? "reading" :
+> "writing", off);
+> +			return -EIO;
+> +		}
+> +
+> +		off +=3D io_op.retlen;
+> +		remaining -=3D io_op.retlen;
+> +		io_op.datbuf +=3D io_op.retlen;
+> +		io_op.len =3D remaining;
+> +		if (has_pages && io_op.len > mtd->writesize)
+> +			io_op.len =3D mtd->writesize;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int dfu_get_medium_size_mtd(struct dfu_entity *dfu, u64 *size)
+> +{
+> +	*size =3D dfu->data.mtd.info->size;
+> +
+> +	return 0;
+> +}
+> +
+> +static int dfu_read_medium_mtd(struct dfu_entity *dfu, u64 offset,
+> void *buf,
+> +			       long *len)
+> +{
+> +	int ret =3D -1;
+> +
+> +	switch (dfu->layout) {
+> +	case DFU_RAW_ADDR:
+> +		ret =3D mtd_block_op(DFU_OP_READ, dfu, offset, buf,
+> len);
+> +		break;
+> +	default:
+> +		printf("%s: Layout (%s) not (yet) supported!\n",
+> __func__,
+> +		       dfu_get_layout(dfu->layout));
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int dfu_write_medium_mtd(struct dfu_entity *dfu,
+> +				u64 offset, void *buf, long *len)
+> +{
+> +	int ret =3D -1;
+> +
+> +	switch (dfu->layout) {
+> +	case DFU_RAW_ADDR:
+> +		ret =3D mtd_block_op(DFU_OP_WRITE, dfu, offset, buf,
+> len);
+> +		break;
+> +	default:
+> +		printf("%s: Layout (%s) not (yet) supported!\n",
+> __func__,
+> +		       dfu_get_layout(dfu->layout));
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int dfu_flush_medium_mtd(struct dfu_entity *dfu)
+> +{
+> +	return 0;
+> +}
+> +
+> +static unsigned int dfu_polltimeout_mtd(struct dfu_entity *dfu)
+> +{
+> +	return DFU_DEFAULT_POLL_TIMEOUT;
+> +}
+> +
+> +int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char
+> *s) +{
+> +	char *st;
+> +	struct mtd_info *mtd;
+> +	bool has_pages;
+> +
+> +	mtd =3D get_mtd_device_nm(devstr);
+> +	if (IS_ERR_OR_NULL(mtd))
+> +		return -ENODEV;
+> +	put_mtd_device(mtd);
+> +
+> +	dfu->dev_type =3D DFU_DEV_MTD;
+> +	dfu->data.mtd.info =3D mtd;
+> +
+> +	has_pages =3D mtd->type =3D=3D MTD_NANDFLASH || mtd->type =3D=3D
+> MTD_MLCNANDFLASH;
+> +	dfu->max_buf_size =3D has_pages ? mtd->erasesize : 0;
+> +
+> +	st =3D strsep(&s, " ");
+> +	if (!strcmp(st, "raw")) {
+> +		dfu->layout =3D DFU_RAW_ADDR;
+> +		dfu->data.mtd.start =3D simple_strtoul(s, &s, 16);
+> +		s++;
+> +		dfu->data.mtd.size =3D simple_strtoul(s, &s, 16);
+> +	} else {
+> +		printf("%s: (%s) not supported!\n", __func__, st);
+> +		return -1;
+> +	}
+> +
+> +	dfu->get_medium_size =3D dfu_get_medium_size_mtd;
+> +	dfu->read_medium =3D dfu_read_medium_mtd;
+> +	dfu->write_medium =3D dfu_write_medium_mtd;
+> +	dfu->flush_medium =3D dfu_flush_medium_mtd;
+> +	dfu->poll_timeout =3D dfu_polltimeout_mtd;
+> +
+> +	/* initial state */
+> +	dfu->inited =3D 0;
+> +
+> +	return 0;
+> +}
+> diff --git a/include/dfu.h b/include/dfu.h
+> index 7d60ffc228..924952f805 100644
+> --- a/include/dfu.h
+> +++ b/include/dfu.h
+> @@ -22,6 +22,7 @@ enum dfu_device_type {
+>  	DFU_DEV_NAND,
+>  	DFU_DEV_RAM,
+>  	DFU_DEV_SF,
+> +	DFU_DEV_MTD,
+>  };
+> =20
+>  enum dfu_layout {
+> @@ -55,6 +56,14 @@ struct mmc_internal_data {
+>  	unsigned int part;
+>  };
+> =20
+> +struct mtd_internal_data {
+> +	struct mtd_info *info;
+> +
+> +	/* RAW programming */
+> +	u64 start;
+> +	u64 size;
+> +};
+> +
+>  struct nand_internal_data {
+>  	/* RAW programming */
+>  	u64 start;
+> @@ -105,6 +114,7 @@ struct dfu_entity {
+> =20
+>  	union {
+>  		struct mmc_internal_data mmc;
+> +		struct mtd_internal_data mtd;
+>  		struct nand_internal_data nand;
+>  		struct ram_internal_data ram;
+>  		struct sf_internal_data sf;
+> @@ -249,6 +259,17 @@ static inline int dfu_fill_entity_sf(struct
+> dfu_entity *dfu, char *devstr, }
+>  #endif
+> =20
+> +#if CONFIG_IS_ENABLED(DFU_MTD)
+> +int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char
+> *s); +#else
+> +static inline int dfu_fill_entity_mtd(struct dfu_entity *dfu, char
+> *devstr,
+> +				      char *s)
+> +{
+> +	puts("MTD support not available!\n");
+> +	return -1;
+> +}
+> +#endif
+> +
+>  /**
+>   * dfu_tftp_write - Write TFTP data to DFU medium
+>   *
 
 
 
@@ -112,25 +474,25 @@ DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
---Sig_/A4CjX1gRkTzNlqZ55ykhG+_
+--Sig_/CsevWLcpjV3uKUNBAGo6mIW
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl2AtWQACgkQAR8vZIA0
-zr3swQf9EdVbY+fUfrrgfiXCvT9nb0oBvS2lp3A2raAdRBDNS4Ri4rOWxPpf4LhQ
-GC5FSRIgeuXQLUhs/ZpHpHQB/EAK1nw7qwNN/tkvE2YAQxHwkruIOMGexHndenhI
-Z4owiHiV0vVi1SHewh677yza3sbcEAIKmwQ3JXcd8fX8rlaj5cL7VFvrHLCTJ3yA
-lgGdNwz3t7ax3Jv3V4KP8tfMhMysAQCDiPTH0rZB6rt3UJ16QncyJnK9dRQPgsGf
-jPzd6++y3OkVtARrCIue1xl2XAzd5eUFmGjyHdllvBnqJ/QqTDI0gwiI9yy/WV2x
-ygMwe5So3LiOsMq8Eza3J9h5cIcXvg==
-=mWtJ
+iQEzBAEBCAAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl2AtwIACgkQAR8vZIA0
+zr3fjgf+OTOqoYBxQ7CVanL/UiW1NjWnWJjKR2Op8OauHLrVgb9WcV4larljGQpJ
+jmHMm3wLHvH2o0HNHaU1Kb0eKymUhj4KScR8N2sZb8Fl+aireX/uLU9Bj6oyPC2C
+TEc+P6aLhpAabHt5DRCokiYb+gpKQvUu76y+ozh9oNKCHqiv5e6bR6HvUiDlT7E9
+uVWM/b17dTnT+sL6g/nr6xpIH1lSf1Hqzml0tqymFFtb200ON3plnekHnmk/8TS9
+YrwahJPCDZHPQ8ZYrofld5X+AQeU8K0wa5BqMi1+cCz0u5sPA+qAxgNpR6k2OVJP
+MWDV04dzdUseRfU2io+KTotjsidjPQ==
+=JSgp
 -----END PGP SIGNATURE-----
 
---Sig_/A4CjX1gRkTzNlqZ55ykhG+_--
+--Sig_/CsevWLcpjV3uKUNBAGo6mIW--
 
---===============4564345223805846032==
+--===============8329414080103078895==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -141,4 +503,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4564345223805846032==--
+--===============8329414080103078895==--

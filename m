@@ -2,36 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D22B4B8E1A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 11:56:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5FCA1B9787
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 21:03:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8FE71C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 09:56:01 +0000 (UTC)
-Received: from relay11.mail.gandi.net (relay11.mail.gandi.net [217.70.178.231])
- (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04C4BC36B3F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 19:03:42 +0000 (UTC)
+Received: from mail-yw1-f66.google.com (mail-yw1-f66.google.com
+ [209.85.161.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCC47C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A8F4BC36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 20 Sep 2019 09:56:00 +0000 (UTC)
-Received: from xps13 (lfbn-1-17395-211.w86-250.abo.wanadoo.fr [86.250.200.211])
- (Authenticated sender: miquel.raynal@bootlin.com)
- by relay11.mail.gandi.net (Postfix) with ESMTPSA id 514BF100006;
- Fri, 20 Sep 2019 09:55:59 +0000 (UTC)
-Date: Fri, 20 Sep 2019 11:55:58 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20190920094154.7742d4ac@xps13>
-In-Reply-To: <20190920072012.17841-1-patrick.delaunay@st.com>
-References: <20190920072012.17841-1-patrick.delaunay@st.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ Fri, 20 Sep 2019 19:03:40 +0000 (UTC)
+Received: by mail-yw1-f66.google.com with SMTP id i188so2442870ywf.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 20 Sep 2019 12:03:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=zWhw6BA2nzv5hkGPQOiJX7D0nXLX6R8S+gaN5RL9w6E=;
+ b=qbfXWrtDOwimMLLeDRkP5eDsRItFYd3QGpSmIgLS7L/NBgLdRSX0K9khorxAy5lNYa
+ XamaPndjRelyoB40rGx3V1+mbD/inmCP+ZuUEi55oQmX4/73znNB0YKxbqNAtsbJV/Bh
+ Sjs1uHFPlNQ2dlm0Gj/xohHsubLwQi2U5Draw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=zWhw6BA2nzv5hkGPQOiJX7D0nXLX6R8S+gaN5RL9w6E=;
+ b=sfaeSTXLwpHerA5T9OATpb7LiABrkJMAFCAPSamx4OgWhVT2L+8TlT1btzqZFe9LDb
+ TzHHE9eKeFx1PmiosXSToH3bWtv+a6kF7xsJryXi1K1kupmgv/vM5xeRr5MsKPpCsgXn
+ bkzEXRgude7cx/NrdX9iDECB2bDyvQb6Mm/kN8ujZCldjQVC7Ram+B00a63cwQQI4uOX
+ 57RuokeEZqjrNNgjn7TrkY8ZhomWntWVTATb5VJ4lQ7ButiXe8K7k4ajlMQU0s1bsdUV
+ wWN5Y7VHRcExI5qlVi7X9AFxdP3SXRgWrpnOJJOFOV6Hr5mGloM0iEWaNNAeJKpNGt6b
+ ypWQ==
+X-Gm-Message-State: APjAAAUGRExMryxDq5exW0ubRp3gina1RsnB5Rj4MeyhpctMmd1zzEGr
+ 4C8h085IoY0gAbIQdY2mzRzy1w==
+X-Google-Smtp-Source: APXvYqzuLsSC9LsIbGm4Zb4ESH+Pc+plYrCNKSOpCL7fX11r7/DO3l7PhwVka3oEmD+oLWwJLPekjw==
+X-Received: by 2002:a81:4bc2:: with SMTP id
+ y185mr13340008ywa.491.1569006207601; 
+ Fri, 20 Sep 2019 12:03:27 -0700 (PDT)
+Received: from bill-the-cat
+ (cpe-2606-A000-1401-87B6-88B2-6D19-9205-7C6C.dyn6.twc.com.
+ [2606:a000:1401:87b6:88b2:6d19:9205:7c6c])
+ by smtp.gmail.com with ESMTPSA id h74sm622688ywc.15.2019.09.20.12.03.25
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 20 Sep 2019 12:03:26 -0700 (PDT)
+Date: Fri, 20 Sep 2019 15:03:24 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Stefan Roese <sr@denx.de>
+Message-ID: <20190920190324.GM1011@bill-the-cat>
+References: <20190918092920.21435-1-patrick.delaunay@st.com>
+ <b3874e83-e983-2adb-aef4-585acc4e08d9@denx.de>
 MIME-Version: 1.0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Quentin Schulz <quentin.schulz@bootlin.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>
-Subject: Re: [Uboot-stm32] [PATCH] cmd: mtd: solve bad block support in
-	erase command
+In-Reply-To: <b3874e83-e983-2adb-aef4-585acc4e08d9@denx.de>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+Cc: Hamish Guthrie <hamish.guthrie@kistler.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Boris Brezillon <boris.brezillon@bootlin.com>,
+ Eugeniu Rosca <roscaeugeniu@gmail.com>, Michal Simek <michal.simek@xilinx.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de,
+ Ash Charles <ash@gumstix.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ruslan Trofymenko <ruslan.trofymenko@linaro.org>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v3 0/3] env: Add
+	CONFIG_ENV_FULL_SUPPORT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -43,103 +78,127 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5121253565222161086=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgUGF0cmljaywKClBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAc3QuY29tPiB3
-cm90ZSBvbiBGcmksIDIwIFNlcCAyMDE5CjA5OjIwOjEyICswMjAwOgoKPiBUaGlzIHBhdGNoIG1v
-ZGlmeSB0aGUgbG9vcCBpbiBtdGQgZXJhc2UgY29tbWFuZCB0byBlcmFzZSBvbmUgYnkgb25lCj4g
-dGhlIGJsb2NrcyBpbiB0aGUgcmVxdWVzdGVkIGFyZWEuCj4gCj4gSXQgc29sdmVzIGlzc3VlIG9u
-ICJtdGQgZXJhc2UiIGNvbW1hbmQgb24gbmFuZCB3aXRoIGV4aXN0aW5nIGJhZCBibG9jaywKPiB0
-aGUgY29tbWFuZCBpcyBpbnRlcnJ1cHRlZCBvbiB0aGUgZmlyc3QgYmFkIGJsb2NrIHdpdGggdGhl
-IHRyYWNlOgo+IAkiU2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4ZmZmZmZmZmZmZmZmZmZmZiIKPiAK
-PiBJbiBNVEQgZHJpdmVyIChuYW5kL3JhdyksIHdoZW4gYSBiYWQgYmxvY2sgaXMgcHJlc2VudCBv
-biB0aGUgTVRECj4gZGV2aWNlLCB0aGUgZXJhc2Vfb3AuZmFpbF9hZGRyIGlzIG5vdCB1cGRhdGVk
-IGFuZCB3ZSBoYXZlIHRoZSBpbml0aWFsCj4gdmFsdWUgTVREX0ZBSUxfQUREUl9VTktOT1dOID0g
-KFVMTCktMS4KPiAKPiBUaGlzIGNhc2Ugc2VlbXMgbm9ybWFsIGluIG5hbmRfYmFzZS5jOm5hbmRf
-ZXJhc2VfbmFuZCgpLAo+IHdlIGhhdmUgdGhlIDIgZXhpdCBjYXNlcyBkdXJpbmcgdGhlIGxvb3A6
-Cj4gCj4gMS8gd2UgaGF2ZSBhIGJhZCBibG9jayAobmFuZF9ibG9ja19jaGVja2JhZCkKPiAJaW5z
-dHItPnN0YXRlID0gTVREX0VSQVNFX0ZBSUxFRAo+IAlsb29wIGludGVycnVwdGVkIChnb3RvIGVy
-YXNlX2V4aXQpCj4gCj4gMi8gaWYgYmxvY2sgZXJhc2UgZmFpbGVkIChzdGF0dXMgJiBOQU5EX1NU
-QVRVU19GQUlMKQo+IAlpbnN0ci0+c3RhdGUgPSBNVERfRVJBU0VfRkFJTEVEOwo+IAlpbnN0ci0+
-ZmFpbF9hZGRyID0KPiAJCQkJKChsb2ZmX3QpcGFnZSA8PCBjaGlwLT5wYWdlX3NoaWZ0KTsKPiAJ
-bG9vcCBpbnRlcnJ1cHRlZCAoZ290byBlcmFzZV9leGl0KQo+IAo+IFNvIGVyYXNlX29wLmZhaWxf
-YWRkciBjYW4ndCBiZSB1c2VkIGlmIGJhZCBibG9ja3Mgd2VyZSBwcmVzZW50Cj4gaW4gdGhlIGVy
-YXNlZCBhcmVhOyB3ZSBuZWVkIHRvIHVzZSBtdGRfZXJhc2Ugb25seSBvbmUgYmxvY2sgdG8gZGV0
-ZWN0Cj4gYW5kIHNraXAgdGhlc2UgZXhpc3RpbmcgYmFkIGJsb2NrcyAoYXMgaXQgaXMgZG9uZSBp
-biBuYW5kX3V0aWwuYykuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0
-cmljay5kZWxhdW5heUBzdC5jb20+Cj4gLS0tCj4gCj4gSGksCj4gCj4gRm91bmQgYSBjb3JyZWN0
-IGluIHRoZSBtdGQgZXJhc2UgY29tbWFuZC4KPiAKPiBJIGRldGVjdCB0aGUgaXNzdWUgYW5kIHRl
-c3QgdGhlIHBhdGNoIG9uIFNUTTMyTVAxNTdDLUVWMSBib2FyZCwKPiB3aXRoIG5vciBhbmQgbmFu
-ZC4gV2UgaGF2ZSB0aGUgYmxvY2sgdGFibGUgYXQgdGhlIGVuZCBvZiB0aGUgbmFuZAo+IHNvIHRo
-ZSA0IGxhc3QgYmxvY2tzIGFyZSBtYXJrZWQgYmFkLgo+IAo+IEFuZCBJIHRyeSB0byBlcmFzZSBh
-bGwgdGhlIG5hbmQgd2l0aCB0aGUgY29tbWFuZCAibXRkIGVyYXNlIi4KPiAKPiBCZWZvcmUgdGhl
-IHBhdGNoOgo+IAo+IFRoZSAibmFuZCBlcmFzZSIgY29tbWFuZCBiZWhhdmlvciBpcyBPSzoKPiAK
-PiBTVE0zMk1QPiBuYW5kIGVyYXNlIDB4MCAweDAwMDA0MDAwMDAwMCAgCj4gCj4gTkFORCBlcmFz
-ZTogZGV2aWNlIDAgd2hvbGUgY2hpcAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmYwMDAw
-MAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmY0MDAwMAo+IFNraXBwaW5nIGJhZCBibG9j
-ayBhdCAgMHgzZmY4MDAwMAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmZjMDAwMAo+IAo+
-IEJ1dCB0aGUgIm10ZCBlcmFzZSIgY29tbWFuZCBpcyBub3QgY29ycmVjdDoKPiAKPiBTVE0zMk1Q
-PiBtdGQgbGlzdCAgCj4gU0Y6IERldGVjdGVkIG14NjZsNTEyMzVsIHdpdGggcGFnZSBzaXplIDI1
-NiBCeXRlcywgZXJhc2Ugc2l6ZSA2NCBLaUIsIHRvdGFsIDY0IE1pQgo+IExpc3Qgb2YgTVREIGRl
-dmljZXM6Cj4gKiBuYW5kMAo+ICAgLSB0eXBlOiBOQU5EIGZsYXNoCj4gICAtIGJsb2NrIHNpemU6
-IDB4NDAwMDAgYnl0ZXMKPiAgIC0gbWluIEkvTzogMHgxMDAwIGJ5dGVzCj4gICAtIE9PQiBzaXpl
-OiAyMjQgYnl0ZXMKPiAgIC0gT09CIGF2YWlsYWJsZTogMTE4IGJ5dGVzCj4gICAtIEVDQyBzdHJl
-bmd0aDogOCBiaXRzCj4gICAtIEVDQyBzdGVwIHNpemU6IDUxMiBieXRlcwo+ICAgLSBiaXRmbGlw
-IHRocmVzaG9sZDogNiBiaXRzCj4gICAtIDB4MDAwMDAwMDAwMDAwLTB4MDAwMDQwMDAwMDAwIDog
-Im5hbmQwIgo+ICAgICAgICAgICAtIDB4MDAwMDAwMDAwMDAwLTB4MDAwMDAwMjAwMDAwIDogImZz
-YmwiCj4gICAgICAgICAgIC0gMHgwMDAwMDAyMDAwMDAtMHgwMDAwMDA0MDAwMDAgOiAic3NibDEi
-Cj4gICAgICAgICAgIC0gMHgwMDAwMDA0MDAwMDAtMHgwMDAwMDA2MDAwMDAgOiAic3NibDIiCj4g
-ICAgICAgICAgIC0gMHgwMDAwMDA2MDAwMDAtMHgwMDAwNDAwMDAwMDAgOiAiVUJJIgo+ICogbm9y
-MAo+ICAgLSB0eXBlOiBOT1IgZmxhc2gKPiAgIC0gYmxvY2sgc2l6ZTogMHgxMDAwMCBieXRlcwo+
-ICAgLSBtaW4gSS9POiAweDEgYnl0ZXMKPiAgIC0gMHgwMDAwMDAwMDAwMDAtMHgwMDAwMDQwMDAw
-MDAgOiAibm9yMCIKPiAgICAgICAgICAgLSAweDAwMDAwMDAwMDAwMC0weDAwMDAwMDA0MDAwMCA6
-ICJmc2JsMSIKPiAgICAgICAgICAgLSAweDAwMDAwMDA0MDAwMC0weDAwMDAwMDA4MDAwMCA6ICJm
-c2JsMiIKPiAgICAgICAgICAgLSAweDAwMDAwMDA4MDAwMC0weDAwMDAwMDI4MDAwMCA6ICJzc2Js
-Igo+ICAgICAgICAgICAtIDB4MDAwMDAwMjgwMDAwLTB4MDAwMDAwMzAwMDAwIDogInUtYm9vdC1l
-bnYiCj4gICAgICAgICAgIC0gMHgwMDAwMDAzMDAwMDAtMHgwMDAwMDQwMDAwMDAgOiAibm9yX3Vz
-ZXIiCj4gCj4gU1RNMzJNUD4gbXRkIGVyYXNlIG5hbmQwIDB4MCAweDAwMDA0MDAwMDAwMCAgCj4g
-RXJhc2luZyAweDAwMDAwMDAwIC4uLiAweDNmZmZmZmZmICg0MDk2IGVyYXNlYmxvY2socykpCj4g
-U2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4ZmZmZmZmZmZmZmZmZmZmZgo+IAo+IE9LCj4gCj4gVGhl
-IDQgYmFkIGJsb2NrcyBhcmUgbm90IGNvcnJlY3RseSBza2lwcGVkLAo+IHRoZSBjb21tYW5kIGlz
-IHN0b3BwZWQgb24gdGhlIGZpcnN0IGVycm9yLgo+IAo+IEFmdGVyIHRoZSBwYXRjaCwgdGhlICJt
-dGQgZXJhc2UiIGNvbW1hbmQgc2tpcHMgdGhlIDQgYmFkIGJsb2NrCj4gZXhhY3RseSBhcyB0aGUg
-Im5hbmQgZXJhc2UiIGNvbW1hbmQ6Cj4gCj4gU1RNMzJNUD4gbXRkIGVyYXNlIG5hbmQwIDB4MDAw
-MDAwMDAwMDAwIDB4MDAwMDQwMDAwMDAwICAKPiBTRjogRGV0ZWN0ZWQgbXg2Nmw1MTIzNWwgd2l0
-aCBwYWdlIHNpemUgMjU2IEJ5dGVzLCBlcmFzZSBzaXplIDY0IEtpQiwgdG90YWwgNjQgTWlCCj4g
-RXJhc2luZyAweDAwMDAwMDAwIC4uLiAweDNmZmZmZmZmICg0MDk2IGVyYXNlYmxvY2socykpCj4g
-U2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4M2ZmMDAwMDAKPiBTa2lwcGluZyBiYWQgYmxvY2sgYXQg
-MHgzZmY0MDAwMAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAweDNmZjgwMDAwCj4gU2tpcHBpbmcg
-YmFkIGJsb2NrIGF0IDB4M2ZmYzAwMDAKPiAKPiBSZWdhcmRzCj4gCj4gUGF0cmljawo+IAo+IAo+
-ICBjbWQvbXRkLmMgfCAyNCArKysrKysrKysrKystLS0tLS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5n
-ZWQsIDEyIGluc2VydGlvbnMoKyksIDEyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9j
-bWQvbXRkLmMgYi9jbWQvbXRkLmMKPiBpbmRleCAxYjZiOGRkYTJiLi5hNTU5YjVhNGEzIDEwMDY0
-NAo+IC0tLSBhL2NtZC9tdGQuYwo+ICsrKyBiL2NtZC9tdGQuYwo+IEBAIC0zODcsNyArMzg3LDcg
-QEAgc3RhdGljIGludCBkb19tdGRfZXJhc2UoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGlu
-dCBhcmdjLAo+ICAJc3RydWN0IG10ZF9pbmZvICptdGQ7Cj4gIAl1NjQgb2ZmLCBsZW47Cj4gIAli
-b29sIHNjcnViOwo+IC0JaW50IHJldDsKPiArCWludCByZXQgPSAwOwo+ICAKPiAgCWlmIChhcmdj
-IDwgMikKPiAgCQlyZXR1cm4gQ01EX1JFVF9VU0FHRTsKPiBAQCAtNDIzLDIyICs0MjMsMjIgQEAg
-c3RhdGljIGludCBkb19tdGRfZXJhc2UoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGludCBh
-cmdjLAo+ICAKPiAgCWVyYXNlX29wLm10ZCA9IG10ZDsKPiAgCWVyYXNlX29wLmFkZHIgPSBvZmY7
-Cj4gLQllcmFzZV9vcC5sZW4gPSBsZW47Cj4gKwllcmFzZV9vcC5sZW4gPSBtdGQtPmVyYXNlc2l6
-ZTsKPiAgCWVyYXNlX29wLnNjcnViID0gc2NydWI7Cj4gIAo+IC0Jd2hpbGUgKGVyYXNlX29wLmxl
-bikgewo+ICsJd2hpbGUgKGxlbikgewo+ICAJCXJldCA9IG10ZF9lcmFzZShtdGQsICZlcmFzZV9v
-cCk7Cj4gIAo+IC0JCS8qIEFib3J0IGlmIGl0cyBub3QgYSBiYWQgYmxvY2sgZXJyb3IgKi8KPiAt
-CQlpZiAocmV0ICE9IC1FSU8pCj4gLQkJCWJyZWFrOwo+IC0KPiAtCQlwcmludGYoIlNraXBwaW5n
-IGJhZCBibG9jayBhdCAweCUwOGxseFxuIiwgZXJhc2Vfb3AuZmFpbF9hZGRyKTsKPiArCQlpZiAo
-cmV0KSB7Cj4gKwkJCS8qIEFib3J0IGlmIGl0cyBub3QgYSBiYWQgYmxvY2sgZXJyb3IgKi8KPiAr
-CQkJaWYgKHJldCAhPSAtRUlPKQo+ICsJCQkJYnJlYWs7Cj4gKwkJCXByaW50ZigiU2tpcHBpbmcg
-YmFkIGJsb2NrIGF0IDB4JTA4bGx4XG4iLAo+ICsJCQkgICAgICAgZXJhc2Vfb3AuYWRkcik7Cj4g
-KwkJfQo+ICAKPiAtCQkvKiBTa2lwIGJhZCBibG9jayBhbmQgY29udGludWUgYmVoaW5kIGl0ICov
-Cj4gLQkJZXJhc2Vfb3AubGVuIC09IGVyYXNlX29wLmZhaWxfYWRkciAtIGVyYXNlX29wLmFkZHI7
-Cj4gLQkJZXJhc2Vfb3AubGVuIC09IG10ZC0+ZXJhc2VzaXplOwo+IC0JCWVyYXNlX29wLmFkZHIg
-PSBlcmFzZV9vcC5mYWlsX2FkZHIgKyBtdGQtPmVyYXNlc2l6ZTsKPiArCQlsZW4gLT0gbXRkLT5l
-cmFzZXNpemU7Cj4gKwkJZXJhc2Vfb3AuYWRkciArPSBtdGQtPmVyYXNlc2l6ZTsKPiAgCX0KPiAg
-Cj4gIAlpZiAocmV0ICYmIHJldCAhPSAtRUlPKQoKTmljZSBjYXRjaCEKClJldmlld2VkLWJ5OiBN
-aXF1ZWwgUmF5bmFsIDxtaXF1ZWwucmF5bmFsQGJvb3RsaW4uY29tPgoKClRoYW5rcywKTWlxdcOo
-bApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
-dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
-bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
-Ym9vdC1zdG0zMgo=
+
+--===============5121253565222161086==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="MsEL38XAg4rx1uDx"
+Content-Disposition: inline
+
+
+--MsEL38XAg4rx1uDx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Sep 20, 2019 at 11:09:14AM +0200, Stefan Roese wrote:
+> Hi Patrick,
+>=20
+> On 18.09.19 11:29, Patrick Delaunay wrote:
+> >This patchset is a the 3rd version of
+> >   http://patchwork.ozlabs.org/project/uboot/list/?series=3D129339
+> >   "env: Add CONFIG_ENV_SUPPORT"
+> >
+> >The first patch of the serie only solves the regression introduced by
+> >commit 7d4776545b0f ("env: solve compilation error
+> >in SPL"); change_ok was always NULL in U-Boot.
+> >See "U-Boot: Environment flags broken for U-Boot" mail
+> >http://u-boot.10912.n7.nabble.com/U-Boot-Environment-flags-broken-for-U-=
+Boot-tt382673.html
+> >
+> >This first patch can be integrated in master branch
+> >for v2019.10 as requested Tom Rimi.
+> >
+> >The next patches of the serie is a proposal after Wolfgang Denk
+> >review on the first proposal: I make the env support coherent between
+> >U-Boot, SPL and TPL.
+> >
+> >I need to change many defconfig (to add CONFIG_(SPL/TPL)_ENV_IS_NOWHERE)
+> >because I modify the dependency between the CONFIG used by SPL.
+> >
+> >Moreover the size of SPL increase after this last patch.
+> >
+> >For example on stm32mp15_basic, the SPL sizes:
+> >
+> >   62024	   4616	    892	  67532	  107cc	spl/u-boot-spl 00003e6c
+> >
+> >increase by 250 byte to
+> >
+> >   62274	   4640	    896	  67810	  108e2	spl/u-boot-spl 00003f56
+> >
+> >And the patch also breaks the compilation of few boards, when SPL size is
+> >near to its limit (.sram overflowed in SPL or SPL image too big):
+> >  imx6q_logic (by 1572 bytes)
+> >  omap3_logic_somlv (by 220 bytes)
+> >  omap3_logic (by 276 bytes)
+> >  omap35_logic_somlv (by 156 bytes)
+> >  omap35_logic (by 3064 bytes)
+> >  smartweb (by 408 bytes)
+> >  duovero (by 952 bytes)
+> >  x600 (by 1624 bytes)
+> >
+> >So the last patch can't be integrated today with these errors
+> >but any review and advice are welcome.
+>=20
+> I'm looking into this because of the x600 breakage. So this patchset
+> increases the SPL image size because all the environment "features"
+> are now also available in SPL (please correct me if I'm wrong). In
+> the case of x600 (IIRC), env is not used at all in the SPL stage.
+> Perhaps it would be possible to (optionally) remove the environment
+> support completely from SPL/TPL in such cases?
+
+As part of correcting things here, we need to be able to have boards
+either:
+- Work as-is today, whatever options that need to be on/off now, are
+  on/off.
+- In the potential cases of undesirable configurations we need to be
+  able to opt for "OK, drop stuff" as well as there's going to be many
+  cases where the board doesn't have the binary space for more features
+  and removal of really unused stuff is fine.  ie TPL/SPL environment
+  use cases boil down to:
+  - Need read-only support, for network stack.
+  - Need some read/write support, for bootcount
+  - Maybe a few things along those lines I can't think of off-hand but
+    are $X needs read-only or $Y needs limited write.
+
+--=20
+Tom
+
+--MsEL38XAg4rx1uDx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJdhSJ7AAoJEIf59jXTHXZSj90P+gNUjSpOyHgUzpi7Vz9auW4M
+6HgR24p2p/u020Nj4pwmABJwFfenpEM2ZhQ/qDPALMiGj5+fRzMz0rNbqjRlavfx
+VlHFp8bo+MO6ewbmguDUlwdSxHrBhZlsRTR2hTE/bQdOOPfSvnrmqQ5pZKa++ANH
+R5MLYr4V8A5aj6MsRZmV3qXPKePr6KPADZY5D1oNXY3cZ+YXjgGVl2XF7lGzPstx
+ALEU2105iI6JHVcDHFBdmE7kwdu/5ERZob/zQ8c1QA1rttsk68jrKUr9+oTrFSq6
+WCM51643UGaL9KBK/SYo6042ZUqYXdpMJhZAyg3zDGC56fq8yW7i1L4NKUA6uEDH
+5f35RdbFAoIA6MKYQM6ukhpEIVs6S0TOtXO33W905SH0UUaC4xm4q4NAzRBmpqtW
+gMBsv6bgmff0X+5o01qCwy64uIe9C+n0YqunfJALKWGhrE+l0yXfGyGE2fFYsj/r
+5CtchOYT3+C3zHoqQXkE8VoBVE38xXbLncl958UaC6hP1gRlHblqotiyVgE6LOnl
+WCzPWz6RWcs9tLnURrsXd1T4rwjYe63THMQTZzDcSkYd69fIp/ylqpZlilIzMQxW
+PRfuR3J2gpvH25KFrEEroYSjXwnuqfL/FPcTMx8xs2/3FUsR1PQUZYC3SRmxPyxC
+W4eIjZWjOnrNQ7qXN5+H
+=flJP
+-----END PGP SIGNATURE-----
+
+--MsEL38XAg4rx1uDx--
+
+--===============5121253565222161086==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============5121253565222161086==--

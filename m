@@ -2,40 +2,34 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0BB8B8D8A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 11:20:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D22B4B8E1A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 11:56:01 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A3351C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 09:20:31 +0000 (UTC)
-Received: from mx2a.mailbox.org (mx2a.mailbox.org [80.241.60.219])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8FE71C36B3F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 09:56:01 +0000 (UTC)
+Received: from relay11.mail.gandi.net (relay11.mail.gandi.net [217.70.178.231])
+ (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 85570C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCC47C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 20 Sep 2019 09:20:28 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:105:465:1:2:0])
- (using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
- (No client certificate requested)
- by mx2.mailbox.org (Postfix) with ESMTPS id B2555A13F5;
- Fri, 20 Sep 2019 11:20:27 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at heinlein-support.de
-Received: from smtp2.mailbox.org ([80.241.60.241])
- by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
- [80.241.56.116]) (amavisd-new, port 10030)
- with ESMTP id vPksY1jaaGR6; Fri, 20 Sep 2019 11:20:23 +0200 (CEST)
-To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
-References: <20190920072012.17841-1-patrick.delaunay@st.com>
-From: Stefan Roese <sr@denx.de>
-Message-ID: <e9bfec17-f534-ce8a-fba0-067f8a1c7131@denx.de>
-Date: Fri, 20 Sep 2019 11:20:22 +0200
-MIME-Version: 1.0
+ Fri, 20 Sep 2019 09:56:00 +0000 (UTC)
+Received: from xps13 (lfbn-1-17395-211.w86-250.abo.wanadoo.fr [86.250.200.211])
+ (Authenticated sender: miquel.raynal@bootlin.com)
+ by relay11.mail.gandi.net (Postfix) with ESMTPSA id 514BF100006;
+ Fri, 20 Sep 2019 09:55:59 +0000 (UTC)
+Date: Fri, 20 Sep 2019 11:55:58 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20190920094154.7742d4ac@xps13>
 In-Reply-To: <20190920072012.17841-1-patrick.delaunay@st.com>
-Content-Language: en-US
+References: <20190920072012.17841-1-patrick.delaunay@st.com>
+Organization: Bootlin
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>,
+ u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
  Quentin Schulz <quentin.schulz@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
+ Boris Brezillon <boris.brezillon@bootlin.com>
 Subject: Re: [Uboot-stm32] [PATCH] cmd: mtd: solve bad block support in
 	erase command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -49,183 +43,103 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
-
-On 20.09.19 09:20, Patrick Delaunay wrote:
-> This patch modify the loop in mtd erase command to erase one by one
-> the blocks in the requested area.
-> 
-> It solves issue on "mtd erase" command on nand with existing bad block,
-> the command is interrupted on the first bad block with the trace:
-> 	"Skipping bad block at 0xffffffffffffffff"
-> 
-> In MTD driver (nand/raw), when a bad block is present on the MTD
-> device, the erase_op.fail_addr is not updated and we have the initial
-> value MTD_FAIL_ADDR_UNKNOWN = (ULL)-1.
-
-So here is the difference? I remember testing this on a board with
-SPI NAND and here it worked correctly. But your test case is with
-RAW NAND?
-
-Do you have a change to also test this on a board with SPI NAND?
-
-Thanks,
-Stefan
-  
-> This case seems normal in nand_base.c:nand_erase_nand(),
-> we have the 2 exit cases during the loop:
-> 
-> 1/ we have a bad block (nand_block_checkbad)
-> 	instr->state = MTD_ERASE_FAILED
-> 	loop interrupted (goto erase_exit)
-> 
-> 2/ if block erase failed (status & NAND_STATUS_FAIL)
-> 	instr->state = MTD_ERASE_FAILED;
-> 	instr->fail_addr =
-> 				((loff_t)page << chip->page_shift);
-> 	loop interrupted (goto erase_exit)
-> 
-> So erase_op.fail_addr can't be used if bad blocks were present
-> in the erased area; we need to use mtd_erase only one block to detect
-> and skip these existing bad blocks (as it is done in nand_util.c).
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> 
-> Hi,
-> 
-> Found a correct in the mtd erase command.
-> 
-> I detect the issue and test the patch on STM32MP157C-EV1 board,
-> with nor and nand. We have the block table at the end of the nand
-> so the 4 last blocks are marked bad.
-> 
-> And I try to erase all the nand with the command "mtd erase".
-> 
-> Before the patch:
-> 
-> The "nand erase" command behavior is OK:
-> 
-> STM32MP> nand erase 0x0 0x000040000000
-> 
-> NAND erase: device 0 whole chip
-> Skipping bad block at  0x3ff00000
-> Skipping bad block at  0x3ff40000
-> Skipping bad block at  0x3ff80000
-> Skipping bad block at  0x3ffc0000
-> 
-> But the "mtd erase" command is not correct:
-> 
-> STM32MP> mtd list
-> SF: Detected mx66l51235l with page size 256 Bytes, erase size 64 KiB, total 64 MiB
-> List of MTD devices:
-> * nand0
->    - type: NAND flash
->    - block size: 0x40000 bytes
->    - min I/O: 0x1000 bytes
->    - OOB size: 224 bytes
->    - OOB available: 118 bytes
->    - ECC strength: 8 bits
->    - ECC step size: 512 bytes
->    - bitflip threshold: 6 bits
->    - 0x000000000000-0x000040000000 : "nand0"
->            - 0x000000000000-0x000000200000 : "fsbl"
->            - 0x000000200000-0x000000400000 : "ssbl1"
->            - 0x000000400000-0x000000600000 : "ssbl2"
->            - 0x000000600000-0x000040000000 : "UBI"
-> * nor0
->    - type: NOR flash
->    - block size: 0x10000 bytes
->    - min I/O: 0x1 bytes
->    - 0x000000000000-0x000004000000 : "nor0"
->            - 0x000000000000-0x000000040000 : "fsbl1"
->            - 0x000000040000-0x000000080000 : "fsbl2"
->            - 0x000000080000-0x000000280000 : "ssbl"
->            - 0x000000280000-0x000000300000 : "u-boot-env"
->            - 0x000000300000-0x000004000000 : "nor_user"
-> 
-> STM32MP> mtd erase nand0 0x0 0x000040000000
-> Erasing 0x00000000 ... 0x3fffffff (4096 eraseblock(s))
-> Skipping bad block at 0xffffffffffffffff
-> 
-> OK
-> 
-> The 4 bad blocks are not correctly skipped,
-> the command is stopped on the first error.
-> 
-> After the patch, the "mtd erase" command skips the 4 bad block
-> exactly as the "nand erase" command:
-> 
-> STM32MP> mtd erase nand0 0x000000000000 0x000040000000
-> SF: Detected mx66l51235l with page size 256 Bytes, erase size 64 KiB, total 64 MiB
-> Erasing 0x00000000 ... 0x3fffffff (4096 eraseblock(s))
-> Skipping bad block at 0x3ff00000
-> Skipping bad block at 0x3ff40000
-> Skipping bad block at 0x3ff80000
-> Skipping bad block at 0x3ffc0000
-> 
-> Regards
-> 
-> Patrick
-> 
-> 
->   cmd/mtd.c | 24 ++++++++++++------------
->   1 file changed, 12 insertions(+), 12 deletions(-)
-> 
-> diff --git a/cmd/mtd.c b/cmd/mtd.c
-> index 1b6b8dda2b..a559b5a4a3 100644
-> --- a/cmd/mtd.c
-> +++ b/cmd/mtd.c
-> @@ -387,7 +387,7 @@ static int do_mtd_erase(cmd_tbl_t *cmdtp, int flag, int argc,
->   	struct mtd_info *mtd;
->   	u64 off, len;
->   	bool scrub;
-> -	int ret;
-> +	int ret = 0;
->   
->   	if (argc < 2)
->   		return CMD_RET_USAGE;
-> @@ -423,22 +423,22 @@ static int do_mtd_erase(cmd_tbl_t *cmdtp, int flag, int argc,
->   
->   	erase_op.mtd = mtd;
->   	erase_op.addr = off;
-> -	erase_op.len = len;
-> +	erase_op.len = mtd->erasesize;
->   	erase_op.scrub = scrub;
->   
-> -	while (erase_op.len) {
-> +	while (len) {
->   		ret = mtd_erase(mtd, &erase_op);
->   
-> -		/* Abort if its not a bad block error */
-> -		if (ret != -EIO)
-> -			break;
-> -
-> -		printf("Skipping bad block at 0x%08llx\n", erase_op.fail_addr);
-> +		if (ret) {
-> +			/* Abort if its not a bad block error */
-> +			if (ret != -EIO)
-> +				break;
-> +			printf("Skipping bad block at 0x%08llx\n",
-> +			       erase_op.addr);
-> +		}
->   
-> -		/* Skip bad block and continue behind it */
-> -		erase_op.len -= erase_op.fail_addr - erase_op.addr;
-> -		erase_op.len -= mtd->erasesize;
-> -		erase_op.addr = erase_op.fail_addr + mtd->erasesize;
-> +		len -= mtd->erasesize;
-> +		erase_op.addr += mtd->erasesize;
->   	}
->   
->   	if (ret && ret != -EIO)
-> 
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgUGF0cmljaywKClBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAc3QuY29tPiB3
+cm90ZSBvbiBGcmksIDIwIFNlcCAyMDE5CjA5OjIwOjEyICswMjAwOgoKPiBUaGlzIHBhdGNoIG1v
+ZGlmeSB0aGUgbG9vcCBpbiBtdGQgZXJhc2UgY29tbWFuZCB0byBlcmFzZSBvbmUgYnkgb25lCj4g
+dGhlIGJsb2NrcyBpbiB0aGUgcmVxdWVzdGVkIGFyZWEuCj4gCj4gSXQgc29sdmVzIGlzc3VlIG9u
+ICJtdGQgZXJhc2UiIGNvbW1hbmQgb24gbmFuZCB3aXRoIGV4aXN0aW5nIGJhZCBibG9jaywKPiB0
+aGUgY29tbWFuZCBpcyBpbnRlcnJ1cHRlZCBvbiB0aGUgZmlyc3QgYmFkIGJsb2NrIHdpdGggdGhl
+IHRyYWNlOgo+IAkiU2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4ZmZmZmZmZmZmZmZmZmZmZiIKPiAK
+PiBJbiBNVEQgZHJpdmVyIChuYW5kL3JhdyksIHdoZW4gYSBiYWQgYmxvY2sgaXMgcHJlc2VudCBv
+biB0aGUgTVRECj4gZGV2aWNlLCB0aGUgZXJhc2Vfb3AuZmFpbF9hZGRyIGlzIG5vdCB1cGRhdGVk
+IGFuZCB3ZSBoYXZlIHRoZSBpbml0aWFsCj4gdmFsdWUgTVREX0ZBSUxfQUREUl9VTktOT1dOID0g
+KFVMTCktMS4KPiAKPiBUaGlzIGNhc2Ugc2VlbXMgbm9ybWFsIGluIG5hbmRfYmFzZS5jOm5hbmRf
+ZXJhc2VfbmFuZCgpLAo+IHdlIGhhdmUgdGhlIDIgZXhpdCBjYXNlcyBkdXJpbmcgdGhlIGxvb3A6
+Cj4gCj4gMS8gd2UgaGF2ZSBhIGJhZCBibG9jayAobmFuZF9ibG9ja19jaGVja2JhZCkKPiAJaW5z
+dHItPnN0YXRlID0gTVREX0VSQVNFX0ZBSUxFRAo+IAlsb29wIGludGVycnVwdGVkIChnb3RvIGVy
+YXNlX2V4aXQpCj4gCj4gMi8gaWYgYmxvY2sgZXJhc2UgZmFpbGVkIChzdGF0dXMgJiBOQU5EX1NU
+QVRVU19GQUlMKQo+IAlpbnN0ci0+c3RhdGUgPSBNVERfRVJBU0VfRkFJTEVEOwo+IAlpbnN0ci0+
+ZmFpbF9hZGRyID0KPiAJCQkJKChsb2ZmX3QpcGFnZSA8PCBjaGlwLT5wYWdlX3NoaWZ0KTsKPiAJ
+bG9vcCBpbnRlcnJ1cHRlZCAoZ290byBlcmFzZV9leGl0KQo+IAo+IFNvIGVyYXNlX29wLmZhaWxf
+YWRkciBjYW4ndCBiZSB1c2VkIGlmIGJhZCBibG9ja3Mgd2VyZSBwcmVzZW50Cj4gaW4gdGhlIGVy
+YXNlZCBhcmVhOyB3ZSBuZWVkIHRvIHVzZSBtdGRfZXJhc2Ugb25seSBvbmUgYmxvY2sgdG8gZGV0
+ZWN0Cj4gYW5kIHNraXAgdGhlc2UgZXhpc3RpbmcgYmFkIGJsb2NrcyAoYXMgaXQgaXMgZG9uZSBp
+biBuYW5kX3V0aWwuYykuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0
+cmljay5kZWxhdW5heUBzdC5jb20+Cj4gLS0tCj4gCj4gSGksCj4gCj4gRm91bmQgYSBjb3JyZWN0
+IGluIHRoZSBtdGQgZXJhc2UgY29tbWFuZC4KPiAKPiBJIGRldGVjdCB0aGUgaXNzdWUgYW5kIHRl
+c3QgdGhlIHBhdGNoIG9uIFNUTTMyTVAxNTdDLUVWMSBib2FyZCwKPiB3aXRoIG5vciBhbmQgbmFu
+ZC4gV2UgaGF2ZSB0aGUgYmxvY2sgdGFibGUgYXQgdGhlIGVuZCBvZiB0aGUgbmFuZAo+IHNvIHRo
+ZSA0IGxhc3QgYmxvY2tzIGFyZSBtYXJrZWQgYmFkLgo+IAo+IEFuZCBJIHRyeSB0byBlcmFzZSBh
+bGwgdGhlIG5hbmQgd2l0aCB0aGUgY29tbWFuZCAibXRkIGVyYXNlIi4KPiAKPiBCZWZvcmUgdGhl
+IHBhdGNoOgo+IAo+IFRoZSAibmFuZCBlcmFzZSIgY29tbWFuZCBiZWhhdmlvciBpcyBPSzoKPiAK
+PiBTVE0zMk1QPiBuYW5kIGVyYXNlIDB4MCAweDAwMDA0MDAwMDAwMCAgCj4gCj4gTkFORCBlcmFz
+ZTogZGV2aWNlIDAgd2hvbGUgY2hpcAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmYwMDAw
+MAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmY0MDAwMAo+IFNraXBwaW5nIGJhZCBibG9j
+ayBhdCAgMHgzZmY4MDAwMAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAgMHgzZmZjMDAwMAo+IAo+
+IEJ1dCB0aGUgIm10ZCBlcmFzZSIgY29tbWFuZCBpcyBub3QgY29ycmVjdDoKPiAKPiBTVE0zMk1Q
+PiBtdGQgbGlzdCAgCj4gU0Y6IERldGVjdGVkIG14NjZsNTEyMzVsIHdpdGggcGFnZSBzaXplIDI1
+NiBCeXRlcywgZXJhc2Ugc2l6ZSA2NCBLaUIsIHRvdGFsIDY0IE1pQgo+IExpc3Qgb2YgTVREIGRl
+dmljZXM6Cj4gKiBuYW5kMAo+ICAgLSB0eXBlOiBOQU5EIGZsYXNoCj4gICAtIGJsb2NrIHNpemU6
+IDB4NDAwMDAgYnl0ZXMKPiAgIC0gbWluIEkvTzogMHgxMDAwIGJ5dGVzCj4gICAtIE9PQiBzaXpl
+OiAyMjQgYnl0ZXMKPiAgIC0gT09CIGF2YWlsYWJsZTogMTE4IGJ5dGVzCj4gICAtIEVDQyBzdHJl
+bmd0aDogOCBiaXRzCj4gICAtIEVDQyBzdGVwIHNpemU6IDUxMiBieXRlcwo+ICAgLSBiaXRmbGlw
+IHRocmVzaG9sZDogNiBiaXRzCj4gICAtIDB4MDAwMDAwMDAwMDAwLTB4MDAwMDQwMDAwMDAwIDog
+Im5hbmQwIgo+ICAgICAgICAgICAtIDB4MDAwMDAwMDAwMDAwLTB4MDAwMDAwMjAwMDAwIDogImZz
+YmwiCj4gICAgICAgICAgIC0gMHgwMDAwMDAyMDAwMDAtMHgwMDAwMDA0MDAwMDAgOiAic3NibDEi
+Cj4gICAgICAgICAgIC0gMHgwMDAwMDA0MDAwMDAtMHgwMDAwMDA2MDAwMDAgOiAic3NibDIiCj4g
+ICAgICAgICAgIC0gMHgwMDAwMDA2MDAwMDAtMHgwMDAwNDAwMDAwMDAgOiAiVUJJIgo+ICogbm9y
+MAo+ICAgLSB0eXBlOiBOT1IgZmxhc2gKPiAgIC0gYmxvY2sgc2l6ZTogMHgxMDAwMCBieXRlcwo+
+ICAgLSBtaW4gSS9POiAweDEgYnl0ZXMKPiAgIC0gMHgwMDAwMDAwMDAwMDAtMHgwMDAwMDQwMDAw
+MDAgOiAibm9yMCIKPiAgICAgICAgICAgLSAweDAwMDAwMDAwMDAwMC0weDAwMDAwMDA0MDAwMCA6
+ICJmc2JsMSIKPiAgICAgICAgICAgLSAweDAwMDAwMDA0MDAwMC0weDAwMDAwMDA4MDAwMCA6ICJm
+c2JsMiIKPiAgICAgICAgICAgLSAweDAwMDAwMDA4MDAwMC0weDAwMDAwMDI4MDAwMCA6ICJzc2Js
+Igo+ICAgICAgICAgICAtIDB4MDAwMDAwMjgwMDAwLTB4MDAwMDAwMzAwMDAwIDogInUtYm9vdC1l
+bnYiCj4gICAgICAgICAgIC0gMHgwMDAwMDAzMDAwMDAtMHgwMDAwMDQwMDAwMDAgOiAibm9yX3Vz
+ZXIiCj4gCj4gU1RNMzJNUD4gbXRkIGVyYXNlIG5hbmQwIDB4MCAweDAwMDA0MDAwMDAwMCAgCj4g
+RXJhc2luZyAweDAwMDAwMDAwIC4uLiAweDNmZmZmZmZmICg0MDk2IGVyYXNlYmxvY2socykpCj4g
+U2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4ZmZmZmZmZmZmZmZmZmZmZgo+IAo+IE9LCj4gCj4gVGhl
+IDQgYmFkIGJsb2NrcyBhcmUgbm90IGNvcnJlY3RseSBza2lwcGVkLAo+IHRoZSBjb21tYW5kIGlz
+IHN0b3BwZWQgb24gdGhlIGZpcnN0IGVycm9yLgo+IAo+IEFmdGVyIHRoZSBwYXRjaCwgdGhlICJt
+dGQgZXJhc2UiIGNvbW1hbmQgc2tpcHMgdGhlIDQgYmFkIGJsb2NrCj4gZXhhY3RseSBhcyB0aGUg
+Im5hbmQgZXJhc2UiIGNvbW1hbmQ6Cj4gCj4gU1RNMzJNUD4gbXRkIGVyYXNlIG5hbmQwIDB4MDAw
+MDAwMDAwMDAwIDB4MDAwMDQwMDAwMDAwICAKPiBTRjogRGV0ZWN0ZWQgbXg2Nmw1MTIzNWwgd2l0
+aCBwYWdlIHNpemUgMjU2IEJ5dGVzLCBlcmFzZSBzaXplIDY0IEtpQiwgdG90YWwgNjQgTWlCCj4g
+RXJhc2luZyAweDAwMDAwMDAwIC4uLiAweDNmZmZmZmZmICg0MDk2IGVyYXNlYmxvY2socykpCj4g
+U2tpcHBpbmcgYmFkIGJsb2NrIGF0IDB4M2ZmMDAwMDAKPiBTa2lwcGluZyBiYWQgYmxvY2sgYXQg
+MHgzZmY0MDAwMAo+IFNraXBwaW5nIGJhZCBibG9jayBhdCAweDNmZjgwMDAwCj4gU2tpcHBpbmcg
+YmFkIGJsb2NrIGF0IDB4M2ZmYzAwMDAKPiAKPiBSZWdhcmRzCj4gCj4gUGF0cmljawo+IAo+IAo+
+ICBjbWQvbXRkLmMgfCAyNCArKysrKysrKysrKystLS0tLS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5n
+ZWQsIDEyIGluc2VydGlvbnMoKyksIDEyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9j
+bWQvbXRkLmMgYi9jbWQvbXRkLmMKPiBpbmRleCAxYjZiOGRkYTJiLi5hNTU5YjVhNGEzIDEwMDY0
+NAo+IC0tLSBhL2NtZC9tdGQuYwo+ICsrKyBiL2NtZC9tdGQuYwo+IEBAIC0zODcsNyArMzg3LDcg
+QEAgc3RhdGljIGludCBkb19tdGRfZXJhc2UoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGlu
+dCBhcmdjLAo+ICAJc3RydWN0IG10ZF9pbmZvICptdGQ7Cj4gIAl1NjQgb2ZmLCBsZW47Cj4gIAli
+b29sIHNjcnViOwo+IC0JaW50IHJldDsKPiArCWludCByZXQgPSAwOwo+ICAKPiAgCWlmIChhcmdj
+IDwgMikKPiAgCQlyZXR1cm4gQ01EX1JFVF9VU0FHRTsKPiBAQCAtNDIzLDIyICs0MjMsMjIgQEAg
+c3RhdGljIGludCBkb19tdGRfZXJhc2UoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGludCBh
+cmdjLAo+ICAKPiAgCWVyYXNlX29wLm10ZCA9IG10ZDsKPiAgCWVyYXNlX29wLmFkZHIgPSBvZmY7
+Cj4gLQllcmFzZV9vcC5sZW4gPSBsZW47Cj4gKwllcmFzZV9vcC5sZW4gPSBtdGQtPmVyYXNlc2l6
+ZTsKPiAgCWVyYXNlX29wLnNjcnViID0gc2NydWI7Cj4gIAo+IC0Jd2hpbGUgKGVyYXNlX29wLmxl
+bikgewo+ICsJd2hpbGUgKGxlbikgewo+ICAJCXJldCA9IG10ZF9lcmFzZShtdGQsICZlcmFzZV9v
+cCk7Cj4gIAo+IC0JCS8qIEFib3J0IGlmIGl0cyBub3QgYSBiYWQgYmxvY2sgZXJyb3IgKi8KPiAt
+CQlpZiAocmV0ICE9IC1FSU8pCj4gLQkJCWJyZWFrOwo+IC0KPiAtCQlwcmludGYoIlNraXBwaW5n
+IGJhZCBibG9jayBhdCAweCUwOGxseFxuIiwgZXJhc2Vfb3AuZmFpbF9hZGRyKTsKPiArCQlpZiAo
+cmV0KSB7Cj4gKwkJCS8qIEFib3J0IGlmIGl0cyBub3QgYSBiYWQgYmxvY2sgZXJyb3IgKi8KPiAr
+CQkJaWYgKHJldCAhPSAtRUlPKQo+ICsJCQkJYnJlYWs7Cj4gKwkJCXByaW50ZigiU2tpcHBpbmcg
+YmFkIGJsb2NrIGF0IDB4JTA4bGx4XG4iLAo+ICsJCQkgICAgICAgZXJhc2Vfb3AuYWRkcik7Cj4g
+KwkJfQo+ICAKPiAtCQkvKiBTa2lwIGJhZCBibG9jayBhbmQgY29udGludWUgYmVoaW5kIGl0ICov
+Cj4gLQkJZXJhc2Vfb3AubGVuIC09IGVyYXNlX29wLmZhaWxfYWRkciAtIGVyYXNlX29wLmFkZHI7
+Cj4gLQkJZXJhc2Vfb3AubGVuIC09IG10ZC0+ZXJhc2VzaXplOwo+IC0JCWVyYXNlX29wLmFkZHIg
+PSBlcmFzZV9vcC5mYWlsX2FkZHIgKyBtdGQtPmVyYXNlc2l6ZTsKPiArCQlsZW4gLT0gbXRkLT5l
+cmFzZXNpemU7Cj4gKwkJZXJhc2Vfb3AuYWRkciArPSBtdGQtPmVyYXNlc2l6ZTsKPiAgCX0KPiAg
+Cj4gIAlpZiAocmV0ICYmIHJldCAhPSAtRUlPKQoKTmljZSBjYXRjaCEKClJldmlld2VkLWJ5OiBN
+aXF1ZWwgUmF5bmFsIDxtaXF1ZWwucmF5bmFsQGJvb3RsaW4uY29tPgoKClRoYW5rcywKTWlxdcOo
+bApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
+dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
+Ym9vdC1zdG0zMgo=

@@ -2,54 +2,42 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4EC1B8D75
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 11:09:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0BB8B8D8A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 11:20:31 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8E271C36B3F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 09:09:36 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A3351C36B3F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 20 Sep 2019 09:20:31 +0000 (UTC)
 Received: from mx2a.mailbox.org (mx2a.mailbox.org [80.241.60.219])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 830F9C36B3E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 85570C36B3E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 20 Sep 2019 09:09:33 +0000 (UTC)
+ Fri, 20 Sep 2019 09:20:28 +0000 (UTC)
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:105:465:1:2:0])
  (using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
  (No client certificate requested)
- by mx2.mailbox.org (Postfix) with ESMTPS id EDDE1A1C2D;
- Fri, 20 Sep 2019 11:09:26 +0200 (CEST)
+ by mx2.mailbox.org (Postfix) with ESMTPS id B2555A13F5;
+ Fri, 20 Sep 2019 11:20:27 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at heinlein-support.de
 Received: from smtp2.mailbox.org ([80.241.60.241])
- by spamfilter06.heinlein-hosting.de (spamfilter06.heinlein-hosting.de
- [80.241.56.125]) (amavisd-new, port 10030)
- with ESMTP id kQE_NOqnQmuM; Fri, 20 Sep 2019 11:09:20 +0200 (CEST)
+ by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+ [80.241.56.116]) (amavisd-new, port 10030)
+ with ESMTP id vPksY1jaaGR6; Fri, 20 Sep 2019 11:20:23 +0200 (CEST)
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
-References: <20190918092920.21435-1-patrick.delaunay@st.com>
+References: <20190920072012.17841-1-patrick.delaunay@st.com>
 From: Stefan Roese <sr@denx.de>
-Message-ID: <b3874e83-e983-2adb-aef4-585acc4e08d9@denx.de>
-Date: Fri, 20 Sep 2019 11:09:14 +0200
+Message-ID: <e9bfec17-f534-ce8a-fba0-067f8a1c7131@denx.de>
+Date: Fri, 20 Sep 2019 11:20:22 +0200
 MIME-Version: 1.0
-In-Reply-To: <20190918092920.21435-1-patrick.delaunay@st.com>
+In-Reply-To: <20190920072012.17841-1-patrick.delaunay@st.com>
 Content-Language: en-US
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Lukasz Majewski <lukma@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Hamish Guthrie <hamish.guthrie@kistler.com>,
- Marek Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Michal Simek <michal.simek@xilinx.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>,
- Ash Charles <ash@gumstix.com>, Wolfgang Denk <wd@denx.de>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- Simon Glass <sjg@chromium.org>, Anup Patel <Anup.Patel@wdc.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 0/3] env: Add CONFIG_ENV_FULL_SUPPORT
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Boris Brezillon <boris.brezillon@bootlin.com>,
+ Quentin Schulz <quentin.schulz@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [Uboot-stm32] [PATCH] cmd: mtd: solve bad block support in
+	erase command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,60 +56,175 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick,
 
-On 18.09.19 11:29, Patrick Delaunay wrote:
-> This patchset is a the 3rd version of
->    http://patchwork.ozlabs.org/project/uboot/list/?series=129339
->    "env: Add CONFIG_ENV_SUPPORT"
+On 20.09.19 09:20, Patrick Delaunay wrote:
+> This patch modify the loop in mtd erase command to erase one by one
+> the blocks in the requested area.
 > 
-> The first patch of the serie only solves the regression introduced by
-> commit 7d4776545b0f ("env: solve compilation error
-> in SPL"); change_ok was always NULL in U-Boot.
-> See "U-Boot: Environment flags broken for U-Boot" mail
-> http://u-boot.10912.n7.nabble.com/U-Boot-Environment-flags-broken-for-U-Boot-tt382673.html
+> It solves issue on "mtd erase" command on nand with existing bad block,
+> the command is interrupted on the first bad block with the trace:
+> 	"Skipping bad block at 0xffffffffffffffff"
 > 
-> This first patch can be integrated in master branch
-> for v2019.10 as requested Tom Rimi.
-> 
-> The next patches of the serie is a proposal after Wolfgang Denk
-> review on the first proposal: I make the env support coherent between
-> U-Boot, SPL and TPL.
-> 
-> I need to change many defconfig (to add CONFIG_(SPL/TPL)_ENV_IS_NOWHERE)
-> because I modify the dependency between the CONFIG used by SPL.
-> 
-> Moreover the size of SPL increase after this last patch.
-> 
-> For example on stm32mp15_basic, the SPL sizes:
-> 
->    62024	   4616	    892	  67532	  107cc	spl/u-boot-spl 00003e6c
-> 
-> increase by 250 byte to
-> 
->    62274	   4640	    896	  67810	  108e2	spl/u-boot-spl 00003f56
-> 
-> And the patch also breaks the compilation of few boards, when SPL size is
-> near to its limit (.sram overflowed in SPL or SPL image too big):
->   imx6q_logic (by 1572 bytes)
->   omap3_logic_somlv (by 220 bytes)
->   omap3_logic (by 276 bytes)
->   omap35_logic_somlv (by 156 bytes)
->   omap35_logic (by 3064 bytes)
->   smartweb (by 408 bytes)
->   duovero (by 952 bytes)
->   x600 (by 1624 bytes)
-> 
-> So the last patch can't be integrated today with these errors
-> but any review and advice are welcome.
+> In MTD driver (nand/raw), when a bad block is present on the MTD
+> device, the erase_op.fail_addr is not updated and we have the initial
+> value MTD_FAIL_ADDR_UNKNOWN = (ULL)-1.
 
-I'm looking into this because of the x600 breakage. So this patchset
-increases the SPL image size because all the environment "features"
-are now also available in SPL (please correct me if I'm wrong). In
-the case of x600 (IIRC), env is not used at all in the SPL stage.
-Perhaps it would be possible to (optionally) remove the environment
-support completely from SPL/TPL in such cases?
+So here is the difference? I remember testing this on a board with
+SPI NAND and here it worked correctly. But your test case is with
+RAW NAND?
+
+Do you have a change to also test this on a board with SPI NAND?
 
 Thanks,
 Stefan
+  
+> This case seems normal in nand_base.c:nand_erase_nand(),
+> we have the 2 exit cases during the loop:
+> 
+> 1/ we have a bad block (nand_block_checkbad)
+> 	instr->state = MTD_ERASE_FAILED
+> 	loop interrupted (goto erase_exit)
+> 
+> 2/ if block erase failed (status & NAND_STATUS_FAIL)
+> 	instr->state = MTD_ERASE_FAILED;
+> 	instr->fail_addr =
+> 				((loff_t)page << chip->page_shift);
+> 	loop interrupted (goto erase_exit)
+> 
+> So erase_op.fail_addr can't be used if bad blocks were present
+> in the erased area; we need to use mtd_erase only one block to detect
+> and skip these existing bad blocks (as it is done in nand_util.c).
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> 
+> Hi,
+> 
+> Found a correct in the mtd erase command.
+> 
+> I detect the issue and test the patch on STM32MP157C-EV1 board,
+> with nor and nand. We have the block table at the end of the nand
+> so the 4 last blocks are marked bad.
+> 
+> And I try to erase all the nand with the command "mtd erase".
+> 
+> Before the patch:
+> 
+> The "nand erase" command behavior is OK:
+> 
+> STM32MP> nand erase 0x0 0x000040000000
+> 
+> NAND erase: device 0 whole chip
+> Skipping bad block at  0x3ff00000
+> Skipping bad block at  0x3ff40000
+> Skipping bad block at  0x3ff80000
+> Skipping bad block at  0x3ffc0000
+> 
+> But the "mtd erase" command is not correct:
+> 
+> STM32MP> mtd list
+> SF: Detected mx66l51235l with page size 256 Bytes, erase size 64 KiB, total 64 MiB
+> List of MTD devices:
+> * nand0
+>    - type: NAND flash
+>    - block size: 0x40000 bytes
+>    - min I/O: 0x1000 bytes
+>    - OOB size: 224 bytes
+>    - OOB available: 118 bytes
+>    - ECC strength: 8 bits
+>    - ECC step size: 512 bytes
+>    - bitflip threshold: 6 bits
+>    - 0x000000000000-0x000040000000 : "nand0"
+>            - 0x000000000000-0x000000200000 : "fsbl"
+>            - 0x000000200000-0x000000400000 : "ssbl1"
+>            - 0x000000400000-0x000000600000 : "ssbl2"
+>            - 0x000000600000-0x000040000000 : "UBI"
+> * nor0
+>    - type: NOR flash
+>    - block size: 0x10000 bytes
+>    - min I/O: 0x1 bytes
+>    - 0x000000000000-0x000004000000 : "nor0"
+>            - 0x000000000000-0x000000040000 : "fsbl1"
+>            - 0x000000040000-0x000000080000 : "fsbl2"
+>            - 0x000000080000-0x000000280000 : "ssbl"
+>            - 0x000000280000-0x000000300000 : "u-boot-env"
+>            - 0x000000300000-0x000004000000 : "nor_user"
+> 
+> STM32MP> mtd erase nand0 0x0 0x000040000000
+> Erasing 0x00000000 ... 0x3fffffff (4096 eraseblock(s))
+> Skipping bad block at 0xffffffffffffffff
+> 
+> OK
+> 
+> The 4 bad blocks are not correctly skipped,
+> the command is stopped on the first error.
+> 
+> After the patch, the "mtd erase" command skips the 4 bad block
+> exactly as the "nand erase" command:
+> 
+> STM32MP> mtd erase nand0 0x000000000000 0x000040000000
+> SF: Detected mx66l51235l with page size 256 Bytes, erase size 64 KiB, total 64 MiB
+> Erasing 0x00000000 ... 0x3fffffff (4096 eraseblock(s))
+> Skipping bad block at 0x3ff00000
+> Skipping bad block at 0x3ff40000
+> Skipping bad block at 0x3ff80000
+> Skipping bad block at 0x3ffc0000
+> 
+> Regards
+> 
+> Patrick
+> 
+> 
+>   cmd/mtd.c | 24 ++++++++++++------------
+>   1 file changed, 12 insertions(+), 12 deletions(-)
+> 
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index 1b6b8dda2b..a559b5a4a3 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -387,7 +387,7 @@ static int do_mtd_erase(cmd_tbl_t *cmdtp, int flag, int argc,
+>   	struct mtd_info *mtd;
+>   	u64 off, len;
+>   	bool scrub;
+> -	int ret;
+> +	int ret = 0;
+>   
+>   	if (argc < 2)
+>   		return CMD_RET_USAGE;
+> @@ -423,22 +423,22 @@ static int do_mtd_erase(cmd_tbl_t *cmdtp, int flag, int argc,
+>   
+>   	erase_op.mtd = mtd;
+>   	erase_op.addr = off;
+> -	erase_op.len = len;
+> +	erase_op.len = mtd->erasesize;
+>   	erase_op.scrub = scrub;
+>   
+> -	while (erase_op.len) {
+> +	while (len) {
+>   		ret = mtd_erase(mtd, &erase_op);
+>   
+> -		/* Abort if its not a bad block error */
+> -		if (ret != -EIO)
+> -			break;
+> -
+> -		printf("Skipping bad block at 0x%08llx\n", erase_op.fail_addr);
+> +		if (ret) {
+> +			/* Abort if its not a bad block error */
+> +			if (ret != -EIO)
+> +				break;
+> +			printf("Skipping bad block at 0x%08llx\n",
+> +			       erase_op.addr);
+> +		}
+>   
+> -		/* Skip bad block and continue behind it */
+> -		erase_op.len -= erase_op.fail_addr - erase_op.addr;
+> -		erase_op.len -= mtd->erasesize;
+> -		erase_op.addr = erase_op.fail_addr + mtd->erasesize;
+> +		len -= mtd->erasesize;
+> +		erase_op.addr += mtd->erasesize;
+>   	}
+>   
+>   	if (ret && ret != -EIO)
+> 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

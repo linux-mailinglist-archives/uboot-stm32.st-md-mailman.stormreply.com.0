@@ -2,71 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71D88BFCDB
-	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2019 03:49:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74413BFCDC
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2019 03:49:09 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3CA30C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2019 01:49:05 +0000 (UTC)
-Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
- [209.85.167.194])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 439ADC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2019 01:49:09 +0000 (UTC)
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 51567C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F3FC8C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 27 Sep 2019 01:49:01 +0000 (UTC)
-Received: by mail-oi1-f194.google.com with SMTP id m16so3873101oic.5
+ Fri, 27 Sep 2019 01:49:07 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id w17so3851646oiw.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Sep 2019 18:49:01 -0700 (PDT)
+ Thu, 26 Sep 2019 18:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sTL1782R4jzERgR3M5JaT6Yj4j0Y/EwYx4VCbuqPj2Q=;
- b=l4gUdZutgHc/7nRVwuwUI/TAWn6JYRNNCCPCSp58jmAzXhw4NSjZtrNQAEhGq+5CDf
- GYv0TCIV3LuQKcBj+SUleUKG08cOkAEieHWOIWEEVO5b6d2d00oCTTNGZILkr6Tfnd11
- WObL2PDXPsCag15MVhR8UxK/5/jwjJx6Zbbus=
+ :cc; bh=KtEmpUYAFtxwO8q9B5b4oJ9Ph9+32LhimpWWcQu8NLU=;
+ b=KXbhok86Xlx+SR+ckGAs6w4Zy3qJMS3ZB01vUSpyUpK/fxnSQRkyWL7s1gHdlAzUe7
+ T1y1Ql5Qrp7kwfJ+lLlwUNV/cNTfYxUwIAulz4ZD0CcQsrq+uRHKmIeDKIfBMS4wG9zS
+ ww2sJbYEs+k7etCx2Nprh1Sj9SExkFlc+giRE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=sTL1782R4jzERgR3M5JaT6Yj4j0Y/EwYx4VCbuqPj2Q=;
- b=P3qnQcKP1OAFfDwUidkNkIIc8EFPc1hmLAOv6vIDoozdBoaYsqVTbvl7j9chrYsMW4
- K3X4SEvMXoubEwyFtOVR+WNB0GzGCIj1K4/E1dPVztjG5Xm9wrAIT0pWA/1cZEfU2+n3
- /XH6wa+tBAsDn8Sd6QriCs4enUW3QztyDqftGA0Rh+m8VIUWT7c3nS36+VgwFB0emgVg
- jGjr8Qn38bNkUChe4C/R2fLZqc6VaeHf04tAa6x5yFf1bUgvc70uTkANvfFZGHBDe5Kz
- cdEY+B5e8si1NMkiQZlclOgcLxqbC9vcmVB2fVdmeyYHbT5C6E6+7W6N+qw97ypX5uSt
- lPIw==
-X-Gm-Message-State: APjAAAU1w1H9E7U6QB1+dVNvJDOl+RqK8T+elTSIRc8/qIwYrZS0Qttg
- UIfpV8XosHLcv6QHMCcubcZmI8fnmLq2+evc8cDezA==
-X-Google-Smtp-Source: APXvYqyywBYZh1Qmn79qoHw+R5d85XI5E43NEWXh2e4zdAv1iqNI+c+An8ucALxymMdTkJ0M2SkvQac+sbtFbdd5abc=
-X-Received: by 2002:a05:6808:a9c:: with SMTP id
- q28mr4875146oij.130.1569548939484; 
- Thu, 26 Sep 2019 18:48:59 -0700 (PDT)
+ bh=KtEmpUYAFtxwO8q9B5b4oJ9Ph9+32LhimpWWcQu8NLU=;
+ b=XkPCuo1+mgai0xTImRDAJ6XQbLeTbQq0lcjQV+5AGOpZDvfwBSizs76l20VCBnihWF
+ izjnIGPltPXwj/y7VipGPasemqyuLvUQ5P37jzrI6mt1b/xIVwBf0y4qMPv42fb9GcR9
+ pOwCFDpCC0E2x5GewEI0SQvNisOdOn0xP1HV932ADp47YDwvXw1ZrIwt5MeF/c7IueBx
+ yl7N7jz9YlUCtEjNVv6Py54E4+U+wrn/+qwqcgDQqMqJfWIFvuM7USAILXLChfKAvVQf
+ vXsKMfa3NlhawXlVglbAAtdD8fRzzNG+cP8FgqbEygqUw4+xPFwZs7qx3ab7tGYSym5F
+ yTUw==
+X-Gm-Message-State: APjAAAXpx70TkwaFk5Lbu5YtFZcSOwLLwt6sQ62Oei5RAF5jiOSIbei5
+ dfA2K8c4ROJTejEubUdiQc5PkMTRYreBIdoEqMgBWQ==
+X-Google-Smtp-Source: APXvYqxJKZ2Ndabkb8uQpgeFnlL9LMeOYax42sULBqBTUe0AzzG+kLTi5g9IEpjwSOQgVG9rxDsElnEeU1wq87h3u3A=
+X-Received: by 2002:aca:fd58:: with SMTP id b85mr4889821oii.94.1569548946217; 
+ Thu, 26 Sep 2019 18:49:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190918092920.21435-1-patrick.delaunay@st.com>
- <20190918092920.21435-3-patrick.delaunay@st.com>
-In-Reply-To: <20190918092920.21435-3-patrick.delaunay@st.com>
+References: <20190906070611.15122-1-patrick.delaunay@st.com>
+In-Reply-To: <20190906070611.15122-1-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 26 Sep 2019 18:48:47 -0700
-Message-ID: <CAPnjgZ2xTrD10Bc+ZFQxTqCx5Dnx05bbagaKTdRh=gg1RJsFNg@mail.gmail.com>
+Date: Thu, 26 Sep 2019 18:48:52 -0700
+Message-ID: <CAPnjgZ2_UjyCqrVWDP=kGH0vpo6vdzGHsVeGsY1cYMf+S3dAjw@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Michal Simek <michal.simek@xilinx.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Hamish Guthrie <hamish.guthrie@kistler.com>,
- Marek Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Hamish Guthrie <hamish.guthrie@kistler.com>,
  Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>,
- Ash Charles <ash@gumstix.com>, Wolfgang Denk <wd@denx.de>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Anup Patel <Anup.Patel@wdc.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 2/3] env: introduce macro
-	ENV_IS_IN_SOMEWHERE
+ Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
+ Boris Brezillon <boris.brezillon@bootlin.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Eugeniu Rosca <roscaeugeniu@gmail.com>, Anup Patel <Anup.Patel@wdc.com>,
+ Lukasz Majewski <lukma@denx.de>, Michal Simek <michal.simek@xilinx.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heiko Schocher <hs@denx.de>, Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marek.vasut@gmail.com>, Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] env: Add CONFIG_ENV_SUPPORT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,136 +78,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, 18 Sep 2019 at 03:30, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Fri, 6 Sep 2019 at 01:06, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> This patch introduce a macro ENV_IS_IN_SOMEWHERE to check if the
-> the environment can be saved somewhere, in a device or in a file system,
-> without assumption on CONFIG$(SPL_TPL_)ENV_IS_NOWHERE.
+> Add a new flag CONFIG_ENV_SUPPORT to compile all
+> the environment features in U-Boot (attributes, callbacks
+> and flags); it is the supplement of the 2 existing flags
+> for SPL/TPL.
+> To have ENV support, enable the flag:
+> - CONFIG_ENV_SUPPORT for U-Boot proper
+> - CONFIG_SPL_ENV_SUPPORT for SPL
+> - CONFIG_TPL_ENV_SUPPORT for TPL
 >
-> Since the commit 208bd2b85ecc ("env: allow ENV_IS_NOWHERE with
-> other storage target"), is is allowed to activated ENV_IS_NOWHERE with
-> other CONFIG_IS_IN...
-> It is only the case for U-Boot but the restriction in Kconfig
-> could also removed for SPL and TPL
-> (depends on !SPL_ENV_IS_NOWHERE / depends on !TPL_ENV_IS_NOWHERE).
->
-> This macro ENV_IS_IN_DEVICE can be used in code to check if the
-> environment for U-Boot / SPL / TPL is really managed (at least one
-> CONFIG$(SPL_TPL_)ENV_IS_IN_.. is activated).
+> This new configuration allows to use the macro
+> CONFIG_IS_ENABLED(ENV_SUPPORT) in the code without
+> issue and solves the regression introduced by
+> commit 7d4776545b0f ("env: solve compilation error
+> in SPL"); change_ok was always NULL in U-Boot.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
-> Changes in v3: None
-> Changes in v2: None
+> Changes in v2:
+> - Update commit message after Lukasz Majewki review
 >
->  cmd/nvedit.c  | 29 +++++++----------------------
->  include/env.h | 13 +++++++++++++
->  2 files changed, 20 insertions(+), 22 deletions(-)
+>  cmd/Kconfig            |  2 ++
+>  env/Kconfig            |  7 +++++++
+>  env/Makefile           | 11 ++++-------
+>  include/env_callback.h |  4 ++++
+>  include/env_flags.h    |  4 ++++
+>  5 files changed, 21 insertions(+), 7 deletions(-)
 
-I feel this is a bit confusion as we have ENV_IS_NOWHERE and
-ENV_IS_IN_SOMEWHERE which are opposites. Can they both be true?
-
-So how about adding a comment as to what your new ENV_IS_NOWHERE means?
-
-Also, how about ENV_IS_SOMEWHERE?
-
-
->
-> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-> index 1cb0bc1460..7a6ec5ae30 100644
-> --- a/cmd/nvedit.c
-> +++ b/cmd/nvedit.c
-> @@ -40,28 +40,13 @@
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> -#if    defined(CONFIG_ENV_IS_IN_EEPROM)        || \
-> -       defined(CONFIG_ENV_IS_IN_FLASH)         || \
-> -       defined(CONFIG_ENV_IS_IN_MMC)           || \
-> -       defined(CONFIG_ENV_IS_IN_FAT)           || \
-> -       defined(CONFIG_ENV_IS_IN_EXT4)          || \
-> -       defined(CONFIG_ENV_IS_IN_NAND)          || \
-> -       defined(CONFIG_ENV_IS_IN_NVRAM)         || \
-> -       defined(CONFIG_ENV_IS_IN_ONENAND)       || \
-> -       defined(CONFIG_ENV_IS_IN_SATA)          || \
-> -       defined(CONFIG_ENV_IS_IN_SPI_FLASH)     || \
-> -       defined(CONFIG_ENV_IS_IN_REMOTE)        || \
-> -       defined(CONFIG_ENV_IS_IN_UBI)
-> -
-> -#define ENV_IS_IN_DEVICE
-> -
-> -#endif
-> -
-> -#if    !defined(ENV_IS_IN_DEVICE)              && \
-> -       !defined(CONFIG_ENV_IS_NOWHERE)
-> +#if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)
-> +#if    !ENV_IS_IN_SOMEWHERE            && \
-> +       !CONFIG_IS_ENABLED(ENV_IS_NOWHERE)
->  # error Define one of CONFIG_ENV_IS_IN_{EEPROM|FLASH|MMC|FAT|EXT4|\
->  NAND|NVRAM|ONENAND|SATA|SPI_FLASH|REMOTE|UBI} or CONFIG_ENV_IS_NOWHERE
->  #endif
-> +#endif
->
->  /*
->   * Maximum expected input data size for import command
-> @@ -744,7 +729,7 @@ ulong env_get_ulong(const char *name, int base, ulong default_val)
->  }
->
->  #ifndef CONFIG_SPL_BUILD
-> -#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
-> +#if defined(CONFIG_CMD_SAVEENV) && ENV_IS_IN_SOMEWHERE
->  static int do_env_save(cmd_tbl_t *cmdtp, int flag, int argc,
->                        char * const argv[])
->  {
-> @@ -1309,7 +1294,7 @@ static cmd_tbl_t cmd_env_sub[] = {
->  #if defined(CONFIG_CMD_RUN)
->         U_BOOT_CMD_MKENT(run, CONFIG_SYS_MAXARGS, 1, do_run, "", ""),
->  #endif
-> -#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
-> +#if defined(CONFIG_CMD_SAVEENV) && ENV_IS_IN_SOMEWHERE
->         U_BOOT_CMD_MKENT(save, 1, 0, do_env_save, "", ""),
->  #if defined(CONFIG_CMD_ERASEENV)
->         U_BOOT_CMD_MKENT(erase, 1, 0, do_env_erase, "", ""),
-> @@ -1392,7 +1377,7 @@ static char env_help_text[] =
->  #if defined(CONFIG_CMD_RUN)
->         "env run var [...] - run commands in an environment variable\n"
->  #endif
-> -#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
-> +#if defined(CONFIG_CMD_SAVEENV) && ENV_IS_IN_SOMEWHERE
->         "env save - save environment\n"
->  #if defined(CONFIG_CMD_ERASEENV)
->         "env erase - erase environment\n"
-> diff --git a/include/env.h b/include/env.h
-> index a74a261337..0088d3b1e8 100644
-> --- a/include/env.h
-> +++ b/include/env.h
-> @@ -35,6 +35,19 @@ struct env_clbk_tbl {
->                         int flags);
->  };
->
-> +#define ENV_IS_IN_SOMEWHERE \
-> +               (CONFIG_IS_ENABLED(ENV_IS_IN_EEPROM) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_EXT4) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_FAT) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_FLASH) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_MMC) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_NAND) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_NVRAM) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_ONENAND) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_REMOTE) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH) || \
-> +                CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
-> +
->  /*
->   * Define a callback that can be associated with variables.
->   * when associated through the ".callbacks" environment variable, the callback
-> --
-> 2.17.1
->
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

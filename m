@@ -2,74 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AB74CF7CC
-	for <lists+uboot-stm32@lfdr.de>; Tue,  8 Oct 2019 13:10:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAF7BD12E6
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Oct 2019 17:36:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 03C0FC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue,  8 Oct 2019 11:10:14 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 96418C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Oct 2019 15:36:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 62DFAC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E25E8C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  8 Oct 2019 11:10:13 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 46nZPw4Yhqz1rh8V
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  8 Oct 2019 13:10:12 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 46nZPw2Wm0z1qqkJ
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  8 Oct 2019 13:10:12 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024) with ESMTP id Z4xYiVXp0yMU
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  8 Oct 2019 13:10:11 +0200 (CEST)
-X-Auth-Info: 0tODFr3ejawEyAj8xKlDwNMYipfEuVl9aCoqq+PNA3s=
-Received: from janitor.denx.de (unknown [62.91.23.180])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  8 Oct 2019 13:10:11 +0200 (CEST)
-Received: by janitor.denx.de (Postfix, from userid 119)
- id F2051A2B9B; Tue,  8 Oct 2019 13:10:09 +0200 (CEST)
-Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
- by janitor.denx.de (Postfix) with ESMTPS id B441B9FBE7;
- Tue,  8 Oct 2019 13:09:53 +0200 (CEST)
-Received: from gemini.denx.de (localhost [IPv6:::1])
- by gemini.denx.de (Postfix) with ESMTP id 573CD240044;
- Tue,  8 Oct 2019 13:09:53 +0200 (CEST)
-To: Tom Rini <trini@konsulko.com>
-From: Wolfgang Denk <wd@denx.de>
+ Wed,  9 Oct 2019 15:36:44 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x99FM0Uh026773; Wed, 9 Oct 2019 17:36:42 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=lQhIr//18JbNi5kPeKiE9967iamR4rQuKxeNXQK39JE=;
+ b=MAYbhTf7pIN9EjrJdWthRmxUsdwOTlsZCSrphNDUXx5UvPXTSv9ZyD9VYYtA5UmSaRi1
+ Kt801jKHa8GlaBjM0At/iIeUTwnNtupoqIss9RdYNDUMqTIijt4DgZ1Z3ubze4IQWIpE
+ ajJiJZrqanhOeIeigNL3q+2dLbhJNEiyQxaz5/lfwCgkFYTWsAqG1keA8fCF2dfdIZyE
+ xlDms1Vz6oRBuxwKzTxog1f30sFvXCjdGXEG+wHvycqqDcsxKCmo23lhgTUqDKQqjuqd
+ 48N/rQMYgbJq4dV+2FjKI8UpNJsI7zvXFz+s+L/km/yAgcQWuavvq8sziqyjKwCQeUNf bw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2vegxvxruv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 09 Oct 2019 17:36:42 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 80B21100039;
+ Wed,  9 Oct 2019 17:36:40 +0200 (CEST)
+Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7698C2A56A6;
+ Wed,  9 Oct 2019 17:36:40 +0200 (CEST)
+Received: from SAFEX1HUBCAS23.st.com (10.75.90.46) by Safex1hubcas24.st.com
+ (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 9 Oct 2019
+ 17:36:40 +0200
+Received: from localhost (10.201.23.25) by webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 9 Oct 2019 17:36:40
+ +0200
+From: Fabien Dessenne <fabien.dessenne@st.com>
+To: Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Christophe Kerello <christophe.kerello@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>, Lokesh Vutla <lokeshvutla@ti.com>
+Date: Wed, 9 Oct 2019 17:36:24 +0200
+Message-ID: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-reply-to: <20191007223650.GR6716@bill-the-cat>
-References: <20191003072428.19197-1-patrick.delaunay@st.com>
- <20191007175635.D9824240044@gemini.denx.de>
- <20191007223650.GR6716@bill-the-cat>
-Comments: In-reply-to Tom Rini <trini@konsulko.com>
- message dated "Mon, 07 Oct 2019 18:36:50 -0400."
-Date: Tue, 08 Oct 2019 13:09:53 +0200
-Message-Id: <20191008110953.573CD240044@gemini.denx.de>
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Lukasz Majewski <lukma@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Hamish Guthrie <hamish.guthrie@kistler.com>,
- Marek Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Michal Simek <michal.simek@xilinx.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>,
- Ash Charles <ash@gumstix.com>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Anup Patel <Anup.Patel@wdc.com>, Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH v4 0/3] env: Add CONFIG_ENV_FULL_SUPPORT
+X-Originating-IP: [10.201.23.25]
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
+ definitions=2019-10-09_07:2019-10-08,2019-10-09 signatures=0
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Arnaud Pouliquen <arnaud.pouliquen@st.com>,
+ Fabien Dessenne <fabien.dessenne@st.com>
+Subject: [Uboot-stm32] [PATCH 0/5] remoteproc: add elf resource table loader
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,46 +73,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Dear Tom,
+Add some helpers that can be called by the drivers to load the firmware
+resource table from an elf32 / elf64 image.
+The stm32 remoteproc driver makes use of it, to load the resource table before
+the elf image itself.
 
-In message <20191007223650.GR6716@bill-the-cat> you wrote:
-> 
-> > Do I understand correctly that all of this is obsolete and no longer
-> > needed after Tom's commit d90fc9c3de ``Revert "env: solve
-> > compilation error in SPL"'' ?
->
-> So, I think there's a new topic here.  I seem to recall a concern from
-> the previous thread that we could have less restrictive environment
-> protections in SPL/TPL than we do in full U-Boot and thus open ourselves
-> to a potential problem.  As of today, U-Boot is back to where it was
-> prior to the problematic patch being applied.  But do we not have the
-> potential problem above and thus need to evaluate the rest of the
-> series (as the revert was largely the same as the first patch in the
-> series) ?  Thanks!
+This series applies on top of the "remoteproc: Add support for R5F and DSP
+processors" series [1] proposed by Lokesh Vutla which introduces the elf64
+support.
 
-The (potential) problem of having less restrictive/secure code in
-SPL than in U-Boot proper resulted from the fact that the patch
-series allowed different configurations of the U-Boot environment
-features in these stages.
+[1]: https://patchwork.ozlabs.org/project/uboot/list/?series=128946
 
-After the revert of the original problem, I don't see the need for
-any such configuration, so if we simply do nothing we are as secure
-as we have been before.
+Fabien Dessenne (5):
+  remoteproc: elf_loader: Add elf resource table load support
+  stm32mp1: declare backup register for copro resource table address
+  remoteproc: stm32: load resource table from firmware
+  stm32mp1: Fixup the Linux DeviceTree with coprocessor information
+  remoteproc: stm32: invert the is_running() return value
 
-When accepting this new patch series, a full review of the impacts
-(size, security) is needed.
-
-Best regards,
-
-Wolfgang Denk
+ arch/arm/mach-stm32mp/include/mach/stm32.h |   1 +
+ board/st/stm32mp1/stm32mp1.c               |  16 +-
+ drivers/remoteproc/rproc-elf-loader.c      | 269 +++++++++++++++++++++++++++++
+ drivers/remoteproc/stm32_copro.c           |  17 +-
+ include/remoteproc.h                       |  70 ++++++++
+ test/dm/remoteproc.c                       |  91 ++++++++--
+ 6 files changed, 448 insertions(+), 16 deletions(-)
 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
-In an infinite universe all things are possible, including the possi-
-bility that the universe does not exist.
-                        - Terry Pratchett, _The Dark Side of the Sun_
+2.7.4
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

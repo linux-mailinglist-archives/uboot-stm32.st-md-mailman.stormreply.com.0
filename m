@@ -2,47 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E447D26E0
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Oct 2019 12:04:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 827A2D26F9
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Oct 2019 12:11:30 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CBE58C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Oct 2019 10:04:17 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4154FC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Oct 2019 10:11:30 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C15E2C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BEACDC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 10 Oct 2019 10:04:16 +0000 (UTC)
+ Thu, 10 Oct 2019 10:11:29 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 46pmrv5VWyz1rMjx;
- Thu, 10 Oct 2019 12:04:15 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 46pn1D1jJJz1rvRK;
+ Thu, 10 Oct 2019 12:11:28 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 46pmrv5FHDz1qqkQ;
- Thu, 10 Oct 2019 12:04:15 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 46pn1D11S5z1qqkQ;
+ Thu, 10 Oct 2019 12:11:28 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id 2F0efq9dZW-D; Thu, 10 Oct 2019 12:04:14 +0200 (CEST)
-X-Auth-Info: 6GpibTcQOKpTXJbc+sB79sq2OKyz/R9sN0Ydx47I41Q=
+ with ESMTP id JO2WpmAgExP0; Thu, 10 Oct 2019 12:11:26 +0200 (CEST)
+X-Auth-Info: 3H49xSRNyNhrh6MuJG6Vn4HP/978/C9vaIYoywteJGA=
 Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Thu, 10 Oct 2019 12:04:14 +0200 (CEST)
-Date: Thu, 10 Oct 2019 12:04:13 +0200
+ Thu, 10 Oct 2019 12:11:26 +0200 (CEST)
+Date: Thu, 10 Oct 2019 12:11:25 +0200
 From: Lukasz Majewski <lukma@denx.de>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20191010120413.344e70f8@jawa>
-In-Reply-To: <20190930133832.11992-3-patrick.delaunay@st.com>
+Message-ID: <20191010121125.1fab75d4@jawa>
+In-Reply-To: <20190930133832.11992-4-patrick.delaunay@st.com>
 References: <20190930133832.11992-1-patrick.delaunay@st.com>
- <20190930133832.11992-3-patrick.delaunay@st.com>
+ <20190930133832.11992-4-patrick.delaunay@st.com>
 Organization: denx.de
 X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH v2 02/16] doc: dfu: Add dfu documentation
+ u-boot@lists.denx.de, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ "Andrew F. Davis" <afd@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 03/16] dfu: sf: add partition support
+	for nor backend
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -54,192 +56,177 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6474423715910778871=="
+Content-Type: multipart/mixed; boundary="===============1591191506570535170=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============6474423715910778871==
+--===============1591191506570535170==
 Content-Type: multipart/signed; micalg=pgp-sha512;
- boundary="Sig_/bYzN+LzpGXgAEV/YFi0P=6P"; protocol="application/pgp-signature"
+ boundary="Sig_/tv0JHqvpse1sPPjxgzcniKz"; protocol="application/pgp-signature"
 
---Sig_/bYzN+LzpGXgAEV/YFi0P=6P
+--Sig_/tv0JHqvpse1sPPjxgzcniKz
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
 Hi Patrick,
 
-> Add documentation for dfu stack and "dfu" command.
+> Copy the partition support from NAND backend to SF,
+> support part and partubi option.
+> In case of ubi partition, erase the rest of the
+> partition as it is mandatory for UBI.
 >=20
-
-Reviewed-by: Lukasz Majewski <lukma@denx.de>
-
+> for example:
+>=20
+> U-Boot> env set dfu_alt_info "spl part 0 1;\
+> u-boot part 0 2;u-boot-env part 0 3;UBI partubi 0 4"
+> U-Boot> dfu 0 sf 0:0:10000000:0
+>=20
+> Acked-by: Lukasz Majewski <lukma@denx.de>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >=20
 > Changes in v2:
-> - Add dfu documentation
+> - Update dfu documentation for callbacks
 >=20
->  doc/README.dfu | 144
-> +++++++++++++++++++++++++++++++++++++++++++++++++ 1 file changed, 144
-> insertions(+) create mode 100644 doc/README.dfu
+>  doc/README.dfu       |  4 ++++
+>  drivers/dfu/dfu_sf.c | 51
+> ++++++++++++++++++++++++++++++++++++++++++++ include/dfu.h        |
+> 2 ++ 3 files changed, 57 insertions(+)
 >=20
 > diff --git a/doc/README.dfu b/doc/README.dfu
-> new file mode 100644
-> index 0000000000..f5344e236c
-> --- /dev/null
+> index f5344e236c..cf5de28b01 100644
+> --- a/doc/README.dfu
 > +++ b/doc/README.dfu
-> @@ -0,0 +1,144 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +Device Firmware Upgrade (DFU)
-> +
-> +Overview:
-> +
-> +  The Device Firmware Upgrade (DFU) allows to download and upload
-> firmware
-> +  to/from U-Boot connected over USB.
-> +
-> +  U-boot follows the Universal Serial Bus Device Class Specification
-> for
-> +  Device Firmware Upgrade Version 1.1 the USB forum (DFU v1.1 in
-> www.usb.org). +
-> +  U-Boot implements this DFU capability (CONFIG_DFU) with the
-> command dfu
-> +  (cmd/dfu.c / CONFIG_CMD_DFU) based on:
-> +  - the DFU stack (common/dfu.c and common/spl/spl_dfu.c), based on
-> the
-> +    USB DFU download gadget (drivers/usb/gadget/f_dfu.c)
-> +  - The access to mediums is done in DFU backends (driver/dfu)
-> +
-> +  Today the supported DFU backends are:
-> +  - MMC (RAW or FAT / EXT2 / EXT3 / EXT4 file system)
-> +  - NAND
-> +  - RAM
-> +  - SF (serial flash)
-> +
-> +  These DFU backends are also used by
-> +  - the dfutftp (see README.dfutftp)
-> +  - the thordown command (cmd/thordown.c and gadget/f_thor.c)
-> +
-> +Configuration Options:
-> +  CONFIG_DFU
-> +  CONFIG_DFU_OVER_USB
-> +  CONFIG_DFU_MMC
-> +  CONFIG_DFU_NAND
-> +  CONFIG_DFU_RAM
-> +  CONFIG_DFU_SF
-> +  CONFIG_CMD_DFU
-> +
-> +Environment variables:
-> +  the dfu command use 3 environments variables:
-> +  "dfu_alt_info" : the DFU setting for the USB download gadget with
-> a comma
-> +                   separated string of information on each alternate:
-> +                   dfu_alt_info=3D"<alt1>;<alt2>;....;<altN>"
-> +
-> +  "dfu_bufsiz" : size of the DFU buffer, when absent, use
-> +                 CONFIG_SYS_DFU_DATA_BUF_SIZE (8MiB by default)
-> +
-> +  "dfu_hash_algo" : name of the hash algorithm to use
-> +
-> +Commands:
-> +  dfu <USB_controller> <interface> <dev> list
-> +    list the alternate device defined in "dfu_alt_info"
-> +
-> +  dfu <USB_controller> <interface> <dev>
-> +    start the dfu stack on the USB instance with the selected medium
-> +    backend and use the "dfu_alt_info" variable to configure the
-> +    alternate setting and link each one with the medium
-> +    The dfu command continue until receive a ^C in console or
-> +    a DFU detach transaction from HOST.
-> +
-> +  The possible values of <interface> are :
-> +  (with <USB controller> =3D 0 in the dfu command example)
-> +
-> +  "mmc" (for eMMC and SD card)
-> +    cmd: dfu 0 mmc <dev>
-> +    each element in "dfu_alt_info" =3D
-> +      <name> raw <offset> <size>   raw access to mmc device
-> +      <name> part <dev> <part_id>  raw acces to partition
-> +      <name> fat <dev> <part_id>   file in FAT partition
-> +      <name> ext4 <dev> <part_id>  file in EXT4 partition
-> +
-> +      with <partid> is the GPT or DOS partition index
-> +
-> +  "nand" (raw slc nand device)
-> +    cmd: dfu 0 nand <dev>
-> +    each element in "dfu_alt_info" =3D
-> +      <name> raw <offset> <size>   raw access to mmc device
+> @@ -89,6 +89,10 @@ Commands:
+>      cmd: dfu 0 sf <dev>
+>      each element in "dfu_alt_info" =3D
+>        <name> ram <offset> <size>  raw access to sf device
 > +      <name> part <dev> <part_id>  raw acces to partition
 > +      <name> partubi <dev> <part_id>  raw acces to ubi partition
 > +
 > +      with <partid> is the MTD partition index
+> =20
+>  Host tools:
+>    When U-Boot runs the dfu stack, the DFU host tools can be used
+> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
+> index b78fcfd3a1..d401b76c2e 100644
+> --- a/drivers/dfu/dfu_sf.c
+> +++ b/drivers/dfu/dfu_sf.c
+> @@ -10,6 +10,8 @@
+>  #include <dfu.h>
+>  #include <spi.h>
+>  #include <spi_flash.h>
+> +#include <jffs2/load_kernel.h>
+> +#include <linux/mtd/mtd.h>
+> =20
+>  static int dfu_get_medium_size_sf(struct dfu_entity *dfu, u64 *size)
+>  {
+> @@ -52,11 +54,33 @@ static int dfu_write_medium_sf(struct dfu_entity
+> *dfu,=20
+>  static int dfu_flush_medium_sf(struct dfu_entity *dfu)
+>  {
+> +	u64 off, length;
 > +
-> +  "ram"
-> +    cmd: dfu 0 ram <dev>
-> +    (<dev> is not used for RAM target)
-> +    each element in "dfu_alt_info" =3D
-> +      <name> ram <offset> <size>  raw access to ram
+> +	if (!dfu->data.sf.ubi)
+> +		return 0;
 > +
-> +  "sf" (serial flash : NOR)
-> +    cmd: dfu 0 sf <dev>
-> +    each element in "dfu_alt_info" =3D
-> +      <name> ram <offset> <size>  raw access to sf device
+> +	/* in case of ubi partition, erase rest of the partition */
+> +	off =3D find_sector(dfu, dfu->data.sf.start, dfu->offset);
+> +	/* last write ended with unaligned length jump to next */
+> +	if (off !=3D dfu->data.sf.start + dfu->offset)
+> +		off +=3D dfu->data.sf.dev->sector_size;
+> +	length =3D dfu->data.sf.start + dfu->data.sf.size - off;
+> +	if (length)
+> +		return spi_flash_erase(dfu->data.sf.dev, off,
+> length); +
+>  	return 0;
+>  }
+> =20
+>  static unsigned int dfu_polltimeout_sf(struct dfu_entity *dfu)
+>  {
+> +	/*
+> +	 * Currently, Poll Timeout !=3D 0 is only needed on nand
+> +	 * ubi partition, as sectors which are not used need
+> +	 * to be erased
+> +	 */
+> +	if (dfu->data.sf.ubi)
+> +		return DFU_MANIFEST_POLL_TIMEOUT;
 > +
-> +Host tools:
-> +  When U-Boot runs the dfu stack, the DFU host tools can be used
-> +  to send/receive firmwares on each configurated alternate.
+>  	return DFU_DEFAULT_POLL_TIMEOUT;
+>  }
+> =20
+> @@ -133,6 +157,33 @@ int dfu_fill_entity_sf(struct dfu_entity *dfu,
+> char *devstr, char *s) dfu->data.sf.start =3D simple_strtoul(s, &s, 16);
+>  		s++;
+>  		dfu->data.sf.size =3D simple_strtoul(s, &s, 16);
+> +	} else if ((!strcmp(st, "part")) || (!strcmp(st,
+> "partubi"))) {
+> +		char mtd_id[32];
+> +		struct mtd_device *mtd_dev;
+> +		u8 part_num;
+> +		struct part_info *pi;
+> +		int ret, dev, part;
 > +
-> +  For example dfu-util is a host side implementation of the DFU 1.1
-> +  specifications(http://dfu-util.sourceforge.net/) which works with
-> U-Boot. +
-> +Usage:
-> +  Example for firmware located in eMMC or SD card, with:
-> +  - alternate 1 (alt=3D1) for SPL partition (GPT partition 1)
-> +  - alternate 2 (alt=3D2) for U-Boot partition (GPT partition 2)
+> +		dfu->layout =3D DFU_RAW_ADDR;
 > +
-> +  The U-Boot configuration is:
+> +		dev =3D simple_strtoul(s, &s, 10);
+> +		s++;
+> +		part =3D simple_strtoul(s, &s, 10);
 > +
-> +  U-Boot> env set dfu_alt_info "spl part 0 1;u-boot part 0 2"
+> +		sprintf(mtd_id, "%s%d,%d", "nor", dev, part - 1);
+> +		printf("using id '%s'\n", mtd_id);
 > +
-> +  U-Boot> dfu 0 mmc 0 list
-> +  DFU alt settings list:
-> +  dev: eMMC alt: 0 name: spl layout: RAW_ADDR
-> +  dev: eMMC alt: 1 name: u-boot layout: RAW_ADDR
+> +		mtdparts_init();
 > +
-> +  Boot> dfu 0 mmc 0
-> +
-> +  On the Host side:
-> +
-> +  list the available alternate setting:
-> +
-> +  $> dfu-util -l
-> +  dfu-util 0.9
-> +
-> +  Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.
-> +  Copyright 2010-2016 Tormod Volden and Stefan Schmidt
-> +  This program is Free Software and has ABSOLUTELY NO WARRANTY
-> +  Please report bugs to http://sourceforge.net/p/dfu-util/tickets/
-> +
-> +  Found DFU: [0483:5720] ver=3D0200, devnum=3D45, cfg=3D1, intf=3D0,
-> path=3D"3-1.3.1", \
-> +     alt=3D1, name=3D"u-boot", serial=3D"003A00203438510D36383238"
-> +  Found DFU: [0483:5720] ver=3D0200, devnum=3D45, cfg=3D1, intf=3D0,
-> path=3D"3-1.3.1", \
-> +     alt=3D0, name=3D"spl", serial=3D"003A00203438510D36383238"
-> +
-> +  To download to U-Boot, use -D option
-> +
-> +  $> dfu-util -a 0 -D u-boot-spl.bin
-> +  $> dfu-util -a 1 -D u-boot.bin
-> +
-> +  To upload from U-Boot, use -U option
-> +
-> +  $> dfu-util -a 0 -U u-boot-spl.bin
-> +  $> dfu-util -a 1 -U u-boot.bin
-> +
-> +  To request a DFU detach and reset the USB connection:
-> +  $> dfu-util -a 0 -e  -R
+> +		ret =3D find_dev_and_part(mtd_id, &mtd_dev, &part_num,
+> &pi);
+
+This patch causes a build break on e.g. mx6sabreauto
+
+drivers/built-in.o: In function `dfu_fill_entity_sf':
+build/../drivers/dfu/dfu_sf.c:176: undefined reference to
+`mtdparts_init' build/../drivers/dfu/dfu_sf.c:178: undefined reference
+to `find_dev_and_part'
+
+To reproduce:
+./tools/buildman/buildman.py --branch=3DHEAD mx6sabreauto --show_errors
+--force-build --count=3D22 --output-dir=3D../BUILD/
+
+Branch:
+github-lmajewski-dfu/testing
+https://github.com/lmajewski/u-boot-dfu/commits/testing
+
+Corresponding output from travis-ci:
+https://travis-ci.org/lmajewski/u-boot-dfu/builds/595994620
+
+
+(Please inspect all failed builds and resend v3)
+
+
+> +		if (ret !=3D 0) {
+> +			printf("Could not locate '%s'\n", mtd_id);
+> +			return -1;
+> +		}
+> +		dfu->data.sf.start =3D pi->offset;
+> +		dfu->data.sf.size =3D pi->size;
+> +		if (!strcmp(st, "partubi"))
+> +			dfu->data.sf.ubi =3D 1;
+>  	} else {
+>  		printf("%s: Memory layout (%s) not supported!\n",
+> __func__, st); spi_flash_free(dfu->data.sf.dev);
+> diff --git a/include/dfu.h b/include/dfu.h
+> index 145a1576a3..bf51ab74a5 100644
+> --- a/include/dfu.h
+> +++ b/include/dfu.h
+> @@ -77,6 +77,8 @@ struct sf_internal_data {
+>  	/* RAW programming */
+>  	u64 start;
+>  	u64 size;
+> +	/* for sf/ubi use */
+> +	unsigned int ubi;
+>  };
+> =20
+>  #define DFU_NAME_SIZE			32
 
 
 
@@ -254,25 +241,25 @@ DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
---Sig_/bYzN+LzpGXgAEV/YFi0P=6P
+--Sig_/tv0JHqvpse1sPPjxgzcniKz
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl2fAh0ACgkQAR8vZIA0
-zr2VAggA0SR+hjpvYiwwadJ/p8WhNeFNrftO/cCl3JNzNlZNMTB5d6RrcdF43dfe
-ZkxGbIEk0gDY2piRsv5W/TF307mwN38UOVTuU7ZfxDdzkA3aq39LZPOhMQLEBB0W
-mww45hxTPj8TKGQz1XNjbONb026/tgLKgA03lU38UZAXH9ukLpKgfYK+O4PRbYU8
-aBOxLeFV0vC4n41VmPUfSFCqpq2K02woLXsgfJD63RKjWDETFNv/VXvaX6UxPlP1
-BYTyRytlpaJq4CD2ZE70aYH9MiH7tt2T0WszZTMyAZvBJy/c3jaGd0KkT/9YOIbS
-phBYELagLL5qXu5l2A1NK9Zi3V2W2Q==
-=QcbH
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl2fA80ACgkQAR8vZIA0
+zr0z9Qf6A94Pp/fkqQMujZ5OKtOU15QSnfIJ/8v+fhOa+zOZNpTxMJuNgXG7o/6o
+84R1/wFekm9Xr40TPYwuK99QBqwH+0s8ic4a1UAbmns578HQOvXeed0rGwHC9Ydb
+nljX4p+otiS7qIqOAUL1WNYRAzWMbBK5p4vjU/ZOfwAwjoYuDi2ZX65WEw/aZgyF
+h767dHQtklon8tzWwoFLCoRrAaM1eiSXfJugYtReCnLnTQvTdbYJf17gDlYrAIV1
+TQGJ0bp+nYWUP9GWBv0nvyXyP794UVxtijD001x/usnGaIFix9z3jdMd8j9XeTRW
+PN8JfRGQEt8ig5I4Go8twsVcVuplmA==
+=RBPy
 -----END PGP SIGNATURE-----
 
---Sig_/bYzN+LzpGXgAEV/YFi0P=6P--
+--Sig_/tv0JHqvpse1sPPjxgzcniKz--
 
---===============6474423715910778871==
+--===============1591191506570535170==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -283,4 +270,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============6474423715910778871==--
+--===============1591191506570535170==--

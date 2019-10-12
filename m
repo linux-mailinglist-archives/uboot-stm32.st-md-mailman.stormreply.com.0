@@ -2,65 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDED7D4C3A
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2019 04:53:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 089CFD4C3C
+	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2019 04:55:15 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 979E8C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2019 02:53:09 +0000 (UTC)
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
- [209.85.210.65])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BE061C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2019 02:55:14 +0000 (UTC)
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
+ [209.85.167.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6BB6BC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9F066C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Oct 2019 02:53:08 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id 41so9588368oti.12
+ Sat, 12 Oct 2019 02:55:13 +0000 (UTC)
+Received: by mail-oi1-f196.google.com with SMTP id i16so9651889oie.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Oct 2019 19:53:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=xVjOp1agcQSgwgS3GGU+ylzFWiMA8DgeIPbDzOvsZVw=;
- b=pgOKW9RXcmHwrBFX8KHdpJK9fVXqdzW1X8VQDXJqhMbi47lyjXzITgA/+rodJk35ex
- qEKFk9C2OQfCTqVDnY4d//YNVnlEmlsMElLZRSDp5c0obZJDD2M+4Vn8M5BTlUWYoVn7
- oF1DgS4YFu99bi9NLQ2zH0oJk0rB5jSJzTxqEEOsUIEwpHP9NdywiVtSlvKBy9kb8Qn4
- PrtCoa9stu5iw1km6rPcUSO3sx2QhXnQ4PWNolQE+plZmoF4bKVrzv4fBPUD6QRHydjr
- 5UolRTlKiN9DcoZye4rfsDk5iMn6eC2gg+HtpeE45En/TQw9LqyzX+xq+VGWl/MZqgDz
- aqig==
+ Fri, 11 Oct 2019 19:55:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=GtRvEKGlRJfN4o/qg7bfr4ga7k7O7MGpvhlOg2xRoBg=;
+ b=S4KhAzo4X1RYHQrQZ2vDJKQOUTxdPvWN6bEFPooSVY62KLNYaT8Jnnpfi1Ys+MefsM
+ 8iPlHBPKSsgkGuoiS2S+afZWo6NkSCj6D4PO3pJ34KNnmsq5Nid+czQfKqdrZbMtUdMC
+ CCqbmxmwLF0ttTHP6U/+g6OWG2SdJXWg1QSU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=xVjOp1agcQSgwgS3GGU+ylzFWiMA8DgeIPbDzOvsZVw=;
- b=pLZN9ciBog8tfJoc6TSYaxTxIpTC77OjkNh9+k8JXpx714yX0wU6/LmWJ4D4qctnTz
- 9zUW1cnP4PRFmHjJgsmmbGRjUK1bdH1KsWKmPB4oyEyPfG94VTitoAhCi+4vbEk55stT
- k3T8cqo64wasT5M487tpfYQMUv+vmWncLId3auR/kbsvqPWpPvCi+E3O67Q/vX+7h++w
- VXhp1G9PUaA96tMJyitY5GdyK+yxHgmHpAMepD+azdydHAo5y2IsvaAwY+VdoCIVdxWH
- yO3BTG+rXvUedZAwgSZLpk9bTvoV+DAqRS5eBnk4CvzIPhYc8wUPsG+mlUAQE24sflbu
- uVtQ==
-X-Gm-Message-State: APjAAAXOfLLuWuZYAfXQBfeYyspMdcNBgdGm6wygqmgEq+B+TxqDhE1r
- HjVwg8PnTAk+I80sn/wx3ihWeHu+zkKCloVibWhHWQ==
-X-Google-Smtp-Source: APXvYqwfUo0zFIH1hdkrIFyguU2BIlU2hhnamyHGQvMhBKsYhh+MtVzhwHQ7mSdZCbJZIt3ZpguR4votCsYN4B/cy5E=
-X-Received: by 2002:a9d:5c07:: with SMTP id o7mr15550057otk.33.1570848786564; 
- Fri, 11 Oct 2019 19:53:06 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 11 Oct 2019 22:53:04 -0400
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=GtRvEKGlRJfN4o/qg7bfr4ga7k7O7MGpvhlOg2xRoBg=;
+ b=Bb7uU6sa06XQB6LnLrGXpVY432oipg5trOEp0dyID9DNstehBPx6HdHOvvI4RvZUAC
+ J6au3yI6BHojLtHZDcZyuLB/FUG6w0h2DOt5pYcIc1Ye00yl0A3UKCQopIjf+pYpNdR/
+ aqGuAeFD1sWjLhmeKQAH3CAX62NMeG48jqqKXlDRwPVQHyAYTjH/jdQBj9pe6BtPkXID
+ bn1wBs9s752Hk2csqOE/vxO1gQFfxFm2infBPB4r+pYwcgJB3cosz+lfEtITgypfJDMt
+ CsprpYk0gDAkWuzkpMZChu3qgagf3LcddlABV1A3tSHpzYeufxPL83AwbMDp1lQE42Fh
+ PZHg==
+X-Gm-Message-State: APjAAAVGI0oIhcQ74m6+NZNQx1TSuTZh2udFlu+HI3dcvVmQuzlL4qm2
+ crS8ZtoL0ZReCYxOg4HUrSfATu8Nn2KUUHtwT7SQSA==
+X-Google-Smtp-Source: APXvYqxEpJUu+9P3ypybbTdKNJbS+ma9qyEyI/4zkEIqpa/uIO2ducwldOrkQh9smZpejsajRZxoEenWBbZ8Vv2mCeQ=
+X-Received: by 2002:aca:5b02:: with SMTP id p2mr14628124oib.94.1570848911811; 
+ Fri, 11 Oct 2019 19:55:11 -0700 (PDT)
 MIME-Version: 1.0
-From: sjg@google.com
-In-Reply-To: <CAPnjgZ0H9hKQ0JWscT6a-4-NR+tRWdOCeUOq0fPcZ2_ZybzbDQ@mail.gmail.com>
-References: <CAPnjgZ0H9hKQ0JWscT6a-4-NR+tRWdOCeUOq0fPcZ2_ZybzbDQ@mail.gmail.com>
- <20190930081913.17306-1-patrick.delaunay@st.com>
-Date: Fri, 11 Oct 2019 22:53:04 -0400
-X-Google-Sender-Auth: _pmB_CMBI3Wyv2Z68BklF1t1olY
-Message-ID: <CAPnjgZ1VrfU0XRwmSSPcqvJ_5FnOExf_4JewOOYBmyKvryidZQ@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Liviu Dudau <Liviu.Dudau@foss.arm.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2] dm: Tidy up dump output when there are
-	many devices
+References: <1564750081-31319-1-git-send-email-patrick.delaunay@st.com>
+ <1564750081-31319-2-git-send-email-patrick.delaunay@st.com>
+ <CAPnjgZ13q4orq=Yp6r=LzT-uahzaQTF7fcuzdGDGLwrLF76abw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ13q4orq=Yp6r=LzT-uahzaQTF7fcuzdGDGLwrLF76abw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 11 Oct 2019 20:55:00 -0600
+Message-ID: <CAPnjgZ2jc=2wewxgQszLH9PsiiirR=GO78RcwqJ3DHbGd5x7qQ@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Cc: Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Patrice Chotard <patrice.chotard@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Ryder Lee <ryder.lee@mediatek.com>,
+ David Wu <david.wu@rock-chips.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>,
+ Chris Packham <judge.packham@gmail.com>,
+ Christoph Muellner <christoph.muellner@theobroma-systems.com>
+Subject: Re: [Uboot-stm32] [RESEND PATCH 2/2] dm: pinctrl: introduce
+	PINCONF_RECURSIVE option
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,23 +75,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 30 Sep 2019 at 02:19, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Tue, 13 Aug 2019 at 03:34, Simon Glass <sjg@chromium.org> wrote:
 >
-> At present the 'Index' column of 'dm tree' assumes there is
-> two digits, this patch increase it to 3 digits.
+> On Fri, 2 Aug 2019 at 06:48, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+> >
+> > In the Linux pinctrl binding, the pin configuration nodes don't need to
+> > be direct children of the pin controller device (may be grandchildren for
+> > example). This behavior is managed with the pinconfig u-class which
+> > recursively bind all the sub-node of the pin controller.
+> >
+> > But for some binding (when pin configuration is only children of pin
+> > controller) that is not necessary. U-Boot can save memory and reduce
+> > the number of pinconf instance when this feature is deactivated
+> > (for arch stm32mp for example for SPL).
+> >
+> > This patch allows to control this feature with a new option
+> > CONFIG_PINCONF_RECURSIVE when it is possible for each individual
+> > pin controller device.
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
+> >
 >
-> It also aligns output of 'dm uclass', assuming the same 3 digits index.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Hi,
+> >
+> > Found her a proposal to have a more clear output of "dm tree" command
+> > and to reduce the memory footprint of PINCTRL_FULL for the arch stm32mp1
+> > (bdinfo "Early malloc usage" is reduced from 2588 to 2144).
 >
-> The boards with CONFIG_PINCTRL_FULL activated have one pinconfig
-> by pin configuration, so they can have more than 100 devices
-> pinconfig (for example with stm32mp157c-ev1 board we have
-> 106 pinconfig node).
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->
-> ---
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> Gosh that is still a lot! But a nice improvement.
 
 Applied to u-boot-dm, thanks!
 _______________________________________________

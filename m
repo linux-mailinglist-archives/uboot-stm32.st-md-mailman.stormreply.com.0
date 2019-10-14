@@ -2,47 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08E3ED6890
-	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 19:35:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 026A6D6C15
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2019 01:36:10 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA87CC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 17:35:54 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B250EC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 23:36:09 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 72C8DC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78C6FC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 14 Oct 2019 17:35:53 +0000 (UTC)
+ Mon, 14 Oct 2019 23:36:08 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 46sQh90Nfcz1rhLD;
- Mon, 14 Oct 2019 19:35:53 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 46sZgq20nNz1qrK0;
+ Tue, 15 Oct 2019 01:36:07 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 46sQh86LbQz1qxBB;
- Mon, 14 Oct 2019 19:35:52 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 46sZgq1SNtz1qr9B;
+ Tue, 15 Oct 2019 01:36:07 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id 1NV_JfYd46Kf; Mon, 14 Oct 2019 19:35:51 +0200 (CEST)
-X-Auth-Info: edBSm0+shBAXMSF/m6NGmyCuJ0TVhhbtso6ETn+BxQ0=
-Received: from crub (p54833695.dip0.t-ipconnect.de [84.131.54.149])
+ with ESMTP id JxabD6eH0K2g; Tue, 15 Oct 2019 01:36:06 +0200 (CEST)
+X-Auth-Info: m3+nZBd3gUDohltTUnG78c69LR9XyfM+FBEnSBR38SA=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 14 Oct 2019 19:35:51 +0200 (CEST)
-Date: Mon, 14 Oct 2019 19:35:51 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Yannick =?UTF-8?B?RmVydHLDqQ==?= <yannick.fertre@st.com>
-Message-ID: <20191014193551.12eccd9e@crub>
-In-Reply-To: <1570454955-21298-16-git-send-email-yannick.fertre@st.com>
-References: <1570454955-21298-1-git-send-email-yannick.fertre@st.com>
- <1570454955-21298-16-git-send-email-yannick.fertre@st.com>
+ Tue, 15 Oct 2019 01:36:06 +0200 (CEST)
+To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
+References: <20191014080025.11245-1-patrick.delaunay@st.com>
+ <20191014080025.11245-2-patrick.delaunay@st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <67fe66ee-4ee9-ceb4-c303-801605764bdb@denx.de>
+Date: Tue, 15 Oct 2019 01:26:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Cc: Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Patrice Chotard <patrice.chotard@st.com>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, Vikas Manocha <vikas.manocha@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v5 15/15] stm32mp1: configs: add display
-	devices
+In-Reply-To: <20191014080025.11245-2-patrick.delaunay@st.com>
+Content-Language: en-US
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
+Subject: Re: [Uboot-stm32] [RESEND PATCH 1/5] usb: host: dwc2: add phy
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -54,20 +56,97 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gTW9uLCA3IE9jdCAyMDE5IDE1OjI5OjE1ICswMjAwCllhbm5pY2sgRmVydHLDqSB5YW5uaWNr
-LmZlcnRyZUBzdC5jb20gd3JvdGU6Cgo+IEFkZCBzdXBwb3J0IG9mIHBhbmVscyBvdG04MDA5QSwg
-Uk02ODIwMCAmIERTSSBjb250cm9sbGVyLgo+IExpbWl0IHJlc29sdXRpb24gdG8gMTI4MHg4MDAu
-Cj4gCj4gU2lnbmVkLW9mZi1ieTogWWFubmljayBGZXJ0csOpIDx5YW5uaWNrLmZlcnRyZUBzdC5j
-b20+Cj4gLS0tCj4gIGNvbmZpZ3Mvc3RtMzJtcDE1X2Jhc2ljX2RlZmNvbmZpZyAgIHwgNiArKysr
-KysKPiAgY29uZmlncy9zdG0zMm1wMTVfb3B0ZWVfZGVmY29uZmlnICAgfCA2ICsrKysrKwo+ICBj
-b25maWdzL3N0bTMybXAxNV90cnVzdGVkX2RlZmNvbmZpZyB8IDYgKysrKysrCj4gIDMgZmlsZXMg
-Y2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKQoKQXBwbGllZCB0byB1LWJvb3QtdmlkZW8vbWFzdGVy
-LCB0aGFua3MhCgotLQpBbmF0b2xpagpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQt
-bWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+On 10/14/19 10:00 AM, Patrick Delaunay wrote:
+> Use generic phy to initialize the PHY associated to the
+
+PHY and USB are abbreviations, should be in capitals.
+
+> DWC2 device and available in the device tree.
+
+[...]
+
+General question -- is the PHY subsystem a mandatory dependency of this
+driver now or will it work without the PHY subsystem still ?
+
+> +static int dwc2_setup_phy(struct udevice *dev)
+> +{
+> +	struct dwc2_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = generic_phy_get_by_index(dev, 0, &priv->phy);
+> +	if (ret) {
+> +		if (ret != -ENOENT) {
+> +			dev_err(dev, "failed to get usb phy\n");
+
+Sentence starts with capital letter, USB and PHY are in capitals. Fix
+globally please.
+
+It would be useful to print the $ret value too.
+
+> +			return ret;
+> +		}
+> +		return 0;
+> +	}
+> +
+> +	ret = generic_phy_init(&priv->phy);
+> +	if (ret) {
+> +		dev_err(dev, "failed to init usb phy\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = generic_phy_power_on(&priv->phy);
+> +	if (ret) {
+> +		dev_err(dev, "failed to power on usb phy\n");
+> +		return generic_phy_exit(&priv->phy);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int dwc2_shutdown_phy(struct udevice *dev)
+> +{
+> +	struct dwc2_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	if (!generic_phy_valid(&priv->phy))
+> +		return 0;
+> +
+> +	ret = generic_phy_power_off(&priv->phy);
+> +	if (ret) {
+> +		dev_err(dev, "failed to power off usb phy\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = generic_phy_exit(&priv->phy);
+> +	if (ret) {
+> +		dev_err(dev, "failed to power off usb phy\n");
+
+Shouldn't all those error prints be produced by the PHY subsystem ?
+
+> +		return ret;
+
+[...]
+
+> @@ -1339,6 +1398,8 @@ static int dwc2_usb_remove(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
+>  
+> +	dwc2_shutdown_phy(dev);
+
+This function returns a return value, but it's ignored here ?
+
+>  	dwc2_uninit_common(priv->regs);
+>  
+>  	reset_release_bulk(&priv->resets);
+> 
+
+[...]
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

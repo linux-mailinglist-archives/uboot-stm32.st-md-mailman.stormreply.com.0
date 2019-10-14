@@ -2,81 +2,80 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3259D658A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 16:46:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B513D667C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 17:50:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5C9A7C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 14:46:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4CC2CC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 14 Oct 2019 15:50:20 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1CD92C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40E01C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 14 Oct 2019 14:46:54 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9EEf94e000328; Mon, 14 Oct 2019 16:46:28 +0200
+ Mon, 14 Oct 2019 15:50:19 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x9EFki8t022051; Mon, 14 Oct 2019 17:50:18 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=nzDeAPR1GMSbJEpKwSNa2ayV05CzIxb0+wQVLSULh4o=;
- b=YwXhm+Vityi8nzh1c2TpnUJC74in+zi4aiuaJuL2mRmOl006CSwpttkcaL3nbrHEZYf0
- o6eNyThCBWuT8kX2EEPbtSKij2y+g15fqIKV5U4CpYIukJLGrVqB4bL3D1S8R4zsrOPx
- VhXnkTgvRfnOYzRMd2BI01LJklgmordTe0BlxbcbP9FNUWg05hOMUEry2cgcwm6izF3Z
- dR3ugnK4I4/wEms0cR2+B1VPiX3jvBhCznVmj9LT8DdCj9b2z/v2ymIS9HRpz212K3og
- 276S9g3rHVGjLztgsvZRa1Kz88mG1/0wXWpGBd5B7FktJ21XasKzcqUkXRojangZHEzE Cg== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=jtAV/AdyZ61FGfRb1IiMuMbTyctMD57CBPeW1FnX+RU=;
+ b=nxl1zCfQsk5u3RWpwzEHkl7HfgOgFRU95orhfXE9JGebhd0CP70Ni5TZEGdXBuoR8A+4
+ wCohkAMcXlQ6A8+zVgBcr7ehmEWh+QKzEBE39he/FGdEclrqFFsWFdNPRPcVsh8QAw3x
+ yr+Y3VDSKp6Ie/+Y7VSriMyI/q+FkjFOxv5IeGrnkp9X4CpCEP8RDjjKrSNUUw8JUbDk
+ RRkZ6qyFC+qOaBInUVKbLMGCIOkKSylxGrnKN/jVt0orTNVy1q7Jyt+ETzJSFvWN44Lm
+ QCLrzttDgk80SR1KshvLAeevpD513T8sOELh99pAgQmeQnUxWUbuOftjel2CRqWuv3KO 2g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2vk4a12xps-1
+ by mx08-00178001.pphosted.com with ESMTP id 2vk3y9kkqj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 14 Oct 2019 16:46:28 +0200
+ Mon, 14 Oct 2019 17:50:17 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CC11B100039;
- Mon, 14 Oct 2019 16:46:26 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 94AFD2C6B40;
- Mon, 14 Oct 2019 16:46:26 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 14 Oct
- 2019 16:46:26 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 14 Oct 2019 16:46:25 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Wolfgang Denk <wd@denx.de>, Tom Rini <trini@konsulko.com>
-Thread-Topic: [PATCH v4 0/3] env: Add CONFIG_ENV_FULL_SUPPORT
-Thread-Index: AQHVebuhJuHiDuRGcU6Z+heZE9rfl6dPXB+AgArg19A=
-Date: Mon, 14 Oct 2019 14:46:25 +0000
-Message-ID: <4f291ed4861b42b0af5a567901d2a9fd@SFHDAG6NODE3.st.com>
-References: <20191003072428.19197-1-patrick.delaunay@st.com>
- <20191007175635.D9824240044@gemini.denx.de>
-In-Reply-To: <20191007175635.D9824240044@gemini.denx.de>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4DE5510002A;
+ Mon, 14 Oct 2019 17:50:17 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag3node1.st.com [10.75.127.7])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3F8F12CDC29;
+ Mon, 14 Oct 2019 17:50:17 +0200 (CEST)
+Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG3NODE1.st.com
+ (10.75.127.7) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 14 Oct
+ 2019 17:50:16 +0200
+Received: from SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47]) by
+ SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47%20]) with mapi id
+ 15.00.1473.003; Mon, 14 Oct 2019 17:50:16 +0200
+From: Fabien DESSENNE <fabien.dessenne@st.com>
+To: Suman Anna <s-anna@ti.com>, Simon Glass <sjg@chromium.org>, "Patrick
+ DELAUNAY" <patrick.delaunay@st.com>, Christophe KERELLO
+ <christophe.kerello@st.com>, Patrice CHOTARD <patrice.chotard@st.com>,
+ "Vutla, Lokesh" <lokeshvutla@ti.com>
+Thread-Topic: [U-Boot] [PATCH 4/5] stm32mp1: Fixup the Linux DeviceTree with
+ coprocessor information
+Thread-Index: AQHVfrdbS89m33EraUmmZN16OpQFOqdVvTCAgARx/wA=
+Date: Mon, 14 Oct 2019 15:50:16 +0000
+Message-ID: <ad8bdfd8-8302-21f5-61d7-a2e066360eae@st.com>
+References: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
+ <1570635389-8445-5-git-send-email-fabien.dessenne@st.com>
+ <b8dc293b-8b72-71a0-3468-da89e920a345@ti.com>
+In-Reply-To: <b8dc293b-8b72-71a0-3468-da89e920a345@ti.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
+x-originating-ip: [10.75.127.46]
+Content-ID: <912B0125538EBA498FDEFFE028810F59@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
  definitions=2019-10-14_08:2019-10-11,2019-10-14 signatures=0
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Michal Simek <michal.simek@xilinx.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Hamish Guthrie <hamish.guthrie@kistler.com>, Marek
- Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>, Ash
- Charles <ash@gumstix.com>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Anup Patel <Anup.Patel@wdc.com>, Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH v4 0/3] env: Add CONFIG_ENV_FULL_SUPPORT
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Arnaud POULIQUEN <arnaud.pouliquen@st.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 4/5] stm32mp1: Fixup the Linux
+ DeviceTree with coprocessor information
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,103 +92,113 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Wolfgang and Tom,
-
-> From: Wolfgang Denk <wd@denx.de>
-> Sent: lundi 7 octobre 2019 19:57
-> 
-> Dear Patrick,
-> 
-> In message <20191003072428.19197-1-patrick.delaunay@st.com> you wrote:
-> >
-> > This patchset follow
-> >
-> > http://patchwork.ozlabs.org/project/uboot/list/?series=131268&state=*
-> >
-> > It follow the first proposal
-> >   http://patchwork.ozlabs.org/project/uboot/list/?series=129339
-> >   "env: Add CONFIG_ENV_SUPPORT"
-> 
-> Do I understand correctly that all of this is obsolete and no longer needed after
-> Tom's commit d90fc9c3de ``Revert "env: solve compilation error in SPL"'' ?
-
-The revert is a solution of the intial regression.
-
-A other solution only to correct he regression was the first patch of the serie
-
-[U-Boot,v4,1/3] env: correct the check of env_flags_validate presence
-http://patchwork.ozlabs.org/patch/1171096/
-
-But I am OK with Tom decision to just revert my initial patch.
+Hi Suman,
 
 
-The two other patch of the serie is a proposal after your remarks in:
-http://patchwork.ozlabs.org/patch/1157174/
-
-= This scares me.  Why are there different settings for SPL, TPL and
-=  U-Boot proper?  This looks conceptually broken to me - if a system
-=  is configured to use a specific set of environment features and
-=  extensions, then the exact same settings must be use in all of SPL,
-=  TPL and U-Boot proper.
-....
-= So please reconsider this whole implementation, and make sure that
-= only a single macro ise used everywhere to enable these features.
- 
-Today in v2010.10  with have ENV attribute / callback / flags 
-1/ always used in U-Boot proper
-2/ optional in SPL/TPL (CONFIG_SPL_ENV_SUPPORT & CONFIG_TPL_ENV_SUPPORT)
-
-In env:Makefile :
-
-obj-y += common.o env.o
-
-ifndef CONFIG_SPL_BUILD
-obj-y += attr.o
-obj-y += callback.o
-obj-y += flags.o
-else
-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += attr.o
-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += flags.o
-obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += callback.o
-endif
-
-Perhaps I not correctly understood the initial issue, 
-but I do my best to have the same level of ENV features
-(CONFIG_ENV_FULL_SUPPORT  activate the features and
-extensions= attribute / callback / flags) 
-between U--Boot proper, SPL and TPL.
-
-With the serie 
-=> when read from device (ENV_IS_IN....) is not supported ENV is still
-    supported in SPL/TPL with  (SPL_TPL_)ENV_IS_NOWHERE with
-    same feature level than U-Boot (only the default env is supported)
-=> the only remaining issue today after my serie is the size of this default
-     environment (default_environment[]) in SPL and TPL.
-     The content of this variable need to have the same content in SPL/TPL
-     than in U-Boot proper ?
-
-However if I not correctly understood the initial issue around ENV and security,
-and if the current ENV code behavior is enough for you,Wolfgang and Tom, or any other 
-maintainers interested by ENV, I will abandon the serie.
-
-PS: I can change also the serie as RFC.... to have more feedback
+Thank you for your comments.
 
 
-> Best regards,
-> 
-> Wolfgang Denk
-> 
-> --
-> DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de The
-> scientists of today think deeply instead of clearly. One must  be sane  to think
-> clearly, but one can think deeply and be quite insane.
->                                                        - Nikola Tesla
+On 11/10/2019 9:57 PM, Suman Anna wrote:
+> Hi Fabien,
+>
+> On 10/9/19 10:36 AM, Fabien Dessenne wrote:
+>> When the coprocessor has been started, provide the context to Linux
+>> kernel so it can handle it:
+>> - update the coprocessor node of kernel DeviceTree with the
+>>    "early-booted" property.
+> Has this property been acked by DT maintainers at the kernel-level?
+> We have used something similar but moving away from it and instead just
+> relying on reading the hardware reset status in the kernel remoteproc
+> driver, and configuring the driver accordingly.
 
-Regards
+Good point, that "early-booted" property has not been reviewed by the 
+kernel DT maintainers.
+This property shall be read by some kernel remoteproc drivers, together 
+with the kernel "remoteproc: add support for preloaded firmware" 
+patchset [1] which is still under review/rework (I expect Loic to send 
+an update version (very) soon).
 
-Patrick
+I will nevertheless rework this u-boot patchset in order to get rid of 
+that property. Instead of, I plan to use some additional HW register to 
+track the processor state.
+
+[1] https://lkml.org/lkml/2018/11/30/157
+
+
+>
+>> - write the resource table address in a dedicated backup register.
+> Is this an actual register on the SoC or some block of memory dedicated
+> for sharing information from U-Boot to kernel?
+>
+> We have the same problem and I am currently going with a
+> design-by-contract approach for early-booted usecases where I am
+> expecting the resource table to be placed at a specific location in
+> memory regions given to remoteproc.
+
+I am interested in having the resource table placed in a specific 
+remoteproc memory region.
+For the time being I write the RscTable in a backup register which is an 
+actual SoC register. When the "specific memory region" dev is available, 
+I may consider moving to that alternate implementation.
+
+
+BR
+
+
+Fabien
+
+>
+> regards
+> Suman
+>
+>> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
+>> ---
+>>   board/st/stm32mp1/stm32mp1.c | 16 +++++++++++++---
+>>   1 file changed, 13 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+>> index 18f9b84..8c669d0 100644
+>> --- a/board/st/stm32mp1/stm32mp1.c
+>> +++ b/board/st/stm32mp1/stm32mp1.c
+>> @@ -891,6 +891,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>>   #if defined(CONFIG_OF_BOARD_SETUP)
+>>   int ft_board_setup(void *blob, bd_t *bd)
+>>   {
+>> +	int off, id = 0; /* Copro id fixed to 0 as only one coproc on mp1 */
+>>   #ifdef CONFIG_FDT_FIXUP_PARTITIONS
+>>   	struct node_info nodes[] = {
+>>   		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_NOR,  },
+>> @@ -899,6 +900,17 @@ int ft_board_setup(void *blob, bd_t *bd)
+>>   	fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
+>>   #endif
+>>   
+>> +	/* Update DT if coprocessor started */
+>> +	off = fdt_path_offset(blob, "/mlahb/m4@10000000");
+>> +	if (off > 0) {
+>> +		if (!rproc_is_running(id)) {
+>> +			fdt_setprop_empty(blob, off, "early-booted");
+>> +		} else {
+>> +			fdt_delprop(blob, off, "early-booted");
+>> +			writel(0, TAMP_COPRO_RSC_TBL_ADDRESS);
+>> +		}
+>> +	}
+>> +
+>>   	return 0;
+>>   }
+>>   #endif
+>> @@ -918,10 +930,8 @@ static void board_copro_image_process(ulong fw_image, size_t fw_size)
+>>   	printf("Load Remote Processor %d with data@addr=0x%08lx %u bytes:%s\n",
+>>   	       id, fw_image, fw_size, ret ? " Failed!" : " Success!");
+>>   
+>> -	if (!ret) {
+>> +	if (!ret)
+>>   		rproc_start(id);
+>> -		env_set("copro_state", "booted");
+>> -	}
+>>   }
+>>   
+>>   U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_COPRO, board_copro_image_process);
+>>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

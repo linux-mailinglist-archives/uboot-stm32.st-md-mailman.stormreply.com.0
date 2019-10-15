@@ -2,46 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1235D7060
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2019 09:45:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2996BD724A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2019 11:28:21 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 659DBC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2019 07:45:47 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E55E8C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2019 09:28:20 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6DA73C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2CFC6C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Oct 2019 07:45:46 +0000 (UTC)
+ Tue, 15 Oct 2019 09:28:20 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 46snXn5r1Cz1qrKK;
- Tue, 15 Oct 2019 09:45:45 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 46sqq74gHSz1rfd1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Oct 2019 11:28:19 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 46snXn50wzz1rD6H;
- Tue, 15 Oct 2019 09:45:45 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 46sqq72xkhz1rD5h
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Oct 2019 11:28:19 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id Wllye_n7emVw; Tue, 15 Oct 2019 09:45:43 +0200 (CEST)
-X-Auth-Info: B6eJiG8JOJqvuMPXMFbSsv70X7xTjvmQ9XADLRLGlfg=
-Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ port 10024) with ESMTP id D1fAJzyFatTE
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Oct 2019 11:28:18 +0200 (CEST)
+X-Auth-Info: Ux1fXJQW1ESNtdprep2FUZuc5KhglHmJFTZebOZ4zgk=
+Received: from janitor.denx.de (unknown [62.91.23.180])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 15 Oct 2019 09:45:43 +0200 (CEST)
-Date: Tue, 15 Oct 2019 09:45:36 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Message-ID: <20191015094536.2c5bbb8f@jawa>
-Organization: denx.de
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ by mail.mnet-online.de (Postfix) with ESMTPSA
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Oct 2019 11:28:18 +0200 (CEST)
+Received: by janitor.denx.de (Postfix, from userid 119)
+ id 27111A2C1B; Tue, 15 Oct 2019 11:28:18 +0200 (CEST)
+Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
+ by janitor.denx.de (Postfix) with ESMTPS id 8D70F9FBE7;
+ Tue, 15 Oct 2019 11:28:01 +0200 (CEST)
+Received: from gemini.denx.de (localhost [IPv6:::1])
+ by gemini.denx.de (Postfix) with ESMTP id 4A8BA240045;
+ Tue, 15 Oct 2019 11:28:01 +0200 (CEST)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+From: Wolfgang Denk <wd@denx.de>
 MIME-Version: 1.0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>
-Subject: [Uboot-stm32] [GIT] Pull request: u-boot-dfu (15.10.2019)
+In-reply-to: <4f291ed4861b42b0af5a567901d2a9fd@SFHDAG6NODE3.st.com>
+References: <20191003072428.19197-1-patrick.delaunay@st.com>
+ <20191007175635.D9824240044@gemini.denx.de>
+ <4f291ed4861b42b0af5a567901d2a9fd@SFHDAG6NODE3.st.com>
+Comments: In-reply-to Patrick DELAUNAY <patrick.delaunay@st.com>
+ message dated "Mon, 14 Oct 2019 14:46:25 -0000."
+Date: Tue, 15 Oct 2019 11:28:01 +0200
+Message-Id: <20191015092801.4A8BA240045@gemini.denx.de>
+Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>, Marek
+ Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Eugeniu Rosca <roscaeugeniu@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>, Ash
+ Charles <ash@gumstix.com>, Hamish Guthrie <hamish.guthrie@kistler.com>,
+ Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>, Anup
+ Patel <Anup.Patel@wdc.com>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Ruslan Trofymenko <ruslan.trofymenko@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH v4 0/3] env: Add CONFIG_ENV_FULL_SUPPORT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -53,133 +81,51 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5506244630849013769=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============5506244630849013769==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- boundary="Sig_/pHZ8UBWJ_AgX+OzNR.j1Cpo"; protocol="application/pgp-signature"
+Dear Patrick,
 
---Sig_/pHZ8UBWJ_AgX+OzNR.j1Cpo
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+In message <4f291ed4861b42b0af5a567901d2a9fd@SFHDAG6NODE3.st.com> you wrote:
+> 
+> Perhaps I not correctly understood the initial issue, 
+> but I do my best to have the same level of ENV features
+> (CONFIG_ENV_FULL_SUPPORT  activate the features and
+> extensions= attribute / callback / flags) 
+> between U--Boot proper, SPL and TPL.
 
-Dear Marek,
+You understood correctly: these should always be the same.
 
-The following changes since commit
-7a779ed1755c2d5011bd9598da90291f759ae760:
+> With the serie 
+> => when read from device (ENV_IS_IN....) is not supported ENV is still
+>     supported in SPL/TPL with  (SPL_TPL_)ENV_IS_NOWHERE with
+>     same feature level than U-Boot (only the default env is supported)
+> => the only remaining issue today after my serie is the size of this default
+>      environment (default_environment[]) in SPL and TPL.
+>      The content of this variable need to have the same content in SPL/TPL
+>      than in U-Boot proper ?
 
-  travis: Exclude MIPS from the bcm job (2019-10-13 11:21:56 -0400)
-
-are available in the Git repository at:
-
-  git@gitlab.denx.de:u-boot/custodians/u-boot-dfu.git=20
-
-for you to fetch changes up to 5d897631065bb2f36bbc1bd7fabb670ce5da3ce8:
-
-  dfu: add callback for flush and initiated operation (2019-10-14
-  12:26:19 +0200)
-
-----------------------------------------------------------------
-Marek Szyprowski (5):
-      gadget: f_thor: properly enable 3rd endpoint defined by the
-protocol=20
-      cmd: thor: select DFU subsystem also for 'thor' download tool
-      dfu: mmc: add support for in-partition offset
-      dwc3: flush cache only if there is a buffer attached to a request
-      thor: fix error path after g_dnl_register() failure
-
-Patrick Delaunay (10):
-      dfu: cosmetic: cleanup sf to avoid checkpatch error
-      doc: dfu: Add dfu documentation
-      dfu: sf: add partition support for nor backend
-      dfu: prepare the support of multiple interface
-      dfu: allow to manage DFU on several devices
-      dfu: allow read with no data without error for EOF indication
-      dfu: add backend for MTD device
-      dfu: add partition support for MTD backend
-      dfu: add DFU virtual backend
-      dfu: add callback for flush and initiated operation
-
-Ralph Siemsen (1):
-      dfu: dfu_nand: reduce verbosity
-
- cmd/Kconfig                 |   1 +
- cmd/dfu.c                   |  21 +++++++++-------
- cmd/thordown.c              |   3 ++-
- doc/README.dfu              | 270
- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- drivers/dfu/Kconfig         |  21 ++++++++++++++++
- drivers/dfu/Makefile        |   2 ++ drivers/dfu/dfu.c           | 145
- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-++++++++++++++++++++++++-------------
- drivers/dfu/dfu_mmc.c       |  13 ++++++++-- drivers/dfu/dfu_mtd.c
-   | 311
- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++++++++++
- drivers/dfu/dfu_nand.c      |   2 +- drivers/dfu/dfu_sf.c        |  56
- +++++++++++++++++++++++++++++++++++++++++-- drivers/dfu/dfu_virt.c
-  |  49 ++++++++++++++++++++++++++++++++++++++
- drivers/usb/dwc3/gadget.c   |   3 ++- drivers/usb/gadget/f_thor.c |
- 7 ++++++ include/dfu.h               |  71
- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ 15 files
- changed, 944 insertions(+), 31 deletions(-) create mode 100644
- doc/README.dfu create mode 100644 drivers/dfu/dfu_mtd.c create mode
- 100644 drivers/dfu/dfu_virt.c
-
-
-DFU_PR: Travis-CI (green):
-https://travis-ci.org/lmajewski/u-boot-dfu/builds/597562672
-
-
-Merge tag (for information about the changes / new features):
-https://gitlab.denx.de/u-boot/custodians/u-boot-dfu/-/tags/u-boot-dfu-15Oct=
-2019
-
+It would feel strange if it had different content, but I did not
+spend much time on this thought (and practical use cases) yet.
+In the olden days you usually wanted to have the console baud rate
+setting from the envrinment, and not much else.  Things have changed
+a lot. Sorry, I can't really tell...
 
 
 Best regards,
 
-Lukasz Majewski
+Wolfgang Denk
 
---
-
+-- 
 DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/pHZ8UBWJ_AgX+OzNR.j1Cpo
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl2leSAACgkQAR8vZIA0
-zr0MqAgAygk2fAAsZPL+2K+p9NAdBoeoxcLnhILuR3gZEIY4/YQsdCrvlGWa7usx
-+mm5ei3lfVVXmLUUu8L+wi8UHJ1PZYV5uPAd/LGq/USP4KXRSqQMpfoxEAOGeiQ4
-I3XStXPT+eon5T/3Uc1ttN1RoKjaEoKtuUfgWp1fXBkThtiqT43/204Zb+/lc1D6
-4i2dtTW8KLtNygYUkjp/pZnUrS8s7WJGQf9jodYq+tQt1gXJkgRWi8e+zORYp9up
-EYB/9imWfZMxAwn+q2j0IYlNcmb1iUG9wQmz+biipaamdajIjPVog8FLHSAyMDpS
-RfnjbNhgnD3ADHTl1DFbXitjg0OUIg==
-=r/jl
------END PGP SIGNATURE-----
-
---Sig_/pHZ8UBWJ_AgX+OzNR.j1Cpo--
-
---===============5506244630849013769==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
+If I don't document something, it's usually either for a good reason,
+or a bad reason.  In this case it's a good reason.  :-)
+                 - Larry Wall in <1992Jan17.005405.16806@netlabs.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============5506244630849013769==--

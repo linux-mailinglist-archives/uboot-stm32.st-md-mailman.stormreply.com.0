@@ -2,72 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACD02DF3DD
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Oct 2019 19:10:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B7598DF426
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Oct 2019 19:26:16 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74A79C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Oct 2019 17:10:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 704B6C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Oct 2019 17:26:16 +0000 (UTC)
+Received: from mail-yb1-f195.google.com (mail-yb1-f195.google.com
+ [209.85.219.195])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BF367C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9AAEFC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Oct 2019 17:10:26 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9LH608E012052; Mon, 21 Oct 2019 19:10:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=mgbvyrvFnPblIex97RnNokZSLCXQ/0kzmonJVHNbzGg=;
- b=eoVtnEDpxy8bKb1YOdJJVcYUVVf1EDbp6CAVpqoKrJnZJ+k4ZaGR7veu795Sa03ut5IP
- OOnW/QV/8LruBe96joXAPEz14pFLe7MiojnwZKXZnMjihLUsfoMp3v6aX3wEuP+jM8jC
- JsNJ3AOupNqYBlcYi8ABEcZArxMT1zmyi01DfjTvmhTzBASJDAAunnBEb1CTbLthNS6f
- kEywXqdqrqAKqEBsRNQ2zikzwUPIMQRJqO+ffu53BSHALl6GXFdppAelUkow4kDaUf6g
- /u7KhPbX+xDxjuwft3VJtz9BASjV8R7o8KqmLobuGY8UP1RnNLCxAsT6cgRdTSdxlYHt VQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2vqwva25xc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 21 Oct 2019 19:10:22 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EBD9F10002A;
- Mon, 21 Oct 2019 19:10:21 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B9672222CFD;
- Mon, 21 Oct 2019 19:10:21 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 21 Oct
- 2019 19:10:21 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 21 Oct 2019 19:10:21 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
-Thread-Topic: [U-Boot] [PATCH] dm: pinctrl: fix for introduce
- PINCONF_RECURSIVE option
-Thread-Index: AQHVheH4JdikP/jkU0GKKy2yvjIdsKdiQueAgAMUsgA=
-Date: Mon, 21 Oct 2019 17:10:21 +0000
-Message-ID: <c7cf2c4dbaa245dfa80caa9af22dd98f@SFHDAG6NODE3.st.com>
-References: <20191018182922.22960-1-patrick.delaunay@st.com>
- <20191019220213.22f7a799@crub>
-In-Reply-To: <20191019220213.22f7a799@crub>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
+ Mon, 21 Oct 2019 17:26:14 +0000 (UTC)
+Received: by mail-yb1-f195.google.com with SMTP id m1so4275959ybm.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 21 Oct 2019 10:26:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=lH6AdDy8i/ir0EOibKpRttICt/t71B502VhdV3FsF18=;
+ b=RztbSp/phCE2aLjbMLbGBDmUB12PrwkhB02xnRrVkSkBVpYpSC75oLu9ozmRLbMmSO
+ pdvIglnfF3Z5V+s3l7TygyL9xxBA5E2h9id24d0+F36PWtudNtDgJ98VitgnMINGGETa
+ sjNi+oUsz3KYDSSuN7q1smrLki98EOQIETsMI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=lH6AdDy8i/ir0EOibKpRttICt/t71B502VhdV3FsF18=;
+ b=QqmmBcsw4i6jAnh91sA1ue8T5FUXPZC/F99ASS2j+AfM47lC6Vbtk6LTBvezon1cXW
+ 3ODxCnoIp7ISL1zYu0cKN5VvIL4c1ly2njz5WdinHoxDYKFBXKwFZ0hRLt6e+mbnm5y6
+ jm+fG9LKe93O9nOcYq6b2NP921Hzxv0QvKDx4j2ow6lPxuteK0sr9izIPHxT0CfZBP9Q
+ szCHXFmbLeMz2S5ojEuYvuppFcqkp2riTL706pCe1gDw3DeVnBgi38TGV38JNgsLcOQz
+ vsO+4ncnStirqtYIgAUOnOr39xXzQ0GiWZBRrp+3aPQjCXouG3ZeDd0Mvrs8Z/fMfErW
+ 3gJA==
+X-Gm-Message-State: APjAAAXQm7eXoViQ14lZYw1lFk+qFzPJmNpLYEorxTLY6MKEUW+QdFO/
+ EV7A9rvscGHmoA7Vq/ti66b2nA==
+X-Google-Smtp-Source: APXvYqwk39M34vbfl8SfiSkZ9leJ6uNl56wA+xSkVhjtiS+wpy3709bCKJcq+fPY24El0AAr16D4Xw==
+X-Received: by 2002:a25:cd88:: with SMTP id d130mr15008942ybf.65.1571678772779; 
+ Mon, 21 Oct 2019 10:26:12 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-142-8.ec.res.rr.com. [65.184.142.8])
+ by smtp.gmail.com with ESMTPSA id s24sm341252ywa.92.2019.10.21.10.26.11
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 21 Oct 2019 10:26:11 -0700 (PDT)
+Date: Mon, 21 Oct 2019 13:26:09 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20191021172609.GQ11173@bill-the-cat>
+References: <20191021130754.32466-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
- definitions=2019-10-21_04:2019-10-21,2019-10-21 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@gmail.com>,
+In-Reply-To: <20191021130754.32466-1-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Ryder Lee <ryder.lee@mediatek.com>, u-boot@lists.denx.de,
+ David Wu <david.wu@rock-chips.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Chris Packham <judge.packham@gmail.com>,
  Christoph Muellner <christoph.muellner@theobroma-systems.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] dm: pinctrl: fix for introduce
- PINCONF_RECURSIVE option
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] pinctrl: Kconfig: remove
+	duplicated nodes
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,47 +71,70 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8510700630011188446=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Anatolij and Tom,
 
-> From: Anatolij Gustschin <agust@denx.de>
-> Sent: samedi 19 octobre 2019 22:02
-> 
-> Hi Tom,
-> 
-> On Fri, 18 Oct 2019 20:29:22 +0200
-> Patrick Delaunay patrick.delaunay@st.com wrote:
-> ...
-> > This correct a regression introduced by commit c20851b3d850 ("dm:
-> > pinctrl: introduce PINCONF_RECURSIVE
-> > option")
-> 
-> Could you please apply this patch ASAP? It fixes broken eMMC, Ethernet, I2C,
-> GPIO, etc. on i.MX8QXP MEK board.
-> 
-> Many other boards are affected, too.
-> 
-> Thanks!
+--===============8510700630011188446==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="4dIe/AmYstFUGHTF"
+Content-Disposition: inline
 
-I check deeper today the root cause of the issue and I have a clean solution
-with v2 patch: http://patchwork.ozlabs.org/patch/1180575/
 
-The friday patch wasn't enough at least for my board, but ok for sandbox.
+--4dIe/AmYstFUGHTF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-And a minor correction of the Kconfig (not blocking)
-http://patchwork.ozlabs.org/patch/1180576/
+On Mon, Oct 21, 2019 at 03:07:54PM +0200, Patrick Delaunay wrote:
 
-> --
-> Anatolij
+> Remove the duplicated configs introduced when the same patch is
+> applied twice times:
+> - commit e878b53a79d1 ("dm: pinctrl: introduce PINCONF_RECURSIVE
+>   option")
+> - commit c20851b3d850 ("dm: pinctrl: introduce PINCONF_RECURSIVE
+>   option")
+>=20
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
-Sorry for disturbance.
+Applied to u-boot/master, thanks!
 
-Patrick
+--=20
+Tom
+
+--4dIe/AmYstFUGHTF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl2t6i4ACgkQh/n2NdMd
+dlLQzg//TbUW3kJIVeVQg2TQdnNBndlSMA+FhbhP6OyT+rNQ6zy+aJ9DG7ifZ7sp
+/vrL7sldfcjbVwAFh1TMpCZ34qW8Icc4VmnxtmgGDtD2oaBeUyEtXGRnhB2QSOmd
+luKZvc3teCV13dYG4y0U8NSEm1VjTLs7SeX5A3czmKfLNuPBItQEiGpJ8rDvbV3s
+nlbm5peSvFg+rqa/LiE66o1JGFVaUgz1oYwcO5ZDHP3i3dpVesKLCKIpAH55oEt1
+zHfdb19FcoLF2wIibZDDaGAHQDbIulhpfyQRMRslORwH2yc4BUTNGbxp/WY9RQgN
+hb/679kE9jIyRE2D7b/YZr15aRRnl3RwdiUGuluvbaTH9QR9Ooq9k6RTor91bc5V
+ddVWilSzl5A/EHyVX65+4SwGEoe2SWaBadK1y+nL8FzXaOZC3piYc79qn7L6pV1H
+chdNpt/q+3zXCMGkrB6oOSC7Fxekg1I1Yn0exomBo2seqHj3mtFE5GHVJIVBPLtD
+v8MPdAS9d3+Lhbuz1jokuXjm5hFfcIsjIxlVZMPFus2hXRCWzmsK9CHb8I7vjsFD
+o4aHw++SD4766s4iPKkv6TTDEjRiK9BJFlj7NCKpAFeHQrLK4FJInBFZZqXtt8ZN
+p0ge+MK5hob3MkCcy5Q5EL0ykY0bumD34HuAveamDLGI6w/9AoU=
+=iZSG
+-----END PGP SIGNATURE-----
+
+--4dIe/AmYstFUGHTF--
+
+--===============8510700630011188446==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============8510700630011188446==--

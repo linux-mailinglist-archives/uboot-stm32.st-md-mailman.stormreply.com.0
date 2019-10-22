@@ -2,72 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86F1BE057D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 15:50:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3A8EE0B36
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 20:10:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 478A1C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 13:50:49 +0000 (UTC)
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
- [209.85.167.196])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 36E7BC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 18:10:20 +0000 (UTC)
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+ [209.85.166.65])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA035C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1BC2CC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2019 13:50:47 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id b25so2593011oib.7
+ Tue, 22 Oct 2019 18:10:17 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id 1so10247420iou.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2019 06:50:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ Tue, 22 Oct 2019 11:10:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QNhXFptNwv1MXnRKGvWldnbR7XIsjJ79jXoQ9Z9Q70s=;
- b=Cvoosy7ht1QEbSsGfRF9OO1jQofZyx9oWqPcUMmLhxh8ML0KWupUzQYrMLTdEK3ybP
- jNtcUkkOQ4BneQKLchngdR37yUjtJY89so3AW8dE1RvNf5Cg/PDanOCWGLc3cVg3sFBI
- rSjJYr35dbDq6w2Fqht2e2SJSKhlr13/dj/i8=
+ :cc; bh=+twEtW0LwAhQp+QaFF7JoTnBkHBy0gBcAwHC+NNR5dw=;
+ b=k4phBnPwrz9WsLczj63gbSBlM1kausXywYhOKnOHAoVI0BBgyT8AgvvNfRyczbJISI
+ jaXT4YSOTuB+2OlEW14Cjh/jngmtLYcTDhly1YMCFMgvI3DSwNGg9JWOqYM4i5UVxQKe
+ Uff17qu8aOXR8GqqPoFXUnW4NQT4bxRTn0Ic8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=QNhXFptNwv1MXnRKGvWldnbR7XIsjJ79jXoQ9Z9Q70s=;
- b=SBMCaoR5SHlvEYYTNHsAEqrusi5TuIHxZaun/gq/9eihCt3d9URWVVkNNDWWimoV63
- EY4RIEJfcNzFNb1o6UYDhKlqDaxNTraU3/irkT3pihJhBY98xcyv04jWgbED4VwTh/Kh
- hO4vt8BywCtlruO1eWAGqlP73P7gdhrNy97T73tlPeAQKQqw9IxIlMjpuVBzqmtIY+Qb
- NOPYSUV3gf6uo5nxIh1xNsqtCD/BWIz7nMv+yDlaR1x226C46fpR+x4r+c4DSvzJcqvN
- Zcmwbv+0IIjuo4r/CwfXmMRKNnwV2uS2mejkd4YueTb1sKw8lT7Wxve+cZ8HwByBWR3A
- Cm0g==
-X-Gm-Message-State: APjAAAXULkTuRCSz2VU/tpaqNAKFHpP79LYWbgXymvPkyZUpVbeqLjXJ
- FrqcN6g2ONRlZ9zeyKvkc5s89dQ5OKmGE8oPWBtdmQ==
-X-Google-Smtp-Source: APXvYqxXUsXHvlgDt3s6EB0/EhyeRU8G5PYUFmumC+HLg7GapCZQQx3sFTtxDIR8LKr+mHd77x9B4U92DEEw+hNaanw=
-X-Received: by 2002:aca:f1d7:: with SMTP id p206mr3114807oih.97.1571752245855; 
- Tue, 22 Oct 2019 06:50:45 -0700 (PDT)
+ bh=+twEtW0LwAhQp+QaFF7JoTnBkHBy0gBcAwHC+NNR5dw=;
+ b=YygiNYDdCdIGHUXafWkVgiPSU6P4wRZHA7T6UxoJV+LrAhjcj77rqXh0BIrS6IG5tj
+ L1Lss/p/vuv+RG9R05B9IAQbznYCPAu7Uol+FRAwQac7RUxS2HJVt7Ct5SOJMhBLfHrU
+ C9I2I6TPVTtkB9CaHeMZD5KCIor2q9lZQIoFrBqgAfIs28wKo8unj957R0GV0jhVCS0a
+ 49nB2PZDYrdwBKfg+e5YCYApJeJsRxiyE7gejB3qSNaYtjEop29IZY/irX0CZeD0x7id
+ DEjUo/GYw2lUSv1TCXQXF9QvJiLPPEfoMssiz04z4jIoT5QbovEJ0xrx+IkfhliF/9/3
+ k6Xw==
+X-Gm-Message-State: APjAAAXlsulW2IVBn3BRoKc3lEsG8WN98QpZFe03twQvDrnWJq6kJtOr
+ IVfJUxix2+Hnu3An5VNDkuahINRW+RW2yhaH3rboMQ==
+X-Google-Smtp-Source: APXvYqy0YDbIgIykfDzLVED2Bh5d7n2DGCYA7n+fsT/b6do7J6Sau6AY96ynhzMLXLcXeNhHdr+hWnPhhBK9Fy0+SlQ=
+X-Received: by 2002:a5e:d917:: with SMTP id n23mr5201592iop.28.1571767816487; 
+ Tue, 22 Oct 2019 11:10:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190918092920.21435-1-patrick.delaunay@st.com>
- <20190918092920.21435-3-patrick.delaunay@st.com>
- <CAPnjgZ2xTrD10Bc+ZFQxTqCx5Dnx05bbagaKTdRh=gg1RJsFNg@mail.gmail.com>
- <c6c9d7f550f84529b1289822a518468f@SFHDAG6NODE3.st.com>
-In-Reply-To: <c6c9d7f550f84529b1289822a518468f@SFHDAG6NODE3.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 22 Oct 2019 07:50:26 -0600
-Message-ID: <CAPnjgZ1KMkNW=ctfiLJWfN6wxdnkLs_jYuf8k6zqc3KaosZRkQ@mail.gmail.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Michal Simek <michal.simek@xilinx.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Hamish Guthrie <hamish.guthrie@kistler.com>,
- Marek Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Heiko Schocher <hs@denx.de>,
- Ash Charles <ash@gumstix.com>, Wolfgang Denk <wd@denx.de>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Anup Patel <Anup.Patel@wdc.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 2/3] env: introduce macro
-	ENV_IS_IN_SOMEWHERE
+References: <20190913224242.21054-1-frieder.schrempf@kontron.de>
+ <20190913224242.21054-2-frieder.schrempf@kontron.de>
+ <CAMty3ZCZgL4wrZpwXcPLZAaGzG2uMHs2zftoPkjSV8b2geNw8g@mail.gmail.com>
+ <7dc4a580-c49f-7371-56f2-a2d56198a060@kontron.de>
+ <fc9cb551-87ab-a8ce-c719-c7fc498c13da@kontron.de>
+In-Reply-To: <fc9cb551-87ab-a8ce-c719-c7fc498c13da@kontron.de>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Tue, 22 Oct 2019 23:40:05 +0530
+Message-ID: <CAMty3ZCiKYYozP60mVVDNtih6WXVC7tFv6Pp75gRDMQD+jqGCA@mail.gmail.com>
+To: Schrempf Frieder <frieder.schrempf@kontron.de>
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "lukma@denx.de" <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 2/3] stm32mp1: configs: Add
+	CONFIG_SPL_SPI_FLASH_MTD
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,135 +73,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
-
-On Mon, 30 Sep 2019 at 03:30, Patrick DELAUNAY <patrick.delaunay@st.com> wrote:
+On Tue, Oct 22, 2019 at 6:23 PM Schrempf Frieder
+<frieder.schrempf@kontron.de> wrote:
 >
-> Hi Simon,
+> Hi Jagan,
 >
-> > From: Simon Glass <sjg@chromium.org>
-> > Sent: vendredi 27 septembre 2019 03:49
+> On 17.10.19 08:42, Frieder Schrempf wrote:
+> > Hi Jagan,
 > >
-> > On Wed, 18 Sep 2019 at 03:30, Patrick Delaunay <patrick.delaunay@st.com>
-> > wrote:
-> > >
-> > > This patch introduce a macro ENV_IS_IN_SOMEWHERE to check if the the
-> > > environment can be saved somewhere, in a device or in a file system,
-> > > without assumption on CONFIG$(SPL_TPL_)ENV_IS_NOWHERE.
-> > >
-> > > Since the commit 208bd2b85ecc ("env: allow ENV_IS_NOWHERE with other
-> > > storage target"), is is allowed to activated ENV_IS_NOWHERE with other
-> > > CONFIG_IS_IN...
-> > > It is only the case for U-Boot but the restriction in Kconfig could
-> > > also removed for SPL and TPL (depends on !SPL_ENV_IS_NOWHERE /
-> > depends
-> > > on !TPL_ENV_IS_NOWHERE).
-> > >
-> > > This macro ENV_IS_IN_DEVICE can be used in code to check if the
-> > > environment for U-Boot / SPL / TPL is really managed (at least one
-> > > CONFIG$(SPL_TPL_)ENV_IS_IN_.. is activated).
-> > >
-> > > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > > ---
-> > >
-> > > Changes in v3: None
-> > > Changes in v2: None
-> > >
-> > >  cmd/nvedit.c  | 29 +++++++----------------------  include/env.h | 13
-> > > +++++++++++++
-> > >  2 files changed, 20 insertions(+), 22 deletions(-)
+> > On 16.10.19 18:34, Jagan Teki wrote:
+> >> On Sat, Sep 14, 2019 at 4:18 AM Schrempf Frieder
+> >> <frieder.schrempf@kontron.de> wrote:
+> >>>
+> >>> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+> >>>
+> >>> As SPI_FLASH_MTD is used in SPL and U-Boot proper, we enable both,
+> >>> now that a separate option for SPL was introduced.
+> >>>
+> >>> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> >>> ---
+> >>>   configs/stm32mp15_basic_defconfig | 3 ++-
+> >>>   1 file changed, 2 insertions(+), 1 deletion(-)
+> >>>
+> >>> diff --git a/configs/stm32mp15_basic_defconfig
+> >>> b/configs/stm32mp15_basic_defconfig
+> >>> index 09785b5dc1..390319657f 100644
+> >>> --- a/configs/stm32mp15_basic_defconfig
+> >>> +++ b/configs/stm32mp15_basic_defconfig
+> >>> @@ -7,10 +7,10 @@ CONFIG_TARGET_STM32MP1=y
+> >>>   CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> >>>   CONFIG_SPL_SPI_SUPPORT=y
+> >>>   # CONFIG_ARMV7_VIRT is not set
+> >>> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
+> >>>   CONFIG_DISTRO_DEFAULTS=y
+> >>>   CONFIG_FIT=y
+> >>>   CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+> >>> -CONFIG_SPL_TEXT_BASE=0x2FFC2500
+> >>
+> >> Unrelated change wrt to commit message?
 > >
-> > I feel this is a bit confusion as we have ENV_IS_NOWHERE and
-> > ENV_IS_IN_SOMEWHERE which are opposites. Can they both be true?
+> > Yes, this is unrelated, but that's what 'menuconfig' and 'savedefconfig'
+> > gave me as output. So I would think it's ok. If you don't think so, feel
+> > free to remove this change or let me know if I should remove it.
 >
-> I am not completely satisfied by the name " ENV_IS_IN_SOMEWHERE ".
->
-> Perhaps other name will be less confusing:
->  "ENV_IS_IN_XXX", "ENV_IS_IN_DEVICE",  "ENV_IS_IN_STORAGE_MEDIUM",  "ENV_SAVE_SUPPORT" ...
->
-> But I don't found a perfect solution...
+> In patchwork all three patches of this series are marked with "Changes
+> Requested". Can you please let me know what needs to be fixed?
 
-Actually I think 'save' is good.
+Thought you might drop that unrelated change and send next version,
+but anyway I have changed and
 
-Perhaps ENV_IS_STORED?
-
->
-> It is not really the opposite:  ENV_IS_IN_SOMEWHERE  means at least one of the config  "ENV_IS_IN...." is activated.
-> => at leats one not volatile TARGET (= a strorage medium) is supported to load and save the environment
->
-> Yes, then can both be true: ENV can support several target in U-Boot
-> (but it is not the case today in SPL due to dependency in Kconfig):
-> - CONFIG_ENV_IS_IN_EXT4
-> - CONFIG_ENV_IS_IN_FAT
-> - CONFIG_ENV_IS_IN_NAND
-> ....
->
-> The arrays env_locations[] to defined the location supported
-> => env_get_location = weak function select the location (can ENVL_NOWHERE)
->
-> For me, U-Boot have no reason to refuse ENV_IS_NOWHERE when the other ENV_IS_IN_XXX are activated , as it I supported in env code.
-> => ENVL_NOWHERE can be see as a fallback (no error) when no other ENV location is available (each init failed / not supported in device tree)...
->
-> I plan to use this feature in stm32mp1 platform: U-Boot select the ENV location according the boot device
->
-> Boot from
-> - SD Card : eMMC => env in a file in ext4 file
-> - NAND =>  env in a UBI file
-> - NOR => env in SPI flash parttion (RAW)
-> - other case (boot form USB/serial for STM32CubeProgrammer):
->    U-Boot don't known where found the environment , use default environment => fallback with NOWHERE returned by env_get_location()
->
-> board/st/stm32mp1/stm32mp1.c:757
->
-> enum env_location env_get_location(enum env_operation op, int prio)
-> {
->         u32 bootmode = get_bootmode();
->
->         if (prio)
->                 return ENVL_UNKNOWN;
->
->         switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
-> #ifdef CONFIG_ENV_IS_IN_EXT4
->         case BOOT_FLASH_SD:
->         case BOOT_FLASH_EMMC:
->                 return ENVL_EXT4;
-> #endif
-> #ifdef CONFIG_ENV_IS_IN_UBI
->         case BOOT_FLASH_NAND:
->                 return ENVL_UBI;
-> #endif
-> #ifdef CONFIG_ENV_IS_IN_SPI_FLASH
->         case BOOT_FLASH_NOR:
->                 return ENVL_SPI_FLASH;
-> #endif
->         default:
->                 return ENVL_NOWHERE;
->         }
-> }
->
-> > So how about adding a comment as to what your new ENV_IS_NOWHERE
-> > means?
->
-> I don't think I change the meaning of ENV_IS_NOWHERE
->
-> In env/Kconfig
->
->           Define this if you don't want to or can't have an environment stored
->           on a storage medium. In this case the environment will still exist
->           while U-Boot is running, but once U-Boot exits it will not be
->           stored. U-Boot will therefore always start up with a default
->           environment.
->
-> I only change the dependency
->
-> > Also, how about ENV_IS_SOMEWHERE?
->
-> Yes I need to add comment on the added macro
-
-[..]
-
-Regards,
-Simon
+Applied to u-boot-spi/master
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

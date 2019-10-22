@@ -2,79 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24EC0E005B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 11:08:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7768E0435
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 14:53:59 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BF65C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 09:08:33 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A6052C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2019 12:53:59 +0000 (UTC)
+Received: from skedge04.snt-world.com (skedge04.snt-world.com [91.208.41.69])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1ADC4C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4D5C7C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2019 09:08:31 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9M96InW005770; Tue, 22 Oct 2019 11:08:30 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=JpuOJTUQU988PMtZgtm/deQwDWNeJKqTcfrkZiNle0g=;
- b=ZcTZ1Hs48rdzxVTxVYAgs+v2FpyQpYKJlwUPH6EpiCh2MO22u4Ox0AU/C5Qh2M4+8+3k
- 5EOBxcfc0N52ZxBZwIlQDlTXFEZ9xvvNvGUDybL0J2tffZcDlTOYzIkNkdWg/1RdVxGB
- i5QfKh1lGMaZXBph6YVhZaMRd0E9zmdCt+M0++Png4j/rrdWc9/0zgYte7JuAWRqAeHQ
- psQ4Q82CYXuitgQkvx2R6AHCZHSxARGz7RJlMrJEXLY6c4tGpnINUnYtFTR59Pok0c+8
- E1aoqZzHDFI5g4OGyhbHpjUH2FD9zZ1e86iFQ2KB4GdHoBZysKSp0hzIQ08x3aKtuRCb CA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2vqr8w6j34-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Oct 2019 11:08:30 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8250410002A;
- Tue, 22 Oct 2019 11:08:28 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag7node1.st.com [10.75.127.19])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 741332A8572;
- Tue, 22 Oct 2019 11:08:28 +0200 (CEST)
-Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG7NODE1.st.com
- (10.75.127.19) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 22 Oct
- 2019 11:08:28 +0200
-Received: from SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47]) by
- SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47%20]) with mapi id
- 15.00.1473.003; Tue, 22 Oct 2019 11:08:28 +0200
-From: Fabien DESSENNE <fabien.dessenne@st.com>
-To: Simon Glass <sjg@chromium.org>
-Thread-Topic: [PATCH 1/5] remoteproc: elf_loader: Add elf resource table load
- support
-Thread-Index: AQHVfrdZXIgBjTwjO0e3NTujI/CKL6dltLeAgACc2oA=
-Date: Tue, 22 Oct 2019 09:08:28 +0000
-Message-ID: <9a098f3c-250c-d589-70d3-6dcfe0fbdc93@st.com>
-References: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
- <1570635389-8445-2-git-send-email-fabien.dessenne@st.com>
- <CAPnjgZ33+J-10WgcmFBjGuqJ90caJFj7mGy+vApbxAyymCXvZw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ33+J-10WgcmFBjGuqJ90caJFj7mGy+vApbxAyymCXvZw@mail.gmail.com>
-Accept-Language: fr-FR, en-US
+ Tue, 22 Oct 2019 12:53:58 +0000 (UTC)
+Received: from sntmail10s.snt-is.com (unknown [10.203.32.183])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by skedge04.snt-world.com (Postfix) with ESMTPS id EF15D7CD87E;
+ Tue, 22 Oct 2019 14:53:50 +0200 (CEST)
+Received: from sntmail12r.snt-is.com (10.203.32.182) by sntmail10s.snt-is.com
+ (10.203.32.183) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1713.5; Tue, 22 Oct
+ 2019 14:53:50 +0200
+Received: from sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305]) by
+ sntmail12r.snt-is.com ([fe80::e551:8750:7bba:3305%3]) with mapi id
+ 15.01.1713.004; Tue, 22 Oct 2019 14:53:50 +0200
+From: Schrempf Frieder <frieder.schrempf@kontron.de>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Thread-Topic: [U-Boot] [PATCH 2/3] stm32mp1: configs: Add
+ CONFIG_SPL_SPI_FLASH_MTD
+Thread-Index: AQHVaoSy12LfEaTQNUKdlZQmpgzfaKddiHeAgADs/ICACEN7gA==
+Date: Tue, 22 Oct 2019 12:53:50 +0000
+Message-ID: <fc9cb551-87ab-a8ce-c719-c7fc498c13da@kontron.de>
+References: <20190913224242.21054-1-frieder.schrempf@kontron.de>
+ <20190913224242.21054-2-frieder.schrempf@kontron.de>
+ <CAMty3ZCZgL4wrZpwXcPLZAaGzG2uMHs2zftoPkjSV8b2geNw8g@mail.gmail.com>
+ <7dc4a580-c49f-7371-56f2-a2d56198a060@kontron.de>
+In-Reply-To: <7dc4a580-c49f-7371-56f2-a2d56198a060@kontron.de>
+Accept-Language: de-DE, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
-Content-ID: <22950E52ADE22F4DBAF4A88F6C4323E1@st.com>
+x-originating-ip: [172.25.9.193]
+x-c2processedorg: 51b406b7-48a2-4d03-b652-521f56ac89f3
+Content-ID: <8D15291309D24B44B15C160F92BD221A@snt-world.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
- definitions=2019-10-22_03:2019-10-21,2019-10-22 signatures=0
-Cc: Christophe KERELLO <christophe.kerello@st.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Arnaud POULIQUEN <arnaud.pouliquen@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/5] remoteproc: elf_loader: Add elf
- resource table load support
+X-SnT-MailScanner-Information: Please contact the ISP for more information
+X-SnT-MailScanner-ID: EF15D7CD87E.A080A
+X-SnT-MailScanner: Not scanned: please contact your Internet E-Mail Service
+ Provider for details
+X-SnT-MailScanner-SpamCheck: 
+X-SnT-MailScanner-From: frieder.schrempf@kontron.de
+X-SnT-MailScanner-To: jagan@amarulasolutions.com, lukma@denx.de,
+ patrick.delaunay@st.com, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com
+X-Spam-Status: No
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "lukma@denx.de" <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH 2/3] stm32mp1: configs: Add
+ CONFIG_SPL_SPI_FLASH_MTD
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,59 +72,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
-
-
-On 22/10/2019 1:47 AM, Simon Glass wrote:
-> Hi Fabien,
->
-> On Wed, 9 Oct 2019 at 09:36, Fabien Dessenne <fabien.dessenne@st.com> wrote:
->> Add rproc_elf_load_rsc_table(), which searches for a resource table in
->> an elf64/elf32 image, and if found, copies it to device memory.
->> Add also the elf32 and elf64 variants of this API.
->> Add a test for this.
->>
->> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
->> ---
->>   drivers/remoteproc/rproc-elf-loader.c | 269 ++++++++++++++++++++++++++++++++++
->>   include/remoteproc.h                  |  70 +++++++++
->>   test/dm/remoteproc.c                  |  91 ++++++++++--
->>   3 files changed, 419 insertions(+), 11 deletions(-)
->>
-> If you are putting stuff in the image, should you use binman to build
-> the image, then find the contents using the binman tables?
-
-
-The "resource table" may be located anywhere, there is no strict rule 
-defining where it is expected to be.
-
-Nevertheless the Linux remoteproc[1] and OpenAmp (running RTOS) [2] 
-frameworks expect the resource table to be stored in a dedicated ELF 
-section. Both of them run some ELF scanning to find out this section.
-
-The proposed patch is for the "ELF section" variant of the resource table.
-Other variants like binman packing may be proposed as well, both 
-implementations can coexist alongside.
-
-BR
-
-Fabien
-
-[1] https://www.kernel.org/doc/Documentation/remoteproc.txt
-[2] 
-https://github.com/OpenAMP/open-amp/blob/master/lib/remoteproc/elf_loader.c
-
->
-> Scanning the image for a table seems a bit horrible.
->
-> Regards,
-> Simon
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgSmFnYW4sDQoNCk9uIDE3LjEwLjE5IDA4OjQyLCBGcmllZGVyIFNjaHJlbXBmIHdyb3RlOg0K
+PiBIaSBKYWdhbiwNCj4gDQo+IE9uIDE2LjEwLjE5IDE4OjM0LCBKYWdhbiBUZWtpIHdyb3RlOg0K
+Pj4gT24gU2F0LCBTZXAgMTQsIDIwMTkgYXQgNDoxOCBBTSBTY2hyZW1wZiBGcmllZGVyDQo+PiA8
+ZnJpZWRlci5zY2hyZW1wZkBrb250cm9uLmRlPiB3cm90ZToNCj4+Pg0KPj4+IEZyb206IEZyaWVk
+ZXIgU2NocmVtcGYgPGZyaWVkZXIuc2NocmVtcGZAa29udHJvbi5kZT4NCj4+Pg0KPj4+IEFzIFNQ
+SV9GTEFTSF9NVEQgaXMgdXNlZCBpbiBTUEwgYW5kIFUtQm9vdCBwcm9wZXIsIHdlIGVuYWJsZSBi
+b3RoLA0KPj4+IG5vdyB0aGF0IGEgc2VwYXJhdGUgb3B0aW9uIGZvciBTUEwgd2FzIGludHJvZHVj
+ZWQuDQo+Pj4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBGcmllZGVyIFNjaHJlbXBmIDxmcmllZGVyLnNj
+aHJlbXBmQGtvbnRyb24uZGU+DQo+Pj4gLS0tDQo+Pj4gwqAgY29uZmlncy9zdG0zMm1wMTVfYmFz
+aWNfZGVmY29uZmlnIHwgMyArKy0NCj4+PiDCoCAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25z
+KCspLCAxIGRlbGV0aW9uKC0pDQo+Pj4NCj4+PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9zdG0zMm1w
+MTVfYmFzaWNfZGVmY29uZmlnIA0KPj4+IGIvY29uZmlncy9zdG0zMm1wMTVfYmFzaWNfZGVmY29u
+ZmlnDQo+Pj4gaW5kZXggMDk3ODViNWRjMS4uMzkwMzE5NjU3ZiAxMDA2NDQNCj4+PiAtLS0gYS9j
+b25maWdzL3N0bTMybXAxNV9iYXNpY19kZWZjb25maWcNCj4+PiArKysgYi9jb25maWdzL3N0bTMy
+bXAxNV9iYXNpY19kZWZjb25maWcNCj4+PiBAQCAtNywxMCArNywxMCBAQCBDT05GSUdfVEFSR0VU
+X1NUTTMyTVAxPXkNCj4+PiDCoCBDT05GSUdfU1BMX1NQSV9GTEFTSF9TVVBQT1JUPXkNCj4+PiDC
+oCBDT05GSUdfU1BMX1NQSV9TVVBQT1JUPXkNCj4+PiDCoCAjIENPTkZJR19BUk1WN19WSVJUIGlz
+IG5vdCBzZXQNCj4+PiArQ09ORklHX1NQTF9URVhUX0JBU0U9MHgyRkZDMjUwMA0KPj4+IMKgIENP
+TkZJR19ESVNUUk9fREVGQVVMVFM9eQ0KPj4+IMKgIENPTkZJR19GSVQ9eQ0KPj4+IMKgIENPTkZJ
+R19CT09UQ09NTUFORD0icnVuIGJvb3RjbWRfc3RtMzJtcCINCj4+PiAtQ09ORklHX1NQTF9URVhU
+X0JBU0U9MHgyRkZDMjUwMA0KPj4NCj4+IFVucmVsYXRlZCBjaGFuZ2Ugd3J0IHRvIGNvbW1pdCBt
+ZXNzYWdlPw0KPiANCj4gWWVzLCB0aGlzIGlzIHVucmVsYXRlZCwgYnV0IHRoYXQncyB3aGF0ICdt
+ZW51Y29uZmlnJyBhbmQgJ3NhdmVkZWZjb25maWcnIA0KPiBnYXZlIG1lIGFzIG91dHB1dC4gU28g
+SSB3b3VsZCB0aGluayBpdCdzIG9rLiBJZiB5b3UgZG9uJ3QgdGhpbmsgc28sIGZlZWwgDQo+IGZy
+ZWUgdG8gcmVtb3ZlIHRoaXMgY2hhbmdlIG9yIGxldCBtZSBrbm93IGlmIEkgc2hvdWxkIHJlbW92
+ZSBpdC4NCg0KSW4gcGF0Y2h3b3JrIGFsbCB0aHJlZSBwYXRjaGVzIG9mIHRoaXMgc2VyaWVzIGFy
+ZSBtYXJrZWQgd2l0aCAiQ2hhbmdlcyANClJlcXVlc3RlZCIuIENhbiB5b3UgcGxlYXNlIGxldCBt
+ZSBrbm93IHdoYXQgbmVlZHMgdG8gYmUgZml4ZWQ/DQoNClRoYW5rcywNCkZyaWVkZXIKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFp
+bGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6
+Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3Rt
+MzIK

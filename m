@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AF03E1D27
+	by mail.lfdr.de (Postfix) with ESMTPS id 72A8BE1D26
 	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 15:45:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 473C1C36B0D
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3D73FC36B0B
 	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 13:45:17 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 279F0C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 28640C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Wed, 23 Oct 2019 13:45:15 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9NDh5sq001122; Wed, 23 Oct 2019 15:45:11 +0200
+ x9NDhVmh001279; Wed, 23 Oct 2019 15:45:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=VOL/B2jNi2SrigXMMufblmyEWFOCwuf3sf2fSFE1Rk8=;
- b=OkURvoASyIC1xr9yhU99j1bttE+HeKTALaF4stHTkK23Nbv5eTy1zO08xoAECz+pmAhw
- I+dG6nJ8kW/BhmdCogs3gvXHNoQlJoQ/i2LKFvZotpVGJY2UgPGdZB1M72HIl/x94o53
- Tv8ANzmI4swihykkWpRGXLD+GL4ta4PI71ey5lnrOzDaJp3krURTmBUBxn+gQr7SANtp
- DRXpMyicTKfVik4BSP4QEBi19xLFpnWnT233KPkAcLxDDjA6+em4mR40XMjTutgXaWxB
- tGvF+3yH4TLWnAKa+tzh8ngXJpSzB6Ru7ZRtN/2GMmZeDceC809BMTO5ryqFJaaQVIdK Dw== 
+ bh=LqOGApJTIRJKD4xJoFTin2Y6QsDChun2NEAdpw0brnU=;
+ b=lmUsI5zD3OA4kh7dIPnySHJHkjcvUuKm9FA5bBNRdMtCvlXHFLRxJCwjvyv45F9DRlbv
+ /dpibI+AlIaLpKmydI7Btk92MTd8mZ2sUQp+XqrSn7ctO9isTL0uudbnK7LXsPZCLJ8A
+ BUS/jHtdzdECzzSkbr8TQ+JYSvNjJ4z541UbOMLDyrSicJCc1j7vpQuS1/pgaYeP4wgv
+ l1R1JRfDaEoE5T8RbxXzx6BfdNeNRwkBsRoXrRy6sNg3+aee5getBzR2BiZSgRM17GH9
+ lgVhCWQOp4pL92jbLGdMIszDnn8WJc0N4U7SqDaHm5rWW3//EaDOC/GpPyrGDM8l6Nrj tg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2vt9s43xkn-1
+ by mx07-00178001.pphosted.com with ESMTP id 2vt9s43xkw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 23 Oct 2019 15:45:11 +0200
+ Wed, 23 Oct 2019 15:45:13 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BD945100039;
- Wed, 23 Oct 2019 15:45:07 +0200 (CEST)
-Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B01CF2FF5FE;
- Wed, 23 Oct 2019 15:45:07 +0200 (CEST)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by Safex1hubcas24.st.com
- (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct
- 2019 15:45:07 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 39AA2100042;
+ Wed, 23 Oct 2019 15:45:09 +0200 (CEST)
+Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 308D22FF5FE;
+ Wed, 23 Oct 2019 15:45:09 +0200 (CEST)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
+ (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct
+ 2019 15:45:09 +0200
 Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct 2019 15:45:07
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct 2019 15:45:08
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 23 Oct 2019 15:44:44 +0200
-Message-ID: <20191023134448.20149-10-patrick.delaunay@st.com>
+Date: Wed, 23 Oct 2019 15:44:45 +0200
+Message-ID: <20191023134448.20149-11-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20191023134448.20149-1-patrick.delaunay@st.com>
 References: <20191023134448.20149-1-patrick.delaunay@st.com>
@@ -54,15 +54,9 @@ MIME-Version: 1.0
 X-Originating-IP: [10.201.21.107]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
  definitions=2019-10-23_03:2019-10-23,2019-10-23 signatures=0
-Cc: =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>,
- Simon Glass <sjg@chromium.org>, Alex Marginean <alexandru.marginean@nxp.com>,
- Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH 09/13] test: dm: update test for pins
-	configuration in pinctrl node
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 10/13] gpio: sandbox: cleanup flag support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,139 +73,93 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add test for "pins" configuration in gpio uclass with set_state() ops
-and test for generic parsing of pinconf_param array).
+Replace the GPIOF_ defines of gpio UCLASS (they are not bitfields but
+enum gpio_func_t = State of a GPIO, as reported by get_function())
+by GPIO_FLAG to access to the bitfield 'flags' of struct gpio_state.
 
-set_state() is called by:
-- pinctrl_generic_set_state
- |- pinctrl_generic_set_state_subnode
+This patch avoid confusion between sandbox and gpio UCLASS defines.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/sandbox/dts/test.dts         | 25 +++++++++++++++++++++++++
- drivers/pinctrl/pinctrl-sandbox.c | 14 +++++++++++++-
- test/py/tests/test_pinmux.py      | 28 ++++++++++++++++++----------
- 3 files changed, 56 insertions(+), 11 deletions(-)
+ drivers/gpio/sandbox.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 42b41fbf62..35e80219a8 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -847,6 +847,31 @@
+diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
+index 2ef5c67ad5..b6c78cc46a 100644
+--- a/drivers/gpio/sandbox.c
++++ b/drivers/gpio/sandbox.c
+@@ -11,14 +11,14 @@
+ #include <dm/of.h>
+ #include <dt-bindings/gpio/gpio.h>
  
- 	pinctrl {
- 		compatible = "sandbox,pinctrl";
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&gpios>;
-+
-+		gpios: gpios {
-+			gpio0 {
-+				pins = "GPIO0";
-+				bias-pull-up;
-+				input-disable;
-+			};
-+			gpio1 {
-+				pins = "GPIO1";
-+				output-high;
-+				drive-open-drain;
-+			};
-+			gpio2 {
-+				pins = "GPIO2";
-+				bias-pull-down;
-+				input-enable;
-+			};
-+			gpio3 {
-+				pins = "GPIO3";
-+				bias-disable;
-+			};
-+		};
- 	};
+-/* Flags for each GPIO */
+-#define GPIOF_OUTPUT	(1 << 0)	/* Currently set as an output */
+-#define GPIOF_HIGH	(1 << 1)	/* Currently set high */
+-#define GPIOF_ODR	(1 << 2)	/* Currently set to open drain mode */
++/* Internal flags for each GPIO : bitfield*/
++#define GPIO_FLAG_OUTPUT	BIT(0)	/* Currently set as an output */
++#define GPIO_FLAG_HIGH		BIT(1)	/* Currently set high */
++#define GPIO_FLAG_ODR		BIT(2)	/* Currently set to open drain mode */
  
- 	hwspinlock@0 {
-diff --git a/drivers/pinctrl/pinctrl-sandbox.c b/drivers/pinctrl/pinctrl-sandbox.c
-index d1a21f0f19..3ee75fbbee 100644
---- a/drivers/pinctrl/pinctrl-sandbox.c
-+++ b/drivers/pinctrl/pinctrl-sandbox.c
-@@ -14,7 +14,11 @@ static const char * const sandbox_pins[] = {
- 	"SDA",
- 	"TX",
- 	"RX",
--	"W1"
-+	"W1",
-+	"GPIO0",
-+	"GPIO1",
-+	"GPIO2",
-+	"GPIO3",
+ struct gpio_state {
+ 	const char *label;	/* label given by requester */
+-	u8 flags;		/* flags (GPIOF_...) */
++	u8 flags;		/* bitfield flags (GPIO_FLAG_...) */
  };
  
- static const char * const sandbox_pins_muxing[] = {
-@@ -23,6 +27,10 @@ static const char * const sandbox_pins_muxing[] = {
- 	"Uart TX",
- 	"Uart RX",
- 	"1-wire gpio",
-+	"gpio",
-+	"gpio",
-+	"gpio",
-+	"gpio",
- };
+ /* Access routines for GPIO state */
+@@ -60,34 +60,34 @@ static int set_gpio_flag(struct udevice *dev, unsigned offset, int flag,
  
- static const char * const sandbox_groups[] = {
-@@ -38,6 +46,10 @@ static const char * const sandbox_functions[] = {
- 	"serial",
- 	"spi",
- 	"w1",
-+	"gpio",
-+	"gpio",
-+	"gpio",
-+	"gpio",
- };
+ int sandbox_gpio_get_value(struct udevice *dev, unsigned offset)
+ {
+-	if (get_gpio_flag(dev, offset, GPIOF_OUTPUT))
++	if (get_gpio_flag(dev, offset, GPIO_FLAG_OUTPUT))
+ 		debug("sandbox_gpio: get_value on output gpio %u\n", offset);
+-	return get_gpio_flag(dev, offset, GPIOF_HIGH);
++	return get_gpio_flag(dev, offset, GPIO_FLAG_HIGH);
+ }
  
- static const struct pinconf_param sandbox_conf_params[] = {
-diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py
-index 25394f1faf..5ca0b4b630 100644
---- a/test/py/tests/test_pinmux.py
-+++ b/test/py/tests/test_pinmux.py
-@@ -22,11 +22,15 @@ def test_pinmux_usage_2(u_boot_console):
- def test_pinmux_status_all(u_boot_console):
-     """Test that 'pinmux status -a' displays pin's muxing."""
-     output = u_boot_console.run_command('pinmux status -a')
--    assert ('SCL       : I2C SCL' in output)
--    assert ('SDA       : I2C SDA' in output)
--    assert ('TX        : Uart TX' in output)
--    assert ('RX        : Uart RX' in output)
--    assert ('W1        : 1-wire gpio' in output)
-+    assert ('SCL       : I2C SCL.' in output)
-+    assert ('SDA       : I2C SDA.' in output)
-+    assert ('TX        : Uart TX.' in output)
-+    assert ('RX        : Uart RX.' in output)
-+    assert ('W1        : 1-wire gpio.' in output)
-+    assert ('GPIO0     : gpio bias-pull-up input-disable.' in output)
-+    assert ('GPIO1     : gpio drive-open-drain.' in output)
-+    assert ('GPIO2     : gpio bias-pull-down input-enable.' in output)
-+    assert ('GPIO3     : gpio bias-disable.' in output)
+ int sandbox_gpio_set_value(struct udevice *dev, unsigned offset, int value)
+ {
+-	return set_gpio_flag(dev, offset, GPIOF_HIGH, value);
++	return set_gpio_flag(dev, offset, GPIO_FLAG_HIGH, value);
+ }
  
- @pytest.mark.buildconfigspec('cmd_pinmux')
- @pytest.mark.boardspec('sandbox')
-@@ -59,8 +63,12 @@ def test_pinmux_status(u_boot_console):
-     """Test that 'pinmux status' displays selected pincontroller's pin
-     muxing descriptions."""
-     output = u_boot_console.run_command('pinmux status')
--    assert ('SCL       : I2C SCL' in output)
--    assert ('SDA       : I2C SDA' in output)
--    assert ('TX        : Uart TX' in output)
--    assert ('RX        : Uart RX' in output)
--    assert ('W1        : 1-wire gpio' in output)
-+    assert ('SCL       : I2C SCL.' in output)
-+    assert ('SDA       : I2C SDA.' in output)
-+    assert ('TX        : Uart TX.' in output)
-+    assert ('RX        : Uart RX.' in output)
-+    assert ('W1        : 1-wire gpio.' in output)
-+    assert ('GPIO0     : gpio bias-pull-up input-disable.' in output)
-+    assert ('GPIO1     : gpio drive-open-drain.' in output)
-+    assert ('GPIO2     : gpio bias-pull-down input-enable.' in output)
-+    assert ('GPIO3     : gpio bias-disable.' in output)
+ int sandbox_gpio_get_open_drain(struct udevice *dev, unsigned offset)
+ {
+-	return get_gpio_flag(dev, offset, GPIOF_ODR);
++	return get_gpio_flag(dev, offset, GPIO_FLAG_ODR);
+ }
+ 
+ int sandbox_gpio_set_open_drain(struct udevice *dev, unsigned offset, int value)
+ {
+-	return set_gpio_flag(dev, offset, GPIOF_ODR, value);
++	return set_gpio_flag(dev, offset, GPIO_FLAG_ODR, value);
+ }
+ 
+ int sandbox_gpio_get_direction(struct udevice *dev, unsigned offset)
+ {
+-	return get_gpio_flag(dev, offset, GPIOF_OUTPUT);
++	return get_gpio_flag(dev, offset, GPIO_FLAG_OUTPUT);
+ }
+ 
+ int sandbox_gpio_set_direction(struct udevice *dev, unsigned offset, int output)
+ {
+-	return set_gpio_flag(dev, offset, GPIOF_OUTPUT, output);
++	return set_gpio_flag(dev, offset, GPIO_FLAG_OUTPUT, output);
+ }
+ 
+ /*
+@@ -158,7 +158,7 @@ static int sb_gpio_set_open_drain(struct udevice *dev, unsigned offset, int valu
+ 
+ static int sb_gpio_get_function(struct udevice *dev, unsigned offset)
+ {
+-	if (get_gpio_flag(dev, offset, GPIOF_OUTPUT))
++	if (get_gpio_flag(dev, offset, GPIO_FLAG_OUTPUT))
+ 		return GPIOF_OUTPUT;
+ 	return GPIOF_INPUT;
+ }
 -- 
 2.17.1
 

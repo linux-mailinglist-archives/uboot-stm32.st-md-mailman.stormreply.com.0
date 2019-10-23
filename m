@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F692E1D1B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 15:45:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 808FBE1D1F
+	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 15:45:08 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2B923C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 13:45:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4C673C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Oct 2019 13:45:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1F473C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EEAA0C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 23 Oct 2019 13:45:05 +0000 (UTC)
+ Wed, 23 Oct 2019 13:45:06 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9NDgx34013942; Wed, 23 Oct 2019 15:45:04 +0200
+ x9NDgx36013942; Wed, 23 Oct 2019 15:45:05 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=iAFRvROSIJnZgLCW8JxrHnRorgEqbGhMpQZ4WymeFJg=;
- b=v/jocOawLxTD1K+OB2Hr05eZLy0ClSSwe2nMMADwJA01ty4pITwpnApx8atrDdXX5kAS
- f63C3BcVYzC1HJGzDSg9IdgGHfhDFNrlGrvnFmgcnoCaQ4fGJDBiZNnyDW7pyl7sL4gW
- D8RWFegqrcszG0vQQvr2+2VR5rzjGCnIXuD0jzvDRbMNmP5/5XPj/CazajU2CNnCG6Ev
- s7ZNBqlslHhay5L5qt/hOhRLjcxMrvEvlhGQRkhIXogPsKlz6lTIYcMehELupxhTx/9f
- iaWU6iRpKVrfQdNgpfmdqQq6L/6sAEgXnYcgaL7LE1z1yu1/MzzCFRnGsUYz60ACrpxg VA== 
+ bh=SKywlPzEz9ZQMY8F3Qmdvn4yersiY22+iu5dW6cXw3Y=;
+ b=SWHHFxv+lkUgx0coOklhGMsp3UBTIp1hE1IRkqGYFL97zMuDDT0t/bH3+x8BDsEjFpQO
+ jPrlxbJuSKafaDYif1iBseAU/vBTd4WzHBgSLdlLR0YVi+rG1QYVhT1VbT0kY3CYC3pd
+ b3dDNwmW82jdrQ6r335nY2MlcJymgppxsUT03enrfguDyXzgcQKE1jJUxBzBX62+0tfC
+ B+Bql6KlKZjEXlk+KtGz8+r8aB529dQk6d7rWqyfgpemYeaucDl5/trGlbRPfhCT1efM
+ oIkr9juvlq9ZG4oAL8BQgz0PRPQOfOkk7YQfBhMFBz8e8MExy+niAciJjUMvce1tMdXO 2Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2vt9s4uxdq-1
+ by mx08-00178001.pphosted.com with ESMTP id 2vt9s4uxdv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 23 Oct 2019 15:45:04 +0200
+ Wed, 23 Oct 2019 15:45:05 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8248C10002A;
- Wed, 23 Oct 2019 15:44:59 +0200 (CEST)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 78DE72FF5FE;
- Wed, 23 Oct 2019 15:44:59 +0200 (CEST)
-Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct
- 2019 15:44:59 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 142B210003A;
+ Wed, 23 Oct 2019 15:45:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (Safex1hubcas21.st.com [10.75.90.44])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 081522FF5FE;
+ Wed, 23 Oct 2019 15:45:01 +0200 (CEST)
+Received: from SAFEX1HUBCAS22.st.com (10.75.90.93) by SAFEX1HUBCAS21.st.com
+ (10.75.90.44) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct
+ 2019 15:45:00 +0200
 Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct 2019 15:44:58
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 23 Oct 2019 15:45:00
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 23 Oct 2019 15:44:39 +0200
-Message-ID: <20191023134448.20149-5-patrick.delaunay@st.com>
+Date: Wed, 23 Oct 2019 15:44:40 +0200
+Message-ID: <20191023134448.20149-6-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20191023134448.20149-1-patrick.delaunay@st.com>
 References: <20191023134448.20149-1-patrick.delaunay@st.com>
@@ -55,9 +55,9 @@ X-Originating-IP: [10.201.21.107]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
  definitions=2019-10-23_03:2019-10-23,2019-10-23 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 04/13] dm: pinctrl: migrate pinctrl-generic to
-	livetree
+ Heiko Schocher <hs@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 05/13] dt-bindings: gpio: document the new
+	pull-up/pull-down flags
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,105 +74,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Migrate pinctrl-generic to livetree:
-- ofnode_get_first_property
-- ofnode_get_next_property
-- ofnode_get_property_by_prop
-- ofnode_read_string_count
-- ofnode_read_string_index
-and get rid of DECLARE_GLOBAL_DATA_PTR.
+This commit extends the flags that can be used in GPIO specifiers to
+indicate if a pull-up resistor or pull-down resistor should be
+enabled.
 
-This solve parsing issue during test in sandbox for pin
-configuration (OF_LIVE is activated in sandbox_defconfig
-and sub node are not correctly parsed in
-pinctrl_generic_set_state_subnode with fdt lib API).
+It is the backport of linux commit ede033e1e863c ('dt-bindings:
+gpio: document the new pull-up/pull-down flags')
+from Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+and integrated in v5.1-rc1
+https://github.com/torvalds/linux/commit/ede033e1e863c
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/pinctrl/pinctrl-generic.c | 36 +++++++++++++++----------------
- 1 file changed, 17 insertions(+), 19 deletions(-)
+ doc/device-tree-bindings/gpio/gpio.txt | 24 ++++++++++++++++++++++++
+ include/dt-bindings/gpio/gpio.h        |  6 ++++++
+ 2 files changed, 30 insertions(+)
 
-diff --git a/drivers/pinctrl/pinctrl-generic.c b/drivers/pinctrl/pinctrl-generic.c
-index eecf0f5dc1..474a2e65ca 100644
---- a/drivers/pinctrl/pinctrl-generic.c
-+++ b/drivers/pinctrl/pinctrl-generic.c
-@@ -8,8 +8,6 @@
- #include <linux/compat.h>
- #include <dm/pinctrl.h>
+diff --git a/doc/device-tree-bindings/gpio/gpio.txt b/doc/device-tree-bindings/gpio/gpio.txt
+index e146917ff3..e9ef0212af 100644
+--- a/doc/device-tree-bindings/gpio/gpio.txt
++++ b/doc/device-tree-bindings/gpio/gpio.txt
+@@ -65,6 +65,30 @@ Example of a node using GPIOs:
+ GPIO_ACTIVE_HIGH is 0, so in this example gpio-specifier is "18 0" and encodes
+ GPIO pin number, and GPIO flags as accepted by the "qe_pio_e" gpio-controller.
  
--DECLARE_GLOBAL_DATA_PTR;
--
- /**
-  * pinctrl_pin_name_to_selector() - return the pin selector for a pin
-  *
-@@ -243,18 +241,18 @@ static int pinctrl_generic_set_state_one(struct udevice *dev,
- 					 struct udevice *config,
- 					 bool is_group, unsigned selector)
- {
--	const void *fdt = gd->fdt_blob;
--	int node_offset = dev_of_offset(config);
- 	const char *propname;
- 	const void *value;
--	int prop_offset, len, func_selector, param, ret;
-+	const void *property;
-+	int len, func_selector, param, ret;
- 	u32 arg, default_val;
++Optional standard bitfield specifiers for the last cell:
++
++- Bit 0: 0 means active high, 1 means active low
++- Bit 1: 0 mean push-pull wiring, see:
++           https://en.wikipedia.org/wiki/Push-pull_output
++         1 means single-ended wiring, see:
++           https://en.wikipedia.org/wiki/Single-ended_triode
++- Bit 2: 0 means open-source, 1 means open drain, see:
++           https://en.wikipedia.org/wiki/Open_collector
++- Bit 3: 0 means the output should be maintained during sleep/low-power mode
++         1 means the output state can be lost during sleep/low-power mode
++- Bit 4: 0 means no pull-up resistor should be enabled
++         1 means a pull-up resistor should be enabled
++         This setting only applies to hardware with a simple on/off
++         control for pull-up configuration. If the hardware has more
++         elaborate pull-up configuration, it should be represented
++         using a pin control binding.
++- Bit 5: 0 means no pull-down resistor should be enabled
++         1 means a pull-down resistor should be enabled
++         This setting only applies to hardware with a simple on/off
++         control for pull-down configuration. If the hardware has more
++         elaborate pull-down configuration, it should be represented
++         using a pin control binding.
++
+ 1.1) GPIO specifier best practices
+ ----------------------------------
  
--	for (prop_offset = fdt_first_property_offset(fdt, node_offset);
--	     prop_offset > 0;
--	     prop_offset = fdt_next_property_offset(fdt, prop_offset)) {
--		value = fdt_getprop_by_offset(fdt, prop_offset,
--					      &propname, &len);
-+	for (property = ofnode_get_first_property(dev_ofnode(config));
-+	     property;
-+	     property = ofnode_get_next_property(dev_ofnode(config),
-+						 property)) {
-+		value = ofnode_get_property_by_prop(dev_ofnode(config),
-+						    property, &propname, &len);
- 		if (!value)
- 			return -EINVAL;
+diff --git a/include/dt-bindings/gpio/gpio.h b/include/dt-bindings/gpio/gpio.h
+index 2cc10ae4bb..c029467e82 100644
+--- a/include/dt-bindings/gpio/gpio.h
++++ b/include/dt-bindings/gpio/gpio.h
+@@ -33,4 +33,10 @@
+ #define GPIO_PERSISTENT 0
+ #define GPIO_TRANSITORY 8
  
-@@ -298,19 +296,18 @@ static int pinctrl_generic_set_state_one(struct udevice *dev,
- static int pinctrl_generic_set_state_subnode(struct udevice *dev,
- 					     struct udevice *config)
- {
--	const void *fdt = gd->fdt_blob;
--	int node = dev_of_offset(config);
- 	const char *subnode_target_type = "pins";
- 	bool is_group = false;
- 	const char *name;
- 	int strings_count, selector, i, ret;
- 
--	strings_count = fdt_stringlist_count(fdt, node, subnode_target_type);
-+	strings_count = ofnode_read_string_count(dev_ofnode(config),
-+						 subnode_target_type);
- 	if (strings_count < 0) {
- 		subnode_target_type = "groups";
- 		is_group = true;
--		strings_count = fdt_stringlist_count(fdt, node,
--						     subnode_target_type);
-+		strings_count = ofnode_read_string_count(dev_ofnode(config),
-+							 subnode_target_type);
- 		if (strings_count < 0) {
- 			/* skip this node; may contain config child nodes */
- 			return 0;
-@@ -318,10 +315,11 @@ static int pinctrl_generic_set_state_subnode(struct udevice *dev,
- 	}
- 
- 	for (i = 0; i < strings_count; i++) {
--		name = fdt_stringlist_get(fdt, node, subnode_target_type, i,
--					  NULL);
--		if (!name)
--			return -EINVAL;
-+		ret = ofnode_read_string_index(dev_ofnode(config),
-+					       subnode_target_type, i,
-+					       &name);
-+		if (ret)
-+			return ret;
- 
- 		if (is_group)
- 			selector = pinctrl_group_name_to_selector(dev, name);
++/* Bit 4 express pull up */
++#define GPIO_PULL_UP 16
++
++/* Bit 5 express pull down */
++#define GPIO_PULL_DOWN 32
++
+ #endif
 -- 
 2.17.1
 

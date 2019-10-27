@@ -2,123 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8429AE4741
-	for <lists+uboot-stm32@lfdr.de>; Fri, 25 Oct 2019 11:31:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19FFFE63D5
+	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2019 16:54:51 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4B85FC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 25 Oct 2019 09:31:25 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ABE21C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2019 15:54:50 +0000 (UTC)
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+ [209.85.166.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 91C33C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00BECC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 25 Oct 2019 09:31:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1571995871;
- bh=WQWj39glcvowKkNwZr4lednR0Zu2t1MYonOFMAmPoe4=;
- h=X-UI-Sender-Class:Subject:To:References:From:Date:In-Reply-To;
- b=eoY/lhX3PWS0V2NWPElf/iudsukV9rIHREhqtTMeLDgOrA+V/5K2Ejhiyt0lgmk95
- AQE3uOv6N6K5YOEdkYSznTYIEzXyHeAg4DIHgbZN23op2NGzcIrq1Q3NfijHydfxjX
- JS6shmYBdFhQAOd//3comiVPofm26ij/0E5CXT1A=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.123.63] ([94.114.42.168]) by mail.gmx.com (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6DWs-1iLl8Z1mp6-006g1d; Fri, 25
- Oct 2019 11:31:11 +0200
-To: Patrice CHOTARD <patrice.chotard@st.com>,
- Yannick FERTRE <yannick.fertre@st.com>, Vikas MANOCHA
- <vikas.manocha@st.com>, Benjamin GAIGNARD <benjamin.gaignard@st.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>, Philippe CORNU <philippe.cornu@st.com>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <1570454955-21298-1-git-send-email-yannick.fertre@st.com>
- <1570454955-21298-2-git-send-email-yannick.fertre@st.com>
- <2d9bb18b-5775-00b6-2fdd-1b38dce1abcc@gmx.de>
- <2ef8752e-a6fd-fec3-ad94-63dcc48fdc13@st.com>
- <721d8c58-9ba4-6b86-133e-f0a1d4c3de94@gmx.de>
- <366fbfdd-586e-5775-1040-47f55168d889@st.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Openpgp: preference=signencrypt
-Autocrypt: addr=xypron.glpk@gmx.de; prefer-encrypt=mutual; keydata=
- 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 Eg==
-Message-ID: <5096de31-bd03-4808-cc38-b31d310aa235@gmx.de>
-Date: Fri, 25 Oct 2019 11:31:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ Sun, 27 Oct 2019 15:54:47 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id w12so7684666iol.11
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 27 Oct 2019 08:54:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=JR4zO8IYUKiuWg90QawCmaS5NAtT734px/58MnBIV8s=;
+ b=iGesvudf0NwwYwixRAjY7C3CHGTYhf2gr/ynTSh8nbneX1G4rFeQKpYRvgHf3SklTi
+ ER41abxDmhGTyZem4Gulj+JQut9jWZ7p+uGoXsIt9Zs5viHt9J0Ch4DaCsJm3kf2EMJp
+ RC7FUD0J3ejd+visYmIV9yPRRN6BP2mEq8HCQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=JR4zO8IYUKiuWg90QawCmaS5NAtT734px/58MnBIV8s=;
+ b=R2JzoVXAPM11kNczZgbmITgCCwoQww+DS9PoL95r6zVoCCJRzKeOqIScyEOsV6F95H
+ l/sWszgzWtefuu2VgxKlzJOUj+epymPuFJlSwjKorn2j68IpZs/1r7xPiJrVjc4tXnlv
+ zaPLiRhHtzrN3uLsm7w9zM6Ud/5obZ+600Qkp4yaQydXthDrOchcZ7rdNf6heqXuURy7
+ K0IrtKxlNdMH92sf35K7qd7dPWigIWApcHOh4LO/zHKudSlZPfOgnyl7S+7L7oJWYqIf
+ +j+5TYLaMUuJcpTWX50bG2C8Is3No2PwKJDANur7hs/duzcJWs8QlynUAbTTjlUZBqXB
+ ClMA==
+X-Gm-Message-State: APjAAAURKWj7tMvtm+KVIsdLGx0cgMrUyscQEi7f7ZLRmUgzfYHMT91+
+ NHheOkI4zt7+OTKeci0xDZNc5w==
+X-Google-Smtp-Source: APXvYqyDL36rKAiEK5KSAEh+UbJRTIhAtos61paxV8QdANfCqkhjYjDGCvrRfhDjv0hpoOAeBd4I3w==
+X-Received: by 2002:a02:c98c:: with SMTP id b12mr13350598jap.40.1572191686521; 
+ Sun, 27 Oct 2019 08:54:46 -0700 (PDT)
+Received: from kiwi.bld.corp.google.com ([2620:15c:183:0:8223:87c:a681:66aa])
+ by smtp.gmail.com with ESMTPSA id
+ n3sm1215070ilm.8.2019.10.27.08.54.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 27 Oct 2019 08:54:46 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 27 Oct 2019 09:53:47 -0600
+Message-Id: <20191027155410.187957-7-sjg@chromium.org>
+X-Mailer: git-send-email 2.24.0.rc0.303.g954a862665-goog
+In-Reply-To: <20191027155410.187957-1-sjg@chromium.org>
+References: <20191027155410.187957-1-sjg@chromium.org>
 MIME-Version: 1.0
-In-Reply-To: <366fbfdd-586e-5775-1040-47f55168d889@st.com>
-Content-Language: en-US
-X-Provags-ID: V03:K1:l1cEsOy5/c5T4E++mi4IMwCoK+l+JtmJt9HuGhWWW7P1WF183+M
- 6QYA0cTDPr9wVlqVyI26PPoXG9OOeguxGzb8ZRwrORTzC5t4FO7Aggxx39lGtQPqJz57BlK
- 7Ks09g/gRofHHi2761lmxq9ew3gGWAgP85g2WOa/lqceoWntKmmtRJ21tVJVFwaFsxxckXi
- FAaqGj9RuA6eCl2ZZqoVQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:LOKN3I6cFwo=:AWPUdHFvMGKwtupjOufa7g
- zns3840cBGH6IWY6yDq0ohxAquWaIvVlzqZAEI9XlG2Sp9+SROO+edCWxVw27HnBEdoYr1yw1
- +fnsQ413wPCG7IYX8RLCudRRxHXK5qn4nLm8Y/ZFU8LerYY9p8kRmsjQ0IPpCanVUY8uP93dq
- wKgm1bg0RvRE72qcxVM9Ta6hT5h99ixY4rnwBRqmbUWXHpoU9NGRfnU/4+TDSm2mkQHMoXh3s
- kwNwqVZ7RBjTwUv/GXAPiqUEGydl8s72JBVPn/opCcU8NmiirMC8XU6XfeN9F0Xzghq6B+Xyx
- 0e4funFerSaK/HCw29HgWR/t5iN6ROb032KAaAdQDwK8xQbeVHPrpy4z3Ra9wX8Thv91FgmQY
- rhDtFSUWorDO0vf0qGVjugIQIh8IgQ+KF93JhyXjDetoz2pvz/fLshGKH7MZHj80qRy5Yv7Vz
- fe6Ka2QAhe9Nj6C+OX67YtuhCQhyPhcay6LyZzvvJuwa5j3bzoeHNSQQMJC7CD3hmv4rvOqXp
- MsrouAB0XvNmP64uSJobZ3p5OkqTnBL/TCe3sygry9qs0OFzLLkYNpnoyr1d0VUGryJYSnnGJ
- qwFCmMzwlmF96nFgyIGl/x2NWlAXx7oRn5l9J73xo3NifanxKbKNEZJKhXTkYqMjofXXzbJtc
- 0xbZg0TNrS6dg7fSLwos3RtazGLqqrMe+sRjuPeEJRJq/WqkG5OL+JQQzSuf1HTvqA9SEeD4q
- j1tu0GtAk+FzsFMYUXQFSJmdMf+Izja8CT0Lv/VmDGaa+zdkpuJUgqBIYFaMwxHnL7kbmtJf+
- pjG8lYI5rZKNfppMrGeSMD5tAqJ6qOAdgfsIiIe4SAmjQt19Z7yGAII/52rkVkBDoSC30TxiA
- k/HxjqIvwrQT7ETWMSnvdcUa0rfBoK+YpZzK05ee+IV9Iv+7m2lZBpIJ9FmDE1RahmEdqwDQc
- jQZoc2+075qMJY8akcqnafPbdZoIhz5Uw2nm5nVMiP+fg7neBJuoRS0NsZutFXGjt65wkczG7
- IRDyQBL1EeFmICXQvfWwNxJWH4k1jf9pd224hYphP1fhBSuNjj2IlXX76A2dYMGNG4Xs0SHQY
- 51h1klYGeZzrUU5rLHyKN8b2SU07/hioDkIHhd+aJHtzbybNUR+KxDxZXJ1e1utzcckQTmE3L
- uH14xvMTP/NCWWG6jpa2tws6N6kUmrt4Ax+p8T/Yn6YreWjPQ2LXTmz4E+7KctCsG5tjU4LGV
- LNg2NCIHIt7crw8F+Bsjgm7oy3YjRqw1KIM5ni1IUKz6e3ZLuOUcoM4Rf0uI=
-Subject: Re: [Uboot-stm32] [PATCH v5 01/15] video: bmp: check resolutions of
-	panel/bitmap
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [Uboot-stm32] [PATCH 07/30] mtd: spi-mem: Drop dm.h header file
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -130,81 +70,85 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTAvMjUvMTkgOTo0MyBBTSwgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+IEhpIEhlaW5yaWNo
-Cj4KPiBPbiAxMC8yNC8xOSAxMDo0MyBQTSwgSGVpbnJpY2ggU2NodWNoYXJkdCB3cm90ZToKPj4g
-T24gMTAvMjQvMTkgNDowNSBQTSwgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+Pj4gSGkgSGVpbnJp
-Y2gsIGFsbAo+Pj4KPj4+IE9uIDEwLzcvMTkgNzozNCBQTSwgSGVpbnJpY2ggU2NodWNoYXJkdCB3
-cm90ZToKPj4+PiBPbiAxMC83LzE5IDM6MjkgUE0sIFlhbm5pY2sgRmVydHLDqSB3cm90ZToKPj4+
-Pj4gSWYgdGhlIHNpemUgb2YgdGhlIGJpdG1hcCBpcyBiaWdnZXIgdGhhbiB0aGUgc2l6ZSBvZgo+
-Pj4+PiB0aGUgcGFuZWwgdGhlbiBlcnJvcnMgYXBwZWFyIHdoZW4gY2FsY3VsYXRpbmcgYXhpcyBh
-bGlnbm1lbnQKPj4+Pj4gYW5kIHRoZSBjb3B5IG9mIGJpdG1hcCBpcyBkb25lIG91dHNpZGUgb2Yg
-ZnJhbWVidWZmZXIuCj4+Pj4+Cj4+Pj4+IFNpZ25lZC1vZmYtYnk6IFlhbm5pY2sgRmVydHLDqSA8
-eWFubmljay5mZXJ0cmVAc3QuY29tPgo+Pj4+PiAtLS0KPj4+Pj4gwqDCoCBkcml2ZXJzL3ZpZGVv
-L3ZpZGVvX2JtcC5jIHwgNyArKysrKysrCj4+Pj4+IMKgwqAgMSBmaWxlIGNoYW5nZWQsIDcgaW5z
-ZXJ0aW9ucygrKQo+Pj4+Pgo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aWRlby92aWRlb19i
-bXAuYyBiL2RyaXZlcnMvdmlkZW8vdmlkZW9fYm1wLmMKPj4+Pj4gaW5kZXggMTkzZjM3ZC4uNGFm
-MWZiNCAxMDA2NDQKPj4+Pj4gLS0tIGEvZHJpdmVycy92aWRlby92aWRlb19ibXAuYwo+Pj4+PiAr
-KysgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jCj4+Pj4+IEBAIC0yNDksNiArMjQ5LDEzIEBA
-IGludCB2aWRlb19ibXBfZGlzcGxheShzdHJ1Y3QgdWRldmljZSAqZGV2LCB1bG9uZyBibXBfaW1h
-Z2UsIGludCB4LCBpbnQgeSwKPj4+Pj4KPj4+Pj4gwqDCoMKgwqDCoMKgIHBhZGRlZF93aWR0aCA9
-ICh3aWR0aCAmIDB4MyA/ICh3aWR0aCAmIH4weDMpICsgNCA6IHdpZHRoKTsKPj4+Pj4KPj4+Pj4g
-K8KgwqDCoCAvKiBjaGVjayBpZiBwaWN0dXJlIHNpemUgZXhjZWVkcyBwYW5lbCBzaXplICovCj4+
-Pj4+ICvCoMKgwqAgaWYgKChwd2lkdGggPCB3aWR0aCkgfHwgKHByaXYtPnlzaXplIDwgaGVpZ2h0
-KSkgewo+Pj4+PiArwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJFcnJvcjogQk1QIHNpemUgJWQgeCAl
-ZCBpcyBiaWdnZXIgdGhhbiBwYW5lbCBzaXplICVkIHggJWRcbiIsCj4+Pj4+ICvCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIChpbnQpd2lkdGgsIChpbnQpaGVpZ2h0LCBwcml2LT54c2l6ZSwg
-cHJpdi0+eXNpemUpOwo+Pj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU5WQUw7Cj4+Pj4+
-ICvCoMKgwqAgfQo+Pj4+PiArCj4+Pj4+IMKgwqDCoMKgwqDCoCBpZiAoYWxpZ24pIHsKPj4+Pj4g
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgdmlkZW9fc3BsYXNoX2FsaWduX2F4aXMoJngsIHByaXYtPnhz
-aXplLCB3aWR0aCk7Cj4+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgIHZpZGVvX3NwbGFzaF9hbGln
-bl9heGlzKCZ5LCBwcml2LT55c2l6ZSwgaGVpZ2h0KTsKPj4+Pgo+Pj4+IFRoaXMgaXMgZm9sbG93
-ZWQgYnk6Cj4+Pj4KPj4+PiDCoMKgwqDCoMKgwqDCoMKgIGlmICgoeCArIHdpZHRoKSA+IHB3aWR0
-aCkKPj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgd2lkdGggPSBwd2lkdGgg
-LSB4Owo+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoGlmICgoeSArIGhlaWdodCkgPiBwcml2LT55c2l6
-ZSkKPj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaGVpZ2h0ID0gcHJpdi0+
-eXNpemUgLSB5Owo+Pj4+Cj4+Pj4gVGhlc2UgbGluZXMgd2lsbCBjbGlwIGEgYml0bWFwIHRoYXQg
-Z2l2ZW4gdGhlIGxlZnQgdXBwZXIgY29ybmVyIHgsIHkKPj4+PiBkb2VzIG5vdCBmaXQgb250byB0
-aGUgc2NyZWVuLgo+Pj4+Cj4+Pj4gU28gaXNuJ3QgdGhpcyBwYXRjaCBzdXBlcmZsdW91cz8KPj4+
-Pgo+Pj4+IFdoYXQgaXMgbWlzc2luZyBhcmUgY2hlY2tzIGZvciB4IGFuZCB5Lgo+Pj4+Cj4+Pj4g
-Rm9yIHRlc3RpbmcgSSBoYXZlIHVzZWQgcWVtdV94ODYgYW5kIGFkZGVkCj4+Pj4KPj4+PiDCoMKg
-wqDCoCAjZGVmaW5lIENPTkZJR19CTVBfMjRCUFAgeQo+Pj4+Cj4+Pj4gdG8gdGhlIHRvcCBvZiBk
-cml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jIGFuZCBsb2FkZWQgYSAyNGJpdCBiaXRtYXAuCj4+Pj4K
-Pj4+PiBDbGlwcGluZyB3b3JrcyBhcyBleHBlY3RlZC4gQnV0IHBhc3NpbmcgYSB2YWx1ZSBvZiB4
-IGV4Y2VlZGluZyB0aGUKPj4+PiBzY3JlZW4gd2lkdGggbGVhZCB0byBhIGNyYXNoLgo+Pj4+Cj4+
-Pj4gV2hhdCBJIHJlYWxseSBkaXNsaWtlIGluIHRoZSBleGlzdGluZyBjb2RpbmcgaXMgdGhhdCBD
-T05GSUdfQk1QXypCUFAgaXMKPj4+PiBkZWZpbmVkIGluIGluY2x1ZGVzIGluc3RlYWQgb2YgdXNp
-bmcgS2NvbmZpZyBidXQgdGhhdCBpcyBhIGRpZmZlcmVudCBzdG9yeS4KPj4+Pgo+Pj4+IEJlc3Qg
-cmVnYXJkcwo+Pj4+Cj4+Pj4gSGVpbnJpY2gKPj4+Cj4+PiBGb3IgaW5mb3JtYXRpb24gYWxsIHRo
-aXMgc2VyaWVzIHBhdGNoZXMgaGF2ZSBiZWVuIGFwcGxpZWQgb24gdS1ib290L21hc3RlciBleGNl
-cHRzwqAgdGhpcyBvbmUuCj4+Pgo+Pj4gVW5mb3J0dW5hdGVseSwgd2l0aG91dCB0aGlzIHBhdGNo
-LCBzdG0zMmY3NDYtZGlzY292ZXJ5IGJvYXJkIGRvZXNuJ3QgYm9vdCBhbnltb3JlLgo+Pgo+PiBJ
-IHN0aWxsIGRvIG5vdCB1bmRlcnN0YW5kIHdoeSB0aGlzIHBhdGNoIGlzIG5lZWRlZC4KPj4KPj4g
-Q291bGQgeW91LCBwbGVhc2UsIHRyeSB0byBhbmFseXplIHdoeSB0aGUgYm9hcmQgZG9lcyBub3Qg
-Ym9vdC4KPj4KPj4gV2hhdCBpcyB3cm9uZyB3aXRoIHRoZSBleGlzdGluZyBjb2RlIGZvciBjbGlw
-cGluZz8KPj4gT3IgaXMgdGhlIG5vbi1ib290aW5nIGp1c3QgY29pbmNpZGVuY2UgYnV0IHRoZSBi
-dWcgaXMgc29tZXdoZXJlIGVsc2U/Cj4+Cj4+IFdoYXQgYXJlIHRoZSB2YWx1ZXMgb2YgdGhlIHBh
-cmFtZXRlcnMgcGFzc2VkIHRvIHZpZGVvX2JtcF9kaXNwbGF5KCk/Cj4+IFdoaWNoIGJpdG1hcCBm
-aWxlIGFyZSB5b3UgdXNpbmc/Cj4+IFdoYXQgaXMgdGhlIHNpemUgb2YgdGhlIGRpc3BsYXk/Cj4K
-Pgo+IFRvIHN1bS11cCwgb24gYWxsIFNUTTMyIGJvYXJkcywgdGhlIHNhbWUgQk1QIHNwbGFzaGNy
-ZWVuIGlzIHVzZWQuCj4KPiBJbiB0aGUgcGFydGljdWxhciBjYXNlIG9mIFNUTTMyRjc0Ni1EaXNj
-byBib2FyZCwgdGhlIHBhbmVsIHNpemUgaXMgc21hbGxlciB0aGVuIHRoZSBCTVAgc2l6ZS4KPgo+
-IFNvLCBzb21lIHNpemUgY2hlY2sgbXVzdCBiZSBkb25lIHRvIGF2b2lkIG92ZXJmbG93IHdoZW4g
-d3JpdGluZyBpbnNpZGUgdGhlIGZyYW1lYnVmZmVyLgoKVGhhdCBpcyB3aHkgd2UgaGF2ZSBsaW5l
-cyB0byBjbGlwIGltYWdlczoKCiAgICAgICAgICBpZiAoKHggKyB3aWR0aCkgPiBwd2lkdGgpCiAg
-ICAgICAgICAgICAgICAgIHdpZHRoID0gcHdpZHRoIC0geDsKICAgICAgICAgIGlmICgoeSArIGhl
-aWdodCkgPiBwcml2LT55c2l6ZSkKICAgICAgICAgICAgICAgICAgaGVpZ2h0ID0gcHJpdi0+eXNp
-emUgLSB5OwoKV2h5IGlzIHRoaXMgbm90IHdvcmtpbmcgaW4geW91IGNhc2U/CgpCZXN0IHJlZ2Fy
-ZHMKCkhlaW5yaWNoCgoKPgo+IElmIG5lZWRlZCwgWWFubmljaywgd2hpY2ggaXMgbXVsdGltZWRp
-YSBleHBlcnQsIGNhbiBnaXZlIHlvdSBtb3JlIHByZWNpc2UgZGV0YWlscy4KPgo+IFRoYW5rcwo+
-Cj4gUGF0cmljZQo+Cj4KPj4KPj4gQmVzdCByZWdhcmRzCj4+Cj4+IEhlaW5yaWNoCj4+Cj4+Pgo+
-Pj4gSGVpbnJpY2gsIGNvdWxkIHRoaXMgcGF0Y2ggYmUgbWVyZ2VkLCB3YWl0aW5nIGZvciBhIGNs
-ZWFuIHBhdGNoIGZyb20gWWFubmljayA/Cj4+Pgo+Pj4gUmVnYXJkcwo+Pj4KPj4+IFBhdHJpY2UK
-Pj4+Cj4+Cj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-ClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3Jt
-cmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xp
-c3RpbmZvL3Vib290LXN0bTMyCg==
+This header file should not be included in other header files. Remove it
+and use a forward declaration instead.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ drivers/spi/spi-mem-nodm.c | 1 +
+ drivers/spi/spi-mem.c      | 5 +++++
+ drivers/spi/stm32_qspi.c   | 2 ++
+ include/spi-mem.h          | 5 +----
+ 4 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/spi/spi-mem-nodm.c b/drivers/spi/spi-mem-nodm.c
+index 4447d44991..83dde4806e 100644
+--- a/drivers/spi/spi-mem-nodm.c
++++ b/drivers/spi/spi-mem-nodm.c
+@@ -3,6 +3,7 @@
+  * Copyright (C) 2018 Texas Instruments Incorporated - http://www.ti.com/
+  */
+ 
++#include <malloc.h>
+ #include <spi.h>
+ #include <spi-mem.h>
+ 
+diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
+index 7788ab9953..e5a8109058 100644
+--- a/drivers/spi/spi-mem.c
++++ b/drivers/spi/spi-mem.c
+@@ -11,6 +11,11 @@
+ #include <linux/pm_runtime.h>
+ #include "internals.h"
+ #else
++#include <common.h>
++#include <dm.h>
++#include <errno.h>
++#include <malloc.h>
++#include <spi.h>
+ #include <spi.h>
+ #include <spi-mem.h>
+ #endif
+diff --git a/drivers/spi/stm32_qspi.c b/drivers/spi/stm32_qspi.c
+index 958c394a1a..c8c81396c5 100644
+--- a/drivers/spi/stm32_qspi.c
++++ b/drivers/spi/stm32_qspi.c
+@@ -9,7 +9,9 @@
+ 
+ #include <common.h>
+ #include <clk.h>
++#include <dm.h>
+ #include <reset.h>
++#include <spi.h>
+ #include <spi-mem.h>
+ #include <linux/iopoll.h>
+ #include <linux/ioport.h>
+diff --git a/include/spi-mem.h b/include/spi-mem.h
+index 36814efa86..2f3f0156d0 100644
+--- a/include/spi-mem.h
++++ b/include/spi-mem.h
+@@ -11,10 +11,7 @@
+ #ifndef __UBOOT_SPI_MEM_H
+ #define __UBOOT_SPI_MEM_H
+ 
+-#include <common.h>
+-#include <dm.h>
+-#include <errno.h>
+-#include <spi.h>
++struct udevice;
+ 
+ #define SPI_MEM_OP_CMD(__opcode, __buswidth)			\
+ 	{							\
+-- 
+2.24.0.rc0.303.g954a862665-goog
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

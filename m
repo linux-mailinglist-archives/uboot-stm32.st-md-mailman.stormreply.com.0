@@ -2,61 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF9E0E63D6
-	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2019 16:55:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94013E728D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 14:23:43 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BFBCCC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2019 15:55:29 +0000 (UTC)
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
- [209.85.166.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4ED1AC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 13:23:43 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5DC22C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2545FC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 27 Oct 2019 15:55:28 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id q1so7756345ion.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 27 Oct 2019 08:55:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=Dicecm7+4fu8xeOyPARsm2XTm8EEK6mjhQw//W8q96o=;
- b=TagF1I9TwGrTiPd/b+WeJrUNiHPyJa9EaytnqBCrTKmuPf80QtKSi0feTy/OUIWVDr
- GBJRqE21Kb0e9EyMYV9abIWhgkzNPxQ/qA8OFyvjqLR/NXRsGn2lYGLL6NizjCWTX3Wy
- n6XmtAXOv7Ubyh89FK6ydI6fzkCFRsSdnuV/w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=Dicecm7+4fu8xeOyPARsm2XTm8EEK6mjhQw//W8q96o=;
- b=Dg0C7ioPbo0JfUnlO/5sPiVlhDH9pD68AA5b+yqalac+G1sgV8AfPPvmLYozCuQ3b8
- 4cRklWaGNnLKWXhq2iuoBIikwmsslj3vYGO0sdBLmKxWH7ONISmYtmETyuKo2tbRuMZr
- iv4n7EqhUBzwaarV0Jom9Aeac8VenKUrDRu2jaGPuLgG7Gcgankvgi1nj/3kKSYZtKQk
- V+gjsnAoDJCDTz6zK+n9Cn3ZqJDsPU68FV/kuRZJNhZIJn9io0xAipkVE8tualspW0N6
- ixJpYbbaSc4rFuhOQkThUsUuIBaKMSjbvzjy4MhVqwBlwx7Muen6oHQcrW0uYY/rPf8F
- q0SQ==
-X-Gm-Message-State: APjAAAUsNLsqHaCdBiFoSEC62qDUyUOLlvYf0mjzJjzE9bDuxhTLbvVH
- xEnnxCxIpUnrLeQ2meJCuisHDw==
-X-Google-Smtp-Source: APXvYqyo48wGOUmFODpfphvUAKjaCm7luBjAcmqOaXHwqFtHb0VAh+ltVtqWsSBki/vWkcgFX8MMkQ==
-X-Received: by 2002:a6b:cf13:: with SMTP id o19mr12817142ioa.182.1572191727291; 
- Sun, 27 Oct 2019 08:55:27 -0700 (PDT)
-Received: from kiwi.bld.corp.google.com ([2620:15c:183:0:8223:87c:a681:66aa])
- by smtp.gmail.com with ESMTPSA id
- n3sm1215070ilm.8.2019.10.27.08.55.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 27 Oct 2019 08:55:26 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Sun, 27 Oct 2019 09:54:06 -0600
-Message-Id: <20191027155410.187957-26-sjg@chromium.org>
-X-Mailer: git-send-email 2.24.0.rc0.303.g954a862665-goog
-In-Reply-To: <20191027155410.187957-1-sjg@chromium.org>
-References: <20191027155410.187957-1-sjg@chromium.org>
+ Mon, 28 Oct 2019 13:23:41 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x9SDLRL8020817; Mon, 28 Oct 2019 14:23:25 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=hlHIRrmuju0p8Kc7Blyj0zDLXb1JjXYx+b9ADOQcc28=;
+ b=1TKJOsD4vAUAo2vDbTWoERtiV0IYe+0aUW9OyRJetGLbYUeM6LEswsP6eLcckKOnoOdr
+ aZ2ar+gTvdM5TuFwpOenNguCKKbHHFDLDqfc54l2sYyM0lBPSk8CHPUyu+HLKbQkpsz1
+ 8PUIZMvL0q2ACEIncOkR/sMrOS8z3krX/7nBedA3U12Esf5v2pICcRenuL/Tg1NI3wXg
+ xVUJoshNWSk5kEOfeWgrRMaym7L7P/kA+BIfQoLwRNnQfx694SR20oPsyIo2p/nHgvcm
+ F5GBEU0N62QGnND0EWl8JsJyIIsPGRQ+tZomsqZoqYK/SQgDK5OJ4xvjJQO63KR6Bcbi /A== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2vvb98af0r-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Oct 2019 14:23:25 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D662210002A;
+ Mon, 28 Oct 2019 14:23:22 +0100 (CET)
+Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AC2052BF515;
+ Mon, 28 Oct 2019 14:23:22 +0100 (CET)
+Received: from SAFEX1HUBCAS23.st.com (10.75.90.46) by Safex1hubcas24.st.com
+ (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 28 Oct
+ 2019 14:23:22 +0100
+Received: from localhost (10.201.23.73) by webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 28 Oct 2019 14:23:22
+ +0100
+From: Patrice Chotard <patrice.chotard@st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 28 Oct 2019 14:23:19 +0100
+Message-ID: <20191028132319.21570-1-patrice.chotard@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 26/30] adc: Drop dm.h header file
+X-Originating-IP: [10.201.23.73]
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
+ definitions=2019-10-28_05:2019-10-25,2019-10-28 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Boris Brezillon <boris.brezillon@bootlin.com>, Stefan Roese <sr@denx.de>,
+ Chris
+ Packham <judge.packham@gmail.com>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
+ Anup Patel <anup.patel@wdc.com>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Heiko Schocher <hs@denx.de>,
+ Adam Ford <aford173@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: [Uboot-stm32] [PATCH] cmd: remove NET and CMD_NET dependency for
+	CMD_PXE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,61 +85,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This header file should not be included in other header files. Remove it
-and use a forward declaration instead.
+It allows to use sysboot command on board which have no NET support.
 
-Drop the common.h inclusion also.
+Currently, sysboot command can't be used if CMD_NET and NET flags are
+not set, while sysboot allows to load extlinux.conf file from local
+filesystem, so it doesn't need to depend of CMD_NET and NET flags.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+One solution would be to put sysboot command's code outside pxe.c and
+create a new sysboot.c file. But sysboot command code is imbricated
+with pxe command code and as all CMD_NET relative code is already under
+CMD_NET flag, the easiest way to break sysboot dependency with CMD_NET
+and NET flags is to move CMD_PXE outside CMD_NET and NET section in
+Kconfig.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- drivers/adc/stm32-adc-core.c | 1 +
- drivers/adc/stm32-adc-core.h | 4 ++--
- drivers/adc/stm32-adc.c      | 1 +
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ Kconfig     |  2 +-
+ cmd/Kconfig | 12 ++++++------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/adc/stm32-adc-core.c b/drivers/adc/stm32-adc-core.c
-index 04b6a8a2f5..d61c23b91a 100644
---- a/drivers/adc/stm32-adc-core.c
-+++ b/drivers/adc/stm32-adc-core.c
-@@ -7,6 +7,7 @@
-  */
+diff --git a/Kconfig b/Kconfig
+index 66b059f749..ce2ad16ea5 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -87,7 +87,7 @@ config DISTRO_DEFAULTS
+ 	select CMD_FS_GENERIC
+ 	select CMD_PART if PARTITIONS
+ 	select CMD_PING if CMD_NET
+-	select CMD_PXE if NET
++	select CMD_PXE
+ 	select ENV_VARS_UBOOT_CONFIG
+ 	select HUSH_PARSER
+ 	select SUPPORT_RAW_INITRD
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 07060c63a7..2cb0935632 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1499,12 +1499,6 @@ config CMD_ETHSW
+ 	  operations such as enabling / disabling a port and
+ 	  viewing/maintaining the filtering database (FDB)
  
- #include <common.h>
-+#include <dm.h>
- #include <asm/io.h>
- #include <power/regulator.h>
- #include "stm32-adc-core.h"
-diff --git a/drivers/adc/stm32-adc-core.h b/drivers/adc/stm32-adc-core.h
-index ba0e10e6cc..05968dbcc8 100644
---- a/drivers/adc/stm32-adc-core.h
-+++ b/drivers/adc/stm32-adc-core.h
-@@ -26,9 +26,9 @@
- #define STM32_ADC_MAX_ADCS		3
- #define STM32_ADCX_COMN_OFFSET		0x300
+-config CMD_PXE
+-	bool "pxe"
+-	select MENU
+-	help
+-	  Boot image via network using PXE protocol
+-
+ config CMD_WOL
+ 	bool "wol"
+ 	help
+@@ -1636,6 +1630,12 @@ config CMD_MISC
+ 	help
+ 	  Delay execution for some time
  
--#include <common.h>
- #include <clk.h>
--#include <dm.h>
++config CMD_PXE
++	bool "pxe"
++	select MENU
++	help
++	  Boot image via network using PXE protocol or via local extlinux.conf file
 +
-+struct udevice;
- 
- /**
-  * struct stm32_adc_common - stm32 ADC driver common data (for all instances)
-diff --git a/drivers/adc/stm32-adc.c b/drivers/adc/stm32-adc.c
-index 029338e4af..c928980e1d 100644
---- a/drivers/adc/stm32-adc.c
-+++ b/drivers/adc/stm32-adc.c
-@@ -8,6 +8,7 @@
- 
- #include <common.h>
- #include <adc.h>
-+#include <dm.h>
- #include <asm/io.h>
- #include <linux/iopoll.h>
- #include "stm32-adc-core.h"
+ config MP
+ 	bool "support for multiprocessor"
+ 	help
 -- 
-2.24.0.rc0.303.g954a862665-goog
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,66 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3617FE72DD
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 14:49:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7DA4EE7708
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 17:51:55 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D8501C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 13:49:51 +0000 (UTC)
-Received: from mail-yb1-f193.google.com (mail-yb1-f193.google.com
- [209.85.219.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 664CCC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 16:51:54 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D5114C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE574C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Oct 2019 13:49:50 +0000 (UTC)
-Received: by mail-yb1-f193.google.com with SMTP id h202so4029858ybg.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Oct 2019 06:49:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=D1Z0bnHFoVJPnT3uRC3PmuzBrFxAzOcQiJom2w8XZcY=;
- b=VpKW29yY1n610aVipfZ055dNhrF8KoIzF0dQS6jIfGM4+dJL1S/aiyPharkIjoRWo6
- QaCmfVEuPRIuyW82NPWOoOpyPdNsCYbGXZkGMUsF+H9QT2K7EN862hYmGfzbPnIXZXF2
- aI4atZ/7+DgJ0sG3IE8tazB5xOOrNLELVQuk4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=D1Z0bnHFoVJPnT3uRC3PmuzBrFxAzOcQiJom2w8XZcY=;
- b=IFRhmeO79agSMO8eAlT1XYnbIP5V8DReZJi9lQ6iMxHK3f06g541f1gRHg2ZImyPf+
- tXQNWh7OaWoWy/HZ+zPU6zbEyzKMmn4n6RsA8koVH+6HUUb5YUaYfkxvQloAOqtPGOzF
- c6LbqHsMQWhNZaEypYCJz8/TY8N85qNL8m3nYFXFSWZK7BcZ8btibLpk112BRAD5qwyL
- lhFCYiFX7kebdLVljQpDvghF0uZmnO3u81kH/6Ig7ZXkDPVsgNXRUH6QxSV2ORM+qUyu
- xSEiH2bhZI/oLv7XERl9kzhIEeXeHcRC75jV9XeWQbBqBw+S/4arR6u1echYjWNVjpLY
- yQNw==
-X-Gm-Message-State: APjAAAVVd0NG/yVkMj/wlvLv+eG4Il/c/4ivhsgKn0OG/79GR3pKXeec
- /vYZRX0hEX69tPU0u/NZLC0meg==
-X-Google-Smtp-Source: APXvYqxAZ6PgMk+C7sPG7UYx7SAeOALYeeNIMtF+Yzu3XfNPBc/1cEBv3IyTeUeMy1YRDGx/lplaDg==
-X-Received: by 2002:a25:e7c4:: with SMTP id
- e187mr13983639ybh.235.1572270589468; 
- Mon, 28 Oct 2019 06:49:49 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-142-8.ec.res.rr.com. [65.184.142.8])
- by smtp.gmail.com with ESMTPSA id q198sm6439742ywg.18.2019.10.28.06.49.47
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 28 Oct 2019 06:49:48 -0700 (PDT)
-Date: Mon, 28 Oct 2019 09:49:46 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20191028134946.GH11173@bill-the-cat>
-References: <20191028132319.21570-1-patrice.chotard@st.com>
+ Mon, 28 Oct 2019 16:51:53 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 47212w4V78z1rD9j;
+ Mon, 28 Oct 2019 17:51:52 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 47212w3pSdz1qqkd;
+ Mon, 28 Oct 2019 17:51:52 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id o7LzvLmE2zNI; Mon, 28 Oct 2019 17:51:50 +0100 (CET)
+X-Auth-Info: IZHYw+LNAFwtwkaM4uTUVdhH43EQVn66UsoXyd3/+XI=
+Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Mon, 28 Oct 2019 17:51:50 +0100 (CET)
+Date: Mon, 28 Oct 2019 17:51:44 +0100
+From: Lukasz Majewski <lukma@denx.de>
+To: Marek Vasut <marex@denx.de>
+Message-ID: <20191028175144.5718cd05@jawa>
+In-Reply-To: <20191015140307.3940831d@jawa>
+References: <20191015094536.2c5bbb8f@jawa>
+ <b17362c5-f4b2-4e5b-360a-0ad026e5ed4d@denx.de>
+ <20191015140307.3940831d@jawa>
+Organization: denx.de
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20191028132319.21570-1-patrice.chotard@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Boris Brezillon <boris.brezillon@bootlin.com>, u-boot@lists.denx.de,
+Cc: Tom Rini <trini@konsulko.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Stefan Roese <sr@denx.de>,
- Chris Packham <judge.packham@gmail.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] cmd: remove NET and CMD_NET
- dependency for CMD_PXE
+ Marek Szyprowski <m.szyprowski@samsung.com>
+Subject: Re: [Uboot-stm32] [GIT] Pull request: u-boot-dfu (15.10.2019)
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,122 +57,106 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6100157803086517639=="
+Content-Type: multipart/mixed; boundary="===============1410810842000375775=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============6100157803086517639==
+--===============1410810842000375775==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="vpVygws8pQvai3MI"
-Content-Disposition: inline
+ boundary="Sig_/tNqzSY_CJXIxBs90t7pWRh4"; protocol="application/pgp-signature"
 
-
---vpVygws8pQvai3MI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--Sig_/tNqzSY_CJXIxBs90t7pWRh4
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 28, 2019 at 02:23:19PM +0100, Patrice Chotard wrote:
+Hi Marek,
 
-> It allows to use sysboot command on board which have no NET support.
+> Hi Marek,
 >=20
-> Currently, sysboot command can't be used if CMD_NET and NET flags are
-> not set, while sysboot allows to load extlinux.conf file from local
-> filesystem, so it doesn't need to depend of CMD_NET and NET flags.
+> > On 10/15/19 9:45 AM, Lukasz Majewski wrote: =20
+> > > Dear Marek,   =20
+> >=20
+> > Hello Lukasz,
+> >  =20
+> > > The following changes since commit
+> > > 7a779ed1755c2d5011bd9598da90291f759ae760:
+> > >=20
+> > >   travis: Exclude MIPS from the bcm job (2019-10-13 11:21:56
+> > > -0400)
+> > >=20
+> > > are available in the Git repository at:
+> > >=20
+> > >   git@gitlab.denx.de:u-boot/custodians/u-boot-dfu.git=20
+> > >=20
+> > > for you to fetch changes up to
+> > > 5d897631065bb2f36bbc1bd7fabb670ce5da3ce8:
+> > >=20
+> > >   dfu: add callback for flush and initiated operation (2019-10-14
+> > >   12:26:19 +0200)   =20
+> >=20
+> > Which branch shall I pull ? This information is missing from the PR,
+> > again :-( =20
 >=20
-> One solution would be to put sysboot command's code outside pxe.c and
-> create a new sysboot.c file. But sysboot command code is imbricated
-> with pxe command code and as all CMD_NET relative code is already under
-> CMD_NET flag, the easiest way to break sysboot dependency with CMD_NET
-> and NET flags is to move CMD_PXE outside CMD_NET and NET section in
-> Kconfig.
+> Ach. I'm still (unfortunately) use my old script for PR.
 >=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-
-How far did you go down the path of making cmd/sysboot.c or similar?
-Since it's not obvious unless you're already in here that the
-extlinux.conf stuff is inside pxe, it really would be good to split
-things out.  If you even have a rough draft patch to look at that would
-be great.  Also:
-
-> ---
+> You shall use the -master branch:
+> https://gitlab.denx.de/u-boot/custodians/u-boot-dfu/commits/master
 >=20
->  Kconfig     |  2 +-
->  cmd/Kconfig | 12 ++++++------
->  2 files changed, 7 insertions(+), 7 deletions(-)
+> I've written also the merge tag for this PR:
+> https://gitlab.denx.de/u-boot/custodians/u-boot-dfu/-/tags
 >=20
-> diff --git a/Kconfig b/Kconfig
-> index 66b059f749..ce2ad16ea5 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -87,7 +87,7 @@ config DISTRO_DEFAULTS
->  	select CMD_FS_GENERIC
->  	select CMD_PART if PARTITIONS
->  	select CMD_PING if CMD_NET
-> -	select CMD_PXE if NET
-> +	select CMD_PXE
->  	select ENV_VARS_UBOOT_CONFIG
->  	select HUSH_PARSER
->  	select SUPPORT_RAW_INITRD
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 07060c63a7..2cb0935632 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1499,12 +1499,6 @@ config CMD_ETHSW
->  	  operations such as enabling / disabling a port and
->  	  viewing/maintaining the filtering database (FDB)
-> =20
-> -config CMD_PXE
-> -	bool "pxe"
-> -	select MENU
-> -	help
-> -	  Boot image via network using PXE protocol
-> -
->  config CMD_WOL
->  	bool "wol"
->  	help
-> @@ -1636,6 +1630,12 @@ config CMD_MISC
->  	help
->  	  Delay execution for some time
-> =20
-> +config CMD_PXE
-> +	bool "pxe"
-> +	select MENU
-> +	help
-> +	  Boot image via network using PXE protocol or via local extlinux.conf =
-file
-> +
+> Sorry for inconvenience and confusion.
 
-We should expand the prompt as well to note that sysboot is in here as
-well, if we cannot split.  Thanks!
+Marek, are there any issues with this PR?=20
 
---=20
-Tom
+Unfortunately, I did not noticed it being applied to your u-boot-usb
+tree. Do you need any help?
 
---vpVygws8pQvai3MI
-Content-Type: application/pgp-signature; name="signature.asc"
+>=20
+>=20
+> Best regards,
+>=20
+> Lukasz Majewski
+>=20
+> --
+>=20
+> DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
+> lukma@denx.de
+
+
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/tNqzSY_CJXIxBs90t7pWRh4
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl228foACgkQh/n2NdMd
-dlJuJA//dKIMk4j8xiAk71ZlHnYSLUDjhu8WUKSzZz5rfyriISD2+03es3aOAcfA
-w5E1eFGP7DTJgkGbCJKXe74rvHqo6gJsnITDwUT4rVkBDoy1EMPnIhPZOqd+aA9c
-0bc76/p+A7AKvRJ6RXUsHTZzv66IdU2x+a0Web/9cMvvRMpT1/3b8JNn7Razo1/k
-VK82pRnQDbQSjjJKI5ME0WLSM+gY7/C6HKK88t/CHsKm/8oc13REkWgkMlWPQlgW
-D0mIha4A/pgZSW50WsUGlLfEz2G6T8QLDjoi+ahGh8cpOmLNs2nA231oyjOgFwnI
-W5XMxx6sDVPRKB1UbBwaKTwBz9Bw9AknB+Y9WMjBJoYZIrw9VQBYlrlswCeQeXWg
-uGNZVCAzo6h5u22oEXIDqyeHFvQjesjxwbYUQZ5pnbES47ycPvMvCflXkSKbhXy5
-3CDXoecaaLiyBmfnYvWJuHER6BJTsTXyzMEbqP8TgzYJXu+z2hd6sbHaLJJmG4fL
-/Z8O1aJM+1iv2aCZ77MP65p1tNkgSRVcdty3evjQpPpmpw/NnTyrEolepfOXd0Hn
-CjV+JysQOM4YsP+ztgzcF+J3nibynzhBrvbB5kNZxh3Zrj8Q/48GlFBVDu+iEpUX
-B10lYof1CRnqIh5zqJduxlxOSycN9VVtI9VCOcYwRBJhJCI0jBg=
-=Eo6X
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl23HKAACgkQAR8vZIA0
+zr2MGgf/ePx5hy2nie9LAKOAz2NDoZhpubImyTEB8rRyr1wPavYQOdum8Qc5m8JX
+JiDcLz1NOH7/PYWacrXEcUYbZWirQxPVpYRBJqMIhu8J3QnVRuVmysa9xnB60/gb
+xktvyi/h2bu9EpI5puSrZXpJFI1cVNmRsAzRiEkqu9wu0BFchEskpdJdnebtoZ25
+KZkDd+1Z3p0iCtNgexBo/1luGVuLZkPiSnpbKbAzlpm49vWtL12Rj0UsXFlzDaew
+zmfP9MehqKNrJo/CjcjCNV0H1aSKOcgM3oUTcwx0euLiFOrpENqT3R1muWDzI+So
+SB95p3NjhVpZttdIH6NNcf0svYgaGg==
+=SGgX
 -----END PGP SIGNATURE-----
 
---vpVygws8pQvai3MI--
+--Sig_/tNqzSY_CJXIxBs90t7pWRh4--
 
---===============6100157803086517639==
+--===============1410810842000375775==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -199,4 +167,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============6100157803086517639==--
+--===============1410810842000375775==--

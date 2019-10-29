@@ -2,79 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B30BE832C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 09:24:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56F34E8354
+	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 09:38:50 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4FD6DC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 08:24:41 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 14C11C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 08:38:50 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01D69C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8FD0C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 29 Oct 2019 08:24:39 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9T8MWcS020143; Tue, 29 Oct 2019 09:24:28 +0100
+ Tue, 29 Oct 2019 08:38:48 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x9T8bcFH014959; Tue, 29 Oct 2019 09:38:47 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=kHVuilUsa50FNStVwiK9cPYb4JkExnzggKPO6rdzxaw=;
- b=TAbcBlKeUaQ29M+8DyOSc/Q6u1ehzdannzfCqTIJC5K6aM0n0FXo0PO4zutUXqvF3HyS
- Xd+snkKbJtHPiAe2HAGj5Kw5TgMlCwOB9jh1pTFyzQDOn8WOl9NFGWjW4OcTnNeL2JkU
- JXp+sSPjXS0SvAtaKEefrjTjna7Q2m4E+o1pOwqB8ZPteRPLph4Nb7q4IBtdLTKU5vsM
- X/ar9XELN9KXD9qh9JzW5uOHAM0m6+qLajyozFPh+Xx+7zgP1Cb2so/7s8nDC+hKgos4
- d2xkPshTqemRdNtEjnrG9cb7RctdyTwlDpQuykLLStayXGUj0QvWVbIdpyodwjg1xh7s cA== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=IXY/qtF4ib1YwrhmqjOSthiOi3nVL0spIj3a7+9om2w=;
+ b=eAapKZs5pJgYVWTnMrjo/Gj/zXqcSf+pYnKIdwcWI0aHCZuZOtMv92kp9Q0fwdtXzeOm
+ L9uRG3ztH2vcR9VhXgL4PElS36LWBFjEmkUW/uLNjyaOxcuv6fL466Zj8rm8XWyHyDoy
+ djUcZCG1tu9b9a2r6gN5gz+dDd3TP4By/CY9J7IzADVvYywSJ99fxXC2m8G4guGDV2U4
+ N6BKCQenlcnbelim3tIVHAMBc75K9Nlqc4Ad2iQYG19NyffV+bIZlVKREGPAoQWI3mTZ
+ zMhSuDkbYE7fxcPOnx/Qoeh27ubjC9WF+HH6cuNeMTyXGMfJeJYxdhSlYoHefQLT3fMO Ww== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2vvbww6c35-1
+ by mx08-00178001.pphosted.com with ESMTP id 2vvd1gp4g9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Oct 2019 09:24:28 +0100
+ Tue, 29 Oct 2019 09:38:46 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 50519100034;
- Tue, 29 Oct 2019 09:24:28 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2E7CE2AB5C6;
- Tue, 29 Oct 2019 09:24:28 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 29 Oct
- 2019 09:24:27 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 56686100038;
+ Tue, 29 Oct 2019 09:38:46 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4C7252AC9C2;
+ Tue, 29 Oct 2019 09:38:46 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 29 Oct
+ 2019 09:38:45 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 29 Oct 2019 09:24:27 +0100
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Tom Rini <trini@konsulko.com>
-Thread-Topic: [U-Boot] [PATCH] cmd: remove NET and CMD_NET dependency for
- CMD_PXE
-Thread-Index: AQHVjZLf5x7igjYXtkiDvahbFadG5qdwATQAgAE3cIA=
-Date: Tue, 29 Oct 2019 08:24:27 +0000
-Message-ID: <5f9e153f-eba4-928e-8830-e6420ef81011@st.com>
-References: <20191028132319.21570-1-patrice.chotard@st.com>
- <20191028134946.GH11173@bill-the-cat>
-In-Reply-To: <20191028134946.GH11173@bill-the-cat>
+ 15.00.1473.003; Tue, 29 Oct 2019 09:38:45 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Bartosz Bilas <bartosz.bilas@hotmail.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] stm32mp1: configs: fix checking the presence of an
+ environment
+Thread-Index: AQHVjNU4+WE+prDYN0OrwEa8M3bnmKdxR23Q
+Date: Tue, 29 Oct 2019 08:38:45 +0000
+Message-ID: <b88103917685448fb193eef6cc3877cc@SFHDAG6NODE3.st.com>
+References: <VI1PR05MB4733FA3D45034F7B15EE9D08F7670@VI1PR05MB4733.eurprd05.prod.outlook.com>
+In-Reply-To: <VI1PR05MB4733FA3D45034F7B15EE9D08F7670@VI1PR05MB4733.eurprd05.prod.outlook.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
-x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
-Content-ID: <EFE6BFE197E6B547AB58948BAC78FEE3@st.com>
+x-originating-ip: [10.75.127.51]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
  definitions=2019-10-29_03:2019-10-28,2019-10-29 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Boris Brezillon <boris.brezillon@bootlin.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, U-Boot
- STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Stefan Roese <sr@denx.de>,
- Chris Packham <judge.packham@gmail.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] cmd: remove NET and CMD_NET
- dependency for CMD_PXE
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Christophe KERELLO <christophe.kerello@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp1: configs: fix checking the
+ presence of an environment
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,90 +84,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom
+Hi Bartosz,
 
-On 10/28/19 2:49 PM, Tom Rini wrote:
-> On Mon, Oct 28, 2019 at 02:23:19PM +0100, Patrice Chotard wrote:
->
->> It allows to use sysboot command on board which have no NET support.
->>
->> Currently, sysboot command can't be used if CMD_NET and NET flags are
->> not set, while sysboot allows to load extlinux.conf file from local
->> filesystem, so it doesn't need to depend of CMD_NET and NET flags.
->>
->> One solution would be to put sysboot command's code outside pxe.c and
->> create a new sysboot.c file. But sysboot command code is imbricated
->> with pxe command code and as all CMD_NET relative code is already under
->> CMD_NET flag, the easiest way to break sysboot dependency with CMD_NET
->> and NET flags is to move CMD_PXE outside CMD_NET and NET section in
->> Kconfig.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> How far did you go down the path of making cmd/sysboot.c or similar?
-> Since it's not obvious unless you're already in here that the
-> extlinux.conf stuff is inside pxe, it really would be good to split
-> things out.  If you even have a rough draft patch to look at that would
+Please ad get maintainers or tools/patman to sent patch for stm32mp1 platform.
 
-As explained, this implementation was the easiest way ... but ok i will split out
+> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Bartosz Bilas
+> Sent: dimanche 27 octobre 2019 15:46
+> To: u-boot@lists.denx.de
+> Subject: [U-Boot] [PATCH] stm32mp1: configs: fix checking the presence of an
+> environment
+> 
+> Execute env check command within extra env settings section instead of bootcmd
+> whereby we are able to mount rootfs partition from sd card properly.
+> 
+> Signed-off-by: Bartosz Bilas <bartosz.bilas@hotmail.com>
+> ---
+>  include/configs/stm32mp1.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h index
+> 988992b336..cadc0358fd 100644
+> --- a/include/configs/stm32mp1.h
+> +++ b/include/configs/stm32mp1.h
+> @@ -115,7 +115,6 @@
+>  	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
+>  	"then stm32prog ${boot_device} ${boot_instance}; " \
+>  	"else " \
+> -		"run env_check;" \
+>  		"if test ${boot_device} = mmc;" \
+>  		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
+>  		"if test ${boot_device} = nand;" \
+> @@ -160,6 +159,7 @@
+>  	"initrd_high=0xffffffff\0" \
+>  	"altbootcmd=run bootcmd\0" \
+>  	"env_default=1\0" \
+> +	"run env_check;" \
 
-sysboot code from pxe one, and put common code into a new file.
+It is not a correct place, this define CONFIG_EXTRA_ENV_SETTINGS only the default environment (only set env variable).
+Only "bootcmd"  or "preboot" is really executed, this command will be never executed here.
 
-Thanks
+>  	"env_check=if test $env_default -eq 1;"\
+>  		" then env set env_default 0;env save;fi\0" \
+>  	STM32MP_BOOTCMD \
+> --
 
-Patrice
+Can you explain you issue and the board used.
+
+I think your patch only mask the issue, as environment is not saved, U-Boot never write in EXT4 file system.
+You should have again the issue if you execute manually by the command "env save".
+
+Today I have no issue on my side with environment in ext4 file system (generated by donwstrean yocto); 
+the requests done by U-Boot are acceptable if the ext4 file system is generated with only the features supported by U-Boot.
+
+But we solved issue with latest ext4 tools; since e2fsprogs 1.43 at least, we have ascendance incompatibility as new enable features are enable by default = metadata_csum and dir_index.
+
+We remove them with the mkfs.ext4 option: -O ^metadata_csum,^dir_index
+
+Example : mkfs.ext4 -L rootfs -O ^metadata_csum,^dir_index /dev/sdb4
+
+For details of restriction, see commit 10a7a1b8 : update with hash tree directory of EXT4 not support by U-Boot (EXT4_INDEX_FL)
+
+Best regards
+
+Patrick
 
 
-> be great.  Also:
->
->> ---
->>
->>  Kconfig     |  2 +-
->>  cmd/Kconfig | 12 ++++++------
->>  2 files changed, 7 insertions(+), 7 deletions(-)
->>
->> diff --git a/Kconfig b/Kconfig
->> index 66b059f749..ce2ad16ea5 100644
->> --- a/Kconfig
->> +++ b/Kconfig
->> @@ -87,7 +87,7 @@ config DISTRO_DEFAULTS
->>  	select CMD_FS_GENERIC
->>  	select CMD_PART if PARTITIONS
->>  	select CMD_PING if CMD_NET
->> -	select CMD_PXE if NET
->> +	select CMD_PXE
->>  	select ENV_VARS_UBOOT_CONFIG
->>  	select HUSH_PARSER
->>  	select SUPPORT_RAW_INITRD
->> diff --git a/cmd/Kconfig b/cmd/Kconfig
->> index 07060c63a7..2cb0935632 100644
->> --- a/cmd/Kconfig
->> +++ b/cmd/Kconfig
->> @@ -1499,12 +1499,6 @@ config CMD_ETHSW
->>  	  operations such as enabling / disabling a port and
->>  	  viewing/maintaining the filtering database (FDB)
->>  
->> -config CMD_PXE
->> -	bool "pxe"
->> -	select MENU
->> -	help
->> -	  Boot image via network using PXE protocol
->> -
->>  config CMD_WOL
->>  	bool "wol"
->>  	help
->> @@ -1636,6 +1630,12 @@ config CMD_MISC
->>  	help
->>  	  Delay execution for some time
->>  
->> +config CMD_PXE
->> +	bool "pxe"
->> +	select MENU
->> +	help
->> +	  Boot image via network using PXE protocol or via local extlinux.conf file
->> +
-> We should expand the prompt as well to note that sysboot is in here as
-> well, if we cannot split.  Thanks!
->
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

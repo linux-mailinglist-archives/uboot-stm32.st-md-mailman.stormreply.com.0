@@ -2,51 +2,79 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94607E7CC0
-	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 00:17:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B30BE832C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 09:24:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4B3E1C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Oct 2019 23:17:00 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4FD6DC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Oct 2019 08:24:41 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0867C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01D69C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Oct 2019 23:16:58 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4729bF4fwTz1rVvy;
- Tue, 29 Oct 2019 00:16:57 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 4729bF3gfrz1qqkH;
- Tue, 29 Oct 2019 00:16:57 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id 8ln_09ak-BVo; Tue, 29 Oct 2019 00:16:55 +0100 (CET)
-X-Auth-Info: fmcvw+J7mQpdjKsFRC76AB/jaTIOalhYyAaxjevEMmg=
-Received: from jawa (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 29 Oct 2019 00:16:55 +0100 (CET)
-Date: Tue, 29 Oct 2019 00:16:54 +0100
-From: Lukasz Majewski <lukma@denx.de>
-To: Marek Vasut <marex@denx.de>
-Message-ID: <20191029001654.3166065a@jawa>
-In-Reply-To: <96c77fb2-95dc-f76d-9f77-4576fc1a658f@denx.de>
-References: <20191015094536.2c5bbb8f@jawa>
- <b17362c5-f4b2-4e5b-360a-0ad026e5ed4d@denx.de>
- <20191015140307.3940831d@jawa> <20191028175144.5718cd05@jawa>
- <96c77fb2-95dc-f76d-9f77-4576fc1a658f@denx.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+ Tue, 29 Oct 2019 08:24:39 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ x9T8MWcS020143; Tue, 29 Oct 2019 09:24:28 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=kHVuilUsa50FNStVwiK9cPYb4JkExnzggKPO6rdzxaw=;
+ b=TAbcBlKeUaQ29M+8DyOSc/Q6u1ehzdannzfCqTIJC5K6aM0n0FXo0PO4zutUXqvF3HyS
+ Xd+snkKbJtHPiAe2HAGj5Kw5TgMlCwOB9jh1pTFyzQDOn8WOl9NFGWjW4OcTnNeL2JkU
+ JXp+sSPjXS0SvAtaKEefrjTjna7Q2m4E+o1pOwqB8ZPteRPLph4Nb7q4IBtdLTKU5vsM
+ X/ar9XELN9KXD9qh9JzW5uOHAM0m6+qLajyozFPh+Xx+7zgP1Cb2so/7s8nDC+hKgos4
+ d2xkPshTqemRdNtEjnrG9cb7RctdyTwlDpQuykLLStayXGUj0QvWVbIdpyodwjg1xh7s cA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2vvbww6c35-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 29 Oct 2019 09:24:28 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 50519100034;
+ Tue, 29 Oct 2019 09:24:28 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2E7CE2AB5C6;
+ Tue, 29 Oct 2019 09:24:28 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 29 Oct
+ 2019 09:24:27 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Tue, 29 Oct 2019 09:24:27 +0100
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Tom Rini <trini@konsulko.com>
+Thread-Topic: [U-Boot] [PATCH] cmd: remove NET and CMD_NET dependency for
+ CMD_PXE
+Thread-Index: AQHVjZLf5x7igjYXtkiDvahbFadG5qdwATQAgAE3cIA=
+Date: Tue, 29 Oct 2019 08:24:27 +0000
+Message-ID: <5f9e153f-eba4-928e-8830-e6420ef81011@st.com>
+References: <20191028132319.21570-1-patrice.chotard@st.com>
+ <20191028134946.GH11173@bill-the-cat>
+In-Reply-To: <20191028134946.GH11173@bill-the-cat>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.49]
+Content-ID: <EFE6BFE197E6B547AB58948BAC78FEE3@st.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>
-Subject: Re: [Uboot-stm32] [GIT] Pull request: u-boot-dfu (15.10.2019)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
+ definitions=2019-10-29_03:2019-10-28,2019-10-29 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Eugeniu Rosca <roscaeugeniu@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Boris Brezillon <boris.brezillon@bootlin.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, U-Boot
+ STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Stefan Roese <sr@denx.de>,
+ Chris Packham <judge.packham@gmail.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] cmd: remove NET and CMD_NET
+ dependency for CMD_PXE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -58,114 +86,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0206507537578943696=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============0206507537578943696==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- boundary="Sig_/1u/fep14OzrsVPW3LBhNlid"; protocol="application/pgp-signature"
+Hi Tom
 
---Sig_/1u/fep14OzrsVPW3LBhNlid
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+On 10/28/19 2:49 PM, Tom Rini wrote:
+> On Mon, Oct 28, 2019 at 02:23:19PM +0100, Patrice Chotard wrote:
+>
+>> It allows to use sysboot command on board which have no NET support.
+>>
+>> Currently, sysboot command can't be used if CMD_NET and NET flags are
+>> not set, while sysboot allows to load extlinux.conf file from local
+>> filesystem, so it doesn't need to depend of CMD_NET and NET flags.
+>>
+>> One solution would be to put sysboot command's code outside pxe.c and
+>> create a new sysboot.c file. But sysboot command code is imbricated
+>> with pxe command code and as all CMD_NET relative code is already under
+>> CMD_NET flag, the easiest way to break sysboot dependency with CMD_NET
+>> and NET flags is to move CMD_PXE outside CMD_NET and NET section in
+>> Kconfig.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> How far did you go down the path of making cmd/sysboot.c or similar?
+> Since it's not obvious unless you're already in here that the
+> extlinux.conf stuff is inside pxe, it really would be good to split
+> things out.  If you even have a rough draft patch to look at that would
 
-Hi Marek,
+As explained, this implementation was the easiest way ... but ok i will split out
 
-> On 10/28/19 5:51 PM, Lukasz Majewski wrote:
-> > Hi Marek, =20
->=20
-> Hi,
->=20
-> >> Hi Marek,
-> >> =20
-> >>> On 10/15/19 9:45 AM, Lukasz Majewski wrote:   =20
-> >>>> Dear Marek,     =20
-> >>>
-> >>> Hello Lukasz,
-> >>>    =20
-> >>>> The following changes since commit
-> >>>> 7a779ed1755c2d5011bd9598da90291f759ae760:
-> >>>>
-> >>>>   travis: Exclude MIPS from the bcm job (2019-10-13 11:21:56
-> >>>> -0400)
-> >>>>
-> >>>> are available in the Git repository at:
-> >>>>
-> >>>>   git@gitlab.denx.de:u-boot/custodians/u-boot-dfu.git=20
-> >>>>
-> >>>> for you to fetch changes up to
-> >>>> 5d897631065bb2f36bbc1bd7fabb670ce5da3ce8:
-> >>>>
-> >>>>   dfu: add callback for flush and initiated operation (2019-10-14
-> >>>>   12:26:19 +0200)     =20
-> >>>
-> >>> Which branch shall I pull ? This information is missing from the
-> >>> PR, again :-(   =20
-> >>
-> >> Ach. I'm still (unfortunately) use my old script for PR.
-> >>
-> >> You shall use the -master branch:
-> >> https://gitlab.denx.de/u-boot/custodians/u-boot-dfu/commits/master
-> >>
-> >> I've written also the merge tag for this PR:
-> >> https://gitlab.denx.de/u-boot/custodians/u-boot-dfu/-/tags
-> >>
-> >> Sorry for inconvenience and confusion. =20
-> >=20
-> > Marek, are there any issues with this PR?=20
-> >=20
-> > Unfortunately, I did not noticed it being applied to your u-boot-usb
-> > tree. Do you need any help? =20
->=20
-> The USB tree was stuck due to multiple patchsets which had issues. It
-> is unstuck now, so rebase the PR on u-boot-usb/master and resubmit it.
+sysboot code from pxe one, and put common code into a new file.
 
-Thanks for the update. I will prepare updated PR.
+Thanks
 
->=20
-> Thanks
+Patrice
 
 
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/1u/fep14OzrsVPW3LBhNlid
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAl23duYACgkQAR8vZIA0
-zr0oqQf/Te2siW2v4OzbBNLSAwhPpEDKEZsGICZc5vlFS6TRtLVWNUE7X0Z8+3nz
-+CLosDK4Pj/dkJvCL4oqxewTPdCeqU/kDcF2xgtHxC8hPD9zN9VyzoYNs5gRK3od
-1LjFmAmuDxSkgeVRji/lJqAl0hwJOQA+zxoztO5i/Er+kFvVRJPEXkNPeUSonEXn
-44ILvjCCMqN4+YzwfW65irZ07Sz3+9R87wpWKa3WQLFxORPM/l/v4QtdMKi3oj5Y
-4CfvZMek3AG8JauRt0kc1ARNv4W8opORyCmmgTzQF4Kzjy+D7Uv+3fl+mHRtD9gX
-keZtFY0QgBN4nnwC9FqfRm9+ciQ+xA==
-=H+R4
------END PGP SIGNATURE-----
-
---Sig_/1u/fep14OzrsVPW3LBhNlid--
-
---===============0206507537578943696==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+> be great.  Also:
+>
+>> ---
+>>
+>>  Kconfig     |  2 +-
+>>  cmd/Kconfig | 12 ++++++------
+>>  2 files changed, 7 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/Kconfig b/Kconfig
+>> index 66b059f749..ce2ad16ea5 100644
+>> --- a/Kconfig
+>> +++ b/Kconfig
+>> @@ -87,7 +87,7 @@ config DISTRO_DEFAULTS
+>>  	select CMD_FS_GENERIC
+>>  	select CMD_PART if PARTITIONS
+>>  	select CMD_PING if CMD_NET
+>> -	select CMD_PXE if NET
+>> +	select CMD_PXE
+>>  	select ENV_VARS_UBOOT_CONFIG
+>>  	select HUSH_PARSER
+>>  	select SUPPORT_RAW_INITRD
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index 07060c63a7..2cb0935632 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -1499,12 +1499,6 @@ config CMD_ETHSW
+>>  	  operations such as enabling / disabling a port and
+>>  	  viewing/maintaining the filtering database (FDB)
+>>  
+>> -config CMD_PXE
+>> -	bool "pxe"
+>> -	select MENU
+>> -	help
+>> -	  Boot image via network using PXE protocol
+>> -
+>>  config CMD_WOL
+>>  	bool "wol"
+>>  	help
+>> @@ -1636,6 +1630,12 @@ config CMD_MISC
+>>  	help
+>>  	  Delay execution for some time
+>>  
+>> +config CMD_PXE
+>> +	bool "pxe"
+>> +	select MENU
+>> +	help
+>> +	  Boot image via network using PXE protocol or via local extlinux.conf file
+>> +
+> We should expand the prompt as well to note that sysboot is in here as
+> well, if we cannot split.  Thanks!
+>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0206507537578943696==--

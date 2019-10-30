@@ -2,56 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E812E94D6
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Oct 2019 02:48:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8F502E94D7
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Oct 2019 02:49:59 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3CE13C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Oct 2019 01:48:52 +0000 (UTC)
-Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
- [209.85.167.195])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 523DCC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Oct 2019 01:49:59 +0000 (UTC)
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+ [209.85.210.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2CDDCC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 08700C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Oct 2019 01:48:51 +0000 (UTC)
-Received: by mail-oi1-f195.google.com with SMTP id r27so607536oij.7
+ Wed, 30 Oct 2019 01:49:58 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id u13so746388ote.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 29 Oct 2019 18:48:51 -0700 (PDT)
+ Tue, 29 Oct 2019 18:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=SL4QQqq7eGt1y0UxMS6XHYUDhwTBQtvRlIhS+wSk9wk=;
- b=CSlzya8GM+z8F4j+6l2oXxEOPBdzwvX3osz8DYM8ZNdSF315VP8Yxd6VJNlXqeh9Wq
- SVhWt3uaGcQN5GwptZoOgI3yeoQxah20dtBepW+E+dV2ll9niFI+tjESc7MPDDSbO+6b
- 5e9rxi1PnH/VQaU6aOG4Ks0hHwlmxCzV5nou0=
+ :cc; bh=IsVBc31Qttq6ZJN2nhylzirKHzSCxYlgOurcIiLwrXY=;
+ b=n3kw3V76TGro9I/77RP2pDse336vuFSnjL+euebfYcPOOoSOQ0kFAZcCt4NW7KZrJp
+ wauicftnrv/vloECMcixYMrC8d/CQTyOffrH72Gn4Tiag/FM+227o9vemWcOjn/wi2KF
+ 1jmB7Ps+V61VCESkHYdooRlix6w+ZDE1W64bM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=SL4QQqq7eGt1y0UxMS6XHYUDhwTBQtvRlIhS+wSk9wk=;
- b=CX4OvdQtxqNeFx88QSkkCTfPcZN1fHGJjMYd5PNkzUuJ1tx14UGOfidQiMw1jhErTX
- tx1v15NaMWGdNoA7dp5Xi3sE/8/Oaizjh+JmGCD1ohxzaY2UdXfv6zCTRpuzNJbSqND6
- 3CpOi1QZ8/e/JHcFFNP/SsYjexsvyQHpH4NxubnnrF8rQXcBeuhUbmf2WqmgEd6Wpq1e
- 4P3hgVPOEw4PGILVwX9mLAEv07Bg3gpdb85lyftiAYwm1S49qKI6z0qgIy4vB++EIcY5
- jupTOom969YEroYU85Vqrl9NNCi6vhc4PYVB0EIdqTZt9advTOjWJNQwUNgEApKYELXZ
- Om9Q==
-X-Gm-Message-State: APjAAAX5XKrbMhczOs9IslQTQzZ/oEdq7bMLouwWnBhX4XZo5xCtDyvJ
- vf10Ee7ctC4ErwoAszxk7diE2dzOD/x/KVGQv52fQ+j8
-X-Google-Smtp-Source: APXvYqzyd6pXi0kiHQjpLFpS6cWLx2t29gaNxczg7O/YVGKQmRjCM/7zijCKpUkfYBdYCbVMDF8/JqNF6EkDLCfjtWY=
-X-Received: by 2002:aca:211a:: with SMTP id 26mr6455486oiz.122.1572400129405; 
- Tue, 29 Oct 2019 18:48:49 -0700 (PDT)
+ bh=IsVBc31Qttq6ZJN2nhylzirKHzSCxYlgOurcIiLwrXY=;
+ b=c1qFrcbfCmVXy65laNAZtK2izu2jGOzfKz4RphBicc3ondJGCfh32cWwCcnZ4szfx0
+ X3VeFEaFAmllUrlo+d2/bS4lzosfg+ZoDkDoordjGksjV3ufBBa9jJj9uTIOzR/V21rr
+ /aVXgN9D9pFzk8jXLZvFq7xng95R9aMcuboVjiH3glJl3zx8/XwgPY41ANlXl/TTL241
+ 1JrVQb1z0c2IBEtXlhDmC9N4Gp22EHO/ZGwmSx71QZMd0prJxNUbrvVhu5knPJAXDT1j
+ s7okdE+3RGNr6K7KoMg1OiqofEUyNy3tgNpubAPTzlqHi3ufZGh55l5Nj71i1N3WAKGF
+ quUA==
+X-Gm-Message-State: APjAAAWlV1J+3HOmsY/q0elB62eah431yq/Y+ciVe4kU8YkxIxCIWXNN
+ /zL9U8N588snEGMKxt76Uu9U4cQBpua9Qt6sud+dVw==
+X-Google-Smtp-Source: APXvYqzIHL876psKbRBfq2C81sbE3irEg+qmJ6gFyfIG55hRzsWRy0xtd3KvLZPYMd8rg7P0qbNalNThPtz1+oF+PWk=
+X-Received: by 2002:a05:6830:1d8a:: with SMTP id
+ y10mr18087596oti.48.1572400196322; 
+ Tue, 29 Oct 2019 18:49:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191023134448.20149-1-patrick.delaunay@st.com>
- <20191023134448.20149-7-patrick.delaunay@st.com>
-In-Reply-To: <20191023134448.20149-7-patrick.delaunay@st.com>
+References: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
+ <1570635389-8445-2-git-send-email-fabien.dessenne@st.com>
+ <CAPnjgZ33+J-10WgcmFBjGuqJ90caJFj7mGy+vApbxAyymCXvZw@mail.gmail.com>
+ <9a098f3c-250c-d589-70d3-6dcfe0fbdc93@st.com>
+In-Reply-To: <9a098f3c-250c-d589-70d3-6dcfe0fbdc93@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 29 Oct 2019 19:48:35 -0600
-Message-ID: <CAPnjgZ2rSG47Etzh-RZo3jQPakdn0NGQ5Xey5B3CL5c2fyKkmg@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 06/13] gpio: add support for new flags on
-	gpio configuration
+Date: Tue, 29 Oct 2019 19:49:44 -0600
+Message-ID: <CAPnjgZ3mf-edo-_kWRqz4o4mh34rOzw76sxo6bPE6yJ3XuJEvQ@mail.gmail.com>
+To: Fabien DESSENNE <fabien.dessenne@st.com>
+Cc: Christophe KERELLO <christophe.kerello@st.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Arnaud POULIQUEN <arnaud.pouliquen@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/5] remoteproc: elf_loader: Add elf
+	resource table load support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,47 +74,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
+Hi Fabien,
 
-On Wed, 23 Oct 2019 at 07:45, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Tue, 22 Oct 2019 at 03:08, Fabien DESSENNE <fabien.dessenne@st.com> wrote:
 >
-> This commit manages the flags that can be used in GPIO specifiers to
-> indicate if a pull-up resistor or pull-down resistor should be
-> enabled for output GPIO and the Open Drain/Open Source configuration
-> for input GPIO.
+> Hi Simon,
 >
-> It is managed in driver with a new ops in gpio uclass set_config.
 >
-> These flags are already support in Linux kernel in gpiolib.
+> On 22/10/2019 1:47 AM, Simon Glass wrote:
+> > Hi Fabien,
+> >
+> > On Wed, 9 Oct 2019 at 09:36, Fabien Dessenne <fabien.dessenne@st.com> wrote:
+> >> Add rproc_elf_load_rsc_table(), which searches for a resource table in
+> >> an elf64/elf32 image, and if found, copies it to device memory.
+> >> Add also the elf32 and elf64 variants of this API.
+> >> Add a test for this.
+> >>
+> >> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
+> >> ---
+> >>   drivers/remoteproc/rproc-elf-loader.c | 269 ++++++++++++++++++++++++++++++++++
+> >>   include/remoteproc.h                  |  70 +++++++++
+> >>   test/dm/remoteproc.c                  |  91 ++++++++++--
+> >>   3 files changed, 419 insertions(+), 11 deletions(-)
+> >>
+> > If you are putting stuff in the image, should you use binman to build
+> > the image, then find the contents using the binman tables?
 >
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
 >
->  drivers/gpio/gpio-uclass.c | 62 +++++++++++++++++++++++++++++++++++++-
->  include/asm-generic/gpio.h | 56 ++++++++++++++++++++++++++++++++++
->  2 files changed, 117 insertions(+), 1 deletion(-)
+> The "resource table" may be located anywhere, there is no strict rule
+> defining where it is expected to be.
 >
+> Nevertheless the Linux remoteproc[1] and OpenAmp (running RTOS) [2]
+> frameworks expect the resource table to be stored in a dedicated ELF
+> section. Both of them run some ELF scanning to find out this section.
+>
+> The proposed patch is for the "ELF section" variant of the resource table.
+> Other variants like binman packing may be proposed as well, both
+> implementations can coexist alongside.
 
-To me this seems like a pretty annoying interface. The uclass has to
-call the driver multiple times with each enum and the driver may end
-up reprogramming the pins multiple times to get it right.
+So why not use binman to pack the image and find the components? This
+is U-Boot, after all.
 
-Normally we want to program things correctly once, before enabling the function.
 
-On the other handle I think what you have is better than adding new
-methods like set_open_drain().
-
-But overall I think it would be better to define a new struct like
-gpio_config that holds some flags and perhaps a few other things. Then
-the uclass can set up that struct and call the driver once with it, to
-set up the pin. It could include input/output too, so that if
-set_config() is defined, the uclass uses that instead of
-direction_output(), etc.
-
-What do you think?
-
-Also we should update the sandbox driver to include tests for new
-methods. It looks like you have done pinctrl but not this?
+>
+> BR
+>
+> Fabien
+>
+> [1] https://www.kernel.org/doc/Documentation/remoteproc.txt
+> [2]
+> https://github.com/OpenAMP/open-amp/blob/master/lib/remoteproc/elf_loader.c
+>
+> >
+> > Scanning the image for a table seems a bit horrible.
 
 Regards,
 Simon

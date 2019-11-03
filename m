@@ -2,72 +2,93 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CC21EB350
-	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Oct 2019 15:59:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB192EDA3A
+	for <lists+uboot-stm32@lfdr.de>; Mon,  4 Nov 2019 08:59:33 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D09D3C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Oct 2019 14:59:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 973C3C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon,  4 Nov 2019 07:59:33 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-oln040092066071.outbound.protection.outlook.com [40.92.66.71])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 91E16C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CDEAFC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 31 Oct 2019 14:59:41 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- x9VEvjaT000462; Thu, 31 Oct 2019 15:59:39 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=tUCsNrtkA1NxOMgFfdy+oi01LLJC5R8PwBNniHEH2AM=;
- b=Sx/0q133IL+aDyG/qOkSV50bS09V8lJllHe1QjF4TTkS25vFU8d30dJS5GbjCSEthRUM
- HaSJUSB7LrJLIQ+0S91G3RuSj/3s3bMVlZsnHTZDUySIblaLg17RjiclqvJX446/sqm8
- 5Y0+8qIbyKNLfLuYhHSKl9XLq0Nt/EgIbEDQs9yDNWj48LwUzX0TrSlqItUYpcp86lJm
- Btz931lAIyMNtKzzfAdzb1VN+G0BYcIUv1IQMOjcnuLiBekICCIVkdGWbt8vZA6X5t1x
- 6SbqeR0YVNU1gRl1nqDMC8mQ9pFzW59vA51m65QeSTkzAfGCREetA7s9kk5osMlJ80t6 yw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2vxwf4adg7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Oct 2019 15:59:39 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5807210002A;
- Thu, 31 Oct 2019 15:59:38 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4A5002C64A8;
- Thu, 31 Oct 2019 15:59:38 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 31 Oct
- 2019 15:59:37 +0100
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 31 Oct 2019 15:59:37 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Simon Glass <sjg@chromium.org>
-Thread-Topic: [PATCH 06/13] gpio: add support for new flags on gpio
- configuration
-Thread-Index: AQHViagScBjw31GDekOPZscbjOGw16dyZDSAgAJ8cHA=
-Date: Thu, 31 Oct 2019 14:59:37 +0000
-Message-ID: <26ab96b4b5654cdcbb1bc36858b88e9a@SFHDAG6NODE3.st.com>
-References: <20191023134448.20149-1-patrick.delaunay@st.com>
- <20191023134448.20149-7-patrick.delaunay@st.com>
- <CAPnjgZ2rSG47Etzh-RZo3jQPakdn0NGQ5Xey5B3CL5c2fyKkmg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2rSG47Etzh-RZo3jQPakdn0NGQ5Xey5B3CL5c2fyKkmg@mail.gmail.com>
-Accept-Language: fr-FR, en-US
+ Sun,  3 Nov 2019 10:15:05 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KwjFowyB6cjQh576zJd9ZZ91Rlhq0sK2TsnQHJSR97pbhu1PmM5QavyAVRowUUPMSzZRK6bz+puLfZXXOHtfLHlF8zQwoWspUNthvBRtF2UhVqMYw3eZMciG3ZOwes+jFEfgvrsWdXxthPRDymxUIyEYw0Y1dKwSLJZY/z5Cav8Xc1fcLq8mtsgTXh304WSAj/KcWHVyoxPlzkH7ETS98vjY3xK+oCWW1ZdxHs6Igb3Jdi/Xiy/rwUCT92zcFUj95NQVxo7hxVjQ5RAi0kG4eXyNAqeRmZhuVPIB/nQNfIYxWSaylhTaves5XAly+uK3JRUhR+ul11VWF8eu3W6fgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NxkPeGsTwdoQf+U5bQBuPOwm7h/lukg7+BpJWGpE4TA=;
+ b=VrZ9TNva6KOsahQujIeutwR7aDfRo+gzjuAi2dojS1zwBJl4107iz2Bb9aOBqfbw0UjxPpYxihJs4BGyW+0aCCpt2hOXnee+8G22HIpYQSxJVuprPh6J+3RbGHc8osuKr3CUsERzk4dxfINP15cT/3Vvy3sXggj4v9+C44yz/8KBOl1dr+QCb3Lkm+h4aqYqcdgBFNVTPcGr6ZG8zY+SI/H0CiJY/SvgklybuBPdM3WHTVkl3KluyzCw9aYyW1u0A4820S4CElqpzCh+qx8HnzhPM6C42lq95HSZntNwY8AEdLqF5fbwG+Mc79j8uOjLQrLP2hlGnmwA6G43KjXyyw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NxkPeGsTwdoQf+U5bQBuPOwm7h/lukg7+BpJWGpE4TA=;
+ b=LUljvNgMMDlSMxRw9KrI+QOdQLlcouo/JS9iPF+wZ+/OzCcJ1KBnEAJd7NZv3FltD/4HG0hknAB/SaoTcufKcrNNga4EqaGR8uExFg01dXLhGIvY182F7Pr0zufD52VAphhpHuL2dbb5hnC201AE8ClF9cS7FgMmnomGXWg5pS5AZmkQiDqbSIsgbDB8gpuMoXYG5gK7swuteXceGCxJYetvHf/mLIX4JdfoicpzCpmpM2uoUG0XtQ5Ut5akc4nMyFi6m8uLBQ/h+KTJ2mg59BMZt2uP8Jga6n1je7FbHeFJusGSQfNJa55xy80eCLuufCEmOUmV56c5gyxGleTASQ==
+Received: from DB5EUR01FT046.eop-EUR01.prod.protection.outlook.com
+ (10.152.4.59) by DB5EUR01HT106.eop-EUR01.prod.protection.outlook.com
+ (10.152.5.53) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2387.20; Sun, 3 Nov
+ 2019 10:15:04 +0000
+Received: from VI1PR05MB4733.eurprd05.prod.outlook.com (10.152.4.56) by
+ DB5EUR01FT046.mail.protection.outlook.com (10.152.5.231) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2387.20 via Frontend Transport; Sun, 3 Nov 2019 10:15:04 +0000
+Received: from VI1PR05MB4733.eurprd05.prod.outlook.com
+ ([fe80::5ae:9ac6:2c7b:11b]) by VI1PR05MB4733.eurprd05.prod.outlook.com
+ ([fe80::5ae:9ac6:2c7b:11b%5]) with mapi id 15.20.2387.028; Sun, 3 Nov 2019
+ 10:15:04 +0000
+From: =?utf-8?B?QmFydG9zeiBCacWCYXM=?= <bartosz.bilas@hotmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] stm32mp1: configs: fix checking the presence of an
+ environment
+Thread-Index: AQHVjNU4+WE+prDYN0OrwEa8M3bnmKdxR23QgAf+CQA=
+Date: Sun, 3 Nov 2019 10:15:04 +0000
+Message-ID: <VI1PR05MB4733AE3FCD54F3BC723AD9CBF77C0@VI1PR05MB4733.eurprd05.prod.outlook.com>
+References: <VI1PR05MB4733FA3D45034F7B15EE9D08F7670@VI1PR05MB4733.eurprd05.prod.outlook.com>
+ <b88103917685448fb193eef6cc3877cc@SFHDAG6NODE3.st.com>
+In-Reply-To: <b88103917685448fb193eef6cc3877cc@SFHDAG6NODE3.st.com>
+Accept-Language: pl-PL, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
+x-clientproxiedby: AM5PR04CA0009.eurprd04.prod.outlook.com
+ (2603:10a6:206:1::22) To VI1PR05MB4733.eurprd05.prod.outlook.com
+ (2603:10a6:802:65::26)
+x-incomingtopheadermarker: OriginalChecksum:7938A5E0E2A2A6483DEE0DC10B4B318072C49D2741589E1126F21352311FC66C;
+ UpperCasedChecksum:300481BC79D5E8C6F8BE6C7A5AA3ADC2855E2D3368F9A4296684C07DA8C89F1C;
+ SizeAsReceived:7561; Count:48
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [UCJQLYsiJLbi3zDCfdNVaSoL9SLTwWZ4]
+x-microsoft-original-message-id: <580adff2-4840-13a6-5900-7d0191c8c230@hotmail.com>
+x-ms-publictraffictype: Email
+x-incomingheadercount: 48
+x-eopattributedmessage: 0
+x-ms-traffictypediagnostic: DB5EUR01HT106:
+x-ms-exchange-purlcount: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: NCWugtTBfWqV1bnuOvB9LyhKQAR/xU3TI06LOiD6mmL5yWH9Vrgf7zrBza+huLA7A4XhHyZA71oi5qAKC9fAgJTQbuFoOhLr46Dpa4vHHgVDGp+CBX76QjKItq4TTLIH94aajjbn+mkYe3Nfp3LgnSu9vPHDF0sWo0Myvy5uZdOJp4hTngAXkxLeyb4D7lxLFeHLsPUEhE8/iMsd9Waz6/OU5w8991HaKKy+LTdm2Bc=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
- definitions=2019-10-31_06:2019-10-30,2019-10-31 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 06/13] gpio: add support for new flags on
- gpio configuration
+X-OriginatorOrg: hotmail.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: ff1fc9c1-4b6b-4ab2-7c47-08d76046b1a3
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Nov 2019 10:15:04.7379 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5EUR01HT106
+X-Mailman-Approved-At: Mon, 04 Nov 2019 07:59:31 +0000
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Christophe KERELLO <christophe.kerello@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp1: configs: fix checking the
+ presence of an environment
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,80 +100,219 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3700250614076706777=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
+--===============3700250614076706777==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_VI1PR05MB4733AE3FCD54F3BC723AD9CBF77C0VI1PR05MB4733eurp_"
 
-> From: Simon Glass <sjg@chromium.org>
-> Sent: mercredi 30 octobre 2019 02:49
-> 
-> Hi Patrick,
-> 
-> On Wed, 23 Oct 2019 at 07:45, Patrick Delaunay <patrick.delaunay@st.com>
-> wrote:
-> >
-> > This commit manages the flags that can be used in GPIO specifiers to
-> > indicate if a pull-up resistor or pull-down resistor should be enabled
-> > for output GPIO and the Open Drain/Open Source configuration for input
-> > GPIO.
-> >
-> > It is managed in driver with a new ops in gpio uclass set_config.
-> >
-> > These flags are already support in Linux kernel in gpiolib.
-> >
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > ---
-> >
-> >  drivers/gpio/gpio-uclass.c | 62
-> > +++++++++++++++++++++++++++++++++++++-
-> >  include/asm-generic/gpio.h | 56 ++++++++++++++++++++++++++++++++++
-> >  2 files changed, 117 insertions(+), 1 deletion(-)
-> >
-> 
-> To me this seems like a pretty annoying interface. The uclass has to call the driver
-> multiple times with each enum and the driver may end up reprogramming the pins
-> multiple times to get it right.
-> 
-> Normally we want to program things correctly once, before enabling the function.
-> 
-> On the other handle I think what you have is better than adding new methods like
-> set_open_drain().
-> 
-> But overall I think it would be better to define a new struct like gpio_config that
-> holds some flags and perhaps a few other things. Then the uclass can set up that
-> struct and call the driver once with it, to set up the pin. It could include input/output
-> too, so that if
-> set_config() is defined, the uclass uses that instead of direction_output(), etc.
-> 
-> What do you think?
+--_000_VI1PR05MB4733AE3FCD54F3BC723AD9CBF77C0VI1PR05MB4733eurp_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-I understand the issue.... 
-You think something like the serial ops setconfig/getconfig.
+SGVsbG8gUGF0cmljaywNCg0Kc29ycnkgZm9yIHRoZSBsYXRlIGFuc3dlciBidXQgSSdsbCB0cnkg
+dG8gZXhwbGFpbiB5b3UgbXkgaXNzdWUuDQoNCk9uIDEwLzI5LzE5IDk6MzggQU0sIFBhdHJpY2sg
+REVMQVVOQVkgd3JvdGU6DQoNCkhpIEJhcnRvc3osDQoNClBsZWFzZSBhZCBnZXQgbWFpbnRhaW5l
+cnMgb3IgdG9vbHMvcGF0bWFuIHRvIHNlbnQgcGF0Y2ggZm9yIHN0bTMybXAxIHBsYXRmb3JtLg0K
+DQpPaywgSSdsbCByZW1lbWJlciBhYm91dCB0aGF0Lg0KDQoNCg0KDQoNCkZyb206IFUtQm9vdCA8
+dS1ib290LWJvdW5jZXNAbGlzdHMuZGVueC5kZT48bWFpbHRvOnUtYm9vdC1ib3VuY2VzQGxpc3Rz
+LmRlbnguZGU+IE9uIEJlaGFsZiBPZiBCYXJ0b3N6IEJpbGFzDQpTZW50OiBkaW1hbmNoZSAyNyBv
+Y3RvYnJlIDIwMTkgMTU6NDYNClRvOiB1LWJvb3RAbGlzdHMuZGVueC5kZTxtYWlsdG86dS1ib290
+QGxpc3RzLmRlbnguZGU+DQpTdWJqZWN0OiBbVS1Cb290XSBbUEFUQ0hdIHN0bTMybXAxOiBjb25m
+aWdzOiBmaXggY2hlY2tpbmcgdGhlIHByZXNlbmNlIG9mIGFuDQplbnZpcm9ubWVudA0KDQpFeGVj
+dXRlIGVudiBjaGVjayBjb21tYW5kIHdpdGhpbiBleHRyYSBlbnYgc2V0dGluZ3Mgc2VjdGlvbiBp
+bnN0ZWFkIG9mIGJvb3RjbWQNCndoZXJlYnkgd2UgYXJlIGFibGUgdG8gbW91bnQgcm9vdGZzIHBh
+cnRpdGlvbiBmcm9tIHNkIGNhcmQgcHJvcGVybHkuDQoNClNpZ25lZC1vZmYtYnk6IEJhcnRvc3og
+QmlsYXMgPGJhcnRvc3ouYmlsYXNAaG90bWFpbC5jb20+PG1haWx0bzpiYXJ0b3N6LmJpbGFzQGhv
+dG1haWwuY29tPg0KLS0tDQogaW5jbHVkZS9jb25maWdzL3N0bTMybXAxLmggfCAyICstDQogMSBm
+aWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQoNCmRpZmYgLS1naXQg
+YS9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDEuaCBiL2luY2x1ZGUvY29uZmlncy9zdG0zMm1wMS5o
+IGluZGV4DQo5ODg5OTJiMzM2Li5jYWRjMDM1OGZkIDEwMDY0NA0KLS0tIGEvaW5jbHVkZS9jb25m
+aWdzL3N0bTMybXAxLmgNCisrKyBiL2luY2x1ZGUvY29uZmlncy9zdG0zMm1wMS5oDQpAQCAtMTE1
+LDcgKzExNSw2IEBADQogICAgICAgICJpZiB0ZXN0ICR7Ym9vdF9kZXZpY2V9ID0gc2VyaWFsIHx8
+IHRlc3QgJHtib290X2RldmljZX0gPSB1c2I7IiBcDQogICAgICAgICJ0aGVuIHN0bTMycHJvZyAk
+e2Jvb3RfZGV2aWNlfSAke2Jvb3RfaW5zdGFuY2V9OyAiIFwNCiAgICAgICAgImVsc2UgIiBcDQot
+ICAgICAgICAgICAgICAgInJ1biBlbnZfY2hlY2s7IiBcDQogICAgICAgICAgICAgICAgImlmIHRl
+c3QgJHtib290X2RldmljZX0gPSBtbWM7IiBcDQogICAgICAgICAgICAgICAgInRoZW4gZW52IHNl
+dCBib290X3RhcmdldHMgXCJtbWMke2Jvb3RfaW5zdGFuY2V9XCI7IGZpOyIgXA0KICAgICAgICAg
+ICAgICAgICJpZiB0ZXN0ICR7Ym9vdF9kZXZpY2V9ID0gbmFuZDsiIFwNCkBAIC0xNjAsNiArMTU5
+LDcgQEANCiAgICAgICAgImluaXRyZF9oaWdoPTB4ZmZmZmZmZmZcMCIgXA0KICAgICAgICAiYWx0
+Ym9vdGNtZD1ydW4gYm9vdGNtZFwwIiBcDQogICAgICAgICJlbnZfZGVmYXVsdD0xXDAiIFwNCisg
+ICAgICAgInJ1biBlbnZfY2hlY2s7IiBcDQoNCg0KDQpJdCBpcyBub3QgYSBjb3JyZWN0IHBsYWNl
+LCB0aGlzIGRlZmluZSBDT05GSUdfRVhUUkFfRU5WX1NFVFRJTkdTIG9ubHkgdGhlIGRlZmF1bHQg
+ZW52aXJvbm1lbnQgKG9ubHkgc2V0IGVudiB2YXJpYWJsZSkuDQpPbmx5ICJib290Y21kIiAgb3Ig
+InByZWJvb3QiIGlzIHJlYWxseSBleGVjdXRlZCwgdGhpcyBjb21tYW5kIHdpbGwgYmUgbmV2ZXIg
+ZXhlY3V0ZWQgaGVyZS4NCg0KDQoNCiAgICAgICAgImVudl9jaGVjaz1pZiB0ZXN0ICRlbnZfZGVm
+YXVsdCAtZXEgMTsiXA0KICAgICAgICAgICAgICAgICIgdGhlbiBlbnYgc2V0IGVudl9kZWZhdWx0
+IDA7ZW52IHNhdmU7ZmlcMCIgXA0KICAgICAgICBTVE0zMk1QX0JPT1RDTUQgXA0KLS0NCg0KDQoN
+CkNhbiB5b3UgZXhwbGFpbiB5b3UgaXNzdWUgYW5kIHRoZSBib2FyZCB1c2VkLg0KDQpUaGUgcHJv
+YmxlbSB3aGljaCBJJ3ZlIGVuY291bnRlcmVkIGlzIHRoYXQgSSdtIG5vdCBhYmxlIHRvIGJvb3Qg
+bXkgcm9vdGZzIHBhcnRpdGlvbiBwcm9wZXJseSB1c2luZyB0aGUgbGF0ZXN0IFUtQm9vdCB2ZXJz
+aW9uICgyMDE5LjEwKSB1c2luZyBzdG0zMm1wMTU3Yy1kazIgYm9hcmQgKEkndmUgYmVlbiBnZXR0
+aW5nIGtlcm5lbCBwYW5pYyBiZWNhdXNlIGl0IHdhc24ndCBhYmxlIHRvIG1vdW50IHBhcnRpdGlv
+bikuIE9uIHRoZSBwcmV2aW91cyB2ZXJzaW9uICgyMDE5LjA3KSB0aGVyZSBpcyBubyBhbnkgcHJv
+YmxlbXMgd2l0aCB0aGF0LiBJJ3ZlIHVzZWQgZ2l0IGJpc2VjdCB0byBjaGVjayB3aGljaCBjb21t
+aXQgY2F1c2VzIHRoZSBwcm9ibGVtIGFuZCBpdCB0dXJuZWQgb3V0IHRoYXQgdGhlIHByb2JsZW0g
+aXMgd2l0aCBjb21taXQgMjJiZWQ3ZWU0OTg4YWFkZmFlZjBjMGRhOTc0NmJmODU0MTU0OWVkNC4N
+Cg0KDQoNCkkgdGhpbmsgeW91ciBwYXRjaCBvbmx5IG1hc2sgdGhlIGlzc3VlLCBhcyBlbnZpcm9u
+bWVudCBpcyBub3Qgc2F2ZWQsIFUtQm9vdCBuZXZlciB3cml0ZSBpbiBFWFQ0IGZpbGUgc3lzdGVt
+Lg0KWW91IHNob3VsZCBoYXZlIGFnYWluIHRoZSBpc3N1ZSBpZiB5b3UgZXhlY3V0ZSBtYW51YWxs
+eSBieSB0aGUgY29tbWFuZCAiZW52IHNhdmUiLg0KDQpIbW0sIGl0IG1ha2VzIHNlbnNlLg0KDQoN
+Cg0KVG9kYXkgSSBoYXZlIG5vIGlzc3VlIG9uIG15IHNpZGUgd2l0aCBlbnZpcm9ubWVudCBpbiBl
+eHQ0IGZpbGUgc3lzdGVtIChnZW5lcmF0ZWQgYnkgZG9ud3N0cmVhbiB5b2N0byk7DQp0aGUgcmVx
+dWVzdHMgZG9uZSBieSBVLUJvb3QgYXJlIGFjY2VwdGFibGUgaWYgdGhlIGV4dDQgZmlsZSBzeXN0
+ZW0gaXMgZ2VuZXJhdGVkIHdpdGggb25seSB0aGUgZmVhdHVyZXMgc3VwcG9ydGVkIGJ5IFUtQm9v
+dC4NCg0KSSB1c2UgYnVpbGRyb290IGFuZCBpZiB5b3Ugd2FubmEgeW91IGNhbiBidWlsZCBhbmQg
+Y2hlY2sgdGhhdCBpbWFnZSB5b3Vyc2VsZi4gSGVyZSBpcyBhIGxpbmsgdG8gZ3VpZGUgaHR0cHM6
+Ly9naXRodWIuY29tL2J1aWxkcm9vdC9idWlsZHJvb3QvdHJlZS9tYXN0ZXIvYm9hcmQvc3RtaWNy
+b2VsZWN0cm9uaWNzL3N0bTMybXAxNTdjLWRrMiBidXQgcmVtZW1iZXIgdG8gY29tbWVudCB0aGlz
+IGxpbmUgLT4gQlIyX0dMT0JBTF9QQVRDSF9ESVI9ImJvYXJkL3N0bWljcm9lbGVjdHJvbmljcy9z
+dG0zMm1wMTU3Yy1kazIvcGF0Y2hlcyIgaW4gc3RtMzJtcDE1N2NfZGsyX2RlZmNvbmZpZyBmaWxl
+IHRvIGRpc2FibGUgbXkgZmF1bHR5IHBhdGNoLg0KDQoNCg0KQnV0IHdlIHNvbHZlZCBpc3N1ZSB3
+aXRoIGxhdGVzdCBleHQ0IHRvb2xzOyBzaW5jZSBlMmZzcHJvZ3MgMS40MyBhdCBsZWFzdCwgd2Ug
+aGF2ZSBhc2NlbmRhbmNlIGluY29tcGF0aWJpbGl0eSBhcyBuZXcgZW5hYmxlIGZlYXR1cmVzIGFy
+ZSBlbmFibGUgYnkgZGVmYXVsdCA9IG1ldGFkYXRhX2NzdW0gYW5kIGRpcl9pbmRleC4NCg0KV2Ug
+cmVtb3ZlIHRoZW0gd2l0aCB0aGUgbWtmcy5leHQ0IG9wdGlvbjogLU8gXm1ldGFkYXRhX2NzdW0s
+XmRpcl9pbmRleA0KDQpFeGFtcGxlIDogbWtmcy5leHQ0IC1MIHJvb3RmcyAtTyBebWV0YWRhdGFf
+Y3N1bSxeZGlyX2luZGV4IC9kZXYvc2RiNA0KDQpJJ2xsIGNoZWNrIHRoYXQgYW5kIGxldCB5b3Ug
+a25vdyBhYm91dCB0aGUgcmVzdWx0cy4NCg0KDQoNCkZvciBkZXRhaWxzIG9mIHJlc3RyaWN0aW9u
+LCBzZWUgY29tbWl0IDEwYTdhMWI4IDogdXBkYXRlIHdpdGggaGFzaCB0cmVlIGRpcmVjdG9yeSBv
+ZiBFWFQ0IG5vdCBzdXBwb3J0IGJ5IFUtQm9vdCAoRVhUNF9JTkRFWF9GTCkNCg0KVGhhbmtzDQoN
+Cg0KDQpCZXN0IHJlZ2FyZHMNCg0KUGF0cmljaw0KDQoNCg0KDQpCZXN0DQpCYXJ0ZWsNCg==
 
-So the API can evaluate without add new ops for each new parameter... 
-It is clearly better.
+--_000_VI1PR05MB4733AE3FCD54F3BC723AD9CBF77C0VI1PR05MB4733eurp_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <5E9BC0DD0C99D444A9C6560657966CA3@eurprd05.prod.outlook.com>
+Content-Transfer-Encoding: base64
 
-I will think about and try to propose something without break nothing.
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5Pg0KPHA+SGVsbG8gUGF0
+cmljayw8L3A+DQo8cD5zb3JyeSBmb3IgdGhlIGxhdGUgYW5zd2VyIGJ1dCBJJ2xsIHRyeSB0byBl
+eHBsYWluIHlvdSBteSBpc3N1ZS48YnI+DQo8L3A+DQo8ZGl2IGNsYXNzPSJtb3otY2l0ZS1wcmVm
+aXgiPk9uIDEwLzI5LzE5IDk6MzggQU0sIFBhdHJpY2sgREVMQVVOQVkgd3JvdGU6PGJyPg0KPC9k
+aXY+DQo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJtaWQ6Yjg4MTAzOTE3Njg1NDQ4ZmIx
+OTNlZWY2Y2MzODc3Y2NAU0ZIREFHNk5PREUzLnN0LmNvbSI+DQo8cHJlIGNsYXNzPSJtb3otcXVv
+dGUtcHJlIiB3cmFwPSIiPkhpIEJhcnRvc3osDQoNClBsZWFzZSBhZCBnZXQgbWFpbnRhaW5lcnMg
+b3IgdG9vbHMvcGF0bWFuIHRvIHNlbnQgcGF0Y2ggZm9yIHN0bTMybXAxIHBsYXRmb3JtLjwvcHJl
+Pg0KPC9ibG9ja3F1b3RlPg0KT2ssIEknbGwgcmVtZW1iZXIgYWJvdXQgdGhhdC48YnI+DQo8Ymxv
+Y2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJtaWQ6Yjg4MTAzOTE3Njg1NDQ4ZmIxOTNlZWY2Y2Mz
+ODc3Y2NAU0ZIREFHNk5PREUzLnN0LmNvbSI+DQo8cHJlIGNsYXNzPSJtb3otcXVvdGUtcHJlIiB3
+cmFwPSIiPg0KDQo8L3ByZT4NCjxibG9ja3F1b3RlIHR5cGU9ImNpdGUiPg0KPHByZSBjbGFzcz0i
+bW96LXF1b3RlLXByZSIgd3JhcD0iIj5Gcm9tOiBVLUJvb3QgPGEgY2xhc3M9Im1vei10eHQtbGlu
+ay1yZmMyMzk2RSIgaHJlZj0ibWFpbHRvOnUtYm9vdC1ib3VuY2VzQGxpc3RzLmRlbnguZGUiPiZs
+dDt1LWJvb3QtYm91bmNlc0BsaXN0cy5kZW54LmRlJmd0OzwvYT4gT24gQmVoYWxmIE9mIEJhcnRv
+c3ogQmlsYXMNClNlbnQ6IGRpbWFuY2hlIDI3IG9jdG9icmUgMjAxOSAxNTo0Ng0KVG86IDxhIGNs
+YXNzPSJtb3otdHh0LWxpbmstYWJicmV2aWF0ZWQiIGhyZWY9Im1haWx0bzp1LWJvb3RAbGlzdHMu
+ZGVueC5kZSI+dS1ib290QGxpc3RzLmRlbnguZGU8L2E+DQpTdWJqZWN0OiBbVS1Cb290XSBbUEFU
+Q0hdIHN0bTMybXAxOiBjb25maWdzOiBmaXggY2hlY2tpbmcgdGhlIHByZXNlbmNlIG9mIGFuDQpl
+bnZpcm9ubWVudA0KDQpFeGVjdXRlIGVudiBjaGVjayBjb21tYW5kIHdpdGhpbiBleHRyYSBlbnYg
+c2V0dGluZ3Mgc2VjdGlvbiBpbnN0ZWFkIG9mIGJvb3RjbWQNCndoZXJlYnkgd2UgYXJlIGFibGUg
+dG8gbW91bnQgcm9vdGZzIHBhcnRpdGlvbiBmcm9tIHNkIGNhcmQgcHJvcGVybHkuDQoNClNpZ25l
+ZC1vZmYtYnk6IEJhcnRvc3ogQmlsYXMgPGEgY2xhc3M9Im1vei10eHQtbGluay1yZmMyMzk2RSIg
+aHJlZj0ibWFpbHRvOmJhcnRvc3ouYmlsYXNAaG90bWFpbC5jb20iPiZsdDtiYXJ0b3N6LmJpbGFz
+QGhvdG1haWwuY29tJmd0OzwvYT4NCi0tLQ0KIGluY2x1ZGUvY29uZmlncy9zdG0zMm1wMS5oIHwg
+MiAmIzQzOy0NCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oJiM0MzspLCAxIGRlbGV0aW9u
+KC0pDQoNCmRpZmYgLS1naXQgYS9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDEuaCBiL2luY2x1ZGUv
+Y29uZmlncy9zdG0zMm1wMS5oIGluZGV4DQo5ODg5OTJiMzM2Li5jYWRjMDM1OGZkIDEwMDY0NA0K
+LS0tIGEvaW5jbHVkZS9jb25maWdzL3N0bTMybXAxLmgNCiYjNDM7JiM0MzsmIzQzOyBiL2luY2x1
+ZGUvY29uZmlncy9zdG0zMm1wMS5oDQpAQCAtMTE1LDcgJiM0MzsxMTUsNiBAQA0KIAkmcXVvdDtp
+ZiB0ZXN0ICR7Ym9vdF9kZXZpY2V9ID0gc2VyaWFsIHx8IHRlc3QgJHtib290X2RldmljZX0gPSB1
+c2I7JnF1b3Q7IFwNCiAJJnF1b3Q7dGhlbiBzdG0zMnByb2cgJHtib290X2RldmljZX0gJHtib290
+X2luc3RhbmNlfTsgJnF1b3Q7IFwNCiAJJnF1b3Q7ZWxzZSAmcXVvdDsgXA0KLQkJJnF1b3Q7cnVu
+IGVudl9jaGVjazsmcXVvdDsgXA0KIAkJJnF1b3Q7aWYgdGVzdCAke2Jvb3RfZGV2aWNlfSA9IG1t
+YzsmcXVvdDsgXA0KIAkJJnF1b3Q7dGhlbiBlbnYgc2V0IGJvb3RfdGFyZ2V0cyBcJnF1b3Q7bW1j
+JHtib290X2luc3RhbmNlfVwmcXVvdDs7IGZpOyZxdW90OyBcDQogCQkmcXVvdDtpZiB0ZXN0ICR7
+Ym9vdF9kZXZpY2V9ID0gbmFuZDsmcXVvdDsgXA0KQEAgLTE2MCw2ICYjNDM7MTU5LDcgQEANCiAJ
+JnF1b3Q7aW5pdHJkX2hpZ2g9MHhmZmZmZmZmZlwwJnF1b3Q7IFwNCiAJJnF1b3Q7YWx0Ym9vdGNt
+ZD1ydW4gYm9vdGNtZFwwJnF1b3Q7IFwNCiAJJnF1b3Q7ZW52X2RlZmF1bHQ9MVwwJnF1b3Q7IFwN
+CiYjNDM7CSZxdW90O3J1biBlbnZfY2hlY2s7JnF1b3Q7IFwNCjwvcHJlPg0KPC9ibG9ja3F1b3Rl
+Pg0KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj4NCkl0IGlzIG5vdCBhIGNvcnJl
+Y3QgcGxhY2UsIHRoaXMgZGVmaW5lIENPTkZJR19FWFRSQV9FTlZfU0VUVElOR1Mgb25seSB0aGUg
+ZGVmYXVsdCBlbnZpcm9ubWVudCAob25seSBzZXQgZW52IHZhcmlhYmxlKS4NCk9ubHkgJnF1b3Q7
+Ym9vdGNtZCZxdW90OyAgb3IgJnF1b3Q7cHJlYm9vdCZxdW90OyBpcyByZWFsbHkgZXhlY3V0ZWQs
+IHRoaXMgY29tbWFuZCB3aWxsIGJlIG5ldmVyIGV4ZWN1dGVkIGhlcmUuDQoNCjwvcHJlPg0KPGJs
+b2NrcXVvdGUgdHlwZT0iY2l0ZSI+DQo8cHJlIGNsYXNzPSJtb3otcXVvdGUtcHJlIiB3cmFwPSIi
+PiAJJnF1b3Q7ZW52X2NoZWNrPWlmIHRlc3QgJGVudl9kZWZhdWx0IC1lcSAxOyZxdW90O1wNCiAJ
+CSZxdW90OyB0aGVuIGVudiBzZXQgZW52X2RlZmF1bHQgMDtlbnYgc2F2ZTtmaVwwJnF1b3Q7IFwN
+CiAJU1RNMzJNUF9CT09UQ01EIFwNCi0tDQo8L3ByZT4NCjwvYmxvY2txdW90ZT4NCjxwcmUgY2xh
+c3M9Im1vei1xdW90ZS1wcmUiIHdyYXA9IiI+DQpDYW4geW91IGV4cGxhaW4geW91IGlzc3VlIGFu
+ZCB0aGUgYm9hcmQgdXNlZC48L3ByZT4NCjwvYmxvY2txdW90ZT4NClRoZSBwcm9ibGVtIHdoaWNo
+IEkndmUgPHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoMjksIDI4LCAyOSk7DQogICAgICBmb250LWZh
+bWlseTogU2xhY2stTGF0bywgYXBwbGVMb2dvLCBzYW5zLXNlcmlmOyBmb250LXNpemU6IDE1cHg7
+DQogICAgICBmb250LXN0eWxlOiBub3JtYWw7IGZvbnQtdmFyaWFudC1saWdhdHVyZXM6IGNvbW1v
+bi1saWdhdHVyZXM7DQogICAgICBmb250LXZhcmlhbnQtY2Fwczogbm9ybWFsOyBmb250LXdlaWdo
+dDogNDAwOyBsZXR0ZXItc3BhY2luZzoNCiAgICAgIG5vcm1hbDsgb3JwaGFuczogMjsgdGV4dC1h
+bGlnbjogbGVmdDsgdGV4dC1pbmRlbnQ6IDBweDsNCiAgICAgIHRleHQtdHJhbnNmb3JtOiBub25l
+OyB3aGl0ZS1zcGFjZTogbm9ybWFsOyB3aWRvd3M6IDI7DQogICAgICB3b3JkLXNwYWNpbmc6IDBw
+eDsgLXdlYmtpdC10ZXh0LXN0cm9rZS13aWR0aDogMHB4Ow0KICAgICAgYmFja2dyb3VuZC1jb2xv
+cjogcmdiKDI1NSwgMjU1LCAyNTUpOyB0ZXh0LWRlY29yYXRpb24tc3R5bGU6DQogICAgICBpbml0
+aWFsOyB0ZXh0LWRlY29yYXRpb24tY29sb3I6IGluaXRpYWw7IGRpc3BsYXk6IGlubGluZQ0KICAg
+ICAgIWltcG9ydGFudDsgZmxvYXQ6IG5vbmU7Ij4NCmVuY291bnRlcmVkPC9zcGFuPiBpcyB0aGF0
+IEknbSBub3QgYWJsZSB0byBib290IG15IHJvb3RmcyBwYXJ0aXRpb24gcHJvcGVybHkgdXNpbmcg
+dGhlIGxhdGVzdCBVLUJvb3QgdmVyc2lvbiAoMjAxOS4xMCkgdXNpbmcgc3RtMzJtcDE1N2MtZGsy
+IGJvYXJkIChJJ3ZlIGJlZW4gZ2V0dGluZyBrZXJuZWwgcGFuaWMgYmVjYXVzZSBpdCB3YXNuJ3Qg
+YWJsZSB0byBtb3VudCBwYXJ0aXRpb24pLiBPbiB0aGUgcHJldmlvdXMgdmVyc2lvbiAoMjAxOS4w
+NykNCiB0aGVyZSBpcyBubyBhbnkgcHJvYmxlbXMgd2l0aCB0aGF0LiBJJ3ZlIHVzZWQgZ2l0IGJp
+c2VjdCB0byBjaGVjayB3aGljaCBjb21taXQgY2F1c2VzIHRoZSBwcm9ibGVtIGFuZCBpdCB0dXJu
+ZWQgb3V0IHRoYXQgdGhlIHByb2JsZW0gaXMgd2l0aCBjb21taXQNCjxzcGFuIGNsYXNzPSJzaGEt
+YmxvY2siPjxzcGFuIGNsYXNzPSJzaGEgdXNlci1zZWxlY3QtY29udGFpbiI+MjJiZWQ3ZWU0OTg4
+YWFkZmFlZjBjMGRhOTc0NmJmODU0MTU0OWVkNC48L3NwYW4+PC9zcGFuPg0KPGJsb2NrcXVvdGUg
+dHlwZT0iY2l0ZSIgY2l0ZT0ibWlkOmI4ODEwMzkxNzY4NTQ0OGZiMTkzZWVmNmNjMzg3N2NjQFNG
+SERBRzZOT0RFMy5zdC5jb20iPg0KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj4N
+Cg0KSSB0aGluayB5b3VyIHBhdGNoIG9ubHkgbWFzayB0aGUgaXNzdWUsIGFzIGVudmlyb25tZW50
+IGlzIG5vdCBzYXZlZCwgVS1Cb290IG5ldmVyIHdyaXRlIGluIEVYVDQgZmlsZSBzeXN0ZW0uDQpZ
+b3Ugc2hvdWxkIGhhdmUgYWdhaW4gdGhlIGlzc3VlIGlmIHlvdSBleGVjdXRlIG1hbnVhbGx5IGJ5
+IHRoZSBjb21tYW5kICZxdW90O2VudiBzYXZlJnF1b3Q7LjwvcHJlPg0KPC9ibG9ja3F1b3RlPg0K
+SG1tLCBpdCBtYWtlcyBzZW5zZS48YnI+DQo8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJt
+aWQ6Yjg4MTAzOTE3Njg1NDQ4ZmIxOTNlZWY2Y2MzODc3Y2NAU0ZIREFHNk5PREUzLnN0LmNvbSI+
+DQo8cHJlIGNsYXNzPSJtb3otcXVvdGUtcHJlIiB3cmFwPSIiPg0KDQpUb2RheSBJIGhhdmUgbm8g
+aXNzdWUgb24gbXkgc2lkZSB3aXRoIGVudmlyb25tZW50IGluIGV4dDQgZmlsZSBzeXN0ZW0gKGdl
+bmVyYXRlZCBieSBkb253c3RyZWFuIHlvY3RvKTsgDQp0aGUgcmVxdWVzdHMgZG9uZSBieSBVLUJv
+b3QgYXJlIGFjY2VwdGFibGUgaWYgdGhlIGV4dDQgZmlsZSBzeXN0ZW0gaXMgZ2VuZXJhdGVkIHdp
+dGggb25seSB0aGUgZmVhdHVyZXMgc3VwcG9ydGVkIGJ5IFUtQm9vdC48L3ByZT4NCjwvYmxvY2tx
+dW90ZT4NCkkgdXNlIGJ1aWxkcm9vdCBhbmQgaWYgeW91IHdhbm5hIHlvdSBjYW4gYnVpbGQgYW5k
+IGNoZWNrIHRoYXQgaW1hZ2UgeW91cnNlbGYuIEhlcmUgaXMgYSBsaW5rIHRvIGd1aWRlDQo8YSBj
+bGFzcz0ibW96LXR4dC1saW5rLWZyZWV0ZXh0IiBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vYnVp
+bGRyb290L2J1aWxkcm9vdC90cmVlL21hc3Rlci9ib2FyZC9zdG1pY3JvZWxlY3Ryb25pY3Mvc3Rt
+MzJtcDE1N2MtZGsyIj4NCmh0dHBzOi8vZ2l0aHViLmNvbS9idWlsZHJvb3QvYnVpbGRyb290L3Ry
+ZWUvbWFzdGVyL2JvYXJkL3N0bWljcm9lbGVjdHJvbmljcy9zdG0zMm1wMTU3Yy1kazI8L2E+IGJ1
+dCByZW1lbWJlciB0byBjb21tZW50IHRoaXMgbGluZSAtJmd0OyBCUjJfR0xPQkFMX1BBVENIX0RJ
+Uj0mcXVvdDtib2FyZC9zdG1pY3JvZWxlY3Ryb25pY3Mvc3RtMzJtcDE1N2MtZGsyL3BhdGNoZXMm
+cXVvdDsgaW4gc3RtMzJtcDE1N2NfZGsyX2RlZmNvbmZpZyBmaWxlIHRvIGRpc2FibGUgbXkgZmF1
+bHR5DQogcGF0Y2guPGJyPg0KPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2l0ZT0ibWlkOmI4ODEw
+MzkxNzY4NTQ0OGZiMTkzZWVmNmNjMzg3N2NjQFNGSERBRzZOT0RFMy5zdC5jb20iPg0KPHByZSBj
+bGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj4NCg0KQnV0IHdlIHNvbHZlZCBpc3N1ZSB3aXRo
+IGxhdGVzdCBleHQ0IHRvb2xzOyBzaW5jZSBlMmZzcHJvZ3MgMS40MyBhdCBsZWFzdCwgd2UgaGF2
+ZSBhc2NlbmRhbmNlIGluY29tcGF0aWJpbGl0eSBhcyBuZXcgZW5hYmxlIGZlYXR1cmVzIGFyZSBl
+bmFibGUgYnkgZGVmYXVsdCA9IG1ldGFkYXRhX2NzdW0gYW5kIGRpcl9pbmRleC4NCg0KV2UgcmVt
+b3ZlIHRoZW0gd2l0aCB0aGUgbWtmcy5leHQ0IG9wdGlvbjogLU8gXm1ldGFkYXRhX2NzdW0sXmRp
+cl9pbmRleA0KDQpFeGFtcGxlIDogbWtmcy5leHQ0IC1MIHJvb3RmcyAtTyBebWV0YWRhdGFfY3N1
+bSxeZGlyX2luZGV4IC9kZXYvc2RiNDwvcHJlPg0KPC9ibG9ja3F1b3RlPg0KSSdsbCBjaGVjayB0
+aGF0IGFuZCBsZXQgeW91IGtub3cgYWJvdXQgdGhlIHJlc3VsdHMuPGJyPg0KPGJsb2NrcXVvdGUg
+dHlwZT0iY2l0ZSIgY2l0ZT0ibWlkOmI4ODEwMzkxNzY4NTQ0OGZiMTkzZWVmNmNjMzg3N2NjQFNG
+SERBRzZOT0RFMy5zdC5jb20iPg0KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3JhcD0iIj4N
+Cg0KRm9yIGRldGFpbHMgb2YgcmVzdHJpY3Rpb24sIHNlZSBjb21taXQgMTBhN2ExYjggOiB1cGRh
+dGUgd2l0aCBoYXNoIHRyZWUgZGlyZWN0b3J5IG9mIEVYVDQgbm90IHN1cHBvcnQgYnkgVS1Cb290
+IChFWFQ0X0lOREVYX0ZMKTwvcHJlPg0KPC9ibG9ja3F1b3RlPg0KVGhhbmtzPGJyPg0KPGJsb2Nr
+cXVvdGUgdHlwZT0iY2l0ZSIgY2l0ZT0ibWlkOmI4ODEwMzkxNzY4NTQ0OGZiMTkzZWVmNmNjMzg3
+N2NjQFNGSERBRzZOT0RFMy5zdC5jb20iPg0KPHByZSBjbGFzcz0ibW96LXF1b3RlLXByZSIgd3Jh
+cD0iIj4NCg0KQmVzdCByZWdhcmRzDQoNClBhdHJpY2sNCg0KDQo8L3ByZT4NCjwvYmxvY2txdW90
+ZT4NCkJlc3Q8YnI+DQpCYXJ0ZWs8YnI+DQo8L2JvZHk+DQo8L2h0bWw+DQo=
 
-> Also we should update the sandbox driver to include tests for new methods. It
-> looks like you have done pinctrl but not this?
+--_000_VI1PR05MB4733AE3FCD54F3BC723AD9CBF77C0VI1PR05MB4733eurp_--
 
-I think test are done in 
-[PATCH 12/13] test: dm: update test for pins configuration in gpio
-- dm_test_gpio_pin_config
+--===============3700250614076706777==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Do think about other tests ?
-
-> Regards,
-> Simon
-
-Regards
-
-Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3700250614076706777==--

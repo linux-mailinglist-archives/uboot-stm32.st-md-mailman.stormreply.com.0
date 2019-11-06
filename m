@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0758F1D18
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 19:03:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B854F1D7D
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 19:27:40 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A9E6C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 18:03:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A3F5C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 18:27:40 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 51DF0C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E4E81C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  6 Nov 2019 18:03:26 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xA6I2HAB027587; Wed, 6 Nov 2019 19:03:24 +0100
+ Wed,  6 Nov 2019 18:27:37 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xA6IRWlP028661; Wed, 6 Nov 2019 19:27:35 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=DSHJ83FG6xmRkrlzVVM+5TmTDYHVUbAb3QnWSKaZNYk=;
- b=nSiyN27xq2q1nWtWUQ8Ss1aJzibW6vRlhuX+sY/GfqzDi53l4uHakufVadiC9K24wMfh
- X/zD9vf771zLQ/3PAiKZZkZDK1NZeRrCE1FUl4JWiETYb8mt0LFSFZZeI2hjJLxWsjwE
- MKZscJ+Hh7RCy7yGeDB1q/rB9jfPC8EJLhDnsNJPS6jAxbhp1yss62EKodqvKRvMA1Bz
- gC0ZORx4V3q2IPQlzJ2poOnct3MondWtq34XKyWybiYR74srAht4aE/sy43ovoKRmJf8
- BXgM4wGWN8VqXMK6A/Y/BnboS/RlRfpEMOrYZ+OH5OVbovs1Ptr0JyKn0iM195p3JRTi uA== 
+ bh=fyL0p4MCsTZBL7RC2kxYfLxhaJPo6WCNyrKTo7tyZug=;
+ b=AMx1p4j+OS7dP5hxA7HU1dFTCKk/Z8vqS7Tcm6NQHOOAhvuja7C3M6o2olqYsEHR686J
+ NJmB18JYPKfnI9rb5BUKkN+legfKY8usMj45J7FnO22Tf+OuuvpqTo2ICJUgrg7t0qTV
+ XDLXyJvgappsfvbRLV8MWu4hZVeZMnAsvTapLYtquMTNHnBupYQdaHB/6kkbzQS1QB4t
+ ZKhrvOLtqnLyZC/JY5U/qN/VnXTJsB2ZCg6ghPao92Hifa1NgE9TqzZnq55ndxwoygaF
+ EkL0S/WthX2HKvMAIsMMgOD4/7OEZaBLwOMUdxuP5ADhe1/O4CzqfVXYt4iXpVCKDdKZ 3g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2w41vgrbuq-1
+ by mx07-00178001.pphosted.com with ESMTP id 2w41vcrejw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 06 Nov 2019 19:03:24 +0100
+ Wed, 06 Nov 2019 19:27:35 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 41177100034;
- Wed,  6 Nov 2019 19:03:24 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2EFEF2AF078;
- Wed,  6 Nov 2019 19:03:24 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 6 Nov
- 2019 19:03:23 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ADCD010002A;
+ Wed,  6 Nov 2019 19:27:34 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7A5CE2AD359;
+ Wed,  6 Nov 2019 19:27:34 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 6 Nov
+ 2019 19:27:34 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 6 Nov 2019 19:03:23 +0100
+ 15.00.1473.003; Wed, 6 Nov 2019 19:27:33 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [RESEND PATCH 2/5] usb: host: dwc2: add support for clk
-Thread-Index: AQHVgmV3xQpodwOrUEWXov0EadTepKdap8kAgCPoNZA=
-Date: Wed, 6 Nov 2019 18:03:23 +0000
-Message-ID: <fd4aa0d388ed49269628a7f8cc9a75d0@SFHDAG6NODE3.st.com>
+Thread-Topic: [RESEND PATCH 3/5] usb: host: dwc2: force reset assert
+Thread-Index: AQHVgmV5BbJGpxxSmEyHBRf487JJQKdaqEKAgCPr9ZA=
+Date: Wed, 6 Nov 2019 18:27:33 +0000
+Message-ID: <3e13407a0c24443fb5325318de75e357@SFHDAG6NODE3.st.com>
 References: <20191014080025.11245-1-patrick.delaunay@st.com>
- <20191014080025.11245-3-patrick.delaunay@st.com>
- <77804378-5ea1-4b37-cb54-8fce77351d9b@denx.de>
-In-Reply-To: <77804378-5ea1-4b37-cb54-8fce77351d9b@denx.de>
+ <20191014080025.11245-4-patrick.delaunay@st.com>
+ <d4a847ac-b675-6a85-4320-c4f3800c18b1@denx.de>
+In-Reply-To: <d4a847ac-b675-6a85-4320-c4f3800c18b1@denx.de>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -64,8 +64,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-11-06_06:2019-11-06,2019-11-06 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
-Subject: Re: [Uboot-stm32] [RESEND PATCH 2/5] usb: host: dwc2: add support
-	for clk
+Subject: Re: [Uboot-stm32] [RESEND PATCH 3/5] usb: host: dwc2: force reset
+	assert
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,55 +82,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Marek,
+Hi,
 
 > From: Marek Vasut <marex@denx.de>
-> Sent: mardi 15 octobre 2019 01:28
+> Sent: mardi 15 octobre 2019 01:30
 > 
 > On 10/14/19 10:00 AM, Patrick Delaunay wrote:
-> > Add support for clock with driver model.
-> >
+> > Assert reset before deassert in dwc2_reset; It should be more safe for
+> > DWC2.
 > 
-> Same question as with the PHY -- is there now a mandatory dependency on the
-> DM CLK ?
+> Can you be more descriptive about this issue ? I have no idea what this patch does
+> or fixes from the description.
 
-No I don't think.
+Yes
 
-Because the clk function are also stubbed in ./include/clk.h
-CONFIG_IS_ENABLED(CLK)
+I will explain it in V2 commit message.
 
-But I don't 100% sure as I don't tested it on one platform without DM_CLK...
+The issue only occurs if the DWC2 OTG device switch between gadget mode 
+and host mode.
+
+For example: 
+some registers initialiaze by the command "ums" (device mode is forced for example),
+cause problem for the next command "usb start" and vice versa.
+
+Even the existing  software reset in dwc_otg_core_reset is not enough;
+the added hardware reset solve all the issues.
  
-> [...]
-> 
-> > @@ -1403,6 +1429,7 @@ static int dwc2_usb_remove(struct udevice *dev)
-> >  	dwc2_uninit_common(priv->regs);
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
 > >
-> >  	reset_release_bulk(&priv->resets);
-> > +	clk_release_bulk(&priv->clks);
+> >  drivers/usb/host/dwc2.c | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c index
+> > 51023b0c2c..3086411fc4 100644
+> > --- a/drivers/usb/host/dwc2.c
+> > +++ b/drivers/usb/host/dwc2.c
+> > @@ -1149,6 +1149,8 @@ static int dwc2_reset(struct udevice *dev)
+> >  			return ret;
+> >  	}
+> >
+> > +	reset_assert_bulk(&priv->resets);
+> > +	udelay(2);
 > 
-> Shouldn't there be some clk_...disable() here ?
+> Why is there a 2 uS delay ?
 
-I don't like make clk_....disable() in U-Boot remove function because the clock
-u-class don't managed a counter for each clock user (as it is done in kernel).
+I think: no real reason to have 2 us....
 
-We have always a risk to deactivate a clock needed by a several device:
-each driver (A&B) enable a common clock with U-Boot clock function, 
-but the first clock disable (A) really deactivate the clock even it is still needed
-by the other driver (B)
+It was jus a reasonable time to be sure that the device reset is correctly
+performed, the reset signal is propagated....
 
-I use the same logical than dwc3 driver: clk_disable_bulk is not called.
+but perhaps that no delay is working...
+I can test without delay if you prefer...
 
-static int dwc3_glue_remove(struct udevice *dev)
+PS: I use the same value than DWC2 gadget driver:
+       Added by my commit c2c74f97afff
+
+static int dwc2_udc_otg_reset_init(struct udevice *dev,
+				   struct reset_ctl_bulk *resets)
 {
-	struct dwc3_glue_data *glue = dev_get_platdata(dev);
+.....
+	ret = reset_assert_bulk(resets);
 
-	reset_release_bulk(&glue->resets);
-
-	clk_release_bulk(&glue->clks);
-
-	return 0;
+	if (!ret) {
+		udelay(2);
+		ret = reset_deassert_bulk(resets);
+	}
+....
 }
+
+ 
+> >  	ret = reset_deassert_bulk(&priv->resets);
+> >  	if (ret) {
+> >  		reset_release_bulk(&priv->resets);
+> >
+> 
+> [...]
 
 Regards
 Patrick

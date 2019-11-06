@@ -2,54 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5E77F2158
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 23:05:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8803F2159
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 23:05:03 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4F48AC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 22:05:01 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A42A2C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Nov 2019 22:05:03 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 460A4C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BDB15C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  6 Nov 2019 22:05:00 +0000 (UTC)
+ Wed,  6 Nov 2019 22:05:01 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 477gZ36bQ2z1qqxn;
- Wed,  6 Nov 2019 23:04:59 +0100 (CET)
+ by mail-out.m-online.net (Postfix) with ESMTP id 477gZ536fGz1qqxy;
+ Wed,  6 Nov 2019 23:05:01 +0100 (CET)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 477gZ35VVnz1qqkB;
- Wed,  6 Nov 2019 23:04:59 +0100 (CET)
+ by mail.m-online.net (Postfix) with ESMTP id 477gZ52vqSz1qqkB;
+ Wed,  6 Nov 2019 23:05:01 +0100 (CET)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id GvQPfMy8Sg1U; Wed,  6 Nov 2019 23:04:58 +0100 (CET)
-X-Auth-Info: wvd8gSx+Lg1U+XGsy3gHYdm2d+wilx4mnL9q0qZWmCI=
+ with ESMTP id Od5459a1z0wI; Wed,  6 Nov 2019 23:05:00 +0100 (CET)
+X-Auth-Info: Tg4L2m7IDx/qBEZd2Rpn40SmUT+S8LYidhGuCVpydq0=
 Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Wed,  6 Nov 2019 23:04:58 +0100 (CET)
+ Wed,  6 Nov 2019 23:05:00 +0100 (CET)
 To: Patrick DELAUNAY <patrick.delaunay@st.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 References: <20191014080025.11245-1-patrick.delaunay@st.com>
- <20191014080025.11245-3-patrick.delaunay@st.com>
- <77804378-5ea1-4b37-cb54-8fce77351d9b@denx.de>
- <fd4aa0d388ed49269628a7f8cc9a75d0@SFHDAG6NODE3.st.com>
+ <20191014080025.11245-4-patrick.delaunay@st.com>
+ <d4a847ac-b675-6a85-4320-c4f3800c18b1@denx.de>
+ <3e13407a0c24443fb5325318de75e357@SFHDAG6NODE3.st.com>
 From: Marek Vasut <marex@denx.de>
-Message-ID: <821d870a-c2ab-7a3a-72a7-83832b35b8ab@denx.de>
-Date: Wed, 6 Nov 2019 22:59:05 +0100
+Message-ID: <5e90369b-c273-028e-ee27-bfd7249ae64e@denx.de>
+Date: Wed, 6 Nov 2019 23:00:25 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <fd4aa0d388ed49269628a7f8cc9a75d0@SFHDAG6NODE3.st.com>
+In-Reply-To: <3e13407a0c24443fb5325318de75e357@SFHDAG6NODE3.st.com>
 Content-Language: en-US
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>,
- "simon.k.r.goldschmidt@gmail.com" <simon.k.r.goldschmidt@gmail.com>,
- Sven Schwermer <sven@svenschwermer.de>, Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [RESEND PATCH 2/5] usb: host: dwc2: add support
-	for clk
+ Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
+Subject: Re: [Uboot-stm32] [RESEND PATCH 3/5] usb: host: dwc2: force reset
+	assert
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,52 +64,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 11/6/19 7:03 PM, Patrick DELAUNAY wrote:
-> Hi Marek,
+On 11/6/19 7:27 PM, Patrick DELAUNAY wrote:
+> Hi,
 
 Hi,
 
 [...]
 
->> Same question as with the PHY -- is there now a mandatory dependency on the
->> DM CLK ?
-> 
-> No I don't think.
-> 
-> Because the clk function are also stubbed in ./include/clk.h
-> CONFIG_IS_ENABLED(CLK)
-> 
-> But I don't 100% sure as I don't tested it on one platform without DM_CLK...
-
-SoCFPGA is one of those, so +CC Simon.
-
->> [...]
->>
->>> @@ -1403,6 +1429,7 @@ static int dwc2_usb_remove(struct udevice *dev)
->>>  	dwc2_uninit_common(priv->regs);
+>>> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c index
+>>> 51023b0c2c..3086411fc4 100644
+>>> --- a/drivers/usb/host/dwc2.c
+>>> +++ b/drivers/usb/host/dwc2.c
+>>> @@ -1149,6 +1149,8 @@ static int dwc2_reset(struct udevice *dev)
+>>>  			return ret;
+>>>  	}
 >>>
->>>  	reset_release_bulk(&priv->resets);
->>> +	clk_release_bulk(&priv->clks);
+>>> +	reset_assert_bulk(&priv->resets);
+>>> +	udelay(2);
 >>
->> Shouldn't there be some clk_...disable() here ?
+>> Why is there a 2 uS delay ?
 > 
-> I don't like make clk_....disable() in U-Boot remove function because the clock
-> u-class don't managed a counter for each clock user (as it is done in kernel).
+> I think: no real reason to have 2 us....
 > 
-> We have always a risk to deactivate a clock needed by a several device:
-> each driver (A&B) enable a common clock with U-Boot clock function, 
-> but the first clock disable (A) really deactivate the clock even it is still needed
-> by the other driver (B)
+> It was jus a reasonable time to be sure that the device reset is correctly
+> performed, the reset signal is propagated....
+> 
+> but perhaps that no delay is working...
+> I can test without delay if you prefer...
+> 
+> PS: I use the same value than DWC2 gadget driver:
+>        Added by my commit c2c74f97afff
 
-But if you don't disable the clock in .remove callback, the clock are
-left running and that might cause other problems.
-
-Are there such systems which share single clock enable bit between
-multiple DWC2 IPs ?
-
-> I use the same logical than dwc3 driver: clk_disable_bulk is not called.
-
-I suspect that driver might need fixing.
+Isn't there a way to poll the IP to determine whether the reset completed ?
 
 [...]
 

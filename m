@@ -2,65 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E1FAF4EAB
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 15:47:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45189F5018
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 16:46:17 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4478BC36B10
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 14:47:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF2D5C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 15:46:16 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4AFD2C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCCDAC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  8 Nov 2019 14:47:26 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xA8Eksnc003396; Fri, 8 Nov 2019 15:47:24 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=9+eZjvEbqB553s8+bComz9cYyhBWJgdveoPLq2za5a8=;
- b=qwe6hrfFnoU/5/uVY714oqo/jkMYQcylcYEj0xjRfEBhYwDM6PR36QfShuMl5ziivHj+
- JhJHTdmWfNYqAYx/iPWilWZFcivpUYI+RwCm5OnEB/qi0FrZAed8Ib95XIIzOro3f9rN
- B0S5ye8aVBe0pmQIY4ubfR5zUFpjg8os4AaQrEfRETRHOm4rYPzOUJZQCBuVtOZxuw9b
- pLdMEsi1wtC6nw5GhxaQf8HecGc/vTQH82Loh3xftQtZDvY6eJ6Db/o9fhyloxKqfYBS
- Jo+781Q5xvv7eft8ThIxt0rc4iH6ac+v/aCDzTMbdYj0A9Y8ZgvKk3aUQTob3p9QC3mY 5A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2w41vh45s9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 08 Nov 2019 15:47:24 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 31CB4100034;
- Fri,  8 Nov 2019 15:47:24 +0100 (CET)
-Received: from Webmail-eu.st.com (Safex1hubcas23.st.com [10.75.90.46])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 26A5F2BEC6E;
- Fri,  8 Nov 2019 15:47:24 +0100 (CET)
-Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by SAFEX1HUBCAS23.st.com
- (10.75.90.46) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019
- 15:47:23 +0100
-Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
- with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 15:47:23
- +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 8 Nov 2019 15:47:16 +0100
-Message-ID: <20191108154707.v2.4.I43934c501010bbca1ee5f7c7780e3999eefc425f@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191108144716.23829-1-patrick.delaunay@st.com>
-References: <20191108144716.23829-1-patrick.delaunay@st.com>
+ Fri,  8 Nov 2019 15:46:15 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 478l466WZrz1qqxs;
+ Fri,  8 Nov 2019 16:46:14 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 478l46655Gz1qqkJ;
+ Fri,  8 Nov 2019 16:46:14 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id z_1BuFstP-pm; Fri,  8 Nov 2019 16:46:13 +0100 (CET)
+X-Auth-Info: 6/V2pWuD6EIPD2gO1n1qSson49IyGB/e3mKdcudWv1Y=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Fri,  8 Nov 2019 16:46:13 +0100 (CET)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20191014080025.11245-1-patrick.delaunay@st.com>
+ <20191014080025.11245-2-patrick.delaunay@st.com>
+ <67fe66ee-4ee9-ceb4-c303-801605764bdb@denx.de>
+ <899e7f46951f4a52a9e2a6453363f210@SFHDAG6NODE3.st.com>
+ <06128aa3-a114-fb20-73c6-7a16980c8dce@denx.de>
+ <d797f1ca4c334f7fa0b44db1f5e4b744@SFHDAG6NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <131e607d-02c3-d3e9-57da-606ceadb5264@denx.de>
+Date: Fri, 8 Nov 2019 16:41:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-Originating-IP: [10.201.21.107]
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-11-08_04:2019-11-08,2019-11-08 signatures=0
-Cc: Marek Vasut <marex@denx.de>, simon.k.r.goldschmidt@gmail.com,
- Patrick Delaunay <patrick.delaunay@st.com>, b.galvani@gmail.com,
- Sven Schwermer <sven@svenschwermer.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>
-Subject: [Uboot-stm32] [PATCH v2 4/4] usb: host: dwc2: add trace to have
-	clean usb start
+In-Reply-To: <d797f1ca4c334f7fa0b44db1f5e4b744@SFHDAG6NODE3.st.com>
+Content-Language: en-US
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
+Subject: Re: [Uboot-stm32] [RESEND PATCH 1/5] usb: host: dwc2: add phy
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,44 +66,95 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Solve issue for the display of "usb start" command on stm32mp1
-because one carriage return is missing in DWC2 probe.
+On 11/8/19 2:25 PM, Patrick DELAUNAY wrote:
+Hi,
 
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000:    Bus usbh-ehci@5800d000:   USB EHCI 1.00
+[...]
+>>>>> +static int dwc2_shutdown_phy(struct udevice *dev) {
+>>>>> +	struct dwc2_priv *priv = dev_get_priv(dev);
+>>>>> +	int ret;
+>>>>> +
+>>>>> +	if (!generic_phy_valid(&priv->phy))
+>>>>> +		return 0;
+>>>>> +
+>>>>> +	ret = generic_phy_power_off(&priv->phy);
+>>>>> +	if (ret) {
+>>>>> +		dev_err(dev, "failed to power off usb phy\n");
+>>>>> +		return ret;
+>>>>> +	}
+>>>>> +
+>>>>> +	ret = generic_phy_exit(&priv->phy);
+>>>>> +	if (ret) {
+>>>>> +		dev_err(dev, "failed to power off usb phy\n");
+>>>>
+>>>> Shouldn't all those error prints be produced by the PHY subsystem ?
+>>>
+>>> Perhaps... but it is not done today in phy u-class (only call ops).
+>>>
+>>> I make the same level of trace than ./drivers/usb/dwc3/core.c as copy
+>>> initially the phy support from this driver.
+>>
+>> So this starts the duplication. Can you move it to the PHY subsystem instead ?
+> 
+> Yes I can, in v2 I will change dev_err to dev_dbg
+> 
+> And I will sent a other serie to change the generic phy (add printf or dev_err) 
+> and also remove the dev_err for all the caller to avoid duplicated trace.
 
-after the patch:
+Thanks
 
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000: USB DWC2
-Bus usbh-ehci@5800d000: USB EHCI 1.00
+[...]
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+>>>>> @@ -1339,6 +1398,8 @@ static int dwc2_usb_remove(struct udevice *dev)
+>>>>>  	if (ret)
+>>>>>  		return ret;
+>>>>>
+>>>>> +	dwc2_shutdown_phy(dev);
+>>>>
+>>>> This function returns a return value, but it's ignored here ?
+>>>
+>>> Yes, even if the shutdown of the USB PHY failed, the USB dwc2  driver
+>>> continues the procedure to release other ressources...
+>>
+>> How can you safely release the rest of the resources if the PHY driver didn't shut
+>> down? I suspect this might lead to some resource corruption, no?
+> 
+> Yes...and that depends of the PHY driver.
 
-Changes in v2: None
+Does it ?
 
- drivers/usb/host/dwc2.c | 2 ++
- 1 file changed, 2 insertions(+)
+> What it is better stategy:
+> - try to continue to release the resources after the first error and the next probe could works / the error is masked
+> Or
+> - stopped the release procedure => the next procedure could failed (resource not available)
 
-diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index 870b06459e..2450dff9ac 100644
---- a/drivers/usb/host/dwc2.c
-+++ b/drivers/usb/host/dwc2.c
-@@ -1217,6 +1217,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
- 	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
- 		mdelay(1000);
- 
-+	printf("USB DWC2\n");
-+
- 	return 0;
- }
- 
--- 
-2.17.1
+Stop the release procedure, because then at least the dynamically
+allocated data are still tracked by allocator and if the driver so
+decided to use them, they will still exist. If you were to release them,
+then the driver could either misbehave and/or cause memory corruption.
 
+>>> And the driver expects that the USB PHY will be available for next
+>>> request/probe (recovery with phy reset for example).
+>>>
+>>> I use the same logic than dwc3 driver in :
+>>> source/drivers/usb/dwc3/dwc3-generic.c::dwc3_generic_remove()
+>>> drivers/usb/host/xhci-dwc3.c::xhci_dwc3_remove()
+>>
+>> dwc3_shutdown_phy() only ever returns 0 though.
+> 
+> Yes, but in dwc3_shutdown_phy, the phy operation can have errors
+> and the "remove" procedure continue (even if ret is never retruned)
+> 
+> ret = generic_phy_power_off(&usb_phys[i]);
+> ret |= generic_phy_exit(&usb_phys[i]);
+> if (ret) {
+> 	pr_err("Can't shutdown USB PHY%d for %s\n", i, dev->name);
+> }
+> 
+> Anyway I will treat error in v2, it should be more clear in dw2c code.
+That doesn't sound right.
+
+[...]
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

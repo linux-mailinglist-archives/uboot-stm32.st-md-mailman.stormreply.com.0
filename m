@@ -2,72 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AD2FF4D1D
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 14:25:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E41FF4EA6
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 15:47:25 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E3316C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 13:25:37 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF6B0C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 14:47:24 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C52E8C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4F845C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  8 Nov 2019 13:25:35 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri,  8 Nov 2019 14:47:23 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xA8DOkc5006777; Fri, 8 Nov 2019 14:25:29 +0100
+ xA8EgLAK005201; Fri, 8 Nov 2019 15:47:19 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=NZms1HoaEbmiGK/3minG/+m0c4fxw2m8MXbkB4aTj7c=;
- b=aXX34bW3H5WZtR43b/bNljexJ79ZAipOMzkNOqfqX0c0Hp/kkeuEaBf6StChfGO7Hjlj
- SPjMNjT4a5I8HKdBS4zKefstCyeZZr1/NxqrpzGMgc8N4GISQbir3kfiF7zyB7oc4KO8
- mM5UJKQNw1DiO2wXTDhrGXtCZKeYwvgPPhnbDhD5a51U8h8eQgjc/QCL2JnBDGNFJKrI
- vcgZLshwc1Wqou/GO+iviSc6QZBkhzcJnFDHPborURYiZaX9U4ffFlDcpPvA4+rSHcDP
- MXL+E5xiF5SSDvakpEytYqksv2KKDKKfAxjj4GJnSQTS2TbKp/Oqmo8JYxN6Xx/wmdE8 8w== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=p6s4FU6ax6GR7han6I0EptB4qFukP37TRndaEGrh0gs=;
+ b=vbA63un+g7AwIkKSFmxsFpe0KYntl0hJ8mAMbiUHud27B9pviZPXqGdd7SNgR4J613s8
+ sgScLyiZlNr9nJfFPAnwLwBzU9Eb2J6SVoGRR8c2CPq7KxTYmiqfDhOArb8buOgxBKZC
+ xX+9hmWB9o7dXJ46sBTmpuywondew0lq0OD9pDmD3aqgqj7Uq6tdC6wNgCkaY7RqOV7s
+ mgpj2lzmnTxAeoLmvSi2vYQSU8RVGLeurtcvL5UnSx6NQntpCCXIwd5yTfi+isgVVTYC
+ 8tY4MTBVweYPAp8vr/aCsV4Puk3MJ2uxHMMVNXT5as8A4Il1L5BUQuPwiCYvN0bkcN37 bw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2w41ve3s26-1
+ by mx07-00178001.pphosted.com with ESMTP id 2w41vd43nq-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 08 Nov 2019 14:25:29 +0100
+ Fri, 08 Nov 2019 15:47:19 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E430410002A;
- Fri,  8 Nov 2019 14:25:28 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB8762BB25C;
- Fri,  8 Nov 2019 14:25:28 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 8 Nov
- 2019 14:25:28 +0100
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 8 Nov 2019 14:25:28 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [RESEND PATCH 1/5] usb: host: dwc2: add phy support
-Thread-Index: AQHVgmV2nmRa+G7B8UeLaPkBdNThMKdap14AgCPWHFCAAEbZgIACj07g
-Date: Fri, 8 Nov 2019 13:25:28 +0000
-Message-ID: <d797f1ca4c334f7fa0b44db1f5e4b744@SFHDAG6NODE3.st.com>
-References: <20191014080025.11245-1-patrick.delaunay@st.com>
- <20191014080025.11245-2-patrick.delaunay@st.com>
- <67fe66ee-4ee9-ceb4-c303-801605764bdb@denx.de>
- <899e7f46951f4a52a9e2a6453363f210@SFHDAG6NODE3.st.com>
- <06128aa3-a114-fb20-73c6-7a16980c8dce@denx.de>
-In-Reply-To: <06128aa3-a114-fb20-73c6-7a16980c8dce@denx.de>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.44]
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E474E10002A;
+ Fri,  8 Nov 2019 15:47:18 +0100 (CET)
+Received: from Webmail-eu.st.com (Safex1hubcas24.st.com [10.75.90.94])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB86E2BEC6D;
+ Fri,  8 Nov 2019 15:47:18 +0100 (CET)
+Received: from SAFEX1HUBCAS21.st.com (10.75.90.45) by Safex1hubcas24.st.com
+ (10.75.90.94) with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019
+ 15:47:18 +0100
+Received: from localhost (10.201.21.107) by Webmail-ga.st.com (10.75.90.48)
+ with Microsoft SMTP Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 15:47:18
+ +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 8 Nov 2019 15:47:12 +0100
+Message-ID: <20191108144716.23829-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.201.21.107]
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-11-08_04:2019-11-08,2019-11-08 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
-Subject: Re: [Uboot-stm32] [RESEND PATCH 1/5] usb: host: dwc2: add phy
-	support
+Cc: Marek Vasut <marex@denx.de>, simon.k.r.goldschmidt@gmail.com,
+ Patrick Delaunay <patrick.delaunay@st.com>, b.galvani@gmail.com,
+ Sven Schwermer <sven@svenschwermer.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Michal Suchanek <msuchanek@suse.de>
+Subject: [Uboot-stm32] [PATCH v2 0/4] usb: host: dwc2: use driver model for
+	PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,115 +74,95 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
 
-> From: Marek Vasut <marex@denx.de>
-> 
-> On 11/6/19 6:40 PM, Patrick DELAUNAY wrote:
-> > Hi Marek,
-> 
-> Hi,
-> 
-> [...]
-> 
-> >>> +static int dwc2_shutdown_phy(struct udevice *dev) {
-> >>> +	struct dwc2_priv *priv = dev_get_priv(dev);
-> >>> +	int ret;
-> >>> +
-> >>> +	if (!generic_phy_valid(&priv->phy))
-> >>> +		return 0;
-> >>> +
-> >>> +	ret = generic_phy_power_off(&priv->phy);
-> >>> +	if (ret) {
-> >>> +		dev_err(dev, "failed to power off usb phy\n");
-> >>> +		return ret;
-> >>> +	}
-> >>> +
-> >>> +	ret = generic_phy_exit(&priv->phy);
-> >>> +	if (ret) {
-> >>> +		dev_err(dev, "failed to power off usb phy\n");
-> >>
-> >> Shouldn't all those error prints be produced by the PHY subsystem ?
-> >
-> > Perhaps... but it is not done today in phy u-class (only call ops).
-> >
-> > I make the same level of trace than ./drivers/usb/dwc3/core.c as copy
-> > initially the phy support from this driver.
-> 
-> So this starts the duplication. Can you move it to the PHY subsystem instead ?
+In this serie I update the DWC2 host driver to use the device tree
+information and the associated PHY and CLOCK drivers when they are
+available.
 
-Yes I can, in v2 I will change dev_err to dev_dbg
+I test this serie on stm32mp157c-ev1 board, with PHY and CLK
+support
 
-And I will sent a other serie to change the generic phy (add printf or dev_err) 
-and also remove the dev_err for all the caller to avoid duplicated trace.
+The U-CLASS are provided by:
+- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
+- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
+- RESET by RCC reset driver = drivers/reset/stm32-reset.c
 
-This generic error is already done in some U-Boot uclass,
-- clock (clk_enable)
+And I activate the configuration
++CONFIG_USB_DWC2=y
 
-But sometime only the caller, the driver,  knows if it is a error or a warning,
-and it is not done for others uclass, for example:
+PS: it is not the default configuration to avoid conflict with gadget
+    driver
 
-- Reset: reset_assert/ reset_deassert reset_assert_bulk/ reset_deassert_bulk
-- Regulator: regulator_set_enable
+To solve a binding issue, I also deactivate the gadget support:
+by default only one driver is bound to theusbotg_hs node with "snps,dwc2"
+compatible, and today it is the device one (the first in the driver list).
 
-> >>> +		return ret;
-> >>
-> >> [...]
-> >>
-> >>> @@ -1339,6 +1398,8 @@ static int dwc2_usb_remove(struct udevice *dev)
-> >>>  	if (ret)
-> >>>  		return ret;
-> >>>
-> >>> +	dwc2_shutdown_phy(dev);
-> >>
-> >> This function returns a return value, but it's ignored here ?
-> >
-> > Yes, even if the shutdown of the USB PHY failed, the USB dwc2  driver
-> > continues the procedure to release other ressources...
-> 
-> How can you safely release the rest of the resources if the PHY driver didn't shut
-> down? I suspect this might lead to some resource corruption, no?
+I also need to deactivate hnp-srp support with:
 
-Yes...and that depends of the PHY driver.
+&usbotg_hs {
+	/* need to disable ONLY for HOST support */
+	hnp-srp-disable;
+};
 
-What it is better stategy:
-- try to continue to release the resources after the first error and the next probe could works / the error is masked
-Or
-- stopped the release procedure => the next procedure could failed (resource not available)
+WARNING: OTG with device or host support is not correctly handle by DWC2
+         driver (see example for dynamic OTG role in DWC3 driver).
 
-> > And the driver expects that the USB PHY will be available for next
-> > request/probe (recovery with phy reset for example).
-> >
-> > I use the same logic than dwc3 driver in :
-> > source/drivers/usb/dwc3/dwc3-generic.c::dwc3_generic_remove()
-> > drivers/usb/host/xhci-dwc3.c::xhci_dwc3_remove()
-> 
-> dwc3_shutdown_phy() only ever returns 0 though.
+The tests executed on the stm32mp157c-ev1 target:
 
-Yes, but in dwc3_shutdown_phy, the phy operation can have errors
-and the "remove" procedure continue (even if ret is never retruned)
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000: USB DWC2
+Bus usbh-ehci@5800d000: USB EHCI 1.00
+scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
+scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 2 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Mass Storage (480 Mb/s, 300mA)
+       Verbatim STORE N GO 070731C8ACD7EE97
 
-ret = generic_phy_power_off(&usb_phys[i]);
-ret |= generic_phy_exit(&usb_phys[i]);
-if (ret) {
-	pr_err("Can't shutdown USB PHY%d for %s\n", i, dev->name);
-}
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Hub (480 Mb/s, 2mA)
+    |
+    +-3  Mass Storage (480 Mb/s, 500mA)
+         Generic  USB Storage
 
-Anyway I will treat error in v2, it should be more clear in dw2c code.
+STM32MP> ls usb 0
+<DIR>       4096 .
+<DIR>       4096 ..
+<DIR>      16384 lost+found
+<DIR>       4096 record
+         1490212 xipImage
+        21058006 vmlinux
 
-+	ret= dwc2_shutdown_phy(dev);
-+	if (ret) {
-+		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n": ret);
-+		return ret;
-+	}
+STM32MP> load usb 0 0xC0000000 vmlinux
+21058006 bytes read in 10851 ms (1.9 MiB/s)
 
-> --
-> Best regards,
-> Marek Vasut
 
-Regards
+Changes in v2:
+- update dev_err
+- update commit message
+- change dev_err to dev_dbg for PHY function call
+- treat dwc2_shutdown_phy error
+- add clk_disable_bulk in dwc2_usb_remove
 
-Patrick
+Patrick Delaunay (4):
+  usb: host: dwc2: add phy support
+  usb: host: dwc2: add clk support
+  usb: host: dwc2: force reset assert
+  usb: host: dwc2: add trace to have clean usb start
+
+ drivers/usb/host/dwc2.c | 100 +++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 99 insertions(+), 1 deletion(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

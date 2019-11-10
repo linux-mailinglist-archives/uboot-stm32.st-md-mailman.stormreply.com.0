@@ -2,62 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4BABF5044
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 16:54:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC79CF6B43
+	for <lists+uboot-stm32@lfdr.de>; Sun, 10 Nov 2019 21:19:24 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 746B9C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Nov 2019 15:54:55 +0000 (UTC)
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
- [209.85.208.193])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E0F7C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Sun, 10 Nov 2019 20:19:24 +0000 (UTC)
+Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
+ [209.85.167.65])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC5F3C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A557FC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  8 Nov 2019 15:54:54 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id g3so6709751ljl.11
+ Sun, 10 Nov 2019 20:19:21 +0000 (UTC)
+Received: by mail-lf1-f65.google.com with SMTP id q5so2192922lfo.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 08 Nov 2019 07:54:54 -0800 (PST)
+ Sun, 10 Nov 2019 12:19:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NTRaZ4nxSZJBqgIHARl1fPmznQ4Bs3AJoYXV2FsinkI=;
- b=eL0/M27iWu2NKvMHqn7VU+sNJTFhnjkuuc2DzIRcSy8sgNUsKoan1k8wKn/qnXUtEz
- Ou192qiA6jsxcUjD2aqhEWoZX+q5UGjCLPJiGSO387UfppPzLEaXpYAOgFXevT93r3uz
- L/wpIYvheTPnlvtpzvOxfjqeJqSziaBZ1/irLLQi6cidUDgpye8W9PdreZ7JrC9JUyqv
- 0MgXTB/YgrsgPEwHkUxiL+zemoYVq/k0w2M93R2L4AOaVTt3dYnQGad7o+hWxn3URu1N
- Tc6cP9WPqmqvTK0Muq/GTegQhCjeslKSooRw5R3UDYdLqjj4DYEDqQrg4PovqeGFQMUj
- aZTQ==
+ :cc:content-transfer-encoding;
+ bh=BB9cQC4K7FifjfaqgHH7PUpDG0Xc0/ojT3Tv3c3BiP4=;
+ b=kw3gDV1nt4fjyg4+9rGTET6FF+cw0HJtEk9ficUkrjW86wA8C12H+oM3vmDnJhSjLu
+ 8Mt4RAMNmV270eC1MJuBBWobTyFw/9vmqjV32xPubjH1dIM8QSWKyuFSgi8KdNzMwHcX
+ uf+vUS7c38/UHSmnCqLLWCiKc6jkKTroWd1jBn1U0iTXQfjR/NuCSU91Kz0UfSfj7qsd
+ RDZNgTY57EkzBxhjd6BaHTtK+b7ediy4CdHaaLPC6EamU4j3Q3ajKNQAmMlp4smbg5u8
+ fPktQZ6d0hfMqlc2IHsS7pH0X6g4u09Qdifcj723LUeOj5w3ohpxekobLY3j55hjQfj8
+ rqoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NTRaZ4nxSZJBqgIHARl1fPmznQ4Bs3AJoYXV2FsinkI=;
- b=hfkzyWHX+ZB4Uf0mCGLumYB2oWpjK0/8puzW7tL3PAPtORKUvQaRDg8UNyeV8xZs3E
- oQ2t2b1V7P9pgdU28GcTk4wwzsBVo18+UlBYKflOvJ2f0OoTcu216UUNqKAIKZoJivKi
- 3sTayN7hivHZPWKjBKfQlrK2oMpPdMSbtst6ScX4pcdYsyuz+qj+RAVy4hu21uxrv9ut
- sK1G4Wog3BJUY9ut8FR8MmIjIShwQddgfkZSQzxrVV24gk/x7kreoVmGoIAL9p5v4Azq
- xU+k2q7mI8z02O0JvHrnCHVzkZf2AidX12Pk/JkY6B3XOppgwoZkY5nCsPhAGx4ouvWJ
- cElQ==
-X-Gm-Message-State: APjAAAUwZHjaf/oZ10d1bzLr/5vreEbujFeJBsHU/xq3r85tnb+6xwFk
- GPaETGG1eRotJPIgTqiFJT3RVl2zLY7OdYl1oAg=
-X-Google-Smtp-Source: APXvYqwLrbVoDLAPIAFJNfOlHQcTy44cCMkggMPdwwk7qITzM3EpFOZE+CcjbmbGQOUAUO820IMrdsXnTPkNu6fHseE=
-X-Received: by 2002:a05:651c:238:: with SMTP id
- z24mr7090659ljn.36.1573228494133; 
- Fri, 08 Nov 2019 07:54:54 -0800 (PST)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=BB9cQC4K7FifjfaqgHH7PUpDG0Xc0/ojT3Tv3c3BiP4=;
+ b=jwhrVUkSyX5giWi/LAuLZHAAAco6HxjBpJea7KQp01hKCx2/K6IMsZ1dXosrHcu+1W
+ qJRy2JkR5HrrlrXcrnrMIFwEmeY5AR6+/lnl8P2hRqsILRd5oMpfixsno2lbi0/gkEGu
+ rD9EJLSZhOSsZayN9wlp/N0ioD3t0fEgV0GtNzKTeWO+3ub5nnUxVGZHtCYchf+Tc0I2
+ K7Gjv0N7VsbDbtWfVZfAiSCIFI4MUA+h55TJsfzn18Wv4DQz2SB5Ci4jJxEF5CS7+vIi
+ xMOO7K/x6dyx/8PDpvEO1CV+s+Q1Tuo7v2YSv6+T4diTda531LJnTQ96lde3PkdXAX2W
+ oiKQ==
+X-Gm-Message-State: APjAAAXQj75hYyvBzuJgY07IUOga2qUaAOqqbSL99P8fZNMdh7RjN2jD
+ 9AsrVbHgycdP958Bsp4zmZd2cQxT8LglIrfDVqk=
+X-Google-Smtp-Source: APXvYqxy5Ly1VHiafPhlfZ26T7zwYaRhkJ4S29cwBlaZ35eC9vlSludJrrpmVRuvwb6fj0b8pAd/lhzzeuAM+8F+RNc=
+X-Received: by 2002:a19:be92:: with SMTP id o140mr13346297lff.40.1573417159959; 
+ Sun, 10 Nov 2019 12:19:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20191108144716.23829-1-patrick.delaunay@st.com>
  <507210dc-a047-8f33-873c-fb336e1f8ba0@denx.de>
-In-Reply-To: <507210dc-a047-8f33-873c-fb336e1f8ba0@denx.de>
+ <CAAh8qsySU816FAqcjmvqsu_Rx6Yy-pk7yHHLsqkMhhrqsFPBzA@mail.gmail.com>
+ <CAKOfRZy664kidMXmXMk4ps_t-cU_25Ut-nxrL8NMm9F24CAAwQ@mail.gmail.com>
+In-Reply-To: <CAKOfRZy664kidMXmXMk4ps_t-cU_25Ut-nxrL8NMm9F24CAAwQ@mail.gmail.com>
 From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Date: Fri, 8 Nov 2019 16:54:24 +0100
-Message-ID: <CAAh8qsySU816FAqcjmvqsu_Rx6Yy-pk7yHHLsqkMhhrqsFPBzA@mail.gmail.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Patrick Delaunay <patrick.delaunay@st.com>,
- b.galvani@gmail.com, U-Boot Mailing List <u-boot@lists.denx.de>, "Tan,
- Ley Foon" <ley.foon.tan@intel.com>, Sven Schwermer <sven@svenschwermer.de>,
+Date: Sun, 10 Nov 2019 21:19:07 +0100
+Message-ID: <CAAh8qsyyc3xuMa=ykGCOyEjon9KWaU8hZ7ussa26yEgkX7m_=w@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay73@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 0/4] usb: host: dwc2: use driver model
-	for PHY and CLOCK
+ Michal Suchanek <msuchanek@suse.de>, Sven Schwermer <sven@svenschwermer.de>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2 0/4] usb: host: dwc2: use
+ driver model for PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,93 +69,44 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5731269433700961284=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============5731269433700961284==
-Content-Type: multipart/alternative; boundary="0000000000008b1f090596d7cd6f"
-
---0000000000008b1f090596d7cd6f
-Content-Type: text/plain; charset="UTF-8"
-
-Marek Vasut <marex@denx.de> schrieb am Fr., 8. Nov. 2019, 16:46:
-
-> On 11/8/19 3:47 PM, Patrick Delaunay wrote:
-> >
-> > In this serie I update the DWC2 host driver to use the device tree
-> > information and the associated PHY and CLOCK drivers when they are
-> > available.
->
-> I'm kinda on the fence whether to add it into current release or not.
-> The patches look generally OK to me.
->
-> Ley, Simon, can you check this on SoCFPGA ?
->
-
-Gmm, so can try, but I don't have a working setup with USB peripherals
-attached... I do have USB on the socrates, but currently no cable to
-connect anything...
-
-I could test it to see if I can get the same result saying no attached
-devices are found, that would mean probing still works correctly...
-
-Regards,
-Simon
-
-Bin, can you give it a once-over ?
->
-> If this looks OK to you, I will add it.
->
-> [...]
->
-
---0000000000008b1f090596d7cd6f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">Marek Vasut &lt;<a href=3D"mailto:marex@denx.de">marex=
-@denx.de</a>&gt; schrieb am Fr., 8. Nov. 2019, 16:46:<br></div><blockquote =
-class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid=
-;padding-left:1ex">On 11/8/19 3:47 PM, Patrick Delaunay wrote:<br>
-&gt; <br>
-&gt; In this serie I update the DWC2 host driver to use the device tree<br>
-&gt; information and the associated PHY and CLOCK drivers when they are<br>
-&gt; available.<br>
-<br>
-I&#39;m kinda on the fence whether to add it into current release or not.<b=
-r>
-The patches look generally OK to me.<br>
-<br>
-Ley, Simon, can you check this on SoCFPGA ?<br></blockquote></div></div><di=
-v dir=3D"auto"><br></div><div dir=3D"auto">Gmm, so can try, but I don&#39;t=
- have a working setup with USB peripherals attached... I do have USB on the=
- socrates, but currently no cable to connect anything...</div><div dir=3D"a=
-uto"><br></div><div dir=3D"auto">I could test it to see if I can get the sa=
-me result saying no attached devices are found, that would mean probing sti=
-ll works correctly...</div><div dir=3D"auto"><br></div><div dir=3D"auto">Re=
-gards,</div><div dir=3D"auto">Simon</div><div dir=3D"auto"><br></div><div d=
-ir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" st=
-yle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-Bin, can you give it a once-over ?<br>
-<br>
-If this looks OK to you, I will add it.<br>
-<br>
-[...]<br>
-</blockquote></div></div></div>
-
---0000000000008b1f090596d7cd6f--
-
---===============5731269433700961284==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============5731269433700961284==--
+T24gU2F0LCBOb3YgOSwgMjAxOSBhdCA0OjQ2IFBNIFBhdHJpY2sgRGVsYXVuYXkKPHBhdHJpY2su
+ZGVsYXVuYXk3M0BnbWFpbC5jb20+IHdyb3RlOgo+Cj4gSGkgTWFyZWssCj4KPiBNeSBjaSB0cmF2
+aXMgYnVpbGQgaXMgZmFpbGluZyBhZnRlciB0aGUgbGFzdCB1cGRhdGVzIChyYXNwYmVycnkgcGkp
+LiBJIGFtIHRlc3RpbmcgYSB1cGRhdGUgd2l0aCBzdWIgZm9yIGNsayBkaXNhYmxlIGJ1bGsgZnVu
+Y3Rpb246Cj4KPiBodHRwczovL2dpdGh1Yi5jb20vcGF0cmlja2RlbGF1bmF5L3UtYm9vdC9jb21t
+aXQvMWQwNTNkZDk2ZTY2MjNkMDJiODQ2NTQzOTg2NTVhNTU2M2NjZmRjYgo+Cj4gTm93IGJ1aWtk
+IGlzIG9rOgo+IGh0dHBzOi8vdHJhdmlzLWNpLm9yZy9wYXRyaWNrZGVsYXVuYXkvdS1ib290L2J1
+aWxkcy82MDk0OTYxODcKPgo+IEkgd2lsbCBwdXNoIGl0IGFmdGVyIHRoZSBXZWVrIGVuZCAodHVl
+c2RheSkuCgpXaXRoIHRoYXQgYWRkaXRpb25hbCBjaGFuZ2UsIGl0IHNlZW1zIHRvIGJ1aWxkIGFu
+ZCB3b3JrIGZvciBtZSAoc2FtZSBlcnJvcgptZXNzYWdlIHNheWluZyBVU0IgIlBvcnQgbm90IGF2
+YWlsYWJsZSIgdGhhbiB3aXRob3V0IHRoaXMgcGF0Y2gpLgoKUmVnYXJkcywKU2ltb24KCj4KPiBT
+b3JyeS4KPgo+IFBhdHJpY2suCj4KPgo+Cj4gTGUgdmVuLiA4IG5vdi4gMjAxOSDDoCAxNjo1NSwg
+U2ltb24gR29sZHNjaG1pZHQgPHNpbW9uLmsuci5nb2xkc2NobWlkdEBnbWFpbC5jb20+IGEgw6lj
+cml0IDoKPj4KPj4gTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+IHNjaHJpZWIgYW0gRnIuLCA4
+LiBOb3YuIDIwMTksIDE2OjQ2Ogo+Pgo+PiA+IE9uIDExLzgvMTkgMzo0NyBQTSwgUGF0cmljayBE
+ZWxhdW5heSB3cm90ZToKPj4gPiA+Cj4+ID4gPiBJbiB0aGlzIHNlcmllIEkgdXBkYXRlIHRoZSBE
+V0MyIGhvc3QgZHJpdmVyIHRvIHVzZSB0aGUgZGV2aWNlIHRyZWUKPj4gPiA+IGluZm9ybWF0aW9u
+IGFuZCB0aGUgYXNzb2NpYXRlZCBQSFkgYW5kIENMT0NLIGRyaXZlcnMgd2hlbiB0aGV5IGFyZQo+
+PiA+ID4gYXZhaWxhYmxlLgo+PiA+Cj4+ID4gSSdtIGtpbmRhIG9uIHRoZSBmZW5jZSB3aGV0aGVy
+IHRvIGFkZCBpdCBpbnRvIGN1cnJlbnQgcmVsZWFzZSBvciBub3QuCj4+ID4gVGhlIHBhdGNoZXMg
+bG9vayBnZW5lcmFsbHkgT0sgdG8gbWUuCj4+ID4KPj4gPiBMZXksIFNpbW9uLCBjYW4geW91IGNo
+ZWNrIHRoaXMgb24gU29DRlBHQSA/Cj4+ID4KPj4KPj4gR21tLCBzbyBjYW4gdHJ5LCBidXQgSSBk
+b24ndCBoYXZlIGEgd29ya2luZyBzZXR1cCB3aXRoIFVTQiBwZXJpcGhlcmFscwo+PiBhdHRhY2hl
+ZC4uLiBJIGRvIGhhdmUgVVNCIG9uIHRoZSBzb2NyYXRlcywgYnV0IGN1cnJlbnRseSBubyBjYWJs
+ZSB0bwo+PiBjb25uZWN0IGFueXRoaW5nLi4uCj4+Cj4+IEkgY291bGQgdGVzdCBpdCB0byBzZWUg
+aWYgSSBjYW4gZ2V0IHRoZSBzYW1lIHJlc3VsdCBzYXlpbmcgbm8gYXR0YWNoZWQKPj4gZGV2aWNl
+cyBhcmUgZm91bmQsIHRoYXQgd291bGQgbWVhbiBwcm9iaW5nIHN0aWxsIHdvcmtzIGNvcnJlY3Rs
+eS4uLgo+Pgo+PiBSZWdhcmRzLAo+PiBTaW1vbgo+Pgo+PiBCaW4sIGNhbiB5b3UgZ2l2ZSBpdCBh
+IG9uY2Utb3ZlciA/Cj4+ID4KPj4gPiBJZiB0aGlzIGxvb2tzIE9LIHRvIHlvdSwgSSB3aWxsIGFk
+ZCBpdC4KPj4gPgo+PiA+IFsuLi5dCj4+ID4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KPj4gVS1Cb290IG1haWxpbmcgbGlzdAo+PiBVLUJvb3RAbGlz
+dHMuZGVueC5kZQo+PiBodHRwczovL2xpc3RzLmRlbnguZGUvbGlzdGluZm8vdS1ib290Cl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1h
+aWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBz
+Oi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0
+bTMyCg==

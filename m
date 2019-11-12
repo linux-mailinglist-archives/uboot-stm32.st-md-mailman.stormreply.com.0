@@ -2,62 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C680CF8C5E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 11:01:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0236AF8CA3
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 11:19:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 915F1C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:01:57 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9980C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:19:00 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC805C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DD911C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Nov 2019 10:01:55 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAC9vFir010149; Tue, 12 Nov 2019 11:01:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=+47VDL6SYpR5kwL4HgB1nPtT4wW6LU00BwJ7Yn1TfmA=;
- b=YP9Rmeq2GGpBeMDP6pPJSeWXtsQR62o4f6pjwtnf6rwFC/M5Bsv//ObKiJlO8FFj3TS6
- JCVuI4tWRJQdZhCE0VZ26XPS5CNlqIB9JAgMG311MReNOwIBeOhhK79X9GccCA+cCdo/
- u45KE/bhJfOq3AJz/nq3/OEHjxGVvTCOgYmL9cBe4NLk7rzGrjqK5JN95Ry8OV/+uWAG
- H3g7GNItCuOxlFg/XhkVa1B8k1GkPRglPcetnVM45r1bojbSArOniMwLImxjhc90jaet
- Qu022uhOgwxpj8SCXc9/FYQv/o1xAD90jf22+3V7lU09/4BbkCsPRDLLWYjTnOAaKldL +Q== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2w7psb196s-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Nov 2019 11:01:54 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BD25510003A;
- Tue, 12 Nov 2019 11:01:52 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B5C742B1B27;
- Tue, 12 Nov 2019 11:01:52 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 12 Nov 2019 11:01:52 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 12 Nov 2019 11:01:45 +0100
-Message-ID: <20191112100145.15940-7-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191112100145.15940-1-patrick.delaunay@st.com>
-References: <20191112100145.15940-1-patrick.delaunay@st.com>
+ Tue, 12 Nov 2019 10:17:14 +0000 (UTC)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id xACAH02N099359;
+ Tue, 12 Nov 2019 04:17:00 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1573553820;
+ bh=WQT9UZsWdqGZyL7eQRaDsvfaCPrQ7XHFgWQfesuvI0c=;
+ h=Subject:To:CC:References:From:Date:In-Reply-To;
+ b=MA1Rf3AW6fpzkpCj2DSzHtHhzcXARuzzL4KaRitE4WGl2CgDMw8TFHfLd+Hl5kpz2
+ yxi1iatPZV/767lCHy4a9cAEDRnfy/q/9O6YW2krB2C3/qPMNTD6M7JEvkBEhEdNG4
+ 3bRfWXqu65fLH5+1ZYUgaRkZX0O3WqoAR2iUC6zc=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTP id xACAH0cb058844;
+ Tue, 12 Nov 2019 04:17:00 -0600
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 12
+ Nov 2019 04:16:42 -0600
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
+ Frontend Transport; Tue, 12 Nov 2019 04:16:42 -0600
+Received: from [10.250.100.20] (ileax41-snat.itg.ti.com [10.172.224.153])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id xACAGvcl066530;
+ Tue, 12 Nov 2019 04:16:58 -0600
+To: Patrick Delaunay <patrick.delaunay@st.com>, <u-boot@lists.denx.de>
+References: <20191112094214.12686-1-patrick.delaunay@st.com>
+ <20191112094214.12686-2-patrick.delaunay@st.com>
+From: Jean-Jacques Hiblot <jjhiblot@ti.com>
+Message-ID: <19c5071a-ab8a-7c68-a7fe-bda25391b531@ti.com>
+Date: Tue, 12 Nov 2019 11:16:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-11-12_02:2019-11-11,2019-11-12 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 7/7] ata: dwc-ahci: change trace level for phy
-	errors managed by uclass
+In-Reply-To: <20191112094214.12686-2-patrick.delaunay@st.com>
+Content-Language: en-US
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Tue, 12 Nov 2019 10:18:59 +0000
+Cc: Peng Fan <peng.fan@nxp.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Simon Glass <sjg@chromium.org>, simon.k.r.goldschmidt@gmail.com,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ ley.foon.tan@intel.com, b.galvani@gmail.com,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 1/5] dm: clk: add stub for
+ clk_disable_bulk when CONFIG_CLK is desactivated
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,43 +69,54 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-As the error message is now displayed by generic phy functions,
-the pr_err can be change to pr_debug.
+Hi Patrick,
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+On 12/11/2019 10:42, Patrick Delaunay wrote:
+> Add stub for clk_disable_bulk() when CONFIG_CLK is desactivated.
+>
+> That avoid compilation issue (undefined reference to
+> `clk_disable_bulk') for code:
+>
+> clk_disable_bulk(&priv->clks);
+> clk_release_bulk(&priv->clks);
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+> Changes in v3:
+> - Add stub for clk_disable_bulk
+>
+> Changes in v2: None
+>
+>   include/clk.h | 4 ++++
+>   1 file changed, 4 insertions(+)
+>
+> diff --git a/include/clk.h b/include/clk.h
+> index a5ee53d94a..6f0b0fe4bc 100644
+> --- a/include/clk.h
+> +++ b/include/clk.h
+> @@ -379,7 +379,11 @@ int clk_disable(struct clk *clk);
+>    *		by clk_get_bulk().
+>    * @return zero on success, or -ve error code.
+>    */
+> + #if CONFIG_IS_ENABLED(CLK)
+>   int clk_disable_bulk(struct clk_bulk *bulk);
+> +#else
+> +inline int clk_disable_bulk(struct clk_bulk *bulk) { return 0; }
+> +#endif
 
- drivers/ata/dwc_ahci.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Maybe this could be done for all clk operations ?
 
-diff --git a/drivers/ata/dwc_ahci.c b/drivers/ata/dwc_ahci.c
-index 017650ae46..3c2a3ac201 100644
---- a/drivers/ata/dwc_ahci.c
-+++ b/drivers/ata/dwc_ahci.c
-@@ -62,13 +62,13 @@ static int dwc_ahci_probe(struct udevice *dev)
- 
- 	ret = generic_phy_init(&phy);
- 	if (ret) {
--		pr_err("unable to initialize the sata phy\n");
-+		pr_debug("unable to initialize the sata phy\n");
- 		return ret;
- 	}
- 
- 	ret = generic_phy_power_on(&phy);
- 	if (ret) {
--		pr_err("unable to power on the sata phy\n");
-+		pr_debug("unable to power on the sata phy\n");
- 		return ret;
- 	}
- 
--- 
-2.17.1
+JJ
 
+>   
+>   /**
+>    * clk_is_match - check if two clk's point to the same hardware clock
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

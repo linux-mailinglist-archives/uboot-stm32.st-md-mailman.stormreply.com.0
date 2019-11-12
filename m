@@ -2,63 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CDE2F8D0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 11:41:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F375F92DA
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 15:40:08 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 01001C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:41:00 +0000 (UTC)
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
- [209.85.208.196])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F32BAC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 14:40:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F25A0C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2EBCBC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Nov 2019 10:40:59 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id v8so17214403ljh.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Nov 2019 02:40:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=v46d+qB8DzdTJA1PTUjoL9AW1iIWq6gvPcK5Jr4R4yY=;
- b=OUFsKmJ6HFTN0yWjgi+datbmUFMiWWDQ/YL3csfVTM1KWDTDhWg15Ax2HuPAFbmt4Y
- 9wAl5YadDbiaF4GwdWFZo5gr5JefRzljkUy5fumvw+oyQS3P9JeVRQVSPvZtr51cGHP7
- ivd0/Ob81TJaHZwz1pn71myb3vBiL7xqYqzhTaf9T7bPV8TiXhYvbRpFoudu3qXDgsoc
- YrfK8cTIuouvjE/yHOYLAZOqpaxb10pw6Y56gzzzcXDo7A+XOZozHCFc+Tqw9WqzGuA2
- lv3axu1Xbdo6EIopFxQTw4tpjMVyGKeBVgrHv6qSNK8VzTokt8vl5REUIz9IslnKdo5K
- 7dig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=v46d+qB8DzdTJA1PTUjoL9AW1iIWq6gvPcK5Jr4R4yY=;
- b=TDe/cUWUntK49h+RHEm1q3lyyxTLN00yH+lYw7UREcDfQvHtVyFjIQsOshuCoVaqAk
- aNh6cbeeTK8Z/saxEvpBleS56TKSR3XxOvxsGoFnKnVhwoQRNYi4pARMHZmrWN0oXso/
- VDsm7uykaXJLc2FosutudRaYqYzufwSWGD09crOe4fHFA7Wzg1gkSgvFNhEVJHvWbZ3b
- C3WU0UdvBjiqP1HiItoym2a3NhHH3ejaJoMsTiV9dijn6d9I+szhc9283NGaPaPRJbge
- 9yTus2P+zXtci74RrfRgpDKlgdpUEgYDARFdKt4vLzKNOeKD733hcuuuwcuKhTuMZA1Z
- K42w==
-X-Gm-Message-State: APjAAAX2g+SqheJNNk91uqBHRRejDTcXqL2EbkCrmXlyoy7GTtpYGuDO
- rVZnVk0aA7Kiib/Q6+1loAwXty4NWK3oPgnokd0=
-X-Google-Smtp-Source: APXvYqyThWNWICQGcX3gTEu9x6YjOAGGqq2b4bYW2K00mqtVgu/PKODxG4dZOZ91FCqRhmE4f934CxpdIpNlrRJsk08=
-X-Received: by 2002:a2e:9a8b:: with SMTP id p11mr10502223lji.164.1573555259066; 
- Tue, 12 Nov 2019 02:40:59 -0800 (PST)
+ Tue, 12 Nov 2019 14:40:05 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xACEbAW5005858; Tue, 12 Nov 2019 15:40:01 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=sycYQY7PMl9T2MwZQKcKGreE983c7OkKIMkTMTn59sE=;
+ b=dA+gzDkjDxAms5poMh3p/zIpUifcA8b2uGL3X27QLldfMBCfJgncVx+eTXdS0wqdbFUv
+ +tVMMzQ4zXu/zFpPPNRKsQp9arkyGSyRORnGaX8hfBAcgJr3OGCfsrJ/lqVZtOFHFb4x
+ x969lGewEmoPUKJ4R23DwaewoG5Z+nCuz2OwEHgqCg2I1yyIV7h7i4LN2zfobSYyzRI8
+ vsyZcXOVkhT0zjEToaZBcqbA60Ul1ovWy5lPbimWcVv6ffz5U+wMDT0/0AQ9pZE7L0Ri
+ MqPd8/w5H80DNQNmBOaVDnJoh6ROtq3hBGtRpqlcDOToZzOT6GWZwgjVzQFAqFj9Yrse iQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2w7psb2psu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Nov 2019 15:40:01 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E599A100038;
+ Tue, 12 Nov 2019 15:40:00 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CDDC92C5EB5;
+ Tue, 12 Nov 2019 15:40:00 +0100 (CET)
+Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Tue, 12 Nov 2019 15:40:00 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 12 Nov 2019 15:39:58 +0100
+Message-ID: <20191112153954.1.Iff44a1504ac7a1605e9ea0706753235c6b9cab15@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20191112094214.12686-1-patrick.delaunay@st.com>
- <20191112094214.12686-2-patrick.delaunay@st.com>
-In-Reply-To: <20191112094214.12686-2-patrick.delaunay@st.com>
-From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Date: Tue, 12 Nov 2019 11:40:46 +0100
-Message-ID: <CAAh8qsyBv4i+mbMMNe5c3Nu-wjY=+EhO6xQ5Ukpcr3rziNUuWQ@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Lokesh Vutla <lokeshvutla@ti.com>,
- Simon Glass <sjg@chromium.org>, Sekhar Nori <nsekhar@ti.com>,
- Lukasz Majewski <lukma@denx.de>, Ley Foon Tan <ley.foon.tan@intel.com>,
- b.galvani@gmail.com, U-Boot Mailing List <u-boot@lists.denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/5] dm: clk: add stub for
- clk_disable_bulk when CONFIG_CLK is desactivated
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2019-11-12_04:2019-11-11,2019-11-12 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ =?UTF-8?q?Yannick=20Fertr=C3=A9?= <yannick.fertre@st.com>,
+ Anatolij Gustschin <agust@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] video: stm32: remove the compatible "synopsys,
+	dw-mipi-dsi" support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,137 +66,152 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2319377611501396957=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============2319377611501396957==
-Content-Type: multipart/alternative; boundary="000000000000404d4f059723e2ac"
+Remove the compatible "synopsys,dw-mipi-dsi" added in U-Boot
+(it don't exist in Linux kernel binding); it is only used
+to bind the generic synopsys UCLASS_DSI_HOST "dw_mipi_dsi" to
+the driver "stm32-display-dsi" UCLASS_VIDEO_BRIDGE
 
---000000000000404d4f059723e2ac
-Content-Type: text/plain; charset="UTF-8"
+This binding is done in Linux kernel drivers without compatible
+(dw_mipi_dsi_bind() is called in bind of driver, for example in
+drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c).
 
-Patrick Delaunay <patrick.delaunay@st.com> schrieb am Di., 12. Nov. 2019,
-10:42:
+This patch does the same in U-Boot driver, the STM32 driver
+calls during its bind the function device_bind_driver_to_node
+to bind the generic driver "dw_mipi_dsi" at the same address.
 
-> Add stub for clk_disable_bulk() when CONFIG_CLK is desactivated.
->
-> That avoid compilation issue (undefined reference to
-> `clk_disable_bulk') for code:
->
-> clk_disable_bulk(&priv->clks);
-> clk_release_bulk(&priv->clks);
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
-> Changes in v3:
-> - Add stub for clk_disable_bulk
->
-> Changes in v2: None
->
->  include/clk.h | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/include/clk.h b/include/clk.h
-> index a5ee53d94a..6f0b0fe4bc 100644
-> --- a/include/clk.h
-> +++ b/include/clk.h
-> @@ -379,7 +379,11 @@ int clk_disable(struct clk *clk);
->   *             by clk_get_bulk().
->   * @return zero on success, or -ve error code.
->   */
-> + #if CONFIG_IS_ENABLED(CLK)
->  int clk_disable_bulk(struct clk_bulk *bulk);
-> +#else
-> +inline int clk_disable_bulk(struct clk_bulk *bulk) { return 0; }
-> +#endif
->
+This patch reduces the device tree differences
+between Linux kernel and U-Boot for stm32mp1 platform.
 
-Doing this inline at this place seems quite different than what is done for
-the other functions?
+Tested with v2020.01-rc1 on STM32MP157C-EV1 and STM32MP157C-DK2.
 
-Regards,
-Simon
+The dependency of driver is clearer and the probe order is guaranteed.
+
+STM32MP> dm tree
+ Class     Index  Probed  Driver                Name
+-----------------------------------------------------------
+ root          0  [ + ]   root_driver           root_driver
+ sysreset      0  [   ]   syscon_reboot         |-- reboot
+ simple_bus    0  [ + ]   generic_simple_bus    |-- soc
+ serial        0  [ + ]   serial_stm32          |   |-- serial@40010000
+...
+ video_brid    0  [ + ]   stm32-display-dsi     |   |-- dsi@5a000000
+ dsi_host      0  [ + ]   dw_mipi_dsi           |   |   |-- dsihost
+ panel         0  [ + ]   rm68200_panel         |   |   `-- panel-dsi@0
+...
 
 
->  /**
->   * clk_is_match - check if two clk's point to the same hardware clock
-> --
-> 2.17.1
->
->
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
---000000000000404d4f059723e2ac
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi |  7 -------
+ arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi |  5 -----
+ drivers/video/dw_mipi_dsi.c              |  6 ------
+ drivers/video/stm32/stm32_dsi.c          | 15 ++++++++++++++-
+ 4 files changed, 14 insertions(+), 19 deletions(-)
 
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"gmail_attr">Patrick Delaunay &lt;<a href=3D"mailto:patrick.delauna=
-y@st.com">patrick.delaunay@st.com</a>&gt; schrieb am Di., 12. Nov. 2019, 10=
-:42:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex">Add stub for clk_disable_bulk(=
-) when CONFIG_CLK is desactivated.<br>
-<br>
-That avoid compilation issue (undefined reference to<br>
-`clk_disable_bulk&#39;) for code:<br>
-<br>
-clk_disable_bulk(&amp;priv-&gt;clks);<br>
-clk_release_bulk(&amp;priv-&gt;clks);<br>
-<br>
-Signed-off-by: Patrick Delaunay &lt;<a href=3D"mailto:patrick.delaunay@st.c=
-om" target=3D"_blank" rel=3D"noreferrer">patrick.delaunay@st.com</a>&gt;<br=
->
----<br>
-<br>
-Changes in v3:<br>
-- Add stub for clk_disable_bulk<br>
-<br>
-Changes in v2: None<br>
-<br>
-=C2=A0include/clk.h | 4 ++++<br>
-=C2=A01 file changed, 4 insertions(+)<br>
-<br>
-diff --git a/include/clk.h b/include/clk.h<br>
-index a5ee53d94a..6f0b0fe4bc 100644<br>
---- a/include/clk.h<br>
-+++ b/include/clk.h<br>
-@@ -379,7 +379,11 @@ int clk_disable(struct clk *clk);<br>
-=C2=A0 *=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0by clk_get_bulk().<=
-br>
-=C2=A0 * @return zero on success, or -ve error code.<br>
-=C2=A0 */<br>
-+ #if CONFIG_IS_ENABLED(CLK)<br>
-=C2=A0int clk_disable_bulk(struct clk_bulk *bulk);<br>
-+#else<br>
-+inline int clk_disable_bulk(struct clk_bulk *bulk) { return 0; }<br>
-+#endif<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D=
-"auto">Doing this inline at this place seems quite different than what is d=
-one for the other functions?</div><div dir=3D"auto"><br></div><div dir=3D"a=
-uto">Regards,</div><div dir=3D"auto">Simon</div><div dir=3D"auto"><br></div=
-><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
-ote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex=
-">
-<br>
-=C2=A0/**<br>
-=C2=A0 * clk_is_match - check if two clk&#39;s point to the same hardware c=
-lock<br>
--- <br>
-2.17.1<br>
-<br>
-</blockquote></div></div></div>
-
---000000000000404d4f059723e2ac--
-
---===============2319377611501396957==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi b/arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi
+index cd9947f166..18ac1e3cb2 100644
+--- a/arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi
+@@ -5,13 +5,6 @@
+ 
+ #include "stm32mp157a-dk1-u-boot.dtsi"
+ 
+-/ {
+-	dsi_host: dsi_host {
+-		compatible = "synopsys,dw-mipi-dsi";
+-		status = "okay";
+-	};
+-};
+-
+ &i2c1 {
+ 	hdmi-transmitter@39 {
+ 		reset-gpios = <&gpioa 10 GPIO_ACTIVE_LOW>;
+diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+index af5945d20b..ec60486f41 100644
+--- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+@@ -14,11 +14,6 @@
+ 		spi0 = &qspi;
+ 		usb0 = &usbotg_hs;
+ 	};
+-
+-	dsi_host: dsi_host {
+-		compatible = "synopsys,dw-mipi-dsi";
+-		status = "okay";
+-	};
+ };
+ 
+ &flash0 {
+diff --git a/drivers/video/dw_mipi_dsi.c b/drivers/video/dw_mipi_dsi.c
+index 04b07e3a2c..83d7c7b2c0 100644
+--- a/drivers/video/dw_mipi_dsi.c
++++ b/drivers/video/dw_mipi_dsi.c
+@@ -816,15 +816,9 @@ static int dw_mipi_dsi_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static const struct udevice_id dw_mipi_dsi_ids[] = {
+-	{ .compatible = "synopsys,dw-mipi-dsi" },
+-	{ }
+-};
+-
+ U_BOOT_DRIVER(dw_mipi_dsi) = {
+ 	.name			= "dw_mipi_dsi",
+ 	.id			= UCLASS_DSI_HOST,
+-	.of_match		= dw_mipi_dsi_ids,
+ 	.probe			= dw_mipi_dsi_probe,
+ 	.ops			= &dw_mipi_dsi_ops,
+ 	.priv_auto_alloc_size	= sizeof(struct dw_mipi_dsi),
+diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
+index cb89576e1d..12895a8f5d 100644
+--- a/drivers/video/stm32/stm32_dsi.c
++++ b/drivers/video/stm32/stm32_dsi.c
+@@ -20,6 +20,7 @@
+ #include <asm/io.h>
+ #include <asm/arch/gpio.h>
+ #include <dm/device-internal.h>
++#include <dm/lists.h>
+ #include <linux/iopoll.h>
+ #include <power/regulator.h>
+ 
+@@ -399,6 +400,18 @@ static int stm32_dsi_set_backlight(struct udevice *dev, int percent)
+ 	return 0;
+ }
+ 
++static int stm32_dsi_bind(struct udevice *dev)
++{
++	int ret;
++
++	ret = device_bind_driver_to_node(dev, "dw_mipi_dsi", "dsihost",
++					 dev_ofnode(dev), NULL);
++	if (ret)
++		return ret;
++
++	return dm_scan_fdt_dev(dev);
++}
++
+ static int stm32_dsi_probe(struct udevice *dev)
+ {
+ 	struct stm32_dsi_priv *priv = dev_get_priv(dev);
+@@ -483,7 +496,7 @@ U_BOOT_DRIVER(stm32_dsi) = {
+ 	.name				= "stm32-display-dsi",
+ 	.id				= UCLASS_VIDEO_BRIDGE,
+ 	.of_match			= stm32_dsi_ids,
+-	.bind				= dm_scan_fdt_dev,
++	.bind				= stm32_dsi_bind,
+ 	.probe				= stm32_dsi_probe,
+ 	.ops				= &stm32_dsi_ops,
+ 	.priv_auto_alloc_size		= sizeof(struct stm32_dsi_priv),
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2319377611501396957==--

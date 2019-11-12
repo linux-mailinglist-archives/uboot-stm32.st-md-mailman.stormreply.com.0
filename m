@@ -2,65 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C69CF8C1E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:42:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91AFAF8C1C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:42:35 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 64B43C36B0E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 09:42:36 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5AB2FC36B0C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 09:42:35 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8CE66C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8C588C36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Nov 2019 09:42:34 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue, 12 Nov 2019 09:42:32 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAC9gD4r004416; Tue, 12 Nov 2019 10:42:20 +0100
+ xAC9b3vm019028; Tue, 12 Nov 2019 10:42:20 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=O/1KbASDsTwt2ifYA/WiTQXjnnAOwFY13zY7jpXAZqo=;
- b=dg98CyynvnLBFkWFEAWzuPhrtBFcqD0agPzzpQlESnDJmAOb15dvpxlfjlJuowpwPdJD
- UTMl6ZAt05nhftF19z85OgRwkdQ7iVEaJLcjCmL04M11+tZZgpevXCeJQdsWPvwzBfUA
- ezynGfRVvieOePH+NB9IkBsUAsGM1x9aJuHQw8FXncSV5PmiO2Dd9KbtFmeHiywONT8a
- lU4+vVY72EijS/Lhoe1/65o8XX/yn1CvaomoM/nnFgqx4lkTeDR0M5rpWBgzN/3EhNpX
- q8WSKJbrZrYNc5cdb3SuaZE0jMIvW3YjKmEnHrZci0x0d5QaLpIIk2swRWEtpjTSR+G5 SQ== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=THYMTCjVs6TEsaB7zO28tiTkj8Zp6iUnoqzXAUX7ISo=;
+ b=1g0agu2EBK7KefXk8HhwgkuhvaQqeGjNWJvmELlShY0Fq0JTELROkodPK/s/RCjydrsN
+ Wa7HJASEP3XE+JILM6fWFHcOxGts0Htt8pTxVWwItSbNKBYRtD521glUOVic8V5z//py
+ JDwPh7VB1rQiG1wBfWexw/qMOb84lF9mt8yYrf/kGE6ctSIVKpeBL1AneMeSrX0DbBxI
+ GXOvg4/wevalESeZg1z2vcGRJY9EkjAPpo0n0H/zOgEwygJMkmyR8a45DXEGYqEFqqzC
+ sFcPrkCQC01F1bRiUPJ0svK3s8u+8WpR02da4boF55iEEcpOz0K6XCc7Sdq6evl2SLnc QQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2w7psjh5rq-1
+ by mx07-00178001.pphosted.com with ESMTP id 2w7psb15xg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 12 Nov 2019 10:42:20 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 17A14100034;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 179C510002A;
  Tue, 12 Nov 2019 10:42:17 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1ED632B1878;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BA0F92B1879;
  Tue, 12 Nov 2019 10:42:17 +0100 (CET)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 12 Nov 2019 10:42:16 +0100
+ Tue, 12 Nov 2019 10:42:17 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 12 Nov 2019 10:42:09 +0100
-Message-ID: <20191112094214.12686-1-patrick.delaunay@st.com>
+Date: Tue, 12 Nov 2019 10:42:10 +0100
+Message-ID: <20191112094214.12686-2-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191112094214.12686-1-patrick.delaunay@st.com>
+References: <20191112094214.12686-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG6NODE1.st.com (10.75.127.16) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-11-12_02:2019-11-11,2019-11-12 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
- simon.k.r.goldschmidt@gmail.com, Sekhar Nori <nsekhar@ti.com>,
- Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
- b.galvani@gmail.com, ley.foon.tan@intel.com,
- Sven Schwermer <sven@svenschwermer.de>,
+Cc: Peng Fan <peng.fan@nxp.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Simon Glass <sjg@chromium.org>, simon.k.r.goldschmidt@gmail.com,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>, b.galvani@gmail.com,
+ ley.foon.tan@intel.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: [Uboot-stm32] [PATCH v3 0/5] usb: host: dwc2: use driver model for
-	PHY and CLOCK
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH v3 1/5] dm: clk: add stub for clk_disable_bulk
+	when CONFIG_CLK is desactivated
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,104 +78,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Add stub for clk_disable_bulk() when CONFIG_CLK is desactivated.
 
-In this serie I update the DWC2 host driver to use the device tree
-information and the associated PHY and CLOCK drivers when they are
-available.
+That avoid compilation issue (undefined reference to
+`clk_disable_bulk') for code:
 
-CI-Travis build is OK for all target after V3:
-https://travis-ci.org/patrickdelaunay/u-boot/builds/609496187
+clk_disable_bulk(&priv->clks);
+clk_release_bulk(&priv->clks);
 
-In V2, I cause the warnings for some boards:
-drivers/usb/host/built-in.o: In function `dwc2_usb_remove':
-drivers/usb/host/dwc2.c:1441: undefined reference to `clk_disable_bulk'
-
-I test this serie on stm32mp157c-ev1 board, with PHY and CLK
-support
-
-The U-CLASS are provided by:
-- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
-- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
-- RESET by RCC reset driver = drivers/reset/stm32-reset.c
-
-And I activate the configuration
-+CONFIG_USB_DWC2=y
-
-PS: it is not the default configuration to avoid conflict with gadget
-    driver
-
-To solve a binding issue, I also deactivate the gadget support:
-by default only one driver is bound to theusbotg_hs node with "snps,dwc2"
-compatible, and today it is the device one (the first in the driver list).
-
-I also need to deactivate hnp-srp support with:
-
-&usbotg_hs {
-	/* need to disable ONLY for HOST support */
-	hnp-srp-disable;
-};
-
-WARNING: OTG with device or host support is not correctly handle by DWC2
-         driver (see example for dynamic OTG role in DWC3 driver).
-
-The tests executed on the stm32mp157c-ev1 target:
-
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000: USB DWC2
-Bus usbh-ehci@5800d000: USB EHCI 1.00
-scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
-scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
-       scanning usb for storage devices... 2 Storage Device(s) found
-STM32MP> usb tree
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |   U-Boot Root Hub
-  |
-  +-2  Mass Storage (480 Mb/s, 300mA)
-       Verbatim STORE N GO 070731C8ACD7EE97
-
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Hub (480 Mb/s, 2mA)
-    |
-    +-3  Mass Storage (480 Mb/s, 500mA)
-         Generic  USB Storage
-
-STM32MP> ls usb 0
-<DIR>       4096 .
-<DIR>       4096 ..
-<DIR>      16384 lost+found
-<DIR>       4096 record
-         1490212 xipImage
-        21058006 vmlinux
-
-STM32MP> load usb 0 0xC0000000 vmlinux
-21058006 bytes read in 10851 ms (1.9 MiB/s)
-
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
 Changes in v3:
 - Add stub for clk_disable_bulk
 
-Changes in v2:
-- update dev_err
-- update commit message
-- change dev_err to dev_dbg for PHY function call
-- treat dwc2_shutdown_phy error
-- add clk_disable_bulk in dwc2_usb_remove
+Changes in v2: None
 
-Patrick Delaunay (5):
-  dm: clk: add stub for clk_disable_bulk when CONFIG_CLK is desactivated
-  usb: host: dwc2: add phy support
-  usb: host: dwc2: add clk support
-  usb: host: dwc2: force reset assert
-  usb: host: dwc2: add trace to have clean usb start
+ include/clk.h | 4 ++++
+ 1 file changed, 4 insertions(+)
 
- drivers/usb/host/dwc2.c | 100 +++++++++++++++++++++++++++++++++++++++-
- include/clk.h           |   4 ++
- 2 files changed, 103 insertions(+), 1 deletion(-)
-
+diff --git a/include/clk.h b/include/clk.h
+index a5ee53d94a..6f0b0fe4bc 100644
+--- a/include/clk.h
++++ b/include/clk.h
+@@ -379,7 +379,11 @@ int clk_disable(struct clk *clk);
+  *		by clk_get_bulk().
+  * @return zero on success, or -ve error code.
+  */
++ #if CONFIG_IS_ENABLED(CLK)
+ int clk_disable_bulk(struct clk_bulk *bulk);
++#else
++inline int clk_disable_bulk(struct clk_bulk *bulk) { return 0; }
++#endif
+ 
+ /**
+  * clk_is_match - check if two clk's point to the same hardware clock
 -- 
 2.17.1
 

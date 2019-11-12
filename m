@@ -2,119 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 364EBF8A69
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 09:20:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C69CF8C1E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 10:42:36 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0233BC36B0C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 08:20:41 +0000 (UTC)
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 64B43C36B0E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Nov 2019 09:42:36 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 44046C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8CE66C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Nov 2019 07:43:19 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
- by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 11 Nov 2019 23:43:16 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,295,1569308400"; d="scan'208";a="234767680"
-Received: from fmsmsx105.amr.corp.intel.com ([10.18.124.203])
- by fmsmga002.fm.intel.com with ESMTP; 11 Nov 2019 23:43:16 -0800
-Received: from fmsmsx605.amr.corp.intel.com (10.18.126.85) by
- FMSMSX105.amr.corp.intel.com (10.18.124.203) with Microsoft SMTP Server (TLS)
- id 14.3.439.0; Mon, 11 Nov 2019 23:43:15 -0800
-Received: from fmsmsx605.amr.corp.intel.com (10.18.126.85) by
- fmsmsx605.amr.corp.intel.com (10.18.126.85) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.1713.5; Mon, 11 Nov 2019 23:43:15 -0800
-Received: from FMSEDG002.ED.cps.intel.com (10.1.192.134) by
- fmsmsx605.amr.corp.intel.com (10.18.126.85) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.1713.5
- via Frontend Transport; Mon, 11 Nov 2019 23:43:15 -0800
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com (104.47.41.55) by
- edgegateway.intel.com (192.55.55.69) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Mon, 11 Nov 2019 23:42:48 -0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jqjjU3kbsCReKDd25DPbNV51lSHyGu0hus/ObYWE4cvxM2IfLkc/Bg2pOUcrT5riQtskQVhATRs3b6yHCjM+8Ie//4slFwhl922MFq2b25zm2EpmzYIln35cztuE4GKe2+Y4s28URBIvvjWeRrMmdhMpLmB+j2wRdGgfbKgz+XzG9YE58XA8q5NhMdlp9kcDCPbH1ZJzEC9inSh408D18BqQOMwL8wGW7fNXnDCRfleuHv8seaLLQz2uqumhHLO+0yuHwF7I7xK8cAjY8Z4+6SfP0O16DJHDr1O6s1ZCS8Qy7FNg8LGi+/wTQ0YkCBHJmiUfDZJxITmdhjBW3UpP0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EesQ1uvgwcU1Py5ZGJzS3WuwnehP8026HwnPemGgDCA=;
- b=aG19E0rqYSyeLLztoCeL4PS3CJ+QwBkwiUYPDl1KgYymDEmQ2s1ay8mJuCRVoqfkQ7TuQUN/ZMqH1KF9rmoRR9Kj9G982A5QNx/l9N8zMhRz7nQNILGNtUGuUCXWX/5oUjhw1pHshfE/qSQR5wXdOoxtuzkSIzMhl44OBqAUq0KkRy1iy/sXpxEuWGguGyAKXk3JF6SXQ3xWnMwIwa+JMYoisSBrOOYvWF6dDwMe5KNj0OoF9PaycQh3iRHvTRK7Eh9cugGum0t3tbrxchmAqYI3hWIlG2cLKtaC3xY5Kdx1TohtXwX5G4irNsc/UjCVWUbSJzlTH4SqgoHzsgA1tg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=intel.onmicrosoft.com; 
- s=selector2-intel-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EesQ1uvgwcU1Py5ZGJzS3WuwnehP8026HwnPemGgDCA=;
- b=kiCbQE4TsEL69W83ove5wIpo06UiX2T9bZ2kI/WMulD/OYRqycYN8Uk42PBNN176d9MVNI7FYNXglWpt16kUjuzQIZzrozrcQfk1OHn2QPiFSNlzt5v8Dh16zFsQeMcJOb6jo872W/iuUu5zNExCS+alTNsNv70pkXZ0+C7lgFw=
-Received: from MN2PR11MB4509.namprd11.prod.outlook.com (52.135.39.90) by
- MN2PR11MB4222.namprd11.prod.outlook.com (52.135.36.26) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2430.22; Tue, 12 Nov 2019 07:42:46 +0000
-Received: from MN2PR11MB4509.namprd11.prod.outlook.com
- ([fe80::b403:c5ba:ab5f:1bd3]) by MN2PR11MB4509.namprd11.prod.outlook.com
- ([fe80::b403:c5ba:ab5f:1bd3%7]) with mapi id 15.20.2430.027; Tue, 12 Nov 2019
- 07:42:46 +0000
-From: "Tan, Ley Foon" <ley.foon.tan@intel.com>
-To: Marek Vasut <marex@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH v2 0/4] usb: host: dwc2: use driver model for PHY and
- CLOCK
-Thread-Index: AQHVlkvC/W2a3vMrIkK4iCmEuxFIIKeHKCbg
-Date: Tue, 12 Nov 2019 07:42:46 +0000
-Message-ID: <MN2PR11MB450966FEDD9DF0375BB8FEDECC770@MN2PR11MB4509.namprd11.prod.outlook.com>
-References: <20191108144716.23829-1-patrick.delaunay@st.com>
- <507210dc-a047-8f33-873c-fb336e1f8ba0@denx.de>
-In-Reply-To: <507210dc-a047-8f33-873c-fb336e1f8ba0@denx.de>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiNGRlYmY0YWItZGQ4OC00NzlkLWE3MDYtZWQ2ZTQ5ZjM1MzhkIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjEwLjE4MDQuNDkiLCJUcnVzdGVkTGFiZWxIYXNoIjoiKzZTTERrZEJ6ZzhobkIyOVU4cDZrZW43TElnMms0RUlNSkx4ZWp0aHpoNUxzNTc4KzMzcWFDcTBLcDZqTXpsNyJ9
-dlp-reaction: no-action
-dlp-version: 11.2.0.6
-dlp-product: dlpe-windows
-x-ctpclassification: CTP_NT
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=ley.foon.tan@intel.com; 
-x-originating-ip: [192.198.147.208]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 507fbf8f-cc66-492a-0588-08d76743e90b
-x-ms-traffictypediagnostic: MN2PR11MB4222:
-x-microsoft-antispam-prvs: <MN2PR11MB4222E649375CD610E388B9DFCC770@MN2PR11MB4222.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:4502;
-x-forefront-prvs: 021975AE46
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(366004)(136003)(376002)(396003)(39860400002)(346002)(13464003)(199004)(189003)(11346002)(26005)(76176011)(33656002)(6436002)(53546011)(6506007)(76116006)(66066001)(476003)(14444005)(7696005)(66556008)(66446008)(64756008)(102836004)(4326008)(486006)(256004)(446003)(66946007)(66476007)(6246003)(55016002)(71190400001)(186003)(71200400001)(9686003)(316002)(110136005)(74316002)(2906002)(229853002)(8676002)(14454004)(81156014)(305945005)(478600001)(7736002)(81166006)(25786009)(99286004)(2501003)(52536014)(86362001)(5660300002)(6116002)(3846002)(54906003)(8936002);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR11MB4222;
- H:MN2PR11MB4509.namprd11.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: lUfVbbWo0BbVoQ/z8sMsbwPvTzZWGGkr2g6NjDJ+52W/0/U4j0gC2vuwF70GQBReWawGvXLhIeawGmwpK3BVfXoUCdPguCUk3qvahCyI3zOZ/1k7021D2jOTygVRygfgfOYRMXQtbF4Brz4jw7eQAG/YdVGkuAJcGCl72Ho4QrED+2JSQZgDK3SanbQ5lfhB//7XVSYPAjbRmE3eHVKYYR4mxwnpThQaFi6jep4pb6LR1CGtW5onS6bd1dU85BUcIV+P+wvI/8Qq2ofrJQb/MQ/ZAvWItv2j2jnNPUihb5xQ3i0N8RREbPGFXOaurH2wkUTOs3GjCw1QpKVHFHc5YlO4fxk3b8t45zkphQs8KuWpWC1nJkj2cLe+1psPAWWbhitKW/Nl6rqVxjOhvi0Y/F2eTn55NJRq7y97xYb/BZ9zNLNJ8d9pAarijro98Zlj
-x-ms-exchange-transport-forked: True
+ Tue, 12 Nov 2019 09:42:34 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xAC9gD4r004416; Tue, 12 Nov 2019 10:42:20 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=O/1KbASDsTwt2ifYA/WiTQXjnnAOwFY13zY7jpXAZqo=;
+ b=dg98CyynvnLBFkWFEAWzuPhrtBFcqD0agPzzpQlESnDJmAOb15dvpxlfjlJuowpwPdJD
+ UTMl6ZAt05nhftF19z85OgRwkdQ7iVEaJLcjCmL04M11+tZZgpevXCeJQdsWPvwzBfUA
+ ezynGfRVvieOePH+NB9IkBsUAsGM1x9aJuHQw8FXncSV5PmiO2Dd9KbtFmeHiywONT8a
+ lU4+vVY72EijS/Lhoe1/65o8XX/yn1CvaomoM/nnFgqx4lkTeDR0M5rpWBgzN/3EhNpX
+ q8WSKJbrZrYNc5cdb3SuaZE0jMIvW3YjKmEnHrZci0x0d5QaLpIIk2swRWEtpjTSR+G5 SQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2w7psjh5rq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Nov 2019 10:42:20 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 17A14100034;
+ Tue, 12 Nov 2019 10:42:17 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1ED632B1878;
+ Tue, 12 Nov 2019 10:42:17 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Tue, 12 Nov 2019 10:42:16 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 12 Nov 2019 10:42:09 +0100
+Message-ID: <20191112094214.12686-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 507fbf8f-cc66-492a-0588-08d76743e90b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Nov 2019 07:42:46.4768 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: huK2rjvwd6oLMZGnIplwz1f/jeelv95xxDJk0hxr1gDb3Nrzx7AjU9IOellcOafATmU93HHZFg5m14F3S5AzIg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4222
-X-OriginatorOrg: intel.com
-X-Mailman-Approved-At: Tue, 12 Nov 2019 08:20:39 +0000
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- "simon.k.r.goldschmidt@gmail.com" <simon.k.r.goldschmidt@gmail.com>,
- "b.galvani@gmail.com" <b.galvani@gmail.com>,
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2019-11-12_02:2019-11-11,2019-11-12 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
+ simon.k.r.goldschmidt@gmail.com, Sekhar Nori <nsekhar@ti.com>,
+ Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
+ b.galvani@gmail.com, ley.foon.tan@intel.com,
  Sven Schwermer <sven@svenschwermer.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 0/4] usb: host: dwc2: use driver model
- for PHY and CLOCK
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH v3 0/5] usb: host: dwc2: use driver model for
+	PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -132,45 +78,106 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
+In this serie I update the DWC2 host driver to use the device tree
+information and the associated PHY and CLOCK drivers when they are
+available.
 
-> -----Original Message-----
-> From: Marek Vasut <marex@denx.de>
-> Sent: Friday, November 8, 2019 11:43 PM
-> To: Patrick Delaunay <patrick.delaunay@st.com>; u-boot@lists.denx.de
-> Cc: simon.k.r.goldschmidt@gmail.com; b.galvani@gmail.com; Michal
-> Suchanek <msuchanek@suse.de>; Sven Schwermer
-> <sven@svenschwermer.de>; U-Boot STM32 <uboot-stm32@st-md-
-> mailman.stormreply.com>; Bin Meng <bmeng.cn@gmail.com>; Tan, Ley
-> Foon <ley.foon.tan@intel.com>
-> Subject: Re: [PATCH v2 0/4] usb: host: dwc2: use driver model for PHY and
-> CLOCK
-> 
-> On 11/8/19 3:47 PM, Patrick Delaunay wrote:
-> >
-> > In this serie I update the DWC2 host driver to use the device tree
-> > information and the associated PHY and CLOCK drivers when they are
-> > available.
-> 
-> I'm kinda on the fence whether to add it into current release or not.
-> The patches look generally OK to me.
-> 
-> Ley, Simon, can you check this on SoCFPGA ?
-There is compilation error for Stratix10. Stratix10 doesn't support clock DM framework yet. 
-So, this patch needs check for CONFIG_CLK when call to all clock DM functions.
+CI-Travis build is OK for all target after V3:
+https://travis-ci.org/patrickdelaunay/u-boot/builds/609496187
 
+In V2, I cause the warnings for some boards:
 drivers/usb/host/built-in.o: In function `dwc2_usb_remove':
 drivers/usb/host/dwc2.c:1441: undefined reference to `clk_disable_bulk'
 
-Tested on Agilex, USB is working fine with this patch.
+I test this serie on stm32mp157c-ev1 board, with PHY and CLK
+support
 
-Regards
-Ley Foon
+The U-CLASS are provided by:
+- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
+- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
+- RESET by RCC reset driver = drivers/reset/stm32-reset.c
 
-> Bin, can you give it a once-over ?
-> 
-> If this looks OK to you, I will add it.
-> 
-> [...]
+And I activate the configuration
++CONFIG_USB_DWC2=y
+
+PS: it is not the default configuration to avoid conflict with gadget
+    driver
+
+To solve a binding issue, I also deactivate the gadget support:
+by default only one driver is bound to theusbotg_hs node with "snps,dwc2"
+compatible, and today it is the device one (the first in the driver list).
+
+I also need to deactivate hnp-srp support with:
+
+&usbotg_hs {
+	/* need to disable ONLY for HOST support */
+	hnp-srp-disable;
+};
+
+WARNING: OTG with device or host support is not correctly handle by DWC2
+         driver (see example for dynamic OTG role in DWC3 driver).
+
+The tests executed on the stm32mp157c-ev1 target:
+
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000: USB DWC2
+Bus usbh-ehci@5800d000: USB EHCI 1.00
+scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
+scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 2 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Mass Storage (480 Mb/s, 300mA)
+       Verbatim STORE N GO 070731C8ACD7EE97
+
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Hub (480 Mb/s, 2mA)
+    |
+    +-3  Mass Storage (480 Mb/s, 500mA)
+         Generic  USB Storage
+
+STM32MP> ls usb 0
+<DIR>       4096 .
+<DIR>       4096 ..
+<DIR>      16384 lost+found
+<DIR>       4096 record
+         1490212 xipImage
+        21058006 vmlinux
+
+STM32MP> load usb 0 0xC0000000 vmlinux
+21058006 bytes read in 10851 ms (1.9 MiB/s)
+
+
+Changes in v3:
+- Add stub for clk_disable_bulk
+
+Changes in v2:
+- update dev_err
+- update commit message
+- change dev_err to dev_dbg for PHY function call
+- treat dwc2_shutdown_phy error
+- add clk_disable_bulk in dwc2_usb_remove
+
+Patrick Delaunay (5):
+  dm: clk: add stub for clk_disable_bulk when CONFIG_CLK is desactivated
+  usb: host: dwc2: add phy support
+  usb: host: dwc2: add clk support
+  usb: host: dwc2: force reset assert
+  usb: host: dwc2: add trace to have clean usb start
+
+ drivers/usb/host/dwc2.c | 100 +++++++++++++++++++++++++++++++++++++++-
+ include/clk.h           |   4 ++
+ 2 files changed, 103 insertions(+), 1 deletion(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

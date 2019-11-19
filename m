@@ -2,120 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CBE21035D5
+	by mail.lfdr.de (Postfix) with ESMTPS id 45EA51035D6
 	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 09:13:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F1619C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 08:13:00 +0000 (UTC)
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
- [148.163.156.75])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08241C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 08:13:01 +0000 (UTC)
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+ [209.85.128.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2662BC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F0A37C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 19 Nov 2019 20:12:21 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
- by mx0a-00010702.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAJK7oIr028336
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 19 Nov 2019 14:12:20 -0600
-Received: from nam02-bl2-obe.outbound.protection.outlook.com
- (mail-bl2nam02lp2055.outbound.protection.outlook.com [104.47.38.55])
- by mx0a-00010702.pphosted.com with ESMTP id 2wae13jaa0-2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 19 Nov 2019 14:12:19 -0600
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=R4cJUVqjmWG+i6ZQK1VKS/8RwD+RFDbVgB51K1Pq21o5p5Lw13TCtpOVR6C716hh16ssHNSHWYs6kzrAxr8Of+Up+x2ihEWpWciKbWEVQOZtqmqzjKo5dbY19ycJn5JcGo80xlNmfGzken84DE2cfxGQ7UXftR3ZVQ8Kru7/+IrjiaCi+c3i8UJ4z5DkVttMzukXVcBZgsTCn75/VSsHLjVxCJ0iBKNvnenIKFPlM5PKp/SoIv+pff3HdhQ7v6fGGaQ4R+pY/5Lp5lhhmLSU587a94Ebd2IRPoeHAg+BOubDTk1t//3tVTXWSSLA7DwUAC4T4W5kUK/LgdVreuJd2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VPubLQ7U3HM4tGDKIJrC2P14EiB3RLJjTLV/nbW3Dwg=;
- b=EV8lUl+VLWtpmmK7901n1o+eqVV2bvfgWhJN8Mt1bedEn1JZy2o0f21Ybdfud3dWAJyTajjXE03EvSvKz3lblCdFmchkgWKl4pt/GKpLW4ZiEnY9p0V8tFuoKARi3EujC22Sin7BKJ27UnPsJM51OsCR4pcq4IqcCDJ+kbD/cp4/jvoLaiiPxSDGq79oAqefMkpm8oyYjP1ZbT9aHTf9rxJlv+EKmfRVAZAHl3xX4I/fDCHjJhilIBCY2lWd0APe0REXUmlsb2iIT46VWDzczTqv/PtjD3nVST93qHBHV5Go7jElsNpUEYj63Hn/CDlmkEolLBQLvD3J7dhauGYcTQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=ni.com; dmarc=pass action=none header.from=ni.com; dkim=pass
- header.d=ni.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=nio365.onmicrosoft.com; s=selector2-nio365-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VPubLQ7U3HM4tGDKIJrC2P14EiB3RLJjTLV/nbW3Dwg=;
- b=iM7GN8ZCR/r8joMfp+bdsk0a/A7ug/WKg1oCE8GEBMbbGEQDrPusG1BO8wQ4Wl2hqUEeSZBYJzuPnyw2AoL2Y1qoP6A6q5DFXKuHPMD+ogsEdS6iIc/MVEZuxNSFfbqsizPuKt/sJsqoRWPhMLqOduyU6P9DH8opH4QJSbq5Zmg=
-Received: from CY4PR04MB0376.namprd04.prod.outlook.com (10.173.195.8) by
- CY4PR04MB0729.namprd04.prod.outlook.com (10.172.137.22) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2451.28; Tue, 19 Nov 2019 20:12:16 +0000
-Received: from CY4PR04MB0376.namprd04.prod.outlook.com
- ([fe80::cd76:aad0:e059:2d6d]) by CY4PR04MB0376.namprd04.prod.outlook.com
- ([fe80::cd76:aad0:e059:2d6d%5]) with mapi id 15.20.2451.029; Tue, 19 Nov 2019
- 20:12:16 +0000
-From: Joe Hershberger <joe.hershberger@ni.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Thread-Topic: [U-Boot] [PATCH v2] cmd: remove NET and CMD_NET dependency for
- CMD_PXE
-Thread-Index: AQHVnxWiBwPcflfEXE68QD6cFaOz+A==
-Date: Tue, 19 Nov 2019 20:12:15 +0000
-Message-ID: <CANr=Z=YYZzC__Eka=Astc7+bEWOBNz4fGtG3Zeu011F94BQgsw@mail.gmail.com>
-References: <20191030080414.30521-1-patrice.chotard@st.com>
-In-Reply-To: <20191030080414.30521-1-patrice.chotard@st.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: CH2PR02CA0019.namprd02.prod.outlook.com
- (2603:10b6:610:4e::29) To CY4PR04MB0376.namprd04.prod.outlook.com
- (2603:10b6:903:be::8)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-gm-message-state: APjAAAXFqLiHg+c6zc961GJRyiKMzH1de+vmh4RgQPIbkTQdbMWrRuiI
- ySEdQr2Vr01xstXR6SZA0eNM1/P/CcqdzAAb5x0=
-x-google-smtp-source: APXvYqxIG+kjDHAN4UaR46F1Yz1e4DWgmwhrP6it3OWb7jTerFHiiz1VE8wqJOt+MMDD3NqxT6NnPFt5HoVEhrS0uOU=
-x-received: by 2002:a6b:b453:: with SMTP id
- d80mr18987814iof.307.1574193846685; Tue, 19 Nov 2019 12:04:06 -0800 (PST)
-x-gmail-original-message-id: <CANr=Z=YYZzC__Eka=Astc7+bEWOBNz4fGtG3Zeu011F94BQgsw@mail.gmail.com>
-x-originating-ip: [209.85.166.42]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 91061e34-e850-4c36-c994-08d76d2cc52f
-x-ms-traffictypediagnostic: CY4PR04MB0729:
-x-microsoft-antispam-prvs: <CY4PR04MB07296ACA19324CBDA64BCEF3F64C0@CY4PR04MB0729.namprd04.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:184;
-x-forefront-prvs: 022649CC2C
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(346002)(366004)(396003)(39860400002)(376002)(136003)(199004)(189003)(6436002)(478600001)(9686003)(6512007)(52116002)(6486002)(99286004)(95326003)(966005)(498394004)(30864003)(61266001)(6306002)(2906002)(66446008)(4326008)(229853002)(102836004)(53546011)(25786009)(186003)(486006)(476003)(81156014)(81166006)(26005)(11346002)(8676002)(446003)(6506007)(76176011)(6246003)(66066001)(305945005)(64756008)(66556008)(43066004)(8936002)(3846002)(71190400001)(66476007)(71200400001)(6116002)(66946007)(55446002)(14444005)(256004)(14454004)(5660300002)(54906003)(316002)(6862004)(386003)(107886003)(7736002)(559001)(569006);
- DIR:OUT; SFP:1102; SCL:1; SRVR:CY4PR04MB0729;
- H:CY4PR04MB0376.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: ni.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: hK+eh15/4DvPxuFzYgnZdydJSECGK5hMuaKWWP4Mllq+DjKhFhsS3jezs2sEQHUXzIiWhWS6iihl1Cgq4f7/Q/9ByPabbqL5GNEYwOOSw8raBRRSjtXVtNSWCZy7WOJ5ew9L5tuhxxFDwp89or+ijJGQQrh5BHzIg0nhrLIzJL9HzPxKmRcH8hg4oP3u5cbrRLoDW1FT7Q4b6rFhBkM/zPg3IbhEoxlazB70DgkM6a+UIJCJCTqXd0pxBup87/bZXcpFDj94czp3k66HqwBExxGQCTZmtmy4pBIqEZ14DDdzj0ZWgpd85Zs4bR/rEWZfVJTnBupn/Jf5CP7Qh3vTiqomVDzH/iOZJB54EvXCjBiqbnbEfX+dS/SfNJqdnLkQxfqKGEn4W3X81um6/Ufebe1p4w8vCnbbBFfRgPzlGj4AdcbhT9rMVoSIFg4YOXJK
-x-ms-exchange-transport-forked: True
-Content-ID: <5EF10CCAF02D6644A5B5FF725F50C77C@namprd04.prod.outlook.com>
+ Tue, 19 Nov 2019 21:39:37 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id b11so4847798wmb.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 19 Nov 2019 13:39:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=S3pzCetPsqjkZnz6FBMFPksKMM44FWvN8NODGmV18ws=;
+ b=iw+MxBTFk/WFEVb0vD3VfMxJd/1sTPNSBZhYMod096oJ2VESgD23NrCghZjx5hMsqD
+ oDoTVYngpHrgwVANPgEbooj9RrOs4TlTVDAVQgXBOFCaDfNjfjnffby+/w7fZZXp6kp7
+ CT1rzgB48l6SNxmzXBgfY/Kf+Z9aS3UCzLyrf4+0U/COdIHa+llh9w9TYP+8RunmkKrs
+ 4K2D1q/iHwQvFKGq2ZjrjMVj6R9poYo7JIoGQf0oU7s0vq4Tbn9RgH3AZvBkva6LhBPU
+ i4mDcvw/V590eWUWaIvKWPiFmOuPAsDQ8TFq0x3RZfXCBYWDAarNvO0Zjt//GrUTHTA1
+ IwQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=S3pzCetPsqjkZnz6FBMFPksKMM44FWvN8NODGmV18ws=;
+ b=f92AhJG+iR9IsEblQDNscOzEmi6boBltuAXAlT9wBtQngsuwOPawuQ3sixBcRXm5pr
+ ox/TML7RzRhKFmbAvL4fHvQ0ezrnV/aHcZfM/DOIR70DSgEnnmy2JtQZa5vppkSsVvy1
+ VeVizOPqe+vOC+IQAse4dpsBcVRLAfqDgeHHO6rHpG7ZI7ooHM0IlxIBrcXEQqk/760p
+ VDOOgdOxnqsqYp99+zMLTjgjI5JGbejL5slYpDyRgbAqlvxvQELnSXiaDFeb0ilVP/Bj
+ 1JQYJQOQT/65J4MUQumfHkPqRJhF6KeTQ6XaPxDd696QZaD/2U6j0pfDfzxwmBy+LM3h
+ jbBg==
+X-Gm-Message-State: APjAAAWb0cNm/q9rH600NUpE22vC2FcLC1p4VJ+qJfa83Q3SCkC+589M
+ DacUguFYF91KosaTM8qyh3c=
+X-Google-Smtp-Source: APXvYqyEnNogFzMw7JvH96l6vN5uEWdwTNwp6YLLM7BT2p//UPVDJClVZX5MVGXG1L0Y4F/KhHu/Aw==
+X-Received: by 2002:a1c:5f04:: with SMTP id t4mr8024300wmb.23.1574199576477;
+ Tue, 19 Nov 2019 13:39:36 -0800 (PST)
+Received: from ?IPv6:2a02:8071:6a3:700:51d2:2ba0:bc1:d4b3?
+ ([2a02:8071:6a3:700:51d2:2ba0:bc1:d4b3])
+ by smtp.gmail.com with ESMTPSA id v184sm4636456wme.31.2019.11.19.13.39.35
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 19 Nov 2019 13:39:35 -0800 (PST)
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20191119010210.24477-1-trini@konsulko.com>
+ <20191119010210.24477-5-trini@konsulko.com>
+From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Message-ID: <54bb624a-5d80-71e9-4c5a-f5bd4aa20851@gmail.com>
+Date: Tue, 19 Nov 2019 22:39:18 +0100
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.1
 MIME-Version: 1.0
-X-OriginatorOrg: ni.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91061e34-e850-4c36-c994-08d76d2cc52f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Nov 2019 20:12:15.4014 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 87ba1f9a-44cd-43a6-b008-6fdb45a5204e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: f4fGihLkEjKGPV7lLl0evRIBba+u5Pbobt0eT33IVI2D8DGDlXjHliqhz9/JuD6fn+Mpde3aLgrEUNXgBP5wtc+LQ8UHZVY+RqrnUL0rLts=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR04MB0729
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-11-19_07:2019-11-15,2019-11-19 signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
- score=30 mlxlogscore=999
- clxscore=1011 adultscore=0 priorityscore=1501 lowpriorityscore=0
- bulkscore=0 spamscore=0 malwarescore=0 impostorscore=0 suspectscore=0
- phishscore=0 mlxscore=0 classifier=spam adjust=30 reason=mlx scancount=1
- engine=8.12.0-1910280000 definitions=main-1911190165
+In-Reply-To: <20191119010210.24477-5-trini@konsulko.com>
+Content-Language: en-US
 X-Mailman-Approved-At: Wed, 20 Nov 2019 08:12:58 +0000
-Cc: Marek Vasut <marex@denx.de>, Leo Ruan <tingquan.ruan@cn.bosch.com>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Boris Brezillon <boris.brezillon@bootlin.com>,
- Joseph Hershberger <joseph.hershberger@ni.com>, u-boot <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>, Stefan Roese <sr@denx.de>,
- Chris Packham <judge.packham@gmail.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v2] cmd: remove NET and CMD_NET
- dependency for CMD_PXE
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [U-Boot] [PATCHv2 5/5] env: Finish migration of
+ common ENV options
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -127,3610 +76,1450 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Reply-To: joe.hershberger@ni.com
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrice,
+Am 19.11.2019 um 02:02 schrieb Tom Rini:> - In ARMv8 NXP Layerscape 
+platforms we also need to make use of
+ >    CONFIG_SYS_RELOC_GD_ENV_ADDR now, do so.
+ > - On ENV_IS_IN_REMOTE, CONFIG_ENV_OFFSET is never used, drop the define
+ >    to 0.
+ > - Add Kconfig entry for ENV_ADDR.
+ > - Make ENV_ADDR / ENV_OFFSET depend on the env locations that use it.
+ > - Add ENV_xxx_REDUND options that depend on their primary option and
+ >    SYS_REDUNDAND_ENVIRONMENT
+ > - On a number of PowerPC platforms, use SPL_ENV_ADDR not CONFIG_ENV_ADDR
+ >    for the pre-main-U-Boot environment location.
+ > - On ENV_IS_IN_SPI_FLASH, check not for CONFIG_ENV_ADDR being set but
+ >    rather it being non-zero, as it will now be zero by default.
+ > - Rework the env_offset absolute in env/embedded.o to not use
+ >    CONFIG_ENV_OFFSET as it was the only use of ENV_OFFSET within
+ >    ENV_IS_IN_FLASH.
+ > - Migrate all platforms.
+ >
+ > Cc: Wolfgang Denk <wd@denx.de>
+ > Cc: Joe Hershberger <joe.hershberger@ni.com>
+ > Cc: Patrick Delaunay <patrick.delaunay@st.com>
+ > Cc: uboot-stm32@st-md-mailman.stormreply.com
+ > Signed-off-by: Tom Rini <trini@konsulko.com>
+ > ---
 
-This is a big patch. Is there a reason it isn't crafted into a more
-reviewable form? For instance, refactor some functions as needed in
-the same file so that the actual changes are apparent. Then in a
-subsequent patch move them to a separate file, then in a subsequent
-patch make use of them elsewhere. I don't have the bandwidth to deal
-with obtuse reviews.
+<snip>
 
-Thanks,
--Joe
+ > diff --git a/include/configs/socfpga_common.h 
+b/include/configs/socfpga_common.h
+ > index baa214399ff9..05bfef75c0df 100644
+ > --- a/include/configs/socfpga_common.h
+ > +++ b/include/configs/socfpga_common.h
+ > @@ -157,21 +157,13 @@ unsigned int cm_get_qspi_controller_clk_hz(void);
+ >   /*
+ >    * U-Boot environment
+ >    */
+ > -#if !defined(CONFIG_ENV_SIZE)
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ > -#endif
+ >
+ >   /* Environment for SDMMC boot */
+ > -#if defined(CONFIG_ENV_IS_IN_MMC) && !defined(CONFIG_ENV_OFFSET)
+ > +#if defined(CONFIG_ENV_IS_IN_MMC)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0 /* device 0 */
+ > -#define CONFIG_ENV_OFFSET		(34 * 512) /* just after the GPT */
+ >   #endif
+ >
+ >   /* Environment for QSPI boot */
+ > -#if defined(CONFIG_ENV_IS_IN_SPI_FLASH) && !defined(CONFIG_ENV_OFFSET)
+ > -#define CONFIG_ENV_OFFSET		0x00100000
+ > -#define CONFIG_ENV_SECT_SIZE		(64 * 1024)
+ > -#endif
 
-On Wed, Oct 30, 2019 at 3:05 AM Patrice Chotard <patrice.chotard@st.com> wrote:
->
-> It allows to use sysboot command on board which have no NET support.
->
-> Currently, sysboot command can't be used if CMD_NET and NET flags are
-> not set, while sysboot allows to load extlinux.conf file from local
-> filesystem, so it doesn't need to depend of CMD_NET and NET flags.
->
-> Extract sysboot command's code outside pxe.c and create a new sysboot.c
-> file.
-> As sysboot and pxe commands are sharing piece of code, put this common
-> code into a new file pxe_utils.c.
->
-> Take the opportunity to move from_env() from pxe.c to nvedit.c.
-> Fix some checkpatch issues.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
->
-> ---
->
-> Changes in v2:
->      - split out sysboot code from pxe.c file and create a sysboot.c file
->
->  Kconfig         |    1 +
->  cmd/Kconfig     |    6 +
->  cmd/Makefile    |    3 +-
->  cmd/nvedit.c    |   17 +
->  cmd/pxe.c       | 1719 ++---------------------------------------------
->  cmd/pxe_utils.c | 1463 ++++++++++++++++++++++++++++++++++++++++
->  cmd/pxe_utils.h |   43 ++
->  cmd/sysboot.c   |  134 ++++
->  include/env.h   |   10 +
->  9 files changed, 1724 insertions(+), 1672 deletions(-)
->  create mode 100644 cmd/pxe_utils.c
->  create mode 100644 cmd/pxe_utils.h
->  create mode 100644 cmd/sysboot.c
->
-> diff --git a/Kconfig b/Kconfig
-> index 66b059f749..98cf53ec78 100644
-> --- a/Kconfig
-> +++ b/Kconfig
-> @@ -88,6 +88,7 @@ config DISTRO_DEFAULTS
->         select CMD_PART if PARTITIONS
->         select CMD_PING if CMD_NET
->         select CMD_PXE if NET
-> +       select CMD_SYSBOOT
->         select ENV_VARS_UBOOT_CONFIG
->         select HUSH_PARSER
->         select SUPPORT_RAW_INITRD
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 82b5d300d2..492d7396f6 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1665,6 +1665,12 @@ config CMD_SOUND
->              sound init   - set up sound system
->              sound play   - play a sound
->
-> +config CMD_SYSBOOT
-> +       bool "sysboot"
-> +       select MENU
-> +       help
-> +         Boot image via local extlinux.conf file
-> +
->  config CMD_QFW
->         bool "qfw"
->         select QFW
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index 2d723ea0f0..b55f936cf0 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -108,7 +108,7 @@ ifdef CONFIG_PCI
->  obj-$(CONFIG_CMD_PCI) += pci.o
->  endif
->  obj-$(CONFIG_CMD_PINMUX) += pinmux.o
-> -obj-$(CONFIG_CMD_PXE) += pxe.o
-> +obj-$(CONFIG_CMD_PXE) += pxe.o pxe_utils.o
->  obj-$(CONFIG_CMD_WOL) += wol.o
->  obj-$(CONFIG_CMD_QFW) += qfw.o
->  obj-$(CONFIG_CMD_READ) += read.o
-> @@ -163,6 +163,7 @@ obj-$(CONFIG_CMD_DFU) += dfu.o
->  obj-$(CONFIG_CMD_GPT) += gpt.o
->  obj-$(CONFIG_CMD_ETHSW) += ethsw.o
->  obj-$(CONFIG_CMD_AXI) += axi.o
-> +obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o pxe_utils.o
->
->  # Power
->  obj-$(CONFIG_CMD_PMIC) += pmic.o
-> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-> index 1cb0bc1460..68b293a6f3 100644
-> --- a/cmd/nvedit.c
-> +++ b/cmd/nvedit.c
-> @@ -680,6 +680,23 @@ char *env_get(const char *name)
->         return NULL;
->  }
->
-> +/*
-> + * Like env_get, but prints an error if envvar isn't defined in the
-> + * environment.  It always returns what env_get does, so it can be used in
-> + * place of env_get without changing error handling otherwise.
-> + */
-> +char *from_env(const char *envvar)
+Removing paragraphs like this one will break configs that haven't made 
+it to a mainline defconfig. E.g. for socfpga_socrates_defconfig, you can 
+chose for the ENV to be saved in SPI instead of MMC as the config 
+supports booting from all sources.
 
-Please use a more similar name like env_get_verbose() if you really
-must print a message.
+How do we proceed with such things? I know that might be non-mainline, 
+but I think throwing this info away is a step-back, not an improvement.
 
-> +{
-> +       char *ret;
-> +
-> +       ret = env_get(envvar);
-> +
-> +       if (!ret)
-> +               printf("missing environment variable: %s\n", envvar);
-> +
-> +       return ret;
-> +}
-> +
->  /*
->   * Look up variable from environment for restricted C runtime env.
->   */
-> diff --git a/cmd/pxe.c b/cmd/pxe.c
-> index 2059975446..2dfdc60566 100644
-> --- a/cmd/pxe.c
-> +++ b/cmd/pxe.c
-> @@ -6,22 +6,9 @@
->
->  #include <common.h>
->  #include <command.h>
-> -#include <env.h>
-> -#include <malloc.h>
-> -#include <mapmem.h>
-> -#include <lcd.h>
-> -#include <linux/string.h>
-> -#include <linux/ctype.h>
-> -#include <errno.h>
-> -#include <linux/list.h>
-> -#include <fs.h>
-> -#include <splash.h>
-> -#include <asm/io.h>
-> +#include "pxe_utils.h"
->
-> -#include "menu.h"
-> -#include "cli.h"
-> -
-> -#define MAX_TFTP_PATH_LEN 127
-> +#ifdef CONFIG_CMD_NET
->
->  const char *pxe_default_paths[] = {
->  #ifdef CONFIG_SYS_SOC
-> @@ -35,102 +22,6 @@ const char *pxe_default_paths[] = {
->         NULL
->  };
->
-> -static bool is_pxe;
-> -
-> -/*
-> - * Like env_get, but prints an error if envvar isn't defined in the
-> - * environment.  It always returns what env_get does, so it can be used in
-> - * place of env_get without changing error handling otherwise.
-> - */
-> -static char *from_env(const char *envvar)
-> -{
-> -       char *ret;
-> -
-> -       ret = env_get(envvar);
-> -
-> -       if (!ret)
-> -               printf("missing environment variable: %s\n", envvar);
-> -
-> -       return ret;
-> -}
-> -
-> -#ifdef CONFIG_CMD_NET
-> -/*
-> - * Convert an ethaddr from the environment to the format used by pxelinux
-> - * filenames based on mac addresses. Convert's ':' to '-', and adds "01-" to
-> - * the beginning of the ethernet address to indicate a hardware type of
-> - * Ethernet. Also converts uppercase hex characters into lowercase, to match
-> - * pxelinux's behavior.
-> - *
-> - * Returns 1 for success, -ENOENT if 'ethaddr' is undefined in the
-> - * environment, or some other value < 0 on error.
-> - */
-> -static int format_mac_pxe(char *outbuf, size_t outbuf_len)
-> -{
-> -       uchar ethaddr[6];
-> -
-> -       if (outbuf_len < 21) {
-> -               printf("outbuf is too small (%zd < 21)\n", outbuf_len);
-> -
-> -               return -EINVAL;
-> -       }
-> -
-> -       if (!eth_env_get_enetaddr_by_index("eth", eth_get_dev_index(), ethaddr))
-> -               return -ENOENT;
-> -
-> -       sprintf(outbuf, "01-%02x-%02x-%02x-%02x-%02x-%02x",
-> -               ethaddr[0], ethaddr[1], ethaddr[2],
-> -               ethaddr[3], ethaddr[4], ethaddr[5]);
-> -
-> -       return 1;
-> -}
-> -#endif
-> -
-> -/*
-> - * Returns the directory the file specified in the bootfile env variable is
-> - * in. If bootfile isn't defined in the environment, return NULL, which should
-> - * be interpreted as "don't prepend anything to paths".
-> - */
-> -static int get_bootfile_path(const char *file_path, char *bootfile_path,
-> -                            size_t bootfile_path_size)
-> -{
-> -       char *bootfile, *last_slash;
-> -       size_t path_len = 0;
-> -
-> -       /* Only syslinux allows absolute paths */
-> -       if (file_path[0] == '/' && !is_pxe)
-> -               goto ret;
-> -
-> -       bootfile = from_env("bootfile");
-> -
-> -       if (!bootfile)
-> -               goto ret;
-> -
-> -       last_slash = strrchr(bootfile, '/');
-> -
-> -       if (last_slash == NULL)
-> -               goto ret;
-> -
-> -       path_len = (last_slash - bootfile) + 1;
-> -
-> -       if (bootfile_path_size < path_len) {
-> -               printf("bootfile_path too small. (%zd < %zd)\n",
-> -                               bootfile_path_size, path_len);
-> -
-> -               return -1;
-> -       }
-> -
-> -       strncpy(bootfile_path, bootfile, path_len);
-> -
-> - ret:
-> -       bootfile_path[path_len] = '\0';
-> -
-> -       return 1;
-> -}
-> -
-> -static int (*do_getfile)(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr);
-> -
-> -#ifdef CONFIG_CMD_NET
->  static int do_get_tftp(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
->  {
->         char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
-> @@ -143,218 +34,6 @@ static int do_get_tftp(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
->
->         return 1;
->  }
-> -#endif
-> -
-> -static char *fs_argv[5];
-> -
-> -static int do_get_ext2(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> -{
-> -#ifdef CONFIG_CMD_EXT2
-> -       fs_argv[0] = "ext2load";
-> -       fs_argv[3] = file_addr;
-> -       fs_argv[4] = (void *)file_path;
-> -
-> -       if (!do_ext2load(cmdtp, 0, 5, fs_argv))
-> -               return 1;
-> -#endif
-> -       return -ENOENT;
-> -}
-> -
-> -static int do_get_fat(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> -{
-> -#ifdef CONFIG_CMD_FAT
-> -       fs_argv[0] = "fatload";
-> -       fs_argv[3] = file_addr;
-> -       fs_argv[4] = (void *)file_path;
-> -
-> -       if (!do_fat_fsload(cmdtp, 0, 5, fs_argv))
-> -               return 1;
-> -#endif
-> -       return -ENOENT;
-> -}
-> -
-> -static int do_get_any(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> -{
-> -#ifdef CONFIG_CMD_FS_GENERIC
-> -       fs_argv[0] = "load";
-> -       fs_argv[3] = file_addr;
-> -       fs_argv[4] = (void *)file_path;
-> -
-> -       if (!do_load(cmdtp, 0, 5, fs_argv, FS_TYPE_ANY))
-> -               return 1;
-> -#endif
-> -       return -ENOENT;
-> -}
-> -
-> -/*
-> - * As in pxelinux, paths to files referenced from files we retrieve are
-> - * relative to the location of bootfile. get_relfile takes such a path and
-> - * joins it with the bootfile path to get the full path to the target file. If
-> - * the bootfile path is NULL, we use file_path as is.
-> - *
-> - * Returns 1 for success, or < 0 on error.
-> - */
-> -static int get_relfile(cmd_tbl_t *cmdtp, const char *file_path,
-> -       unsigned long file_addr)
-> -{
-> -       size_t path_len;
-> -       char relfile[MAX_TFTP_PATH_LEN+1];
-> -       char addr_buf[18];
-> -       int err;
-> -
-> -       err = get_bootfile_path(file_path, relfile, sizeof(relfile));
-> -
-> -       if (err < 0)
-> -               return err;
-> -
-> -       path_len = strlen(file_path);
-> -       path_len += strlen(relfile);
-> -
-> -       if (path_len > MAX_TFTP_PATH_LEN) {
-> -               printf("Base path too long (%s%s)\n",
-> -                                       relfile,
-> -                                       file_path);
-> -
-> -               return -ENAMETOOLONG;
-> -       }
-> -
-> -       strcat(relfile, file_path);
-> -
-> -       printf("Retrieving file: %s\n", relfile);
-> -
-> -       sprintf(addr_buf, "%lx", file_addr);
-> -
-> -       return do_getfile(cmdtp, relfile, addr_buf);
-> -}
-> -
-> -/*
-> - * Retrieve the file at 'file_path' to the locate given by 'file_addr'. If
-> - * 'bootfile' was specified in the environment, the path to bootfile will be
-> - * prepended to 'file_path' and the resulting path will be used.
-> - *
-> - * Returns 1 on success, or < 0 for error.
-> - */
-> -static int get_pxe_file(cmd_tbl_t *cmdtp, const char *file_path,
-> -       unsigned long file_addr)
-> -{
-> -       unsigned long config_file_size;
-> -       char *tftp_filesize;
-> -       int err;
-> -       char *buf;
-> -
-> -       err = get_relfile(cmdtp, file_path, file_addr);
-> -
-> -       if (err < 0)
-> -               return err;
-> -
-> -       /*
-> -        * the file comes without a NUL byte at the end, so find out its size
-> -        * and add the NUL byte.
-> -        */
-> -       tftp_filesize = from_env("filesize");
-> -
-> -       if (!tftp_filesize)
-> -               return -ENOENT;
-> -
-> -       if (strict_strtoul(tftp_filesize, 16, &config_file_size) < 0)
-> -               return -EINVAL;
-> -
-> -       buf = map_sysmem(file_addr + config_file_size, 1);
-> -       *buf = '\0';
-> -       unmap_sysmem(buf);
-> -
-> -       return 1;
-> -}
-> -
-> -#ifdef CONFIG_CMD_NET
-> -
-> -#define PXELINUX_DIR "pxelinux.cfg/"
-> -
-> -/*
-> - * Retrieves a file in the 'pxelinux.cfg' folder. Since this uses get_pxe_file
-> - * to do the hard work, the location of the 'pxelinux.cfg' folder is generated
-> - * from the bootfile path, as described above.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int get_pxelinux_path(cmd_tbl_t *cmdtp, const char *file,
-> -       unsigned long pxefile_addr_r)
-> -{
-> -       size_t base_len = strlen(PXELINUX_DIR);
-> -       char path[MAX_TFTP_PATH_LEN+1];
-> -
-> -       if (base_len + strlen(file) > MAX_TFTP_PATH_LEN) {
-> -               printf("path (%s%s) too long, skipping\n",
-> -                               PXELINUX_DIR, file);
-> -               return -ENAMETOOLONG;
-> -       }
-> -
-> -       sprintf(path, PXELINUX_DIR "%s", file);
-> -
-> -       return get_pxe_file(cmdtp, path, pxefile_addr_r);
-> -}
-> -
-> -/*
-> - * Looks for a pxe file with a name based on the pxeuuid environment variable.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int pxe_uuid_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> -{
-> -       char *uuid_str;
-> -
-> -       uuid_str = from_env("pxeuuid");
-> -
-> -       if (!uuid_str)
-> -               return -ENOENT;
-> -
-> -       return get_pxelinux_path(cmdtp, uuid_str, pxefile_addr_r);
-> -}
-> -
-> -/*
-> - * Looks for a pxe file with a name based on the 'ethaddr' environment
-> - * variable.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int pxe_mac_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> -{
-> -       char mac_str[21];
-> -       int err;
-> -
-> -       err = format_mac_pxe(mac_str, sizeof(mac_str));
-> -
-> -       if (err < 0)
-> -               return err;
-> -
-> -       return get_pxelinux_path(cmdtp, mac_str, pxefile_addr_r);
-> -}
-> -
-> -/*
-> - * Looks for pxe files with names based on our IP address. See pxelinux
-> - * documentation for details on what these file names look like.  We match
-> - * that exactly.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int pxe_ipaddr_paths(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> -{
-> -       char ip_addr[9];
-> -       int mask_pos, err;
-> -
-> -       sprintf(ip_addr, "%08X", ntohl(net_ip.s_addr));
-> -
-> -       for (mask_pos = 7; mask_pos >= 0;  mask_pos--) {
-> -               err = get_pxelinux_path(cmdtp, ip_addr, pxefile_addr_r);
-> -
-> -               if (err > 0)
-> -                       return err;
-> -
-> -               ip_addr[mask_pos] = '\0';
-> -       }
-> -
-> -       return -ENOENT;
-> -}
->
->  /*
->   * Entry point for the 'pxe get' command.
-> @@ -417,1292 +96,77 @@ do_pxe_get(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
->
->         return 1;
->  }
-> -#endif
-> -
-> -/*
-> - * Wrapper to make it easier to store the file at file_path in the location
-> - * specified by envaddr_name. file_path will be joined to the bootfile path,
-> - * if any is specified.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int get_relfile_envaddr(cmd_tbl_t *cmdtp, const char *file_path, const char *envaddr_name)
-> -{
-> -       unsigned long file_addr;
-> -       char *envaddr;
-> -
-> -       envaddr = from_env(envaddr_name);
-> -
-> -       if (!envaddr)
-> -               return -ENOENT;
-> -
-> -       if (strict_strtoul(envaddr, 16, &file_addr) < 0)
-> -               return -EINVAL;
-> -
-> -       return get_relfile(cmdtp, file_path, file_addr);
-> -}
-> -
-> -/*
-> - * A note on the pxe file parser.
-> - *
-> - * We're parsing files that use syslinux grammar, which has a few quirks.
-> - * String literals must be recognized based on context - there is no
-> - * quoting or escaping support. There's also nothing to explicitly indicate
-> - * when a label section completes. We deal with that by ending a label
-> - * section whenever we see a line that doesn't include.
-> - *
-> - * As with the syslinux family, this same file format could be reused in the
-> - * future for non pxe purposes. The only action it takes during parsing that
-> - * would throw this off is handling of include files. It assumes we're using
-> - * pxe, and does a tftp download of a file listed as an include file in the
-> - * middle of the parsing operation. That could be handled by refactoring it to
-> - * take a 'include file getter' function.
-> - */
-> -
-> -/*
-> - * Describes a single label given in a pxe file.
-> - *
-> - * Create these with the 'label_create' function given below.
-> - *
-> - * name - the name of the menu as given on the 'menu label' line.
-> - * kernel - the path to the kernel file to use for this label.
-> - * append - kernel command line to use when booting this label
-> - * initrd - path to the initrd to use for this label.
-> - * attempted - 0 if we haven't tried to boot this label, 1 if we have.
-> - * localboot - 1 if this label specified 'localboot', 0 otherwise.
-> - * list - lets these form a list, which a pxe_menu struct will hold.
-> - */
-> -struct pxe_label {
-> -       char num[4];
-> -       char *name;
-> -       char *menu;
-> -       char *kernel;
-> -       char *config;
-> -       char *append;
-> -       char *initrd;
-> -       char *fdt;
-> -       char *fdtdir;
-> -       int ipappend;
-> -       int attempted;
-> -       int localboot;
-> -       int localboot_val;
-> -       struct list_head list;
-> -};
-> -
-> -/*
-> - * Describes a pxe menu as given via pxe files.
-> - *
-> - * title - the name of the menu as given by a 'menu title' line.
-> - * default_label - the name of the default label, if any.
-> - * bmp - the bmp file name which is displayed in background
-> - * timeout - time in tenths of a second to wait for a user key-press before
-> - *           booting the default label.
-> - * prompt - if 0, don't prompt for a choice unless the timeout period is
-> - *          interrupted.  If 1, always prompt for a choice regardless of
-> - *          timeout.
-> - * labels - a list of labels defined for the menu.
-> - */
-> -struct pxe_menu {
-> -       char *title;
-> -       char *default_label;
-> -       char *bmp;
-> -       int timeout;
-> -       int prompt;
-> -       struct list_head labels;
-> -};
->
->  /*
-> - * Allocates memory for and initializes a pxe_label. This uses malloc, so the
-> - * result must be free()'d to reclaim the memory.
-> + * Boots a system using a pxe file
->   *
-> - * Returns NULL if malloc fails.
-> + * Returns 0 on success, 1 on error.
->   */
-> -static struct pxe_label *label_create(void)
-> +static int
-> +do_pxe_boot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
->  {
-> -       struct pxe_label *label;
-> -
-> -       label = malloc(sizeof(struct pxe_label));
-> -
-> -       if (!label)
-> -               return NULL;
-> +       unsigned long pxefile_addr_r;
-> +       struct pxe_menu *cfg;
-> +       char *pxefile_addr_str;
->
-> -       memset(label, 0, sizeof(struct pxe_label));
-> +       do_getfile = do_get_tftp;
->
-> -       return label;
-> -}
-> +       if (argc == 1) {
-> +               pxefile_addr_str = from_env("pxefile_addr_r");
-> +               if (!pxefile_addr_str)
-> +                       return 1;
->
-> -/*
-> - * Free the memory used by a pxe_label, including that used by its name,
-> - * kernel, append and initrd members, if they're non NULL.
-> - *
-> - * So - be sure to only use dynamically allocated memory for the members of
-> - * the pxe_label struct, unless you want to clean it up first. These are
-> - * currently only created by the pxe file parsing code.
-> - */
-> -static void label_destroy(struct pxe_label *label)
-> -{
-> -       if (label->name)
-> -               free(label->name);
-> +       } else if (argc == 2) {
-> +               pxefile_addr_str = argv[1];
-> +       } else {
-> +               return CMD_RET_USAGE;
-> +       }
->
-> -       if (label->kernel)
-> -               free(label->kernel);
-> +       if (strict_strtoul(pxefile_addr_str, 16, &pxefile_addr_r) < 0) {
-> +               printf("Invalid pxefile address: %s\n", pxefile_addr_str);
-> +               return 1;
-> +       }
->
-> -       if (label->config)
-> -               free(label->config);
-> +       cfg = parse_pxefile(cmdtp, pxefile_addr_r);
->
-> -       if (label->append)
-> -               free(label->append);
-> +       if (!cfg) {
-> +               printf("Error parsing config file\n");
-> +               return 1;
-> +       }
->
-> -       if (label->initrd)
-> -               free(label->initrd);
-> +       handle_pxe_menu(cmdtp, cfg);
->
-> -       if (label->fdt)
-> -               free(label->fdt);
-> +       destroy_pxe_menu(cfg);
->
-> -       if (label->fdtdir)
-> -               free(label->fdtdir);
-> +       copy_filename(net_boot_file_name, "", sizeof(net_boot_file_name));
->
-> -       free(label);
-> +       return 0;
->  }
->
-> -/*
-> - * Print a label and its string members if they're defined.
-> - *
-> - * This is passed as a callback to the menu code for displaying each
-> - * menu entry.
-> - */
-> -static void label_print(void *data)
-> -{
-> -       struct pxe_label *label = data;
-> -       const char *c = label->menu ? label->menu : label->name;
-> -
-> -       printf("%s:\t%s\n", label->num, c);
-> -}
-> +static cmd_tbl_t cmd_pxe_sub[] = {
-> +       U_BOOT_CMD_MKENT(get, 1, 1, do_pxe_get, "", ""),
-> +       U_BOOT_CMD_MKENT(boot, 2, 1, do_pxe_boot, "", "")
-> +};
->
-> -/*
-> - * Boot a label that specified 'localboot'. This requires that the 'localcmd'
-> - * environment variable is defined. Its contents will be executed as U-Boot
-> - * command.  If the label specified an 'append' line, its contents will be
-> - * used to overwrite the contents of the 'bootargs' environment variable prior
-> - * to running 'localcmd'.
-> - *
-> - * Returns 1 on success or < 0 on error.
-> - */
-> -static int label_localboot(struct pxe_label *label)
-> +static int do_pxe(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
->  {
-> -       char *localcmd;
-> +       cmd_tbl_t *cp;
->
-> -       localcmd = from_env("localcmd");
-> +       if (argc < 2)
-> +               return CMD_RET_USAGE;
->
-> -       if (!localcmd)
-> -               return -ENOENT;
-> +       is_pxe = true;
->
-> -       if (label->append) {
-> -               char bootargs[CONFIG_SYS_CBSIZE];
-> +       /* drop initial "pxe" arg */
-> +       argc--;
-> +       argv++;
->
-> -               cli_simple_process_macros(label->append, bootargs);
-> -               env_set("bootargs", bootargs);
-> -       }
-> +       cp = find_cmd_tbl(argv[0], cmd_pxe_sub, ARRAY_SIZE(cmd_pxe_sub));
->
-> -       debug("running: %s\n", localcmd);
-> +       if (cp)
-> +               return cp->cmd(cmdtp, flag, argc, argv);
->
-> -       return run_command_list(localcmd, strlen(localcmd), 0);
-> -}
-> -
-> -/*
-> - * Boot according to the contents of a pxe_label.
-> - *
-> - * If we can't boot for any reason, we return.  A successful boot never
-> - * returns.
-> - *
-> - * The kernel will be stored in the location given by the 'kernel_addr_r'
-> - * environment variable.
-> - *
-> - * If the label specifies an initrd file, it will be stored in the location
-> - * given by the 'ramdisk_addr_r' environment variable.
-> - *
-> - * If the label specifies an 'append' line, its contents will overwrite that
-> - * of the 'bootargs' environment variable.
-> - */
-> -static int label_boot(cmd_tbl_t *cmdtp, struct pxe_label *label)
-> -{
-> -       char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
-> -       char initrd_str[28];
-> -       char mac_str[29] = "";
-> -       char ip_str[68] = "";
-> -       char *fit_addr = NULL;
-> -       int bootm_argc = 2;
-> -       int len = 0;
-> -       ulong kernel_addr;
-> -       void *buf;
-> -
-> -       label_print(label);
-> -
-> -       label->attempted = 1;
-> -
-> -       if (label->localboot) {
-> -               if (label->localboot_val >= 0)
-> -                       label_localboot(label);
-> -               return 0;
-> -       }
-> -
-> -       if (label->kernel == NULL) {
-> -               printf("No kernel given, skipping %s\n",
-> -                               label->name);
-> -               return 1;
-> -       }
-> -
-> -       if (label->initrd) {
-> -               if (get_relfile_envaddr(cmdtp, label->initrd, "ramdisk_addr_r") < 0) {
-> -                       printf("Skipping %s for failure retrieving initrd\n",
-> -                                       label->name);
-> -                       return 1;
-> -               }
-> -
-> -               bootm_argv[2] = initrd_str;
-> -               strncpy(bootm_argv[2], env_get("ramdisk_addr_r"), 18);
-> -               strcat(bootm_argv[2], ":");
-> -               strncat(bootm_argv[2], env_get("filesize"), 9);
-> -       }
-> -
-> -       if (get_relfile_envaddr(cmdtp, label->kernel, "kernel_addr_r") < 0) {
-> -               printf("Skipping %s for failure retrieving kernel\n",
-> -                               label->name);
-> -               return 1;
-> -       }
-> -
-> -       if (label->ipappend & 0x1) {
-> -               sprintf(ip_str, " ip=%s:%s:%s:%s",
-> -                       env_get("ipaddr"), env_get("serverip"),
-> -                       env_get("gatewayip"), env_get("netmask"));
-> -       }
-> -
-> -#ifdef CONFIG_CMD_NET
-> -       if (label->ipappend & 0x2) {
-> -               int err;
-> -               strcpy(mac_str, " BOOTIF=");
-> -               err = format_mac_pxe(mac_str + 8, sizeof(mac_str) - 8);
-> -               if (err < 0)
-> -                       mac_str[0] = '\0';
-> -       }
-> -#endif
-> -
-> -       if ((label->ipappend & 0x3) || label->append) {
-> -               char bootargs[CONFIG_SYS_CBSIZE] = "";
-> -               char finalbootargs[CONFIG_SYS_CBSIZE];
-> -
-> -               if (strlen(label->append ?: "") +
-> -                   strlen(ip_str) + strlen(mac_str) + 1 > sizeof(bootargs)) {
-> -                       printf("bootarg overflow %zd+%zd+%zd+1 > %zd\n",
-> -                              strlen(label->append ?: ""),
-> -                              strlen(ip_str), strlen(mac_str),
-> -                              sizeof(bootargs));
-> -                       return 1;
-> -               } else {
-> -                       if (label->append)
-> -                               strncpy(bootargs, label->append,
-> -                                       sizeof(bootargs));
-> -                       strcat(bootargs, ip_str);
-> -                       strcat(bootargs, mac_str);
-> -
-> -                       cli_simple_process_macros(bootargs, finalbootargs);
-> -                       env_set("bootargs", finalbootargs);
-> -                       printf("append: %s\n", finalbootargs);
-> -               }
-> -       }
-> -
-> -       bootm_argv[1] = env_get("kernel_addr_r");
-> -       /* for FIT, append the configuration identifier */
-> -       if (label->config) {
-> -               int len = strlen(bootm_argv[1]) + strlen(label->config) + 1;
-> -
-> -               fit_addr = malloc(len);
-> -               if (!fit_addr) {
-> -                       printf("malloc fail (FIT address)\n");
-> -                       return 1;
-> -               }
-> -               snprintf(fit_addr, len, "%s%s", bootm_argv[1], label->config);
-> -               bootm_argv[1] = fit_addr;
-> -       }
-> -
-> -       /*
-> -        * fdt usage is optional:
-> -        * It handles the following scenarios. All scenarios are exclusive
-> -        *
-> -        * Scenario 1: If fdt_addr_r specified and "fdt" label is defined in
-> -        * pxe file, retrieve fdt blob from server. Pass fdt_addr_r to bootm,
-> -        * and adjust argc appropriately.
-> -        *
-> -        * Scenario 2: If there is an fdt_addr specified, pass it along to
-> -        * bootm, and adjust argc appropriately.
-> -        *
-> -        * Scenario 3: fdt blob is not available.
-> -        */
-> -       bootm_argv[3] = env_get("fdt_addr_r");
-> -
-> -       /* if fdt label is defined then get fdt from server */
-> -       if (bootm_argv[3]) {
-> -               char *fdtfile = NULL;
-> -               char *fdtfilefree = NULL;
-> -
-> -               if (label->fdt) {
-> -                       fdtfile = label->fdt;
-> -               } else if (label->fdtdir) {
-> -                       char *f1, *f2, *f3, *f4, *slash;
-> -
-> -                       f1 = env_get("fdtfile");
-> -                       if (f1) {
-> -                               f2 = "";
-> -                               f3 = "";
-> -                               f4 = "";
-> -                       } else {
-> -                               /*
-> -                                * For complex cases where this code doesn't
-> -                                * generate the correct filename, the board
-> -                                * code should set $fdtfile during early boot,
-> -                                * or the boot scripts should set $fdtfile
-> -                                * before invoking "pxe" or "sysboot".
-> -                                */
-> -                               f1 = env_get("soc");
-> -                               f2 = "-";
-> -                               f3 = env_get("board");
-> -                               f4 = ".dtb";
-> -                       }
-> -
-> -                       len = strlen(label->fdtdir);
-> -                       if (!len)
-> -                               slash = "./";
-> -                       else if (label->fdtdir[len - 1] != '/')
-> -                               slash = "/";
-> -                       else
-> -                               slash = "";
-> -
-> -                       len = strlen(label->fdtdir) + strlen(slash) +
-> -                               strlen(f1) + strlen(f2) + strlen(f3) +
-> -                               strlen(f4) + 1;
-> -                       fdtfilefree = malloc(len);
-> -                       if (!fdtfilefree) {
-> -                               printf("malloc fail (FDT filename)\n");
-> -                               goto cleanup;
-> -                       }
-> -
-> -                       snprintf(fdtfilefree, len, "%s%s%s%s%s%s",
-> -                                label->fdtdir, slash, f1, f2, f3, f4);
-> -                       fdtfile = fdtfilefree;
-> -               }
-> -
-> -               if (fdtfile) {
-> -                       int err = get_relfile_envaddr(cmdtp, fdtfile, "fdt_addr_r");
-> -                       free(fdtfilefree);
-> -                       if (err < 0) {
-> -                               printf("Skipping %s for failure retrieving fdt\n",
-> -                                               label->name);
-> -                               goto cleanup;
-> -                       }
-> -               } else {
-> -                       bootm_argv[3] = NULL;
-> -               }
-> -       }
-> -
-> -       if (!bootm_argv[3])
-> -               bootm_argv[3] = env_get("fdt_addr");
-> -
-> -       if (bootm_argv[3]) {
-> -               if (!bootm_argv[2])
-> -                       bootm_argv[2] = "-";
-> -               bootm_argc = 4;
-> -       }
-> -
-> -       kernel_addr = genimg_get_kernel_addr(bootm_argv[1]);
-> -       buf = map_sysmem(kernel_addr, 0);
-> -       /* Try bootm for legacy and FIT format image */
-> -       if (genimg_get_format(buf) != IMAGE_FORMAT_INVALID)
-> -               do_bootm(cmdtp, 0, bootm_argc, bootm_argv);
-> -#ifdef CONFIG_CMD_BOOTI
-> -       /* Try booting an AArch64 Linux kernel image */
-> -       else
-> -               do_booti(cmdtp, 0, bootm_argc, bootm_argv);
-> -#elif defined(CONFIG_CMD_BOOTZ)
-> -       /* Try booting a Image */
-> -       else
-> -               do_bootz(cmdtp, 0, bootm_argc, bootm_argv);
-> -#endif
-> -       unmap_sysmem(buf);
-> -
-> -cleanup:
-> -       if (fit_addr)
-> -               free(fit_addr);
-> -       return 1;
-> -}
-> -
-> -/*
-> - * Tokens for the pxe file parser.
-> - */
-> -enum token_type {
-> -       T_EOL,
-> -       T_STRING,
-> -       T_EOF,
-> -       T_MENU,
-> -       T_TITLE,
-> -       T_TIMEOUT,
-> -       T_LABEL,
-> -       T_KERNEL,
-> -       T_LINUX,
-> -       T_APPEND,
-> -       T_INITRD,
-> -       T_LOCALBOOT,
-> -       T_DEFAULT,
-> -       T_PROMPT,
-> -       T_INCLUDE,
-> -       T_FDT,
-> -       T_FDTDIR,
-> -       T_ONTIMEOUT,
-> -       T_IPAPPEND,
-> -       T_BACKGROUND,
-> -       T_INVALID
-> -};
-> -
-> -/*
-> - * A token - given by a value and a type.
-> - */
-> -struct token {
-> -       char *val;
-> -       enum token_type type;
-> -};
-> -
-> -/*
-> - * Keywords recognized.
-> - */
-> -static const struct token keywords[] = {
-> -       {"menu", T_MENU},
-> -       {"title", T_TITLE},
-> -       {"timeout", T_TIMEOUT},
-> -       {"default", T_DEFAULT},
-> -       {"prompt", T_PROMPT},
-> -       {"label", T_LABEL},
-> -       {"kernel", T_KERNEL},
-> -       {"linux", T_LINUX},
-> -       {"localboot", T_LOCALBOOT},
-> -       {"append", T_APPEND},
-> -       {"initrd", T_INITRD},
-> -       {"include", T_INCLUDE},
-> -       {"devicetree", T_FDT},
-> -       {"fdt", T_FDT},
-> -       {"devicetreedir", T_FDTDIR},
-> -       {"fdtdir", T_FDTDIR},
-> -       {"ontimeout", T_ONTIMEOUT,},
-> -       {"ipappend", T_IPAPPEND,},
-> -       {"background", T_BACKGROUND,},
-> -       {NULL, T_INVALID}
-> -};
-> -
-> -/*
-> - * Since pxe(linux) files don't have a token to identify the start of a
-> - * literal, we have to keep track of when we're in a state where a literal is
-> - * expected vs when we're in a state a keyword is expected.
-> - */
-> -enum lex_state {
-> -       L_NORMAL = 0,
-> -       L_KEYWORD,
-> -       L_SLITERAL
-> -};
-> -
-> -/*
-> - * get_string retrieves a string from *p and stores it as a token in
-> - * *t.
-> - *
-> - * get_string used for scanning both string literals and keywords.
-> - *
-> - * Characters from *p are copied into t-val until a character equal to
-> - * delim is found, or a NUL byte is reached. If delim has the special value of
-> - * ' ', any whitespace character will be used as a delimiter.
-> - *
-> - * If lower is unequal to 0, uppercase characters will be converted to
-> - * lowercase in the result. This is useful to make keywords case
-> - * insensitive.
-> - *
-> - * The location of *p is updated to point to the first character after the end
-> - * of the token - the ending delimiter.
-> - *
-> - * On success, the new value of t->val is returned. Memory for t->val is
-> - * allocated using malloc and must be free()'d to reclaim it.  If insufficient
-> - * memory is available, NULL is returned.
-> - */
-> -static char *get_string(char **p, struct token *t, char delim, int lower)
-> -{
-> -       char *b, *e;
-> -       size_t len, i;
-> -
-> -       /*
-> -        * b and e both start at the beginning of the input stream.
-> -        *
-> -        * e is incremented until we find the ending delimiter, or a NUL byte
-> -        * is reached. Then, we take e - b to find the length of the token.
-> -        */
-> -       b = e = *p;
-> -
-> -       while (*e) {
-> -               if ((delim == ' ' && isspace(*e)) || delim == *e)
-> -                       break;
-> -               e++;
-> -       }
-> -
-> -       len = e - b;
-> -
-> -       /*
-> -        * Allocate memory to hold the string, and copy it in, converting
-> -        * characters to lowercase if lower is != 0.
-> -        */
-> -       t->val = malloc(len + 1);
-> -       if (!t->val)
-> -               return NULL;
-> -
-> -       for (i = 0; i < len; i++, b++) {
-> -               if (lower)
-> -                       t->val[i] = tolower(*b);
-> -               else
-> -                       t->val[i] = *b;
-> -       }
-> -
-> -       t->val[len] = '\0';
-> -
-> -       /*
-> -        * Update *p so the caller knows where to continue scanning.
-> -        */
-> -       *p = e;
-> -
-> -       t->type = T_STRING;
-> -
-> -       return t->val;
-> -}
-> -
-> -/*
-> - * Populate a keyword token with a type and value.
-> - */
-> -static void get_keyword(struct token *t)
-> -{
-> -       int i;
-> -
-> -       for (i = 0; keywords[i].val; i++) {
-> -               if (!strcmp(t->val, keywords[i].val)) {
-> -                       t->type = keywords[i].type;
-> -                       break;
-> -               }
-> -       }
-> -}
-> -
-> -/*
-> - * Get the next token.  We have to keep track of which state we're in to know
-> - * if we're looking to get a string literal or a keyword.
-> - *
-> - * *p is updated to point at the first character after the current token.
-> - */
-> -static void get_token(char **p, struct token *t, enum lex_state state)
-> -{
-> -       char *c = *p;
-> -
-> -       t->type = T_INVALID;
-> -
-> -       /* eat non EOL whitespace */
-> -       while (isblank(*c))
-> -               c++;
-> -
-> -       /*
-> -        * eat comments. note that string literals can't begin with #, but
-> -        * can contain a # after their first character.
-> -        */
-> -       if (*c == '#') {
-> -               while (*c && *c != '\n')
-> -                       c++;
-> -       }
-> -
-> -       if (*c == '\n') {
-> -               t->type = T_EOL;
-> -               c++;
-> -       } else if (*c == '\0') {
-> -               t->type = T_EOF;
-> -               c++;
-> -       } else if (state == L_SLITERAL) {
-> -               get_string(&c, t, '\n', 0);
-> -       } else if (state == L_KEYWORD) {
-> -               /*
-> -                * when we expect a keyword, we first get the next string
-> -                * token delimited by whitespace, and then check if it
-> -                * matches a keyword in our keyword list. if it does, it's
-> -                * converted to a keyword token of the appropriate type, and
-> -                * if not, it remains a string token.
-> -                */
-> -               get_string(&c, t, ' ', 1);
-> -               get_keyword(t);
-> -       }
-> -
-> -       *p = c;
-> -}
-> -
-> -/*
-> - * Increment *c until we get to the end of the current line, or EOF.
-> - */
-> -static void eol_or_eof(char **c)
-> -{
-> -       while (**c && **c != '\n')
-> -               (*c)++;
-> -}
-> -
-> -/*
-> - * All of these parse_* functions share some common behavior.
-> - *
-> - * They finish with *c pointing after the token they parse, and return 1 on
-> - * success, or < 0 on error.
-> - */
-> -
-> -/*
-> - * Parse a string literal and store a pointer it at *dst. String literals
-> - * terminate at the end of the line.
-> - */
-> -static int parse_sliteral(char **c, char **dst)
-> -{
-> -       struct token t;
-> -       char *s = *c;
-> -
-> -       get_token(c, &t, L_SLITERAL);
-> -
-> -       if (t.type != T_STRING) {
-> -               printf("Expected string literal: %.*s\n", (int)(*c - s), s);
-> -               return -EINVAL;
-> -       }
-> -
-> -       *dst = t.val;
-> -
-> -       return 1;
-> -}
-> -
-> -/*
-> - * Parse a base 10 (unsigned) integer and store it at *dst.
-> - */
-> -static int parse_integer(char **c, int *dst)
-> -{
-> -       struct token t;
-> -       char *s = *c;
-> -
-> -       get_token(c, &t, L_SLITERAL);
-> -
-> -       if (t.type != T_STRING) {
-> -               printf("Expected string: %.*s\n", (int)(*c - s), s);
-> -               return -EINVAL;
-> -       }
-> -
-> -       *dst = simple_strtol(t.val, NULL, 10);
-> -
-> -       free(t.val);
-> -
-> -       return 1;
-> -}
-> -
-> -static int parse_pxefile_top(cmd_tbl_t *cmdtp, char *p, unsigned long base,
-> -       struct pxe_menu *cfg, int nest_level);
-> -
-> -/*
-> - * Parse an include statement, and retrieve and parse the file it mentions.
-> - *
-> - * base should point to a location where it's safe to store the file, and
-> - * nest_level should indicate how many nested includes have occurred. For this
-> - * include, nest_level has already been incremented and doesn't need to be
-> - * incremented here.
-> - */
-> -static int handle_include(cmd_tbl_t *cmdtp, char **c, unsigned long base,
-> -                               struct pxe_menu *cfg, int nest_level)
-> -{
-> -       char *include_path;
-> -       char *s = *c;
-> -       int err;
-> -       char *buf;
-> -       int ret;
-> -
-> -       err = parse_sliteral(c, &include_path);
-> -
-> -       if (err < 0) {
-> -               printf("Expected include path: %.*s\n",
-> -                                (int)(*c - s), s);
-> -               return err;
-> -       }
-> -
-> -       err = get_pxe_file(cmdtp, include_path, base);
-> -
-> -       if (err < 0) {
-> -               printf("Couldn't retrieve %s\n", include_path);
-> -               return err;
-> -       }
-> -
-> -       buf = map_sysmem(base, 0);
-> -       ret = parse_pxefile_top(cmdtp, buf, base, cfg, nest_level);
-> -       unmap_sysmem(buf);
-> -
-> -       return ret;
-> -}
-> -
-> -/*
-> - * Parse lines that begin with 'menu'.
-> - *
-> - * base and nest are provided to handle the 'menu include' case.
-> - *
-> - * base should point to a location where it's safe to store the included file.
-> - *
-> - * nest_level should be 1 when parsing the top level pxe file, 2 when parsing
-> - * a file it includes, 3 when parsing a file included by that file, and so on.
-> - */
-> -static int parse_menu(cmd_tbl_t *cmdtp, char **c, struct pxe_menu *cfg,
-> -                               unsigned long base, int nest_level)
-> -{
-> -       struct token t;
-> -       char *s = *c;
-> -       int err = 0;
-> -
-> -       get_token(c, &t, L_KEYWORD);
-> -
-> -       switch (t.type) {
-> -       case T_TITLE:
-> -               err = parse_sliteral(c, &cfg->title);
-> -
-> -               break;
-> -
-> -       case T_INCLUDE:
-> -               err = handle_include(cmdtp, c, base, cfg,
-> -                                               nest_level + 1);
-> -               break;
-> -
-> -       case T_BACKGROUND:
-> -               err = parse_sliteral(c, &cfg->bmp);
-> -               break;
-> -
-> -       default:
-> -               printf("Ignoring malformed menu command: %.*s\n",
-> -                               (int)(*c - s), s);
-> -       }
-> -
-> -       if (err < 0)
-> -               return err;
-> -
-> -       eol_or_eof(c);
-> -
-> -       return 1;
-> -}
-> -
-> -/*
-> - * Handles parsing a 'menu line' when we're parsing a label.
-> - */
-> -static int parse_label_menu(char **c, struct pxe_menu *cfg,
-> -                               struct pxe_label *label)
-> -{
-> -       struct token t;
-> -       char *s;
-> -
-> -       s = *c;
-> -
-> -       get_token(c, &t, L_KEYWORD);
-> -
-> -       switch (t.type) {
-> -       case T_DEFAULT:
-> -               if (!cfg->default_label)
-> -                       cfg->default_label = strdup(label->name);
-> -
-> -               if (!cfg->default_label)
-> -                       return -ENOMEM;
-> -
-> -               break;
-> -       case T_LABEL:
-> -               parse_sliteral(c, &label->menu);
-> -               break;
-> -       default:
-> -               printf("Ignoring malformed menu command: %.*s\n",
-> -                               (int)(*c - s), s);
-> -       }
-> -
-> -       eol_or_eof(c);
-> -
-> -       return 0;
-> -}
-> -
-> -/*
-> - * Handles parsing a 'kernel' label.
-> - * expecting "filename" or "<fit_filename>#cfg"
-> - */
-> -static int parse_label_kernel(char **c, struct pxe_label *label)
-> -{
-> -       char *s;
-> -       int err;
-> -
-> -       err = parse_sliteral(c, &label->kernel);
-> -       if (err < 0)
-> -               return err;
-> -
-> -       s = strstr(label->kernel, "#");
-> -       if (!s)
-> -               return 1;
-> -
-> -       label->config = malloc(strlen(s) + 1);
-> -       if (!label->config)
-> -               return -ENOMEM;
-> -
-> -       strcpy(label->config, s);
-> -       *s = 0;
-> -
-> -       return 1;
-> -}
-> -
-> -/*
-> - * Parses a label and adds it to the list of labels for a menu.
-> - *
-> - * A label ends when we either get to the end of a file, or
-> - * get some input we otherwise don't have a handler defined
-> - * for.
-> - *
-> - */
-> -static int parse_label(char **c, struct pxe_menu *cfg)
-> -{
-> -       struct token t;
-> -       int len;
-> -       char *s = *c;
-> -       struct pxe_label *label;
-> -       int err;
-> -
-> -       label = label_create();
-> -       if (!label)
-> -               return -ENOMEM;
-> -
-> -       err = parse_sliteral(c, &label->name);
-> -       if (err < 0) {
-> -               printf("Expected label name: %.*s\n", (int)(*c - s), s);
-> -               label_destroy(label);
-> -               return -EINVAL;
-> -       }
-> -
-> -       list_add_tail(&label->list, &cfg->labels);
-> -
-> -       while (1) {
-> -               s = *c;
-> -               get_token(c, &t, L_KEYWORD);
-> -
-> -               err = 0;
-> -               switch (t.type) {
-> -               case T_MENU:
-> -                       err = parse_label_menu(c, cfg, label);
-> -                       break;
-> -
-> -               case T_KERNEL:
-> -               case T_LINUX:
-> -                       err = parse_label_kernel(c, label);
-> -                       break;
-> -
-> -               case T_APPEND:
-> -                       err = parse_sliteral(c, &label->append);
-> -                       if (label->initrd)
-> -                               break;
-> -                       s = strstr(label->append, "initrd=");
-> -                       if (!s)
-> -                               break;
-> -                       s += 7;
-> -                       len = (int)(strchr(s, ' ') - s);
-> -                       label->initrd = malloc(len + 1);
-> -                       strncpy(label->initrd, s, len);
-> -                       label->initrd[len] = '\0';
-> -
-> -                       break;
-> -
-> -               case T_INITRD:
-> -                       if (!label->initrd)
-> -                               err = parse_sliteral(c, &label->initrd);
-> -                       break;
-> -
-> -               case T_FDT:
-> -                       if (!label->fdt)
-> -                               err = parse_sliteral(c, &label->fdt);
-> -                       break;
-> -
-> -               case T_FDTDIR:
-> -                       if (!label->fdtdir)
-> -                               err = parse_sliteral(c, &label->fdtdir);
-> -                       break;
-> -
-> -               case T_LOCALBOOT:
-> -                       label->localboot = 1;
-> -                       err = parse_integer(c, &label->localboot_val);
-> -                       break;
-> -
-> -               case T_IPAPPEND:
-> -                       err = parse_integer(c, &label->ipappend);
-> -                       break;
-> -
-> -               case T_EOL:
-> -                       break;
-> -
-> -               default:
-> -                       /*
-> -                        * put the token back! we don't want it - it's the end
-> -                        * of a label and whatever token this is, it's
-> -                        * something for the menu level context to handle.
-> -                        */
-> -                       *c = s;
-> -                       return 1;
-> -               }
-> -
-> -               if (err < 0)
-> -                       return err;
-> -       }
-> -}
-> -
-> -/*
-> - * This 16 comes from the limit pxelinux imposes on nested includes.
-> - *
-> - * There is no reason at all we couldn't do more, but some limit helps prevent
-> - * infinite (until crash occurs) recursion if a file tries to include itself.
-> - */
-> -#define MAX_NEST_LEVEL 16
-> -
-> -/*
-> - * Entry point for parsing a menu file. nest_level indicates how many times
-> - * we've nested in includes.  It will be 1 for the top level menu file.
-> - *
-> - * Returns 1 on success, < 0 on error.
-> - */
-> -static int parse_pxefile_top(cmd_tbl_t *cmdtp, char *p, unsigned long base,
-> -                               struct pxe_menu *cfg, int nest_level)
-> -{
-> -       struct token t;
-> -       char *s, *b, *label_name;
-> -       int err;
-> -
-> -       b = p;
-> -
-> -       if (nest_level > MAX_NEST_LEVEL) {
-> -               printf("Maximum nesting (%d) exceeded\n", MAX_NEST_LEVEL);
-> -               return -EMLINK;
-> -       }
-> -
-> -       while (1) {
-> -               s = p;
-> -
-> -               get_token(&p, &t, L_KEYWORD);
-> -
-> -               err = 0;
-> -               switch (t.type) {
-> -               case T_MENU:
-> -                       cfg->prompt = 1;
-> -                       err = parse_menu(cmdtp, &p, cfg,
-> -                               base + ALIGN(strlen(b) + 1, 4),
-> -                               nest_level);
-> -                       break;
-> -
-> -               case T_TIMEOUT:
-> -                       err = parse_integer(&p, &cfg->timeout);
-> -                       break;
-> -
-> -               case T_LABEL:
-> -                       err = parse_label(&p, cfg);
-> -                       break;
-> -
-> -               case T_DEFAULT:
-> -               case T_ONTIMEOUT:
-> -                       err = parse_sliteral(&p, &label_name);
-> -
-> -                       if (label_name) {
-> -                               if (cfg->default_label)
-> -                                       free(cfg->default_label);
-> -
-> -                               cfg->default_label = label_name;
-> -                       }
-> -
-> -                       break;
-> -
-> -               case T_INCLUDE:
-> -                       err = handle_include(cmdtp, &p,
-> -                               base + ALIGN(strlen(b), 4), cfg,
-> -                               nest_level + 1);
-> -                       break;
-> -
-> -               case T_PROMPT:
-> -                       eol_or_eof(&p);
-> -                       break;
-> -
-> -               case T_EOL:
-> -                       break;
-> -
-> -               case T_EOF:
-> -                       return 1;
-> -
-> -               default:
-> -                       printf("Ignoring unknown command: %.*s\n",
-> -                                                       (int)(p - s), s);
-> -                       eol_or_eof(&p);
-> -               }
-> -
-> -               if (err < 0)
-> -                       return err;
-> -       }
-> -}
-> -
-> -/*
-> - * Free the memory used by a pxe_menu and its labels.
-> - */
-> -static void destroy_pxe_menu(struct pxe_menu *cfg)
-> -{
-> -       struct list_head *pos, *n;
-> -       struct pxe_label *label;
-> -
-> -       if (cfg->title)
-> -               free(cfg->title);
-> -
-> -       if (cfg->default_label)
-> -               free(cfg->default_label);
-> -
-> -       list_for_each_safe(pos, n, &cfg->labels) {
-> -               label = list_entry(pos, struct pxe_label, list);
-> -
-> -               label_destroy(label);
-> -       }
-> -
-> -       free(cfg);
-> -}
-> -
-> -/*
-> - * Entry point for parsing a pxe file. This is only used for the top level
-> - * file.
-> - *
-> - * Returns NULL if there is an error, otherwise, returns a pointer to a
-> - * pxe_menu struct populated with the results of parsing the pxe file (and any
-> - * files it includes). The resulting pxe_menu struct can be free()'d by using
-> - * the destroy_pxe_menu() function.
-> - */
-> -static struct pxe_menu *parse_pxefile(cmd_tbl_t *cmdtp, unsigned long menucfg)
-> -{
-> -       struct pxe_menu *cfg;
-> -       char *buf;
-> -       int r;
-> -
-> -       cfg = malloc(sizeof(struct pxe_menu));
-> -
-> -       if (!cfg)
-> -               return NULL;
-> -
-> -       memset(cfg, 0, sizeof(struct pxe_menu));
-> -
-> -       INIT_LIST_HEAD(&cfg->labels);
-> -
-> -       buf = map_sysmem(menucfg, 0);
-> -       r = parse_pxefile_top(cmdtp, buf, menucfg, cfg, 1);
-> -       unmap_sysmem(buf);
-> -
-> -       if (r < 0) {
-> -               destroy_pxe_menu(cfg);
-> -               return NULL;
-> -       }
-> -
-> -       return cfg;
-> -}
-> -
-> -/*
-> - * Converts a pxe_menu struct into a menu struct for use with U-Boot's generic
-> - * menu code.
-> - */
-> -static struct menu *pxe_menu_to_menu(struct pxe_menu *cfg)
-> -{
-> -       struct pxe_label *label;
-> -       struct list_head *pos;
-> -       struct menu *m;
-> -       int err;
-> -       int i = 1;
-> -       char *default_num = NULL;
-> -
-> -       /*
-> -        * Create a menu and add items for all the labels.
-> -        */
-> -       m = menu_create(cfg->title, DIV_ROUND_UP(cfg->timeout, 10),
-> -                       cfg->prompt, label_print, NULL, NULL);
-> -
-> -       if (!m)
-> -               return NULL;
-> -
-> -       list_for_each(pos, &cfg->labels) {
-> -               label = list_entry(pos, struct pxe_label, list);
-> -
-> -               sprintf(label->num, "%d", i++);
-> -               if (menu_item_add(m, label->num, label) != 1) {
-> -                       menu_destroy(m);
-> -                       return NULL;
-> -               }
-> -               if (cfg->default_label &&
-> -                   (strcmp(label->name, cfg->default_label) == 0))
-> -                       default_num = label->num;
-> -
-> -       }
-> -
-> -       /*
-> -        * After we've created items for each label in the menu, set the
-> -        * menu's default label if one was specified.
-> -        */
-> -       if (default_num) {
-> -               err = menu_default_set(m, default_num);
-> -               if (err != 1) {
-> -                       if (err != -ENOENT) {
-> -                               menu_destroy(m);
-> -                               return NULL;
-> -                       }
-> -
-> -                       printf("Missing default: %s\n", cfg->default_label);
-> -               }
-> -       }
-> -
-> -       return m;
-> -}
-> -
-> -/*
-> - * Try to boot any labels we have yet to attempt to boot.
-> - */
-> -static void boot_unattempted_labels(cmd_tbl_t *cmdtp, struct pxe_menu *cfg)
-> -{
-> -       struct list_head *pos;
-> -       struct pxe_label *label;
-> -
-> -       list_for_each(pos, &cfg->labels) {
-> -               label = list_entry(pos, struct pxe_label, list);
-> -
-> -               if (!label->attempted)
-> -                       label_boot(cmdtp, label);
-> -       }
-> -}
-> -
-> -/*
-> - * Boot the system as prescribed by a pxe_menu.
-> - *
-> - * Use the menu system to either get the user's choice or the default, based
-> - * on config or user input.  If there is no default or user's choice,
-> - * attempted to boot labels in the order they were given in pxe files.
-> - * If the default or user's choice fails to boot, attempt to boot other
-> - * labels in the order they were given in pxe files.
-> - *
-> - * If this function returns, there weren't any labels that successfully
-> - * booted, or the user interrupted the menu selection via ctrl+c.
-> - */
-> -static void handle_pxe_menu(cmd_tbl_t *cmdtp, struct pxe_menu *cfg)
-> -{
-> -       void *choice;
-> -       struct menu *m;
-> -       int err;
-> -
-> -#ifdef CONFIG_CMD_BMP
-> -       /* display BMP if available */
-> -       if (cfg->bmp) {
-> -               if (get_relfile(cmdtp, cfg->bmp, load_addr)) {
-> -                       run_command("cls", 0);
-> -                       bmp_display(load_addr,
-> -                                   BMP_ALIGN_CENTER, BMP_ALIGN_CENTER);
-> -               } else {
-> -                       printf("Skipping background bmp %s for failure\n",
-> -                              cfg->bmp);
-> -               }
-> -       }
-> -#endif
-> -
-> -       m = pxe_menu_to_menu(cfg);
-> -       if (!m)
-> -               return;
-> -
-> -       err = menu_get_choice(m, &choice);
-> -
-> -       menu_destroy(m);
-> -
-> -       /*
-> -        * err == 1 means we got a choice back from menu_get_choice.
-> -        *
-> -        * err == -ENOENT if the menu was setup to select the default but no
-> -        * default was set. in that case, we should continue trying to boot
-> -        * labels that haven't been attempted yet.
-> -        *
-> -        * otherwise, the user interrupted or there was some other error and
-> -        * we give up.
-> -        */
-> -
-> -       if (err == 1) {
-> -               err = label_boot(cmdtp, choice);
-> -               if (!err)
-> -                       return;
-> -       } else if (err != -ENOENT) {
-> -               return;
-> -       }
-> -
-> -       boot_unattempted_labels(cmdtp, cfg);
-> -}
-> -
-> -#ifdef CONFIG_CMD_NET
-> -/*
-> - * Boots a system using a pxe file
-> - *
-> - * Returns 0 on success, 1 on error.
-> - */
-> -static int
-> -do_pxe_boot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-> -{
-> -       unsigned long pxefile_addr_r;
-> -       struct pxe_menu *cfg;
-> -       char *pxefile_addr_str;
-> -
-> -       do_getfile = do_get_tftp;
-> -
-> -       if (argc == 1) {
-> -               pxefile_addr_str = from_env("pxefile_addr_r");
-> -               if (!pxefile_addr_str)
-> -                       return 1;
-> -
-> -       } else if (argc == 2) {
-> -               pxefile_addr_str = argv[1];
-> -       } else {
-> -               return CMD_RET_USAGE;
-> -       }
-> -
-> -       if (strict_strtoul(pxefile_addr_str, 16, &pxefile_addr_r) < 0) {
-> -               printf("Invalid pxefile address: %s\n", pxefile_addr_str);
-> -               return 1;
-> -       }
-> -
-> -       cfg = parse_pxefile(cmdtp, pxefile_addr_r);
-> -
-> -       if (cfg == NULL) {
-> -               printf("Error parsing config file\n");
-> -               return 1;
-> -       }
-> -
-> -       handle_pxe_menu(cmdtp, cfg);
-> -
-> -       destroy_pxe_menu(cfg);
-> -
-> -       copy_filename(net_boot_file_name, "", sizeof(net_boot_file_name));
-> -
-> -       return 0;
-> -}
-> -
-> -static cmd_tbl_t cmd_pxe_sub[] = {
-> -       U_BOOT_CMD_MKENT(get, 1, 1, do_pxe_get, "", ""),
-> -       U_BOOT_CMD_MKENT(boot, 2, 1, do_pxe_boot, "", "")
-> -};
-> -
-> -static int do_pxe(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-> -{
-> -       cmd_tbl_t *cp;
-> -
-> -       if (argc < 2)
-> -               return CMD_RET_USAGE;
-> -
-> -       is_pxe = true;
-> -
-> -       /* drop initial "pxe" arg */
-> -       argc--;
-> -       argv++;
-> -
-> -       cp = find_cmd_tbl(argv[0], cmd_pxe_sub, ARRAY_SIZE(cmd_pxe_sub));
-> -
-> -       if (cp)
-> -               return cp->cmd(cmdtp, flag, argc, argv);
-> -
-> -       return CMD_RET_USAGE;
-> +       return CMD_RET_USAGE;
->  }
->
->  U_BOOT_CMD(
-> @@ -1712,90 +176,3 @@ U_BOOT_CMD(
->         "boot [pxefile_addr_r] - boot from the pxe file at pxefile_addr_r\n"
->  );
->  #endif
-> -
-> -/*
-> - * Boots a system using a local disk syslinux/extlinux file
-> - *
-> - * Returns 0 on success, 1 on error.
-> - */
-> -static int do_sysboot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-> -{
-> -       unsigned long pxefile_addr_r;
-> -       struct pxe_menu *cfg;
-> -       char *pxefile_addr_str;
-> -       char *filename;
-> -       int prompt = 0;
-> -
-> -       is_pxe = false;
-> -
-> -       if (argc > 1 && strstr(argv[1], "-p")) {
-> -               prompt = 1;
-> -               argc--;
-> -               argv++;
-> -       }
-> -
-> -       if (argc < 4)
-> -               return cmd_usage(cmdtp);
-> -
-> -       if (argc < 5) {
-> -               pxefile_addr_str = from_env("pxefile_addr_r");
-> -               if (!pxefile_addr_str)
-> -                       return 1;
-> -       } else {
-> -               pxefile_addr_str = argv[4];
-> -       }
-> -
-> -       if (argc < 6)
-> -               filename = env_get("bootfile");
-> -       else {
-> -               filename = argv[5];
-> -               env_set("bootfile", filename);
-> -       }
-> -
-> -       if (strstr(argv[3], "ext2"))
-> -               do_getfile = do_get_ext2;
-> -       else if (strstr(argv[3], "fat"))
-> -               do_getfile = do_get_fat;
-> -       else if (strstr(argv[3], "any"))
-> -               do_getfile = do_get_any;
-> -       else {
-> -               printf("Invalid filesystem: %s\n", argv[3]);
-> -               return 1;
-> -       }
-> -       fs_argv[1] = argv[1];
-> -       fs_argv[2] = argv[2];
-> -
-> -       if (strict_strtoul(pxefile_addr_str, 16, &pxefile_addr_r) < 0) {
-> -               printf("Invalid pxefile address: %s\n", pxefile_addr_str);
-> -               return 1;
-> -       }
-> -
-> -       if (get_pxe_file(cmdtp, filename, pxefile_addr_r) < 0) {
-> -               printf("Error reading config file\n");
-> -               return 1;
-> -       }
-> -
-> -       cfg = parse_pxefile(cmdtp, pxefile_addr_r);
-> -
-> -       if (cfg == NULL) {
-> -               printf("Error parsing config file\n");
-> -               return 1;
-> -       }
-> -
-> -       if (prompt)
-> -               cfg->prompt = 1;
-> -
-> -       handle_pxe_menu(cmdtp, cfg);
-> -
-> -       destroy_pxe_menu(cfg);
-> -
-> -       return 0;
-> -}
-> -
-> -U_BOOT_CMD(
-> -       sysboot, 7, 1, do_sysboot,
-> -       "command to get and boot from syslinux files",
-> -       "[-p] <interface> <dev[:part]> <ext2|fat|any> [addr] [filename]\n"
-> -       "    - load and parse syslinux menu file 'filename' from ext2, fat\n"
-> -       "      or any filesystem on 'dev' on 'interface' to address 'addr'"
-> -);
-> diff --git a/cmd/pxe_utils.c b/cmd/pxe_utils.c
-> new file mode 100644
-> index 0000000000..bbc931b208
-> --- /dev/null
-> +++ b/cmd/pxe_utils.c
-> @@ -0,0 +1,1463 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright 2010-2011 Calxeda, Inc.
-> + * Copyright (c) 2014, NVIDIA CORPORATION.  All rights reserved.
-> + */
-> +
-> +#include <common.h>
-> +#include <command.h>
-> +#include <env.h>
-> +#include <malloc.h>
-> +#include <mapmem.h>
-> +#include <lcd.h>
-> +#include <linux/string.h>
-> +#include <linux/ctype.h>
-> +#include <errno.h>
-> +#include <linux/list.h>
-> +#include <fs.h>
-> +
-> +#include <splash.h>
-> +#include <asm/io.h>
-> +
-> +#include "menu.h"
-> +#include "cli.h"
-> +#include "pxe_utils.h"
-> +
-> +#define MAX_TFTP_PATH_LEN 127
-> +
-> +bool is_pxe;
-> +
-> +int (*do_getfile)(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr);
-> +
-> +/*
-> + * Returns the directory the file specified in the bootfile env variable is
-> + * in. If bootfile isn't defined in the environment, return NULL, which should
-> + * be interpreted as "don't prepend anything to paths".
-> + */
-> +static int get_bootfile_path(const char *file_path, char *bootfile_path,
-> +                            size_t bootfile_path_size)
-> +{
-> +       char *bootfile, *last_slash;
-> +       size_t path_len = 0;
-> +
-> +       /* Only syslinux allows absolute paths */
-> +       if (file_path[0] == '/' && !is_pxe)
-> +               goto ret;
-> +
-> +       bootfile = from_env("bootfile");
-> +
-> +       if (!bootfile)
-> +               goto ret;
-> +
-> +       last_slash = strrchr(bootfile, '/');
-> +
-> +       if (!last_slash)
-> +               goto ret;
-> +
-> +       path_len = (last_slash - bootfile) + 1;
-> +
-> +       if (bootfile_path_size < path_len) {
-> +               printf("bootfile_path too small. (%zd < %zd)\n",
-> +                      bootfile_path_size, path_len);
-> +
-> +               return -1;
-> +       }
-> +
-> +       strncpy(bootfile_path, bootfile, path_len);
-> +
-> + ret:
-> +       bootfile_path[path_len] = '\0';
-> +
-> +       return 1;
-> +}
-> +
-> +/*
-> + * As in pxelinux, paths to files referenced from files we retrieve are
-> + * relative to the location of bootfile. get_relfile takes such a path and
-> + * joins it with the bootfile path to get the full path to the target file. If
-> + * the bootfile path is NULL, we use file_path as is.
-> + *
-> + * Returns 1 for success, or < 0 on error.
-> + */
-> +static int get_relfile(cmd_tbl_t *cmdtp, const char *file_path,
-> +                      unsigned long file_addr)
-> +{
-> +       size_t path_len;
-> +       char relfile[MAX_TFTP_PATH_LEN + 1];
-> +       char addr_buf[18];
-> +       int err;
-> +
-> +       err = get_bootfile_path(file_path, relfile, sizeof(relfile));
-> +
-> +       if (err < 0)
-> +               return err;
-> +
-> +       path_len = strlen(file_path);
-> +       path_len += strlen(relfile);
-> +
-> +       if (path_len > MAX_TFTP_PATH_LEN) {
-> +               printf("Base path too long (%s%s)\n", relfile, file_path);
-> +
-> +               return -ENAMETOOLONG;
-> +       }
-> +
-> +       strcat(relfile, file_path);
-> +
-> +       printf("Retrieving file: %s\n", relfile);
-> +
-> +       sprintf(addr_buf, "%lx", file_addr);
-> +
-> +       return do_getfile(cmdtp, relfile, addr_buf);
-> +}
-> +
-> +/*
-> + * Retrieve the file at 'file_path' to the locate given by 'file_addr'. If
-> + * 'bootfile' was specified in the environment, the path to bootfile will be
-> + * prepended to 'file_path' and the resulting path will be used.
-> + *
-> + * Returns 1 on success, or < 0 for error.
-> + */
-> +int get_pxe_file(cmd_tbl_t *cmdtp, const char *file_path,
-> +                unsigned long file_addr)
-> +{
-> +       unsigned long config_file_size;
-> +       char *tftp_filesize;
-> +       int err;
-> +       char *buf;
-> +
-> +       err = get_relfile(cmdtp, file_path, file_addr);
-> +
-> +       if (err < 0)
-> +               return err;
-> +
-> +       /*
-> +        * the file comes without a NUL byte at the end, so find out its size
-> +        * and add the NUL byte.
-> +        */
-> +       tftp_filesize = from_env("filesize");
-> +
-> +       if (!tftp_filesize)
-> +               return -ENOENT;
-> +
-> +       if (strict_strtoul(tftp_filesize, 16, &config_file_size) < 0)
-> +               return -EINVAL;
-> +
-> +       buf = map_sysmem(file_addr + config_file_size, 1);
-> +       *buf = '\0';
-> +       unmap_sysmem(buf);
-> +
-> +       return 1;
-> +}
-> +
-> +#ifdef CONFIG_CMD_NET
-> +
-> +#define PXELINUX_DIR "pxelinux.cfg/"
-> +
-> +/*
-> + * Convert an ethaddr from the environment to the format used by pxelinux
-> + * filenames based on mac addresses. Convert's ':' to '-', and adds "01-" to
-> + * the beginning of the ethernet address to indicate a hardware type of
-> + * Ethernet. Also converts uppercase hex characters into lowercase, to match
-> + * pxelinux's behavior.
-> + *
-> + * Returns 1 for success, -ENOENT if 'ethaddr' is undefined in the
-> + * environment, or some other value < 0 on error.
-> + */
-> +static int format_mac_pxe(char *outbuf, size_t outbuf_len)
-> +{
-> +       uchar ethaddr[6];
-> +
-> +       if (outbuf_len < 21) {
-> +               printf("outbuf is too small (%zd < 21)\n", outbuf_len);
-> +
-> +               return -EINVAL;
-> +       }
-> +
-> +       if (!eth_env_get_enetaddr_by_index("eth", eth_get_dev_index(), ethaddr))
-> +               return -ENOENT;
-> +
-> +       sprintf(outbuf, "01-%02x-%02x-%02x-%02x-%02x-%02x",
-> +               ethaddr[0], ethaddr[1], ethaddr[2],
-> +               ethaddr[3], ethaddr[4], ethaddr[5]);
-> +
-> +       return 1;
-> +}
-> +
-> +/*
-> + * Retrieves a file in the 'pxelinux.cfg' folder. Since this uses get_pxe_file
-> + * to do the hard work, the location of the 'pxelinux.cfg' folder is generated
-> + * from the bootfile path, as described above.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +int get_pxelinux_path(cmd_tbl_t *cmdtp, const char *file,
-> +                     unsigned long pxefile_addr_r)
-> +{
-> +       size_t base_len = strlen(PXELINUX_DIR);
-> +       char path[MAX_TFTP_PATH_LEN + 1];
-> +
-> +       if (base_len + strlen(file) > MAX_TFTP_PATH_LEN) {
-> +               printf("path (%s%s) too long, skipping\n", PXELINUX_DIR, file);
-> +               return -ENAMETOOLONG;
-> +       }
-> +
-> +       sprintf(path, PXELINUX_DIR "%s", file);
-> +
-> +       return get_pxe_file(cmdtp, path, pxefile_addr_r);
-> +}
-> +
-> +/*
-> + * Looks for a pxe file with a name based on the pxeuuid environment variable.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +int pxe_uuid_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> +{
-> +       char *uuid_str;
-> +
-> +       uuid_str = from_env("pxeuuid");
-> +
-> +       if (!uuid_str)
-> +               return -ENOENT;
-> +
-> +       return get_pxelinux_path(cmdtp, uuid_str, pxefile_addr_r);
-> +}
-> +
-> +/*
-> + * Looks for a pxe file with a name based on the 'ethaddr' environment
-> + * variable.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +int pxe_mac_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> +{
-> +       char mac_str[21];
-> +       int err;
-> +
-> +       err = format_mac_pxe(mac_str, sizeof(mac_str));
-> +
-> +       if (err < 0)
-> +               return err;
-> +
-> +       return get_pxelinux_path(cmdtp, mac_str, pxefile_addr_r);
-> +}
-> +
-> +/*
-> + * Looks for pxe files with names based on our IP address. See pxelinux
-> + * documentation for details on what these file names look like.  We match
-> + * that exactly.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +int pxe_ipaddr_paths(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r)
-> +{
-> +       char ip_addr[9];
-> +       int mask_pos, err;
-> +
-> +       sprintf(ip_addr, "%08X", ntohl(net_ip.s_addr));
-> +
-> +       for (mask_pos = 7; mask_pos >= 0;  mask_pos--) {
-> +               err = get_pxelinux_path(cmdtp, ip_addr, pxefile_addr_r);
-> +
-> +               if (err > 0)
-> +                       return err;
-> +
-> +               ip_addr[mask_pos] = '\0';
-> +       }
-> +
-> +       return -ENOENT;
-> +}
-> +#endif
-> +
-> +/*
-> + * Wrapper to make it easier to store the file at file_path in the location
-> + * specified by envaddr_name. file_path will be joined to the bootfile path,
-> + * if any is specified.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +static int get_relfile_envaddr(cmd_tbl_t *cmdtp, const char *file_path,
-> +                              const char *envaddr_name)
-> +{
-> +       unsigned long file_addr;
-> +       char *envaddr;
-> +
-> +       envaddr = from_env(envaddr_name);
-> +
-> +       if (!envaddr)
-> +               return -ENOENT;
-> +
-> +       if (strict_strtoul(envaddr, 16, &file_addr) < 0)
-> +               return -EINVAL;
-> +
-> +       return get_relfile(cmdtp, file_path, file_addr);
-> +}
-> +
-> +/*
-> + * A note on the pxe file parser.
-> + *
-> + * We're parsing files that use syslinux grammar, which has a few quirks.
-> + * String literals must be recognized based on context - there is no
-> + * quoting or escaping support. There's also nothing to explicitly indicate
-> + * when a label section completes. We deal with that by ending a label
-> + * section whenever we see a line that doesn't include.
-> + *
-> + * As with the syslinux family, this same file format could be reused in the
-> + * future for non pxe purposes. The only action it takes during parsing that
-> + * would throw this off is handling of include files. It assumes we're using
-> + * pxe, and does a tftp download of a file listed as an include file in the
-> + * middle of the parsing operation. That could be handled by refactoring it to
-> + * take a 'include file getter' function.
-> + */
-> +
-> +/*
-> + * Describes a single label given in a pxe file.
-> + *
-> + * Create these with the 'label_create' function given below.
-> + *
-> + * name - the name of the menu as given on the 'menu label' line.
-> + * kernel - the path to the kernel file to use for this label.
-> + * append - kernel command line to use when booting this label
-> + * initrd - path to the initrd to use for this label.
-> + * attempted - 0 if we haven't tried to boot this label, 1 if we have.
-> + * localboot - 1 if this label specified 'localboot', 0 otherwise.
-> + * list - lets these form a list, which a pxe_menu struct will hold.
-> + */
-> +struct pxe_label {
-> +       char num[4];
-> +       char *name;
-> +       char *menu;
-> +       char *kernel;
-> +       char *config;
-> +       char *append;
-> +       char *initrd;
-> +       char *fdt;
-> +       char *fdtdir;
-> +       int ipappend;
-> +       int attempted;
-> +       int localboot;
-> +       int localboot_val;
-> +       struct list_head list;
-> +};
-> +
-> +/*
-> + * Allocates memory for and initializes a pxe_label. This uses malloc, so the
-> + * result must be free()'d to reclaim the memory.
-> + *
-> + * Returns NULL if malloc fails.
-> + */
-> +static struct pxe_label *label_create(void)
-> +{
-> +       struct pxe_label *label;
-> +
-> +       label = malloc(sizeof(struct pxe_label));
-> +
-> +       if (!label)
-> +               return NULL;
-> +
-> +       memset(label, 0, sizeof(struct pxe_label));
-> +
-> +       return label;
-> +}
-> +
-> +/*
-> + * Free the memory used by a pxe_label, including that used by its name,
-> + * kernel, append and initrd members, if they're non NULL.
-> + *
-> + * So - be sure to only use dynamically allocated memory for the members of
-> + * the pxe_label struct, unless you want to clean it up first. These are
-> + * currently only created by the pxe file parsing code.
-> + */
-> +static void label_destroy(struct pxe_label *label)
-> +{
-> +       if (label->name)
-> +               free(label->name);
-> +
-> +       if (label->kernel)
-> +               free(label->kernel);
-> +
-> +       if (label->config)
-> +               free(label->config);
-> +
-> +       if (label->append)
-> +               free(label->append);
-> +
-> +       if (label->initrd)
-> +               free(label->initrd);
-> +
-> +       if (label->fdt)
-> +               free(label->fdt);
-> +
-> +       if (label->fdtdir)
-> +               free(label->fdtdir);
-> +
-> +       free(label);
-> +}
-> +
-> +/*
-> + * Print a label and its string members if they're defined.
-> + *
-> + * This is passed as a callback to the menu code for displaying each
-> + * menu entry.
-> + */
-> +static void label_print(void *data)
-> +{
-> +       struct pxe_label *label = data;
-> +       const char *c = label->menu ? label->menu : label->name;
-> +
-> +       printf("%s:\t%s\n", label->num, c);
-> +}
-> +
-> +/*
-> + * Boot a label that specified 'localboot'. This requires that the 'localcmd'
-> + * environment variable is defined. Its contents will be executed as U-Boot
-> + * command.  If the label specified an 'append' line, its contents will be
-> + * used to overwrite the contents of the 'bootargs' environment variable prior
-> + * to running 'localcmd'.
-> + *
-> + * Returns 1 on success or < 0 on error.
-> + */
-> +static int label_localboot(struct pxe_label *label)
-> +{
-> +       char *localcmd;
-> +
-> +       localcmd = from_env("localcmd");
-> +
-> +       if (!localcmd)
-> +               return -ENOENT;
-> +
-> +       if (label->append) {
-> +               char bootargs[CONFIG_SYS_CBSIZE];
-> +
-> +               cli_simple_process_macros(label->append, bootargs);
-> +               env_set("bootargs", bootargs);
-> +       }
-> +
-> +       debug("running: %s\n", localcmd);
-> +
-> +       return run_command_list(localcmd, strlen(localcmd), 0);
-> +}
-> +
-> +/*
-> + * Boot according to the contents of a pxe_label.
-> + *
-> + * If we can't boot for any reason, we return.  A successful boot never
-> + * returns.
-> + *
-> + * The kernel will be stored in the location given by the 'kernel_addr_r'
-> + * environment variable.
-> + *
-> + * If the label specifies an initrd file, it will be stored in the location
-> + * given by the 'ramdisk_addr_r' environment variable.
-> + *
-> + * If the label specifies an 'append' line, its contents will overwrite that
-> + * of the 'bootargs' environment variable.
-> + */
-> +static int label_boot(cmd_tbl_t *cmdtp, struct pxe_label *label)
-> +{
-> +       char *bootm_argv[] = { "bootm", NULL, NULL, NULL, NULL };
-> +       char initrd_str[28];
-> +       char mac_str[29] = "";
-> +       char ip_str[68] = "";
-> +       char *fit_addr = NULL;
-> +       int bootm_argc = 2;
-> +       int len = 0;
-> +       ulong kernel_addr;
-> +       void *buf;
-> +
-> +       label_print(label);
-> +
-> +       label->attempted = 1;
-> +
-> +       if (label->localboot) {
-> +               if (label->localboot_val >= 0)
-> +                       label_localboot(label);
-> +               return 0;
-> +       }
-> +
-> +       if (!label->kernel) {
-> +               printf("No kernel given, skipping %s\n", label->name);
-> +               return 1;
-> +       }
-> +
-> +       if (label->initrd) {
-> +               if (get_relfile_envaddr(cmdtp, label->initrd, "ramdisk_addr_r") < 0) {
-> +                       printf("Skipping %s for failure retrieving initrd\n",
-> +                              label->name);
-> +                       return 1;
-> +               }
-> +
-> +               bootm_argv[2] = initrd_str;
-> +               strncpy(bootm_argv[2], env_get("ramdisk_addr_r"), 18);
-> +               strcat(bootm_argv[2], ":");
-> +               strncat(bootm_argv[2], env_get("filesize"), 9);
-> +       }
-> +
-> +       if (get_relfile_envaddr(cmdtp, label->kernel, "kernel_addr_r") < 0) {
-> +               printf("Skipping %s for failure retrieving kernel\n",
-> +                      label->name);
-> +               return 1;
-> +       }
-> +
-> +       if (label->ipappend & 0x1) {
-> +               sprintf(ip_str, " ip=%s:%s:%s:%s",
-> +                       env_get("ipaddr"), env_get("serverip"),
-> +                       env_get("gatewayip"), env_get("netmask"));
-> +       }
-> +
-> +#ifdef CONFIG_CMD_NET
-> +       if (label->ipappend & 0x2) {
-> +               int err;
-> +
-> +               strcpy(mac_str, " BOOTIF=");
-> +               err = format_mac_pxe(mac_str + 8, sizeof(mac_str) - 8);
-> +               if (err < 0)
-> +                       mac_str[0] = '\0';
-> +       }
-> +#endif
-> +
-> +       if ((label->ipappend & 0x3) || label->append) {
-> +               char bootargs[CONFIG_SYS_CBSIZE] = "";
-> +               char finalbootargs[CONFIG_SYS_CBSIZE];
-> +
-> +               if (strlen(label->append ?: "") +
-> +                   strlen(ip_str) + strlen(mac_str) + 1 > sizeof(bootargs)) {
-> +                       printf("bootarg overflow %zd+%zd+%zd+1 > %zd\n",
-> +                              strlen(label->append ?: ""),
-> +                              strlen(ip_str), strlen(mac_str),
-> +                              sizeof(bootargs));
-> +                       return 1;
-> +               }
-> +
-> +               if (label->append)
-> +                       strncpy(bootargs, label->append, sizeof(bootargs));
-> +
-> +               strcat(bootargs, ip_str);
-> +               strcat(bootargs, mac_str);
-> +
-> +               cli_simple_process_macros(bootargs, finalbootargs);
-> +               env_set("bootargs", finalbootargs);
-> +               printf("append: %s\n", finalbootargs);
-> +       }
-> +
-> +       bootm_argv[1] = env_get("kernel_addr_r");
-> +       /* for FIT, append the configuration identifier */
-> +       if (label->config) {
-> +               int len = strlen(bootm_argv[1]) + strlen(label->config) + 1;
-> +
-> +               fit_addr = malloc(len);
-> +               if (!fit_addr) {
-> +                       printf("malloc fail (FIT address)\n");
-> +                       return 1;
-> +               }
-> +               snprintf(fit_addr, len, "%s%s", bootm_argv[1], label->config);
-> +               bootm_argv[1] = fit_addr;
-> +       }
-> +
-> +       /*
-> +        * fdt usage is optional:
-> +        * It handles the following scenarios. All scenarios are exclusive
-> +        *
-> +        * Scenario 1: If fdt_addr_r specified and "fdt" label is defined in
-> +        * pxe file, retrieve fdt blob from server. Pass fdt_addr_r to bootm,
-> +        * and adjust argc appropriately.
-> +        *
-> +        * Scenario 2: If there is an fdt_addr specified, pass it along to
-> +        * bootm, and adjust argc appropriately.
-> +        *
-> +        * Scenario 3: fdt blob is not available.
-> +        */
-> +       bootm_argv[3] = env_get("fdt_addr_r");
-> +
-> +       /* if fdt label is defined then get fdt from server */
-> +       if (bootm_argv[3]) {
-> +               char *fdtfile = NULL;
-> +               char *fdtfilefree = NULL;
-> +
-> +               if (label->fdt) {
-> +                       fdtfile = label->fdt;
-> +               } else if (label->fdtdir) {
-> +                       char *f1, *f2, *f3, *f4, *slash;
-> +
-> +                       f1 = env_get("fdtfile");
-> +                       if (f1) {
-> +                               f2 = "";
-> +                               f3 = "";
-> +                               f4 = "";
-> +                       } else {
-> +                               /*
-> +                                * For complex cases where this code doesn't
-> +                                * generate the correct filename, the board
-> +                                * code should set $fdtfile during early boot,
-> +                                * or the boot scripts should set $fdtfile
-> +                                * before invoking "pxe" or "sysboot".
-> +                                */
-> +                               f1 = env_get("soc");
-> +                               f2 = "-";
-> +                               f3 = env_get("board");
-> +                               f4 = ".dtb";
-> +                       }
-> +
-> +                       len = strlen(label->fdtdir);
-> +                       if (!len)
-> +                               slash = "./";
-> +                       else if (label->fdtdir[len - 1] != '/')
-> +                               slash = "/";
-> +                       else
-> +                               slash = "";
-> +
-> +                       len = strlen(label->fdtdir) + strlen(slash) +
-> +                               strlen(f1) + strlen(f2) + strlen(f3) +
-> +                               strlen(f4) + 1;
-> +                       fdtfilefree = malloc(len);
-> +                       if (!fdtfilefree) {
-> +                               printf("malloc fail (FDT filename)\n");
-> +                               goto cleanup;
-> +                       }
-> +
-> +                       snprintf(fdtfilefree, len, "%s%s%s%s%s%s",
-> +                                label->fdtdir, slash, f1, f2, f3, f4);
-> +                       fdtfile = fdtfilefree;
-> +               }
-> +
-> +               if (fdtfile) {
-> +                       int err = get_relfile_envaddr(cmdtp, fdtfile,
-> +                                                     "fdt_addr_r");
-> +
-> +                       free(fdtfilefree);
-> +                       if (err < 0) {
-> +                               printf("Skipping %s for failure retrieving fdt\n",
-> +                                      label->name);
-> +                               goto cleanup;
-> +                       }
-> +               } else {
-> +                       bootm_argv[3] = NULL;
-> +               }
-> +       }
-> +
-> +       if (!bootm_argv[3])
-> +               bootm_argv[3] = env_get("fdt_addr");
-> +
-> +       if (bootm_argv[3]) {
-> +               if (!bootm_argv[2])
-> +                       bootm_argv[2] = "-";
-> +               bootm_argc = 4;
-> +       }
-> +
-> +       kernel_addr = genimg_get_kernel_addr(bootm_argv[1]);
-> +       buf = map_sysmem(kernel_addr, 0);
-> +       /* Try bootm for legacy and FIT format image */
-> +       if (genimg_get_format(buf) != IMAGE_FORMAT_INVALID)
-> +               do_bootm(cmdtp, 0, bootm_argc, bootm_argv);
-> +#ifdef CONFIG_CMD_BOOTI
-> +       /* Try booting an AArch64 Linux kernel image */
-> +       else
-> +               do_booti(cmdtp, 0, bootm_argc, bootm_argv);
-> +#elif defined(CONFIG_CMD_BOOTZ)
-> +       /* Try booting a Image */
-> +       else
-> +               do_bootz(cmdtp, 0, bootm_argc, bootm_argv);
-> +#endif
-> +       unmap_sysmem(buf);
-> +
-> +cleanup:
-> +       if (fit_addr)
-> +               free(fit_addr);
-> +       return 1;
-> +}
-> +
-> +/*
-> + * Tokens for the pxe file parser.
-> + */
-> +enum token_type {
-> +       T_EOL,
-> +       T_STRING,
-> +       T_EOF,
-> +       T_MENU,
-> +       T_TITLE,
-> +       T_TIMEOUT,
-> +       T_LABEL,
-> +       T_KERNEL,
-> +       T_LINUX,
-> +       T_APPEND,
-> +       T_INITRD,
-> +       T_LOCALBOOT,
-> +       T_DEFAULT,
-> +       T_PROMPT,
-> +       T_INCLUDE,
-> +       T_FDT,
-> +       T_FDTDIR,
-> +       T_ONTIMEOUT,
-> +       T_IPAPPEND,
-> +       T_BACKGROUND,
-> +       T_INVALID
-> +};
-> +
-> +/*
-> + * A token - given by a value and a type.
-> + */
-> +struct token {
-> +       char *val;
-> +       enum token_type type;
-> +};
-> +
-> +/*
-> + * Keywords recognized.
-> + */
-> +static const struct token keywords[] = {
-> +       {"menu", T_MENU},
-> +       {"title", T_TITLE},
-> +       {"timeout", T_TIMEOUT},
-> +       {"default", T_DEFAULT},
-> +       {"prompt", T_PROMPT},
-> +       {"label", T_LABEL},
-> +       {"kernel", T_KERNEL},
-> +       {"linux", T_LINUX},
-> +       {"localboot", T_LOCALBOOT},
-> +       {"append", T_APPEND},
-> +       {"initrd", T_INITRD},
-> +       {"include", T_INCLUDE},
-> +       {"devicetree", T_FDT},
-> +       {"fdt", T_FDT},
-> +       {"devicetreedir", T_FDTDIR},
-> +       {"fdtdir", T_FDTDIR},
-> +       {"ontimeout", T_ONTIMEOUT,},
-> +       {"ipappend", T_IPAPPEND,},
-> +       {"background", T_BACKGROUND,},
-> +       {NULL, T_INVALID}
-> +};
-> +
-> +/*
-> + * Since pxe(linux) files don't have a token to identify the start of a
-> + * literal, we have to keep track of when we're in a state where a literal is
-> + * expected vs when we're in a state a keyword is expected.
-> + */
-> +enum lex_state {
-> +       L_NORMAL = 0,
-> +       L_KEYWORD,
-> +       L_SLITERAL
-> +};
-> +
-> +/*
-> + * get_string retrieves a string from *p and stores it as a token in
-> + * *t.
-> + *
-> + * get_string used for scanning both string literals and keywords.
-> + *
-> + * Characters from *p are copied into t-val until a character equal to
-> + * delim is found, or a NUL byte is reached. If delim has the special value of
-> + * ' ', any whitespace character will be used as a delimiter.
-> + *
-> + * If lower is unequal to 0, uppercase characters will be converted to
-> + * lowercase in the result. This is useful to make keywords case
-> + * insensitive.
-> + *
-> + * The location of *p is updated to point to the first character after the end
-> + * of the token - the ending delimiter.
-> + *
-> + * On success, the new value of t->val is returned. Memory for t->val is
-> + * allocated using malloc and must be free()'d to reclaim it.  If insufficient
-> + * memory is available, NULL is returned.
-> + */
-> +static char *get_string(char **p, struct token *t, char delim, int lower)
-> +{
-> +       char *b, *e;
-> +       size_t len, i;
-> +
-> +       /*
-> +        * b and e both start at the beginning of the input stream.
-> +        *
-> +        * e is incremented until we find the ending delimiter, or a NUL byte
-> +        * is reached. Then, we take e - b to find the length of the token.
-> +        */
-> +       e = *p;
-> +       b = *p;
-> +
-> +       while (*e) {
-> +               if ((delim == ' ' && isspace(*e)) || delim == *e)
-> +                       break;
-> +               e++;
-> +       }
-> +
-> +       len = e - b;
-> +
-> +       /*
-> +        * Allocate memory to hold the string, and copy it in, converting
-> +        * characters to lowercase if lower is != 0.
-> +        */
-> +       t->val = malloc(len + 1);
-> +       if (!t->val)
-> +               return NULL;
-> +
-> +       for (i = 0; i < len; i++, b++) {
-> +               if (lower)
-> +                       t->val[i] = tolower(*b);
-> +               else
-> +                       t->val[i] = *b;
-> +       }
-> +
-> +       t->val[len] = '\0';
-> +
-> +       /*
-> +        * Update *p so the caller knows where to continue scanning.
-> +        */
-> +       *p = e;
-> +
-> +       t->type = T_STRING;
-> +
-> +       return t->val;
-> +}
-> +
-> +/*
-> + * Populate a keyword token with a type and value.
-> + */
-> +static void get_keyword(struct token *t)
-> +{
-> +       int i;
-> +
-> +       for (i = 0; keywords[i].val; i++) {
-> +               if (!strcmp(t->val, keywords[i].val)) {
-> +                       t->type = keywords[i].type;
-> +                       break;
-> +               }
-> +       }
-> +}
-> +
-> +/*
-> + * Get the next token.  We have to keep track of which state we're in to know
-> + * if we're looking to get a string literal or a keyword.
-> + *
-> + * *p is updated to point at the first character after the current token.
-> + */
-> +static void get_token(char **p, struct token *t, enum lex_state state)
-> +{
-> +       char *c = *p;
-> +
-> +       t->type = T_INVALID;
-> +
-> +       /* eat non EOL whitespace */
-> +       while (isblank(*c))
-> +               c++;
-> +
-> +       /*
-> +        * eat comments. note that string literals can't begin with #, but
-> +        * can contain a # after their first character.
-> +        */
-> +       if (*c == '#') {
-> +               while (*c && *c != '\n')
-> +                       c++;
-> +       }
-> +
-> +       if (*c == '\n') {
-> +               t->type = T_EOL;
-> +               c++;
-> +       } else if (*c == '\0') {
-> +               t->type = T_EOF;
-> +               c++;
-> +       } else if (state == L_SLITERAL) {
-> +               get_string(&c, t, '\n', 0);
-> +       } else if (state == L_KEYWORD) {
-> +               /*
-> +                * when we expect a keyword, we first get the next string
-> +                * token delimited by whitespace, and then check if it
-> +                * matches a keyword in our keyword list. if it does, it's
-> +                * converted to a keyword token of the appropriate type, and
-> +                * if not, it remains a string token.
-> +                */
-> +               get_string(&c, t, ' ', 1);
-> +               get_keyword(t);
-> +       }
-> +
-> +       *p = c;
-> +}
-> +
-> +/*
-> + * Increment *c until we get to the end of the current line, or EOF.
-> + */
-> +static void eol_or_eof(char **c)
-> +{
-> +       while (**c && **c != '\n')
-> +               (*c)++;
-> +}
-> +
-> +/*
-> + * All of these parse_* functions share some common behavior.
-> + *
-> + * They finish with *c pointing after the token they parse, and return 1 on
-> + * success, or < 0 on error.
-> + */
-> +
-> +/*
-> + * Parse a string literal and store a pointer it at *dst. String literals
-> + * terminate at the end of the line.
-> + */
-> +static int parse_sliteral(char **c, char **dst)
-> +{
-> +       struct token t;
-> +       char *s = *c;
-> +
-> +       get_token(c, &t, L_SLITERAL);
-> +
-> +       if (t.type != T_STRING) {
-> +               printf("Expected string literal: %.*s\n", (int)(*c - s), s);
-> +               return -EINVAL;
-> +       }
-> +
-> +       *dst = t.val;
-> +
-> +       return 1;
-> +}
-> +
-> +/*
-> + * Parse a base 10 (unsigned) integer and store it at *dst.
-> + */
-> +static int parse_integer(char **c, int *dst)
-> +{
-> +       struct token t;
-> +       char *s = *c;
-> +
-> +       get_token(c, &t, L_SLITERAL);
-> +
-> +       if (t.type != T_STRING) {
-> +               printf("Expected string: %.*s\n", (int)(*c - s), s);
-> +               return -EINVAL;
-> +       }
-> +
-> +       *dst = simple_strtol(t.val, NULL, 10);
-> +
-> +       free(t.val);
-> +
-> +       return 1;
-> +}
-> +
-> +static int parse_pxefile_top(cmd_tbl_t *cmdtp, char *p, unsigned long base,
-> +                            struct pxe_menu *cfg, int nest_level);
-> +
-> +/*
-> + * Parse an include statement, and retrieve and parse the file it mentions.
-> + *
-> + * base should point to a location where it's safe to store the file, and
-> + * nest_level should indicate how many nested includes have occurred. For this
-> + * include, nest_level has already been incremented and doesn't need to be
-> + * incremented here.
-> + */
-> +static int handle_include(cmd_tbl_t *cmdtp, char **c, unsigned long base,
-> +                         struct pxe_menu *cfg, int nest_level)
-> +{
-> +       char *include_path;
-> +       char *s = *c;
-> +       int err;
-> +       char *buf;
-> +       int ret;
-> +
-> +       err = parse_sliteral(c, &include_path);
-> +
-> +       if (err < 0) {
-> +               printf("Expected include path: %.*s\n", (int)(*c - s), s);
-> +               return err;
-> +       }
-> +
-> +       err = get_pxe_file(cmdtp, include_path, base);
-> +
-> +       if (err < 0) {
-> +               printf("Couldn't retrieve %s\n", include_path);
-> +               return err;
-> +       }
-> +
-> +       buf = map_sysmem(base, 0);
-> +       ret = parse_pxefile_top(cmdtp, buf, base, cfg, nest_level);
-> +       unmap_sysmem(buf);
-> +
-> +       return ret;
-> +}
-> +
-> +/*
-> + * Parse lines that begin with 'menu'.
-> + *
-> + * base and nest are provided to handle the 'menu include' case.
-> + *
-> + * base should point to a location where it's safe to store the included file.
-> + *
-> + * nest_level should be 1 when parsing the top level pxe file, 2 when parsing
-> + * a file it includes, 3 when parsing a file included by that file, and so on.
-> + */
-> +static int parse_menu(cmd_tbl_t *cmdtp, char **c, struct pxe_menu *cfg,
-> +                     unsigned long base, int nest_level)
-> +{
-> +       struct token t;
-> +       char *s = *c;
-> +       int err = 0;
-> +
-> +       get_token(c, &t, L_KEYWORD);
-> +
-> +       switch (t.type) {
-> +       case T_TITLE:
-> +               err = parse_sliteral(c, &cfg->title);
-> +
-> +               break;
-> +
-> +       case T_INCLUDE:
-> +               err = handle_include(cmdtp, c, base, cfg,
-> +                                    nest_level + 1);
-> +               break;
-> +
-> +       case T_BACKGROUND:
-> +               err = parse_sliteral(c, &cfg->bmp);
-> +               break;
-> +
-> +       default:
-> +               printf("Ignoring malformed menu command: %.*s\n",
-> +                      (int)(*c - s), s);
-> +       }
-> +
-> +       if (err < 0)
-> +               return err;
-> +
-> +       eol_or_eof(c);
-> +
-> +       return 1;
-> +}
-> +
-> +/*
-> + * Handles parsing a 'menu line' when we're parsing a label.
-> + */
-> +static int parse_label_menu(char **c, struct pxe_menu *cfg,
-> +                           struct pxe_label *label)
-> +{
-> +       struct token t;
-> +       char *s;
-> +
-> +       s = *c;
-> +
-> +       get_token(c, &t, L_KEYWORD);
-> +
-> +       switch (t.type) {
-> +       case T_DEFAULT:
-> +               if (!cfg->default_label)
-> +                       cfg->default_label = strdup(label->name);
-> +
-> +               if (!cfg->default_label)
-> +                       return -ENOMEM;
-> +
-> +               break;
-> +       case T_LABEL:
-> +               parse_sliteral(c, &label->menu);
-> +               break;
-> +       default:
-> +               printf("Ignoring malformed menu command: %.*s\n",
-> +                      (int)(*c - s), s);
-> +       }
-> +
-> +       eol_or_eof(c);
-> +
-> +       return 0;
-> +}
-> +
-> +/*
-> + * Handles parsing a 'kernel' label.
-> + * expecting "filename" or "<fit_filename>#cfg"
-> + */
-> +static int parse_label_kernel(char **c, struct pxe_label *label)
-> +{
-> +       char *s;
-> +       int err;
-> +
-> +       err = parse_sliteral(c, &label->kernel);
-> +       if (err < 0)
-> +               return err;
-> +
-> +       s = strstr(label->kernel, "#");
-> +       if (!s)
-> +               return 1;
-> +
-> +       label->config = malloc(strlen(s) + 1);
-> +       if (!label->config)
-> +               return -ENOMEM;
-> +
-> +       strcpy(label->config, s);
-> +       *s = 0;
-> +
-> +       return 1;
-> +}
-> +
-> +/*
-> + * Parses a label and adds it to the list of labels for a menu.
-> + *
-> + * A label ends when we either get to the end of a file, or
-> + * get some input we otherwise don't have a handler defined
-> + * for.
-> + *
-> + */
-> +static int parse_label(char **c, struct pxe_menu *cfg)
-> +{
-> +       struct token t;
-> +       int len;
-> +       char *s = *c;
-> +       struct pxe_label *label;
-> +       int err;
-> +
-> +       label = label_create();
-> +       if (!label)
-> +               return -ENOMEM;
-> +
-> +       err = parse_sliteral(c, &label->name);
-> +       if (err < 0) {
-> +               printf("Expected label name: %.*s\n", (int)(*c - s), s);
-> +               label_destroy(label);
-> +               return -EINVAL;
-> +       }
-> +
-> +       list_add_tail(&label->list, &cfg->labels);
-> +
-> +       while (1) {
-> +               s = *c;
-> +               get_token(c, &t, L_KEYWORD);
-> +
-> +               err = 0;
-> +               switch (t.type) {
-> +               case T_MENU:
-> +                       err = parse_label_menu(c, cfg, label);
-> +                       break;
-> +
-> +               case T_KERNEL:
-> +               case T_LINUX:
-> +                       err = parse_label_kernel(c, label);
-> +                       break;
-> +
-> +               case T_APPEND:
-> +                       err = parse_sliteral(c, &label->append);
-> +                       if (label->initrd)
-> +                               break;
-> +                       s = strstr(label->append, "initrd=");
-> +                       if (!s)
-> +                               break;
-> +                       s += 7;
-> +                       len = (int)(strchr(s, ' ') - s);
-> +                       label->initrd = malloc(len + 1);
-> +                       strncpy(label->initrd, s, len);
-> +                       label->initrd[len] = '\0';
-> +
-> +                       break;
-> +
-> +               case T_INITRD:
-> +                       if (!label->initrd)
-> +                               err = parse_sliteral(c, &label->initrd);
-> +                       break;
-> +
-> +               case T_FDT:
-> +                       if (!label->fdt)
-> +                               err = parse_sliteral(c, &label->fdt);
-> +                       break;
-> +
-> +               case T_FDTDIR:
-> +                       if (!label->fdtdir)
-> +                               err = parse_sliteral(c, &label->fdtdir);
-> +                       break;
-> +
-> +               case T_LOCALBOOT:
-> +                       label->localboot = 1;
-> +                       err = parse_integer(c, &label->localboot_val);
-> +                       break;
-> +
-> +               case T_IPAPPEND:
-> +                       err = parse_integer(c, &label->ipappend);
-> +                       break;
-> +
-> +               case T_EOL:
-> +                       break;
-> +
-> +               default:
-> +                       /*
-> +                        * put the token back! we don't want it - it's the end
-> +                        * of a label and whatever token this is, it's
-> +                        * something for the menu level context to handle.
-> +                        */
-> +                       *c = s;
-> +                       return 1;
-> +               }
-> +
-> +               if (err < 0)
-> +                       return err;
-> +       }
-> +}
-> +
-> +/*
-> + * This 16 comes from the limit pxelinux imposes on nested includes.
-> + *
-> + * There is no reason at all we couldn't do more, but some limit helps prevent
-> + * infinite (until crash occurs) recursion if a file tries to include itself.
-> + */
-> +#define MAX_NEST_LEVEL 16
-> +
-> +/*
-> + * Entry point for parsing a menu file. nest_level indicates how many times
-> + * we've nested in includes.  It will be 1 for the top level menu file.
-> + *
-> + * Returns 1 on success, < 0 on error.
-> + */
-> +static int parse_pxefile_top(cmd_tbl_t *cmdtp, char *p, unsigned long base,
-> +                            struct pxe_menu *cfg, int nest_level)
-> +{
-> +       struct token t;
-> +       char *s, *b, *label_name;
-> +       int err;
-> +
-> +       b = p;
-> +
-> +       if (nest_level > MAX_NEST_LEVEL) {
-> +               printf("Maximum nesting (%d) exceeded\n", MAX_NEST_LEVEL);
-> +               return -EMLINK;
-> +       }
-> +
-> +       while (1) {
-> +               s = p;
-> +
-> +               get_token(&p, &t, L_KEYWORD);
-> +
-> +               err = 0;
-> +               switch (t.type) {
-> +               case T_MENU:
-> +                       cfg->prompt = 1;
-> +                       err = parse_menu(cmdtp, &p, cfg,
-> +                                        base + ALIGN(strlen(b) + 1, 4),
-> +                                        nest_level);
-> +                       break;
-> +
-> +               case T_TIMEOUT:
-> +                       err = parse_integer(&p, &cfg->timeout);
-> +                       break;
-> +
-> +               case T_LABEL:
-> +                       err = parse_label(&p, cfg);
-> +                       break;
-> +
-> +               case T_DEFAULT:
-> +               case T_ONTIMEOUT:
-> +                       err = parse_sliteral(&p, &label_name);
-> +
-> +                       if (label_name) {
-> +                               if (cfg->default_label)
-> +                                       free(cfg->default_label);
-> +
-> +                               cfg->default_label = label_name;
-> +                       }
-> +
-> +                       break;
-> +
-> +               case T_INCLUDE:
-> +                       err = handle_include(cmdtp, &p,
-> +                                            base + ALIGN(strlen(b), 4), cfg,
-> +                                            nest_level + 1);
-> +                       break;
-> +
-> +               case T_PROMPT:
-> +                       eol_or_eof(&p);
-> +                       break;
-> +
-> +               case T_EOL:
-> +                       break;
-> +
-> +               case T_EOF:
-> +                       return 1;
-> +
-> +               default:
-> +                       printf("Ignoring unknown command: %.*s\n",
-> +                              (int)(p - s), s);
-> +                       eol_or_eof(&p);
-> +               }
-> +
-> +               if (err < 0)
-> +                       return err;
-> +       }
-> +}
-> +
-> +/*
-> + * Free the memory used by a pxe_menu and its labels.
-> + */
-> +void destroy_pxe_menu(struct pxe_menu *cfg)
-> +{
-> +       struct list_head *pos, *n;
-> +       struct pxe_label *label;
-> +
-> +       if (cfg->title)
-> +               free(cfg->title);
-> +
-> +       if (cfg->default_label)
-> +               free(cfg->default_label);
-> +
-> +       list_for_each_safe(pos, n, &cfg->labels) {
-> +               label = list_entry(pos, struct pxe_label, list);
-> +
-> +               label_destroy(label);
-> +       }
-> +
-> +       free(cfg);
-> +}
-> +
-> +/*
-> + * Entry point for parsing a pxe file. This is only used for the top level
-> + * file.
-> + *
-> + * Returns NULL if there is an error, otherwise, returns a pointer to a
-> + * pxe_menu struct populated with the results of parsing the pxe file (and any
-> + * files it includes). The resulting pxe_menu struct can be free()'d by using
-> + * the destroy_pxe_menu() function.
-> + */
-> +struct pxe_menu *parse_pxefile(cmd_tbl_t *cmdtp, unsigned long menucfg)
-> +{
-> +       struct pxe_menu *cfg;
-> +       char *buf;
-> +       int r;
-> +
-> +       cfg = malloc(sizeof(struct pxe_menu));
-> +
-> +       if (!cfg)
-> +               return NULL;
-> +
-> +       memset(cfg, 0, sizeof(struct pxe_menu));
-> +
-> +       INIT_LIST_HEAD(&cfg->labels);
-> +
-> +       buf = map_sysmem(menucfg, 0);
-> +       r = parse_pxefile_top(cmdtp, buf, menucfg, cfg, 1);
-> +       unmap_sysmem(buf);
-> +
-> +       if (r < 0) {
-> +               destroy_pxe_menu(cfg);
-> +               return NULL;
-> +       }
-> +
-> +       return cfg;
-> +}
-> +
-> +/*
-> + * Converts a pxe_menu struct into a menu struct for use with U-Boot's generic
-> + * menu code.
-> + */
-> +static struct menu *pxe_menu_to_menu(struct pxe_menu *cfg)
-> +{
-> +       struct pxe_label *label;
-> +       struct list_head *pos;
-> +       struct menu *m;
-> +       int err;
-> +       int i = 1;
-> +       char *default_num = NULL;
-> +
-> +       /*
-> +        * Create a menu and add items for all the labels.
-> +        */
-> +       m = menu_create(cfg->title, DIV_ROUND_UP(cfg->timeout, 10),
-> +                       cfg->prompt, label_print, NULL, NULL);
-> +
-> +       if (!m)
-> +               return NULL;
-> +
-> +       list_for_each(pos, &cfg->labels) {
-> +               label = list_entry(pos, struct pxe_label, list);
-> +
-> +               sprintf(label->num, "%d", i++);
-> +               if (menu_item_add(m, label->num, label) != 1) {
-> +                       menu_destroy(m);
-> +                       return NULL;
-> +               }
-> +               if (cfg->default_label &&
-> +                   (strcmp(label->name, cfg->default_label) == 0))
-> +                       default_num = label->num;
-> +       }
-> +
-> +       /*
-> +        * After we've created items for each label in the menu, set the
-> +        * menu's default label if one was specified.
-> +        */
-> +       if (default_num) {
-> +               err = menu_default_set(m, default_num);
-> +               if (err != 1) {
-> +                       if (err != -ENOENT) {
-> +                               menu_destroy(m);
-> +                               return NULL;
-> +                       }
-> +
-> +                       printf("Missing default: %s\n", cfg->default_label);
-> +               }
-> +       }
-> +
-> +       return m;
-> +}
-> +
-> +/*
-> + * Try to boot any labels we have yet to attempt to boot.
-> + */
-> +static void boot_unattempted_labels(cmd_tbl_t *cmdtp, struct pxe_menu *cfg)
-> +{
-> +       struct list_head *pos;
-> +       struct pxe_label *label;
-> +
-> +       list_for_each(pos, &cfg->labels) {
-> +               label = list_entry(pos, struct pxe_label, list);
-> +
-> +               if (!label->attempted)
-> +                       label_boot(cmdtp, label);
-> +       }
-> +}
-> +
-> +/*
-> + * Boot the system as prescribed by a pxe_menu.
-> + *
-> + * Use the menu system to either get the user's choice or the default, based
-> + * on config or user input.  If there is no default or user's choice,
-> + * attempted to boot labels in the order they were given in pxe files.
-> + * If the default or user's choice fails to boot, attempt to boot other
-> + * labels in the order they were given in pxe files.
-> + *
-> + * If this function returns, there weren't any labels that successfully
-> + * booted, or the user interrupted the menu selection via ctrl+c.
-> + */
-> +void handle_pxe_menu(cmd_tbl_t *cmdtp, struct pxe_menu *cfg)
-> +{
-> +       void *choice;
-> +       struct menu *m;
-> +       int err;
-> +
-> +#ifdef CONFIG_CMD_BMP
-> +       /* display BMP if available */
-> +       if (cfg->bmp) {
-> +               if (get_relfile(cmdtp, cfg->bmp, load_addr)) {
-> +                       run_command("cls", 0);
-> +                       bmp_display(load_addr,
-> +                                   BMP_ALIGN_CENTER, BMP_ALIGN_CENTER);
-> +               } else {
-> +                       printf("Skipping background bmp %s for failure\n",
-> +                              cfg->bmp);
-> +               }
-> +       }
-> +#endif
-> +
-> +       m = pxe_menu_to_menu(cfg);
-> +       if (!m)
-> +               return;
-> +
-> +       err = menu_get_choice(m, &choice);
-> +
-> +       menu_destroy(m);
-> +
-> +       /*
-> +        * err == 1 means we got a choice back from menu_get_choice.
-> +        *
-> +        * err == -ENOENT if the menu was setup to select the default but no
-> +        * default was set. in that case, we should continue trying to boot
-> +        * labels that haven't been attempted yet.
-> +        *
-> +        * otherwise, the user interrupted or there was some other error and
-> +        * we give up.
-> +        */
-> +
-> +       if (err == 1) {
-> +               err = label_boot(cmdtp, choice);
-> +               if (!err)
-> +                       return;
-> +       } else if (err != -ENOENT) {
-> +               return;
-> +       }
-> +
-> +       boot_unattempted_labels(cmdtp, cfg);
-> +}
-> diff --git a/cmd/pxe_utils.h b/cmd/pxe_utils.h
-> new file mode 100644
-> index 0000000000..10be494c65
-> --- /dev/null
-> +++ b/cmd/pxe_utils.h
-> @@ -0,0 +1,43 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +
-> +#ifndef __PXE_UTILS_H
-> +#define __PXE_UTILS_H
-> +
-> +/*
-> + * Describes a pxe menu as given via pxe files.
-> + *
-> + * title - the name of the menu as given by a 'menu title' line.
-> + * default_label - the name of the default label, if any.
-> + * bmp - the bmp file name which is displayed in background
-> + * timeout - time in tenths of a second to wait for a user key-press before
-> + *           booting the default label.
-> + * prompt - if 0, don't prompt for a choice unless the timeout period is
-> + *          interrupted.  If 1, always prompt for a choice regardless of
-> + *          timeout.
-> + * labels - a list of labels defined for the menu.
-> + */
-> +struct pxe_menu {
-> +       char *title;
-> +       char *default_label;
-> +       char *bmp;
-> +       int timeout;
-> +       int prompt;
-> +       struct list_head labels;
-> +};
-> +
-> +extern bool is_pxe;
-> +
-> +extern int (*do_getfile)(cmd_tbl_t *cmdtp, const char *file_path,
-> +                        char *file_addr);
-> +void destroy_pxe_menu(struct pxe_menu *cfg);
-> +int get_pxe_file(cmd_tbl_t *cmdtp, const char *file_path,
-> +                unsigned long file_addr);
-> +int get_pxelinux_path(cmd_tbl_t *cmdtp, const char *file,
-> +                     unsigned long pxefile_addr_r);
-> +void handle_pxe_menu(cmd_tbl_t *cmdtp, struct pxe_menu *cfg);
-> +struct pxe_menu *parse_pxefile(cmd_tbl_t *cmdtp, unsigned long menucfg);
-> +int pxe_ipaddr_paths(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r);
-> +int pxe_mac_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r);
-> +int pxe_uuid_path(cmd_tbl_t *cmdtp, unsigned long pxefile_addr_r);
-> +
-> +#endif /* __PXE_UTILS_H */
-> diff --git a/cmd/sysboot.c b/cmd/sysboot.c
-> new file mode 100644
-> index 0000000000..793d67d2f5
-> --- /dev/null
-> +++ b/cmd/sysboot.c
-> @@ -0,0 +1,134 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <common.h>
-> +#include <command.h>
-> +#include <env.h>
-> +#include <fs.h>
-> +#include "pxe_utils.h"
-> +
-> +static char *fs_argv[5];
-> +
-> +static int do_get_ext2(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> +{
-> +#ifdef CONFIG_CMD_EXT2
-> +       fs_argv[0] = "ext2load";
-> +       fs_argv[3] = file_addr;
-> +       fs_argv[4] = (void *)file_path;
-> +
-> +       if (!do_ext2load(cmdtp, 0, 5, fs_argv))
-> +               return 1;
-> +#endif
-> +       return -ENOENT;
-> +}
-> +
-> +static int do_get_fat(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> +{
-> +#ifdef CONFIG_CMD_FAT
-> +       fs_argv[0] = "fatload";
-> +       fs_argv[3] = file_addr;
-> +       fs_argv[4] = (void *)file_path;
-> +
-> +       if (!do_fat_fsload(cmdtp, 0, 5, fs_argv))
-> +               return 1;
-> +#endif
-> +       return -ENOENT;
-> +}
-> +
-> +static int do_get_any(cmd_tbl_t *cmdtp, const char *file_path, char *file_addr)
-> +{
-> +#ifdef CONFIG_CMD_FS_GENERIC
-> +       fs_argv[0] = "load";
-> +       fs_argv[3] = file_addr;
-> +       fs_argv[4] = (void *)file_path;
-> +
-> +       if (!do_load(cmdtp, 0, 5, fs_argv, FS_TYPE_ANY))
-> +               return 1;
-> +#endif
-> +       return -ENOENT;
-> +}
-> +
-> +/*
-> + * Boots a system using a local disk syslinux/extlinux file
-> + *
-> + * Returns 0 on success, 1 on error.
-> + */
-> +static int do_sysboot(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
-> +{
-> +       unsigned long pxefile_addr_r;
-> +       struct pxe_menu *cfg;
-> +       char *pxefile_addr_str;
-> +       char *filename;
-> +       int prompt = 0;
-> +
-> +       is_pxe = false;
-> +
-> +       if (argc > 1 && strstr(argv[1], "-p")) {
-> +               prompt = 1;
-> +               argc--;
-> +               argv++;
-> +       }
-> +
-> +       if (argc < 4)
-> +               return cmd_usage(cmdtp);
-> +
-> +       if (argc < 5) {
-> +               pxefile_addr_str = from_env("pxefile_addr_r");
-> +               if (!pxefile_addr_str)
-> +                       return 1;
-> +       } else {
-> +               pxefile_addr_str = argv[4];
-> +       }
-> +
-> +       if (argc < 6) {
-> +               filename = env_get("bootfile");
-> +       } else {
-> +               filename = argv[5];
-> +               env_set("bootfile", filename);
-> +       }
-> +
-> +       if (strstr(argv[3], "ext2")) {
-> +               do_getfile = do_get_ext2;
-> +       } else if (strstr(argv[3], "fat")) {
-> +               do_getfile = do_get_fat;
-> +       } else if (strstr(argv[3], "any")) {
-> +               do_getfile = do_get_any;
-> +       } else {
-> +               printf("Invalid filesystem: %s\n", argv[3]);
-> +               return 1;
-> +       }
-> +       fs_argv[1] = argv[1];
-> +       fs_argv[2] = argv[2];
-> +
-> +       if (strict_strtoul(pxefile_addr_str, 16, &pxefile_addr_r) < 0) {
-> +               printf("Invalid pxefile address: %s\n", pxefile_addr_str);
-> +               return 1;
-> +       }
-> +
-> +       if (get_pxe_file(cmdtp, filename, pxefile_addr_r) < 0) {
-> +               printf("Error reading config file\n");
-> +               return 1;
-> +       }
-> +
-> +       cfg = parse_pxefile(cmdtp, pxefile_addr_r);
-> +
-> +       if (!cfg) {
-> +               printf("Error parsing config file\n");
-> +               return 1;
-> +       }
-> +
-> +       if (prompt)
-> +               cfg->prompt = 1;
-> +
-> +       handle_pxe_menu(cmdtp, cfg);
-> +
-> +       destroy_pxe_menu(cfg);
-> +
-> +       return 0;
-> +}
-> +
-> +U_BOOT_CMD(sysboot, 7, 1, do_sysboot,
-> +          "command to get and boot from syslinux files",
-> +          "[-p] <interface> <dev[:part]> <ext2|fat|any> [addr] [filename]\n"
-> +          "    - load and parse syslinux menu file 'filename' from ext2, fat\n"
-> +          "      or any filesystem on 'dev' on 'interface' to address 'addr'"
-> +);
-> diff --git a/include/env.h b/include/env.h
-> index b72239f6a5..d6c2d751d6 100644
-> --- a/include/env.h
-> +++ b/include/env.h
-> @@ -113,6 +113,16 @@ int env_match(unsigned char *name, int index);
->   */
->  char *env_get(const char *varname);
->
-> +/*
-> + * Like env_get, but prints an error if envvar isn't defined in the
-> + * environment.  It always returns what env_get does, so it can be used in
-> + * place of env_get without changing error handling otherwise.
-> + *
-> + * @varname:   Variable to look up
-> + * @return value of variable, or NULL if not found
-> + */
-> +char *from_env(const char *envvar);
-> +
->  /**
->   * env_get_f() - Look up the value of an environment variable (early)
->   *
-> --
-> 2.17.1
->
-> _______________________________________________
-> U-Boot mailing list
-> U-Boot@lists.denx.de
-> https://lists.denx.de/listinfo/u-boot
+[And don't get me wrong: this doesn't affect my downstream boards, they 
+don't save/load env due to secure boot reasons anyway.]
+
+Regards,
+Simon
+
+ >
+ >   /*
+ >    * SPL
+ > diff --git a/include/configs/socfpga_sr1500.h 
+b/include/configs/socfpga_sr1500.h
+ > index e1a48715fb0d..ccaa050ae597 100644
+ > --- a/include/configs/socfpga_sr1500.h
+ > +++ b/include/configs/socfpga_sr1500.h
+ > @@ -28,10 +28,6 @@
+ >   #define CONFIG_SYS_BOOTCOUNT_BE
+ >
+ >   /* Environment setting for SPI flash */
+ > -#define CONFIG_ENV_SECT_SIZE	(64 * 1024)
+ > -#define CONFIG_ENV_SIZE		(16 * 1024)
+ > -#define CONFIG_ENV_OFFSET	0x000e0000
+ > -#define CONFIG_ENV_OFFSET_REDUND (CONFIG_ENV_OFFSET + 
+CONFIG_ENV_SECT_SIZE)
+ >
+ >   /* The rest of the configuration is shared */
+ >   #include <configs/socfpga_common.h>
+ > diff --git a/include/configs/socfpga_stratix10_socdk.h 
+b/include/configs/socfpga_stratix10_socdk.h
+ > index 8e6ecf4bed34..e8e66fa4ae67 100644
+ > --- a/include/configs/socfpga_stratix10_socdk.h
+ > +++ b/include/configs/socfpga_stratix10_socdk.h
+ > @@ -48,9 +48,7 @@
+ >   /*
+ >    * U-Boot environment configurations
+ >    */
+ > -#define CONFIG_ENV_SIZE			0x1000
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0	/* device 0 */
+ > -#define CONFIG_ENV_OFFSET		512	/* just after the MBR */
+ >
+ >   /*
+ >    * QSPI support
+ > @@ -62,13 +60,6 @@
+ >   /* Flash device info */
+ >
+ >   /*#define CONFIG_ENV_IS_IN_SPI_FLASH*/
+ > -#ifdef CONFIG_ENV_IS_IN_SPI_FLASH
+ > -#undef CONFIG_ENV_OFFSET
+ > -#undef CONFIG_ENV_SIZE
+ > -#define CONFIG_ENV_OFFSET		0x710000
+ > -#define CONFIG_ENV_SIZE			(4 * 1024)
+ > -#define CONFIG_ENV_SECT_SIZE		(4 * 1024)
+ > -#endif /* CONFIG_ENV_IS_IN_SPI_FLASH */
+ >
+ >   #ifndef CONFIG_SPL_BUILD
+ >   #define CONFIG_MTD_DEVICE
+ > diff --git a/include/configs/socfpga_vining_fpga.h 
+b/include/configs/socfpga_vining_fpga.h
+ > index 5cc12419a692..8b97cd93a78a 100644
+ > --- a/include/configs/socfpga_vining_fpga.h
+ > +++ b/include/configs/socfpga_vining_fpga.h
+ > @@ -195,11 +195,6 @@
+ >   		"fi\0"							\
+ >   		"socfpga_legacy_reset_compat=1\0"
+ >
+ > -#define CONFIG_ENV_SECT_SIZE		(64 * 1024)
+ > -#define CONFIG_ENV_OFFSET		0x100000
+ > -#define CONFIG_ENV_OFFSET_REDUND	\
+ > -	(CONFIG_ENV_OFFSET + CONFIG_ENV_SECT_SIZE)
+ > -
+ >   /* Support changing the prompt string */
+ >   #define CONFIG_CMDLINE_PS_SUPPORT
+ >
+ > diff --git a/include/configs/socrates.h b/include/configs/socrates.h
+ > index f5f3316b9030..4fe67dced850 100644
+ > --- a/include/configs/socrates.h
+ > +++ b/include/configs/socrates.h
+ > @@ -187,11 +187,6 @@
+ >   /*
+ >    * Environment
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000 /* 128K(one sector) for env	*/
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE - \
+ > -				CONFIG_ENV_SECT_SIZE - CONFIG_ENV_SECT_SIZE)
+ > -#define CONFIG_ENV_SIZE		0x4000
+ > -#define CONFIG_ENV_ADDR_REDUND	(CONFIG_ENV_ADDR - CONFIG_ENV_SECT_SIZE)
+ >
+ >   #define CONFIG_LOADS_ECHO	1	/* echo on for serial download	*/
+ >   #define CONFIG_SYS_LOADS_BAUD_CHANGE	1	/* allow baudrate change	*/
+ > diff --git a/include/configs/som-db5800-som-6867.h 
+b/include/configs/som-db5800-som-6867.h
+ > index cfcc9c866d63..201f2c2ece57 100644
+ > --- a/include/configs/som-db5800-som-6867.h
+ > +++ b/include/configs/som-db5800-som-6867.h
+ > @@ -21,7 +21,4 @@
+ >   #define VIDEO_IO_OFFSET				0
+ >   #define CONFIG_X86EMU_RAW_IO
+ >
+ > -#define CONFIG_ENV_SECT_SIZE		0x1000
+ > -#define CONFIG_ENV_OFFSET		0x006ef000
+ > -
+ >   #endif	/* __CONFIG_H */
+ > diff --git a/include/configs/spear-common.h 
+b/include/configs/spear-common.h
+ > index d21ff9771693..85e498dc6687 100644
+ > --- a/include/configs/spear-common.h
+ > +++ b/include/configs/spear-common.h
+ > @@ -99,7 +99,6 @@
+ >    * Environment is in serial NOR flash
+ >    */
+ >   #define CONFIG_SYS_MONITOR_LEN			0x00040000
+ > -#define CONFIG_ENV_SECT_SIZE			0x00010000
+ >   #define CONFIG_FSMTDBLK				"/dev/mtdblock3 "
+ >
+ >   #define CONFIG_BOOTCOMMAND			"bootm 0xf8050000"
+ > @@ -109,21 +108,16 @@
+ >    * Environment is in parallel NOR flash
+ >    */
+ >   #define CONFIG_SYS_MONITOR_LEN			0x00060000
+ > -#define CONFIG_ENV_SECT_SIZE			0x00020000
+ >   #define CONFIG_FSMTDBLK				"/dev/mtdblock3 "
+ >
+ >   #define CONFIG_BOOTCOMMAND			"cp.b 0x50080000 0x1600000 " \
+ >   						"0x4C0000; bootm 0x1600000"
+ >   #endif
+ > -
+ > -#define CONFIG_ENV_ADDR				(CONFIG_SYS_FLASH_BASE + \
+ > -						CONFIG_SYS_MONITOR_LEN)
+ >   #elif defined(CONFIG_ENV_IS_IN_NAND)
+ >   /*
+ >    * Environment is in NAND
+ >    */
+ >
+ > -#define CONFIG_ENV_OFFSET			0x60000
+ >   #define CONFIG_ENV_RANGE			0x10000
+ >   #define CONFIG_FSMTDBLK				"/dev/mtdblock7 "
+ >
+ > @@ -146,7 +140,6 @@
+ >   		"console=ttyAMA0,115200 $(othbootargs);"		\
+ >   	CONFIG_BOOTCOMMAND
+ >
+ > -#define CONFIG_ENV_SIZE				0x02000
+ >   #define CONFIG_SYS_MONITOR_BASE			CONFIG_SYS_TEXT_BASE
+ >
+ >   /* Miscellaneous configurable options */
+ > diff --git a/include/configs/stih410-b2260.h 
+b/include/configs/stih410-b2260.h
+ > index b67efbb16830..a8a58f395068 100644
+ > --- a/include/configs/stih410-b2260.h
+ > +++ b/include/configs/stih410-b2260.h
+ > @@ -39,9 +39,6 @@
+ >   			"ramdisk_addr_r=0x48000000\0"		\
+ >   			BOOTENV
+ >
+ > -
+ > -#define CONFIG_ENV_SIZE 0x4000
+ > -
+ >   /* Extra Commands */
+ >   #define CONFIG_CMD_ASKENV
+ >
+ > diff --git a/include/configs/stm32f429-discovery.h 
+b/include/configs/stm32f429-discovery.h
+ > index 31c17d081867..a8b3a173096f 100644
+ > --- a/include/configs/stm32f429-discovery.h
+ > +++ b/include/configs/stm32f429-discovery.h
+ > @@ -20,10 +20,6 @@
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	12
+ >   #define CONFIG_SYS_MAX_FLASH_BANKS	2
+ >
+ > -#define CONFIG_ENV_OFFSET		(256 << 10)
+ > -#define CONFIG_ENV_SECT_SIZE		(128 << 10)
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_RED_LED			110
+ >   #define CONFIG_GREEN_LED		109
+ >
+ > diff --git a/include/configs/stm32f429-evaluation.h 
+b/include/configs/stm32f429-evaluation.h
+ > index a5390f874284..7a17222d7b81 100644
+ > --- a/include/configs/stm32f429-evaluation.h
+ > +++ b/include/configs/stm32f429-evaluation.h
+ > @@ -20,10 +20,6 @@
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	12
+ >   #define CONFIG_SYS_MAX_FLASH_BANKS	2
+ >
+ > -#define CONFIG_ENV_OFFSET		(256 << 10)
+ > -#define CONFIG_ENV_SECT_SIZE		(128 << 10)
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_STM32_FLASH
+ >
+ >   #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
+ > diff --git a/include/configs/stm32f469-discovery.h 
+b/include/configs/stm32f469-discovery.h
+ > index 1c7efd13b835..463f1c4396d0 100644
+ > --- a/include/configs/stm32f469-discovery.h
+ > +++ b/include/configs/stm32f469-discovery.h
+ > @@ -20,10 +20,6 @@
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	12
+ >   #define CONFIG_SYS_MAX_FLASH_BANKS	2
+ >
+ > -#define CONFIG_ENV_OFFSET		(256 << 10)
+ > -#define CONFIG_ENV_SECT_SIZE		(128 << 10)
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_STM32_FLASH
+ >
+ >   #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
+ > diff --git a/include/configs/stm32f746-disco.h 
+b/include/configs/stm32f746-disco.h
+ > index cc26f83e7462..337b99977b80 100644
+ > --- a/include/configs/stm32f746-disco.h
+ > +++ b/include/configs/stm32f746-disco.h
+ > @@ -24,8 +24,6 @@
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	8
+ >   #define CONFIG_SYS_MAX_FLASH_BANKS	1
+ >
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_STM32_FLASH
+ >
+ >   #define CONFIG_DW_GMAC_DEFAULT_DMA_PBL	(8)
+ > diff --git a/include/configs/stm32h743-disco.h 
+b/include/configs/stm32h743-disco.h
+ > index f110e2994c71..74c69eba39d3 100644
+ > --- a/include/configs/stm32h743-disco.h
+ > +++ b/include/configs/stm32h743-disco.h
+ > @@ -18,8 +18,6 @@
+ >   #define CONFIG_SYS_LOAD_ADDR		0xD0400000
+ >   #define CONFIG_LOADADDR			0xD0400000
+ >
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_SYS_HZ_CLOCK		1000000
+ >
+ >   #define CONFIG_CMDLINE_TAG
+ > diff --git a/include/configs/stm32h743-eval.h 
+b/include/configs/stm32h743-eval.h
+ > index e3bf5b27e859..b7c84922ab84 100644
+ > --- a/include/configs/stm32h743-eval.h
+ > +++ b/include/configs/stm32h743-eval.h
+ > @@ -18,8 +18,6 @@
+ >   #define CONFIG_SYS_LOAD_ADDR		0xD0400000
+ >   #define CONFIG_LOADADDR			0xD0400000
+ >
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -
+ >   #define CONFIG_SYS_HZ_CLOCK		1000000
+ >
+ >   #define CONFIG_CMDLINE_TAG
+ > diff --git a/include/configs/stmark2.h b/include/configs/stmark2.h
+ > index 35966580a918..a08d9950bd87 100644
+ > --- a/include/configs/stmark2.h
+ > +++ b/include/configs/stmark2.h
+ > @@ -139,9 +139,6 @@
+ >
+ >   #if defined(CONFIG_CF_SBF)
+ >   #define CONFIG_ENV_IS_IN_SPI_FLASH	1
+ > -#define CONFIG_ENV_OFFSET		0x40000
+ > -#define CONFIG_ENV_SIZE			0x2000
+ > -#define CONFIG_ENV_SECT_SIZE		0x10000
+ >   #endif
+ >
+ >   #undef CONFIG_ENV_OVERWRITE
+ > diff --git a/include/configs/strider.h b/include/configs/strider.h
+ > index d270d8a2dd4f..ac9fce80cec3 100644
+ > --- a/include/configs/strider.h
+ > +++ b/include/configs/strider.h
+ > @@ -384,15 +384,6 @@ void fpga_control_clear(unsigned int bus, int pin);
+ >   /*
+ >    * Environment
+ >    */
+ > -#if 1
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE + \
+ > -				 CONFIG_SYS_MONITOR_LEN)
+ > -#define CONFIG_ENV_SECT_SIZE	0x10000 /* 64K(one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x2000
+ > -#define CONFIG_ENV_ADDR_REDUND	(CONFIG_ENV_ADDR + CONFIG_ENV_SECT_SIZE)
+ > -#else
+ > -#define CONFIG_ENV_SIZE		0x2000		/* 8KB */
+ > -#endif
+ >
+ >   #define CONFIG_LOADS_ECHO	1	/* echo on for serial download */
+ >   #define CONFIG_SYS_LOADS_BAUD_CHANGE	1	/* allow baudrate change */
+ > diff --git a/include/configs/stv0991.h b/include/configs/stv0991.h
+ > index e5262085fc75..81e1e49c928a 100644
+ > --- a/include/configs/stv0991.h
+ > +++ b/include/configs/stv0991.h
+ > @@ -13,11 +13,6 @@
+ >   #define CONFIG_SYS_SDRAM_BASE			PHYS_SDRAM_1
+ >   #define PHYS_SDRAM_1_SIZE			0x00198000
+ >
+ > -#define CONFIG_ENV_SIZE				0x10000
+ > -#define CONFIG_ENV_SECT_SIZE			CONFIG_ENV_SIZE
+ > -#define CONFIG_ENV_OFFSET			0x30000
+ > -#define CONFIG_ENV_ADDR				\
+ > -	(PHYS_SDRAM_1_SIZE - CONFIG_ENV_SIZE)
+ >   #define CONFIG_SYS_MALLOC_LEN			(CONFIG_ENV_SIZE + 16 * 1024)
+ >
+ >   /* user interface */
+ > diff --git a/include/configs/t4qds.h b/include/configs/t4qds.h
+ > index bf3750191281..5d087caf31e4 100644
+ > --- a/include/configs/t4qds.h
+ > +++ b/include/configs/t4qds.h
+ > @@ -54,9 +54,7 @@
+ >   #define CONFIG_SYS_INIT_L3_ADDR		0xFFFC0000
+ >   #define CONFIG_SYS_L3_SIZE		(512 << 10)
+ >   #define CONFIG_SPL_GD_ADDR		(CONFIG_SYS_INIT_L3_ADDR + 32 * 1024)
+ > -#ifdef CONFIG_RAMBOOT_PBL
+ > -#define CONFIG_ENV_ADDR			(CONFIG_SPL_GD_ADDR + 4 * 1024)
+ > -#endif
+ > +#define SPL_ENV_ADDR			(CONFIG_SPL_GD_ADDR + 4 * 1024)
+ >   #define CONFIG_SPL_RELOC_MALLOC_ADDR	(CONFIG_SPL_GD_ADDR + 12 * 1024)
+ >   #define CONFIG_SPL_RELOC_MALLOC_SIZE	(50 << 10)
+ >   #define CONFIG_SPL_RELOC_STACK		(CONFIG_SPL_GD_ADDR + 64 * 1024)
+ > diff --git a/include/configs/tam3517-common.h 
+b/include/configs/tam3517-common.h
+ > index 69819da492fd..a2bb1b55eb12 100644
+ > --- a/include/configs/tam3517-common.h
+ > +++ b/include/configs/tam3517-common.h
+ > @@ -110,10 +110,6 @@
+ >
+ >   /* Redundant Environment */
+ >   #define CONFIG_SYS_ENV_SECT_SIZE	(128 << 10)	/* 128 KiB */
+ > -#define CONFIG_ENV_OFFSET		0x180000
+ > -#define CONFIG_ENV_ADDR			0x180000
+ > -#define CONFIG_ENV_OFFSET_REDUND	(CONFIG_ENV_OFFSET + \
+ > -						2 * CONFIG_SYS_ENV_SECT_SIZE)
+ >
+ >   #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
+ >   #define CONFIG_SYS_INIT_RAM_ADDR	0x4020f800
+ > diff --git a/include/configs/tao3530.h b/include/configs/tao3530.h
+ > index 7a54fe3e1e37..e95cd0087d3f 100644
+ > --- a/include/configs/tao3530.h
+ > +++ b/include/configs/tao3530.h
+ > @@ -169,7 +169,6 @@
+ >   #define ONENAND_ENV_OFFSET		0x260000 /* environment starts here */
+ >
+ >   #define CONFIG_SYS_ENV_SECT_SIZE	(128 << 10)
+ > -#define CONFIG_ENV_ADDR			CONFIG_ENV_OFFSET
+ >
+ >   #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
+ >   #define CONFIG_SYS_INIT_RAM_ADDR	0x4020f800
+ > diff --git a/include/configs/taurus.h b/include/configs/taurus.h
+ > index fdd1c5224b78..9990c9340a3d 100644
+ > --- a/include/configs/taurus.h
+ > +++ b/include/configs/taurus.h
+ > @@ -108,7 +108,6 @@
+ >   #define CONFIG_SYS_LOAD_ADDR			0x22000000
+ >
+ >   /* bootstrap in spi flash , u-boot + env + linux in nandflash */
+ > -#define CONFIG_ENV_OFFSET_REDUND	0x180000
+ >
+ >   #ifndef CONFIG_SPL_BUILD
+ >   #if defined(CONFIG_BOARD_AXM)
+ > diff --git a/include/configs/tbs2910.h b/include/configs/tbs2910.h
+ > index 46d67a7fcfd0..b598fca1ecb3 100644
+ > --- a/include/configs/tbs2910.h
+ > +++ b/include/configs/tbs2910.h
+ > @@ -75,8 +75,6 @@
+ >   /* Environment organization */
+ >   #define CONFIG_SYS_MMC_ENV_DEV		2 /* overwritten on SD boot */
+ >   #define CONFIG_SYS_MMC_ENV_PART		1 /* overwritten on SD boot */
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ > -#define CONFIG_ENV_OFFSET		(384 * 1024)
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ >   #define CONFIG_BOARD_SIZE_LIMIT		392192 /* (CONFIG_ENV_OFFSET - 
+1024) */
+ > diff --git a/include/configs/tec-ng.h b/include/configs/tec-ng.h
+ > index b637832a5ee7..1047372105e2 100644
+ > --- a/include/configs/tec-ng.h
+ > +++ b/include/configs/tec-ng.h
+ > @@ -17,7 +17,6 @@
+ >   #define CONFIG_SYS_NS16550_COM1		NV_PA_APB_UARTD_BASE
+ >
+ >   /* Environment in eMMC, at the end of 2nd "boot sector" */
+ > -#define CONFIG_ENV_OFFSET		(-CONFIG_ENV_SIZE)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >   #define CONFIG_SYS_MMC_ENV_PART		2
+ >
+ > diff --git a/include/configs/tec.h b/include/configs/tec.h
+ > index 907c8d5e2301..aa9665eab59a 100644
+ > --- a/include/configs/tec.h
+ > +++ b/include/configs/tec.h
+ > @@ -23,7 +23,6 @@
+ >   #define CONFIG_SYS_MAX_NAND_DEVICE	1
+ >
+ >   /* Environment in NAND, aligned to start of last sector */
+ > -#define CONFIG_ENV_OFFSET		(SZ_512M - SZ_128K) /* 128K sectors */
+ >
+ >   #include "tegra-common-post.h"
+ >
+ > diff --git a/include/configs/tegra-common.h 
+b/include/configs/tegra-common.h
+ > index 84f671d00c37..b4da1f8428ca 100644
+ > --- a/include/configs/tegra-common.h
+ > +++ b/include/configs/tegra-common.h
+ > @@ -25,7 +25,6 @@
+ >   #define CONFIG_CMDLINE_TAG		/* enable passing of ATAGs */
+ >
+ >   /* Environment */
+ > -#define CONFIG_ENV_SIZE			0x2000	/* Total Size Environment */
+ >
+ >   /*
+ >    * NS16550 Configuration
+ > diff --git a/include/configs/theadorable-x86-common.h 
+b/include/configs/theadorable-x86-common.h
+ > index 2d7be7d5b96e..0a1261fa2017 100644
+ > --- a/include/configs/theadorable-x86-common.h
+ > +++ b/include/configs/theadorable-x86-common.h
+ > @@ -23,12 +23,6 @@
+ >   #define CONFIG_BMP_16BPP
+ >
+ >   /* Environment settings */
+ > -#undef CONFIG_ENV_SIZE
+ > -#define CONFIG_ENV_SIZE			0x2000
+ > -#define CONFIG_ENV_SECT_SIZE		0x1000
+ > -#define CONFIG_ENV_OFFSET		0x006ec000
+ > -#define CONFIG_ENV_OFFSET_REDUND	\
+ > -	(CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE)
+ >
+ >   #undef CONFIG_BOOTCOMMAND
+ >   #undef CONFIG_EXTRA_ENV_SETTINGS
+ > diff --git a/include/configs/theadorable.h 
+b/include/configs/theadorable.h
+ > index 45cd7e2b83ac..6d42ec1aa194 100644
+ > --- a/include/configs/theadorable.h
+ > +++ b/include/configs/theadorable.h
+ > @@ -40,9 +40,6 @@
+ >   #define CONFIG_USB_MAX_CONTROLLER_COUNT 3
+ >
+ >   /* Environment in SPI NOR flash */
+ > -#define CONFIG_ENV_OFFSET		(1 << 20) /* 1MiB in */
+ > -#define CONFIG_ENV_SIZE			(64 << 10) /* 64KiB */
+ > -#define CONFIG_ENV_SECT_SIZE		(256 << 10) /* 256KiB sectors */
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ >   #define PHY_ANEG_TIMEOUT	8000	/* PHY needs a longer aneg time */
+ > diff --git a/include/configs/thuban.h b/include/configs/thuban.h
+ > index 954b063e293a..d909be9b019c 100644
+ > --- a/include/configs/thuban.h
+ > +++ b/include/configs/thuban.h
+ > @@ -39,7 +39,6 @@
+ >   #define CONFIG_FACTORYSET
+ >
+ >   /* Define own nand partitions */
+ > -#define CONFIG_ENV_OFFSET_REDUND    0x2E0000
+ >   #define CONFIG_ENV_RANGE        (4 * CONFIG_SYS_ENV_SECT_SIZE)
+ >
+ >   #ifndef CONFIG_SPL_BUILD
+ > diff --git a/include/configs/thunderx_88xx.h 
+b/include/configs/thunderx_88xx.h
+ > index 619571d45ba6..dac7e4ad9594 100644
+ > --- a/include/configs/thunderx_88xx.h
+ > +++ b/include/configs/thunderx_88xx.h
+ > @@ -61,7 +61,6 @@
+ >   					"fdt_high=0x9fffffff\0"
+ >
+ >   /* Do not preserve environment */
+ > -#define CONFIG_ENV_SIZE			0x1000
+ >
+ >   /* Monitor Command Prompt */
+ >   #define CONFIG_SYS_CBSIZE		512	/* Console I/O Buffer Size */
+ > diff --git a/include/configs/ti816x_evm.h b/include/configs/ti816x_evm.h
+ > index fc5608b3fd47..1d3b2a392237 100644
+ > --- a/include/configs/ti816x_evm.h
+ > +++ b/include/configs/ti816x_evm.h
+ > @@ -12,7 +12,6 @@
+ >   #include <configs/ti_armv7_omap.h>
+ >   #include <asm/arch/omap.h>
+ >
+ > -#define CONFIG_ENV_SIZE			0x2000
+ >   #define CONFIG_MACH_TYPE		MACH_TYPE_TI8168EVM
+ >
+ >   #define CONFIG_EXTRA_ENV_SETTINGS	\
+ > @@ -84,8 +83,6 @@
+ >   #define CONFIG_SYS_NAND_ONFI_DETECTION
+ >   #define CONFIG_NAND_OMAP_ECCSCHEME	OMAP_ECC_BCH8_CODE_HW
+ >   #define CONFIG_SYS_NAND_U_BOOT_OFFS	0x000c0000
+ > -#define CONFIG_ENV_OFFSET		0x001c0000
+ > -#define CONFIG_ENV_OFFSET_REDUND	0x001e0000
+ >   #define CONFIG_SYS_ENV_SECT_SIZE	CONFIG_SYS_NAND_BLOCK_SIZE
+ >
+ >   /* SPL */
+ > diff --git a/include/configs/titanium.h b/include/configs/titanium.h
+ > index 64ec06da8599..d6ab5e4393ee 100644
+ > --- a/include/configs/titanium.h
+ > +++ b/include/configs/titanium.h
+ > @@ -145,16 +145,10 @@
+ >   /* DMA stuff, needed for GPMI/MXS NAND support */
+ >
+ >   /* Environment in NAND */
+ > -#define CONFIG_ENV_OFFSET		(16 << 20)
+ > -#define CONFIG_ENV_SECT_SIZE		(128 << 10)
+ > -#define CONFIG_ENV_SIZE			CONFIG_ENV_SECT_SIZE
+ > -#define CONFIG_ENV_OFFSET_REDUND	(CONFIG_ENV_OFFSET + (512 << 10))
+ >
+ >   #else /* CONFIG_CMD_NAND */
+ >
+ >   /* Environment in MMC */
+ > -#define CONFIG_ENV_SIZE			(8 << 10)
+ > -#define CONFIG_ENV_OFFSET		(6 * 64 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >
+ >   #endif /* CONFIG_CMD_NAND */
+ > diff --git a/include/configs/topic_miami.h 
+b/include/configs/topic_miami.h
+ > index b98656dd4c17..73fdfae4610c 100644
+ > --- a/include/configs/topic_miami.h
+ > +++ b/include/configs/topic_miami.h
+ > @@ -15,10 +15,6 @@
+ >   #include "zynq-common.h"
+ >
+ >   /* Fixup settings */
+ > -#undef CONFIG_ENV_SIZE
+ > -#define CONFIG_ENV_SIZE			0x8000
+ > -#undef CONFIG_ENV_OFFSET
+ > -#define CONFIG_ENV_OFFSET		0x80000
+ >
+ >   /* SPL settings */
+ >   #undef CONFIG_SPL_ETH_SUPPORT
+ > diff --git a/include/configs/tplink_wdr4300.h 
+b/include/configs/tplink_wdr4300.h
+ > index 436715824b23..8f13744c322f 100644
+ > --- a/include/configs/tplink_wdr4300.h
+ > +++ b/include/configs/tplink_wdr4300.h
+ > @@ -34,8 +34,6 @@
+ >   #define CONFIG_BOOTCOMMAND		\
+ >   	"dhcp 192.168.1.1:wdr4300.fit && bootm $loadaddr"
+ >
+ > -#define CONFIG_ENV_SIZE			0x10000
+ > -
+ >   /*
+ >    * Command
+ >    */
+ > diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
+ > index 3c1d629d251f..1ea6332878fe 100644
+ > --- a/include/configs/tqma6.h
+ > +++ b/include/configs/tqma6.h
+ > @@ -68,7 +68,6 @@
+ >
+ >   #define CONFIG_ARP_TIMEOUT		200UL
+ >
+ > -#define CONFIG_ENV_SIZE			(SZ_8K)
+ >   /* Size of malloc() pool */
+ >   #define CONFIG_SYS_MALLOC_LEN		(CONFIG_ENV_SIZE + 2 * SZ_1M)
+ >
+ > @@ -78,7 +77,6 @@
+ >   #define TQMA6_UBOOT_SECTOR_START	0x2
+ >   #define TQMA6_UBOOT_SECTOR_COUNT	0x7fe
+ >
+ > -#define CONFIG_ENV_OFFSET		SZ_1M
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >
+ >   #define TQMA6_FDT_OFFSET		(2 * SZ_1M)
+ > @@ -148,11 +146,6 @@
+ >   #define TQMA6_UBOOT_SIZE		(TQMA6_UBOOT_SECTOR_SIZE * \
+ >   					 TQMA6_UBOOT_SECTOR_COUNT)
+ >
+ > -#define CONFIG_ENV_OFFSET		(TQMA6_UBOOT_SIZE)
+ > -#define CONFIG_ENV_SECT_SIZE		TQMA6_SPI_FLASH_SECTOR_SIZE
+ > -#define CONFIG_ENV_OFFSET_REDUND	(CONFIG_ENV_OFFSET + \
+ > -					 CONFIG_ENV_SECT_SIZE)
+ > -
+ >   #define TQMA6_FDT_OFFSET		(CONFIG_ENV_OFFSET_REDUND + \
+ >   					 CONFIG_ENV_SECT_SIZE)
+ >   #define TQMA6_FDT_SECT_SIZE		(TQMA6_SPI_FLASH_SECTOR_SIZE)
+ > diff --git a/include/configs/trats.h b/include/configs/trats.h
+ > index af8e8ce3b6cc..37fadc52102a 100644
+ > --- a/include/configs/trats.h
+ > +++ b/include/configs/trats.h
+ > @@ -49,8 +49,6 @@
+ >   #define CONFIG_ENV_COMMON_BOOT		"${console} ${meminfo}"
+ >
+ >   #define CONFIG_SYS_MMC_ENV_DEV		CONFIG_MMC_DEFAULT_DEV
+ > -#define CONFIG_ENV_SIZE			4096
+ > -#define CONFIG_ENV_OFFSET		((32 - 4) << 10) /* 32KiB - 4KiB */
+ >
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ > diff --git a/include/configs/trats2.h b/include/configs/trats2.h
+ > index 9c6b2bbc8d60..8b71c2575735 100644
+ > --- a/include/configs/trats2.h
+ > +++ b/include/configs/trats2.h
+ > @@ -44,8 +44,6 @@
+ >   #define CONFIG_SYS_MONITOR_BASE	0x00000000
+ >
+ >   #define CONFIG_SYS_MMC_ENV_DEV		CONFIG_MMC_DEFAULT_DEV
+ > -#define CONFIG_ENV_SIZE			4096
+ > -#define CONFIG_ENV_OFFSET		((32 - 4) << 10) /* 32KiB - 4KiB */
+ >
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ > diff --git a/include/configs/tricorder.h b/include/configs/tricorder.h
+ > index 2106f4e5b043..1e4459747d54 100644
+ > --- a/include/configs/tricorder.h
+ > +++ b/include/configs/tricorder.h
+ > @@ -78,7 +78,6 @@
+ >
+ >   /* environment placement (for NAND), is different for FLASHCARD but 
+does not
+ >    * harm there */
+ > -#define CONFIG_ENV_OFFSET_REDUND	0x2A0000    /* redundant env start */
+ >   #define CONFIG_ENV_RANGE		(384 << 10) /* allow badblocks in env */
+ >
+ >   /* the loadaddr is the same as CONFIG_SYS_LOAD_ADDR, unfortunately 
+the defiend
+ > diff --git a/include/configs/trimslice.h b/include/configs/trimslice.h
+ > index 93db175288c1..b914e444b6e7 100644
+ > --- a/include/configs/trimslice.h
+ > +++ b/include/configs/trimslice.h
+ > @@ -23,9 +23,7 @@
+ >   /* SPI */
+ >
+ >   /* Environment in SPI */
+ > -#define CONFIG_ENV_SECT_SIZE		CONFIG_ENV_SIZE
+ >   /* 1MiB flash, environment located as high as possible */
+ > -#define CONFIG_ENV_OFFSET		(SZ_1M - CONFIG_ENV_SIZE)
+ >
+ >   #include "tegra-common-post.h"
+ >
+ > diff --git a/include/configs/ts4600.h b/include/configs/ts4600.h
+ > index a107e96530ec..6aab8a06a963 100644
+ > --- a/include/configs/ts4600.h
+ > +++ b/include/configs/ts4600.h
+ > @@ -21,11 +21,9 @@
+ >   #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
+ >
+ >   /* Environment */
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ >
+ >   /* Environment is in MMC */
+ >   #if defined(CONFIG_CMD_MMC) && defined(CONFIG_ENV_IS_IN_MMC)
+ > -#define CONFIG_ENV_OFFSET		(256 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >   #endif
+ >
+ > diff --git a/include/configs/ts4800.h b/include/configs/ts4800.h
+ > index 4e274bd4141d..bd50d3b19c32 100644
+ > --- a/include/configs/ts4800.h
+ > +++ b/include/configs/ts4800.h
+ > @@ -135,8 +135,6 @@
+ >    * Environment organization
+ >    */
+ >
+ > -#define CONFIG_ENV_OFFSET      (6 * 64 * 1024)
+ > -#define CONFIG_ENV_SIZE        (8 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV 0
+ >
+ >   #endif
+ > diff --git a/include/configs/turris_mox.h b/include/configs/turris_mox.h
+ > index 16a49c766f28..9409344338e1 100644
+ > --- a/include/configs/turris_mox.h
+ > +++ b/include/configs/turris_mox.h
+ > @@ -62,9 +62,6 @@
+ >   #define CONFIG_SYS_I2C_SLAVE		0x0
+ >
+ >   /* Environment in SPI NOR flash */
+ > -#define CONFIG_ENV_OFFSET		0x180000 /* as Marvell U-Boot version */
+ > -#define CONFIG_ENV_SIZE			(64 << 10) /* 64KiB */
+ > -#define CONFIG_ENV_SECT_SIZE		(64 << 10) /* 64KiB sectors */
+ >
+ >   /*
+ >    * Ethernet Driver configuration
+ > diff --git a/include/configs/turris_omnia.h 
+b/include/configs/turris_omnia.h
+ > index abe1e99acda5..0b55c14d8bff 100644
+ > --- a/include/configs/turris_omnia.h
+ > +++ b/include/configs/turris_omnia.h
+ > @@ -22,9 +22,6 @@
+ >   #define CONFIG_EHCI_IS_TDI
+ >
+ >   /* Environment in SPI NOR flash */
+ > -#define CONFIG_ENV_SIZE			(64 << 10) /* 64KiB */
+ > -#define CONFIG_ENV_OFFSET		((1 << 20) - CONFIG_ENV_SIZE)
+ > -#define CONFIG_ENV_SECT_SIZE		(64 << 10) /* 64KiB */
+ >
+ >   #define PHY_ANEG_TIMEOUT	8000	/* PHY needs a longer aneg time */
+ >
+ > diff --git a/include/configs/udoo.h b/include/configs/udoo.h
+ > index 3378b4a601c4..bf9106e239fe 100644
+ > --- a/include/configs/udoo.h
+ > +++ b/include/configs/udoo.h
+ > @@ -87,9 +87,7 @@
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ >   /* Environment organization */
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ >
+ > -#define CONFIG_ENV_OFFSET		(6 * 64 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >
+ >   #endif			       /* __CONFIG_H * */
+ > diff --git a/include/configs/udoo_neo.h b/include/configs/udoo_neo.h
+ > index 6ba4270b72db..f4a2837b3913 100644
+ > --- a/include/configs/udoo_neo.h
+ > +++ b/include/configs/udoo_neo.h
+ > @@ -75,8 +75,6 @@
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ >   /* Environment organization */
+ > -#define CONFIG_ENV_OFFSET		(8 * SZ_64K)
+ > -#define CONFIG_ENV_SIZE			SZ_8K
+ >
+ >   #define CONFIG_IMX_THERMAL
+ >
+ > diff --git a/include/configs/ulcb.h b/include/configs/ulcb.h
+ > index 6f2a0cc56dce..1d99dcaba666 100644
+ > --- a/include/configs/ulcb.h
+ > +++ b/include/configs/ulcb.h
+ > @@ -19,7 +19,6 @@
+ >   #define COUNTER_FREQUENCY	0xFE502A	/* 16.66MHz from CPclk */
+ >
+ >   /* Environment in eMMC, at the end of 2nd "boot sector" */
+ > -#define CONFIG_ENV_OFFSET		(-CONFIG_ENV_SIZE)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		1
+ >   #define CONFIG_SYS_MMC_ENV_PART		2
+ >
+ > diff --git a/include/configs/uniphier.h b/include/configs/uniphier.h
+ > index 68568f412245..29866668c491 100644
+ > --- a/include/configs/uniphier.h
+ > +++ b/include/configs/uniphier.h
+ > @@ -72,10 +72,6 @@
+ >   /* Boot Argument Buffer Size */
+ >   #define CONFIG_SYS_BARGSIZE		(CONFIG_SYS_CBSIZE)
+ >
+ > -#define CONFIG_ENV_OFFSET			0x100000
+ > -#define CONFIG_ENV_SIZE				0x2000
+ > -/* #define CONFIG_ENV_OFFSET_REDUND	(CONFIG_ENV_OFFSET + 
+CONFIG_ENV_SIZE) */
+ > -
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >   #define CONFIG_SYS_MMC_ENV_PART		1
+ >
+ > diff --git a/include/configs/usbarmory.h b/include/configs/usbarmory.h
+ > index 128f02db66fa..91c8b478b3af 100644
+ > --- a/include/configs/usbarmory.h
+ > +++ b/include/configs/usbarmory.h
+ > @@ -15,8 +15,6 @@
+ >   #include <asm/arch/imx-regs.h>
+ >
+ >   /* U-Boot environment */
+ > -#define CONFIG_ENV_OFFSET	(6 * 64 * 1024)
+ > -#define CONFIG_ENV_SIZE		(8 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV	0
+ >
+ >   /* U-Boot general configurations */
+ > diff --git a/include/configs/vcoreiii.h b/include/configs/vcoreiii.h
+ > index 6ff68cd6a085..e69456ef7ce2 100644
+ > --- a/include/configs/vcoreiii.h
+ > +++ b/include/configs/vcoreiii.h
+ > @@ -25,15 +25,6 @@
+ >
+ >   #define CONFIG_BOARD_TYPES
+ >
+ > -#if defined(CONFIG_ENV_IS_IN_SPI_FLASH) && !defined(CONFIG_ENV_OFFSET)
+ > -#define CONFIG_ENV_OFFSET		(1024 * 1024)
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ > -#define CONFIG_ENV_SECT_SIZE		(256 * 1024)
+ > -
+ > -#define CONFIG_ENV_OFFSET_REDUND      (CONFIG_ENV_OFFSET + 
+CONFIG_ENV_SECT_SIZE)
+ > -
+ > -#endif
+ > -
+ >   #define CONFIG_SYS_SDRAM_BASE		0x80000000
+ >   #if defined(CONFIG_DDRTYPE_H5TQ1G63BFA) || 
+defined(CONFIG_DDRTYPE_MT47H128M8HQ)
+ >   #define CONFIG_SYS_SDRAM_SIZE		(128 * SZ_1M)
+ > diff --git a/include/configs/vct.h b/include/configs/vct.h
+ > index 890f347b4395..284d2682593d 100644
+ > --- a/include/configs/vct.h
+ > +++ b/include/configs/vct.h
+ > @@ -128,12 +128,7 @@
+ >   #define CONFIG_SYS_FLASH_WRITE_TOUT	500	/* Timeout for Flash Write 
+(in ms)	*/
+ >
+ >   #ifdef CONFIG_ENV_IS_IN_FLASH
+ > -#define CONFIG_ENV_SECT_SIZE	0x10000		/* size of one complete sector	*/
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_FLASH_BASE + 
+CONFIG_SYS_MONITOR_LEN)
+ > -#define	CONFIG_ENV_SIZE		0x4000	/* Total Size of Environment Sector	*/
+ > -
+ >   /* Address and size of Redundant Environment Sector	*/
+ > -#define CONFIG_ENV_ADDR_REDUND	(CONFIG_ENV_ADDR + CONFIG_ENV_SECT_SIZE)
+ >   #endif /* CONFIG_ENV_IS_IN_FLASH */
+ >   #endif /* CONFIG_VCT_NOR */
+ >
+ > @@ -141,8 +136,6 @@
+ >   #define CONFIG_USE_ONENAND_BOARD_INIT
+ >   #define	CONFIG_SYS_ONENAND_BASE		0x00000000	/* this is not real 
+address */
+ >   #define CONFIG_SYS_FLASH_BASE		0x00000000
+ > -#define CONFIG_ENV_ADDR			(128 << 10)	/* after compr. U-Boot image */
+ > -#define	CONFIG_ENV_SIZE			(128 << 10)	/* erase size */
+ >   #endif /* CONFIG_VCT_ONENAND */
+ >
+ >   /*
+ > diff --git a/include/configs/ve8313.h b/include/configs/ve8313.h
+ > index 2608b2b23220..a31e6f4abe35 100644
+ > --- a/include/configs/ve8313.h
+ > +++ b/include/configs/ve8313.h
+ > @@ -195,13 +195,7 @@
+ >   /*
+ >    * Environment
+ >    */
+ > -#define CONFIG_ENV_ADDR		\
+ > -			(CONFIG_SYS_FLASH_BASE + CONFIG_SYS_MONITOR_LEN)
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000	/* 128K(one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x4000
+ >   /* Address and size of Redundant Environment Sector */
+ > -#define CONFIG_ENV_OFFSET_REDUND	\
+ > -			(CONFIG_ENV_OFFSET + CONFIG_ENV_SECT_SIZE)
+ >
+ >   #define CONFIG_LOADS_ECHO	1	/* echo on for serial download */
+ >   #define CONFIG_SYS_LOADS_BAUD_CHANGE	1	/* allow baudrate change */
+ > diff --git a/include/configs/venice2.h b/include/configs/venice2.h
+ > index 8ad872d94f37..b62a43054a21 100644
+ > --- a/include/configs/venice2.h
+ > +++ b/include/configs/venice2.h
+ > @@ -21,7 +21,6 @@
+ >   /* Environment in eMMC, at the end of 2nd "boot sector" */
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >   #define CONFIG_SYS_MMC_ENV_PART		2
+ > -#define CONFIG_ENV_OFFSET		(-CONFIG_ENV_SIZE)
+ >
+ >   /* SPI */
+ >   #define CONFIG_SPI_FLASH_SIZE          (4 << 20)
+ > diff --git a/include/configs/ventana.h b/include/configs/ventana.h
+ > index 09f90db1f515..2c2d66cdc099 100644
+ > --- a/include/configs/ventana.h
+ > +++ b/include/configs/ventana.h
+ > @@ -20,7 +20,6 @@
+ >   #define CONFIG_MACH_TYPE		MACH_TYPE_VENTANA
+ >
+ >   /* Environment in eMMC, at the end of 2nd "boot sector" */
+ > -#define CONFIG_ENV_OFFSET (-CONFIG_ENV_SIZE)
+ >   #define CONFIG_SYS_MMC_ENV_DEV 0
+ >   #define CONFIG_SYS_MMC_ENV_PART 2
+ >
+ > diff --git a/include/configs/vexpress_aemv8a.h 
+b/include/configs/vexpress_aemv8a.h
+ > index b2c14f9e10f6..9a9cec414c87 100644
+ > --- a/include/configs/vexpress_aemv8a.h
+ > +++ b/include/configs/vexpress_aemv8a.h
+ > @@ -201,15 +201,11 @@
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	259
+ >   /* Store environment at top of flash in the same location as 
+blank.img */
+ >   /* in the Juno firmware. */
+ > -#define CONFIG_ENV_ADDR			0x0BFC0000
+ > -#define CONFIG_ENV_SECT_SIZE		0x00010000
+ >   #else
+ >   #define CONFIG_SYS_FLASH_BASE		0x0C000000
+ >   /* 256 x 256KiB sectors */
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	256
+ >   /* Store environment at top of flash */
+ > -#define CONFIG_ENV_ADDR			0x0FFC0000
+ > -#define CONFIG_ENV_SECT_SIZE		0x00040000
+ >   #endif
+ >
+ >   #define CONFIG_SYS_FLASH_CFI_WIDTH	FLASH_CFI_32BIT
+ > @@ -217,6 +213,5 @@
+ >
+ >   #define CONFIG_SYS_FLASH_EMPTY_INFO	/* flinfo indicates empty blocks */
+ >   #define FLASH_MAX_SECTOR_SIZE		0x00040000
+ > -#define CONFIG_ENV_SIZE			CONFIG_ENV_SECT_SIZE
+ >
+ >   #endif /* __VEXPRESS_AEMV8A_H */
+ > diff --git a/include/configs/vexpress_common.h 
+b/include/configs/vexpress_common.h
+ > index 47ea89df6607..7f215a670771 100644
+ > --- a/include/configs/vexpress_common.h
+ > +++ b/include/configs/vexpress_common.h
+ > @@ -226,21 +226,15 @@
+ >   #define FLASH_MAX_SECTOR_SIZE		0x00040000	/* 256 KB sectors */
+ >
+ >   /* Room required on the stack for the environment data */
+ > -#define CONFIG_ENV_SIZE			FLASH_MAX_SECTOR_SIZE
+ >
+ >   /*
+ >    * Amount of flash used for environment:
+ >    * We don't know which end has the small erase blocks so we use the 
+penultimate
+ >    * sector location for the environment
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE		FLASH_MAX_SECTOR_SIZE
+ >   #define CONFIG_ENV_OVERWRITE		1
+ >
+ >   /* Store environment at top of flash */
+ > -#define CONFIG_ENV_OFFSET		(PHYS_FLASH_SIZE - \
+ > -					(2 * CONFIG_ENV_SECT_SIZE))
+ > -#define CONFIG_ENV_ADDR			(CONFIG_SYS_FLASH_BASE1 + \
+ > -					 CONFIG_ENV_OFFSET)
+ >   #define CONFIG_SYS_FLASH_EMPTY_INFO	/* flinfo indicates empty blocks */
+ >   #define CONFIG_SYS_FLASH_BANKS_LIST	{ CONFIG_SYS_FLASH_BASE0, \
+ >   					  CONFIG_SYS_FLASH_BASE1 }
+ > diff --git a/include/configs/vf610twr.h b/include/configs/vf610twr.h
+ > index ba85bc91e74d..3ab323194387 100644
+ > --- a/include/configs/vf610twr.h
+ > +++ b/include/configs/vf610twr.h
+ > @@ -187,17 +187,11 @@
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ >   #ifdef CONFIG_ENV_IS_IN_MMC
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ > -
+ > -#define CONFIG_ENV_OFFSET		(12 * 64 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >   #endif
+ >
+ >   #ifdef CONFIG_ENV_IS_IN_NAND
+ > -#define CONFIG_ENV_SIZE			(64 * 2048)
+ > -#define CONFIG_ENV_SECT_SIZE		(64 * 2048)
+ >   #define CONFIG_ENV_RANGE		(512 * 1024)
+ > -#define CONFIG_ENV_OFFSET		0x180000
+ >   #endif
+ >
+ >   #endif
+ > diff --git a/include/configs/vinco.h b/include/configs/vinco.h
+ > index eebb3f7ca789..a709502d4373 100644
+ > --- a/include/configs/vinco.h
+ > +++ b/include/configs/vinco.h
+ > @@ -63,11 +63,6 @@
+ >   #ifdef CONFIG_SPI_BOOT
+ >   /* bootstrap + u-boot + env + linux in serial flash */
+ >   /* Use our own mapping for the VInCo platform */
+ > -#undef CONFIG_ENV_OFFSET
+ > -#undef CONFIG_ENV_SIZE
+ > -
+ > -#define CONFIG_ENV_OFFSET       0x10000
+ > -#define CONFIG_ENV_SIZE         0x10000
+ >
+ >   /* Update the bootcommand according to our mapping for the VInCo 
+platform */
+ >   #undef CONFIG_BOOTCOMMAND
+ > diff --git a/include/configs/vining_2000.h 
+b/include/configs/vining_2000.h
+ > index 6672930fb39c..54c8c2f62efc 100644
+ > --- a/include/configs/vining_2000.h
+ > +++ b/include/configs/vining_2000.h
+ > @@ -85,10 +85,6 @@
+ >
+ >   #define CONFIG_IMX6_PWM_PER_CLK 66000000
+ >
+ > -#define CONFIG_ENV_OFFSET		(8 * SZ_64K)
+ > -#define CONFIG_ENV_SIZE			SZ_8K
+ > -#define CONFIG_ENV_OFFSET_REDUND	(9 * SZ_64K)
+ > -
+ >   #ifdef CONFIG_ENV_IS_IN_MMC
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0 /* USDHC4 eMMC */
+ >   /* 0=user, 1=boot0, 2=boot1, * 4..7=general0..3. */
+ > diff --git a/include/configs/vme8349.h b/include/configs/vme8349.h
+ > index 74e8d3925bf2..f40c9002e590 100644
+ > --- a/include/configs/vme8349.h
+ > +++ b/include/configs/vme8349.h
+ > @@ -199,16 +199,7 @@
+ >    * Environment
+ >    */
+ >   #ifndef CONFIG_SYS_RAMBOOT
+ > -	#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE + 0xc0000)
+ > -	#define CONFIG_ENV_SECT_SIZE	0x20000	/* 128K(one sector) for env */
+ > -	#define CONFIG_ENV_SIZE		0x2000
+ > -
+ >   /* Address and size of Redundant Environment Sector	*/
+ > -#define CONFIG_ENV_ADDR_REDUND	(CONFIG_ENV_ADDR + CONFIG_ENV_SECT_SIZE)
+ > -
+ > -#else
+ > -	#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE - 0x1000)
+ > -	#define CONFIG_ENV_SIZE		0x2000
+ >   #endif
+ >
+ >   #define CONFIG_LOADS_ECHO		/* echo on for serial download */
+ > diff --git a/include/configs/wandboard.h b/include/configs/wandboard.h
+ > index a0a78eab27bf..a65d23bbe80a 100644
+ > --- a/include/configs/wandboard.h
+ > +++ b/include/configs/wandboard.h
+ > @@ -124,9 +124,7 @@
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ >   /* Environment organization */
+ > -#define CONFIG_ENV_SIZE			(8 * 1024)
+ >
+ > -#define CONFIG_ENV_OFFSET		(768 * 1024)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >
+ >   #endif			       /* __CONFIG_H * */
+ > diff --git a/include/configs/warp.h b/include/configs/warp.h
+ > index 41fd6c759eba..68361a6199ee 100644
+ > --- a/include/configs/warp.h
+ > +++ b/include/configs/warp.h
+ > @@ -41,8 +41,6 @@
+ >   #define CONFIG_SYS_INIT_SP_ADDR \
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ > -#define CONFIG_ENV_OFFSET		(6 * SZ_64K)
+ > -#define CONFIG_ENV_SIZE			SZ_8K
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ >
+ >   /* VDD voltage 1.65 - 1.95 */
+ > diff --git a/include/configs/warp7.h b/include/configs/warp7.h
+ > index 73541fe17608..9a82581c5f3a 100644
+ > --- a/include/configs/warp7.h
+ > +++ b/include/configs/warp7.h
+ > @@ -130,9 +130,7 @@
+ >   #define CONFIG_SYS_I2C_SPEED		100000
+ >
+ >   /* environment organization */
+ > -#define CONFIG_ENV_SIZE			SZ_8K
+ >
+ > -#define CONFIG_ENV_OFFSET		(8 * SZ_64K)
+ >   #define CONFIG_SYS_FSL_USDHC_NUM	1
+ >
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0
+ > diff --git a/include/configs/wb45n.h b/include/configs/wb45n.h
+ > index 43de2e111933..36060975c10e 100644
+ > --- a/include/configs/wb45n.h
+ > +++ b/include/configs/wb45n.h
+ > @@ -66,9 +66,6 @@
+ >
+ >   #ifdef CONFIG_SYS_USE_NANDFLASH
+ >   /* bootstrap + u-boot + env + linux in nandflash */
+ > -#define CONFIG_ENV_OFFSET           0xa0000
+ > -#define CONFIG_ENV_OFFSET_REDUND    0xc0000
+ > -#define CONFIG_ENV_SIZE             0x20000	/* 1 block = 128 kB */
+ >
+ >   #define CONFIG_BOOTCOMMAND  "nand read 0x22000000 0xe0000 0x280000; " \
+ >       "run _mtd; bootm"
+ > diff --git a/include/configs/wb50n.h b/include/configs/wb50n.h
+ > index 6e471f62e6be..ca1619f25116 100644
+ > --- a/include/configs/wb50n.h
+ > +++ b/include/configs/wb50n.h
+ > @@ -72,7 +72,6 @@
+ >       "autostart=no\0"
+ >
+ >   /* bootstrap + u-boot + env in nandflash */
+ > -#define CONFIG_ENV_OFFSET_REDUND    0xC0000
+ >   #define CONFIG_BOOTCOMMAND \
+ >       "nand read 0x22000000 0x000e0000 0x500000; " \
+ >       "bootm"
+ > diff --git a/include/configs/woodburn_common.h 
+b/include/configs/woodburn_common.h
+ > index d7c4a6f1f4d8..194e43ecc612 100644
+ > --- a/include/configs/woodburn_common.h
+ > +++ b/include/configs/woodburn_common.h
+ > @@ -119,14 +119,7 @@
+ >   #define CONFIG_SYS_MONITOR_BASE	CONFIG_SYS_FLASH_BASE
+ >   #define CONFIG_SYS_MONITOR_LEN		(512 * 1024)
+ >
+ > -#define CONFIG_ENV_SECT_SIZE	(128 * 1024)
+ > -#define CONFIG_ENV_SIZE		CONFIG_ENV_SECT_SIZE
+ > -
+ >   /* Address and size of Redundant Environment Sector	*/
+ > -#define CONFIG_ENV_OFFSET_REDUND	(CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE)
+ > -
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE + \
+ > -				CONFIG_SYS_MONITOR_LEN)
+ >
+ >   /*
+ >    * CFI FLASH driver setup
+ > diff --git a/include/configs/work_92105.h b/include/configs/work_92105.h
+ > index e260a637d6fd..f73946b935a4 100644
+ > --- a/include/configs/work_92105.h
+ > +++ b/include/configs/work_92105.h
+ > @@ -116,11 +116,6 @@
+ >    * Environment
+ >    */
+ >
+ > -#define CONFIG_ENV_SIZE			0x00020000
+ > -#define CONFIG_ENV_OFFSET		0x00100000
+ > -#define CONFIG_ENV_OFFSET_REDUND	0x00120000
+ > -#define CONFIG_ENV_ADDR			0x80000100
+ > -
+ >   /*
+ >    * Boot Linux
+ >    */
+ > diff --git a/include/configs/x530.h b/include/configs/x530.h
+ > index 2269d1ed8cd0..b4e986ebccdf 100644
+ > --- a/include/configs/x530.h
+ > +++ b/include/configs/x530.h
+ > @@ -59,10 +59,6 @@
+ >   #define CONFIG_EHCI_IS_TDI
+ >
+ >   /* Environment in SPI NOR flash */
+ > -#define CONFIG_ENV_OFFSET		(1 << 20) /* 1MiB in */
+ > -#define CONFIG_ENV_SIZE			(64 << 10) /* 64KiB */
+ > -#define CONFIG_ENV_SECT_SIZE		(256 << 10) /* 256KiB sectors */
+ > -#define CONFIG_ENV_ADDR			CONFIG_ENV_OFFSET
+ >
+ >   #define CONFIG_PHY_MARVELL		/* there is a marvell phy */
+ >   #define PHY_ANEG_TIMEOUT	8000	/* PHY needs a longer aneg time */
+ > diff --git a/include/configs/x600.h b/include/configs/x600.h
+ > index f6779213a896..63092b24a53a 100644
+ > --- a/include/configs/x600.h
+ > +++ b/include/configs/x600.h
+ > @@ -87,12 +87,6 @@
+ >   /*
+ >    * U-Boot Environment placing definitions.
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE			0x00010000
+ > -#define CONFIG_ENV_ADDR				(CONFIG_SYS_MONITOR_BASE + \
+ > -						 CONFIG_SYS_MONITOR_LEN)
+ > -#define CONFIG_ENV_SIZE				0x02000
+ > -#define CONFIG_ENV_ADDR_REDUND			(CONFIG_ENV_ADDR + \
+ > -						 CONFIG_ENV_SECT_SIZE)
+ >
+ >   /* Miscellaneous configurable options */
+ >   #define CONFIG_BOOT_PARAMS_ADDR			0x00000100
+ > diff --git a/include/configs/x86-chromebook.h 
+b/include/configs/x86-chromebook.h
+ > index 5a33223b7ddf..0efc7156a6dd 100644
+ > --- a/include/configs/x86-chromebook.h
+ > +++ b/include/configs/x86-chromebook.h
+ > @@ -28,11 +28,6 @@
+ >   #define VIDEO_IO_OFFSET				0
+ >   #define CONFIG_X86EMU_RAW_IO
+ >
+ > -#undef CONFIG_ENV_SIZE
+ > -#define CONFIG_ENV_SIZE			0x1000
+ > -#define CONFIG_ENV_SECT_SIZE		0x1000
+ > -#define CONFIG_ENV_OFFSET		0x003f8000
+ > -
+ >   #define CONFIG_STD_DEVICES_SETTINGS	"stdin=usbkbd,i8042-kbd,serial\0" \
+ >   					"stdout=vidconsole,serial\0" \
+ >   					"stderr=vidconsole,serial\0"
+ > diff --git a/include/configs/x86-common.h b/include/configs/x86-common.h
+ > index 54214f99e9a6..329b270467e2 100644
+ > --- a/include/configs/x86-common.h
+ > +++ b/include/configs/x86-common.h
+ > @@ -79,7 +79,6 @@
+ > 
+/*-----------------------------------------------------------------------
+ >    * Environment configuration
+ >    */
+ > -#define CONFIG_ENV_SIZE			0x01000
+ >
+ > 
+/*-----------------------------------------------------------------------
+ >    * PCI configuration
+ > diff --git a/include/configs/xfi3.h b/include/configs/xfi3.h
+ > index afc4b82fd80f..51efab1d2c1a 100644
+ > --- a/include/configs/xfi3.h
+ > +++ b/include/configs/xfi3.h
+ > @@ -13,7 +13,6 @@
+ >   #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
+ >
+ >   /* Environment */
+ > -#define CONFIG_ENV_SIZE			(16 * 1024)
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ >   /* Booting Linux */
+ > diff --git a/include/configs/xilinx_zynqmp_r5.h 
+b/include/configs/xilinx_zynqmp_r5.h
+ > index 4eb3312e2d2b..38d952d0c0cc 100644
+ > --- a/include/configs/xilinx_zynqmp_r5.h
+ > +++ b/include/configs/xilinx_zynqmp_r5.h
+ > @@ -16,8 +16,6 @@
+ >   #define CONFIG_SYS_BAUDRATE_TABLE  \
+ >   	{300, 600, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 
+230400}
+ >
+ > -# define CONFIG_ENV_SIZE	(128 << 10)
+ > -
+ >   /* Allow to overwrite serial and ethaddr */
+ >   #define CONFIG_ENV_OVERWRITE
+ >
+ > diff --git a/include/configs/xpedite517x.h 
+b/include/configs/xpedite517x.h
+ > index 23f038961574..634ee4240993 100644
+ > --- a/include/configs/xpedite517x.h
+ > +++ b/include/configs/xpedite517x.h
+ > @@ -485,9 +485,6 @@ extern unsigned long get_board_sys_clk(unsigned 
+long dummy);
+ >   /*
+ >    * Environment Configuration
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000		/* 128k (one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x8000
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE + 
+CONFIG_SYS_MONITOR_LEN)
+ >
+ >   /*
+ >    * Flash memory map:
+ > diff --git a/include/configs/xpedite520x.h 
+b/include/configs/xpedite520x.h
+ > index 21e91ee1a4dd..0186aaa10277 100644
+ > --- a/include/configs/xpedite520x.h
+ > +++ b/include/configs/xpedite520x.h
+ > @@ -285,9 +285,6 @@
+ >   /*
+ >    * Environment Configuration
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000		/* 128k (one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x8000
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE - (256 * 1024))
+ >
+ >   /*
+ >    * Flash memory map:
+ > diff --git a/include/configs/xpedite537x.h 
+b/include/configs/xpedite537x.h
+ > index 73e1fa313f88..5e027bebcabe 100644
+ > --- a/include/configs/xpedite537x.h
+ > +++ b/include/configs/xpedite537x.h
+ > @@ -335,9 +335,6 @@ extern unsigned long get_board_ddr_clk(unsigned 
+long dummy);
+ >   /*
+ >    * Environment Configuration
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000		/* 128k (one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x8000
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE - (256 * 1024))
+ >
+ >   /*
+ >    * Flash memory map:
+ > diff --git a/include/configs/xpedite550x.h 
+b/include/configs/xpedite550x.h
+ > index e5a41abd4b52..611089cbb935 100644
+ > --- a/include/configs/xpedite550x.h
+ > +++ b/include/configs/xpedite550x.h
+ > @@ -333,9 +333,6 @@ extern unsigned long get_board_ddr_clk(unsigned 
+long dummy);
+ >   /*
+ >    * Environment Configuration
+ >    */
+ > -#define CONFIG_ENV_SECT_SIZE	0x20000		/* 128k (one sector) for env */
+ > -#define CONFIG_ENV_SIZE		0x8000
+ > -#define CONFIG_ENV_ADDR		(CONFIG_SYS_MONITOR_BASE - (256 * 1024))
+ >
+ >   /*
+ >    * Flash memory map:
+ > diff --git a/include/configs/xpress.h b/include/configs/xpress.h
+ > index 4cbf8aa5261d..dbdd812506b5 100644
+ > --- a/include/configs/xpress.h
+ > +++ b/include/configs/xpress.h
+ > @@ -51,8 +51,6 @@
+ >   	(CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
+ >
+ >   /* Environment is in stored in the eMMC boot partition */
+ > -#define CONFIG_ENV_SIZE			(16 << 10)
+ > -#define CONFIG_ENV_OFFSET		(512 << 10)
+ >   #define CONFIG_SYS_MMC_ENV_DEV		0	/* USDHC2 */
+ >   #define CONFIG_SYS_MMC_ENV_PART		1	/* boot parition */
+ >   #define CONFIG_MMCROOT			"/dev/mmcblk0p2"  /* USDHC2 */
+ > diff --git a/include/configs/xtfpga.h b/include/configs/xtfpga.h
+ > index 2f20273572d2..8b73900130d7 100644
+ > --- a/include/configs/xtfpga.h
+ > +++ b/include/configs/xtfpga.h
+ > @@ -220,8 +220,6 @@
+ >    * Put environment in top block (64kB)
+ >    * Another option would be to put env. in 2nd param block offs 8KB, 
+size 8KB
+ >    */
+ > -#define CONFIG_ENV_OFFSET    (CONFIG_SYS_FLASH_SIZE - 
+CONFIG_SYS_FLASH_SECT_SZ)
+ > -#define CONFIG_ENV_SIZE	     CONFIG_SYS_FLASH_SECT_SZ
+ >
+ >   /* print 'E' for empty sector on flinfo */
+ >   #define CONFIG_SYS_FLASH_EMPTY_INFO
+ > diff --git a/include/configs/zmx25.h b/include/configs/zmx25.h
+ > index 9d683768f4cf..a8c6f0be10d4 100644
+ > --- a/include/configs/zmx25.h
+ > +++ b/include/configs/zmx25.h
+ > @@ -85,10 +85,6 @@
+ >   #define CONFIG_SYS_MAX_FLASH_BANKS	1
+ >   #define CONFIG_SYS_MAX_FLASH_SECT	256
+ >
+ > -#define CONFIG_ENV_ADDR			(CONFIG_SYS_FLASH_BASE + 0x00040000)
+ > -#define CONFIG_ENV_SECT_SIZE		(128 * 1024)
+ > -#define CONFIG_ENV_SIZE			(128 * 1024)
+ > -
+ >   /*
+ >    * CFI FLASH driver setup
+ >    */
+ > diff --git a/include/env_internal.h b/include/env_internal.h
+ > index b8158c0e0bc5..90a4df8a7273 100644
+ > --- a/include/env_internal.h
+ > +++ b/include/env_internal.h
+ > @@ -30,26 +30,6 @@
+ > 
+*************************************************************************/
+ >
+ >   #if defined(CONFIG_ENV_IS_IN_FLASH)
+ > -# ifndef	CONFIG_ENV_ADDR
+ > -#  define	CONFIG_ENV_ADDR	(CONFIG_SYS_FLASH_BASE + CONFIG_ENV_OFFSET)
+ > -# endif
+ > -# ifndef	CONFIG_ENV_OFFSET
+ > -#  define	CONFIG_ENV_OFFSET (CONFIG_ENV_ADDR - CONFIG_SYS_FLASH_BASE)
+ > -# endif
+ > -# if !defined(CONFIG_ENV_ADDR_REDUND) && 
+defined(CONFIG_ENV_OFFSET_REDUND)
+ > -#  define	CONFIG_ENV_ADDR_REDUND	\
+ > -		(CONFIG_SYS_FLASH_BASE + CONFIG_ENV_OFFSET_REDUND)
+ > -# endif
+ > -# if defined(CONFIG_ENV_SECT_SIZE) || defined(CONFIG_ENV_SIZE)
+ > -#  ifndef	CONFIG_ENV_SECT_SIZE
+ > -#   define	CONFIG_ENV_SECT_SIZE	CONFIG_ENV_SIZE
+ > -#  endif
+ > -#  ifndef	CONFIG_ENV_SIZE
+ > -#   define	CONFIG_ENV_SIZE	CONFIG_ENV_SECT_SIZE
+ > -#  endif
+ > -# else
+ > -#  error "Both CONFIG_ENV_SECT_SIZE and CONFIG_ENV_SIZE undefined"
+ > -# endif
+ >   # if	defined(CONFIG_ENV_ADDR_REDUND) && \
+ >   	((CONFIG_ENV_ADDR >= CONFIG_SYS_MONITOR_BASE) &&		\
+ >   	(CONFIG_ENV_ADDR_REDUND + CONFIG_ENV_SIZE) <=		\
+ > @@ -75,41 +55,9 @@
+ >   #  endif
+ >   extern unsigned long nand_env_oob_offset;
+ >   #  define CONFIG_ENV_OFFSET nand_env_oob_offset
+ > -# else
+ > -#  ifndef CONFIG_ENV_OFFSET
+ > -#   error "Need to define CONFIG_ENV_OFFSET when using 
+CONFIG_ENV_IS_IN_NAND"
+ > -#  endif
+ >   # endif /* CONFIG_ENV_OFFSET_OOB */
+ > -# ifndef CONFIG_ENV_SIZE
+ > -#  error "Need to define CONFIG_ENV_SIZE when using 
+CONFIG_ENV_IS_IN_NAND"
+ > -# endif
+ >   #endif /* CONFIG_ENV_IS_IN_NAND */
+ >
+ > -#if defined(CONFIG_ENV_IS_IN_UBI)
+ > -# ifndef CONFIG_ENV_UBI_PART
+ > -#  error "Need to define CONFIG_ENV_UBI_PART when using 
+CONFIG_ENV_IS_IN_UBI"
+ > -# endif
+ > -# ifndef CONFIG_ENV_UBI_VOLUME
+ > -#  error "Need to define CONFIG_ENV_UBI_VOLUME when using 
+CONFIG_ENV_IS_IN_UBI"
+ > -# endif
+ > -# ifndef CONFIG_ENV_SIZE
+ > -#  error "Need to define CONFIG_ENV_SIZE when using 
+CONFIG_ENV_IS_IN_UBI"
+ > -# endif
+ > -# ifndef CONFIG_CMD_UBI
+ > -#  error "Need to define CONFIG_CMD_UBI when using CONFIG_ENV_IS_IN_UBI"
+ > -# endif
+ > -#endif /* CONFIG_ENV_IS_IN_UBI */
+ > -
+ > -/* Embedded env is only supported for some flash types */
+ > -#ifdef CONFIG_ENV_IS_EMBEDDED
+ > -# if	!defined(CONFIG_ENV_IS_IN_FLASH)	&& \
+ > -	!defined(CONFIG_ENV_IS_IN_NAND)		&& \
+ > -	!defined(CONFIG_ENV_IS_IN_ONENAND)	&& \
+ > -	!defined(CONFIG_ENV_IS_IN_SPI_FLASH)
+ > -#  error "CONFIG_ENV_IS_EMBEDDED not supported for your flash type"
+ > -# endif
+ > -#endif
+ > -
+ >   /*
+ >    * For the flash types where embedded env is supported, but it 
+cannot be
+ >    * calculated automatically (i.e. NAND), take the board opt-in.
+ > diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
+ > index d73e433cffb1..284fb62e54c1 100644
+ > --- a/scripts/config_whitelist.txt
+ > +++ b/scripts/config_whitelist.txt
+ > @@ -426,9 +426,7 @@ CONFIG_ENABLE_MMU
+ >   CONFIG_ENABLE_MUST_CHECK
+ >   CONFIG_ENABLE_WARN_DEPRECATED
+ >   CONFIG_ENV_ACCESS_IGNORE_FORCE
+ > -CONFIG_ENV_ADDR
+ >   CONFIG_ENV_ADDR_FLEX
+ > -CONFIG_ENV_ADDR_REDUND
+ >   CONFIG_ENV_BASE
+ >   CONFIG_ENV_CALLBACK_LIST_DEFAULT
+ >   CONFIG_ENV_CALLBACK_LIST_STATIC
+ > @@ -443,7 +441,6 @@ CONFIG_ENV_IS_IN_
+ >   CONFIG_ENV_MAX_ENTRIES
+ >   CONFIG_ENV_MIN_ENTRIES
+ >   CONFIG_ENV_OFFSET_OOB
+ > -CONFIG_ENV_OFFSET_REDUND
+ >   CONFIG_ENV_OVERWRITE
+ >   CONFIG_ENV_RANGE
+ >   CONFIG_ENV_RDADDR
+ >
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

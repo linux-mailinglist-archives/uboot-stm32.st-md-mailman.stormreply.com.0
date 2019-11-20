@@ -2,63 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75A0610383B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 12:06:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 34A75103AC2
+	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 14:09:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 31523C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 11:06:15 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E076BC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Nov 2019 13:09:40 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 84631C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2E8B0C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 20 Nov 2019 11:06:14 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Wed, 20 Nov 2019 13:09:39 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAKB25rD016468; Wed, 20 Nov 2019 12:06:11 +0100
+ xAKD7KLx024920; Wed, 20 Nov 2019 14:09:35 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=vpB/PU3ChSM1e6f5FyPojv29ZHRI7IUw9cuLy7O4CaQ=;
- b=VqRlO3mupWerhkKT2Q1hhtISfm0uip+UEKPbIuV7jK1BAdARzyrOFevqRPPrNTQkwZl0
- CLhdQYCkDaTcK/NADPynS9LZUZRAkK355xseVYJTEUL5Zpoe9nmgAM7Ok2OhPwMkP/J8
- mYkmAyjFimOAkpjx9l4QmGw8ayYMZS8PAOKbYztYWWW744gVcPtgXGcHe7GduRL6QYY9
- xdB7tAEfb9AV0QeryBCDCFh34epdWmGzkUiJdTjHTDPuWfJqfUltbtZhTuTOnctejX2q
- +ipmObGRT6HWPSQhJIACtAvwYHriBgM1c7GEPZ9He0Bj6hb1LTbyAxXOwXXPa6J2v1Es UA== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=fuWWSss8h5BgspW2fpn6H5GMvXLj55A+miihAEslbas=;
+ b=q6mRJuqFZ5Q4ndEkmq6B61Fu0bfpTHriqNFhA9q9zJP4RJ044ajjd9auHUcZ81maTWcl
+ cf0+JsddpfSjUgZFSKAHcG6wI3vAAr7MH4STONZxhUjhwNVsIVHFT+ZtqkHK09n+xwQ0
+ jZ0bzCQ6O70FOGAl/Mre28fgaxXw5XB87ZxP+oE1zCealqs4JDeR8lVVyoxBuWrKhGtB
+ yBSmV2moL+Fi4/mWHvvb/4OW3FfzCCN7L6dk6bZyNj2vdpbUc5EJiaaiSF3H/Elo57BB
+ nj2tjYxA9NdGg2/xqn4efR3uSuGdSRXviUeNz7kr72yCU1Y2kC0rWGA2dyzdZRLSux1R 0Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2wa9usda9e-1
+ by mx07-00178001.pphosted.com with ESMTP id 2wa9uj5t9s-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 20 Nov 2019 12:06:11 +0100
+ Wed, 20 Nov 2019 14:09:34 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1042C10002A;
- Wed, 20 Nov 2019 12:06:11 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 39A4810002A;
+ Wed, 20 Nov 2019 14:09:34 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 065EF2BEC54;
- Wed, 20 Nov 2019 12:06:11 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 24E302FF5C0;
+ Wed, 20 Nov 2019 14:09:34 +0100 (CET)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
  (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 20 Nov
- 2019 12:06:10 +0100
+ 2019 14:09:33 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 20 Nov 2019 12:06:10 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
+ 15.00.1473.003; Wed, 20 Nov 2019 14:09:33 +0100
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
 Thread-Topic: [PATCH 1/2] video: bmp: Fix video_splash_align_axis()
-Thread-Index: AQHVn496RkzxevRHN0a2+cBSXyp/+KeT4/zQ
-Date: Wed, 20 Nov 2019 11:06:10 +0000
-Message-ID: <f7540c4f9c3b4869a6752b900c9a14f7@SFHDAG6NODE3.st.com>
+Thread-Index: AQHVn496cCXyRGxMm0qsyx/7cWT3SKeT1SQAgAAieYA=
+Date: Wed, 20 Nov 2019 13:09:33 +0000
+Message-ID: <545aaf19-02d4-d2ac-3eb8-05cce8c61d3b@st.com>
 References: <20191120104418.1179-1-patrice.chotard@st.com>
  <20191120104418.1179-2-patrice.chotard@st.com>
-In-Reply-To: <20191120104418.1179-2-patrice.chotard@st.com>
+ <f7540c4f9c3b4869a6752b900c9a14f7@SFHDAG6NODE3.st.com>
+In-Reply-To: <f7540c4f9c3b4869a6752b900c9a14f7@SFHDAG6NODE3.st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.50]
+Content-ID: <494D02269C69C447A4BC4459B2A79892@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-11-20_03:2019-11-15,2019-11-20 signatures=0
@@ -82,32 +87,34 @@ Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksDQoNCj4gRnJvbTogUGF0cmljZSBDSE9UQVJEIDxwYXRyaWNlLmNob3RhcmRAc3QuY29tPg0K
-PiBTZW50OiBtZXJjcmVkaSAyMCBub3ZlbWJyZSAyMDE5IDExOjQ0DQo+IA0KPiBJbiBjYXNlIHRo
-ZSBwYW5lbF9zaXplIGlzIHNtYWxsZXIgdGhhbiBwaWN0dXJlX3NpemUsIHdlIG11c3QgaW5zdXJl
-IHRoYXQNCj4gcGFuZWxfcGljdHVyZV9kZWx0YSBzdG9yZXMgdGhlIGFic29sdXRlIHZhbHVlIG9m
-IGRpZmZlcmVuY2UgYmV0d2VlbiBwYW5lbF9zaXplDQo+IGFuZCBwaWN0dXJlX3NpemUuDQo+IA0K
-PiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBzdC5jb20+
-DQo+IENDOiBZYW5uaWNrIEZlcnRyw6kgPHlhbm5pY2suZmVydHJlQHN0LmNvbT4NCj4gLS0tDQo+
-IA0KPiAgZHJpdmVycy92aWRlby92aWRlb19ibXAuYyB8IDIgKy0NCj4gIDEgZmlsZSBjaGFuZ2Vk
-LCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvdmlkZW8vdmlkZW9fYm1wLmMgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jIGluZGV4DQo+
-IDE5M2YzN2QyNzUuLmRjNjI1OGNlNzggMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvdmlkZW8vdmlk
-ZW9fYm1wLmMNCj4gKysrIGIvZHJpdmVycy92aWRlby92aWRlb19ibXAuYw0KPiBAQCAtMTU3LDcg
-KzE1Nyw3IEBAIF9fd2VhayB2b2lkIGZiX3B1dF93b3JkKHVjaGFyICoqZmIsIHVjaGFyICoqZnJv
-bSkNCj4gc3RhdGljIHZvaWQgdmlkZW9fc3BsYXNoX2FsaWduX2F4aXMoaW50ICpheGlzLCB1bnNp
-Z25lZCBsb25nIHBhbmVsX3NpemUsDQo+ICAJCQkJICAgIHVuc2lnbmVkIGxvbmcgcGljdHVyZV9z
-aXplKQ0KPiAgew0KPiAtCXVuc2lnbmVkIGxvbmcgcGFuZWxfcGljdHVyZV9kZWx0YSA9IHBhbmVs
-X3NpemUgLSBwaWN0dXJlX3NpemU7DQo+ICsJdW5zaWduZWQgbG9uZyBwYW5lbF9waWN0dXJlX2Rl
-bHRhID0gYWJzKHBhbmVsX3NpemUgLSBwaWN0dXJlX3NpemUpOw0KDQpJIHRoaW5rIHRoaXMgcGF0
-Y2ggY2F1c2UgYWxpZ25tZW50IGlzc3VlIGlmIHBpY3R1cmVfc2l6ZSA+IHBhbmVsX3NpemUuIChu
-b3QgYWxsaWduZSBhIHRoZSBsZWZ0L3VwIGNvcm5lcikuDQoNCkkgdGhpbmsgaXQgaXMgYmVldGVy
-IHRvIGNoYW5nZSB0eXBlOg0KDQorIGxvbmcgcGFuZWxfcGljdHVyZV9kZWx0YSA9IHBhbmVsX3Np
-emUgLSBwaWN0dXJlX3NpemU7DQoNCkFzIHZhbHVlIGlzIGNyb3BwZWQgdG8gMCBpbiB0aGUgbmV4
-dCBsaW5lczoNCg0KKmF4aXMgPSBtYXgoMCwgKGludClheGlzX2FsaWdubWVudCk7DQoNCg0KDQo+
-ICAJdW5zaWduZWQgbG9uZyBheGlzX2FsaWdubWVudDsNCj4gDQo+ICAJaWYgKCpheGlzID09IEJN
-UF9BTElHTl9DRU5URVIpDQo+IC0tDQo+IDIuMTcuMQ0KDQoNClJlZ2FyZHMNCg0KUGF0cmljaw0K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3Rt
-MzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20K
-aHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJv
-b3Qtc3RtMzIK
+DQpPbiAxMS8yMC8xOSAxMjowNiBQTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToNCj4gSGksDQo+
+DQo+PiBGcm9tOiBQYXRyaWNlIENIT1RBUkQgPHBhdHJpY2UuY2hvdGFyZEBzdC5jb20+DQo+PiBT
+ZW50OiBtZXJjcmVkaSAyMCBub3ZlbWJyZSAyMDE5IDExOjQ0DQo+Pg0KPj4gSW4gY2FzZSB0aGUg
+cGFuZWxfc2l6ZSBpcyBzbWFsbGVyIHRoYW4gcGljdHVyZV9zaXplLCB3ZSBtdXN0IGluc3VyZSB0
+aGF0DQo+PiBwYW5lbF9waWN0dXJlX2RlbHRhIHN0b3JlcyB0aGUgYWJzb2x1dGUgdmFsdWUgb2Yg
+ZGlmZmVyZW5jZSBiZXR3ZWVuIHBhbmVsX3NpemUNCj4+IGFuZCBwaWN0dXJlX3NpemUuDQo+Pg0K
+Pj4gU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAc3QuY29t
+Pg0KPj4gQ0M6IFlhbm5pY2sgRmVydHLDqSA8eWFubmljay5mZXJ0cmVAc3QuY29tPg0KPj4gLS0t
+DQo+Pg0KPj4gIGRyaXZlcnMvdmlkZW8vdmlkZW9fYm1wLmMgfCAyICstDQo+PiAgMSBmaWxlIGNo
+YW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvdmlkZW8vdmlkZW9fYm1wLmMgYi9kcml2ZXJzL3ZpZGVvL3ZpZGVvX2JtcC5jIGlu
+ZGV4DQo+PiAxOTNmMzdkMjc1Li5kYzYyNThjZTc4IDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy92
+aWRlby92aWRlb19ibXAuYw0KPj4gKysrIGIvZHJpdmVycy92aWRlby92aWRlb19ibXAuYw0KPj4g
+QEAgLTE1Nyw3ICsxNTcsNyBAQCBfX3dlYWsgdm9pZCBmYl9wdXRfd29yZCh1Y2hhciAqKmZiLCB1
+Y2hhciAqKmZyb20pDQo+PiBzdGF0aWMgdm9pZCB2aWRlb19zcGxhc2hfYWxpZ25fYXhpcyhpbnQg
+KmF4aXMsIHVuc2lnbmVkIGxvbmcgcGFuZWxfc2l6ZSwNCj4+ICAJCQkJICAgIHVuc2lnbmVkIGxv
+bmcgcGljdHVyZV9zaXplKQ0KPj4gIHsNCj4+IC0JdW5zaWduZWQgbG9uZyBwYW5lbF9waWN0dXJl
+X2RlbHRhID0gcGFuZWxfc2l6ZSAtIHBpY3R1cmVfc2l6ZTsNCj4+ICsJdW5zaWduZWQgbG9uZyBw
+YW5lbF9waWN0dXJlX2RlbHRhID0gYWJzKHBhbmVsX3NpemUgLSBwaWN0dXJlX3NpemUpOw0KPiBJ
+IHRoaW5rIHRoaXMgcGF0Y2ggY2F1c2UgYWxpZ25tZW50IGlzc3VlIGlmIHBpY3R1cmVfc2l6ZSA+
+IHBhbmVsX3NpemUuIChub3QgYWxsaWduZSBhIHRoZSBsZWZ0L3VwIGNvcm5lcikuDQo+DQo+IEkg
+dGhpbmsgaXQgaXMgYmVldGVyIHRvIGNoYW5nZSB0eXBlOg0KPg0KPiArIGxvbmcgcGFuZWxfcGlj
+dHVyZV9kZWx0YSA9IHBhbmVsX3NpemUgLSBwaWN0dXJlX3NpemU7DQo+DQo+IEFzIHZhbHVlIGlz
+IGNyb3BwZWQgdG8gMCBpbiB0aGUgbmV4dCBsaW5lczoNCj4NCj4gKmF4aXMgPSBtYXgoMCwgKGlu
+dClheGlzX2FsaWdubWVudCk7DQo+DQpBZ3JlZSwgaSB3aWxsIHVwZGF0ZSB0aGlzIGluIFYyDQoN
+ClRoYW5rcw0KDQo+DQo+PiAgCXVuc2lnbmVkIGxvbmcgYXhpc19hbGlnbm1lbnQ7DQo+Pg0KPj4g
+IAlpZiAoKmF4aXMgPT0gQk1QX0FMSUdOX0NFTlRFUikNCj4+IC0tDQo+PiAyLjE3LjENCj4NCj4g
+UmVnYXJkcw0KPg0KPiBQYXRyaWNrCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1t
+YWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

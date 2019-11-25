@@ -2,63 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97BE4108F28
-	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Nov 2019 14:48:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A21F109237
+	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Nov 2019 17:55:06 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5A0A9C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Nov 2019 13:48:33 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04516C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Nov 2019 16:55:06 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 20BA5C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 026A9C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 25 Nov 2019 13:48:32 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAPDlWfB021354; Mon, 25 Nov 2019 14:48:17 +0100
+ Mon, 25 Nov 2019 16:55:04 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xAPGrLeo007730; Mon, 25 Nov 2019 17:54:54 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=ph9/2HrpNmVlDmB6LCUkZl4bMlb8BN2JotI0XQf1pP8=;
- b=AFzvUiGIOgNzSxvmat4vRL63pJ1jm9LTaYO+ZAONjT2Rpk0SfCIQ/EzebMiEwxmNjDZS
- mAoXZbHpP5k27o2cAJkhphK4ODHivbdqEnWaFGLVayirJjzp9SaHsIn255QCIsCm+UvJ
- SzenBAwetDaMIANIQxOKvbbe8cBduNjtT7U5wmTUC82qTWk1LUqbI5s1VOfO6Nwyd8LI
- BNDbPH4/oukx2EGdS77CuCX6uqNN1STd6D/TirbaLt2F7qI+6eY9RgRMtAmgh7K0p2c6
- 96YN9kDXTJ2g/eRlrtvPU0GlUbVUHLjNVhhLKgXc1O+sMW9enKSL79+f8ZKk2RFim+X8 wg== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=QO3AHzS1iHKhg5/3cLgtA1hXMCNThMpwkbOQjYbMA+4=;
+ b=IXd2333MNtacIPbrgCykJkSJFTKFpTFkkpst7RVjXeTsmQsJexqetQ15Iit0zlJ+090S
+ N/9tp+5PmijIUmi0IZEqaY+HI6HP2bqITx6pxfGacI+Xln/WVKglPZVIvrPirfGkn/KN
+ w9mjHbALnkM/Pp9wkWk07IJpNMST5cAAXSLO++mYErRCHHdL7JIXuFzv7pcRvjIJ7iWM
+ LUMmcwQmBON++BvleQ9d/awDpZQ64i+zgEY+3Lifhc1YUTa0Byh9JdhlCUtGuTb9KD+Q
+ bE+nm+KLH0OHJgFV/zsDE9mgLLulwp9//r1v3cnylX9GVlaGmuA6X1oTlJ62M7oNIgqo qQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2weudw1cmp-1
+ by mx08-00178001.pphosted.com with ESMTP id 2wevhjj081-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 Nov 2019 14:48:17 +0100
+ Mon, 25 Nov 2019 17:54:54 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C11FE100038;
- Mon, 25 Nov 2019 14:48:15 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CE0002C7882;
- Mon, 25 Nov 2019 14:48:15 +0100 (CET)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 25 Nov 2019 14:48:15 +0100
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 25 Nov 2019 14:48:11 +0100
-Message-ID: <20191125134811.16462-1-patrice.chotard@st.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-11-25_03:2019-11-21,2019-11-25 signatures=0
-Cc: Stephen Warren <swarren@nvidia.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E80BC100034;
+ Mon, 25 Nov 2019 17:54:52 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag3node3.st.com [10.75.127.9])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB5292B3C62;
+ Mon, 25 Nov 2019 17:54:52 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG3NODE3.st.com
+ (10.75.127.9) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Mon, 25 Nov
+ 2019 17:54:52 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 25 Nov 2019 17:54:52 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Fabien DESSENNE <fabien.dessenne@st.com>, Simon Glass <sjg@chromium.org>, 
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Trevor Woerner <trevor@toganlabs.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Vikas Manocha <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH] board_f.c: Insure gd->new_bootstage alignment
+ Lokesh Vutla <lokeshvutla@ti.com>, Suman Anna <s-anna@ti.com>
+Thread-Topic: [PATCH v2 2/6] stm32mp1: declare backup registers for coprocessor
+Thread-Index: AQHVjydaR+MxwGtz+ECe392p69Sg/aecQvUQ
+Date: Mon, 25 Nov 2019 16:54:52 +0000
+Message-ID: <c14b02e5498b47aeb4713e0f8254388f@SFHDAG6NODE3.st.com>
+References: <1572442713-26353-1-git-send-email-fabien.dessenne@st.com>
+ <1572442713-26353-3-git-send-email-fabien.dessenne@st.com>
+In-Reply-To: <1572442713-26353-3-git-send-email-fabien.dessenne@st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.45]
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2019-11-25_04:2019-11-21,2019-11-25 signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Arnaud POULIQUEN <arnaud.pouliquen@st.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/6] stm32mp1: declare backup registers
+	for coprocessor
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,35 +85,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In reserve_bootstage(), in case size is odd, gd->new_bootstage
-is not aligned. In bootstage_relocate(), the platform hangs when
-getting access to data->record[i].name.
-To avoid this issue, make gd->new_bootstage 16 byte aligned.
+Hi Fabien,
 
-Fixes: ac9cd4805c8b ("bootstage: Correct relocation algorithm")
+> From: Fabien DESSENNE <fabien.dessenne@st.com>
+> Sent: mercredi 30 octobre 2019 14:38
+> 
+> Use the backup register #17 as coprocessor resource table address and backup
+> register #18 as coprocessor state.
+> 
+> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
 
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-Reviewed-by: Vikas MANOCHA <vikas.manocha@st.com>
----
+Acked-by: Patrick Delaunay <patrick.delaunay@st.com>
 
- common/board_f.c | 1 +
- 1 file changed, 1 insertion(+)
+Thanks
 
-diff --git a/common/board_f.c b/common/board_f.c
-index e3591cbaeb..9cd4cfaf5f 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -559,6 +559,7 @@ static int reserve_bootstage(void)
- 	int size = bootstage_get_size();
- 
- 	gd->start_addr_sp -= size;
-+	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp, 16);
- 	gd->new_bootstage = map_sysmem(gd->start_addr_sp, size);
- 	debug("Reserving %#x Bytes for bootstage at: %08lx\n", size,
- 	      gd->start_addr_sp);
--- 
-2.17.1
-
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

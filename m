@@ -2,62 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D638E109A79
+	by mail.lfdr.de (Postfix) with ESMTPS id CA7EE109A78
 	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Nov 2019 09:49:24 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 96653C36B12
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8EB51C36B10
 	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Nov 2019 08:49:24 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D9B24C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BC29AC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue, 26 Nov 2019 08:49:21 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xAQ8lHVi030849; Tue, 26 Nov 2019 09:49:20 +0100
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xAQ8lfXY029177; Tue, 26 Nov 2019 09:49:21 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=KDilOE1jsChi543oAH66Lf1EdO+VpDurVfZvGL9rFbI=;
- b=HbQAIknmuSrEZxPBwPfwQrdJpz1FD7hGy4h/WlTo22WEEq9vmKEA/2tmpg/DXGS1TfWW
- SnXE+7egg8ey0FDIAekbOt/tEwPR4bgEJgx25cO4IfK/h288y2vW7oO/5d06/m/whB3A
- DMObxgsMT7QeVvqdt42h2NOkuLwKYeqivC3NdiOyCm0fEPEDNy/QnwStJhQh9TegbYc5
- iv+4X0Ng8q/5ZNZocvCDbo3vJGBtACBG8pT0OjWDdlXnoOpkDJLCWiAEtXfvmhdsKrPX
- XhoGpx5fVz/n7Ybuw+t2monYrzX9iNfmlJ2IwsH5fiq8zhNzU1dUsu1N99bexWLzLPFI Hg== 
+ bh=Qo83ektULbMKzT94rdErjXl/Zhw6SMlmksRCXYRaCQg=;
+ b=xT5R2dksuWpBS/qADU6/xU8MOzQgSU8vhITmWoQEOEaWuoATShvktImn32f87eIeD2LV
+ ct6j6AKyaw9CyiYQVV6CPpj3ptf+bB5Pw2dbWjIRnQXKsIAPZtBbS9xroMOZdTFZ2Aoc
+ uy64kdp/OJscHW9PVz94y5zGJ25WLKR2uqE3f9sk2CoJXt6YLUHdJev19KuxRUXON4ZE
+ 86QhWAWttBI32pOs26IGCgLR9tvoDnRa46fBmZO8sDXSpL/iUjn6xCcG7WalkNBly85y
+ zrgat+T49WLozHlQ0nzkLfUcnJMBO4cO7RTx/jLXh1S/SyO/bIGZVThmnstiCbFXLgmo NQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx08-00178001.pphosted.com with ESMTP id 2wets9p7v5-1
+ by mx07-00178001.pphosted.com with ESMTP id 2weu42dx5n-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 26 Nov 2019 09:49:20 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CFCAE100034;
- Tue, 26 Nov 2019 09:49:19 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 973B3100039;
+ Tue, 26 Nov 2019 09:49:20 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C47AE2ACE57;
- Tue, 26 Nov 2019 09:49:19 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C97D2ACE57;
+ Tue, 26 Nov 2019 09:49:20 +0100 (CET)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 26 Nov 2019 09:49:19 +0100
+ Tue, 26 Nov 2019 09:49:20 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 26 Nov 2019 09:49:05 +0100
-Message-ID: <20191126084911.19761-9-patrick.delaunay@st.com>
+Date: Tue, 26 Nov 2019 09:49:06 +0100
+Message-ID: <20191126084911.19761-10-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20191126084911.19761-1-patrick.delaunay@st.com>
 References: <20191126084911.19761-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-11-26_01:2019-11-21,2019-11-26 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Heiko Schocher <hs@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v2 08/14] gpio: add ops for configuration with
-	dir flags
+Subject: [Uboot-stm32] [PATCH v2 09/14] dt-bindings: gpio: alignment with
+	kernel v5.3
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,389 +73,414 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This commit manages the dir flags that can be used in gpio specifiers
-to indicate if a pull-up resistor or pull-down resistor should be
-enabled for output gpio (GPIO_PULL_UP, GPIO_PULL_DOWN) and the
-Open Drain/Open Source configuration for input gpio
-(GPIO_OPEN_DRAIN, GPIO_OPEN_SOURCE).
-
-These flags are already supported in Linux kernel in gpiolib;
-this patch provides the same support in U-Boot.
-
-The dir flags are managed in gpio drivers with two optional ops in gpio
-uclass: set_dir_flags and get_dir_flags.
-
-- ops set_dir_flags() set the direction and configuration of each GPIO
-  with a only call to dm_gpio_set_dir_flags() / dm_gpio_set_dir()
-  and respecting the configuration provided by device tree
-  (saved in desc->flags).
-
-- ops get_dir_flags() return dynamically the current gpio configuration,
-  it is used by the new API dm_gpio_get_dir_flags().
-
-When these optional ops are absent, the gpio uclass use the mandatory ops
-(direction_output, direction_input, get_value) and desc->flags to manage
-only the main dir flags:
-- GPIOD_IS_IN
-- GPIOD_IS_OUT
-- GPIOD_IS_OUT_ACTIVE
-- GPIOD_ACTIVE_LOW
+Update the binding file for gpio, it is just an alignment
+with kernel v5.3.
+The U-Boot code example for gpio-hog (not directly linked
+to binding) is moved in a new file doc/README.gpio.
+[commit 21676b706e99 ("gpio: fixes for gpio-hog support")
+& 'commit 4762a9988ede ("gpio: add gpio-hog support")']
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
-Changes in v2:
-- change the proposed ops for pin config to set_dir_flags/get_dir_flags
-- reused the existing API dm_gpio_set_dir_flags/dm_gpio_set_dir
-- add a new API dm_gpio_get_dir_flags
+Changes in v2: None
 
- drivers/gpio/gpio-uclass.c | 157 +++++++++++++++++++++++++++++++------
- include/asm-generic/gpio.h |  65 +++++++++++++--
- 2 files changed, 192 insertions(+), 30 deletions(-)
+ doc/README.gpio                        |  42 ++++
+ doc/device-tree-bindings/gpio/gpio.txt | 280 ++++++++++++++-----------
+ 2 files changed, 196 insertions(+), 126 deletions(-)
+ create mode 100644 doc/README.gpio
 
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 0870458e96..241293f4b4 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -140,8 +140,27 @@ int gpio_xlate_offs_flags(struct udevice *dev, struct gpio_desc *desc,
- 	if (args->args_count < 2)
- 		return 0;
+diff --git a/doc/README.gpio b/doc/README.gpio
+new file mode 100644
+index 0000000000..548ff37b8c
+--- /dev/null
++++ b/doc/README.gpio
+@@ -0,0 +1,42 @@
++
++GPIO hog (CONFIG_GPIO_HOG)
++--------
++
++All the GPIO hog are initialized in gpio_hog_probe_all() function called in
++board_r.c just before board_late_init() but you can also acces directly to
++the gpio with gpio_hog_lookup_name().
++
++
++Example, for the device tree:
++
++        tca6416@20 {
++                compatible = "ti,tca6416";
++                reg = <0x20>;
++                #gpio-cells = <2>;
++                gpio-controller;
++
++                env_reset {
++                        gpio-hog;
++                        input;
++                        gpios = <6 GPIO_ACTIVE_LOW>;
++                };
++                boot_rescue {
++                        gpio-hog;
++                        input;
++                        line-name = "foo-bar-gpio";
++                        gpios = <7 GPIO_ACTIVE_LOW>;
++                };
++        };
++
++You can than access the gpio in your board code with:
++
++	struct gpio_desc *desc;
++	int ret;
++
++	ret = gpio_hog_lookup_name("boot_rescue", &desc);
++	if (ret)
++		return;
++	if (dm_gpio_get_value(desc) == 1)
++		printf("\nBooting into Rescue System\n");
++	else if (dm_gpio_get_value(desc) == 0)
++		printf("\nBoot normal\n");
+diff --git a/doc/device-tree-bindings/gpio/gpio.txt b/doc/device-tree-bindings/gpio/gpio.txt
+index e9ef0212af..1481ed607d 100644
+--- a/doc/device-tree-bindings/gpio/gpio.txt
++++ b/doc/device-tree-bindings/gpio/gpio.txt
+@@ -4,19 +4,12 @@ Specifying GPIO information for devices
+ 1) gpios property
+ -----------------
  
-+	desc->flags = 0;
- 	if (args->args[1] & GPIO_ACTIVE_LOW)
--		desc->flags = GPIOD_ACTIVE_LOW;
-+		desc->flags |= GPIOD_ACTIVE_LOW;
-+
-+	/*
-+	 * need to test 2 bits for gpio output binding:
-+	 * OPEN_DRAIN (0x6) = SINGLE_ENDED (0x2) | LINE_OPEN_DRAIN (0x4)
-+	 * OPEN_SOURCE (0x2) = SINGLE_ENDED (0x2) | LINE_OPEN_SOURCE (0x0)
-+	 */
-+	if (args->args[1] & GPIO_SINGLE_ENDED) {
-+		if (args->args[1] & GPIO_LINE_OPEN_DRAIN)
-+			desc->flags |= GPIOD_OPEN_DRAIN;
-+		else
-+			desc->flags |= GPIOD_OPEN_SOURCE;
-+	}
-+
-+	if (args->args[1] & GPIO_PULL_UP)
-+		desc->flags |= GPIOD_PULL_UP;
-+
-+	if (args->args[1] & GPIO_PULL_DOWN)
-+		desc->flags |= GPIOD_PULL_DOWN;
- 
- 	return 0;
- }
-@@ -476,18 +495,24 @@ int gpio_direction_output(unsigned gpio, int value)
- 							desc.offset, value);
- }
- 
--int dm_gpio_get_value(const struct gpio_desc *desc)
-+static int _gpio_get_value(const struct gpio_desc *desc)
- {
- 	int value;
-+
-+	value = gpio_get_ops(desc->dev)->get_value(desc->dev, desc->offset);
-+
-+	return desc->flags & GPIOD_ACTIVE_LOW ? !value : value;
-+}
-+
-+int dm_gpio_get_value(const struct gpio_desc *desc)
-+{
- 	int ret;
- 
- 	ret = check_reserved(desc, "get_value");
- 	if (ret)
- 		return ret;
- 
--	value = gpio_get_ops(desc->dev)->get_value(desc->dev, desc->offset);
+-Nodes that makes use of GPIOs should specify them using one or more
+-properties, each containing a 'gpio-list':
 -
--	return desc->flags & GPIOD_ACTIVE_LOW ? !value : value;
-+	return _gpio_get_value(desc);
- }
+-	gpio-list ::= <single-gpio> [gpio-list]
+-	single-gpio ::= <gpio-phandle> <gpio-specifier>
+-	gpio-phandle : phandle to gpio controller node
+-	gpio-specifier : Array of #gpio-cells specifying specific gpio
+-			 (controller specific)
+-
+ GPIO properties should be named "[<name>-]gpios", with <name> being the purpose
+ of this GPIO for the device. While a non-existent <name> is considered valid
+ for compatibility reasons (resolving to the "gpios" property), it is not allowed
+-for new bindings.
++for new bindings. Also, GPIO properties named "[<name>-]gpio" are valid and old
++bindings use it, but are only supported for compatibility reasons and should not
++be used for newer bindings since it has been deprecated.
  
- int dm_gpio_set_value(const struct gpio_desc *desc, int value)
-@@ -504,39 +529,119 @@ int dm_gpio_set_value(const struct gpio_desc *desc, int value)
- 	return 0;
- }
+ GPIO properties can contain one or more GPIO phandles, but only in exceptional
+ cases should they contain more than one. If your device uses several GPIOs with
+@@ -31,30 +24,28 @@ The following example could be used to describe GPIO pins used as device enable
+ and bit-banged data signals:
  
--int dm_gpio_set_dir_flags(struct gpio_desc *desc, ulong flags)
-+/* check dir flags invalid configuration */
-+static int check_dir_flags(ulong flags)
-+{
-+	if ((flags & GPIOD_IS_OUT) && (flags & GPIOD_IS_IN))
-+		return -EINVAL;
+ 	gpio1: gpio1 {
+-		gpio-controller
+-		 #gpio-cells = <2>;
+-	};
+-	gpio2: gpio2 {
+-		gpio-controller
+-		 #gpio-cells = <1>;
++		gpio-controller;
++		#gpio-cells = <2>;
+ 	};
+ 	[...]
+ 
+-	enable-gpios = <&gpio2 2>;
+ 	data-gpios = <&gpio1 12 0>,
+ 		     <&gpio1 13 0>,
+ 		     <&gpio1 14 0>,
+ 		     <&gpio1 15 0>;
+ 
+-Note that gpio-specifier length is controller dependent.  In the
+-above example, &gpio1 uses 2 cells to specify a gpio, while &gpio2
+-only uses one.
++In the above example, &gpio1 uses 2 cells to specify a gpio. The first cell is
++a local offset to the GPIO line and the second cell represent consumer flags,
++such as if the consumer desire the line to be active low (inverted) or open
++drain. This is the recommended practice.
+ 
+-gpio-specifier may encode: bank, pin position inside the bank,
+-whether pin is open-drain and whether pin is logically inverted.
+-Exact meaning of each specifier cell is controller specific, and must
+-be documented in the device tree binding for the device. Use the macros
+-defined in include/dt-bindings/gpio/gpio.h whenever possible:
++The exact meaning of each specifier cell is controller specific, and must be
++documented in the device tree binding for the device, but it is strongly
++recommended to use the two-cell approach.
 +
-+	if ((flags & GPIOD_PULL_UP) && (flags & GPIOD_PULL_DOWN))
-+		return -EINVAL;
++Most controllers are specifying a generic flag bitfield in the last cell, so
++for these, use the macros defined in
++include/dt-bindings/gpio/gpio.h whenever possible:
+ 
+ Example of a node using GPIOs:
+ 
+@@ -140,6 +131,80 @@ Every GPIO controller node must contain both an empty "gpio-controller"
+ property, and a #gpio-cells integer property, which indicates the number of
+ cells in a gpio-specifier.
+ 
++Some system-on-chips (SoCs) use the concept of GPIO banks. A GPIO bank is an
++instance of a hardware IP core on a silicon die, usually exposed to the
++programmer as a coherent range of I/O addresses. Usually each such bank is
++exposed in the device tree as an individual gpio-controller node, reflecting
++the fact that the hardware was synthesized by reusing the same IP block a
++few times over.
 +
-+	if ((flags & GPIOD_OPEN_DRAIN) && (flags & GPIOD_OPEN_SOURCE))
-+		return -EINVAL;
++Optionally, a GPIO controller may have a "ngpios" property. This property
++indicates the number of in-use slots of available slots for GPIOs. The
++typical example is something like this: the hardware register is 32 bits
++wide, but only 18 of the bits have a physical counterpart. The driver is
++generally written so that all 32 bits can be used, but the IP block is reused
++in a lot of designs, some using all 32 bits, some using 18 and some using
++12. In this case, setting "ngpios = <18>;" informs the driver that only the
++first 18 GPIOs, at local offset 0 .. 17, are in use.
 +
-+	return 0;
++If these GPIOs do not happen to be the first N GPIOs at offset 0...N-1, an
++additional set of tuples is needed to specify which GPIOs are unusable, with
++the gpio-reserved-ranges binding. This property indicates the start and size
++of the GPIOs that can't be used.
++
++Optionally, a GPIO controller may have a "gpio-line-names" property. This is
++an array of strings defining the names of the GPIO lines going out of the
++GPIO controller. This name should be the most meaningful producer name
++for the system, such as a rail name indicating the usage. Package names
++such as pin name are discouraged: such lines have opaque names (since they
++are by definition generic purpose) and such names are usually not very
++helpful. For example "MMC-CD", "Red LED Vdd" and "ethernet reset" are
++reasonable line names as they describe what the line is used for. "GPIO0"
++is not a good name to give to a GPIO line. Placeholders are discouraged:
++rather use the "" (blank string) if the use of the GPIO line is undefined
++in your design. The names are assigned starting from line offset 0 from
++left to right from the passed array. An incomplete array (where the number
++of passed named are less than ngpios) will still be used up until the last
++provided valid line index.
++
++Example:
++
++gpio-controller@00000000 {
++	compatible = "foo";
++	reg = <0x00000000 0x1000>;
++	gpio-controller;
++	#gpio-cells = <2>;
++	ngpios = <18>;
++	gpio-reserved-ranges = <0 4>, <12 2>;
++	gpio-line-names = "MMC-CD", "MMC-WP", "VDD eth", "RST eth", "LED R",
++		"LED G", "LED B", "Col A", "Col B", "Col C", "Col D",
++		"Row A", "Row B", "Row C", "Row D", "NMI button",
++		"poweroff", "reset";
 +}
 +
-+static int _dm_gpio_set_dir_flags(struct gpio_desc *desc, ulong flags)
- {
- 	struct udevice *dev = desc->dev;
- 	struct dm_gpio_ops *ops = gpio_get_ops(dev);
-+	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	int ret;
++The GPIO chip may contain GPIO hog definitions. GPIO hogging is a mechanism
++providing automatic GPIO request and configuration as part of the
++gpio-controller's driver probe function.
++
++Each GPIO hog definition is represented as a child node of the GPIO controller.
++Required properties:
++- gpio-hog:   A property specifying that this child node represents a GPIO hog.
++- gpios:      Store the GPIO information (id, flags, ...) for each GPIO to
++	      affect. Shall contain an integer multiple of the number of cells
++	      specified in its parent node (GPIO controller node).
++Only one of the following properties scanned in the order shown below.
++This means that when multiple properties are present they will be searched
++in the order presented below and the first match is taken as the intended
++configuration.
++- input:      A property specifying to set the GPIO direction as input.
++- output-low  A property specifying to set the GPIO direction as output with
++	      the value low.
++- output-high A property specifying to set the GPIO direction as output with
++	      the value high.
++
++Optional properties:
++- line-name:  The GPIO label name. If not present the node name is used.
++
+ Example of two SOC GPIO banks defined as gpio-controller nodes:
  
--	ret = check_reserved(desc, "set_dir");
+ 	qe_pio_a: gpio-controller@1400 {
+@@ -161,46 +226,40 @@ Example of two SOC GPIO banks defined as gpio-controller nodes:
+ 
+ Some or all of the GPIOs provided by a GPIO controller may be routed to pins
+ on the package via a pin controller. This allows muxing those pins between
+-GPIO and other functions.
++GPIO and other functions. It is a fairly common practice among silicon
++engineers.
++
++2.2) Ordinary (numerical) GPIO ranges
++-------------------------------------
+ 
+ It is useful to represent which GPIOs correspond to which pins on which pin
+-controllers. The gpio-ranges property described below represents this, and
+-contains information structures as follows:
+-
+-	gpio-range-list ::= <single-gpio-range> [gpio-range-list]
+-	single-gpio-range ::= <numeric-gpio-range> | <named-gpio-range>
+-	numeric-gpio-range ::=
+-			<pinctrl-phandle> <gpio-base> <pinctrl-base> <count>
+-	named-gpio-range ::= <pinctrl-phandle> <gpio-base> '<0 0>'
+-	pinctrl-phandle : phandle to pin controller node
+-	gpio-base : Base GPIO ID in the GPIO controller
+-	pinctrl-base : Base pinctrl pin ID in the pin controller
+-	count : The number of GPIOs/pins in this range
+-
+-The "pin controller node" mentioned above must conform to the bindings
+-described in ../pinctrl/pinctrl-bindings.txt.
+-
+-In case named gpio ranges are used (ranges with both <pinctrl-base> and
+-<count> set to 0), the property gpio-ranges-group-names contains one string
+-for every single-gpio-range in gpio-ranges:
+-	gpiorange-names-list ::= <gpiorange-name> [gpiorange-names-list]
+-	gpiorange-name : Name of the pingroup associated to the GPIO range in
+-			the respective pin controller.
+-
+-Elements of gpiorange-names-list corresponding to numeric ranges contain
+-the empty string. Elements of gpiorange-names-list corresponding to named
+-ranges contain the name of a pin group defined in the respective pin
+-controller. The number of pins/GPIOs in the range is the number of pins in
+-that pin group.
++controllers. The gpio-ranges property described below represents this with
++a discrete set of ranges mapping pins from the pin controller local number space
++to pins in the GPIO controller local number space.
+ 
+-Previous versions of this binding required all pin controller nodes that
+-were referenced by any gpio-ranges property to contain a property named
+-#gpio-range-cells with value <3>. This requirement is now deprecated.
+-However, that property may still exist in older device trees for
+-compatibility reasons, and would still be required even in new device
+-trees that need to be compatible with older software.
++The format is: <[pin controller phandle], [GPIO controller offset],
++                [pin controller offset], [number of pins]>;
++
++The GPIO controller offset pertains to the GPIO controller node containing the
++range definition.
++
++The pin controller node referenced by the phandle must conform to the bindings
++described in pinctrl/pinctrl-bindings.txt.
++
++Each offset runs from 0 to N. It is perfectly fine to pile any number of
++ranges with just one pin-to-GPIO line mapping if the ranges are concocted, but
++in practice these ranges are often lumped in discrete sets.
++
++Example:
+ 
+-Example 1:
++    gpio-ranges = <&foo 0 20 10>, <&bar 10 50 20>;
++
++This means:
++- pins 20..29 on pin controller "foo" is mapped to GPIO line 0..9 and
++- pins 50..69 on pin controller "bar" is mapped to GPIO line 10..29
++
++
++Verbose example:
+ 
+ 	qe_pio_e: gpio-controller@1460 {
+ 		#gpio-cells = <2>;
+@@ -211,12 +270,33 @@ Example 1:
+ 	};
+ 
+ Here, a single GPIO controller has GPIOs 0..9 routed to pin controller
+-pinctrl1's pins 20..29, and GPIOs 10..19 routed to pin controller pinctrl2's
+-pins 50..59.
++pinctrl1's pins 20..29, and GPIOs 10..29 routed to pin controller pinctrl2's
++pins 50..69.
++
++
++2.3) GPIO ranges from named pin groups
++--------------------------------------
+ 
+-Example 2:
++It is also possible to use pin groups for gpio ranges when pin groups are the
++easiest and most convenient mapping.
+ 
+-	gpio_pio_i: gpio-controller@14B0 {
++Both both <pinctrl-base> and <count> must set to 0 when using named pin groups
++names.
++
++The property gpio-ranges-group-names must contain exactly one string for each
++range.
++
++Elements of gpio-ranges-group-names must contain the name of a pin group
++defined in the respective pin controller. The number of pins/GPIO lines in the
++range is the number of pins in that pin group. The number of pins of that
++group is defined int the implementation and not in the device tree.
++
++If numerical and named pin groups are mixed, the string corresponding to a
++numerical pin range in gpio-ranges-group-names must be empty.
++
++Example:
++
++	gpio_pio_i: gpio-controller@14b0 {
+ 		#gpio-cells = <2>;
+ 		compatible = "fsl,qe-pario-bank-e", "fsl,qe-pario-bank";
+ 		reg = <0x1480 0x18>;
+@@ -231,66 +311,14 @@ Example 2:
+ 						"bar";
+ 	};
+ 
+-Here, three GPIO ranges are defined wrt. two pin controllers. pinctrl1 GPIO
+-ranges are defined using pin numbers whereas the GPIO ranges wrt. pinctrl2
+-are named "foo" and "bar".
+-
+-3) GPIO hog definitions
+------------------------
+-
+-The GPIO chip may contain GPIO hog definitions. GPIO hogging is a mechanism
+-providing automatic GPIO request and configuration as part of the
+-gpio-controller's driver probe function.
+-
+-Each GPIO hog definition is represented as a child node of the GPIO controller.
+-Required properties:
+-- gpio-hog:   A property specifying that this child node represents a GPIO hog.
+-- gpios:      Store the GPIO information (id, flags) for the GPIO to
+-	      affect.
+-
+-              ! Not yet support more than one gpio !
++Here, three GPIO ranges are defined referring to two pin controllers.
+ 
+-Only one of the following properties scanned in the order shown below.
+-- input:      A property specifying to set the GPIO direction as input.
+-- output-low  A property specifying to set the GPIO direction as output with
+-	      the value low.
+-- output-high A property specifying to set the GPIO direction as output with
+-	      the value high.
++pinctrl1 GPIO ranges are defined using pin numbers whereas the GPIO ranges
++in pinctrl2 are defined using the pin groups named "foo" and "bar".
+ 
+-Optional properties:
+-- line-name:  The GPIO label name. If not present the node name is used.
+-
+-Example:
+-
+-        tca6416@20 {
+-                compatible = "ti,tca6416";
+-                reg = <0x20>;
+-                #gpio-cells = <2>;
+-                gpio-controller;
+-
+-                env_reset {
+-                        gpio-hog;
+-                        input;
+-                        gpios = <6 GPIO_ACTIVE_LOW>;
+-                };
+-                boot_rescue {
+-                        gpio-hog;
+-                        input;
+-                        line-name = "foo-bar-gpio";
+-                        gpios = <7 GPIO_ACTIVE_LOW>;
+-                };
+-        };
+-
+-For the above Example you can than access the gpio in your boardcode
+-with:
+-
+-	struct gpio_desc *desc;
+-	int ret;
+-
+-	ret = gpio_hog_lookup_name("boot_rescue", &desc);
 -	if (ret)
--		return ret;
-+	ret = check_dir_flags(flags);
-+	if (ret) {
-+		dev_err(dev,
-+			"%s error: set_dir_flags for gpio %s%d has invalid dir flags 0x%lx\n",
-+			desc->dev->name,
-+			uc_priv->bank_name ? uc_priv->bank_name : "",
-+			desc->offset, flags);
- 
--	if (flags & GPIOD_IS_OUT) {
--		int value = flags & GPIOD_IS_OUT_ACTIVE ? 1 : 0;
-+		return ret;
-+	}
- 
--		if (flags & GPIOD_ACTIVE_LOW)
--			value = !value;
--		ret = ops->direction_output(dev, desc->offset, value);
--	} else  if (flags & GPIOD_IS_IN) {
--		ret = ops->direction_input(dev, desc->offset);
-+	/* GPIOD_ are directly managed by driver in set_dir_flags*/
-+	if (ops->set_dir_flags) {
-+		ret = ops->set_dir_flags(dev, desc->offset, flags);
-+	} else {
-+		if (flags & GPIOD_IS_OUT) {
-+			ret = ops->direction_output(dev, desc->offset,
-+						    GPIOD_FLAGS_OUTPUT(flags));
-+		} else if (flags & GPIOD_IS_IN) {
-+			ret = ops->direction_input(dev, desc->offset);
-+		}
- 	}
-+
-+	return ret;
-+}
-+
-+int dm_gpio_set_dir_flags(struct gpio_desc *desc, ulong flags)
-+{
-+	int ret;
-+
-+	ret = check_reserved(desc, "set_dir_flags");
- 	if (ret)
- 		return ret;
--	/*
--	 * Update desc->flags here, so that GPIO_ACTIVE_LOW is honoured in
--	 * futures
--	 */
--	desc->flags = flags;
- 
--	return 0;
-+	/* combine the requested flags (for IN/OUT) and the descriptor flags */
-+	flags |= desc->flags;
-+	ret = _dm_gpio_set_dir_flags(desc, flags);
-+
-+	/* update the descriptor flags */
-+	if (ret)
-+		desc->flags = flags;
-+
-+	return ret;
- }
- 
- int dm_gpio_set_dir(struct gpio_desc *desc)
- {
--	return dm_gpio_set_dir_flags(desc, desc->flags);
-+	int ret;
-+
-+	ret = check_reserved(desc, "set_dir");
-+	if (ret)
-+		return ret;
-+
-+	return _dm_gpio_set_dir_flags(desc, desc->flags);
-+}
-+
-+int dm_gpio_get_dir_flags(struct gpio_desc *desc, ulong *flags)
-+{
-+	struct udevice *dev = desc->dev;
-+	struct dm_gpio_ops *ops = gpio_get_ops(dev);
-+	int ret, value;
-+	ulong dir_flags;
-+
-+	ret = check_reserved(desc, "get_dir_flags");
-+	if (ret)
-+		return ret;
-+
-+	/* GPIOD_ are directly provided by driver except GPIOD_ACTIVE_LOW*/
-+	if (ops->get_dir_flags) {
-+		ret = ops->get_dir_flags(dev, desc->offset, &dir_flags);
-+		if (ret)
-+			return ret;
-+
-+		/* GPIOD_ACTIVE_LOW is saved in desc->flags */
-+		value = dir_flags & GPIOD_IS_OUT_ACTIVE ? 1 : 0;
-+		if (desc->flags & GPIOD_ACTIVE_LOW)
-+			value = !value;
-+		dir_flags &= ~(GPIOD_ACTIVE_LOW | GPIOD_IS_OUT_ACTIVE);
-+		dir_flags |= (desc->flags & GPIOD_ACTIVE_LOW);
-+		if (value)
-+			dir_flags |= GPIOD_IS_OUT_ACTIVE;
-+	} else {
-+		dir_flags = desc->flags;
-+		/* only GPIOD_IS_OUT_ACTIVE is provided by uclass */
-+		dir_flags &= ~GPIOD_IS_OUT_ACTIVE;
-+		if ((desc->flags & GPIOD_IS_OUT) && _gpio_get_value(desc))
-+			dir_flags |= GPIOD_IS_OUT_ACTIVE;
-+	}
-+	*flags = dir_flags;
-+
-+	return 0;
- }
- 
- /**
-@@ -809,7 +914,7 @@ static int gpio_request_tail(int ret, const char *nodename,
- 		debug("%s: dm_gpio_requestf failed\n", __func__);
- 		goto err;
- 	}
--	ret = dm_gpio_set_dir_flags(desc, flags | desc->flags);
-+	ret = dm_gpio_set_dir_flags(desc, flags);
- 	if (ret) {
- 		debug("%s: dm_gpio_set_dir failed\n", __func__);
- 		goto err;
-@@ -1036,6 +1141,10 @@ static int gpio_post_bind(struct udevice *dev)
- 			ops->get_function += gd->reloc_off;
- 		if (ops->xlate)
- 			ops->xlate += gd->reloc_off;
-+		if (ops->set_dir_flags)
-+			ops->set_dir_flags += gd->reloc_off;
-+		if (ops->get_dir_flags)
-+			ops->get_dir_flags += gd->reloc_off;
- 
- 		reloc_done++;
- 	}
-diff --git a/include/asm-generic/gpio.h b/include/asm-generic/gpio.h
-index 454578c8d2..c6991be1c9 100644
---- a/include/asm-generic/gpio.h
-+++ b/include/asm-generic/gpio.h
-@@ -117,10 +117,15 @@ struct udevice;
- struct gpio_desc {
- 	struct udevice *dev;	/* Device, NULL for invalid GPIO */
- 	unsigned long flags;
-+
- #define GPIOD_IS_OUT		BIT(1)	/* GPIO is an output */
- #define GPIOD_IS_IN		BIT(2)	/* GPIO is an input */
- #define GPIOD_ACTIVE_LOW	BIT(3)	/* value has active low */
- #define GPIOD_IS_OUT_ACTIVE	BIT(4)	/* set output active */
-+#define GPIOD_OPEN_DRAIN	BIT(5)	/* GPIO is open drain type */
-+#define GPIOD_OPEN_SOURCE	BIT(6)	/* GPIO is open source type */
-+#define GPIOD_PULL_UP		BIT(7)	/* GPIO has pull up enabled */
-+#define GPIOD_PULL_DOWN		BIT(8)	/* GPIO has pull down enabled */
- 
- 	uint offset;		/* GPIO offset within the device */
- 	/*
-@@ -129,6 +134,12 @@ struct gpio_desc {
- 	 */
- };
- 
-+/* helper to compute the value of the gpio output */
-+#define GPIOD_FLAGS_OUTPUT_MASK (GPIOD_ACTIVE_LOW | GPIOD_IS_OUT_ACTIVE)
-+#define GPIOD_FLAGS_OUTPUT(flags) \
-+	(((((flags) & GPIOD_FLAGS_OUTPUT_MASK) == GPIOD_IS_OUT_ACTIVE) || \
-+	  (((flags) & GPIOD_FLAGS_OUTPUT_MASK) == GPIOD_ACTIVE_LOW)) ? 1 : 0)
-+
- /**
-  * dm_gpio_is_valid() - Check if a GPIO is valid
-  *
-@@ -253,6 +264,7 @@ struct dm_gpio_ops {
- 				int value);
- 	int (*get_value)(struct udevice *dev, unsigned offset);
- 	int (*set_value)(struct udevice *dev, unsigned offset, int value);
-+
- 	/**
- 	 * get_function() Get the GPIO function
- 	 *
-@@ -287,6 +299,37 @@ struct dm_gpio_ops {
- 	 */
- 	int (*xlate)(struct udevice *dev, struct gpio_desc *desc,
- 		     struct ofnode_phandle_args *args);
-+
-+	/**
-+	 * set_dir_flags() - Set GPIO dir flags
-+	 *
-+	 * This function should set up the GPIO configuration according to the
-+	 * information provide by the direction flags bitfield.
-+	 *
-+	 * This method is optional.
-+	 *
-+	 * @dev:	GPIO device
-+	 * @offset:	GPIO offset within that device
-+	 * @flags:	GPIO configuration to use
-+	 * @return 0 if OK, -ve on error
-+	 */
-+	int (*set_dir_flags)(struct udevice *dev, unsigned int offset,
-+			     ulong flags);
-+
-+	/**
-+	 * get_dir_flags() - Get GPIO dir flags
-+	 *
-+	 * This function return the GPIO direction flags used.
-+	 *
-+	 * This method is optional.
-+	 *
-+	 * @dev:	GPIO device
-+	 * @offset:	GPIO offset within that device
-+	 * @flags:	place to put the used direction flags by GPIO
-+	 * @return 0 if OK, -ve on error
-+	 */
-+	int (*get_dir_flags)(struct udevice *dev, unsigned int offset,
-+			     ulong *flags);
- };
- 
- /**
-@@ -586,8 +629,7 @@ int dm_gpio_set_value(const struct gpio_desc *desc, int value);
- /**
-  * dm_gpio_set_dir() - Set the direction for a GPIO
-  *
-- * This sets up the direction according tot the provided flags. It will do
-- * nothing unless the direction is actually specified.
-+ * This sets up the direction according to the GPIO flags: desc->flags.
-  *
-  * @desc:	GPIO description containing device, offset and flags,
-  *		previously returned by gpio_request_by_name()
-@@ -596,11 +638,10 @@ int dm_gpio_set_value(const struct gpio_desc *desc, int value);
- int dm_gpio_set_dir(struct gpio_desc *desc);
- 
- /**
-- * dm_gpio_set_dir_flags() - Set direction using specific flags
-+ * dm_gpio_set_dir_flags() - Set direction using add flags
-  *
-- * This is like dm_gpio_set_dir() except that the flags value is provided
-- * instead of being used from desc->flags. This is needed because in many
-- * cases the GPIO description does not include direction information.
-+ * This sets up the direction according tot the provided flags and the GPIO
-+ * description (desc->flags) which include direction information.
-  * Note that desc->flags is updated by this function.
-  *
-  * @desc:	GPIO description containing device, offset and flags,
-@@ -610,6 +651,18 @@ int dm_gpio_set_dir(struct gpio_desc *desc);
-  */
- int dm_gpio_set_dir_flags(struct gpio_desc *desc, ulong flags);
- 
-+/**
-+ * dm_gpio_get_dir_flags() - Get direction flags
-+ *
-+ * read the current direction flags
-+ *
-+ * @desc:	GPIO description containing device, offset and flags,
-+ *		previously returned by gpio_request_by_name()
-+ * @flags:	place to put the used flags
-+ * @return 0 if OK, -ve on error, in which case desc->flags is not updated
-+ */
-+int dm_gpio_get_dir_flags(struct gpio_desc *desc, ulong *flags);
-+
- /**
-  * gpio_get_number() - Get the global GPIO number of a GPIO
-  *
+-		return;
+-	if (dm_gpio_get_value(desc) == 1)
+-		printf("\nBooting into Rescue System\n");
+-	else if (dm_gpio_get_value(desc) == 0)
+-		printf("\nBoot normal\n");
++Previous versions of this binding required all pin controller nodes that
++were referenced by any gpio-ranges property to contain a property named
++#gpio-range-cells with value <3>. This requirement is now deprecated.
++However, that property may still exist in older device trees for
++compatibility reasons, and would still be required even in new device
++trees that need to be compatible with older software.
 -- 
 2.17.1
 

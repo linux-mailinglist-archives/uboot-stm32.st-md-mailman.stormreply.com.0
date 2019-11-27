@@ -2,65 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4721F10A378
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Nov 2019 18:42:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C16510AC31
+	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Nov 2019 09:49:43 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DFE50C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Nov 2019 17:41:59 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DBD6AC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Nov 2019 08:49:42 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E7BC6C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E9C4C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Nov 2019 17:41:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1574790106;
- bh=4tMF1X5yxXMRjW0P5iicTL5Q6TDsV9g6bgtH367npIQ=;
- h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=kjq+J495LVAdX92VuRXHx7Rk9Zv0adw2YnUCl8yl4Bi0g9n1WIkfCsiRf2F2/ww/R
- jitTqEkBrBVBIcS/4j7vhL7UdgnqbXcMSYT2UU+5FX1F1pE1+2kKBL5ZGsihq3OpQA
- MF57FG6YRO/f2hEAylGX7cxLkqEMkuxUDes95JOo=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.123.51] ([94.114.42.168]) by mail.gmx.com (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M8hVB-1iV00W3yc5-004lY8; Tue, 26
- Nov 2019 18:41:46 +0100
-To: Patrick DELAUNAY <patrick.delaunay@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+ Wed, 27 Nov 2019 08:49:40 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xAR8l0fC018337; Wed, 27 Nov 2019 09:49:27 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=/U9RLVow2adv38gXbc+SpzfTjl4xFwHNutLfcUPslf8=;
+ b=W6drE/OrkBNfksucVeLbMEEqj8UIH7yEeIewnMgAFWWE7zARaKlIT4lGFPzWL3/X0q3J
+ Ln18ChNYdfQrTjMQBf99y5z/SPAaNqfisEcQErKXL2Hjf7w93sRX3+7tL56djyaor22P
+ pUDe6FCuLTxhU2lgSkINpH3u0abUl08juxAduD9FUTJK9dkzYBmthbCUIYF75fK98y9I
+ Nen3EUXnoakhFpny75HnEfTstJvEBd3qhEkyJOSNKZj8VnPy08MbRb0s1QRG9v1dxoZl
+ CzpvGu29NfpwHkcRuXdz+W7soBC3qs31yVj4A7PMfXwROb6ZHwt1xnbna6RiTkMQ/gVC bA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2whcxkje4f-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 27 Nov 2019 09:49:27 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 017A710002A;
+ Wed, 27 Nov 2019 09:49:25 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D38822AC078;
+ Wed, 27 Nov 2019 09:49:25 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 27 Nov
+ 2019 09:49:25 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 27 Nov 2019 09:49:25 +0100
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Patrick DELAUNAY
+ <patrick.delaunay@st.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] board_f.c: Insure gd->new_bootstage alignment
+Thread-Index: AQHVo5b8nMk4YyxpKkWVHbr0Um2wiqedXd5ggABLtQCAAP2eAA==
+Date: Wed, 27 Nov 2019 08:49:25 +0000
+Message-ID: <ad242f08-5478-8ac8-64af-025da10da41a@st.com>
 References: <20191125134811.16462-1-patrice.chotard@st.com>
  <a4bdcd488930473dbeb01c6e9d678398@SFHDAG6NODE3.st.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <217ce077-0e80-5f94-cb7b-511f8c527b1f@gmx.de>
-Date: Tue, 26 Nov 2019 18:41:40 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
-MIME-Version: 1.0
-In-Reply-To: <a4bdcd488930473dbeb01c6e9d678398@SFHDAG6NODE3.st.com>
+ <217ce077-0e80-5f94-cb7b-511f8c527b1f@gmx.de>
+In-Reply-To: <217ce077-0e80-5f94-cb7b-511f8c527b1f@gmx.de>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-X-Provags-ID: V03:K1:Ywzl5nsaEJKXoJm0AkkNnQxF/u6ttPkLXCHB2IGTENlashQFyia
- Wj1VSwvfoEAVGLf6rpplMEUcj4wdDFW9fu/CzgwPfnVmACT5R4t9A0Kv6/6dhA51my3237k
- eXniCm8ZFxxxrGC/cN2MD/yMZk+TfRz085GHLMXPENNAkMGc5/1cTx5fmX0Nd/iwHGjcFN2
- S+Itzh45BMHP2lIKD8zHA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:Md5TXqAhtWo=:tZ5hrTfZgjII6ysEr9P9Mu
- jHAhpstY5QqAetkPl6/5aG5eTja7KpXoZ7YlkZFKYKmGE8ROKZ+KSKvMTfcjfxexPnuovX1gf
- 0qof9UrF4hhXf7qZiVJRnJuTWBKysZ5MD50DAMYxQuNq8nAwujIdyZDNOjQlOI2V43wkELJnz
- QQhD4JYqY58yP7nRRVxyz9oNL+iD5lRMDI1Hrp5b0OWwtm8WJYvkm7yxT802REuzJY+vqxTBX
- 6NohIAvgPJueezthg7nN+qmSX16HyC/1da/uWb2TWtHo59uB3HrVgD39JukqULnzbqsK3wPG9
- LMdTD7qqX5qWrV+HdfJ2k9gSx3dRYQGguRaGIllO34CnxbFSy0veuZq+IIc7URnccdXLXP3ar
- ZORPkQXd61e9C9hnq7J2XyVZjc+DolYRfWGxKj6mSzQP8F1CSfnP1i5a/2p2XPnvZN8hgTZzN
- GDuGPMFvWAZ4sDIVh5PPEfOwTTKtpHcgJI9syK5it02bygCaLYg4szEkQBmhgHBTYZ9uZQY21
- QY1XYXqp60dmzvBoE74dyREdZfRVM+IsaManjIDiZKs0JrOOtharJeLiBRmV+1H8MyP/FA23H
- NZlvNmnlQ/psvq9uMdQG8fzh2x/TGZn4qYWQjXJwTVW0hgYygG3WujC6g8TooO2qonrTiyzaH
- hzSHE6AltbcYyZhV3Ayyv+lVM44/35x5YSX5gBVXFLkTnihriotKsBemPsNM9i3CLmAwPKqYW
- EHVW4RgsKYjlKLLykl+1pUMVw7zLDjP5uiFZAXtKDQYwv+NXU+MX481URGCXQgiqnK9cpLREf
- upnNoDFDzDMNMxfA6C/UY4NwnmMOoKEuIQJDCYy8TLz+M6A71zC0fX4RZf4DqtH5udH8pQbu/
- JGrsuYTRLv55QudrdtrY7fIewSdL93SZYU+ADOn3GaCMkefKys1Pt2hgQhHzUla/C/YDrm/zn
- dCOrRwANtwb3C3nLZ2qx88vdawh3RJIIHQ0YrsJ6Dp2qN+2xxT1PNpPYLiHT+Ha9qmYlQJ3Aw
- QJP34GWMObbxoy9CgsZO1kxtXXrv8/kWShwIVdRHrYMQS5yGyvvi45f5cJ8g10RcjqjUr58vq
- lRllpM7xTiD++2kKlF41gwo2Ea3v96qtpkZS1I0f+YCKzImvHe4S2f8WxsnP7xMDr/DQeZdEQ
- T/mfHeeTVvmM/dWDWRUZsDFZvRoP4zIJ0XeDVgahWwl9DQTzg+TLfeX6DR4JQFffzC8m1ziXS
- Q+Nfw0THY5cE3n51nrqF1MHtAs1UZhCyNK9qYqwrHrQIDm4MmYlQ5cuD1qCM=
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.48]
+Content-ID: <FEB25D973A2DC54C9B265675DACF0B9D@st.com>
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2019-11-27_02:2019-11-27,2019-11-27 signatures=0
 Cc: Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Trevor Woerner <trevor@toganlabs.com>, Jagan Teki <jagan@amarulasolutions.com>,
@@ -79,74 +85,52 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 11/26/19 1:16 PM, Patrick DELAUNAY wrote:
-> Hi,
->
->> From: Patrice CHOTARD <patrice.chotard@st.com>
->> Sent: lundi 25 novembre 2019 14:48
->>
->> In reserve_bootstage(), in case size is odd, gd->new_bootstage is not aligned. In
->> bootstage_relocate(), the platform hangs when getting access to data-
->>> record[i].name.
->> To avoid this issue, make gd->new_bootstage 16 byte aligned.
->>
->> Fixes: ac9cd4805c8b ("bootstage: Correct relocation algorithm")
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
->> Reviewed-by: Vikas MANOCHA <vikas.manocha@st.com>
->> ---
->
-> This patch is mandatory for stm32mp1 (ARM plaform with bootstage feature activated).
->
-> Without this patch, the boot failed for v2020.01-rc3 (crash has struct pointer new_bootstage is not aligned).
->
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
->
->>   common/board_f.c | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/common/board_f.c b/common/board_f.c index e3591cbaeb..9cd4cfaf5f
->> 100644
->> --- a/common/board_f.c
->> +++ b/common/board_f.c
->> @@ -559,6 +559,7 @@ static int reserve_bootstage(void)
->>   	int size = bootstage_get_size();
->>
->>   	gd->start_addr_sp -= size;
->> +	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp, 16);
-
-A comment in the code describing why this ALIGN_DOWN() is done would be
-helpful.
-
-Is this value sufficient for all boards?
-
-I found references for:
-
-x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
-ARMv8: ARMv8 Instruction Set Overview: quad word, 16 bytes
-
-Best regards
-
-Heinrich
-
->>   	gd->new_bootstage = map_sysmem(gd->start_addr_sp, size);
->>   	debug("Reserving %#x Bytes for bootstage at: %08lx\n", size,
->>   	      gd->start_addr_sp);
->> --
->> 2.17.1
->
-> Thanks
->
-> Patrick
->
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgSGVpbnJpY2gNCg0KT24gMTEvMjYvMTkgNjo0MSBQTSwgSGVpbnJpY2ggU2NodWNoYXJkdCB3
+cm90ZToNCj4gT24gMTEvMjYvMTkgMToxNiBQTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToNCj4+
+IEhpLA0KPj4NCj4+PiBGcm9tOiBQYXRyaWNlIENIT1RBUkQgPHBhdHJpY2UuY2hvdGFyZEBzdC5j
+b20+DQo+Pj4gU2VudDogbHVuZGkgMjUgbm92ZW1icmUgMjAxOSAxNDo0OA0KPj4+DQo+Pj4gSW4g
+cmVzZXJ2ZV9ib290c3RhZ2UoKSwgaW4gY2FzZSBzaXplIGlzIG9kZCwgZ2QtPm5ld19ib290c3Rh
+Z2UgaXMgbm90IGFsaWduZWQuIEluDQo+Pj4gYm9vdHN0YWdlX3JlbG9jYXRlKCksIHRoZSBwbGF0
+Zm9ybSBoYW5ncyB3aGVuIGdldHRpbmcgYWNjZXNzIHRvIGRhdGEtDQo+Pj4+IHJlY29yZFtpXS5u
+YW1lLg0KPj4+IFRvIGF2b2lkIHRoaXMgaXNzdWUsIG1ha2UgZ2QtPm5ld19ib290c3RhZ2UgMTYg
+Ynl0ZSBhbGlnbmVkLg0KPj4+DQo+Pj4gRml4ZXM6IGFjOWNkNDgwNWM4YiAoImJvb3RzdGFnZTog
+Q29ycmVjdCByZWxvY2F0aW9uIGFsZ29yaXRobSIpDQo+Pj4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBQ
+YXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBzdC5jb20+DQo+Pj4gUmV2aWV3ZWQtYnk6
+IFZpa2FzIE1BTk9DSEEgPHZpa2FzLm1hbm9jaGFAc3QuY29tPg0KPj4+IC0tLQ0KPj4NCj4+IFRo
+aXMgcGF0Y2ggaXMgbWFuZGF0b3J5IGZvciBzdG0zMm1wMSAoQVJNIHBsYWZvcm0gd2l0aCBib290
+c3RhZ2UgZmVhdHVyZSBhY3RpdmF0ZWQpLg0KPj4NCj4+IFdpdGhvdXQgdGhpcyBwYXRjaCwgdGhl
+IGJvb3QgZmFpbGVkIGZvciB2MjAyMC4wMS1yYzMgKGNyYXNoIGhhcyBzdHJ1Y3QgcG9pbnRlciBu
+ZXdfYm9vdHN0YWdlIGlzIG5vdCBhbGlnbmVkKS4NCj4+DQo+PiBSZXZpZXdlZC1ieTogUGF0cmlj
+ayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBzdC5jb20+DQo+PiBUZXN0ZWQtYnk6IFBhdHJp
+Y2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAc3QuY29tPg0KPj4NCj4+PiDCoCBjb21tb24v
+Ym9hcmRfZi5jIHwgMSArDQo+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspDQo+
+Pj4NCj4+PiBkaWZmIC0tZ2l0IGEvY29tbW9uL2JvYXJkX2YuYyBiL2NvbW1vbi9ib2FyZF9mLmMg
+aW5kZXggZTM1OTFjYmFlYi4uOWNkNGNmYWY1Zg0KPj4+IDEwMDY0NA0KPj4+IC0tLSBhL2NvbW1v
+bi9ib2FyZF9mLmMNCj4+PiArKysgYi9jb21tb24vYm9hcmRfZi5jDQo+Pj4gQEAgLTU1OSw2ICs1
+NTksNyBAQCBzdGF0aWMgaW50IHJlc2VydmVfYm9vdHN0YWdlKHZvaWQpDQo+Pj4gwqDCoMKgwqDC
+oCBpbnQgc2l6ZSA9IGJvb3RzdGFnZV9nZXRfc2l6ZSgpOw0KPj4+DQo+Pj4gwqDCoMKgwqDCoCBn
+ZC0+c3RhcnRfYWRkcl9zcCAtPSBzaXplOw0KPj4+ICvCoMKgwqAgZ2QtPnN0YXJ0X2FkZHJfc3Ag
+PSBBTElHTl9ET1dOKGdkLT5zdGFydF9hZGRyX3NwLCAxNik7DQo+DQo+IEEgY29tbWVudCBpbiB0
+aGUgY29kZSBkZXNjcmliaW5nIHdoeSB0aGlzIEFMSUdOX0RPV04oKSBpcyBkb25lIHdvdWxkIGJl
+DQo+IGhlbHBmdWwuDQoNCk9rIGkgd2lsbCBhZGQgYSBjb21tZW50IGFib3V0IHRoYXQuDQoNCg0K
+Pg0KPiBJcyB0aGlzIHZhbHVlIHN1ZmZpY2llbnQgZm9yIGFsbCBib2FyZHM/DQoNCkkgc2ltcGx5
+IHJldXNlIHRoZSBzYW1lIGFsaWdubWVudCBhbHJlYWR5IGFwcGxpZWQgZm9yIG90aGVyIG1lbW9y
+eSBhcmVhIDoNCg0KwqDCoMKgIF8gc3RhcnRfYWRkcl9zcCBpbiByZXNlcnZlX3N0YWNrcygpDQoN
+CsKgwqDCoCBfIG5ld19ibG9ibGlzdCBpbiByZXNlcnZlX2Jsb2JsaXN0KCkNCg0KDQpUaGFua3MN
+Cg0KUGF0cmljZQ0KDQoNCj4NCj4gSSBmb3VuZCByZWZlcmVuY2VzIGZvcjoNCj4NCj4geDg2XzY0
+IEFCSTogaHR0cHM6Ly9yZXZpZXdzLmxsdm0ub3JnL0QzMDA0OTogMTYgYnl0ZXMNCj4gQVJNdjg6
+IEFSTXY4IEluc3RydWN0aW9uIFNldCBPdmVydmlldzogcXVhZCB3b3JkLCAxNiBieXRlcw0KPg0K
+PiBCZXN0IHJlZ2FyZHMNCj4NCj4gSGVpbnJpY2gNCj4NCj4+PiDCoMKgwqDCoMKgIGdkLT5uZXdf
+Ym9vdHN0YWdlID0gbWFwX3N5c21lbShnZC0+c3RhcnRfYWRkcl9zcCwgc2l6ZSk7DQo+Pj4gwqDC
+oMKgwqDCoCBkZWJ1ZygiUmVzZXJ2aW5nICUjeCBCeXRlcyBmb3IgYm9vdHN0YWdlIGF0OiAlMDhs
+eFxuIiwgc2l6ZSwNCj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdkLT5zdGFydF9hZGRyX3Nw
+KTsNCj4+PiAtLSANCj4+PiAyLjE3LjENCj4+DQo+PiBUaGFua3MNCj4+DQo+PiBQYXRyaWNrDQo+
+Pg0KPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9v
+dC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5
+LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5m
+by91Ym9vdC1zdG0zMgo=

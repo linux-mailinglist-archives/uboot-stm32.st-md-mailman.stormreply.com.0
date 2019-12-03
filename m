@@ -2,64 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A84CB10EC24
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Dec 2019 16:16:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7544B10FA00
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Dec 2019 09:38:51 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 639BAC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Dec 2019 15:16:11 +0000 (UTC)
-Received: from mail-yw1-f52.google.com (mail-yw1-f52.google.com
- [209.85.161.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8B6D4C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Dec 2019 08:38:49 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00468C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFD21C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  2 Dec 2019 15:16:09 +0000 (UTC)
-Received: by mail-yw1-f52.google.com with SMTP id s187so2270981ywe.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 02 Dec 2019 07:16:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=R/zGyM1pGK6ChzIUR+Sd75zOSrDkJ/6UBtEovIC/ytE=;
- b=aamgA4sbVPuwCpYMMOGXn6hiYh4cBLJ/buOeh1/qZlFT2gcbbHiEJvsk4yjdc7+mn1
- NCVxb/VTZXibKJFeWUZX9Pr0dLb9ULk0fXY6LD2AgX6JHrMPL3jrO/RHe38lnXue5W40
- wTlHfDJOTBtbTO5kt0ddUTj7pk8GyyiyWPzJA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=R/zGyM1pGK6ChzIUR+Sd75zOSrDkJ/6UBtEovIC/ytE=;
- b=JGg+Sh5wI+kHqUHqYNGDHJS4TV9YaBZanggXrF5p2A+TNfIoRhdsxfZkn5AUoH5AOs
- 0Qc8RsYA4LfDL9pYjhWNpd+3A99nfXWifVOo22OLOFuQQUXnfp2e/zeD3Pri1DNars4P
- 0nii23M6IZImIHveXcTI61+0eXfdJ9ubhzgc0JqZz4Y8eCZM+vGw6kxLh49niqkwdkB2
- sWZvI6AJcWw/8SrYBIXeI+iTfl+8PXbMD/NgwYbR0gHHKImh8NOfdJxJwV9PxvpFPdfP
- QAn6heOL2m5LNXbS5rcCOEWMcjdCpAccmHQyBKpl3YBC2P4+q3a7lSa3yQPq/6Quyqwf
- Wocw==
-X-Gm-Message-State: APjAAAX7rMEYSioEaXTM4Djh/qXInE4x447O3qr8IzQdFeMt1WuEgtjR
- uJHoABkFYiNs9EluWzHW5r6Tug==
-X-Google-Smtp-Source: APXvYqwOMKnNkgaARqNJdtU/ldN+/JEfgFv5IdQvQr/2pn0vgWjdJeoIFoBSnwNntO8dHwPCmdK8Gw==
-X-Received: by 2002:a0d:e848:: with SMTP id r69mr6080501ywe.9.1575299768604;
- Mon, 02 Dec 2019 07:16:08 -0800 (PST)
-Received: from bill-the-cat
- (2606-a000-1401-86dd-9968-44d6-e18d-7edd.inf6.spectrum.com.
- [2606:a000:1401:86dd:9968:44d6:e18d:7edd])
- by smtp.gmail.com with ESMTPSA id v186sm4843483ywv.34.2019.12.02.07.16.07
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 02 Dec 2019 07:16:07 -0800 (PST)
-Date: Mon, 2 Dec 2019 10:16:05 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20191202151605.GR15966@bill-the-cat>
-References: <efb401d88d4140e2a2fa7f434bf86447@SFHDAG6NODE3.st.com>
+ Tue,  3 Dec 2019 08:38:48 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xB38aq5P004482; Tue, 3 Dec 2019 09:38:42 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=Z9HNoPl6fyZR2xcfWdHUSHYt9ahcUkC5x3cqKkJjpAA=;
+ b=xsSDXeo9WuceFgnT05a/ZrZac14JTGFguH3gv1FSfvZRl0xTE0WdhLoqElcMIOwDEQFI
+ 8SWfZht1yFHuzZ+eirn4umKxOODKza3hW+6MSyRH7S7AvdMQ2gNCb5oD8Zif5ohv/7HL
+ oY5OorLlIN2eQD/IRh29VKgzHa5EQrfB5zFtcXLff8MBUNP83P+a9JHPpxt0MXkwLhFe
+ E6VH6IQYlZ2NkMr1DlzgDjryM1oKZ6mrjOn9hjTw1uAHK8AV5SMZz5h9xfUzF5rkIWSH
+ y1WKAewh71KTy6b7mmt5EUd7wt0BuuNQ1nbg2UIDcprGG47yDp8WhZGbmdYjxHXiyByh XA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2wkee9xcm5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Dec 2019 09:38:42 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9C1FE100034;
+ Tue,  3 Dec 2019 09:38:41 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 912C32A8D1E;
+ Tue,  3 Dec 2019 09:38:41 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Tue, 3 Dec 2019 09:38:41 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 3 Dec 2019 09:38:35 +0100
+Message-ID: <20191203083835.6898-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <efb401d88d4140e2a2fa7f434bf86447@SFHDAG6NODE3.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
-	u-boot-stm32-20191126
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG8NODE1.st.com (10.75.127.22) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2019-12-03_01:2019-11-29,2019-12-03 signatures=0
+Cc: Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] cmd: pxe: execute the cls command only when
+	supported
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,93 +68,42 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6200654749212367160=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Execute the command cls (for clear screen), when the "menu background"
+keyword is present in extlinux.conf file, only if the command is supported.
 
---===============6200654749212367160==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3TQuZyvpu40ebvIM"
-Content-Disposition: inline
+This patch avoid the warning "Unknown command 'cls'"
+with "menu background" in extlinux.conf when CONFIG_CMD_BMP is activated
+and CONFIG_CMD_CLS not activated (default for CONFIG_DM_VIDEO).
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
---3TQuZyvpu40ebvIM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ cmd/pxe.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On Wed, Nov 27, 2019 at 01:42:24PM +0000, Patrick DELAUNAY wrote:
-
-> Hi Tom
->=20
-> Please pull the STM32 related patches for u-boot-stm32-20191126
->=20
-> With the following changes:
-> - Solve warning for stih410-b2260
-> - Device tree alignment on v5.4-rc4 for all stm32 boards
-> - Correct the eMMC pin configuration on stm32mp157c-ev1
-> - Add DFU and SPI-NAND support for stm32mp1 board
->=20
-> Travis CI status:
->      https://travis-ci.org/patrickdelaunay/u-boot/builds/617166580
->=20
-> Thanks,
-> Patrick
->=20
-> The following changes since commit 4b19b89ca4a866b7baa642533e6dbd67cd832d=
-27:
->=20
->   Merge tag 'rpi-next-2020.01' of https://github.com/mbgg/u-boot (2019-11=
--25 12:56:27 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20191126
->=20
-> for you to fetch changes up to b4fee1610864036c8363e552f8547e99b1100f0b:
->=20
->   stm32mp1: add support for virtual partition read (2019-11-26 10:14:35 +=
-0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---3TQuZyvpu40ebvIM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl3lKrUACgkQh/n2NdMd
-dlJO4g//SIqS4pEBwKdKtMTgYtBYxO0Bz9G/TuOy0+IAv7XFyf2Wzx9Z4UKUYV0x
-PGgQaAh0Ynd8tys6aniWucN56gMissB5bE5BDdxC6C8tf4skyICT7h/+yYYwSano
-9liKamfHbF74T5S9nbIw70GpldlqpnuUR6qQd/U9oNZ/wD7ZdNBsVxHWJ/nORcFv
-kHfZYodGVUhEH5fAZWbWtySPRmHd0VDjrbE2LFH6Cl0dClbZC0+bdqmoAcnOpLgR
-GXMsdru9j0z8wYuKOnvgsjAyAVWsEMqy5NB7WcOH6QFOkh0YwbTa745y02ncr1v4
-+QQ2b0jUI02MayFkJ54WZqaTeUmSJu87+2FSNJnXKDKBwW+kpvL2byjoVFvcJlZS
-br/U3OQBokFv0XY6csed3tFv1dZ4G6WeT84/2KHGI9rmmfgCZlnnzby6hCYF+qbD
-OBlpnaz+BgyzOqr4/DSzWdS3wD1om8Tb0fR51GUwfeaj1/lin51R9MsHKvx6aWfv
-h7IPUxG9LUphFOIsdvMReXUqn0KvIy1gwR2aBuGmYOVZ+9HXY4vrVAPkzHTgGPLh
-aQtFTaPgiVRCV3TI10S0V6oaKrP4mGxxZuA8sLn8tizLMnSZRWMu0vT0TWcLIAqi
-jDgpZnVfaIYyGp+f1rpZWfdLSQuT/t9E54d5S5lk1rW1+3fmQN8=
-=Kfhf
------END PGP SIGNATURE-----
-
---3TQuZyvpu40ebvIM--
-
---===============6200654749212367160==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/cmd/pxe.c b/cmd/pxe.c
+index 2059975446..b62cb79b3a 100644
+--- a/cmd/pxe.c
++++ b/cmd/pxe.c
+@@ -1592,7 +1592,8 @@ static void handle_pxe_menu(cmd_tbl_t *cmdtp, struct pxe_menu *cfg)
+ 	/* display BMP if available */
+ 	if (cfg->bmp) {
+ 		if (get_relfile(cmdtp, cfg->bmp, load_addr)) {
+-			run_command("cls", 0);
++			if (CONFIG_IS_ENABLED(CMD_CLS))
++				run_command("cls", 0);
+ 			bmp_display(load_addr,
+ 				    BMP_ALIGN_CENTER, BMP_ALIGN_CENTER);
+ 		} else {
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6200654749212367160==--

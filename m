@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00B2A118D9F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 17:32:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DBE6118DB2
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 17:36:50 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B9BB4C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 16:32:36 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08DE1C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 16:36:50 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3718EC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C8AFBC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Dec 2019 16:32:32 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- xBAGV20I017085; Tue, 10 Dec 2019 17:32:28 +0100
+ Tue, 10 Dec 2019 16:36:48 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ xBAGWNvW009880; Tue, 10 Dec 2019 17:36:47 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=n9yg1ndAQOt/jArYumrrObpgZFZybjhbwR45qou8JpU=;
- b=Ky7Y80J8Stm5cC18N3R8IBHjnUOD0CvpGoP5F0dAAuh12ckjGF3u7HOahNyKKQmskjQu
- 8Ab1Rh2uh4QL8y9/60gIiK5vW2O2f5te8wkea2dqysmk5IgQm1tIdHckQYhyd1pSxPEa
- HOUHBEISPwbkCliM8d1gfE4jU62sBUhO6HISvkZOVTfp0Z/iUbCSm5G3at/rnEg7gCVV
- jDdfT+O9EHAphEY2yS0RgGTwVHT5qv6q456nYoto9av66tpCC+MIJ6nTaDLsem4ksTz5
- HovDP5RGr27E96MN7E0LJ5Rvh6v45ycKeKBetXZz8DSvLaCRhjwKiL2ugju6R2Jjwkl/ eQ== 
+ bh=quxERYDjKnMVENvgbQ7wBFp4AfHo/YufQJntJ4/JwAM=;
+ b=vG0AOzO8vuECOhkpUupRieJcYapK1KhlcqDpSf7Cw68whCMCmWQsA7/DYXiwkIB9a30b
+ TiJHgIVmpBcBfSbrpsRQs323OlBOumtcwc4DPMg9/mcIU1947b+h1hjses4PjQWPLOqU
+ LbDxZn1S8ziodcfox31mgknIrEVCh92XfTvigvUzBTIAfEvX93KDYEAocb0eOpqfqu1r
+ TEaqfnWsqBcDDozSgQ+U6OL6EBPPFfN3/n5eLWKcGrQ/bgh/3XV+O7EfsA1gkwR+6xd8
+ HI1UzYMp+iqxROCFmu64lkA55FLFiU/aXkOnNXoq3UQDFopa1nl1BI0euDb+87/KeO07 ag== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2wt5wutucd-1
+ by mx08-00178001.pphosted.com with ESMTP id 2wrbrfdkdj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 Dec 2019 17:32:28 +0100
+ Tue, 10 Dec 2019 17:36:46 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 17860100038;
- Tue, 10 Dec 2019 17:32:28 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag7node3.st.com [10.75.127.21])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0CCB72B188D;
- Tue, 10 Dec 2019 17:32:28 +0100 (CET)
-Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG7NODE3.st.com
- (10.75.127.21) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 10 Dec
- 2019 17:32:27 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7A356100034;
+ Tue, 10 Dec 2019 17:36:46 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag3node3.st.com [10.75.127.9])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6DF7D2BAB6C;
+ Tue, 10 Dec 2019 17:36:46 +0100 (CET)
+Received: from SFHDAG5NODE3.st.com (10.75.127.15) by SFHDAG3NODE3.st.com
+ (10.75.127.9) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 10 Dec
+ 2019 17:36:45 +0100
 Received: from SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47]) by
  SFHDAG5NODE3.st.com ([fe80::7c09:5d6b:d2c7:5f47%20]) with mapi id
- 15.00.1473.003; Tue, 10 Dec 2019 17:32:27 +0100
+ 15.00.1473.003; Tue, 10 Dec 2019 17:36:45 +0100
 From: Fabien DESSENNE <fabien.dessenne@st.com>
 To: Simon Glass <sjg@chromium.org>
 Thread-Topic: [PATCH 1/5] remoteproc: elf_loader: Add elf resource table load
  support
-Thread-Index: AQHVfrdZXIgBjTwjO0e3NTujI/CKL6dltLeAgACc2oCADCjXAIAAhmkAgEDLEoCAABS8gA==
-Date: Tue, 10 Dec 2019 16:32:27 +0000
-Message-ID: <9b62716d-cc5b-bc32-f1db-69897663e88f@st.com>
+Thread-Index: AQHVfrdZXIgBjTwjO0e3NTujI/CKL6dltLeAgACc2oCADCjXAIAAhmkAgEDLEoCAABXvgA==
+Date: Tue, 10 Dec 2019 16:36:45 +0000
+Message-ID: <64b6f3f8-8f3c-a41d-70f9-87386f12946a@st.com>
 References: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
  <1570635389-8445-2-git-send-email-fabien.dessenne@st.com>
  <CAPnjgZ33+J-10WgcmFBjGuqJ90caJFj7mGy+vApbxAyymCXvZw@mail.gmail.com>
@@ -66,8 +66,8 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
-Content-ID: <C5BBC8CFE87CBC4EA1E9F8E583566FC3@st.com>
+x-originating-ip: [10.75.127.44]
+Content-ID: <27C88393264C824BBAB6DE641800E83E@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-12-10_04:2019-12-10,2019-12-10 signatures=0
@@ -95,7 +95,9 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
+Btw, I sent a v2 for this patch:
+
+https://www.mail-archive.com/u-boot@lists.denx.de/msg346085.html
 
 
 On 10/12/2019 4:18 PM, Simon Glass wrote:
@@ -152,35 +154,11 @@ On 10/12/2019 4:18 PM, Simon Glass wrote:
 >> System that can be read by both U-Boot and Linux.
 >>
 > Where is the coprocessor firmware stored, then?
-
-Please have a look to [STM32MP15_Flash_mapping] which describes how 
-u-boot, linux and the coprocessor firmwares can be stored in flash memory.
-
-Both U-boot and Linux use an EXT4 filesystem (eg bootfs partition) to 
-read the coprocessor .elf firmware file.
-
-
-When it is read (it is then in DDR), U-boot or Linux parses it, in order 
-to copy the resource table and the different ELF segments into 
-appropriate memory addresses.
-
-[STM32MP15_Flash_mapping] 
-https://wiki.st.com/stm32mpu/wiki/STM32MP15_Flash_mapping
-
-
 >
 >> If we have the firmware packed in the image (for U-Boot), we need to
 >> have a copy in the FileSystem (for Linux) which would not be a good idea.
 > What type of filesystem do you use? I don't see any filesystem access
 > in this patch though.
-
-
-As described above, an EXT4 filesystem is a good example.
-
-This patch is not about filesystem but about how the .elf contents 
-available in DDR memory (after is has been loaded from somewhere) is parsed.
-
-
 >
 >> BR
 >> Fabien

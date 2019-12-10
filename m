@@ -2,47 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C00361184E5
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 11:22:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7BB5118C59
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 16:18:23 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F0639C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 10:22:29 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7E84DC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2019 15:18:23 +0000 (UTC)
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
+ [209.85.167.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0919EC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3AE5BC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Dec 2019 10:22:29 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 47XGMl5RsMz1qql9;
- Tue, 10 Dec 2019 11:22:27 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 47XGMl4rdnz1rjrG;
- Tue, 10 Dec 2019 11:22:27 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id MOjshgQ33qbI; Tue, 10 Dec 2019 11:22:26 +0100 (CET)
-X-Auth-Info: +utLpJ32UE1patyGLfp1qG4AZPl8SMsUXtV9Leonc4w=
-Received: from crub (p5483338F.dip0.t-ipconnect.de [84.131.51.143])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 10 Dec 2019 11:22:26 +0100 (CET)
-Date: Tue, 10 Dec 2019 11:22:26 +0100
-From: Anatolij Gustschin <agust@denx.de>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20191210112226.2231558c@crub>
-In-Reply-To: <20191120131116.20620-3-patrice.chotard@st.com>
-References: <20191120131116.20620-1-patrice.chotard@st.com>
- <20191120131116.20620-3-patrice.chotard@st.com>
+ Tue, 10 Dec 2019 15:18:22 +0000 (UTC)
+Received: by mail-oi1-f196.google.com with SMTP id a67so10111458oib.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 10 Dec 2019 07:18:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=2s+HzxtxxhGUlWXz+PnhEKMkjWWi4RbmseTgRiLkmkY=;
+ b=ADgqqKYwQviAo3YrNZkaouvA7PyGhbQNh5zv2gSUsyyDQpksojciM7pRByM+2ZYamc
+ 76d3Vb4lbljoeRWFJZ0zP1KqI6g88hzCRnpwTHDUZ5UVxqsvHscGMOcixGSkfWWD80Gl
+ yGNYojoPLToeBGioH6nluPEZmBBExE7WKknBs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=2s+HzxtxxhGUlWXz+PnhEKMkjWWi4RbmseTgRiLkmkY=;
+ b=jxBTg+7GZYzkvJNscIjFEj2V1GmrcFWEIMQRYZqqwXVLvJ6ikx2Su0+4fzXBtHBUru
+ CjiP3DVbd9QqPNl+8YMXK7QNIIxyI6FGnJgbfAppBmfnpo/j5OTJ8JlZB/PXt8Bq5oAk
+ lkpSbTVUO0Fn3/htvt8e90+vxCZ2waTbgOQCRoIP7Uj9QlYbrfWksGEPfMuQhAueNdZc
+ Hjs9KkHrK8D1bN2c8irCEb4ihhTG7WHvnZi28I2MgHrKHakm3ws1PfT09no0DmFynfbt
+ z/eaLGepg4WAnmQsLh4e5Ue3VpPrripXPSeiqGKbAIifXvT2pPtN13yzuL0OGuuhf6Tq
+ 9A6w==
+X-Gm-Message-State: APjAAAWZXGBNM2VBPwV3z13S3R6QW46NM1Hj3fZcWr8aUGZiK6F8ZYo+
+ +YYp+w3xTEuweeJXxiEvf+p0ZSUaJaRTTddDyvHouA==
+X-Google-Smtp-Source: APXvYqyImN6uUSXoqJXiaq3DXtf8647massY7zP1+1yCMdY1MjF5mxkd3g+mjFpaKfxy1KD/orqzBKmA0tTTF6wGgLI=
+X-Received: by 2002:aca:3a41:: with SMTP id h62mr4475479oia.97.1575991100175; 
+ Tue, 10 Dec 2019 07:18:20 -0800 (PST)
 MIME-Version: 1.0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Yannick =?UTF-8?B?RmVydHLDqQ==?= <yannick.fertre@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/2] video: bmp: Fix
-	video_display_rle8_bitmap()
+References: <1570635389-8445-1-git-send-email-fabien.dessenne@st.com>
+ <1570635389-8445-2-git-send-email-fabien.dessenne@st.com>
+ <CAPnjgZ33+J-10WgcmFBjGuqJ90caJFj7mGy+vApbxAyymCXvZw@mail.gmail.com>
+ <9a098f3c-250c-d589-70d3-6dcfe0fbdc93@st.com>
+ <CAPnjgZ3mf-edo-_kWRqz4o4mh34rOzw76sxo6bPE6yJ3XuJEvQ@mail.gmail.com>
+ <7843e136-32cf-bdf0-d27c-db85651c4f9d@st.com>
+In-Reply-To: <7843e136-32cf-bdf0-d27c-db85651c4f9d@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 10 Dec 2019 08:18:15 -0700
+Message-ID: <CAPnjgZ36zJWaqgbnEWUN4gK3DC5ppaK+YA3gMKmu+WmK8aK64g@mail.gmail.com>
+To: Fabien DESSENNE <fabien.dessenne@st.com>
+Cc: Christophe KERELLO <christophe.kerello@st.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Arnaud POULIQUEN <arnaud.pouliquen@st.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/5] remoteproc: elf_loader: Add elf
+	resource table load support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -59,18 +75,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, 20 Nov 2019 14:11:16 +0100
-Patrice Chotard patrice.chotard@st.com wrote:
-... 
-> Changes in v2: None
-> 
->  drivers/video/video_bmp.c | 8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
+Hi Fabien,
 
-Applied to u-boot-video/master, thanks!
+On Wed, 30 Oct 2019 at 03:50, Fabien DESSENNE <fabien.dessenne@st.com> wrote:
+>
+> Hi Simon
+>
+> On 30/10/2019 2:49 AM, Simon Glass wrote:
+> > Hi Fabien,
+> >
+> > On Tue, 22 Oct 2019 at 03:08, Fabien DESSENNE <fabien.dessenne@st.com> wrote:
+> >> Hi Simon,
+> >>
+> >>
+> >> On 22/10/2019 1:47 AM, Simon Glass wrote:
+> >>> Hi Fabien,
+> >>>
+> >>> On Wed, 9 Oct 2019 at 09:36, Fabien Dessenne <fabien.dessenne@st.com> wrote:
+> >>>> Add rproc_elf_load_rsc_table(), which searches for a resource table in
+> >>>> an elf64/elf32 image, and if found, copies it to device memory.
+> >>>> Add also the elf32 and elf64 variants of this API.
+> >>>> Add a test for this.
+> >>>>
+> >>>> Signed-off-by: Fabien Dessenne <fabien.dessenne@st.com>
+> >>>> ---
+> >>>>    drivers/remoteproc/rproc-elf-loader.c | 269 ++++++++++++++++++++++++++++++++++
+> >>>>    include/remoteproc.h                  |  70 +++++++++
+> >>>>    test/dm/remoteproc.c                  |  91 ++++++++++--
+> >>>>    3 files changed, 419 insertions(+), 11 deletions(-)
+> >>>>
+> >>> If you are putting stuff in the image, should you use binman to build
+> >>> the image, then find the contents using the binman tables?
+> >>
+> >> The "resource table" may be located anywhere, there is no strict rule
+> >> defining where it is expected to be.
+> >>
+> >> Nevertheless the Linux remoteproc[1] and OpenAmp (running RTOS) [2]
+> >> frameworks expect the resource table to be stored in a dedicated ELF
+> >> section. Both of them run some ELF scanning to find out this section.
+> >>
+> >> The proposed patch is for the "ELF section" variant of the resource table.
+> >> Other variants like binman packing may be proposed as well, both
+> >> implementations can coexist alongside.
+> > So why not use binman to pack the image and find the components? This
+> > is U-Boot, after all.
+> >
+>
+> Packing the firmware together with the other U-Boot components is
+> acceptable if the firmware is controlled only by U-Boot.
+> My requirement is that the coprocessor firmware shall be loaded by
+> U-Boot or by Linux.
+>
+> You can have a look at [1] for more details on the way this is handled
+> on STM32 MPU. In that case, the .elf firmware is stored in a in File
+> System that can be read by both U-Boot and Linux.
+>
 
---
-Anatolij
+Where is the coprocessor firmware stored, then?
+
+> If we have the firmware packed in the image (for U-Boot), we need to
+> have a copy in the FileSystem (for Linux) which would not be a good idea.
+
+What type of filesystem do you use? I don't see any filesystem access
+in this patch though.
+
+>
+> BR
+> Fabien
+>
+> [1] https://wiki.st.com/stm32mpu/index.php/Boot_chains_overview
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

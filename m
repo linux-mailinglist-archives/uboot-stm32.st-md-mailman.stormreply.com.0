@@ -2,70 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B481122C4B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Dec 2019 13:52:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9C941230C3
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Dec 2019 16:46:44 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E872BC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Dec 2019 12:52:09 +0000 (UTC)
-Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
- [209.85.219.194])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6B37EC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Dec 2019 15:46:44 +0000 (UTC)
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB6EFC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 383ADC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 17 Dec 2019 12:52:08 +0000 (UTC)
-Received: by mail-yb1-f194.google.com with SMTP id b12so2146950ybg.6
+ Tue, 17 Dec 2019 15:46:42 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id j22so5688291oij.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 17 Dec 2019 04:52:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to
- :user-agent; bh=jpU6a8RMTHNKMoUvlOH0fYCXlCkjpvjrgNgGhI8qlTY=;
- b=reCbMbzrPSfi3VRXh5pSMg6aeApN40P2ud9XuPIT7zcQpYYUOwl+7mh6CYQk8KVx77
- L4a/rzyNt/WCFush4v6XmYwJ0FUoLMirScyRJ/ntmvjncGt9/7Tz6TgyRozudwM3kF+A
- e8pB9yImhk53M8oYAJIvP7316RueMZnpXDsbs=
+ Tue, 17 Dec 2019 07:46:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=fpkjR9FjXutv95UlWnUFLahF5fQqgNRgQqepLcIpPwM=;
+ b=YIPRkptbwAmtzWOeR4GX4lGVoL1/I802M2cqQ7TTeZYHpSCE7M+xj81hcHcKgaldCW
+ IlzRLghXHrc4iNk/YBPqzwcoFv8g7yM3sQDEG+Q9cJoF17oKoLan83ddXCzh5b+3b8rl
+ Ns1FVsVxT0ilkxDWdMupnlQPHlrCdPuLHeDx0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to:user-agent;
- bh=jpU6a8RMTHNKMoUvlOH0fYCXlCkjpvjrgNgGhI8qlTY=;
- b=YAU2NSnIPp+v2RU4CNQKv9mufMf9K00WndjAP3hGqvyiOLN6/ll7f/oCgz96TA1YfN
- s8jOIE+dYzVU7JdL36qcrw7VNvjCsqx+k4+jFKQTz8NNT0IiEdVjVquV5Bj91K0TxPOJ
- HJ+b58yt783uMadT3d4V/s14zLGpRVNAltVv/IQzp0OKUDhEkDhtD+w9bbXT6XL2/WlA
- hc57okWuYfqWsz4ZRn4y70v94Way5nVYJ4IpOd9Q41K8yNn8hPZYVOlypypHK4T5VE6l
- R+iOadjzazsvFpMcOz+/cUAFc+0JKAto+SfrIEBvkf1laj1ge8JD5WWPkRDICfCAqyPg
- qLNQ==
-X-Gm-Message-State: APjAAAV5saWfbu4Rs3pblSMYj+rH5dfFOx9vIo7H7p4yIYQ8Gs5nLdxZ
- aB2gr80QA/Du13ztq0mEsuuVkQ==
-X-Google-Smtp-Source: APXvYqzSF9BxleaxIsEQJKS+NIbXSn5oiDL5ojTmEeDUQkb2SECOlIvKpfD3FD5PDHoZJb6BiIfTbA==
-X-Received: by 2002:a25:26d0:: with SMTP id m199mr16493131ybm.38.1576587127298; 
- Tue, 17 Dec 2019 04:52:07 -0800 (PST)
-Received: from bill-the-cat
- (2606-a000-1401-86dd-b1f8-850d-9a2e-1e49.inf6.spectrum.com.
- [2606:a000:1401:86dd:b1f8:850d:9a2e:1e49])
- by smtp.gmail.com with ESMTPSA id e63sm9734484ywd.64.2019.12.17.04.52.06
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 17 Dec 2019 04:52:06 -0800 (PST)
-Date: Tue, 17 Dec 2019 07:52:04 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20191217125204.GA12668@bill-the-cat>
-References: <20191127091138.29223-1-patrice.chotard@st.com>
- <611198b18f8e404d9c63a3ab2a1410dd@SFHDAG6NODE3.st.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=fpkjR9FjXutv95UlWnUFLahF5fQqgNRgQqepLcIpPwM=;
+ b=qtmnmY8EXSBYhtSAm4sLXApntaDhN07PjK3aIA69KVXszuoOV7WB3lw/OYpgm9XAA5
+ qb9pwb0Kp9zwjXEI1lXQrf1H548WIxqbjW27G1bHldFnQp0nJj82tqourKVicuxnDORV
+ tJQk0iC7cUq6eT0EDZChAHsEV0mATr02hC3gPCe/Hroiz8OossUxpwPvwrKtF3dp908p
+ 9WNz1hBISgAB3ckqK7quj/ULTpxXPu47v0RRRImG9U0edH28nyvBmY3VFGZwC5Rmkv/S
+ vffyPiuH6pf2Ic8XWahxqFICGG4zHMm5piOirDyLkvdv22+cZuXVZgulPMeF+Qa7U1og
+ K7Cw==
+X-Gm-Message-State: APjAAAUZt0iiFeAlgQEDmBR8gHFrf4luEh51bJDgwg0JWo5kBgiEbBrt
+ CYWcoVsyYMjXWSw9Ta5La+7FyXE7PjhgEqg2Dwqa/Q==
+X-Google-Smtp-Source: APXvYqyhLjussJkVl3P+6EscMr246aR632XkoKBPYsv2hiOYLYpkUl/DfqIJgVg6/FL8Akw4vsr8fL18LoxHLsFB2/4=
+X-Received: by 2002:aca:5588:: with SMTP id j130mr1775986oib.122.1576597600428; 
+ Tue, 17 Dec 2019 07:46:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <611198b18f8e404d9c63a3ab2a1410dd@SFHDAG6NODE3.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20191127091138.29223-1-patrice.chotard@st.com>
+In-Reply-To: <20191127091138.29223-1-patrice.chotard@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 17 Dec 2019 08:46:29 -0700
+Message-ID: <CAPnjgZ2kK+kSAxSQTF7sRJ3_rBti4+35uSU9hrXqbh=sEpcX+w@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@st.com>
 Cc: Stephen Warren <swarren@nvidia.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
  Trevor Woerner <trevor@toganlabs.com>, Jagan Teki <jagan@amarulasolutions.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Vikas MANOCHA <vikas.manocha@st.com>
+ Vikas Manocha <vikas.manocha@st.com>
 Subject: Re: [Uboot-stm32] [PATCH v3] board_f.c: Insure gd->new_bootstage
 	alignment
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -84,45 +72,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, Dec 16, 2019 at 11:53:48AM +0000, Patrick DELAUNAY wrote:
-> Hi Tom,
-> 
-> > From: Patrice CHOTARD <patrice.chotard@st.com>
-> > Sent: mercredi 27 novembre 2019 10:12
-> > 
-> > In reserve_bootstage(), in case size is odd, gd->new_bootstage is not aligned. In
-> > bootstage_relocate(), the platform hangs when getting access to data-
-> > >record[i].name.
-> > To avoid this issue, make gd->new_bootstage 16 byte aligned.
-> > 
-> > To insure that new_bootstage is 16 byte aligned (at least needed for
-> > x86_64 and ARMv8) and new_bootstage starts down to get enough space,
-> > ALIGN_DOWN macro is used.
-> > 
-> > Fixes: ac9cd4805c8b ("bootstage: Correct relocation algorithm")
-> > 
-> > Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> > Reviewed-by: Vikas MANOCHA <vikas.manocha@st.com>
-> > Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > 
-> 
-> Do you plan to merge this fixe for the next rc for v2020.01 ?
-> Or do you expect some change / review.
->
-> This patch is mandatory for stm32mp1 (ARM plaform with bootstage
-> feature activated).
-> Without this patch, the boot failed (at least for v2020.01-rc3 : crash
-> has struct pointer new_bootstage is not aligned).
-> 
-> Or I will deactivate the BOOTSTAGE feature...
- 
-I think at this point I would prefer dropping BOOTSTAGE from those
-boards for the release.  There's already been more than one "I think
-this is safe" followed by "this broke ..." changes I've tried.  Sorry!
+Hi Patrice,
 
--- 
-Tom
+On Wed, 27 Nov 2019 at 02:11, Patrice Chotard <patrice.chotard@st.com> wrote:
+>
+> In reserve_bootstage(), in case size is odd, gd->new_bootstage
+> is not aligned. In bootstage_relocate(), the platform hangs when
+> getting access to data->record[i].name.
+> To avoid this issue, make gd->new_bootstage 16 byte aligned.
+>
+> To insure that new_bootstage is 16 byte aligned (at least needed for
+> x86_64 and ARMv8) and new_bootstage starts down to get enough space,
+> ALIGN_DOWN macro is used.
+>
+> Fixes: ac9cd4805c8b ("bootstage: Correct relocation algorithm")
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Reviewed-by: Vikas MANOCHA <vikas.manocha@st.com>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
+
+For this patch I think it would be better to update reserve_fdt() to
+keep things aligned, assuming that is the problem.
+
+At some point we should also document that reservations must keep
+things aligned.
+
+Perhaps this should be handled by a separate function called from all
+these places, which subtracts gd->start_addr_sp and ensures 16-byte
+alignment.
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

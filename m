@@ -2,64 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C896124854
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Dec 2019 14:26:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF24D12CB8F
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 02:21:21 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1F182C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Dec 2019 13:26:16 +0000 (UTC)
-Received: from mail-yw1-f54.google.com (mail-yw1-f54.google.com
- [209.85.161.54])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 49FA7C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 01:21:21 +0000 (UTC)
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
+ [209.85.167.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E4294C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCF41C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Dec 2019 13:26:14 +0000 (UTC)
-Received: by mail-yw1-f54.google.com with SMTP id u139so725128ywf.13
+ Mon, 30 Dec 2019 01:21:20 +0000 (UTC)
+Received: by mail-oi1-f195.google.com with SMTP id l9so7951122oii.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Dec 2019 05:26:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=wp9M3VsNUgpKP89w9sxSZuN34jU3mxlxdRW1xPYefbA=;
- b=a+wteXu3Vt6OOMbuUcQbZHoX26ARxoJz0YsFHkbE+70wJl+XwOF6m5IZy5SLidx2Ol
- ILt22tZPtqLSGQlwnmF9OGdAtI+391uE05Y4OuxFNvWjqfWou2BLhduZY9A+f+OaF7UQ
- mAZlSArS/VWnvPwbqDokVF9HeOE4Zt2m1vCBg=
+ Sun, 29 Dec 2019 17:21:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=q1J4uQplUOTSGWwj0z0f0ifYwRWQaZqnUyxk2+mRCVw=;
+ b=JCHtWFnTrdAMI2oxvcnTjmesrCVcuKVXa38mfDvntjed49JWtY+rH2+OvoBRnDYDpo
+ 7qEOvBc0H9fS5CXt/2gs5DWYONtp+5r37beG0yosgqnACWo6ANzTE+54ElsiaHlOTqDs
+ DOXUqD6EoIfcXWi5UZsthq/ZYSF24gTVwEz4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=wp9M3VsNUgpKP89w9sxSZuN34jU3mxlxdRW1xPYefbA=;
- b=YU6qyygovNKsiZEbjdN5weWV18jgwcRxCNGBTawNCZbwOuVF9lftpZYgQmsWONC6q/
- cuz9TiPuf9mdWMK1D6nXPL0k1mHnXOla0q2ph2IggFKnzTms+UvfMOP5ZznK5PdRlOhu
- xk5/LSW3YIxjGWtfWTShxHVFBZLPk7jYP5+B0WzwKOnxGtl7Ct+nOcVTOosyuubI28bb
- cvMJMWWYqqB85y5QBogf60cbFwDrf+OBRj/rJwJM6TcwPqOxDHR6tkBHPDSZ5b9rnj5P
- zzXedfGrRNduu4BkrNEhbcdxPGPHUzmTx+VHmbTWt9pzQs8J3uSYORWlVTGSoYO+k2aK
- ccNw==
-X-Gm-Message-State: APjAAAXfavIH4Zsmvq64B537mE2epCOiOPuepoUThqzyOFovqseJSFUc
- jf7rPOvTNpHCcM9seL+Mahrpnw==
-X-Google-Smtp-Source: APXvYqwEwf2LPGJssXbJ50umpnG2Ght7WT9H58B8yt4N0zhTZvuTYOXHyryozSce/IE/L7hhJ7yj6Q==
-X-Received: by 2002:a0d:cb48:: with SMTP id n69mr1967817ywd.48.1576675573594; 
- Wed, 18 Dec 2019 05:26:13 -0800 (PST)
-Received: from bill-the-cat
- (2606-a000-1401-86dd-0414-167a-e8c4-5a16.inf6.spectrum.com.
- [2606:a000:1401:86dd:414:167a:e8c4:5a16])
- by smtp.gmail.com with ESMTPSA id 189sm938018ywc.16.2019.12.18.05.26.12
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 18 Dec 2019 05:26:12 -0800 (PST)
-Date: Wed, 18 Dec 2019 08:26:10 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20191218132610.GC18106@bill-the-cat>
-References: <38736df3b2ae4cf3b487e83cf5fae71c@SFHDAG6NODE3.st.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=q1J4uQplUOTSGWwj0z0f0ifYwRWQaZqnUyxk2+mRCVw=;
+ b=T3+yLO9iQoV+j8dU2ISC+MNRKtdyIAo7QwPvCOpwCRNDPXjx9GECvnM6CtkeRHkPyM
+ KJFh/m2dgHxO5u+y84L77T3ptABbE7FzZIhgiGuBgGptOaiC0nnvvbBHLRXaQbd0NWmw
+ /raSEL63Bz9em1O5dGgEWG+67VXreaFSJ/nIxKROH/j+OgXwhoO2LfYyLIMLUBX07m23
+ gQ7gwh003wlqb9y/IFfnCpvUqN9QQhjM0fPJeG0miBspi/CvsEnpLJYAE0Kk5uUrdXP7
+ Zn12zajKeyi5duS3YCkzE+2hNMqhLuu8LqlloNLha9myVu1B7GkeCIIV77FxQXJMrd3b
+ LBKA==
+X-Gm-Message-State: APjAAAWjgGGvKqL1QNd4i4t/SKZUPKYkZh9VaDz0lDzYbjKcP2LoCgL0
+ P9ZCY8D9nU9kvjH3yMK7dibVQP/iGTo6EI5kPJE0yw==
+X-Google-Smtp-Source: APXvYqyUSLw3T3s6pTvCc8SGYEnPV8Wcbw0UXkYYEiQcVi9X7FmOiVK096DV/HOllyjTttrUk89fstKFNvNVkNRyVTM=
+X-Received: by 2002:aca:3182:: with SMTP id x124mr5269382oix.170.1577668879276; 
+ Sun, 29 Dec 2019 17:21:19 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <38736df3b2ae4cf3b487e83cf5fae71c@SFHDAG6NODE3.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
-	u-boot-stm32-20191218
+References: <20191126084911.19761-1-patrick.delaunay@st.com>
+ <20191126084911.19761-2-patrick.delaunay@st.com>
+In-Reply-To: <20191126084911.19761-2-patrick.delaunay@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 29 Dec 2019 18:21:06 -0700
+Message-ID: <CAPnjgZ2Qh_Mbmnu=eptqNXJcJNne4Khs6GV2bTsbnOfGShZeEA@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Adam Ford <aford173@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 01/14] dm: pinctrl: convert
+	pinctrl-single to livetree
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,96 +62,32 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4072379567268731466=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On Tue, 26 Nov 2019 at 01:49, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+>
+> Convert 'pinctrl-single' using livetree functions
+> - dev_read_prop
+> - dev_read_u32_default
+> - dev_read_u32_array
+> - dev_read_bool
+> - dev_read_addr
+> and get rid of DECLARE_GLOBAL_DATA_PTR.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+> Changes in v2:
+> - use the dev_ API instead of ofnode_ function.
+>
+>  drivers/pinctrl/pinctrl-single.c | 27 +++++++++------------------
+>  1 file changed, 9 insertions(+), 18 deletions(-)
 
---===============4072379567268731466==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7iMSBzlTiPOCCT2k"
-Content-Disposition: inline
-
-
---7iMSBzlTiPOCCT2k
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Dec 18, 2019 at 12:13:29PM +0000, Patrick DELAUNAY wrote:
-
-> Hi Tom
->=20
-> Please pull the last STM32 related patches for v2020.01
->=20
-> Travis CI status:
->      https://travis-ci.org/patrickdelaunay/u-boot/builds/626655770
->=20
-> With the following fixes:
-> - fix crash for stm32mp1: remove the BOOTSTAGE feature
-> - fix warning for stm32mp1: add the missing cls command
->=20
-> And I also resync the stm32mp1 defconfig.
->=20
-> Thanks,
-> Patrick
->=20
-> git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u=
--boot-stm.git u-boot-stm32-20191218
-> warn: No match for commit eddd79291d2026f8fefebc3f5d39928d7c649241 found =
-at https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
-> warn: Are you sure you pushed 'u-boot-stm32-20191218' there?
-> The following changes since commit ef7c2af65966a57c98d3c47e6c2fe1ce2103b7=
-f6:
->=20
->   Prepare v2020.01-rc5 (2019-12-16 07:39:56 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git u-boot-stm32-20=
-191218
->=20
-> for you to fetch changes up to eddd79291d2026f8fefebc3f5d39928d7c649241:
->=20
->   stm32mp1: configs: Resync with savedefconfig (2019-12-18 11:58:36 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---7iMSBzlTiPOCCT2k
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl36KO4ACgkQh/n2NdMd
-dlKCvA/8DWYp+QJP8ZCWvIoKp9TW0u617v9SNZOwCC8czNOrnzDv8UKwhc9fU8Cc
-JNodxj4xnlbO/n9xMqOlc9u/0DIp+OhWpBbSMqDjBGBV/JSX6YUeC8OCyT/ADTOT
-YHXFBxVNis6TUHz8Uaqxx+Jt1SEx8gOsgvesyXIDMnobDmVdcgptnuIaHVzpkmQ6
-D3CJGxlpLbv6XzmHDb/l0JvH6UG53JzOfatLnXgjpILWPguw8VXjoufZ2SDguWcC
-geGiYjzJQicjM+NgpM6MOkVIFl6EWG8meiDCSgZxqZ+9jDinBSUsecgpCbjlXyC5
-pyyiT7vYHxFjRTVwvcbOeHC0oqIKLRAepM9PUoeYEiHQrAZKFvlq9mQEeVqs69/R
-5BFqXcudLaRls8ikAsboHLExWFiLDumt/BjCSo/Ixvrkuu33tlKR+2D4nV+90alK
-kHGrZoNZQqlnlobM0mRADsqBj9oGmWwEmTDcRwvCqWYI9vloE3RdBWM0LUZrlAjF
-cex5Y4Y910ewE/WXCq8W4F75oNyiLbYThYZLVLIIiqlhes0jWIEewsGDrmZ2uhxV
-wLiQ2ytMHs5i6hcQN83wZ3hBT1yUyUJhCZmC+tM/DQEEWZG0tjs/5PxRG6GHo/qn
-1QS104I2jLx4BsL4lZjnJGEnfAd7rvw9v37D1L+A8MAPCJ+IMrg=
-=jSk5
------END PGP SIGNATURE-----
-
---7iMSBzlTiPOCCT2k--
-
---===============4072379567268731466==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============4072379567268731466==--

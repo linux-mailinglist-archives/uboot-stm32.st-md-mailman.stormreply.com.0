@@ -2,55 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF24D12CB8F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 02:21:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A78312CB90
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 02:21:22 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 49FA7C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 01:21:21 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 50AD5C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Dec 2019 01:21:22 +0000 (UTC)
 Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
  [209.85.167.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCF41C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 65753C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 30 Dec 2019 01:21:20 +0000 (UTC)
-Received: by mail-oi1-f195.google.com with SMTP id l9so7951122oii.5
+ Mon, 30 Dec 2019 01:21:21 +0000 (UTC)
+Received: by mail-oi1-f195.google.com with SMTP id z64so4379544oia.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 29 Dec 2019 17:21:20 -0800 (PST)
+ Sun, 29 Dec 2019 17:21:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=q1J4uQplUOTSGWwj0z0f0ifYwRWQaZqnUyxk2+mRCVw=;
- b=JCHtWFnTrdAMI2oxvcnTjmesrCVcuKVXa38mfDvntjed49JWtY+rH2+OvoBRnDYDpo
- 7qEOvBc0H9fS5CXt/2gs5DWYONtp+5r37beG0yosgqnACWo6ANzTE+54ElsiaHlOTqDs
- DOXUqD6EoIfcXWi5UZsthq/ZYSF24gTVwEz4s=
+ :cc; bh=sIUwgRfJiadLEBrGrjOOvbWiBoO2bWrO3RYWcXS0Jds=;
+ b=jS0dHQOu8s46CQrMQixfjAZEaDoLyaGLMni/YTmyBat3Lb5WYNxn9glTrU+6C54VCj
+ Wu7iOUAN8pY3VsDHimHtmhlsuNEu4oar6s0k81LX6A2hqpr6UyOYF9CiAwhi063F483A
+ QPKps/FB7Fz4uQmDvwMgxTv4jpLecRnqS1Qm8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=q1J4uQplUOTSGWwj0z0f0ifYwRWQaZqnUyxk2+mRCVw=;
- b=T3+yLO9iQoV+j8dU2ISC+MNRKtdyIAo7QwPvCOpwCRNDPXjx9GECvnM6CtkeRHkPyM
- KJFh/m2dgHxO5u+y84L77T3ptABbE7FzZIhgiGuBgGptOaiC0nnvvbBHLRXaQbd0NWmw
- /raSEL63Bz9em1O5dGgEWG+67VXreaFSJ/nIxKROH/j+OgXwhoO2LfYyLIMLUBX07m23
- gQ7gwh003wlqb9y/IFfnCpvUqN9QQhjM0fPJeG0miBspi/CvsEnpLJYAE0Kk5uUrdXP7
- Zn12zajKeyi5duS3YCkzE+2hNMqhLuu8LqlloNLha9myVu1B7GkeCIIV77FxQXJMrd3b
- LBKA==
-X-Gm-Message-State: APjAAAWjgGGvKqL1QNd4i4t/SKZUPKYkZh9VaDz0lDzYbjKcP2LoCgL0
- P9ZCY8D9nU9kvjH3yMK7dibVQP/iGTo6EI5kPJE0yw==
-X-Google-Smtp-Source: APXvYqyUSLw3T3s6pTvCc8SGYEnPV8Wcbw0UXkYYEiQcVi9X7FmOiVK096DV/HOllyjTttrUk89fstKFNvNVkNRyVTM=
-X-Received: by 2002:aca:3182:: with SMTP id x124mr5269382oix.170.1577668879276; 
+ bh=sIUwgRfJiadLEBrGrjOOvbWiBoO2bWrO3RYWcXS0Jds=;
+ b=dZdN6BsEN3CzFiw1o+4auSl4zHC+uel6wPSgGdpgkcCEJ7bMVBPs6KAlNyHC/y2mKT
+ h4W028ds9zP0PGX4ZsCcFrvPpBKEjkE3b1B8XQ+qJmSW0PtqTvd4SiZxtrLkRJO9J58o
+ QVUlREgy8k+SN79mNq3bgscQAAb1zue7GB9eKCnCZL4HhXmfviUOxjqTISqVZvJ7jQ/I
+ MzJmYCiQOhRH9ImGIQt+nTRRHY9wmJGJY/IzBZERF2ijP8Z6IhFc6TG64xxGN6z7OneR
+ EKl2KAS+g7F1YbzYn4ygHn9HbdRaS1gJ5ZvwbtuUZ/OMFYTRvTNyY0sGW2Poq0I4aU57
+ lC4Q==
+X-Gm-Message-State: APjAAAVztTZTh/WHcd2C0AY+optaO9GikfB9g4cpn4u0m0V7mlDXPjMi
+ 0xKLXEexEpm7UtUSjpDzARP7VgIhAkeboih+Oww9Rw==
+X-Google-Smtp-Source: APXvYqz3edFvL7nVCqZE+4PRmM/V2spVGq+qSdjxTCtGjnTzP0aEm5mBsPdRYLTkz7ChTr4xzKkd1Vk+vQi4yml8cZE=
+X-Received: by 2002:a05:6808:150:: with SMTP id
+ h16mr4761912oie.130.1577668879845; 
  Sun, 29 Dec 2019 17:21:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20191126084911.19761-1-patrick.delaunay@st.com>
- <20191126084911.19761-2-patrick.delaunay@st.com>
-In-Reply-To: <20191126084911.19761-2-patrick.delaunay@st.com>
+ <20191126084911.19761-3-patrick.delaunay@st.com>
+In-Reply-To: <20191126084911.19761-3-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 29 Dec 2019 18:21:06 -0700
-Message-ID: <CAPnjgZ2Qh_Mbmnu=eptqNXJcJNne4Khs6GV2bTsbnOfGShZeEA@mail.gmail.com>
+Date: Sun, 29 Dec 2019 18:21:07 -0700
+Message-ID: <CAPnjgZ1YrAf5VQTTsXge6SLhU=hNV9SwZoa=nyeVozQ8PHzW-A@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Adam Ford <aford173@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 01/14] dm: pinctrl: convert
-	pinctrl-single to livetree
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2 02/14] dm: core: add ofnode and dev
+ function to iterate on node property
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,24 +70,55 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Tue, 26 Nov 2019 at 01:49, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Convert 'pinctrl-single' using livetree functions
-> - dev_read_prop
-> - dev_read_u32_default
-> - dev_read_u32_array
-> - dev_read_bool
-> - dev_read_addr
-> and get rid of DECLARE_GLOBAL_DATA_PTR.
+> Add functions to iterate on all property with livetree
+> - dev_read_first_prop
+> - dev_read_next_prop
+> - dev_read_prop_by_prop
+> and
+> - ofnode_get_first_property
+> - ofnode_get_next_property
+> - ofnode_get_property_by_prop
+>
+> For example:
+> struct ofprop property;
+>
+> dev_for_each_property(property, config) {
+>         value = dev_read_prop_by_prop(&property, &propname, &len);
+>
+> or:
+> for (prop = ofnode_get_first_property(dev_ofnode(dev));
+>      prop;
+>      prop = ofnode_get_next_property(dev_ofnode(dev),prop))
+> {
+>      value = ofnode_get_property_by_prop(dev_ofnode(dev), prop,
+>                                          &propname, &len);
+> ....
+> }
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
 > Changes in v2:
-> - use the dev_ API instead of ofnode_ function.
+> - Identify property with a new struct ofprop as proposed
+>   by Simon Glass
+> - Add dev_ iterate functions
 >
->  drivers/pinctrl/pinctrl-single.c | 27 +++++++++------------------
->  1 file changed, 9 insertions(+), 18 deletions(-)
+>  drivers/core/of_access.c | 32 +++++++++++++++++++
+>  drivers/core/ofnode.c    | 48 ++++++++++++++++++++++++++++
+>  drivers/core/read.c      | 16 ++++++++++
+>  include/dm/of_access.h   | 40 ++++++++++++++++++++++++
+>  include/dm/ofnode.h      | 63 ++++++++++++++++++++++++++++++++++++-
+>  include/dm/read.h        | 67 ++++++++++++++++++++++++++++++++++++++++
+>  6 files changed, 265 insertions(+), 1 deletion(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+These look good, but please add a few simple tests like in your commit message.
+
+See test/dm/ofnode.c, or you could add test/dm/read.c and just use the
+read interface which would be good enough It think, since tests run
+with and without livetree.
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

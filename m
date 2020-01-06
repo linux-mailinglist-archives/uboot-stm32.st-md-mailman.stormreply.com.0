@@ -2,63 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A4A12E3B6
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jan 2020 09:18:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B98D7131745
+	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jan 2020 19:11:21 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 264CDC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jan 2020 08:18:11 +0000 (UTC)
-Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
- [209.85.216.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6DCA5C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jan 2020 18:11:21 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D9A90C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1673AC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 21 Dec 2019 02:03:47 +0000 (UTC)
-Received: by mail-pj1-f67.google.com with SMTP id m13so4923802pjb.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 20 Dec 2019 18:03:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=9RI34rz99E+BS9F42TZllD4HxKir/yKWPjI+iQKTnFg=;
- b=qIuTz+ULfdlm8zi2KszedKrfkYfOzzcDwE4QL20SdVxhsXoOML7XUq9MzAgX/neZQ9
- j2YxwDHt4/5JQMKg7KaYrhGI4rXKAerHlNBP7Xzu+eoT4HbNkijIK6QH+epGEZdKAMVJ
- 1UqhjoF6Bv78NJ4cWUTrCPdH+sDS+EWYLZmpTRrpK2J3Ez/oh6UWRjoEXPzqKl6PMMNC
- ud04/RGocp1kNV7SUzvjQp7C2v819dCw0L4lEsyHVwZsVOBdR8PdiLDXVOeUGCj4aQi+
- wR9VU1dKIcQK6xN+W3lMAaAw6wh0G1E/YStGYsbTHIzaO/66jBp8kbI96F+Hv6nGR5zp
- YBKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=9RI34rz99E+BS9F42TZllD4HxKir/yKWPjI+iQKTnFg=;
- b=ju0qCrZD3xjek0bQ0TWrX1tGRhOHDJLwun0EJVfPL66bWREiuTrdstJBhttenTdBJY
- FVbxt4lG1DPTl4qToT2hfu9nlCrSgljdCyvVYCzuv4yI8v1UPKR6YmMhwHOeyp5h5wR3
- 1PbNUVyet69iRZpV+gOXioGR3sEw+YgPKIL2vWeUM7P/gSfTeO6p6X0jPqEeKApD6wAs
- zWsuXaovuhvHg4sgESYGTLP6OULlj3bTNNllQfzl+B9idN09Zr9RYdK3L6ihigXkwhtX
- dMw/1A3I6Xwa2PK3FOq1bY+oRggCE/NubizRn0n/hWBJjX92xLVGBgMSe+wjbk/0sT4r
- IK2Q==
-X-Gm-Message-State: APjAAAVahEw8s88HvZ2tSUtViyvkfcGBVr8l6PE4VnVTu4lHq8EhUA4c
- OyHWHpZ4dwCVJ7BhEeSqCrg=
-X-Google-Smtp-Source: APXvYqwloVWlScKdJhEq3nGlD6Q13mrN0mIxDfzwoNEyOfZ2ZKn+UnmGZmScxy9foFWizbY/6k11nQ==
-X-Received: by 2002:a17:90a:17c5:: with SMTP id
- q63mr19120387pja.138.1576893826253; 
- Fri, 20 Dec 2019 18:03:46 -0800 (PST)
-Received: from glados.lan ([2601:647:4c01:6541:fa16:54ff:fed1:1bd6])
- by smtp.gmail.com with ESMTPSA id g19sm14933515pfh.134.2019.12.20.18.03.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2019 18:03:45 -0800 (PST)
-From: Thomas Hebb <tommyhebb@gmail.com>
-To: u-boot@lists.denx.de
-Date: Fri, 20 Dec 2019 18:03:43 -0800
-Message-Id: <83634bb5ffff308a693021bf2729742c0b30b2cc.1576893816.git.tommyhebb@gmail.com>
-X-Mailer: git-send-email 2.24.1
+ Mon,  6 Jan 2020 18:11:19 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 006I37cL014026; Mon, 6 Jan 2020 19:11:17 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=tcddzMVNRJlzxw4JVNwnReip3LLv+QVo0T7F+su1vhs=;
+ b=adWnSSAXdsckUrrT12mkOPlAD5pE83ry5xBh7Xg5u6y0Upifh1GCXqAeOXZ0zQjLePBs
+ U6QiWw7N7q+gknegoNwCgmHRAmuQP6lP1FLPLaGb3VLgDxr8907Ic39MhcZV21jqFb8T
+ jMHzkLX8p2X6hgBfLxL9d2NZW/htTp8b82rYTmebMVzmIT6TskA5ugWt2VP3e/0BPGmt
+ BF6MGL8pTJ7c4x4BsbZd/e0jyOJwiYujL/q8+Sh3IR17J8JB1b76bAvFK68rLtYo787m
+ pHZqVdyBHhi7ktnpRc+jHXd2bOqxr5XOB5ITPAiTkD9iEQIontzkX1z5eJY/cYYxnZe7 DA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx08-00178001.pphosted.com with ESMTP id 2xakvb19gs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 06 Jan 2020 19:11:17 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 591E2100038;
+ Mon,  6 Jan 2020 19:11:16 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4E41D222244;
+ Mon,  6 Jan 2020 19:11:16 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 6 Jan
+ 2020 19:11:15 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 6 Jan 2020 19:11:15 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Thomas Hebb <tommyhebb@gmail.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] stm32mp: remove redundant SYS_TEXT_BASE prompt
+Thread-Index: AQHVt6LiHyeAAowEBUeVKk0nRq2rGKfeB/yg
+Date: Mon, 6 Jan 2020 18:11:15 +0000
+Message-ID: <b7a371977267481eaadb9b355e2262b1@SFHDAG6NODE3.st.com>
+References: <83634bb5ffff308a693021bf2729742c0b30b2cc.1576893816.git.tommyhebb@gmail.com>
+In-Reply-To: <83634bb5ffff308a693021bf2729742c0b30b2cc.1576893816.git.tommyhebb@gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
-X-Mailman-Approved-At: Thu, 02 Jan 2020 08:18:10 +0000
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Thomas Hebb <tommyhebb@gmail.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp: remove redundant SYS_TEXT_BASE prompt
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
+ definitions=2020-01-06_05:2020-01-06,2020-01-06 signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp: remove redundant SYS_TEXT_BASE
+	prompt
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,40 +77,65 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The main prompt for this (defined in /Kconfig) is visible at all times,
-which means there's no reason to have an additional, machine-specific
-prompt to set the same option.
+Hi Thomas,
 
-Signed-off-by: Thomas Hebb <tommyhebb@gmail.com>
----
+> From: Thomas Hebb <tommyhebb@gmail.com>
+> Sent: samedi 21 d=E9cembre 2019 03:04
+> =
 
- arch/arm/mach-stm32mp/Kconfig | 5 -----
- 1 file changed, 5 deletions(-)
+> The main prompt for this (defined in /Kconfig) is visible at all times, w=
+hich means
+> there's no reason to have an additional, machine-specific prompt to set t=
+he same
+> option.
+> =
 
-diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index ae28f6e206..bf8a18a0c3 100644
---- a/arch/arm/mach-stm32mp/Kconfig
-+++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -80,12 +80,7 @@ config STM32MP1_OPTEE
- 		OP-TEE monitor provides ST SMC to access to secure resources
- 
- config SYS_TEXT_BASE
--	prompt "U-Boot base address"
- 	default 0xC0100000
--	help
--		configure the U-Boot base address
--		when DDR driver is used:
--		  DDR + 1MB (0xC0100000)
- 
- config NR_DRAM_BANKS
- 	default 1
--- 
-2.24.1
+> Signed-off-by: Thomas Hebb <tommyhebb@gmail.com>
+
+Yes, thanks for notice it.
+
+It wasn't the case before the commit 278b90ce786f ('configs: Migrate CONFIG=
+_SYS_TEXT_BASE')
+merged before my first comit 2514c2d0e6abe (' arm: stm32: add new architect=
+ure for STM32MP family').
+
+And I miss it when I rebase my initial serie.
+
+Acked-by: Patrick Delaunay <patrick.delaunay@st.com>
+
+> ---
+> =
+
+>  arch/arm/mach-stm32mp/Kconfig | 5 -----
+>  1 file changed, 5 deletions(-)
+> =
+
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index ae28f6e206..bf8a18a0c3 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -80,12 +80,7 @@ config STM32MP1_OPTEE
+>  		OP-TEE monitor provides ST SMC to access to secure resources
+> =
+
+>  config SYS_TEXT_BASE
+> -	prompt "U-Boot base address"
+>  	default 0xC0100000
+> -	help
+> -		configure the U-Boot base address
+> -		when DDR driver is used:
+> -		  DDR + 1MB (0xC0100000)
+> =
+
+>  config NR_DRAM_BANKS
+>  	default 1
+> --
+> 2.24.1
 
 _______________________________________________
 Uboot-stm32 mailing list

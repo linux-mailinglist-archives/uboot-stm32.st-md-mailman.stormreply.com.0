@@ -2,61 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 730A6136A11
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Jan 2020 10:39:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E07731387E2
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Jan 2020 20:07:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E09DC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Jan 2020 09:39:51 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 94215C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Sun, 12 Jan 2020 19:07:01 +0000 (UTC)
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+ [209.85.166.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 58D8FC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DFBBBC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Jan 2020 09:39:47 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id 77so1339829oty.6
+ Sun, 12 Jan 2020 19:06:58 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id c16so7261813ioh.6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Jan 2020 01:39:47 -0800 (PST)
+ Sun, 12 Jan 2020 11:06:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=oF9pusWNybNOfRr3MKdMY0gs1Wyr9Ig63ryXijvi9II=;
- b=IvkShpwRzMG9ZfZC+7QSpEQqP+1MyZjD3IWhu5AgNKEdbLNLDVZRg4Dck96TJOvlLl
- nZyjli5us27Gb+eyJRSHY3AKH4RgLKL2pYPl208+oPR5RUh1eXbmk8usY9BxRdgQUUUJ
- nLWA1IbuR3JhSUsOz21rKLnfzi17DaNea6bbo=
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=OliDLNCfwyNfVeIHxO6RiVl1FnkrEQBSGKMidGcjc04=;
+ b=WgnjPy0s6xrhS29byRjt9A9tRtYgJ1ar6x1PZmZQd93x5Cugl91mlOWbAU2H5C7KPk
+ fQUzK8+BP4HnO87IBQLlLh8w9svJmHpjlMts7CNiUODs1s8FziiWsWeks3xz6zvxnVyM
+ Q/7gp4mARvDzS1s1+UTsK/I0IwGDjdHuDtdao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=oF9pusWNybNOfRr3MKdMY0gs1Wyr9Ig63ryXijvi9II=;
- b=bvBM62D/OVTb+AFfEN8dKE8V3LxRu6tSnYEVlqrv5X4u1fSJ6qgTtR+HWNHRUGPtE4
- +fsfJndonxZ6kSWOUvO6y8mawxrtCRCkNEgclLA/SfDDquy04/XK1CBRHG3C+IWJVwgU
- dCkwO91bX1Pe16fgG/BlfMi2MYhJHSd7ZHAfsSk/DC/bvKaGaeelWTs4X03NDAg+BO3e
- h7ule3mfnhBJFjrdyvzN4ctU0F45sZD7T5UGCCvDICdbjI/JOMkZeyOJ4z+DTzvQUo4y
- cnxl9UvV6SQh6Bi2O2lwxP4sdIBOHKpznF7JFiAAA/sTZoBlnM8j9+0vCFEq0PVVfa5t
- 6PwA==
-X-Gm-Message-State: APjAAAVdshYhELB0rAxPbzrQ5lQIcEwehT9vs8iItzqSUQDTb2HaAvkQ
- q29m8a66dcYqzrrRmVU7iSjH71S2HgiQRltRG6ddxA==
-X-Google-Smtp-Source: APXvYqz+GKmErwc2JVVTSma/wj6lOyXlKU2xs4x4ooDAnkOPTMFOnbFPg/SRpcxVxydX6Tc4kpc7bu+GovZdbxWoqM8=
-X-Received: by 2002:a9d:53c4:: with SMTP id i4mr1946058oth.48.1578649185990;
- Fri, 10 Jan 2020 01:39:45 -0800 (PST)
-MIME-Version: 1.0
-References: <20191126084911.19761-1-patrick.delaunay@st.com>
- <20191126084911.19761-15-patrick.delaunay@st.com>
- <CAPnjgZ2NNfwvxkY7jx9gWU0cWRDX_QMrYYrUCsdmf61pw_RHeA@mail.gmail.com>
- <18b4104304ad49e8a11d27ddcf0345ed@SFHDAG6NODE3.st.com>
-In-Reply-To: <18b4104304ad49e8a11d27ddcf0345ed@SFHDAG6NODE3.st.com>
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=OliDLNCfwyNfVeIHxO6RiVl1FnkrEQBSGKMidGcjc04=;
+ b=saHqS04ZZSD5jz4WUeRtaZ+UcQsD4fkmLc0hOpDm7O6ioyyvKI64RxEvMHke3NsvNH
+ RJ4dRartsoNjgEDguTUZrKiTGnh8FzllKImQ56JC5RNqyEJinDt0lMfvNXUYyTHKtbu4
+ FfFU61qBGj6VNHOHTZB+z9fvF8hgtXT4Kqir3/GWQYcf/VNPQ4yFKAs8/I8o2tAezvuF
+ bI0V1sffZapQ1jcAPMn5rnszbWTcSJLM3585xZMPsTzWKt4yVvV6WK3JiXTWlGhdEasT
+ hZdBPmpx0ZXBhP7KKYRJZrzcYQ4y/CiS7w99okQMxwwSDte5OxWa3XF552fWuLGStDqM
+ akwQ==
+X-Gm-Message-State: APjAAAW/XrJjGcV07uPW+cvOJ2xKszsmfsNej/ZOO+rcJdtQ2DrgZtyJ
+ 1WXOFADHG3KRkTUGc5366o/yRA==
+X-Google-Smtp-Source: APXvYqx8zFX38kMZSBCO+byxmGCAAvZlFlj0F9niPkuAltjQkhIMAkIpSKJRG+1nycDb2A1kVvBR+A==
+X-Received: by 2002:a5d:9f4f:: with SMTP id u15mr9833476iot.129.1578856017387; 
+ Sun, 12 Jan 2020 11:06:57 -0800 (PST)
+Received: from kiwi.bld.corp.google.com ([2620:15c:183:0:8223:87c:a681:66aa])
+ by smtp.gmail.com with ESMTPSA id
+ r22sm3039219ilb.25.2020.01.12.11.06.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Jan 2020 11:06:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Jan 2020 22:39:29 +1300
-Message-ID: <CAPnjgZ02ggJAhA+fA_gFmM_LE_9iqVrZY29g_53updrG5KNdqA@mail.gmail.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Alex Marginean <alexandru.marginean@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 14/14] test: pinmux: add
-	pincontrol-gpio for pin configuration
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 12 Jan 2020 12:05:55 -0700
+Message-Id: <20200112120216.4.I48608cdc95aee9e6e906d0e8d3b4169eeb104558@changeid>
+X-Mailer: git-send-email 2.25.0.rc1.283.g88dfdc4193-goog
+In-Reply-To: <20200112190624.79077-1-sjg@chromium.org>
+References: <20200112190624.79077-1-sjg@chromium.org>
+MIME-Version: 1.0
+Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@xilinx.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Ibai Erkiaga <ibai.erkiaga-elorza@xilinx.com>
+Subject: [Uboot-stm32] [PATCH 04/33] mailbox: Rename free() to rfree()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,47 +70,118 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgUGF0cmljaywKCk9uIFRodSwgOSBKYW4gMjAyMCBhdCAyMzozMCwgUGF0cmljayBERUxBVU5B
-WSA8cGF0cmljay5kZWxhdW5heUBzdC5jb20+IHdyb3RlOgo+Cj4gSGkgU2ltb24sCj4KPiA+IEZy
-b206IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3JnPgo+ID4gU2VudDogbHVuZGkgMzAgZMOp
-Y2VtYnJlIDIwMTkgMDI6MjEKPiA+Cj4gPiBPbiBUdWUsIDI2IE5vdiAyMDE5IGF0IDAxOjQ5LCBQ
-YXRyaWNrIERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QHN0LmNvbT4KPiA+IHdyb3RlOgo+ID4g
-Pgo+ID4gPiBBZGQgYSBzaW1wbGUgcGluY29udHJvbCBhc3NvY2lhdGVkIHRvIHRoZSBzYW5kYm94
-IGdwaW8gZHJpdmVyLCB0aGF0Cj4gPiA+IGFsbG93cyB0byBjaGVjayBwaW4gY29uZmlndXJhdGlv
-biB3aXRoIHRoZSBjb21tYW5kIHBpbm11eC4KPiA+ID4KPiA+ID4gVGhlIHBtdXggdGVzdCBpcyBh
-bHNvIHVwZGF0ZWQgdG8gdGVzdCBiZWhhdmlvciB3aXRoIDIgcGluY29udHJvbHMuCj4gPiA+Cj4g
-PiA+IEV4YW1wbGUgdG8gY2hlY2sgTEVEIHBpbiBjb25maWd1cmF0aW9uOgo+ID4gPgo+ID4gPiA9
-PiBwaW5tdXggbGlzdAo+ID4gPiB8IERldmljZSAgICAgICAgICAgICAgICAgICAgICAgIHwgRHJp
-dmVyICAgICAgICAgICAgICAgICAgICAgICAgfCBQYXJlbnQKPiA+ID4gfCBwaW5jdHJsLWdwaW8g
-ICAgICAgICAgICAgICAgICB8IHNhbmRib3hfcGluY3RybF9ncGlvICAgICAgICAgIHwgcm9vdF9k
-cml2ZXIKPiA+ID4gfCBwaW5jdHJsICAgICAgICAgICAgICAgICAgICAgICB8IHNhbmRib3hfcGlu
-Y3RybCAgICAgICAgICAgICAgIHwgcm9vdF9kcml2ZXIKPiA+ID4KPiA+ID4gPT4gcGlubXV4IGRl
-diBwaW5jdHJsLWdwaW8KPiA+ID4KPiA+ID4gPT4gcGlubXV4IHN0YXR1cwo+ID4gPgo+ID4gPiBh
-MCAgICAgICAgOiBncGlvIGlucHV0IC4KPiA+ID4gYTEgICAgICAgIDogZ3BpbyBpbnB1dCAuCj4g
-PiA+IGEyICAgICAgICA6IGdwaW8gaW5wdXQgLgo+ID4gPiBhMyAgICAgICAgOiBncGlvIGlucHV0
-IC4KPiA+ID4gYTQgICAgICAgIDogZ3BpbyBpbnB1dCAuCj4gPiA+IGE1ICAgICAgICA6IGdwaW8g
-b3V0cHV0IC4KPiA+ID4gYTYgICAgICAgIDogZ3BpbyBvdXRwdXQgLgo+ID4gPiAuLi4KPiA+ID4K
-PiA+ID4gU2VyaWUtY2M6IEhlaWtvIFNjaG9jaGVyIDxoc0BkZW54LmRlPgo+ID4gPiBTZXJpZS1j
-YzogU2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+Cj4gPgo+ID4gU2VyaWVzLWNjIDotKQo+
-Cj4gT3VwcyA6LSkKPgo+Cj4gPiA+Cj4gPiA+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2sgRGVsYXVu
-YXkgPHBhdHJpY2suZGVsYXVuYXlAc3QuY29tPgo+ID4gPgo+ID4gPiAtLS0KPiA+ID4KPiA+ID4g
-Q2hhbmdlcyBpbiB2MjoKPiA+ID4gLSBBZGFwdCBzYW5kYm94X3BpbmN0cmxfZ3BpbyBkcml2ZXIg
-d2l0aCB0aGUgc2F2ZWQgZGlyX2ZsYWdzIGluCj4gPiA+ICAgc2FuZGJveCBncGlvIGRyaXZlcgo+
-ID4gPiAtIHJlYmFzZSBvbiB2MjAyMC4wMS1yYzMKPiA+ID4KPiA+ID4gIGFyY2gvc2FuZGJveC9k
-dHMvdGVzdC5kdHMgICAgfCAgNDggKysrKystLS0tCj4gPiA+ICBkcml2ZXJzL2dwaW8vc2FuZGJv
-eC5jICAgICAgIHwgMTk1ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gPiA+
-ICB0ZXN0L3B5L3Rlc3RzL3Rlc3RfcGlubXV4LnB5IHwgIDEwICsrCj4gPiA+ICAzIGZpbGVzIGNo
-YW5nZWQsIDIzMSBpbnNlcnRpb25zKCspLCAyMiBkZWxldGlvbnMoLSkKPiA+Cj4gPiBSZXZpZXdl
-ZC1ieTogU2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+Cj4KPiBUaGFua3MgZm9yIHRoZSBy
-ZXZpZXcKPgo+IEkgYW0gcHJlcGFyaW5nIGEgdjMuCj4KPiBEbyB5b3UgdGhpbmsgSSBuZWVkIHRv
-IHNwbGl0IHRoZSBwYXRjaAo+ICAgICAgICAgW1BBVENIIHYyIDA4LzE0XSBncGlvOiBhZGQgb3Bz
-IGZvciBjb25maWd1cmF0aW9uIHdpdGggZGlyIGZsYWdzCj4KCkkgYW0gaW4gZmF2b3VyIG9mIHRo
-YXQuCgpSZWdhcmRzLApTaW1vbgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFp
-bG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20v
-bWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+This function name conflicts with our desire to #define free() to
+something else on sandbox. Since it deals with resources, rename it to
+rfree().
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ drivers/mailbox/k3-sec-proxy.c   | 2 +-
+ drivers/mailbox/mailbox-uclass.c | 4 ++--
+ drivers/mailbox/sandbox-mbox.c   | 2 +-
+ drivers/mailbox/stm32-ipcc.c     | 2 +-
+ drivers/mailbox/tegra-hsp.c      | 2 +-
+ include/mailbox-uclass.h         | 4 ++--
+ 6 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/mailbox/k3-sec-proxy.c b/drivers/mailbox/k3-sec-proxy.c
+index b07b56cf97..1194c6f029 100644
+--- a/drivers/mailbox/k3-sec-proxy.c
++++ b/drivers/mailbox/k3-sec-proxy.c
+@@ -291,7 +291,7 @@ static int k3_sec_proxy_recv(struct mbox_chan *chan, void *data)
+ struct mbox_ops k3_sec_proxy_mbox_ops = {
+ 	.of_xlate = k3_sec_proxy_of_xlate,
+ 	.request = k3_sec_proxy_request,
+-	.free = k3_sec_proxy_free,
++	.rfree = k3_sec_proxy_free,
+ 	.send = k3_sec_proxy_send,
+ 	.recv = k3_sec_proxy_recv,
+ };
+diff --git a/drivers/mailbox/mailbox-uclass.c b/drivers/mailbox/mailbox-uclass.c
+index 5968c9b7eb..a6d2d1f5b8 100644
+--- a/drivers/mailbox/mailbox-uclass.c
++++ b/drivers/mailbox/mailbox-uclass.c
+@@ -105,8 +105,8 @@ int mbox_free(struct mbox_chan *chan)
+ 
+ 	debug("%s(chan=%p)\n", __func__, chan);
+ 
+-	if (ops->free)
+-		return ops->free(chan);
++	if (ops->rfree)
++		return ops->rfree(chan);
+ 
+ 	return 0;
+ }
+diff --git a/drivers/mailbox/sandbox-mbox.c b/drivers/mailbox/sandbox-mbox.c
+index bc917b3de4..442ca633a1 100644
+--- a/drivers/mailbox/sandbox-mbox.c
++++ b/drivers/mailbox/sandbox-mbox.c
+@@ -87,7 +87,7 @@ static const struct udevice_id sandbox_mbox_ids[] = {
+ 
+ struct mbox_ops sandbox_mbox_mbox_ops = {
+ 	.request = sandbox_mbox_request,
+-	.free = sandbox_mbox_free,
++	.rfree = sandbox_mbox_free,
+ 	.send = sandbox_mbox_send,
+ 	.recv = sandbox_mbox_recv,
+ };
+diff --git a/drivers/mailbox/stm32-ipcc.c b/drivers/mailbox/stm32-ipcc.c
+index c3df9678a7..d4035a85f2 100644
+--- a/drivers/mailbox/stm32-ipcc.c
++++ b/drivers/mailbox/stm32-ipcc.c
+@@ -152,7 +152,7 @@ static const struct udevice_id stm32_ipcc_ids[] = {
+ 
+ struct mbox_ops stm32_ipcc_mbox_ops = {
+ 	.request = stm32_ipcc_request,
+-	.free = stm32_ipcc_free,
++	.rfree = stm32_ipcc_free,
+ 	.send = stm32_ipcc_send,
+ 	.recv = stm32_ipcc_recv,
+ };
+diff --git a/drivers/mailbox/tegra-hsp.c b/drivers/mailbox/tegra-hsp.c
+index 9bee886561..c463e6a2be 100644
+--- a/drivers/mailbox/tegra-hsp.c
++++ b/drivers/mailbox/tegra-hsp.c
+@@ -175,7 +175,7 @@ static const struct udevice_id tegra_hsp_ids[] = {
+ struct mbox_ops tegra_hsp_mbox_ops = {
+ 	.of_xlate = tegra_hsp_of_xlate,
+ 	.request = tegra_hsp_request,
+-	.free = tegra_hsp_free,
++	.rfree = tegra_hsp_free,
+ 	.send = tegra_hsp_send,
+ 	.recv = tegra_hsp_recv,
+ };
+diff --git a/include/mailbox-uclass.h b/include/mailbox-uclass.h
+index e0618aad97..3c60c76506 100644
+--- a/include/mailbox-uclass.h
++++ b/include/mailbox-uclass.h
+@@ -49,14 +49,14 @@ struct mbox_ops {
+ 	 */
+ 	int (*request)(struct mbox_chan *chan);
+ 	/**
+-	 * free - Free a previously requested channel.
++	 * rfree - Free a previously requested channel.
+ 	 *
+ 	 * This is the implementation of the client mbox_free() API.
+ 	 *
+ 	 * @chan:	The channel to free.
+ 	 * @return 0 if OK, or a negative error code.
+ 	 */
+-	int (*free)(struct mbox_chan *chan);
++	int (*rfree)(struct mbox_chan *chan);
+ 	/**
+ 	* send - Send a message over a mailbox channel
+ 	*
+-- 
+2.25.0.rc1.283.g88dfdc4193-goog
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51EBF138F3C
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A2FD138F3A
 	for <lists+uboot-stm32@lfdr.de>; Mon, 13 Jan 2020 11:35:35 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1DCFEC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 13 Jan 2020 10:35:35 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F12A2C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 13 Jan 2020 10:35:34 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 032ACC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D66FC36B0F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 13 Jan 2020 10:35:32 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Mon, 13 Jan 2020 10:35:33 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00DAScHQ021535; Mon, 13 Jan 2020 11:35:31 +0100
+ 00DASQwJ006869; Mon, 13 Jan 2020 11:35:32 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=64TG6TMPkFqmvQGjFtfnHWgNzXeUv+qxCQCzv1eo+TU=;
- b=YxJRysHeG9ZplYiChkndpldO0E1mi0be4dJvoeKCEFnruhqeanF4m6asw8RqGrXOi1F8
- hSeFz4V81fVS1GaGcJwIDft6KaXcquYU4IwX93pDeyBERjOOwx5D1fFkB65+B5oLTfu3
- tpMQAhgm+4fisf29WGhfZDnrfDqJcRC+EIKFLP+MWNvWUEg2+zy70uaxPmHmZNBgn1kI
- 9iVs2HckwXgTFs1QH9pvwJsBMaSCM5VHF62EXZ8gZosX/nwA/6E9puVLBLVeiI44SwQS
- kENl1JVX+jhXgGakXp8/bgjBKUHh/Fs0zH/xGsLL6fTO0psPwoXoz2NT6kb2R8GwZCao /w== 
+ bh=WKkl570VmqJ2IDAnKT3XVrYoCiJ4KHJAka0jjnjHHTQ=;
+ b=jIHhwWhXiWDKJBjSClSem1Ad43MlP8lbZas4A3+80ePSabm5KwZhbVu48g7VAIfGip2J
+ bCsup+iU2Jn3UfX0kxA4JHrNK6cCdCPnT4mQ6Gy6VUb2ZEwinfPXDs7/zWIiJrKv4X0C
+ zx6Qa7O/3r0styU0iDHcCqUMiYjc+dXNi4vVMI3ByqK6laMJEAFDdVNOhjWojQ6Yf3TQ
+ 7/eL9NeZcXQI0kcdJT+9gQCEhJxMUd9AQI4BFlMuhrV3+jn6dEpdwmAl2ZQHABR8WyY+
+ YKE3Vhi2okb4btqa/pewoYUmXJdjMpNVmspxuQq/apUEYNKTcspurMeIRYaGs01uL9P1 Lw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xf78ryk9x-1
+ by mx07-00178001.pphosted.com with ESMTP id 2xf7jp7hvx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 13 Jan 2020 11:35:31 +0100
+ Mon, 13 Jan 2020 11:35:32 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0CB8B100039;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B594410003A;
  Mon, 13 Jan 2020 11:35:27 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 01F0C2A96E8;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A9C552A96E8;
  Mon, 13 Jan 2020 11:35:27 +0100 (CET)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 13 Jan 2020 11:35:26 +0100
+ Mon, 13 Jan 2020 11:35:27 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 13 Jan 2020 11:35:07 +0100
-Message-ID: <20200113103515.20879-14-patrick.delaunay@st.com>
+Date: Mon, 13 Jan 2020 11:35:08 +0100
+Message-ID: <20200113103515.20879-15-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200113103515.20879-1-patrick.delaunay@st.com>
 References: <20200113103515.20879-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG4NODE2.st.com (10.75.127.11) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG5NODE1.st.com (10.75.127.13) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-01-13_02:2020-01-13,
@@ -57,8 +57,7 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>,
  Patrick Delaunay <patrick.delaunay@st.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH v3 13/21] gpio: add support of new GPIO
-	direction flag
+Subject: [Uboot-stm32] [PATCH v3 14/21] gpio: add ops to get dir flags
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,27 +74,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This commit manages the new dir flags that can be used in gpio
-specifiers to indicate the pull-up or pull-down resistor
-configuration for output gpio (GPIO_PULL_UP, GPIO_PULL_DOWN)
-or the Open Drain/Open Source configuration for input gpio
-(GPIO_OPEN_DRAIN, GPIO_OPEN_SOURCE).
+Add the ops for GPIO driver get_dir_flags(), allows to get dynamically
+the current gpio configuration; it is used by the API function
+dm_gpio_get_dir_flags().
 
-These flags are already supported in Linux kernel in gpio lib.
-
-This patch only parse and save the direction flags in GPIO
-descriptor (desc->flags), it prepares the introduction of new ops
-to manage them.
-The GPIO uclass supports new GPIO flags from device-tree
-(GPIO_XXX define in include/dt-bindings/gpio/gpio.h)
-and translate them in the dir flags (GPIOD_XXX):
-- GPIO_PULL_UP     => GPIOD_PULL_UP
-- GPIO_PULL_DOWN   => GPIOD_PULL_DOWN
-- GPIO_OPEN_DRAIN  => GPIOD_OPEN_DRAIN
-- GPIO_OPEN_SOURCE => GPIOD_OPEN_SOURCE
-
-This patch also adds protection in the check_dir_flags function for
-new invalid configuration of the dir flags.
+When these optional ops are absent, the gpio uclass continues to use
+the mandatory ops (direction_output, direction_input, get_value) and
+value of desc->flags to manage only the main dir flags:
+- GPIOD_IS_IN
+- GPIOD_IS_OUT
+- GPIOD_IS_OUT_ACTIVE
+- GPIOD_ACTIVE_LOW
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
@@ -107,78 +96,97 @@ This patch was part of v2 08/14
 Changes in v3:
 - Split the previous patch [PATCH v2 08/14] to help review
 
-Changes in v2: None
+Changes in v2:
+- change the proposed ops for pin config to set_dir_flags/get_dir_flags
+- reused the existing API dm_gpio_set_dir_flags/dm_gpio_set_dir
+- add a new API dm_gpio_get_dir_flags
 
- drivers/gpio/gpio-uclass.c | 30 ++++++++++++++++++++++++++++++
- include/asm-generic/gpio.h |  6 +++++-
- 2 files changed, 35 insertions(+), 1 deletion(-)
+ drivers/gpio/gpio-uclass.c | 31 +++++++++++++++++++++++++------
+ include/asm-generic/gpio.h | 15 +++++++++++++++
+ 2 files changed, 40 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 85f0b03f81..e02ef29fed 100644
+index e02ef29fed..89af37a4ea 100644
 --- a/drivers/gpio/gpio-uclass.c
 +++ b/drivers/gpio/gpio-uclass.c
-@@ -144,6 +144,24 @@ int gpio_xlate_offs_flags(struct udevice *dev, struct gpio_desc *desc,
- 	if (args->args[1] & GPIO_ACTIVE_LOW)
- 		desc->flags |= GPIOD_ACTIVE_LOW;
+@@ -613,19 +613,36 @@ int dm_gpio_set_dir(struct gpio_desc *desc)
  
-+	/*
-+	 * need to test 2 bits for gpio output binding:
-+	 * OPEN_DRAIN (0x6) = SINGLE_ENDED (0x2) | LINE_OPEN_DRAIN (0x4)
-+	 * OPEN_SOURCE (0x2) = SINGLE_ENDED (0x2) | LINE_OPEN_SOURCE (0x0)
-+	 */
-+	if (args->args[1] & GPIO_SINGLE_ENDED) {
-+		if (args->args[1] & GPIO_LINE_OPEN_DRAIN)
-+			desc->flags |= GPIOD_OPEN_DRAIN;
-+		else
-+			desc->flags |= GPIOD_OPEN_SOURCE;
+ int dm_gpio_get_dir_flags(struct gpio_desc *desc, ulong *flags)
+ {
+-	int ret;
++	struct udevice *dev = desc->dev;
++	int ret, value;
++	struct dm_gpio_ops *ops = gpio_get_ops(dev);
+ 	ulong dir_flags;
+ 
+ 	ret = check_reserved(desc, "get_dir_flags");
+ 	if (ret)
+ 		return ret;
+ 
+-	dir_flags = desc->flags;
+-	/* only GPIOD_IS_OUT_ACTIVE is provided by uclass */
+-	dir_flags &= ~GPIOD_IS_OUT_ACTIVE;
+-	if ((desc->flags & GPIOD_IS_OUT) && _gpio_get_value(desc))
+-		dir_flags |= GPIOD_IS_OUT_ACTIVE;
++	/* GPIOD_ are directly provided by driver except GPIOD_ACTIVE_LOW */
++	if (ops->get_dir_flags) {
++		ret = ops->get_dir_flags(dev, desc->offset, &dir_flags);
++		if (ret)
++			return ret;
+ 
++		/* GPIOD_ACTIVE_LOW is saved in desc->flags */
++		value = dir_flags & GPIOD_IS_OUT_ACTIVE ? 1 : 0;
++		if (desc->flags & GPIOD_ACTIVE_LOW)
++			value = !value;
++		dir_flags &= ~(GPIOD_ACTIVE_LOW | GPIOD_IS_OUT_ACTIVE);
++		dir_flags |= (desc->flags & GPIOD_ACTIVE_LOW);
++		if (value)
++			dir_flags |= GPIOD_IS_OUT_ACTIVE;
++	} else {
++		dir_flags = desc->flags;
++		/* only GPIOD_IS_OUT_ACTIVE is provided by uclass */
++		dir_flags &= ~GPIOD_IS_OUT_ACTIVE;
++		if ((desc->flags & GPIOD_IS_OUT) && _gpio_get_value(desc))
++			dir_flags |= GPIOD_IS_OUT_ACTIVE;
 +	}
-+
-+	if (args->args[1] & GPIO_PULL_UP)
-+		desc->flags |= GPIOD_PULL_UP;
-+
-+	if (args->args[1] & GPIO_PULL_DOWN)
-+		desc->flags |= GPIOD_PULL_DOWN;
-+
- 	return 0;
- }
+ 	*flags = dir_flags;
  
-@@ -520,6 +538,18 @@ static int check_dir_flags(ulong flags)
- 		return -EINVAL;
+ 	return 0;
+@@ -1128,6 +1145,8 @@ static int gpio_post_bind(struct udevice *dev)
+ 			ops->get_function += gd->reloc_off;
+ 		if (ops->xlate)
+ 			ops->xlate += gd->reloc_off;
++		if (ops->get_dir_flags)
++			ops->get_dir_flags += gd->reloc_off;
+ 
+ 		reloc_done++;
  	}
- 
-+	if ((flags & GPIOD_PULL_UP) && (flags & GPIOD_PULL_DOWN)) {
-+		log_debug("%s: flags 0x%lx has GPIOD_PULL_UP and GPIOD_PULL_DOWN\n",
-+			  __func__, flags);
-+		return -EINVAL;
-+	}
-+
-+	if ((flags & GPIOD_OPEN_DRAIN) && (flags & GPIOD_OPEN_SOURCE)) {
-+		log_debug("%s: flags 0x%lx has GPIOD_OPEN_DRAIN and GPIOD_OPEN_SOURCE\n",
-+			  __func__, flags);
-+		return -EINVAL;
-+	}
-+
- 	return 0;
- }
- 
 diff --git a/include/asm-generic/gpio.h b/include/asm-generic/gpio.h
-index 3dd0002b0b..4f7b43f163 100644
+index 4f7b43f163..ac30c3ee4e 100644
 --- a/include/asm-generic/gpio.h
 +++ b/include/asm-generic/gpio.h
-@@ -119,8 +119,12 @@ struct gpio_desc {
- 	unsigned long flags;
- #define GPIOD_IS_OUT		BIT(1)	/* GPIO is an output */
- #define GPIOD_IS_IN		BIT(2)	/* GPIO is an input */
--#define GPIOD_ACTIVE_LOW	BIT(3)	/* value has active low */
-+#define GPIOD_ACTIVE_LOW	BIT(3)	/* GPIO is active when value is low */
- #define GPIOD_IS_OUT_ACTIVE	BIT(4)	/* set output active */
-+#define GPIOD_OPEN_DRAIN	BIT(5)	/* GPIO is open drain type */
-+#define GPIOD_OPEN_SOURCE	BIT(6)	/* GPIO is open source type */
-+#define GPIOD_PULL_UP		BIT(7)	/* GPIO has pull-up enabled */
-+#define GPIOD_PULL_DOWN		BIT(8)	/* GPIO has pull-down enabled */
+@@ -297,6 +297,21 @@ struct dm_gpio_ops {
+ 	 */
+ 	int (*xlate)(struct udevice *dev, struct gpio_desc *desc,
+ 		     struct ofnode_phandle_args *args);
++
++	/**
++	 * get_dir_flags() - Get GPIO dir flags
++	 *
++	 * This function return the GPIO direction flags used.
++	 *
++	 * This method is optional.
++	 *
++	 * @dev:	GPIO device
++	 * @offset:	GPIO offset within that device
++	 * @flags:	place to put the used direction flags by GPIO
++	 * @return 0 if OK, -ve on error
++	 */
++	int (*get_dir_flags)(struct udevice *dev, unsigned int offset,
++			     ulong *flags);
+ };
  
- 	uint offset;		/* GPIO offset within the device */
- 	/*
+ /**
 -- 
 2.17.1
 

@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78FD41409E5
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Jan 2020 13:45:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B8CF1409E7
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Jan 2020 13:45:31 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E577C36B0E
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Jan 2020 12:45:15 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4A772C36B0E
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Jan 2020 12:45:31 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8F456C36B0D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AADE1C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Jan 2020 12:45:13 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 17 Jan 2020 12:45:30 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00HCbR2J012165; Fri, 17 Jan 2020 13:45:11 +0100
+ 00HCbDKs012625; Fri, 17 Jan 2020 13:45:29 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=IFClIfrGIaV7n2KVgHWuGdzvKbbn2lp7kiS5cL6EhSI=;
- b=LJt84vC5iqMjxztNELACK6ExuBUe6dOw0t+wld68+miGSFTuPnTdTzVOwcHvMh7ivxJA
- wZQS4MqFS08Sd+wwby9gsuyPw9kJS2lWLJ7SWccvBYDQsvEYGXVjWQaeBo2bu0Uxlpdw
- GZ4jBiGgHABsgk+Z9pSJWGMM2R32Td4Aiyoh8XcCYpZxDiZ1OVRW8cx2A9403HxkD5x+
- 2DmUU6O509/yXMoG1LrZFvpLG+SUmfPnoyt1f2xP2eOdJQ0zXjsdvp4sm1CWnu1hlvh7
- UNalHE3KBeXQBo21fkxaxcHZ47CL50O9gpFy7jPvvGmf86iM+Y40SDSTk0OokXx+iyh3 VA== 
+ bh=9wCc1uCFLCiQ9zaGJeFMGu3q6SUY10BZjrhiX300NDo=;
+ b=VXSLpo54azG60b8xiNEGZvyGUC1mmhTeXi5PoYUp++I/VCJNIWHJNZAtuG238t3npePk
+ COBOlEJVKghnmJ5c6nZa8lZss42+vJWFmfeWnKiJSzdCJwDm2QwcQFumsuw4m84CeiAq
+ PhmzULKaU2ZLnKzV9wyeXcbFRys/4AC82fBJDu2xc9cLI2ViTmWDEtwRqc7UWCa96e+k
+ 6WSeGtgOpnOU7Heds51tSTj+vI/rSDyBhYlnwm6cl87Lr1lE5kBXM3q6xS3xxxgCdy5W
+ iC0RCBqx7NQkS27MSTsXwENek3khDn+bZ+xI6pcsVhb4XJMcTQ4Z8yU9KYZ0TEnQF0Qx qg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xk0r7bkgg-1
+ by mx07-00178001.pphosted.com with ESMTP id 2xk0r33kkv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Jan 2020 13:45:11 +0100
+ Fri, 17 Jan 2020 13:45:29 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9F5EF10002A;
- Fri, 17 Jan 2020 13:45:08 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9679D2B7739;
- Fri, 17 Jan 2020 13:45:08 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 17 Jan
- 2020 13:45:08 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 65F8B10002A;
+ Fri, 17 Jan 2020 13:45:25 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5DF832B773B;
+ Fri, 17 Jan 2020 13:45:25 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 17 Jan
+ 2020 13:45:24 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 17 Jan 2020 13:45:07 +0100
+ 15.00.1473.003; Fri, 17 Jan 2020 13:45:24 +0100
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 1/3] stm32mp1: move stboard command in
- board/st/common directory
-Thread-Index: AQHVzTPyiEH6+ey/AkGkCbkCAij3TA==
-Date: Fri, 17 Jan 2020 12:45:07 +0000
-Message-ID: <ad66b011-dbb9-e42d-a3f4-43a7d9ff13f7@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH 2/3] board: stm32mp1: move CONFIG_ENV_XXX
+ in defconfig
+Thread-Index: AQHVzTP8qJa4ny2sLUe1KA9FQ8nHSg==
+Date: Fri, 17 Jan 2020 12:45:24 +0000
+Message-ID: <8b520a1d-7cb9-c796-8e40-339a1ba47fd2@st.com>
 References: <20200113141742.28182-1-patrick.delaunay@st.com>
- <20200113141742.28182-2-patrick.delaunay@st.com>
-In-Reply-To: <20200113141742.28182-2-patrick.delaunay@st.com>
+ <20200113141742.28182-3-patrick.delaunay@st.com>
+In-Reply-To: <20200113141742.28182-3-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,15 +62,15 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.2.2
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
-Content-ID: <FCEF6C7513B5A641B25CAEE1FF354008@st.com>
+x-originating-ip: [10.75.127.47]
+Content-ID: <3BC03D4302C7F5459CD482159252D09D@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-01-17_03:2020-01-16,
  2020-01-17 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] stm32mp1: move stboard command in
- board/st/common directory
+Subject: Re: [Uboot-stm32] [PATCH 2/3] board: stm32mp1: move CONFIG_ENV_XXX
+ in defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,119 +87,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
+Hi
 
 On 1/13/20 3:17 PM, Patrick Delaunay wrote:
-> Move the ST command in board/st/common, as this command is only used
-> by ST board. Prepare the support in U-Boot of boards with STM32MP15x
-> SOC but not STMicroelectronics.
+> Move CONFIG_ENV_SECT_SIZE and CONFIG_ENV_OFFSET in stm32mp15_*_defconfig
+> for ST board with NOR support (STM32MP15xx-EV1 boards)
+> - CONFIG_SECT_SIZE values = the max supported NOR erase size (256KB)
+> - CONFIG_ENV_OFFSET = offset for NOR (ENV_IS_IN_SPI_FLASH)
+>
+> This Patch prepares the U-Boot support of boards with STM32MP15x SOC
+> not provided by STMicroelectronics.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  board/st/common/Kconfig                     | 6 ++++++
->  board/st/common/MAINTAINERS                 | 6 ++++++
->  board/st/common/Makefile                    | 6 ++++++
->  board/st/{stm32mp1 => common}/cmd_stboard.c | 3 +++
->  board/st/stm32mp1/Kconfig                   | 9 ++-------
->  board/st/stm32mp1/Makefile                  | 1 -
->  6 files changed, 23 insertions(+), 8 deletions(-)
->  create mode 100644 board/st/common/Kconfig
->  create mode 100644 board/st/common/MAINTAINERS
->  create mode 100644 board/st/common/Makefile
->  rename board/st/{stm32mp1 => common}/cmd_stboard.c (98%)
+>  board/st/stm32mp1/Kconfig           | 6 ------
+>  configs/stm32mp15_basic_defconfig   | 2 ++
+>  configs/stm32mp15_optee_defconfig   | 2 ++
+>  configs/stm32mp15_trusted_defconfig | 2 ++
+>  4 files changed, 6 insertions(+), 6 deletions(-)
 >
-> diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-> new file mode 100644
-> index 0000000000..1824087afc
-> --- /dev/null
-> +++ b/board/st/common/Kconfig
-> @@ -0,0 +1,6 @@
-> +config CMD_STBOARD
-> +	bool "stboard - command for OTP board information"
-> +	default y
-> +	help
-> +	  This compile the stboard command to
-> +	  read and write the board in the OTP.
-> diff --git a/board/st/common/MAINTAINERS b/board/st/common/MAINTAINERS
-> new file mode 100644
-> index 0000000000..3b02f4ab98
-> --- /dev/null
-> +++ b/board/st/common/MAINTAINERS
-> @@ -0,0 +1,6 @@
-> +ST BOARDS
-> +M:	Patrick Delaunay <patrick.delaunay@st.com>
-> +L:	uboot-stm32@st-md-mailman.stormreply.com (moderated for non-subscribers)
-> +T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
-> +S:	Maintained
-> +F:	board/st/common/
-> diff --git a/board/st/common/Makefile b/board/st/common/Makefile
-> new file mode 100644
-> index 0000000000..8553606b90
-> --- /dev/null
-> +++ b/board/st/common/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> +#
-> +# Copyright (C) 2020, STMicroelectronics - All Rights Reserved
-> +#
-> +
-> +obj-$(CONFIG_CMD_STBOARD) += cmd_stboard.o
-> diff --git a/board/st/stm32mp1/cmd_stboard.c b/board/st/common/cmd_stboard.c
-> similarity index 98%
-> rename from board/st/stm32mp1/cmd_stboard.c
-> rename to board/st/common/cmd_stboard.c
-> index 04352ae8ed..e994a88e71 100644
-> --- a/board/st/stm32mp1/cmd_stboard.c
-> +++ b/board/st/common/cmd_stboard.c
-> @@ -3,6 +3,7 @@
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   */
->  
-> +#ifndef CONFIG_SPL_BUILD
->  #include <common.h>
->  #include <console.h>
->  #include <misc.h>
-> @@ -143,3 +144,5 @@ U_BOOT_CMD(stboard, 6, 0, do_stboard,
->  	   "  - Variant: 1 ... 15\n"
->  	   "  - Revision: A...O\n"
->  	   "  - BOM: 1...15\n");
-> +
-> +#endif
 > diff --git a/board/st/stm32mp1/Kconfig b/board/st/stm32mp1/Kconfig
-> index 4fa2360b4f..9f985e5775 100644
+> index 9f985e5775..89fc562746 100644
 > --- a/board/st/stm32mp1/Kconfig
 > +++ b/board/st/stm32mp1/Kconfig
-> @@ -15,15 +15,10 @@ config ENV_SECT_SIZE
->  config ENV_OFFSET
->  	default 0x280000 if ENV_IS_IN_SPI_FLASH
+> @@ -9,12 +9,6 @@ config SYS_VENDOR
+>  config SYS_CONFIG_NAME
+>  	default "stm32mp1"
 >  
-> -config CMD_STBOARD
-> -	bool "stboard - command for OTP board information"
-> -	default y
-> -	help
-> -	  This compile the stboard command to
-> -	  read and write the board in the OTP.
+> -config ENV_SECT_SIZE
+> -	default 0x40000 if ENV_IS_IN_SPI_FLASH
+> -
+> -config ENV_OFFSET
+> -	default 0x280000 if ENV_IS_IN_SPI_FLASH
 > -
 >  config TARGET_STM32MP157C_DK2
 >  	bool "support of STMicroelectronics STM32MP157C-DK2 Discovery Board"
 >  	default y
->  
-> +source "board/st/common/Kconfig"
-> +
->  endif
-> diff --git a/board/st/stm32mp1/Makefile b/board/st/stm32mp1/Makefile
-> index 3c6c035b11..8188075b1a 100644
-> --- a/board/st/stm32mp1/Makefile
-> +++ b/board/st/stm32mp1/Makefile
-> @@ -7,7 +7,6 @@ ifdef CONFIG_SPL_BUILD
->  obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
-> -obj-$(CONFIG_CMD_STBOARD) += cmd_stboard.o
->  endif
->  
->  obj-y += board.o
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+> index 713a7e6c57..8f0c7e9339 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -1,6 +1,8 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_STM32MP=y
+>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+> +CONFIG_ENV_SECT_SIZE=0x40000
+> +CONFIG_ENV_OFFSET=0x280000
+>  CONFIG_SPL_MMC_SUPPORT=y
+>  CONFIG_SPL=y
+>  CONFIG_TARGET_STM32MP1=y
+> diff --git a/configs/stm32mp15_optee_defconfig b/configs/stm32mp15_optee_defconfig
+> index f9161fd7d1..b036bb738b 100644
+> --- a/configs/stm32mp15_optee_defconfig
+> +++ b/configs/stm32mp15_optee_defconfig
+> @@ -1,6 +1,8 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_STM32MP=y
+>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+> +CONFIG_ENV_SECT_SIZE=0x40000
+> +CONFIG_ENV_OFFSET=0x280000
+>  CONFIG_TARGET_STM32MP1=y
+>  CONFIG_STM32MP1_OPTEE=y
+>  CONFIG_DISTRO_DEFAULTS=y
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+> index a5ea528ae3..956ba90153 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -1,6 +1,8 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_STM32MP=y
+>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+> +CONFIG_ENV_SECT_SIZE=0x40000
+> +CONFIG_ENV_OFFSET=0x280000
+>  CONFIG_TARGET_STM32MP1=y
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_FIT=y
+
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

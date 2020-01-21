@@ -2,70 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4097C14259B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jan 2020 09:35:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 689CA143525
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Jan 2020 02:27:25 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E34FCC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jan 2020 08:35:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A6A9C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Jan 2020 01:27:25 +0000 (UTC)
+Received: from mail-yb1-f182.google.com (mail-yb1-f182.google.com
+ [209.85.219.182])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C70D9C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 52B11C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jan 2020 08:35:03 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00K8XgnN009161; Mon, 20 Jan 2020 09:35:02 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=vzDSdLeAQJPtawp18/z90qibM2H2Do1Y78odMPBMPVU=;
- b=lXB8He7/XpL/qrGshSFeAvvt5AG4j8yo32bYu796Tf0zgV/D4OiQnJxGKMH8Y6RtISk8
- iUoiG+Pl8IbGKs6t70T0E5RG8KLgautYFe8gAf7mEKNHGyBWkdZ/SVaWqaM99i3fKNpZ
- kpKCwnXjZqzHjHNNEBnaCW3Q8ME+NSylNnbyQMp4mYP2/zqJaDl6TDW0YWF0hV7OFQI4
- 2BtmwD2HSeO+bJJX+iby/gDzAuUJa1NyG7xbBPP5o24n7wtx6ggBC8ktJHo0DDpXQKAW
- aWioPcSPXL1AYon1ElwK9/YH8TxNK5e4kRLou5E1KnpxPgvWNlNBG2/nr8OVsNLyehrK gw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xkrc4rfw9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Jan 2020 09:35:02 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 529BE100039;
- Mon, 20 Jan 2020 09:35:01 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3E10721E5E5;
- Mon, 20 Jan 2020 09:35:01 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 20 Jan
- 2020 09:35:00 +0100
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 20 Jan 2020 09:35:00 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PULL] Pull request: u-boot-stm32 u-boot-stm32-20200117
-Thread-Index: AdXNUMfXeBOfI0pySTGbQKoXTxB5ZgCG2G9w
-Date: Mon, 20 Jan 2020 08:35:00 +0000
-Message-ID: <bcd0648cb68e483595473d78b3ff7ce7@SFHDAG6NODE3.st.com>
+ Tue, 21 Jan 2020 01:27:24 +0000 (UTC)
+Received: by mail-yb1-f182.google.com with SMTP id z15so638703ybm.8
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 20 Jan 2020 17:27:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=zCNb7riCwUk2gI4YkHSuvYAvOeJTLDCJR11E0pLQ5rM=;
+ b=Le6YUTPGCOEd1hU1nCfAhSVN1wDfN5m+whbBz7ovrNOagaf4PquapVE1t5t6YPZhVV
+ mmua635dSCpkCFWDfJjpLOVFisUuXreEn5XdsuMO+cIhkndFer+YHf+hzo2cBbfjYdMh
+ Qk1rpTVebHYSuXvMCMo4EGVKvtiIY9or1rj2s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=zCNb7riCwUk2gI4YkHSuvYAvOeJTLDCJR11E0pLQ5rM=;
+ b=UnIvyVZRdnYUCh1rzJfWGR6Y4VIkvi3dCHJF9s2dPzBBTwDsz4i1/5wEBYQBQ8iruI
+ sUmNZ3bzZNx9mcBDTp+CWD4T8h0QlROaCDHmjDRoK8lfAYvpiI8XWLCnHa+t1PLWemD0
+ KCbDYzKZhVR7RXDV9vImbApwJimtRswM/xgmwyvkLqfcFmOmFQJz6Xf2+4MZxxgoD+cp
+ yhdNhHOWw+HHmpH0tC39AzjZUEyRM62ezkrgaw+j8YEiStp/ZIhObtAM65V/lL9E8EFt
+ W3KAF+QCs4AV135RApfbWvzAmbnQ/VcQgRfOjpzul29EiE4QgXse1ohmhlvaH+tNmiJz
+ jcFQ==
+X-Gm-Message-State: APjAAAXTuOdc0vN25fVjeGwnFU5W/zqYErd+eZGmjH4B5hBBKY39zkce
+ M1BozjU6Q1asHXTT3gCa4Ubf4Q==
+X-Google-Smtp-Source: APXvYqyCHZytcM6VgsvGTmSoq8zZ7ESZGwclflHaRUE5KUsL4d0x9JNKvdakKckBNk8cADQjI5BBsA==
+X-Received: by 2002:a05:6902:52d:: with SMTP id
+ y13mr1713546ybs.433.1579570042941; 
+ Mon, 20 Jan 2020 17:27:22 -0800 (PST)
+Received: from bill-the-cat
+ (2606-a000-1401-86dd-b96e-413f-6954-8a35.inf6.spectrum.com.
+ [2606:a000:1401:86dd:b96e:413f:6954:8a35])
+ by smtp.gmail.com with ESMTPSA id d10sm16504681ywd.107.2020.01.20.17.27.20
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 20 Jan 2020 17:27:21 -0800 (PST)
+Date: Mon, 20 Jan 2020 20:27:18 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+Message-ID: <20200121012718.GO8732@bill-the-cat>
 References: <2ee6127028ec4e94b070befc6240354e@SFHDAG6NODE3.st.com>
-In-Reply-To: <2ee6127028ec4e94b070befc6240354e@SFHDAG6NODE3.st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
+ <bcd0648cb68e483595473d78b3ff7ce7@SFHDAG6NODE3.st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-01-19_08:2020-01-16,
- 2020-01-19 signatures=0
+In-Reply-To: <bcd0648cb68e483595473d78b3ff7ce7@SFHDAG6NODE3.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Cc: "uboot-stm32@st-md-mailman.stormreply.com"
  <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Patrice CHOTARD <patrice.chotard@st.com>
-Subject: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
+Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
 	u-boot-stm32-20200117
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -78,76 +74,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4145915376325803058=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom
 
-Please pull the first STM32 related patches for v2020.04
+--===============4145915376325803058==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Q7bfAqWrbHh5tT1G"
+Content-Disposition: inline
 
-Gitlab CI status:
-     https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/1900
 
-With the following fixes:
-- stm32mp1: split SOC and board and cleanup config
+--Q7bfAqWrbHh5tT1G
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It is a preliminary step for DH Electronics DHCOM SoM and PDK2 board
+On Mon, Jan 20, 2020 at 08:35:00AM +0000, Patrick DELAUNAY wrote:
 
-NB: I resent the email with correct Title (I just remove "Re:") to avoid confusion.
+> Hi Tom
+>=20
+> Please pull the first STM32 related patches for v2020.04
+>=20
+> Gitlab CI status:
+>      https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/1900
+>=20
+> With the following fixes:
+> - stm32mp1: split SOC and board and cleanup config
+>=20
+> It is a preliminary step for DH Electronics DHCOM SoM and PDK2 board
+>=20
+> NB: I resent the email with correct Title (I just remove "Re:") to avoid =
+confusion.
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u=
+-boot-stm.git u-boot-stm32-20200117 The following changes since commit d7bb=
+6aceb2e99a832efbb96f9bf480bf95602192:
+>=20
+>   Merge tag 'mmc-1-16-2020' of https://gitlab.denx.de/u-boot/custodians/u=
+-boot-mmc (2020-01-16 13:20:51 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
+32-20200117
+>=20
+> for you to fetch changes up to db48e11b1eccf23f3f9ba26e886a798e74df6a01:
+>=20
+>   ARM: dts: stm32: Add missing ETHCK clock to ethernet node (2020-01-17 1=
+6:26:42 +0100)
+>=20
 
-Thanks,
-Patrick
+Applied to u-boot/master, thanks!
 
-git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git u-boot-stm32-20200117 The following changes since commit d7bb6aceb2e99a832efbb96f9bf480bf95602192:
+--=20
+Tom
 
-  Merge tag 'mmc-1-16-2020' of https://gitlab.denx.de/u-boot/custodians/u-boot-mmc (2020-01-16 13:20:51 -0500)
+--Q7bfAqWrbHh5tT1G
+Content-Type: application/pgp-signature; name="signature.asc"
 
-are available in the Git repository at:
+-----BEGIN PGP SIGNATURE-----
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20200117
+iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4mU3AACgkQh/n2NdMd
+dlLUvRAAjvD3PFwQO6GREFmyC8kOVWy1ws5E64qCfVnm+Dg6rRelXMh95IeXMEhi
+MackVhkYthoY8rFbTuAQqFNR00kY3y+DYDiNmBw+Up5QQ4KbUc8IuRQqxvlNF/zn
+R4MsG8QjFNWa25piq2ozMDHoz/5h1fxGBVrJleF+lV4YrLrY2qgBOtpi+LczK5+c
+A3SdQSZi83FA/lYdhTYcdzphezcRmWZI5jhjnKnhLbGh3x8MGrFiEg0r/byrwqHD
+kygYUV6H7pu/DnRAls4x5/KJw1G4mNtRnwEBmNRVcOUZzoLiYpZjQ6Gh83NB/PSL
+/yF+X7IGX49seSaeQ0mDLWA7lZfYppHiPbQVOBoPtM1WZYizHDFg6IXZhzKmALj2
+OgU+5bwiIb9YUH1wM/du8zRVr8h4rrretTOGY35xT5kfy1Dk1zILuLDAjhfkMwah
+qXDOGyFbby3iCoA0Ibv2XroJYFDz9rZ6CnwHHVfV3YpnJEqbByHC08p5NDBltn1H
+NKu9L41BMS8xvYx9ttw+rY9poWfg1ASguW/7nGs1IfEdxxkeWZh+fTBqrw9mHujo
+7am/FZxx+cRph2t8bk7ieS+/n1MkazX79nsJWEcyZ4C8pnoE/p3z98PW589g3ZNd
+3rOdZrSH3rB63Tk/1tE87L2KitkFcjYfsWKawRJT7ftnZloLEFs=
+=EmvR
+-----END PGP SIGNATURE-----
 
-for you to fetch changes up to db48e11b1eccf23f3f9ba26e886a798e74df6a01:
+--Q7bfAqWrbHh5tT1G--
 
-  ARM: dts: stm32: Add missing ETHCK clock to ethernet node (2020-01-17 16:26:42 +0100)
+--===============4145915376325803058==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-----------------------------------------------------------------
-- stm32mp1: split SOC and board and cleanup config
-
-----------------------------------------------------------------
-Marek Vasut (4):
-      ARM: stm32: Allow overriding setup_mac_address()
-      stm32mp1: configs: Make all boot devices in distro boot conditional
-      ARM: stm32: Fill in missing loadaddr
-      ARM: dts: stm32: Add missing ETHCK clock to ethernet node
-
-Patrick Delaunay (3):
-      stm32mp1: move stboard command in board/st/common directory
-      board: stm32mp1: move CONFIG_ENV_XXX in defconfig
-      stm32mp1: split board and SOC support for STM32MP15x family
-
-Thomas Hebb (1):
-      stm32mp: remove redundant SYS_TEXT_BASE prompt
-
- arch/arm/dts/Makefile                          |  2 +-
- arch/arm/dts/stm32mp157c.dtsi                  |  2 ++
- arch/arm/mach-stm32mp/Kconfig                  | 37 ++++++++++++++++++++++++-------------
- arch/arm/mach-stm32mp/cpu.c                    |  2 +-
- arch/arm/mach-stm32mp/include/mach/sys_proto.h |  2 ++
- board/st/common/Kconfig                        |  7 +++++++
- board/st/common/MAINTAINERS                    |  6 ++++++
- board/st/common/Makefile                       |  6 ++++++
- board/st/{stm32mp1 => common}/cmd_stboard.c    |  3 +++
- board/st/stm32mp1/Kconfig                      | 20 ++------------------
- board/st/stm32mp1/Makefile                     |  1 -
- board/st/stm32mp1/stm32mp1.c                   |  2 +-
- configs/stm32mp15_basic_defconfig              |  4 +++-
- configs/stm32mp15_optee_defconfig              |  4 +++-
- configs/stm32mp15_trusted_defconfig            |  4 +++-
- include/configs/stm32mp1.h                     | 39 +++++++++++++++++++++++++++++++--------
- 16 files changed, 95 insertions(+), 46 deletions(-)  create mode 100644 board/st/common/Kconfig  create mode 100644 board/st/common/MAINTAINERS  create mode 100644 board/st/common/Makefile  rename board/st/{stm32mp1 => common}/cmd_stboard.c (98%)
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============4145915376325803058==--

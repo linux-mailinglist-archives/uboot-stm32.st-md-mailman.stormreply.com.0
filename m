@@ -2,63 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C094D147377
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Jan 2020 22:58:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12580147924
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 09:03:26 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74C7CC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Jan 2020 21:58:05 +0000 (UTC)
-Received: from mail-yw1-f68.google.com (mail-yw1-f68.google.com
- [209.85.161.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CDEBAC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 08:03:25 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D2E57C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 56CC2C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 23 Jan 2020 21:58:02 +0000 (UTC)
-Received: by mail-yw1-f68.google.com with SMTP id 192so2364984ywy.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 23 Jan 2020 13:58:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=fRt9AJYDeYGWv6U83BS/AzpSO01nOGTTZEwhhewBvL0=;
- b=dLbxmM9Gilu06Y0/FgkgVSFqphofjNzIiK5zj3bnQvsSIKlwuRe7bDMPAgvvWSqtHs
- 4eR8flCM5lhBBxEZZd/LbTBnviht192jipzI+iRBYtUjSfBAeBRYzJfHSKT+2tm6wxQC
- QsbBnWlG3N/1UOpzGmoYWKY2qNQKrvvj01qLY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=fRt9AJYDeYGWv6U83BS/AzpSO01nOGTTZEwhhewBvL0=;
- b=MMvltDqv0N6Tl4jkHZdoLF2jzyXieVKxcVdPYC0iVoFJ4K4mtL/+8Rpv3CXdmJyJJV
- uJC22uKRMp95nT+y8/YcTQNlq1+w8ofH7pi4KtyLjrE2Wr+yJoxHnR+TkwkymD4Ner6X
- HZ2rGEHgPT24I83JUbmC/EIxMTz0RwjXjXUgtfcIdvRj0JwtAnf3TJr5aZQhGwxsn6ah
- OQJ6rb2+Fj1uEcb3J8tQjgsVuT1zF7hMq5eVBfZfxAf4kqi2WsVO+/P+PJh0RwRj89Ht
- 3Bp2nqXIbqilVyV3u56+glAAWzwRJXGWRRtwNc8TfOMWVlVmTqjPFqg8SFvyZyFLMBYD
- uH4Q==
-X-Gm-Message-State: APjAAAUiQzG+N3dnH30K8BmCXTNInc9+0mv2cAyGbdX0i8htQ5X9iVFq
- H+EZA9sKjImraWDoIPQt5kKcGQ==
-X-Google-Smtp-Source: APXvYqzh/DjHFoOvc6hYgDwiebTw/GrsFNDYgRrIJDWbFc91cfZ0LLS/Hb0Xmka3YgLi5HdPE7QVUw==
-X-Received: by 2002:a81:204:: with SMTP id 4mr6803905ywc.224.1579816681432;
- Thu, 23 Jan 2020 13:58:01 -0800 (PST)
-Received: from bill-the-cat
- (2606-a000-1401-86dd-4d1b-b279-03ac-0199.inf6.spectrum.com.
- [2606:a000:1401:86dd:4d1b:b279:3ac:199])
- by smtp.gmail.com with ESMTPSA id u185sm1350933ywf.89.2020.01.23.13.58.00
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 23 Jan 2020 13:58:00 -0800 (PST)
-Date: Thu, 23 Jan 2020 16:57:58 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200123215758.GE26536@bill-the-cat>
-References: <20191203083835.6898-1-patrick.delaunay@st.com>
+ Thu, 23 Jan 2020 22:44:43 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 483clt3Tcwz1qr45;
+ Thu, 23 Jan 2020 23:44:42 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 483clt2xRcz1qqkW;
+ Thu, 23 Jan 2020 23:44:42 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id ejbcA6chEhcc; Thu, 23 Jan 2020 23:44:41 +0100 (CET)
+X-Auth-Info: +R5FT3ntwGREeelr3tZn2nv6Mv8JxwSSkllpo8e6FEs=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Thu, 23 Jan 2020 23:44:41 +0100 (CET)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20200121213843.96709-1-marex@denx.de>
+ <09fea5052c6a48f7bc5353b5ce5ad884@SFHDAG6NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <bda00092-eee5-9175-0c5c-f666d0797c5b@denx.de>
+Date: Thu, 23 Jan 2020 23:44:40 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20191203083835.6898-1-patrick.delaunay@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+In-Reply-To: <09fea5052c6a48f7bc5353b5ce5ad884@SFHDAG6NODE3.st.com>
+Content-Language: en-US
+X-Mailman-Approved-At: Fri, 24 Jan 2020 08:03:24 +0000
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] cmd: pxe: execute the cls
- command only when supported
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH V2] ARM: dts: stm32: Add DH Electronics
+ DHCOM SoM and PDK2 board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,71 +58,58 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3518774704352618163=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 1/23/20 10:57 AM, Patrick DELAUNAY wrote:
+> Hi Marek,
 
---===============3518774704352618163==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7QsOHKuLbhbLTwLB"
-Content-Disposition: inline
+Hi,
 
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: mardi 21 janvier 2020 22:39
+>>
+>> Add support for DH Electronics DHCOM SoM and PDK2 rev. 400 carrier board.
+>> This is an SoM with STM32MP157C and an evaluation kit. The baseboard
+>> provides Ethernet, UART, USB, CAN and optional display.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> Cc: Patrick Delaunay <patrick.delaunay@st.com>
+>> Cc: Patrice Chotard <patrice.chotard@st.com>
+> 
+> Few remarks (see after) about
+> 1/ name of dts file (I prefer to don't add a file "-u-boot.dts")
+> 2/ stusb1600 support (it seens that the PDK2 board hav no this USB type C controller, so part of code can be dropped)
+> 3/ ST board specific part are not needed : OTP_BOARD / command stboard
+> 
+> But anayway:
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+> 
+> I propose something for the first point on the custodians git, branch "dh"
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+> 
+> see " fixup! ARM: dts: stm32: Add DH Electronics DHCOM SoM and PDK2 board" on dh branch
 
---7QsOHKuLbhbLTwLB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Did you verify that the generated DT is identical for U-Boot and SPL
+before and after this change ?
 
-On Tue, Dec 03, 2019 at 09:38:35AM +0100, Patrick Delaunay wrote:
+> Are you are ok with this proposal ?
+> 
+> In the same branch I propose 2 other modifications to reduce the size of board.c
+> (remove feature note needed).
+> 
+> - remove stusb1600 support
+> - remove OTP_BOARD support and cmd_stboard
 
-> Execute the command cls (for clear screen), when the "menu background"
-> keyword is present in extlinux.conf file, only if the command is supporte=
-d.
->=20
-> This patch avoid the warning "Unknown command 'cls'"
-> with "menu background" in extlinux.conf when CONFIG_CMD_BMP is activated
-> and CONFIG_CMD_CLS not activated (default for CONFIG_DM_VIDEO).
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
+These two are OK, thanks.
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---7QsOHKuLbhbLTwLB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4qFuYACgkQh/n2NdMd
-dlKuIQ//RBOAR1QzTcu3E7DlX0L1UP5Ha0ZYzW2eKaBgsAMdbFi0hJnvOsjPcwgE
-O5flKIOvb2bzn/eY6lL+zen6mMFuHKbpaVnUd8tEvTVhPIvrSW48wrS/JV6Jmavb
-O8O/3Fr4Yj6KOqQzbrSXueuzbapdXZrNvOra1N85GF8Psk6YsmBoSIRRP5Cdcudu
-y0EPpZVMF+UTHwZBbdyuMw63Xr+uHnxs6jfpYkQ7u/2hIWJSWapLPC5b7HMGHtvG
-qhoOi0+J2OJdnTmyC8yJuRSjulZhvBr7qriTk759IqFWvo+0f2IoDssihltHKgWt
-W+TNLbRLiSC3MbJHRXNqfebCscVCsqUSjDUeu/C+6nltSIJF81oBCddVTlAngW1y
-58zyCFHIKT73N52OxASAkxX2MeMYCuSueqK5Gyk1jktMHT4xxKUuFmesDbMAJib/
-SEYpwt+JZ0M5pwgf35X+/GfR2EBjt5WixpCc9tJ2GWZnCadHN6r3lW36nVV+T1UH
-e0d9lwgs+sKn9V6u7C8bjvk25fPkGYE57vvUTknwJG3bBpRBB+R42H23DM2pj9ny
-GKv8WbU65GXVZD6i6hdqm73w++6RHc0byYWS7l4WzwE6BPAkbv3Kg4IPOhDBeWW3
-qxJIyHJiDtNwpZ+OGyzkrfhqiY/72/PffFKhKU319x2Ra9x2UqM=
-=aQgl
------END PGP SIGNATURE-----
-
---7QsOHKuLbhbLTwLB--
-
---===============3518774704352618163==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+-- 
+Best regards,
+Marek Vasut
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============3518774704352618163==--

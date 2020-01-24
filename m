@@ -2,58 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2A5D14855C
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 13:46:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD6891485CF
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 14:17:30 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 858ECC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 12:46:02 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7F82AC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jan 2020 13:17:30 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D6046C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E2986C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Jan 2020 12:46:00 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00OCgbPu010527; Fri, 24 Jan 2020 13:45:59 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=udjV2bl9BCuvfuVWBnMYGyUeVynoOXmJclXnhc5TdEs=;
- b=twzt9CgQgMjCEbokCBXUPBHp+Z3iM6QANy2EPZctpd3Rtb+3NcRtbThUYey6zvrGHQJO
- F0tWuRMEUIsxhxjReQUDhPbo7mc5r3usj+rY6iinWcteeD5ow5+00sUZCfPgTNjfjPT9
- Xk32v8EzZ1DdSTRPuemdbN+BblPDa8RE77e9BGjWQIHMy6mfyNcyvXiVOnFCCJ3VlmyD
- CwzaYrrCCuAx8aXpZtmaCxh27CdlnPHxWLQgJNXWgpu4PxF0b8qaG4lPGpGA7sEdvYng
- jCl+8lOpTpvrW7tEL6zLxF7UWzalTey4iYGujwkohCv/9D3zQ4tGo8IZHTHlEIxBqzQw lg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xkrp2qwmb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 24 Jan 2020 13:45:59 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 12731100034;
- Fri, 24 Jan 2020 13:45:59 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0A7792A7710;
- Fri, 24 Jan 2020 13:45:59 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 24 Jan 2020 13:45:58 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 24 Jan 2020 13:45:56 +0100
-Message-ID: <20200124124556.2563-1-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
+ Fri, 24 Jan 2020 13:17:29 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 48406x3bM1z1qr57
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 24 Jan 2020 14:17:29 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 48406x34hxz1qwyJ
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 24 Jan 2020 14:17:29 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024) with ESMTP id 3SQRcKz-oJyH
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 24 Jan 2020 14:17:28 +0100 (CET)
+X-Auth-Info: 86x1KrzAceLASIHFHaCSvW82Ham3Xe9DepwSK3uGMac=
+Received: from janitor.denx.de (unknown [62.91.23.180])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 24 Jan 2020 14:17:28 +0100 (CET)
+Received: by janitor.denx.de (Postfix, from userid 119)
+ id 2AE5BA2C25; Fri, 24 Jan 2020 14:17:28 +0100 (CET)
+Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
+ by janitor.denx.de (Postfix) with ESMTPS id 202D4A2B93;
+ Fri, 24 Jan 2020 14:17:15 +0100 (CET)
+Received: from gemini.denx.de (localhost [IPv6:::1])
+ by gemini.denx.de (Postfix) with ESMTP id CE60724065B;
+ Fri, 24 Jan 2020 14:17:14 +0100 (CET)
+To: Patrick Delaunay <patrick.delaunay@st.com>
+From: Wolfgang Denk <wd@denx.de>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-01-24_03:2020-01-24,
- 2020-01-24 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] mtd: add prototypes for weak function
+In-reply-to: <20200124133332.3.I42c79507524e5ad68e85fd60bbd686c4c59523ae@changeid>
+References: <20200124123346.32210-1-patrick.delaunay@st.com>
+ <20200124133332.3.I42c79507524e5ad68e85fd60bbd686c4c59523ae@changeid>
+Comments: In-reply-to Patrick Delaunay <patrick.delaunay@st.com>
+ message dated "Fri, 24 Jan 2020 13:33:44 +0100."
+Date: Fri, 24 Jan 2020 14:17:14 +0100
+Message-Id: <20200124131714.CE60724065B@gemini.denx.de>
+Cc: Leo Ruan <tingquan.ruan@cn.bosch.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 3/5] cmd: env: check real location for env
+	info command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,38 +77,111 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This patch adds a prototype for the weak function
-board_mtdparts_default().
+Dear Patrick Delaunay,
 
-It solves one warning when compiling with W=1 on stm32mp1 board:
+In message <20200124133332.3.I42c79507524e5ad68e85fd60bbd686c4c59523ae@changeid> you wrote:
+> Check the current ENV location, dynamically provided by the weak
+> function env_get_location to be sure that the environment can be
+> persistent.
+>
+> The compilation flag ENV_IS_IN_DEVICE is not enough when the board
+> dynamically select the available storage location (according boot
+> device for example).
+>
+> This patch solves issue for stm32mp1 platform, when the boot device
+> is USB.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+>  cmd/nvedit.c           | 13 ++++++++++---
+>  env/env.c              | 18 ------------------
+>  include/env_internal.h | 20 ++++++++++++++++++++
+>  3 files changed, 30 insertions(+), 21 deletions(-)
+>
+> diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+> index 3d1054e763..a37b7c094a 100644
+> --- a/cmd/nvedit.c
+> +++ b/cmd/nvedit.c
+> @@ -1269,9 +1269,16 @@ static int do_env_info(cmd_tbl_t *cmdtp, int flag,
+>  	/* evaluate whether environment can be persisted */
+>  	if (eval_flags & ENV_INFO_IS_PERSISTED) {
+>  #if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
+> -		if (!quiet)
+> -			printf("Environment can be persisted\n");
+> -		eval_results |= ENV_INFO_IS_PERSISTED;
+> +		enum env_location loc = env_get_location(ENVOP_SAVE,
 
-board/st/stm32mp1/stm32mp1.c:
-     warning: no previous prototype for 'board_mtdparts_default'
-              [-Wmissing-prototypes]
-     void board_mtdparts_default(const char **mtdids,
-                                 const char **mtdparts)
-          ^~~~~~~~~~~~~~~~~~~~~~
+Please do not declare variables right in the middle of the code!
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
 
- include/mtd.h | 2 ++
- 1 file changed, 2 insertions(+)
+> +++ b/env/env.c
+> @@ -105,24 +105,6 @@ static void env_set_inited(enum env_location location)
+>  	gd->env_has_init |= BIT(location);
+>  }
+>  
+> -/**
+> - * env_get_location() - Returns the best env location for a board
+> - * @op: operations performed on the environment
+> - * @prio: priority between the multiple environments, 0 being the
+> - *        highest priority
+> - *
+> - * This will return the preferred environment for the given priority.
+> - * This is overridable by boards if they need to.
+> - *
+> - * All implementations are free to use the operation, the priority and
+> - * any other data relevant to their choice, but must take into account
+> - * the fact that the lowest prority (0) is the most important location
+> - * in the system. The following locations should be returned by order
+> - * of descending priorities, from the highest to the lowest priority.
+> - *
+> - * Returns:
+> - * an enum env_location value on success, a negative error code otherwise
+> - */
+>  __weak enum env_location env_get_location(enum env_operation op, int prio)
 
-diff --git a/include/mtd.h b/include/mtd.h
-index 65fcd3c700..b0f8693386 100644
---- a/include/mtd.h
-+++ b/include/mtd.h
-@@ -11,4 +11,6 @@
- int mtd_probe(struct udevice *dev);
- int mtd_probe_devices(void);
- 
-+void board_mtdparts_default(const char **mtdids, const char **mtdparts);
-+
- #endif	/* _MTD_H_ */
+I think it is a really bad idea to remove the comment from the
+implementation.  Please keep it here.
+
+> --- a/include/env_internal.h
+> +++ b/include/env_internal.h
+> @@ -209,6 +209,26 @@ struct env_driver {
+>  
+>  extern struct hsearch_data env_htab;
+>  
+> +/**
+> + * env_get_location() - Returns the best env location for a board
+> + * @op: operations performed on the environment
+> + * @prio: priority between the multiple environments, 0 being the
+> + *        highest priority
+> + *
+> + * This will return the preferred environment for the given priority.
+> + * This is overridable by boards if they need to.
+> + *
+> + * All implementations are free to use the operation, the priority and
+> + * any other data relevant to their choice, but must take into account
+> + * the fact that the lowest prority (0) is the most important location
+> + * in the system. The following locations should be returned by order
+> + * of descending priorities, from the highest to the lowest priority.
+> + *
+> + * Returns:
+> + * an enum env_location value on success, a negative error code otherwise
+> + */
+> +enum env_location env_get_location(enum env_operation op, int prio);
+
+If absolutely necessary, copuy only what is needed for API
+documentation.
+
+Best regards,
+
+Wolfgang Denk
+
 -- 
-2.17.1
-
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
+"This is a test of the Emergency Broadcast System. If this had been an
+actual emergency, do you really think we'd stick around to tell you?"
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

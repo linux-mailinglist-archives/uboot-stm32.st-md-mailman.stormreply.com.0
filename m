@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B6711496C4
-	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Jan 2020 18:08:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F0031496CF
+	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Jan 2020 18:10:45 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EBB35C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Jan 2020 17:08:34 +0000 (UTC)
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
- [209.85.160.196])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1B2AAC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Jan 2020 17:10:45 +0000 (UTC)
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+ [209.85.222.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 50B40C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CEA9DC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 25 Jan 2020 17:08:33 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id d18so4127088qtj.10
+ Sat, 25 Jan 2020 17:10:43 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id w15so3709918qkf.6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 25 Jan 2020 09:08:33 -0800 (PST)
+ Sat, 25 Jan 2020 09:10:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=GmZoe48nVKErG6/WX/LSYOXZa/hsDaTwGCCFs9sjPK0=;
- b=f/Q4/Ia7NC6qrR/7wqIDyMr38DhsDJ79wdzucXuDyVztG8B50lghg5IBCX/SxE3PD2
- xzqAgiZAGQEt+OW31V8Ptt2DzKTyRaEZ3zfd4+/cSOqPYktRGFKfdfT4KFTP/6lo31Lh
- +zQdRbJaF4xuU/xooruHjntzfdXGXNd9YOxIM=
+ bh=b7H3+zn0rTAWGdYBgHNeF83mlKlXrIjT0LHcEEnR6tI=;
+ b=Uq7GyqbB3aameF3YXapyOm2mB1bV+/FUm6w4fZespyNAbC9UjIhA2mJFhvSLzPB0P1
+ kJ+kUXQmlZHuWq9ukNW2fDdmqcQ719E2wL0jlHwmCsd8xQpc1xsLyY+dqCRYBt9yQJoC
+ RhtIuYHMJG5ED27yXt5TA6AtP36TsuNHXvBvo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=GmZoe48nVKErG6/WX/LSYOXZa/hsDaTwGCCFs9sjPK0=;
- b=DblpVvuPUYMmJ1wZcTrPUs+37pOClo6drDIpQO54TgX6j2mCQvl95QJffOIM37G6Tm
- TYQU6/nxwXMBStUp1k/k8GQtgqckk/tpghahskZi0at0A4jBjLArqIPDSP6tO/BtZ0CY
- xHPyeT3QFsYlzjFA6yU7jlG0hy99MjLPvRG1FPJ3s9lS6f4FyCJLAb0G0x5T0xh2FcdV
- S/BVIVi2P5/E5E7m1I9SFFZsx+AlizV3myKKZH+feK7AjbUeJ4/4j2gHstCzyK6yZEWF
- mILohUvw3SlU+QSYh6pfnQ0zQo8NUwfUxNrmLl8NW7aLSAYSMZWIb7ZweBnwQrgaOHWM
- wYsw==
-X-Gm-Message-State: APjAAAWQQqKDEs1om6j52SHBQzIa1bxxd2SfQxNTnZUNVIUGdBCJlM7a
- Brk2y92U4dn8v1KIN6HNmUJGtw==
-X-Google-Smtp-Source: APXvYqwwx1SQQdrKxIJOyNRLoRq/cJ1V0rzLPQWGjUMtBTUG9T8GhcaLTQG7a/p6gWQ9DaNZGOQy7g==
-X-Received: by 2002:ac8:209:: with SMTP id k9mr8217914qtg.290.1579972112176;
- Sat, 25 Jan 2020 09:08:32 -0800 (PST)
+ bh=b7H3+zn0rTAWGdYBgHNeF83mlKlXrIjT0LHcEEnR6tI=;
+ b=jYrKra4RX+upkmWH69aHCpPnN/+jC28d7kfoxGaYr/aJhiKkY/AasOYQd+hh5eUTAM
+ cFsyBCzANt5kXeRXqhOy5pNSDHycnZ7rAHEo7VQb5si66u5NUEDdoW9MTUjSjP1/oDnK
+ z77zIXZVTgXALJnW20WN43QEQtpaK5L+QhwRghgm6K4xuZlbAN9omdpAS2q1V8xZbnrt
+ 85dJpSdAB1CY3rN79U1pipfdH7AxuXdQdQgT+HGxah5IeUCOGrptFdbiM/QzQPh1Tg3R
+ TXQZBCiv5Gm+TB4VqaFp7X9zlT5I8Z4m8AcBRzyV1P6LBS9AClUvnYOXPxnLhaHMCSY1
+ 7Kkw==
+X-Gm-Message-State: APjAAAVqqZIO9i/U14eBxo7ZHXlUf9/8tFQmPJGmy56qME7OntCU0+yr
+ TW7dykqCPq3mIX8xYhzXflh1UA==
+X-Google-Smtp-Source: APXvYqwCIt9oiW7eQzladO4lvw7SHnYv2Dt9fN/o4TjcXHUaOLbW0H5o3nsBdqDOqz0pzBJ+8U8FCg==
+X-Received: by 2002:a37:5fc2:: with SMTP id t185mr8553523qkb.271.1579972242698; 
+ Sat, 25 Jan 2020 09:10:42 -0800 (PST)
 Received: from bill-the-cat
  (2606-a000-1401-86dd-3dc3-97ee-c77e-aac0.inf6.spectrum.com.
  [2606:a000:1401:86dd:3dc3:97ee:c77e:aac0])
- by smtp.gmail.com with ESMTPSA id w60sm5676010qte.39.2020.01.25.09.08.30
+ by smtp.gmail.com with ESMTPSA id a36sm5918098qtk.29.2020.01.25.09.10.41
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 25 Jan 2020 09:08:31 -0800 (PST)
-Date: Sat, 25 Jan 2020 12:08:29 -0500
+ Sat, 25 Jan 2020 09:10:41 -0800 (PST)
+Date: Sat, 25 Jan 2020 12:10:40 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200125170829.GB26536@bill-the-cat>
-References: <20190920072012.17841-1-patrick.delaunay@st.com>
+Message-ID: <20200125171040.GV26536@bill-the-cat>
+References: <20200124124556.2563-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20190920072012.17841-1-patrick.delaunay@st.com>
+In-Reply-To: <20200124124556.2563-1-patrick.delaunay@st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Quentin Schulz <quentin.schulz@bootlin.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, u-boot@lists.denx.de,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [Uboot-stm32] [U-Boot] [PATCH] cmd: mtd: solve bad block
- support in erase command
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH] mtd: add prototypes for weak function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,83 +69,66 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4374582383222769656=="
+Content-Type: multipart/mixed; boundary="===============4298471985570681419=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4374582383222769656==
+--===============4298471985570681419==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="DG78IEnUmLKoW088"
+	protocol="application/pgp-signature"; boundary="EzyTiZo8w1pFn3ee"
 Content-Disposition: inline
 
 
---DG78IEnUmLKoW088
+--EzyTiZo8w1pFn3ee
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 20, 2019 at 09:20:12AM +0200, Patrick Delaunay wrote:
+On Fri, Jan 24, 2020 at 01:45:56PM +0100, Patrick Delaunay wrote:
 
-> This patch modify the loop in mtd erase command to erase one by one
-> the blocks in the requested area.
+> This patch adds a prototype for the weak function
+> board_mtdparts_default().
 >=20
-> It solves issue on "mtd erase" command on nand with existing bad block,
-> the command is interrupted on the first bad block with the trace:
-> 	"Skipping bad block at 0xffffffffffffffff"
+> It solves one warning when compiling with W=3D1 on stm32mp1 board:
 >=20
-> In MTD driver (nand/raw), when a bad block is present on the MTD
-> device, the erase_op.fail_addr is not updated and we have the initial
-> value MTD_FAIL_ADDR_UNKNOWN =3D (ULL)-1.
->=20
-> This case seems normal in nand_base.c:nand_erase_nand(),
-> we have the 2 exit cases during the loop:
->=20
-> 1/ we have a bad block (nand_block_checkbad)
-> 	instr->state =3D MTD_ERASE_FAILED
-> 	loop interrupted (goto erase_exit)
->=20
-> 2/ if block erase failed (status & NAND_STATUS_FAIL)
-> 	instr->state =3D MTD_ERASE_FAILED;
-> 	instr->fail_addr =3D
-> 				((loff_t)page << chip->page_shift);
-> 	loop interrupted (goto erase_exit)
->=20
-> So erase_op.fail_addr can't be used if bad blocks were present
-> in the erased area; we need to use mtd_erase only one block to detect
-> and skip these existing bad blocks (as it is done in nand_util.c).
+> board/st/stm32mp1/stm32mp1.c:
+>      warning: no previous prototype for 'board_mtdparts_default'
+>               [-Wmissing-prototypes]
+>      void board_mtdparts_default(const char **mtdids,
+>                                  const char **mtdparts)
+>           ^~~~~~~~~~~~~~~~~~~~~~
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---DG78IEnUmLKoW088
+--EzyTiZo8w1pFn3ee
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4sdg0ACgkQh/n2NdMd
-dlJ9gQ/9E1ShZ9bw8LVp1o0z3fk9yGq+qeJ/arajjYTS8ZZw5B2saZOV/GRBcYY3
-/bR7CDVfzFk+Z3KgZhzeq+xWlvUXoj37VJXBgechfKs9SBFKiXSv3C6mu9KfPqVE
-sQmvgm039tTsxBUu8bnSs2V2Q2HGX8HmOkGZThCARRBLaoyueHG03k/KGxo9AW6V
-pjxznrBT44hDtL2zGwWCfEW9WYaDlL+DThRcOlEhy0OcO8LPDivgv8c038zohZus
-GHe12KksyW1pHWbCd81oxMTbdEdF9unmHF/GKgb5qHqXdenCGLVx937D7eU9yQOj
-IsRe1Usj3RA+lG7CZp0YM8D01Srm69tPMy+k1CFTa6Hh/DDC1xbTxxbSO6RaIPF3
-tO3QNSVXXdTeg9F+S83CHa2vN6cZ7hqVxmN1UkciCZvgKUsNCPQFfuAl2caRTCkR
-s4JWVuV89sSXxgFbKFNwaNKpXEsZBoqZYlSfT7hBoI5TwMo9k2lMjHIeUr36CU4k
-9dgFbiOVkKqnTXOj50UuuXFh9RHB+gx55+wrywgJxRH0tNbO3XOu+n2ZJOeh1sF1
-2wi4aSh8RUXKrbFbOevqwYcFDZsBIm/h01rhakHJKovH+njHHbXdlX+OWfUtOxpQ
-ksibRNUD++4fdDH2WbNnPIJEy2Y2feFjrCHFonbyaIMc0h/U4Tw=
-=L6gP
+iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4sdo8ACgkQh/n2NdMd
+dlJVcg/+M8efD13FYRgjx3lSEAKSB+/h4OVUe3O4Ky+ugev0ERn97hfcxDPqncwN
+wQY/A/WpB8Y86mOukPkQQZmacxq5kFgZLckh8LSWqPyr1QVp5CWw38oVt4pflvMf
+0Nk0/LWbkbFu0+gakGx1ERgcHlOGYrdrzlUMzvaytOl/jB6Z2ga/xdb/geqXQjBu
+Dv630rpuIZq7d2sCOhVgcAqJT/H5jhKPKY0TBJGTR3/igwYwEO0GflgHpDLIEApC
+vWgVMds3JYz9bsWp6OeywvmJMeqoj/cvSHKkg042eV7dYbES3F4mYrishhvppSYs
+B+Mhl6it9+1i7l09zli1iy+x3afQ7fLTcGptlFfA3fBalvK70RQpFpFVKcOaLpOp
+NrxOiC3ZUt/PbgiGxFBWAPCvc+jcC2FKkIAtoxAz/eQTL0wiC/HWwBGZbE5OtpME
+hxw8omvrsyugZiELzjNJDnbBhtrtzdc5KkEBSb7kvkqgSoE9OhGTjDyw8qE+Pdc7
+YqU0LYrxRRU42uvs66dV20q38VsHfYHzO1n3k1y2QtDCD3EJYrx+Dr3tSezgIqxL
+tpEkGPnF7dF01kGfqemq5hyY6AuKrQE0hF4gKN7BtiGVm7eEkwu+jAaOjP2Eto2n
+gqKU9LNKFNy49Zt3II2sehKlfwVtEEjjJhiEjZAMq01BZRHjuZg=
+=pDiA
 -----END PGP SIGNATURE-----
 
---DG78IEnUmLKoW088--
+--EzyTiZo8w1pFn3ee--
 
---===============4374582383222769656==
+--===============4298471985570681419==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -160,4 +139,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4374582383222769656==--
+--===============4298471985570681419==--

@@ -2,62 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6567414B194
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A4B814B195
 	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 10:11:38 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A769C36B0B
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E433C36B0C
 	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 09:11:38 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7ABC8C36B0D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E8554C36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue, 28 Jan 2020 09:11:32 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00S987Xe024262; Tue, 28 Jan 2020 10:11:30 +0100
+ 00S990Mi002586; Tue, 28 Jan 2020 10:11:31 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=NkvDegRHM2JTEh52RNSG2NZAj6FCwW1wz43YLJ8Ihvg=;
- b=d5HpQx0TWja1OH6vo/p+6ovLSpYpvwefEBzQFx8lfHj1rnyF6H5yP81ewtbvAx/JzQ96
- h2y8g+NgZd1BHGyxf35KEYlqN0q6+d4gJoH8Vxd8s/SzjpbUBt1uDSGIvUHtlJgXbdlG
- d5M5+JoB7W0yW7aNn6X/sWbzoSjWzkPkAqyhzAJMPRlW37LK20nYIq0T0OKO4oVgSe/z
- ZQE/30Tbb8ga0Yp4W5T1/erkUNk8uEUUWVMMgrslvVzd4/jIZvZOy494GJImCrQZpGK9
- 9au2fGHZhXfg5KgEErBtZVBJqwl0Aq/ZprUvbgC2iBMO53KVxVwkyUu3AuPHvuVHtEcC 7w== 
+ bh=dGLXfdlz7a4kdjEKGXcwwY8Hye55Uz2fKEH46xPxJ6k=;
+ b=EMWO3fm9rwrf7daEsddpgrCdovwhVTGoCTWwqm7vI5L05uqbB/zwf6PFqd5Q4f5o089+
+ UWmlHZSlna+AD0j5+1GU/BN/njj0OF2rvem7kJT4u4ajmK0wMZvkyhfK2lRo8yDwUFpx
+ cGXjGF5hHevJsgqz6zqg6RS3hZ9dsSIAm0l6Ivsf0g8X5i5A4bVQr1H2h4IYCGBAl3Ue
+ LXDuM3+AoTl4NetVgt4cACkLx0bxjvq4xoHwzm9tERvpREgPTnHvWREaVxhIm2v6hipz
+ kLCHV/q8oLqM7CcONIiu6sKmEEbyUkMQmpuK7TN5oGEL9uNABzHQGhAeopH3XBnWL9fj WA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xrc134y9e-1
+ by mx07-00178001.pphosted.com with ESMTP id 2xrcaxvwkd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jan 2020 10:11:30 +0100
+ Tue, 28 Jan 2020 10:11:31 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2B3E510002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E5A5C10002A;
  Tue, 28 Jan 2020 10:11:30 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 200F7212A40;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DC9B7212A3F;
  Tue, 28 Jan 2020 10:11:30 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 28 Jan 2020 10:11:29 +0100
+ Tue, 28 Jan 2020 10:11:30 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jan 2020 10:11:01 +0100
-Message-ID: <20200128101041.4.Ide537d091d8ee33f89ee50edad59ea237e517e42@changeid>
+Date: Tue, 28 Jan 2020 10:11:02 +0100
+Message-ID: <20200128101042.5.Ic4ce0ec17e761c1e8458602a341cb9c806aed270@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200128091106.28552-1-patrick.delaunay@st.com>
 References: <20200128091106.28552-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG8NODE1.st.com (10.75.127.22) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG7NODE2.st.com (10.75.127.20) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-01-28_02:2020-01-24,
  2020-01-28 signatures=0
-Cc: Antonio Borneo <antonio.borneo@st.com>, Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>, Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to PLL4_R
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 5/9] ARM: dts: stm32mp1: correct ddr node
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,76 +73,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Antonio Borneo <antonio.borneo@st.com>
+This patch fix the warning:
+dt.dts: Warning (simple_bus_reg): Node /soc/ddr@5A003000
+simple-bus unit address format error, expected "5a003000"
 
-LTDC modifies the clock frequency to adapt it to the display. Such
-frequency change is not detected by the FDCAN driver that instead
-cache the value at probe and pretend to use it later.
-
-Keep the LTDC alone on PLL4_Q by moving the FDCAN to PLL4_R.
-
-Signed-off-by: Antonio Borneo <antonio.borneo@st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi | 2 +-
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi       | 2 +-
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi       | 2 +-
- arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi     | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ arch/arm/dts/stm32mp15-ddr.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi b/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-index 1104a70a65..d8a4617d90 100644
---- a/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-@@ -91,7 +91,7 @@
- 		CLK_UART6_HSI
- 		CLK_UART78_HSI
- 		CLK_SPDIF_PLL4P
--		CLK_FDCAN_PLL4Q
-+		CLK_FDCAN_PLL4R
- 		CLK_SAI1_PLL3Q
- 		CLK_SAI2_PLL3Q
- 		CLK_SAI3_PLL3Q
-diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-index 4045a6e731..a7a125c087 100644
---- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-@@ -110,7 +110,7 @@
- 		CLK_UART6_HSI
- 		CLK_UART78_HSI
- 		CLK_SPDIF_PLL4P
--		CLK_FDCAN_PLL4Q
-+		CLK_FDCAN_PLL4R
- 		CLK_SAI1_PLL3Q
- 		CLK_SAI2_PLL3Q
- 		CLK_SAI3_PLL3Q
-diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-index b2ac49472a..32d95b84e7 100644
---- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-@@ -107,7 +107,7 @@
- 		CLK_UART6_HSI
- 		CLK_UART78_HSI
- 		CLK_SPDIF_PLL4P
--		CLK_FDCAN_PLL4Q
-+		CLK_FDCAN_PLL4R
- 		CLK_SAI1_PLL3Q
- 		CLK_SAI2_PLL3Q
- 		CLK_SAI3_PLL3Q
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-index 320912edd8..21aa4bfb86 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-@@ -142,7 +142,7 @@
- 		CLK_UART6_HSI
- 		CLK_UART78_HSI
- 		CLK_SPDIF_PLL4P
--		CLK_FDCAN_PLL4Q
-+		CLK_FDCAN_PLL4R
- 		CLK_SAI1_PLL3Q
- 		CLK_SAI2_PLL3Q
- 		CLK_SAI3_PLL3Q
+diff --git a/arch/arm/dts/stm32mp15-ddr.dtsi b/arch/arm/dts/stm32mp15-ddr.dtsi
+index 479b700c86..38f29bb789 100644
+--- a/arch/arm/dts/stm32mp15-ddr.dtsi
++++ b/arch/arm/dts/stm32mp15-ddr.dtsi
+@@ -5,7 +5,7 @@
+ 
+ / {
+ 	soc {
+-		ddr: ddr@5A003000 {
++		ddr: ddr@5a003000 {
+ 			u-boot,dm-pre-reloc;
+ 
+ 			compatible = "st,stm32mp1-ddr";
 -- 
 2.17.1
 

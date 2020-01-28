@@ -2,62 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C8EF14B196
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CCDE14B197
 	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 10:11:38 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 47C65C36B0E
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4FCD9C36B10
 	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 09:11:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8AE6EC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60852C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jan 2020 09:11:33 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue, 28 Jan 2020 09:11:34 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 00S988uu024267; Tue, 28 Jan 2020 10:11:32 +0100
+ 00S97Vko026248; Tue, 28 Jan 2020 10:11:32 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=3qa6H7wCTEptTWRuPwd8CWqBhhQPcm5iKReSg4XPETE=;
- b=KreJkWUNLyy9DEjEZuoVDVxvsCPQUGxJTwsebqusuUaN3suReFz8LWFuoPGxiEv+0llS
- 936n4ouFRnCCznHf7YWXAA0WZ8e7IkhodhAL+3RGCHBgsZJsSE+X6unyHHOhFRW7n2+3
- 7+3L0cedJMzZ4H8VntbNJ99yHgBeQa3j3eX5gCe6nl8YASiS2fkZlgXgbBKNHglt7ISR
- w4ZibydCfRhFGK0wqfuibGNH9jI2k6JsLvstOiQd113PuPZhWk9iYEsRGs2zruamLeL6
- vjgK1dOMSTzzTTR3EJtAlDL5KOTG41+pi1R4Y8HL/klLk0PP+mzxqFYNCqupWl/xOXzm ig== 
+ bh=ZMEWDMimTIM2Zutqy0Mt12Jph0dKye1msLggHaSUBHg=;
+ b=pI9ECgYj4Qekg7HF6bAesGRi1sX41PrXqWzkNIS0vEFY6N1c7IOBq15DsZKr0TuI3OfB
+ KX/KDDomBe3uiEraCwzNHbWk3OpOkYZY9UeTpl3FyRrD2lsbJTU8FbSX3naYpi+MrA0k
+ UWFiDPnBU6ryVp5WHKRBn0FtRZKa5F4kDRyOoDy6P3JZZGdoFhN/eW3UcOOCmKYYfjea
+ z062Kb2FMuke6iJ61su9BkltbzB0/GAl23QTbML9hucmJFYkG0990+nphOIfJkLd7wFq
+ AtMwgc9se2EwL+eDCIeksTOxgKXA97F/atyoTmyr0w7F+rTF+eEUjpN0/MZzSF2qV/YQ SA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xrc134y9k-1
+ by mx07-00178001.pphosted.com with ESMTP id 2xrbpaw5hr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 28 Jan 2020 10:11:32 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5A5B100034;
- Tue, 28 Jan 2020 10:11:31 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 589A710002A;
+ Tue, 28 Jan 2020 10:11:32 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9B7E3212A3F;
- Tue, 28 Jan 2020 10:11:31 +0100 (CET)
-Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 502CE212A3F;
+ Tue, 28 Jan 2020 10:11:32 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Tue, 28 Jan 2020 10:11:31 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jan 2020 10:11:03 +0100
-Message-ID: <20200128101042.6.I2f3909b277fbe345fc8d26129dfdf17ff2249b0a@changeid>
+Date: Tue, 28 Jan 2020 10:11:04 +0100
+Message-ID: <20200128091106.28552-4-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200128091106.28552-1-patrick.delaunay@st.com>
 References: <20200128091106.28552-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG6NODE3.st.com (10.75.127.18) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG6NODE1.st.com (10.75.127.16) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-01-28_02:2020-01-24,
  2020-01-28 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 6/9] ARM: dts: stm32m1: add reg for pll nodes
+Subject: [Uboot-stm32] [PATCH 7/9] board: stm32mp1: update readme
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,308 +73,142 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Fix the following DT dtc warnings for stm32mp1 boards:
-
-Warning (unit_address_vs_reg): /soc/rcc@50000000/st,pll@0:
-  node has a unit name, but no reg property
-Warning (unit_address_vs_reg): /soc/rcc@50000000/st,pll@1:
-  node has a unit name, but no reg property
-Warning (unit_address_vs_reg): /soc/rcc@50000000/st,pll@2:
-  node has a unit name, but no reg property
-Warning (unit_address_vs_reg): /soc/rcc@50000000/st,pll@3:
-  node has a unit name, but no reg property
+Update readme:
+- list the supported SOC and change family to STM32MP15x
+- add warning on OTP write and prerequisite:
+  check if MAC address is not yet provisioned.
+- Use filesize for mmc write command (avoid to write all partition
+  with ${partsize}). ${filesize} and ${partsize} are set by previous
+  load command.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/arm/dts/stm32mp157-u-boot.dtsi           |  2 ++
- .../arm/dts/stm32mp157a-avenger96-u-boot.dtsi |  8 +++++
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi      |  8 +++++
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi      |  8 +++++
- arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  8 +++++
- .../clock/st,stm32mp1.txt                     | 32 ++++++++++++++++---
- 6 files changed, 62 insertions(+), 4 deletions(-)
+ board/st/stm32mp1/README | 52 ++++++++++++++++++++++++++--------------
+ 1 file changed, 34 insertions(+), 18 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp157-u-boot.dtsi b/arch/arm/dts/stm32mp157-u-boot.dtsi
-index cb8d60e33d..8f9535a4db 100644
---- a/arch/arm/dts/stm32mp157-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157-u-boot.dtsi
-@@ -134,6 +134,8 @@
+diff --git a/board/st/stm32mp1/README b/board/st/stm32mp1/README
+index f2069bcefa..5d7465a8c8 100644
+--- a/board/st/stm32mp1/README
++++ b/board/st/stm32mp1/README
+@@ -3,8 +3,8 @@ SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+ # Copyright (C) 2018 STMicroelectronics - All Rights Reserved
+ #
  
- &rcc {
- 	u-boot,dm-pre-reloc;
-+	#address-cells = <1>;
-+	#size-cells = <0>;
- };
+-U-Boot on STMicroelectronics STM32MP1
+-======================================
++U-Boot on STMicroelectronics STM32MP15x
++=======================================
  
- &sdmmc1 {
-diff --git a/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi b/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-index d8a4617d90..d6dc746365 100644
---- a/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi
-@@ -105,6 +105,8 @@
+ 1. Summary
+ ==========
+@@ -12,12 +12,12 @@ This is a quick instruction for setup stm32mp1 boards.
  
- 	/* VCO = 1300.0 MHz => P = 650 (CPU) */
- 	pll1: st,pll@0 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <0>;
- 		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
- 		frac = < 0x800 >;
- 		u-boot,dm-pre-reloc;
-@@ -112,6 +114,8 @@
+ 2. Supported devices
+ ====================
+-U-Boot supports one STMP32MP1 SoCs: STM32MP157
++U-Boot supports STMP32MP15x SoCs: STM32MP157, STM32MP153 and STM32MP151
  
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
- 		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
- 		frac = < 0x1400 >;
- 		u-boot,dm-pre-reloc;
-@@ -119,6 +123,8 @@
+-The STM32MP157 is a Cortex-A MPU aimed at various applications.
++The STM32MP15x is a Cortex-A MPU aimed at various applications.
+ It features:
+-- Dual core Cortex-A7 application core
+-- 2D/3D image composition with GPU
++- Dual core Cortex-A7 application core (Single on STM32MP151)
++- 2D/3D image composition with GPU (only on STM32MP157)
+ - Standard memories interface support
+ - Standard connectivity, widely inherited from the STM32 MCU family
+ - Comprehensive security support
+@@ -37,11 +37,11 @@ And the necessary drivers
+ 4. Fuse
  
- 	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
- 	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
- 		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
- 		frac = < 0x1a04 >;
- 		u-boot,dm-pre-reloc;
-@@ -126,6 +132,8 @@
+ Currently the following boards are supported:
+-+ stm32mp157c-ev1
+-+ stm32mp157c-ed1
+-+ stm32mp157a-dk1
+-+ stm32mp157c-dk2
+-+ stm32mp157a-avenger96
+++ stm32mp157a-avenger96.dts
+++ stm32mp157a-dk1.dts
+++ stm32mp157c-dk2.dts
+++ stm32mp157c-ed1.dts
+++ stm32mp157c-ev1.dts
  
- 	/* VCO = 480.0 MHz => P = 120, Q = 40, R = 96 */
- 	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
- 		cfg = < 1 39 3 11 4 PQR(1,1,1) >;
- 		u-boot,dm-pre-reloc;
- 	};
-diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-index a7a125c087..a5cc01dd19 100644
---- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-@@ -124,6 +124,8 @@
+ 3. Boot Sequences
+ =================
+@@ -74,7 +74,7 @@ with FSBL = First Stage Bootloader
+    U-Boot is running in secure mode and provide a secure monitor to the kernel
+    with only PSCI support (Power State Coordination Interface defined by ARM).
  
- 	/* VCO = 1300.0 MHz => P = 650 (CPU) */
- 	pll1: st,pll@0 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <0>;
- 		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
- 		frac = < 0x800 >;
- 		u-boot,dm-pre-reloc;
-@@ -131,6 +133,8 @@
+-All the STM32MP1 boards supported by U-Boot use the same generic board
++All the STM32MP15x boards supported by U-Boot use the same generic board
+ stm32mp1 which support all the bootable devices.
  
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
- 		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
- 		frac = < 0x1400 >;
- 		u-boot,dm-pre-reloc;
-@@ -138,6 +142,8 @@
+ Each board is configurated only with the associated device tree.
+@@ -108,7 +108,7 @@ the supported device trees for stm32mp157 are:
+    + install package needed in U-Boot makefile
+      (libssl-dev, swig, libpython-dev...)
+    + install ARMv7 toolchain for 32bit Cortex-A (from Linaro,
+-     from SDK for STM32MP1, or any crosstoolchains from your distribution)
++     from SDK for STM32MP15x, or any crosstoolchains from your distribution)
  
- 	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
- 	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
- 		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
- 		frac = < 0x1a04 >;
- 		u-boot,dm-pre-reloc;
-@@ -145,6 +151,8 @@
+ 2. Set the cross compiler:
  
- 	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
- 	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
- 		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
- 		u-boot,dm-pre-reloc;
- 	};
-diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-index 32d95b84e7..347edf7e58 100644
---- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-@@ -121,6 +121,8 @@
+@@ -323,8 +323,7 @@ c) copy U-Boot in first GPT partition of eMMC
+ 	# ext4load mmc 0:4 0xC0000000 u-boot.img
+ 	# mmc dev 1
+ 	# part start mmc 1 1 partstart
+-	# part size mmc 1 1 partsize
+-	# mmc write ${fileaddr} ${partstart} ${partsize}
++	# mmc write ${fileaddr} ${partstart} ${filesize}
  
- 	/* VCO = 1300.0 MHz => P = 650 (CPU) */
- 	pll1: st,pll@0 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <0>;
- 		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
- 		frac = < 0x800 >;
- 		u-boot,dm-pre-reloc;
-@@ -128,6 +130,8 @@
+ To boot from eMMC, select BootPinMode = 0 1 0 and reset.
  
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
- 		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
- 		frac = < 0x1400 >;
- 		u-boot,dm-pre-reloc;
-@@ -135,6 +139,8 @@
+@@ -334,14 +333,27 @@ To boot from eMMC, select BootPinMode = 0 1 0 and reset.
+ Please read doc/README.enetaddr for the implementation guidelines for mac id
+ usage. Basically, environment has precedence over board specific storage.
  
- 	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
- 	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
- 		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
- 		frac = < 0x1a04 >;
- 		u-boot,dm-pre-reloc;
-@@ -142,6 +148,8 @@
+-Mac id storage and retrieval in stm32mp otp :
++For STMicroelectonics board, it is retrieved in STM32MP15x otp :
+ - OTP_57[31:0] = MAC_ADDR[31:0]
+ - OTP_58[15:0] = MAC_ADDR[47:32]
  
- 	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
- 	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
- 		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
- 		u-boot,dm-pre-reloc;
- 	};
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-index 21aa4bfb86..6c952a57ee 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-@@ -156,6 +156,8 @@
+ To program a MAC address on virgin OTP words above, you can use the fuse command
+ on bank 0 to access to internal OTP:
  
- 	/* VCO = 1300.0 MHz => P = 650 (CPU) */
- 	pll1: st,pll@0 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <0>;
- 		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
- 		frac = < 0x800 >;
- 		u-boot,dm-pre-reloc;
-@@ -163,6 +165,8 @@
- 
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
- 		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
- 		frac = < 0x1400 >;
- 		u-boot,dm-pre-reloc;
-@@ -170,6 +174,8 @@
- 
- 	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
- 	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
- 		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
- 		frac = < 0x1a04 >;
- 		u-boot,dm-pre-reloc;
-@@ -177,6 +183,8 @@
- 
- 	/* VCO = 600.0 MHz => P = 50, Q = 50, R = 50 */
- 	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
- 		cfg = < 1 49 11 11 11 PQR(1,1,1) >;
- 		u-boot,dm-pre-reloc;
- 	};
-diff --git a/doc/device-tree-bindings/clock/st,stm32mp1.txt b/doc/device-tree-bindings/clock/st,stm32mp1.txt
-index ec1d703f34..a3d427911d 100644
---- a/doc/device-tree-bindings/clock/st,stm32mp1.txt
-+++ b/doc/device-tree-bindings/clock/st,stm32mp1.txt
-@@ -12,6 +12,9 @@ describes the fields added for clock tree initialization which are not present
- in Linux binding for compatible "st,stm32mp1-rcc" defined in st,stm32mp1-rcc.txt
- file.
- 
-+This parent node may optionally have additional children nodes which define
-+specific init values for RCC elements.
+-    example to set mac address "12:34:56:78:9a:bc"
++    Prerequisite: check if a MAC address isn't yet programmed in OTP
 +
- The added properties for clock tree initialization are:
- 
- Required properties:
-@@ -78,13 +81,16 @@ Required properties:
- 	>;
- 
- Optional Properties:
--- st,pll : A specific PLL configuration, including frequency.
-+- children for a PLL configuration with "st,stm32mp1-pll" compatible
- 
--  PLL children nodes for PLL1 to PLL4 (see ref manual for details)
--  are listed with associated index 0 to 3 (st,pll@0 to st,pll@3).
--  PLLx is off when the associated node is absent.
-+  each PLL children nodes for PLL1 to PLL4 (see ref manual for details)
-+  are listed with associated reg 0 to 3.
-+  PLLx is off when the associated node is absent or deactivated.
- 
-   Here are the available properties for each PLL node:
-+    - compatible: should be "st,stm32mp1-pll"
++    1- check OTP: their value must be equal to 0
 +
-+    - reg: index of the pll instance
++       STM32MP> fuse sense 0 57 2
++       Sensing bank 0:
++       Word 0x00000039: 00000000 00000000
++
++    2- check environment variable
++
++       STM32MP> env print ethaddr
++       ## Error: "ethaddr" not defined
++
++    Example to set mac address "12:34:56:78:9a:bc"
  
-     - cfg: The parameters for PLL configuration in the following order:
-            DIVM DIVN DIVP DIVQ DIVR Output.
-@@ -118,18 +124,26 @@ Optional Properties:
+     1- Write OTP
+        STM32MP> fuse prog -y 0 57 0x78563412 0x0000bc9a
+@@ -355,9 +367,13 @@ on bank 0 to access to internal OTP:
+        ### Setting environment from OTP MAC address = "12:34:56:78:9a:bc"
  
-     Example:
- 	st,pll@0 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <0>;
- 		cfg = < 1 53 0 0 0 1 >;
- 		frac = < 0x810 >;
- 	};
- 	st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
- 		cfg = < 1 43 1 0 0 PQR(0,1,1) >;
- 		csg = < 10 20 1 >;
- 	};
- 	st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
- 		cfg = < 2 85 3 13 3 0 >;
- 		csg = < 10 20 SSCG_MODE_CENTER_SPREAD >;
- 		};
- 	st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
- 		cfg = < 2 78 4 7 9 3 >;
- 	};
+     4 check env update
+-       STM32MP> print ethaddr
++       STM32MP> env print ethaddr
+        ethaddr=12:34:56:78:9a:bc
  
-@@ -277,6 +291,8 @@ Example of clock tree initialization
- 			u-boot,dm-pre-reloc;
- 			compatible = "st,stm32mp1-rcc", "syscon";
- 			reg = <0x50000000 0x1000>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
- 			#clock-cells = <1>;
- 			#reset-cells = <1>;
- 			interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
-@@ -347,6 +363,8 @@ Example of clock tree initialization
++warning:: This MAC address provisioning can't be executed twice on the same
++          board as the OTP are protected. It is already done for the board
++          provided by STMicroelectronics.
++
+ 10. Coprocessor firmware
+ ========================
  
- 			/* VCO = 1300.0 MHz => P = 650 (CPU) */
- 			pll1: st,pll@0 {
-+				compatible = "st,stm32mp1-pll";
-+				reg = <0>;
- 				cfg = < 2 80 0 0 0 PQR(1,0,0) >;
- 				frac = < 0x800 >;
- 				u-boot,dm-pre-reloc;
-@@ -355,6 +373,8 @@ Example of clock tree initialization
- 			/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU),
- 			                       R = 533 (DDR) */
- 			pll2: st,pll@1 {
-+				compatible = "st,stm32mp1-pll";
-+				reg = <1>;
- 				cfg = < 2 65 1 0 0 PQR(1,1,1) >;
- 				frac = < 0x1400 >;
- 				u-boot,dm-pre-reloc;
-@@ -362,6 +382,8 @@ Example of clock tree initialization
- 
- 			/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
- 			pll3: st,pll@2 {
-+				compatible = "st,stm32mp1-pll";
-+				reg = <2>;
- 				cfg = < 1 33 1 16 36 PQR(1,1,1) >;
- 				frac = < 0x1a04 >;
- 				u-boot,dm-pre-reloc;
-@@ -369,6 +391,8 @@ Example of clock tree initialization
- 
- 			/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
- 			pll4: st,pll@3 {
-+				compatible = "st,stm32mp1-pll";
-+				reg = <3>;
- 				cfg = < 3 98 5 7 7 PQR(1,1,1) >;
- 				u-boot,dm-pre-reloc;
- 			};
 -- 
 2.17.1
 

@@ -2,58 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5ABC014C76A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 09:25:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E22514CEB0
+	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 17:51:57 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 22EBCC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 08:25:14 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 182CDC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 16:51:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2D738C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4CD54C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 29 Jan 2020 06:00:55 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 486tBp0bWkz1rXvw;
- Wed, 29 Jan 2020 07:00:50 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 486tBn695jz1qr2W;
- Wed, 29 Jan 2020 07:00:49 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id YaXlws65EAJA; Wed, 29 Jan 2020 07:00:47 +0100 (CET)
-X-Auth-Info: s0Ed7YidENGLgKpDxwZZo35dSKEYSBXb1FULgBh1db0=
-Received: from [192.168.1.106] (213-197-89-185.pool.digikabel.hu
- [213.197.89.185])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Wed, 29 Jan 2020 07:00:47 +0100 (CET)
-To: Simon Glass <sjg@chromium.org>
-References: <20200123184826.116850-1-sjg@chromium.org>
-From: Heiko Schocher <hs@denx.de>
-Message-ID: <42ee5912-c0e1-1313-75d7-59d21fccabfa@denx.de>
-Date: Wed, 29 Jan 2020 07:00:46 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.5.2
-MIME-Version: 1.0
-In-Reply-To: <20200123184826.116850-1-sjg@chromium.org>
+ Wed, 29 Jan 2020 16:51:56 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 00TGl90E002182; Wed, 29 Jan 2020 17:51:53 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=e8vjSMWXg5QjgzceS3qF8SfT0OfXNiWE4Z+VZiDbC5Q=;
+ b=BFODymBBSU/QwKeDilkOEb+CdVleqjxoP+SDDcxe4jhrSM3opJxNNKpxjvoOGG+EMRkd
+ TfSaEuGCcXynRVbAwuBY5wcWpZTqvDQxPnMLCG6K7fa3rHqnzdvG0ca4JvjCprLYPCQb
+ nT3pxqHIEio9xLgFmc2EhwzUHGsouZ9BoMGI7kaSc1lcJGD77+qdhK970k/96MN9heVr
+ 9tAfujO2Ci4+K8IZxcMYyUhsNNXetDcb9WstPqJmo13QgsaOhbZrhDBkxgSsbVCIiAzp
+ 8CW0FIwfrIblK+sx+WXonJeuXaKn10e5vn3t1+NEjotwK+MGYKrN5c6vlt7byYp5nuHs TA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2xrcay46r9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 29 Jan 2020 17:51:53 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B39B5100038;
+ Wed, 29 Jan 2020 17:51:51 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag5node3.st.com [10.75.127.15])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 43B682BF9DB;
+ Wed, 29 Jan 2020 17:51:51 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG5NODE3.st.com
+ (10.75.127.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 29 Jan
+ 2020 17:51:50 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 29 Jan 2020 17:51:50 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to PLL4_R
+Thread-Index: AQHV1brt0TuVWBqyKk67jzeWED/NPqf/7R6AgAHj0lA=
+Date: Wed, 29 Jan 2020 16:51:50 +0000
+Message-ID: <adb487b28fac45b6b147464b1bb53641@SFHDAG6NODE3.st.com>
+References: <20200128091106.28552-1-patrick.delaunay@st.com>
+ <20200128101041.4.Ide537d091d8ee33f89ee50edad59ea237e517e42@changeid>
+ <231eb0d9-9bf3-ac62-0177-f7ee6dfb644d@denx.de>
+In-Reply-To: <231eb0d9-9bf3-ac62-0177-f7ee6dfb644d@denx.de>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-X-Mailman-Approved-At: Wed, 29 Jan 2020 08:25:12 +0000
-Cc: Robert Beckett <bob.beckett@collabora.com>, Michal Simek <monstr@monstr.eu>,
- Jun Chen <ptchentw@gmail.com>, Ian Ray <ian.ray@ge.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Lukasz Majewski <lukma@denx.de>,
- Ley Foon Tan <ley.foon.tan@intel.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 00/23] i2c: designware_ic2:
- Improvements to timing and general cleanup
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.44]
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-01-29_04:2020-01-28,
+ 2020-01-29 signatures=0
+Cc: Antonio BORNEO <antonio.borneo@st.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Gerald BAEZA <gerald.baeza@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to
+	PLL4_R
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -65,108 +79,62 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Reply-To: hs@denx.de
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello Simon,
+Hi Marek,
 
-Am 23.01.2020 um 19:48 schrieb Simon Glass:
-> This series updates the Designware I2C driver to support reading its
-> timing from the device tree and handling it in units of nanoseconds
-> instead of clock cycles.
+> From: Marek Vasut <marex@denx.de>
+> Sent: mardi 28 janvier 2020 13:16
 > 
-> A new function converts from nanoseconds to the units used by the I2C
-> controller and makes sure that the requested bus speed is not exceeded.
-> This is more accurate than the existing method.
+> On 1/28/20 10:11 AM, Patrick Delaunay wrote:
+> > From: Antonio Borneo <antonio.borneo@st.com>
+> >
+> > LTDC modifies the clock frequency to adapt it to the display. Such
+> > frequency change is not detected by the FDCAN driver that instead
+> > cache the value at probe and pretend to use it later.
+> >
+> > Keep the LTDC alone on PLL4_Q by moving the FDCAN to PLL4_R.
 > 
-> The series includes a few smaller clean-ups in the same driver.
-> 
-> In addition the v2 series adds enums for i2c speed and updates drivers to
-> use them.
-> 
-> There is currently an existing configuration method used just for a few
-> x86 boards (Baytrail). This method is retained but it should be removed in
-> favour of using the device tree. I have not done this in this series since
-> I am not sure of the timings to use.
-> 
-> Changes in v3:
-> - Fix the address of comp_param1 by adding a gap
-> - Drop note about moving to driver model
-> - Use ARRAY_SIZE() for i2c_specs bounds check
-> - Add new patch with support for fast-plus speed
-> - Add new patch to move dw_i2c_speed_config to header
-> - Add new patch to separate out the speed calculation
-> - Add new patch to do more in the probe() method
-> 
-> Changes in v2:
-> - Fix 'previde' typo
-> - Add a few more clean-up patches for i2c
-> 
-> Simon Glass (23):
->    i2c: designware_i2c: Add more registers
->    i2c: designware_i2c: Don't allow changing IC_CLK
->    i2c: designware_i2c: Include clk.h in the header file
->    i2c: designware_i2c: Rename 'max' speed to 'high' speed
->    i2c: designware_i2c: Use an enum for selected speed mode
->    i2c: designware_i2c: Use an accurate bus clock instead of MHz
->    i2c: designware_i2c: Bring in the binding file
->    i2c: designware_i2c: Read device-tree properties
->    i2c: designware_i2c: Drop scl_sda_cfg parameter
->    i2c: designware_i2c: Put hold config in a struct
->    i2c: designware_i2c: Rewrite timing calculation
->    i2c: designware_i2c: Add spike supression
->    i2c: Add enums for i2c speed and address size
->    i2c: ast_i2c: Update to use standard enums for speed
->    i2c: designware_i2c: Update to use standard enums for speed
->    i2c: kona_i2c: Update to use standard enums for speed
->    i2c: omap: Update to use standard enums for speed
->    i2c: stm32: Update to use standard enums for speed
->    i2c: Update drivers to use enum for speed
->    i2c: designware_i2c: Add support for fast-plus speed
->    i2c: designware_i2c: Move dw_i2c_speed_config to header
->    i2c: designware_i2c: Separate out the speed calculation
->    i2c: designware_i2c: Do more in the probe() method
-> 
->   .../i2c/i2c-designware.txt                    |  73 +++++
->   drivers/i2c/ast_i2c.c                         |   2 +-
->   drivers/i2c/ast_i2c.h                         |   2 -
->   drivers/i2c/designware_i2c.c                  | 300 ++++++++++++++----
->   drivers/i2c/designware_i2c.h                  |  73 ++++-
->   drivers/i2c/designware_i2c_pci.c              |   4 +-
->   drivers/i2c/exynos_hs_i2c.c                   |   5 +-
->   drivers/i2c/fsl_i2c.c                         |   3 +-
->   drivers/i2c/i2c-cdns.c                        |   2 +-
->   drivers/i2c/i2c-uclass.c                      |  12 +-
->   drivers/i2c/i2c-uniphier-f.c                  |   2 +-
->   drivers/i2c/i2c-uniphier.c                    |   2 +-
->   drivers/i2c/imx_lpi2c.c                       |   8 +-
->   drivers/i2c/kona_i2c.c                        |  28 +-
->   drivers/i2c/mv_i2c.c                          |   4 +-
->   drivers/i2c/mvtwsi.c                          |   5 +-
->   drivers/i2c/omap24xx_i2c.c                    |   5 +-
->   drivers/i2c/omap24xx_i2c.h                    |   4 -
->   drivers/i2c/rcar_i2c.c                        |   2 +-
->   drivers/i2c/rcar_iic.c                        |   2 +-
->   drivers/i2c/s3c24x0_i2c.c                     |   5 +-
->   drivers/i2c/sandbox_i2c.c                     |   3 +-
->   drivers/i2c/stm32f7_i2c.c                     |  43 +--
->   include/i2c.h                                 |  26 ++
->   24 files changed, 454 insertions(+), 161 deletions(-)
->   create mode 100644 doc/device-tree-bindings/i2c/i2c-designware.txt
+> Now this looks like a grisly workaround. Can you fix the LTDC driver to do
+> something sane on boards which didn't update bootloader yet ?
 
-Applied the hole series to u-boot-i2c master.
+In fact it more a issue in the initial clock-tree used when I upstream the ST board the first time... based on our delivery v1.0.0
 
-Thanks!
+It is already corrected in downstream on v1.1.0:
++ For U-Boot = https://github.com/STMicroelectronics/u-boot/commit/d62f14dece32e41c2854b9ff44aca7b8384aa8a0
++ For TF-A = https://github.com/STMicroelectronics/arm-trusted-firmware/commit/9a24ceda6c3ba060d9acf2b26d069fedde9f0807
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+The LTDC/DSI need to set the pixel clock according the panel configuration and settings: it is normal and needed.
+
+But If the pixel clock is shared with FDCAN, which expects that its input clock is fixed, an issue occur when the pixel clock change.
+
+We could add protection in FDCAN driver (don't assume fixed clock in probe for example) 
+but anyway that don't protect for any issue (pending FDCAN transfer when pixel clock change).
+
+The main issue is that we try to share a clock source between 2 IP that are not compatible:
+1/ FDCAN => clock source configurated by CLK_FDCAN_PLL4Q
+2/ pixel clocl for LTDC and DSI = LTDC_PX or DSI_PX  => _PLL4_Q  (hardcoded in RCC)
+
+The clock source for pixel clock PLL4_Q need only managed only by LDTC as it can modify the source clock.
+
+It is why we decide to change the reference clock tree used on ST Microelectronic boards.
+And unfortunately that impacts the first stage bootloader.
+
+For information in our solution the clock tree is fixed and configurated at boot by first stage bootloader 
+(TF-A normally for trusted boot chain / SPL for basic boot chain) as this configuration is  done in secured
+registers with information provided by device-tree.
+
+See https://wiki.st.com/stm32mpu/wiki/STM32MP15_clock_tree for details
+
+Regards
+
+Patrick
+
+
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

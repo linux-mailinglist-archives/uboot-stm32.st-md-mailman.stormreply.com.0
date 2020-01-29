@@ -2,114 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5380F14BD37
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 16:48:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5ABC014C76A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 09:25:14 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E7369C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jan 2020 15:48:40 +0000 (UTC)
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
- [209.85.160.194])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 22EBCC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jan 2020 08:25:14 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 693C3C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2D738C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jan 2020 15:48:37 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id d18so10602808qtj.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jan 2020 07:48:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:mime-version:content-disposition
- :user-agent; bh=bHjm6G1Rk8zJfPGNqidS5hZF1JC3RoxOY4jsxBuzXlc=;
- b=eMWB2Nz07Wf6asTCU79Ndfm/d3eJmb+MXJ3X3tpFm4ChxP6PAnBXeakDynbOTcZGpS
- hT3pGJO6m+zeRaa1SQeRzmL3Ujz+4toFfW5xEnqmj3KeSY01KMOG2a1/X0vtA4WMtevR
- JdPu0T5uaQXvGHuvup5Py+PqPp+rhQtuN1n3k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition:user-agent;
- bh=bHjm6G1Rk8zJfPGNqidS5hZF1JC3RoxOY4jsxBuzXlc=;
- b=GTSa/fGwEXkfCedZrK5kS10pzXLPu+kNDEpWqMyL2CzFi1Kh5Td2RCj4WQX4Pojxjd
- MnueSsibBIgvcaJo6ZgWS/z7fgl9xGTjoYhqEla6n18JnflyoU2pGIeV+TSGRTdP0Lhx
- dc6Gk3A1I/ahe1Du4mAV7Bq68lkLoD8dQ38MfdrsN+al8j59RaIR8VhUevs03LFzYw+f
- S9l2+A1pVa969kh/oNcsydfUMf3TGBplT/RDMR/oegupSIhcIkKg8RFKeuT2jJHjY7Xq
- kNSPTI+HrJWArFd2LxSojkiU+YB+EEjPQxNKFk7NPAlrjFZjHBo4yiz6LzHUBlztB2Hd
- zWMw==
-X-Gm-Message-State: APjAAAXujp0BFe34WJpuN1kdbdYlNr9fJfWDVBQl2ZaRC7tTWOCR/2Oz
- riCObRQuUK/LJtUWr17uxX5oag==
-X-Google-Smtp-Source: APXvYqyEycqI0hGsJvyrTSRvEaQOkyMVNhxFEwg+Y4ZbDhcrnk2YZfaNJp9RKN/XJ7xd4ES+3omALg==
-X-Received: by 2002:ac8:5206:: with SMTP id r6mr20919860qtn.214.1580226515763; 
- Tue, 28 Jan 2020 07:48:35 -0800 (PST)
-Received: from bill-the-cat
- (2606-a000-1401-86dd-c8bf-ac0b-31a4-d341.inf6.spectrum.com.
- [2606:a000:1401:86dd:c8bf:ac0b:31a4:d341])
- by smtp.gmail.com with ESMTPSA id w24sm2938478qts.3.2020.01.28.07.48.31
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 28 Jan 2020 07:48:34 -0800 (PST)
-Date: Tue, 28 Jan 2020 10:48:29 -0500
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Message-ID: <20200128154829.GS13379@bill-the-cat>
+ Wed, 29 Jan 2020 06:00:55 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 486tBp0bWkz1rXvw;
+ Wed, 29 Jan 2020 07:00:50 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 486tBn695jz1qr2W;
+ Wed, 29 Jan 2020 07:00:49 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id YaXlws65EAJA; Wed, 29 Jan 2020 07:00:47 +0100 (CET)
+X-Auth-Info: s0Ed7YidENGLgKpDxwZZo35dSKEYSBXb1FULgBh1db0=
+Received: from [192.168.1.106] (213-197-89-185.pool.digikabel.hu
+ [213.197.89.185])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Wed, 29 Jan 2020 07:00:47 +0100 (CET)
+To: Simon Glass <sjg@chromium.org>
+References: <20200123184826.116850-1-sjg@chromium.org>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <42ee5912-c0e1-1313-75d7-59d21fccabfa@denx.de>
+Date: Wed, 29 Jan 2020 07:00:46 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+ Thunderbird/52.5.2
 MIME-Version: 1.0
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Wen He <wen.he_1@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Anup Patel <anup.patel@wdc.com>,
- Eddy =?utf-8?B?UGV0cmnImW9y?= <eddy.petrisor@gmail.com>,
- Nikita Kiryanov <nikita@compulab.co.il>,
- Patrick Bruenn <p.bruenn@beckhoff.com>, Adrian Alonso <adrian.alonso@nxp.com>,
- Bhaskar Upadhaya <bhaskar.upadhaya@nxp.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>,
- Vanessa Maegima <vanessa.maegima@nxp.com>, Baruch Siach <baruch@tkos.co.il>,
- Oliver Graute <oliver.graute@kococonnector.com>,
- Atish Patra <atish.patra@wdc.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Marcin Niestroj <m.niestroj@grinn-global.com>,
- David Feng <fenghua@phytium.com.cn>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Richard Hu <richard.hu@technexion.com>,
- Martyn Welch <martyn.welch@collabora.co.uk>, Marek Vasut <marex@denx.de>,
- Hannes Schmelzer <hannes.schmelzer@br-automation.com>,
- Sudhanshu Gupta <sudhanshu.gupta@nxp.com>,
- Otavio Salvador <otavio@ossystems.com.br>,
- Uri Mashiach <uri.mashiach@compulab.co.il>, Sumit Garg <sumit.garg@nxp.com>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
- Vinitha V Pillai <vinitha.pillai@nxp.com>,
- Peter Griffin <peter.griffin@linaro.org>, Ian Ray <ian.ray@ge.com>,
- Simone CIANNI <simone.cianni@bticino.it>,
- Jagan Teki <jagan@amarulasolutions.com>, Jason Liu <jason.hui.liu@nxp.com>,
- Udit Agarwal <udit.agarwal@nxp.com>, Heiko Schocher <hs@denx.de>,
- Zhao Qiang <qiang.zhao@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
- Feng Li <feng.li_2@nxp.com>, Ye Li <ye.li@nxp.com>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Parthiban Nallathambi <parthitce@gmail.com>,
- "Derald D. Woods" <woods.technical@gmail.com>, Breno Lima <breno.lima@nxp.com>,
- Mian Yousaf Kaukab <ykaukab@suse.de>, Gilles Gameiro <gilles@gigadevices.com>,
- Alison Wang <alison.wang@nxp.com>, Ken Lin <Ken.Lin@advantech.com.tw>,
- Ashish Kumar <Ashish.Kumar@nxp.com>,
- Troy Kisky <troy.kisky@boundarydevices.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>, Yunfeng Ding <yunfeng.ding@nxp.com>,
- Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
- Vabhav Sharma <vabhav.sharma@nxp.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Akshay Bhat <akshaybhat@timesys.com>,
- Ludwig Zenz <lzenz@dh-electronics.de>, Stefano Babic <sbabic@denx.de>,
- Rai Harninder <harninder.rai@nxp.com>, Igor Opaniuk <igor.opaniuk@toradex.com>,
- Anatolij Gustschin <agust@denx.de>, Tang Yuantian <andy.tang@nxp.com>,
- Antti =?iso-8859-1?Q?M=E4entausta?= <antti.maentausta@ge.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Bin Meng <bmeng.cn@gmail.com>,
- Palmer Dabbelt <palmer@sifive.com>, Patrice Chotard <patrice.chotard@st.com>,
- Vikas Manocha <vikas.manocha@st.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Prabhakar Kushwaha <prabhakar.kushwaha@nxp.com>,
- Rajesh Bhagat <rajesh.bhagat@nxp.com>,
- Markus Niebel <Markus.Niebel@tq-group.com>,
- Francesco Montefoschi <francesco.montefoschi@udoo.org>,
- Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@linaro.org>,
- =?iso-8859-1?Q?S=E9bastien?= Szymanski <sebastien.szymanski@armadeus.com>,
- Vladimir Oltean <olteanv@gmail.com>
-Subject: [Uboot-stm32] Removing "fdt_high=0xffffffff" from board environments
+In-Reply-To: <20200123184826.116850-1-sjg@chromium.org>
+Content-Language: en-US
+X-Mailman-Approved-At: Wed, 29 Jan 2020 08:25:12 +0000
+Cc: Robert Beckett <bob.beckett@collabora.com>, Michal Simek <monstr@monstr.eu>,
+ Jun Chen <ptchentw@gmail.com>, Ian Ray <ian.ray@ge.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Ley Foon Tan <ley.foon.tan@intel.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 00/23] i2c: designware_ic2:
+ Improvements to timing and general cleanup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -121,71 +65,109 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6332784140259466248=="
+Reply-To: hs@denx.de
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hello Simon,
 
---===============6332784140259466248==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="15k5Fuw+yLfT1d9X"
-Content-Disposition: inline
+Am 23.01.2020 um 19:48 schrieb Simon Glass:
+> This series updates the Designware I2C driver to support reading its
+> timing from the device tree and handling it in units of nanoseconds
+> instead of clock cycles.
+> 
+> A new function converts from nanoseconds to the units used by the I2C
+> controller and makes sure that the requested bus speed is not exceeded.
+> This is more accurate than the existing method.
+> 
+> The series includes a few smaller clean-ups in the same driver.
+> 
+> In addition the v2 series adds enums for i2c speed and updates drivers to
+> use them.
+> 
+> There is currently an existing configuration method used just for a few
+> x86 boards (Baytrail). This method is retained but it should be removed in
+> favour of using the device tree. I have not done this in this series since
+> I am not sure of the timings to use.
+> 
+> Changes in v3:
+> - Fix the address of comp_param1 by adding a gap
+> - Drop note about moving to driver model
+> - Use ARRAY_SIZE() for i2c_specs bounds check
+> - Add new patch with support for fast-plus speed
+> - Add new patch to move dw_i2c_speed_config to header
+> - Add new patch to separate out the speed calculation
+> - Add new patch to do more in the probe() method
+> 
+> Changes in v2:
+> - Fix 'previde' typo
+> - Add a few more clean-up patches for i2c
+> 
+> Simon Glass (23):
+>    i2c: designware_i2c: Add more registers
+>    i2c: designware_i2c: Don't allow changing IC_CLK
+>    i2c: designware_i2c: Include clk.h in the header file
+>    i2c: designware_i2c: Rename 'max' speed to 'high' speed
+>    i2c: designware_i2c: Use an enum for selected speed mode
+>    i2c: designware_i2c: Use an accurate bus clock instead of MHz
+>    i2c: designware_i2c: Bring in the binding file
+>    i2c: designware_i2c: Read device-tree properties
+>    i2c: designware_i2c: Drop scl_sda_cfg parameter
+>    i2c: designware_i2c: Put hold config in a struct
+>    i2c: designware_i2c: Rewrite timing calculation
+>    i2c: designware_i2c: Add spike supression
+>    i2c: Add enums for i2c speed and address size
+>    i2c: ast_i2c: Update to use standard enums for speed
+>    i2c: designware_i2c: Update to use standard enums for speed
+>    i2c: kona_i2c: Update to use standard enums for speed
+>    i2c: omap: Update to use standard enums for speed
+>    i2c: stm32: Update to use standard enums for speed
+>    i2c: Update drivers to use enum for speed
+>    i2c: designware_i2c: Add support for fast-plus speed
+>    i2c: designware_i2c: Move dw_i2c_speed_config to header
+>    i2c: designware_i2c: Separate out the speed calculation
+>    i2c: designware_i2c: Do more in the probe() method
+> 
+>   .../i2c/i2c-designware.txt                    |  73 +++++
+>   drivers/i2c/ast_i2c.c                         |   2 +-
+>   drivers/i2c/ast_i2c.h                         |   2 -
+>   drivers/i2c/designware_i2c.c                  | 300 ++++++++++++++----
+>   drivers/i2c/designware_i2c.h                  |  73 ++++-
+>   drivers/i2c/designware_i2c_pci.c              |   4 +-
+>   drivers/i2c/exynos_hs_i2c.c                   |   5 +-
+>   drivers/i2c/fsl_i2c.c                         |   3 +-
+>   drivers/i2c/i2c-cdns.c                        |   2 +-
+>   drivers/i2c/i2c-uclass.c                      |  12 +-
+>   drivers/i2c/i2c-uniphier-f.c                  |   2 +-
+>   drivers/i2c/i2c-uniphier.c                    |   2 +-
+>   drivers/i2c/imx_lpi2c.c                       |   8 +-
+>   drivers/i2c/kona_i2c.c                        |  28 +-
+>   drivers/i2c/mv_i2c.c                          |   4 +-
+>   drivers/i2c/mvtwsi.c                          |   5 +-
+>   drivers/i2c/omap24xx_i2c.c                    |   5 +-
+>   drivers/i2c/omap24xx_i2c.h                    |   4 -
+>   drivers/i2c/rcar_i2c.c                        |   2 +-
+>   drivers/i2c/rcar_iic.c                        |   2 +-
+>   drivers/i2c/s3c24x0_i2c.c                     |   5 +-
+>   drivers/i2c/sandbox_i2c.c                     |   3 +-
+>   drivers/i2c/stm32f7_i2c.c                     |  43 +--
+>   include/i2c.h                                 |  26 ++
+>   24 files changed, 454 insertions(+), 161 deletions(-)
+>   create mode 100644 doc/device-tree-bindings/i2c/i2c-designware.txt
 
+Applied the hole series to u-boot-i2c master.
 
---15k5Fuw+yLfT1d9X
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Thanks!
 
-Hey all,
-
-Relatively recently it's been highlighted that a number of boards are
-disabling relocation of the device tree image in memory and this in turn
-leading to various difficult to resolve bugs.  At heart, disabling
-device tree relocation at boot is something that should be used in rare
-circumstances (and more generally fdt_high / initrd_high set to where
-they are already residing in memory, as a known, correct and aligned
-address).
-
-I would like to ask everyone to update their board config file to use
-the bootm_size (or set CONFIG_SYS_BOOTMAPSZ) to the amount of memory
-(size, not location) available to safely contain a kernel, device tree
-and initrd for relocation.  Thanks all!
-
---=20
-Tom
-
---15k5Fuw+yLfT1d9X
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4wV8IACgkQh/n2NdMd
-dlIqxRAAmIi3lLtNWY2duZE/iuR+PPRwkPN4K5QttO8uM9o5KM6YJJlLo2SJGg3P
-2uQAn7idktMXPmZLOTWqs7FW/BPY2OIVyynCXNSdSykm2KqyTho9WqbUSq0ICz7c
-VHKMeNq3ME6807Ebqr+//Smx8/E/sC6KzzuTS14asXXRlNasGsNj6gt1vSxG84Tw
-l4LEn2impNJUUE3EI1QZftXyfvVkqs1gExgKh5bHJEs9w+h4gu7AQbx3t3n9twj9
-B0J3nJRJxyq9o6bvGjeF0NGaQoplaNuElTTNxn+uaFzRkSxaSDM0+H+8/apIsReK
-0JMpkBRJoZ92vPVBpfE6EFNIqsneMVEkPNyUEnGXpZeIVp3YcwN8WYDLyt8SGXbw
-cD0RLCjnYlRszJTbukGAll2JCszxo9EgrJFFss9Pab/sXVZVHZSek6QatlXxFclR
-0cSoTakkKU4dYCAK+a44xoUhln9U8vkuhJhEjRpFxfgoc5CRM9rFida3TlJqdICa
-JbdZXOAmAG2S4QeMdJRf9YRJt0eIRZ+Crq/4IWw7SA2mhPIYGpcs++mQZm/FDC+U
-esKdRtFcmVMcgdaoxQjtRILpEwCwHjZjH0ZTsBDpMj21JGqjCiPWpYQC9/cIvWOO
-Q+EbAgiVfs3UoUkBJL3bmmKb8TV8xuTqpdd4zXuCbNrQmUv5/A8=
-=0+TD
------END PGP SIGNATURE-----
-
---15k5Fuw+yLfT1d9X--
-
---===============6332784140259466248==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6332784140259466248==--

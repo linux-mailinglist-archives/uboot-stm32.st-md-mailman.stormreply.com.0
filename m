@@ -2,55 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CB4414D531
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:19:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED83714D537
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:23:28 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DCDE4C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:19:26 +0000 (UTC)
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
- [209.85.167.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A5496C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:23:28 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CCFBBC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5F931C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Jan 2020 02:19:25 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id v201so1131364lfa.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 29 Jan 2020 18:19:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=3zJ9yPPymdyLT+2B+114skZN1Oo8bhean+YPTLb6VLc=;
- b=h9+NmGh9e1BbIuFin/buY2EgimSsh8f/BPaXaA4hStNnlRiKHaY0n7WilPxN4DqUrj
- vdaT+ASGr8AEdH989fR0u5/FT836zjjNsjeVrUuI/mgmdKvN3Bz09vGNyAAST++kKTIQ
- Gc/kP99i1ZK1+6PbnIFGs+CtEB8KMpOq1oIxs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=3zJ9yPPymdyLT+2B+114skZN1Oo8bhean+YPTLb6VLc=;
- b=LEPEMi6xEcbrgRdKukz1Z+FDuK9ln7sqReDtOmJfzacZaSZD85k68YYvA3P3/4kLOt
- HkNKPmURGZtxa0k1FLERe1cbwk8Vjmwv++HATZ+YIxolflPzubz3gHuXXssXfs15MJvc
- wRd4fhQFwUDaQn3eoFTcxc9UGrJiZJ//kfpcK7/km7HUa7VUzKSSSG8X09bsr7W5Vm0/
- 8DPO3Ij5WdF3tZhzBr5uLR27WO+4QKm0DsvHr8sGoArZts63CIPkhJ3+bXbTPd9JHncB
- oqHxbpXq0QNXo+8ppMOsEItMkwHDoskk+qah3fBug9G1dbzUWhCx2vpIbRzLX3Wmcney
- EF/g==
-X-Gm-Message-State: APjAAAXXdDxZMAg/Bl+10YpdnvUPqtKLsssMuH1xFZqQSVX730UidKdo
- iv02+T366m0LU3taPPKEtlAANC4NlNMrR5/PYyO4tw==
-X-Google-Smtp-Source: APXvYqxFtVQT88mIYOjHGF1zJns3mcJDO0hf+VrZknyseBDGDMwDxPE6yD4xwf6s99Bg7NUnSZ9qB4yodl9M5YGjxok=
-X-Received: by 2002:a19:cb17:: with SMTP id b23mr1240707lfg.201.1580350764599; 
- Wed, 29 Jan 2020 18:19:24 -0800 (PST)
+ Thu, 30 Jan 2020 02:23:27 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 487PKV0zhPz1rY5L;
+ Thu, 30 Jan 2020 03:23:26 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 487PKV0L9vz1qsnd;
+ Thu, 30 Jan 2020 03:23:26 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id u-DEkKii6JHD; Thu, 30 Jan 2020 03:23:24 +0100 (CET)
+X-Auth-Info: BDU/LflNVk3UPIjEALyst2bXONSkBP/dW0N2QSTBbJs=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Thu, 30 Jan 2020 03:23:24 +0100 (CET)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20200128091106.28552-1-patrick.delaunay@st.com>
+ <20200128101041.4.Ide537d091d8ee33f89ee50edad59ea237e517e42@changeid>
+ <231eb0d9-9bf3-ac62-0177-f7ee6dfb644d@denx.de>
+ <adb487b28fac45b6b147464b1bb53641@SFHDAG6NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <a7dcac3d-beaa-b641-e4f0-ab75622e7edd@denx.de>
+Date: Thu, 30 Jan 2020 03:23:23 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.2
 MIME-Version: 1.0
-References: <20200113103515.20879-1-patrick.delaunay@st.com>
- <20200113103515.20879-17-patrick.delaunay@st.com>
-In-Reply-To: <20200113103515.20879-17-patrick.delaunay@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Jan 2020 19:18:17 -0700
-Message-ID: <CAPnjgZ13pkSURj3NG9mj3p=kX_nDAXXzn3FsfawYKGXXXb+Wmg@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v3 16/21] dt-bindings: gpio: alignment
-	with kernel v5.3
+In-Reply-To: <adb487b28fac45b6b147464b1bb53641@SFHDAG6NODE3.st.com>
+Content-Language: en-US
+Cc: Antonio BORNEO <antonio.borneo@st.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Gerald BAEZA <gerald.baeza@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to
+	PLL4_R
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,27 +65,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 13 Jan 2020 at 03:35, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Update the binding file for gpio, it is just an alignment
-> with kernel v5.3.
-> The U-Boot code example for gpio-hog (not directly linked
-> to binding) is moved in a new file doc/README.gpio.
-> [commit 21676b706e99 ("gpio: fixes for gpio-hog support")
-> & 'commit 4762a9988ede ("gpio: add gpio-hog support")']
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
-> Changes in v3: None
-> Changes in v2: None
->
->  doc/README.gpio                        |  42 ++++
->  doc/device-tree-bindings/gpio/gpio.txt | 280 ++++++++++++++-----------
->  2 files changed, 196 insertions(+), 126 deletions(-)
->  create mode 100644 doc/README.gpio
+On 1/29/20 5:51 PM, Patrick DELAUNAY wrote:
+> Hi Marek,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Hi,
+
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: mardi 28 janvier 2020 13:16
+>>
+>> On 1/28/20 10:11 AM, Patrick Delaunay wrote:
+>>> From: Antonio Borneo <antonio.borneo@st.com>
+>>>
+>>> LTDC modifies the clock frequency to adapt it to the display. Such
+>>> frequency change is not detected by the FDCAN driver that instead
+>>> cache the value at probe and pretend to use it later.
+>>>
+>>> Keep the LTDC alone on PLL4_Q by moving the FDCAN to PLL4_R.
+>>
+>> Now this looks like a grisly workaround. Can you fix the LTDC driver to do
+>> something sane on boards which didn't update bootloader yet ?
+> 
+> In fact it more a issue in the initial clock-tree used when I upstream the ST board the first time... based on our delivery v1.0.0
+> 
+> It is already corrected in downstream on v1.1.0:
+> + For U-Boot = https://github.com/STMicroelectronics/u-boot/commit/d62f14dece32e41c2854b9ff44aca7b8384aa8a0
+> + For TF-A = https://github.com/STMicroelectronics/arm-trusted-firmware/commit/9a24ceda6c3ba060d9acf2b26d069fedde9f0807
+> 
+> The LTDC/DSI need to set the pixel clock according the panel configuration and settings: it is normal and needed.
+> 
+> But If the pixel clock is shared with FDCAN, which expects that its input clock is fixed, an issue occur when the pixel clock change.
+
+I understand the problem you are trying to solve.
+
+What I think you are missing is that not everyone will update
+ATF/U-Boot/Linux in lockstep. That is the problem you need to deal with
+here.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

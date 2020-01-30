@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A626814D525
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:18:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2606914D52A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:19:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F299C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:18:22 +0000 (UTC)
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
- [209.85.167.65])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E224EC36B0C
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:19:00 +0000 (UTC)
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+ [209.85.208.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D565C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFEA9C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Jan 2020 02:18:20 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id y19so1147071lfl.9
+ Thu, 30 Jan 2020 02:18:57 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id f25so1535285ljg.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 29 Jan 2020 18:18:20 -0800 (PST)
+ Wed, 29 Jan 2020 18:18:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=TJ36PKQJlaAjMbXIcqP+bYCmm3b0oL8Noct40c37yLE=;
- b=ejqL/sZyRVyl0affw9EG1ChsZ/Bg9GXTM0cwDonXqBhM/wOpzxVJ5ClpD6MiNE/pIL
- x/Ge6P2kPx/IJEnCl/ksOvG8QkcW/Akpg9jvKjJXwiev8JB3Jl8IoVTgjmFYYeSCtt2j
- JViqjUAXVkbNHXra6utUvWlpGsKO9ktSa1m+I=
+ :cc; bh=bmQ98sijRWVvHjzQDND7AlH7r9fc53WNQdy8AT7IzoU=;
+ b=WflyEd5wMt+S0/Ha5RWHMWvaaxpppqmtFr2cZoBeWhWky+3s8W+WKrUwUlwunkOsvJ
+ Dr4tIzcqxfSVyEn5yKqGy4kCq73nvgga+uqtZPVEmo7cFIKZYcLqWOG73B75cejiLwO6
+ ZAOaqEnFSTqH9PvR57vYrEp4Jm5utp/Ft3toM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=TJ36PKQJlaAjMbXIcqP+bYCmm3b0oL8Noct40c37yLE=;
- b=Br0/lyUV+9tPOFdnvWFTXHo2Yg80BJy/RMmQGw0wfVghj0J5IqHDo7U/r0clghKTW/
- pff4lOJgAm24aQHeiihBMTfkag/DnWdD2kxyontCZz4rcX4oVDM80RnCg5hB4MgDeZ4o
- K0pS6uUnOlQ87M4hEPIZ300j/ER9BRPhU8bdbcikXEFkDmjGM00iGEsX/olmGethJ9qP
- //HJsPPRITjpPAGwLVIcOSMPnpjPLUOHGc89PEQDZ310MVARBKerifUi6TuAxie/H5Ib
- XcNf3+5xsn1HLBpZkg6qcuWH5OOFnjrl7An/iY199vn1KrRFVzU1pPwyYbEBLY71/vz4
- myAA==
-X-Gm-Message-State: APjAAAV8ud+Kd8n6NSL1xk0GhFTZE8A4IYabbtmbip3OEwDDs2KDipqa
- Xg9mhHUSHPpm3p3fBnPXRsBjRFtSvpRboJ9E3S/wrw==
-X-Google-Smtp-Source: APXvYqwsHroV92qc6l0H1uegWGRVSP79evWa17RxXlWDnzm5tz4xw7gnFH6bUW8V/aK2NsNCVwTaUO9L0cw6E6bARK4=
-X-Received: by 2002:ac2:5e9b:: with SMTP id b27mr1290345lfq.184.1580350699632; 
- Wed, 29 Jan 2020 18:18:19 -0800 (PST)
+ bh=bmQ98sijRWVvHjzQDND7AlH7r9fc53WNQdy8AT7IzoU=;
+ b=oCuzdfD1Kmx9WKLjTBiHQqOs0fLRLncdza0knsjUG4B5BM33RUAARZsg/rnxLQYIXU
+ MeTK5krIuLP9mLLX9fEqexKubkipRCCE5iDu+PHDEzoWVqoUA0/qLSyyOlH2WIMT7+QH
+ 3P2UjLAil+t/D6DCNNt7968k5yvV2Gr6X6rCHToKeMgzBcJq2CHxPwZyTtctYGdTTPhI
+ 2CgfrD6WYZONQxroj/V/UGUW+pDZn5+0H5fAu5cw24ZFCLCk5LPO5UZHpUxP+M59NLgU
+ uNdv9mHPWQ4k/wR+/F8zIEB9dIUuVL5xsyD1wXF1BYqUpLx1FDLhIsmVQw3+KnJkbFOG
+ 1iFg==
+X-Gm-Message-State: APjAAAVlC0NenDh7zbjn2rtqlgXo03A8bSrcrlHysK2Zd+RS3/ykrbrE
+ qhzd2KuCCk8k1pRoiHZ5VuRRZVDLBRyb1AzX5LwIxA==
+X-Google-Smtp-Source: APXvYqx0R9aKMzLkO8KpP6krXj2x9vH6xGp+rDTIvUuBy+AHxcEyxy5iV1H9fpLf9wYMfol7LGkdoLt9mkIM1+WE+8Y=
+X-Received: by 2002:a2e:9ad8:: with SMTP id p24mr1230961ljj.148.1580350736729; 
+ Wed, 29 Jan 2020 18:18:56 -0800 (PST)
 MIME-Version: 1.0
 References: <20200113103515.20879-1-patrick.delaunay@st.com>
- <20200113103515.20879-3-patrick.delaunay@st.com>
-In-Reply-To: <20200113103515.20879-3-patrick.delaunay@st.com>
+ <20200113103515.20879-5-patrick.delaunay@st.com>
+In-Reply-To: <20200113103515.20879-5-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Jan 2020 19:17:58 -0700
-Message-ID: <CAPnjgZ3yqo=kh5_8FBdPaMuG7KexDAhuFgB1AE9W+t5uHoN6xA@mail.gmail.com>
+Date: Wed, 29 Jan 2020 19:18:00 -0700
+Message-ID: <CAPnjgZ3cLXC33A-HwBT17VpUm4-ToToVjynn3oeYGnaCAUjgnw@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v3 02/21] dm: core: add ofnode and dev
- function to iterate on node property
+Subject: Re: [Uboot-stm32] [PATCH v3 04/21] dt-bindings: gpio: document the
+ new pull-up/pull-down flags
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,57 +69,29 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Mon, 13 Jan 2020 at 03:35, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Add functions to iterate on all property with livetree
-> - dev_read_first_prop
-> - dev_read_next_prop
-> - dev_read_prop_by_prop
-> and
-> - ofnode_get_first_property
-> - ofnode_get_next_property
-> - ofnode_get_property_by_prop
+> This commit extends the flags that can be used in GPIO specifiers to
+> indicate if a pull-up resistor or pull-down resistor should be
+> enabled.
 >
-> And helper: dev_for_each_property
->
-> For example:
-> struct ofprop property;
->
-> dev_for_each_property(property, config) {
->         value = dev_read_prop_by_prop(&property, &propname, &len);
->
-> or:
->
-> for (res = ofnode_get_first_property(node, &property);
->      !res;
->      res = ofnode_get_next_property(&property))
-> {
->      value = ofnode_get_property_by_prop(&property, &propname, &len);
-> ....
-> }
+> It is the backport of linux commit ede033e1e863c ('dt-bindings:
+
+Strictly speaking I don't think this is a backport, since this is a
+different project.
+
+> gpio: document the new pull-up/pull-down flags')
+> from Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+> and integrated in v5.1-rc1
+> https://github.com/torvalds/linux/commit/ede033e1e863c
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
-> Changes in v3:
-> - add test dm_test_ofnode_get_property_by_prop
-> - udpate ofnode example in commit message
-> - solve comment for ofnode_get_property_by_prop (and not by of_ofprop)
+> Changes in v3: None
+> Changes in v2: None
 >
-> Changes in v2:
-> - Identify property with a new struct ofprop as proposed
->   by Simon Glass
-> - Add dev_ iterate functions
->
->  drivers/core/of_access.c | 32 +++++++++++++++++++
->  drivers/core/ofnode.c    | 48 ++++++++++++++++++++++++++++
->  drivers/core/read.c      | 16 ++++++++++
->  include/dm/of_access.h   | 40 ++++++++++++++++++++++++
->  include/dm/ofnode.h      | 63 ++++++++++++++++++++++++++++++++++++-
->  include/dm/read.h        | 67 ++++++++++++++++++++++++++++++++++++++++
->  test/dm/Makefile         |  1 +
->  test/dm/ofread.c         | 50 ++++++++++++++++++++++++++++++
->  8 files changed, 316 insertions(+), 1 deletion(-)
->  create mode 100644 test/dm/ofread.c
->
+>  doc/device-tree-bindings/gpio/gpio.txt | 24 ++++++++++++++++++++++++
+>  include/dt-bindings/gpio/gpio.h        |  6 ++++++
+>  2 files changed, 30 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

@@ -2,61 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8B5014D527
+	by mail.lfdr.de (Postfix) with ESMTPS id A017814D524
 	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:18:22 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7CDB8C36B10
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 698D2C36B0A
 	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:18:22 +0000 (UTC)
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
- [209.85.167.68])
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
+ [209.85.167.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA6A0C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 97ACFC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Thu, 30 Jan 2020 02:18:20 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id f24so1180065lfh.3
+Received: by mail-lf1-f66.google.com with SMTP id 203so1130277lfa.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Wed, 29 Jan 2020 18:18:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xI9g+gcL4IXwzo78GzpmQqjHG2E4dca5kW1n9Pszr40=;
- b=UbaV1RA3s0jrkYYuXJX29RWtgF8cyoxdsf7MsCihCogfW5kxYHjZFsfllNPgs7XDa+
- R5kVlxczet5Umoh76jM8N9CHr5X5bm3/fC2crl++I7XzSWSrnAQRHRC0kwSNhafO+sjo
- B0Ze4tXsTgTeMypLohGzzmLxHy399gfo3W42I=
+ :cc; bh=gS5LYTsLrygnW7H+HRtgXba9KxpbwwKuEwU0lfh8imQ=;
+ b=N4PkZVHSZMrimFrUmihbnnnB8QEeOZJ8LEMMaaWrWDNU9rtfz0SIegc3Oggyc80ao/
+ tcm2LijNWD8mjwf+JxQIcYoLwK5irA7TUX+KdJRDV5XMYNiOLVSbM69NIYxBpEnfsvvz
+ ki5Hku87pBUv97K3mteZmlzLqaABmPhDzlCvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=xI9g+gcL4IXwzo78GzpmQqjHG2E4dca5kW1n9Pszr40=;
- b=PhCQbSfSUoU1/mivyrlzGErGNrbDIPnX65elCw+HWGDwVGfIlxu8osqj8qSGiN0O9C
- s2HKK2eb4mKWb11zu6B3k23HRnW3txp12eQmUGc+FuMXnJZjSfbRpJwfKagKi51rGLgx
- mTFkaT8sigmKJlu0f40Yo25X8QWC/mQSntRCcxUVhQ8Nkt9bPeUxCAuixuvNZyTRM3YG
- KiiG1ZmTKgkJbdUy2H9l8XJqDsEN3Fu5GdiNk2NzN5azARAp3hP0g/Tr7c+PdfIZkNkQ
- q/S/GMnTVmTrPuzLv6CC0qEottLnVgBUNaxZEed3lcSUo01PAHuRW2HyZUVjKqos5K23
- d8Pw==
-X-Gm-Message-State: APjAAAWx3XpZe+IVpBKByo1Sr/LLV4PNwnEufUf/FVcHxDcx5Wmg8DAt
- ++nNK1IJ0NjH8twQxQ74RDuwJA/aJyfQ3aoE+ohRAg==
-X-Google-Smtp-Source: APXvYqxs2kaz5YjaRjhvBFT4thXAsS9Ab4Px49khdF0tsIFrwepXZ8V/plUgNls91MVxH3aMNNopT1J8Rl2XhFfnc88=
-X-Received: by 2002:ac2:5496:: with SMTP id t22mr1264087lfk.85.1580350699678; 
+ bh=gS5LYTsLrygnW7H+HRtgXba9KxpbwwKuEwU0lfh8imQ=;
+ b=WGybaJYsaB79OIIAvi0vdIYfjWr1C0bcq/AwxQF6IDTPdfmhLTeLSLfD+6OUCGp/RF
+ zKCY4qEVtWfqAGPBUXkNh84UxltBhx37COnD7heI/vuMmOBeWj6JYnPAWsRqqdLW7Ppu
+ TnVZV+Z3aeAg3cDZ7A61BdDUk6Y/8JrF+JV6FzofYCQTjg14LQbrh5tw8DTiyNu7vUOy
+ P5PxO4PJZQ7io8Tdk9Hvdt9UC3hFoy5zTRsmTC5vIbQkm6XzGetcU0NQxsr+caF058eE
+ 8GaC9wWKLAEHzM6P3EiYnHotz7k9ZLA22HCyrDShFK6ieXy7LOekkD4b3LUl8Aug38cb
+ M6vg==
+X-Gm-Message-State: APjAAAVMWfL3xI3YnJgpmrOGL30Sy2vqObDbIvFrPnsKOukdeWFRhY2p
+ N2dEG6qxZGYRQvu9w7+UlDl+NPX+RYq+c8RuxmB8AA==
+X-Google-Smtp-Source: APXvYqxy7/k2SIs1kESQQdQvEsBE0IBbQ4oJApzI4QluXg5EQHLMrCQzbn19CrCchwNUSGM3hxtdeGDp5EGwFRxkE/A=
+X-Received: by 2002:a19:cb17:: with SMTP id b23mr1238795lfg.201.1580350699646; 
  Wed, 29 Jan 2020 18:18:19 -0800 (PST)
 MIME-Version: 1.0
 References: <20200122135243.17683-1-patrick.delaunay@st.com>
- <20200122135243.17683-2-patrick.delaunay@st.com>
-In-Reply-To: <20200122135243.17683-2-patrick.delaunay@st.com>
+ <20200122135243.17683-3-patrick.delaunay@st.com>
+In-Reply-To: <20200122135243.17683-3-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Jan 2020 19:17:49 -0700
-Message-ID: <CAPnjgZ287KBmPjbofTNdLJa++GpcjsDaz-vkP1S49yDtTEB0ig@mail.gmail.com>
+Date: Wed, 29 Jan 2020 19:17:52 -0700
+Message-ID: <CAPnjgZ2O96cWWbWkbBWJq_JQqBbc1u2w95Qm2L=kjDFK2VVQ4Q@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Tom Rini <trini@konsulko.com>, Stephen Warren <swarren@nvidia.com>,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Trevor Woerner <trevor@toganlabs.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Vikas Manocha <vikas.manocha@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/4] board_f.c: Insure
-	gd->new_bootstage alignment
+ Patrice Chotard <patrice.chotard@st.com>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/4] Revert "stm32mp1: remove the imply
+	BOOTSTAGE"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,35 +71,17 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Wed, 22 Jan 2020 at 06:52, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> From: Patrice Chotard <patrice.chotard@st.com>
+> This reverts the workaround introduced by the
+> commit 16fec9b0bc1a ("stm32mp1: remove the imply BOOTSTAGE")
+> As the bootstage alignment issue is now solved.
 >
-> In reserve_bootstage(), in case size is odd, gd->new_bootstage
-> is not aligned. In bootstage_relocate(), the platform hangs when
-> getting access to data->record[i].name.
-> To avoid this issue, make gd->new_bootstage 16 byte aligned.
->
-> To insure that new_bootstage is 16 byte aligned (at least needed for
-> x86_64 and ARMv8) and new_bootstage starts down to get enough space,
-> ALIGN_DOWN macro is used.
->
-> Fixes: ac9cd4805c8b ("bootstage: Correct relocation algorithm")
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> Reviewed-by: Vikas MANOCHA <vikas.manocha@st.com>
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
-> Changes in v2:
-> - import: [U-Boot,v3] board_f.c: Insure gd->new_bootstage alignment
+> Changes in v2: None
 >
->  common/board_f.c | 5 +++++
->  1 file changed, 5 insertions(+)
-
-Ensure as Stephen says
-
-With that fixed:
+>  arch/arm/mach-stm32mp/Kconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

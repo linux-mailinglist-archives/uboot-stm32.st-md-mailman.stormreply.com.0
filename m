@@ -2,60 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B489D14D526
+	by mail.lfdr.de (Postfix) with ESMTPS id A626814D525
 	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 03:18:22 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7578CC36B0E
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F299C36B0C
 	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2020 02:18:22 +0000 (UTC)
 Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
  [209.85.167.65])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A29C9C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D565C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Thu, 30 Jan 2020 02:18:20 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id t23so1158300lfk.6
+Received: by mail-lf1-f65.google.com with SMTP id y19so1147071lfl.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Wed, 29 Jan 2020 18:18:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kAs2BeK/kAG9G13nhn5A1vSaoX3Mc6HhWipTu7gEG14=;
- b=ZdrH6wiubs9xHZ7FNxGl+rKdFTGNg0z3meUbrnsk1/+sZZ+ZCHR2+xfjoqey5219Ky
- 6u3wUbtXpen/PVxHn/jCT5MSMY8+jWzGRqsylo3/ysG2n2dWiK1rNu/HyqJ6sLnrQPbz
- 9iSdP0S9om6Xs0tZWxsLt1+5+39SmZVcy3oGw=
+ :cc; bh=TJ36PKQJlaAjMbXIcqP+bYCmm3b0oL8Noct40c37yLE=;
+ b=ejqL/sZyRVyl0affw9EG1ChsZ/Bg9GXTM0cwDonXqBhM/wOpzxVJ5ClpD6MiNE/pIL
+ x/Ge6P2kPx/IJEnCl/ksOvG8QkcW/Akpg9jvKjJXwiev8JB3Jl8IoVTgjmFYYeSCtt2j
+ JViqjUAXVkbNHXra6utUvWlpGsKO9ktSa1m+I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=kAs2BeK/kAG9G13nhn5A1vSaoX3Mc6HhWipTu7gEG14=;
- b=KOH5HUTg6mG+xUrbHpsm0Nyg1GQWwNfqNOeia2itJFExVUCbWzojgtSTzF7y/I8Ixv
- ixY7WNAVYp3YpV5uHDQsPHyxPPkGJjUcbpco4C3161VrMCGHt8w8SgYYNf+vBOd/eJ9W
- HiSp49B88qFqMosdfQYmUFHKgVh9vbYSU9vObzUUUxsPxiqagR+BHk12NOmJo58rlcrH
- QRYsWoJiCs3mfTG64eouK/nXZ6Kx6/V63xlb6gAwRYjrvlcd0FBraQ05eFNHNMGok5sB
- P1yGF3c/K4KrWh1XdKui8qUlDAEGF3mqNbUHTOGr0zgLpyvhW7Ox2CIzQc5/TRcG9tY2
- ZXzA==
-X-Gm-Message-State: APjAAAWJBmIolHn9DX+liEUgwV/nBCkNRjeflyKzoA7I76lDRpygY+Cy
- Z7OzTyO3U9lLDkr1P9A7BKhtUUwl9JH047+UrOP1xA==
-X-Google-Smtp-Source: APXvYqztEnTvDgEJ1IRerK42M6yWp7/iq8yq0RsUoXHXYdHlRAmGkrTsXZen4R/TYsF0eGjYYAzUE870ckAef3ysd9M=
-X-Received: by 2002:ac2:5196:: with SMTP id u22mr1148270lfi.123.1580350699616; 
+ bh=TJ36PKQJlaAjMbXIcqP+bYCmm3b0oL8Noct40c37yLE=;
+ b=Br0/lyUV+9tPOFdnvWFTXHo2Yg80BJy/RMmQGw0wfVghj0J5IqHDo7U/r0clghKTW/
+ pff4lOJgAm24aQHeiihBMTfkag/DnWdD2kxyontCZz4rcX4oVDM80RnCg5hB4MgDeZ4o
+ K0pS6uUnOlQ87M4hEPIZ300j/ER9BRPhU8bdbcikXEFkDmjGM00iGEsX/olmGethJ9qP
+ //HJsPPRITjpPAGwLVIcOSMPnpjPLUOHGc89PEQDZ310MVARBKerifUi6TuAxie/H5Ib
+ XcNf3+5xsn1HLBpZkg6qcuWH5OOFnjrl7An/iY199vn1KrRFVzU1pPwyYbEBLY71/vz4
+ myAA==
+X-Gm-Message-State: APjAAAV8ud+Kd8n6NSL1xk0GhFTZE8A4IYabbtmbip3OEwDDs2KDipqa
+ Xg9mhHUSHPpm3p3fBnPXRsBjRFtSvpRboJ9E3S/wrw==
+X-Google-Smtp-Source: APXvYqwsHroV92qc6l0H1uegWGRVSP79evWa17RxXlWDnzm5tz4xw7gnFH6bUW8V/aK2NsNCVwTaUO9L0cw6E6bARK4=
+X-Received: by 2002:ac2:5e9b:: with SMTP id b27mr1290345lfq.184.1580350699632; 
  Wed, 29 Jan 2020 18:18:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20200122135243.17683-1-patrick.delaunay@st.com>
- <20200122135243.17683-4-patrick.delaunay@st.com>
-In-Reply-To: <20200122135243.17683-4-patrick.delaunay@st.com>
+References: <20200113103515.20879-1-patrick.delaunay@st.com>
+ <20200113103515.20879-3-patrick.delaunay@st.com>
+In-Reply-To: <20200113103515.20879-3-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 29 Jan 2020 19:17:54 -0700
-Message-ID: <CAPnjgZ3Oyx-A+05O5DKmv=EydyV8j+aAMK5MXpVsyz3eaGv_ew@mail.gmail.com>
+Date: Wed, 29 Jan 2020 19:17:58 -0700
+Message-ID: <CAPnjgZ3yqo=kh5_8FBdPaMuG7KexDAhuFgB1AE9W+t5uHoN6xA@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 3/4] arm: set the relocated gd with
-	gd->new_gd
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v3 02/21] dm: core: add ofnode and dev
+ function to iterate on node property
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,23 +67,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, 22 Jan 2020 at 06:52, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Mon, 13 Jan 2020 at 03:35, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Simplify the arm relocation behavior and get gd directly form new_gd,
-> as it is already done in crt0_64.S:
+> Add functions to iterate on all property with livetree
+> - dev_read_first_prop
+> - dev_read_next_prop
+> - dev_read_prop_by_prop
+> and
+> - ofnode_get_first_property
+> - ofnode_get_next_property
+> - ofnode_get_property_by_prop
 >
->         ldr     x18, [x18, #GD_NEW_GD]          /* x18 <- gd->new_gd */
+> And helper: dev_for_each_property
 >
-> This patch avoid assumption on new GD location (new GD is below bd -
-> with #GD_SIZE offset).
+> For example:
+> struct ofprop property;
+>
+> dev_for_each_property(property, config) {
+>         value = dev_read_prop_by_prop(&property, &propname, &len);
+>
+> or:
+>
+> for (res = ofnode_get_first_property(node, &property);
+>      !res;
+>      res = ofnode_get_next_property(&property))
+> {
+>      value = ofnode_get_property_by_prop(&property, &propname, &len);
+> ....
+> }
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
-> Changes in v2: None
+> Changes in v3:
+> - add test dm_test_ofnode_get_property_by_prop
+> - udpate ofnode example in commit message
+> - solve comment for ofnode_get_property_by_prop (and not by of_ofprop)
 >
->  arch/arm/lib/crt0.S | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
+> Changes in v2:
+> - Identify property with a new struct ofprop as proposed
+>   by Simon Glass
+> - Add dev_ iterate functions
+>
+>  drivers/core/of_access.c | 32 +++++++++++++++++++
+>  drivers/core/ofnode.c    | 48 ++++++++++++++++++++++++++++
+>  drivers/core/read.c      | 16 ++++++++++
+>  include/dm/of_access.h   | 40 ++++++++++++++++++++++++
+>  include/dm/ofnode.h      | 63 ++++++++++++++++++++++++++++++++++++-
+>  include/dm/read.h        | 67 ++++++++++++++++++++++++++++++++++++++++
+>  test/dm/Makefile         |  1 +
+>  test/dm/ofread.c         | 50 ++++++++++++++++++++++++++++++
+>  8 files changed, 316 insertions(+), 1 deletion(-)
+>  create mode 100644 test/dm/ofread.c
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

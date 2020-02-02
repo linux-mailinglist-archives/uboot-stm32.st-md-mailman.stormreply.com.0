@@ -2,75 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EB914FD8E
-	for <lists+uboot-stm32@lfdr.de>; Sun,  2 Feb 2020 15:36:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6586214FE9E
+	for <lists+uboot-stm32@lfdr.de>; Sun,  2 Feb 2020 18:28:12 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 174CEC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Sun,  2 Feb 2020 14:36:06 +0000 (UTC)
-Received: from mail.ltec.ch (mail.ltec.ch [95.143.48.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0DCA3C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Sun,  2 Feb 2020 17:28:12 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A0977C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8F7B4C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  2 Feb 2020 14:36:03 +0000 (UTC)
-Received: from 46-126-180-79.dynamic.hispeed.ch ([46.126.180.79]
- helo=[172.27.111.134])
- by mail.ltec.ch with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.92) (envelope-from <fb@ltec.ch>)
- id 1iyGLi-00084R-Ve; Sun, 02 Feb 2020 15:35:47 +0100
-To: Thomas Hebb <tommyhebb@gmail.com>, u-boot@lists.denx.de
-References: <faa9691528835dce9733dcfd1c1a8f20d13fa0bb.1580585884.git.tommyhebb@gmail.com>
- <6412a441fa9548f23086bf8c0a1b9b490d92dd0b.1580585884.git.tommyhebb@gmail.com>
-From: Felix Brack <fb@ltec.ch>
-Organization: LTEC AG
-Message-ID: <fb41192d-68f1-361a-7c65-eec5ee479a35@ltec.ch>
-Date: Sun, 2 Feb 2020 15:35:43 +0100
+ Sun,  2 Feb 2020 17:28:10 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 489dG173SWz1rY5Z;
+ Sun,  2 Feb 2020 18:28:09 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 489dG16PJnz1qrmb;
+ Sun,  2 Feb 2020 18:28:09 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id rtolPfOq036c; Sun,  2 Feb 2020 18:28:07 +0100 (CET)
+X-Auth-Info: w2a4Qck5ZFwKVvri6d6ndZ7y0vVOeDUNFyotvtCxPqI=
+Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Sun,  2 Feb 2020 18:28:07 +0100 (CET)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20200128091106.28552-1-patrick.delaunay@st.com>
+ <20200128101041.4.Ide537d091d8ee33f89ee50edad59ea237e517e42@changeid>
+ <231eb0d9-9bf3-ac62-0177-f7ee6dfb644d@denx.de>
+ <adb487b28fac45b6b147464b1bb53641@SFHDAG6NODE3.st.com>
+ <a7dcac3d-beaa-b641-e4f0-ab75622e7edd@denx.de>
+ <357d83958e34432bb052af1509bc2487@SFHDAG6NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <b2227c18-e343-4683-6def-47eb5ab82031@denx.de>
+Date: Sun, 2 Feb 2020 18:28:06 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+ Thunderbird/68.4.2
 MIME-Version: 1.0
-In-Reply-To: <6412a441fa9548f23086bf8c0a1b9b490d92dd0b.1580585884.git.tommyhebb@gmail.com>
+In-Reply-To: <357d83958e34432bb052af1509bc2487@SFHDAG6NODE3.st.com>
 Content-Language: en-US
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Baruch Siach <baruch@tkos.co.il>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lokesh Vutla <lokeshvutla@ti.com>,
- Hannes Schmelzer <hannes.schmelzer@br-automation.com>,
- Lars Poeschel <poeschel@lemonage.de>, Peng Fan <peng.fan@nxp.com>,
- Patrice Chotard <patrice.chotard@st.com>, Vignesh R <vigneshr@ti.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Arkadiusz Karas <arkadiusz.karas@somlabs.com>,
- =?UTF-8?Q?Eric_B=c3=a9nard?= <eric@eukrea.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Richard Hu <richard.hu@technexion.com>,
- Nikita Kiryanov <nikita@compulab.co.il>, Marek Vasut <marex@denx.de>,
- Niel Fourie <lusus@denx.de>, Lukasz Majewski <lukma@denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- =?UTF-8?Q?Javier_Mart=c3=adnez_Canillas?= <javier@dowhile0.org>,
- Heiko Schocher <hs@denx.de>, Ash Charles <ash@gumstix.com>,
- Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>,
- Otavio Salvador <otavio@ossystems.com.br>, Breno Lima <breno.lima@nxp.com>,
- Samuel Egli <samuel.egli@siemens.com>, Gilles Gameiro <gilles@gigadevices.com>,
- James Byrne <james.byrne@origamienergy.com>,
- Enric Balletbo i Serra <enric.balletbo@collabora.com>,
- Erik van Luijk <evanluijk@interact.nl>,
- Igor Grinberg <grinberg@compulab.co.il>,
- Moses Christopher Bollavarapu <BollavarapuMoses.Christopher@in.bosch.com>,
- Silvio Fricke <open-source@softing.de>, Parthiban Nallathambi <pn@denx.de>,
- Yegor Yefremov <yegorslists@googlemail.com>, Stefano Babic <sbabic@denx.de>,
- Michal Simek <monstr@monstr.eu>, Anatolij Gustschin <agust@denx.de>,
- Boris Brezillon <bbrezillon@kernel.org>,
- Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
- Nicolas Ferre <nicolas.ferre@microchip.com>, "Andrew F. Davis" <afd@ti.com>,
- Marcin Niestroj <m.niestroj@grinn-global.com>,
- Lothar Felten <lothar.felten@gmail.com>, Yangbo Lu <yangbo.lu@nxp.com>,
- Francesco Montefoschi <francesco.montefoschi@udoo.org>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- =?UTF-8?Q?S=c3=a9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] spl: get rid of SPL_LIBDISK_SUPPORT
+Cc: Antonio BORNEO <antonio.borneo@st.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Gerald BAEZA <gerald.baeza@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to
+	PLL4_R
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,26 +62,92 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 01.02.20 20:38, Thomas Hebb wrote:
-> This option hasn't actually affected what's linked into the build since
-> commit 91ff6865629c ("blk: Rework guard around part_init call"), which
-> switched libdisk in SPL to depend on (CONFIG_SPL_FRAMEWORK &&
-> CONFIG_PARTITIONS). After removing one straggling reference that seems
-> to been authored before 91ff6865629c landed, there are absolutely no
-> references to this in the code. Let's remove it.
-> 
-> Signed-off-by: Thomas Hebb <tommyhebb@gmail.com>
-> 
-> ---
-> 
+On 1/31/20 9:15 AM, Patrick DELAUNAY wrote:
+> Hi Marek,
 
-For the PDU001 board:
-Tested-by: Felix Brack <fb@ltec.ch>
+Hi,
+
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: jeudi 30 janvier 2020 03:23
+>>
+>> On 1/29/20 5:51 PM, Patrick DELAUNAY wrote:
+>>> Hi Marek,
+>>
+>> Hi,
+>>
+>>>> From: Marek Vasut <marex@denx.de>
+>>>> Sent: mardi 28 janvier 2020 13:16
+>>>>
+>>>> On 1/28/20 10:11 AM, Patrick Delaunay wrote:
+>>>>> From: Antonio Borneo <antonio.borneo@st.com>
+>>>>>
+>>>>> LTDC modifies the clock frequency to adapt it to the display. Such
+>>>>> frequency change is not detected by the FDCAN driver that instead
+>>>>> cache the value at probe and pretend to use it later.
+>>>>>
+>>>>> Keep the LTDC alone on PLL4_Q by moving the FDCAN to PLL4_R.
+>>>>
+>>>> Now this looks like a grisly workaround. Can you fix the LTDC driver
+>>>> to do something sane on boards which didn't update bootloader yet ?
+>>>
+>>> In fact it more a issue in the initial clock-tree used when I upstream
+>>> the ST board the first time... based on our delivery v1.0.0
+>>>
+>>> It is already corrected in downstream on v1.1.0:
+>>> + For U-Boot =
+>>> + https://github.com/STMicroelectronics/u-boot/commit/d62f14dece32e41c
+>>> + 2854b9ff44aca7b8384aa8a0 For TF-A =
+>>> + https://github.com/STMicroelectronics/arm-trusted-firmware/commit/9a
+>>> + 24ceda6c3ba060d9acf2b26d069fedde9f0807
+>>>
+>>> The LTDC/DSI need to set the pixel clock according the panel configuration and
+>> settings: it is normal and needed.
+>>>
+>>> But If the pixel clock is shared with FDCAN, which expects that its input clock is
+>> fixed, an issue occur when the pixel clock change.
+>>
+>> I understand the problem you are trying to solve.
+>>
+>> What I think you are missing is that not everyone will update ATF/U-Boot/Linux in
+>> lockstep. That is the problem you need to deal with here.
+> 
+> I understood the possible issue and I hope that I will be not the case
+> (at least for the ST Microelectronics boards).
+
+Do I understand it correctly that you expect the customers who buy the
+ST chip to update bootloader in lockstep with the kernel in systems
+which are deployed today ?
+
+No, this does not work. If you have a working bootloader and your kernel
+fails to start, that is something you can recover from, If your
+bootloader fails to start and you need to dig an embedded system buried
+who-knows-where or recall a lot of systems because of a failed
+bootloader update, that would be a disaster.
+
+> We are aware of the possible issue to fixe these clocks in first stage bootloader but after a long
+> debate, we don't found a better solution, with the constraints:
+> - M4 firmware require clock initialization before start and it can be loaded by U-Boot
+> - clock tree is generated by CubeMX tools which generate device tree (for bootloaders and kernel)
+> - "assigned-clock" management in Linux kernel could lead us to a race condition for shared clock
+> 
+> We spent a long time to found a clock tree which respect all the constraints of the SOC
+> before to our first release v1.0 and before I upstream the stm32mp1 support in U-Boot.
+> 
+> Then I wait a year before to upstream the patches on clock tree initialization (and the second
+> release v1.2) to avoid too many iteration.
+>  And this patch on FDCAN is the only issue found on the initial clock tree.
+> 
+> Today I think (hope?) it will be the last patch on this part.
+
+You will keep finding clock issues and no , this will not be the last
+patch which fixes a clock issue.
+
+So what solution is there for those who can only update the kernel ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

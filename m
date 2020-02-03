@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94CF11507E0
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 15:01:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B5CD150816
+	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 15:10:50 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E03AC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 14:01:12 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3A74C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 14:10:49 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3768CC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 759C7C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Feb 2020 14:01:09 +0000 (UTC)
+ Mon,  3 Feb 2020 14:10:47 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 013DvPC5019463; Mon, 3 Feb 2020 15:01:07 +0100
+ 013E9ORS009947; Mon, 3 Feb 2020 15:10:45 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=vny6Cwqx/P2rVRrShDWOH48fGpuAYMLFxJSMaoz6vlg=;
- b=Q8spo8xtLCmuyfDhETOR1q2Wv1bCUQpF9WcPwkj43NEuesMYT1a0lTKtsYxtAHZNvEZg
- pB3QBl073l1+TGSYe0wZ1bLd+Wa+EYlV9AS5q8c7C5Gm2zSCKfcE8z8NFXUKL5IpePLa
- Flh/kn3upQrNd5Pye0Ivx/ddXlYE9zQrm0NMBU+w6l703gxR3k1If5kufYulfEq3oe3i
- risaaX0/MJ9dUc4iEHSYA76ZwdQQpzZAZll8EHqPFyA8ipY5yAgVy6GJ2oKQd9bRTpkD
- pR/YEsMCAwEn/nPNIONtzbiYApGnLeRtqIRBUEwV7XFYJP7K6PL2fwUQvNTTiMggPBQK hw== 
+ bh=xlv3SC1XiW8WLRZ3Oemkgj+Y42Efvn1yli3yv6rrO8o=;
+ b=bDxQcmN0er5vrdS8YE2g9sMQ5VJxIh+lE1t2/ksESW1G7pAHGt0d8slpBPeSfztZCtmc
+ 8tyqaqvb5E6mxwTVo4ZQ97oDf1SJ+YhuesZrLgkE6gq8geT+YKM/jHwOKbm53RQ1t6gu
+ aufaRDriVDazEG314F/wt1ZWtnXS3hIZcALE1f+60c6jywXHxEXV2AqsKeGU5vHgDZPf
+ O5+Ya4ZaW/JGK0DAsNIpOOXfKQvPWPAIgGUpRGamAlqrhoW/BFpw6wjIdUT+4UCDH6kL
+ QTjWK5QN7Tl0ibeZWJWDQ6mi1jO3yWYOc+6oiMvOA1cL3oj61uaxsuJvl77w7wP9v6Wp KA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xw13nhar8-1
+ by mx07-00178001.pphosted.com with ESMTP id 2xw13nhc6x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Feb 2020 15:01:07 +0100
+ Mon, 03 Feb 2020 15:10:45 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 162FB10002A;
- Mon,  3 Feb 2020 15:01:05 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1AA3A100038;
+ Mon,  3 Feb 2020 15:10:45 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EEB1021FEBC;
- Mon,  3 Feb 2020 15:01:04 +0100 (CET)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 127A92B1872;
+ Mon,  3 Feb 2020 15:10:45 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 3 Feb 2020 15:01:04 +0100
+ Mon, 3 Feb 2020 15:10:44 +0100
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 3 Feb 2020 15:00:59 +0100
-Message-ID: <20200203140059.2111-1-patrice.chotard@st.com>
+Date: Mon, 3 Feb 2020 15:10:38 +0100
+Message-ID: <20200203141040.3236-1-patrice.chotard@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-03_04:2020-02-02,
  2020-02-03 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] board: stih410-b2260: remove fdt_high and
-	initrd_high
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Vikas Manocha <vikas.manocha@st.com>
+Subject: [Uboot-stm32] [PATCH v1 0/2] Update board environment for STM32
+	MCU's boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,44 +73,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Remove fdt_high and initrd_high as they shouldn't be used,
-this allows the fdt and initrd relocation.
-This implies to set CONFIG_SYS_BOOTMAPSZ to indicate the
-amount of memory available to contain kernel, device tree
-and initrd for relocation.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
----
+This series:
+ - standardizes the fdt_addr, scriptaddr and pxefile_addr
+   across all STM32 MCU's board.
+ - remove fdt_high and initrd_high from board environment
 
- include/configs/stih410-b2260.h | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/include/configs/stih410-b2260.h b/include/configs/stih410-b2260.h
-index a8a58f3950..f393aa0264 100644
---- a/include/configs/stih410-b2260.h
-+++ b/include/configs/stih410-b2260.h
-@@ -19,6 +19,12 @@
- 
- /* Environment */
- 
-+/*
-+ * For booting Linux, use the first 256 MB of memory, since this is
-+ * the maximum mapped by the Linux kernel during initialization.
-+ */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_256M
-+
- #define CONFIG_LOADADDR			CONFIG_SYS_LOAD_ADDR
- #define CONFIG_SYS_BOOTM_LEN		SZ_16M
- 
-@@ -34,8 +40,6 @@
- 			"fdt_addr_r=0x47000000\0"		\
- 			"scriptaddr=0x50000000\0"		\
- 			"pxefile_addr_r=0x50100000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			"ramdisk_addr_r=0x48000000\0"		\
- 			BOOTENV
- 
+
+Patrice Chotard (2):
+  board: stm32: fix extra env setings addresses
+  board: stm32: remove fdt_high and fdt_highinitrd_high
+
+ include/configs/stm32f429-evaluation.h | 15 +++++++++------
+ include/configs/stm32f469-discovery.h  | 15 +++++++++------
+ include/configs/stm32f746-disco.h      | 15 +++++++++------
+ include/configs/stm32h743-disco.h      | 14 ++++++++------
+ include/configs/stm32h743-eval.h       | 14 ++++++++------
+ 5 files changed, 43 insertions(+), 30 deletions(-)
+
 -- 
 2.17.1
 

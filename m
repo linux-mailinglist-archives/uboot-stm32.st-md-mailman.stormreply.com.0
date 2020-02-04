@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 358E7150818
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 15:10:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B6E91514E5
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Feb 2020 05:13:51 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CAEC5C36B0F
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Feb 2020 14:10:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CE670C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Feb 2020 04:13:50 +0000 (UTC)
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+ [209.85.222.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D44F7C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ADC0EC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Feb 2020 14:10:47 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 013E9GmC009900; Mon, 3 Feb 2020 15:10:47 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=6PAiDBd3t/YH0BDfwKExBh9hTO4Zvbz+FuJZL+o5oOk=;
- b=OIz8BvBFjNWJDYFL28+l9XY0mx567F/boirnxst35m18d/eEULgEbmw4fCk/Cdbc9lRz
- iWYf0GB6XKx7T+jQcj/c1PqH4EJxDiMMpiuJHdhqzG0UI7jXZEY9w7idin2ejr4gYErx
- bEthhOv8QtxFqYN4W72SGkgz9Q16KF8TO75O42J4pc2ZdMTAsThbDI9fwv5ZVFv/z6t4
- 0hlbOyz9MOfkiOaPrFN8iWIfph04MNUL8riOWQg9KczHrpDlUL2o42Nu6RJU+8lC7vUL
- EIGPpHFNErMCV/TFp+/bWl/wjtq/14XiqOHVAdw+G/9yJOIi7CzjeQMJPLmFRIGftLoi Vw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2xw13nhc74-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Feb 2020 15:10:47 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 93D0E100034;
- Mon,  3 Feb 2020 15:10:46 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C8792B2F2D;
- Mon,  3 Feb 2020 15:10:46 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 3 Feb 2020 15:10:46 +0100
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 3 Feb 2020 15:10:40 +0100
-Message-ID: <20200203141040.3236-3-patrice.chotard@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200203141040.3236-1-patrice.chotard@st.com>
-References: <20200203141040.3236-1-patrice.chotard@st.com>
+ Tue,  4 Feb 2020 04:13:48 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id g195so16598788qke.13
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 03 Feb 2020 20:13:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=E9hkABYg1C+JmazHKE3YVU5EgyIBZBTPPlCwESl5bzM=;
+ b=SniQxTMWt5g03qHAf3/MF4lqOzOO4JrOv6ZFOhpO1pmRsSlZ1b7ZJWupCsFoGOmeAZ
+ wkii1X1WeTCZxw9IrLT1Pu2fHdmrP33sFRVISLnjE//ltWS+N7OBghHaXwsH3+4g422Z
+ aEjzVk6WTxIjVVr9NE7/pICRAb2g7cABo3EDU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=E9hkABYg1C+JmazHKE3YVU5EgyIBZBTPPlCwESl5bzM=;
+ b=XaksrDgzz4DM8aHqRSbGhQG7hS5CyVURRPFtw9ulT3gmAk8UHCJhji6G7hIFbS9Lu5
+ 2LWATfQpnkrCVXQj9ZqbMkAHWYoTxIPqGLFQ5LqEeYcFUyNfI5y5E0q9kcU9Op+nDqGS
+ O0a0BYQoaTMH4zSE+oEOkZicuyf7nMujQjm5HUL9EYaLp+VdBBXxMPi4iS/RtBt7JNbE
+ 8Sc0aDX2SyUDcpuKs5wL6sPYBN4RRBxLC7Jhw30InlDJAzwJjbr4GEy+oZ+yfGkhFDgo
+ r2/g88TKLNg6hqeqcwC44n86+luT/jcEfkraGGJJudjeapSnYiy3F02wl9onjMFxIRHH
+ y94A==
+X-Gm-Message-State: APjAAAUxd3nxbwX3TKK8FF5KufLSRgQf0UPZZm7i4rPzer1knMkV9FtL
+ vMHlTsIFbVWM5wN4skfFoT3+scx9EUjnGg==
+X-Google-Smtp-Source: APXvYqx/u1sdHtwVGyGO50ekSII10wC9ckUdYV9evfbZ70V902vyN6o/SJOCvee1VgwriXSDdtARMQ==
+X-Received: by 2002:a05:620a:b04:: with SMTP id
+ t4mr27529676qkg.7.1580789627137; 
+ Mon, 03 Feb 2020 20:13:47 -0800 (PST)
+Received: from bill-the-cat
+ (2606-a000-1401-86dd-e4ac-64fa-4c27-a5bf.inf6.spectrum.com.
+ [2606:a000:1401:86dd:e4ac:64fa:4c27:a5bf])
+ by smtp.gmail.com with ESMTPSA id d26sm10223388qka.28.2020.02.03.20.13.46
+ (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+ Mon, 03 Feb 2020 20:13:46 -0800 (PST)
+Date: Mon, 3 Feb 2020 23:13:44 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Message-ID: <20200204041344.GZ13379@bill-the-cat>
+References: <20200203140059.2111-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-03_04:2020-02-02,
- 2020-02-03 signatures=0
+In-Reply-To: <20200203140059.2111-1-patrice.chotard@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Vikas Manocha <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH v1 2/2] board: stm32: remove fdt_high and
-	fdt_highinitrd_high
+ u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH] board: stih410-b2260: remove fdt_high and
+	initrd_high
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,156 +71,68 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3492764826292742008=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-For stm32 f4, f7 and h7 boards, remove fdt_high and
-initrd_high as they shouldn't be used, this allows the fdt
-and initrd relocation.
-This implies to set CONFIG_SYS_BOOTMAPSZ to indicate the
-amount of memory available to contain kernel, device tree
-and initrd for relocation.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+--===============3492764826292742008==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="koUF50DMN6AmuCAv"
+Content-Disposition: inline
 
----
 
- include/configs/stm32f429-evaluation.h | 7 +++++--
- include/configs/stm32f469-discovery.h  | 7 +++++--
- include/configs/stm32f746-disco.h      | 7 +++++--
- include/configs/stm32h743-disco.h      | 6 ++++--
- include/configs/stm32h743-eval.h       | 6 ++++--
- 5 files changed, 23 insertions(+), 10 deletions(-)
+--koUF50DMN6AmuCAv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/configs/stm32f429-evaluation.h b/include/configs/stm32f429-evaluation.h
-index f74d027e5d..a7150312ca 100644
---- a/include/configs/stm32f429-evaluation.h
-+++ b/include/configs/stm32f429-evaluation.h
-@@ -7,6 +7,11 @@
- #ifndef __CONFIG_H
- #define __CONFIG_H
- 
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 16MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_16M
-+
- #define CONFIG_SYS_FLASH_BASE		0x08000000
- 
- #define CONFIG_SYS_INIT_SP_ADDR		0x10010000
-@@ -44,8 +49,6 @@
- 			"scriptaddr=0x00418000\0"		\
- 			"pxefile_addr_r=0x00428000\0" \
- 			"ramdisk_addr_r=0x00438000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			BOOTENV
- 
- /*
-diff --git a/include/configs/stm32f469-discovery.h b/include/configs/stm32f469-discovery.h
-index 23ed02ab52..8212fb63de 100644
---- a/include/configs/stm32f469-discovery.h
-+++ b/include/configs/stm32f469-discovery.h
-@@ -7,6 +7,11 @@
- #ifndef __CONFIG_H
- #define __CONFIG_H
- 
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 12MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_8M + SZ_4M
-+
- #define CONFIG_SYS_FLASH_BASE		0x08000000
- 
- #define CONFIG_SYS_INIT_SP_ADDR		0x10010000
-@@ -44,8 +49,6 @@
- 			"scriptaddr=0x00418000\0"		\
- 			"pxefile_addr_r=0x00428000\0" \
- 			"ramdisk_addr_r=0x00438000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			BOOTENV
- 
- /*
-diff --git a/include/configs/stm32f746-disco.h b/include/configs/stm32f746-disco.h
-index 6d82a9cdd1..45343d2323 100644
---- a/include/configs/stm32f746-disco.h
-+++ b/include/configs/stm32f746-disco.h
-@@ -7,6 +7,11 @@
- #ifndef __CONFIG_H
- #define __CONFIG_H
- 
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 6MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_4M + SZ_2M
-+
- #define CONFIG_SYS_FLASH_BASE		0x08000000
- #define CONFIG_SYS_INIT_SP_ADDR		0x20050000
- 
-@@ -52,8 +57,6 @@
- 			"scriptaddr=0xC0418000\0"		\
- 			"pxefile_addr_r=0xC0428000\0" \
- 			"ramdisk_addr_r=0xC0438000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			BOOTENV
- 
- /*
-diff --git a/include/configs/stm32h743-disco.h b/include/configs/stm32h743-disco.h
-index 312f2916d1..39c93ee6f9 100644
---- a/include/configs/stm32h743-disco.h
-+++ b/include/configs/stm32h743-disco.h
-@@ -8,6 +8,10 @@
- #define __CONFIG_H
- 
- #include <config.h>
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 16MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_16M
- 
- #define CONFIG_SYS_FLASH_BASE		0x08000000
- #define CONFIG_SYS_INIT_SP_ADDR		0x24040000
-@@ -39,8 +43,6 @@
- 			"scriptaddr=0xD0418000\0"		\
- 			"pxefile_addr_r=0xD0428000\0" \
- 			"ramdisk_addr_r=0xD0438000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			BOOTENV
- 
- /*
-diff --git a/include/configs/stm32h743-eval.h b/include/configs/stm32h743-eval.h
-index 9f7194ab0b..8eb94c1ad4 100644
---- a/include/configs/stm32h743-eval.h
-+++ b/include/configs/stm32h743-eval.h
-@@ -8,6 +8,10 @@
- #define __CONFIG_H
- 
- #include <config.h>
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 16MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_16M
- 
- #define CONFIG_SYS_FLASH_BASE		0x08000000
- #define CONFIG_SYS_INIT_SP_ADDR		0x24040000
-@@ -39,8 +43,6 @@
- 			"scriptaddr=0xD0418000\0"		\
- 			"pxefile_addr_r=0xD0428000\0" \
- 			"ramdisk_addr_r=0xD0438000\0"		\
--			"fdt_high=0xffffffffffffffff\0"		\
--			"initrd_high=0xffffffffffffffff\0"	\
- 			BOOTENV
- 
- /*
--- 
-2.17.1
+On Mon, Feb 03, 2020 at 03:00:59PM +0100, Patrice Chotard wrote:
+
+> Remove fdt_high and initrd_high as they shouldn't be used,
+> this allows the fdt and initrd relocation.
+> This implies to set CONFIG_SYS_BOOTMAPSZ to indicate the
+> amount of memory available to contain kernel, device tree
+> and initrd for relocation.
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--koUF50DMN6AmuCAv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE6HLbQJwaaH776GM2h/n2NdMddlIFAl4473gACgkQh/n2NdMd
+dlLQdxAAtx57AwltXn1NJewcvMgH1rAM5m//Gn+Y9q7sV3MR8llpQprT/JVRw+hi
+RRUdUCfpLfUkxMwXtcYt5j0vSYgUf+WhynO23p68hzGeAXdwsSLyKOaadMuKZSjd
+Cg7PrQVP/opsW6eewzkBvu4H3SkgrFTSpqpPuo9o73XIT15dG8A0fc4uCNUQ44Hc
+wiP10GpcIeMH6uYz+2eC+ZiT1I7j4YlnaCSxtGmNf+ylkMQmCMIh5aee4/xbcuSZ
+34NbNNd9ssRtaWL9dZqNAcG0Y0oblzJEFXWbpI7UFpCdI2NNK6GgnuJ0vLFYx/0t
+Y9/zDRh8nwwATxKmHUMHMdxUs4S+UHmDT4BXSveSc/C8Py1UdAZs5V1CRijK8Tyb
+SyKaQg0EfVqAlHcDzHCn5t4hagCk1dXQ/HYalZiyfg3caEPmpicHh1j0qGouRoq0
+Y4MhtcU0U3Mjx0/oTmsSyvtN7qvLt3buev608KwIEPI/wu5Lq8Y8XDohI/ssqR9h
+iuBH2tj9FUV8MRgF5xZ2DB+TCrGONEkEtr2UvT//GA79zigD4FrqdCWQxoqC9dXo
+uRfrwWg5+glgn2M+hmLv6JIM8qgF+vVnMm4qexmp930n5B3bLSMBS1Lp7PxJZtfM
+6ZEuTpqm3lBsg8Vlk9sU2KEXOSj5g9uaoFBw45Y/X8+R6gg/eB0=
+=tEUf
+-----END PGP SIGNATURE-----
+
+--koUF50DMN6AmuCAv--
+
+--===============3492764826292742008==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3492764826292742008==--

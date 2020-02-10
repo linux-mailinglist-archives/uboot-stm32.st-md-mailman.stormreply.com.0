@@ -2,58 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C1CC157334
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 12:02:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C35615760D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 13:48:44 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C363C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 11:02:31 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F20E1C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 12:48:43 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D3FFCC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E433CC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Feb 2020 11:02:28 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Mon, 10 Feb 2020 12:48:41 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01AAsC1o012666; Mon, 10 Feb 2020 12:02:26 +0100
+ 01AClfMp023751; Mon, 10 Feb 2020 13:48:35 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=InhhdrtrijsuI6+MTykzwUPbhTCSd6MJN7TvyVTqElg=;
- b=EiDkR2ijhR62bRZwkv4yz01rND10cq1nPPD7CSZtJ/0A4UMbTFQXyP1m52WulhF6doy0
- ZgNBx+qwMK3wsGUnAoKJ7gdZ6Tdu+Cz/jnmLO5Aen2lNhhH6m5Tu09GJaRgbb29F+7DP
- T/ndKmf1DeOtzVlZR+hpzdhCViTnvimSSgawE2yKC0Az8iShCLw0/ljfzmuPg0/MA2CD
- 89k7VaAzqLygnVLDcTSq5QvDHJVyrfl8u+AjgxajZWm9p1XNqAW8or1boBkD8DeUQGDW
- MQs4MaLkPu/JfWQWxMlV2B1K/tuTq2vHyJalA10NFWcYqenCqEvoDryMb57+SPALAkUn uQ== 
+ bh=fuV+5h2kCx2zZMEibLhlLOBihv6f+hgFztU+yjimzAM=;
+ b=xdqkmCWEwRxvrvPhAXNyqyH9KC4Ztcv314U8IRHZppN2Tw2zZAhPHzcCZ0xlPKUE9rqF
+ w/eFbTjZQBa0z9h4lWZttt86UbgQYGhpxchF8UokgxUGKXTvGx01Ldxcbais5w7u3wUU
+ dKQPx51Qq9lLwsMDqRXoAIt/5XEEH7auSZzjFdLKBI9JIEL7tNeLCQKOWrddm/u2TNJi
+ RouUCkK+GiKClp1Rj8KcoiVRwLMxVNEM9Kk+dfKOhr1qxonFx2cesKpMvukUd+naUjUD
+ WUvaSZQW+rk1JFL+2TKwoFfsajErKIteBWp6mAuQkdzsyMhRrwOpGC1+gjHjJKxUBmsG pA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1ud99brf-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1ufgsvrf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Feb 2020 12:02:26 +0100
+ Mon, 10 Feb 2020 13:48:35 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5DEA910002A;
- Mon, 10 Feb 2020 12:02:23 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3ED5D10002A;
+ Mon, 10 Feb 2020 13:48:30 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5333C2D379B;
- Mon, 10 Feb 2020 12:02:23 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1DDC42CB8A0;
+ Mon, 10 Feb 2020 13:48:30 +0100 (CET)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
  (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 10 Feb
- 2020 12:02:22 +0100
+ 2020 13:48:29 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 10 Feb 2020 12:02:22 +0100
+ 15.00.1473.003; Mon, 10 Feb 2020 13:48:29 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 8/9] doc: add board documentation for stm32mp1
-Thread-Index: AQHV1brvWCAgUcHIP0C4sxQS6bWT+Kf/4ZSAgBR1H8A=
-Date: Mon, 10 Feb 2020 11:02:22 +0000
-Message-ID: <18fb0431a0064149979c9d7ae2184f3f@SFHDAG6NODE3.st.com>
-References: <20200128091106.28552-1-patrick.delaunay@st.com>
- <20200128091106.28552-5-patrick.delaunay@st.com>
- <106cf4fa-a85c-6ee8-f8a7-cc1bcd24fbc7@gmx.de>
-In-Reply-To: <106cf4fa-a85c-6ee8-f8a7-cc1bcd24fbc7@gmx.de>
+To: Simon Glass <sjg@chromium.org>
+Thread-Topic: [PATCH 2/5] cmd: env: use ENV_IS_IN_DEVICE in env info
+Thread-Index: AQHV0rKIGUBW/M/pikiBrLyr3G0bc6gCcMSAgBIJusA=
+Date: Mon, 10 Feb 2020 12:48:29 +0000
+Message-ID: <1cc23c3666a34fdd8ea832747b8cb455@SFHDAG6NODE3.st.com>
+References: <20200124123346.32210-1-patrick.delaunay@st.com>
+ <20200124123346.32210-2-patrick.delaunay@st.com>
+ <CAPnjgZ0iAyDJhwo8Qnj7jWuzz-St1ors+Ap8p__Qjy8+2rCVyA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0iAyDJhwo8Qnj7jWuzz-St1ors+Ap8p__Qjy8+2rCVyA@mail.gmail.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -64,10 +63,15 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-10_02:2020-02-10,
  2020-02-10 signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 8/9] doc: add board documentation for
-	stm32mp1
+Cc: Leo Ruan <tingquan.ruan@cn.bosch.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/5] cmd: env: use ENV_IS_IN_DEVICE in env
+	info
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,77 +88,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Heinrich
+Hi Simon,
 
-> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Sent: mardi 28 janvier 2020 12:34
+> From: Simon Glass <sjg@chromium.org>
+> Sent: jeudi 30 janvier 2020 03:18
 > 
-> On 1/28/20 10:11 AM, Patrick Delaunay wrote:
-> > Change plain test README to rst format and move this file in
-> > documentation directory.
+> On Fri, 24 Jan 2020 at 05:34, Patrick Delaunay <patrick.delaunay@st.com>
+> wrote:
+> >
+> > Use the define ENV_IS_IN_DEVICE to test if one the
+> > CONFIG_ENV_IS_IN_...  is defined and correct the detection of
+> > persistent storage support in the command "env info"
+> > if CONFIG_ENV_IS_NOWHERE is activated.
+> >
+> > Since commit 60d5ed2593c9 ("env: allow ENV_IS_NOWHERE with other
+> > storage target") test CONFIG_ENV_IS_NOWHERE is not enough; see also
+> > commit 953db29a1e9c6 ("env: enable saveenv command when one
+> > CONFIG_ENV_IS_IN is activated").
+> >
+> > This patch avoids issue for this command in stm32mp1 platform.
 > >
 > > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> 
-> When I apply only this patch to origin/master:
-> 
-> git am /tmp/1.patch
-> Applying: doc: add board documentation for stm32mp1
-> error: patch failed: board/st/stm32mp1/README:1
-> error: board/st/stm32mp1/README: patch does not apply
-> .git/rebase-apply/patch:1164: new blank line at EOF.
-> 
-> Maybe this patch will have to be rebased.
-
-I think the issue is because ethe readme is updated in the previous patch
-[7/9] board: stm32mp1: update readme
-
-=> I think I will get the board patch in my next pull request on stm32 and
-     then rebase this patch only.
-
 > > ---
 > >
-> >   board/st/stm32mp1/README  | 520 +--------------------------------
-> >   doc/board/index.rst       |   1 +
-> >   doc/board/st/index.rst    |   9 +
-> >   doc/board/st/stm32mp1.rst | 598
-> ++++++++++++++++++++++++++++++++++++++
-> >   4 files changed, 609 insertions(+), 519 deletions(-)
-> >   create mode 100644 doc/board/st/index.rst
-> >   create mode 100644 doc/board/st/stm32mp1.rst
-> >
-> > diff --git a/board/st/stm32mp1/README b/board/st/stm32mp1/README index
-> > 5d7465a8c8..8172d26a66 100644
-> > --- a/board/st/stm32mp1/README
-> > +++ b/board/st/stm32mp1/README
-> > @@ -1,519 +1 @@
-> > -SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause -# -# Copyright (C)
-> > 2018 STMicroelectronics - All Rights Reserved -#
-> > -
-> > -U-Boot on STMicroelectronics STM32MP15x
-> > -=======================================
-
-......
-
-> > + bi
-> > +
-> > +- you can also dump the OTP and the PMIC NVM with::
-> > +
-> > +  $> dfu-util -d 0483:5720 -a 25 -U otp.bin  $> dfu-util -d 0483:5720
-> > + -a 26 -U pmic.bin
-> > +
+> >  cmd/nvedit.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> This blank line could be removed.
-
-Ok => in V2 with rebase
-
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > 
-> 'make html' shows that the reStructured text files are syntactically valid.
-> 
-> Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> We should add more tests for the environment functionality.
 
-Thanks 
+Sorry for the delay,
 
-Patrkc
+I need to activate a location in sandbox to test this feature....
+
+I am working on a other serie for it (I am trying to add test for env in EXT4).
+
+Patrick
+
+
 
 _______________________________________________
 Uboot-stm32 mailing list

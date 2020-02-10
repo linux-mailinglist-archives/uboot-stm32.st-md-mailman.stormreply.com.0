@@ -2,55 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77846158608
-	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Feb 2020 00:14:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C3F3158609
+	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Feb 2020 00:14:06 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2FC53C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 23:14:04 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 568EAC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 23:14:06 +0000 (UTC)
 Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
  [209.85.167.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60ADCC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E4484C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Feb 2020 23:14:02 +0000 (UTC)
-Received: by mail-oi1-f195.google.com with SMTP id d62so10942306oia.11
+ Mon, 10 Feb 2020 23:14:03 +0000 (UTC)
+Received: by mail-oi1-f195.google.com with SMTP id j132so10952775oih.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Feb 2020 15:14:02 -0800 (PST)
+ Mon, 10 Feb 2020 15:14:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=sxUcjZN7AwGAr+InoWRli3JBsnrVG/g66SYOP3XEd+k=;
- b=S9aN8s+J+4EBvNmMvhlEgp9w4EwoBg0mTuupeJUpX3rExdVaOJACdyHdWIfuKjYpWm
- 2uf7HPA31ByVCSV7TIBXgdBR/MzhknRzd+J7QHf39z/zUn9xSgZYwnm4ZUAxTJVGLhfz
- 4Z2d7zvLtNOYG4dlteuCvG16V3gLFP+sLGCxo=
+ :cc; bh=ODX0vn/cyNNzcL6Pf0dANeAJ21ZYYR7mEjpeLz03svA=;
+ b=mZ5lY/4jOfoxCSYfk6lVyHvGuofpQ3JPFNRr/59/5AxKktgNGrIbI0oY8fst54ls1X
+ H/H2WvWNwmJebvotPkRvVf3EPdsPfNR1MEnQW+oPdYmTa+VyvdZ5A2SQKvfr0EAj/nli
+ sSlDkvdVjxwZ/bcJBhdPoE8Qe4wz8tY0xHDFk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=sxUcjZN7AwGAr+InoWRli3JBsnrVG/g66SYOP3XEd+k=;
- b=mMT+26k35e52YjsSm3EquUVZM+JZllmn7xqtMRt3Xyu0K/f7mjilctUcF6DL3Pv3Lq
- ZsYB1LIDkzReBChCNSLCBudLU1nzxu2byGchPsZUUqC3nqxA+zxy0Dr84uIgyjbeFIqj
- 09LRMCL+KsheWAVj2QOtqsH28utHyV5+j//j8QIGzqvp+8nYPOdON/q9utlHzvQ6awOL
- x8M341c80XOVHrezQ0Gkz0MFIc/HMVq50SzLJNem620ohJnZzCBSDXx/fc2v3D2wT0bH
- cXv97rOcyrRIuhbRl5nd+/FcN8XsVr5HWF9Dsm3gs9KejyFbIpQjwbiasMqDxk5gI6hb
- aEcQ==
-X-Gm-Message-State: APjAAAXhBkbJ3oYZMyshen5yVW/7CIJ8xKZjMiweaDnGT1foJdkEtdaf
- FMqbbo0ctjGJmL05Ico0B/8LXhaWbG5TMbIJEMdS3g==
-X-Google-Smtp-Source: APXvYqwQwZxoUuo2zMDyDX7jczjktysU28bZfuFE9RDhAlMxLggt3d6sC3bTI7O1Y+bvgDYSwwQX4lC8YkoUYBtDXas=
-X-Received: by 2002:aca:5588:: with SMTP id j130mr1021355oib.122.1581376440807; 
- Mon, 10 Feb 2020 15:14:00 -0800 (PST)
+ bh=ODX0vn/cyNNzcL6Pf0dANeAJ21ZYYR7mEjpeLz03svA=;
+ b=FYj9qKZ+6XpSO2wxDDWrCnydVVSlXJpnOyYyTiMkGs0qwzvAsgl63iHEBpxdzWQC0s
+ bIusPdEB+8L8NRDdw3rsSkImqrSBeVIJvn/R5kKnfHhfns+oZjWPjWQowW8lxMa5qnpt
+ AizuTmTxAFu2R4ve3G0XOC5XXXkfOY37AcQn208PhMX+ZDUj/VeYn7xGzK6zig57sI9a
+ d8RyqJBzPdCLG16WAxRpuhcaXVgQoqcd/2n680xxV7icEgiS2/NLfUNUwwMFNvpNQ5JF
+ jeHKnBzSMXIbAXzLsVlxEDD4GNhgY3ZI8oXa6D05KqGAij3RxfHqGJFTAiZQCj7q1m4A
+ qpvw==
+X-Gm-Message-State: APjAAAXG9RhCrtLua2vAdnJUi84sUjLW7r6KcbeHRRoYFSmCgah8OaCi
+ I+X6xzlH3xhEiLsfZROafENc2KVEDvAe4dRR2YGPhQ==
+X-Google-Smtp-Source: APXvYqypbtvgtB2VRLki61hDDR2n/HegDqGSzXDQJGX7ZNmGLUCxd3RR/hQjQZTEVVMo7m4yP74VrO+LrIXQ50RYqs8=
+X-Received: by 2002:aca:1a05:: with SMTP id a5mr1053501oia.97.1581376442321;
+ Mon, 10 Feb 2020 15:14:02 -0800 (PST)
 MIME-Version: 1.0
 References: <20200210170129.8405-1-patrick.delaunay@st.com>
- <20200210170129.8405-5-patrick.delaunay@st.com>
-In-Reply-To: <20200210170129.8405-5-patrick.delaunay@st.com>
+ <20200210180110.v2.3.I42c79507524e5ad68e85fd60bbd686c4c59523ae@changeid>
+In-Reply-To: <20200210180110.v2.3.I42c79507524e5ad68e85fd60bbd686c4c59523ae@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 10 Feb 2020 16:13:49 -0700
-Message-ID: <CAPnjgZ1bGJUX_rPJpjfEvwu9TbAe4mrwfnHSoK5ca_mSoZNr=w@mail.gmail.com>
+Date: Mon, 10 Feb 2020 16:13:50 -0700
+Message-ID: <CAPnjgZ05GT2VcN21gQZ7bxCixOv7cOnyiFa1ANVHDakgpNqW3w@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Mario Six <mario.six@gdsys.cc>
-Subject: Re: [Uboot-stm32] [PATCH v2 6/7] configs: sandbox: Enable sub
-	command 'env info'
+Cc: Leo Ruan <tingquan.ruan@cn.bosch.com>, Wolfgang Denk <wd@denx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 3/7] cmd: env: check real location for
+	env info command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,21 +74,31 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Mon, 10 Feb 2020 at 10:01, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Enable support for sub command 'env info' in sandbox
-> with CONFIG_CMD_NVEDIT_INFO. This is aimed primarily
-> at adding unit test.
+> Check the current ENV location, dynamically provided by the weak
+> function env_get_location to be sure that the environment can be
+> persistent.
+>
+> The compilation flag ENV_IS_IN_DEVICE is not enough when the board
+> dynamically select the available storage location (according boot
+> device for example).
+>
+> This patch solves issue for stm32mp1 platform, when the boot device
+> is USB.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
 > Changes in v2:
-> - activate env info command in sandbox (new)
+> - update prototype in env_internal.h  as done in
+>   "env: add prototypes for weak function"
+> - remove comment change in env.c (implementation information)
+> - move env_location declaration
 >
->  configs/sandbox64_defconfig        | 1 +
->  configs/sandbox_defconfig          | 1 +
->  configs/sandbox_flattree_defconfig | 1 +
->  configs/sandbox_spl_defconfig      | 1 +
->  4 files changed, 4 insertions(+)
+>  cmd/nvedit.c           | 15 ++++++++++++---
+>  include/env_internal.h | 11 +++++++++++
+>  2 files changed, 23 insertions(+), 3 deletions(-)
+
+Definitely we need some more tests in the area of the environment.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3C711540E7
-	for <lists+uboot-stm32@lfdr.de>; Thu,  6 Feb 2020 10:10:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6D4615731C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 11:54:21 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9030FC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu,  6 Feb 2020 09:10:48 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 38A83C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 10:54:21 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7EEACC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2A526C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  6 Feb 2020 09:10:46 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48Ct2F11Zhz1qrV5;
- Thu,  6 Feb 2020 10:10:45 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48Ct2F00wQz1rPD4;
- Thu,  6 Feb 2020 10:10:44 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id nLUtw_bWeutY; Thu,  6 Feb 2020 10:10:43 +0100 (CET)
-X-Auth-Info: jPfP3QooFvwEhKFvOOOWtG1gUnjshtGEe1eXWB4mhX8=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Thu,  6 Feb 2020 10:10:43 +0100 (CET)
-To: Patrick DELAUNAY <patrick.delaunay@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20200128091106.28552-1-patrick.delaunay@st.com>
- <20200128101041.4.Ide537d091d8ee33f89ee50edad59ea237e517e42@changeid>
- <231eb0d9-9bf3-ac62-0177-f7ee6dfb644d@denx.de>
- <adb487b28fac45b6b147464b1bb53641@SFHDAG6NODE3.st.com>
- <a7dcac3d-beaa-b641-e4f0-ab75622e7edd@denx.de>
- <357d83958e34432bb052af1509bc2487@SFHDAG6NODE3.st.com>
- <b2227c18-e343-4683-6def-47eb5ab82031@denx.de>
- <64487d994ae046898418881ad86b1039@SFHDAG6NODE3.st.com>
- <d3651bdd-be44-51f1-6a91-707695491209@denx.de>
- <ab592bb4ff9c4a8ba6bfb45a91418b57@SFHDAG6NODE3.st.com>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <193d31b4-7916-459f-6f79-fc7e17c0a1d0@denx.de>
-Date: Thu, 6 Feb 2020 10:10:43 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.2
+ Mon, 10 Feb 2020 10:54:19 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 01AArlrR021120; Mon, 10 Feb 2020 11:54:17 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=vbE6cBvdXwjmZvYmRzXS4EuGoTJq4Imkjp8fjiTETdg=;
+ b=yQjVObaFcDfDBgHXMWL7Chv0xo0XG3f3BAfqF6o0x7XaAfHZESrHjdAxIMOilxNKQB0q
+ hdFnl+3BkciR4rhy+SbqVDpijGu58QPxh6WmzNSC+pLktHNpFwG+OFj5CMku+O4MPMID
+ AhnIrudd1CphlkdxA5hzUYRdzmZXD6pbsO52eHyXBl4DuRBzademw/XFlIShFxcxIyIg
+ c7pARWz2B1t4Y2Y1+1ZaKuNfdx/tsJ+XTp+1FnKHM+9Izd7lyYlNyNLaeP+WjqaxLnb4
+ HuDwY2/dHWDVzSwS8SZmorGyN+nW3vABCALDuQmo7O3IrmkrqgfeEg4MsWM0JHi7qvMl zQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2y1uvd10jy-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 Feb 2020 11:54:17 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7AB6610002A;
+ Mon, 10 Feb 2020 11:54:13 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D9162D3783;
+ Mon, 10 Feb 2020 11:54:13 +0100 (CET)
+Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Mon, 10 Feb 2020 11:54:12 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 10 Feb 2020 11:54:11 +0100
+Message-ID: <20200210115346.1.I82bc82f60e739674bce1015b8a7906d3852f0b93@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <ab592bb4ff9c4a8ba6bfb45a91418b57@SFHDAG6NODE3.st.com>
-Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>, Antonio BORNEO <antonio.borneo@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Gerald BAEZA <gerald.baeza@st.com>, Alexandre TORGUE <alexandre.torgue@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 4/9] ARM: dts: stm32mp1: move FDCAN to
-	PLL4_R
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-02-10_02:2020-02-10,
+ 2020-02-10 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] stm32mp1: remove fdt_high and initrd_high in
+	environment
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,39 +71,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 2/6/20 9:59 AM, Patrick DELAUNAY wrote:
-> Hi Marek,
+Remove fdt_high and initrd_high (set to 0xffffffff) in stm32mp1 board
+enviromnent, and U-Boot always relocate FDT and initrd in bootm command.
 
-Hello Patrick
+This relocation is limited by CONFIG_SYS_BOOTMAPSZ which indicates
+the size of the memory region where it is safe to place data passed
+to the Linux kernel (DTB, initrd), it is
+a) Less than or equal to RAM size.
+b) not within the kernel's highmem region
 
-[...]
+So 256M seems large enough in most circumstances and users
+can override this value via environment variable "bootm_mapsize"
+if needed.
 
->> My problem is with the bootloader-Linux clock tree dependency. That dependency
->> should not exist or be minimized, otherwise you end up with a very poor long-term
->> experience, see above. And if you want for this platform to be successful in the
->> industrial/automotive deployments, then you want to make sure the long-term
->> experience is a good one.
-> 
-> With STM32MP15x SOC and RCC, very few clocks need to be fixed by bootloaders
-> (in fact more or less the root clocks of the system = frequency of PLL1 to PLL4, 
-> common for many device or protected  by security feature), I think it is the case for
-> any platform.
-> 
-> All the other clocks have a initial value / source provided by bootloaders but they can 
-> also be modified at runtime (by device tree assigned-clock-parents for not secure clocks
-> and with SMC call to TF-A secure monitor for "secure" clock).
-> 
-> For ST boards, we are trying to don't modify the initial clock tree-source only to prove
-> that this clock tree is functional / correct for most of case.
-> 
-> But for client and after first deployment, clock tree modification must be done in Linux kernel
-> without any Bootloader update (and avoid all known issue for OTA).
-> 
-> I shared your concerns with my team and we are completely agree with you.
+This modification increases the boot time but avoid assumption
+on aligned address for bootm command.
 
-So, shall we expect a proper fix for the Linux kernel too ?
+A user can still define this variables themselves if the FDT or
+initrd is either left in-place or copied to a specific location.
 
-[...]
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
+
+ include/configs/stm32mp1.h | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
+index a66534e027..42717c167e 100644
+--- a/include/configs/stm32mp1.h
++++ b/include/configs/stm32mp1.h
+@@ -43,8 +43,14 @@
+ #define CONFIG_SETUP_MEMORY_TAGS
+ #define CONFIG_INITRD_TAG
+ 
++/*
++ * For booting Linux, use the first 256 MB of memory, since this is
++ * the maximum mapped by the Linux kernel during initialization.
++ */
++#define CONFIG_SYS_BOOTMAPSZ		SZ_256M
++
+ /* Extend size of kernel image for uncompression */
+-#define CONFIG_SYS_BOOTM_LEN			SZ_32M
++#define CONFIG_SYS_BOOTM_LEN		SZ_32M
+ 
+ /* SPL support */
+ #ifdef CONFIG_SPL
+@@ -215,8 +221,6 @@
+ 	"pxefile_addr_r=0xc4200000\0" \
+ 	"splashimage=0xc4300000\0"  \
+ 	"ramdisk_addr_r=0xc4400000\0" \
+-	"fdt_high=0xffffffff\0" \
+-	"initrd_high=0xffffffff\0" \
+ 	"altbootcmd=run bootcmd\0" \
+ 	"env_default=1\0" \
+ 	"env_check=if test $env_default -eq 1;"\
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,59 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6D4615731C
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 11:54:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C1CC157334
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 12:02:31 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 38A83C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 10:54:21 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C363C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2020 11:02:31 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2A526C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D3FFCC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Feb 2020 10:54:19 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Mon, 10 Feb 2020 11:02:28 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01AArlrR021120; Mon, 10 Feb 2020 11:54:17 +0100
+ 01AAsC1o012666; Mon, 10 Feb 2020 12:02:26 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=vbE6cBvdXwjmZvYmRzXS4EuGoTJq4Imkjp8fjiTETdg=;
- b=yQjVObaFcDfDBgHXMWL7Chv0xo0XG3f3BAfqF6o0x7XaAfHZESrHjdAxIMOilxNKQB0q
- hdFnl+3BkciR4rhy+SbqVDpijGu58QPxh6WmzNSC+pLktHNpFwG+OFj5CMku+O4MPMID
- AhnIrudd1CphlkdxA5hzUYRdzmZXD6pbsO52eHyXBl4DuRBzademw/XFlIShFxcxIyIg
- c7pARWz2B1t4Y2Y1+1ZaKuNfdx/tsJ+XTp+1FnKHM+9Izd7lyYlNyNLaeP+WjqaxLnb4
- HuDwY2/dHWDVzSwS8SZmorGyN+nW3vABCALDuQmo7O3IrmkrqgfeEg4MsWM0JHi7qvMl zQ== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=InhhdrtrijsuI6+MTykzwUPbhTCSd6MJN7TvyVTqElg=;
+ b=EiDkR2ijhR62bRZwkv4yz01rND10cq1nPPD7CSZtJ/0A4UMbTFQXyP1m52WulhF6doy0
+ ZgNBx+qwMK3wsGUnAoKJ7gdZ6Tdu+Cz/jnmLO5Aen2lNhhH6m5Tu09GJaRgbb29F+7DP
+ T/ndKmf1DeOtzVlZR+hpzdhCViTnvimSSgawE2yKC0Az8iShCLw0/ljfzmuPg0/MA2CD
+ 89k7VaAzqLygnVLDcTSq5QvDHJVyrfl8u+AjgxajZWm9p1XNqAW8or1boBkD8DeUQGDW
+ MQs4MaLkPu/JfWQWxMlV2B1K/tuTq2vHyJalA10NFWcYqenCqEvoDryMb57+SPALAkUn uQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1uvd10jy-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1ud99brf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Feb 2020 11:54:17 +0100
+ Mon, 10 Feb 2020 12:02:26 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7AB6610002A;
- Mon, 10 Feb 2020 11:54:13 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D9162D3783;
- Mon, 10 Feb 2020 11:54:13 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 10 Feb 2020 11:54:12 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 10 Feb 2020 11:54:11 +0100
-Message-ID: <20200210115346.1.I82bc82f60e739674bce1015b8a7906d3852f0b93@changeid>
-X-Mailer: git-send-email 2.17.1
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5DEA910002A;
+ Mon, 10 Feb 2020 12:02:23 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5333C2D379B;
+ Mon, 10 Feb 2020 12:02:23 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 10 Feb
+ 2020 12:02:22 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 10 Feb 2020 12:02:22 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH 8/9] doc: add board documentation for stm32mp1
+Thread-Index: AQHV1brvWCAgUcHIP0C4sxQS6bWT+Kf/4ZSAgBR1H8A=
+Date: Mon, 10 Feb 2020 11:02:22 +0000
+Message-ID: <18fb0431a0064149979c9d7ae2184f3f@SFHDAG6NODE3.st.com>
+References: <20200128091106.28552-1-patrick.delaunay@st.com>
+ <20200128091106.28552-5-patrick.delaunay@st.com>
+ <106cf4fa-a85c-6ee8-f8a7-cc1bcd24fbc7@gmx.de>
+In-Reply-To: <106cf4fa-a85c-6ee8-f8a7-cc1bcd24fbc7@gmx.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG6NODE3.st.com
- (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-10_02:2020-02-10,
  2020-02-10 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp1: remove fdt_high and initrd_high in
-	environment
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 8/9] doc: add board documentation for
+	stm32mp1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,62 +84,77 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Remove fdt_high and initrd_high (set to 0xffffffff) in stm32mp1 board
-enviromnent, and U-Boot always relocate FDT and initrd in bootm command.
+Hi Heinrich
 
-This relocation is limited by CONFIG_SYS_BOOTMAPSZ which indicates
-the size of the memory region where it is safe to place data passed
-to the Linux kernel (DTB, initrd), it is
-a) Less than or equal to RAM size.
-b) not within the kernel's highmem region
+> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Sent: mardi 28 janvier 2020 12:34
+> 
+> On 1/28/20 10:11 AM, Patrick Delaunay wrote:
+> > Change plain test README to rst format and move this file in
+> > documentation directory.
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> 
+> When I apply only this patch to origin/master:
+> 
+> git am /tmp/1.patch
+> Applying: doc: add board documentation for stm32mp1
+> error: patch failed: board/st/stm32mp1/README:1
+> error: board/st/stm32mp1/README: patch does not apply
+> .git/rebase-apply/patch:1164: new blank line at EOF.
+> 
+> Maybe this patch will have to be rebased.
 
-So 256M seems large enough in most circumstances and users
-can override this value via environment variable "bootm_mapsize"
-if needed.
+I think the issue is because ethe readme is updated in the previous patch
+[7/9] board: stm32mp1: update readme
 
-This modification increases the boot time but avoid assumption
-on aligned address for bootm command.
+=> I think I will get the board patch in my next pull request on stm32 and
+     then rebase this patch only.
 
-A user can still define this variables themselves if the FDT or
-initrd is either left in-place or copied to a specific location.
+> > ---
+> >
+> >   board/st/stm32mp1/README  | 520 +--------------------------------
+> >   doc/board/index.rst       |   1 +
+> >   doc/board/st/index.rst    |   9 +
+> >   doc/board/st/stm32mp1.rst | 598
+> ++++++++++++++++++++++++++++++++++++++
+> >   4 files changed, 609 insertions(+), 519 deletions(-)
+> >   create mode 100644 doc/board/st/index.rst
+> >   create mode 100644 doc/board/st/stm32mp1.rst
+> >
+> > diff --git a/board/st/stm32mp1/README b/board/st/stm32mp1/README index
+> > 5d7465a8c8..8172d26a66 100644
+> > --- a/board/st/stm32mp1/README
+> > +++ b/board/st/stm32mp1/README
+> > @@ -1,519 +1 @@
+> > -SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause -# -# Copyright (C)
+> > 2018 STMicroelectronics - All Rights Reserved -#
+> > -
+> > -U-Boot on STMicroelectronics STM32MP15x
+> > -=======================================
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+......
 
- include/configs/stm32mp1.h | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+> > + bi
+> > +
+> > +- you can also dump the OTP and the PMIC NVM with::
+> > +
+> > +  $> dfu-util -d 0483:5720 -a 25 -U otp.bin  $> dfu-util -d 0483:5720
+> > + -a 26 -U pmic.bin
+> > +
+> 
+> This blank line could be removed.
 
-diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-index a66534e027..42717c167e 100644
---- a/include/configs/stm32mp1.h
-+++ b/include/configs/stm32mp1.h
-@@ -43,8 +43,14 @@
- #define CONFIG_SETUP_MEMORY_TAGS
- #define CONFIG_INITRD_TAG
- 
-+/*
-+ * For booting Linux, use the first 256 MB of memory, since this is
-+ * the maximum mapped by the Linux kernel during initialization.
-+ */
-+#define CONFIG_SYS_BOOTMAPSZ		SZ_256M
-+
- /* Extend size of kernel image for uncompression */
--#define CONFIG_SYS_BOOTM_LEN			SZ_32M
-+#define CONFIG_SYS_BOOTM_LEN		SZ_32M
- 
- /* SPL support */
- #ifdef CONFIG_SPL
-@@ -215,8 +221,6 @@
- 	"pxefile_addr_r=0xc4200000\0" \
- 	"splashimage=0xc4300000\0"  \
- 	"ramdisk_addr_r=0xc4400000\0" \
--	"fdt_high=0xffffffff\0" \
--	"initrd_high=0xffffffff\0" \
- 	"altbootcmd=run bootcmd\0" \
- 	"env_default=1\0" \
- 	"env_check=if test $env_default -eq 1;"\
--- 
-2.17.1
+Ok => in V2 with rebase
+
+> 
+> 'make html' shows that the reStructured text files are syntactically valid.
+> 
+> Tested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+Thanks 
+
+Patrkc
 
 _______________________________________________
 Uboot-stm32 mailing list

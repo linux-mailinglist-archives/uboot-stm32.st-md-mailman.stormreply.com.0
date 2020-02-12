@@ -2,63 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FB3415A94F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 13:40:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79E1A15AFD9
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 19:31:14 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 39EEDC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 12:40:14 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FBA3C36B0E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 18:31:14 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C85D1C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77F92C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Feb 2020 12:40:12 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Wed, 12 Feb 2020 18:31:12 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01CCWXw9014064; Wed, 12 Feb 2020 13:40:09 +0100
+ 01CIEEBF031223; Wed, 12 Feb 2020 19:30:37 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=Kf+1LuAySt9NtHmXgNpuXc2o/se/l1rcq3+dL1wN/JU=;
- b=HNwjSdJvpQMXVyC3p9H+wBy+5mGcSpGuX5gX1p4jAfOtuq8eRIuXJI4XQAL8pcyGawvB
- 21cF1BdUfZtOP3+YxxWHsGB4T5S8yogckr2oxxByHyCi1oR+EIAogMVM8dMH74Jnir9+
- Q9iEEXX0uA5zRgN4OKyC7FXcAPWVqMeFTGG0CUZxAWczOboJJ/dT7t558vvaCk9EF3/0
- GB5S+PwBANoq743ixV+piJ0Ovq8l8zXqk8b8c1kEdR2LW/ZbSyz15kCJbAAewin9dYdi
- BYTRxh3pYglxQpyaqFSB4i0ZiFuYhhhx1EvTnh4OY6PqcWl202oStSf/gqV492Gm3aLl 1A== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=BwykBCHdeoy0KykWOPg5FQRitDtb5C8O15ibpsAqNd4=;
+ b=gRP4K6deNeZDh5aXmZrIj0Otpa55TyIcC9LhH1uvHPYFH6Deyh/lQBGsEn1QqQmvEZVK
+ n4xGwUKj24HcdjpVU6EvJKCLjpwmn5vol8KzOIK037Y0Pewp6KncTK1AH2fbyfTfKOpv
+ /QlkQUUdQaF/B7sXv60GSG0YmoFjMHeA/eeY+exsOmBVkRk+ovYrEwHVM0F5gkZR7mGJ
+ PiW03u8tKxfbB9eYV9yYgdvP6clWsPlETIg8z5KCyjAtgbYvngn00JTU8QURExoF0mGi
+ uVklAVBR7LIzbvnbZeWPT1KgMVMTxTq3Ipjh7Kj7O0J8UeW9gPGrRrHlQIZr+Y0xT1NT ZQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1ufhegsk-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1uvdqst5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 12 Feb 2020 13:40:09 +0100
+ Wed, 12 Feb 2020 19:30:37 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A560D100034;
- Wed, 12 Feb 2020 13:40:08 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2B376100034;
+ Wed, 12 Feb 2020 19:30:25 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9CBA42B1867;
- Wed, 12 Feb 2020 13:40:08 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1B9CF2C38D7;
+ Wed, 12 Feb 2020 19:30:25 +0100 (CET)
+Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 12 Feb 2020 13:40:08 +0100
+ Wed, 12 Feb 2020 19:30:24 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 12 Feb 2020 13:40:00 +0100
-Message-ID: <20200212124001.12788-6-patrick.delaunay@st.com>
+Date: Wed, 12 Feb 2020 19:30:11 +0100
+Message-ID: <20200212183021.4844-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200212124001.12788-1-patrick.delaunay@st.com>
-References: <20200212124001.12788-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-12_06:2020-02-11,
+ definitions=2020-02-12_08:2020-02-12,
  2020-02-12 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stephen Warren <swarren@nvidia.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v3 7/7] test: env: add test for env info
-	sub-command
+Cc: Stephen Warren <swarren@nvidia.com>, Wolfgang Denk <wd@denx.de>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 00/10]
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,79 +72,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a pytest for testing the env info sub-command:
+env: ext4: add test for env in ext4
 
-test_env_info: test command with several option
+Hi,
 
-test_env_info_quiet: test the result of the sub-command with quiet option,
-'-q' as used for support in shell test; for example:
-  if env info -p -d -q; then env save; fi
+In this serie, I add sandbox test with CONFIG_ENV_IS_NOWHERE
+activated with other location: at least one CONFIG_ENV_IS_IN_...
+is defined and  ENV_IS_IN_DEVICE is automatically defined.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+To test this feature, I activate and test ENV_IS_IN_EXT4
+in sandbox; I add a new command "env_loc" to change this
+ENV location.
 
-Changes in v3:
-- udpate commit message (sub-commandi)
-- rename test_env_info_test to test_env_info_quiet
+This serie depends on previous env test introduced in:
+"cmd: env: add option for quiet output on env info"
+http://patchwork.ozlabs.org/project/uboot/list/?series=158105
 
-Changes in v2:
-- add pytest test_env_info and test_env_info_test (new)
+To be able to test invalid file (bad CRC), I also add the support of
+the command "env erase" for EXT4 env location.
 
- test/py/tests/test_env.py | 44 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+Regards
 
-diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 6ff38f1020..cbdb41031c 100644
---- a/test/py/tests/test_env.py
-+++ b/test/py/tests/test_env.py
-@@ -336,3 +336,47 @@ def test_env_import_whitelist_delete(state_test_env):
-     unset_var(state_test_env, 'foo2')
-     unset_var(state_test_env, 'foo3')
-     unset_var(state_test_env, 'foo4')
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_nvedit_info')
-+def test_env_info(state_test_env):
-+
-+    """Test 'env info' command with several options.
-+    """
-+    c = state_test_env.u_boot_console
-+
-+    response = c.run_command('env info')
-+    assert 'env_valid = invalid' in response
-+    assert 'env_ready = true' in response
-+    assert 'env_use_default = true' in response
-+
-+    response = c.run_command('env info -p -d')
-+    assert 'Default environment is used' in response
-+    assert 'Environment cannot be persisted' in response
-+
-+    response = c.run_command('env info -p -d -q')
-+    assert response == ""
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_nvedit_info')
-+@pytest.mark.buildconfigspec('cmd_echo')
-+def test_env_info_quiet(state_test_env):
-+
-+    """Test 'env info' quiet command result with several options for test.
-+    """
-+    c = state_test_env.u_boot_console
-+
-+    response = c.run_command('env info -d -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "0"
-+
-+    response = c.run_command('env info -p -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "1"
-+
-+    response = c.run_command('env info -d -p -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "1"
+Patrick
+
+
+
+Patrick Delaunay (10):
+  env: add absolute path at CONFIG_ENV_EXT4_FILE
+  env: ext4: set gd->env_valid
+  env: correctly handle result in env_init
+  sandbox: activate env in ext4 support
+  sandbox: support the change of env location
+  test: environment in ext4
+  env: ext4: fix possible compilation issue
+  env: ext4: introduce new function env_ext4_save_buffer
+  env: ext4: add support of command env erase
+  test: sandbox: add test for erase command
+
+ board/sandbox/sandbox.c            |  50 ++++++++++++++
+ configs/sandbox64_defconfig        |   5 ++
+ configs/sandbox_defconfig          |   5 ++
+ configs/sandbox_flattree_defconfig |   5 ++
+ configs/sandbox_spl_defconfig      |   5 ++
+ env/Kconfig                        |   2 +-
+ env/env.c                          |   5 +-
+ env/ext4.c                         |  63 +++++++++++++++---
+ test/py/tests/test_env.py          | 103 +++++++++++++++++++++++++++++
+ 9 files changed, 232 insertions(+), 11 deletions(-)
+
 -- 
 2.17.1
 

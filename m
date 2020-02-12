@@ -2,67 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C47D115A952
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 13:40:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3364D15A94D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 13:40:12 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90E6AC36B0D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 12:40:18 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0061EC36B0C
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 12:40:12 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0C6F0C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01928C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Feb 2020 12:40:16 +0000 (UTC)
+ Wed, 12 Feb 2020 12:40:10 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01CCWdKh031605; Wed, 12 Feb 2020 13:40:05 +0100
+ 01CCWgkt031626; Wed, 12 Feb 2020 13:40:05 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=3wf3Db6wINRlwDpaMdyWbU7H6IiKbpX6A6+Pc9hh2bg=;
- b=aota/1/9kWnpNmBuGMNbqrE+2EIWJzzREBBoDfVV2CHxjp+XMg6k6izM3w7Oq8fcZ1ZW
- vWqCzNKy8SOld6zS9CwzlF9FvH4WZK+2L7I9SL8P8Ox+4tqeMiuoAVVvDF1q/0Na/2Fi
- kxnu7T5tWXKn1junNS7tzpbQ4ESFCqPc56WgiQtsX3KZoYB8oOy1ndl/X9Z6iQMgKa2P
- dvTrGRcnzo1YWwomK6QzeHAheiFdyJ3z9NoTZL8luN2kUk94oaB5oVCuMB8vWtUzkHM7
- hbwrsVbaUyh0FFxz1pZYlKRnNI97fgr7/pz84fMUgASEvqjLAILAwGHkrP988FimUHK5 yg== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=nv5TuCfhkSp48R1OuXwEgYz/H/TggUn/vgc/x7opiCc=;
+ b=TNhQLEFK9Gbhx/VYT+AWgeAuVujumSpuwaeKB8XQMCf/wxZimlhNtONvq2jj03C2qdLj
+ SbvP497PzGn8AIgizyiRTk5mHm3vDUJg8HbszGirWQ79zTLs6LKNhdVecuoPP8FtZFIL
+ hwCu6xj3YW98xb7s3fs5GycL4nP3IPpiHepfxYu21+cYY/yZXUmMGZubQlCejhOGn4JZ
+ zG1a+cUm0jienV0T51bI1sM6DbipSmrqWiwzC37rcmahKKL/BUTzZYV0PjFrnUuDO5DJ
+ qrbl/NYnaIaSb10/+oqwnXVx8x4b4Jv7LvfnqoyPVZJC9PAx2S63SLEabxF5ZOP7GTUT cQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1urhec88-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1urhec87-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Wed, 12 Feb 2020 13:40:05 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AB8F1100034;
- Wed, 12 Feb 2020 13:40:03 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 41B6210002A;
+ Wed, 12 Feb 2020 13:40:04 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7A40B2B1867;
- Wed, 12 Feb 2020 13:40:03 +0100 (CET)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 30FF82B1868;
+ Wed, 12 Feb 2020 13:40:04 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Wed, 12 Feb 2020 13:40:03 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 12 Feb 2020 13:39:53 +0100
-Message-ID: <20200212124001.12788-1-patrick.delaunay@st.com>
+Date: Wed, 12 Feb 2020 13:39:54 +0100
+Message-ID: <20200212124001.12788-2-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200212124001.12788-1-patrick.delaunay@st.com>
+References: <20200212124001.12788-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-12_06:2020-02-11,
  2020-02-12 signatures=0
 Cc: Frank Wunderlich <frank-w@public-files.de>,
- Leo Ruan <tingquan.ruan@cn.bosch.com>, Stephen Warren <swarren@nvidia.com>,
+ Leo Ruan <tingquan.ruan@cn.bosch.com>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Anup Patel <Anup.Patel@wdc.com>, Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Anup Patel <Anup.Patel@wdc.com>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sam Protsenko <joe.skb7@gmail.com>,
- Wolfgang Denk <wd@denx.de>
-Subject: [Uboot-stm32] [PATCH v3 0/7] cmd: env: add option for quiet output
+ Sam Protsenko <joe.skb7@gmail.com>
+Subject: [Uboot-stm32] [PATCH v3 1/7] cmd: env: add option for quiet output
 	on env info
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -80,65 +81,129 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+The "env info" can be use for test with -d and -p parameter,
+in scripting case the output of the command is not needed.
 
-Hi,
+This patch allows to deactivate this output with a new option "-q".
 
-It is a V3 for
-"cmd: env: add option for quiet output on env info"
-http://patchwork.ozlabs.org/project/uboot/list/?series=157728
+For example, we can save the environment if default
+environment is used and persistent storage is managed with:
+  if env info -p -d -q; then env save; fi
 
-I also add pytest for command env info.
+Without the quiet option, I have the unnecessary traces
+First boot:
+      Default environment is used
+      Environment can be persisted
+      Saving Environment to EXT4... File System is consistent
 
-Test for ENV_IS_IN_DEVICE will be included in future serie
-(I will activate ENV_IS_IN_EXT4 support in sandbox)
+Next boot:
+      Environment was loaded from persistent storage
+      Environment can be persisted
 
-To avoid compilation warning, I add prototype for
-env_get_location for the patch 3/7
-"cmd: env: check real location for env info command"
-as it is done in
-http://patchwork.ozlabs.org/patch/1230200/
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
-Regards
+Changes in v3: None
+Changes in v2: None
 
-Patrick
+ cmd/Kconfig  |  1 +
+ cmd/nvedit.c | 26 +++++++++++++++++++-------
+ 2 files changed, 20 insertions(+), 7 deletions(-)
 
-Changes in v3:
-- udpate commit message (sub-commandi)
-- rename test_env_info_test to test_env_info_quiet
-
-Changes in v2:
-- update prototype in env_internal.h  as done in
-  "env: add prototypes for weak function"
-- remove comment change in env.c (implementation information)
-- move env_location declaration
-- activate CMD_NVEDIT_INFO in sandbox (new patch)
-- activate env info command in sandbox (new)
-- add pytest test_env_info and test_env_info_test (new)
-
-Patrick Delaunay (7):
-  cmd: env: add option for quiet output on env info
-  cmd: env: use ENV_IS_IN_DEVICE in env info
-  cmd: env: check real location for env info command
-  stm32mp1: use the command env info in env_check
-  stm32mp1: configs: activate CMD_ERASEENV
-  configs: sandbox: Enable sub command 'env info'
-  test: env: add test for env info sub-command
-
- arch/arm/mach-stm32mp/Kconfig       |  1 +
- cmd/Kconfig                         |  1 +
- cmd/nvedit.c                        | 39 +++++++++++++++++++------
- configs/sandbox64_defconfig         |  1 +
- configs/sandbox_defconfig           |  1 +
- configs/sandbox_flattree_defconfig  |  1 +
- configs/sandbox_spl_defconfig       |  1 +
- configs/stm32mp15_basic_defconfig   |  1 +
- configs/stm32mp15_optee_defconfig   |  1 +
- configs/stm32mp15_trusted_defconfig |  1 +
- include/configs/stm32mp1.h          |  4 +--
- include/env_internal.h              | 11 ++++++++
- test/py/tests/test_env.py           | 44 +++++++++++++++++++++++++++++
- 13 files changed, 95 insertions(+), 12 deletions(-)
-
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index e6ba57035e..5c859199b6 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -591,6 +591,7 @@ config CMD_NVEDIT_INFO
+ 	  This command can be optionally used for evaluation in scripts:
+ 	  [-d] : evaluate whether default environment is used
+ 	  [-p] : evaluate whether environment can be persisted
++	  [-q] : quiet output
+ 	  The result of multiple evaluations will be combined with AND.
+ 
+ endmenu
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 81d94cd193..aaa032cd96 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -1219,12 +1219,15 @@ static int print_env_info(void)
+  * env info - display environment information
+  * env info [-d] - evaluate whether default environment is used
+  * env info [-p] - evaluate whether environment can be persisted
++ *      Add [-q] - quiet mode, use only for command result, for test by example:
++ *                 test env info -p -d -q
+  */
+ static int do_env_info(cmd_tbl_t *cmdtp, int flag,
+ 		       int argc, char * const argv[])
+ {
+ 	int eval_flags = 0;
+ 	int eval_results = 0;
++	bool quiet = false;
+ 
+ 	/* display environment information */
+ 	if (argc <= 1)
+@@ -1242,6 +1245,9 @@ static int do_env_info(cmd_tbl_t *cmdtp, int flag,
+ 			case 'p':
+ 				eval_flags |= ENV_INFO_IS_PERSISTED;
+ 				break;
++			case 'q':
++				quiet = true;
++				break;
+ 			default:
+ 				return CMD_RET_USAGE;
+ 			}
+@@ -1251,20 +1257,24 @@ static int do_env_info(cmd_tbl_t *cmdtp, int flag,
+ 	/* evaluate whether default environment is used */
+ 	if (eval_flags & ENV_INFO_IS_DEFAULT) {
+ 		if (gd->flags & GD_FLG_ENV_DEFAULT) {
+-			printf("Default environment is used\n");
++			if (!quiet)
++				printf("Default environment is used\n");
+ 			eval_results |= ENV_INFO_IS_DEFAULT;
+ 		} else {
+-			printf("Environment was loaded from persistent storage\n");
++			if (!quiet)
++				printf("Environment was loaded from persistent storage\n");
+ 		}
+ 	}
+ 
+ 	/* evaluate whether environment can be persisted */
+ 	if (eval_flags & ENV_INFO_IS_PERSISTED) {
+ #if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_ENV_IS_NOWHERE)
+-		printf("Environment can be persisted\n");
++		if (!quiet)
++			printf("Environment can be persisted\n");
+ 		eval_results |= ENV_INFO_IS_PERSISTED;
+ #else
+-		printf("Environment cannot be persisted\n");
++		if (!quiet)
++			printf("Environment cannot be persisted\n");
+ #endif
+ 	}
+ 
+@@ -1321,7 +1331,7 @@ static cmd_tbl_t cmd_env_sub[] = {
+ 	U_BOOT_CMD_MKENT(import, 5, 0, do_env_import, "", ""),
+ #endif
+ #if defined(CONFIG_CMD_NVEDIT_INFO)
+-	U_BOOT_CMD_MKENT(info, 2, 0, do_env_info, "", ""),
++	U_BOOT_CMD_MKENT(info, 3, 0, do_env_info, "", ""),
+ #endif
+ 	U_BOOT_CMD_MKENT(print, CONFIG_SYS_MAXARGS, 1, do_env_print, "", ""),
+ #if defined(CONFIG_CMD_RUN)
+@@ -1400,8 +1410,10 @@ static char env_help_text[] =
+ #endif
+ #if defined(CONFIG_CMD_NVEDIT_INFO)
+ 	"env info - display environment information\n"
+-	"env info [-d] - whether default environment is used\n"
+-	"env info [-p] - whether environment can be persisted\n"
++	"env info [-d] [-p] [-q] - evaluate environment information\n"
++	"      \"-d\": default environment is used\n"
++	"      \"-p\": environment can be persisted\n"
++	"      \"-q\": quiet output\n"
+ #endif
+ 	"env print [-a | name ...] - print environment\n"
+ #if defined(CONFIG_CMD_NVEDIT_EFI)
 -- 
 2.17.1
 

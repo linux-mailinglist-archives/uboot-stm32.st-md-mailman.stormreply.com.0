@@ -2,61 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3229C15B01D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 19:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 697DB15B018
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 19:45:33 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E9946C36B12
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 18:45:36 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BEA8C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 18:45:32 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C5F97C36B0E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9F835C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Feb 2020 18:45:32 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Wed, 12 Feb 2020 18:45:27 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01CIgiA1024273; Wed, 12 Feb 2020 19:45:12 +0100
+ 01CIg6Yv021881; Wed, 12 Feb 2020 19:45:12 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=dK8kabp+8ucotNVvYhQySvqQIB+PxdpsTbizsC5gRWE=;
- b=zUOtqgRSsBtCNLZQxUazovvGWTcQWpd5v3FFLz9pG3l55Sfnrcri2U6JC74o0vzO+9bS
- lvOi3HlpjhJ4i/FmqRncA2ASwD0bISWC+jVNZJpsitNuBi9LrKlvrT82ogYc1s06JUWz
- 6KCO/g7wh0xkx+m692pLMpZZQWHcwtwQm3Klo6MjXPXceAn5tBTJstgoOmOgEPht8YQh
- nWUDlukNgS4a2mnzQ2tGIizTQtTM6+/4FEXpBqTzAmpnVdTWYTuB1qW6HfewHOb2oHr+
- MT0/MPcAzq1lFNIQ9AXJSFZ9VgO+mIyn7N9DTpXHpKBFjL2azcK4m5e/ol4A8K1yylXt Xw== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=OiwrFh3/S2/hRMVHTzd8/kh4L3RtkxzxgBHJkkhEzTY=;
+ b=0QEzm6+OFfLKia/Flz6HqbAVpAvw+2FJS0+hq5TqKR4zX19m7zvlLYt+etCAE0OLaa/F
+ 6u/xHLEgV8B6f8QXGgWv8Qaq7OW1G43hdo0R9QJkHxyssPkolKlpXoh9o43wWzU3b7a/
+ faui45/ldyLNWNI7LK3t0Fk4cgO/x9sTy5DNpv3T6NLQyyI2rBBBBlZwxQ117JK7e4Iy
+ aBGUOo3ciZOABHFdp8+3uMFjTlZP9cwdDyh9FBI9VVuvR4QKkFyPBO41xujXlZtbr9t2
+ YGptDwA9orp0yTk7bEx3mdqyiWbcvarvpEuli7TCTSBgOTuAdQ/OLlWDUx4AyfHE8e0k Lg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1uda04cc-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1uvdqv1t-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Wed, 12 Feb 2020 19:45:12 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AAD8610003B;
- Wed, 12 Feb 2020 19:45:03 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6AEDF10003D;
+ Wed, 12 Feb 2020 19:45:04 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9F50B2C60B1;
- Wed, 12 Feb 2020 19:45:03 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 62F6B2C60B1;
+ Wed, 12 Feb 2020 19:45:04 +0100 (CET)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 12 Feb 2020 19:45:02 +0100
+ Wed, 12 Feb 2020 19:45:03 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 12 Feb 2020 19:44:51 +0100
-Message-ID: <20200212184501.5911-1-patrick.delaunay@st.com>
+Date: Wed, 12 Feb 2020 19:44:52 +0100
+Message-ID: <20200212184501.5911-2-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200212184501.5911-1-patrick.delaunay@st.com>
+References: <20200212184501.5911-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-12_08:2020-02-12,
  2020-02-12 signatures=0
-Cc: Stephen Warren <swarren@nvidia.com>, Wolfgang Denk <wd@denx.de>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [RESEND PATCH 00/10] env: ext4: add test for env in
-	ext4
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Wolfgang Denk <wd@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [RESEND PATCH 01/10] env: add absolute path at
+	CONFIG_ENV_EXT4_FILE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,55 +75,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Add the absolute path to the default value of
+CONFIG_ENV_EXT4_FILE = "/uboot.env".
 
-Hi,
+This patch avoid the error :
+  Saving Environment to EXT4... File System is consistent
+  Please supply Absolute path
 
-[RESEND] with correct serie title (sorry)
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-In this serie, I add sandbox test with CONFIG_ENV_IS_NOWHERE
-activated with other location: at least one CONFIG_ENV_IS_IN_...
-is defined and  ENV_IS_IN_DEVICE is automatically defined.
+For information, it is the value used today by all the boards:
 
-To test this feature, I activate and test ENV_IS_IN_EXT4
-in sandbox; I add a new command "env_loc" to change this
-ENV location.
-
-This serie depends on previous env test introduced in:
-"cmd: env: add option for quiet output on env info"
-http://patchwork.ozlabs.org/project/uboot/list/?series=158105
-
-To be able to test invalid file (bad CRC), I also add the support of
-the command "env erase" for EXT4 env location.
-
-Regards
-
-Patrick
+dragonboard820c_defconfig:29:CONFIG_ENV_EXT4_FILE="/uboot.env"
+hikey960_defconfig:25:CONFIG_ENV_EXT4_FILE="/uboot.env"
+stm32mp15_basic_defconfig:64:CONFIG_ENV_EXT4_FILE="/uboot.env"
+stm32mp15_optee_defconfig:51:CONFIG_ENV_EXT4_FILE="/uboot.env"
+stm32mp15_trusted_defconfig:50:CONFIG_ENV_EXT4_FILE="/uboot.env"
 
 
+ env/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patrick Delaunay (10):
-  env: add absolute path at CONFIG_ENV_EXT4_FILE
-  env: ext4: set gd->env_valid
-  env: correctly handle result in env_init
-  sandbox: activate env in ext4 support
-  sandbox: support the change of env location
-  test: environment in ext4
-  env: ext4: fix possible compilation issue
-  env: ext4: introduce new function env_ext4_save_buffer
-  env: ext4: add support of command env erase
-  test: sandbox: add test for erase command
-
- board/sandbox/sandbox.c            |  50 ++++++++++++++
- configs/sandbox64_defconfig        |   5 ++
- configs/sandbox_defconfig          |   5 ++
- configs/sandbox_flattree_defconfig |   5 ++
- configs/sandbox_spl_defconfig      |   5 ++
- env/Kconfig                        |   2 +-
- env/env.c                          |   5 +-
- env/ext4.c                         |  63 +++++++++++++++---
- test/py/tests/test_env.py          | 103 +++++++++++++++++++++++++++++
- 9 files changed, 232 insertions(+), 11 deletions(-)
-
+diff --git a/env/Kconfig b/env/Kconfig
+index 0d6f559b39..8059749701 100644
+--- a/env/Kconfig
++++ b/env/Kconfig
+@@ -467,7 +467,7 @@ config ENV_EXT4_DEVICE_AND_PART
+ config ENV_EXT4_FILE
+ 	string "Name of the EXT4 file to use for the environment"
+ 	depends on ENV_IS_IN_EXT4
+-	default "uboot.env"
++	default "/uboot.env"
+ 	help
+ 	  It's a string of the EXT4 file name. This file use to store the
+ 	  environment (explicit path to the file)
 -- 
 2.17.1
 

@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10BEB15B01A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 19:45:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15BBB15B015
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 19:45:22 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CCF1CC36B0C
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 18:45:36 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D5F67C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Feb 2020 18:45:21 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4CE51C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66AC5C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Feb 2020 18:45:32 +0000 (UTC)
+ Wed, 12 Feb 2020 18:45:20 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01CIgmr7006915; Wed, 12 Feb 2020 19:45:15 +0100
+ 01CIgmr8006915; Wed, 12 Feb 2020 19:45:16 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=T49wc0rO2e6EaBeFaHoTUHy06Qx+rOGUUHUf+keKcXI=;
- b=XszC712keeWijFZ3j4jLB+gcx4LU3L0WW/Rqr10wU61hwQe6ubgwAnnC03x4030R0Wra
- N5SApRcuJvI/KvQf/P8lHcq4AyxUGEc/xrnVt9j/v0xn6xXEmv+M9hWjczD1E/vsRWq1
- pXh9HheWlaQdeUTYF4BgylPwlTRNxt1oZwUnXcqKEU8a4tAfih5kZXAnkZlqbvRL+f98
- 53r/gGx5/faQgkksnnrBmF8v6T3O0lQu0LgwdLHSXXcFUoLpklUgBPqJyf2rZT1fkEvB
- tUb9GvVuNN6kv92YwX4Impxlqy52HOqEDX3A4g0OI9MR91ZQQDAi9/++HA3rwVXOw7kB 5Q== 
+ bh=i7Vhq2AKy88I6syR3OsQ1Jp/4BTcvRJJs9TFoUqgET8=;
+ b=Y+zxxYHsUHoPZ5gqBUnr5/arJ/q94Sz4kXAT7CGKfjETmlQAmKAsue5YPGklulN+cNsU
+ EqMit4vf460nRmBawfUE1zocBAIGIxVyzSeIT8MkyKKm4Z5WNx2TBOeuKj1QXBDm8Wpk
+ sdeFSvBi92u29npT1CvaJ4FD+K62Q3gu76uA9/6an3Yxzk+cuitB6gAvDtaroFpR4hid
+ re0QS7DCn/7tA2YRUYfn4jBgKTgnDCDcD9fiKzAZgtJ+clPjbQCCRlFyXlSvcq455i1o
+ bE8AdgIgrncWAcnGhQJ7EKnJ/G7y5WvoLFmYxVKg2CqYtO5De+ln6NV2NEF6j+MJWMVY XA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1urhg7pw-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1urhg7px-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 12 Feb 2020 19:45:15 +0100
+ Wed, 12 Feb 2020 19:45:16 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F0D80100034;
- Wed, 12 Feb 2020 19:45:10 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B5F6F100038;
+ Wed, 12 Feb 2020 19:45:11 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E82982C60B1;
- Wed, 12 Feb 2020 19:45:10 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ACC412C60B1;
+ Wed, 12 Feb 2020 19:45:11 +0100 (CET)
+Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 12 Feb 2020 19:45:10 +0100
+ Wed, 12 Feb 2020 19:45:11 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 12 Feb 2020 19:45:00 +0100
-Message-ID: <20200212184501.5911-10-patrick.delaunay@st.com>
+Date: Wed, 12 Feb 2020 19:45:01 +0100
+Message-ID: <20200212184501.5911-11-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200212184501.5911-1-patrick.delaunay@st.com>
 References: <20200212184501.5911-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-12_08:2020-02-12,
  2020-02-12 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Wolfgang Denk <wd@denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [RESEND PATCH 09/10] env: ext4: add support of
-	command env erase
+ Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
+ Mario Six <mario.six@gdsys.cc>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [RESEND PATCH 10/10] test: sandbox: add test for
+	erase command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,65 +75,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of opts erase for env in ext4,
-this opts is used by command 'env erase'.
-
-This command only fill the env file (CONFIG_ENV_EXT4_FILE)
-with 0, the CRC and the saved environment becomes invalid.
+Add test for the erase command tested on ENV in EXT4.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- env/ext4.c | 24 +++++++++++++++++++++++-
- 1 file changed, 23 insertions(+), 1 deletion(-)
+ configs/sandbox64_defconfig        |  1 +
+ configs/sandbox_defconfig          |  1 +
+ configs/sandbox_flattree_defconfig |  1 +
+ configs/sandbox_spl_defconfig      |  1 +
+ test/py/tests/test_env.py          | 20 ++++++++++++++++++--
+ 5 files changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/env/ext4.c b/env/ext4.c
-index 49ed06659f..aec2a33fad 100644
---- a/env/ext4.c
-+++ b/env/ext4.c
-@@ -43,7 +43,7 @@ __weak const char *env_ext4_get_dev_part(void)
- 	return (const char *)CONFIG_ENV_EXT4_DEVICE_AND_PART;
- }
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 6172259924..a92dc957e8 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -25,6 +25,7 @@ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_ELF is not set
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_ENV_CALLBACK=y
+ CONFIG_CMD_ENV_FLAGS=y
+ CONFIG_CMD_NVEDIT_INFO=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 28a6211189..82a980e652 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -29,6 +29,7 @@ CONFIG_CMD_ABOOTIMG=y
+ # CONFIG_CMD_ELF is not set
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_ENV_CALLBACK=y
+ CONFIG_CMD_ENV_FLAGS=y
+ CONFIG_CMD_NVEDIT_INFO=y
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index 1324aaca37..93d587fe38 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -22,6 +22,7 @@ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_ELF is not set
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_NVEDIT_INFO=y
+ CONFIG_LOOPW=y
+ CONFIG_CMD_MD5SUM=y
+diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
+index eadcdb9f43..2337eade06 100644
+--- a/configs/sandbox_spl_defconfig
++++ b/configs/sandbox_spl_defconfig
+@@ -31,6 +31,7 @@ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_ELF is not set
+ CONFIG_CMD_ASKENV=y
+ CONFIG_CMD_GREPENV=y
++CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_ENV_CALLBACK=y
+ CONFIG_CMD_ENV_FLAGS=y
+ CONFIG_CMD_NVEDIT_INFO=y
+diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+index d35ad888a7..a71b4c2571 100644
+--- a/test/py/tests/test_env.py
++++ b/test/py/tests/test_env.py
+@@ -423,7 +423,7 @@ def test_env_ext4(state_test_env):
+     response = c.run_command('ext4ls host 0:0')
+     assert 'uboot.env' not in response
  
--#if defined(CONFIG_CMD_SAVEENV)
-+#if defined(CONFIG_CMD_SAVEENV) || defined(CONFIG_CMD_ERASEENV)
- static int env_ext4_save_buffer(env_t *env_new)
- {
- 	struct blk_desc *dev_desc = NULL;
-@@ -102,6 +102,25 @@ static int env_ext4_save(void)
- }
- #endif /* CONFIG_CMD_SAVEENV */
+-    """ env_location: ENVL_EXT4 (2)
++    """ env location: ENVL_EXT4 (2)
+     """
+     response = c.run_command('env_loc 2')
+     assert 'Saving Environment to EXT4' in response
+@@ -453,7 +453,23 @@ def test_env_ext4(state_test_env):
+     response = c.run_command('echo $?')
+     assert response == "0"
  
-+#if defined(CONFIG_CMD_ERASEENV)
-+static int env_ext4_erase(void)
-+{
-+	env_t	env_new;
-+	int err;
+-    """ restore env_location: ENVL_NOWHERE (12)
++    response = c.run_command('env erase')
++    assert 'OK' in response
 +
-+	memset(&env_new, 0, sizeof(env_t));
++    response = c.run_command('env_loc 2')
++    assert 'Loading Environment from EXT4... ' in response
++    assert 'bad CRC, using default environment' in response
 +
-+	err = env_ext4_save_buffer(&env_new);
-+	if (err)
-+		return err;
++    response = c.run_command('env info')
++    assert 'env_valid = invalid' in response
++    assert 'env_ready = true' in response
++    assert 'env_use_default = true' in response
 +
-+	gd->env_valid = ENV_INVALID;
-+	puts("done\n");
++    response = c.run_command('env info -p -d')
++    assert 'Default environment is used' in response
++    assert 'Environment can be persisted' in response
 +
-+	return 0;
-+}
-+#endif
-+
- static int env_ext4_load(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, CONFIG_ENV_SIZE);
-@@ -161,4 +180,7 @@ U_BOOT_ENV_LOCATION(ext4) = {
- #ifdef CONFIG_CMD_SAVEENV
- 	.save		= env_save_ptr(env_ext4_save),
- #endif
-+#if defined(CONFIG_CMD_ERASEENV)
-+	.erase		= env_ext4_erase,
-+#endif
- };
++    """ restore env location: ENVL_NOWHERE (12)
+     """
+     c.run_command('env_loc 12')
+ 
 -- 
 2.17.1
 

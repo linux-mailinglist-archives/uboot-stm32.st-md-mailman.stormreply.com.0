@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1743A15BA89
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 09:11:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1921015BA8C
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 09:12:17 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C9611C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 08:11:56 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D8970C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 08:12:16 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 235A0C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00879C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Feb 2020 08:11:55 +0000 (UTC)
+ Thu, 13 Feb 2020 08:12:14 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01D82c7S001681; Thu, 13 Feb 2020 09:11:38 +0100
+ 01D82c7f001681; Thu, 13 Feb 2020 09:12:13 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=GxxMm8ymdRs+XwcOPCHMfINO1IZbyHAic1NF2M8t8Z0=;
- b=HC/RHNQ5OTT/XDv0t6JHCgl9A0NV4odjS796Mq5i1j9D+LcQS3EKTUAqutuSlxLNKZ6K
- jLeAcFh42t2JoykkjxLPuyoSrldCe+K5XgYni6ToLzKNDbanGuv4NcWo+ehpZXU72Ryy
- abablM9Ulh6oqkW2PbXsLhUuVrAaB46veFkfFaALPRVyaKkNhDcqQTcF9ol1pnasVPKv
- I9rkdPqhLfywdE28uCE6/Zhg0vaxwOJN84tq8KNM/bZ1cgFLELHACJEXvDnHv63crgCi
- 5xUXrKGZ71ChUlPkPgEd6jlWNxWlsY4sd6zdEKuISgp4qXEyCZKHi2LmgEfZKQKmuJ4h CA== 
+ bh=srviB6xHmW2Ou4jJZrXUZ9nInMGu4A0f3aav3DzxJJM=;
+ b=KQM61Tb+jTBoajZ4kYhPC4ffrPrzd4njeDO121+ZEaltFLNqBvjS9jkt8v0KlcB7Mh8D
+ Mx+5CQ1jR29tGA8LlRwXAPK5Ja9dx9IAnpbBRCm9Uic3R/Uq1UrrZkjQjohh5n5pZ0ra
+ fLhD2CyzAwPeyBVn6UKAQsoGc0mZNzxqBLyF684eN/0+9Mfcv0gnFNyjOT52OAHkSbnt
+ eW7z7DhncD2MIeE2ySDX1rh6YDYY/4zhWfon99p5gqW1fuwQ2CDPNfV5jzUzzoFk8Zh6
+ uQ2K7XIaIwyfz8xTIJCsZ0cmkymz2D3sNC2S1eoysc6dc+z0s3LZJc2FMxXqphImrbEr /A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1ufhknqf-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1ufhkntn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Feb 2020 09:11:38 +0100
+ Thu, 13 Feb 2020 09:12:13 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B755F10002A;
- Thu, 13 Feb 2020 09:11:37 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A9018220BD3;
- Thu, 13 Feb 2020 09:11:37 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Thu, 13 Feb
- 2020 09:11:37 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 732BA100034;
+ Thu, 13 Feb 2020 09:12:09 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 687BC222CA1;
+ Thu, 13 Feb 2020 09:12:09 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Feb
+ 2020 09:12:08 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 13 Feb 2020 09:11:37 +0100
+ 15.00.1473.003; Thu, 13 Feb 2020 09:12:08 +0100
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 1/9] ARM: dts: stm32mp1: DT alignment with
- kernel v5.4
-Thread-Index: AQHV4kU29+WMNPBivkOPw23AJWTkig==
-Date: Thu, 13 Feb 2020 08:11:37 +0000
-Message-ID: <ec46854a-11b2-46a8-a627-3bf31eee5116@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH 3/9] ARM: dts: stm32mp1: DT alignment with
+ kernel v5.5-rc7
+Thread-Index: AQHV4kVJHEsFOxUbk02RAvQOeHKWkA==
+Date: Thu, 13 Feb 2020 08:12:08 +0000
+Message-ID: <f054cd35-6992-790d-2781-652525e1fd63@st.com>
 References: <20200128091106.28552-1-patrick.delaunay@st.com>
- <20200128091106.28552-2-patrick.delaunay@st.com>
-In-Reply-To: <20200128091106.28552-2-patrick.delaunay@st.com>
+ <20200128091106.28552-3-patrick.delaunay@st.com>
+In-Reply-To: <20200128091106.28552-3-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,15 +63,15 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.51]
-Content-ID: <F41CAA4F067DC74D83626FD85C8ACA26@st.com>
+Content-ID: <6B40FD48EB0F9440A593D27E84B56A15@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-02-13_01:2020-02-12,
  2020-02-13 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Christophe KERELLO <christophe.kerello@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/9] ARM: dts: stm32mp1: DT alignment with
- kernel v5.4
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH 3/9] ARM: dts: stm32mp1: DT alignment with
+ kernel v5.5-rc7
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,127 +83,177 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-On 1/28/20 10:10 AM, Patrick Delaunay wrote:
-> Device tree and binding alignment with kernel v5.4
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  arch/arm/dts/stm32mp157-pinctrl.dtsi             | 8 ++++----
->  arch/arm/dts/stm32mp157c-ev1.dts                 | 5 ++---
->  arch/arm/dts/stm32mp157c.dtsi                    | 4 ++--
->  doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt | 6 ++++--
->  4 files changed, 12 insertions(+), 11 deletions(-)
->
-> diff --git a/arch/arm/dts/stm32mp157-pinctrl.dtsi b/arch/arm/dts/stm32mp157-pinctrl.dtsi
-> index 0d53396119..07cd0809ff 100644
-> --- a/arch/arm/dts/stm32mp157-pinctrl.dtsi
-> +++ b/arch/arm/dts/stm32mp157-pinctrl.dtsi
-> @@ -622,13 +622,13 @@
->  						 <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
->  					bias-disable;
->  					drive-push-pull;
-> -					slew-rate = <3>;
-> +					slew-rate = <1>;
->  				};
->  				pins2 {
->  					pinmux = <STM32_PINMUX('B', 6, AF10)>; /* QSPI_BK1_NCS */
->  					bias-pull-up;
->  					drive-push-pull;
-> -					slew-rate = <3>;
-> +					slew-rate = <1>;
->  				};
->  			};
->  
-> @@ -650,13 +650,13 @@
->  						 <STM32_PINMUX('G', 7, AF11)>; /* QSPI_BK2_IO3 */
->  					bias-disable;
->  					drive-push-pull;
-> -					slew-rate = <3>;
-> +					slew-rate = <1>;
->  				};
->  				pins2 {
->  					pinmux = <STM32_PINMUX('C', 0, AF10)>; /* QSPI_BK2_NCS */
->  					bias-pull-up;
->  					drive-push-pull;
-> -					slew-rate = <3>;
-> +					slew-rate = <1>;
->  				};
->  			};
->  
-> diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
-> index 89d29b50c3..aa5892b156 100644
-> --- a/arch/arm/dts/stm32mp157c-ev1.dts
-> +++ b/arch/arm/dts/stm32mp157c-ev1.dts
-> @@ -189,8 +189,8 @@
->  		clocks = <&clk_ext_camera>;
->  		clock-names = "xclk";
->  		DOVDD-supply = <&v2v8>;
-> -		powerdown-gpios = <&stmfx_pinctrl 18 GPIO_ACTIVE_HIGH>;
-> -		reset-gpios = <&stmfx_pinctrl 19 GPIO_ACTIVE_LOW>;
-> +		powerdown-gpios = <&stmfx_pinctrl 18 (GPIO_ACTIVE_HIGH | GPIO_PUSH_PULL)>;
-> +		reset-gpios = <&stmfx_pinctrl 19 (GPIO_ACTIVE_LOW | GPIO_PUSH_PULL)>;
->  		rotation = <180>;
->  		status = "okay";
->  
-> @@ -223,7 +223,6 @@
->  
->  			joystick_pins: joystick {
->  				pins = "gpio0", "gpio1", "gpio2", "gpio3", "gpio4";
-> -				drive-push-pull;
->  				bias-pull-down;
->  			};
->  
-> diff --git a/arch/arm/dts/stm32mp157c.dtsi b/arch/arm/dts/stm32mp157c.dtsi
-> index 41aea75213..28a7e4c08a 100644
-> --- a/arch/arm/dts/stm32mp157c.dtsi
-> +++ b/arch/arm/dts/stm32mp157c.dtsi
-> @@ -939,7 +939,7 @@
->  			interrupt-names = "int0", "int1";
->  			clocks = <&rcc CK_HSE>, <&rcc FDCAN_K>;
->  			clock-names = "hclk", "cclk";
-> -			bosch,mram-cfg = <0x1400 0 0 32 0 0 2 2>;
-> +			bosch,mram-cfg = <0x0 0 0 32 0 0 2 2>;
->  			status = "disabled";
->  		};
->  
-> @@ -952,7 +952,7 @@
->  			interrupt-names = "int0", "int1";
->  			clocks = <&rcc CK_HSE>, <&rcc FDCAN_K>;
->  			clock-names = "hclk", "cclk";
-> -			bosch,mram-cfg = <0x0 0 0 32 0 0 2 2>;
-> +			bosch,mram-cfg = <0x1400 0 0 32 0 0 2 2>;
->  			status = "disabled";
->  		};
->  
-> diff --git a/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt b/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
-> index 70e76be2a3..ad2bef8265 100644
-> --- a/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
-> +++ b/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
-> @@ -18,8 +18,10 @@ Optional properties:
->  - dmas: DMA specifiers (see: dma/stm32-mdma.txt)
->  - dma-names: Must be "tx", "rx" and "ecc"
->  
-> -Optional children nodes:
-> -Children nodes represent the available NAND chips.
-> +* NAND device bindings:
-> +
-> +Required properties:
-> +- reg: describes the CS lines assigned to the NAND device.
->  
->  Optional properties:
->  - nand-on-flash-bbt: see nand.txt
-
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
-
-Thanks
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+DQpPbiAxLzI4LzIwIDEwOjExIEFNLCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOg0KPiBEZXZpY2Ug
+dHJlZSBhbmQgYmluZGluZyBhbGlnbm1lbnQgd2l0aCBrZXJuZWwgdjUuNS1yYzcNCj4NCj4gU2ln
+bmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBzdC5jb20+DQo+
+IC0tLQ0KPg0KPiAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTctcGluY3RybC5kdHNpICAgICB8IDIz
+ICsrKysrKysrLQ0KPiAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWF2ZW5nZXI5Ni5kdHMgICB8
+ICAzICstDQo+ICBhcmNoL2FybS9kdHMvc3RtMzJtcDE1N2EtZGsxLXUtYm9vdC5kdHNpIHwgMTcg
+LS0tLS0tLQ0KPiAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWRrMS5kdHMgICAgICAgICB8IDY1
+ICsrKysrKysrKysrKysrKysrKysrKy0tLQ0KPiAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWRr
+Mi5kdHMgICAgICAgICB8IDEzICsrKysrDQo+ICBhcmNoL2FybS9kdHMvc3RtMzJtcDE1N2MtZWQx
+LmR0cyAgICAgICAgIHwgMjAgKysrKysrLS0NCj4gIGFyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1l
+djEuZHRzICAgICAgICAgfCAgMyAtLQ0KPiAgNyBmaWxlcyBjaGFuZ2VkLCAxMTIgaW5zZXJ0aW9u
+cygrKSwgMzIgZGVsZXRpb25zKC0pDQo+DQo+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvc3Rt
+MzJtcDE1Ny1waW5jdHJsLmR0c2kgYi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1Ny1waW5jdHJsLmR0
+c2kNCj4gaW5kZXggMDdjZDA4MDlmZi4uODFhMzYzZDkzZCAxMDA2NDQNCj4gLS0tIGEvYXJjaC9h
+cm0vZHRzL3N0bTMybXAxNTctcGluY3RybC5kdHNpDQo+ICsrKyBiL2FyY2gvYXJtL2R0cy9zdG0z
+Mm1wMTU3LXBpbmN0cmwuZHRzaQ0KPiBAQCAtMTM4LDcgKzEzOCwxNiBAQA0KPiAgCQkJCXN0YXR1
+cyA9ICJkaXNhYmxlZCI7DQo+ICAJCQl9Ow0KPiAgDQo+IC0JCQlhZGMxMl91c2JfcHdyX3BpbnNf
+YTogYWRjMTItdXNiLXB3ci1waW5zLTAgew0KPiArCQkJYWRjMTJfYWluX3BpbnNfYTogYWRjMTIt
+YWluLTAgew0KPiArCQkJCXBpbnMgew0KPiArCQkJCQlwaW5tdXggPSA8U1RNMzJfUElOTVVYKCdD
+JywgMywgQU5BTE9HKT4sIC8qIEFEQzEgaW4xMyAqLw0KPiArCQkJCQkJIDxTVE0zMl9QSU5NVVgo
+J0YnLCAxMiwgQU5BTE9HKT4sIC8qIEFEQzEgaW42ICovDQo+ICsJCQkJCQkgPFNUTTMyX1BJTk1V
+WCgnRicsIDEzLCBBTkFMT0cpPiwgLyogQURDMiBpbjIgKi8NCj4gKwkJCQkJCSA8U1RNMzJfUElO
+TVVYKCdGJywgMTQsIEFOQUxPRyk+OyAvKiBBREMyIGluNiAqLw0KPiArCQkJCX07DQo+ICsJCQl9
+Ow0KPiArDQo+ICsJCQlhZGMxMl91c2JfY2NfcGluc19hOiBhZGMxMi11c2ItY2MtcGlucy0wIHsN
+Cj4gIAkJCQlwaW5zIHsNCj4gIAkJCQkJcGlubXV4ID0gPFNUTTMyX1BJTk1VWCgnQScsIDQsIEFO
+QUxPRyk+LCAvKiBBREMxMiBpbjE4ICovDQo+ICAJCQkJCQkgPFNUTTMyX1BJTk1VWCgnQScsIDUs
+IEFOQUxPRyk+OyAvKiBBREMxMiBpbjE5ICovDQo+IEBAIC0xNzUsNiArMTg0LDE4IEBADQo+ICAJ
+CQkJfTsNCj4gIAkJCX07DQo+ICANCj4gKwkJCWRhY19jaDFfcGluc19hOiBkYWMtY2gxIHsNCj4g
+KwkJCQlwaW5zIHsNCj4gKwkJCQkJcGlubXV4ID0gPFNUTTMyX1BJTk1VWCgnQScsIDQsIEFOQUxP
+Ryk+Ow0KPiArCQkJCX07DQo+ICsJCQl9Ow0KPiArDQo+ICsJCQlkYWNfY2gyX3BpbnNfYTogZGFj
+LWNoMiB7DQo+ICsJCQkJcGlucyB7DQo+ICsJCQkJCXBpbm11eCA9IDxTVE0zMl9QSU5NVVgoJ0En
+LCA1LCBBTkFMT0cpPjsNCj4gKwkJCQl9Ow0KPiArCQkJfTsNCj4gKw0KPiAgCQkJZGNtaV9waW5z
+X2E6IGRjbWktMCB7DQo+ICAJCQkJcGlucyB7DQo+ICAJCQkJCXBpbm11eCA9IDxTVE0zMl9QSU5N
+VVgoJ0gnLCA4LCAgQUYxMyk+LC8qIERDTUlfSFNZTkMgKi8NCj4gZGlmZiAtLWdpdCBhL2FyY2gv
+YXJtL2R0cy9zdG0zMm1wMTU3YS1hdmVuZ2VyOTYuZHRzIGIvYXJjaC9hcm0vZHRzL3N0bTMybXAx
+NTdhLWF2ZW5nZXI5Ni5kdHMNCj4gaW5kZXggMjMyZmU3MDkwNS4uMzA2NTU5M2JmMiAxMDA2NDQN
+Cj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWF2ZW5nZXI5Ni5kdHMNCj4gKysrIGIv
+YXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWF2ZW5nZXI5Ni5kdHMNCj4gQEAgLTI1MiwxNCArMjUy
+LDEzIEBADQo+ICAJCQkJcmVndWxhdG9yLW5hbWUgPSAidmJ1c19vdGciOw0KPiAgCQkJCWludGVy
+cnVwdHMgPSA8SVRfT0NQX09URyAwPjsNCj4gIAkJCQlpbnRlcnJ1cHQtcGFyZW50ID0gPCZwbWlj
+PjsNCj4gLQkJCQlyZWd1bGF0b3ItYWN0aXZlLWRpc2NoYXJnZTsNCj4gIAkJCX07DQo+ICANCj4g
+IAkJCXZidXNfc3c6IHB3cl9zdzIgew0KPiAgCQkJCXJlZ3VsYXRvci1uYW1lID0gInZidXNfc3ci
+Ow0KPiAgCQkJCWludGVycnVwdHMgPSA8SVRfT0NQX1NXT1VUIDA+Ow0KPiAgCQkJCWludGVycnVw
+dC1wYXJlbnQgPSA8JnBtaWM+Ow0KPiAtCQkJCXJlZ3VsYXRvci1hY3RpdmUtZGlzY2hhcmdlOw0K
+PiArCQkJCXJlZ3VsYXRvci1hY3RpdmUtZGlzY2hhcmdlID0gPDE+Ow0KPiAgCQkJfTsNCj4gIAkJ
+fTsNCj4gIA0KPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWRrMS11LWJv
+b3QuZHRzaSBiL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3YS1kazEtdS1ib290LmR0c2kNCj4gaW5k
+ZXggZGNhYWIzZWVmMi4uNDA0NWE2ZTczMSAxMDA2NDQNCj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0
+bTMybXAxNTdhLWRrMS11LWJvb3QuZHRzaQ0KPiArKysgYi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1
+N2EtZGsxLXUtYm9vdC5kdHNpDQo+IEBAIC0zNSwyNCArMzUsNyBAQA0KPiAgfTsNCj4gIA0KPiAg
+JmFkYyB7DQo+IC0JcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IjsNCj4gLQlwaW5jdHJsLTAgPSA8
+JmFkYzEyX3VzYl9wd3JfcGluc19hPjsNCj4gLQl2ZGQtc3VwcGx5ID0gPCZ2ZGQ+Ow0KPiAtCXZk
+ZGEtc3VwcGx5ID0gPCZ2ZGQ+Ow0KPiAtCXZyZWYtc3VwcGx5ID0gPCZ2cmVmYnVmPjsNCj4gIAlz
+dGF0dXMgPSAib2theSI7DQo+IC0JYWRjMTogYWRjQDAgew0KPiAtCQkvKg0KPiAtCQkgKiBUeXBl
+LUMgVVNCX1BXUl9DQzEgJiBVU0JfUFdSX0NDMiBvbiBpbjE4ICYgaW4xOS4NCj4gLQkJICogVXNl
+IGF0IGxlYXN0IDUgKiBSQyB0aW1lLCBlLmcuIDUgKiAoUnAgKyBSZCkgKiBDOg0KPiAtCQkgKiA1
+ICogKDU2ICsgNDdrT2htcykgKiA1cEYgPT4gMi41dXMuDQo+IC0JCSAqIFVzZSBhcmJpdHJhcnkg
+bWFyZ2luIGhlcmUgKGUuZy4gNcK1cykuDQo+IC0JCSAqLw0KPiAtCQlzdCxtaW4tc2FtcGxlLXRp
+bWUtbnNlY3MgPSA8NTAwMD47DQo+IC0JCS8qIEFOQTAsIEFOQTEsIFVTQiBUeXBlLUMgQ0MxICYg
+Q0MyICovDQo+IC0JCXN0LGFkYy1jaGFubmVscyA9IDwwIDEgMTggMTk+Ow0KPiAtCQlzdGF0dXMg
+PSAib2theSI7DQo+IC0JfTsNCj4gIH07DQo+ICANCj4gICZjbGtfaHNlIHsNCj4gZGlmZiAtLWdp
+dCBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3YS1kazEuZHRzIGIvYXJjaC9hcm0vZHRzL3N0bTMy
+bXAxNTdhLWRrMS5kdHMNCj4gaW5kZXggZGM2MWJmYzNkNS4uNjI0YmY2OTU0YiAxMDA2NDQNCj4g
+LS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdhLWRrMS5kdHMNCj4gKysrIGIvYXJjaC9hcm0v
+ZHRzL3N0bTMybXAxNTdhLWRrMS5kdHMNCj4gQEAgLTI1LDYgKzI1LDcgQEANCj4gIAl9Ow0KPiAg
+DQo+ICAJbWVtb3J5QGMwMDAwMDAwIHsNCj4gKwkJZGV2aWNlX3R5cGUgPSAibWVtb3J5IjsNCj4g
+IAkJcmVnID0gPDB4YzAwMDAwMDAgMHgyMDAwMDAwMD47DQo+ICAJfTsNCj4gIA0KPiBAQCAtOTIs
+NyArOTMsMzQgQEANCj4gIAkJCSJQbGF5YmFjayIgLCAiTUNMSyIsDQo+ICAJCQkiQ2FwdHVyZSIg
+LCAiTUNMSyIsDQo+ICAJCQkiTUlDTCIgLCAiTWljIEJpYXMiOw0KPiAtCQlkYWlzID0gPCZzYWky
+YV9wb3J0ICZzYWkyYl9wb3J0PjsNCj4gKwkJZGFpcyA9IDwmc2FpMmFfcG9ydCAmc2FpMmJfcG9y
+dCAmaTJzMl9wb3J0PjsNCj4gKwkJc3RhdHVzID0gIm9rYXkiOw0KPiArCX07DQo+ICt9Ow0KPiAr
+DQo+ICsmYWRjIHsNCj4gKwlwaW5jdHJsLW5hbWVzID0gImRlZmF1bHQiOw0KPiArCXBpbmN0cmwt
+MCA9IDwmYWRjMTJfYWluX3BpbnNfYT4sIDwmYWRjMTJfdXNiX2NjX3BpbnNfYT47DQo+ICsJdmRk
+LXN1cHBseSA9IDwmdmRkPjsNCj4gKwl2ZGRhLXN1cHBseSA9IDwmdmRkPjsNCj4gKwl2cmVmLXN1
+cHBseSA9IDwmdnJlZmJ1Zj47DQo+ICsJc3RhdHVzID0gImRpc2FibGVkIjsNCj4gKwlhZGMxOiBh
+ZGNAMCB7DQo+ICsJCS8qDQo+ICsJCSAqIFR5cGUtQyBVU0JfUFdSX0NDMSAmIFVTQl9QV1JfQ0My
+IG9uIGluMTggJiBpbjE5Lg0KPiArCQkgKiBVc2UgYXQgbGVhc3QgNSAqIFJDIHRpbWUsIGUuZy4g
+NSAqIChScCArIFJkKSAqIEM6DQo+ICsJCSAqIDUgKiAoNTYgKyA0N2tPaG1zKSAqIDVwRiA9PiAy
+LjV1cy4NCj4gKwkJICogVXNlIGFyYml0cmFyeSBtYXJnaW4gaGVyZSAoZS5nLiA1dXMpLg0KPiAr
+CQkgKi8NCj4gKwkJc3QsbWluLXNhbXBsZS10aW1lLW5zZWNzID0gPDUwMDA+Ow0KPiArCQkvKiBB
+SU4gY29ubmVjdG9yLCBVU0IgVHlwZS1DIENDMSAmIENDMiAqLw0KPiArCQlzdCxhZGMtY2hhbm5l
+bHMgPSA8MCAxIDYgMTMgMTggMTk+Ow0KPiArCQlzdGF0dXMgPSAib2theSI7DQo+ICsJfTsNCj4g
+KwlhZGMyOiBhZGNAMTAwIHsNCj4gKwkJLyogQUlOIGNvbm5lY3RvciwgVVNCIFR5cGUtQyBDQzEg
+JiBDQzIgKi8NCj4gKwkJc3QsYWRjLWNoYW5uZWxzID0gPDAgMSAyIDYgMTggMTk+Ow0KPiArCQlz
+dCxtaW4tc2FtcGxlLXRpbWUtbnNlY3MgPSA8NTAwMD47DQo+ICAJCXN0YXR1cyA9ICJva2F5IjsN
+Cj4gIAl9Ow0KPiAgfTsNCj4gQEAgLTE0Niw5ICsxNzQsNyBAQA0KPiAgCQlyZXNldC1ncGlvcyA9
+IDwmZ3Bpb2EgMTAgR1BJT19BQ1RJVkVfTE9XPjsNCj4gIAkJaW50ZXJydXB0cyA9IDwxIElSUV9U
+WVBFX0VER0VfRkFMTElORz47DQo+ICAJCWludGVycnVwdC1wYXJlbnQgPSA8JmdwaW9nPjsNCj4g
+LQkJcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IiwgInNsZWVwIjsNCj4gLQkJcGluY3RybC0wID0g
+PCZsdGRjX3BpbnNfYT47DQo+IC0JCXBpbmN0cmwtMSA9IDwmbHRkY19waW5zX3NsZWVwX2E+Ow0K
+PiArCQkjc291bmQtZGFpLWNlbGxzID0gPDA+Ow0KPiAgCQlzdGF0dXMgPSAib2theSI7DQo+ICAN
+Cj4gIAkJcG9ydHMgew0KPiBAQCAtMTYxLDYgKzE4NywxMyBAQA0KPiAgCQkJCQlyZW1vdGUtZW5k
+cG9pbnQgPSA8Jmx0ZGNfZXAwX291dD47DQo+ICAJCQkJfTsNCj4gIAkJCX07DQo+ICsNCj4gKwkJ
+CXBvcnRAMyB7DQo+ICsJCQkJcmVnID0gPDM+Ow0KPiArCQkJCXNpaTkwMjJfdHhfZW5kcG9pbnQ6
+IGVuZHBvaW50IHsNCj4gKwkJCQkJcmVtb3RlLWVuZHBvaW50ID0gPCZpMnMyX2VuZHBvaW50PjsN
+Cj4gKwkJCQl9Ow0KPiArCQkJfTsNCj4gIAkJfTsNCj4gIAl9Ow0KPiAgDQo+IEBAIC0yNDQsNyAr
+Mjc3LDcgQEANCj4gIA0KPiAgCQkJdmRkY29yZTogYnVjazEgew0KPiAgCQkJCXJlZ3VsYXRvci1u
+YW1lID0gInZkZGNvcmUiOw0KPiAtCQkJCXJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDgwMDAw
+MD47DQo+ICsJCQkJcmVndWxhdG9yLW1pbi1taWNyb3ZvbHQgPSA8MTIwMDAwMD47DQo+ICAJCQkJ
+cmVndWxhdG9yLW1heC1taWNyb3ZvbHQgPSA8MTM1MDAwMD47DQo+ICAJCQkJcmVndWxhdG9yLWFs
+d2F5cy1vbjsNCj4gIAkJCQlyZWd1bGF0b3ItaW5pdGlhbC1tb2RlID0gPDA+Ow0KPiBAQCAtMzQ1
+LDcgKzM3OCw3IEBADQo+ICAJCQkgdmJ1c19zdzogcHdyX3N3MiB7DQo+ICAJCQkJcmVndWxhdG9y
+LW5hbWUgPSAidmJ1c19zdyI7DQo+ICAJCQkJaW50ZXJydXB0cyA9IDxJVF9PQ1BfU1dPVVQgMD47
+DQo+IC0JCQkJcmVndWxhdG9yLWFjdGl2ZS1kaXNjaGFyZ2U7DQo+ICsJCQkJcmVndWxhdG9yLWFj
+dGl2ZS1kaXNjaGFyZ2UgPSA8MT47DQo+ICAJCQkgfTsNCj4gIAkJfTsNCj4gIA0KPiBAQCAtMzY0
+LDYgKzM5NywyMyBAQA0KPiAgCX07DQo+ICB9Ow0KPiAgDQo+ICsmaTJzMiB7DQo+ICsJY2xvY2tz
+ID0gPCZyY2MgU1BJMj4sIDwmcmNjIFNQSTJfSz4sIDwmcmNjIFBMTDNfUT4sIDwmcmNjIFBMTDNf
+Uj47DQo+ICsJY2xvY2stbmFtZXMgPSAicGNsayIsICJpMnNjbGsiLCAieDhrIiwgIngxMWsiOw0K
+PiArCXBpbmN0cmwtbmFtZXMgPSAiZGVmYXVsdCIsICJzbGVlcCI7DQo+ICsJcGluY3RybC0wID0g
+PCZpMnMyX3BpbnNfYT47DQo+ICsJcGluY3RybC0xID0gPCZpMnMyX3BpbnNfc2xlZXBfYT47DQo+
+ICsJc3RhdHVzID0gIm9rYXkiOw0KPiArDQo+ICsJaTJzMl9wb3J0OiBwb3J0IHsNCj4gKwkJaTJz
+Ml9lbmRwb2ludDogZW5kcG9pbnQgew0KPiArCQkJcmVtb3RlLWVuZHBvaW50ID0gPCZzaWk5MDIy
+X3R4X2VuZHBvaW50PjsNCj4gKwkJCWZvcm1hdCA9ICJpMnMiOw0KPiArCQkJbWNsay1mcyA9IDwy
+NTY+Ow0KPiArCQl9Ow0KPiArCX07DQo+ICt9Ow0KPiArDQo+ICAmaXBjYyB7DQo+ICAJc3RhdHVz
+ID0gIm9rYXkiOw0KPiAgfTsNCj4gQEAgLTM3NCw2ICs0MjQsOSBAQA0KPiAgfTsNCj4gIA0KPiAg
+Jmx0ZGMgew0KPiArCXBpbmN0cmwtbmFtZXMgPSAiZGVmYXVsdCIsICJzbGVlcCI7DQo+ICsJcGlu
+Y3RybC0wID0gPCZsdGRjX3BpbnNfYT47DQo+ICsJcGluY3RybC0xID0gPCZsdGRjX3BpbnNfc2xl
+ZXBfYT47DQo+ICAJc3RhdHVzID0gIm9rYXkiOw0KPiAgDQo+ICAJcG9ydCB7DQo+IGRpZmYgLS1n
+aXQgYS9hcmNoL2FybS9kdHMvc3RtMzJtcDE1N2MtZGsyLmR0cyBiL2FyY2gvYXJtL2R0cy9zdG0z
+Mm1wMTU3Yy1kazIuZHRzDQo+IGluZGV4IDAyMGVhMGYwZTIuLmQyNmFkY2JlYmEgMTAwNjQ0DQo+
+IC0tLSBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1kazIuZHRzDQo+ICsrKyBiL2FyY2gvYXJt
+L2R0cy9zdG0zMm1wMTU3Yy1kazIuZHRzDQo+IEBAIC01Myw2ICs1MywxOSBAQA0KPiAgCX07DQo+
+ICB9Ow0KPiAgDQo+ICsmaTJjMSB7DQo+ICsJdG91Y2hzY3JlZW5AMzggew0KPiArCQljb21wYXRp
+YmxlID0gImZvY2FsdGVjaCxmdDYyMzYiOw0KPiArCQlyZWcgPSA8MHgzOD47DQo+ICsJCWludGVy
+cnVwdHMgPSA8MiAyPjsNCj4gKwkJaW50ZXJydXB0LXBhcmVudCA9IDwmZ3Bpb2Y+Ow0KPiArCQlp
+bnRlcnJ1cHQtY29udHJvbGxlcjsNCj4gKwkJdG91Y2hzY3JlZW4tc2l6ZS14ID0gPDQ4MD47DQo+
+ICsJCXRvdWNoc2NyZWVuLXNpemUteSA9IDw4MDA+Ow0KPiArCQlzdGF0dXMgPSAib2theSI7DQo+
+ICsJfTsNCj4gK307DQo+ICsNCj4gICZsdGRjIHsNCj4gIAlzdGF0dXMgPSAib2theSI7DQo+ICAN
+Cj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1lZDEuZHRzIGIvYXJjaC9h
+cm0vZHRzL3N0bTMybXAxNTdjLWVkMS5kdHMNCj4gaW5kZXggYWNiNTlmMjRjYy4uYWU0ZGEzOWNl
+OCAxMDA2NDQNCj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWVkMS5kdHMNCj4gKysr
+IGIvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWVkMS5kdHMNCj4gQEAgLTg0LDcgKzg0LDIxIEBA
+DQo+ICANCj4gIAkJZ3Bpb3MgPSA8JmdwaW9mIDE0IEdQSU9fQUNUSVZFX0hJR0g+Ow0KPiAgCQln
+cGlvcy1zdGF0ZXMgPSA8MD47DQo+IC0JCXN0YXRlcyA9IDwxODAwMDAwIDB4MSAyOTAwMDAwIDB4
+MD47DQo+ICsJCXN0YXRlcyA9IDwxODAwMDAwIDB4MT4sDQo+ICsJCQkgPDI5MDAwMDAgMHgwPjsN
+Cj4gKwl9Ow0KPiArfTsNCj4gKw0KPiArJmRhYyB7DQo+ICsJcGluY3RybC1uYW1lcyA9ICJkZWZh
+dWx0IjsNCj4gKwlwaW5jdHJsLTAgPSA8JmRhY19jaDFfcGluc19hICZkYWNfY2gyX3BpbnNfYT47
+DQo+ICsJdnJlZi1zdXBwbHkgPSA8JnZkZGE+Ow0KPiArCXN0YXR1cyA9ICJkaXNhYmxlZCI7DQo+
+ICsJZGFjMTogZGFjQDEgew0KPiArCQlzdGF0dXMgPSAib2theSI7DQo+ICsJfTsNCj4gKwlkYWMy
+OiBkYWNAMiB7DQo+ICsJCXN0YXR1cyA9ICJva2F5IjsNCj4gIAl9Ow0KPiAgfTsNCj4gIA0KPiBA
+QCAtMTI3LDcgKzE0MSw3IEBADQo+ICANCj4gIAkJCXZkZGNvcmU6IGJ1Y2sxIHsNCj4gIAkJCQly
+ZWd1bGF0b3ItbmFtZSA9ICJ2ZGRjb3JlIjsNCj4gLQkJCQlyZWd1bGF0b3ItbWluLW1pY3Jvdm9s
+dCA9IDw4MDAwMDA+Ow0KPiArCQkJCXJlZ3VsYXRvci1taW4tbWljcm92b2x0ID0gPDEyMDAwMDA+
+Ow0KPiAgCQkJCXJlZ3VsYXRvci1tYXgtbWljcm92b2x0ID0gPDEzNTAwMDA+Ow0KPiAgCQkJCXJl
+Z3VsYXRvci1hbHdheXMtb247DQo+ICAJCQkJcmVndWxhdG9yLWluaXRpYWwtbW9kZSA9IDwwPjsN
+Cj4gQEAgLTIyNSw3ICsyMzksNyBAQA0KPiAgCQkJIHZidXNfc3c6IHB3cl9zdzIgew0KPiAgCQkJ
+CXJlZ3VsYXRvci1uYW1lID0gInZidXNfc3ciOw0KPiAgCQkJCWludGVycnVwdHMgPSA8SVRfT0NQ
+X1NXT1VUIDA+Ow0KPiAtCQkJCXJlZ3VsYXRvci1hY3RpdmUtZGlzY2hhcmdlOw0KPiArCQkJCXJl
+Z3VsYXRvci1hY3RpdmUtZGlzY2hhcmdlID0gPDE+Ow0KPiAgCQkJIH07DQo+ICAJCX07DQo+ICAN
+Cj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1ldjEuZHRzIGIvYXJjaC9h
+cm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMNCj4gaW5kZXggYWE1ODkyYjE1Ni4uYmQ4ZmZjMTg1
+ZiAxMDA2NDQNCj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMNCj4gKysr
+IGIvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMNCj4gQEAgLTMyLDcgKzMyLDYgQEAN
+Cj4gIA0KPiAgCWpveXN0aWNrIHsNCj4gIAkJY29tcGF0aWJsZSA9ICJncGlvLWtleXMiOw0KPiAt
+CQkjc2l6ZS1jZWxscyA9IDwwPjsNCj4gIAkJcGluY3RybC0wID0gPCZqb3lzdGlja19waW5zPjsN
+Cj4gIAkJcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IjsNCj4gIAkJYnV0dG9uLTAgew0KPiBAQCAt
+MzQzLDE0ICszNDIsMTIgQEANCj4gIA0KPiAgJnVzYmhfZWhjaSB7DQo+ICAJcGh5cyA9IDwmdXNi
+cGh5Y19wb3J0MD47DQo+IC0JcGh5LW5hbWVzID0gInVzYiI7DQo+ICAJc3RhdHVzID0gIm9rYXki
+Ow0KPiAgfTsNCj4gIA0KPiAgJnVzYm90Z19ocyB7DQo+ICAJZHJfbW9kZSA9ICJwZXJpcGhlcmFs
+IjsNCj4gIAlwaHlzID0gPCZ1c2JwaHljX3BvcnQxIDA+Ow0KPiAtCXBoeS1uYW1lcyA9ICJ1c2Iy
+LXBoeSI7DQo+ICAJc3RhdHVzID0gIm9rYXkiOw0KPiAgfTsNCj4gIA0KPg0KDQpSZXZpZXdlZC1i
+eTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAc3QuY29tPg0KDQpUaGFua3MNCg0K
+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBVYm9v
+dC1zdG0zMiBtYWlsaW5nIGxpc3QNCj4gVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJl
+cGx5LmNvbQ0KPiBodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9s
+aXN0aW5mby91Ym9vdC1zdG0zMgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFp
+bG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20v
+bWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

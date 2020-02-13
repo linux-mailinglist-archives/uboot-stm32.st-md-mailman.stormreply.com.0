@@ -2,74 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C93F15BE7C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 13:34:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE6F115C863
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 17:38:19 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1F2A5C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 12:34:26 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 64D62C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 16:38:19 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 53296C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B2BBEC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Feb 2020 12:34:23 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Thu, 13 Feb 2020 16:38:16 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01DCT8Nu001014; Thu, 13 Feb 2020 13:34:18 +0100
+ 01DGIrBf032167; Thu, 13 Feb 2020 17:38:14 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=okImDRzDR+3DcL+5wJIQePFoL5mk4PMz6VDbKjHb14w=;
- b=LGVdyWuvubYMndZs4GOcWGKzZVR6MDbo0lVI4x7O4NVMlvNOZbjB2KHB/u4wTqpCxUuL
- zj8+l+02NbDjXixiUI5WYzIOw4gqTa8qM/1YTdARwKyY9RDM9+/QC9PvZu0mTORye+36
- zi4dnD8/FzXpqmHpsInhNfQy6OJ7vRzOLJiOPkglTUqQIS7d2naIGlTpK58IbMegm3zo
- VlFUSo3vStutG2LQNcu1eSWP3iEymJ7I4BFeBIxXx4r/EMEghrghwbJUNWl6HpGZOZLA
- 0Kc5SiCIyBy+KBK+j5kbZvItfuyZ7ClSoUg0Uoi5adv/PCWah+rTswLSxUbU/peTW4Zr 4w== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=qLnXqZhtRbpB2wsS7x9OVAtYkKp8ABBjgYxxqc4A8RE=;
+ b=yaeENalW8TYnGMz6Eumpr12O1ZssmJJhgHEvPaubp7G9uRD4o/1RXBEvgO3DnF23ucj1
+ uTF54/kTDoVkthRcXNOzzaB2aemI5T6kgSiK2e2c5CIU0gXZIy11UBXLcYYHeq1WIgWu
+ AfPj9QeSSg+VHCqaZksS2rVlCNai2a+5Tx3DOlIFwvFI9T/OYphsvzsDrJYPimHTVeGY
+ vvQ2TaIBIL6dh18G23prK/r3i+i5wO5LzzRfQ8KMUi6fVZy+ZNJvFqOXJyLBf8t8ULHC
+ iKhHrtAOwuRrsfUhBUQLCqNH1LYvterFVsPJQC89QFNg3zDafig061EhumwNceoQP14q 2w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1urhn0st-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1uda695n-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Feb 2020 13:34:17 +0100
+ Thu, 13 Feb 2020 17:38:14 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7782E100039;
- Thu, 13 Feb 2020 13:34:13 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 65C382B468E;
- Thu, 13 Feb 2020 13:34:13 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Feb
- 2020 13:34:12 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E29CE100046;
+ Thu, 13 Feb 2020 17:38:13 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BFFFC2C38BB;
+ Thu, 13 Feb 2020 17:38:13 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Feb
+ 2020 17:38:13 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 13 Feb 2020 13:34:12 +0100
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ 15.00.1473.003; Thu, 13 Feb 2020 17:38:13 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 9/9] stm32mp1: support of STM32MP15x Rev.Z
-Thread-Index: AQHV1brvtE6ofEclqEi8GJ2mD+YcCqgZF5AA
-Date: Thu, 13 Feb 2020 12:34:12 +0000
-Message-ID: <cf9e7852-b300-f103-f383-9a29f4b06c23@st.com>
-References: <20200128091106.28552-1-patrick.delaunay@st.com>
- <20200128091106.28552-6-patrick.delaunay@st.com>
-In-Reply-To: <20200128091106.28552-6-patrick.delaunay@st.com>
+Thread-Topic: [PATCH v1 1/2] board: stm32: fix extra env setings addresses
+Thread-Index: AQHV2pu6k0E2gB6vGEWVTju08ECWsKgZYmdw
+Date: Thu, 13 Feb 2020 16:38:13 +0000
+Message-ID: <23a8f8905e2248c39c8358f720fc9e8e@SFHDAG6NODE3.st.com>
+References: <20200203141040.3236-1-patrice.chotard@st.com>
+ <20200203141040.3236-2-patrice.chotard@st.com>
+In-Reply-To: <20200203141040.3236-2-patrice.chotard@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
-Content-ID: <AF2D46D9A8B94E44BC3F2673AA65B31E@st.com>
+x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-13_04:2020-02-12,
+ definitions=2020-02-13_05:2020-02-12,
  2020-02-13 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 9/9] stm32mp1: support of STM32MP15x Rev.Z
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Vikas MANOCHA <vikas.manocha@st.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 1/2] board: stm32: fix extra env
+	setings addresses
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,52 +78,31 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrice,
 
-On 1/28/20 10:11 AM, Patrick Delaunay wrote:
-> Add support for Rev.Z of STM32MP15x cpu.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> From: Patrice CHOTARD <patrice.chotard@st.com>
+> Sent: lundi 3 f=E9vrier 2020 15:11
+> =
+
+> For stm32f4, f7 and h7 boards, reserve:
+>  - 4MB for kernel
+>  - 64KB for fdt, boot script, pxefile
+>  - the remaining memory for ramdisk
+> =
+
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 > ---
->
->  arch/arm/mach-stm32mp/cpu.c                    | 3 +++
->  arch/arm/mach-stm32mp/include/mach/sys_proto.h | 1 +
->  2 files changed, 4 insertions(+)
->
-> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-> index de7891b5c4..ea0bd94605 100644
-> --- a/arch/arm/mach-stm32mp/cpu.c
-> +++ b/arch/arm/mach-stm32mp/cpu.c
-> @@ -342,6 +342,9 @@ int print_cpuinfo(void)
->  	case CPU_REVB:
->  		cpu_r = "B";
->  		break;
-> +	case CPU_REVZ:
-> +		cpu_r = "Z";
-> +		break;
->  	default:
->  		cpu_r = "?";
->  		break;
-> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> index 47e57922d1..da46c11573 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> @@ -16,6 +16,7 @@ u32 get_cpu_type(void);
->  
->  #define CPU_REVA	0x1000
->  #define CPU_REVB	0x2000
-> +#define CPU_REVZ	0x2001
->  
->  /* return CPU_REV constants */
->  u32 get_cpu_rev(void);
 
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
 
-Thanks
+Thanks,
+
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

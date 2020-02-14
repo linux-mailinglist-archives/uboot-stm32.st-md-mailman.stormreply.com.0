@@ -2,60 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C70F415CAB0
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 19:48:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 67C5515D336
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Feb 2020 08:53:35 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74380C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Feb 2020 18:48:20 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1685DC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Feb 2020 07:53:35 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 14EBCC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E045CC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Feb 2020 18:48:19 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri, 14 Feb 2020 07:53:31 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01DIgnUD003041; Thu, 13 Feb 2020 19:48:10 +0100
+ 01E7gRLG011072; Fri, 14 Feb 2020 08:53:29 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=Yov5GduKefnyz9maCo3Dgb8NUhAgAn28UhWDxNBScJc=;
- b=hB7a1yIe9pU4eJGpTxL/U9d6HONFX/O1dJJt1+KhSkptNkUlUT+E1UY2vFFqm0ILNTC8
- jQ+mcpLYFgVC5nxhWeYhW5MUyUJTjLJDFe9AFbFG4xRTINcnSTmDBWeVWS4PiUAP97D6
- hYjDHq/BC16BvRyh0su5zMmxHMnxaiVz1vWAN02es+7J5vaXnJlSGw1iLiIdDxtNkBKs
- +4LL0W0Itw+dRBHsmzP6s7oCzW7by5tPuAs/Pz9bpFpjFlsjGGY+sILflvs4+lIM/RYd
- l2GE8+sVoG1OgkjeYLiaZZ4wma6PMPPYNYJNGseDQqPXjz3MoEO20aZ7j6JLVJtl7w4b tQ== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=z/5/WgNM24Jpo3AGTAOOoOWtS/WiBPQwygovIwe3704=;
+ b=Eejy/2FucyijaCAqevvOixyOMOpgsZpt/vaqO2MNTZRASYfDLiRZVPHLI0yJqIemVdXA
+ NJTmJ7/5qh6rE0+it2n0m/Wv9eE6lbTVv/fsMl3rztrhWurOsVAR6nU+mCPy4T664fFW
+ Lsw0ah/d3aXhuVu+ZDvT2XN5zL/TDRJXA4g7azG58MnaCwNsjMZLzUvqHEjRl29RgVNH
+ VI7Yh6XP3ELIP7DQ61bkFAzM0EfcFhZg6JHWoAAd9BeLtQt9g9YGJzfgnCNGfF5eZzPu
+ ZV0pS6ExGvTI4yMmT+v6gOedlW8y6IrkAOCASSEbSKOrD/1ESodn15la24FTx4bhIHd4 2A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2y1uda6ukd-1
+ by mx07-00178001.pphosted.com with ESMTP id 2y1uve1wc6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Feb 2020 19:48:10 +0100
+ Fri, 14 Feb 2020 08:53:29 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0D8C110002A;
- Thu, 13 Feb 2020 19:48:05 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 00F362109E5;
- Thu, 13 Feb 2020 19:48:05 +0100 (CET)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 13 Feb 2020 19:48:04 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 13 Feb 2020 19:48:00 +0100
-Message-ID: <20200213184800.13968-1-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8B45D10002A;
+ Fri, 14 Feb 2020 08:53:28 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7133E21FE8B;
+ Fri, 14 Feb 2020 08:53:28 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 14 Feb
+ 2020 08:53:27 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Fri, 14 Feb 2020 08:53:28 +0100
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [Uboot-stm32] [PATCH 1/4] board: stm32mp1: board: add include
+ for dfu
+Thread-Index: AQHV4wvXips4swy1IEKRdZNWv0iJTg==
+Date: Fri, 14 Feb 2020 07:53:27 +0000
+Message-ID: <4ee9ede4-4df7-ca37-3c40-13f7aa45ef52@st.com>
+References: <20200128094415.5768-1-patrick.delaunay@st.com>
+ <20200128094415.5768-2-patrick.delaunay@st.com>
+In-Reply-To: <20200128094415.5768-2-patrick.delaunay@st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
+Content-ID: <57D1A81B559C5048A4CDB09A5E3E30CF@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
- (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-13_07:2020-02-12,
- 2020-02-13 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Jens Wiklander <jens.wiklander@linaro.org>, Rajan Vaja <rajan.vaja@xilinx.com>
-Subject: [Uboot-stm32] [PATCH v2] dm: core: Move "/chosen" and "/firmware"
-	node scan
+ definitions=2020-02-14_01:2020-02-12,
+ 2020-02-14 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/4] board: stm32mp1: board: add include
+ for dfu
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,143 +87,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use the new function dm_scan_fdt_ofnode_path() to scan all the nodes
-which aren't devices themselves but may contain some:
-- "/chosen"
-- "/clocks"
-- "/firmware"
 
-The patch removes the strcmp call in recursive function dm_scan_fdt_live()
-and also corrects a conflict with the 2 applied patches in
-the commit 1712ca21924b ("dm: core: Scan /firmware node by default")
-and in the commit 747558d01457 ("dm: fdt: scan for devices under
-/firmware too"): the subnodes of "/firmware" (optee for example)
-are bound 2 times.
+On 1/28/20 10:44 AM, Patrick Delaunay wrote:
+> Add include for dfu, add prototype for set_dfu_alt_info
+> and avoid warning when compiling with W=1.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+>  board/st/stm32mp1/stm32mp1.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+> index e82a43074f..2fecfc1b16 100644
+> --- a/board/st/stm32mp1/stm32mp1.c
+> +++ b/board/st/stm32mp1/stm32mp1.c
+> @@ -7,6 +7,7 @@
+>  #include <bootm.h>
+>  #include <clk.h>
+>  #include <config.h>
+> +#include <dfu.h>
+>  #include <dm.h>
+>  #include <env.h>
+>  #include <env_internal.h>
 
-For example the dm tree command result on STM32MP1 is:
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
-STM32MP> dm tree
- Class     Index  Probed  Driver                Name
- -----------------------------------------------------------
- root          0  [ + ]   root_driver           root_driver
- firmware      0  [   ]   psci                  |-- psci
- sysreset      0  [   ]   psci-sysreset         |   `-- psci-sysreset
- simple_bus    0  [ + ]   generic_simple_bus    |-- soc
-...
- tee           0  [ + ]   optee                 |-- optee
-...
- tee           1  [   ]   optee                 `-- optee
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
-
-Changes in v2:
-- update commit message (Serie-cc => Series-cc)
-
- drivers/core/root.c | 52 +++++++++++++++------------------------------
- 1 file changed, 17 insertions(+), 35 deletions(-)
-
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index e85643819e..14df16c280 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -203,15 +203,6 @@ static int dm_scan_fdt_live(struct udevice *parent,
- 	int ret = 0, err;
- 
- 	for (np = node_parent->child; np; np = np->sibling) {
--		/* "chosen" node isn't a device itself but may contain some: */
--		if (!strcmp(np->name, "chosen")) {
--			pr_debug("parsing subnodes of \"chosen\"\n");
--
--			err = dm_scan_fdt_live(parent, np, pre_reloc_only);
--			if (err && !ret)
--				ret = err;
--			continue;
--		}
- 
- 		if (!of_device_is_available(np)) {
- 			pr_debug("   - ignoring disabled device\n");
-@@ -256,21 +247,6 @@ static int dm_scan_fdt_node(struct udevice *parent, const void *blob,
- 	     offset = fdt_next_subnode(blob, offset)) {
- 		const char *node_name = fdt_get_name(blob, offset, NULL);
- 
--		/*
--		 * The "chosen" and "firmware" nodes aren't devices
--		 * themselves but may contain some:
--		 */
--		if (!strcmp(node_name, "chosen") ||
--		    !strcmp(node_name, "firmware")) {
--			pr_debug("parsing subnodes of \"%s\"\n", node_name);
--
--			err = dm_scan_fdt_node(parent, blob, offset,
--					       pre_reloc_only);
--			if (err && !ret)
--				ret = err;
--			continue;
--		}
--
- 		if (!fdtdec_get_is_enabled(blob, offset)) {
- 			pr_debug("   - ignoring disabled device\n");
- 			continue;
-@@ -315,7 +291,8 @@ int dm_scan_fdt(const void *blob, bool pre_reloc_only)
- 	return dm_scan_fdt_node(gd->dm_root, blob, 0, pre_reloc_only);
- }
- 
--static int dm_scan_fdt_ofnode_path(const char *path, bool pre_reloc_only)
-+static int dm_scan_fdt_ofnode_path(const void *blob, const char *path,
-+				   bool pre_reloc_only)
- {
- 	ofnode node;
- 
-@@ -327,13 +304,18 @@ static int dm_scan_fdt_ofnode_path(const char *path, bool pre_reloc_only)
- 	if (of_live_active())
- 		return dm_scan_fdt_live(gd->dm_root, node.np, pre_reloc_only);
- #endif
--	return dm_scan_fdt_node(gd->dm_root, gd->fdt_blob, node.of_offset,
-+	return dm_scan_fdt_node(gd->dm_root, blob, node.of_offset,
- 				pre_reloc_only);
- }
- 
- int dm_extended_scan_fdt(const void *blob, bool pre_reloc_only)
- {
--	int ret;
-+	int ret, i;
-+	const char * const nodes[] = {
-+		"/chosen",
-+		"/clocks",
-+		"/firmware"
-+	};
- 
- 	ret = dm_scan_fdt(blob, pre_reloc_only);
- 	if (ret) {
-@@ -341,16 +323,16 @@ int dm_extended_scan_fdt(const void *blob, bool pre_reloc_only)
- 		return ret;
- 	}
- 
--	ret = dm_scan_fdt_ofnode_path("/clocks", pre_reloc_only);
--	if (ret) {
--		debug("scan for /clocks failed: %d\n", ret);
--		return ret;
-+	/* Some nodes aren't devices themselves but may contain some */
-+	for (i = 0; i < ARRAY_SIZE(nodes); i++) {
-+		ret = dm_scan_fdt_ofnode_path(blob, nodes[i], pre_reloc_only);
-+		if (ret) {
-+			debug("dm_scan_fdt() scan for %s failed: %d\n",
-+			      nodes[i], ret);
-+			return ret;
-+		}
- 	}
- 
--	ret = dm_scan_fdt_ofnode_path("/firmware", pre_reloc_only);
--	if (ret)
--		debug("scan for /firmware failed: %d\n", ret);
--
- 	return ret;
- }
- #endif
--- 
-2.17.1
-
+Thanks
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

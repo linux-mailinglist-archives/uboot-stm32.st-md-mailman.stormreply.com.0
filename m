@@ -2,56 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1FF41605AB
-	for <lists+uboot-stm32@lfdr.de>; Sun, 16 Feb 2020 20:03:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1C9F160954
+	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Feb 2020 04:55:59 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8659BC36B0C
-	for <lists+uboot-stm32@lfdr.de>; Sun, 16 Feb 2020 19:03:10 +0000 (UTC)
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
- [209.85.210.65])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 69AD1C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Feb 2020 03:55:59 +0000 (UTC)
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ABD64C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 140B4C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 16 Feb 2020 19:03:05 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id 59so13995966otp.12
+ Mon, 17 Feb 2020 03:55:57 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id l136so15454451oig.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 16 Feb 2020 11:03:05 -0800 (PST)
+ Sun, 16 Feb 2020 19:55:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=iSI3v0hWpaWuBlgmWScE3UP2FbdDo8XtFLQe6JATbxw=;
- b=ghOqmCXJ7Ni/mykrgd3RHB0ZdqIe8Gk72V83iQhaUtJnwowbdxQJ7mzMSmESdP2UiV
- 6UMRLhHtBS4bJspvYycYlShwqf0cJlqb3aPbvJ3r9iwTdyd8J7n5jCAHmYmFT3C7mPUZ
- UDhZiiL8rT3yq/CEHnyzLciP+Hzvyongs3BRs=
+ :cc; bh=fY38joiEp8m93gDe0c419pvQAxjpF6CTdKPEC9mImSU=;
+ b=B3Gmutr+Qg3YRETKtNJ58BSujInYl2eTic6RnR3+vaCslEqEBq1rOlKcY5WzpBHNcd
+ DOK8k4mR8RIpEYhtW9mnnyR62vJXhA+FDZgsHYHfyphrgzZrUF0zuCwhch8wQ1MHKLfy
+ BRZVV8G04qqLkMu9lv3W9xZybZdMVEynZRdcI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=iSI3v0hWpaWuBlgmWScE3UP2FbdDo8XtFLQe6JATbxw=;
- b=ehlcKx60lX2KuoKouLtqjVvJZ8TFwZWFiahVSjVlBKt3kchB+P1wyhEzq72cvdKn1k
- JldQcGSLkWi2yYk4ossxxOvRmN5gplcvhYvGNQ21c59sEaBtSEbL7QnLR1tiFgydSbQX
- 5JdF0LwdETWnLXS6tIFOnZSvDIXm4pfQv+oj5MI158jfTXFrW6DKxdsgSZAwrpOm8qpm
- kmlQHk9M2JLihSbtLgefsPLHI+/VbWHWymVJls61qQCkFNwTS8UbybUwAfH2fqit9hFg
- MBSX92KqJw/Ltr5gcirPtAXqTWR3XOcWrMr/GpxnIMloQI8c8iPdUd6bHkvwVgQoLp9Q
- jzxQ==
-X-Gm-Message-State: APjAAAU2pPJCh7UWbDE2smPMGlCknSf2+1LIRXLs+lDalCS1jhaLr9eM
- CZrjhZvJCwBK9++UaXlnMhxJk4O2sSKayIKcVMw7Xg==
-X-Google-Smtp-Source: APXvYqzsstt4vhspxb1TQg9VwARP9bs4IM2/m+ohktdMHeJea+ejzApXF8K9Lu7J4M5LXMT/zhi3q1DXm721H8aV4+M=
-X-Received: by 2002:a9d:2dea:: with SMTP id g97mr9743812otb.33.1581879784081; 
- Sun, 16 Feb 2020 11:03:04 -0800 (PST)
+ bh=fY38joiEp8m93gDe0c419pvQAxjpF6CTdKPEC9mImSU=;
+ b=V1E3okqfafwsgL9G7LTwCtNg6Glhvclx4I3PKRrNJ1zDO5a1l0rXB+dZ9FOb6n7L5b
+ oVu/wjtoo5IuaPJKXQ6wPIzxGTScolt6N6Yaq7bGQp6AlEVYKg+8mO0DvRXIfZv5FquM
+ j1Q7Qsd6J62WaP63uW23syJZLT3uWhN0H+oMQF1F1foXvcz3qD/KYeQ6qGX9nLvHWch+
+ eDwejCebhTBXsHnFIMXUro80AYHGQYl9Gx1Ry2/ICTh83xN+Z4vf2phK6/5NGx0b87Kw
+ qCaKOZ9v7su8OcjtW5bEb84K5wQL3CRmpwBYFgLRWbIxckW4ep1Tv3+d83WnxlX6EQ0R
+ LfZw==
+X-Gm-Message-State: APjAAAVpgluPsR0+FdyRFzPZgDXN54gKXnEnFGO7Ky1LhI40/l3IpYGL
+ 5ghInYEJMzRWgI166EraDbUeecq6N7NtpBCpH0P+Ew==
+X-Google-Smtp-Source: APXvYqwmqjANNCY2rWVczUuj4GFneOjYNekfJQ+0VDR2ebBZvzgWR5k3oVxi7bLoRa6Rl8lzUk5z+CC6k11wytAXEkA=
+X-Received: by 2002:a54:4f16:: with SMTP id e22mr9077608oiy.170.1581911755344; 
+ Sun, 16 Feb 2020 19:55:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20200212184501.5911-1-patrick.delaunay@st.com>
- <20200212184501.5911-11-patrick.delaunay@st.com>
-In-Reply-To: <20200212184501.5911-11-patrick.delaunay@st.com>
+References: <20200213184800.13968-1-patrick.delaunay@st.com>
+In-Reply-To: <20200213184800.13968-1-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Feb 2020 12:02:48 -0700
-Message-ID: <CAPnjgZ3-qu72tnfEbYBn8rcPPTKfHbjB11gqC6HpqT9v5TQsyA@mail.gmail.com>
+Date: Sun, 16 Feb 2020 20:55:44 -0700
+Message-ID: <CAPnjgZ0oAPNwJFbEwQyE8CnxjGF3G96APJF249gTtXUt1QLMUg@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Mario Six <mario.six@gdsys.cc>,
- Stephen Warren <swarren@nvidia.com>
-Subject: Re: [Uboot-stm32] [RESEND PATCH 10/10] test: sandbox: add test for
-	erase command
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Rajan Vaja <rajan.vaja@xilinx.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] dm: core: Move "/chosen" and
+	"/firmware" node scan
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,24 +69,47 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick,
 
-On Wed, 12 Feb 2020 at 11:45, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Thu, 13 Feb 2020 at 11:48, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Add test for the erase command tested on ENV in EXT4.
+> Use the new function dm_scan_fdt_ofnode_path() to scan all the nodes
+> which aren't devices themselves but may contain some:
+> - "/chosen"
+> - "/clocks"
+> - "/firmware"
+>
+> The patch removes the strcmp call in recursive function dm_scan_fdt_live()
+> and also corrects a conflict with the 2 applied patches in
+> the commit 1712ca21924b ("dm: core: Scan /firmware node by default")
+> and in the commit 747558d01457 ("dm: fdt: scan for devices under
+> /firmware too"): the subnodes of "/firmware" (optee for example)
+> are bound 2 times.
+>
+> For example the dm tree command result on STM32MP1 is:
+>
+> STM32MP> dm tree
+>  Class     Index  Probed  Driver                Name
+>  -----------------------------------------------------------
+>  root          0  [ + ]   root_driver           root_driver
+>  firmware      0  [   ]   psci                  |-- psci
+>  sysreset      0  [   ]   psci-sysreset         |   `-- psci-sysreset
+>  simple_bus    0  [ + ]   generic_simple_bus    |-- soc
+> ...
+>  tee           0  [ + ]   optee                 |-- optee
+> ...
+>  tee           1  [   ]   optee                 `-- optee
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  configs/sandbox64_defconfig        |  1 +
->  configs/sandbox_defconfig          |  1 +
->  configs/sandbox_flattree_defconfig |  1 +
->  configs/sandbox_spl_defconfig      |  1 +
->  test/py/tests/test_env.py          | 20 ++++++++++++++++++--
->  5 files changed, 22 insertions(+), 2 deletions(-)
+> Changes in v2:
+> - update commit message (Serie-cc => Series-cc)
+>
+>  drivers/core/root.c | 52 +++++++++++++++------------------------------
+>  1 file changed, 17 insertions(+), 35 deletions(-)
 
-Can you write this test in C?
 
-See ut_check_console_line() in mainline which should help if you need
-to check console output.
+This looks good to me, but please can you address the test failure
+(make qcheck)?
 
 Regards,
 Simon

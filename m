@@ -2,49 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C087162D77
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 18:53:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 061B9162D78
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 18:53:32 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BB344C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 17:53:29 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C2AF4C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 17:53:31 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D239C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CBC44C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Feb 2020 17:53:27 +0000 (UTC)
+ Tue, 18 Feb 2020 17:53:28 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48MT3n69lFz1qrLg;
- Tue, 18 Feb 2020 18:53:25 +0100 (CET)
+ by mail-out.m-online.net (Postfix) with ESMTP id 48MT3r2RC6z1qrLX;
+ Tue, 18 Feb 2020 18:53:28 +0100 (CET)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48MT3n5JwYz1qqkc;
- Tue, 18 Feb 2020 18:53:25 +0100 (CET)
+ by mail.m-online.net (Postfix) with ESMTP id 48MT3r11N0z1qqkc;
+ Tue, 18 Feb 2020 18:53:28 +0100 (CET)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id 34ndMDtjV6O5; Tue, 18 Feb 2020 18:53:24 +0100 (CET)
-X-Auth-Info: BQyubNTmLKQGi+bLn1Eh1S+rQqSctsJKYbTRBFOWkbY=
+ with ESMTP id ljxrwaalP3MM; Tue, 18 Feb 2020 18:53:26 +0100 (CET)
+X-Auth-Info: IScOl5xdw6G3vYgkb0RTINE969tjXffpJetsZG785NY=
 Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 18 Feb 2020 18:53:24 +0100 (CET)
+ Tue, 18 Feb 2020 18:53:26 +0100 (CET)
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <20200218083836.6369-1-patrick.delaunay@st.com>
+ <20200218083836.6369-3-patrick.delaunay@st.com>
 From: Marek Vasut <marex@denx.de>
-Message-ID: <8bd74f07-98a0-4ca7-d189-a55c01ce08a1@denx.de>
-Date: Tue, 18 Feb 2020 18:40:22 +0100
+Message-ID: <4e9dd901-d93f-e19a-c793-56c52b57498f@denx.de>
+Date: Tue, 18 Feb 2020 18:41:45 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.2
 MIME-Version: 1.0
-In-Reply-To: <20200218083836.6369-1-patrick.delaunay@st.com>
+In-Reply-To: <20200218083836.6369-3-patrick.delaunay@st.com>
 Content-Language: en-US
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/8] phy: generic: add error trace to
- detect PHY issue in uclass
+ Hans de Goede <hdegoede@redhat.com>,
+ Maxime Ripard <maxime.ripard@free-electrons.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Maxime Ripard <mripard@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH v2 3/8] board: sunxi: change trace level
+ for phy errors managed by uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -62,38 +64,10 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 2/18/20 9:38 AM, Patrick Delaunay wrote:
-[...]
->  static inline struct phy_ops *phy_dev_ops(struct udevice *dev)
->  {
-> @@ -109,56 +110,86 @@ int generic_phy_get_by_name(struct udevice *dev, const char *phy_name,
->  int generic_phy_init(struct phy *phy)
->  {
->  	struct phy_ops const *ops;
-> +	int ret;
->  
->  	if (!phy)
->  		return 0;
->  	ops = phy_dev_ops(phy->dev);
->  
-> -	return ops->init ? ops->init(phy) : 0;
-> +	ret = ops->init ? ops->init(phy) : 0;
+> As the error message is now displayed by generic phy functions,
+> the pr_err can be change to pr_idebug.
 
-if (!ops->init)
-   return 0;
-ret = ops->init();
-if (ret)
-   dev_err...
-
-return ret;
-
-Please fix globally.
-
-> +	if (ret)
-> +		dev_err(phy->dev, "PHY: Failed to init %s: %d.\n",
-> +			phy->dev->name, ret);
-> +
-> +	return ret;
-[...]
+pr_debug(), not pr_ i debug()
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,53 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EE9E162D79
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 18:53:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65C96162D7A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 18:53:37 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C93B6C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 17:53:32 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2FD26C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Feb 2020 17:53:37 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 26D21C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 029BFC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Feb 2020 17:53:31 +0000 (UTC)
+ Tue, 18 Feb 2020 17:53:36 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48MT3t5pn1z1qrLp;
- Tue, 18 Feb 2020 18:53:30 +0100 (CET)
+ by mail-out.m-online.net (Postfix) with ESMTP id 48MT3z0CR5z1qrLr;
+ Tue, 18 Feb 2020 18:53:35 +0100 (CET)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48MT3t4tQWz1qqkc;
- Tue, 18 Feb 2020 18:53:30 +0100 (CET)
+ by mail.m-online.net (Postfix) with ESMTP id 48MT3y5y4Xz1qqkk;
+ Tue, 18 Feb 2020 18:53:34 +0100 (CET)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id EQ3KhVE3xICP; Tue, 18 Feb 2020 18:53:29 +0100 (CET)
-X-Auth-Info: 2er0/c+QW1e8ioY81/uw5vAZtTzBegAYbzsWAj20TXQ=
+ with ESMTP id m6xTWEfLN9bu; Tue, 18 Feb 2020 18:53:31 +0100 (CET)
+X-Auth-Info: HLKc3wMmUtXE5C1wohRZPb3osmKYhk8fBjeh5Dd6xRg=
 Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 18 Feb 2020 18:53:28 +0100 (CET)
+ Tue, 18 Feb 2020 18:53:31 +0100 (CET)
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
-References: <20200218083836.6369-1-patrick.delaunay@st.com>
- <20200218083836.6369-6-patrick.delaunay@st.com>
+References: <20200218083503.5468-1-patrick.delaunay@st.com>
 From: Marek Vasut <marex@denx.de>
-Message-ID: <80a5e53c-19d6-4d1b-aa36-aa3d5d9162f3@denx.de>
-Date: Tue, 18 Feb 2020 18:42:19 +0100
+Message-ID: <6ca7cd1f-c86e-aa38-adf8-8b9ee3f56dd8@denx.de>
+Date: Tue, 18 Feb 2020 18:44:27 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.2
 MIME-Version: 1.0
-In-Reply-To: <20200218083836.6369-6-patrick.delaunay@st.com>
+In-Reply-To: <20200218083503.5468-1-patrick.delaunay@st.com>
 Content-Language: en-US
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@xilinx.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
+Cc: Peng Fan <peng.fan@nxp.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Simon Glass <sjg@chromium.org>, simon.k.r.goldschmidt@gmail.com,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ ley.foon.tan@intel.com, b.galvani@gmail.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>,
- T Karthik Reddy <t.karthik.reddy@xilinx.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 6/8] usb: dwc3: change trace level for
- phy errors managed by uclass
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>
+Subject: Re: [Uboot-stm32] [PATCH v4 0/5] usb: host: dwc2: use driver model
+ for PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -65,32 +67,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 2/18/20 9:38 AM, Patrick Delaunay wrote:
-> As the error message is now displayed by generic phy functions,
-> the pr_err can be change to pr_debug.
+On 2/18/20 9:34 AM, Patrick Delaunay wrote:
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
+> In this serie I update the DWC2 host driver to use the device tree
+> information and the associated PHY and CLOCK drivers when they are
+> availables.
 > 
-> Changes in v2: None
+> The V4 is rebased on latest master (v2020.04-rc2).
+> CI-Tavis build is OK:
+>     https://travis-ci.org/patrickdelaunay/u-boot/builds/651479714
 > 
->  drivers/usb/dwc3/core.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+> NB: CI-Travis build was OK for all target after V3:
+>     https://travis-ci.org/patrickdelaunay/u-boot/builds/609496187
+>     As in V2, I cause the warnings for some boards:
+>     drivers/usb/host/built-in.o: In function `dwc2_usb_remove':
+>     drivers/usb/host/dwc2.c:1441: undefined reference to `clk_disable_bulk'
 > 
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index c5066529b7..6304036c00 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -867,8 +867,8 @@ int dwc3_setup_phy(struct udevice *dev, struct phy **array, int *num_phys)
->  	for (i = 0; i < count; i++) {
->  		ret = generic_phy_init(&usb_phys[i]);
->  		if (ret) {
-> -			pr_err("Can't init USB PHY%d for %s\n",
-> -			       i, dev->name);
-> +			pr_debug("Can't init USB PHY%d for %s\n",
-> +				 i, dev->name);
+> I test this serie on stm32mp157c-ev1 board, with PHY and CLK
+> support
+> 
+> The U-CLASS are provided by:
+> - PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
+> - CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
+> - RESET by RCC reset driver = drivers/reset/stm32-reset.c
+> 
+> And I activate the configuration
+> +CONFIG_USB_DWC2=y
 
-dev_dbg() , since you have a dev pointer.
+Simon, can you test this on SOCFPGA ?
+
+[...]
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

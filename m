@@ -2,57 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BA1017337A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Feb 2020 10:04:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D461D17383D
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Feb 2020 14:25:09 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4C064C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Feb 2020 09:04:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C769C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Feb 2020 13:25:09 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1570BC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6DA83C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Feb 2020 09:04:27 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 28 Feb 2020 13:25:08 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 01S8x6j9001274; Fri, 28 Feb 2020 10:04:22 +0100
+ 01SDHAte001024; Fri, 28 Feb 2020 14:25:03 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=y2AruO9EmwNoDbpF9rfSx/ZCNx45ul1FYIzdsz2/I7k=;
- b=h4is1gQeOtlnVriBkfQXQqt+HKo42O94qiv0NxVHF26J5hSkbsEhRKkvgQXVqzEGaAqw
- tGeaBZVcKV8ffguWjgS7Q0iS0fpSMTcFUF7UNNdfkx7A6vfRsy9FB6HllGQ4XlNkT5+o
- R7qTHMlTcSNR3/Y1m4HaYeTTo+N9uuxN1QhfgzkkAMXuKB07+SYWmPYpu+fmnAeHgj6B
- PKNhvipgdbmB9YNIOyPHjzvjU7xncPU7bbjOeaKeeg3fNmiYNiOJfqtFLOrGfpXPon+T
- yC3rV4QpEsLCFPdTIlwuxWaDAWJ93D2PFc7Tjwa5TX+7WowWXfAKqvalh6szZii+dC1S IA== 
+ bh=QKsGwaTq+v5uudPFGab/1QI9kJrNFmevW7JelcKghxA=;
+ b=vC+P2SLvdBZW/AQKk8fs0Jz9BEWegxKTvMp3KrvZ3TgAxUISTZAPWsU+ZJGjQmDNogO2
+ GYmpvR95tojqtmiKG5wOgOZPJK3ti+BgCUE4e+Nej4e2qgZU6/3zQI3h+P91T5WBiwHJ
+ VmM5yy+LoREAT4Er+nH3Jlvki1En5n6J39ihonU0En0nefW0c5Gvkg9/ejy9ryHzuoF8
+ 7qU9CzuqQfMiwYOxDVwpXpCXaKDhD81jORa8A4rVOzsFQhe53ZoUEbfsoLqcrwKDh4XP
+ o/wbp+BGogBWHPrY1+PDoJivabbNOTUXUE+X/p9z7xBQtzyNZ3UySlKIP8i6+xhYANmn /w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yepvttra1-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yepvvc3fk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 28 Feb 2020 10:04:22 +0100
+ Fri, 28 Feb 2020 14:25:03 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2204B10002A;
- Fri, 28 Feb 2020 10:04:20 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 125772A970F;
- Fri, 28 Feb 2020 10:04:20 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 28 Feb
- 2020 10:04:19 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8A3AB10002A;
+ Fri, 28 Feb 2020 14:24:58 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7A6172BC7D1;
+ Fri, 28 Feb 2020 14:24:58 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 28 Feb
+ 2020 14:24:57 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 28 Feb 2020 10:04:19 +0100
+ 15.00.1473.003; Fri, 28 Feb 2020 14:24:57 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Thread-Topic: [PATCH] doc: Makefile: remove target refcheckdocs
-Thread-Index: AQHV7AVtHiVKe3T6VEi/n/bZLGLOU6gsJMmAgAAJmoCABBl14A==
-Date: Fri, 28 Feb 2020 09:04:19 +0000
-Message-ID: <a86f67e4b21e4c319704d5a68d4f32ee@SFHDAG6NODE3.st.com>
-References: <20200225180011.8129-1-patrick.delaunay@st.com>
- <f435e69b-7e4f-b58b-8903-eda993c60792@gmx.de>
- <20200225184423.GK18302@bill-the-cat>
-In-Reply-To: <20200225184423.GK18302@bill-the-cat>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Thread-Topic: [PATCH 1/1] scripts: add documentation-file-ref-check
+Thread-Index: AQHV7BUKvXBf5+2gBk+ru8xkVhMR36gwVAKw
+Date: Fri, 28 Feb 2020 13:24:57 +0000
+Message-ID: <82390057a4904c94bbf000fb98274d3d@SFHDAG6NODE3.st.com>
+References: <20200225195142.5682-1-xypron.glpk@gmx.de>
+In-Reply-To: <20200225195142.5682-1-xypron.glpk@gmx.de>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -61,13 +59,13 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.49]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-02-28_02:2020-02-26,
+ definitions=2020-02-28_04:2020-02-26,
  2020-02-28 signatures=0
 Cc: Breno Matheus Lima <breno.lima@nxp.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] doc: Makefile: remove target refcheckdocs
+ Bin Meng <bmeng.cn@gmail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 1/1] scripts: add
+	documentation-file-ref-check
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,132 +84,298 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Heinrich,
 
-> From: Tom Rini <trini@konsulko.com>
-> Sent: mardi 25 f=E9vrier 2020 19:44
+> From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Sent: mardi 25 f=E9vrier 2020 20:52
 > =
 
-> On Tue, Feb 25, 2020 at 07:10:01PM +0100, Heinrich Schuchardt wrote:
-> > On 2/25/20 7:00 PM, Patrick Delaunay wrote:
-> > > Remove the target refcheckdocs, based on the missing script
-> > > scripts/documentation-file-ref-check.
-> > >
-> > > This script exists in Linux tree but wasn't imported when 'doc' move
-> > > to SPHINX in commit 78a88f7930be ("doc: Replace DocBook with
-> > > sphinx-based docs")
-> > >
-> > > This patch avoids the error:
-> > >
-> > > make refcheckdocs
-> > > /bin/sh: scripts/documentation-file-ref-check: No such file or
-> > > directory
-> > > doc/Makefile:102: recipe for target 'refcheckdocs' failed
-> > > make[1]: *** [refcheckdocs] Error 127
-> > > Makefile:2094: recipe for target 'refcheckdocs' failed
-> > > make: *** [refcheckdocs] Error 2
-> > >
-> > > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> >
-> > When we copy and adjust the missing script we can identify dozens of
-> > documentation errors, see below. So I think we should fix the make
-> > target instead of removing it.
-> >
-> > arch/arm/mach-imx/Kconfig: doc/README.mxc_hab
-> > arch/arm/mach-imx/Kconfig: doc/README.mxc_hab
-> > board/advantech/dms-ba16/dms-ba16_1g.cfg: doc/README.imximage
-> > board/advantech/dms-ba16/dms-ba16_2g.cfg: doc/README.imximage
-> > board/aristainetos/aristainetos2.cfg: doc/README.imximage
-> > board/bachmann/ot1200/mx6q_4x_mt41j128.cfg: doc/README.imximage
-> > board/barco/titanium/imximage.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6dl.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6dl2g.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6q.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6q2g.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6s.cfg: doc/README.imximage
-> > board/boundary/nitrogen6x/nitrogen6s1g.cfg: doc/README.imximage
-> > board/ccv/xpress/imximage.cfg: doc/README.imximage
-> > board/cobra5272/README: u-boot-x-x-x/doc/README.COBRA5272
-> > board/freescale/imx8qxp_mek/imximage.cfg: doc/README.imx8image
-> > board/freescale/m52277evb/README: doc/README.m52277evb
-> > board/freescale/m53017evb/README: doc/README.m53017evb
-> > board/freescale/m5373evb/README: doc/README.m5373evb
-> > board/freescale/m54455evb/README: doc/README.m54455evb
-> > board/freescale/m547xevb/README: doc/README.m5475evb
-> > board/freescale/mx25pdk/imximage.cfg: doc/README.imximage
-> > board/freescale/mx51evk/imximage.cfg: doc/README.imximage
-> > board/freescale/mx53ard/imximage_dd3.cfg: doc/README.imximage
-> > board/freescale/mx53evk/imximage.cfg: doc/README.imximage
-> > board/freescale/mx53loco/imximage.cfg: doc/README.imximage
-> > board/freescale/mx53smd/imximage.cfg: doc/README.imximage
-> > board/freescale/mx6qarm2/imximage.cfg: doc/README.imximage
-> > board/freescale/mx6qarm2/imximage_mx6dl.cfg: doc/README.imximage
-> > board/freescale/mx6slevk/imximage.cfg: doc/README.imximage
-> > board/freescale/mx6ullevk/imximage.cfg: doc/README.imximage
-> > board/freescale/mx7dsabresd/imximage.cfg: doc/README.imximage
-> > board/freescale/s32v234evb/s32v234evb.cfg: doc/README.imximage
-> > board/freescale/vf610twr/imximage.cfg: doc/README.imximage
-> > board/ge/bx50v3/bx50v3.cfg: doc/README.imximage
-> > board/ge/mx53ppd/imximage.cfg: doc/README.imximage
-> > board/menlo/m53menlo/imximage.cfg: doc/README.imximage
-> > board/phytec/pcm052/imximage.cfg: doc/README.imximage
-> > board/seco/mx6quq7/mx6quq7-2g.cfg: doc/README.imximage
-> > board/siemens/capricorn/imximage.cfg: doc/README.imx8image
-> > board/technexion/pico-imx6ul/imximage.cfg: doc/README.imximage
-> > board/toradex/apalis-imx8/apalis-imx8qm-imximage.cfg:
-> > doc/README.imx8image
-> > board/toradex/colibri-imx6ull/imximage.cfg: doc/README.imximage
-> > board/toradex/colibri-imx8x/colibri-imx8qxp-imximage.cfg:
-> > doc/README.imx8image
-> > board/toradex/colibri_imx7/imximage.cfg: doc/README.imximage
-> > board/toradex/colibri_vf/imximage.cfg: doc/README.imximage
-> > board/tqc/tqma6/clocks.cfg: doc/README.imximage
-> > board/tqc/tqma6/tqma6dl.cfg: doc/README.imximage
-> > board/tqc/tqma6/tqma6q.cfg: doc/README.imximage
-> > board/tqc/tqma6/tqma6s.cfg: doc/README.imximage
-> > board/warp/imximage.cfg: doc/README.imximage
-> > board/warp7/imximage.cfg: doc/README.imximage
-> > cmd/Kconfig: doc/README.beddbug
-> > doc/README.drivers.eth: doc/driver-model/README.txt
-> > doc/README.fdt-control: doc/driver-model/README.txt
-> > doc/device-tree-bindings/net/ti,dp83867.txt:
-> > doc/devicetree/bindings/net/ethernet.txt
-> > doc/device-tree-bindings/video/rockchip-lvds.txt:
-> > doc/devicetree/device-tree-bindings/video/display-timing.txt
-> > doc/imx/misc/sdp.txt: doc/README.imximage
-> > doc/sphinx/parse-headers.pl: doc/doc-guide/parse-headers.rst
-> > doc/sphinx/rstFlatTable.py: doc/books/kernel-doc-HOWTO
-> > drivers/i2c/davinci_i2c.c: doc/driver-model/i2c-howto.txt
-> > drivers/i2c/kona_i2c.c: doc/driver-model/i2c-howto.txt
-> > drivers/i2c/sh_i2c.c: doc/driver-model/i2c-howto.txt
-> > drivers/i2c/soft_i2c.c: doc/driver-model/i2c-howto.txt
-> > drivers/rtc/ds1374.c: Watchdoc/Alarm
-> > include/ata.h: ftp://ftp.fee.vutbr.cz/pub/doc/io/ata/ata-3/ata3r5v.zip
-> > include/configs/sbc8548.h: doc/README.sbc8548
-> > include/fsl_qe.h: doc/README.qe_firmware
-> > lib/zlib/trees.c: ftp.uu.net:/pub/archiving/zip/doc/deflate-1.1.doc
-> > tools/dtoc/dtb_platdata.py: doc/driver-model/of-plat.txt
-> > tools/dtoc/dtoc.py: doc/driver-model/of-plat.txt
+> 'make refcheckdocs' requires scripts/documentation-file-ref-check.
+> Adopt script from Linux v5.6-rc3.
 > =
 
-> Agreed.  And then make new errors a CI fatal?  Thanks!
+> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
 
-Agreed also.
-I did not have the courage to do it (in fact: I started, but I did not succ=
-eed and I give up)
+Reviewed-by: Patrick Delaunay <Patrick.delaunay@st.com>
 
-FYI: that can't be CI fatal today, because the current script give too many=
- false positive
+It is just a copy of kernel script with =
 
-For example : =
++ "/Documentation" =3D>  "/doc"
++ remove kernel specific rules
 
-	board/aristainetos/aristainetos2.cfg: doc/README.imximage
-	cmd/Kconfig: doc/README.beddbug
+Just 2 remarks on ftp and binding directory (for --fix option)
 
-	=3D> these file exist
+>  scripts/documentation-file-ref-check | 226 +++++++++++++++++++++++++++
+>  1 file changed, 226 insertions(+)
+>  create mode 100755 scripts/documentation-file-ref-check
+> =
 
-Thanks
+> diff --git a/scripts/documentation-file-ref-check b/scripts/documentation=
+-file-ref-
+> check
+> new file mode 100755
+> index 0000000000..9978fc9a91
+> --- /dev/null
+> +++ b/scripts/documentation-file-ref-check
+> @@ -0,0 +1,226 @@
+> +#!/usr/bin/env perl
+> +# SPDX-License-Identifier: GPL-2.0
+> +#
+> +# Treewide grep for references to files under doc, and report #
+> +non-existing files in stderr.
+> +
+> +use warnings;
+> +use strict;
+> +use Getopt::Long qw(:config no_auto_abbrev);
+> +
+> +# NOTE: only add things here when the file was gone, but the text wants
+> +# to mention a past documentation file, for example, to give credits
+> +for # the original work.
+> +my %false_positives =3D (
+> +);
+> +
+> +my $scriptname =3D $0;
+> +$scriptname =3D~ s,.*/([^/]+/),$1,;
+> +
+> +# Parse arguments
+> +my $help =3D 0;
+> +my $fix =3D 0;
+> +my $warn =3D 0;
+> +
+> +if (! -d ".git") {
+> +	printf "Warning: can't check if file exists, as this is not a git tree";
+> +	exit 0;
+> +}
+> +
+> +GetOptions(
+> +	'fix' =3D> \$fix,
+> +	'warn' =3D> \$warn,
+> +	'h|help|usage' =3D> \$help,
+> +);
+> +
+> +if ($help !=3D 0) {
+> +    print "$scriptname [--help] [--fix]\n";
+> +    exit -1;
+> +}
+> +
+> +# Step 1: find broken references
+> +print "Finding broken references. This may take a while...  " if
+> +($fix);
+> +
+> +my %broken_ref;
+> +
+> +my $doc_fix =3D 0;
+> +
+> +open IN, "git grep ':doc:\`' doc/|"
+> +     or die "Failed to run git grep";
+> +while (<IN>) {
+> +	next if (!m,^([^:]+):.*\:doc\:\`([^\`]+)\`,);
+> +
+> +	my $d =3D $1;
+> +	my $doc_ref =3D $2;
+> +
+> +	my $f =3D $doc_ref;
+> +
+> +	$d =3D~ s,(.*/).*,$1,;
+> +	$f =3D~ s,.*\<([^\>]+)\>,$1,;
+> +
+> +	$f =3D"$d$f.rst";
+> +
+> +	next if (grep -e, glob("$f"));
+> +
+> +	if ($fix && !$doc_fix) {
+> +		print STDERR "\nWARNING: Currently, can't fix broken :doc:``
+> fields\n";
+> +	}
+> +	$doc_fix++;
+> +
+> +	print STDERR "$f: :doc:`$doc_ref`\n";
+> +}
+> +close IN;
+> +
+> +open IN, "git grep 'doc/'|"
+> +     or die "Failed to run git grep";
+> +while (<IN>) {
+> +	next if (!m/^([^:]+):(.*)/);
+> +
+> +	my $f =3D $1;
+> +	my $ln =3D $2;
+> +
+> +	# On linux-next, discard the Next/ directory
+> +	next if ($f =3D~ m,^Next/,);
+> +
+> +	# Makefiles and scripts contain nasty expressions to parse docs
+> +	next if ($f =3D~ m/Makefile/ || $f =3D~ m/\.sh$/);
+> +
+> +	# Skip this script
+> +	next if ($f eq $scriptname);
+> +
+> +	# Ignore the dir where documentation will be built
+> +	next if ($ln =3D~ m,\b(\S*)doc/output,);
+> +
+> +	if ($ln =3D~ m,\b(\S*)(doc/[A-Za-z0-9\_\.\,\~/\*\[\]\?+-]*)(.*),) {
+> +		my $prefix =3D $1;
+> +		my $ref =3D $2;
+> +		my $base =3D $2;
+> +		my $extra =3D $3;
+> +
+> +		# some file references are like:
+> +		# /usr/src/linux/doc/DMA-{API,mapping}.txt
+> +		# For now, ignore them
+> +		next if ($extra =3D~ m/^{/);
+> +
+> +		# Remove footnotes at the end like:
+> +		# doc/devicetree/dt-object-internal.txt[1]
+> +		$ref =3D~ s/(txt|rst)\[\d+]$/$1/;
+> +
+> +		# Remove ending ']' without any '['
+> +		$ref =3D~ s/\].*// if (!($ref =3D~ m/\[/));
+> +
+> +		# Remove puntuation marks at the end
+> +		$ref =3D~ s/[\,\.]+$//;
+> +
+> +		my $fulref =3D "$prefix$ref";
+> +
+> +		$fulref =3D~ s/^(\<file|ref)://;
+> +		$fulref =3D~ s/^[\'\`]+//;
+> +		$fulref =3D~ s,^\$\(.*\)/,,;
+> +		$base =3D~ s,.*/,,;
+> +
+> +		# Remove URL false-positives
+> +		next if ($fulref =3D~ m/^http/);
 
+		next if ($fulref =3D~ m/^ftp/);
+
+To avoid issue on ftp URL =3D =
+
+
+include/ata.h: ftp://ftp.fee.vutbr.cz/pub/doc/io/ata/ata-3/ata3r5v.zip
+lib/zlib/trees.c: ftp.uu.net:/pub/archiving/zip/doc/deflate-1.1.do
+
+> +		# Check if exists, evaluating wildcards
+> +		next if (grep -e, glob("$ref $fulref"));
+> +
+> +		# Accept relative doc patches for tools/
+> +		if ($f =3D~ m/tools/) {
+> +			my $path =3D $f;
+> +			$path =3D~ s,(.*)/.*,$1,;
+> +			next if (grep -e, glob("$path/$ref $path/../$ref
+> $path/$fulref"));
+> +		}
+> +
+> +		# Discard known false-positives
+> +		if (defined($false_positives{$f})) {
+> +			next if ($false_positives{$f} eq $fulref);
+> +		}
+> +
+> +		if ($fix) {
+> +			if (!($ref =3D~ m/(scripts|Kconfig|Kbuild)/)) {
+> +				$broken_ref{$ref}++;
+> +			}
+> +		} elsif ($warn) {
+> +			print STDERR "Warning: $f references a file that doesn't
+> exist: $fulref\n";
+> +		} else {
+> +			print STDERR "$f: $fulref\n";
+> +		}
+> +	}
+> +}
+> +close IN;
+> +
+> +exit 0 if (!$fix);
+> +
+> +# Step 2: Seek for file name alternatives print "Auto-fixing broken
+> +references. Please double-check the results\n";
+> +
+> +foreach my $ref (keys %broken_ref) {
+> +	my $new =3D$ref;
+> +
+> +	my $basedir =3D ".";
+> +	# On translations, only seek inside the translations directory
+> +	$basedir  =3D $1 if ($ref =3D~ m,(doc/translations/[^/]+),);
+> +
+> +	# get just the basename
+> +	$new =3D~ s,.*/,,;
+> +
+> +	my $f=3D"";
+> +
+> +	# usual reason for breakage: DT file moved around
+> +	if ($ref =3D~ /devicetree/) {
+> +		# usual reason for breakage: DT file renamed to .yaml
+> +		if (!$f) {
+> +			my $new_ref =3D $ref;
+> +			$new_ref =3D~ s/\.txt$/.yaml/;
+> +			$f=3D$new_ref if (-f $new_ref);
+> +		}
+> +
+> +		if (!$f) {
+> +			my $search =3D $new;
+> +			$search =3D~ s,^.*/,,;
+> +			$f =3D qx(find doc/devicetree/ -iname "*$search*") if
+> ($search);
+
+No "devicetree/ bindings/" directory in U-boot
+=3D> I think "doc/device-tree-bindings/" should be used here =
+
+
++			$f =3D qx(find doc/device-tree-bindings/ -iname "*$search*") if ($searc=
+h);
+
+> +			if (!$f) {
+> +				# Manufacturer name may have changed
+> +				$search =3D~ s/^.*,//;
+> +				$f =3D qx(find doc/devicetree/ -iname "*$search*") if
+> ($search);
+
++			$f =3D qx(find doc/device-tree-bindings/ -iname "*$search*") if  ($sear=
+ch);
+
+> +			}
+> +		}
+> +	}
+> +
+> +	# usual reason for breakage: file renamed to .rst
+> +	if (!$f) {
+> +		$new =3D~ s/\.txt$/.rst/;
+> +		$f=3Dqx(find $basedir -iname $new) if ($new);
+> +	}
+> +
+> +	# usual reason for breakage: use dash or underline
+> +	if (!$f) {
+> +		$new =3D~ s/[-_]/[-_]/g;
+> +		$f=3Dqx(find $basedir -iname $new) if ($new);
+> +	}
+> +
+> +	# Wild guess: seek for the same name on another place
+> +	if (!$f) {
+> +		$f =3D qx(find $basedir -iname $new) if ($new);
+> +	}
+> +
+> +	my @find =3D split /\s+/, $f;
+> +
+> +	if (!$f) {
+> +		print STDERR "ERROR: Didn't find a replacement for $ref\n";
+> +	} elsif (scalar(@find) > 1) {
+> +		print STDERR "WARNING: Won't auto-replace, as found multiple
+> files close to $ref:\n";
+> +		foreach my $j (@find) {
+> +			$j =3D~ s,^./,,;
+> +			print STDERR "    $j\n";
+> +		}
+> +	} else {
+> +		$f =3D $find[0];
+> +		$f =3D~ s,^./,,;
+> +		print "INFO: Replacing $ref to $f\n";
+> +		foreach my $j (qx(git grep -l $ref)) {
+> +			qx(sed "s\@$ref\@$f\@g" -i $j);
+> +		}
+> +	}
+> +}
 > --
-> Tom
+> 2.25.0
+
+Regard,
+
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

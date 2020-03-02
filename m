@@ -2,59 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42C65175849
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 11:27:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4C25175A5C
+	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 13:22:12 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 045E4C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 10:27:17 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6B988C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 12:22:12 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6441FC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6AF9AC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  2 Mar 2020 10:27:14 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Mon,  2 Mar 2020 12:22:10 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 022ANd4l010058; Mon, 2 Mar 2020 11:27:12 +0100
+ 022CDjbp031948; Mon, 2 Mar 2020 13:22:06 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=nX+MiOiioS7cPdFh7+LLdiwKtP52nWA1AU1BOeBCp2Y=;
- b=LF+YushIHgGw7MjGVKejHtvw1WTanyBxjgLgALQeRXfUXpgp2C3Ta1JTiGoENHUlNk/0
- w1bqG2USTTVnA8oc+VMgZcx88HfPJ4SdxeSXm87eYJ0XsfWltiWWSGLXXAYZs0cdEdc/
- iOtjFFUYDoIuIzZFnjb8XwLP4laXil1/19TuBmNeVbCMJWHur6mOqvOMDt784jc+e4Ui
- cs8fYQsQlh083fmIPSOWLacuMrX0dP7Vbnes+heXheHmbbbGjF248C8oqPQ+GZ+xuw/Q
- T8Wyfg9XRgCd3H+xT1uhAQESPKOQlkOcvZh20GOzD3plKQRrAIAG51PehvGQc0YOtXd1 CQ== 
+ bh=7JQ46RpdW9PixpGbBfCC0fi8GCFzoHwajfpoWj8s2gE=;
+ b=MqyJWef7c4zPndhhR+CikoX9D/dqzKfshmaBTju++UNzPMGuy3dpUYuxB/5HbA7iwAiO
+ G5I0jVpf7sN3/wuB8LuCf6flSDjT0S6wJ/jL1stFnVmzD6cICRlBEH9gq1rYOz0rT1aq
+ 2SEv9RUR5VcZH0xaE7Qt/CR/kyH0Q20Sd1khVkg7iKK2zUq3kLaqD9wg+yKi2LMQECds
+ r68qp6TmCUMqLZejeMz37vsKR9OlRsmGsUw1rYruSeydPGUFVK2RYfutWXAoad/fD31I
+ ABy7xqq8jeKjIDTN6tOjnmq9Dk1M2ZGBLBiGJdMajKZ5ZZZo+Y1V4Abrdb+aFTx+itaJ yQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfea6jwp8-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yffqpkau1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 02 Mar 2020 11:27:12 +0100
+ Mon, 02 Mar 2020 13:22:06 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CB009100038;
- Mon,  2 Mar 2020 11:27:07 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7E38010003B;
+ Mon,  2 Mar 2020 13:22:00 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD7262B189C;
- Mon,  2 Mar 2020 11:27:07 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 700192C2467;
+ Mon,  2 Mar 2020 13:22:00 +0100 (CET)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 2 Mar 2020 11:27:06 +0100
+ Mon, 2 Mar 2020 13:22:00 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 2 Mar 2020 11:27:02 +0100
-Message-ID: <20200302102702.6917-1-patrick.delaunay@st.com>
+Date: Mon, 2 Mar 2020 13:21:53 +0100
+Message-ID: <20200302122153.20670-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-02_03:2020-02-28,
+ definitions=2020-03-02_03:2020-03-02,
  2020-03-02 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Ludovic Barre <ludovic.barre@st.com>, Patrice Chotard <patrice.chotard@st.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp: psci: set cntfrq register of cpu on
+ Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] tee: optee: use dev_info in print_os_revision
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,65 +72,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Ludovic Barre <ludovic.barre@st.com>
+Display TEE version at information level; this patch replaces
+debug() call to dev_info() in print_os_revision() function.
 
-This path allows to set the cntfrq register of targeted cpu.
-
-Signed-off-by: Ludovic Barre <ludovic.barre@st.com>
-Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/arm/mach-stm32mp/psci.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/tee/optee/core.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/psci.c b/arch/arm/mach-stm32mp/psci.c
-index 1d91b2d324..3fb038d3e7 100644
---- a/arch/arm/mach-stm32mp/psci.c
-+++ b/arch/arm/mach-stm32mp/psci.c
-@@ -30,6 +30,22 @@ u8 psci_state[STM32MP1_PSCI_NR_CPUS] __secure_data = {
- 	 PSCI_AFFINITY_LEVEL_ON,
- 	 PSCI_AFFINITY_LEVEL_OFF};
- 
-+static u32 __secure_data cntfrq;
-+
-+static u32 __secure cp15_read_cntfrq(void)
-+{
-+	u32 frq;
-+
-+	asm volatile("mrc p15, 0, %0, c14, c0, 0" : "=r" (frq));
-+
-+	return frq;
-+}
-+
-+static void __secure cp15_write_cntfrq(u32 frq)
-+{
-+	asm volatile ("mcr p15, 0, %0, c14, c0, 0" : : "r" (frq));
-+}
-+
- static inline void psci_set_state(int cpu, u8 state)
- {
- 	psci_state[cpu] = state;
-@@ -63,6 +79,9 @@ void __secure psci_arch_cpu_entry(void)
- 
- 	psci_set_state(cpu, PSCI_AFFINITY_LEVEL_ON);
- 
-+	/* write the saved cntfrq */
-+	cp15_write_cntfrq(cntfrq);
-+
- 	/* reset magic in TAMP register */
- 	writel(0xFFFFFFFF, TAMP_BACKUP_MAGIC_NUMBER);
+diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+index 9fb5e658f9..5260dab3ac 100644
+--- a/drivers/tee/optee/core.c
++++ b/drivers/tee/optee/core.c
+@@ -512,7 +512,7 @@ static bool is_optee_api(optee_invoke_fn *invoke_fn)
+ 	       res.a2 == OPTEE_MSG_UID_2 && res.a3 == OPTEE_MSG_UID_3;
  }
-@@ -130,6 +149,9 @@ s32 __secure psci_cpu_on(u32 function_id, u32 target_cpu, u32 pc,
- 	if (psci_state[cpu] == PSCI_AFFINITY_LEVEL_ON)
- 		return ARM_PSCI_RET_ALREADY_ON;
  
-+	/* read and save cntfrq of current cpu to write on target cpu  */
-+	cntfrq = cp15_read_cntfrq();
-+
- 	/* reset magic in TAMP register */
- 	if (readl(TAMP_BACKUP_MAGIC_NUMBER))
- 		writel(0xFFFFFFFF, TAMP_BACKUP_MAGIC_NUMBER);
+-static void print_os_revision(optee_invoke_fn *invoke_fn)
++static void print_os_revision(struct udevice *dev, optee_invoke_fn *invoke_fn)
+ {
+ 	union {
+ 		struct arm_smccc_res smccc;
+@@ -527,11 +527,12 @@ static void print_os_revision(optee_invoke_fn *invoke_fn)
+ 		  &res.smccc);
+ 
+ 	if (res.result.build_id)
+-		debug("OP-TEE revision %lu.%lu (%08lx)\n", res.result.major,
+-		      res.result.minor, res.result.build_id);
++		dev_info(dev, "OP-TEE: revision %lu.%lu (%08lx)\n",
++			 res.result.major, res.result.minor,
++			 res.result.build_id);
+ 	else
+-		debug("OP-TEE revision %lu.%lu\n", res.result.major,
+-		      res.result.minor);
++		dev_info(dev, "OP-TEE: revision %lu.%lu\n",
++			 res.result.major, res.result.minor);
+ }
+ 
+ static bool api_revision_is_compatible(optee_invoke_fn *invoke_fn)
+@@ -626,7 +627,7 @@ static int optee_probe(struct udevice *dev)
+ 		return -ENOENT;
+ 	}
+ 
+-	print_os_revision(pdata->invoke_fn);
++	print_os_revision(dev, pdata->invoke_fn);
+ 
+ 	if (!api_revision_is_compatible(pdata->invoke_fn)) {
+ 		debug("%s: OP-TEE api revision mismatch\n", __func__);
 -- 
 2.17.1
 

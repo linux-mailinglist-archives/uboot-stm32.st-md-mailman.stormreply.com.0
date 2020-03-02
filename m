@@ -2,61 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BC001756A4
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 10:12:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42C65175849
+	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 11:27:17 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E8236C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 09:12:52 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 045E4C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Mar 2020 10:27:17 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E0D5FC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6441FC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  2 Mar 2020 09:12:50 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Mon,  2 Mar 2020 10:27:14 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02297Yjn002473; Mon, 2 Mar 2020 10:12:47 +0100
+ 022ANd4l010058; Mon, 2 Mar 2020 11:27:12 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=b4CGAr6Dq5fwwqa4fn+dSzwh/ylkJF3GYzbwJesWj/o=;
- b=CTjFZNAiq670TL4nhYu7rrpjxTFEK90gjzhLiwZhpZ4WxlcjZWELK05S4l5+lKj0YPHC
- 4E5AeRbQ9w2uKhH+ufDLx7bWQdihJSsBVb6hyjm2hrgvQAGMVMMdhhLGkAsU0o8/S4c+
- Bhxn/H1hTlAwDEbC6CJkqHVv1+qpXfpSDpEWRWriiRlZm9E8METNzDlGdBmLPXX4iGl3
- GYPZeH6HRmbXJYee77ZMuGzPkztc9Jz3G6bmYvmjMWiAj5k4bAhLzJTBoOx7FZURUfG7
- ovYe1bwXznv33rRb2tbtAxRMmeVlepGEcHkFEVRR3dmhQllXNZhSZgog1/homYVWd820 Ew== 
+ bh=nX+MiOiioS7cPdFh7+LLdiwKtP52nWA1AU1BOeBCp2Y=;
+ b=LF+YushIHgGw7MjGVKejHtvw1WTanyBxjgLgALQeRXfUXpgp2C3Ta1JTiGoENHUlNk/0
+ w1bqG2USTTVnA8oc+VMgZcx88HfPJ4SdxeSXm87eYJ0XsfWltiWWSGLXXAYZs0cdEdc/
+ iOtjFFUYDoIuIzZFnjb8XwLP4laXil1/19TuBmNeVbCMJWHur6mOqvOMDt784jc+e4Ui
+ cs8fYQsQlh083fmIPSOWLacuMrX0dP7Vbnes+heXheHmbbbGjF248C8oqPQ+GZ+xuw/Q
+ T8Wyfg9XRgCd3H+xT1uhAQESPKOQlkOcvZh20GOzD3plKQRrAIAG51PehvGQc0YOtXd1 CQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfem0jdgr-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yfea6jwp8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 02 Mar 2020 10:12:47 +0100
+ Mon, 02 Mar 2020 11:27:12 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D39310003A;
- Mon,  2 Mar 2020 10:12:44 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CB009100038;
+ Mon,  2 Mar 2020 11:27:07 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3220A2A8F56;
- Mon,  2 Mar 2020 10:12:44 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD7262B189C;
+ Mon,  2 Mar 2020 11:27:07 +0100 (CET)
 Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 2 Mar 2020 10:12:43 +0100
+ Mon, 2 Mar 2020 11:27:06 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 2 Mar 2020 10:12:41 +0100
-Message-ID: <20200302091241.10371-1-patrick.delaunay@st.com>
+Date: Mon, 2 Mar 2020 11:27:02 +0100
+Message-ID: <20200302102702.6917-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-02_02:2020-02-28,
+ definitions=2020-03-02_03:2020-02-28,
  2020-03-02 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Thomas Hebb <tommyhebb@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] doc: spl: update reference to
-	driver-model/README.txt
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Ludovic Barre <ludovic.barre@st.com>, Patrice Chotard <patrice.chotard@st.com>
+Subject: [Uboot-stm32] [PATCH] stm32mp: psci: set cntfrq register of cpu on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,31 +71,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Update the reference in doc/README.SPL to a no more existing file:
-"driver-model/README.txt", it is changed to "doc/driver-model/design.rst".
+From: Ludovic Barre <ludovic.barre@st.com>
 
-Adding the directory path /doc/ allows to check this reference with
-'make refcheckdocs'.
+This path allows to set the cntfrq register of targeted cpu.
 
+Signed-off-by: Ludovic Barre <ludovic.barre@st.com>
+Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- doc/README.SPL | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-stm32mp/psci.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-diff --git a/doc/README.SPL b/doc/README.SPL
-index 929b9672b0..2beb6d8f11 100644
---- a/doc/README.SPL
-+++ b/doc/README.SPL
-@@ -81,7 +81,7 @@ fdtgrep is also used to remove:
-   ('u-boot,dm-pre-reloc', 'u-boot,dm-spl' and 'u-boot,dm-tpl')
+diff --git a/arch/arm/mach-stm32mp/psci.c b/arch/arm/mach-stm32mp/psci.c
+index 1d91b2d324..3fb038d3e7 100644
+--- a/arch/arm/mach-stm32mp/psci.c
++++ b/arch/arm/mach-stm32mp/psci.c
+@@ -30,6 +30,22 @@ u8 psci_state[STM32MP1_PSCI_NR_CPUS] __secure_data = {
+ 	 PSCI_AFFINITY_LEVEL_ON,
+ 	 PSCI_AFFINITY_LEVEL_OFF};
  
- All the nodes remaining in the SPL devicetree are bound
--(see driver-model/README.txt).
-+(see doc/driver-model/design.rst).
++static u32 __secure_data cntfrq;
++
++static u32 __secure cp15_read_cntfrq(void)
++{
++	u32 frq;
++
++	asm volatile("mrc p15, 0, %0, c14, c0, 0" : "=r" (frq));
++
++	return frq;
++}
++
++static void __secure cp15_write_cntfrq(u32 frq)
++{
++	asm volatile ("mcr p15, 0, %0, c14, c0, 0" : : "r" (frq));
++}
++
+ static inline void psci_set_state(int cpu, u8 state)
+ {
+ 	psci_state[cpu] = state;
+@@ -63,6 +79,9 @@ void __secure psci_arch_cpu_entry(void)
  
- Debugging
- ---------
+ 	psci_set_state(cpu, PSCI_AFFINITY_LEVEL_ON);
+ 
++	/* write the saved cntfrq */
++	cp15_write_cntfrq(cntfrq);
++
+ 	/* reset magic in TAMP register */
+ 	writel(0xFFFFFFFF, TAMP_BACKUP_MAGIC_NUMBER);
+ }
+@@ -130,6 +149,9 @@ s32 __secure psci_cpu_on(u32 function_id, u32 target_cpu, u32 pc,
+ 	if (psci_state[cpu] == PSCI_AFFINITY_LEVEL_ON)
+ 		return ARM_PSCI_RET_ALREADY_ON;
+ 
++	/* read and save cntfrq of current cpu to write on target cpu  */
++	cntfrq = cp15_read_cntfrq();
++
+ 	/* reset magic in TAMP register */
+ 	if (readl(TAMP_BACKUP_MAGIC_NUMBER))
+ 		writel(0xFFFFFFFF, TAMP_BACKUP_MAGIC_NUMBER);
 -- 
 2.17.1
 

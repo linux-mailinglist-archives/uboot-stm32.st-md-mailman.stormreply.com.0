@@ -2,73 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EF9517994B
-	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Mar 2020 20:50:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADE3C179952
+	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Mar 2020 20:52:49 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44F0FC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Mar 2020 19:50:05 +0000 (UTC)
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7024FC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Mar 2020 19:52:49 +0000 (UTC)
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+ [209.85.128.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 37040C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 915B0C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Mar 2020 19:50:01 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id r17so3983847wrj.7
+ Wed,  4 Mar 2020 19:52:47 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id m3so3165803wmi.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 04 Mar 2020 11:50:01 -0800 (PST)
+ Wed, 04 Mar 2020 11:52:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=ygBm8t6DheKdK5poVouimQ9NSram/IfFAEcpNpyOh3k=;
- b=D0tJmwpAnyTDtxsK7YEA2wk1+rs3ppEOGCDg1/gHI9XgGXskHm1KQZvJzIIJLvOEwu
- yXLN3hO6ZmSpCNEQyvboOwa+TOExq0xp7HVsbmD/1VgwxWCJSAwy7AoBDY7WAcIpUtOr
- xEGew6Pr2xlfV1wCRee3gFQVqBrz1uI2Y/WyyK2I5OSLea4SRD4pNlTHbRYRu8/lYpXB
- L/ZRu2HiBWtbU95dhfJnQpUHNKmq53eeuj52lDYKQaAf0pLsP6Bn5mXTxNoha1hju72J
- ZhS67aD7zHbHtD7IyegOf11MIZVAeUP9L+JqsV+OQCDOxj/NQrU8OxUz3lImCtJQvTia
- 59jQ==
+ bh=KHUtPOUJR1ak/IRkDk+3s5t5XT3ZlTl5e3fXGVnJ5GQ=;
+ b=ONPsHhaU3qT20CWht8FJq38plepKDNLv11qxt31kF0Th8Y2dBK4o6QR4P9kgox7YGA
+ XYE13Gwqeuu60vepqclEPQ4AZD1AERqbmvsfQlDkhSX938lcTVnqqroB/xgtDzNK2t0C
+ yGtT01v03stHZybfl73Iervm6BnHC+FeKcra9ASkrIR2zJvDmBFC+C8KBT88Bxkz8Yyq
+ MPfiHycCYd4WKZI0qjWjzTC8eP39gq8Q302/Zb+K3qK7GCVRq83+vl2HZTjUqgsLiNlN
+ q0E326RunDP3zQlfTq06MZq52JmrgCsnPoybIiLPfxrPDn/bLVNkECG0j8RtM2IZgatd
+ l15w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=ygBm8t6DheKdK5poVouimQ9NSram/IfFAEcpNpyOh3k=;
- b=l9xzozPfd1QUjRf2OT2P2cv9KT0VsHl+KB/5OsiZh7zywUmJZ228WrgjxiJ5JMws+q
- ucFti3itvkG+Ss4gb6MjU34AE32gKAeQ+6mU0vGnZZxbHOzoUYYp18PTZOQJtso3LgAx
- 1FgEG1rVWsK94LBPckawV1KO0MOOEohixraoz8sy/06mkOj1ZIRfP2MEH2q1Jec+y2y4
- SYidDVmFmftxZlMKDE+uwc8tDy1G/XvQj1kqrf5rNlC/3okiPVwjvx4IFJGozeR/tYyP
- XOHoZvSmyKhjDTLkSs09y1TWthG0PPT/PQpL5lhfpfDnJnAr4OrMsN5NajCIeo2Qx1EB
- VSIg==
-X-Gm-Message-State: ANhLgQ0Y9jG9D7esFWhjXjeNO0tzizKJpeVopRYV8uYIEKOAmz/DpEEQ
- 7v6sYLfvsof++MAcD2XJ/6TCPh9F
-X-Google-Smtp-Source: ADFU+vsU120vGWlQsEoH02XzXc/VWq/N32yBS1ZSmBvcpS0i2HyE7p5fRK+lgIe8W7RuoODjmOVxcQ==
-X-Received: by 2002:adf:f745:: with SMTP id z5mr5714394wrp.54.1583351400608;
- Wed, 04 Mar 2020 11:50:00 -0800 (PST)
+ bh=KHUtPOUJR1ak/IRkDk+3s5t5XT3ZlTl5e3fXGVnJ5GQ=;
+ b=MrOZRMEu4jBj+GiNklbYhbP5HiThlYMy5rofyIhgeIkDGrouqNNJ1hoNLkWZb9eOYT
+ bcZ/W7M8m6qU5gRi+KEWwSEdHjFbzbAvMuG6ab60zgPcHQzFLwb+GVD0NYH5hdej/woQ
+ FKjIuiwptpmQqUUQyoBb5VuGekmE0CJrHk14DR3dn0511CQ2wHlz5LTbhelKasFSpopj
+ xHryTmHlQkIrvUlj6dmSGU+tiIDCIKLcPgC6zUpju+hE6S+bxmSA2nA6U6cRej3c1alj
+ lFqo8DujtDsXiQVHfEpskS/3BtaXIggVxHs1nddbrkXstCtfiLUCqY6nwcVaXAbLlDJE
+ fi4A==
+X-Gm-Message-State: ANhLgQ3bDt37ptKhlkdHVrnZnKEjnLyu5IrqBCBLKr0PLXwOTHC8Q/Kv
+ iJdQl3ET7O2Ed4HP4fu7F7Dmgfbn
+X-Google-Smtp-Source: ADFU+vtVRPHIOWjAK6tC073Jpwr/C44/OpM7lP3Q+07QlwH4LCHBfAIWedgtmt1ZyuOYKkiJrFPeCQ==
+X-Received: by 2002:a7b:cb17:: with SMTP id u23mr5335529wmj.12.1583351566756; 
+ Wed, 04 Mar 2020 11:52:46 -0800 (PST)
 Received: from ?IPv6:2a02:8071:6cd:f600:3dff:b879:b41b:fa13?
  ([2a02:8071:6cd:f600:3dff:b879:b41b:fa13])
- by smtp.gmail.com with ESMTPSA id o16sm26217518wrj.5.2020.03.04.11.49.59
+ by smtp.gmail.com with ESMTPSA id c11sm40217811wrp.51.2020.03.04.11.52.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Mar 2020 11:49:59 -0800 (PST)
+ Wed, 04 Mar 2020 11:52:46 -0800 (PST)
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <20200218083503.5468-1-patrick.delaunay@st.com>
- <20200218083503.5468-2-patrick.delaunay@st.com>
+ <20200218083503.5468-3-patrick.delaunay@st.com>
 From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Message-ID: <6981022d-792b-7776-ac9f-00af6acb1d0e@gmail.com>
-Date: Wed, 4 Mar 2020 20:48:52 +0100
+Message-ID: <9c919bd2-87b9-0052-579a-a3fa491445dd@gmail.com>
+Date: Wed, 4 Mar 2020 20:51:38 +0100
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <20200218083503.5468-2-patrick.delaunay@st.com>
+In-Reply-To: <20200218083503.5468-3-patrick.delaunay@st.com>
 Content-Language: en-US
-Cc: Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
- ley.foon.tan@intel.com, b.galvani@gmail.com,
+Cc: Marek Vasut <marex@denx.de>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Simon Glass <sjg@chromium.org>, ley.foon.tan@intel.com, b.galvani@gmail.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 1/5] dm: clk: add stub when CONFIG_CLK
-	is desactivated
+ Michal Suchanek <msuchanek@suse.de>
+Subject: Re: [Uboot-stm32] [PATCH v4 2/5] usb: host: dwc2: add phy support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,175 +82,142 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Am 18.02.2020 um 09:34 schrieb Patrick Delaunay:
-> Add stub for functions clk_...() when CONFIG_CLK is desactivated.
+Am 18.02.2020 um 09:35 schrieb Patrick Delaunay:
+> Use generic phy to initialize the PHY associated to the
+> DWC2 device and available in the device tree.
 > 
-> This patch avoids compilation issues for driver using these API
-> without protection (#if CONFIG_IS_ENABLED(CLK))
-> 
-> For example, before this patch we have undefined reference to
-> `clk_disable_bulk') for code:
->   clk_disable_bulk(&priv->clks);
->   clk_release_bulk(&priv->clks);
+> This patch don't added dependency because when CONFIG_PHY
+> is not activated, the generic PHY function are stubbed.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 > 
-> Changes in v4:
-> - Add stub for all functions using 'struct clk' or 'struct clk_bulk'
->   after remarks on v3
+> Changes in v4: None
+> Changes in v3: None
+> Changes in v2:
+> - update dev_err
+> - update commit message
+> - change dev_err to dev_dbg for PHY function call
+> - treat dwc2_shutdown_phy error
 > 
-> Changes in v3:
-> - Add stub for clk_disable_bulk
+>  drivers/usb/host/dwc2.c | 66 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 66 insertions(+)
 > 
-> Changes in v2: None
-> 
->  include/clk.h | 101 +++++++++++++++++++++++++++++++++++++++++++-------
->  1 file changed, 88 insertions(+), 13 deletions(-)
-> 
-> diff --git a/include/clk.h b/include/clk.h
-> index 3336301815..1fb415ddc8 100644
-> --- a/include/clk.h
-> +++ b/include/clk.h
-> @@ -312,6 +312,7 @@ static inline int clk_release_bulk(struct clk_bulk *bulk)
->  	return clk_release_all(bulk->clks, bulk->count);
+> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+> index e4efaf1e59..5e7ffaddd9 100644
+> --- a/drivers/usb/host/dwc2.c
+> +++ b/drivers/usb/host/dwc2.c
+> @@ -8,6 +8,7 @@
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <errno.h>
+> +#include <generic-phy.h>
+>  #include <usb.h>
+>  #include <malloc.h>
+>  #include <memalign.h>
+> @@ -37,6 +38,7 @@ struct dwc2_priv {
+>  #ifdef CONFIG_DM_REGULATOR
+>  	struct udevice *vbus_supply;
+>  #endif
+> +	struct phy phy;
+>  #else
+>  	uint8_t *aligned_buffer;
+>  	uint8_t *status_buffer;
+> @@ -1322,13 +1324,71 @@ static int dwc2_usb_ofdata_to_platdata(struct udevice *dev)
+>  	return 0;
 >  }
 >  
-> +#if CONFIG_IS_ENABLED(CLK)
->  /**
->   * clk_request - Request a clock by provider-specific ID.
->   *
-> @@ -433,19 +434,6 @@ int clk_disable_bulk(struct clk_bulk *bulk);
->   */
->  bool clk_is_match(const struct clk *p, const struct clk *q);
+> +static int dwc2_setup_phy(struct udevice *dev)
+> +{
+> +	struct dwc2_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = generic_phy_get_by_index(dev, 0, &priv->phy);
+> +	if (ret) {
+> +		if (ret != -ENOENT) {
+
+Could you invert this logic and add a comment like "no PHY" or something?
+
+> +			dev_err(dev, "Failed to get USB PHY: %d.\n", ret);
+> +			return ret;
+> +		}
+> +		return 0;
+> +	}
+> +
+> +	ret = generic_phy_init(&priv->phy);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to init USB PHY: %d.\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = generic_phy_power_on(&priv->phy);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to power on USB PHY: %d.\n", ret);
+> +		generic_phy_exit(&priv->phy);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int dwc2_shutdown_phy(struct udevice *dev)
+> +{
+> +	struct dwc2_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	if (!generic_phy_valid(&priv->phy))
+
+A comment saying that this is for platforms without a phy driver would
+be nice.
+
+Other than that:
+Reviewed-by: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+
+> +		return 0;
+> +
+> +	ret = generic_phy_power_off(&priv->phy);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to power off USB PHY: %d.\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = generic_phy_exit(&priv->phy);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to power off USB PHY: %d.\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  static int dwc2_usb_probe(struct udevice *dev)
+>  {
+>  	struct dwc2_priv *priv = dev_get_priv(dev);
+>  	struct usb_bus_priv *bus_priv = dev_get_uclass_priv(dev);
+> +	int ret;
 >  
-> -int soc_clk_dump(void);
-> -
-> -/**
-> - * clk_valid() - check if clk is valid
-> - *
-> - * @clk:	the clock to check
-> - * @return true if valid, or false
-> - */
-> -static inline bool clk_valid(struct clk *clk)
-> -{
-> -	return clk && !!clk->dev;
-> -}
-> -
->  /**
->   * clk_get_by_id() - Get the clock by its ID
->   *
-> @@ -465,6 +453,93 @@ int clk_get_by_id(ulong id, struct clk **clkp);
->   * @return true on binded, or false on no
->   */
->  bool clk_dev_binded(struct clk *clk);
-> +
-> +#else /* CONFIG_IS_ENABLED(CLK) */
-> +
-> +static inline int clk_request(struct udevice *dev, struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_free(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline ulong clk_get_rate(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline struct clk *clk_get_parent(struct clk *clk)
-> +{
-> +	return (struct clk *)-ENOSYS;
-
-This should use ERR_PTR() to care for platforms defining
-CONFIG_ERR_PTR_OFFSET.
-
-> +}
-> +
-> +static inline long long clk_get_parent_rate(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline ulong clk_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_set_parent(struct clk *clk, struct clk *parent)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_enable(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_enable_bulk(struct clk_bulk *bulk)
-> +{
-> +	return bulk && bulk->count == 0 ? 0 : -ENOSYS;
-
-For this test to work, someone would need to set bulk->count to 0. This
-is normally done by clk_get_bulk(), but you defined it to only return an
-error.
-
-I guess it works for you because all clk_bulk objects you use are from
-the heap (which is currently zeroed out in U-Boot) or if they are on the
-stack, you have if/else code that doesn't bring you here. Still it seems
-wrong.
-
-Regards,
-Simon
-
-> +}
-> +
-> +static inline int clk_disable(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_disable_bulk(struct clk_bulk *bulk)
-> +{
-> +	return bulk && bulk->count == 0 ? 0 : -ENOSYS;
-> +}
-> +
-> +static inline bool clk_is_match(const struct clk *p, const struct clk *q)
-> +{
-> +	return false;
-> +}
-> +
-> +static inline int clk_get_by_id(ulong id, struct clk **clkp)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline bool clk_dev_binded(struct clk *clk)
-> +{
-> +	return false;
-> +}
-> +#endif /* CONFIG_IS_ENABLED(CLK) */
-> +
-> +/**
-> + * clk_valid() - check if clk is valid
-> + *
-> + * @clk:	the clock to check
-> + * @return true if valid, or false
-> + */
-> +static inline bool clk_valid(struct clk *clk)
-> +{
-> +	return clk && !!clk->dev;
-> +}
-> +
-> +int soc_clk_dump(void);
-> +
->  #endif
+>  	bus_priv->desc_before_addr = true;
 >  
->  #define clk_prepare_enable(clk) clk_enable(clk)
+> +	ret = dwc2_setup_phy(dev);
+> +	if (ret)
+> +		return ret;
+> +
+>  	return dwc2_init_common(dev, priv);
+>  }
+>  
+> @@ -1341,6 +1401,12 @@ static int dwc2_usb_remove(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = dwc2_shutdown_phy(dev);
+> +	if (ret) {
+> +		dev_dbg(dev, "Failed to shutdown USB PHY: %d.\n", ret);
+> +		return ret;
+> +	}
+> +
+>  	dwc2_uninit_common(priv->regs);
+>  
+>  	reset_release_bulk(&priv->resets);
 > 
 
 _______________________________________________

@@ -2,66 +2,43 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8459C17C541
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 19:18:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FF8217C615
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 20:13:50 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4B431C36B0E
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 18:18:17 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AF159C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 19:13:49 +0000 (UTC)
+Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 035E6C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B5F60C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Mar 2020 18:18:15 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 026IEKn5015270; Fri, 6 Mar 2020 19:18:04 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=Q5LCS7s9oQf3Zq2GpBEHCRPzBos3vDBATSO7Vk/ZWJ4=;
- b=OciKFffU24s0ooT8GbNF9Q+xYN8BEN43lIyPtXN+XqrWjoPnONwQAlDbE/7ETu2vZP6m
- yRRK4jX3BxsuUE+F1bSc1RZGyM+ppaTj5Xl6lJq/DJRW/LHtglOV+sWjbzWXUb/5lR3f
- g6+Zpu3PoIN5P7kknEaeazRvFx1Qc7ESouqbQ7xfv41gTDUvU1h9PcRBGG05KCkBGaXq
- gApseU7uz3fP0mRXuXpo870Tcu0mLmw3klk6BuhpH63ZAToH20ZHtu2FddYtIiWYtM1I
- 6s9Qfo1VL3cWrQmvrACCEmUT54G+E0xmNHN5DPYNcZy+f93cwcbbCcWKbAebx1s4yU7v 0w== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfem1h169-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 06 Mar 2020 19:18:04 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7CD2E10003B;
- Fri,  6 Mar 2020 19:18:03 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 703772AA9F5;
- Fri,  6 Mar 2020 19:18:03 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 6 Mar 2020 19:18:03 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 6 Mar 2020 19:17:58 +0100
-Message-ID: <20200306181758.12336-5-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200306181758.12336-1-patrick.delaunay@st.com>
+ Fri,  6 Mar 2020 19:13:48 +0000 (UTC)
+Received: from [10.20.204.51] (unknown [216.228.112.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id 4E3BB1C01BF;
+ Fri,  6 Mar 2020 12:13:46 -0700 (MST)
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.102.1 at avon.wwwdotorg.org
+To: Patrick Delaunay <patrick.delaunay@st.com>
 References: <20200306181758.12336-1-patrick.delaunay@st.com>
+ <20200306181758.12336-5-patrick.delaunay@st.com>
+From: Stephen Warren <swarren@wwwdotorg.org>
+Message-ID: <958c22f8-9736-bfd6-ffe7-9c49660d54ed@wwwdotorg.org>
+Date: Fri, 6 Mar 2020 12:13:45 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG5NODE1.st.com (10.75.127.13) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-06_06:2020-03-06,
- 2020-03-06 signatures=0
+In-Reply-To: <20200306181758.12336-5-patrick.delaunay@st.com>
+Content-Language: en-US
 Cc: Tom Rini <trini@konsulko.com>, Stephen Warren <swarren@nvidia.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Ovidiu Panait <ovpanait@gmail.com>, Patrick Delaunay <patrick.delaunay@st.com>,
+ u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Ovidiu Panait <ovpanait@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Vikas Manocha <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH v3 4/4] board_f.c: Insure 16 alignment of
-	start_addr_sp and reserved memory
+Subject: Re: [Uboot-stm32] [PATCH v3 4/4] board_f.c: Insure 16 alignment of
+ start_addr_sp and reserved memory
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,129 +50,29 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a function reserve_stack_aligned() to reserved memory with 16 bits
-alignment after the stack pointer (gd->start_addr_sp) and use this new
-function in board_f.c to reserve all the memory area (malloc, board, gd,
-fdt, bootstage, stacks).
+On 3/6/20 11:17 AM, Patrick Delaunay wrote:
+> Add a function reserve_stack_aligned() to reserved memory with 16 bits
+> alignment after the stack pointer (gd->start_addr_sp) and use this new
+> function in board_f.c to reserve all the memory area (malloc, board, gd,
+> fdt, bootstage, stacks).
+> 
+> This 16 byte alignment is needed for cast on struct pointer
+> for the reserved memory, for example:
+> + x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
+> + ARMv8 Instruction Set Overview: quad word, 16 bytes
+> 
+> An other alignment value could be needed for other architecture.
 
-This 16 byte alignment is needed for cast on struct pointer
-for the reserved memory, for example:
-+ x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
-+ ARMv8 Instruction Set Overview: quad word, 16 bytes
+I think the series look OK, so,
+Acked-by: Stephen Warren <swarren@nvidia.com>
 
-An other alignment value could be needed for other architecture.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
-
-Changes in v3:
-- rename reserve_sp to reserve_stack_aligned
-
-Changes in v2: None
-
- common/board_f.c | 32 ++++++++++++++++++--------------
- 1 file changed, 18 insertions(+), 14 deletions(-)
-
-diff --git a/common/board_f.c b/common/board_f.c
-index 99154f5759..2ec5dbaa68 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -472,6 +472,17 @@ static int reserve_uboot(void)
- 	return 0;
- }
- 
-+/*
-+ * reserve after start_addr_sp the requested size and make the stack pointer
-+ * 16-byte aligned, this alignment is needed for cast on the reserved memory
-+ * ref = x86_64 ABI: https://reviews.llvm.org/D30049: 16 bytes
-+ *     = ARMv8 Instruction Set Overview: quad word, 16 bytes
-+ */
-+static unsigned long reserve_stack_aligned(size_t size)
-+{
-+	return ALIGN_DOWN(gd->start_addr_sp - size, 16);
-+}
-+
- #ifdef CONFIG_SYS_NONCACHED_MEMORY
- static int reserve_noncached(void)
- {
-@@ -497,7 +508,7 @@ static int reserve_noncached(void)
- /* reserve memory for malloc() area */
- static int reserve_malloc(void)
- {
--	gd->start_addr_sp = gd->start_addr_sp - TOTAL_MALLOC_LEN;
-+	gd->start_addr_sp = reserve_stack_aligned(TOTAL_MALLOC_LEN);
- 	debug("Reserving %dk for malloc() at: %08lx\n",
- 	      TOTAL_MALLOC_LEN >> 10, gd->start_addr_sp);
- #ifdef CONFIG_SYS_NONCACHED_MEMORY
-@@ -511,7 +522,7 @@ static int reserve_malloc(void)
- static int reserve_board(void)
- {
- 	if (!gd->bd) {
--		gd->start_addr_sp -= sizeof(bd_t);
-+		gd->start_addr_sp = reserve_stack_aligned(sizeof(bd_t));
- 		gd->bd = (bd_t *)map_sysmem(gd->start_addr_sp, sizeof(bd_t));
- 		memset(gd->bd, '\0', sizeof(bd_t));
- 		debug("Reserving %zu Bytes for Board Info at: %08lx\n",
-@@ -530,7 +541,7 @@ static int setup_machine(void)
- 
- static int reserve_global_data(void)
- {
--	gd->start_addr_sp -= sizeof(gd_t);
-+	gd->start_addr_sp = reserve_stack_aligned(sizeof(gd_t));
- 	gd->new_gd = (gd_t *)map_sysmem(gd->start_addr_sp, sizeof(gd_t));
- 	debug("Reserving %zu Bytes for Global Data at: %08lx\n",
- 	      sizeof(gd_t), gd->start_addr_sp);
-@@ -548,7 +559,7 @@ static int reserve_fdt(void)
- 	if (gd->fdt_blob) {
- 		gd->fdt_size = ALIGN(fdt_totalsize(gd->fdt_blob) + 0x1000, 32);
- 
--		gd->start_addr_sp -= gd->fdt_size;
-+		gd->start_addr_sp = reserve_stack_aligned(gd->fdt_size);
- 		gd->new_fdt = map_sysmem(gd->start_addr_sp, gd->fdt_size);
- 		debug("Reserving %lu Bytes for FDT at: %08lx\n",
- 		      gd->fdt_size, gd->start_addr_sp);
-@@ -563,12 +574,7 @@ static int reserve_bootstage(void)
- #ifdef CONFIG_BOOTSTAGE
- 	int size = bootstage_get_size();
- 
--	gd->start_addr_sp -= size;
--	/*
--	 * Insure that start_addr_sp is aligned down to reserve enough
--	 * space for new_bootstage
--	 */
--	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp, 16);
-+	gd->start_addr_sp = reserve_stack_aligned(size);
- 	gd->new_bootstage = map_sysmem(gd->start_addr_sp, size);
- 	debug("Reserving %#x Bytes for bootstage at: %08lx\n", size,
- 	      gd->start_addr_sp);
-@@ -585,8 +591,7 @@ __weak int arch_reserve_stacks(void)
- static int reserve_stacks(void)
- {
- 	/* make stack pointer 16-byte aligned */
--	gd->start_addr_sp -= 16;
--	gd->start_addr_sp &= ~0xf;
-+	gd->start_addr_sp = reserve_stack_aligned(16);
- 
- 	/*
- 	 * let the architecture-specific code tailor gd->start_addr_sp and
-@@ -598,8 +603,7 @@ static int reserve_stacks(void)
- static int reserve_bloblist(void)
- {
- #ifdef CONFIG_BLOBLIST
--	gd->start_addr_sp &= ~0xf;
--	gd->start_addr_sp -= CONFIG_BLOBLIST_SIZE;
-+	gd->start_addr_sp = reserve_stack_aligned(CONFIG_BLOBLIST_SIZE);
- 	gd->new_bloblist = map_sysmem(gd->start_addr_sp, CONFIG_BLOBLIST_SIZE);
- #endif
- 
--- 
-2.17.1
-
+Nit: Ensure not insure, in a number of places.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0948C17B9BD
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:02:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 015F117B9BE
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:02:09 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ADF37C36B0F
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:02:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF47EC36B0D
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:02:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 69AAAC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E832FC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Mar 2020 10:02:03 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri,  6 Mar 2020 10:02:04 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0269wB5M003889; Fri, 6 Mar 2020 11:01:58 +0100
+ 0269sQ0o018606; Fri, 6 Mar 2020 11:01:58 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=CVMoFE01dDIf5/HFMBjiWGETD2O6FImJyCP/AIjGmtw=;
- b=VmUmJkt5uGbrB5h517+hpn47MsusbAhkT+UH4xPaw2t/d0AjG4UYv1n2VXkwOrBqFI3T
- HS6yof7STuFLI3Y2rsDdSX5vqpkQuidkJj2hr47NMCSkd23jH5D6nvXCC/GLP8xjwzWL
- 6N2fhuF/B3bTwqZm1zLwPl6zdAHIqScQNYRxGWZvAmE1hc5/L8L5JovG4p0YmKFNF+5D
- /p2OHZCLe4VHY8A/mKyvHFOh/hiE8PnD05+ZUjWiKn8SWp2it4JQ+2UaUB1qUzyjdyTd
- ZaQnzGHdlwWCMPi5RppIo0RuF5w//jfJI4crkLx9oNwTDJR8TG1ASYo6UM/C0RMp9XaM IQ== 
+ bh=bdhhx71SxojWtg+fiqWU1f9xy/ySAdLKi1LcsoHwc34=;
+ b=W5RVqGHxgZ5rpyPQm4eHmkJFSMhgpJcBljuYCPlLYxLnuLAAFubei10DbUm/a/RS++/o
+ oSVgIx4Ls5/DYtzkn/ba9fwQjXzRjoEH2ftax1RDrgmkEK5n/0GSB2uI9HmRP65DewLH
+ e7gBv+ohk70yDe5p1M5Cy7Xaub70wFWRPNjN1BvhPAmmq7jJRu35dotuszA2G5rZOCAg
+ VpD9zaPxgGSmvgpWipr0ZWs1jeRP1CuOhgfnSj+XFJo7lGsqmS1DHFuuiEOoXfiulKyA
+ U0sk4ZSF6kUJJauLxhTNegOz2jEmUoRED+ddQ2lnaox/KGvOqasZMIhIGtD8YpJNfc17 Dg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfem1e9wm-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yfea7ecgx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 06 Mar 2020 11:01:58 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5065100038;
- Fri,  6 Mar 2020 11:01:53 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 89BF7100039;
+ Fri,  6 Mar 2020 11:01:54 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 98B432A59CF;
- Fri,  6 Mar 2020 11:01:53 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7D54D2A59CF;
+ Fri,  6 Mar 2020 11:01:54 +0100 (CET)
 Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 6 Mar 2020 11:01:52 +0100
+ Fri, 6 Mar 2020 11:01:54 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 6 Mar 2020 11:01:39 +0100
-Message-ID: <20200306100140.27582-5-patrick.delaunay@st.com>
+Date: Fri, 6 Mar 2020 11:01:40 +0100
+Message-ID: <20200306110136.v5.5.I43934c501010bbca1ee5f7c7780e3999eefc425f@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200306100140.27582-1-patrick.delaunay@st.com>
 References: <20200306100140.27582-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-03-06_02:2020-03-05,
@@ -61,7 +61,8 @@ Cc: Marek Vasut <marex@denx.de>,
  ley.foon.tan@intel.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Michal Suchanek <msuchanek@suse.de>
-Subject: [Uboot-stm32] [PATCH v5 4/5] usb: host: dwc2: force reset assert
+Subject: [Uboot-stm32] [PATCH v5 5/5] usb: host: dwc2: add trace to have
+	clean usb start
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,18 +79,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Assert reset before deassert in dwc2_reset;
-this patch solve issues when the DWC2 registers are already
-initialized with value incompatible with host mode.
+Solve issue for the display of "usb start" command on stm32mp1
+because one carriage return is missing in DWC2 probe.
 
-Force a hardware reset of the IP reset all the DWC2 registers at
-default value, the host driver start with a clean state
-(Core Soft reset doen in dwc_otg_core_reset is not enought
- to reset all register).
+Before the patch:
 
-The error can occurs in U-Boot when DWC2 device gadget driver
-force device mode (called by ums or dfu command, before to execute
-the usb start command).
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000:    Bus usbh-ehci@5800d000:   USB EHCI 1.00
+
+after the patch:
+
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000: USB DWC2
+Bus usbh-ehci@5800d000: USB EHCI 1.00
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
@@ -97,25 +101,24 @@ Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 Changes in v5: None
 Changes in v4: None
 Changes in v3: None
-Changes in v2:
-- add clk_disable_bulk in dwc2_usb_remove
+Changes in v2: None
 
  drivers/usb/host/dwc2.c | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index b1b79d0a18..640ae3e730 100644
+index 640ae3e730..f25ed2dab0 100644
 --- a/drivers/usb/host/dwc2.c
 +++ b/drivers/usb/host/dwc2.c
-@@ -1151,6 +1151,8 @@ static int dwc2_reset(struct udevice *dev)
- 			return ret;
- 	}
+@@ -1219,6 +1219,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
+ 	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
+ 		mdelay(1000);
  
-+	/* force reset to clear all IP register */
-+	reset_assert_bulk(&priv->resets);
- 	ret = reset_deassert_bulk(&priv->resets);
- 	if (ret) {
- 		reset_release_bulk(&priv->resets);
++	printf("USB DWC2\n");
++
+ 	return 0;
+ }
+ 
 -- 
 2.17.1
 

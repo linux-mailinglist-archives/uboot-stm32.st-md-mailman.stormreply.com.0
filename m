@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C1BC17B9F7
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:14:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B3C317B9FB
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:14:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2C8BDC36B0E
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:14:39 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF6A3C36B13
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:14:40 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 972A4C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BCE73C36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Fri,  6 Mar 2020 10:14:37 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 026AEQGX020360; Fri, 6 Mar 2020 11:14:36 +0100
+ 026ADsaP020437; Fri, 6 Mar 2020 11:14:36 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=wGOk8JiQfJwAoJnmUsIl1Ref4ylqxkCrLxqU/M5jPug=;
- b=cNkSb0LXMT8qqd50QzAs3OmeFGnF5b6gDwe0UjAfUTqxCuru4jR1y2YdzFKiyh4esfzT
- xwf8hyn8WjaQGzMBq0ueuBNVK/iiJVbpMox+rx63dvyj0iaRUZ6dzULSPbDa4A/SMiCg
- vQMIl78SPX7g80PrWvVpdxRvt6qTsZFqmlQvuqOil7/EPMDmgGj/jxQDBWVbvbuEwgqr
- Xx3+Hl1aDdVmbIClbYnck/lc2+oFsZUgGcbsA8eblFbffnnB1nWeed+I7eHv9MgiPds3
- J+gnIbajHAmjanSGKdFaI1fIt9ZubUKUiJtt/CIbny5MEzyuCGggidQfe0K4cZjTSpbY QA== 
+ bh=/n/3t7Bn4p6lIGVyEQVdH0au5Aj7GOCwjEBl76iLjpk=;
+ b=Xb2q/cQYAZhGr7i7hkuIYEAhg98Q7OsAM/qz+y+4+0fBrT5JDqNHe6KbAzXimwbHAJCv
+ ccoS1QOR5xj3A8jQ8xL8XRs7Zg+N6orre1k1ZjTdKnkoiOMSumxIBXOcgJol2qKWWxZY
+ zq0dXnamq3LENi30FhqQIjm81kjz52h2h/5acploaQVopH0qMOgzhuqTb5T2P69frkdb
+ lvvwf4oW7ZDxy3grns44ewJIqFYZ4GgFz/ezRJpCYAuV3Qb90jhsy1JGg4Gynt9uSymy
+ iWSbMYUt0zys9r541rs/FEJuZkhu0CMzTjpdEGucjto9L4W/zFGjKn6HJZL3kTAIzVpe Cw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yffqqegs2-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yfdydex1k-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 06 Mar 2020 11:14:36 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B4B2610003B;
- Fri,  6 Mar 2020 11:14:35 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6887210003E;
+ Fri,  6 Mar 2020 11:14:36 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AA46D2A7189;
- Fri,  6 Mar 2020 11:14:35 +0100 (CET)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 610B52A7189;
+ Fri,  6 Mar 2020 11:14:36 +0100 (CET)
+Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 6 Mar 2020 11:14:35 +0100
+ Fri, 6 Mar 2020 11:14:36 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 6 Mar 2020 11:14:09 +0100
-Message-ID: <20200306111355.7.I0f31274f26e4299269ef3c7d5a581d2abe96aad2@changeid>
+Date: Fri, 6 Mar 2020 11:14:10 +0100
+Message-ID: <20200306111355.8.I2ed443e2c15db6b007f836254b3753da9b06e76d@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200306101412.15376-1-patrick.delaunay@st.com>
 References: <20200306101412.15376-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-03-06_02:2020-03-05,
  2020-03-06 signatures=0
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 7/9] ram: stm32mp1_ddr: fix self refresh
-	disable during DQS training
+Subject: [Uboot-stm32] [PATCH 8/9] ram: stm32mp1: reduce delay after BIST
+	reset for tuning
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,52 +75,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-DDRCTRL_PWRCTL.SELFREF_EN needs to be reset before DQS training step, not
-to enter in self refresh mode during the execution of this phase.
-Depending on settings, it can be set after the DQS training.
+Reduce the delay after BIST delay, from 1ms to 10us
+which is enough accoriding datasheet.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/ram/stm32mp1/stm32mp1_ddr.c      | 5 ++++-
- drivers/ram/stm32mp1/stm32mp1_ddr_regs.h | 1 +
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ drivers/ram/stm32mp1/stm32mp1_tuning.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-index a87914f2d5..b9300dd6d1 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-@@ -639,7 +639,8 @@ void stm32mp1_refresh_disable(struct stm32mp1_ddrctl *ctl)
- 	start_sw_done(ctl);
- 	/* quasi-dynamic register update*/
- 	setbits_le32(&ctl->rfshctl3, DDRCTRL_RFSHCTL3_DIS_AUTO_REFRESH);
--	clrbits_le32(&ctl->pwrctl, DDRCTRL_PWRCTL_POWERDOWN_EN);
-+	clrbits_le32(&ctl->pwrctl, DDRCTRL_PWRCTL_POWERDOWN_EN |
-+				   DDRCTRL_PWRCTL_SELFREF_EN);
- 	clrbits_le32(&ctl->dfimisc, DDRCTRL_DFIMISC_DFI_INIT_COMPLETE_EN);
- 	wait_sw_done_ack(ctl);
- }
-@@ -652,6 +653,8 @@ void stm32mp1_refresh_restore(struct stm32mp1_ddrctl *ctl,
- 		clrbits_le32(&ctl->rfshctl3, DDRCTRL_RFSHCTL3_DIS_AUTO_REFRESH);
- 	if (pwrctl & DDRCTRL_PWRCTL_POWERDOWN_EN)
- 		setbits_le32(&ctl->pwrctl, DDRCTRL_PWRCTL_POWERDOWN_EN);
-+	if ((pwrctl & DDRCTRL_PWRCTL_SELFREF_EN))
-+		setbits_le32(&ctl->pwrctl, DDRCTRL_PWRCTL_SELFREF_EN);
- 	setbits_le32(&ctl->dfimisc, DDRCTRL_DFIMISC_DFI_INIT_COMPLETE_EN);
- 	wait_sw_done_ack(ctl);
- }
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-index 9d33186b3a..afd93c518e 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-+++ b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-@@ -260,6 +260,7 @@ struct stm32mp1_ddrphy {
+diff --git a/drivers/ram/stm32mp1/stm32mp1_tuning.c b/drivers/ram/stm32mp1/stm32mp1_tuning.c
+index 07d57d496c..3013b7b667 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_tuning.c
++++ b/drivers/ram/stm32mp1/stm32mp1_tuning.c
+@@ -402,7 +402,7 @@ run:
+ 		writel(rand(), &phy->bistlsr);
  
- #define DDRCTRL_MRSTAT_MR_WR_BUSY		BIT(0)
+ 	/* some delay to reset BIST */
+-	mdelay(1);
++	udelay(10);
  
-+#define DDRCTRL_PWRCTL_SELFREF_EN		BIT(0)
- #define DDRCTRL_PWRCTL_POWERDOWN_EN		BIT(1)
- #define DDRCTRL_PWRCTL_SELFREF_SW		BIT(5)
- 
+ 	/*Perform BIST Run*/
+ 	clrsetbits_le32(&phy->bistrr,
 -- 
 2.17.1
 

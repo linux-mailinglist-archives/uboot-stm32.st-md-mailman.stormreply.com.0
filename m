@@ -2,63 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14ACE17B9FC
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:14:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6968917BBA7
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 12:28:38 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C882FC36B14
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:14:40 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2004EC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:28:38 +0000 (UTC)
+Received: from mail-vs1-f66.google.com (mail-vs1-f66.google.com
+ [209.85.217.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88265C36B0F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1B04AC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Mar 2020 10:14:38 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 026AERuX018889; Fri, 6 Mar 2020 11:14:37 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=OPfn41pvtDEBVo2BMLcUpVR5cIG1BLjoBhV2iRvredQ=;
- b=VhpHwNx2frSU1NWaED7yIAL/GsyG5cYMEURR2adQPhKXlhp6WMtAEVa3ZEGCuLapK1OV
- px6zOB4gKyNgO96jgg+/38Idur68B4IGskFn8KJLGO1Dp7Q1ilWUQssOu67eqNsfEWIh
- qqm3LNow7qliTi+1b83dwTMHVe4uJCXDY/yqGUO7Rha/lFVc2GDUrxm0+LegiaJ2JMsK
- QH3vmFXTnWlFF2QXJKNaWCQHCPONyJppogBwxstJr96tTLr52ajJKG9LKAX1Tskd+Jkb
- yUAEoLOsF8YSL2z+YKQv2xTHypByR2g5Js8/USKV5VslG8Lseh4MPiJnU7b+3lgaOHEB 8w== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfea7ef40-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 06 Mar 2020 11:14:37 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D61110002A;
- Fri,  6 Mar 2020 11:14:37 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 340AD2A7189;
- Fri,  6 Mar 2020 11:14:37 +0100 (CET)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 6 Mar 2020 11:14:36 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 6 Mar 2020 11:14:11 +0100
-Message-ID: <20200306101412.15376-2-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200306101412.15376-1-patrick.delaunay@st.com>
-References: <20200306101412.15376-1-patrick.delaunay@st.com>
+ Fri,  6 Mar 2020 11:28:36 +0000 (UTC)
+Received: by mail-vs1-f66.google.com with SMTP id n6so1297323vsc.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 06 Mar 2020 03:28:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=7jhubb0iYw1eKE46a+S/mhLtR0PjqLjwxc0UwH4v/SY=;
+ b=EGwYLGbH0z2zQelU1uTCAdJQt4r6904eAOCqYbIkhSnck+UwpbGmijlJyGXhBHpRWt
+ JcLmJoD4H01A+Wx2HyRCLvUDjYgbhZ1MrbC0e96rvvhV8MkW+LJZLq+nb2fhzo63z3Fh
+ B4cBjNb/ShupdMr6v87Y38/6TUHjY+DE3M6/ipgtsH+pkUjBjmobPS6I5W3T+1vIJX48
+ ZOKfE3PRA/gpB0eimmpkq96fMW4uTSRy5SAZUfJIf1Itrizs/aAcTmjyvx85zTa7UvET
+ hBdHlReku4lER311PhM/Zz6IAy9zFW+MfZQ3OGN8rIkj4hyLqM3uQjwGb3X15flTOIxN
+ bYOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=7jhubb0iYw1eKE46a+S/mhLtR0PjqLjwxc0UwH4v/SY=;
+ b=MtsesuXJ/UV0XtPIwqQGts1w+YHFbK/zn7SXROighY9mw+3hHMYe63Fqyw8ded/tqX
+ wlG9o63oR7x7EyKTVAf/DflkvhsYvdTax5M9nEeXhtE15cZEUsYkuBlRp+kmeu5ya09j
+ IEVJALOgvxvk/CwOBCjb2u62ZgwaVAJOaoFKYNp7TYgJpfq3cYyKd5JNlh17lTgOrQnx
+ e982SqlecRUuNY9PMNz7m3PEfzRCtueaWxwV68Q0RIwAkaV/bwOrgLgCSHkFeqzlf4es
+ Gi3BDbrbGRF1UPMQjpoP/FdOnNtAHh5Py7YMPQX32KdC5AdmacBh6nBjeRdcJpJKK5el
+ lXjQ==
+X-Gm-Message-State: ANhLgQ2fMLqpAffWl6Y393AIkFr6cjuoqdm4a/rFQOutCtq7R1sHqVIa
+ E0f9baGZyG+Yulz+z9zl4p/o4CTGfnBvq2awyw8=
+X-Google-Smtp-Source: ADFU+vu4FsmviGoydd2O/HvuC4hkXsDv/dLj4I3A6HiYM3/xg8oBtXy+5Fwrdrl/x2E/58jtFnc/f86331F3x6IEgUY=
+X-Received: by 2002:a67:6483:: with SMTP id y125mr1735540vsb.212.1583494114814; 
+ Fri, 06 Mar 2020 03:28:34 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-06_02:2020-03-05,
- 2020-03-06 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 9/9] ram: stm32mp1: the property st,
-	phy-cal becomes optional
+References: <20200306100140.27582-1-patrick.delaunay@st.com>
+ <20200306100140.27582-2-patrick.delaunay@st.com>
+In-Reply-To: <20200306100140.27582-2-patrick.delaunay@st.com>
+From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Date: Fri, 6 Mar 2020 12:28:23 +0100
+Message-ID: <CAAh8qsxjEBGyDicSsEJJ0fsn=X6JDz9=N4GYkm5EgrMcrK=rOQ@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Ley Foon Tan <ley.foon.tan@intel.com>, b.galvani@gmail.com,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v5 1/5] dm: clk: add stub when CONFIG_CLK
+	is deactivated
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,241 +76,212 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This parameter "st,phy-cal" becomes optional and when it is
-absent the built-in PHY calibration is done.
+On Fri, Mar 6, 2020 at 11:01 AM Patrick Delaunay
+<patrick.delaunay@st.com> wrote:
+>
+> Add stub for functions clk_...() when CONFIG_CLK is deactivated.
+>
+> This patch avoids compilation issues for driver using these API
+> without protection (#if CONFIG_IS_ENABLED(CLK))
+>
+> For example, before this patch we have undefined reference to
+> `clk_disable_bulk') for code:
+>   clk_disable_bulk(&priv->clks);
+>   clk_release_bulk(&priv->clks);
+>
+> The bulk stub set and test bulk->count to avoid error for the sequence:
+>
+>   clk_get_bulk(dev, &priv->bulk);
+>         ....
+>   if (clk_enable(&priv>bulk))
+>         return -EIO;
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+> Changes in v5:
+> - use ERR_PTR in clk_get_parent()
+> - force bulk->count = 0 in clk_get_bulk to avoid issue
+>   for next call of clk_enable_bulk / clk_enable_bulk
 
-It is the case in the helper dtsi file "stm32mp15-ddr.dtsi"
-except if DDR_PHY_CAL_SKIP is defined.
+I wonder if this is correct. I think it only produces additional code. If you
+always set bulk->count to 0, the enable code will never fail.
 
-This patch also impact the ddr interactive mode
-- the registers of the param 'phy.cal' are initialized to 0 when
-  "st,phy-cal" is not present in device tree (default behavior when
-  DDR_PHY_CAL_SKIP is not activated)
-- the info 'cal' field can be use to change the calibration behavior
-  - cal=1 => use param phy.cal to initialize the PHY, built-in training
-             is skipped
-  - cal=0 => param phy.cal is absent, built-in training is used (default)
+However, the enable function should never be executed as enable returns an
+error. I can imagine the *disable* function could be called, but the return
+value of this function is currently only handled in clk_sandbox_test.c...
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+Wouldn't it work to just remove all checks for bulk->count and let *all*
+redefined functions return a constant (success or failure)? That would help
+to keep the code small.
 
- arch/arm/dts/stm32mp15-ddr.dtsi               |  3 ++
- .../memory-controllers/st,stm32mp1-ddr.txt    |  2 ++
- drivers/ram/stm32mp1/stm32mp1_ddr.c           | 19 +++++++----
- drivers/ram/stm32mp1/stm32mp1_ddr.h           |  1 +
- drivers/ram/stm32mp1/stm32mp1_interactive.c   | 13 ++++++-
- drivers/ram/stm32mp1/stm32mp1_ram.c           | 34 ++++++++++++++-----
- 6 files changed, 56 insertions(+), 16 deletions(-)
+Looking at linux, clock disable functions have *no* return value that needs
+to be checked, clock enable functions return success when compiled without
+clock support.
 
-diff --git a/arch/arm/dts/stm32mp15-ddr.dtsi b/arch/arm/dts/stm32mp15-ddr.dtsi
-index 38f29bb789..8b20b5e173 100644
---- a/arch/arm/dts/stm32mp15-ddr.dtsi
-+++ b/arch/arm/dts/stm32mp15-ddr.dtsi
-@@ -133,6 +133,7 @@
- 				DDR_MR3
- 			>;
- 
-+#ifdef DDR_PHY_CAL_SKIP
- 			st,phy-cal = <
- 				DDR_DX0DLLCR
- 				DDR_DX0DQTR
-@@ -148,6 +149,8 @@
- 				DDR_DX3DQSTR
- 			>;
- 
-+#endif
-+
- 			status = "okay";
- 		};
- 	};
-diff --git a/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt b/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
-index ee708ce92c..ac6a7df432 100644
---- a/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
-+++ b/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
-@@ -129,6 +129,8 @@ phyc attributes:
- 		MR3
- 
- - st,phy-cal	: phy cal depending of calibration or tuning of DDR
-+	This parameter is optional; when it is absent the built-in PHY
-+	calibration is done.
- 	for STM32MP15x: 12 values are requested in this order
- 		DX0DLLCR
- 		DX0DQTR
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-index b9300dd6d1..11b14ae652 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-@@ -769,7 +769,8 @@ start:
-  */
- 	set_reg(priv, REGPHY_REG, &config->p_reg);
- 	set_reg(priv, REGPHY_TIMING, &config->p_timing);
--	set_reg(priv, REGPHY_CAL, &config->p_cal);
-+	if (config->p_cal_present)
-+		set_reg(priv, REGPHY_CAL, &config->p_cal);
- 
- 	if (INTERACTIVE(STEP_PHY_INIT))
- 		goto start;
-@@ -804,13 +805,16 @@ start:
- 
- 	wait_operating_mode(priv, DDRCTRL_STAT_OPERATING_MODE_NORMAL);
- 
--	debug("DDR DQS training : ");
-+	if (config->p_cal_present) {
-+		debug("DDR DQS training skipped.\n");
-+	} else {
-+		debug("DDR DQS training : ");
- /*  8. Disable Auto refresh and power down by setting
-  *    - RFSHCTL3.dis_au_refresh = 1
-  *    - PWRCTL.powerdown_en = 0
-  *    - DFIMISC.dfiinit_complete_en = 0
-  */
--	stm32mp1_refresh_disable(priv->ctl);
-+		stm32mp1_refresh_disable(priv->ctl);
- 
- /*  9. Program PUBL PGCR to enable refresh during training and rank to train
-  *     not done => keep the programed value in PGCR
-@@ -818,14 +822,15 @@ start:
- 
- /* 10. configure PUBL PIR register to specify which training step to run */
- 	/* warning : RVTRN  is not supported by this PUBL */
--	stm32mp1_ddrphy_init(priv->phy, DDRPHYC_PIR_QSTRN);
-+		stm32mp1_ddrphy_init(priv->phy, DDRPHYC_PIR_QSTRN);
- 
- /* 11. monitor PUB PGSR.IDONE to poll cpmpletion of training sequence */
--	ddrphy_idone_wait(priv->phy);
-+		ddrphy_idone_wait(priv->phy);
- 
- /* 12. set back registers in step 8 to the orginal values if desidered */
--	stm32mp1_refresh_restore(priv->ctl, config->c_reg.rfshctl3,
--				 config->c_reg.pwrctl);
-+		stm32mp1_refresh_restore(priv->ctl, config->c_reg.rfshctl3,
-+					 config->c_reg.pwrctl);
-+	} /* if (config->p_cal_present) */
- 
- 	/* enable uMCTL2 AXI port 0 and 1 */
- 	setbits_le32(&priv->ctl->pctrl_0, DDRCTRL_PCTRL_N_PORT_EN);
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.h b/drivers/ram/stm32mp1/stm32mp1_ddr.h
-index 52b748f3ca..4998f04439 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ddr.h
-+++ b/drivers/ram/stm32mp1/stm32mp1_ddr.h
-@@ -170,6 +170,7 @@ struct stm32mp1_ddr_config {
- 	struct stm32mp1_ddrphy_reg p_reg;
- 	struct stm32mp1_ddrphy_timing p_timing;
- 	struct stm32mp1_ddrphy_cal p_cal;
-+	bool p_cal_present;
- };
- 
- int stm32mp1_ddr_clk_enable(struct ddr_info *priv, u32 mem_speed);
-diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-index cedf92cb5f..805c9ddaad 100644
---- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-@@ -106,7 +106,7 @@ static void stm32mp1_do_usage(void)
- 		"help                       displays help\n"
- 		"info                       displays DDR information\n"
- 		"info  <param> <val>        changes DDR information\n"
--		"      with <param> = step, name, size or speed\n"
-+		"      with <param> = step, name, size, speed or cal\n"
- 		"freq                       displays the DDR PHY frequency in kHz\n"
- 		"freq  <freq>               changes the DDR PHY frequency\n"
- 		"param [type|reg]           prints input parameters\n"
-@@ -160,6 +160,7 @@ static void stm32mp1_do_info(struct ddr_info *priv,
- 		printf("name = %s\n", config->info.name);
- 		printf("size = 0x%x\n", config->info.size);
- 		printf("speed = %d kHz\n", config->info.speed);
-+		printf("cal = %d\n", config->p_cal_present);
- 		return;
- 	}
- 
-@@ -208,6 +209,16 @@ static void stm32mp1_do_info(struct ddr_info *priv,
- 		}
- 		return;
- 	}
-+	if (!strcmp(argv[1], "cal")) {
-+		if (strict_strtoul(argv[2], 10, &value) < 0 ||
-+		    (value != 0 && value != 1)) {
-+			printf("invalid value %s\n", argv[2]);
-+		} else {
-+			config->p_cal_present = value;
-+			printf("cal = %d\n", config->p_cal_present);
-+		}
-+		return;
-+	}
- 	printf("argument %s invalid\n", argv[1]);
- }
- 
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-index eb78f1198d..b1e593f86b 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ram.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-@@ -65,18 +65,22 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
- 	struct clk axidcg;
- 	struct stm32mp1_ddr_config config;
- 
--#define PARAM(x, y) \
--	{ x,\
--	  offsetof(struct stm32mp1_ddr_config, y),\
--	  sizeof(config.y) / sizeof(u32)}
-+#define PARAM(x, y, z)							\
-+	{	.name = x,						\
-+		.offset = offsetof(struct stm32mp1_ddr_config, y),	\
-+		.size = sizeof(config.y) / sizeof(u32),			\
-+		.present = z,						\
-+	}
- 
--#define CTL_PARAM(x) PARAM("st,ctl-"#x, c_##x)
--#define PHY_PARAM(x) PARAM("st,phy-"#x, p_##x)
-+#define CTL_PARAM(x) PARAM("st,ctl-"#x, c_##x, NULL)
-+#define PHY_PARAM(x) PARAM("st,phy-"#x, p_##x, NULL)
-+#define PHY_PARAM_OPT(x) PARAM("st,phy-"#x, p_##x, &config.p_##x##_present)
- 
- 	const struct {
- 		const char *name; /* name in DT */
- 		const u32 offset; /* offset in config struct */
- 		const u32 size;   /* size of parameters */
-+		bool * const present;  /* presence indication for opt */
- 	} param[] = {
- 		CTL_PARAM(reg),
- 		CTL_PARAM(timing),
-@@ -84,7 +88,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
- 		CTL_PARAM(perf),
- 		PHY_PARAM(reg),
- 		PHY_PARAM(timing),
--		PHY_PARAM(cal)
-+		PHY_PARAM_OPT(cal)
- 	};
- 
- 	config.info.speed = dev_read_u32_default(dev, "st,mem-speed", 0);
-@@ -103,11 +107,25 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
- 					 param[idx].size);
- 		debug("%s: %s[0x%x] = %d\n", __func__,
- 		      param[idx].name, param[idx].size, ret);
--		if (ret) {
-+		if (ret &&
-+		    (ret != -FDT_ERR_NOTFOUND || !param[idx].present)) {
- 			pr_err("%s: Cannot read %s, error=%d\n",
- 			       __func__, param[idx].name, ret);
- 			return -EINVAL;
- 		}
-+		if (param[idx].present) {
-+			/* save presence of optional parameters */
-+			*param[idx].present = true;
-+			if (ret == -FDT_ERR_NOTFOUND) {
-+				*param[idx].present = false;
-+#ifdef CONFIG_STM32MP1_DDR_INTERACTIVE
-+				/* reset values if used later */
-+				memset((void *)((u32)&config +
-+						param[idx].offset),
-+					0, param[idx].size * sizeof(u32));
-+#endif
-+			}
-+		}
- 	}
- 
- 	ret = clk_get_by_name(dev, "axidcg", &axidcg);
--- 
-2.17.1
+Regards,
+Simon
 
+> - update commit message
+>
+> Changes in v4:
+> - Add stub for all functions using 'struct clk' or 'struct clk_bulk'
+>   after remarks on v3
+>
+> Changes in v3:
+> - Add stub for clk_disable_bulk
+>
+> Changes in v2: None
+>
+>  include/clk.h | 104 +++++++++++++++++++++++++++++++++++++++++++-------
+>  1 file changed, 91 insertions(+), 13 deletions(-)
+>
+> diff --git a/include/clk.h b/include/clk.h
+> index 3336301815..ca8f1cfec7 100644
+> --- a/include/clk.h
+> +++ b/include/clk.h
+> @@ -9,6 +9,7 @@
+>  #define _CLK_H_
+>
+>  #include <dm/ofnode.h>
+> +#include <linux/err.h>
+>  #include <linux/errno.h>
+>  #include <linux/types.h>
+>
+> @@ -249,6 +250,8 @@ static inline int clk_get_by_index(struct udevice *dev, int index,
+>
+>  static inline int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
+>  {
+> +       if (bulk)
+> +               bulk->count = 0;
+>         return -ENOSYS;
+>  }
+>
+> @@ -312,6 +315,7 @@ static inline int clk_release_bulk(struct clk_bulk *bulk)
+>         return clk_release_all(bulk->clks, bulk->count);
+>  }
+>
+> +#if CONFIG_IS_ENABLED(CLK)
+>  /**
+>   * clk_request - Request a clock by provider-specific ID.
+>   *
+> @@ -433,19 +437,6 @@ int clk_disable_bulk(struct clk_bulk *bulk);
+>   */
+>  bool clk_is_match(const struct clk *p, const struct clk *q);
+>
+> -int soc_clk_dump(void);
+> -
+> -/**
+> - * clk_valid() - check if clk is valid
+> - *
+> - * @clk:       the clock to check
+> - * @return true if valid, or false
+> - */
+> -static inline bool clk_valid(struct clk *clk)
+> -{
+> -       return clk && !!clk->dev;
+> -}
+> -
+>  /**
+>   * clk_get_by_id() - Get the clock by its ID
+>   *
+> @@ -465,6 +456,93 @@ int clk_get_by_id(ulong id, struct clk **clkp);
+>   * @return true on binded, or false on no
+>   */
+>  bool clk_dev_binded(struct clk *clk);
+> +
+> +#else /* CONFIG_IS_ENABLED(CLK) */
+> +
+> +static inline int clk_request(struct udevice *dev, struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int clk_free(struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline ulong clk_get_rate(struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline struct clk *clk_get_parent(struct clk *clk)
+> +{
+> +       return ERR_PTR(-ENOSYS);
+> +}
+> +
+> +static inline long long clk_get_parent_rate(struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline ulong clk_set_rate(struct clk *clk, ulong rate)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int clk_set_parent(struct clk *clk, struct clk *parent)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int clk_enable(struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int clk_enable_bulk(struct clk_bulk *bulk)
+> +{
+> +       return bulk && bulk->count == 0 ? 0 : -ENOSYS;
+> +}
+> +
+> +static inline int clk_disable(struct clk *clk)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline int clk_disable_bulk(struct clk_bulk *bulk)
+> +{
+> +       return bulk && bulk->count == 0 ? 0 : -ENOSYS;
+> +}
+> +
+> +static inline bool clk_is_match(const struct clk *p, const struct clk *q)
+> +{
+> +       return false;
+> +}
+> +
+> +static inline int clk_get_by_id(ulong id, struct clk **clkp)
+> +{
+> +       return -ENOSYS;
+> +}
+> +
+> +static inline bool clk_dev_binded(struct clk *clk)
+> +{
+> +       return false;
+> +}
+> +#endif /* CONFIG_IS_ENABLED(CLK) */
+> +
+> +/**
+> + * clk_valid() - check if clk is valid
+> + *
+> + * @clk:       the clock to check
+> + * @return true if valid, or false
+> + */
+> +static inline bool clk_valid(struct clk *clk)
+> +{
+> +       return clk && !!clk->dev;
+> +}
+> +
+> +int soc_clk_dump(void);
+> +
+>  #endif
+>
+>  #define clk_prepare_enable(clk) clk_enable(clk)
+> --
+> 2.17.1
+>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

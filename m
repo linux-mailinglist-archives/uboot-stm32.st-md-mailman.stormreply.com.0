@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B3C317B9FB
+	by mail.lfdr.de (Postfix) with ESMTPS id 14ACE17B9FC
 	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 11:14:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF6A3C36B13
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C882FC36B14
 	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Mar 2020 10:14:40 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BCE73C36B0E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88265C36B0F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Mar 2020 10:14:37 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri,  6 Mar 2020 10:14:38 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 026ADsaP020437; Fri, 6 Mar 2020 11:14:36 +0100
+ 026AERuX018889; Fri, 6 Mar 2020 11:14:37 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=/n/3t7Bn4p6lIGVyEQVdH0au5Aj7GOCwjEBl76iLjpk=;
- b=Xb2q/cQYAZhGr7i7hkuIYEAhg98Q7OsAM/qz+y+4+0fBrT5JDqNHe6KbAzXimwbHAJCv
- ccoS1QOR5xj3A8jQ8xL8XRs7Zg+N6orre1k1ZjTdKnkoiOMSumxIBXOcgJol2qKWWxZY
- zq0dXnamq3LENi30FhqQIjm81kjz52h2h/5acploaQVopH0qMOgzhuqTb5T2P69frkdb
- lvvwf4oW7ZDxy3grns44ewJIqFYZ4GgFz/ezRJpCYAuV3Qb90jhsy1JGg4Gynt9uSymy
- iWSbMYUt0zys9r541rs/FEJuZkhu0CMzTjpdEGucjto9L4W/zFGjKn6HJZL3kTAIzVpe Cw== 
+ bh=OPfn41pvtDEBVo2BMLcUpVR5cIG1BLjoBhV2iRvredQ=;
+ b=VhpHwNx2frSU1NWaED7yIAL/GsyG5cYMEURR2adQPhKXlhp6WMtAEVa3ZEGCuLapK1OV
+ px6zOB4gKyNgO96jgg+/38Idur68B4IGskFn8KJLGO1Dp7Q1ilWUQssOu67eqNsfEWIh
+ qqm3LNow7qliTi+1b83dwTMHVe4uJCXDY/yqGUO7Rha/lFVc2GDUrxm0+LegiaJ2JMsK
+ QH3vmFXTnWlFF2QXJKNaWCQHCPONyJppogBwxstJr96tTLr52ajJKG9LKAX1Tskd+Jkb
+ yUAEoLOsF8YSL2z+YKQv2xTHypByR2g5Js8/USKV5VslG8Lseh4MPiJnU7b+3lgaOHEB 8w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yfdydex1k-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yfea7ef40-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 06 Mar 2020 11:14:36 +0100
+ Fri, 06 Mar 2020 11:14:37 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6887210003E;
- Fri,  6 Mar 2020 11:14:36 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D61110002A;
+ Fri,  6 Mar 2020 11:14:37 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 610B52A7189;
- Fri,  6 Mar 2020 11:14:36 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 340AD2A7189;
+ Fri,  6 Mar 2020 11:14:37 +0100 (CET)
+Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Fri, 6 Mar 2020 11:14:36 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 6 Mar 2020 11:14:10 +0100
-Message-ID: <20200306111355.8.I2ed443e2c15db6b007f836254b3753da9b06e76d@changeid>
+Date: Fri, 6 Mar 2020 11:14:11 +0100
+Message-ID: <20200306101412.15376-2-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200306101412.15376-1-patrick.delaunay@st.com>
 References: <20200306101412.15376-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
  definitions=2020-03-06_02:2020-03-05,
@@ -57,8 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 8/9] ram: stm32mp1: reduce delay after BIST
-	reset for tuning
+Subject: [Uboot-stm32] [PATCH 9/9] ram: stm32mp1: the property st,
+	phy-cal becomes optional
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,28 +75,238 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Reduce the delay after BIST delay, from 1ms to 10us
-which is enough accoriding datasheet.
+This parameter "st,phy-cal" becomes optional and when it is
+absent the built-in PHY calibration is done.
+
+It is the case in the helper dtsi file "stm32mp15-ddr.dtsi"
+except if DDR_PHY_CAL_SKIP is defined.
+
+This patch also impact the ddr interactive mode
+- the registers of the param 'phy.cal' are initialized to 0 when
+  "st,phy-cal" is not present in device tree (default behavior when
+  DDR_PHY_CAL_SKIP is not activated)
+- the info 'cal' field can be use to change the calibration behavior
+  - cal=1 => use param phy.cal to initialize the PHY, built-in training
+             is skipped
+  - cal=0 => param phy.cal is absent, built-in training is used (default)
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/ram/stm32mp1/stm32mp1_tuning.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/stm32mp15-ddr.dtsi               |  3 ++
+ .../memory-controllers/st,stm32mp1-ddr.txt    |  2 ++
+ drivers/ram/stm32mp1/stm32mp1_ddr.c           | 19 +++++++----
+ drivers/ram/stm32mp1/stm32mp1_ddr.h           |  1 +
+ drivers/ram/stm32mp1/stm32mp1_interactive.c   | 13 ++++++-
+ drivers/ram/stm32mp1/stm32mp1_ram.c           | 34 ++++++++++++++-----
+ 6 files changed, 56 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/ram/stm32mp1/stm32mp1_tuning.c b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-index 07d57d496c..3013b7b667 100644
---- a/drivers/ram/stm32mp1/stm32mp1_tuning.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-@@ -402,7 +402,7 @@ run:
- 		writel(rand(), &phy->bistlsr);
+diff --git a/arch/arm/dts/stm32mp15-ddr.dtsi b/arch/arm/dts/stm32mp15-ddr.dtsi
+index 38f29bb789..8b20b5e173 100644
+--- a/arch/arm/dts/stm32mp15-ddr.dtsi
++++ b/arch/arm/dts/stm32mp15-ddr.dtsi
+@@ -133,6 +133,7 @@
+ 				DDR_MR3
+ 			>;
  
- 	/* some delay to reset BIST */
--	mdelay(1);
-+	udelay(10);
++#ifdef DDR_PHY_CAL_SKIP
+ 			st,phy-cal = <
+ 				DDR_DX0DLLCR
+ 				DDR_DX0DQTR
+@@ -148,6 +149,8 @@
+ 				DDR_DX3DQSTR
+ 			>;
  
- 	/*Perform BIST Run*/
- 	clrsetbits_le32(&phy->bistrr,
++#endif
++
+ 			status = "okay";
+ 		};
+ 	};
+diff --git a/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt b/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
+index ee708ce92c..ac6a7df432 100644
+--- a/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
++++ b/doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt
+@@ -129,6 +129,8 @@ phyc attributes:
+ 		MR3
+ 
+ - st,phy-cal	: phy cal depending of calibration or tuning of DDR
++	This parameter is optional; when it is absent the built-in PHY
++	calibration is done.
+ 	for STM32MP15x: 12 values are requested in this order
+ 		DX0DLLCR
+ 		DX0DQTR
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+index b9300dd6d1..11b14ae652 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
++++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+@@ -769,7 +769,8 @@ start:
+  */
+ 	set_reg(priv, REGPHY_REG, &config->p_reg);
+ 	set_reg(priv, REGPHY_TIMING, &config->p_timing);
+-	set_reg(priv, REGPHY_CAL, &config->p_cal);
++	if (config->p_cal_present)
++		set_reg(priv, REGPHY_CAL, &config->p_cal);
+ 
+ 	if (INTERACTIVE(STEP_PHY_INIT))
+ 		goto start;
+@@ -804,13 +805,16 @@ start:
+ 
+ 	wait_operating_mode(priv, DDRCTRL_STAT_OPERATING_MODE_NORMAL);
+ 
+-	debug("DDR DQS training : ");
++	if (config->p_cal_present) {
++		debug("DDR DQS training skipped.\n");
++	} else {
++		debug("DDR DQS training : ");
+ /*  8. Disable Auto refresh and power down by setting
+  *    - RFSHCTL3.dis_au_refresh = 1
+  *    - PWRCTL.powerdown_en = 0
+  *    - DFIMISC.dfiinit_complete_en = 0
+  */
+-	stm32mp1_refresh_disable(priv->ctl);
++		stm32mp1_refresh_disable(priv->ctl);
+ 
+ /*  9. Program PUBL PGCR to enable refresh during training and rank to train
+  *     not done => keep the programed value in PGCR
+@@ -818,14 +822,15 @@ start:
+ 
+ /* 10. configure PUBL PIR register to specify which training step to run */
+ 	/* warning : RVTRN  is not supported by this PUBL */
+-	stm32mp1_ddrphy_init(priv->phy, DDRPHYC_PIR_QSTRN);
++		stm32mp1_ddrphy_init(priv->phy, DDRPHYC_PIR_QSTRN);
+ 
+ /* 11. monitor PUB PGSR.IDONE to poll cpmpletion of training sequence */
+-	ddrphy_idone_wait(priv->phy);
++		ddrphy_idone_wait(priv->phy);
+ 
+ /* 12. set back registers in step 8 to the orginal values if desidered */
+-	stm32mp1_refresh_restore(priv->ctl, config->c_reg.rfshctl3,
+-				 config->c_reg.pwrctl);
++		stm32mp1_refresh_restore(priv->ctl, config->c_reg.rfshctl3,
++					 config->c_reg.pwrctl);
++	} /* if (config->p_cal_present) */
+ 
+ 	/* enable uMCTL2 AXI port 0 and 1 */
+ 	setbits_le32(&priv->ctl->pctrl_0, DDRCTRL_PCTRL_N_PORT_EN);
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.h b/drivers/ram/stm32mp1/stm32mp1_ddr.h
+index 52b748f3ca..4998f04439 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ddr.h
++++ b/drivers/ram/stm32mp1/stm32mp1_ddr.h
+@@ -170,6 +170,7 @@ struct stm32mp1_ddr_config {
+ 	struct stm32mp1_ddrphy_reg p_reg;
+ 	struct stm32mp1_ddrphy_timing p_timing;
+ 	struct stm32mp1_ddrphy_cal p_cal;
++	bool p_cal_present;
+ };
+ 
+ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, u32 mem_speed);
+diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+index cedf92cb5f..805c9ddaad 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
++++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+@@ -106,7 +106,7 @@ static void stm32mp1_do_usage(void)
+ 		"help                       displays help\n"
+ 		"info                       displays DDR information\n"
+ 		"info  <param> <val>        changes DDR information\n"
+-		"      with <param> = step, name, size or speed\n"
++		"      with <param> = step, name, size, speed or cal\n"
+ 		"freq                       displays the DDR PHY frequency in kHz\n"
+ 		"freq  <freq>               changes the DDR PHY frequency\n"
+ 		"param [type|reg]           prints input parameters\n"
+@@ -160,6 +160,7 @@ static void stm32mp1_do_info(struct ddr_info *priv,
+ 		printf("name = %s\n", config->info.name);
+ 		printf("size = 0x%x\n", config->info.size);
+ 		printf("speed = %d kHz\n", config->info.speed);
++		printf("cal = %d\n", config->p_cal_present);
+ 		return;
+ 	}
+ 
+@@ -208,6 +209,16 @@ static void stm32mp1_do_info(struct ddr_info *priv,
+ 		}
+ 		return;
+ 	}
++	if (!strcmp(argv[1], "cal")) {
++		if (strict_strtoul(argv[2], 10, &value) < 0 ||
++		    (value != 0 && value != 1)) {
++			printf("invalid value %s\n", argv[2]);
++		} else {
++			config->p_cal_present = value;
++			printf("cal = %d\n", config->p_cal_present);
++		}
++		return;
++	}
+ 	printf("argument %s invalid\n", argv[1]);
+ }
+ 
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
+index eb78f1198d..b1e593f86b 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ram.c
++++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
+@@ -65,18 +65,22 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+ 	struct clk axidcg;
+ 	struct stm32mp1_ddr_config config;
+ 
+-#define PARAM(x, y) \
+-	{ x,\
+-	  offsetof(struct stm32mp1_ddr_config, y),\
+-	  sizeof(config.y) / sizeof(u32)}
++#define PARAM(x, y, z)							\
++	{	.name = x,						\
++		.offset = offsetof(struct stm32mp1_ddr_config, y),	\
++		.size = sizeof(config.y) / sizeof(u32),			\
++		.present = z,						\
++	}
+ 
+-#define CTL_PARAM(x) PARAM("st,ctl-"#x, c_##x)
+-#define PHY_PARAM(x) PARAM("st,phy-"#x, p_##x)
++#define CTL_PARAM(x) PARAM("st,ctl-"#x, c_##x, NULL)
++#define PHY_PARAM(x) PARAM("st,phy-"#x, p_##x, NULL)
++#define PHY_PARAM_OPT(x) PARAM("st,phy-"#x, p_##x, &config.p_##x##_present)
+ 
+ 	const struct {
+ 		const char *name; /* name in DT */
+ 		const u32 offset; /* offset in config struct */
+ 		const u32 size;   /* size of parameters */
++		bool * const present;  /* presence indication for opt */
+ 	} param[] = {
+ 		CTL_PARAM(reg),
+ 		CTL_PARAM(timing),
+@@ -84,7 +88,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+ 		CTL_PARAM(perf),
+ 		PHY_PARAM(reg),
+ 		PHY_PARAM(timing),
+-		PHY_PARAM(cal)
++		PHY_PARAM_OPT(cal)
+ 	};
+ 
+ 	config.info.speed = dev_read_u32_default(dev, "st,mem-speed", 0);
+@@ -103,11 +107,25 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+ 					 param[idx].size);
+ 		debug("%s: %s[0x%x] = %d\n", __func__,
+ 		      param[idx].name, param[idx].size, ret);
+-		if (ret) {
++		if (ret &&
++		    (ret != -FDT_ERR_NOTFOUND || !param[idx].present)) {
+ 			pr_err("%s: Cannot read %s, error=%d\n",
+ 			       __func__, param[idx].name, ret);
+ 			return -EINVAL;
+ 		}
++		if (param[idx].present) {
++			/* save presence of optional parameters */
++			*param[idx].present = true;
++			if (ret == -FDT_ERR_NOTFOUND) {
++				*param[idx].present = false;
++#ifdef CONFIG_STM32MP1_DDR_INTERACTIVE
++				/* reset values if used later */
++				memset((void *)((u32)&config +
++						param[idx].offset),
++					0, param[idx].size * sizeof(u32));
++#endif
++			}
++		}
+ 	}
+ 
+ 	ret = clk_get_by_name(dev, "axidcg", &axidcg);
 -- 
 2.17.1
 

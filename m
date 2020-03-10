@@ -2,72 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD36D18043C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 18:02:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C003818063B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 19:27:20 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8B489C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 17:02:11 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6ED99C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 18:27:20 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F1E2BC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2DB94C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Mar 2020 17:02:09 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02AGiqkn012959; Tue, 10 Mar 2020 18:01:51 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=C9IRzp+0aJcp1Fo74aR8blE9o8HJbCH2c47frgRO3jE=;
- b=snWHrfxS+v42yaZ5qUQagHWe9KvrvwvohtWHc33YInKVFPD9BNIlIillEEdcYGBv4xO6
- nYs1R3dEZGWEwMyHLEjvJBYfAnM0WYg2HfBJnYfbX6tn/UUwfg+I/NHxSLsRCZreeb49
- X9AobNORvVuT2dJUji8QmTKSZdvJQFNq/12xxEkCduIFn3B4s/3KBIeLi2OGsVpBxRgN
- HOo5mTORbFunvHoZE3Dssyej8GhVsop156AMVqdg6vwFdxSUG4Pa/VGV+Gwkefc5WOcJ
- Xqn9eQ8zMnN4DEjhnA1Lx/CyG1E5NFD33QNwR/m0GMJXiT+YFf7+rVrerJmBteKAaT1g Zw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2ym292cvrb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 Mar 2020 18:01:51 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 397F810002A;
- Tue, 10 Mar 2020 18:01:50 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 08DA321BAB9;
- Tue, 10 Mar 2020 18:01:50 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 10 Mar
- 2020 18:01:49 +0100
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 10 Mar 2020 18:01:49 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH v6 0/5] usb: host: dwc2: use driver model for PHY and
- CLOCK
-Thread-Index: AQHV9sP0L9yL6EBFTUiIs8rwgW9mm6hB4IyAgAAmmdA=
-Date: Tue, 10 Mar 2020 17:01:49 +0000
-Message-ID: <6e2e15a588d742a8b9367807ba01d941@SFHDAG6NODE3.st.com>
+ Tue, 10 Mar 2020 18:27:19 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 48cNq92C3qz1qw97;
+ Tue, 10 Mar 2020 19:27:17 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 48cNq86tKsz1qqkq;
+ Tue, 10 Mar 2020 19:27:16 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id 2Q9ihJ5pyXT7; Tue, 10 Mar 2020 19:27:14 +0100 (CET)
+X-Auth-Info: gX1DwUoCzyXMuW4xepFpZk67uxzvuyXI0uNVEUhdzRo=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Tue, 10 Mar 2020 19:27:14 +0100 (CET)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 References: <20200310100912.28129-1-patrick.delaunay@st.com>
  <0679888c-4fa3-f759-6107-87eac3750755@denx.de>
-In-Reply-To: <0679888c-4fa3-f759-6107-87eac3750755@denx.de>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
+ <6e2e15a588d742a8b9367807ba01d941@SFHDAG6NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <f5bcdb37-d7ed-c190-bb21-62f8ec71b27c@denx.de>
+Date: Tue, 10 Mar 2020 19:27:13 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-10_11:2020-03-10,
- 2020-03-10 signatures=0
+In-Reply-To: <6e2e15a588d742a8b9367807ba01d941@SFHDAG6NODE3.st.com>
+Content-Language: en-US
 Cc: Peng Fan <peng.fan@nxp.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Simon Glass <sjg@chromium.org>,
- "simon.k.r.goldschmidt@gmail.com" <simon.k.r.goldschmidt@gmail.com>, Lukasz
- Majewski <lukma@denx.de>, "ley.foon.tan@intel.com" <ley.foon.tan@intel.com>,
+ "simon.k.r.goldschmidt@gmail.com" <simon.k.r.goldschmidt@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ "ley.foon.tan@intel.com" <ley.foon.tan@intel.com>,
  "b.galvani@gmail.com" <b.galvani@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -91,38 +72,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Marek,
-
-> From: Marek Vasut <marex@denx.de>
-> Sent: mardi 10 mars 2020 16:20
-> Subject: Re: [PATCH v6 0/5] usb: host: dwc2: use driver model for PHY and
-> CLOCK
-> Importance: High
+On 3/10/20 6:01 PM, Patrick DELAUNAY wrote:
+> Hi Marek,
 > 
-> On 3/10/20 11:09 AM, Patrick Delaunay wrote:
-> >
-> > In this serie I update the DWC2 host driver to use the device tree
-> > information and the associated PHY and CLOCK drivers when they are
-> > availables.
-> >
-> > V6 is minor update of the first patch of the serie; I update some clk
-> > stub to return success after Simon Goldschmidt remarks on V5:
-> > http://patchwork.ozlabs.org/project/uboot/list/?series=162791
+>> From: Marek Vasut <marex@denx.de>
+>> Sent: mardi 10 mars 2020 16:20
+>> Subject: Re: [PATCH v6 0/5] usb: host: dwc2: use driver model for PHY and
+>> CLOCK
+>> Importance: High
+>>
+>> On 3/10/20 11:09 AM, Patrick Delaunay wrote:
+>>>
+>>> In this serie I update the DWC2 host driver to use the device tree
+>>> information and the associated PHY and CLOCK drivers when they are
+>>> availables.
+>>>
+>>> V6 is minor update of the first patch of the serie; I update some clk
+>>> stub to return success after Simon Goldschmidt remarks on V5:
+>>> http://patchwork.ozlabs.org/project/uboot/list/?series=162791
+>>
+>> Once Simon reviews them, I'll put them in usb/next . btw I'm not CCed on 1/5,
+>> would be helpful if you could keep the CC consistent, thanks
 > 
-> Once Simon reviews them, I'll put them in usb/next . btw I'm not CCed on 1/5,
-> would be helpful if you could keep the CC consistent, thanks
+> Ok and thanks
+> 
+> I used patman for the serie with default maintainers list + 3 reviewers in Serie-CC 
+>     Series-cc: simon.k.r.goldschmidt@gmail.com
+>     Series-cc: b.galvani@gmail.com
+>     Series-cc: ley.foon.tan@intel.com
+> 
+> But I forgot you. Sorry.
 
-Ok and thanks
-
-I used patman for the serie with default maintainers list + 3 reviewers in Serie-CC 
-    Series-cc: simon.k.r.goldschmidt@gmail.com
-    Series-cc: b.galvani@gmail.com
-    Series-cc: ley.foon.tan@intel.com
-
-But I forgot you. Sorry.
-
-Patrick
-.
+I'd expect get-maintainer script should tell you to add me, maybe patman
+needs fixing.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

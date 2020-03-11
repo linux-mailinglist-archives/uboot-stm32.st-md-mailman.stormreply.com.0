@@ -2,72 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5595C180914
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 21:23:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19B561812D0
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Mar 2020 09:22:05 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 19F03C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Mar 2020 20:23:55 +0000 (UTC)
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D4829C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Mar 2020 08:22:04 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8DD5BC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C1AA2C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Mar 2020 20:23:53 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id a25so13765620wrd.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Mar 2020 13:23:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=1NCb7M9i98aDFgUG7Vy+4z4jrlDLwhhYzmJLSmD3IuA=;
- b=jGGOt22LgjitDOpj+yAahajnZBr30IWoBYTbAMqor6FO+q4KMBBXeKVueGq1BSrrVl
- 27mH18yXRRCOenVJcvrnUE20T8t5Z2GLJxs/VHUNcdIawWo5+KXfMZYcgdkf6+Z7rmJg
- Tgc9JhJN1grHkMRswLQGJURyujoZjteTNid9EXvLSXBfTTa/ApRmVCi2yHzERzzH7Hav
- pVN+mONTRbXao0OsTGxLFjH+xhY9cy0JTeaX6lyFOnsU0pQNTB4rMBReCrfOQy4tuLGP
- Db9GKm3ScPQu44xwGxEJGe0sds/jXcW2KXpMIO3IkSXtdup9AgHQItRfK2VS9UznB5O0
- fjWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=1NCb7M9i98aDFgUG7Vy+4z4jrlDLwhhYzmJLSmD3IuA=;
- b=bQTQxa/VWMC5sCOBzFCVKryYifTSGXegdkOdSDLFrLpFnKdt2UujbTn040VjFealgA
- 9nD6dZlQKrKoh1MZwBS7lvXUOskE+0a9tHGFzOJd/mm/f4Fkv1YTNoMA2a7FEX6t6FDy
- 2UeHQZRSQ+Xs1q3dh6eBWUYpyGzX+cJEuQ6h75i9cWxM3b0hClawc6etbSYcYsZljpqp
- II3cUJhzb4Czq6EwRXERXaJ2cCa4mGYWGOIq8BpgmEqapem8n/Gp8MZn/upjtGxObX4f
- M2qhCMdb9El1JNKtQTb/cbYDC6yhyYwoy1OJN4QVzhqQSkQaAFPQqQKgaOa4BOuFvwbl
- V1CQ==
-X-Gm-Message-State: ANhLgQ0le4Gj2OYYnTUcxecYZHZijLxQFy9Lc9DOsHe73EHaPQI9IXag
- JRsFB8YFdMZIaON5rWDR5uuPaZPg
-X-Google-Smtp-Source: ADFU+vu7IxjLA2xJNG853fwXvpxx+Ds6pSsdyJ2gwOE7PnVoOsFeu7i2HW5tF86hWAsK22T76AU2pA==
-X-Received: by 2002:adf:82ac:: with SMTP id 41mr21510565wrc.180.1583871832184; 
- Tue, 10 Mar 2020 13:23:52 -0700 (PDT)
-Received: from ?IPv6:2a02:8071:6cd:f600:3dff:b879:b41b:fa13?
- ([2a02:8071:6cd:f600:3dff:b879:b41b:fa13])
- by smtp.gmail.com with ESMTPSA id d1sm4805831wrw.52.2020.03.10.13.23.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Mar 2020 13:23:51 -0700 (PDT)
-To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
-References: <20200310100912.28129-1-patrick.delaunay@st.com>
- <20200310100912.28129-2-patrick.delaunay@st.com>
-From: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
-Message-ID: <294afb20-69c5-50aa-0978-3e60dd2a623c@gmail.com>
-Date: Tue, 10 Mar 2020 21:22:32 +0100
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <20200310100912.28129-2-patrick.delaunay@st.com>
+ Wed, 11 Mar 2020 08:22:02 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 02B8J0Yv016703; Wed, 11 Mar 2020 09:21:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : content-type : content-transfer-encoding :
+ mime-version; s=STMicroelectronics;
+ bh=RsDGZ5x3g+s75LMyoPMr7WvFb7BLmpdE1e/f8NhSWIc=;
+ b=061tgMN50CmrOS1ORL7nGvU93rztGIVt0Q3TjzyzYfXuhCmSXHAF+t3+CKWzpPPVsRWQ
+ A8tolYE8AMEHBcZHJx7EVnvUhJHYQaTVfWpEIkKf9Usv8KAK07FslZL4b4zgN2MBpIG4
+ RuDE6Vz+xk6lhQIWJ/jgmfW7OtMpb4xnQRf7a7O+Q7Thz64kRjXrINkaR/z9nefcUmh+
+ daeXGhcO7R6/5Q56TR0BGS5vD5TxyE6qfYpV3EyoZgxxsQsWUEfTF9UULN6z2fXERlrw
+ Uh2wnQhKHw60HA3I7gE5KMYIsFfZO/EMq0OCKcRrz8WxHBdZOy9B6jiNYPc5jjrC9Svv rQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2ym1y6s7rk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 11 Mar 2020 09:21:58 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 783F510002A;
+ Wed, 11 Mar 2020 09:21:53 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 653D821C091;
+ Wed, 11 Mar 2020 09:21:53 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 11 Mar
+ 2020 09:21:53 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 11 Mar 2020 09:21:53 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PULL] Pull request: u-boot-stm32 =u-boot-stm32-20200310
+Thread-Index: AdX3fPD7wqPbShDCS26HqgZTmTeF6w==
+Date: Wed, 11 Mar 2020 08:21:53 +0000
+Message-ID: <bd0e30dec781493d9797eea097bff7e0@SFHDAG6NODE3.st.com>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-Cc: Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, ley.foon.tan@intel.com, b.galvani@gmail.com,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v6 1/5] dm: clk: add stub when CONFIG_CLK
-	is deactivated
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.45]
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
+ definitions=2020-03-11_02:2020-03-10,
+ 2020-03-11 signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
+	=u-boot-stm32-20200310
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,181 +81,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Am 10.03.2020 um 11:09 schrieb Patrick Delaunay:
-> Add stub for functions clk_...() when CONFIG_CLK is deactivated.
-> 
-> This patch avoids compilation issues for driver using these API
-> without protection (#if CONFIG_IS_ENABLED(CLK))
-> 
-> For example, before this patch we have undefined reference to
-> `clk_disable_bulk') for code:
->   clk_disable_bulk(&priv->clks);
->   clk_release_bulk(&priv->clks);
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Hi Tom,
 
-Reviewed-by: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Please pull the STM32 related fixes for v2020.04-rc4 = u-boot-stm32-20200310
 
-> ---
-> 
-> Changes in v6:
-> - return success in stub for clk_free/clk_enable/clk_disable/
->   clk_enable_bulk/clk_disable_bulk
-> 
-> Changes in v5:
-> - use ERR_PTR in clk_get_parent()
-> - force bulk->count = 0 in clk_get_bulk to avoid issue
->   for next call of clk_enable_bulk / clk_enable_bulk
-> - update commit message
-> 
-> Changes in v4:
-> - Add stub for all functions using 'struct clk' or 'struct clk_bulk'
->   after remarks on v3
-> 
-> Changes in v3:
-> - Add stub for clk_disable_bulk
-> 
-> Changes in v2: None
-> 
->  include/clk.h | 102 +++++++++++++++++++++++++++++++++++++++++++-------
->  1 file changed, 89 insertions(+), 13 deletions(-)
-> 
-> diff --git a/include/clk.h b/include/clk.h
-> index 3336301815..60c4b7d075 100644
-> --- a/include/clk.h
-> +++ b/include/clk.h
-> @@ -9,6 +9,7 @@
->  #define _CLK_H_
->  
->  #include <dm/ofnode.h>
-> +#include <linux/err.h>
->  #include <linux/errno.h>
->  #include <linux/types.h>
->  
-> @@ -312,6 +313,7 @@ static inline int clk_release_bulk(struct clk_bulk *bulk)
->  	return clk_release_all(bulk->clks, bulk->count);
->  }
->  
-> +#if CONFIG_IS_ENABLED(CLK)
->  /**
->   * clk_request - Request a clock by provider-specific ID.
->   *
-> @@ -433,19 +435,6 @@ int clk_disable_bulk(struct clk_bulk *bulk);
->   */
->  bool clk_is_match(const struct clk *p, const struct clk *q);
->  
-> -int soc_clk_dump(void);
-> -
-> -/**
-> - * clk_valid() - check if clk is valid
-> - *
-> - * @clk:	the clock to check
-> - * @return true if valid, or false
-> - */
-> -static inline bool clk_valid(struct clk *clk)
-> -{
-> -	return clk && !!clk->dev;
-> -}
-> -
->  /**
->   * clk_get_by_id() - Get the clock by its ID
->   *
-> @@ -465,6 +454,93 @@ int clk_get_by_id(ulong id, struct clk **clkp);
->   * @return true on binded, or false on no
->   */
->  bool clk_dev_binded(struct clk *clk);
-> +
-> +#else /* CONFIG_IS_ENABLED(CLK) */
-> +
-> +static inline int clk_request(struct udevice *dev, struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_free(struct clk *clk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline ulong clk_get_rate(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline struct clk *clk_get_parent(struct clk *clk)
-> +{
-> +	return ERR_PTR(-ENOSYS);
-> +}
-> +
-> +static inline long long clk_get_parent_rate(struct clk *clk)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline ulong clk_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_set_parent(struct clk *clk, struct clk *parent)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline int clk_enable(struct clk *clk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline int clk_enable_bulk(struct clk_bulk *bulk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline int clk_disable(struct clk *clk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline int clk_disable_bulk(struct clk_bulk *bulk)
-> +{
-> +	return 0;
-> +}
-> +
-> +static inline bool clk_is_match(const struct clk *p, const struct clk *q)
-> +{
-> +	return false;
-> +}
-> +
-> +static inline int clk_get_by_id(ulong id, struct clk **clkp)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static inline bool clk_dev_binded(struct clk *clk)
-> +{
-> +	return false;
-> +}
-> +#endif /* CONFIG_IS_ENABLED(CLK) */
-> +
-> +/**
-> + * clk_valid() - check if clk is valid
-> + *
-> + * @clk:	the clock to check
-> + * @return true if valid, or false
-> + */
-> +static inline bool clk_valid(struct clk *clk)
-> +{
-> +	return clk && !!clk->dev;
-> +}
-> +
-> +int soc_clk_dump(void);
-> +
->  #endif
->  
->  #define clk_prepare_enable(clk) clk_enable(clk)
-> 
+With the following changes:
+- stm32mp: fix dependency for CONFIG_STM32_ETZPC
 
+CI status:
+     https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/2399
+
+Thanks,
+Patrick
+
+The following changes since commit 9f976bac2b4a81a13de8124a896a198cbeabb634:
+
+  Merge https://gitlab.denx.de/u-boot/custodians/u-boot-x86 (2020-03-05 07:51:12 -0500)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20200310
+
+for you to fetch changes up to 7a02e4d53c4a44a565cc9228bd1b78e0a2bdd6b5:
+
+  stm32mp: update dependency for STM32_ETZPC (2020-03-10 18:11:02 +0100)
+
+----------------------------------------------------------------
+- stm32mp: fix dependency for CONFIG_STM32_ETZPC
+
+----------------------------------------------------------------
+Patrick Delaunay (1):
+      stm32mp: update dependency for STM32_ETZPC
+
+ arch/arm/mach-stm32mp/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

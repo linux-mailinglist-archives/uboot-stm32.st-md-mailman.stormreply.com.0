@@ -2,65 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD2E2182D25
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 11:11:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 936421830BF
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 13:59:31 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 92487C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 10:11:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 478A9C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 12:59:31 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 081C4C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EC81C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Mar 2020 10:11:46 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu, 12 Mar 2020 12:59:28 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02CA2Pd1008841; Thu, 12 Mar 2020 11:11:32 +0100
+ 02CCn1Lt018534; Thu, 12 Mar 2020 13:59:24 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=sXvkJ4dj5PJn4EiErSXCh6ZLHhPwS1PC+q/0U2BsqkM=;
- b=0FMuGy3F0vlTYcyg98QX6hVK7f5WTcGeRoOV5oc7lSb2fhEyBFAG6Ilre+m59bTy9Ccp
- HL/IX6wW6JkeHI0kibDs3DBRM5ayyVimri5eUrMZr7s3OJw+ONiiL0Jzuoq/Xbz4JV70
- rR2TfUBJsWtp8fYRhDZsrJn/bS4OKdj7s6FRqd5KObc65unR5wkDWoak49CORcAYdkzn
- NJ4iGQqpOmj3NEGYvR60zDyQLCaGr/uvSkSuQE3nmuTYYdcM/dzUkKGRCg7qfcr/+cDK
- eQStstSfa/eNbe8UtTN3ZwKz1FQ0yHZTxE9+mIbQXTsLAbkzooJVwZKPwEDFyI5UOmoh SA== 
+ bh=Im2jESaLAe+/asCY3pC4x8QPR72QwOIWCghTtM1DAoI=;
+ b=LWU4XgNbwWvdMdWkF6zhnQbZDr9SSiurvInYZF4DiffrV10aF0VCMPE3Ro1pkswCiTYs
+ d6g5IOaLxe/kmchXftEmAch2SBMNuj+4tiJCmot+S44AWpWmIW4cluyNSWn5uCF9cWGI
+ oPA7M4QcEf3rTAqDppC667IMGngfZUHNCznpRXWnPTiUvliCokBjjEt9SPjmEYVCdpl6
+ DxYVzfJpvsvUnR3BPP7VpZRm62xqon27AwfMqexX/XK8AGvqmldEgQPvG21j1acjmXY0
+ i5cEnQ1Izr4/tn2yLX091OVUVW8WSIj3FSayPCYAHoRWfavu47EaSWbMhwOnocdsWtaw 4A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2ym1mh99rc-1
+ by mx07-00178001.pphosted.com with ESMTP id 2ynecdrr0x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Mar 2020 11:11:32 +0100
+ Thu, 12 Mar 2020 13:59:24 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0F0CC100039;
- Thu, 12 Mar 2020 11:11:30 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0507B100042;
+ Thu, 12 Mar 2020 13:59:23 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB94C21F0DA;
- Thu, 12 Mar 2020 11:11:30 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E69DB2A88E1;
+ Thu, 12 Mar 2020 13:59:23 +0100 (CET)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 12 Mar 2020 11:11:30 +0100
+ Thu, 12 Mar 2020 13:59:23 +0100
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 12 Mar 2020 11:11:18 +0100
-Message-ID: <20200312111114.1.Ib3afa8c50c18f3d86fb39f535864476f697b8ba7@changeid>
+Date: Thu, 12 Mar 2020 13:59:19 +0100
+Message-ID: <20200312135913.1.I98f004eb93dff0dad8ebd9447a3cff76bd1ecc91@changeid>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
- definitions=2020-03-12_01:2020-03-11,
+ definitions=2020-03-12_04:2020-03-11,
  2020-03-12 signatures=0
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Lokesh Vutla <lokeshvutla@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, "Andrew F. Davis" <afd@ti.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Stefan Roese <sr@denx.de>
-Subject: [Uboot-stm32] [PATCH] MAINTAINERS: update entry for ARM STI
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] usb: host: dwc3-sti-glue: Use UCLASS_NOP
+	instead of UCLASS_MISC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,40 +72,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add STi drivers/include files and git tree.
+dwc3-sti-glue has been broken since MISC uclass has been
+modified to scan DT sub-nodes after bind.
+Fixing it by a using the no-op uclass.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
- MAINTAINERS | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ drivers/usb/host/dwc3-sti-glue.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1842569f242d..1694cb13f264 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -328,8 +328,21 @@ F:	drivers/usb/host/ehci-msm.c
- ARM STI
- M:	Patrice Chotard <patrice.chotard@st.com>
- S:	Maintained
-+T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
- F:	arch/arm/mach-sti/
- F:	arch/arm/include/asm/arch-sti*/
-+F:	drivers/phy/sti_usb_phy.c
-+F:	drivers/pinctrl/pinctrl-sti.c
-+F:	drivers/mmc/sti_sdhci.c
-+F:	drivers/reset/sti-reset.c
-+F:	drivers/serial/serial_sti_asc.c
-+F:	drivers/sysreset/sysreset_sti.c
-+F:	drivers/timer/sti-timer.c
-+F:	drivers/usb/host/dwc3-sti-glue.c
-+F:	include/dwc3-sti-glue.h
-+F:	include/dt-bindings/clock/stih407-clks.h
-+F:	include/dt-bindings/clock/stih410-clks.h
-+F:	include/dt-bindings/reset/stih407-resets.h
+diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti-glue.c
+index ad7cf6e6b53d..f25e1dc6640c 100644
+--- a/drivers/usb/host/dwc3-sti-glue.c
++++ b/drivers/usb/host/dwc3-sti-glue.c
+@@ -245,7 +245,7 @@ static const struct udevice_id sti_dwc3_glue_ids[] = {
  
- ARM STM SPEAR
- #M:	Vipin Kumar <vipin.kumar@st.com>
+ U_BOOT_DRIVER(dwc3_sti_glue) = {
+ 	.name = "dwc3_sti_glue",
+-	.id = UCLASS_MISC,
++	.id = UCLASS_NOP,
+ 	.of_match = sti_dwc3_glue_ids,
+ 	.ofdata_to_platdata = sti_dwc3_glue_ofdata_to_platdata,
+ 	.probe = sti_dwc3_glue_probe,
 -- 
 2.17.1
 

@@ -2,66 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23ED3183B9F
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 22:46:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A529184D95
+	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Mar 2020 18:26:08 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C58BEC36B0D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Mar 2020 21:46:08 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
- [209.85.219.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 06330C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Mar 2020 17:26:08 +0000 (UTC)
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+ [209.85.160.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1E5EDC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9FABDC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Mar 2020 21:46:07 +0000 (UTC)
-Received: by mail-qv1-f53.google.com with SMTP id r15so3481853qve.3
+ Fri, 13 Mar 2020 17:26:06 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id v15so8183848qto.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Mar 2020 14:46:06 -0700 (PDT)
+ Fri, 13 Mar 2020 10:26:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=JPhc80j0ummMne9UmO7cL9bdN1wZb8RDSxzNdkkjD+k=;
- b=ogkZ6LGFSpQovztX9an8D/UE7zNf+jumbszrKnOgrTafqMwKRya5FSs2vTIx4JcwMf
- H19m6ArCADorWUZEyKoCtYYVXuupHrsg2U2q35rj+8Ob5Kxde8zwA1lDZEK5Y4x0gbH6
- GOHnow3LJGFWBmIIBmaN0apiFNPSoCB0MXxWk=
+ bh=LhzCO1UlBvaMpB4JhdftWoFaEtsIq0scMosGyQtHXaw=;
+ b=CAfcFwWD/vxJnzeqjy+l2gLTyURtcljVMYA1jHc3rN8oX6F3evyF+z8700kZONu/QE
+ TvnEJhIWC6DwekHAcaEv2df4E9e4PafrQYTqSorrbuxaW2ekCJKOXyH2CNiGYJRPYlUc
+ J5d6Xa08ywKGld6Fn38gYedE6legJTwU+tFJY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=JPhc80j0ummMne9UmO7cL9bdN1wZb8RDSxzNdkkjD+k=;
- b=pHy8U93+Dm22cgb81BJbZCJ8zuj8Ls7u44FRhs+Now5LmmbpRIX7n9AoqmTOedJmzz
- jjtrJT1O+tHo3bszTMJsJbkrWkpWE43nv4MR4o5kKw/5VtPQkmYxMeMm5EOYdJTa+OVD
- dnrxnIIx/Mh5nnvCCk4S7r4mnk4jZpVW5nfZ2ArI0MA7PinwCDqtLIF9yoZyNyYsOkJU
- TmC+c+VVuPuc+izOMkbWAGjcIsQhg/cMM3Om7j6YN2SvxC4IE3N/Zlrh11D7p0IQ/CHG
- OULGrOHYCpRrVmc4zHA4DaZoOy7xzPm7XQZX20IrKCM/iyiELd7ZnCg20OGIpjt0V1D9
- p4lg==
-X-Gm-Message-State: ANhLgQ1HBTB/xQHBG3rTge8TTc3OUIyT8PvZskbM/zH57zZ6NHqMmYri
- OigfrsbCall5bX3Y9knqMm03uQ==
-X-Google-Smtp-Source: ADFU+vsX0N81NJHyoaT9x9sfdBIVF7g9VqkJDcEPwM0vmm80ZBqNOH7ymmUMjQ1Hv6D7roPfUwW/wQ==
-X-Received: by 2002:a05:6214:a73:: with SMTP id
- ef19mr3872752qvb.98.1584049565710; 
- Thu, 12 Mar 2020 14:46:05 -0700 (PDT)
+ bh=LhzCO1UlBvaMpB4JhdftWoFaEtsIq0scMosGyQtHXaw=;
+ b=VayN8zTwVZZG9yYrlLwStOdMehan/t4d0U/ASV/VLKpodDhXjsmF4noP11M0m3OOxE
+ QDG3Mouq1L22U1COcdtWuRjs15Bqc7bRXMRi3xLsj79zH8fkobiHFLLsisqU4aWOtEJe
+ suRqpgc3Z0Q5EZa4rQ16PpSZf0LbMX8of8NcYzVzRkNy79OZT+ww+AOlThr6Ejxx5pE4
+ UR4ifMWAtUm4wSTfhEz/ecxNoiu7XCDVEB1ntMUGoQnA9CBgq4usZrtoYp/WnYQISSNo
+ AZ2r1vjuhWyLPUwGUy03Fa/oOkpcPr+MItDWr1h1wcIv+PEFtGtx7PE4tm+xJ0Ks9JD5
+ vYGQ==
+X-Gm-Message-State: ANhLgQ0SkW8MpX2LoY6QodJcff9tCuaBp5r7OLO2ToZyV3plfKoWTfgD
+ /oz4HcGEP3bMoRNvfnNZlC9MIQ==
+X-Google-Smtp-Source: ADFU+vu+cQmmdtRjAKQ4lrfXHTORuvMjh+eegFrniCPk+zhCzIdbmfHQIB8L42BPxA3C3QJCtKY7wQ==
+X-Received: by 2002:ac8:4e91:: with SMTP id 17mr13992029qtp.133.1584120364945; 
+ Fri, 13 Mar 2020 10:26:04 -0700 (PDT)
 Received: from bill-the-cat
- (2606-a000-1401-8c31-2dbb-1704-24ca-48e5.inf6.spectrum.com.
- [2606:a000:1401:8c31:2dbb:1704:24ca:48e5])
- by smtp.gmail.com with ESMTPSA id i4sm28482259qkf.111.2020.03.12.14.46.04
+ (2606-a000-1401-8c31-2540-47b7-0a1a-2287.inf6.spectrum.com.
+ [2606:a000:1401:8c31:2540:47b7:a1a:2287])
+ by smtp.gmail.com with ESMTPSA id f13sm16483423qte.53.2020.03.13.10.26.02
  (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 12 Mar 2020 14:46:04 -0700 (PDT)
-Date: Thu, 12 Mar 2020 17:46:01 -0400
+ Fri, 13 Mar 2020 10:26:03 -0700 (PDT)
+Date: Fri, 13 Mar 2020 13:26:01 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20200312214601.GA12423@bill-the-cat>
-References: <bd0e30dec781493d9797eea097bff7e0@SFHDAG6NODE3.st.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Message-ID: <20200313172601.GK12423@bill-the-cat>
+References: <20200312111114.1.Ib3afa8c50c18f3d86fb39f535864476f697b8ba7@changeid>
 MIME-Version: 1.0
-In-Reply-To: <bd0e30dec781493d9797eea097bff7e0@SFHDAG6NODE3.st.com>
+In-Reply-To: <20200312111114.1.Ib3afa8c50c18f3d86fb39f535864476f697b8ba7@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm32
-	=u-boot-stm32-20200310
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>, "Andrew F. Davis" <afd@ti.com>,
+ u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] MAINTAINERS: update entry for ARM STI
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,80 +75,54 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7270438637960988454=="
+Content-Type: multipart/mixed; boundary="===============2912918867649983340=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============7270438637960988454==
+--===============2912918867649983340==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="xyF51EaUT3XiWnZP"
+	protocol="application/pgp-signature"; boundary="4kf3ZaKr/mmDV0ZC"
 Content-Disposition: inline
 
 
---xyF51EaUT3XiWnZP
+--4kf3ZaKr/mmDV0ZC
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 11, 2020 at 08:21:53AM +0000, Patrick DELAUNAY wrote:
+On Thu, Mar 12, 2020 at 11:11:18AM +0100, Patrice Chotard wrote:
 
-> Hi Tom,
+> Add STi drivers/include files and git tree.
 >=20
-> Please pull the STM32 related fixes for v2020.04-rc4 =3D u-boot-stm32-202=
-00310
->=20
-> With the following changes:
-> - stm32mp: fix dependency for CONFIG_STM32_ETZPC
->=20
-> CI status:
->      https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/2399
->=20
-> Thanks,
-> Patrick
->=20
-> The following changes since commit 9f976bac2b4a81a13de8124a896a198cbeabb6=
-34:
->=20
->   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-x86 (2020-03-05 0=
-7:51:12 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20200310
->=20
-> for you to fetch changes up to 7a02e4d53c4a44a565cc9228bd1b78e0a2bdd6b5:
->=20
->   stm32mp: update dependency for STM32_ETZPC (2020-03-10 18:11:02 +0100)
->=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---xyF51EaUT3XiWnZP
+--4kf3ZaKr/mmDV0ZC
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl5qrZYACgkQFHw5/5Y0
-tyw/Sgv/XG+oM7T9HmhlOGKtoDzp9vEgnIaCBQPuuoWmN2A4wEKhi3HokX3M83HI
-CZ3r7a8RDsU5W6H4NEDdMOwIY51M0bhP2KNzONfxFdx8N1QVJMFjgU7p0uEm+kUq
-5ZsuPAJsIJ7+nDy2OV3Sz78avGxNp/YYnFO+7dfLniN0Oz3borjo1p+9iRbKf+O1
-ZixrWYnOnb96Ou5lXctnPAyn/ALq6KqILaByRVpW1m92aF4IBaqUZlsnXIL8Rjmy
-iE58FX83pQSQokWAvBYwjLwzE2/mfWXf32Cs8b+ZKuOCCpQqg4CM91szGN/wdRE4
-kj65Q7g1UMwcVrCbeuUTxaOPpjDKIFPsPzpYYmBgv0QUWa0FB5g8hykj//xDiCax
-M2meDU1v3Ygx+hggIOerXJTUZw2yemzCteCb4r8LSVVdZu79eQLE4BCPYQCtus0Z
-HvfCqqWbdyegLp7AAtDQnBSrAohRatq5vXrS/FTd9mRA+1XSPEj7JsYuOaKvO3vV
-bo8zx3CC
-=e06S
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl5rwikACgkQFHw5/5Y0
+tyyepQv+P3jnIzlAlTKfSdRSP4K81ALd7eaguF5oD6qv6AWALpyCdQiJCfWMS60t
+x8cceCv6rXJ/yyPkt3qu678g++bKL7y2nlnECYxb975NeXEjvKMV3UibHtMVXSXC
+pSOIXzRYrw3qVVvGQxRzLMoNtYOzAwlIVZWbTxowWAAg4KJ1ft5Af6FKzuSnf6YT
+c7tUWQn4VbyIqsf4Z3RwX2TUGGejehqwvGvPu6OQsX6DmwCtpZCYrp7c3IGHEPAL
+fKlULy/UbpGGHZxA99BEuOIVLae2DC3rKRhniVRl1GPQcLPK+RA0kLW+G+2DqTkp
+cPrPHIONhO5bsPcbNP/Pa8ZoEzJKtOw9prm3hsr4EWBxcUSLVlggcnzh37R71onP
+ZxIMkZQWGaxlL3TH3nbSyF6SPhheBzW+AP/veDxPzWY1PztYAmkYCFAiAgqjKN7R
+eGGfDzp2jEMQ0KSQZFMMXPw/zjQ0lYiKILdlIE7AWvhsMsZyb6iv3mnX/aTWDNYB
+z9T2HCKf
+=QiCt
 -----END PGP SIGNATURE-----
 
---xyF51EaUT3XiWnZP--
+--4kf3ZaKr/mmDV0ZC--
 
---===============7270438637960988454==
+--===============2912918867649983340==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -157,4 +133,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============7270438637960988454==--
+--===============2912918867649983340==--

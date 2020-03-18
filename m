@@ -2,75 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4C84189856
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 10:46:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEFD618987B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 10:50:33 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F0C9C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 09:46:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D6CBAC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 09:50:32 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7CFD6C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB06DC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Mar 2020 09:46:44 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Wed, 18 Mar 2020 09:50:29 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02I9fcvW019112; Wed, 18 Mar 2020 10:46:43 +0100
+ 02I9mnmF009871; Wed, 18 Mar 2020 10:50:25 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=wQkVoWN65rgc0QlY87bJ/NxBdXycvrbhzb1aq9J+YWY=;
- b=B/iHwcIXV3EAV0VRuUMHqcUNcxGC3ooUEtVQ4eEPB3T2+cH0xInmXZK2phe3gHUdLpTt
- /qpGc2cecISU8fneKscRGksoh9krzK3BK/6aEFhhKWp1xFnnejSJUjM2j2LkNuYV34Q0
- Sg2JlCyaaWqoHY0N0xZ7c+z5NcgRpfi8YY1ELGoyYVqxLECY+7tKFn6yqy7tuSgMWLGY
- XQhp+UBcT72HSyGnsob8vGxhb7sW8tDD7mClRd8QRhXA9HXbhhK5pqNTwvZIpQ0UL3Kw
- 6iTSbyGSnQaJiYGC0odjjx7LIyqyl/m0qtoWwNRTYiTd3Yh8RPxgMoVcU4Uf9o541XXt Ag== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=hFP9N2si9xnDbwQQL1FuTLjC7iapIq2AeYlcGvKBHmg=;
+ b=SdgGPpmM4Jpr340EKF6TZ2HuguDOIcmLYTkM0bcL//PBnVaDjAtiIV1Ep8OF/wSefujD
+ xOmiJa510xB+8cfeS/w9CV0AOJJcNyPbF7Y5atRH7C9uY54WWxZMdYtRFOIFUp2wq6GC
+ 9BzZ0GK7JFTYD2hAE7KCXBYOemm6JtZ42v+EXGek0GMo5xWcD5OG/62Pa/f6MT3BR7k9
+ YErXtsUwLkeSp6ZRgxmbS5AdoTqHEkb6fPnPcX/C/pVgzjjU6ye87DsmIpIw02elQrv+
+ nZByI1tPjsbw3kjLEweLGelcEpanAjQN5NJniGtDGeE4od/RLdPot0SH1qJ9mA2CECj5 LA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yu8etarp9-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yua4waaq6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Mar 2020 10:46:43 +0100
+ Wed, 18 Mar 2020 10:50:25 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CB363100038;
- Wed, 18 Mar 2020 10:46:39 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C235621FE8F;
- Wed, 18 Mar 2020 10:46:39 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 18 Mar
- 2020 10:46:39 +0100
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 18 Mar 2020 10:46:39 +0100
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 8/9] ram: stm32mp1: reduce delay after BIST reset for
- tuning
-Thread-Index: AQHV86AJ7aF+O1aJ5Uu0fItgihs606hOHDiA
-Date: Wed, 18 Mar 2020 09:46:39 +0000
-Message-ID: <d518b81d-48ae-5952-cb65-57ccef1ed5f3@st.com>
-References: <20200306101412.15376-1-patrick.delaunay@st.com>
- <20200306111355.8.I2ed443e2c15db6b007f836254b3753da9b06e76d@changeid>
-In-Reply-To: <20200306111355.8.I2ed443e2c15db6b007f836254b3753da9b06e76d@changeid>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
-Content-ID: <B7A5AACF8757D04C8B74C9C2395F29EA@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F0B6810002A;
+ Wed, 18 Mar 2020 10:50:20 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E029C21FEB7;
+ Wed, 18 Mar 2020 10:50:20 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Wed, 18 Mar 2020 10:50:20 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 18 Mar 2020 10:50:15 +0100
+Message-ID: <20200318095016.19942-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG8NODE3.st.com (10.75.127.24) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
- definitions=2020-03-18_03:2020-03-17,
+ definitions=2020-03-18_04:2020-03-17,
  2020-03-18 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 8/9] ram: stm32mp1: reduce delay after
- BIST reset for tuning
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Christophe Roullier <christophe.roullier@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] net: dwc_eth_qos: implement reset-gpios
+	for stm32
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,36 +73,115 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+From: Christophe Roullier <christophe.roullier@st.com>
 
-On 3/6/20 11:14 AM, Patrick Delaunay wrote:
-> Reduce the delay after BIST delay, from 1ms to 10us
-> which is enough accoriding datasheet.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  drivers/ram/stm32mp1/stm32mp1_tuning.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_tuning.c b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> index 07d57d496c..3013b7b667 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> @@ -402,7 +402,7 @@ run:
->  		writel(rand(), &phy->bistlsr);
->  
->  	/* some delay to reset BIST */
-> -	mdelay(1);
-> +	udelay(10);
->  
->  	/*Perform BIST Run*/
->  	clrsetbits_le32(&phy->bistrr,
+Add management of property "reset-gpios" in the node identified by
+"phy-handle" to configure any GPIO used to reset the PHY.
 
-Acked-by: Patrice Chotard <patrice.chotard@st.com>
+Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
+Reviewed-by: Patrice CHOTARD <patrice.chotard@st.com>
+Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-Thanks
+ drivers/net/dwc_eth_qos.c | 53 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
 
-Patrice
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 0564bebf76..4796659216 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -694,6 +694,29 @@ static int eqos_start_resets_tegra186(struct udevice *dev)
+ 
+ static int eqos_start_resets_stm32(struct udevice *dev)
+ {
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	int ret;
++
++	debug("%s(dev=%p):\n", __func__, dev);
++	if (dm_gpio_is_valid(&eqos->phy_reset_gpio)) {
++		ret = dm_gpio_set_value(&eqos->phy_reset_gpio, 1);
++		if (ret < 0) {
++			pr_err("dm_gpio_set_value(phy_reset, assert) failed: %d",
++			       ret);
++			return ret;
++		}
++
++		udelay(2);
++
++		ret = dm_gpio_set_value(&eqos->phy_reset_gpio, 0);
++		if (ret < 0) {
++			pr_err("dm_gpio_set_value(phy_reset, deassert) failed: %d",
++			       ret);
++			return ret;
++		}
++	}
++	debug("%s: OK\n", __func__);
++
+ 	return 0;
+ }
+ 
+@@ -709,6 +732,18 @@ static int eqos_stop_resets_tegra186(struct udevice *dev)
+ 
+ static int eqos_stop_resets_stm32(struct udevice *dev)
+ {
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	int ret;
++
++	if (dm_gpio_is_valid(&eqos->phy_reset_gpio)) {
++		ret = dm_gpio_set_value(&eqos->phy_reset_gpio, 1);
++		if (ret < 0) {
++			pr_err("dm_gpio_set_value(phy_reset, assert) failed: %d",
++			       ret);
++			return ret;
++		}
++	}
++
+ 	return 0;
+ }
+ 
+@@ -1604,6 +1639,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+ 	int ret;
+ 	phy_interface_t interface;
++	struct ofnode_phandle_args phandle_args;
+ 
+ 	debug("%s(dev=%p):\n", __func__, dev);
+ 
+@@ -1641,6 +1677,20 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+ 	if (ret)
+ 		pr_warn("No phy clock provided %d", ret);
+ 
++	ret = dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
++					 &phandle_args);
++	if (!ret) {
++		/* search "reset-gpios" in phy node */
++		ret = gpio_request_by_name_nodev(phandle_args.node,
++						 "reset-gpios", 0,
++						 &eqos->phy_reset_gpio,
++						 GPIOD_IS_OUT |
++						 GPIOD_IS_OUT_ACTIVE);
++		if (ret)
++			pr_warn("gpio_request_by_name(phy reset) not provided %d",
++				ret);
++	}
++
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
+ 
+@@ -1704,6 +1754,9 @@ static int eqos_remove_resources_stm32(struct udevice *dev)
+ 	if (clk_valid(&eqos->clk_ck))
+ 		clk_free(&eqos->clk_ck);
+ 
++	if (dm_gpio_is_valid(&eqos->phy_reset_gpio))
++		dm_gpio_free(dev, &eqos->phy_reset_gpio);
++
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
+ }
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

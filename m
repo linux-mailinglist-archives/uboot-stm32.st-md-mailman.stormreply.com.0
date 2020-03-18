@@ -2,68 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A529184D95
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Mar 2020 18:26:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 131B71896C7
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 09:23:06 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 06330C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 13 Mar 2020 17:26:08 +0000 (UTC)
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
- [209.85.160.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA3A5C36B11
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 08:23:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9FABDC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27C81C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 13 Mar 2020 17:26:06 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id v15so8183848qto.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 13 Mar 2020 10:26:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=LhzCO1UlBvaMpB4JhdftWoFaEtsIq0scMosGyQtHXaw=;
- b=CAfcFwWD/vxJnzeqjy+l2gLTyURtcljVMYA1jHc3rN8oX6F3evyF+z8700kZONu/QE
- TvnEJhIWC6DwekHAcaEv2df4E9e4PafrQYTqSorrbuxaW2ekCJKOXyH2CNiGYJRPYlUc
- J5d6Xa08ywKGld6Fn38gYedE6legJTwU+tFJY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=LhzCO1UlBvaMpB4JhdftWoFaEtsIq0scMosGyQtHXaw=;
- b=VayN8zTwVZZG9yYrlLwStOdMehan/t4d0U/ASV/VLKpodDhXjsmF4noP11M0m3OOxE
- QDG3Mouq1L22U1COcdtWuRjs15Bqc7bRXMRi3xLsj79zH8fkobiHFLLsisqU4aWOtEJe
- suRqpgc3Z0Q5EZa4rQ16PpSZf0LbMX8of8NcYzVzRkNy79OZT+ww+AOlThr6Ejxx5pE4
- UR4ifMWAtUm4wSTfhEz/ecxNoiu7XCDVEB1ntMUGoQnA9CBgq4usZrtoYp/WnYQISSNo
- AZ2r1vjuhWyLPUwGUy03Fa/oOkpcPr+MItDWr1h1wcIv+PEFtGtx7PE4tm+xJ0Ks9JD5
- vYGQ==
-X-Gm-Message-State: ANhLgQ0SkW8MpX2LoY6QodJcff9tCuaBp5r7OLO2ToZyV3plfKoWTfgD
- /oz4HcGEP3bMoRNvfnNZlC9MIQ==
-X-Google-Smtp-Source: ADFU+vu+cQmmdtRjAKQ4lrfXHTORuvMjh+eegFrniCPk+zhCzIdbmfHQIB8L42BPxA3C3QJCtKY7wQ==
-X-Received: by 2002:ac8:4e91:: with SMTP id 17mr13992029qtp.133.1584120364945; 
- Fri, 13 Mar 2020 10:26:04 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8c31-2540-47b7-0a1a-2287.inf6.spectrum.com.
- [2606:a000:1401:8c31:2540:47b7:a1a:2287])
- by smtp.gmail.com with ESMTPSA id f13sm16483423qte.53.2020.03.13.10.26.02
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 13 Mar 2020 10:26:03 -0700 (PDT)
-Date: Fri, 13 Mar 2020 13:26:01 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20200313172601.GK12423@bill-the-cat>
-References: <20200312111114.1.Ib3afa8c50c18f3d86fb39f535864476f697b8ba7@changeid>
+ Wed, 18 Mar 2020 08:23:04 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 02I8IeM6014450; Wed, 18 Mar 2020 09:22:57 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=FB2XsivTgdNdvVHeF7HWDNkRKRfJLRjhHSVzAb4dPFM=;
+ b=HWXf+rLhT30WmIdECdvT6nwGRULbO/Lhav5Lf35pUhyJC5lgfeoYO4jjYdtDdTm5vwmi
+ J/g3gsTHRBOeo/nYRHVrFF1gUb/tbJrOdKXOhdxliVCuydpj0pIl6aXpWMKLnU3XjMyW
+ 6uoo49OGF0jxs925TP2QFoLuZwehUNiah7mTQEF4yrho6xYN/7NXyq2d//KA7+KXFeqr
+ nR0i3lqTZIyaUjTUswtmALeSTQWPU0JbaInOQkQ6nP7xcbs6101oOJbZ1fgPgr9z+vnI
+ LXWbl16fCxGzrqxdMz70x0sHLuAc6WE3FryqVcROAXaIzxOCVO7jxXBaO9Gq+Vyxr/A+ MA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2yu6xdam59-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 18 Mar 2020 09:22:57 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 07BE4100038;
+ Wed, 18 Mar 2020 09:22:56 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DA00221CA90;
+ Wed, 18 Mar 2020 09:22:56 +0100 (CET)
+Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Wed, 18 Mar 2020 09:22:56 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 18 Mar 2020 09:22:43 +0100
+Message-ID: <20200318082254.7522-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200312111114.1.Ib3afa8c50c18f3d86fb39f535864476f697b8ba7@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, Lokesh Vutla <lokeshvutla@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, "Andrew F. Davis" <afd@ti.com>,
- u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] MAINTAINERS: update entry for ARM STI
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
+ definitions=2020-03-18_03:2020-03-17,
+ 2020-03-18 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Boris Brezillon <bbrezillon@kernel.org>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Fabien Dessenne <fabien.dessenne@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 00/11] stm32mp1: migrate MTD and DFU
+	configuration in Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,62 +70,75 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2912918867649983340=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============2912918867649983340==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="4kf3ZaKr/mmDV0ZC"
-Content-Disposition: inline
+This serie migrate the dynamically build MTD (CONFIG_SYS_MTDPARTS_RUNTIME)
+and the DFU configuration (CONFIG_SET_DFU_ALT_INFO)
+previously based on ENV variables to CONFIG_.
+
+These patches reduce the size of the environment and allow to tune
+for each target with a specific defconfig file.
+
+This serie also removes the TEE deconfig, replaced by a dynamic
+detection based on op-tee driver probe.
+
+This serie depends on previous CONFIG migration proposed in
+http://patchwork.ozlabs.org/project/uboot/list/?series=160899
+- configs: migrate CONFIG_SET_DFU_ALT_INFO to defconfigs
+- configs: migrate CONFIG_SYS_MTDPARTS_RUNTIME to defconfigs
 
 
---4kf3ZaKr/mmDV0ZC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 12, 2020 at 11:11:18AM +0100, Patrice Chotard wrote:
+Patrick Delaunay (11):
+  board: stm32mp1: move board_get_mtdparts in st common directory
+  board: stm32mp1: move set_dfu_alt_info in st common directory
+  stm32mp1: dynamically build DFU_ALT_INFO
+  stm32mp1: move MTDPART configuration in Kconfig
+  board: stm32mp1: reserve memory for OP-TEE in device tree
+  stm32mp1: dynamically detect op-tee presence
+  board: stm32mp1: use FDT address provided by TF-A at boot time
+  configs: stm32mp1: remove optee defconfig
+  board: stm32mp1: support boot from spi-nand
+  board: stm32mp1: adapt MTD partition for BOOT from NOR or NAND
+  doc: stm32mp1: update DFU support example
 
-> Add STi drivers/include files and git tree.
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+ arch/arm/dts/stm32mp157a-dk1.dts           |   5 +
+ arch/arm/dts/stm32mp157c-ed1.dts           |   5 +
+ arch/arm/mach-stm32mp/Kconfig              |  10 -
+ arch/arm/mach-stm32mp/Makefile             |   1 +
+ arch/arm/mach-stm32mp/boot_params.c        |  45 ++++
+ arch/arm/mach-stm32mp/cpu.c                |   4 +
+ arch/arm/mach-stm32mp/dram_init.c          |  18 ++
+ arch/arm/mach-stm32mp/fdt.c                |  25 ++
+ arch/arm/mach-stm32mp/include/mach/stm32.h |   3 +
+ arch/arm/mach-stm32mp/spl.c                |   2 +
+ board/dhelectronics/dh_stm32mp1/Kconfig    |   1 +
+ board/dhelectronics/dh_stm32mp1/Makefile   |   3 +
+ board/dhelectronics/dh_stm32mp1/board.c    | 143 +-----------
+ board/st/common/Kconfig                    |  64 ++++++
+ board/st/common/Makefile                   |   5 +
+ board/st/common/stm32mp_dfu.c              | 225 ++++++++++++++++++
+ board/st/common/stm32mp_mtdparts.c         | 157 +++++++++++++
+ board/st/stm32mp1/MAINTAINERS              |   1 -
+ board/st/stm32mp1/stm32mp1.c               | 253 +--------------------
+ configs/stm32mp15_optee_defconfig          | 132 -----------
+ configs/stm32mp15_trusted_defconfig        |   3 +
+ doc/board/st/stm32mp1.rst                  | 147 +++++-------
+ include/configs/stm32mp1.h                 |  64 +-----
+ 23 files changed, 634 insertions(+), 682 deletions(-)
+ create mode 100644 arch/arm/mach-stm32mp/boot_params.c
+ create mode 100644 board/st/common/stm32mp_dfu.c
+ create mode 100644 board/st/common/stm32mp_mtdparts.c
+ delete mode 100644 configs/stm32mp15_optee_defconfig
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---4kf3ZaKr/mmDV0ZC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl5rwikACgkQFHw5/5Y0
-tyyepQv+P3jnIzlAlTKfSdRSP4K81ALd7eaguF5oD6qv6AWALpyCdQiJCfWMS60t
-x8cceCv6rXJ/yyPkt3qu678g++bKL7y2nlnECYxb975NeXEjvKMV3UibHtMVXSXC
-pSOIXzRYrw3qVVvGQxRzLMoNtYOzAwlIVZWbTxowWAAg4KJ1ft5Af6FKzuSnf6YT
-c7tUWQn4VbyIqsf4Z3RwX2TUGGejehqwvGvPu6OQsX6DmwCtpZCYrp7c3IGHEPAL
-fKlULy/UbpGGHZxA99BEuOIVLae2DC3rKRhniVRl1GPQcLPK+RA0kLW+G+2DqTkp
-cPrPHIONhO5bsPcbNP/Pa8ZoEzJKtOw9prm3hsr4EWBxcUSLVlggcnzh37R71onP
-ZxIMkZQWGaxlL3TH3nbSyF6SPhheBzW+AP/veDxPzWY1PztYAmkYCFAiAgqjKN7R
-eGGfDzp2jEMQ0KSQZFMMXPw/zjQ0lYiKILdlIE7AWvhsMsZyb6iv3mnX/aTWDNYB
-z9T2HCKf
-=QiCt
------END PGP SIGNATURE-----
-
---4kf3ZaKr/mmDV0ZC--
-
---===============2912918867649983340==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2912918867649983340==--

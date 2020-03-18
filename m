@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8251D1896EC
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 09:25:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E5181896EE
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 09:25:19 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3F035C36B11
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 08:25:18 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 58CAFC36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 08:25:19 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0A04BC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8BA3C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Wed, 18 Mar 2020 08:25:17 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02I8Ic21014430; Wed, 18 Mar 2020 09:25:16 +0100
+ 02I8IeHm014442; Wed, 18 Mar 2020 09:25:17 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=WUJPl98nsfKoeF7t5ApOmLK4dn6/826dnimP/+9zGCU=;
- b=dY/KdIQ62k475zk0rN7t7UGSNRh7tPmLaxkPzbpnYtlqmKLqqdCNoaDAaz79wn3kIaZ9
- O2QuniOMH4JNB/1xw1LmavKPNx1+7YqExcIWVpaj6xC4XQZDRmW0UxSF7jfKskm5lg4B
- fWRwR1vAfhtQFiwlDGUjSsR+If8UMlf17sjziWnwZvuWLyLZ5ynIdGF0cbcwZZBvATbM
- c+hq2bxKdbQvIr+5+bkOMWlAO90vBUkFBhixZ6qBX8F7jW6TGgcc65WaGI6m+SteyjuB
- fLJPkJLunc1txnMAq5BH1DrUhHfd2GVL2/3vFqdYkK97kivVisU/qhFkAchxI+7IPh0M CA== 
+ bh=kHbyp/BPhygvp6F0mJOQfPPz/aeRC5X04Krmjj7q4bU=;
+ b=FazSJdoG1eOpmosG6pquCaZmhgbA54TphYU9ImcwXgNYq9LF5RHM5CF2rnqRKix6hAcu
+ HuZydUsCN8VQd0sNaVGinX/2jjPGZzbL4gQ5XjSYD7l0LqmXSc20OdafEFl8qg+HBZ/+
+ b21CTJ00qox6T0ya8axwMsD31gx8qy5ePyIs91eKercpFUcclZJR7tuCca8InCmy/a9w
+ sYNlWyDJU/nogA7xlw6pEA69md/sT5w2Yr5P+WwLskgsRChs3A54ypFGSWqaKUb3Y6xR
+ i8/kkDomKnAbb22DdP586FNPiUp2UQq7vlQNSTPBlFbJOjXF/tPDTce9VxoIdEVe0AgA eg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yu6xdamkn-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yu6xdamkr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Mar 2020 09:25:15 +0100
+ Wed, 18 Mar 2020 09:25:17 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 900BB100034;
- Wed, 18 Mar 2020 09:25:11 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5BF4210003E;
+ Wed, 18 Mar 2020 09:25:12 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8102921CA95;
- Wed, 18 Mar 2020 09:25:11 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4CE3221CA95;
+ Wed, 18 Mar 2020 09:25:12 +0100 (CET)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 18 Mar 2020 09:25:10 +0100
+ Wed, 18 Mar 2020 09:25:11 +0100
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 18 Mar 2020 09:24:51 +0100
-Message-ID: <20200318082503.8025-7-patrick.delaunay@st.com>
+Date: Wed, 18 Mar 2020 09:24:52 +0100
+Message-ID: <20200318082503.8025-8-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200318082503.8025-1-patrick.delaunay@st.com>
 References: <20200318082503.8025-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
  definitions=2020-03-18_03:2020-03-17,
@@ -57,7 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 06/18] stm32mp: stm32prog: add MMC device
+Subject: [Uboot-stm32] [PATCH 07/18] stm32mp: stm32prog: add support of boot
+	partition for eMMC device
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,387 +75,214 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of MMC device (based on DFU_MMC backend)
-for SD card and eMMC update.
+Add support of eMMC device boot partition with
+part_id = -1 for offset="boot1"
+     or = -2 for offset="boot2"
 
-Create a GPT partitioning on the device.
+The stm32prog command configures the MMC DFU backend with "mmcpart"
+and configure the eMMC (command "mmc bootbus" and "mmc partconf")
+when the update is done.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/arm/mach-stm32mp/Kconfig                 |   3 +
- .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 204 +++++++++++++++++-
- .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |   3 +
- configs/stm32mp15_basic_defconfig             |   2 -
- configs/stm32mp15_trusted_defconfig           |   2 -
- 5 files changed, 209 insertions(+), 5 deletions(-)
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 124 +++++++++++++-----
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |   2 +-
+ 2 files changed, 90 insertions(+), 36 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index 61466f6125..39504e8540 100644
---- a/arch/arm/mach-stm32mp/Kconfig
-+++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -119,6 +119,9 @@ config CMD_STM32PROG
- 	select DFU
- 	select DFU_RAM
- 	select DFU_VIRT
-+	select PARTITION_TYPE_GUID
-+	imply CMD_GPT if MMC
-+	imply DFU_MMC if MMC
- 	help
- 		activate a specific command stm32prog for STM32MP soc family
- 		witch update the device with the tools STM32CubeProgrammer,
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 11fe479072..feb83670b5 100644
+index feb83670b5..f63036606e 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -7,6 +7,7 @@
- #include <console.h>
- #include <dfu.h>
- #include <malloc.h>
-+#include <mmc.h>
- #include <dm/uclass.h>
- #include <linux/list.h>
- #include <linux/list_sort.h>
-@@ -14,6 +15,9 @@
+@@ -259,12 +259,30 @@ static int parse_offset(struct stm32prog_data *data,
+ 	char *tail;
  
- #include "stm32prog.h"
- 
-+/* Primary GPT header size for 128 entries : 17kB = 34 LBA of 512B */
-+#define GPT_HEADER_SZ	34
-+
- #define OPT_SELECT	BIT(0)
- #define OPT_EMPTY	BIT(1)
- 
-@@ -22,6 +26,32 @@
- 
- #define ALT_BUF_LEN			SZ_1K
- 
-+#define ROOTFS_MMC0_UUID \
-+	EFI_GUID(0xE91C4E10, 0x16E6, 0x4C0E, \
-+		 0xBD, 0x0E, 0x77, 0xBE, 0xCF, 0x4A, 0x35, 0x82)
-+
-+#define ROOTFS_MMC1_UUID \
-+	EFI_GUID(0x491F6117, 0x415D, 0x4F53, \
-+		 0x88, 0xC9, 0x6E, 0x0D, 0xE5, 0x4D, 0xEA, 0xC6)
-+
-+#define ROOTFS_MMC2_UUID \
-+	EFI_GUID(0xFD58F1C7, 0xBE0D, 0x4338, \
-+		 0x88, 0xE9, 0xAD, 0x8F, 0x05, 0x0A, 0xEB, 0x18)
-+
-+/* RAW parttion (binary / bootloader) used Linux - reserved UUID */
-+#define LINUX_RESERVED_UUID "8DA63339-0007-60C0-C436-083AC8230908"
-+
-+/*
-+ * unique partition guid (uuid) for partition named "rootfs"
-+ * on each MMC instance = SD Card or eMMC
-+ * allow fixed kernel bootcmd: "rootf=PARTUID=e91c4e10-..."
-+ */
-+static const efi_guid_t uuid_mmc[3] = {
-+	ROOTFS_MMC0_UUID,
-+	ROOTFS_MMC1_UUID,
-+	ROOTFS_MMC2_UUID
-+};
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- /* order of column in flash layout file */
-@@ -200,6 +230,9 @@ static int parse_ip(struct stm32prog_data *data,
- 	part->dev_id = 0;
- 	if (!strcmp(p, "none")) {
- 		part->target = STM32PROG_NONE;
-+	} else if (!strncmp(p, "mmc", 3)) {
-+		part->target = STM32PROG_MMC;
-+		len = 3;
- 	} else {
- 		result = -EINVAL;
- 	}
-@@ -424,16 +457,50 @@ static int __init part_cmp(void *priv, struct list_head *a, struct list_head *b)
- static int init_device(struct stm32prog_data *data,
- 		       struct stm32prog_dev_t *dev)
- {
-+	struct mmc *mmc = NULL;
- 	struct blk_desc *block_dev = NULL;
- 	int part_id;
- 	u64 first_addr = 0, last_addr = 0;
- 	struct stm32prog_part_t *part, *next_part;
- 
- 	switch (dev->target) {
-+#ifdef CONFIG_MMC
-+	case STM32PROG_MMC:
-+		mmc = find_mmc_device(dev->dev_id);
-+		if (mmc_init(mmc)) {
-+			stm32prog_err("mmc device %d not found", dev->dev_id);
-+			return -ENODEV;
-+		}
-+		block_dev = mmc_get_blk_desc(mmc);
-+		if (!block_dev) {
-+			stm32prog_err("mmc device %d not probed", dev->dev_id);
-+			return -ENODEV;
-+		}
-+		dev->erase_size = mmc->erase_grp_size * block_dev->blksz;
-+		dev->mmc = mmc;
-+
-+		/* reserve a full erase group for each GTP headers */
-+		if (mmc->erase_grp_size > GPT_HEADER_SZ) {
-+			first_addr = dev->erase_size;
-+			last_addr = (u64)(block_dev->lba -
-+					  mmc->erase_grp_size) *
-+				    block_dev->blksz;
+ 	part->part_id = 0;
++	part->addr = 0;
+ 	part->size = 0;
+-	part->addr = simple_strtoull(p, &tail, 0);
+-	if (tail == p || *tail != '\0') {
+-		stm32prog_err("Layout line %d: invalid offset '%s'",
+-			      i, p);
+-		result = -EINVAL;
++	/* eMMC boot parttion */
++	if (!strncmp(p, "boot", 4)) {
++		if (strlen(p) != 5) {
++			result = -EINVAL;
 +		} else {
-+			first_addr = (u64)GPT_HEADER_SZ * block_dev->blksz;
-+			last_addr = (u64)(block_dev->lba - GPT_HEADER_SZ - 1) *
-+				    block_dev->blksz;
++			if (p[4] == '1')
++				part->part_id = -1;
++			else if (p[4] == '2')
++				part->part_id = -2;
++			else
++				result = -EINVAL;
 +		}
-+		pr_debug("MMC %d: lba=%ld blksz=%ld\n", dev->dev_id,
-+			 block_dev->lba, block_dev->blksz);
-+		pr_debug(" available address = 0x%llx..0x%llx\n",
-+			 first_addr, last_addr);
-+		break;
-+#endif
- 	default:
- 		stm32prog_err("unknown device type = %d", dev->target);
- 		return -ENODEV;
++		if (result)
++			stm32prog_err("Layout line %d: invalid part '%s'",
++				      i, p);
++	} else {
++		part->addr = simple_strtoull(p, &tail, 0);
++		if (tail == p || *tail != '\0') {
++			stm32prog_err("Layout line %d: invalid offset '%s'",
++				      i, p);
++			result = -EINVAL;
++		}
  	}
-+	pr_debug(" erase size = 0x%x\n", dev->erase_size);
  
- 	/* order partition list in offset order */
- 	list_sort(NULL, &dev->part_list, &part_cmp);
-@@ -491,6 +558,12 @@ static int init_device(struct stm32prog_data *data,
- 			return -EINVAL;
- 		}
+ 	return result;
+@@ -451,7 +469,10 @@ static int __init part_cmp(void *priv, struct list_head *a, struct list_head *b)
+ 	parta = container_of(a, struct stm32prog_part_t, list);
+ 	partb = container_of(b, struct stm32prog_part_t, list);
  
-+		if ((part->addr & ((u64)part->dev->erase_size - 1)) != 0) {
-+			stm32prog_err("%s (0x%x): not aligned address : 0x%llx on erase size 0x%x",
-+				      part->name, part->id, part->addr,
-+				      part->dev->erase_size);
-+			return -EINVAL;
-+		}
- 		pr_debug("%02d : %1d %02x %14s %02d %02d.%02d %08llx %08llx",
- 			 part->part_id, part->option, part->id, part->name,
- 			 part->part_type, part->target,
-@@ -559,6 +632,118 @@ static int treat_partition_list(struct stm32prog_data *data)
- 	return 0;
+-	return parta->addr > partb->addr ? 1 : -1;
++	if (parta->part_id != partb->part_id)
++		return parta->part_id - partb->part_id;
++	else
++		return parta->addr > partb->addr ? 1 : -1;
  }
  
-+static int create_partitions(struct stm32prog_data *data)
-+{
-+#ifdef CONFIG_MMC
-+	int offset = 0;
-+	const int buflen = SZ_8K;
-+	char *buf;
-+	char uuid[UUID_STR_LEN + 1];
-+	unsigned char *uuid_bin;
-+	unsigned int mmc_id;
-+	int i;
-+	bool rootfs_found;
-+	struct stm32prog_part_t *part;
+ static int init_device(struct stm32prog_data *data,
+@@ -520,44 +541,53 @@ static int init_device(struct stm32prog_data *data,
+ 				 part->dev_id, part->addr, part->size);
+ 			continue;
+ 		}
+-
+-		part->part_id = part_id++;
+-
+-		/* last partition : size to the end of the device */
+-		if (part->list.next != &dev->part_list) {
+-			next_part =
+-				container_of(part->list.next,
+-					     struct stm32prog_part_t,
+-					     list);
+-			if (part->addr < next_part->addr) {
+-				part->size = next_part->addr -
+-					     part->addr;
++		if (part->part_id < 0) { /* boot hw partition for eMMC */
++			if (mmc) {
++				part->size = mmc->capacity_boot;
+ 			} else {
+-				stm32prog_err("%s (0x%x): same address : 0x%llx == %s (0x%x): 0x%llx",
++				stm32prog_err("%s (0x%x): hw partition not expected : %d",
+ 					      part->name, part->id,
+-					      part->addr,
+-					      next_part->name,
+-					      next_part->id,
+-					      next_part->addr);
+-				return -EINVAL;
++					      part->part_id);
++				return -ENODEV;
+ 			}
+ 		} else {
+-			if (part->addr <= last_addr) {
+-				part->size = last_addr - part->addr;
++			part->part_id = part_id++;
 +
-+	buf = malloc(buflen);
-+	if (!buf)
-+		return -ENOMEM;
-+
-+	puts("partitions : ");
-+	/* initialize the selected device */
-+	for (i = 0; i < data->dev_nb; i++) {
-+		offset = 0;
-+		rootfs_found = false;
-+		memset(buf, 0, buflen);
-+
-+		list_for_each_entry(part, &data->dev[i].part_list, list) {
-+			/* skip Raw Image */
-+			if (part->part_type == RAW_IMAGE)
-+				continue;
-+
-+			if (offset + 100 > buflen) {
-+				pr_debug("\n%s: buffer too small, %s skippped",
-+					 __func__, part->name);
-+				continue;
-+			}
-+
-+			if (!offset)
-+				offset += sprintf(buf, "gpt write mmc %d \"",
-+						  data->dev[i].dev_id);
-+
-+			offset += snprintf(buf + offset, buflen - offset,
-+					   "name=%s,start=0x%llx,size=0x%llx",
-+					   part->name,
-+					   part->addr,
-+					   part->size);
-+
-+			if (part->part_type == PART_BINARY)
-+				offset += snprintf(buf + offset,
-+						   buflen - offset,
-+						   ",type="
-+						   LINUX_RESERVED_UUID);
-+			else
-+				offset += snprintf(buf + offset,
-+						   buflen - offset,
-+						   ",type=linux");
-+
-+			if (part->part_type == PART_SYSTEM)
-+				offset += snprintf(buf + offset,
-+						   buflen - offset,
-+						   ",bootable");
-+
-+			if (!rootfs_found && !strcmp(part->name, "rootfs")) {
-+				mmc_id = part->dev_id;
-+				rootfs_found = true;
-+				if (mmc_id < ARRAY_SIZE(uuid_mmc)) {
-+					uuid_bin =
-+					  (unsigned char *)uuid_mmc[mmc_id].b;
-+					uuid_bin_to_str(uuid_bin, uuid,
-+							UUID_STR_FORMAT_GUID);
-+					offset += snprintf(buf + offset,
-+							   buflen - offset,
-+							   ",uuid=%s", uuid);
++			/* last partition : size to the end of the device */
++			if (part->list.next != &dev->part_list) {
++				next_part =
++					container_of(part->list.next,
++						     struct stm32prog_part_t,
++						     list);
++				if (part->addr < next_part->addr) {
++					part->size = next_part->addr -
++						     part->addr;
++				} else {
++					stm32prog_err("%s (0x%x): same address : 0x%llx == %s (0x%x): 0x%llx",
++						      part->name, part->id,
++						      part->addr,
++						      next_part->name,
++						      next_part->id,
++						      next_part->addr);
++					return -EINVAL;
++				}
+ 			} else {
+-				stm32prog_err("%s (0x%x): invalid address 0x%llx (max=0x%llx)",
++				if (part->addr <= last_addr) {
++					part->size = last_addr - part->addr;
++				} else {
++					stm32prog_err("%s (0x%x): invalid address 0x%llx (max=0x%llx)",
++						      part->name, part->id,
++						      part->addr, last_addr);
++					return -EINVAL;
 +				}
 +			}
-+
-+			offset += snprintf(buf + offset, buflen - offset, ";");
-+		}
-+
-+		if (offset) {
-+			offset += snprintf(buf + offset, buflen - offset, "\"");
-+			pr_debug("\ncmd: %s\n", buf);
-+			if (run_command(buf, 0)) {
-+				stm32prog_err("GPT partitionning fail: %s",
-+					      buf);
-+				free(buf);
-+
-+				return -1;
-+			}
-+		}
-+
-+		if (data->dev[i].mmc)
-+			part_init(mmc_get_blk_desc(data->dev[i].mmc));
-+
-+#ifdef DEBUG
-+		sprintf(buf, "gpt verify mmc %d", data->dev[i].dev_id);
-+		pr_debug("\ncmd: %s", buf);
-+		if (run_command(buf, 0))
-+			printf("fail !\n");
-+		else
-+			printf("OK\n");
-+
-+		sprintf(buf, "part list mmc %d", data->dev[i].dev_id);
-+		run_command(buf, 0);
-+#endif
-+	}
-+	puts("done\n");
-+
-+	free(buf);
-+#endif
-+
-+	return 0;
-+}
-+
- static int stm32prog_alt_add(struct stm32prog_data *data,
- 			     struct dfu_entity *dfu,
- 			     struct stm32prog_part_t *part)
-@@ -596,17 +781,30 @@ static int stm32prog_alt_add(struct stm32prog_data *data,
- 	if (part->part_type == RAW_IMAGE) {
- 		u64 dfu_size;
++			if (part->addr < first_addr) {
++				stm32prog_err("%s (0x%x): invalid address 0x%llx (min=0x%llx)",
+ 					      part->name, part->id,
+-					      part->addr, last_addr);
++					      part->addr, first_addr);
+ 				return -EINVAL;
+ 			}
+ 		}
+-		if (part->addr < first_addr) {
+-			stm32prog_err("%s (0x%x): invalid address 0x%llx (min=0x%llx)",
+-				      part->name, part->id,
+-				      part->addr, first_addr);
+-			return -EINVAL;
+-		}
+-
+ 		if ((part->addr & ((u64)part->dev->erase_size - 1)) != 0) {
+ 			stm32prog_err("%s (0x%x): not aligned address : 0x%llx on erase size 0x%x",
+ 				      part->name, part->id, part->addr,
+@@ -657,6 +687,9 @@ static int create_partitions(struct stm32prog_data *data)
+ 		memset(buf, 0, buflen);
  
--		dfu_size = part->size;
-+		if (part->dev->target == STM32PROG_MMC)
-+			dfu_size = part->size / part->dev->mmc->read_bl_len;
-+		else
-+			dfu_size = part->size;
+ 		list_for_each_entry(part, &data->dev[i].part_list, list) {
++			/* skip eMMC boot partitions */
++			if (part->part_id < 0)
++				continue;
+ 			/* skip Raw Image */
+ 			if (part->part_type == RAW_IMAGE)
+ 				continue;
+@@ -787,6 +820,14 @@ static int stm32prog_alt_add(struct stm32prog_data *data,
+ 			dfu_size = part->size;
  		offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
  				   "raw 0x0 0x%llx", dfu_size);
++	} else if (part->part_id < 0) {
++		u64 nb_blk = part->size / part->dev->mmc->read_bl_len;
++
++		offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
++				   "raw 0x%llx 0x%llx",
++				   part->addr, nb_blk);
++		offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
++				   " mmcpart %d;", -(part->part_id));
  	} else {
  		offset += snprintf(buf + offset,
  				   ALT_BUF_LEN - offset,
- 				   "part");
-+		/* dev_id requested by DFU MMC */
-+		if (part->target == STM32PROG_MMC)
-+			offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
-+					   " %d", part->dev_id);
- 		offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
- 				   " %d;", part->part_id);
- 	}
- 	switch (part->target) {
-+#ifdef CONFIG_MMC
-+	case STM32PROG_MMC:
-+		sprintf(dfustr, "mmc");
-+		sprintf(devstr, "%d", part->dev_id);
-+		break;
-+#endif
- 	default:
- 		stm32prog_err("invalid target: %d", part->target);
- 		return -ENODEV;
-@@ -775,6 +973,10 @@ static void stm32prog_devices_init(struct stm32prog_data *data)
- 			goto error;
- 	}
+@@ -908,6 +949,19 @@ static void stm32prog_end_phase(struct stm32prog_data *data)
  
-+	ret = create_partitions(data);
-+	if (ret)
-+		goto error;
+ 	if (!data->cur_part)
+ 		return;
 +
- 	return;
++	if (CONFIG_IS_ENABLED(MMC) &&
++	    data->cur_part->part_id < 0) {
++		char cmdbuf[60];
++
++		sprintf(cmdbuf, "mmc bootbus %d 0 0 0; mmc partconf %d 1 %d 0",
++			data->cur_part->dev_id, data->cur_part->dev_id,
++			-(data->cur_part->part_id));
++		if (run_command(cmdbuf, 0)) {
++			stm32prog_err("commands '%s' failed", cmdbuf);
++			return;
++		}
++	}
+ }
  
- error:
+ void stm32prog_do_reset(struct stm32prog_data *data)
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index b44b6f89af..228a25d37f 100644
+index 228a25d37f..6c3ad56a38 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -19,6 +19,7 @@
+@@ -89,7 +89,7 @@ struct stm32prog_part_t {
  
- enum stm32prog_target {
- 	STM32PROG_NONE,
-+	STM32PROG_MMC,
- };
+ 	/* information on associated device */
+ 	struct stm32prog_dev_t	*dev;		/* pointer to device */
+-	u16			part_id;	/* partition id in device */
++	s16			part_id;	/* partition id in device */
+ 	int			alt_id;		/* alt id in usb/dfu */
  
- enum stm32prog_link_t {
-@@ -64,6 +65,8 @@ enum stm32prog_part_type {
- struct stm32prog_dev_t {
- 	enum stm32prog_target	target;
- 	char			dev_id;
-+	u32			erase_size;
-+	struct mmc		*mmc;
- 	/* list of partition for this device / ordered in offset */
- 	struct list_head	part_list;
- };
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index baed3d92f5..2e7d8bc990 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -35,7 +35,6 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_MTD=y
-@@ -68,7 +67,6 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
- CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_STM32_ADC=y
--CONFIG_DFU_MMC=y
- CONFIG_DFU_MTD=y
- CONFIG_SET_DFU_ALT_INFO=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index adbe304902..6f6c909da0 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -23,7 +23,6 @@ CONFIG_CMD_CLK=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
--CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_MTD=y
-@@ -54,7 +53,6 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
- CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_STM32_ADC=y
--CONFIG_DFU_MMC=y
- CONFIG_DFU_MTD=y
- CONFIG_SET_DFU_ALT_INFO=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
+ 	struct list_head	list;
 -- 
 2.17.1
 

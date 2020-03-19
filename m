@@ -2,62 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5D8318AEF8
-	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 10:13:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E66E18B0B5
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 11:00:25 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4BE51C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 09:13:41 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08051C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 10:00:24 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D4C3C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1F95DC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2020 09:13:40 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48jh6D0Pz3z1rfLn
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2020 10:13:40 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48jh6D0048z1qrG1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2020 10:13:39 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024) with ESMTP id beSexziHWsi8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2020 10:13:39 +0100 (CET)
-X-Auth-Info: EN0y9gOlhHpzk+JRCx2zwruzGUzb6qro2LMDdjLaa9w=
-Received: from janitor.denx.de (unknown [62.91.23.180])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 19 Mar 2020 10:13:39 +0100 (CET)
-Received: by janitor.denx.de (Postfix, from userid 119)
- id D8CD1A2C3F; Thu, 19 Mar 2020 10:13:38 +0100 (CET)
-Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
- by janitor.denx.de (Postfix) with ESMTPS id 228EBA2B88;
- Thu, 19 Mar 2020 10:13:37 +0100 (CET)
-Received: from gemini.denx.de (localhost [IPv6:::1])
- by gemini.denx.de (Postfix) with ESMTP id CFD5E24003E;
- Thu, 19 Mar 2020 10:13:36 +0100 (CET)
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-From: Wolfgang Denk <wd@denx.de>
+ Thu, 19 Mar 2020 10:00:21 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 02J9gr9i026342; Thu, 19 Mar 2020 11:00:11 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=gRU5fv1EhiseRpOlvHFGSW3zppoKvafZlYIhM7IgrzQ=;
+ b=rlDglTYcqkhIK/ngg6b9ZYmHBZreO5v0bzKols4pSghhaDIyK89OD6rkkYcyQI3gabsq
+ VjyE6Iw2a/81HEHiz/O49iyIAA3xrlkG2K7EsIwVCxD+QGcfDnCRfaOxFdgXkrh1U+Ds
+ VwFmeNa4XGI7kltHGz4MROwuVeNajLrszdFVhz1gzI7rEZrGj/U3G07EqbJDcog8d/Gk
+ BkeusomhTaISruAbZ7N8eW6oLdmLHu99oDT1tpBgENYIldamR48T6w7OIPyAgQHQ05EQ
+ w1owKYibrSTfUMj6J/91l1x1e7WCi63j7Gr3WuXI6fqeeYnXlGYydodwNILndGtP8ZOs QQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 2yu95uruep-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 19 Mar 2020 11:00:11 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 32A0110003E;
+ Thu, 19 Mar 2020 11:00:04 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1914F2A4D7E;
+ Thu, 19 Mar 2020 11:00:04 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Thu, 19 Mar 2020 11:00:03 +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Thu, 19 Mar 2020 10:59:33 +0100
+Message-ID: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-reply-to: <07159b22a76a445089aa6cd646c0ef1c@SFHDAG6NODE3.st.com>
-References: <20200212183744.5309-1-patrick.delaunay@st.com>
- <20200212183744.5309-8-patrick.delaunay@st.com>
- <20200318104452.3B6E824003E@gemini.denx.de>
- <07159b22a76a445089aa6cd646c0ef1c@SFHDAG6NODE3.st.com>
-Comments: In-reply-to Patrick DELAUNAY <patrick.delaunay@st.com>
- message dated "Thu, 19 Mar 2020 08:57:58 +0000."
-Date: Thu, 19 Mar 2020 10:13:36 +0100
-Message-Id: <20200319091336.CFD5E24003E@gemini.denx.de>
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
+ definitions=2020-03-19_02:2020-03-18,
+ 2020-03-19 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 07/10] board: stm32mp1: add finished good
-	in board identifier OTP
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
+ Wolfgang Denk <wd@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
+	mmc_get_env_dev with OF_CONTROL
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,29 +72,62 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Dear Patrick,
+Use the weak function mmc_get_env_dev in mmc_offset_try_partition
+function to allow dynamic selection of mmc device to use
+and no more use directly the define CONFIG_SYS_MMC_ENV_DEV.
 
-In message <07159b22a76a445089aa6cd646c0ef1c@SFHDAG6NODE3.st.com> you wrote:
->
-> > I can't parse the sentence above, sorry.
-> 
-> It is a part of the codification used in production of ST board, sorry if it is not clear.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-I see.
+ env/mmc.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
-Please add suich explanation to the commit message and maybe even
-comment in the code.
-
-Best regards,
-
-Wolfgang Denk
-
+diff --git a/env/mmc.c b/env/mmc.c
+index 251ad07d7c..902cca23ad 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -24,14 +24,25 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#if !defined(CONFIG_SYS_MMC_ENV_DEV)
++#define CONFIG_SYS_MMC_ENV_DEV 0
++#endif
++
++__weak int mmc_get_env_dev(void)
++{
++	return CONFIG_SYS_MMC_ENV_DEV;
++}
++
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
+ static inline int mmc_offset_try_partition(const char *str, s64 *val)
+ {
+ 	disk_partition_t info;
+ 	struct blk_desc *desc;
+ 	int len, i, ret;
++	char dev_str[4];
+ 
+-	ret = blk_get_device_by_str("mmc", STR(CONFIG_SYS_MMC_ENV_DEV), &desc);
++	snprintf(dev_str, sizeof(dev_str), "%d", mmc_get_env_dev());
++	ret = blk_get_device_by_str("mmc", dev_str, &desc);
+ 	if (ret < 0)
+ 		return (ret);
+ 
+@@ -114,11 +125,6 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+ 	return 0;
+ }
+ 
+-__weak int mmc_get_env_dev(void)
+-{
+-	return CONFIG_SYS_MMC_ENV_DEV;
+-}
+-
+ #ifdef CONFIG_SYS_MMC_ENV_PART
+ __weak uint mmc_get_env_part(struct mmc *mmc)
+ {
 -- 
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
-Everyone, in some small sacred sanctuary of the self, is nuts.
-                                                         - Leo Rosten
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

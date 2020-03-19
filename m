@@ -2,84 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F20A218A02F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 17:06:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A70E18AED7
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 09:58:04 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B754EC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Mar 2020 16:06:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 544B7C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Mar 2020 08:58:04 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 32EEBC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40AB4C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Mar 2020 16:06:27 +0000 (UTC)
+ Thu, 19 Mar 2020 08:58:02 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02IFmlZt002455; Wed, 18 Mar 2020 17:06:04 +0100
+ 02J8qtec025685; Thu, 19 Mar 2020 09:57:59 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=Rx1L9R7GomIyat6/v4EUrUl1fVENXrGUsIJdcGTsbbE=;
- b=QfJ+nm1Fhx1K1/fIq3rhTQ/JDIPTexXME73R+qxKD/C3NlU/UynUzxqW4UPQAMdmOots
- m/Vg5ojl/9bKnZ+CtkuCXAmPJzbPGzZ23qPT8/YZRyg3bhEGZAJKpxATpe7NFicdNxe6
- z8WVofVT4qnTJXtwqIwl1tr9u97QFWb4zp5QqyinxoeFGHQia4Udw8fY3oNEPq+H1pCO
- 0sddnpRgdSmIqgYGdtVwO9DU9x2/IVnOH/noda4a0squccMcccPCgc17hR5DhKwPcJJS
- +2WNiCrcWhz4RvlFoT5ce2cGV47rqEOQL5DHyy9T9tN9sM3ev0ogxnYs1hmwpfIn8CQ7 oA== 
+ bh=zHSbPt4AK4MWYeNgjW0ZiI5ZoqzdXApLKuEbAHEfezw=;
+ b=fMG0/Z7soJRB02fSAgallg25Hv0Q8zrDWzEvWBhZeYqOZDpXRBGwgz2z4U/sLN4RT8B0
+ EzFHcwczxMiZcPlLEKFEGRXEtHiseUWFY7iNPgOroiokka5/+EFV47A4CPztsuJqI6VQ
+ Q15DlGnQT/hIQcj0tO6bdCIFr71v7e2glCwbnBWlpU0RKR+z7ZzRPyReEGyYA2Utr5Hm
+ KPXWaRMYssodBWSeTCB9+aAQEQ20L0aIA5ZG7cjfZ8dbEADFl9pCgSe0uAR0E4BJwf+x
+ jZW1fgQ0s5GemhuWyXVbySnIDGjqUc2JpL5eJd9hIw5hwede5pZ0l689QLYbtlrGIWIs dw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yu6xdd4ve-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yu6xdh2v7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 Mar 2020 17:06:03 +0100
+ Thu, 19 Mar 2020 09:57:59 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7DED610002A;
- Wed, 18 Mar 2020 17:06:03 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D9146100034;
+ Thu, 19 Mar 2020 09:57:58 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D7062AF332;
- Wed, 18 Mar 2020 17:06:03 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C46AB21FE9F;
+ Thu, 19 Mar 2020 09:57:58 +0100 (CET)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 18 Mar
- 2020 17:06:03 +0100
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 19 Mar
+ 2020 09:57:58 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 18 Mar 2020 17:06:02 +0100
+ 15.00.1473.003; Thu, 19 Mar 2020 09:57:58 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>
-Thread-Topic: [PATCH v4 3/3] env: Add CONFIG_ENV_FULL_SUPPORT
-Thread-Index: AQHVebulHd4l62JRsUqktuT6G9ATgKhPiimA
-Date: Wed, 18 Mar 2020 16:06:02 +0000
-Message-ID: <1268da43d27a4f11b49e6e3a68e76a28@SFHDAG6NODE3.st.com>
-References: <20191003072428.19197-1-patrick.delaunay@st.com>
- <20191003072428.19197-4-patrick.delaunay@st.com>
-In-Reply-To: <20191003072428.19197-4-patrick.delaunay@st.com>
+To: Wolfgang Denk <wd@denx.de>
+Thread-Topic: [PATCH 07/10] board: stm32mp1: add finished good in board
+ identifier OTP
+Thread-Index: AQHV4dOJFMqSQuMDi0GTaKvIgTu+3ahOUBcAgAF81JA=
+Date: Thu, 19 Mar 2020 08:57:58 +0000
+Message-ID: <07159b22a76a445089aa6cd646c0ef1c@SFHDAG6NODE3.st.com>
+References: <20200212183744.5309-1-patrick.delaunay@st.com>
+ <20200212183744.5309-8-patrick.delaunay@st.com>
+ <20200318104452.3B6E824003E@gemini.denx.de>
+In-Reply-To: <20200318104452.3B6E824003E@gemini.denx.de>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
+x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
- definitions=2020-03-18_07:2020-03-18,
+ definitions=2020-03-19_01:2020-03-18,
  2020-03-18 signatures=0
-Cc: Markus Klotzbuecher <markus.klotzbuecher@kistler.com>,
- Lukasz Majewski <lukma@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Hamish Guthrie <hamish.guthrie@kistler.com>,
- Marek Vasut <marek.vasut@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Michal Simek <michal.simek@xilinx.com>, AKASHI
- Takahiro <takahiro.akashi@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Heiko Schocher <hs@denx.de>, Ash
- Charles <ash@gumstix.com>, Wolfgang Denk <wd@denx.de>,
- Eugeniu Rosca <roscaeugeniu@gmail.com>,
- Boris Brezillon <boris.brezillon@bootlin.com>, Adam Ford <aford173@gmail.com>,
- Simon Glass <sjg@chromium.org>, Anup Patel <Anup.Patel@wdc.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Ruslan Trofymenko <ruslan.trofymenko@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH v4 3/3] env: Add CONFIG_ENV_FULL_SUPPORT
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 07/10] board: stm32mp1: add finished good
+ in board identifier OTP
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,61 +79,36 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-> From: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Sent: jeudi 3 octobre 2019 09:24
-> To: u-boot@lists.denx.de
-> 
-> Add a new flag CONFIG_ENV_FULL_SUPPORT to compile all
-> the environment features (attributes, callbacks
-> and flags) in U-Boot, TPL and SPL.
-> 
-> This flag replace the existing flags for SPL and TPL
-> (CONFIG_SPL_ENV_SUPPORT / CONFIG_TPL_ENV_SUPPORT), because
-> the same support of environment features is mandatory for U-Boot,
-> SPL and TPL.
-> 
-> To deactivate the load/save environment support in SPL / TPL,
-> the board need to activate CONFIG_SPL_ENV_IS_NOWHERE or
-> CONFIG_TPL_ENV_IS_NOWHERE.
-> 
-> With this patch, the environment is activated by default in SPL
-> and TPL, which include the content of default_environment[] as
-> U-boot. To avoid to increase their size, this patch also add
-> 3 new confif : CONFIG_$(SPL_TPL_)ENV_DEFAULT.
-> It is deactivated by default for SPL/TPL and activated by
-> default for U-Boot, the default environment for SPL/TPL is empty
-> and it will be populated only when it will be loaded from storage
-> medium.
-> 
-> All the test on CONFIG_SPL_ENV_SUPPORT are replaced by the
-> ENV_IS_SOMEWHERE macro, which tests if the environment is
-> storage medium.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-Hi Tom,
-
-I try to solve default environment size issue in patch =
-
-http://patchwork.ozlabs.org/patch/1257545/
-[RFC RFT PATCH] env: spl: filter the variables in default environment of SPL or TPL
-
-But as it is not acceptable and I don't see other solution, 
-I won't push v5 and I considere this serie abandoned.
-
-http://patchwork.ozlabs.org/patch/1171180/
-
-Thanks
-
-Patrick
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgV29sZmdhbmcsDQoNCj4gRnJvbTogV29sZmdhbmcgRGVuayA8d2RAZGVueC5kZT4NCj4gU2Vu
+dDogbWVyY3JlZGkgMTggbWFycyAyMDIwIDExOjQ1DQo+IA0KPiBEZWFyIFBhdHJpY2ssDQo+IA0K
+PiBJbiBtZXNzYWdlIDwyMDIwMDIxMjE4Mzc0NC41MzA5LTgtcGF0cmljay5kZWxhdW5heUBzdC5j
+b20+IHlvdSB3cm90ZToNCj4gPiBVcGRhdGUgdGhlIGNvbW1hbmQgc3Rib2FyZCB0byBzdXBwb3J0
+IHRoZSBjb2Rpbmcgb2YgT1RQIDU5IHdpdGgNCj4gPiBmaW5pc2hlZCBnb29kOg0KPiANCj4gQ2Fu
+IHlvdSBwbGVhc2UgZXhwbGFpbiB3aGF0ICJmaW5pc2hlZCBnb29kIiBtZWFucz8NCj4gDQo+IEkg
+Y2FuJ3QgcGFyc2UgdGhlIHNlbnRlbmNlIGFib3ZlLCBzb3JyeS4NCg0KSXQgaXMgYSBwYXJ0IG9m
+IHRoZSBjb2RpZmljYXRpb24gdXNlZCBpbiBwcm9kdWN0aW9uIG9mIFNUIGJvYXJkLCBzb3JyeSBp
+ZiBpdCBpcyBub3QgY2xlYXIuDQoNClRoZSBTVCBwcm9kdWN0IGNvZGlmaWNhdGlvbiBoYXZlIHNl
+dmVyYWwgZWxlbWVudA0KLSAiQ29tbWVyY2lhbCBQcm9kdWN0IE5hbWUiIChDUE4pIDogdHlwZSBv
+ZiBwcm9kdWN0IGJvYXJkIChES1gsIEVWWCkNCi0gIkZpbmlzaGVkIEdvb2QiIG9yICJGaW5pc2gg
+R29vZCIgKEZHKSA6IGVmZmVjdGl2ZSBjb250ZW50IG9mIHRoZSBwcm9kdWN0IHdpdGhvdXQgY2hp
+cCBTVE0zMk1QMSAoTENELCBXaWZpLCDigKYpIA0KLSBCT006IGNvc3QgdmFyaWFudCBmb3Igc2Ft
+ZSBGRyAoZm9yIGV4YW1wbGUsIHNldmVyYWwgcHJvdmlkZXIgb2YgdGhlIHNhbWUgY29tcG9uZW50
+KSANCg0KRm9yIGV4YW1wbGUNCmNvbW1lcmNpYWwgcHJvZHVjdCA9IFNUTTMyTVAxNTdDLUVWMQ0K
+RmluaXNoZWQgR29vZCA9IEVWQTMyTVAxNTdBMSRBVTENCg0KQm9vdGggaW5mb3JtYXRpb24gYXJl
+IHdyaXR0ZW4gb24gYm9hcmQuDQoNCkR1cmluZyBwcm9kdWN0aW9uLCB0aGlzIGluZm9ybWF0aW9u
+IGlzIGFsc28gc2F2ZSBpbiBPVFAuDQpBbmQgdGhlIHN0bTMybXAxIHNvZnR3YXJlIGNhbiBjaGFu
+Z2UgaXRzIGJlaGF2aW9yIGJhc2VkIG9uIHRoaXMgaW5mb3JtYXRpb24uDQoNClRoZSBGRyBpbmZv
+cm1hdGlvbiBpcyBpbnRyb2R1Y2VkIGJlY2F1c2Ugb24gREsyIGJvYXJkIChzYW1lIHByb2R1Y3Qg
+LyBzYW1lIENQTikgLCANCndlIGhhdmUgYSByaXNrIHRvIG1hbmFnZSAyIHR5cGVzIG9mIGRpc3Bs
+YXkgaW4gZnV0dXJlIHByb2R1Y3Rpb24gYmF0Y2ggDQoobm8gbW9yZSBhdmFpbGFiaWxpdHkgb2Yg
+dGhlIGN1cnJlbnQgTENEID0+IG5ldyBGRyBmb3IgdGhlIHNhbWUgcHJvZHVjdCB3aXRoIG5ldyBk
+aXNwbGF5KQ0KIA0KPiBCZXN0IHJlZ2FyZHMsDQo+IA0KPiBXb2xmZ2FuZyBEZW5rDQo+IA0KDQpS
+ZWdhcmRzDQpQYXRyaWNrDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1h
+bi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFp
+bG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

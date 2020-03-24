@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E1911907FD
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 09:49:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 752101907FF
+	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 09:49:33 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3628CC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 08:49:06 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BEABC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 08:49:33 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE58EC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DE397C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Mar 2020 08:49:03 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Tue, 24 Mar 2020 08:49:30 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02O8mkxC012420; Tue, 24 Mar 2020 09:49:03 +0100
+ 02O8ldYP004090; Tue, 24 Mar 2020 09:49:29 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=bPpglxPNnDKqoIenMXhMmuIL+BtYWLa7awqv7pNNnWI=;
- b=bSvxbrrm6j+LwwOWGnXuaGKk09ug5u2xFosvC1Jf7fYRj4e03v1LVyYLsJCiDTkIApQ4
- lY23nfF1k/FbudyM3HtxNBNUY4wH4omQJG9gLz9D2YN0scGFU8XWd1pgCfMlShgiCPem
- /ZoAIV30wULspHzrsG2Vfi+YGtuy/vVREswe+jNavQBVZd2hE0bpaLnx6H842g6C42nq
- W2EoA0xDmwTGlzybUSU9xLsCNvzscyMFtsDBn2mPzg4unIcUrE7szftU6h7bD2rjAPcj
- kqqpsUvGDwlh8HwToMB1dWQtKTIvJHucnqVJxChuEu7M7FnUoM0ZZXByy2ciBYsE/omq bQ== 
+ bh=84O98FrhtZBU6gy6R1bALrH0hYPNfwkobty8O8X3Fe8=;
+ b=OcuowCbpPL1FR68bbStDA6hrNFEuAJp7al4Xac/MihBm6UUZgCFr1NTz7UbSGStCjn0W
+ oma4N22wgQpzN7x4ebusbFgSBwN9cIjZV4Qp/QufuQn5MJH443Xd4K0wHLxog0PClKyd
+ KnnTZ6E5lIav+UYenhsaHiYSunSFdcA/FYL5+6qHEhm4oHHkj9IVwHzSfSpDRHbLQiSY
+ Jg54teT6PSTzZ0OFMteAdvqdcwXGO8sa3+oLWvzwj9qN+YEvTnPASVn3FG3alIohvGAS
+ 5yqTStJac7X2r9vCuDLeA+zIg9rstnLXeMjk+e8ga0z8QIMLy4f6G9SityKLoO7CwuYJ Lw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yw9jyxcqd-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yw995een8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Mar 2020 09:49:03 +0100
+ Tue, 24 Mar 2020 09:49:29 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A8DF1100039;
- Tue, 24 Mar 2020 09:48:58 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A133721FE86;
- Tue, 24 Mar 2020 09:48:58 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 24 Mar
- 2020 09:48:58 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 63E3B10002A;
+ Tue, 24 Mar 2020 09:49:25 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5B93C21FE87;
+ Tue, 24 Mar 2020 09:49:25 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 24 Mar
+ 2020 09:49:24 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 24 Mar 2020 09:48:58 +0100
+ 15.00.1473.003; Tue, 24 Mar 2020 09:49:24 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 2/9] ram: stm32mp1: display result for software read DQS
- gating
-Thread-Index: AQHV86AHImfm7OCOz0K2/36RlgyjnahXisLw
-Date: Tue, 24 Mar 2020 08:48:58 +0000
-Message-ID: <65aef7a8898540afbec97203e546e252@SFHDAG6NODE3.st.com>
+Thread-Topic: [PATCH 3/9] ram: stm32mp1: don't display the prompt two times
+Thread-Index: AQHV86AHSbp5fxAjzU6yQ00FN+FssqhXit/g
+Date: Tue, 24 Mar 2020 08:49:24 +0000
+Message-ID: <42c4677e21d64f728e87609be85709ec@SFHDAG6NODE3.st.com>
 References: <20200306101412.15376-1-patrick.delaunay@st.com>
- <20200306111355.2.I7aa349c91deffa4a6f096fbadfa22b01844a7c4d@changeid>
-In-Reply-To: <20200306111355.2.I7aa349c91deffa4a6f096fbadfa22b01844a7c4d@changeid>
+ <20200306111355.3.I6004c77337da88fcc073b421245687c3f74b30a8@changeid>
+In-Reply-To: <20200306111355.3.I6004c77337da88fcc073b421245687c3f74b30a8@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -65,8 +64,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
  2020-03-24 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/9] ram: stm32mp1: display result for
- software read DQS gating
+Subject: Re: [Uboot-stm32] [PATCH 3/9] ram: stm32mp1: don't display the
+	prompt two times
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,8 +87,10 @@ Hi,
 > From: Patrick DELAUNAY <patrick.delaunay@st.com>
 > Sent: vendredi 6 mars 2020 11:14
 > 
-> Display result information for software read DQS gating, the tuning 0 which be
-> used by CubeMX DDR tuning tools.
+> Remove one "DDR>" display on command
+> - next
+> - step
+> - go
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---

@@ -2,57 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25CC41907CC
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 09:38:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F4471907E0
+	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 09:40:58 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6FFC8C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 08:38:36 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 18E81C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 08:40:58 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C88A2C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AAFA2C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Mar 2020 08:38:33 +0000 (UTC)
+ Tue, 24 Mar 2020 08:40:56 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02O8SmIb023497; Tue, 24 Mar 2020 09:38:30 +0100
+ 02O8clQX032674; Tue, 24 Mar 2020 09:40:54 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=lsIXMTuyN4Hy6A4KI2AtWtmhNNkC8VrAfKHdHekNeNY=;
- b=HYnM0kPngDRP29yFcgjsQrbmCff3NGQZOo8HwwlbDI76nfRYbQkeAw6EEA4t0NV3A85h
- p0YHlky+2HM4qJJvnBcYAuNe2mnyEYnZKuZUUCEGk4VVk7V9/xWKw+KxLhivYllzWbwE
- L8Z20ixq4QWsX9s9qgDIWRWnkn9Z+eO19KRl46ukhnPUzLGhhvfsCk06xtpAxf3BAe0P
- 04kvrtilHYY1hL2wgBZSYOD6Owg/yjD5LGVSZRLaoa35f4ccLgGSApM2qOyPhi0CcL5S
- t8yBZLO9vXKoiYD/RKSxSB7lhSjrMeM+Bklj7KOsrMbJIA7SxUyXtUjgjFJ8qhPJCIVV DQ== 
+ bh=4h6nDg+2ciVZT6ciYv6WJvtNzdFHyF2h9CVyITHyrFw=;
+ b=x7bjqB5Z6BoRr16S7EleEKSc8hqzfWINUGqtcE91wep1Vln/wNw3HzpVLJECRUeTYsnm
+ l4s/KojPoTMz5cmW1XIrvW8W//b5b9sw01GRaqQtENzGFCeLqIrHkrBe2/y+T5yfOjQP
+ gjR7ouX7LgRbFtputoKa3jTJNOaDkmwuPFDdxIg9TMYMFI0i4334CVzrzRfDlF4rhLmZ
+ YjFAe5N5en6tOIj1PMFsVBhLMTMPelTliew5DiwsAqYfDbgFDV/HW/2o9dA9GHiBK1PG
+ K5eMm57Mak+wv1sZme3DLWOKz8fmrIihCymz0e+USOz+9zW/uLVLQYMhQtF+T4q0M3Yw zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yw9jyxawb-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yw9jyxbar-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Mar 2020 09:38:30 +0100
+ Tue, 24 Mar 2020 09:40:54 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B32AC10002A;
- Tue, 24 Mar 2020 09:38:26 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A870D21F697;
- Tue, 24 Mar 2020 09:38:26 +0100 (CET)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 24 Mar
- 2020 09:37:47 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 34132100039;
+ Tue, 24 Mar 2020 09:40:52 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2911C21F698;
+ Tue, 24 Mar 2020 09:40:52 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 24 Mar
+ 2020 09:40:51 +0100
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 24 Mar 2020 09:37:47 +0100
+ 15.00.1473.003; Tue, 24 Mar 2020 09:40:51 +0100
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 10/10] arm: stm32mp: fdt: update kernel device tree
- according the part number
-Thread-Index: AQHV4dOLbT76UZWuUECZt8hePNau36hXqzkw
-Date: Tue, 24 Mar 2020 08:37:47 +0000
-Message-ID: <1d770565776c4c19b0b23a6c9bfaaccd@SFHDAG6NODE3.st.com>
-References: <20200212183744.5309-1-patrick.delaunay@st.com>
- <20200212183744.5309-11-patrick.delaunay@st.com>
-In-Reply-To: <20200212183744.5309-11-patrick.delaunay@st.com>
+Thread-Topic: [PATCH] stm32mp1: add 800 MHz profile support
+Thread-Index: AQHV7I9JSBshfTyXfU2uY1TEVA1o96hXlnpQ
+Date: Tue, 24 Mar 2020 08:40:51 +0000
+Message-ID: <0d9f75e5607b4cb8929163fe2d6b91c1@SFHDAG6NODE3.st.com>
+References: <20200226102643.11273-1-patrick.delaunay@st.com>
+In-Reply-To: <20200226102643.11273-1-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,11 +61,10 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
  definitions=2020-03-24_02:2020-03-23,
  2020-03-24 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+Cc: Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 10/10] arm: stm32mp: fdt: update kernel
- device tree according the part number
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp1: add 800 MHz profile support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,28 +84,35 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 > From: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Sent: mercredi 12 f=E9vrier 2020 19:38
+> Sent: mercredi 26 f=E9vrier 2020 11:27
 > =
 
-> Update the kernel device tree for STM32MP15x product lines according the =
-used
-> soc and its part number, when CONFIG_OF_SYSTEM_SETUP is activated:
-> - STM32MP15XA hasn't Crypto (cryp1/2)
-> - STM32M151 and STM32M153 hasn't 3D GPU and DSI host
-> - STM32M151 hasn't CAN FD and has single A7
+> The STM32MP1 series is available in 3 different lines which are pin-to-pin
+> compatible:
+> - STM32MP157: Dual Cortex-A7 cores, Cortex-M4 core @ 209 MHz,
+>               3D GPU, DSI display interface and CAN FD
+> - STM32MP153: Dual Cortex-A7 cores, Cortex-M4 core @ 209 MHz
+>               and CAN FD
+> - STM32MP151: Single Cortex-A7 core, Cortex-M4 core @ 209 MHz
 > =
 
-> For example:
+> Each line comes with a security option (cryptography & secure boot) & a C=
+ortex-A
+> frequency option :
 > =
 
-> FDT: cpu 1 node remove for STM32MP151AAA Rev.B
-> FDT: can@4400e000 node disabled for STM32MP151AAA Rev.B
-> FDT: gpu@59000000 node disabled for STM32MP151AAA Rev.B
-> FDT: dsi@5a000000 node disabled for STM32MP151AAA Rev.B
+> - A : Cortex-A7 @ 650 MHz
+> - C : Secure Boot + HW Crypto + Cortex-A7 @ 650 MHz
+> - D : Cortex-A7 @ 800 MHz
+> - F : Secure Boot + HW Crypto + Cortex-A7 @ 800 MHz
+> =
+
+> This patch adds the support of STM32MP15xD and STM32MP15xF in U-Boot.
 > =
 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
+
 
 Applied to u-boot-stm/next, thanks!
 

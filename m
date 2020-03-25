@@ -2,60 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9DA31910F8
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 14:36:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9612192250
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Mar 2020 09:15:15 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACE75C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Mar 2020 13:36:13 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 913E4C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Mar 2020 08:15:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 831F8C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40489C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Mar 2020 13:36:11 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Wed, 25 Mar 2020 08:15:12 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02ODT0bY023268; Tue, 24 Mar 2020 14:36:08 +0100
+ 02P88LDv000547; Wed, 25 Mar 2020 09:15:07 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type :
- content-transfer-encoding; s=STMicroelectronics;
- bh=xcxwTkxDQRMYNQBBAC4tf12or5LhVthJ3U1cM64h/PM=;
- b=QN3SxIfvXmrSe3I4UYa1fHi8E7cVAvsn2ilpLSoSocVLgZp7GlPqhA/vZlltSRJTTQNA
- 0yQRzDhj4EnzucUZRpEKN6+4wNalS5tAhfQyuTaq1hpSTSZ2hZd3ZsXEGvoIn8kts2zP
- 1SbxTov/7CCjWnE9q5Fwuzwdv4P0gjCFVMDgYQYGiVhShChzFWFcFDABBCjCc9x9nCpV
- C8N9isxyhxhEcyglgu5bmJywBRHTcdIEzpnSIhUp80B4vGOAcLZw5EHPRXl1OdE0nIcU
- s6Q2+nhG3ao+7aXDFW09U0MXyicbnRmPx5VTDepK1gpt/XbDOTB5S+xzF2vhcCMAnKvq DQ== 
+ : date : message-id : content-type : content-transfer-encoding :
+ mime-version; s=STMicroelectronics;
+ bh=W90hbLc8kn3y5z1xQDOpTWzRSEIfgeQcdTDitQHkb9c=;
+ b=OnjHFFgI323dPbn7Ue0nM50FQFy+XOIgZTwVhwYdjUsTPW8MXTMLGn8Gopo4h6guOS9D
+ T3vyd/+Pvrz2J+pLstEOLKCIm9N8DZSO4czuPvGic9zt+yZCFsR0TSF+l+txV2rp8XGA
+ wcepzYsWUTMteSgWarbluJVGPncaNZVZ4CHkd8VH9752wFK3H1Mjd5MHfvnRDPi7LOmD
+ /U8+JbwvCQNKnvjHF7gLHOSGw3vw+DSyv/ExGp5RRZbjfraw4a3l/7HZHDet/Dcg1iRO
+ KxckLC3dy0L65uOZIQgNHfXcV1n1TIEn+LJJuaPyb480TYZauZMdKJ5lxPjO+menhRFK 2w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 2yw9jyyqhd-1
+ by mx07-00178001.pphosted.com with ESMTP id 2yw8xe4c84-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Mar 2020 14:36:08 +0100
+ Wed, 25 Mar 2020 09:15:07 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DE35410002A;
- Tue, 24 Mar 2020 14:36:07 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C239A2A9715;
- Tue, 24 Mar 2020 14:36:07 +0100 (CET)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 24 Mar 2020 14:36:07 +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 24 Mar 2020 14:36:05 +0100
-Message-ID: <20200324133605.8786-1-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C0DFC100039;
+ Wed, 25 Mar 2020 09:15:02 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A3A5821C0AE;
+ Wed, 25 Mar 2020 09:15:02 +0100 (CET)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 25 Mar
+ 2020 09:15:02 +0100
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 25 Mar 2020 09:15:02 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PULL] Pull request: u-boot-stm/next =u-boot-stm32-20200324
+Thread-Index: AdYCfPHzYY0MAYVWRWCyHo80NC4f6w==
+Date: Wed, 25 Mar 2020 08:15:01 +0000
+Message-ID: <10b180027227416a83b4e1a0461d0914@SFHDAG6NODE3.st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
- (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.645
- definitions=2020-03-24_05:2020-03-23,
- 2020-03-24 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v3] board: stm32mp1: add finished good in
-	board identifier OTP
+ definitions=2020-03-25_01:2020-03-23,
+ 2020-03-25 signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: [Uboot-stm32] [PULL] Pull request: u-boot-stm/next
+	=u-boot-stm32-20200324
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,127 +76,160 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-VXBkYXRlIHRoZSBjb21tYW5kIHN0Ym9hcmQgdG8gc3VwcG9ydCB0aGUgdXBkYXRlZCBjb2Rpbmcg
-b2YgT1RQIDU5IHdpdGgKZmluaXNoZWQgZ29vZC4KClRoZSBTVCBwcm9kdWN0IGNvZGlmaWNhdGlv
-biBoYXZlIHNldmVyYWwgZWxlbWVudAotICJDb21tZXJjaWFsIFByb2R1Y3QgTmFtZSIgKENQTik6
-IHR5cGUgb2YgcHJvZHVjdCBib2FyZCAoREtYLCBFVlgpCiAgYXNzb2NpYXRlZCB0byB0aGUgYm9h
-cmQgSUQgIk1CeHh4eCIKLSAiRmluaXNoZWQgR29vZCIgb3IgIkZpbmlzaCBHb29kIiAoRkcpOgog
-IGVmZmVjdGl2ZSBjb250ZW50IG9mIHRoZSBwcm9kdWN0IHdpdGhvdXQgY2hpcCBTVE0zMk1QMSAo
-TENELCBXaWZpLCDigKYpCi0gQk9NOiBjb3N0IHZhcmlhbnQgZm9yIHNhbWUgRkcKICAoZm9yIGV4
-YW1wbGUsIHNldmVyYWwgcHJvdmlkZXIgb2YgdGhlIHNhbWUgY29tcG9uZW50KQoKRm9yIGV4YW1w
-bGUKLSBjb21tZXJjaWFsIHByb2R1Y3QgPSBTVE0zMk1QMTU3Qy1FVjEKLSBGaW5pc2hlZCBHb29k
-ID0gRVZBMzJNUDE1N0ExJEFVMQoKQm9vdGggaW5mb3JtYXRpb24gYXJlIHdyaXR0ZW4gb24gYm9h
-cmQgYW5kIHRoZXNlIGluZm9ybWF0aW9uIGlzIGFsc28gc2F2ZWQKaW4gT1RQNTk6CgpiaXQgWzMx
-OjE2XSAoaGV4KSA9PiBCb2FyZCBpZCwgTUJ4eHh4CmJpdCBbMTU6MTJdIChkZWMpID0+IFZhcmlh
-bnQgQ1BOICgxLi4uLjE1KQpiaXQgWzExOjhdICAoZGVjKSA9PiBSZXZpc2lvbiBib2FyZCAoaW5k
-ZXggd2l0aCBBID0gMSwgWiA9IDI2KQpiaXQgWzc6NF0gICAoZGVjKSA9PiBWYXJpYW50IEZHIDog
-ZmluaXNoZWQgZ29vZCAoTkVXKQpiaXQgWzM6MF0gICAoZGVjKSA9PiBCT00gKDAxLCAuLi4uIDI1
-NSkKClRoZSB1cGRhdGVkIGNvbW1hbmQgaXM6CiAgc3Rib2FyZCBbLXldIDxCb2FyZD4gPFZhckNQ
-Tj4gPFJldmlzaW9uPiA8VmFyRkc+IDxCT00+CgpBbmQgdGhlIGRpc3BsYXllZCBTVE1pY3JvZWxl
-Y3Ryb25pY3MgYm9hcmQgaWRlbnRpZmljYXRpb24gaXM6CiAgQm9hcmQ6IE1CPEJvYXJkPiBWYXI8
-VmFyQ1BOPi48VmFyRkc+IFJldi48UmV2aXNpb24+LTxCT00+CgpTaWduZWQtb2ZmLWJ5OiBQYXRy
-aWNrIERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QHN0LmNvbT4KUmV2aWV3ZWQtYnk6IFBhdHJp
-Y2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQHN0LmNvbT4KLS0tCgpDaGFuZ2VzIGluIHYzOgot
-IGZpeCBjb21tZW50IGFmdGVyIFBhdHJpY2UgQ2hvdGFyZCByZXZpZXcKCkNoYW5nZXMgaW4gdjI6
-Ci0gdXBkYXRlIGNvbW1pdCBtZXNzYWdlCi0gYWRkIGNvbW1lbnRzIGluIGNtZF9zdGJvYXJkLmMK
-CiBib2FyZC9zdC9jb21tb24vY21kX3N0Ym9hcmQuYyB8IDYwICsrKysrKysrKysrKysrKysrKysr
-KysrKysrKystLS0tLS0tCiBib2FyZC9zdC9zdG0zMm1wMS9zdG0zMm1wMS5jICB8ICA0ICsrLQog
-MiBmaWxlcyBjaGFuZ2VkLCA1MiBpbnNlcnRpb25zKCspLCAxMiBkZWxldGlvbnMoLSkKCmRpZmYg
-LS1naXQgYS9ib2FyZC9zdC9jb21tb24vY21kX3N0Ym9hcmQuYyBiL2JvYXJkL3N0L2NvbW1vbi9j
-bWRfc3Rib2FyZC5jCmluZGV4IDE1NzNlMzU0MTAuLjkxNTE2NGFhMGIgMTAwNjQ0Ci0tLSBhL2Jv
-YXJkL3N0L2NvbW1vbi9jbWRfc3Rib2FyZC5jCisrKyBiL2JvYXJkL3N0L2NvbW1vbi9jbWRfc3Ri
-b2FyZC5jCkBAIC0xLDYgKzEsMzIgQEAKIC8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwt
-Mi4wKyBPUiBCU0QtMy1DbGF1c2UKIC8qCiAgKiBDb3B5cmlnaHQgKEMpIDIwMTksIFNUTWljcm9l
-bGVjdHJvbmljcyAtIEFsbCBSaWdodHMgUmVzZXJ2ZWQKKyAqCisgKiB0aGUgc3QgY29tbWFuZCBz
-dGJvYXJkIHN1cHBvcnRzIHRoZSBTVE1pY3JvZWxlY3Ryb25pY3MgYm9hcmQgaWRlbnRpZmljYXRp
-b24KKyAqIHNhdmVkIGluIE9UUCA1OS4KKyAqCisgKiBUaGUgU1QgcHJvZHVjdCBjb2RpZmljYXRp
-b24gaGF2ZSBzZXZlcmFsIGVsZW1lbnQKKyAqIC0gIkNvbW1lcmNpYWwgUHJvZHVjdCBOYW1lIiAo
-Q1BOKTogdHlwZSBvZiBwcm9kdWN0IGJvYXJkIChES1gsIEVWWCkKKyAqICAgYXNzb2NpYXRlZCB0
-byB0aGUgYm9hcmQgSUQgIk1CeHh4eCIKKyAqIC0gIkZpbmlzaGVkIEdvb2QiIG9yICJGaW5pc2gg
-R29vZCIgKEZHKToKKyAqICAgZWZmZWN0aXZlIGNvbnRlbnQgb2YgdGhlIHByb2R1Y3Qgd2l0aG91
-dCBjaGlwIFNUTTMyTVAxeHggKExDRCwgV2lmaSzigKYpCisgKiAtIEJPTTogY29zdCB2YXJpYW50
-IGZvciBzYW1lIEZHIChmb3IgZXhhbXBsZSwgc2V2ZXJhbCBwcm92aWRlciBvZiB0aGUgc2FtZQor
-ICogICBjb21wb25lbnQpCisgKgorICogRm9yIGV4YW1wbGUKKyAqIC0gY29tbWVyY2lhbCBwcm9k
-dWN0ID0gU1RNMzJNUDE1N0MtRVYxIGZvciBib2FyZCBNQjEyNjMKKyAqIC0gRmluaXNoZWQgR29v
-ZCA9IEVWQTMyTVAxNTdBMSRBVTEKKyAqCisgKiBCb3RoIGluZm9ybWF0aW9uIGFyZSB3cml0dGVu
-IG9uIGJvYXJkIGFuZCB0aGVzZSBpbmZvcm1hdGlvbiBhcmUgYWxzbyBzYXZlZAorICogaW4gT1RQ
-NTksIHdpdGg6CisgKiBiaXQgWzMxOjE2XSAoaGV4KSA9PiBCb2FyZCBpZCwgTUJ4eHh4CisgKiBi
-aXQgWzE1OjEyXSAoZGVjKSA9PiBWYXJpYW50IENQTiAoMS4uLi4xNSkKKyAqIGJpdCBbMTE6OF0g
-IChkZWMpID0+IFJldmlzaW9uIGJvYXJkIChpbmRleCB3aXRoIEEgPSAxLCBaID0gMjYpCisgKiBi
-aXQgWzc6NF0gICAoZGVjKSA9PiBWYXJpYW50IEZHIDogZmluaXNoZWQgZ29vZCBpbmRleAorICog
-Yml0IFszOjBdICAgKGRlYykgPT4gQk9NICgwMSwgLi4uLiAyNTUpCisgKgorICogYW5kIGRpc3Bs
-YXllZCB3aXRoIHRoZSBmb3JtYXQ6CisgKiAgIEJvYXJkOiBNQjxCb2FyZD4gVmFyPFZhckNQTj4u
-PFZhckZHPiBSZXYuPFJldmlzaW9uPi08Qk9NPgogICovCiAKICNpZm5kZWYgQ09ORklHX1NQTF9C
-VUlMRApAQCAtMTMsNiArMzksNyBAQAogc3RhdGljIGJvb2wgY2hlY2tfc3Rib2FyZCh1MTYgYm9h
-cmQpCiB7CiAJdW5zaWduZWQgaW50IGk7CisJLyogbGlzdCBvZiBzdXBwb3J0ZWQgU1QgYm9hcmRz
-ICovCiAJY29uc3QgdTE2IHN0X2JvYXJkX2lkW10gPSB7CiAJCTB4MTI3MiwKIAkJMHgxMjYzLApA
-QCAtMzEsOSArNTgsMTEgQEAgc3RhdGljIGJvb2wgY2hlY2tfc3Rib2FyZCh1MTYgYm9hcmQpCiAK
-IHN0YXRpYyB2b2lkIGRpc3BsYXlfc3Rib2FyZCh1MzIgb3RwKQogewotCXByaW50ZigiQm9hcmQ6
-IE1CJTA0eCBWYXIlZCBSZXYuJWMtJTAyZFxuIiwKKwkvKiBkaXNwbGF5IGJvYXJkIGluZGVudGlm
-aWNhdGlvbiB3aXRoIE9QVCBjb2RpbmcgKi8KKwlwcmludGYoIkJvYXJkOiBNQiUwNHggVmFyJWQu
-JWQgUmV2LiVjLSUwMmRcbiIsCiAJICAgICAgIG90cCA+PiAxNiwKIAkgICAgICAgKG90cCA+PiAx
-MikgJiAweEYsCisJICAgICAgIChvdHAgPj4gNCkgJiAweEYsCiAJICAgICAgICgob3RwID4+IDgp
-ICYgMHhGKSAtIDEgKyAnQScsCiAJICAgICAgIG90cCAmIDB4Rik7CiB9CkBAIC00NCwxNCArNzMs
-MTQgQEAgc3RhdGljIGludCBkb19zdGJvYXJkKGNtZF90YmxfdCAqY21kdHAsIGludCBmbGFnLCBp
-bnQgYXJnYywKIAlpbnQgcmV0OwogCXUzMiBvdHAsIGxvY2s7CiAJdTggcmV2aXNpb247Ci0JdW5z
-aWduZWQgbG9uZyBib2FyZCwgdmFyaWFudCwgYm9tOworCXVuc2lnbmVkIGxvbmcgYm9hcmQsIHZh
-cl9jcG4sIHZhcl9mZywgYm9tOwogCXN0cnVjdCB1ZGV2aWNlICpkZXY7Ci0JaW50IGNvbmZpcm1l
-ZCA9IGFyZ2MgPT0gNiAmJiAhc3RyY21wKGFyZ3ZbMV0sICIteSIpOworCWludCBjb25maXJtZWQg
-PSBhcmdjID09IDcgJiYgIXN0cmNtcChhcmd2WzFdLCAiLXkiKTsKIAogCWFyZ2MgLT0gMSArIGNv
-bmZpcm1lZDsKIAlhcmd2ICs9IDEgKyBjb25maXJtZWQ7CiAKLQlpZiAoYXJnYyAhPSAwICYmIGFy
-Z2MgIT0gNCkKKwlpZiAoYXJnYyAhPSAwICYmIGFyZ2MgIT0gNSkKIAkJcmV0dXJuIENNRF9SRVRf
-VVNBR0U7CiAKIAlyZXQgPSB1Y2xhc3NfZ2V0X2RldmljZV9ieV9kcml2ZXIoVUNMQVNTX01JU0Ms
-CkBAIC05NSw4ICsxMjQsOCBAQCBzdGF0aWMgaW50IGRvX3N0Ym9hcmQoY21kX3RibF90ICpjbWR0
-cCwgaW50IGZsYWcsIGludCBhcmdjLAogCQlyZXR1cm4gQ01EX1JFVF9VU0FHRTsKIAl9CiAKLQlp
-ZiAoc3RyaWN0X3N0cnRvdWwoYXJndlsxXSwgMTAsICZ2YXJpYW50KSA8IDAgfHwKLQkgICAgdmFy
-aWFudCA9PSAwIHx8IHZhcmlhbnQgPiAxNSkgeworCWlmIChzdHJpY3Rfc3RydG91bChhcmd2WzFd
-LCAxMCwgJnZhcl9jcG4pIDwgMCB8fAorCSAgICB2YXJfY3BuID09IDAgfHwgdmFyX2NwbiA+IDE1
-KSB7CiAJCXByaW50ZigiYXJndW1lbnQgJWQgaW52YWxpZDogJXNcbiIsIDIsIGFyZ3ZbMV0pOwog
-CQlyZXR1cm4gQ01EX1JFVF9VU0FHRTsKIAl9CkBAIC0xMDcsMTMgKzEzNiwyMSBAQCBzdGF0aWMg
-aW50IGRvX3N0Ym9hcmQoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGludCBhcmdjLAogCQly
-ZXR1cm4gQ01EX1JFVF9VU0FHRTsKIAl9CiAKLQlpZiAoc3RyaWN0X3N0cnRvdWwoYXJndlszXSwg
-MTAsICZib20pIDwgMCB8fAorCWlmIChzdHJpY3Rfc3RydG91bChhcmd2WzNdLCAxMCwgJnZhcl9m
-ZykgPCAwIHx8CisJICAgIHZhcl9mZyA+IDE1KSB7CisJCXByaW50ZigiYXJndW1lbnQgJWQgaW52
-YWxpZDogJXNcbiIsIDQsIGFyZ3ZbM10pOworCQlyZXR1cm4gQ01EX1JFVF9VU0FHRTsKKwl9CisK
-KwlpZiAoc3RyaWN0X3N0cnRvdWwoYXJndls0XSwgMTAsICZib20pIDwgMCB8fAogCSAgICBib20g
-PT0gMCB8fCBib20gPiAxNSkgewogCQlwcmludGYoImFyZ3VtZW50ICVkIGludmFsaWQ6ICVzXG4i
-LCA0LCBhcmd2WzNdKTsKIAkJcmV0dXJuIENNRF9SRVRfVVNBR0U7CiAJfQogCi0Jb3RwID0gKGJv
-YXJkIDw8IDE2KSB8ICh2YXJpYW50IDw8IDEyKSB8IChyZXZpc2lvbiA8PCA4KSB8IGJvbTsKKwkv
-KiBzdCBib2FyZCBpbmRlbnRpZmljYXRpb24gdmFsdWUgKi8KKwlvdHAgPSAoYm9hcmQgPDwgMTYp
-IHwgKHZhcl9jcG4gPDwgMTIpIHwgKHJldmlzaW9uIDw8IDgpIHwKKwkgICAgICAodmFyX2ZnIDw8
-IDQpIHwgYm9tOwogCWRpc3BsYXlfc3Rib2FyZChvdHApOwogCXByaW50ZigiPT4gT1RQWyVkXSA9
-ICUwOFhcbiIsIEJTRUNfT1RQX0JPQVJELCBvdHApOwogCkBAIC0xNTMsMTUgKzE5MCwxNiBAQCBz
-dGF0aWMgaW50IGRvX3N0Ym9hcmQoY21kX3RibF90ICpjbWR0cCwgaW50IGZsYWcsIGludCBhcmdj
-LAogCXJldHVybiBDTURfUkVUX1NVQ0NFU1M7CiB9CiAKLVVfQk9PVF9DTUQoc3Rib2FyZCwgNiwg
-MCwgZG9fc3Rib2FyZCwKK1VfQk9PVF9DTUQoc3Rib2FyZCwgNywgMCwgZG9fc3Rib2FyZCwKIAkg
-ICAicmVhZC93cml0ZSBib2FyZCByZWZlcmVuY2UgaW4gT1RQIiwKIAkgICAiXG4iCiAJICAgIiAg
-UHJpbnQgY3VycmVudCBib2FyZCBpbmZvcm1hdGlvblxuIgotCSAgICJzdGJvYXJkIFsteV0gPEJv
-YXJkPiA8VmFyaWFudD4gPFJldmlzaW9uPiA8Qk9NPlxuIgorCSAgICJzdGJvYXJkIFsteV0gPEJv
-YXJkPiA8VmFyQ1BOPiA8UmV2aXNpb24+IDxWYXJGRz4gPEJPTT5cbiIKIAkgICAiICBXcml0ZSBi
-b2FyZCBpbmZvcm1hdGlvblxuIgogCSAgICIgIC0gQm9hcmQ6IHh4eHgsIGV4YW1wbGUgMTI2NCBm
-b3IgTUIxMjY0XG4iCi0JICAgIiAgLSBWYXJpYW50OiAxIC4uLiAxNVxuIgorCSAgICIgIC0gVmFy
-Q1BOOiAxLi4uMTVcbiIKIAkgICAiICAtIFJldmlzaW9uOiBBLi4uT1xuIgorCSAgICIgIC0gVmFy
-Rkc6IDAuLi4xNVxuIgogCSAgICIgIC0gQk9NOiAxLi4uMTVcbiIpOwogCiAjZW5kaWYKZGlmZiAt
-LWdpdCBhL2JvYXJkL3N0L3N0bTMybXAxL3N0bTMybXAxLmMgYi9ib2FyZC9zdC9zdG0zMm1wMS9z
-dG0zMm1wMS5jCmluZGV4IGMzNmU3NjU1YzAuLjRkZDAwOThjNmUgMTAwNjQ0Ci0tLSBhL2JvYXJk
-L3N0L3N0bTMybXAxL3N0bTMybXAxLmMKKysrIGIvYm9hcmQvc3Qvc3RtMzJtcDEvc3RtMzJtcDEu
-YwpAQCAtMTA0LDYgKzEwNCw3IEBAIGludCBjaGVja2JvYXJkKHZvaWQpCiAJCXByaW50ZigiICgl
-cykiLCBmZHRfY29tcGF0KTsKIAlwdXRzKCJcbiIpOwogCisJLyogZGlzcGxheSB0aGUgU1RNaWNy
-b2VsZWN0cm9uaWNzIGJvYXJkIGlkZW50aWZpY2F0aW9uICovCiAJcmV0ID0gdWNsYXNzX2dldF9k
-ZXZpY2VfYnlfZHJpdmVyKFVDTEFTU19NSVNDLAogCQkJCQkgIERNX0dFVF9EUklWRVIoc3RtMzJt
-cF9ic2VjKSwKIAkJCQkJICAmZGV2KTsKQEAgLTExMiw5ICsxMTMsMTAgQEAgaW50IGNoZWNrYm9h
-cmQodm9pZCkKIAkJcmV0ID0gbWlzY19yZWFkKGRldiwgU1RNMzJfQlNFQ19TSEFET1coQlNFQ19P
-VFBfQk9BUkQpLAogCQkJCSZvdHAsIHNpemVvZihvdHApKTsKIAlpZiAocmV0ID4gMCAmJiBvdHAp
-IHsKLQkJcHJpbnRmKCJCb2FyZDogTUIlMDR4IFZhciVkIFJldi4lYy0lMDJkXG4iLAorCQlwcmlu
-dGYoIkJvYXJkOiBNQiUwNHggVmFyJWQuJWQgUmV2LiVjLSUwMmRcbiIsCiAJCSAgICAgICBvdHAg
-Pj4gMTYsCiAJCSAgICAgICAob3RwID4+IDEyKSAmIDB4RiwKKwkJICAgICAgIChvdHAgPj4gNCkg
-JiAweEYsCiAJCSAgICAgICAoKG90cCA+PiA4KSAmIDB4RikgLSAxICsgJ0EnLAogCQkgICAgICAg
-b3RwICYgMHhGKTsKIAl9Ci0tIAoyLjE3LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBz
-dC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJl
-cGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+Hi Tom,
+
+Please pull the STM32 next related fixes for v2020.07 = u-boot-stm32-20200324
+
+With the following changes:
+- stm32mp: fix command stboard
+- stm32mp: update kernel device tree according the part number
+- stm32mp: add 800 MHz profile support = stm32mp15xd and stm32mp15xf
+- stm32mp: set cp15 frequency in psci cpu on
+- stm32mp: DT alignment with Linux 5.6-rc1
+- stm32mp: clk: add SPI5 support and correct CKSELR masks
+- stm32mp: ram: fixes on LPDDR2/LPDDR3 support and on tuning
+- stm32: i2c: allows for any bus frequency
+- sti: timer: livetree and clk API conversion
+
+CI status:
+     https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/2510
+
+Thanks,
+Patrick
+
+The following changes since commit 2738f0edea7d19960d692284d1f378b1a2b4c4a5:
+
+  Merge tag 'ti-v2020.07-next' of https://gitlab.denx.de/u-boot/custodians/u-boot-ti into next (2020-03-17 11:59:58 -0400)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20200324
+
+for you to fetch changes up to 5b5699cdc97122e08e7fd0886a9e4474ca3ccb35:
+
+  timer: sti: use clk API to get timer clock rate (2020-03-24 14:23:35 +0100)
+
+----------------------------------------------------------------
+- stm32mp: fix command stboard
+- stm32mp: update kernel device tree according the part number
+- stm32mp: add 800 MHz profile support = stm32mp15xd and stm32mp15xf
+- stm32mp: set cp15 frequency in psci cpu on
+- stm32mp: DT alignment with Linux 5.6-rc1
+- stm32mp: clk: add SPI5 support and correct CKSELR masks
+- stm32mp: ram: fixes on LPDDR2/LPDDR3 support and on tuning
+- stm32: i2c: allows for any bus frequency
+- sti: timer: livetree and clk API conversion
+
+----------------------------------------------------------------
+Alain Volmat (1):
+      i2c: stm32f7_i2c: allows for any bus frequency
+
+Ludovic Barre (1):
+      stm32mp: psci: set cntfrq register of cpu on
+
+Nicolas Heemeryck (2):
+      timer: sti: convert to livetree
+      timer: sti: use clk API to get timer clock rate
+
+Patrick Delaunay (23):
+      board: stm32mp1: update command stboard on misc_write result
+      board: stm32mp1: read OTP in command stboard
+      arm: stm32mp: bsec: remove unneeded test
+      arm: stm32mp: bsec: add permanent lock support in bsec driver
+      board: stm32mp1: stboard: lock the OTP after programming
+      arm: stm32mp: improve the error message for smc
+      board: stm32mp1: add finished good in board identifier OTP
+      board: stm32mp1: display reference only for STMicroelectronics board
+      arm: stm32mp: add function get_soc_name
+      arm: stm32mp: fdt: update kernel device tree according the part number
+      stm32mp1: add 800 MHz profile support
+      clk: stm32mp1: correct CKSELR masks
+      clk: stm32mp1: add SPI5_K support
+      ARM: dts: stm32mp1: DT alignment with Linux 5.6-rc1
+      ram: stm32mp1: increase vdd2_ddr: buck2 for 32bits LPDDR
+      ram: stm32mp1: display result for software read DQS gating
+      ram: stm32mp1: don't display the prompt two times
+      ram: stm32mp1: tuning: add timeout for polling BISTGSR.BDDONE
+      ram: stm32mp1: tuning: deactivate derating during BIST test
+      ram: stm32mp1: update BIST config for tuning
+      ram: stm32mp1_ddr: fix self refresh disable during DQS training
+      ram: stm32mp1: reduce delay after BIST reset for tuning
+      ram: stm32mp1: the property st, phy-cal becomes optional
+
+ arch/arm/dts/stm32mp15-ddr.dtsi                                 |    3 +
+ arch/arm/dts/stm32mp15-pinctrl.dtsi                             | 1114 ++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/{stm32mp157-u-boot.dtsi => stm32mp15-u-boot.dtsi}  |    0
+ arch/arm/dts/{stm32mp157c.dtsi => stm32mp151.dtsi}              |  274 +++++++++---
+ arch/arm/dts/stm32mp153.dtsi                                    |   45 ++
+ arch/arm/dts/stm32mp157-pinctrl.dtsi                            | 1057 -------------------------------------------
+ arch/arm/dts/stm32mp157.dtsi                                    |   31 ++
+ arch/arm/dts/stm32mp157a-avenger96-u-boot.dtsi                  |   11 +-
+ arch/arm/dts/stm32mp157a-avenger96.dts                          |    5 +-
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi                        |    7 +-
+ arch/arm/dts/stm32mp157a-dk1.dts                                |  541 +---------------------
+ arch/arm/dts/stm32mp157c-dk2-u-boot.dtsi                        |    6 -
+ arch/arm/dts/stm32mp157c-dk2.dts                                |   15 +-
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi                        |    7 +-
+ arch/arm/dts/stm32mp157c-ed1.dts                                |   22 +-
+ arch/arm/dts/stm32mp157c-ev1.dts                                |   30 +-
+ arch/arm/dts/stm32mp157xaa-pinctrl.dtsi                         |   90 ----
+ arch/arm/dts/stm32mp157xab-pinctrl.dtsi                         |   62 ---
+ arch/arm/dts/stm32mp157xac-pinctrl.dtsi                         |   78 ----
+ arch/arm/dts/stm32mp157xad-pinctrl.dtsi                         |   62 ---
+ arch/arm/dts/stm32mp15xc.dtsi                                   |   18 +
+ arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi                      |    7 +-
+ arch/arm/dts/stm32mp15xx-dhcom.dtsi                             |    6 +-
+ arch/arm/dts/stm32mp15xx-dkx.dtsi                               |  639 ++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi                         |   85 ++++
+ arch/arm/dts/stm32mp15xxab-pinctrl.dtsi                         |   57 +++
+ arch/arm/dts/stm32mp15xxac-pinctrl.dtsi                         |   73 +++
+ arch/arm/dts/stm32mp15xxad-pinctrl.dtsi                         |   57 +++
+ arch/arm/mach-stm32mp/bsec.c                                    |   92 ++--
+ arch/arm/mach-stm32mp/cpu.c                                     |   38 +-
+ arch/arm/mach-stm32mp/fdt.c                                     |  107 ++++-
+ arch/arm/mach-stm32mp/include/mach/ddr.h                        |    6 +-
+ arch/arm/mach-stm32mp/include/mach/stm32.h                      |    9 +-
+ arch/arm/mach-stm32mp/include/mach/stm32mp1_smc.h               |    5 +-
+ arch/arm/mach-stm32mp/include/mach/sys_proto.h                  |   12 +-
+ arch/arm/mach-stm32mp/psci.c                                    |   22 +
+ board/st/common/cmd_stboard.c                                   |   85 +++-
+ board/st/stm32mp1/board.c                                       |   23 +-
+ board/st/stm32mp1/stm32mp1.c                                    |   28 +-
+ doc/board/st/stm32mp1.rst                                       |   42 +-
+ doc/device-tree-bindings/memory-controllers/st,stm32mp1-ddr.txt |    2 +
+ drivers/clk/clk_stm32mp1.c                                      |   13 +-
+ drivers/i2c/stm32f7_i2c.c                                       |  105 +++--
+ drivers/ram/stm32mp1/stm32mp1_ddr.c                             |   54 ++-
+ drivers/ram/stm32mp1/stm32mp1_ddr.h                             |    1 +
+ drivers/ram/stm32mp1/stm32mp1_ddr_regs.h                        |    1 +
+ drivers/ram/stm32mp1/stm32mp1_interactive.c                     |   17 +-
+ drivers/ram/stm32mp1/stm32mp1_ram.c                             |   34 +-
+ drivers/ram/stm32mp1/stm32mp1_tuning.c                          |  223 ++++++++--
+ drivers/timer/sti-timer.c                                       |   26 +-
+ include/power/stpmic1.h                                         |    1 +
+ 51 files changed, 3143 insertions(+), 2205 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp15-pinctrl.dtsi
+ rename arch/arm/dts/{stm32mp157-u-boot.dtsi => stm32mp15-u-boot.dtsi} (100%)
+ rename arch/arm/dts/{stm32mp157c.dtsi => stm32mp151.dtsi} (89%)
+ create mode 100644 arch/arm/dts/stm32mp153.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157xaa-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157xab-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157xac-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32mp157xad-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xc.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xx-dkx.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xxaa-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xxab-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xxac-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp15xxad-pinctrl.dtsi
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

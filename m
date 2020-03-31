@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71698199AD6
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 18:05:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C07A199AD8
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 18:05:08 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24270C36B22
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 16:05:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 34136C36B0E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 16:05:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EC931C36B0F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BE1BBC36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 31 Mar 2020 16:05:05 +0000 (UTC)
+ Tue, 31 Mar 2020 16:05:06 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 02VG4lxv027840; Tue, 31 Mar 2020 18:05:04 +0200
+ 02VG4v96027866; Tue, 31 Mar 2020 18:05:05 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=krYJqzzkLZV9mRbvzU4WieS2oF7wK7ryes216t4wW8E=;
- b=Jax+eYD2lA8e7eWri2220YKx3H09TfC7dZEJusC/NIuLbrlCfGzCNSPIIZKnMxEf6LEh
- OLIKdwLd9dAkHHxycS38WaXOyCLMu9O/1sw5kiiLjg2l3VpQy7hkeJPoVSkNLqVy4uN1
- cMixhu1p66pODK0/9i1MA+u0efpvPQ/FhB9dVUqPgqFa6yXnMKkqh8PGJmFRtgvHk9Ho
- 6LO6VYLeyxFxPb8vOWQjTYNp9R5vX04z4eNYm0cLp3lQXWm5Ne4UMCvz2PtW7vWgUeg0
- JtMoDNfRocCnINDd+POf/72d9tRd3Q5uksT+vINdIk/wE0OF1Oqy1cdfyvkvyuxX+fpy 9g== 
+ bh=UwSW1eutTntyJ25V/TRJn2olE1Sm590liY1rdEzy35I=;
+ b=xpY0zs0owX1+skuYbhTGBTC9Ro7btLwZw/mBdmvjAezejUx6hQreddPjFJ3gJbkWj92Z
+ AxeUmUE3kcCom4PhTKciuTdlhCEuYL5du126mizeHzrF5IuyHc7R4IOyKZ+CUmAzbXn/
+ /rdly+ZfLyNnufpQqM4AsuqPIWdadI36hvmShL6GLTge0eJvfECpp+j6kJkMIog75pj4
+ bAodI8yev+iDmI7K5xIF082spTsAfV22y5yd0+PuKggUMLK3lPPOdDvaGP41IEooucKK
+ sXAEKAkQUVULF0ua02ItBKI0uvvTp1Rx57jBFOR63NF4qFtcIJFO/i+rljdTPJgXLcr+ Xg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 301xbmfyur-1
+ by mx07-00178001.pphosted.com with ESMTP id 301xbmfyut-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 31 Mar 2020 18:05:04 +0200
+ Tue, 31 Mar 2020 18:05:05 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5CCA9100038;
- Tue, 31 Mar 2020 18:05:04 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 28E9710002A;
+ Tue, 31 Mar 2020 18:05:05 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 55FE82BEC70;
- Tue, 31 Mar 2020 18:05:04 +0200 (CEST)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 200FD2BEC70;
+ Tue, 31 Mar 2020 18:05:05 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 31 Mar 2020 18:05:03 +0200
+ Tue, 31 Mar 2020 18:05:04 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 31 Mar 2020 18:04:30 +0200
-Message-ID: <20200331180330.13.I355ddbc804eba6047ea147d830be57a5b9c4a87e@changeid>
+Date: Tue, 31 Mar 2020 18:04:31 +0200
+Message-ID: <20200331180330.14.I9d49b85c2523409eb85071c740650a8615dac45d@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200331180330.1.Ied6708bad5048382a57618f95d67c549aae49f42@changeid>
 References: <20200331180330.1.Ied6708bad5048382a57618f95d67c549aae49f42@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-03-31_05:2020-03-31,
  2020-03-31 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice Chotard <patrice.chotard@st.com>,
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 13/16] gpio: stm32: support gpio ops in SPL
+Subject: [Uboot-stm32] [PATCH 14/16] ARM: dts: stm32mp15: use DDR3 files
+	generated by STM32CubeMX
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,63 +75,169 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The GPIO support is needed in SPL to managed the SD cart detect
-used on stm32mp157c-ev1 and dk2 board.
-So this patch activates the associated code in stm32_gpio.c.
+Use the DDR3 dtsi files generated by STM32CubeMX 5.6.0
+Speed Bin Grade = using DDR3-1066G / 8-8-8 and all others
+parameters at default value.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/gpio/stm32_gpio.c | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ .../dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi   | 49 +++++++++----------
+ .../dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi   | 49 +++++++++----------
+ 2 files changed, 48 insertions(+), 50 deletions(-)
 
-diff --git a/drivers/gpio/stm32_gpio.c b/drivers/gpio/stm32_gpio.c
-index f55f834e7d..37a8cfa47a 100644
---- a/drivers/gpio/stm32_gpio.c
-+++ b/drivers/gpio/stm32_gpio.c
-@@ -20,7 +20,6 @@
- #define MODE_BITS_MASK			3
- #define BSRR_BIT(gpio_pin, value)	BIT(gpio_pin + (value ? 0 : 16))
- 
--#ifndef CONFIG_SPL_BUILD
+diff --git a/arch/arm/dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi
+index 11e8f2bef6..c0fc1f772e 100644
+--- a/arch/arm/dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi
++++ b/arch/arm/dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi
+@@ -1,24 +1,23 @@
+ // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
  /*
-  * convert gpio offset to gpio index taking into account gpio holes
-  * into gpio bank
-@@ -147,7 +146,6 @@ static const struct dm_gpio_ops gpio_stm32_ops = {
- 	.set_value		= stm32_gpio_set_value,
- 	.get_function		= stm32_gpio_get_function,
- };
--#endif
- 
- static int gpio_stm32_probe(struct udevice *dev)
- {
-@@ -162,7 +160,6 @@ static int gpio_stm32_probe(struct udevice *dev)
- 
- 	priv->regs = (struct stm32_gpio_regs *)addr;
- 
--#ifndef CONFIG_SPL_BUILD
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	struct ofnode_phandle_args args;
- 	const char *name;
-@@ -195,7 +192,7 @@ static int gpio_stm32_probe(struct udevice *dev)
- 	dev_dbg(dev, "addr = 0x%p bank_name = %s gpio_count = %d gpio_range = 0x%x\n",
- 		(u32 *)priv->regs, uc_priv->bank_name, uc_priv->gpio_count,
- 		priv->gpio_range);
--#endif
+  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
++ */
 +
- 	ret = clk_get_by_index(dev, 0, &clk);
- 	if (ret < 0)
- 		return ret;
-@@ -215,9 +212,7 @@ U_BOOT_DRIVER(gpio_stm32) = {
- 	.name	= "gpio_stm32",
- 	.id	= UCLASS_GPIO,
- 	.probe	= gpio_stm32_probe,
--#ifndef CONFIG_SPL_BUILD
- 	.ops	= &gpio_stm32_ops,
--#endif
- 	.flags	= DM_UC_FLAG_SEQ_ALIAS,
- 	.priv_auto_alloc_size	= sizeof(struct stm32_gpio_priv),
- };
++/*
++ * File generated by STMicroelectronics STM32CubeMX DDR Tool for MPUs
++ * DDR type: DDR3 / DDR3L
++ * DDR width: 16bits
++ * DDR density: 4Gb
++ * System frequency: 533000Khz
++ * Relaxed Timing Mode: false
++ * Address mapping type: RBC
+  *
+- * STM32MP157C DK1/DK2 BOARD configuration
+- * 1x DDR3L 4Gb, 16-bit, 533MHz.
+- * Reference used NT5CC256M16DP-DI from NANYA
+- *
+- * DDR type / Platform	DDR3/3L
+- * freq		533MHz
+- * width	16
+- * datasheet	0  = MT41J256M16-187 / DDR3-1066 bin G
+- * DDR density	4
+- * timing mode	optimized
+- * Scheduling/QoS options : type = 2
+- * address mapping : RBC
+- * Tc > + 85C : N
++ * Save Date: 2020.02.20, save Time: 18:45:20
+  */
+-#define DDR_MEM_NAME "DDR3-1066/888 bin G 1x4Gb 533MHz v1.45"
+-#define DDR_MEM_SPEED 533000
+-#define DDR_MEM_SIZE 0x20000000
++
++#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000Khz"
++#define DDR_MEM_SPEED	533000
++#define DDR_MEM_SIZE	0x20000000
+ 
+ #define DDR_MSTR 0x00041401
+ #define DDR_MRCTRL0 0x00000010
+@@ -50,15 +49,6 @@
+ #define DDR_DFIUPD1 0x00000000
+ #define DDR_DFIUPD2 0x00000000
+ #define DDR_DFIPHYMSTR 0x00000000
+-#define DDR_ADDRMAP1 0x00070707
+-#define DDR_ADDRMAP2 0x00000000
+-#define DDR_ADDRMAP3 0x1F000000
+-#define DDR_ADDRMAP4 0x00001F1F
+-#define DDR_ADDRMAP5 0x06060606
+-#define DDR_ADDRMAP6 0x0F060606
+-#define DDR_ADDRMAP9 0x00000000
+-#define DDR_ADDRMAP10 0x00000000
+-#define DDR_ADDRMAP11 0x00000000
+ #define DDR_ODTCFG 0x06000600
+ #define DDR_ODTMAP 0x00000001
+ #define DDR_SCHED 0x00000C01
+@@ -83,6 +73,15 @@
+ #define DDR_PCFGQOS1_1 0x00800040
+ #define DDR_PCFGWQOS0_1 0x01100C03
+ #define DDR_PCFGWQOS1_1 0x01000200
++#define DDR_ADDRMAP1 0x00070707
++#define DDR_ADDRMAP2 0x00000000
++#define DDR_ADDRMAP3 0x1F000000
++#define DDR_ADDRMAP4 0x00001F1F
++#define DDR_ADDRMAP5 0x06060606
++#define DDR_ADDRMAP6 0x0F060606
++#define DDR_ADDRMAP9 0x00000000
++#define DDR_ADDRMAP10 0x00000000
++#define DDR_ADDRMAP11 0x00000000
+ #define DDR_PGCR 0x01442E02
+ #define DDR_PTR0 0x0022AA5B
+ #define DDR_PTR1 0x04841104
+diff --git a/arch/arm/dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi
+index 4b70b60554..fc226d2544 100644
+--- a/arch/arm/dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi
++++ b/arch/arm/dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi
+@@ -1,24 +1,23 @@
+ // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+ /*
+  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
++ */
++
++/*
++ * File generated by STMicroelectronics STM32CubeMX DDR Tool for MPUs
++ * DDR type: DDR3 / DDR3L
++ * DDR width: 32bits
++ * DDR density: 8Gb
++ * System frequency: 533000Khz
++ * Relaxed Timing Mode: false
++ * Address mapping type: RBC
+  *
+- * STM32MP157C ED1 BOARD configuration
+- * 2x DDR3L 4Gb each, 16-bit, 533MHz, Single Die Package in flyby topology.
+- * Reference used NT5CC256M16DP-DI from NANYA
+- *
+- * DDR type / Platform	DDR3/3L
+- * freq		533MHz
+- * width	32
+- * datasheet	0  = MT41J256M16-187 / DDR3-1066 bin G
+- * DDR density	8
+- * timing mode	optimized
+- * Scheduling/QoS options : type = 2
+- * address mapping : RBC
+- * Tc > + 85C : N
++ * Save Date: 2020.02.20, save Time: 18:49:33
+  */
+-#define DDR_MEM_NAME "DDR3-1066/888 bin G 2x4Gb 533MHz v1.45"
+-#define DDR_MEM_SPEED 533000
+-#define DDR_MEM_SIZE 0x40000000
++
++#define DDR_MEM_NAME	"DDR3-DDR3L 32bits 533000Khz"
++#define DDR_MEM_SPEED	533000
++#define DDR_MEM_SIZE	0x40000000
+ 
+ #define DDR_MSTR 0x00040401
+ #define DDR_MRCTRL0 0x00000010
+@@ -50,15 +49,6 @@
+ #define DDR_DFIUPD1 0x00000000
+ #define DDR_DFIUPD2 0x00000000
+ #define DDR_DFIPHYMSTR 0x00000000
+-#define DDR_ADDRMAP1 0x00080808
+-#define DDR_ADDRMAP2 0x00000000
+-#define DDR_ADDRMAP3 0x00000000
+-#define DDR_ADDRMAP4 0x00001F1F
+-#define DDR_ADDRMAP5 0x07070707
+-#define DDR_ADDRMAP6 0x0F070707
+-#define DDR_ADDRMAP9 0x00000000
+-#define DDR_ADDRMAP10 0x00000000
+-#define DDR_ADDRMAP11 0x00000000
+ #define DDR_ODTCFG 0x06000600
+ #define DDR_ODTMAP 0x00000001
+ #define DDR_SCHED 0x00000C01
+@@ -83,6 +73,15 @@
+ #define DDR_PCFGQOS1_1 0x00800040
+ #define DDR_PCFGWQOS0_1 0x01100C03
+ #define DDR_PCFGWQOS1_1 0x01000200
++#define DDR_ADDRMAP1 0x00080808
++#define DDR_ADDRMAP2 0x00000000
++#define DDR_ADDRMAP3 0x00000000
++#define DDR_ADDRMAP4 0x00001F1F
++#define DDR_ADDRMAP5 0x07070707
++#define DDR_ADDRMAP6 0x0F070707
++#define DDR_ADDRMAP9 0x00000000
++#define DDR_ADDRMAP10 0x00000000
++#define DDR_ADDRMAP11 0x00000000
+ #define DDR_PGCR 0x01442E02
+ #define DDR_PTR0 0x0022AA5B
+ #define DDR_PTR1 0x04841104
 -- 
 2.17.1
 

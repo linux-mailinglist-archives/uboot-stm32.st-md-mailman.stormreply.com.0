@@ -2,52 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F02C199AE9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 18:07:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48671199AF3
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 18:08:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E379C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 16:07:17 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 13792C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Mar 2020 16:08:20 +0000 (UTC)
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1B07C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 10860C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 31 Mar 2020 16:07:16 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48sDjv4JClz1rsXX;
- Tue, 31 Mar 2020 18:07:15 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48sDjv3czdz1qqkQ;
- Tue, 31 Mar 2020 18:07:15 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id caCMoicMJZog; Tue, 31 Mar 2020 18:07:14 +0200 (CEST)
-X-Auth-Info: X42bcTwH6UI4RA1AeGIusKmWDdjSxrJUVe7lRESFQCY=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 31 Mar 2020 18:07:14 +0200 (CEST)
-To: Patrice CHOTARD <patrice.chotard@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+ Tue, 31 Mar 2020 16:08:16 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id y71so19364742oia.7
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 31 Mar 2020 09:08:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=sCzhbnENEVrPkADu51arzQp8dH2NRRrNxbz2DeQ3SBQ=;
+ b=C/X+YVfbNjzcSQuslfsByFMr6Tm/diUftatMgkFvvp+TEHavhBJ2ihePS6NNj6Qa2u
+ 3Qcbk9a84cN+UWkFt/6ajZid3Td3OJKebBs1IoIAkE1bTVMoKbpKMiJKkkLwh9ElL52q
+ bam80la1lvIz7s37vpfOQVdWAVf9ud+o0l2eM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=sCzhbnENEVrPkADu51arzQp8dH2NRRrNxbz2DeQ3SBQ=;
+ b=f85Ohgd88kYcu4tvz+vYarjAkOiZ45usbkbSsE9D+PbZJj1rHUjyMFXtiEppZefsE+
+ loMzvwybqviLWI7CclrXBgf8UtKgJP2rMlLZUUKNsJSaLsGW5Xsf8dMU+yvJTgHrKhkG
+ OpqAa5CovbxfdnYyl7wMEy81o1l7+lyyxVivzwXqFuBJwi0aKpgKKrqmoEmRMP3fjPgg
+ ndpowkvjk2Ct8WB5BU2XQuFAI58NQls2xPzojm305bwiwSe8b0tb2GpdP+t/BxpnOSc8
+ THEzpeAaROxwQXhh0+aPUtsQnOR6ogVNF1BWNAaB/lZmdPV5ID26fY1MtV/uy6q7teJi
+ i49A==
+X-Gm-Message-State: ANhLgQ38TxW577omXhoT1zszQmJAX5YjS/IwT5MwEV1yHCKZ+6q+hOUQ
+ yjW1z7juTRQzTQ7gkd0/Ne9bCSqpwdc0q1h9HHO1jw==
+X-Google-Smtp-Source: ADFU+vvwquYckpedbC0WB8V4KGRx2OwBUjfOkrJbw9LpNMN5QJRCc7z7txIUnrqiNb0aMYS18hD2P07FqrRsfNbNiRg=
+X-Received: by 2002:aca:bb83:: with SMTP id l125mr2551091oif.122.1585670895161; 
+ Tue, 31 Mar 2020 09:08:15 -0700 (PDT)
+MIME-Version: 1.0
 References: <1546595706-31360-1-git-send-email-patrice.chotard@st.com>
  <1546595706-31360-3-git-send-email-patrice.chotard@st.com>
  <f3e23915-c6ae-7c4d-7c5a-f725f726b5d4@denx.de>
- <ed1f23e8-6ae1-4f62-cb23-10f8061a45d1@st.com>
- <08d1a5d5-4d90-1c97-6e88-b44391bc0fe0@denx.de>
- <c0c7ba79-763e-3096-fbe6-f97e9f076592@st.com>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <5916e5a0-bfcf-ce91-1fa5-e4f78c63e47b@denx.de>
-Date: Tue, 31 Mar 2020 18:07:14 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <c0c7ba79-763e-3096-fbe6-f97e9f076592@st.com>
-Content-Language: en-US
+In-Reply-To: <f3e23915-c6ae-7c4d-7c5a-f725f726b5d4@denx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 31 Mar 2020 10:08:03 -0600
+Message-ID: <CAPnjgZ3m_Ft+uoY4RnFCQN2Ug77WbXWr1fwTOiZ7heoAdeNeMA@mail.gmail.com>
+To: Marek Vasut <marex@denx.de>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Patrick DELAUNAY <patrick.delaunay@st.com>
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
 Subject: Re: [Uboot-stm32] [U-Boot] [PATCH v1 2/2] gpio: stm32f7: Fix SPL
 	code size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -66,44 +70,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 3/31/20 4:10 PM, Patrice CHOTARD wrote:
-> 
-> On 3/31/20 1:22 PM, Marek Vasut wrote:
->> On 3/31/20 10:12 AM, Patrice CHOTARD wrote:
->>> Hi Marek
->> Hi,
->>
->>> On 3/31/20 4:51 AM, Marek Vasut wrote:
->>>> On 1/4/19 10:55 AM, Patrice Chotard wrote:
->>>>
->>>> Hi,
->>>>
->>>>> @@ -215,7 +220,9 @@ U_BOOT_DRIVER(gpio_stm32) = {
->>>>>  	.id	= UCLASS_GPIO,
->>>>>  	.of_match = stm32_gpio_ids,
->>>>>  	.probe	= gpio_stm32_probe,
->>>>> +#ifndef CONFIG_SPL_BUILD
->>>>>  	.ops	= &gpio_stm32_ops,
->>>>> +#endif
->>>>>  	.flags	= DM_UC_FLAG_SEQ_ALIAS,
->>>>>  	.priv_auto_alloc_size	= sizeof(struct stm32_gpio_priv),
->>>>>  };
->>>> The U-Boot DM GPIO uclass code assumes the .ops is always non-NULL.
->>>> Hence, this patch breaks all GPIO access (actually crashes SPL) on STM32
->>>> in SPL.
->>> I suppose it breaks AV96 boot ?
->> No, it does not. I was trying to read GPIO value in SPL and found this.
->>
->>> On my side i have checked on v2020-04-rc4 U-boot release, by reverting "gpio: stm32f7: Fix SPL code size"
->>>
->>> the stm32f7 SPL code size is below the 32Kb limit.
->>>
->>> I will send a patch to revert it.
->> OK sure, does that apply to all the STM32 systems ?
-> Yes, all STM32 based platforms (F4/F7/H7 and MP1) are using this gpio driver.
+Hi,
 
-What I wanted to ask about is whether you're sure they don't overflow in
-SPL. But I suspect CI would tell you by now.
+On Mon, 30 Mar 2020 at 20:51, Marek Vasut <marex@denx.de> wrote:
+>
+> On 1/4/19 10:55 AM, Patrice Chotard wrote:
+>
+> Hi,
+>
+> > @@ -215,7 +220,9 @@ U_BOOT_DRIVER(gpio_stm32) = {
+> >       .id     = UCLASS_GPIO,
+> >       .of_match = stm32_gpio_ids,
+> >       .probe  = gpio_stm32_probe,
+> > +#ifndef CONFIG_SPL_BUILD
+> >       .ops    = &gpio_stm32_ops,
+> > +#endif
+> >       .flags  = DM_UC_FLAG_SEQ_ALIAS,
+> >       .priv_auto_alloc_size   = sizeof(struct stm32_gpio_priv),
+> >  };
+>
+> The U-Boot DM GPIO uclass code assumes the .ops is always non-NULL.
+> Hence, this patch breaks all GPIO access (actually crashes SPL) on STM32
+> in SPL.
+
+Right. You are not allowed to have a driver without operations unless
+the uclass defines none.
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

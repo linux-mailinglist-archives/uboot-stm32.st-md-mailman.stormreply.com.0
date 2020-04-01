@@ -2,60 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E15619AAD1
-	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 13:32:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70FB719AAD7
+	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 13:34:07 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 14846C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 11:32:19 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 371A4C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 11:34:07 +0000 (UTC)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66628C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AFC9CC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 11:32:18 +0000 (UTC)
+ Wed,  1 Apr 2020 11:34:06 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48skZB018Wz1qs0j
+ by mail-out.m-online.net (Postfix) with ESMTP id 48skcG205Qz1qs07
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 13:32:18 +0200 (CEST)
+ Wed,  1 Apr 2020 13:34:06 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48skZ970XZz1r0cS
+ by mail.m-online.net (Postfix) with ESMTP id 48skcG1hLLz1r0cV
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 13:32:17 +0200 (CEST)
+ Wed,  1 Apr 2020 13:34:06 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024) with ESMTP id UIaW0UZ7jXDB
+ port 10024) with ESMTP id 10-F-9uEGoy7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 13:32:17 +0200 (CEST)
-X-Auth-Info: 1Ennd6IIUPEWYIE8uFWl3kj/ZMxAk1I2pF1J9W042uM=
+ Wed,  1 Apr 2020 13:34:05 +0200 (CEST)
+X-Auth-Info: FdTrODQWwIyH/tgxQc7KqCc8hQOBcoPdRY+BkmvWKtI=
 Received: from janitor.denx.de (unknown [62.91.23.180])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 13:32:17 +0200 (CEST)
+ Wed,  1 Apr 2020 13:34:05 +0200 (CEST)
 Received: by janitor.denx.de (Postfix, from userid 119)
- id C0ECEA2C44; Wed,  1 Apr 2020 13:32:16 +0200 (CEST)
+ id 34535A2C3F; Wed,  1 Apr 2020 13:34:05 +0200 (CEST)
 Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
- by janitor.denx.de (Postfix) with ESMTPS id 22AEFA12F3;
- Wed,  1 Apr 2020 13:32:13 +0200 (CEST)
+ by janitor.denx.de (Postfix) with ESMTPS id 07C6BA2B96;
+ Wed,  1 Apr 2020 13:34:02 +0200 (CEST)
 Received: from gemini.denx.de (localhost [IPv6:::1])
- by gemini.denx.de (Postfix) with ESMTP id C829924003E;
- Wed,  1 Apr 2020 13:32:12 +0200 (CEST)
+ by gemini.denx.de (Postfix) with ESMTP id DB2B124003E;
+ Wed,  1 Apr 2020 13:34:01 +0200 (CEST)
 To: Patrick Delaunay <patrick.delaunay@st.com>
 From: Wolfgang Denk <wd@denx.de>
 MIME-Version: 1.0
-In-reply-to: <20200331180330.8.I15cb0a6245fb4cd5d23371683c2697f794adf306@changeid>
+In-reply-to: <20200331180330.9.I5d296f8fd82b60a592b51029e7e420672d0e855b@changeid>
 References: <20200331180330.1.Ied6708bad5048382a57618f95d67c549aae49f42@changeid>
- <20200331180330.8.I15cb0a6245fb4cd5d23371683c2697f794adf306@changeid>
+ <20200331180330.9.I5d296f8fd82b60a592b51029e7e420672d0e855b@changeid>
 Comments: In-reply-to Patrick Delaunay <patrick.delaunay@st.com>
- message dated "Tue, 31 Mar 2020 18:04:25 +0200."
-Date: Wed, 01 Apr 2020 13:32:12 +0200
-Message-Id: <20200401113212.C829924003E@gemini.denx.de>
+ message dated "Tue, 31 Mar 2020 18:04:26 +0200."
+Date: Wed, 01 Apr 2020 13:34:01 +0200
+Message-Id: <20200401113401.DB2B124003E@gemini.denx.de>
 Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 08/16] board: stm32mp1: update management
-	of boot-led
+Subject: Re: [Uboot-stm32] [PATCH 09/16] board: stm32mp1: gt9147 IRQ before
+	reset on EV1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,39 +74,19 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Dear Patrick Delaunay,
 
-In message <20200331180330.8.I15cb0a6245fb4cd5d23371683c2697f794adf306@changeid> you wrote:
-> Force boot-led ON and no more rely on default-state.
-> This patch avoid device-tree modification for U-Boot.
+In message <20200331180330.9.I5d296f8fd82b60a592b51029e7e420672d0e855b@changeid> you wrote:
+> Software workaround for I2C issue on EV1 board,
+> configure the IRQ line for touchscreen before LCD reset
+> to fix the used I2C address.
 ...
 
-> +#ifdef CONFIG_LED
->  	struct udevice *dev;
->  	int ret;
->  
-> @@ -292,8 +294,10 @@ static int setup_led(enum led_state_t cmd)
->  
->  	ret = led_set_state(dev, cmd);
->  	return ret;
-> -}
-> +#else
-> +	return 0;
->  #endif
-> +}
->  
->  static void __maybe_unused led_error_blink(u32 nb_blink)
->  {
-> @@ -648,8 +652,10 @@ int board_init(void)
->  
->  	sysconf_init();
->  
-> -	if (CONFIG_IS_ENABLED(CONFIG_LED))
-> +	if (CONFIG_IS_ENABLED(CONFIG_LED)) {
->  		led_default_state();
-> +		setup_led(LEDST_ON);
-> +	}
+> +	ret = uclass_get_device_by_driver(UCLASS_NOP, DM_GET_DRIVER(goodix),
+> +					  &dev);
+> +	if (ret)
+> +		debug("goodix init failed: %d\n", ret);
 
-This is inconsistent, please use CONFIG_IS_ENABLED() everywhere
-instead of #ifdef's.
+If this is an error condition, you should use printf(), and not
+paper over it with a debug().
 
 Best regards,
 
@@ -116,8 +96,7 @@ Wolfgang Denk
 DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
-Q:  Do you know what the death rate around here is?
-A:  One per person.
+Don't have a battle of wits with an unarmed opponent.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

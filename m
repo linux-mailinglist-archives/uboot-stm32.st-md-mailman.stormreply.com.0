@@ -2,65 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB5CC19B57B
-	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 20:29:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 976B319D1A2
+	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Apr 2020 10:04:00 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A3001C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Apr 2020 18:29:10 +0000 (UTC)
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
- [209.85.160.179])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A4F6C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Apr 2020 08:04:00 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 73029C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D26A7C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Apr 2020 18:29:09 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id a5so943273qtw.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 01 Apr 2020 11:29:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=XXmPDJxcmM7Kgocgg1YJjsl/vI0SSWdxbiQa1Y4Y0Ao=;
- b=hdwAar5p8poXfb1DfqJdCo+gTlIVt54/qC0P1npS/q1OHu+dIEQm/MUT45qUHnojBx
- kg3A/h7TE6ZTJt/6X31HVOhKXWItFssFPykRsaXnTKMDrHvco7nqCpWQRTAmZHiCd7YR
- 3LN5NeAUWjJCBr+3p4xDM37hJR4I2cMWpfjjI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=XXmPDJxcmM7Kgocgg1YJjsl/vI0SSWdxbiQa1Y4Y0Ao=;
- b=udWJOC5lTBQiXA+VFqa4ePonuPWGdbKm760bjQZ84M3iQuhts9/gkDAFBo8Gc8h94q
- 658Z8AgGw0tfU+6q/6Cb/ldQkX5B5BQAjMDpEiZZ77mpmgdL9JeOaGS0X5IUqQTlRPdE
- X1Lwo3Tz7A+WrF9IUNSuAiA6aeXljO3LgWZj6x7dfhbvFxOfDpVtCcXu2IYgAEC7yb/Z
- 0WVLwwC0C52pYrGwfgLYntIH50eyQiI6hyLI59b7beGp0/24AQ00m9LQt5HlB0BlGU5B
- jDWRajjX8QTiF8Lp4ZHHxUnGxOzIjoMRIoLbSTpdS8zquRWWpYi6uKUpZVVYZyDqlYtL
- nqkw==
-X-Gm-Message-State: ANhLgQ34XJW9KZZs2XYomWoUFtDfu7bt1H8Fi53U1KpSVnNevWVDkCwc
- 6/j6XsrhZwzAC7DKhgc8QouEdg==
-X-Google-Smtp-Source: ADFU+vvfZ2rTkQ7/oJbcP+rkfP99kL1Icm7lWFpdVhK6uUa09HdDB0p0pm/q6ua8oxWx4FR/05M3qg==
-X-Received: by 2002:ac8:7450:: with SMTP id h16mr11602014qtr.11.1585765748084; 
- Wed, 01 Apr 2020 11:29:08 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-826f-4518-0223-1e7c-39c9.inf6.spectrum.com.
- [2606:a000:1401:826f:4518:223:1e7c:39c9])
- by smtp.gmail.com with ESMTPSA id m65sm1959923qke.109.2020.04.01.11.29.06
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 01 Apr 2020 11:29:07 -0700 (PDT)
-Date: Wed, 1 Apr 2020 14:29:04 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20200401182904.GO27133@bill-the-cat>
-References: <500b672581d74a37b23de7a9c35125c9@SFHDAG6NODE3.st.com>
+ Fri,  3 Apr 2020 08:03:58 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03383HWq025068; Fri, 3 Apr 2020 10:03:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=5W7dtpgQWJnh01IxlD6VjM5yDvcX4XxFSKAQAGv7ZW4=;
+ b=U8HCUl8Bp/XZCmnd8UVk6dp4wFU8RSDAl1wXWe82zuoO0+n+cenmrOayXRxJqHev8Oft
+ e4JM2b+FG10opTnNeVfL2l2MyB+4RSV6JWSTqpm6SNWgJRv7CJ3Ga4Zgv+Lkuxl1VDfI
+ Z+3HaRmkWxe16+h8BP9mGaMs+Tve5Ao73uuKJMnpURouEZ3/LcQpOMeHcKFo4EG1JtTF
+ p4MeKDAueweWEEQR9vrbu7yDHRv27J9Wz/bp2f1oOOqsYYUDzaZg4aQpZJrWebyGat8O
+ ELyFGrI+GsYI02wQbvmSpkgT+gGdCzJ7qLGCdcXgSyYrpGc70KqFmcQQDTmD3pudGM3T 1g== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 302y54a02d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 03 Apr 2020 10:03:53 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2D7DD10002A;
+ Fri,  3 Apr 2020 10:03:48 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C131921D6D5;
+ Fri,  3 Apr 2020 10:03:48 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 3 Apr
+ 2020 10:03:48 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Fri, 3 Apr 2020 10:03:48 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] arm: stm32mp1: activate data cache in SPL and before
+ relocation
+Thread-Index: AQHWBmdSO6oWcaW6PEiqwzqWJWVPdKhgxLEAgABF/nD///8WgIADSjGQ
+Date: Fri, 3 Apr 2020 08:03:48 +0000
+Message-ID: <a933431e01de4a1b9973ad1b5f6d9ddb@SFHDAG6NODE3.st.com>
+References: <20200330094610.1.I2ff601b652f4995a3401dc67c2369a4187046ed8@changeid>
+ <15a7a5fc-35f0-844a-8bdb-aefcbc001243@denx.de>
+ <85b6dd3be8a9460984dd958592a4d476@SFHDAG6NODE3.st.com>
+ <2b7f0474-7e8e-0908-1971-3cc688a221ac@denx.de>
+In-Reply-To: <2b7f0474-7e8e-0908-1971-3cc688a221ac@denx.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.46]
 MIME-Version: 1.0
-In-Reply-To: <500b672581d74a37b23de7a9c35125c9@SFHDAG6NODE3.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-03_05:2020-04-02,
+ 2020-04-03 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm/master
-	=u-boot-stm32-20200401
+Subject: Re: [Uboot-stm32] [PATCH] arm: stm32mp1: activate data cache in SPL
+ and before relocation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,94 +81,150 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7528495339671297115=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Marek,
 
---===============7528495339671297115==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="i1d8offQF8oqidLm"
-Content-Disposition: inline
+> From: Marek Vasut <marex@denx.de>
+> Sent: lundi 30 mars 2020 16:04
+> 
+> On 3/30/20 3:49 PM, Patrick DELAUNAY wrote:
+> > Hi Marek,
+> 
+> Hi,
+> 
+> [...]
+> 
+> >>> -	/* Enable D-cache. I-cache is already enabled in start.S */
+> >>> +	/* I-cache is already enabled in start.S */
+> >
+> > Not needed for arm V7 (I copy this function from other platfrom ... I
+> > don't remember which one)
+> 
+> Maybe this needs to be de-duplicated if it's a copy ?
 
+I don't remember.... 
+As I mixed several references
 
---i1d8offQF8oqidLm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+But I found the same content in many arm arch;
 
-On Wed, Apr 01, 2020 at 12:43:44PM +0000, Patrick DELAUNAY wrote:
+arch/arm/mach-imx/mx5/soc.c:67
+arch/arm/mach-rockchip/board.c:47
+arch/arm/mach-tegra/board.c:271
+arch/arm/mach-sunxi/board.c:347
+arch/arm/mach-exynos/soc.c:30:
+arch/arm/mach-zynq/cpu.c:88:
+arch/arm/cpu/armv7/iproc-common/hwinit-common.c:1
+arch/arm/mach-u8500/cache.c:14
+arch/arm/mach-keystone/init.c:206
 
-> Hi Tom,
->=20
-> Please pull the latest STM32 master bugfix for v2020.04 =3D u-boot-stm32-=
-20200401
->=20
-> With the following changes:
-> - Fix device tree of Avenger96 board from Arrow Electronics and add
->   compatibility with stm32mp15_dhcom_basic_defconfig
->=20
-> CI status: Failed for vexpress_ca9x4 test.py
->      https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/2592
->=20
-> But local compilation is OK with buildman on stm32 targets.
-> I think it is enough as the Marek's patches only update the dh board code=
- and the AV96 device tree.
->=20
-> Thanks,
-> Patrick
->=20
-> The following changes since commit af827140e5965e5bb2bcad1c53ca8419b428ff=
-6d:
->=20
->   vexpress_ca9x4: Enable use of correct DTB file and restore EFI loader. =
-(2020-03-23 16:11:46 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20200401
->=20
-> for you to fetch changes up to 2f3c4b8a0f303edbea9fc112a49e546cf03776b0:
->=20
->   ARM: dts: stm32: Repair PMIC configuration on AV96 (2020-04-01 11:58:00=
- +0200)
->=20
+And different implementation in 
+arch/arm/mach-socfpga/misc.c:55
 
-Applied to u-boot/master, thanks!
+mach-omap2/omap-cache.c:49
+void enable_caches(void)
+{
 
---=20
-Tom
+	/* Enable I cache if not enabled */
+	if (!icache_status())
+		icache_enable();
 
---i1d8offQF8oqidLm
-Content-Type: application/pgp-signature; name="signature.asc"
+	dcache_enable();
+}
 
------BEGIN PGP SIGNATURE-----
+the issue the weak function empty, so it is mandatory to
+redefine the real implementation for each platform.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6E3WkACgkQFHw5/5Y0
-tyyZ7gwAtF4K7Ks243pt55/D9fskOmrvI7TTfm70/Eq17Q1twaaCWdhwPoaRY8Zf
-wJEhLFzfb/aAuLIm2HBSS+rCveaQ5DwPOdVHLcgcDm6Mak9IpQEnumfpelfgcbQJ
-zoY1uDutbM4DMj1CnQvCiQC4npCIuVzI1K1rWnQykiINbR1Dd9UOhyG2M69GIwcd
-HNu+HWf/tyg+CXXTQmeadCRuWyvtMDGCaMTkFcrQWW1+hmiAOwatWGDrxcl9BeWe
-cPgpDiP4MWWqcsX1amlOjAd2PN4ts7gQ3C/In5bj21RnbpI3pUBcHnhbWVz3bsLS
-A8lDdsOgS/CNK+GXCP+WV5k+6bi/cX6kuboT5auwxWDU/tr8CUsGpUM6dShTus0k
-Qj1OXGIuaBWQZlZIAfs1qwovmglejTnDhty5/+PwKw25Oi8Xod9Cx9E+AUSMq5fX
-wi5etFPQxK/jAfzXKL1q+Vz3008AYIprxbh4LIEZ+//asUt3/2sRbCl2IlHbS0G9
-SDnZv3ji
-=z7dL
------END PGP SIGNATURE-----
+arch/arm/lib/cache.c:35
+/*
+ * Default implementation of enable_caches()
+ * Real implementation should be in platform code
+ */
+__weak void enable_caches(void)
+{
+	puts("WARNING: Caches not enabled\n");
+}
 
---i1d8offQF8oqidLm--
+[...]
 
---===============7528495339671297115==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> >>>
+> >>> +static void set_mmu_dcache(u32 addr, u32 size) {
+> >>> +	int	i;
+> >>> +	u32 start, end;
+> >>> +
+> >>> +	start = addr >> MMU_SECTION_SHIFT;
+> >>> +	end = ((u64)addr + (u64)size) >> MMU_SECTION_SHIFT;
+> >>
+> >> Is this a copy of dram_bank_mmu_setup() in arch/arm/lib/cache-cp15.c ?
+> >> Why ?
+> >
+> > It is not just a copy...
+> >
+> > set__mmu_dache is only a static helper for  function
+> > dram_bank_mmu_setup()
+> >
+> > I override the default implementation of the weak functon
+> > dram_bank_mmu_setup()
+> 
+> Can you instead augment the original implementation to cater for this usecase or
+> would that be too difficult ?
 
+Have a generic behavior...
+
+I will propose to protect the access to bd->bi_dram[bank] in dram_bank_mmu_setup
+
+[....]
+
+> >>
+> >>> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
+> >>> index c34a720e0c..5203fc93ad 100644
+> >>> --- a/include/configs/stm32mp1.h
+> >>> +++ b/include/configs/stm32mp1.h
+> >>> @@ -58,8 +58,8 @@
+> >>>
+> >>>  /* limit SYSRAM usage to first 128 KB */
+> >>>  #define CONFIG_SPL_MAX_SIZE		0x00020000
+> >>> -#define CONFIG_SPL_STACK		(STM32_SYSRAM_BASE + \
+> >>> -					 STM32_SYSRAM_SIZE)
+> >>> +/* stack at STM32_SYSRAM_BASE + STM32_SYSRAM_SIZE -
+> >> PGTABLE_SIZE (=16kB) */
+> >>> +#define CONFIG_SPL_STACK		0x2FFFC000
+> >>
+> >> Can't you memalign() the pagetable area instead of this hacking around?
+> >> Or use something around board_init_f_alloc_reserve().
+> >
+> > It was my first idea: use malloc
+> >
+> > But as I try to activate the data cache as soon as possible.
+> > So before spl_early_init call (for spl in board_init_f) and malloc is not yet
+> accessible.
+> >
+> > And board_init_f_alloc_reserve  is only called in U-Boot board-f.c.....
+> > after the MMU configuration for pre-relocation / not called in SPL.
+> >
+> > I don't see this address as hack but a memory configuration of SYSRAM:
+> >
+> > SYRAM content (board_f)
+> > - SPL code
+> > - SPL data
+> > - SPL stack (reversed order)
+> > - TTB
+> >
+> > But I can move it in BSS as global apl variable, I need to think about it....
+> > It is probably more clean.
+> 
+> Please do :)
+
+I willl move it in ".data" section in V2 for SPL and U-Boot.
+
+Even in binary size increase and the SPL load time
+by ROM code is increase by 30ms.
+
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============7528495339671297115==--

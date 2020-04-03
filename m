@@ -2,51 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82C8719D38D
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F67619D38B
 	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Apr 2020 11:25:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3250EC36B0E
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 223C0C36B0A
 	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Apr 2020 09:25:54 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 62B01C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6467BC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Fri,  3 Apr 2020 09:25:53 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0339MELk005838; Fri, 3 Apr 2020 11:25:48 +0200
+ 0339NASx018075; Fri, 3 Apr 2020 11:25:49 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=qLb4SPuQrzPvWbNHeo0G52S3R9nufa1Btk9FuDoVHEk=;
- b=QllMMqpJG+2nvD5EJDRgm7TdiZdcOGNKk4hyEntTSWSXQX78LR6sravGIrmPq7auO4oF
- PscfX/GitAiamyP0h14qnMrNiSu+33iJGpfRm+8IEnZGDRHRPHt2e4G2dBaXlL6PcfBw
- Y1+E8XeqPsEdfcGcT/5WRXXcBwyEsRrwee4HgcOy0onDJFZNg3FWCfG/C4rScx39A+yu
- sPK4fCL+U7otRfqNovMOWOUL6k9Huc5p5BY7h+3u7LYglR5IvWX+r5ITcqWLpNoEKhGk
- +pUMFUrpXOOUFdhyC3jno7siwJC0jkgAG9Fr0D1GIELpYxmIxO1mTUb04MBYb97U4GcN 6A== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=aekYFykZ7/HtP6xCPI7F6GC/TUSW2jTan3h1BJGrhCo=;
+ b=ZhVUjqXvT+PFqU4WNyXUN1g60mw6OFRMa2V/CmTMNE2IokaLZx0VTUcmkWlCUuQZA2+Y
+ 2dleOBH3WTB2MNgTUN0LGjJIRl4wnxHZ25dlMHeD1wzW3aM3IIy/saJbJCHf0S6P9USI
+ cEK0xEgTaXAuaDei/uWGbeDgdI1wEyHbuucRNvbR6kPzO6l9G6tryz4xpiW96m+tB1eN
+ 5rsJs7HgnLcRO/cYKGR3zQS69edurTm0y7zzkzZZetiT+gfsyT5TU7i+Y0w/KlJ/mmmT
+ 9T1bZV1idatDwhwM22Hf2H0peortui/nccn38b+5EdSQ4rrtWoxUX32iYNWksFbZgTRU eA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 301w81g8jn-1
+ by mx07-00178001.pphosted.com with ESMTP id 302y54addk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 03 Apr 2020 11:25:48 +0200
+ Fri, 03 Apr 2020 11:25:49 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9D47F10002A;
- Fri,  3 Apr 2020 11:25:47 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 919DE100034;
+ Fri,  3 Apr 2020 11:25:48 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9054E2222AD;
- Fri,  3 Apr 2020 11:25:47 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 876AE2222AD;
+ Fri,  3 Apr 2020 11:25:48 +0200 (CEST)
 Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Fri, 3 Apr 2020 11:25:47 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 3 Apr 2020 11:25:35 +0200
-Message-ID: <20200403092537.19961-1-patrick.delaunay@st.com>
+Date: Fri, 3 Apr 2020 11:25:36 +0200
+Message-ID: <20200403105644.v2.1.I2ff601b652f4995a3401dc67c2369a4187046ed8@changeid>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200403092537.19961-1-patrick.delaunay@st.com>
+References: <20200403092537.19961-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG8NODE2.st.com (10.75.127.23) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-03_06:2020-04-02,
@@ -55,7 +58,7 @@ Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH v2 0/2] arm: stm32mp1: activate data cache in
+Subject: [Uboot-stm32] [PATCH v2 1/2] arm: stm32mp: activate data cache in
 	SPL and before relocation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -73,124 +76,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Activate the data cache in SPL and in U-Boot before relocation.
 
-V2 after first feedbacks of the previous patch
-"arm: stm32mp1: activate data cache in SPL and before relocation"
-http://patchwork.ozlabs.org/patch/1263815/
+In arch_cpu_init(), the function early_enable_caches() sets the early
+TLB, early_tlb[] located .init section, and set cacheable:
+- for SPL, all the SYSRAM
+- for U-Boot, all the DDR
 
-This new serie depends on the ARM cache serie:
-http://patchwork.ozlabs.org/project/uboot/list/?series=168378
+After relocation, the function enable_caches() (called by board_r)
+reconfigures the MMU with new TLB location (reserved in
+board_f.c::reserve_mmu) and re-enable the data cache.
 
-I move tlb in .data section and simplify the implementation by reusing
-the default weak function dram_bank_mmu_setup() for MMU configuration
-and mmu_set_region_dcache_behaviour() to setup the specific behavior.
+This patch allows to reduce the execution time, particularly
+- for the device tree parsing in U-Boot pre-reloc stage
+  (dm_extended_scan_fd =>dm_scan_fdt)
+- in I2C timing computation in SPL (stm32_i2c_choose_solution())
 
-I also activate data cache on DDR for SPL.
+For example, the result on STM32MP157C-DK2 board is:
+   1,6s gain for trusted boot chain with TF-A
+   2,2s gain for basic boot chain with SPL
 
-For information the gain of the second patch is limited (few ms) for boot
-from SDCARD: the SDMMC IP use internal DMA and data cache on DDR is
-not really used.
+As TLB is added in .data section, the binary size increased and
+the SPL load time by ROM code increased (30ms on DK2).
 
-Gain should be better for other boot use-case.
-
-Example of bootstage report on STM32MP157C-DK2, boot from SD card.
-
-1/ For trusted boot chain with TF-A
-
-a) Before
-
-    STM32MP> bootstage report
-    Timer summary in microseconds (9 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-        583,290    583,290  board_init_f
-      2,348,898  1,765,608  board_init_r
-      2,664,580    315,682  id=64
-      2,704,027     39,447  id=65
-      2,704,729        702  main_loop
-      5,563,519  2,858,790  id=175
-
-    Accumulated time:
-                    41,696  dm_r
-                   615,561  dm_f
-
-b) After the serie
-
-    STM32MP> bootstage report
-    Timer summary in microseconds (9 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-        583,401    583,401  board_init_f
-        727,725    144,324  board_init_r
-      1,043,362    315,637  id=64
-      1,082,806     39,444  id=65
-      1,083,507        701  main_loop
-      3,680,827  2,597,320  id=175
-
-    Accumulated time:
-                    36,047  dm_f
-                    41,718  dm_r
-
-2/ And for the basic boot chain with SPL
-
-a) Before:
-
-    STM32MP> bootstage report
-    Timer summary in microseconds (12 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-        195,613    195,613  SPL
-        837,867    642,254  end SPL
-        840,117      2,250  board_init_f
-      2,739,639  1,899,522  board_init_r
-      3,066,815    327,176  id=64
-      3,103,377     36,562  id=65
-      3,104,078        701  main_loop
-      3,142,171     38,093  id=175
-
-    Accumulated time:
-                    38,124  dm_spl
-                    41,956  dm_r
-                   648,861  dm_f
-
-b) After the serie
-
-    STM32MP> bootstage report
-    Timer summary in microseconds (12 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-        195,859    195,859  SPL
-        330,190    134,331  end SPL
-        332,408      2,218  board_init_f
-        482,688    150,280  board_init_r
-        808,694    326,006  id=64
-        845,029     36,335  id=65
-        845,730        701  main_loop
-      3,281,876  2,436,146  id=175
-
-    Accumulated time:
-                     3,169  dm_spl
-                    36,041  dm_f
-                    41,701  dm_r
-
-    STM32MP> bootstage report
-    Timer summary in microseconds (12 records):
-           Mark    Elapsed  Stage
-              0          0  reset
-        211,036    211,036  SPL
-        343,393    132,357  end SPL
-        345,645      2,252  board_init_f
-        496,596    150,951  board_init_r
-        822,256    325,660  id=64
-        858,451     36,195  id=65
-        859,153        702  main_loop
-      3,414,706  2,555,553  id=175
-
-    Accumulated time:
-                     3,132  dm_spl
-                    36,005  dm_f
-                    41,695  dm_r
-
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
 Changes in v2:
 - create a new function early_enable_caches
@@ -199,16 +109,85 @@ Changes in v2:
   use mmu_set_region_dcache_behaviour() to setup
   the early MMU configuration
 - enable data cache on DDR in SPL, after DDR controller initialization
-- new
-
-Patrick Delaunay (2):
-  arm: stm32mp: activate data cache in SPL and before relocation
-  arm: stm32mp: activate data cache on DDR in SPL
 
  arch/arm/mach-stm32mp/cpu.c | 43 ++++++++++++++++++++++++++++++++++++-
- arch/arm/mach-stm32mp/spl.c | 21 ++++++++++++++++++
- 2 files changed, 63 insertions(+), 1 deletion(-)
+ 1 file changed, 42 insertions(+), 1 deletion(-)
 
+diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+index 36a9205819..c22c1a9bbc 100644
+--- a/arch/arm/mach-stm32mp/cpu.c
++++ b/arch/arm/mach-stm32mp/cpu.c
+@@ -75,6 +75,12 @@
+ #define PKG_SHIFT	27
+ #define PKG_MASK	GENMASK(2, 0)
+ 
++/*
++ * early TLB into the .data section so that it not get cleared
++ * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
++ */
++u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
++
+ #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+ #ifndef CONFIG_STM32MP1_TRUSTED
+ static void security_init(void)
+@@ -186,6 +192,32 @@ u32 get_bootmode(void)
+ 		    TAMP_BOOT_MODE_SHIFT;
+ }
+ 
++/*
++ * initialize the MMU and activate cache in SPL or in U- Boot pre-reloc stage
++ * MMU/TLB is updated in enable_caches() for U-Boot after relocation
++ * or is deactivated in U-Boot entry function start.S::cpu_init_cp15
++ */
++static void early_enable_caches(void)
++{
++	/* I-cache is already enabled in start.S: cpu_init_cp15 */
++
++	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
++		return;
++
++	gd->arch.tlb_size = PGTABLE_SIZE;
++	gd->arch.tlb_addr = (unsigned long)&early_tlb;
++
++	dcache_enable();
++
++	if (IS_ENABLED(CONFIG_SPL_BUILD))
++		mmu_set_region_dcache_behaviour(STM32_SYSRAM_BASE,
++						STM32_SYSRAM_SIZE,
++						DCACHE_DEFAULT_OPTION);
++	else
++		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
++						DCACHE_DEFAULT_OPTION);
++}
++
+ /*
+  * Early system init
+  */
+@@ -193,6 +225,8 @@ int arch_cpu_init(void)
+ {
+ 	u32 boot_mode;
+ 
++	early_enable_caches();
++
+ 	/* early armv7 timer init: needed for polling */
+ 	timer_init();
+ 
+@@ -225,7 +259,14 @@ int arch_cpu_init(void)
+ 
+ void enable_caches(void)
+ {
+-	/* Enable D-cache. I-cache is already enabled in start.S */
++	/* I-cache is already enabled in start.S: icache_enable() not needed */
++
++	/* deactivate the data cache, early enabled in arch_cpu_init() */
++	dcache_disable();
++	/*
++	 * update MMU after relocation and enable the data cache
++	 * warning: the TLB location udpated in board_f.c::reserve_mmu
++	 */
+ 	dcache_enable();
+ }
+ 
 -- 
 2.17.1
 

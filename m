@@ -2,55 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04C711A1A29
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Apr 2020 04:58:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB1F81A1E1E
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Apr 2020 11:38:40 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A2410C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Apr 2020 02:58:37 +0000 (UTC)
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
- [209.85.208.194])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4217DC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Apr 2020 09:38:40 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 50F45C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8E230C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  8 Apr 2020 02:58:36 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id 142so1432831ljj.7
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Apr 2020 19:58:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vqK7oY5MBzbBWe3otUvzM6GPQn3LueldwftxSgZjjHE=;
- b=cT7xCPusrnrSF4krMhRlrLP9AqsAreXrrsNglz8T5b6MDsatm4atL+XdRjtU0GOoqo
- ck3IUbwgHLV1g5cjFP7uJFDjg2NDh/iGoFhxU8w8S3QVEWamJ2Famr2Qvxy5bfFMy7fu
- wza+40SA9gMknov+gl6NhiGevl0j4ge673Dhk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vqK7oY5MBzbBWe3otUvzM6GPQn3LueldwftxSgZjjHE=;
- b=Cb5crGIK/vhwBaonlK2WACAozHUOd7sbzpoFEtby1E+2xhObuBvXvVWFljp4USiPm7
- XV4pr5UH8kKj0eJhdCZO6wbISLdTHgALss56T7bArVQ8T7Y3n+hRCZTCzFlWxpVfpNzf
- vqsrmjhk7eiHGGvdhDqoOFTsaE3WvJpLIUO/tIrARBDl3Xag8BB3EtzusATWhxWm87sY
- Z6ue44udg1pRtPvN1rvED5NBjquDQO39Xy5bms9VInY6CCIzpTMyvxEjhojpENClc8P6
- dK18bYUCnFmkVJXUGtQGaKCe5CA/Wh2M/RvqJ/AD2Hv3EVU05mwPFjjOn9PPgG+3MCpp
- x8Gw==
-X-Gm-Message-State: AGi0PuaN3nX9lKu4+D6bykD+o3FtN+orFGM2GYpRSA77xBQzRvi1m0F2
- j6c/sERRB8yQEuSsbA7ng4ayoXKn6pe/XfP5teimtA==
-X-Google-Smtp-Source: APiQypKY3cka9Tcjk7k4ZrrwxCwV7GZR0eYUec6sY82RQQGhWB/EC9UORdd16JbkYk8zyTK77TujUIPQhXQ4k0RHEU8=
-X-Received: by 2002:a2e:b24c:: with SMTP id n12mr3695933ljm.7.1586314715160;
- Tue, 07 Apr 2020 19:58:35 -0700 (PDT)
+ Wed,  8 Apr 2020 09:38:38 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0389c0B9030852; Wed, 8 Apr 2020 11:38:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=N1gubVzgqmmorsy5TLkrLlVEk7zB24heTgFT29GiaOA=;
+ b=KLyq/21EGgiLyQqiUKjKGv0bF/rHy4SoX1V09ec58+9lrBNqHRZ/QbgAC9325er5UiZz
+ iztzopfmdjYj/4ASv5U5aOh41XTw3QKygj8eUgZFuW9ynu0nt6h94rYbBwI86FDN87N7
+ qpNwquBQNibpnUDF6Mx3Su7GMtmrSxiOOaOzmaSnTD9Mb8W+YF81JFjbNh4+yQc2/9tL
+ +vfs30t/X4w+HtDc2ZZR9TD18CFNNEX8zf+VFD44hHPfcniZOk3xvysN7ojPftFXovRR
+ 0RH9NbWw2SEVL+oViXvmX2fOKNU0fH+zYczSz55bBy/+I+JwrdewGviq09otaF7EKdF8 oA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3091k6u3jj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 08 Apr 2020 11:38:35 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E15D610002A;
+ Wed,  8 Apr 2020 11:38:30 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB5E2222CB2;
+ Wed,  8 Apr 2020 11:38:30 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 8 Apr
+ 2020 11:38:30 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 8 Apr 2020 11:38:30 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Wolfgang Denk <wd@denx.de>, Marek Vasut <marex@denx.de>
+Thread-Topic: [Uboot-stm32] [PATCH 04/16] arm: stm32mp: detect U-Boot version
+ used to save environment
+Thread-Index: AQHWDPmjfPDPV698I0yFpn+ldbTE8Khu7J1A
+Date: Wed, 8 Apr 2020 09:38:30 +0000
+Message-ID: <2bff39d04e0c4112b3f763c7d97921eb@SFHDAG6NODE3.st.com>
+References: <20200331180330.1.Ied6708bad5048382a57618f95d67c549aae49f42@changeid>
+ <20200331160456.26254-1-patrick.delaunay@st.com>
+ <20200401112615.931A024003E@gemini.denx.de>
+ <8607d1778bcd4035807908e4a3a90381@SFHDAG6NODE3.st.com>
+ <20200407162847.8884D24003E@gemini.denx.de>
+In-Reply-To: <20200407162847.8884D24003E@gemini.denx.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
-References: <20200403113844.v2.1.If3d7baadb24504a63742fe82f963f481b030fafa@changeid>
-In-Reply-To: <20200403113844.v2.1.If3d7baadb24504a63742fe82f963f481b030fafa@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Apr 2020 20:57:32 -0600
-Message-ID: <CAPnjgZ0s-=ONFEe5kOTpc2cGXDOWSw81qX-Cf2=Rd4fFdAAw7g@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-07_10:2020-04-07,
+ 2020-04-07 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2] dm: core: remove the duplicated
-	function dm_ofnode_pre_reloc
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH 04/16] arm: stm32mp: detect U-Boot
+	version	used to save environment
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,44 +87,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 3 Apr 2020 at 03:39, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> The content dm_ofnode_pre_reloc() is identical with ofnode_pre_reloc()
-> defined in drivers/core/ofnode.c and used only three times:
-> - drivers/core/lists.c:lists_bind_fdt()
-> - drivers/clk/at91/pmc.c::at91_clk_sub_device_bind
-> - drivers/clk/altera/clk-arria10.c::socfpga_a10_clk_bind
->
-> So this function dm_ofnode_pre_reloc can be removed and replaced
-> by these function calls by ofnode_pre_reloc().
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> Hi Simon,
->
-> It is a rebased patch for http://patchwork.ozlabs.org/patch/1035799/
-> marked as superseded but never resent (and I forget it).
->
-> Compilation is OK on travis:
-> https://travis-ci.org/github/patrickdelaunay/u-boot/builds/670029232
->
-> Patrick
->
->
-> Changes in v2:
-> - rebase on master
-> - udpate dm_ofnode_pre_reloc call in at91_clk_sub_device_bind and
->   socfpga_a10_clk_bind
->
->  drivers/clk/altera/clk-arria10.c |  2 +-
->  drivers/clk/at91/pmc.c           |  2 +-
->  drivers/core/lists.c             |  2 +-
->  drivers/core/util.c              | 28 ----------------------------
->  include/dm/util.h                | 27 ---------------------------
->  5 files changed, 3 insertions(+), 58 deletions(-)
->
+Dear Wolfgang,
 
-Acked-by: Simon Glass <sjg@chromium.org>
+> From: Uboot-stm32 <uboot-stm32-bounces@st-md-mailman.stormreply.com> On
+> Behalf Of Wolfgang Denk
+> 
+> Dear Patrick,
+> 
+> In message <8607d1778bcd4035807908e4a3a90381@SFHDAG6NODE3.st.com>
+> you wrote:
+> >
+> > To simplify the test:
+> >
+> > env_check = " if env info -p -d -q; then env save; fi;"
+> 
+> All such automatical "env save" actions somewhere in the code give me the
+> creeps.  I've seen too often that they did things I nver intended to do or would
+> have accepted if I had a chance to decide.
+> 
+> Use extremely careful, please.
+
+Sure,
+
+In this case, the command "env info -d" tests if the default environment is currently used,
+So the user have never updated and saved the environment.
+
+In this case and if the persistent storage is available (option -p), the script "env_check" save the environment.
+
+PS: I take the initial idea from ./include/configs/opos6uldev.h and ./include/configs/apf27.h
+ 
+> From a user point of view, it's me who owns the environment, and nobody should
+> mess with my data without me confirming it.
+
+As the save action is performed only when default environment is used, it is done before 
+any user modification so I don't think that it is annoying for user.
+
+I also kept the call this feature only in the ST specific bootcmd_stm32mp to allow customization for users or other boards.
+(I prefer to don't add it in board_late_init() as it is done in board/intel/edison/edison.c)
+
+The purpose of the "env save" is just to avoid a "Warning" during the boot, 
+until the first user action and "env save" command:
+
+Loading Environment from MMC... *** Warning - bad CRC, using default environment
+
+The content of environment before and after the save is identical: it is the default one.
+but if it is too aggressive I can kept it for downstream.
+
+Marek do you have a opinion: it is acceptable for DH SOM using STM32MP15x SOC? 
+
+
+> Best regards,
+> 
+> Wolfgang Denk
+> 
+
+Best Regards
+
+Patrick Delaunay
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

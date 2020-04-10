@@ -2,63 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48CBC1A4A71
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 21:31:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE301A4B61
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 22:47:41 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0375FC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 19:31:07 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6C3D4C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 20:47:41 +0000 (UTC)
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C8C7C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A02C1C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2020 19:31:05 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id g23so2818005otq.4
+ Fri, 10 Apr 2020 20:47:39 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id k133so1658647oih.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2020 12:31:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=jTEc3bF3rimetAQssgdIhhG863borTxcvzZKZEXdw+Q=;
- b=uhgd4GHXjMSLvIC2RZWaWC6KVmAbHLMufBgSoJJ5M/4EK0KGVpTrWNRrYis69ediQg
- wAv84Ar+3GWq5/qjQVLcBtArjhtf6nw50OL+6+6rbcjmbKcS/tbB5prlsAEZiDEQfRko
- G2gto6gcgvpOQa50pcZ79cxUJ4iQWrvyQ3SqPiFFGZTJhz1YC5tTHqwagI4Qksf04kDt
- fObvtMDENyhtDmXAGN+ksCCVvdQDhPX3NiDW1nt6Ycnlf+dKlppTu7PB4hQFlwpd3wwx
- QfXgg/eNmJrgFWQ9EYQPOQ7Sibc9zt9izJK6KvV3iT+J/lSxSFLAxrWOPtaiHGcywGb4
- 8zVg==
+ Fri, 10 Apr 2020 13:47:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=KfBsGzH6kZY4RDJB+lY+Jl3ft0uN15BJ7it/xADAphU=;
+ b=YfBtYXFkEYdOb/p2MWHNpVdZAD1NVzfYeldW3H4I+aA15By1ttrqRUT2qWMjtwelE1
+ f7+gBAPv2zTljalt1DGqFU3Re94sMnLhEvWPHgq2lLdXqoW5Jm/a7v1u9+xlob7BDnbQ
+ SpNRQaR5DpuygMqHHShhQayEiQwnrok3S/qw8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=jTEc3bF3rimetAQssgdIhhG863borTxcvzZKZEXdw+Q=;
- b=srqaEFghFcdehrdNfjaopzYnNFYe5r7K6IIShpCR+gd5lIrf/lwpO4OxMVpERYZk1b
- kLhJ+XEXQsa+8Ql6ciPnU3FpGILAa+PQFGHSFXzHpbBQIBEyJgX2+VMwOTobNm0Tsfou
- Fe4WBXdjqUzM2ypT7/ytR+rJVXfNa4dOWOW+tVIl2CumXiaDjwrj0vrLOJsr1tTSjrzA
- 07PwQkBY9EwaP/nXxesys6dK5vTRP7vfqH3pgkUoWLZl1y1jlXE1DMklGLouRxKxQKv8
- zH9/vBGwPjBkyRRTopPeyt8TY6cboZXkSk7G3xbuwm94wx7NFw+Asv5FCnPkuxCVB0Mm
- eJMQ==
-X-Gm-Message-State: AGi0PuZJZ0wDy2iSKoFPMiqHbrzzwEGVaRbH2fy0VQC7r9c1wcu/fSSC
- 2lBf5BazyYpYIjaAxdNSXg5v7lanUzQoFiZYJK6d1g==
-X-Google-Smtp-Source: APiQypJTISLliPvHXhk/jaRqfwE0Sg5efFw00mZhdaQH3NURSh7kz0RnZ9E+dr9ksC0z/js98z/vmcGi59AxKrfoVNM=
-X-Received: by 2002:a9d:1e82:: with SMTP id n2mr5287998otn.356.1586547063714; 
- Fri, 10 Apr 2020 12:31:03 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 10 Apr 2020 12:31:01 -0700
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=KfBsGzH6kZY4RDJB+lY+Jl3ft0uN15BJ7it/xADAphU=;
+ b=Pg5Q0xR/mhyjT8Z1zgYyE4d8I8WAmDmMM820FG7QHC5N29Bz+IMxHYPX97WifTjNTY
+ k2CocPTJhxESBmMjBjC0TkQNRDb4dJmJYoqrfL5XE3fBljlj7Lc1PGl2N3A4CO5FGdji
+ CY3jhGHrSgJ3oiT7RVbk0563H2TOjLMszKO2mwS62qrK+G9vS60fWUfiGqz/od8W1dD7
+ MHVzhMCNq3jICzcttToZExGdDdN6zl7zoNmUQxRaasY3QQXZJoNsK/gFnE5KjE3hN+wn
+ gxaGQD2gKRtP0hHttmb9ZL9ZVmsLMnsUpzEQ/H2DsQ+V/ytQm1ADdJ4CurS2jmTvwUVD
+ 4JAg==
+X-Gm-Message-State: AGi0PuZWyk13AzE7XhyVmjEdUfeBNxuOolHlx6uBBerxDutgZU4fsBaQ
+ UqFQuMvrWMKYk1192DbaMqxxgfk2CMrxkAzpWJBTEQ==
+X-Google-Smtp-Source: APiQypLwxBMoeYAGvdBJFwQpLH9PCH+r9ZAv9/eMGxC11nYPxf6090uJHg9WoeTjFaL73yQ3D0s6STuCrGWHX6dUMm0=
+X-Received: by 2002:aca:bb83:: with SMTP id l125mr4524789oif.122.1586551657944; 
+ Fri, 10 Apr 2020 13:47:37 -0700 (PDT)
 MIME-Version: 1.0
-From: sjg@google.com
-In-Reply-To: <CAPnjgZ0s-=ONFEe5kOTpc2cGXDOWSw81qX-Cf2=Rd4fFdAAw7g@mail.gmail.com>
-References: <CAPnjgZ0s-=ONFEe5kOTpc2cGXDOWSw81qX-Cf2=Rd4fFdAAw7g@mail.gmail.com>
- <20200403113844.v2.1.If3d7baadb24504a63742fe82f963f481b030fafa@changeid>
-Date: Fri, 10 Apr 2020 12:31:01 -0700
-X-Google-Sender-Auth: JAQ3Gjx8vghCDeiJTTr2IYJXtxc
-Message-ID: <CAPnjgZ2Qgc+-LtNWgFD0YX6ucgkcZBu1WrXi1K_znf38JCE=hA@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] dm: core: remove the duplicated
-	function dm_ofnode_pre_reloc
+References: <20200410163403.1.I3190d9b77167a808c65f44883fd1bc1c1d15218a@changeid>
+ <20200410163403.2.Ice5c9d8cd5de91bb8b2f0db60c93e5be3d921893@changeid>
+In-Reply-To: <20200410163403.2.Ice5c9d8cd5de91bb8b2f0db60c93e5be3d921893@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Apr 2020 14:47:26 -0600
+Message-ID: <CAPnjgZ3ZKEQyyeDte9jnzRrsvEmF1mE8xMXsCmCH2P=dp2dSMg@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Thomas Hebb <tommyhebb@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Andreas Dannenberg <dannenberg@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/3] README: remove references on no more
+	used config CONFIG_SYS_RCAR_I2C*
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,46 +70,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 3 Apr 2020 at 03:39, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+On Fri, 10 Apr 2020 at 08:34, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> The content dm_ofnode_pre_reloc() is identical with ofnode_pre_reloc()
-> defined in drivers/core/ofnode.c and used only three times:
-> - drivers/core/lists.c:lists_bind_fdt()
-> - drivers/clk/at91/pmc.c::at91_clk_sub_device_bind
-> - drivers/clk/altera/clk-arria10.c::socfpga_a10_clk_bind
+> Remove the references in README on CONFIG_SYS_RCAR_I2C_* not use
+> in U-Boot drivers/i2c/rcar_i2c.c, since commit a4d9aafadb31 ("i2c:
+>  rcar_i2c: Remove the driver") and commit a06a0ac36d59 ("i2c: rcar_i2c:
+>  Add DM and DT capable I2C driver")
 >
-> So this function dm_ofnode_pre_reloc can be removed and replaced
-> by these function calls by ofnode_pre_reloc().
+> Checked by the command: grep -r SYS_RCAR_I2C *
+> And these CONFIG are only defined in
+> arch/arm/mach-rmobile/include/mach/rcar-base.h
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
-> Hi Simon,
 >
-> It is a rebased patch for http://patchwork.ozlabs.org/patch/1035799/
-> marked as superseded but never resent (and I forget it).
->
-> Compilation is OK on travis:
-> https://travis-ci.org/github/patrickdelaunay/u-boot/builds/670029232
->
-> Patrick
->
->
-> Changes in v2:
-> - rebase on master
-> - udpate dm_ofnode_pre_reloc call in at91_clk_sub_device_bind and
->   socfpga_a10_clk_bind
->
->  drivers/clk/altera/clk-arria10.c |  2 +-
->  drivers/clk/at91/pmc.c           |  2 +-
->  drivers/core/lists.c             |  2 +-
->  drivers/core/util.c              | 28 ----------------------------
->  include/dm/util.h                | 27 ---------------------------
->  5 files changed, 3 insertions(+), 58 deletions(-)
->
+>  README | 10 ----------
+>  1 file changed, 10 deletions(-)
 
-Acked-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Applied to u-boot-dm/next, thanks!
+Nice clean-up.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

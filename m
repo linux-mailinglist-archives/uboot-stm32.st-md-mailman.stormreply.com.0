@@ -2,76 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 263391A46AE
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 15:25:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4B831A4726
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 16:02:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B2F8C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 13:25:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 804C6C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 14:02:26 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2EA31C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 089A7C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2020 13:25:15 +0000 (UTC)
+ Fri, 10 Apr 2020 14:02:24 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03ADNDw1024258; Fri, 10 Apr 2020 15:25:04 +0200
+ 03ADvEXC028621; Fri, 10 Apr 2020 16:02:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=woXnglePaUG/Sua7ul70Ux4u9HfK3OzlOpBXkUMUx84=;
- b=zgi/pMHT8Izc0GPuHRT1Zz/go++TMb+wfmtMfr5HKiP4I2UV05ih3gTuwsWYk/kfFgCI
- cvb6+K3WmPh6H9N4BUFsNdCRlpr8V5PLVXjsGFV1cyVdU/OLCt1bAaCJssTrGkMZyTAW
- Qa5nZwFKC8p8OeqKF5Jrmosi2CNyyFRHFGwkrW6AZmeuyrWTburWOKHjYXYLbBBqKkIs
- EQQmjKSFsFe7L6RBEQcxVoe5/kbbqIDlMBG/0KOymI4o1ebaKe95GEeNdaHSfR3miiKP
- EWEzHgdFOTijNz4hWfSWnG5xxy6VXYfPPV8OQ/tO1GdKhfX564zbHmpgD8yMYwVh57eG qQ== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=1CR+aa2Qq9VN4uS1KcbtU8x6c35EgF98C4us9NzL8u8=;
+ b=oRmdQtORtgr3R3Iup7P0Vb4LnA3xsFyPZssSuoHd1eDNb/KbaqiK7tA9DQdAx5lo70An
+ v2B7cklI+LiLvl+sCV/AAMSX68bkBvaXgoE9+dxiXJh5qOq9D81NI9zMQeHPCON93X7s
+ nRoQy9SuVnZ1gZENXkojD2eaNFW1YdxhxLl2/Xy1dyjm1urnIclmuN8ly/uxigvsnfr1
+ bdeSKdZLwa+caaFHjbbL2IzJe+0tDWPZmym71JgvvuQOHdSti6ToNL/6wFUp1yC0yfXZ
+ eRl6qEIx8Ex477FyBImPKClDCLJmuwdBSfe8ljUElg80ukb8/kh7lIx10D2KWuakaXFo pw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3091qkgm3y-1
+ by mx07-00178001.pphosted.com with ESMTP id 3091qkgs67-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 10 Apr 2020 15:25:04 +0200
+ Fri, 10 Apr 2020 16:02:09 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BF90910002A;
- Fri, 10 Apr 2020 15:25:00 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 96CE82B5C5F;
- Fri, 10 Apr 2020 15:25:00 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 10 Apr
- 2020 15:25:00 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 10 Apr 2020 15:25:00 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 3/3] arm: caches: manage phys_addr_t overflow in
- mmu_set_region_dcache_behaviour
-Thread-Index: AQHWCZHnx4T+nlKgAUCrBmzXu/7Bh6hnyYiAgAjPTOCAAVAjgIAAeeCQ
-Date: Fri, 10 Apr 2020 13:24:59 +0000
-Message-ID: <bb316e5469cd457f84625712f837fe5a@SFHDAG6NODE3.st.com>
-References: <20200403102815.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
- <20200403102815.3.Ic2c7c6923035711a4c653d52ae7c0f57ca6f9210@changeid>
- <9e48b552-38a0-53f9-349c-68f5542b18bd@denx.de>
- <cfae3f9ab7de4515b302533c379a3457@SFHDAG6NODE3.st.com>
- <583926ae-0bcd-bbaa-33dd-78978ab49395@denx.de>
-In-Reply-To: <583926ae-0bcd-bbaa-33dd-78978ab49395@denx.de>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7011710002A;
+ Fri, 10 Apr 2020 16:02:08 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 43B0F2BEC40;
+ Fri, 10 Apr 2020 16:02:08 +0200 (CEST)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 10 Apr 2020 16:02:07 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 10 Apr 2020 16:02:02 +0200
+Message-ID: <20200410160158.v2.1.Ib3bfddef91204749326b4bdd0a089ed0bfcac33e@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-10_04:2020-04-09,
+ definitions=2020-04-10_05:2020-04-09,
  2020-04-10 signatures=0
-Cc: Tom Rini <trini@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
- Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>, Trevor
- Woerner <trevor@toganlabs.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] arm: caches: manage phys_addr_t
- overflow in mmu_set_region_dcache_behaviour
+Cc: Marek Vasut <marex@denx.de>, Marek Vasut <marek.vasut@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Pascal Linder <pascal.linder@edu.hefr.ch>,
+ Kever Yang <kever.yang@rock-chips.com>, Ley Foon Tan <ley.foon.tan@intel.com>,
+ Holger Brunck <holger.brunck@ch.abb.com>, Mario Six <mario.six@gdsys.cc>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>
+Subject: [Uboot-stm32] [PATCH v2] configs: migrate CONFIG_SYS_ARM_CACHE_* in
+	Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,100 +76,120 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Dear Marek
+Move CONFIG_SYS_ARM_CACHE_WRITETHROUGH and
+CONFIG_SYS_ARM_CACHE_WRITEALLOC into Kconfig done by moveconfig.py.
 
-> From: Marek Vasut <marex@denx.de>
-> Sent: vendredi 10 avril 2020 10:06
-> 
-> On 4/9/20 4:18 PM, Patrick DELAUNAY wrote:
-> >
-> >
-> >> -----Original Message-----
-> >> From: Marek Vasut <marex@denx.de>
-> >> Sent: vendredi 3 avril 2020 23:31
-> >> To: Patrick DELAUNAY <patrick.delaunay@st.com>; u-boot@lists.denx.de
-> >> Cc: Simon Glass <sjg@chromium.org>; Alexey Brodkin
-> >> <abrodkin@synopsys.com>; Lokesh Vutla <lokeshvutla@ti.com>; Tom Rini
-> >> <trini@konsulko.com>; Trevor Woerner <trevor@toganlabs.com>; U-Boot
-> >> STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-> >> Subject: Re: [PATCH 3/3] arm: caches: manage phys_addr_t overflow in
-> >> mmu_set_region_dcache_behaviour
-> >> Importance: High
-> >>
-> >> On 4/3/20 10:28 AM, Patrick Delaunay wrote:
-> >>> Detect and solve the overflow on phys_addr_t type for start + size
-> >>> in
-> >>> mmu_set_region_dcache_behaviour() function.
-> >>>
-> >>> This issue occurs for example with ARM32, start = 0xC0000000 and
-> >>> size = 0x40000000: start + size = 0x100000000 and end = 0x0.
-> >>>
-> >>> Overflow is detected when end < start.
-> >>> In normal case the previous behavior is still used: when start is
-> >>> not aligned on MMU section, the end address is only aligned after
-> >>> the sum start + size.
-> >>>
-> >>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> >>> ---
-> >>>
-> >>>  arch/arm/lib/cache-cp15.c | 5 +++++
-> >>>  1 file changed, 5 insertions(+)
-> >>>
-> >>> diff --git a/arch/arm/lib/cache-cp15.c b/arch/arm/lib/cache-cp15.c
-> >>> index d15144188b..e5a7fd0ef4 100644
-> >>> --- a/arch/arm/lib/cache-cp15.c
-> >>> +++ b/arch/arm/lib/cache-cp15.c
-> >>> @@ -63,6 +63,11 @@ void mmu_set_region_dcache_behaviour(phys_addr_t
-> >>> start, size_t size,
-> >>>
-> >>>  	end = ALIGN(start + size, MMU_SECTION_SIZE) >>
-> >> MMU_SECTION_SHIFT;
-> >>>  	start = start >> MMU_SECTION_SHIFT;
-> >>> +
-> >>> +	/* phys_addr_t overflow detected */
-> >>> +	if (end < start)
-> >>> +		end = (~(phys_addr_t)0x0 >> MMU_SECTION_SHIFT) + 1;
-> >>> +
-> >>
-> >> Or, you can divide $start and $size separately by MMU_SECTION_SIZE
-> >> and then add them up .
-> >
-> > It was my first idea but that change the function behavior, because
-> > today start and size can be not aligned on MMU_SECTION aligned.
-> >
-> > I think it is strange, but I preferred to don't change this part.
-> >
-> > Example with shift = 21 and 2MB section size: 0x200000
-> >
-> > Start = 0x1000000
-> > Size = 0x1000000
-> >
-> > End = 0x2000000
-> >
-> > => after alignment start = 0x0, end = 0x1
-> >
-> > But if we align the start and size before addition as proposed, the
-> > final result change
-> >
-> > Start = 0x1000000 => 0
-> > Size = 0x1000000 => 0
-> >
-> > End = 0x0
-> >
-> > I prefer don't modify this current (strange) behavior to avoid regression.
-> >
-> > But if it is acceptable (because the caller MUST always use start and
-> > size MMU_SECTION aligned), I will change the proposal
-> 
-> The minimum page size is 4k, right ? Then divide both by 4k and then by the rest
-> of MMU_SECTION_SHIFT.
+Kconfig uses a choice between the 3 values supported in U-Boot,
+including the new configuration CONFIG_SYS_ARM_CACHE_WRITEBACK
+(the default configuration).
 
-Yes, good idea...
-I am waiting possible other feedbacks
+The patch also avoids to select simultaneously 2 configurations.
 
-but I think ii ts candidate to integrate V2.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-Patrick
+Changes in v2:
+- default SYS_ARM_CACHE_WRITETHROUGH if CPU_PXA || RZA1
+  and remove defconfig impacts for grpeach and colibri_pxa270
+
+ arch/arm/Kconfig                            | 28 +++++++++++++++++++++
+ arch/arm/include/asm/iproc-common/configs.h |  1 -
+ include/configs/grpeach.h                   |  1 -
+ include/configs/pxa-common.h                |  2 --
+ scripts/config_whitelist.txt                |  1 -
+ 5 files changed, 28 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index bbb1e2738b..f2bffddb44 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -340,6 +340,34 @@ config SYS_CACHELINE_SIZE
+ 	default 64 if SYS_CACHE_SHIFT_6
+ 	default 32 if SYS_CACHE_SHIFT_5
+ 
++choice
++	prompt "Select the ARM data write cache policy"
++	default SYS_ARM_CACHE_WRITETHROUGH if TARGET_BCMCYGNUS || \
++					      TARGET_BCMNSP || CPU_PXA || RZA1
++	default SYS_ARM_CACHE_WRITEBACK
++
++config SYS_ARM_CACHE_WRITEBACK
++	bool "Write-back (WB)"
++	help
++	  A write updates the cache only and marks the cache line as dirty.
++	  External memory is updated only when the line is evicted or explicitly
++	  cleaned.
++
++config SYS_ARM_CACHE_WRITETHROUGH
++	bool "Write-through (WT)"
++	help
++	  A write updates both the cache and the external memory system.
++	  This does not mark the cache line as dirty.
++
++config SYS_ARM_CACHE_WRITEALLOC
++	bool "Write allocation (WA)"
++	help
++	  A cache line is allocated on a write miss. This means that executing a
++	  store instruction on the processor might cause a burst read to occur.
++	  There is a linefill to obtain the data for the cache line, before the
++	  write is performed.
++endchoice
++
+ config ARCH_CPU_INIT
+ 	bool "Enable ARCH_CPU_INIT"
+ 	help
+diff --git a/arch/arm/include/asm/iproc-common/configs.h b/arch/arm/include/asm/iproc-common/configs.h
+index 96c4f54f4a..4733c0793c 100644
+--- a/arch/arm/include/asm/iproc-common/configs.h
++++ b/arch/arm/include/asm/iproc-common/configs.h
+@@ -10,7 +10,6 @@
+ 
+ /* Architecture, CPU, chip, etc */
+ #define CONFIG_IPROC
+-#define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
+ 
+ /* Memory Info */
+ #define CONFIG_SYS_SDRAM_BASE		0x61000000
+diff --git a/include/configs/grpeach.h b/include/configs/grpeach.h
+index b875f9b132..af5b92443e 100644
+--- a/include/configs/grpeach.h
++++ b/include/configs/grpeach.h
+@@ -16,7 +16,6 @@
+ 
+ /* Miscellaneous */
+ #define CONFIG_SYS_PBSIZE	256
+-#define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
+ #define CONFIG_CMDLINE_TAG
+ 
+ /* Internal RAM Size (RZ/A1=3M, RZ/A1M=5M, RZ/A1H=10M) */
+diff --git a/include/configs/pxa-common.h b/include/configs/pxa-common.h
+index e25800a095..2632d48cc9 100644
+--- a/include/configs/pxa-common.h
++++ b/include/configs/pxa-common.h
+@@ -8,8 +8,6 @@
+ #ifndef	__CONFIG_PXA_COMMON_H__
+ #define	__CONFIG_PXA_COMMON_H__
+ 
+-#define	CONFIG_SYS_ARM_CACHE_WRITETHROUGH
+-
+ /*
+  * KGDB
+  */
+diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
+index 6908431d03..0f747ac0a3 100644
+--- a/scripts/config_whitelist.txt
++++ b/scripts/config_whitelist.txt
+@@ -1773,7 +1773,6 @@ CONFIG_SYS_AMASK4
+ CONFIG_SYS_AMASK5
+ CONFIG_SYS_AMASK6
+ CONFIG_SYS_AMASK7
+-CONFIG_SYS_ARM_CACHE_WRITETHROUGH
+ CONFIG_SYS_AT91_CPU_NAME
+ CONFIG_SYS_AT91_MAIN_CLOCK
+ CONFIG_SYS_AT91_PLLA
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

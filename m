@@ -2,60 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 935761A4998
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 19:58:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48CBC1A4A71
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 21:31:07 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4BEE6C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 17:58:16 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0375FC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 19:31:07 +0000 (UTC)
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+ [209.85.210.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8BE64C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C8C7C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2020 17:58:14 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48zQjK1RmJz1tBwv;
- Fri, 10 Apr 2020 19:58:13 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48zQjJ69rgz1qqkg;
- Fri, 10 Apr 2020 19:58:12 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id Bz3Pq2ZQ6l6v; Fri, 10 Apr 2020 19:58:11 +0200 (CEST)
-X-Auth-Info: DU1EIbpMgtydXm+Lyxt029RNH6zvGbk/YKxjLCWZ2iM=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Fri, 10 Apr 2020 19:58:10 +0200 (CEST)
-To: Patrick DELAUNAY <patrick.delaunay@st.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20200403102815.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
- <20200403102815.2.Ib6abcb05422a74bc6bc03daa71b15c98c99dbc5d@changeid>
- <ea5a59e9-dd9f-f2b6-a210-d99b417cb8f2@denx.de>
- <faf4ef59ca6a49c7a8a032726468fe43@SFHDAG6NODE3.st.com>
- <6e789fd398524ffbbdd6122278d72564@SFHDAG6NODE3.st.com>
- <0dda916f-0573-6f02-a774-cc4e463759e4@denx.de>
- <af7aab29c615462ca2e6190fc524736a@SFHDAG6NODE3.st.com>
- <d18709c2-c349-ef50-0124-2a99750ece5e@denx.de>
- <c40d071ddc3d4a188d0071254575578a@SFHDAG6NODE3.st.com>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <670331b4-844b-34f5-730d-35cb6c2155b0@denx.de>
-Date: Fri, 10 Apr 2020 19:58:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Fri, 10 Apr 2020 19:31:05 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id g23so2818005otq.4
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 10 Apr 2020 12:31:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=mime-version:sender:from:in-reply-to:references:date:message-id
+ :subject:to:cc;
+ bh=jTEc3bF3rimetAQssgdIhhG863borTxcvzZKZEXdw+Q=;
+ b=uhgd4GHXjMSLvIC2RZWaWC6KVmAbHLMufBgSoJJ5M/4EK0KGVpTrWNRrYis69ediQg
+ wAv84Ar+3GWq5/qjQVLcBtArjhtf6nw50OL+6+6rbcjmbKcS/tbB5prlsAEZiDEQfRko
+ G2gto6gcgvpOQa50pcZ79cxUJ4iQWrvyQ3SqPiFFGZTJhz1YC5tTHqwagI4Qksf04kDt
+ fObvtMDENyhtDmXAGN+ksCCVvdQDhPX3NiDW1nt6Ycnlf+dKlppTu7PB4hQFlwpd3wwx
+ QfXgg/eNmJrgFWQ9EYQPOQ7Sibc9zt9izJK6KvV3iT+J/lSxSFLAxrWOPtaiHGcywGb4
+ 8zVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
+ :date:message-id:subject:to:cc;
+ bh=jTEc3bF3rimetAQssgdIhhG863borTxcvzZKZEXdw+Q=;
+ b=srqaEFghFcdehrdNfjaopzYnNFYe5r7K6IIShpCR+gd5lIrf/lwpO4OxMVpERYZk1b
+ kLhJ+XEXQsa+8Ql6ciPnU3FpGILAa+PQFGHSFXzHpbBQIBEyJgX2+VMwOTobNm0Tsfou
+ Fe4WBXdjqUzM2ypT7/ytR+rJVXfNa4dOWOW+tVIl2CumXiaDjwrj0vrLOJsr1tTSjrzA
+ 07PwQkBY9EwaP/nXxesys6dK5vTRP7vfqH3pgkUoWLZl1y1jlXE1DMklGLouRxKxQKv8
+ zH9/vBGwPjBkyRRTopPeyt8TY6cboZXkSk7G3xbuwm94wx7NFw+Asv5FCnPkuxCVB0Mm
+ eJMQ==
+X-Gm-Message-State: AGi0PuZJZ0wDy2iSKoFPMiqHbrzzwEGVaRbH2fy0VQC7r9c1wcu/fSSC
+ 2lBf5BazyYpYIjaAxdNSXg5v7lanUzQoFiZYJK6d1g==
+X-Google-Smtp-Source: APiQypJTISLliPvHXhk/jaRqfwE0Sg5efFw00mZhdaQH3NURSh7kz0RnZ9E+dr9ksC0z/js98z/vmcGi59AxKrfoVNM=
+X-Received: by 2002:a9d:1e82:: with SMTP id n2mr5287998otn.356.1586547063714; 
+ Fri, 10 Apr 2020 12:31:03 -0700 (PDT)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 10 Apr 2020 12:31:01 -0700
 MIME-Version: 1.0
-In-Reply-To: <c40d071ddc3d4a188d0071254575578a@SFHDAG6NODE3.st.com>
-Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>,
- Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
- Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>,
- Trevor Woerner <trevor@toganlabs.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/3] arm: caches: add DCACHE_DEFAULT_OPTION
+From: sjg@google.com
+In-Reply-To: <CAPnjgZ0s-=ONFEe5kOTpc2cGXDOWSw81qX-Cf2=Rd4fFdAAw7g@mail.gmail.com>
+References: <CAPnjgZ0s-=ONFEe5kOTpc2cGXDOWSw81qX-Cf2=Rd4fFdAAw7g@mail.gmail.com>
+ <20200403113844.v2.1.If3d7baadb24504a63742fe82f963f481b030fafa@changeid>
+Date: Fri, 10 Apr 2020 12:31:01 -0700
+X-Google-Sender-Auth: JAQ3Gjx8vghCDeiJTTr2IYJXtxc
+Message-ID: <CAPnjgZ2Qgc+-LtNWgFD0YX6ucgkcZBu1WrXi1K_znf38JCE=hA@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] dm: core: remove the duplicated
+	function dm_ofnode_pre_reloc
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,107 +70,52 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gNC8xMC8yMCA0OjU4IFBNLCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhpIE1hcmVrLAo+
-IAo+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KPj4gU2VudDogdmVuZHJlZGkg
-MTAgYXZyaWwgMjAyMCAxMDoxNAo+Pgo+PiBPbiA0LzkvMjAgODowNiBQTSwgUGF0cmljayBERUxB
-VU5BWSB3cm90ZToKPj4+IERlYXIgTWFyZWssCj4+Cj4+IEhpLAo+Pgo+Pj4+IFNlbnQ6IGpldWRp
-IDkgYXZyaWwgMjAyMCAxMjoyMQo+Pj4+IFRvOiBQYXRyaWNrIERFTEFVTkFZIDxwYXRyaWNrLmRl
-bGF1bmF5QHN0LmNvbT47IHUtYm9vdEBsaXN0cy5kZW54LmRlCj4+Pj4KPj4+PiBPbiA0LzkvMjAg
-MTI6MDEgUE0sIFBhdHJpY2sgREVMQVVOQVkgd3JvdGU6Cj4+Pj4+IERlYXIgTWFyZWssCj4+Pj4K
-Pj4+PiBIaSwKPj4+Pgo+Pj4+Pj4gRnJvbTogVWJvb3Qtc3RtMzIKPj4+Pj4+IDx1Ym9vdC1zdG0z
-Mi1ib3VuY2VzQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20+Cj4+Pj4+PiBPbiBCZWhhbGYg
-T2YgUGF0cmljayBERUxBVU5BWQo+Pj4+Pj4KPj4+Pj4+IERlYXIgTWFyZWssCj4+Pj4+Pgo+Pj4+
-Pj4+IEZyb206IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+Pj4+Pj4+IFNlbnQ6IHZlbmRy
-ZWRpIDMgYXZyaWwgMjAyMCAyMzoyOQo+Pj4+Pj4+Cj4+Pj4+Pj4gT24gNC8zLzIwIDEwOjI4IEFN
-LCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+Pj4+Pj4+PiBBZGQgdGhlIG5ldyBmbGFncyBEQ0FD
-SEVfREVGQVVMVF9PUFRJT04gdG8gZGVmaW5lIHRoZSBkZWZhdWx0Cj4+Pj4+Pj4+IG9wdGlvbiB0
-byB1c2UgYWNjb3JkaW5nIHRoZSBjb21waWxhdGlvbiBmbGFncwo+Pj4+Pj4+PiBDT05GSUdfU1lT
-X0FSTV9DQUNIRV9XUklURVRIUk9VR0ggb3IKPj4+Pj4+PiBDT05GSUdfU1lTX0FSTV9DQUNIRV9X
-UklURUFMTE9DLgo+Pj4+Pj4+Cj4+Pj4+Pj4gQ2FuJ3QgeW91IHVuaWZ5IHRoZXNlIG1hY3JvcyBp
-bnRvIGEgc2luZ2xlIEtjb25maWcgInNlbGVjdCIKPj4+Pj4+PiBzdGF0ZW1lbnQgaW5zdGVhZCAs
-IGFuZCB0aGVuIGp1c3Qgc2VsZWN0IHRoZSBtYXRjaGluZyBjYWNoZQo+Pj4+Pj4+IGNvbmZpZ3Vy
-YXRpb24gaW4KPj4+PiBLY29uZmlnID8KPj4+Pj4+Cj4+Pj4+PiBZZXMgSSB3aWxsIHRyeSwgd2l0
-aCAyIHN0ZXBzCj4+Pj4+PiAtIG1pZ3JhdGUgZXhpc3RpbmcgQ09ORklHX1NZU19BUk1fQ0FDSEVf
-Li4uLiBpbiBLY29uZmlnCj4+Pj4+Cj4+Pj4+IEZpcnN0IHN0ZXAgZG9uZS4uLgo+Pj4+PiBJIHdp
-bGwgcHVzaCBpdCBhcyBhIHNlcGFyYXRlIHBhdGNoc2V0IEkgdGhpbmsuCj4+Pj4+Cj4+Pj4+PiAt
-IGFkZCBuZXcgb3B0aW9uIENPTkZJR19TWVNfQVJNX0NBQ0hFX09QVElPTgo+Pj4+Pgo+Pj4+PiBJ
-biBmYWN0IGl0IGlzIHRvIGRpZmZpY3VsdCB0byB1c2Ugc2VsZWN0IGJlY2F1c2UgZWFjaCBkZWZp
-bmVzCj4+Pj4+IERDQUNIRV9YWFggdmFsdWUgY2FuIGhhdmUgc2V2ZXJhbCB2YWx1ZXMKPj4+Pj4K
-Pj4+Pj4gdGhleSBhcmUgYnVpbGQgYWNjb3JkaW5nIENPTkZJR19BUk02NCAvIExQQUUKPj4+Pj4K
-Pj4+Pj4gQnV0LCBJIGNhbid0IHVzZSB0aGlzIGRlZmluZSBpbiBLY29uZmlnCj4+Pj4+Cj4+Pj4+
-IEkgdHJ5IDoKPj4+Pj4gb3B0aW9uCUFSTV9PUFRJT04KPj4+Pj4gCWludCAib3B0aW9uIgo+Pj4+
-PiAJZGVmYXVsdCBEQ0FDSEVfV1JJVEVUSFJPVUdIVCBpZgo+Pj4+IENPTkZJR19TWVNfQVJNX0NB
-Q0hFX1dSSVRFVEhST1VHSAo+Pj4+PiAJZGVmYXVsdCBEQ0FDSEVfIFdSSVRFQUxMT0MgaWYgQ09O
-RklHX1NZU19BUk1fQ0FDSEVfCj4+Pj4gV1JJVEVBTExPQwo+Pj4+PiAJZGVmYXVsdCBEQ0FDSEVf
-V1JJVEVCQUNLIGlmCj4+Pj4gQ09ORklHX1NZU19BUk1fQ0FDSEVfV1JJVEVCQUNLCj4+Pj4+Cj4+
-Pj4+IGludCBhbmQgaGV4IGlzIGludmFsaWQsIGFuZCBzdHJpbmcgY2FuJ3QgYmUgdXNlIHdpdGgg
-IiIuCj4+Pj4+Cj4+Pj4+IEFuZCBJIGRvbid0IGZvdW5kIHdheSB0byBidWlsZCBpdCBhdXRvbWF0
-aWNhbGx5IHdoZW4gb3B0aW9uIGlzIGFjdGl2YXRlZC4KPj4+Pj4KPj4+Pj4gQW55IGlkZWEgPwo+
-Pj4+Cj4+Pj4gTWF5YmUgeW91IGNhbiBoYXZlIGEgc2VsZWN0IGluIHRoZSBLY29uZmlnIHRvIHNl
-dCBzb21lIGRpZmZlcmVudGx5Cj4+Pj4gbmFtZWQgb3B0aW9uLCBlLmcuCj4+Pj4KPj4+PiBEQ0FD
-SEVfTU9ERV9XUklURXtUSFJPVUdILEFMTE9DLEJBQ0t9Cj4+Pj4KPj4+PiBhbmQgdGhlbiBhbiBp
-ZmRlZiBpbiBzb21lIGhlYWRlciBmaWxlLCBlLmcuCj4+Pj4KPj4+PiAjaWZkZWYgQ09ORklHX0RD
-QUNIRV9NT0RFX1dSSVRFVEhST1VHSCAjZGVmaW5lCj4+IEFSTV9DQUNIRV9NT0RFCj4+Pj4gRENB
-Q0hFX1dSSVRFVEhST1VHSCAuLi4KPj4+Pgo+Pj4+IEFuZCB0aGVuIHVzZSBBUk1fQ0FDSEVfTU9E
-RSB3aGVyZSB5b3UgbmVlZCBhIHZhbHVlIGFuZAo+Pj4+IENPTkZJR19EQ0FDSEVfTU9ERXsuLi59
-IHdoZXJlIHlvdSBuZWVkIGEgY29uZmlnIG9wdGlvbiBjaGVjay4KPj4+Pgo+Pj4+IERvZXMgdGhp
-cyB3b3JrID8KPj4+Cj4+PiBJIHRyeSB3aXRoIHN0cmluZyBhbmQgZGVmYXVsdCAoYXMgc2VsZWN0
-IGlzIGFsbG93ZWQgb24gZm9yIGJvbGVhbiBvcgo+Pj4gdHJpc2F0ZSksIEFuZCBJIGZhaWxlZCA6
-LTwKPj4+Cj4+PiBJIGRvbid0IGZvdW5kIGEgd2F5IHRvIGhhdmUgdGhlIGRlLXN0cmluZ2ZpY2F0
-ZSB0aGUgS0NvbmZpZyBvcHRpb24gdG8KPj4+IGdlbmVyYXRlZCB0aGUgY29ycmVjdCBkZWZpbmUK
-Pj4KPj4gVGhlIHJlc3VsdCBpcyBhIGJvb2xlYW4gLCBpc24ndCBpdCA/IE9uZSBvdXQgb2YgTiBj
-b25maWdzIGVuZHMgdXAgYmVpbmcgZGVmaW5lZCBhbmQKPj4gdGhlIHJlc3QgYXJlIG5vdCBkZWZp
-bmVkLgo+Pgo+Pj4gY29uZmlnIFNZU19BUk1fQ0FDSEVfUE9MSUNZCj4+PiAJc3RyaW5nICJOYW1l
-IG9mIHRoZSBBUk0gZGF0YSB3cml0ZSBjYWNoZSBwb2xpY3kiCj4+PiAJZGVmYXVsdCBXUklURUJB
-Q0sgaWYgU1lTX0FSTV9DQUNIRV9XUklURUJBQ0sKPj4+IAlkZWZhdWx0IFdSSVRFVEhST1VHSCBp
-ZiBTWVNfQVJNX0NBQ0hFX1dSSVRFQkFDSwo+Pj4gCWRlZmF1bHQgV1JJVEVBTExPQyBpZiBTWVNf
-QVJNX0NBQ0hFX1dSSVRFQUxMT0MKPj4+Cj4+PiAjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElP
-TglEQ0FDSEVfICMjCj4+IENPTkZJR19TWVNfQVJNX0NBQ0hFX1BPTElDWQo+Pj4KPj4+ID0+IGVy
-cm9yOiDigJhEQ0FDSEVfQ09ORklHX1NZU19BUk1fQ0FDSEVfUE9MSUNZ4oCZIHVuZGVjbGFyZWQg
-KGZpcnN0Cj4+IHVzZSBpbiB0aGlzIGZ1bmN0aW9uKTsgZGlkIHlvdSBtZWFuIOKAmENPTkZJR19T
-WVNfQVJNX0NBQ0hFX1BPTElDWeKAmT8KPj4+Cj4+PiAjZGVmaW5lIERDQUNIRV9PUFRJT04ocykJ
-RENBQ0hFXyAjIwo+PiBDT05GSUdfU1lTX0FSTV9DQUNIRV9QT0xJQ1kKPj4+Cj4+PiAjZGVmaW5l
-IERDQUNIRV9ERUZBVUxUX09QVElPTgo+PiAJRENBQ0hFX09QVElPTihDT05GSUdfU1lTX0FSTV9D
-QUNIRV9QT0xJQ1kpCj4+Pgo+Pj4gYXJjaC9hcm0vaW5jbHVkZS9hc20vc3lzdGVtLmg6NDg4OjI2
-OiBlcnJvcjog4oCYRENBQ0hFX+KAmSB1bmRlY2xhcmVkIChmaXJzdCB1c2UKPj4gaW4gdGhpcyBm
-dW5jdGlvbik7IGRpZCB5b3UgbWVhbiDigJhEQ0FDSEVfT0ZG4oCZPwo+Pj4gYXJjaC9hcm0vbGli
-L2NhY2hlLWNwMTUuYzo5OToyNTogZXJyb3I6IGV4cGVjdGVkIOKAmCnigJkgYmVmb3JlIHN0cmlu
-Zwo+Pj4gY29uc3RhbnQKPj4+Cj4+PiBUaGUgc3RyaW5naWZpY2F0aW9uIGlzIHBvc3NpYmxlIGJ1
-dCBub3QgdGhlIGludmVyc2Ugb3BlcmF0aW9uIChyZW1vdmUgdGhlIHF1b3RlKS4uLgo+Pj4KPj4+
-IEluIG15IC5jb25maWcsIENPTkZJR19TWVNfQVJNX0NBQ0hFX1BPTElDWT0iV1JJVEVCQUNLIgo+
-Pgo+PiBXaGF0IGFib3V0IHRoaXM6Cj4+Cj4+IGNob2ljZQo+PiBwcm9tcHQgIkNhY2hlIHBvbGlj
-eSIKPj4gIGRlZmF1bHQgQ0FDSEVfV1JJVEVCQUNLCj4+Cj4+IGNvbmZpZyBDQUNIRV9XUklURUJB
-Q0sKPj4gIGJvb2wgIldyaXRlYmFjayIKPj4KPj4gY29uZmlnIC4uLgo+Pgo+PiBlbmRjaG9pY2UK
-Pj4KPj4gYW5kIHRoZW4gaW4gc29tZSBoZWFkZXIKPj4KPj4gI2lmZGVmIENPTkZJR19DQUNIRV9X
-UklURUJBQ0sKPj4gI2RlZmluZSBDT05GSUZfU1lTX0FSTV9DQUNIRV9XUklURUJBQ0sKPj4gI2Vs
-c2UKPj4gLi4uCj4+Cj4+IFdvdWxkIHRoYXQgd29yayA/Cj4gCj4gWWVzLCBpdCBjYW4gd29yayBp
-dCBzZWVtcyBjb21wbGljYXRlZAo+IAo+IEkgcHVzaCB2MiBmb3IgQ09ORklHX1NZU19BUk1fQ0FD
-SEVfKiBtaWdyYXRpb24gaW4gS2NvbmZpZwo+IAo+IE15IHByb3Bvc2FsIGJlY29tZXM6Cj4gCj4g
-KyNpZiBkZWZpbmVkKENPTkZJR19TWVNfQVJNX0NBQ0hFX1dSSVRFVEhST1VHSCkKPiArI2RlZmlu
-ZSBEQ0FDSEVfREVGQVVMVF9PUFRJT04JRENBQ0hFX1dSSVRFVEhST1VHSAo+ICsjZWxpZiBkZWZp
-bmVkKENPTkZJR19TWVNfQVJNX0NBQ0hFX1dSSVRFQUxMT0MpCj4gKyNkZWZpbmUgRENBQ0hFX0RF
-RkFVTFRfT1BUSU9OCURDQUNIRV9XUklURUFMTE9DCj4gKyNlbGlmIGRlZmluZWQoQ09ORklHX1NZ
-U19BUk1fQ0FDSEVfV1JJVEVCQUNLKQo+ICsjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElPTglE
-Q0FDSEVfV1JJVEVCQUNLCj4gKyNlbmRpZgo+ICsKPiAKPiBJIHRoaW5rIGl0IGlzIGlzIG1vcmUg
-Y2xlYXIgc29sdXRpb24uCj4gCj4gCj4gSSBjYW4gdXNlIG1hY3JvIG1hZ2ljIHRvIGJ1aWxkIERD
-QUNIRV9ERUZBVUxUX09QVElPTiAKPiAKPiArI2lmIGRlZmluZWQoQ09ORklHX1NZU19BUk1fQ0FD
-SEVfV1JJVEVUSFJPVUdIKQo+ICsjZGVmaW5lIEFSTV9DQUNIRV9QT0xJQ1kJV1JJVEVUSFJPVUdI
-Cj4gKyNlbGlmIGRlZmluZWQoQ09ORklHX1NZU19BUk1fQ0FDSEVfV1JJVEVBTExPQykKPiArI2Rl
-ZmluZSBBUk1fQ0FDSEVfUE9MSUNZCVdSSVRFQUxMT0MKPiArI2VsaWYgZGVmaW5lZChDT05GSUdf
-U1lTX0FSTV9DQUNIRV9XUklURUJBQ0spCj4gKyNkZWZpbmUgQVJNX0NBQ0hFX1BPTElDWQlXUklU
-RUJBQ0sKPiArI2VuZGlmCj4gIAo+ICsjZGVmaW5lIF9EQ0FDSEVfT1BUSU9OKHBvbGljeSkJRENB
-Q0hFXyAjIyBwb2xpY3kKPiArI2RlZmluZSBEQ0FDSEVfT1BUSU9OKHBvbGljeSkJX0RDQUNIRV9P
-UFRJT04ocG9saWN5KQo+ICsjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElPTglEQ0FDSEVfT1BU
-SU9OKEFSTV9DQUNIRV9QT0xJQ1kpCj4gKwo+IAo+Pgo+PiBCdXQgSSBmZWVsIEkgbWlnaHQgcmVh
-bGx5IGJlIG1pc3NpbmcgdGhlIHF1ZXN0aW9uIGhlcmUuCj4gCj4gSSB0aGluayBJIHdpbGwgcHVz
-aCBWMiBpbiBvbmUgd2VlayAoSSBhbSBvdXQgb2Ygb2ZmaWNlIG5leHQgd2VlaykgdG8gd2FpdCBv
-dGhlciBmZWVkYmFjay4KPiAKPiBJdCBjb3VsZCBiZSBtb3JlIGNsZWFyIHdpdGggYW4gdXBkYXRl
-ZCBwYXRjaHNldC4KClRoYXQncyBhIGdvb2QgaWRlYSwgbGV0J3Mgc2VlLgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxp
-c3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1k
-LW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+On Fri, 3 Apr 2020 at 03:39, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+>
+> The content dm_ofnode_pre_reloc() is identical with ofnode_pre_reloc()
+> defined in drivers/core/ofnode.c and used only three times:
+> - drivers/core/lists.c:lists_bind_fdt()
+> - drivers/clk/at91/pmc.c::at91_clk_sub_device_bind
+> - drivers/clk/altera/clk-arria10.c::socfpga_a10_clk_bind
+>
+> So this function dm_ofnode_pre_reloc can be removed and replaced
+> by these function calls by ofnode_pre_reloc().
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> Hi Simon,
+>
+> It is a rebased patch for http://patchwork.ozlabs.org/patch/1035799/
+> marked as superseded but never resent (and I forget it).
+>
+> Compilation is OK on travis:
+> https://travis-ci.org/github/patrickdelaunay/u-boot/builds/670029232
+>
+> Patrick
+>
+>
+> Changes in v2:
+> - rebase on master
+> - udpate dm_ofnode_pre_reloc call in at91_clk_sub_device_bind and
+>   socfpga_a10_clk_bind
+>
+>  drivers/clk/altera/clk-arria10.c |  2 +-
+>  drivers/clk/at91/pmc.c           |  2 +-
+>  drivers/core/lists.c             |  2 +-
+>  drivers/core/util.c              | 28 ----------------------------
+>  include/dm/util.h                | 27 ---------------------------
+>  5 files changed, 3 insertions(+), 58 deletions(-)
+>
+
+Acked-by: Simon Glass <sjg@chromium.org>
+
+Applied to u-boot-dm/next, thanks!
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

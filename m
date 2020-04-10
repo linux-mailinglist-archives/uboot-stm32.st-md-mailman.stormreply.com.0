@@ -2,56 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8690A1A4997
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 19:57:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 935761A4998
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 19:58:16 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33772C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 17:57:11 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4BEE6C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 10 Apr 2020 17:58:16 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 72921C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8BE64C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 10 Apr 2020 17:57:09 +0000 (UTC)
+ Fri, 10 Apr 2020 17:58:14 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 48zQh41LQfz1qrML;
- Fri, 10 Apr 2020 19:57:08 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 48zQjK1RmJz1tBwv;
+ Fri, 10 Apr 2020 19:58:13 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 48zQh40F3Lz1qqkg;
- Fri, 10 Apr 2020 19:57:08 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 48zQjJ69rgz1qqkg;
+ Fri, 10 Apr 2020 19:58:12 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id 2lpD50u8MZ8I; Fri, 10 Apr 2020 19:57:06 +0200 (CEST)
-X-Auth-Info: gBuokqaA1qIWbvfsMzltNxTypuOSUxxNVYgaTWGTPhc=
+ with ESMTP id Bz3Pq2ZQ6l6v; Fri, 10 Apr 2020 19:58:11 +0200 (CEST)
+X-Auth-Info: DU1EIbpMgtydXm+Lyxt029RNH6zvGbk/YKxjLCWZ2iM=
 Received: from [IPv6:::1] (unknown [195.140.253.167])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Fri, 10 Apr 2020 19:57:06 +0200 (CEST)
+ Fri, 10 Apr 2020 19:58:10 +0200 (CEST)
 To: Patrick DELAUNAY <patrick.delaunay@st.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 References: <20200403102815.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
- <20200403102815.3.Ic2c7c6923035711a4c653d52ae7c0f57ca6f9210@changeid>
- <9e48b552-38a0-53f9-349c-68f5542b18bd@denx.de>
- <cfae3f9ab7de4515b302533c379a3457@SFHDAG6NODE3.st.com>
- <583926ae-0bcd-bbaa-33dd-78978ab49395@denx.de>
- <bb316e5469cd457f84625712f837fe5a@SFHDAG6NODE3.st.com>
+ <20200403102815.2.Ib6abcb05422a74bc6bc03daa71b15c98c99dbc5d@changeid>
+ <ea5a59e9-dd9f-f2b6-a210-d99b417cb8f2@denx.de>
+ <faf4ef59ca6a49c7a8a032726468fe43@SFHDAG6NODE3.st.com>
+ <6e789fd398524ffbbdd6122278d72564@SFHDAG6NODE3.st.com>
+ <0dda916f-0573-6f02-a774-cc4e463759e4@denx.de>
+ <af7aab29c615462ca2e6190fc524736a@SFHDAG6NODE3.st.com>
+ <d18709c2-c349-ef50-0124-2a99750ece5e@denx.de>
+ <c40d071ddc3d4a188d0071254575578a@SFHDAG6NODE3.st.com>
 From: Marek Vasut <marex@denx.de>
-Message-ID: <46694c1e-0836-a4bd-faeb-bfd1cc1ce03a@denx.de>
-Date: Fri, 10 Apr 2020 19:57:06 +0200
+Message-ID: <670331b4-844b-34f5-730d-35cb6c2155b0@denx.de>
+Date: Fri, 10 Apr 2020 19:58:10 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <bb316e5469cd457f84625712f837fe5a@SFHDAG6NODE3.st.com>
+In-Reply-To: <c40d071ddc3d4a188d0071254575578a@SFHDAG6NODE3.st.com>
 Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+Cc: Tom Rini <trini@konsulko.com>,
+ Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
  Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>,
  Trevor Woerner <trevor@toganlabs.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] arm: caches: manage phys_addr_t
- overflow in mmu_set_region_dcache_behaviour
+Subject: Re: [Uboot-stm32] [PATCH 2/3] arm: caches: add DCACHE_DEFAULT_OPTION
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,109 +67,107 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 4/10/20 3:24 PM, Patrick DELAUNAY wrote:
-> Dear Marek
-> 
->> From: Marek Vasut <marex@denx.de>
->> Sent: vendredi 10 avril 2020 10:06
->>
->> On 4/9/20 4:18 PM, Patrick DELAUNAY wrote:
->>>
->>>
->>>> -----Original Message-----
->>>> From: Marek Vasut <marex@denx.de>
->>>> Sent: vendredi 3 avril 2020 23:31
->>>> To: Patrick DELAUNAY <patrick.delaunay@st.com>; u-boot@lists.denx.de
->>>> Cc: Simon Glass <sjg@chromium.org>; Alexey Brodkin
->>>> <abrodkin@synopsys.com>; Lokesh Vutla <lokeshvutla@ti.com>; Tom Rini
->>>> <trini@konsulko.com>; Trevor Woerner <trevor@toganlabs.com>; U-Boot
->>>> STM32 <uboot-stm32@st-md-mailman.stormreply.com>
->>>> Subject: Re: [PATCH 3/3] arm: caches: manage phys_addr_t overflow in
->>>> mmu_set_region_dcache_behaviour
->>>> Importance: High
->>>>
->>>> On 4/3/20 10:28 AM, Patrick Delaunay wrote:
->>>>> Detect and solve the overflow on phys_addr_t type for start + size
->>>>> in
->>>>> mmu_set_region_dcache_behaviour() function.
->>>>>
->>>>> This issue occurs for example with ARM32, start = 0xC0000000 and
->>>>> size = 0x40000000: start + size = 0x100000000 and end = 0x0.
->>>>>
->>>>> Overflow is detected when end < start.
->>>>> In normal case the previous behavior is still used: when start is
->>>>> not aligned on MMU section, the end address is only aligned after
->>>>> the sum start + size.
->>>>>
->>>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->>>>> ---
->>>>>
->>>>>  arch/arm/lib/cache-cp15.c | 5 +++++
->>>>>  1 file changed, 5 insertions(+)
->>>>>
->>>>> diff --git a/arch/arm/lib/cache-cp15.c b/arch/arm/lib/cache-cp15.c
->>>>> index d15144188b..e5a7fd0ef4 100644
->>>>> --- a/arch/arm/lib/cache-cp15.c
->>>>> +++ b/arch/arm/lib/cache-cp15.c
->>>>> @@ -63,6 +63,11 @@ void mmu_set_region_dcache_behaviour(phys_addr_t
->>>>> start, size_t size,
->>>>>
->>>>>  	end = ALIGN(start + size, MMU_SECTION_SIZE) >>
->>>> MMU_SECTION_SHIFT;
->>>>>  	start = start >> MMU_SECTION_SHIFT;
->>>>> +
->>>>> +	/* phys_addr_t overflow detected */
->>>>> +	if (end < start)
->>>>> +		end = (~(phys_addr_t)0x0 >> MMU_SECTION_SHIFT) + 1;
->>>>> +
->>>>
->>>> Or, you can divide $start and $size separately by MMU_SECTION_SIZE
->>>> and then add them up .
->>>
->>> It was my first idea but that change the function behavior, because
->>> today start and size can be not aligned on MMU_SECTION aligned.
->>>
->>> I think it is strange, but I preferred to don't change this part.
->>>
->>> Example with shift = 21 and 2MB section size: 0x200000
->>>
->>> Start = 0x1000000
->>> Size = 0x1000000
->>>
->>> End = 0x2000000
->>>
->>> => after alignment start = 0x0, end = 0x1
->>>
->>> But if we align the start and size before addition as proposed, the
->>> final result change
->>>
->>> Start = 0x1000000 => 0
->>> Size = 0x1000000 => 0
->>>
->>> End = 0x0
->>>
->>> I prefer don't modify this current (strange) behavior to avoid regression.
->>>
->>> But if it is acceptable (because the caller MUST always use start and
->>> size MMU_SECTION aligned), I will change the proposal
->>
->> The minimum page size is 4k, right ? Then divide both by 4k and then by the rest
->> of MMU_SECTION_SHIFT.
-> 
-> Yes, good idea...
-> I am waiting possible other feedbacks
-> 
-> but I think ii ts candidate to integrate V2.
-
-It's much better than dealing with overflows, esp. if you're shifting by
-power-of-two anyway. And using 4k should also take care of LPAE 36bit
-address space.
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gNC8xMC8yMCA0OjU4IFBNLCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhpIE1hcmVrLAo+
+IAo+PiBGcm9tOiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KPj4gU2VudDogdmVuZHJlZGkg
+MTAgYXZyaWwgMjAyMCAxMDoxNAo+Pgo+PiBPbiA0LzkvMjAgODowNiBQTSwgUGF0cmljayBERUxB
+VU5BWSB3cm90ZToKPj4+IERlYXIgTWFyZWssCj4+Cj4+IEhpLAo+Pgo+Pj4+IFNlbnQ6IGpldWRp
+IDkgYXZyaWwgMjAyMCAxMjoyMQo+Pj4+IFRvOiBQYXRyaWNrIERFTEFVTkFZIDxwYXRyaWNrLmRl
+bGF1bmF5QHN0LmNvbT47IHUtYm9vdEBsaXN0cy5kZW54LmRlCj4+Pj4KPj4+PiBPbiA0LzkvMjAg
+MTI6MDEgUE0sIFBhdHJpY2sgREVMQVVOQVkgd3JvdGU6Cj4+Pj4+IERlYXIgTWFyZWssCj4+Pj4K
+Pj4+PiBIaSwKPj4+Pgo+Pj4+Pj4gRnJvbTogVWJvb3Qtc3RtMzIKPj4+Pj4+IDx1Ym9vdC1zdG0z
+Mi1ib3VuY2VzQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20+Cj4+Pj4+PiBPbiBCZWhhbGYg
+T2YgUGF0cmljayBERUxBVU5BWQo+Pj4+Pj4KPj4+Pj4+IERlYXIgTWFyZWssCj4+Pj4+Pgo+Pj4+
+Pj4+IEZyb206IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+Pj4+Pj4+IFNlbnQ6IHZlbmRy
+ZWRpIDMgYXZyaWwgMjAyMCAyMzoyOQo+Pj4+Pj4+Cj4+Pj4+Pj4gT24gNC8zLzIwIDEwOjI4IEFN
+LCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+Pj4+Pj4+PiBBZGQgdGhlIG5ldyBmbGFncyBEQ0FD
+SEVfREVGQVVMVF9PUFRJT04gdG8gZGVmaW5lIHRoZSBkZWZhdWx0Cj4+Pj4+Pj4+IG9wdGlvbiB0
+byB1c2UgYWNjb3JkaW5nIHRoZSBjb21waWxhdGlvbiBmbGFncwo+Pj4+Pj4+PiBDT05GSUdfU1lT
+X0FSTV9DQUNIRV9XUklURVRIUk9VR0ggb3IKPj4+Pj4+PiBDT05GSUdfU1lTX0FSTV9DQUNIRV9X
+UklURUFMTE9DLgo+Pj4+Pj4+Cj4+Pj4+Pj4gQ2FuJ3QgeW91IHVuaWZ5IHRoZXNlIG1hY3JvcyBp
+bnRvIGEgc2luZ2xlIEtjb25maWcgInNlbGVjdCIKPj4+Pj4+PiBzdGF0ZW1lbnQgaW5zdGVhZCAs
+IGFuZCB0aGVuIGp1c3Qgc2VsZWN0IHRoZSBtYXRjaGluZyBjYWNoZQo+Pj4+Pj4+IGNvbmZpZ3Vy
+YXRpb24gaW4KPj4+PiBLY29uZmlnID8KPj4+Pj4+Cj4+Pj4+PiBZZXMgSSB3aWxsIHRyeSwgd2l0
+aCAyIHN0ZXBzCj4+Pj4+PiAtIG1pZ3JhdGUgZXhpc3RpbmcgQ09ORklHX1NZU19BUk1fQ0FDSEVf
+Li4uLiBpbiBLY29uZmlnCj4+Pj4+Cj4+Pj4+IEZpcnN0IHN0ZXAgZG9uZS4uLgo+Pj4+PiBJIHdp
+bGwgcHVzaCBpdCBhcyBhIHNlcGFyYXRlIHBhdGNoc2V0IEkgdGhpbmsuCj4+Pj4+Cj4+Pj4+PiAt
+IGFkZCBuZXcgb3B0aW9uIENPTkZJR19TWVNfQVJNX0NBQ0hFX09QVElPTgo+Pj4+Pgo+Pj4+PiBJ
+biBmYWN0IGl0IGlzIHRvIGRpZmZpY3VsdCB0byB1c2Ugc2VsZWN0IGJlY2F1c2UgZWFjaCBkZWZp
+bmVzCj4+Pj4+IERDQUNIRV9YWFggdmFsdWUgY2FuIGhhdmUgc2V2ZXJhbCB2YWx1ZXMKPj4+Pj4K
+Pj4+Pj4gdGhleSBhcmUgYnVpbGQgYWNjb3JkaW5nIENPTkZJR19BUk02NCAvIExQQUUKPj4+Pj4K
+Pj4+Pj4gQnV0LCBJIGNhbid0IHVzZSB0aGlzIGRlZmluZSBpbiBLY29uZmlnCj4+Pj4+Cj4+Pj4+
+IEkgdHJ5IDoKPj4+Pj4gb3B0aW9uCUFSTV9PUFRJT04KPj4+Pj4gCWludCAib3B0aW9uIgo+Pj4+
+PiAJZGVmYXVsdCBEQ0FDSEVfV1JJVEVUSFJPVUdIVCBpZgo+Pj4+IENPTkZJR19TWVNfQVJNX0NB
+Q0hFX1dSSVRFVEhST1VHSAo+Pj4+PiAJZGVmYXVsdCBEQ0FDSEVfIFdSSVRFQUxMT0MgaWYgQ09O
+RklHX1NZU19BUk1fQ0FDSEVfCj4+Pj4gV1JJVEVBTExPQwo+Pj4+PiAJZGVmYXVsdCBEQ0FDSEVf
+V1JJVEVCQUNLIGlmCj4+Pj4gQ09ORklHX1NZU19BUk1fQ0FDSEVfV1JJVEVCQUNLCj4+Pj4+Cj4+
+Pj4+IGludCBhbmQgaGV4IGlzIGludmFsaWQsIGFuZCBzdHJpbmcgY2FuJ3QgYmUgdXNlIHdpdGgg
+IiIuCj4+Pj4+Cj4+Pj4+IEFuZCBJIGRvbid0IGZvdW5kIHdheSB0byBidWlsZCBpdCBhdXRvbWF0
+aWNhbGx5IHdoZW4gb3B0aW9uIGlzIGFjdGl2YXRlZC4KPj4+Pj4KPj4+Pj4gQW55IGlkZWEgPwo+
+Pj4+Cj4+Pj4gTWF5YmUgeW91IGNhbiBoYXZlIGEgc2VsZWN0IGluIHRoZSBLY29uZmlnIHRvIHNl
+dCBzb21lIGRpZmZlcmVudGx5Cj4+Pj4gbmFtZWQgb3B0aW9uLCBlLmcuCj4+Pj4KPj4+PiBEQ0FD
+SEVfTU9ERV9XUklURXtUSFJPVUdILEFMTE9DLEJBQ0t9Cj4+Pj4KPj4+PiBhbmQgdGhlbiBhbiBp
+ZmRlZiBpbiBzb21lIGhlYWRlciBmaWxlLCBlLmcuCj4+Pj4KPj4+PiAjaWZkZWYgQ09ORklHX0RD
+QUNIRV9NT0RFX1dSSVRFVEhST1VHSCAjZGVmaW5lCj4+IEFSTV9DQUNIRV9NT0RFCj4+Pj4gRENB
+Q0hFX1dSSVRFVEhST1VHSCAuLi4KPj4+Pgo+Pj4+IEFuZCB0aGVuIHVzZSBBUk1fQ0FDSEVfTU9E
+RSB3aGVyZSB5b3UgbmVlZCBhIHZhbHVlIGFuZAo+Pj4+IENPTkZJR19EQ0FDSEVfTU9ERXsuLi59
+IHdoZXJlIHlvdSBuZWVkIGEgY29uZmlnIG9wdGlvbiBjaGVjay4KPj4+Pgo+Pj4+IERvZXMgdGhp
+cyB3b3JrID8KPj4+Cj4+PiBJIHRyeSB3aXRoIHN0cmluZyBhbmQgZGVmYXVsdCAoYXMgc2VsZWN0
+IGlzIGFsbG93ZWQgb24gZm9yIGJvbGVhbiBvcgo+Pj4gdHJpc2F0ZSksIEFuZCBJIGZhaWxlZCA6
+LTwKPj4+Cj4+PiBJIGRvbid0IGZvdW5kIGEgd2F5IHRvIGhhdmUgdGhlIGRlLXN0cmluZ2ZpY2F0
+ZSB0aGUgS0NvbmZpZyBvcHRpb24gdG8KPj4+IGdlbmVyYXRlZCB0aGUgY29ycmVjdCBkZWZpbmUK
+Pj4KPj4gVGhlIHJlc3VsdCBpcyBhIGJvb2xlYW4gLCBpc24ndCBpdCA/IE9uZSBvdXQgb2YgTiBj
+b25maWdzIGVuZHMgdXAgYmVpbmcgZGVmaW5lZCBhbmQKPj4gdGhlIHJlc3QgYXJlIG5vdCBkZWZp
+bmVkLgo+Pgo+Pj4gY29uZmlnIFNZU19BUk1fQ0FDSEVfUE9MSUNZCj4+PiAJc3RyaW5nICJOYW1l
+IG9mIHRoZSBBUk0gZGF0YSB3cml0ZSBjYWNoZSBwb2xpY3kiCj4+PiAJZGVmYXVsdCBXUklURUJB
+Q0sgaWYgU1lTX0FSTV9DQUNIRV9XUklURUJBQ0sKPj4+IAlkZWZhdWx0IFdSSVRFVEhST1VHSCBp
+ZiBTWVNfQVJNX0NBQ0hFX1dSSVRFQkFDSwo+Pj4gCWRlZmF1bHQgV1JJVEVBTExPQyBpZiBTWVNf
+QVJNX0NBQ0hFX1dSSVRFQUxMT0MKPj4+Cj4+PiAjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElP
+TglEQ0FDSEVfICMjCj4+IENPTkZJR19TWVNfQVJNX0NBQ0hFX1BPTElDWQo+Pj4KPj4+ID0+IGVy
+cm9yOiDigJhEQ0FDSEVfQ09ORklHX1NZU19BUk1fQ0FDSEVfUE9MSUNZ4oCZIHVuZGVjbGFyZWQg
+KGZpcnN0Cj4+IHVzZSBpbiB0aGlzIGZ1bmN0aW9uKTsgZGlkIHlvdSBtZWFuIOKAmENPTkZJR19T
+WVNfQVJNX0NBQ0hFX1BPTElDWeKAmT8KPj4+Cj4+PiAjZGVmaW5lIERDQUNIRV9PUFRJT04ocykJ
+RENBQ0hFXyAjIwo+PiBDT05GSUdfU1lTX0FSTV9DQUNIRV9QT0xJQ1kKPj4+Cj4+PiAjZGVmaW5l
+IERDQUNIRV9ERUZBVUxUX09QVElPTgo+PiAJRENBQ0hFX09QVElPTihDT05GSUdfU1lTX0FSTV9D
+QUNIRV9QT0xJQ1kpCj4+Pgo+Pj4gYXJjaC9hcm0vaW5jbHVkZS9hc20vc3lzdGVtLmg6NDg4OjI2
+OiBlcnJvcjog4oCYRENBQ0hFX+KAmSB1bmRlY2xhcmVkIChmaXJzdCB1c2UKPj4gaW4gdGhpcyBm
+dW5jdGlvbik7IGRpZCB5b3UgbWVhbiDigJhEQ0FDSEVfT0ZG4oCZPwo+Pj4gYXJjaC9hcm0vbGli
+L2NhY2hlLWNwMTUuYzo5OToyNTogZXJyb3I6IGV4cGVjdGVkIOKAmCnigJkgYmVmb3JlIHN0cmlu
+Zwo+Pj4gY29uc3RhbnQKPj4+Cj4+PiBUaGUgc3RyaW5naWZpY2F0aW9uIGlzIHBvc3NpYmxlIGJ1
+dCBub3QgdGhlIGludmVyc2Ugb3BlcmF0aW9uIChyZW1vdmUgdGhlIHF1b3RlKS4uLgo+Pj4KPj4+
+IEluIG15IC5jb25maWcsIENPTkZJR19TWVNfQVJNX0NBQ0hFX1BPTElDWT0iV1JJVEVCQUNLIgo+
+Pgo+PiBXaGF0IGFib3V0IHRoaXM6Cj4+Cj4+IGNob2ljZQo+PiBwcm9tcHQgIkNhY2hlIHBvbGlj
+eSIKPj4gIGRlZmF1bHQgQ0FDSEVfV1JJVEVCQUNLCj4+Cj4+IGNvbmZpZyBDQUNIRV9XUklURUJB
+Q0sKPj4gIGJvb2wgIldyaXRlYmFjayIKPj4KPj4gY29uZmlnIC4uLgo+Pgo+PiBlbmRjaG9pY2UK
+Pj4KPj4gYW5kIHRoZW4gaW4gc29tZSBoZWFkZXIKPj4KPj4gI2lmZGVmIENPTkZJR19DQUNIRV9X
+UklURUJBQ0sKPj4gI2RlZmluZSBDT05GSUZfU1lTX0FSTV9DQUNIRV9XUklURUJBQ0sKPj4gI2Vs
+c2UKPj4gLi4uCj4+Cj4+IFdvdWxkIHRoYXQgd29yayA/Cj4gCj4gWWVzLCBpdCBjYW4gd29yayBp
+dCBzZWVtcyBjb21wbGljYXRlZAo+IAo+IEkgcHVzaCB2MiBmb3IgQ09ORklHX1NZU19BUk1fQ0FD
+SEVfKiBtaWdyYXRpb24gaW4gS2NvbmZpZwo+IAo+IE15IHByb3Bvc2FsIGJlY29tZXM6Cj4gCj4g
+KyNpZiBkZWZpbmVkKENPTkZJR19TWVNfQVJNX0NBQ0hFX1dSSVRFVEhST1VHSCkKPiArI2RlZmlu
+ZSBEQ0FDSEVfREVGQVVMVF9PUFRJT04JRENBQ0hFX1dSSVRFVEhST1VHSAo+ICsjZWxpZiBkZWZp
+bmVkKENPTkZJR19TWVNfQVJNX0NBQ0hFX1dSSVRFQUxMT0MpCj4gKyNkZWZpbmUgRENBQ0hFX0RF
+RkFVTFRfT1BUSU9OCURDQUNIRV9XUklURUFMTE9DCj4gKyNlbGlmIGRlZmluZWQoQ09ORklHX1NZ
+U19BUk1fQ0FDSEVfV1JJVEVCQUNLKQo+ICsjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElPTglE
+Q0FDSEVfV1JJVEVCQUNLCj4gKyNlbmRpZgo+ICsKPiAKPiBJIHRoaW5rIGl0IGlzIGlzIG1vcmUg
+Y2xlYXIgc29sdXRpb24uCj4gCj4gCj4gSSBjYW4gdXNlIG1hY3JvIG1hZ2ljIHRvIGJ1aWxkIERD
+QUNIRV9ERUZBVUxUX09QVElPTiAKPiAKPiArI2lmIGRlZmluZWQoQ09ORklHX1NZU19BUk1fQ0FD
+SEVfV1JJVEVUSFJPVUdIKQo+ICsjZGVmaW5lIEFSTV9DQUNIRV9QT0xJQ1kJV1JJVEVUSFJPVUdI
+Cj4gKyNlbGlmIGRlZmluZWQoQ09ORklHX1NZU19BUk1fQ0FDSEVfV1JJVEVBTExPQykKPiArI2Rl
+ZmluZSBBUk1fQ0FDSEVfUE9MSUNZCVdSSVRFQUxMT0MKPiArI2VsaWYgZGVmaW5lZChDT05GSUdf
+U1lTX0FSTV9DQUNIRV9XUklURUJBQ0spCj4gKyNkZWZpbmUgQVJNX0NBQ0hFX1BPTElDWQlXUklU
+RUJBQ0sKPiArI2VuZGlmCj4gIAo+ICsjZGVmaW5lIF9EQ0FDSEVfT1BUSU9OKHBvbGljeSkJRENB
+Q0hFXyAjIyBwb2xpY3kKPiArI2RlZmluZSBEQ0FDSEVfT1BUSU9OKHBvbGljeSkJX0RDQUNIRV9P
+UFRJT04ocG9saWN5KQo+ICsjZGVmaW5lIERDQUNIRV9ERUZBVUxUX09QVElPTglEQ0FDSEVfT1BU
+SU9OKEFSTV9DQUNIRV9QT0xJQ1kpCj4gKwo+IAo+Pgo+PiBCdXQgSSBmZWVsIEkgbWlnaHQgcmVh
+bGx5IGJlIG1pc3NpbmcgdGhlIHF1ZXN0aW9uIGhlcmUuCj4gCj4gSSB0aGluayBJIHdpbGwgcHVz
+aCBWMiBpbiBvbmUgd2VlayAoSSBhbSBvdXQgb2Ygb2ZmaWNlIG5leHQgd2VlaykgdG8gd2FpdCBv
+dGhlciBmZWVkYmFjay4KPiAKPiBJdCBjb3VsZCBiZSBtb3JlIGNsZWFyIHdpdGggYW4gdXBkYXRl
+ZCBwYXRjaHNldC4KClRoYXQncyBhIGdvb2QgaWRlYSwgbGV0J3Mgc2VlLgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxp
+c3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1k
+LW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

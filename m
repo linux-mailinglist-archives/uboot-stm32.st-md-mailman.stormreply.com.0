@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B105D1A7BAC
-	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Apr 2020 15:04:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFF7F1A7BAD
+	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Apr 2020 15:04:58 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D9593C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Apr 2020 13:04:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC5E0C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Apr 2020 13:04:58 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4FB4DC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 801A2C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Apr 2020 13:04:26 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue, 14 Apr 2020 13:04:57 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03ED2t3C023881; Tue, 14 Apr 2020 15:04:25 +0200
+ 03ED3g3G020508; Tue, 14 Apr 2020 15:04:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
  bh=3zZ1otiJelOOBxyn1lqtbd4aacr8UpBDDuOFvzEmczQ=;
- b=UfrtiXSdkp6Fjy+V0rlu5dyI31DLY11fXxGiHY0vpuvpfjvholug+ir8YXD01Hv/VgoL
- Uw11zUaJ33pIjkgm5dmnxtDNn3F6fCSiIZ8z7dREtBnuR5VhPv5cu8qQpzE4AxVRwZLq
- GLW1glpCYftnoUfXO6PKObRppaiAYgtS6Gzjyr9c6aIMgo0jVYc/JWbPrbJHAzpGWyhs
- +onGnbiHj2mu7f37XeT7rY0n8MkKewy01ykJylQdDaZQKxycC3wrZDus3Z0UxE7gUHqK
- 3uZlJqpdpREV6/ENQ1tP9KlbNrpovkOzDcoZ2cUR6UUoZPkUP3BiEBvYo/FuwRrlCu5C zQ== 
+ b=ucj76HW7Hu5YLkdSMD7HsRhcMwsGE3slGAXVRodNYinc89Pft2PaRBOeGx484xjSFctQ
+ 4/YzM3NNJcg8dm6pctUuQRqKysNoFzpqzm/tzi1kyF7W3/CXSiE0+T1YSgor7D8/PBfD
+ XLMeN0rMpuCTUuZ3VkChEEzre7HeagvdjWWQw85qCT69YC6wioulRlAkBaFCV5odcsMq
+ z1hkhmCl+h/Nk6eC69r229J5eF3n1yvrJrOc+QLR2DF2AIzWrl5aPVQU0AoSVjC/0Dqf
+ 24TEqmAcjlS5+ijRMlrna1DOF+xgnanSExutMcf+LuJvTWee50VnK4ETDB/fMAUp+ea9 4A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30b66a5nxn-1
+ by mx07-00178001.pphosted.com with ESMTP id 30b5sjwt2p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Apr 2020 15:04:25 +0200
+ Tue, 14 Apr 2020 15:04:56 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C06CE10002A;
- Tue, 14 Apr 2020 15:04:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B6E2F2B5C46;
- Tue, 14 Apr 2020 15:04:20 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 14 Apr
- 2020 15:04:20 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2BC0F100034;
+ Tue, 14 Apr 2020 15:04:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 22ABE2B5C4B;
+ Tue, 14 Apr 2020 15:04:56 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 14 Apr
+ 2020 15:04:55 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 14 Apr 2020 15:04:20 +0200
+ 15.00.1473.003; Tue, 14 Apr 2020 15:04:55 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
 Thread-Topic: [PATCH 06/18] stm32mp: stm32prog: add MMC device
-Thread-Index: AQHV/P69yZBiiNM1lkKBd2OpekJgd6h4nuaA
-Date: Tue, 14 Apr 2020 13:04:20 +0000
-Message-ID: <72924f4a-046a-9ccf-9558-9ff18b5ab58b@st.com>
+Thread-Index: AQHV/P69yZBiiNM1lkKBd2OpekJgd6h4nxGA
+Date: Tue, 14 Apr 2020 13:04:55 +0000
+Message-ID: <bde8f3fe-210d-bdee-f0f9-9841e601cada@st.com>
 References: <20200318082503.8025-1-patrick.delaunay@st.com>
  <20200318082503.8025-7-patrick.delaunay@st.com>
 In-Reply-To: <20200318082503.8025-7-patrick.delaunay@st.com>
@@ -62,7 +62,7 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.48]
-Content-ID: <B42ADB198739AA4C8A3BD705CC82E883@st.com>
+Content-ID: <7C8F5D11803D1841935E5C80385A9C0F@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-14_05:2020-04-14,

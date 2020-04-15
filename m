@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E8721A9438
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Apr 2020 09:27:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C12751A9442
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Apr 2020 09:29:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B3A8C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Apr 2020 07:27:52 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7C07AC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Apr 2020 07:29:50 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8130DC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 927D5C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 15 Apr 2020 07:27:50 +0000 (UTC)
+ Wed, 15 Apr 2020 07:29:47 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03F7N5sO000883; Wed, 15 Apr 2020 09:27:47 +0200
+ 03F7T2SH008303; Wed, 15 Apr 2020 09:29:46 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=mWLIcB5hn8taoJJ00TOvB3l7p6XNFNkvQlRL88/Mz30=;
- b=JBJn7fXSu6GzW7w/mC8s2bXjnVFbkI+1NhpeHZnNt8jxNT5eKNi3g77HoNA3v010ZY4s
- 0/fG3Lo0fK1ZXgXEmexeiNsIfNP1ZBV+JboTnH3ldgXCx3nK8947Y/51KnND67QhwmZk
- MbP9luuRb4+C45foXiC7dEp1xVYuhunOJQlL0iuKx70hohthiZcbo38nbSc+FsnVptMz
- sKRl172wHwRCjtHSAUj75RrWKsxMk0okfedfoD5evMVNNm1+uM0ExfxKNY4u1O/1pmMt
- gw3y2XoCVK0gUjKN6y1amCU/NJ7UtUed1Icd6fVhjmh+Z6WzsX0ZcHsglQZDVXg6Lj6/ bg== 
+ bh=T4KUfkaC9W/DX1CFp92tmwBfHjDxGSol1kwAp0IdJ9Q=;
+ b=DjP5nyqtco8Ub+sVUXReD34w55F3P91+gZQG2yx6CklOT/AP3J3qtR9mAm4N/lLwce2n
+ P+2+IP0xRvfUoXXviWVHuvbLmsjxIm5uYetiZp+S8qUUah/c3L7mBshUhLdVCETGczp7
+ OVno2+TCSg9tWZk6ljas2h00SZNwlqibWXvv2qcwfoDoNebZRwfv/57iRId4C9DNpdBY
+ XfpYiReqSlb1cXF4NOCYORYRPF7inJTS7yMCs6tlB8z4UgN15jNKXPPp/irJJwQfNtO2
+ Y4ubEC9rd84lTVCnSmi8LKQZTgo0/r+jSLvD+lx5aOdjI+zuIK+uP+PuatTL4Nah4Ih6 Lw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30dn6st41d-1
+ by mx07-00178001.pphosted.com with ESMTP id 30dn6st4bh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 15 Apr 2020 09:27:46 +0200
+ Wed, 15 Apr 2020 09:29:46 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 970FA100034;
- Wed, 15 Apr 2020 09:27:46 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag5node3.st.com [10.75.127.15])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C3482A4D75;
- Wed, 15 Apr 2020 09:27:46 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG5NODE3.st.com
- (10.75.127.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 15 Apr
- 2020 09:27:46 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1FF2010002A;
+ Wed, 15 Apr 2020 09:29:46 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1230A2A4D8D;
+ Wed, 15 Apr 2020 09:29:46 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 15 Apr
+ 2020 09:29:45 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 15 Apr 2020 09:27:46 +0200
+ 15.00.1473.003; Wed, 15 Apr 2020 09:29:45 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 2/2] net: dwc_eth_qos: implement phy reg
- and max-speed for stm32
-Thread-Index: AQHWEvdbKu/9Mq1EfUmicWTd/a8xlw==
-Date: Wed, 15 Apr 2020 07:27:46 +0000
-Message-ID: <de1e6485-21f9-96c3-d759-8c5ef48cf856@st.com>
-References: <20200318095016.19942-1-patrick.delaunay@st.com>
- <20200318095016.19942-2-patrick.delaunay@st.com>
-In-Reply-To: <20200318095016.19942-2-patrick.delaunay@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH] configs: stm32mp1: replace
+ STM32MP1_TRUSTED by TFABOOT
+Thread-Index: AQHWB/Q4S03xiQjitEy+S/sPOXQYM6hjweGAgBX79IA=
+Date: Wed, 15 Apr 2020 07:29:45 +0000
+Message-ID: <27e14db2-25b7-8d2f-682e-cd8a1148a1b7@st.com>
+References: <20200401090730.1.I8afbe46ade3ac297f6508f03fbcc643a260f54f7@changeid>
+ <5d26c655-ba93-3e7b-4e94-7c2136b074fe@st.com>
+In-Reply-To: <5d26c655-ba93-3e7b-4e94-7c2136b074fe@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,17 +62,17 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.47]
-Content-ID: <4F9580DC1EA481438E68AC012CE438CF@st.com>
+x-originating-ip: [10.75.127.46]
+Content-ID: <CEEC5350F1B6D64EA06CB6B171701EA5@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-15_01:2020-04-14,
  2020-04-15 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Christophe ROULLIER <christophe.roullier@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] net: dwc_eth_qos: implement phy reg
- and max-speed for stm32
+Cc: Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp1: replace
+ STM32MP1_TRUSTED by TFABOOT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,90 +91,345 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi
 
-On 3/18/20 10:50 AM, Patrick Delaunay wrote:
-> Add management of property "reg" to configure @ of phy and
-> also "max-speed" property to specify maximum speed in Mbit/s
-> supported by the device
+On 4/1/20 9:46 AM, Patrice CHOTARD wrote:
+> Hi Patrick
 >
-> Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
-> Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  drivers/net/dwc_eth_qos.c | 19 ++++++++++++++++++-
->  1 file changed, 18 insertions(+), 1 deletion(-)
-
-
+> On 4/1/20 9:07 AM, Patrick Delaunay wrote:
+>> Activate ARCH_SUPPORT_TFABOOT and replace the arch stm32mp
+>> specific config CONFIG_STM32MP1_TRUSTED by the generic CONFIG_TFABOOT
+>> introduced by the commit 535d76a12150 ("armv8: layerscape: Add TFABOOT
+>> support").
+>> This config CONFIG_TFABOOT is activated for the trusted boot chain,
+>> when U-Boot is loaded by TF-A.
+>>
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+>> ---
 Applied to u-boot-stm/next
 
 Thanks
 
 Patrice
-
+>>
+>>  arch/arm/Kconfig                        |  1 +
+>>  arch/arm/mach-stm32mp/Kconfig           | 21 ++++++---------------
+>>  arch/arm/mach-stm32mp/bsec.c            | 18 +++++++++---------
+>>  arch/arm/mach-stm32mp/cpu.c             | 10 +++++-----
+>>  board/dhelectronics/dh_stm32mp1/board.c |  4 ++--
+>>  board/st/stm32mp1/stm32mp1.c            |  4 ++--
+>>  configs/stm32mp15_optee_defconfig       |  1 +
+>>  configs/stm32mp15_trusted_defconfig     |  1 +
+>>  drivers/clk/clk_stm32mp1.c              |  2 +-
+>>  drivers/ram/stm32mp1/stm32mp1_ram.c     |  2 +-
+>>  include/configs/stm32mp1.h              |  2 +-
+>>  11 files changed, 30 insertions(+), 36 deletions(-)
+>>
+>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+>> index 5d367888d8..54ff4557d4 100644
+>> --- a/arch/arm/Kconfig
+>> +++ b/arch/arm/Kconfig
+>> @@ -1583,6 +1583,7 @@ config ARCH_STI
+>>  config ARCH_STM32MP
+>>  	bool "Support STMicroelectronics STM32MP Socs with cortex A"
+>>  	select ARCH_MISC_INIT
+>> +	select ARCH_SUPPORT_TFABOOT
+>>  	select BOARD_LATE_INIT
+>>  	select CLK
+>>  	select DM
+>> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+>> index e4d621dee8..e42e9e2e82 100644
+>> --- a/arch/arm/mach-stm32mp/Kconfig
+>> +++ b/arch/arm/mach-stm32mp/Kconfig
+>> @@ -35,9 +35,10 @@ config ENV_SIZE
+>>  
+>>  config STM32MP15x
+>>  	bool "Support STMicroelectronics STM32MP15x Soc"
+>> -	select ARCH_SUPPORT_PSCI if !STM32MP1_TRUSTED
+>> +	select ARCH_SUPPORT_PSCI if !TFABOOT
+>> +	select ARM_SMCCC if TFABOOT
+>>  	select CPU_V7A
+>> -	select CPU_V7_HAS_NONSEC if !STM32MP1_TRUSTED
+>> +	select CPU_V7_HAS_NONSEC if !TFABOOT
+>>  	select CPU_V7_HAS_VIRT
+>>  	select OF_BOARD_SETUP
+>>  	select PINCTRL_STM32
+>> @@ -45,8 +46,8 @@ config STM32MP15x
+>>  	select STM32_RESET
+>>  	select STM32_SERIAL
+>>  	select SYS_ARCH_TIMER
+>> -	imply SYSRESET_PSCI if STM32MP1_TRUSTED
+>> -	imply SYSRESET_SYSCON if !STM32MP1_TRUSTED
+>> +	imply SYSRESET_PSCI if TFABOOT
+>> +	imply SYSRESET_SYSCON if !TFABOOT
+>>  	help
+>>  		support of STMicroelectronics SOC STM32MP15x family
+>>  		STM32MP157, STM32MP153 or STM32MP151
+>> @@ -83,19 +84,9 @@ config TARGET_DH_STM32MP1_PDK2
+>>  
+>>  endchoice
+>>  
+>> -config STM32MP1_TRUSTED
+>> -	bool "Support trusted boot with TF-A"
+>> -	default y if !SPL
+>> -	select ARM_SMCCC
+>> -	help
+>> -		Say Y here to enable boot with TF-A
+>> -		Trusted boot chain is :
+>> -		BootRom => TF-A.stm32 (clock & DDR) => U-Boot.stm32
+>> -		TF-A monitor provides proprietary SMC to manage secure devices
+>> -
+>>  config STM32MP1_OPTEE
+>>  	bool "Support trusted boot with TF-A and OP-TEE"
+>> -	depends on STM32MP1_TRUSTED
+>> +	depends on TFABOOT
+>>  	default n
+>>  	help
+>>  		Say Y here to enable boot with TF-A and OP-TEE
+>> diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
+>> index 3b923f088e..0d5850b4a9 100644
+>> --- a/arch/arm/mach-stm32mp/bsec.c
+>> +++ b/arch/arm/mach-stm32mp/bsec.c
+>> @@ -68,7 +68,7 @@ static bool bsec_read_lock(u32 address, u32 otp)
+>>  	return !!(readl(address + bank) & bit);
+>>  }
+>>  
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  /**
+>>   * bsec_check_error() - Check status of one otp
+>>   * @base: base address of bsec IP
+>> @@ -273,7 +273,7 @@ static int bsec_program_otp(long base, u32 val, u32 otp)
+>>  
+>>  	return ret;
+>>  }
+>> -#endif /* CONFIG_STM32MP1_TRUSTED */
+>> +#endif /* CONFIG_TFABOOT */
+>>  
+>>  /* BSEC MISC driver *******************************************************/
+>>  struct stm32mp_bsec_platdata {
+>> @@ -282,7 +282,7 @@ struct stm32mp_bsec_platdata {
+>>  
+>>  static int stm32mp_bsec_read_otp(struct udevice *dev, u32 *val, u32 otp)
+>>  {
+>> -#ifdef CONFIG_STM32MP1_TRUSTED
+>> +#ifdef CONFIG_TFABOOT
+>>  	return stm32_smc(STM32_SMC_BSEC,
+>>  			 STM32_SMC_READ_OTP,
+>>  			 otp, 0, val);
+>> @@ -313,7 +313,7 @@ static int stm32mp_bsec_read_otp(struct udevice *dev, u32 *val, u32 otp)
+>>  
+>>  static int stm32mp_bsec_read_shadow(struct udevice *dev, u32 *val, u32 otp)
+>>  {
+>> -#ifdef CONFIG_STM32MP1_TRUSTED
+>> +#ifdef CONFIG_TFABOOT
+>>  	return stm32_smc(STM32_SMC_BSEC,
+>>  			 STM32_SMC_READ_SHADOW,
+>>  			 otp, 0, val);
+>> @@ -336,7 +336,7 @@ static int stm32mp_bsec_read_lock(struct udevice *dev, u32 *val, u32 otp)
+>>  
+>>  static int stm32mp_bsec_write_otp(struct udevice *dev, u32 val, u32 otp)
+>>  {
+>> -#ifdef CONFIG_STM32MP1_TRUSTED
+>> +#ifdef CONFIG_TFABOOT
+>>  	return stm32_smc_exec(STM32_SMC_BSEC,
+>>  			      STM32_SMC_PROG_OTP,
+>>  			      otp, val);
+>> @@ -349,7 +349,7 @@ static int stm32mp_bsec_write_otp(struct udevice *dev, u32 val, u32 otp)
+>>  
+>>  static int stm32mp_bsec_write_shadow(struct udevice *dev, u32 val, u32 otp)
+>>  {
+>> -#ifdef CONFIG_STM32MP1_TRUSTED
+>> +#ifdef CONFIG_TFABOOT
+>>  	return stm32_smc_exec(STM32_SMC_BSEC,
+>>  			      STM32_SMC_WRITE_SHADOW,
+>>  			      otp, val);
+>> @@ -362,7 +362,7 @@ static int stm32mp_bsec_write_shadow(struct udevice *dev, u32 val, u32 otp)
+>>  
+>>  static int stm32mp_bsec_write_lock(struct udevice *dev, u32 val, u32 otp)
+>>  {
+>> -#ifdef CONFIG_STM32MP1_TRUSTED
+>> +#ifdef CONFIG_TFABOOT
+>>  	if (val == 1)
+>>  		return stm32_smc_exec(STM32_SMC_BSEC,
+>>  				      STM32_SMC_WRLOCK_OTP,
+>> @@ -473,7 +473,7 @@ static int stm32mp_bsec_ofdata_to_platdata(struct udevice *dev)
+>>  	return 0;
+>>  }
+>>  
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  static int stm32mp_bsec_probe(struct udevice *dev)
+>>  {
+>>  	int otp;
+>> @@ -500,7 +500,7 @@ U_BOOT_DRIVER(stm32mp_bsec) = {
+>>  	.ofdata_to_platdata = stm32mp_bsec_ofdata_to_platdata,
+>>  	.platdata_auto_alloc_size = sizeof(struct stm32mp_bsec_platdata),
+>>  	.ops = &stm32mp_bsec_ops,
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  	.probe = stm32mp_bsec_probe,
+>>  #endif
+>>  };
+>> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+>> index 9aa5794334..74d03fa7dd 100644
+>> --- a/arch/arm/mach-stm32mp/cpu.c
+>> +++ b/arch/arm/mach-stm32mp/cpu.c
+>> @@ -76,7 +76,7 @@
+>>  #define PKG_MASK	GENMASK(2, 0)
+>>  
+>>  #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  static void security_init(void)
+>>  {
+>>  	/* Disable the backup domain write protection */
+>> @@ -136,7 +136,7 @@ static void security_init(void)
+>>  	writel(BIT(0), RCC_MP_AHB5ENSETR);
+>>  	writel(0x0, GPIOZ_SECCFGR);
+>>  }
+>> -#endif /* CONFIG_STM32MP1_TRUSTED */
+>> +#endif /* CONFIG_TFABOOT */
+>>  
+>>  /*
+>>   * Debug init
+>> @@ -150,7 +150,7 @@ static void dbgmcu_init(void)
+>>  }
+>>  #endif /* !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD) */
+>>  
+>> -#if !defined(CONFIG_STM32MP1_TRUSTED) && \
+>> +#if !defined(CONFIG_TFABOOT) && \
+>>  	(!defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD))
+>>  /* get bootmode from ROM code boot context: saved in TAMP register */
+>>  static void update_bootmode(void)
+>> @@ -198,7 +198,7 @@ int arch_cpu_init(void)
+>>  
+>>  #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+>>  	dbgmcu_init();
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  	security_init();
+>>  	update_bootmode();
+>>  #endif
+>> @@ -214,7 +214,7 @@ int arch_cpu_init(void)
+>>  	if ((boot_mode & TAMP_BOOT_DEVICE_MASK) == BOOT_SERIAL_UART)
+>>  		gd->flags |= GD_FLG_SILENT | GD_FLG_DISABLE_CONSOLE;
+>>  #if defined(CONFIG_DEBUG_UART) && \
+>> -	!defined(CONFIG_STM32MP1_TRUSTED) && \
+>> +	!defined(CONFIG_TFABOOT) && \
+>>  	(!defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD))
+>>  	else
+>>  		debug_uart_init();
+>> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+>> index b663696983..c39a4b193c 100644
+>> --- a/board/dhelectronics/dh_stm32mp1/board.c
+>> +++ b/board/dhelectronics/dh_stm32mp1/board.c
+>> @@ -119,7 +119,7 @@ int checkboard(void)
+>>  
+>>  	if (IS_ENABLED(CONFIG_STM32MP1_OPTEE))
+>>  		mode = "trusted with OP-TEE";
+>> -	else if (IS_ENABLED(CONFIG_STM32MP1_TRUSTED))
+>> +	else if (IS_ENABLED(CONFIG_TFABOOT))
+>>  		mode = "trusted";
+>>  	else
+>>  		mode = "basic";
+>> @@ -284,7 +284,7 @@ static void __maybe_unused led_error_blink(u32 nb_blink)
+>>  
+>>  static void sysconf_init(void)
+>>  {
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  	u8 *syscfg;
+>>  #ifdef CONFIG_DM_REGULATOR
+>>  	struct udevice *pwr_dev;
+>> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+>> index 07f5344ec9..6c884028d3 100644
+>> --- a/board/st/stm32mp1/stm32mp1.c
+>> +++ b/board/st/stm32mp1/stm32mp1.c
+>> @@ -92,7 +92,7 @@ int checkboard(void)
+>>  
+>>  	if (IS_ENABLED(CONFIG_STM32MP1_OPTEE))
+>>  		mode = "trusted with OP-TEE";
+>> -	else if (IS_ENABLED(CONFIG_STM32MP1_TRUSTED))
+>> +	else if (IS_ENABLED(TFABOOT))
+>>  		mode = "trusted";
+>>  	else
+>>  		mode = "basic";
+>> @@ -462,7 +462,7 @@ static int board_check_usb_power(void)
+>>  
+>>  static void sysconf_init(void)
+>>  {
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  	u8 *syscfg;
+>>  #ifdef CONFIG_DM_REGULATOR
+>>  	struct udevice *pwr_dev;
+>> diff --git a/configs/stm32mp15_optee_defconfig b/configs/stm32mp15_optee_defconfig
+>> index 298611776d..6c17bd9b20 100644
+>> --- a/configs/stm32mp15_optee_defconfig
+>> +++ b/configs/stm32mp15_optee_defconfig
+>> @@ -1,5 +1,6 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_ARCH_STM32MP=y
+>> +CONFIG_TFABOOT=y
+>>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+>>  CONFIG_ENV_SECT_SIZE=0x40000
+>>  CONFIG_ENV_OFFSET=0x280000
+>> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+>> index 6928e9a65c..7592f6fcc4 100644
+>> --- a/configs/stm32mp15_trusted_defconfig
+>> +++ b/configs/stm32mp15_trusted_defconfig
+>> @@ -1,5 +1,6 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_ARCH_STM32MP=y
+>> +CONFIG_TFABOOT=y
+>>  CONFIG_SYS_MALLOC_F_LEN=0x3000
+>>  CONFIG_ENV_SECT_SIZE=0x40000
+>>  CONFIG_ENV_OFFSET=0x280000
+>> diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
+>> index 52bd8e96f3..50df8425bf 100644
+>> --- a/drivers/clk/clk_stm32mp1.c
+>> +++ b/drivers/clk/clk_stm32mp1.c
+>> @@ -19,7 +19,7 @@
+>>  
+>>  DECLARE_GLOBAL_DATA_PTR;
+>>  
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+>>  /* activate clock tree initialization in the driver */
+>>  #define STM32MP1_CLOCK_TREE_INIT
+>> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
+>> index b1e593f86b..7b1adc5b24 100644
+>> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
+>> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
+>> @@ -177,7 +177,7 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
+>>  
+>>  	priv->info.base = STM32_DDR_BASE;
+>>  
+>> -#if !defined(CONFIG_STM32MP1_TRUSTED) && \
+>> +#if !defined(CONFIG_TFABOOT) && \
+>>  	(!defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD))
+>>  	priv->info.size = 0;
+>>  	return stm32mp1_ddr_setup(dev);
+>> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
+>> index 42717c167e..2ba4fb1305 100644
+>> --- a/include/configs/stm32mp1.h
+>> +++ b/include/configs/stm32mp1.h
+>> @@ -10,7 +10,7 @@
+>>  #include <linux/sizes.h>
+>>  #include <asm/arch/stm32.h>
+>>  
+>> -#ifndef CONFIG_STM32MP1_TRUSTED
+>> +#ifndef CONFIG_TFABOOT
+>>  /* PSCI support */
+>>  #define CONFIG_ARMV7_PSCI_1_0
+>>  #define CONFIG_ARMV7_SECURE_BASE		STM32_SYSRAM_BASE
+> Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 >
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index 4796659216..63f2086dec 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -306,6 +306,8 @@ struct eqos_priv {
->  	struct clk clk_slave_bus;
->  	struct mii_dev *mii;
->  	struct phy_device *phy;
-> +	int phyaddr;
-> +	u32 max_speed;
->  	void *descs;
->  	struct eqos_desc *tx_descs;
->  	struct eqos_desc *rx_descs;
-> @@ -1081,12 +1083,21 @@ static int eqos_start(struct udevice *dev)
->  	 * don't need to reconnect/reconfigure again
->  	 */
->  	if (!eqos->phy) {
-> -		eqos->phy = phy_connect(eqos->mii, -1, dev,
-> +		eqos->phy = phy_connect(eqos->mii, eqos->phyaddr, dev,
->  					eqos->config->interface(dev));
->  		if (!eqos->phy) {
->  			pr_err("phy_connect() failed");
->  			goto err_stop_resets;
->  		}
-> +
-> +		if (eqos->max_speed) {
-> +			ret = phy_set_supported(eqos->phy, eqos->max_speed);
-> +			if (ret) {
-> +				pr_err("phy_set_supported() failed: %d", ret);
-> +				goto err_shutdown_phy;
-> +			}
-> +		}
-> +
->  		ret = phy_config(eqos->phy);
->  		if (ret < 0) {
->  			pr_err("phy_config() failed: %d", ret);
-> @@ -1654,6 +1665,8 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->  	if (ret)
->  		return -EINVAL;
->  
-> +	eqos->max_speed = dev_read_u32_default(dev, "max-speed", 0);
-> +
->  	ret = clk_get_by_name(dev, "stmmaceth", &eqos->clk_master_bus);
->  	if (ret) {
->  		pr_err("clk_get_by_name(master_bus) failed: %d", ret);
-> @@ -1677,6 +1690,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->  	if (ret)
->  		pr_warn("No phy clock provided %d", ret);
->  
-> +	eqos->phyaddr = -1;
->  	ret = dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
->  					 &phandle_args);
->  	if (!ret) {
-> @@ -1689,6 +1703,9 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->  		if (ret)
->  			pr_warn("gpio_request_by_name(phy reset) not provided %d",
->  				ret);
-> +
-> +		eqos->phyaddr = ofnode_read_u32_default(phandle_args.node,
-> +							"reg", -1);
->  	}
->  
->  	debug("%s: OK\n", __func__);
+> Thanks
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

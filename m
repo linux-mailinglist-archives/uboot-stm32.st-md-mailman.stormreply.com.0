@@ -2,57 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D2FF1ADD5B
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 14:37:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD2EA1ADD5C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 14:37:28 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 242E9C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 12:37:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 30136C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 12:37:28 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A195EC36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7F6ACC36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Apr 2020 12:37:09 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri, 17 Apr 2020 12:37:27 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03HCVwI7011400; Fri, 17 Apr 2020 14:37:00 +0200
+ 03HCbJTI032502; Fri, 17 Apr 2020 14:37:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=1828SfkzZqrZwR9CfdEMFU/cs558g9c+oPIJTdUmybE=;
- b=s374QefZfgQLB/NhwLetDU8+80R84HKsG8M+XtDqepbXAqIwti78K2OC4EDFSEtMJ00Z
- gxewPJCuvHE4OiRCd1Z9Z1nEQ94MhVwG/7NRgXMAtYL+6ws87ELTVHZLiTjF02gCCdkr
- veK0Q0K6kjU7SPzuYIgl+Arml5Ipf5phYn/JGb+J/mdPA57rUE7gwTFiaiolu6tmm5KV
- vd/lvxDylh9qfpbZv9lHePp+E9VSsUJtNdBTTj1z6zg470W4Z4vW345yvsCutbV/gzRJ
- UhEHcW9fOExAdo3F5wXVkqRO7N4c0AwQNJzM4is0KeYL2iawcgMr+AifXMJE/52bhODl 7A== 
+ bh=dT1Qna6E/mJS2ImRSwV+06Ia3a2ys3zCX+UKBrKxkz4=;
+ b=RuNm3pEpnJ2uzMyah/f8E2+XPuK51NF/xuJpu7iHr5JEqj0vVcQbqgrxedhSfQXI8Qo9
+ sQG9wk58ZowSZ46DSG8C+DCU20cgGZxkysUsRtpmZdEz0thcyhUOFFzsqsMQsdWGMVwa
+ rSES3bmgfOiJkdzSPzRhIk2kEHEsl+rg0mUf4Psjg0BNdlHaW49Qx4tJXju8+wf3NQj3
+ zAfKt7HqJoJ8mSkIcmVJlkBH4mSuw/VUDcF7QaKxoU8PNPQvUPE4S7vU6uC1gTT3KyqV
+ QRrLmPbMnfjZLoQ4v/e2n1r2oQTihubi27Bt7FQ+jJ8MuU81OutLDJWXdYy6wyKRsprI VQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30dn761gc3-1
+ by mx07-00178001.pphosted.com with ESMTP id 30dn6t9gye-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Apr 2020 14:37:00 +0200
+ Fri, 17 Apr 2020 14:37:19 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A3AF6100034;
- Fri, 17 Apr 2020 14:36:59 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 79E072B1893;
- Fri, 17 Apr 2020 14:36:59 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 17 Apr
- 2020 14:36:58 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 37A1F10002A;
+ Fri, 17 Apr 2020 14:37:19 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2D5202B1893;
+ Fri, 17 Apr 2020 14:37:19 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 17 Apr
+ 2020 14:37:18 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 17 Apr 2020 14:36:58 +0200
+ 15.00.1473.003; Fri, 17 Apr 2020 14:37:18 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
- mmc_get_env_dev with OF_CONTROL
-Thread-Index: AQHWFLTi3Ay3q7Yulk2Pi//5LTul/A==
-Date: Fri, 17 Apr 2020 12:36:58 +0000
-Message-ID: <0568fd18-bd0f-9c3b-f25a-37ddd7730f2e@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH 2/3] env: mmc: correct the offset returned
+ by mmc_offset_try_partition
+Thread-Index: AQHWFLTuqIvoyR3hKEqabpiPWzSQnQ==
+Date: Fri, 17 Apr 2020 12:37:18 +0000
+Message-ID: <026193d0-78a4-4cc7-481b-12db578a630e@st.com>
 References: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
-In-Reply-To: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
+ <20200319105917.2.Ib5b400348308b65bb50d9bfff5fe681027bff4e5@changeid>
+In-Reply-To: <20200319105917.2.Ib5b400348308b65bb50d9bfff5fe681027bff4e5@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -61,8 +62,8 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
-Content-ID: <E3317FD2B98E5341A2690EF4428EF813@st.com>
+x-originating-ip: [10.75.127.48]
+Content-ID: <4C79291DF6F17A439BE78C264C3DF991@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-17_03:2020-04-17,
@@ -70,8 +71,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
  Wolfgang Denk <wd@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
- mmc_get_env_dev with OF_CONTROL
+Subject: Re: [Uboot-stm32] [PATCH 2/3] env: mmc: correct the offset returned
+ by mmc_offset_try_partition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,59 +92,38 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi
 
 On 3/19/20 10:59 AM, Patrick Delaunay wrote:
-> Use the weak function mmc_get_env_dev in mmc_offset_try_partition
-> function to allow dynamic selection of mmc device to use
-> and no more use directly the define CONFIG_SYS_MMC_ENV_DEV.
+> The output of the function mmc_offset_try_partition must be a
+> byte offset in mmc and not a multiple of blksz.
+>
+> This function is used in mmc_offset(), called by mmc_get_env_addr()
+> and the offset is used in write_env(), erase_env() and read_env().
+>
+> In these function, blk_start = offset / mmc->read_bl_len
+> or /write_bl_len so this offset is not a multiple of blksz.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  env/mmc.c | 18 ++++++++++++------
->  1 file changed, 12 insertions(+), 6 deletions(-)
+>  env/mmc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
 > diff --git a/env/mmc.c b/env/mmc.c
-> index 251ad07d7c..902cca23ad 100644
+> index 902cca23ad..c24b169f3e 100644
 > --- a/env/mmc.c
 > +++ b/env/mmc.c
-> @@ -24,14 +24,25 @@
+> @@ -56,10 +56,10 @@ static inline int mmc_offset_try_partition(const char *str, s64 *val)
+>  	}
 >  
->  DECLARE_GLOBAL_DATA_PTR;
+>  	/* round up to info.blksz */
+> -	len = (CONFIG_ENV_SIZE + info.blksz - 1) & ~(info.blksz - 1);
+> +	len = DIV_ROUND_UP(CONFIG_ENV_SIZE, info.blksz);
 >  
-> +#if !defined(CONFIG_SYS_MMC_ENV_DEV)
-> +#define CONFIG_SYS_MMC_ENV_DEV 0
-> +#endif
-> +
-> +__weak int mmc_get_env_dev(void)
-> +{
-> +	return CONFIG_SYS_MMC_ENV_DEV;
-> +}
-> +
->  #if CONFIG_IS_ENABLED(OF_CONTROL)
->  static inline int mmc_offset_try_partition(const char *str, s64 *val)
->  {
->  	disk_partition_t info;
->  	struct blk_desc *desc;
->  	int len, i, ret;
-> +	char dev_str[4];
+>  	/* use the top of the partion for the environment */
+> -	*val = (info.start + info.size - 1) - len / info.blksz;
+> +	*val = (info.start + info.size - len) * info.blksz;
 >  
-> -	ret = blk_get_device_by_str("mmc", STR(CONFIG_SYS_MMC_ENV_DEV), &desc);
-> +	snprintf(dev_str, sizeof(dev_str), "%d", mmc_get_env_dev());
-> +	ret = blk_get_device_by_str("mmc", dev_str, &desc);
->  	if (ret < 0)
->  		return (ret);
->  
-> @@ -114,11 +125,6 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
 >  	return 0;
 >  }
->  
-> -__weak int mmc_get_env_dev(void)
-> -{
-> -	return CONFIG_SYS_MMC_ENV_DEV;
-> -}
-> -
->  #ifdef CONFIG_SYS_MMC_ENV_PART
->  __weak uint mmc_get_env_part(struct mmc *mmc)
->  {
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

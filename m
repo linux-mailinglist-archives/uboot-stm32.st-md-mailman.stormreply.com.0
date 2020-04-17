@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E48C11AE736
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 23:07:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE9431AE738
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 23:07:49 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B0C25C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 21:07:44 +0000 (UTC)
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
- [209.85.222.193])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B7E3DC36B0D
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Apr 2020 21:07:49 +0000 (UTC)
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+ [209.85.160.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00660C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8365CC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Apr 2020 21:07:43 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id c63so4024961qke.2
+ Fri, 17 Apr 2020 21:07:48 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id l60so3204073qtd.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Apr 2020 14:07:42 -0700 (PDT)
+ Fri, 17 Apr 2020 14:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=6e57h23Pa1U8d2VXfo7543RVyj9VlKx+zWD2qpTJ68E=;
- b=GW6TFU4pmmNHUQ86VYo+dKToKTkOovkn1RI6GFDRsDTBb7FUUuNZxehT4yNrdIO6jJ
- GEw0ZV37MoDRCIShxHBbyhxXi5Ui9Vu3YAWv4bNvImGbfc0VIf/bP3WAwY1+hgJLMbQw
- 6rvwzGWBIolnzg00mptTBz7NRFCWDMK7SP/OI=
+ bh=zc3UhZqNWpGwbptVt3YObK8bXH1pyMj4PJapyDJHJsE=;
+ b=oRfgrakBWRtkUGmVo7Ihno9biB5D1i4qjXRJuAHkiHUOShHrLHCvXW3KxWULLcMCJj
+ lAx5lopX3zmFm8a2kNaeWlkqEcfCcZoyF26W/xHCfrnxPggcZUEGtVoNgHQv0nBtvOgB
+ aJZDhPf5DzLKrdiO3+JWD8QfM50LX6eVzL/WI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=6e57h23Pa1U8d2VXfo7543RVyj9VlKx+zWD2qpTJ68E=;
- b=km0Vp0bkdyMe/xwEYqvSzS7pHLBf1NvyCYuf4s1PXrvUaizB9yIcE8n2lcqpCryRWf
- X0gS6qitnuirGKfIAmFO3EdWloM13faTJzjQX1D8VJeiIk4korchFoX7iefsgANZB5ZG
- tQpKX/A5icLWHJRqzYSn62cm5NwNMS2OUTod8tXI890GrwITKO4uUFmPbC5N8sNulsy8
- ioZ5RcpiPoSgoB5tDHSUcHKk47t+oNCpTuk39EGic2Wj7WDl7cxYem4Mq/CnF+4CbojW
- a3b8MfQZ68Fp1Zs6jjJ59O/1axv50zf22qmQoQpzH4lmYFvSm5Co6Zr+Y/geyvQZR96D
- te9w==
-X-Gm-Message-State: AGi0PuZ8u9tWAxgWrI8GkKnNZELAgBVDdMnqhAvxczC+sQHY/9LOM7/P
- fjWaD12bctR6w5Ga11tz22O5Vg==
-X-Google-Smtp-Source: APiQypIG2z82yk+xSKkS4jDGXtJxuMA3wLEqCcI+BLdnR5ZGntBuvAUykpg9BU18R1r1VcKk3d8lXw==
-X-Received: by 2002:a37:5004:: with SMTP id e4mr5335701qkb.18.1587157660531;
- Fri, 17 Apr 2020 14:07:40 -0700 (PDT)
+ bh=zc3UhZqNWpGwbptVt3YObK8bXH1pyMj4PJapyDJHJsE=;
+ b=VV4utP5nZWxjtIDh2/s+zXwdNM7K11wH19u3jcOuVaRkAiKepOBkTkBXnWEz3/n+5a
+ ZOOcCAYFShWIxdVHnodR42YdNHzMPuARvialWYFvnr++sX2l1UxR+xQECqlQvN99o/RQ
+ mOWmk5YJ4VvHdKWq/YdDBIV5Suy08r/eplQ6VCCznWALqg0SqKVWxfJP/3lNa1IbfoIv
+ 2/pHBqHBvLECb4JSZZxhx0lY2sFtTNf4iaNvB1TcztP4V/7LGti4VWQw39M36EAasqzP
+ MzAyWNZrPzELSHXVIL5wShQ1Mp7+UgHRjeBtKVFpvqsjkd+Qvrg6jCwKlnT07L7T0100
+ 3bBA==
+X-Gm-Message-State: AGi0Pub4IQpHrUrz4Obg9c7DkddniyShd0haj67jtfqF5xmhIThAkDDP
+ B8DipxlY3/2x8dN/lACQEbPcxWV99Cs=
+X-Google-Smtp-Source: APiQypI02K6ttefKNyB3IgsNPkyNPegKYFrnSZv7xqMNPt/l4eemj3sZkL+lSXkvMDyHLSbMHtSF9g==
+X-Received: by 2002:ac8:23ed:: with SMTP id r42mr5118853qtr.372.1587157667464; 
+ Fri, 17 Apr 2020 14:07:47 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-826f-4058-2b78-ede2-0695.inf6.spectrum.com.
  [2606:a000:1401:826f:4058:2b78:ede2:695])
- by smtp.gmail.com with ESMTPSA id m1sm19183323qtm.22.2020.04.17.14.07.39
+ by smtp.gmail.com with ESMTPSA id g187sm17346258qkf.115.2020.04.17.14.07.46
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 17 Apr 2020 14:07:39 -0700 (PDT)
-Date: Fri, 17 Apr 2020 17:07:37 -0400
+ Fri, 17 Apr 2020 14:07:46 -0700 (PDT)
+Date: Fri, 17 Apr 2020 17:07:44 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200417210737.GA4555@bill-the-cat>
+Message-ID: <20200417210744.GB4555@bill-the-cat>
 References: <20200113103515.20879-1-patrick.delaunay@st.com>
- <20200113103515.20879-21-patrick.delaunay@st.com>
+ <20200113103515.20879-22-patrick.delaunay@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20200113103515.20879-21-patrick.delaunay@st.com>
+In-Reply-To: <20200113103515.20879-22-patrick.delaunay@st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH v3 20/21] test: dm: update test for pins
- configuration in gpio
+Subject: Re: [Uboot-stm32] [PATCH v3 21/21] test: pinmux: add
+ pincontrol-gpio for pin configuration
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,29 +71,50 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8386234587502074932=="
+Content-Type: multipart/mixed; boundary="===============7264691713871388802=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============8386234587502074932==
+--===============7264691713871388802==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="JEhTuUFIcUlI65CC"
+	protocol="application/pgp-signature"; boundary="ahZICQ7iXVM/oLYH"
 Content-Disposition: inline
 
 
---JEhTuUFIcUlI65CC
+--ahZICQ7iXVM/oLYH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 13, 2020 at 11:35:14AM +0100, Patrick Delaunay wrote:
+On Mon, Jan 13, 2020 at 11:35:15AM +0100, Patrick Delaunay wrote:
 
-> Add tests for new API set_dir_flags and set_dir_flags and associated
-> code in gpio uclass.
+> Add a simple pincontrol associated to the sandbox gpio driver,
+> that allows to check pin configuration with the command pinmux.
 >=20
-> Test support for new flags GPIO_OPEN_DRAIN, GPIO_OPEN_SOURCE
-> GPIO_PULL_UP and GPIO_PULL_DOWN.
+> The pinmux test is also updated to test behavior with 2 pincontrols.
+>=20
+> Example to check LED pin configuration:
+>=20
+> =3D> pinmux list
+> | Device                        | Driver                        | Parent
+> | pinctrl-gpio                  | sandbox_pinctrl_gpio          | root_dr=
+iver
+> | pinctrl                       | sandbox_pinctrl               | root_dr=
+iver
+>=20
+> =3D> pinmux dev pinctrl-gpio
+>=20
+> =3D> pinmux status
+>=20
+> a0        : gpio input .
+> a1        : gpio input .
+> a2        : gpio input .
+> a3        : gpio input .
+> a4        : gpio input .
+> a5        : gpio output .
+> a6        : gpio output .
+> ...
 >=20
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
@@ -103,27 +124,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---JEhTuUFIcUlI65CC
+--ahZICQ7iXVM/oLYH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6aGpkACgkQFHw5/5Y0
-tyzhjwwAloQuis/H+dVV+JttLqkuBk+mlDEi3tRBn9zy33q78BQ1++Yl+cHd2gXg
-pjaBllNcZw91JAjsQpeDnMVtDdTK2g322vaWLNvI4NK+7dy3ApxUe58QbaBIuc4z
-ZoVPzRBajZnnmxRj/ka8zYyze2GnMUuHJxXARHb42a9Va9HkZ6mzNnKWZpa6ql1x
-qnqsTH5USIua7X2B9wxk4wO88Pp7Wj8BAsfEeaCO33MSQymUqf2JyBXkWkoyA2DG
-Z+gC4kpAX357VUnkOV0SdIbOkLRLPB3zKObucOD/gJq+CvryEkdM3ZL4f40mDIys
-lWWO3aYhkG+Pt+k9hUL2AydYOlSQXP4X9unwLNG/cXmnGWNWJCi4yG5+Ghq9emYk
-LQEbfOFKi/kwK6yjff8oy8LlKhIhqqg9lUAbakQAiAjkqP5oMUijF/SOOK0tdI3U
-UxfkvLw0DZpHX5DEvFCAomgp7DNkYXBkjdtyUZkLErIkyxpD69EFVdsvZSZ6oor1
-FUotHxob
-=HJ4M
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6aGqAACgkQFHw5/5Y0
+tywiYgv9Ex/zVY0/2rZqoA2HUpNQ9F10GdUg+nI6cgGfauqXYOH5+9646fOXjAqw
+FUa8zLxQenhGEr5lBXuoGYr2EidMmlbtCQCwcJh4IIr7Uqb0sBmwgaY/Sd91bGnr
+vx7Nl8xIImo4GHac4sSH4TmKPbZCr7oT3kLiSdA5/vBSGU7vtcsLDOw/sfYBVcF3
+QSZpLGy8DTqVbhWoOmxFexgmvH+EbNuKa2vcTlSr0ZzAqoC0Fr2O4TTGtwI0iw+s
+L5zvFMOd1X0NCAqLJddubMaxyjqm+HItBP02ukOQFBDCgJV2Mv2GGnYdD9x+pIoc
+aFe8FyA8k+E1L150lUa5VQZAb5tv7te325JGsG2YIFNimH7oFsDiHa6tx+HFV5TL
+nMtMQPDKI5DZxzaeECN5KL4DckV8Wq7jgaaDp+0ywo7RETH2m/UIL4JqGZFqt7iH
+twu8tVCg59CbGMmm5QK4Tk8pbtQpt+PDXGt6fBLjaXyaj8g0Ak/lkN8Fy/kMo3x/
+1WXwRaTs
+=8fMW
 -----END PGP SIGNATURE-----
 
---JEhTuUFIcUlI65CC--
+--ahZICQ7iXVM/oLYH--
 
---===============8386234587502074932==
+--===============7264691713871388802==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -134,4 +155,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============8386234587502074932==--
+--===============7264691713871388802==--

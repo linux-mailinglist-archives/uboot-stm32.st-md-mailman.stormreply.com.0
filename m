@@ -2,75 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6DAC1B04A8
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2020 10:43:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 561E81B22C8
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 11:30:48 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6D7E0C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Apr 2020 08:43:08 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 13FEDC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 09:30:48 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE4E7C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 11AE2C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Apr 2020 08:43:07 +0000 (UTC)
+ Tue, 21 Apr 2020 09:30:45 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03K8gpXx015814; Mon, 20 Apr 2020 10:42:53 +0200
+ 03L9T07Z003786; Tue, 21 Apr 2020 11:30:35 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=cCxt9AWgu1y/YiY8/FzrGBRNK6QjxERA8MNtos8KrrM=;
- b=XTfwCGwFHZHmRmXT6DVGTdPVGtZxeeBSzNrxMuXfRyGv15dFqyZe0SP54Uq86DPUwpW9
- bgbbG75nz62zH8uvj3Slup1aRZz/r1UWDk8N5ihbGJxBooD78osR4/vN7BAX8ri1gNfs
- 2L6E9Rd1TL4GY4uy7xUD22xyjaQGvv4l8qWNaKAPG5fcCdG/zxJ32vFyPFUS4VwQJ97O
- x/veuHipTWUzcNwaNSMnoOChd0QOeShY4XH4MSB5kSdZ2JTbwSVKgfkb38vGyegSgONI
- vLOWvH5UhtBzy4PuNrYEH6ZDb2SWSwcLNo6rcmPObaA9WDjnAhSY10ALaPIHDdv5h2mH 2w== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=1pbm6zgruEyzoCMg/JoRE7KYCcZpVKk21tmmffN3ryE=;
+ b=FQQDOn2uj6aJ4h6UVxwpDvfKq7bPECUqQcxSajP0+ntS3bh0bc8dCHU/ACuiRAULTLjx
+ iO1uzkOGRlz1VQNKmbUfj9UTVyOs+iXLA5cP+lqq+zHZ+Op5Qw8DA+dJcFc5jSWYmaQT
+ Ink4YmCN65ZTIyJQ/vwOxyinEO2Z2uTp8uMNZUmeYVQQWrc+xl5wkN6GohbdMmbopcJL
+ D1kjlN2SW/K3vVbqtrn+Y/y5qWMOcfmFR6/ci33ykAcYoO1DsDuBdf4EXhQZcRs7K9kQ
+ EtYEfdwW6/mPUbmaoxwnIqR3D25TECIjFzF6fm0NbH2NROb3Y8HawI3NWIxmudpxL4Ot bw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fqaw160v-1
+ by mx07-00178001.pphosted.com with ESMTP id 30fqaw75hp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Apr 2020 10:42:53 +0200
+ Tue, 21 Apr 2020 11:30:35 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AB8A7100034;
- Mon, 20 Apr 2020 10:42:51 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4D5492B8A33;
- Mon, 20 Apr 2020 10:42:51 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Mon, 20 Apr
- 2020 10:42:51 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 84A3110002A;
+ Tue, 21 Apr 2020 11:30:34 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 69EA12AA297;
+ Tue, 21 Apr 2020 11:30:34 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 21 Apr
+ 2020 11:30:33 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 20 Apr 2020 10:42:51 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 3/3] rmobile: rcar: removed used CONFIG_SYS_RCAR_I2C*_BASE
-Thread-Index: AQHWD0UvRoumm/h1v0mS4Oew9zh8U6hyblMAgA9Q3JA=
-Date: Mon, 20 Apr 2020 08:42:50 +0000
-Message-ID: <b688f5d9a3294385b9fec68ff1c9d650@SFHDAG6NODE3.st.com>
-References: <20200410163403.1.I3190d9b77167a808c65f44883fd1bc1c1d15218a@changeid>
- <20200410163403.3.I2f2c3584fe42d6c42910d2e7e40d236910365a89@changeid>
- <bc8ebb55-fa80-6702-2585-1a9b645454df@denx.de>
-In-Reply-To: <bc8ebb55-fa80-6702-2585-1a9b645454df@denx.de>
+ 15.00.1473.003; Tue, 21 Apr 2020 11:30:33 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Thread-Topic: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
+ mmc_get_env_dev with OF_CONTROL
+Thread-Index: AQHWF7+BmISA5RtGnE+XnSThr4BrQw==
+Date: Tue, 21 Apr 2020 09:30:33 +0000
+Message-ID: <d73f5820-92a8-b182-fca3-f8ca2fe49a01@st.com>
+References: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
+In-Reply-To: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
+x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
+x-originating-ip: [10.75.127.49]
+Content-ID: <D6E29F4562069B40BABAE1CDAE69AA38@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-20_03:2020-04-17,
- 2020-04-20 signatures=0
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Pascal Linder <pascal.linder@edu.hefr.ch>, Simon Glass <sjg@chromium.org>,
- Kever Yang <kever.yang@rock-chips.com>, Ley Foon Tan <ley.foon.tan@intel.com>,
- Holger Brunck <holger.brunck@ch.abb.com>, Mario Six <mario.six@gdsys.cc>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Marek Vasut <marek.vasut+renesas@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] rmobile: rcar: removed used
-	CONFIG_SYS_RCAR_I2C*_BASE
+ definitions=2020-04-21_03:2020-04-20,
+ 2020-04-21 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
+ Wolfgang Denk <wd@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
+ mmc_get_env_dev with OF_CONTROL
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,40 +88,70 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Dear Marek,
+Hi Tom
 
-> From: Marek Vasut <marex@denx.de>
-> Sent: vendredi 10 avril 2020 18:44
-> 
-> On 4/10/20 4:34 PM, Patrick Delaunay wrote:
-> > As this "CONFIG" are never used, CONFIG_SYS_RCAR_I2C*_BASE can be
-> > removed without effect and the file config_whitelist.txt is also
-> > clean-up.
-> >
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > ---
-> >
-> >  arch/arm/mach-rmobile/include/mach/rcar-base.h | 6 ------
-> >  scripts/config_whitelist.txt                   | 4 ----
-> >  2 files changed, 10 deletions(-)
-> 
-> Update the README too, otherwise look good, thanks.
+I just noticed that this env series is delegated to Peng Fan (mmc maintainer) instead of Joe Hershberger (env maintainer).
 
-Done in a separate patch as I clean all the CONFIG no more used in this driver
+Is there any reason for this or perhaps is it just an error ?
 
-[PATCH 2/3]  README: remove references on no more used config CONFIG_SYS_RCAR_I2C*
+Thanks
 
-I didn't add you in CC for the serie, sorry.
+Patrice
 
-http://patchwork.ozlabs.org/project/uboot/list/?series=169619
-
-Regards
-
-Patrick
-
-
-
-
+On 3/19/20 10:59 AM, Patrick Delaunay wrote:
+> Use the weak function mmc_get_env_dev in mmc_offset_try_partition
+> function to allow dynamic selection of mmc device to use
+> and no more use directly the define CONFIG_SYS_MMC_ENV_DEV.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+>  env/mmc.c | 18 ++++++++++++------
+>  1 file changed, 12 insertions(+), 6 deletions(-)
+>
+> diff --git a/env/mmc.c b/env/mmc.c
+> index 251ad07d7c..902cca23ad 100644
+> --- a/env/mmc.c
+> +++ b/env/mmc.c
+> @@ -24,14 +24,25 @@
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+> +#if !defined(CONFIG_SYS_MMC_ENV_DEV)
+> +#define CONFIG_SYS_MMC_ENV_DEV 0
+> +#endif
+> +
+> +__weak int mmc_get_env_dev(void)
+> +{
+> +	return CONFIG_SYS_MMC_ENV_DEV;
+> +}
+> +
+>  #if CONFIG_IS_ENABLED(OF_CONTROL)
+>  static inline int mmc_offset_try_partition(const char *str, s64 *val)
+>  {
+>  	disk_partition_t info;
+>  	struct blk_desc *desc;
+>  	int len, i, ret;
+> +	char dev_str[4];
+>  
+> -	ret = blk_get_device_by_str("mmc", STR(CONFIG_SYS_MMC_ENV_DEV), &desc);
+> +	snprintf(dev_str, sizeof(dev_str), "%d", mmc_get_env_dev());
+> +	ret = blk_get_device_by_str("mmc", dev_str, &desc);
+>  	if (ret < 0)
+>  		return (ret);
+>  
+> @@ -114,11 +125,6 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+>  	return 0;
+>  }
+>  
+> -__weak int mmc_get_env_dev(void)
+> -{
+> -	return CONFIG_SYS_MMC_ENV_DEV;
+> -}
+> -
+>  #ifdef CONFIG_SYS_MMC_ENV_PART
+>  __weak uint mmc_get_env_part(struct mmc *mmc)
+>  {
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

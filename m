@@ -2,63 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7F3E1B2ABF
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 17:11:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEA221B2BE2
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 18:05:49 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AA22C36B13
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 15:11:56 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8792C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 16:05:49 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9FC3AC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8FF30C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Apr 2020 15:11:55 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue, 21 Apr 2020 16:05:48 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03LF8COD014130; Tue, 21 Apr 2020 17:11:54 +0200
+ 03LFuvit013496; Tue, 21 Apr 2020 18:05:44 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=CfMX6WCzSc9LdaI6grk38hLQkaM5ySJliZ+zhhQ9jIc=;
- b=ph2V+UUAJjp2epEKvPbhMnW/3mfTH5wkPSH9Kjn53s8MxQtSOFCQ5j/dHkYjZFzKQB8u
- CDsIu3Clr6rkeK/yehjl5a916rEFwJAORMzOmKxIwiRYUI6SqLgtN68j3jqX3s+lVOUY
- RbyGrZH2m5asevwPhKnY3jtgcEs6XW2Rm16hwEFcZcLhusLZUPwWE2lqm+YwIEKXvNuE
- BUo2C/CaXvUDibS8bya7PzrIkc6ISlU9hkzrJddm7zoO2xtwUEqYnsb3kqEybIwwx0gr
- Fy7QVUAP0chP60gg2ByUXw8gqexNgLDlyljdChYsATuGpGupUb8+AQN2zDH9AGvHKRxy eA== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=qunmScvu5auc4OHFb95txW3e/YKhYZFOi1zqg3snE8Y=;
+ b=alk92c0qTQrFEHz3MkX8L4+9wcuRWawqzJta5eAx1I2PxWDDA8ee1VAdwGDZTmFIar9+
+ Bd8yoNk1DzXjE/pBIkSyqCcZW0egILcQB8EM0i7fPJlJNI3syYn2siDJXp1UJX/Smw1L
+ xDhUPSye0VdZQeggIUKcXMD7rRbcbnqctUJY5usHTaVNL2hI72uBQCFcOwHznoY6igS7
+ wnPWMqtXJ1S3TaTA0p3psMuEHQUOAaag6P4HxGNoYc+7ooDHXuAu2lJ6i/V0yKOB30so
+ 2cO7xhH04CMCYX4BU9TVIa1gocnF1kYikQl3h9JiaKHUOUJ2UnTacew61FoF90kh9dPM kg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fpp8s680-1
+ by mx07-00178001.pphosted.com with ESMTP id 30fqaw93xg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 21 Apr 2020 17:11:53 +0200
+ Tue, 21 Apr 2020 18:05:44 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 61D3E10002A;
- Tue, 21 Apr 2020 17:11:53 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 57E902BE249;
- Tue, 21 Apr 2020 17:11:53 +0200 (CEST)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 21 Apr 2020 17:11:52 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 21 Apr 2020 17:11:28 +0200
-Message-ID: <20200421171123.9.I6fbccaae99254e6b1baf41a29257b5927df5f3f8@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200421151128.18072-1-patrick.delaunay@st.com>
-References: <20200421151128.18072-1-patrick.delaunay@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9B00B10002A;
+ Tue, 21 Apr 2020 18:05:43 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8E75221E669;
+ Tue, 21 Apr 2020 18:05:43 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 21 Apr
+ 2020 18:05:43 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Tue, 21 Apr 2020 18:05:43 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Wolfgang Denk <wd@denx.de>
+Thread-Topic: [PATCH 06/16] arm: stm32mp: spl: display error in board_init_f
+Thread-Index: AQHWB3Ygtp+ajZQQTEW4+qouBTH5mahkAWWAgB/WMGA=
+Date: Tue, 21 Apr 2020 16:05:43 +0000
+Message-ID: <8970fb86c1374d1999ff656c2a3272da@SFHDAG6NODE3.st.com>
+References: <20200331180330.1.Ied6708bad5048382a57618f95d67c549aae49f42@changeid>
+ <20200331180330.6.I41a641a07fd12da45b392920fc3407e608926396@changeid>
+ <20200401113019.73B6724003E@gemini.denx.de>
+In-Reply-To: <20200401113019.73B6724003E@gemini.denx.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.44]
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
- (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-21_05:2020-04-20,
+ definitions=2020-04-21_06:2020-04-20,
  2020-04-21 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+Cc: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 9/9] ARM: dts: stm32mp1: use OPP information
-	for PLL1 settings in SPL
+ Patrice CHOTARD <patrice.chotard@st.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH 06/16] arm: stm32mp: spl: display error in
+	board_init_f
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,82 +84,109 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This patch allows to switch the CPU frequency to 800MHz on the
-ST Microelectronics board (DK1/DK2 and EV1) when it supported by the HW
-(for STM32MP15xD and STM32MP15xF).
+Dear Wolfgang,
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+> From: Wolfgang Denk <wd@denx.de>
+> Sent: mercredi 1 avril 2020 13:30
+> 
+> Dear Patrick Delaunay,
+> 
+> In message
+> <20200331180330.6.I41a641a07fd12da45b392920fc3407e608926396@changeid>
+> you wrote:
+> > Update board_init_f and try to display error message when console is
+> > available.
+> >
+> > This patch adds trace to debug a spl boot issue when DEBUG and
+> > DEBUG_UART is not activated, after uart probe.
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
+> >
+> >  arch/arm/mach-stm32mp/spl.c | 33 ++++++++++++++++-----------------
+> >  1 file changed, 16 insertions(+), 17 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-stm32mp/spl.c b/arch/arm/mach-stm32mp/spl.c
+> > index ca4231cd0d..dfdb5bb7e9 100644
+> > --- a/arch/arm/mach-stm32mp/spl.c
+> > +++ b/arch/arm/mach-stm32mp/spl.c
+> > @@ -79,37 +79,36 @@ void spl_display_print(void)  void
+> > board_init_f(ulong dummy)  {
+> >  	struct udevice *dev;
+> > -	int ret;
+> > +	int ret, clk, reset, pinctrl;
+> >
+> >  	arch_cpu_init();
+> >
+> >  	ret = spl_early_init();
+> >  	if (ret) {
+> > -		debug("spl_early_init() failed: %d\n", ret);
+> > +		debug("%s: spl_early_init() failed: %d\n", __func__, ret);
+> >  		hang();
+> >  	}
+> >
+> > -	ret = uclass_get_device(UCLASS_CLK, 0, &dev);
+> > -	if (ret) {
+> > -		debug("Clock init failed: %d\n", ret);
+> > -		return;
+> > -	}
+> > +	clk = uclass_get_device(UCLASS_CLK, 0, &dev);
+> > +	if (clk)
+> > +		debug("%s: Clock init failed: %d\n", __func__, clk);
+> >
+> > -	ret = uclass_get_device(UCLASS_RESET, 0, &dev);
+> > -	if (ret) {
+> > -		debug("Reset init failed: %d\n", ret);
+> > -		return;
+> > -	}
+> > +	reset = uclass_get_device(UCLASS_RESET, 0, &dev);
+> > +	if (reset)
+> > +		debug("%s: Reset init failed: %d\n", __func__, reset);
+> >
+> > -	ret = uclass_get_device(UCLASS_PINCTRL, 0, &dev);
+> > -	if (ret) {
+> > -		debug("%s: Cannot find pinctrl device\n", __func__);
+> > -		return;
+> > -	}
+> > +	pinctrl = uclass_get_device(UCLASS_PINCTRL, 0, &dev);
+> > +	if (pinctrl)
+> > +		debug("%s: Cannot find pinctrl device: %d\n",
+> > +		      __func__, pinctrl);
+> >
+> >  	/* enable console uart printing */
+> >  	preloader_console_init();
+> >
+> > +	if (clk || reset || pinctrl)
+> > +		printf("%s: probe failed clk=%d reset=%d pinctrl=%d\n",
+> > +		       __func__, clk, reset, pinctrl);
+> > +
+> 
+> This change makes little sense to me/  If you want error messages, then just turn
+> above debug() into printf(), and be done with it.
+> As an additional benefit so see at once which step failed.
 
- arch/arm/dts/stm32mp15-u-boot.dtsi       | 10 ++++++++++
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi |  9 ---------
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi |  9 ---------
- 3 files changed, 10 insertions(+), 18 deletions(-)
+In this patch, I try to display error as soon as console is available
+(after preloader_console_init) , if after one driver initialization
+(clk, reset, pincontrol) failing.
 
-diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
-index e0b1223de8..497c1a01ec 100644
---- a/arch/arm/dts/stm32mp15-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
-@@ -63,6 +63,16 @@
- 	u-boot,dm-pre-reloc;
- };
+Change debug to printf only works only if CONFIG_DEBUG_UART 
+is activated (not by default) and board_debug_uart_init() exist to configure
+the needed UART TX pins.
+
+At least I need to remove the return and change them to hang() to interrupt SPL
+execution if one probe failed to detect issue
+
+I spent some time for this kind of issue: clock probe failed without any trace.
  
-+&cpu0_opp_table {
-+	u-boot,dm-spl;
-+	opp-650000000 {
-+		u-boot,dm-spl;
-+	};
-+	opp-800000000 {
-+		u-boot,dm-spl;
-+	};
-+};
-+
- &gpioa {
- 	u-boot,dm-pre-reloc;
- };
-diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-index 5844d41c53..97d5ea43c3 100644
---- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-@@ -122,15 +122,6 @@
- 		CLK_LPTIM45_LSE
- 	>;
- 
--	/* VCO = 1300.0 MHz => P = 650 (CPU) */
--	pll1: st,pll@0 {
--		compatible = "st,stm32mp1-pll";
--		reg = <0>;
--		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
--		frac = < 0x800 >;
--		u-boot,dm-pre-reloc;
--	};
--
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
- 		compatible = "st,stm32mp1-pll";
-diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-index ed2f024be9..9f9aa4ac65 100644
---- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-@@ -119,15 +119,6 @@
- 		CLK_LPTIM45_LSE
- 	>;
- 
--	/* VCO = 1300.0 MHz => P = 650 (CPU) */
--	pll1: st,pll@0 {
--		compatible = "st,stm32mp1-pll";
--		reg = <0>;
--		cfg = < 2 80 0 0 0 PQR(1,0,0) >;
--		frac = < 0x800 >;
--		u-boot,dm-pre-reloc;
--	};
--
- 	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
- 	pll2: st,pll@1 {
- 		compatible = "st,stm32mp1-pll";
--- 
-2.17.1
 
+> Best regards,
+> 
+> Wolfgang Denk
+> 
+> --
+
+Regards
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

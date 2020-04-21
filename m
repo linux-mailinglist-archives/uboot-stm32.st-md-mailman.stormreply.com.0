@@ -2,93 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EF831B2519
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 13:31:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7594C1B25E9
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 14:25:41 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 324B1C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 11:31:38 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on2073.outbound.protection.outlook.com [40.107.20.73])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C32FC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Apr 2020 12:25:41 +0000 (UTC)
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+ [209.85.222.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6BFD5C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D2517C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Apr 2020 10:35:41 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fEyQV71ErJdnQgApYFr6CeJ+teW0a7M6h1fuNL3cEVpieRJWONRhaqHBHwsTRNG4f1HUT/clopNJJ8qXDfah4qRS3Fvs2DwZyzy13yPcwn7ZYxA3ieNGIvRMVZxHwLjSS2YRzR9awqDbV3Uy6KH/dtoANnxs9uKjbxUoP4GM5LSyn/wAqo9MTlRC3uWotfEO6U8tvvJLHvrXNKSZiJ8MxG5P+a8LYcZgbfJrXDTu/aE4qHqfyloWtEIRFLaBVnqLtMBksPZrZ3shBJCrM0vUntVfFY5HaG5HsEcmT0xjeTjzZDEziqYeoVt83vBz+kF3cCVNq76KFe4rK/75xHg+Iw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DOBvbVDUQGplw8zaj1+KllnE9G6onpvIfdeHbzcnSWA=;
- b=RccMSM/sL3ntjjTMMSkLCeNK1xRis2XIvbnSJuYqZr0AbjDi6CQLNG8VxoVoG+2FUSbDpeBz2gXCa0WnsCt2dLcIpNhYDQ5N92vbjbhzcgDLmAD4w0MhHbUzIasAnlUaWlWiyuOY985Vske5gbVvkkmqhI8K8ViJOAKO4P1r7Laiot2ve+jsKmY7Hfs123UaiKX4iKtIO43eQ/1zFUcRNwGhg38kuvdEBTQvrnWGML/I5y9h3n0i31gx/BV1PBo+yFMk1L/qgcCblTzG8YDZ0wYgTiREsumblI1I0Um+G21UjE2ogd/kJ7m5IXB19gIfI0nkCYGcg3ECmyYw8j9ZQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DOBvbVDUQGplw8zaj1+KllnE9G6onpvIfdeHbzcnSWA=;
- b=KDXQ3E7vwwlUlDwCMOrkmkd3BuIyaV5KuvlUc1oIpJ1AQzYFmpd8UOE7TKEc9JQA4obLGSaRhK27/aHZXLk/WMmjZtLFB5GSI8/+O0m3W/Zbg6I6BZRa7Nc/kL+CHNEz+EVfee5Q7RDMV2ca/3kRdt4qJ/lLYYStvNLax6RS80s=
-Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com (2603:10a6:4:a1::14)
- by DB6PR0402MB2727.eurprd04.prod.outlook.com (2603:10a6:4:98::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2921.29; Tue, 21 Apr
- 2020 10:35:40 +0000
-Received: from DB6PR0402MB2760.eurprd04.prod.outlook.com
- ([fe80::d17b:d767:19c3:b871]) by DB6PR0402MB2760.eurprd04.prod.outlook.com
- ([fe80::d17b:d767:19c3:b871%6]) with mapi id 15.20.2921.027; Tue, 21 Apr 2020
- 10:35:40 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Patrice CHOTARD <patrice.chotard@st.com>, Patrick DELAUNAY
- <patrick.delaunay@st.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Tom
- Rini <trini@konsulko.com>
-Thread-Topic: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
- mmc_get_env_dev with OF_CONTROL
-Thread-Index: AQHV/dUzj2gIXrs6OEqTw7j0uG34GKiDg1iAgAAQpfA=
-Date: Tue, 21 Apr 2020 10:35:40 +0000
-Message-ID: <DB6PR0402MB2760B504CC3F094DA95AC8E088D50@DB6PR0402MB2760.eurprd04.prod.outlook.com>
-References: <20200319105917.1.Ib0b23085d678421d429580e13560b4dad27c9378@changeid>
- <d73f5820-92a8-b182-fca3-f8ca2fe49a01@st.com>
-In-Reply-To: <d73f5820-92a8-b182-fca3-f8ca2fe49a01@st.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=peng.fan@nxp.com; 
-x-originating-ip: [119.31.174.68]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: e68b932a-3052-40ab-a14b-08d7e5dfbcfe
-x-ms-traffictypediagnostic: DB6PR0402MB2727:
-x-microsoft-antispam-prvs: <DB6PR0402MB2727E7208A6CE9A6666DAFDD88D50@DB6PR0402MB2727.eurprd04.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:7691;
-x-forefront-prvs: 038002787A
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB6PR0402MB2760.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(10009020)(4636009)(39860400002)(346002)(376002)(136003)(366004)(396003)(66556008)(26005)(81156014)(9686003)(66446008)(64756008)(76116006)(7696005)(66946007)(8936002)(4326008)(186003)(8676002)(71200400001)(52536014)(44832011)(110136005)(33656002)(478600001)(86362001)(5660300002)(66476007)(2906002)(6506007)(53546011)(55016002)(316002)(54906003);
- DIR:OUT; SFP:1101; 
-received-spf: None (protection.outlook.com: nxp.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 7oQ7M0rm+bnKUe1exhszkzjzBy+biQ3Z6kDSObkYFHDPIFA8vm/gkOYcSrKuWxpbk5LkSBO89yVhrhbNFNw0RClBK1gSkG8ZAJkjnSKuouyemfS1Ahm5pACb84UINTRvqCaGHg6AoVL8g1xink2tHXbmAhe02gU1+Fts397fqaEurV2Oqtynwk7VmiDbfW488FipzSWH1PfgdPt2d2wm2XXmLH+KutzfCZSI2Cq8wOSRFhXTz2vKn0KpZZy7qOQRR0WdVMVSEIjrE6yjefnaaYID63wj8D5iDLzgU3NqGQLPq0747gC1p5he4zc5fwQryjks4eAojnswD4WcpWLJUiVindItQ7R9N1EINs71Ff0jPOlea8jBvNSXmq+z4EQFvjg9hhqhAZMU+wz675tbY4/SUsXKzcCvAPKJIQ33cmU7loGqEkGyLJscilCwu12i
-x-ms-exchange-antispam-messagedata: mumVR9uOKdPSM2ny2g08yiQL6GmltZcDNbgWKrP0cANOyZVCBp4AfO7+JH5wZOFLjRRvZonbHLCUZ9SGn5B1ygvBEQMItC8eqb873aQodNfIG2xvYMvxXkQCcoeRrbGi4kW4xYG5jFv65UGS2HQYcQ==
-x-ms-exchange-transport-forked: True
+ Tue, 21 Apr 2020 12:25:39 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id m67so14142661qke.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 21 Apr 2020 05:25:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=wnEITQ3dyR6dgsV01R8WMIkcFCXATVkQZ6rbR7XdVCY=;
+ b=bSJznaYxmvShX3I3+NoqD2Nokf8yuIamAvGU8lnkWIIUyZ+hG00AThi9kVIfre25Jl
+ zvkAksyxOYvtJcpBH45sVkJlZlF/zfgU9Fx6bs3TMw4pPtDiREik3hJQd/HxlgJZB+Kw
+ NcCIXXp+hqDb3agz5xLp5cVRy/0I3Kw7UnSkE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=wnEITQ3dyR6dgsV01R8WMIkcFCXATVkQZ6rbR7XdVCY=;
+ b=M8UJaTpZkQkkFNzEXsyqP/11IK2HCfB1b2If1+QnNiRiZk6AvlJEuyJTrbM7erxhBB
+ YzMOl8PO4uJNVJqhcw8H2Xg+Sl85q9b+zsVSocHChmoxYdt4hogCCeK3t3E8efEUk4LT
+ DZeyaBpGWZbmbNW1Lfw0J9qdvgA4EpjweaQQYd5Iev+11VRNNNx9xGGiKMq+TSfDqnnl
+ rcU92bbUDX8iRRXW3JJilM6dFrTCNLdJ0AlzGylN7K27DXidcS60MSIhrg5h3DjNgMX5
+ v2/iZR58qnnisCdK/VaZgkgJRkx0aePwcD6Z/m844NhQSba/roJHgnncmKcQsU0FqJ5Z
+ apCQ==
+X-Gm-Message-State: AGi0PuaDZ8cNgIlHXoCjg/fhjYV8M0iZV5jB3cvizPDvv8ZJDWjbYIyj
+ vaYLMoo9UxCWlwFXQfi0TY36zg==
+X-Google-Smtp-Source: APiQypIci9+SeMr7uIcYgRgb1mTCsr79ipovrpWct1b6cbCza92F67O1HEIhXAdNxebvW9Jz8V1G8A==
+X-Received: by 2002:ae9:ef93:: with SMTP id
+ d141mr21268328qkg.311.1587471938543; 
+ Tue, 21 Apr 2020 05:25:38 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-826f-3d58-7014-cb56-b1a9.inf6.spectrum.com.
+ [2606:a000:1401:826f:3d58:7014:cb56:b1a9])
+ by smtp.gmail.com with ESMTPSA id x43sm1628652qtj.65.2020.04.21.05.25.37
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 21 Apr 2020 05:25:37 -0700 (PDT)
+Date: Tue, 21 Apr 2020 08:25:35 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20200421122535.GR4555@bill-the-cat>
+References: <20200213182950.10744-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e68b932a-3052-40ab-a14b-08d7e5dfbcfe
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Apr 2020 10:35:40.6146 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ThhqSDYxqCrRKmV/qV+DnV9KvElzBH4fth+Ym+rCfADh0iYAPdt/eeAGFd8PMSH7yrDGpcNfiO/gRK9ujNIiUQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0402MB2727
-X-Mailman-Approved-At: Tue, 21 Apr 2020 11:31:37 +0000
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Wolfgang Denk <wd@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
- mmc_get_env_dev with OF_CONTROL
+In-Reply-To: <20200213182950.10744-1-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Joe Hershberger <joe.hershberger@ni.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Keerthy <j-keerthy@ti.com>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@st.com>, u-boot@lists.denx.de,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: bootm: take into account gd->ram_top
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,88 +72,67 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3227549457905194830=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-> Subject: Re: [Uboot-stm32] [PATCH 1/3] env: mmc: allow support of
-> mmc_get_env_dev with OF_CONTROL
-> 
-> Hi Tom
-> 
-> I just noticed that this env series is delegated to Peng Fan (mmc maintainer)
-> instead of Joe Hershberger (env maintainer).
-> 
-> Is there any reason for this or perhaps is it just an error ?
 
-Ah, I not notice the delegation issue. if you are concerned about this. 
-I'll leave this to Joe and drop the patchset from my CI.
+--===============3227549457905194830==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="NV8Q+b3U03j8aVmL"
+Content-Disposition: inline
 
-Thanks,
-Peng.
 
-> 
-> Thanks
-> 
-> Patrice
-> 
-> On 3/19/20 10:59 AM, Patrick Delaunay wrote:
-> > Use the weak function mmc_get_env_dev in mmc_offset_try_partition
-> > function to allow dynamic selection of mmc device to use and no more
-> > use directly the define CONFIG_SYS_MMC_ENV_DEV.
-> >
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > ---
-> >
-> >  env/mmc.c | 18 ++++++++++++------
-> >  1 file changed, 12 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/env/mmc.c b/env/mmc.c
-> > index 251ad07d7c..902cca23ad 100644
-> > --- a/env/mmc.c
-> > +++ b/env/mmc.c
-> > @@ -24,14 +24,25 @@
-> >
-> >  DECLARE_GLOBAL_DATA_PTR;
-> >
-> > +#if !defined(CONFIG_SYS_MMC_ENV_DEV)
-> > +#define CONFIG_SYS_MMC_ENV_DEV 0
-> > +#endif
-> > +
-> > +__weak int mmc_get_env_dev(void)
-> > +{
-> > +	return CONFIG_SYS_MMC_ENV_DEV;
-> > +}
-> > +
-> >  #if CONFIG_IS_ENABLED(OF_CONTROL)
-> >  static inline int mmc_offset_try_partition(const char *str, s64 *val)
-> > {
-> >  	disk_partition_t info;
-> >  	struct blk_desc *desc;
-> >  	int len, i, ret;
-> > +	char dev_str[4];
-> >
-> > -	ret = blk_get_device_by_str("mmc", STR(CONFIG_SYS_MMC_ENV_DEV),
-> &desc);
-> > +	snprintf(dev_str, sizeof(dev_str), "%d", mmc_get_env_dev());
-> > +	ret = blk_get_device_by_str("mmc", dev_str, &desc);
-> >  	if (ret < 0)
-> >  		return (ret);
-> >
-> > @@ -114,11 +125,6 @@ __weak int mmc_get_env_addr(struct mmc
-> *mmc, int copy, u32 *env_addr)
-> >  	return 0;
-> >  }
-> >
-> > -__weak int mmc_get_env_dev(void)
-> > -{
-> > -	return CONFIG_SYS_MMC_ENV_DEV;
-> > -}
-> > -
-> >  #ifdef CONFIG_SYS_MMC_ENV_PART
-> >  __weak uint mmc_get_env_part(struct mmc *mmc){
+--NV8Q+b3U03j8aVmL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 13, 2020 at 07:29:50PM +0100, Patrick Delaunay wrote:
+
+> From: Patrice Chotard <patrice.chotard@st.com>
+>=20
+> If gd->ram_top has been tuned using board_get_usable_ram_top(),
+> it must be taken into account when reserving arch lmb.
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--NV8Q+b3U03j8aVmL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6e5j8ACgkQFHw5/5Y0
+tyxRvQv/T05BMfuJ/evUWHQHPNdSMuGm7eFAT3zpwHXwY4cDu+CsZTppNYRFB1JY
+IAFpOw+IS7cJJKfE6iWBSEz8oNati44cyOmWcTyAa6+QIZNbkqlp+iTAs9qIdBmM
+YT4Wd84wX7DEgl2n1t0ztiV7QNnniIAudlclUDbVqIV7FYKccxW+Ov23MJpGtW3q
+Fbu2l8De3kPz1DGmZRlYNBVQRH/ujaWu9evK43QetDlQZ/RIDJDhNQR/mVodlOWL
+1GIYvRCOUIPjt7+TvNgZ6Z7tN9aO8bc2/MTAEQkvv5caNvgcsq5AKYSYTFqmnCXR
+rkc+hwDad9zu6TigdkJy4qzSGtegKDTjtpy5TDeiv139oxdEPH5uCYxW7/vovh++
+a1BxOSOfSVy5xV+ZfqmAYW+1tTXb0Msxr2kCJdRyHBEJOZDT+gNHYnfhI9xfql2I
+VgLjh9AP/MZnM9ylO2v/lJzQMX44T+xAem/nSVrH7Uq+5io+IDilFspjIELB6Own
+Pr+Y3dYV
+=CpvS
+-----END PGP SIGNATURE-----
+
+--NV8Q+b3U03j8aVmL--
+
+--===============3227549457905194830==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3227549457905194830==--

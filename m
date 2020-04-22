@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C85BB1B4A95
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 18:33:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B7631B4BCA
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 19:29:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BC5CC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 16:33:05 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E5A43C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 17:29:23 +0000 (UTC)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D886C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1A85AC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 16:33:03 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id z17so2549031oto.4
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 09:33:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=l4TRRhIWGRwGl0wQWTfzbgckqtJvX80Z8sLUaY6AEOk=;
- b=gh2amTb9cJ6S+KGJzlChEla9UWaXOX+wN5N9GyBnIZmA9auZQY5cIQ7NLStHAWJcRJ
- PaBsCvp2KATUa0oGhc6uyfty8yyT8Pi443FxlNpJkTn0EZ98gJmd4TxJz+iV80ykjlwu
- bKH6CBab0NbHUPoZxi8zP1Hi46qsjHz7WkuB8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=l4TRRhIWGRwGl0wQWTfzbgckqtJvX80Z8sLUaY6AEOk=;
- b=eI29chTebNYzW1t+1RdYPslKPyII+RaXtNZwr3ajUYbg9imods4V1aHyJ2k52euzGW
- qLCvDNSrlEu2A8t8x11alpz+ncZJ6BtgQK7CepXf7kuYw8wb0lT3wZ/ZsV0LkUZijZtK
- MpFWwPIBPGb/XyhMczhcE7PzW/usrQUAjgmpkcNvxQWbaosn3BzzyTMayRuCpFT+uGGq
- GnjTySQB6IqrFA5ascsDo6PVfonrNmtQHej0zZFqw9VypW5w4+NZVTU9+113BWH6+jJ/
- nHqTpWyEByaUVLkUb4n1EDwcfi59i8vJR9QWzOF8uDgrdDzV/pHvnz4hPMmKhH1LGaux
- ybSQ==
-X-Gm-Message-State: AGi0PubW9LCreLvRF9QpkDwhLWDqIyIMxBmJ+9qQeFf4rWlwBcFAZKO1
- 8EqcnJA4io4LsNJPyewcV304YWbxmppX2YbmlsiBmg==
-X-Google-Smtp-Source: APiQypLfT5TYPQkfXSOnqKIsPG2h/NCohhbOOt/ITEjdT6JDCUeRmXuyKqLoFBxo3s6QwMLMSZP91gkjTLiC3krbssw=
-X-Received: by 2002:a9d:490d:: with SMTP id e13mr18228869otf.356.1587573181657; 
- Wed, 22 Apr 2020 09:33:01 -0700 (PDT)
+ Wed, 22 Apr 2020 17:29:21 +0000 (UTC)
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 03MHTHmG029024;
+ Wed, 22 Apr 2020 12:29:17 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1587576557;
+ bh=080CjEDd9Re8/3YJQcMfq/qHfbpMoUOSq9v323yA4rk=;
+ h=Subject:To:CC:References:From:Date:In-Reply-To;
+ b=Oq+pmjF9bmB8UF/QNVHd/yBPpCpKfVaYEtUSOvN9jPHiDzuPnwvKkyhd0qT5EFIPY
+ Kjis34vARaPGcFBBToW1x1ybMNzRlKH8bBgCFlk172A7+mh4y394/1ya9bIoP8h2RX
+ N2gcRt9qa5uFc0GNfY+5djo6jz6FJBlEGpo+G4Iw=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 03MHTHOk050349
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 22 Apr 2020 12:29:17 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 22
+ Apr 2020 12:29:16 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Wed, 22 Apr 2020 12:29:16 -0500
+Received: from [10.24.69.20] (ileax41-snat.itg.ti.com [10.172.224.153])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 03MHTBc9039740;
+ Wed, 22 Apr 2020 12:29:15 -0500
+To: Tom Rini <trini@konsulko.com>, Patrick Delaunay <patrick.delaunay@st.com>
+References: <20200113103515.20879-1-patrick.delaunay@st.com>
+ <20200113103515.20879-2-patrick.delaunay@st.com>
+ <20200417210548.GH4555@bill-the-cat> <20200422162743.GA4555@bill-the-cat>
+From: Lokesh Vutla <lokeshvutla@ti.com>
+Message-ID: <a74c5e63-e2ce-fdb4-6e77-d5499333d8be@ti.com>
+Date: Wed, 22 Apr 2020 22:59:11 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-References: <20200421140840.25729-1-patrice.chotard@st.com>
- <20200421140840.25729-3-patrice.chotard@st.com>
- <CAPnjgZ2h+xuUshDeUCtGQu81oHJ+poproR1B4oXiuS=yFzA-Yw@mail.gmail.com>
- <7f7534e9-5351-c6de-8784-a62d284d6d0b@st.com>
-In-Reply-To: <7f7534e9-5351-c6de-8784-a62d284d6d0b@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 22 Apr 2020 10:32:50 -0600
-Message-ID: <CAPnjgZ1=DVA_g2Os4Ur2Z4hiJTq7ULBw=x0C-d4GBvnuAyOH2Q@mail.gmail.com>
-To: Patrice CHOTARD <patrice.chotard@st.com>
+In-Reply-To: <20200422162743.GA4555@bill-the-cat>
+Content-Language: en-US
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v1 2/2] cmd: bind: allow to bind driver
-	with driver data
+ u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH v3 01/21] dm: pinctrl: convert
+	pinctrl-single to livetree
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,87 +71,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrice,
 
-On Wed, 22 Apr 2020 at 02:13, Patrice CHOTARD <patrice.chotard@st.com> wrote:
->
->
-> On 4/21/20 7:36 PM, Simon Glass wrote:
-> > Hi Patrice,
-> >
-> > On Tue, 21 Apr 2020 at 08:09, Patrice Chotard <patrice.chotard@st.com> wrote:
-> >> Initial implementation invokes device_bind_with_driver_data()
-> >> with driver_data parameter equal to 0.
-> >> For driver with driver data, the bind command can't bind
-> >> correctly this driver or even worse causes data abort.
-> >>
-> >> Add find_udevice_id() to parse the driver's of_match list
-> >> and return the entry corresponding to the driver compatible string.
-> >> This allows to get access to driver_data and to use it as
-> >> parameters of device_bind_with_driver_data().
-> >>
-> >> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> >> Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
-> >>
-> >> ---
-> >>
-> >>  cmd/bind.c | 29 ++++++++++++++++++++++++++++-
-> >>  1 file changed, 28 insertions(+), 1 deletion(-)
-> >>
-> > The thing I don't quite get here is why the driver name needs to be
-> > specified. If the device tree node is present, and it has a compatible
->
-> Sorry, i didn't get your point when you said "why the driver name needs to be specified"
 
-It's just that I don't understand it at all. If the compatible string
-is available, why not use lists_bind_fdt()?
+On 22/04/20 9:57 PM, Tom Rini wrote:
+> On Fri, Apr 17, 2020 at 05:05:48PM -0400, Tom Rini wrote:
+>> On Mon, Jan 13, 2020 at 11:34:55AM +0100, Patrick Delaunay wrote:
+>>
+>>> Convert 'pinctrl-single' using livetree functions
+>>> - dev_read_prop
+>>> - dev_read_u32_default
+>>> - dev_read_u32_array
+>>> - dev_read_bool
+>>> - dev_read_addr
+>>> and get rid of DECLARE_GLOBAL_DATA_PTR.
+>>>
+>>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+>>
+>> Applied to u-boot/master, thanks!
+> 
+> Now that I've setup my AM65x board, this commit is breaking boot there
+> and I don't have any idea why.  I don't get any sort of output on either
+> core (this platform takes am65x_evm_r5 for the SPL and am65x_evm_a53 for
+> the main core).
+> 
 
->
-> Which part of this patch do you made reference to ?
+Ahh thanks for the pointer Tom. I have been struggling since yesterday as why my
+board is not booting with latest master. Looks like this patch is passing the
+wrong device pointer for searching pinctrl-single-pins. Just posted a patch
+fixing it[0]. Please have a look and merge it asap.
 
-The whole thing, because I just don't understand the bind command.
+[0]
+https://patchwork.ozlabs.org/project/uboot/patch/20200422172531.29649-1-lokeshvutla@ti.com/
 
->
-> > string, can't DM find the driver and bind a device automatically?
-> >
-> > Also, is there any docs for this command? It would be good to add to
->
-> Is what in cmd/bind.c not enough ?
+Thanks and regards,
+Lokesh
 
-I am just confused here. You obviously have a use case in mind, but
-the help below is not sufficient to understand what is going on. As I
-said, if you have a device-tree node you can find the driver. I am
-just not sure what this is for.
-
-It could really use a short document as I said, to explain the uses of
-this command and what it does in a bit more detail.
-
->
->
-> U_BOOT_CMD(
->     bind,    4,    0,    do_bind_unbind,
->     "Bind a device to a driver",
->     "<node path> <driver>\n"
->     "bind <class> <index> <driver>\n"
-> );
->
-> U_BOOT_CMD(
->     unbind,    4,    0,    do_bind_unbind,
->     "Unbind a device from a driver",
->     "<node path>\n"
->     "unbind <class> <index>\n"
->     "unbind <class> <index> <driver>\n"
-> );
->
->
-> > doc/driver-model and also add a simple test.
->
-> Ok i will add an additionnal test to test/py/tests/test_bind.py
-
-OK thanks.
-
-Regards,
-SImon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

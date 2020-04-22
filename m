@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E376E1B4523
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 14:29:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF79B1B4525
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 14:29:34 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8741C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 12:29:33 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B5890C36B10
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 12:29:34 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22B35C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7E134C36B0F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 12:29:28 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Wed, 22 Apr 2020 12:29:29 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03MCCNqn015755; Wed, 22 Apr 2020 14:29:27 +0200
+ 03MCCE3J031096; Wed, 22 Apr 2020 14:29:28 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=AVl/QyxMd8oC1wGX0Mr2WX/Jzu6VS1pJjGcLIvl/jwc=;
- b=meaSWMxizbp2Bp6LK82mZ0NRkRB5/49YEx/JBadJEQKsPFhwlbQHneCKSRk7qYvwewzv
- roWQzjxcXn7OIDTbtLF7pa1oRCXmwHzqY0l2fo/3m5ymvhNTYxKByBz3krZYAOc2tRaq
- wh0X8ng7pL8ZQB//tDmEfacP4P1GeGRu4pbPwT0UxLG0otIhBlnRPbDxdfUkEixvYKgV
- Q7N7tpqLdaf1ITZh00xOWdF1UzFbM2FXAt9xz4+4guw6WSO/YV9AeHJ6+nG5F4KuRuSd
- LfGCMLJuZyEK55J45SlaXJAeP6M9dkV9XE/0GwQ4/A24KeaX83ueVgzborBKf3xK3eDC 1Q== 
+ bh=ym+GbwxbBMEXw+1KEn0gVZZK1saVoF6jWFYh3lPxzKc=;
+ b=SltnKJTwqgm3HE8YSxYXb2Ufe3jRcvEDH3tKinEiv0W1MRwCp/4R2priMWtUFp7nTzPR
+ 5RXoE0U7YVqrCFxwCe8SKb+qU2BIbIZRoUnptvT6HhVxvjyVZL5uQOpQCcQjrp4mVbLc
+ voTE5fhGjbsFLISmsYbJEh+7LcF4fCeDi8oN9rIPlaNuyYRy2mybmbJD8pQyCGMOZTek
+ hbqsV9g9kx7+Tkr/moixG7TMUAHhyTVxW8DtyYcaK/3oCVKcHFHrpFsHdzVX+s1BUy5M
+ ksQlSRSr4au88ND/5kOZenkmNsrz9/Lp2Vu8co6MsjO+uVdH8q0fduptwC/THbwUdV1p Ow== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fregpatx-1
+ by mx07-00178001.pphosted.com with ESMTP id 30fpp8xpxa-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 22 Apr 2020 14:29:27 +0200
+ Wed, 22 Apr 2020 14:29:28 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D2F1100034;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EF157100038;
  Wed, 22 Apr 2020 14:29:27 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 340FE2AE6C5;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E6F292AE6C5;
  Wed, 22 Apr 2020 14:29:27 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 22 Apr 2020 14:29:26 +0200
+ Wed, 22 Apr 2020 14:29:27 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 22 Apr 2020 14:29:15 +0200
-Message-ID: <20200422142834.v2.7.Ic051e25812481db408f2431c7962da1db1f198fb@changeid>
+Date: Wed, 22 Apr 2020 14:29:16 +0200
+Message-ID: <20200422142834.v2.8.Ia5fd6d6f4787d69ef9b4b5cebb334e5f2dc81ed3@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200422122920.19340-1-patrick.delaunay@st.com>
 References: <20200422122920.19340-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG6NODE3.st.com (10.75.127.18) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-22_03:2020-04-22,
  2020-04-22 signatures=0
 Cc: Marek Vasut <marex@denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Wolfgang Denk <wd@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v2 07/12] board: stm32mp1: remove bootdelay
-	configuration for usb or serial boot
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH v2 08/12] board: stm32mp1: add timeout for I/O
+	compensation ready
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,45 +75,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-It is not allowed to change the user setting of bootdelay, so
-remove the check of the boot-source to disable it dynamically
-in board_late_init()
-
+This patch avoids infinite loop when I/O compensation failed,
+it adds a 1s timeout to detect error.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 ---
 
-Changes in v2:
-- remove bootdelay configuration after Wolfgang's comment on dropped patch
-  [11/16] board: stm32mp1: check env_get result in board_late_init
+Changes in v2: None
 
- board/st/stm32mp1/stm32mp1.c | 6 ------
- 1 file changed, 6 deletions(-)
+ board/st/stm32mp1/stm32mp1.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
 diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 280c5b7ae4..687d605e29 100644
+index 687d605e29..a7160e1334 100644
 --- a/board/st/stm32mp1/stm32mp1.c
 +++ b/board/st/stm32mp1/stm32mp1.c
-@@ -692,7 +692,6 @@ int board_init(void)
+@@ -35,6 +35,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <jffs2/load_kernel.h>
+ #include <linux/err.h>
++#include <linux/iopoll.h>
+ #include <power/regulator.h>
+ #include <usb/dwc2_udc.h>
  
- int board_late_init(void)
- {
--	char *boot_device;
- #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
- 	const void *fdt_compat;
- 	int fdt_compat_len;
-@@ -740,11 +739,6 @@ int board_late_init(void)
- 	board_check_usb_power();
- #endif /* CONFIG_ADC */
+@@ -468,10 +469,10 @@ static void sysconf_init(void)
+ 	struct udevice *pwr_dev;
+ 	struct udevice *pwr_reg;
+ 	struct udevice *dev;
+-	int ret;
+ 	u32 otp = 0;
+ #endif
+-	u32 bootr;
++	int ret;
++	u32 bootr, val;
  
--	/* Check the boot-source to disable bootdelay */
--	boot_device = env_get("boot_device");
--	if (!strcmp(boot_device, "serial") || !strcmp(boot_device, "usb"))
--		env_set("bootdelay", "0");
--
- 	return 0;
+ 	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
+ 
+@@ -548,8 +549,15 @@ static void sysconf_init(void)
+ 	 */
+ 	writel(SYSCFG_CMPENSETR_MPU_EN, syscfg + SYSCFG_CMPENSETR);
+ 
+-	while (!(readl(syscfg + SYSCFG_CMPCR) & SYSCFG_CMPCR_READY))
+-		;
++	/* poll until ready (1s timeout) */
++	ret = readl_poll_timeout(syscfg + SYSCFG_CMPCR, val,
++				 val & SYSCFG_CMPCR_READY,
++				 1000000);
++	if (ret) {
++		pr_err("SYSCFG: I/O compensation failed, timeout.\n");
++		led_error_blink(10);
++	}
++
+ 	clrbits_le32(syscfg + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
+ #endif
  }
- 
 -- 
 2.17.1
 

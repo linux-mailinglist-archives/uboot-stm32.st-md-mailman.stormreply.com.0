@@ -2,63 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31E211B4529
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 14:29:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7342E1B4A6E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 18:27:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DB1A7C36B16
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 12:29:34 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A6BAC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 16:27:50 +0000 (UTC)
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
+ [209.85.219.67])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8C167C36B0D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E0D7CC36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 12:29:32 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03MCEBWE031946; Wed, 22 Apr 2020 14:29:31 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=kFQi/JnFxTBLy3iAAIaT3eY12VV5gWz/6b7RtG6O4oM=;
- b=dxKH7r4gPQ90u2iL50lnrV0CIY9yGjXbuhWihV8XiEXVTgtXmsa/lHndKaR67+bD2r0p
- MOBTyrHd0klVn9EKmB761KPcXl0vK5wbVX4UbVguHE8UtkzrdkgHbop2yaFrUb9ZpD+E
- vYBs1Si7LRFZtOqgQjKJex71eHBB4pRsGnGEA/k7NWiJTg6gKhZYYVjpGilyt4yL1TKx
- cGot49O4pvfbioVK4o7+40fuXSne6YXigJS+KiTm+b3A95gqyf1NujfaSOZwiCNWFW1n
- QG2OJC6mD4pjVkGXB3yi9MpaucQ4eHweFMrW8yQYWoL626keU0wIzkymri3XQN+ERYyt aA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fq11pcfb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 22 Apr 2020 14:29:31 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DACD1100034;
- Wed, 22 Apr 2020 14:29:30 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D2AB52AE6C5;
- Wed, 22 Apr 2020 14:29:30 +0200 (CEST)
-Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 22 Apr 2020 14:29:30 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 22 Apr 2020 14:29:20 +0200
-Message-ID: <20200422142834.v2.12.Ie45c9b3aed36a3a582774fa1dffcea89d2c4bcf4@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200422122920.19340-1-patrick.delaunay@st.com>
-References: <20200422122920.19340-1-patrick.delaunay@st.com>
+ Wed, 22 Apr 2020 16:27:48 +0000 (UTC)
+Received: by mail-qv1-f67.google.com with SMTP id q2so1178358qvd.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 22 Apr 2020 09:27:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=b+BBptxnrpVPWZSKdZu6Oqyxg5TguLlA3Q3OtjMtF04=;
+ b=t30eWFY6RMtzbRKB+YRmGktLtRKV8YtZ9Zt9IEhgpNjDWpJEieHET5Fk2MmF913j4r
+ q7f1iCzKhM8ZHc7tNpwXPlbXXlC2LywxT8VVC+o1fqACLfxZjlkjh1LT2n+znZ6QFzOS
+ Qmlx6KerrHrxzjgwyAKzbwe1t50xN9Jxfc9ac=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=b+BBptxnrpVPWZSKdZu6Oqyxg5TguLlA3Q3OtjMtF04=;
+ b=ou64fnGynRYAhqZQPnAvzNmuGsZd4mHpkXFY5k0aOBoH3o8n5516VUYXICXZ17bTLY
+ GXq7gtBDiMyl88CEjm5AfxSC1X2uPPDnUy/1oiz5V3t6Lf3FLXVtU1W0VccTMyNzRMEl
+ zHJ5t+NtMYi4DMhOr23F2guyujS14EFiFrx65T4bNVLJe9O+A81Mn9O90O8MNgJCA7Zh
+ /v1MEw2GtLQyhql0qXl75dyzavhrmZgAZtHT4Uzi1/qz+lZYIC5Ll4k+JlERgtyjClia
+ iNERuA5qvEoGFdBEuXb1+gsjkfJ5KwLL+syuwBTXMwIjn4g1QTFzIbeVUjAU/pxPF+8l
+ xnJw==
+X-Gm-Message-State: AGi0PuauBd0V5LIXJmMOl6zfcR5cyfQFLDLlCxh3yaVxRy6CfHUa/Xq7
+ hUMcxP4kwC6vphrFG6XTfVkSaA==
+X-Google-Smtp-Source: APiQypKwReICsVdDNJzdgdGiaBPfLp3YxXeW4+P+qTbVi45eKhdYYKkqExQtKi8e4lwXIE9B2ERB7A==
+X-Received: by 2002:a0c:ec8f:: with SMTP id u15mr26335887qvo.102.1587572866746; 
+ Wed, 22 Apr 2020 09:27:46 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-826f-5991-4655-dc91-bdaa.inf6.spectrum.com.
+ [2606:a000:1401:826f:5991:4655:dc91:bdaa])
+ by smtp.gmail.com with ESMTPSA id k33sm1288776qtd.22.2020.04.22.09.27.44
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 22 Apr 2020 09:27:45 -0700 (PDT)
+Date: Wed, 22 Apr 2020 12:27:43 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>
+Message-ID: <20200422162743.GA4555@bill-the-cat>
+References: <20200113103515.20879-1-patrick.delaunay@st.com>
+ <20200113103515.20879-2-patrick.delaunay@st.com>
+ <20200417210548.GH4555@bill-the-cat>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-22_03:2020-04-22,
- 2020-04-22 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v2 12/12] configs: stm32mp1: activate
-	CONFIG_ERRNO_STR
+In-Reply-To: <20200417210548.GH4555@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH v3 01/21] dm: pinctrl: convert
+	pinctrl-single to livetree
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,47 +73,75 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8436378405920782663=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of errno_str, used in command pmic and regulator.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
----
+--===============8436378405920782663==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="cAMdxM7kFS4+ma4H"
+Content-Disposition: inline
 
-Changes in v2: None
 
- configs/stm32mp15_basic_defconfig   | 1 +
- configs/stm32mp15_trusted_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+--cAMdxM7kFS4+ma4H
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 9a16ada428..115d12ffb5 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -141,4 +141,5 @@ CONFIG_VIDEO_STM32=y
- CONFIG_VIDEO_STM32_DSI=y
- CONFIG_VIDEO_STM32_MAX_XRES=1280
- CONFIG_VIDEO_STM32_MAX_YRES=800
-+CONFIG_ERRNO_STR=y
- CONFIG_FDT_FIXUP_PARTITIONS=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 8085d28772..d38394ed6b 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -125,4 +125,5 @@ CONFIG_VIDEO_STM32=y
- CONFIG_VIDEO_STM32_DSI=y
- CONFIG_VIDEO_STM32_MAX_XRES=1280
- CONFIG_VIDEO_STM32_MAX_YRES=800
-+CONFIG_ERRNO_STR=y
- CONFIG_FDT_FIXUP_PARTITIONS=y
--- 
-2.17.1
+On Fri, Apr 17, 2020 at 05:05:48PM -0400, Tom Rini wrote:
+> On Mon, Jan 13, 2020 at 11:34:55AM +0100, Patrick Delaunay wrote:
+>=20
+> > Convert 'pinctrl-single' using livetree functions
+> > - dev_read_prop
+> > - dev_read_u32_default
+> > - dev_read_u32_array
+> > - dev_read_bool
+> > - dev_read_addr
+> > and get rid of DECLARE_GLOBAL_DATA_PTR.
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+>=20
+> Applied to u-boot/master, thanks!
+
+Now that I've setup my AM65x board, this commit is breaking boot there
+and I don't have any idea why.  I don't get any sort of output on either
+core (this platform takes am65x_evm_r5 for the SPL and am65x_evm_a53 for
+the main core).
+
+--=20
+Tom
+
+--cAMdxM7kFS4+ma4H
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6gcHwACgkQFHw5/5Y0
+tyxulwv+J3fjdezMvGwd4pWHfAcxNom9VTO+wDwb2IHcLc4z1fhLxXjdxbcxqoum
+Nb82Szcq9D7bPOLPW7ZO4ISWsEp89WrrQ1b1XIEGvsW4mDZmceugGeeN26V7yXQ8
+rqpBR+LkMoNFZak9jAydWN6XaEcfnGqIowJ+KwyHJIwbnfX2mVrg7e4r4vzTYYDV
+Nrb1bZIO52/PGtubCIn4DWGyUiYdSoe0Hv2Z9pvoWY495LiBsQu20At64EtV/ggm
+FqV96w208hG2hgZ5tUijLXdSN72+krPClRuuCVEIe/wjhPjWkvrF2chHKz32DIGx
+TOSWXnEjxAW7wse+jOd5ls+Y6M1Bky68F8kL1pDrUXfuCGr6RCaYBBjU4I7Ud3Wj
+Tbj9ZtKkFHtQ8y6I1iDfl+erezd6kwKVB9UP48Y70byVMc+GBBya1TeRdXkXpCgU
+rg7fdOCEfhiMffQyIJwk2yDO+gwkECfA/J+rbDsigzNSS9GG4vSlZuO9pCwTqO0u
+L5V5CVK9
+=fSYT
+-----END PGP SIGNATURE-----
+
+--cAMdxM7kFS4+ma4H--
+
+--===============8436378405920782663==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============8436378405920782663==--

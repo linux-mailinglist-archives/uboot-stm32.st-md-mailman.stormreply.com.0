@@ -2,66 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7342E1B4A6E
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 18:27:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C85BB1B4A95
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 18:33:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A6BAC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 16:27:50 +0000 (UTC)
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
- [209.85.219.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BC5CC36B0A
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 16:33:05 +0000 (UTC)
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+ [209.85.210.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E0D7CC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D886C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 16:27:48 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id q2so1178358qvd.1
+ Wed, 22 Apr 2020 16:33:03 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id z17so2549031oto.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 09:27:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=b+BBptxnrpVPWZSKdZu6Oqyxg5TguLlA3Q3OtjMtF04=;
- b=t30eWFY6RMtzbRKB+YRmGktLtRKV8YtZ9Zt9IEhgpNjDWpJEieHET5Fk2MmF913j4r
- q7f1iCzKhM8ZHc7tNpwXPlbXXlC2LywxT8VVC+o1fqACLfxZjlkjh1LT2n+znZ6QFzOS
- Qmlx6KerrHrxzjgwyAKzbwe1t50xN9Jxfc9ac=
+ Wed, 22 Apr 2020 09:33:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=l4TRRhIWGRwGl0wQWTfzbgckqtJvX80Z8sLUaY6AEOk=;
+ b=gh2amTb9cJ6S+KGJzlChEla9UWaXOX+wN5N9GyBnIZmA9auZQY5cIQ7NLStHAWJcRJ
+ PaBsCvp2KATUa0oGhc6uyfty8yyT8Pi443FxlNpJkTn0EZ98gJmd4TxJz+iV80ykjlwu
+ bKH6CBab0NbHUPoZxi8zP1Hi46qsjHz7WkuB8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=b+BBptxnrpVPWZSKdZu6Oqyxg5TguLlA3Q3OtjMtF04=;
- b=ou64fnGynRYAhqZQPnAvzNmuGsZd4mHpkXFY5k0aOBoH3o8n5516VUYXICXZ17bTLY
- GXq7gtBDiMyl88CEjm5AfxSC1X2uPPDnUy/1oiz5V3t6Lf3FLXVtU1W0VccTMyNzRMEl
- zHJ5t+NtMYi4DMhOr23F2guyujS14EFiFrx65T4bNVLJe9O+A81Mn9O90O8MNgJCA7Zh
- /v1MEw2GtLQyhql0qXl75dyzavhrmZgAZtHT4Uzi1/qz+lZYIC5Ll4k+JlERgtyjClia
- iNERuA5qvEoGFdBEuXb1+gsjkfJ5KwLL+syuwBTXMwIjn4g1QTFzIbeVUjAU/pxPF+8l
- xnJw==
-X-Gm-Message-State: AGi0PuauBd0V5LIXJmMOl6zfcR5cyfQFLDLlCxh3yaVxRy6CfHUa/Xq7
- hUMcxP4kwC6vphrFG6XTfVkSaA==
-X-Google-Smtp-Source: APiQypKwReICsVdDNJzdgdGiaBPfLp3YxXeW4+P+qTbVi45eKhdYYKkqExQtKi8e4lwXIE9B2ERB7A==
-X-Received: by 2002:a0c:ec8f:: with SMTP id u15mr26335887qvo.102.1587572866746; 
- Wed, 22 Apr 2020 09:27:46 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-826f-5991-4655-dc91-bdaa.inf6.spectrum.com.
- [2606:a000:1401:826f:5991:4655:dc91:bdaa])
- by smtp.gmail.com with ESMTPSA id k33sm1288776qtd.22.2020.04.22.09.27.44
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 22 Apr 2020 09:27:45 -0700 (PDT)
-Date: Wed, 22 Apr 2020 12:27:43 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>,
- Lokesh Vutla <lokeshvutla@ti.com>
-Message-ID: <20200422162743.GA4555@bill-the-cat>
-References: <20200113103515.20879-1-patrick.delaunay@st.com>
- <20200113103515.20879-2-patrick.delaunay@st.com>
- <20200417210548.GH4555@bill-the-cat>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=l4TRRhIWGRwGl0wQWTfzbgckqtJvX80Z8sLUaY6AEOk=;
+ b=eI29chTebNYzW1t+1RdYPslKPyII+RaXtNZwr3ajUYbg9imods4V1aHyJ2k52euzGW
+ qLCvDNSrlEu2A8t8x11alpz+ncZJ6BtgQK7CepXf7kuYw8wb0lT3wZ/ZsV0LkUZijZtK
+ MpFWwPIBPGb/XyhMczhcE7PzW/usrQUAjgmpkcNvxQWbaosn3BzzyTMayRuCpFT+uGGq
+ GnjTySQB6IqrFA5ascsDo6PVfonrNmtQHej0zZFqw9VypW5w4+NZVTU9+113BWH6+jJ/
+ nHqTpWyEByaUVLkUb4n1EDwcfi59i8vJR9QWzOF8uDgrdDzV/pHvnz4hPMmKhH1LGaux
+ ybSQ==
+X-Gm-Message-State: AGi0PubW9LCreLvRF9QpkDwhLWDqIyIMxBmJ+9qQeFf4rWlwBcFAZKO1
+ 8EqcnJA4io4LsNJPyewcV304YWbxmppX2YbmlsiBmg==
+X-Google-Smtp-Source: APiQypLfT5TYPQkfXSOnqKIsPG2h/NCohhbOOt/ITEjdT6JDCUeRmXuyKqLoFBxo3s6QwMLMSZP91gkjTLiC3krbssw=
+X-Received: by 2002:a9d:490d:: with SMTP id e13mr18228869otf.356.1587573181657; 
+ Wed, 22 Apr 2020 09:33:01 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200417210548.GH4555@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20200421140840.25729-1-patrice.chotard@st.com>
+ <20200421140840.25729-3-patrice.chotard@st.com>
+ <CAPnjgZ2h+xuUshDeUCtGQu81oHJ+poproR1B4oXiuS=yFzA-Yw@mail.gmail.com>
+ <7f7534e9-5351-c6de-8784-a62d284d6d0b@st.com>
+In-Reply-To: <7f7534e9-5351-c6de-8784-a62d284d6d0b@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 22 Apr 2020 10:32:50 -0600
+Message-ID: <CAPnjgZ1=DVA_g2Os4Ur2Z4hiJTq7ULBw=x0C-d4GBvnuAyOH2Q@mail.gmail.com>
+To: Patrice CHOTARD <patrice.chotard@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH v3 01/21] dm: pinctrl: convert
-	pinctrl-single to livetree
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 2/2] cmd: bind: allow to bind driver
+	with driver data
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,75 +66,93 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8436378405920782663=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrice,
 
---===============8436378405920782663==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="cAMdxM7kFS4+ma4H"
-Content-Disposition: inline
+On Wed, 22 Apr 2020 at 02:13, Patrice CHOTARD <patrice.chotard@st.com> wrote:
+>
+>
+> On 4/21/20 7:36 PM, Simon Glass wrote:
+> > Hi Patrice,
+> >
+> > On Tue, 21 Apr 2020 at 08:09, Patrice Chotard <patrice.chotard@st.com> wrote:
+> >> Initial implementation invokes device_bind_with_driver_data()
+> >> with driver_data parameter equal to 0.
+> >> For driver with driver data, the bind command can't bind
+> >> correctly this driver or even worse causes data abort.
+> >>
+> >> Add find_udevice_id() to parse the driver's of_match list
+> >> and return the entry corresponding to the driver compatible string.
+> >> This allows to get access to driver_data and to use it as
+> >> parameters of device_bind_with_driver_data().
+> >>
+> >> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> >> Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
+> >>
+> >> ---
+> >>
+> >>  cmd/bind.c | 29 ++++++++++++++++++++++++++++-
+> >>  1 file changed, 28 insertions(+), 1 deletion(-)
+> >>
+> > The thing I don't quite get here is why the driver name needs to be
+> > specified. If the device tree node is present, and it has a compatible
+>
+> Sorry, i didn't get your point when you said "why the driver name needs to be specified"
 
+It's just that I don't understand it at all. If the compatible string
+is available, why not use lists_bind_fdt()?
 
---cAMdxM7kFS4+ma4H
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>
+> Which part of this patch do you made reference to ?
 
-On Fri, Apr 17, 2020 at 05:05:48PM -0400, Tom Rini wrote:
-> On Mon, Jan 13, 2020 at 11:34:55AM +0100, Patrick Delaunay wrote:
->=20
-> > Convert 'pinctrl-single' using livetree functions
-> > - dev_read_prop
-> > - dev_read_u32_default
-> > - dev_read_u32_array
-> > - dev_read_bool
-> > - dev_read_addr
-> > and get rid of DECLARE_GLOBAL_DATA_PTR.
-> >=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->=20
-> Applied to u-boot/master, thanks!
+The whole thing, because I just don't understand the bind command.
 
-Now that I've setup my AM65x board, this commit is breaking boot there
-and I don't have any idea why.  I don't get any sort of output on either
-core (this platform takes am65x_evm_r5 for the SPL and am65x_evm_a53 for
-the main core).
+>
+> > string, can't DM find the driver and bind a device automatically?
+> >
+> > Also, is there any docs for this command? It would be good to add to
+>
+> Is what in cmd/bind.c not enough ?
 
---=20
-Tom
+I am just confused here. You obviously have a use case in mind, but
+the help below is not sufficient to understand what is going on. As I
+said, if you have a device-tree node you can find the driver. I am
+just not sure what this is for.
 
---cAMdxM7kFS4+ma4H
-Content-Type: application/pgp-signature; name="signature.asc"
+It could really use a short document as I said, to explain the uses of
+this command and what it does in a bit more detail.
 
------BEGIN PGP SIGNATURE-----
+>
+>
+> U_BOOT_CMD(
+>     bind,    4,    0,    do_bind_unbind,
+>     "Bind a device to a driver",
+>     "<node path> <driver>\n"
+>     "bind <class> <index> <driver>\n"
+> );
+>
+> U_BOOT_CMD(
+>     unbind,    4,    0,    do_bind_unbind,
+>     "Unbind a device from a driver",
+>     "<node path>\n"
+>     "unbind <class> <index>\n"
+>     "unbind <class> <index> <driver>\n"
+> );
+>
+>
+> > doc/driver-model and also add a simple test.
+>
+> Ok i will add an additionnal test to test/py/tests/test_bind.py
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6gcHwACgkQFHw5/5Y0
-tyxulwv+J3fjdezMvGwd4pWHfAcxNom9VTO+wDwb2IHcLc4z1fhLxXjdxbcxqoum
-Nb82Szcq9D7bPOLPW7ZO4ISWsEp89WrrQ1b1XIEGvsW4mDZmceugGeeN26V7yXQ8
-rqpBR+LkMoNFZak9jAydWN6XaEcfnGqIowJ+KwyHJIwbnfX2mVrg7e4r4vzTYYDV
-Nrb1bZIO52/PGtubCIn4DWGyUiYdSoe0Hv2Z9pvoWY495LiBsQu20At64EtV/ggm
-FqV96w208hG2hgZ5tUijLXdSN72+krPClRuuCVEIe/wjhPjWkvrF2chHKz32DIGx
-TOSWXnEjxAW7wse+jOd5ls+Y6M1Bky68F8kL1pDrUXfuCGr6RCaYBBjU4I7Ud3Wj
-Tbj9ZtKkFHtQ8y6I1iDfl+erezd6kwKVB9UP48Y70byVMc+GBBya1TeRdXkXpCgU
-rg7fdOCEfhiMffQyIJwk2yDO+gwkECfA/J+rbDsigzNSS9GG4vSlZuO9pCwTqO0u
-L5V5CVK9
-=fSYT
------END PGP SIGNATURE-----
+OK thanks.
 
---cAMdxM7kFS4+ma4H--
-
---===============8436378405920782663==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards,
+SImon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============8436378405920782663==--

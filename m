@@ -2,59 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B7631B4BCA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 19:29:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 783AC1B55EB
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Apr 2020 09:39:27 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E5A43C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Apr 2020 17:29:23 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3EB52C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Apr 2020 07:39:27 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1A85AC36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EAE17C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Apr 2020 17:29:21 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 03MHTHmG029024;
- Wed, 22 Apr 2020 12:29:17 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1587576557;
- bh=080CjEDd9Re8/3YJQcMfq/qHfbpMoUOSq9v323yA4rk=;
- h=Subject:To:CC:References:From:Date:In-Reply-To;
- b=Oq+pmjF9bmB8UF/QNVHd/yBPpCpKfVaYEtUSOvN9jPHiDzuPnwvKkyhd0qT5EFIPY
- Kjis34vARaPGcFBBToW1x1ybMNzRlKH8bBgCFlk172A7+mh4y394/1ya9bIoP8h2RX
- N2gcRt9qa5uFc0GNfY+5djo6jz6FJBlEGpo+G4Iw=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 03MHTHOk050349
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Apr 2020 12:29:17 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Wed, 22
- Apr 2020 12:29:16 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Wed, 22 Apr 2020 12:29:16 -0500
-Received: from [10.24.69.20] (ileax41-snat.itg.ti.com [10.172.224.153])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 03MHTBc9039740;
- Wed, 22 Apr 2020 12:29:15 -0500
-To: Tom Rini <trini@konsulko.com>, Patrick Delaunay <patrick.delaunay@st.com>
-References: <20200113103515.20879-1-patrick.delaunay@st.com>
- <20200113103515.20879-2-patrick.delaunay@st.com>
- <20200417210548.GH4555@bill-the-cat> <20200422162743.GA4555@bill-the-cat>
-From: Lokesh Vutla <lokeshvutla@ti.com>
-Message-ID: <a74c5e63-e2ce-fdb4-6e77-d5499333d8be@ti.com>
-Date: Wed, 22 Apr 2020 22:59:11 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+ Thu, 23 Apr 2020 07:39:25 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03N7WTiv023685; Thu, 23 Apr 2020 09:39:12 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=mvmCoWZ7NFFYCDhBk+DAmZ9wrj7mnTLx0FxxGdscJKk=;
+ b=v6flCS6usSABlIMNVTSoQ8G2Q8gfxpiljDtHH8W0QZtFY0mrA+6BylhrXhL1X5+BdFhH
+ HwC0xRhoE8gJaauDmtUtmQvh7NorPMGco6QPAeu+4X7WSyJds4Tv2XxcD7uQEC6K/imB
+ E7jHShNRwQE2D+2JI9JPPtSOMrzsq/NMMNlQRv+AEa5e/wfM0pDkUxaRvm0yf3pYs8OK
+ H8pZ6Bfq3PvwF+v5Q2vQCpR4yvt/DD7Y2JF6W0QDuaSkbxexXpZuO6PiZ5Sa3aXOiTNW
+ cn6TJm4z5nv+Tr3RN8TAygYlCAoas9QXJVUyPZm0mg4J5DSKSP1TovEWpIMUXwFGmPkJ uw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 30fpp93k5c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 23 Apr 2020 09:39:12 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4239710002A;
+ Thu, 23 Apr 2020 09:39:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EC6FB2AA296;
+ Thu, 23 Apr 2020 09:39:10 +0200 (CEST)
+Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Thu, 23 Apr 2020 09:39:10 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Thu, 23 Apr 2020 09:39:08 +0200
+Message-ID: <20200423093845.1.Idf086bdb530238139f0066b3fecc01529d7c0b7d@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200422162743.GA4555@bill-the-cat>
-Content-Language: en-US
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH v3 01/21] dm: pinctrl: convert
-	pinctrl-single to livetree
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-23_06:2020-04-22,
+ 2020-04-23 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [Uboot-stm32] [PATCH] Makefile: copy SPL_FIT_SOURCE in build
+	directory
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,41 +76,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Copy the .its source file selected by CONFIG_SPL_FIT_SOURCE
+in builddir and in a file named "u-boot.its".
+
+This patch avoid compilation issue when CONFIG_SPL_FIT_SOURCE is used
+and KBUILD_OUTPUT is defined, in buildman for example.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
+Hi,
+
+Problem detected with path proposal:
+
+[V3,3/6] ARM: stm32: Implement board coding on AV96
+
+http://patchwork.ozlabs.org/project/uboot/patch/20200422111814.121060-3-marex@denx.de/
+
+Issue see with:
+
+tools/buildman/buildman -v -V stm32mp15_dhcom_basic stm32mp15_dhcor_basic
+
+Building current source for 2 boards (2 threads, 6 jobs per thread)
+       arm:  +   stm32mp15_dhcor_basic
++FATAL ERROR: Couldn't open "board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its": No such file or directory
++./tools/mkimage: Can't open u-boot.itb.tmp: No such file or directory
++make[2]: *** [spl/u-boot-spl] Error 1
++make[1]: *** [spl/u-boot-spl] Error 2
++make: *** [sub-make] Error 2
+       arm:  +   stm32mp15_dhcom_basic
++FATAL ERROR: Couldn't open "board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its": No such file or directory
++./tools/mkimage: Can't open u-boot.itb.tmp: No such file or directory
++make[2]: *** [spl/u-boot-spl] Error 1
++make[1]: *** [spl/u-boot-spl] Error 2
++make: *** [sub-make] Error 2
+    0    0    2 /2      stm32mp15_dhcom_basic
+
+This error doesn't occur for a local compilation,
+as the 2 files exist in  source directory:
+"board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its"
+"board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its"
+
+But they can't found by buildman in build directory
+and the issue is reproduced with "KBUILD_OUTPUT=../build".
+
+With the proposed path the issue is solved.
+
+Regards
+
+Patrick
 
 
-On 22/04/20 9:57 PM, Tom Rini wrote:
-> On Fri, Apr 17, 2020 at 05:05:48PM -0400, Tom Rini wrote:
->> On Mon, Jan 13, 2020 at 11:34:55AM +0100, Patrick Delaunay wrote:
->>
->>> Convert 'pinctrl-single' using livetree functions
->>> - dev_read_prop
->>> - dev_read_u32_default
->>> - dev_read_u32_array
->>> - dev_read_bool
->>> - dev_read_addr
->>> and get rid of DECLARE_GLOBAL_DATA_PTR.
->>>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->>
->> Applied to u-boot/master, thanks!
-> 
-> Now that I've setup my AM65x board, this commit is breaking boot there
-> and I don't have any idea why.  I don't get any sort of output on either
-> core (this platform takes am65x_evm_r5 for the SPL and am65x_evm_a53 for
-> the main core).
-> 
+ Makefile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Ahh thanks for the pointer Tom. I have been struggling since yesterday as why my
-board is not booting with latest master. Looks like this patch is passing the
-wrong device pointer for searching pinctrl-single-pins. Just posted a patch
-fixing it[0]. Please have a look and merge it asap.
-
-[0]
-https://patchwork.ozlabs.org/project/uboot/patch/20200422172531.29649-1-lokeshvutla@ti.com/
-
-Thanks and regards,
-Lokesh
+diff --git a/Makefile b/Makefile
+index 26307fd4a6..d574f8a181 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1320,7 +1320,9 @@ endif
+ # Boards with more complex image requirements can provide an .its source file
+ # or a generator script
+ ifneq ($(CONFIG_SPL_FIT_SOURCE),"")
+-U_BOOT_ITS = $(subst ",,$(CONFIG_SPL_FIT_SOURCE))
++U_BOOT_ITS := u-boot.its
++$(U_BOOT_ITS): $(subst ",,$(CONFIG_SPL_FIT_SOURCE))
++	$(call if_changed,copy)
+ else
+ ifneq ($(CONFIG_SPL_FIT_GENERATOR),"")
+ U_BOOT_ITS := u-boot.its
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

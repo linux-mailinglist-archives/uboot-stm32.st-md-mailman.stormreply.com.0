@@ -2,71 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB6ED1B7D2B
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 19:42:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 854351B7DBF
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 20:21:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6EF55C36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 17:42:16 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4AC46C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 18:21:06 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2C7B6C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8F491C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 17:42:14 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Fri, 24 Apr 2020 18:21:04 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03OHcSR1013269; Fri, 24 Apr 2020 19:42:07 +0200
+ 03OICqlU021117; Fri, 24 Apr 2020 20:20:59 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=dFQRSbqvRbW/lyquDfjT2bLGxdybVytufZftn3lJk98=;
- b=McUDrSbPxakUY4ELTL3l9qkzaWmMShO7d0yp75J1zCj2N/8ysCvrG+S5/3NjXtJA5jBr
- +WtPB+XQGm5fjlhukmFker4LKZ/eN0892q1SyeJNMaSH4504PvLhVgMmWqnLjfqDHvwK
- jsqQrUAaIQC2QsKbcU3Bhw6yAYkExhdu2aB6FhflWuDTKaRbSBNUSJZV2wV02ih7YB9M
- lQVDAAaLBJwmSrOC21eX3WKVUYu1jZTSoTtn9PyP99gzIe+qgSG5Fme5IneMuux/qDpM
- 8NV43fro4w5KVTfnhIOIoguI6+GfLjS0yyb/HWcU2wZ8EjEwq3XWvOWCMwKYOPgMslOo 9Q== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=XR3K7nSNYXUuRVPBwLI6UsGVR0wUezlp3JE6Xpr+oF8=;
+ b=EVcSZ4w0UmIFdb9DsIH45VmxhHxo8Cum1RqWBrac2+gXi4j99/ljEAlmfT4mAvIxzADx
+ U5k/M5kVaRx7f0zPjrgvjNwYQRYhtEVUYH9yQZK554m8LSRNsFrB51oWauZ0UGR/pg0F
+ +J5boW/PBr79cBFSD3OJALnGRS19WxO9qZDCz/AittTilVD/kfl4/zoGLLSOchvYZuJu
+ qRgRMCI3tbOEIwu2Z3JjJZbrVZZ77ES/Tqohr6zYt1cJ0M5PFmFxTrR4rZDMmVYMhR5p
+ jMn7Y2cw5iI0gMEnORxDAr1urZIYz+lRL+B3fTve4LSwB4bZDsZUSb69JlEvaA27h+Pc 0Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fq124f05-1
+ by mx07-00178001.pphosted.com with ESMTP id 30fpp9d5m7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 24 Apr 2020 19:42:07 +0200
+ Fri, 24 Apr 2020 20:20:59 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2A03210002A;
- Fri, 24 Apr 2020 19:42:07 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1E68B2D1DAD;
- Fri, 24 Apr 2020 19:42:07 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 24 Apr
- 2020 19:42:06 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 24 Apr 2020 19:42:06 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PULL] Pull request: u-boot-stm/master =u-boot-stm32-20200424
-Thread-Index: AQHWGkfUSAbYv8mEOEahFOoe0izkkw==
-Date: Fri, 24 Apr 2020 17:42:06 +0000
-Message-ID: <1587750125350.94861@st.com>
-References: <500b672581d74a37b23de7a9c35125c9@SFHDAG6NODE3.st.com>
-In-Reply-To: <500b672581d74a37b23de7a9c35125c9@SFHDAG6NODE3.st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: fr-FR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.45]
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5242D100034;
+ Fri, 24 Apr 2020 20:20:57 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 365FF2CF9BD;
+ Fri, 24 Apr 2020 20:20:57 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 24 Apr 2020 20:20:56 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 24 Apr 2020 20:20:14 +0200
+Message-ID: <20200424182017.11852-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG7NODE1.st.com (10.75.127.19) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-24_09:2020-04-24,
  2020-04-24 signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut <marex@denx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: [Uboot-stm32] [PULL] Pull request: u-boot-stm/master
-	=u-boot-stm32-20200424
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
+ Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Trevor Woerner <trevor@toganlabs.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v2 0/3] arm: caches: allow to activate dcache
+	in SPL and in U-Boot pre-reloc
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,66 +76,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom,
 
-Please pull the STM32 related fixes for v2020.07 = u-boot-stm32-20200424
+Hi
 
-With the following changes:
-- Solve stm32mp15 pinctrl dts issue (patch conlict in branches master and next)
-- Split device tree for DHCOR Som and AV 96 board
-- Update PLL4 setting in AV96 board
-- Enable bootd, iminfo, imxtract on DHCOM
+It is a V2 serie after Marek feedback for
+http://patchwork.ozlabs.org/project/uboot/list/?series=168378
 
-CI status: 
-    https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/2909
+This serie allows dcache activation in SPL or in U-Boot preloc stage
+for ARM board.
 
-Thanks,
-Patrick
+See "arm: stm32mp1: activate data cache in SPL and before relocation"
+for example of usage in SPL and in U-Boot pre-reloc of the function
+dcache_enable() and of mmu_set_region_dcache_behaviour().
 
-The following changes since commit dbfd9e0e61ff1f9c65703959ed8e3ceb410d1e7e:
+A branch named "dcache" with the needed patches for stm32mp1 boards
+is available in:
+https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
 
-  dm: pinctrl: Use right device pointer for configuring pinctrl (2020-04-23 08:25:37 -0400)
 
-are available in the Git repository at:
+Changes in v2:
+- update patch after Marek's proposal. but I just divided by 2 instead
+  of 4kB (minimal MMU page size)
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20200424
+Patrick Delaunay (3):
+  arm: caches: protect dram_bank_mmu_setup access to bi_dram
+  arm: caches: add DCACHE_DEFAULT_OPTION
+  arm: caches: manage phys_addr_t overflow in
+    mmu_set_region_dcache_behaviour
 
-for you to fetch changes up to 23d203d62e0ec95bc42bf96c56df991ff924f360:
+ arch/arm/include/asm/system.h |  8 ++++++++
+ arch/arm/lib/cache-cp15.c     | 20 ++++++++++----------
+ 2 files changed, 18 insertions(+), 10 deletions(-)
 
-  ARM: stm32: Enable bootd, iminfo, imxtract on DHCOM (2020-04-24 17:59:48 +0200)
-
-----------------------------------------------------------------
-- Solve stm32mp15 pinctrl dts issue (patch conflict in branches master and next)
-- Split device tree for DHCOR Som and AV 96 board
-- Update PLL4 setting in AV96 board
-- Enable bootd, iminfo, imxtract on DHCOM
-
-----------------------------------------------------------------
-Marek Vasut (3):
-      ARM: dts: stm32: Adjust PLL4 settings on AV96
-      ARM: dts: stm32: Split AV96 into DHCOR SoM and AV96 board
-      ARM: stm32: Enable bootd, iminfo, imxtract on DHCOM
-
-Patrick Delaunay (1):
-      ARM: dts: stm32mp1: remove file stm32mp157-pinctrl.dtsi
-
- arch/arm/dts/Makefile                                                             |    3 +-
- arch/arm/dts/stm32mp15-pinctrl.dtsi                                               |   96 ++++++++
- arch/arm/dts/stm32mp157-pinctrl.dtsi                                              | 1153 -------------------------------------------------------------------------------------------
- arch/arm/dts/stm32mp157a-avenger96.dts                                            |  423 +---------------------------------
- arch/arm/dts/stm32mp15xx-dhcor-avenger96-u-boot.dtsi                              |   83 +++++++
- arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts                                      |  212 +++++++++++++++++
- arch/arm/dts/{stm32mp157a-avenger96-u-boot.dtsi => stm32mp15xx-dhcor-u-boot.dtsi} |   86 +------
- arch/arm/dts/stm32mp15xx-dhcor.dtsi                                               |  232 +++++++++++++++++++
- configs/stm32mp15_dhcom_basic_defconfig                                           |    3 -
- doc/board/st/stm32mp1.rst                                                         |    8 +-
- 10 files changed, 638 insertions(+), 1661 deletions(-)
- delete mode 100644 arch/arm/dts/stm32mp157-pinctrl.dtsi
- create mode 100644 arch/arm/dts/stm32mp15xx-dhcor-avenger96-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp15xx-dhcor-avenger96.dts
- rename arch/arm/dts/{stm32mp157a-avenger96-u-boot.dtsi => stm32mp15xx-dhcor-u-boot.dtsi} (71%)
- create mode 100644 arch/arm/dts/stm32mp15xx-dhcor.dtsi
-
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

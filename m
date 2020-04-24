@@ -2,64 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 854351B7DBF
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E9391B7DBE
 	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 20:21:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4AC46C36B0C
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FE50C36B0A
 	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 18:21:06 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8F491C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC3C0C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 18:21:04 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri, 24 Apr 2020 18:21:03 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03OICqlU021117; Fri, 24 Apr 2020 20:20:59 +0200
+ 03OICsok025097; Fri, 24 Apr 2020 20:20:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=XR3K7nSNYXUuRVPBwLI6UsGVR0wUezlp3JE6Xpr+oF8=;
- b=EVcSZ4w0UmIFdb9DsIH45VmxhHxo8Cum1RqWBrac2+gXi4j99/ljEAlmfT4mAvIxzADx
- U5k/M5kVaRx7f0zPjrgvjNwYQRYhtEVUYH9yQZK554m8LSRNsFrB51oWauZ0UGR/pg0F
- +J5boW/PBr79cBFSD3OJALnGRS19WxO9qZDCz/AittTilVD/kfl4/zoGLLSOchvYZuJu
- qRgRMCI3tbOEIwu2Z3JjJZbrVZZ77ES/Tqohr6zYt1cJ0M5PFmFxTrR4rZDMmVYMhR5p
- jMn7Y2cw5iI0gMEnORxDAr1urZIYz+lRL+B3fTve4LSwB4bZDsZUSb69JlEvaA27h+Pc 0Q== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=SP1WMkXdXFi/7kFq5SOdBJufClyW71StlW+Jw2Drz38=;
+ b=oSi2CoAQJDdm7OlwcS7f+HN4Efc8po5vuXMyAP96p0lpqgXmKi6KLcS1be78wN9a8L/w
+ A8cYMFeNxD2AuslFpYipcM9Od8KIOXODDa12f5E0/wARVzwhwCaTxaTvYROqETTIwx65
+ z9PDaVijyP/If7ybooVe5GOeAYQYlJbYwJvnswN8H1f3i070kVpHg5XfsyP95i3GnSXE
+ ex75QEpof4ShArvmyOGU2dfS1h7x8LjQMYa+VSZ88SSgmKEL9suMbT+B2N7A0wSjAI2G
+ Z6dQCJU+2b1HDZRJiYwcBNRubkBGI4q3u1X6gcsNO3bHtZjW8ZQVxF94NW+Cn5NbJn4c rw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fpp9d5m7-1
+ by mx07-00178001.pphosted.com with ESMTP id 30freh4sm3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 24 Apr 2020 20:20:59 +0200
+ Fri, 24 Apr 2020 20:20:58 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5242D100034;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F03F710002A;
  Fri, 24 Apr 2020 20:20:57 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 365FF2CF9BD;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E58A82CF9BE;
  Fri, 24 Apr 2020 20:20:57 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 24 Apr 2020 20:20:56 +0200
+ Fri, 24 Apr 2020 20:20:57 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 24 Apr 2020 20:20:14 +0200
-Message-ID: <20200424182017.11852-1-patrick.delaunay@st.com>
+Date: Fri, 24 Apr 2020 20:20:15 +0200
+Message-ID: <20200424201957.v2.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200424182017.11852-1-patrick.delaunay@st.com>
+References: <20200424182017.11852-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG7NODE1.st.com (10.75.127.19) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG5NODE1.st.com (10.75.127.13) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-24_09:2020-04-24,
  2020-04-24 signatures=0
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
- Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
+ Alexey Brodkin <abrodkin@synopsys.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
  Trevor Woerner <trevor@toganlabs.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH v2 0/3] arm: caches: allow to activate dcache
-	in SPL and in U-Boot pre-reloc
+Subject: [Uboot-stm32] [PATCH v2 1/3] arm: caches: protect
+	dram_bank_mmu_setup access to bi_dram
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,38 +78,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Add protection in dram_bank_mmu_setup() to avoid access to bd->bi_dram
+before relocation.
 
-Hi
+This patch allow to use the generic weak function dram_bank_mmu_setup
+to activate the MMU and the data cache in SPL or in U-Boot before
+relocation, when bd->bi_dram is not yet initialized.
 
-It is a V2 serie after Marek feedback for
-http://patchwork.ozlabs.org/project/uboot/list/?series=168378
+In this cases, the MMU must be initialized explicitly with
+mmu_set_region_dcache_behaviour function.
 
-This serie allows dcache activation in SPL or in U-Boot preloc stage
-for ARM board.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-See "arm: stm32mp1: activate data cache in SPL and before relocation"
-for example of usage in SPL and in U-Boot pre-reloc of the function
-dcache_enable() and of mmu_set_region_dcache_behaviour().
+Changes in v2: None
 
-A branch named "dcache" with the needed patches for stm32mp1 boards
-is available in:
-https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+ arch/arm/lib/cache-cp15.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-
-Changes in v2:
-- update patch after Marek's proposal. but I just divided by 2 instead
-  of 4kB (minimal MMU page size)
-
-Patrick Delaunay (3):
-  arm: caches: protect dram_bank_mmu_setup access to bi_dram
-  arm: caches: add DCACHE_DEFAULT_OPTION
-  arm: caches: manage phys_addr_t overflow in
-    mmu_set_region_dcache_behaviour
-
- arch/arm/include/asm/system.h |  8 ++++++++
- arch/arm/lib/cache-cp15.c     | 20 ++++++++++----------
- 2 files changed, 18 insertions(+), 10 deletions(-)
-
+diff --git a/arch/arm/lib/cache-cp15.c b/arch/arm/lib/cache-cp15.c
+index f8d20960da..54509f11c3 100644
+--- a/arch/arm/lib/cache-cp15.c
++++ b/arch/arm/lib/cache-cp15.c
+@@ -91,6 +91,10 @@ __weak void dram_bank_mmu_setup(int bank)
+ 	bd_t *bd = gd->bd;
+ 	int	i;
+ 
++	/* bd->bi_dram is available only after relocation */
++	if ((gd->flags & GD_FLG_RELOC) == 0)
++		return;
++
+ 	debug("%s: bank: %d\n", __func__, bank);
+ 	for (i = bd->bi_dram[bank].start >> MMU_SECTION_SHIFT;
+ 	     i < (bd->bi_dram[bank].start >> MMU_SECTION_SHIFT) +
 -- 
 2.17.1
 

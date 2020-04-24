@@ -2,58 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6E4B1B7009
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 10:50:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23B681B76B6
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 15:14:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7B74AC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 08:50:56 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4EC2C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 13:14:56 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F2763C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 929A7C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 08:50:54 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri, 24 Apr 2020 13:14:54 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03O8kgeF023694
- for <uboot-stm32@st-md-mailman.stormreply.com>; Fri, 24 Apr 2020 10:50:54 +0200
+ 03ODDXgf030373; Fri, 24 Apr 2020 15:14:51 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : subject :
- date : message-id : references : in-reply-to : content-type : content-id :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
  bh=RR00y050SDwfGctJPYldQRZYniy7OkAQXjgqX62JDqI=;
- b=l4tY+0NWMjWOb+8qHp9/7bhAVIjRESB4Mxu10lwgurLAxKblKDpuQZeH5esTRVKDxIXR
- BNdZHk7SK23pc8QGP7XGZdpQtd2VbwMAc4qyRoiIOHYRPfYo/mdaMODwX7arG7HOSkHz
- 3qHtaGpKu3odWCsX+fyRpnLX4srD4qxeZUqT4GUNXeq1OxM4RygLmV2qsg68Xa6784ci
- NPE04h2pfmjDNyWfTWqQqdt4CXuV42JCB9xwK3rwOPH55MW7LmsAUj7nmjynuMDvbhaM
- lDus5JjWHaLDXFnPtLQ290ll+u8WmMOZD1GkuZY2JhXMBoXZk9kmjbDvmn5Rppr8H92R TA== 
+ b=vQ2AXDuhE0roCWC1tv9D8Xtt2/hDMkBCWSVP0F03ijAy3OUyVsgBQvlqf6AgZViZ1uaQ
+ 27tv32sTRDnlZOOD+O+IYStD95LCSt/EZ/ospqbNAOMbQCPypr7QathGkoXvIriepnLp
+ ISrlAYi/1FrZz4P6SC844NiEq3TMAII/Mjrnn/uGNpFtoxH8cjeaSqzep1j9JuCwkPrt
+ BhhPIvAgdUBEmH6bkCOFZj1gmtxM9NDEAUkxaeA9mQ9ZJMwnpo0Md45cLmEYS6xWLygl
+ K5P4nlsoch2peWIfkTFasutQDF+VY1E6etCreX1G1pkZothdwr5JJ0megSZsaCo7VJZH LQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30freh25tr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <uboot-stm32@st-md-mailman.stormreply.com>; Fri, 24 Apr 2020 10:50:54 +0200
+ by mx07-00178001.pphosted.com with ESMTP id 30fqawu7qp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 24 Apr 2020 15:14:51 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9790210002A
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 10:50:53 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 89B202A9A8D
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 10:50:53 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 24 Apr
- 2020 10:50:52 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C077510002A;
+ Fri, 24 Apr 2020 15:14:50 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B037B2BE23B;
+ Fri, 24 Apr 2020 15:14:50 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 24 Apr
+ 2020 15:14:50 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 24 Apr 2020 10:50:52 +0200
+ 15.00.1473.003; Fri, 24 Apr 2020 15:14:50 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
-To: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
 Thread-Topic: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: remove file
  stm32mp157-pinctrl.dtsi
-Thread-Index: AQHWGhV1zkNdvCooP0C9X5b/rA9F9w==
-Date: Fri, 24 Apr 2020 08:50:52 +0000
-Message-ID: <40ae130d-19e1-25bf-a8c4-df32839cb354@st.com>
+Thread-Index: AQHWGjpV7NzE2OluG0+V1oQPdl/LqA==
+Date: Fri, 24 Apr 2020 13:14:50 +0000
+Message-ID: <386735cd-44fc-769c-8d74-ed143ad2ba37@st.com>
 References: <20200421122708.1.I555d4e1bdbfc2f09370be821302de722a25a1d1c@changeid>
 In-Reply-To: <20200421122708.1.I555d4e1bdbfc2f09370be821302de722a25a1d1c@changeid>
 Accept-Language: fr-FR, en-US
@@ -64,12 +61,14 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
-Content-ID: <C10A7F0890651A4E818C113D79BBB316@st.com>
+x-originating-ip: [10.75.127.46]
+Content-ID: <2757E950D5680B42ABC9775C689E71ED@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-24_02:2020-04-23,
+ definitions=2020-04-24_06:2020-04-23,
  2020-04-24 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
 Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: remove file
  stm32mp157-pinctrl.dtsi
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com

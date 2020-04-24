@@ -2,66 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91D3D1B7DC1
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 20:21:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D52351B7DD3
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 20:24:23 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 59B43C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 18:21:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9E1B3C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Apr 2020 18:24:23 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A9EBC36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60955C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 24 Apr 2020 18:21:09 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 24 Apr 2020 18:24:21 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03OIDXSU028603; Fri, 24 Apr 2020 20:20:59 +0200
+ 03OID1Ot025127; Fri, 24 Apr 2020 20:24:16 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=xzTkNteO6SifJuWz+8DYueEdQiuBVZ8uqLERX3Qb4Pg=;
- b=rHCgp8mu/xlxJKIclRk8ZVo4Ixyaytn+Fy6eOV5fSUyMyzGuZ6CKvemOuEEMB3tnmOu9
- Fnk0r0eF/x+nGN+eW+hlLZmJGSmT88rkksDj1vWP23SP8PfmnKq0ihTnhXYqiAsFsmGy
- Bok2cV8cONHfTikm4ampJ/xTU6szXFteBWHm0NgueUydGuoLTaYhSaey2E5y1YFx74OC
- 6RyKRm4ispqwF1eC1WFLul32+bHqWKQ5ZrCr/fIwDIzoaeDsqMewsyquT/PyQRXg5ppP
- hm79Rf+1BPHpRcJ8+ZnY7/S+ffZDFp11Xg9hAuU9g6t11CiSm2PA/fcSDNYAWZNIYSa/ NQ== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=BqSpNJFhLms/D65vecD/Rya2xd0NTahqEpSbo5AaV24=;
+ b=OawDvBWdfbZZ/o5iXEekhk8u8iiodIvTte0B4JY7OnTsVUAR15Qypo9DO6+nn3CBotnP
+ L2gz7+3tUzvYuLGeavC9JjbXJVf5O0ox4p+sp29TPcHBZkizbp+XDCbdKT1Sum6L0H5N
+ fi94ewEzQKy98GXX9ji5kYclbREmqA15m+CxppH8d4cWjGSbjnFt8kCmTGWFyCyUuZhH
+ aMfTMAqqAEXS/PpolAut7AlYCn6aztEeayEG6rNPw+A8MA6gvsS0lCgLsie9RUpNBIbZ
+ ljAql3jpe11dFgIwT2vCLsIoEaInINWIFnd10g76hsj9l/Zzwg0YRUNqrZyYZYN4tk1u Tw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30fqawvh1h-1
+ by mx07-00178001.pphosted.com with ESMTP id 30freh4t19-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 24 Apr 2020 20:20:59 +0200
+ Fri, 24 Apr 2020 20:24:16 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 667EB10002A;
- Fri, 24 Apr 2020 20:20:59 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 69F8510002A;
+ Fri, 24 Apr 2020 20:24:16 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5B4C62CF9BD;
- Fri, 24 Apr 2020 20:20:59 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 601F12BCDE5;
+ Fri, 24 Apr 2020 20:24:16 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 24 Apr 2020 20:20:58 +0200
+ Fri, 24 Apr 2020 20:24:15 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 24 Apr 2020 20:20:17 +0200
-Message-ID: <20200424201957.v2.3.Ic2c7c6923035711a4c653d52ae7c0f57ca6f9210@changeid>
+Date: Fri, 24 Apr 2020 20:24:11 +0200
+Message-ID: <20200424182413.12685-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200424182017.11852-1-patrick.delaunay@st.com>
-References: <20200424182017.11852-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG8NODE2.st.com (10.75.127.23) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG4NODE2.st.com (10.75.127.11) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-24_09:2020-04-24,
  2020-04-24 signatures=0
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
- Alexey Brodkin <abrodkin@synopsys.com>,
+ Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
- Trevor Woerner <trevor@toganlabs.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH v2 3/3] arm: caches: manage phys_addr_t
-	overflow in mmu_set_region_dcache_behaviour
+Subject: [Uboot-stm32] [PATCH v3 0/2] arm: stm32mp1: activate data cache in
+	SPL and before relocation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,57 +73,147 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Solved the overflow on phys_addr_t type for start + size in
-mmu_set_region_dcache_behaviour() function.
 
-This overflow is avoided by dividing start and end by 2 before addition,
-and we only expecting that start and size are even.
+V3 after first feedbacks of the previous serie
+"arm: stm32mp1: activate data cache in SPL and before relocation"
+http://patchwork.ozlabs.org/project/uboot/list/?series=168390
 
-This patch doesn't change the current function behavior if the
-parameters (start or size) are not aligned on MMU_SECTION_SIZE.
+This serie depends on the ARM cache serie:
+"arm: caches: allow to activate dcache in SPL and in U-Boot pre-reloc"
+http://patchwork.ozlabs.org/project/uboot/list/?series=172555
 
-For example, this overflow occurs on ARM32 with:
-start = 0xC0000000 and size = 0x40000000
-then start + size = 0x100000000 and end = 0x0.
+I move tlb in .data section and simplify the implementation by reusing
+the default weak function dram_bank_mmu_setup() for MMU configuration
+and mmu_set_region_dcache_behaviour() to setup the specific behavior.
 
-For information the function behavior change with risk of regression,
-if we just shift start and size before the addition.
-Example with 2MB section size:
-  MMU_SECTION_SIZE 0x200000 and MMU_SECTION_SHIFT = 21
-  with start = 0x1000000, size = 0x1000000,
-  - with the proposed patch, start = 0 and end = 0x1 as previously
-  - with the more simple patch:
-    end = (start >> MMU_SECTION_SHIFT) + (size >> MMU_SECTION_SHIFT)
-    the value of end change:
-    start >> 21 = 0, size >> 21 = 0 and end = 0x0 !!!
+I also activate data cache on DDR for SPL.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+For information the gain of the second patch is limited (few ms) for boot
+from SDCARD: the SDMMC IP use internal DMA and data cache on DDR is
+not really used.
+
+Gain should be better for other boot use-case.
+
+Example of bootstage report on STM32MP157C-DK2, boot from SD card.
+
+1/ For trusted boot chain with TF-A
+
+a) Before
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (9 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        583,290    583,290  board_init_f
+      2,348,898  1,765,608  board_init_r
+      2,664,580    315,682  id=64
+      2,704,027     39,447  id=65
+      2,704,729        702  main_loop
+      5,563,519  2,858,790  id=175
+
+    Accumulated time:
+                    41,696  dm_r
+                   615,561  dm_f
+
+b) After the serie
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (9 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        583,401    583,401  board_init_f
+        727,725    144,324  board_init_r
+      1,043,362    315,637  id=64
+      1,082,806     39,444  id=65
+      1,083,507        701  main_loop
+      3,680,827  2,597,320  id=175
+
+    Accumulated time:
+                    36,047  dm_f
+                    41,718  dm_r
+
+2/ And for the basic boot chain with SPL
+
+a) Before:
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        195,613    195,613  SPL
+        837,867    642,254  end SPL
+        840,117      2,250  board_init_f
+      2,739,639  1,899,522  board_init_r
+      3,066,815    327,176  id=64
+      3,103,377     36,562  id=65
+      3,104,078        701  main_loop
+      3,142,171     38,093  id=175
+
+    Accumulated time:
+                    38,124  dm_spl
+                    41,956  dm_r
+                   648,861  dm_f
+
+b) After the serie
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        195,859    195,859  SPL
+        330,190    134,331  end SPL
+        332,408      2,218  board_init_f
+        482,688    150,280  board_init_r
+        808,694    326,006  id=64
+        845,029     36,335  id=65
+        845,730        701  main_loop
+      3,281,876  2,436,146  id=175
+
+    Accumulated time:
+                     3,169  dm_spl
+                    36,041  dm_f
+                    41,701  dm_r
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        211,036    211,036  SPL
+        343,393    132,357  end SPL
+        345,645      2,252  board_init_f
+        496,596    150,951  board_init_r
+        822,256    325,660  id=64
+        858,451     36,195  id=65
+        859,153        702  main_loop
+      3,414,706  2,555,553  id=175
+
+    Accumulated time:
+                     3,132  dm_spl
+                    36,005  dm_f
+                    41,695  dm_r
+
+
+Changes in v3:
+- add Information in commit-message on early malloc and .BSS
+- remove debug message "bye"
 
 Changes in v2:
-- update patch after Marek's proposal. but I just divided by 2 instead
-  of 4kB (minimal MMU page size)
+- create a new function early_enable_caches
+- use TLB in .init section
+- use the default weak dram_bank_mmu_setup() and
+  use mmu_set_region_dcache_behaviour() to setup
+  the early MMU configuration
+- enable data cache on DDR in SPL, after DDR controller initialization
+- new
 
- arch/arm/lib/cache-cp15.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Patrick Delaunay (2):
+  arm: stm32mp: activate data cache in SPL and before relocation
+  arm: stm32mp: activate data cache on DDR in SPL
 
-diff --git a/arch/arm/lib/cache-cp15.c b/arch/arm/lib/cache-cp15.c
-index d15144188b..f803d6fb8c 100644
---- a/arch/arm/lib/cache-cp15.c
-+++ b/arch/arm/lib/cache-cp15.c
-@@ -61,8 +61,11 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
- 	unsigned long startpt, stoppt;
- 	unsigned long upto, end;
- 
--	end = ALIGN(start + size, MMU_SECTION_SIZE) >> MMU_SECTION_SHIFT;
-+	/* div by 2 before start + size to avoid phys_addr_t overflow */
-+	end = ALIGN((start / 2) + (size / 2), MMU_SECTION_SIZE / 2)
-+	      >> (MMU_SECTION_SHIFT - 1);
- 	start = start >> MMU_SECTION_SHIFT;
-+
- #ifdef CONFIG_ARMV7_LPAE
- 	debug("%s: start=%pa, size=%zu, option=%llx\n", __func__, &start, size,
- 	      option);
+ arch/arm/mach-stm32mp/cpu.c | 43 ++++++++++++++++++++++++++++++++++++-
+ arch/arm/mach-stm32mp/spl.c | 19 ++++++++++++++++
+ 2 files changed, 61 insertions(+), 1 deletion(-)
+
 -- 
 2.17.1
 

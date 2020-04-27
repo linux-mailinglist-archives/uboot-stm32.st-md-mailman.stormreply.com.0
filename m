@@ -2,51 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5E231BA298
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 13:41:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 921A41BA4BF
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 15:30:27 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9951DC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 11:41:36 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E6F1DC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 13:30:26 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 80E5CC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1C984C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 27 Apr 2020 11:41:35 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 499jXs6772z1r7Qr;
- Mon, 27 Apr 2020 13:41:33 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 499jXs4vJ6z1r5MZ;
- Mon, 27 Apr 2020 13:41:33 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id nWk6MD9EZUTL; Mon, 27 Apr 2020 13:41:32 +0200 (CEST)
-X-Auth-Info: 3Y1HrUZlTaaZ7fbmevfGmLvC2+mVTycyyWCoGDM+7cc=
-Received: from [127.0.0.1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 27 Apr 2020 13:41:32 +0200 (CEST)
-To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
-References: <20200423093845.1.Idf086bdb530238139f0066b3fecc01529d7c0b7d@changeid>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <cf50ddab-86cf-24b0-1c0e-a0a60e419cef@denx.de>
-Date: Mon, 27 Apr 2020 13:39:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Mon, 27 Apr 2020 13:30:24 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03RDIUVb020494; Mon, 27 Apr 2020 15:30:05 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=diRocbIpuakUZpOVtfYqv9UvJGWdgxEJ3oAZsWmxMIc=;
+ b=Vu48a+uJodBYhAUpKm17JUMHZoVZkG9W6/2n+z7cnEQR94gls90wc/vDlGaRmRHfq2b0
+ i+fULEHiMvjmyD060xm/mEn/6J6HzKoUpjT0xWwSE2bU/z+mMVI6Y5ZcUickPzj7XwHb
+ LM4J9MM/kN3GMBprF0NJewmSy2fymqYedwHkCy1jbCr9HODgjyWVNwr/3e7q9G8Ba6Ox
+ a1qlFAxEnxPeKUU/C6b4Iy0GHtL4becsabaMsjc4RkUU7iKoqJPWR9qCFFtqMQuYKJeP
+ LLCtjJBHcvmQ/CRn9tVX3P872TNTx0WaQhJBnKDv/i+4wBSBTypDbHyIjh8fTHg15YUp bw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 30mhcbsyjv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 27 Apr 2020 15:30:05 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A3C97100038;
+ Mon, 27 Apr 2020 15:30:03 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 73E6E211242;
+ Mon, 27 Apr 2020 15:30:03 +0200 (CEST)
+Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Mon, 27 Apr 2020 15:30:03 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 27 Apr 2020 15:29:56 +0200
+Message-ID: <20200427133001.5557-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200423093845.1.Idf086bdb530238139f0066b3fecc01529d7c0b7d@changeid>
-Content-Language: en-US
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@xilinx.com>, Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-27_10:2020-04-24,
+ 2020-04-27 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Simon Glass <sjg@chromium.org>, simon.k.r.goldschmidt@gmail.com,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>, b.galvani@gmail.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>, Fabio Estevam <festevam@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] Makefile: copy SPL_FIT_SOURCE in build
-	directory
+ ley.foon.tan@intel.com, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [RESEND PATCH v6 0/5] usb: host: dwc2: use driver
+	model for PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,18 +78,116 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 4/23/20 9:39 AM, Patrick Delaunay wrote:
-> Copy the .its source file selected by CONFIG_SPL_FIT_SOURCE
-> in builddir and in a file named "u-boot.its".
-> 
-> This patch avoid compilation issue when CONFIG_SPL_FIT_SOURCE is used
-> and KBUILD_OUTPUT is defined, in buildman for example.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
-Both in-tree and out-of-tree, and also in the context of OE
-Tested-by: Marek Vasut <marex@denx.de>
-Acked-by: Marek Vasut <marex@denx.de>
+RESEND of V6, rebased on master
+http://patchwork.ozlabs.org/project/uboot/list/?series=163388
+
+In this serie I update the DWC2 host driver to use the device tree
+information and the associated PHY and CLOCK drivers when they are
+availables.
+
+V6 is minor update of the first patch of the serie;
+I update some clk stub to return success after Simon Goldschmidt
+remarks on V5:
+http://patchwork.ozlabs.org/project/uboot/list/?series=162791
+
+Benjamino also use this V6 serie to enable USB host for Odroid-C2.
+
+I test the V4 of this serie on stm32mp157c-ev1 board, with PHY and CLK
+support (V5 was a minor update).
+
+The U-CLASS are provided by:
+- PHY by USBPHYC driver = ./drivers/phy/phy-stm32-usbphyc.c
+- CLOCK by RCC clock driver = drivers/clk/clk_stm32mp1.c
+- RESET by RCC reset driver = drivers/reset/stm32-reset.c
+
+And I activate the configuration
++CONFIG_USB_DWC2=y
+
+PS: it is not the default configuration to avoid conflict with gadget
+    driver
+
+To solve a binding issue, I also deactivate the gadget support:
+by default only one driver is bound to the usbotg_hs node with "snps,dwc2"
+compatible, and today it is the device one (the first in the driver list).
+
+WARNING: OTG with device or host support is not correctly handle by DWC2
+         driver (see example for dynamic OTG role in DWC3 driver).
+
+The tests executed on the stm32mp157c-ev1 target:
+
+STM32MP> usb start
+starting USB...
+Bus usb-otg@49000000: USB DWC2
+Bus usbh-ehci@5800d000: USB EHCI 1.00
+scanning bus usb-otg@49000000 for devices... 2 USB Device(s) found
+scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
+       scanning usb for storage devices... 2 Storage Device(s) found
+STM32MP> usb tree
+USB device tree:
+  1  Hub (480 Mb/s, 0mA)
+  |   U-Boot Root Hub
+  |
+  +-2  Mass Storage (480 Mb/s, 300mA)
+       Verbatim STORE N GO 070731C8ACD7EE97
+
+  1  Hub (480 Mb/s, 0mA)
+  |  u-boot EHCI Host Controller
+  |
+  +-2  Hub (480 Mb/s, 2mA)
+
+STM32MP> ls usb 0
+<DIR>       4096 .
+<DIR>       4096 ..
+<DIR>      16384 lost+found
+<DIR>       4096 record
+         1490212 xipImage
+        21058006 vmlinux
+
+STM32MP> load usb 0 0xC0000000 vmlinux
+21058006 bytes read in 10851 ms (1.9 MiB/s)
+
+
+Changes in v6:
+- return success in stub for clk_free/clk_enable/clk_disable/
+  clk_enable_bulk/clk_disable_bulk
+
+Changes in v5:
+- use ERR_PTR in clk_get_parent()
+- force bulk->count = 0 in clk_get_bulk to avoid issue
+  for next call of clk_enable_bulk / clk_enable_bulk
+- update commit message
+- inverse logic for -ENOENT test on generic_phy_get_by_index result
+- Add some comments
+
+Changes in v4:
+- Add stub for all functions using 'struct clk' or 'struct clk_bulk'
+  after remarks on v3
+
+Changes in v3:
+- Add stub for clk_disable_bulk
+
+Changes in v2:
+- update dev_err
+- update commit message
+- change dev_err to dev_dbg for PHY function call
+- treat dwc2_shutdown_phy error
+- add clk_disable_bulk in dwc2_usb_remove
+
+Patrick Delaunay (5):
+  dm: clk: add stub when CONFIG_CLK is deactivated
+  usb: host: dwc2: add phy support
+  usb: host: dwc2: add clk support
+  usb: host: dwc2: force reset assert
+  usb: host: dwc2: add trace to have clean usb start
+
+ drivers/usb/host/dwc2.c | 100 ++++++++++++++++++++++++++++++++++++++-
+ include/clk.h           | 102 +++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 188 insertions(+), 14 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,67 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8EF4B1BA4BC
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 15:30:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F7611BA6A0
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 16:40:18 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 57825C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 13:30:20 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D0DDCC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 14:40:17 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0D115C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A37DC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 27 Apr 2020 13:30:18 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03RDIGwU029637; Mon, 27 Apr 2020 15:30:07 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=r11ApTju4V0Q/qStvr8iHkQCzPY9ayWtRkJ3IXxU57U=;
- b=K4fQdoOc5OQT7UzerIMpTqgiS2X6FA3H+NcwLV8Or5fDE6nJZvAjw/XSSTfcAPVuc52N
- WLjnoYD4Rc7g+nhaxfkThtZmNklAx6VlXX1dY2mjTiNP5YLPRBWVz+WN4AuodKtPW3v0
- 7m2wXEp3GuuObXvxvBFSG1sjwBWUQTxQy1G4blQhgfPIpRPQ53WGIjT0OQW2upUq7AcS
- Ert0zWl4CjhEZAIylgNgwhOoGmHkBuzsa8QitVdbIzZb0hfFiJ+XCfBM2oNMdOSn8IOu
- Jfz6PvsQ2j/dRRpBojgmufFOIWzvG1cddKjw0Rejhc9k5ZQeiKtUcB0RdYCVZaJ5UlX5 rg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30mhjwj49d-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 27 Apr 2020 15:30:07 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 541F110002A;
- Mon, 27 Apr 2020 15:30:07 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4853F21BAB3;
- Mon, 27 Apr 2020 15:30:07 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 27 Apr 2020 15:30:06 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 27 Apr 2020 15:30:01 +0200
-Message-ID: <20200427152956.RESEND.v6.5.I43934c501010bbca1ee5f7c7780e3999eefc425f@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200427133001.5557-1-patrick.delaunay@st.com>
+ Mon, 27 Apr 2020 14:40:16 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 499nVz4TMCz1s3jH;
+ Mon, 27 Apr 2020 16:40:11 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 499nVz2hxNz1r5Pv;
+ Mon, 27 Apr 2020 16:40:11 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id IkWbqPLouWb9; Mon, 27 Apr 2020 16:40:09 +0200 (CEST)
+X-Auth-Info: EpvYqzW5O6ilattMeTYynhqMk4Ozn56lxaLodko/5RY=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Mon, 27 Apr 2020 16:40:08 +0200 (CEST)
+To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <20200427133001.5557-1-patrick.delaunay@st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <da040744-ee0a-df22-e5fa-af0446599b87@denx.de>
+Date: Mon, 27 Apr 2020 15:37:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-27_10:2020-04-24,
- 2020-04-27 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
+In-Reply-To: <20200427133001.5557-1-patrick.delaunay@st.com>
+Content-Language: en-US
+Cc: Peng Fan <peng.fan@nxp.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Simon Glass <sjg@chromium.org>, simon.k.r.goldschmidt@gmail.com,
- Patrick Delaunay <patrick.delaunay@st.com>, b.galvani@gmail.com,
- ley.foon.tan@intel.com,
+ Sekhar Nori <nsekhar@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ ley.foon.tan@intel.com, b.galvani@gmail.com,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Suchanek <msuchanek@suse.de>
-Subject: [Uboot-stm32] [RESEND PATCH v6 5/5] usb: host: dwc2: add trace to
-	have clean usb start
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>
+Subject: Re: [Uboot-stm32] [RESEND PATCH v6 0/5] usb: host: dwc2: use driver
+ model for PHY and CLOCK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,50 +67,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Solve issue for the display of "usb start" command on stm32mp1
-because one carriage return is missing in DWC2 probe.
+On 4/27/20 3:29 PM, Patrick Delaunay wrote:
+> 
+> RESEND of V6, rebased on master
+> http://patchwork.ozlabs.org/project/uboot/list/?series=163388
+> 
+> In this serie I update the DWC2 host driver to use the device tree
+> information and the associated PHY and CLOCK drivers when they are
+> availables.
+> 
+> V6 is minor update of the first patch of the serie;
+> I update some clk stub to return success after Simon Goldschmidt
+> remarks on V5:
+> http://patchwork.ozlabs.org/project/uboot/list/?series=162791
 
-Before the patch:
-
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000:    Bus usbh-ehci@5800d000:   USB EHCI 1.00
-
-after the patch:
-
-STM32MP> usb start
-starting USB...
-Bus usb-otg@49000000: USB DWC2
-Bus usbh-ehci@5800d000: USB EHCI 1.00
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
-
-Changes in v6: None
-Changes in v5: None
-Changes in v4: None
-Changes in v3: None
-Changes in v2: None
-
- drivers/usb/host/dwc2.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index 640ae3e730..f25ed2dab0 100644
---- a/drivers/usb/host/dwc2.c
-+++ b/drivers/usb/host/dwc2.c
-@@ -1219,6 +1219,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
- 	if (readl(&regs->gintsts) & DWC2_GINTSTS_CURMODE_HOST)
- 		mdelay(1000);
- 
-+	printf("USB DWC2\n");
-+
- 	return 0;
- }
- 
--- 
-2.17.1
-
+Applied all, thanks.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

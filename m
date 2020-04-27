@@ -2,67 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05D001B8F6E
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2020 13:27:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 376C61B982D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 09:17:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C512DC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Apr 2020 11:27:05 +0000 (UTC)
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
- [209.85.160.196])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E1F84C36B0A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Apr 2020 07:17:53 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 95DF0C36B09
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D4A52C36B09
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2020 11:27:04 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id k12so11911468qtm.4
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 26 Apr 2020 04:27:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=vWjcwPX6RAZOXOoo1Cm/Q86SH+mW5SSC+vJM4CIwmGo=;
- b=UPMbS6kZVpzX0IEpdnChfdtZSQBzwCwL0ogO17Z2Pl79EsUOCKQobYxVK/EFkuKDbA
- bv4WfA4jPlbmip7op8up9MyOSa/pDanR2b1I/TcnCBIfP/GzsMd7W2tl0DgII0vlflDa
- aU9ky6e2sZzleq6A8Eh6WPrgfSYSIYuGzolHY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=vWjcwPX6RAZOXOoo1Cm/Q86SH+mW5SSC+vJM4CIwmGo=;
- b=gwUEZ9ncIOh8YW/wI+l1JvSMv28kP28AkoH5fGUHt9tVmemAYxNBN7z9PHkSqIY5QQ
- 7f2m8josk3iLQiWpKCccWCoi0FZbbM91SY5Az0+2JL2qU2ZUx9pZbfts6cSE9k2NYeNT
- SydN8Z2VNSzCYubsNWMxV2Zd5HtPOmf+cOtjkyOjAbWaGoO0G3aQ7y7EXHy2VsaKKMRC
- HET+MFvqpPP0xppaSEVmbG1V+P3heVsxpaUSzfDltuKg03siS5kTxjMbjAv5HLQUb8Ys
- 8c3duw6cExVffl0kUUmsONmf4JW1xMijCRaR+buPPhSDNd2V+exE5MxqtJfzdAdsNYbZ
- DhuQ==
-X-Gm-Message-State: AGi0PuaLzhSwS+HdP1qAmSrkSAZh8A7/zVugUchQeuBoUtIi18NPGBBr
- qnDDY0KO868+UYUhZBkFxJqV4A==
-X-Google-Smtp-Source: APiQypJeYIdJUB5L/RVKLXTG9k7GQ0R9wAjTR57MJmPE3hbyEWxt8i7O6cZE5bn3OTeSfq9C6MhqeA==
-X-Received: by 2002:ac8:6c6:: with SMTP id j6mr18167162qth.194.1587900423445; 
- Sun, 26 Apr 2020 04:27:03 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-826f-0077-5706-6f89-bef6.inf6.spectrum.com.
- [2606:a000:1401:826f:77:5706:6f89:bef6])
- by smtp.gmail.com with ESMTPSA id x18sm7351257qkn.107.2020.04.26.04.27.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Sun, 26 Apr 2020 04:27:02 -0700 (PDT)
-Date: Sun, 26 Apr 2020 07:27:00 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200426112700.GW4555@bill-the-cat>
-References: <20200410163403.1.I3190d9b77167a808c65f44883fd1bc1c1d15218a@changeid>
- <20200410163403.2.Ice5c9d8cd5de91bb8b2f0db60c93e5be3d921893@changeid>
+ Mon, 27 Apr 2020 07:17:50 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03R7C4kR026714; Mon, 27 Apr 2020 09:17:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=leO+wNTLTTSU8TgLgS95K9czgnaBEFbVRvoMOOPD3sc=;
+ b=Rm1My59cUAhIWyHLxmMTJSUDv2LieuoPQm7vKbZiIMvGIsRCYRaW/dhyTRxoOwb544Cy
+ n4EWxmUNUU9tBaqtvxwzsGTzKuvpuIW4bi9FKxisw3oULLZSB3sIEFtVDdgIn71ttig2
+ qwWAxaAhPKddHnnQ4HC1hCOBUEQidmCDYBbjnXxIZ0bhmQfbEFSen3djRtwwJTBVcHFo
+ q1w3RA4sHC3AZVn6Gb/coDL3cpcQgYpJSOcIB9ni9yhJnwXWMGFYECFLIYeexZsE+yy+
+ 8S/kDtJDdKl0EM3/36LllgFeDCW3lhNvhIZOtWaizQ3FrUn5risiZXotvbyob5aavXxG 5A== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 30mhq5r83v-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 27 Apr 2020 09:17:43 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C8FAD10002A;
+ Mon, 27 Apr 2020 09:17:42 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BAE0C220F54;
+ Mon, 27 Apr 2020 09:17:42 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Mon, 27 Apr
+ 2020 09:17:42 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 27 Apr 2020 09:17:42 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH v3 1/2] arm: stm32mp: activate data cache in SPL and
+ before relocation
+Thread-Index: AQHWGmWQkA68POrYL0GzHoYSLrvu8aiMcY6A
+Date: Mon, 27 Apr 2020 07:17:42 +0000
+Message-ID: <ffc1c616-7ece-82e6-517c-f8ebd1d3d559@st.com>
+References: <20200424182413.12685-1-patrick.delaunay@st.com>
+ <20200424202335.v3.1.I2ff601b652f4995a3401dc67c2369a4187046ed8@changeid>
+In-Reply-To: <20200424202335.v3.1.I2ff601b652f4995a3401dc67c2369a4187046ed8@changeid>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.45]
+Content-ID: <51AEA2800087DD438FD23C170389CC25@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20200410163403.2.Ice5c9d8cd5de91bb8b2f0db60c93e5be3d921893@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, u-boot@lists.denx.de,
- Thomas Hebb <tommyhebb@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/3] README: remove references on no more
- used config CONFIG_SYS_RCAR_I2C*
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-27_03:2020-04-24,
+ 2020-04-27 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 1/2] arm: stm32mp: activate data cache
+ in SPL and before relocation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,70 +84,162 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0615466127355197759=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
 
---===============0615466127355197759==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="zSvig8sR1vi+U47p"
-Content-Disposition: inline
+some typos below
 
+On 4/24/20 8:24 PM, Patrick Delaunay wrote:
+> Activate the data cache in SPL and in U-Boot before relocation.
+>
+> In arch_cpu_init(), the function early_enable_caches() sets the early
+> TLB, early_tlb[] located .init section, and set cacheable:
+> - for SPL, all the SYSRAM
+> - for U-Boot, all the DDR
+>
+> After relocation, the function enable_caches() (called by board_r)
+> reconfigures the MMU with new TLB location (reserved in
+> board_f.c::reserve_mmu) and re-enable the data cache.
+>
+> This patch allows to reduce the execution time, particularly
+> - for the device tree parsing in U-Boot pre-reloc stage
+>   (dm_extended_scan_fd =>dm_scan_fdt)
+> - in I2C timing computation in SPL (stm32_i2c_choose_solution())
+>
+> For example, the result on STM32MP157C-DK2 board is:
+>    1,6s gain for trusted boot chain with TF-A
+>    2,2s gain for basic boot chain with SPL
+>
+> For information, as TLB is added in .data section, the binary size
+> increased and the SPL load time by ROM code increased (30ms on DK2).
+>
+> But early maloc can't be used for TLB because arch_cpu_init()
+s/maloc/malloc
+> is executed before the early poll initialization done in spl_common_init()
+> called by spl_early_init() So it too late for this use case.
+> And if I initialize the MMU and the cache after this function it is
+> too late, as dm_init_and_scan and fdt parsin is also called in
+s/parsin/parsing
+> spl_common_init().
+>
+> And .BSS can be used in board_init_f(): only stack and global can use
+> before BSS init done in board_init_r().
+>
+> So .data is the better soluttion without hardcoded location but is you
 
---zSvig8sR1vi+U47p
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+s/soluttion/solution
 
-On Fri, Apr 10, 2020 at 04:34:41PM +0200, Patrick Delaunay wrote:
+s/is you/if you
 
-> Remove the references in README on CONFIG_SYS_RCAR_I2C_* not use
-> in U-Boot drivers/i2c/rcar_i2c.c, since commit a4d9aafadb31 ("i2c:
->  rcar_i2c: Remove the driver") and commit a06a0ac36d59 ("i2c: rcar_i2c:
->  Add DM and DT capable I2C driver")
->=20
-> Checked by the command: grep -r SYS_RCAR_I2C *
-> And these CONFIG are only defined in
-> arch/arm/mach-rmobile/include/mach/rcar-base.h
->=20
+> have size issue for SPL you can deactivate cache for SPL only
+> (with CONFIG_SPL_SYS_DCACHE_OFF).
+>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v3:
+> - add Information in commit-message on early malloc and .BSS
+>
+> Changes in v2:
+> - create a new function early_enable_caches
+> - use TLB in .init section
+> - use the default weak dram_bank_mmu_setup() and
+>   use mmu_set_region_dcache_behaviour() to setup
+>   the early MMU configuration
+> - enable data cache on DDR in SPL, after DDR controller initialization
+>
+>  arch/arm/mach-stm32mp/cpu.c | 43 ++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 42 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+> index 74d03fa7dd..712c2c594b 100644
+> --- a/arch/arm/mach-stm32mp/cpu.c
+> +++ b/arch/arm/mach-stm32mp/cpu.c
+> @@ -75,6 +75,12 @@
+>  #define PKG_SHIFT	27
+>  #define PKG_MASK	GENMASK(2, 0)
+>  
+> +/*
+> + * early TLB into the .data section so that it not get cleared
+> + * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
+s /allignment/alignement
+> + */
+> +u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+> +
+>  #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+>  #ifndef CONFIG_TFABOOT
+>  static void security_init(void)
+> @@ -186,6 +192,32 @@ u32 get_bootmode(void)
+>  		    TAMP_BOOT_MODE_SHIFT;
+>  }
+>  
+> +/*
+> + * initialize the MMU and activate cache in SPL or in U- Boot pre-reloc stage
+s/U- Boot/U-Boot
+> + * MMU/TLB is updated in enable_caches() for U-Boot after relocation
+> + * or is deactivated in U-Boot entry function start.S::cpu_init_cp15
+> + */
+> +static void early_enable_caches(void)
+> +{
+> +	/* I-cache is already enabled in start.S: cpu_init_cp15 */
+> +
+> +	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> +		return;
+> +
+> +	gd->arch.tlb_size = PGTABLE_SIZE;
+> +	gd->arch.tlb_addr = (unsigned long)&early_tlb;
+> +
+> +	dcache_enable();
+> +
+> +	if (IS_ENABLED(CONFIG_SPL_BUILD))
+> +		mmu_set_region_dcache_behaviour(STM32_SYSRAM_BASE,
+> +						STM32_SYSRAM_SIZE,
+> +						DCACHE_DEFAULT_OPTION);
+> +	else
+> +		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
+> +						DCACHE_DEFAULT_OPTION);
+> +}
+> +
+>  /*
+>   * Early system init
+>   */
+> @@ -193,6 +225,8 @@ int arch_cpu_init(void)
+>  {
+>  	u32 boot_mode;
+>  
+> +	early_enable_caches();
+> +
+>  	/* early armv7 timer init: needed for polling */
+>  	timer_init();
+>  
+> @@ -225,7 +259,14 @@ int arch_cpu_init(void)
+>  
+>  void enable_caches(void)
+>  {
+> -	/* Enable D-cache. I-cache is already enabled in start.S */
+> +	/* I-cache is already enabled in start.S: icache_enable() not needed */
+> +
+> +	/* deactivate the data cache, early enabled in arch_cpu_init() */
+> +	dcache_disable();
+> +	/*
+> +	 * update MMU after relocation and enable the data cache
+> +	 * warning: the TLB location udpated in board_f.c::reserve_mmu
+> +	 */
+>  	dcache_enable();
+>  }
+>  
 
-Applied to u-boot/master, thanks!
+With typo fixes
 
---=20
-Tom
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
---zSvig8sR1vi+U47p
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6lcAQACgkQFHw5/5Y0
-tyxxCQv/Wfzg3cm7EUE0CvfTDzLqJirwkL+L3m7SCFD30WklSBABfgHHpOIdQJxe
-4LQbwUPQXxgFHiNID8J5u7qcpfB/y5w13J0DTz83+20JU56mEw/8P19GfqTjNnQ2
-8KtRZ/yx4ZougtxxafyXIv+2nqhZsVDfIkNYv6t7GKLmeEhRU72KbvbP91CMf5Lw
-OFO7rnFXrTNo8epBhNIvSRyFRK+y/SQKuw/HvOSPtlaaWW/aMBM43rfjZh86aotU
-EKCRXtaNQQJktuM5oh9ZPVuRoFzpmsYYNHsQydkRNfDyWeQMqgglT/zw4HmSFkKL
-7ezv8fYQVUrxGKoUe4cS1EnrKJ8X9KrppMGjPhdSouF6YXd4HN51r7C6dNaVe6Ug
-Jm5Gc3RDLbK5cP+RTAN/S6OKz6QfCCh+bH4tCblisJ1QhyUr+Jqf9bwo47Wo6qtY
-2xq3RUGfc9AkIuPBGIhHMpRhPV7aaKSos/BLQFqAZjed3ZViymvA6Dx14/JK1mxW
-dCJD4Kh3
-=Zf6e
------END PGP SIGNATURE-----
-
---zSvig8sR1vi+U47p--
-
---===============0615466127355197759==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Thanks
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0615466127355197759==--

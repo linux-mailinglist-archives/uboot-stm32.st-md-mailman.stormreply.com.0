@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F4041BC044
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 15:54:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 980F01BC045
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 15:54:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 59DEAC36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 13:54:21 +0000 (UTC)
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
- [209.85.222.193])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 615A0C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 13:54:26 +0000 (UTC)
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+ [209.85.160.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2934EC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AC076C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Apr 2020 13:54:20 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id o135so9359089qke.6
+ Tue, 28 Apr 2020 13:54:25 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id z90so17236047qtd.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Apr 2020 06:54:20 -0700 (PDT)
+ Tue, 28 Apr 2020 06:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=Ov/KdmLbq8s5klYyQkCEpjjEIqGs8g3PoCt+eFyfvVQ=;
- b=Q9RLUPc21zz2t+g2lSfbdyqpPX0LJzj0u5ywgMSR8UesY4LuyBeACgnUYHqOl0Kxig
- rrNS9ZWXvWXj42B0eNxkSZ/N749TAE0WEHAK0gsS5XTAa3aFacZHkKbK2t3Bt177loSO
- 3TCsbbu23U1mXy/PPw2S1FK1gBzC5uD07tzv4=
+ bh=9VNeOO1It6alMmtGxfQouO6XHrdXbRA5l7nDEQ4cUtk=;
+ b=AMvIQSMxqw/CFEAoQg7LgrBQGm2XevWsyv3JCLRuyZWMp3Hq+endF+2XCkmJCjwGT+
+ KIHXdTGzCZgIXzP/ZMFC/sYR6jUC7QKDa8YEPVmfExdVirJIoiPQcBTnfX6cJyvmcAaJ
+ j3SzLRYJ3M2QNY49QNQqGT180UezoyUuTmWkM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=Ov/KdmLbq8s5klYyQkCEpjjEIqGs8g3PoCt+eFyfvVQ=;
- b=ZVZzkOpzah6PkoIyspht6ackC+zltYa9C2P/hZj6WWZXDdY7zVB1yGma7bpHuhpjkO
- r7x1hRubj+RIkdgEJ+HDb8aco0EtgtoER9IulzkgJ/xCodeAd48wWPelVLj62aonAiH+
- Pk7lnSAt+IXuZtPKnlipraJU+JhsX+qurY9i6tlmBX4cwdbtPVlr29QMoErSyI+VTe2j
- Orj6Nb3Eob237fv/6OoWMBuwG7bHzWLvBxl6Frw2dnmxiaoxmdvv63eChlgByHx1gXBN
- 87gmAPjXz30G4TkxNJiujIP9/zFYwmW7pOvbj/VjdTYTnMYc0gnrP41VMQMzpo5Hmkgq
- jLbw==
-X-Gm-Message-State: AGi0PuYXfbB2auRf7NqJaCEDIX7dE51S8P5pW+sW1yfwu8ArzPbj8/c8
- lnHtyeCCES0HLIycatfxZIrNpw==
-X-Google-Smtp-Source: APiQypJLHKDNNDTF6Np/X2+r6CmDHbi3YNHtQu2kBFxrhdZAHIWTyfWFcHsKIXLqlF/FuQ4qrpXkhw==
-X-Received: by 2002:ae9:f712:: with SMTP id s18mr11446394qkg.394.1588082058973; 
- Tue, 28 Apr 2020 06:54:18 -0700 (PDT)
+ bh=9VNeOO1It6alMmtGxfQouO6XHrdXbRA5l7nDEQ4cUtk=;
+ b=jMEX/Njyj8JPBNZTdIYfrJ667iWSJziufUBOV9fCv8sinjs5vz1Cs4wxT04tChKT/g
+ vktrNi4uNejCcXOEKIKKvOCRDu4NP+yadylvfM972JfGNiBWMuuNHj0Z72T5Kj6E/aKR
+ +F12azEA6t3KPh7sKh7pc0vTRLvTUjfsHSnY8K+hBvjaMJe4R9lYm9Q3lkG+j8e+OIuN
+ iCgUJWT1axuG9BnQB5TTCT9KI1c4bGjAktgRbGaT/YZcXC1XWzRe3wIB9RpoqWHfTsEp
+ GcZTaBJQsgt5Aw6EL39GKd3cGvIYGrClEjhUSqTz8tps0A9FXofhIa18JmvxQPB3mtS6
+ HF8A==
+X-Gm-Message-State: AGi0PuZBtxOP6wHmTZDOSE4lah3huBCQDkAXo0LZ8ZzSkruKVVssl3+e
+ N+3GNDc5DAYNziVt1B57VZ0n8A==
+X-Google-Smtp-Source: APiQypJjynggVgz/93Ijusv30oJuqM3eBQ5mraWaXITDxGoc3n9CGuE0F/1E7bfINzq6u31TFdZ9ZQ==
+X-Received: by 2002:aed:2b43:: with SMTP id p61mr28707008qtd.298.1588082064564; 
+ Tue, 28 Apr 2020 06:54:24 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-826f-c4e8-427e-eef8-640c.inf6.spectrum.com.
  [2606:a000:1401:826f:c4e8:427e:eef8:640c])
- by smtp.gmail.com with ESMTPSA id o33sm13960984qtj.62.2020.04.28.06.54.17
+ by smtp.gmail.com with ESMTPSA id s8sm12501931qtb.0.2020.04.28.06.54.22
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 28 Apr 2020 06:54:18 -0700 (PDT)
-Date: Tue, 28 Apr 2020 09:54:16 -0400
+ Tue, 28 Apr 2020 06:54:23 -0700 (PDT)
+Date: Tue, 28 Apr 2020 09:54:21 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200428135416.GO4468@bill-the-cat>
-References: <20200422141755.1.I8b005c35223011e3c07122ccbf558bf8d27b6aab@changeid>
- <20200422141755.2.I7e1980e0938cb60ddf2b7fea2778d9987291da99@changeid>
+Message-ID: <20200428135421.GP4468@bill-the-cat>
+References: <20200423093845.1.Idf086bdb530238139f0066b3fecc01529d7c0b7d@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20200422141755.2.I7e1980e0938cb60ddf2b7fea2778d9987291da99@changeid>
+In-Reply-To: <20200423093845.1.Idf086bdb530238139f0066b3fecc01529d7c0b7d@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@xilinx.com>, u-boot@lists.denx.de,
+ Jagan Teki <jagan@amarulasolutions.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] net: tftp: remove TFTP_MTU_BLOCKSIZE
+ Bin Meng <bmeng.cn@gmail.com>, Fabio Estevam <festevam@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] Makefile: copy SPL_FIT_SOURCE in build
+	directory
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,58 +74,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6042620354936564931=="
+Content-Type: multipart/mixed; boundary="===============6784392103926097739=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============6042620354936564931==
+--===============6784392103926097739==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="acOuGx3oQeOcSZJu"
+	protocol="application/pgp-signature"; boundary="4IFtMBbmeqbTM/ox"
 Content-Disposition: inline
 
 
---acOuGx3oQeOcSZJu
+--4IFtMBbmeqbTM/ox
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Apr 22, 2020 at 02:18:26PM +0200, Patrick Delaunay wrote:
+On Thu, Apr 23, 2020 at 09:39:08AM +0200, Patrick Delaunay wrote:
 
-> Remove the unneeded define TFTP_MTU_BLOCKSIZE.
-> Since the KConfig migration done by commit b618b3707633 ("net:
-> Convert CONFIG_TFTP_BLOCKSIZE to Kconfig"), CONFIG_TFTP_BLOCKSIZE
-> is always defined and can be used directly to avoid confusion
-> (fallback to 1468 in code is never used).
+> Copy the .its source file selected by CONFIG_SPL_FIT_SOURCE
+> in builddir and in a file named "u-boot.its".
+>=20
+> This patch avoid compilation issue when CONFIG_SPL_FIT_SOURCE is used
+> and KBUILD_OUTPUT is defined, in buildman for example.
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Tested-by: Marek Vasut <marex@denx.de>
+> Acked-by: Marek Vasut <marex@denx.de>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---acOuGx3oQeOcSZJu
+--4IFtMBbmeqbTM/ox
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6oNYcACgkQFHw5/5Y0
-tyws4AwAr+/xBryOrhKQtFQQyNj4TYHvShF7Fe6VfxCl04G4xxrcmjsBTqWN+sFM
-qcjU682nfJAopKEwbSeG5jvkNrzpj6azz0w8r7p0UFTYBhJLG3t5cAA2hXsZpQuU
-GY9uADDwC2QPBzfdUYq2OyrXyIcEVJVBQH1/+DYUbVxZBCDzvB2IXROGITizURaM
-3flI71dcYu43ZAr3EQXZKYi1ophX9r63vaJwXIbylQVtGPcr+58+OkIhAueg2sBP
-d2Hpp2e79fPW/9KfJ0Gru0GmFKJlIIr+k4BLHyPyUdNzijv0k+mYes1zisamwcTe
-cBJSyqO14q3t1jNa8LcL7RN5oBPHOMsYgNybbTfaMT9cdGwgH7hPoLfSDUUd+3GX
-P4nCVZ9mnqh77Eb4Qf/24rerUHSdz706qnKzy3jPUd+kRMKCFncha4DybbjhJKMZ
-a5kxLW1s8Ml4LHHi+6xnCTLcpCEWMeU77dwcAYzg4sw23rhUbML9ds2C7KtWrqMP
-pvaa8LNS
-=jmVd
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6oNY0ACgkQFHw5/5Y0
+tyz5bgv9Fuk9m6WRIHlPeveiJkeWIAHm0Z0ca0rj3T2U3bkZsA+UivFve2PNITkU
+eYf4K+jYGgTY01VF/9ChEONWFJO3NisxFRkpiwCiiQbF4WXdPpyNo0Ig4t54AiLz
+jYaAT1BxFwtcSd1X0eRJ0UcIGtthh0h6jhlUxMcddF1A966n4/n0X01M5xxAChz3
+/N58+eV3cu7uCqlruUUODyFY+Namy11zcK7d7IXvQmLBnJw55+CXBN4OPrDQSY5M
+i0IVYkCuL5rpglV/uK5CBmran01xzoBYzXqUT+osDFMQwefgO4OxbiQUJxizJoi3
+YJZM7XNHcFAngYOLQya5ERgguvLE4n2blHY0QRIDfn4fUHU3GXT8DjLvbrY2yAjY
+zduO37pph38ckUvacYK+lRfBAyv6pMKxE3x5tlalBtu2EhT9pCzZwpiAV9Q6qU8T
+X3EDgeWmp47vxYZGkn6lcbxqjlDNb6Gg59w0z6MQrCAsFwIkv5K6fuSha691Trfc
+w8GctHYQ
+=W0KB
 -----END PGP SIGNATURE-----
 
---acOuGx3oQeOcSZJu--
+--4IFtMBbmeqbTM/ox--
 
---===============6042620354936564931==
+--===============6784392103926097739==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -134,4 +138,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============6042620354936564931==--
+--===============6784392103926097739==--

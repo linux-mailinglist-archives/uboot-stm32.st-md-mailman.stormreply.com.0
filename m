@@ -2,52 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDC8E1BBB99
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 12:52:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16B271BBCD2
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 13:50:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82DF3C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 10:52:11 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C2C81C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Apr 2020 11:50:04 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 28801C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A5CA2C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Apr 2020 10:52:09 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 49BJPN0PXWz1qs0h;
- Tue, 28 Apr 2020 12:52:08 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 49BJPM5z4Fz1r5Qb;
- Tue, 28 Apr 2020 12:52:07 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id xX4ADHSwLdNa; Tue, 28 Apr 2020 12:52:06 +0200 (CEST)
-X-Auth-Info: OmTjl08EOsYYX/p51k0MzEqSv/OeUW9ZnsoLXvwRAng=
-Received: from [127.0.0.1] (unknown [195.140.253.167])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Tue, 28 Apr 2020 12:52:06 +0200 (CEST)
-To: Patrice Chotard <patrice.chotard@st.com>, u-boot@lists.denx.de
-References: <20200428093804.20773-1-patrice.chotard@st.com>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <9c2a3b90-2e6a-766e-64c6-bb692ed4c083@denx.de>
-Date: Tue, 28 Apr 2020 11:50:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ Tue, 28 Apr 2020 11:50:03 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 03SBgMUF023832; Tue, 28 Apr 2020 13:50:00 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=llSd3nqPbSmolaL2PNJB4GsVcWMTOU5Ae9NrakB5CGY=;
+ b=SfOC8SCj2D12Ls8N/sOKzNwRD1wfzCDy6FSW84kKCHVKNbPVyukoMG7XWsZ7ki3A3b6h
+ Opmb3ig/pTc06bi7LFh39ENqy0oCd0Ou0pJ+6bncJS7lRhtR5M777kSk9VbwrGcLJ1HR
+ tA9j73aFe4I2b3m4JAEsCPDBWC9qp6Pf/gwGy1pzFQwUImFa3BTtiaXAr209eLxO9a55
+ FPtA6YUWW00iDFHORXzUr8KRUu/BqkkknBpvyPBHWTC2xkmERISIHdkQZOu3m41x4tgj
+ bK4S09xefJ//UPW1zRuyjE+VLdHCEtfqBapw8rUvHeMl8RtNvNPdqOMsiRchotjtBtVT HQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 30mhcbyk2w-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 28 Apr 2020 13:50:00 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3C170100034;
+ Tue, 28 Apr 2020 13:50:00 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 26C172B0356;
+ Tue, 28 Apr 2020 13:50:00 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Tue, 28 Apr 2020 13:49:59 +0200
+From: Patrice Chotard <patrice.chotard@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 28 Apr 2020 13:49:50 +0200
+Message-ID: <20200428134918.1.I98f004eb93dff0dad8ebd9447a3cff76bd1ecc91@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200428093804.20773-1-patrice.chotard@st.com>
-Content-Language: en-US
-Cc: Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
- Ovidiu Panait <ovpanait@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Eric Perie <eric.perie@yahoo.com>, Patrick DELAUNAY <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Trevor Woerner <trevor@toganlabs.com>, Ramon Fried <rfried.dev@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] cmd: cache: Fix non-cached memory
-	cachability
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG6NODE1.st.com (10.75.127.16) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
+ definitions=2020-04-28_07:2020-04-28,
+ 2020-04-28 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [RESEND PATCH] usb: host: dwc3-sti-glue: Use
+	UCLASS_NOP instead of UCLASS_MISC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -64,48 +72,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 4/28/20 11:38 AM, Patrice Chotard wrote:
-> If dcache is switched OFF to ON state and if non-cached memory is
-> used, this non-cached memory must be re-declared as uncached to mmu
-> each time dcache is set ON.
-> 
-> Introduce noncached_set_region() to set this non-cached region's mmu
-> settings. Let architecture override it by defining it as a weak
-> function.
-> 
-> For ARM architecture, noncached_set_region() defines all noncached
-> region as non-cacheable.
-> 
-> Issue found on STM32MP1 platform using dwc_eth_qos ethernet driver,
-> when going from dcache OFF to dcache ON state, ethernet driver issued
-> TX timeout errors when performing dhcp or ping.
-> 
-> It can be reproduced with the following sequence:
-> 
-> dhcp
-> while true ; do
->   ping 192.168.1.300 ;
->   dcache off ;
->   ping 192.168.1.300 ;
->   dcache on ;
-> done
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Stephen Warren <swarren@nvidia.com>
-> 
-> ---
-> 
-> Changes in v2:
->     - make noncached_set_region a weak function
-> 
->  arch/arm/lib/cache.c | 13 ++++++++++---
->  cmd/cache.c          |  5 +++++
->  2 files changed, 15 insertions(+), 3 deletions
+dwc3-sti-glue has been broken since MISC uclass has been
+modified to scan DT sub-nodes after bind.
+Fixing it by a using the no-op uclass.
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+---
+
+ drivers/usb/host/dwc3-sti-glue.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti-glue.c
+index c99a1985cca5..99d4e29414aa 100644
+--- a/drivers/usb/host/dwc3-sti-glue.c
++++ b/drivers/usb/host/dwc3-sti-glue.c
+@@ -239,7 +239,7 @@ static const struct udevice_id sti_dwc3_glue_ids[] = {
+ 
+ U_BOOT_DRIVER(dwc3_sti_glue) = {
+ 	.name = "dwc3_sti_glue",
+-	.id = UCLASS_MISC,
++	.id = UCLASS_NOP,
+ 	.of_match = sti_dwc3_glue_ids,
+ 	.ofdata_to_platdata = sti_dwc3_glue_ofdata_to_platdata,
+ 	.probe = sti_dwc3_glue_probe,
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

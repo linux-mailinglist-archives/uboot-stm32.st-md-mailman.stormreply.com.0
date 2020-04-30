@@ -2,64 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19A8F1BF4E0
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 12:06:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E8F51BF4E1
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 12:06:36 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BDDFEC36B0A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 10:06:34 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DB9ABC36B0C
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 10:06:35 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 381FFC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 50FF2C36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Thu, 30 Apr 2020 10:06:32 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03UA4ZgH006367; Thu, 30 Apr 2020 12:06:24 +0200
+ 03UA4N5J011614; Thu, 30 Apr 2020 12:06:25 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=NrxMvoqU2SVUYFxDsjjzgQvd1eAVQoxgIRCh8kV5zWc=;
- b=otNf4nmFEn5ZtPPwvlOGA+wunznY8cXR1AaOyI80xwh0cVH2MI+1PoT2N+8PIfmzbSE0
- omZBgcu1cD4eHwNKvP/fqgs2YDN7Ze+y6yeGfKXtIwe6X5GSyNzkU+SiLwyPpNqLa+NP
- 76zbvgJCEJqYVXk4hIc2/QAd5kcujpFWlZU7Vml0m9Vo+YjcmuCvFhHDr7zNu72P9SGw
- LWvnBnGLXclVY8T08rR/GaBXB87vXr5QJbtzCFGTUyGUcrhUtUfpH1TVjIwE5RxQhMna
- 1bRKbZI6FJL47AlaAaLv1Tw3wEzr1FomP6VK5ZqcN7wc6MdK43Oy3OsMkPkILVq7OGQy fQ== 
+ bh=UCA3tLt1HlHGubDOQH9gh/ZD9AhF4aCIdkrE3adZZaY=;
+ b=Ue35X/VozLbXcV05LBAWdMjbxYqqXFZqGRc1GbTWrJvXC5vaCEb3WmxkFZHN4HbsGxPI
+ blppFqAa+1N/jcVLQKyECavH97SD6tY6kGnCdoYskSRdmSZ2UtjRX39JmZfDk31XM615
+ WiKF4hBsNQ6rxNUy/wZUXNyBUcGFUc9p2JFJROH3YbvHu6Ivyt/7vmAhBT9E91Z1GStH
+ 3K8SbJqt02gL5Z4HMX5nj8odb7O80TdD9KqXuhlSKHXUZ9XJ8KeL58IcT3CTxWqwhdws
+ jK3BP5/D1WZf8pQ7EWrBcrCOByjFBMOxBkET13+OQfxoQvj91ZGJnUV7KwUeo2bZXxXy bg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30qst09412-1
+ by mx07-00178001.pphosted.com with ESMTP id 30n4j67r4w-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Apr 2020 12:06:24 +0200
+ Thu, 30 Apr 2020 12:06:25 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D4468100039;
- Thu, 30 Apr 2020 12:06:23 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C297010002A;
+ Thu, 30 Apr 2020 12:06:24 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB8C22B3BD4;
- Thu, 30 Apr 2020 12:06:23 +0200 (CEST)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4C392B3BD4;
+ Thu, 30 Apr 2020 12:06:24 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 30 Apr 2020 12:06:23 +0200
+ Thu, 30 Apr 2020 12:06:24 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 30 Apr 2020 12:06:16 +0200
-Message-ID: <20200430100619.28557-3-patrice.chotard@st.com>
+Date: Thu, 30 Apr 2020 12:06:17 +0200
+Message-ID: <20200430100619.28557-4-patrice.chotard@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200430100619.28557-1-patrice.chotard@st.com>
 References: <20200430100619.28557-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-30_06:2020-04-30,
  2020-04-30 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+Cc: Simon Glass <sjg@chromium.org>,
+ Alex Marginean <alexandru.marginean@nxp.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v4 2/5] sandbox: phy: add driver_data for bind
-	test cmd
+ Patrick DELAUNAY <patrick.delaunay@st.com>, Lukasz Majewski <lukma@denx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [Uboot-stm32] [PATCH v4 3/5] sandbox: dts: Add compatible string
+	for bind-test node
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,14 +79,10 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add driver data to existing compatible string "sandbox,phy".
-Add an additional compatible string without driver_data
-
-This will verify that bind command parses, finds and passes the
-correct driver data to device_bind_with_driver_data() by using
-driver_data in the second sandbox_phy_ids table entry.
-In sandbox_phy_bind() a check is added to validate driver_data
-content.
+Usage of lists_bind_fdt() in bind command imposes to add
+a compatible string for bind-test node.
+The other impact, is that bind-test node is binded at sandbox
+start, so no need to bind it in test_bind_unbind_with_node() test
 
 Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -93,58 +92,36 @@ Changes in v4: None
 Changes in v3: None
 Changes in v2: None
 
- drivers/phy/sandbox-phy.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+ arch/sandbox/dts/test.dts  | 1 +
+ test/py/tests/test_bind.py | 3 ---
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/drivers/phy/sandbox-phy.c b/drivers/phy/sandbox-phy.c
-index 84ff5c6275..5f36da7692 100644
---- a/drivers/phy/sandbox-phy.c
-+++ b/drivers/phy/sandbox-phy.c
-@@ -8,6 +8,8 @@
- #include <dm.h>
- #include <generic-phy.h>
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index df9f1835c9..7c6b14887f 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -131,6 +131,7 @@
+ 	};
  
-+#define DRIVER_DATA 0x12345678
-+
- struct sandbox_phy_priv {
- 	bool initialized;
- 	bool on;
-@@ -71,6 +73,14 @@ static int sandbox_phy_exit(struct phy *phy)
- 	return 0;
- }
+ 	bind-test {
++		compatible = "simple-bus";
+ 		bind-test-child1 {
+ 			compatible = "sandbox,phy";
+ 			#phy-cells = <1>;
+diff --git a/test/py/tests/test_bind.py b/test/py/tests/test_bind.py
+index 20c6050342..0b7cd9a808 100644
+--- a/test/py/tests/test_bind.py
++++ b/test/py/tests/test_bind.py
+@@ -25,9 +25,6 @@ def in_tree(response, name, uclass, drv, depth, last_child):
+ @pytest.mark.buildconfigspec('cmd_bind')
+ def test_bind_unbind_with_node(u_boot_console):
  
-+static int sandbox_phy_bind(struct udevice *dev)
-+{
-+	if (dev_get_driver_data(dev) != DRIVER_DATA)
-+		return -ENODATA;
-+
-+	return 0;
-+}
-+
- static int sandbox_phy_probe(struct udevice *dev)
- {
- 	struct sandbox_phy_priv *priv = dev_get_priv(dev);
-@@ -90,13 +100,19 @@ static struct phy_ops sandbox_phy_ops = {
- };
- 
- static const struct udevice_id sandbox_phy_ids[] = {
--	{ .compatible = "sandbox,phy" },
-+	{ .compatible = "sandbox,phy_no_driver_data",
-+	},
-+
-+	{ .compatible = "sandbox,phy",
-+	  .data = DRIVER_DATA
-+	},
- 	{ }
- };
- 
- U_BOOT_DRIVER(phy_sandbox) = {
- 	.name		= "phy_sandbox",
- 	.id		= UCLASS_PHY,
-+	.bind		= sandbox_phy_bind,
- 	.of_match	= sandbox_phy_ids,
- 	.ops		= &sandbox_phy_ops,
- 	.probe		= sandbox_phy_probe,
+-	#bind /bind-test. Device should come up as well as its children
+-	response = u_boot_console.run_command('bind  /bind-test generic_simple_bus')
+-	assert response == ''
+ 	tree = u_boot_console.run_command('dm tree')
+ 	assert in_tree(tree, 'bind-test', 'simple_bus', 'generic_simple_bus', 0, True)
+ 	assert in_tree(tree, 'bind-test-child1', 'phy', 'phy_sandbox', 1, False)
 -- 
 2.17.1
 

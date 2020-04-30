@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F22931BFA36
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 15:52:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C05E11BFE46
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 16:30:31 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B6DF7C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 13:52:55 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 874D3C36B0E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 14:30:31 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 656D4C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0AE20C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Apr 2020 13:52:54 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Thu, 30 Apr 2020 14:30:28 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03UDqkaS030950; Thu, 30 Apr 2020 15:52:49 +0200
+ 03UESVmb021801; Thu, 30 Apr 2020 16:30:24 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=SG9A92+7NQ2GYt4V7qbo7iGFoixMAlnkXDY/BCieAQ4=;
- b=ZL+6sj7Fc9U5zkvSOuKz8a/dZQAoqRTmdE64yVwR/mUs0pwccDG2I6GCIRWnwoIFYr/h
- HXK4AOxmp6tMlo2AkFDweGjIta8FUgvnKtLYPYz6dXrHU8eV7uWVTnamQGyfrjEmrHB/
- 25v/N/cQev1N/bGNAsp+AevoJm9SKnDYM//zZNl0YLrbAI8Ah8OYRKrk99e9LDpIC4TY
- +gqboBk71dhQmhvyKefQ5E76rescvM4mobOVNpEsZR1XIbyGBRXMn0OQgGkWJRnkkDgW
- NwEvXJTxbLZPKu5AIaqO7ynbLfjojU805bGBADWJEedhcK1rPpCsE71rLLb0DgPX/PlR zA== 
+ bh=wl5+RxCn3IjAsfW2F3naS6Rqodp6p6151dKVNV1LaMI=;
+ b=btihYyzEsPeQOYf+Jxi1XQD82biidBt4mqRGTr92XlIaNJ3p5yjGX3ZJR5gPXDuTzepz
+ oo1wVHUC8tUvliCzZoMuJ7ZqTQMiM3bcDpYUfD6ps0QThUjDIb9s6oNqSoOIYQAt2eKe
+ PrgGHRJFg+4IaJt3e9YK5Il3fK2rVI0x6cEUIPHYffUW/KkRHN4yBhslfICMz9QvSGNd
+ gsg7RvvnbR3oNNDjpncfZhGmQRj2nsFhJfBM8Yq+cJ71duwQEzgLq7O4ptFuMIO9NJGa
+ 5eSv0XZGvlCWIloMm0Sj68CX+UoofLQVDZfyYWv1YKSkT03+Vuuvhv1zyoLQDHycbSWz Tw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30mhjx4sqd-1
+ by mx07-00178001.pphosted.com with ESMTP id 30mhq6cy69-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Apr 2020 15:52:49 +0200
+ Thu, 30 Apr 2020 16:30:24 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 355AA10002A;
- Thu, 30 Apr 2020 15:52:49 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DDF2410002A;
+ Thu, 30 Apr 2020 16:30:23 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F1152BE244;
- Thu, 30 Apr 2020 15:52:49 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CD1B421FE98;
+ Thu, 30 Apr 2020 16:30:23 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 30 Apr 2020 15:52:48 +0200
+ Thu, 30 Apr 2020 16:30:23 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 30 Apr 2020 15:52:46 +0200
-Message-ID: <20200430155234.1.If8f63efaa47eb0830ce241e3a62b2aa420e0883a@changeid>
+Date: Thu, 30 Apr 2020 16:30:19 +0200
+Message-ID: <20200430143021.3636-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG6NODE3.st.com (10.75.127.18) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
  definitions=2020-04-30_09:2020-04-30,
  2020-04-30 signatures=0
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: DT alignment with Linux
-	5.7-rc2
+ Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v4 0/2] arm: stm32mp1: activate data cache in
+	SPL and before relocation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,497 +73,151 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-DT alignment with Linux 5.7-rc2, including the kernel commits
 
-431c89e6f323 ARM: dts: stm32: use correct vqmmc regu for eMMC on stm32mp1 ED1/EV1 boards
-79e965053872 ARM: dts: stm32: add disable-wp property for SD-card on STM32MP1 boards
-877db62ea516 ARM: dts: stm32: add cd-gpios properties for SD-cards on STM32MP1 boards
-7519e95ba5f8 ARM: dts: stm32: Do clean up in stmpic nodes on stm32mp15 boards
-f68e2dbc591a ARM: dts: stm32: Rename stmfx joystick pins on stm32mp157c-ev1
-d6210da4f8bf ARM: dts: stm32: add cpu clock-frequency property on stm32mp15x
-b65b6fc56925 ARM: dts: stm32: add wakeup-source in all I2C nodes of stm32mp157c
-1c1cf5996cfb ARM: dts: stm32: add i2c4 sleep pinctrl on stm32mp157c-ed1
-bef15fc0fad9 ARM: dts: stm32: add i2c2/i2c5 sleep pinctrl on stm32mp157c-ev1
-b7fc0a87b9ac ARM: dts: stm32: add i2c4 sleep pinctrl on stm32mp15xx-dkx
-a5e557655285 ARM: dts: stm32: set i2c4 bus freq to 400KHz on stm32mp15 DK boards
-8bc631b650a6 ARM: dts: stm32: set i2c4 bus freq to 400KHz on stm32mp157c-ed1
-fccd6a577bb3 ARM: dts: stm32: Correct stmfx node name on stm32mp157c-ev1 board
-cc775a83db65 ARM: dts: stm32: add resets property on all DMA nodes on stm32mp151
-c5fae093511b ARM: dts: stm32: enable USB OTG Dual Role on stm32mp157c-ev1
-9879e2165758 ARM: dts: stm32: add USB OTG pinctrl to stm32mp15
-82ac8a81f985 ARM: dts: stm32: add USB OTG full support on stm32mp151
-8714b26e2863 ARM: dts: stm32: remove useless properties in stm32mp157a-avenger96 stmpic node
-a7959919709e ARM: dts: stm32: Add UART8 pins A pinmux entry on stm32mp1
-4d7c53a684da ARM: dts: stm32: Add USART3 pins A pinmux entry on stm32mp1
-80ab128332ee ARM: dts: stm32: Add SAI2A pins B pinmux entry on stm32mp1
-ab7f98c0c546 ARM: dts: stm32: Add Ethernet0 RMII pins A pinmux entry on stm32mp1
+V4 = cosmetic update of the previous serie V3
+"arm: stm32mp1: activate data cache in SPL and before relocation"
+http://patchwork.ozlabs.org/project/uboot/list/?series=172557
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
-Hi,
+This serie depends on the ARM cache serie:
+"arm: caches: allow to activate dcache in SPL and in U-Boot pre-reloc"
+http://patchwork.ozlabs.org/project/uboot/list/?series=172555
 
-Dependency with correction of GPIO support in SPL:
+I move tlb in .data section and simplify the implementation by reusing
+the default weak function dram_bank_mmu_setup() for MMU configuration
+and mmu_set_region_dcache_behaviour() to setup the specific behavior.
 
-[v2,09/12] gpio: stm32: support gpio ops in SPL
-http://patchwork.ozlabs.org/project/uboot/patch/20200422142834.v2.9.I355ddbc804eba6047ea147d830be57a5b9c4a87e@changeid/
+I also activate data cache on DDR for SPL.
 
-Patrick
+For information the gain of the second patch is limited (few ms) for boot
+from SDCARD: the SDMMC IP use internal DMA and data cache on DDR is
+not really used.
+
+Gain should be better for other boot use-case.
+
+Example of bootstage report on STM32MP157C-DK2, boot from SD card.
+
+1/ For trusted boot chain with TF-A
+
+a) Before
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (9 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        583,290    583,290  board_init_f
+      2,348,898  1,765,608  board_init_r
+      2,664,580    315,682  id=64
+      2,704,027     39,447  id=65
+      2,704,729        702  main_loop
+      5,563,519  2,858,790  id=175
+
+    Accumulated time:
+                    41,696  dm_r
+                   615,561  dm_f
+
+b) After the serie
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (9 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        583,401    583,401  board_init_f
+        727,725    144,324  board_init_r
+      1,043,362    315,637  id=64
+      1,082,806     39,444  id=65
+      1,083,507        701  main_loop
+      3,680,827  2,597,320  id=175
+
+    Accumulated time:
+                    36,047  dm_f
+                    41,718  dm_r
+
+2/ And for the basic boot chain with SPL
+
+a) Before:
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        195,613    195,613  SPL
+        837,867    642,254  end SPL
+        840,117      2,250  board_init_f
+      2,739,639  1,899,522  board_init_r
+      3,066,815    327,176  id=64
+      3,103,377     36,562  id=65
+      3,104,078        701  main_loop
+      3,142,171     38,093  id=175
+
+    Accumulated time:
+                    38,124  dm_spl
+                    41,956  dm_r
+                   648,861  dm_f
+
+b) After the serie
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        195,859    195,859  SPL
+        330,190    134,331  end SPL
+        332,408      2,218  board_init_f
+        482,688    150,280  board_init_r
+        808,694    326,006  id=64
+        845,029     36,335  id=65
+        845,730        701  main_loop
+      3,281,876  2,436,146  id=175
+
+    Accumulated time:
+                     3,169  dm_spl
+                    36,041  dm_f
+                    41,701  dm_r
+
+    STM32MP> bootstage report
+    Timer summary in microseconds (12 records):
+           Mark    Elapsed  Stage
+              0          0  reset
+        211,036    211,036  SPL
+        343,393    132,357  end SPL
+        345,645      2,252  board_init_f
+        496,596    150,951  board_init_r
+        822,256    325,660  id=64
+        858,451     36,195  id=65
+        859,153        702  main_loop
+      3,414,706  2,555,553  id=175
+
+    Accumulated time:
+                     3,132  dm_spl
+                    36,005  dm_f
+                    41,695  dm_r
 
 
- arch/arm/dts/stm32mp15-pinctrl.dtsi | 92 +++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp151.dtsi        | 13 +++-
- arch/arm/dts/stm32mp153.dtsi        |  1 +
- arch/arm/dts/stm32mp157c-ed1.dts    | 12 ++--
- arch/arm/dts/stm32mp157c-ev1.dts    | 13 ++--
- arch/arm/dts/stm32mp15xx-dhcom.dtsi |  3 +-
- arch/arm/dts/stm32mp15xx-dhcor.dtsi |  8 ---
- arch/arm/dts/stm32mp15xx-dkx.dtsi   | 10 ++--
- 8 files changed, 126 insertions(+), 26 deletions(-)
+Changes in v4:
+- fix commit message and comment and add Patrice Chotard reviewed-by
+- fix commit message and add Patrice Chotard reviewed-by
 
-diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-index 29acdc4afd..8d00391978 100644
---- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-@@ -213,6 +213,40 @@
- 		};
- 	};
- 
-+	ethernet0_rmii_pins_a: rmii-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('G', 13, AF11)>, /* ETH1_RMII_TXD0 */
-+				 <STM32_PINMUX('G', 14, AF11)>, /* ETH1_RMII_TXD1 */
-+				 <STM32_PINMUX('B', 11, AF11)>, /* ETH1_RMII_TX_EN */
-+				 <STM32_PINMUX('A', 1, AF0)>,   /* ETH1_RMII_REF_CLK */
-+				 <STM32_PINMUX('A', 2, AF11)>,  /* ETH1_MDIO */
-+				 <STM32_PINMUX('C', 1, AF11)>;  /* ETH1_MDC */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <2>;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('C', 4, AF11)>,  /* ETH1_RMII_RXD0 */
-+				 <STM32_PINMUX('C', 5, AF11)>,  /* ETH1_RMII_RXD1 */
-+				 <STM32_PINMUX('A', 7, AF11)>;  /* ETH1_RMII_CRS_DV */
-+			bias-disable;
-+		};
-+	};
-+
-+	ethernet0_rmii_pins_sleep_a: rmii-sleep-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('G', 13, ANALOG)>, /* ETH1_RMII_TXD0 */
-+				 <STM32_PINMUX('G', 14, ANALOG)>, /* ETH1_RMII_TXD1 */
-+				 <STM32_PINMUX('B', 11, ANALOG)>, /* ETH1_RMII_TX_EN */
-+				 <STM32_PINMUX('A', 2, ANALOG)>,  /* ETH1_MDIO */
-+				 <STM32_PINMUX('C', 1, ANALOG)>,  /* ETH1_MDC */
-+				 <STM32_PINMUX('C', 4, ANALOG)>,  /* ETH1_RMII_RXD0 */
-+				 <STM32_PINMUX('C', 5, ANALOG)>,  /* ETH1_RMII_RXD1 */
-+				 <STM32_PINMUX('A', 1, ANALOG)>,  /* ETH1_RMII_REF_CLK */
-+				 <STM32_PINMUX('A', 7, ANALOG)>;  /* ETH1_RMII_CRS_DV */
-+		};
-+	};
-+
- 	fmc_pins_a: fmc-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('D', 4, AF12)>, /* FMC_NOE */
-@@ -736,6 +770,25 @@
- 		};
- 	};
- 
-+	sai2a_pins_b: sai2a-2 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('I', 6, AF10)>,	/* SAI2_SD_A */
-+				 <STM32_PINMUX('I', 7, AF10)>,	/* SAI2_FS_A */
-+				 <STM32_PINMUX('D', 13, AF10)>;	/* SAI2_SCK_A */
-+			slew-rate = <0>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+	};
-+
-+	sai2a_sleep_pins_b: sai2a-sleep-3 {
-+		pins {
-+			pinmux = <STM32_PINMUX('I', 6, ANALOG)>,  /* SAI2_SD_A */
-+				 <STM32_PINMUX('I', 7, ANALOG)>,  /* SAI2_FS_A */
-+				 <STM32_PINMUX('D', 13, ANALOG)>; /* SAI2_SCK_A */
-+		};
-+	};
-+
- 	sai2b_pins_a: sai2b-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('E', 12, AF10)>, /* SAI2_SCK_B */
-@@ -1118,6 +1171,19 @@
- 		};
- 	};
- 
-+	usart3_pins_a: usart3-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('B', 10, AF7)>; /* USART3_TX */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <0>;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
-+			bias-disable;
-+		};
-+	};
-+
- 	uart4_pins_a: uart4-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
-@@ -1158,6 +1224,32 @@
- 			bias-disable;
- 		};
- 	};
-+
-+	uart8_pins_a: uart8-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('E', 1, AF8)>; /* UART8_TX */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <0>;
-+		};
-+		pins2 {
-+			pinmux = <STM32_PINMUX('E', 0, AF8)>; /* UART8_RX */
-+			bias-disable;
-+		};
-+	};
-+
-+	usbotg_hs_pins_a: usbotg-hs-0 {
-+		pins {
-+			pinmux = <STM32_PINMUX('A', 10, ANALOG)>; /* OTG_ID */
-+		};
-+	};
-+
-+	usbotg_fs_dp_dm_pins_a: usbotg-fs-dp-dm-0 {
-+		pins {
-+			pinmux = <STM32_PINMUX('A', 11, ANALOG)>, /* OTG_FS_DM */
-+				 <STM32_PINMUX('A', 12, ANALOG)>; /* OTG_FS_DP */
-+		};
-+	};
- };
- 
- &pinctrl_z {
-diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
-index f185639a46..75d2c0d296 100644
---- a/arch/arm/dts/stm32mp151.dtsi
-+++ b/arch/arm/dts/stm32mp151.dtsi
-@@ -17,6 +17,7 @@
- 
- 		cpu0: cpu@0 {
- 			compatible = "arm,cortex-a7";
-+			clock-frequency = <650000000>;
- 			device_type = "cpu";
- 			reg = <0>;
- 		};
-@@ -490,6 +491,7 @@
- 			resets = <&rcc I2C1_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -503,6 +505,7 @@
- 			resets = <&rcc I2C2_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -516,6 +519,7 @@
- 			resets = <&rcc I2C3_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -529,6 +533,7 @@
- 			resets = <&rcc I2C5_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -966,6 +971,7 @@
- 				     <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc DMA1>;
-+			resets = <&rcc DMA1_R>;
- 			#dma-cells = <4>;
- 			st,mem2mem;
- 			dma-requests = <8>;
-@@ -983,6 +989,7 @@
- 				     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc DMA2>;
-+			resets = <&rcc DMA2_R>;
- 			#dma-cells = <4>;
- 			st,mem2mem;
- 			dma-requests = <8>;
-@@ -996,6 +1003,7 @@
- 			dma-masters = <&dma1 &dma2>;
- 			dma-channels = <16>;
- 			clocks = <&rcc DMAMUX>;
-+			resets = <&rcc DMAMUX_R>;
- 		};
- 
- 		adc: adc@48003000 {
-@@ -1051,7 +1059,7 @@
- 		};
- 
- 		usbotg_hs: usb-otg@49000000 {
--			compatible = "snps,dwc2";
-+			compatible = "st,stm32mp15-hsotg", "snps,dwc2";
- 			reg = <0x49000000 0x10000>;
- 			clocks = <&rcc USBO_K>;
- 			clock-names = "otg";
-@@ -1296,6 +1304,7 @@
- 			reg = <0x58000000 0x1000>;
- 			interrupts = <GIC_SPI 122 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc MDMA>;
-+			resets = <&rcc MDMA_R>;
- 			#dma-cells = <5>;
- 			dma-channels = <32>;
- 			dma-requests = <48>;
-@@ -1495,6 +1504,7 @@
- 			resets = <&rcc I2C4_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -1530,6 +1540,7 @@
- 			resets = <&rcc I2C6_R>;
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-diff --git a/arch/arm/dts/stm32mp153.dtsi b/arch/arm/dts/stm32mp153.dtsi
-index 2d759fc601..6d9ab08667 100644
---- a/arch/arm/dts/stm32mp153.dtsi
-+++ b/arch/arm/dts/stm32mp153.dtsi
-@@ -10,6 +10,7 @@
- 	cpus {
- 		cpu1: cpu@1 {
- 			compatible = "arm,cortex-a7";
-+			clock-frequency = <650000000>;
- 			device_type = "cpu";
- 			reg = <1>;
- 		};
-diff --git a/arch/arm/dts/stm32mp157c-ed1.dts b/arch/arm/dts/stm32mp157c-ed1.dts
-index 05d5326405..4fb71100f5 100644
---- a/arch/arm/dts/stm32mp157c-ed1.dts
-+++ b/arch/arm/dts/stm32mp157c-ed1.dts
-@@ -135,10 +135,12 @@
- };
- 
- &i2c4 {
--	pinctrl-names = "default";
-+	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&i2c4_pins_a>;
-+	pinctrl-1 = <&i2c4_pins_sleep_a>;
- 	i2c-scl-rising-time-ns = <185>;
- 	i2c-scl-falling-time-ns = <20>;
-+	clock-frequency = <400000>;
- 	status = "okay";
- 	/* spare dmas for other usage */
- 	/delete-property/dmas;
-@@ -223,8 +225,6 @@
- 
- 			vdd_usb: ldo4 {
- 				regulator-name = "vdd_usb";
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
- 				interrupts = <IT_CURLIM_LDO4 0>;
- 			};
- 
-@@ -246,7 +246,6 @@
- 			vref_ddr: vref_ddr {
- 				regulator-name = "vref_ddr";
- 				regulator-always-on;
--				regulator-over-current-protection;
- 			};
- 
- 			bst_out: boost {
-@@ -318,7 +317,8 @@
- 	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_dir_pins_a>;
- 	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_dir_pins_a>;
- 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a &sdmmc1_dir_sleep_pins_a>;
--	broken-cd;
-+	cd-gpios = <&gpiog 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+	disable-wp;
- 	st,sig-dir;
- 	st,neg-edge;
- 	st,use-ckin;
-@@ -339,7 +339,7 @@
- 	st,neg-edge;
- 	bus-width = <8>;
- 	vmmc-supply = <&v3v3>;
--	vqmmc-supply = <&v3v3>;
-+	vqmmc-supply = <&vdd>;
- 	mmc-ddr-3_3v;
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
-index 228e35e168..8a4c7ff31a 100644
---- a/arch/arm/dts/stm32mp157c-ev1.dts
-+++ b/arch/arm/dts/stm32mp157c-ev1.dts
-@@ -174,8 +174,9 @@
- };
- 
- &i2c2 {
--	pinctrl-names = "default";
-+	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&i2c2_pins_a>;
-+	pinctrl-1 = <&i2c2_pins_sleep_a>;
- 	i2c-scl-rising-time-ns = <185>;
- 	i2c-scl-falling-time-ns = <20>;
- 	status = "okay";
-@@ -210,7 +211,7 @@
- 		interrupt-parent = <&gpioi>;
- 		vdd-supply = <&v3v3>;
- 
--		stmfx_pinctrl: stmfx-pin-controller {
-+		stmfx_pinctrl: pinctrl {
- 			compatible = "st,stmfx-0300-pinctrl";
- 			gpio-controller;
- 			#gpio-cells = <2>;
-@@ -218,7 +219,7 @@
- 			#interrupt-cells = <2>;
- 			gpio-ranges = <&stmfx_pinctrl 0 0 24>;
- 
--			joystick_pins: joystick {
-+			joystick_pins: joystick-pins {
- 				pins = "gpio0", "gpio1", "gpio2", "gpio3", "gpio4";
- 				bias-pull-down;
- 			};
-@@ -227,8 +228,9 @@
- };
- 
- &i2c5 {
--	pinctrl-names = "default";
-+	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&i2c5_pins_a>;
-+	pinctrl-1 = <&i2c5_pins_sleep_a>;
- 	i2c-scl-rising-time-ns = <185>;
- 	i2c-scl-falling-time-ns = <20>;
- 	status = "okay";
-@@ -353,7 +355,8 @@
- };
- 
- &usbotg_hs {
--	dr_mode = "peripheral";
-+	pinctrl-0 = <&usbotg_hs_pins_a>;
-+	pinctrl-names = "default";
- 	phys = <&usbphyc_port1 0>;
- 	phy-names = "usb2-phy";
- 	status = "okay";
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom.dtsi b/arch/arm/dts/stm32mp15xx-dhcom.dtsi
-index d8a255b9c6..b3f4cb4515 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcom.dtsi
-@@ -269,7 +269,8 @@
- 	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_dir_pins_a>;
- 	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_dir_pins_a>;
- 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a &sdmmc1_dir_sleep_pins_a>;
--	broken-cd;
-+	cd-gpios = <&gpioi 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+	disable-wp;
- 	st,sig-dir;
- 	st,neg-edge;
- 	st,use-ckin;
-diff --git a/arch/arm/dts/stm32mp15xx-dhcor.dtsi b/arch/arm/dts/stm32mp15xx-dhcor.dtsi
-index 97d370e119..ce17997142 100644
---- a/arch/arm/dts/stm32mp15xx-dhcor.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcor.dtsi
-@@ -51,10 +51,6 @@
- 		#interrupt-cells = <2>;
- 		status = "okay";
- 
--		st,main-control-register = <0x04>;
--		st,vin-control-register = <0xc0>;
--		st,usb-control-register = <0x30>;
--
- 		regulators {
- 			compatible = "st,stpmic1-regulators";
- 
-@@ -89,7 +85,6 @@
- 				regulator-min-microvolt = <2900000>;
- 				regulator-max-microvolt = <2900000>;
- 				regulator-always-on;
--				st,mask_reset;
- 				regulator-initial-mode = <0>;
- 				regulator-over-current-protection;
- 			};
-@@ -129,8 +124,6 @@
- 
- 			vdd_usb: ldo4 {
- 				regulator-name = "vdd_usb";
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
- 				interrupts = <IT_CURLIM_LDO4 0>;
- 				interrupt-parent = <&pmic>;
- 			};
-@@ -156,7 +149,6 @@
- 			vref_ddr: vref_ddr {
- 				regulator-name = "vref_ddr";
- 				regulator-always-on;
--				regulator-over-current-protection;
- 			};
- 
- 			bst_out: boost {
-diff --git a/arch/arm/dts/stm32mp15xx-dkx.dtsi b/arch/arm/dts/stm32mp15xx-dkx.dtsi
-index 9ce10a52f0..812e370ee4 100644
---- a/arch/arm/dts/stm32mp15xx-dkx.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dkx.dtsi
-@@ -221,10 +221,12 @@
- };
- 
- &i2c4 {
--	pinctrl-names = "default";
-+	pinctrl-names = "default", "sleep";
- 	pinctrl-0 = <&i2c4_pins_a>;
-+	pinctrl-1 = <&i2c4_pins_sleep_a>;
- 	i2c-scl-rising-time-ns = <185>;
- 	i2c-scl-falling-time-ns = <20>;
-+	clock-frequency = <400000>;
- 	status = "okay";
- 	/* spare dmas for other usage */
- 	/delete-property/dmas;
-@@ -327,8 +329,6 @@
- 
- 			vdd_usb: ldo4 {
- 				regulator-name = "vdd_usb";
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
- 				interrupts = <IT_CURLIM_LDO4 0>;
- 			};
- 
-@@ -351,7 +351,6 @@
- 			vref_ddr: vref_ddr {
- 				regulator-name = "vref_ddr";
- 				regulator-always-on;
--				regulator-over-current-protection;
- 			};
- 
- 			 bst_out: boost {
-@@ -502,7 +501,8 @@
- 	pinctrl-0 = <&sdmmc1_b4_pins_a>;
- 	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
- 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
--	broken-cd;
-+	cd-gpios = <&gpiob 7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+	disable-wp;
- 	st,neg-edge;
- 	bus-width = <4>;
- 	vmmc-supply = <&v3v3>;
+Changes in v3:
+- add Information in commit-message on early malloc and .BSS
+- remove debug message "bye"
+
+Changes in v2:
+- create a new function early_enable_caches
+- use TLB in .init section
+- use the default weak dram_bank_mmu_setup() and
+  use mmu_set_region_dcache_behaviour() to setup
+  the early MMU configuration
+- enable data cache on DDR in SPL, after DDR controller initialization
+- new
+
+Patrick Delaunay (2):
+  arm: stm32mp: activate data cache in SPL and before relocation
+  arm: stm32mp: activate data cache on DDR in SPL
+
+ arch/arm/mach-stm32mp/cpu.c | 43 ++++++++++++++++++++++++++++++++++++-
+ arch/arm/mach-stm32mp/spl.c | 19 ++++++++++++++++
+ 2 files changed, 61 insertions(+), 1 deletion(-)
+
 -- 
 2.17.1
 

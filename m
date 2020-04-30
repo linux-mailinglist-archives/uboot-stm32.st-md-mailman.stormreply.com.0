@@ -2,67 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33E431BF4E3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 12:06:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F22931BFA36
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 15:52:55 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ECBF8C36B11
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 10:06:35 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B6DF7C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Apr 2020 13:52:55 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 30F9CC36B0F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 656D4C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Apr 2020 10:06:34 +0000 (UTC)
+ Thu, 30 Apr 2020 13:52:54 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 03UA2qif009703; Thu, 30 Apr 2020 12:06:27 +0200
+ 03UDqkaS030950; Thu, 30 Apr 2020 15:52:49 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=UOCA/D3LocyjbZVs+sSElFmzus3T6W0F1a6fVRGydEg=;
- b=g+aq0JMaBli4H9djzAyH6ZU1Dkof+r7ruLaSeecz2FNQ5aJ29wlDURxh6ACTl6O3jJ75
- Vj4WxBt4dD+j0KwWGwsDBZQYa/5LtqLrRI2Djf5+1Dzx5lCtyI/9/KzbV0PlMrcAg79W
- j4upC/F56j5z9a7Qa6V49n+7EIAH+1f36BaPmMufZMcJt1/s2CIqIHbRMA2yrvQH+wrn
- kaaWgDfmJoJTSTJ6kIYkarhTG4DYzmQGV0WbqBlQ/o+avo9kX7UNtvRVy837KKGrvc3s
- +GR1T4/iU0+S/1+1ODkAiCRbRDs3Dq/k7gEhMeYkD5C8TAp72YeY8UsYrQ4QxM/63mG5 rg== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=SG9A92+7NQ2GYt4V7qbo7iGFoixMAlnkXDY/BCieAQ4=;
+ b=ZL+6sj7Fc9U5zkvSOuKz8a/dZQAoqRTmdE64yVwR/mUs0pwccDG2I6GCIRWnwoIFYr/h
+ HXK4AOxmp6tMlo2AkFDweGjIta8FUgvnKtLYPYz6dXrHU8eV7uWVTnamQGyfrjEmrHB/
+ 25v/N/cQev1N/bGNAsp+AevoJm9SKnDYM//zZNl0YLrbAI8Ah8OYRKrk99e9LDpIC4TY
+ +gqboBk71dhQmhvyKefQ5E76rescvM4mobOVNpEsZR1XIbyGBRXMn0OQgGkWJRnkkDgW
+ NwEvXJTxbLZPKu5AIaqO7ynbLfjojU805bGBADWJEedhcK1rPpCsE71rLLb0DgPX/PlR zA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 30mhjx3jg6-1
+ by mx07-00178001.pphosted.com with ESMTP id 30mhjx4sqd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Apr 2020 12:06:27 +0200
+ Thu, 30 Apr 2020 15:52:49 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B27AC10002A;
- Thu, 30 Apr 2020 12:06:26 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 355AA10002A;
+ Thu, 30 Apr 2020 15:52:49 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A7C602B3BD4;
- Thu, 30 Apr 2020 12:06:26 +0200 (CEST)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F1152BE244;
+ Thu, 30 Apr 2020 15:52:49 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 30 Apr 2020 12:06:26 +0200
-From: Patrice Chotard <patrice.chotard@st.com>
+ Thu, 30 Apr 2020 15:52:48 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 30 Apr 2020 12:06:19 +0200
-Message-ID: <20200430100619.28557-6-patrice.chotard@st.com>
+Date: Thu, 30 Apr 2020 15:52:46 +0200
+Message-ID: <20200430155234.1.If8f63efaa47eb0830ce241e3a62b2aa420e0883a@changeid>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200430100619.28557-1-patrice.chotard@st.com>
-References: <20200430100619.28557-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG6NODE3.st.com (10.75.127.18) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.676
- definitions=2020-04-30_06:2020-04-30,
+ definitions=2020-04-30_09:2020-04-30,
  2020-04-30 signatures=0
-Cc: Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH v4 5/5] doc: add bind/unbind command
-	documentation
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: DT alignment with Linux
+	5.7-rc2
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,96 +72,497 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add documentation in doc/drivel-model for the bind/unbind command.
-Part of this documentation is extracted from original patch commit
-message:
-commit 49c752c93a78 ("cmd: Add bind/unbind commands to bind a device to a driver from the command line")
+DT alignment with Linux 5.7-rc2, including the kernel commits
 
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+431c89e6f323 ARM: dts: stm32: use correct vqmmc regu for eMMC on stm32mp1 ED1/EV1 boards
+79e965053872 ARM: dts: stm32: add disable-wp property for SD-card on STM32MP1 boards
+877db62ea516 ARM: dts: stm32: add cd-gpios properties for SD-cards on STM32MP1 boards
+7519e95ba5f8 ARM: dts: stm32: Do clean up in stmpic nodes on stm32mp15 boards
+f68e2dbc591a ARM: dts: stm32: Rename stmfx joystick pins on stm32mp157c-ev1
+d6210da4f8bf ARM: dts: stm32: add cpu clock-frequency property on stm32mp15x
+b65b6fc56925 ARM: dts: stm32: add wakeup-source in all I2C nodes of stm32mp157c
+1c1cf5996cfb ARM: dts: stm32: add i2c4 sleep pinctrl on stm32mp157c-ed1
+bef15fc0fad9 ARM: dts: stm32: add i2c2/i2c5 sleep pinctrl on stm32mp157c-ev1
+b7fc0a87b9ac ARM: dts: stm32: add i2c4 sleep pinctrl on stm32mp15xx-dkx
+a5e557655285 ARM: dts: stm32: set i2c4 bus freq to 400KHz on stm32mp15 DK boards
+8bc631b650a6 ARM: dts: stm32: set i2c4 bus freq to 400KHz on stm32mp157c-ed1
+fccd6a577bb3 ARM: dts: stm32: Correct stmfx node name on stm32mp157c-ev1 board
+cc775a83db65 ARM: dts: stm32: add resets property on all DMA nodes on stm32mp151
+c5fae093511b ARM: dts: stm32: enable USB OTG Dual Role on stm32mp157c-ev1
+9879e2165758 ARM: dts: stm32: add USB OTG pinctrl to stm32mp15
+82ac8a81f985 ARM: dts: stm32: add USB OTG full support on stm32mp151
+8714b26e2863 ARM: dts: stm32: remove useless properties in stm32mp157a-avenger96 stmpic node
+a7959919709e ARM: dts: stm32: Add UART8 pins A pinmux entry on stm32mp1
+4d7c53a684da ARM: dts: stm32: Add USART3 pins A pinmux entry on stm32mp1
+80ab128332ee ARM: dts: stm32: Add SAI2A pins B pinmux entry on stm32mp1
+ab7f98c0c546 ARM: dts: stm32: Add Ethernet0 RMII pins A pinmux entry on stm32mp1
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
+Hi,
 
-Changes in v4:
-   - fix make htmldocs error "Title underline too short"
+Dependency with correction of GPIO support in SPL:
 
-Changes in v3:
-   - fix typo
-   - add bind/unbind parameters description and how to find them
+[v2,09/12] gpio: stm32: support gpio ops in SPL
+http://patchwork.ozlabs.org/project/uboot/patch/20200422142834.v2.9.I355ddbc804eba6047ea147d830be57a5b9c4a87e@changeid/
 
-Changes in v2: None
+Patrick
 
- doc/driver-model/bind.rst  | 49 ++++++++++++++++++++++++++++++++++++++
- doc/driver-model/index.rst |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 doc/driver-model/bind.rst
 
-diff --git a/doc/driver-model/bind.rst b/doc/driver-model/bind.rst
-new file mode 100644
-index 0000000000..e3e9cb4d3c
---- /dev/null
-+++ b/doc/driver-model/bind.rst
-@@ -0,0 +1,49 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Patrice Chotard <patrice.chotard@st.com>
-+
-+Binding/unbinding a driver
-+==========================
-+
-+This document aims to describe the bind and unbind commands.
-+
-+For debugging purpose, it should be useful to bind or unbind a driver from
-+the U-boot command line.
-+
-+The unbind command calls the remove device driver callback and unbind the
-+device from its driver.
-+
-+The bind command binds a device to its driver.
-+
-+In some cases it can be useful to be able to bind a device to a driver from
-+the command line.
-+The obvious example is for versatile devices such as USB gadget.
-+Another use case is when the devices are not yet ready at startup and
-+require some setup before the drivers are bound (ex: FPGA which bitsream is
-+fetched from a mass storage or ethernet)
-+
-+usage:
-+
-+bind <node path> <driver>
-+bind <class> <index> <driver>
-+
-+unbind <node path>
-+unbind <class> <index>
-+unbind <class> <index> <driver>
-+
-+Where:
-+ - <node path> is the node's device tree path
-+ - <class> is one of the class available in the list given by the "dm uclass"
-+   command or first column of "dm tree" command.
-+ - <index> is the index of the parent's node (second column of "dm tree" output).
-+ - <driver> is the driver name to bind given by the "dm drivers" command or the by
-+   the fourth column of "dm tree" output.
-+
-+example:
-+
-+bind usb_dev_generic 0 usb_ether
-+unbind usb_dev_generic 0 usb_ether
-+or
-+unbind eth 1
-+
-+bind /ocp/omap_dwc3@48380000/usb@48390000 usb_ether
-+unbind /ocp/omap_dwc3@48380000/usb@48390000
-diff --git a/doc/driver-model/index.rst b/doc/driver-model/index.rst
-index b9df221627..37ef3721df 100644
---- a/doc/driver-model/index.rst
-+++ b/doc/driver-model/index.rst
-@@ -6,6 +6,7 @@ Driver Model
- .. toctree::
-    :maxdepth: 2
+ arch/arm/dts/stm32mp15-pinctrl.dtsi | 92 +++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp151.dtsi        | 13 +++-
+ arch/arm/dts/stm32mp153.dtsi        |  1 +
+ arch/arm/dts/stm32mp157c-ed1.dts    | 12 ++--
+ arch/arm/dts/stm32mp157c-ev1.dts    | 13 ++--
+ arch/arm/dts/stm32mp15xx-dhcom.dtsi |  3 +-
+ arch/arm/dts/stm32mp15xx-dhcor.dtsi |  8 ---
+ arch/arm/dts/stm32mp15xx-dkx.dtsi   | 10 ++--
+ 8 files changed, 126 insertions(+), 26 deletions(-)
+
+diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+index 29acdc4afd..8d00391978 100644
+--- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
++++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+@@ -213,6 +213,40 @@
+ 		};
+ 	};
  
-+   bind
-    debugging
-    design
-    ethernet
++	ethernet0_rmii_pins_a: rmii-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('G', 13, AF11)>, /* ETH1_RMII_TXD0 */
++				 <STM32_PINMUX('G', 14, AF11)>, /* ETH1_RMII_TXD1 */
++				 <STM32_PINMUX('B', 11, AF11)>, /* ETH1_RMII_TX_EN */
++				 <STM32_PINMUX('A', 1, AF0)>,   /* ETH1_RMII_REF_CLK */
++				 <STM32_PINMUX('A', 2, AF11)>,  /* ETH1_MDIO */
++				 <STM32_PINMUX('C', 1, AF11)>;  /* ETH1_MDC */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <2>;
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX('C', 4, AF11)>,  /* ETH1_RMII_RXD0 */
++				 <STM32_PINMUX('C', 5, AF11)>,  /* ETH1_RMII_RXD1 */
++				 <STM32_PINMUX('A', 7, AF11)>;  /* ETH1_RMII_CRS_DV */
++			bias-disable;
++		};
++	};
++
++	ethernet0_rmii_pins_sleep_a: rmii-sleep-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('G', 13, ANALOG)>, /* ETH1_RMII_TXD0 */
++				 <STM32_PINMUX('G', 14, ANALOG)>, /* ETH1_RMII_TXD1 */
++				 <STM32_PINMUX('B', 11, ANALOG)>, /* ETH1_RMII_TX_EN */
++				 <STM32_PINMUX('A', 2, ANALOG)>,  /* ETH1_MDIO */
++				 <STM32_PINMUX('C', 1, ANALOG)>,  /* ETH1_MDC */
++				 <STM32_PINMUX('C', 4, ANALOG)>,  /* ETH1_RMII_RXD0 */
++				 <STM32_PINMUX('C', 5, ANALOG)>,  /* ETH1_RMII_RXD1 */
++				 <STM32_PINMUX('A', 1, ANALOG)>,  /* ETH1_RMII_REF_CLK */
++				 <STM32_PINMUX('A', 7, ANALOG)>;  /* ETH1_RMII_CRS_DV */
++		};
++	};
++
+ 	fmc_pins_a: fmc-0 {
+ 		pins1 {
+ 			pinmux = <STM32_PINMUX('D', 4, AF12)>, /* FMC_NOE */
+@@ -736,6 +770,25 @@
+ 		};
+ 	};
+ 
++	sai2a_pins_b: sai2a-2 {
++		pins1 {
++			pinmux = <STM32_PINMUX('I', 6, AF10)>,	/* SAI2_SD_A */
++				 <STM32_PINMUX('I', 7, AF10)>,	/* SAI2_FS_A */
++				 <STM32_PINMUX('D', 13, AF10)>;	/* SAI2_SCK_A */
++			slew-rate = <0>;
++			drive-push-pull;
++			bias-disable;
++		};
++	};
++
++	sai2a_sleep_pins_b: sai2a-sleep-3 {
++		pins {
++			pinmux = <STM32_PINMUX('I', 6, ANALOG)>,  /* SAI2_SD_A */
++				 <STM32_PINMUX('I', 7, ANALOG)>,  /* SAI2_FS_A */
++				 <STM32_PINMUX('D', 13, ANALOG)>; /* SAI2_SCK_A */
++		};
++	};
++
+ 	sai2b_pins_a: sai2b-0 {
+ 		pins1 {
+ 			pinmux = <STM32_PINMUX('E', 12, AF10)>, /* SAI2_SCK_B */
+@@ -1118,6 +1171,19 @@
+ 		};
+ 	};
+ 
++	usart3_pins_a: usart3-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('B', 10, AF7)>; /* USART3_TX */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <0>;
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
++			bias-disable;
++		};
++	};
++
+ 	uart4_pins_a: uart4-0 {
+ 		pins1 {
+ 			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
+@@ -1158,6 +1224,32 @@
+ 			bias-disable;
+ 		};
+ 	};
++
++	uart8_pins_a: uart8-0 {
++		pins1 {
++			pinmux = <STM32_PINMUX('E', 1, AF8)>; /* UART8_TX */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <0>;
++		};
++		pins2 {
++			pinmux = <STM32_PINMUX('E', 0, AF8)>; /* UART8_RX */
++			bias-disable;
++		};
++	};
++
++	usbotg_hs_pins_a: usbotg-hs-0 {
++		pins {
++			pinmux = <STM32_PINMUX('A', 10, ANALOG)>; /* OTG_ID */
++		};
++	};
++
++	usbotg_fs_dp_dm_pins_a: usbotg-fs-dp-dm-0 {
++		pins {
++			pinmux = <STM32_PINMUX('A', 11, ANALOG)>, /* OTG_FS_DM */
++				 <STM32_PINMUX('A', 12, ANALOG)>; /* OTG_FS_DP */
++		};
++	};
+ };
+ 
+ &pinctrl_z {
+diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
+index f185639a46..75d2c0d296 100644
+--- a/arch/arm/dts/stm32mp151.dtsi
++++ b/arch/arm/dts/stm32mp151.dtsi
+@@ -17,6 +17,7 @@
+ 
+ 		cpu0: cpu@0 {
+ 			compatible = "arm,cortex-a7";
++			clock-frequency = <650000000>;
+ 			device_type = "cpu";
+ 			reg = <0>;
+ 		};
+@@ -490,6 +491,7 @@
+ 			resets = <&rcc I2C1_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+@@ -503,6 +505,7 @@
+ 			resets = <&rcc I2C2_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+@@ -516,6 +519,7 @@
+ 			resets = <&rcc I2C3_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+@@ -529,6 +533,7 @@
+ 			resets = <&rcc I2C5_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+@@ -966,6 +971,7 @@
+ 				     <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>,
+ 				     <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
+ 			clocks = <&rcc DMA1>;
++			resets = <&rcc DMA1_R>;
+ 			#dma-cells = <4>;
+ 			st,mem2mem;
+ 			dma-requests = <8>;
+@@ -983,6 +989,7 @@
+ 				     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
+ 				     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>;
+ 			clocks = <&rcc DMA2>;
++			resets = <&rcc DMA2_R>;
+ 			#dma-cells = <4>;
+ 			st,mem2mem;
+ 			dma-requests = <8>;
+@@ -996,6 +1003,7 @@
+ 			dma-masters = <&dma1 &dma2>;
+ 			dma-channels = <16>;
+ 			clocks = <&rcc DMAMUX>;
++			resets = <&rcc DMAMUX_R>;
+ 		};
+ 
+ 		adc: adc@48003000 {
+@@ -1051,7 +1059,7 @@
+ 		};
+ 
+ 		usbotg_hs: usb-otg@49000000 {
+-			compatible = "snps,dwc2";
++			compatible = "st,stm32mp15-hsotg", "snps,dwc2";
+ 			reg = <0x49000000 0x10000>;
+ 			clocks = <&rcc USBO_K>;
+ 			clock-names = "otg";
+@@ -1296,6 +1304,7 @@
+ 			reg = <0x58000000 0x1000>;
+ 			interrupts = <GIC_SPI 122 IRQ_TYPE_LEVEL_HIGH>;
+ 			clocks = <&rcc MDMA>;
++			resets = <&rcc MDMA_R>;
+ 			#dma-cells = <5>;
+ 			dma-channels = <32>;
+ 			dma-requests = <48>;
+@@ -1495,6 +1504,7 @@
+ 			resets = <&rcc I2C4_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+@@ -1530,6 +1540,7 @@
+ 			resets = <&rcc I2C6_R>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
++			wakeup-source;
+ 			status = "disabled";
+ 		};
+ 
+diff --git a/arch/arm/dts/stm32mp153.dtsi b/arch/arm/dts/stm32mp153.dtsi
+index 2d759fc601..6d9ab08667 100644
+--- a/arch/arm/dts/stm32mp153.dtsi
++++ b/arch/arm/dts/stm32mp153.dtsi
+@@ -10,6 +10,7 @@
+ 	cpus {
+ 		cpu1: cpu@1 {
+ 			compatible = "arm,cortex-a7";
++			clock-frequency = <650000000>;
+ 			device_type = "cpu";
+ 			reg = <1>;
+ 		};
+diff --git a/arch/arm/dts/stm32mp157c-ed1.dts b/arch/arm/dts/stm32mp157c-ed1.dts
+index 05d5326405..4fb71100f5 100644
+--- a/arch/arm/dts/stm32mp157c-ed1.dts
++++ b/arch/arm/dts/stm32mp157c-ed1.dts
+@@ -135,10 +135,12 @@
+ };
+ 
+ &i2c4 {
+-	pinctrl-names = "default";
++	pinctrl-names = "default", "sleep";
+ 	pinctrl-0 = <&i2c4_pins_a>;
++	pinctrl-1 = <&i2c4_pins_sleep_a>;
+ 	i2c-scl-rising-time-ns = <185>;
+ 	i2c-scl-falling-time-ns = <20>;
++	clock-frequency = <400000>;
+ 	status = "okay";
+ 	/* spare dmas for other usage */
+ 	/delete-property/dmas;
+@@ -223,8 +225,6 @@
+ 
+ 			vdd_usb: ldo4 {
+ 				regulator-name = "vdd_usb";
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+ 				interrupts = <IT_CURLIM_LDO4 0>;
+ 			};
+ 
+@@ -246,7 +246,6 @@
+ 			vref_ddr: vref_ddr {
+ 				regulator-name = "vref_ddr";
+ 				regulator-always-on;
+-				regulator-over-current-protection;
+ 			};
+ 
+ 			bst_out: boost {
+@@ -318,7 +317,8 @@
+ 	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_dir_pins_a>;
+ 	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_dir_pins_a>;
+ 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a &sdmmc1_dir_sleep_pins_a>;
+-	broken-cd;
++	cd-gpios = <&gpiog 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++	disable-wp;
+ 	st,sig-dir;
+ 	st,neg-edge;
+ 	st,use-ckin;
+@@ -339,7 +339,7 @@
+ 	st,neg-edge;
+ 	bus-width = <8>;
+ 	vmmc-supply = <&v3v3>;
+-	vqmmc-supply = <&v3v3>;
++	vqmmc-supply = <&vdd>;
+ 	mmc-ddr-3_3v;
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
+index 228e35e168..8a4c7ff31a 100644
+--- a/arch/arm/dts/stm32mp157c-ev1.dts
++++ b/arch/arm/dts/stm32mp157c-ev1.dts
+@@ -174,8 +174,9 @@
+ };
+ 
+ &i2c2 {
+-	pinctrl-names = "default";
++	pinctrl-names = "default", "sleep";
+ 	pinctrl-0 = <&i2c2_pins_a>;
++	pinctrl-1 = <&i2c2_pins_sleep_a>;
+ 	i2c-scl-rising-time-ns = <185>;
+ 	i2c-scl-falling-time-ns = <20>;
+ 	status = "okay";
+@@ -210,7 +211,7 @@
+ 		interrupt-parent = <&gpioi>;
+ 		vdd-supply = <&v3v3>;
+ 
+-		stmfx_pinctrl: stmfx-pin-controller {
++		stmfx_pinctrl: pinctrl {
+ 			compatible = "st,stmfx-0300-pinctrl";
+ 			gpio-controller;
+ 			#gpio-cells = <2>;
+@@ -218,7 +219,7 @@
+ 			#interrupt-cells = <2>;
+ 			gpio-ranges = <&stmfx_pinctrl 0 0 24>;
+ 
+-			joystick_pins: joystick {
++			joystick_pins: joystick-pins {
+ 				pins = "gpio0", "gpio1", "gpio2", "gpio3", "gpio4";
+ 				bias-pull-down;
+ 			};
+@@ -227,8 +228,9 @@
+ };
+ 
+ &i2c5 {
+-	pinctrl-names = "default";
++	pinctrl-names = "default", "sleep";
+ 	pinctrl-0 = <&i2c5_pins_a>;
++	pinctrl-1 = <&i2c5_pins_sleep_a>;
+ 	i2c-scl-rising-time-ns = <185>;
+ 	i2c-scl-falling-time-ns = <20>;
+ 	status = "okay";
+@@ -353,7 +355,8 @@
+ };
+ 
+ &usbotg_hs {
+-	dr_mode = "peripheral";
++	pinctrl-0 = <&usbotg_hs_pins_a>;
++	pinctrl-names = "default";
+ 	phys = <&usbphyc_port1 0>;
+ 	phy-names = "usb2-phy";
+ 	status = "okay";
+diff --git a/arch/arm/dts/stm32mp15xx-dhcom.dtsi b/arch/arm/dts/stm32mp15xx-dhcom.dtsi
+index d8a255b9c6..b3f4cb4515 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcom.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dhcom.dtsi
+@@ -269,7 +269,8 @@
+ 	pinctrl-0 = <&sdmmc1_b4_pins_a &sdmmc1_dir_pins_a>;
+ 	pinctrl-1 = <&sdmmc1_b4_od_pins_a &sdmmc1_dir_pins_a>;
+ 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a &sdmmc1_dir_sleep_pins_a>;
+-	broken-cd;
++	cd-gpios = <&gpioi 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++	disable-wp;
+ 	st,sig-dir;
+ 	st,neg-edge;
+ 	st,use-ckin;
+diff --git a/arch/arm/dts/stm32mp15xx-dhcor.dtsi b/arch/arm/dts/stm32mp15xx-dhcor.dtsi
+index 97d370e119..ce17997142 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcor.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dhcor.dtsi
+@@ -51,10 +51,6 @@
+ 		#interrupt-cells = <2>;
+ 		status = "okay";
+ 
+-		st,main-control-register = <0x04>;
+-		st,vin-control-register = <0xc0>;
+-		st,usb-control-register = <0x30>;
+-
+ 		regulators {
+ 			compatible = "st,stpmic1-regulators";
+ 
+@@ -89,7 +85,6 @@
+ 				regulator-min-microvolt = <2900000>;
+ 				regulator-max-microvolt = <2900000>;
+ 				regulator-always-on;
+-				st,mask_reset;
+ 				regulator-initial-mode = <0>;
+ 				regulator-over-current-protection;
+ 			};
+@@ -129,8 +124,6 @@
+ 
+ 			vdd_usb: ldo4 {
+ 				regulator-name = "vdd_usb";
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+ 				interrupts = <IT_CURLIM_LDO4 0>;
+ 				interrupt-parent = <&pmic>;
+ 			};
+@@ -156,7 +149,6 @@
+ 			vref_ddr: vref_ddr {
+ 				regulator-name = "vref_ddr";
+ 				regulator-always-on;
+-				regulator-over-current-protection;
+ 			};
+ 
+ 			bst_out: boost {
+diff --git a/arch/arm/dts/stm32mp15xx-dkx.dtsi b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+index 9ce10a52f0..812e370ee4 100644
+--- a/arch/arm/dts/stm32mp15xx-dkx.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+@@ -221,10 +221,12 @@
+ };
+ 
+ &i2c4 {
+-	pinctrl-names = "default";
++	pinctrl-names = "default", "sleep";
+ 	pinctrl-0 = <&i2c4_pins_a>;
++	pinctrl-1 = <&i2c4_pins_sleep_a>;
+ 	i2c-scl-rising-time-ns = <185>;
+ 	i2c-scl-falling-time-ns = <20>;
++	clock-frequency = <400000>;
+ 	status = "okay";
+ 	/* spare dmas for other usage */
+ 	/delete-property/dmas;
+@@ -327,8 +329,6 @@
+ 
+ 			vdd_usb: ldo4 {
+ 				regulator-name = "vdd_usb";
+-				regulator-min-microvolt = <3300000>;
+-				regulator-max-microvolt = <3300000>;
+ 				interrupts = <IT_CURLIM_LDO4 0>;
+ 			};
+ 
+@@ -351,7 +351,6 @@
+ 			vref_ddr: vref_ddr {
+ 				regulator-name = "vref_ddr";
+ 				regulator-always-on;
+-				regulator-over-current-protection;
+ 			};
+ 
+ 			 bst_out: boost {
+@@ -502,7 +501,8 @@
+ 	pinctrl-0 = <&sdmmc1_b4_pins_a>;
+ 	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
+ 	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
+-	broken-cd;
++	cd-gpios = <&gpiob 7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++	disable-wp;
+ 	st,neg-edge;
+ 	bus-width = <4>;
+ 	vmmc-supply = <&v3v3>;
 -- 
 2.17.1
 

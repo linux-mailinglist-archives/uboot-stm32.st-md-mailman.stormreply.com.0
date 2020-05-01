@@ -2,66 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67BBD1C2023
-	for <lists+uboot-stm32@lfdr.de>; Fri,  1 May 2020 23:56:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70E731C2024
+	for <lists+uboot-stm32@lfdr.de>; Fri,  1 May 2020 23:56:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3160DC36B0E
-	for <lists+uboot-stm32@lfdr.de>; Fri,  1 May 2020 21:56:20 +0000 (UTC)
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
- [209.85.160.196])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 39B0EC36B0E
+	for <lists+uboot-stm32@lfdr.de>; Fri,  1 May 2020 21:56:26 +0000 (UTC)
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+ [209.85.160.194])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01906C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 38325C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  1 May 2020 21:56:19 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id k12so9116704qtm.4
+ Fri,  1 May 2020 21:56:25 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id v26so9113888qto.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 01 May 2020 14:56:18 -0700 (PDT)
+ Fri, 01 May 2020 14:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=yBrWFhUVCqGjkmD/L0vWYsmmndZgUlhFZlZBggQd6i4=;
- b=rd13nfpfah3QNHIffqn1a5XvspBfXfXfdVsmz/LZA42IqZWKJ/wGWET3uRlw3rZWna
- TBU49229Jar7Ol2qtx9t/IxSaUjg0fyqbfQXtT5pd9hJ6t8VCh3FNwE92tKgOBFJra0I
- ZKDcVnEePx8r7nu4ThA3d6NExRyy8bLXo6xYw=
+ bh=hUTWwJ+95bKLX6QHr3fjBDbVV9MqZT+h+njrUiT+tek=;
+ b=SQJ2O2EKLAw/nMRHA+hcZ5l6P4XLinUzZ9xYwgaSrAewwNcogCK0JO6Yriy5Rd8Rg4
+ siTI1OrIR6jchwc6jlMWODX6RkCG5VXwxqEu4H5gqbnUD9x//IC6snThCK7/mzz+uW1k
+ vhtQGqAn0GhugqFPF6+L6RmZ35hY6CRPyOnDM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=yBrWFhUVCqGjkmD/L0vWYsmmndZgUlhFZlZBggQd6i4=;
- b=UdE/aynycKQkWmOIIN0sDafzOkm+t4J2sdTN6jtfTmV/Rnl3PRleBruOVQtSKVO6nG
- RbeJiJrhoEskUu9hmTUvK2aHKuOPztti0c//9c0gBeQXbvfMkVlAwRH5B6eGYq+8KVN9
- UHG4jNLmy35vre9o/XUXPq3BLcXTO7KfZ0ObmFAQCXRBIYaqa9zXJJPD34b/gMH1XbNu
- v6InVkpcpUbFdWs64TgmJ4JSMPGRt+NCNmVxiZTFhrvWvyGloPU4ZX5uqwJyIDsXhLrz
- Jn6vho7C2Wu8HEqYNqHPwD7WilqvKr5K4IYfVLqPRiwy3PayZjmiCvnGkwcchvIviQ/9
- K69Q==
-X-Gm-Message-State: AGi0PuZv9NEfQqGpt2WFmz9pjSSkm7CpWWoB5RMUPWXsZI1cQRxG2Hzv
- CDRsDzW359fgl+3YNgOGCfHyJw==
-X-Google-Smtp-Source: APiQypJGqhvvTfqmH88DIOT++4k8CecRx+FYLa3y7cRjGgwy8dPlVrxhElVRY2a6Ws98Qrr9jgkdPg==
-X-Received: by 2002:ac8:e8f:: with SMTP id v15mr5826820qti.391.1588370177913; 
- Fri, 01 May 2020 14:56:17 -0700 (PDT)
+ bh=hUTWwJ+95bKLX6QHr3fjBDbVV9MqZT+h+njrUiT+tek=;
+ b=WSAqIjD/MGUxgevPvVPr6i3kVjY9TxvwWzmy/4ui59Qc4019ugXd8mQ6zT1SFWeYaX
+ SdnV1XdzY3EWDgX/MQTdw6lAArXe44nA4Tb5DcQE0XvmUpJe2sSjsO7bRJzERkWcHzcK
+ 0yFabMVZUaspAk63rgEKh8nGATR1EB/HsrvKpDHd7h2QR+M2BTHaTU8LYLsv3pCl3hGJ
+ PSouwieBb979eq0ON9JaTZnHiIO3phucJth5qFb9PLNyOjTudgbug6Qx0hv74MBpIHNZ
+ EZis6NsrjEKx7j/pwfrCrHOziHA1MiX1a46STiWArg0WAAcekhtZe2KHhFKRU76Dl2ua
+ 0C+g==
+X-Gm-Message-State: AGi0PuY1LkadJEQZn+5KcUNKLboOsNO1n9P5TPmQuRyI5XfjXFJY5n86
+ mxaDXY0/pLmQUKPUOfeHwPtG5A==
+X-Google-Smtp-Source: APiQypLKprs/PGgezyKQtzrXvhlYqLPrKT9tj++Mn7V3bqZeyqq4w48E8da1O1BQ1q1/P/htucKmAg==
+X-Received: by 2002:ac8:6e8c:: with SMTP id c12mr6141426qtv.374.1588370184129; 
+ Fri, 01 May 2020 14:56:24 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-826f-8453-a408-e16a-eb16.inf6.spectrum.com.
  [2606:a000:1401:826f:8453:a408:e16a:eb16])
- by smtp.gmail.com with ESMTPSA id j9sm3470934qkg.88.2020.05.01.14.56.16
+ by smtp.gmail.com with ESMTPSA id h25sm3350652qto.87.2020.05.01.14.56.22
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 01 May 2020 14:56:16 -0700 (PDT)
-Date: Fri, 1 May 2020 17:56:14 -0400
+ Fri, 01 May 2020 14:56:23 -0700 (PDT)
+Date: Fri, 1 May 2020 17:56:20 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200501215614.GL12564@bill-the-cat>
+Message-ID: <20200501215620.GM12564@bill-the-cat>
 References: <20200424182017.11852-1-patrick.delaunay@st.com>
- <20200424201957.v2.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
+ <20200424201957.v2.2.Ib6abcb05422a74bc6bc03daa71b15c98c99dbc5d@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20200424201957.v2.1.I64599059b66bacb531db38c67273754a145dbad8@changeid>
+In-Reply-To: <20200424201957.v2.2.Ib6abcb05422a74bc6bc03daa71b15c98c99dbc5d@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, Lokesh Vutla <lokeshvutla@ti.com>,
+Cc: Marek Vasut <marex@denx.de>,
+ Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
  Simon Glass <sjg@chromium.org>, Alexey Brodkin <abrodkin@synopsys.com>,
  u-boot@lists.denx.de, Trevor Woerner <trevor@toganlabs.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/3] arm: caches: protect
- dram_bank_mmu_setup access to bi_dram
+Subject: Re: [Uboot-stm32] [PATCH v2 2/3] arm: caches: add
+	DCACHE_DEFAULT_OPTION
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,33 +75,31 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4000713328792213916=="
+Content-Type: multipart/mixed; boundary="===============3000419049462708257=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4000713328792213916==
+--===============3000419049462708257==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="U3s59FfKcByyGl+j"
+	protocol="application/pgp-signature"; boundary="utPK4TBebyzZxMrE"
 Content-Disposition: inline
 
 
---U3s59FfKcByyGl+j
+--utPK4TBebyzZxMrE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 24, 2020 at 08:20:15PM +0200, Patrick Delaunay wrote:
+On Fri, Apr 24, 2020 at 08:20:16PM +0200, Patrick Delaunay wrote:
 
-> Add protection in dram_bank_mmu_setup() to avoid access to bd->bi_dram
-> before relocation.
+> Add the new flags DCACHE_DEFAULT_OPTION to define the default
+> option to use according the compilation flags
+> CONFIG_SYS_ARM_CACHE_*.
 >=20
-> This patch allow to use the generic weak function dram_bank_mmu_setup
-> to activate the MMU and the data cache in SPL or in U-Boot before
-> relocation, when bd->bi_dram is not yet initialized.
->=20
-> In this cases, the MMU must be initialized explicitly with
-> mmu_set_region_dcache_behaviour function.
+> This new compilation flag allows to simplify dram_bank_mmu_setup()
+> and can be used as third parameter (option=3Ddcache option to select)
+> of mmu_set_region_dcache_behaviour function.
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
@@ -108,27 +108,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---U3s59FfKcByyGl+j
+--utPK4TBebyzZxMrE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6smv4ACgkQFHw5/5Y0
-tyy56gv+KLiheUVF5i81z/4zh4DimSUc6NumwD2yN3+oIoo7NHvyRPvaypQS5Wh1
-SFGl+DzIwOwBPwJ//UgghvL4G1ChEud7vo2akmrVgO2H09uPJ3PaESQfLEbzyVnV
-C5mmyDmtawn4+PLIlnNr+9MDvXdcYmDLe2YNrMxDVbnHVwvrUgdPushz8j/wXAcC
-zz5Kjqc19ou7u3W1lesjlCHJBoV5K7I5T6G6AM1reNC0HnEDgjbPg2Le+ihRkCvz
-gehRgLJT0uiZVvy/qDpSW49iDCyxcAYpAcak1qV3WMlDGZYzc0Ji1ikleQ8yXonV
-cPtD5J1FH/TN2sq5e1RJ6ePzrr09HhNGscPVjWRoqBgKJf9U1o6BgFL25s4t4Gj0
-mCt8lBwerY05MDS6Be5SqwecakCHlZjM1SlycKNMqVWej+iQ7uky1g6Q6NJC5jGy
-kjj1svJxLQzLiNuZsmTGYLQsB3i17Miiuu2ayEBtGJDfuDEphF7VqJHi1vdiEnjv
-CpoChdnF
-=u37X
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl6smwQACgkQFHw5/5Y0
+tyyYLAv8CdsB2Ry2jAej+zGOtE8b/MOG8T2CYOdJISmP3OrXOGtzlR40inEJExEX
+LfyMScRmY3u14HNk07g8Kb3oGEhib6nZfC92dODg19d7gl1PZm84og9yDFjsnarT
+z6VY08fZR8UyfKD0x+rpY7DZA6KJFAuxoEC4K75oWE111bOMpMvfrQx1OjeSH/43
+tsInc6HLF9bDYSmYmWp5VyS4ItKWFgXZVyjhjrTJhzgp89ypmuvJ8T5e1K+2p5Cr
+9MCf7cNcpRk+SP5lWbueqGONNIHWBjVKupIDj4sZbZNskq76mzGHuNtqY8ML5qxY
+eM31Sr58qIJHtM9EmMrq52XvNSbTdS4vmutov+Hz5DBssDH4HagaqfASXRT/6/D8
+F+/L+eugzZbBX+oAVlHUniGW44ITot9oOfzIrEA684K8SbV9Uh2vdjlE9Ckronsh
+WTkxGS9V0QHgx8IX1NPkeNihBYHaOf6qmhNJ2se4z+HODlrJFjTDJHZniW1i+hET
+iPH9Lbk3
+=52JX
 -----END PGP SIGNATURE-----
 
---U3s59FfKcByyGl+j--
+--utPK4TBebyzZxMrE--
 
---===============4000713328792213916==
+--===============3000419049462708257==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -139,4 +139,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4000713328792213916==--
+--===============3000419049462708257==--

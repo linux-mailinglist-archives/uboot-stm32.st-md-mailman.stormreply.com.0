@@ -2,78 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D170C1C860F
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 11:48:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A97D21C8BB3
+	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 15:04:25 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8B8A6C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 09:48:37 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6CB21C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 13:04:25 +0000 (UTC)
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+ [209.85.160.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8E683C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77705C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  7 May 2020 09:48:35 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 49HpYl5rZ8z1qsZy;
- Thu,  7 May 2020 11:48:27 +0200 (CEST)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 49HpYl17pzz1qspq;
- Thu,  7 May 2020 11:48:27 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id bRMkb16xLOO8; Thu,  7 May 2020 11:48:21 +0200 (CEST)
-X-Auth-Info: XtdENeF0MZ52rZJqBtQzurTS/xLp6XqPDgMqSsyBB3g=
-Received: from [192.168.1.106] (91-82-169-45.pool.digikabel.hu [91.82.169.45])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Thu,  7 May 2020 11:48:21 +0200 (CEST)
-To: Michal Simek <michal.simek@xilinx.com>
-References: <f5214e0dd5f7a2c713f18d75727cc112d2d5e88b.1588593276.git.michal.simek@xilinx.com>
- <e519e51b-d05e-949e-343c-3cb4e606d3c4@denx.de>
- <637580f3-0042-ded2-173b-c9bddd92c588@xilinx.com>
-From: Heiko Schocher <hs@denx.de>
-Message-ID: <7536840e-feb2-07d1-0a48-e7d8771f4e3e@denx.de>
-Date: Thu, 7 May 2020 11:48:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
- Thunderbird/52.5.2
+ Thu,  7 May 2020 13:04:24 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id w29so4580692qtv.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 07 May 2020 06:04:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=9REXjERr7Y8ngoinG5t5hW3q99RXbu2A46oR0X5yt2o=;
+ b=e+6+1ieWQsDycBZza+9BmD+l2AfVqYyImH6c5SMy3u0FZnceujTnD+vesUJWrnPktO
+ I/yPp4YG1G2hlaodEZbDJBmJPEUDGTut/uRO0ZKxswzCYDFQNa0QiJl30v7pkUhAoklj
+ h1aw961nQZayaaqUuhq0kBnTk3QnqtoxNO5tk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=9REXjERr7Y8ngoinG5t5hW3q99RXbu2A46oR0X5yt2o=;
+ b=axBEjQXkWS1NO0uyWpt4RDD4FuKHLsNC2P+m8x8eIIl3kBtIMdOdzS0OhHABEOwf9t
+ c4d/q4c1HboM34kz+T2xL5g9TYF6GeQPquyN/dCmhotTeoAyt1cBH8778iVDxMqD2tXe
+ qPVPgz5lfgLl8LGmm+/JiEwbL7zV34w2gAnuqc183TgF468qu+0C6KTfKfJKlfJvaxYp
+ wY/UpA58u6L1Par92QfK2vppOXXF0cA25ie6aA0b5q7IWMPx0csohbxkpwJNoaRtVGb3
+ 0o6/5pHIX2wIUt+5Cn0H6y4r2qjlfwy3tOqNnYuzTRNaT4DwXE3Ra9jOQfqmWvJI/loN
+ 9K5g==
+X-Gm-Message-State: AGi0Puaq2vD9/7f6D5WbS7CqAqttjZ9o7hBZxsHuPWAkujcFK705WIfT
+ CgOaWtgYrlK/0Aq55FdEwAshzg==
+X-Google-Smtp-Source: APiQypKq09KZ//smPzRbv9QWSglopW1ly4ZN3pZqe90zaddHOAEewlT4veH7Na35wG4wQunmpyTNeQ==
+X-Received: by 2002:ac8:1788:: with SMTP id o8mr13837235qtj.15.1588856663231; 
+ Thu, 07 May 2020 06:04:23 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-826f-7000-c596-aa5a-d094.inf6.spectrum.com.
+ [2606:a000:1401:826f:7000:c596:aa5a:d094])
+ by smtp.gmail.com with ESMTPSA id p10sm2833691qkm.121.2020.05.07.06.04.21
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 07 May 2020 06:04:22 -0700 (PDT)
+Date: Thu, 7 May 2020 09:04:20 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Message-ID: <20200507130420.GD12564@bill-the-cat>
+References: <20200428093804.20773-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-In-Reply-To: <637580f3-0042-ded2-173b-c9bddd92c588@xilinx.com>
-Content-Language: en-US
-Cc: Joel Johnson <mrjoel@lixil.net>,
- Hannes Schmelzer <hannes.schmelzer@br-automation.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- =?UTF-8?Q?Eric_B=c3=a9nard?= <eric@eukrea.com>,
- Ken Lin <Ken.Lin@advantech.com.tw>, uboot-stm32@st-md-mailman.stormreply.com,
- Stefan Roese <sr@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Marek Vasut <marex@denx.de>, Pascal Linder <pascal.linder@edu.hefr.ch>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Ley Foon Tan <ley.foon.tan@intel.com>, Ian Ray <ian.ray@ge.com>,
- Thomas Hebb <tommyhebb@gmail.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>, Anatolij Gustschin <agust@denx.de>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Tetsuyuki Kobayashi <koba@kmckk.co.jp>,
- Andreas Geisreiter <ageisreiter@dh-electronics.de>,
- Otavio Salvador <otavio@ossystems.com.br>, Thomas Weber <weber@corscience.de>,
- Tim Harvey <tharvey@gateworks.com>,
- Troy Kisky <troy.kisky@boundarydevices.com>, git@xilinx.com,
- Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
- Akshay Bhat <akshaybhat@timesys.com>, Adam Ford <aford173@gmail.com>,
- Ludwig Zenz <lzenz@dh-electronics.de>, Andreas Dannenberg <dannenberg@ti.com>,
- Igor Opaniuk <igor.opaniuk@toradex.com>,
- Philippe Reynes <philippe.reynes@softathome.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Holger Brunck <holger.brunck@ch.abb.com>,
- Mario Six <mario.six@gdsys.cc>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>
-Subject: Re: [Uboot-stm32] [PATCH] cmd: mem: Remove
-	CONFIG_SYS_MEMTEST_SCRATCH mapping
+In-Reply-To: <20200428093804.20773-1-patrice.chotard@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, Stephen Warren <swarren@nvidia.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Ovidiu Panait <ovpanait@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
+ Eric Perie <eric.perie@yahoo.com>, Patrick DELAUNAY <patrick.delaunay@st.com>,
+ u-boot@lists.denx.de, Trevor Woerner <trevor@toganlabs.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] cmd: cache: Fix non-cached memory
+	cachability
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,72 +75,90 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Reply-To: hs@denx.de
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1435561799104590562=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGVsbG8gTWljaGFsLAoKQW0gMDcuMDUuMjAyMCB1bSAwODozOSBzY2hyaWViIE1pY2hhbCBTaW1l
-azoKPiBPbiAwNy4gMDUuIDIwIDU6MzMsIEhlaWtvIFNjaG9jaGVyIHdyb3RlOgo+PiBIZWxsbyBN
-aWNoYWwsCj4+Cj4+IEFtIDA0LjA1LjIwMjAgdW0gMTM6NTQgc2NocmllYiBNaWNoYWwgU2ltZWs6
-Cj4+PiBUaGVyZSBpcyBubyByZWFsIG5lZWQgdG8gZXhhY3RseSBkZWZpbmUgc3BhY2UgZm9yIHNh
-dmluZyBwYXR0ZXJucyBmb3IKPj4+IGFsdGVybmF0ZSBtZW1vcnkgdGVzdC4gSXQgaXMgbXVjaCBl
-YXNpZXIgdG8gYWxsb2NhdGUgc3BhY2Ugb24gdGhlCj4+PiBzdGFjayBhbmQKPj4+IHVzZSBpdCBp
-bnN0ZWFkIG9mIHRyeWluZyB0byBmaW5kIG91dCBzcGFjZSB3aGVyZSBwYXR0ZXJuIHNob3VsZCBi
-ZSBzYXZlZC4KPj4+Cj4+PiBGb3IgZXhhbXBsZSBpZiB5b3Ugd2FudCB0byB0ZXN0IHRoZSB3aG9s
-ZSBERFIgbWVtb3J5IHlvdSBjYW4ndCBzYXZlCj4+PiBwYXR0ZXIKPj4+IHRvIEREUiBhbmQgeW91
-IG5lZWQgdG8gZmluZCBpdCBvdXQuIE9uIFhpbGlueCBkZXZpY2VzIEREUiBvciBPQ00KPj4+IGFk
-ZHJlc3Nlcwo+Pj4gd2VyZSBjaG9zZW4gYnV0IHRoYXQgbWVhbnMgdGhhdCBPQ00gbmVlZHMgdG8g
-YmUgbWFwcGVkIGFuZCBVLUJvb3QgaGFzCj4+PiBhY2Nlc3MgcGVybWlzc2lvbiB0aGVyZS4KPj4+
-Cj4+PiBJdCBpcyBlYXNpZXIgdG8gcmVtb3ZlIHRoaXMgbGltaXRhdGlvbiBhbmQgc2ltcGx5IHNh
-dmUgaXQgb24gc3RhY2sKPj4+IGJlY2F1c2UKPj4+IGl0IGlzIHZlcnkgY2xlYXIgdGhhdCBtZW1v
-cnkgdGVzdCBjYW4ndCByZXdyaXRlIFUtQm9vdCBhbmQgVS1Cb290IGhhcwo+Pj4gYWxzbwo+Pj4g
-ZnVsbCBhY2Nlc3MgdG8gbWVtb3J5IHdoZXJlIHJ1bnMgZnJvbS4KPj4+Cj4+PiBTaWduZWQtb2Zm
-LWJ5OiBNaWNoYWwgU2ltZWsgPG1pY2hhbC5zaW1la0B4aWxpbnguY29tPgo+Pj4gLS0tCj4+Pgo+
-Pj4gIMKgIFJFQURNRcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB8IDQgLS0tLQo+Pj4gIMKgIGNtZC9tZW0uY8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDkgKystLS0tLS0tCj4+
-PiAgwqAgaW5jbHVkZS9jb25maWdzL01pZ29SLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8
-IDEgLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy9hZHZhbnRlY2hfZG1zLWJhMTYuaCB8IDEgLQo+
-Pj4gIMKgIGluY2x1ZGUvY29uZmlncy9hcGFsaXNfaW14Ni5owqDCoMKgwqDCoMKgwqAgfCAxIC0K
-Pj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MvYXJpc3RhaW5ldG9zMi5owqDCoMKgwqDCoCB8IDEgLQo+
-Pj4gIMKgIGluY2x1ZGUvY29uZmlncy9hcm1hZGlsbG8tODAwZXZhLmjCoMKgIHwgMSAtCj4+PiAg
-wqAgaW5jbHVkZS9jb25maWdzL2JsYW5jaGUuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAxIC0K
-Pj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MvY2d0cW14NmV2YWwuaMKgwqDCoMKgwqDCoMKgIHwgMSAt
-Cj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL2NvbGlicmlfaW14Ni5owqDCoMKgwqDCoMKgIHwgMSAt
-Cj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL2RoX2lteDYuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-fCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MvZWw2eF9jb21tb24uaMKgwqDCoMKgwqDCoMKg
-IHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL2VtYmVzdG14NmJvYXJkcy5owqDCoMKgIHwg
-MSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL2dlX2J4NTB2My5owqDCoMKgwqDCoMKgwqDCoMKg
-IHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL2d3X3ZlbnRhbmEuaMKgwqDCoMKgwqDCoMKg
-wqAgfCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MvaW14Nl9sb2dpYy5owqDCoMKgwqDCoMKg
-wqDCoCB8IDEgLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy9rem05Zy5owqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgfCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MvbXg2c2FicmVfY29tbW9u
-LmjCoMKgwqAgfCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3Mvbml0cm9nZW42eC5owqDCoMKg
-wqDCoMKgwqDCoCB8IDEgLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy9wcmVzaWRpb19hc2ljLmjC
-oMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL3NoNzc1MmV2Yi5owqDCoMKg
-wqDCoMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL3NoNzc1M2V2Yi5owqDC
-oMKgwqDCoMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL3NoNzc1N2xjci5o
-wqDCoMKgwqDCoMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdzL3N0bTMybXAx
-LmjCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDEgLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy90YW8z
-NTMwLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25maWdz
-L3RyaWNvcmRlci5owqDCoMKgwqDCoMKgwqDCoMKgIHwgMSAtCj4+PiAgwqAgaW5jbHVkZS9jb25m
-aWdzL3hpbGlueF92ZXJzYWwuaMKgwqDCoMKgwqAgfCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZp
-Z3MveGlsaW54X3ZlcnNhbF9taW5pLmggfCAxIC0KPj4+ICDCoCBpbmNsdWRlL2NvbmZpZ3MveGls
-aW54X3p5bnFtcC5owqDCoMKgwqDCoCB8IDQgLS0tLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy94
-aWxpbnhfenlucW1wX21pbmkuaCB8IDEgLQo+Pj4gIMKgIGluY2x1ZGUvY29uZmlncy94aWxpbnhf
-enlucW1wX3I1LmjCoMKgIHwgMSAtCj4+PiAgwqAgc2NyaXB0cy9jb25maWdfd2hpdGVsaXN0LnR4
-dMKgwqDCoMKgwqDCoMKgwqAgfCAxIC0KPj4+ICDCoCAzMiBmaWxlcyBjaGFuZ2VkLCAyIGluc2Vy
-dGlvbnMoKyksIDQ0IGRlbGV0aW9ucygtKQo+Pgo+PiBIbW0uLiBJIHRoaW5rIHRoaXMgaXMgZnJv
-bSBvbGQgcG93ZXJwYyB0aW1lcywgYnV0IEkgZG8gbm90IHNlZSBhCj4+IHBvd2VycGMgYm9hcmQg
-aW4gdGhlIGxpc3QsIHNvIHRoaXMgbWFrZXMgc2Vuc2UuCj4gCj4gQW5kIHdhcyB0aGVyZSBhbnkg
-cmVhc29uIHRvIHNldHVwIHNwZWNpZmljIGFkZHJlc3Mgb24gUFBDIGZvciBzYXZpbmcKPiB0ZXN0
-IHBhdHRlcm4/CgpOb3QgdGhhdCBJIGFtIGF3YXJlIG9mIGFueW1vcmUuLi4KCmJ5ZSwKSGVpa28K
-LS0gCkRFTlggU29mdHdhcmUgRW5naW5lZXJpbmcgR21iSCwgICAgICBNYW5hZ2luZyBEaXJlY3Rv
-cjogV29sZmdhbmcgRGVuawpIUkIgMTY1MjM1IE11bmljaCwgT2ZmaWNlOiBLaXJjaGVuc3RyLjUs
-IEQtODIxOTQgR3JvZWJlbnplbGwsIEdlcm1hbnkKUGhvbmU6ICs0OS04MTQyLTY2OTg5LTUyICAg
-RmF4OiArNDktODE0Mi02Njk4OS04MCAgIEVtYWlsOiBoc0BkZW54LmRlCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlz
-dApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQt
-bWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+
+--===============1435561799104590562==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="uR7YiQvNOb/8Y6Dg"
+Content-Disposition: inline
+
+
+--uR7YiQvNOb/8Y6Dg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Apr 28, 2020 at 11:38:03AM +0200, Patrice Chotard wrote:
+
+> If dcache is switched OFF to ON state and if non-cached memory is
+> used, this non-cached memory must be re-declared as uncached to mmu
+> each time dcache is set ON.
+>=20
+> Introduce noncached_set_region() to set this non-cached region's mmu
+> settings. Let architecture override it by defining it as a weak
+> function.
+>=20
+> For ARM architecture, noncached_set_region() defines all noncached
+> region as non-cacheable.
+>=20
+> Issue found on STM32MP1 platform using dwc_eth_qos ethernet driver,
+> when going from dcache OFF to dcache ON state, ethernet driver issued
+> TX timeout errors when performing dhcp or ping.
+>=20
+> It can be reproduced with the following sequence:
+>=20
+> dhcp
+> while true ; do
+>   ping 192.168.1.300 ;
+>   dcache off ;
+>   ping 192.168.1.300 ;
+>   dcache on ;
+> done
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Stephen Warren <swarren@nvidia.com>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--uR7YiQvNOb/8Y6Dg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl60B1MACgkQFHw5/5Y0
+tyxYagv/faO8HznWuJfXM9IiLJhQ9vxa6+vOM8cyvRA+DmQN+RJJnzxa/0Gz4mRS
+XVO/vSulBw67NuX5SSK6yxQ8Btk9ePtyMxrsnqYHYOEwROxAJqKcAu3Lp4pwlCMQ
+xSgUHxIhV0xJDCHHzvsb+pLsdBnyITZ/oU0l/ujBhU1a3wSvXWBndnPncLf9gPvG
+lfRA16z2N0yAFd3yGFyWm+2YUim5eGhBwDAZU9b2ZDBJrT9VA2GHBcJDI9x83plK
+si0a32/Cq15WoGcmO+Atb18+A5XKWuWumUOeA1YN+5abWCOhuWQLcuKGvgNh1Ier
+G5aT6PwjXqRPy2LamIeVc+7do/u8FrUbJ4ZXeEHIWq4UTcdhpc53A8Rz/B6W9Elq
+4YG+TORTc/5iL2cs4ekBJzcVO2kl9a3cw4IPgE96QWEdLrUtkN0RmQ+2/0nHU4FK
+AjdsH3yxudrCIAn0jtnV1bqh/T4NGfrJ6mMLdDR23uz5H5k90gVa1QDOtFPXAppl
+x5wg3RsG
+=wY15
+-----END PGP SIGNATURE-----
+
+--uR7YiQvNOb/8Y6Dg--
+
+--===============1435561799104590562==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1435561799104590562==--

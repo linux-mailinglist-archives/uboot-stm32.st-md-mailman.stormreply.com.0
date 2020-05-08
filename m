@@ -2,68 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A97D21C8BB3
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 15:04:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CABCD1CA026
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 May 2020 03:37:12 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6CB21C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 May 2020 13:04:25 +0000 (UTC)
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
- [209.85.160.193])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8E954C3F95E
+	for <lists+uboot-stm32@lfdr.de>; Fri,  8 May 2020 01:37:12 +0000 (UTC)
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+ [209.85.210.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77705C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0D9B6C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  7 May 2020 13:04:24 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id w29so4580692qtv.3
+ Fri,  8 May 2020 01:37:11 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id i27so208824ota.7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 07 May 2020 06:04:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=9REXjERr7Y8ngoinG5t5hW3q99RXbu2A46oR0X5yt2o=;
- b=e+6+1ieWQsDycBZza+9BmD+l2AfVqYyImH6c5SMy3u0FZnceujTnD+vesUJWrnPktO
- I/yPp4YG1G2hlaodEZbDJBmJPEUDGTut/uRO0ZKxswzCYDFQNa0QiJl30v7pkUhAoklj
- h1aw961nQZayaaqUuhq0kBnTk3QnqtoxNO5tk=
+ Thu, 07 May 2020 18:37:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=wikOTniGlmijmfANbWAR/Gt+qSJiudG8bP3Gqrwc/Lw=;
+ b=PXl/WD7CfPR/Zy+QMnPJhArKklDKpCrzgLXF0cBvWfNhO7ySRdY1qlOjqbJKTFUqdj
+ VXPpA9JmA6eKUMcbcYlddJx8kcdvW+yylTAXzga1H57hmegFfrqtwMpwFu1U5yb9/93H
+ DHlwyAwXQK493ugIfTnJKDdaHLZqGm4NbRfM4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=9REXjERr7Y8ngoinG5t5hW3q99RXbu2A46oR0X5yt2o=;
- b=axBEjQXkWS1NO0uyWpt4RDD4FuKHLsNC2P+m8x8eIIl3kBtIMdOdzS0OhHABEOwf9t
- c4d/q4c1HboM34kz+T2xL5g9TYF6GeQPquyN/dCmhotTeoAyt1cBH8778iVDxMqD2tXe
- qPVPgz5lfgLl8LGmm+/JiEwbL7zV34w2gAnuqc183TgF468qu+0C6KTfKfJKlfJvaxYp
- wY/UpA58u6L1Par92QfK2vppOXXF0cA25ie6aA0b5q7IWMPx0csohbxkpwJNoaRtVGb3
- 0o6/5pHIX2wIUt+5Cn0H6y4r2qjlfwy3tOqNnYuzTRNaT4DwXE3Ra9jOQfqmWvJI/loN
- 9K5g==
-X-Gm-Message-State: AGi0Puaq2vD9/7f6D5WbS7CqAqttjZ9o7hBZxsHuPWAkujcFK705WIfT
- CgOaWtgYrlK/0Aq55FdEwAshzg==
-X-Google-Smtp-Source: APiQypKq09KZ//smPzRbv9QWSglopW1ly4ZN3pZqe90zaddHOAEewlT4veH7Na35wG4wQunmpyTNeQ==
-X-Received: by 2002:ac8:1788:: with SMTP id o8mr13837235qtj.15.1588856663231; 
- Thu, 07 May 2020 06:04:23 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-826f-7000-c596-aa5a-d094.inf6.spectrum.com.
- [2606:a000:1401:826f:7000:c596:aa5a:d094])
- by smtp.gmail.com with ESMTPSA id p10sm2833691qkm.121.2020.05.07.06.04.21
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 07 May 2020 06:04:22 -0700 (PDT)
-Date: Thu, 7 May 2020 09:04:20 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20200507130420.GD12564@bill-the-cat>
-References: <20200428093804.20773-1-patrice.chotard@st.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=wikOTniGlmijmfANbWAR/Gt+qSJiudG8bP3Gqrwc/Lw=;
+ b=c2wK7mzb4WwTuonMN80kzp8i7xF8sYuEfvpnHueQglthY0wirU8O5l5EGRfkjViAC1
+ ZbPxJa0Y5jMps+q/zSL/hNtITynkX75oimAZ6lNhZEsnVZi4GBS3rUqhN3lGN5cp1tkX
+ yUkxCC5ZY5dCblzU/SsEdMh3bFHxqv6/35A2ADCNXCeXojE79f3ceIuwn9G0f2qP/vtC
+ 0+m/vCZglTt5R881YvIwKnAMKnxNHNqtjXTxC1cicjW37DOTrovk1XovTW0LV1svvxEU
+ +csYgIihTyLcNazUUtGFisQzWNQjGA+2CzpBPGu3M2YNLl9WwSeSh4haIDoeF1TfBPiv
+ YyIA==
+X-Gm-Message-State: AGi0PuZWuTlwaONC293PEaarBDVOwXlO+mJMqprGIfepkFKnHNi3Szw2
+ zOPcY08yWyHSn0ZLWY711/tYh6WyMlQmiWGDWEH31Q==
+X-Google-Smtp-Source: APiQypLZG49c5rm3zK2PtC7IFSjEstAMReviiaLf4UtQQAlUYIgq7XUvtuOOKwPhertsdeivKDNpGXY4ZGu19FMsFY0=
+X-Received: by 2002:a9d:490d:: with SMTP id e13mr236670otf.356.1588901829461; 
+ Thu, 07 May 2020 18:37:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200428093804.20773-1-patrice.chotard@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, Stephen Warren <swarren@nvidia.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
- Ovidiu Panait <ovpanait@gmail.com>, Alexey Brodkin <abrodkin@synopsys.com>,
- Eric Perie <eric.perie@yahoo.com>, Patrick DELAUNAY <patrick.delaunay@st.com>,
- u-boot@lists.denx.de, Trevor Woerner <trevor@toganlabs.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] cmd: cache: Fix non-cached memory
-	cachability
+References: <20200430100619.28557-1-patrice.chotard@st.com>
+ <20200430100619.28557-6-patrice.chotard@st.com>
+In-Reply-To: <20200430100619.28557-6-patrice.chotard@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 7 May 2020 19:36:55 -0600
+Message-ID: <CAPnjgZ1zpMZNfo=MGovDrWpua=-9ctZp8ZSco_YrJJQLPmdRxg@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v4 5/5] doc: add bind/unbind command
+	documentation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,90 +67,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1435561799104590562=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============1435561799104590562==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="uR7YiQvNOb/8Y6Dg"
-Content-Disposition: inline
-
-
---uR7YiQvNOb/8Y6Dg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Apr 28, 2020 at 11:38:03AM +0200, Patrice Chotard wrote:
-
-> If dcache is switched OFF to ON state and if non-cached memory is
-> used, this non-cached memory must be re-declared as uncached to mmu
-> each time dcache is set ON.
->=20
-> Introduce noncached_set_region() to set this non-cached region's mmu
-> settings. Let architecture override it by defining it as a weak
-> function.
->=20
-> For ARM architecture, noncached_set_region() defines all noncached
-> region as non-cacheable.
->=20
-> Issue found on STM32MP1 platform using dwc_eth_qos ethernet driver,
-> when going from dcache OFF to dcache ON state, ethernet driver issued
-> TX timeout errors when performing dhcp or ping.
->=20
-> It can be reproduced with the following sequence:
->=20
-> dhcp
-> while true ; do
->   ping 192.168.1.300 ;
->   dcache off ;
->   ping 192.168.1.300 ;
->   dcache on ;
-> done
->=20
+On Thu, 30 Apr 2020 at 04:06, Patrice Chotard <patrice.chotard@st.com> wrote:
+>
+> Add documentation in doc/drivel-model for the bind/unbind command.
+> Part of this documentation is extracted from original patch commit
+> message:
+> commit 49c752c93a78 ("cmd: Add bind/unbind commands to bind a device to a driver from the command line")
+>
 > Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Stephen Warren <swarren@nvidia.com>
-> Reviewed-by: Marek Vasut <marex@denx.de>
+>
+> ---
+>
+> Changes in v4:
+>    - fix make htmldocs error "Title underline too short"
+>
+> Changes in v3:
+>    - fix typo
+>    - add bind/unbind parameters description and how to find them
+>
+> Changes in v2: None
+>
+>  doc/driver-model/bind.rst  | 49 ++++++++++++++++++++++++++++++++++++++
+>  doc/driver-model/index.rst |  1 +
+>  2 files changed, 50 insertions(+)
+>  create mode 100644 doc/driver-model/bind.rst
 
-Applied to u-boot/master, thanks!
+I'm still a bit unsure why we must specify the driver name.
 
---=20
-Tom
-
---uR7YiQvNOb/8Y6Dg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl60B1MACgkQFHw5/5Y0
-tyxYagv/faO8HznWuJfXM9IiLJhQ9vxa6+vOM8cyvRA+DmQN+RJJnzxa/0Gz4mRS
-XVO/vSulBw67NuX5SSK6yxQ8Btk9ePtyMxrsnqYHYOEwROxAJqKcAu3Lp4pwlCMQ
-xSgUHxIhV0xJDCHHzvsb+pLsdBnyITZ/oU0l/ujBhU1a3wSvXWBndnPncLf9gPvG
-lfRA16z2N0yAFd3yGFyWm+2YUim5eGhBwDAZU9b2ZDBJrT9VA2GHBcJDI9x83plK
-si0a32/Cq15WoGcmO+Atb18+A5XKWuWumUOeA1YN+5abWCOhuWQLcuKGvgNh1Ier
-G5aT6PwjXqRPy2LamIeVc+7do/u8FrUbJ4ZXeEHIWq4UTcdhpc53A8Rz/B6W9Elq
-4YG+TORTc/5iL2cs4ekBJzcVO2kl9a3cw4IPgE96QWEdLrUtkN0RmQ+2/0nHU4FK
-AjdsH3yxudrCIAn0jtnV1bqh/T4NGfrJ6mMLdDR23uz5H5k90gVa1QDOtFPXAppl
-x5wg3RsG
-=wY15
------END PGP SIGNATURE-----
-
---uR7YiQvNOb/8Y6Dg--
-
---===============1435561799104590562==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1435561799104590562==--

@@ -2,77 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA6071D316F
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 15:38:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 715FA1D37C7
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 19:15:52 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7C91BC36B10
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 13:38:03 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 374F2C36B10
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 17:15:52 +0000 (UTC)
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
+ [209.85.219.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66993C36B0E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 47511C36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 May 2020 13:38:00 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 04EDSTgC000745; Thu, 14 May 2020 15:37:51 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=3peIJADw0tga+drV5r0kvEbTfd5YqNfizvthmYoyfE4=;
- b=UCqccimRC5vs72u1OOYJ4h2609luLQtClXoxTn1j8ipuRKSMp84pqthmAIIUCmT/MtlW
- aC27zH/XiFckHlLAlZb9v+VOp1DzP4FT9KpTpUDMlhN7gjetOjf3inMQi7aLY5h1N2hq
- OkWIMdjFNLTCLQWolsRJ7fUZyS3m4WeEMCpk1TKqrGvBlXwx8DizHELOuh7xMMDcK9aP
- ACb4zPAnnnptGNIQ8c6NWED/4Dz+7c7fGGC0+lRv2AviHqyI+1xMHOI3phE2cN7+S/o4
- KDqVoNZ6HwD9migTvifWIEytTi3Z18OPL5yhUDpHIonb+cVJb8f8th+ISsZfdz4qp+zG ZA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3100vpkm0c-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 14 May 2020 15:37:51 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D0B84100034;
- Thu, 14 May 2020 15:37:50 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag5node3.st.com [10.75.127.15])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BB73B2BE249;
- Thu, 14 May 2020 15:37:50 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG5NODE3.st.com
- (10.75.127.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 14 May
- 2020 15:37:50 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 14 May 2020 15:37:50 +0200
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [RESEND PATCH] net: dwc_eth_qos: update the
- compatible supported for STM32
-Thread-Index: AQHWKfTcMRki4Yd/7k2Mev+9vUTp6Q==
-Date: Thu, 14 May 2020 13:37:49 +0000
-Message-ID: <67aa9083-0f52-1b5f-9c5b-9a902dbf4a9a@st.com>
-References: <20200514130023.15030-1-patrick.delaunay@st.com>
-In-Reply-To: <20200514130023.15030-1-patrick.delaunay@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
-Content-ID: <D89B6FD1DBF3DD49BE515AF9A666C7E4@st.com>
+ Thu, 14 May 2020 17:15:49 +0000 (UTC)
+Received: by mail-qv1-f42.google.com with SMTP id t8so2054559qvw.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 14 May 2020 10:15:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=r7SSy6EHXHSZOXCjybmg4PWxcoopuWWlxm1Sz0QxNdU=;
+ b=q90JTNEwaf84UZNsVsYH3DOesW7SWUECK5mhttz3dOnqOYk6cyxaObJsbBVmRsEzah
+ 0Pn40Oos823u+55jhDXa6spy+6Hc+OSHKJ9HLJALyQ9D5D2+kZde27eowM4+VKtif+YM
+ UWQ/yLg6MYGzkQcug+L+AjTry3uAXqF4CAH3I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=r7SSy6EHXHSZOXCjybmg4PWxcoopuWWlxm1Sz0QxNdU=;
+ b=PlFShQPba+HA/xDK2Nd2NHKBtQpov6ko8xuR29DnvsHU+6DKouPrST5U247PjR6wTv
+ wba7VCPcjsMOAm7OpPzK+e0V2Y5FtduMRDm5d1TrywVn/8RUDXStlU4rJSEllhUOpH62
+ 00sr+RbqlhXrUIJ3EhrVjxOFF4f+UMpdxUJ1q3qKSq1PKHY4TrK2dkKYaLKnNnFVVf9r
+ eWGTnacsTstcBWh1Hd5v0bxoFcKieMUclX9EjYKRBpMttZKvKtVGtNBnwXq/OOaX0Bgz
+ pGjZquZOYdAk6+GOJqSG6lQErOwRPLOBy12zpT4M2edaEjaIeT84zj2xJiiPFuoB6jS3
+ Lo2g==
+X-Gm-Message-State: AOAM531XmqZZydR75blreZ4vAeVrRmpj89QZYmpRc4WbN6SqLwgz8IQ7
+ KWBurM5bj8TgyWeu3cziECs2oyDMC6k=
+X-Google-Smtp-Source: ABdhPJz1AV0E1nBGOSMATyagSd1fBH1D1RBvufa9wu0/TkfZhOrg7TgBTct47EYh88/89ix8WmADAA==
+X-Received: by 2002:a0c:aec2:: with SMTP id n2mr5796905qvd.16.1589476548313;
+ Thu, 14 May 2020 10:15:48 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-826f-9072-2581-ca55-941b.inf6.spectrum.com.
+ [2606:a000:1401:826f:9072:2581:ca55:941b])
+ by smtp.gmail.com with ESMTPSA id m25sm2983545qkg.83.2020.05.14.10.15.46
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 14 May 2020 10:15:47 -0700 (PDT)
+Date: Thu, 14 May 2020 13:15:45 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+Message-ID: <20200514171545.GF4794@bill-the-cat>
+References: <bbbace4ec92f4be7af31e46ee7c5bcbb@SFHDAG6NODE3.st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.676
- definitions=2020-05-14_04:2020-05-14,
- 2020-05-14 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Christophe ROULLIER <christophe.roullier@st.com>,
- David Wu <david.wu@rock-chips.com>
-Subject: Re: [Uboot-stm32] [RESEND PATCH] net: dwc_eth_qos: update the
- compatible supported for STM32
+In-Reply-To: <bbbace4ec92f4be7af31e46ee7c5bcbb@SFHDAG6NODE3.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PULL] Pull request: u-boot-stm/master
+	=u-boot-stm32-20200514
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,59 +72,99 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6158723519114100261=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 5/14/20 3:00 PM, Patrick Delaunay wrote:
-> Update the compatible associated with the STM32 MPU glue
-> in the DWC ethernet driver.
->
-> The supported compatible is the specific "st,stm32mp1-dwmac"
-> as indicated in Linux binding
-> Documentation/devicetree/bindings/net/stm32-dwmac.txt
-> and not the "snps,dwmac-4.20a" only used to the select IP
-> version.
->
-> This glue is implemented in Linux kernel in:
-> drivers/net/ethernet/stmicro/stmmac/dwmac-stm32.c
->
-> For information in stm32mp151.dtsi, the 2 compatibles are
-> supported:
->
-> ethernet0: ethernet@5800a000 {
-> 	compatible = "st,stm32mp1-dwmac", "snps,dwmac-4.20a";
-> 	...
-> };
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> RESEND with fix patman on Series-cc
->
->  drivers/net/dwc_eth_qos.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index f67c5f4570..5e7ad6c658 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -2166,7 +2166,7 @@ static const struct udevice_id eqos_ids[] = {
->  		.data = (ulong)&eqos_tegra186_config
->  	},
->  	{
-> -		.compatible = "snps,dwmac-4.20a",
-> +		.compatible = "st,stm32mp1-dwmac",
->  		.data = (ulong)&eqos_stm32_config
->  	},
->  	{
+--===============6158723519114100261==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="kR3zbvD4cgoYnS/6"
+Content-Disposition: inline
 
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
-Patrice
+--kR3zbvD4cgoYnS/6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 14, 2020 at 10:03:33AM +0000, Patrick DELAUNAY wrote:
+
+> Hi Tom,
+>=20
+> Please pull the STM32 related fixes for v2020.07-rc3 =3D u-boot-stm32-202=
+00514
+> =20
+> With the following changes:
+> - stm32mp1: migrate MTD and DFU configuration in Kconfig
+> - stm32mp1: add command stm32prog
+> - stm32mp1: several board and arch updates
+> - stm32mp1: activate data cache in SPL and before relocation
+> - Many improvement for AV96 board and DHCOR SoM
+>   (add new defconfig, DDR3 coding on DHCOR SoM, split between board and S=
+OM=20
+>    Synchronize DDR setttings on DH SoMs, setting for I2C EEPROM)
+> - clk: stm32mp1: fix CK_MPU calculation
+> - DT alignment of stm32mp1 device tree with Linux 5.7-rc2
+> =20
+> CI status:
+>      https://gitlab.denx.de/u-boot/custodians/u-boot-stm/pipelines/3238>=
+=20
+>=20
+> Thanks,
+> Patrick
+>=20
+> The following changes since commit 10bca13ea6d9d4b85f80f02c8795227f63240f=
+59:
+>=20
+>   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2020-05-12 1=
+6:20:10 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
+32-20200514
+>=20
+> for you to fetch changes up to 1b28a5e2b00a9bf3523cc63694baa03f23604619:
+>=20
+>   ARM: dts: stm32mp1: DT alignment with Linux 5.7-rc2 (2020-05-14 09:02:1=
+2 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--kR3zbvD4cgoYnS/6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl69fMAACgkQFHw5/5Y0
+tyxkKQv9G/7B5juES9L+axrF1V1rzvP1BoJyvKkRqMTeCh10d1L28gWrKiG88WRn
+5zFfdveDTBFu4gZsbf2cWlBR50sV91j0LnonlhAbpInjxTHO+DPhAfiicxX0SuMf
+wq90zw/6oV4QbBwQ5Nv3icMDvDHQf9rigsVTVFck3o32WIYfBdXb5Ao9hg5MqdlT
+dmXRfUPDm+goDARLq4UJrShL9JfdH6lBKzxJDsH6ncrrKqoCdnJQ+YEA/aeZIFtx
+Jain/uI9mrkNV0JOEFDme9AqfImlmy5nKJdOUC1QYNGHU53sHzdUrNl2DlVh+76z
+HmZHcxJ8kF/owimUvhabBk87naXR8SaSqWJ5yXFsrv6RT0KyZOMUgCGOWJ5rcybg
+X+HBxkPCja73aKgIFQx8hMraX8NG2udJDSaTl9IT9OwXmH7mkrCsG6C664oOfqyp
+gJDW4v2UR7BS7mmdFe7dJJhNy0jTnNq3a3dOoHjRrey/imFEBv0KMZYRIyDBaS07
+rV+MMlN3
+=YSTN
+-----END PGP SIGNATURE-----
+
+--kR3zbvD4cgoYnS/6--
+
+--===============6158723519114100261==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6158723519114100261==--

@@ -2,69 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A7411D1B15
-	for <lists+uboot-stm32@lfdr.de>; Wed, 13 May 2020 18:32:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1ED91D2B56
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 11:26:28 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0CA42C36B10
-	for <lists+uboot-stm32@lfdr.de>; Wed, 13 May 2020 16:32:11 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5415AC36B10
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 May 2020 09:26:28 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F0EE2C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00C1FC36B0E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 13 May 2020 16:32:09 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu, 14 May 2020 09:26:26 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 04DGSIPl020613; Wed, 13 May 2020 18:32:06 +0200
+ 04E9HOCs013020; Thu, 14 May 2020 11:26:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=vghBqsBsucrLKoHhE3KzcnXAlbmXrFm2zr9QYqZFpCA=;
- b=QzOjdeDp5wdeFyPHTjghrFtpi67AP4dQPhTH41qpoehDS4sqCU2aw0+PNqURXnR4hntl
- yFE02j8CSShLxFzK3ruD53j6hUOUc1e/GylBYebsgP2WOk5bseupoCoktMkO0rqXMQPu
- ptJy5VcaNQFoqykrIs4z3aDnQ1LnQGZEPo8ptk6C2erOs0ykvRkX7ElYPIJCAZSVF+tV
- nkPYlS6oeRO+vV/UhyBfLiNsaIKI3ZIxHEJrcLsS6h7JbSrJlzH8eQ3eXKIRt3xXK4yv
- hemArxv8NY/vtAgR8Omv7U34au36NhnVIJV1QcOImlQaYV+8bb/Ndgnq63AciOjUeJi+ iQ== 
+ bh=H+wVJJeLjdn1FfK/SInTLLMPywDlVeE9j0Wq32tgJ/U=;
+ b=gHxwwA8GJf++vBVvkeXBkCuHRCzb8iEwVQUorhv2oixlMDocEOobBCUlmzNNSR6En2WR
+ ugGyAJV+MN8dpQi2LuCkU7R1OQwfR1sEXjKToDdf7FOsnZgmnC6/oqCC7ikBrnb6vIR0
+ LYm2A8LGr/HWis3p0wel7vQxq5WRCcwwMmAZOcwmUGwY18W1iVyQZHhQjYkGC8HPLH+L
+ 1yrNIyRtPS8+RTadf7aiB1D1ybIUjk8UGGRo3r1CKZn2EUtlGxZoYaaTArQVPqVPuFs1
+ bVahIaJiuJnpD1jdv9Z3a+Mu1G6l9tQIsCJ8jkwjHXaynJYdNNcMiekPoeB8vrWLkNzm 0A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3100vpdwhc-1
+ by mx07-00178001.pphosted.com with ESMTP id 3100vyj7vq-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 13 May 2020 18:32:06 +0200
+ Thu, 14 May 2020 11:26:19 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E164910002A;
- Wed, 13 May 2020 18:32:05 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CBB5B2D3038;
- Wed, 13 May 2020 18:32:05 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 13 May
- 2020 18:32:05 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 692AD10002A;
+ Thu, 14 May 2020 11:26:18 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 513632AEF18;
+ Thu, 14 May 2020 11:26:18 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Thu, 14 May
+ 2020 11:26:17 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Wed, 13 May 2020 18:32:05 +0200
+ 15.00.1473.003; Thu, 14 May 2020 11:26:17 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 8/9] board: stm32mp1: update vddcore in SPL
-Thread-Index: AQHWF+8vsN/gB9Mb3ESX2y4AWg7r2aimVz+Q
-Date: Wed, 13 May 2020 16:32:05 +0000
-Message-ID: <0bfd3ec12fd8464ba920dc0d62187043@SFHDAG6NODE3.st.com>
-References: <20200421151128.18072-1-patrick.delaunay@st.com>
- <20200421171123.8.I6f11a8bc7a6681ab18c3bbbc1ac73cbdac030982@changeid>
-In-Reply-To: <20200421171123.8.I6f11a8bc7a6681ab18c3bbbc1ac73cbdac030982@changeid>
+Thread-Topic: [PATCH 00/11] stm32mp1: migrate MTD and DFU configuration in
+ Kconfig
+Thread-Index: AQHV/P5tBJkklWyop0mQmVRFo2UI+qinqOQA
+Date: Thu, 14 May 2020 09:26:17 +0000
+Message-ID: <b997f59a04144c269b9ddbc8d99f723e@SFHDAG6NODE3.st.com>
+References: <20200318082254.7522-1-patrick.delaunay@st.com>
+In-Reply-To: <20200318082254.7522-1-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.47]
+x-originating-ip: [10.75.127.51]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.676
- definitions=2020-05-13_07:2020-05-13,
- 2020-05-13 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
+ definitions=2020-05-14_02:2020-05-13,
+ 2020-05-14 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Boris Brezillon <bbrezillon@kernel.org>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Fabien DESSENNE <fabien.dessenne@st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 8/9] board: stm32mp1: update vddcore in SPL
+Subject: Re: [Uboot-stm32] [PATCH 00/11] stm32mp1: migrate MTD and DFU
+ configuration in Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,31 +88,77 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 > From: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Sent: mardi 21 avril 2020 17:11
+> Sent: mercredi 18 mars 2020 09:23
 > 
-> For board using STPMIC1, the vddcore is provided by BUCK1 of STMPIC1 and
-> need to be updated for 800MHz support and only after the clock tree initialization.
 > 
-> The VDDCORE voltage value in provide by clock driver, saved in global variable
-> opp_voltage_mv and udpated SPL in board_early_init_f().
+> This serie migrate the dynamically build MTD
+> (CONFIG_SYS_MTDPARTS_RUNTIME) and the DFU configuration
+> (CONFIG_SET_DFU_ALT_INFO) previously based on ENV variables to
+> CONFIG_.
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
+> These patches reduce the size of the environment and allow to tune for each
+> target with a specific defconfig file.
+> 
+> This serie also removes the TEE deconfig, replaced by a dynamic detection
+> based on op-tee driver probe.
+> 
+> This serie depends on previous CONFIG migration proposed in
+> http://patchwork.ozlabs.org/project/uboot/list/?series=160899
+> - configs: migrate CONFIG_SET_DFU_ALT_INFO to defconfigs
+> - configs: migrate CONFIG_SYS_MTDPARTS_RUNTIME to defconfigs
+> 
+> 
+> 
+> Patrick Delaunay (11):
+>   board: stm32mp1: move board_get_mtdparts in st common directory
+>   board: stm32mp1: move set_dfu_alt_info in st common directory
+>   stm32mp1: dynamically build DFU_ALT_INFO
+>   stm32mp1: move MTDPART configuration in Kconfig
+>   board: stm32mp1: reserve memory for OP-TEE in device tree
+>   stm32mp1: dynamically detect op-tee presence
+>   board: stm32mp1: use FDT address provided by TF-A at boot time
+>   configs: stm32mp1: remove optee defconfig
+>   board: stm32mp1: support boot from spi-nand
+>   board: stm32mp1: adapt MTD partition for BOOT from NOR or NAND
+>   doc: stm32mp1: update DFU support example
+> 
+>  arch/arm/dts/stm32mp157a-dk1.dts           |   5 +
+>  arch/arm/dts/stm32mp157c-ed1.dts           |   5 +
+>  arch/arm/mach-stm32mp/Kconfig              |  10 -
+>  arch/arm/mach-stm32mp/Makefile             |   1 +
+>  arch/arm/mach-stm32mp/boot_params.c        |  45 ++++
+>  arch/arm/mach-stm32mp/cpu.c                |   4 +
+>  arch/arm/mach-stm32mp/dram_init.c          |  18 ++
+>  arch/arm/mach-stm32mp/fdt.c                |  25 ++
+>  arch/arm/mach-stm32mp/include/mach/stm32.h |   3 +
+>  arch/arm/mach-stm32mp/spl.c                |   2 +
+>  board/dhelectronics/dh_stm32mp1/Kconfig    |   1 +
+>  board/dhelectronics/dh_stm32mp1/Makefile   |   3 +
+>  board/dhelectronics/dh_stm32mp1/board.c    | 143 +-----------
+>  board/st/common/Kconfig                    |  64 ++++++
+>  board/st/common/Makefile                   |   5 +
+>  board/st/common/stm32mp_dfu.c              | 225 ++++++++++++++++++
+>  board/st/common/stm32mp_mtdparts.c         | 157 +++++++++++++
+>  board/st/stm32mp1/MAINTAINERS              |   1 -
+>  board/st/stm32mp1/stm32mp1.c               | 253 +--------------------
+>  configs/stm32mp15_optee_defconfig          | 132 -----------
+>  configs/stm32mp15_trusted_defconfig        |   3 +
+>  doc/board/st/stm32mp1.rst                  | 147 +++++-------
+>  include/configs/stm32mp1.h                 |  64 +-----
+>  23 files changed, 634 insertions(+), 682 deletions(-)  create mode 100644
+> arch/arm/mach-stm32mp/boot_params.c
+>  create mode 100644 board/st/common/stm32mp_dfu.c  create mode 100644
+> board/st/common/stm32mp_mtdparts.c
+>  delete mode 100644 configs/stm32mp15_optee_defconfig
+> 
+> --
+> 2.17.1
 
-Ok for ST board boards but compilation failed for 
-stm32mp15_dhcor_basic / stm32mp15_dhcom_basic
+For the serie applied to u-boot-stm/master, thanks!
 
-+arm-linux-gnueabi-ld.bfd: spl/board/dhelectronics/dh_stm32mp1/board.o: in function `board_early_init_f':
-+board/dhelectronics/dh_stm32mp1/board.c:196: multiple definition of `board_early_init_f'; spl/board/dhelectronics/dh_stm32mp1/../../st/stm32mp1/spl.o:board/dhelectronics/dh_stm32mp1/../../st/stm32mp1/spl.c:28: first defined here
-
-need V2
-with rework for board/st/stm32mp1/spl.c
-and better split for DHCOM SOM
-
-regards
+Regards
 
 Patrick
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

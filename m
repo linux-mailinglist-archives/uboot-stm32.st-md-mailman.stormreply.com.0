@@ -2,61 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D30A11E0B95
+	by mail.lfdr.de (Postfix) with ESMTPS id C09181E0B93
 	for <lists+uboot-stm32@lfdr.de>; Mon, 25 May 2020 12:20:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 53AD8C36B2B
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 485F1C36B29
 	for <lists+uboot-stm32@lfdr.de>; Mon, 25 May 2020 10:20:01 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7D183C36B0D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8079AC36B24
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Mon, 25 May 2020 10:19:59 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 04PAHqrR009285; Mon, 25 May 2020 12:19:54 +0200
+ 04PAHlAd026084; Mon, 25 May 2020 12:19:55 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=+lMbJ9Dhf/rH0vqrtgIYnhlMc5ORfu5IEoGUST4sqJY=;
- b=Yd+kWvcHbx/hlgxZX1yM/mCFkt1vOqE8ldX3XS7/WpkJ+PHT3+nazg+1x7HHuGc/WW47
- MYTvKjMz+NJIBzP5vGKsi6kaFQt3sfaF2EUQjzOo/59QUSWjKL0/kG9SutQMPShnCx2H
- 9AwOe+hk9fj3buRiRchqBQIk4n5L25XKOwDer1jxAcYwaOc/TrPDBaT8Cqyt3g7l9m09
- A9uCCLHhmHyvtPRVg0iEr3VsHP43q73vp5YslWhHsyJhq/bJ2zAb04Uhp+i0bPLI78Sx
- 772EWeptL8FsqbwgyRQMGF/fmD7ZJeD7Td5+Y+gE408urDbnoePwB5nJ8vr+zTTkWil9 OA== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=vP9LhUgqAkZQuYDaof2ty4eydZnC96WhhVzBTDDEfo8=;
+ b=ATea7ox+edxO/baXEelhY3sV2AjemZgGvUSYyOQJnxDzjICaFP8qzKlfk+ufuMRMStQl
+ J86ISOy/tWOMgSHgKNppu0vVWQxCzG/N15opnDi149cSEJ4oj0qShcFi5sDTsM2sx/DW
+ HgDq7E5MCz/L53KhMBl0R6/MdKzsCYfsYaXowMRorsGfk4f5jz61sUmbjHlhUj00xbRM
+ ArjH63SCWS0U6gw2a02r2FKpLgM9L39kgH3HLXVTD+InZ2MuZ5cBdzCIdCBjkRnbfWz/
+ JlZZXhH+oeinVlF88flBR5T3nZ3s4k7eKWL6vCavizGRuTjGmj0lUdJvJLjAkfE7vOBU wA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 316skw1r8e-1
+ by mx07-00178001.pphosted.com with ESMTP id 316sa1steh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 May 2020 12:19:54 +0200
+ Mon, 25 May 2020 12:19:55 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 33B9A10002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EA65B100034;
  Mon, 25 May 2020 12:19:54 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1CAEC20B847;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E08FC20B847;
  Mon, 25 May 2020 12:19:54 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 25 May 2020 12:19:53 +0200
+ Mon, 25 May 2020 12:19:54 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 25 May 2020 12:19:40 +0200
-Message-ID: <20200525101949.15944-1-patrick.delaunay@st.com>
+Date: Mon, 25 May 2020 12:19:41 +0200
+Message-ID: <20200525101949.15944-2-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200525101949.15944-1-patrick.delaunay@st.com>
+References: <20200525101949.15944-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
+X-Originating-IP: [10.75.127.48]
 X-ClientProxiedBy: SFHDAG8NODE3.st.com (10.75.127.24) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.676
  definitions=2020-05-25_04:2020-05-25,
  2020-05-25 signatures=0
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice Chotard <patrice.chotard@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH v2 0/9] stm32mp1: use OPP information for PLL1
-	settings in SPL
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH v2 1/9] arm: stm32mp: spl: add bsec driver in
+	SPL
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,69 +76,90 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Add the bsec driver in SPL, as it is needed by SOC part number detection
+to found the supported OPP.
 
-This serie allows to switch the CPU frequency to the max frequency
-supported in OPP device tree nodes and supported by STM32MP SOC
-(800MHz is supported by STM32MP15xD and STM32MP15xF).
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
+---
 
-Board also increases the VDDCore voltage to support this new
-operation point.
+Changes in v2: None
 
-This V2 version of [1] is rebased on top of custodian stm32 and solve
-issue with dh_stm32mp1 (because spl.c was shared between stm32mp1 and
-dh_stm32mp1).
+ arch/arm/dts/stm32mp15-u-boot.dtsi |  2 +-
+ arch/arm/mach-stm32mp/Makefile     |  2 +-
+ arch/arm/mach-stm32mp/bsec.c       | 11 ++++++-----
+ 3 files changed, 8 insertions(+), 7 deletions(-)
 
-[1] http://patchwork.ozlabs.org/project/uboot/list/?series=171767&state=*
-
-
-Changes in v2:
-- add stpmic1_init function, called in board_early_init_f for
-  dh_stm32mp1 board support (and no more use spl.c from stm32mp1)
-- remove CONFIG_SPL_BOARD_INIT
-- stmpic_buck1_set is a static function called in stpmic1_init
-  (with new parameter for vddcore value)
-- update also dh_stm32mp1 board
-- update stm32mp15xx-dhcor and dhcom device tree
-- NEW: merge spl.c and board.c to avoid a file with only one function
-
-Patrick Delaunay (9):
-  arm: stm32mp: spl: add bsec driver in SPL
-  ARM: dts: stm32: add cpufreq support on stm32mp15x
-  board: st: create common file stpmic1.c
-  stm32mp1: clk: configure pll1 with OPP
-  arm: stm32mp: add weak function to save vddcore
-  board: st: stpmic1: add function stpmic1_init
-  board: stm32mp1: update vddcore in SPL
-  ARM: dts: stm32mp1: use OPP information for PLL1 settings in SPL
-  board: stm32mp1: move the function board_debug_uart_init in spl.c
-
- arch/arm/dts/stm32mp15-u-boot.dtsi            |  12 +-
- arch/arm/dts/stm32mp151.dtsi                  |  21 ++
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi      |   9 -
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi      |   9 -
- arch/arm/dts/stm32mp157c-ed1.dts              |   8 +
- arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |   9 -
- arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |   9 -
- arch/arm/dts/stm32mp15xx-dkx.dtsi             |   8 +
- arch/arm/mach-stm32mp/Kconfig                 |   1 -
- arch/arm/mach-stm32mp/Makefile                |   2 +-
- arch/arm/mach-stm32mp/bsec.c                  |  11 +-
- .../arm/mach-stm32mp/include/mach/sys_proto.h |   3 +
- board/dhelectronics/dh_stm32mp1/Makefile      |   6 +-
- board/dhelectronics/dh_stm32mp1/board.c       |  10 +
- board/st/common/Makefile                      |   1 +
- .../st/{stm32mp1/board.c => common/stpmic1.c} |  82 +++--
- board/st/common/stpmic1.h                     |   6 +
- board/st/stm32mp1/Makefile                    |   2 -
- board/st/stm32mp1/spl.c                       |  72 +++--
- board/st/stm32mp1/stm32mp1.c                  |   6 +
- configs/stm32mp15_basic_defconfig             |   1 +
- .../clock/st,stm32mp1.txt                     |   4 +
- drivers/clk/clk_stm32mp1.c                    | 295 ++++++++++++++++--
- 23 files changed, 445 insertions(+), 142 deletions(-)
- rename board/st/{stm32mp1/board.c => common/stpmic1.c} (74%)
- create mode 100644 board/st/common/stpmic1.h
-
+diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
+index 1279589a56..a0d971ad88 100644
+--- a/arch/arm/dts/stm32mp15-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
+@@ -65,7 +65,7 @@
+ };
+ 
+ &bsec {
+-	u-boot,dm-pre-proper;
++	u-boot,dm-pre-reloc;
+ };
+ 
+ &clk_csi {
+diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+index 66bb8cf92f..c8aa24d489 100644
+--- a/arch/arm/mach-stm32mp/Makefile
++++ b/arch/arm/mach-stm32mp/Makefile
+@@ -6,12 +6,12 @@
+ obj-y += cpu.o
+ obj-y += dram_init.o
+ obj-y += syscon.o
++obj-y += bsec.o
+ 
+ ifdef CONFIG_SPL_BUILD
+ obj-y += spl.o
+ else
+ obj-$(CONFIG_CMD_STM32PROG) += cmd_stm32prog/
+-obj-y += bsec.o
+ obj-$(CONFIG_CMD_STM32KEY) += cmd_stm32key.o
+ obj-$(CONFIG_ARMV7_PSCI) += psci.o
+ obj-$(CONFIG_TFABOOT) += boot_params.o
+diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
+index 0d5850b4a9..98a950c640 100644
+--- a/arch/arm/mach-stm32mp/bsec.c
++++ b/arch/arm/mach-stm32mp/bsec.c
+@@ -473,20 +473,23 @@ static int stm32mp_bsec_ofdata_to_platdata(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-#ifndef CONFIG_TFABOOT
+ static int stm32mp_bsec_probe(struct udevice *dev)
+ {
++#if !defined(CONFIG_TFABOOT) && !defined(CONFIG_SPL_BUILD)
+ 	int otp;
+ 	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
+ 
+-	/* update unlocked shadow for OTP cleared by the rom code */
++	/*
++	 * update unlocked shadow for OTP cleared by the rom code
++	 * only executed in U-Boot proper when TF-A is not used
++	 */
+ 	for (otp = 57; otp <= BSEC_OTP_MAX_VALUE; otp++)
+ 		if (!bsec_read_SR_lock(plat->base, otp))
+ 			bsec_shadow_register(plat->base, otp);
++#endif
+ 
+ 	return 0;
+ }
+-#endif
+ 
+ static const struct udevice_id stm32mp_bsec_ids[] = {
+ 	{ .compatible = "st,stm32mp15-bsec" },
+@@ -500,7 +503,5 @@ U_BOOT_DRIVER(stm32mp_bsec) = {
+ 	.ofdata_to_platdata = stm32mp_bsec_ofdata_to_platdata,
+ 	.platdata_auto_alloc_size = sizeof(struct stm32mp_bsec_platdata),
+ 	.ops = &stm32mp_bsec_ops,
+-#ifndef CONFIG_TFABOOT
+ 	.probe = stm32mp_bsec_probe,
+-#endif
+ };
 -- 
 2.17.1
 

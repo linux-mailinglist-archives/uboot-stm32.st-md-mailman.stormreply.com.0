@@ -2,61 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DADB31EF1F4
-	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Jun 2020 09:24:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6C4E1EF1F5
+	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Jun 2020 09:24:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A4BD1C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Jun 2020 07:24:40 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ABD49C36B22
+	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Jun 2020 07:24:42 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 361C4C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2BD99C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  5 Jun 2020 07:24:39 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  5 Jun 2020 07:24:42 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0557MAC2028595; Fri, 5 Jun 2020 09:24:38 +0200
+ 0557MSMY015882; Fri, 5 Jun 2020 09:24:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=xdf8/xf1jjkwTxMO01HOAplIhJv0VJMKS1T4I/C4UOU=;
- b=1Y9syMFEX4mTlXw8Km/hWIayV2GN8WjqdEXDzONtBJk/7GNYMu1VteQj3WtadCzkznpu
- agk8+WiCw+/nCILeNTfxBPw0+ZBzHx1v4u3hkZPUfY1WMVeIfyWvVEw4IaAzx7r44m5c
- 1c1dag3mmDaQBkLspzXfkUxvoNltdy9nolUh6nHgtX/gIKEwjSOJ+ujEAtaMoXbtV3Vf
- Sq8gtoLBINn0dhkmaZkwE+bMmWUJu3kW7aHXMcQqhVQjpHt2s5LMn17xhk3VjLq9kGzj
- hxR6scCCRk4uukyzoTyhkzHa2eHg4qc1GqV/4A/IKUluTRXrCM7ht0gR+k6f7yz4uLFH ww== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=IsD5l36p+Lp03rPeYDYilEU9k7qyyUoYYZ5tYQJoAY8=;
+ b=KxwPexP49BjJ8X/pDQuqPFp0jUk01sVQVbsOKJxQ4Zpzaluc6VvJILphW8qsXXkmT2n1
+ QCVMww67VbTd+jMJXs0B/c9mDZfAiM5oHekRDAt3QOPt4qo48WKAz86i4bg9+gwS5b56
+ 4i2aYp4oKC/O3XeoJOAJh4tD7wJpoqYNjqLGKjQ7PdMTQHMCr65AR2BhaQyaHY4h8etI
+ +/WjBeFbpolMLX3IRkrfOTTyL9B3Gisu0Y/SYql8xaJzkS1Fx/E5VXgYBXXd86aQFjSr
+ 8MzLvSL3JLHnPsqQ6eDW3b3+tyY8d2/WEgQX5C1HyMkutUkxNohM4yq4qK2uinw5VvGu FA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31fasesqhq-1
+ by mx07-00178001.pphosted.com with ESMTP id 31fasm9qbh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 05 Jun 2020 09:24:38 +0200
+ Fri, 05 Jun 2020 09:24:39 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 49F6710002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F2CDF100034;
  Fri,  5 Jun 2020 09:24:38 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3EE582A7E6D;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E1E232AB5BA;
  Fri,  5 Jun 2020 09:24:38 +0200 (CEST)
 Received: from localhost (10.75.127.44) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Fri, 5 Jun 2020 09:24:37 +0200
+ Fri, 5 Jun 2020 09:24:38 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 5 Jun 2020 09:24:29 +0200
-Message-ID: <20200605092427.1.I393865d4202eca31c111da33b792596f130b73d2@changeid>
+Date: Fri, 5 Jun 2020 09:24:30 +0200
+Message-ID: <20200605092427.2.I0b49a502a439eb6530b486f5e3ab4923195bff8e@changeid>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200605092427.1.I393865d4202eca31c111da33b792596f130b73d2@changeid>
+References: <20200605092427.1.I393865d4202eca31c111da33b792596f130b73d2@changeid>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG6NODE2.st.com (10.75.127.17) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
  definitions=2020-06-05_01:2020-06-04,
  2020-06-05 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
  Etienne Carriere <etienne.carriere@linaro.org>,
- Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH 1/2] board: stm32mp1: fix handling of DT
-	OP-TEE reserved memory nodes
+Subject: [Uboot-stm32] [PATCH 2/2] dts: ARM: stm32mp15: add OP-TEE node in
+	u-boot DTSI
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,63 +77,113 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: Etienne Carriere <etienne.carriere@linaro.org>
 
-Fix the sequence in stm32mp1 fdt.c that disables OP-TEE resources
-defined in FDT when U-boot detects OP-TEE firmware is not present.
+Add OP-TEE firmware node in stm32mp15 U-Boot DTSI. This node is
+needed since commit [1] that changed U-Boot/stm32mp15 to detect
+OP-TEE availability by probing the resource instead of relying on
+U-Boot configuration. The software sequence implemented by [1] is
+fine but U-Boot DTS/DTSI files were not updated accordingly since,
+hence OP-TEE presence is never detected by U-Boot, preventing Linux
+kernel from using OP-TEE resources.
 
-Before this change, helper function stm32_fdt_disable_optee()
-set property status to "disabled" for the OP-TEE reserved memory
-nodes but this has no impact since Linux kernel does not consider
-the status property for reserved-memory subnodes. This change
-make U-Boot to attempt to delete the node instead.
+For consistency and to synchronize stm32mp15 DTSI files (excluding
+U-Boot specific DTSI files) with the Linux kernel ones, this change
+also moves the OP-TEE reserved memory nodes from board generic DTSI
+files to U-Boot specific board DTSI files.
 
-Fixes: 4a1b975dac02 ("board: stm32mp1: reserve memory for OP-TEE in device tree")
+Link: [1] commit 43df0a159df6 ("stm32mp1: dynamically detect op-tee presence")
 Signed-off-by: Etienne Carriere <etienne.carriere@linaro.org>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- arch/arm/mach-stm32mp/fdt.c | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 15 +++++++++++++++
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 14 ++++++++++++++
+ arch/arm/dts/stm32mp157c-ed1.dts         |  5 -----
+ arch/arm/dts/stm32mp15xx-dkx.dtsi        |  5 -----
+ 4 files changed, 29 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/fdt.c b/arch/arm/mach-stm32mp/fdt.c
-index c723b223e0..959f12efe1 100644
---- a/arch/arm/mach-stm32mp/fdt.c
-+++ b/arch/arm/mach-stm32mp/fdt.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
- /*
-- * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
-+ * Copyright (C) 2019-2020, STMicroelectronics - All Rights Reserved
-  */
- 
- #include <common.h>
-@@ -224,19 +224,23 @@ static void stm32_fdt_disable_optee(void *blob)
- {
- 	int off, node;
- 
-+	/* Delete "optee" firmware node */
- 	off = fdt_node_offset_by_compatible(blob, -1, "linaro,optee-tz");
- 	if (off >= 0 && fdtdec_get_is_enabled(blob, off))
--		fdt_status_disabled(blob, off);
-+		fdt_del_node(blob, off);
- 
--	/* Disabled "optee@..." reserved-memory node */
-+	/* Delete "optee@..." reserved-memory node */
- 	off = fdt_path_offset(blob, "/reserved-memory/");
- 	if (off < 0)
- 		return;
- 	for (node = fdt_first_subnode(blob, off);
- 	     node >= 0;
- 	     node = fdt_next_subnode(blob, node)) {
--		if (!strncmp(fdt_get_name(blob, node, NULL), "optee@", 6))
--			fdt_status_disabled(blob, node);
-+		if (strncmp(fdt_get_name(blob, node, NULL), "optee@", 6))
-+			continue;
+diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+index c52abeb1e7..3fedb6f1e1 100644
+--- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+@@ -20,6 +20,21 @@
+ 		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+ 		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
+ 	};
 +
-+		if (fdt_del_node(blob, node))
-+			printf("Failed to remove optee reserved-memory node\n");
- 	}
- }
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++
++	reserved-memory {
++		optee@de000000 {
++			reg = <0xde000000 0x02000000>;
++			no-map;
++		};
++	};
++
+ 	led {
+ 		red {
+ 			label = "error";
+diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+index 84af7fa47b..a07c585415 100644
+--- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+@@ -21,6 +21,20 @@
+ 		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
+ 	};
  
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++
++	reserved-memory {
++		optee@fe000000 {
++			reg = <0xfe000000 0x02000000>;
++			no-map;
++		};
++	};
++
+ 	led {
+ 		red {
+ 			label = "error";
+diff --git a/arch/arm/dts/stm32mp157c-ed1.dts b/arch/arm/dts/stm32mp157c-ed1.dts
+index 4fb71100f5..186dc46754 100644
+--- a/arch/arm/dts/stm32mp157c-ed1.dts
++++ b/arch/arm/dts/stm32mp157c-ed1.dts
+@@ -70,11 +70,6 @@
+ 			reg = <0xe8000000 0x8000000>;
+ 			no-map;
+ 		};
+-
+-		optee@fe000000 {
+-			reg = <0xfe000000 0x02000000>;
+-			no-map;
+-		};
+ 	};
+ 
+ 	aliases {
+diff --git a/arch/arm/dts/stm32mp15xx-dkx.dtsi b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+index 812e370ee4..7589c6f9dc 100644
+--- a/arch/arm/dts/stm32mp15xx-dkx.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+@@ -58,11 +58,6 @@
+ 			reg = <0xd4000000 0x4000000>;
+ 			no-map;
+ 		};
+-
+-		optee@de000000 {
+-			reg = <0xde000000 0x02000000>;
+-			no-map;
+-		};
+ 	};
+ 
+ 	led {
 -- 
 2.17.1
 

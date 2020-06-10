@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B890D1F5AFA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 20:10:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93FC91F5B01
+	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 20:11:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A13C8C36B0D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 18:10:26 +0000 (UTC)
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
- [209.85.219.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5D4E1C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 18:11:46 +0000 (UTC)
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+ [209.85.222.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7E039C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 280FFC36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 10 Jun 2020 18:10:24 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id dp10so1448904qvb.10
+ Wed, 10 Jun 2020 18:11:44 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id 205so3000266qkg.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 10 Jun 2020 11:10:24 -0700 (PDT)
+ Wed, 10 Jun 2020 11:11:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=qi7yw4HnaYlrCWH9vsuIdlHHO2ED+0h72ZybBOqjjHY=;
- b=MqKSEB0bD+jEzXs7i7yxKCCYLv92cLnAxnqjfND8XG7r8mg8R8cLuOgRA3YlqftbCR
- 6g4jrwlG/yZCMWyxHABYvNEwBJVJBE/WXYi23KumuPYEtk2BX9GeyNSp07IBwYN9bDug
- Gs+SDZsiBnnHAWvp1394w4RvETKY1zwqHdQ7o=
+ bh=rek5bACI6+V9QilVMziMXd6DD1MrK6wtpEQUd2DHGgM=;
+ b=J0gFgBzij4WvNTI8ONAVaS4mBYR4fY6vFnlEeG8iPBLOGYbM3UoduQ5enDIlxV8bVm
+ kvKtr4Mlm/pn3+lkCNUKQo3qKYEBc6Xry9sZv/CLqvQ1nYdmD8Qj9yR5ZRvLuFhmt/UD
+ z4UpW7nd85Ad/0lfvssn7BtIdmKiafX/HRyCs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=qi7yw4HnaYlrCWH9vsuIdlHHO2ED+0h72ZybBOqjjHY=;
- b=KyRAMaCgHcbbqip8Lckk8SKO26e7Z3zvBD0nmFteLCiiGd2mTSiRoPCS5xj6Zu20rH
- grOYiuAiVMMVtYoBTWMZbc/H3JTGYUNrqiZf2FWgbgNNboy8BRrSWFYHub0LfL5KJs9S
- ziySOSQDlz1FwUnV6UpqhfcmTn7QWxo4T62xxd4yFVmILyEvD6YzbUeA9g0AbRvD8PwP
- Q8LDUVhcaYW4XCVzKB3WyvDgRjPZ9nTUsZay/As/iW4ZC+m/DEKsS8ue7XzN8/uGvHOc
- y+U/KH0aprkdRGQV1Aj3YwIIKEmVmg8NfG7gRdEAQcKnrBTBqgTxF98nHj06tdxoQJvF
- jsZA==
-X-Gm-Message-State: AOAM532NDzOlKTD6+AcRObZpqYZQhZvoAVHjsr9sFHlcaeaqe9CrF4zA
- pEVEK00DJBUUgdoVo+2LbN0k5Q==
-X-Google-Smtp-Source: ABdhPJwBgNSlrEK6vl4J0RnEggccGDGekWtMP7ZcRB8+DefrtkKBK7JpZE5MLtqkMY5sa66HSuaS+Q==
-X-Received: by 2002:a0c:f494:: with SMTP id i20mr4326820qvm.179.1591812623081; 
- Wed, 10 Jun 2020 11:10:23 -0700 (PDT)
+ bh=rek5bACI6+V9QilVMziMXd6DD1MrK6wtpEQUd2DHGgM=;
+ b=YfaCFWdmrAZWdWsoZV2ne0r7h2G3zYHAsk4RKlVeldnTu3y4wVQgHhsM8T0Zts5qms
+ K6GkPC+OLkL9YAIEvRD+EB1+oWldLaBu1KSJr6Lqvj8GxxKVOas6yy9scISMwgZWBuVS
+ W+3TduSxM3zdS1p8K5r92f6EKjxliXnzT5Ozp45ftZ10SkTaSq7JsmMrbKwqaHckySVZ
+ 0q2mj5U5Aeb4/nQcu8RujAsBRNe9onzSWziSEsDIsbOES5mPU3qy87XGUPhH1n9DLcJy
+ sUT5C3wmxH98f806BLQbU0D9EvEvrVKiruR3c1EOZdf7IFgAZdX9Zm5WnBIQNli0hn94
+ gkqA==
+X-Gm-Message-State: AOAM532hbrMWIGGLyDh5tu7Q+UH5qcQ/O2GOPx5vOcYE/nIIdW48dt/j
+ kiZF1No/q/GusgiMzI7EtN42Ag==
+X-Google-Smtp-Source: ABdhPJy3pVxCT5sI0TYlAz1sED7KKB/tylRJWC3POwo1KcBfPd6kkfM4EA+IcIE+Ycg0AJw/hSm+cw==
+X-Received: by 2002:a37:63d3:: with SMTP id x202mr4116455qkb.97.1591812703007; 
+ Wed, 10 Jun 2020 11:11:43 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8080-2c5b-4fc8-1785-177e.inf6.spectrum.com.
  [2606:a000:1401:8080:2c5b:4fc8:1785:177e])
- by smtp.gmail.com with ESMTPSA id 195sm320234qkg.74.2020.06.10.11.10.21
+ by smtp.gmail.com with ESMTPSA id f14sm348280qka.70.2020.06.10.11.11.41
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 10 Jun 2020 11:10:21 -0700 (PDT)
-Date: Wed, 10 Jun 2020 14:10:19 -0400
+ Wed, 10 Jun 2020 11:11:41 -0700 (PDT)
+Date: Wed, 10 Jun 2020 14:11:39 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200610181019.GE24893@bill-the-cat>
-References: <20200608092719.10643-1-patrick.delaunay@st.com>
+Message-ID: <20200610181139.GF24893@bill-the-cat>
+References: <20200610172842.3728-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20200608092719.10643-1-patrick.delaunay@st.com>
+In-Reply-To: <20200610172842.3728-1-patrick.delaunay@st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+Cc: Masahiro Yamada <yamada.masahiro@socionext.com>, u-boot@lists.denx.de,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH] net: dwc_eth_qos: add Kconfig option to
- select supported configuration
+ Wolfgang Denk <wd@denx.de>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH] env: Kconfig: cosmetics: update comment
+ for SYS_RELOC_GD_ENV_ADDR
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,123 +71,59 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8691410464986962399=="
+Content-Type: multipart/mixed; boundary="===============5492834235987609798=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============8691410464986962399==
+--===============5492834235987609798==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="KzTpGdFWKkiGyjCs"
+	protocol="application/pgp-signature"; boundary="Ca0e2zgpnh8/XhnM"
 Content-Disposition: inline
 
 
---KzTpGdFWKkiGyjCs
+--Ca0e2zgpnh8/XhnM
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 08, 2020 at 11:27:19AM +0200, Patrick Delaunay wrote:
+On Wed, Jun 10, 2020 at 07:28:42PM +0200, Patrick Delaunay wrote:
 
-> Add configuration flag to select the supported dwc driver configuration:
-> - CONFIG_DWC_ETH_QOS_TEGRA186
-> - CONFIG_DWC_ETH_QOS_IMX
-> - CONFIG_DWC_ETH_QOS_STM32
->=20
-> See Linux driver ethernet/stmicro/stmmac and associated glue layers
-> for other configuration examples.
->=20
-> This patch removes the not-selected compatibles and lets the linker remove
-> the unused functions to reduce the size of the driver.
+> Update the comment for SYS_RELOC_GD_ENV_ADDR as gd->env_addr is updated
+> in board_r.c::initr_reloc_global_data() under the compilation flags
+> CONFIG_SYS_RELOC_GD_ENV_ADDR
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> Hi,
->=20
-> I propose this patch after Marek's remark in [1].
->=20
-> It is also linked to [2] to limit the STM32 glue for ST compatible.
->=20
-> [1] net: dwc_eth_qos: Make clk_rx and clk_tx optional
->     http://patchwork.ozlabs.org/project/uboot/patch/20200512095603.29126-=
-5-david.wu@rock-chips.com/#2432595
->=20
-> [2] net: dwc_eth_qos: update the compatible supported for STM32
->     http://patchwork.ozlabs.org/project/uboot/list/?series=3D176917
->=20
->=20
->  drivers/net/Kconfig       | 27 ++++++++++++++++++++++++---
->  drivers/net/dwc_eth_qos.c | 12 +++++++++---
->  2 files changed, 33 insertions(+), 6 deletions(-)
->=20
-> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-> index 0b08de0ef4..c4b3667d3b 100644
-> --- a/drivers/net/Kconfig
-> +++ b/drivers/net/Kconfig
-> @@ -156,9 +156,30 @@ config DWC_ETH_QOS
->  	help
->  	  This driver supports the Synopsys Designware Ethernet QOS (Quality
->  	  Of Service) IP block. The IP supports many options for bus type,
-> -	  clocking/reset structure, and feature list. This driver currently
-> -	  supports the specific configuration used in NVIDIA's Tegra186 chip,
-> -	  but should be extensible to other combinations quite easily.
-> +	  clocking/reset structure, and feature list.
-> +
-> +config DWC_ETH_QOS_IMX
-> +	bool "Synopsys DWC Ethernet QOS device support for IMX"
-> +	depends on DWC_ETH_QOS
-> +	help
-> +	  The Synopsys Designware Ethernet QOS IP block with the specific
-> +	  configuration used in IMX soc.
-> +
-> +config DWC_ETH_QOS_STM32
-> +	bool "Synopsys DWC Ethernet QOS device support for STM32"
-> +	depends on DWC_ETH_QOS
-> +	default y if ARCH_STM32MP
-> +	help
-> +	  The Synopsys Designware Ethernet QOS IP block with the specific
-> +	  configuration used in STM32MP soc.
-> +
-> +config DWC_ETH_QOS_TEGRA186
-> +	bool "Synopsys DWC Ethernet QOS device support for TEGRA186"
-> +	depends on DWC_ETH_QOS
-> +	default y if TEGRA186
-> +	help
-> +	  The Synopsys Designware Ethernet QOS IP block with specific
-> +	  configuration used in NVIDIA's Tegra186 chip.
-> =20
->  config E1000
->  	bool "Intel PRO/1000 Gigabit Ethernet support"
 
-I like this idea.  But, is there a reason to have more than one of these
-enabled?  Assuming not, we should do this as a choice I think so it'll
-be clear to the next SoC that they'll need to add this table right away.
-Thanks!
+Pretty sure that's just a typo I introduced, thanks for digging at the
+code to confirm.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---KzTpGdFWKkiGyjCs
+--Ca0e2zgpnh8/XhnM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7hIgMACgkQFHw5/5Y0
-tyxDbgv/f+nzEUcV13q7oXssPly1ww96+IJ+dSmRHWwiGYf3tbjDmJ0OVVPHAW/T
-TB99qHI+B3h/AKqVxNZcR/G051tkUt40/vKNzqqvUAr8KeGwhohWHNRX/tdJcoba
-AAtT+NWdzlBb3XFjuA9cgq6GA9ieSd8E2qglxxLkF6uS6jjQOXZ+zc2HYl4rg0IU
-NmlN31EgQWrd2bvPJujc7hZiweVDWEXw/NAWhFxVRK3wT3ZDrXFepRLE5yEYg4z4
-8B31AILzIhFKQSoqjh6emh/4BB9D4DTy22Td1Hn0FuP4AhK0eb3Pnn/YxBNcmje1
-LYV13O0EDYa8XZYf0MhjjM5k1Pv+/uYYx1O/PozaeWIvx9NQIVE1Lm6k/znSvx5K
-0j9W/zOZxCcXa8cB9CJTtJPdcX3j2FHIUMSrT9M5duZSW7192DzIN1ruc+qR6JOk
-ytqkIjZkuN0Hz8KX7DrLGnj1eg76O6UUvVhDm/wV5EHYd9XaQa9pNW83iKuPcQOe
-RkQ4sZAX
-=4ZFQ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7hIlsACgkQFHw5/5Y0
+tyxwrQwAjZqdpcCfLy0XDNiHRcrl+fjT1FCmNLgao2jTgrqWh21hLeCe07yy0Lpe
+lh0VDSRfs/DBInBDFpbma7AqNV3j0sAqJ/KHXqqPmy+XVC4gqF+3bqALF8MPS9ls
+w02Dtb6T04HIMVmgARyUKrbDUM1FA4ZtgW2/fLIhSdi8/9J8g9ehRHbmizQ26KIF
+8cayUl/DFH4wv/f20b/X4O11lJLxD4i40EWictaQEm7AuWe5ob5XloQQoq0+F2F7
+/jrVo3PwtVflOHoKmShYgMdbZNLaXntZjjwyJzU3dePyAV78SZorUd+hKG9972KD
+eLa6SoA1JzHWoDWSi7pFgOnYEb42sp7KkhdDbh2FrYi9uRg3f+ATupAAL/HSyWfj
+TjxZgzdadjmYsKdracGu5xyYD5u5i4wgT3M72PadxxvEux2i5moD43wNgw1PghVK
+3Uv2Cxk0HHn3dUOwr10tzKn66UbWUq0pBJ1xs4ltuRTRKhBVtZVaF+ntkTMRXld2
+CVpO+eZA
+=nhH6
 -----END PGP SIGNATURE-----
 
---KzTpGdFWKkiGyjCs--
+--Ca0e2zgpnh8/XhnM--
 
---===============8691410464986962399==
+--===============5492834235987609798==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -198,4 +134,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============8691410464986962399==--
+--===============5492834235987609798==--

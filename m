@@ -2,54 +2,35 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5E9A1F5E36
-	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Jun 2020 00:17:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2583C1F5E5D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Jun 2020 00:32:48 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75E4CC36B0D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 22:17:54 +0000 (UTC)
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
- [209.85.222.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 93CACC36B0D
+	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Jun 2020 22:32:47 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA9E3C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 393ECC36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 10 Jun 2020 22:17:51 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id w3so3763940qkb.6
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 10 Jun 2020 15:17:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=5r+8URYZJJcoMTsx3Jsv0fosCUZBc2qwjE1VPx0QvSI=;
- b=Ie3wNDBZnGaIyAx0M0l7OwqRvR8vkO0zohazVtwgYShIUEMVmhS195ApQTNKBnGX3h
- k4BIn+9/YdJetwEC8WMgTgP+i5E+B1S/t4odFaT34wLSPhLrdaEGyyrdzXM8bFjQDdX8
- NG+CXSvHrh2aBzzG+M7s1NeGLneXimSmv0rsQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=5r+8URYZJJcoMTsx3Jsv0fosCUZBc2qwjE1VPx0QvSI=;
- b=VxTFfcKw/m84J6ZksKUwx1BGw1m/tVbKHYeuYcS8RvPXqZlWxGR3ctX3zIzCCYyyGh
- Ix2JQG0iE1shh0Q6uxNoJxVQJdwsKQ3l0EB9nNsCEYxuUn0otYwTA+fFP+czuUNvFNrl
- wwfZPb2RrDD6UKNgejCXVZYSFdWMMlVtY9M9LePRUo6JAIlbq65zmzLDxDDvC+orWLgD
- 0mgxzHcsEZC4lqpNEePYJUfyN288Utb3s49WQGtcVLFo4KIyF44ISGFD3Vh1vhTXd7jt
- jyTWXFvrHPHSefcEqQQ/ayoLPSlyyF/KrWiKt+0pcDVepTzxafCw5S10sg3mRH4PtN1v
- uZEw==
-X-Gm-Message-State: AOAM530RFxMmxwMQNPEiB6BtzPWOkqnfEvvV0TeSBzvLq+lQQ6A+TnyZ
- GF4YnI2ZDg3UVJXefKNl1R2x3A==
-X-Google-Smtp-Source: ABdhPJwCTowb/UML6s86G4E9Q+bjCRehoPNJnUOxvWtmvHrPf5c9U2WAF8iOa0ieiwUzC4qTod3mkg==
-X-Received: by 2002:a37:6196:: with SMTP id v144mr5311912qkb.337.1591827470613; 
- Wed, 10 Jun 2020 15:17:50 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8080-2c5b-4fc8-1785-177e.inf6.spectrum.com.
- [2606:a000:1401:8080:2c5b:4fc8:1785:177e])
- by smtp.gmail.com with ESMTPSA id b4sm722137qka.133.2020.06.10.15.17.48
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 10 Jun 2020 15:17:49 -0700 (PDT)
-Date: Wed, 10 Jun 2020 18:17:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Message-ID: <20200610221747.GQ24893@bill-the-cat>
+ Wed, 10 Jun 2020 22:32:44 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 49j1vw0JS6z1qrf4;
+ Thu, 11 Jun 2020 00:32:44 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 49j1vv6rpwz1qqkt;
+ Thu, 11 Jun 2020 00:32:43 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024)
+ with ESMTP id G_XzSOki4lKS; Thu, 11 Jun 2020 00:32:42 +0200 (CEST)
+X-Auth-Info: QPo+uCBXIRxSThMulktbj1IpE0Nm2XdTfkgY1VLS1t4=
+Received: from [IPv6:::1] (unknown [195.140.253.167])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA;
+ Thu, 11 Jun 2020 00:32:42 +0200 (CEST)
+To: Tom Rini <trini@konsulko.com>
 References: <20200610185851.GI24893@bill-the-cat>
  <ca74b5b5-3de3-c249-16d5-c5e1de742dc2@denx.de>
  <20200610201148.GJ24893@bill-the-cat>
@@ -60,10 +41,15 @@ References: <20200610185851.GI24893@bill-the-cat>
  <0b8142d8-2375-ee8f-515d-680f8e93beed@denx.de>
  <20200610215737.GO24893@bill-the-cat>
  <7db25e91-a2ad-26d8-2fb9-f65ea7db0bce@denx.de>
+ <20200610221747.GQ24893@bill-the-cat>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <c2e4c1f1-5e0f-c7af-7bfd-6a5ca0125ffe@denx.de>
+Date: Thu, 11 Jun 2020 00:32:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-In-Reply-To: <7db25e91-a2ad-26d8-2fb9-f65ea7db0bce@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+In-Reply-To: <20200610221747.GQ24893@bill-the-cat>
+Content-Language: en-US
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  u-boot@lists.denx.de, Patrick Delaunay <patrick.delaunay@st.com>,
  Joe Hershberger <joe.hershberger@ni.com>
@@ -80,99 +66,63 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6786171544832243786=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 6/11/20 12:17 AM, Tom Rini wrote:
+> On Thu, Jun 11, 2020 at 12:02:08AM +0200, Marek Vasut wrote:
+>> On 6/10/20 11:57 PM, Tom Rini wrote:
+>> [...]
+>>
+>>>> My point is more in the general direction of being able to configure
+>>>> SPL/TPL/U-Boot separately, without being forced to craft nasty ifdeffery
+>>>> in include/config/board.h if I need something enabled in SPL, but not in
+>>>> U-Boot, and vice versa. And for that the Kconfig should be able to
+>>>> somehow emit the _SPL/_TPL/U-Boot options of all symbols I think, so
+>>>> that we won't need separate entry for each.
+>>>
+>>> I haven't seen a case where the nasty ifdeffery in a config header file
+>>> wasn't basically either:
+>>> - Now wrong (we _have_ the symbols today to say we don't want X in SPL)
+>>> - Working around a case where we need to use $(SPL_TPL_) somewhere but
+>>>   didn't know that we could use $(SPL_TPL_) to fix the problem instead.
+>>> - Now not useful (for example, disable CMD_xxx for SPL, but we've really
+>>>   sorted things out so now so doing that didn't help anything).
+>>>
+>>> Now I'm happy to admit that I just might be missing a case as I've only
+>>> gotten as far as "undef CONFIG_[ABC]" and BOOTCOMMAND is possibly
+>>> leading to embedding a long string where we really don't want it.
+>>> Please point me at more undef cases that need to be resolved in some
+>>> way.
+>>
+>> I don't want to resolve these problems one-by-one , the obvious solution
+>> for them AND the growth of Kconfig files with multiple copies of the
+>> same symbol for SPL/TPL/U-Boot is the have Kconfig generate those
+>> symbols automatically for SPL/TPL/U-Boot and then let user pick the
+>> configuration as needed. That would make the undefs in
+>> include/configs/board.h go away easily and would reduce the duplication
+>> in Kconfig files.
+> 
+> I strongly disagree that having two or three times the number of symbols
+> to select from will result in a better outcome.  I see 386 SPL_
+> '^config ' lines (of which a number are 'default y' lines) and that's
+> more than I thought there would be.  There's also 6175 overall symbols
+> today.  I would be hopeful that the "lets look at the DTS files and see
+> what we can tell about a platform" thread could help with configuring a
+> good binary better.  Because to me the worrisome entries are things like
+> MMC_HS200_SUPPORT / SPL_MMC_HS200_SUPPORT as I would start by asking if
+> the cases where we don't enable that in SPL are intention or oversight.
 
---===============6786171544832243786==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3m6VNgM56Nljn+Yv"
-Content-Disposition: inline
+Surely HS200 (and HS400/SDR104/UHS) , which wastes _A_LOT_ of boot time
+and a lot of space, is a good candidate for something to be disabled in SPL.
 
-
---3m6VNgM56Nljn+Yv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jun 11, 2020 at 12:02:08AM +0200, Marek Vasut wrote:
-> On 6/10/20 11:57 PM, Tom Rini wrote:
-> [...]
->=20
-> >> My point is more in the general direction of being able to configure
-> >> SPL/TPL/U-Boot separately, without being forced to craft nasty ifdeffe=
-ry
-> >> in include/config/board.h if I need something enabled in SPL, but not =
-in
-> >> U-Boot, and vice versa. And for that the Kconfig should be able to
-> >> somehow emit the _SPL/_TPL/U-Boot options of all symbols I think, so
-> >> that we won't need separate entry for each.
-> >=20
-> > I haven't seen a case where the nasty ifdeffery in a config header file
-> > wasn't basically either:
-> > - Now wrong (we _have_ the symbols today to say we don't want X in SPL)
-> > - Working around a case where we need to use $(SPL_TPL_) somewhere but
-> >   didn't know that we could use $(SPL_TPL_) to fix the problem instead.
-> > - Now not useful (for example, disable CMD_xxx for SPL, but we've really
-> >   sorted things out so now so doing that didn't help anything).
-> >=20
-> > Now I'm happy to admit that I just might be missing a case as I've only
-> > gotten as far as "undef CONFIG_[ABC]" and BOOTCOMMAND is possibly
-> > leading to embedding a long string where we really don't want it.
-> > Please point me at more undef cases that need to be resolved in some
-> > way.
->=20
-> I don't want to resolve these problems one-by-one , the obvious solution
-> for them AND the growth of Kconfig files with multiple copies of the
-> same symbol for SPL/TPL/U-Boot is the have Kconfig generate those
-> symbols automatically for SPL/TPL/U-Boot and then let user pick the
-> configuration as needed. That would make the undefs in
-> include/configs/board.h go away easily and would reduce the duplication
-> in Kconfig files.
-
-I strongly disagree that having two or three times the number of symbols
-to select from will result in a better outcome.  I see 386 SPL_
-'^config ' lines (of which a number are 'default y' lines) and that's
-more than I thought there would be.  There's also 6175 overall symbols
-today.  I would be hopeful that the "lets look at the DTS files and see
-what we can tell about a platform" thread could help with configuring a
-good binary better.  Because to me the worrisome entries are things like
-MMC_HS200_SUPPORT / SPL_MMC_HS200_SUPPORT as I would start by asking if
-the cases where we don't enable that in SPL are intention or oversight.
-
---=20
-Tom
-
---3m6VNgM56Nljn+Yv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7hXAEACgkQFHw5/5Y0
-tywalgwAm+EkozIFZA3EEtZhieOvEcsXpORXOHfsqNqJffggRtUqb0OHekrvE7/a
-fsydlVzvEPyUp/xrGJynN05ZTVBBrleKLBqqj9iuydlNvaydR0JIZDUEWIVh3PyB
-EnGUGyhgXtnY5N+PrsGrFlx41HeLQzSmwXT+7LvOHD+gTeSAGNwXKwO6CTdKgbNb
-G5C7mAnmKOc1g52peVAqcHwi7kJOt2xTfi3GlgadHSva7mI4890WVchd45o5nm1v
-xqeX3/n1P24kYehGBb/jematT6czUbPhz6vrQrNkLFo+bUT8LLXdQsiXJ6lupdgq
-Ge29yJQmOnthsaxd/e4czTwobmk1cd4trENzYIqC5o1sReouF4HSppnsWtoP2Qdp
-9y0TA0KZRzRzZsm4mup1MJK0r3g31eStlMNHksRdTtx7Z4YpzB+k5CM7SC8q8UPS
-LbziRlS8xoGcxQD7/ILELD76DR4Lptkyocu/jwHeTaQ+10Zu262v79ssNUqUqSod
-SoU+Ip3Z
-=KKu4
------END PGP SIGNATURE-----
-
---3m6VNgM56Nljn+Yv--
-
---===============6786171544832243786==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Some core platform-specific symbols are fine with not having matching
+_SPL/_TPL counterpart, sure, but that's not the majority of the Kconfig
+symbols, right? Or maybe we need some new Kconfig keyword (instead of
+'config') to describe symbols which do need _SPL/_TPL variants ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6786171544832243786==--

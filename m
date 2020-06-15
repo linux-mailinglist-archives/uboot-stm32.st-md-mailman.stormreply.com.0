@@ -2,63 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 408721F997F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jun 2020 16:01:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B26DC1F9A88
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jun 2020 16:42:10 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09F1DC36B0D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jun 2020 14:01:52 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68BF1C36B0D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jun 2020 14:42:10 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D378C36B0D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE6C1C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jun 2020 14:01:51 +0000 (UTC)
+ Mon, 15 Jun 2020 14:42:08 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05FDtoWg023258; Mon, 15 Jun 2020 16:01:45 +0200
+ 05FEdnrq020183; Mon, 15 Jun 2020 16:42:06 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=g34uyNKaL25xgtRh+qILBGImTstZhXWm4SZ04Q8PRqQ=;
- b=NMvqcwsCFH18LLNrdPGckkRkiVK2ICmFtxnjKDta9IbpO9jFjWxNQUy2LbtI/vioEpfg
- crYlAdkvOmTtBjmY8aqsFsTvYPfp2y8EXy4O/MMdaBoS4iL4HCefmgFaetuHV1SpC02W
- ptUr/lwcW1RHoIQuNOR1lw05ItEDs4tiZpvtwbi2+oIM+yKcoy8BInZYb28fzhdGyJWi
- AqvY9pHkAjG9sYfndq1auOLbyKuGtr79MO9CfrfQmhHDckJAIMyebnxNVQiWD+ZDYKsP
- oSgf2BLWxlj6VawzHvHF9ujFb2EpESrlwOhwmz4A4PuQ3badb7K5Fx05IYPUGZE/QZEE 5w== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=F9IhtajISb+uxFxx92oRIdpi7V18lvMKzN9ixlpAuV8=;
+ b=w8w5TQmn6x/MLBPpg4xsAilOl62xEzY0SLpc01sh7XyfzSNLwtmGFdfNb01n2mWLMqwm
+ N7NEbjpx6sO15ZK3wLwaaYZsz320G/kvUxGlr7w/Fibq2mtSE18EWM2JJ559SOUsuG9F
+ nMFf2JY+dzwzVLZQ9qfIaVOWyfX/oa++DzG/7nKkQqjQuzirQ2OAfAy1D+ybsdGqlLdW
+ xrMlDrEDVXeHFlaKjhHNT7oehT0LYUif/rAa58PKMNfpCWd/2q5lsFjOxu2bOaf5wYjk
+ ctWBwxqZAVRt9OKccH1KdcHtNdhedqDY+46S0UskVppBg51a5S0qSaGpuVxz8wJWY4in mw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31mm91j1xm-1
+ by mx07-00178001.pphosted.com with ESMTP id 31mm91j7pw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jun 2020 16:01:45 +0200
+ Mon, 15 Jun 2020 16:42:06 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 00B5210002A;
- Mon, 15 Jun 2020 16:01:42 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 96F77100039;
+ Mon, 15 Jun 2020 16:42:05 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ECAD92B427C;
- Mon, 15 Jun 2020 16:01:42 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 62F912B35EE;
+ Mon, 15 Jun 2020 16:42:05 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Mon, 15 Jun 2020 16:01:42 +0200
+ Mon, 15 Jun 2020 16:42:05 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 15 Jun 2020 16:01:37 +0200
-Message-ID: <20200615140137.21186-5-patrick.delaunay@st.com>
+Date: Mon, 15 Jun 2020 16:42:01 +0200
+Message-ID: <20200615144201.23220-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200615140137.21186-1-patrick.delaunay@st.com>
-References: <20200615140137.21186-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG6NODE3.st.com (10.75.127.18) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
  definitions=2020-06-15_03:2020-06-15,
  2020-06-15 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stephen Warren <swarren@nvidia.com>,
+Cc: Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v4 4/4] test: env: add test for env info
-	sub-command
+Subject: [Uboot-stm32] [PATCH] stm32mp1: use the command env info -q in
+	env_check
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,85 +72,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a pytest for testing the env info sub-command:
+Activate the new option -q in command "env info"
+to avoid unnecessary trace during boot.
 
-test_env_info: test command with several option
+Hi,
 
-test_env_info_quiet: test the result of the sub-command with quiet option,
-'-q' as used for support in shell test; for example:
-  if env info -p -d -q; then env save; fi
+This patch was previous included in V3 serie 158105.
+
+This patch have dependency with serie 183438 for -q otpion
+and with serie 183387 for stm32mp1 env_check update.
+
+END
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
-Changes in v4:
-- rebase on master branch
-- move 5/7 stm32mp1: configs: activate CMD_ERASEENV
-  in a new serie 183380
-- move 2/7 and 4/7 in a new serie 183387
+ include/configs/stm32mp1.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes in v3:
-- update commit message (sub-commandi)
-- rename test_env_info_test to test_env_info_quiet
-
-Changes in v2:
-- add pytest test_env_info and test_env_info_test (new)
-
- test/py/tests/test_env.py | 44 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
-
-diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 6ff38f1020..cbdb41031c 100644
---- a/test/py/tests/test_env.py
-+++ b/test/py/tests/test_env.py
-@@ -336,3 +336,47 @@ def test_env_import_whitelist_delete(state_test_env):
-     unset_var(state_test_env, 'foo2')
-     unset_var(state_test_env, 'foo3')
-     unset_var(state_test_env, 'foo4')
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_nvedit_info')
-+def test_env_info(state_test_env):
-+
-+    """Test 'env info' command with several options.
-+    """
-+    c = state_test_env.u_boot_console
-+
-+    response = c.run_command('env info')
-+    assert 'env_valid = invalid' in response
-+    assert 'env_ready = true' in response
-+    assert 'env_use_default = true' in response
-+
-+    response = c.run_command('env info -p -d')
-+    assert 'Default environment is used' in response
-+    assert 'Environment cannot be persisted' in response
-+
-+    response = c.run_command('env info -p -d -q')
-+    assert response == ""
-+
-+@pytest.mark.boardspec('sandbox')
-+@pytest.mark.buildconfigspec('cmd_nvedit_info')
-+@pytest.mark.buildconfigspec('cmd_echo')
-+def test_env_info_quiet(state_test_env):
-+
-+    """Test 'env info' quiet command result with several options for test.
-+    """
-+    c = state_test_env.u_boot_console
-+
-+    response = c.run_command('env info -d -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "0"
-+
-+    response = c.run_command('env info -p -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "1"
-+
-+    response = c.run_command('env info -d -p -q')
-+    assert response == ""
-+    response = c.run_command('echo $?')
-+    assert response == "1"
+diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
+index e927787be0..038a639843 100644
+--- a/include/configs/stm32mp1.h
++++ b/include/configs/stm32mp1.h
+@@ -155,7 +155,7 @@
+ 	"splashimage=0xc4300000\0"  \
+ 	"ramdisk_addr_r=0xc4400000\0" \
+ 	"altbootcmd=run bootcmd\0" \
+-	"env_check=if env info -p -d; then env save; fi\0" \
++	"env_check=if env info -p -d -q; then env save; fi\0" \
+ 	STM32MP_BOOTCMD \
+ 	BOOTENV \
+ 	"boot_net_usb_start=true\0"
 -- 
 2.17.1
 

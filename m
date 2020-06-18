@@ -2,74 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59C791FEED5
-	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 11:42:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F4581FFB9F
+	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 21:15:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1591EC36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 09:42:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 39E69C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 19:15:37 +0000 (UTC)
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+ [209.85.160.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ABA44C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 044F4C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 18 Jun 2020 09:42:21 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05I9eGX4025236; Thu, 18 Jun 2020 11:42:01 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=Sz70bl6PqoeUZDJD2ZJ0anNhVphzEOcmauPCthIw3YQ=;
- b=KYTjNzh9J6JS3GefaphU0c488yi10dJhsa/jR9f2buagwIaNGthgcVIyyfcWrlNcN9bb
- 10ZbfdRml2SWKn+3DMLeXNwzrLJvQTnLFB3QJH50oBvK+TzagBF1iw03ZB/jbbCh02ex
- Vn5E+ln24ZUBImOB1d1CkbZFjhanLmULpR8DasEBtvxh24RzReAUNA6lo+eFXgrxV6VF
- 3ENxgMHuWw/PWD9l3dBK3mCj7uymMfaXm3VKllyWsZWZrtwM/8OUWjDOe6c7gizeLPy2
- NvZsf59B6ULD2E2VAzsb5bRBp0874UvPM/Jb+6Gfm8/ApE1hMYs8h1aMgG9/QlguakPP jQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31q64ahuem-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 18 Jun 2020 11:42:01 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C7C3610002A;
- Thu, 18 Jun 2020 11:41:58 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AAFB820F370;
- Thu, 18 Jun 2020 11:41:58 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 18 Jun
- 2020 11:41:58 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 18 Jun 2020 11:41:58 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Stephen Warren <swarren@wwwdotorg.org>
-Thread-Topic: [PATCH v4 4/4] test: env: add test for env info sub-command
-Thread-Index: AQHWQx1/R/l4elmvDU6GVyE/L/zF+6jaG3MAgADDSYCAAme3gIAAzp3w
-Date: Thu, 18 Jun 2020 09:41:58 +0000
-Message-ID: <aad19cd162744215871ae9b52e6d90e4@SFHDAG6NODE3.st.com>
-References: <20200615140137.21186-1-patrick.delaunay@st.com>
- <20200615140137.21186-5-patrick.delaunay@st.com>
- <7b4b0f62-2ee9-d806-dca3-f5b046b41e0d@wwwdotorg.org>
- <4aaf99c13bbf4c2a94c3f4c40efbeb37@SFHDAG6NODE3.st.com>
- <2306274c-b93c-2934-b4d8-7e803a88a9e8@wwwdotorg.org>
-In-Reply-To: <2306274c-b93c-2934-b4d8-7e803a88a9e8@wwwdotorg.org>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
+ Thu, 18 Jun 2020 19:15:34 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id y1so5337879qtv.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 18 Jun 2020 12:15:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=b4pURu3io0wf8O+DKPkD0aii/ya6CrF3DkmlvJwr8M0=;
+ b=NZgfXgLCBZDvtM3eHWoC1cIwmiiPwxXQ9Ui/qT2lpq2iaYKusLW089SGQD+Aa+qEjH
+ +RCZYlG25Qr4JBfZasQpCd2v4UxfOd1c1ONAs+LEyFPsLgyJEv6r0MeiyQkrpyXNWzSJ
+ A7umAq0nKtqAONYTcnLol75lKqAXRLZHpWKMc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=b4pURu3io0wf8O+DKPkD0aii/ya6CrF3DkmlvJwr8M0=;
+ b=Ibap7Fx9j2jcEACq3glqPFGgB/BlglIjW4pRzwAvuaAnZrW6vMVCh+dYcnU60NyyIu
+ mZpd5/wnVAzwKELEo65W5siCZb17tgalUwPpnj+XH+ZEvYo4h82hGlGvXe0gsoA07gnU
+ H6L6G580Ri5eWi85xHf6IqPgfH0gXT9hQ5R6Rz55a0cu6zK5vHfnb2TWRUcHoTQIMYPt
+ jqiFsTP5uya4OwaDhE0khzoWdixRzfpwQ9Ndm0XBJCOR9D9UD5J+5LleRiAlSUvzjqg8
+ nNlwoaN+7Rwk97ig5ZSh1PUFgWW3B7rE17sufO/6tEsOoeiy5qjYKbqc/Er9TuLTh4co
+ l2oQ==
+X-Gm-Message-State: AOAM5304Ls/c6pLEKXGhtDJHpMq3xURuuqHFXn/P7BcV+7KqSGZj15+k
+ yaqG46g9BvT37iTPdJyix8fbYA==
+X-Google-Smtp-Source: ABdhPJwExE9uzIMcRBp/XDgZRKNiP4UeO6Bo69206n6ugTTYKQASeQ4tJQNDE3xIQS0X2YECV3JsMA==
+X-Received: by 2002:ac8:2aed:: with SMTP id c42mr5936813qta.202.1592507733324; 
+ Thu, 18 Jun 2020 12:15:33 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-8080-3530-e3a2-751f-ef7e.inf6.spectrum.com.
+ [2606:a000:1401:8080:3530:e3a2:751f:ef7e])
+ by smtp.gmail.com with ESMTPSA id v14sm4095025qtj.31.2020.06.18.12.15.31
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 18 Jun 2020 12:15:32 -0700 (PDT)
+Date: Thu, 18 Jun 2020 15:15:30 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>, Marek Vasut <marex@denx.de>
+Message-ID: <20200618191530.GU27801@bill-the-cat>
+References: <20200616074048.7898-1-patrick.delaunay@st.com>
+ <20200616074048.7898-4-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
- definitions=2020-06-18_07:2020-06-17,
- 2020-06-18 signatures=0
+In-Reply-To: <20200616074048.7898-4-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 4/4] test: env: add test for env info
-	sub-command
+ u-boot@lists.denx.de, Wolfgang Denk <wd@denx.de>,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 3/9] env: correctly handle result in
+	env_init
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,87 +72,108 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3356230071768047988=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Stephen,
 
-> From: Stephen Warren <swarren@wwwdotorg.org>
-> Sent: jeudi 18 juin 2020 00:32
-> 
-> On 6/16/20 2:01 AM, Patrick DELAUNAY wrote:
-> > Hi Stephen,
-> >
-> >> From: Stephen Warren <swarren@wwwdotorg.org>
-> >> Sent: mardi 16 juin 2020 00:09
-> >>
-> >> On 6/15/20 8:01 AM, Patrick Delaunay wrote:
-> >>> Add a pytest for testing the env info sub-command:
-> >>>
-> >>> test_env_info: test command with several option
-> >>>
-> >>> test_env_info_quiet: test the result of the sub-command with quiet
-> >>> option, '-q' as used for support in shell test; for example:
-> >>>   if env info -p -d -q; then env save; fi
-> >>
-> >>> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-> >>
-> >>> +@pytest.mark.boardspec('sandbox')
-> >>> +@pytest.mark.buildconfigspec('cmd_nvedit_info')
-> >>> +def test_env_info(state_test_env):
-> >>
-> >> The body of these tests doesn't look like it tests something that's
-> >> specific to sandbox, so I'm not sure why the test function is marked to only run
-> on sandbox.
-> >> Is it simply because other boards may store the environment
-> >> differently and/or have valid saved environment in flash, so the
-> >> responses to e.g. "env info" aren't the same everywhere? If so, I
-> >> imagine that test_env_info_quiet() doesn't need to be sandbox-only, since
-> there's no output in that case.
-> >
-> > The test is not really sandbox specific but I don't have easy way to
-> > know on real board the ENV configuration (for the resut of command env info -p
-> -d).
-> >
-> > In the test, I assume that  at least  CONFIG_ENV_IS_.... is activated
-> > (for persistent storage) and if this target is selected in the weak function
-> env_get_location.
-> > And "env save" as be not be executed (default environment is used).
-> >
-> > And with quiet option, the test  the environment if is persistent
-> > (result of "env -p -q" is 0) or using default ("env -d -q" result is 0).
-> >
-> > And in the next patch
-> > http://patchwork.ozlabs.org/project/uboot/patch/20200616074048.7898-10
-> > -patrick.delaunay@st.com/
-> >
-> > As the command "env erase" is not always supported according he environment
-> target.
-> >
-> > I could test on real hardware but I need to check if I test all the possible result.
-> 
-> OK, I guess that makes sense for a start.
+--===============3356230071768047988==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="HC0F8i/BfMshQzR8"
+Content-Disposition: inline
 
-But I will propose a V5  to check command on real hardware
-Just modify test_env_info to check the all possible strings.
- 
-> For testing on real HW, the typical approach would be to require that the board's
-> test configuration define some env__xxx variables that define its capabilities.
-> Then, the test can be made to depend on those values, or whether those variables
-> are set at all.
 
-For the next steps, I need to thinks about tests because ENV location is not only impacted
-by CONFIG_ENV_IS_IN_.... or CONFIG_ENV_IS_NOWHERE 
+--HC0F8i/BfMshQzR8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-These defined can be activated simultaneously and env location is detected at run
-time: so it is difficult to predict the 'env info' result on real hardware.
+On Tue, Jun 16, 2020 at 09:40:42AM +0200, Patrick Delaunay wrote:
 
-On sandbox it is fixed because ENVL_NOWHERE is selected by default.
+> Don't return error with ret=3D-ENOENT when the optional ops drv->init
+> is absent but only if env_driver_lookup doesn't found driver.
+>=20
+> This patch correct an issue for the code
+>   if (!env_init())
+>      env_load()
+> When only ext4 is supported (CONFIG_ENV_IS_IN_EXT4),
+> as the backend env/ext4.c doesn't define an ops .init
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  env/env.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/env/env.c b/env/env.c
+> index dcc25c030b..819c88f729 100644
+> --- a/env/env.c
+> +++ b/env/env.c
+> @@ -295,7 +295,10 @@ int env_init(void)
+>  	int prio;
+> =20
+>  	for (prio =3D 0; (drv =3D env_driver_lookup(ENVOP_INIT, prio)); prio++)=
+ {
+> -		if (!drv->init || !(ret =3D drv->init()))
+> +		ret =3D 0;
+> +		if (drv->init)
+> +			ret =3D drv->init();
+> +		if (!ret)
+>  			env_set_inited(drv->location);
+> =20
+>  		debug("%s: Environment %s init done (ret=3D%d)\n", __func__,
 
-Patrick
+I'm adding in Marek here because this reminds me of similar questions /
+concerns I had looking in to his series.  At root, I think we're not
+being consistent in each of our env backing implementations about where
+flags such as ENV_VALID are set, and return values / checks of
+functions.
+
+Just outside of the start of the patch context here, we set ret to
+-ENOENT and just past this, if still -ENOENT we say ENV_VALID and point
+at the default environment.
+
+But, I don't follow the patch commit message here.  If we don't have
+drv->init we call env_set_inited(drv->location) but we won't have change
+ret to 0, which means that later on down the function we go back to
+default environment.
+
+So isn't this a problem in most environment cases then?  Thanks!
+
+--=20
+Tom
+
+--HC0F8i/BfMshQzR8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7rvUsACgkQFHw5/5Y0
+tyzBPAwAjiXiKJQgc9yWE0FA+OESRHZSLsETJyJSbVW7yTAbp6NxiTy7xK8IQlfq
+a/aISICYhvQLvyWCsm7OtHSWApHv+yFI6U+U1J9mKGuvyzP9bzoObVV8ZVwdfKK9
+98G49sJLd28+wbpHoZQUk7xc97msLDPn5dWwe1KJD3UsDFie2MQE1iUsMB6/zIDd
+4KE7RQIlY904hn8en8MTXoWj5p4gysVFcRMSKjUFrkdQwY/AsAAX+H6Bi/a+FD0X
+n+j5ie5x3Aqw7WlcjvfjGRtjoCoo4XbZHgBuAHuhKuBG+DoMMiUzhHKuljFVONGl
+22/Jv5kie8SOCITW1kvTxS9Kjp11aoeEnly0qKFJw25JLvWPFl8AEraqfvJIOgWA
+EyrT8x9sx0JEYQ8gsemN63uqKE0AxgTY16CEjJar5nMrihUNcY6KPTJT9sYgDDaq
+PLAGoWtLH4StZwHbEzuic6ThGkdpTEN8pOYN8L9D5TFtH8rMR4/PjYll6gzn53Vb
+dvVT6LGq
+=PYXd
+-----END PGP SIGNATURE-----
+
+--HC0F8i/BfMshQzR8--
+
+--===============3356230071768047988==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3356230071768047988==--

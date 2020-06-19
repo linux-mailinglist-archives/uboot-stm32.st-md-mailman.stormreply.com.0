@@ -2,64 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 211401FFBC6
-	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 21:25:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE232004D4
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 11:20:11 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E00C2C36B0C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 18 Jun 2020 19:25:56 +0000 (UTC)
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
- [209.85.222.195])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC9F0C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 09:20:10 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 165DAC36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ABED1C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 18 Jun 2020 19:25:56 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id j68so3366930qkb.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 18 Jun 2020 12:25:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=BEEFjK02VCZn2X4Y8P6L5LoT4U4+4WulAcp4lbthEKQ=;
- b=cmDIDmVrxGAUQganj8aEEiKuKV/BhUiEbCX9moHjrIdtprtbvUuLQGAe0hJ+dPBPmR
- AiUQbvqr8isY35LXKUsXqnHCujhK97BuCRsLdPE/diEbM3SwByzNJObbh/x0JspjU1ql
- N3mcuzFwNzeVV+caktrX55KH/UmCwDbkv1Jow=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=BEEFjK02VCZn2X4Y8P6L5LoT4U4+4WulAcp4lbthEKQ=;
- b=NG+gf/evmw3nV05JNLBPvUTIekTxi5yEmhurimstJfmDi7LrsrH0aBkYk/7Vc7jWBz
- 2Psx+ftaTEjZZnCWALMRyVBq2XO4o3ym2klS0xySgB9D+9QSD2Y+vJ+lhl8bLmDttFf4
- ficM8+IQfFTl9hettssI0RuAOhqap57Nv99ohg0u2zX6/JAR9xURn6DJzk/gAYA+xWC6
- sZKIDNZOCD+Eb1cT6Aa0TVUdZAkRJ6yT1vlRyl9DKr4vTcEnpo49p7agrWHpuCSFpgFb
- u1BgI9s3eaijszDr3tOs6Kwve282F+QVbO1W6tEvL6kHv/90H9VsgDH/V8QpL4wTpoFq
- 8uTg==
-X-Gm-Message-State: AOAM532BJiuXhxopfsGXcy5G1DJs0WWabPaLRITrUq5TDVfiWHhTkBaP
- rK4k+KhyITIUyZPCQoWeYObp+g==
-X-Google-Smtp-Source: ABdhPJz22fR1hDKFeOF5cUeMvOZ3wW/q8iudsP3M+y/Jl3K5HRDV9rZ2EHR1Kq7T8cdp+3WgbuWaag==
-X-Received: by 2002:a37:e30a:: with SMTP id y10mr403134qki.151.1592508355057; 
- Thu, 18 Jun 2020 12:25:55 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8080-3530-e3a2-751f-ef7e.inf6.spectrum.com.
- [2606:a000:1401:8080:3530:e3a2:751f:ef7e])
- by smtp.gmail.com with ESMTPSA id n1sm3882398qkf.54.2020.06.18.12.25.53
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 18 Jun 2020 12:25:54 -0700 (PDT)
-Date: Thu, 18 Jun 2020 15:25:52 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200618192552.GX27801@bill-the-cat>
-References: <20200616074048.7898-1-patrick.delaunay@st.com>
- <20200616074048.7898-3-patrick.delaunay@st.com>
+ Fri, 19 Jun 2020 09:20:08 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 05J9GOoj012765; Fri, 19 Jun 2020 11:20:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=eZnIR1OI3o4Huo9LKQfiNMtHF3Mu8AEgs88CZRDd0f8=;
+ b=JoWgfLkE8mM0oRmXntRXP8MesUKUS5Yl9lPdll7DJsuee4y69P5Wh1TePhLiw/7EfVrx
+ hrzySlkuZLob8/ODH9EdwPpkNCuzW0PplEqG4bMXvS/dwv9dP3mz06jlbkC8g8KHZzdK
+ wdbD5QvQSvqCfhjJjHnQ1CIv5+AKyThryDG0ZDxjtQPferETETkNOaiUO/mwRDfQKpil
+ q4YcP//GmEJIHdLCt+xQV7B3h9rNYpY0EnzusP6sCsfAT7i5r5kVITRxmAb6JlbyO9Dd
+ BkDJAFCSRKkKCwr1FRj072oHYs1pBL35feNxGY77en1WDJih1h2q1uQtV4FHaSMVFyBL cA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 31q64aque0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Jun 2020 11:20:02 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7FE21100034;
+ Fri, 19 Jun 2020 11:20:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5B81A2B0F5E;
+ Fri, 19 Jun 2020 11:20:01 +0200 (CEST)
+Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 19 Jun 2020 11:20:01 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 19 Jun 2020 11:19:45 +0200
+Message-ID: <20200619091945.11656-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200616074048.7898-3-patrick.delaunay@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Wolfgang Denk <wd@denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/9] env: ext4: set gd->env_valid
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
+ definitions=2020-06-19_05:2020-06-18,
+ 2020-06-19 signatures=0
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32: Reinstate card detect
+	behavior on ST boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,67 +68,74 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3620992656360770017=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+The cd-gpios with (GPIO_ACTIVE_LOW | GPIO_PULL_UP) gpio is thus far
+unsupported, reinstate the old cd-gpios behavior until this handling
+is fully implemented. This avoid potential issue for SDCard boot:
+the card detect fails with floating gpio.
 
---===============3620992656360770017==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="+dH9khzwljbvYE07"
-Content-Disposition: inline
+Hi,
 
+I don't have boot issue on my boards (DK2 and EV1) but this
+patch avoids potential issue with floating gpio as issue see
+by Marek on DHSOM.
 
---+dH9khzwljbvYE07
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+To be reverted in v2020.10 when the serie [1] is accepted.
 
-On Tue, Jun 16, 2020 at 09:40:41AM +0200, Patrick Delaunay wrote:
+The generic impacts in gpio uclass [2] is already accepted
+for V2020.07 and merged in master branch.
 
-> Add a missing initialization of gd->env_valid in env_ext4_load
-> as it is already done in some other env device.
->=20
-> Set gd->env_valid =3D ENV_VALID in env_ext4_save() and env_ext4_load().
->=20
-> This patch allows to have a correct information in 'env info' command.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+[1] stm32mp1: activate gpio hog support and add new pinctrl ops
+http://patchwork.ozlabs.org/project/uboot/list/?series=181294
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+[2] dm: add support of new binding in gpio and pincontrol
+http://patchwork.ozlabs.org/project/uboot/list/?series=152777&state=*
 
---=20
-Tom
+Patrick
 
---+dH9khzwljbvYE07
-Content-Type: application/pgp-signature; name="signature.asc"
+END
 
------BEGIN PGP SIGNATURE-----
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7rv78ACgkQFHw5/5Y0
-tyx8Ogv/ZDp+gRraNRixHfj1K10Jxu9ywdVlQi+oK0wGrvAcRNplO1W//xNFnKX1
-9CeLUPC/HDFfoToY39qKkwoXqxL5QS/gYUvLN1e2m/K3QmxgWqJaMA6e/H88oFAh
-DYDC4tPjsKxKBK+SDaQYo+JekpVYNWLZxPcmkadXcSLy6I3E1FE3/XnO5V0T5nco
-i+7VoyFX+CbRjvPD9G2U2oanpICI9MC1za1znl2YEq0vlr+GX+DNqKJIGK+fa9hg
-xT3piPmBEwkmdtFQEmeBdWFyfQz1inRLtLE9pTMVsVAQPh5cbHjTKO7E6H1ou4+2
-yv4uHgTiN4nRe6nHEm4hJ+G7D4YNWLg1zlal1oM0sygrqXfeQRhGNP8OgrvDFoIt
-55OHB2U8wJQ1qKSN3puLebVJJYlLR9X94s1Yq91nZbkwfYTm/Ua+VkIYf2pjBomk
-UH2Pb9nVEn4gzjLZ6QMZpZUu4rU9Y/pYsREmRFhBA9XhXIuxk9tEtV2ZmtNhjN6n
-t7NyVw5e
-=eQcz
------END PGP SIGNATURE-----
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 2 ++
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 2 ++
+ 2 files changed, 4 insertions(+)
 
---+dH9khzwljbvYE07--
-
---===============3620992656360770017==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+index 3fedb6f1e1..e13dade463 100644
+--- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+@@ -171,6 +171,8 @@
+ 
+ &sdmmc1 {
+ 	u-boot,dm-spl;
++	broken-cd;
++	/delete-property/ cd-gpios;
+ };
+ 
+ &sdmmc1_b4_pins_a {
+diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+index a07c585415..b16dc28d47 100644
+--- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+@@ -167,6 +167,8 @@
+ 
+ &sdmmc1 {
+ 	u-boot,dm-spl;
++	broken-cd;
++	/delete-property/ cd-gpios;
+ };
+ 
+ &sdmmc1_b4_pins_a {
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============3620992656360770017==--

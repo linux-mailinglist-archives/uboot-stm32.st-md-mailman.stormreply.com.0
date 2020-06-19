@@ -2,67 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9992B2019EA
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 20:05:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF2F22019F3
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 20:07:59 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 492BBC36B0C
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 18:05:21 +0000 (UTC)
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
- [209.85.160.196])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 862B5C36B0C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jun 2020 18:07:59 +0000 (UTC)
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+ [209.85.160.194])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 363F8C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8257DC36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Jun 2020 18:05:15 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id k22so7849931qtm.6
+ Fri, 19 Jun 2020 18:07:55 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id z2so5810632qts.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Jun 2020 11:05:15 -0700 (PDT)
+ Fri, 19 Jun 2020 11:07:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=GjdtfSqAfWCjLZBDTeEOCIDf9C9gn9K7mx6wV5PYo68=;
- b=aAIky+dizjqL8BY+uk9TJc3LI8x4Aqt+e0O9zijWePfZ1HDn+5dYC/GLipTDWmO2tU
- p05DwG8eDTZaR/mr2qP+BZrbFdU5WTmNt0NtkUGoYP4+mI3VLcMf89XDvCpcsqDOD33z
- DTrouqpHi4jit0VXj/Fjqh2yYKr0aGT8DGsl8=
+ bh=olsQ+MFl9t3e/i0ln6wo1x6n3EJ5bFBi3DP3ZbDJfuE=;
+ b=Art5IbX8/pjfrYGNLZD+Aa5jQiURnMoKyTI3Tgwl03a8LATPzfxpRwMPLVg53T2M3J
+ J1oKgmHoXak2Dv0WGq5CkP1s3CtOTz9PRU5yAIje+QHqvYM5knhwmDxA2CYoDZ/D7NYc
+ 1U/yMcgLviRt8x6lRB6vj+5VtVS5KIhOXWEmQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=GjdtfSqAfWCjLZBDTeEOCIDf9C9gn9K7mx6wV5PYo68=;
- b=RdYmUUCXGeWenxSoeNuqp5yDUvAbDuRD2FTpp/KCFUoVM+uaa7MoN118mm3aFLuEQr
- IqwRF0FuTPPOKGumTfGn3xlt5BKWArklxVVuIjDhf/tj09ljiiDEETNsOGD8WEIISJ8I
- 3VSvAtFedd//FsATXkYZkcgtGbIXV72nR/GYJawOtdLPfWyREngolMCKzX+sSnV5Mz6o
- cApSxYcDrlHiFcBjBBWJe9PfFoxmx7onFcSlOdczhyrHbPcQN/n2biSFmAxIDCnWN32G
- dfYQ2v7NKaGFiRZVlh6VWAOVhx9Aa7qvuQiImX2lMg8RFmZQ/YMSx9MitogNvOFN1n+c
- z/1w==
-X-Gm-Message-State: AOAM531Wmp/L1ZJgPQ47HU4GWuFjV1N4VLOhXtvf1VYjCwsByFwoiLAd
- GBH4vY/RfOHgB/Yv3yiiOZFpPQ==
-X-Google-Smtp-Source: ABdhPJz6uJkMaiS39s/+fbEDtSzhHCF/2XgRUCCff2Wrn96nt8j3tvpzwczhywisJeuMpOcr+KdBxg==
-X-Received: by 2002:aed:2437:: with SMTP id r52mr3750063qtc.140.1592589914662; 
- Fri, 19 Jun 2020 11:05:14 -0700 (PDT)
+ bh=olsQ+MFl9t3e/i0ln6wo1x6n3EJ5bFBi3DP3ZbDJfuE=;
+ b=X9QHlNZi/LgrZ0xn2gLBsMz3DlPTt2W1PRoE3woFS7aSJuHmi3i6DoHOVRTOseVFI3
+ XSK2hXueMSyDushhlM3HzamGO/ga71Blzm9xuUOJB0v+uPaBMAYm3JbfQj7eGaNROVYU
+ NC7J7vSvvOuH37eWyzVyGB5URdIxVF06H21ZGCrw1DHu3ypW4C3FLKwnZInmG+ReUM5O
+ uVlBODAcJ1eP9YshLkVveDldSY1+Q4i52uyutW8p+Xt94GeCfew4m4IZAIsSu0LhVwxG
+ Y9oIu3r9DpixSRSevNktHUNXklQKUi7y81N8+5zXoUEgWSRHVMFkeFYTFImc3wPsiYs1
+ t49A==
+X-Gm-Message-State: AOAM532xf/IuZ8tHg9IOiPZRNCM21caQdKz1CIzIPa3sp7ntrbqioe96
+ azfPCGNir4d3GBM4VlKUskfwSg==
+X-Google-Smtp-Source: ABdhPJynR9Bfed/T+bbk4G/oRuaq52qFU+WK/ffjHqfw6POvNhQyphvg2O8xBJ6Kjz1dwH/4zdrr7Q==
+X-Received: by 2002:ac8:6746:: with SMTP id n6mr4691998qtp.307.1592590074383; 
+ Fri, 19 Jun 2020 11:07:54 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8080-8c25-1271-b281-e614.inf6.spectrum.com.
  [2606:a000:1401:8080:8c25:1271:b281:e614])
- by smtp.gmail.com with ESMTPSA id g140sm6948095qke.98.2020.06.19.11.05.13
+ by smtp.gmail.com with ESMTPSA id y40sm6076923qtc.29.2020.06.19.11.07.52
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 19 Jun 2020 11:05:13 -0700 (PDT)
-Date: Fri, 19 Jun 2020 14:05:11 -0400
+ Fri, 19 Jun 2020 11:07:53 -0700 (PDT)
+Date: Fri, 19 Jun 2020 14:07:51 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20200619180511.GP27801@bill-the-cat>
+Message-ID: <20200619180751.GQ27801@bill-the-cat>
 References: <20200616074048.7898-1-patrick.delaunay@st.com>
- <20200616074048.7898-4-patrick.delaunay@st.com>
- <20200618191530.GU27801@bill-the-cat>
- <50087f47d8c44cb8930940c6de7ae360@SFHDAG6NODE3.st.com>
+ <20200616074048.7898-6-patrick.delaunay@st.com>
+ <20200618191719.GV27801@bill-the-cat>
+ <817efefe407341aa98d6a80f037a1610@SFHDAG6NODE3.st.com>
 MIME-Version: 1.0
-In-Reply-To: <50087f47d8c44cb8930940c6de7ae360@SFHDAG6NODE3.st.com>
+In-Reply-To: <817efefe407341aa98d6a80f037a1610@SFHDAG6NODE3.st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Wolfgang Denk <wd@denx.de>, Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 3/9] env: correctly handle result in
-	env_init
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Mario Six <mario.six@gdsys.cc>
+Subject: Re: [Uboot-stm32] [PATCH v2 5/9] sandbox: support the change of env
+	location
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,183 +74,102 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7849855298339880549=="
+Content-Type: multipart/mixed; boundary="===============2499017320625439845=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============7849855298339880549==
+--===============2499017320625439845==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="v1mHNXBTCsim3EdZ"
+	protocol="application/pgp-signature"; boundary="g3gKGiRpvPEwrzWv"
 Content-Disposition: inline
 
 
---v1mHNXBTCsim3EdZ
+--g3gKGiRpvPEwrzWv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 19, 2020 at 02:14:00PM +0000, Patrick DELAUNAY wrote:
-> Hi Tom and Marek,
+On Fri, Jun 19, 2020 at 02:40:06PM +0000, Patrick DELAUNAY wrote:
+> Hi,
 >=20
 > > From: Tom Rini <trini@konsulko.com>
-> > Sent: jeudi 18 juin 2020 21:16
+> > Sent: jeudi 18 juin 2020 21:17
 > >=20
-> > On Tue, Jun 16, 2020 at 09:40:42AM +0200, Patrick Delaunay wrote:
+> > On Tue, Jun 16, 2020 at 09:40:44AM +0200, Patrick Delaunay wrote:
 > >=20
-> > > Don't return error with ret=3D-ENOENT when the optional ops drv->init=
- is
-> > > absent but only if env_driver_lookup doesn't found driver.
+> > > Add support of environment location with a new sandbox command
+> > > 'env_loc'.
 > > >
-> > > This patch correct an issue for the code
-> > >   if (!env_init())
-> > >      env_load()
-> > > When only ext4 is supported (CONFIG_ENV_IS_IN_EXT4), as the backend
-> > > env/ext4.c doesn't define an ops .init
+> > > When the user change the environment location with the command
+> > > 'env_loc <location>' the env is reinitialized and saved; the
+> > > GD_FLG_ENV_DEFAULT flag is also updated.
+> > >
+> > > When the user set the same env location, the environment is re-loaded.
 > > >
 > > > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > > > ---
 > > >
-> > > (no changes since v1)
+> > > Changes in v2:
+> > > - change cmd_tbl_t to struct cmd_tbl
 > > >
-> > >  env/env.c | 5 ++++-
-> > >  1 file changed, 4 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/env/env.c b/env/env.c
-> > > index dcc25c030b..819c88f729 100644
-> > > --- a/env/env.c
-> > > +++ b/env/env.c
-> > > @@ -295,7 +295,10 @@ int env_init(void)
-> > >  	int prio;
-> > >
-> > >  	for (prio =3D 0; (drv =3D env_driver_lookup(ENVOP_INIT, prio)); pri=
-o++) {
-> > > -		if (!drv->init || !(ret =3D drv->init()))
-> > > +		ret =3D 0;
-> > > +		if (drv->init)
-> > > +			ret =3D drv->init();
-> > > +		if (!ret)
-> > >  			env_set_inited(drv->location);
-> > >
-> > >  		debug("%s: Environment %s init done (ret=3D%d)\n", __func__,
+> > >  board/sandbox/sandbox.c | 42
+> > > ++++++++++++++++++++++++++++++++++++++++-
+> > >  1 file changed, 41 insertions(+), 1 deletion(-)
 > >=20
-> > I'm adding in Marek here because this reminds me of similar questions /=
- concerns
-> > I had looking in to his series.  At root, I think we're not being consi=
-stent in each of
-> > our env backing implementations about where flags such as ENV_VALID are=
- set,
-> > and return values / checks of functions.
-> >=20
-> > Just outside of the start of the patch context here, we set ret to -ENO=
-ENT and just
-> > past this, if still -ENOENT we say ENV_VALID and point at the default
-> > environment.
-> >=20
-> > But, I don't follow the patch commit message here.  If we don't have
-> > drv->init we call env_set_inited(drv->location) but we won't have change
-> > ret to 0, which means that later on down the function we go back to def=
-ault
-> > environment.
+> > This is for testing, which is why it's on sandbox?  But I think we shou=
+ld have this
+> > be a generic opt-in feature as changing where environment is saved at r=
+un time
+> > has use cases when we have multiple available.  Thanks!
 >=20
-> The cause of the issue is because the init() ops is optional in "struct e=
-nv_driver".
+> Yes in my mind it was only for testing on sandbox....
+>=20
+> But  I agree, I can a add a opt-in generic command to select and load ENV=
+ on one target.
+>=20
+> Someting as "env load [<target>] " which loads with the request backend a=
+nd update gd->env_load_prio
+>=20
+> With <target> =3D name of the name define in backend with ENV_NAME macro
+> And using the default location gd->env_load_prio when absent.
+>=20
+> Or split in 2 new commands
+>=20
+> - env select <target>
+> - env load
+>=20
+> Perhaps this last proposal with 2 command is more flexible....=20
+> to be combined with other command (env save / env erase)
+>=20
+> if this proposal is OK, I will work on it.....
 
-Right.
-
-> When this opt is absent, I assume that the initialization is not mandator=
-y but
-> this inititialization need to be tagged in gd->env_has_init with the call=
- of
-> env_set_inited() function=20
-
-So when drv->init isn't set we are already calling env_set_inited(...).
-If that's not the case, what's going on?
-
-> And the ENV backend is FOUND (don't return -ENOENT)
->=20
-> else the next call of env_has_inited(drv->location) always failed : in en=
-v_load()
->=20
-> I see the error  in EXT4 env backend,.all the other backend as a env_init=
-() function
->=20
-> But some othe backend don't define the .init operation and have the issue
->=20
-> eeprom.c:235:U_BOOT_ENV_LOCATION(eeprom) =3D {
-> ext4.c:135:U_BOOT_ENV_LOCATION(ext4) =3D {
-> fat.c:128:U_BOOT_ENV_LOCATION(fat) =3D {=20
-> mmc.c:393:U_BOOT_ENV_LOCATION(mmc) =3D {
-> onenand.c:108:U_BOOT_ENV_LOCATION(onenand) =3D {
-> sata.c:117:U_BOOT_ENV_LOCATION(sata) =3D {=20
-> ubi.c:179:U_BOOT_ENV_LOCATION(ubi) =3D {
->=20
-> The other don't have issue:
->=20
-> flash.c:358:U_BOOT_ENV_LOCATION(flash) =3D {
-> flash.c:368:	.init		=3D env_flash_init,
-> nand.c:382:U_BOOT_ENV_LOCATION(nand) =3D {
-> nand.c:389:	.init		=3D env_nand_init,
-> nowhere.c:30:U_BOOT_ENV_LOCATION(nowhere) =3D {
-> nowhere.c:32:	.init		=3D env_nowhere_init,
-> nvram.c:117:U_BOOT_ENV_LOCATION(nvram) =3D {
-> nvram.c:122:	.init		=3D env_nvram_init,
-> remote.c:54:U_BOOT_ENV_LOCATION(remote) =3D {
-> remote.c:59:	.init		=3D env_remote_init,
-> sf.c:306:U_BOOT_ENV_LOCATION(sf) =3D {
-> sf.c:312:	.init		=3D env_sf_init,
-
-Right, there should be a problem showing up on a ton of locations, not
-just ext4 which is why I'm concerned / confused here.  While ext4 isn't
-as widely used yet as I would expect, FAT/MMC are.
-
-> > So isn't this a problem in most environment cases then?  Thanks!
->=20
-> I don't sure which environment configuration can case issue (only one ENV=
- without drc->init() function)
-> But no issue if at least one CONFIG_ENV_IS_ is activated with driver impl=
-ementing init ops=20
->=20
-> But I see the issue in SANDBOX when I activate EXT4 only target. (CONFIG_=
-ENV_IS_IN_EXT4),=20
-> And no more issue when I add CONFIG_ENV_IS_NOWHERE.
->=20
-> PS: no direct issue if env_init result is not checked
->        but I check this result in the sandbox tests in next patches:
-> 	if (!env_init())
-> 	     env_load()
-> =20
->        but anyway inconsistent value of gd->env_has_init=20
->        which can be a problem for any env_has_inited() calls
-
-Right.  I think there's some bigger inconsistency going on here that
-needs to be fixed.  I'm also confused / concerned how you're not seeing
-env_set_inite(..) being called.  if (!NULL) is true.  Thanks!
+Sounds good to me, thanks!
 
 --=20
 Tom
 
---v1mHNXBTCsim3EdZ
+--g3gKGiRpvPEwrzWv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7s/lcACgkQFHw5/5Y0
-tyzapAv+K+ErgsfNp9EPZTZDIRXoPuz2+cm3YtEwMczLz+DB3MH7zbh8ZdOzNwrp
-OFHpRigZOiqH2GHmtrlIQUR/S4vYsdQbt0eQ2RDLadHJX4JHlzaODXl5x278TxVl
-I+xZqnvzfPcfImNl563GnX3op2c7lO5U8sl8ZUKs/eY64OMnZ3ryf8eeB29ZnF1F
-2e/vyRKeKFimid4ORnwZTEX4dKXO43cv9GXKo3T5jInF/BrShm/eidNAuUlb3Qom
-p/7y3U8hMG0hj6mggAwl3cVi09En+y1BMaDkDF83VoJZaxdDO66wezY53eWk3lP6
-qH2assqeYsfvtIF8e0fW6xakd8Mk5ABrlDTxW0hArUCFLVG4PA8ZG60KOksVnLB1
-R5CbY8HeeEZ5PD7o6HBAm+z0yBDBWIKCW/5DfpFxURbjS3bWeeDfOsCygBf4YfWu
-SVY8aD5CJtUjq8HKBWlPE5rFo/n0xxUaQyI++HKsFrq6qwM+nbKtlQ34yitN5Ovy
-oNRGRFAN
-=IZwh
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl7s/vYACgkQFHw5/5Y0
+tyzg2wwAjve6JVVypBzoD6fKOF22fdHocaClC5v86aA2MVYV+VL2vF/DjrIp0Rn1
+SafRKTTsZVQWwiSqZlah8UbMcOLRBx6Q+z0bOescuA4gCJYhTGB1ma9OcOs0VVaX
+SPOqXe7d58EFHwvRtiXQ5rNgdlN4XLaPvjmlrPAKTNUUCSmvrlYvDChvGaee36wl
+XBy1SHJLiXCID/jtCsCwskzipE9wp68AJRScqUTks2+GBYA747Fw1ByulNCFDSBT
+uJraLtfzhSiW96EkisjNbYsASb+Psu6fe3S0rIhWz4DbLAj4Fxav6HVt10cX6YsC
+AueUQsjOJdMyMJKv45ro4b04fv6ichO/+RMnQAYcVCN0WG0znSyENMJ920EHofYw
+kEIN7SIPRm9AFFb5jiIfcosGHsAzoJUrrJPhL3xPm0vG/+Lcpt1PHZRI+HiIwNA6
+07u5QAF/RNQofCa4pQY518ZaU/IZJug2jSaNgE6TtnXScJEY+TglhIXoAZL7izpH
+U4cwEE5p
+=w8Nw
 -----END PGP SIGNATURE-----
 
---v1mHNXBTCsim3EdZ--
+--g3gKGiRpvPEwrzWv--
 
---===============7849855298339880549==
+--===============2499017320625439845==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -261,4 +180,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============7849855298339880549==--
+--===============2499017320625439845==--

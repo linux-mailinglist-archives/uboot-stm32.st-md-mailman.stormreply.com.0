@@ -2,27 +2,27 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 02A5B203F74
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2020 20:50:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DAAD203F83
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2020 20:57:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 83731C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2020 18:50:43 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 15866C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Jun 2020 18:57:20 +0000 (UTC)
 Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9A9E7C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C4CCEC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 Jun 2020 18:50:41 +0000 (UTC)
+ Mon, 22 Jun 2020 18:57:18 +0000 (UTC)
 Received: from [10.2.51.55] (thunderhill.nvidia.com [216.228.112.22])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by avon.wwwdotorg.org (Postfix) with ESMTPSA id 5FB451C0814;
- Mon, 22 Jun 2020 12:50:39 -0600 (MDT)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id ED90A1C0814;
+ Mon, 22 Jun 2020 12:57:16 -0600 (MDT)
 X-Virus-Status: Clean
 X-Virus-Scanned: clamav-milter 0.102.3 at avon.wwwdotorg.org
 To: Patrick Delaunay <patrick.delaunay@st.com>
-References: <20200619120337.17042-1-patrick.delaunay@st.com>
- <20200619120337.17042-5-patrick.delaunay@st.com>
+References: <20200616074048.7898-1-patrick.delaunay@st.com>
+ <20200616074048.7898-7-patrick.delaunay@st.com>
 From: Stephen Warren <swarren@wwwdotorg.org>
 Autocrypt: addr=swarren@wwwdotorg.org; prefer-encrypt=mutual; keydata=
  mQINBE6KoecBEACosznehcVarBMNKGOiQ4MBbDAKQo73RDLP4hKEtaTVoQKg7tAM/tcQgbR6
@@ -67,17 +67,16 @@ Autocrypt: addr=swarren@wwwdotorg.org; prefer-encrypt=mutual; keydata=
  +C8BIn/q4yhfxxzKPmQicfQQmXlucjZHk5ut/CXw9V462cwzbGsHTBRXRi+Uya7m7udn8bJp
  eNWsukGnJ4uI1VJmQz9R1WM3EDeNju8p2SjHnKcDNxulfS9yH7PFaX3T6TpyW+kzl1DqyE8+
  JMhw8tIUbFNQ8Bnqs8smQCU+jB2UdKjvd1yhcvfloM1F0to9K0PQ+M00COHNGad64vL+WQ1y YdVt
-Message-ID: <fe00c944-0f54-8c61-ee16-dc97844eba44@wwwdotorg.org>
-Date: Mon, 22 Jun 2020 12:50:38 -0600
+Message-ID: <cd2bf3ca-661f-b67f-39a7-dcc804d70882@wwwdotorg.org>
+Date: Mon, 22 Jun 2020 12:57:15 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200619120337.17042-5-patrick.delaunay@st.com>
+In-Reply-To: <20200616074048.7898-7-patrick.delaunay@st.com>
 Content-Language: en-GB
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  u-boot@lists.denx.de, Stephen Warren <swarren@nvidia.com>
-Subject: Re: [Uboot-stm32] [RESEND PATCH v5 4/4] test: env: add test for env
- info sub-command
+Subject: Re: [Uboot-stm32] [PATCH v2 6/9] test: environment in ext4
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,34 +93,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 6/19/20 6:03 AM, Patrick Delaunay wrote:
-> Add a pytest for testing the env info sub-command:
+On 6/16/20 1:40 AM, Patrick Delaunay wrote:
+> Add basic test to persistent environment in ext4:
+> save and load in host ext4 file 'uboot.env'.
 > 
-> test_env_info: test command with several option that
-> can be executed on real hardware device without assumption
-> 
-> test_env_info_sandbox: test the result on sandbox
-> with a known ENV configuration: ready & default & persistent
-> 
-> The quiet option '-q' is used for support in shell test;
-> for example:
->   if env info -p -d -q; then env save; fi
+> On first execution an empty EXT4 file system is created in
+> persistent data dir: env.ext4.img.
 
-Acked-by: Stephen Warren <swarren@nvidia.com>
+> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
 
-> +def test_env_info(state_test_env):
-...
-> +    for l in response.split('\n'):
-> +        if 'env_valid = ' in l:
-> +            assert '= invalid' in l or '= valid' in l or '= redundant' in l
-> +            nb_line += 1
-> +        elif 'env_ready =' in l or 'env_use_default =' in l:
-> +            assert '= true' in l or '= false' in l
-> +            nb_line += 1
-> +        else:
-> +            assert true
+> +def mk_env_ext4(state_test_env):
 
-Those last two lines don't seem terribly useful:-)
+> +    if os.path.exists(persistent):
+> +        c.log.action('Disk image file ' + persistent + ' already exists')
+> +    else:
+> +        try:
+> +            check_call('rm -f %s' % persistent, shell=True)
+
+This should be run with the results logged to the overall test log file
+so that if there are failures, it's possible to see what they were. Use
+util.run_and_log() for this.
+
+Also, this particular command doesn't seem useful, since 4 lines above
+the code verified that the file doesn't exist.
+
+> +@pytest.mark.boardspec('sandbox')
+> +@pytest.mark.buildconfigspec('cmd_nvedit_info')
+> +@pytest.mark.buildconfigspec('cmd_echo')
+> +@pytest.mark.buildconfigspec('env_is_in_ext4')
+> +def test_env_ext4(state_test_env):
+> +
+> +    c = state_test_env.u_boot_console
+
+Nit: That blank line is a bit odd.
+
+> +    fs_img = mk_env_ext4(state_test_env)
+> +    c.run_command('host bind 0  %s' % fs_img)
+> +
+> +    response = c.run_command('ext4ls host 0:0')
+> +    assert 'uboot.env' not in response
+> +
+> +    """ env location: ENVL_EXT4 (2)
+> +    """
+
+Nit: Wrap the trailing """ onto the same line; no need to force it to be
+a multi-line string. Also a comman may be better rather than a
+docstring. Same for the other docstring later.
+
+> +    call('rm -f %s' % fs_img, shell=True)
+
+This won't happen if the test fails earlier. Should there be a
+try/except block or wrapper function with exception handling to resolve
+this?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

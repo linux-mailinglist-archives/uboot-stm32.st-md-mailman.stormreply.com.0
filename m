@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11E0E209AE2
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 10:00:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E31C209AE7
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 10:00:37 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9550C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 08:00:32 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CC978C36B22
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 08:00:36 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 311ABC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E94F2C36B0D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Jun 2020 08:00:32 +0000 (UTC)
+ Thu, 25 Jun 2020 08:00:34 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05P7vh87016203; Thu, 25 Jun 2020 10:00:26 +0200
+ 05P7vh88016203; Thu, 25 Jun 2020 10:00:30 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=1oV31yRSCHToj1TA/0fKrOCqRUrO2knEPEd18qsHaPI=;
- b=Ug+fSavuUpO8ZiNpVylDgAjHqeO42E5v+1WuYLU2gi9HM1YdM5/NE1187a+aPDNPamIX
- dctmh1Lzt8+4wEYM09xbbFvvemGnqdsmSTbEITncP4KHcF4du9EX7+QIwDbUzVY8OTKe
- bLeWUvCbU30yPCiamgwT7wkCuwMppTWCmMSC2IAbyHyrwbL+w6FGuO+l7sxhqnXY1H9+
- LYcFVg7OC4JMXg5PBEI4CuFuj5Gve6vFpvNeXZFgbt0fOd2Jqc92T5hMC0h8lmzKuXi0
- bQGPTXDpC+AtdQHCNIxLCO2u+lZOtcr8QcxsF+LaJqr7UX1fESXIRDs8054qaEzsWkbF Tw== 
+ bh=4089hW1W2HhYQ9aFqiVpf3lrdDR5b9dIgEqwfD8JGn8=;
+ b=ss95EhWrqyrSHDs40AYUMtQ6ruYZYHRtcKRMDHt+3idRRXdVbXHyftx0GmSXuN20nqeN
+ dnyAHMJ0sD0hS29OsKvZEnJMNQaVe5k/Wn4CF9B0zp11+ZfqLTebC/Ng2pnnX7XSiRWe
+ as7uFmX6FnaVten2fd3itAk8O3JO/iiN2AgEZu9p0setwInTbYmv1Wtl1UiPVNbAuFUB
+ Q7lTiJqsE2sbB3kR3uh+lqt3hvQJYgq5IZD8jStj1ffqO7FyWPjuF+YL6+m7RpW6SKc0
+ imZuG2v4Ii0I96sP4O8wZM50PFFqAlNkQLggQtsw0cQNSgWOaAvRa/zd57dC7YdmiEwW gg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31uuumgmx9-1
+ by mx07-00178001.pphosted.com with ESMTP id 31uuumgmxb-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 Jun 2020 10:00:26 +0200
+ Thu, 25 Jun 2020 10:00:30 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B033410003D;
- Thu, 25 Jun 2020 10:00:25 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 786E8100034;
+ Thu, 25 Jun 2020 10:00:26 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A4F0D2A991B;
- Thu, 25 Jun 2020 10:00:25 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6E83B2A991A;
+ Thu, 25 Jun 2020 10:00:26 +0200 (CEST)
 Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Thu, 25 Jun 2020 10:00:25 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 25 Jun 2020 09:59:49 +0200
-Message-ID: <20200625075958.9868-6-patrick.delaunay@st.com>
+Date: Thu, 25 Jun 2020 09:59:50 +0200
+Message-ID: <20200625075958.9868-7-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200625075958.9868-1-patrick.delaunay@st.com>
 References: <20200625075958.9868-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG5NODE1.st.com (10.75.127.13) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
  definitions=2020-06-25_03:2020-06-25,
@@ -57,7 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
  Wolfgang Denk <wd@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v3 05/14] env: nowhere: add .load ops
+Subject: [Uboot-stm32] [PATCH v3 06/14] env: the ops driver load becomes
+	mandatory in struct env_driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,44 +75,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add the ops .load for nowhere ENV backend to load the
-default environment.
-
-This ops is needed for the command 'env load'
-
-
+The ops driver load becomes mandatory in struct env_drive,
+change the comment for this ops and remove unnecessary test.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
 Changes in v3:
-- new: add ?load ops in nowhere
+- new: load operation becomes mandatory
 
- env/nowhere.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ env/env.c              | 3 ---
+ include/env_internal.h | 3 +--
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/env/nowhere.c b/env/nowhere.c
-index f5b0a17652..6949810a1f 100644
---- a/env/nowhere.c
-+++ b/env/nowhere.c
-@@ -27,8 +27,17 @@ static int env_nowhere_init(void)
- 	return 0;
- }
+diff --git a/env/env.c b/env/env.c
+index 181aaa222c..a1696cd77e 100644
+--- a/env/env.c
++++ b/env/env.c
+@@ -187,9 +187,6 @@ int env_load(void)
+ 	for (prio = 0; (drv = env_driver_lookup(ENVOP_LOAD, prio)); prio++) {
+ 		int ret;
  
-+static int env_nowhere_load(void)
-+{
-+	env_set_default(NULL, 0);
-+	gd->env_valid	= ENV_INVALID;
-+
-+	return 0;
-+}
-+
- U_BOOT_ENV_LOCATION(nowhere) = {
- 	.location	= ENVL_NOWHERE,
- 	.init		= env_nowhere_init,
-+	.load		= env_nowhere_load,
- 	ENV_NAME("nowhere")
- };
+-		if (!drv->load)
+-			continue;
+-
+ 		if (!env_has_inited(drv->location))
+ 			continue;
+ 
+diff --git a/include/env_internal.h b/include/env_internal.h
+index 66550434c3..795941daee 100644
+--- a/include/env_internal.h
++++ b/include/env_internal.h
+@@ -154,8 +154,7 @@ struct env_driver {
+ 	/**
+ 	 * load() - Load the environment from storage
+ 	 *
+-	 * This method is optional. If not provided, no environment will be
+-	 * loaded.
++	 * This method is required for loading environment
+ 	 *
+ 	 * @return 0 if OK, -ve on error
+ 	 */
 -- 
 2.17.1
 

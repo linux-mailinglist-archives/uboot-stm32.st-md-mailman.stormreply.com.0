@@ -2,63 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41C28209AEF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 10:00:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CDC620BAB2
+	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Jun 2020 22:54:53 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0D5AEC36B14
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jun 2020 08:00:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [62.209.51.94])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E12FC36B0B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Jun 2020 20:54:53 +0000 (UTC)
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
+ [209.85.219.67])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 38AB4C36B14
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4B12DC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Jun 2020 08:00:45 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 05P7w3sl027786; Thu, 25 Jun 2020 10:00:33 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=SLFMgjqnHulFCEZ/fVmHvYVZdKe942GxfjHN59Rf2SM=;
- b=PVkm2Y9f2LTJEHDLJWJm20gj5bfak7yUIgjVSPWtjh0bHwACs+IXXvNhoNau/1xR1i1t
- E0F/nkPtL3chlKMF7zFAvQ7X8U49CF1t2iizQdOJdJOVpRO10m3GMsbnsBbsA5Ca+4pZ
- zETD0BB6Ic1i6g5zBkEFhXlEJHvBVuT8Lp4NMQa/ohue51dNyisxzq9GgmskBI1BtglW
- UpeEdgLICQ9pYMB9OMJn2UiBdRqXQcHcK1SKrYiNiBysHyCrOQd78wBZLvdOs8PfFZ9A
- YK/5oOuuJpbqcQM7G/5O+4oOP/ho95mKLqdjGQ/yHgJv9YAHwtH3vcZ4Hqi4ecJECMb0 mA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31uuus0ptg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 Jun 2020 10:00:33 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7891410003A;
- Thu, 25 Jun 2020 10:00:32 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6CA5C2A991C;
- Thu, 25 Jun 2020 10:00:32 +0200 (CEST)
-Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 25 Jun 2020 10:00:31 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 25 Jun 2020 09:59:58 +0200
-Message-ID: <20200625075958.9868-15-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200625075958.9868-1-patrick.delaunay@st.com>
+ Fri, 26 Jun 2020 20:54:51 +0000 (UTC)
+Received: by mail-qv1-f67.google.com with SMTP id p7so5112072qvl.4
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 26 Jun 2020 13:54:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=z9DAriiD9RMisLCe9NXZODzIVTml3Rkqz2cEVfSgiYA=;
+ b=M2AKIHvxwlnTGF1yYwjCXAAVt+PnMC/nMB3ISltZ6x3N3PBlzdZPB8IuEaTvIHRpeP
+ OmiVH0iqYaUG+Hu1LO+YtHY2iN+mrocalIG4RcxtXXK9IUwJgkUAmiDz8cPL82lQt0ly
+ QzwhHC1vyXnBy0w4yM6ClR9lmZA1UKN40BwQY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=z9DAriiD9RMisLCe9NXZODzIVTml3Rkqz2cEVfSgiYA=;
+ b=KcrGAx2UgT1/1GZ/iai6ZweYzoqVMa2z2nB7doI7QY4x8nu0uwrsP8nQy1ayyTtCE4
+ BDx0Y0DHJWjrkhZcK6nNC7RqaWxAw35PZSLVbG7BpkKlVYSF1VXNWaYJKi84MRv213po
+ W4yQG7xcG4Cm8pZIEmi5IRlupIEGnoJN2H6zApjl65aJQUAxtDIaaiM/xH7EldBfEpC0
+ i7wu5y8SuDRabVEEIQtk/YhySOe5LC7mbwEGftr1vs13obAoFquJEugx6iRA67+Hq3ZJ
+ /Mbd9vJzjwkazxilcMrGqRuULDe6yop59Hz6v+Zvw5X2lF8fhGqREDkCdtR6KBM685LA
+ 43cA==
+X-Gm-Message-State: AOAM533MbqUdnospQ7y6OHyE5uNqcYTK43qfcVtvxs0oFryqRMVsdt+d
+ GL/GBkIYen9fLUkjgQYck6u/CQ==
+X-Google-Smtp-Source: ABdhPJxlFz4ah0RtcZGfsF24A92U+2jVbd1oqBnUxXzeYmCrV2+DpzRd0BRkORxHRENGV/fm7DtmAA==
+X-Received: by 2002:a05:6214:a0a:: with SMTP id
+ dw10mr5174106qvb.200.1593204890842; 
+ Fri, 26 Jun 2020 13:54:50 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-8080-bd3e-bf60-4b70-2dd4.inf6.spectrum.com.
+ [2606:a000:1401:8080:bd3e:bf60:4b70:2dd4])
+ by smtp.gmail.com with ESMTPSA id p128sm7388571qka.47.2020.06.26.13.54.48
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Fri, 26 Jun 2020 13:54:49 -0700 (PDT)
+Date: Fri, 26 Jun 2020 16:54:47 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20200626205447.GE8432@bill-the-cat>
 References: <20200625075958.9868-1-patrick.delaunay@st.com>
+ <20200625075958.9868-9-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG5NODE3.st.com (10.75.127.15) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216, 18.0.687
- definitions=2020-06-25_03:2020-06-25,
- 2020-06-25 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v3 14/14] test: sandbox: add test for erase
-	command
+In-Reply-To: <20200625075958.9868-9-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Joel Johnson <mrjoel@lixil.net>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Leo Ruan <tingquan.ruan@cn.bosch.com>, Wolfgang Denk <wd@denx.de>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Anup Patel <Anup.Patel@wdc.com>, Lukasz Majewski <lukma@denx.de>,
+ Patrice Chotard <patrice.chotard@st.com>, u-boot@lists.denx.de,
+ Eugeniu Rosca <roscaeugeniu@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sam Protsenko <joe.skb7@gmail.com>, Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 08/14] cmd: env: add env select command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,105 +81,82 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1055726296804325696=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add test for the erase command tested on ENV in EXT4.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+--===============1055726296804325696==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Ytgo/kJyDF3J5kSH"
+Content-Disposition: inline
 
-Changes in v3:
-- replace sandbox command by generic command 'env load' in test_env
 
- configs/sandbox64_defconfig        |  1 +
- configs/sandbox_defconfig          |  1 +
- configs/sandbox_flattree_defconfig |  1 +
- configs/sandbox_spl_defconfig      |  1 +
- test/py/tests/test_env.py          | 16 ++++++++++++++++
- 5 files changed, 20 insertions(+)
+--Ytgo/kJyDF3J5kSH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 6b9b3a7b75..906b92de8c 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -27,6 +27,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_EFI=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 5b26fff7c9..97953fda08 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -31,6 +31,7 @@ CONFIG_CMD_ABOOTIMG=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_EFI=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index ccbc6374e7..ba9f652689 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -24,6 +24,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_NVEDIT_INFO=y
- CONFIG_CMD_NVEDIT_LOAD=y
- CONFIG_CMD_NVEDIT_SELECT=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 534f2d3239..fb54c86bf6 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_INFO=y
-diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 70913c8d9a..86ec1b36d3 100644
---- a/test/py/tests/test_env.py
-+++ b/test/py/tests/test_env.py
-@@ -475,6 +475,22 @@ def test_env_ext4(state_test_env):
-         response = c.run_command('echo $?')
-         assert response == "0"
- 
-+        response = c.run_command('env erase')
-+        assert 'OK' in response
-+
-+        response = c.run_command('env load')
-+        assert 'Loading Environment from EXT4... ' in response
-+        assert 'bad CRC, using default environment' in response
-+
-+        response = c.run_command('env info')
-+        assert 'env_valid = invalid' in response
-+        assert 'env_ready = true' in response
-+        assert 'env_use_default = true' in response
-+
-+        response = c.run_command('env info -p -d')
-+        assert 'Default environment is used' in response
-+        assert 'Environment can be persisted' in response
-+
-         # restore env location: NOWHERE (prio 0 in sandbox)
-         response = c.run_command('env select nowhere')
-         assert 'Select Environment on nowhere: OK' in response
--- 
-2.17.1
+On Thu, Jun 25, 2020 at 09:59:52AM +0200, Patrick Delaunay wrote:
+
+> Add the new command 'env select' to force the persistent storage
+> of environment, saved in gd->env_load_prio.
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+[snip]
+> +	/* search priority by driver */
+> +	for (prio =3D 0; (drv =3D env_driver_lookup(ENVOP_INIT, prio)); prio++)=
+ {
+> +		if (entry->location =3D=3D env_get_location(ENVOP_LOAD, prio)) {
+> +			/* when priority change, reset the ENV flags */
+> +			if (gd->env_load_prio !=3D prio) {
+> +				gd->env_load_prio =3D prio;
+> +				gd->env_valid =3D ENV_INVALID;
+> +				gd->flags &=3D ~GD_FLG_ENV_DEFAULT;
+> +			}
+> +			printf("OK\n");
+> +			return 0;
+> +		}
+> +	}
+
+So, after we do this, is some follow up env command required to
+initialize the environment to now exist somewhere else?  Or will we have
+initialized all configured locations during boot, and don't have to?
+But what will happen if we select say "nand" but it's not present so
+didn't init.  Will things fail gracefully (not panic) ?  Thanks!
+
+--=20
+Tom
+
+--Ytgo/kJyDF3J5kSH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl72YJAACgkQFHw5/5Y0
+tywRpQv+MlwLh9gDK+jysir4GUOsTMFxD/4lqbenYJ5STYGauRVLcDRZzwGvyIrB
+Beo2bNHCTOmPpo3rqRzrhD5rM4ncMAJdMGutA4SbJeB3uGM1DxbPO2WUQIsKmQ0M
+SdD+QoVgVvYse7BJX6Y0QH6CZQzkh4IJy6sKfKplr4ENXJSITpwpBBCdMw1fp4Iy
+MorXbebESZZsap2wJLaS8yZj8cc6vvkoKAeAbrn2D9OFIsm0HIxU4xI8xMOJF0y4
+NbQuoHBuBojL4mBC7c9D2krMZa3V+zfutaa7MjB2KNmMtCxF2ikS/MQ71lOs0rqv
+quARJPIcvZL8ReteuewZC/wG7ThRyOQ9sVBd+UT2WLZ90CICbjOIPr9Ra4QFXU56
+VF/15O95Et3MgwrZyNbFVfJyvrv2m+SLDtcpsaXKQHw6tok0FRhR9MfjUNr9v0Zw
+Vf1B+03R6MF0FrZnmtJUDj1NjID2RHSuOHByi9oCo6f9VC1O6LNe01XKPaWjQvi5
+Q+B7Dnrw
+=xamK
+-----END PGP SIGNATURE-----
+
+--Ytgo/kJyDF3J5kSH--
+
+--===============1055726296804325696==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1055726296804325696==--

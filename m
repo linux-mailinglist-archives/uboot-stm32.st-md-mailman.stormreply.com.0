@@ -2,60 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2380C212473
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jul 2020 15:20:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B44A9212842
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jul 2020 17:44:01 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D274BC36B25
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jul 2020 13:20:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 799B4C36B26
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Jul 2020 15:44:01 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1419FC36B24
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A497CC36B24
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  2 Jul 2020 13:20:54 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu,  2 Jul 2020 15:43:59 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 062DDIpf025475; Thu, 2 Jul 2020 15:20:50 +0200
+ 062Fc4KY031958; Thu, 2 Jul 2020 17:43:50 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=U0JFtyG0T8gUsMkgL7OFVLeSH3fATvq/GepxI0d7hj0=;
- b=gNNe3avXsOYqVcUAyG5GZTqhdketaIPCEvgtyNK81hQO3m9bBRi6t6vPPvSmT+svGeI4
- gw1RxRy73VtqAX7pT7VBD0RlCwFctypidDYldWWZHDNAhZLXaBbRiXySWdFp9Q0K2BET
- afniqm8pTYwml1NKKb3PdXZs0+sUvbI7Oq2Z5Eeh4A1VNcmM1LZFtc9g7gfQsj7NVmsY
- vLQyTTDPbjxqpnKS4BW+gN0Vn2LHrYdDnzr4+Y8kRLxMg3soeDP+0+5WSjOsIM18zoPr
- ntXTgeN6YeTdFLFEpnSI6AzLNt7oCRZ8Fjek2fPXuRZ4h7A5RKBPORfCzTn2t8jjKd0d EQ== 
+ bh=hyvTs2nWOiFi/7iHt3W4JkyptACN8YvLJeppUgjbwtA=;
+ b=kQsWDgIAc9y8WRvKbw41wGQa/kX9lyHLgSicKCip/9WFKffh2Yw2jLDqRIhEMkd+/fnX
+ 6xWHlycuExlokpZXHfrxJswCdsgQaZBB9vYVqHhKJQovhg4lGlq4ZFunpuHKNUxbapUQ
+ KQ9jw35kNJtIQck97L8Q396HxeAgE/HIUmcxMIHNrvUhn5uI/d+kuCrr1AOx+GcAs29s
+ qUfYHC9T4d1z4XSDezZpxwr1qheFKNSf2GdYs9f0oWhSnE84SwdE41AyB8gimkgZo65S
+ WI92zwEPOcmTVeMCIeiqZTvtYGC3QzBLVKwlV2z7xNzPJN1eJm3zijaoe6yvswwwlqg2 iQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31wu8a0scd-1
+ by mx07-00178001.pphosted.com with ESMTP id 31wuk1s2dg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 02 Jul 2020 15:20:50 +0200
+ Thu, 02 Jul 2020 17:43:50 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F395610002A;
- Thu,  2 Jul 2020 15:20:49 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 66BC110002A;
+ Thu,  2 Jul 2020 17:43:49 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DF9372B66C9;
- Thu,  2 Jul 2020 15:20:49 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5476E2BF9DA;
+ Thu,  2 Jul 2020 17:43:49 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 2 Jul 2020 15:20:49 +0200
+ Thu, 2 Jul 2020 17:43:48 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 2 Jul 2020 15:20:47 +0200
-Message-ID: <20200702132047.28021-1-patrick.delaunay@st.com>
+Date: Thu, 2 Jul 2020 17:43:44 +0200
+Message-ID: <20200702154345.8436-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG8NODE2.st.com (10.75.127.23) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-02_08:2020-07-02,
+ definitions=2020-07-02_09:2020-07-02,
  2020-07-02 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v2] board: dh_stm32mp1: update the gpio hog
-	support
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Leo Ruan <tingquan.ruan@cn.bosch.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v2 1/2] cmd: env: use ENV_IS_IN_DEVICE in env
+	info
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,43 +77,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This patch update the current gpio hog implementation with
-the new API gpio_hog_probe_all() activated with CONFIG_GPIO_HOG.
+Use the define ENV_IS_IN_DEVICE to test if one the
+CONFIG_ENV_IS_IN_...  is defined and correct the detection of
+persistent storage support in the command "env info"
+if CONFIG_ENV_IS_NOWHERE is activated.
+
+Since commit 60d5ed2593c9 ("env: allow ENV_IS_NOWHERE with
+other storage target") test CONFIG_ENV_IS_NOWHERE is not
+enough; see also commit 953db29a1e9c6 ("env: enable saveenv
+command when one CONFIG_ENV_IS_IN is activated").
+
+This patch avoids issue for this command in stm32mp1 platform.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 ---
+Previously sent in serie
+cmd: env: add option for quiet output on env info
+http://patchwork.ozlabs.org/project/uboot/list/?series=158105
+
+Resend as separate serie.
 
 Changes in v2:
-- correct commit message and add review by Patrice
+- correct commit message (commit-notes) and add review by Patrice
 
- board/dhelectronics/dh_stm32mp1/board.c | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
+ cmd/nvedit.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 26e827bc38..ac9dc4b52c 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -513,17 +513,11 @@ static void board_init_fmc2(void)
- /* board dependent setup after realloc */
- int board_init(void)
- {
--	struct udevice *dev;
--
- 	/* address of boot parameters */
- 	gd->bd->bi_boot_params = STM32_DDR_BASE + 0x100;
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 08d49df220..49338b4d36 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -1265,7 +1265,7 @@ static int do_env_info(struct cmd_tbl *cmdtp, int flag,
  
--	/* probe all PINCTRL for hog */
--	for (uclass_first_device(UCLASS_PINCTRL, &dev);
--	     dev;
--	     uclass_next_device(&dev)) {
--		pr_debug("probe pincontrol = %s\n", dev->name);
--	}
-+	if (CONFIG_IS_ENABLED(DM_GPIO_HOG))
-+		gpio_hog_probe_all();
- 
- 	board_key_check();
- 
+ 	/* evaluate whether environment can be persisted */
+ 	if (eval_flags & ENV_INFO_IS_PERSISTED) {
+-#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_ENV_IS_NOWHERE)
++#if defined(CONFIG_CMD_SAVEENV) && defined(ENV_IS_IN_DEVICE)
+ 		printf("Environment can be persisted\n");
+ 		eval_results |= ENV_INFO_IS_PERSISTED;
+ #else
 -- 
 2.17.1
 

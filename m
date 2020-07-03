@@ -2,76 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 778462134AB
-	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Jul 2020 09:09:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08021213CBD
+	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Jul 2020 17:37:37 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3F57CC36B24
-	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Jul 2020 07:09:26 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C47DEC36B24
+	for <lists+uboot-stm32@lfdr.de>; Fri,  3 Jul 2020 15:37:36 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F26BBC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0A0B0C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  3 Jul 2020 07:09:24 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri,  3 Jul 2020 15:37:36 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06379MEm027890; Fri, 3 Jul 2020 09:09:22 +0200
+ 063FX98d002298; Fri, 3 Jul 2020 17:37:01 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=ygFxsS2uPJ62Y/9VAcdIn7XGyrxdVRSOS7+T3yhusxQ=;
- b=PTMNi+v2kizbQKk0hpq22IZqj+cWZPpR5ETAlXtps6vrrKSU79gmFELOZeZE4RwoOYS7
- G6xn+mAXz32JXPDkCrlZvmxH6r3TAh45jmUevpCf6MLrR57KiJyCeHL7jDNfFh2SpSke
- 3zdQMSotvMkmbjVc687ZG17XRwOOweAgrx+NAc0IWDSKipNoGxx9mee/HpjsAqeRHMAK
- zzd36utSFbTvAb5kK/cO/r9wZQRqOZUQ3d7AjqKwi+zKIixgqmbweJZyEHWyeIg0Ccak
- 0SEQW5RFedE/SCifMhUOpLfDwT73SUWMdcdHQbh9flLfHGU5cOpXYPI3jJjeX3flxGQs ZQ== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=JT/EgjMvT9BGlYUQQpfEQPtdABruY+WNSCjTwnx6Cbs=;
+ b=DtJ/jEclyswuoJdCeBe77MpRTnJvJvmlKAO2Y1KOpfggquPx/J3N7zIwG0Kpqzd7ejWQ
+ mRH1c6ozi0gKRU3BWLnjxdMeehFO9kK/VAW4pck6KWhklfuu416M1PMc8wMrEJm7zPQh
+ vouhgDLujzoL10J8x1jVE0n5tywxLjSkM/qMRx7pXVsp9D5md1JKGlzNI+M7gkPVaUeC
+ opR5aAZNSkuBztEpfJAvtDRD7/IXK5ZEBr/p0u7OroTm+o8svSrAhQjzpJPl3CO4KrP8
+ 46BPv1g7lqsl1vNPjC8xOZNQNNlUYginDa1aK5TimOPk1OqHTkxBTc7ImQniOoOfpXgg 4Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 31wu8a5g83-1
+ by mx07-00178001.pphosted.com with ESMTP id 31wuvwqa3v-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 03 Jul 2020 09:09:22 +0200
+ Fri, 03 Jul 2020 17:37:01 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C6DD810002A;
- Fri,  3 Jul 2020 09:09:16 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BD2F22AD2AB;
- Fri,  3 Jul 2020 09:09:16 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Fri, 3 Jul
- 2020 09:09:15 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 3 Jul 2020 09:09:14 +0200
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH v2 9/9] board: stm32mp1: move the function
- board_debug_uart_init in spl.c
-Thread-Index: AQHWUQjcrnA1bdKBxUiJ0QzByHOX1g==
-Date: Fri, 3 Jul 2020 07:09:14 +0000
-Message-ID: <a2ede6a6-8284-e5cf-c64c-316c1ac107a0@st.com>
-References: <20200525101949.15944-1-patrick.delaunay@st.com>
- <20200525101949.15944-10-patrick.delaunay@st.com>
-In-Reply-To: <20200525101949.15944-10-patrick.delaunay@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
-Content-ID: <583E61473EB53E4791682E321D5095D4@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 08B6A100039;
+ Fri,  3 Jul 2020 17:36:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CDC362A9AFF;
+ Fri,  3 Jul 2020 17:36:58 +0200 (CEST)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 3 Jul 2020 17:36:58 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 3 Jul 2020 17:36:39 +0200
+Message-ID: <20200703153646.28533-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-03_02:2020-07-02,
+ definitions=2020-07-03_10:2020-07-02,
  2020-07-03 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 9/9] board: stm32mp1: move the function
- board_debug_uart_init in spl.c
+Cc: Vignesh Raghavendra <vigneshr@ti.com>,
+ Neil Armstrong <narmstrong@baylibre.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>, u-boot-amlogic@groups.io,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Michal Suchanek <msuchanek@suse.de>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@st.com>,
+ Maxime Ripard <maxime.ripard@free-electrons.com>
+Subject: [Uboot-stm32] [PATCH v3 0/7] phy: generic: add error trace to
+	detect PHY issue in uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,122 +85,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 5/25/20 12:19 PM, Patrick Delaunay wrote:
-> Move the debug function board_debug_uart_init in spl.c
-> as the debug_uart_init() function is called in arch_cpu_init()
-> only for SPL and remove the board.c file.
->
-> For TFABOOT, the UART TX pin configuration is done in TF-A.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
-> Changes in v2:
-> - NEW: merge spl.c and board.c to avoid a file with only one function
->
->  board/st/stm32mp1/Makefile |  2 --
->  board/st/stm32mp1/board.c  | 34 ----------------------------------
->  board/st/stm32mp1/spl.c    | 26 ++++++++++++++++++++++++++
->  3 files changed, 26 insertions(+), 36 deletions(-)
->  delete mode 100644 board/st/stm32mp1/board.c
->
-> diff --git a/board/st/stm32mp1/Makefile b/board/st/stm32mp1/Makefile
-> index 8188075b1a..65560df290 100644
-> --- a/board/st/stm32mp1/Makefile
-> +++ b/board/st/stm32mp1/Makefile
-> @@ -8,5 +8,3 @@ obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
->  endif
-> -
-> -obj-y += board.o
-> diff --git a/board/st/stm32mp1/board.c b/board/st/stm32mp1/board.c
-> deleted file mode 100644
-> index 1887941e57..0000000000
-> --- a/board/st/stm32mp1/board.c
-> +++ /dev/null
-> @@ -1,34 +0,0 @@
-> -// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> -/*
-> - * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-> - */
-> -
-> -#include <common.h>
-> -#include <asm/io.h>
-> -
-> -#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> -void board_debug_uart_init(void)
-> -{
-> -#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> -
-> -#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> -#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> -
-> -	/* UART4 clock enable */
-> -	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> -
-> -#define GPIOG_BASE 0x50008000
-> -	/* GPIOG clock enable */
-> -	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> -	/* GPIO configuration for EVAL board
-> -	 * => Uart4 TX = G11
-> -	 */
-> -	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> -	writel(0x00006000, GPIOG_BASE + 0x24);
-> -#else
-> -
-> -#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> -
-> -#endif
-> -}
-> -#endif
-> diff --git a/board/st/stm32mp1/spl.c b/board/st/stm32mp1/spl.c
-> index 96ab671169..977703f58a 100644
-> --- a/board/st/stm32mp1/spl.c
-> +++ b/board/st/stm32mp1/spl.c
-> @@ -5,6 +5,7 @@
->  
->  #include <config.h>
->  #include <common.h>
-> +#include <asm/io.h>
->  #include "../common/stpmic1.h"
->  
->  /* board early initialisation in board_f: need to use global variable */
-> @@ -23,3 +24,28 @@ int board_early_init_f(void)
->  
->  	return 0;
->  }
-> +
-> +#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> +void board_debug_uart_init(void)
-> +{
-> +#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> +
-> +#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> +#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> +
-> +	/* UART4 clock enable */
-> +	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> +
-> +#define GPIOG_BASE 0x50008000
-> +	/* GPIOG clock enable */
-> +	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> +	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> +	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> +	writel(0x00006000, GPIOG_BASE + 0x24);
-> +#else
-> +
-> +#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> +
-> +#endif
-> +}
-> +#endif
+Hi,
 
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
+it is a V3 serie for [1].
 
-Thanks
+After rebase 2 patches are no more needed:
+[v2,2/8] usb: gadget: dwc2: change trace level for phy errors managed by uclass
+[v2,6/8] usb: dwc3: change trace level for phy errors managed by uclass
+
+And I add a patch in this V3 serie:
+[PATCH v3 7/7] arm: meson: change trace level for phy errors managed
+
+Regards,
+
+Patrick
+
+[1] [v2,1/8] phy: generic: add error trace to detect PHY issue in uclass
+http://patchwork.ozlabs.org/project/uboot/list/?series=159187&state=*
+
+Changes in v3:
+- rebase on next branch
+- removed added dm/device_compat.h include after rebase
+- simplify test on ops presence after Marek review
+- add update for mach-meson board-gx: new generic_phy API usage
+
+Changes in v2:
+- Rebase and add include dm/device_compat.h
+- Added patch after rebase: new generic_phy API usage
+
+Patrick Delaunay (7):
+  phy: generic: add error trace to detect PHY issue in uclass
+  board: sunxi: change trace level for phy errors managed by uclass
+  usb: host: ohci: change trace level for phy errors managed by uclass
+  usb: host: ehci-hcd: change trace level for phy errors managed by
+    uclass
+  ata: dwc-ahci: change trace level for phy errors managed by uclass
+  usb: musb-new: sunxi: change trace level for phy errors managed by
+    uclass
+  arm: meson: change trace level for phy errors managed by uclass
+
+ arch/arm/mach-meson/board-gx.c  |  8 +++---
+ board/sunxi/board.c             |  2 +-
+ drivers/ata/dwc_ahci.c          |  4 +--
+ drivers/phy/phy-uclass.c        | 45 +++++++++++++++++++++++++++++----
+ drivers/usb/host/ehci-hcd.c     |  8 +++---
+ drivers/usb/host/ohci-generic.c |  8 +++---
+ drivers/usb/musb-new/sunxi.c    |  8 +++---
+ 7 files changed, 59 insertions(+), 24 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

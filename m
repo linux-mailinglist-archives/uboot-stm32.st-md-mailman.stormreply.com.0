@@ -2,27 +2,27 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EC3D21610F
-	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jul 2020 23:53:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98831216112
+	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jul 2020 23:54:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF596C36B29
-	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jul 2020 21:53:23 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 665D1C36B29
+	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jul 2020 21:54:35 +0000 (UTC)
 Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C692C36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C1C8C36B27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  6 Jul 2020 21:53:22 +0000 (UTC)
+ Mon,  6 Jul 2020 21:54:33 +0000 (UTC)
 Received: from [10.2.50.160] (searspoint.nvidia.com [216.228.112.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by avon.wwwdotorg.org (Postfix) with ESMTPSA id 2874A1C0590;
- Mon,  6 Jul 2020 15:53:20 -0600 (MDT)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id 2DD8A1C0590;
+ Mon,  6 Jul 2020 15:54:30 -0600 (MDT)
 X-Virus-Status: Clean
 X-Virus-Scanned: clamav-milter 0.102.3 at avon.wwwdotorg.org
 To: Patrick Delaunay <patrick.delaunay@st.com>
 References: <20200625075958.9868-1-patrick.delaunay@st.com>
- <20200625075958.9868-12-patrick.delaunay@st.com>
+ <20200625075958.9868-15-patrick.delaunay@st.com>
 From: Stephen Warren <swarren@wwwdotorg.org>
 Autocrypt: addr=swarren@wwwdotorg.org; prefer-encrypt=mutual; keydata=
  mQINBE6KoecBEACosznehcVarBMNKGOiQ4MBbDAKQo73RDLP4hKEtaTVoQKg7tAM/tcQgbR6
@@ -67,17 +67,18 @@ Autocrypt: addr=swarren@wwwdotorg.org; prefer-encrypt=mutual; keydata=
  +C8BIn/q4yhfxxzKPmQicfQQmXlucjZHk5ut/CXw9V462cwzbGsHTBRXRi+Uya7m7udn8bJp
  eNWsukGnJ4uI1VJmQz9R1WM3EDeNju8p2SjHnKcDNxulfS9yH7PFaX3T6TpyW+kzl1DqyE8+
  JMhw8tIUbFNQ8Bnqs8smQCU+jB2UdKjvd1yhcvfloM1F0to9K0PQ+M00COHNGad64vL+WQ1y YdVt
-Message-ID: <05498310-604d-7254-4296-a31edb47be6e@wwwdotorg.org>
-Date: Mon, 6 Jul 2020 15:53:14 -0600
+Message-ID: <169ea36f-cca9-24b6-9aab-10b70f36333e@wwwdotorg.org>
+Date: Mon, 6 Jul 2020 15:54:25 -0600
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200625075958.9868-12-patrick.delaunay@st.com>
+In-Reply-To: <20200625075958.9868-15-patrick.delaunay@st.com>
 Content-Language: en-GB
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Stephen Warren <swarren@nvidia.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 11/14] test: environment in ext4
+ Mario Six <mario.six@gdsys.cc>, Stephen Warren <swarren@nvidia.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 14/14] test: sandbox: add test for
+	erase command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,30 +96,9 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 6/25/20 1:59 AM, Patrick Delaunay wrote:
-> Add basic test to persistent environment in ext4:
-> save and load in host ext4 file 'uboot.env'.
-> 
-> On first execution an empty EXT4 file system is created in
-> persistent data dir: env.ext4.img.
+> Add test for the erase command tested on ENV in EXT4.
 
 Acked-by: Stephen Warren <swarren@nvidia.com>
-
-A couple nits below; feel free not to skip them, but if you end up
-sending another revision for other reasons, may as well fix them.
-
-> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-
-> +from subprocess import call, check_call, CalledProcessError
-
-I believe only CalledProcessError is used now.
-
-> +def test_env_ext4(state_test_env):
-> +
-> +    """Test ENV in EXT4 on sandbox."""
-> +    c = state_test_env.u_boot_console
-> +    fs_img = ''
-
-"None" would be a better unset value.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

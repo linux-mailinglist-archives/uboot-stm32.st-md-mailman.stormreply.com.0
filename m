@@ -2,68 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAEB52175C0
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 20:00:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48B14217896
+	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 22:09:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 993F8C36B29
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 18:00:39 +0000 (UTC)
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
- [209.85.222.194])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 00FC5C36B29
+	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 20:09:06 +0000 (UTC)
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+ [209.85.222.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E7A9AC36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E3833C36B27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Jul 2020 18:00:35 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id e11so39044105qkm.3
+ Tue,  7 Jul 2020 20:09:04 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id q198so39389695qka.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Jul 2020 11:00:35 -0700 (PDT)
+ Tue, 07 Jul 2020 13:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=BpFCxYNWbHIyySbtJxh0nfOKHVWqfnOLgs1JDEE/d4E=;
- b=HTevi73xhfKb0XxFH0qPYyK4a9j+AA7bFtneJY4gaAfambz6KHFo7LM+88Q/x4dI8o
- LmVxA0/mnNA+pLSPZfa+9zf5Gq+AOdY4QQW0xX+FTsv71H5feLomsHfaFKZryVPdejAW
- ocn1v8pIHfLpovqMxVcRV3bPEY8+MfhPErZd0=
+ bh=SwvLCD0PJ3ncEBZHDAGGYUse19UngU/KM15bsrypLsc=;
+ b=lc6Z1yUvWvmFAIh5y1NjUzDl8uh8YWg9B2YpfBgE4z3/mb/Dh86q8frboRQZROUQQt
+ pbF5F0HXZ/wdoM/DonCJSSA6ZsqZsvs4qyk65PfOFGcYS4Ge7qtnOjaeBzOnGOMgdGIF
+ y3lCpehrgnMOwX4kgcOAnaV+M8Rp+GmeM+9UI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=BpFCxYNWbHIyySbtJxh0nfOKHVWqfnOLgs1JDEE/d4E=;
- b=TudiWOSpWn8RdTUEVhoMJ6YgiTGVO6hNSK/4PaI9As1ydzquHEkAr7ViOePollJu0V
- XXwbpEYz9p17UFPvyS5LfdhJSF32/Dk/XAfn1ZVDWsFcaVgZTWTS9/nXKZw9sLqGS6vt
- jivsjE8qaqnTf53qcAY5wixjxwaHO/ip90nJxJK0xmJAe4tWrB0jDVnmwymouWjZkLni
- zTyn5e7NUAvacH71MoKT4zAR9vd/8H8n3OQx4rrnjCmM8zh0BKZo3cpGr4LTpDhRpAnb
- /c1yJPAzlblZ8q0B/R9jaPu5fKjjxAH4gEXKKcu2dR3o6Hb1bSYeBv/iFCvPsFjSuTa8
- b/fg==
-X-Gm-Message-State: AOAM532Q0yQ3JMfuQIQkrLEZHCCoDeX/rXXRWdOQzqlteYBGaYXsH6a5
- iemNj73J64yAAg8433nO9Tf74g==
-X-Google-Smtp-Source: ABdhPJwHp4xbYRCaguX/6Pw7mc+gVPbY4lG1Kp9b4Qid+GUGvTtc0wtJnDnkU55xNW6kDDdZfn5aTg==
-X-Received: by 2002:a37:ae01:: with SMTP id x1mr49101603qke.179.1594144834240; 
- Tue, 07 Jul 2020 11:00:34 -0700 (PDT)
+ bh=SwvLCD0PJ3ncEBZHDAGGYUse19UngU/KM15bsrypLsc=;
+ b=kTbaPxWFtT4XNjG4ylMPnReb26t0Fb3Jc1cFQarXvBbnqST9N8MkLrJyBLJ46Eld9T
+ OmrYNg5dDjslunQokxYnc854PWfv2O67/JQZTH0rjyFxE4v3b7FiQuRQpEDe5b5fAueI
+ tGdxvVBwZTTOKF1/0l79aONxYQrANX2SQRadpuPMbn50/zYSvHJBUtt0jf3LCIqeUbPw
+ HC5kClhYsmExvTZd1D+Sh6tRZsm9STIe6W7ieIdr5WVByZ8pYlorbBQUFd8+cHBPd8vx
+ LiOSRe9+jKNqvm0XW50jaNdYnzwujetnnNhig26/jmzPeFHl2AzWSjFFFMfmoWbxyLJu
+ KhXA==
+X-Gm-Message-State: AOAM530fNMDkihcfSkDG6ZUtqwz12bBWkeEHdm0QkMqY2MJEyhhLQOd3
+ 5xvTscsMz2OzJ+4YqD8qENeI5w==
+X-Google-Smtp-Source: ABdhPJwW9iFMTjwqzIED8MifGw1x5wBI9pA8xzZFbMr9gt+N5hQqbC0QvCRbfgZT+NJmMkR8dJQPFA==
+X-Received: by 2002:ae9:f814:: with SMTP id x20mr53535035qkh.253.1594152542965; 
+ Tue, 07 Jul 2020 13:09:02 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8080-dd52-ab8a-1bf1-56f7.inf6.spectrum.com.
  [2606:a000:1401:8080:dd52:ab8a:1bf1:56f7])
- by smtp.gmail.com with ESMTPSA id p186sm24702118qkf.33.2020.07.07.11.00.32
+ by smtp.gmail.com with ESMTPSA id p80sm24479266qke.19.2020.07.07.13.09.01
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 07 Jul 2020 11:00:33 -0700 (PDT)
-Date: Tue, 7 Jul 2020 14:00:30 -0400
+ Tue, 07 Jul 2020 13:09:01 -0700 (PDT)
+Date: Tue, 7 Jul 2020 16:08:59 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200707180030.GW1306@bill-the-cat>
-References: <20200702154345.8436-1-patrick.delaunay@st.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Message-ID: <20200707200859.GA10034@bill-the-cat>
+References: <20200430100619.28557-1-patrice.chotard@st.com>
+ <20200430100619.28557-2-patrice.chotard@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20200702154345.8436-1-patrick.delaunay@st.com>
+In-Reply-To: <20200430100619.28557-2-patrice.chotard@st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Leo Ruan <tingquan.ruan@cn.bosch.com>, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, Simon Glass <sjg@chromium.org>,
- Frank Wunderlich <frank-w@public-files.de>,
- Patrice Chotard <patrice.chotard@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] cmd: env: use ENV_IS_IN_DEVICE in
-	env info
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v4 1/5] cmd: bind: allow to bind driver
+	with driver data
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,66 +73,103 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4883249044385807501=="
+Content-Type: multipart/mixed; boundary="===============2676560301617326701=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4883249044385807501==
+--===============2676560301617326701==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="I6qdtgfjj9z6AdGX"
+	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
 Content-Disposition: inline
 
 
---I6qdtgfjj9z6AdGX
+--VS++wcV0S1rZb1Fb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 02, 2020 at 05:43:44PM +0200, Patrick Delaunay wrote:
+On Thu, Apr 30, 2020 at 12:06:15PM +0200, Patrice Chotard wrote:
 
-> Use the define ENV_IS_IN_DEVICE to test if one the
-> CONFIG_ENV_IS_IN_...  is defined and correct the detection of
-> persistent storage support in the command "env info"
-> if CONFIG_ENV_IS_NOWHERE is activated.
+> Initial implementation invokes device_bind_with_driver_data()
+> with driver_data parameter equal to 0.
+> For driver with driver data, the bind command can't bind
+> correctly this driver or even worse causes data abort as shown below:
 >=20
-> Since commit 60d5ed2593c9 ("env: allow ENV_IS_NOWHERE with
-> other storage target") test CONFIG_ENV_IS_NOWHERE is not
-> enough; see also commit 953db29a1e9c6 ("env: enable saveenv
-> command when one CONFIG_ENV_IS_IN is activated").
+> As example, for debug purpose on STM32MP1 platform, ethernet (dwc_eth_qos=
+=2Ec)
+> driver needed to be unbinded/binded. This driver is using driver data:
 >=20
-> This patch avoids issue for this command in stm32mp1 platform.
+> static const struct udevice_id eqos_ids[] =3D {
+>     {
+>         .compatible =3D "nvidia,tegra186-eqos",
+>         .data =3D (ulong)&eqos_tegra186_config
+>     },
+>     {
+>         .compatible =3D "snps,dwmac-4.20a",
+>         .data =3D (ulong)&eqos_stm32_config
+>     },
 >=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+>     { }
+> };
+>=20
+> After unbinding/binding this driver and probing it (with the dhcp command=
+),
+> we got a prefetch abort as below:
+>=20
+> STM32MP> unbind eth ethernet@5800a000
+> STM32MP> bind /soc/ethernet@5800a000 eth_eqos
+> STM32MP> dhcp
+> prefetch abort
+> pc : [<4310801c>]          lr : [<ffc8f4ad>]
+> reloc pc : [<035ba01c>]    lr : [<c01414ad>]
+> sp : fdaf19b0  ip : ffcea83c     fp : 00000001
+> r10: ffcfd4a0  r9 : fdaffed0     r8 : 00000000
+> r7 : ffcff304  r6 : fdc63220     r5 : 00000000  r4 : fdc5b108
+> r3 : 43108020  r2 : 00003d39     r1 : ffcea544  r0 : fdc63220
+> Flags: nZCv  IRQs off  FIQs off  Mode SVC_32
+> Code: data abort
+> pc : [<ffc4f9c0>]          lr : [<ffc4f9ad>]
+> reloc pc : [<c01019c0>]    lr : [<c01019ad>]
+> sp : fdaf18b8  ip : 00000000     fp : 00000001
+> r10: ffcd69b2  r9 : fdaffed0     r8 : ffcd69aa
+> r7 : 00000000  r6 : 00000008     r5 : 4310801c  r4 : fffffffc
+> r3 : 00000001  r2 : 00000028     r1 : 00000000  r0 : 00000006
+> Flags: NzCv  IRQs on  FIQs on  Mode SVC_32 (T)
+> Code: 2f00 d1e9 2c00 dce9 (f855) 2024
+> Resetting CPU ...
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Sorry for the delay in getting to this.  Currently, this breaks the dm
+unit tests on sandbox, can you please investigate?  Thanks!
 
 --=20
 Tom
 
---I6qdtgfjj9z6AdGX
+--VS++wcV0S1rZb1Fb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8EuD4ACgkQFHw5/5Y0
-tyyj5wv9HPCdnn+zM02mnDc1+JbKbO1eA+dLiyDmDPImr7Il211OkXAP6Ew8KuEL
-wD+YdDkkedIX7Vz7lSjqKIuY/MogQEGhsazEQERlA1rLkRpdw234tD9emOijMvhH
-hD4GTW3d0n+jK8L/AkATwOZOjj0N07UctO0FY2t+qPKiIPLcD+vaKH7MG9QjIb/g
-SmzY9vjfI4iy1cLnyti5lUJWOUNEipJVYiUP/n3yeuSYfFCpD/xmPLEcu1OYNQiW
-mnaFsJq9DlZqVmiKIbv9I0Bx1h95L+U6Wf1qoPHPCDQ1H5doRbhRxOxHsLwCUmPJ
-TAQ/PmJ/D4an5BO5A2d6yQcFe3jsCCGTDDiyZ1gbDy42dWw2JXsIAabWqzgdaNQ0
-sVtbtYh2gq/XXPO+WouAkjvsG+Mu7StVItb46rdp63g58iXYoexOKJMpvBxFqtSK
-ybTIpnCIiCML1PYlHTgV/zrAWqKk/ZNf64ZiMCawT8OYsiIqKs/9grzC49yRgiof
-3mjw6Sa9
-=t6Gy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8E1lEACgkQFHw5/5Y0
+tyzKXwv/XuP+XZj22Qka+LeSX4AWdTnwceWbyhPOL91Yao1Qiw1tQfagTKbHwVFl
+A4/8Fyb//ELKB+yaD7h/b5si6GlVpZq67hT1NvC9QWG7014TVb2bP8+bE6Ze0eWz
+zov0TvgGGaFGRemsCro10gnGDBOK71MECpW6FHmiNRcm5wLbmB0LaYISHCb7pNl0
+03louQYgan1R+0PyITrs/jA/QaNyV6hJ2qJEgzhivthDviJ1dcxvlZ6Gx4ZhehYy
+5fklzlrVeFAsuzCZuSsDKUcJ1xjTi+vwhKSSPYyZDnm2/8oSo2igmkgLdt+tlPBj
+QO3Kw5n7b4jtl/AD4p22rKB3DcLsn4MfX+CTrpu4B2XiILNuW19Wy3aRPe0ado9F
+FOuCpGMZFthuoWMnXkYuQhoIFNJJZj+zk5Iy66svHWBzCswnHnezCw41DRqDKKis
+NEBvGLMyBA3hxNp1gWrpSCIJARlgn9Zfj0o33bqmHCuQdckHmHR6URFSnAj5jJ9q
+nqPDpnl4
+=h1pk
 -----END PGP SIGNATURE-----
 
---I6qdtgfjj9z6AdGX--
+--VS++wcV0S1rZb1Fb--
 
---===============4883249044385807501==
+--===============2676560301617326701==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -145,4 +180,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4883249044385807501==--
+--===============2676560301617326701==--

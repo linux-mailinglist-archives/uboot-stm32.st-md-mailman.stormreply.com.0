@@ -2,67 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73406216DE9
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 15:38:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6DFA2172D0
+	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 17:46:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DD550C36B29
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 13:38:36 +0000 (UTC)
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
- [209.85.219.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BE49C36B29
+	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 15:46:38 +0000 (UTC)
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+ [209.85.221.68])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 59EB5C36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77570C36B27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Jul 2020 13:38:35 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id u8so18799028qvj.12
+ Tue,  7 Jul 2020 15:46:34 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id a6so45704857wrm.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Jul 2020 06:38:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=yakSAgmqxBXq7aYycoxfqL9zZb7Q1ZC/B8pcJ3qYqTs=;
- b=JOJ474TN+9kHy7s+4wi/EJvTImje/rQrMviE/L8n4bZxdnrMH5yF7tOjzyd6XQaki5
- wp/DcHyXSO1TFqD6Rm11Sq9ilnjrmNg+H/d34p3i/KUNib53mG9FIm7ALsduNx4rz1Na
- 5qD9WHQpqjtqNXonI4o6jfZ4rKA855sqSAduo=
+ Tue, 07 Jul 2020 08:46:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20150623.gappssmtp.com; s=20150623;
+ h=subject:to:references:cc:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding;
+ bh=qXnUwNbIlu+I0n4z/AJi3VJlT4mXZvOjmmKhQ/YmJvI=;
+ b=nNnXfCYb2mtK/3FitETgW/ApbGDZWfHvfvxDV4LlnkIavSgRAwTwF9Ln49RCP1Vgb3
+ D0b5sNwkUodJn0QZXV6RjSqOT2ZD+w16s5PH1OM+8uzrEt0aGnBY0zcQscCAGlYuL4Pv
+ 7SBRbugcZnc1iv9YeWqTS7tzpFiONA/SbXupSMs+GAMsDRmUm3Zj3YCAJkHVrRsIY86F
+ pn5aQsxbjxcev/lDYAr9tvYT6uTzYuwXTnLd6liiCKwOubOn7xhPo5GFngK6MgMVWdN9
+ W2njd5j/uxoITThq8EZYrkv0F9iY8gd52Q7gRioYarvQWELhAk3Lkr00dOz8BImZ6fjY
+ fCjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=yakSAgmqxBXq7aYycoxfqL9zZb7Q1ZC/B8pcJ3qYqTs=;
- b=BXxTG/TnDC1p6UY6vB4N7zmxumilolRnyROU+TgN8wWK+mlthvBTzFICKqcHOPl47Z
- ystCrJptNH7enBIWV9ZPCosVK8KTEbwHRH4V0K43bt95fWLDOrlG81PjDldjkybST9kk
- CID7Jy4BHueZPWeE0KSG5Hev77ukkWISKQuWyEsXFPWb9Y7FCJqR5VJF+ZnX8+B9TTVT
- wt0v54rTYpVn/lqe+NTtrHZLuLS2gFDEEorlEWfK9sfL1oRqi5ucn5FtzxsA93l9qRwW
- d2Deq/KkJkhCIqGCR73HMIvh49qcqY8/+bc6k34rYyXFPSVADUWqdb05qSE8M3NY9xti
- zdGg==
-X-Gm-Message-State: AOAM531bkAfcUGUon3rHdOEEVA4Wp3G4OcQdhkn2RYRRftKs70CIW1gv
- tziqe13GlXhdV/hz0f6yd4Bo3w==
-X-Google-Smtp-Source: ABdhPJyckLfLlE7NHvtiJBcxzAvs7kuurXXF1bpemtvHe4d7piwx2bTprGF53aV/gKz5d90h1uGKyA==
-X-Received: by 2002:a0c:a8e6:: with SMTP id h38mr46218993qvc.15.1594129114011; 
- Tue, 07 Jul 2020 06:38:34 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8080-dd52-ab8a-1bf1-56f7.inf6.spectrum.com.
- [2606:a000:1401:8080:dd52:ab8a:1bf1:56f7])
- by smtp.gmail.com with ESMTPSA id x23sm15052031qki.6.2020.07.07.06.38.32
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 07 Jul 2020 06:38:33 -0700 (PDT)
-Date: Tue, 7 Jul 2020 09:38:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200707133830.GK1306@bill-the-cat>
-References: <20200701125610.22340-1-patrick.delaunay@st.com>
+ h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding;
+ bh=qXnUwNbIlu+I0n4z/AJi3VJlT4mXZvOjmmKhQ/YmJvI=;
+ b=VqkG2TSq37vsSTJloZtQZ7/FhT226RC8Vz0IPXV+spZ/w7X2tNTZP1ehawFbKHA4gM
+ J3XDftgJGY1PyMMClSP/5SJZn/p9Kax01CkdzHGd1NLc8xCOHC8Twa0gwMeQUiqyVOIP
+ o8rrEQuEH6W7+WnPg3pGneKRzQHuG30Y4/LVRR2NT0jDLhvsR8m3ZmTQVT+mRKQP5ESe
+ NgvWYUJrdpsMPxrY7UJ4yn6dmbFDDyY/0RCX5vyqa3D8PNs0WQrIRXHdWzoXw0msTNrX
+ jTBaHcH+gvbI0GjmDv3dYZLg3RBz5m9Vx9mzg+u8mEziP1XdesKDKpW0GGSBvBk4YxYm
+ JngA==
+X-Gm-Message-State: AOAM532Az4Cy/FmSqweskOncA0gd3bdJ7MSGX5YAej53HfgnU+sJf3bi
+ vtn3EpzoWudZS60CfDNagDmc3Xo88t67ig==
+X-Google-Smtp-Source: ABdhPJxZItaq/s7jj2dBL9Ge/+lmEMQRv6iHy1QOA4UvF8vaZoU/cUMTWLS6rDuVfPso8QJ4L2tIjg==
+X-Received: by 2002:a5d:6603:: with SMTP id n3mr56588158wru.142.1594136793408; 
+ Tue, 07 Jul 2020 08:46:33 -0700 (PDT)
+Received: from Armstrongs-MacBook-Pro.local
+ ([2a01:e35:2ec0:82b0:54eb:7b69:49b3:9820])
+ by smtp.gmail.com with ESMTPSA id q188sm1459676wma.46.2020.07.07.08.46.28
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 07 Jul 2020 08:46:32 -0700 (PDT)
+To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
+References: <20200703153646.28533-1-patrick.delaunay@st.com>
+ <20200703153646.28533-8-patrick.delaunay@st.com>
+From: Neil Armstrong <narmstrong@baylibre.com>
+Message-ID: <fec15eb5-3385-a763-bd2b-c64dd17d9bc6@baylibre.com>
+Date: Tue, 7 Jul 2020 17:46:21 +0200
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:45.0)
+ Gecko/20100101 Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200701125610.22340-1-patrick.delaunay@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
- Yannick =?iso-8859-1?Q?Fertr=E9?= <yannick.fertre@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Soeren Moch <smoch@web.de>,
+In-Reply-To: <20200703153646.28533-8-patrick.delaunay@st.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] video: restore CONFIG_VIDCONSOLE_AS_LCD
-	as boolean
+ u-boot-amlogic@groups.io
+Subject: Re: [Uboot-stm32] [PATCH v3 7/7] arm: meson: change trace level for
+ phy errors managed by uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,70 +75,62 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2408265194251634658=="
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi,
 
---===============2408265194251634658==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="56hrQfoz910L17cR"
-Content-Disposition: inline
+Le 03/07/2020 =E0 17:36, Patrick Delaunay a =E9crit :
+> As the error message is now displayed by generic phy functions,
+> the pr_err can be change to pr_debug.
+> =
 
-
---56hrQfoz910L17cR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jul 01, 2020 at 02:56:10PM +0200, Patrick Delaunay wrote:
-
-> This patch restores CONFIG_VIDCONSOLE_AS_LCD as boolean
-> and introduce a separate sting as CONFIG_VIDCONSOLE_AS_NAME
-> to search this string in stdout used as videoconsole.
->=20
-> This patch avoid issue with board defconfig or code expecting
-> CONFIG_VIDCONSOLE_AS_LCD as boolean.
->=20
-> Fixes: 22b897a12323 ("video: extend stdout video console work-around for =
-'vga'")
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> =
 
-Applied to u-boot/master, thanks!
+> Changes in v3:
+> - add update for mach-meson board-gx: new generic_phy API usage
+> =
 
---=20
-Tom
+>  arch/arm/mach-meson/board-gx.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> =
 
---56hrQfoz910L17cR
-Content-Type: application/pgp-signature; name="signature.asc"
+> diff --git a/arch/arm/mach-meson/board-gx.c b/arch/arm/mach-meson/board-g=
+x.c
+> index c4cc11f1de..b4fde46fcb 100644
+> --- a/arch/arm/mach-meson/board-gx.c
+> +++ b/arch/arm/mach-meson/board-gx.c
+> @@ -196,8 +196,8 @@ int board_usb_init(int index, enum usb_init_type init)
+>  	for (i =3D 0; i < 2; i++) {
+>  		ret =3D generic_phy_init(&usb_phys[i]);
+>  		if (ret) {
+> -			pr_err("Can't init USB PHY%d for %s\n",
+> -			       i, ofnode_get_name(dwc2_node));
+> +			pr_debug("Can't init USB PHY%d for %s\n",
+> +				 i, ofnode_get_name(dwc2_node));
+>  			return ret;
+>  		}
+>  	}
+> @@ -205,8 +205,8 @@ int board_usb_init(int index, enum usb_init_type init)
+>  	for (i =3D 0; i < 2; i++) {
+>  		ret =3D generic_phy_power_on(&usb_phys[i]);
+>  		if (ret) {
+> -			pr_err("Can't power USB PHY%d for %s\n",
+> -			       i, ofnode_get_name(dwc2_node));
+> +			pr_debug("Can't power USB PHY%d for %s\n",
+> +				 i, ofnode_get_name(dwc2_node));
+>  			return ret;
+>  		}
+>  	}
+> =
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8EetYACgkQFHw5/5Y0
-tyylHgv/VXyPGhKu6uUcCUdrH+1vBAIDcZnXht/D/Kpzb6DwBxoZjR17qHo36Z+z
-urk82FNBtKg4zYPsLfgcGN1++qvv43l26JZWv/uLg7IXY+wwr2C25dQNIZYNb0Mb
-xed+zUVLJsKeC4u4aFBsZj+bLJMIN79AaQj3WyWxIBHasiMgZMyRhA1Z4q6wLD3A
-WH+NI1BM9OYP6xKO6aK2jb6PGq0uoFDcfpTjanCd+rtwJMmaf+btrFtgK4w4HE9F
-m0J+wHfcTkScyn3LE8Q0BwsANviapQMwwT4dgVXkU9con9mTbLCF7dpS+/dSrtLd
-zlOjTMbddA7/XSUD+j2pSTYrSBtOnsz94dl3q4D4Fho6yCaIGFQJ+U3elOWSAf+2
-nUEdE4dYZh9nc24Kt7EjD3QCDJebKK1yYEVoU7evT5bfdNhOYjbA+ODbzTftK95H
-HGHdkF7ZsRvQAdR/6C68OBdgKbys/7OlTru2pYNa1c4i15p9S1SILMndrIN9JX2L
-p78k2/vO
-=dhU6
------END PGP SIGNATURE-----
-
---56hrQfoz910L17cR--
-
---===============2408265194251634658==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Acked-by: Neil Armstrong <narmstrong@baylibre.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2408265194251634658==--

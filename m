@@ -2,70 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01897218EEC
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 19:49:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FDC9218F54
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 19:56:33 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B7CB1C36B2A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 17:49:18 +0000 (UTC)
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
- [209.85.208.66])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 55EAFC36B2A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 17:56:33 +0000 (UTC)
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+ [209.85.208.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88772C36B29
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E813CC36B29
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  8 Jul 2020 17:49:17 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id d15so42567206edm.10
+ Wed,  8 Jul 2020 17:56:30 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id d16so35893355edz.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 08 Jul 2020 10:49:17 -0700 (PDT)
+ Wed, 08 Jul 2020 10:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=C4GBkw9RBrZLBpGrl5vgtIZjEZ7bl3UwEJEyFq9Ejdw=;
- b=UseixvzIN2uc6u1n/VXWY1vNvKvXlAGBrDOb8Gr7FRKvIgby/hAgo5CO2IF4oYAsgy
- +WHq3EX90hHSKK+kAmKK4Kmyd7COtndUeBHOCEoTr2HZe8wcPn+UtVjVJ8LdnAU5ybgW
- WqlCh/zHlQuNagciOPv+lADJ+BNroFN8Nowt4mk097wc19Xb9Sv244FgvMubw1d9dZri
- qaX608fq9gA0VmI8tb4xuoz3GC2WJBeNBEdXgvuFnI7LFCNH8RN0mf1UBAkPhRD+GZhx
- QaMhVF6l8RvJimipZDsPYWwy7Wo5Bvqif8vVe0LxLu6kV2oshmwH/kCvRCMtpf9sbtJs
- lZJg==
+ bh=FymXzUTZ1Ocqktha+2cYHuWaoOR4G3trlVG1+9ZorIY=;
+ b=WjgBFabgtagRhLfRzb4N/ye/+zbDbJkmzXox2zod+UK2PAD08pkAiqUoUfHtnBQHhV
+ /7wxnANqS22IdLsJw4D4b7MbQSU7RYggASzcspFcxIfeJbXrRl8GpijVswchL3v9iJho
+ bepG8cTHlzhqYwX5i+UV3g+LZ7u8/r/YEH4UPwVfmjtASQMpLzngm9uZLc2Gx4dBO5LL
+ flQQbvIaIBBkUTHawiBTdEdvcWZY2nhRRBqN744QLHj/kCQuszrKCcM6hpm/f1D1Vw4C
+ 7Fr/vfKROQDwHpEAkR8uAzE07ZRMRFDC4+gKR1vybq/8+XnjYEL2Oo3cr5mBGyOU2eWH
+ wVkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=C4GBkw9RBrZLBpGrl5vgtIZjEZ7bl3UwEJEyFq9Ejdw=;
- b=Ou7QRW2j8fWlOlfHcqUxymOpEepZBrygFhyiUXKaQQCBzzi/Vct/CrZLvWFn2POKIG
- Ot9Z7ttXUSGQNe52IM9R4iToOasn1ZdA37NeyC+lZn1ySIYXwrwPS3nT2eh1MV6OhA9w
- Axpa+D+1ja2Qtha+nA1i2ECFwOkk4y2OAS+rQaa0tFPMj08U1Fb2ZsfuypLsiZkrpTRM
- 3qlbGn6D6xmAlTLv1kS/tMR8bdtt56dkgCGytDjBE4ORnsAmSAd25u0AgY496qMS7KHc
- IfnGN0gdLLPCraVYuKkTAKw9Np51XLy0GAYWNE03NDTVuTAF6U6c/Ey6k3mZqC1HU71T
- jOOQ==
-X-Gm-Message-State: AOAM531T9rEVi4C+rJw2jxFvTdx1vdoP1FyzfgfffE4k3zh7TvMDZLQm
- XXjheDaSWT1ao2aMzsnkg14=
-X-Google-Smtp-Source: ABdhPJwEpcEL0NiKSzSVcTUd4XeHUKZ0ffXkpP7NTK2cSROuUApdMrRgQwdRtp3hfnNZLDMS7kuKcg==
-X-Received: by 2002:a05:6402:b4b:: with SMTP id
- bx11mr66663497edb.286.1594230556659; 
- Wed, 08 Jul 2020 10:49:16 -0700 (PDT)
+ bh=FymXzUTZ1Ocqktha+2cYHuWaoOR4G3trlVG1+9ZorIY=;
+ b=OiF9195lDJYaGbrdqakE+UzcY692WmZy1RHOfH7dgNPA9NBDnMoGGEwH9GF8XTjq+E
+ 3RO0os7lqVYtgE1YGDCklOHVMK5j8gXO6ZU+EwWyaukZHDjC9nDxapG2l7Xv6V4qeJjJ
+ oC6P5dODZ8J2sQGp5GIQ2R2RPLiTuSsk2XVlupQzzID1NEEzBMu6Ov4xskHBj3AkyPhl
+ wL4rqJ2U2PKRjp+ykk/PDfh6K0z0Mwbjze4Go0gFFy1YrK3WbpRlh8bTVqXynJT5GQk3
+ drafTA+w1Qgga96TdiDmHr6RXaveAL92CRNyhDaXytHVddOdSwhc00DeP0InxOo+ZYP9
+ ug9A==
+X-Gm-Message-State: AOAM531GbFPZ/4bqY4ZSGKlmfbTfEjXZnQi0F2/h++MIicmdu/LrzGPF
+ euLebN9IIRFPPn+Qf/vVn4w=
+X-Google-Smtp-Source: ABdhPJy/wmOWZa/SlWwz4ixJ96uInsHeEt/fDE6MZ3TsobC3ON9RHZNKC4GXCpc/2sdxxfPc2EYFag==
+X-Received: by 2002:a50:e14e:: with SMTP id i14mr65338553edl.279.1594230990336; 
+ Wed, 08 Jul 2020 10:56:30 -0700 (PDT)
 Received: from blackhead.home ([2a01:112f:a1c:7900:7316:ce1e:7b0b:6bd7])
- by smtp.gmail.com with ESMTPSA id d20sm177004edy.9.2020.07.08.10.49.14
+ by smtp.gmail.com with ESMTPSA id ay27sm157475edb.81.2020.07.08.10.56.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jul 2020 10:49:15 -0700 (PDT)
+ Wed, 08 Jul 2020 10:56:29 -0700 (PDT)
 From: Marcin Sloniewski <marcin.sloniewski@gmail.com>
 To: u-boot@lists.denx.de
-Date: Wed,  8 Jul 2020 19:49:06 +0200
-Message-Id: <20200708174906.41280-1-marcin.sloniewski@gmail.com>
+Date: Wed,  8 Jul 2020 19:56:22 +0200
+Message-Id: <20200708175622.42669-1-marcin.sloniewski@gmail.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200701192305.16193-1-marcin.sloniewski@gmail.com>
-References: <20200701192305.16193-1-marcin.sloniewski@gmail.com>
+In-Reply-To: <20200708174906.41280-1-marcin.sloniewski@gmail.com>
+References: <20200708174906.41280-1-marcin.sloniewski@gmail.com>
 MIME-Version: 1.0
 Cc: Baruch Siach <baruch@tkos.co.il>, Josip Kelecic <josip.kelecic@sartura.hr>,
+ Neil Armstrong <narmstrong@baylibre.com>,
  Kever Yang <kever.yang@rock-chips.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
  Michal Simek <michal.simek@xilinx.com>,
  Marcin Sloniewski <marcin.sloniewski@gmail.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
- Troy Kisky <troy.kisky@boundarydevices.com>, Peng Fan <peng.fan@nxp.com>,
+ Troy Kisky <troy.kisky@boundarydevices.com>,
  Marek Vasut <marek.vasut+renesas@gmail.com>
-Subject: [Uboot-stm32] [PATCH v5] ARM: dts: stm32: add seeed studio
+Subject: [Uboot-stm32] [PATCH v6] ARM: dts: stm32: add seeed studio
 	odyssey-stm32mp157c board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -91,6 +91,9 @@ Right now only booting from SD card is supported.
 
 Signed-off-by: Marcin Sloniewski <marcin.sloniewski@gmail.com>
 ---
+
+Changes in v6:
+- forgot to add changes in v5 ;(
 
 Changes in v5:
 - removed description of PLL1 which is now handled by OPP info

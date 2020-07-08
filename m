@@ -2,66 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48B14217896
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 22:09:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 790CF218E73
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 19:41:29 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 00FC5C36B29
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Jul 2020 20:09:06 +0000 (UTC)
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
- [209.85.222.193])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E27EC36B2A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jul 2020 17:41:29 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E3833C36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 42172C36B29
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Jul 2020 20:09:04 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id q198so39389695qka.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Jul 2020 13:09:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=SwvLCD0PJ3ncEBZHDAGGYUse19UngU/KM15bsrypLsc=;
- b=lc6Z1yUvWvmFAIh5y1NjUzDl8uh8YWg9B2YpfBgE4z3/mb/Dh86q8frboRQZROUQQt
- pbF5F0HXZ/wdoM/DonCJSSA6ZsqZsvs4qyk65PfOFGcYS4Ge7qtnOjaeBzOnGOMgdGIF
- y3lCpehrgnMOwX4kgcOAnaV+M8Rp+GmeM+9UI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=SwvLCD0PJ3ncEBZHDAGGYUse19UngU/KM15bsrypLsc=;
- b=kTbaPxWFtT4XNjG4ylMPnReb26t0Fb3Jc1cFQarXvBbnqST9N8MkLrJyBLJ46Eld9T
- OmrYNg5dDjslunQokxYnc854PWfv2O67/JQZTH0rjyFxE4v3b7FiQuRQpEDe5b5fAueI
- tGdxvVBwZTTOKF1/0l79aONxYQrANX2SQRadpuPMbn50/zYSvHJBUtt0jf3LCIqeUbPw
- HC5kClhYsmExvTZd1D+Sh6tRZsm9STIe6W7ieIdr5WVByZ8pYlorbBQUFd8+cHBPd8vx
- LiOSRe9+jKNqvm0XW50jaNdYnzwujetnnNhig26/jmzPeFHl2AzWSjFFFMfmoWbxyLJu
- KhXA==
-X-Gm-Message-State: AOAM530fNMDkihcfSkDG6ZUtqwz12bBWkeEHdm0QkMqY2MJEyhhLQOd3
- 5xvTscsMz2OzJ+4YqD8qENeI5w==
-X-Google-Smtp-Source: ABdhPJwW9iFMTjwqzIED8MifGw1x5wBI9pA8xzZFbMr9gt+N5hQqbC0QvCRbfgZT+NJmMkR8dJQPFA==
-X-Received: by 2002:ae9:f814:: with SMTP id x20mr53535035qkh.253.1594152542965; 
- Tue, 07 Jul 2020 13:09:02 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8080-dd52-ab8a-1bf1-56f7.inf6.spectrum.com.
- [2606:a000:1401:8080:dd52:ab8a:1bf1:56f7])
- by smtp.gmail.com with ESMTPSA id p80sm24479266qke.19.2020.07.07.13.09.01
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 07 Jul 2020 13:09:01 -0700 (PDT)
-Date: Tue, 7 Jul 2020 16:08:59 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@st.com>
-Message-ID: <20200707200859.GA10034@bill-the-cat>
-References: <20200430100619.28557-1-patrice.chotard@st.com>
- <20200430100619.28557-2-patrice.chotard@st.com>
+ Wed,  8 Jul 2020 17:41:27 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 068HNwCg005666; Wed, 8 Jul 2020 19:41:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=1HtayS1FtH1nUvXapNd/V7Bu50/7kumyVX/GFLTzMvs=;
+ b=W6DpZPyAt4pdekFTyzYKEgdfO9bFQW00zAOoip7w2Cp6DwbF+XVMLOBDCQHIELgshPEY
+ ZIWwjbzUPpfdpLk98BWTqziX5LJf9ZMFaHrv26trenc0eTeMq6FXtZVG2dUWX/kxhti9
+ OeIJPJV6oXtMR7K1wMnmE7AYfeO4e8KHWc3955Qe1NLZxAzcWKNVrB7gQOHS8t4M7wOa
+ CbNDhyRIzWeA1F1TV5/rXtLuran8peNk5q7VF7/HAg9BqGC/wdu8rXs5IOA4lN9StVbm
+ fsrvGzmzYFTv1w1oIp2fgr4onihadrv0GeALzuzshPz38kyCi4+TusLrywq96Ve+tPqf Gg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 322gnfrntg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 08 Jul 2020 19:41:23 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7128910002A;
+ Wed,  8 Jul 2020 19:41:23 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 60E512CBB9D;
+ Wed,  8 Jul 2020 19:41:23 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Wed, 8 Jul
+ 2020 19:41:22 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Wed, 8 Jul 2020 19:41:22 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: "hs@denx.de" <hs@denx.de>
+Thread-Topic: [PATCH] i2c: stm32f7: SYSCFG Fast Mode Plus support for I2C
+ STM32F7
+Thread-Index: AQHWU4kEUlRCMnJnVUqtnMwnwCUA1qj7dCMAgAKAzXA=
+Date: Wed, 8 Jul 2020 17:41:22 +0000
+Message-ID: <c7b8b60768b14c97b842d1bcfdb02b40@SFHDAG6NODE3.st.com>
+References: <20200706133132.1.Ib000bc59b2ad7201352c5a0a55ec6072221e1808@changeid>
+ <8a1ecf55-a3df-eb9e-a5b2-f87d8b0c2a16@denx.de>
+In-Reply-To: <8a1ecf55-a3df-eb9e-a5b2-f87d8b0c2a16@denx.de>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
-In-Reply-To: <20200430100619.28557-2-patrice.chotard@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Jean-Jacques Hiblot <jjhiblot@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 1/5] cmd: bind: allow to bind driver
-	with driver data
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-08_15:2020-07-08,
+ 2020-07-08 signatures=0
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] i2c: stm32f7: SYSCFG Fast Mode Plus
+ support for I2C STM32F7
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,111 +80,69 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2676560301617326701=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Heiko
 
---===============2676560301617326701==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
-Content-Disposition: inline
+> From: Heiko Schocher <hs@denx.de>
+> Sent: mardi 7 juillet 2020 07:21
+> 
+> Hello Patrick,
+> 
+> Am 06.07.2020 um 13:31 schrieb Patrick Delaunay:
+> > Read SYSCFG bindings to set Fast Mode Plus bits if Fast Mode Plus
+> > speed is selected.
+> >
+> > Handle the stm32mp15 specific compatible to handle FastMode+ registers
+> > handling which is different on the stm32mp15 compared to the stm32f7
+> > or stm32h7.
+> > Indeed, on the stm32mp15, the FastMode+ set and clear registers are
+> > separated while on the other platforms (F7 or H7) the control is done
+> > in a unique register.
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > ---
+> >
+> >   drivers/i2c/stm32f7_i2c.c | 74
+> ++++++++++++++++++++++++++++++++++++++-
+> >   1 file changed, 73 insertions(+), 1 deletion(-)
+> 
+> Just tried to apply your patch on current mainline, but this fails for me, reason is
+> missing patch:
+> 
+> http://patchwork.ozlabs.org/project/uboot/patch/20200706112653.18951-2-
+> patrick.delaunay@st.com/
+> 
+> So I add this patch also to my repo, if nobody has objections.
 
+No objection for me (as u-boot stm32 custodians / shared with Patrice Chotard),
+You can take the in tiny patch in your repo.
 
---VS++wcV0S1rZb1Fb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I delegate the serie to Patrice only to have a review before merge this serie in stm32 tree.
+But he is in holiday... and I wait him for my next pull request (including this serie).
+ 
+> Beside of this:
+> 
+> Reviewed-by: Heiko Schocher <hs@denx.de>
 
-On Thu, Apr 30, 2020 at 12:06:15PM +0200, Patrice Chotard wrote:
+Thanks.
+ 
+> Thanks!
+> 
+> bye,
+> Heiko
 
-> Initial implementation invokes device_bind_with_driver_data()
-> with driver_data parameter equal to 0.
-> For driver with driver data, the bind command can't bind
-> correctly this driver or even worse causes data abort as shown below:
->=20
-> As example, for debug purpose on STM32MP1 platform, ethernet (dwc_eth_qos=
-=2Ec)
-> driver needed to be unbinded/binded. This driver is using driver data:
->=20
-> static const struct udevice_id eqos_ids[] =3D {
->     {
->         .compatible =3D "nvidia,tegra186-eqos",
->         .data =3D (ulong)&eqos_tegra186_config
->     },
->     {
->         .compatible =3D "snps,dwmac-4.20a",
->         .data =3D (ulong)&eqos_stm32_config
->     },
->=20
->     { }
-> };
->=20
-> After unbinding/binding this driver and probing it (with the dhcp command=
-),
-> we got a prefetch abort as below:
->=20
-> STM32MP> unbind eth ethernet@5800a000
-> STM32MP> bind /soc/ethernet@5800a000 eth_eqos
-> STM32MP> dhcp
-> prefetch abort
-> pc : [<4310801c>]          lr : [<ffc8f4ad>]
-> reloc pc : [<035ba01c>]    lr : [<c01414ad>]
-> sp : fdaf19b0  ip : ffcea83c     fp : 00000001
-> r10: ffcfd4a0  r9 : fdaffed0     r8 : 00000000
-> r7 : ffcff304  r6 : fdc63220     r5 : 00000000  r4 : fdc5b108
-> r3 : 43108020  r2 : 00003d39     r1 : ffcea544  r0 : fdc63220
-> Flags: nZCv  IRQs off  FIQs off  Mode SVC_32
-> Code: data abort
-> pc : [<ffc4f9c0>]          lr : [<ffc4f9ad>]
-> reloc pc : [<c01019c0>]    lr : [<c01019ad>]
-> sp : fdaf18b8  ip : 00000000     fp : 00000001
-> r10: ffcd69b2  r9 : fdaffed0     r8 : ffcd69aa
-> r7 : 00000000  r6 : 00000008     r5 : 4310801c  r4 : fffffffc
-> r3 : 00000001  r2 : 00000028     r1 : 00000000  r0 : 00000006
-> Flags: NzCv  IRQs on  FIQs on  Mode SVC_32 (T)
-> Code: 2f00 d1e9 2c00 dce9 (f855) 2024
-> Resetting CPU ...
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+Regards,
+Patrick
 
-Sorry for the delay in getting to this.  Currently, this breaks the dm
-unit tests on sandbox, can you please investigate?  Thanks!
-
---=20
-Tom
-
---VS++wcV0S1rZb1Fb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8E1lEACgkQFHw5/5Y0
-tyzKXwv/XuP+XZj22Qka+LeSX4AWdTnwceWbyhPOL91Yao1Qiw1tQfagTKbHwVFl
-A4/8Fyb//ELKB+yaD7h/b5si6GlVpZq67hT1NvC9QWG7014TVb2bP8+bE6Ze0eWz
-zov0TvgGGaFGRemsCro10gnGDBOK71MECpW6FHmiNRcm5wLbmB0LaYISHCb7pNl0
-03louQYgan1R+0PyITrs/jA/QaNyV6hJ2qJEgzhivthDviJ1dcxvlZ6Gx4ZhehYy
-5fklzlrVeFAsuzCZuSsDKUcJ1xjTi+vwhKSSPYyZDnm2/8oSo2igmkgLdt+tlPBj
-QO3Kw5n7b4jtl/AD4p22rKB3DcLsn4MfX+CTrpu4B2XiILNuW19Wy3aRPe0ado9F
-FOuCpGMZFthuoWMnXkYuQhoIFNJJZj+zk5Iy66svHWBzCswnHnezCw41DRqDKKis
-NEBvGLMyBA3hxNp1gWrpSCIJARlgn9Zfj0o33bqmHCuQdckHmHR6URFSnAj5jJ9q
-nqPDpnl4
-=h1pk
------END PGP SIGNATURE-----
-
---VS++wcV0S1rZb1Fb--
-
---===============2676560301617326701==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+> --
+> DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2676560301617326701==--

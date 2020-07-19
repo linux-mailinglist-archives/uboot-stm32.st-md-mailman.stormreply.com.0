@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED00E2252C4
-	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 18:16:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1BCB2252C5
+	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 18:16:32 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B4093C36B29
-	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 16:16:26 +0000 (UTC)
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
- [209.85.166.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BB7ABC36B29
+	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 16:16:32 +0000 (UTC)
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+ [209.85.166.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E74B3C36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 322ABC36B27
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Jul 2020 16:16:24 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id v6so15163323iob.4
+ Sun, 19 Jul 2020 16:16:32 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id i4so15115789iov.11
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Jul 2020 09:16:24 -0700 (PDT)
+ Sun, 19 Jul 2020 09:16:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=M9O+8ovzwWkVPrRIiaGYfmrY/QrI1AA6KjZBqSfQe6I=;
- b=f9rjBMfGJ5QJS+8GUiLKB4fMnbvMAsARFjQsBm+77ZvVzr09bfAOekNhauC3blpvcp
- Fa2jcgouBlWyivE3kSl0pFjY5dM9/cSuF8vh2+PKY6khuYPS2wmim3cix4RWNJFrPHeE
- PqLjF99aFdRzJTpK/YzurGquBcq269ZZlnvdo=
+ bh=+EHkv3LvXJjJkYFDByQLoeH3vENtFlRkon6/9Ml+WKo=;
+ b=PxXzMmlFY1nTHFgf03BkcwpUsElxUxBUJngscrJDsULmAx5/TNbB+jG8fWGf84KI0C
+ DxxYA7e0c8aFIDYQL/Lbk/OeSVv1t6EQJDVxPw43dAGFXzvwWPX9IY6B84QTerWeqXAI
+ PKYZ4smAIF88RAJa/P5q0+NQeADWOYlfh6y9I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=M9O+8ovzwWkVPrRIiaGYfmrY/QrI1AA6KjZBqSfQe6I=;
- b=V2xM/S17rmUDab6b29pjSZetMUdbStRGkskx1AapV5F+Eb5CxvVEhSIAj4+A5ciTNg
- wRMaRRYpLy/SwR1Eqaw/P7Rvdge8zZL6OzYK9l/NddkfjM887qI6YBB0TRQyRjfMyOdO
- iGoH4tZ/dsBsgl+aCWziugeaSaHcAKHn8XewnuS6w+ktpFtpBDRUnNwbtPbDsSff+l54
- GsKNz9AsxgT7H1NOMY7WjCjOOl1UXoojXKjBAac4hIGTGtKIrW2zUuk2h7tiyVdjpdvb
- 5GlROBducITEyEUK+z4iSWWcmPk8wR2UyJktyiAIOyYhTb7MsjifBMAL+GtiMIK+TWB9
- 1ExQ==
-X-Gm-Message-State: AOAM5311XqldT7a/QR7kXctICfdCZBU3G3mq7N6q+WKfBbioNuE7Teps
- qDwymYBDFkTirPfFCiO0QVpQCQ==
-X-Google-Smtp-Source: ABdhPJxBo6QJimw2+PEYZ3oUo64E40qTbIvR6Y1A15OgziH9CKwmNH5XcaOT0ff88SuTkHkbloRsvA==
-X-Received: by 2002:a05:6602:1611:: with SMTP id
- x17mr12354942iow.32.1595175383770; 
- Sun, 19 Jul 2020 09:16:23 -0700 (PDT)
+ bh=+EHkv3LvXJjJkYFDByQLoeH3vENtFlRkon6/9Ml+WKo=;
+ b=fzCC026WTxJJVdYb/QnJOmVaHwOQf3OlaHaEYrBmb8whf6fjGHqpFoyWhNTtnkFPK5
+ 51x4vQ+zmXHWAoXoYcnvBmhLMs3IALsyOcPJPUnnauChEVeww9m6tbsQKh0PSy6yr1Gy
+ xWMbCAcAO1WFCF8uW2kboYTPYTBaHe05yrXs4sf59Tk6900weKqW6tTjGcO4J7QExRJn
+ I5mxiJ+xUG5IHT5Co9mICTTq+p4P6YecYDbH1tLIPIvDNz2xRAF50oD6eamegJ9OSeCY
+ FaMT0rI1K4keJlgYdgpLoGylt4QsfpdnC+GeNmTvDJL7mfMhQ+XRdnnYFE0O2xhlex4K
+ nn9w==
+X-Gm-Message-State: AOAM531NKC57SFLtnSEYgv4PgbNl1p+v1jyB4XmJE3PAPIqHmkjsVDvB
+ bCGxB4Vxg87KQfw+gFLt3norFQ==
+X-Google-Smtp-Source: ABdhPJy4kdSbtMkfIogc2+jNJPjVq48a5JTXPoRRaSrDOH/BWT+k3W9DwKOEDdo7k/jk3g0A65Carg==
+X-Received: by 2002:a05:6638:1504:: with SMTP id
+ b4mr18577650jat.23.1595175391081; 
+ Sun, 19 Jul 2020 09:16:31 -0700 (PDT)
 Received: from localhost.localdomain (c-73-14-175-90.hsd1.co.comcast.net.
  [73.14.175.90])
- by smtp.gmail.com with ESMTPSA id c3sm7415632ilj.31.2020.07.19.09.16.22
+ by smtp.gmail.com with ESMTPSA id c3sm7415632ilj.31.2020.07.19.09.16.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2020 09:16:23 -0700 (PDT)
+ Sun, 19 Jul 2020 09:16:30 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Sun, 19 Jul 2020 10:15:34 -0600
-Message-Id: <20200719161601.495421-5-sjg@chromium.org>
+Date: Sun, 19 Jul 2020 10:15:40 -0600
+Message-Id: <20200719161601.495421-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.28.0.rc0.105.gf9edc3c819-goog
 In-Reply-To: <20200719161601.495421-1-sjg@chromium.org>
 References: <20200719161601.495421-1-sjg@chromium.org>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Patrice Chotard <patrice.chotard@st.com>,
+Cc: Tom Rini <trini@konsulko.com>, Mike Frysinger <vapier@gentoo.org>,
+ Vignesh R <vigneshr@ti.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
  Masahiro Yamada <yamada.masahiro@socionext.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH 04/31] mtd: spi-mem: Drop dm.h header file
+ uboot-stm32@st-md-mailman.stormreply.com, Bin Meng <bmeng.cn@gmail.com>
+Subject: [Uboot-stm32] [PATCH 10/31] sf: Drop dm.h header file from
+	spi_flash.h
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,75 +85,78 @@ and use a forward declaration instead.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/spi/spi-mem.c    | 7 ++++++-
- drivers/spi/spi-sifive.c | 1 +
- drivers/spi/stm32_qspi.c | 2 ++
- include/spi-mem.h        | 5 +----
- 4 files changed, 10 insertions(+), 5 deletions(-)
+ arch/arm/mach-k3/sysfw-loader.c                        | 1 +
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c | 1 +
+ arch/x86/cpu/ivybridge/sdram.c                         | 1 +
+ board/st/common/stm32mp_dfu.c                          | 1 +
+ include/spi_flash.h                                    | 3 ++-
+ 5 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
-index d344701aeb..c095ae9505 100644
---- a/drivers/spi/spi-mem.c
-+++ b/drivers/spi/spi-mem.c
-@@ -13,9 +13,14 @@
- #include <linux/pm_runtime.h>
- #include "internals.h"
- #else
--#include <dm/device_compat.h>
-+#include <common.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <malloc.h>
-+#include <spi.h>
- #include <spi.h>
- #include <spi-mem.h>
-+#include <dm/device_compat.h>
- #endif
- 
- #ifndef __UBOOT__
-diff --git a/drivers/spi/spi-sifive.c b/drivers/spi/spi-sifive.c
-index 0e0ce25abb..c7345d9042 100644
---- a/drivers/spi/spi-sifive.c
-+++ b/drivers/spi/spi-sifive.c
-@@ -10,6 +10,7 @@
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <malloc.h>
-+#include <spi.h>
- #include <spi-mem.h>
- #include <wait_bit.h>
- #include <asm/io.h>
-diff --git a/drivers/spi/stm32_qspi.c b/drivers/spi/stm32_qspi.c
-index 001f0703e3..a53b941410 100644
---- a/drivers/spi/stm32_qspi.c
-+++ b/drivers/spi/stm32_qspi.c
-@@ -9,8 +9,10 @@
+diff --git a/arch/arm/mach-k3/sysfw-loader.c b/arch/arm/mach-k3/sysfw-loader.c
+index 513be09c68..96be069ee8 100644
+--- a/arch/arm/mach-k3/sysfw-loader.c
++++ b/arch/arm/mach-k3/sysfw-loader.c
+@@ -7,6 +7,7 @@
+  */
  
  #include <common.h>
- #include <clk.h>
 +#include <dm.h>
+ #include <image.h>
  #include <log.h>
- #include <reset.h>
-+#include <spi.h>
- #include <spi-mem.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
-diff --git a/include/spi-mem.h b/include/spi-mem.h
-index 893f7bd733..ca0f55c8fd 100644
---- a/include/spi-mem.h
-+++ b/include/spi-mem.h
-@@ -11,10 +11,7 @@
- #ifndef __UBOOT_SPI_MEM_H
- #define __UBOOT_SPI_MEM_H
+ #include <spl.h>
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
+index 70940f01f3..8aad4be467 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
+@@ -5,6 +5,7 @@
  
--#include <common.h>
--#include <dm.h>
--#include <errno.h>
--#include <spi.h>
+ #include <common.h>
+ #include <console.h>
++#include <dm.h>
+ #include <dfu.h>
+ #include <malloc.h>
+ #include <serial.h>
+diff --git a/arch/x86/cpu/ivybridge/sdram.c b/arch/x86/cpu/ivybridge/sdram.c
+index 99bc48021e..dd6b8753de 100644
+--- a/arch/x86/cpu/ivybridge/sdram.c
++++ b/arch/x86/cpu/ivybridge/sdram.c
+@@ -10,6 +10,7 @@
+  */
+ 
+ #include <common.h>
++#include <dm.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+ #include <init.h>
+diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
+index 0cda9196f9..38eb0f27c9 100644
+--- a/board/st/common/stm32mp_dfu.c
++++ b/board/st/common/stm32mp_dfu.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <blk.h>
++#include <dm.h>
+ #include <dfu.h>
+ #include <env.h>
+ #include <memalign.h>
+diff --git a/include/spi_flash.h b/include/spi_flash.h
+index b336619487..85cae32cc7 100644
+--- a/include/spi_flash.h
++++ b/include/spi_flash.h
+@@ -9,10 +9,11 @@
+ #ifndef _SPI_FLASH_H_
+ #define _SPI_FLASH_H_
+ 
+-#include <dm.h>	/* Because we dereference struct udevice here */
+ #include <linux/types.h>
+ #include <linux/mtd/spi-nor.h>
+ 
 +struct udevice;
- 
- #define SPI_MEM_OP_CMD(__opcode, __buswidth)			\
- 	{							\
++
+ /* by default ENV use the same parameters than SF command */
+ #ifndef CONFIG_ENV_SPI_BUS
+ # define CONFIG_ENV_SPI_BUS	CONFIG_SF_DEFAULT_BUS
 -- 
 2.28.0.rc0.105.gf9edc3c819-goog
 

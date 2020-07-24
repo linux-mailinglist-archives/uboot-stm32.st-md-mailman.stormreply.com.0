@@ -2,63 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 072D82252C6
-	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 18:16:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EB1922C1CD
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jul 2020 11:13:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4D24C36B29
-	for <lists+uboot-stm32@lfdr.de>; Sun, 19 Jul 2020 16:16:44 +0000 (UTC)
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
- [209.85.166.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BE00CC36B25
+	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jul 2020 09:13:42 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C306DC36B27
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CA806C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Jul 2020 16:16:43 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id q74so15210884iod.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 19 Jul 2020 09:16:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=uXdr1zvmQRcM+JMlvmwnC82o1Qat0kvfG9TEgke6SUo=;
- b=nmPxUh9vansr/LE8G5pFqeBn96xB/SIywHQBLIFVU0CdvtEWVFQj3y45R+cvPloydm
- D9spipYfidfwjyM/56PmIP272ZTUMyJqi3HUgQwp+cSfNoLXzko05W5xaVp9kJz6j+4i
- xj25k/Ce9gC0TU0zB/QtHeJkipppMhqFMxsCY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=uXdr1zvmQRcM+JMlvmwnC82o1Qat0kvfG9TEgke6SUo=;
- b=elpYyu4W3SV1dv4b35S9d5QKYVX4JLCXunoUazEpJKRfmA+EsOiDZkR9UoQiDDQsNa
- GZV2TC7jvbsS96hYujrEs3dbAA+FpU8Zj2G0tKJ9yzQjUxUa0jlCLaTe4kqk/qZ6fo+t
- LY/u0xHKsjV6Z3ixpAPt8kLdFi4Zykn3/D0hVMjjlBeL/RDr/tgs541qZv5mjJEQuV8d
- NyNT2/co9/C293vTBlFzLM9iK7dBcP3ruikNG90ykU8iXeHdzdgKJz7kb7UJQMEjwJRp
- InR9VT8kvv3soSsFgfq7PmaEnRmBdiPjp7COESNdjtnA/Q47VEUM2B38QoXveklj8kio
- nUVA==
-X-Gm-Message-State: AOAM530bT0f+vwuuQSB+pnazyOJtsdlsHGSDAm40rg1OOJZHMSljwBdg
- HATs0iS9+Bg+T1lEiYhUmTh/AvFxHfR1sw==
-X-Google-Smtp-Source: ABdhPJyrJ2RT8xFfynanxLkOGeHfeFdf1xHorxkO9X51vSUva49sa7xknJnuL2bqLfWrArJsjAFYyw==
-X-Received: by 2002:a5e:9b0e:: with SMTP id j14mr19153803iok.169.1595175402713; 
- Sun, 19 Jul 2020 09:16:42 -0700 (PDT)
-Received: from localhost.localdomain (c-73-14-175-90.hsd1.co.comcast.net.
- [73.14.175.90])
- by smtp.gmail.com with ESMTPSA id c3sm7415632ilj.31.2020.07.19.09.16.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Jul 2020 09:16:42 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Sun, 19 Jul 2020 10:15:52 -0600
-Message-Id: <20200719161601.495421-23-sjg@chromium.org>
-X-Mailer: git-send-email 2.28.0.rc0.105.gf9edc3c819-goog
-In-Reply-To: <20200719161601.495421-1-sjg@chromium.org>
-References: <20200719161601.495421-1-sjg@chromium.org>
+ Fri, 24 Jul 2020 09:13:40 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 06O97sHb028019; Fri, 24 Jul 2020 11:13:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=KpZtMIyd3Iy/l4Jjdcy6a/wEHp4dsVSQCyW8Sitx1B0=;
+ b=LVY2o2MDmTwyiwsSIrsSDV4w7LTyFIi7SxJIoGNsNfIRyVMurbQH8w6f0fiqC1O99F9U
+ qgxzIinlSmauhZu2ECatJur5qA89Kj1xj3VrJ47nfBGm0NMaBH1CZRBZZxDgDnBirIRk
+ ghYNTl9DS34nM6VphC/d4MSh5CWNvH0ZN0Jt14uvzQLaC5zJDIDsrjRAWSXYXSvFBMJs
+ F2CeRXWzbxsZ7XKxRvXoccXhJnHYjZFYv7y9q4BSnTa6qDi+na0VJ/IaPyXxny1mxWBW
+ kb7sP9xqcJvWPvXZ0nfsAWixnMav2DGJthbIGzgdbVuj3/6uGc1IqxiVFPwqrCz/eAyW Og== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 32bsfpya85-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 24 Jul 2020 11:13:38 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 711D810002A;
+ Fri, 24 Jul 2020 11:13:37 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6053E2A5438;
+ Fri, 24 Jul 2020 11:13:37 +0200 (CEST)
+Received: from localhost (10.75.127.47) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 24 Jul 2020 11:13:37 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 24 Jul 2020 11:13:31 +0200
+Message-ID: <20200724091331.12195-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH 22/31] adc: Drop dm.h header file
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG7NODE3.st.com (10.75.127.21) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-07-24_02:2020-07-24,
+ 2020-07-24 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] arm: stm32mp: move dbgmcu_init call when DT
+	is ready
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,61 +72,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This header file should not be included in other header files. Remove it
-and use a forward declaration instead.
+As the dbgmcu_init use the function bsec_dbgswenable which is based
+on the DM and DT, its call can't be done before the spl is initialized
+(driver model, DT and malloc) in board_init_f::spl_early_init().
 
-Drop the common.h inclusion also.
+This function call is moved later in spl_board_init().
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: bd3f60d29c24 ("arm: stm32mp: protect DBGMCU_IDC access with BSEC")
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/adc/stm32-adc-core.c | 1 +
- drivers/adc/stm32-adc-core.h | 4 ++--
- drivers/adc/stm32-adc.c      | 1 +
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ arch/arm/mach-stm32mp/Kconfig |  1 +
+ arch/arm/mach-stm32mp/cpu.c   | 12 ++++++++----
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/adc/stm32-adc-core.c b/drivers/adc/stm32-adc-core.c
-index 31bbb6f9d6..f20c46fb36 100644
---- a/drivers/adc/stm32-adc-core.c
-+++ b/drivers/adc/stm32-adc-core.c
-@@ -7,6 +7,7 @@
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index 4003c2e38b..478fd2f17d 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -1,6 +1,7 @@
+ if ARCH_STM32MP
+ 
+ config SPL
++	select SPL_BOARD_INIT
+ 	select SPL_CLK
+ 	select SPL_DM
+ 	select SPL_DM_SEQ_ALIAS
+diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+index 382067190c..56092c8bf6 100644
+--- a/arch/arm/mach-stm32mp/cpu.c
++++ b/arch/arm/mach-stm32mp/cpu.c
+@@ -154,15 +154,20 @@ static void security_init(void)
   */
- 
- #include <common.h>
-+#include <dm.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
-diff --git a/drivers/adc/stm32-adc-core.h b/drivers/adc/stm32-adc-core.h
-index ba0e10e6cc..05968dbcc8 100644
---- a/drivers/adc/stm32-adc-core.h
-+++ b/drivers/adc/stm32-adc-core.h
-@@ -26,9 +26,9 @@
- #define STM32_ADC_MAX_ADCS		3
- #define STM32_ADCX_COMN_OFFSET		0x300
- 
--#include <common.h>
- #include <clk.h>
--#include <dm.h>
+ static void dbgmcu_init(void)
+ {
+-	setbits_le32(RCC_DBGCFGR, RCC_DBGCFGR_DBGCKEN);
+-
+ 	/*
+ 	 * Freeze IWDG2 if Cortex-A7 is in debug mode
+ 	 * done in TF-A for TRUSTED boot and
+ 	 * DBGMCU access is controlled by BSEC_DENABLE.DBGSWENABLE
+ 	*/
+-	if (!IS_ENABLED(CONFIG_TFABOOT) && bsec_dbgswenable())
++	if (!IS_ENABLED(CONFIG_TFABOOT) && bsec_dbgswenable()) {
++		setbits_le32(RCC_DBGCFGR, RCC_DBGCFGR_DBGCKEN);
+ 		setbits_le32(DBGMCU_APB4FZ1, DBGMCU_APB4FZ1_IWDG2);
++	}
++}
 +
-+struct udevice;
++void spl_board_init(void)
++{
++	dbgmcu_init();
+ }
+ #endif /* !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD) */
  
- /**
-  * struct stm32_adc_common - stm32 ADC driver common data (for all instances)
-diff --git a/drivers/adc/stm32-adc.c b/drivers/adc/stm32-adc.c
-index b12f894a9b..3f0ed48846 100644
---- a/drivers/adc/stm32-adc.c
-+++ b/drivers/adc/stm32-adc.c
-@@ -8,6 +8,7 @@
+@@ -241,7 +246,6 @@ int arch_cpu_init(void)
+ 	timer_init();
  
- #include <common.h>
- #include <adc.h>
-+#include <dm.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
- #include <linux/bitops.h>
+ #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
+-	dbgmcu_init();
+ #ifndef CONFIG_TFABOOT
+ 	security_init();
+ 	update_bootmode();
 -- 
-2.28.0.rc0.105.gf9edc3c819-goog
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

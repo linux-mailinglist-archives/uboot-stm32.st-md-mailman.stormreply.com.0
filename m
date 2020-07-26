@@ -2,138 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 83AE522C250
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jul 2020 11:32:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8401822E2A4
+	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Jul 2020 22:50:41 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E38BC36B25
-	for <lists+uboot-stm32@lfdr.de>; Fri, 24 Jul 2020 09:32:25 +0000 (UTC)
-Received: from vic-MTAout5.csiro.au (vic-mtaout5.csiro.au [150.229.64.42])
- (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C37A4C36B25
+	for <lists+uboot-stm32@lfdr.de>; Sun, 26 Jul 2020 20:50:39 +0000 (UTC)
+Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com
+ [209.85.219.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 229A2C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 696F6C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Jul 2020 23:02:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=data61.csiro.au; i=@data61.csiro.au; q=dns/txt;
- s=dkim; t=1595458972; x=1626994972;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=esWZv3sb2dHOjhRn6qApfceKU4Vbb6MoZP4SxvmEogI=;
- b=ERGbPxvDLwhvd77Jnl9TDZ9tAVmm4bWH4uPuTThNgYVY2ThgsrYlL413
- w00wM6aWOL/pz739R/qGpIwylD11GjsTVa8FYiBlqbRWdCyTMF+zgBZ7L
- VNAlUCzl6A0Nd4haf5P4RY6INEaqAkG6+7UMwUF1cEPGs7WaqofjUa1av U=;
-IronPort-SDR: E3TLUzwCNZrJ7crJCOvDdpXqijx4Y1aFv4t7b/ChGh7UfGFt3b1+VUKgmpofNEGVusqKtbuFZd
- tUA4cYn1mLWw==
-X-SBRS: 4.0
-IronPort-PHdr: =?us-ascii?q?9a23=3A9I54/BCMRMVrIBj+ZRIfUyQJPHJ1sqjoPgMT9p?=
- =?us-ascii?q?ssgq5PdaLm5Zn5IUjD/qw00A3SQcPQ7PcXw+bVsqW1X2sG7N7BtX0Za5VDWl?=
- =?us-ascii?q?cDjtlehA0vBsOJSCiZZP7nZiA3BoJOAVli+XzoKlQTE8H7NBXep3So5msUHR?=
- =?us-ascii?q?PyfQN+OuXyHNvUiMK6n+C/8pHeeUNGnj24NL97MBzo9EParcgMhs1rN/U8?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A+GpAABSxBhfjACwBSSwhIATAJKcgDN?=
- =?us-ascii?q?gGwEBAQEBAQEBBQEBARIBAQEDAwEBAUCBSoFSUWKBRwqHbwOiLYZTA1ULAQE?=
- =?us-ascii?q?BDi0CBAEBAoRKAoIPAiQ4EwIDAQELAQEGAQEBAQEGBAICEAEBASaGDAyDU4E?=
- =?us-ascii?q?DAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBBQKBDD4CAQM?=
- =?us-ascii?q?SKAYBATcBDwIBCDYQECIlAgQOBSKDBIJMAy0BAQSifgKBOYhgAQFzgTSDAQE?=
- =?us-ascii?q?BBYUzGIIOCQkBgS4BgmmKCIIagUeCJTU+hD2FVCKSHQGjNAcBAoJdmWYhgmm?=
- =?us-ascii?q?caC2wYAIEAgQFAg4BAQWBaoF7HU+DPVAXAg2OHhqDV4pWdAI1AgYIAQEDCXy?=
- =?us-ascii?q?OGQGBEAEB?=
-X-IPAS-Result: =?us-ascii?q?A+GpAABSxBhfjACwBSSwhIATAJKcgDNgGwEBAQEBAQEBB?=
- =?us-ascii?q?QEBARIBAQEDAwEBAUCBSoFSUWKBRwqHbwOiLYZTA1ULAQEBDi0CBAEBAoRKA?=
- =?us-ascii?q?oIPAiQ4EwIDAQELAQEGAQEBAQEGBAICEAEBASaGDAyDU4EDAQEBAQEBAQEBA?=
- =?us-ascii?q?QEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBBQKBDD4CAQMSKAYBATcBDwIBC?=
- =?us-ascii?q?DYQECIlAgQOBSKDBIJMAy0BAQSifgKBOYhgAQFzgTSDAQEBBYUzGIIOCQkBg?=
- =?us-ascii?q?S4BgmmKCIIagUeCJTU+hD2FVCKSHQGjNAcBAoJdmWYhgmmcaC2wYAIEAgQFA?=
- =?us-ascii?q?g4BAQWBaoF7HU+DPVAXAg2OHhqDV4pWdAI1AgYIAQEDCXyOGQGBEAEB?=
-Received: from exch3-cdc.nexus.csiro.au ([IPv6:2405:b000:601:13::247:33])
- by vic-ironport-int.csiro.au with ESMTP/TLS/ECDHE-RSA-AES256-SHA384;
- 23 Jul 2020 09:01:21 +1000
-Received: from exch2-cdc.nexus.csiro.au (2405:b000:601:13::247:32) by
- exch3-cdc.nexus.csiro.au (2405:b000:601:13::247:33) with Microsoft SMTP
- Server (TLS) id 15.0.1497.2; Thu, 23 Jul 2020 09:01:20 +1000
-Received: from ExEdge1.csiro.au (150.229.7.34) by exch2-cdc.nexus.csiro.au
- (152.83.247.32) with Microsoft SMTP Server (TLS) id 15.0.1497.2 via Frontend
- Transport; Thu, 23 Jul 2020 09:01:20 +1000
-Received: from AUS01-ME1-obe.outbound.protection.outlook.com (104.47.116.57)
- by ExEdge1.csiro.au (150.229.7.34) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2; Thu, 23 Jul 2020 09:01:17 +1000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=V74ihddWdQY1Hoz4GyeSmyZCZvhP/VDnxYjUS9ZRYUZdFrcyNc47m3Jik0mWDSGH/Z5V7TTJF6nUGwVe494ai4JZNo84YsCkxL56R3rTzdFQKhPFadV8nggZJ31FhvK1tPJaCVgxfMgKqiVnWVzKjrhLUSWkzc/u1+x7vsE1wFu58ADPwtVKYXc0ddMQFfbpTT5X/0y8ebJeJv1LnsZ9oi3FWUHQUbWZPQFWaHZoAvRLjw26byy2FobS1ULxs1xHjIvjuifU+bFf+FXo1dBY1vQ0GLZupCnlD1y5yCGIulrs/VMuVPqCf8xffFjyM2zlXLxcdssLWazLlR5n1kvqhQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esWZv3sb2dHOjhRn6qApfceKU4Vbb6MoZP4SxvmEogI=;
- b=MDae4hgjhmMjWNWssvDVxpmU6RYJQWgVxOJZFzqgGaviE62HcXFZONWBpZM4xRzzHnid2VBtefsSL//hfQvEEaGlBUfBAC0Btr7QnZQarVLtnpGs65vs2QlKel3SCi3Fs5d4nlIRG27gYt/QRbPlmjYrpcFmPP2rB+x7bqmneaHZSR8pX0SKog59yzRy5Ab6i7Uqg4vZkOjdxv4goLRuZTbGQQPgBt6T/FsoCblsx8hVRE3O9g+vlbt0BFcHANNB7/49IhY5d2r4blbOxBQp5LYWQoOIWGXDrz86RQAP6gYtCxUYBvvBuExZrrP1gA60xGD9ODdysw7GHrIXnEHwqg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=data61.csiro.au; dmarc=pass action=none
- header.from=data61.csiro.au; dkim=pass header.d=data61.csiro.au; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=CSIROAU.onmicrosoft.com; s=selector1-CSIROAU-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=esWZv3sb2dHOjhRn6qApfceKU4Vbb6MoZP4SxvmEogI=;
- b=D82R+WPU5EUoe9XRJjWmKYkfNgqa+jOK0d8ClUAoEwCuB5htlI2Pqq22F5Ox++wrtPde/HTpwZ3afnphDV2/V2udyK3NNVEv3d8h/We5d6ztAgWwKWam8aGFkT9qLsS386fleIJ1t9/XkBghLDSCR44WuXXDAGUSm8NJ3gLLUO8=
-Received: from ME2PR01MB5203.ausprd01.prod.outlook.com (2603:10c6:220:4e::23)
- by MEXPR01MB0725.ausprd01.prod.outlook.com (2603:10c6:200::20) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3195.17; Wed, 22 Jul 2020 23:01:18 +0000
-Received: from ME2PR01MB5203.ausprd01.prod.outlook.com
- ([fe80::d2c:4503:9b8c:ccb0]) by ME2PR01MB5203.ausprd01.prod.outlook.com
- ([fe80::d2c:4503:9b8c:ccb0%3]) with mapi id 15.20.3195.026; Wed, 22 Jul 2020
- 23:01:17 +0000
-From: "Chubb, Peter (Data61, Kensington NSW)" <Peter.Chubb@data61.csiro.au>
+ Sun, 26 Jul 2020 20:50:36 +0000 (UTC)
+Received: by mail-qv1-f66.google.com with SMTP id s15so2118444qvv.7
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 26 Jul 2020 13:50:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=RQbClAWiXUHMdEwsdo25umU4b5LxLvDtD7IQkegvjec=;
+ b=GCN9DLK4miuqkWe49pg5Vwp7pnOEwJ0fpGYrqhS7OMtY0TlnRgi/uZGiNx4uu+0Gny
+ dwXcER6ulxdH4sbI7sCDpVo6Q98cWKStEbcBYpXv5bOERcomUwcuFnytAaOSDptwXS1m
+ BvSd+hd4IOxHvIeY2Feq5wkvmduKo6smOleRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=RQbClAWiXUHMdEwsdo25umU4b5LxLvDtD7IQkegvjec=;
+ b=Os85qOgwrl3nkY2CLx1bjpXrKLbgLDm3egDsbQiGRJNzJG+l1WjGMQJ3H3OpQUmRa2
+ U0+DHPSRaV8xQ6yx7ccwR4ieHSs6YcJCPcej5BroxkEK3rn95BbdwLvItXuhkNAqwgeF
+ f+W6GHdReYByEpnBAZ5wEVxyU5xGyN7MaDu06fCaYtVUsQJOMFJeCk7ijeiKHcBUHJfX
+ B11aK1sQnYMP13eVw5di1Ye0zJ8RONbGi2omq4yUTict9Gef8YTit8+bzVJC2tnNQm25
+ z5i4PzsSdi1YKNKwrpgBgLzx5U+QdA2DnCkHqv0JOTr/Lp11vyYVXZvdvqIWCGtyTc3Q
+ f0vQ==
+X-Gm-Message-State: AOAM53052HVWRe17NTtd4O+Z5IjeyEbz+wokJIgC9+vJXphMmiyKPAgt
+ v/nNe/VzVMmf1gU4YWr7vBwcvg==
+X-Google-Smtp-Source: ABdhPJxGnBwyAM9Tnd4maQ5b0UrrWC3i8w6rSNI2eYgn8sH25SLtX0A/Qe6q6dpsYz8UyZn38EOtRg==
+X-Received: by 2002:a0c:e008:: with SMTP id j8mr19976271qvk.87.1595796635556; 
+ Sun, 26 Jul 2020 13:50:35 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-8c61-f1b9-a518-346f-c376.inf6.spectrum.com.
+ [2606:a000:1401:8c61:f1b9:a518:346f:c376])
+ by smtp.gmail.com with ESMTPSA id i20sm15006361qka.17.2020.07.26.13.50.33
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Sun, 26 Jul 2020 13:50:34 -0700 (PDT)
+Date: Sun, 26 Jul 2020 16:50:32 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Thread-Topic: [PATCH] configs: cei-tk1-som: remove CONFIG_ARMV7_PSCI in
- include file
-Thread-Index: AQHWRUPvW5KD9af1BUCZ1HoOn1U6TqkUbXiA
-Date: Wed, 22 Jul 2020 23:01:17 +0000
-Message-ID: <87imefp32c.wl-Peter.Chubb@data61.csiro.au>
-References: <20200618074134.26629-1-patrick.delaunay@st.com>
-In-Reply-To: <20200618074134.26629-1-patrick.delaunay@st.com>
-Accept-Language: en-AU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
- FLIM/1.14.9 (Goj?) APEL/10.8 EasyPG/1.0.0 Emacs/26.3 (x86_64-pc-linux-gnu)
- MULE/6.0 (HANACHIRUSATO)
-authentication-results: st.com; dkim=none (message not signed)
- header.d=none;st.com; dmarc=none action=none header.from=data61.csiro.au;
-x-originating-ip: [221.199.209.25]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: c0182a3f-527e-47f8-c2c3-08d82e932472
-x-ms-traffictypediagnostic: MEXPR01MB0725:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <MEXPR01MB072517E0EDAE14DFD979E431BB790@MEXPR01MB0725.ausprd01.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: KmJb492FgQev00Sy0j+2MdSzKXrOkUoEv5b7pMC/2E/AD32Yp4pbgZeVM8PckIJSg/J69EKeKbVIab1l5LvLHxGrsHs6NJpTKnsnSv0Gor3IYuzTicT3jA0VNujsWNUV/CrnTy/iEAOlTMkxiBP1uUCysSwSrF56yJJ2C8Fs0mPyZRfzgXMyMFdZgJjVK9ZqSifYF3AEdYmPyhNdlNZP2wAkVjrZXAEN3uIn8eOSdnKlQKydw5Wj+7e+qY4uhsTTcJ0+GHsDRGi5cLvoimk1KAk8pIS1KBWqDj/Jo9fSru61+GUjZHQM0J06X2lm6AST
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ME2PR01MB5203.ausprd01.prod.outlook.com; PTR:; CAT:NONE;
- SFTY:;
- SFS:(4636009)(366004)(136003)(396003)(39850400004)(376002)(346002)(6512007)(83380400001)(4326008)(8936002)(91956017)(478600001)(8676002)(186003)(26005)(6916009)(71200400001)(54906003)(86362001)(5660300002)(66446008)(64756008)(66476007)(66556008)(4744005)(2616005)(76116006)(6486002)(316002)(2906002)(6506007)(66946007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: /sUWTWe9eBDRpsrqawPo4kzNH7lc98n37TcUtXGw7nT8w5JwO7PFCWl96RxGyngyvpeq4DCvbneeTRMChAdsG1Xz1oeQQ81iDS+fNWumJ7VyAIhYfA7azXeO6gJlly1o74QYgdEbWoNhRgeE4u9UQVhUz4jOu8x9WIQkKdvvyrfAvYWtRk9JPi7YKv3E4JDJ+On8Wrw//S5ZB399Ccuy87f58Xn0KeLQlI3rNaH3SLpQgqzDNVGC8lWDCTFS4842D/p5dTIJ9R7Ln2jue5bdXIxy+UckfI6uafgBN8UhR3nM13U/rPcanMpm9ci01oskWdiN/FT4YBHRhKdUN4H4gPMemWy6VXLLU3sCTnmEESdTn2QFf+t7xscGfcx751wvRy34+x1osZwJzjNeXh6Iixu1Dg4S+8PV57LIfmHp8AaAEe+WJtee+Ztur/Z8Zmb/l7JoDw4pVKRcAzC5NrM+hxIQEWtTk/j17IkvClNyxVrCYtUGYTjG7SwoSaLB5dhg
-Content-ID: <4F7292995086D943AD0B6010F7DFBF9F@ausprd01.prod.outlook.com>
+Message-ID: <20200726205032.GA15418@bill-the-cat>
+References: <20200625075958.9868-1-patrick.delaunay@st.com>
+ <20200625075958.9868-6-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ME2PR01MB5203.ausprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c0182a3f-527e-47f8-c2c3-08d82e932472
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jul 2020 23:01:17.8836 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 0fe05593-19ac-4f98-adbf-0375fce7f160
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: JT7Bxd63QJgcpAV8CERKsG9/BWvoRLLkaY8rl2VCIzQ63FqWz8r5nQ5QeqA9PPgo
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MEXPR01MB0725
-X-OriginatorOrg: data61.csiro.au
-X-Mailman-Approved-At: Fri, 24 Jul 2020 09:32:24 +0000
-Cc: "Chubb, Peter \(Data61, Kensington NSW\)" <Peter.Chubb@data61.csiro.au>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Warren <twarren@nvidia.com>, Trevor Woerner <twoerner@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] configs: cei-tk1-som: remove
- CONFIG_ARMV7_PSCI in include file
+In-Reply-To: <20200625075958.9868-6-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Wolfgang Denk <wd@denx.de>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 05/14] env: nowhere: add .load ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -145,27 +71,100 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3480900472368721763=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
->>>>> "Patrick" == Patrick Delaunay <patrick.delaunay@st.com> writes:
 
-Patrick> Activate ARCH_SUPPORT_PSCI as other TEGRA124 target and
-Patrick> remove CONFIG_ARMV7_PSCI and CONFIG_ARMV7_PSCI_NR_CPUS in
-Patrick> configs file as they are migrated in Kconfig.
-
-Patrick> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-
-Reviewed-by: Peter Chubb <peter.chubb@data61.csiro.au>
+--===============3480900472368721763==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="envbJBWh7q8WU6mo"
+Content-Disposition: inline
 
 
-I can't get at our TK1_SOM at the moment to test the patch but it
-looks plausible.
+--envbJBWh7q8WU6mo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Peter C
+On Thu, Jun 25, 2020 at 09:59:49AM +0200, Patrick Delaunay wrote:
+
+> Add the ops .load for nowhere ENV backend to load the
+> default environment.
+>=20
+> This ops is needed for the command 'env load'
+>=20
+>=20
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+>=20
+> Changes in v3:
+> - new: add ?load ops in nowhere
+>=20
+>  env/nowhere.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>=20
+> diff --git a/env/nowhere.c b/env/nowhere.c
+> index f5b0a17652..6949810a1f 100644
+> --- a/env/nowhere.c
+> +++ b/env/nowhere.c
+> @@ -27,8 +27,17 @@ static int env_nowhere_init(void)
+>  	return 0;
+>  }
+> =20
+> +static int env_nowhere_load(void)
+> +{
+> +	env_set_default(NULL, 0);
+> +	gd->env_valid	=3D ENV_INVALID;
+> +
+> +	return 0;
+> +}
+> +
+>  U_BOOT_ENV_LOCATION(nowhere) =3D {
+>  	.location	=3D ENVL_NOWHERE,
+>  	.init		=3D env_nowhere_init,
+> +	.load		=3D env_nowhere_load,
+>  	ENV_NAME("nowhere")
+>  };
+
+Build testing this, we get 8KiB size increase in SPL in targets which
+have ENV_NOWHERE in SPL.  Can we guard this somehow, with a logical
+tie-in to being needed for 'env load' ? Thanks!
+
+--=20
+Tom
+
+--envbJBWh7q8WU6mo
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8d7JQACgkQFHw5/5Y0
+tyzGEQv/a3wrdWCHqoHoU3sFf+t0K0nh2Z4wG/TrtML+N6vEancZfou6FnJe6bgA
+0A+Fu5AU/nX2kiErbhYaOUclt4hOxKkXQh059xmb2dNSKSjGkcr0msLEWY8ekHnY
+1LKQuB7RA1OMBgK9Q0F6r118/gfbqF0X+vm1QZju5mcKGlr6h4L4LTtcCQ/ZMub5
+z8OqWov87TCOPhcZLNTLnGU6ZEFQr11QlEgQjhNYOeUIGammlI8aDR9nMNOMA0JM
+kxMJOIA0448DXIeYWd/zr2erPL0MaBznNKs2DSjL33EgKS7fCKD62r3y2u+Jx46D
+w4BVrbmEV0sTInYkp/GZjE5mypiKqpGoJa/T/MMJmTJxzonC/5U2ODwnQ1z3s3oi
+TyD7Hv4OcQB0k2e9SgnBUeX43zGG0Vr056U1KjwqVasF7pyaM/Hfq745mmgocBp6
+8xcTVEbYWWczvljnDrljXWOCZWqCg0Qjeg9nYAE9pyNMOtBmBTSjLznnuD1dpOJr
+SM6pws1P
+=k408
+-----END PGP SIGNATURE-----
+
+--envbJBWh7q8WU6mo--
+
+--===============3480900472368721763==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3480900472368721763==--

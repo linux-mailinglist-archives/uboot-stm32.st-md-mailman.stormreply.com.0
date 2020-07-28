@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ECB4F230BDA
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 15:56:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1869230C0A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 16:09:34 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B658BC36B25
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 13:56:36 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B0185C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 14:09:34 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 17348C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 227A3C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 13:56:35 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue, 28 Jul 2020 14:09:32 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06SDlAX6024687; Tue, 28 Jul 2020 15:56:34 +0200
+ 06SE7ik7008740; Tue, 28 Jul 2020 16:09:29 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=69JfRyb8lB1DS/eB0lTzHRyhYaxZacIKkJLaEa/ku/8=;
- b=apibLG+2q/TTWeYtZDkGi6ogDrkPEf0jwikoUpsp2DfmyqEnoetReRAp8OOdYK/BzLMW
- NNQqsSjSgkcV6Y4J7e7aTt8g8xhL5my0/LtQztxBA6GI5eh6cy5GxohpCG35a3QICKbR
- /95jX9jasPBmRs+RZyX6mh2psM6V/79JQyFYnv+WZ7bewPQx05maoo3l1c0Q8tSwWGO5
- 4fptTZUWXBzI41iw3Bz8m9GG8Gr/KU6nTpW4yYfsrtBIMbPsDZ4GMgtowjzRtNb0Y7og
- 7hNoMLSbzF9mHL1s8EPRRaq/Fd1ilI/dfGTZn/vZPQpGlNmTlfgoLWXwHe9drEmY7mW1 cg== 
+ bh=3H6FmMyTUS144Rd96nW3i3IWFj8hgXmO9+Gbi7S321o=;
+ b=D7ue0iJli+qlt+m6BY5rRWTKFiY45XAYZ5yGNs4vRUvKUQRBb1PWxRbZ0C342tXHAE8F
+ d5IKYhUXxvogmdC8sK6Z6wrQLI+RGClE+U8Hsz40xpuKyAuHO+/YbXxaAjSwst8jm7Em
+ VeapdPJhw/DHk2a4nXlBilOcXYoK33iZsekrK6GRbRCgj5EGJtdTkCM3gQGzJDxPAhm9
+ G1uKP1tO+s1FNftY5tq39mYELISJPkXXOkNa2N+PDsb841IyyXlgsA0xQvSipcwEOwC9
+ eF/IVjlvvVDIKhRghaHX1wXEr5GLj5zJzGZOK22hvAqqeIIjbp2Meod4YUAdPVdLIw+V Cg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32g9v9ets1-1
+ by mx07-00178001.pphosted.com with ESMTP id 32gagv6jyu-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jul 2020 15:56:34 +0200
+ Tue, 28 Jul 2020 16:09:28 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E024410002A;
- Tue, 28 Jul 2020 15:56:33 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 72A3C10002A;
+ Tue, 28 Jul 2020 16:09:28 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D55C92216F6;
- Tue, 28 Jul 2020 15:56:33 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 67C932C38D1;
+ Tue, 28 Jul 2020 16:09:28 +0200 (CEST)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
  (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
- 2020 15:56:33 +0200
+ 2020 16:09:28 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 28 Jul 2020 15:56:33 +0200
+ 15.00.1473.003; Tue, 28 Jul 2020 16:09:28 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH] Revert "ARM: dts: stm32: Reinstate card
- detect behavior on ST boards"
-Thread-Index: AQHWZObmWZvdyR99o0eozy9VBElA4w==
-Date: Tue, 28 Jul 2020 13:56:33 +0000
-Message-ID: <d6f4576a-ff47-4c0a-9a1e-e08d318565cf@st.com>
-References: <20200707164729.20359-1-patrick.delaunay@st.com>
-In-Reply-To: <20200707164729.20359-1-patrick.delaunay@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH v2] Revert "ARM: dts: stm32: Reinstate card
+ detect behavior on DHSOM"
+Thread-Index: AQHWZOi0qFOfVLAwDUChRY34zg4Yvg==
+Date: Tue, 28 Jul 2020 14:09:27 +0000
+Message-ID: <abf47444-54cb-a4e8-429d-32651965e1b0@st.com>
+References: <20200707164608.20056-1-patrick.delaunay@st.com>
+In-Reply-To: <20200707164608.20056-1-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -61,16 +61,16 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
-Content-ID: <E734596D8FC1DA4A8BF2754335890653@st.com>
+x-originating-ip: [10.75.127.51]
+Content-ID: <11D4F9B0BC7B324BA47F911C58E2969D@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_11:2020-07-28,
  2020-07-28 signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+Cc: Marek Vasut <marex@denx.de>, "uboot-stm32@st-md-mailman.stormreply.com"
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] Revert "ARM: dts: stm32: Reinstate card
- detect behavior on ST boards"
+Subject: Re: [Uboot-stm32] [PATCH v2] Revert "ARM: dts: stm32: Reinstate
+ card detect behavior on DHSOM"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,45 +88,36 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 7/7/20 6:47 PM, Patrick Delaunay wrote:
+On 7/7/20 6:46 PM, Patrick Delaunay wrote:
 > Since commit f13ff88b61c3 ("gpio: stm32: add ops set_dir_flags")
 > the gpio flags are supported by stm32 pinctrl driver.
 >
 > The cd-gpios is correctly handle in U-Boot and the patch on the
 > device tree can be removed.
 >
-> This reverts commit 792919241b3d750cd5295dfe6dd1d0958b9be468.
+> This reverts commit 3c2e2a1a79608c5e046313a8c47586d9a734e2a3.
+>
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 2 --
->  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 2 --
->  2 files changed, 4 deletions(-)
+> Changes in v2:
+> - correct commit message
 >
-> diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-> index 7b8c1c1cc7..06cff38460 100644
-> --- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-> @@ -162,8 +162,6 @@
+>  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> index 69c5af4241..f96de9e7a3 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> @@ -264,9 +264,6 @@
 >  
 >  &sdmmc1 {
 >  	u-boot,dm-spl;
 > -	broken-cd;
 > -	/delete-property/ cd-gpios;
->  };
->  
->  &sdmmc1_b4_pins_a {
-> diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-> index ef3e7f45a3..7759ba2896 100644
-> --- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-> @@ -158,8 +158,6 @@
->  
->  &sdmmc1 {
->  	u-boot,dm-spl;
-> -	broken-cd;
-> -	/delete-property/ cd-gpios;
+> -	/delete-property/ disable-wp;
 >  };
 >  
 >  &sdmmc1_b4_pins_a {

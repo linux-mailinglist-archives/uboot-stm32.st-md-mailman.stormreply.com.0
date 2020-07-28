@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4284230B72
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 15:28:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 591A6230B77
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 15:29:53 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AE71C36B25
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 13:28:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 203FAC36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 13:29:53 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6F78EC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE78FC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 13:28:46 +0000 (UTC)
+ Tue, 28 Jul 2020 13:29:51 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06SDSNPH022515; Tue, 28 Jul 2020 15:28:43 +0200
+ 06SDSNSF022546; Tue, 28 Jul 2020 15:29:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=VxL8VkTfHWCivpAYuNm14x+TGRkiRuvYK2OmM4Vj9VA=;
- b=rcM0chGYPRiQUbQw0kFZwSY+/ysmPoDD4AfbRYyFEy2E1XTOs0Oxary6RtXvA1L1btl5
- JoVP5lEjasPKgtZVCf3sMZ7ibddNT68oaOangtjKHXNisEn1BWKfkalOzu1s15Wx/KE3
- 17Jav81nW789MzajpDLj1VMPUAFesGDfzYoslZjv5OiejwU49XtHosBgT46gsqfLleDR
- g+VKk1aher1fVISlODcgli82az0yBXxRCm4iwqBFkoGPMSp3MoGN0Ba1xGRcB0yaxQPq
- 61K3CZVBwRwY6BjqOAE8nQNTEARQRU3N7wdw51lP3BUZxjq37/rGz2yL0pJD5stpqG99 0Q== 
+ bh=t4MLNKFzO+7Y9cmXiWFrBZQQHLqPZQZN89ba4fhe3PI=;
+ b=FMsyxtKKlgMlmPjJLqDpx4UWd45aVDPG/+N5OYhv7AVgz8RF67huS7C1F5U2aI1vFui4
+ gMaKqenw/yOF5fzNUoHLiMA60zIgH9ojnJgOdVt+EuK/KSEVYvgM5NC9Mws/wxvFESU4
+ fTFp4L76RX1rx+R8l4mHJzRHGl6bqlzVCmVM2LvGf1vsTvJRn9+EPd3lEDrybGMO3dcF
+ OFomzIoZSuH/pRq6UIeIfJJl1SbT6RaPcKPSS46TDt2+9ePuAioeVIxqRcDP+lpDkm4g
+ 5X8m41Ld5zxq8MQIHoZmlaqzinq82PFg/0AkYsigMyXLaBM4R/AMehT5h0pkuHVSxEUZ iQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32ga71xf3t-1
+ by mx07-00178001.pphosted.com with ESMTP id 32ga71xf8a-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jul 2020 15:28:43 +0200
+ Tue, 28 Jul 2020 15:29:45 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E65CF10002A;
- Tue, 28 Jul 2020 15:28:42 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 89C3C10002A;
+ Tue, 28 Jul 2020 15:29:44 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DCA082B8A1E;
- Tue, 28 Jul 2020 15:28:42 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7E0EE2B1862;
+ Tue, 28 Jul 2020 15:29:44 +0200 (CEST)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
  (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
- 2020 15:28:42 +0200
+ 2020 15:29:44 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 28 Jul 2020 15:28:42 +0200
+ 15.00.1473.003; Tue, 28 Jul 2020 15:29:44 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH] phy: usbphyc: use regulator_set_enable_if_allowed for
- disabling vdd supply
-Thread-Index: AQHWUV02NvmUFP8nLkGQGTTzgK32qqkdAcMA
-Date: Tue, 28 Jul 2020 13:28:42 +0000
-Message-ID: <6e94f420-1039-0e87-770e-f04cdbc6dfd7@st.com>
-References: <20200703191239.1.I230b778f5bf092459aaadca7d51fecbc808d417d@changeid>
-In-Reply-To: <20200703191239.1.I230b778f5bf092459aaadca7d51fecbc808d417d@changeid>
+Thread-Topic: [PATCH] arm: stm32mp: stm32prog: check result of find_mmc_device
+Thread-Index: AQHWU4eHB8eS85NBlk25M6MH63Nt36kc/biA
+Date: Tue, 28 Jul 2020 13:29:44 +0000
+Message-ID: <3b494ab6-7f00-f39c-3571-f1d19688e384@st.com>
+References: <20200706132052.1.I28c26381b4f45a78d97ea917280479c10df92e76@changeid>
+In-Reply-To: <20200706132052.1.I28c26381b4f45a78d97ea917280479c10df92e76@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,16 +61,16 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.48]
-Content-ID: <5A3655C77907AB43AE324248A51E0651@st.com>
+Content-ID: <4AE87B9F1724584282B193532FD34E25@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_11:2020-07-28,
  2020-07-28 signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH] phy: usbphyc: use
- regulator_set_enable_if_allowed for disabling vdd supply
+Cc: U-Boot
+ STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH] arm: stm32mp: stm32prog: check result of
+	find_mmc_device
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,35 +88,32 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 7/3/20 7:13 PM, Patrick Delaunay wrote:
-> Use regulator_set_enable_if_allowed() api instead of regulator_set_enable()
-> while disabling vdd supply. This way the driver doesn't see an error
-> when disabling an always-on regulator.
+On 7/6/20 1:20 PM, Patrick Delaunay wrote:
+> Check result of find_mmc_device() before calling mmc_init().
 >
-> This patch is needed since the commit f93fab312615 ("Revert 'power:
-> regulator: Return success on attempt to disable an always-on regulator'")
-> and use the API introduced by commit cc4a224af226 ("power: regulator:
-> Introduce regulator_set_enable_if_allowed api").
+> This patch avoid a data abort when the command try to acces
+> to sd/mmc device deactivated in device tree.
 >
+> Fixes: aff4c5dd8265 ("stm32mp: stm32prog: add MMC device")
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  drivers/phy/phy-stm32-usbphyc.c | 2 +-
+>  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-> index 464b0735e8..c6d3048602 100644
-> --- a/drivers/phy/phy-stm32-usbphyc.c
-> +++ b/drivers/phy/phy-stm32-usbphyc.c
-> @@ -263,7 +263,7 @@ static int stm32_usbphyc_phy_power_off(struct phy *phy)
->  		return 0;
->  
->  	if (usbphyc_phy->vdd) {
-> -		ret = regulator_set_enable(usbphyc_phy->vdd, false);
-> +		ret = regulator_set_enable_if_allowed(usbphyc_phy->vdd, false);
->  		if (ret)
->  			return ret;
->  	}
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> index c5b8841b23..e4199dbaa5 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> @@ -560,7 +560,7 @@ static int init_device(struct stm32prog_data *data,
+>  #ifdef CONFIG_MMC
+>  	case STM32PROG_MMC:
+>  		mmc = find_mmc_device(dev->dev_id);
+> -		if (mmc_init(mmc)) {
+> +		if (!mmc || mmc_init(mmc)) {
+>  			stm32prog_err("mmc device %d not found", dev->dev_id);
+>  			return -ENODEV;
+>  		}
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

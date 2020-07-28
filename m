@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4852B2306F3
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:51:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EE9D2306F6
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:51:47 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08EC2C36B25
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:51:43 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 55E92C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:51:47 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 098CFC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 21D1CC36B2C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 09:51:41 +0000 (UTC)
+ Tue, 28 Jul 2020 09:51:43 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06S9ngN1000659; Tue, 28 Jul 2020 11:51:38 +0200
+ 06S9nh3V000662; Tue, 28 Jul 2020 11:51:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=dFeX2e6+sXkGdy4+8IApJgWq98hcDb6Q7pE3F1wJ2do=;
- b=FSHbp0nsomxrzptVjf7rvxKqM+t5toEhs4IaEXW9XM+SpnGyluIILKkymMAFvrvDiRLx
- Q4es3dTJZtopvytO3/lOrXC6HDmORErJio4teWJN4fjEKCt2O7lWOKBiuz5QyP5Gc8XD
- /Zoo/E6agcTSRTsiTWt30lG4c38hzqYy7oqPVWg0icv5SH+kIgkBkmk0mlFUr+GN3hDe
- c0Vnt2+zwnO2ioOYoQKZgbsXbCKSry8pDaFGLHCfDU36nCRkqwyVRw4j+cXfdVzeiUBS
- +IAagw2Zdc4sv6WNoJ94y9pHkbbAvsId5e7kxYJ4z/+o7b5uNwKCTpvCq23Eh1JcsTmH qw== 
+ bh=c2EW0DcG85PrnpWpXOypq0ARi0qitezqSmaW747I800=;
+ b=XN7wJ1SHSRY3bTIzl741BXnHk9j1/gYyjcjLjf1SFTMMzvluOyu9/oAxRs3FahCJu8D6
+ 45wc1w1sznRNdgtkfbsq9uO2qcOlzfvEVQoF/BICzikbXKuDkQ+ZFvKpNYFhcddX3ttT
+ SV8IIrW2m1gw0cBaH8rAQww3+02T6XsJGWqKuvT8+agrA6ZaJzd/R9lITMdxiTJ4vOAu
+ JsctIlQP6/EUebTJp0uIHA/DyhrNcZI0xhSa9ZpuCTEwfLH3KDLz5z5aI6N069jGZj3N
+ FQYsYKP/dGdZdqmQaM/PWmvFC/vLGNhnhRKiTkafQuZKr0CY9lk8/Q5bYRdBGUa6m3jT lA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32gagv5hsc-1
+ by mx07-00178001.pphosted.com with ESMTP id 32gagv5hsf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jul 2020 11:51:38 +0200
+ Tue, 28 Jul 2020 11:51:39 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2392210002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ECC0710002A;
  Tue, 28 Jul 2020 11:51:38 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 180B32A70DA;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E2D4B2A70DA;
  Tue, 28 Jul 2020 11:51:38 +0200 (CEST)
 Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 28 Jul 2020 11:51:37 +0200
+ Tue, 28 Jul 2020 11:51:38 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jul 2020 11:51:17 +0200
-Message-ID: <20200728095128.2363-5-patrick.delaunay@st.com>
+Date: Tue, 28 Jul 2020 11:51:18 +0200
+Message-ID: <20200728095128.2363-6-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200728095128.2363-1-patrick.delaunay@st.com>
 References: <20200728095128.2363-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG7NODE2.st.com (10.75.127.20) To SFHDAG6NODE3.st.com
+X-ClientProxiedBy: SFHDAG6NODE1.st.com (10.75.127.16) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_07:2020-07-28,
@@ -57,7 +57,7 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
  Wolfgang Denk <wd@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v4 04/14] env: correctly handle env_load_prio
+Subject: [Uboot-stm32] [PATCH v4 05/14] env: nowhere: add .load ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,58 +74,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Only update gd->env_load_prio in generic function env_load()
-and no more in the weak function env_get_location() which is
-called in many place (for example in env_driver_lookup, even
-for ENVOP_SAVE operation).
+Add the ops .load for nowhere ENV backend to load the
+default environment.
 
-This patch is a preliminary step to use env_driver_lookup()/
-env_get_location() in new function env_select() without
-updating gd->env_load_prio.
+This ops is needed for the command 'env load'
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
-(no changes since v3)
+Changes in v4:
+- don't use env_import in SPL to avoid to increase its size
+  as it is only required for 'env load' command
 
 Changes in v3:
-- new
+- new: add load ops in nowhere
 
- env/env.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ env/nowhere.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/env/env.c b/env/env.c
-index 2e64346438..bcc68c6bce 100644
---- a/env/env.c
-+++ b/env/env.c
-@@ -131,8 +131,6 @@ __weak enum env_location env_get_location(enum env_operation op, int prio)
- 	if (prio >= ARRAY_SIZE(env_locations))
- 		return ENVL_UNKNOWN;
- 
--	gd->env_load_prio = prio;
--
- 	return env_locations[prio];
+diff --git a/env/nowhere.c b/env/nowhere.c
+index f5b0a17652..d33fdf27d0 100644
+--- a/env/nowhere.c
++++ b/env/nowhere.c
+@@ -27,8 +27,25 @@ static int env_nowhere_init(void)
+ 	return 0;
  }
  
-@@ -204,6 +202,8 @@ int env_load(void)
- 		ret = drv->load();
- 		if (!ret) {
- 			printf("OK\n");
-+			gd->env_load_prio = prio;
++static int env_nowhere_load(void)
++{
++	/*
++	 * for SPL, set env_valid = ENV_INVALID is enougth as env_get_char()
++	 * return the default env if env_get is used
++	 * and SPL don't used env_import to reduce its size
++	 * For U-Boot proper, import the default environment to allow reload.
++	 */
++	if (!IS_ENABLED(CONFIG_SPL_BUILD))
++		env_set_default(NULL, 0);
 +
- 			return 0;
- 		} else if (ret == -ENOMSG) {
- 			/* Handle "bad CRC" case */
-@@ -227,7 +227,8 @@ int env_load(void)
- 		debug("Selecting environment with bad CRC\n");
- 	else
- 		best_prio = 0;
--	env_get_location(ENVOP_LOAD, best_prio);
++	gd->env_valid	= ENV_INVALID;
 +
-+	gd->env_load_prio = best_prio;
- 
- 	return -ENODEV;
- }
++	return 0;
++}
++
+ U_BOOT_ENV_LOCATION(nowhere) = {
+ 	.location	= ENVL_NOWHERE,
+ 	.init		= env_nowhere_init,
++	.load		= env_nowhere_load,
+ 	ENV_NAME("nowhere")
+ };
 -- 
 2.17.1
 

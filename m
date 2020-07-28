@@ -2,55 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A97A32305D4
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 10:54:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18C3623062E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:11:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65ADEC36B25
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 08:54:25 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C83E1C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:11:04 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C7DDBC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0496AC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 08:54:24 +0000 (UTC)
+ Tue, 28 Jul 2020 09:11:02 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06S8qL2T025751; Tue, 28 Jul 2020 10:54:21 +0200
+ 06S98M0C014114; Tue, 28 Jul 2020 11:10:53 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=xNLfJ9q11E7CtbFv30tBzoNdCxa7oZDYG/ZEjjetThA=;
- b=iXcTXKW9jms17evg60CTjESZ5TZm9s6kbc6cGR0I8DOkvOGj3pdwGghDNEc380ZmLVXS
- RPdioCn8EIV0R/DL825NfGfPVqmOWbxB5HDqxMDtMqD9TmVRcWpZtg3oyzpNpOYtAvWC
- I5waPdRTcJea5bjtGlHbMS9fXEdu1azZkpOSFVTXP55lYxxkmWPsPS1Hl/mzVOT1LBot
- 98l6VkgLk5RH+QJ6iky39nF69lzatAvkZGO2yjtoVaoNAJErMskBr/hYUyvrBPfYSZbY
- lcM6IP5KsUZMkLWMOmONoQ2uPzGbS45xjiWY4DVB8qcObGa0pd3caACbEnp3J6ueEnY+ NQ== 
+ bh=iJXKp4SxhQE6GmukDv8bmGe0qtwvT7j0eKM8Pb/aVIY=;
+ b=JZ2VwkYHnfKdjzFT+MZ2zV5p5X9aXPMpVFUsVou8XKF2sk838wKFrmnys9OsgFeJzTAj
+ UDo3vtZkvZmTJRZUWJXe0CKNe9gar73hgZRcnAmJopJeqeabrfAFnotkLJSGtKm0j/U6
+ mgFNZLsh6bbB9+qFWfejQ0D0ICKdG0DXKnlSqiKmpzkH+ez0irygJhFVgtT3Sk7pKHQp
+ mKlIPAq1OpBscX7UadsPdlU9yKGURyeNAWLHvZmFqfLjc3Ub/lIw34kKn+5nSJQfRjDk
+ m+X8uHNB7LJ+4Qu9387Pp+cB+SKSAFsvUJ9AO51IWoYH6dQwSl2YfobM+vnasUO/ydJQ Kw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32ga71wb5q-1
+ by mx07-00178001.pphosted.com with ESMTP id 32ga71wdt9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jul 2020 10:54:21 +0200
+ Tue, 28 Jul 2020 11:10:53 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 48B4610002A;
- Tue, 28 Jul 2020 10:54:18 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3703E2A4D84;
- Tue, 28 Jul 2020 10:54:18 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
- 2020 10:54:17 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AE01110002A;
+ Tue, 28 Jul 2020 11:10:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A0B6C2A55EE;
+ Tue, 28 Jul 2020 11:10:52 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
+ 2020 11:10:52 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Tue, 28 Jul 2020 10:54:17 +0200
+ 15.00.1473.003; Tue, 28 Jul 2020 11:10:52 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH] usb: host: dwc3-sti-glue: Fix ofnode_valid() parameter
-Thread-Index: AQHWTfdoFA3CWL+7/USDVsIdwP6hAakcu+OA
-Date: Tue, 28 Jul 2020 08:54:17 +0000
-Message-ID: <7a656b7e-4a15-4bd6-54ba-6dc87f2c9b81@st.com>
-References: <20200629092633.24545-1-patrice.chotard@st.com>
-In-Reply-To: <20200629092633.24545-1-patrice.chotard@st.com>
+To: Tom Rini <trini@konsulko.com>
+Thread-Topic: [PATCH v4 1/5] cmd: bind: allow to bind driver with driver data
+Thread-Index: AQHWHtcAIOv36kG/d0qeAHl7sm3oN6j81bGAgCBJFIA=
+Date: Tue, 28 Jul 2020 09:10:51 +0000
+Message-ID: <3ab782f6-81f5-fdde-06e6-f2d8ab35a74f@st.com>
+References: <20200430100619.28557-1-patrice.chotard@st.com>
+ <20200430100619.28557-2-patrice.chotard@st.com>
+ <20200707200859.GA10034@bill-the-cat>
+In-Reply-To: <20200707200859.GA10034@bill-the-cat>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -60,15 +62,17 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.51]
-Content-ID: <A14C78261BC27B4A854E46CB650F9077@st.com>
+Content-ID: <4E1F222C4F7A8A4BAC6D194F3229538D@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_01:2020-07-28,
  2020-07-28 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] usb: host: dwc3-sti-glue: Fix
-	ofnode_valid() parameter
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v4 1/5] cmd: bind: allow to bind driver
+	with driver data
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,39 +89,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi
+Hi Tom
 
-Just a gentle reminder as this patch is present on mailing list since 2 months.
+On 7/7/20 10:08 PM, Tom Rini wrote:
+> On Thu, Apr 30, 2020 at 12:06:15PM +0200, Patrice Chotard wrote:
+>
+>> Initial implementation invokes device_bind_with_driver_data()
+>> with driver_data parameter equal to 0.
+>> For driver with driver data, the bind command can't bind
+>> correctly this driver or even worse causes data abort as shown below:
+>>
+>> As example, for debug purpose on STM32MP1 platform, ethernet (dwc_eth_qos.c)
+>> driver needed to be unbinded/binded. This driver is using driver data:
+>>
+>> static const struct udevice_id eqos_ids[] = {
+>>     {
+>>         .compatible = "nvidia,tegra186-eqos",
+>>         .data = (ulong)&eqos_tegra186_config
+>>     },
+>>     {
+>>         .compatible = "snps,dwmac-4.20a",
+>>         .data = (ulong)&eqos_stm32_config
+>>     },
+>>
+>>     { }
+>> };
+>>
+>> After unbinding/binding this driver and probing it (with the dhcp command),
+>> we got a prefetch abort as below:
+>>
+>> STM32MP> unbind eth ethernet@5800a000
+>> STM32MP> bind /soc/ethernet@5800a000 eth_eqos
+>> STM32MP> dhcp
+>> prefetch abort
+>> pc : [<4310801c>]          lr : [<ffc8f4ad>]
+>> reloc pc : [<035ba01c>]    lr : [<c01414ad>]
+>> sp : fdaf19b0  ip : ffcea83c     fp : 00000001
+>> r10: ffcfd4a0  r9 : fdaffed0     r8 : 00000000
+>> r7 : ffcff304  r6 : fdc63220     r5 : 00000000  r4 : fdc5b108
+>> r3 : 43108020  r2 : 00003d39     r1 : ffcea544  r0 : fdc63220
+>> Flags: nZCv  IRQs off  FIQs off  Mode SVC_32
+>> Code: data abort
+>> pc : [<ffc4f9c0>]          lr : [<ffc4f9ad>]
+>> reloc pc : [<c01019c0>]    lr : [<c01019ad>]
+>> sp : fdaf18b8  ip : 00000000     fp : 00000001
+>> r10: ffcd69b2  r9 : fdaffed0     r8 : ffcd69aa
+>> r7 : 00000000  r6 : 00000008     r5 : 4310801c  r4 : fffffffc
+>> r3 : 00000001  r2 : 00000028     r1 : 00000000  r0 : 00000006
+>> Flags: NzCv  IRQs on  FIQs on  Mode SVC_32 (T)
+>> Code: 2f00 d1e9 2c00 dce9 (f855) 2024
+>> Resetting CPU ...
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+>> Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Sorry for the delay in getting to this.  Currently, this breaks the dm
+> unit tests on sandbox, can you please investigate?  Thanks!
+>
+A v5 has been submitted fixing the dm unit test regression
 
-Regards
+Thanks
 
 Patrice
-
-On 6/29/20 11:26 AM, Patrice Chotard wrote:
-> node varaible is used as iterator into ofnode_for_each_subnode()
-> loop, when exiting of it, node is no more a valid ofnode.
-> Use dwc3_node instead as parameter of ofnode_valid()
->
-> Fixes: ac28e59a574d ("usb: Migrate to support live DT for some driver")
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
-> ---
->
->  drivers/usb/host/dwc3-sti-glue.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti-glue.c
-> index a72ab20168..3e6c1429d6 100644
-> --- a/drivers/usb/host/dwc3-sti-glue.c
-> +++ b/drivers/usb/host/dwc3-sti-glue.c
-> @@ -159,7 +159,7 @@ static int sti_dwc3_glue_bind(struct udevice *dev)
->  			dwc3_node = node;
->  	}
->  
-> -	if (!ofnode_valid(node)) {
-> +	if (!ofnode_valid(dwc3_node)) {
->  		pr_err("Can't find dwc3 subnode for %s\n", dev->name);
->  		return -ENODEV;
->  	}
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

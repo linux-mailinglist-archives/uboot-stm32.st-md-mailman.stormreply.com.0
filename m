@@ -2,66 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D07623039E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:13:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81EFA230399
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:13:45 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 67D8CC36B27
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 07:13:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FA63C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 07:13:45 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [62.209.51.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4219EC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22C04C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 07:13:54 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue, 28 Jul 2020 07:13:44 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06S7D7U6031946; Tue, 28 Jul 2020 09:13:41 +0200
+ 06S7DcGU005227; Tue, 28 Jul 2020 09:13:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=6g+WnMv8kCxSWIHpfhhBaRGfU5aVJnf8Jm93uoSaG9c=;
- b=1jGkrVNFjKRzjVfkmOxt6HhNUpptVk57LBkPYh51UYvzx1PMeWRPAorIefRGf0zR5+/R
- 5QrFiueFV+voEidRmCWzCUtIVD8OVE/DuBNTinQrY8qUFaR/u12DJFGqn3bb3Y3QnNdj
- gQ3mTr69+i2RMTwwkH3Yz0xvS21UU8rE5WXzTvcLSW/C6iGjfSDds6HnCYzXmL3ATRTZ
- N5rGF+5JACZojp7AlBs/lXmn/BXmaZrfGbyNt1Hyn9Si+qNLMAmfxZa8bGQDzK7eXK2p
- O+RwRRaB3ca9VeI92L6SiEvVHeh+sEBDxALr/1XTaCc+xmVhypaOLXvggrLz72J4IATZ ww== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=bNXHM+ahs/QUB4SZ963WdgF4fVsxwOmc1iQmrVsUZsQ=;
+ b=hMxZdXgthXEYZpIGWDV1Xkv/41aWoh659IUoXtFmFp22Yw3xYM4cQzRU23o3kSAU0cjU
+ brpOPGJpgx2Qz4OovZ0jJe/MvuPXxpd7cY/GBTnXTCE4cCddaWWu7giPgV3uYxEIvC2D
+ un3s6TftInCaXvMizLL2FssKbAzRPehdFHwJh4QV5FK7WoWLnFEi2sKzhAwOqvLy0M0d
+ PFQzDetUAhbYzgQtXTkUrX89tC8CAdg26on7aM9SE4HkSEdjyXcDGI8pWGasEG9HIecT
+ yd63or4Kvsome0VTstCjo1mG/L+jpY/4M11B9pUkc2FVxrANdfYVemCK0JuwgNqB1vnU ZA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32g9v9d0cp-1
+ by mx07-00178001.pphosted.com with ESMTP id 32gagv4trm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 28 Jul 2020 09:13:41 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5E55A10002A;
- Tue, 28 Jul 2020 09:13:39 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CF62A100034;
+ Tue, 28 Jul 2020 09:13:40 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D839721E690;
- Tue, 28 Jul 2020 09:13:39 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C26E821E690;
+ Tue, 28 Jul 2020 09:13:40 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 28 Jul 2020 09:13:39 +0200
+ Tue, 28 Jul 2020 09:13:40 +0200
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jul 2020 09:13:30 +0200
-Message-ID: <20200728071335.5840-1-patrice.chotard@st.com>
+Date: Tue, 28 Jul 2020 09:13:31 +0200
+Message-ID: <20200728071335.5840-2-patrice.chotard@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200728071335.5840-1-patrice.chotard@st.com>
+References: <20200728071335.5840-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG8NODE3.st.com (10.75.127.24) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_01:2020-07-27,
  2020-07-28 signatures=0
-Cc: Heiko Schocher <hs@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Simon Glass <sjg@chromium.org>, Walter Lozano <walter.lozano@collabora.com>,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Simon Glass <sjg@chromium.org>,
  Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH v5 0/5] cmd: bind allow to bind driver with
-	driver_data
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH v5 1/5] cmd: bind: allow to bind driver with
+	driver data
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,46 +76,95 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Initial implementation invokes device_bind_with_driver_data()
+with driver_data parameter equal to 0.
+For driver with driver data, the bind command can't bind
+correctly this driver or even worse causes data abort as shown below:
 
-  - fix the bind command
-  - add a bind command test
-  - add bind command documentation
+As example, for debug purpose on STM32MP1 platform, ethernet
+(dwc_eth_qos.c) driver needed to be unbinded/binded.
+This driver is using driver data:
 
-Changes in v5:
-  - rebase on last master
-  - fix phy test regression
+static const struct udevice_id eqos_ids[] = {
+    {
+        .compatible = "nvidia,tegra186-eqos",
+        .data = (ulong)&eqos_tegra186_config
+    },
+    {
+        .compatible = "snps,dwmac-4.20a",
+        .data = (ulong)&eqos_stm32_config
+    },
 
-Changes in v4:
-  - fix make htmldocs error "Title underline too short"
+    { }
+};
+
+After unbinding/binding this driver and probing it (with the dhcp command),
+we got a prefetch abort as below:
+
+STM32MP> unbind eth ethernet@5800a000
+STM32MP> bind /soc/ethernet@5800a000 eth_eqos
+STM32MP> dhcp
+prefetch abort
+pc : [<4310801c>]          lr : [<ffc8f4ad>]
+reloc pc : [<035ba01c>]    lr : [<c01414ad>]
+sp : fdaf19b0  ip : ffcea83c     fp : 00000001
+r10: ffcfd4a0  r9 : fdaffed0     r8 : 00000000
+r7 : ffcff304  r6 : fdc63220     r5 : 00000000  r4 : fdc5b108
+r3 : 43108020  r2 : 00003d39     r1 : ffcea544  r0 : fdc63220
+Flags: nZCv  IRQs off  FIQs off  Mode SVC_32
+Code: data abort
+pc : [<ffc4f9c0>]          lr : [<ffc4f9ad>]
+reloc pc : [<c01019c0>]    lr : [<c01019ad>]
+sp : fdaf18b8  ip : 00000000     fp : 00000001
+r10: ffcd69b2  r9 : fdaffed0     r8 : ffcd69aa
+r7 : 00000000  r6 : 00000008     r5 : 4310801c  r4 : fffffffc
+r3 : 00000001  r2 : 00000028     r1 : 00000000  r0 : 00000006
+Flags: NzCv  IRQs on  FIQs on  Mode SVC_32 (T)
+Code: 2f00 d1e9 2c00 dce9 (f855) 2024
+Resetting CPU ...
+
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+Cc: Jean-Jacques Hiblot <jjhiblot@ti.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+---
+
+(no changes since v3)
 
 Changes in v3:
   - fix typo
-  - fix typo
-  - fix typo
-  - add bind/unbind parameters description and how to find them
 
 Changes in v2:
   - add a bind command test
   - add bind command documentation in doc/driver/model/bind.rst
   - simplify patch 1 by using lists_bind_fdt()
 
-Patrice Chotard (5):
-  cmd: bind: allow to bind driver with driver data
-  sandbox: phy: add driver_data for bind test cmd
-  sandbox: dts: Add compatible string for bind-test node
-  test/py: Update test_bind
-  doc: add bind/unbind command documentation
+ cmd/bind.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
- arch/sandbox/dts/test.dts  |  1 +
- cmd/bind.c                 |  5 ++--
- doc/driver-model/bind.rst  | 49 ++++++++++++++++++++++++++++++++++++++
- doc/driver-model/index.rst |  1 +
- drivers/phy/sandbox-phy.c  | 18 +++++++++++++-
- test/dm/phy.c              |  2 +-
- test/py/tests/test_bind.py | 18 +++++++-------
- 7 files changed, 81 insertions(+), 13 deletions(-)
- create mode 100644 doc/driver-model/bind.rst
-
+diff --git a/cmd/bind.c b/cmd/bind.c
+index 068b1399ab..af2f22cc4c 100644
+--- a/cmd/bind.c
++++ b/cmd/bind.c
+@@ -8,6 +8,7 @@
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
++#include <dm/root.h>
+ #include <dm/uclass-internal.h>
+ 
+ static int bind_by_class_index(const char *uclass, int index,
+@@ -151,8 +152,8 @@ static int bind_by_node_path(const char *path, const char *drv_name)
+ 	}
+ 
+ 	ofnode = ofnode_path(path);
+-	ret = device_bind_with_driver_data(parent, drv, ofnode_get_name(ofnode),
+-					   0, ofnode, &dev);
++	ret = lists_bind_fdt(parent, ofnode, &dev, false);
++
+ 	if (!dev || ret) {
+ 		printf("Unable to bind. err:%d\n", ret);
+ 		return ret;
 -- 
 2.17.1
 

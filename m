@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 481F42306FB
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:51:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F50E2306FC
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:51:51 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1109AC36B27
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:51:50 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 47753C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:51:51 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D4D08C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9B97C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue, 28 Jul 2020 09:51:48 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06S9oNFa005913; Tue, 28 Jul 2020 11:51:45 +0200
+ 06S9oNFb005913; Tue, 28 Jul 2020 11:51:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=P0w0rXNgnmDfwIYljnX646tRCaDd//h41GAQgi9X8UM=;
- b=iEPsJpUAXuB4X+K/zBAW3iynYUWDjyPqc4k9298PQOgPejTDi+g3j2knh1p4dbWtAp3G
- t0VouB3Ht+2zBZ9ZaNsnCtRbN4/Elw0CMVdPPjPqlPV5zYup7Ii/tKnTzD5cy4m6Y2Gn
- 6K8n9gbzlrX/queKFoo6f8Zp/o8okezqPzeEoNfyI/3eY1Wo9Gqfuf2HZGfgr+SeDwjH
- 2+3fW5eZdhKTF8O0MReG6ulm+UcSFBd1BoqqDlz1239tYztvbq5R2WcOqtpzLxv+qU07
- AWWVGFiOEgL97fQiwQziIIjpfnikoktOl5hIN17j5P+g/QeWr5Fi2Tv25uffSvzOJ36J 0w== 
+ bh=grVASiqTslVmoyvNE7cUQ69Jk1KSCDpDlkRlnomTjII=;
+ b=1jEICzQTx6yPnRFVVnFzL7RdcOiSdJ20bGazVXWYbW30gAySOMmDqYi8+B9lV2DBPFCP
+ NjRQSy72xkELTizgURi/jBFyaK1ByL2CoGNlouzIMtEQT4x+jQ1+wqSZidtnIwtCyr8i
+ utIIjbHbqmSXlMFyXTV5+sDiZnAJAel30JDtqMX9N513FTH0R8ozLc2TOE6xcZG2Z8KS
+ ZwcNAUpbwl8vKHy23qGrVjvtOnYbaPiUUN2m32FPI5xKpv3EMnMWuVNJQjwVKchZcHgq
+ 4WXJhniuKaOX0UBYJShlkm/iJTxHcfbvRCbQPOD+xZPj32pT0dnw0nzP7i/xwSnXBqH3 GQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32ga71wkh8-1
+ by mx07-00178001.pphosted.com with ESMTP id 32ga71wkha-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 28 Jul 2020 11:51:45 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AD0E4100034;
- Tue, 28 Jul 2020 11:51:44 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8091310002A;
+ Tue, 28 Jul 2020 11:51:45 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A0D9E2A70DB;
- Tue, 28 Jul 2020 11:51:44 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 76C672A70DA;
+ Tue, 28 Jul 2020 11:51:45 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
  Tue, 28 Jul 2020 11:51:44 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jul 2020 11:51:25 +0200
-Message-ID: <20200728095128.2363-13-patrick.delaunay@st.com>
+Date: Tue, 28 Jul 2020 11:51:26 +0200
+Message-ID: <20200728095128.2363-14-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200728095128.2363-1-patrick.delaunay@st.com>
 References: <20200728095128.2363-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-07-28_07:2020-07-28,
@@ -57,8 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
  Wolfgang Denk <wd@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v4 12/14] env: ext4: introduce new function
-	env_ext4_save_buffer
+Subject: [Uboot-stm32] [PATCH v4 13/14] env: ext4: add support of command
+	env erase
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,79 +75,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Split the function env_ext4_save to prepare the erase support.
+Add support of opts erase for env in ext4,
+this opts is used by command 'env erase'.
+
+This command only fill the env file (CONFIG_ENV_EXT4_FILE)
+with 0, the CRC and the saved environment becomes invalid.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- env/ext4.c | 28 ++++++++++++++++++++--------
- 1 file changed, 20 insertions(+), 8 deletions(-)
+Changes in v2:
+- use CONFIG_IS_ENABLED to set .erase (same as .save)
+
+ env/ext4.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
 diff --git a/env/ext4.c b/env/ext4.c
-index ac9f126bec..0a10a5e050 100644
+index 0a10a5e050..cc36504154 100644
 --- a/env/ext4.c
 +++ b/env/ext4.c
-@@ -44,9 +44,8 @@ __weak const char *env_ext4_get_dev_part(void)
- 	return (const char *)CONFIG_ENV_EXT4_DEVICE_AND_PART;
+@@ -99,6 +99,23 @@ static int env_ext4_save(void)
+ 	return 0;
  }
  
--static int env_ext4_save(void)
-+static int env_ext4_save_buffer(env_t *env_new)
- {
--	env_t	env_new;
- 	struct blk_desc *dev_desc = NULL;
- 	struct disk_partition info;
- 	int dev, part;
-@@ -54,10 +53,6 @@ static int env_ext4_save(void)
- 	const char *ifname = env_ext4_get_intf();
- 	const char *dev_and_part = env_ext4_get_dev_part();
- 
--	err = env_export(&env_new);
--	if (err)
--		return err;
--
- 	part = blk_get_device_part_str(ifname, dev_and_part,
- 				       &dev_desc, &info, 1);
- 	if (part < 0)
-@@ -72,7 +67,7 @@ static int env_ext4_save(void)
- 		return 1;
- 	}
- 
--	err = ext4fs_write(CONFIG_ENV_EXT4_FILE, (void *)&env_new,
-+	err = ext4fs_write(CONFIG_ENV_EXT4_FILE, (void *)env_new,
- 			   sizeof(env_t), FILETYPE_REG);
- 	ext4fs_close();
- 
-@@ -81,9 +76,26 @@ static int env_ext4_save(void)
- 			CONFIG_ENV_EXT4_FILE, ifname, dev, part);
- 		return 1;
- 	}
--	gd->env_valid = ENV_VALID;
- 
-+	return 0;
-+}
-+
-+static int env_ext4_save(void)
++static int env_ext4_erase(void)
 +{
 +	env_t env_new;
 +	int err;
 +
-+	err = env_export(&env_new);
-+	if (err)
-+		return err;
++	memset(&env_new, 0, sizeof(env_t));
 +
 +	err = env_ext4_save_buffer(&env_new);
 +	if (err)
 +		return err;
 +
-+	gd->env_valid = ENV_VALID;
- 	puts("done\n");
++	gd->env_valid = ENV_INVALID;
++	puts("done\n");
 +
- 	return 0;
- }
- 
++	return 0;
++}
++
+ static int env_ext4_load(void)
+ {
+ 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, CONFIG_ENV_SIZE);
+@@ -156,4 +173,6 @@ U_BOOT_ENV_LOCATION(ext4) = {
+ 	ENV_NAME("EXT4")
+ 	.load		= env_ext4_load,
+ 	.save		= ENV_SAVE_PTR(env_ext4_save),
++	.erase		= CONFIG_IS_ENABLED(CMD_ERASEENV) ? env_ext4_erase :
++							    NULL,
+ };
 -- 
 2.17.1
 

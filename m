@@ -2,63 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 994252306FF
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 11:51:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EBD4230B71
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 15:27:31 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F38EC36B2E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 09:51:51 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5FED3C36B25
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Jul 2020 13:27:31 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E2782C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3A351C36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Jul 2020 09:51:50 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Tue, 28 Jul 2020 13:27:28 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06S9nfbY000653; Tue, 28 Jul 2020 11:51:46 +0200
+ 06SDRB6c024766; Tue, 28 Jul 2020 15:27:26 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=9WTrP52d1AY/RnoCcFCrjuuqkqWx7r4C9fvr8FFoti8=;
- b=eFvj5r7ruEnYSalib2smLM2UJfpdd+sQ9J0pD+f/k+vQBCHJS8TxSpJbBOXwfA/+jUrX
- X5dqwySFr3I5pHPyryffs+JDkwruF/rD+KL6qrFdC/m+0On0QFG9lUMZjD8phK9qUo0/
- v8Eu+WjINBPEfpdY463IiUiNoHdpor6iOnlmfHJXb3X3jNbTIx4+7lWR24rS4LG0kShQ
- RaGturH1GWs44mpN/dDT50p3JV2YG3+tyCUFHfHi9GNVlYDyGStLMpMC3gREzGY5TH9g
- iC7OhkDRadiWZNPeP2SG0YiPmIj/HTRgaCzq/AQrEUG6c8hIyvhu6r1eh+9UXoyNHXI9 mQ== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=G2OyDf8rz5bPwZd/KRTNQUs+6CYjUZ9/N0KvRz6/tJg=;
+ b=yYJqSUpnCa3PeGBXu1brFsnEO6BlKwyaKLHfe6z9ZGxo3ugBCOlIwDloo2GQPAvZ6TTW
+ Fx37I/bcgnf/hbWQHM4ln+dqYoDyrQ/5onh2bc006cSm1pwcJWVsTFOqmpvJjX3qLtEk
+ rGcSecwfPhYlSZTLoUHZ1XOwSUyCWURl0esz9hyPWW4NDEqzsVKUI/ChdlW9LFtCe6cZ
+ XImnjTp9eQH4ZlFQoZnf8R+Z6D7oIi4wDWlD723tmRVf4F/oU6tFxNGtozpjO4KoyVJc
+ XCNNhDBDJDG0/O/QrEmCSil4xD5dABpijusdG+bj4By3dCzNMP4G2IbooVpcHj3BsrdZ Mw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32gagv5ht9-1
+ by mx07-00178001.pphosted.com with ESMTP id 32g9v9eps8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 28 Jul 2020 11:51:46 +0200
+ Tue, 28 Jul 2020 15:27:26 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 55CD210002A;
- Tue, 28 Jul 2020 11:51:46 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4AB652A70DA;
- Tue, 28 Jul 2020 11:51:46 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Tue, 28 Jul 2020 11:51:45 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 28 Jul 2020 11:51:27 +0200
-Message-ID: <20200728095128.2363-15-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200728095128.2363-1-patrick.delaunay@st.com>
-References: <20200728095128.2363-1-patrick.delaunay@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0C55310002A;
+ Tue, 28 Jul 2020 15:27:25 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EB3DE2B8A00;
+ Tue, 28 Jul 2020 15:27:25 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Jul
+ 2020 15:27:25 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Tue, 28 Jul 2020 15:27:25 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [Uboot-stm32] [PATCH] board: update test on misc_read result in
+ board_late_init
+Thread-Index: AQHWZOLVlgDC3zfDVEODBnrjnoLr4w==
+Date: Tue, 28 Jul 2020 13:27:25 +0000
+Message-ID: <19b8f8a0-6bd6-f9a6-70f9-435fd8de492f@st.com>
+References: <20200703174457.1.Ibd755e6f03fcd167f10d9a9bfe98d2b928493e09@changeid>
+In-Reply-To: <20200703174457.1.Ibd755e6f03fcd167f10d9a9bfe98d2b928493e09@changeid>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.50]
+Content-ID: <09736CB1AE058C4991961B9CBE7A72D1@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
- (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-28_07:2020-07-28,
+ definitions=2020-07-28_11:2020-07-28,
  2020-07-28 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
- Mario Six <mario.six@gdsys.cc>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v4 14/14] test: sandbox: add test for erase
-	command
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] board: update test on misc_read result in
+ board_late_init
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,102 +87,39 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add test for the erase command tested on ENV in EXT4.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+On 7/3/20 5:45 PM, Patrick Delaunay wrote:
+> Update management of misc_read, which now return length of data
+> after the commit 8729b1ae2cbd ("misc: Update read() and write()
+> methods to return bytes xfered")
+>
+> Fixes: 8b8b3d6b55b9 ("stm32mp1: board: add environment variable for board id and board rev")
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+>  board/st/stm32mp1/stm32mp1.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+> index 4553329b25..b51165a636 100644
+> --- a/board/st/stm32mp1/stm32mp1.c
+> +++ b/board/st/stm32mp1/stm32mp1.c
+> @@ -732,7 +732,7 @@ int board_late_init(void)
+>  	if (!ret)
+>  		ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_BOARD),
+>  				&otp, sizeof(otp));
+> -	if (!ret && otp) {
+> +	if (ret > 0 && otp) {
+>  		snprintf(buf, sizeof(buf), "0x%04x", otp >> 16);
+>  		env_set("board_id", buf);
+>  
 
----
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
-(no changes since v3)
+Thanks
 
-Changes in v3:
-- replace sandbox command by generic command 'env load' in test_env
-
- configs/sandbox64_defconfig        |  1 +
- configs/sandbox_defconfig          |  1 +
- configs/sandbox_flattree_defconfig |  1 +
- configs/sandbox_spl_defconfig      |  1 +
- test/py/tests/test_env.py          | 16 ++++++++++++++++
- 5 files changed, 20 insertions(+)
-
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index d19c6dfba9..d4cef46e13 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -27,6 +27,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_EFI=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 04efc9b50b..90aac2d69b 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -31,6 +31,7 @@ CONFIG_CMD_ABOOTIMG=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_EFI=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 60d065b8c5..195ce57d81 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -24,6 +24,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_NVEDIT_INFO=y
- CONFIG_CMD_NVEDIT_LOAD=y
- CONFIG_CMD_NVEDIT_SELECT=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 40605626e5..fe7b182b89 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMD_BOOTEFI_HELLO=y
- # CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GREPENV=y
-+CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_ENV_CALLBACK=y
- CONFIG_CMD_ENV_FLAGS=y
- CONFIG_CMD_NVEDIT_INFO=y
-diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
-index 70913c8d9a..86ec1b36d3 100644
---- a/test/py/tests/test_env.py
-+++ b/test/py/tests/test_env.py
-@@ -475,6 +475,22 @@ def test_env_ext4(state_test_env):
-         response = c.run_command('echo $?')
-         assert response == "0"
- 
-+        response = c.run_command('env erase')
-+        assert 'OK' in response
-+
-+        response = c.run_command('env load')
-+        assert 'Loading Environment from EXT4... ' in response
-+        assert 'bad CRC, using default environment' in response
-+
-+        response = c.run_command('env info')
-+        assert 'env_valid = invalid' in response
-+        assert 'env_ready = true' in response
-+        assert 'env_use_default = true' in response
-+
-+        response = c.run_command('env info -p -d')
-+        assert 'Default environment is used' in response
-+        assert 'Environment can be persisted' in response
-+
-         # restore env location: NOWHERE (prio 0 in sandbox)
-         response = c.run_command('env select nowhere')
-         assert 'Select Environment on nowhere: OK' in response
--- 
-2.17.1
-
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

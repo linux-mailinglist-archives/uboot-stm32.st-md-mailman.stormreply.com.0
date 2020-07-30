@@ -2,59 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01973231D51
-	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jul 2020 13:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37ABD23314F
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jul 2020 13:57:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9BA8C36B25
-	for <lists+uboot-stm32@lfdr.de>; Wed, 29 Jul 2020 11:25:03 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DD706C36B33
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jul 2020 11:57:41 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D06C0C36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C3F66C36B25
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 29 Jul 2020 11:25:01 +0000 (UTC)
+ Thu, 30 Jul 2020 11:57:40 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 06TBMEOl032194; Wed, 29 Jul 2020 13:24:59 +0200
+ 06UBqOdw013197; Thu, 30 Jul 2020 13:57:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=EWUnOQTpwyCwtZRZOHNkvAqqEoX7gDTbsZXIj404c8s=;
- b=kl4eYSyTliNGwKhmH6K7lavC+ZMUTDNE7ytJl2ERnk7PONkQg4xNA/k6OLCoMBZJ/Mdq
- q3/QaS8dzeZtLiiF9Hhs3XFRpUkJYLox85d2ucEb1V0xRfQ3/s1tQmkIcfXsY0c1bDYn
- TUJfUB6H542GWhkXShiO3I/EtoUyHxSv0dnB72O/Ibbu77p0Mmxt9Sh4bU2i6fA+GtNO
- i3resAMBH4gEBgpQ7Lr0C0Nn8m8P3Ft5d+h46N5zDWQYYdXoALeKpWSfjkKjzuIy892X
- DH2ow1h2WcyG77Ik2Vl4jSS+h9UhPI/OHhpvQoRaWrYfMuGuw6YbJ5onV0Wu9Dsr6+Sn 7g== 
+ bh=qkofBpnA1Qz8vEl287O7WfNvD8aZRA1RZYv95OiS1PM=;
+ b=q5w6JUsM7BRgUEHYbT+pniV903a06HpLdtvUFPjak4u2VwRRjc4JmRRtpn7vOKRE6372
+ htwiwVcftd6KbOUHH9JnIQngmzIBd5YWHIenZLcEoGyzctvAuX57ZbKwoQVspWdDaZ64
+ NBPzq/N7KYvp0rmYujrpouwSI6jNVWgixKLcLYXZJtCaCRo5kvTX7suWTvL+vh7KGafU
+ 5cQzVlDJFM1MJlNwMgq0LMvzMKQEBPS34wU62FrHVY7KPNGCGwOXEhxY7iJ7yLa0lUDM
+ qYRZKyQOeSjSjW0oJCE3kmkjSI7FqGns1ORk5/11tdbBxvPxFOEL27Pmx0yAEdRrtQ7O Dg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32gbmgbg50-1
+ by mx07-00178001.pphosted.com with ESMTP id 32gbmggvbd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 29 Jul 2020 13:24:59 +0200
+ Thu, 30 Jul 2020 13:57:38 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1270A10002A;
- Wed, 29 Jul 2020 13:24:59 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B39E010002A;
+ Thu, 30 Jul 2020 13:57:37 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F09C2222CB6;
- Wed, 29 Jul 2020 13:24:58 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 94CF82AF822;
+ Thu, 30 Jul 2020 13:57:37 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 29 Jul 2020 13:24:58 +0200
+ Thu, 30 Jul 2020 13:57:37 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 29 Jul 2020 13:24:52 +0200
-Message-ID: <20200729112452.15812-1-patrick.delaunay@st.com>
+Date: Thu, 30 Jul 2020 13:57:34 +0200
+Message-ID: <20200730115735.2063-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG5NODE2.st.com (10.75.127.14) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-07-29_04:2020-07-29,
- 2020-07-29 signatures=0
+ definitions=2020-07-30_09:2020-07-30,
+ 2020-07-30 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] board: stm32mp1: use const for struct
-	node_info
+Subject: [Uboot-stm32] [PATCH] board: stm32mp1: remove board.c
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,28 +70,67 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use const for the variable nodes in ft_board_setup,
-this patch follow fdt_fixup_mtdparts prototype and no more use stack.
+Remove the file board/st/stm32mp1/board.c which is not more
+compiled since commit 156732cc8939 ("board: stm32mp1: move the
+function board_debug_uart_init in spl.c")
 
+Fixes: 156732cc8939 ("board: stm32mp1: move the function board_debug_uart_init in spl.c")
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
+Issue when initial patch [1] was applied:
 
- board/st/stm32mp1/stm32mp1.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/board/st/stm32mp1/board.c b/board/st/stm32mp1/board.c
+deleted file mode 100644
 
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index 1d274c3157..68c4a221da 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -847,7 +847,7 @@ int mmc_get_env_dev(void)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
- #ifdef CONFIG_FDT_FIXUP_PARTITIONS
--	struct node_info nodes[] = {
-+	static const struct node_info nodes[] = {
- 		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_NOR,  },
- 		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_SPINAND},
- 		{ "st,stm32mp15-fmc2",		MTD_DEV_TYPE_NAND, },
+[1] http://patchwork.ozlabs.org/project/uboot/patch/20200525101949.15944-10-patrick.delaunay@st.com/
+
+
+ board/st/stm32mp1/board.c | 36 ------------------------------------
+ 1 file changed, 36 deletions(-)
+ delete mode 100644 board/st/stm32mp1/board.c
+
+diff --git a/board/st/stm32mp1/board.c b/board/st/stm32mp1/board.c
+deleted file mode 100644
+index 00c61c2886..0000000000
+--- a/board/st/stm32mp1/board.c
++++ /dev/null
+@@ -1,36 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+-/*
+- * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+- */
+-
+-#include <common.h>
+-#include <asm/io.h>
+-#include <linux/bitops.h>
+-#include <linux/delay.h>
+-
+-#ifdef CONFIG_DEBUG_UART_BOARD_INIT
+-void board_debug_uart_init(void)
+-{
+-#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
+-
+-#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
+-#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
+-
+-	/* UART4 clock enable */
+-	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
+-
+-#define GPIOG_BASE 0x50008000
+-	/* GPIOG clock enable */
+-	writel(BIT(6), RCC_MP_AHB4ENSETR);
+-	/* GPIO configuration for EVAL board
+-	 * => Uart4 TX = G11
+-	 */
+-	writel(0xffbfffff, GPIOG_BASE + 0x00);
+-	writel(0x00006000, GPIOG_BASE + 0x24);
+-#else
+-
+-#error("CONFIG_DEBUG_UART_BASE: not supported value")
+-
+-#endif
+-}
+-#endif
 -- 
 2.17.1
 

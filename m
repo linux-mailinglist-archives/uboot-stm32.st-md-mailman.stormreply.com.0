@@ -2,76 +2,82 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8368C23A06D
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Aug 2020 09:38:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29AD123A9B1
+	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Aug 2020 17:43:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 438BBC36B38
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Aug 2020 07:38:01 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D65AEC36B38
+	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Aug 2020 15:43:23 +0000 (UTC)
+Received: from avon.wwwdotorg.org (avon.wwwdotorg.org [104.237.132.123])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 74FA4C36B32
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4B626C36B32
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Aug 2020 07:37:59 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0737aPwl023883; Mon, 3 Aug 2020 09:37:52 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=uSnkhKtmLqvI9/UN8IVWrTJokmX80c/0tCFdwp5IOQQ=;
- b=OEjt2fOqExu0alw4D+WLfrAPsNdPg2sDpEA2e+CjcfhOlxLCJRIcAdEz4j+ZR5x/Q+XO
- 00TMbA9XHS0y0rshoR6gzdbzRtnEsSLh2ltsGhdJQUJzTHjnUwOCQqj1jo/CfSzCknBC
- 57EYPZHybv+8Gyxgh+drJB8ud6jaGtiGcCefrIzVQ/Ysh5i4ZoJruje5xyQPwGZEi6P1
- /ndWEHchvWSIN2MT82s7ExG0pnLpsP6kjH3J9wVgLfsbfjzfHmoR65H7h6FqIp5hP/0v
- SbB6ste27BM6pdY+B6L3cToV5gMb0bKezu30T3a3T5L4qKFCccj5Y6BJC3SiFzWchKzj Dg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32n6sawcb1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Aug 2020 09:37:52 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 05EDC10002A;
- Mon,  3 Aug 2020 09:37:51 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D352C221F05;
- Mon,  3 Aug 2020 09:37:51 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
- (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 3 Aug
- 2020 09:37:51 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Mon, 3 Aug 2020 09:37:51 +0200
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [RESEND][PATCH] usb: host: dwc3-sti-glue: Fix ofnode_valid()
- parameter
-Thread-Index: AQHWZw6FFrgWD9lwrkKD9z+eZinQCakh1auAgAQMrIA=
-Date: Mon, 3 Aug 2020 07:37:51 +0000
-Message-ID: <27b24d37-80c8-75cc-faa8-6b62afef44fc@st.com>
-References: <20200731074505.25642-1-patrice.chotard@st.com>
- <7377ea66-4f59-ae61-b513-43f13c53a65c@denx.de>
-In-Reply-To: <7377ea66-4f59-ae61-b513-43f13c53a65c@denx.de>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Mon,  3 Aug 2020 15:43:22 +0000 (UTC)
+Received: from [10.129.98.13] (unknown [216.228.117.191])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by avon.wwwdotorg.org (Postfix) with ESMTPSA id F20381C04BB;
+ Mon,  3 Aug 2020 09:43:19 -0600 (MDT)
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.102.3 at avon.wwwdotorg.org
+To: Patrick Delaunay <patrick.delaunay@st.com>
+References: <20200728095128.2363-1-patrick.delaunay@st.com>
+ <20200728095128.2363-12-patrick.delaunay@st.com>
+From: Stephen Warren <swarren@wwwdotorg.org>
+Autocrypt: addr=swarren@wwwdotorg.org; prefer-encrypt=mutual; keydata=
+ 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 YdVt
+Message-ID: <ce21c47a-e485-71f4-0a6a-1d66a9a166f8@wwwdotorg.org>
+Date: Mon, 3 Aug 2020 09:43:18 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.44]
-Content-ID: <40E561C3F4E2DF4884453A09E625399E@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-08-03_07:2020-07-31,
- 2020-08-03 signatures=0
+In-Reply-To: <20200728095128.2363-12-patrick.delaunay@st.com>
+Content-Language: en-GB
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [RESEND][PATCH] usb: host: dwc3-sti-glue: Fix
- ofnode_valid() parameter
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>
+Subject: Re: [Uboot-stm32] [PATCH v4 11/14] test: environment in ext4
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,19 +94,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 7/28/20 3:51 AM, Patrick Delaunay wrote:
+> Add basic test to persistent environment in ext4:
+> save and load in host ext4 file 'uboot.env'.
+> 
+> On first execution an empty EXT4 file system is created in
+> persistent data dir: env.ext4.img.
 
-On 7/31/20 7:47 PM, Marek Vasut wrote:
-> On 7/31/20 9:45 AM, Patrice Chotard wrote:
->> node varaible is used as iterator into ofnode_for_each_subnode()
->> loop, when exiting of it, node is no more a valid ofnode.
->> Use dwc3_node instead as parameter of ofnode_valid()
->>
->> Fixes: ac28e59a574d ("usb: Migrate to support live DT for some driver")
-> Looks OK to me, feel free to pick it via ST tree.
+> diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
 
-Ok thanks
+> +def mk_env_ext4(state_test_env):
 
-Patrice
+> +            u_boot_utils.run_and_log(c, 'mkfs.ext4 -O ^metadata_csum %s' % persistent)
+
+Is "-O ^metadata_csum" necessary? The mkfs.ext4 in Ubuntu 16.04 doesn't
+support that option, which causes this command to fail.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

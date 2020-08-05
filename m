@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBF0223D2FD
-	for <lists+uboot-stm32@lfdr.de>; Wed,  5 Aug 2020 22:27:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E24BF23D2FE
+	for <lists+uboot-stm32@lfdr.de>; Wed,  5 Aug 2020 22:27:25 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9E3C6C36B38
-	for <lists+uboot-stm32@lfdr.de>; Wed,  5 Aug 2020 20:27:00 +0000 (UTC)
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
- [209.85.219.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9342C36B38
+	for <lists+uboot-stm32@lfdr.de>; Wed,  5 Aug 2020 20:27:25 +0000 (UTC)
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+ [209.85.222.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16D5AC36B0C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 419ACC36B0C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  5 Aug 2020 20:26:56 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id a19so15390016qvy.3
+ Wed,  5 Aug 2020 20:27:23 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id m7so10801722qki.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 05 Aug 2020 13:26:56 -0700 (PDT)
+ Wed, 05 Aug 2020 13:27:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=cK8wCJzLjdU3fc883fKw885Tg8MqW+Lk21Qa2ilSc5Y=;
- b=bljAmjPq2FwerPRE/hQPIwWJ/O8nTjQIa6qXtGnKlyaflbw9GeQj+331lvw0NVc35Z
- DCefCzIz/wtT7Kk4XZnK/ITZDtzqqN+NLB5j9mMw8W7Y520KBLP9LmwPCorBeoilZWzM
- U+JDWONJ80TreWNqZcnbpneOZ0mcj5TcEu4X0=
+ bh=+m64ruE3rdxf0fEc2grv6jwTtHe2xGCt0Jv7pN4TEG0=;
+ b=EeBUJx9OvKtCZRM/7i8t3r+cr0hZaWKFIL9DiqvAkk+VpigBT/CFPoGRH84o2piRqp
+ jxWEuB8sL0wJ+1nEZQUcuEebtjYWhw5wA+CYLhiA0qv7MdYS3itD5X0ZVazB5VsDBVon
+ 1OZB8g7H0ECsYTY5mPkiVmpu63reBw/tMTyoI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=cK8wCJzLjdU3fc883fKw885Tg8MqW+Lk21Qa2ilSc5Y=;
- b=mOF3CnaMVVPBkHzVruQTRlyxlYj1lEm9XQ9l8A4hVM3DIfM3vs8yslNiRNvH0Oe6t1
- rExMuUyvZWTRFZhMaigO4pNMDXtESIxKEwrLot1aN38mXOcDAtDZrHfewrb++qbJi3M7
- KDcB886akTOY6uP5lBM2sk+CUkpzZTRmw8iZioeUNtcSqgra0rPvbYfzFqb2WUoA4hij
- YSoDFHRyLo0mxRAfsX52uEP8xOsWoQOKLIWnSR10K6WGpaGuaJVQ6/tnWjVrwwlwTqXh
- bXuoDOpJ0W+qLjEeZLdfh9ZJE1Z00+wWO5eNQ5VdQWsTOYHzRks49ubh5vWLsR8sl0gh
- auWg==
-X-Gm-Message-State: AOAM531sZzQXDqcAUxzkNNv+5IM7JaojhkTyXNYwqWe22OQUtNZUgYG3
- oWJNbdY6XX2k+g6RM62gR1mTnw==
-X-Google-Smtp-Source: ABdhPJwO84xzeBvLkrbd8BKknwVKOb5SCLtMEyfko+92YgVofrFwOzaVUEvsY4ICQHb4Lt/3dVcqQg==
-X-Received: by 2002:a0c:ffc6:: with SMTP id h6mr5610060qvv.251.1596659215808; 
- Wed, 05 Aug 2020 13:26:55 -0700 (PDT)
+ bh=+m64ruE3rdxf0fEc2grv6jwTtHe2xGCt0Jv7pN4TEG0=;
+ b=kp0TU4FkGkMWO9jrcqjAX33aBz4tLkeE4v06aIvQIEEBBY588YitKLyeRiprHf9twO
+ mnFxNtIo1wimm/Pwh1ytzDY8Turv+fa/PlleTVBepOEbNtn28357YV1klf5h9rxi5oMS
+ ojY0I7iPKBy2fbuUZXYVoOTEy3FnwPG5OZNrCtep0vy3zQCKAOjCFmTvIDJjmGvdcigg
+ y7IRQFmNypPSf5OIS5kOtD2bNSsR2/dK26jjqcKu1IPXE5tY5NrQkjjJ9nqfFRqd9tcx
+ 42VGQSgH8fywYQ+mHU3pXBZWY8/yeuc+r5Mfx0x3P66IkkGmfbRRr1jB5Z0Xa7Yv91h6
+ Gh7g==
+X-Gm-Message-State: AOAM530EcPo06mqyf90lpjnylDO7zmrWm8cti6/Uu156Bw9A6Gbru0uY
+ pXLOW/GRDbNVxv9B9S79rlYVaQ==
+X-Google-Smtp-Source: ABdhPJyIO57CkCJcE4aJ4J7Kx9I5Qn+hNt/xVKkyZB0XuxbUrIPkIGXZnJZjhHE5ej/dqiuwa39tDg==
+X-Received: by 2002:a37:6211:: with SMTP id w17mr5121759qkb.14.1596659242101; 
+ Wed, 05 Aug 2020 13:27:22 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8c61-3826-99f0-e3e6-2490.inf6.spectrum.com.
  [2606:a000:1401:8c61:3826:99f0:e3e6:2490])
- by smtp.gmail.com with ESMTPSA id p202sm2385596qke.97.2020.08.05.13.26.54
+ by smtp.gmail.com with ESMTPSA id w44sm3068327qtj.86.2020.08.05.13.27.20
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 05 Aug 2020 13:26:54 -0700 (PDT)
-Date: Wed, 5 Aug 2020 16:26:52 -0400
+ Wed, 05 Aug 2020 13:27:21 -0700 (PDT)
+Date: Wed, 5 Aug 2020 16:27:19 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20200805202652.GS6965@bill-the-cat>
-References: <20200608092719.10643-1-patrick.delaunay@st.com>
+Message-ID: <20200805202719.GX6965@bill-the-cat>
+References: <20200717142009.1.I33bddfcff61ece321e626b04e34f9b53d016d6f2@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20200608092719.10643-1-patrick.delaunay@st.com>
+In-Reply-To: <20200717142009.1.I33bddfcff61ece321e626b04e34f9b53d016d6f2@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH] net: dwc_eth_qos: add Kconfig option to
- select supported configuration
+ Jon Hunter <jonathanh@nvidia.com>
+Subject: Re: [Uboot-stm32] [PATCH] psci: put psci_method in .data section if
+ EFI_LOADER is not enabled
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,35 +71,37 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3043399337749621470=="
+Content-Type: multipart/mixed; boundary="===============5474651221216379767=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============3043399337749621470==
+--===============5474651221216379767==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="VDo88IHMZzDSr6Ba"
+	protocol="application/pgp-signature"; boundary="6gn/eZb/68GftVhn"
 Content-Disposition: inline
 
 
---VDo88IHMZzDSr6Ba
+--6gn/eZb/68GftVhn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 08, 2020 at 11:27:19AM +0200, Patrick Delaunay wrote:
+On Fri, Jul 17, 2020 at 02:20:15PM +0200, Patrick Delaunay wrote:
 
-> Add configuration flag to select the supported dwc driver configuration:
-> - CONFIG_DWC_ETH_QOS_TEGRA186
-> - CONFIG_DWC_ETH_QOS_IMX
-> - CONFIG_DWC_ETH_QOS_STM32
+> From: Yann Gautier <yann.gautier@st.com>
 >=20
-> See Linux driver ethernet/stmicro/stmmac and associated glue layers
-> for other configuration examples.
+> Move the variable psci_method in .data section when EFI is not
+> activated and the psci driver safely access it before relocation.
 >=20
-> This patch removes the not-selected compatibles and lets the linker remove
-> the unused functions to reduce the size of the driver.
+> Without this patch the variable is located in .bss section
+> and the psci probe requested before relocation corrupts the device
+> tree (probe is requested by board_f.c::print_resetinfo()).
 >=20
+> When EFI_LOADER is activated, this variable in already located in the
+> .data.efi_runtime section by __efi_runtime_data.
+>=20
+> Signed-off-by: Yann Gautier <yann.gautier@st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 
 Applied to u-boot/master, thanks!
@@ -107,27 +109,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---VDo88IHMZzDSr6Ba
+--6gn/eZb/68GftVhn
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8rFgYACgkQFHw5/5Y0
-tyzJMwv/WPJU3OmtgynV6FYTcu546CVejfXAOy1yb9UnMeqS3XZL2EUyjr0uI9va
-lGRtFxFX6dIfHV2zUpZToO+fKqqsvCB7AJcNFPODRBOSpFQ10ymYwPdH7ytLYRmZ
-69S+ezrtTU9CpJLSXZtr+yTaPK2CAIKLiODSnIvfsZOy7ThjDgicQiQ0oKRCFBFM
-pslCNzpAzd7leh6NZlbU4tViLmVDY9XjQPyrPH/gVQhq2VprRuCeuzJ2PxX+sUcN
-Xez3BKwrUHZmmZl/hTXzS88UFknSLFeP2yd718l1kxdqGdiSuhsHP775G+Ux7nga
-liPIUl9wPkCg95fXVJKz8PN7MXotb2NZLbWeOCDzpQiEJ3gGc6RelApqSRDYKVrf
-lM684I6FHezlOx9GWMt4eRlpDtkYtPO8mVXRYW9npniK3VkhCcJGFNPWjATjRN64
-DRQYkNV3OtSv7XgTc0Xw5TwM7G6JaqH8Tnm9fPPKxKHzi2Rz4GrejfKRGhvM8KA2
-Mwd9SXMm
-=j8ez
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl8rFicACgkQFHw5/5Y0
+tyxBMwv/UrnRK+DoPe4J6GYX1EJPivOChdvvPynNCRfmE7SoVB1gOQI+/IBzTJFn
+95iiIoEKjbNQzRmNr/21nhOzTZdQmc7sbwmOJwzlIjyyJpbcm33qHqshs1Rgw6pH
+UA2/RX2nshPOs+efMDFun3jogUCJcyuGMzMxDKlHIbMF/5RBzz//+ISkv/OYYttz
+aLbP83RSki4HDOwXcxq3c0AU0APo/fz3J8bWxyRLdQzrihM4yJWHlRw3oevlU9v+
+X7Xc2Lergie2jiQb8XZEItfjA7UyxZD7xGoByLD93NE7gY9s5DFWJW+BgL3i63OI
+oAvTuxAx/zCP4k7LaeTSv8sn2Sb5h06+Kq80UbAzXccqWmFnPelfq7LdiygyI1/j
+jtoTp+2FpJph6bdvoy2SnYWfYtZaO/UOMEOt5vWydT3uIeRRgxWy2VVsREhre9Zq
+3OYdqFe9OkBx65AmgbT4It6a8KSAvsCShT5GjkLumEBbJlGIQRjI4g+gpraZBBft
+02NHc4IO
+=ijs9
 -----END PGP SIGNATURE-----
 
---VDo88IHMZzDSr6Ba--
+--6gn/eZb/68GftVhn--
 
---===============3043399337749621470==
+--===============5474651221216379767==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -138,4 +140,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============3043399337749621470==--
+--===============5474651221216379767==--

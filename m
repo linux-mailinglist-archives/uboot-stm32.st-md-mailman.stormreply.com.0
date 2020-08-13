@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6118B243807
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 11:54:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2153243808
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 11:55:18 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2975CC36B24
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:54:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A7E29C36B24
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:55:18 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0E3D2C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8C42C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Aug 2020 09:54:44 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu, 13 Aug 2020 09:55:16 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 07D9q1OZ005647; Thu, 13 Aug 2020 11:54:41 +0200
+ 07D9qM60032210; Thu, 13 Aug 2020 11:55:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=epDMOq2ErmCshuPTaUD7N5aiF13B2kHHclLlLlJOqHY=;
- b=V3QK0vsRdiO0zZd8kb/PXsSJfV5uIagtzt2TKr0NxOCEqqFCNJk5U77eBxqyacW029cm
- 32NvktuvSSyn7yb1iue86SNzDITvFl0PFOAUpze1Cvbc38Qf9xouEFZK7N7zebxAx2cc
- lGtFeApusY/w8KnC+GVsaZVlvuYaDYyoMX8LhypN1lDEK9VBK3L3dQR+6bSB8K9YUdPp
- SX9FxN1ASc8G7B2aflSlW5sG2AXhgI04YMocKtg/0IoERjURy96+2noj3KJlTPEzFZcm
- Maxal/9CFEsmNFabWzb4hxGP8G+KyTpqHydQywWDfzOrisQQiz2/+cWUnRxz/92eeHxS yw== 
+ bh=kcs4vj5NQ9/Hglmx8WncG6FlypbSm9SaenNedvsEOHE=;
+ b=AnBbSZrU6/XYHOUUw7BANRIsyM1K4L/g+xvZzT9IIkP7FUSzc1mfyrCt3e7CppujQkkE
+ xPyH1oVptT0V7+SheqX/J40N3iagE/nEOdcp1kObWJl/QrUHxO9ycuAPAKGVv75eFCtt
+ IMhxM6P3Rqj2aSr98hxbKhho8+9Ux1qSEPXwKY618hu8AExV7w8kChI3x5nr81jDqdH1
+ LJ8CUrB6eLvtDQ4ufWwbL0BZ3TwTYreo/smwNdS46aOCK4YIgeiiILJCQEQyf+KeNAeF
+ P4ClkgnIqPKzVVZtptnwXSNTcvUoD+96tA5+HHMYeKQyMBwVaZW58FCMUZi48ucatN5G Zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32sm9rnydy-1
+ by mx07-00178001.pphosted.com with ESMTP id 32smf9n2k4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Aug 2020 11:54:41 +0200
+ Thu, 13 Aug 2020 11:55:12 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 799AF100034;
- Thu, 13 Aug 2020 11:54:40 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D8E52AB700;
- Thu, 13 Aug 2020 11:54:40 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
- 2020 11:54:39 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A168F10002A;
+ Thu, 13 Aug 2020 11:55:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 92C3D2AB701;
+ Thu, 13 Aug 2020 11:55:11 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
+ 2020 11:55:10 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 13 Aug 2020 11:54:39 +0200
+ 15.00.1473.003; Thu, 13 Aug 2020 11:55:10 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 10/11] arm: stm32mp: bsec: use IS_ENABLED
- to prevent ifdef
-Thread-Index: AQHWZ0dc6vN6TYhEJkCTe1UtPBnmrKk1lZ2AgAAp0YA=
-Date: Thu, 13 Aug 2020 09:54:39 +0000
-Message-ID: <39a26450-bd7c-7c6e-772d-4f03cdecc425@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH 11/11] arm: stm32mp: stm32prog: use
+ IS_ENABLED to prevent ifdef
+Thread-Index: AQHWZ0dc92pEjwy+vkevrKoXYLruYKk1la0AgAAp5gA=
+Date: Thu, 13 Aug 2020 09:55:10 +0000
+Message-ID: <a38b87ce-0df3-ad06-ddd3-92793c83c9e3@st.com>
 References: <20200731143152.8812-1-patrick.delaunay@st.com>
- <20200731143152.8812-10-patrick.delaunay@st.com>
- <b2ce5ceb-d532-890b-5844-69cc0ec63d3a@st.com>
-In-Reply-To: <b2ce5ceb-d532-890b-5844-69cc0ec63d3a@st.com>
+ <20200731143152.8812-11-patrick.delaunay@st.com>
+ <cf7bd4e1-702c-2143-e4f9-e0e73cf997c1@st.com>
+In-Reply-To: <cf7bd4e1-702c-2143-e4f9-e0e73cf997c1@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,16 +63,17 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
-Content-ID: <A38004EC86029D4E83F562F04453CB96@st.com>
+x-originating-ip: [10.75.127.51]
+Content-ID: <10DCE35C9AF3B840902C662643DFF269@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-08-13_06:2020-08-13,
  2020-08-13 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH 10/11] arm: stm32mp: bsec: use IS_ENABLED
- to prevent ifdef
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 11/11] arm: stm32mp: stm32prog: use
+ IS_ENABLED to prevent ifdef
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,17 +91,18 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 8/13/20 9:24 AM, Patrice CHOTARD wrote:
+On 8/13/20 9:25 AM, Patrice CHOTARD wrote:
 > Hi Patrick
 >
 > On 7/31/20 4:31 PM, Patrick Delaunay wrote:
->> Use IS_ENABLED to prevent ifdef in bsec driver.
+>> Use IS_ENABLED to prevent ifdef in stm32prog command.
 >>
 >> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 >> ---
 >>
->>  arch/arm/mach-stm32mp/bsec.c | 86 +++++++++++++++++++-----------------
->>  1 file changed, 46 insertions(+), 40 deletions(-)
+>>  .../cmd_stm32prog/cmd_stm32prog.c             |   5 +-
+>>  .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 100 ++++++++++--------
+>>  2 files changed, 58 insertions(+), 47 deletions(-)
 
 
 Applied on u-boot-stm/master
@@ -108,173 +110,292 @@ Applied on u-boot-stm/master
 Thanks
 
 >>
->> diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
->> index 0c56b440f5..a9b9bd0902 100644
->> --- a/arch/arm/mach-stm32mp/bsec.c
->> +++ b/arch/arm/mach-stm32mp/bsec.c
->> @@ -74,7 +74,6 @@ static bool bsec_read_lock(u32 address, u32 otp)
->>  	return !!(readl(address + bank) & bit);
->>  }
+>> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+>> index cbf0120adc..49dd25b28f 100644
+>> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+>> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+>> @@ -14,7 +14,6 @@ struct stm32prog_data *stm32prog_data;
 >>  
->> -#ifndef CONFIG_TFABOOT
->>  /**
->>   * bsec_check_error() - Check status of one otp
->>   * @base: base address of bsec IP
->> @@ -279,7 +278,6 @@ static int bsec_program_otp(long base, u32 val, u32 otp)
->>  
->>  	return ret;
->>  }
->> -#endif /* CONFIG_TFABOOT */
->>  
->>  /* BSEC MISC driver *******************************************************/
->>  struct stm32mp_bsec_platdata {
->> @@ -288,15 +286,17 @@ struct stm32mp_bsec_platdata {
->>  
->>  static int stm32mp_bsec_read_otp(struct udevice *dev, u32 *val, u32 otp)
+>>  static void enable_vidconsole(void)
 >>  {
->> -#ifdef CONFIG_TFABOOT
->> -	return stm32_smc(STM32_SMC_BSEC,
->> -			 STM32_SMC_READ_OTP,
->> -			 otp, 0, val);
->> -#else
->> -	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
->> +	struct stm32mp_bsec_platdata *plat;
->>  	u32 tmp_data = 0;
+>> -#ifdef CONFIG_DM_VIDEO
+>>  	char *stdname;
+>>  	char buf[64];
+>>  
+>> @@ -35,7 +34,6 @@ static void enable_vidconsole(void)
+>>  			snprintf(buf, sizeof(buf), "%s,vidconsole", stdname);
+>>  		env_set("stderr", buf);
+>>  	}
+>> -#endif
+>>  }
+>>  
+>>  static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+>> @@ -86,7 +84,8 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+>>  						   "script@1");
+>>  	}
+>>  
+>> -	enable_vidconsole();
+>> +	if (IS_ENABLED(CONFIG_DM_VIDEO))
+>> +		enable_vidconsole();
+>>  
+>>  	data = (struct stm32prog_data *)malloc(sizeof(*data));
+>>  
+>> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+>> index e4199dbaa5..ec3355d816 100644
+>> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+>> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+>> @@ -544,10 +544,8 @@ static int init_device(struct stm32prog_data *data,
+>>  {
+>>  	struct mmc *mmc = NULL;
+>>  	struct blk_desc *block_dev = NULL;
+>> -#ifdef CONFIG_MTD
+>>  	struct mtd_info *mtd = NULL;
+>>  	char mtd_id[16];
+>> -#endif
+>>  	int part_id;
 >>  	int ret;
+>>  	u64 first_addr = 0, last_addr = 0;
+>> @@ -557,8 +555,11 @@ static int init_device(struct stm32prog_data *data,
+>>  	const char *part_name;
 >>  
->> +	if (IS_ENABLED(CONFIG_TFABOOT))
->> +		return stm32_smc(STM32_SMC_BSEC,
->> +				 STM32_SMC_READ_OTP,
->> +				 otp, 0, val);
->> +
->> +	plat = dev_get_platdata(dev);
->> +
->>  	/* read current shadow value */
->>  	ret = bsec_read_shadow(plat->base, &tmp_data, otp);
->>  	if (ret)
->> @@ -313,21 +313,22 @@ static int stm32mp_bsec_read_otp(struct udevice *dev, u32 *val, u32 otp)
->>  
->>  	/* restore shadow value */
->>  	ret = bsec_write_shadow(plat->base, tmp_data, otp);
->> +
->>  	return ret;
+>>  	switch (dev->target) {
+>> -#ifdef CONFIG_MMC
+>>  	case STM32PROG_MMC:
+>> +		if (!IS_ENABLED(CONFIG_MMC)) {
+>> +			stm32prog_err("unknown device type = %d", dev->target);
+>> +			return -ENODEV;
+>> +		}
+>>  		mmc = find_mmc_device(dev->dev_id);
+>>  		if (!mmc || mmc_init(mmc)) {
+>>  			stm32prog_err("mmc device %d not found", dev->dev_id);
+>> @@ -589,11 +590,13 @@ static int init_device(struct stm32prog_data *data,
+>>  			 first_addr, last_addr);
+>>  		pr_debug(" full_update = %d\n", dev->full_update);
+>>  		break;
 >> -#endif
+>> -#ifdef CONFIG_MTD
+>>  	case STM32PROG_NOR:
+>>  	case STM32PROG_NAND:
+>>  	case STM32PROG_SPI_NAND:
+>> +		if (!IS_ENABLED(CONFIG_MTD)) {
+>> +			stm32prog_err("unknown device type = %d", dev->target);
+>> +			return -ENODEV;
+>> +		}
+>>  		get_mtd_by_target(mtd_id, dev->target, dev->dev_id);
+>>  		pr_debug("%s\n", mtd_id);
+>>  
+>> @@ -612,7 +615,6 @@ static int init_device(struct stm32prog_data *data,
+>>  			 first_addr, last_addr);
+>>  		dev->mtd = mtd;
+>>  		break;
+>> -#endif
+>>  	case STM32PROG_RAM:
+>>  		first_addr = gd->bd->bi_dram[0].start;
+>>  		last_addr = first_addr + gd->bd->bi_dram[0].size;
+>> @@ -744,8 +746,7 @@ static int init_device(struct stm32prog_data *data,
+>>  			part_found = true;
+>>  		}
+>>  
+>> -#ifdef CONFIG_MTD
+>> -		if (mtd) {
+>> +		if (IS_ENABLED(CONFIG_MTD) && mtd) {
+>>  			char mtd_part_id[32];
+>>  			struct part_info *mtd_part;
+>>  			struct mtd_device *mtd_dev;
+>> @@ -766,7 +767,7 @@ static int init_device(struct stm32prog_data *data,
+>>  			part_name = mtd_part->name;
+>>  			part_found = true;
+>>  		}
+>> -#endif
+>> +
+>>  		if (!part_found) {
+>>  			stm32prog_err("%s (0x%x): Invalid partition",
+>>  				      part->name, part->id);
+>> @@ -873,9 +874,8 @@ static int treat_partition_list(struct stm32prog_data *data)
+>>  	return 0;
 >>  }
 >>  
->>  static int stm32mp_bsec_read_shadow(struct udevice *dev, u32 *val, u32 otp)
+>> -static int create_partitions(struct stm32prog_data *data)
+>> +static int create_gpt_partitions(struct stm32prog_data *data)
 >>  {
->> -#ifdef CONFIG_TFABOOT
->> -	return stm32_smc(STM32_SMC_BSEC,
->> -			 STM32_SMC_READ_SHADOW,
->> -			 otp, 0, val);
->> -#else
->> -	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
->> +	struct stm32mp_bsec_platdata *plat;
->> +
->> +	if (IS_ENABLED(CONFIG_TFABOOT))
->> +		return stm32_smc(STM32_SMC_BSEC,
->> +				 STM32_SMC_READ_SHADOW,
->> +				 otp, 0, val);
->> +
->> +	plat = dev_get_platdata(dev);
->>  
->>  	return bsec_read_shadow(plat->base, val, otp);
+>> -#ifdef CONFIG_MMC
+>>  	int offset = 0;
+>>  	const int buflen = SZ_8K;
+>>  	char *buf;
+>> @@ -991,7 +991,6 @@ static int create_partitions(struct stm32prog_data *data)
+>>  	run_command("mtd list", 0);
+>>  #endif
+>>  	free(buf);
 >> -#endif
->>  }
->>  
->>  static int stm32mp_bsec_read_lock(struct udevice *dev, u32 *val, u32 otp)
->> @@ -342,33 +343,38 @@ static int stm32mp_bsec_read_lock(struct udevice *dev, u32 *val, u32 otp)
->>  
->>  static int stm32mp_bsec_write_otp(struct udevice *dev, u32 val, u32 otp)
->>  {
->> -#ifdef CONFIG_TFABOOT
->> -	return stm32_smc_exec(STM32_SMC_BSEC,
->> -			      STM32_SMC_PROG_OTP,
->> -			      otp, val);
->> -#else
->> -	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
->> +	struct stm32mp_bsec_platdata *plat;
->> +
->> +	if (IS_ENABLED(CONFIG_TFABOOT))
->> +		return stm32_smc_exec(STM32_SMC_BSEC,
->> +				      STM32_SMC_PROG_OTP,
->> +				      otp, val);
->> +
->> +	plat = dev_get_platdata(dev);
->>  
->>  	return bsec_program_otp(plat->base, val, otp);
->> -#endif
->> +
->>  }
->>  
->>  static int stm32mp_bsec_write_shadow(struct udevice *dev, u32 val, u32 otp)
->>  {
->> -#ifdef CONFIG_TFABOOT
->> -	return stm32_smc_exec(STM32_SMC_BSEC,
->> -			      STM32_SMC_WRITE_SHADOW,
->> -			      otp, val);
->> -#else
->> -	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
->> +	struct stm32mp_bsec_platdata *plat;
->> +
->> +	if (IS_ENABLED(CONFIG_TFABOOT))
->> +		return stm32_smc_exec(STM32_SMC_BSEC,
->> +				      STM32_SMC_WRITE_SHADOW,
->> +				      otp, val);
->> +
->> +	plat = dev_get_platdata(dev);
->>  
->>  	return bsec_write_shadow(plat->base, val, otp);
->> -#endif
->>  }
->>  
->>  static int stm32mp_bsec_write_lock(struct udevice *dev, u32 val, u32 otp)
->>  {
->> -#ifdef CONFIG_TFABOOT
->> +	if (!IS_ENABLED(CONFIG_TFABOOT))
->> +		return -ENOTSUPP;
->> +
->>  	if (val == 1)
->>  		return stm32_smc_exec(STM32_SMC_BSEC,
->>  				      STM32_SMC_WRLOCK_OTP,
->> @@ -377,9 +383,6 @@ static int stm32mp_bsec_write_lock(struct udevice *dev, u32 val, u32 otp)
->>  		return 0; /* nothing to do */
->>  
->>  	return -EINVAL;
->> -#else
->> -	return -ENOTSUPP;
->> -#endif
->>  }
->>  
->>  static int stm32mp_bsec_read(struct udevice *dev, int offset,
->> @@ -481,18 +484,21 @@ static int stm32mp_bsec_ofdata_to_platdata(struct udevice *dev)
->>  
->>  static int stm32mp_bsec_probe(struct udevice *dev)
->>  {
->> -#if !defined(CONFIG_TFABOOT) && !defined(CONFIG_SPL_BUILD)
->>  	int otp;
->> -	struct stm32mp_bsec_platdata *plat = dev_get_platdata(dev);
->> +	struct stm32mp_bsec_platdata *plat;
->>  
->>  	/*
->>  	 * update unlocked shadow for OTP cleared by the rom code
->>  	 * only executed in U-Boot proper when TF-A is not used
->>  	 */
->> -	for (otp = 57; otp <= BSEC_OTP_MAX_VALUE; otp++)
->> -		if (!bsec_read_SR_lock(plat->base, otp))
->> -			bsec_shadow_register(plat->base, otp);
->> -#endif
->> +
->> +	if (!IS_ENABLED(CONFIG_TFABOOT) && !IS_ENABLED(CONFIG_SPL_BUILD)) {
->> +		plat = dev_get_platdata(dev);
->> +
->> +		for (otp = 57; otp <= BSEC_OTP_MAX_VALUE; otp++)
->> +			if (!bsec_read_SR_lock(plat->base, otp))
->> +				bsec_shadow_register(plat->base, otp);
->> +	}
 >>  
 >>  	return 0;
 >>  }
+>> @@ -1070,28 +1069,35 @@ static int stm32prog_alt_add(struct stm32prog_data *data,
+>>  		offset += snprintf(buf + offset, ALT_BUF_LEN - offset,
+>>  				   " %d;", part->part_id);
+>>  	}
+>> +	ret = -ENODEV;
+>>  	switch (part->target) {
+>> -#ifdef CONFIG_MMC
+>>  	case STM32PROG_MMC:
+>> -		sprintf(dfustr, "mmc");
+>> -		sprintf(devstr, "%d", part->dev_id);
+>> +		if (IS_ENABLED(CONFIG_MMC)) {
+>> +			ret = 0;
+>> +			sprintf(dfustr, "mmc");
+>> +			sprintf(devstr, "%d", part->dev_id);
+>> +		}
+>>  		break;
+>> -#endif
+>> -#ifdef CONFIG_MTD
+>>  	case STM32PROG_NAND:
+>>  	case STM32PROG_NOR:
+>>  	case STM32PROG_SPI_NAND:
+>> -		sprintf(dfustr, "mtd");
+>> -		get_mtd_by_target(devstr, part->target, part->dev_id);
+>> +		if (IS_ENABLED(CONFIG_MTD)) {
+>> +			ret = 0;
+>> +			sprintf(dfustr, "mtd");
+>> +			get_mtd_by_target(devstr, part->target, part->dev_id);
+>> +		}
+>>  		break;
+>> -#endif
+>>  	case STM32PROG_RAM:
+>> +		ret = 0;
+>>  		sprintf(dfustr, "ram");
+>>  		sprintf(devstr, "0");
+>>  		break;
+>>  	default:
+>> +		break;
+>> +	}
+>> +	if (ret) {
+>>  		stm32prog_err("invalid target: %d", part->target);
+>> -		return -ENODEV;
+>> +		return ret;
+>>  	}
+>>  	pr_debug("dfu_alt_add(%s,%s,%s)\n", dfustr, devstr, buf);
+>>  	ret = dfu_alt_add(dfu, dfustr, devstr, buf);
+>> @@ -1213,13 +1219,14 @@ int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>>  int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>>  		       long *size)
+>>  {
+>> -#ifndef CONFIG_ARM_SMCCC
+>> -	stm32prog_err("OTP update not supported");
+>> -
+>> -	return -1;
+>> -#else
+>>  	int result = 0;
+>>  
+>> +	if (!IS_ENABLED(CONFIG_ARM_SMCCC)) {
+>> +		stm32prog_err("OTP update not supported");
+>> +
+>> +		return -1;
+>> +	}
+>> +
+>>  	pr_debug("%s: %x %lx\n", __func__, offset, *size);
+>>  	/* alway read for first packet */
+>>  	if (!offset) {
+>> @@ -1255,19 +1262,19 @@ end_otp_read:
+>>  	pr_debug("%s: result %i\n", __func__, result);
+>>  
+>>  	return result;
+>> -#endif
+>>  }
+>>  
+>>  int stm32prog_otp_start(struct stm32prog_data *data)
+>>  {
+>> -#ifndef CONFIG_ARM_SMCCC
+>> -	stm32prog_err("OTP update not supported");
+>> -
+>> -	return -1;
+>> -#else
+>>  	int result = 0;
+>>  	struct arm_smccc_res res;
+>>  
+>> +	if (!IS_ENABLED(CONFIG_ARM_SMCCC)) {
+>> +		stm32prog_err("OTP update not supported");
+>> +
+>> +		return -1;
+>> +	}
+>> +
+>>  	if (!data->otp_part) {
+>>  		stm32prog_err("start OTP without data");
+>>  		return -1;
+>> @@ -1302,7 +1309,6 @@ int stm32prog_otp_start(struct stm32prog_data *data)
+>>  	pr_debug("%s: result %i\n", __func__, result);
+>>  
+>>  	return result;
+>> -#endif
+>>  }
+>>  
+>>  int stm32prog_pmic_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>> @@ -1538,19 +1544,20 @@ static int part_delete(struct stm32prog_data *data,
+>>  		       struct stm32prog_part_t *part)
+>>  {
+>>  	int ret = 0;
+>> -#ifdef CONFIG_MMC
+>>  	unsigned long blks, blks_offset, blks_size;
+>>  	struct blk_desc *block_dev = NULL;
+>> - #endif
+>> -#ifdef CONFIG_MTD
+>>  	char cmdbuf[40];
+>>  	char devstr[10];
+>> -#endif
+>>  
+>>  	printf("Erasing %s ", part->name);
+>>  	switch (part->target) {
+>> -#ifdef CONFIG_MMC
+>>  	case STM32PROG_MMC:
+>> +		if (!IS_ENABLED(CONFIG_MMC)) {
+>> +			ret = -1;
+>> +			stm32prog_err("%s (0x%x): erase invalid",
+>> +				      part->name, part->id);
+>> +			break;
+>> +		}
+>>  		printf("on mmc %d: ", part->dev->dev_id);
+>>  		block_dev = mmc_get_blk_desc(part->dev->mmc);
+>>  		blks_offset = lldiv(part->addr, part->dev->mmc->read_bl_len);
+>> @@ -1576,11 +1583,15 @@ static int part_delete(struct stm32prog_data *data,
+>>  				      part->name, part->id);
+>>  		}
+>>  		break;
+>> -#endif
+>> -#ifdef CONFIG_MTD
+>>  	case STM32PROG_NOR:
+>>  	case STM32PROG_NAND:
+>>  	case STM32PROG_SPI_NAND:
+>> +		if (!IS_ENABLED(CONFIG_MTD)) {
+>> +			ret = -1;
+>> +			stm32prog_err("%s (0x%x): erase invalid",
+>> +				      part->name, part->id);
+>> +			break;
+>> +		}
+>>  		get_mtd_by_target(devstr, part->target, part->dev->dev_id);
+>>  		printf("on %s: ", devstr);
+>>  		sprintf(cmdbuf, "mtd erase %s 0x%llx 0x%llx",
+>> @@ -1591,7 +1602,6 @@ static int part_delete(struct stm32prog_data *data,
+>>  				      part->name, part->id, cmdbuf);
+>>  		}
+>>  		break;
+>> -#endif
+>>  	case STM32PROG_RAM:
+>>  		printf("on ram: ");
+>>  		memset((void *)(uintptr_t)part->addr, 0, (size_t)part->size);
+>> @@ -1639,9 +1649,11 @@ static void stm32prog_devices_init(struct stm32prog_data *data)
+>>  			goto error;
+>>  	}
+>>  
+>> -	ret = create_partitions(data);
+>> -	if (ret)
+>> -		goto error;
+>> +	if (IS_ENABLED(CONFIG_MMC)) {
+>> +		ret = create_gpt_partitions(data);
+>> +		if (ret)
+>> +			goto error;
+>> +	}
+>>  
+>>  	/* delete partition GPT or MTD */
+>>  	for (i = 0; i < data->part_nb; i++) {
 > Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 >
 > Thanks

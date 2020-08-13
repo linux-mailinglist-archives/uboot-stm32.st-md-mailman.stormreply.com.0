@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF01B243509
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:34:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9434824350A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:35:14 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9B094C36B24
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 07:34:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 61CB7C36B24
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 07:35:14 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 43681C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 41D44C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Aug 2020 07:34:30 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Thu, 13 Aug 2020 07:35:12 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 07D2NIRW022636; Thu, 13 Aug 2020 09:34:29 +0200
+ 07D7SKBO029496; Thu, 13 Aug 2020 09:35:11 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=LvQ8bQO9wsxHJFnd7wC0/cPhFuhTHaZq8UvZMqoUeWE=;
- b=yvCNvlTKGFFjBP8GSPrc74mpNGimyCiMXrxWVZUAdJ/YTUCzAPfJPPB4Y2wXT3wRO4Kq
- XyQzMkyn0ij5qY9O0O4JRt+VSz7zHaOZ/wxeoakO5kKDMqWC8sMWPj9gxz3drEV73idj
- 8o+NCpE8Z3fkhVsi7HxvkCKAPf407SowJiE5yYGVmAXL6ECEsK/r1XLK57POLIr2/nOi
- pX6v8mBNZXUVCQY5oKB6ecAOUSnEJCV2Qx2veKcKTyJyOUN5AoqIdvH5xdcUq8WSVUHH
- YJO9CxxV7+E831quxyaAgBXFu8j0WAVHZx5Wt+scIDM7SlmTaI78CJ3kFHnJrE5Na0QY jQ== 
+ bh=mGfDZVVByrWivvny7sgL2cFwIc7xHc3XvLMXfzdsjTg=;
+ b=deSTVDiQZVaJg6MbNAiOJKtz1PD5NNDZchqgAWnHTDgWnh+2KSzdlndeR2bJWxJE60QT
+ Lze744eDLNYo+bSkRlU1MpwW5AXFGEgeH/+e2VMWZOhvgAXn5Lk+M8map8RfNWG8xxd+
+ 2cA1Ii+/FDRSbMLTbJjG4eiSb5YfIvkwALXi5u2beSBYT9wZ8o1ydL1GsKrEp6oKx1DW
+ ov6iBAnmdPLR+D4EEWWTxwmlq5sqg4LPWRRMyzMQhw67K6Or6kBVTOOayt5czMx0D4Ic
+ suL+0T8zFEvjwg76kpJszxNApTyB0eLSmzjLlNlb+2HK0EHhY+MsDZG2bJTma5C2DwlA 6w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32uj532ydh-1
+ by mx07-00178001.pphosted.com with ESMTP id 32sm9rnbar-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Aug 2020 09:34:29 +0200
+ Thu, 13 Aug 2020 09:35:11 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F185E10002A;
- Thu, 13 Aug 2020 09:34:28 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E806421FE8E;
- Thu, 13 Aug 2020 09:34:28 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
- 2020 09:34:28 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0704410002A;
+ Thu, 13 Aug 2020 09:35:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F1CF121FE91;
+ Thu, 13 Aug 2020 09:35:10 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
+ 2020 09:35:10 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 13 Aug 2020 09:34:28 +0200
+ 15.00.1473.003; Thu, 13 Aug 2020 09:35:10 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Christophe KERELLO <christophe.kerello@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 09/11] board: stm32mp1: update fdt fixup partitions table
-Thread-Index: AQHWZw/oSHhgzhMM30qlb7Ubd70s1qk1mLMA
-Date: Thu, 13 Aug 2020 07:34:28 +0000
-Message-ID: <f2affd46-12b8-e149-2c07-11166eefe51a@st.com>
+Thread-Topic: [PATCH 10/11] configs: stm32mp: add CONFIG_STM32_FMC2_EBI
+Thread-Index: AQHWZw/pd488D6fQX0WF+bd0hnp3dKk1mOOA
+Date: Thu, 13 Aug 2020 07:35:10 +0000
+Message-ID: <ab4b0950-090e-741f-66d8-fc73b5e15012@st.com>
 References: <1596182024-18181-1-git-send-email-christophe.kerello@st.com>
- <1596182024-18181-10-git-send-email-christophe.kerello@st.com>
-In-Reply-To: <1596182024-18181-10-git-send-email-christophe.kerello@st.com>
+ <1596182024-18181-11-git-send-email-christophe.kerello@st.com>
+In-Reply-To: <1596182024-18181-11-git-send-email-christophe.kerello@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,15 +62,15 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.47]
-Content-ID: <AFB4FEB250020B4E857797D483CE4E2A@st.com>
+Content-ID: <7BBB0909CC25674284F988E6540CED59@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-08-13_02:2020-08-11,
+ definitions=2020-08-13_05:2020-08-13,
  2020-08-13 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 09/11] board: stm32mp1: update fdt fixup
-	partitions table
+Subject: Re: [Uboot-stm32] [PATCH 10/11] configs: stm32mp: add
+	CONFIG_STM32_FMC2_EBI
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,27 +90,39 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Christophe
 
 On 7/31/20 9:53 AM, Christophe Kerello wrote:
-> This patch adds "st,stm32mp1-fmc2-nfc" compatible string in the
-> fdt fixup partitions table.
+> This patch enables the support of FMC2 EBI.
 >
 > Signed-off-by: Christophe Kerello <christophe.kerello@st.com>
 > ---
 >
->  board/st/stm32mp1/stm32mp1.c | 1 +
->  1 file changed, 1 insertion(+)
+>  configs/stm32mp15_basic_defconfig   | 1 +
+>  configs/stm32mp15_trusted_defconfig | 1 +
+>  2 files changed, 2 insertions(+)
 >
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 1d274c3..f2f6c99 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -851,6 +851,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->  		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_NOR,  },
->  		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_SPINAND},
->  		{ "st,stm32mp15-fmc2",		MTD_DEV_TYPE_NAND, },
-> +		{ "st,stm32mp1-fmc2-nfc",	MTD_DEV_TYPE_NAND, },
->  	};
->  	fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
->  #endif
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+> index 5c500a1..2094183 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -88,6 +88,7 @@ CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+>  CONFIG_DM_MAILBOX=y
+>  CONFIG_STM32_IPCC=y
+> +CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_DM_MMC=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+> index 98680cb..8d59d84 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -68,6 +68,7 @@ CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+>  CONFIG_DM_MAILBOX=y
+>  CONFIG_STM32_IPCC=y
+> +CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_DM_MMC=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

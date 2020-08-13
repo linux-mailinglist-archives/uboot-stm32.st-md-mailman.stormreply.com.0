@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 515772434DF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:22:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 749222434E0
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 09:23:06 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A246C36B24
-	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 07:22:39 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E815C36B24
+	for <lists+uboot-stm32@lfdr.de>; Thu, 13 Aug 2020 07:23:06 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8B6C7C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 72711C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 13 Aug 2020 07:22:37 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu, 13 Aug 2020 07:23:04 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 07D7LrVu021278; Thu, 13 Aug 2020 09:22:36 +0200
+ 07D7Dk1M004052; Thu, 13 Aug 2020 09:23:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=SROG+3ufjA57/lRV3uY3jWC6c3n8Dk1uShgN5lUct7E=;
- b=bvb95CETVkoGqVJGZrY3av94kP1Nd845194IsSM8Vm0sb1WX8sw7Wra3XcOgAVkjoaH1
- +4kih/gkDL/tUJFsTX6/WsgruPbMFikOR+AEVYvL3Vr6yY9W7P5xMABIdJs8aGEAbDFT
- asH4XZ1pP77JJlcIgE5mGBjDk1aksuOWB6HbEf4yaTt6CKaiEGDDPHLayhWXcYaZZYWK
- DBcqXAdVZkIgNwMAmaEO9fHyLMhszWL11de5SzyNaWf5wIgrB9jnNBHyBPvgT8vQHi5n
- Mv8e1LhiNgyoxowtH/Z6zc3CktwjGipVEzdRoS8t+K2TYl4JnBjDg9vPG8NXvm0ryxjP MQ== 
+ bh=cmrTwJjQdgW05HMR/jPK27RVtUe27ciLJRHd9xRFpGw=;
+ b=aqFv0V9pZ2jSz6cAirHRi3y1bq/Ffypre/V2jxILJ8mh1Jpc7aBhy0cwLqxUvF3zGqs5
+ sX5SjeRCzjxwNepALd9vAm0+kuIJd2Kz8Yemjn8sA2mDVGmgf98ufFie30chtQ0KrdXP
+ 7keNCrXd+Yf8s1cGkYPd6vCdtaQsd8TDHXk2YWtMQZucSaiSDvDxD6sAOKK1jz1sYMKR
+ qAb6oHocVq5JLWPpHx56LniuQxoPL+IlpTnjY5h/gvUVPwIZiLjchQE9ZXj4DjT20PFs
+ AjV6BJGGgefXN2i7WgvnGEcSZKOMAhCWWeGgOESmF+eCygC6ux95LNlx5oGJlxWJf9gE aQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 32sm9rn9jk-1
+ by mx07-00178001.pphosted.com with ESMTP id 32sm6fmfmf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 13 Aug 2020 09:22:36 +0200
+ Thu, 13 Aug 2020 09:23:03 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 05AD510002A;
- Thu, 13 Aug 2020 09:22:36 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F288A21F66F;
- Thu, 13 Aug 2020 09:22:35 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
- 2020 09:22:35 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5C4CC100034;
+ Thu, 13 Aug 2020 09:23:03 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 54FA021F66F;
+ Thu, 13 Aug 2020 09:23:03 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 13 Aug
+ 2020 09:23:02 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Thu, 13 Aug 2020 09:22:35 +0200
+ 15.00.1473.003; Thu, 13 Aug 2020 09:23:02 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 03/11] board: stm32mp1: use IS_ENABLED to
- prevent ifdef in board_check_usb_power
-Thread-Index: AQHWcUKE0Tt7DRYW/UKmQdwmocPbXw==
-Date: Thu, 13 Aug 2020 07:22:35 +0000
-Message-ID: <881e02e3-b381-7408-36b1-5606a5385353@st.com>
+Thread-Topic: [Uboot-stm32] [PATCH 04/11] board: stm32mp1: use IS_ENABLED to
+ prevent ifdef in sysconf_init
+Thread-Index: AQHWcUKU+fOAu6UB70uubTr/AI1lCg==
+Date: Thu, 13 Aug 2020 07:23:02 +0000
+Message-ID: <b6803501-1ff7-066e-e5aa-45957a98c2c0@st.com>
 References: <20200731143152.8812-1-patrick.delaunay@st.com>
- <20200731143152.8812-3-patrick.delaunay@st.com>
-In-Reply-To: <20200731143152.8812-3-patrick.delaunay@st.com>
+ <20200731143152.8812-4-patrick.delaunay@st.com>
+In-Reply-To: <20200731143152.8812-4-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,14 +63,14 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.47]
-Content-ID: <0D3345B88FE7744F9DD73EA3BC7EB413@st.com>
+Content-ID: <EEB518D75437C54A89497D40515AEE1B@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-08-13_04:2020-08-13,
  2020-08-13 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 03/11] board: stm32mp1: use IS_ENABLED to
- prevent ifdef in board_check_usb_power
+Subject: Re: [Uboot-stm32] [PATCH 04/11] board: stm32mp1: use IS_ENABLED to
+ prevent ifdef in sysconf_init
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,56 +90,76 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Patrick
 
 On 7/31/20 4:31 PM, Patrick Delaunay wrote:
-> Use IS_ENABLED to prevent ifdef in board_check_usb_power.
+> Use IS_ENABLED to prevent ifdef in sysconf_init.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  board/st/stm32mp1/stm32mp1.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  board/st/stm32mp1/stm32mp1.c | 11 +++--------
+>  1 file changed, 3 insertions(+), 8 deletions(-)
 >
 > diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 5c84b09c3e..3182f44598 100644
+> index 3182f44598..a0a2f9978f 100644
 > --- a/board/st/stm32mp1/stm32mp1.c
 > +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -288,7 +288,6 @@ static void __maybe_unused led_error_blink(u32 nb_blink)
->  		hang();
->  }
->  
-> -#ifdef CONFIG_ADC
->  static int board_check_usb_power(void)
->  {
->  	struct ofnode_phandle_args adc_args;
-> @@ -300,6 +299,10 @@ static int board_check_usb_power(void)
->  	int ret, uV, adc_count;
->  	u32 nb_blink;
->  	u8 i;
-> +
-> +	if (!IS_ENABLED(CONFIG_ADC))
-> +		return -ENODEV;
-> +
->  	node = ofnode_path("/config");
->  	if (!ofnode_valid(node)) {
->  		debug("%s: no /config node?\n", __func__);
-> @@ -422,7 +425,6 @@ static int board_check_usb_power(void)
->  
->  	return 0;
->  }
-> -#endif /* CONFIG_ADC */
+> @@ -428,14 +428,11 @@ static int board_check_usb_power(void)
 >  
 >  static void sysconf_init(void)
 >  {
-> @@ -699,10 +701,8 @@ int board_late_init(void)
+> -#ifndef CONFIG_TFABOOT
+>  	u8 *syscfg;
+> -#ifdef CONFIG_DM_REGULATOR
+>  	struct udevice *pwr_dev;
+>  	struct udevice *pwr_reg;
+>  	struct udevice *dev;
+>  	u32 otp = 0;
+> -#endif
+>  	int ret;
+>  	u32 bootr, val;
+>  
+> @@ -453,7 +450,6 @@ static void sysconf_init(void)
+>  	bootr |= (bootr & SYSCFG_BOOTR_BOOT_MASK) << SYSCFG_BOOTR_BOOTPD_SHIFT;
+>  	writel(bootr, syscfg + SYSCFG_BOOTR);
+>  
+> -#ifdef CONFIG_DM_REGULATOR
+>  	/* High Speed Low Voltage Pad mode Enable for SPI, SDMMC, ETH, QSPI
+>  	 * and TRACE. Needed above ~50MHz and conditioned by AFMUX selection.
+>  	 * The customer will have to disable this for low frequencies
+> @@ -470,7 +466,7 @@ static void sysconf_init(void)
+>  	ret = uclass_get_device_by_driver(UCLASS_PMIC,
+>  					  DM_GET_DRIVER(stm32mp_pwr_pmic),
+>  					  &pwr_dev);
+> -	if (!ret) {
+> +	if (!ret && IS_ENABLED(CONFIG_DM_REGULATOR)) {
+>  		ret = uclass_get_device_by_driver(UCLASS_MISC,
+>  						  DM_GET_DRIVER(stm32mp_bsec),
+>  						  &dev);
+> @@ -507,7 +503,6 @@ static void sysconf_init(void)
+>  			debug("VDD unknown");
+>  		}
 >  	}
+> -#endif
+>  
+>  	/* activate automatic I/O compensation
+>  	 * warning: need to ensure CSI enabled and ready in clock driver
+> @@ -524,7 +519,6 @@ static void sysconf_init(void)
+>  	}
+>  
+>  	clrbits_le32(syscfg + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
+> -#endif
+>  }
+>  
+>  #ifdef CONFIG_DM_REGULATOR
+> @@ -647,7 +641,8 @@ int board_init(void)
+>  	regulators_enable_boot_on(_DEBUG);
 >  #endif
 >  
-> -#ifdef CONFIG_ADC
->  	/* for DK1/DK2 boards */
->  	board_check_usb_power();
-> -#endif /* CONFIG_ADC */
+> -	sysconf_init();
+> +	if (!IS_ENABLED(CONFIG_TFABOOT))
+> +		sysconf_init();
 >  
->  	return 0;
->  }
+>  	if (CONFIG_IS_ENABLED(LED))
+>  		led_default_state();
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

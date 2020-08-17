@@ -2,55 +2,38 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42E1A245590
-	for <lists+uboot-stm32@lfdr.de>; Sun, 16 Aug 2020 05:40:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7BAF245D98
+	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Aug 2020 09:13:08 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1104BC36B24
-	for <lists+uboot-stm32@lfdr.de>; Sun, 16 Aug 2020 03:40:22 +0000 (UTC)
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
- [209.85.210.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7A747C36B26
+	for <lists+uboot-stm32@lfdr.de>; Mon, 17 Aug 2020 07:13:08 +0000 (UTC)
+Received: from mx.tkos.co.il (unknown [192.115.133.116])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 63494C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B7139C36B24
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 16 Aug 2020 03:40:20 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id v6so10793884ota.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 15 Aug 2020 20:40:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=tJy0G9sD0mb+hTHSeJ0pqIyCy3snKmOqUrasX5zjYSc=;
- b=gVD4IAbsysjoPcqrCNs12P5SFiH2SbEJngAWY4pLGTzTEq0JOHI+w1TAteUP0CNQ1N
- bfnlPQVgLepuFLdqwZvn3s+zzWIWXWSCE1AKPOzSYbt57gfCyv1KGiBhLo5dU5LeGdT/
- VZDgzGBYHmO3F/og7ElThX3Q1OqlLKOkach+o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=tJy0G9sD0mb+hTHSeJ0pqIyCy3snKmOqUrasX5zjYSc=;
- b=WkBBaFhmJeMURyWBn3+GTTruuFOIf1/2YAfOrvfIicR24JMPrcHLPzh2u0SsKRQfz6
- 8WYT6961aL3xZkjwzRMBJ3OxufJf90pG9RID+jK+PCIiw/v6hVhp1jJZQ05L621H0Kg4
- Ny/u6BtFnnI2003+YQ16GuAxYQ7No+H6vz1DgXIRbn2C2oL2dCsN2rhrV8mYZssBMVHb
- AVqodoNTdALBaaBrk5lutiEw/VcfBe9MBi6MSdiFd2Asl4tvjY9O2U8ze4jGXac7chXP
- msUV5xJDdnHZji/301Hn4hZ/YiNJZq/IyjKS2P/Ii60q+R19Rxv0DZCQo4IfADi/0i5I
- idfQ==
-X-Gm-Message-State: AOAM5323Fl0mcV2epiBmMTpWHArEii4SflBrUgZ1wiM3BkQRoVHGiiTV
- vHNorT5okMaCQNd+O5jkH5cSkryyhpRnrqrvoSu5rg==
-X-Google-Smtp-Source: ABdhPJyy3b2OLIUKX9cjzG6GwViKSnPdqlldJDAikRUZDcJn95F5FdbZssrD23bN9OWVUFnzQsrsJckvzTqzxH+W/q8=
-X-Received: by 2002:a9d:4d01:: with SMTP id n1mr6728193otf.367.1597549218818; 
- Sat, 15 Aug 2020 20:40:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200730140347.1.I0977b8abc51b9854d9e8f7822a7b28f3f219b99e@changeid>
- <20200730140347.2.I49a10ddbcc4100fd5d62b55f760128a7ecef2cb8@changeid>
-In-Reply-To: <20200730140347.2.I49a10ddbcc4100fd5d62b55f760128a7ecef2cb8@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Aug 2020 21:39:20 -0600
-Message-ID: <CAPnjgZ0fddQs6tnimxFHTo22cEPKdvGiuEDmR9hCGu4MhrhvZg@mail.gmail.com>
+ Mon, 17 Aug 2020 04:47:01 +0000 (UTC)
+Received: from tarshish (unknown [10.0.8.2])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx.tkos.co.il (Postfix) with ESMTPS id 210DF4405AD;
+ Mon, 17 Aug 2020 07:47:00 +0300 (IDT)
+References: <20200213182950.10744-1-patrick.delaunay@st.com>
+User-agent: mu4e 1.4.13; emacs 26.3
+From: Baruch Siach <baruch@tkos.co.il>
 To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] cmd: clk: correctly handle depth for
-	clk dump
+In-reply-to: <20200213182950.10744-1-patrick.delaunay@st.com>
+Date: Mon, 17 Aug 2020 07:46:59 +0300
+Message-ID: <87eeo5nakc.fsf@tarshish>
+MIME-Version: 1.0
+X-Mailman-Approved-At: Mon, 17 Aug 2020 07:13:07 +0000
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Lokesh Vutla <lokeshvutla@ti.com>, Keerthy <j-keerthy@ti.com>,
+ Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: bootm: take into account gd->ram_top
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,23 +50,94 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 30 Jul 2020 at 06:04, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Update depth only when clock uclass is found to have correct display
-> of command "clk dump".
->
-> Without this patch, the displayed depth is the binding depth for
-> all the uclass and that can be strange as only clock uclass nodes
-> are displayed.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  cmd/clk.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
+Hi Patrick, all,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Thu, Feb 13 2020, Patrick Delaunay wrote:
+> From: Patrice Chotard <patrice.chotard@st.com>
+>
+> If gd->ram_top has been tuned using board_get_usable_ram_top(),
+> it must be taken into account when reserving arch lmb.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> Reviewed-by: Patrick DELAUNAY <patrick.delaunay@st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+[snip]
+> diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
+> index a135bcfc7b..f4b5ca6de0 100644
+> --- a/arch/arm/lib/bootm.c
+> +++ b/arch/arm/lib/bootm.c
+> @@ -75,6 +75,9 @@ void arch_lmb_reserve(struct lmb *lmb)
+>  			gd->bd->bi_dram[bank].size - 1;
+>  		if (sp > bank_end)
+>  			continue;
+> +		if (bank_end > gd->ram_top)
+> +			bank_end = gd->ram_top - 1;
+> +
+
+This patch (now committed as 8ce1f10cf2b1) breaks kernel boot on Armada
+8040 based Clearfog GT-8K with 16GB RAM. See below the console output of
+v2020.10-rc2 with a few added prints.
+
+The first memory bank (bi_dram[0]) goes from 0 to 3GB. The rest
+(4GB-17GB) is on bi_dram[1] (see a8k_dram_init_banksize()). ram_top is
+set to 2GB on
+arch/arm/mach-mvebu/arm64-common.c:board_get_usable_ram_top().
+
+Reverting commit 8ce1f10cf2b1 on top of v2020.10-rc2 fixes boot.
+
+Any Idea?
+
+Found /extlinux/extlinux.conf
+Retrieving file: /extlinux/extlinux.conf
+## Current stack ends at 0x7fb24300
+arch_lmb_reserve: bank_end: bfffffff ram_top: 80000000
+62 bytes read in 21 ms (2 KiB/s)
+1:	linux
+Retrieving file: /extlinux/Image
+## Current stack ends at 0x7fb23960
+arch_lmb_reserve: bank_end: bfffffff ram_top: 80000000
+13740544 bytes read in 1266 ms (10.4 MiB/s)
+Retrieving file: /extlinux/armada-8040-clearfog-gt-8k.dtb
+## Current stack ends at 0x7fb23960
+arch_lmb_reserve: bank_end: bfffffff ram_top: 80000000
+33368 bytes read in 31 ms (1 MiB/s)
+## Current stack ends at 0x7fb23cd0
+arch_lmb_reserve: bank_end: bfffffff ram_top: 80000000
+## Flattened Device Tree blob at 04f00000
+   Booting using the fdt blob at 0x4f00000
+   Loading Device Tree to 00000000bfff4000, end 00000000bffff257 ... "Synchronous Abort" handler, esr 0x96000045
+elr: 000000000006e1cc lr : 0000000000068fd8 (reloc)
+elr: 000000007ffa91cc lr : 000000007ffa3fd8
+x0 : ffffffffffffffff x1 : 00000000bfffc258
+x2 : 0000000000000000 x3 : ffffffffffff7da7
+x4 : 0000000004f08258 x5 : 00000000bfff4000
+x6 : 00000000bfff4000 x7 : 000000000000000f
+x8 : 000000007fb23bf8 x9 : 0000000000000008
+x10: 00000000bffff257 x11: 00000000bffff257
+x12: 0000000000000000 x13: fffffffffffff000
+x14: 00000000bfff4000 x15: 0000000000000021
+x16: 000000007ff7bc38 x17: 0000000000000000
+x18: 000000007fb2add0 x19: 00000000bfff4000
+x20: 0000000004f00000 x21: 000000000000b258
+x22: 0000000058820000 x23: 0000000000000010
+x24: 000000007ffe3c40 x25: 000000007fb23cb8
+x26: 00000000c0000000 x27: 0000000000000000
+x28: 000000007fc3fd50 x29: 000000007fb23bd0
+
+Code: 54000061 aa0603e0 d65f03c0 38606882 (38206822) 
+Resetting CPU ...
+
+Thanks,
+baruch
+
+>  		lmb_reserve(lmb, sp, bank_end - sp + 1);
+>  		break;
+>  	}
+
+-- 
+                                                     ~. .~   Tk Open Systems
+=}------------------------------------------------ooO--U--Ooo------------{=
+   - baruch@tkos.co.il - tel: +972.52.368.4656, http://www.tkos.co.il -
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

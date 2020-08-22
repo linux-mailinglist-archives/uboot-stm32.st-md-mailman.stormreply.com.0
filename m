@@ -2,67 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E5C124EA5B
+	by mail.lfdr.de (Postfix) with ESMTPS id 436B824EA5A
 	for <lists+uboot-stm32@lfdr.de>; Sun, 23 Aug 2020 01:18:16 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 127AAC3FAD8
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C631C3FAD3
 	for <lists+uboot-stm32@lfdr.de>; Sat, 22 Aug 2020 23:18:16 +0000 (UTC)
 Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
  [209.85.221.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4BBC6C3FAD3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4615FC32E91
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Sat, 22 Aug 2020 23:18:15 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id b17so4398173wru.2
+Received: by mail-wr1-f66.google.com with SMTP id o4so1148285wrn.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Sat, 22 Aug 2020 16:18:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:sender:from:in-reply-to:references:date:message-id
  :subject:to:cc;
- bh=ASV0Koj15HlQH+399QPjz5bpOmBjMBj81OV+4jiS+aE=;
- b=cmDxx4CaspvpMsJHAuOzLoDMkRT2tilVWzVdPA/27iwwE5EBf1iBM/0eavUAFsWu7j
- 5zhjv9YDGBuLRyYsI84IC7swf/vJ/Je9aD8JornM/e9FiFF1te0aUa+xGJSQTRwmkog0
- jDGxO4I5MZgZUPliqxqaxCLqWYqe/mKQlhdyM=
+ bh=wpPvSiu7oLlEkmJR5EH5Dhlx+aEbY5JqF+2Cel4WL28=;
+ b=Fc5w1JsUfeSb8auSmctYDjTVvSBnqnmdNTOT9YGxvH/pl0LSQ7aXe3Jm045me0hac7
+ Ya1rjQCA/I/lfn9V4hG1sSvYuhGAep0lC4ezzNrdOo/DBVrmtzpWgXMFJLHdyVbb+nFE
+ uX+9+zImW+reiUHbABWN631GlBZtizq0Px+O4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
  :date:message-id:subject:to:cc;
- bh=ASV0Koj15HlQH+399QPjz5bpOmBjMBj81OV+4jiS+aE=;
- b=TJ6aNwdXtyliA9K6Fr7XnJamSFnIYt2G+PoyqZWuu0Kj0C2Avw8NKwRy/fFhI8LQlz
- +b75di061nH61MTxhz4e4IpOWqBl8k/8DlbUYkZi/26ME1PqDv/prntNc7z2rmIenkaI
- 7rxpEbqcKFQFQJcjsHN6d1yTuloB1b3NclZIOFnkltNcXqvpcTOAB2iELmW4CbfxrowN
- xmcO9JO4n6sIMehewo7RCZxtwVwWBaIbBWNHbumFFwLW+Qr3kCiZgqdo9u3YQPuMZt/9
- i7gBH1ikTmTHUQhFiNzx9PENw9LukJ7gRx8pkqkznDLaS58D7/JdCm4m+DxRiZlhdCPq
- 3/nA==
-X-Gm-Message-State: AOAM530pQlg7wM7ceRdIfLb5eCHV2olR7NZyM0IpYJVhZ8sVVGEfmj8A
- ZWegjS62OAxwCdyI/zNJSOAx2GxtzMitts8wf7TwBg==
-X-Google-Smtp-Source: ABdhPJxMGxnEyqmyLEFDgKvzbT31ruzDas6oln7pi6LwqlmGtaskz+/9qVMh3PMu7waiFRZZlFgW3uHhcq1GfTEtP94=
-X-Received: by 2002:a5d:4a52:: with SMTP id v18mr8479384wrs.221.1598138294617; 
+ bh=wpPvSiu7oLlEkmJR5EH5Dhlx+aEbY5JqF+2Cel4WL28=;
+ b=CPI8S0MjRB+zVwjiFb7vXUREv4aTl2UsZfA4ugU05PwcEA13kwLipLyXpvTMs/opAW
+ dr9mnK7krEFuyWWJdORJ++jvUyml5MOsGSIgBE0F9wn+721zc0bRaZM0txjbPJZbHNa/
+ YTr7Omu8v0SRn9Nnven+1e18KNJjH4jZQpINt3X/BRGrFv8npRPwQc2LJavw+1yLZrRt
+ PSjb/kjUBRY7EWykegwNqIAeQ7dMM7l9Ue2fAgFiztDO5DocCoXvST3t1wiiQOnp+5gv
+ nAH7GI28EnfJ/LKQoZdRaZ0tbfQX9YUkoUdL2dUVF2EOrpf9Zfr90/ObqZn8RgwLHPjz
+ XXaA==
+X-Gm-Message-State: AOAM530d5YZGABPoDdDwDhG0w4FHUlwTGBdZbs5MzQTc7DdHtdw9y06J
+ Qcfiqn5x52pFDWWLPTuswLOUhBR4UgAo+7tu1pVAeA==
+X-Google-Smtp-Source: ABdhPJxT8id4piyNOE/vrBJci9//eqHsTtQuqwP65E8plPBKuYKT2z7nu7nFfCymEo6ht5bXZx8Li4U/5DXF9eBeYFo=
+X-Received: by 2002:adf:f3cc:: with SMTP id g12mr8530575wrp.412.1598138294597; 
  Sat, 22 Aug 2020 16:18:14 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 22 Aug 2020 19:18:09 -0400
+ HTTPREST; Sat, 22 Aug 2020 19:18:10 -0400
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ1C5uWuLL7V75Vfbn=Kx2avhRN9hJgrUnNQxSBdZHcY3Q@mail.gmail.com>
-References: <CAPnjgZ1C5uWuLL7V75Vfbn=Kx2avhRN9hJgrUnNQxSBdZHcY3Q@mail.gmail.com>
+In-Reply-To: <20200728071335.5840-3-patrice.chotard@st.com>
+References: <20200728071335.5840-3-patrice.chotard@st.com>
  <20200728071335.5840-1-patrice.chotard@st.com>
- <20200728071335.5840-4-patrice.chotard@st.com>
-Date: Sat, 22 Aug 2020 19:18:09 -0400
-X-Google-Sender-Auth: idmSrLnUiExmBGL9VnZvI4AjSXU
-Message-ID: <CAPnjgZ1EgHga1NJzmgU_dnbys+HBVMqQYMqvPowuw-8GGVHpng@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Heiko Schocher <hs@denx.de>, AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Walter Lozano <walter.lozano@collabora.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v5 3/5] sandbox: dts: Add compatible
-	string for bind-test node
+Date: Sat, 22 Aug 2020 19:18:10 -0400
+X-Google-Sender-Auth: p989lLOJSFQSNuC_1svM5nP_0xY
+Message-ID: <CAPnjgZ3tF_M8ZCqctf3okJp21rs5OKBp7C76rni+t0+dy_anvw@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Simon Glass <sjg@chromium.org>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>, u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH v5 2/5] sandbox: phy: add driver_data for
+	bind test cmd
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,32 +72,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 28 Jul 2020 at 01:13, Patrice Chotard <patrice.chotard@st.com> wrote:
->
-> Usage of lists_bind_fdt() in bind command imposes to add
-> a compatible string for bind-test node.
->
-> Others impacts are:
->   - bind-test node is binded at sandbox start, so no need to bind it
->     in test_bind_unbind_with_node() test.
->   - As explained just above, after sandbox start, now a phy exist.
->     In test/dm/phy.c, it was verified that a third phy didn't exist,
->     now we must verified that a fourth phy doesn't exist.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
->
-> ---
->
-> Changes in v5:
->   - rebase on last master
->   - fix phy test regression
->
->  arch/sandbox/dts/test.dts  | 1 +
->  test/dm/phy.c              | 2 +-
->  test/py/tests/test_bind.py | 3 ---
->  3 files changed, 2 insertions(+), 4 deletions(-)
+Add driver data to existing compatible string "sandbox,phy".
+Add an additional compatible string without driver_data
 
+This will verify that bind command parses, finds and passes the
+correct driver data to device_bind_with_driver_data() by using
+driver_data in the second sandbox_phy_ids table entry.
+In sandbox_phy_bind() a check is added to validate driver_data
+content.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+
+(no changes since v1)
+
+ drivers/phy/sandbox-phy.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
 Applied to u-boot-dm, thanks!
 _______________________________________________

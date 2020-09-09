@@ -2,68 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F07B825FCFD
-	for <lists+uboot-stm32@lfdr.de>; Mon,  7 Sep 2020 17:25:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DC30262F15
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Sep 2020 15:22:58 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1B1AC3FAE0
-	for <lists+uboot-stm32@lfdr.de>; Mon,  7 Sep 2020 15:25:00 +0000 (UTC)
-Received: from mail-ej1-f67.google.com (mail-ej1-f67.google.com
- [209.85.218.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E55BAC3FAE1
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Sep 2020 13:22:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE3CFC36B33
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 05385C36B33
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  7 Sep 2020 15:24:59 +0000 (UTC)
-Received: by mail-ej1-f67.google.com with SMTP id r7so5327474ejs.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 07 Sep 2020 08:24:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=xeLZOGY0Q6wnB6ftPpFx/0o9Fg3OXw8dYyTBM1ICsgg=;
- b=pwJV1bR6Q8EYbYgdh9wYAfpczW1LuLRs6aObuvRWBXE++1NWVjFVnIhxWF3yUsEYDD
- X8xp/b8qWw3iy00TNtRnEMxDUN8/LTVUh6LCaLDi2Tp71RSoQVAAEV6WdADecFAp3wyV
- F+5Aob7yBgZIKazDlw3h31LhXC4c/Csqvq87D/1MTsRvVu+yrxCxBky6uvRKIRjSmsED
- UZxgURTR8wKl9YeOFEsoONsHsZib7eyoyNu5Rx/+orPqPsmxgs44StljrFb3pGcBaO0L
- QD8ZaysrDX8shAyj08eRq3zG+RmUWmQBcaoFpG6e0MOfOyHIFBbkyYzfFyQQLTYHu+jy
- MxEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=xeLZOGY0Q6wnB6ftPpFx/0o9Fg3OXw8dYyTBM1ICsgg=;
- b=oG9l7kCeTzcZYVkzqjqPPNuNTVclrXzQmY8MXUMnFJCAGr+eupl7zYkb9iCHUL1t5p
- ZPSDk4g6iVewbHCeY1E987uVB4bLlBV47L9DyeTMkFddF0LI+L48sbKOjMdLgh1ZUlXb
- 1lprrU2kvSw+BZsn4xzptQSdpwsbfbvz6bLqw0DG7HwePaIiekZAaBdA4hpGRYe5xRwy
- ZzjF9d/yCp2TSOpT4KTrzZKhQMscrMbbGBiAo9SXe867Uk/CzpZr27k9xOgmcblCbdYX
- JcjAFQRpBCW1/+ZP0cY1H6Y/Hj4q2WPpRJ9zRNwjmMM2JX1LZqjhVxQRLq90t8QQ1wfb
- mK1w==
-X-Gm-Message-State: AOAM533agqlb7vD1jREDmDSakXu1QpPJ1U/z9sH1I+iNaLK7IYcz46ZW
- iXh7ozsGZkD+T6Gld1IHbADKEfAzUVBL9lz4eF50Kg==
-X-Google-Smtp-Source: ABdhPJwFHw0pUAxega5glo0KoO2pfSzgMfpgGpm4tPbaOhF6xJw/AAA3gNSG5TFIShOt/RQKuGI+jUgNUfjPOHxcCg0=
-X-Received: by 2002:a17:906:19db:: with SMTP id
- h27mr19865613ejd.154.1599492298562; 
- Mon, 07 Sep 2020 08:24:58 -0700 (PDT)
+ Wed,  9 Sep 2020 13:22:55 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 089DMeLk011347; Wed, 9 Sep 2020 15:22:44 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=P0vVU2pRUBH6nSc8g2Ps2IafolUt3Bpn/GAXcWX9mVs=;
+ b=dSYYyVlm88FQzOoLRYnMzDArqL2csjw/QzFaLIJs4ncNRwyHz1UNht09XsRlylOJT3lL
+ WcJt+Yv4ESMc7ENz5MRZXu5pchK9aAwpYgT9ERz3PKTi9oFguTqjYbL+HdkMaCw3VAw5
+ Jcz95KWkueWKXO7Ieg4iiA1kn+piUJJg5LthmOPpQGYwowZ5FJvfpjYpUJZGhvj6Xj/W
+ e5swry7qVMsRw6f8HJ90c7MKq5y/Ak+nM2O8O9YNcYll78+7YNDUyUWcYRRc76tsDcw6
+ kyUZAkz8cKjDmD3QsJnAV9v53/qSa3ZmxFRFDxCE7DmPoV/lXfHBin5xqUqrJ7Rl3EWS Bg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 33c0euwasj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 09 Sep 2020 15:22:44 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1967E10002A;
+ Wed,  9 Sep 2020 15:22:43 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E4C352AD9E9;
+ Wed,  9 Sep 2020 15:22:42 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Wed, 9 Sep 2020 15:22:42 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 9 Sep 2020 15:22:36 +0200
+Message-ID: <20200909152228.1.I4ae7c1ab59fed4861cde9322a8d12167c9d0187a@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200904105133.2502-1-patrick.delaunay@st.com>
- <CAMj1kXHTJpfjUX_KdCvmzVm2m7B61yVvnb95NNh8yhphyROchg@mail.gmail.com>
-In-Reply-To: <CAMj1kXHTJpfjUX_KdCvmzVm2m7B61yVvnb95NNh8yhphyROchg@mail.gmail.com>
-From: Etienne Carriere <etienne.carriere@linaro.org>
-Date: Mon, 7 Sep 2020 17:24:47 +0200
-Message-ID: <CAN5uoS9NJv5--9CRMmoUSN10K-dmeHfmhP1haDaidg1zfAR8Sw@mail.gmail.com>
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Rajesh Ravi <rajesh.ravi@broadcom.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Patrick Delaunay <patrick.delaunay@st.com>, Tero Kristo <t-kristo@ti.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
- Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Jens Wiklander <jens.wiklander@linaro.org>,
- chenshuo <chenshuo@eswin.com>, Marek Szyprowski <m.szyprowski@samsung.com>
-Subject: Re: [Uboot-stm32] [RFC PATCH 0/7]
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-09-09_07:2020-09-09,
+ 2020-09-09 signatures=0
+Cc: Peng Fan <peng.fan@nxp.com>, Mingming lee <mingming.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 1/4] fastboot: mmc: Add
+	CONFIG_FASTBOOT_MMC_USER_SUPPORT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,101 +75,117 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 4 Sep 2020 at 14:25, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Fri, 4 Sep 2020 at 13:51, Patrick Delaunay <patrick.delaunay@st.com> wrote:
-> >
-> > arm: cache: cp15: don't map reserved region with no-map property
-> >
-> > Hi,
-> >
-> > On STM32MP15x platform we can use OP-TEE, loaded in DDR in a region protected
-> > by a firewall. This region is reserved in device with "no-map" property.
-> >
-> > But sometime the platform boot failed in U-boot on a Cortex A7 access to this
-> > region (depending of the binary and the issue can change with compiler version or
-> > with code alignment), then the firewall raise a error, for example:
-> >
-> > E/TC:0   tzc_it_handler:19 TZC permission failure
-> > E/TC:0   dump_fail_filter:420 Permission violation on filter 0
-> > E/TC:0   dump_fail_filter:425 Violation @0xde5c6bf0, non-secure privileged read, AXI ID 5c0
-> > E/TC:0   Panic
-> >
-> > After investigation, the forbidden access is a speculative request performed by
-> > the Cortex A7 because all the DDR is mapped as MEMORY with CACHEABLE property.
-> >
-> > The issue is solved only when the region reserved by OP-TEE is no more mapped
-> > in U-Boot (mapped as DEVICE/NON-CACHEABLE wasn't enough) as it is already done
-> > in Linux kernel.
-> >
->
-> The only speculative accesses to such regions permitted by the
-> architecture are instruction fetches, which is why setting the nx
-> attribute is required on v7 for device mappings.
->
-> Does uboot currently honour this requirement?
+Split userdata and boot partition support for eMMC update
+and correct the description (update is supported).
 
-I think current U-Boot honours the speculative side by using a IO memory
-default mapping strategy. If the reserved memory is used by a driver
-with a specific
-mapping, u-boot cannot ensure the mapping won't conflict with default mapping.
-For example OP-TEE defines a portion of this memory as non-secure
-cached shared memory.
-With Arm, we cannot map an area both as cached memory and as IO memory
-(Device/StronglyOrdered).
-So here, using a not-mapped strategy for "no-map" property looks better.
+The new configuration CONFIG_FASTBOOT_MMC_USER_SUPPORT
+allows to activate support of userdata partition update,
+based on target name=CONFIG_FASTBOOT_MMC_USER_NAME
 
-Regards,
-Etienne
+This patch also removes the unnecessary dependency with
+ARCH_MEDIATEK and EFI_PARTITION.
 
->
->
-> > I think that can be a general issue for ARM architecture: the no-map tag in
-> > device should be respected by U-boot, so I propose a  generic solution in
-> > arm/lib/cache-cp15.c:dram_bank_mmu_setup().
-> >
-> > This RFC serie is composed by 7 patches
-> > - 1..4/7: preliminary steps to support flags in library in lmb
-> >   (as it is done in memblock.c in Linux)
-> > - 5/7: unitary test on the added feature in lmb lib
-> > - 6/7: save the no-map flags in lmb when the device tree is parsed
-> > - 7/7: update the generic behavior for "no-map" region in
-> >        arm/lib/cache-cp15.c::dram_bank_mmu_setup()
-> >
-> > I can change this last patch if it is required by other ARM architecture;
-> > it is a weak function so I can avoid to map the region with "no-map"
-> > property in device tree only for STM32MP architecture
-> > (in arch/arm/mach-stm32mp/cpu.c).
-> >
-> > See also [1] which handle same speculative access on armv8 for area
-> > with Executable attribute.
-> >
-> > [1] http://patchwork.ozlabs.org/project/uboot/patch/20200903000106.5016-1-marek.bykowski@gmail.com/
-> >
-> > Regards
-> > Patrick
-> >
-> >
-> > Patrick Delaunay (7):
-> >   lmb: Add support of flags for no-map properties
-> >   lmb: add lmb_is_reserved_flags
-> >   lmb: remove lmb_region.size
-> >   lmb: add lmb_dump_region() function
-> >   test: lmb: add test for lmb_reserve_flags
-> >   image-fdt: save no-map parameter of reserve-memory
-> >   arm: cache: cp15: don't map the reserved region with no-map property
-> >
-> >  arch/arm/include/asm/system.h |   3 +
-> >  arch/arm/lib/cache-cp15.c     |  17 +++++-
-> >  common/image-fdt.c            |  23 +++++---
-> >  include/lmb.h                 |  22 +++++++-
-> >  lib/lmb.c                     | 100 +++++++++++++++++++++++-----------
-> >  test/lib/lmb.c                |  89 ++++++++++++++++++++++++++++++
-> >  6 files changed, 210 insertions(+), 44 deletions(-)
-> >
-> > --
-> > 2.17.1
-> >
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
+
+ configs/mt8518_ap1_emmc_defconfig |  1 +
+ drivers/fastboot/Kconfig          | 22 +++++++++++++++++-----
+ drivers/fastboot/fb_mmc.c         |  9 ++++++---
+ 3 files changed, 24 insertions(+), 8 deletions(-)
+
+diff --git a/configs/mt8518_ap1_emmc_defconfig b/configs/mt8518_ap1_emmc_defconfig
+index b95d2c683a..d5fb0ccd48 100644
+--- a/configs/mt8518_ap1_emmc_defconfig
++++ b/configs/mt8518_ap1_emmc_defconfig
+@@ -25,6 +25,7 @@ CONFIG_FASTBOOT_BUF_SIZE=0x1E00000
+ CONFIG_FASTBOOT_FLASH=y
+ CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+ CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT=y
++CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
+ CONFIG_DM_MMC=y
+ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_MTK=y
+diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+index d4436dfc91..45e07d05e0 100644
+--- a/drivers/fastboot/Kconfig
++++ b/drivers/fastboot/Kconfig
+@@ -124,14 +124,26 @@ config FASTBOOT_MMC_BOOT1_NAME
+ 	  defined here.
+ 	  The default target name for updating EMMC_BOOT1 is "mmc0boot0".
+ 
++config FASTBOOT_MMC_USER_SUPPORT
++	bool "Enable eMMC userdata partition flash/erase"
++	depends on FASTBOOT_FLASH_MMC
++	help
++	  Define this to enable the support "flash" and "erase" command on
++	  eMMC userdata. The "flash" command only update the MBR and GPT
++	  header when CONFIG_EFI_PARTITION is supported.
++	  The "erase" command erase all the userdata.
++	  This occurs when the specified "partition name" on the
++	  fastboot command line matches the value CONFIG_FASTBOOT_MMC_USER_NAME.
++
+ config FASTBOOT_MMC_USER_NAME
+-	string "Target name for erasing EMMC_USER"
+-	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION && ARCH_MEDIATEK
++	string "Target name for updating EMMC_USER"
++	depends on FASTBOOT_MMC_USER_SUPPORT
+ 	default "mmc0"
+ 	help
+-	  The fastboot "erase" command supports erasing EMMC_USER. This occurs
+-	  when the specified "EMMC_USER name" on the "fastboot erase" commands
+-	  match the value defined here.
++	  The fastboot "flash" and "erase" command supports EMMC_USER.
++	  This occurs when the specified "EMMC_USER name" on the
++	  "fastboot flash" and the "fastboot erase" commands match the value
++	  defined here.
+ 	  The default target name for erasing EMMC_USER is "mmc0".
+ 
+ config FASTBOOT_GPT_NAME
+diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
+index b2f8932e1c..ab6674cac2 100644
+--- a/drivers/fastboot/fb_mmc.c
++++ b/drivers/fastboot/fb_mmc.c
+@@ -132,7 +132,8 @@ static void write_raw_image(struct blk_desc *dev_desc,
+ 	fastboot_okay(NULL, response);
+ }
+ 
+-#ifdef CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT
++#if defined(CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT) || \
++	defined(CONFIG_FASTBOOT_MMC_USER_SUPPORT)
+ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+ {
+ 	lbaint_t blks;
+@@ -151,7 +152,9 @@ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+ 
+ 	return 0;
+ }
++#endif
+ 
++#ifdef CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT
+ static void fb_mmc_boot1_ops(struct blk_desc *dev_desc, void *buffer,
+ 			     u32 buff_sz, char *response)
+ {
+@@ -427,7 +430,7 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
+ #endif
+ 
+ #if CONFIG_IS_ENABLED(EFI_PARTITION)
+-#ifndef CONFIG_FASTBOOT_MMC_USER_NAME
++#ifndef CONFIG_FASTBOOT_MMC_USER_SUPPORT
+ 	if (strcmp(cmd, CONFIG_FASTBOOT_GPT_NAME) == 0) {
+ #else
+ 	if (strcmp(cmd, CONFIG_FASTBOOT_GPT_NAME) == 0 ||
+@@ -551,7 +554,7 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+ 	}
+ #endif
+ 
+-#ifdef CONFIG_FASTBOOT_MMC_USER_NAME
++#ifdef CONFIG_FASTBOOT_MMC_USER_SUPPORT
+ 	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_USER_NAME) == 0) {
+ 		/* erase EMMC userdata */
+ 		if (fb_mmc_erase_mmc_hwpart(dev_desc))
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

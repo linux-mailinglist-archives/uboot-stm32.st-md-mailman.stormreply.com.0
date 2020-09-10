@@ -2,65 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47A3E264081
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 10:50:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B64F26471D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 15:38:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07E40C3FAE3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 08:50:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3354DC424BA
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 13:38:35 +0000 (UTC)
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+ [209.85.221.68])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1A7FC3FADF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B5FC1C424B7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 10 Sep 2020 08:50:08 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08A8lUNR031743; Thu, 10 Sep 2020 10:50:07 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=JR5nwJ8bWgQcvCBAvRTxtvbbcfsn2C2S8HNB1tQjo6k=;
- b=HZLE+bNvccYbguh6++FDGr6kbOYtkD3FzJTOSQja/NCtkhB798SJHXmyPjlRf7sV8zqh
- FTxA3WOP3cWNyj3wz1T0i2nmmq19jgj5il1d5Z77NXQpHnBjv0b67VWlXo+JpvEfN4wZ
- xBaTE9Z6dcohH2qf8zZK7J7uAQJUVWefXB/vXVbUp3EVoqjSLRp0aBwibFVJOxG6a07A
- j4Bf/hG+58OkxbDX9rhLrVni0SW9YlNDfYSrtREzK6XLaiYVJmF+weyqyJB3WUtL6cEI
- Ix/sjOzUqzCb9pQUKJtRzCFup1SBuVgfehmy57dwp40aiwAwfFiIP1uSL2w7GtiymkQ3 6Q== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33c1jfabdu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 10 Sep 2020 10:50:07 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 34EAE100038;
- Thu, 10 Sep 2020 10:50:06 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2BA0D21F69B;
- Thu, 10 Sep 2020 10:50:06 +0200 (CEST)
-Received: from localhost (10.75.127.45) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 10 Sep 2020 10:50:05 +0200
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 10 Sep 2020 10:50:01 +0200
-Message-ID: <20200910104956.v4.3.I1b5c7dcf6c43efa10d18b4bc707055fc15fb36ca@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200910104956.v4.1.I2dff760694d84d8bb1f8dc4ec03a5572681e4e8d@changeid>
-References: <20200910104956.v4.1.I2dff760694d84d8bb1f8dc4ec03a5572681e4e8d@changeid>
+ Thu, 10 Sep 2020 13:38:31 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id m6so6787463wrn.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 10 Sep 2020 06:38:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=bLMYkCrNBC+c02E2FAS938NLpCD+/ppClg6sQowUpfs=;
+ b=h9Dtt6zqYf65PvbmpnyeLnfvRxGsSm4+O0JSuuxgrNrXlvBII8iHvsKCf81hjR3194
+ 7z+ZR5EF5n1lhatFIUFVErUOqPx6h8uvp4vjsq64NpksSRuV8YaxA0GI5x3UUNCOwqXp
+ iHnAYHIdNlhLQmGAGp40fQVdvzBBTOKuIwNAc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=bLMYkCrNBC+c02E2FAS938NLpCD+/ppClg6sQowUpfs=;
+ b=nIePGwThlEMgAdy9M1JKxDRfkiIdhVs3RAsSoT1cjFsnBbHVhgPtAzOZU7T/IF1azl
+ Flx9upRQcjDH+Em3dfhdTRU9SvW72Oco7ArfTw5Hp2JadPfW5Dv16KgVTCy1OStrO6et
+ tqiQehmCSFlTYQ5Ea38iLQ3UgavMoZjqL30yiAs+4Ujw7EFwtaT3d5Jn2iISFz3sPXG6
+ nPKQhjrLqNt0+E2CtOJRprpvo8zgjy1HIbHVUQO37P5uLp6mHrL3oYrDZK/UG5Np8wZC
+ NqYyJ1mxqEN5M3sctlBn4LRXl7Fm1oHDtNsRKhWyE9quIlxyfxCmn/ebaIWCI226RJyf
+ Kwww==
+X-Gm-Message-State: AOAM530xpAxzf7gVfTFLvz5Hxy5xrLMykchwwGSORf9NyYrE7wpiVJqz
+ D3+GlcFhAvJyil/QJ7nvSI2VTbMcKnLQajRIJr98xw==
+X-Google-Smtp-Source: ABdhPJz+nMC67I5ULmvW9vFVGVxn/tfPFxPpXAmrluR91cWvQRU+3AvgTxQdaBmJBUGtUbG0tetCMxCV7CfALaiRfNw=
+X-Received: by 2002:a5d:430d:: with SMTP id h13mr9621912wrq.41.1599745110862; 
+ Thu, 10 Sep 2020 06:38:30 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-10_01:2020-09-10,
- 2020-09-10 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Etienne Carriere <etienne.carriere@st.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Subject: [Uboot-stm32] [PATCH v4 3/3] optee: add property no-map to secure
-	reserved memory
+References: <20200909154413.28064-1-patrick.delaunay@st.com>
+ <20200909154413.28064-2-patrick.delaunay@st.com>
+In-Reply-To: <20200909154413.28064-2-patrick.delaunay@st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 10 Sep 2020 07:38:17 -0600
+Message-ID: <CAPnjgZ3ETQVf2YUo7BU5OcyRrQ4q0xynyf_Dxr4RZbsRvkn+PA@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Cc: Yannick Fertre <yannick.fertre@st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 2/2] video: stm32_dsi: Convert to use APIs
+ which support live DT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,42 +69,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Etienne Carriere <etienne.carriere@st.com>
+On Wed, 9 Sep 2020 at 09:44, Patrick Delaunay <patrick.delaunay@st.com> wrote:
+>
+> Use ofnode_ or dev_ APIs instead of fdt_ and fdtdec_ APIs so that the
+> driver can support live DT.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>
+>  drivers/video/stm32/stm32_dsi.c | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 
-OP-TEE reserved memory node must set property "no-map" to prevent
-Linux kernel from mapping secure memory unless what non-secure world
-speculative accesses of the CPU can violate the memory firmware
-configuration.
-
-Fixes: 6ccb05eae01b ("image: fdt: copy possible optee nodes to a loaded devicetree")
-Signed-off-by: Etienne Carriere <etienne.carriere@st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
----
-
-(no changes since v3)
-
-Changes in v3:
-   - Fix changelogs
-
- lib/optee/optee.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/optee/optee.c b/lib/optee/optee.c
-index 963c2ff430..9e6606568f 100644
---- a/lib/optee/optee.c
-+++ b/lib/optee/optee.c
-@@ -192,7 +192,7 @@ int optee_copy_fdt_nodes(const void *old_blob, void *new_blob)
- 				ret = fdtdec_add_reserved_memory(new_blob,
- 								 nodename,
- 								 &carveout,
--								 NULL, false);
-+								 NULL, true);
- 				free(oldname);
- 
- 				if (ret < 0)
--- 
-2.17.1
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

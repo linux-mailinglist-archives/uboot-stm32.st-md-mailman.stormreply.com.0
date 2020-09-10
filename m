@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A07A2649A6
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 18:25:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9BC12649AB
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 18:26:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CE454C424B8
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 16:25:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 73243C424B8
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Sep 2020 16:26:24 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 79F81C424B7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0F45FC424B7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 10 Sep 2020 16:25:15 +0000 (UTC)
+ Thu, 10 Sep 2020 16:26:22 +0000 (UTC)
 Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08AGMhZK030448; Thu, 10 Sep 2020 18:25:12 +0200
+ 08AGMhZV030448; Thu, 10 Sep 2020 18:26:20 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=mXrH9+3TXz6snlzqENdrrDUUsSfy/CGllFvzCArZmzw=;
- b=ZSgeg49t+dB27k3DBuzhqzZjRtByiWfbfOrwG1gU2ZKAnaBQJwD7NJI308mKUWkj9rHm
- u/srG/FAUAOedXOCRe02bji9Lqx6rCVuBB/pYG0fjDY3d89vVz4qwv7sgeB/wtj4CgL+
- vEorg7mDjLTAJDGb1zNhY7aZV88yQLlLuff8b7Ayao7x0knmSTfJ1o4C/MSGOjXDhgXe
- COmPGmlSPvwHIAKfzGheVrcEKiKFdd8gjtc6Lw5MN5ppEpJ3+rDGvALR8A1LXfUUeAAq
- B02Nyh7JZAoI8wp3jbX1BDo1Cq06/6Y+OogYfZRY4UpW61wgRKl1zfHnMZG41cWjowmc Qg== 
+ bh=/+ZEXHr261IOJdj/TDIkPGpzYSbwFW6hiVs/jLJ5avY=;
+ b=NH/oRkMf3dE1WGEbsLLELG9dBjGkbcPrlqLshnL8HXdL43Z7Kl3LQm5uLGVnSxqcWt06
+ V/tUG4B3J54FWafTxAAt4kpEQSWKHazLgSb4Cd8lrhjYQ/4t8siOdHCcW4cP9JpbCZFl
+ saWtNY1awbiOQRx/B9OGy1SC6Q2gar82e/tYwDd7jkog0PAOPCj45+GspbpXHCJCk3Qu
+ yVaPEpbWlgkRycU9lwNorbVwnzF4kCe5dBOnhNgk8RD5Nv9+JpEmOtOUu/xeYUkn8y13
+ LWwa1w7jzXsIpNNuGV1Ddtr8RzZc09nNmEcw+rJrOK/I+yRvd1wTHW9Zpq2oTcWRCeSk +A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33c0ev4641-1
+ by mx07-00178001.pphosted.com with ESMTP id 33c0ev4687-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 10 Sep 2020 18:25:12 +0200
+ Thu, 10 Sep 2020 18:26:20 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 024EF10002A;
- Thu, 10 Sep 2020 18:25:11 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 55B09100034;
+ Thu, 10 Sep 2020 18:26:20 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E42472BC7B3;
- Thu, 10 Sep 2020 18:25:11 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4B8252BC7B4;
+ Thu, 10 Sep 2020 18:26:20 +0200 (CEST)
+Received: from localhost (10.75.127.48) by SFHDAG6NODE3.st.com (10.75.127.18)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Thu, 10 Sep 2020 18:25:11 +0200
+ Thu, 10 Sep 2020 18:26:19 +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 10 Sep 2020 18:25:09 +0200
-Message-ID: <20200910162509.27997-1-patrick.delaunay@st.com>
+Date: Thu, 10 Sep 2020 18:26:17 +0200
+Message-ID: <20200910162617.28257-1-patrick.delaunay@st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG6NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG6NODE3.st.com
  (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-09-10_05:2020-09-10,
  2020-09-10 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Heiko Schocher <hs@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] i2c: i2c-gpio: Convert to use APIs which
-	support live DT
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] dm: add cells_count parameter in live DT APIs
+	of_parse_phandle_with_args
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,53 +71,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use ofnode_ or dev_ APIs instead of fdt_ and fdtdec_ APIs so that the
-driver can support live DT.
+In the live tree API ofnode_parse_phandle_with_args, the cell_count
+argument must be used when cells_name is NULL.
+
+But this argument is not provided to the live DT function
+of_parse_phandle_with_args even it is provided to
+fdtdec_parse_phandle_with_args.
+
+This patch adds support of the cells_count parameter in dev_ and
+of_node API to allow migration and support of live DT:
+- of_parse_phandle_with_args
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- drivers/i2c/i2c-gpio.c | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
+ drivers/core/of_access.c | 7 ++++---
+ drivers/core/ofnode.c    | 3 ++-
+ include/dm/of_access.h   | 4 +++-
+ 3 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/i2c/i2c-gpio.c b/drivers/i2c/i2c-gpio.c
-index cfdeadc752..381938c956 100644
---- a/drivers/i2c/i2c-gpio.c
-+++ b/drivers/i2c/i2c-gpio.c
-@@ -18,8 +18,6 @@
- #define I2C_ACK		0
- #define I2C_NOACK	1
+diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
+index 922e78f99b..bcf1644d05 100644
+--- a/drivers/core/of_access.c
++++ b/drivers/core/of_access.c
+@@ -745,13 +745,14 @@ struct device_node *of_parse_phandle(const struct device_node *np,
  
--DECLARE_GLOBAL_DATA_PTR;
--
- enum {
- 	PIN_SDA = 0,
- 	PIN_SCL,
-@@ -334,8 +332,6 @@ static int i2c_gpio_drv_probe(struct udevice *dev)
- static int i2c_gpio_ofdata_to_platdata(struct udevice *dev)
+ int of_parse_phandle_with_args(const struct device_node *np,
+ 			       const char *list_name, const char *cells_name,
+-			       int index, struct of_phandle_args *out_args)
++			       int cell_count, int index,
++			       struct of_phandle_args *out_args)
  {
- 	struct i2c_gpio_bus *bus = dev_get_priv(dev);
--	const void *blob = gd->fdt_blob;
--	int node = dev_of_offset(dev);
- 	int ret;
+ 	if (index < 0)
+ 		return -EINVAL;
  
- 	ret = gpio_request_list_by_name(dev, "gpios", bus->gpios,
-@@ -343,12 +339,12 @@ static int i2c_gpio_ofdata_to_platdata(struct udevice *dev)
- 	if (ret < 0)
- 		goto error;
+-	return __of_parse_phandle_with_args(np, list_name, cells_name, 0,
+-					    index, out_args);
++	return __of_parse_phandle_with_args(np, list_name, cells_name,
++					    cell_count, index, out_args);
+ }
  
--	bus->udelay = fdtdec_get_int(blob, node, "i2c-gpio,delay-us",
--				     DEFAULT_UDELAY);
-+	bus->udelay = dev_read_u32_default(dev, "i2c-gpio,delay-us",
-+					   DEFAULT_UDELAY);
+ int of_count_phandle_with_args(const struct device_node *np,
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index d02d8d33fe..79fcdf5ce2 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -409,7 +409,8 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
+ 		int ret;
  
- 	bus->get_sda = i2c_gpio_sda_get;
- 	bus->set_sda = i2c_gpio_sda_set;
--	if (fdtdec_get_bool(blob, node, "i2c-gpio,scl-output-only"))
-+	if (dev_read_bool(dev, "i2c-gpio,scl-output-only"))
- 		bus->set_scl = i2c_gpio_scl_set_output_only;
- 	else
- 		bus->set_scl = i2c_gpio_scl_set;
+ 		ret = of_parse_phandle_with_args(ofnode_to_np(node),
+-						 list_name, cells_name, index,
++						 list_name, cells_name,
++						 cell_count, index,
+ 						 &args);
+ 		if (ret)
+ 			return ret;
+diff --git a/include/dm/of_access.h b/include/dm/of_access.h
+index f95a00d065..2fa65c9332 100644
+--- a/include/dm/of_access.h
++++ b/include/dm/of_access.h
+@@ -407,6 +407,7 @@ struct device_node *of_parse_phandle(const struct device_node *np,
+  * @np:		pointer to a device tree node containing a list
+  * @list_name:	property name that contains a list
+  * @cells_name:	property name that specifies phandles' arguments count
++ * @cells_count: Cell count to use if @cells_name is NULL
+  * @index:	index of a phandle to parse out
+  * @out_args:	optional pointer to output arguments structure (will be filled)
+  * @return 0 on success (with @out_args filled out if not NULL), -ENOENT if
+@@ -440,7 +441,8 @@ struct device_node *of_parse_phandle(const struct device_node *np,
+  */
+ int of_parse_phandle_with_args(const struct device_node *np,
+ 			       const char *list_name, const char *cells_name,
+-			       int index, struct of_phandle_args *out_args);
++			       int cells_count, int index,
++			       struct of_phandle_args *out_args);
+ 
+ /**
+  * of_count_phandle_with_args() - Count the number of phandle in a list
 -- 
 2.17.1
 

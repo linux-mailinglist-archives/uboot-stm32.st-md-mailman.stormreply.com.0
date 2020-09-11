@@ -2,111 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76C0F265ACC
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 09:49:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AEC7265C1D
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 11:01:10 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0371CC3FAE3
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 07:49:31 +0000 (UTC)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EEA50C3FAE3
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 09:01:09 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D2DD1C3FAE2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 926E9C3FADD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Sep 2020 07:49:27 +0000 (UTC)
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20200911074924epoutp0273e276c0dabb095525652297651e0864~zqztkS36t0977609776epoutp02P
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Sep 2020 07:49:24 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20200911074924epoutp0273e276c0dabb095525652297651e0864~zqztkS36t0977609776epoutp02P
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1599810564;
- bh=+B+pbJ9cCffQ1EtRndTm+adptL2LvKlKNeyrYnDvay0=;
- h=Subject:To:Cc:From:Date:In-Reply-To:References:From;
- b=lbWc8M0RHVbl2spNg7pr0E6+wnVobB2Lp/h0aam5cmB1PzA37+wIGL4GNYzTOg2AE
- NLBThwdYV2cJzqMLMFiqkDi+TAvzFq+SnTF55ERzM5X+7BpclTD7xQjk31n6BU/KoE
- uyfiEmQhCtIcY2oRIRlgygleTv5WB46pGbBdOhLI=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20200911074924epcas1p3a9147bbf3717295c04e09ad8e00303fb~zqztZgi2g1402714027epcas1p3N;
- Fri, 11 Sep 2020 07:49:24 +0000 (GMT)
-Received: from epsmges1p2.samsung.com (unknown [182.195.40.153]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4Bnnvj5QyyzMqYm5; Fri, 11 Sep
- 2020 07:49:21 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- 22.70.19033.10C2B5F5; Fri, 11 Sep 2020 16:49:21 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20200911074921epcas1p285f7372d59256e0c88c04521e98b4b5d~zqzqq5uMD0098300983epcas1p2s;
- Fri, 11 Sep 2020 07:49:21 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20200911074921epsmtrp2fb4257d4b73d8f1bdca6ba77c1dc80e2~zqzqpE4hw2594625946epsmtrp2o;
- Fri, 11 Sep 2020 07:49:21 +0000 (GMT)
-X-AuditID: b6c32a36-159ff70000004a59-01-5f5b2c013903
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D6.F1.08382.00C2B5F5; Fri, 11 Sep 2020 16:49:20 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20200911074920epsmtip17b4fe76972a6d9313f6c21c45aae36c4~zqzqba7Et1624716247epsmtip1C;
- Fri, 11 Sep 2020 07:49:20 +0000 (GMT)
-To: Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-From: Jaehoon Chung <jh80.chung@samsung.com>
-Message-ID: <79b3e835-0dac-43cd-9d6e-0d31e985424b@samsung.com>
-Date: Fri, 11 Sep 2020 16:49:33 +0900
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <20200909215402.366561-1-mr.nuke.me@gmail.com>
+ Fri, 11 Sep 2020 09:01:07 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 08B8urdu024360; Fri, 11 Sep 2020 11:01:04 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=iu4KnuFHqgo2ujcloqIZhqHwUNMNl+lQ8xH9xwS3Xps=;
+ b=ItUfnu17L1Sb67Y/3sw40pPLB2AW12GhMhGNRmyyOQmfj//PSF8ZX1yxn1LHYdHdSrdn
+ PVbW61il8ssDVKsDvI3KHlehXhiLUQtqrG9JVW9b3/C1rRysvCpU20sbIY0EsFTEs/1Z
+ WfpPplWxFRlOLnGhPgF+G/to2vwa1TJ9+CgWMH3bP45bDD3lzmkTz8CiOKvenWNcAxbT
+ Zvv9al5KdWNMhi45pimvkK+NEiwR2iGK1ZBxZ9dlBu40i2MTm4ROZ/JXb3oRjt/28ZpQ
+ HAMpUwNT7yTrRtgnL6zXXUgAnwcHC+gHaCPAdxxx2mITu8P7ayAunFEeVFTd/45qQaJP RA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 33c0ev84rr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 11 Sep 2020 11:01:04 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2C68F100038;
+ Fri, 11 Sep 2020 11:01:03 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1E5AA21F69D;
+ Fri, 11 Sep 2020 11:01:03 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
+ (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 11 Sep
+ 2020 11:00:14 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Fri, 11 Sep 2020 11:00:14 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Alex G. <mr.nuke.me@gmail.com>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Yann GAUTIER
+ <yann.gautier@st.com>
+Thread-Topic: [PATCH] mmc: stm32_sdmmc2: Use mmc_of_parse() to read host
+ capabilities
+Thread-Index: AQHWhvPBpA6CLj++jEKGeAsJCXckZ6lh6s/QgABCmACAAOGvIA==
+Date: Fri, 11 Sep 2020 09:00:14 +0000
+Message-ID: <f43d5afbf0ce4b6bb2d11941cb28f7da@SFHDAG6NODE3.st.com>
+References: <20200909215402.366561-1-mr.nuke.me@gmail.com>
+ <f48f0991628c4dda87089f1464da65d5@SFHDAG6NODE3.st.com>
+ <ed73c108-71e5-4940-f9e0-9490758087a8@gmail.com>
+In-Reply-To: <ed73c108-71e5-4940-f9e0-9490758087a8@gmail.com>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprMJsWRmVeSWpSXmKPExsWy7bCmgS6jTnS8wdNLqhaz7l9htZhz4iqj
- xcpL/1ktfqz6wmrxdm8nu8XCrctZHNg8ds66y+5x9s4ORo+N73YweRzcZ+jx9Mde5gDWqGyb
- jNTElNQihdS85PyUzLx0WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKALlBTKEnNK
- gUIBicXFSvp2NkX5pSWpChn5xSW2SqkFKTkFlgV6xYm5xaV56XrJ+blWhgYGRqZAhQnZGQ/+
- PWMvWMdT8WPRA9YGxq+cXYycHBICJhIXVs9g6mLk4hAS2MEo8fFIKwuE84lRomHTEmYI5xuj
- xIq1e9hgWt5caYJK7GWUeHWwjRHCec8ocbT5KxNIlbBAmMS6h91Aszg4RAQiJHZdEwOpYRbo
- ZZR48fYZO0gNm4COxPZvx5lAangF7CSer9UDCbMIqEpc2reFGcQWFYiU2Pn0JVg5r4CgxMmZ
- T1hAbE4Ba4mt5/eDHcQsIC5x68l8JghbXmL72zlgx0kIdHJIrOxbBHW1i0TDxFVMELawxKvj
- W9ghbCmJz+/2QtVUS+xqPgPV3MEocWtbE1SDscT+pZPBDmUW0JRYv0sfIqwosfP3XEaIxXwS
- 7772sIKUSAjwSnS0CUGUqEhcev2SCWbV3Sf/WSFsD4lj97awTmBUnIXktVlI3pmF5J1ZCIsX
- MLKsYhRLLSjOTU8tNiwwQo7tTYzg1KlltoNx0tsPeocYmTgYDzFKcDArifAm5UfGC/GmJFZW
- pRblxxeV5qQWH2I0BQb2RGYp0eR8YPLOK4k3NDUyNja2MDE0MzU0VBLnfXhLIV5IID2xJDU7
- NbUgtQimj4mDU6qBSYDtyEsewSpD61N3uk7VzPz6csXR8oBsjjBRv5Z/oja/raK5d8y/e1e+
- uyz7qU74yY71yxJbosKF4qJs89hce8Knvbif1f5nmYQY097DW5dGP6i9YTmN02vF3AObOGP2
- rU2LZzx8xmH/m3lerTu5lgRFumnOsV0ne2fTK37NuzWcUw6e3qgQUXgyefaRgk8imptbT5yr
- umqcI/PjW+3bQzNmnj+k+/HgqdsJW/aLfhVs4Ak8c+O3xs8VuU9WKVcnv1jPlfvwQKllWF7J
- X2vBhE4F96vheS+zxUMfL54rNqnimOTt7/0pV64FJteUP7t1xX7lypu81iITb3N87UlKav18
- /wXDnYo5Mc1nn8r67VBiKc5INNRiLipOBAClkcdOJgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrALMWRmVeSWpSXmKPExsWy7bCSnC6DTnS8wY4VVhaz7l9htZhz4iqj
- xcpL/1ktfqz6wmrxdm8nu8XCrctZHNg8ds66y+5x9s4ORo+N73YweRzcZ+jx9Mde5gDWKC6b
- lNSczLLUIn27BK6MB/+esRes46n4segBawPjV84uRk4OCQETiTdXmpi7GLk4hAR2M0p07m9n
- g0hISXx+OhXI5gCyhSUOHy4GCQsJvGWUuNZXAWILC4RJrHvYzQJiiwhESPTs2MIIModZoJ9R
- 4uXyd1BD+xglJl9rYAKpYhPQkdj+7TgTyFBeATuJ52v1QMIsAqoSl/ZtYQYJiwpESuzcYQkS
- 5hUQlDg58wnYfE4Ba4mt5/eDncYsoC7xZ94lZghbXOLWk/lMELa8xPa3c5gnMArNQtI+C0nL
- LCQts5C0LGBkWcUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJERwpWpo7GLev+qB3iJGJ
- g/EQowQHs5IIb1J+ZLwQb0piZVVqUX58UWlOavEhRmkOFiVx3huFC+OEBNITS1KzU1MLUotg
- skwcnFINTOcyNv5QNXAsrLSaln2oeXKDGc/m2ntzag9z/q45mK34N/9BZl/uj/laz582/m0s
- fm1/7rzg9v1/bLnfv69dbPIkOXZp6c6nrfPuSC5//1BMLvKc8toT83wiGF/YLy9u0Oz1mqSj
- vPHZ3r7aS6oTxDbP31/sWdfrtlgj/Gn8Ws6YJzdeS/ZYX+KuTOI9ZfT67Y1gy6JrAfsTdorp
- 8SXdnlXJI7ndoLnr8UylqoIHj5fVrElu1ZyVH7J41+qIVT1L/bLzdjXs854Vwz1Ns9e9f7uz
- QINk09qYwNw3nIlfY5f8k5/CHsDWrdVeYeNcO2vN3L7n4nf+XTnNUlXw5P3i1UX/fkhKhD3f
- 4vkyXS1cXomlOCPRUIu5qDgRAGQzRFUDAwAA
-X-CMS-MailID: 20200911074921epcas1p285f7372d59256e0c88c04521e98b4b5d
-X-Msg-Generator: CA
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20200910005435epcas1p20d2f97d097717214bd2836fafdd140d9
-References: <CGME20200910005435epcas1p20d2f97d097717214bd2836fafdd140d9@epcas1p2.samsung.com>
- <20200909215402.366561-1-mr.nuke.me@gmail.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.46]
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-09-11_03:2020-09-10,
+ 2020-09-11 signatures=0
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>
 Subject: Re: [Uboot-stm32] [PATCH] mmc: stm32_sdmmc2: Use mmc_of_parse() to
  read host capabilities
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -125,59 +86,138 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 9/10/20 6:54 AM, Alexandru Gagniuc wrote:
-> mmc_of_parse() can populate the 'f_max' and 'host_caps' fields of
-> struct mmc_config from devicetree.
-> The same logic is duplicated in stm32_sdmmc2_probe(). Use
-> mmc_of_parse(), which is more generic.
+Hi Alex,
+
+> From: Alex G. <mr.nuke.me@gmail.com>
+> Sent: jeudi 10 septembre 2020 22:10
 > 
-> Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> ---
->  drivers/mmc/stm32_sdmmc2.c | 18 ++----------------
->  1 file changed, 2 insertions(+), 16 deletions(-)
+> On 9/10/20 11:04 AM, Patrick DELAUNAY wrote:
+> > Hi Alexandru,
 > 
-> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-> index 6d50356217..77871d5afc 100644
-> --- a/drivers/mmc/stm32_sdmmc2.c
-> +++ b/drivers/mmc/stm32_sdmmc2.c
-> @@ -676,27 +676,13 @@ static int stm32_sdmmc2_probe(struct udevice *dev)
->  			     GPIOD_IS_IN);
->  
->  	cfg->f_min = 400000;
-> -	cfg->f_max = dev_read_u32_default(dev, "max-frequency", 52000000);
->  	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34 | MMC_VDD_165_195;
->  	cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
->  	cfg->name = "STM32 SD/MMC";
->  
->  	cfg->host_caps = 0;
-> -	if (cfg->f_max > 25000000)
-> -		cfg->host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
-> -
-> -	switch (dev_read_u32_default(dev, "bus-width", 1)) {
-> -	case 8:
-> -		cfg->host_caps |= MMC_MODE_8BIT;
-> -		/* fall through */
-> -	case 4:
-> -		cfg->host_caps |= MMC_MODE_4BIT;
-> -		break;
-> -	case 1:
-> -		break;
-> -	default:
-> -		pr_err("invalid \"bus-width\" property, force to 1\n");
-> -	}
-> +	cfg->f_max = 52000000;
+> Hi
+> 
+> [snip]
+> 
+> >> +	cfg->f_max = 52000000;
+> >> +	mmc_of_parse(dev, cfg);
+> >
+> > Result of mmc_of_parse is not tested ?
+> >
+> > I proposed:
+> >
+> > +	ret = mmc_of_parse(dev, cfg);
+> > +	if (ret)
+> > +		return ret;
+> 
+> You're right. I'll get that updated.
 
-cfg->f_max can be also removed?
+Thanks;
+ 
+> 
+> > I test this patch with a trace in stm32_sdmmc2_probe on
+> > STM32MP157C-EV1
+> [snip]
+> > I think that it is a issue U-Boot, in mmc uclass in mmc_of_parse():
+> >
+> > 	if (dev_read_bool(dev, "cap-mmc-highspeed"))
+> > -		cfg->host_caps |= MMC_CAP(MMC_HS);
+> > +		cfg->host_caps |= MMC_CAP(MMC_HS) |
+> MMC_CAP(MMC_HS_52);
+> >
+> > In U-Boot this capability is splitted in 2 bits = one for 26MHz one
+> > for 52MHz And  for card side it is managed on card side by
+> > mmc_get_capabilities()
+> 
+> I agree. I am preparing a patch to address this.
 
-Best Regards,
-Jaehoon Chung
+Thanks;
+ 
+> 
+> [snip]
+> > 2) some host caps can be added in device tree (they are supported by SOC and
+> by Linux driver)
+> >      but they are not supported by U-Boot driver, for example:
+> >
+> > #define MMC_MODE_DDR_52MHz	MMC_CAP(MMC_DDR_52)
+> > #define MMC_MODE_HS200		MMC_CAP(MMC_HS_200)
+> > #define MMC_MODE_HS400		MMC_CAP(MMC_HS_400)
+> > #define MMC_MODE_HS400_ES	MMC_CAP(MMC_HS_400_ES)
+> >
+> >
+> > I afraid (I don't sure) that this added caps change the mmc core
+> > behavior in U-Boot = U-Boot try to select  the high speed mode even if not
+> supported by driver....
+> 
+> Two issues here. The first is when devicetree enables an unsupported mode, say
+> "mmc-hs400-1_2v". That's a devicetree bug, and not something we should fix in
+> the code. Hypothetical exam: DT says
+> 	bus-width = <8>;
+> but only four lines are routed on the board.
 
-> +	mmc_of_parse(dev, cfg);
->  
->  	upriv->mmc = &plat->mmc;
->  
+Yes it is a device tree issue when the mode is not supported by board / SOC.
+
+But high mode is supported by the STM32MP15x SOC but only if additional
+Operation are done (IO configuration to support higher speed) 
+
+It is not supported in U-Boot driver (yet ?) but it is supported by Linux driver...
+
+> The second issue is what happens when somebody plugs in a UHS SD card?
+> UHS support is not enabled by default in the stm32mp1 defconfigs, so the mmc
+> core won't try to run it at UHS.
+> 
+> Now if somebody were to enable UHS manually:
+> 	CONFIG_MMC_IO_VOLTAGE=y
+> 	CONFIG_MMC_UHS_SUPPORT=y
+> Then yes, the UHS switch will be attempted, fail, and the card will not be detected.
+> 
+> To work around that, one could implement a .wait_dat0() that returns an error
+> other than -ENOSYS. This would cause mmc_switch_voltage() to fail, making the
+> mmc core to leave the card at default speeds.
+> 
+> My argument is that it takes conscious effort to break things in the first place, so
+> it's not a situation we should worry about.
 > 
 
+Yes  we should have issue only if UHS defconfig was activated
+(CONFIG_MMC_UHS_SUPPORT, CONFIG_MMC_HS*_SUPPORT)....
+
+And it is not the case today in stm32*defconfig
+And my proposal is protection (over).
+
+> > The host_caps bitfield should be limited by the supported features in the driver
+> (or remove the unsupported features)
+> [snip]
+> > 	cfg->host_caps &= SDMMC_SUPPORTED_CAPS;
+> > or
+> > 	cfg->host_caps |= ~SDMMC_UNSUPPORTED_CAPS;
+> 
+> I think this sort of playing with the flags will cause more confusion.
+> People would expect this to come from DT. For example, somebody sets
+> "sd-uhs-ddr52" in devicetree. It's more confusing to check host_caps,
+> and find that MMC_MODE_DDR_52MHz is not set than it is to see the driver
+> trying to place the card in DDR52 and failing.
+
+- card_caps = CARD capacity
+
+For you
+- host_caps is SOC capacity (read from DT)
+
+For me 
+- host_caps is SOC capacity (read from DT) AND driver capacity
+
+=> then in mmc u-class, the real capacity is  host_caps | card_caps
+
+I already see this kind of limitation in one driver 
+omap_hsmmc.c:1939:		cfg->host_caps &= ~fixups->unsupported_caps;
+
+But I agree it is today an over protection on host_caps and it can be confusing
+so you can forget this point....
+
+> Alex
+
+Regards
+
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

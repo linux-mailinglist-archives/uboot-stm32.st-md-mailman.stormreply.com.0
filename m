@@ -2,69 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AEC7265C1D
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 11:01:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57E82265EF7
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 13:46:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EEA50C3FAE3
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 09:01:09 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07DB1C3FAE3
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 11:46:44 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 926E9C3FADD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 11C54C3FAE2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Sep 2020 09:01:07 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri, 11 Sep 2020 11:46:40 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08B8urdu024360; Fri, 11 Sep 2020 11:01:04 +0200
+ 08BBfljW024888; Fri, 11 Sep 2020 13:46:32 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=iu4KnuFHqgo2ujcloqIZhqHwUNMNl+lQ8xH9xwS3Xps=;
- b=ItUfnu17L1Sb67Y/3sw40pPLB2AW12GhMhGNRmyyOQmfj//PSF8ZX1yxn1LHYdHdSrdn
- PVbW61il8ssDVKsDvI3KHlehXhiLUQtqrG9JVW9b3/C1rRysvCpU20sbIY0EsFTEs/1Z
- WfpPplWxFRlOLnGhPgF+G/to2vwa1TJ9+CgWMH3bP45bDD3lzmkTz8CiOKvenWNcAxbT
- Zvv9al5KdWNMhi45pimvkK+NEiwR2iGK1ZBxZ9dlBu40i2MTm4ROZ/JXb3oRjt/28ZpQ
- HAMpUwNT7yTrRtgnL6zXXUgAnwcHC+gHaCPAdxxx2mITu8P7ayAunFEeVFTd/45qQaJP RA== 
+ bh=Fwccz2xE8WX3R5VADbdMPs+uh+vC9iQArpM8zgfBdDQ=;
+ b=Af4TveLlt4LMY4ntpa8PlM4dEBGDIMgzAyGao6IRsNE+ykDiHb2Cq/67P0COdG1X07Fi
+ CWSqVXjFQRkH3WbcF3+nYND1G7aqO3QO9uZQGu2qJ9DyfofY9D1ptFLkj3TiQeh2zPv+
+ JlzBJ0cw9W1W+xuGxhWxRSVqHj6DuBgm0eziBEJ4mY/Lt+JKrykHl3IRqlrprCfUk3fj
+ LUJsc5PlHADPG6mDxrS9aqkMdt/keeNDsKHS0uWrIEsRw8310Y4vIVlm6rTcD6pbeKqc
+ irOnf56sczeQfKQqfwbUkAtmY8IyRevvW0QiIuHLzhcslyDTOUi1DqQJh1PgXfEH3Vah bw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33c0ev84rr-1
+ by mx07-00178001.pphosted.com with ESMTP id 33c1jfhc72-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Sep 2020 11:01:04 +0200
+ Fri, 11 Sep 2020 13:46:32 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2C68F100038;
- Fri, 11 Sep 2020 11:01:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1E5AA21F69D;
- Fri, 11 Sep 2020 11:01:03 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 11 Sep
- 2020 11:00:14 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 11 Sep 2020 11:00:14 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3F68A10002A;
+ Fri, 11 Sep 2020 13:46:32 +0200 (CEST)
+Received: from Webmail-eu.st.com (gpxdag6node4.st.com [10.75.127.80])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3038F2A7A11;
+ Fri, 11 Sep 2020 13:46:32 +0200 (CEST)
+Received: from GPXDAG6NODE6.st.com (10.75.127.82) by GPXDAG6NODE4.st.com
+ (10.75.127.80) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 11 Sep
+ 2020 13:46:31 +0200
+Received: from GPXDAG6NODE6.st.com ([fe80::1c1:61d:3d8d:4b33]) by
+ GPXDAG6NODE6.st.com ([fe80::1c1:61d:3d8d:4b33%19]) with mapi id
+ 15.00.1473.003; Fri, 11 Sep 2020 13:46:31 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Alex G. <mr.nuke.me@gmail.com>, "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>, Yann GAUTIER
- <yann.gautier@st.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>, Alexandru Gagniuc
+ <mr.nuke.me@gmail.com>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
 Thread-Topic: [PATCH] mmc: stm32_sdmmc2: Use mmc_of_parse() to read host
  capabilities
-Thread-Index: AQHWhvPBpA6CLj++jEKGeAsJCXckZ6lh6s/QgABCmACAAOGvIA==
-Date: Fri, 11 Sep 2020 09:00:14 +0000
-Message-ID: <f43d5afbf0ce4b6bb2d11941cb28f7da@SFHDAG6NODE3.st.com>
-References: <20200909215402.366561-1-mr.nuke.me@gmail.com>
- <f48f0991628c4dda87089f1464da65d5@SFHDAG6NODE3.st.com>
- <ed73c108-71e5-4940-f9e0-9490758087a8@gmail.com>
-In-Reply-To: <ed73c108-71e5-4940-f9e0-9490758087a8@gmail.com>
+Thread-Index: AQHWhvPBpA6CLj++jEKGeAsJCXckZ6li8L6AgABhtkA=
+Date: Fri, 11 Sep 2020 11:46:31 +0000
+Message-ID: <2cb173a6d4834550805337bf76545a12@GPXDAG6NODE6.st.com>
+References: <CGME20200910005435epcas1p20d2f97d097717214bd2836fafdd140d9@epcas1p2.samsung.com>
+ <20200909215402.366561-1-mr.nuke.me@gmail.com>
+ <79b3e835-0dac-43cd-9d6e-0d31e985424b@samsung.com>
+In-Reply-To: <79b3e835-0dac-43cd-9d6e-0d31e985424b@samsung.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.46]
+x-originating-ip: [10.75.127.50]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-11_03:2020-09-10,
+ definitions=2020-09-11_04:2020-09-10,
  2020-09-11 signatures=0
 Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
  Patrice CHOTARD <patrice.chotard@st.com>
@@ -86,136 +86,70 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Alex,
+Hi Jaehoon
 
-> From: Alex G. <mr.nuke.me@gmail.com>
-> Sent: jeudi 10 septembre 2020 22:10
+> From: Jaehoon Chung <jh80.chung@samsung.com>
+> Sent: vendredi 11 septembre 2020 09:50
 > 
-> On 9/10/20 11:04 AM, Patrick DELAUNAY wrote:
-> > Hi Alexandru,
-> 
-> Hi
-> 
-> [snip]
-> 
-> >> +	cfg->f_max = 52000000;
-> >> +	mmc_of_parse(dev, cfg);
+> On 9/10/20 6:54 AM, Alexandru Gagniuc wrote:
+> > mmc_of_parse() can populate the 'f_max' and 'host_caps' fields of
+> > struct mmc_config from devicetree.
+> > The same logic is duplicated in stm32_sdmmc2_probe(). Use
+> > mmc_of_parse(), which is more generic.
 > >
-> > Result of mmc_of_parse is not tested ?
+> > Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
+> > ---
+> >  drivers/mmc/stm32_sdmmc2.c | 18 ++----------------
+> >  1 file changed, 2 insertions(+), 16 deletions(-)
 > >
-> > I proposed:
+> > diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> > index 6d50356217..77871d5afc 100644
+> > --- a/drivers/mmc/stm32_sdmmc2.c
+> > +++ b/drivers/mmc/stm32_sdmmc2.c
+> > @@ -676,27 +676,13 @@ static int stm32_sdmmc2_probe(struct udevice *dev)
+> >  			     GPIOD_IS_IN);
 > >
-> > +	ret = mmc_of_parse(dev, cfg);
-> > +	if (ret)
-> > +		return ret;
-> 
-> You're right. I'll get that updated.
-
-Thanks;
- 
-> 
-> > I test this patch with a trace in stm32_sdmmc2_probe on
-> > STM32MP157C-EV1
-> [snip]
-> > I think that it is a issue U-Boot, in mmc uclass in mmc_of_parse():
+> >  	cfg->f_min = 400000;
+> > -	cfg->f_max = dev_read_u32_default(dev, "max-frequency", 52000000);
+> >  	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34 |
+> MMC_VDD_165_195;
+> >  	cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
+> >  	cfg->name = "STM32 SD/MMC";
 > >
-> > 	if (dev_read_bool(dev, "cap-mmc-highspeed"))
-> > -		cfg->host_caps |= MMC_CAP(MMC_HS);
-> > +		cfg->host_caps |= MMC_CAP(MMC_HS) |
-> MMC_CAP(MMC_HS_52);
+> >  	cfg->host_caps = 0;
+> > -	if (cfg->f_max > 25000000)
+> > -		cfg->host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
+> > -
+> > -	switch (dev_read_u32_default(dev, "bus-width", 1)) {
+> > -	case 8:
+> > -		cfg->host_caps |= MMC_MODE_8BIT;
+> > -		/* fall through */
+> > -	case 4:
+> > -		cfg->host_caps |= MMC_MODE_4BIT;
+> > -		break;
+> > -	case 1:
+> > -		break;
+> > -	default:
+> > -		pr_err("invalid \"bus-width\" property, force to 1\n");
+> > -	}
+> > +	cfg->f_max = 52000000;
+> 
+> cfg->f_max can be also removed?
+> 
+> Best Regards,
+> Jaehoon Chung
+
+I don't think because " max-frequency" is optional in device tree (only "reg" is required)
+
+Here 52MHz is a default value when it is absent in device tree
+That avoids cfg->f_max = 0 after mmc_of_parse() call.
+
+> 
+> > +	mmc_of_parse(dev, cfg);
 > >
-> > In U-Boot this capability is splitted in 2 bits = one for 26MHz one
-> > for 52MHz And  for card side it is managed on card side by
-> > mmc_get_capabilities()
-> 
-> I agree. I am preparing a patch to address this.
-
-Thanks;
- 
-> 
-> [snip]
-> > 2) some host caps can be added in device tree (they are supported by SOC and
-> by Linux driver)
-> >      but they are not supported by U-Boot driver, for example:
-> >
-> > #define MMC_MODE_DDR_52MHz	MMC_CAP(MMC_DDR_52)
-> > #define MMC_MODE_HS200		MMC_CAP(MMC_HS_200)
-> > #define MMC_MODE_HS400		MMC_CAP(MMC_HS_400)
-> > #define MMC_MODE_HS400_ES	MMC_CAP(MMC_HS_400_ES)
+> >  	upriv->mmc = &plat->mmc;
 > >
 > >
-> > I afraid (I don't sure) that this added caps change the mmc core
-> > behavior in U-Boot = U-Boot try to select  the high speed mode even if not
-> supported by driver....
-> 
-> Two issues here. The first is when devicetree enables an unsupported mode, say
-> "mmc-hs400-1_2v". That's a devicetree bug, and not something we should fix in
-> the code. Hypothetical exam: DT says
-> 	bus-width = <8>;
-> but only four lines are routed on the board.
-
-Yes it is a device tree issue when the mode is not supported by board / SOC.
-
-But high mode is supported by the STM32MP15x SOC but only if additional
-Operation are done (IO configuration to support higher speed) 
-
-It is not supported in U-Boot driver (yet ?) but it is supported by Linux driver...
-
-> The second issue is what happens when somebody plugs in a UHS SD card?
-> UHS support is not enabled by default in the stm32mp1 defconfigs, so the mmc
-> core won't try to run it at UHS.
-> 
-> Now if somebody were to enable UHS manually:
-> 	CONFIG_MMC_IO_VOLTAGE=y
-> 	CONFIG_MMC_UHS_SUPPORT=y
-> Then yes, the UHS switch will be attempted, fail, and the card will not be detected.
-> 
-> To work around that, one could implement a .wait_dat0() that returns an error
-> other than -ENOSYS. This would cause mmc_switch_voltage() to fail, making the
-> mmc core to leave the card at default speeds.
-> 
-> My argument is that it takes conscious effort to break things in the first place, so
-> it's not a situation we should worry about.
-> 
-
-Yes  we should have issue only if UHS defconfig was activated
-(CONFIG_MMC_UHS_SUPPORT, CONFIG_MMC_HS*_SUPPORT)....
-
-And it is not the case today in stm32*defconfig
-And my proposal is protection (over).
-
-> > The host_caps bitfield should be limited by the supported features in the driver
-> (or remove the unsupported features)
-> [snip]
-> > 	cfg->host_caps &= SDMMC_SUPPORTED_CAPS;
-> > or
-> > 	cfg->host_caps |= ~SDMMC_UNSUPPORTED_CAPS;
-> 
-> I think this sort of playing with the flags will cause more confusion.
-> People would expect this to come from DT. For example, somebody sets
-> "sd-uhs-ddr52" in devicetree. It's more confusing to check host_caps,
-> and find that MMC_MODE_DDR_52MHz is not set than it is to see the driver
-> trying to place the card in DDR52 and failing.
-
-- card_caps = CARD capacity
-
-For you
-- host_caps is SOC capacity (read from DT)
-
-For me 
-- host_caps is SOC capacity (read from DT) AND driver capacity
-
-=> then in mmc u-class, the real capacity is  host_caps | card_caps
-
-I already see this kind of limitation in one driver 
-omap_hsmmc.c:1939:		cfg->host_caps &= ~fixups->unsupported_caps;
-
-But I agree it is today an over protection on host_caps and it can be confusing
-so you can forget this point....
-
-> Alex
-
-Regards
 
 Patrick
 _______________________________________________

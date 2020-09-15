@@ -2,65 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 674D826A776
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 16:46:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE04226AE19
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 21:52:00 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 31D76C3FADE
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 14:46:13 +0000 (UTC)
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
- [209.85.160.193])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 97F9BC3FADE
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 19:52:00 +0000 (UTC)
+Received: from mail-oo1-f67.google.com (mail-oo1-f67.google.com
+ [209.85.161.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7ED00C3FADE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2BBEAC3FAD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Sep 2020 14:46:11 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id r8so3296347qtp.13
+ Tue, 15 Sep 2020 19:51:58 +0000 (UTC)
+Received: by mail-oo1-f67.google.com with SMTP id b12so1068888oop.13
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Sep 2020 07:46:11 -0700 (PDT)
+ Tue, 15 Sep 2020 12:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=jmGZv03eVj3y+UaR089wbAFrC/EYvkaU8sSNIY1jpj4=;
- b=TFJK/RPY+3MmsvKEUhLwrk77YwPYZEJRUQ1eEU7nOSpHbB7F4i6qFJ8Fo7UPO9hbH4
- pRJNmViBIeQicl3o8hS2BWjz3g0j8OScjGCfUxOyQHruS9TwgodyHbfnUOBz/sCnKbF/
- fTXK6bFGXFs0kyB/NUeGXoxQ2/1FzBle8NCXxFenBYBRukS96Il1/FnsDaQqeJw01J8M
- ykLvxofwvzBoLx/RuHHRnh1QIm2LGTCtoLAHEVSZE2sH5qSoLZlKdHH0CEu36nyDx1PZ
- uuz98SbQrm21SFskDDH+NTYSjRfLvZovXGr5j+xg7o1rto9Y6TuX8dvBTJXW3V6qPFvq
- j8zA==
+ bh=ssCJQEMyjxevZ+K2X8hpxvUv+eio8ZdKxfR9v2XRRTM=;
+ b=PdVwI3e6rTyDzukhCcjmqn6GJapMIv0AJL8FHq8gZqlkXBdjN+FHqf34dDQpOMmeBN
+ IUMaA5bYHAWhX+/VE8g09Da/KyTBJXbzQU+g4w6pH5GoPV8szmpZineVNtzg78QcMwU2
+ Xst6/zZnFr8cS2pjv5l2ZVxhfnwThv7zZ+0LUPshBnPsnFUOjKJgEZ/sMm2EMLp51lYB
+ DIwj/ia7pGPwAyHkojzkdhPbsDu572X+btvjfuT0Ugwm90gTvDS+II36KYAVFV1ktmGZ
+ lwQL3Ho7OoALVoIOyEDfUlUQXPYpzLVHSBycka3f9OX7sQzJgwNQz/AoznHD7t0qsnL1
+ VW5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=jmGZv03eVj3y+UaR089wbAFrC/EYvkaU8sSNIY1jpj4=;
- b=lXbV/xRvIkgIiZXjvruSGW8vzUcrI/Z4+V99FyfFCWj+aamOmU16HdD5LyO3HVIQh4
- 4YFdiJ4Ngy3Gx85dysJWNKbeUHNwNISSa7rlpTxIZi4P6TDhq9xWQ8oqalRu5fQJwop8
- P38VpoBHGuxzUizGPmwdABlWqeWmF8oIi0NHxZSMGavqtaMHuOdfZUL9paCj0hfOgP3u
- m31SvKund7HpF3JN3f87VBUqrSvzD46EKGd4nzFO79+o2f3IqfQgShize7SSoX1hLvVX
- F1HBhjWTCX1epMF/P+ycefp14O0k4fyVvBpyGaZlJDYjhGn4l/AxRF9iisiOhuQNcdm3
- oP0g==
-X-Gm-Message-State: AOAM533xJMveKweDJGFYiDQT8Oh+96ye4tIEMbpNZfm4zjaA6PW6ofLy
- auwAjtClYJe+RisNimLKkQMO2jSOR9PMySgJ
-X-Google-Smtp-Source: ABdhPJyKi/9YuzyJfB5InACUtQ6qErFFgfU9Cz0SxSmW8gVn1G1o3pP9d70oiD5XFsa/67SoFOlb/A==
-X-Received: by 2002:ac8:1b3d:: with SMTP id y58mr17919025qtj.10.1600181170418; 
- Tue, 15 Sep 2020 07:46:10 -0700 (PDT)
-Received: from godwin.fios-router.home
- (pool-108-51-35-162.washdc.fios.verizon.net. [108.51.35.162])
- by smtp.gmail.com with ESMTPSA id g18sm16371799qko.126.2020.09.15.07.46.08
+ bh=ssCJQEMyjxevZ+K2X8hpxvUv+eio8ZdKxfR9v2XRRTM=;
+ b=K23QHXL9sk5/cmOAii3H16k+14Z09IoMW/MmZ4a874sq3MPjQHroPjGJiuZq84J6iM
+ kwht5Bjb8bBYdOb4WVYtN7VXdASfr7/2vtGIPQvDLE1KlUyJEf9IaPjL8LqZLqfaDTDA
+ RGm9qWKXDck2uK8+43sTvIG0tNJ6JQ2bHuE7QRUga7SNeRUUN718Ng/+KiTeV3mzp7xs
+ mSRBoblE32aOLBwtjmfOi1V0SUTlJRKXzbRSrK53qoCUg9544MZ8PvTXvdlbIPXDpzoK
+ B8xMCBdUtWmdW9Mr4U7/8hZL0a/JTji/VDXr80FvmRVStbQmv2zPyt1JhgurzB8q4UB1
+ aRfg==
+X-Gm-Message-State: AOAM532nxO9PPyUauXduuDjoiDR+zcPN9yMpOGwR+Rv7rCcHgDvtI8L1
+ hI5BYg3i5jXHBXv04+TAep1lhBK5l8c=
+X-Google-Smtp-Source: ABdhPJyWIkkTbjlpdAv0Kg1tHX/KT1Ffn6zsGUJd6NegRFbyeCOSZ1j9M12v+V8/Kp5a+pU73S8nqQ==
+X-Received: by 2002:a4a:614f:: with SMTP id u15mr15167379ooe.70.1600199516713; 
+ Tue, 15 Sep 2020 12:51:56 -0700 (PDT)
+Received: from nuclearis2-1.lan (c-98-195-139-126.hsd1.tx.comcast.net.
+ [98.195.139.126])
+ by smtp.gmail.com with ESMTPSA id t7sm7896874ooq.0.2020.09.15.12.51.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2020 07:46:09 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de
-Date: Tue, 15 Sep 2020 10:45:06 -0400
-Message-Id: <20200915144522.509493-31-seanga2@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200915144522.509493-1-seanga2@gmail.com>
-References: <20200915144522.509493-1-seanga2@gmail.com>
+ Tue, 15 Sep 2020 12:51:56 -0700 (PDT)
+From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
+To: uboot-stm32@st-md-mailman.stormreply.com,
+	peng.fan@nxp.com
+Date: Tue, 15 Sep 2020 14:51:46 -0500
+Message-Id: <20200915195147.2659607-1-mr.nuke.me@gmail.com>
+X-Mailer: git-send-email 2.25.4
+In-Reply-To: <20200909215402.366561-1-mr.nuke.me@gmail.com>
+References: <20200909215402.366561-1-mr.nuke.me@gmail.com>
 MIME-Version: 1.0
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>
-Subject: [Uboot-stm32] [PATCH v2 30/46] phy: usbphyc: Fix not calling
-	dev_err with a device
+Cc: u-boot@lists.denx.de, Alexandru Gagniuc <mr.nuke.me@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Patrice Chotard <patrice.chotard@st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] mmc: mmc_of_parse: Enable 52 MHz support
+	with "cap-mmc-highspeed"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,32 +78,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use the phy's device.
+"cap-mmc-highspeed" enables support for 26 MHz MMC, but there is no
+additional flag to enable 52 MHz MMC. In Linux. "cap-mmc-highspeed"
+is used for MMC HS at both 26MHz and 52MHz.
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Use the same approach and enable MMC_CAP(MMC_HS_52) host capability
+when "cap-mmc-highspeed" is found in the devicetree. In the event an
+MMC card doesn't support 52 MHz, it will be clocked at a speed based
+on its EXT CSD, even on 52 MHz host controllers
+
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
-
-Changes in v2:
-- New
-
- drivers/phy/phy-stm32-usbphyc.c | 2 +-
+ drivers/mmc/mmc-uclass.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-index c6d3048602..9d4296d649 100644
---- a/drivers/phy/phy-stm32-usbphyc.c
-+++ b/drivers/phy/phy-stm32-usbphyc.c
-@@ -311,7 +311,7 @@ static int stm32_usbphyc_of_xlate(struct phy *phy,
- 
- 	if ((phy->id == 0 && args->args_count != 1) ||
- 	    (phy->id == 1 && args->args_count != 2)) {
--		dev_err(dev, "invalid number of cells for phy port%ld\n",
-+		dev_err(phy->dev, "invalid number of cells for phy port%ld\n",
- 			phy->id);
- 		return -EINVAL;
- 	}
+diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+index 90690c8d1e..6d2310eff3 100644
+--- a/drivers/mmc/mmc-uclass.c
++++ b/drivers/mmc/mmc-uclass.c
+@@ -198,7 +198,7 @@ int mmc_of_parse(struct udevice *dev, struct mmc_config *cfg)
+ 	if (dev_read_bool(dev, "cap-sd-highspeed"))
+ 		cfg->host_caps |= MMC_CAP(SD_HS);
+ 	if (dev_read_bool(dev, "cap-mmc-highspeed"))
+-		cfg->host_caps |= MMC_CAP(MMC_HS);
++		cfg->host_caps |= MMC_CAP(MMC_HS) | MMC_CAP(MMC_HS_52);
+ 	if (dev_read_bool(dev, "sd-uhs-sdr12"))
+ 		cfg->host_caps |= MMC_CAP(UHS_SDR12);
+ 	if (dev_read_bool(dev, "sd-uhs-sdr25"))
 -- 
-2.28.0
+2.25.4
 
 _______________________________________________
 Uboot-stm32 mailing list

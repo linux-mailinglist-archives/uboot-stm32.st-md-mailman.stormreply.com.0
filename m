@@ -2,74 +2,103 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57E82265EF7
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 13:46:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72CDE26A775
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 16:46:10 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07DB1C3FAE3
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Sep 2020 11:46:44 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 17EFFC3FADE
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Sep 2020 14:46:10 +0000 (UTC)
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+ [209.85.222.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 11C54C3FAE2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 084D2C3FAD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Sep 2020 11:46:40 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08BBfljW024888; Fri, 11 Sep 2020 13:46:32 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=Fwccz2xE8WX3R5VADbdMPs+uh+vC9iQArpM8zgfBdDQ=;
- b=Af4TveLlt4LMY4ntpa8PlM4dEBGDIMgzAyGao6IRsNE+ykDiHb2Cq/67P0COdG1X07Fi
- CWSqVXjFQRkH3WbcF3+nYND1G7aqO3QO9uZQGu2qJ9DyfofY9D1ptFLkj3TiQeh2zPv+
- JlzBJ0cw9W1W+xuGxhWxRSVqHj6DuBgm0eziBEJ4mY/Lt+JKrykHl3IRqlrprCfUk3fj
- LUJsc5PlHADPG6mDxrS9aqkMdt/keeNDsKHS0uWrIEsRw8310Y4vIVlm6rTcD6pbeKqc
- irOnf56sczeQfKQqfwbUkAtmY8IyRevvW0QiIuHLzhcslyDTOUi1DqQJh1PgXfEH3Vah bw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33c1jfhc72-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Sep 2020 13:46:32 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3F68A10002A;
- Fri, 11 Sep 2020 13:46:32 +0200 (CEST)
-Received: from Webmail-eu.st.com (gpxdag6node4.st.com [10.75.127.80])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3038F2A7A11;
- Fri, 11 Sep 2020 13:46:32 +0200 (CEST)
-Received: from GPXDAG6NODE6.st.com (10.75.127.82) by GPXDAG6NODE4.st.com
- (10.75.127.80) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 11 Sep
- 2020 13:46:31 +0200
-Received: from GPXDAG6NODE6.st.com ([fe80::1c1:61d:3d8d:4b33]) by
- GPXDAG6NODE6.st.com ([fe80::1c1:61d:3d8d:4b33%19]) with mapi id
- 15.00.1473.003; Fri, 11 Sep 2020 13:46:31 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>, Alexandru Gagniuc
- <mr.nuke.me@gmail.com>, "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-Thread-Topic: [PATCH] mmc: stm32_sdmmc2: Use mmc_of_parse() to read host
- capabilities
-Thread-Index: AQHWhvPBpA6CLj++jEKGeAsJCXckZ6li8L6AgABhtkA=
-Date: Fri, 11 Sep 2020 11:46:31 +0000
-Message-ID: <2cb173a6d4834550805337bf76545a12@GPXDAG6NODE6.st.com>
-References: <CGME20200910005435epcas1p20d2f97d097717214bd2836fafdd140d9@epcas1p2.samsung.com>
- <20200909215402.366561-1-mr.nuke.me@gmail.com>
- <79b3e835-0dac-43cd-9d6e-0d31e985424b@samsung.com>
-In-Reply-To: <79b3e835-0dac-43cd-9d6e-0d31e985424b@samsung.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
+ Tue, 15 Sep 2020 14:45:37 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id 16so4460825qkf.4
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Sep 2020 07:45:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+KUjmRBUuvIxZ4IVihF+LIIw1UzZQt4gb9d9OUzxJm8=;
+ b=V0sU3kr9jhyj+lgZWqAd6N3iQnrb/xEXcwoPNBnN3wlDE/Gb2NqObn6yJDnA/a+JPy
+ lVmi7sZyWxJ/BrxXHCqHI8EwGE8Xz58U1rB5TLmZEv5H/3TEDWB57Xq4OlkJzLtLcH9Y
+ qehCK7qD0/tHgVlcJXLh6cpXijwez9dUE1IDqwdRH1OtwZ/ZE1Y+eFgqKedFayYfnD1G
+ TqIGJ88xmsOnh4FQIPjOPbrJ3bXIhv5z/L4nCTubJM+eZ28mRvfth2SWYmcpMN9p7+z2
+ M6pu7KMnrX+2wExQD0cf5VH9FZK6GxRsB7t5BN1w1/5wZX3e76nYO8nP1fxE12DTkDgC
+ Z5eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=+KUjmRBUuvIxZ4IVihF+LIIw1UzZQt4gb9d9OUzxJm8=;
+ b=MKiKEQLuqtPbhf5FLD2oQuAqXWkB4n1MoJ6t6a+CzoVjlt1WYAXn3yihHxvgFX48h0
+ dCo+uIghdl5g0Nk5pakTkJfLWicxD5n0+bzb+oQwPKdNbXUIrQmraufQbzNdJurw8EtH
+ oLXp9s0JXVyp2wQVYRhzyky8lpUus1UQ3hiq8wqVf+4z5TIDnxgFJfHbhJ/Z+eapwWUl
+ YgAKK0Icfd8SEPq0URXqLhNjudtsmZhPe8/EgpeNF26Uo0V/UaemSp+Eg1n4GUTPtY9b
+ h96hrYlLKn6pax0oERJspZHN6/H4icuACWJTalPJYQPNLytl2gHFwpDVry+pv1UB8peG
+ SNdw==
+X-Gm-Message-State: AOAM531M4SdPaD61mLHtKwQ6A5Kqa2fFiQkGbGVgwdVt1N5ukDQD/DUB
+ L9ykt45wm6NBnsj7PIXv/QE=
+X-Google-Smtp-Source: ABdhPJxwy3GRrbSRtpdRHd2A7ztdDxgzq1i5wZZVGRDC3g8yHJT/83JgrjRvgt3NOTPFyXa+9dMizA==
+X-Received: by 2002:ae9:ebd0:: with SMTP id b199mr18171279qkg.39.1600181135731; 
+ Tue, 15 Sep 2020 07:45:35 -0700 (PDT)
+Received: from godwin.fios-router.home
+ (pool-108-51-35-162.washdc.fios.verizon.net. [108.51.35.162])
+ by smtp.gmail.com with ESMTPSA id g18sm16371799qko.126.2020.09.15.07.45.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Sep 2020 07:45:35 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: u-boot@lists.denx.de
+Date: Tue, 15 Sep 2020 10:44:36 -0400
+Message-Id: <20200915144522.509493-1-seanga2@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-11_04:2020-09-10,
- 2020-09-11 signatures=0
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] mmc: stm32_sdmmc2: Use mmc_of_parse() to
- read host capabilities
+X-Mailman-Approved-At: Tue, 15 Sep 2020 14:46:08 +0000
+Cc: Nishanth Menon <nm@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
+ Patrice Chotard <patrice.chotard@st.com>, Ramon Fried <ramon.fried@gmail.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Sekhar Nori <nsekhar@ti.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Stefan Agner <stefan@agner.ch>,
+ Sean Anderson <seanga2@gmail.com>, Fabien Parent <fparent@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Chris Packham <judge.packham@gmail.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Stefan Mavrodiev <stefan@olimex.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Alexander Graf <agraf@suse.de>,
+ Fabien Dessenne <fabien.dessenne@st.com>, Marek Behun <marek.behun@nic.cz>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Chen-Yu Tsai <wens@csie.org>,
+ Alex Marginean <alexm.osslist@gmail.com>,
+ Jean-Jacques Hiblot <jjhiblot@ti.com>, Heiko Schocher <hs@denx.de>,
+ Siva Durga Prasad Paladugu <siva.durga.paladugu@xilinx.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Mugunthan V N <mugunthanvnm@ti.com>,
+ Grygorii Strashko <grygorii.strashko@ti.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Stefan Agner <stefan.agner@toradex.com>,
+ Frank Wang <frank.wang@rock-chips.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Boris Brezillon <boris.brezillon@bootlin.com>,
+ Matthias Brugger <mbrugger@suse.com>, Scott Wood <scottwood@freescale.com>,
+ Ofer Heifetz <oferh@marvell.com>, Igal Liberman <igall@marvell.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Anatolij Gustschin <agust@denx.de>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ =?UTF-8?q?Andreas=20Bie=C3=9Fmann?= <andreas.devel@googlemail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, "Andrew F. Davis" <afd@ti.com>,
+ =?UTF-8?q?Yannick=20Fertr=C3=A9?= <yannick.fertre@st.com>,
+ Josh Wu <josh.wu@atmel.com>, Faiz Abbas <faiz_abbas@ti.com>,
+ Suman Anna <s-anna@ti.com>, Jun Nie <jun.nie@linaro.org>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Subject: [Uboot-stm32] [PATCH v2 00/46] dm: Print device name in dev_xxx
+	like Linux
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,72 +115,175 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Jaehoon
+This series adds some additional information to dev_xxx output. This requires
+the first argument to dev_xxx to be a struct udevice. The first argument has
+never been used in U-Boot, so many drivers have some invalid calls. To fix these
+drivers, the following strategies were generally followed
 
-> From: Jaehoon Chung <jh80.chung@samsung.com>
-> Sent: vendredi 11 septembre 2020 09:50
-> 
-> On 9/10/20 6:54 AM, Alexandru Gagniuc wrote:
-> > mmc_of_parse() can populate the 'f_max' and 'host_caps' fields of
-> > struct mmc_config from devicetree.
-> > The same logic is duplicated in stm32_sdmmc2_probe(). Use
-> > mmc_of_parse(), which is more generic.
-> >
-> > Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> > ---
-> >  drivers/mmc/stm32_sdmmc2.c | 18 ++----------------
-> >  1 file changed, 2 insertions(+), 16 deletions(-)
-> >
-> > diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-> > index 6d50356217..77871d5afc 100644
-> > --- a/drivers/mmc/stm32_sdmmc2.c
-> > +++ b/drivers/mmc/stm32_sdmmc2.c
-> > @@ -676,27 +676,13 @@ static int stm32_sdmmc2_probe(struct udevice *dev)
-> >  			     GPIOD_IS_IN);
-> >
-> >  	cfg->f_min = 400000;
-> > -	cfg->f_max = dev_read_u32_default(dev, "max-frequency", 52000000);
-> >  	cfg->voltages = MMC_VDD_32_33 | MMC_VDD_33_34 |
-> MMC_VDD_165_195;
-> >  	cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
-> >  	cfg->name = "STM32 SD/MMC";
-> >
-> >  	cfg->host_caps = 0;
-> > -	if (cfg->f_max > 25000000)
-> > -		cfg->host_caps |= MMC_MODE_HS_52MHz | MMC_MODE_HS;
-> > -
-> > -	switch (dev_read_u32_default(dev, "bus-width", 1)) {
-> > -	case 8:
-> > -		cfg->host_caps |= MMC_MODE_8BIT;
-> > -		/* fall through */
-> > -	case 4:
-> > -		cfg->host_caps |= MMC_MODE_4BIT;
-> > -		break;
-> > -	case 1:
-> > -		break;
-> > -	default:
-> > -		pr_err("invalid \"bus-width\" property, force to 1\n");
-> > -	}
-> > +	cfg->f_max = 52000000;
-> 
-> cfg->f_max can be also removed?
-> 
-> Best Regards,
-> Jaehoon Chung
+* If there is a udevice already passed to the function, use it.
+* If there is a udevice contained in a struct passed to the function, use it.
+  When there are multiple possible devices, I have tried to use whatever "makes
+  sense" given the content of the message.
+* If there is no udevice passed to the function either directly or indirectly,
+  but all the callers of said function can access a udevice, modify the function
+  signature to pass in a udevice and use that.
+* If the driver does not use DM, convert the log statements to log_xxx.
+* If the driver uses DM only some of the time, use ifdefs to select an
+  appropriate log function.
 
-I don't think because " max-frequency" is optional in device tree (only "reg" is required)
+I have done a little bit of cleanup beyond these strategies, but for the most
+part I have tried to *only* to the minimum necessary. Many drivers could use a
+follow-up patch to convert their printf()s and debug()s to an appropriate log
+function.
 
-Here 52MHz is a default value when it is absent in device tree
-That avoids cfg->f_max = 0 after mmc_of_parse() call.
+I have tried to CC relevant maintainers/reviewers only for patches they
+maintain/review. If I have left someone out, please let me know and I will add
+them.
 
-> 
-> > +	mmc_of_parse(dev, cfg);
-> >
-> >  	upriv->mmc = &plat->mmc;
-> >
-> >
+CI is passing at [1]. This does not necessarily mean that this series is free of
+bugs, so I would appreciate testing on hardware. During my refactoring, I
+noticed a few bugs like
 
-Patrick
+	struct udevice *dev;
+
+	if (some_condition)
+		dev_err(dev, "Something went wrong\n");
+
+	dev = some_function();
+
+I have fixed such errors when I have encountered them, but they will not always
+warn or error on build.
+
+Removal of the duplicate definitions in <linux/compat.h> will be done in a
+follow-up patch due to the already-large size of this series.
+
+To test this series on sandbox, apply the following options in addition to
+sandbox_defconfig
+
+CONFIG_LOGLEVEL=8
+CONFIG_LOG=n
+CONFIG_CMD_LOG=n
+CONFIG_CMD_TPM=n
+
+Note that there is a soft dependency on [2] if you would like to test this patch
+with CONFIG_LOG and a higher LOG_LEVEL than LOGL_INFO.
+
+[1] https://dev.azure.com/seanga2/u-boot/_build/results?buildId=34&view=results
+[2] https://patchwork.ozlabs.org/project/uboot/list/?series=201343
+
+Changes in v2:
+- Support logging with struct device as well as struct udevice. A lot of
+  drivers, especially USB gadgets, log with devices and not udevices. There
+  is no major reason why they can't use udevice, but big changes like that
+  are outside the scope of this series.
+- Add some comments to __dev_printk and dev_printk_emit
+- Handle struct device as well as struct udevice
+- Match format strings for the NULL path to the regular path. This reduces the
+  amount of duplicated strings.
+- Print the device name before the driver name
+- Many new patches added to fix build bugs
+
+Sean Anderson (46):
+  dm: syscon: Fix calling dev_dbg with an uninitialized device
+  firmware: ti_sci: Fix not calling dev_err with a device
+  i2c: mxc: Fix dev_err being called on a nonexistant variable
+  mtd: nand: pxa3xx: Fix not calling dev_xxx with a device
+  mtd: nand: sunxi: Fix not calling dev_err with a device
+  mtd: spi: Include dm.h in spi-nor-core.c
+  mtd: spi: Fix logging in spi-nor-tiny
+  mtd: spi-nand: Fix not calling dev_err with a device
+  mmc: Add mmc_dev()
+  mmc: bcm2835-host: Fix not calling dev_dbg with a device
+  mmc: mtk-sd: Fix not calling dev_err with a device
+  mailbox: k3: Fix not calling dev_err with a device
+  nand: atmel: Fix not calling dev_xxx with a device
+  nand: brcmnand: Fix not calling dev_err() with a device
+  nand: vybrid: Re-introduce vf610_nfc.dev
+  net: bcm6368: Fix not calling dev_info with a device
+  net: mdio: Fix not calling dev_dbg with a device
+  net: mvneta: Fix not always calling dev_err with a device
+  net: mvneta: Convert netdev_xxx to dev_xxx
+  net: mvpp2: Fix not calling dev_xxx with a device
+  net: mvpp2: Convert netdev_xxx to dev_xxx
+  linux/compat.h: Remove netdev_xxx functions
+  net: sunxi: Fix not calling dev_xxx with a device
+  net: sun8i_emac: Fix not calling dev_xxx with a device
+  net: ti: cpsw: Fix not calling dev_dbg with a device
+  phy: marvell: Fix not calling dev_err with a device
+  phy: rockchip: Fix not calling dev_err with a device
+  phy: sun4i-usb: Fix not calling dev_err with a device
+  phy: ti: Fix not calling dev_err with a device
+  phy: usbphyc: Fix not calling dev_err with a device
+  remoteproc: Remove unused function rproc_elf_sanity_check
+  remoteproc: k3-r5: Fix not calling dev_xxx with a device
+  remoteproc: k3: Fix not calling dev_xxx with a device
+  soc: qualcomm: Fix not calling dev_err with a device
+  spi: sunxi: Fix not calling dev_err with a device
+  spi: zynqmp_gqspi: Fix not calling dev_err with a device
+  sysreset: ti: Fix not calling dev_err with a device
+  usb: cdns3: Fix not calling dev_xxx with a device
+  usb: dwc2: Fix not calling dev_xxx with a device
+  usb: dwc3: Fix not calling dev_xxx with a device
+  usb: dwc3: ti: Fix not calling dev_err with a device
+  usb: dwc3: Don't include asm-generic/io.h
+  usb: musb-new: sunxi: Fix not calling dev_err with a device
+  video: stm32: Fix not calling dev_xxx with a device
+  dm: Use symbolic constants for log levels in dev_xxx
+  dm: Print device name in dev_xxx like Linux
+
+ drivers/core/syscon-uclass.c              |   2 +-
+ drivers/firmware/ti_sci.c                 |  23 ++--
+ drivers/i2c/mxc_i2c.c                     |   7 +-
+ drivers/mailbox/k3-sec-proxy.c            |   6 +-
+ drivers/mmc/bcm2835_sdhost.c              |  34 +++---
+ drivers/mmc/mtk-sd.c                      |  24 ++--
+ drivers/mtd/nand/raw/atmel_nand.c         |  69 +++++++-----
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c  |  20 +---
+ drivers/mtd/nand/raw/pxa3xx_nand.c        |  30 ++---
+ drivers/mtd/nand/raw/sunxi_nand.c         |  45 ++++----
+ drivers/mtd/nand/raw/vf610_nfc.c          |  38 ++++---
+ drivers/mtd/nand/spi/core.c               |   8 +-
+ drivers/mtd/spi/spi-nor-core.c            |   1 +
+ drivers/mtd/spi/spi-nor-tiny.c            |  21 +++-
+ drivers/net/bcm6368-eth.c                 |   3 +-
+ drivers/net/mvneta.c                      |  56 +++++-----
+ drivers/net/mvpp2.c                       |  87 ++++++++-------
+ drivers/net/sun8i_emac.c                  |   9 +-
+ drivers/net/sunxi_emac.c                  |   5 +-
+ drivers/net/ti/cpsw.c                     |   6 +
+ drivers/phy/allwinner/phy-sun4i-usb.c     |  12 +-
+ drivers/phy/marvell/comphy_core.c         |   6 +-
+ drivers/phy/phy-stm32-usbphyc.c           |   2 +-
+ drivers/phy/phy-ti-am654.c                |   4 +-
+ drivers/phy/rockchip/phy-rockchip-pcie.c  |  14 +--
+ drivers/phy/rockchip/phy-rockchip-typec.c |   6 +-
+ drivers/remoteproc/k3_system_controller.c |   9 +-
+ drivers/remoteproc/rproc-elf-loader.c     |  16 ---
+ drivers/remoteproc/ti_k3_r5f_rproc.c      |  24 ++--
+ drivers/smem/msm_smem.c                   |   2 +-
+ drivers/spi/spi-sunxi.c                   |   6 +-
+ drivers/spi/zynqmp_gqspi.c                |   6 +-
+ drivers/sysreset/sysreset-ti-sci.c        |   3 +-
+ drivers/usb/cdns3/ep0.c                   |   5 +-
+ drivers/usb/cdns3/gadget.c                |   3 +-
+ drivers/usb/dwc3/core.c                   |  15 +--
+ drivers/usb/dwc3/dwc3-generic.c           |   1 -
+ drivers/usb/dwc3/ep0.c                    |   1 +
+ drivers/usb/dwc3/gadget.c                 |  23 ++--
+ drivers/usb/dwc3/ti_usb_phy.c             |   4 +-
+ drivers/usb/host/dwc2.c                   |  39 ++++---
+ drivers/usb/musb-new/sunxi.c              |   9 +-
+ drivers/video/dw_mipi_dsi.c               |  24 ++--
+ include/dm/device_compat.h                | 127 ++++++++++++++++------
+ include/linux/compat.h                    |  19 ----
+ include/mmc.h                             |   2 +
+ include/remoteproc.h                      |  13 ---
+ net/mdio-uclass.c                         |   4 +-
+ 48 files changed, 486 insertions(+), 407 deletions(-)
+
+-- 
+2.28.0
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

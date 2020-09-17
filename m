@@ -2,55 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7939C26D063
-	for <lists+uboot-stm32@lfdr.de>; Thu, 17 Sep 2020 03:10:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9731126D06A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 17 Sep 2020 03:10:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44762C3FAE1
-	for <lists+uboot-stm32@lfdr.de>; Thu, 17 Sep 2020 01:10:01 +0000 (UTC)
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
- [209.85.210.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5D7AAC3FADF
+	for <lists+uboot-stm32@lfdr.de>; Thu, 17 Sep 2020 01:10:46 +0000 (UTC)
+Received: from mail-oi1-f193.google.com (mail-oi1-f193.google.com
+ [209.85.167.193])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8968EC3FAD6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 606F5C3FAD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 17 Sep 2020 01:10:00 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id g96so343025otb.12
+ Thu, 17 Sep 2020 01:10:45 +0000 (UTC)
+Received: by mail-oi1-f193.google.com with SMTP id u126so487522oif.13
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 16 Sep 2020 18:10:00 -0700 (PDT)
+ Wed, 16 Sep 2020 18:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RmFk6W2znpiSGAQ0gEB2Mmd+IHE9tRPHg+lafy4jkZE=;
- b=L8Z+MTltouW5e0xLlbxdDnoBgRG8V02BczKv+UNGmgItNa9m40kqVT2V1d0w1k08Bp
- jkScXQ9VuxnxD7DkuKYT1yEJV14H+JpKeNdgS+ctufSgfmKzD42J37gHPbbAiiD05/wN
- LCS305OabuTfLhnYifDqWCRgiA5zGT1CcOKtM=
+ :cc; bh=/pA37dEi6FwW2HjmF9SwouD7n2y2ckIKsTp/+/5w76U=;
+ b=RoamRkjFh2N4btovrK6n4H5ThQjOiLI5ivgSz2GGCIsQAaI3/A2/Gfzt2hrdpTM3XI
+ w70z4nIhA41SAK91PNZ0rvVyt1K+NucHGLyno+z/AoWD0pzwVF/IyP1yjGiOGVqZHO2/
+ PB054MMizB8mQRqw1vlMPMRQKV5TJH1itumY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=RmFk6W2znpiSGAQ0gEB2Mmd+IHE9tRPHg+lafy4jkZE=;
- b=CR1iO2KsUVMCqPvqQ3DQBqOOGjoewX/1JZ4JTX+idHsMLcNWkzxQPEH3np9dRrUerz
- DUmeRy0DVNXugDKgN/iq54GhFWLmhPCqjhzSxdkBYPOX5pUPO4Jm1iGxtr08avWuJH/U
- 5/gA2T7ojiQdfBgDY/7tAGiPTL0lhW8xDS6Ld7H3OMSX21MzF2jklZyLwcnyRrGf8t6o
- J18QZ+X98olcvWybWMVWLRrEtHLwaF6SPs6JBNVKlPsS57ieHy+yDHB9Rkf3VQeY5mTk
- D+GGregS31pZq7Jh4wQUiCDKbR0XOvZpWt9ODkMV7ALj2tDGJb6mNv7cuGKs3yakOGSn
- 8oqQ==
-X-Gm-Message-State: AOAM533eEzbxdtklmA/OCdDIV5bt3Lc9JUFGdfo5EwnNZre72hfWGyu6
- YlDyB7/5K9LK19oe4SgYkigIdf2y9acZcqDhERaPPQ==
-X-Google-Smtp-Source: ABdhPJwlVGllCaMkAhEaQrIPKhARa1ppnNfut+Aio0Q2+VGL06yOMTsZ47sVS9jwBHY0EizjOnfveiFlrd/V3aQUDYo=
-X-Received: by 2002:a9d:6d95:: with SMTP id x21mr18972309otp.339.1600304999002; 
- Wed, 16 Sep 2020 18:09:59 -0700 (PDT)
+ bh=/pA37dEi6FwW2HjmF9SwouD7n2y2ckIKsTp/+/5w76U=;
+ b=GYkfIiJOzOASx+o77oeU8XAXehbxNXX72KmrUJYrVWSuHI0ra3nWtLyZOXN/lA2Tw/
+ 2Mr6TmtKBl/aCTGXMpJekgcjchVRTeN73NPYRgzz5Ff7/oQC3VUx4tl3Tbo8LHbsXDhR
+ ShADOtt7MZxn8jIsSxDAvL8mZiE1p3vFwtujpnUkzdoSi/pk0uVxU6xynE/MXuHoZRtD
+ JvvJPLflGb304XbDUx69Eru8UmC67R1k8r5limFIefLQjlQgCaEn5pXeT+suC2upOmCl
+ UBGPaEDg007+R9Zl2mU7UWZxCRZVIZiUopx1f7v3XxLnWDH0G7e0n++/Wz0gu0l02N5V
+ NvEw==
+X-Gm-Message-State: AOAM530WR2SK7RokUuqBBjdym+FALB+0s6Bv3HJH5FAgICQ1p6biMSHD
+ dxnh9k529otfxDK+FRUrYJ3DdnQfJit4KUekkuaMFg==
+X-Google-Smtp-Source: ABdhPJxgt33aA6zxMjR27o9Xh+cZvPt/4OZX+YfRHpooR6xrmaWzCsF1jn6eYpN2fPfw/R9VIz7ln/gsWcyGQaj1FWU=
+X-Received: by 2002:aca:55c5:: with SMTP id j188mr4927376oib.138.1600305043678; 
+ Wed, 16 Sep 2020 18:10:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200910161817.27535-1-patrick.delaunay@st.com>
-In-Reply-To: <20200910161817.27535-1-patrick.delaunay@st.com>
+ <20200910161817.27535-2-patrick.delaunay@st.com>
+In-Reply-To: <20200910161817.27535-2-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 16 Sep 2020 19:09:43 -0600
-Message-ID: <CAPnjgZ0jyUFpDvJ6f1uinwuKFZztYTWrzAS5iZWRWwGDe4t6mw@mail.gmail.com>
+Date: Wed, 16 Sep 2020 19:09:44 -0600
+Message-ID: <CAPnjgZ2YbOT_RVT4aR-g+TyocjGmVJ6R7epzPi4gOzxfG7n4wQ@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: Jaehoon Chung <jh80.chung@samsung.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] power: regulator: gpio-regulator:
-	protect count value
+Subject: Re: [Uboot-stm32] [PATCH 2/2] power: regulator: gpio-regulator:
+ Convert to use APIs which support live DT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,21 +70,14 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Thu, 10 Sep 2020 at 10:18, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Update the size of states_array to avoid overflow for
-> dev_pdata->voltages[j] and dev_pdata->states[j].
->
-> As the size of array is GPIO_REGULATOR_MAX_STATES, the size of
-> states_array is limited by GPIO_REGULATOR_MAX_STATES * 2 = 4
-> instead of 8 previously.
->
-> The value of the "count" variable is limited by the third parameter of
-> fdtdec_get_int_array_count.
+> Use ofnode_ or dev_ APIs instead of fdt_ and fdtdec_ APIs so that the
+> driver can support live DT.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  drivers/power/regulator/gpio-regulator.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  drivers/power/regulator/gpio-regulator.c | 22 +++++++++++++---------
+>  1 file changed, 13 insertions(+), 9 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>

@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 650BF279D63
-	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Sep 2020 03:59:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94D7E279D64
+	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Sep 2020 03:59:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 19322C36B25;
-	Sun, 27 Sep 2020 01:59:39 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 58BCDC3FAD4;
+	Sun, 27 Sep 2020 01:59:42 +0000 (UTC)
 Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
  [209.85.221.66])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D770DC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A096C36B35
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 27 Sep 2020 01:59:37 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id e16so7954414wrm.2
+ Sun, 27 Sep 2020 01:59:39 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id m6so7971054wrn.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 26 Sep 2020 18:59:37 -0700 (PDT)
+ Sat, 26 Sep 2020 18:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:sender:from:in-reply-to:references:date:message-id
  :subject:to:cc;
- bh=zsJrlYhgkijVg1AaYTaRpYQK2dSYn0UegItJmFQUud0=;
- b=X7XVKZxrbf46wJdMoc6Otra9YcPCSljMyBQom8uDc17pn0veg+HSy/ZGSjQQT35jot
- drw+l1VRoQNOVHZKPmdU1KhAqwW0aecRgX/JMmHlqsDEBskt9JIVu0plDF0pNDfngnfE
- qktE43h+hNblpdXBEoodi09GBjLwPhBh2wn2A=
+ bh=fVvMf07jO9E9PL5973wxmq/AH5MEEVp824+e3SbS+N0=;
+ b=Fjk7+FzCMxdJi0Of3Qc8L/6Dh22ggmnR/syplOELRxmQcSJqzmhpF36DQgQy+aS0LY
+ GCKRjX5Sim5uKhvLT6b/UfmuGe8dKPfmGEILYb4JyvLV7sHJW4pccBcWkLs9QKYtkZod
+ 7m9JSK72mtx/eFolusY9Zw7xxDnqJs4gQkSkw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
  :date:message-id:subject:to:cc;
- bh=zsJrlYhgkijVg1AaYTaRpYQK2dSYn0UegItJmFQUud0=;
- b=aXbvmqLtHzKfYYxkFtIIVEjCJ6mb6R2UdnWthH7fte5ytJa97WxBsdywWEdCyINsWc
- PjZxVCJ09KYPEQjDbuDke/ElCjIOK3aofapkp5mTbOOFCtZD6zbvjJXEbUajPXBoLmNu
- pcCOTzgiyTfpxJ7EipHM0OJHufvZOmqTuGIkHgPFruhR1dEfdlkGBJWMBTQoMb+bKjqq
- FkuuI5DU322swQ6ufbY4DFrSpwV/N74XDaAEvNGH2z7Yikp3eUErjAHk8IYtfJ/DKLjf
- KGcv59lC+unddlKekkL3pmo5JbNHeuvomzwnNTADCsyuCHhJj8Iqk8rF/DX7nE3EAo/9
- Xm8Q==
-X-Gm-Message-State: AOAM531DZr4RBb7mTPDwcJc8Eog5FLpeO5Q4c2LYEJxablOKe9zfE65A
- f9hW2DIhIPRVhgFeDEeRyVotQfjt465ZZ7zM0VwFkw==
-X-Google-Smtp-Source: ABdhPJzFS5y7hOdsGnbxMvJKsnvudVgEwYiYCc0BIfYc+Z8tiJSoc4oixP8aaK6lS1exZXXcnvk8MGP3C+H7619JGmI=
-X-Received: by 2002:a5d:680b:: with SMTP id w11mr12519850wru.73.1601171977215; 
- Sat, 26 Sep 2020 18:59:37 -0700 (PDT)
+ bh=fVvMf07jO9E9PL5973wxmq/AH5MEEVp824+e3SbS+N0=;
+ b=PXOQlhg/qUISCV9ka9HcH+4bLlZpwY0BbprIvt+Z2KF0UayIICSLS62vigIaLCxxLi
+ RgWYH9wTrEEfUSbsmjFwkfG7DV5M8TJAQAMbMDvMhGfWFaFR7QzvOfWmMnHl58NbHZjd
+ R87Vd9AVaDx5lNistEAUDfnZDBGN3tunqA7JsB3pXpszQjBoqZd6Wv8QNS4qKxH1pc3W
+ /VAh68uOO7dtsRRMJXkKGZgCGY6Q2IXN+xqOqciFLOpJRqVsYQb6Up/HPqML8cVTVoN4
+ 878bvYwmndbttVEyucpWoA5POgUoaqNzfxnTg80HU3k1MXTf/7N8svae8ZIkbhICcJHc
+ kG2g==
+X-Gm-Message-State: AOAM5332oZ2nz7coYMuuekRTDSdcd3quZyatHxIHHU5YaR/90zjwj5Pg
+ 9qqC96xnsc6XHin2bmWhXVAjJM8s1tgcWXGLFhILFGWdbyGK6A==
+X-Google-Smtp-Source: ABdhPJzAIiL1LLnME8qozR+Yah0QTpmTbtz+VTDDBoDOMto9uMfA743KsgXSJai3YtpJWs9YkYd9C8pB0Mx95lKWtDU=
+X-Received: by 2002:adf:81e6:: with SMTP id 93mr11710317wra.412.1601171978930; 
+ Sat, 26 Sep 2020 18:59:38 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 26 Sep 2020 18:59:34 -0700
+ HTTPREST; Sat, 26 Sep 2020 18:59:35 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ1rmWnQ4-7Z1cAiR+G51YDBacqapyAi=FcH5rOJJ4fSWw@mail.gmail.com>
-References: <CAPnjgZ1rmWnQ4-7Z1cAiR+G51YDBacqapyAi=FcH5rOJJ4fSWw@mail.gmail.com>
- <20200910162617.28257-1-patrick.delaunay@st.com>
-Date: Sat, 26 Sep 2020 18:59:34 -0700
-X-Google-Sender-Auth: qjg_LtNw2KpLYmwrNZ4VXdlqRd4
-Message-ID: <CAPnjgZ0aF2GYb8QTvgDUB0VwZL2X_c3H6XMiLvXjmwb7DgL9OQ@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20200910104956.v4.3.I1b5c7dcf6c43efa10d18b4bc707055fc15fb36ca@changeid>
+References: <20200910104956.v4.3.I1b5c7dcf6c43efa10d18b4bc707055fc15fb36ca@changeid>
+ <20200910104956.v4.1.I2dff760694d84d8bb1f8dc4ec03a5572681e4e8d@changeid>
+Date: Sat, 26 Sep 2020 18:59:35 -0700
+X-Google-Sender-Auth: oxzydkGaUfbkiyYo_N6tU-rWnUg
+Message-ID: <CAPnjgZ1VnWQwhR+Jkhp9vzVTS4QyD+Rb3XXtOZ4EZcFu6RU=Ew@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: add cells_count parameter in live DT
-	APIs of_parse_phandle_with_args
+ Etienne Carriere <etienne.carriere@st.com>, u-boot@lists.denx.de,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH v4 3/3] optee: add property no-map to
+	secure reserved memory
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,28 +73,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 10 Sep 2020 at 10:26, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> In the live tree API ofnode_parse_phandle_with_args, the cell_count
-> argument must be used when cells_name is NULL.
->
-> But this argument is not provided to the live DT function
-> of_parse_phandle_with_args even it is provided to
-> fdtdec_parse_phandle_with_args.
->
-> This patch adds support of the cells_count parameter in dev_ and
-> of_node API to allow migration and support of live DT:
-> - of_parse_phandle_with_args
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  drivers/core/of_access.c | 7 ++++---
->  drivers/core/ofnode.c    | 3 ++-
->  include/dm/of_access.h   | 4 +++-
->  3 files changed, 9 insertions(+), 5 deletions(-)
+From: Etienne Carriere <etienne.carriere@st.com>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+OP-TEE reserved memory node must set property "no-map" to prevent
+Linux kernel from mapping secure memory unless what non-secure world
+speculative accesses of the CPU can violate the memory firmware
+configuration.
+
+Fixes: 6ccb05eae01b ("image: fdt: copy possible optee nodes to a
+loaded devicetree")
+Signed-off-by: Etienne Carriere <etienne.carriere@st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+---
+
+(no changes since v3)
+
+Changes in v3:
+   - Fix changelogs
+
+ lib/optee/optee.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 Applied to u-boot-dm/next, thanks!
 _______________________________________________

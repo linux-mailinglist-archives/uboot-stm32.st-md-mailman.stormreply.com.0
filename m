@@ -2,65 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2310627EDB3
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Sep 2020 17:45:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4995E27EDC5
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Sep 2020 17:48:55 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5C5DC36B37;
-	Wed, 30 Sep 2020 15:45:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0E3A3C36B37;
+	Wed, 30 Sep 2020 15:48:55 +0000 (UTC)
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
+ [209.85.219.68])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C19D1C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B77ABC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Sep 2020 15:45:36 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 08UFWnW7010572; Wed, 30 Sep 2020 17:45:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=axmC5IziFGKIgN5cJT3ympSdYK3MH4dvLsYktKcuNpA=;
- b=xN80Ro+/2uK6hCQTtqsmslFHS2Ak2wj/AE2dEvB4jlzziPdN/KfTSf7zSZOMsXgvk2k4
- cp/TXGDplTOHMaj33sCcD/x6qhrOo6NKbEJybaQsDDFp2yb5RyNMa+3qlhyIS545APzi
- FJUzrgIHyxNW4qHQ+O7KUgtnCQCTMbpJEUg53Aydc5YCYs99+o0ziuXBMiLmpxCRldmJ
- McIfsl+L4pQiV8fW5I6ZYHE/vdAkeXnmjoHIg8EV+E0hHnuPquPRcBEljO+oaheeWXUo
- O2iyy16vTBhwHJTFqbv/TD4wm/dnp9bnBTVV2yyqFvKJMGfoflaweWLXybfLO3ZfKcu+ ZQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33sts80hjn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 30 Sep 2020 17:45:22 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6173210002A;
- Wed, 30 Sep 2020 17:45:21 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 28B052B205F;
- Wed, 30 Sep 2020 17:45:21 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG6NODE3.st.com (10.75.127.18)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3;
- Wed, 30 Sep 2020 17:45:20 +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 30 Sep 2020 17:45:08 +0200
-Message-ID: <20200930174454.v2.1.I3f984b644583cb7080d779898cebfed8669d3f33@changeid>
-X-Mailer: git-send-email 2.17.1
+ Wed, 30 Sep 2020 15:48:52 +0000 (UTC)
+Received: by mail-qv1-f68.google.com with SMTP id cy2so1138427qvb.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 30 Sep 2020 08:48:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=CVVwwvj7/i0Wk5bvLK/OwkJE5oUJPZDW2hyYIQrsQS8=;
+ b=es0uH4ErA5HLg5MvODlgKFc7JlUBuefGLQzM/nYeK3hCPLIoPkXkJ88EZ1+UeCW/hW
+ eKNWFqPPPdlK6fRLZQRqhxPg2NONTG5KtMapT6DhxHoe38inNIgs8S6pPq/CPa5LhD6A
+ St9XAxVujphyegyWHJR5JZ4fWu52k2Tbj23u0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=CVVwwvj7/i0Wk5bvLK/OwkJE5oUJPZDW2hyYIQrsQS8=;
+ b=kYiSnoEZgbD8+10YR4bCXg4wREMxNWzsy11gYKj99u7Ba44ouNzHeGRL9y8m2iJkMP
+ UzhFEkvSmTOmuKOczDwl9EAiHQX2J1vFUH1+6AZBuoJwippaBus7gZuStagwa/NScDB+
+ N9NR4V8gyfexunLP8qG0zrNe3AKlvzLMgo4xwjgkjkcNMa6PVkmb0fHmStXNkOJbEGMZ
+ lvRajyUwGJ+Thprt5xOO9i3QypG/Pnxs4IMj+2YIjTR/nbG92aO3tUity5e8vz92trX5
+ /kBWeo1DoeX+FDGhY4gt/HNz8uoh0ZoN8NWQqmsbAvZkb0TxUqSxStS02P/huPckU0Pv
+ WLQA==
+X-Gm-Message-State: AOAM531X8qoUlGO7tjQig+Util5rBazgDCWp2UxqpBqASlzFfzVE+4Cd
+ hH3gOKWXQuWOYiYGvVi+61g4aA==
+X-Google-Smtp-Source: ABdhPJwgHtx2grxbHfRPsGt6ElZG8lnoGCZHV0vZV9tbh/4ZRi52gccYVkOa/W2rph4jkD5OscCtBA==
+X-Received: by 2002:a0c:80c3:: with SMTP id 61mr3006365qvb.23.1601480931621;
+ Wed, 30 Sep 2020 08:48:51 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-8ebe-2185-3192-0f2f-246c.inf6.spectrum.com.
+ [2606:a000:1401:8ebe:2185:3192:f2f:246c])
+ by smtp.gmail.com with ESMTPSA id g5sm2634671qtx.43.2020.09.30.08.48.50
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 30 Sep 2020 08:48:50 -0700 (PDT)
+Date: Wed, 30 Sep 2020 11:48:48 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20200930154848.GE14816@bill-the-cat>
+References: <20200930174454.v2.1.I3f984b644583cb7080d779898cebfed8669d3f33@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG5NODE1.st.com (10.75.127.13) To SFHDAG6NODE3.st.com
- (10.75.127.18)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-09-30_08:2020-09-30,
- 2020-09-30 signatures=0
-Cc: chenshuo <chenshuo@eswin.com>, Tom Rini <trini@konsulko.com>,
+In-Reply-To: <20200930174454.v2.1.I3f984b644583cb7080d779898cebfed8669d3f33@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: chenshuo <chenshuo@eswin.com>,
  Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Tero Kristo <t-kristo@ti.com>,
- Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tero Kristo <t-kristo@ti.com>,
+ u-boot@lists.denx.de, Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Etienne Carriere <etienne.carriere@linaro.org>,
  Jens Wiklander <jens.wiklander@linaro.org>
-Subject: [Uboot-stm32] [PATCH v2] optee: copy FDT OP-TEE related nodes
-	before generic FDT changes
+Subject: Re: [Uboot-stm32] [PATCH v2] optee: copy FDT OP-TEE related nodes
+ before generic FDT changes
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,68 +75,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2483316704024541267=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Etienne Carriere <etienne.carriere@linaro.org>
 
-Move call to optee_copy_fdt_nodes() introduced by [1] before generic
-changes in kernel FDT so that platform specific changes are not
-overridden by the changes made by this function.
+--===============2483316704024541267==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="WG9qowv1NtzwMEkm"
+Content-Disposition: inline
 
-Link: [1] commit 6ccb05eae01b ("image: fdt: copy possible optee nodes to a loaded devicetree")
 
-Fixes: 6ccb05eae01b ('image: fdt: copy possible optee nodes to a loaded devicetree')
-Signed-off-by: Etienne Carriere <etienne.carriere@linaro.org>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+--WG9qowv1NtzwMEkm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- rebase on master branch
-- add Fixes tag
+On Wed, Sep 30, 2020 at 05:45:08PM +0200, Patrick Delaunay wrote:
 
- common/image-fdt.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+> From: Etienne Carriere <etienne.carriere@linaro.org>
+>=20
+> Move call to optee_copy_fdt_nodes() introduced by [1] before generic
+> changes in kernel FDT so that platform specific changes are not
+> overridden by the changes made by this function.
+>=20
+> Link: [1] commit 6ccb05eae01b ("image: fdt: copy possible optee nodes to =
+a loaded devicetree")
+>=20
+> Fixes: 6ccb05eae01b ('image: fdt: copy possible optee nodes to a loaded d=
+evicetree')
+> Signed-off-by: Etienne Carriere <etienne.carriere@linaro.org>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+>=20
+> Changes in v2:
+> - rebase on master branch
+> - add Fixes tag
 
-diff --git a/common/image-fdt.c b/common/image-fdt.c
-index f13eefb061..3d6935ad40 100644
---- a/common/image-fdt.c
-+++ b/common/image-fdt.c
-@@ -557,6 +557,14 @@ int image_setup_libfdt(bootm_headers_t *images, void *blob,
- 		printf("ERROR: arch-specific fdt fixup failed\n");
- 		goto err;
- 	}
-+
-+	fdt_ret = optee_copy_fdt_nodes(gd->fdt_blob, blob);
-+	if (fdt_ret) {
-+		printf("ERROR: transfer of optee nodes to new fdt failed: %s\n",
-+		       fdt_strerror(fdt_ret));
-+		goto err;
-+	}
-+
- 	/* Update ethernet nodes */
- 	fdt_fixup_ethernet(blob);
- 	if (IMAGE_OF_BOARD_SETUP) {
-@@ -576,13 +584,6 @@ int image_setup_libfdt(bootm_headers_t *images, void *blob,
- 		}
- 	}
- 
--	fdt_ret = optee_copy_fdt_nodes(gd->fdt_blob, blob);
--	if (fdt_ret) {
--		printf("ERROR: transfer of optee nodes to new fdt failed: %s\n",
--		       fdt_strerror(fdt_ret));
--		goto err;
--	}
--
- 	/* Delete the old LMB reservation */
- 	if (lmb)
- 		lmb_free(lmb, (phys_addr_t)(u32)(uintptr_t)blob,
--- 
-2.17.1
+Note that this applied cleanly for me and I reworded the commit slightly
+differently to also include a fixes tag.  I'm currently testing this
+(just to be safe).  Sorry for not being clear in the other thread I
+would just grab that and add the tag.
+
+--=20
+Tom
+
+--WG9qowv1NtzwMEkm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl90qOAACgkQFHw5/5Y0
+tywBVgv8CsMP193SFYTwhYTeZi7StE/pW67u90Q3ngskSfpraad2z2SV3IjS+7Gf
+N4p/D9s4dGe/Vxj6+J3uRJjusXz6uE80Skg1j5ureCX/WDW6epRBphHlhp8Iuzmj
+uZXL0GQs85AwBxDpbPl1vclBXI42yh+VC5H1c3aiWw1KxwGdmNBAemiXWgwUEoiq
+2lU/Ukm5sI8GhpYkG+hskAfNlWT2wJWVAygiicHpm0GSVSvLQch5xHvoQlrVHZpq
+p0Mi97q6LhIvpdykXTG0rwR0YCfFbyBGRzBB/HF3QisuyoKb19tpH0qoYx2DttCG
+l+VMqvIBvUU0X0EGVX+3+IHxQOgZfF0w3HkqayP1lUaCbXh56LIp8yWVVXpgRmW/
+3Tw3No3AJ7CG3cfWvb3GLG5eWg8H0fAtrNP2FZxFDz+IjubtlL6THgyujBLLcwP7
+kVZyyK7+EeMPMx61fTWiHjypLJFxH6Q6l1MMHac2rhhi9+/T5PQuOBY6kp/sru5L
+4PHLn+Ia
+=d113
+-----END PGP SIGNATURE-----
+
+--WG9qowv1NtzwMEkm--
+
+--===============2483316704024541267==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============2483316704024541267==--

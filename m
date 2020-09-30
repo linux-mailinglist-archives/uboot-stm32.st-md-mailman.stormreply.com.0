@@ -2,54 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D31927E91E
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Sep 2020 15:01:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1D9327E935
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Sep 2020 15:08:31 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 15574C36B37;
-	Wed, 30 Sep 2020 13:01:49 +0000 (UTC)
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
- [209.85.160.195])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A16ECC36B37;
+	Wed, 30 Sep 2020 13:08:31 +0000 (UTC)
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+ [209.85.222.195])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6C4E7C36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 357EFC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Sep 2020 13:01:47 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id v54so1053941qtj.7
+ Wed, 30 Sep 2020 13:08:29 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id c2so1246018qkf.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Sep 2020 06:01:47 -0700 (PDT)
+ Wed, 30 Sep 2020 06:08:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=WXV143bWz9CEkOfxXVVZZ1M6asJx4ln+mGJjFJLXBtA=;
- b=lM13pDCZ0fYteDglFy0U0PKUGG9WkETsEVb0WF+D2xofeTLiBvI7Zsy+/FX1H9t6Dj
- DOAUj9P56zzmabdkTcQ4tdpyiTeKHiInWA+vF5G4vn6gzRtBKAvi4BBivU1TFa8XQE7m
- veAmP43H/a0lVcS1MbKXtYx1CofYacJGL8+Tc=
+ bh=37AEv6KejEitO7J4az4BGPHWHxHZh909CC2H4fRKNqM=;
+ b=csGRtbbr7vhqAVrGSaAx0x2mCSs6Equryqsyy+lnmPZfBa50XrW00j3MW5gdCHq0FG
+ 6JRRZCdUgmucVuOe8buq4HEwzCwhutBagYXWEIePDIRkqIOglV9yM70zhr79RYUSTcY3
+ P0nEfMtsbsOTMoHe8d+JfPKhM1DI75NT9OqOM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=WXV143bWz9CEkOfxXVVZZ1M6asJx4ln+mGJjFJLXBtA=;
- b=Tw0QJKQRGYXw/mZ62GwDWngGi95FtmDEEd88FcNBXGckLBmjcX1D30gjgoeNGwDRJJ
- 8O5XQPOmKaXTY2I0k2isH5jI89WTM02Fvxxb/SI82Ez1LzEu45bIrG+M6dsPRhdZO/MY
- dS9LkGo2HlQVrkmUB0SloINybzkPU86+l79q04x9lMBcCRa038dwUyQ/ksNcPfyzu4GQ
- B3qMUxRUbPHGcNbvQ3H0Nk2bjyDondT9cGPXCBfVhrBTbxVJOu4P6RgPvaRaYEnvoIHa
- JatDL6fggyu1fCjvzMm8LR8eNnZ2bN6A+xp+qNS0ZiA+/eOGHW+MA67lg0/uCMsMoE63
- q2Uw==
-X-Gm-Message-State: AOAM532srkik2kK3SY4/N3FMcvlyStTFLcM49q06Oy4N5U8ApklF+pdq
- tF8cFF0ScMBxP+dngpm/6pu0hA==
-X-Google-Smtp-Source: ABdhPJzwe8Cxswsp+VOkZPNkZVSi+jwAdNvUPx/VsGUurJKQJAZsfb0fGkoh9+vO7r7FMGRKpt3I+Q==
-X-Received: by 2002:ac8:37bb:: with SMTP id d56mr2107380qtc.222.1601470904302; 
- Wed, 30 Sep 2020 06:01:44 -0700 (PDT)
+ bh=37AEv6KejEitO7J4az4BGPHWHxHZh909CC2H4fRKNqM=;
+ b=rGfk2Zv5L8kxwqfJknoxRYPQzgw4+X4G/K70wr+hdZNLSMHUUnSWicFCbD6N38AdBo
+ squ+FO27v+T/JAoG38xvg7EyCVCwnJnQWbZr/Y/nYQSGGZvpqpclHatgUyLI8i/Q0Wve
+ mm1PHcssrU/qnxKQ5kNMlc0ygkh5lwrrxuUFJNV/l/s3C1jEg9trBbBgRRgSD4+ZqIxb
+ XgAHtCxt6gVAiE/OrRGEfvqexbqkI0law5AKuKMmcC+m9syFKTrKzOzbA8xie6Khx6F4
+ KeF6421n0dYpdC6kKxUkVEFcHD5zT9d3soDBIXzqFfBttPxzDKMR/AtZ8hZveofQxvgK
+ aypw==
+X-Gm-Message-State: AOAM533dM9516zh+wgAK95SPEyu6zfblfq+adYrDph1IxfmBci+gxIv0
+ AiLhAHIwkTeyWtZm7CBB+WcbKw==
+X-Google-Smtp-Source: ABdhPJwdAmU5O1QI2UaNB85TNYIc8F3MyYyItRR1dyUV4NhsJ6U7E/cRWKKrZolSdunmDDzoDrLksA==
+X-Received: by 2002:a05:620a:14b0:: with SMTP id
+ x16mr2319158qkj.441.1601471307772; 
+ Wed, 30 Sep 2020 06:08:27 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8ebe-2185-3192-0f2f-246c.inf6.spectrum.com.
  [2606:a000:1401:8ebe:2185:3192:f2f:246c])
- by smtp.gmail.com with ESMTPSA id f24sm1893308qkk.136.2020.09.30.06.01.40
+ by smtp.gmail.com with ESMTPSA id v18sm2206783qtq.15.2020.09.30.06.08.23
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 30 Sep 2020 06:01:43 -0700 (PDT)
-Date: Wed, 30 Sep 2020 09:01:39 -0400
+ Wed, 30 Sep 2020 06:08:26 -0700 (PDT)
+Date: Wed, 30 Sep 2020 09:08:21 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>, u-boot-board-maintainers@lists.denx.de
-Message-ID: <20200930125833.GW14816@bill-the-cat>
+To: Sean Anderson <seanga2@gmail.com>
+Message-ID: <20200930130821.GA7180@bill-the-cat>
 References: <20200915144522.509493-1-seanga2@gmail.com>
 MIME-Version: 1.0
 In-Reply-To: <20200915144522.509493-1-seanga2@gmail.com>
@@ -110,18 +111,18 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4896697238189058720=="
+Content-Type: multipart/mixed; boundary="===============0477975333314616927=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4896697238189058720==
+--===============0477975333314616927==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="+3+wxNvbl9qzvuhY"
+	protocol="application/pgp-signature"; boundary="AqsLC8rIMeq19msA"
 Content-Disposition: inline
 
 
---+3+wxNvbl9qzvuhY
+--AqsLC8rIMeq19msA
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
@@ -310,41 +311,33 @@ s the
 >  include/remoteproc.h                      |  13 ---
 >  net/mdio-uclass.c                         |   4 +-
 >  48 files changed, 486 insertions(+), 407 deletions(-)
-> Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
 
-I'm about to apply this series to -next and I'm cc'ing the board
-maintainers list.  A feature of this series is that a large number of
-drivers that had put in information / error / etc messages that had
-intended to be seen (presumably) by the user and were being discarded at
-link/compile time before are included now.  buildman has a set of flags
-to tell you what exact functions grew between commits and if there's
-messages that should have their log level changed, we really should do
-that.
+For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---+3+wxNvbl9qzvuhY
+--AqsLC8rIMeq19msA
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl90gbIACgkQFHw5/5Y0
-tyyaMAv/YsPMk8bGKkxxlEXSw5xi2XcHAci4jIZoYVRwcV0fyGB6mpVa3eY5ba3Z
-6GgGpCjK5dciM2sCgVgjvs+eaeRXeLPfmeQktPMuIPcCf5rcf0c9fk86vLnAJ/U3
-BVWb9EJB1eiHiMkIiUNboJ9zrBRZmTD1YdPVY8nWRTHllXcV05xY2akVfFToNVPO
-Jzx7zxNFVtGNHzUvs3G3fJEr5X/+/D/ahW2vWv62bciyYrw2j4fysLWsu3gYN082
-rFBfYjCDrmdSnoLjkr4ondxsI1o0OCKt+cnNeXqGo+RcnBQ64w8IQdoztbNoG013
-Q/OOY2SvT6wZEvYGkKF07mzdyOfcJxid5KodLGtmd3zPlRp5giNzWpkHmUF0IWaN
-ZXgdxghJncyT2T8wHl1Pw5qvpaxx7VEve/XCVzZVUty/nZd+s3GUyde4PMkryFaj
-hrFrsjs96W/KKXlAaU3XN0yQzttJSJ2CqhWuFj/KX9htxA2yPOLxCv8awgIFfTST
-rpl5Hxcu
-=Tf5E
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl90g0UACgkQFHw5/5Y0
+tyyJeAv8CYi7IzgjmbbbneKcg+Y0FdbaVZG0OIXIQ41dzpC1bg9PUV/tNB++ur8i
+hX7caQjzA9PByD/fXcG/yT1FNfm0H0nJ13Y3cTC+bmNrO1uMG9lCq54kprKGS0Zf
+63AQTdoAcqPWsEBXqn6ymWqzxrxXlMshY9TRoDHXuujf292m8hC/eNNFjVcL7Gcy
+xYy/0SEuz14TKXCxZD8CgNqbKQC0clkZw1gBk2Y9Wwns8K6/jV2vcGSPGfYMrla/
+b96NnHVlUaJbiW9OMfe6VO58bIGoIDTt5lC+EhsOxeko2bsayBAFBknXjWVxaEye
+U70szicx69KgISJgBW4EZydkqZLlIQD4qSEhI72KdXyWXZ3Ixhx7exulpJvCdxP2
+mOQDFDLm1YF8Bfz6mDmai9Fa5vFcea6Kp8dVaSE5IWlXnOFeAPNOrEEZrBNC7/iu
+dqQfSL+7r4FO6pvluftcjtIuSFNGUT5AhqAF/e2MjC0Nn5l6Q00Xgu0w8PU7COWT
+ZZMKl5yI
+=ad/M
 -----END PGP SIGNATURE-----
 
---+3+wxNvbl9qzvuhY--
+--AqsLC8rIMeq19msA--
 
---===============4896697238189058720==
+--===============0477975333314616927==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -355,4 +348,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4896697238189058720==--
+--===============0477975333314616927==--

@@ -2,58 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0125928113A
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 13:30:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18737281141
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 13:32:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BBB16C3FAFF;
-	Fri,  2 Oct 2020 11:30:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D33A0C424AF;
+	Fri,  2 Oct 2020 11:32:16 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 13B9CC32EA8
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE23EC3FAFF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Oct 2020 11:30:42 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri,  2 Oct 2020 11:32:15 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 092BRWNt001575; Fri, 2 Oct 2020 13:30:40 +0200
+ 092BQjcF019749; Fri, 2 Oct 2020 13:32:15 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=GdA3NYiz2HUa9b16j2SfH2HegvFibG0aNkKgLnAaDhM=;
- b=Nj0ahsc1U6N2ky97egLdl/sL9/PkzMpA8PeH+cc2wbblZVwCuBcEN4L5QdjCjlfBP4go
- ao6pMr0cjiawJj5m5dDRhiwNlGp0KItVYXxd8+1/BDgIdTIX6J4vQwlEttPUnDnTNxxy
- U5PZwrw09E3iC8t3S+UJZlrzWES9mEMlNPNALz8XHFOudcxN35KD2b5ceOIOqqpj97+1
- 8RJAsV4wIGB1v3v9KFL5F2KMrm9vwuyqParsbeHGhLvEt0NeZ3Qx8WfLQEeBFQlNre2N
- ++q4md4jPGHNlml9QYIumIbiaSrvWNr8x5lghxJgJXykg3ufeozZ3oY62ZF0yrlVWT7H ZA== 
+ bh=CceMLFs0IpyY2Yu+g9871y9CwOYC/OttDrLitme2DmY=;
+ b=UWzRdUIpBtx98XIPAJj+XtdraKWuiQTgqJkWiZIt5PWzoWGtmHkLbFPhVifoqAWdzY2M
+ xlouzWanCGLplGyxIYHHiP5VTzoirIwsQVFAdhO+psAJ5IG2af3QybrQIWBhJaKGgBZa
+ jS8rHOUmxVj7I4Pqk+5j2Vgk+oSg3hSS1P3JZcdObCGYlUU1CrgCy2CW3wYRNdVJuiBh
+ PlcwJdwYb7Fun9Uh6fNlMoVZfRDkIBkpW8e1viEPuD+RMZ2lRmuPqLzJXeihMNLR4Tmy
+ ZFJkHNFI8NwYPZ9dt0FltAX113KByDJii4QqnqbI0nqGSWkrQqQsmJ0KIU8SHFnM2HAk Iw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33v0dhaxed-1
+ by mx07-00178001.pphosted.com with ESMTP id 33sts8bc8b-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Oct 2020 13:30:40 +0200
+ Fri, 02 Oct 2020 13:32:15 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4A12D10002A;
- Fri,  2 Oct 2020 13:30:40 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3E6982B8A11;
- Fri,  2 Oct 2020 13:30:40 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE1.st.com
- (10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
- 2020 13:30:39 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CA6DD10002A;
+ Fri,  2 Oct 2020 13:32:14 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C04B72B8A14;
+ Fri,  2 Oct 2020 13:32:14 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
+ 2020 13:32:14 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 2 Oct 2020 13:30:39 +0200
+ 15.00.1473.003; Fri, 2 Oct 2020 13:32:14 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 4/4] configs: stm32mp1: enable the fastboot
- oem command bootbus
-Thread-Index: AQHWmK90H3t3c+zGPUmYIJF5XBaReQ==
-Date: Fri, 2 Oct 2020 11:30:39 +0000
-Message-ID: <89cb7da2-8cf5-aa55-6a65-c0c836d62a5b@st.com>
-References: <20200909152426.1.Ie383431427f46a688dc1f0932522d8f34f3192a5@changeid>
- <20200909152426.4.I3df1738f393278eeb2df2ad4fd8543360d3a5597@changeid>
-In-Reply-To: <20200909152426.4.I3df1738f393278eeb2df2ad4fd8543360d3a5597@changeid>
+Thread-Topic: [PATCH] stm32mp: limit size of cacheable DDR in pre-reloc stage
+Thread-Index: AQHWgqnn0U8ilZs6X0CoKrA2gMWosamEOHwA
+Date: Fri, 2 Oct 2020 11:32:14 +0000
+Message-ID: <e5f2d640-6835-c58c-a534-d6a66ad7072e@st.com>
+References: <20200904125517.1.I23889bc9bd065ae7ac2b17faf2436522848e0568@changeid>
+In-Reply-To: <20200904125517.1.I23889bc9bd065ae7ac2b17faf2436522848e0568@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,14 +61,14 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.49]
-Content-ID: <D78A64FFD36F2249B967F439662588B1@st.com>
+Content-ID: <5E6776FFFBFD0744B9FF1980E1ABF88B@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-10-02_06:2020-10-02,
  2020-10-02 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 4/4] configs: stm32mp1: enable the
- fastboot oem command bootbus
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp: limit size of cacheable DDR in
+	pre-reloc stage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,49 +87,81 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 9/9/20 3:24 PM, Patrick Delaunay wrote:
-> Enable the fastboot oem command bootbus, used to configure the eMMC
-> boot behavior, with same format than 'mmc bootbus'
-> and with parameter: boot_bus_width reset_boot_bus_width boot_mode
+On 9/4/20 12:55 PM, Patrick Delaunay wrote:
+> In pre-reloc stage, U-Boot marks cacheable the DDR limited by
+> the new config CONFIG_DDR_CACHEABLE_SIZE.
 >
-> On stm32mp1 boards the expected command is
-> $> fastboot oem partconf:0 0 0
+> This patch allows to avoid any speculative access to DDR protected by
+> firewall and used by OP-TEE; the "no-map" reserved memory
+> node in DT are assumed after this limit:
+> STM32_DDR_BASE + DDR_CACHEABLE_SIZE.
+>
+> Without security, in basic boot, the value is equal to STM32_DDR_SIZE.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  configs/stm32mp15_basic_defconfig   | 1 +
->  configs/stm32mp15_trusted_defconfig | 1 +
->  2 files changed, 2 insertions(+)
+>  arch/arm/mach-stm32mp/Kconfig | 13 +++++++++++++
+>  arch/arm/mach-stm32mp/cpu.c   |  3 ++-
+>  arch/arm/mach-stm32mp/spl.c   |  3 ++-
+>  3 files changed, 17 insertions(+), 2 deletions(-)
 >
-> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-> index 6cbfbe5274..0115c9b891 100644
-> --- a/configs/stm32mp15_basic_defconfig
-> +++ b/configs/stm32mp15_basic_defconfig
-> @@ -87,6 +87,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
->  CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
-> +CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
->  CONFIG_DM_HWSPINLOCK=y
->  CONFIG_HWSPINLOCK_STM32=y
->  CONFIG_DM_I2C=y
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index cc114896df..470a2f4c35 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -67,6 +67,7 @@ CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
->  CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
->  CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
->  CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
-> +CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
->  CONFIG_DM_HWSPINLOCK=y
->  CONFIG_HWSPINLOCK_STM32=y
->  CONFIG_DM_I2C=y
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index 478fd2f17d..f538d7cb83 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -93,6 +93,19 @@ config SYS_TEXT_BASE
+>  config NR_DRAM_BANKS
+>  	default 1
+>  
+> +config DDR_CACHEABLE_SIZE
+> +	hex "Size of the DDR marked cacheable in pre-reloc stage"
+> +	default 0x10000000 if TFABOOT
+> +	default 0x40000000
+> +	help
+> +		Define the size of the DDR marked as cacheable in U-Boot
+> +		pre-reloc stage.
+> +		This option can be useful to avoid speculatif access
+> +		to secured area of DDR used by TF-A or OP-TEE before U-Boot
+> +		initialization.
+> +		The areas marked "no-map" in device tree should be located
+> +		before this limit: STM32_DDR_BASE + DDR_CACHEABLE_SIZE.
+> +
+>  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
+>  	hex "Partition on MMC2 to use to load U-Boot from"
+>  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+> index b7fcee2b36..dc170dd6fa 100644
+> --- a/arch/arm/mach-stm32mp/cpu.c
+> +++ b/arch/arm/mach-stm32mp/cpu.c
+> @@ -230,7 +230,8 @@ static void early_enable_caches(void)
+>  			round_up(STM32_SYSRAM_SIZE, MMU_SECTION_SIZE),
+>  			DCACHE_DEFAULT_OPTION);
+>  	else
+> -		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
+> +		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
+> +						CONFIG_DDR_CACHEABLE_SIZE,
+>  						DCACHE_DEFAULT_OPTION);
+>  }
+>  
+> diff --git a/arch/arm/mach-stm32mp/spl.c b/arch/arm/mach-stm32mp/spl.c
+> index e84bdad7bf..b679b0a645 100644
+> --- a/arch/arm/mach-stm32mp/spl.c
+> +++ b/arch/arm/mach-stm32mp/spl.c
+> @@ -138,7 +138,8 @@ void board_init_f(ulong dummy)
+>  	 * to avoid speculative access and issue in get_ram_size()
+>  	 */
+>  	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
+> -		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
+> +		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
+> +						CONFIG_DDR_CACHEABLE_SIZE,
+>  						DCACHE_DEFAULT_OPTION);
+>  }
+>  
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
-Thanks
+Thnaks
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,74 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 496A8280FB7
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 11:20:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB76C280FE8
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 11:32:00 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 00FDEC424AF;
-	Fri,  2 Oct 2020 09:20:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 449C1C424B1;
+	Fri,  2 Oct 2020 09:32:00 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5001AC3089F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9031BC424B0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Oct 2020 09:20:45 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  2 Oct 2020 09:31:58 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0929743U015382; Fri, 2 Oct 2020 11:20:42 +0200
+ 0929LckA020475; Fri, 2 Oct 2020 11:31:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=X1rvIqYwUz31uu+uXAHIbUbrHkw8AURb0DMVq1xUjy4=;
- b=0HfiB3EqNp6cugj0olKtFgoyl2Woz/q+4iUMEjCOTX0u1IlrWME/jbz6rKMKxv3xsXcL
- QRPdnoBg9X6D5CScjZ8RvTUexIkagNdgT320llAfdfyTNptUHVnJVfgbNOdAxG3OVzCI
- khIYEKI8nDvjfwF+2KixwwfpTI+1eLpPtQupjKaZSulEfQkt1o9UBlnwfwZChi8qMtTr
- 3U/G0oi/XHI6z76sPylow9fbJmRl17A/Yga+z/KtsG7oVv/dI+Eq3H2czWJflWVnEsdT
- p93rh0WgOmv7McaK/3ck5YcxRrbbqO+/uj0lzrBzTqVL5K47exvnqs0CpXBq6q6YVyC4 CQ== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=rQN6NqGyRyCjWK2K6vy1Vxo7S4hLsqDkj5r+svv1VXo=;
+ b=mQw4iaI749kEHgCtPVcxq8x2Po3c+ywB3wEwo/P0OCbJlmzBdRTWoiITyGF6MkVWiPRV
+ wqKy7LxLGl7I4RU4ppEzCSq101a0bov4fTsgrYWQSO0SAXFPDt04VM0HWBBw1hI+yJ8H
+ QciXDq5vNcDsrigzOPZKMG3Qn19VoTlm2Ncd3IRRM1qz6ZEy6LdrHTwLmfuNDEzD1oVV
+ oWr+LWfpGZYE1hh3KDjQQ6P+qRsl2MwII3maRvxU6bJbMCaEJKxXDYXQtL+jbH7k/3P4
+ c/6dYklIsYpJ18LJGfRvIZZsbApz2bxIRzsKaRXEBopA8guQ6Eez3/WKAS49Ai8uE29l gA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33svhf2b2t-1
+ by mx07-00178001.pphosted.com with ESMTP id 33su409g7n-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Oct 2020 11:20:42 +0200
+ Fri, 02 Oct 2020 11:31:56 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C79B810002A;
- Fri,  2 Oct 2020 11:20:41 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BA0952B0873;
- Fri,  2 Oct 2020 11:20:41 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
- 2020 11:20:41 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5AC0110002A;
+ Fri,  2 Oct 2020 11:31:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4B97F2B0890;
+ Fri,  2 Oct 2020 11:31:56 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
+ (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
+ 2020 11:30:57 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 2 Oct 2020 11:20:41 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>, "peng.fan@nxp.com"
- <peng.fan@nxp.com>
-Thread-Topic: [PATCH v2 2/2] mmc: stm32_sdmmc2: Use mmc_of_parse() to read
- host capabilities
-Thread-Index: AQHWi5mtcGbc77IZCUO45VDKXHcwnqmEIudQ
-Date: Fri, 2 Oct 2020 09:20:41 +0000
-Message-ID: <11f07b6448814c54924026c352f6ebf4@SFHDAG6NODE3.st.com>
-References: <20200909215402.366561-1-mr.nuke.me@gmail.com>
- <20200915195147.2659607-2-mr.nuke.me@gmail.com>
-In-Reply-To: <20200915195147.2659607-2-mr.nuke.me@gmail.com>
+ 15.00.1473.003; Fri, 2 Oct 2020 11:30:57 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] ARM: dts: stm32mp1: DT alignment with Linux kernel
+ v5.9-rc4
+Thread-Index: AQHWi/+qGsgV8pUTykynw+oocENRramEA+2A
+Date: Fri, 2 Oct 2020 09:30:57 +0000
+Message-ID: <b78169c0-1101-e48c-a575-654a6eea6d7e@st.com>
+References: <20200916080132.10369-1-patrick.delaunay@st.com>
+In-Reply-To: <20200916080132.10369-1-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
+x-originating-ip: [10.75.127.51]
+Content-ID: <9A37B22A7306EF4295DA704A4B61A721@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-10-02_05:2020-10-02,
  2020-10-02 signatures=0
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/2] mmc: stm32_sdmmc2: Use
- mmc_of_parse() to read host capabilities
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: DT alignment with
+ Linux kernel v5.9-rc4
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,32 +87,513 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+Hi Patrick
 
-> From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> Sent: mardi 15 septembre 2020 21:52
-> 
-> mmc_of_parse() can populate the 'f_max' and 'host_caps' fields of struct
-> mmc_config from devicetree.
-> The same logic is duplicated in stm32_sdmmc2_probe(). Use mmc_of_parse(),
-> which is more generic.
-> 
-> Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
+On 9/16/20 10:01 AM, Patrick Delaunay wrote:
+> DT alignment with Linux kernel v5.9-rc4 for the STM32MP15x soc
+> device tree files and the STMicroelectronics boards device tree files.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
-> Changes from v1:
->  - Check the return value of mmc_of_parse().
->  - The call to mmc_of_parse() is moved further up. This means we can just
->    'return err' on error instead of exiting via goto.
-> 
->  drivers/mmc/stm32_sdmmc2.c | 24 ++++++------------------
->  1 file changed, 6 insertions(+), 18 deletions(-)
-> 
+>
+>  arch/arm/dts/stm32mp15-pinctrl.dtsi | 263 ++++++++++++++++++++++++++--
+>  arch/arm/dts/stm32mp151.dtsi        |   4 +-
+>  arch/arm/dts/stm32mp157a-dk1.dts    |   2 +
+>  arch/arm/dts/stm32mp157c-dk2.dts    |  11 ++
+>  arch/arm/dts/stm32mp157c-ed1.dts    |   4 +-
+>  arch/arm/dts/stm32mp157c-ev1.dts    |  15 ++
+>  arch/arm/dts/stm32mp15xx-dkx.dtsi   |  38 +++-
+>  7 files changed, 318 insertions(+), 19 deletions(-)
+>
+> diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+> index e9525b5d06..154832983c 100644
+> --- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
+> +++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+> @@ -1573,6 +1573,20 @@
+>  		};
+>  	};
+>  
+> +	spi4_pins_a: spi4-0 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('E', 12, AF5)>, /* SPI4_SCK */
+> +				 <STM32_PINMUX('E', 6, AF5)>;  /* SPI4_MOSI */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <1>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('E', 13, AF5)>; /* SPI4_MISO */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+>  	stusb1600_pins_a: stusb1600-0 {
+>  			pins {
+>  				pinmux = <STM32_PINMUX('I', 11, ANALOG)>;
+> @@ -1580,6 +1594,133 @@
+>  		};
+>  	};
+>  
+> +	uart4_pins_a: uart4-0 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart4_idle_pins_a: uart4-idle-0 {
+> +		   pins1 {
+> +			 pinmux = <STM32_PINMUX('G', 11, ANALOG)>; /* UART4_TX */
+> +		   };
+> +		   pins2 {
+> +			 pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
+> +			 bias-disable;
+> +		   };
+> +	};
+> +
+> +	uart4_sleep_pins_a: uart4-sleep-0 {
+> +		   pins {
+> +			pinmux = <STM32_PINMUX('G', 11, ANALOG)>, /* UART4_TX */
+> +				 <STM32_PINMUX('B', 2, ANALOG)>; /* UART4_RX */
+> +		    };
+> +	};
+> +
+> +	uart4_pins_b: uart4-1 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('D', 1, AF8)>; /* UART4_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart4_pins_c: uart4-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 2, AF8)>; /* UART4_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart7_pins_a: uart7-0 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('E', 8, AF7)>; /* UART7_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('E', 7, AF7)>, /* UART7_RX */
+> +				 <STM32_PINMUX('E', 10, AF7)>, /* UART7_CTS */
+> +				 <STM32_PINMUX('E', 9, AF7)>; /* UART7_RTS */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart7_pins_b: uart7-1 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('F', 7, AF7)>; /* UART7_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('F', 6, AF7)>; /* UART7_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart7_pins_c: uart7-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('E', 8, AF7)>; /* UART7_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('E', 7, AF7)>; /* UART7_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart7_idle_pins_c: uart7-idle-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('E', 8, ANALOG)>; /* UART7_TX */
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('E', 7, AF7)>; /* UART7_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	uart7_sleep_pins_c: uart7-sleep-2 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('E', 8, ANALOG)>, /* UART7_TX */
+> +				 <STM32_PINMUX('E', 7, ANALOG)>; /* UART7_RX */
+> +		};
+> +	};
+> +
+> +	uart8_pins_a: uart8-0 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('E', 1, AF8)>; /* UART8_TX */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('E', 0, AF8)>; /* UART8_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+>  	usart2_pins_a: usart2-0 {
+>  		pins1 {
+>  			pinmux = <STM32_PINMUX('F', 5, AF7)>, /* USART2_TX */
+> @@ -1628,6 +1769,42 @@
+>  		};
+>  	};
+>  
+> +	usart2_pins_c: usart2-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('D', 5, AF7)>, /* USART2_TX */
+> +				 <STM32_PINMUX('D', 4, AF7)>; /* USART2_RTS */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <3>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('D', 6, AF7)>, /* USART2_RX */
+> +				 <STM32_PINMUX('D', 3, AF7)>; /* USART2_CTS_NSS */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart2_idle_pins_c: usart2-idle-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('D', 5, ANALOG)>, /* USART2_TX */
+> +				 <STM32_PINMUX('D', 4, ANALOG)>, /* USART2_RTS */
+> +				 <STM32_PINMUX('D', 3, ANALOG)>; /* USART2_CTS_NSS */
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('D', 6, AF7)>; /* USART2_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart2_sleep_pins_c: usart2-sleep-2 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('D', 5, ANALOG)>, /* USART2_TX */
+> +				 <STM32_PINMUX('D', 4, ANALOG)>, /* USART2_RTS */
+> +				 <STM32_PINMUX('D', 6, ANALOG)>, /* USART2_RX */
+> +				 <STM32_PINMUX('D', 3, ANALOG)>; /* USART2_CTS_NSS */
+> +		};
+> +	};
+> +
+>  	usart3_pins_a: usart3-0 {
+>  		pins1 {
+>  			pinmux = <STM32_PINMUX('B', 10, AF7)>; /* USART3_TX */
+> @@ -1641,6 +1818,78 @@
+>  		};
+>  	};
+>  
+> +	usart3_pins_b: usart3-1 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('B', 10, AF7)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, AF8)>; /* USART3_RTS */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 12, AF8)>, /* USART3_RX */
+> +				 <STM32_PINMUX('I', 10, AF8)>; /* USART3_CTS_NSS */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart3_idle_pins_b: usart3-idle-1 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
+> +				 <STM32_PINMUX('I', 10, ANALOG)>; /* USART3_CTS_NSS */
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart3_sleep_pins_b: usart3-sleep-1 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
+> +				 <STM32_PINMUX('I', 10, ANALOG)>, /* USART3_CTS_NSS */
+> +				 <STM32_PINMUX('B', 12, ANALOG)>; /* USART3_RX */
+> +		};
+> +	};
+> +
+> +	usart3_pins_c: usart3-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('B', 10, AF7)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, AF8)>; /* USART3_RTS */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <0>;
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 12, AF8)>, /* USART3_RX */
+> +				 <STM32_PINMUX('B', 13, AF7)>; /* USART3_CTS_NSS */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart3_idle_pins_c: usart3-idle-2 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
+> +				 <STM32_PINMUX('B', 13, ANALOG)>; /* USART3_CTS_NSS */
+> +		};
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	usart3_sleep_pins_c: usart3-sleep-2 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
+> +				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
+> +				 <STM32_PINMUX('B', 13, ANALOG)>, /* USART3_CTS_NSS */
+> +				 <STM32_PINMUX('B', 12, ANALOG)>; /* USART3_RX */
+> +		};
+> +	};
+> +
+>  	uart4_pins_a: uart4-0 {
+>  		pins1 {
+>  			pinmux = <STM32_PINMUX('G', 11, AF6)>; /* UART4_TX */
+> @@ -1782,18 +2031,4 @@
+>  			bias-disable;
+>  		};
+>  	};
+> -
+> -	spi4_pins_a: spi4-0 {
+> -		pins {
+> -			pinmux = <STM32_PINMUX('E', 12, AF5)>, /* SPI4_SCK */
+> -				 <STM32_PINMUX('E', 6, AF5)>;  /* SPI4_MOSI */
+> -			bias-disable;
+> -			drive-push-pull;
+> -			slew-rate = <1>;
+> -		};
+> -		pins2 {
+> -			pinmux = <STM32_PINMUX('E', 13, AF5)>; /* SPI4_MISO */
+> -			bias-disable;
+> -		};
+> -	};
+>  };
+> diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
+> index 39d9e545ed..206d3d3c78 100644
+> --- a/arch/arm/dts/stm32mp151.dtsi
+> +++ b/arch/arm/dts/stm32mp151.dtsi
+> @@ -1153,7 +1153,7 @@
+>  		};
+>  
+>  		pwr_mcu: pwr_mcu@50001014 {
+> -			compatible = "syscon";
+> +			compatible = "st,stm32mp151-pwr-mcu", "syscon";
+>  			reg = <0x50001014 0x4>;
+>  		};
+>  
+> @@ -1372,6 +1372,8 @@
+>  			dma-names = "tx", "rx";
+>  			clocks = <&rcc QSPI_K>;
+>  			resets = <&rcc QSPI_R>;
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+>  			status = "disabled";
+>  		};
+>  
+> diff --git a/arch/arm/dts/stm32mp157a-dk1.dts b/arch/arm/dts/stm32mp157a-dk1.dts
+> index d03d4cd260..4c8be9c8eb 100644
+> --- a/arch/arm/dts/stm32mp157a-dk1.dts
+> +++ b/arch/arm/dts/stm32mp157a-dk1.dts
+> @@ -18,6 +18,8 @@
+>  	aliases {
+>  		ethernet0 = &ethernet0;
+>  		serial0 = &uart4;
+> +		serial1 = &usart3;
+> +		serial2 = &uart7;
+>  	};
+>  
+>  	chosen {
+> diff --git a/arch/arm/dts/stm32mp157c-dk2.dts b/arch/arm/dts/stm32mp157c-dk2.dts
+> index 9a8a26710a..045636555d 100644
+> --- a/arch/arm/dts/stm32mp157c-dk2.dts
+> +++ b/arch/arm/dts/stm32mp157c-dk2.dts
+> @@ -19,6 +19,9 @@
+>  	aliases {
+>  		ethernet0 = &ethernet0;
+>  		serial0 = &uart4;
+> +		serial1 = &usart3;
+> +		serial2 = &uart7;
+> +		serial3 = &usart2;
+>  	};
+>  
+>  	chosen {
+> @@ -84,3 +87,11 @@
+>  		};
+>  	};
+>  };
+> +
+> +&usart2 {
+> +	pinctrl-names = "default", "sleep", "idle";
+> +	pinctrl-0 = <&usart2_pins_c>;
+> +	pinctrl-1 = <&usart2_sleep_pins_c>;
+> +	pinctrl-2 = <&usart2_idle_pins_c>;
+> +	status = "disabled";
+> +};
+> diff --git a/arch/arm/dts/stm32mp157c-ed1.dts b/arch/arm/dts/stm32mp157c-ed1.dts
+> index 072d646379..dd911c9932 100644
+> --- a/arch/arm/dts/stm32mp157c-ed1.dts
+> +++ b/arch/arm/dts/stm32mp157c-ed1.dts
+> @@ -361,8 +361,10 @@
+>  };
+>  
+>  &uart4 {
+> -	pinctrl-names = "default";
+> +	pinctrl-names = "default", "sleep", "idle";
+>  	pinctrl-0 = <&uart4_pins_a>;
+> +	pinctrl-1 = <&uart4_sleep_pins_a>;
+> +	pinctrl-2 = <&uart4_idle_pins_a>;
+>  	status = "okay";
+>  };
+>  
+> diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
+> index 46f81ce92e..a55e80ce26 100644
+> --- a/arch/arm/dts/stm32mp157c-ev1.dts
+> +++ b/arch/arm/dts/stm32mp157c-ev1.dts
+> @@ -19,6 +19,7 @@
+>  
+>  	aliases {
+>  		serial0 = &uart4;
+> +		serial1 = &usart3;
+>  		ethernet0 = &ethernet0;
+>  	};
+>  
+> @@ -343,6 +344,20 @@
+>  	};
+>  };
+>  
+> +&usart3 {
+> +	pinctrl-names = "default", "sleep", "idle";
+> +	pinctrl-0 = <&usart3_pins_b>;
+> +	pinctrl-1 = <&usart3_sleep_pins_b>;
+> +	pinctrl-2 = <&usart3_idle_pins_b>;
+> +	/*
+> +	 * HW flow control USART3_RTS is optional, and isn't default wired to
+> +	 * the connector. SB23 needs to be soldered in order to use it, and R77
+> +	 * (ETH_CLK) should be removed.
+> +	 */
+> +	uart-has-rtscts;
+> +	status = "disabled";
+> +};
+> +
+>  &usbh_ehci {
+>  	phys = <&usbphyc_port0>;
+>  	status = "okay";
+> diff --git a/arch/arm/dts/stm32mp15xx-dkx.dtsi b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+> index d660dfb74e..aa4aa83e05 100644
+> --- a/arch/arm/dts/stm32mp15xx-dkx.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dkx.dtsi
+> @@ -62,7 +62,7 @@
+>  
+>  	led {
+>  		compatible = "gpio-leds";
+> -		blue {
+> +		led-blue {
+>  			label = "heartbeat";
+>  			gpios = <&gpiod 11 GPIO_ACTIVE_HIGH>;
+>  			linux,default-trigger = "heartbeat";
+> @@ -391,6 +391,19 @@
+>  	};
+>  };
+>  
+> +&i2c5 {
+> +	pinctrl-names = "default", "sleep";
+> +	pinctrl-0 = <&i2c5_pins_a>;
+> +	pinctrl-1 = <&i2c5_sleep_pins_a>;
+> +	i2c-scl-rising-time-ns = <185>;
+> +	i2c-scl-falling-time-ns = <20>;
+> +	clock-frequency = <400000>;
+> +	/* spare dmas for other usage */
+> +	/delete-property/dmas;
+> +	/delete-property/dma-names;
+> +	status = "disabled";
+> +};
+> +
+>  &i2s2 {
+>  	clocks = <&rcc SPI2>, <&rcc SPI2_K>, <&rcc PLL3_Q>, <&rcc PLL3_R>;
+>  	clock-names = "pclk", "i2sclk", "x8k", "x11k";
+> @@ -610,20 +623,39 @@
+>  };
+>  
+>  &uart4 {
+> -	pinctrl-names = "default";
+> +	pinctrl-names = "default", "sleep", "idle";
+>  	pinctrl-0 = <&uart4_pins_a>;
+> +	pinctrl-1 = <&uart4_sleep_pins_a>;
+> +	pinctrl-2 = <&uart4_idle_pins_a>;
+>  	status = "okay";
+>  };
+>  
+> +&uart7 {
+> +	pinctrl-names = "default", "sleep", "idle";
+> +	pinctrl-0 = <&uart7_pins_c>;
+> +	pinctrl-1 = <&uart7_sleep_pins_c>;
+> +	pinctrl-2 = <&uart7_idle_pins_c>;
+> +	status = "disabled";
+> +};
+> +
+> +&usart3 {
+> +	pinctrl-names = "default", "sleep", "idle";
+> +	pinctrl-0 = <&usart3_pins_c>;
+> +	pinctrl-1 = <&usart3_sleep_pins_c>;
+> +	pinctrl-2 = <&usart3_idle_pins_c>;
+> +	uart-has-rtscts;
+> +	status = "disabled";
+> +};
+> +
+>  &usbh_ehci {
+>  	phys = <&usbphyc_port0>;
+>  	status = "okay";
+>  };
+>  
+>  &usbotg_hs {
+> -	dr_mode = "peripheral";
+>  	phys = <&usbphyc_port1 0>;
+>  	phy-names = "usb2-phy";
+> +	usb-role-switch;
+>  	status = "okay";
+>  };
+>  
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
 Thanks
-
-Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

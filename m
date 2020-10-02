@@ -2,58 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF70F281333
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 14:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CECC2813A1
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 15:04:14 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D88AC3FAFF;
-	Fri,  2 Oct 2020 12:55:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3186AC424B3;
+	Fri,  2 Oct 2020 13:04:14 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7386EC3089F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA48AC424B2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Oct 2020 12:55:05 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  2 Oct 2020 13:04:10 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 092Cb7s1022530; Fri, 2 Oct 2020 14:55:00 +0200
+ 092D1geS011885; Fri, 2 Oct 2020 15:04:08 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=Se4WNNuy6ged93iUc5lF1RM17NsZ45pYAcTEDoXmq3Q=;
- b=AMc0ow7IQdqlzq8bfMGoWrX0tnBjUo8YWGBR88xpqKaHoqkimw2OKfwjg3wMORrHZ6bR
- LTGaC4pf6IZSm8cXIis0XWQDOdef6nFLcJEwbZ84ye74ZP3XdguXFX2u2DqVQxZ7y9OO
- CNg/BIcAWq2+b4bCWGhOMu0E2fkTmIbkLdNdAp81XH9oaapsnZ6h1ORk8Sorq2vcIQwP
- jVMUbZyBnvPa2Q6uDDgphrhWwTJX3X2ll0pL7/XBdPkTFceqCl5DrgKm42C88ZGCj6CX
- 2HENYvuy64w6XfxxzIRSVkAdeN/lkMnhZjkn2/If8mgcF63Pqlv4hhqckcmj4AQ1wCj+ 4Q== 
+ bh=Mi7i1YpyMAzwRjMAnlxJJShuybPFcB2M98mjkBr8O6M=;
+ b=NDQwv/qQEjggOaE1OWX0L6BCE/yVlK7/zyxOL0HDMRwBEB5ZkpIIjAvQZzxQQuIos8iU
+ xj2Fgd5Jihm8182pU5CC7Ce78Sph5l+txEa0klw3VuJkEjWDAioi8grcFuj80eAIaTMz
+ Q0iQ0RvEZnQ4aNzFnj5WuNMm5A2aYqCgiLxWr0gX2+2b1hHqNKLN8AeyZpLIhH66J30v
+ I+PrIp3WxCojANS7wJODZP36ooJQsmJ0EH/wPHyM0SSw3RU6/QQcAm2Olb7M0XoSNQA4
+ 4rQ2ty0DQL2KzluZCNdNBMumQSImyjTLrM73qJS6A9uz4WcLmyg/2CZqZ0LVtqMeqlGG /A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33svhf3c0j-1
+ by mx07-00178001.pphosted.com with ESMTP id 33su40ag5r-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Oct 2020 14:55:00 +0200
+ Fri, 02 Oct 2020 15:04:08 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 25C1B10002A;
- Fri,  2 Oct 2020 14:55:00 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3CC4A10002A;
+ Fri,  2 Oct 2020 15:04:08 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E65F42BF9BE;
- Fri,  2 Oct 2020 14:54:59 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31E4D2C38A2;
+ Fri,  2 Oct 2020 15:04:08 +0200 (CEST)
 Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE3.st.com
  (10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
- 2020 14:54:59 +0200
+ 2020 15:04:07 +0200
 Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
  SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 2 Oct 2020 14:54:59 +0200
+ 15.00.1473.003; Fri, 2 Oct 2020 15:04:07 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: "peng.fan@nxp.com" <peng.fan@nxp.com>
-Thread-Topic: [PATCH 1/2] mmc: mmc_of_parse: Enable 52 MHz support with
- "cap-mmc-highspeed"
-Thread-Index: AQHWi5msGhDIPL5WykOA1I3zu06JJ6mEICqggAA8aIA=
-Date: Fri, 2 Oct 2020 12:54:59 +0000
-Message-ID: <7fa74725c9c44853895730888635d898@SFHDAG6NODE3.st.com>
-References: <20200909215402.366561-1-mr.nuke.me@gmail.com>
- <20200915195147.2659607-1-mr.nuke.me@gmail.com>
- <ba02620d889647dfbc2c01f3c281f5a9@SFHDAG6NODE3.st.com>
-In-Reply-To: <ba02620d889647dfbc2c01f3c281f5a9@SFHDAG6NODE3.st.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] ARM: dts: stm32mp1: DT alignment with Linux kernel
+ v5.9-rc4
+Thread-Index: AQHWi/+Yy3Oe8DKcPk2TmaThNiJ4K6mEYBgw
+Date: Fri, 2 Oct 2020 13:04:07 +0000
+Message-ID: <98125bdca8614b3f85bbd0a89d900229@SFHDAG6NODE3.st.com>
+References: <20200916080132.10369-1-patrick.delaunay@st.com>
+In-Reply-To: <20200916080132.10369-1-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -64,13 +62,10 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-10-02_06:2020-10-02,
  2020-10-02 signatures=0
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] mmc: mmc_of_parse: Enable 52 MHz
- support with "cap-mmc-highspeed"
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32mp1: DT alignment with
+ Linux kernel v5.9-rc4
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,57 +82,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Peng,
+Hi,
 
-> From: Uboot-stm32 <uboot-stm32-bounces@st-md-mailman.stormreply.com> On
-> Behalf Of Patrick DELAUNAY
+> From: Patrick DELAUNAY <patrick.delaunay@st.com>
+> Sent: mercredi 16 septembre 2020 10:02
 > 
-> Hi,
+> DT alignment with Linux kernel v5.9-rc4 for the STM32MP15x soc device tree
+> files and the STMicroelectronics boards device tree files.
 > 
-> > From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> > Sent: mardi 15 septembre 2020 21:52
-> >
-> > "cap-mmc-highspeed" enables support for 26 MHz MMC, but there is no
-> > additional flag to enable 52 MHz MMC. In Linux. "cap-mmc-highspeed"
-> > is used for MMC HS at both 26MHz and 52MHz.
-> >
-> > Use the same approach and enable MMC_CAP(MMC_HS_52) host capability
-> > when "cap-mmc-highspeed" is found in the devicetree. In the event an
-> > MMC card doesn't support 52 MHz, it will be clocked at a speed based
-> > on its EXT CSD, even on 52 MHz host controllers
-> >
-> > Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> > ---
-> >  drivers/mmc/mmc-uclass.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
 > 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Tested-by: Patrick Delaunay <patrick.delaunay@st.com>
+>  arch/arm/dts/stm32mp15-pinctrl.dtsi | 263 ++++++++++++++++++++++++++--
+>  arch/arm/dts/stm32mp151.dtsi        |   4 +-
+>  arch/arm/dts/stm32mp157a-dk1.dts    |   2 +
+>  arch/arm/dts/stm32mp157c-dk2.dts    |  11 ++
+>  arch/arm/dts/stm32mp157c-ed1.dts    |   4 +-
+>  arch/arm/dts/stm32mp157c-ev1.dts    |  15 ++
+>  arch/arm/dts/stm32mp15xx-dkx.dtsi   |  38 +++-
+>  7 files changed, 318 insertions(+), 19 deletions(-)
 > 
-> Tested on STM32MP157C-EV1, for mmc 1 = emmc with patch [1]
-> 
-> 	Mode: MMC High Speed (52MHz)
-> 
-> [1]: mmc: stm32_sdmmc2: Use mmc_of_parse() to read host capabilities
->      http://patchwork.ozlabs.org/project/uboot/patch/20200909215402.366561-1-
-> mr.nuke.me@gmail.com/
 
-Today this patch is delegate to me in patchwork even it is a mmc core patch:
+Applied to u-boot-stm/next, thanks!
 
-http://patchwork.ozlabs.org/project/uboot/list/?series=201912
+Regards
 
-You are OK if I integrate this patch in my stm32 pull request for v2020.01-rc1 or
-I delegate to you ?
-
-> 
-> Thanks
-> 
-> Patrick
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

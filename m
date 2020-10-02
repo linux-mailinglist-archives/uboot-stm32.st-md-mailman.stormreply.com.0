@@ -2,73 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18737281141
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 13:32:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FF70281207
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Oct 2020 14:09:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D33A0C424AF;
-	Fri,  2 Oct 2020 11:32:16 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 305A4C3FAFF;
+	Fri,  2 Oct 2020 12:09:43 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE23EC3FAFF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C6A2C32EA8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Oct 2020 11:32:15 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri,  2 Oct 2020 12:09:39 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 092BQjcF019749; Fri, 2 Oct 2020 13:32:15 +0200
+ 092C34Xw019127; Fri, 2 Oct 2020 14:09:37 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type : content-id
- : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=CceMLFs0IpyY2Yu+g9871y9CwOYC/OttDrLitme2DmY=;
- b=UWzRdUIpBtx98XIPAJj+XtdraKWuiQTgqJkWiZIt5PWzoWGtmHkLbFPhVifoqAWdzY2M
- xlouzWanCGLplGyxIYHHiP5VTzoirIwsQVFAdhO+psAJ5IG2af3QybrQIWBhJaKGgBZa
- jS8rHOUmxVj7I4Pqk+5j2Vgk+oSg3hSS1P3JZcdObCGYlUU1CrgCy2CW3wYRNdVJuiBh
- PlcwJdwYb7Fun9Uh6fNlMoVZfRDkIBkpW8e1viEPuD+RMZ2lRmuPqLzJXeihMNLR4Tmy
- ZFJkHNFI8NwYPZ9dt0FltAX113KByDJii4QqnqbI0nqGSWkrQqQsmJ0KIU8SHFnM2HAk Iw== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=quOylH9BjLCBgjvd4PmTi8SfF2PiTbWHJoHKwYyXtMo=;
+ b=geCU+nOH0L91ezOn4eYwUeB5VmCPWJczrqY6LzHtfRHa9tjfDI+tOG7ta8vu2lCBSlS0
+ kF9BIiMzbGsKBdrzRx1Y2dmhnMP5ziL+7tRs/q7t8/OnbqpmbeB2ukTBuAZxAKpaB0tO
+ nuqelUJc8SgzdFsb4LxUpAOuvdk9qXLiIok73ESheWmL10XloPzjYhQSy+n9ngpV21hd
+ +BxnsJ5BF4kIe32fuocoj46QhyGSgANwt6StHe+4/hjtCQf7VyGJhOYjv2fzik4oCZyB
+ rD2S9zb8tT0t+n5jb8SiGFyQPMOSNyvJ+bAi9tkwgl02bcDbdN/JOpJhR2FIoKYWReCm Lg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 33sts8bc8b-1
+ by mx07-00178001.pphosted.com with ESMTP id 33svhf35dw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Oct 2020 13:32:15 +0200
+ Fri, 02 Oct 2020 14:09:37 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CA6DD10002A;
- Fri,  2 Oct 2020 13:32:14 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C04B72B8A14;
- Fri,  2 Oct 2020 13:32:14 +0200 (CEST)
-Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
- (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 2 Oct
- 2020 13:32:14 +0200
-Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
- SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
- 15.00.1473.003; Fri, 2 Oct 2020 13:32:14 +0200
-From: Patrice CHOTARD <patrice.chotard@st.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH] stm32mp: limit size of cacheable DDR in pre-reloc stage
-Thread-Index: AQHWgqnn0U8ilZs6X0CoKrA2gMWosamEOHwA
-Date: Fri, 2 Oct 2020 11:32:14 +0000
-Message-ID: <e5f2d640-6835-c58c-a534-d6a66ad7072e@st.com>
-References: <20200904125517.1.I23889bc9bd065ae7ac2b17faf2436522848e0568@changeid>
-In-Reply-To: <20200904125517.1.I23889bc9bd065ae7ac2b17faf2436522848e0568@changeid>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
-Content-ID: <5E6776FFFBFD0744B9FF1980E1ABF88B@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1C780100034;
+ Fri,  2 Oct 2020 14:09:37 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 099582BE220;
+ Fri,  2 Oct 2020 14:09:37 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG6NODE3.st.com (10.75.127.18)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+ Fri, 2 Oct 2020 14:09:13 +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 2 Oct 2020 14:08:54 +0200
+Message-ID: <20201002120854.22557-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG8NODE1.st.com (10.75.127.22) To SFHDAG6NODE3.st.com
+ (10.75.127.18)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-10-02_06:2020-10-02,
  2020-10-02 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp: limit size of cacheable DDR in
-	pre-reloc stage
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Patrice Chotard <patrice.chotard@st.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH] arm: stm32: cleanup arch gpio.h
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,83 +71,150 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
+Cosmetic update of gpio.h:
+- remove enumerate: stm32_gpio_port, stm32_gpio_pin
+  because STM32_GPIO_XXX values are unused
+- move STM32_GPIOS_PER_BANK in stm32_gpio.c
+  as its value is IP dependent and not arch dependent
 
-On 9/4/20 12:55 PM, Patrick Delaunay wrote:
-> In pre-reloc stage, U-Boot marks cacheable the DDR limited by
-> the new config CONFIG_DDR_CACHEABLE_SIZE.
->
-> This patch allows to avoid any speculative access to DDR protected by
-> firewall and used by OP-TEE; the "no-map" reserved memory
-> node in DT are assumed after this limit:
-> STM32_DDR_BASE + DDR_CACHEABLE_SIZE.
->
-> Without security, in basic boot, the value is equal to STM32_DDR_SIZE.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  arch/arm/mach-stm32mp/Kconfig | 13 +++++++++++++
->  arch/arm/mach-stm32mp/cpu.c   |  3 ++-
->  arch/arm/mach-stm32mp/spl.c   |  3 ++-
->  3 files changed, 17 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 478fd2f17d..f538d7cb83 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -93,6 +93,19 @@ config SYS_TEXT_BASE
->  config NR_DRAM_BANKS
->  	default 1
->  
-> +config DDR_CACHEABLE_SIZE
-> +	hex "Size of the DDR marked cacheable in pre-reloc stage"
-> +	default 0x10000000 if TFABOOT
-> +	default 0x40000000
-> +	help
-> +		Define the size of the DDR marked as cacheable in U-Boot
-> +		pre-reloc stage.
-> +		This option can be useful to avoid speculatif access
-> +		to secured area of DDR used by TF-A or OP-TEE before U-Boot
-> +		initialization.
-> +		The areas marked "no-map" in device tree should be located
-> +		before this limit: STM32_DDR_BASE + DDR_CACHEABLE_SIZE.
-> +
->  config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
->  	hex "Partition on MMC2 to use to load U-Boot from"
->  	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
-> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-> index b7fcee2b36..dc170dd6fa 100644
-> --- a/arch/arm/mach-stm32mp/cpu.c
-> +++ b/arch/arm/mach-stm32mp/cpu.c
-> @@ -230,7 +230,8 @@ static void early_enable_caches(void)
->  			round_up(STM32_SYSRAM_SIZE, MMU_SECTION_SIZE),
->  			DCACHE_DEFAULT_OPTION);
->  	else
-> -		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
-> +		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
-> +						CONFIG_DDR_CACHEABLE_SIZE,
->  						DCACHE_DEFAULT_OPTION);
->  }
->  
-> diff --git a/arch/arm/mach-stm32mp/spl.c b/arch/arm/mach-stm32mp/spl.c
-> index e84bdad7bf..b679b0a645 100644
-> --- a/arch/arm/mach-stm32mp/spl.c
-> +++ b/arch/arm/mach-stm32mp/spl.c
-> @@ -138,7 +138,8 @@ void board_init_f(ulong dummy)
->  	 * to avoid speculative access and issue in get_ram_size()
->  	 */
->  	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-> -		mmu_set_region_dcache_behaviour(STM32_DDR_BASE, STM32_DDR_SIZE,
-> +		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
-> +						CONFIG_DDR_CACHEABLE_SIZE,
->  						DCACHE_DEFAULT_OPTION);
->  }
->  
+No functional change as number of banks and number of gpio by banks
+is managed by device tree since since DM migration and
+commit 8f651ca60ba1 ("pinctrl: stm32: Add get_pins_count() ops").
 
-Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-Thnaks
+ arch/arm/include/asm/arch-stm32/gpio.h    | 37 ++---------------------
+ arch/arm/mach-stm32mp/include/mach/gpio.h | 37 ++---------------------
+ drivers/gpio/stm32_gpio.c                 |  2 ++
+ 3 files changed, 6 insertions(+), 70 deletions(-)
+
+diff --git a/arch/arm/include/asm/arch-stm32/gpio.h b/arch/arm/include/asm/arch-stm32/gpio.h
+index 570e80a6ba..233ce278a7 100644
+--- a/arch/arm/include/asm/arch-stm32/gpio.h
++++ b/arch/arm/include/asm/arch-stm32/gpio.h
+@@ -7,39 +7,6 @@
+ #ifndef _GPIO_H_
+ #define _GPIO_H_
+ 
+-#define STM32_GPIOS_PER_BANK		16
+-
+-enum stm32_gpio_port {
+-	STM32_GPIO_PORT_A = 0,
+-	STM32_GPIO_PORT_B,
+-	STM32_GPIO_PORT_C,
+-	STM32_GPIO_PORT_D,
+-	STM32_GPIO_PORT_E,
+-	STM32_GPIO_PORT_F,
+-	STM32_GPIO_PORT_G,
+-	STM32_GPIO_PORT_H,
+-	STM32_GPIO_PORT_I
+-};
+-
+-enum stm32_gpio_pin {
+-	STM32_GPIO_PIN_0 = 0,
+-	STM32_GPIO_PIN_1,
+-	STM32_GPIO_PIN_2,
+-	STM32_GPIO_PIN_3,
+-	STM32_GPIO_PIN_4,
+-	STM32_GPIO_PIN_5,
+-	STM32_GPIO_PIN_6,
+-	STM32_GPIO_PIN_7,
+-	STM32_GPIO_PIN_8,
+-	STM32_GPIO_PIN_9,
+-	STM32_GPIO_PIN_10,
+-	STM32_GPIO_PIN_11,
+-	STM32_GPIO_PIN_12,
+-	STM32_GPIO_PIN_13,
+-	STM32_GPIO_PIN_14,
+-	STM32_GPIO_PIN_15
+-};
+-
+ enum stm32_gpio_mode {
+ 	STM32_GPIO_MODE_IN = 0,
+ 	STM32_GPIO_MODE_OUT,
+@@ -85,8 +52,8 @@ enum stm32_gpio_af {
+ };
+ 
+ struct stm32_gpio_dsc {
+-	enum stm32_gpio_port	port;
+-	enum stm32_gpio_pin	pin;
++	u8	port;
++	u8	pin;
+ };
+ 
+ struct stm32_gpio_ctl {
+diff --git a/arch/arm/mach-stm32mp/include/mach/gpio.h b/arch/arm/mach-stm32mp/include/mach/gpio.h
+index 5ca76d21ff..7a0f293519 100644
+--- a/arch/arm/mach-stm32mp/include/mach/gpio.h
++++ b/arch/arm/mach-stm32mp/include/mach/gpio.h
+@@ -8,39 +8,6 @@
+ #define _STM32_GPIO_H_
+ #include <asm/gpio.h>
+ 
+-#define STM32_GPIOS_PER_BANK		16
+-
+-enum stm32_gpio_port {
+-	STM32_GPIO_PORT_A = 0,
+-	STM32_GPIO_PORT_B,
+-	STM32_GPIO_PORT_C,
+-	STM32_GPIO_PORT_D,
+-	STM32_GPIO_PORT_E,
+-	STM32_GPIO_PORT_F,
+-	STM32_GPIO_PORT_G,
+-	STM32_GPIO_PORT_H,
+-	STM32_GPIO_PORT_I
+-};
+-
+-enum stm32_gpio_pin {
+-	STM32_GPIO_PIN_0 = 0,
+-	STM32_GPIO_PIN_1,
+-	STM32_GPIO_PIN_2,
+-	STM32_GPIO_PIN_3,
+-	STM32_GPIO_PIN_4,
+-	STM32_GPIO_PIN_5,
+-	STM32_GPIO_PIN_6,
+-	STM32_GPIO_PIN_7,
+-	STM32_GPIO_PIN_8,
+-	STM32_GPIO_PIN_9,
+-	STM32_GPIO_PIN_10,
+-	STM32_GPIO_PIN_11,
+-	STM32_GPIO_PIN_12,
+-	STM32_GPIO_PIN_13,
+-	STM32_GPIO_PIN_14,
+-	STM32_GPIO_PIN_15
+-};
+-
+ enum stm32_gpio_mode {
+ 	STM32_GPIO_MODE_IN = 0,
+ 	STM32_GPIO_MODE_OUT,
+@@ -86,8 +53,8 @@ enum stm32_gpio_af {
+ };
+ 
+ struct stm32_gpio_dsc {
+-	enum stm32_gpio_port	port;
+-	enum stm32_gpio_pin	pin;
++	u8	port;
++	u8	pin;
+ };
+ 
+ struct stm32_gpio_ctl {
+diff --git a/drivers/gpio/stm32_gpio.c b/drivers/gpio/stm32_gpio.c
+index 5bff27f75b..9ea2a03f15 100644
+--- a/drivers/gpio/stm32_gpio.c
++++ b/drivers/gpio/stm32_gpio.c
+@@ -18,6 +18,8 @@
+ #include <linux/errno.h>
+ #include <linux/io.h>
+ 
++#define STM32_GPIOS_PER_BANK		16
++
+ #define MODE_BITS(gpio_pin)		((gpio_pin) * 2)
+ #define MODE_BITS_MASK			3
+ #define BSRR_BIT(gpio_pin, value)	BIT((gpio_pin) + (value ? 0 : 16))
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

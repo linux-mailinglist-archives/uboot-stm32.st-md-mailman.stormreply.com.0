@@ -2,81 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC39F282EB2
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Oct 2020 03:52:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24BD3283263
+	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Oct 2020 10:44:52 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 92409C424BD;
-	Mon,  5 Oct 2020 01:52:36 +0000 (UTC)
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
- [209.85.210.65])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DBE1BC32EA6;
+	Mon,  5 Oct 2020 08:44:51 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5D1BCC32EA4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C83EC32E90
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  5 Oct 2020 01:52:35 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id q21so7166083ota.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 04 Oct 2020 18:52:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=4pGznNXyZEER4lEVTVbtFELK8GKG06rtM22dcET0DO0=;
- b=VVTvkVPOiW/HWyFuLV/ZAuRIXwdUOQO+5T33KKQTmqBUEIdlvVC03V2Ly72A76pmUY
- h2p1vwkMLvnpgKDjyS24Z4qyZisQUrtrAS8p6QUwuQ1Zu1QvfsHnQDIzrhj9WurMDRSk
- DwSIKk1PRHehzfgM4bTDga+7TBovmzHOhvcno=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=4pGznNXyZEER4lEVTVbtFELK8GKG06rtM22dcET0DO0=;
- b=URdRoAAvsmNvd48qZLd80OhVweUv54meRKiphGTDI7g402VGAiC+wxJIJPoOl1XPZF
- DY1M4Aq7Emd/k5+Vuj99H7ucJ3KAY1tLMDWoDiHcSPeOUELALE4+SDJMVQSY4fY9bZbn
- 8STx+Bx1SIfu49IDtXIciAlXA1I3ir/OFop3b38u/UHo/pSiDBW9E++PzQyACJ4Rwmqc
- D5uit3PYV3aA6JNAv/5VxtuCRa411hPCzCwbB4L7VeujaOJYomRBzkk89JEnN7YcySkI
- uR8DHTxL2imL/MFdp9tYRZZP0Pc5Ua7BvE9nug+iYF8yzkhhY10Jqq42+oY/wGdCgyu6
- 8puQ==
-X-Gm-Message-State: AOAM530kVRJFoByGthDoXC6HtHs0Ew7v7DopC9g70KKuMmuWK5fP7lu3
- AOI+ur4zzUXh9KKkxpewrPrdHQ4rlbspxHzT7AeSZA==
-X-Google-Smtp-Source: ABdhPJwn+OCeyoOzwbBfZf+HRBeb4PiJ3vjWB8AcGeJQj6KWBhV64hbpRdrK6nAjlUb9REDP92BsRiGy5rkgbxiKsjg=
-X-Received: by 2002:a9d:7616:: with SMTP id k22mr9239366otl.87.1601862753916; 
- Sun, 04 Oct 2020 18:52:33 -0700 (PDT)
+ Mon,  5 Oct 2020 08:44:50 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0958hGHF001393; Mon, 5 Oct 2020 10:44:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : content-type : content-transfer-encoding :
+ mime-version; s=STMicroelectronics;
+ bh=hb5SZ5rg3I0lSlJRFmuhwDGPfBIk2HtLI+qBCDnM0F8=;
+ b=PMUxN8n3lpxH6/faGfFKhrPFJOhyHRX1GewsNi9jZ1GwMsmVigrLKueeXEPWMVTNfUCB
+ 0YPt7fFcCx77QPAjpIKkmRU8ZdtxxAkBqhBFcbQS+MuaXeABn7ieKwqjxkjjiDkZHDm2
+ bRzE+z71qiqFTvUrhcLKL8LV8wJ0MVsBnFLXU0699xXw6uEtBwPSzrXMByU8QioWziHf
+ FNChQEQThvltPurz8YqjmxSDmE8XZRlvowhFXav6rPrbM6toYu8MtGw7N4wUB70Cphb8
+ dvq2+9DkznEZFR6XGzRb6Erp4aqP6k/Om50oow7oeVFMhNAK4HlC3Du3gCxYNyp+7v2X qw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 33xee8sd6c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 05 Oct 2020 10:44:46 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DEA78100034;
+ Mon,  5 Oct 2020 10:44:45 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C9FC721D3B8;
+ Mon,  5 Oct 2020 10:44:45 +0200 (CEST)
+Received: from SFHDAG6NODE3.st.com (10.75.127.18) by SFHDAG6NODE2.st.com
+ (10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 5 Oct
+ 2020 10:44:45 +0200
+Received: from SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6]) by
+ SFHDAG6NODE3.st.com ([fe80::d04:5337:ab17:b6f6%20]) with mapi id
+ 15.00.1473.003; Mon, 5 Oct 2020 10:44:45 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PULL] Pull request for u-boot-stm/next = u-boot-stm32-20201003
+Thread-Index: Adaa87TKgTWrw03rTVSW20R1OnNajg==
+Date: Mon, 5 Oct 2020 08:44:45 +0000
+Message-ID: <bf117b87ae7e491ea725c59f70280410@SFHDAG6NODE3.st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.49]
 MIME-Version: 1.0
-References: <20200928093017.19053-1-patrick.delaunay@st.com>
- <20200928093017.19053-3-patrick.delaunay@st.com>
-In-Reply-To: <20200928093017.19053-3-patrick.delaunay@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 4 Oct 2020 19:52:21 -0600
-Message-ID: <CAPnjgZ1apJragfZhtJc2crgFz6ujvqTRRNw3YX1Wk5uZyXgG9g@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Baruch Siach <baruch@tkos.co.il>, Neil Armstrong <narmstrong@baylibre.com>,
- Adrian Alonso <adrian.alonso@nxp.com>,
- Vanessa Maegima <vanessa.maegima@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Stefan Bosch <stefan_b@posteo.net>, Joe Hershberger <joe.hershberger@ni.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
- Ken Lin <Ken.Lin@advantech.com.tw>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Richard Hu <richard.hu@technexion.com>, Marek Vasut <marex@denx.de>,
- Stefan Roese <sr@denx.de>, Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Michal Simek <michal.simek@xilinx.com>, u-boot-amlogic@groups.io,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jason Liu <jason.hui.liu@nxp.com>,
- Anatolij Gustschin <agust@denx.de>, Vikas Manocha <vikas.manocha@st.com>,
- Otavio Salvador <otavio@ossystems.com.br>,
- Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
- Troy Kisky <troy.kisky@boundarydevices.com>,
- Beniamino Galvani <b.galvani@gmail.com>, Akshay Bhat <akshaybhat@timesys.com>,
- Adam Ford <aford173@gmail.com>,
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- Stefano Babic <sbabic@denx.de>, Olaf Mandel <o.mandel@menlosystems.com>,
- Igor Opaniuk <igor.opaniuk@toradex.com>, Heiko Schocher <hs@denx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Holger Brunck <holger.brunck@ch.abb.com>,
- Fabio Estevam <fabio.estevam@nxp.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] configs: migrate
-	CONFIG_BMP_16/24/32BPP to defconfigs
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-10-05_06:2020-10-02,
+ 2020-10-05 signatures=0
+Cc: Marek Vasut <marex@denx.de>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>
+Subject: [Uboot-stm32] [PULL] Pull request for u-boot-stm/next =
+	u-boot-stm32-20201003
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,120 +81,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 28 Sep 2020 at 03:31, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Done with:
-> ./tools/moveconfig.py BMP_16BPP BMP_24BPP BMP_32BPP
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  configs/apalis_imx6_defconfig                  |  1 +
->  configs/aristainetos2_defconfig                |  1 +
->  configs/aristainetos2b_defconfig               |  1 +
->  configs/aristainetos2bcsl_defconfig            |  1 +
->  configs/aristainetos2c_defconfig               |  1 +
->  configs/cgtqmx6eval_defconfig                  |  1 +
->  configs/colibri-imx6ull_defconfig              |  1 +
->  configs/colibri_imx6_defconfig                 |  1 +
->  configs/colibri_imx7_defconfig                 |  1 +
->  configs/colibri_imx7_emmc_defconfig            |  1 +
->  configs/imx6dl_icore_nand_defconfig            |  1 +
->  configs/imx6q_icore_nand_defconfig             |  1 +
->  configs/imx6qdl_icore_mmc_defconfig            |  1 +
->  configs/imx6qdl_icore_nand_defconfig           |  1 +
->  configs/imxrt1050-evk_defconfig                |  1 +
->  configs/khadas-vim3_defconfig                  |  3 +++
->  configs/khadas-vim3l_defconfig                 |  3 +++
->  configs/libretech-ac_defconfig                 |  3 +++
->  configs/libretech-cc_defconfig                 |  3 +++
->  configs/libretech-s905d-pc_defconfig           |  3 +++
->  configs/libretech-s912-pc_defconfig            |  3 +++
->  configs/m53menlo_defconfig                     |  1 +
->  configs/marsboard_defconfig                    |  1 +
->  configs/mx6cuboxi_defconfig                    |  1 +
->  configs/mx6qsabrelite_defconfig                |  1 +
->  configs/mx6sabreauto_defconfig                 |  1 +
->  configs/mx6sabresd_defconfig                   |  1 +
->  configs/mx6ul_14x14_evk_defconfig              |  1 +
->  configs/mx6ul_9x9_evk_defconfig                |  1 +
->  configs/nitrogen6dl2g_defconfig                |  1 +
->  configs/nitrogen6dl_defconfig                  |  1 +
->  configs/nitrogen6q2g_defconfig                 |  1 +
->  configs/nitrogen6q_defconfig                   |  1 +
->  configs/nitrogen6s1g_defconfig                 |  1 +
->  configs/nitrogen6s_defconfig                   |  1 +
->  configs/novena_defconfig                       |  1 +
->  configs/odroid-c2_defconfig                    |  3 +++
->  configs/odroid-c4_defconfig                    |  3 +++
->  configs/odroid-n2_defconfig                    |  3 +++
->  configs/opos6uldev_defconfig                   |  3 +++
->  configs/pico-dwarf-imx7d_defconfig             |  1 +
->  configs/pico-hobbit-imx7d_defconfig            |  1 +
->  configs/pico-imx6_defconfig                    |  1 +
->  configs/pico-imx7d_bl33_defconfig              |  1 +
->  configs/pico-imx7d_defconfig                   |  1 +
->  configs/pico-nymph-imx7d_defconfig             |  1 +
->  configs/pico-pi-imx7d_defconfig                |  1 +
->  configs/puma-rk3399_defconfig                  |  3 +++
->  configs/riotboard_defconfig                    |  1 +
->  configs/riotboard_spl_defconfig                |  1 +
->  configs/s5p4418_nanopi2_defconfig              |  1 +
->  configs/sei510_defconfig                       |  3 +++
->  configs/sei610_defconfig                       |  3 +++
->  configs/stm32f746-disco_defconfig              |  3 +++
->  configs/stm32f769-disco_defconfig              |  3 +++
->  configs/stm32mp15_basic_defconfig              |  3 +++
->  configs/stm32mp15_dhcom_basic_defconfig        |  3 +++
->  configs/stm32mp15_dhcor_basic_defconfig        |  3 +++
->  configs/stm32mp15_trusted_defconfig            |  3 +++
->  ...rable-x86-conga-qa3-e3845-pcie-x4_defconfig |  1 +
->  .../theadorable-x86-conga-qa3-e3845_defconfig  |  1 +
->  configs/theadorable-x86-dfi-bt700_defconfig    |  1 +
->  configs/theadorable_debug_defconfig            |  3 +++
->  configs/wandboard_defconfig                    |  1 +
->  drivers/video/Kconfig                          | 18 ++++++++++++++++++
->  include/configs/advantech_dms-ba16.h           |  1 -
->  include/configs/apalis_imx6.h                  |  1 -
->  include/configs/aristainetos2.h                |  1 -
->  include/configs/cgtqmx6eval.h                  |  1 -
->  include/configs/colibri-imx6ull.h              |  1 -
->  include/configs/colibri_imx6.h                 |  1 -
->  include/configs/colibri_imx7.h                 |  1 -
->  include/configs/embestmx6boards.h              |  1 -
->  include/configs/imx6-engicam.h                 |  1 -
->  include/configs/imxrt1050-evk.h                |  1 -
->  include/configs/m53menlo.h                     |  1 -
->  include/configs/meson64.h                      |  3 ---
->  include/configs/mx23evk.h                      |  1 -
->  include/configs/mx28evk.h                      |  1 -
->  include/configs/mx51evk.h                      |  1 -
->  include/configs/mx53loco.h                     |  1 -
->  include/configs/mx6cuboxi.h                    |  1 -
->  include/configs/mx6sabre_common.h              |  1 -
->  include/configs/mx6sxsabresd.h                 |  1 -
->  include/configs/mx6ul_14x14_evk.h              |  1 -
->  include/configs/mx7dsabresd.h                  |  1 -
->  include/configs/nitrogen6x.h                   |  1 -
->  include/configs/novena.h                       |  1 -
->  include/configs/opos6uldev.h                   |  3 ---
->  include/configs/pico-imx6.h                    |  1 -
->  include/configs/pico-imx6ul.h                  |  1 -
->  include/configs/pico-imx7d.h                   |  1 -
->  include/configs/puma_rk3399.h                  |  4 ----
->  include/configs/s5p4418_nanopi2.h              |  5 -----
->  include/configs/s5pc210_universal.h            |  1 -
->  include/configs/stm32f746-disco.h              |  5 -----
->  include/configs/stm32mp1.h                     |  6 ------
->  include/configs/theadorable-x86-common.h       |  1 -
->  include/configs/theadorable.h                  |  4 ----
->  include/configs/trats.h                        |  1 -
->  include/configs/trats2.h                       |  1 -
->  include/configs/wandboard.h                    |  1 -
->  scripts/config_whitelist.txt                   |  3 ---
->  103 files changed, 122 insertions(+), 63 deletions(-)
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Please pull the STM32 related patches for u-boot/next: u-boot-stm32-20201003
+
+With STM32 updates for v2021.01-rc1:
+- stm32mp: DT alignment with Linux 5.9-rc4
+- stm32mp: convert drivers to APIs which support live DT
+- stm32mp: gpio: minor fixes
+
+CI status:
+    https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/4880
+
+Thanks,
+Patrick
+
+git request-pull origin/next https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git u-boot-stm32-20201003
+
+
+The following changes since commit 7e373a1a6ac27492ffebba146d70c4d39a9b9f36:
+
+  Merge branch 'next' of git://git.denx.de/u-boot-usb into next (2020-10-01 14:52:56 -0400)
+
+are available in the Git repository at:
+
+  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20201003
+
+for you to fetch changes up to 04e29ca5bbb82f15d7a32d4130214c6a15db69aa:
+
+  mailbox: stm32_ipcc: Convert to use APIs which support live DT (2020-10-02 15:05:14 +0200)
+
+----------------------------------------------------------------
+- stm32mp: DT alignment with Linux 5.9-rc4
+- stm32mp: convert drivers to APIs which support live DT
+- stm32mp: gpio: minor fixes
+
+----------------------------------------------------------------
+Patrick Delaunay (8):
+      ARM: dts: stm32mp1: DT alignment with Linux kernel v5.9-rc4
+      gpio: stm32: cosmetic: cleanup gpio_stm32_probe
+      gpio: stm32: check result of ofnode_phandle_args
+      pinctrl: stm32: Convert to use APIs which support live DT
+      pinctrl: stm32: Add header with SPDX licence
+      video: stm32_ltdc: Convert to use APIs which support live DT
+      video: stm32_dsi: Convert to use APIs which support live DT
+      mailbox: stm32_ipcc: Convert to use APIs which support live DT
+
+ arch/arm/dts/stm32mp15-pinctrl.dtsi | 263 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ arch/arm/dts/stm32mp151.dtsi        |   4 +-
+ arch/arm/dts/stm32mp157a-dk1.dts    |   2 +
+ arch/arm/dts/stm32mp157c-dk2.dts    |  11 ++++
+ arch/arm/dts/stm32mp157c-ed1.dts    |   4 +-
+ arch/arm/dts/stm32mp157c-ev1.dts    |  15 +++++
+ arch/arm/dts/stm32mp15xx-dkx.dtsi   |  38 ++++++++++++-
+ drivers/gpio/stm32_gpio.c           |  15 +++--
+ drivers/mailbox/stm32-ipcc.c        |   9 +--
+ drivers/pinctrl/pinctrl_stm32.c     |  48 +++++++++-------
+ drivers/video/stm32/stm32_dsi.c     |   3 +-
+ drivers/video/stm32/stm32_ltdc.c    |   3 +-
+ 12 files changed, 360 insertions(+), 55 deletions(-)
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

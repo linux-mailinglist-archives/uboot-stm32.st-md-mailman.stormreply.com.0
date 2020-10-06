@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8BB96284FF8
-	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Oct 2020 18:36:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77558284FFF
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Oct 2020 18:37:08 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4D3B6C32E8F;
-	Tue,  6 Oct 2020 16:36:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 41F03C32EA6;
+	Tue,  6 Oct 2020 16:37:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2C6D5C32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83302C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  6 Oct 2020 16:36:43 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue,  6 Oct 2020 16:37:06 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 096GWG96000783; Tue, 6 Oct 2020 18:36:36 +0200
+ 096GW94x023544; Tue, 6 Oct 2020 18:36:37 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : in-reply-to : references : mime-version :
  content-type; s=STMicroelectronics;
- bh=Qi4AQeudvM/l5p1anipNQ4wSmapDYgYvsz4vdtjPCac=;
- b=ED6auhhiW6/hGgTEOPfEY6Bkvvkzvnn+L9ijdxXz5+xmZsxO1bWbQhtpS/y9upOQTz4d
- 7qpFl0ir20mqFSbN3YKmD0Iv6r122FbNxOxt4gs9cp2L1BLxHNqRfIqxRnsHLx3d9tol
- bAPkX57wAvQntKET5RCBIP72+uYJRKQIbIxAOinDEStcOcfGcZ+BEEv59CvIHgZu84tU
- OHYnUJyG4yZF50fgNuAXhBld0TraxV1bWVSfhp7GhEIjFuJU7/tYXBfPCUjjqsFxVY/2
- tBmINlUAcHHkbBe1ixicGLKwFhNqUkKXmUtMX2NIL4zrVUSfl1frCWmEeCB7Fb/Mxmyf TQ== 
+ bh=vyxu6Skk/fF6q9s+SjHLXg5IIZZ1va4j0aD+TkNVEGA=;
+ b=J1uaO18b/IXTZWJl5XseHWx8k97SZl9C+ceCjsREEySuSx1TsjZFN8BQnHgAACq98JWu
+ +2/YTdZqDML06n3mcYTUx7PvPVm78Bgr9MGulwGCeLDCHxHfD2F1ITdLhVw9wHAdQWwc
+ zSK4D75wkmaIjyamB8YU/reM/kvUi6YjOS517vbMuNlEofrg8Ft+btbqaAiye0E2+fv3
+ UEIEOv8FZ4FyNRVHv/Fgn2Yb6ANbAUsqzJrKyTw3RNCvWHqZpE4d+GRpd/4HtTbCYasa
+ gIsgwtZkJmjGXVA5Boj+ZmLdmEP6E7Mv2NLWyDFXdBBFGhx4brJHeio+0eFrd3r/XhxD /g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3402tjfvds-1
+ by mx07-00178001.pphosted.com with ESMTP id 3402tjqtxs-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 06 Oct 2020 18:36:36 +0200
+ Tue, 06 Oct 2020 18:36:37 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 28C0B100038;
- Tue,  6 Oct 2020 18:36:36 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0A69710002A;
+ Tue,  6 Oct 2020 18:36:37 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1AD0B2C38BB;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F16602C38BB;
  Tue,  6 Oct 2020 18:36:36 +0200 (CEST)
 Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 6 Oct 2020 18:36:35
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 6 Oct 2020 18:36:36
  +0200
 From: Patrick Delaunay <patrick.delaunay@st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 6 Oct 2020 18:35:57 +0200
-Message-ID: <20201006183548.2.I22712a112842c336b2934d240f18dc64f12919db@changeid>
+Date: Tue, 6 Oct 2020 18:35:58 +0200
+Message-ID: <20201006183548.3.Ied3d7fa502a6796d8839ee9f4a048b276f16c073@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201006163602.21687-1-patrick.delaunay@st.com>
 References: <20201006163602.21687-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
  definitions=2020-10-06_09:2020-10-06,
  2020-10-06 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- Tero Kristo <t-kristo@ti.com>,
+Cc: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Patrick Delaunay <patrick.delaunay@st.com>, Tero Kristo <t-kristo@ti.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- marek.bykowski@gmail.com, Bin Meng <bmeng.cn@gmail.com>,
- Masahiro Yamada <masahiroy@kernel.org>
-Subject: [Uboot-stm32] [PATCH 2/7] lmb: add lmb_is_reserved_flags
+ Stefan Roese <sr@denx.de>, marek.bykowski@gmail.com,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH 3/7] lmb: remove lmb_region.size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,65 +79,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a new function lmb_is_reserved_flags to check is a
-address is reserved with a specific flags.
+Remove the unused field size of struct lmb_region as it is initialized to 0
+and never used after in lmb library.
 
-This function can be used to check if an address had be
-reserved with no-map flags with:
-
-lmb_is_reserved_flags(lmb, addr, LMB_NOMAP);
+See Linux kernel commit 4734b594c6ca ("memblock: Remove memblock_type.size
+and add memblock.memory_size instead")
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 ---
 
- include/lmb.h |  1 +
- lib/lmb.c     | 10 ++++++++--
- 2 files changed, 9 insertions(+), 2 deletions(-)
+ include/lmb.h | 1 -
+ lib/lmb.c     | 6 ------
+ 2 files changed, 7 deletions(-)
 
 diff --git a/include/lmb.h b/include/lmb.h
-index 1c73f4851b..68e9cc007a 100644
+index 68e9cc007a..9be422103c 100644
 --- a/include/lmb.h
 +++ b/include/lmb.h
-@@ -59,6 +59,7 @@ extern phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base,
- 				  phys_size_t size);
- extern phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
- extern int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr);
-+extern int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags);
- extern long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size);
+@@ -32,7 +32,6 @@ struct lmb_property {
  
- extern void lmb_dump_all(struct lmb *lmb);
+ struct lmb_region {
+ 	unsigned long cnt;
+-	phys_size_t size;
+ 	struct lmb_property region[MAX_LMB_REGIONS+1];
+ };
+ 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 44ab9cede2..d237d0b65f 100644
+index d237d0b65f..7f66a99884 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -440,7 +440,7 @@ phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr)
- 	return 0;
- }
+@@ -20,8 +20,6 @@ void lmb_dump_all_force(struct lmb *lmb)
  
--int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
-+int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
- {
- 	int i;
- 
-@@ -448,11 +448,17 @@ int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
- 		phys_addr_t upper = lmb->reserved.region[i].base +
- 			lmb->reserved.region[i].size - 1;
- 		if ((addr >= lmb->reserved.region[i].base) && (addr <= upper))
--			return 1;
-+			return !!((lmb->reserved.region[i].flags & flags)
-+				   == flags);
+ 	printf("lmb_dump_all:\n");
+ 	printf("    memory.cnt		   = 0x%lx\n", lmb->memory.cnt);
+-	printf("    memory.size		   = 0x%llx\n",
+-	       (unsigned long long)lmb->memory.size);
+ 	for (i = 0; i < lmb->memory.cnt; i++) {
+ 		printf("    memory.reg[0x%lx].base   = 0x%llx\n", i,
+ 		       (unsigned long long)lmb->memory.region[i].base);
+@@ -32,8 +30,6 @@ void lmb_dump_all_force(struct lmb *lmb)
  	}
- 	return 0;
+ 
+ 	printf("\n    reserved.cnt	   = 0x%lx\n", lmb->reserved.cnt);
+-	printf("    reserved.size	   = 0x%llx\n",
+-	       (unsigned long long)lmb->reserved.size);
+ 	for (i = 0; i < lmb->reserved.cnt; i++) {
+ 		printf("    reserved.reg[0x%lx].base = 0x%llx\n", i,
+ 		       (unsigned long long)lmb->reserved.region[i].base);
+@@ -105,9 +101,7 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
+ void lmb_init(struct lmb *lmb)
+ {
+ 	lmb->memory.cnt = 0;
+-	lmb->memory.size = 0;
+ 	lmb->reserved.cnt = 0;
+-	lmb->reserved.size = 0;
  }
  
-+int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
-+{
-+	return lmb_is_reserved_flags(lmb, addr, LMB_NONE);
-+}
-+
- __weak void board_lmb_reserve(struct lmb *lmb)
- {
- 	/* please define platform specific board_lmb_reserve() */
+ static void lmb_reserve_common(struct lmb *lmb, void *fdt_blob)
 -- 
 2.17.1
 

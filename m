@@ -2,61 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91702284225
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Oct 2020 23:32:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8420E284B29
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Oct 2020 13:54:27 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B1D7C32EA6;
-	Mon,  5 Oct 2020 21:32:39 +0000 (UTC)
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
- [209.85.221.66])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 47E46C36B37;
+	Tue,  6 Oct 2020 11:54:27 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 94923C32EA5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E8AFEC36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  5 Oct 2020 21:32:37 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id t10so11200241wrv.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 05 Oct 2020 14:32:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=rxuup/uzkPyOsOYFIUhxrxeBAjV+3c6O8EyLERxhgoc=;
- b=G89Q+5m22ACBb1fbdLkQC/IrN5wZJqAKtSyeuVq5dBbVbeB0IKKj9DAlkTMQdtqXiu
- F14Xa2J2I+9BbV7AsVdgRmhm9GigNw4l90WjGm7USrMBTZ+NfH00tU3YM+aiYZuluQC+
- hjZBOFhl3BuXpVLe9HcMfwpUlIVN4Jr1YUOVo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=rxuup/uzkPyOsOYFIUhxrxeBAjV+3c6O8EyLERxhgoc=;
- b=hLRwGV1UDSBUrsX9LX6BjH1mr4FoyYK7/t8KxbqYfk+MVW7E1k8I/WZ6rsSJsLCzhT
- /qo2UraVURJyq06gAsaU1DELgKpUA+efkqNNisP4OeIa6YAgNZEQcXMG90F5zWstfNwj
- wQPRMQK1zYNA7luUq4UCyKHoHBJvAnXOx3inF2EFfjPUnMoy/TOAWRRFpVH+jwQj4j8Z
- PqSK5oMMwAokl24KebYqRA0gYa24gEcmy5z+gbSi1YfEghAxSQYK3NFTexjdYi66s5qG
- U3/9hEQ8IM7Q2z//ECTIa/eJY6lChOkGr5+FZoKPHAEsNx84fKD+ZVEDQgPM7y75fLzL
- tWXA==
-X-Gm-Message-State: AOAM533YWptgZ3Ay2XAuCbN2C5NKar26td7+OVXbxCpqeH+YsKV2JO/7
- 9VD2hmrweQfXjI71XVNESro84caJP/KguqOkZOk1dg==
-X-Google-Smtp-Source: ABdhPJzUGLU3yC6gkAeoM2mQb2DMtyfZcWFAPuKlbTaOCGbBoJjLzW5Uz1jWZvGTx2TqF8aL8x2IpftdpDZvagDrexc=
-X-Received: by 2002:a05:6000:10ce:: with SMTP id
- b14mr1475974wrx.204.1601933556958; 
- Mon, 05 Oct 2020 14:32:36 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 5 Oct 2020 14:32:33 -0700
+ Tue,  6 Oct 2020 11:54:25 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 096BmLPR027484; Tue, 6 Oct 2020 13:54:03 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=btqMeTAFQb+M7xw3ZOXnWiRjBi74uC8BAYyBwSt9A6A=;
+ b=OkgX+FLv7PnjUQijkm/5aUQjDvv34rhc5aNIlJ+PRGLEmfPq0xtzg8Z7HPe5mxmxcXBj
+ VGgkjksYJ6Pb96WiG0vrkjdkFscdbEe5OJf0vOZ9ste1tNDj8Gbz/5GivrxlaKf++VBR
+ HYSWzKzUlSjvumA/ch4s1KhI9G5A4+A5yxYi8ii6QHRKR2QbhYZH8t7CNlc8Po6YWGvF
+ laMLKH6Xul0/wCe7U46FxNgn2wFCCwcM7TtD89PgGx52Iwkvy2weq37jYG7XCqAStI1K
+ qXEjvSGPRz8R8htbIW9rLWXPHz/2kJn/x9Yww5l/2foyKu9BRSnZaVb43hZimqgqI4J/ 1Q== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3402tjebv6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 06 Oct 2020 13:54:03 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0F31910002A;
+ Tue,  6 Oct 2020 13:54:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D623F2AD2BC;
+ Tue,  6 Oct 2020 13:54:00 +0200 (CEST)
+Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 6 Oct 2020 13:53:12
+ +0200
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 6 Oct 2020 13:52:26 +0200
+Message-ID: <20201006115227.19060-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ2Bf1LxnrtXYvkqVQvbmFPdnSUNKOxm_D032nxUQJxdJQ@mail.gmail.com>
-References: <CAPnjgZ2Bf1LxnrtXYvkqVQvbmFPdnSUNKOxm_D032nxUQJxdJQ@mail.gmail.com>
- <20200924152621.1317-1-patrick.delaunay@st.com>
-Date: Mon, 5 Oct 2020 14:32:33 -0700
-X-Google-Sender-Auth: EYDYo_SxEpxlXX7c_Mtvt3QSI3A
-Message-ID: <CAPnjgZ3p6x8Pd0dnZbSgWsoDquDHOk9FWTBc6QB0-mF_bOEw7w@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: update test on of_offset in
-	ofnode_valid
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
+ definitions=2020-10-06_03:2020-10-06,
+ 2020-10-06 signatures=0
+Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Jway Lin <jway.lin@cortina-access.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>,
+ Amit Singh Tomar <amittomer25@gmail.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sam Protsenko <joe.skb7@gmail.com>, Robert Marko <robert.marko@sartura.hr>
+Subject: [Uboot-stm32] [PATCH] MAINTAINERS: Add STM32MP1 RNG driver in
+	stm32mp platform
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,29 +81,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 24 Sep 2020 at 09:26, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Update the test for node.of_offset because an invalid offset is not
-> always set to -1 because the return value of the libfdt functions are:
-> + an error with a value < 0
-> + a valid offset with value >=0
->
-> For example, in ofnode_get_by_phandle() function, we have:
-> node.of_offset = fdt_node_offset_by_phandle(gd->fdt_blob, phandle);
-> and this function can return -FDT_ERR_BADPHANDLE (-6).
->
-> Without this patch, the added test dm_test_ofnode_get_by_phandle failed.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  include/dm/ofnode.h |  2 +-
->  test/dm/ofnode.c    | 16 ++++++++++++++++
->  2 files changed, 17 insertions(+), 1 deletion(-)
+Add the STM32MP1 RNG driver in the list of drivers supported by
+the STMicroelectronics STM32MP15x series.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-Applied to u-boot-dm/next, thanks!
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 85babd1908..8628ffd2a3 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -430,6 +430,7 @@ F:	drivers/power/regulator/stpmic1.c
+ F:	drivers/ram/stm32mp1/
+ F:	drivers/remoteproc/stm32_copro.c
+ F:	drivers/reset/stm32-reset.c
++F:	drivers/rng/stm32mp1_rng.c
+ F:	drivers/rtc/stm32_rtc.c
+ F:	drivers/serial/serial_stm32.*
+ F:	drivers/spi/stm32_qspi.c
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

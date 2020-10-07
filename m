@@ -2,71 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD62E286A06
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Oct 2020 23:25:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0243C286A0B
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Oct 2020 23:26:59 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 668FCC32EA7;
-	Wed,  7 Oct 2020 21:25:18 +0000 (UTC)
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
- [209.85.219.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BEF89C32EA7;
+	Wed,  7 Oct 2020 21:26:58 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+ [209.85.221.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27F7FC32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7F8B1C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Oct 2020 21:25:16 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id t20so2017033qvv.8
+ Wed,  7 Oct 2020 21:26:57 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id n6so3683386wrm.13
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 07 Oct 2020 14:25:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=TfYE9hPnVk2PAZD4JiWbQiYCxsnPdZAElnzbgEZR0pE=;
- b=O2NEbg8b0zEdBWuJkAahivchspT5i9lG1saGYobRqFMbDNaGA2P2G1EdddAAsUz5H0
- O5wNSF7dGrQbXwWsaMo/d7OZtPkshEkxcukgV5q7q0fdsIT5OPVOfjzJH6barEs4jEo8
- Z1ygpCWY17Lh9Y/9US2iT5gkkIv3AvVq1xhKg=
+ Wed, 07 Oct 2020 14:26:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=LZHcKHH07++nAPnzrgGakDVCiqKq7bRQk8HyuaJMZTI=;
+ b=iivoOK3ubp06gMU0rBP6hlmKs2X1d7aVEuP2KB5i7tdTiUeZxCQXoGtwYc/CXeR2nP
+ tnokDQyBNcKB81pHJgBOudVSTi6Kdt0nN9OzYHdvaakSaDJ7E05eyl1gqIy3mXePqOh7
+ Qb+F66VbL82ns+qIKeeIn1zJhpzprQ4Yovhh4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=TfYE9hPnVk2PAZD4JiWbQiYCxsnPdZAElnzbgEZR0pE=;
- b=AWjUkP5vtMlbUFpZbYAuiZo9Wo9fk/CWfkm0KCRsbX4Y4iyaPVT5X1BLS4GVY5pDBT
- 4actyz4zSelHZb3ZB/4RHrtX6l4bTS1iaIJDugFFlNQiwUr8S1AzlN8/0JslbT8h7BiY
- A1yv+81mDF+CWgiO3707zK4Y+4YYd8EkJIHZJ3e4vhl4CdGNN5vLlec+TTwcNkN6mq8C
- aRGR5iWQFyRrzo02zUAR1dQZNkYSvG4jIbogXp9MCvGF7lCFM/Kmc2yfZtgh8ZQEsmar
- fzAG0KW8OCOsWlLxh+os+B2F34i+LOguPykzOurc88P3Je752AX/0bHUufUbPIKql1/j
- nU8g==
-X-Gm-Message-State: AOAM533AK5YCaxrHHkbh92wrXw2ZlN98olvadDxzbb/Z5etb3F9Sii5j
- vDxE5oFC8t/CkcWGg5RRBeGnhw==
-X-Google-Smtp-Source: ABdhPJzriOfxm4TETApFZhwoxvN12N2UGHsbQJ1DFj8h3MVJw5dK0mvLVZA273QRMCxyVAkA/82daw==
-X-Received: by 2002:a0c:fac6:: with SMTP id p6mr5196177qvo.5.1602105915916;
- Wed, 07 Oct 2020 14:25:15 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8ebe-b485-f8d5-5f78-0a27.inf6.spectrum.com.
- [2606:a000:1401:8ebe:b485:f8d5:5f78:a27])
- by smtp.gmail.com with ESMTPSA id h47sm2531610qtc.80.2020.10.07.14.25.14
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 07 Oct 2020 14:25:15 -0700 (PDT)
-Date: Wed, 7 Oct 2020 17:25:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <20201007212512.GA14816@bill-the-cat>
-References: <20201007161148.59389-1-xypron.glpk@gmx.de>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=LZHcKHH07++nAPnzrgGakDVCiqKq7bRQk8HyuaJMZTI=;
+ b=f3VNvAJFxWDOtA7d9UARI1xM02+SNvPVdMZ5FJuCuy3p9YH2lzbszelhxjBHug3Nx6
+ kBqBgH4Ep9/syLaVuqe8Jht6VSowGcvI4N8CbXH4xj5fTx07LHP6d4qNmFj4z3To5pu9
+ Z1xu8we6zG1s18Cgn2ZS5jodcKUUUszyMEs5FEDzMHpMSH5YPOTCxhaDj0cF/Oi+/7pF
+ i01HkoPP+ZNDICB7LQGQL3KlA1q4z8rkC7bieWl+u2A6HRBPFwFNHbP3b1RT0YnlQx6Y
+ ohxRWk5Xgwaf+bA8msUJzgbLnemiAgsmiGhe+4W19IZZ5lZ0N5jxS4AQ29Sv2g3GLp9b
+ UiDQ==
+X-Gm-Message-State: AOAM533qsn05ouq524RPyF+w1+CB+Sn9AoatX7cdUgZ6uAp74hmMzP+U
+ VvefIpTHVYDdY35p0gXiPv+R6yOUzdta6Xs6TQO9Yg==
+X-Google-Smtp-Source: ABdhPJxwTih7saSO7h0dGMCcH2B462i1ORsSBW0PqwAGUU3pjblb5N+BiaE+bhUlYmBDIxB/4xanlogAFtKkG9G4oRE=
+X-Received: by 2002:adf:ec0e:: with SMTP id x14mr6057846wrn.204.1602106016773; 
+ Wed, 07 Oct 2020 14:26:56 -0700 (PDT)
 MIME-Version: 1.0
+References: <20201007161148.59389-1-xypron.glpk@gmx.de>
 In-Reply-To: <20201007161148.59389-1-xypron.glpk@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Anatolij Gustschin <agust@denx.de>,
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 7 Oct 2020 15:26:45 -0600
+Message-ID: <CAPnjgZ14rfibfVgbO9HxQC11n_HfMTti-CnywWrp_Og_0FNNPA@mail.gmail.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Lokesh Vutla <lokeshvutla@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Patrice Chotard <patrice.chotard@st.com>,
+ Sean Anderson <seanga2@gmail.com>, Patrice Chotard <patrice.chotard@st.com>,
  Patrick Delaunay <patrick.delaunay@st.com>,
- Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de,
- Alexander Graf <agraf@csgraf.de>,
+ Cristian Ciocaltea <cristian.ciocaltea@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Alexander Graf <agraf@csgraf.de>,
  Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
  Ovidiu Panait <ovidiu.panait@windriver.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
  Andreas Dannenberg <dannenberg@ti.com>
 Subject: Re: [Uboot-stm32] [PATCH 1/1] common: rename getc() to getchar()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -80,73 +70,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5011725227669966807=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Heinrich,
 
---===============5011725227669966807==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="6EVlxZEFeUQbArez"
-Content-Disposition: inline
-
-
---6EVlxZEFeUQbArez
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Oct 07, 2020 at 06:11:48PM +0200, Heinrich Schuchardt wrote:
-
+On Wed, 7 Oct 2020 at 10:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
 > The sandbox is built with the SDL2 library with invokes the X11 library
 > which in turn calls getc(). But getc() in glibc is defined as
->=20
+>
 >     int getc(FILE *)
->=20
+>
 > This does not match our definition.
->=20
+>
 >     int getc(void)
->=20
+>
 > The sandbox crashes when called with parameter -l.
->=20
+
+Just a nit here. I don't think the issue is that getc() has different
+parameters. I believe it is the fact that we are overriding the getc()
+in the C library. It wouldn't help if we changed the parameters, for
+example, as it is still wrong for it to call the U-Boot version.
+
+>
 > Rename our library symbol getc() to getchar().
->=20
+>
 > Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>  api/api.c                                   |  2 +-
+>  cmd/bootmenu.c                              |  4 +-
+>  cmd/load.c                                  | 44 ++++++++++-----------
+>  common/autoboot.c                           | 10 ++---
+>  common/cli_readline.c                       |  4 +-
+>  common/console.c                            | 12 +++---
+>  common/spl/spl_ymodem.c                     |  2 +-
+>  common/xyzModem.c                           |  2 +-
+>  drivers/ddr/fsl/main.c                      |  2 +-
+>  drivers/ram/stm32mp1/stm32mp1_interactive.c |  2 +-
+>  drivers/serial/serial-uclass.c              |  2 +-
+>  drivers/serial/serial.c                     |  2 +-
+>  include/_exports.h                          |  2 +-
+>  include/stdio.h                             |  2 +-
+>  lib/charset.c                               |  2 +-
+>  lib/efi_loader/efi_console.c                | 20 +++++-----
+>  test/dm/usb.c                               |  2 +-
+>  17 files changed, 58 insertions(+), 58 deletions(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
---=20
-Tom
-
---6EVlxZEFeUQbArez
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl9+MjgACgkQFHw5/5Y0
-tyxmCQv/XtcahSO+nKFLRLM1sRtv9sraw3myIXY/a6Z13UPDg8MW9bd6C/XBgR9v
-4DKJxex1HwsY9elR/EcY1jDQZzB5eYrxedh85E6hQQoxo/22rW/5KPFDb2NoPlOS
-QvrgnAftFybiSeuGwdMG1kMXcld5yjOpia2JQQ98y5saVldy5lZCwnIV34yKjclF
-xX4dBjzjJwhe+coI+4BN05XJ3k7u1VcjJGm6s6KYlyUkXqA7mLK06ndq51GHfp2v
-Quya73WiKEdKsko7U4V5Ckn8CfVWlV4PqNkCcu1capDdEZ1oEt2GLTweIePr8jdK
-fHqlK9Hmq2ZHFb51U8ijfG9sLfH/BKlRpK743HeE/d+jFWIif6EpfC3TOigcyowx
-ec3RPHKXjG7Yn7Yl1eA/FTK1gOMvPf49V8PRKsYo1XURfwn8Q39DpQdBq2/n6qss
-vOrACew0FS0QYvX6RNUJIxG4t9IBoD0VFStBp7UcaypmcjJl0jD5aDs1s8wepBgC
-Rq2DuFA0
-=UEiY
------END PGP SIGNATURE-----
-
---6EVlxZEFeUQbArez--
-
---===============5011725227669966807==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============5011725227669966807==--

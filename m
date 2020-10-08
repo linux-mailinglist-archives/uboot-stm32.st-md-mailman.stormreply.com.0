@@ -2,63 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0243C286A0B
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Oct 2020 23:26:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E26AD2875D4
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Oct 2020 16:16:16 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BEF89C32EA7;
-	Wed,  7 Oct 2020 21:26:58 +0000 (UTC)
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
- [209.85.221.67])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AB6F1C32EA7;
+	Thu,  8 Oct 2020 14:16:16 +0000 (UTC)
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+ [209.85.222.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7F8B1C32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BBC46C32EA6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Oct 2020 21:26:57 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id n6so3683386wrm.13
+ Thu,  8 Oct 2020 14:16:15 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id z6so7160080qkz.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 07 Oct 2020 14:26:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=LZHcKHH07++nAPnzrgGakDVCiqKq7bRQk8HyuaJMZTI=;
- b=iivoOK3ubp06gMU0rBP6hlmKs2X1d7aVEuP2KB5i7tdTiUeZxCQXoGtwYc/CXeR2nP
- tnokDQyBNcKB81pHJgBOudVSTi6Kdt0nN9OzYHdvaakSaDJ7E05eyl1gqIy3mXePqOh7
- Qb+F66VbL82ns+qIKeeIn1zJhpzprQ4Yovhh4=
+ Thu, 08 Oct 2020 07:16:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=YoPGYeTDef1IaYHtFP0Hf0DeiAzXEnc1SVTEFbOU0iU=;
+ b=cFpSp2OnwSGrP/MolUg+mzbmDPuHOCsgEDWR3NgteUt5g+cjmZ1c59jep8pQ25XPTY
+ 0/jlqNTleDJ8i+bc7guyRXoGPDlxx47ZA1j266GuefpkkG+bx1rgOjbq0NSq1k51rq0S
+ GPNZ0Qd8JG4BtaMweZFOtOQ+qZMUSr8wdL79w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=LZHcKHH07++nAPnzrgGakDVCiqKq7bRQk8HyuaJMZTI=;
- b=f3VNvAJFxWDOtA7d9UARI1xM02+SNvPVdMZ5FJuCuy3p9YH2lzbszelhxjBHug3Nx6
- kBqBgH4Ep9/syLaVuqe8Jht6VSowGcvI4N8CbXH4xj5fTx07LHP6d4qNmFj4z3To5pu9
- Z1xu8we6zG1s18Cgn2ZS5jodcKUUUszyMEs5FEDzMHpMSH5YPOTCxhaDj0cF/Oi+/7pF
- i01HkoPP+ZNDICB7LQGQL3KlA1q4z8rkC7bieWl+u2A6HRBPFwFNHbP3b1RT0YnlQx6Y
- ohxRWk5Xgwaf+bA8msUJzgbLnemiAgsmiGhe+4W19IZZ5lZ0N5jxS4AQ29Sv2g3GLp9b
- UiDQ==
-X-Gm-Message-State: AOAM533qsn05ouq524RPyF+w1+CB+Sn9AoatX7cdUgZ6uAp74hmMzP+U
- VvefIpTHVYDdY35p0gXiPv+R6yOUzdta6Xs6TQO9Yg==
-X-Google-Smtp-Source: ABdhPJxwTih7saSO7h0dGMCcH2B462i1ORsSBW0PqwAGUU3pjblb5N+BiaE+bhUlYmBDIxB/4xanlogAFtKkG9G4oRE=
-X-Received: by 2002:adf:ec0e:: with SMTP id x14mr6057846wrn.204.1602106016773; 
- Wed, 07 Oct 2020 14:26:56 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=YoPGYeTDef1IaYHtFP0Hf0DeiAzXEnc1SVTEFbOU0iU=;
+ b=PMYpUmMiO9BBOCfbcEG2DdZX96LDMZv7QVPuP29CeY9Q0/xTepTjMS0sWABk13rQtX
+ Ot31Ir+gvewQrcmi6XWY74RZ9HGv2qdSysyxwUxsHT4Sp9tT/fxp1rKC0FbV9WI0Ba+4
+ VrU1DfjBM7mEh/wlYQnRhT9ntvZHbWQvIpjbQ3BsxxVlT5wuSpX9TzFLDj6YNZ1PQfQD
+ 7VRypXI41anRD+2oR6RLR/rq+000uAfdcfLfsYTZth8B2Hi/VHaPtbfsD42+zoLsYkAu
+ Vtepz/sCdiclkNj0pspWmoMlMFMdJ4FoGVZLGn3vDuNnNLC3YPiHfs77ug4EEi0BEa+E
+ 3gdg==
+X-Gm-Message-State: AOAM531ZlcyU22iW3i0WkMnMtOBJA4PLYx5O9WzeQLZAjRC6oOKNvT4+
+ Ndfr+072AglT82GsqI/0lrQaHw==
+X-Google-Smtp-Source: ABdhPJzQQCLIfl+TDdPEOhkfad80UKC0AV8ZUVxeWi0SIWCQ3Vu2hcML3CCH5CSjYg5xz0BVnjFllA==
+X-Received: by 2002:a05:620a:15b6:: with SMTP id
+ f22mr1097950qkk.490.1602166574578; 
+ Thu, 08 Oct 2020 07:16:14 -0700 (PDT)
+Received: from bill-the-cat
+ (2606-a000-1401-8ebe-b485-f8d5-5f78-0a27.inf6.spectrum.com.
+ [2606:a000:1401:8ebe:b485:f8d5:5f78:a27])
+ by smtp.gmail.com with ESMTPSA id s125sm4124085qkd.18.2020.10.08.07.16.12
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 08 Oct 2020 07:16:13 -0700 (PDT)
+Date: Thu, 8 Oct 2020 10:16:10 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20201008141610.GB14816@bill-the-cat>
+References: <20201007081020.30635-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-References: <20201007161148.59389-1-xypron.glpk@gmx.de>
-In-Reply-To: <20201007161148.59389-1-xypron.glpk@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 7 Oct 2020 15:26:45 -0600
-Message-ID: <CAPnjgZ14rfibfVgbO9HxQC11n_HfMTti-CnywWrp_Og_0FNNPA@mail.gmail.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Sean Anderson <seanga2@gmail.com>, Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Cristian Ciocaltea <cristian.ciocaltea@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Alexander Graf <agraf@csgraf.de>,
- Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
- Ovidiu Panait <ovidiu.panait@windriver.com>,
+In-Reply-To: <20201007081020.30635-1-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <narmstrong@baylibre.com>,
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
+ u-boot@lists.denx.de, Jonas Smedegaard <dr@jones.dk>,
+ Peter Robinson <pbrobinson@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
- Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/1] common: rename getc() to getchar()
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp: force empty PREBOOT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,60 +74,113 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2524981486968391449=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Heinrich,
 
-On Wed, 7 Oct 2020 at 10:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> The sandbox is built with the SDL2 library with invokes the X11 library
-> which in turn calls getc(). But getc() in glibc is defined as
->
->     int getc(FILE *)
->
-> This does not match our definition.
->
->     int getc(void)
->
-> The sandbox crashes when called with parameter -l.
+--===============2524981486968391449==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="3WHXSKva2fGRnTbi"
+Content-Disposition: inline
 
-Just a nit here. I don't think the issue is that getc() has different
-parameters. I believe it is the fact that we are overriding the getc()
-in the C library. It wouldn't help if we changed the parameters, for
-example, as it is still wrong for it to call the U-Boot version.
 
->
-> Rename our library symbol getc() to getchar().
->
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+--3WHXSKva2fGRnTbi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Oct 07, 2020 at 10:10:20AM +0200, Patrick Delaunay wrote:
+
+> This patch remove the default preboot command 'usb start' for
+> STMicroelectronics board. These command is added by the
+> commit 324d77998ed6 ("Define default CONFIG_PREBOOT with right config
+> option")' and commit 44758771eefb ("arm: move CONFIG_PREBOOT=3D"usb start"
+> to KConfig").
+>=20
+> The USB storage boot (not activated in stm32mp1.h) is correctly
+> managed by distro boot command 'usb_boot' (defined in
+> include/config_distro_bootcmd.h, it include 'usb start')
+> and USB keyboard is not supported in stm32mp15 defconfig.
+>=20
+> So this patch avoids unnecessary USB initialization which slows
+> down the start-up:
+>   starting USB...
+>   Bus usbh-ehci@5800d000: USB EHCI 1.00
+>   scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
+>          scanning usb for storage devices... 1 Storage Device(s) found
+>=20
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Jonas Smedegaard <dr@jones.dk>
+> Cc: Neil Armstrong <narmstrong@baylibre.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
->  api/api.c                                   |  2 +-
->  cmd/bootmenu.c                              |  4 +-
->  cmd/load.c                                  | 44 ++++++++++-----------
->  common/autoboot.c                           | 10 ++---
->  common/cli_readline.c                       |  4 +-
->  common/console.c                            | 12 +++---
->  common/spl/spl_ymodem.c                     |  2 +-
->  common/xyzModem.c                           |  2 +-
->  drivers/ddr/fsl/main.c                      |  2 +-
->  drivers/ram/stm32mp1/stm32mp1_interactive.c |  2 +-
->  drivers/serial/serial-uclass.c              |  2 +-
->  drivers/serial/serial.c                     |  2 +-
->  include/_exports.h                          |  2 +-
->  include/stdio.h                             |  2 +-
->  lib/charset.c                               |  2 +-
->  lib/efi_loader/efi_console.c                | 20 +++++-----
->  test/dm/usb.c                               |  2 +-
->  17 files changed, 58 insertions(+), 58 deletions(-)
+>=20
+>  configs/stm32mp15_basic_defconfig   | 1 +
+>  configs/stm32mp15_trusted_defconfig | 1 +
+>  2 files changed, 2 insertions(+)
+>=20
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_=
+defconfig
+> index a8c4112dbe..f937a0278d 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -19,6 +19,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"stm32mp157c-ev1"
+>  CONFIG_DISTRO_DEFAULTS=3Dy
+>  CONFIG_FIT=3Dy
+>  CONFIG_BOOTCOMMAND=3D"run bootcmd_stm32mp"
+> +CONFIG_PREBOOT=3D""
+>  CONFIG_BOARD_EARLY_INIT_F=3Dy
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=3Dy
+>  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3D3
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trus=
+ted_defconfig
+> index 0792884a9d..b0be064cc3 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE=3D"stm32mp157c-ev1"
+>  CONFIG_DISTRO_DEFAULTS=3Dy
+>  CONFIG_FIT=3Dy
+>  CONFIG_BOOTCOMMAND=3D"run bootcmd_stm32mp"
+> +CONFIG_PREBOOT=3D""
+>  CONFIG_SYS_PROMPT=3D"STM32MP> "
+>  CONFIG_CMD_ADTIMG=3Dy
+>  # CONFIG_CMD_ELF is not set
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+In this case you should disable CONFIG_USE_PREBOOT.
 
-Regards,
-Simon
+--=20
+Tom
+
+--3WHXSKva2fGRnTbi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl9/HyMACgkQFHw5/5Y0
+tyyJ5Av/UWc8VmdJ9CX9M3nGcUVwqoav2aDS4zh/gan2o0j+9iRMElbKjmXVMKnF
+LGu3yzszU5szDhtVnd1PVVAeTb42km4SmOvxwhcM8JaeDut1vm8UmYbGD4SCULrn
+MxOuWGh2BCDx/YYmzUebL8Qa9JdWeFGrwM0PclHp6V/VjJ72+66EPq3zthM5mNc6
+Syy1e/OlV/RxxC2t3lgOpb556vqhw8r2ts50dOKMQfMBfqEP9SkW20PDtdf0e4tV
+ol6cClOvCdzYHYn7/Mc99KTBYoMNFBuq72EopcadJ5BzFQ674GosyZdz/qAgZqdF
+OvskFDdAkwRv12lwmvWsNYfplTM3DwKX0EPc5h9/C6yYXE5oStrNQZUAhlvtwhwU
+fUOYShjHSsR2WU4rJwBlDg/o44AFY9+PEzFfxsLwP/SOVhTheAn1S01qISKeRgBR
+1W2H69AU1awVjws1pXeUE/L9sWFPH6Uh6t4tZQ98iYU0ozqNjdm+j1+21kFaDheq
+AxYnmLXS
+=6AUv
+-----END PGP SIGNATURE-----
+
+--3WHXSKva2fGRnTbi--
+
+--===============2524981486968391449==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============2524981486968391449==--

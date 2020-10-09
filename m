@@ -2,56 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 784272883EA
-	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Oct 2020 09:50:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B319D2887C1
+	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Oct 2020 13:19:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2EEC8C32EA7;
-	Fri,  9 Oct 2020 07:50:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68A31C32EA7;
+	Fri,  9 Oct 2020 11:19:35 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 12886C32EA6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DEBD1C32EA3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  9 Oct 2020 07:50:36 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Fri,  9 Oct 2020 11:19:32 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0997igxP015483; Fri, 9 Oct 2020 09:46:24 +0200
+ 099B7e9i006448; Fri, 9 Oct 2020 13:18:54 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type :
  content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=Rj9mHrMH3G78iOtvwOQcjoYOqncWbxW+TBWiTeicGTg=;
- b=OARfkLvOePyExxCk8WC/UJCR44+KRNUl6omOv6vrpMgdUk1AS6YiM4fn/g2BlpUeQFWU
- gI01l80GXYaRCty2rHBYTjZtUUcXLnwBnXmwpEE/kVzh9pnymkilCWYg3I/StzOWXfRJ
- Dd7BsHOVN5eifnSejPzwkclcYE/ezgWd8cfxFhE6H+khmxf7iN6WKSGv+TcuCJmJ6MHE
- fDXgbAcNxhtsSRKDC6tWE3jqSLv+jBaQETtb2fjm8iu+fcB5dd+XqFRVYCS5rNOfqCqD
- ti9E33G3pYYpAqEc7bzmiu3FcdE3ovJp6aZwJn3pgiNfDVvtmYhPVqUAPuZ5IXv2ipEJ ZQ== 
+ bh=0h+A7+wxqkJ/faefl4go9ZBRzgCq9YotZ0I2bTvdLyY=;
+ b=gNpr+8CGshZEZ4PES10Tl3egf3kZEdPVrYfNzNAY94jBE0+GccQ0ji7C/XjPrOCfKlsF
+ EKf8FxBf0JiqJ6TkcVhLX+1rvuJB5ninGcoGr1QKXyr3+UuerPjSFx4c19l5reV1T2RX
+ BylqXRijMSMCeLLAJcD9lV9KcLLAaH17Di8e7MI2WQ48ulfV53D1+9mjnDcduGR70NYW
+ TdAoEHzrSPjXGviIKBWRbZxH8jFjpWxLG82ExxCnK6TgiK/Hkney3v2Z3PJGyo1GQinj
+ wNjd9Ybn7BA2Ia/hYkNiMB5sgjJUlT66Unye8v49awi+2oNIGeML4Bq2PyDKlTFyH7Bo gQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3429j62v09-1
+ by mx07-00178001.pphosted.com with ESMTP id 3429hs4bsy-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 09 Oct 2020 09:46:24 +0200
+ Fri, 09 Oct 2020 13:18:54 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B11F7100038;
- Fri,  9 Oct 2020 09:46:22 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 39CC610002A;
+ Fri,  9 Oct 2020 13:18:50 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8350121E686;
- Fri,  9 Oct 2020 09:46:22 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 018902A9E62;
+ Fri,  9 Oct 2020 13:18:49 +0200 (CEST)
 Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 9 Oct
- 2020 09:46:21 +0200
+ 2020 13:18:49 +0200
 Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
  SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Fri, 9 Oct 2020 09:46:21 +0200
+ 15.00.1473.003; Fri, 9 Oct 2020 13:18:49 +0200
 From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>
-Thread-Topic: [PATCH] configs: stm32mp: force empty PREBOOT
-Thread-Index: AQHWnIFNeSAe4KJr6EKz/HfVSdcVLKmNoJoAgAFAgJA=
-Date: Fri, 9 Oct 2020 07:46:21 +0000
-Message-ID: <19333411c29f4eb4a58a1b93688a6939@SFHDAG2NODE3.st.com>
-References: <20201007081020.30635-1-patrick.delaunay@st.com>
- <20201008141610.GB14816@bill-the-cat>
-In-Reply-To: <20201008141610.GB14816@bill-the-cat>
+To: Ard Biesheuvel <ardb@kernel.org>
+Thread-Topic: [PATCH 0/7] arm: cache: cp15: don't map reserved region with
+ no-map property
+Thread-Index: AQHWm/7ac4z1MnZQC0SdlnxnUjIJ4amLzyQAgAMq2+A=
+Date: Fri, 9 Oct 2020 11:18:49 +0000
+Message-ID: <ff6423f1e32c4f7f97ec970b9a5a6e0c@SFHDAG2NODE3.st.com>
+References: <20201006163602.21687-1-patrick.delaunay@st.com>
+ <CAMj1kXET8=ERg7gGqWa-FwLZzAuztBsVMhyTGmYEMAxzb63_sw@mail.gmail.com>
+In-Reply-To: <CAMj1kXET8=ERg7gGqWa-FwLZzAuztBsVMhyTGmYEMAxzb63_sw@mail.gmail.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -60,15 +61,27 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.47]
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-10-09_02:2020-10-09,
+ definitions=2020-10-09_06:2020-10-09,
  2020-10-09 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <narmstrong@baylibre.com>,
- Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Jonas Smedegaard <dr@jones.dk>,
- Peter Robinson <pbrobinson@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp: force empty PREBOOT
+Cc: chenshuo <chenshuo@eswin.com>, Lokesh Vutla <lokeshvutla@ti.com>, Masahiro
+ Yamada <yamada.masahiro@socionext.com>, U-Boot
+ STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>,
+ Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
+ Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
+ Masahiro Yamada <masahiroy@kernel.org>, Lionel DEBIEVE <lionel.debieve@st.com>,
+ Rajesh Ravi <rajesh.ravi@broadcom.com>,
+ Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Simon Glass <sjg@chromium.org>, Tero Kristo <t-kristo@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Etienne
+ Carriere <etienne.carriere@linaro.org>,
+ =?utf-8?B?UGFsaSBSb2jDoXI=?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH 0/7] arm: cache: cp15: don't map reserved
+ region with no-map property
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,129 +93,158 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom,
-
-> From: Tom Rini <trini@konsulko.com>
-> Sent: jeudi 8 octobre 2020 16:16
-> 
-> On Wed, Oct 07, 2020 at 10:10:20AM +0200, Patrick Delaunay wrote:
-> 
-> > This patch remove the default preboot command 'usb start' for
-> > STMicroelectronics board. These command is added by the commit
-> > 324d77998ed6 ("Define default CONFIG_PREBOOT with right config
-> > option")' and commit 44758771eefb ("arm: move CONFIG_PREBOOT="usb
-> start"
-> > to KConfig").
-> >
-> > The USB storage boot (not activated in stm32mp1.h) is correctly
-> > managed by distro boot command 'usb_boot' (defined in
-> > include/config_distro_bootcmd.h, it include 'usb start') and USB
-> > keyboard is not supported in stm32mp15 defconfig.
-> >
-> > So this patch avoids unnecessary USB initialization which slows down
-> > the start-up:
-> >   starting USB...
-> >   Bus usbh-ehci@5800d000: USB EHCI 1.00
-> >   scanning bus usbh-ehci@5800d000 for devices... 3 USB Device(s) found
-> >          scanning usb for storage devices... 1 Storage Device(s) found
-> >
-> > Cc: Peter Robinson <pbrobinson@gmail.com>
-> > Cc: Jonas Smedegaard <dr@jones.dk>
-> > Cc: Neil Armstrong <narmstrong@baylibre.com>
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> > ---
-> >
-> >  configs/stm32mp15_basic_defconfig   | 1 +
-> >  configs/stm32mp15_trusted_defconfig | 1 +
-> >  2 files changed, 2 insertions(+)
-> >
-> > diff --git a/configs/stm32mp15_basic_defconfig
-> > b/configs/stm32mp15_basic_defconfig
-> > index a8c4112dbe..f937a0278d 100644
-> > --- a/configs/stm32mp15_basic_defconfig
-> > +++ b/configs/stm32mp15_basic_defconfig
-> > @@ -19,6 +19,7 @@ CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-
-> ev1"
-> >  CONFIG_DISTRO_DEFAULTS=y
-> >  CONFIG_FIT=y
-> >  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-> > +CONFIG_PREBOOT=""
-> >  CONFIG_BOARD_EARLY_INIT_F=y
-> >  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-> >  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3
-> > diff --git a/configs/stm32mp15_trusted_defconfig
-> > b/configs/stm32mp15_trusted_defconfig
-> > index 0792884a9d..b0be064cc3 100644
-> > --- a/configs/stm32mp15_trusted_defconfig
-> > +++ b/configs/stm32mp15_trusted_defconfig
-> > @@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-
-> ev1"
-> >  CONFIG_DISTRO_DEFAULTS=y
-> >  CONFIG_FIT=y
-> >  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-> > +CONFIG_PREBOOT=""
-> >  CONFIG_SYS_PROMPT="STM32MP> "
-> >  CONFIG_CMD_ADTIMG=y
-> >  # CONFIG_CMD_ELF is not set
-> 
-> In this case you should disable CONFIG_USE_PREBOOT.
-
-I activate CONFIG_USE_PREBOOT to handle the "preboot" variable in
-common/main.c::main_loop()
-
-	if (IS_ENABLED(CONFIG_USE_PREBOOT))
-		run_preboot_environment_command();
-
-But I expect that the "preboot" varibale in empty by default,
-as it is the case until now.
-
-In my case the preboot variable is dynamically build in 
-arch/arm/mach-stm32mp/cpu.c::setup_boot_mode()
-
-it is why I activate the USE_PREBOOT by default:
-  with imply in mach-stm32mp Kconfig.
-
-I use this feature to handle the 'forced' boot request,
-and I preferred don't override the bootcmd
-(I handle the fastboot 'continue' command without any effort:
-  the bootcmd is executed after preboot=fastboot)
-
-And it is managed by linux with reboot mode driver:
-
-tamp: tamp@5c00a000 {
-	compatible = "simple-bus", "syscon", "simple-mfd";
-	reg = <0x5c00a000 0x400>;
-
-	reboot-mode {
-		compatible = "syscon-reboot-mode";
-		offset = <0x150>; /* reg20 */
-		mask = <0xff>;
-		mode-normal = <0>;
-		mode-fastboot = <0x1>;
-		mode-recovery = <0x2>;
-		mode-stm32cubeprogrammer = <0x3>;
-		mode-ums_mmc0 = <0x10>;
-		mode-ums_mmc1 = <0x11>;
-		mode-ums_mmc2 = <0x12>;
-	};
-};
-
-So the expected configuration for me is 
-- CONFIG_USE_PREBOOT=y		=> variable preboot is handle
-- CONFIG_PREBOOT=""		=> default value of variable
-
-
-> --
-> Tom
-
-Regards
-Patrick
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgQXJkLA0KDQo+IEZyb206IEFyZCBCaWVzaGV1dmVsIDxhcmRiQGtlcm5lbC5vcmc+DQo+IFNl
+bnQ6IG1lcmNyZWRpIDcgb2N0b2JyZSAyMDIwIDEyOjI3DQo+IA0KPiBPbiBUdWUsIDYgT2N0IDIw
+MjAgYXQgMTg6MzYsIFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAc3QuY29tPg0K
+PiB3cm90ZToNCj4gPg0KPiA+DQo+ID4gSGksDQo+ID4NCj4gPiBPbiBTVE0zMk1QMTV4IHBsYXRm
+b3JtIHdlIGNhbiB1c2UgT1AtVEVFLCBsb2FkZWQgaW4gRERSIGluIGEgcmVnaW9uDQo+ID4gcHJv
+dGVjdGVkIGJ5IGEgZmlyZXdhbGwuIFRoaXMgcmVnaW9uIGlzIHJlc2VydmVkIGluIGRldmljZSB3
+aXRoICJuby1tYXAiDQo+ID4gcHJvcGVydHkuDQo+ID4NCj4gPiBCdXQgc29tZXRpbWUgdGhlIHBs
+YXRmb3JtIGJvb3QgZmFpbGVkIGluIFUtYm9vdCBvbiBhIENvcnRleCBBNyBhY2Nlc3MNCj4gPiB0
+byB0aGlzIHJlZ2lvbiAoZGVwZW5kaW5nIG9mIHRoZSBiaW5hcnkgYW5kIHRoZSBpc3N1ZSBjYW4g
+Y2hhbmdlIHdpdGgNCj4gPiBjb21waWxlciB2ZXJzaW9uIG9yIHdpdGggY29kZSBhbGlnbm1lbnQp
+LCB0aGVuIHRoZSBmaXJld2FsbCByYWlzZSBhDQo+ID4gZXJyb3IsIGZvciBleGFtcGxlOg0KPiA+
+DQo+ID4gRS9UQzowICAgdHpjX2l0X2hhbmRsZXI6MTkgVFpDIHBlcm1pc3Npb24gZmFpbHVyZQ0K
+PiA+IEUvVEM6MCAgIGR1bXBfZmFpbF9maWx0ZXI6NDIwIFBlcm1pc3Npb24gdmlvbGF0aW9uIG9u
+IGZpbHRlciAwDQo+ID4gRS9UQzowICAgZHVtcF9mYWlsX2ZpbHRlcjo0MjUgVmlvbGF0aW9uIEAw
+eGRlNWM2YmYwLCBub24tc2VjdXJlIHByaXZpbGVnZWQNCj4gcmVhZCwNCj4gPiAgICAgICAgICBB
+WEkgSUQgNWMwDQo+ID4gRS9UQzowICAgUGFuaWMNCj4gPg0KPiA+IEFmdGVyIGludmVzdGlnYXRp
+b24sIHRoZSBmb3JiaWRkZW4gYWNjZXNzIGlzIGEgc3BlY3VsYXRpdmUgcmVxdWVzdA0KPiA+IHBl
+cmZvcm1lZCBieSB0aGUgQ29ydGV4IEE3IGJlY2F1c2UgYWxsIHRoZSBERFIgaXMgbWFwcGVkIGFz
+IE1FTU9SWQ0KPiA+IHdpdGggQ0FDSEVBQkxFIHByb3BlcnR5Lg0KPiA+DQo+ID4gVGhlIGlzc3Vl
+IGlzIHNvbHZlZCBvbmx5IHdoZW4gdGhlIHJlZ2lvbiByZXNlcnZlZCBieSBPUC1URUUgaXMgbm8g
+bW9yZQ0KPiA+IG1hcHBlZCBpbiBVLUJvb3QgKG1hcHBlZCBhcyBERVZJQ0UvTk9OLUNBQ0hFQUJM
+RSB3YXNuJ3QgZW5vdWdoKSBhcyBpdA0KPiA+IGlzIGFscmVhZHkgZG9uZSBpbiBMaW51eCBrZXJu
+ZWwuDQo+ID4NCj4gDQo+IFNwdXJpb3VzIHBlY3VsYXRpdmUgYWNjZXNzZXMgdG8gZGV2aWNlIHJl
+Z2lvbnMgd291bGQgYmUgYSBzZXZlcmUgc2lsaWNvbiBidWcsIHNvDQo+IEkgd29uZGVyIHdoYXQg
+aXMgZ29pbmcgb24gaGVyZS4NCj4gDQo+IChBcG9sb2dpZXMgaWYgd2UgYXJlIHJlaGFzaGluZyBz
+dHVmZiBoZXJlIHRoYXQgaGFzIGFscmVhZHkgYmVlbiBkaXNjdXNzZWQgLSBJIGRvbid0DQo+IHJl
+bWVtYmVyIHRoZSBkZXRhaWxzKQ0KPiANCj4gQXJlIHlvdSBzdXJlIHRoYXQgdGhlIHNwZWN1bGF0
+aXZlIGFjY2Vzc2VzIHdlcmUgbm90IGNhdXNlZCBieSBtaXNjb25maWd1cmVkDQo+IENQVSBvciBw
+YWdlIHRhYmxlcywgbWlzc2luZyBUTEIgbWFpbnRlbmFuY2UsIGV0YyBldGM/DQo+IEJlY2F1c2Ug
+aXQgcmVhbGx5IGRvZXMgc21lbGwgbGlrZSBhIHNvZnR3YXJlIGlzc3VlIG5vdCBhIGhhcmR3YXJl
+IGlzc3VlLg0KPiANCj4gPiBJIHRoaW5rIHRoYXQgY2FuIGJlIGEgZ2VuZXJhbCBpc3N1ZSBmb3Ig
+QVJNIGFyY2hpdGVjdHVyZTogdGhlIG5vLW1hcA0KPiA+IHRhZyBpbiBkZXZpY2Ugc2hvdWxkIGJl
+IHJlc3BlY3RlZCBieSBVLWJvb3QsIHNvIEkgcHJvcG9zZSBhICBnZW5lcmljDQo+ID4gc29sdXRp
+b24gaW4gYXJtL2xpYi9jYWNoZS1jcDE1LmM6ZHJhbV9iYW5rX21tdV9zZXR1cCgpLg0KPiA+DQo+
+ID4gVGhpcyBzZXJpZSBpcyBjb21wb3NlZCBieSA3IHBhdGNoZXMNCj4gPiAtIDEuLjQvNzogcHJl
+bGltaW5hcnkgc3RlcHMgdG8gc3VwcG9ydCBmbGFncyBpbiBsaWJyYXJ5IGluIGxtYg0KPiA+ICAg
+KGFzIGl0IGlzIGRvbmUgaW4gbWVtYmxvY2suYyBpbiBMaW51eCkNCj4gPiAtIDUvNzogdW5pdGFy
+eSB0ZXN0IG9uIHRoZSBhZGRlZCBmZWF0dXJlIGluIGxtYiBsaWINCj4gPiAtIDYvNzogc2F2ZSB0
+aGUgbm8tbWFwIGZsYWdzIGluIGxtYiB3aGVuIHRoZSBkZXZpY2UgdHJlZSBpcyBwYXJzZWQNCj4g
+PiAtIDcvNzogdXBkYXRlIHRoZSBnZW5lcmljIGJlaGF2aW9yIGZvciAibm8tbWFwIiByZWdpb24g
+aW4NCj4gPiAgICAgICAgYXJtL2xpYi9jYWNoZS1jcDE1LmM6OmRyYW1fYmFua19tbXVfc2V0dXAo
+KQ0KPiA+DQo+ID4gSXQgaXMgYSByZWJhc2Ugb24gbWFzdGVyIGJyYW5jaCBvZiBwcmV2aW91cyBS
+RkMgWzJdLg0KPiA+DQo+ID4gSSBjYW4gY2hhbmdlIHRoaXMgbGFzdCBwYXRjaCBpZiB0aGlzIGZl
+YXR1cmUgaXMgbm90ZSByZXF1aXJlZCBieSBvdGhlcg0KPiA+IEFSTSBhcmNoaXRlY3R1cmU7IGl0
+IGlzIGEgd2VhayBmdW5jdGlvbiBzbyBJIGNhbiBhdm9pZCB0byBtYXAgdGhlDQo+ID4gcmVnaW9u
+IHdpdGggIm5vLW1hcCIgcHJvcGVydHkgaW4gZGV2aWNlIHRyZWUgb25seSBmb3IgU1RNMzJNUA0K
+PiA+IGFyY2hpdGVjdHVyZSAoaW4gYXJjaC9hcm0vbWFjaC1zdG0zMm1wL2NwdS5jKS4NCj4gPg0K
+PiA+IFNlZSBhbHNvIFsxXSB3aGljaCBoYW5kbGUgc2FtZSBzcGVjdWxhdGl2ZSBhY2Nlc3Mgb24g
+YXJtdjggZm9yIGFyZWENCj4gPiB3aXRoIEV4ZWN1dGFibGUgYXR0cmlidXRlLg0KPiA+DQo+ID4g
+WzFdDQo+ID4gaHR0cDovL3BhdGNod29yay5vemxhYnMub3JnL3Byb2plY3QvdWJvb3QvcGF0Y2gv
+MjAyMDA5MDMwMDAxMDYuNTAxNi0xLQ0KPiA+IG1hcmVrLmJ5a293c2tpQGdtYWlsLmNvbS8gWzJd
+DQo+ID4gaHR0cDovL3BhdGNod29yay5vemxhYnMub3JnL3Byb2plY3QvdWJvb3QvbGlzdC8/c2Vy
+aWVzPTE5OTQ4NiZhcmNoaXZlPQ0KPiA+IGJvdGgmc3RhdGU9Kg0KPiA+DQo+ID4gUmVnYXJkcw0K
+PiA+IFBhdHJpY2sNCj4gPg0KPiA+DQo+ID4gUGF0cmljayBEZWxhdW5heSAoNyk6DQo+ID4gICBs
+bWI6IEFkZCBzdXBwb3J0IG9mIGZsYWdzIGZvciBuby1tYXAgcHJvcGVydGllcw0KPiA+ICAgbG1i
+OiBhZGQgbG1iX2lzX3Jlc2VydmVkX2ZsYWdzDQo+ID4gICBsbWI6IHJlbW92ZSBsbWJfcmVnaW9u
+LnNpemUNCj4gPiAgIGxtYjogYWRkIGxtYl9kdW1wX3JlZ2lvbigpIGZ1bmN0aW9uDQo+ID4gICB0
+ZXN0OiBsbWI6IGFkZCB0ZXN0IGZvciBsbWJfcmVzZXJ2ZV9mbGFncw0KPiA+ICAgaW1hZ2UtZmR0
+OiBzYXZlIG5vLW1hcCBwYXJhbWV0ZXIgb2YgcmVzZXJ2ZS1tZW1vcnkNCj4gPiAgIGFybTogY2Fj
+aGU6IGNwMTU6IGRvbid0IG1hcCB0aGUgcmVzZXJ2ZWQgcmVnaW9uIHdpdGggbm8tbWFwIHByb3Bl
+cnR5DQo+ID4NCj4gPiAgYXJjaC9hcm0vaW5jbHVkZS9hc20vc3lzdGVtLmggfCAgIDMgKw0KPiA+
+ICBhcmNoL2FybS9saWIvY2FjaGUtY3AxNS5jICAgICB8ICAxOSArKysrKystDQo+ID4gIGNvbW1v
+bi9pbWFnZS1mZHQuYyAgICAgICAgICAgIHwgIDIzICsrKysrLS0tDQo+ID4gIGluY2x1ZGUvbG1i
+LmggICAgICAgICAgICAgICAgIHwgIDIyICsrKysrKystDQo+ID4gIGxpYi9sbWIuYyAgICAgICAg
+ICAgICAgICAgICAgIHwgMTAwICsrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0NCj4g
+PiAgdGVzdC9saWIvbG1iLmMgICAgICAgICAgICAgICAgfCAgODkgKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrDQo+ID4gIDYgZmlsZXMgY2hhbmdlZCwgMjEyIGluc2VydGlvbnMoKyksIDQ0
+IGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gLS0NCj4gPiAyLjE3LjENCj4gPg0KDQpObywgSSBkb24n
+dCB5ZXQgZGVzY3JpYmVkIHRoZSBpc3N1ZSBpbiBkZXRhaWxzIG9uIG1haWxpbmcgbGlzdC4NClNv
+IEkgd2lsbCBleHBsYWluIHRoZSBpbnZlc3RpZ2F0aW9uIGRvbmUgYW5kIG15IGNvbmNsdXNpb24u
+DQoNCk9uIFNUTTMyTVAxNXggcGxhdGZvcm0gd2UgaGF2ZSBmaXJld2FsbCB0byBwcm90ZWN0IHRo
+ZSBhY2Nlc3MgdG8gRERSIChUWkM0MDAgSVApLg0KDQpXaGVuIE9QLVRFRSBpcyB1c2VkLCB0aGUg
+Ym9vdCBjaGFpbiBpczoNCg0KMS8gUk9NLUNvZGUgKHNlY3VyZSkNCjIvIFRGLUEgKEJMMikgaW4g
+U1lTUkFNIChzZWN1cmUpDQozLyBPUC1URUUgaW4gIFNZU1JBTSBhbmQgRERSIChzZWN1cmUpDQo0
+LyBVLUJvb3QgaW4gRERSDQo1LyBMaW51eCBsZXJuZWwgDQoNCk9QLVRFRSBpcyBsb2FkZWQgYnkg
+VEYtQSBCTDINCi0gaW4gU1lSQU0gKGZvciBwYWdlciBwYXJ0KQ0KLSBpbiBERFIgKGZvciBwYWdl
+YWJsZSBwYXJ0KS4NCg0KVS1Cb290IGlzIGxvYWRlZCBieSBURi1BIEJMMiBpbiBERFIuDQoNCldo
+ZW4gT1AtVEVFIGlzIGV4ZWN1dGUsICBpdCBwcm90ZWN0cyB3aXRoIFRaQzQwMCBmaXJld2FsbCB0
+aGUgcmVzZXJ2ZWQgcGFydCBvZiBERFIgYXMgZGVmaW5lZCBpbiBkZXZpY2UgdHJlZSA6DQoNCkZv
+ciBleGFtcGxlIDogLi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1N2EtZWQxLXUtYm9vdC5kdHNpOjQy
+Og0KCXJlc2VydmVkLW1lbW9yeSB7DQoJCW9wdGVlQGZlMDAwMDAwIHsNCgkJCXJlZyA9IDwweGZl
+MDAwMDAwIDB4MDIwMDAwMDA+Ow0KCQkJbm8tbWFwOw0KCQl9Ow0KCX07DQoNCldoZW4gT1AtVEVF
+IGlzIHJ1bm5pbmcgaW4gc2VjdXJlIHdvcmxkIChzZWN1cmUgbW9uaXRvciBpcyByZXNpZGVudCks
+DQppdCBqdW1wIHRvIG5vcm1hbCB3b3JsZCAodW5zZWN1cmUpID0gVS1Cb290DQoNCkFmdGVyIHJl
+bG9jYXRpb24sIFUtQm9vdCBtYXBzIGFsbCB0aGUgRERSIGFzIG5vcm1hbCBtZW1vcnkNCihjYWNo
+ZWFibGUsIGJ1ZmZlcmFibGUsIGV4ZWN1dGFibGUpIGFuZCBhY3RpdmF0ZSBkYXRhIGNhaGUNCg0K
+VGhlbiwgc29tZXRpbWUgKGJlY2F1c2UgZGVwZW5kaW5nIG9mIHRoZSBjb21waWxhdGlvbiksIHRo
+ZSBmaXJld2FsbCBkZXRlY3QgYW4gdW5zZWN1cmUgYWNjZXNzDQogdG8gT1AtVEVFIHNlY3VyZWQg
+cmVnaW9uIHdoZW4gVS1Cb290IGlzIHJ1bm5pbmcuDQoNCldlIGhhdmUgaW52ZXN0aWdhdGUgdGhp
+cyBhY2Nlc3Mgd2l0aCBnZGI6DQotIGl0IGlzIG5vdCBhbiBkaXJlY3QgcmVxdWV0IGRvbmUgYnkg
+VS1Cb290IGNvZGUgOiB3ZSBoYXZlIG5vIGlzc3VlIHdoZSBjb2RlIGlzIGV4ZWN1dGVkIHN0ZXAg
+Ynkgc3RlcA0KLSB3ZSBoYXZlIG5vIGlzc3VlIHdoZW4gQ0FDSEUgKGluc3RydWN0aW9uIGFuZCBk
+YXRhKSBpcyBkZWFjdGl2YXRlZA0KLSBubyBjYWNoZSBvciBUTEIgbWFpbnRlbmFuY2UgaW4gdGhp
+cyBwYXJ0IG9mIGNvZGUNCi0ganVzdCBhZnRlciB0aGUgUEMsICB3ZSBmb3VuZCBpbiAgbWVtb3J5
+IGEgYXJyYXkgd2hpdGggY29udGVudCBkZWNvZGVkIGFzIGJyYW5jaCBpbnN0cnVjdGlvbg0KICB0
+byBzb21lIGFkZHJlc3MgbG9jYXRlZCBpbiBPUC1URUUgcHJvdGVjdGVkIG1lbW9yeQ0KICAoZXZl
+biBpZiB0aGUgY29udGVudCBvZiB0aGUgYXJyYXkgaXMgbm90IGluc3RydWN0aW9uIGJ1dCB1MzIg
+dmFsdWVzKSANCiAgYW5kIGl0IGlzIGV4YWN0bHkgdGhpcyBhZGRyZXNzIHdoaWNoIGNhdXNlIHRo
+ZSBmaXJld2FsbCBlcnJvci4NCg0KUFM6IGlmIEkgbW9kaWZ5IHRoZSBjb2RlIChieSBhZGRpbmcg
+cHJpbnRmIGZvciBleGFtcGxlKSwgdGhlIGFycmF5IGNoYW5nZTogDQogICAgICBpdCBjb250ZW50
+IGlzIG5vIG1vcmUgc2VlIGFzIGJyYW5jaCBpbnN0cnVjdGlvbiBhbmQgdGhlIGlzc3VlIGRpc2Fw
+cGVhcnMuDQogICAgICAgDQpNeSBjb25jbHVzaW9uOg0KICB0aGUgQTcgY29yZSAic2VlIiB0aGUg
+YnJhbmNoIGluc3RydWN0aW9uIG5lYXIgdGhlIFBDIHdpdGggYWRkcmVzcyBpbiBERFIgDQogIGFu
+ZCB0aGlzIGFkZHJlc3MgaXMgbWFya2VkIGFzIGNhY2hlYWJsZS9leGVjdXRhYmxlIGluIE1NVQ0K
+ICBTbyB0aGUgaW5zdHJ1Y3Rpb24gY2FjaGUgbG9hZCB0aGlzIGNvZGUgaW4gdGhlIGNhY2hlIGlu
+c3RydWN0aW9uIChwcmVsb2FkZWQgZm9yIENvcnRleCBBNyBwaXBlbGluZSkuDQoNCkkgZm91bmQg
+dGhpcyBub3RlIGluIEFSTSBkb2N1bWVudGF0aW9uIChmb3VuZCBpbiBhcm12OCBidXQgaXQgaXMg
+dGhlIHNhbWUgZm9yIGFybVY3KToNCg0KaHR0cHM6Ly9kZXZlbG9wZXIuYXJtLmNvbS9hcmNoaXRl
+Y3R1cmVzL2xlYXJuLXRoZS1hcmNoaXRlY3R1cmUvYXJtdjgtYS1tZW1vcnktbW9kZWwvZGV2aWNl
+LW1lbW9yeQ0KDQpOb3RlOiBUaGVyZSBpcyBhIHN1YnRsZSBkaXN0aW5jdGlvbiBoZXJlIHRoYXQg
+aXMgZWFzeSB0byBtaXNzLiBNYXJraW5nIGEgcmVnaW9uIGFzIERldmljZSBwcmV2ZW50cyBzcGVj
+dWxhdGl2ZQ0KICAgICAgICAgIGRhdGEgYWNjZXNzZXMgb25seS4gIE1hcmtpbmcgYSByZWdpb24g
+YXMgbm9uLWV4ZWN1dGFibGUgcHJldmVudHMgc3BlY3VsYXRpdmUgaW5zdHJ1Y3Rpb24gYWNjZXNz
+ZXMuDQogICAgICAgICBUaGlzIG1lYW5zIHRoYXQsIHRvIHByZXZlbnQgYW55IHNwZWN1bGF0aXZl
+IGFjY2Vzc2VzLCBhIHJlZ2lvbiBtdXN0IGJlIG1hcmtlZCBhcyBib3RoIERldmljZSBhbmQgbm9u
+LWV4ZWN1dGFibGUuDQogIA0KRm9yIG1lIHRvIGF2b2lkIGFueSB1bmV4cGVjdGVkIGFjY2VzcyB0
+byBwcm90ZWN0ZWQgbWVtb3J5IGJ5IGZpcmV3YWxsIHRoZSBPUC1URUUgcmVzZXJ2ZWQNCm1lbW9y
+eSBtdXN0IGF0IGxlYXN0IGJlIGNvbmZpZ3VyZWQgYXMgZGV2aWNlIG1lbW9yeSBhbmQgbm90IGV4
+ZWN1dGFibGUuLi4NCg0KQnV0IGFmdGVyIHRlc3RzLCBpdCB3YXNuJ3QgZW5vdWdoLg0KRXZlbiBp
+ZiB3ZSBzZXQgdGhlIE9QLVRFRSBtZW1vcnkgd2l0aCBEQ0FDSEVfT0ZGIHZhbHVlLA0KVFpDNDAw
+IHNlZSBvdGhlciBpc3N1ZSBmb3Igc2VjdXJlIHRvIG5vIHNlY3VyZSB0cmFuc2l0aW9uIGFjY2Vz
+cw0KKGR1cmluZyBTTUMgZXhlY3V0aW9uIGZvciByZXF1ZXN0IHRvIHNlY3VyZSBtb25pdG9yKS4N
+Cg0KVGhlbiBJIHJlbWVtYmVyIGEgb3RoZXIgcmVxdWlyZW1lbnQgaW4gQVJNIGFyY2hpdGVjdHVy
+ZToNCnRvIGF2b2lkIHVuZXhwZWN0ZWQgYmVoYXZpb3IgdGhlIHNhbWUgcmVnaW9uIHNob3VsZCBi
+ZSBtYXBwZWQgbm90IG1hcHBlZCBhcyBkZXZpY2UgYW5kIG1lbW9yeToNCihPUC1URUUgbWFyayB0
+aGUgcmVzZXJ2ZWQgcmVnaW9uIGFzIG5vcm1hbCBtZW1vcnkgLyBjYWNoZWFibGUgb25seSBhY2Nl
+c3NpYmxlIA0KYnkgc2VjdXJlIHdvcmxkIC8gcHJvdGVjdGVkIGJ5IFRaQzQwMCkNCg0KUmVmZXJl
+bmNlID0gQVJNdjcgQXJjaGl0ZWN0dXJlIHJlZmVyZW5jZToNCg0KQTMuNS43IE1lbW9yeSBhY2Nl
+c3MgcmVzdHJpY3Rpb25zDQoNCkJlaGF2aW9yIGlzIFVOUFJFRElDVEFCTEUgaWYgdGhlIHNhbWUg
+bWVtb3J5IGxvY2F0aW9uOg0K4oCUIGlzIG1hcmtlZCBhcyBTaGFyZWFibGUgTm9ybWFsIGFuZCBO
+b24tc2hhcmVhYmxlIE5vcm1hbA0K4oCUIGlzIG1hcmtlZCBhcyBoYXZpbmcgZGlmZmVyZW50IG1l
+bW9yeSB0eXBlcyAoTm9ybWFsLCBEZXZpY2UsIG9yIFN0cm9uZ2x5LW9yZGVyZWQpDQrigJQgaXMg
+bWFya2VkIGFzIGhhdmluZyBkaWZmZXJlbnQgY2FjaGVhYmlsaXR5IGF0dHJpYnV0ZXMNCuKAlCBp
+cyBtYXJrZWQgYXMgYmVpbmcgU2hhcmVhYmxlIERldmljZSBhbmQgTm9uLXNoYXJlYWJsZSBEZXZp
+Y2UgbWVtb3J5Lg0KU3VjaCBtZW1vcnkgbWFya2luZyBjb250cmFkaWN0aW9ucyBjYW4gb2NjdXIs
+IGZvciBleGFtcGxlLCBieSB0aGUgdXNlIG9mIGFsaWFzZXMgaW4gYSB2aXJ0dWFsIHRvDQpwaHlz
+aWNhbCBhZGRyZXNzIG1hcHBpbmcNCg0KSXQgaXMgd2h5IEkgcHJvcG9zZSB0aGlzIHBhdGNoc2V0
+IHRvIHVuLW1hcCB0aGUgT1AtVEVFIG1lbW9yeSwgYXMgaXQgaXMgaW5kaWNhdGVkIGluIGRldmlj
+ZSB0cmVlOw0KSSBkb24ndCBzZWUgb3RoZXIgc29sdXRpb24gdG8gcmVzcGVjdCB0aGUgQVJNIHJl
+cXVpcmVtZW50cy4NCg0KU28gZm9yIG1lIGl0IGlzIG5vdCBhIFNPQyBpc3N1ZSBvciBhIFNXIGJ1
+ZywgYnV0IGFuIEFSTSBhcmNoaXRlY3R1cmUgY29uc3RyYWludCBmb3Igc3BlY3VsYXRpdmUgYWNj
+ZXNzDQp0byBub3JtYWwgbWVtb3J5IHJlZ2lvbiAobWFya2VkIGNhY2hlYWJsZS9zaGFyZWFibGUv
+ZXhlY3V0YWJsZSkuDQoNClRoaXMgcHJldmVudCBhbnkgaXNzdWUgZm9yIFNUTTMyTVAxNXggcGxh
+dGZvcm0gYnV0IGFsc28gZm9yIG90aGVyIHBsYXRmb3Jtcw0Kd2hlbiBzb21lIHBhcnQgb2YgbWVt
+b3J5IG11c3QgYmUgcHJvdGVjdGVkIChubyBhY2Nlc3MgYWxsb3dlZC9wcm90ZWN0ZWQgYnkgZmly
+ZXdhbGwpDQpCRUZPUkUgVS1Cb290IGV4ZWN1dGlvbi4NCg0KSSBob3BlIHRoYXQgaXQgaXMgbW9y
+ZSBjbGVhciBub3cuDQoNClJlZ2FyZHMNCg0KUGF0cmljaw0KDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJv
+b3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxt
+YW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

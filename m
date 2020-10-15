@@ -2,60 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D87728F5B3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Oct 2020 17:18:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F34728F640
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Oct 2020 17:59:30 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AB7FEC3FADE;
-	Thu, 15 Oct 2020 15:18:29 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E3D11C424B2;
+	Thu, 15 Oct 2020 15:59:29 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2FCC9C32EA3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D4B7FC424AF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Oct 2020 15:18:23 +0000 (UTC)
+ Thu, 15 Oct 2020 15:59:28 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09FFCZl3017765; Thu, 15 Oct 2020 17:18:21 +0200
+ 09FFqSYL030131; Thu, 15 Oct 2020 17:59:10 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=88tPXa28tQAqJiUmRGZINAnfBMnBugqAhrJoMO2CIfY=;
- b=HD2TKt65uBuJNbcfP46/BV1va9xP2oCq6G96YbGZKtnta8JfNe235aQCQaierO/y7dpn
- GIA2zafpN9pG8VdgYMat4chqJcGFiHkv0Y7rtq47fnEzJfr8E1CzC/QnV33cQJ7GeuNk
- GgLBQ8mlRZWZPojQljCC7ibVtvWbAA/SL4hdcWCz3hjnveskEYI20KTbqoTXjVjMGp0n
- VYWmgXTKLCPa3rfUzddsBJ5UlZIucYn186rBPXvOdi6Fh6MATJ0lRxnvtdTSoQjDUqyh
- +gCq+LBZuuHTaIpObi5d9uFzeDO9xfmP0RLJH3GPq/4Ly1d9fMZNNRRYvve223Y9IHp/ Ag== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=EMDBG3SteBBC9swTBIquyfyj6EMcxsdiN2tayPffSNg=;
+ b=uDFN+Dimug15BKDuqmJh03NOHhFhW9686H8D/0z4GBFsQq4Tgc9BU/48xahWgap2TxsZ
+ An8iW72jtpKHEezSRhPu01WSNxdmbq+uZEAw7ZBZZwJ80KMeF9qIJSZBshnsOqYpkfuh
+ Sd+lEbgaMxIUnlsPxPZUes6PFeT7b0OYdsyy0o7p/yApffoaL2B5IjYwg8fSxrV6uGbd
+ p6ZIBKDFc6d9l3Td2A9z2k2jsknjbX85SuRzktqPw4abkx+m6tLn/wz+G9eoD1QhsWvc
+ 4EbwLROICMsY4ymtz1yG0C1aondyOR0nI1KnIsmhMvpLU1CJn+hRWRskErenkRGu09AE 7Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34353wqmgm-1
+ by mx07-00178001.pphosted.com with ESMTP id 34353wqu5p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Oct 2020 17:18:21 +0200
+ Thu, 15 Oct 2020 17:59:09 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7FEFE10002A;
- Thu, 15 Oct 2020 17:18:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 647092B8A07;
- Thu, 15 Oct 2020 17:18:20 +0200 (CEST)
-Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 15 Oct 2020 17:18:19
- +0200
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 15 Oct 2020 17:18:17 +0200
-Message-ID: <20201015151817.29513-1-patrick.delaunay@st.com>
-X-Mailer: git-send-email 2.17.1
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E4FD510002A;
+ Thu, 15 Oct 2020 17:59:08 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CA43F2CD074;
+ Thu, 15 Oct 2020 17:59:08 +0200 (CEST)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 15 Oct
+ 2020 17:59:08 +0200
+Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
+ SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
+ 15.00.1473.003; Thu, 15 Oct 2020 17:59:08 +0200
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Simon Glass <sjg@chromium.org>
+Thread-Topic: [PATCH 00/33] stm32: enable logging features
+Thread-Index: AQHWogq+KGMXxr763EqZXROs/LdT36mYo72AgAAosRA=
+Date: Thu, 15 Oct 2020 15:59:08 +0000
+Message-ID: <88a21c960cc248af9cd08e2fc5681a69@SFHDAG2NODE3.st.com>
+References: <20201014091646.4233-1-patrick.delaunay@st.com>
+ <CAPnjgZ2Z8=hXqoWXz8nuUToWTGz3sCY8zneGA9WsaVGYPprxzQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2Z8=hXqoWXz8nuUToWTGz3sCY8zneGA9WsaVGYPprxzQ@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.51]
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.687
- definitions=2020-10-15_08:2020-10-14,
+ definitions=2020-10-15_10:2020-10-14,
  2020-10-15 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] spi: migrate trace to dev and log macro in
-	spi uclass
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Heiko Schocher <hs@denx.de>, Christophe KERELLO <christophe.kerello@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ Yannick FERTRE <yannick.fertre@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/33] stm32: enable logging features
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,185 +88,128 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Define LOG_CATEGORY and change printf and pr_*
-to dev_ (when dev is available) or log_ macro.
+Hi Simon,
 
-This patch adds the support of logging feature with log command
-(filtering, display of device name in trace) and allows to
-suppress traces via the syslog driver.
+> From: Simon Glass <sjg@chromium.org>
+> Sent: jeudi 15 octobre 2020 17:06
+> 
+> Hi Patrick,
+> 
+> On Wed, 14 Oct 2020 at 03:16, Patrick Delaunay <patrick.delaunay@st.com>
+> wrote:
+> >
+> >
+> > This patch-set migrates several stm32 drivers to API compatible with
+> > logging features (use dev_...() or log_...() function) and activate
+> > the logging features in STM32MP15 boards.
+> >
+> > The size of U-Boot increased by 19kB (933026 to 952830 on
+> > STM32MP157C-EV1 board for basic defconfig) but the boot time don't change
+> drastically.
+> 
+> >
+> > For example on STM32MP157C-EV1 board:
+> >
+> > 1/ Before LOG patchset
+> >
+> > Timer summary in microseconds (12 records):
+> >        Mark    Elapsed  Stage
+> >           0          0  reset
+> >     224,514    224,514  SPL
+> >     961,170    736,656  end SPL
+> >     964,006      2,836  board_init_f
+> >   1,186,986    222,980  board_init_r
+> >   1,651,379    464,393  id=64
+> >   1,674,463     23,084  id=65
+> >   1,675,164        701  main_loop
+> >   4,025,806  2,350,642  id=175
+> >
+> > Accumulated time:
+> >                 55,064  dm_f
+> >                 66,749  dm_r
+> >                 88,796  dm_spl
+> >
+> > 2/ With LOG activated (after this patchset)
+> >
+> > Timer summary in microseconds (12 records):
+> >        Mark    Elapsed  Stage
+> >           0          0  reset
+> >     227,142    227,142  SPL
+> >     984,585    757,443  end SPL
+> >     987,579      2,994  board_init_f
+> >   1,210,091    222,512  board_init_r
+> >   1,673,354    463,263  id=64
+> >   1,696,073     22,719  id=65
+> >   1,696,775        702  main_loop
+> >   5,443,104  3,746,329  id=175
+> >
+> > Accumulated time:
+> >                 62,154  dm_f
+> >                 66,264  dm_r
+> >                 89,376  dm_spl
+> >
+> > For information even with all trace embbeded in U-Boot but not
+> > activated, MAX_LOG_LEVEL=8 and LOG_DEFAULT_LEVEL=6
+> >
+> > Size increase by 190KB (952830 to 1147918) but boot time is stable
+> > (1,748s vs 1,696s).
+> 
+> This seems pretty bad. Is this because of console output, or something else? I
+> understand the size increase, but not the boot time increase.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+For this last point I just execute STM32MP157C-EV1 boot 
+with a patch in configs/stm32mp15_basic_defconfig
 
- drivers/spi/spi-uclass.c | 51 ++++++++++++++++++++++------------------
- 1 file changed, 28 insertions(+), 23 deletions(-)
++CONFIG_LOGLEVEL=8
++CONFIG_LOG_MAX_LEVEL=8
++CONFIG_LOG_DEFAULT_LEVEL=6
++CONFIG_LOGF_FILE=y
++CONFIG_LOGF_LINE=y
++CONFIG_LOGF_FUNC=y
 
-diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-index 55a8eed890..d5a1e3a676 100644
---- a/drivers/spi/spi-uclass.c
-+++ b/drivers/spi/spi-uclass.c
-@@ -3,12 +3,15 @@
-  * Copyright (c) 2014 Google, Inc
-  */
- 
-+#define LOG_CATEGORY UCLASS_SPI
-+
- #include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
- #include <malloc.h>
- #include <spi.h>
-+#include <dm/device_compat.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
- #include <dm/lists.h>
-@@ -29,7 +32,7 @@ static int spi_set_speed_mode(struct udevice *bus, int speed, int mode)
- 	else
- 		ret = -EINVAL;
- 	if (ret) {
--		printf("Cannot set speed (err=%d)\n", ret);
-+		dev_err(bus, "Cannot set speed (err=%d)\n", ret);
- 		return ret;
- 	}
- 
-@@ -38,7 +41,7 @@ static int spi_set_speed_mode(struct udevice *bus, int speed, int mode)
- 	else
- 		ret = -EINVAL;
- 	if (ret) {
--		printf("Cannot set mode (err=%d)\n", ret);
-+		dev_err(bus, "Cannot set mode (err=%d)\n", ret);
- 		return ret;
- 	}
- 
-@@ -138,13 +141,15 @@ int spi_write_then_read(struct spi_slave *slave, const u8 *opcode,
- 
- 	ret = spi_xfer(slave, n_opcode * 8, opcode, NULL, flags);
- 	if (ret) {
--		debug("spi: failed to send command (%zu bytes): %d\n",
--		      n_opcode, ret);
-+		dev_dbg(slave->dev,
-+			"spi: failed to send command (%zu bytes): %d\n",
-+			n_opcode, ret);
- 	} else if (n_buf != 0) {
- 		ret = spi_xfer(slave, n_buf * 8, txbuf, rxbuf, SPI_XFER_END);
- 		if (ret)
--			debug("spi: failed to transfer %zu bytes of data: %d\n",
--			      n_buf, ret);
-+			dev_dbg(slave->dev,
-+				"spi: failed to transfer %zu bytes of data: %d\n",
-+				n_buf, ret);
- 	}
- 
- 	return ret;
-@@ -248,7 +253,7 @@ int spi_find_chip_select(struct udevice *bus, int cs, struct udevice **devp)
- 	}
- 
- 	if (ret) {
--		printf("Invalid cs %d (err=%d)\n", cs, ret);
-+		dev_err(bus, "Invalid cs %d (err=%d)\n", cs, ret);
- 		return ret;
- 	}
- 
-@@ -257,7 +262,7 @@ int spi_find_chip_select(struct udevice *bus, int cs, struct udevice **devp)
- 		struct dm_spi_slave_platdata *plat;
- 
- 		plat = dev_get_parent_platdata(dev);
--		debug("%s: plat=%p, cs=%d\n", __func__, plat, plat->cs);
-+		dev_dbg(bus, "%s: plat=%p, cs=%d\n", __func__, plat, plat->cs);
- 		if (plat->cs == cs) {
- 			*devp = dev;
- 			return 0;
-@@ -275,7 +280,7 @@ int spi_cs_is_valid(unsigned int busnum, unsigned int cs)
- 
- 	ret = uclass_find_device_by_seq(UCLASS_SPI, busnum, false, &bus);
- 	if (ret) {
--		debug("%s: No bus %d\n", __func__, busnum);
-+		log_debug("%s: No bus %d\n", __func__, busnum);
- 		return ret;
- 	}
- 
-@@ -304,12 +309,12 @@ int spi_find_bus_and_cs(int busnum, int cs, struct udevice **busp,
- 
- 	ret = uclass_find_device_by_seq(UCLASS_SPI, busnum, false, &bus);
- 	if (ret) {
--		debug("%s: No bus %d\n", __func__, busnum);
-+		log_debug("%s: No bus %d\n", __func__, busnum);
- 		return ret;
- 	}
- 	ret = spi_find_chip_select(bus, cs, &dev);
- 	if (ret) {
--		debug("%s: No cs %d\n", __func__, cs);
-+		dev_dbg(bus, "%s: No cs %d\n", __func__, cs);
- 		return ret;
- 	}
- 	*busp = bus;
-@@ -334,7 +339,7 @@ int spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 	ret = uclass_get_device_by_seq(UCLASS_SPI, busnum, &bus);
- #endif
- 	if (ret) {
--		printf("Invalid bus %d (err=%d)\n", busnum, ret);
-+		log_err("Invalid bus %d (err=%d)\n", busnum, ret);
- 		return ret;
- 	}
- 	ret = spi_find_chip_select(bus, cs, &dev);
-@@ -345,12 +350,12 @@ int spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 	 * SPI flash chip - we will bind to the correct driver.
- 	 */
- 	if (ret == -ENODEV && drv_name) {
--		debug("%s: Binding new device '%s', busnum=%d, cs=%d, driver=%s\n",
--		      __func__, dev_name, busnum, cs, drv_name);
-+		dev_dbg(bus, "%s: Binding new device '%s', busnum=%d, cs=%d, driver=%s\n",
-+			__func__, dev_name, busnum, cs, drv_name);
- 		ret = device_bind_driver(bus, drv_name, dev_name, &dev);
- 		if (ret) {
--			debug("%s: Unable to bind driver (ret=%d)\n", __func__,
--			      ret);
-+			dev_dbg(bus, "%s: Unable to bind driver (ret=%d)\n",
-+				__func__, ret);
- 			return ret;
- 		}
- 		plat = dev_get_parent_platdata(dev);
-@@ -358,15 +363,15 @@ int spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 		if (speed) {
- 			plat->max_hz = speed;
- 		} else {
--			printf("Warning: SPI speed fallback to %u kHz\n",
--			       SPI_DEFAULT_SPEED_HZ / 1000);
-+			dev_warn(bus,
-+				 "Warning: SPI speed fallback to %u kHz\n",
-+				 SPI_DEFAULT_SPEED_HZ / 1000);
- 			plat->max_hz = SPI_DEFAULT_SPEED_HZ;
- 		}
- 		plat->mode = mode;
- 		created = true;
- 	} else if (ret) {
--		printf("Invalid chip select %d:%d (err=%d)\n", busnum, cs,
--		       ret);
-+		dev_err(bus, "Invalid chip select %d:%d (err=%d)\n", busnum, cs, ret);
- 		return ret;
- 	}
- 
-@@ -394,13 +399,13 @@ int spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- 
- 	*busp = bus;
- 	*devp = slave;
--	debug("%s: bus=%p, slave=%p\n", __func__, bus, *devp);
-+	log_debug("%s: bus=%p, slave=%p\n", __func__, bus, *devp);
- 
- 	return 0;
- 
- err:
--	debug("%s: Error path, created=%d, device '%s'\n", __func__,
--	      created, dev->name);
-+	log_debug("%s: Error path, created=%d, device '%s'\n", __func__,
-+		  created, dev->name);
- 	if (created) {
- 		device_remove(dev, DM_REMOVE_NORMAL);
- 		device_unbind(dev);
--- 
-2.17.1
+And execute "bootstage report" after the second boot
+(the first boot is pertubated by env save)
 
+I think the delta is linked to 
+1/ size of U-Boot (SPL spent more time to load U-Boot)
+    end of SPL 987,579  => 996,117
+
+2/ time to check for each debug trace: because I increase the log level
+   (gd->default_log_level = 6 < MAX_LOG_LEVEL=8)
+
+3/ treatment added in log_console_emit (some printf) and
+    log_dispatch (processing_msg / gd->loghead)
+
+4/ lower cache performancy as trace code are pesent in memory even
+    they are not used
+
+Can I do some check/experimentation on my side ?
+
+Patrick
+
+> >
+> > STM32MP> bootstage report
+> > Timer summary in microseconds (12 records):
+> >        Mark    Elapsed  Stage
+> >           0          0  reset
+> >     230,028    230,028  SPL
+> >     996,117    766,089  end SPL
+> >     999,082      2,965  board_init_f
+> >   1,220,225    221,143  board_init_r
+> >   1,718,641    498,416  id=64
+> >   1,746,096     27,455  id=65
+> >   1,748,202      2,106  main_loop
+> >   4,509,271  2,761,069  id=175
+> >
+> > Accumulated time:
+> >                 58,481  dm_f
+> >                 68,881  dm_r
+> >                 89,385  dm_spl
+> >
+> >
+> >
+
+(...)
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

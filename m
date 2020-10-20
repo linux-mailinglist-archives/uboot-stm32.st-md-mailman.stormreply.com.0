@@ -2,71 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADC8129309F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 19 Oct 2020 23:37:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0ECA4293910
+	for <lists+uboot-stm32@lfdr.de>; Tue, 20 Oct 2020 12:21:32 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 731A1C424B8;
-	Mon, 19 Oct 2020 21:37:47 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 66B13C424B8;
+	Tue, 20 Oct 2020 10:21:31 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3AA1FC424B7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 558DFC424B7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 19 Oct 2020 21:37:47 +0000 (UTC)
+ Tue, 20 Oct 2020 10:21:28 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4CFVV24WX3z1qrg9;
- Mon, 19 Oct 2020 23:37:46 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4CFqR959Ccz1s0tc;
+ Tue, 20 Oct 2020 12:21:25 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 4CFVV21bptz1qrgN;
- Mon, 19 Oct 2020 23:37:46 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4CFqR94Rwkz1r0m7;
+ Tue, 20 Oct 2020 12:21:25 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
  port 10024)
- with ESMTP id ATRy9BkLkEMh; Mon, 19 Oct 2020 23:37:43 +0200 (CEST)
-X-Auth-Info: Hazvf+lWtSjbsZ9XSThYJgoJfD1QLayb4Hm1WQ3LNY0=
-Received: from crub (p508b685f.dip0.t-ipconnect.de [80.139.104.95])
+ with ESMTP id JR19_E1zyAdl; Tue, 20 Oct 2020 12:21:24 +0200 (CEST)
+X-Auth-Info: E91Ym4D4Egf9em88trUbpReKpRVh8HhfNfF0ZMNf5sA=
+Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 19 Oct 2020 23:37:43 +0200 (CEST)
-Date: Mon, 19 Oct 2020 23:37:43 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20201019233743.66ddb694@crub>
-In-Reply-To: <20200928093017.19053-3-patrick.delaunay@st.com>
-References: <20200928093017.19053-1-patrick.delaunay@st.com>
- <20200928093017.19053-3-patrick.delaunay@st.com>
+ Tue, 20 Oct 2020 12:21:24 +0200 (CEST)
+To: Patrick DELAUNAY <patrick.delaunay@st.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20201015144856.1.I77269d852e0f410c31f9d1f869815c4328510c12@changeid>
+ <9ea18aa8-2c87-85cf-fba3-d753382f32e7@denx.de>
+ <7fd5050f277643a78bb185b4c272b6c4@SFHDAG2NODE3.st.com>
+ <eeaec9e8-764f-8869-33c3-0b3d4d74348e@denx.de>
+ <b4e675d5caff47d1b207b67e6ca03e1f@SFHDAG2NODE3.st.com>
+From: Marek Vasut <marex@denx.de>
+Message-ID: <a86babf0-e628-1f10-848e-5fbdf9dd698a@denx.de>
+Date: Tue, 20 Oct 2020 12:21:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Cc: Baruch Siach <baruch@tkos.co.il>, Neil Armstrong <narmstrong@baylibre.com>,
- Adrian Alonso <adrian.alonso@nxp.com>,
- Vanessa Maegima <vanessa.maegima@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Stefan Bosch <stefan_b@posteo.net>, Joe
- Hershberger <joe.hershberger@ni.com>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Eric =?UTF-8?B?QsOpbmFyZA==?= <eric@eukrea.com>,
- Ken Lin <Ken.Lin@advantech.com.tw>, uboot-stm32@st-md-mailman.stormreply.com,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Richard Hu <richard.hu@technexion.com>, Marek Vasut <marex@denx.de>,
- Stefan Roese <sr@denx.de>, Simon
- Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Michal Simek <michal.simek@xilinx.com>, u-boot-amlogic@groups.io,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jason Liu <jason.hui.liu@nxp.com>,
- Heiko Schocher <hs@denx.de>, Vikas Manocha <vikas.manocha@st.com>, Otavio
- Salvador <otavio@ossystems.com.br>, Ashok Reddy
- Soma <ashok.reddy.soma@xilinx.com>, Troy Kisky <troy.kisky@boundarydevices.com>,
- Beniamino Galvani <b.galvani@gmail.com>, Akshay Bhat <akshaybhat@timesys.com>,
- Adam Ford <aford173@gmail.com>,
- =?UTF-8?B?U8OpYmFzdGllbg==?= Szymanski <sebastien.szymanski@armadeus.com>,
- Stefano Babic <sbabic@denx.de>, Olaf Mandel <o.mandel@menlosystems.com>,
- Igor Opaniuk <igor.opaniuk@toradex.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Holger Brunck <holger.brunck@ch.abb.com>,
- Fabio Estevam <fabio.estevam@nxp.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] configs: migrate
- CONFIG_BMP_16/24/32BPP to defconfigs
+In-Reply-To: <b4e675d5caff47d1b207b67e6ca03e1f@SFHDAG2NODE3.st.com>
+Content-Language: en-US
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Amelie DELAUNAY <amelie.delaunay@st.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] usb: dwc2: add "u-boot,
+	force-vbus-detection" for stm32
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,15 +66,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 28 Sep 2020 11:30:16 +0200
-Patrick Delaunay patrick.delaunay@st.com wrote:
-...
->  103 files changed, 122 insertions(+), 63 deletions(-)
+On 10/16/20 6:32 PM, Patrick DELAUNAY wrote:
+> Hi Marek,
 
-applied to u-boot-video/master, thanks!
+Hi,
 
---
-Anatolij
+[...]
+
+>>>> On 10/15/20 2:49 PM, Patrick Delaunay wrote:
+>>>>> On some board, the ID pin is not connected so the B session must be
+>>>>> overridden with "u-boot,force_b_session_valid" but the VBus sensing
+>>>>> must continue to be handle.
+>>>>>
+>>>>> To managed it, this patch adds a new DT field
+>>>>> "u-boot,force-vbus-detection" to use with "u-boot,force_b_session_valid"
+>>>>
+>>>> How is this solved in Linux ?
+>>>
+>>> It is managed by Linux DWC2 driver: it is a real OTG driver, with dual
+>>> mode support and by usb framework
+>>>
+>>> Throught the properties
+>>> &usbotg_hs {
+>>> 	usb-role-switch;
+>>> };
+>>>
+>>> a glue treat the session and the sensing management see
+>>> linux/drivers/usb/dwc2/drd.c in linux-next
+>>>
+>>> PS: activate_stm_id_vb_detection is also used in driver = hsotg->params.
+>>>
+>>> As ID pin / vbus is completly managed by the USB TYPE driver C
+>>> (STUSB1600 for STMicroelectronics board) and DWC2 driver with dual
+>>> role stack (host/gadget).
+>>>
+>>> I don't found a better solution than device tree property for this
+>>> task in U-Boot as DWC2 driver don't support dual role and U-Boot don't have
+>> framework for USB type C controller.
+>>>
+>>>>
+>>>> btw can you do something about that huge change in indent ? Is it necessary ?
+>>>
+>>> I move all this code under activate_stm_id_vb_detection (linked to
+>>> compatible "st,stm32mp1-hsotg") to avoid impact on other platform as
+>>> this "sensing" properties are only support for STM32MP15X (it is
+>>> linked to USB block detection integrated in SOC)
+>>>
+>>> And after I need to check the
+>>> 1/ The usb33d-supply is required of vbus or IDPIN sensing 2/ manage
+>>> Vbus sensing or override (according dt) 3/ manage IDPIN or override
+>>> (according dt)
+>>>
+>>> I add a new property to be backward compatible (even it the
+>>> combinaison is less clear) I protect regulator function call to avoid compilation
+>> issue for other platform.
+>>>
+>>> PS: after reading the refmanual, I also split VALOEN and VALOVAL bit update
+>> as it is required.
+>>>
+>>> So yes I think it is needed but I can split the patch to simplify the review.
+>>
+>> I presume you don't feel like implementing proper OTG support, right ?
+> 
+> Yes, I am afraid of this task.
+
+Can you take a look ?
+
+I will pick this patch into next for now.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

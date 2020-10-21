@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31F74294BEA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 13:45:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A19FD294BEE
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 13:46:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EEC65C3FAE0;
-	Wed, 21 Oct 2020 11:45:30 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E92FC3FAE0;
+	Wed, 21 Oct 2020 11:46:54 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CBEE4C3FAD5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B7426C3FAD5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 Oct 2020 11:45:27 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Wed, 21 Oct 2020 11:46:52 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09LBg8Gc020349; Wed, 21 Oct 2020 13:45:25 +0200
+ 09LBfxrB015884; Wed, 21 Oct 2020 13:46:44 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=k0p3wbCNT6NPpO9HklJcOLhjJOtqBWIe1FbIdpRv0Gw=;
- b=WlYvt7BRwbSgr59AUDEX9r8OQmNucpqPHmPmHagZ3YM7On7YgYrNrLsvFLFbo4DwcbSF
- Hy9IGLPKAeLatic3Dj1rjLi3Z4UOyyVNhTqjQypAQhg7qDTc19JMnVPPeYpqjZRz7ipQ
- xUOFuZhCWEnKLktc1ynqXa62ZIwxJzNrrWjJqywxwXexuNn1iROg188+RuljidQnWkPm
- qFb8+0qT52rb7NuRP04LvpPZx8IZtrDgNdWikMzTFsZB9MiwmXIIcBv1NCuweXcWUIqH
- UqYdnErPxI1tHxcAu85zu/xF56fCBlvHIRYCu6QR2fRj8W60JDuEr+YltgN/MW/AFnpG Vw== 
+ bh=2MKjBBgvKg4X4KFpt/JWcpiqpJGNp8AzoP5k3zvN0UU=;
+ b=Rcf+8LMCvw9UaSVgc26Z48huqZS3W4f3pUWBrYIPtRKTmGp91vZQ6NoyEU6ZQPIN8p+4
+ z12pbM4AKZeQucrBzdFiu1oX96GwUjyEVmMgg2Rqql/2PiDCl6riLNubd+fjxpGuazxB
+ 663UISNySIFCAgnTGWr4afmO5lS57VM4bZ43+OtbrA1A7rqU5+P4ct+DHFME74zJ3aTA
+ KvT+S35ULcjFrE0z86cLI0bkOQBNIlvjvI02RALEB/BDvfEojlOSBumcb0NPVQyu0cOw
+ LL9OiuUdSBBjgDTlI4P2w74xotP5d8XkEEK7BkWR3ifN6gPw5TyfbmbwBlCUzH4E5DWg eQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 347p30stvg-1
+ by mx07-00178001.pphosted.com with ESMTP id 347pcx1r52-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 Oct 2020 13:45:24 +0200
+ Wed, 21 Oct 2020 13:46:44 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 84F9310002A;
- Wed, 21 Oct 2020 13:45:24 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node1.st.com [10.75.127.4])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 79B7D2DD65D;
- Wed, 21 Oct 2020 13:45:24 +0200 (CEST)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE1.st.com
- (10.75.127.4) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
- 2020 13:45:24 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8AF0210002A;
+ Wed, 21 Oct 2020 13:46:43 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 71D732E082D;
+ Wed, 21 Oct 2020 13:46:43 +0200 (CEST)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
+ 2020 13:46:43 +0200
 Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
  SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 21 Oct 2020 13:45:24 +0200
+ 15.00.1473.003; Wed, 21 Oct 2020 13:46:42 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH] phy: stm32: usbphyc: manage optional vbus regulator on
- phy_power_on/off
-Thread-Index: AQHWovHVPT0sQn+iMkmHgzg9BH47Damh1+SA
-Date: Wed, 21 Oct 2020 11:45:23 +0000
-Message-ID: <f389cef5-c57f-3d93-4ce8-d79188050005@st.com>
-References: <20201015125057.8037-1-patrick.delaunay@st.com>
-In-Reply-To: <20201015125057.8037-1-patrick.delaunay@st.com>
+Thread-Topic: [PATCH] usb: dwc2: add "u-boot,force-vbus-detection" for stm32
+Thread-Index: AQHWovGt9Y3AMtsM/0mEkuEc2BNk0amh2EMA
+Date: Wed, 21 Oct 2020 11:46:42 +0000
+Message-ID: <d1741e28-4d96-7739-6117-656d812760c6@st.com>
+References: <20201015144856.1.I77269d852e0f410c31f9d1f869815c4328510c12@changeid>
+In-Reply-To: <20201015144856.1.I77269d852e0f410c31f9d1f869815c4328510c12@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,15 +61,16 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.50]
-Content-ID: <19274FBC6F7AC449B9592FB29BB16373@st.com>
+Content-ID: <A8BFC61E20FF87438211169A14559E8B@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
  definitions=2020-10-21_05:2020-10-20,
  2020-10-21 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH] phy: stm32: usbphyc: manage optional vbus
- regulator on phy_power_on/off
+Cc: Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] usb: dwc2: add "u-boot,
+	force-vbus-detection" for stm32
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,117 +89,128 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 10/15/20 2:50 PM, Patrick Delaunay wrote:
-> This patch adds support for optional vbus regulator.
-> It is managed on phy_power_on/off calls and may be needed for host mode.
+On 10/15/20 2:49 PM, Patrick Delaunay wrote:
+> On some board, the ID pin is not connected so the B session must be
+> overridden with "u-boot,force_b_session_valid" but the VBus sensing
+> must continue to be handle.
+>
+> To managed it, this patch adds a new DT field
+> "u-boot,force-vbus-detection" to use with "u-boot,force_b_session_valid"
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  .../phy/phy-stm32-usbphyc.txt                 |  2 ++
->  drivers/phy/phy-stm32-usbphyc.c               | 33 +++++++++++++------
->  2 files changed, 25 insertions(+), 10 deletions(-)
+>  drivers/usb/gadget/dwc2_udc_otg.c      | 59 +++++++++++++++++---------
+>  drivers/usb/gadget/dwc2_udc_otg_regs.h |  2 +
+>  include/usb/dwc2_udc.h                 |  1 +
+>  3 files changed, 41 insertions(+), 21 deletions(-)
 >
-> diff --git a/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt b/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
-> index da98407403..edfe4b426c 100644
-> --- a/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
-> +++ b/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
-> @@ -45,6 +45,8 @@ Required properties:
->  - #phy-cells: see phy-bindings.txt in the same directory, must be <0> for PHY
->    port#1 and must be <1> for PHY port#2, to select USB controller
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+> index eaa5dcb9b1..d20ce6147e 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -1014,6 +1014,9 @@ static int dwc2_udc_otg_ofdata_to_platdata(struct udevice *dev)
+>  	platdata->force_b_session_valid =
+>  		dev_read_bool(dev, "u-boot,force-b-session-valid");
 >  
-> +Optional properties:
-> +- vbus-supply: phandle to the regulator providing 5V vbus to the USB connector
->  
->  Example:
->  		usbphyc: usb-phy@5a006000 {
-> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-> index 9d4296d649..ab4a913c93 100644
-> --- a/drivers/phy/phy-stm32-usbphyc.c
-> +++ b/drivers/phy/phy-stm32-usbphyc.c
-> @@ -59,6 +59,7 @@ struct stm32_usbphyc {
->  	struct udevice *vdda1v8;
->  	struct stm32_usbphyc_phy {
->  		struct udevice *vdd;
-> +		struct udevice *vbus;
->  		bool init;
->  		bool powered;
->  	} phys[MAX_PHYS];
-> @@ -244,6 +245,11 @@ static int stm32_usbphyc_phy_power_on(struct phy *phy)
->  		if (ret)
->  			return ret;
->  	}
-> +	if (usbphyc_phy->vbus) {
-> +		ret = regulator_set_enable(usbphyc_phy->vbus, true);
-> +		if (ret)
-> +			return ret;
-> +	}
->  
->  	usbphyc_phy->powered = true;
->  
-> @@ -262,6 +268,11 @@ static int stm32_usbphyc_phy_power_off(struct phy *phy)
->  	if (stm32_usbphyc_is_powered(usbphyc))
->  		return 0;
->  
-> +	if (usbphyc_phy->vbus) {
-> +		ret = regulator_set_enable(usbphyc_phy->vbus, false);
-> +		if (ret)
-> +			return ret;
-> +	}
->  	if (usbphyc_phy->vdd) {
->  		ret = regulator_set_enable_if_allowed(usbphyc_phy->vdd, false);
->  		if (ret)
-> @@ -271,7 +282,7 @@ static int stm32_usbphyc_phy_power_off(struct phy *phy)
->  	return 0;
->  }
->  
-> -static int stm32_usbphyc_get_regulator(struct udevice *dev, ofnode node,
-> +static int stm32_usbphyc_get_regulator(ofnode node,
->  				       char *supply_name,
->  				       struct udevice **regulator)
->  {
-> @@ -281,19 +292,14 @@ static int stm32_usbphyc_get_regulator(struct udevice *dev, ofnode node,
->  	ret = ofnode_parse_phandle_with_args(node, supply_name,
->  					     NULL, 0, 0,
->  					     &regulator_phandle);
-> -	if (ret) {
-> -		dev_err(dev, "Can't find %s property (%d)\n", supply_name, ret);
-> +	if (ret)
->  		return ret;
-> -	}
->  
->  	ret = uclass_get_device_by_ofnode(UCLASS_REGULATOR,
->  					  regulator_phandle.node,
->  					  regulator);
-> -
-> -	if (ret) {
-> -		dev_err(dev, "Can't get %s regulator (%d)\n", supply_name, ret);
-> +	if (ret)
->  		return ret;
-> -	}
->  
->  	return 0;
->  }
-> @@ -380,10 +386,17 @@ static int stm32_usbphyc_probe(struct udevice *dev)
->  
->  		usbphyc_phy->init = false;
->  		usbphyc_phy->powered = false;
-> -		ret = stm32_usbphyc_get_regulator(dev, node, "phy-supply",
-> +		ret = stm32_usbphyc_get_regulator(node, "phy-supply",
->  						  &usbphyc_phy->vdd);
-> -		if (ret)
-> +		if (ret) {
-> +			dev_err(dev, "Can't get phy-supply regulator\n");
->  			return ret;
-> +		}
+> +	platdata->force_vbus_detection =
+> +		dev_read_bool(dev, "u-boot,force-vbus-detection");
 > +
-> +		ret = stm32_usbphyc_get_regulator(node, "vbus-supply",
-> +						  &usbphyc_phy->vbus);
-> +		if (ret)
-> +			usbphyc_phy->vbus = NULL;
+>  	/* force platdata according compatible */
+>  	drvdata = dev_get_driver_data(dev);
+>  	if (drvdata) {
+> @@ -1106,31 +1109,45 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
 >  
->  		node = dev_read_next_subnode(node);
+> -	if (CONFIG_IS_ENABLED(DM_REGULATOR) &&
+> -	    platdata->activate_stm_id_vb_detection &&
+> -	    !platdata->force_b_session_valid) {
+> -		ret = device_get_supply_regulator(dev, "usb33d-supply",
+> -						  &priv->usb33d_supply);
+> -		if (ret) {
+> -			dev_err(dev, "can't get voltage level detector supply\n");
+> -			return ret;
+> +	if (platdata->activate_stm_id_vb_detection) {
+> +		if (CONFIG_IS_ENABLED(DM_REGULATOR) &&
+> +		    (!platdata->force_b_session_valid ||
+> +		     platdata->force_vbus_detection)) {
+> +			ret = device_get_supply_regulator(dev, "usb33d-supply",
+> +							  &priv->usb33d_supply);
+> +			if (ret) {
+> +				dev_err(dev, "can't get voltage level detector supply\n");
+> +				return ret;
+> +			}
+> +			ret = regulator_set_enable(priv->usb33d_supply, true);
+> +			if (ret) {
+> +				dev_err(dev, "can't enable voltage level detector supply\n");
+> +				return ret;
+> +			}
+>  		}
+> -		ret = regulator_set_enable(priv->usb33d_supply, true);
+> -		if (ret) {
+> -			dev_err(dev, "can't enable voltage level detector supply\n");
+> -			return ret;
+> +
+> +		if (platdata->force_b_session_valid &&
+> +		    !platdata->force_vbus_detection) {
+> +			/* Override VBUS detection: enable then value*/
+> +			setbits_le32(&usbotg_reg->gotgctl, VB_VALOEN);
+> +			setbits_le32(&usbotg_reg->gotgctl, VB_VALOVAL);
+> +		} else {
+> +			/* Enable VBUS sensing */
+> +			setbits_le32(&usbotg_reg->ggpio,
+> +				     GGPIO_STM32_OTG_GCCFG_VBDEN);
+> +		}
+> +		if (platdata->force_b_session_valid) {
+> +			/* Override B session bits: enable then value */
+> +			setbits_le32(&usbotg_reg->gotgctl, A_VALOEN | B_VALOEN);
+> +			setbits_le32(&usbotg_reg->gotgctl,
+> +				     A_VALOVAL | B_VALOVAL);
+> +		} else {
+> +			/* Enable ID detection */
+> +			setbits_le32(&usbotg_reg->ggpio,
+> +				     GGPIO_STM32_OTG_GCCFG_IDEN);
+>  		}
+> -		/* Enable vbus sensing */
+> -		setbits_le32(&usbotg_reg->ggpio,
+> -			     GGPIO_STM32_OTG_GCCFG_VBDEN |
+> -			     GGPIO_STM32_OTG_GCCFG_IDEN);
 >  	}
+>  
+> -	if (platdata->force_b_session_valid)
+> -		/* Override B session bits : value and enable */
+> -		setbits_le32(&usbotg_reg->gotgctl,
+> -			     A_VALOEN | A_VALOVAL | B_VALOEN | B_VALOVAL);
+> -
+>  	ret = dwc2_udc_probe(platdata);
+>  	if (ret)
+>  		return ret;
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> index 2eda5c3720..9ca6f42375 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> +++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
+> @@ -94,6 +94,8 @@ struct dwc2_usbotg_reg {
+>  #define B_VALOEN			BIT(6)
+>  #define A_VALOVAL			BIT(5)
+>  #define A_VALOEN			BIT(4)
+> +#define VB_VALOVAL			BIT(3)
+> +#define VB_VALOEN			BIT(2)
+>  
+>  /* DWC2_UDC_OTG_GOTINT */
+>  #define GOTGINT_SES_END_DET		(1<<2)
+> diff --git a/include/usb/dwc2_udc.h b/include/usb/dwc2_udc.h
+> index a2af381a66..aa37e957b4 100644
+> --- a/include/usb/dwc2_udc.h
+> +++ b/include/usb/dwc2_udc.h
+> @@ -28,6 +28,7 @@ struct dwc2_plat_otg_data {
+>  	unsigned int	tx_fifo_sz_array[DWC2_MAX_HW_ENDPOINTS];
+>  	unsigned char   tx_fifo_sz_nb;
+>  	bool		force_b_session_valid;
+> +	bool		force_vbus_detection;
+>  	bool		activate_stm_id_vb_detection;
+>  };
+>  
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

@@ -2,57 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E209294C83
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 14:25:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AAEA294C88
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 14:26:09 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EA8B5C3FAE0;
-	Wed, 21 Oct 2020 12:25:53 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0CD20C3FAE0;
+	Wed, 21 Oct 2020 12:26:09 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 33B1EC3FAD5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C09B2C3FAD5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 Oct 2020 12:25:52 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Wed, 21 Oct 2020 12:26:07 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09LC85qY008925; Wed, 21 Oct 2020 14:25:51 +0200
+ 09LC7ptY002924; Wed, 21 Oct 2020 14:26:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=sLF1hz19QJcLpOJT47f8J2+D2h0/p52yAHQaCZWbaNQ=;
- b=glBch43BwabByU4Jc4cigR9ReqkBk//BWGkc4O9E3hOWglcjSGAgnOk3OfDWG08zZNJM
- mqive9hWAdddoJo9LGPFirb7bgHVfckKaKLJzYA2UCh2uktB4ryjI0W/bhWz4djyafkt
- uIr4y/nmXVauln2oNTmijXSpy6Wb9sAEEn1yOjM34OSZGjoHlI910TllFGWCJRJu8zd1
- fx/wm8F7E4Ki4lqbSpadd1oV8NhFN49Xo/0MZ+QDOwisUj61hMoHOX9+m47PCvskjUgK
- hi38kZtP0zp8PqJgdlRnOS+2ncUa11gPeypPAwjBiFeI5nL9iNyd4BlkQ20RflT52o+g mA== 
+ bh=ssfqEACGLDlA8UCNfZsvjlh8xKp/CAC4/nxJIl8oLDA=;
+ b=ANJ1hdWC1Yjsavb6QXktZq0HgDcSuHzt/jCe8MNz5STShXW1YMvpT08iO7rT9buvHj2y
+ QD87dEy5aGUttk0dKf99WCcEAaTUKqbTu772MDGvCjIENXUweuhxMvugy2xTy/3QiwVp
+ lwUFqPQ50805BotptEIqb6IJa6/MKrT/zYOiNI9DWgJFECaP7oTxVOQJye4miAkSZUDk
+ OdBaHygWoltAKuZoaCSnJVQyhBL2dpl0dIStYqeucFyre/pMoZx3Ar1sELcJiPc5jgTd
+ 6YCuRSvv5P8DspAtIfTDNJwhSfpxqGArFYfXrA4rhsPXmOHVGh9nG5jo0r+dKddZZsk3 /g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 347p30t2c3-1
+ by mx07-00178001.pphosted.com with ESMTP id 347qggahjf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 Oct 2020 14:25:51 +0200
+ Wed, 21 Oct 2020 14:26:03 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B7E7D10002A;
- Wed, 21 Oct 2020 14:25:50 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AC7EF2E8451;
- Wed, 21 Oct 2020 14:25:50 +0200 (CEST)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
- 2020 14:25:50 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CDC58100034;
+ Wed, 21 Oct 2020 14:26:02 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node1.st.com [10.75.127.4])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C34A02E8451;
+ Wed, 21 Oct 2020 14:26:02 +0200 (CEST)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE1.st.com
+ (10.75.127.4) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
+ 2020 14:26:02 +0200
 Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
  SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 21 Oct 2020 14:25:50 +0200
+ 15.00.1473.003; Wed, 21 Oct 2020 14:26:02 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 08/33] ram: stm32mp1: migrate trace to dev or log macro
-Thread-Index: AQHWogrDSDG2voSRtkC96mRSGPpGQKmh5P6A
-Date: Wed, 21 Oct 2020 12:25:50 +0000
-Message-ID: <badad215-3b9b-bc69-2cb3-03d2dfed32c0@st.com>
+Thread-Topic: [PATCH 09/33] mmc: stm32_sdmmc2: migrate trace to dev and log
+ macro
+Thread-Index: AQHWogrDtuBEr4UssU6a8jY6GAhtZqmh5Q2A
+Date: Wed, 21 Oct 2020 12:26:02 +0000
+Message-ID: <9f95954d-5cf6-5da6-e0c2-b935f54373f0@st.com>
 References: <20201014091646.4233-1-patrick.delaunay@st.com>
- <20201014091646.4233-9-patrick.delaunay@st.com>
-In-Reply-To: <20201014091646.4233-9-patrick.delaunay@st.com>
+ <20201014091646.4233-10-patrick.delaunay@st.com>
+In-Reply-To: <20201014091646.4233-10-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -62,14 +63,15 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.44]
-Content-ID: <7458A72C7BB43D489149B180F7844C70@st.com>
+Content-ID: <3A4168643806544D947B3E3F324BA334@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
  definitions=2020-10-21_05:2020-10-20,
  2020-10-21 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 08/33] ram: stm32mp1: migrate trace to dev
-	or log macro
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH 09/33] mmc: stm32_sdmmc2: migrate trace to
+ dev and log macro
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,657 +91,265 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Patrick
 
 On 10/14/20 11:16 AM, Patrick Delaunay wrote:
-> Define LOG_CATEGORY, use dev_ macro when it is possible
-> and migrate other trace to log_ macro.
+> Define LOG_CATEGORY, use dev_ macro when it is possible.
+> Remove the "%s:" __func__  header as it is managed by dev macro
+> (dev->name is displayed) or log macro (CONFIG_LOGF_FUNC).
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  drivers/ram/stm32mp1/stm32mp1_ddr.c         |  36 +++---
->  drivers/ram/stm32mp1/stm32mp1_interactive.c |   4 +-
->  drivers/ram/stm32mp1/stm32mp1_ram.c         |  37 +++---
->  drivers/ram/stm32mp1/stm32mp1_tests.c       |  19 +--
->  drivers/ram/stm32mp1/stm32mp1_tuning.c      | 124 ++++++++++----------
->  5 files changed, 116 insertions(+), 104 deletions(-)
+>  drivers/mmc/stm32_sdmmc2.c | 85 ++++++++++++++++++++------------------
+>  1 file changed, 44 insertions(+), 41 deletions(-)
 >
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> index bf3a4c97a4..0457166b12 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> @@ -3,6 +3,8 @@
->   * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
+> index 6d50356217..483660c9d3 100644
+> --- a/drivers/mmc/stm32_sdmmc2.c
+> +++ b/drivers/mmc/stm32_sdmmc2.c
+> @@ -4,6 +4,8 @@
+>   * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
 >   */
 >  
-> +#define LOG_CATEGORY UCLASS_RAM
+> +#define LOG_CATEGORY UCLASS_MMC
 > +
 >  #include <common.h>
 >  #include <clk.h>
->  #include <log.h>
-> @@ -311,17 +313,17 @@ static void set_reg(const struct ddr_info *priv,
->  	u32 base_addr = get_base_addr(priv, base);
->  	const struct reg_desc *desc = ddr_registers[type].desc;
+>  #include <cpu_func.h>
+> @@ -200,10 +202,11 @@ struct stm32_sdmmc2_ctx {
+>  #define SDMMC_CMD_TIMEOUT		0xFFFFFFFF
+>  #define SDMMC_BUSYD0END_TIMEOUT_US	2000000
 >  
-> -	debug("init %s\n", ddr_registers[type].name);
-> +	log_debug("init %s\n", ddr_registers[type].name);
->  	for (i = 0; i < ddr_registers[type].size; i++) {
->  		ptr = (unsigned int *)(base_addr + desc[i].offset);
->  		if (desc[i].par_offset == INVALID_OFFSET) {
-> -			pr_err("invalid parameter offset for %s", desc[i].name);
-> +			log_err("invalid parameter offset for %s", desc[i].name);
->  		} else {
->  			value = *((u32 *)((u32)param +
->  					       desc[i].par_offset));
->  			writel(value, ptr);
-> -			debug("[0x%x] %s= 0x%08x\n",
-> -			      (u32)ptr, desc[i].name, value);
-> +			log_debug("[0x%x] %s= 0x%08x\n",
-> +				  (u32)ptr, desc[i].name, value);
->  		}
->  	}
->  }
-> @@ -564,16 +566,16 @@ static void ddrphy_idone_wait(struct stm32mp1_ddrphy *phy)
->  					 DDRPHYC_PGSR_RVERR |
->  					 DDRPHYC_PGSR_RVEIRR),
->  				1000000);
-> -	debug("\n[0x%08x] pgsr = 0x%08x ret=%d\n",
-> -	      (u32)&phy->pgsr, pgsr, ret);
-> +	log_debug("\n[0x%08x] pgsr = 0x%08x ret=%d\n",
-> +		  (u32)&phy->pgsr, pgsr, ret);
->  }
->  
->  void stm32mp1_ddrphy_init(struct stm32mp1_ddrphy *phy, u32 pir)
+> -static void stm32_sdmmc2_start_data(struct stm32_sdmmc2_priv *priv,
+> +static void stm32_sdmmc2_start_data(struct udevice *dev,
+>  				    struct mmc_data *data,
+>  				    struct stm32_sdmmc2_ctx *ctx)
 >  {
->  	pir |= DDRPHYC_PIR_INIT;
->  	writel(pir, &phy->pir);
-> -	debug("[0x%08x] pir = 0x%08x -> 0x%08x\n",
-> -	      (u32)&phy->pir, pir, readl(&phy->pir));
-> +	log_debug("[0x%08x] pir = 0x%08x -> 0x%08x\n",
-> +		  (u32)&phy->pir, pir, readl(&phy->pir));
+> +	struct stm32_sdmmc2_priv *priv = dev_get_priv(dev);
+>  	u32 data_ctrl, idmabase0;
 >  
->  	/* need to wait 10 configuration clock before start polling */
->  	udelay(10);
-> @@ -603,7 +605,7 @@ static void wait_sw_done_ack(struct stm32mp1_ddrctl *ctl)
->  		panic("Timeout initialising DRAM : DDR->swstat = %x\n",
->  		      swstat);
->  
-> -	debug("[0x%08x] swstat = 0x%08x\n", (u32)&ctl->swstat, swstat);
-> +	log_debug("[0x%08x] swstat = 0x%08x\n", (u32)&ctl->swstat, swstat);
+>  	/* Configure the SDMMC DPSM (Data Path State Machine) */
+> @@ -241,10 +244,11 @@ static void stm32_sdmmc2_start_data(struct stm32_sdmmc2_priv *priv,
+>  	writel(SDMMC_IDMACTRL_IDMAEN, priv->base + SDMMC_IDMACTRL);
 >  }
 >  
->  /* wait quasi dynamic register update */
-> @@ -634,7 +636,7 @@ static void wait_operating_mode(struct ddr_info *priv, int mode)
->  	if (ret)
->  		panic("Timeout DRAM : DDR->stat = %x\n", stat);
+> -static void stm32_sdmmc2_start_cmd(struct stm32_sdmmc2_priv *priv,
+> +static void stm32_sdmmc2_start_cmd(struct udevice *dev,
+>  				   struct mmc_cmd *cmd, u32 cmd_param,
+>  				   struct stm32_sdmmc2_ctx *ctx)
+>  {
+> +	struct stm32_sdmmc2_priv *priv = dev_get_priv(dev);
+>  	u32 timeout = 0;
 >  
-> -	debug("[0x%08x] stat = 0x%08x\n", (u32)&priv->ctl->stat, stat);
-> +	log_debug("[0x%08x] stat = 0x%08x\n", (u32)&priv->ctl->stat, stat);
+>  	if (readl(priv->base + SDMMC_CMD) & SDMMC_CMD_CPSMEN)
+> @@ -290,10 +294,11 @@ static void stm32_sdmmc2_start_cmd(struct stm32_sdmmc2_priv *priv,
+>  	writel(cmd_param, priv->base + SDMMC_CMD);
 >  }
 >  
->  void stm32mp1_refresh_disable(struct stm32mp1_ddrctl *ctl)
-> @@ -706,9 +708,9 @@ void stm32mp1_ddr_init(struct ddr_info *priv,
->  		panic("ddr power init failed\n");
->  
->  start:
-> -	debug("name = %s\n", config->info.name);
-> -	debug("speed = %d kHz\n", config->info.speed);
-> -	debug("size  = 0x%x\n", config->info.size);
-> +	log_debug("name = %s\n", config->info.name);
-> +	log_debug("speed = %d kHz\n", config->info.speed);
-> +	log_debug("size  = 0x%x\n", config->info.size);
->  /*
->   * 1. Program the DWC_ddr_umctl2 registers
->   * 1.1 RESETS: presetn, core_ddrc_rstn, aresetn
-> @@ -745,8 +747,8 @@ start:
->  /* 1.5. initialize registers ddr_umctl2 */
->  	/* Stop uMCTL2 before PHY is ready */
->  	clrbits_le32(&priv->ctl->dfimisc, DDRCTRL_DFIMISC_DFI_INIT_COMPLETE_EN);
-> -	debug("[0x%08x] dfimisc = 0x%08x\n",
-> -	      (u32)&priv->ctl->dfimisc, readl(&priv->ctl->dfimisc));
-> +	log_debug("[0x%08x] dfimisc = 0x%08x\n",
-> +		  (u32)&priv->ctl->dfimisc, readl(&priv->ctl->dfimisc));
->  
->  	set_reg(priv, REG_REG, &config->c_reg);
->  	set_reg(priv, REG_TIMING, &config->c_timing);
-> @@ -809,9 +811,9 @@ start:
->  	wait_operating_mode(priv, DDRCTRL_STAT_OPERATING_MODE_NORMAL);
->  
->  	if (config->p_cal_present) {
-> -		debug("DDR DQS training skipped.\n");
-> +		log_debug("DDR DQS training skipped.\n");
->  	} else {
-> -		debug("DDR DQS training : ");
-> +		log_debug("DDR DQS training : ");
->  /*  8. Disable Auto refresh and power down by setting
->   *    - RFSHCTL3.dis_au_refresh = 1
->   *    - PWRCTL.powerdown_en = 0
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> index 38390c0d55..b86eb268e9 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
-> @@ -3,6 +3,8 @@
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   */
->  
-> +#define LOG_CATEGORY UCLASS_RAM
-> +
->  #include <common.h>
->  #include <command.h>
->  #include <console.h>
-> @@ -404,7 +406,7 @@ bool stm32mp1_ddr_interactive(void *priv,
->  #endif
->  	}
->  
-> -	debug("** step %d ** %s / %d\n", step, step_str[step], next_step);
-> +	log_debug("** step %d ** %s / %d\n", step, step_str[step], next_step);
->  
->  	if (next_step < 0)
->  		return false;
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> index 9022679703..decc700c16 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> @@ -3,6 +3,8 @@
->   * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
->   */
->  
-> +#define LOG_CATEGORY UCLASS_RAM
-> +
->  #include <common.h>
->  #include <clk.h>
->  #include <dm.h>
-> @@ -37,7 +39,7 @@ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
->  			ret = clk_enable(&clk);
->  
->  		if (ret) {
-> -			printf("error for %s : %d\n", clkname[idx], ret);
-> +			log_err("error for %s : %d\n", clkname[idx], ret);
->  			return ret;
->  		}
->  	}
-> @@ -45,13 +47,13 @@ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
->  	priv->clk = clk;
->  	ddrphy_clk = clk_get_rate(&priv->clk);
->  
-> -	debug("DDR: mem_speed (%d kHz), RCC %d kHz\n",
-> -	      mem_speed, (u32)(ddrphy_clk / 1000));
-> +	log_debug("DDR: mem_speed (%d kHz), RCC %d kHz\n",
-> +		  mem_speed, (u32)(ddrphy_clk / 1000));
->  	/* max 10% frequency delta */
->  	ddr_clk = abs(ddrphy_clk - mem_speed * 1000);
->  	if (ddr_clk > (mem_speed * 100)) {
-> -		pr_err("DDR expected freq %d kHz, current is %d kHz\n",
-> -		       mem_speed, (u32)(ddrphy_clk / 1000));
-> +		log_err("DDR expected freq %d kHz, current is %d kHz\n",
-> +			mem_speed, (u32)(ddrphy_clk / 1000));
->  		return -EINVAL;
->  	}
->  
-> @@ -118,7 +120,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
->  	config.info.size = ofnode_read_u32_default(node, "st,mem-size", 0);
->  	config.info.name = ofnode_read_string(node, "st,mem-name");
->  	if (!config.info.name) {
-> -		debug("%s: no st,mem-name\n", __func__);
-> +		dev_dbg(dev, "no st,mem-name\n");
->  		return -EINVAL;
->  	}
->  	printf("RAM: %s\n", config.info.name);
-> @@ -128,12 +130,12 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
->  					 (void *)((u32)&config +
->  						  param[idx].offset),
->  					 param[idx].size);
-> -		debug("%s: %s[0x%x] = %d\n", __func__,
-> -		      param[idx].name, param[idx].size, ret);
-> +		dev_dbg(dev, "%s: %s[0x%x] = %d\n", __func__,
-> +			param[idx].name, param[idx].size, ret);
->  		if (ret &&
->  		    (ret != -FDT_ERR_NOTFOUND || !param[idx].present)) {
-> -			pr_err("%s: Cannot read %s, error=%d\n",
-> -			       __func__, param[idx].name, ret);
-> +			dev_err(dev, "Cannot read %s, error=%d\n",
-> +				param[idx].name, ret);
->  			return -EINVAL;
->  		}
->  		if (param[idx].present) {
-> @@ -153,7 +155,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
->  
->  	ret = clk_get_by_name(dev, "axidcg", &axidcg);
->  	if (ret) {
-> -		debug("%s: Cannot found axidcg\n", __func__);
-> +		dev_dbg(dev, "%s: Cannot found axidcg\n", __func__);
->  		return -EINVAL;
->  	}
->  	clk_disable(&axidcg); /* disable clock gating during init */
-> @@ -163,13 +165,13 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
->  	clk_enable(&axidcg); /* enable clock gating */
->  
->  	/* check size */
-> -	debug("%s : get_ram_size(%x, %x)\n", __func__,
-> -	      (u32)priv->info.base, (u32)STM32_DDR_SIZE);
-> +	dev_dbg(dev, "get_ram_size(%x, %x)\n",
-> +		(u32)priv->info.base, (u32)STM32_DDR_SIZE);
->  
->  	priv->info.size = get_ram_size((long *)priv->info.base,
->  				       STM32_DDR_SIZE);
->  
-> -	debug("%s : %x\n", __func__, (u32)priv->info.size);
-> +	dev_dbg(dev, "info.size: %x\n", (u32)priv->info.size);
->  
->  	/* check memory access for all memory */
->  	if (config.info.size != priv->info.size) {
-> @@ -186,12 +188,11 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
->  	struct regmap *map;
+> -static int stm32_sdmmc2_end_cmd(struct stm32_sdmmc2_priv *priv,
+> +static int stm32_sdmmc2_end_cmd(struct udevice *dev,
+>  				struct mmc_cmd *cmd,
+>  				struct stm32_sdmmc2_ctx *ctx)
+>  {
+> +	struct stm32_sdmmc2_priv *priv = dev_get_priv(dev);
+>  	u32 mask = SDMMC_STA_CTIMEOUT;
+>  	u32 status;
 >  	int ret;
+> @@ -311,22 +316,22 @@ static int stm32_sdmmc2_end_cmd(struct stm32_sdmmc2_priv *priv,
+>  				 10000);
 >  
-> -	debug("STM32MP1 DDR probe\n");
->  	priv->dev = dev;
->  
->  	ret = regmap_init_mem(dev_ofnode(dev), &map);
->  	if (ret)
-> -		return ret;
-> +		return log_ret(ret);
->  
->  	priv->ctl = regmap_get_range(map, 0);
->  	priv->phy = regmap_get_range(map, 1);
-> @@ -203,7 +204,9 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
->  #if !defined(CONFIG_TFABOOT) && \
->  	(!defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD))
->  	priv->info.size = 0;
-> -	return stm32mp1_ddr_setup(dev);
-> +	ret = stm32mp1_ddr_setup(dev);
-> +
-> +	return log_ret(ret);
->  #else
->  	ofnode node = stm32mp1_ddr_get_ofnode(dev);
->  	priv->info.size = ofnode_read_u32_default(node, "st,mem-size", 0);
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_tests.c b/drivers/ram/stm32mp1/stm32mp1_tests.c
-> index 952006aa14..1fcc7cfd69 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_tests.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_tests.c
-> @@ -2,6 +2,9 @@
->  /*
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   */
-> +
-> +#define LOG_CATEGORY UCLASS_RAM
-> +
->  #include <common.h>
->  #include <console.h>
->  #include <init.h>
-> @@ -197,8 +200,8 @@ static u32 databus(u32 *address)
->  
->  		/* Read it back (immediately is okay for this test). */
->  		read_value = readl(address);
-> -		debug("%x: %x <=> %x\n",
-> -		      (u32)address, read_value, pattern);
-> +		log_debug("%x: %x <=> %x\n",
-> +			  (u32)address, read_value, pattern);
->  
->  		if (read_value != pattern)
->  			return pattern;
-> @@ -252,8 +255,8 @@ static u32 *addressbus(u32 *address, u32 nb_bytes)
->  
->  	for (offset = 1; (offset & mask) != 0; offset <<= 1) {
->  		read_value = readl(&address[offset]);
-> -		debug("%x: %x <=> %x\n",
-> -		      (u32)&address[offset], read_value, pattern);
-> +		log_debug("%x: %x <=> %x\n",
-> +			  (u32)&address[offset], read_value, pattern);
->  		if (read_value != pattern)
->  			return &address[offset];
+>  	if (ret < 0) {
+> -		debug("%s: timeout reading SDMMC_STA register\n", __func__);
+> +		dev_dbg(dev, "timeout reading SDMMC_STA register\n");
+>  		ctx->dpsm_abort = true;
+>  		return ret;
 >  	}
-> @@ -363,8 +366,8 @@ static enum test_result databuswalk0(struct stm32mp1_ddrctl *ctl,
->  			data = readl(addr + 4 * i);
->  			if (~(1 << i) !=  data) {
->  				error |= 1 << i;
-> -				debug("%x: error %x expected %x => error:%x\n",
-> -				      addr + 4 * i, data, ~(1 << i), error);
-> +				log_debug("%x: error %x expected %x => error:%x\n",
-> +					  addr + 4 * i, data, ~(1 << i), error);
->  			}
->  		}
->  		if (test_loop_end(&loop, nb_loop, 1000))
-> @@ -403,8 +406,8 @@ static enum test_result databuswalk1(struct stm32mp1_ddrctl *ctl,
->  			data = readl(addr + 4 * i);
->  			if ((1 << i) !=  data) {
->  				error |= 1 << i;
-> -				debug("%x: error %x expected %x => error:%x\n",
-> -				      addr + 4 * i, data, (1 << i), error);
-> +				log_debug("%x: error %x expected %x => error:%x\n",
-> +					  addr + 4 * i, data, (1 << i), error);
->  			}
->  		}
->  		if (test_loop_end(&loop, nb_loop, 1000))
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_tuning.c b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> index a8d6892bb0..c8cd7c3cea 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_tuning.c
-> @@ -2,6 +2,9 @@
->  /*
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   */
-> +
-> +#define LOG_CATEGORY UCLASS_RAM
-> +
->  #include <common.h>
->  #include <console.h>
->  #include <clk.h>
-> @@ -227,8 +230,7 @@ static u8 DQ_unit_index(struct stm32mp1_ddrphy *phy, u8 byte, u8 bit)
->  	index = (readl(addr) >> DDRPHYC_DXNDQTR_DQDLY_SHIFT(bit))
->  		& DDRPHYC_DXNDQTR_DQDLY_LOW_MASK;
 >  
-> -	pr_debug("%s: [%x]: %x => DQ unit index = %x\n",
-> -		 __func__, addr, readl(addr), index);
-> +	log_debug("[%x]: %x => DQ unit index = %x\n", addr, readl(addr), index);
+>  	/* Check status */
+>  	if (status & SDMMC_STA_CTIMEOUT) {
+> -		debug("%s: error SDMMC_STA_CTIMEOUT (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_CTIMEOUT (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -ETIMEDOUT;
+>  	}
 >  
->  	return index;
+>  	if (status & SDMMC_STA_CCRCFAIL && cmd->resp_type & MMC_RSP_CRC) {
+> -		debug("%s: error SDMMC_STA_CCRCFAIL (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_CCRCFAIL (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -EILSEQ;
+>  	}
+> @@ -350,15 +355,15 @@ static int stm32_sdmmc2_end_cmd(struct stm32_sdmmc2_priv *priv,
+>  						 SDMMC_BUSYD0END_TIMEOUT_US);
+>  
+>  			if (ret < 0) {
+> -				debug("%s: timeout reading SDMMC_STA\n",
+> -				      __func__);
+> +				dev_dbg(dev, "timeout reading SDMMC_STA\n");
+>  				ctx->dpsm_abort = true;
+>  				return ret;
+>  			}
+>  
+>  			if (status & SDMMC_STA_DTIMEOUT) {
+> -				debug("%s: error SDMMC_STA_DTIMEOUT (0x%x)\n",
+> -				      __func__, status);
+> +				dev_dbg(dev,
+> +					"error SDMMC_STA_DTIMEOUT (0x%x)\n",
+> +					status);
+>  				ctx->dpsm_abort = true;
+>  				return -ETIMEDOUT;
+>  			}
+> @@ -368,11 +373,12 @@ static int stm32_sdmmc2_end_cmd(struct stm32_sdmmc2_priv *priv,
+>  	return 0;
 >  }
-> @@ -470,13 +472,13 @@ static void apply_deskew_results(struct stm32mp1_ddrphy *phy, u8 byte,
->  	for (bit_i = 0; bit_i < 8; bit_i++) {
->  		set_DQ_unit_delay(phy, byte, bit_i, deskew_delay[byte][bit_i]);
->  		index = DQ_unit_index(phy, byte, bit_i);
-> -		pr_debug("Byte %d ; bit %d : The new DQ delay (%d) index=%d [delta=%d, 3 is the default]",
-> -			 byte, bit_i, deskew_delay[byte][bit_i],
-> -			 index, index - 3);
-> +		log_debug("Byte %d ; bit %d : The new DQ delay (%d) index=%d [delta=%d, 3 is the default]",
-> +			  byte, bit_i, deskew_delay[byte][bit_i],
-> +			  index, index - 3);
->  		printf("Byte %d, bit %d, DQ delay = %d",
->  		       byte, bit_i, deskew_delay[byte][bit_i]);
->  		if (deskew_non_converge[byte][bit_i] == 1)
-> -			pr_debug(" - not converged : still more skew");
-> +			log_debug(" - not converged : still more skew");
->  		printf("\n");
+>  
+> -static int stm32_sdmmc2_end_data(struct stm32_sdmmc2_priv *priv,
+> +static int stm32_sdmmc2_end_data(struct udevice *dev,
+>  				 struct mmc_cmd *cmd,
+>  				 struct mmc_data *data,
+>  				 struct stm32_sdmmc2_ctx *ctx)
+>  {
+> +	struct stm32_sdmmc2_priv *priv = dev_get_priv(dev);
+>  	u32 mask = SDMMC_STA_DCRCFAIL | SDMMC_STA_DTIMEOUT |
+>  		   SDMMC_STA_IDMATE | SDMMC_STA_DATAEND;
+>  	u32 status;
+> @@ -394,37 +400,37 @@ static int stm32_sdmmc2_end_data(struct stm32_sdmmc2_priv *priv,
+>  		invalidate_dcache_range(ctx->cache_start, ctx->cache_end);
+>  
+>  	if (status & SDMMC_STA_DCRCFAIL) {
+> -		debug("%s: error SDMMC_STA_DCRCFAIL (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_DCRCFAIL (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		if (readl(priv->base + SDMMC_DCOUNT))
+>  			ctx->dpsm_abort = true;
+>  		return -EILSEQ;
 >  	}
+>  
+>  	if (status & SDMMC_STA_DTIMEOUT) {
+> -		debug("%s: error SDMMC_STA_DTIMEOUT (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_DTIMEOUT (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -ETIMEDOUT;
+>  	}
+>  
+>  	if (status & SDMMC_STA_TXUNDERR) {
+> -		debug("%s: error SDMMC_STA_TXUNDERR (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_TXUNDERR (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -EIO;
+>  	}
+>  
+>  	if (status & SDMMC_STA_RXOVERR) {
+> -		debug("%s: error SDMMC_STA_RXOVERR (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_RXOVERR (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -EIO;
+>  	}
+>  
+>  	if (status & SDMMC_STA_IDMATE) {
+> -		debug("%s: error SDMMC_STA_IDMATE (0x%x) for cmd %d\n",
+> -		      __func__, status, cmd->cmdidx);
+> +		dev_dbg(dev, "error SDMMC_STA_IDMATE (0x%x) for cmd %d\n",
+> +			status, cmd->cmdidx);
+>  		ctx->dpsm_abort = true;
+>  		return -EIO;
+>  	}
+> @@ -448,19 +454,18 @@ retry_cmd:
+>  
+>  	if (data) {
+>  		ctx.data_length = data->blocks * data->blocksize;
+> -		stm32_sdmmc2_start_data(priv, data, &ctx);
+> +		stm32_sdmmc2_start_data(dev, data, &ctx);
+>  	}
+>  
+> -	stm32_sdmmc2_start_cmd(priv, cmd, cmdat, &ctx);
+> +	stm32_sdmmc2_start_cmd(dev, cmd, cmdat, &ctx);
+>  
+> -	debug("%s: send cmd %d data: 0x%x @ 0x%x\n",
+> -	      __func__, cmd->cmdidx,
+> -	      data ? ctx.data_length : 0, (unsigned int)data);
+> +	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%x\n",
+> +		cmd->cmdidx, data ? ctx.data_length : 0, (unsigned int)data);
+>  
+> -	ret = stm32_sdmmc2_end_cmd(priv, cmd, &ctx);
+> +	ret = stm32_sdmmc2_end_cmd(dev, cmd, &ctx);
+>  
+>  	if (data && !ret)
+> -		ret = stm32_sdmmc2_end_data(priv, cmd, data, &ctx);
+> +		ret = stm32_sdmmc2_end_data(dev, cmd, data, &ctx);
+>  
+>  	/* Clear flags */
+>  	writel(SDMMC_ICR_STATIC_FLAGS, priv->base + SDMMC_ICR);
+> @@ -478,26 +483,24 @@ retry_cmd:
+>  		stop_cmd.cmdarg = 0;
+>  		stop_cmd.resp_type = MMC_RSP_R1b;
+>  
+> -		debug("%s: send STOP command to abort dpsm treatments\n",
+> -		      __func__);
+> +		dev_dbg(dev, "send STOP command to abort dpsm treatments\n");
+>  
+>  		ctx.data_length = 0;
+>  
+> -		stm32_sdmmc2_start_cmd(priv, &stop_cmd,
+> +		stm32_sdmmc2_start_cmd(dev, &stop_cmd,
+>  				       SDMMC_CMD_CMDSTOP, &ctx);
+> -		stm32_sdmmc2_end_cmd(priv, &stop_cmd, &ctx);
+> +		stm32_sdmmc2_end_cmd(dev, &stop_cmd, &ctx);
+>  
+>  		writel(SDMMC_ICR_STATIC_FLAGS, priv->base + SDMMC_ICR);
+>  	}
+>  
+>  	if ((ret != -ETIMEDOUT) && (ret != 0) && retry) {
+> -		printf("%s: cmd %d failed, retrying ...\n",
+> -		       __func__, cmd->cmdidx);
+> +		dev_err(dev, "cmd %d failed, retrying ...\n", cmd->cmdidx);
+>  		retry--;
+>  		goto retry_cmd;
+>  	}
+>  
+> -	debug("%s: end for CMD %d, ret = %d\n", __func__, cmd->cmdidx, ret);
+> +	dev_dbg(dev, "end for CMD %d, ret = %d\n", cmd->cmdidx, ret);
+>  
+>  	return ret;
 >  }
-> @@ -536,7 +538,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+> @@ -579,8 +582,8 @@ static int stm32_sdmmc2_set_ios(struct udevice *dev)
+>  	u32 sys_clock = clk_get_rate(&priv->clk);
+>  	u32 clk = 0;
 >  
->  	/* Config the BIST block */
->  	config_BIST(ctl, phy);
-> -	pr_debug("BIST Config done.\n");
-> +	log_debug("BIST Config done.\n");
+> -	debug("%s: bus_with = %d, clock = %d\n", __func__,
+> -	      mmc->bus_width, mmc->clock);
+> +	dev_dbg(dev, "bus_with = %d, clock = %d\n",
+> +		mmc->bus_width, mmc->clock);
 >  
->  	/* Train each byte */
->  	for (datx8 = 0; datx8 < nb_bytes; datx8++) {
-> @@ -545,9 +547,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  				datx8 + 1, nb_bytes, error);
->  			return TEST_FAILED;
->  		}
-> -		pr_debug("\n======================\n");
-> -		pr_debug("Start deskew byte %d .\n", datx8);
-> -		pr_debug("======================\n");
-> +		log_debug("\n======================\n");
-> +		log_debug("Start deskew byte %d .\n", datx8);
-> +		log_debug("======================\n");
->  		/* Enable Byte (DXNGCR, bit DXEN) */
->  		setbits_le32(DXNGCR(phy, datx8), DDRPHYC_DXNGCR_DXEN);
+>  	if (mmc->clk_disable)
+>  		stm32_sdmmc2_pwrcycle(priv);
+> @@ -616,7 +619,7 @@ static int stm32_sdmmc2_getcd(struct udevice *dev)
+>  {
+>  	struct stm32_sdmmc2_priv *priv = dev_get_priv(dev);
 >  
-> @@ -584,7 +586,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  		 * Else, look for Pass init condition
->  		 */
->  		if (!success) {
-> -			pr_debug("Fail at init condtion. Let's look for a good init condition.\n");
-> +			log_debug("Fail at init condtion. Let's look for a good init condition.\n");
->  			success = 0; /* init */
->  			/* Make sure we start with a PASS condition before
->  			 * looking for a fail condition.
-> @@ -592,7 +594,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  			 */
+> -	debug("stm32_sdmmc2_getcd called\n");
+> +	dev_dbg(dev, "%s called\n", __func__);
 >  
->  			/* escape if we find a PASS */
-> -			pr_debug("increase Phase idx\n");
-> +			log_debug("increase Phase idx\n");
->  			while (!success && (phase_idx <= MAX_DQS_PHASE_IDX)) {
->  				DQS_phase_delay(phy, datx8, phase_idx);
->  				BIST_test(phy, datx8, &result);
-> @@ -618,7 +620,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  			 * we have hold violation, lets try reduce DQS_unit
->  			 * Delay
->  			 */
-> -			pr_debug("Still fail. Try decrease DQS Unit delay\n");
-> +			log_debug("Still fail. Try decrease DQS Unit delay\n");
->  
->  			phase_idx = 0;
->  			dqs_unit_delay_index = 0;
-> @@ -665,9 +667,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  			return TEST_FAILED;
->  		}
->  
-> -		pr_debug("there is a pass region for phase idx %d\n",
-> -			 phase_idx);
-> -		pr_debug("Step1: Find the first failing condition\n");
-> +		log_debug("there is a pass region for phase idx %d\n",
-> +			  phase_idx);
-> +		log_debug("Step1: Find the first failing condition\n");
->  		/* Look for the first failing condition by PHASE stepping.
->  		 * This part of the algo can finish without converging.
->  		 */
-> @@ -692,9 +694,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  		 * stepping (minimal delay)
->  		 */
->  		if (!success) {
-> -			pr_debug("Fail region (PHASE) found phase idx %d\n",
-> -				 phase_idx);
-> -			pr_debug("Let's look for first success by DQS Unit steps\n");
-> +			log_debug("Fail region (PHASE) found phase idx %d\n",
-> +				  phase_idx);
-> +			log_debug("Let's look for first success by DQS Unit steps\n");
->  			/* This part, the algo always converge */
->  			phase_idx--;
->  
-> @@ -721,7 +723,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  				/*+1 to get back to current condition */
->  				last_right_ok.unit = dqs_unit_delay_index + 1;
->  				last_right_ok.bits_delay = 0xFFFFFFFF;
-> -				pr_debug("Found %d\n", dqs_unit_delay_index);
-> +				log_debug("Found %d\n", dqs_unit_delay_index);
->  			} else {
->  				/* the last OK condition is then with the
->  				 * previous phase_idx.
-> @@ -735,8 +737,8 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  				 */
->  				last_right_ok.unit = 1;
->  				last_right_ok.bits_delay = 0xFFFFFFFF;
-> -				pr_debug("Not Found : try previous phase %d\n",
-> -					 phase_idx - 1);
-> +				log_debug("Not Found : try previous phase %d\n",
-> +					  phase_idx - 1);
->  
->  				DQS_phase_delay(phy, datx8, phase_idx - 1);
->  				dqs_unit_delay_index = 0;
-> @@ -749,8 +751,8 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  					BIST_test(phy, datx8, &result);
->  					success = result.test_result;
->  					dqs_unit_delay_index++;
-> -					pr_debug("dqs_unit_delay_index = %d, result = %d\n",
-> -						 dqs_unit_delay_index, success);
-> +					log_debug("dqs_unit_delay_index = %d, result = %d\n",
-> +						  dqs_unit_delay_index, success);
->  				}
->  
->  				if (!success) {
-> @@ -758,7 +760,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  						 dqs_unit_delay_index - 1;
->  				} else {
->  					last_right_ok.unit = 0;
-> -					pr_debug("ERROR: failed region not FOUND");
-> +					log_debug("ERROR: failed region not FOUND");
->  				}
->  			}
->  		} else {
-> @@ -775,7 +777,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  			last_right_ok.phase = MAX_DQS_PHASE_IDX;
->  			last_right_ok.unit = MAX_DQS_UNIT_IDX;
->  			last_right_ok.bits_delay = 0xFFFFFFFF;
-> -			pr_debug("Can't find the a fail condition\n");
-> +			log_debug("Can't find the a fail condition\n");
->  		}
->  
->  		/* step 2:
-> @@ -787,9 +789,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  		 */
->  		printf("Byte %d, DQS unit = %d, phase = %d\n",
->  		       datx8, last_right_ok.unit, last_right_ok.phase);
-> -		pr_debug("Step2, unit = %d, phase = %d, bits delay=%x\n",
-> -			 last_right_ok.unit, last_right_ok.phase,
-> -			 last_right_ok.bits_delay);
-> +		log_debug("Step2, unit = %d, phase = %d, bits delay=%x\n",
-> +			  last_right_ok.unit, last_right_ok.phase,
-> +			  last_right_ok.bits_delay);
->  
->  		/* Restore the last_right_ok condtion. */
->  		DQS_unit_delay(phy, datx8, last_right_ok.unit);
-> @@ -812,7 +814,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  					datx8 + 1, nb_bytes, error);
->  				return error;
->  			}
-> -			pr_debug("deskewing bit %d:\n", bit_i);
-> +			log_debug("deskewing bit %d:\n", bit_i);
->  			success = 1; /* init */
->  			/* Set all DQDLYn to maximum value.
->  			 * Only bit_i will be down-delayed
-> @@ -855,10 +857,10 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  				 * at one bit.
->  				 */
->  				fail_found = 1;
-> -				pr_debug("Fail found on bit %d, for delay = %d => deskew[%d][%d] = %d\n",
-> -					 bit_i, bit_i_delay_index + 1,
-> -					 datx8, bit_i,
-> -					 deskew_delay[datx8][bit_i]);
-> +				log_debug("Fail found on bit %d, for delay = %d => deskew[%d][%d] = %d\n",
-> +					  bit_i, bit_i_delay_index + 1,
-> +					  datx8, bit_i,
-> +					  deskew_delay[datx8][bit_i]);
->  			} else {
->  				/* if we can find a success condition by
->  				 * back-delaying this bit, just set the delay
-> @@ -870,20 +872,20 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
->  				 * in the report.
->  				 */
->  				deskew_non_converge[datx8][bit_i] = 1;
-> -				pr_debug("Fail not found on bit %d => deskew[%d][%d] = %d\n",
-> -					 bit_i, datx8, bit_i,
-> -					 deskew_delay[datx8][bit_i]);
-> +				log_debug("Fail not found on bit %d => deskew[%d][%d] = %d\n",
-> +					  bit_i, datx8, bit_i,
-> +					  deskew_delay[datx8][bit_i]);
->  			}
->  		}
-> -		pr_debug("**********byte %d tuning complete************\n",
-> -			 datx8);
-> +		log_debug("**********byte %d tuning complete************\n",
-> +			  datx8);
->  		/* If we can't find any failure by back delaying DQ lines,
->  		 * hold the default values
->  		 */
->  		if (!fail_found) {
->  			for (bit_i = 0; bit_i < 8; bit_i++)
->  				deskew_delay[datx8][bit_i] = 0;
-> -			pr_debug("The Deskew algorithm can't converge, there is too much margin in your design. Good job!\n");
-> +			log_debug("The Deskew algorithm can't converge, there is too much margin in your design. Good job!\n");
->  		}
->  
->  		apply_deskew_results(phy, datx8, deskew_delay,
-> @@ -986,7 +988,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  		dqs_unit_delay_index_pass = dqs_unit_delay_index;
->  		success = 0;
->  
-> -		pr_debug("STEP0: Find Init delay\n");
-> +		log_debug("STEP0: Find Init delay\n");
->  		/* STEP0: Find Init delay: a delay that put the system
->  		 * in a "Pass" condition then (TODO) update
->  		 * dqs_unit_delay_index_pass & phase_idx_pass
-> @@ -1035,7 +1037,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  				byte + 1, nb_bytes, error);
->  			return TEST_FAILED;
->  		}
-> -		pr_debug("STEP1: Find LEFT PHASE DQS Bound\n");
-> +		log_debug("STEP1: Find LEFT PHASE DQS Bound\n");
->  		/* STEP1: Find LEFT PHASE DQS Bound */
->  		while ((phase_idx >= 0) &&
->  		       (phase_idx <= MAX_DQS_PHASE_IDX) &&
-> @@ -1069,7 +1071,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  				byte + 1, nb_bytes, error);
->  			return TEST_FAILED;
->  		}
-> -		pr_debug("STEP2: Find UNIT left bound\n");
-> +		log_debug("STEP2: Find UNIT left bound\n");
->  		/* STEP2: Find UNIT left bound */
->  		while ((dqs_unit_delay_index >= 0) &&
->  		       !left_unit_bound_found) {
-> @@ -1097,7 +1099,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  				byte + 1, nb_bytes, error);
->  			return TEST_FAILED;
->  		}
-> -		pr_debug("STEP3: Find PHase right bound\n");
-> +		log_debug("STEP3: Find PHase right bound\n");
->  		/* STEP3: Find PHase right bound, start with "pass"
->  		 * condition
->  		 */
-> @@ -1135,7 +1137,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  				byte + 1, nb_bytes, error);
->  			return TEST_FAILED;
->  		}
-> -		pr_debug("STEP4: Find UNIT right bound\n");
-> +		log_debug("STEP4: Find UNIT right bound\n");
->  		/* STEP4: Find UNIT right bound */
->  		while ((dqs_unit_delay_index <= MAX_DQS_UNIT_IDX) &&
->  		       !right_unit_bound_found) {
-> @@ -1174,12 +1176,12 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
->  			if (((right_bound.phase + left_bound.phase) % 2 == 1) &&
->  			    eye_training_val[byte][1] != MAX_DQS_UNIT_IDX)
->  				eye_training_val[byte][1]++;
-> -			pr_debug("** found phase : %d -  %d & unit %d - %d\n",
-> -				 right_bound.phase, left_bound.phase,
-> -				 right_bound.unit, left_bound.unit);
-> -			pr_debug("** calculating mid region: phase: %d  unit: %d (nominal is 3)\n",
-> -				 eye_training_val[byte][0],
-> -				 eye_training_val[byte][1]);
-> +			log_debug("** found phase : %d -  %d & unit %d - %d\n",
-> +				  right_bound.phase, left_bound.phase,
-> +				  right_bound.unit, left_bound.unit);
-> +			log_debug("** calculating mid region: phase: %d  unit: %d (nominal is 3)\n",
-> +				  eye_training_val[byte][0],
-> +				  eye_training_val[byte][1]);
->  		} else {
->  			/* PPPPPPPPPP, we're already good.
->  			 * Set nominal values.
-> @@ -1280,11 +1282,11 @@ static u8 set_midpoint_read_dqs_gating(struct stm32mp1_ddrphy *phy, u8 byte,
->  		 * or pppppff  or ffppppp
->  		 */
->  		if (left_bound_found || right_bound_found) {
-> -			pr_debug("idx0(%d): %d %d      idx1(%d) : %d %d\n",
-> -				 left_bound_found,
-> -				 right_bound_idx[0], left_bound_idx[0],
-> -				 right_bound_found,
-> -				 right_bound_idx[1], left_bound_idx[1]);
-> +			log_debug("idx0(%d): %d %d      idx1(%d) : %d %d\n",
-> +				  left_bound_found,
-> +				  right_bound_idx[0], left_bound_idx[0],
-> +				  right_bound_found,
-> +				  right_bound_idx[1], left_bound_idx[1]);
->  			dqs_gate_values[byte][0] =
->  				(right_bound_idx[0] + left_bound_idx[0]) / 2;
->  			dqs_gate_values[byte][1] =
-> @@ -1319,14 +1321,14 @@ static u8 set_midpoint_read_dqs_gating(struct stm32mp1_ddrphy *phy, u8 byte,
->  						left_bound_idx[0];
->  				}
->  			}
-> -			pr_debug("*******calculating mid region: system latency: %d  phase: %d********\n",
-> -				 dqs_gate_values[byte][0],
-> -				 dqs_gate_values[byte][1]);
-> -			pr_debug("*******the nominal values were system latency: 0  phase: 2*******\n");
-> +			log_debug("*******calculating mid region: system latency: %d  phase: %d********\n",
-> +				  dqs_gate_values[byte][0],
-> +				  dqs_gate_values[byte][1]);
-> +			log_debug("*******the nominal values were system latency: 0  phase: 2*******\n");
->  		}
->  	} else {
->  		/* if intermitant, restore defaut values */
-> -		pr_debug("dqs gating:no regular fail/pass/fail found. defaults values restored.\n");
-> +		log_debug("dqs gating:no regular fail/pass/fail found. defaults values restored.\n");
->  		dqs_gate_values[byte][0] = 0;
->  		dqs_gate_values[byte][1] = 2;
+>  	if (dm_gpio_is_valid(&priv->cd_gpio))
+>  		return dm_gpio_get_value(&priv->cd_gpio);
+> @@ -695,7 +698,7 @@ static int stm32_sdmmc2_probe(struct udevice *dev)
+>  	case 1:
+>  		break;
+>  	default:
+> -		pr_err("invalid \"bus-width\" property, force to 1\n");
+> +		dev_err(dev, "invalid \"bus-width\" property, force to 1\n");
 >  	}
+>  
+>  	upriv->mmc = &plat->mmc;
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

@@ -2,70 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3C67294A60
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 11:19:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CF68D294BDD
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 13:42:39 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65AF2C3FAD5;
-	Wed, 21 Oct 2020 09:19:21 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 60CF2C3FAE0;
+	Wed, 21 Oct 2020 11:42:39 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 92493C3087A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16E4AC3FAD5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 Oct 2020 09:19:16 +0000 (UTC)
+ Wed, 21 Oct 2020 11:42:37 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09L97o9F025993; Wed, 21 Oct 2020 11:19:15 +0200
+ 09LBfo8F020069; Wed, 21 Oct 2020 13:42:36 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=IDgpVu3wKY64+c4FY655hxNA6pu3ec6br3/MSAYmsJw=;
- b=SzxEA5s8rB+pEiRqqFpgXfxvSt3xbqZDIIVUrkRpMvRRus5jdWzlvzJGO7O87r67sTr+
- 6Xr6dTnsmwXEC2t5rrEsX15aVT2z2alUUIHp+6yncBeDkucqFv7Yo7vHjzDz9dZOmnfQ
- SyTTUdMPR6PXCS1LVJ5Jc7tTszEB/p7xd76YqXzDPS4Sxr6hxdTNd6QOlgPc5SDex///
- wPVGvFDp3jo2O5WepRZpTjQiV+FWRQhVghXdFskVTyeCUxYbuxz8KqMlSYdju7Ne54xi
- 9wkrr1nuA47ZDhCfw1DS761qupWK8EOacsUxe4MdhiR050BvmT4T6+HQTXKV21RB09MU Fg== 
+ : date : message-id : references : in-reply-to : content-type : content-id
+ : content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=SB8QkXvCnN9WSy9O70o7oW4hNMdi7myviqD39iXSa8Y=;
+ b=UoX1NFwHUtaMcm/pikheoJcinqw1KRfT5An+FFwC47QxZO5kt3IZp1dYrLOmAYkZtFKq
+ YfEP341fkqttHJysbPVngvUKsrRoLsClMDfwwMVVlnEjvA3vg5RTzTRoA0+5iQW6Qfou
+ /OJXJWN1zkcgWJUWWqdwtq+PRS/7ljs3mhBfubOhXTH58wnLsgUabundm9PW0bbZkQbj
+ yZ2gNgKdsGGGUXbCEvmot1iqeYLHLSP9Y2pb15qvckMTYoAaMfVPIqlO7tkk43/DyMNz
+ R5YMXhHSU2vg/Pnrd8X9p140kVyoMaEL673WilZSPyRT4KwTWuPdRjnlOcyreUcinBsH eA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 347qgg9enn-1
+ by mx07-00178001.pphosted.com with ESMTP id 347qgga9kh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 Oct 2020 11:19:15 +0200
+ Wed, 21 Oct 2020 13:42:36 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 18AA210002A;
- Wed, 21 Oct 2020 11:19:15 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0F5C12C38B8;
- Wed, 21 Oct 2020 11:19:15 +0200 (CEST)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
- 2020 11:19:14 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8B6A0100034;
+ Wed, 21 Oct 2020 13:42:35 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node1.st.com [10.75.127.4])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6F2262A705E;
+ Wed, 21 Oct 2020 13:42:35 +0200 (CEST)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE1.st.com
+ (10.75.127.4) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
+ 2020 13:42:35 +0200
 Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
  SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 21 Oct 2020 11:19:14 +0200
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
+ 15.00.1473.003; Wed, 21 Oct 2020 13:42:34 +0200
+From: Patrice CHOTARD <patrice.chotard@st.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [PATCH] board: stm32pm1: update USB-C power detection algorithm
- on DK boards
-Thread-Index: AQHWo44Kxg4ZcIEIpEabbNkMTd1EXamhzzpA
-Date: Wed, 21 Oct 2020 09:19:14 +0000
-Message-ID: <354bd3c8695143ac884c2898cbbaac81@SFHDAG2NODE3.st.com>
-References: <20201016092843.1.I5e39774367f1ea4e7c390f69ab3f86a79b66b8ce@changeid>
-In-Reply-To: <20201016092843.1.I5e39774367f1ea4e7c390f69ab3f86a79b66b8ce@changeid>
+Thread-Topic: [PATCH 1/3] reset: stm32: Add support of MCU HOLD BOOT
+Thread-Index: AQHWovND4UCTTIVUi0uhAy5XJussa6mh1xgA
+Date: Wed, 21 Oct 2020 11:42:34 +0000
+Message-ID: <fdf727b6-d8e5-cc05-9dee-d04ef8404950@st.com>
+References: <20201015150101.1.Ic4f6a36fa0594203b3f994a9e1d48143b420f072@changeid>
+In-Reply-To: <20201015150101.1.Ic4f6a36fa0594203b3f994a9e1d48143b420f072@changeid>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.50]
+Content-ID: <6A1AA9561FE88041B745CC13F0D546C7@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
- definitions=2020-10-21_03:2020-10-20,
+ definitions=2020-10-21_05:2020-10-20,
  2020-10-21 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] board: stm32pm1: update USB-C power
- detection algorithm on DK boards
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Arnaud POULIQUEN <arnaud.pouliquen@st.com>,
+ Fabien DESSENNE <fabien.dessenne@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/3] reset: stm32: Add support of MCU HOLD
+	BOOT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,40 +87,84 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrice,
+Hi Patrick
 
-> From: Patrice CHOTARD <patrice.chotard@st.com>
-> Sent: vendredi 16 octobre 2020 09:29
-> 
-> USB-C power supply which are Power Delivery compliant (USB-PD) are able to
-> provide different voltage/current (for example 5V/3A 9V/3A 12V/2.25A...)
-> 
-> In this case, the power supply need to negotiate the voltage/current to use with
-> the device using CC1/CC2 USB-C signals.
-> 
-> If this negotiation occurs during ADC measurement (done also on CC1/CC2 USB-
-> C signals) some ADC acquisition can be corrupted which cause wrong power
-> supply current detection.
-> 
-> To avoid this, the power supply current detection algorithm is updated as
-> following:
->   - perform an ADC measurement, if a 3A current is detected, continue the
->     boot process.
->   - else, wait 20ms (max tPDDebounce duration) to ensure that USB-PD
->     negotiation is done and perform another ADC measurement.
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+On 10/15/20 3:01 PM, Patrick Delaunay wrote:
+> Handle the register RCC_MP_GCR without SET/CLR registers
+> but with a direct access to bit BOOT_MCU:
+> - deassert => set the bit: The MCU will not be in HOLD_BOOT
+> - assert => clear the bit: The MCU will be set in HOLD_BOOT
+>
+> With this patch the RCC driver handles the MCU_HOLD_BOOT_R value
+> added in binding stm32mp1-resets.h
+>
+> Cc: Fabien DESSENNE <fabien.dessenne@st.com>
+> Cc: Arnaud POULIQUEN <arnaud.pouliquen@st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
-> 
->  board/st/stm32mp1/stm32mp1.c | 106 +++++++++++++++++++++--------------
->  1 file changed, 63 insertions(+), 43 deletions(-)
-> 
+>
+>  drivers/reset/stm32-reset.c                 | 17 +++++++++++++----
+>  include/dt-bindings/reset/stm32mp1-resets.h |  1 +
+>  2 files changed, 14 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/reset/stm32-reset.c b/drivers/reset/stm32-reset.c
+> index 64a11cfcfc..20c36a99eb 100644
+> --- a/drivers/reset/stm32-reset.c
+> +++ b/drivers/reset/stm32-reset.c
+> @@ -14,6 +14,9 @@
+>  #include <asm/io.h>
+>  #include <linux/bitops.h>
+>  
+> +/* offset of register without set/clear management */
+> +#define RCC_MP_GCR_OFFSET 0x10C
+> +
+>  /* reset clear offset for STM32MP RCC */
+>  #define RCC_CL 0x4
+>  
+> @@ -40,8 +43,11 @@ static int stm32_reset_assert(struct reset_ctl *reset_ctl)
+>  	      reset_ctl->id, bank, offset);
+>  
+>  	if (dev_get_driver_data(reset_ctl->dev) == STM32MP1)
+> -		/* reset assert is done in rcc set register */
+> -		writel(BIT(offset), priv->base + bank);
+> +		if (bank != RCC_MP_GCR_OFFSET)
+> +			/* reset assert is done in rcc set register */
+> +			writel(BIT(offset), priv->base + bank);
+> +		else
+> +			clrbits_le32(priv->base + bank, BIT(offset));
+>  	else
+>  		setbits_le32(priv->base + bank, BIT(offset));
+>  
+> @@ -57,8 +63,11 @@ static int stm32_reset_deassert(struct reset_ctl *reset_ctl)
+>  	      reset_ctl->id, bank, offset);
+>  
+>  	if (dev_get_driver_data(reset_ctl->dev) == STM32MP1)
+> -		/* reset deassert is done in rcc clr register */
+> -		writel(BIT(offset), priv->base + bank + RCC_CL);
+> +		if (bank != RCC_MP_GCR_OFFSET)
+> +			/* reset deassert is done in rcc clr register */
+> +			writel(BIT(offset), priv->base + bank + RCC_CL);
+> +		else
+> +			setbits_le32(priv->base + bank, BIT(offset));
+>  	else
+>  		clrbits_le32(priv->base + bank, BIT(offset));
+>  
+> diff --git a/include/dt-bindings/reset/stm32mp1-resets.h b/include/dt-bindings/reset/stm32mp1-resets.h
+> index f0c3aaef67..702da37a2e 100644
+> --- a/include/dt-bindings/reset/stm32mp1-resets.h
+> +++ b/include/dt-bindings/reset/stm32mp1-resets.h
+> @@ -7,6 +7,7 @@
+>  #ifndef _DT_BINDINGS_STM32MP1_RESET_H_
+>  #define _DT_BINDINGS_STM32MP1_RESET_H_
+>  
+> +#define MCU_HOLD_BOOT_R	2144
+>  #define LTDC_R		3072
+>  #define DSI_R		3076
+>  #define DDRPERFM_R	3080
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 
 Thanks
-
-Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

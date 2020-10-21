@@ -2,58 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 236C6294C80
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 14:25:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E209294C83
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Oct 2020 14:25:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DE1A3C3FAE0;
-	Wed, 21 Oct 2020 12:25:39 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EA8B5C3FAE0;
+	Wed, 21 Oct 2020 12:25:53 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2AA6CC3FAD5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 33B1EC3FAD5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 Oct 2020 12:25:38 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ Wed, 21 Oct 2020 12:25:52 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09LC89Nm023380; Wed, 21 Oct 2020 14:25:37 +0200
+ 09LC85qY008925; Wed, 21 Oct 2020 14:25:51 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
  : date : message-id : references : in-reply-to : content-type : content-id
  : content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=xDJIF5XkLUTER+zm9RtFwSxfBn5mDqPgv1al/cbG6MQ=;
- b=lpW+zX6CXYcxonptibd0Z7Hw1ODBmd3n6d76/+l3e91B9M9+ANZI3SqLH/t2ukI/qwZG
- 8j6acQEjGCv4ZcKawb4iWk01X0dQOo2KYVcalA8chRzcECUrsTZ2KH7ZD9jL1AnTxFVw
- kf530pAAYZsSkzRQ9exSgX8lY/uyXbdngV4KPqMLpHJ7HizfOCV6eOebRhgZ7Qts0s4X
- 6IqwEE9F/S+wVUsZL6l5W9UwdNwswolaTxoCmUlxwP51qsaDnfPr/aetadgbyA3b9ac6
- IVE1qgMmctopEuStblOWYBfC9jb5jTHUFYpC4qe9uLVxUdRY/ECR3hGkExqwVVEVkIEH nQ== 
+ bh=sLF1hz19QJcLpOJT47f8J2+D2h0/p52yAHQaCZWbaNQ=;
+ b=glBch43BwabByU4Jc4cigR9ReqkBk//BWGkc4O9E3hOWglcjSGAgnOk3OfDWG08zZNJM
+ mqive9hWAdddoJo9LGPFirb7bgHVfckKaKLJzYA2UCh2uktB4ryjI0W/bhWz4djyafkt
+ uIr4y/nmXVauln2oNTmijXSpy6Wb9sAEEn1yOjM34OSZGjoHlI910TllFGWCJRJu8zd1
+ fx/wm8F7E4Ki4lqbSpadd1oV8NhFN49Xo/0MZ+QDOwisUj61hMoHOX9+m47PCvskjUgK
+ hi38kZtP0zp8PqJgdlRnOS+2ncUa11gPeypPAwjBiFeI5nL9iNyd4BlkQ20RflT52o+g mA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 347pcx1y8e-1
+ by mx07-00178001.pphosted.com with ESMTP id 347p30t2c3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 Oct 2020 14:25:36 +0200
+ Wed, 21 Oct 2020 14:25:51 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8A205100038;
- Wed, 21 Oct 2020 14:25:36 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node1.st.com [10.75.127.4])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7F7942E8450;
- Wed, 21 Oct 2020 14:25:36 +0200 (CEST)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE1.st.com
- (10.75.127.4) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
- 2020 14:25:36 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B7E7D10002A;
+ Wed, 21 Oct 2020 14:25:50 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AC7EF2E8451;
+ Wed, 21 Oct 2020 14:25:50 +0200 (CEST)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 21 Oct
+ 2020 14:25:50 +0200
 Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
  SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 21 Oct 2020 14:25:36 +0200
+ 15.00.1473.003; Wed, 21 Oct 2020 14:25:50 +0200
 From: Patrice CHOTARD <patrice.chotard@st.com>
 To: Patrick DELAUNAY <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-Thread-Topic: [Uboot-stm32] [PATCH 07/33] ram: stm32: migrate trace to log
- macro
-Thread-Index: AQHWogrIsE6GIuHO9ECizy+b+kcM16mh5O6A
-Date: Wed, 21 Oct 2020 12:25:35 +0000
-Message-ID: <cd654e00-050c-b39b-e1dd-f1070c439a00@st.com>
+Thread-Topic: [PATCH 08/33] ram: stm32mp1: migrate trace to dev or log macro
+Thread-Index: AQHWogrDSDG2voSRtkC96mRSGPpGQKmh5P6A
+Date: Wed, 21 Oct 2020 12:25:50 +0000
+Message-ID: <badad215-3b9b-bc69-2cb3-03d2dfed32c0@st.com>
 References: <20201014091646.4233-1-patrick.delaunay@st.com>
- <20201014091646.4233-8-patrick.delaunay@st.com>
-In-Reply-To: <20201014091646.4233-8-patrick.delaunay@st.com>
+ <20201014091646.4233-9-patrick.delaunay@st.com>
+In-Reply-To: <20201014091646.4233-9-patrick.delaunay@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -63,15 +62,14 @@ user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.75.127.44]
-Content-ID: <92B3EFC62113FA4CAE84AE1B6B43A8B1@st.com>
+Content-ID: <7458A72C7BB43D489149B180F7844C70@st.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
  definitions=2020-10-21_05:2020-10-20,
  2020-10-21 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 07/33] ram: stm32: migrate trace to log
- macro
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 08/33] ram: stm32mp1: migrate trace to dev
+	or log macro
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,21 +89,157 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Patrick
 
 On 10/14/20 11:16 AM, Patrick Delaunay wrote:
-> Define LOG_CATEGORY, change debug to dev_dbg and remove "%s:" __func__
-> header as it is managed by dev macro (dev->name is displayed)
+> Define LOG_CATEGORY, use dev_ macro when it is possible
+> and migrate other trace to log_ macro.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  drivers/ram/stm32_sdram.c | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
+>  drivers/ram/stm32mp1/stm32mp1_ddr.c         |  36 +++---
+>  drivers/ram/stm32mp1/stm32mp1_interactive.c |   4 +-
+>  drivers/ram/stm32mp1/stm32mp1_ram.c         |  37 +++---
+>  drivers/ram/stm32mp1/stm32mp1_tests.c       |  19 +--
+>  drivers/ram/stm32mp1/stm32mp1_tuning.c      | 124 ++++++++++----------
+>  5 files changed, 116 insertions(+), 104 deletions(-)
 >
-> diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
-> index 3fddf4df96..9e0e70ca97 100644
-> --- a/drivers/ram/stm32_sdram.c
-> +++ b/drivers/ram/stm32_sdram.c
-> @@ -4,6 +4,8 @@
->   * Author(s): Vikas Manocha, <vikas.manocha@st.com> for STMicroelectronics.
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> index bf3a4c97a4..0457166b12 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+> @@ -3,6 +3,8 @@
+>   * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+>   */
+>  
+> +#define LOG_CATEGORY UCLASS_RAM
+> +
+>  #include <common.h>
+>  #include <clk.h>
+>  #include <log.h>
+> @@ -311,17 +313,17 @@ static void set_reg(const struct ddr_info *priv,
+>  	u32 base_addr = get_base_addr(priv, base);
+>  	const struct reg_desc *desc = ddr_registers[type].desc;
+>  
+> -	debug("init %s\n", ddr_registers[type].name);
+> +	log_debug("init %s\n", ddr_registers[type].name);
+>  	for (i = 0; i < ddr_registers[type].size; i++) {
+>  		ptr = (unsigned int *)(base_addr + desc[i].offset);
+>  		if (desc[i].par_offset == INVALID_OFFSET) {
+> -			pr_err("invalid parameter offset for %s", desc[i].name);
+> +			log_err("invalid parameter offset for %s", desc[i].name);
+>  		} else {
+>  			value = *((u32 *)((u32)param +
+>  					       desc[i].par_offset));
+>  			writel(value, ptr);
+> -			debug("[0x%x] %s= 0x%08x\n",
+> -			      (u32)ptr, desc[i].name, value);
+> +			log_debug("[0x%x] %s= 0x%08x\n",
+> +				  (u32)ptr, desc[i].name, value);
+>  		}
+>  	}
+>  }
+> @@ -564,16 +566,16 @@ static void ddrphy_idone_wait(struct stm32mp1_ddrphy *phy)
+>  					 DDRPHYC_PGSR_RVERR |
+>  					 DDRPHYC_PGSR_RVEIRR),
+>  				1000000);
+> -	debug("\n[0x%08x] pgsr = 0x%08x ret=%d\n",
+> -	      (u32)&phy->pgsr, pgsr, ret);
+> +	log_debug("\n[0x%08x] pgsr = 0x%08x ret=%d\n",
+> +		  (u32)&phy->pgsr, pgsr, ret);
+>  }
+>  
+>  void stm32mp1_ddrphy_init(struct stm32mp1_ddrphy *phy, u32 pir)
+>  {
+>  	pir |= DDRPHYC_PIR_INIT;
+>  	writel(pir, &phy->pir);
+> -	debug("[0x%08x] pir = 0x%08x -> 0x%08x\n",
+> -	      (u32)&phy->pir, pir, readl(&phy->pir));
+> +	log_debug("[0x%08x] pir = 0x%08x -> 0x%08x\n",
+> +		  (u32)&phy->pir, pir, readl(&phy->pir));
+>  
+>  	/* need to wait 10 configuration clock before start polling */
+>  	udelay(10);
+> @@ -603,7 +605,7 @@ static void wait_sw_done_ack(struct stm32mp1_ddrctl *ctl)
+>  		panic("Timeout initialising DRAM : DDR->swstat = %x\n",
+>  		      swstat);
+>  
+> -	debug("[0x%08x] swstat = 0x%08x\n", (u32)&ctl->swstat, swstat);
+> +	log_debug("[0x%08x] swstat = 0x%08x\n", (u32)&ctl->swstat, swstat);
+>  }
+>  
+>  /* wait quasi dynamic register update */
+> @@ -634,7 +636,7 @@ static void wait_operating_mode(struct ddr_info *priv, int mode)
+>  	if (ret)
+>  		panic("Timeout DRAM : DDR->stat = %x\n", stat);
+>  
+> -	debug("[0x%08x] stat = 0x%08x\n", (u32)&priv->ctl->stat, stat);
+> +	log_debug("[0x%08x] stat = 0x%08x\n", (u32)&priv->ctl->stat, stat);
+>  }
+>  
+>  void stm32mp1_refresh_disable(struct stm32mp1_ddrctl *ctl)
+> @@ -706,9 +708,9 @@ void stm32mp1_ddr_init(struct ddr_info *priv,
+>  		panic("ddr power init failed\n");
+>  
+>  start:
+> -	debug("name = %s\n", config->info.name);
+> -	debug("speed = %d kHz\n", config->info.speed);
+> -	debug("size  = 0x%x\n", config->info.size);
+> +	log_debug("name = %s\n", config->info.name);
+> +	log_debug("speed = %d kHz\n", config->info.speed);
+> +	log_debug("size  = 0x%x\n", config->info.size);
+>  /*
+>   * 1. Program the DWC_ddr_umctl2 registers
+>   * 1.1 RESETS: presetn, core_ddrc_rstn, aresetn
+> @@ -745,8 +747,8 @@ start:
+>  /* 1.5. initialize registers ddr_umctl2 */
+>  	/* Stop uMCTL2 before PHY is ready */
+>  	clrbits_le32(&priv->ctl->dfimisc, DDRCTRL_DFIMISC_DFI_INIT_COMPLETE_EN);
+> -	debug("[0x%08x] dfimisc = 0x%08x\n",
+> -	      (u32)&priv->ctl->dfimisc, readl(&priv->ctl->dfimisc));
+> +	log_debug("[0x%08x] dfimisc = 0x%08x\n",
+> +		  (u32)&priv->ctl->dfimisc, readl(&priv->ctl->dfimisc));
+>  
+>  	set_reg(priv, REG_REG, &config->c_reg);
+>  	set_reg(priv, REG_TIMING, &config->c_timing);
+> @@ -809,9 +811,9 @@ start:
+>  	wait_operating_mode(priv, DDRCTRL_STAT_OPERATING_MODE_NORMAL);
+>  
+>  	if (config->p_cal_present) {
+> -		debug("DDR DQS training skipped.\n");
+> +		log_debug("DDR DQS training skipped.\n");
+>  	} else {
+> -		debug("DDR DQS training : ");
+> +		log_debug("DDR DQS training : ");
+>  /*  8. Disable Auto refresh and power down by setting
+>   *    - RFSHCTL3.dis_au_refresh = 1
+>   *    - PWRCTL.powerdown_en = 0
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> index 38390c0d55..b86eb268e9 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+> @@ -3,6 +3,8 @@
+>   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
+>   */
+>  
+> +#define LOG_CATEGORY UCLASS_RAM
+> +
+>  #include <common.h>
+>  #include <command.h>
+>  #include <console.h>
+> @@ -404,7 +406,7 @@ bool stm32mp1_ddr_interactive(void *priv,
+>  #endif
+>  	}
+>  
+> -	debug("** step %d ** %s / %d\n", step, step_str[step], next_step);
+> +	log_debug("** step %d ** %s / %d\n", step, step_str[step], next_step);
+>  
+>  	if (next_step < 0)
+>  		return false;
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
+> index 9022679703..decc700c16 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
+> @@ -3,6 +3,8 @@
+>   * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
 >   */
 >  
 > +#define LOG_CATEGORY UCLASS_RAM
@@ -113,42 +247,499 @@ On 10/14/20 11:16 AM, Patrick Delaunay wrote:
 >  #include <common.h>
 >  #include <clk.h>
 >  #include <dm.h>
-> @@ -272,7 +274,7 @@ static int stm32_fmc_ofdata_to_platdata(struct udevice *dev)
->  	ret = dev_read_phandle_with_args(dev, "st,syscfg", NULL, 0, 0,
->  						 &args);
->  	if (ret) {
-> -		dev_dbg(dev, "%s: can't find syscon device (%d)\n", __func__, ret);
-> +		dev_dbg(dev, "can't find syscon device (%d)\n", ret);
->  	} else {
->  		syscfg_base = (u32 *)ofnode_get_addr(args.node);
+> @@ -37,7 +39,7 @@ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
+>  			ret = clk_enable(&clk);
 >  
-> @@ -281,7 +283,7 @@ static int stm32_fmc_ofdata_to_platdata(struct udevice *dev)
->  			/* set memory mapping selection */
->  			clrsetbits_le32(syscfg_base, MEM_MODE_MASK, mem_remap);
->  		} else {
-> -			dev_dbg(dev, "%s: cannot find st,mem_remap property\n", __func__);
-> +			dev_dbg(dev, "cannot find st,mem_remap property\n");
+>  		if (ret) {
+> -			printf("error for %s : %d\n", clkname[idx], ret);
+> +			log_err("error for %s : %d\n", clkname[idx], ret);
+>  			return ret;
 >  		}
->  		
->  		swp_fmc = dev_read_u32_default(dev, "st,swp_fmc", NOT_FOUND);
-> @@ -289,7 +291,7 @@ static int stm32_fmc_ofdata_to_platdata(struct udevice *dev)
->  			/* set fmc swapping selection */
->  			clrsetbits_le32(syscfg_base, SWP_FMC_MASK, swp_fmc << SWP_FMC_OFFSET);
->  		} else {
-> -			dev_dbg(dev, "%s: cannot find st,swp_fmc property\n", __func__);
-> +			dev_dbg(dev, "cannot find st,swp_fmc property\n");
->  		}
+>  	}
+> @@ -45,13 +47,13 @@ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
+>  	priv->clk = clk;
+>  	ddrphy_clk = clk_get_rate(&priv->clk);
 >  
->  		dev_dbg(dev, "syscfg %x = %x\n", (u32)syscfg_base, *syscfg_base);
-> @@ -348,7 +350,7 @@ static int stm32_fmc_ofdata_to_platdata(struct udevice *dev)
+> -	debug("DDR: mem_speed (%d kHz), RCC %d kHz\n",
+> -	      mem_speed, (u32)(ddrphy_clk / 1000));
+> +	log_debug("DDR: mem_speed (%d kHz), RCC %d kHz\n",
+> +		  mem_speed, (u32)(ddrphy_clk / 1000));
+>  	/* max 10% frequency delta */
+>  	ddr_clk = abs(ddrphy_clk - mem_speed * 1000);
+>  	if (ddr_clk > (mem_speed * 100)) {
+> -		pr_err("DDR expected freq %d kHz, current is %d kHz\n",
+> -		       mem_speed, (u32)(ddrphy_clk / 1000));
+> +		log_err("DDR expected freq %d kHz, current is %d kHz\n",
+> +			mem_speed, (u32)(ddrphy_clk / 1000));
+>  		return -EINVAL;
 >  	}
 >  
->  	params->no_sdram_banks = bank;
-> -	debug("%s, no of banks = %d\n", __func__, params->no_sdram_banks);
-> +	dev_dbg(dev, "no of banks = %d\n", params->no_sdram_banks);
+> @@ -118,7 +120,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+>  	config.info.size = ofnode_read_u32_default(node, "st,mem-size", 0);
+>  	config.info.name = ofnode_read_string(node, "st,mem-name");
+>  	if (!config.info.name) {
+> -		debug("%s: no st,mem-name\n", __func__);
+> +		dev_dbg(dev, "no st,mem-name\n");
+>  		return -EINVAL;
+>  	}
+>  	printf("RAM: %s\n", config.info.name);
+> @@ -128,12 +130,12 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+>  					 (void *)((u32)&config +
+>  						  param[idx].offset),
+>  					 param[idx].size);
+> -		debug("%s: %s[0x%x] = %d\n", __func__,
+> -		      param[idx].name, param[idx].size, ret);
+> +		dev_dbg(dev, "%s: %s[0x%x] = %d\n", __func__,
+> +			param[idx].name, param[idx].size, ret);
+>  		if (ret &&
+>  		    (ret != -FDT_ERR_NOTFOUND || !param[idx].present)) {
+> -			pr_err("%s: Cannot read %s, error=%d\n",
+> -			       __func__, param[idx].name, ret);
+> +			dev_err(dev, "Cannot read %s, error=%d\n",
+> +				param[idx].name, ret);
+>  			return -EINVAL;
+>  		}
+>  		if (param[idx].present) {
+> @@ -153,7 +155,7 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
 >  
->  	return 0;
+>  	ret = clk_get_by_name(dev, "axidcg", &axidcg);
+>  	if (ret) {
+> -		debug("%s: Cannot found axidcg\n", __func__);
+> +		dev_dbg(dev, "%s: Cannot found axidcg\n", __func__);
+>  		return -EINVAL;
+>  	}
+>  	clk_disable(&axidcg); /* disable clock gating during init */
+> @@ -163,13 +165,13 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+>  	clk_enable(&axidcg); /* enable clock gating */
+>  
+>  	/* check size */
+> -	debug("%s : get_ram_size(%x, %x)\n", __func__,
+> -	      (u32)priv->info.base, (u32)STM32_DDR_SIZE);
+> +	dev_dbg(dev, "get_ram_size(%x, %x)\n",
+> +		(u32)priv->info.base, (u32)STM32_DDR_SIZE);
+>  
+>  	priv->info.size = get_ram_size((long *)priv->info.base,
+>  				       STM32_DDR_SIZE);
+>  
+> -	debug("%s : %x\n", __func__, (u32)priv->info.size);
+> +	dev_dbg(dev, "info.size: %x\n", (u32)priv->info.size);
+>  
+>  	/* check memory access for all memory */
+>  	if (config.info.size != priv->info.size) {
+> @@ -186,12 +188,11 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
+>  	struct regmap *map;
+>  	int ret;
+>  
+> -	debug("STM32MP1 DDR probe\n");
+>  	priv->dev = dev;
+>  
+>  	ret = regmap_init_mem(dev_ofnode(dev), &map);
+>  	if (ret)
+> -		return ret;
+> +		return log_ret(ret);
+>  
+>  	priv->ctl = regmap_get_range(map, 0);
+>  	priv->phy = regmap_get_range(map, 1);
+> @@ -203,7 +204,9 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
+>  #if !defined(CONFIG_TFABOOT) && \
+>  	(!defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD))
+>  	priv->info.size = 0;
+> -	return stm32mp1_ddr_setup(dev);
+> +	ret = stm32mp1_ddr_setup(dev);
+> +
+> +	return log_ret(ret);
+>  #else
+>  	ofnode node = stm32mp1_ddr_get_ofnode(dev);
+>  	priv->info.size = ofnode_read_u32_default(node, "st,mem-size", 0);
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_tests.c b/drivers/ram/stm32mp1/stm32mp1_tests.c
+> index 952006aa14..1fcc7cfd69 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_tests.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_tests.c
+> @@ -2,6 +2,9 @@
+>  /*
+>   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
+>   */
+> +
+> +#define LOG_CATEGORY UCLASS_RAM
+> +
+>  #include <common.h>
+>  #include <console.h>
+>  #include <init.h>
+> @@ -197,8 +200,8 @@ static u32 databus(u32 *address)
+>  
+>  		/* Read it back (immediately is okay for this test). */
+>  		read_value = readl(address);
+> -		debug("%x: %x <=> %x\n",
+> -		      (u32)address, read_value, pattern);
+> +		log_debug("%x: %x <=> %x\n",
+> +			  (u32)address, read_value, pattern);
+>  
+>  		if (read_value != pattern)
+>  			return pattern;
+> @@ -252,8 +255,8 @@ static u32 *addressbus(u32 *address, u32 nb_bytes)
+>  
+>  	for (offset = 1; (offset & mask) != 0; offset <<= 1) {
+>  		read_value = readl(&address[offset]);
+> -		debug("%x: %x <=> %x\n",
+> -		      (u32)&address[offset], read_value, pattern);
+> +		log_debug("%x: %x <=> %x\n",
+> +			  (u32)&address[offset], read_value, pattern);
+>  		if (read_value != pattern)
+>  			return &address[offset];
+>  	}
+> @@ -363,8 +366,8 @@ static enum test_result databuswalk0(struct stm32mp1_ddrctl *ctl,
+>  			data = readl(addr + 4 * i);
+>  			if (~(1 << i) !=  data) {
+>  				error |= 1 << i;
+> -				debug("%x: error %x expected %x => error:%x\n",
+> -				      addr + 4 * i, data, ~(1 << i), error);
+> +				log_debug("%x: error %x expected %x => error:%x\n",
+> +					  addr + 4 * i, data, ~(1 << i), error);
+>  			}
+>  		}
+>  		if (test_loop_end(&loop, nb_loop, 1000))
+> @@ -403,8 +406,8 @@ static enum test_result databuswalk1(struct stm32mp1_ddrctl *ctl,
+>  			data = readl(addr + 4 * i);
+>  			if ((1 << i) !=  data) {
+>  				error |= 1 << i;
+> -				debug("%x: error %x expected %x => error:%x\n",
+> -				      addr + 4 * i, data, (1 << i), error);
+> +				log_debug("%x: error %x expected %x => error:%x\n",
+> +					  addr + 4 * i, data, (1 << i), error);
+>  			}
+>  		}
+>  		if (test_loop_end(&loop, nb_loop, 1000))
+> diff --git a/drivers/ram/stm32mp1/stm32mp1_tuning.c b/drivers/ram/stm32mp1/stm32mp1_tuning.c
+> index a8d6892bb0..c8cd7c3cea 100644
+> --- a/drivers/ram/stm32mp1/stm32mp1_tuning.c
+> +++ b/drivers/ram/stm32mp1/stm32mp1_tuning.c
+> @@ -2,6 +2,9 @@
+>  /*
+>   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
+>   */
+> +
+> +#define LOG_CATEGORY UCLASS_RAM
+> +
+>  #include <common.h>
+>  #include <console.h>
+>  #include <clk.h>
+> @@ -227,8 +230,7 @@ static u8 DQ_unit_index(struct stm32mp1_ddrphy *phy, u8 byte, u8 bit)
+>  	index = (readl(addr) >> DDRPHYC_DXNDQTR_DQDLY_SHIFT(bit))
+>  		& DDRPHYC_DXNDQTR_DQDLY_LOW_MASK;
+>  
+> -	pr_debug("%s: [%x]: %x => DQ unit index = %x\n",
+> -		 __func__, addr, readl(addr), index);
+> +	log_debug("[%x]: %x => DQ unit index = %x\n", addr, readl(addr), index);
+>  
+>  	return index;
 >  }
+> @@ -470,13 +472,13 @@ static void apply_deskew_results(struct stm32mp1_ddrphy *phy, u8 byte,
+>  	for (bit_i = 0; bit_i < 8; bit_i++) {
+>  		set_DQ_unit_delay(phy, byte, bit_i, deskew_delay[byte][bit_i]);
+>  		index = DQ_unit_index(phy, byte, bit_i);
+> -		pr_debug("Byte %d ; bit %d : The new DQ delay (%d) index=%d [delta=%d, 3 is the default]",
+> -			 byte, bit_i, deskew_delay[byte][bit_i],
+> -			 index, index - 3);
+> +		log_debug("Byte %d ; bit %d : The new DQ delay (%d) index=%d [delta=%d, 3 is the default]",
+> +			  byte, bit_i, deskew_delay[byte][bit_i],
+> +			  index, index - 3);
+>  		printf("Byte %d, bit %d, DQ delay = %d",
+>  		       byte, bit_i, deskew_delay[byte][bit_i]);
+>  		if (deskew_non_converge[byte][bit_i] == 1)
+> -			pr_debug(" - not converged : still more skew");
+> +			log_debug(" - not converged : still more skew");
+>  		printf("\n");
+>  	}
+>  }
+> @@ -536,7 +538,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  
+>  	/* Config the BIST block */
+>  	config_BIST(ctl, phy);
+> -	pr_debug("BIST Config done.\n");
+> +	log_debug("BIST Config done.\n");
+>  
+>  	/* Train each byte */
+>  	for (datx8 = 0; datx8 < nb_bytes; datx8++) {
+> @@ -545,9 +547,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  				datx8 + 1, nb_bytes, error);
+>  			return TEST_FAILED;
+>  		}
+> -		pr_debug("\n======================\n");
+> -		pr_debug("Start deskew byte %d .\n", datx8);
+> -		pr_debug("======================\n");
+> +		log_debug("\n======================\n");
+> +		log_debug("Start deskew byte %d .\n", datx8);
+> +		log_debug("======================\n");
+>  		/* Enable Byte (DXNGCR, bit DXEN) */
+>  		setbits_le32(DXNGCR(phy, datx8), DDRPHYC_DXNGCR_DXEN);
+>  
+> @@ -584,7 +586,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  		 * Else, look for Pass init condition
+>  		 */
+>  		if (!success) {
+> -			pr_debug("Fail at init condtion. Let's look for a good init condition.\n");
+> +			log_debug("Fail at init condtion. Let's look for a good init condition.\n");
+>  			success = 0; /* init */
+>  			/* Make sure we start with a PASS condition before
+>  			 * looking for a fail condition.
+> @@ -592,7 +594,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  			 */
+>  
+>  			/* escape if we find a PASS */
+> -			pr_debug("increase Phase idx\n");
+> +			log_debug("increase Phase idx\n");
+>  			while (!success && (phase_idx <= MAX_DQS_PHASE_IDX)) {
+>  				DQS_phase_delay(phy, datx8, phase_idx);
+>  				BIST_test(phy, datx8, &result);
+> @@ -618,7 +620,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  			 * we have hold violation, lets try reduce DQS_unit
+>  			 * Delay
+>  			 */
+> -			pr_debug("Still fail. Try decrease DQS Unit delay\n");
+> +			log_debug("Still fail. Try decrease DQS Unit delay\n");
+>  
+>  			phase_idx = 0;
+>  			dqs_unit_delay_index = 0;
+> @@ -665,9 +667,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  			return TEST_FAILED;
+>  		}
+>  
+> -		pr_debug("there is a pass region for phase idx %d\n",
+> -			 phase_idx);
+> -		pr_debug("Step1: Find the first failing condition\n");
+> +		log_debug("there is a pass region for phase idx %d\n",
+> +			  phase_idx);
+> +		log_debug("Step1: Find the first failing condition\n");
+>  		/* Look for the first failing condition by PHASE stepping.
+>  		 * This part of the algo can finish without converging.
+>  		 */
+> @@ -692,9 +694,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  		 * stepping (minimal delay)
+>  		 */
+>  		if (!success) {
+> -			pr_debug("Fail region (PHASE) found phase idx %d\n",
+> -				 phase_idx);
+> -			pr_debug("Let's look for first success by DQS Unit steps\n");
+> +			log_debug("Fail region (PHASE) found phase idx %d\n",
+> +				  phase_idx);
+> +			log_debug("Let's look for first success by DQS Unit steps\n");
+>  			/* This part, the algo always converge */
+>  			phase_idx--;
+>  
+> @@ -721,7 +723,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  				/*+1 to get back to current condition */
+>  				last_right_ok.unit = dqs_unit_delay_index + 1;
+>  				last_right_ok.bits_delay = 0xFFFFFFFF;
+> -				pr_debug("Found %d\n", dqs_unit_delay_index);
+> +				log_debug("Found %d\n", dqs_unit_delay_index);
+>  			} else {
+>  				/* the last OK condition is then with the
+>  				 * previous phase_idx.
+> @@ -735,8 +737,8 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  				 */
+>  				last_right_ok.unit = 1;
+>  				last_right_ok.bits_delay = 0xFFFFFFFF;
+> -				pr_debug("Not Found : try previous phase %d\n",
+> -					 phase_idx - 1);
+> +				log_debug("Not Found : try previous phase %d\n",
+> +					  phase_idx - 1);
+>  
+>  				DQS_phase_delay(phy, datx8, phase_idx - 1);
+>  				dqs_unit_delay_index = 0;
+> @@ -749,8 +751,8 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  					BIST_test(phy, datx8, &result);
+>  					success = result.test_result;
+>  					dqs_unit_delay_index++;
+> -					pr_debug("dqs_unit_delay_index = %d, result = %d\n",
+> -						 dqs_unit_delay_index, success);
+> +					log_debug("dqs_unit_delay_index = %d, result = %d\n",
+> +						  dqs_unit_delay_index, success);
+>  				}
+>  
+>  				if (!success) {
+> @@ -758,7 +760,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  						 dqs_unit_delay_index - 1;
+>  				} else {
+>  					last_right_ok.unit = 0;
+> -					pr_debug("ERROR: failed region not FOUND");
+> +					log_debug("ERROR: failed region not FOUND");
+>  				}
+>  			}
+>  		} else {
+> @@ -775,7 +777,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  			last_right_ok.phase = MAX_DQS_PHASE_IDX;
+>  			last_right_ok.unit = MAX_DQS_UNIT_IDX;
+>  			last_right_ok.bits_delay = 0xFFFFFFFF;
+> -			pr_debug("Can't find the a fail condition\n");
+> +			log_debug("Can't find the a fail condition\n");
+>  		}
+>  
+>  		/* step 2:
+> @@ -787,9 +789,9 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  		 */
+>  		printf("Byte %d, DQS unit = %d, phase = %d\n",
+>  		       datx8, last_right_ok.unit, last_right_ok.phase);
+> -		pr_debug("Step2, unit = %d, phase = %d, bits delay=%x\n",
+> -			 last_right_ok.unit, last_right_ok.phase,
+> -			 last_right_ok.bits_delay);
+> +		log_debug("Step2, unit = %d, phase = %d, bits delay=%x\n",
+> +			  last_right_ok.unit, last_right_ok.phase,
+> +			  last_right_ok.bits_delay);
+>  
+>  		/* Restore the last_right_ok condtion. */
+>  		DQS_unit_delay(phy, datx8, last_right_ok.unit);
+> @@ -812,7 +814,7 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  					datx8 + 1, nb_bytes, error);
+>  				return error;
+>  			}
+> -			pr_debug("deskewing bit %d:\n", bit_i);
+> +			log_debug("deskewing bit %d:\n", bit_i);
+>  			success = 1; /* init */
+>  			/* Set all DQDLYn to maximum value.
+>  			 * Only bit_i will be down-delayed
+> @@ -855,10 +857,10 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  				 * at one bit.
+>  				 */
+>  				fail_found = 1;
+> -				pr_debug("Fail found on bit %d, for delay = %d => deskew[%d][%d] = %d\n",
+> -					 bit_i, bit_i_delay_index + 1,
+> -					 datx8, bit_i,
+> -					 deskew_delay[datx8][bit_i]);
+> +				log_debug("Fail found on bit %d, for delay = %d => deskew[%d][%d] = %d\n",
+> +					  bit_i, bit_i_delay_index + 1,
+> +					  datx8, bit_i,
+> +					  deskew_delay[datx8][bit_i]);
+>  			} else {
+>  				/* if we can find a success condition by
+>  				 * back-delaying this bit, just set the delay
+> @@ -870,20 +872,20 @@ static enum test_result bit_deskew(struct stm32mp1_ddrctl *ctl,
+>  				 * in the report.
+>  				 */
+>  				deskew_non_converge[datx8][bit_i] = 1;
+> -				pr_debug("Fail not found on bit %d => deskew[%d][%d] = %d\n",
+> -					 bit_i, datx8, bit_i,
+> -					 deskew_delay[datx8][bit_i]);
+> +				log_debug("Fail not found on bit %d => deskew[%d][%d] = %d\n",
+> +					  bit_i, datx8, bit_i,
+> +					  deskew_delay[datx8][bit_i]);
+>  			}
+>  		}
+> -		pr_debug("**********byte %d tuning complete************\n",
+> -			 datx8);
+> +		log_debug("**********byte %d tuning complete************\n",
+> +			  datx8);
+>  		/* If we can't find any failure by back delaying DQ lines,
+>  		 * hold the default values
+>  		 */
+>  		if (!fail_found) {
+>  			for (bit_i = 0; bit_i < 8; bit_i++)
+>  				deskew_delay[datx8][bit_i] = 0;
+> -			pr_debug("The Deskew algorithm can't converge, there is too much margin in your design. Good job!\n");
+> +			log_debug("The Deskew algorithm can't converge, there is too much margin in your design. Good job!\n");
+>  		}
+>  
+>  		apply_deskew_results(phy, datx8, deskew_delay,
+> @@ -986,7 +988,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  		dqs_unit_delay_index_pass = dqs_unit_delay_index;
+>  		success = 0;
+>  
+> -		pr_debug("STEP0: Find Init delay\n");
+> +		log_debug("STEP0: Find Init delay\n");
+>  		/* STEP0: Find Init delay: a delay that put the system
+>  		 * in a "Pass" condition then (TODO) update
+>  		 * dqs_unit_delay_index_pass & phase_idx_pass
+> @@ -1035,7 +1037,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  				byte + 1, nb_bytes, error);
+>  			return TEST_FAILED;
+>  		}
+> -		pr_debug("STEP1: Find LEFT PHASE DQS Bound\n");
+> +		log_debug("STEP1: Find LEFT PHASE DQS Bound\n");
+>  		/* STEP1: Find LEFT PHASE DQS Bound */
+>  		while ((phase_idx >= 0) &&
+>  		       (phase_idx <= MAX_DQS_PHASE_IDX) &&
+> @@ -1069,7 +1071,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  				byte + 1, nb_bytes, error);
+>  			return TEST_FAILED;
+>  		}
+> -		pr_debug("STEP2: Find UNIT left bound\n");
+> +		log_debug("STEP2: Find UNIT left bound\n");
+>  		/* STEP2: Find UNIT left bound */
+>  		while ((dqs_unit_delay_index >= 0) &&
+>  		       !left_unit_bound_found) {
+> @@ -1097,7 +1099,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  				byte + 1, nb_bytes, error);
+>  			return TEST_FAILED;
+>  		}
+> -		pr_debug("STEP3: Find PHase right bound\n");
+> +		log_debug("STEP3: Find PHase right bound\n");
+>  		/* STEP3: Find PHase right bound, start with "pass"
+>  		 * condition
+>  		 */
+> @@ -1135,7 +1137,7 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  				byte + 1, nb_bytes, error);
+>  			return TEST_FAILED;
+>  		}
+> -		pr_debug("STEP4: Find UNIT right bound\n");
+> +		log_debug("STEP4: Find UNIT right bound\n");
+>  		/* STEP4: Find UNIT right bound */
+>  		while ((dqs_unit_delay_index <= MAX_DQS_UNIT_IDX) &&
+>  		       !right_unit_bound_found) {
+> @@ -1174,12 +1176,12 @@ static enum test_result eye_training(struct stm32mp1_ddrctl *ctl,
+>  			if (((right_bound.phase + left_bound.phase) % 2 == 1) &&
+>  			    eye_training_val[byte][1] != MAX_DQS_UNIT_IDX)
+>  				eye_training_val[byte][1]++;
+> -			pr_debug("** found phase : %d -  %d & unit %d - %d\n",
+> -				 right_bound.phase, left_bound.phase,
+> -				 right_bound.unit, left_bound.unit);
+> -			pr_debug("** calculating mid region: phase: %d  unit: %d (nominal is 3)\n",
+> -				 eye_training_val[byte][0],
+> -				 eye_training_val[byte][1]);
+> +			log_debug("** found phase : %d -  %d & unit %d - %d\n",
+> +				  right_bound.phase, left_bound.phase,
+> +				  right_bound.unit, left_bound.unit);
+> +			log_debug("** calculating mid region: phase: %d  unit: %d (nominal is 3)\n",
+> +				  eye_training_val[byte][0],
+> +				  eye_training_val[byte][1]);
+>  		} else {
+>  			/* PPPPPPPPPP, we're already good.
+>  			 * Set nominal values.
+> @@ -1280,11 +1282,11 @@ static u8 set_midpoint_read_dqs_gating(struct stm32mp1_ddrphy *phy, u8 byte,
+>  		 * or pppppff  or ffppppp
+>  		 */
+>  		if (left_bound_found || right_bound_found) {
+> -			pr_debug("idx0(%d): %d %d      idx1(%d) : %d %d\n",
+> -				 left_bound_found,
+> -				 right_bound_idx[0], left_bound_idx[0],
+> -				 right_bound_found,
+> -				 right_bound_idx[1], left_bound_idx[1]);
+> +			log_debug("idx0(%d): %d %d      idx1(%d) : %d %d\n",
+> +				  left_bound_found,
+> +				  right_bound_idx[0], left_bound_idx[0],
+> +				  right_bound_found,
+> +				  right_bound_idx[1], left_bound_idx[1]);
+>  			dqs_gate_values[byte][0] =
+>  				(right_bound_idx[0] + left_bound_idx[0]) / 2;
+>  			dqs_gate_values[byte][1] =
+> @@ -1319,14 +1321,14 @@ static u8 set_midpoint_read_dqs_gating(struct stm32mp1_ddrphy *phy, u8 byte,
+>  						left_bound_idx[0];
+>  				}
+>  			}
+> -			pr_debug("*******calculating mid region: system latency: %d  phase: %d********\n",
+> -				 dqs_gate_values[byte][0],
+> -				 dqs_gate_values[byte][1]);
+> -			pr_debug("*******the nominal values were system latency: 0  phase: 2*******\n");
+> +			log_debug("*******calculating mid region: system latency: %d  phase: %d********\n",
+> +				  dqs_gate_values[byte][0],
+> +				  dqs_gate_values[byte][1]);
+> +			log_debug("*******the nominal values were system latency: 0  phase: 2*******\n");
+>  		}
+>  	} else {
+>  		/* if intermitant, restore defaut values */
+> -		pr_debug("dqs gating:no regular fail/pass/fail found. defaults values restored.\n");
+> +		log_debug("dqs gating:no regular fail/pass/fail found. defaults values restored.\n");
+>  		dqs_gate_values[byte][0] = 0;
+>  		dqs_gate_values[byte][1] = 2;
+>  	}
 
 Reviewed-by: Patrice Chotard <patrice.chotard@st.com>
 

@@ -2,73 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD3A42967EB
-	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Oct 2020 02:27:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C69502967ED
+	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Oct 2020 02:29:57 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 62F86C3FAD5;
-	Fri, 23 Oct 2020 00:27:49 +0000 (UTC)
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
- [209.85.160.194])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C588C3FAD5;
+	Fri, 23 Oct 2020 00:29:57 +0000 (UTC)
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
+ [209.85.219.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2F72C36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B3D3C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 23 Oct 2020 00:27:47 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id p88so2805338qtd.12
+ Fri, 23 Oct 2020 00:29:55 +0000 (UTC)
+Received: by mail-qv1-f67.google.com with SMTP id bl9so2003551qvb.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Oct 2020 17:27:47 -0700 (PDT)
+ Thu, 22 Oct 2020 17:29:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=98Jgf0KGSSF+B2gX/kiyvtIeRkMR4rS1Lwi4PkAL41M=;
- b=sDyWzLA/cksPd8cHrW7ZSDlkHxq09rbzt7lkU3K2WVEKkXNDSaCbkxah4wWaTB7VIx
- zB9wp+KMF2Y2CYhMpwqdttVZcIu4qQh6+FW5gaSVnuUcbg271kaO2ZYoTVksaTMUxfEW
- QAc73aRPndt8J27N1l/gl6wksamYgr0bHoDI4=
+ bh=rZQyPAeXprnI3SdY6K+znHa1AdXFdSlLCHDM5Bn/bck=;
+ b=O+kmkuzHkKtux3bIA/YfHmqC114GOjD2NgNaihQjCqjaa9oQqS+NnK8BnIguiM+LKl
+ BnpuSpk3J84hFSEt5GDHcf/OqSXRVHvkI9p+yFXNKEtCTwHq34X4qq7/+zfUmUi8EE+F
+ LCbeb3AlmVY14k0L7PHRQsSWWdSdZ5zsPFL1U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=98Jgf0KGSSF+B2gX/kiyvtIeRkMR4rS1Lwi4PkAL41M=;
- b=fhblUjwpnxyQLq7xyuoct6DndjM5Mocj/fO6CoTSAlHiQIv46AwvkD6yiUdLtsTTap
- aVHcbXEwxOH+hLibpZmXiFl75Gjg6Xm1UqqvIWtDWtBQ1aYfYD7vXD7bzfBO4/R35DrF
- cR4oG7UK4TwUkddqUmYgoMrdPS/W31YUj1ZgSaf/4JGh3yVmY2oIELTeMMdiKDMGMDgA
- U+eA9cjj/8vwUqk2TGxr0RZQ7o/tLhlXhuNLLLAms5+v88KLME7iWlWw8PWe90HjZkSx
- nuMmDLySlFnAxdcQtAqYdnU1GneQ9CWOHteqQPwwZUK6C9Z9fk1xfuERO34bIXNolZv3
- 0GwA==
-X-Gm-Message-State: AOAM533CovQjBRPgZMMKG1/jhOghK7r6o+1FJ+dxsT5t1SJaEFiIpE0l
- KBXkAtsG/IiSy9PhBy4lkAHEIQ==
-X-Google-Smtp-Source: ABdhPJwWmzWbSUcSqhxRmqwiRlnUtISqcTB18ryg0ExNBG63qr15PR503yPSZQPxoiKrD8/dRpXNaw==
-X-Received: by 2002:ac8:74ca:: with SMTP id j10mr4623260qtr.253.1603412866332; 
- Thu, 22 Oct 2020 17:27:46 -0700 (PDT)
+ bh=rZQyPAeXprnI3SdY6K+znHa1AdXFdSlLCHDM5Bn/bck=;
+ b=qnIqCbheniVeNoUlrL/y1izJtBw5ilOR4DppWFCkB1CpGQ+rdG2TYwun9RGghMUH0U
+ Wh7L0Bou9tHhgknr/3fspPaq1RSE4uGP5i6/B/CwveTbSojOwHcyYRFVR8qfNyaSmA1Y
+ FZJC838lDZEexroWv5GmeQeT1Qf/X94u1CsY2PLNwzM3MYBmSG//kQc0afa0sTseGkFL
+ /zl81oqVjc1SX7QNdccB15WuBvRigEWLs7NqO6IfJt1cswsvqjXYHLPwQ6Eal/v9a3O3
+ Y+LN0P4rEIv55mDSpKiqFVKrWkI8HKVqxbuKuma3/sToTobSJ9hZ0jjyCUbJK7Tb9w3m
+ 1+cA==
+X-Gm-Message-State: AOAM532bIe7qZR6sVScJcdKkfFgZcgod8/ccoJ0pmIbbEsdDKR8xmbEK
+ uZa+5M0of4hJ2JwKWxiPzX0hpQ==
+X-Google-Smtp-Source: ABdhPJzvwa3WzAP2UNNgBEtBPaRnyDTAIXLzwwItmmp5NOA2siFADoPOIPqzKeF17gMB+TPGAUQcFQ==
+X-Received: by 2002:a05:6214:4b2:: with SMTP id
+ w18mr5127044qvz.14.1603412994430; 
+ Thu, 22 Oct 2020 17:29:54 -0700 (PDT)
 Received: from bill-the-cat
  (2606-a000-1401-8ebe-545f-9691-be58-8292.inf6.spectrum.com.
  [2606:a000:1401:8ebe:545f:9691:be58:8292])
- by smtp.gmail.com with ESMTPSA id n57sm2331848qtf.52.2020.10.22.17.27.38
+ by smtp.gmail.com with ESMTPSA id g11sm2176087qkl.30.2020.10.22.17.29.53
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 22 Oct 2020 17:27:39 -0700 (PDT)
-Date: Thu, 22 Oct 2020 20:27:36 -0400
+ Thu, 22 Oct 2020 17:29:53 -0700 (PDT)
+Date: Thu, 22 Oct 2020 20:29:51 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <20201023002736.GA14816@bill-the-cat>
-References: <20201007161148.59389-1-xypron.glpk@gmx.de>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20201023002951.GW14816@bill-the-cat>
+References: <20201012074750.15602-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-In-Reply-To: <20201007161148.59389-1-xypron.glpk@gmx.de>
+In-Reply-To: <20201012074750.15602-1-patrick.delaunay@st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Anatolij Gustschin <agust@denx.de>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Patrice Chotard <patrice.chotard@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Cristian Ciocaltea <cristian.ciocaltea@gmail.com>, u-boot@lists.denx.de,
- Alexander Graf <agraf@csgraf.de>,
- Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
- Ovidiu Panait <ovidiu.panait@windriver.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Andreas Dannenberg <dannenberg@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/1] common: rename getc() to getchar()
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH] Remove default value of CONFIG_PREBOOT
+ for CONFIG_USB_STORAGE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,39 +71,32 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3727544936457063610=="
+Content-Type: multipart/mixed; boundary="===============1035315110600312598=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============3727544936457063610==
+--===============1035315110600312598==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="+PIqGITk9NA83ikA"
+	protocol="application/pgp-signature"; boundary="RL2wp5SU9DpvSuVO"
 Content-Disposition: inline
 
 
---+PIqGITk9NA83ikA
+--RL2wp5SU9DpvSuVO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 07, 2020 at 06:11:48PM +0200, Heinrich Schuchardt wrote:
+On Mon, Oct 12, 2020 at 09:47:50AM +0200, Patrick Delaunay wrote:
 
-> The sandbox is built with the SDL2 library with invokes the X11 library
-> which in turn calls getc(). But getc() in glibc is defined as
+> Remove the default value "usb start" for CONFIG_USB_STORAGE as the USB
+> storage boot initialization is correctly managed by  distro boot command
+> ('usb_boot' defined in include/config_distro_bootcmd.h already include
+> the command 'usb  start').
 >=20
->     int getc(FILE *)
->=20
-> This does not match our definition.
->=20
->     int getc(void)
->=20
-> The sandbox crashes when called with parameter -l.
->=20
-> Rename our library symbol getc() to getchar().
->=20
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> Fixes: 324d77998ed6 ("Define default CONFIG_PREBOOT with right config opt=
+ion")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
@@ -120,27 +104,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---+PIqGITk9NA83ikA
+--RL2wp5SU9DpvSuVO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+SI3gACgkQFHw5/5Y0
-tyySgwwAqhW8VNHPnuO8aEmvNXYOPRpriXwW/Fu1ibDLHFsPFGJXcD8Kta1rl9lL
-3X6MIQwL0bmF1R8oTlltZGKMjTBdUxelf7KHrxAznl9hEU5MdPjZYNyYYHyS35GO
-LuJ/YfZPIfDQeGnauEt1ZWPL61g97RRucbbY8nwepYcLgzaUQrFKFGA+Sn2JG4js
-zz3u5ha5xEZziGm7ZIfkt8njY1E/tleu+h5WHaefGUZp0dGFRTwW8OM5YRlyDSW7
-1cWnjMvhCmjCr198Pd1tK0Egjhb2v6uji86uIB/xCSJmfj2pUAvXPn68WBqzFRHQ
-DaTjxCAhqwdGXLRQFHdh0ERzOmOlgB5A29lv+umd5eeQo4FG1P3DdxBiw/Nu/bxI
-Tzk3wdXcubNM83xzDWeq23PzvQCVtp/YPj7qVLp4sotiYZaMDUT5+G07WJZsRQsp
-qcHaDzXJppJ3B1n8fdj+P0UEbgXNBnS6Gow0wDhZgE0R+UdL8Geqg62rTUvVMGGV
-qfe++vYU
-=2jBG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+SI/8ACgkQFHw5/5Y0
+tyxHTgv+Kb9Jtjz3Two+Wt7pjzumAjKrhhcO8/1zKLsavLqma5h2u02LjY+ZQRH1
+iPuWh8wgQy8lHxm4IEyHXzIMbCNZjwQnWNIZlm9XjJRAf03V10vAWmH+/IsdHbin
+zr+y1Sg38xb379XX21O9ta7QAktcQp93xvxuL2CrXsw2YXH1j2MwY0xtj8AP3hky
+B8JW7U5lo7LrfJRJTguFw+QnJgawSl16VUo4DJby1wL9DHXmJN+j6THY9teyEgOv
+AkA50SRaTZf4EZytnD7ulXj/rXd2r5kalcA0pLB/6tQK/omdO0H+YaRE6S8BQVj0
+f5RfD1o8p0PydpnPubHX+qV0PIy0X2G31byqV1OBgmJTlg6yjdrXoki5N5ED2SxI
+oM9HoM3wFHQRJghN4m5rG43fCL7OWq4opNtG16AdqSsiCXmwIKUvYmY2SRlhlIr8
+xIIY4bTW6ZSxz0lXcgZBYd8UbFACRkwt7STVJr5UTncjCRu4AkFKzbHmEBQcunCT
+t2VtfZ0M
+=/9x9
 -----END PGP SIGNATURE-----
 
---+PIqGITk9NA83ikA--
+--RL2wp5SU9DpvSuVO--
 
---===============3727544936457063610==
+--===============1035315110600312598==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -151,4 +135,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============3727544936457063610==--
+--===============1035315110600312598==--

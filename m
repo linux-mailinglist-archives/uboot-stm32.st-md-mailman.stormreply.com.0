@@ -2,111 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A5CA298A74
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Oct 2020 11:36:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0B902996C1
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Oct 2020 20:22:57 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D8E63C36B0B;
-	Mon, 26 Oct 2020 10:36:10 +0000 (UTC)
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6801BC36B0B;
+	Mon, 26 Oct 2020 19:22:57 +0000 (UTC)
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+ [209.85.128.66])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76EEFC36B0A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 69751C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 26 Oct 2020 08:36:08 +0000 (UTC)
-Received: from pps.filterd (m0174679.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 09Q8ZP9L009918; Mon, 26 Oct 2020 08:35:50 GMT
-Received: from eur04-vi1-obe.outbound.protection.outlook.com
- (mail-vi1eur04lp2053.outbound.protection.outlook.com [104.47.14.53])
- by mx0a-0039f301.pphosted.com with ESMTP id 34cdn4bhkd-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 26 Oct 2020 08:35:50 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lKOZzpXWmXqe2nSUvtE4N0U5oEgDSva22b32NQqo8o0V7Vef5xLYpAMDMHFKVNTGlFiFuYyNernoijszErER1d/IOA/rS+nlF3EoR9rMyM84Mq97BnswvAIjfr5LO9414tFtrwDoxnryG7uch2XLiosBrHCqaWV4aIpqGgoP6oNwOhVRssHjrzeCMJBQPIsJDVZLATDNP0zbcZdoAfnOKjVG8WGMLXZExr7igx6PnIjQxs0hJkoYS0A3Vh0QurTbOlDE6G20uw9JO5cvNADz6SJ33ypYJvSUdqYAtmXyZajJvBCKRDOzJ64Ormcp97/VSmO1x94q3zGVIokHuvntjw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4TL0miJMSYv/tPaIWFRQIRKtoUJa5jGeBYMQwctrQkU=;
- b=dCUBIA3uHJJmn3C0fU+hyEpEBg3dVZMOqkMUbtxFsb3KgFjeu55WWubvgyVcFo6FDs7AGBJ4fQvaZYGwhOnFRvULSnFX1dXyRNX86OPUatkeeTY5CV+MNzeHkhmhTDXJYbpzZ5xmmGhFCe/vui/DSdPWwC6ewJ63c27/eFp5jHMghnBlTU2W6TCc/P8kzv1xy2pirQvsTN0YiGSDx+6GB07E94nDHVzvLOHbCht7G4TC0+mF5gZM88umaAbXfGOLwH/MkzfOUnBpB/6hDAdvQrbtFOgq/xuXV1mQB1R/lgDKIMt3KAwhytJIbksCEUBIyJzp9fQONd4jiIVWdrn2qQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4TL0miJMSYv/tPaIWFRQIRKtoUJa5jGeBYMQwctrQkU=;
- b=BcT3bCgacFGukFMDZkJrlv+DpIHXtr+3kA4qF6KshkBSHJ3qB2gtl1ltGvn4zCsaiT+u6/B7+qyyvKggBA8//zCijihEgZpADi8zFAUJVz194OVrJAGp0XewmiP+ecCydQ8rqsqBdT12zBdUV9JagYDFnAE3Qfaew6odQLRdD1FciQKhNoS3wonfQEIIddszstvS1sL+5PRy7q5Xwd+7Tp2thoSaP6OrXo+9w0SG6N3lOVanOTpGyotRlQ9iCftpBfM9E2ko+4/7CUiB4WSfLaaU8ufBs2RmkjcUFEMEgLoeZ/GGt1f6VhijL8D/SfvSDr9VqXu9B3zg9dO+AXaLfw==
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
- by AM0PR03MB5553.eurprd03.prod.outlook.com (2603:10a6:208:171::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18; Mon, 26 Oct
- 2020 08:35:46 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e]) by AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::501:a686:7515:465e%8]) with mapi id 15.20.3477.029; Mon, 26 Oct 2020
- 08:35:46 +0000
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 1/2] hush: Remove default CONFIG_SYS_PROMPT_HUSH_PS2
- setting from board files
-Thread-Index: AQHWq3J3lYzugYBav0KSVb7gFPzX66mpjxoA
-Date: Mon, 26 Oct 2020 08:35:46 +0000
-Message-ID: <8f9bdac1-df06-d1fa-f896-5dd208c0d16d@epam.com>
-References: <20201026083142.6395-1-patrick.delaunay@st.com>
-In-Reply-To: <20201026083142.6395-1-patrick.delaunay@st.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: st.com; dkim=none (message not signed)
- header.d=none;st.com; dmarc=none action=none header.from=epam.com;
-x-originating-ip: [185.199.97.5]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 8fd884e0-1256-4811-12ba-08d8798a22b4
-x-ms-traffictypediagnostic: AM0PR03MB5553:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <AM0PR03MB555392BAE5A35D36FACD8C09E7190@AM0PR03MB5553.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:138;
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: rOqwkXgz6P5WTLD1YG21MV6A3USKfg6RT99jC7mEi4IERVJ85SDoumcMSosemzrbdI2BBa5eqg90gRa7CnohNKBEf8MXxPh8jgiNX9wykvFrwXDvDYfU48WNRoBthlfgNnwAglqGGI9LHnmTrxHBPAMShgxsn3/T9RzHCN5HBghJ1HatsggwVaXoCDwyiCqd9TlRJMeu5VG+w/TUQxq6TUzxfZpnXkS68AzOJUkeYJKTrxrdLil0tUm94KiE7EWb6pttYUBTdJ8lmAwb/7s2dYmKdx6Q3J/qGsk9GkRmHxQBHCSVcufTmm3KsXWMfrWTCCLR1kCZ69KpXvsTCxMibjpDHsrdQVqy6sKvsvEuDHtCZ4YqUIfVk4iIPWzyDr7/eoq7wdOmODghWHBjw8sgHQgu93OIbLCL6rSuHno2Z5otU1DBrrUpQ4ovdkpvJVBFU2Jif79UnkJIccl/uTwmWw==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR03MB6324.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(396003)(346002)(376002)(136003)(366004)(39860400002)(316002)(66446008)(6486002)(76116006)(66946007)(53546011)(31686004)(54906003)(36756003)(86362001)(966005)(478600001)(2616005)(31696002)(83080400002)(8676002)(26005)(8936002)(6512007)(186003)(7416002)(4326008)(71200400001)(64756008)(66556008)(91956017)(6506007)(66476007)(110136005)(2906002)(83380400001)(5660300002);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata: tTJktBEjZjENnoJVPFJlpl4v1sA0xYgeX5wI48BbK8Wfg4l5WaAQXjjqM8Hl0fopqDW/iNinXLQknKk+90HL71QeOCfLOISfZgCTBa7WYrXjTIz4+YpGTJkjfJlUf1DhI0CmcO3xyiAASIVHvTv0s8+n4EvLyKO2nnFkmhCD1FqX6WNG2HS+beo8uiGmxFjfQYpObECmAY4gspXeQ/NXmyqD1Ovlik3GsqwMFwL+ltIl80AKZQPCPjvYGjVpQeNX0XqIh72FK7xZrPw+x4daRL8co5Kx5fi/1wbGfQknJcx9CiJT/aVAPkBhNxwBSu54aLM40Js9ispqZuccFXVCfjXVc2lv87DHGjCk8phuP+xasrjM5YY84MXVv8vOOkj/hNxi1EPl+0D6qXuCKZosSPrzkVfkU79du7/iFcqRo8rmusthF2gudaIbMyNjxgZYgf//YIlMp8jwxOyz8Q/WG77tpTAtF2im69GEF/yU4PRwZphiXIzA4RGTv4uwwFHd+6Rk12luz7WOerQiTQo4oza8HS4irQvs7CLH0aAhIj2CgjPFf37ssm8c2KzA4ufzimTkHgBCAmpo6488+tD6nuE7Hcdn6tn2069QsXr3uoZ9leBqZaxvLP5EcYW1gp0PmXNJPqlfWc/Rn7BmTnB0cg==
-Content-ID: <A7BF6954FCE3A94B9F07F173614E61A0@eurprd03.prod.outlook.com>
+ Mon, 26 Oct 2020 19:22:55 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id v5so12807462wmh.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 26 Oct 2020 12:22:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tppMN3jktTXk0CzIWyuHCrXdu6QjxJQLVC48oV4KRjs=;
+ b=S3IsUaDjVT22/ypYUGWdRwN47JAkAZDg4qrVR07lKXHObwmi/7u61nbWFIKtjiBLX0
+ /4XGnYTiXJQfCoH0gWDFgTlrj6uqijsA3zmDd3bWq6iM0jBJDJwA4KpkeKC46WNOKnaX
+ PCDkEIy6guKrLfhFvtl4gffVfZV3huJqWABRQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tppMN3jktTXk0CzIWyuHCrXdu6QjxJQLVC48oV4KRjs=;
+ b=kIiefXfj4Oo5nUYmwd4D5C9ywMKfj7OyUCj2WU50+wpI7QEeQ00+86apVU3P2BW4/c
+ kfQSIiSA0yDR2FHdk1NaIv42Jj/gfAXlVTvMXtr09IT6QUkYmDFjQlz+xGkwGXH8TgfZ
+ n7ikfzvJaC3w48uX4QTzOoBJW9K/IQEXQ2sVE+n9vb+fv6B+6gLn21AnKkwhTD/fY2Ff
+ pQn7Y0cWGjVr9cnGos1NYL4illeYKax9t8OeS9PRs6sJKJvlcO65Zm79xmhvVsRWkhc5
+ I/EyDXgH/VIN+MtwCQ6EkQ1PIV0SJI/djg0Obm5otBSo+rJ/LPT3w3hgbfA7Eb3ojdrO
+ 5DSg==
+X-Gm-Message-State: AOAM532a0i7FD7UHdLbHM12sYqtrJa4BbN0CdRPMUjK+vnajCLYzsgww
+ LvGTG9Ag9xIbsbEHUV97tP+tmBwuXJpNJGAxwCZB4g==
+X-Google-Smtp-Source: ABdhPJxlmB5JTbAyqhSgOVIeLRnfi8cOL3eDVu9PM7IiFRoWKwrTftC47BYbRnqYkK/C9cXWA7xwhhY0EuKwhKOzeEw=
+X-Received: by 2002:a7b:c18d:: with SMTP id y13mr17351187wmi.120.1603740174645; 
+ Mon, 26 Oct 2020 12:22:54 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB6324.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8fd884e0-1256-4811-12ba-08d8798a22b4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Oct 2020 08:35:46.6335 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: H0ACbvzZiRyKLiNEVpH9bwcTYPnFJ/w36QiVxlBfztneDUJdWmXGqUZL/h52qXp464mo0lAEm2LIJ0FzcfXBTtXJ4nI7tEXkJ99V4WfVDDsTa7QVs2hFVU4SuGUbRVUB
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR03MB5553
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
- definitions=2020-10-26_04:2020-10-26,
- 2020-10-26 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 spamscore=0
- phishscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501
- malwarescore=0 impostorscore=0 mlxscore=0 bulkscore=0 clxscore=1011
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2010260061
-X-Mailman-Approved-At: Mon, 26 Oct 2020 10:36:09 +0000
-Cc: Anastasiia Lukianenko <Anastasiia_Lukianenko@epam.com>,
- Igor Opaniuk <igor.opaniuk@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Adam Ford <aford173@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Stefan Bosch <stefan_b@posteo.net>,
- Marco Franchi <marcofrk@gmail.com>,
+References: <20201014091646.4233-1-patrick.delaunay@st.com>
+ <CAPnjgZ2Z8=hXqoWXz8nuUToWTGz3sCY8zneGA9WsaVGYPprxzQ@mail.gmail.com>
+ <88a21c960cc248af9cd08e2fc5681a69@SFHDAG2NODE3.st.com>
+In-Reply-To: <88a21c960cc248af9cd08e2fc5681a69@SFHDAG2NODE3.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 26 Oct 2020 13:22:43 -0600
+Message-ID: <CAPnjgZ3S8PzSYjJSNJ0HhYk_=jkFR4yryL-qwPZRDM4BDQOwiw@mail.gmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Heiko Schocher <hs@denx.de>, Christophe KERELLO <christophe.kerello@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Fabio Estevam <festevam@gmail.com>, Alifer Moraes <alifer.wsdm@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] hush: Remove default
- CONFIG_SYS_PROMPT_HUSH_PS2 setting from board files
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ Yannick FERTRE <yannick.fertre@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/33] stm32: enable logging features
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,182 +74,126 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+Hi Patrick,
 
-On 10/26/20 10:31 AM, Patrick Delaunay wrote:
-> There is no reason to define default option for this macro which is
-> already done in common/cli_hush.c.
+On Thu, 15 Oct 2020 at 09:59, Patrick DELAUNAY <patrick.delaunay@st.com> wrote:
 >
->    87 #ifndef CONFIG_SYS_PROMPT_HUSH_PS2
->    88 #define CONFIG_SYS_PROMPT_HUSH_PS2      "> "
->    89 #endif
+> Hi Simon,
 >
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> > From: Simon Glass <sjg@chromium.org>
+> > Sent: jeudi 15 octobre 2020 17:06
+> >
+> > Hi Patrick,
+> >
+> > On Wed, 14 Oct 2020 at 03:16, Patrick Delaunay <patrick.delaunay@st.com>
+> > wrote:
+> > >
+> > >
+> > > This patch-set migrates several stm32 drivers to API compatible with
+> > > logging features (use dev_...() or log_...() function) and activate
+> > > the logging features in STM32MP15 boards.
+> > >
+> > > The size of U-Boot increased by 19kB (933026 to 952830 on
+> > > STM32MP157C-EV1 board for basic defconfig) but the boot time don't change
+> > drastically.
+> >
+> > >
+> > > For example on STM32MP157C-EV1 board:
+> > >
+> > > 1/ Before LOG patchset
+> > >
+> > > Timer summary in microseconds (12 records):
+> > >        Mark    Elapsed  Stage
+> > >           0          0  reset
+> > >     224,514    224,514  SPL
+> > >     961,170    736,656  end SPL
+> > >     964,006      2,836  board_init_f
+> > >   1,186,986    222,980  board_init_r
+> > >   1,651,379    464,393  id=64
+> > >   1,674,463     23,084  id=65
+> > >   1,675,164        701  main_loop
+> > >   4,025,806  2,350,642  id=175
+> > >
+> > > Accumulated time:
+> > >                 55,064  dm_f
+> > >                 66,749  dm_r
+> > >                 88,796  dm_spl
+> > >
+> > > 2/ With LOG activated (after this patchset)
+> > >
+> > > Timer summary in microseconds (12 records):
+> > >        Mark    Elapsed  Stage
+> > >           0          0  reset
+> > >     227,142    227,142  SPL
+> > >     984,585    757,443  end SPL
+> > >     987,579      2,994  board_init_f
+> > >   1,210,091    222,512  board_init_r
+> > >   1,673,354    463,263  id=64
+> > >   1,696,073     22,719  id=65
+> > >   1,696,775        702  main_loop
+> > >   5,443,104  3,746,329  id=175
+> > >
+> > > Accumulated time:
+> > >                 62,154  dm_f
+> > >                 66,264  dm_r
+> > >                 89,376  dm_spl
+> > >
+> > > For information even with all trace embbeded in U-Boot but not
+> > > activated, MAX_LOG_LEVEL=8 and LOG_DEFAULT_LEVEL=6
+> > >
+> > > Size increase by 190KB (952830 to 1147918) but boot time is stable
+> > > (1,748s vs 1,696s).
+> >
+> > This seems pretty bad. Is this because of console output, or something else? I
+> > understand the size increase, but not the boot time increase.
+>
+> For this last point I just execute STM32MP157C-EV1 boot
+> with a patch in configs/stm32mp15_basic_defconfig
+>
+> +CONFIG_LOGLEVEL=8
+> +CONFIG_LOG_MAX_LEVEL=8
+> +CONFIG_LOG_DEFAULT_LEVEL=6
+> +CONFIG_LOGF_FILE=y
+> +CONFIG_LOGF_LINE=y
+> +CONFIG_LOGF_FUNC=y
+>
+> And execute "bootstage report" after the second boot
+> (the first boot is pertubated by env save)
+>
+> I think the delta is linked to
+> 1/ size of U-Boot (SPL spent more time to load U-Boot)
+>     end of SPL 987,579  => 996,117
 
-For the Xen bits:
+OK.
 
-Acked-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+>
+> 2/ time to check for each debug trace: because I increase the log level
+>    (gd->default_log_level = 6 < MAX_LOG_LEVEL=8)
 
-Thank you,
+This might be the biggest part. If you look at _log() it always does
+the vsprintf() even if in fact log_dispatch() does not dispatch it to
+anything.
 
-Oleksandr
+I suspect that could be refactored to move the checking to a separate
+function, and then call it before doing the expensive vsprintf().
 
-> ---
 >
-> see previous patches:
+> 3/ treatment added in log_console_emit (some printf) and
+>     log_dispatch (processing_msg / gd->loghead)
+
+Likely this is fast.
+
 >
-> https://urldefense.com/v3/__http://patchwork.ozlabs.org/project/uboot/patch/11b23b65581253f10905bcefc923aacb3c2ce85a.1529647987.git.michal.simek@xilinx.com/__;!!GF_29dbcQIUBPA!kuAr0IR41fGK-arwjDJjvrgCPSun2J2QhGuqL3jeWOp_bGAsPKrocOHClsfQvvlGete5ostLcw$ [patchwork[.]ozlabs[.]org]
-> https://urldefense.com/v3/__https://lists.denx.de/pipermail/u-boot/2012-June/126510.html__;!!GF_29dbcQIUBPA!kuAr0IR41fGK-arwjDJjvrgCPSun2J2QhGuqL3jeWOp_bGAsPKrocOHClsfQvvlGetdcg8yzLQ$ [lists[.]denx[.]de]
+> 4/ lower cache performancy as trace code are pesent in memory even
+>     they are not used
 >
->
->   include/configs/apalis-imx8.h     | 1 -
->   include/configs/colibri-imx8x.h   | 1 -
->   include/configs/imx8mm_beacon.h   | 1 -
->   include/configs/imx8mm_evk.h      | 1 -
->   include/configs/imx8mn_evk.h      | 1 -
->   include/configs/imx8mp_evk.h      | 1 -
->   include/configs/imx8mq_evk.h      | 1 -
->   include/configs/imx8mq_phanbell.h | 1 -
->   include/configs/s5p4418_nanopi2.h | 4 ----
->   include/configs/verdin-imx8mm.h   | 1 -
->   include/configs/xenguest_arm64.h  | 1 -
->   11 files changed, 14 deletions(-)
->
-> diff --git a/include/configs/apalis-imx8.h b/include/configs/apalis-imx8.h
-> index db4e9011c0..b474b2f522 100644
-> --- a/include/configs/apalis-imx8.h
-> +++ b/include/configs/apalis-imx8.h
-> @@ -98,7 +98,6 @@
->   #define PHYS_SDRAM_2_SIZE		SZ_2G		/* 2 GB */
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		SZ_2K
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/colibri-imx8x.h b/include/configs/colibri-imx8x.h
-> index 29a37ed44f..fc2c191594 100644
-> --- a/include/configs/colibri-imx8x.h
-> +++ b/include/configs/colibri-imx8x.h
-> @@ -132,7 +132,6 @@
->   #define PHYS_SDRAM_2_SIZE		0x00000000	/* 0 GB */
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		SZ_2K
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mm_beacon.h b/include/configs/imx8mm_beacon.h
-> index 3c9541187f..9a93dba1c5 100644
-> --- a/include/configs/imx8mm_beacon.h
-> +++ b/include/configs/imx8mm_beacon.h
-> @@ -119,7 +119,6 @@
->   #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		2048
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mm_evk.h b/include/configs/imx8mm_evk.h
-> index 83521ad401..92eb85553e 100644
-> --- a/include/configs/imx8mm_evk.h
-> +++ b/include/configs/imx8mm_evk.h
-> @@ -120,7 +120,6 @@
->   #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		2048
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mn_evk.h b/include/configs/imx8mn_evk.h
-> index a6333085fe..cda8fc2ef7 100644
-> --- a/include/configs/imx8mn_evk.h
-> +++ b/include/configs/imx8mn_evk.h
-> @@ -124,7 +124,6 @@
->   #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		2048
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mp_evk.h b/include/configs/imx8mp_evk.h
-> index 8253c6aa2f..92091dfd6b 100644
-> --- a/include/configs/imx8mp_evk.h
-> +++ b/include/configs/imx8mp_evk.h
-> @@ -135,7 +135,6 @@
->   #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		2048
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mq_evk.h b/include/configs/imx8mq_evk.h
-> index 3f9a3bc100..96bfff749c 100644
-> --- a/include/configs/imx8mq_evk.h
-> +++ b/include/configs/imx8mq_evk.h
-> @@ -175,7 +175,6 @@
->   /* Monitor Command Prompt */
->   #undef CONFIG_SYS_PROMPT
->   #define CONFIG_SYS_PROMPT		"u-boot=> "
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		1024
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/imx8mq_phanbell.h b/include/configs/imx8mq_phanbell.h
-> index e8b65a4ba5..66c2c3a8d8 100644
-> --- a/include/configs/imx8mq_phanbell.h
-> +++ b/include/configs/imx8mq_phanbell.h
-> @@ -169,7 +169,6 @@
->   #define CONFIG_MXC_UART_BASE		UART1_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		1024
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/s5p4418_nanopi2.h b/include/configs/s5p4418_nanopi2.h
-> index 6dd1f3bc04..1e2180b970 100644
-> --- a/include/configs/s5p4418_nanopi2.h
-> +++ b/include/configs/s5p4418_nanopi2.h
-> @@ -102,10 +102,6 @@
->   /* Boot Argument Buffer Size */
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
->   
-> -#ifdef CONFIG_HUSH_PARSER
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
-> -#endif
-> -
->   /*-----------------------------------------------------------------------
->    * Etc Command definition
->    */
-> diff --git a/include/configs/verdin-imx8mm.h b/include/configs/verdin-imx8mm.h
-> index fd8405433d..4751bf5a5a 100644
-> --- a/include/configs/verdin-imx8mm.h
-> +++ b/include/configs/verdin-imx8mm.h
-> @@ -98,7 +98,6 @@
->   #define CONFIG_MXC_UART_BASE		UART1_BASE_ADDR
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
->   #define CONFIG_SYS_CBSIZE		SZ_2K
->   #define CONFIG_SYS_MAXARGS		64
->   #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
-> diff --git a/include/configs/xenguest_arm64.h b/include/configs/xenguest_arm64.h
-> index c44381e966..d76ce13d14 100644
-> --- a/include/configs/xenguest_arm64.h
-> +++ b/include/configs/xenguest_arm64.h
-> @@ -27,7 +27,6 @@
->   #define CONFIG_SYS_MALLOC_LEN         (32 * 1024 * 1024)
->   
->   /* Monitor Command Prompt */
-> -#define CONFIG_SYS_PROMPT_HUSH_PS2    "> "
->   #define CONFIG_SYS_CBSIZE             1024
->   #define CONFIG_SYS_MAXARGS            64
->   #define CONFIG_SYS_BARGSIZE           CONFIG_SYS_CBSIZE
+> Can I do some check/experimentation on my side ?
+
+Yes, if you can use the bootstage_start() and bootstage_accum() within
+the _log() function to measure the total time take in the run.
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

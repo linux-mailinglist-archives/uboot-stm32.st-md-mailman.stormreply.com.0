@@ -2,63 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 626CE297CEF
-	for <lists+uboot-stm32@lfdr.de>; Sat, 24 Oct 2020 16:51:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6B16298853
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Oct 2020 09:32:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2D552C424BD;
-	Sat, 24 Oct 2020 14:51:36 +0000 (UTC)
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
- [209.85.160.195])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99672C36B0B;
+	Mon, 26 Oct 2020 08:32:01 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 84D93C424BC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2C122C36B0A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 24 Oct 2020 14:51:34 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id m9so3620695qth.7
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 24 Oct 2020 07:51:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=R23RI/AO2BVzQDytjq200Wt2nfiigWznFynd/wTLQdw=;
- b=daxvnIJaQw1YbJ8PQhU+eDwf8Llsrf4+izv/DMHpCqFi8U6aqg/shZ++9lhI+Hnpwv
- heoxOO6HQVJswB5+b0r2bSoDXlntCpQ/74nwNZqDnwMxp/TP5ki+9JjbQ1eqkPHkFF57
- zw4YDBjZHnFWAGLMplhOukepQuDUq8czJc9QM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=R23RI/AO2BVzQDytjq200Wt2nfiigWznFynd/wTLQdw=;
- b=hgYN0bqmjYMDw+Nu/yyYlloY5PuhsE0BGLXqyIrsYt0Q/tNlx4GR1VTmsn1iZujB0R
- d2oRT4H77/nMVQI6D6X+3dascMylWrBh4/P132amGxFycEme+RoS+nGe5sDQT4Szd9hp
- GUyHIYghT+pMge8eqv+zC8wOYj6h7c54TsYHde87P2ud3v03/Xm5gz1L5hIx779by02e
- 7XUXyChVER9Zoup7vJCUtTrGL/OjyOB4HqLR6KtIW5aoGGveUMlNlX/UMO5vPT4VXWkk
- YE/uoZrOxu/pXuyNeiVqYllbU2MHLmo+c85iyfsXymOCgs0SZooTfh73F5cUutwZRimV
- pkSw==
-X-Gm-Message-State: AOAM533CBvvdsM0fe8qnyJiufQQcd6dR8OoqqztiN2qVL7hFjnLp83Ev
- zstbq+QHIdT6/w7TgYxBshRP3A==
-X-Google-Smtp-Source: ABdhPJzXUbswMjOx4+aMt4YfHl963DGX01a8Jl7Lw9ljhXH1+VdO+B24dS66mJxZyiuaJpza9Iihrw==
-X-Received: by 2002:aed:22fa:: with SMTP id q55mr7237666qtc.229.1603551093533; 
- Sat, 24 Oct 2020 07:51:33 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8ebe-9c01-c4e4-7778-4869.inf6.spectrum.com.
- [2606:a000:1401:8ebe:9c01:c4e4:7778:4869])
- by smtp.gmail.com with ESMTPSA id o193sm2963508qke.12.2020.10.24.07.51.32
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Sat, 24 Oct 2020 07:51:32 -0700 (PDT)
-Date: Sat, 24 Oct 2020 10:51:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Message-ID: <20201024145130.GB14816@bill-the-cat>
-References: <20200910162509.27997-1-patrick.delaunay@st.com>
+ Mon, 26 Oct 2020 08:32:00 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 09Q8QiZN028226; Mon, 26 Oct 2020 09:31:47 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=ufw2BATuxcxEsDiSyUicftfqCUApTMHFnOr5OuGLumo=;
+ b=wzRNppXq6sp+x8j04dZTRaBGwvsqWGWO553mubJDfzut6/iK/3rsYWS82bAIqzn7QoRl
+ 59L0nEKH4mC0KKJ2kQcUex8+AcaHyukhm3HdlxwQjK0FrnbuleMhlNcRST/sWpmwFv6J
+ KGW+8AYo6MYYRKtIcxz0bWdDKHwjXE7gof08Udp93h5wlBeXvkH2k2n8tJzqyoRRaZfB
+ VhblSRO64PejbMd7R59MG0KqOHngPdiQLDRnjUoexTf5THHpmU3xI/BMxo8kyMzZQlqe
+ NzFGuc1ltsfBYu5g3siGbRi8Yo1t55EhbazDO9NNOUuRzjAMhq3qx0KSMcfAgjsfj3IO Xw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 34ccj1jfub-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 26 Oct 2020 09:31:47 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7BD0210002A;
+ Mon, 26 Oct 2020 09:31:46 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5ACEC2B0B99;
+ Mon, 26 Oct 2020 09:31:46 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 26 Oct 2020 09:31:45
+ +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 26 Oct 2020 09:31:41 +0100
+Message-ID: <20201026083142.6395-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200910162509.27997-1-patrick.delaunay@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] i2c: i2c-gpio: Convert to use APIs which
-	support live DT
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235, 18.0.737
+ definitions=2020-10-26_04:2020-10-26,
+ 2020-10-26 signatures=0
+Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Igor Opaniuk <igor.opaniuk@toradex.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Adam Ford <aford173@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Stefan Bosch <stefan_b@posteo.net>, Marco Franchi <marcofrk@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Fabio Estevam <festevam@gmail.com>, Alifer Moraes <alifer.wsdm@gmail.com>
+Subject: [Uboot-stm32] [PATCH 1/2] hush: Remove default
+	CONFIG_SYS_PROMPT_HUSH_PS2 setting from board files
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,64 +72,179 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6159452980167848222=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+There is no reason to define default option for this macro which is
+already done in common/cli_hush.c.
 
---===============6159452980167848222==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="KbG+cpf3i6ZSdWei"
-Content-Disposition: inline
+  87 #ifndef CONFIG_SYS_PROMPT_HUSH_PS2
+  88 #define CONFIG_SYS_PROMPT_HUSH_PS2      "> "
+  89 #endif
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
+
+see previous patches:
+
+http://patchwork.ozlabs.org/project/uboot/patch/11b23b65581253f10905bcefc923aacb3c2ce85a.1529647987.git.michal.simek@xilinx.com/
+https://lists.denx.de/pipermail/u-boot/2012-June/126510.html
 
 
---KbG+cpf3i6ZSdWei
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ include/configs/apalis-imx8.h     | 1 -
+ include/configs/colibri-imx8x.h   | 1 -
+ include/configs/imx8mm_beacon.h   | 1 -
+ include/configs/imx8mm_evk.h      | 1 -
+ include/configs/imx8mn_evk.h      | 1 -
+ include/configs/imx8mp_evk.h      | 1 -
+ include/configs/imx8mq_evk.h      | 1 -
+ include/configs/imx8mq_phanbell.h | 1 -
+ include/configs/s5p4418_nanopi2.h | 4 ----
+ include/configs/verdin-imx8mm.h   | 1 -
+ include/configs/xenguest_arm64.h  | 1 -
+ 11 files changed, 14 deletions(-)
 
-On Thu, Sep 10, 2020 at 06:25:09PM +0200, Patrick Delaunay wrote:
-
-> Use ofnode_ or dev_ APIs instead of fdt_ and fdtdec_ APIs so that the
-> driver can support live DT.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> Reviewed-by: Heiko Schocher <hs@denx.de>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---KbG+cpf3i6ZSdWei
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+UP3IACgkQFHw5/5Y0
-tywZ9Av/TSLXKp3//NIAu39ih0qtMMu+HNZw0BHi2E6AC7EgpYav+x9gCK3Cqbui
-qBbm8RuER2C/RnhqBz/cGrZUYMAPLkh4jFUXirTEPy8Lh5lZxZhjr2zTpUr+R0de
-uOj6b8HlkV2dgdxlkOnwh2MwT9nS8OutN7Yhe+su1+vRW8FFX1ECWXdu5K9dhUh6
-Ip/Q0PNjEwI67cFycluX6ictbMvzgP3tyF0mJtlSOTdHZbOJlHqQqlCQ32S0JUoe
-fN4cZ5UOskOj8jmpHot92ov03viOa1zKvaWSqtMVohh7APv1LQOYj+EdbAbPVgek
-BPzCXK5vg7p3pcx8h4RiWeKfpC7ruiM0RhkMlCduutitozU2Gstofhz4sLO8wLXz
-JUzb8N+GXGt63c/ljNGH/kYwOr5iNH7/gU4tbjY1WWTX99vzQIGI5syij8qiCpkF
-Ahc30Si+h4d4qbWGTu0JreHChmdjkmDr6mPGxZ1td+9Y+MbVNLqqAzJs3rqX0s3t
-hVTi/LN2
-=OmOF
------END PGP SIGNATURE-----
-
---KbG+cpf3i6ZSdWei--
-
---===============6159452980167848222==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/include/configs/apalis-imx8.h b/include/configs/apalis-imx8.h
+index db4e9011c0..b474b2f522 100644
+--- a/include/configs/apalis-imx8.h
++++ b/include/configs/apalis-imx8.h
+@@ -98,7 +98,6 @@
+ #define PHYS_SDRAM_2_SIZE		SZ_2G		/* 2 GB */
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		SZ_2K
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/colibri-imx8x.h b/include/configs/colibri-imx8x.h
+index 29a37ed44f..fc2c191594 100644
+--- a/include/configs/colibri-imx8x.h
++++ b/include/configs/colibri-imx8x.h
+@@ -132,7 +132,6 @@
+ #define PHYS_SDRAM_2_SIZE		0x00000000	/* 0 GB */
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		SZ_2K
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mm_beacon.h b/include/configs/imx8mm_beacon.h
+index 3c9541187f..9a93dba1c5 100644
+--- a/include/configs/imx8mm_beacon.h
++++ b/include/configs/imx8mm_beacon.h
+@@ -119,7 +119,6 @@
+ #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		2048
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mm_evk.h b/include/configs/imx8mm_evk.h
+index 83521ad401..92eb85553e 100644
+--- a/include/configs/imx8mm_evk.h
++++ b/include/configs/imx8mm_evk.h
+@@ -120,7 +120,6 @@
+ #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		2048
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mn_evk.h b/include/configs/imx8mn_evk.h
+index a6333085fe..cda8fc2ef7 100644
+--- a/include/configs/imx8mn_evk.h
++++ b/include/configs/imx8mn_evk.h
+@@ -124,7 +124,6 @@
+ #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		2048
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mp_evk.h b/include/configs/imx8mp_evk.h
+index 8253c6aa2f..92091dfd6b 100644
+--- a/include/configs/imx8mp_evk.h
++++ b/include/configs/imx8mp_evk.h
+@@ -135,7 +135,6 @@
+ #define CONFIG_MXC_UART_BASE		UART2_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		2048
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mq_evk.h b/include/configs/imx8mq_evk.h
+index 3f9a3bc100..96bfff749c 100644
+--- a/include/configs/imx8mq_evk.h
++++ b/include/configs/imx8mq_evk.h
+@@ -175,7 +175,6 @@
+ /* Monitor Command Prompt */
+ #undef CONFIG_SYS_PROMPT
+ #define CONFIG_SYS_PROMPT		"u-boot=> "
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		1024
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/imx8mq_phanbell.h b/include/configs/imx8mq_phanbell.h
+index e8b65a4ba5..66c2c3a8d8 100644
+--- a/include/configs/imx8mq_phanbell.h
++++ b/include/configs/imx8mq_phanbell.h
+@@ -169,7 +169,6 @@
+ #define CONFIG_MXC_UART_BASE		UART1_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		1024
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/s5p4418_nanopi2.h b/include/configs/s5p4418_nanopi2.h
+index 6dd1f3bc04..1e2180b970 100644
+--- a/include/configs/s5p4418_nanopi2.h
++++ b/include/configs/s5p4418_nanopi2.h
+@@ -102,10 +102,6 @@
+ /* Boot Argument Buffer Size */
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+ 
+-#ifdef CONFIG_HUSH_PARSER
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+-#endif
+-
+ /*-----------------------------------------------------------------------
+  * Etc Command definition
+  */
+diff --git a/include/configs/verdin-imx8mm.h b/include/configs/verdin-imx8mm.h
+index fd8405433d..4751bf5a5a 100644
+--- a/include/configs/verdin-imx8mm.h
++++ b/include/configs/verdin-imx8mm.h
+@@ -98,7 +98,6 @@
+ #define CONFIG_MXC_UART_BASE		UART1_BASE_ADDR
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2	"> "
+ #define CONFIG_SYS_CBSIZE		SZ_2K
+ #define CONFIG_SYS_MAXARGS		64
+ #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
+diff --git a/include/configs/xenguest_arm64.h b/include/configs/xenguest_arm64.h
+index c44381e966..d76ce13d14 100644
+--- a/include/configs/xenguest_arm64.h
++++ b/include/configs/xenguest_arm64.h
+@@ -27,7 +27,6 @@
+ #define CONFIG_SYS_MALLOC_LEN         (32 * 1024 * 1024)
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_PROMPT_HUSH_PS2    "> "
+ #define CONFIG_SYS_CBSIZE             1024
+ #define CONFIG_SYS_MAXARGS            64
+ #define CONFIG_SYS_BARGSIZE           CONFIG_SYS_CBSIZE
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6159452980167848222==--

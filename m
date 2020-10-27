@@ -2,80 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBEE129C150
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Oct 2020 18:25:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9491A29CAE3
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Oct 2020 22:04:52 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 50687C36B0B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Oct 2020 17:25:40 +0000 (UTC)
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
- [209.85.160.196])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3EFB5C36B0B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Oct 2020 21:04:52 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 57265C36B0A
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 27 Oct 2020 21:04:50 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
+ [209.85.167.172])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66A70C36B0A
+ by mail.kernel.org (Postfix) with ESMTPSA id 83BEB218AC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 Oct 2020 17:25:39 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id i7so1579755qti.6
+ Tue, 27 Oct 2020 21:04:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1603832688;
+ bh=lsG88PfLLJDpoAp2iQ1oZGknQICSB8jTW2LoLknzmgg=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=nxI1hT1EAaKFJnnU1RBhYRrKMXyJacAauf7KNlenOzA7QNTVy89aDvaEiMJS2hgdi
+ BhphnUU8ppmZXjnuqeoViBbOkHs340Bt9f0lzaDunm1DEhGje+dm5hR+5efS4ZS8W6
+ WM6aLyECVYnS5iQSVAIP/VEQUwJACyVgMwXwe0mw=
+Received: by mail-oi1-f172.google.com with SMTP id c72so2757379oig.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 Oct 2020 10:25:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=PWDhR76TuPwIgEiD3/0slJ351ZsYj/er2Ib6QKkByNs=;
- b=bCUzsMT295wztgiM0vRkuWHeCsPoehCALjzkyxHqVD/BrDYwZjmzZJ8431ljc/BtyV
- lNhATCQg+eS6zivV99/ys1vfkdfhyjA8HOT0hMBeKHmvIvhdsqT06srBqu3H3Wxbd2c/
- 9MEPMZ8prPxHWbQ1UpZbImwzWtjqhIYfexkBU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=PWDhR76TuPwIgEiD3/0slJ351ZsYj/er2Ib6QKkByNs=;
- b=aSuxIF2k4c7QxP7gwHG0HConf8MgtAmcJPL+3SW1rB2RGNWmmA0aOBe+SCAVdPUP+h
- k/VLkMxXRaCf5VlJdhyy/d7IZYPtBlqYtTU+LT43UxCE7qS6J5MGoofw+bkWlElNvKHf
- MLogIa2cut5XFfzBI+J4BhNOlH9v4VEEuXbf94GcHazq4rxbkAcF0R2M48Cz9nR+yzd4
- Y+4UMCjLJ/QN44wx87WyM3HH4r1AmDZP4/BEj9oJASdQTrAmq4Zvrz6h8Z9zldozJ6CH
- u1xTwmMJh9fvQReIIqESh2aLptGp9R6IfslgZJOrYfJ8+DrUtXZdyz2QXyrFcW0iu/K2
- o49Q==
-X-Gm-Message-State: AOAM530nf/o7Ijh3bQwwm9C44kDwctGR4aiId66oidjBH41c2hb8qdbr
- Fly5Hw+UkK8RYJJoALbCBremnw==
-X-Google-Smtp-Source: ABdhPJzBgvwhNv5h7D8crNSgs2WlWj9+yd/ElWukXgyZSRRobA5qQ20KZvR4+KfVSE7eyyn0sqx9uQ==
-X-Received: by 2002:ac8:5bc2:: with SMTP id b2mr3206565qtb.284.1603819537386; 
- Tue, 27 Oct 2020 10:25:37 -0700 (PDT)
-Received: from bill-the-cat
- (2606-a000-1401-8ebe-f905-bd01-6b83-3c89.inf6.spectrum.com.
- [2606:a000:1401:8ebe:f905:bd01:6b83:3c89])
- by smtp.gmail.com with ESMTPSA id q188sm1136534qka.56.2020.10.27.10.25.35
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 27 Oct 2020 10:25:36 -0700 (PDT)
-Date: Tue, 27 Oct 2020 13:25:33 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20201027172533.GD14816@bill-the-cat>
+ Tue, 27 Oct 2020 14:04:48 -0700 (PDT)
+X-Gm-Message-State: AOAM532ZPDIcEhTqOicY9xxRUc+DO8Gd7pPX+fVypomq4FazIUl/ZTg9
+ W8gkWAI7k2PxWBaLXdqGdv05L5fLq5uuxoQVWhs=
+X-Google-Smtp-Source: ABdhPJxIvIoYA5tOe9oVItyafL1HbYuLLgYz+ecbHIj0qaAYVaHO9MW+a5XbbdNWKM0MeK4Id277LAY906ls+gWptPo=
+X-Received: by 2002:aca:2310:: with SMTP id e16mr2772144oie.47.1603832687683; 
+ Tue, 27 Oct 2020 14:04:47 -0700 (PDT)
+MIME-Version: 1.0
 References: <20201006163602.21687-1-patrick.delaunay@st.com>
  <CAMj1kXET8=ERg7gGqWa-FwLZzAuztBsVMhyTGmYEMAxzb63_sw@mail.gmail.com>
  <190d019a-7e18-b4bc-9276-e14bbe4c2855@pengutronix.de>
  <258ba4fa-8d1e-56be-e0de-2d6c09812c13@pengutronix.de>
  <CAMj1kXFoJx7henE0FbSXzsATH4z4Xg8EfJkc+ki7=i33cz3Vew@mail.gmail.com>
  <f629253d8c92446ca1d33a25058c1676@SFHDAG2NODE3.st.com>
-MIME-Version: 1.0
-In-Reply-To: <f629253d8c92446ca1d33a25058c1676@SFHDAG2NODE3.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+ <20201027172533.GD14816@bill-the-cat>
+In-Reply-To: <20201027172533.GD14816@bill-the-cat>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Tue, 27 Oct 2020 22:04:36 +0100
+X-Gmail-Original-Message-ID: <CAMj1kXGmW7bm10X9uQV1Aod=RrE30x_v5=1ACPSagoNyRjZ3Pw@mail.gmail.com>
+Message-ID: <CAMj1kXGmW7bm10X9uQV1Aod=RrE30x_v5=1ACPSagoNyRjZ3Pw@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: chenshuo <chenshuo@eswin.com>, Lokesh Vutla <lokeshvutla@ti.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>,
- Stefan Roese <sr@denx.de>, Ard Biesheuvel <ardb@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Marek Vasut <marex@denx.de>,
+ Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Marek Vasut <marex@denx.de>,
  Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
  Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Masahiro Yamada <masahiroy@kernel.org>, Rajesh Ravi <rajesh.ravi@broadcom.com>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Rajesh Ravi <rajesh.ravi@broadcom.com>,
  Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Etienne Carriere <etienne.carriere@linaro.org>,
  Masahiro Yamada <yamada.masahiro@socionext.com>,
  Simon Glass <sjg@chromium.org>, Tero Kristo <t-kristo@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
 Subject: Re: [Uboot-stm32] [PATCH 0/7] arm: cache: cp15: don't map reserved
  region with no-map property
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -89,216 +80,137 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2451981318119500020=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============2451981318119500020==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="kxxrNrcW2VJu0g25"
-Content-Disposition: inline
-
-
---kxxrNrcW2VJu0g25
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Oct 09, 2020 at 05:00:44PM +0000, Patrick DELAUNAY wrote:
-> Hi Ard,
->=20
-> > From: Ard Biesheuvel <ardb@kernel.org>
-> > Sent: mercredi 7 octobre 2020 15:16
-> >=20
-> > On Wed, 7 Oct 2020 at 13:53, Ahmad Fatoum <a.fatoum@pengutronix.de> wro=
-te:
-> > >
-> > > Hello,
-> > >
-> > > On 10/7/20 1:23 PM, Ahmad Fatoum wrote:
-> > > > My findings[1] back then were that U-Boot did set the eXecute Never
-> > > > bit only on OMAP, but not for other platforms.  So I could imagine
-> > > > this being the root cause of Patrick's issues as well:
-> > >
-> > > Rereading my own link, my memory is a little less fuzzy: eXecute Never
-> > > was being set, but was without effect due Manager mode being set in t=
-he
-> > DACR:
-> > >
-> > > > The ARM Architecture Reference Manual notes[1]:
-> > > > > When using the Short-descriptor translation table format, the XN
-> > > > > attribute is not checked for domains marked as Manager.
-> > > > > Therefore, the system must not include read-sensitive memory in
-> > > > > domains marked as Manager, because the XN bit does not prevent
-> > > > > speculative fetches from a Manager domain.
-> > >
-> > > > To avoid speculative access to read-sensitive memory-mapped
-> > > > peripherals on ARMv7, we'll need U-Boot to use client domain
-> > > > permissions, so the XN bit can function.
-> > >
-> > > > This issue has come up before and was fixed in de63ac278
-> > > > ("ARM: mmu: Set domain permissions to client access") for OMAP2 onl=
-y.
-> > > > It's equally applicable to all ARMv7-A platforms where caches are
-> > > > enabled.
-> > > > [1]: B3.7.2 - Execute-never restrictions on instruction fetching
-> > >
-> > > Hope this helps,
-> > > Ahmad
-> > >
-> >=20
-> > It most definitely does, thanks a lot.
-> >=20
-> > U-boot's mmu_setup() currently sets DACR to manager for all domains, so=
- this is
-> > broken for all non-LPAE configurations running on v7 CPUs (except OMAP =
-and
-> > perhaps others that fixed it individually). This affects all device map=
-pings: not just
-> > secure DRAM for OP-TEE, but any MMIO register for any peripheral that is
-> > mapped into the CPU's address space.
-> >=20
-> > Patrick, could you please check whether this fixes the issue as well?
-> >=20
-> > --- a/arch/arm/lib/cache-cp15.c
-> > +++ b/arch/arm/lib/cache-cp15.c
-> > @@ -202,9 +202,9 @@ static inline void mmu_setup(void)
-> >         asm volatile("mcr p15, 0, %0, c2, c0, 0"
-> >                      : : "r" (gd->arch.tlb_addr) : "memory");  #endif
-> > -       /* Set the access control to all-supervisor */
-> > +       /* Set the access control to client (0b01) for each of the 16
-> > + domains */
-> >         asm volatile("mcr p15, 0, %0, c3, c0, 0"
-> > -                    : : "r" (~0));
-> > +                    : : "r" (0x55555555));
-> >=20
-> >         arm_init_domains();
->=20
-> The test will take some time to be sure that solve my remaining issue bec=
-ause  issue is not always reproductible.
->=20
-> At fist chek, I wasn't sure of DACR bahavior, but I found in [1] the line=
- :
->=20
-> 	The XN attribute is not checked for domains marked as Manager. Read-sens=
-itive memory must
-> 	not be included in domains marked as Manager, because the XN bit does no=
-t prevent prefetches
-> 	in these cases.
->=20
-> So, I need  to test your patch +  DCACHE_OFF instead of INVALID=20
-> (to map with XN the OP-TEE region) in my patchset.
->=20
-> FYI: I found the same DACR configuration is done in:
-> 	arch/arm/cpu/armv7/ls102xa/cpu.c:199
->=20
-> [1] https://developer.arm.com/documentation/ddi0406/b/System-Level-Archit=
-ecture/Virtual-Memory-System-Architecture--VMSA-/Memory-access-control/The-=
-Execute-Never--XN--attribute-and-instruction-prefetching?lang=3Den
->=20
-> Patrick
->=20
-> For information:
->=20
-> At the beginning I wasn't sure that the current DACR configuration is an =
-issue because in found
-> in pseudo code of  DDI0406B_arm_architecture_reference_manual_errata_mark=
-up_8_0.pdf
->=20
-> B3.13.3 Address translation
-> 	if CheckDomain(tlbrecord.domain, mva, tlbrecord.sectionnotpage, iswrite)=
- then
-> 		CheckPermission(tlbrecord.perms, mva, tlbrecord.sectionnotpage, iswrite=
-, ispriv);
->=20
-> B3.13.4 Domain checking
-> 	boolean CheckDomain(bits(4) domain, bits(32) mva, boolean sectionnotpage=
-, boolean iswrite)
-> 		bitpos =3D 2*UInt(domain);
-> 		case DACR<bitpos+1:bitpos> of
-> 			when =E2=80=9800=E2=80=99 DataAbort(mva, domain, sectionnotpage, iswri=
-te, DAbort_Domain);
-> 			when =E2=80=9801=E2=80=99 permissioncheck =3D TRUE;
-> 			when =E2=80=9810=E2=80=99 UNPREDICTABLE;
-> 			when =E2=80=9811=E2=80=99 permissioncheck =3D FALSE;
-> 		return permissioncheck;
->=20
-> B2.4.8 Access permission checking
-> 	// CheckPermission()
-> 	// =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> 	CheckPermission(Permissions perms, bits(32) mva,
-> 		boolean sectionnotpage, bits(4) domain, boolean iswrite, boolean ispriv)
->=20
-> 		if SCTLR.AFE =3D=3D =E2=80=980=E2=80=99 then
-> 			perms.ap<0> =3D =E2=80=981=E2=80=99;
-> 			case perms.ap of
-> 				when =E2=80=98000=E2=80=99 abort =3D TRUE;
-> 				when =E2=80=98001=E2=80=99 abort =3D !ispriv;
-> 				when =E2=80=98010=E2=80=99 abort =3D !ispriv && iswrite;
-> 				when =E2=80=98011=E2=80=99 abort =3D FALSE;
-> 				when =E2=80=98100=E2=80=99 UNPREDICTABLE;
-> 				when =E2=80=98101=E2=80=99 abort =3D !ispriv || iswrite;
-> 				when =E2=80=98110=E2=80=99 abort =3D iswrite;
-> 				when =E2=80=98111=E2=80=99
-> 			if MemorySystemArchitecture() =3D=3D MemArch_VMSA then
-> 				abort =3D iswrite
-> 			else
-> 				UNPREDICTABLE;
-> 			if abort then
-> 				DataAbort(mva, domain, sectionnotpage, iswrite, DAbort_Permission);
-> 			return;
->=20
-> =3D> it seens only the read/write permission is checked here (perms.ap)
-> =3D> perms.xn is not used here
->=20
-> 	access_control =3D DRACR[r];
-> 	perms.ap =3D access_control<10:8>;
-> 	perms.xn =3D access_control<12>;
->=20
-> with AP[2:0], bits [10:8]
-> 	Access Permissions field. Indicates the read and write access permission=
-s for unprivileged
-> 	and privileged accesses to the memory region.
->=20
-> But now it is clear with [1]
-
-So, where did everything end up here?  I specifically didn't grab this
-series as it sounded like there was concern the problem should be solved
-via another patch.  Or would that be an in-addition-to?  Thanks!
-
---=20
-Tom
-
---kxxrNrcW2VJu0g25
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+YWA0ACgkQFHw5/5Y0
-tyyTQQv/cfq1J3/vctHTuuqNPha1jxyDgYE/EQPDkEV5pJP6uPIr6wtwvG1v5TBH
-HTzl0YSbXhvgQ1vj4ew5A+lSGyTD1+M4FcBGKSLc1iVPI4ZEhezktn4PZ3Y50vIt
-V0b1tGakOhIvhCbiAupGuv6/w5alXpAwDXQZsM0jHqR4+9nhSlumSUg8mq6CCP7f
-6iraVdY4Nerv24Fg4NFjJEDweJ0VMJFf5lnqpqFzaW7Jc5IiBOa5npxw4Gm2RPWG
-AV+NoXg9q8kKDZTjRrc9inJLpol7/XoHnLo2YW1Rx/A0znKOhhpnwAuEKO48Jvqp
-Z6qfBIqut/PznQI4HzaGECt/anadXsk4AbdyGCOHzq0sE3DhD8fIISWQ0JsNz88f
-3KeTd1vrAZJfxn3CNljUzSQcyLlAPbZu6JA/gFOliSv6/EO/M1bffgR5saEdyQWx
-gu3fr8Xume6kzIwa1WnJhFgQcwbg5sBL2Gt5vu5x8gMbrnmEvmsVA9pJesJiwORy
-lsoZsjl0
-=7ZTV
------END PGP SIGNATURE-----
-
---kxxrNrcW2VJu0g25--
-
---===============2451981318119500020==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2451981318119500020==--
+T24gVHVlLCAyNyBPY3QgMjAyMCBhdCAxODoyNSwgVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNv
+bT4gd3JvdGU6Cj4KPiBPbiBGcmksIE9jdCAwOSwgMjAyMCBhdCAwNTowMDo0NFBNICswMDAwLCBQ
+YXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+ID4gSGkgQXJkLAo+ID4KPiA+ID4gRnJvbTogQXJkIEJp
+ZXNoZXV2ZWwgPGFyZGJAa2VybmVsLm9yZz4KPiA+ID4gU2VudDogbWVyY3JlZGkgNyBvY3RvYnJl
+IDIwMjAgMTU6MTYKPiA+ID4KPiA+ID4gT24gV2VkLCA3IE9jdCAyMDIwIGF0IDEzOjUzLCBBaG1h
+ZCBGYXRvdW0gPGEuZmF0b3VtQHBlbmd1dHJvbml4LmRlPiB3cm90ZToKPiA+ID4gPgo+ID4gPiA+
+IEhlbGxvLAo+ID4gPiA+Cj4gPiA+ID4gT24gMTAvNy8yMCAxOjIzIFBNLCBBaG1hZCBGYXRvdW0g
+d3JvdGU6Cj4gPiA+ID4gPiBNeSBmaW5kaW5nc1sxXSBiYWNrIHRoZW4gd2VyZSB0aGF0IFUtQm9v
+dCBkaWQgc2V0IHRoZSBlWGVjdXRlIE5ldmVyCj4gPiA+ID4gPiBiaXQgb25seSBvbiBPTUFQLCBi
+dXQgbm90IGZvciBvdGhlciBwbGF0Zm9ybXMuICBTbyBJIGNvdWxkIGltYWdpbmUKPiA+ID4gPiA+
+IHRoaXMgYmVpbmcgdGhlIHJvb3QgY2F1c2Ugb2YgUGF0cmljaydzIGlzc3VlcyBhcyB3ZWxsOgo+
+ID4gPiA+Cj4gPiA+ID4gUmVyZWFkaW5nIG15IG93biBsaW5rLCBteSBtZW1vcnkgaXMgYSBsaXR0
+bGUgbGVzcyBmdXp6eTogZVhlY3V0ZSBOZXZlcgo+ID4gPiA+IHdhcyBiZWluZyBzZXQsIGJ1dCB3
+YXMgd2l0aG91dCBlZmZlY3QgZHVlIE1hbmFnZXIgbW9kZSBiZWluZyBzZXQgaW4gdGhlCj4gPiA+
+IERBQ1I6Cj4gPiA+ID4KPiA+ID4gPiA+IFRoZSBBUk0gQXJjaGl0ZWN0dXJlIFJlZmVyZW5jZSBN
+YW51YWwgbm90ZXNbMV06Cj4gPiA+ID4gPiA+IFdoZW4gdXNpbmcgdGhlIFNob3J0LWRlc2NyaXB0
+b3IgdHJhbnNsYXRpb24gdGFibGUgZm9ybWF0LCB0aGUgWE4KPiA+ID4gPiA+ID4gYXR0cmlidXRl
+IGlzIG5vdCBjaGVja2VkIGZvciBkb21haW5zIG1hcmtlZCBhcyBNYW5hZ2VyLgo+ID4gPiA+ID4g
+PiBUaGVyZWZvcmUsIHRoZSBzeXN0ZW0gbXVzdCBub3QgaW5jbHVkZSByZWFkLXNlbnNpdGl2ZSBt
+ZW1vcnkgaW4KPiA+ID4gPiA+ID4gZG9tYWlucyBtYXJrZWQgYXMgTWFuYWdlciwgYmVjYXVzZSB0
+aGUgWE4gYml0IGRvZXMgbm90IHByZXZlbnQKPiA+ID4gPiA+ID4gc3BlY3VsYXRpdmUgZmV0Y2hl
+cyBmcm9tIGEgTWFuYWdlciBkb21haW4uCj4gPiA+ID4KPiA+ID4gPiA+IFRvIGF2b2lkIHNwZWN1
+bGF0aXZlIGFjY2VzcyB0byByZWFkLXNlbnNpdGl2ZSBtZW1vcnktbWFwcGVkCj4gPiA+ID4gPiBw
+ZXJpcGhlcmFscyBvbiBBUk12Nywgd2UnbGwgbmVlZCBVLUJvb3QgdG8gdXNlIGNsaWVudCBkb21h
+aW4KPiA+ID4gPiA+IHBlcm1pc3Npb25zLCBzbyB0aGUgWE4gYml0IGNhbiBmdW5jdGlvbi4KPiA+
+ID4gPgo+ID4gPiA+ID4gVGhpcyBpc3N1ZSBoYXMgY29tZSB1cCBiZWZvcmUgYW5kIHdhcyBmaXhl
+ZCBpbiBkZTYzYWMyNzgKPiA+ID4gPiA+ICgiQVJNOiBtbXU6IFNldCBkb21haW4gcGVybWlzc2lv
+bnMgdG8gY2xpZW50IGFjY2VzcyIpIGZvciBPTUFQMiBvbmx5Lgo+ID4gPiA+ID4gSXQncyBlcXVh
+bGx5IGFwcGxpY2FibGUgdG8gYWxsIEFSTXY3LUEgcGxhdGZvcm1zIHdoZXJlIGNhY2hlcyBhcmUK
+PiA+ID4gPiA+IGVuYWJsZWQuCj4gPiA+ID4gPiBbMV06IEIzLjcuMiAtIEV4ZWN1dGUtbmV2ZXIg
+cmVzdHJpY3Rpb25zIG9uIGluc3RydWN0aW9uIGZldGNoaW5nCj4gPiA+ID4KPiA+ID4gPiBIb3Bl
+IHRoaXMgaGVscHMsCj4gPiA+ID4gQWhtYWQKPiA+ID4gPgo+ID4gPgo+ID4gPiBJdCBtb3N0IGRl
+ZmluaXRlbHkgZG9lcywgdGhhbmtzIGEgbG90Lgo+ID4gPgo+ID4gPiBVLWJvb3QncyBtbXVfc2V0
+dXAoKSBjdXJyZW50bHkgc2V0cyBEQUNSIHRvIG1hbmFnZXIgZm9yIGFsbCBkb21haW5zLCBzbyB0
+aGlzIGlzCj4gPiA+IGJyb2tlbiBmb3IgYWxsIG5vbi1MUEFFIGNvbmZpZ3VyYXRpb25zIHJ1bm5p
+bmcgb24gdjcgQ1BVcyAoZXhjZXB0IE9NQVAgYW5kCj4gPiA+IHBlcmhhcHMgb3RoZXJzIHRoYXQg
+Zml4ZWQgaXQgaW5kaXZpZHVhbGx5KS4gVGhpcyBhZmZlY3RzIGFsbCBkZXZpY2UgbWFwcGluZ3M6
+IG5vdCBqdXN0Cj4gPiA+IHNlY3VyZSBEUkFNIGZvciBPUC1URUUsIGJ1dCBhbnkgTU1JTyByZWdp
+c3RlciBmb3IgYW55IHBlcmlwaGVyYWwgdGhhdCBpcwo+ID4gPiBtYXBwZWQgaW50byB0aGUgQ1BV
+J3MgYWRkcmVzcyBzcGFjZS4KPiA+ID4KPiA+ID4gUGF0cmljaywgY291bGQgeW91IHBsZWFzZSBj
+aGVjayB3aGV0aGVyIHRoaXMgZml4ZXMgdGhlIGlzc3VlIGFzIHdlbGw/Cj4gPiA+Cj4gPiA+IC0t
+LSBhL2FyY2gvYXJtL2xpYi9jYWNoZS1jcDE1LmMKPiA+ID4gKysrIGIvYXJjaC9hcm0vbGliL2Nh
+Y2hlLWNwMTUuYwo+ID4gPiBAQCAtMjAyLDkgKzIwMiw5IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBt
+bXVfc2V0dXAodm9pZCkKPiA+ID4gICAgICAgICBhc20gdm9sYXRpbGUoIm1jciBwMTUsIDAsICUw
+LCBjMiwgYzAsIDAiCj4gPiA+ICAgICAgICAgICAgICAgICAgICAgIDogOiAiciIgKGdkLT5hcmNo
+LnRsYl9hZGRyKSA6ICJtZW1vcnkiKTsgICNlbmRpZgo+ID4gPiAtICAgICAgIC8qIFNldCB0aGUg
+YWNjZXNzIGNvbnRyb2wgdG8gYWxsLXN1cGVydmlzb3IgKi8KPiA+ID4gKyAgICAgICAvKiBTZXQg
+dGhlIGFjY2VzcyBjb250cm9sIHRvIGNsaWVudCAoMGIwMSkgZm9yIGVhY2ggb2YgdGhlIDE2Cj4g
+PiA+ICsgZG9tYWlucyAqLwo+ID4gPiAgICAgICAgIGFzbSB2b2xhdGlsZSgibWNyIHAxNSwgMCwg
+JTAsIGMzLCBjMCwgMCIKPiA+ID4gLSAgICAgICAgICAgICAgICAgICAgOiA6ICJyIiAofjApKTsK
+PiA+ID4gKyAgICAgICAgICAgICAgICAgICAgOiA6ICJyIiAoMHg1NTU1NTU1NSkpOwo+ID4gPgo+
+ID4gPiAgICAgICAgIGFybV9pbml0X2RvbWFpbnMoKTsKPiA+Cj4gPiBUaGUgdGVzdCB3aWxsIHRh
+a2Ugc29tZSB0aW1lIHRvIGJlIHN1cmUgdGhhdCBzb2x2ZSBteSByZW1haW5pbmcgaXNzdWUgYmVj
+YXVzZSAgaXNzdWUgaXMgbm90IGFsd2F5cyByZXByb2R1Y3RpYmxlLgo+ID4KPiA+IEF0IGZpc3Qg
+Y2hlaywgSSB3YXNuJ3Qgc3VyZSBvZiBEQUNSIGJhaGF2aW9yLCBidXQgSSBmb3VuZCBpbiBbMV0g
+dGhlIGxpbmUgOgo+ID4KPiA+ICAgICAgIFRoZSBYTiBhdHRyaWJ1dGUgaXMgbm90IGNoZWNrZWQg
+Zm9yIGRvbWFpbnMgbWFya2VkIGFzIE1hbmFnZXIuIFJlYWQtc2Vuc2l0aXZlIG1lbW9yeSBtdXN0
+Cj4gPiAgICAgICBub3QgYmUgaW5jbHVkZWQgaW4gZG9tYWlucyBtYXJrZWQgYXMgTWFuYWdlciwg
+YmVjYXVzZSB0aGUgWE4gYml0IGRvZXMgbm90IHByZXZlbnQgcHJlZmV0Y2hlcwo+ID4gICAgICAg
+aW4gdGhlc2UgY2FzZXMuCj4gPgo+ID4gU28sIEkgbmVlZCAgdG8gdGVzdCB5b3VyIHBhdGNoICsg
+IERDQUNIRV9PRkYgaW5zdGVhZCBvZiBJTlZBTElECj4gPiAodG8gbWFwIHdpdGggWE4gdGhlIE9Q
+LVRFRSByZWdpb24pIGluIG15IHBhdGNoc2V0Lgo+ID4KPiA+IEZZSTogSSBmb3VuZCB0aGUgc2Ft
+ZSBEQUNSIGNvbmZpZ3VyYXRpb24gaXMgZG9uZSBpbjoKPiA+ICAgICAgIGFyY2gvYXJtL2NwdS9h
+cm12Ny9sczEwMnhhL2NwdS5jOjE5OQo+ID4KPiA+IFsxXSBodHRwczovL2RldmVsb3Blci5hcm0u
+Y29tL2RvY3VtZW50YXRpb24vZGRpMDQwNi9iL1N5c3RlbS1MZXZlbC1BcmNoaXRlY3R1cmUvVmly
+dHVhbC1NZW1vcnktU3lzdGVtLUFyY2hpdGVjdHVyZS0tVk1TQS0vTWVtb3J5LWFjY2Vzcy1jb250
+cm9sL1RoZS1FeGVjdXRlLU5ldmVyLS1YTi0tYXR0cmlidXRlLWFuZC1pbnN0cnVjdGlvbi1wcmVm
+ZXRjaGluZz9sYW5nPWVuCj4gPgo+ID4gUGF0cmljawo+ID4KPiA+IEZvciBpbmZvcm1hdGlvbjoK
+PiA+Cj4gPiBBdCB0aGUgYmVnaW5uaW5nIEkgd2Fzbid0IHN1cmUgdGhhdCB0aGUgY3VycmVudCBE
+QUNSIGNvbmZpZ3VyYXRpb24gaXMgYW4gaXNzdWUgYmVjYXVzZSBpbiBmb3VuZAo+ID4gaW4gcHNl
+dWRvIGNvZGUgb2YgIERESTA0MDZCX2FybV9hcmNoaXRlY3R1cmVfcmVmZXJlbmNlX21hbnVhbF9l
+cnJhdGFfbWFya3VwXzhfMC5wZGYKPiA+Cj4gPiBCMy4xMy4zIEFkZHJlc3MgdHJhbnNsYXRpb24K
+PiA+ICAgICAgIGlmIENoZWNrRG9tYWluKHRsYnJlY29yZC5kb21haW4sIG12YSwgdGxicmVjb3Jk
+LnNlY3Rpb25ub3RwYWdlLCBpc3dyaXRlKSB0aGVuCj4gPiAgICAgICAgICAgICAgIENoZWNrUGVy
+bWlzc2lvbih0bGJyZWNvcmQucGVybXMsIG12YSwgdGxicmVjb3JkLnNlY3Rpb25ub3RwYWdlLCBp
+c3dyaXRlLCBpc3ByaXYpOwo+ID4KPiA+IEIzLjEzLjQgRG9tYWluIGNoZWNraW5nCj4gPiAgICAg
+ICBib29sZWFuIENoZWNrRG9tYWluKGJpdHMoNCkgZG9tYWluLCBiaXRzKDMyKSBtdmEsIGJvb2xl
+YW4gc2VjdGlvbm5vdHBhZ2UsIGJvb2xlYW4gaXN3cml0ZSkKPiA+ICAgICAgICAgICAgICAgYml0
+cG9zID0gMipVSW50KGRvbWFpbik7Cj4gPiAgICAgICAgICAgICAgIGNhc2UgREFDUjxiaXRwb3Mr
+MTpiaXRwb3M+IG9mCj4gPiAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgwMOKAmSBEYXRh
+QWJvcnQobXZhLCBkb21haW4sIHNlY3Rpb25ub3RwYWdlLCBpc3dyaXRlLCBEQWJvcnRfRG9tYWlu
+KTsKPiA+ICAgICAgICAgICAgICAgICAgICAgICB3aGVuIOKAmDAx4oCZIHBlcm1pc3Npb25jaGVj
+ayA9IFRSVUU7Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgxMOKAmSBVTlBSRURJ
+Q1RBQkxFOwo+ID4gICAgICAgICAgICAgICAgICAgICAgIHdoZW4g4oCYMTHigJkgcGVybWlzc2lv
+bmNoZWNrID0gRkFMU0U7Cj4gPiAgICAgICAgICAgICAgIHJldHVybiBwZXJtaXNzaW9uY2hlY2s7
+Cj4gPgo+ID4gQjIuNC44IEFjY2VzcyBwZXJtaXNzaW9uIGNoZWNraW5nCj4gPiAgICAgICAvLyBD
+aGVja1Blcm1pc3Npb24oKQo+ID4gICAgICAgLy8gPT09PT09PT09PT09PT09PT0KPiA+ICAgICAg
+IENoZWNrUGVybWlzc2lvbihQZXJtaXNzaW9ucyBwZXJtcywgYml0cygzMikgbXZhLAo+ID4gICAg
+ICAgICAgICAgICBib29sZWFuIHNlY3Rpb25ub3RwYWdlLCBiaXRzKDQpIGRvbWFpbiwgYm9vbGVh
+biBpc3dyaXRlLCBib29sZWFuIGlzcHJpdikKPiA+Cj4gPiAgICAgICAgICAgICAgIGlmIFNDVExS
+LkFGRSA9PSDigJgw4oCZIHRoZW4KPiA+ICAgICAgICAgICAgICAgICAgICAgICBwZXJtcy5hcDww
+PiA9IOKAmDHigJk7Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgY2FzZSBwZXJtcy5hcCBvZgo+
+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgwMDDigJkgYWJvcnQgPSBU
+UlVFOwo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgwMDHigJkgYWJv
+cnQgPSAhaXNwcml2Owo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgw
+MTDigJkgYWJvcnQgPSAhaXNwcml2ICYmIGlzd3JpdGU7Cj4gPiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB3aGVuIOKAmDAxMeKAmSBhYm9ydCA9IEZBTFNFOwo+ID4gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgd2hlbiDigJgxMDDigJkgVU5QUkVESUNUQUJMRTsKPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHdoZW4g4oCYMTAx4oCZIGFib3J0ID0gIWlzcHJpdiB8
+fCBpc3dyaXRlOwo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2hlbiDigJgxMTDi
+gJkgYWJvcnQgPSBpc3dyaXRlOwo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd2hl
+biDigJgxMTHigJkKPiA+ICAgICAgICAgICAgICAgICAgICAgICBpZiBNZW1vcnlTeXN0ZW1BcmNo
+aXRlY3R1cmUoKSA9PSBNZW1BcmNoX1ZNU0EgdGhlbgo+ID4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgYWJvcnQgPSBpc3dyaXRlCj4gPiAgICAgICAgICAgICAgICAgICAgICAgZWxzZQo+
+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgVU5QUkVESUNUQUJMRTsKPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICBpZiBhYm9ydCB0aGVuCj4gPiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBEYXRhQWJvcnQobXZhLCBkb21haW4sIHNlY3Rpb25ub3RwYWdlLCBpc3dyaXRlLCBE
+QWJvcnRfUGVybWlzc2lvbik7Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuOwo+ID4K
+PiA+ID0+IGl0IHNlZW5zIG9ubHkgdGhlIHJlYWQvd3JpdGUgcGVybWlzc2lvbiBpcyBjaGVja2Vk
+IGhlcmUgKHBlcm1zLmFwKQo+ID4gPT4gcGVybXMueG4gaXMgbm90IHVzZWQgaGVyZQo+ID4KPiA+
+ICAgICAgIGFjY2Vzc19jb250cm9sID0gRFJBQ1Jbcl07Cj4gPiAgICAgICBwZXJtcy5hcCA9IGFj
+Y2Vzc19jb250cm9sPDEwOjg+Owo+ID4gICAgICAgcGVybXMueG4gPSBhY2Nlc3NfY29udHJvbDwx
+Mj47Cj4gPgo+ID4gd2l0aCBBUFsyOjBdLCBiaXRzIFsxMDo4XQo+ID4gICAgICAgQWNjZXNzIFBl
+cm1pc3Npb25zIGZpZWxkLiBJbmRpY2F0ZXMgdGhlIHJlYWQgYW5kIHdyaXRlIGFjY2VzcyBwZXJt
+aXNzaW9ucyBmb3IgdW5wcml2aWxlZ2VkCj4gPiAgICAgICBhbmQgcHJpdmlsZWdlZCBhY2Nlc3Nl
+cyB0byB0aGUgbWVtb3J5IHJlZ2lvbi4KPiA+Cj4gPiBCdXQgbm93IGl0IGlzIGNsZWFyIHdpdGgg
+WzFdCj4KPiBTbywgd2hlcmUgZGlkIGV2ZXJ5dGhpbmcgZW5kIHVwIGhlcmU/ICBJIHNwZWNpZmlj
+YWxseSBkaWRuJ3QgZ3JhYiB0aGlzCj4gc2VyaWVzIGFzIGl0IHNvdW5kZWQgbGlrZSB0aGVyZSB3
+YXMgY29uY2VybiB0aGUgcHJvYmxlbSBzaG91bGQgYmUgc29sdmVkCj4gdmlhIGFub3RoZXIgcGF0
+Y2guICBPciB3b3VsZCB0aGF0IGJlIGFuIGluLWFkZGl0aW9uLXRvPyAgVGhhbmtzIQo+CgpUaGVy
+ZSBhcmUgdGhyZWUgZGlmZmVyZW50IHByb2JsZW1zOgotIEFSTXY3IG5vbi1MUEFFIHVzZXMgdGhl
+IHdyb25nIGRvbWFpbiBzZXR0aW5ncwotIG5vLW1hcCBub24tc2VjdXJlIG1lbW9yeSBzaG91bGQg
+bm90IGJlIG1hcHBlZCBieSB1LWJvb3QKLSBzZWN1cmUgd29ybGQtb25seSBtZW1vcnkgc2hvdWxk
+IG5vdCBiZSBkZXNjcmliZWQgYXMgbWVtb3J5IGluIHRoZSBkZXZpY2UgdHJlZQoKU28gSSB0aGlu
+ayB0aGlzIHNlcmllcyBkZWZpbml0ZWx5IG5lZWRzIGEgcmVzcGluIGF0IHRoZSB2ZXJ5IGxlYXN0
+LgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
+dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
+Ym9vdC1zdG0zMgo=

@@ -2,87 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C790A29F2B8
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Oct 2020 18:11:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA55D29FFF1
+	for <lists+uboot-stm32@lfdr.de>; Fri, 30 Oct 2020 09:28:38 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8EAA1C424B3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Oct 2020 17:11:49 +0000 (UTC)
-Received: from mail-ej1-f68.google.com (mail-ej1-f68.google.com
- [209.85.218.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 66447C3FAD5;
+	Fri, 30 Oct 2020 08:28:38 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
+ [209.85.208.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE93CC36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78C18C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Oct 2020 17:11:48 +0000 (UTC)
-Received: by mail-ej1-f68.google.com with SMTP id w27so4889579ejb.3
+ Fri, 30 Oct 2020 08:28:36 +0000 (UTC)
+Received: by mail-ed1-f47.google.com with SMTP id a71so366354edf.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Oct 2020 10:11:48 -0700 (PDT)
+ Fri, 30 Oct 2020 01:28:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dH3bNb1GqyHkUVS67IKo7dvtzFvBe6EeilFz13htb6M=;
- b=MXhDGr5PQaPgruuuYl6P+gqetfmhw3QuEjg706re2/Keyd3uFrbLQkJGDx51ULkipA
- s6IhgiS4bN0ocv+zD7d4DoBvUVG3iZspOxbu6YzKe8NEWhGKrqFb4fdWcD+UysVq9b4+
- tfZWLnS1lx+HwpKOHTDtNs2aFFpzFV7oktuMh/ZuB9aP9Od+Yq/KxTwccUkmpNZHnFic
- 7P3ySgZ663yMaHQthV1SWFWKy8e3j9/MBxpBsEAFM+mRgAOGkWKx8Zp61jsJ/pxXDnUm
- Dt47Gu60MjL1InHSizHX6vM09+4L/eH2lb0xlrrZixKrEI4db2boDNe5q8n6eR+zubgA
- hzIA==
+ :cc; bh=eicsNC0bilXejoYFpiz9XRrnllrQYTogcXWdsjt5dtA=;
+ b=KIhmte/5fA4tnXZryjBktcjvUBizZQ61gwsWbQcdpYiafydi5l+VDO5m+rPqpIu+7v
+ cf/V8Mtcz/t7/7c3S2VvlEKxaFqH7iKLYFKxL6alZOFnmvCMuNMXf8Y8J7OzLNoaK66/
+ gxOm05X9/4Dm4rpPj6qYH/Z++eQS/oURiM63/ie8VgjYFSxPzWHV20ZAJpRm9h5hHAuG
+ X5IhYr+oUuA9ZA3SgJeqBCGS3OCRFVQrBi4kLAlTv7tKZrkoiZkTJNN11JaZO7+ilJs8
+ pvsuMuNITUjFRj6A3sk/ozeQ9ksvRbQQy07CfHj9Ko4NobecV1YIp/Ld1OLCTscrDYGE
+ dqww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dH3bNb1GqyHkUVS67IKo7dvtzFvBe6EeilFz13htb6M=;
- b=YrKeXXPe/JOs+rwKiUoza/D7d++e/fHF/fWx3Er964c2ecU4W6bKbTJKbybMEvSE3E
- JSTufzU1p/4buZlouNoDjNhl0DAbCUmgM4nI7ZbYN7yzNdQBe6zcc0AHgmOUsE0oLPlo
- GMz8Xxl5aH3XzhtRP3aesVC3b1Uh5F3ow5ABZuGVbp+OrZ+WRMNqoHoprRuk7Id5zQFr
- 5qNGzYsC3O+ZqAEnwDnlU8HqR/aok6u6Q4v9k7qXPfs9LFCcybcBDu2DhgUppiBQOLCi
- qx+hAoR3ffvPe/e4MYq3EdAdyEB43Hs0f+yRYB8hqEcltBOvvS2jwrC6d0Mg+JC7b+LQ
- E+0Q==
-X-Gm-Message-State: AOAM533yemDElRCML7NqZwAGWcvP+TaLuo3twqNBYbCFL7R5bArK4XjP
- dzF3PCwoxADmZIWrMiURjje6c4gh82MSIPlCEvUSCA==
-X-Google-Smtp-Source: ABdhPJy49HeV/6CL9qWkjcpirVpS5jM7FKIFht/xomU1NaxDZz0cAtGJ7hRJnOcxaSOhFm1q5jVzFz8lleLdZshfXk8=
-X-Received: by 2002:a17:906:c315:: with SMTP id
- s21mr4913003ejz.285.1603991507990; 
- Thu, 29 Oct 2020 10:11:47 -0700 (PDT)
+ bh=eicsNC0bilXejoYFpiz9XRrnllrQYTogcXWdsjt5dtA=;
+ b=VT9NjNQMYinKh3L9k6suHzqZbo25T8ycPUolxPYOo9cOod7zdvnbImhn3PQ2f9HPke
+ 4wx61pte92EZyXsjV9Cx0T5EvGA7V6oNrhfVnyBTtJ+qaUIhKsveafyhAsCxD5sb1NYW
+ dUoDAJKh2ZXHSU9Rffuo5iXciljFCM3YNHn4d+byrYw8jAriYX6Tvzfx3+huZbOt70HX
+ xyftRnjdY2E2ZwcQiVPQZn6lb7tGchoxOZdwcxXdrYwSKOanrfLuSTOA//Hmf3z0hOuY
+ Lle6i3Ksi6IbcLwMZX0aMi73FU4Kx6xpWyK+2UijamSiQHo57sOZ7NrvSq7/NO0NqQKt
+ 3R/Q==
+X-Gm-Message-State: AOAM53379KRIClStW3GwXcM5WuKNmpgPkc52QzQ5NGVXgE8KXD0kXyYn
+ InnwoRDykyuRTCgkWLhZXl4VtYESwDyoXIvpiKuiNg==
+X-Google-Smtp-Source: ABdhPJzt0ztGQe3hCzxshjLFfAQbcrybzaq/Ic5X4AAe6QAGOyQHoTRzGmuIpYgMaLfBbU4oGzoczOSyREJqU16XDXQ=
+X-Received: by 2002:a05:6402:143a:: with SMTP id
+ c26mr1125374edx.150.1604046516070; 
+ Fri, 30 Oct 2020 01:28:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201006163602.21687-1-patrick.delaunay@st.com>
- <CAMj1kXET8=ERg7gGqWa-FwLZzAuztBsVMhyTGmYEMAxzb63_sw@mail.gmail.com>
- <190d019a-7e18-b4bc-9276-e14bbe4c2855@pengutronix.de>
- <258ba4fa-8d1e-56be-e0de-2d6c09812c13@pengutronix.de>
- <CAMj1kXFoJx7henE0FbSXzsATH4z4Xg8EfJkc+ki7=i33cz3Vew@mail.gmail.com>
- <f629253d8c92446ca1d33a25058c1676@SFHDAG2NODE3.st.com>
- <20201027172533.GD14816@bill-the-cat>
- <CAMj1kXGmW7bm10X9uQV1Aod=RrE30x_v5=1ACPSagoNyRjZ3Pw@mail.gmail.com>
- <976b2b1443424f659fa85a2d11b4b507@SFHDAG2NODE3.st.com>
- <CAN5uoS-ePc6u9Pbh6TR3MScPGZzOkAR5xSWQNnLjjmVrpW5zsg@mail.gmail.com>
- <CAMj1kXHiVrPs4g7AOCz7ja=q=vH921e-8x-XnZN25e0u=yme1Q@mail.gmail.com>
- <CAN5uoS-OEcfwMhLUvOYRoRSf1cpkdeBayS0yUC56_XPUxvHzrg@mail.gmail.com>
- <54533fa8-0e11-56de-90c2-d05817de738d@forissier.org>
-In-Reply-To: <54533fa8-0e11-56de-90c2-d05817de738d@forissier.org>
+References: <fd5e7932-11b9-3a06-0169-ddf13e91ffee@gmail.com>
+ <bdf285bd-7540-b7cf-989f-0f24594c6940@gmail.com>
+In-Reply-To: <bdf285bd-7540-b7cf-989f-0f24594c6940@gmail.com>
 From: Etienne Carriere <etienne.carriere@linaro.org>
-Date: Thu, 29 Oct 2020 18:11:36 +0100
-Message-ID: <CAN5uoS9_xOqxQd6AGqfQ86=U1WkVUacUVhHztxjrBCwdX7msmQ@mail.gmail.com>
-To: Jerome Forissier <jerome@forissier.org>
-Cc: chenshuo <chenshuo@eswin.com>, Lokesh Vutla <lokeshvutla@ti.com>,
- Masahiro Yamada <yamada.masahiro@socionext.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>,
- Stefan Roese <sr@denx.de>, Ard Biesheuvel <ardb@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>,
- Vladimir Olovyannikov <vladimir.olovyannikov@broadcom.com>,
- Heiko Stuebner <heiko.stuebner@theobroma-systems.com>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Rajesh Ravi <rajesh.ravi@broadcom.com>,
- Thirupathaiah Annapureddy <thiruan@linux.microsoft.com>,
- Joakim Bech <joakim.bech@linaro.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Tero Kristo <t-kristo@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
- Jens Wiklander <jens.wiklander@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH 0/7] arm: cache: cp15: don't map reserved
- region with no-map property
+Date: Fri, 30 Oct 2020 09:28:24 +0100
+Message-ID: <CAN5uoS-EoT7aUC1OEmeLv46SUzRFHe_nnr6T8Pvq+9VWc6RV8w@mail.gmail.com>
+To: "Alex G." <mr.nuke.me@gmail.com>
+Cc: "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] stm32mp: The purpose of "!tee_find_device()"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,62 +73,96 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 29 Oct 2020 at 17:35, Jerome Forissier <jerome@forissier.org> wrote:
+On Thu, 29 Oct 2020 at 15:33, Alex G. <mr.nuke.me@gmail.com> wrote:
 >
->
->
-> On 10/29/20 5:06 PM, Etienne Carriere wrote:
-> > On Thu, 29 Oct 2020 at 12:26, Ard Biesheuvel <ardb@kernel.org> wrote:
-> >> The point I made before was that secure and non-secure are two
-> >> disjoint address spaces. The fact that TZ firewalls exist where you
-> >> can move things from one side to the other does not imply that things
-> >> works like this in the general case.
-> >>
-> >> E.g., you could have
-> >>
-> >> secure DRAM at S 0x0
-> >> non-secure DRAM at NS 0x0
-> >>
-> >> where the ranges are backed by *different* memory. Since the DT
-> >> description does not include the S/NS distinction, only the address
-> >> range, the only thing we can assume when looking at memory@ and
-> >> /reserved-memory is that everything it describes is NS.
+> On 9/30/20 6:03 PM, Alex G. wrote:
+> > Hi
 > >
-> > From Arm Trustzone stand point, both secure and non-secure worlds
-> > share the very same physical address space. I your example, physical
-> > address 0x0 would refer to the same DRAM cell. Whether this cell is secure
-> > or non-secure is a configuration set in the DRAM firmwall.
+> > I'm trying to wrap my head around the purpose of the following lines in
+> > ft_system_setup():
+> >
+> >      if (!CONFIG_IS_ENABLED(OPTEE) ||
+> >          !tee_find_device(NULL, NULL, NULL, NULL))
+> >          stm32_fdt_disable_optee(blob);
 >
-> No, like Ard said it is a possibility but it doesn't have to be the
-> case. See the Armv8-A ARM (DDI 0487F.c) section D5.1.3 VMSA address
-> types and address spaces, "Physical address (PA)".
-
-Ok. I didn't know that. Thanks both to highlight this and thanks for the refs.
-
-However, I think this does not change the question on whether or not a memory
-node in non-secure world FDT can cover address ranges that are carved out
-with reserved-memory/no-map because non-secure world generic mapping
-cannot presume valid default mapping attributes.
-
-
-> If we need to differentiate between non-secure and secure PA I suppose
-> we could use the status and secure-status properties in the memory
-> nodes, consistent with the usual usage described in [1].
+> Hi! Me again! Do we have a (good) reason for this, or should I submit a
+> patch to remove this problematic code?
 >
-> As Etienne says, it seems that a majority of systems actually have a
-> single PA space with access control added on top, and by default the
-> secure state can access non-secure memory. That goes well with memory
-> nodes without a status nor a secure-status property, yet other
-> configurations can easily be supported.
+> Alex
 >
-> [1]
-> https://www.kernel.org/doc/Documentation/devicetree/bindings/arm/secure.txt
->
-> --
-> Jerome
+> > My interpretation is "if optee is not running, delete the FDT node".
+> > The problem is that tee_find_device() invokes device_probe(). This in
+> > turn does an SMC call. This call results in an abort and reboot if optee
+> > is not running in the first place.
+> >
+> > So I don't think that tee_find_device() can be used as a check for "Is
+> > optee running?". Exhibit B: Outside of mach-stm32mp, tee_find_device()
+> > is used to obtain of a _working_ TEE node, not to ask if "is optee
+> > running?".
+> >
+> >
+> > My problem is that trying to start linux with CONFIG_OPTEE=y will cause
+> > the bootm command to crash (log in appendix A):
+> >
+> >      load mmc 0:7 $loadaddr boot/uImage
+> >      load mmc 0:7 $fdt_addr_r boot/stm32mp157c-dk2.dtb
+> >      load mmc 0:7 0xc8000000 boot/utee
+> >      setenv bootm_boot_mode sec
+> >      bootm 0xc8000000 - $fdt_addr_r
+> >
+> > What is the intent of calling tee_find_device() in an FDT fixup
+> > function?
 
-Cheers,
+The scheme is the generic U-Boot implementation do copy OP-TEE
+related nodes when found in its FDT to the FDT provided to Linux.
+(called from common/image-fdt.c)
+
+However stm32mp1 can be used with or without OP-TEE installed. To
+get a generic stm32mp1/U-Boot image that support both configurations
+(with and w/o OP-TEE installed), U-Boot FDT and config for this plaform
+do enable OP-TEE but, at u-boot runtime, if we find OP-TEE's not present,
+we remove the FTD node so that Linux does get it and expect OP-TEE
+is present.
+
+> > Do you have any ideas how to make it not crash (short of
+> > commenting out the problem lines) ?
+
+The crash seems due to that there is no secure monitor by the time
+you have this sequence called. Secure monitor is the code that
+handles the SMC. If none installed, SMCs ends nowhere and
+likely badly crash the systel. If OP-TEE is not running but there
+is a secure monitor loaded, it should not crash.
+
+It seems to me that U-Boot does set up a secure monitor for
+PSCI minimal support, so the U-Boot PSCI stack should
+nicely handle the SMC to report that there is no OP-TEE installed.
+Enabling CONFIG_ARMV7_PSCI should fix the issue I think.
+
+Regards,
 Etienne
+
+> >
+> > Alex
+> >
+> >
+> > Appendix A: u-boot log after bootm command
+> >
+> > ## Booting kernel from Legacy Image at c8000000 ...
+> >     Image Name:
+> >     Created:      2020-09-28  20:58:56 UTC
+> >     Image Type:   ARM Trusted Execution Environment Kernel Image
+> > (uncompressed)
+> >     Data Size:    349276 Bytes = 341.1 KiB
+> >     Load Address: fdffffe4
+> >     Entry Point:  fe000000
+> >     Verifying Checksum ... OK
+> >     Loading Kernel Image
+> > ## Flattened Device Tree blob at c4000000
+> >     Booting using the fdt blob at 0xc4000000
+> >     Loading Device Tree to cffef000, end cffff5e2 ... OK
+> > <BOARD RESETS WITHOUT USER INPUT>
+> > U-Boot SPL 2020.10-rc4 (Sep 20 2020 - 23:46:47 +0000)
+> > Model: STMicroelectronics STM32MP157C-DK2 Discovery Board
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

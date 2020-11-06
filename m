@@ -2,63 +2,80 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AF6D2A900F
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 08:12:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E51AF2A9B17
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 18:45:48 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E152C3FAE2;
-	Fri,  6 Nov 2020 07:12:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACE8BC36B36;
+	Fri,  6 Nov 2020 17:45:48 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0463AC3FAD4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 38915C36B0B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Nov 2020 07:12:46 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Fri,  6 Nov 2020 17:45:47 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0A67C7wh016643; Fri, 6 Nov 2020 08:12:39 +0100
+ 0A6HWD3p006450; Fri, 6 Nov 2020 18:45:30 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=e/BJ+GW1IItyD2xaB3bFF/yot+Mr1Zh1Q969y9LzduY=;
- b=mx3NBqbyrAwrnOAJoHerBcQ2uELHSz9EF2ak1wX1lmE0nydb7u2dsY4ccS1qK+XdUKgm
- KvONkkw32yrvifSNYkJLNFFCIRwJcq4jd9DB9soP0Aoj1I8HJ6sGnNKSZ48RbsX1Oj7j
- AMKB5ASzASYj3ka/vHRCDKt1eh3BczW048t59oVX6MI5nJCPpQb4S5b7bLo7kFFMHSmY
- bVj+E0UKsvoyLP6612X2860yiVabalgF2awDCLLMHjrCMhrCm+t1dhTedhwiElQQAN2I
- HjQ6lZ5hpo/3gtE18L+UiF2M2ASg+ypNkoebpDNdWHVbIbf2RnetjsmMJ9I5/8rhjY7K eA== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=KVeUSxxH97l0zUvPcTF9dl/3zG5ewe9hFst8uuucRyE=;
+ b=FnCEcVj4dpDVuz2uXkbgIoVEp59Dpb9jkf7e1zACHU9aR/SpyeJg7VGV5D+voZ3s1qWu
+ RiKe1DR2az4WXIqC6yYlITqW1p1PLE826AgsGmRwhjAI8zrXmKhR5tWxb83UM6/f0ERO
+ N7za16cqXapnFV3lNBNt1lmpC61beqYR5zJQOCBZ+8sIrxPFxnWhtT3j4dgl+euEB5yK
+ rnrtxOeAS97ok9xAV9y17lupT0anwCjTw5RIA13FMwBzGzsHjYmwR65mjRhyn8RrcfnU
+ 65CG7AMFc6mm2Ai+n1Wxiu7+dbvHU7U0Vw+EyY0IfZ6sDvxGGJnpA9rtXTzihHdVXY+y 8A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34gyw1u61u-1
+ by mx07-00178001.pphosted.com with ESMTP id 34gywrft6j-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 06 Nov 2020 08:12:39 +0100
+ Fri, 06 Nov 2020 18:45:30 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4B04810003D;
- Fri,  6 Nov 2020 08:12:39 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 369CD22461E;
- Fri,  6 Nov 2020 08:12:39 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov 2020 08:12:15
- +0100
-From: Patrice Chotard <patrice.chotard@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 6 Nov 2020 08:12:00 +0100
-Message-ID: <20201106071200.6933-5-patrice.chotard@st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201106071200.6933-1-patrice.chotard@st.com>
-References: <20201106071200.6933-1-patrice.chotard@st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5925710002A;
+ Fri,  6 Nov 2020 18:45:29 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3009B254082;
+ Fri,  6 Nov 2020 18:45:29 +0100 (CET)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov
+ 2020 18:45:28 +0100
+Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
+ SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
+ 15.00.1473.003; Fri, 6 Nov 2020 18:45:28 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Simon Glass <sjg@chromium.org>
+Thread-Topic: [PATCH 00/33] stm32: enable logging features
+Thread-Index: AQHWogq+KGMXxr763EqZXROs/LdT36mYo72AgAAosRCAEXl6gIACseXAgAOEtoCACwduYA==
+Date: Fri, 6 Nov 2020 17:45:28 +0000
+Message-ID: <c24b590e1eaa4af7a06a863a7f3aeeb1@SFHDAG2NODE3.st.com>
+References: <20201014091646.4233-1-patrick.delaunay@st.com>
+ <CAPnjgZ2Z8=hXqoWXz8nuUToWTGz3sCY8zneGA9WsaVGYPprxzQ@mail.gmail.com>
+ <88a21c960cc248af9cd08e2fc5681a69@SFHDAG2NODE3.st.com>
+ <CAPnjgZ3S8PzSYjJSNJ0HhYk_=jkFR4yryL-qwPZRDM4BDQOwiw@mail.gmail.com>
+ <8a219eb12a6446999545b375827980d8@SFHDAG2NODE3.st.com>
+ <CAPnjgZ0KpixWRivpttZf+Mc_rJGuVtQAqY2iEBV7jOA4Mn4peA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0KpixWRivpttZf+Mc_rJGuVtQAqY2iEBV7jOA4Mn4peA@mail.gmail.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.51]
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-11-06_02:2020-11-05,
+ definitions=2020-11-06_06:2020-11-05,
  2020-11-06 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Patrice CHOTARD <patrice.chotard@st.com>,
- Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v1 4/4] ARM: dts: stm32: Fix typo in
-	stm32h7-u-boot.dtsi
+Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
+ Heiko Schocher <hs@denx.de>, Christophe KERELLO <christophe.kerello@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrice CHOTARD <patrice.chotard@st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ Yannick FERTRE <yannick.fertre@st.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/33] stm32: enable logging features
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,31 +92,132 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Fix typo "firsct"
+Hi Simon,
 
-Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> From: Simon Glass <sjg@chromium.org>
+> Sent: vendredi 30 octobre 2020 19:16
+> 
+> Hi Patrick,
+> 
+> On Wed, 28 Oct 2020 at 05:52, Patrick DELAUNAY <patrick.delaunay@st.com>
+> wrote:
+> >
+> > Hi Simon,
+> >
+> > > From: Simon Glass <sjg@chromium.org>
+> > > Sent: lundi 26 octobre 2020 20:23
+> > >
+> > > Hi Patrick,
+> > >
+> > > On Thu, 15 Oct 2020 at 09:59, Patrick DELAUNAY
+> > > <patrick.delaunay@st.com>
+> > > wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > > From: Simon Glass <sjg@chromium.org>
+> > > > > Sent: jeudi 15 octobre 2020 17:06
+> > > > >
+> > > > > Hi Patrick,
+> > > > >
+> > > > > On Wed, 14 Oct 2020 at 03:16, Patrick Delaunay
+> > > > > <patrick.delaunay@st.com>
+> > > > > wrote:
+> > > > > >
+> > > > > >
+> > > > > > This patch-set migrates several stm32 drivers to API
+> > > > > > compatible with logging features (use dev_...() or log_...()
+> > > > > > function) and activate the logging features in STM32MP15 boards.
+> > > > > >
+> > > > > > The size of U-Boot increased by 19kB (933026 to 952830 on
+> > > > > > STM32MP157C-EV1 board for basic defconfig) but the boot time
+> > > > > > don't change
+> > > > > drastically.
+> > > > >
+> > > > > >
+> >
+> > (...)
+> >
+> > > > > > For information even with all trace embbeded in U-Boot but not
+> > > > > > activated, MAX_LOG_LEVEL=8 and LOG_DEFAULT_LEVEL=6
+> > > > > >
+> > > > > > Size increase by 190KB (952830 to 1147918) but boot time is
+> > > > > > stable (1,748s vs 1,696s).
+> > > > >
+> > > > > This seems pretty bad. Is this because of console output, or
+> > > > > something else? I understand the size increase, but not the boot
+> > > > > time
+> > > increase.
+> > > >
+> > > > For this last point I just execute STM32MP157C-EV1 boot with a
+> > > > patch in configs/stm32mp15_basic_defconfig
+> > > >
+> > > > +CONFIG_LOGLEVEL=8
+> > > > +CONFIG_LOG_MAX_LEVEL=8
+> > > > +CONFIG_LOG_DEFAULT_LEVEL=6
+> > > > +CONFIG_LOGF_FILE=y
+> > > > +CONFIG_LOGF_LINE=y
+> > > > +CONFIG_LOGF_FUNC=y
+> > > >
+> > > > And execute "bootstage report" after the second boot (the first
+> > > > boot is pertubated by env save)
+> > > >
+> > > > I think the delta is linked to
+> > > > 1/ size of U-Boot (SPL spent more time to load U-Boot)
+> > > >     end of SPL 987,579  => 996,117
+> > >
+> > > OK.
+> > >
+> > > >
+> > > > 2/ time to check for each debug trace: because I increase the log level
+> > > >    (gd->default_log_level = 6 < MAX_LOG_LEVEL=8)
+> > >
+> > > This might be the biggest part. If you look at _log() it always does
+> > > the vsprintf() even if in fact log_dispatch() does not dispatch it to anything.
+> >
+> > Yes, log_dispatch / log_passes_filter are called after vsnprintf
+> >
+> > > I suspect that could be refactored to move the checking to a
+> > > separate function, and then call it before doing the expensive vsprintf().
+> >
+> > Or save va_list, fmt in log_rec and call vsnprintf allow when needed
+> > in log_dispatch, just before emit
+> 
+> Yes that sounds better to me.
+> 
+> >
+> > > >
+> > > > 3/ treatment added in log_console_emit (some printf) and
+> > > >     log_dispatch (processing_msg / gd->loghead)
+> > >
+> > > Likely this is fast.
+> > >
+> > > >
+> > > > 4/ lower cache performancy as trace code are pesent in memory even
+> > > >     they are not used
+> > > >
+> > > > Can I do some check/experimentation on my side ?
+> > >
+> > > Yes, if you can use the bootstage_start() and bootstage_accum()
+> > > within the _log() function to measure the total time take in the run.
+> >
+> > Ok, I add it in my TODO list
+> 
+> OK. We really should make logging add the least overhead possible.
+> 
+> Regards,
+> Simon
 
----
+I rebase my patchset, tested on stm32mp15_trusted_defconfig (with TF-A load)
+and no more stm32_basic_defconfgi (with SPL load)
 
- arch/arm/dts/stm32h7-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+And the cost is now more limited.... (perhaps I made some error in my last tests or 
+I activate too many trace ?).
 
-diff --git a/arch/arm/dts/stm32h7-u-boot.dtsi b/arch/arm/dts/stm32h7-u-boot.dtsi
-index 7182533cc9..54dd406b6b 100644
---- a/arch/arm/dts/stm32h7-u-boot.dtsi
-+++ b/arch/arm/dts/stm32h7-u-boot.dtsi
-@@ -39,7 +39,7 @@
- 
- 			/*
- 			 * Memory configuration from sdram datasheet IS42S32800G-6BLI
--			 * firsct bank is bank@0
-+			 * first bank is bank@0
- 			 * second bank is bank@1
- 			 */
- 			bank1: bank@1 {
--- 
-2.17.1
+But I found some improvement on the log features, I will sent booth with
+updated values next week.
 
+Patrick.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

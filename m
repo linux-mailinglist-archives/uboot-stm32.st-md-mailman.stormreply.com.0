@@ -2,80 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E51AF2A9B17
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 18:45:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62A462A9B4E
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 18:55:17 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACE8BC36B36;
-	Fri,  6 Nov 2020 17:45:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9CCB7C3FAE2;
+	Fri,  6 Nov 2020 17:55:16 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 38915C36B0B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 95A70C3FAD9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Nov 2020 17:45:47 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  6 Nov 2020 17:55:15 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0A6HWD3p006450; Fri, 6 Nov 2020 18:45:30 +0100
+ 0A6Hm993026881; Fri, 6 Nov 2020 18:55:09 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=KVeUSxxH97l0zUvPcTF9dl/3zG5ewe9hFst8uuucRyE=;
- b=FnCEcVj4dpDVuz2uXkbgIoVEp59Dpb9jkf7e1zACHU9aR/SpyeJg7VGV5D+voZ3s1qWu
- RiKe1DR2az4WXIqC6yYlITqW1p1PLE826AgsGmRwhjAI8zrXmKhR5tWxb83UM6/f0ERO
- N7za16cqXapnFV3lNBNt1lmpC61beqYR5zJQOCBZ+8sIrxPFxnWhtT3j4dgl+euEB5yK
- rnrtxOeAS97ok9xAV9y17lupT0anwCjTw5RIA13FMwBzGzsHjYmwR65mjRhyn8RrcfnU
- 65CG7AMFc6mm2Ai+n1Wxiu7+dbvHU7U0Vw+EyY0IfZ6sDvxGGJnpA9rtXTzihHdVXY+y 8A== 
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=Q/FuSe6MrF9sAEIINJEgq2sS6l/2AW8JVAHeDqsIyP8=;
+ b=GSJL3bC3mVPuPgq8Z+WK9yJ1YXP4xfsU8gQaObSByk7ZJL0ymKX7MPOkm8JhSr7phXqd
+ NiaQt7D13GvFJu10ioV4c66GeuZloudC6KdPH+phAnVqse7xxP3r5rO6effjKEROKZKt
+ ALCuMoiv6GD10p1AB3CC5DrZgk6L8zn8DDxnDZBl37JmiNhCcVVrObyyWpJiqKBwhdO+
+ 6U0tWOI6e/51TyZDwmiN7Jqnnn7kQ48nO0RAZdsTbPYGQyqyyRItowWYq2K9wCAFHvHh
+ 4cIZqXgYWwyROwQZgu9vh1wtuId+QwP2jOs/twR0YDwwEC+TfkmobJbajNG0S8Bq4SVN 0w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34gywrft6j-1
+ by mx07-00178001.pphosted.com with ESMTP id 34gyw1xfdb-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 06 Nov 2020 18:45:30 +0100
+ Fri, 06 Nov 2020 18:55:09 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5925710002A;
- Fri,  6 Nov 2020 18:45:29 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3009B254082;
- Fri,  6 Nov 2020 18:45:29 +0100 (CET)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov
- 2020 18:45:28 +0100
-Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
- SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Fri, 6 Nov 2020 18:45:28 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Simon Glass <sjg@chromium.org>
-Thread-Topic: [PATCH 00/33] stm32: enable logging features
-Thread-Index: AQHWogq+KGMXxr763EqZXROs/LdT36mYo72AgAAosRCAEXl6gIACseXAgAOEtoCACwduYA==
-Date: Fri, 6 Nov 2020 17:45:28 +0000
-Message-ID: <c24b590e1eaa4af7a06a863a7f3aeeb1@SFHDAG2NODE3.st.com>
-References: <20201014091646.4233-1-patrick.delaunay@st.com>
- <CAPnjgZ2Z8=hXqoWXz8nuUToWTGz3sCY8zneGA9WsaVGYPprxzQ@mail.gmail.com>
- <88a21c960cc248af9cd08e2fc5681a69@SFHDAG2NODE3.st.com>
- <CAPnjgZ3S8PzSYjJSNJ0HhYk_=jkFR4yryL-qwPZRDM4BDQOwiw@mail.gmail.com>
- <8a219eb12a6446999545b375827980d8@SFHDAG2NODE3.st.com>
- <CAPnjgZ0KpixWRivpttZf+Mc_rJGuVtQAqY2iEBV7jOA4Mn4peA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0KpixWRivpttZf+Mc_rJGuVtQAqY2iEBV7jOA4Mn4peA@mail.gmail.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 039BC10002A;
+ Fri,  6 Nov 2020 18:55:09 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ECA402150F7;
+ Fri,  6 Nov 2020 18:55:08 +0100 (CET)
+Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov 2020 18:55:08
+ +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 6 Nov 2020 18:53:37 +0100
+Message-ID: <20201106175339.30683-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG3NODE3.st.com (10.75.127.9) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
  definitions=2020-11-06_06:2020-11-05,
  2020-11-06 signatures=0
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
- Heiko Schocher <hs@denx.de>, Christophe KERELLO <christophe.kerello@st.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
- Yannick FERTRE <yannick.fertre@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 00/33] stm32: enable logging features
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/3] log: don't build the trace buffer when
+	log is not ready
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,132 +71,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
+Update _log function to drop any traces when log is yet initialized:
+vsnprintf is no more executed in this case.
 
-> From: Simon Glass <sjg@chromium.org>
-> Sent: vendredi 30 octobre 2020 19:16
-> 
-> Hi Patrick,
-> 
-> On Wed, 28 Oct 2020 at 05:52, Patrick DELAUNAY <patrick.delaunay@st.com>
-> wrote:
-> >
-> > Hi Simon,
-> >
-> > > From: Simon Glass <sjg@chromium.org>
-> > > Sent: lundi 26 octobre 2020 20:23
-> > >
-> > > Hi Patrick,
-> > >
-> > > On Thu, 15 Oct 2020 at 09:59, Patrick DELAUNAY
-> > > <patrick.delaunay@st.com>
-> > > wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > > From: Simon Glass <sjg@chromium.org>
-> > > > > Sent: jeudi 15 octobre 2020 17:06
-> > > > >
-> > > > > Hi Patrick,
-> > > > >
-> > > > > On Wed, 14 Oct 2020 at 03:16, Patrick Delaunay
-> > > > > <patrick.delaunay@st.com>
-> > > > > wrote:
-> > > > > >
-> > > > > >
-> > > > > > This patch-set migrates several stm32 drivers to API
-> > > > > > compatible with logging features (use dev_...() or log_...()
-> > > > > > function) and activate the logging features in STM32MP15 boards.
-> > > > > >
-> > > > > > The size of U-Boot increased by 19kB (933026 to 952830 on
-> > > > > > STM32MP157C-EV1 board for basic defconfig) but the boot time
-> > > > > > don't change
-> > > > > drastically.
-> > > > >
-> > > > > >
-> >
-> > (...)
-> >
-> > > > > > For information even with all trace embbeded in U-Boot but not
-> > > > > > activated, MAX_LOG_LEVEL=8 and LOG_DEFAULT_LEVEL=6
-> > > > > >
-> > > > > > Size increase by 190KB (952830 to 1147918) but boot time is
-> > > > > > stable (1,748s vs 1,696s).
-> > > > >
-> > > > > This seems pretty bad. Is this because of console output, or
-> > > > > something else? I understand the size increase, but not the boot
-> > > > > time
-> > > increase.
-> > > >
-> > > > For this last point I just execute STM32MP157C-EV1 boot with a
-> > > > patch in configs/stm32mp15_basic_defconfig
-> > > >
-> > > > +CONFIG_LOGLEVEL=8
-> > > > +CONFIG_LOG_MAX_LEVEL=8
-> > > > +CONFIG_LOG_DEFAULT_LEVEL=6
-> > > > +CONFIG_LOGF_FILE=y
-> > > > +CONFIG_LOGF_LINE=y
-> > > > +CONFIG_LOGF_FUNC=y
-> > > >
-> > > > And execute "bootstage report" after the second boot (the first
-> > > > boot is pertubated by env save)
-> > > >
-> > > > I think the delta is linked to
-> > > > 1/ size of U-Boot (SPL spent more time to load U-Boot)
-> > > >     end of SPL 987,579  => 996,117
-> > >
-> > > OK.
-> > >
-> > > >
-> > > > 2/ time to check for each debug trace: because I increase the log level
-> > > >    (gd->default_log_level = 6 < MAX_LOG_LEVEL=8)
-> > >
-> > > This might be the biggest part. If you look at _log() it always does
-> > > the vsprintf() even if in fact log_dispatch() does not dispatch it to anything.
-> >
-> > Yes, log_dispatch / log_passes_filter are called after vsnprintf
-> >
-> > > I suspect that could be refactored to move the checking to a
-> > > separate function, and then call it before doing the expensive vsprintf().
-> >
-> > Or save va_list, fmt in log_rec and call vsnprintf allow when needed
-> > in log_dispatch, just before emit
-> 
-> Yes that sounds better to me.
-> 
-> >
-> > > >
-> > > > 3/ treatment added in log_console_emit (some printf) and
-> > > >     log_dispatch (processing_msg / gd->loghead)
-> > >
-> > > Likely this is fast.
-> > >
-> > > >
-> > > > 4/ lower cache performancy as trace code are pesent in memory even
-> > > >     they are not used
-> > > >
-> > > > Can I do some check/experimentation on my side ?
-> > >
-> > > Yes, if you can use the bootstage_start() and bootstage_accum()
-> > > within the _log() function to measure the total time take in the run.
-> >
-> > Ok, I add it in my TODO list
-> 
-> OK. We really should make logging add the least overhead possible.
-> 
-> Regards,
-> Simon
+This patch allows to reduce the cost for the dropped early debug trace.
 
-I rebase my patchset, tested on stm32mp15_trusted_defconfig (with TF-A load)
-and no more stm32_basic_defconfgi (with SPL load)
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
 
-And the cost is now more limited.... (perhaps I made some error in my last tests or 
-I activate too many trace ?).
+ common/log.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-But I found some improvement on the log features, I will sent booth with
-updated values next week.
+diff --git a/common/log.c b/common/log.c
+index 4b6f3fcd04..aadf533fb2 100644
+--- a/common/log.c
++++ b/common/log.c
+@@ -227,6 +227,9 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+ 	struct log_rec rec;
+ 	va_list args;
+ 
++	if (!gd)
++		return -ENOSYS;
++
+ 	/* Check for message continuation */
+ 	if (cat == LOGC_CONT)
+ 		cat = gd->logc_prev;
+@@ -239,15 +242,15 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+ 	rec.file = file;
+ 	rec.line = line;
+ 	rec.func = func;
++
++	if (!(gd->flags & GD_FLG_LOG_READY)) {
++		gd->log_drop_count++;
++		return -ENOSYS;
++	}
+ 	va_start(args, fmt);
+ 	vsnprintf(buf, sizeof(buf), fmt, args);
+ 	va_end(args);
+ 	rec.msg = buf;
+-	if (!gd || !(gd->flags & GD_FLG_LOG_READY)) {
+-		if (gd)
+-			gd->log_drop_count++;
+-		return -ENOSYS;
+-	}
+ 	if (!log_dispatch(&rec)) {
+ 		gd->logc_prev = cat;
+ 		gd->logl_prev = level;
+-- 
+2.17.1
 
-Patrick.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

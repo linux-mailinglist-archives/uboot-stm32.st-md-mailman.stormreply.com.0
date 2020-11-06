@@ -2,51 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 826732A9010
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 08:12:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AD4A2A900B
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Nov 2020 08:12:45 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4B24DC3FAE3;
-	Fri,  6 Nov 2020 07:12:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 28409C32E90;
+	Fri,  6 Nov 2020 07:12:45 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8EE61C36B36
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 26037C36B36
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Nov 2020 07:12:47 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  6 Nov 2020 07:12:44 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
- 0A67CFob005488; Fri, 6 Nov 2020 08:12:39 +0100
+ 0A67C9DJ019512; Fri, 6 Nov 2020 08:12:39 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
  h=from : to : cc : subject
- : date : message-id : mime-version : content-type; s=STMicroelectronics;
- bh=ChFGyRr3b9mh03kUM6oZ/OLXUbNgBUlNCl+TgdxKDZw=;
- b=EzetVEp2Tt8+mv8JTNFx2adnj+z+s7/rgHx9TG44bGD+AmGUypCEmPkgP8r7Q1kpcbIr
- PxzhFXURMsXLmOuxXj5IEVZ6Ns/AobzMRC0fJpehvtI6+cepxY4OAbEYTNO/ie4/96V7
- ZKYg7l7FGhDx4RdEnNId5H8CgVKuP+txXG5t7hmbvfDfnuZnEWqWvZQ1YWytqJpvg6GK
- ZRUByiagDdUTs0YQU/mvbGjoeucm9ybs/px5ImNNBWra63/3ct5L7a6pvkYo9rl3TIv9
- knnypyaYuLah3u/2EATWD3YUT9nUH5J9LCYdWbeE1tJ6tEHRW/f4KEDWrDJbzUyWZOpp Cw== 
+ : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=STMicroelectronics;
+ bh=orqQGXbHUNeJK/ED+s4kFq6jVobmTeY2vajCfFmj2No=;
+ b=rmJcUIhUWjqwxNECLuJrLttqTiJI84d+roYoXGnkZT//61gZwwZ1i1IC2XCSQVeUKRdI
+ 34cwGw+sI+TMjXjr7dqFXD6mt3xbwb2dKt2K4neEgRbSD9F1I2RjqUWRRHQrMnBc3Jan
+ ZR6kczwBCrJdrRftocLdNFvpmU8klsQL+2V/UNYOO6w55L2Sdd2UlwiZhjRr0QIpfVEO
+ w5Aqt2er0wHeKPdm8tOw7lgzhHgN+2zxA73TSMc1LeYmKNCkI/hhqFgR8KHct1j/bNYe
+ D3Q3XtihHoO9BBgc2v8FA9ZeE+QEuXiNdrMOiAmAyTlDahXouIR8AM1qpeECt3uxAZVe Qg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34gywrcfut-1
+ by mx07-00178001.pphosted.com with ESMTP id 34h00etgtn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 06 Nov 2020 08:12:39 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4AF9A10003A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4B19F10003E;
  Fri,  6 Nov 2020 08:12:39 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2E41722460A;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31D6422461A;
  Fri,  6 Nov 2020 08:12:39 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov 2020 08:12:11
+Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 6 Nov 2020 08:12:12
  +0100
 From: Patrice Chotard <patrice.chotard@st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 6 Nov 2020 08:11:56 +0100
-Message-ID: <20201106071200.6933-1-patrice.chotard@st.com>
+Date: Fri, 6 Nov 2020 08:11:57 +0100
+Message-ID: <20201106071200.6933-2-patrice.chotard@st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201106071200.6933-1-patrice.chotard@st.com>
+References: <20201106071200.6933-1-patrice.chotard@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
  definitions=2020-11-06_02:2020-11-05,
@@ -54,7 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Tom Rini <trini@konsulko.com>, Patrice CHOTARD <patrice.chotard@st.com>,
  Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH v1 0/4] ARM: dts: STM32: MCU's DT update
+Subject: [Uboot-stm32] [PATCH v1 1/4] ARM: dts: sync armv7-m.dtsi with
+	kernel v5.10-rc1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,44 +75,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-   - Sync STM32 MCU's DT with kernel v5.10-rc1
-   - Fix typo
-   - Fix timer init
-   - Sync armv7-m.dtsi with kernel v5.10-rc1
+Since kernel v4.8-rc1, commit 05b23ebc2bd9 ("ARM: dts: armv7-m: remove skeleton.dtsi include"),
+skeleton.dtsi file is no more included.
 
+This synchronization is needed to avoid to get 2 memory node
+in DTB file if, in DTS file, memory node is declared with the correct
+syntax as following:
 
-Patrice Chotard (4):
-  ARM: dts: sync armv7-m.dtsi with kernel v5.10-rc1
-  ARM: dts: stm32: DT sync with kernel v5.10-rc1 for MCU's boards
-  ARM: dts: stm32: Fix timer initialization for stm32 MCU's board
-  ARM: dts: stm32: Fix typo in stm32h7-u-boot.dtsi
+	memory@90000000 {
+ 		device_type = "memory";
+ 		reg = <0x90000000 0x800000>;
+ 	};
 
- arch/arm/dts/armv7-m.dtsi                |   4 +-
- arch/arm/dts/stm32429i-eval-u-boot.dtsi  |   6 +-
- arch/arm/dts/stm32429i-eval.dts          |  21 +++--
- arch/arm/dts/stm32746g-eval-u-boot.dtsi  |   4 +-
- arch/arm/dts/stm32746g-eval.dts          |  13 ++-
- arch/arm/dts/stm32f4-pinctrl.dtsi        | 107 ++++++++++++++++++++---
- arch/arm/dts/stm32f429-disco-u-boot.dtsi |   6 +-
- arch/arm/dts/stm32f429-disco.dts         |  99 ++++++++++++++++++++-
- arch/arm/dts/stm32f429.dtsi              |  30 +++++--
- arch/arm/dts/stm32f469-disco-u-boot.dtsi |  26 +++---
- arch/arm/dts/stm32f469-disco.dts         |  19 ++--
- arch/arm/dts/stm32f469.dtsi              |   1 -
- arch/arm/dts/stm32f7-pinctrl.dtsi        |  22 ++---
- arch/arm/dts/stm32f7-u-boot.dtsi         |   3 +-
- arch/arm/dts/stm32f746-disco-u-boot.dtsi |   8 +-
- arch/arm/dts/stm32f746-disco.dts         |   2 +-
- arch/arm/dts/stm32f746.dtsi              |  12 ++-
- arch/arm/dts/stm32f769-disco-u-boot.dtsi |   4 +-
- arch/arm/dts/stm32f769-disco.dts         |   6 +-
- arch/arm/dts/stm32h7-u-boot.dtsi         |   6 +-
- arch/arm/dts/stm32h743-pinctrl.dtsi      |  10 +--
- arch/arm/dts/stm32h743.dtsi              |  37 +++++---
- arch/arm/dts/stm32h743i-disco.dts        |   2 +-
- arch/arm/dts/stm32h743i-eval.dts         |   2 +-
- 24 files changed, 334 insertions(+), 116 deletions(-)
+Then in DTB, we will have the 2 memory nodes, which is incorrect and
+cause misbehavior during DT parsing by U-boot:
 
+	memory {
+		device_type = "memory";
+		reg = <0x00 0x00>;
+	};
+
+	memory@90000000 {
+		device_type = "memory";
+		reg = <0x90000000 0x800000>;
+	};
+
+Issue found when synchronizing MCU's STM32 DT from kernel v5.10-rc1.
+When using fdtdec_setup_mem_size_base() or fdtdec_setup_memory_banksize()
+API, first above memory node is found (with reg = <0x00 0x00>), so
+gd->ram_size, gd->ram_base, gd->bd->bi_dram[bank].start and
+gd->bd->bi_dram[bank].size are all set to 0 which avoid boards to boot.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+---
+
+ arch/arm/dts/armv7-m.dtsi | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/armv7-m.dtsi b/arch/arm/dts/armv7-m.dtsi
+index 31349da75a..26f5443d85 100644
+--- a/arch/arm/dts/armv7-m.dtsi
++++ b/arch/arm/dts/armv7-m.dtsi
+@@ -1,5 +1,4 @@
+-#include "skeleton.dtsi"
+-
++// SPDX-License-Identifier: GPL-2.0
+ / {
+ 	nvic: interrupt-controller@e000e100  {
+ 		compatible = "arm,armv7m-nvic";
+@@ -22,4 +21,3 @@
+ 		ranges;
+ 	};
+ };
+-
 -- 
 2.17.1
 

@@ -2,55 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 377192AF3A3
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Nov 2020 15:32:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C69022B8E65
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 Nov 2020 10:09:27 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4367C36B36;
-	Wed, 11 Nov 2020 14:32:49 +0000 (UTC)
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
- [209.85.210.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90BABC56630;
+	Thu, 19 Nov 2020 09:09:27 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8B013C36B35
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3FEAEC35E3C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Nov 2020 14:32:48 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id g19so2265583otp.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Nov 2020 06:32:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=bvKNKzlUT9+87VQJ/0jpuvLjXHN9TrzGZ/98SiOQc7U=;
- b=bURLxyHcUIZOg0D2AqwwORC/d9zlhgnz4MKsrQmaYFFWYVj9WNzyiX4Km/WpDFXi8X
- WHmh9c75pgwOtlqrwJpPNi9sU+SJADPKmrKl5AoXRds7+ElU+Z9FN5M+7qBeSzIXxIEU
- OJ0Nx9+HVJN1umiQCtbgQ01jxJvIKbv1UzJeY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=bvKNKzlUT9+87VQJ/0jpuvLjXHN9TrzGZ/98SiOQc7U=;
- b=d8uX9hjNh7tv7vkEDGjC2NcFqvtNfToyfYCgWzm0egow07zV3jvrgBcm14OIyhdfeI
- 61hO1DUJEgR4gClZ9/nQtpzDQ4nhqxJ4H7fC25tV6y67sbk7NRXUrI9/7QD7YpoCt1pc
- TwBr5kDQr6577hBe5+vHnfs5ljPlAKWMsnxrFfAXQ8IuoW9ENHhAl5M/3dvGQHo21WYA
- ftiRCNbrFn4LwTBE5w+EQrIN8QnecabSrIO4px/LY6EPDZQgujlmF9nOCQA297CPZon/
- waN1Y9KGSU7u5tGQKa9Vcjm7ZQtCrksMq//pOmfci979DpDWX4esEXE+GZg1SJW9Yzvd
- OhNw==
-X-Gm-Message-State: AOAM532FnXxHnyyz/bodJcs2S7QIJgQAOeyzZE3efy8Vvj7obL73di1i
- 4+mtBSaYYn3Orc8bI95PZXNA229yZOnIztsX7oF0yw==
-X-Google-Smtp-Source: ABdhPJyVXQoCB1zY2+6p9AlyJOEDaYxsjPQxyKWdBnYQhIszqI5CNH4Iq/XX1UxDyZLK7JetVHs2NqqhHVAyhZWtbT4=
-X-Received: by 2002:a9d:39b7:: with SMTP id y52mr18884767otb.28.1605105166988; 
- Wed, 11 Nov 2020 06:32:46 -0800 (PST)
+ Thu, 19 Nov 2020 09:09:25 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+ 0AJ97uBC004846; Thu, 19 Nov 2020 10:09:15 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=RgrzMQDT7yZGgPTzG39psZCGA+vFDEqBIYYuFXr5ApQ=;
+ b=G47irLy0GO41NJlKm67XTr4fqegLtaYHgSVKsHh2qz78nBYWI8UDLcUKMkq12YRhduSf
+ 2nA95dNvSRGv+MvJxxrffuSyNQPX7ASEyAKBnGhQXYsrJ8XlNRSPbtkxoBRBqal5Iy8/
+ eYAozGA9QJXaK0nJndtRyO3/5oFZtmetJfzY8JUpHX20sT8QnTyHGGrxrdktGXC0Onac
+ g5AdIjdzcTR1KoTRRbV2Slc3Ywh8p7r50F8UXu20yG5pIkLXhcCKDHAFmXps0LiVIjqg
+ O1QcPS7V97M5GXbPH5OuBeTqkxiDU2jCitWaDwMdRJqQL4DhdxY7VpmdQtr2S6Qpdrkw nA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 34t70gxv6p-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 19 Nov 2020 10:09:15 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 315A6100034;
+ Thu, 19 Nov 2020 10:09:14 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B1DB4236ED5;
+ Thu, 19 Nov 2020 10:09:14 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 19 Nov 2020 10:09:14
+ +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Thu, 19 Nov 2020 10:08:41 +0100
+Message-ID: <20201119090843.5614-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20201106175339.30683-1-patrick.delaunay@st.com>
- <20201106175339.30683-3-patrick.delaunay@st.com>
-In-Reply-To: <20201106175339.30683-3-patrick.delaunay@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Nov 2020 07:32:03 -0700
-Message-ID: <CAPnjgZ1Ne3=cRHyQrdr=v+6u9fcVgxKrrWGnwhecci-+YDB6mw@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
+ definitions=2020-11-19_05:2020-11-17,
+ 2020-11-19 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] log: call vsnprintf only when it is
-	needed to emit trace
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/3] test: cmd_ut_category: raise a error when
+	the test is not found
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,25 +73,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 6 Nov 2020 at 10:55, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Reduce the log overhead when the traces are filtered,
-> by moving the vsnprintf call from _log() to log_dispatch().
->
-> This patch avoids the printf treatment when LOG features is
-> activated, but trace is filtered, for example when
-> MAX_LOG_LEVEL=8 and LOG_DEFAULT_LEVEL=6.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
->
-> # Conflicts:
-> #       common/log.c
-> ---
->
->  common/log.c | 22 ++++++++++++++--------
->  1 file changed, 14 insertions(+), 8 deletions(-)
+Raise an error when test is not found, for example with manual test
+with bad test name, as following, doesn't raise an error
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+=> ut lib bad
+Failures: 0
+
+After the patch:
+
+=> ut lib bad
+lib test bad not found
+Failures: 1
+
+This patch allows also to detect tests which don't respect the expected
+format with "prefix" used in cmd_ut_category and defined in ut_subtest
+(./test/py/conftest.py). When I execute "make qcheck" this patch detects
+2 issues, corrected by the 2 next patches.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+---
+
+ test/cmd_ut.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 8f0bc688a2..6a752e6456 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -20,6 +20,7 @@ int cmd_ut_category(const char *name, const char *prefix,
+ 	struct unit_test_state uts = { .fail_count = 0 };
+ 	struct unit_test *test;
+ 	int prefix_len = prefix ? strlen(prefix) : 0;
++	int nb_tests = 0;
+ 
+ 	if (argc == 1)
+ 		printf("Running %d %s tests\n", n_ents, name);
+@@ -47,6 +48,12 @@ int cmd_ut_category(const char *name, const char *prefix,
+ 		uts.start = mallinfo();
+ 
+ 		test->func(&uts);
++		nb_tests++;
++	}
++
++	if (argc > 1 && nb_tests == 0) {
++		printf("%s test %s not found\n", name, argv[1]);
++		uts.fail_count = 1;
+ 	}
+ 
+ 	printf("Failures: %d\n", uts.fail_count);
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

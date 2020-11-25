@@ -2,58 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED93C2BC296
-	for <lists+uboot-stm32@lfdr.de>; Sun, 22 Nov 2020 00:08:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD4322C3BC1
+	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Nov 2020 10:14:07 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6FE46C5663D;
-	Sat, 21 Nov 2020 23:08:13 +0000 (UTC)
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
- [209.85.210.68])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 759BAC56630;
+	Wed, 25 Nov 2020 09:14:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 03238C56638
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DD725C424AF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 21 Nov 2020 23:08:10 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id n12so8909884otk.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 21 Nov 2020 15:08:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=w43bIzd2abyAQeHNHqihFO3O3Bq+GBUzuc6JiCby2co=;
- b=MpX9zZm8a21UC1vBLi7hqF9Ovp7lc969NY6Xe/0GU+P6lFYnYP+MZG/8/TNR0qN8Ry
- A1L7+hv0sNEqIEANyg8Wl/YlBUdOA8RBp26PwXk4NILzYIpp1iQCpP1DvqVJe+E3TRXL
- XQy4KKLsNqeXRkg0egxayyacxKKlJi1Y4HZiI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=w43bIzd2abyAQeHNHqihFO3O3Bq+GBUzuc6JiCby2co=;
- b=X7LhOi4ixQJjWlxY/6z1ZrcetTbhWEy/wex2Ci4eKBFoinzBYNXf/YKyR0gfiJ6Fqv
- jnTZnHKSbhzKvGFtjd1WbF4fnxT+/m5AibDr3IWv+5J1ssCSba8/I56VD/N4yDkBrUrS
- CxmyazkXnXyCUedbZE3xjAYzWzj8c4Yrimelw+aEAwqLUo83SyJrB9iHSWXedXdhr89b
- DeCQ8xx3FmBHHS/ns00urOaP313lbcI2w6p1Qwyaw11TykrnFUqxTE3HGDTjNrX33FCa
- fOqUQkGqKIRYW+LzrXJ6G2bN0WOLdNAa0cIjcEPO+V0wcnA5j/C0ZOd00KfQcwecFyUv
- o5mQ==
-X-Gm-Message-State: AOAM530PYR3FoWj3x57VvICc34agps61UjCPtfj+QxzvecUzPFIAwLkO
- 1v++RTQQZ+Ty1Ujon1HOnWdSJWQSzP+T5g2A7XQa3Q==
-X-Google-Smtp-Source: ABdhPJxG+Cl5RcYyyASHRsCA892QZADvvXJPNli2k2LPPxI7yeYAGa+ELYL/n02a0RnCqoqX2R/4U7nJLz2EtcbppVY=
-X-Received: by 2002:a9d:39b7:: with SMTP id y52mr19492044otb.28.1606000089236; 
- Sat, 21 Nov 2020 15:08:09 -0800 (PST)
+ Wed, 25 Nov 2020 09:14:05 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 0AP9DBUT002800; Wed, 25 Nov 2020 10:13:47 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=epNn/dpmJvk/LgxkSJc3rPWPV8i9kHgRx4CUbCJya5o=;
+ b=WJNX5lRAfGOAbAEiw8SLBA3kWrPZfXDot5caL8qOh4tlNEe1mwwqWF+O3AAYBJZJJeEa
+ xlPrl89z0rQZZsXiswTqgwmbvwAoRZsHC6Km6unCZnI+s1v3kbdSn4DThjuOjbFTN3y5
+ 8DnudrV8Fd/Dwi+nRq9VG2QhMQjRBe+Ay7iAHkhXKdejCK264Q+XCkwlwUXLHqKT6bKR
+ 1JKNorsB3Tuz7har36C3n7HmdYaEffYZGoXRLrArH46Tny6ir83SLa9rYBolSF+8/LUr
+ MSrxWv2gnuwWdjBEOV4br2fhZ9KCNtOoGDMOUaZcdOpoS4KqUFVwTakQUBZDJ9HJ9cV4 9A== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 34y0fgya19-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 25 Nov 2020 10:13:47 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E948510002A;
+ Wed, 25 Nov 2020 10:13:45 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CBE5923096C;
+ Wed, 25 Nov 2020 10:13:45 +0100 (CET)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 25 Nov
+ 2020 10:13:45 +0100
+Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
+ SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
+ 15.00.1473.003; Wed, 25 Nov 2020 10:13:45 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: Patrice CHOTARD <patrice.chotard@st.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Thread-Topic: [PATCH v1 1/4] ARM: dts: sync armv7-m.dtsi with kernel v5.10-rc1
+Thread-Index: AQHWtAwmjFn2a43ESk+s+kVt9ax916nYrjpw
+Date: Wed, 25 Nov 2020 09:13:45 +0000
+Message-ID: <cc6c86f906ea4d9cb308697e64207e57@SFHDAG2NODE3.st.com>
+References: <20201106071200.6933-1-patrice.chotard@st.com>
+ <20201106071200.6933-2-patrice.chotard@st.com>
+In-Reply-To: <20201106071200.6933-2-patrice.chotard@st.com>
+Accept-Language: fr-FR, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.44]
 MIME-Version: 1.0
-References: <20201120084833.31845-1-patrick.delaunay@st.com>
-In-Reply-To: <20201120084833.31845-1-patrick.delaunay@st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 21 Nov 2020 16:07:52 -0700
-Message-ID: <CAPnjgZ0-c5VNvQJkFc88XxTPH5cXXyiMuH8huMfxeXVmWTu1Qg@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@st.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] sandbox: remove ram buffer file when
-	U-Boot is loaded by SPL
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
+ definitions=2020-11-25_05:2020-11-25,
+ 2020-11-25 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 1/4] ARM: dts: sync armv7-m.dtsi with
+	kernel v5.10-rc1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,37 +83,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 20 Nov 2020 at 02:48, Patrick Delaunay <patrick.delaunay@st.com> wrote:
->
-> Update management of "--rm_memory" sandbox's option and force
-> this option when U-Boot is loaded by SPL in os_spl_to_uboot()
-> and remove the ram file after reading in main() as described
-> in option help message: "Remove memory file after reading".
->
-> This patch avoids that the file "/tmp/u-boot.mem.XXXXXX" [created in
-> os_jump_to_file() when U-Boot is loaded by SPL] is never deleted
-> because state_uninit() is not called after U-Boot execution
-> (CtrlC or with running pytest for example).
->
-> This issue is reproduced by
-> > build-sandbox_spl/spl/u-boot-spl
->   and CtrlC in U-Bot console
->
-> > make qcheck
->
-> One temp file is created after each SPL and U-Boot execution
-> (7 tims in qcheck after test_handoff.py, test_ofplatdata.py,
->  test_spl.py execution).
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
->
->  arch/sandbox/cpu/os.c    | 5 +++++
->  arch/sandbox/cpu/start.c | 7 +++++++
->  arch/sandbox/cpu/state.c | 4 ----
->  3 files changed, 12 insertions(+), 4 deletions(-)
+Hi Patrice
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> From: Patrice CHOTARD <patrice.chotard@st.com>
+> Sent: vendredi 6 novembre 2020 08:12
+> 
+> Since kernel v4.8-rc1, commit 05b23ebc2bd9 ("ARM: dts: armv7-m: remove
+> skeleton.dtsi include"), skeleton.dtsi file is no more included.
+> 
+> This synchronization is needed to avoid to get 2 memory node in DTB file if, in
+> DTS file, memory node is declared with the correct syntax as following:
+> 
+> 	memory@90000000 {
+>  		device_type = "memory";
+>  		reg = <0x90000000 0x800000>;
+>  	};
+> 
+> Then in DTB, we will have the 2 memory nodes, which is incorrect and cause
+> misbehavior during DT parsing by U-boot:
+> 
+> 	memory {
+> 		device_type = "memory";
+> 		reg = <0x00 0x00>;
+> 	};
+> 
+> 	memory@90000000 {
+> 		device_type = "memory";
+> 		reg = <0x90000000 0x800000>;
+> 	};
+> 
+> Issue found when synchronizing MCU's STM32 DT from kernel v5.10-rc1.
+> When using fdtdec_setup_mem_size_base() or fdtdec_setup_memory_banksize()
+> API, first above memory node is found (with reg = <0x00 0x00>), so
+> gd->ram_size, gd->ram_base, gd->bd->bi_dram[bank].start and
+> gd->bd->bi_dram[bank].size are all set to 0 which avoid boards to boot.
+> 
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
+> ---
+> 
+>  arch/arm/dts/armv7-m.dtsi | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/dts/armv7-m.dtsi b/arch/arm/dts/armv7-m.dtsi index
+> 31349da75a..26f5443d85 100644
+> --- a/arch/arm/dts/armv7-m.dtsi
+> +++ b/arch/arm/dts/armv7-m.dtsi
+> @@ -1,5 +1,4 @@
+> -#include "skeleton.dtsi"
+> -
+> +// SPDX-License-Identifier: GPL-2.0
+>  / {
+>  	nvic: interrupt-controller@e000e100  {
+>  		compatible = "arm,armv7m-nvic";
+> @@ -22,4 +21,3 @@
+>  		ranges;
+>  	};
+>  };
+> -
+> --
+> 2.17.1
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@st.com>
+
+Applied to u-boot-stm/master, thanks!
+
+Thanks
+
+Patrick
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

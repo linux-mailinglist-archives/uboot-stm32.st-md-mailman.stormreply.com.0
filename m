@@ -2,69 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 892A42C427F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 25 Nov 2020 15:55:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A1512C4DDF
+	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Nov 2020 04:52:42 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4A914C424AF;
-	Wed, 25 Nov 2020 14:55:18 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A866C424AF;
+	Thu, 26 Nov 2020 03:52:42 +0000 (UTC)
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+ [209.85.222.182])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F29F4C36B36
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DFE49C36B36
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 25 Nov 2020 14:55:16 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0APEpsOK009544; Wed, 25 Nov 2020 15:55:03 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : content-type : content-transfer-encoding :
- mime-version; s=STMicroelectronics;
- bh=oP8LhZqn3SRgoamBZ0+xZK7DvMQ89cIQ93ZMe2dz47k=;
- b=p8AJTgrJBlquElZTgNEUvWE47EfrnI5WKw3ggLqcbQrcctUHcSKc/egwPR0JycumWosZ
- qwkThRfD2yURhX/tri1LoQJGXIzz5m/ossj3v3ltPxve01Ukc5lFZZfKcOVQ6DljFjaS
- kI+IHmgHItTPOpol+zaPbXDUvSyz+7eW9lkFP0kiTzxDawpBIKJuFARVAl0bos2WDuRe
- OdJKY1U7BcdrcDvXIoLLyoU0L3gkBQ1g2Fx2pfjlwEko7jt7tkQKZePHdol6ibV2rDY6
- Q+CU3K3lr1TGm2//l2IP+nbX1b0+CFIal+NLC3ckXmIqfkThHXq7FqSeM12BzuoPdIm+ 6A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34y0hjh9vx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 25 Nov 2020 15:55:03 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 40A9210002A;
- Wed, 25 Nov 2020 15:55:03 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 27FFD264DB5;
- Wed, 25 Nov 2020 15:55:03 +0100 (CET)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 25 Nov
- 2020 15:55:02 +0100
-Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
- SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 25 Nov 2020 15:55:02 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PULL] Pull request for u-boot master  = u-boot-stm32-20201125
-Thread-Index: AdbDOkg+RqVjBusgSSi4WMJ+sftz4Q==
-Date: Wed, 25 Nov 2020 14:55:02 +0000
-Message-ID: <1606316102821.13856@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: fr-FR
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
+ Thu, 26 Nov 2020 03:52:40 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id q5so516048qkc.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 25 Nov 2020 19:52:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=Dpcn6Xe7sli+E7cf8ratBmo19l4xCW1Xwn1kZzy1uYw=;
+ b=oITLcLFmTS2BIrMf/4zS7FrbYKjEAzOLVKGVpp/roFSIaNcCKw8rP6SN4YRrFp4/Ax
+ E2PkqYuyUznlFqpqULr75oroa9e5aPUyP8UirCbURcxCYKXxbIhLRxAGHqqdb9hFg95V
+ 9R36YprnYgVO+j56mGSofTgiKxSJ0FrOOtopo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=Dpcn6Xe7sli+E7cf8ratBmo19l4xCW1Xwn1kZzy1uYw=;
+ b=uIl3skWCeGNk1UP4Yl5UBsOay3KqEkhg5JRn7b8cQc1hh7dsGCcnIgnWdtz5fyoBUh
+ cKJHGkFcA7bEb83wG9amkGFejPJFCTaiG+d/Zy+/jEYT78ogpvHKuTbqVId4wTbUwO3s
+ GiLT8yQM0868nir6Jy6cBbhHB+F22c3sIwY3tlNX4/frLgd031W5F2jMJnObUgsUXffe
+ BJKoEahhyNYaXgiP1J2+sP6+VxX4M4Nrz8WXJMIsQDx/+QoSa154YR6TBLPg2Ulyy4GB
+ KeGYumpArqsJ6m32AWgm5mOK8gNbFPWRqec5hcuykGd/GgcDTZv8Ov8GtiN2sEo/rHH7
+ hiqA==
+X-Gm-Message-State: AOAM532LNFLz5O5uOdUi1K4/aLitsSm4yVTyQDuFX5gSYZ+7HBbsHtN/
+ yZIBROAPMhn4ay0qqRV+pMaUPA==
+X-Google-Smtp-Source: ABdhPJzfF1mWQaIkavmD/azx8L5cMvOXtEau+W42/2u2/J0f9QRqnrK1BoaPgEEIN4MPx2zJW115yg==
+X-Received: by 2002:a37:634d:: with SMTP id x74mr1342267qkb.478.1606362759687; 
+ Wed, 25 Nov 2020 19:52:39 -0800 (PST)
+Received: from bill-the-cat (cpe-65-184-135-175.ec.res.rr.com.
+ [65.184.135.175])
+ by smtp.gmail.com with ESMTPSA id j21sm1491028qtp.10.2020.11.25.19.52.38
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 25 Nov 2020 19:52:38 -0800 (PST)
+Date: Wed, 25 Nov 2020 22:52:36 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@st.com>
+Message-ID: <20201126035236.GN32272@bill-the-cat>
+References: <1606316102821.13856@st.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-11-25_09:2020-11-25,
- 2020-11-25 signatures=0
-Cc: Marek Vasut <marex@denx.de>, "uboot-stm32@st-md-mailman.stormreply.com"
+In-Reply-To: <1606316102821.13856@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
  <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice CHOTARD <patrice.chotard@st.com>,
  Richard Genoud <richard.genoud@posteo.net>
-Subject: [Uboot-stm32] [PULL] Pull request for u-boot master =
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master =
 	u-boot-stm32-20201125
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -77,136 +72,103 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6014293002182983885=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom,
 
-Please pull the STM32 related patches for u-boot/master, v2021.01: u-boot-stm32-20201125
+--===============6014293002182983885==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="AMnfhCSTHOurdchq"
+Content-Disposition: inline
 
-- STM32 MCU's DT update
-- Add DHCOM based STM32MP15x PicoITX board
-- Correct ALIGN macro usage for on syram for SPL dcache support
-- Fixes on DHCOM: uSD card-detect GPIO and Drop QSPI CS2
-- Fix compilation issue for spl_mmc_boot_partition
-- Fix MTD partitions for serial boot
-- Add support of MCU HOLD BOOT with reset for stm32 remoteproc
-  (prepare alligneent with  kernel DT)
-- Correct bias information and support in STM32 soc and STMFX
-- Support optional vbus in usbphyc
-- Update FIT examples to avoid kernel zImage relocation before decompression
 
-CI status: 
-https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/commits/u-boot-stm32-20201125
+--AMnfhCSTHOurdchq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks,
-Patrick
+On Wed, Nov 25, 2020 at 02:55:02PM +0000, Patrick DELAUNAY wrote:
 
-git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git u-boot-stm32-20201125
+> Hi Tom,
+>=20
+> Please pull the STM32 related patches for u-boot/master, v2021.01: u-boot=
+-stm32-20201125
+>=20
+> - STM32 MCU's DT update
+> - Add DHCOM based STM32MP15x PicoITX board
+> - Correct ALIGN macro usage for on syram for SPL dcache support
+> - Fixes on DHCOM: uSD card-detect GPIO and Drop QSPI CS2
+> - Fix compilation issue for spl_mmc_boot_partition
+> - Fix MTD partitions for serial boot
+> - Add support of MCU HOLD BOOT with reset for stm32 remoteproc
+>   (prepare alligneent with  kernel DT)
+> - Correct bias information and support in STM32 soc and STMFX
+> - Support optional vbus in usbphyc
+> - Update FIT examples to avoid kernel zImage relocation before decompress=
+ion
+>=20
+> CI status:=20
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/commits/u-boot-stm3=
+2-20201125
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u=
+-boot-stm.git u-boot-stm32-20201125
+>=20
+> The following changes since commit d361eafe82bfbf90ab0a592ae59daef99faee5=
+ec:
+>=20
+>   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2020-11-22 1=
+1:00:11 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
+32-20201125
+>=20
+> for you to fetch changes up to 60a2dd6aa20f6c0938856b764e7ebdee722d998e:
+>=20
+>   board: st: stm32mp1: update load address for FIT examples (2020-11-25 1=
+4:27:19 +0100)
+>=20
 
-The following changes since commit d361eafe82bfbf90ab0a592ae59daef99faee5ec:
+Applied to u-boot/master, thanks!
 
-  Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2020-11-22 11:00:11 -0500)
+--=20
+Tom
 
-are available in the Git repository at:
+--AMnfhCSTHOurdchq
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm32-20201125
+-----BEGIN PGP SIGNATURE-----
 
-for you to fetch changes up to 60a2dd6aa20f6c0938856b764e7ebdee722d998e:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+/JoAACgkQFHw5/5Y0
+tywPdgv/c+ler+zvzyPQszLugMoPzBXQjShuk/PVJvjhrMUB1mjTpYTXv94J21nf
+wszwBaXF2BbaIfrN05MM6+GthReY56uG2Hm73GheFZeBBgyrXiZlfkdt/Aq7HvOO
+mMMiFM2iiOc3+gUIZjSuc/PZKaODqDZUMzYwSavnQlUV/MMFY0IN5WO2e4mRsTKy
+6/+WBYAvdt0Eo++N/FSyE4B1k/H1ot5hujnfEwBh5LtgP8ktMuOK3adh8Mi/x9fc
+kjhTQ09pn7dZx8PhJgd0vemAWTDATlzbc9Xkfekh1DrhsWueWu+8E8qrw7iIYiJP
+s+MP4jGz7vx+T37qCmjsPq+oheEtJW2Oc1nLrCNbxpnV4xL2/Amw2PxXo156j7s2
+tzdli4SRISd7U9Z1lM/MNS3DkntR7dX2ExeANfVlizpW8nezQ1epmwJYHgWMIRxg
+xJuGsIHRKb99S8TVopWJuX9RkIa+qa9BycJqyRFGuM7ba1RUhxndmvUOU4h75avq
+KVJ12oLo
+=cG8J
+-----END PGP SIGNATURE-----
 
-  board: st: stm32mp1: update load address for FIT examples (2020-11-25 14:27:19 +0100)
+--AMnfhCSTHOurdchq--
 
-----------------------------------------------------------------
-- STM32 MCU's DT update
-- Add DHCOM based STM32MP15x PicoITX board
-- Correct ALIGN macro usage for on syram for SPL dcache support
-- Fixes on DHCOM: uSD card-detect GPIO and Drop QSPI CS2
-- Fix compilation issue for spl_mmc_boot_partition
-- Fix MTD partitions for serial boot
-- Add support of MCU HOLD BOOT with reset for stm32 remoteproc
-  (prepare alligneent with  kernel DT)
-- Correct bias information and support in STM32 soc and STMFX
-- Support optional vbus in usbphyc
-- Update FIT examples to avoid kernel zImage relocation before decompression
+--===============6014293002182983885==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-----------------------------------------------------------------
-Marek Vasut (3):
-      ARM: dts: stm32: Add DHCOM based PicoITX board
-      ARM: dts: stm32: Fix uSD card-detect GPIO on DHCOM
-      ARM: dts: stm32: Drop QSPI CS2 on DHCOM
-
-Patrice Chotard (4):
-      ARM: dts: sync armv7-m.dtsi with kernel v5.10-rc1
-      ARM: dts: stm32: DT sync with kernel v5.10-rc1 for MCU's boards
-      ARM: dts: stm32: Fix timer initialization for stm32 MCU's board
-      ARM: dts: stm32: Fix typo in stm32h7-u-boot.dtsi
-
-Patrick Delaunay (11):
-      arm: stm32mp: correct the ALIGN macro usage
-      board: stm32mp1: no MTD partitions fixup for serial boot
-      reset: stm32: Add support of MCU HOLD BOOT
-      remoteproc: stm32: use reset for hold boot
-      remoteproc: stm32: update error management in stm32_copro_start
-      pinctrl: stm32: display bias information for all pins
-      gpio: stm32: correct the bias management
-      pinctrl: stmfx: update pincontrol and gpio device name
-      pinctrl: stmfx: update pin name
-      phy: stm32: usbphyc: manage optional vbus regulator on phy_power_on/off
-      board: st: stm32mp1: update load address for FIT examples
-
-Richard Genoud (1):
-      SPL: stm32mp1: fix spl_mmc_boot_partition not defined
-
- arch/arm/dts/Makefile                              |   1 +
- arch/arm/dts/armv7-m.dtsi                          |   4 +--
- arch/arm/dts/stm32429i-eval-u-boot.dtsi            |   6 ++++-
- arch/arm/dts/stm32429i-eval.dts                    |  21 ++++++++++-----
- arch/arm/dts/stm32746g-eval-u-boot.dtsi            |   4 +--
- arch/arm/dts/stm32746g-eval.dts                    |  13 +++++-----
- arch/arm/dts/stm32f4-pinctrl.dtsi                  | 107 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------
- arch/arm/dts/stm32f429-disco-u-boot.dtsi           |   6 ++++-
- arch/arm/dts/stm32f429-disco.dts                   |  99 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
- arch/arm/dts/stm32f429.dtsi                        |  30 +++++++++++++++-------
- arch/arm/dts/stm32f469-disco-u-boot.dtsi           |  26 +++++++++++--------
- arch/arm/dts/stm32f469-disco.dts                   |  19 +++++++++-----
- arch/arm/dts/stm32f469.dtsi                        |   1 -
- arch/arm/dts/stm32f7-pinctrl.dtsi                  |  22 ++++++++--------
- arch/arm/dts/stm32f7-u-boot.dtsi                   |   3 +--
- arch/arm/dts/stm32f746-disco-u-boot.dtsi           |   8 ++----
- arch/arm/dts/stm32f746-disco.dts                   |   2 +-
- arch/arm/dts/stm32f746.dtsi                        |  12 ++++-----
- arch/arm/dts/stm32f769-disco-u-boot.dtsi           |   4 +--
- arch/arm/dts/stm32f769-disco.dts                   |   6 ++---
- arch/arm/dts/stm32h7-u-boot.dtsi                   |   6 ++++-
- arch/arm/dts/stm32h743-pinctrl.dtsi                |  10 ++++----
- arch/arm/dts/stm32h743.dtsi                        |  37 +++++++++++++++++++--------
- arch/arm/dts/stm32h743i-disco.dts                  |   2 +-
- arch/arm/dts/stm32h743i-eval.dts                   |   2 +-
- arch/arm/dts/stm32mp15-u-boot.dtsi                 |   7 +++++
- arch/arm/dts/stm32mp15xx-dhcom-picoitx-u-boot.dtsi |  14 ++++++++++
- arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts         |  93 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/stm32mp15xx-dhcom.dtsi                |  15 +++--------
- arch/arm/mach-stm32mp/cpu.c                        |   4 +--
- arch/arm/mach-stm32mp/spl.c                        |   2 ++
- board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its   |  22 ++++++++++++++++
- board/st/stm32mp1/fit_copro_kernel_dtb.its         |  18 +++++++++++--
- board/st/stm32mp1/fit_kernel_dtb.its               |   6 ++---
- board/st/stm32mp1/stm32mp1.c                       |  11 +++++---
- configs/stm32mp15_dhcom_basic_defconfig            |   2 +-
- doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt |   2 ++
- drivers/gpio/stm32_gpio.c                          |  28 ++++++++++----------
- drivers/phy/phy-stm32-usbphyc.c                    |  33 ++++++++++++++++--------
- drivers/pinctrl/pinctrl-stmfx.c                    |  13 ++++++----
- drivers/pinctrl/pinctrl_stm32.c                    |  24 ++++++++---------
- drivers/remoteproc/stm32_copro.c                   | 108 +++++++++++++++++++++++------------------------------------------------------
- drivers/reset/stm32-reset.c                        |  17 +++++++++---
- include/dt-bindings/reset/stm32mp1-resets.h        |   1 +
- 44 files changed, 611 insertions(+), 260 deletions(-)
- create mode 100644 arch/arm/dts/stm32mp15xx-dhcom-picoitx-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp15xx-dhcom-picoitx.dts
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6014293002182983885==--

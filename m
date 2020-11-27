@@ -2,65 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A1512C4DDF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Nov 2020 04:52:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C68F2C62EE
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Nov 2020 11:21:20 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A866C424AF;
-	Thu, 26 Nov 2020 03:52:42 +0000 (UTC)
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
- [209.85.222.182])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 18F03C56631;
+	Fri, 27 Nov 2020 10:21:20 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DFE49C36B36
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78CFAC56631
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Nov 2020 03:52:40 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id q5so516048qkc.12
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 25 Nov 2020 19:52:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=Dpcn6Xe7sli+E7cf8ratBmo19l4xCW1Xwn1kZzy1uYw=;
- b=oITLcLFmTS2BIrMf/4zS7FrbYKjEAzOLVKGVpp/roFSIaNcCKw8rP6SN4YRrFp4/Ax
- E2PkqYuyUznlFqpqULr75oroa9e5aPUyP8UirCbURcxCYKXxbIhLRxAGHqqdb9hFg95V
- 9R36YprnYgVO+j56mGSofTgiKxSJ0FrOOtopo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=Dpcn6Xe7sli+E7cf8ratBmo19l4xCW1Xwn1kZzy1uYw=;
- b=uIl3skWCeGNk1UP4Yl5UBsOay3KqEkhg5JRn7b8cQc1hh7dsGCcnIgnWdtz5fyoBUh
- cKJHGkFcA7bEb83wG9amkGFejPJFCTaiG+d/Zy+/jEYT78ogpvHKuTbqVId4wTbUwO3s
- GiLT8yQM0868nir6Jy6cBbhHB+F22c3sIwY3tlNX4/frLgd031W5F2jMJnObUgsUXffe
- BJKoEahhyNYaXgiP1J2+sP6+VxX4M4Nrz8WXJMIsQDx/+QoSa154YR6TBLPg2Ulyy4GB
- KeGYumpArqsJ6m32AWgm5mOK8gNbFPWRqec5hcuykGd/GgcDTZv8Ov8GtiN2sEo/rHH7
- hiqA==
-X-Gm-Message-State: AOAM532LNFLz5O5uOdUi1K4/aLitsSm4yVTyQDuFX5gSYZ+7HBbsHtN/
- yZIBROAPMhn4ay0qqRV+pMaUPA==
-X-Google-Smtp-Source: ABdhPJzfF1mWQaIkavmD/azx8L5cMvOXtEau+W42/2u2/J0f9QRqnrK1BoaPgEEIN4MPx2zJW115yg==
-X-Received: by 2002:a37:634d:: with SMTP id x74mr1342267qkb.478.1606362759687; 
- Wed, 25 Nov 2020 19:52:39 -0800 (PST)
-Received: from bill-the-cat (cpe-65-184-135-175.ec.res.rr.com.
- [65.184.135.175])
- by smtp.gmail.com with ESMTPSA id j21sm1491028qtp.10.2020.11.25.19.52.38
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 25 Nov 2020 19:52:38 -0800 (PST)
-Date: Wed, 25 Nov 2020 22:52:36 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@st.com>
-Message-ID: <20201126035236.GN32272@bill-the-cat>
-References: <1606316102821.13856@st.com>
+ Fri, 27 Nov 2020 10:21:13 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 0ARAII8M019318; Fri, 27 Nov 2020 11:21:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-type; s=STMicroelectronics;
+ bh=D7q8p4Gx9m2xCOAOOuvXQ7XyaBXkin5M6K60nOlPs1E=;
+ b=SFLqi76AkRjEaruy4IRSfAQtUMPOBxnsSqFhTMBDSy1iIjetm/0gaWjnNf311B8X8Nrm
+ kJbwXL/+rG2AreDgFtPkXKg5u0akW0P2Y7ocBzWDBKoi3Rch8qufH0T/YiumG7h79IXw
+ Q5Jab+pa/b0Mbz+f3QrkR5vng/4UPkbMM3ApSu5bcagamHYX+o3GSBB9jlsgReQkySCz
+ C+TCcXn1sj1p4m5gHjynkLnIeCQpVMfQGpt1kjq8PlI2qWY48eTBR/LJGAcMySqtdTIG
+ Jd0MCdzoWL4T+asu3dsJTj+qeqdm/wuSkN0INLwRjm6fYv6pL0i37JrnlY8M09xiwmGK nQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 34y01d1xaf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 27 Nov 2020 11:21:07 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A0CBF10002A;
+ Fri, 27 Nov 2020 11:21:06 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9100D236CB6;
+ Fri, 27 Nov 2020 11:21:05 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 27 Nov 2020 11:21:05
+ +0100
+From: Patrick Delaunay <patrick.delaunay@st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 27 Nov 2020 11:20:50 +0100
+Message-ID: <20201127102100.11721-1-patrick.delaunay@st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1606316102821.13856@st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice CHOTARD <patrice.chotard@st.com>,
- Richard Genoud <richard.genoud@posteo.net>
-Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master =
-	u-boot-stm32-20201125
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
+ definitions=2020-11-27_05:2020-11-26,
+ 2020-11-27 signatures=0
+Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: [Uboot-stm32] [PATCH v2 0/9] log: don't build the trace buffer when
+	log is not ready
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,103 +69,62 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6014293002182983885=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============6014293002182983885==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="AMnfhCSTHOurdchq"
-Content-Disposition: inline
+It is the V2 of [1], rebased and with added tests.
+
+To allow test (with console record), I replace the debug uart
+function used to display the dropped messages printascii() by
+the console generic function puts().
+
+This function allows to support all the features defined in
+console.c (as DEBUG_UART, PRE_CONSOLE_BUFFER, CONSOLE_RECORD)
+without duplicate them (no more nedd to test CONFIG_DEBUG_UART
+for example).
+
+PS: I don't sure that the added trace added for test in
+    arch/sandbox/cpu/start.c = "sandbox: starting..."
+    is not disturbing.
+    see patch 5 = "test: add test for dropped trace before log_init"
+
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=212739
 
 
---AMnfhCSTHOurdchq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+- Add test for LOGL_FORCE_DEBUG (NEW)
+- add test to count the dropped messages (NEW)
+- replace printascii by console puts, remove test on CONFIG_DEBUG_UART
+- Add test of displayed messages requested before log_init (NEW)
+- update gd test in console function puts and putc (cosmetic)
+- Record all messages in console, even when dropped (NEW)
+- added test for content of dropped messages (NEW)
 
-On Wed, Nov 25, 2020 at 02:55:02PM +0000, Patrick DELAUNAY wrote:
+Patrick Delaunay (9):
+  test: add LOGL_FORCE_DEBUG flags support in log tests
+  log: don't build the trace buffer when log is not ready
+  test: log: add test for dropped messages
+  log: use console puts to output trace before LOG init
+  test: add test for dropped trace before log_init
+  console: remove duplicated test on gd value
+  console: allow to record console output before ready
+  test: log: add test for console output of dropped messages
+  log: call vsnprintf only when it is needed to emit trace
 
-> Hi Tom,
->=20
-> Please pull the STM32 related patches for u-boot/master, v2021.01: u-boot=
--stm32-20201125
->=20
-> - STM32 MCU's DT update
-> - Add DHCOM based STM32MP15x PicoITX board
-> - Correct ALIGN macro usage for on syram for SPL dcache support
-> - Fixes on DHCOM: uSD card-detect GPIO and Drop QSPI CS2
-> - Fix compilation issue for spl_mmc_boot_partition
-> - Fix MTD partitions for serial boot
-> - Add support of MCU HOLD BOOT with reset for stm32 remoteproc
->   (prepare alligneent with  kernel DT)
-> - Correct bias information and support in STM32 soc and STMFX
-> - Support optional vbus in usbphyc
-> - Update FIT examples to avoid kernel zImage relocation before decompress=
-ion
->=20
-> CI status:=20
-> https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/commits/u-boot-stm3=
-2-20201125
->=20
-> Thanks,
-> Patrick
->=20
-> git request-pull origin/master https://gitlab.denx.de/u-boot/custodians/u=
--boot-stm.git u-boot-stm32-20201125
->=20
-> The following changes since commit d361eafe82bfbf90ab0a592ae59daef99faee5=
-ec:
->=20
->   Merge https://gitlab.denx.de/u-boot/custodians/u-boot-usb (2020-11-22 1=
-1:00:11 -0500)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
-32-20201125
->=20
-> for you to fetch changes up to 60a2dd6aa20f6c0938856b764e7ebdee722d998e:
->=20
->   board: st: stm32mp1: update load address for FIT examples (2020-11-25 1=
-4:27:19 +0100)
->=20
+ arch/sandbox/cpu/start.c  |  5 +++
+ common/console.c          | 32 ++++++++---------
+ common/log.c              | 40 +++++++++++++++------
+ test/log/log_test.c       | 76 +++++++++++++++++++++++++++++++--------
+ test/py/tests/test_log.py | 11 ++++++
+ 5 files changed, 122 insertions(+), 42 deletions(-)
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---AMnfhCSTHOurdchq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl+/JoAACgkQFHw5/5Y0
-tywPdgv/c+ler+zvzyPQszLugMoPzBXQjShuk/PVJvjhrMUB1mjTpYTXv94J21nf
-wszwBaXF2BbaIfrN05MM6+GthReY56uG2Hm73GheFZeBBgyrXiZlfkdt/Aq7HvOO
-mMMiFM2iiOc3+gUIZjSuc/PZKaODqDZUMzYwSavnQlUV/MMFY0IN5WO2e4mRsTKy
-6/+WBYAvdt0Eo++N/FSyE4B1k/H1ot5hujnfEwBh5LtgP8ktMuOK3adh8Mi/x9fc
-kjhTQ09pn7dZx8PhJgd0vemAWTDATlzbc9Xkfekh1DrhsWueWu+8E8qrw7iIYiJP
-s+MP4jGz7vx+T37qCmjsPq+oheEtJW2Oc1nLrCNbxpnV4xL2/Amw2PxXo156j7s2
-tzdli4SRISd7U9Z1lM/MNS3DkntR7dX2ExeANfVlizpW8nezQ1epmwJYHgWMIRxg
-xJuGsIHRKb99S8TVopWJuX9RkIa+qa9BycJqyRFGuM7ba1RUhxndmvUOU4h75avq
-KVJ12oLo
-=cG8J
------END PGP SIGNATURE-----
-
---AMnfhCSTHOurdchq--
-
---===============6014293002182983885==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6014293002182983885==--

@@ -2,64 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBD352C6362
-	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Nov 2020 11:49:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E43722C6832
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Nov 2020 15:50:42 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B4B22C56632;
-	Fri, 27 Nov 2020 10:49:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 72FF2C56630;
+	Fri, 27 Nov 2020 14:50:42 +0000 (UTC)
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+ [209.85.222.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AEE04C36B36
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA988C36B36
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 27 Nov 2020 10:49:41 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0ARAgblc023964; Fri, 27 Nov 2020 11:49:39 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-type; s=STMicroelectronics;
- bh=vdQtUU7TFI8atDOP5k/YU/53WTU8+TpmUInR8SsMGks=;
- b=Bp8NHIlv834H/5avJ0UiYOhAHer5U8NQWIsEhICVOkTXLWD1riWsh50/diJRGrXvdz6+
- MbAx7qUXFxGgaaRWmMPBPCFwoHydBht7TzYgsqRHl86yZD4t0zIGbqnCXY+wvQS1uP4o
- Tn3LIvuXSe4X48UM5OVmKra5rKZOt3hX6IEVU4vXvO/P6BoGMNJSzVzQ03mY7HnR3tUw
- XgD6EvminBaNJiSRjU+gQbWJZMch9Stn82JVOfBVVErKe+E65dZKaSpJlX/SFYM6K5lG
- zrSBEx0dFbkdJxOSnSqX8fu5yiy5IinUDX0EXjRRJKlg43mfZRM8VzMhVXl4GZM5bal6 rA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 34y05ht3e1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 27 Nov 2020 11:49:39 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D6774100038;
- Fri, 27 Nov 2020 11:49:38 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C536E23B151;
- Fri, 27 Nov 2020 11:49:38 +0100 (CET)
-Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 27 Nov 2020 11:49:38
- +0100
-From: Patrick Delaunay <patrick.delaunay@st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 27 Nov 2020 11:49:30 +0100
-Message-ID: <20201127114927.2.Ida70f4fb1524187703e9240d63e436f8ae5adaab@changeid>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201127104930.32692-1-patrick.delaunay@st.com>
-References: <20201127104930.32692-1-patrick.delaunay@st.com>
+ Fri, 27 Nov 2020 14:50:38 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id u4so4497411qkk.10
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 27 Nov 2020 06:50:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=hMsAdiXZvJrkXzIgmb5NxrDJtY2TrWSb/gJjx9iA0vE=;
+ b=Iq/0lpMebm6KspawxtVxB23NUEpQBzuFqv8HYWWmhKjOo3H4jGFi3rBbdGAkLNWWBw
+ 4PxtFdgqM+U7b0OtvKuj4bJRLtkKWnGxV3meSLqJuHyEvJiCxkMiutZ8QU9wZ4se3tAW
+ m7e0qYczfG8mwwuUp6VMBoDy+aHrtPG47fX04KCzMKSWP4p1ZxF+925HzjaMVM1RocjC
+ PamgMlo3Wa6M57Zb+t45hZcBIDxk9p+cP6Tlk0MeFp5rZdaRNH1e3N0yrx1di1J0vWOV
+ pqkGGS3zWoaHbUaCnRG7qb3kFwd7m1s1GKeDmjHwC6iv3moYXaYugxx2rd0YGaZ1NhES
+ YORA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=hMsAdiXZvJrkXzIgmb5NxrDJtY2TrWSb/gJjx9iA0vE=;
+ b=J+Sa/bGu6mJ6zVzES3AbJQJIUnkyhoqxQUACOdAvagzlWB0HdgfHy1/0EGvYm7qZWu
+ ldN+Ef7qGYJ660JEwlWezNfxG00PtVQSFtxD0ffskS3rp4nfTdFsbhJEppr0NOkJ7cjR
+ oSpu8qDvzPyXm44noEHFH19mefXysCPt9WXTv8PEBF9AlK30o87DuyVCbOhuWb50Su1Y
+ s2HkGcwExdq2a+njA6si63J9U/rwfSQf2vQa3cpwO34oOIQczZUEGxARPqhNpdwMErSm
+ mSllx6g4a0R/uFeORfNcH88IF5SXQwuTObTQHKphR5Qk1CLcKIrj6NQmhT0sh5ehf4FC
+ EPyw==
+X-Gm-Message-State: AOAM532AQ00wV+sJRnd140bF8At6RaaEcYlgU2R3QzCSdawuH/UjZZxj
+ 30MFDTWiDG92QeBbgeAMC9s3lW+nPJsg3Q==
+X-Google-Smtp-Source: ABdhPJz+7JWIgYcR0tTooqJfgUn1iNVngVw21X+cb5Xvb59oEAX8RRueNB7DYZUBwsJqi3zV8hQlbQ==
+X-Received: by 2002:a37:a689:: with SMTP id p131mr8706446qke.77.1606488637204; 
+ Fri, 27 Nov 2020 06:50:37 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-51-35-162.washdc.fios.verizon.net.
+ [108.51.35.162])
+ by smtp.googlemail.com with ESMTPSA id r127sm6152434qke.64.2020.11.27.06.50.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 27 Nov 2020 06:50:36 -0800 (PST)
+To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
+References: <20201127102100.11721-1-patrick.delaunay@st.com>
+ <20201127102100.11721-3-patrick.delaunay@st.com>
+From: Sean Anderson <seanga2@gmail.com>
+Message-ID: <19fede5c-166c-1cff-643d-d80cbff6c34b@gmail.com>
+Date: Fri, 27 Nov 2020 09:50:36 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG4NODE3.st.com (10.75.127.12) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-11-27_05:2020-11-26,
- 2020-11-27 signatures=0
-Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: [Uboot-stm32] [PATCH 2/2] console: sandbox: remove unnecessary
-	sandbox code
+In-Reply-To: <20201127102100.11721-3-patrick.delaunay@st.com>
+Content-Language: en-US
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/9] log: don't build the trace buffer
+ when log is not ready
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,67 +75,69 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Remove the specific sandbox code in console.c, as the config
-CONFIG_DEBUG_UART is already supported in drivers/serial/sandbox.c
-and activated by default in all sandbox defconfig
-(CONFIG_DEBUG_UART_SANDBOX=y and CONFIG_DEBUG_UART=y).
+On 11/27/20 5:20 AM, Patrick Delaunay wrote:
+> Update _log function to drop any traces when log is yet initialized:
+> vsnprintf is no more executed in this case.
+> 
+> This patch allows to reduce the cost for the dropped early debug trace.
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> 
+> (no changes since v1)
+> 
+>   common/log.c | 13 ++++++++-----
+>   1 file changed, 8 insertions(+), 5 deletions(-)
+> 
+> diff --git a/common/log.c b/common/log.c
+> index ce39918e04..212789d6b3 100644
+> --- a/common/log.c
+> +++ b/common/log.c
+> @@ -228,6 +228,9 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+>   	struct log_rec rec;
+>   	va_list args;
+>   
+> +	if (!gd)
+> +		return -ENOSYS;
 
-This patch allows to test the console code under DEBUG_UART in sandbox
-and avoids to include the file <os.h> in this u-boot generic code.
+How early are you expecting this function to get called? AFAIK this will
+only return true before board_init_f_init_reserve. Shouldn't functions
+that early just not call log in the first place?
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
----
+--Sean
 
- common/console.c | 15 ---------------
- 1 file changed, 15 deletions(-)
-
-diff --git a/common/console.c b/common/console.c
-index 3348436da6..11d3694159 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -13,7 +13,6 @@
- #include <iomux.h>
- #include <malloc.h>
- #include <mapmem.h>
--#include <os.h>
- #include <serial.h>
- #include <stdio_dev.h>
- #include <exports.h>
-@@ -517,13 +516,6 @@ static inline void print_pre_console_buffer(int flushpoint) {}
- 
- void putc(const char c)
- {
--#ifdef CONFIG_SANDBOX
--	/* sandbox can send characters to stdout before it has a console */
--	if (!gd || !(gd->flags & GD_FLG_SERIAL_READY)) {
--		os_putc(c);
--		return;
--	}
--#endif
- #ifdef CONFIG_DEBUG_UART
- 	/* if we don't have a console yet, use the debug UART */
- 	if (!gd || !(gd->flags & GD_FLG_SERIAL_READY)) {
-@@ -565,13 +557,6 @@ void putc(const char c)
- 
- void puts(const char *s)
- {
--#ifdef CONFIG_SANDBOX
--	/* sandbox can send characters to stdout before it has a console */
--	if (!gd || !(gd->flags & GD_FLG_SERIAL_READY)) {
--		os_puts(s);
--		return;
--	}
--#endif
- #ifdef CONFIG_DEBUG_UART
- 	if (!gd || !(gd->flags & GD_FLG_SERIAL_READY)) {
- 		while (*s) {
--- 
-2.17.1
+> +
+>   	/* Check for message continuation */
+>   	if (cat == LOGC_CONT)
+>   		cat = gd->logc_prev;
+> @@ -240,15 +243,15 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+>   	rec.file = file;
+>   	rec.line = line;
+>   	rec.func = func;
+> +
+> +	if (!(gd->flags & GD_FLG_LOG_READY)) {
+> +		gd->log_drop_count++;
+> +		return -ENOSYS;
+> +	}
+>   	va_start(args, fmt);
+>   	vsnprintf(buf, sizeof(buf), fmt, args);
+>   	va_end(args);
+>   	rec.msg = buf;
+> -	if (!gd || !(gd->flags & GD_FLG_LOG_READY)) {
+> -		if (gd)
+> -			gd->log_drop_count++;
+> -		return -ENOSYS;
+> -	}
+>   	if (!log_dispatch(&rec)) {
+>   		gd->logc_prev = cat;
+>   		gd->logl_prev = level;
+> 
 
 _______________________________________________
 Uboot-stm32 mailing list

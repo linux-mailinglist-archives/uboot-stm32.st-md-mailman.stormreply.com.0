@@ -2,66 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B6A3C2CC41D
-	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Dec 2020 18:47:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22F752CC8CA
+	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Dec 2020 22:21:44 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 79A6DC06150;
-	Wed,  2 Dec 2020 17:47:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D0DCDC424C0;
+	Wed,  2 Dec 2020 21:21:43 +0000 (UTC)
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+ [209.85.222.193])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0D54C424C0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2754BC424BE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  2 Dec 2020 17:47:42 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0B2HhD9K022621; Wed, 2 Dec 2020 18:47:40 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=selector1;
- bh=lL9+KftsbjUw0BTbz2/uGxX/0lNySQ0+Xdp8AyLH11k=;
- b=zVSKxci3fNgpzysjAIPhV6R3dSWIarvVWBWDPlVXSHZIuWP5yE6G9WHvjxDXbTFuPhge
- 2o7NkC/E48nz8wJXZYSUSA3bMXuJztH+SlzjS1xqS/At/AYrRK5eTFT5lI/UDDsOqs0f
- JkW/j5u0KAPu8IDzq/1VJ5bnT7j//ctiHiiAHflqlz89u/zpn9BcypYGf53NqsmGwsyy
- L/mVk/0xY9+R1eoZsJbS++hbC5r9i/4M9+z6Gsr7oNiFqikfs/Vh9u7mQXmlSNsOMc3Z
- Y8iqu/i7o5Ec6RJm5Ie9lXgdSi5ylZjyIdvkSIAdWumcU/7x7Nz3MgMn1OZ8OZRbMzF9 9g== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 355w3hcku3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 02 Dec 2020 18:47:40 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 025A610003B;
- Wed,  2 Dec 2020 18:47:40 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E95A8247D32;
- Wed,  2 Dec 2020 18:47:39 +0100 (CET)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 2 Dec 2020 18:47:39
- +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 2 Dec 2020 18:47:31 +0100
-Message-ID: <20201202174731.9503-3-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201202174731.9503-1-patrice.chotard@foss.st.com>
-References: <20201202174731.9503-1-patrice.chotard@foss.st.com>
+ Wed,  2 Dec 2020 21:21:39 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id i199so179682qke.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 02 Dec 2020 13:21:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=iDLuZLP85fzpqkfe+yCPncDncrK/j27fFvmbsSzn/s4=;
+ b=CFv7hHmoZ6vjFn4zaxTmopTC8rzVaR9BfEFu/vARYs8SbJ9q2IGReel2vTSFYL+vvp
+ ndgkrQKxX7z1BaUGET6JY05E26ko5Q41NoLRRuvMQx9fcIYMhbYjz8WKTwvt6nEmBowL
+ uld9iB9LVj6jF0AI2hfb/IOEhaixRGxKMGCb0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=iDLuZLP85fzpqkfe+yCPncDncrK/j27fFvmbsSzn/s4=;
+ b=kuDgVIzHxah96OAfL4QY7h8jFDzKQJZXqHghVO5Y6IHO8RbeILXIFdajXdxhdVrl1U
+ bI+5Ow7gDGIFxNsnvj+ykFiumWyKDtQH/qWfZHJAD4puZu230MB1CcDLSnRGJHNRVy/c
+ DT6j2AhVi9CyhTax6VPK2bOIKV1ZKr988DnHj9FJ64BkPiI6ZvRHWkVkNBQU6qKGuV7r
+ W6ibBQ9XKWuhEGXd7CHKLsUJ7P5U/hFXURAbByBODtSDw46ODBRs+Fvpspsyo0kk6+Dw
+ T0LriQLFKafvXC2RVJsQBx5EC7mmzlgHtglbJLVSqOCw32DZSlUkkvZc5NkntqxVy7Cv
+ Slzg==
+X-Gm-Message-State: AOAM530aFjFTCWghMctNwKujOjeY3ZmV0ANkxA1XnmzMHHtPxYYwt1zS
+ 4RY8N+2tVnTqsmXC6a0BuO6GRg==
+X-Google-Smtp-Source: ABdhPJwsVctErPX9SaT6qac8iq23qA5leYXcvLGnJNLj7utNJyt8hTiFAzQp8CdpRGOVb4Xu/rxPbQ==
+X-Received: by 2002:a37:5c3:: with SMTP id 186mr4609071qkf.234.1606944098317; 
+ Wed, 02 Dec 2020 13:21:38 -0800 (PST)
+Received: from bill-the-cat (cpe-65-184-135-175.ec.res.rr.com.
+ [65.184.135.175])
+ by smtp.gmail.com with ESMTPSA id b12sm117804qtj.12.2020.12.02.13.21.37
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 02 Dec 2020 13:21:37 -0800 (PST)
+Date: Wed, 2 Dec 2020 16:21:35 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
+Message-ID: <20201202212135.GL32272@bill-the-cat>
+References: <20200909162617.31576-1-patrick.delaunay@st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-12-02_10:2020-11-30,
- 2020-12-02 signatures=0
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrick DELAUNAY <patrick.delaunay@st.com>,
- Oleksandr Suvorov <oleksandr.suvorov@toradex.com>,
+In-Reply-To: <20200909162617.31576-1-patrick.delaunay@st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Heiko Schocher <hs@denx.de>, Neil Armstrong <narmstrong@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 3/3] .mailmap: map Patrick Delaunay and my
-	email address
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] gpio: Convert to use APIs which support
+	live DT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,40 +71,65 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3381053471049101584=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add our new email address dedicated for upstream activities.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+--===============3381053471049101584==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="zhcyhtwhiTBwkXGM"
+Content-Disposition: inline
 
----
 
-Changes in v2:
-  - Add .mailmap update
+--zhcyhtwhiTBwkXGM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- .mailmap | 2 ++
- 1 file changed, 2 insertions(+)
+On Wed, Sep 09, 2020 at 06:26:16PM +0200, Patrick Delaunay wrote:
 
-diff --git a/.mailmap b/.mailmap
-index 8250015453..33001f1e01 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -31,6 +31,8 @@ Jagan Teki <jagannadh.teki@gmail.com>
- Jagan Teki <jagannadha.sutradharudu-teki@xilinx.com>
- Igor Opaniuk <igor.opaniuk@gmail.com> <igor.opaniuk@linaro.org>
- Markus Klotzbuecher <mk@denx.de>
-+Patrice Chotard <patrice.chotard@foss.st.com> <patrice.chotard@st.com>
-+Patrick Delaunay <patrick.delaunay@foss.st.com> <patrick.delaunay@st.com>
- Paul Burton <paul.burton@mips.com> <paul.burton@imgtec.com>
- Prabhakar Kushwaha <prabhakar@freescale.com>
- Rajeshwari Shinde <rajeshwari.s@samsung.com>
--- 
-2.17.1
+> Use ofnode_ or dev_ APIs instead of fdt_ and fdtdec_ APIs so that the
+> driver can support live DT.
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Heiko Schocher <hs@denx.de>
+
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--zhcyhtwhiTBwkXGM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl/IBV8ACgkQFHw5/5Y0
+tyys7gv/Q/dYvAweZOpzU4IsGyB0nJowbQHifcdaTa1DwEx/kEqINTs0NtAcq5hm
+0SukY4+8AhgFSyqrTpeydyjex41RFJlcYKKtS0Ubxl4q4S8yKIvM521IQKEu9YJ/
+aaSIg/jQ0VRuXxVhs/3P1ac3VOpthm5ZoU5cbmbEOpO1kPQZX3PdxsxKXPUcysoL
+3Ygox9VMhJt4eCMNeZ2PaZFOEEqEboD9v4DxotFUQD7aktfcN4qjiARrLqycu7cN
+gq8nGD7+2kU5DWi+PONMV0A+2unt0Gz9FatjTQ2DmQJ7KjugXH3TRehxxBiGAiDG
+y1pd5HRqCm0EmszAEgnZCr+wUvwhH3sFqJswMm9CQ7z1HDtMtiRpUnuNKI2a1AMQ
+yZmd8uZz8F5uDQFC3n8iF+O6dvYyTCugQaYdxBunF50PzPfOsbUaoQujKBoPGQM8
+k8SdJtQKl9syox2dVzHf/HGmx399ccQy0FsBhFU28FOrU0rpF97Xa4A413l7s5cn
+s2SYvrCT
+=JPpx
+-----END PGP SIGNATURE-----
+
+--zhcyhtwhiTBwkXGM--
+
+--===============3381053471049101584==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3381053471049101584==--

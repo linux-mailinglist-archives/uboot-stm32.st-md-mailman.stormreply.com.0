@@ -2,69 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB3782CC3E1
-	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Dec 2020 18:31:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F4BB2CC3E2
+	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Dec 2020 18:32:04 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1BCAFC56630;
-	Wed,  2 Dec 2020 17:31:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DAD90C56635;
+	Wed,  2 Dec 2020 17:32:03 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 987AEC424BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CEAABC06150
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  2 Dec 2020 17:22:22 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0B2HGsk6029993; Wed, 2 Dec 2020 18:22:10 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=selector1;
- bh=bx/AXYCelP5aDHJkLFt7wuiwIsAycxKczWHbiERJqq4=;
- b=C4kAziu+aw1KW2ktU2eDJ8isY23Krnei3kgha07fvj75pmkSbLYa/tU2sI71uX9zrWwV
- zJTd5l0+7KgOEwxVflmJ/iOpE9yRZtka4Xb2eouNhFWnxlUeDdMQQkMBT3E5hWmGh+J5
- ksTE5sZDVGColi55vVMUKtaDytSo6kdxxPG4/TL7zsvnGmKYAJtatvde7bYdOt2h10pf
- I93ABKj7DRqSKmNrqGrCsif2OEhzCP1HpJhw8G9vZjF782r5g4J4z94F+r/Dpf0oLsIv
- Q+b3ghKyP9kdlPhqeC6e+mvZ5/Df85oLK87zf1DyfeMgjetURSK6Vhul0TKeJzM82gZV xA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 355w3ccv6p-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 02 Dec 2020 18:22:10 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C47F710002A;
- Wed,  2 Dec 2020 18:22:09 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B1EA9233FBB;
- Wed,  2 Dec 2020 18:22:09 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 2 Dec 2020 18:21:28
- +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 2 Dec 2020 18:21:10 +0100
-Message-ID: <20201202172110.7809-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201202172110.7809-1-patrice.chotard@foss.st.com>
+ Wed,  2 Dec 2020 17:32:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1606930304;
+ bh=5qZJxvsQmY9ShN+7I7IbE4FGw/nErLgYfTjCii+GhY4=;
+ h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=CJzfXvBhV+rVtEmYDAhCV/EDJHZC0KwbABr8QcxlCftNTplkmHgd/cAatmd5bBH9n
+ 5dskjnbVCsLBYR8eoGwX48qfQ+EMdKSFyZGRjA4G+DXOq1LOyyqwZtQh4lvecza+xv
+ 5REzHsRCx8qJkuGdtIPRGJ16oLjC75y0raArG0+g=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.51] ([62.143.246.89]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgvvT-1kGPIT0YGr-00hJXe; Wed, 02
+ Dec 2020 18:31:44 +0100
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
 References: <20201202172110.7809-1-patrice.chotard@foss.st.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <d568fed8-9a8f-02d1-c2f3-cc95598c3ac3@gmx.de>
+Date: Wed, 2 Dec 2020 18:31:36 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG4NODE1.st.com (10.75.127.10) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.312, 18.0.737
- definitions=2020-12-02_10:2020-11-30,
- 2020-12-02 signatures=0
-X-Mailman-Approved-At: Wed, 02 Dec 2020 17:31:53 +0000
-Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Patrick DELAUNAY <patrick.delaunay@st.com>,
- Claudiu Beznea <claudiu.beznea@microchip.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
+In-Reply-To: <20201202172110.7809-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+X-Provags-ID: V03:K1:qV5v060PFXpNyEPpMOaHCoXtQUoQtZD0f9ZbnlM+FVlIpvnMLlT
+ IJGnct6qwMfLrLHCjmmwQf1Ng7soXlAPANpBlndLNyZkS2Gl/8NFak/dkCZEbyVDMuyw896
+ k4FSJCDUj0TTw+4S3stYNpiG1DeEFgxddlir9Xj7eMVcp8YnlHntZcmTC5oWN//Y4pNFurN
+ fDKNzup9aMGFJiwP8J0pw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:rtuOYLHRRaY=:Mm4QslQGL4N38TcoNttDT7
+ RaA1CT1cHuLnu3KbTMacuDA2RUglBh2mmfrwm+Lxvz9WZ8veV9pgUW6kQ77b7DUcV5wP7TJLR
+ SMMo0zOTFV7+oyrB/NULTkh5wDfX3RdcaetIK1tnX+X2JQfpkwx4iYWS7ylU2iXdxhRdue913
+ ya76HVDsPv9lo/KAoXfNpodSdG5NBdmRKB3GuNYKTXHketql0eFCT034tJ61DveR8znOMCyeJ
+ HenqfoOgWfjOif78dT8r9A7CQFB+g9BkDDxCF0i9ATk83WPqJVKqcoKzg0tOQQdJwlwk0IAE5
+ dkUAM+hFPJN3g1B0ZeJnHHnluXUCU9gMzchdaY7+zS+nAsKOHw1IpWZSb1vK0eZvUDXWOidc+
+ /VJoyR3USq0krOPyn2FuBCxrioXsHUUzZMDUjeoJqbrWOBwX0W+zrt8ozPeHr4SVF+ctxS2pf
+ VR/8qcvBRBRaMZf+7PjcgahBWCI6CXeqFgD+Vd2wguWP4dSaVsKk8aJ5DP0mKh5YqEtsamcHb
+ +klXw6ZQ5rO46R1QQbtwNBUfLlOsFhn01j37hP4A1HmFFmoGSO7FppXdFImA+TTTf/6gYCS8f
+ 3OQyRA+Oec1f9Vlz61PM/0ql6sbbEJU3nAsVJ8aVO/IE64htvACt6ID31E4Udysly9XjRJtr6
+ qaZ8p+29xDlP7jG79fez2dvgh2n6/nhuz5Nn6rnuR/H9TQCXqoM2wXmldeOQb6tgiRMPbqsy2
+ XmdGBWTEzUd6rimgVwQHKHq7p0QH8pKoPiuc1w0Cu9V93K1ivyG+N5VdFqWmOnhur3PftV78M
+ pswub6ahioSa+MVpVYETw0SjB7Z7nY36cx5UoqeGLP9WX4nja7v1l6J8e/U4pxPfkhIWdPXVH
+ SoulEsmBlsTpVDkUnNNg==
+Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>,
+ Amit Singh Tomar <amittomer25@gmail.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Anatolij Gustschin <agust@denx.de>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 2/2] treewide: Update email address Patrick
-	Delaunay and Patrice Chotard
+ Sam Protsenko <joe.skb7@gmail.com>, Robert Marko <robert.marko@sartura.hr>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] MAINTAINERS: Update ARM STI and ARM
+ STM STM32MP Arch maintainers emails
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,497 +76,54 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Update Patrick and my email address with the one dedicated to
-upstream activities.
+On 12/2/20 6:21 PM, Patrice Chotard wrote:
+> Update Patrick and my email address with the one dedicated to
+> upstream activities.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+It might make sense to add entries to .mailmap too if you have
+contributed to files where you are not the maintainer.
 
- arch/arm/include/asm/arch-stih410/sdhci.h            | 2 +-
- arch/arm/include/asm/arch-stih410/sys_proto.h        | 2 +-
- arch/arm/include/asm/arch-stm32/stm32f.h             | 2 +-
- arch/arm/include/asm/arch-stm32f4/stm32_pwr.h        | 2 +-
- arch/arm/include/asm/arch-stm32f7/stm32_pwr.h        | 2 +-
- arch/arm/include/asm/arch-stm32h7/gpio.h             | 2 +-
- arch/arm/include/asm/arch-stm32h7/stm32.h            | 2 +-
- arch/arm/mach-stm32/soc.c                            | 2 +-
- board/st/stih410-b2260/board.c                       | 2 +-
- board/st/stm32f429-evaluation/stm32f429-evaluation.c | 2 +-
- board/st/stm32f469-discovery/stm32f469-discovery.c   | 2 +-
- board/st/stm32h743-disco/stm32h743-disco.c           | 2 +-
- board/st/stm32h743-eval/stm32h743-eval.c             | 2 +-
- drivers/clk/clk_stm32h7.c                            | 2 +-
- drivers/misc/stm32_rcc.c                             | 2 +-
- drivers/mmc/sti_sdhci.c                              | 2 +-
- drivers/mmc/stm32_sdmmc2.c                           | 2 +-
- drivers/phy/sti_usb_phy.c                            | 2 +-
- drivers/pinctrl/pinctrl-sti.c                        | 2 +-
- drivers/reset/sti-reset.c                            | 2 +-
- drivers/reset/stm32-reset.c                          | 2 +-
- drivers/serial/serial_sti_asc.c                      | 2 +-
- drivers/sysreset/sysreset_sti.c                      | 2 +-
- drivers/timer/sti-timer.c                            | 2 +-
- drivers/timer/stm32_timer.c                          | 2 +-
- drivers/usb/host/dwc3-sti-glue.c                     | 2 +-
- drivers/video/backlight_gpio.c                       | 2 +-
- include/configs/stih410-b2260.h                      | 2 +-
- include/configs/stm32f429-evaluation.h               | 2 +-
- include/configs/stm32f469-discovery.h                | 2 +-
- include/configs/stm32h743-disco.h                    | 2 +-
- include/configs/stm32h743-eval.h                     | 2 +-
- include/dwc3-sti-glue.h                              | 2 +-
- include/stm32_rcc.h                                  | 2 +-
- 34 files changed, 34 insertions(+), 34 deletions(-)
+Best regards
 
-diff --git a/arch/arm/include/asm/arch-stih410/sdhci.h b/arch/arm/include/asm/arch-stih410/sdhci.h
-index d5557b89fc..1735c0e391 100644
---- a/arch/arm/include/asm/arch-stih410/sdhci.h
-+++ b/arch/arm/include/asm/arch-stih410/sdhci.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __STI_SDHCI_H__
-diff --git a/arch/arm/include/asm/arch-stih410/sys_proto.h b/arch/arm/include/asm/arch-stih410/sys_proto.h
-index f9e8d3704a..30e7f398eb 100644
---- a/arch/arm/include/asm/arch-stih410/sys_proto.h
-+++ b/arch/arm/include/asm/arch-stih410/sys_proto.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef _ASM_ARCH_SYS_PROTO_H
-diff --git a/arch/arm/include/asm/arch-stm32/stm32f.h b/arch/arm/include/asm/arch-stm32/stm32f.h
-index bd3f4fd30a..a1ce81ecad 100644
---- a/arch/arm/include/asm/arch-stm32/stm32f.h
-+++ b/arch/arm/include/asm/arch-stm32/stm32f.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef _ASM_ARCH_STM32F_H
-diff --git a/arch/arm/include/asm/arch-stm32f4/stm32_pwr.h b/arch/arm/include/asm/arch-stm32f4/stm32_pwr.h
-index 8af6de220d..fe6ca03d2d 100644
---- a/arch/arm/include/asm/arch-stm32f4/stm32_pwr.h
-+++ b/arch/arm/include/asm/arch-stm32f4/stm32_pwr.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __STM32_PWR_H_
-diff --git a/arch/arm/include/asm/arch-stm32f7/stm32_pwr.h b/arch/arm/include/asm/arch-stm32f7/stm32_pwr.h
-index 02faaeb663..5cd6553d04 100644
---- a/arch/arm/include/asm/arch-stm32f7/stm32_pwr.h
-+++ b/arch/arm/include/asm/arch-stm32f7/stm32_pwr.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __STM32_PWR_H_
-diff --git a/arch/arm/include/asm/arch-stm32h7/gpio.h b/arch/arm/include/asm/arch-stm32h7/gpio.h
-index 2dad52a400..4f57f175ff 100644
---- a/arch/arm/include/asm/arch-stm32h7/gpio.h
-+++ b/arch/arm/include/asm/arch-stm32h7/gpio.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef _STM32_GPIO_H_
-diff --git a/arch/arm/include/asm/arch-stm32h7/stm32.h b/arch/arm/include/asm/arch-stm32h7/stm32.h
-index 458baca458..2b0a670008 100644
---- a/arch/arm/include/asm/arch-stm32h7/stm32.h
-+++ b/arch/arm/include/asm/arch-stm32h7/stm32.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef _ASM_ARCH_HARDWARE_H
-diff --git a/arch/arm/mach-stm32/soc.c b/arch/arm/mach-stm32/soc.c
-index 1f12da401c..0bd8d7b22c 100644
---- a/arch/arm/mach-stm32/soc.c
-+++ b/arch/arm/mach-stm32/soc.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/board/st/stih410-b2260/board.c b/board/st/stih410-b2260/board.c
-index b1147f2e1a..e06f05bfa4 100644
---- a/board/st/stih410-b2260/board.c
-+++ b/board/st/stih410-b2260/board.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/board/st/stm32f429-evaluation/stm32f429-evaluation.c b/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-index 92e3d40a1b..22a193d8fc 100644
---- a/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-+++ b/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/board/st/stm32f469-discovery/stm32f469-discovery.c b/board/st/stm32f469-discovery/stm32f469-discovery.c
-index 85988acb24..4ad4ee69c7 100644
---- a/board/st/stm32f469-discovery/stm32f469-discovery.c
-+++ b/board/st/stm32f469-discovery/stm32f469-discovery.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) STMicroelectronics SA 2017
-- * Author(s): Patrice CHOTARD, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice CHOTARD, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/board/st/stm32h743-disco/stm32h743-disco.c b/board/st/stm32h743-disco/stm32h743-disco.c
-index 0484c3c250..0b5afa05ac 100644
---- a/board/st/stm32h743-disco/stm32h743-disco.c
-+++ b/board/st/stm32h743-disco/stm32h743-disco.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/board/st/stm32h743-eval/stm32h743-eval.c b/board/st/stm32h743-eval/stm32h743-eval.c
-index 0484c3c250..0b5afa05ac 100644
---- a/board/st/stm32h743-eval/stm32h743-eval.c
-+++ b/board/st/stm32h743-eval/stm32h743-eval.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/clk/clk_stm32h7.c b/drivers/clk/clk_stm32h7.c
-index 5e6abca56f..edf90ee00f 100644
---- a/drivers/clk/clk_stm32h7.c
-+++ b/drivers/clk/clk_stm32h7.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/misc/stm32_rcc.c b/drivers/misc/stm32_rcc.c
-index b82fe54c60..86275454be 100644
---- a/drivers/misc/stm32_rcc.c
-+++ b/drivers/misc/stm32_rcc.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/mmc/sti_sdhci.c b/drivers/mmc/sti_sdhci.c
-index 5578feebef..c3a1b34442 100644
---- a/drivers/mmc/sti_sdhci.c
-+++ b/drivers/mmc/sti_sdhci.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-index 77871d5afc..1f1b6cf4fb 100644
---- a/drivers/mmc/stm32_sdmmc2.c
-+++ b/drivers/mmc/stm32_sdmmc2.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/phy/sti_usb_phy.c b/drivers/phy/sti_usb_phy.c
-index 2a20f7601c..51468b4573 100644
---- a/drivers/phy/sti_usb_phy.c
-+++ b/drivers/phy/sti_usb_phy.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/pinctrl/pinctrl-sti.c b/drivers/pinctrl/pinctrl-sti.c
-index 8e942a8280..2f3ee00453 100644
---- a/drivers/pinctrl/pinctrl-sti.c
-+++ b/drivers/pinctrl/pinctrl-sti.c
-@@ -3,7 +3,7 @@
-  * Pinctrl driver for STMicroelectronics STi SoCs
-  *
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/reset/sti-reset.c b/drivers/reset/sti-reset.c
-index ac3a99f9bf..2cca67dc52 100644
---- a/drivers/reset/sti-reset.c
-+++ b/drivers/reset/sti-reset.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/reset/stm32-reset.c b/drivers/reset/stm32-reset.c
-index 20c36a99eb..d8902e9d9c 100644
---- a/drivers/reset/stm32-reset.c
-+++ b/drivers/reset/stm32-reset.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/serial/serial_sti_asc.c b/drivers/serial/serial_sti_asc.c
-index 33ff396bff..91e1574638 100644
---- a/drivers/serial/serial_sti_asc.c
-+++ b/drivers/serial/serial_sti_asc.c
-@@ -3,7 +3,7 @@
-  * Support for Serial I/O using STMicroelectronics' on-chip ASC.
-  *
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/sysreset/sysreset_sti.c b/drivers/sysreset/sysreset_sti.c
-index 3482d2a078..43e161c65d 100644
---- a/drivers/sysreset/sysreset_sti.c
-+++ b/drivers/sysreset/sysreset_sti.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/timer/sti-timer.c b/drivers/timer/sti-timer.c
-index e6843ebb33..9d95f562fa 100644
---- a/drivers/timer/sti-timer.c
-+++ b/drivers/timer/sti-timer.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/timer/stm32_timer.c b/drivers/timer/stm32_timer.c
-index f517d5e61f..2f5f8f43b9 100644
---- a/drivers/timer/stm32_timer.c
-+++ b/drivers/timer/stm32_timer.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/usb/host/dwc3-sti-glue.c b/drivers/usb/host/dwc3-sti-glue.c
-index 3e6c1429d6..9dec087738 100644
---- a/drivers/usb/host/dwc3-sti-glue.c
-+++ b/drivers/usb/host/dwc3-sti-glue.c
-@@ -3,7 +3,7 @@
-  * STiH407 family DWC3 specific Glue layer
-  *
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #include <common.h>
-diff --git a/drivers/video/backlight_gpio.c b/drivers/video/backlight_gpio.c
-index 67fed7f224..433d0979e8 100644
---- a/drivers/video/backlight_gpio.c
-+++ b/drivers/video/backlight_gpio.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author: Patrick Delaunay <patrick.delaunay@st.com>
-+ * Author: Patrick Delaunay <patrick.delaunay@foss.st.com>
-  */
- 
- #include <common.h>
-diff --git a/include/configs/stih410-b2260.h b/include/configs/stih410-b2260.h
-index 169b9efeec..33b34ee0cd 100644
---- a/include/configs/stih410-b2260.h
-+++ b/include/configs/stih410-b2260.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __CONFIG_H
-diff --git a/include/configs/stm32f429-evaluation.h b/include/configs/stm32f429-evaluation.h
-index 8390535af0..fefdb2dd15 100644
---- a/include/configs/stm32f429-evaluation.h
-+++ b/include/configs/stm32f429-evaluation.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) STMicroelectronics SA 2017
-- * Author(s): Patrice CHOTARD, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice CHOTARD, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __CONFIG_H
-diff --git a/include/configs/stm32f469-discovery.h b/include/configs/stm32f469-discovery.h
-index 57fb6b25af..ba9f05a61b 100644
---- a/include/configs/stm32f469-discovery.h
-+++ b/include/configs/stm32f469-discovery.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) STMicroelectronics SA 2017
-- * Author(s): Patrice CHOTARD, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice CHOTARD, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __CONFIG_H
-diff --git a/include/configs/stm32h743-disco.h b/include/configs/stm32h743-disco.h
-index afc98ae791..6e10dbdfe9 100644
---- a/include/configs/stm32h743-disco.h
-+++ b/include/configs/stm32h743-disco.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __CONFIG_H
-diff --git a/include/configs/stm32h743-eval.h b/include/configs/stm32h743-eval.h
-index 66af8f50d9..268d39c7ad 100644
---- a/include/configs/stm32h743-eval.h
-+++ b/include/configs/stm32h743-eval.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __CONFIG_H
-diff --git a/include/dwc3-sti-glue.h b/include/dwc3-sti-glue.h
-index 3989a9bb53..546ffbaf7b 100644
---- a/include/dwc3-sti-glue.h
-+++ b/include/dwc3-sti-glue.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) 2017, STMicroelectronics - All Rights Reserved
-- * Author(s): Patrice Chotard, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __DWC3_STI_UBOOT_H_
-diff --git a/include/stm32_rcc.h b/include/stm32_rcc.h
-index a09a09ff95..b559ea7728 100644
---- a/include/stm32_rcc.h
-+++ b/include/stm32_rcc.h
-@@ -1,7 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-  * Copyright (C) STMicroelectronics SA 2017
-- * Author(s): Patrice CHOTARD, <patrice.chotard@st.com> for STMicroelectronics.
-+ * Author(s): Patrice CHOTARD, <patrice.chotard@foss.st.com> for STMicroelectronics.
-  */
- 
- #ifndef __STM32_RCC_H_
--- 
-2.17.1
+Heinrich
+
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   MAINTAINERS | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 874cf2c0e5..ed5d7c3ab6 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -385,7 +385,7 @@ F:	drivers/smem/msm_smem.c
+>   F:	drivers/usb/host/ehci-msm.c
+>
+>   ARM STI
+> -M:	Patrice Chotard <patrice.chotard@st.com>
+> +M:	Patrice Chotard <patrice.chotard@foss.st.com>
+>   S:	Maintained
+>   T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+>   F:	arch/arm/mach-sti/
+> @@ -411,8 +411,8 @@ F:	arch/arm/cpu/arm926ejs/spear/
+>   F:	arch/arm/include/asm/arch-spear/
+>
+>   ARM STM STM32MP
+> -M:	Patrick Delaunay <patrick.delaunay@st.com>
+> -M:	Patrice Chotard <patrice.chotard@st.com>
+> +M:	Patrick Delaunay <patrick.delaunay@foss.st.com>
+> +M:	Patrice Chotard <patrice.chotard@foss.st.com>
+>   L:	uboot-stm32@st-md-mailman.stormreply.com (moderated for non-subscribers)
+>   T:	git https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+>   S:	Maintained
+>
 
 _______________________________________________
 Uboot-stm32 mailing list

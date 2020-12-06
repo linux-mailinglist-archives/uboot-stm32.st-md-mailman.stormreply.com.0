@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD80E2D0B3B
+	by mail.lfdr.de (Postfix) with ESMTPS id BE6452D0B3C
 	for <lists+uboot-stm32@lfdr.de>; Mon,  7 Dec 2020 08:41:19 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 69808C3FAD8;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 741EAC3FADB;
 	Mon,  7 Dec 2020 07:41:19 +0000 (UTC)
 Received: from mout.web.de (mout.web.de [212.227.17.11])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 15D16C36B35
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 89A9EC36B35
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  6 Dec 2020 19:59:02 +0000 (UTC)
+ Sun,  6 Dec 2020 19:59:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
- s=dbaedf251592; t=1607284734;
- bh=QRJ4LAAIqPHrhY5qOdNoN9M3Rl1MKZ/GoYBurdmXgrk=;
+ s=dbaedf251592; t=1607284778;
+ bh=cZHVgbg3fEONf21Ajj8lWQDlh6MDsdnm9uemiyRlKh0=;
  h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=nVLCLWvC4ytxFz0R5PzaQmCw3ossvaw11d63Rvy0tR1myFQG82w0UW3ZBfdBf492f
- 65S1pavsLySnWiCok4xmvXkYL4K/nW3Q5j+mSPDBOrNasPeHSa8qDWmKm6Addzhx86
- dGNEAn8y7y5w7TVsoswi5Ih57UoLOXJK8Osd2IEk=
+ b=pFv43xz7JhsVlmAkQtypY5LflZl4cP7EqttIX2GtdH38f+e0KAosdU3nkCw/Bnyce
+ /cxkusk6ppAslEunpnYutC2qFOsN23YeaTm7OZTm5nnZBWyxu2EIvTgBZtlQIiNW0n
+ NC6t0D4CXEEqsxY5DzyXKPmOU8/+7i25XvQIuH9U=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.27] ([77.191.130.91]) by smtp.web.de (mrweb102
- [213.165.67.124]) with ESMTPSA (Nemesis) id 0Lo0ZA-1kF8GT3bCq-00fzbZ; Sun, 06
- Dec 2020 20:58:54 +0100
+Received: from [192.168.1.27] ([77.191.130.91]) by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MBB80-1ks0zn3A8k-00CkD2; Sun, 06
+ Dec 2020 20:59:37 +0100
 To: Patrick Delaunay <patrick.delaunay@st.com>, u-boot@lists.denx.de
 References: <20201203091549.7031-1-patrick.delaunay@st.com>
+ <20201203101538.1.I3813d938e14b844437a4ed6addf3280d064b28fd@changeid>
 From: Soeren Moch <smoch@web.de>
-Message-ID: <9d8e34fa-cd69-f2ac-7d63-0b2da2e382f5@web.de>
-Date: Sun, 6 Dec 2020 20:58:45 +0100
+Message-ID: <5d297b38-5603-07e6-af78-fb2594f52a79@web.de>
+Date: Sun, 6 Dec 2020 20:59:36 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201203091549.7031-1-patrick.delaunay@st.com>
+In-Reply-To: <20201203101538.1.I3813d938e14b844437a4ed6addf3280d064b28fd@changeid>
 Content-Language: en-GB
-X-Provags-ID: V03:K1:Spcfb3IGHnTY0lBtuK18ecpbznA0nNL9voflRnx2J+4+JGmASYx
- ratTOi7ojK/p03C6F0Ow9snfkn2iDNI3KbglqDK9S4RDWwYhDI0+7hA24Uy0Ny2JMNdQctB
- 2ZenIFn0DtzNzgaemANYDWgXV9CbnV6dxzfUWBlg3n419WHJ6f11EmCEEDN0jMmvSca3jRe
- KnRuzMeFNQJ2HGidMnJUQ==
+X-Provags-ID: V03:K1:uwuDMp3av2J8pn6Giu6LSaSYg/Ub70391L8dYYIRn5JhXJcs0lz
+ fPI1mLkA50nnT55jnbwAiy5KDZnfKXV3JEJ1B7QDqhck3F+ujLMZX9vglFPzEV5HqEZgZjE
+ PrVvXzC3iag3sKYjwM91//Za7jdVFcwhkBEfNuIQqYzojrqJxhyI30kvxt9UUlLQwQs943S
+ ECjFfxhByzhAj5Q9/5TfA==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:pd5nBNoENi8=:aLclNehISktxBE7iu7vumS
- 567C+oOdWUHYMEuani7n96gaCye5c95mzq1/zCYSfQ+p4S65qv+wvYaaVrNJBhggy0jABH6aI
- 3xvCZROOw/7mnveeF4p7gIbARzy2t9dczXOZUP8ih99Cfcwguw3Lclh90DvVokuTLzYhmzGL0
- GLZCN2QIR0zs9F6LF0KULr7iy9snA3wdQ0hS1Pbfsi4HenTwEl/yNlLx/QwUw2vcdjV6ByaU5
- MIZqEM5SSn9giHisCMRZu4gyQ+bOoohFVqnH3Kx0UwG22nxEXPf89rwkM2XVXkSIU+j6R4B3i
- H2RzV2npCyy8Zs4CwM+yu/Oz6qcjDBC5rXACz2E6Q8va/HER8HBPGHpbr+XZERr6NcGiJ1GDJ
- w2wajskanPXr7pT8ofe2UqwpSS+bK3YcBISARTvnMLIibUATy80E+cyu8b0C3n97jaFgMKHWn
- I4vkEXF7yXn9ZqMH0YYQz39AntMObN5f4pmSmoSsoDGUBOdZ0kl7vzj5QWyX4kwqpGyYMFojC
- 7uUjjs77Pa4XIDIQl7kuvzum2hF2BwY76fxweHCUm42V3z6JUI+MEoeorYRdJ8dsY4ft/77Dp
- DHowX+tUxnFjNEq7baesL7zFVMrYeLBnPERcNcNN4xMJ9JFajrcOyp1uZ5HTyWXMP2GAH7Orn
- zKJVKrf/3Bj5OVaElb5eSTvc3SXkpWNvUCCUbNSBahA3j386YPL06ze6pGXBC0LRsFC88qf9n
- pzZUAbKifn7Z2H3JsIyxwquQdpj9c+c/TIjEy+8Dv/VdZrKgJYiw5T8O7PbL7iFRC5U6fqQ1T
- d5pUbjLRfjsSqSfZU+xTqrpV27fHDsdCElAKule0F6H75l0KJUtA9wtPXm2Tmr+MGY1b69UiR
- foL4iIhVf5TzdGbasB2g==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Ne7MYebX9xw=:2aqMYSG9tvP+SuG+Lw8F0E
+ pNiYJpr1vy6nb5KC3xAwUrvj1jMlHLkFAbGcGY/Lmu8em4YmBylr+T1vSvkUqDgk52S3vzJ5Z
+ oKXYQxgbz/OJiMudtqc+fRH9Liq5gSMpoPZRboszWvsY5bHFwCUDZdzi8T43LeumxTPFXkWme
+ x/H/x8aUxDArtHzyX9K3MrMw+3qp+k3gKyfC2gD+P8Gk+C4iGGkCE0Qam6c7SDtUF4J5i1nEu
+ UM1P9DQeSZqBACEADaNkH/Diz2/Xxl0TZ8OsvGtotmapHWyyPh+J/r+fsMiLFUap4h9EQZxB4
+ 51wXatXyZ/eyPBVQwen/sLe1emKORM8J8fDQSAtTzXT6+ws/7wEWCNZY93wQ60sEZ/NpDowZY
+ Q6FsLtn7ggxTeOoNYjP5zfLCVzofiTuEa6lQ3AVDNF6dXcmTYQKG+YNtuAc8wXNi+OYAqGk2r
+ DPU/FCpP1sot0PUosqICdLE24FeSVKverqAu+YuHITvCUFV89HOyXCFh+XBa+586QgZfDDZNU
+ DchYBxOGrNSfDnxELHD8UxlW9sP0xIBOQVzqVxoRlLGbK+DbDEzARPx1xMs/HSz+4i4et+NUa
+ X22gVnOvVuJqhUZuWiLhtZl7ynwUskwXLryH1BUTcqWaDkriT14Qq54OTH1l1YCCsZW4zzpjO
+ dF7sOkSHSyd5LP+af9LMDq9mdvdhLrIJaen/OqAXh/7K7HersIpcqPA6IEOTH9gkY7ep8qrJO
+ RvDDk6c4SC4ajmuaLYi3Qd9Mr64PkNMHZ+Sf6fmcfRyHbcHQqXkv0/Ye2hBrj+IBJmA1igEhj
+ LVyRjjhvaP1sk343LBcQK+dHcbNCwdpzPin9kYZUaRJQa0C6J9b/yB9q9B3aEdm33//AzI99J
+ X5R1lomtEHKKwFnfpQ2w==
 X-Mailman-Approved-At: Mon, 07 Dec 2020 07:41:18 +0000
-Cc: Tom Rini <trini@konsulko.com>, Akshay Saraswat <akshay.s@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?Q?Yannick_Fertr=c3=a9?= <yannick.fertre@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 0/6] video: remove VIDCONSOLE_AS_LCD and
- VIDCONSOLE_AS_NAME
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/6] tbs2910: configs: remove
+	VIDCONSOLE_AS_LCD
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,54 +75,37 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 03.12.20 10:15, Patrick Delaunay wrote:
-> I propose this serie to remove the vidconsole work-around, activated with
-> the 2 options VIDCONSOLE_AS_LCD and VIDCONSOLE_AS_NAME and cleanup
-> the associated code in console.c (under #ifdef CONFIG_VIDCONSOLE_AS_LCD)
->
-> This options are now obsolete and they was planned to be
-> removed around the end of 2020.
->
-> I propose this patchset for v2021.04 even if I don't
-> test this serie on real boards.
-I really would like to keep this code for now.
+> Remove the obsolete CONFIG_VIDCONSOLE_AS_LCD as vidconsole is used in
+> ./include/configs/tbs2910.h since commit 513acd04452f ("tbs2910: migrate
+> to DM_VIDEO").
+I don't consider this workaround as obsolete, please see my response to
+the cover letter of this series. [1]
 
-On the tbs2910 board this workaround was introduced in the last u-boot
-release (v2020.10), so there was almost no time for end users to notice
-the warning and to update there environment. Not every end user installs
-every new u-boot release, so we really should give more time for this
-change.
-
-This workaround is self-contained, small, easy to maintain, and strictly
-opt-in. So this workaround hurts nobody, but removing this will let
-users alone without any HDMI output. So on this board (without included
-serial console port), this will result in unhappy users, especially
-since without any console output there is no chance to get any idea what
-is going wrong.
+So please do not remove this code.
 
 Thanks,
 Soeren
+
+[1] https://lists.denx.de/pipermail/u-boot/2020-December/434239.html
 >
-> Patrick.
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
 >
+>  configs/tbs2910_defconfig | 1 -
+>  1 file changed, 1 deletion(-)
 >
->
-> Patrick Delaunay (6):
->   tbs2910: configs: remove VIDCONSOLE_AS_LCD
->   peach-pit: configs: remove VIDCONSOLE_AS_LCD
->   snow: configs: remove VIDCONSOLE_AS_LCD
->   peach-pi: configs: remove VIDCONSOLE_AS_LCD
->   spring: configs: remove VIDCONSOLE_AS_LCD
->   video: remove VIDCONSOLE_AS_LCD and VIDCONSOLE_AS_NAME
->
->  common/console.c            | 10 ----------
->  configs/peach-pi_defconfig  |  1 -
->  configs/peach-pit_defconfig |  1 -
->  configs/snow_defconfig      |  1 -
->  configs/spring_defconfig    |  1 -
->  configs/tbs2910_defconfig   |  1 -
->  drivers/video/Kconfig       | 22 ----------------------
->  7 files changed, 37 deletions(-)
->
+> diff --git a/configs/tbs2910_defconfig b/configs/tbs2910_defconfig
+> index e43fab208d..b5580abbfd 100644
+> --- a/configs/tbs2910_defconfig
+> +++ b/configs/tbs2910_defconfig
+> @@ -103,7 +103,6 @@ CONFIG_DM_VIDEO=y
+>  # CONFIG_VIDEO_ANSI is not set
+>  CONFIG_SYS_WHITE_ON_BLACK=y
+>  # CONFIG_PANEL is not set
+> -CONFIG_VIDCONSOLE_AS_LCD=y
+>  CONFIG_I2C_EDID=y
+>  CONFIG_VIDEO_IPUV3=y
+>  CONFIG_VIDEO_BMP_RLE8=y
 
 _______________________________________________
 Uboot-stm32 mailing list

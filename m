@@ -2,67 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 40E922D3E4C
-	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Dec 2020 10:16:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB9512D4047
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Dec 2020 11:48:49 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E5585C3FADB;
-	Wed,  9 Dec 2020 09:16:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 95529C3FADA;
+	Wed,  9 Dec 2020 10:48:49 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 165E6C32E90
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A51BC32E90
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  9 Dec 2020 09:16:42 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Wed,  9 Dec 2020 10:48:47 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0B997wYk011314; Wed, 9 Dec 2020 10:16:39 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=V6E/W/aCjoNaVmydxDHCPYbn9bZBoXKKlFToavaUzz8=;
- b=7Ech/G6TVr14ISRw22y+G/799OgTPzloWQUuTx2c+D4QQWh+4YdRq6dAaDtZd58IxMga
- KCUXnNAuJSVVsfcAdwaDrCkEHY+UuSdTKX4iRigS/RwRiXh/LP2PK688vwo62u0Gm50v
- mg0jOvL/mJJ3U9dx/xP1TjPlSUmSkb1qOyF8WlLvebGTtrdr7eJ4lwRn7CglaFCEoctc
- PhJJdYyOtCYp68qMJRl1D5bIhXE7MO3v3AzuOny0Q+NLmOFFTV6ZW3FsgFJdWnEy/c9y
- APKR/8V79O8YQL2u5a31z4hrHFdOZJg23dhPGRRBN79JHJeyQdQICV92xGgkBUXp5mNS xw== 
+ 0B9AkgTI026538; Wed, 9 Dec 2020 11:48:35 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+ h=from : to : cc : subject
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=nzwiSOD/L8iVyRdtsBpI+hKtCP0tO0lrZX1QfWFNT1o=;
+ b=Nh0SCdEXjTdN6a0lfxgVyIXx0OOlv3VbK0HXHg+Rlb4NtW6HSODZA0bnCFxjo4rgi/KB
+ B0DrWBh+cLx8HfrK/gItzvv7+v5424zpqEoeTZ+fh9sl5oNKFZY6qyjA6FnLvtuH6+oD
+ cYLrDm2fLxKjJvOEb+aqJ3mLUovxfyfU0oP90FFWtzU6kaUTVK8VPo7lbvtQjwJ/DU+u
+ TpS15xlR5p5iN4j6bZ15vFPm1CxlCdBbTRgrX8s9XqXyJobhET82WP6ZQcbkD+5/TzNJ
+ UwoIb/ae67T5lLlyAvwjJaZSd0kmYgFU7UjyRjnP+zi43HDgBo9esO7aBAiqcfNTiXZe Ow== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35agq637xd-1
+ by mx07-00178001.pphosted.com with ESMTP id 35agwfkx71-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 09 Dec 2020 10:16:39 +0100
+ Wed, 09 Dec 2020 11:48:35 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6055210002A;
- Wed,  9 Dec 2020 10:16:38 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4567510002A;
+ Wed,  9 Dec 2020 11:48:34 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4E72523C163;
- Wed,  9 Dec 2020 10:16:38 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.47) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 150C425D007;
+ Wed,  9 Dec 2020 11:48:34 +0100 (CET)
+Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 9 Dec
- 2020 10:16:37 +0100
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20201201102920.84051-1-marex@denx.de>
- <22668d9b2add43d5bb75f50862baf2f6@SFHDAG2NODE3.st.com>
- <01f3a78a-6cb5-560c-63e6-e0b94629e098@foss.st.com>
- <979eac17-8320-068b-9691-0353bcd57545@denx.de>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <f59204cb-7499-0193-5837-4b86a21cc459@foss.st.com>
-Date: Wed, 9 Dec 2020 10:16:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <979eac17-8320-068b-9691-0353bcd57545@denx.de>
+ 2020 11:48:33 +0100
+Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
+ SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
+ 15.00.1473.003; Wed, 9 Dec 2020 11:48:33 +0100
+From: Patrick DELAUNAY <patrick.delaunay@st.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Lukasz Majewski
+ <lukma@denx.de>
+Thread-Topic: [PATCH 1/4] fastboot: mmc: Add CONFIG_FASTBOOT_MMC_USER_SUPPORT
+Thread-Index: AQHWhqxMDfO6nk7X1EyVb1ikk5gjiqnvIpnQ
+Date: Wed, 9 Dec 2020 10:48:33 +0000
+Message-ID: <8d6dfa51d37a4fcdb2f58516473925de@SFHDAG2NODE3.st.com>
+References: <20200909152228.1.I4ae7c1ab59fed4861cde9322a8d12167c9d0187a@changeid>
+In-Reply-To: <20200909152228.1.I4ae7c1ab59fed4861cde9322a8d12167c9d0187a@changeid>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE3.st.com
- (10.75.127.6)
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.48]
+MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
- definitions=2020-12-09_07:2020-12-08,
+ definitions=2020-12-09_08:2020-12-09,
  2020-12-09 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: Re: [Uboot-stm32] FW: [PATCH 1/4] ARM: dts: stm32: Enable internal
- pull-ups for SDMMC1 on DHCOM SoM
+Cc: Peng Fan <peng.fan@nxp.com>, Mingming lee <mingming.lee@mediatek.com>,
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/4] fastboot: mmc: Add
+	CONFIG_FASTBOOT_MMC_USER_SUPPORT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,18 +80,53 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgTWFyZWssCgpPbiAxMi84LzIwIDY6MjYgUE0sIE1hcmVrIFZhc3V0IHdyb3RlOgo+IE9uIDEy
-LzgvMjAgNjoyMCBQTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPj4gSGkgTWFyZWssCj4KPiBI
-aSwKPgo+IFsuLi5dCj4KPj4gRm9yIHRoZSBzZXJpZTrCoCB0aGUgdGFyZ2V0IGlzIG5leHQgb3Ig
-aXQgaXMgYSBidWdmaXggZm9yIG1hc3RlciAvIAo+PiB2MjAyMS4wMSA/Cj4KPiBUaGlzIGlzIGZv
-ciAyMDIxLjAxICwgaXQgY29ycmVjdHMgYSBjb3VwbGUgb2YgcmFuZG9tIHRoaW5ncyBoZXJlIGFu
-ZCAKPiB0aGVyZS4KCgpGb3IgdGhlIHNlcmllOgoKQXBwbGllZCB0byB1LWJvb3Qtc3RtL21hc3Rl
-ci4KClRoYW5rcwoKUGF0cmljawoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1t
-YWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
-bS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+Hi Lukasz,
+
+> From: Patrick DELAUNAY <patrick.delaunay@st.com>
+> Sent: mercredi 9 septembre 2020 15:23
+> To: u-boot@lists.denx.de
+> Cc: Patrick DELAUNAY <patrick.delaunay@st.com>; Jagan Teki
+> <jagan@amarulasolutions.com>; Kever Yang <kever.yang@rock-chips.com>;
+> Mingming lee <mingming.lee@mediatek.com>; Miquel Raynal
+> <miquel.raynal@bootlin.com>; Peng Fan <peng.fan@nxp.com>; Simon Glass
+> <sjg@chromium.org>; U-Boot STM32 <uboot-stm32@st-md-
+> mailman.stormreply.com>
+> Subject: [PATCH 1/4] fastboot: mmc: Add
+> CONFIG_FASTBOOT_MMC_USER_SUPPORT
+> Importance: High
+> 
+> Split userdata and boot partition support for eMMC update and correct the
+> description (update is supported).
+> 
+> The new configuration CONFIG_FASTBOOT_MMC_USER_SUPPORT allows to
+> activate support of userdata partition update, based on target
+> name=CONFIG_FASTBOOT_MMC_USER_NAME
+> 
+> This patch also removes the unnecessary dependency with ARCH_MEDIATEK
+> and EFI_PARTITION.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> ---
+> 
+>  configs/mt8518_ap1_emmc_defconfig |  1 +
+>  drivers/fastboot/Kconfig          | 22 +++++++++++++++++-----
+>  drivers/fastboot/fb_mmc.c         |  9 ++++++---
+>  3 files changed, 24 insertions(+), 8 deletions(-)
+> 
+
+Gentle reminder,
+
+Any comments on this serie [1]
+
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=200509
+
+Patrick 
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

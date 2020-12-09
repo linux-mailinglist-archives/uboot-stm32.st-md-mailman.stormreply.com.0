@@ -2,73 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB9512D4047
-	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Dec 2020 11:48:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 349662D4524
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Dec 2020 16:11:16 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 95529C3FADA;
-	Wed,  9 Dec 2020 10:48:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D94E0C3FADA;
+	Wed,  9 Dec 2020 15:11:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A51BC32E90
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 168E0C32E90
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  9 Dec 2020 10:48:47 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Wed,  9 Dec 2020 15:11:12 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0B9AkgTI026538; Wed, 9 Dec 2020 11:48:35 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
- h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=nzwiSOD/L8iVyRdtsBpI+hKtCP0tO0lrZX1QfWFNT1o=;
- b=Nh0SCdEXjTdN6a0lfxgVyIXx0OOlv3VbK0HXHg+Rlb4NtW6HSODZA0bnCFxjo4rgi/KB
- B0DrWBh+cLx8HfrK/gItzvv7+v5424zpqEoeTZ+fh9sl5oNKFZY6qyjA6FnLvtuH6+oD
- cYLrDm2fLxKjJvOEb+aqJ3mLUovxfyfU0oP90FFWtzU6kaUTVK8VPo7lbvtQjwJ/DU+u
- TpS15xlR5p5iN4j6bZ15vFPm1CxlCdBbTRgrX8s9XqXyJobhET82WP6ZQcbkD+5/TzNJ
- UwoIb/ae67T5lLlyAvwjJaZSd0kmYgFU7UjyRjnP+zi43HDgBo9esO7aBAiqcfNTiXZe Ow== 
+ 0B9F87x9015771; Wed, 9 Dec 2020 16:11:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=to : cc : from :
+ subject : message-id : date : mime-version : content-type :
+ content-transfer-encoding; s=selector1;
+ bh=gCJsQWCggsWJ9eg+6gcO0aOg5aPLODDbgcIDo67siVo=;
+ b=LSY1bZddm/l6evtdwlUE8triYSyZjrsjM4GKTCTlO9W6U4x+oaQYi1Ha6yyHB1nj33Wr
+ Wzupy6puNAnKE69MG7NJ/Ywsb5DxrlAc3doudktdmbADeI05H6kuM4xIMLWQtgVqpAww
+ eJtQdsL61fVquBQzaX2sQR1HSvwgziVg2Fa+Iw/Za51852mzzs9e/ENKmz7mZy9cyrk7
+ I+qLSK0NaEBJvc02I7nK1dGKnHrepKHxLN+hHHt1JoD9E7bxT21ySOSdU0z0Fplq+4Px
+ oE3zkpcr4PCWpVQy/JnTiTpEQpm88RxWxbJC2w8vLMJLQrF/c4J5J5J8UF0dowoR9OHx pg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35agwfkx71-1
+ by mx07-00178001.pphosted.com with ESMTP id 35agq65hv3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 09 Dec 2020 11:48:35 +0100
+ Wed, 09 Dec 2020 16:11:07 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4567510002A;
- Wed,  9 Dec 2020 11:48:34 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2C93C10002A;
+ Wed,  9 Dec 2020 16:11:07 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 150C425D007;
- Wed,  9 Dec 2020 11:48:34 +0100 (CET)
-Received: from SFHDAG2NODE3.st.com (10.75.127.6) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 15E51239BCA;
+ Wed,  9 Dec 2020 16:11:07 +0100 (CET)
+Received: from lmecxl0994.lme.st.com (10.75.127.47) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 9 Dec
- 2020 11:48:33 +0100
-Received: from SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c]) by
- SFHDAG2NODE3.st.com ([fe80::31b3:13bf:2dbe:f64c%20]) with mapi id
- 15.00.1473.003; Wed, 9 Dec 2020 11:48:33 +0100
-From: Patrick DELAUNAY <patrick.delaunay@st.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Lukasz Majewski
- <lukma@denx.de>
-Thread-Topic: [PATCH 1/4] fastboot: mmc: Add CONFIG_FASTBOOT_MMC_USER_SUPPORT
-Thread-Index: AQHWhqxMDfO6nk7X1EyVb1ikk5gjiqnvIpnQ
-Date: Wed, 9 Dec 2020 10:48:33 +0000
-Message-ID: <8d6dfa51d37a4fcdb2f58516473925de@SFHDAG2NODE3.st.com>
-References: <20200909152228.1.I4ae7c1ab59fed4861cde9322a8d12167c9d0187a@changeid>
-In-Reply-To: <20200909152228.1.I4ae7c1ab59fed4861cde9322a8d12167c9d0187a@changeid>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.48]
+ 2020 16:11:06 +0100
+To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <470f1711-3a45-9490-d561-6b34d11d5b63@foss.st.com>
+Date: Wed, 9 Dec 2020 16:11:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+Content-Language: en-US
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG4NODE2.st.com (10.75.127.11) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
- definitions=2020-12-09_08:2020-12-09,
+ definitions=2020-12-09_13:2020-12-09,
  2020-12-09 signatures=0
-Cc: Peng Fan <peng.fan@nxp.com>, Mingming lee <mingming.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/4] fastboot: mmc: Add
-	CONFIG_FASTBOOT_MMC_USER_SUPPORT
+Cc: Marek Vasut <marex@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
+ Manuel Reis <mluis.reis@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: [Uboot-stm32] [PULL] Pull request for u-boot master =
+	u-boot-stm32-20201209
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,53 +71,104 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Lukasz,
-
-> From: Patrick DELAUNAY <patrick.delaunay@st.com>
-> Sent: mercredi 9 septembre 2020 15:23
-> To: u-boot@lists.denx.de
-> Cc: Patrick DELAUNAY <patrick.delaunay@st.com>; Jagan Teki
-> <jagan@amarulasolutions.com>; Kever Yang <kever.yang@rock-chips.com>;
-> Mingming lee <mingming.lee@mediatek.com>; Miquel Raynal
-> <miquel.raynal@bootlin.com>; Peng Fan <peng.fan@nxp.com>; Simon Glass
-> <sjg@chromium.org>; U-Boot STM32 <uboot-stm32@st-md-
-> mailman.stormreply.com>
-> Subject: [PATCH 1/4] fastboot: mmc: Add
-> CONFIG_FASTBOOT_MMC_USER_SUPPORT
-> Importance: High
-> 
-> Split userdata and boot partition support for eMMC update and correct the
-> description (update is supported).
-> 
-> The new configuration CONFIG_FASTBOOT_MMC_USER_SUPPORT allows to
-> activate support of userdata partition update, based on target
-> name=CONFIG_FASTBOOT_MMC_USER_NAME
-> 
-> This patch also removes the unnecessary dependency with ARCH_MEDIATEK
-> and EFI_PARTITION.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> ---
-> 
->  configs/mt8518_ap1_emmc_defconfig |  1 +
->  drivers/fastboot/Kconfig          | 22 +++++++++++++++++-----
->  drivers/fastboot/fb_mmc.c         |  9 ++++++---
->  3 files changed, 24 insertions(+), 8 deletions(-)
-> 
-
-Gentle reminder,
-
-Any comments on this serie [1]
-
-[1] http://patchwork.ozlabs.org/project/uboot/list/?series=200509
-
-Patrick 
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+CkhpIFRvbSwKClBsZWFzZSBwdWxsIHRoZSBTVE0zMiByZWxhdGVkIHBhdGNoZXMgZm9yIHUtYm9v
+dC9tYXN0ZXIsIHYyMDIxLjAxOiAKdS1ib290LXN0bTMyLTIwMjAxMjA5CgotIE1hbmFnZSBDT05G
+SUdfRU5WX0VYVDRfREVWSUNFX0FORF9QQVJUIGluIHN0bTMybXAxIGJvYXJkCi0gVXBkYXRlIEFS
+TSBTVEkgYW5kIEFSTSBTVE0gU1RNMzJNUCBBcmNoIG1haW50YWluZXJzIGVtYWlscwotIEVuYWJs
+ZSBpbnRlcm5hbCBwdWxsLXVwcyBmb3IgU0RNTUMxIG9uIERIQ09NIFNvTQoKQ0kgc3RhdHVzOiAK
+aHR0cHM6Ly9naXRsYWIuZGVueC5kZS91LWJvb3QvY3VzdG9kaWFucy91LWJvb3Qtc3RtLy0vcGlw
+ZWxpbmVzLzU1MTgKClRoYW5rcywKUGF0cmljawoKZ2l0IHJlcXVlc3QtcHVsbCBvcmlnaW4vbWFz
+dGVyIApodHRwczovL2dpdGxhYi5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1zdG0u
+Z2l0IAp1LWJvb3Qtc3RtMzItMjAyMDEyMDkKClRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzaW5jZSBj
+b21taXQgZWM3OWY1Y2UyMjAyY2Y2YzU2ZTVlYjFlYjc1NTYwNGI1MzRhZTA4YjoKCiDCoCBNZXJn
+ZSBodHRwczovL2dpdGxhYi5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1tYXJ2ZWxs
+IAooMjAyMC0xMi0wNyAxMTo0NjoxMiAtMDUwMCkKCmFyZSBhdmFpbGFibGUgaW4gdGhlIEdpdCBy
+ZXBvc2l0b3J5IGF0OgoKIMKgIGh0dHBzOi8vZ2l0bGFiLmRlbnguZGUvdS1ib290L2N1c3RvZGlh
+bnMvdS1ib290LXN0bS5naXQgCnRhZ3MvdS1ib290LXN0bTMyLTIwMjAxMjA5Cgpmb3IgeW91IHRv
+IGZldGNoIGNoYW5nZXMgdXAgdG8gOWIzNmI3ZGM5NmJhZWRjMGVkNTA2MjQ2YTk4MjJjNzQ1Y2M2
+NWI0NToKCiDCoCBBUk06IGR0czogc3RtMzI6IEFkZCBVU0IgT1RHIElEIHBpbiBvbiBESCBBVjk2
+ICgyMDIwLTEyLTA5IDEwOjU3OjUwIAorMDEwMCkKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLSBNYW5hZ2UgQ09ORklHX0VO
+Vl9FWFQ0X0RFVklDRV9BTkRfUEFSVCBpbiBzdG0zMm1wMSBib2FyZAotIFVwZGF0ZSBBUk0gU1RJ
+IGFuZCBBUk0gU1RNIFNUTTMyTVAgQXJjaCBtYWludGFpbmVycyBlbWFpbHMKLSBFbmFibGUgaW50
+ZXJuYWwgcHVsbC11cHMgZm9yIFNETU1DMSBvbiBESENPTSBTb00KCi0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KTWFudWVsIFJl
+aXMgKDEpOgogwqDCoMKgwqDCoCBhZGQgY2hlY2sgZm9yIGlnbm9yZWQgQ09ORklHX0VOVl9FWFQ0
+X0RFVklDRV9BTkRfUEFSVCBkZWZpbml0aW9uCgpNYXJlayBWYXN1dCAoNCk6CiDCoMKgwqDCoMKg
+IEFSTTogZHRzOiBzdG0zMjogRW5hYmxlIGludGVybmFsIHB1bGwtdXBzIGZvciBTRE1NQzEgb24g
+REhDT00gU29NCiDCoMKgwqDCoMKgIEFSTTogZHRzOiBzdG0zMjogRGlzYWJsZSBTRE1NQzEgQ0tJ
+TiBmZWVkYmFjayBjbG9jawogwqDCoMKgwqDCoCBBUk06IGR0czogc3RtMzI6IEVuYWJsZSBTRE1N
+QzMgb24gREggRFJDMDIKIMKgwqDCoMKgwqAgQVJNOiBkdHM6IHN0bTMyOiBBZGQgVVNCIE9URyBJ
+RCBwaW4gb24gREggQVY5NgoKUGF0cmljZSBDaG90YXJkICgzKToKIMKgwqDCoMKgwqAgTUFJTlRB
+SU5FUlM6IFVwZGF0ZSBBUk0gU1RJIGFuZCBBUk0gU1RNIFNUTTMyTVAgQXJjaCBtYWludGFpbmVy
+cyAKZW1haWxzCiDCoMKgwqDCoMKgIHRyZWV3aWRlOiBVcGRhdGUgZW1haWwgYWRkcmVzcyBQYXRy
+aWNrIERlbGF1bmF5IGFuZCBQYXRyaWNlIENob3RhcmQKIMKgwqDCoMKgwqAgLm1haWxtYXA6IG1h
+cCBQYXRyaWNrIERlbGF1bmF5IGFuZCBteSBlbWFpbCBhZGRyZXNzCgogwqAubWFpbG1hcMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDIgKysKIMKgTUFJTlRBSU5FUlPCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA2ICsrKy0tLQogwqBhcmNoL2FybS9kdHMvc3RtMzJtcDE1
+eHgtZGhjb20tZHJjMDIuZHRzwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTMgKysrKysrKysr
+KystLQogwqBhcmNoL2FybS9kdHMvc3RtMzJtcDE1eHgtZGhjb20uZHRzacKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAxNSArKysrKysrKysrKysrKy0KIMKgYXJjaC9hcm0vZHRz
+L3N0bTMybXAxNXh4LWRoY29yLWF2ZW5nZXI5Ni5kdHPCoMKgwqDCoMKgwqDCoMKgIHzCoCAzICsr
+LQogwqBhcmNoL2FybS9pbmNsdWRlL2FzbS9hcmNoLXN0aWg0MTAvc2RoY2kuaMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgfMKgIDIgKy0KIMKgYXJjaC9hcm0vaW5jbHVkZS9hc20vYXJjaC1zdGloNDEw
+L3N5c19wcm90by5owqDCoMKgwqDCoMKgwqAgfMKgIDIgKy0KIMKgYXJjaC9hcm0vaW5jbHVkZS9h
+c20vYXJjaC1zdG0zMi9zdG0zMmYuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQog
+wqBhcmNoL2FybS9pbmNsdWRlL2FzbS9hcmNoLXN0bTMyZjQvc3RtMzJfcHdyLmjCoMKgwqDCoMKg
+wqDCoCB8wqAgMiArLQogwqBhcmNoL2FybS9pbmNsdWRlL2FzbS9hcmNoLXN0bTMyZjcvc3RtMzJf
+cHdyLmjCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQogwqBhcmNoL2FybS9pbmNsdWRlL2FzbS9hcmNo
+LXN0bTMyaDcvZ3Bpby5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGFyY2gv
+YXJtL2luY2x1ZGUvYXNtL2FyY2gtc3RtMzJoNy9zdG0zMi5owqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8wqAgMiArLQogwqBhcmNoL2FybS9tYWNoLXN0bTMyL3NvYy5jwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGJvYXJkL3N0
+L3N0aWg0MTAtYjIyNjAvYm9hcmQuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHzCoCAyICstCiDCoGJvYXJkL3N0L3N0bTMyZjQyOS1ldmFsdWF0aW9uL3N0bTMy
+ZjQyOS1ldmFsdWF0aW9uLmMgfMKgIDIgKy0KIMKgYm9hcmQvc3Qvc3RtMzJmNDY5LWRpc2NvdmVy
+eS9zdG0zMmY0NjktZGlzY292ZXJ5LmPCoMKgIHzCoCAyICstCiDCoGJvYXJkL3N0L3N0bTMyaDc0
+My1kaXNjby9zdG0zMmg3NDMtZGlzY28uY8KgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDC
+oGJvYXJkL3N0L3N0bTMyaDc0My1ldmFsL3N0bTMyaDc0My1ldmFsLmPCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgfMKgIDIgKy0KIMKgYm9hcmQvc3Qvc3RtMzJtcDEvc3RtMzJtcDEuY8KgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDExICsrKysrKysrKysr
+CiDCoGRyaXZlcnMvY2xrL2Nsa19zdG0zMmg3LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDIgKy0KIMKgZHJpdmVycy9taXNjL3N0bTMy
+X3JjYy5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgfMKgIDIgKy0KIMKgZHJpdmVycy9tbWMvc3RpX3NkaGNpLmPCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGRy
+aXZlcnMvbW1jL3N0bTMyX3NkbW1jMi5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQogwqBkcml2ZXJzL3BoeS9zdGlfdXNiX3BoeS5j
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzC
+oCAyICstCiDCoGRyaXZlcnMvcGluY3RybC9waW5jdHJsLXN0aS5jwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQogwqBkcml2ZXJzL3Jlc2V0L3N0
+aS1yZXNldC5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHzCoCAyICstCiDCoGRyaXZlcnMvcmVzZXQvc3RtMzItcmVzZXQuY8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGRyaXZl
+cnMvc2VyaWFsL3NlcmlhbF9zdGlfYXNjLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgfMKgIDIgKy0KIMKgZHJpdmVycy9zeXNyZXNldC9zeXNyZXNldF9zdGkuY8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQogwqBkcml2
+ZXJzL3RpbWVyL3N0aS10aW1lci5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGRyaXZlcnMvdGltZXIvc3RtMzJfdGltZXIu
+Y8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAy
+ICstCiDCoGRyaXZlcnMvdXNiL2hvc3QvZHdjMy1zdGktZ2x1ZS5jwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQogwqBkcml2ZXJzL3ZpZGVvL2JhY2tsaWdo
+dF9ncGlvLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAg
+MiArLQogwqBpbmNsdWRlL2NvbmZpZ3Mvc3RpaDQxMC1iMjI2MC5owqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGluY2x1ZGUvY29uZmlncy9zdG0z
+MmY0MjktZXZhbHVhdGlvbi5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQog
+wqBpbmNsdWRlL2NvbmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeS5owqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGluY2x1ZGUvY29uZmlncy9zdG0zMmg3NDMtZGlzY28u
+aMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCiDCoGluY2x1
+ZGUvY29uZmlncy9zdG0zMmg3NDMtZXZhbC5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB8wqAgMiArLQogwqBpbmNsdWRlL2R3YzMtc3RpLWdsdWUuaMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDIgKy0K
+IMKgaW5jbHVkZS9zdG0zMl9yY2MuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArLQoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0
+ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1t
+YWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

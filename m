@@ -2,64 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36D782D4AFB
-	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Dec 2020 20:52:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CC2A2D59F2
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Dec 2020 13:05:06 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ECDFFC3FADA;
-	Wed,  9 Dec 2020 19:52:30 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A7C36C3FADA;
+	Thu, 10 Dec 2020 12:05:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A192EC32E90
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6CC41C3089F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  9 Dec 2020 19:52:28 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id f14so1863334qto.12
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 09 Dec 2020 11:52:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=xJyJLWoe+1ZxbN5TFId0S/UUTB4TKCtd/QESkMa5pgI=;
- b=MCVz9K5yzjeF7kbpCszcKpY0NEcfDow6wo18oiPst2qGBj0WZoxQBxyIsI2UxwzBFx
- TEDpnNWmYDmusS63PLFRYK5siqJdossUf9IjDNnUME45QKlCZ2H63YchKSl5402moUwp
- lmXG4/zpmea6Oygv+N/ULB5V3E7aBDeBGm23I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=xJyJLWoe+1ZxbN5TFId0S/UUTB4TKCtd/QESkMa5pgI=;
- b=obgrEgoCIOCAh/N6PtdJAl1hshJ58K5yiXuhlgfBgdk3KSW3dU7lJlXjQlVe/h6mJy
- diboh+XxsN6C7w6cl4isBZ0mKivKkA8Gb3K6xH0LNX6WGWUTQ//ziKYByBcS8AiNvwcj
- LJkjTU9Lc2eXUF0JmdhfG0e2gleLB1QyQKZOP25s5qKOANQeYd6H4SI1XJmpC+eCISIt
- dmzawxE6H73yThWte/FU78XW+awE5bBYwBX5QUSIjJ0Ojl8dYQ7C/TgN6RNXNgC09clo
- MBqah07aBt3m97vBzF8U4EMu98y7trLZlHIEU+OrJvN1Svp6f7wYvJV3bv6l4YbEMXnj
- PhPw==
-X-Gm-Message-State: AOAM533a6TtP8bV86eXlevdBAO7YMDQGQbd/N5uosqDAQkCfNB4vkTqI
- NM67vZja+fgsF7YwyDqejBAy1A==
-X-Google-Smtp-Source: ABdhPJz+JqWLRO4kg6wT9xu5qReenEGpMKPWqnZiSImTGf5oZ57JRU0UZ03slSa4fao5CrBEsVRKog==
-X-Received: by 2002:ac8:454e:: with SMTP id z14mr4800159qtn.120.1607543547850; 
- Wed, 09 Dec 2020 11:52:27 -0800 (PST)
-Received: from bill-the-cat (cpe-65-184-135-175.ec.res.rr.com.
- [65.184.135.175])
- by smtp.gmail.com with ESMTPSA id b19sm1703878qtr.39.2020.12.09.11.52.26
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 09 Dec 2020 11:52:27 -0800 (PST)
-Date: Wed, 9 Dec 2020 14:52:24 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <20201209195224.GU32272@bill-the-cat>
-References: <470f1711-3a45-9490-d561-6b34d11d5b63@foss.st.com>
+ Thu, 10 Dec 2020 12:05:03 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 0BAC1q9F030546; Thu, 10 Dec 2020 13:04:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : references
+ : to : cc : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=xl4HLfNaEdDlv2RHLfMUw8QbeaAKyMr5eZgMXd3UPfM=;
+ b=rKKc3+BikOo70TcSnsNzvsJm6ZBFhy2ssK9/0yFEYPP/3YK2M6KrlbQeX2LIYhTg1uOo
+ +iXh7Y+UexyIxlq6aZC27a3+nBZDehg14eMVHqblT5ihmsBWgkCRlJNbJVpWozWq1zES
+ GirGVHhAktv134v8h4wMvYoXjJxFIvU10xDXwkFUnHw8fdIm9aS3TxsjkLrwFupyWA3I
+ TTV5As1e1WCVIWlfcMZ753+WbcDvMEBM/5IuWkRBqB3UAWNnQj2yfLwH7Y5FTdnekg/S
+ znnakQfLQtxreisCkgsBAsVfCN5sGiGpEB27gZrdOZtCjtLkVM2kVEURk+KOOAb0sF96 Sg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 35ag8jb5er-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 10 Dec 2020 13:04:58 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AAFE210002A;
+ Thu, 10 Dec 2020 13:04:56 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9D07B24E670;
+ Thu, 10 Dec 2020 13:04:56 +0100 (CET)
+Received: from lmecxl0994.lme.st.com (10.75.127.50) by SFHDAG2NODE3.st.com
+ (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 10 Dec
+ 2020 13:04:56 +0100
+References: <6fa4af68-ca93-d71d-9b48-6f8e5028e548@foss.st.com>
+To: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+X-Forwarded-Message-Id: <6fa4af68-ca93-d71d-9b48-6f8e5028e548@foss.st.com>
+Message-ID: <618da3e2-df99-fc1a-5fda-08fcf38d16ae@foss.st.com>
+Date: Thu, 10 Dec 2020 13:04:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <470f1711-3a45-9490-d561-6b34d11d5b63@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Manuel Reis <mluis.reis@gmail.com>
-Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master =
-	u-boot-stm32-20201209
+In-Reply-To: <6fa4af68-ca93-d71d-9b48-6f8e5028e548@foss.st.com>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
+ definitions=2020-12-10_05:2020-12-09,
+ 2020-12-10 signatures=0
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>,
+ Guillermo Rodriguez Garcia <guille.rodriguez@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] string: Use memcpy() within memmove()
+	when we can
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,96 +75,93 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7250846225994390258=="
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="windows-1252"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Tom,
 
---===============7250846225994390258==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="y9sq6d1BrjS7gjNl"
-Content-Disposition: inline
+On 12/10/20 12:57 PM, Patrick DELAUNAY wrote:
+> From: Tom Rini <trini@konsulko.com>
+> Sent: mardi 8 d=E9cembre 2020 17:11
+>
+> On Wed, Nov 25, 2020 at 01:07:43PM +0100, Rasmus Villemoes wrote:
+>> On 25/11/2020 12.26, Patrick Delaunay wrote:
+>>> A common use of memmove() can be handled by memcpy(). Also memcpy()
+>>> includes an optimization for large sizes: it copies a word at a
+>>> time. So we can get a speed-up by calling memcpy() to handle our =
 
+>>> move in this case.
+>>>
+>>> Update memmove() to call also memcpy() if the source don't overlap
+>>> the destination (src + count <=3D dest).
+>>>
+>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+>>> ---
+>>> This patch allows to save 38ms for Kernel Image extraction (7327624
+>>> Bytes) from FIT loaded at 0xC2000000 for ARMV7 board
+>>> STM32MP157C-EV1, and with kernel destination =3D Load Address:
+>>> 0xc4000000, located after the FIT without overlap, compared with
+>>> destination =3D Load Address: 0xc0008000.
+>>>
+>>> -> 14,332 us vs 52,239 in bootstage report
+>>>
+>>> In this case the memmove funtion is called in
+>>> common/image.c::memmove_wd() to handle overlap.
+>>>
+>>>
+>>> lib/string.c | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/lib/string.c b/lib/string.c index
+>>> ae7835f600..ef8ead976c 100644
+>>> --- a/lib/string.c
+>>> +++ b/lib/string.c
+>>> @@ -567,7 +567,7 @@ void * memmove(void * dest,const void
+>>> *src,size_t count) {
+>>> char *tmp, *s;
+>>> - if (dest <=3D src) {
+>>> + if (dest <=3D src || (src + count) <=3D dest) {
+>>> memcpy(dest, src, count);
+>> Hm. So the condition you add (src + count <=3D dest) implies no overlap
+>> at all, so that's ok. So this doesn't really have anything to do with
+>> your patch per se.
+>>
+>> The existing condition relies on memcpy doing forward-copying. That's
+>> the case if the implementation from lib/string.c is in use, i.e. if
+>> __HAVE_ARCH_MEMCPY is not defined. And if an arch defines
+>> __HAVE_ARCH_MEMMOVE, this memmove() is not used.
+>>
+>> But AFAICT, there's a potential problem for the case where
+>> __HAVE_ARCH_MEMCPY is defined but __HAVE_ARCH_MEMMOVE is not, and e.g.
+>> arch/arm/include/asm/string.h does
+>>
+>> #if CONFIG_IS_ENABLED(USE_ARCH_MEMCPY)
+>> #define __HAVE_ARCH_MEMCPY
+>> #endif
+>> #undef __HAVE_ARCH_MEMMOVE
+>>
+>> Of course, the arch-specific implementation _may_ also do
+>> forward-copying (I haven't tried to decipher it), but that seems to be
+>> a rather fragile assumption. At the very least, some comments would be
+>> in order.
+> Looking at this deeper, today, ARM (non-64bit) can and usually but not =
 
---y9sq6d1BrjS7gjNl
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> always does use the asm optimized memcpy / memset. No other optimized =
 
-On Wed, Dec 09, 2020 at 04:11:06PM +0100, Patrick DELAUNAY wrote:
+> functions were copied from Linux, and no other arches seem to use them =
 
->=20
-> Hi Tom,
->=20
-> Please pull the STM32 related patches for u-boot/master, v2021.01:
-> u-boot-stm32-20201209
->=20
-> - Manage CONFIG_ENV_EXT4_DEVICE_AND_PART in stm32mp1 board
-> - Update ARM STI and ARM STM STM32MP Arch maintainers emails
-> - Enable internal pull-ups for SDMMC1 on DHCOM SoM
->=20
-> CI status:
-> https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/5518
->=20
-> Thanks,
-> Patrick
->=20
-> git request-pull origin/master
-> https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
-> u-boot-stm32-20201209
->=20
-> The following changes since commit ec79f5ce2202cf6c56e5eb1eb755604b534ae0=
-8b:
->=20
-> =A0 Merge https://gitlab.denx.de/u-boot/custodians/u-boot-marvell (2020-1=
-2-07
-> 11:46:12 -0500)
->=20
-> are available in the Git repository at:
->=20
-> =A0 https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
-> tags/u-boot-stm32-20201209
->=20
-> for you to fetch changes up to 9b36b7dc96baedc0ed506246a9822c745cc65b45:
->=20
-> =A0 ARM: dts: stm32: Add USB OTG ID pin on DH AV96 (2020-12-09 10:57:50 +=
-0100)
->=20
+> today either. I think in sum then, Patrick can you please do a v2 that =
 
-Applied to u-boot/master, thanks!
+> adds a comment here, in case we get more optimizations in the future?
+> And thanks for the review here Rasmus!
 
---=20
-Tom
+I am preparing a V2 with added coment.
 
---y9sq6d1BrjS7gjNl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl/RKvUACgkQFHw5/5Y0
-tyzZqgv/SdoS/JO6c+LRQHT/jbQjd9sTPyfZYHTvfB6DSN0l3hjriEus4BZgzTnC
-JQojoTuAL5qWYboDa4B/Jvxb/3Ir4u+tQJ6eh8g+9ulda0hudQI6EMJ2nLIeo6Pg
-BEwssjU3l8D8rjCVsVvC8o8Ha76iXd8yk3QZLBvQPLvyib6Bj68VC1bW9XNVaTqf
-u2MKqQhz8eTvUzFLN4CbMWDcMjpQBIcohc8tVnQVtINIbOxVB8QCUduHVgkFMUf/
-olvxHrjR6gCOgTxMy2ptZpWHzrFR87tv5a0uDIORYDgPFU/0vsgZrz2O66SvOSFt
-hUr0WFTYXxglqN+JYQhgIP2D1tkyNf1NTKOJ/nA2wvRB1eZBYIyTNjaNhZE51rUB
-1WXLriSe8pfMRI6B3v0ZU6AEQ1eG0AH3M2FhFxxwbLQcgZdSC+Bg41kTiMyvr/MT
-njs7usD7FOqUehhhxPbDwo4u/kHrilmK5voXwB+NHk22thtmpFaBAl33E11lzIQe
-DhwT3vkn
-=Qfhc
------END PGP SIGNATURE-----
-
---y9sq6d1BrjS7gjNl--
-
---===============7250846225994390258==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Patrick.
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============7250846225994390258==--

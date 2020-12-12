@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2276C2D8751
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Dec 2020 16:39:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 065762D8752
+	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Dec 2020 16:39:25 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B6B71C3FADB;
-	Sat, 12 Dec 2020 15:39:22 +0000 (UTC)
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
- [209.85.221.68])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF28FC3FADA;
+	Sat, 12 Dec 2020 15:39:24 +0000 (UTC)
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8A4C7C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E56BC36B25
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Dec 2020 15:39:20 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id t4so11995160wrr.12
+ Sat, 12 Dec 2020 15:39:22 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id a6so10011992wmc.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Dec 2020 07:39:20 -0800 (PST)
+ Sat, 12 Dec 2020 07:39:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/906Uqqnyj4Xi5j22Rm9SiCCzHtO2rMmezrcSNb6WMA=;
- b=WMYX5OEYVMJU7fI0VEPsYDjkHhALB6K/SwGiIVaOtN7Yq3cDRCNkVkm9OqQ/20VcRZ
- UXZ9v/bjdM8aNwS+9syVQ+r7s2RERg+fjDF5zCYmSqTL/gl0kp+ZANcUz07XWq0e1vYT
- sq+CZ13HZ5po1c1XPDZ89dyLmYsVT/InbMzR0=
+ :cc; bh=3gX+b0n5qPwfy2aUSLgeQs7ixMEK4nmfiCs7+LymJlw=;
+ b=bZfHjv3XfK1xLdHa+kNoh4G8CpeLMHBtv7YtM01FubWA0j5yln1trLUEKwse2SHjn2
+ XiFHSreoIWvvdjKticPrniOpwQ38aZrDMJnRXrzTp2zCB3E3y92prgN5vILD222DabkE
+ jThzh+g+BSonKOW5Jis0CC2Jr3tRwieaY5g+A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=/906Uqqnyj4Xi5j22Rm9SiCCzHtO2rMmezrcSNb6WMA=;
- b=WWWgwm8ynYa3hC3DBBHjs69y3cbPff3hrcyuyehp0S+bSvS0NrSwN5oMPujPb2fI5R
- I1sikcp4aJfqZNOsfNQWL6T11bWLTrh1tTHVnD0FC5u9a16I4pGuUi16fwLavC/OxlHf
- 2LxxWlB3g2Ut2oR4tfgZoLr9sBJKzEAak5rkQY03lk9IMgCViI06cf6AE+ddBboGg7Qn
- 6b0/1kwB/yYbI7DW5MyN5xvcuRsmzEI+rjuZz6grz0aYE/Q3GpcHAufabDTVFlqFPgbG
- Hx6sFtfp4xr9SyUOEFpCyQEt5SFXza0VMRNRsddY+Zt3cbc27uLYac91lUXBsNEWiv+F
- rGew==
-X-Gm-Message-State: AOAM530dMI9FB8l/1ivxGl8lTxtMMmy1rwQmXfsE6IZ/51fUI1pfQhgi
- l6NYPWQKXh8/jCVq5EOC8YxFPdz2vriiv37esWcubw==
-X-Google-Smtp-Source: ABdhPJytmzeSknCvMfbkHBQfvwHHrlUUlSkgp35BkohFUv9bEQSm4apTd5SvX9eIgBgWBynA9GaeQsx8pjsC5KQpdBo=
-X-Received: by 2002:a5d:4d50:: with SMTP id a16mr12151082wru.43.1607787559455; 
- Sat, 12 Dec 2020 07:39:19 -0800 (PST)
+ bh=3gX+b0n5qPwfy2aUSLgeQs7ixMEK4nmfiCs7+LymJlw=;
+ b=f/vp/qcnsOWIdutf+TQsvVeurc939FTwoYdXOvzA4GnRexQ0jzFTbUiF9FDdRGejWx
+ fgVrnHAJlEIbh6lR8gyKuf+2lWPAaZn4qzJydKlU0PnGy2r26AMCUv+TZujC8vwoWI87
+ RPF8o2KbmTMlgqroUmFb+2gFDlYg3UWf4bnx4fFiP1Wh6okjZvX9MhqwayAQ4mPo+L4+
+ 3uff6Jq1+eVKHlFUkMeRfbqvd/dZVd4nP1qyN3d5BE6RpHA/v7XIlFRc0/A5L1/8h1hZ
+ zn4r0LXaMDj8dQx8YvFyTnEapci6gGpZetmZUaznZkZJ+M6wqpo94Fh1eGMKXGy3qGj2
+ Q91A==
+X-Gm-Message-State: AOAM530s8Q2S55V5RbfxzkSSCgRfifqbzS/kV61SmrVrkH4zhCEGWFvR
+ XW4Y3NEGJVJTXLH9NSTGouZ1o/gRM/iQRcOXYfEO4g==
+X-Google-Smtp-Source: ABdhPJz3xjz70oGhkxV+kWtgziXH/FOYRfzz+fJDNd8RbwfPOD2eshFiuj9ktE77so6HWy0tcYeavPHwu+/lrjWPUSY=
+X-Received: by 2002:a1c:65d4:: with SMTP id z203mr9755295wmb.65.1607787562037; 
+ Sat, 12 Dec 2020 07:39:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20201203092032.8124-1-patrick.delaunay@st.com>
- <20201203102027.1.Iaf4e6c8a8adfa754adbf7a27200c0bc9e9f9b363@changeid>
-In-Reply-To: <20201203102027.1.Iaf4e6c8a8adfa754adbf7a27200c0bc9e9f9b363@changeid>
+ <20201203102027.2.Icd4f9239c00329a77c50bc0c42b3638c744ea955@changeid>
+In-Reply-To: <20201203102027.2.Icd4f9239c00329a77c50bc0c42b3638c744ea955@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 12 Dec 2020 08:39:06 -0700
-Message-ID: <CAPnjgZ104dGFx4AJ3suS9okE5=ikDeNrrYJtpDV3VnGpMY9J5A@mail.gmail.com>
+Date: Sat, 12 Dec 2020 08:39:09 -0700
+Message-ID: <CAPnjgZ24QKsWbAPxL1p-BRBhYVJMWYqKJAvcrcF-nXscwm_rdw@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/4] console: remove #ifdef CONFIG when it
-	is possible
+Subject: Re: [Uboot-stm32] [PATCH 2/4] console: add function
+	console_devices_set
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,14 +70,17 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Thu, 3 Dec 2020 at 02:20, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Remove #ifdef or #ifndef for CONFIG when it is possible to simplify
-> the console.c code and respect the U-Boot coding rules.
+> Add a new function to access to console_devices only defined if
+> CONFIG_IS_ENABLED(CONSOLE_MUX).
+>
+> This path allows to remove #if CONFIG_IS_ENABLED(CONSOLE_MUX)
+> in console_getc function.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  common/console.c | 149 +++++++++++++++++++----------------------------
->  1 file changed, 61 insertions(+), 88 deletions(-)
+>  common/console.c | 20 +++++++++++++-------
+>  1 file changed, 13 insertions(+), 7 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

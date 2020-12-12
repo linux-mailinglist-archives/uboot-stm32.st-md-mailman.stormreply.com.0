@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A7F22D8756
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Dec 2020 16:40:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0970D2D8753
+	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Dec 2020 16:39:27 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 374A3C3FADA;
-	Sat, 12 Dec 2020 15:40:20 +0000 (UTC)
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
- [209.85.210.65])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5EFCC3FADB;
+	Sat, 12 Dec 2020 15:39:26 +0000 (UTC)
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9FE57C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2F8DFC3FADA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Dec 2020 15:40:18 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id q25so11212734otn.10
+ Sat, 12 Dec 2020 15:39:26 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id g185so11301768wmf.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Dec 2020 07:40:18 -0800 (PST)
+ Sat, 12 Dec 2020 07:39:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=IOZ1lcKJMve90ufXr/HFAEXaSpRqHRgsniNn6piCzt0=;
- b=jX/DB7GPTVomb73tBOwgx4zbvUCk3ioFl+z4KJCGek06wV4et8G/Q4OizsLkfdlyAh
- yBZk/WVsithrEagYu6R7/DqCIeh9O7ukhbVw+53s1rQw4vkhamFY9yOOK5emepUrwTju
- 8DXTehyXmiFabF2kIP6Gh0CKd+91NkCGe+2Mg=
+ :cc; bh=XWKZsWfm7lJVovAaPBDqIg/eqyPiRjhvUN6cf7pdc8c=;
+ b=WaHwHP3hlcYom0yZwx1UwF00Ppi79y67KZmy8ktNqWxkCURPhc7gPGwHpmViQ5mEMc
+ 3eCYyRfY/eK88uteyxqu6ugXlKiFgkqxwEx4hWfnt7vip4vJVRs5/mSE8jSfNcl5dnM8
+ uJxMWSgvl+Rt35V0djeteHZ/Waa6X7Uk3v9bI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=IOZ1lcKJMve90ufXr/HFAEXaSpRqHRgsniNn6piCzt0=;
- b=H5ULMfndsLFeUnaZ+8xwCeDjm8CVtFB21mHxtg7QgaQjPjyFBQ4OkjZ3JahLvZL0+o
- 1/Vh5oGG92hzahq7vY4DBdALS1nfuC/g8KnMbf3UKriqHJ2IPryqIhV89WpiRYUjVDSC
- GBx9gVpwteo54GHX2pMEzMGSqVEFrp17UDlfO3R3DWSMd/6HLW5gxUe0Ek8+4a14DVP7
- LWeEofi8PhSqoMJd/sRR1xQ3ozG1lpaXHQbdsU5vlBdNexD6yv/ykPyEfxHVZTXKxAhJ
- WQa4OILz+2hM9TO91B4cmZLQxvySX0B/L2U1Q7ELGYOthSw8KteF+xBHtEcVRReYFq+S
- yFBg==
-X-Gm-Message-State: AOAM5329dz0dEX9ewDJpqNz+b6SOhhITxMN2ng+jIV7pZUxDKZaT8kPv
- WPlibIuk70Gi8gFmV+50DLxMQrH89rTC6MlceCj+0g==
-X-Google-Smtp-Source: ABdhPJy+ITfyHd/M81LSgKYIekMbyDs51cCgwcj2MsUp/2c6q+/8dl3/wG1BLfsrV/eGjXHvNM2VThnv4ieooGtFDBc=
-X-Received: by 2002:a05:6830:1d0:: with SMTP id
- r16mr13732898ota.54.1607787617175; 
- Sat, 12 Dec 2020 07:40:17 -0800 (PST)
+ bh=XWKZsWfm7lJVovAaPBDqIg/eqyPiRjhvUN6cf7pdc8c=;
+ b=dUXwDg2jw87Yg3rZOmzsUjgLpMR6jMsu+fRlydRUHJF5rpghZI0sGTpCUXPr2uCCIb
+ pZDK6+WTTVfyLk6NXOOV6A8FBbA638ljla1C6ImOukxOZttzI6KtcClfsLU1r0T34rtT
+ O4AsL1QDNALA1h9XcWuEpRSKz4XYwaHkQOKA6SmaJ0/LVjtq+9jgPXyCthBRziU0PGt7
+ aBr5Vgw7oH4/KdgXnWqYXiP1+qryUteh8xyukqS+/AtO5wiIZ5Wi73/bIfMm4e7HF7Wz
+ Clhs7eKtVIdu+hbyEdR/gMyhmw1hqeatsuJaDXTIH6VQcP9oYxpWn1/FUS5hd0CINJLP
+ saPw==
+X-Gm-Message-State: AOAM533nlBe6tkiC2f9JpE4EfdQQvPshf+4vPG8ILsMMtoceLyJt7PdS
+ bOHwN4Y+qEuiYEjp12yay1OhTGfzAtnwFbeeNrVXiw==
+X-Google-Smtp-Source: ABdhPJxRn5iSSK/WzydSGfK2ZMkWnpdXwh/YbTBbabKFjAn3LqkbgtvnuwgeQwFC6zHqhnl0aExNN/Rv4YiTCbym0nQ=
+X-Received: by 2002:a7b:cf0d:: with SMTP id l13mr19371713wmg.168.1607787565547; 
+ Sat, 12 Dec 2020 07:39:25 -0800 (PST)
 MIME-Version: 1.0
 References: <20201203092032.8124-1-patrick.delaunay@st.com>
- <20201203102027.3.I3e15d39becc5c180a3be52571bb570e29c6b4cd0@changeid>
-In-Reply-To: <20201203102027.3.I3e15d39becc5c180a3be52571bb570e29c6b4cd0@changeid>
+ <20201203102027.4.I810a6b37da2c8aa13ca2e20408a8d54b08e2ef32@changeid>
+In-Reply-To: <20201203102027.4.I810a6b37da2c8aa13ca2e20408a8d54b08e2ef32@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 12 Dec 2020 08:39:11 -0700
-Message-ID: <CAPnjgZ33Ahzy_LV8SniyU_=HVGLYggPBRmULMF_h2sLV3jbJwA@mail.gmail.com>
+Date: Sat, 12 Dec 2020 08:39:13 -0700
+Message-ID: <CAPnjgZ3ZK8yEYe5+ijTNNX3miwfZ2uex3Ro1WX=XzoSoBWg_HA@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/4] console: remove #ifdef
-	CONFIG_CONSOLE_RECORD
+Subject: Re: [Uboot-stm32] [PATCH 4/4] console: add console_tstc_check
+	helper function for CONSOLE_MUX
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,156 +72,86 @@ Hi Patrick,
 
 On Thu, 3 Dec 2020 at 02:20, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Add helper functions to access to gd->console_out and gd->console_in
-> with membuff API and replace the #ifdef CONFIG_CONSOLE_RECORD test
-> by if (IS_ENABLED(CONFIG_CONSOLE_RECORD)) to respect the U-Boot
-> coding rule.
+> Add the helper function console_tstc_check() and replace the test
+> #if CONFIG_IS_ENABLED(CONSOLE_MUX) to a simple if to respect the
+> U-Boot coding rule.
+>
+> No functional change.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> # Conflicts:
-> #       common/console.c
 > ---
 >
->  common/console.c | 86 +++++++++++++++++++++++++++++++++++++-----------
->  1 file changed, 66 insertions(+), 20 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But see below
-
+>  common/console.c | 36 ++++++++++++++++++++++++------------
+>  1 file changed, 24 insertions(+), 12 deletions(-)
 >
 > diff --git a/common/console.c b/common/console.c
-> index 9a63eaa664..0b864444bb 100644
+> index 0b864444bb..c570cd88cf 100644
 > --- a/common/console.c
 > +++ b/common/console.c
-> @@ -88,6 +88,56 @@ static int on_silent(const char *name, const char *value, enum env_op op,
->  U_BOOT_ENV_CALLBACK(silent, on_silent);
->  #endif
+> @@ -248,6 +248,12 @@ static int console_getc(int file)
+>         return ret;
+>  }
 >
-> +#ifdef CONFIG_CONSOLE_RECORD
-> +/* helper function: access to gd->console_out and gd->console_in */
-> +static void console_record_putc(const char c)
-> +{
-> +       if  (gd->console_out.start)
-> +               membuff_putbyte((struct membuff *)&gd->console_out, c);
-> +}
-> +
-> +static void console_record_puts(const char *s)
-> +{
-> +       if  (gd->console_out.start)
-> +               membuff_put((struct membuff *)&gd->console_out, s, strlen(s));
-> +}
-> +
-> +static int console_record_getc(void)
-> +{
-> +       if (!gd->console_in.start)
-> +               return -1;
-> +
-> +       return membuff_getbyte((struct membuff *)&gd->console_in);
-> +}
-> +
-> +static int console_record_tstc(void)
-> +{
-> +       if (gd->console_in.start) {
-> +               if (membuff_peekbyte((struct membuff *)&gd->console_in) != -1)
-> +                       return 1;
-> +       }
-> +       return 0;
-> +}
-> +#else
-> +static void console_record_putc(char c)
-> +{
-> +}
-> +
-> +static void console_record_puts(const char *s)
-> +{
-> +}
-> +
-> +static int console_record_getc(void)
-> +{
-> +       return -1;
-> +}
-> +
-> +static int console_record_tstc(void)
-> +{
-> +       return 0;
-> +}
-> +#endif
-> +
->  #if CONFIG_IS_ENABLED(SYS_CONSOLE_IS_IN_ENV)
->  /*
->   * if overwrite_console returns 1, the stdin, stderr and stdout
-> @@ -420,15 +470,13 @@ int getchar(void)
->         if (!gd->have_console)
->                 return 0;
->
-> -#ifdef CONFIG_CONSOLE_RECORD
-> -       if (gd->console_in.start) {
-> -               int ch;
-> +       if (IS_ENABLED(CONFIG_CONSOLE_RECORD)) {
-> +               int ch = console_record_getc();
->
-> -               ch = membuff_getbyte((struct membuff *)&gd->console_in);
->                 if (ch != -1)
-> -                       return 1;
-> +                       return ch;
->         }
-> -#endif
-> +
->         if (gd->flags & GD_FLG_DEVINIT) {
->                 /* Get from the standard input */
->                 return fgetc(stdin);
-> @@ -445,12 +493,10 @@ int tstc(void)
->
->         if (!gd->have_console)
->                 return 0;
-> -#ifdef CONFIG_CONSOLE_RECORD
-> -       if (gd->console_in.start) {
-> -               if (membuff_peekbyte((struct membuff *)&gd->console_in) != -1)
-> -                       return 1;
-> -       }
-> -#endif
-> +
-> +       if (IS_ENABLED(CONFIG_CONSOLE_RECORD) && console_record_tstc())
-> +               return 1;
-> +
->         if (gd->flags & GD_FLG_DEVINIT) {
->                 /* Test the standard input */
->                 return ftstc(stdin);
-> @@ -521,10 +567,10 @@ void putc(const char c)
->  {
->         if (!gd)
->                 return;
-> -#ifdef CONFIG_CONSOLE_RECORD
-> -       if ((gd->flags & GD_FLG_RECORD) && gd->console_out.start)
-> -               membuff_putbyte((struct membuff *)&gd->console_out, c);
-> -#endif
-> +
-> +       if (IS_ENABLED(CONFIG_CONSOLE_RECORD) && (gd->flags & GD_FLG_RECORD))
-> +               console_record_putc(c);
+> +/*  Upper layer may have already called tstc(): check the saved result */
+> +static bool console_tstc_check(void)
 
-Given your functions above I wonder why you need the IS_ENABLED()
-here? Maybe even move the gd-.flags check into those functions?
+This is checking if we actually have a device, right? I think
+has_tstcdev() would be better.
 
+Also could you add a comment in the testcdev variable declaration as
+to what this variable actually is for?
+
+> +{
+> +       return !!tstcdev;
+> +}
 > +
->  #ifdef CONFIG_SANDBOX
->         /* sandbox can send characters to stdout before it has a console */
->         if (!(gd->flags & GD_FLG_SERIAL_READY)) {
-> @@ -564,10 +610,10 @@ void puts(const char *s)
+>  static int console_tstc(int file)
 >  {
->         if (!gd)
->                 return;
-> -#ifdef CONFIG_CONSOLE_RECORD
-> -       if ((gd->flags & GD_FLG_RECORD) && gd->console_out.start)
-> -               membuff_put((struct membuff *)&gd->console_out, s, strlen(s));
+>         int i, ret;
+> @@ -340,6 +346,11 @@ static inline int console_getc(int file)
+>         return stdio_devices[file]->getc(stdio_devices[file]);
+>  }
+>
+> +static bool console_tstc_check(void)
+> +{
+> +       return false;
+> +}
+> +
+>  static inline int console_tstc(int file)
+>  {
+>         return stdio_devices[file]->tstc(stdio_devices[file]);
+> @@ -397,18 +408,19 @@ int fgetc(int file)
+>                  */
+>                 for (;;) {
+>                         WATCHDOG_RESET();
+> -#if CONFIG_IS_ENABLED(CONSOLE_MUX)
+> -                       /*
+> -                        * Upper layer may have already called tstc() so
+> -                        * check for that first.
+> -                        */
+> -                       if (tstcdev != NULL)
+> -                               return console_getc(file);
+> -                       console_tstc(file);
+> -#else
+> -                       if (console_tstc(file))
+> -                               return console_getc(file);
 > -#endif
+> +                       if (CONFIG_IS_ENABLED(CONSOLE_MUX)) {
+> +                               /*
+> +                                * Upper layer may have already called tstc() so
+> +                                * check for that first.
+> +                                */
+> +                               if (console_tstc_check())
+> +                                       return console_getc(file);
+> +                               console_tstc(file);
+> +                       } else {
+> +                               if (console_tstc(file))
+> +                                       return console_getc(file);
+> +                       }
 > +
-> +       if (IS_ENABLED(CONFIG_CONSOLE_RECORD) && (gd->flags & GD_FLG_RECORD))
-> +               console_record_puts(s);
-> +
->  #ifdef CONFIG_SANDBOX
->         /* sandbox can send characters to stdout before it has a console */
->         if (!(gd->flags & GD_FLG_SERIAL_READY)) {
+>                         /*
+>                          * If the watchdog must be rate-limited then it should
+>                          * already be handled in board-specific code.
 > --
 > 2.17.1
 >

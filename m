@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C02862DE22F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Dec 2020 12:46:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5C4A2DE232
+	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Dec 2020 12:46:57 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75C82C5717F;
-	Fri, 18 Dec 2020 11:46:56 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1FB8C57185;
+	Fri, 18 Dec 2020 11:46:57 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B1B3C5717E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 97902C57184
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 18 Dec 2020 11:46:54 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri, 18 Dec 2020 11:46:56 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 0BIBbsHk014131; Fri, 18 Dec 2020 12:46:52 +0100
+ 0BIBbfpm002900; Fri, 18 Dec 2020 12:46:53 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-type; s=selector1;
- bh=6+j4++KxPHczwJHaVqRwPW2wXSENGynm89sPxdIdYQ0=;
- b=2m7KQTAsI0XZzqXdxLjGiZ1wXAAFkX4Z/5PaYySyBQKvlnWrrT29Qgi/41umRenZycB0
- jd0tZvRFCQy0ps88iy+uREo7roAKTLQALWWZJawpgdWW9J0FPmHEUAjl8qbhkdhaxMQG
- EE67J45iuLhwjXUMUfqKFj6Msi6QLg/BDjALBK0g6v+bflZ60V7G5EvKOasKgdnW3UUk
- 3sg/6QdLdSNrOec+tzLsHxlx6WzUhIRsnU46sS72nI7xwvn3uJigooGhUplwfC9GWjEF
- tbFPhg3DR25lF7Ave2G6scKH881aFqaJ0LLFNNGofpyQtuGFbFgeUQ3f1fz3yRoGHzBb rA== 
+ bh=zots2ErolWJpF8jeQuSz2JFafjBPbkoZN/7BDdt+w34=;
+ b=STPo1AcknJ3lYB1hfgvxkIwRcelC1/dNFnfLXPOWxb+UpHf5AtZRvyQvMnnc4DRNmfus
+ qWaEaY/5RImjc3tS8KudO3lH0utJspQ1a96/Ym+KSqELM2GK6I9cZyPjI0Ts6FwdKio0
+ JLtkHioQNs3Ruub/onRpZ1psyo+z+LSlUBGsQ4gbE9r1vyZMtqcpPT5EWvYf0R+/rcx5
+ r5juQjZKWZWNw8igTMs5TjXv7QKkp85Kg5wuXWBfDMTaNH0Nya3wQFP5FiNqGFI202UB
+ bf2dmcpmmzCBv1PjyIdv0fE9RXsBuomtM59hskxy8jQedas5qkIF9o6AHZD6MBU/kyEP tA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35cq03e73v-1
+ by mx07-00178001.pphosted.com with ESMTP id 35cpwep992-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Fri, 18 Dec 2020 12:46:52 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8625110002A;
- Fri, 18 Dec 2020 12:46:51 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6ECCF10002A;
+ Fri, 18 Dec 2020 12:46:52 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7B0CA23FF1F;
- Fri, 18 Dec 2020 12:46:51 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 62A7623FF1F;
+ Fri, 18 Dec 2020 12:46:52 +0100 (CET)
+Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
  with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 18 Dec 2020 12:46:51
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 18 Dec 2020 12:46:45 +0100
-Message-ID: <20201218124642.v3.3.I3e15d39becc5c180a3be52571bb570e29c6b4cd0@changeid>
+Date: Fri, 18 Dec 2020 12:46:46 +0100
+Message-ID: <20201218124642.v3.4.I810a6b37da2c8aa13ca2e20408a8d54b08e2ef32@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20201218114646.9902-1-patrick.delaunay@foss.st.com>
 References: <20201218114646.9902-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
  definitions=2020-12-18_06:2020-12-18,
@@ -59,8 +59,8 @@ Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>
-Subject: [Uboot-stm32] [PATCH v3 3/4] console: remove #ifdef
-	CONFIG_CONSOLE_RECORD
+Subject: [Uboot-stm32] [PATCH v3 4/4] console: add console_has_tstc helper
+	function for CONSOLE_MUX
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,166 +79,95 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: Patrick Delaunay <patrick.delaunay@st.com>
 
-Add helper functions to access to gd->console_out and gd->console_in
-with membuff API and replace the #ifdef CONFIG_CONSOLE_RECORD test
-by if (IS_ENABLED(CONFIG_CONSOLE_RECORD)) to respect the U-Boot
-coding rule.
+Add the helper function console_has_tstc() and replace the test
+#if CONFIG_IS_ENABLED(CONSOLE_MUX) to a simple 'if' test to
+respect the U-Boot coding rule.
+
+No functional change.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
-(no changes since v2)
+Changes in v3:
+- update commit message with new function name console_has_tstc
 
 Changes in v2:
-- move the tests on gd->flags & GD_FLG_RECORD in helper functions
-- remove test on IS_ENABLED(CONFIG_CONSOLE_RECORD)
-  before to call helper functions
+- add comment for tstcdev variable
+- rename console_tstc_check to console_has_tstc
 
- common/console.c | 95 +++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 73 insertions(+), 22 deletions(-)
+ common/console.c | 37 +++++++++++++++++++++++++------------
+ 1 file changed, 25 insertions(+), 12 deletions(-)
 
 diff --git a/common/console.c b/common/console.c
-index 036dd0358a..295c10f242 100644
+index 295c10f242..e82b5d2075 100644
 --- a/common/console.c
 +++ b/common/console.c
-@@ -88,6 +88,64 @@ static int on_silent(const char *name, const char *value, enum env_op op,
- U_BOOT_ENV_CALLBACK(silent, on_silent);
- #endif
+@@ -231,6 +231,7 @@ static bool console_dev_is_serial(struct stdio_dev *sdev)
+ #if CONFIG_IS_ENABLED(CONSOLE_MUX)
+ /** Console I/O multiplexing *******************************************/
  
-+#ifdef CONFIG_CONSOLE_RECORD
-+/* helper function: access to gd->console_out and gd->console_in */
-+static void console_record_putc(const char c)
-+{
-+	if (!(gd->flags & GD_FLG_RECORD))
-+		return;
-+	if  (gd->console_out.start)
-+		membuff_putbyte((struct membuff *)&gd->console_out, c);
-+}
-+
-+static void console_record_puts(const char *s)
-+{
-+	if (!(gd->flags & GD_FLG_RECORD))
-+		return;
-+	if  (gd->console_out.start)
-+		membuff_put((struct membuff *)&gd->console_out, s, strlen(s));
-+}
-+
-+static int console_record_getc(void)
-+{
-+	if (!(gd->flags & GD_FLG_RECORD))
-+		return -1;
-+	if (!gd->console_in.start)
-+		return -1;
-+
-+	return membuff_getbyte((struct membuff *)&gd->console_in);
-+}
-+
-+static int console_record_tstc(void)
-+{
-+	if (!(gd->flags & GD_FLG_RECORD))
-+		return 0;
-+	if (gd->console_in.start) {
-+		if (membuff_peekbyte((struct membuff *)&gd->console_in) != -1)
-+			return 1;
-+	}
-+	return 0;
-+}
-+#else
-+static void console_record_putc(char c)
-+{
-+}
-+
-+static void console_record_puts(const char *s)
-+{
-+}
-+
-+static int console_record_getc(void)
-+{
-+	return -1;
-+}
-+
-+static int console_record_tstc(void)
-+{
-+	return 0;
-+}
-+#endif
-+
- #if CONFIG_IS_ENABLED(SYS_CONSOLE_IS_IN_ENV)
- /*
-  * if overwrite_console returns 1, the stdin, stderr and stdout
-@@ -414,21 +472,18 @@ int fprintf(int file, const char *fmt, ...)
++/* tstcdev: save the last stdio device with pending characters, with tstc != 0 */
+ static struct stdio_dev *tstcdev;
+ struct stdio_dev **console_devices[MAX_FILES];
+ int cd_count[MAX_FILES];
+@@ -256,6 +257,12 @@ static int console_getc(int file)
+ 	return ret;
+ }
  
- int getchar(void)
++/*  Upper layer may have already called tstc(): check the saved result */
++static bool console_has_tstc(void)
++{
++	return !!tstcdev;
++}
++
+ static int console_tstc(int file)
  {
-+	int ch;
+ 	int i, ret;
+@@ -348,6 +355,11 @@ static inline int console_getc(int file)
+ 	return stdio_devices[file]->getc(stdio_devices[file]);
+ }
+ 
++static bool console_has_tstc(void)
++{
++	return false;
++}
 +
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return 0;
- 
- 	if (!gd->have_console)
- 		return 0;
- 
--#ifdef CONFIG_CONSOLE_RECORD
--	if (gd->console_in.start) {
--		int ch;
-+	ch = console_record_getc();
-+	if (ch != -1)
-+		return ch;
- 
--		ch = membuff_getbyte((struct membuff *)&gd->console_in);
--		if (ch != -1)
--			return 1;
--	}
--#endif
- 	if (gd->flags & GD_FLG_DEVINIT) {
- 		/* Get from the standard input */
- 		return fgetc(stdin);
-@@ -445,12 +500,10 @@ int tstc(void)
- 
- 	if (!gd->have_console)
- 		return 0;
--#ifdef CONFIG_CONSOLE_RECORD
--	if (gd->console_in.start) {
--		if (membuff_peekbyte((struct membuff *)&gd->console_in) != -1)
--			return 1;
--	}
--#endif
-+
-+	if (console_record_tstc())
-+		return 1;
-+
- 	if (gd->flags & GD_FLG_DEVINIT) {
- 		/* Test the standard input */
- 		return ftstc(stdin);
-@@ -521,10 +574,9 @@ void putc(const char c)
+ static inline int console_tstc(int file)
  {
- 	if (!gd)
- 		return;
--#ifdef CONFIG_CONSOLE_RECORD
--	if ((gd->flags & GD_FLG_RECORD) && gd->console_out.start)
--		membuff_putbyte((struct membuff *)&gd->console_out, c);
+ 	return stdio_devices[file]->tstc(stdio_devices[file]);
+@@ -405,18 +417,19 @@ int fgetc(int file)
+ 		 */
+ 		for (;;) {
+ 			WATCHDOG_RESET();
+-#if CONFIG_IS_ENABLED(CONSOLE_MUX)
+-			/*
+-			 * Upper layer may have already called tstc() so
+-			 * check for that first.
+-			 */
+-			if (tstcdev != NULL)
+-				return console_getc(file);
+-			console_tstc(file);
+-#else
+-			if (console_tstc(file))
+-				return console_getc(file);
 -#endif
++			if (CONFIG_IS_ENABLED(CONSOLE_MUX)) {
++				/*
++				 * Upper layer may have already called tstc() so
++				 * check for that first.
++				 */
++				if (console_has_tstc())
++					return console_getc(file);
++				console_tstc(file);
++			} else {
++				if (console_tstc(file))
++					return console_getc(file);
++			}
 +
-+	console_record_putc(c);
-+
- 	/* sandbox can send characters to stdout before it has a console */
- 	if (IS_ENABLED(CONFIG_SANDBOX) && !(gd->flags & GD_FLG_SERIAL_READY)) {
- 		os_putc(c);
-@@ -563,10 +615,9 @@ void puts(const char *s)
- {
- 	if (!gd)
- 		return;
--#ifdef CONFIG_CONSOLE_RECORD
--	if ((gd->flags & GD_FLG_RECORD) && gd->console_out.start)
--		membuff_put((struct membuff *)&gd->console_out, s, strlen(s));
--#endif
-+
-+	console_record_puts(s);
-+
- 	/* sandbox can send characters to stdout before it has a console */
- 	if (IS_ENABLED(CONFIG_SANDBOX) && !(gd->flags & GD_FLG_SERIAL_READY)) {
- 		os_puts(s);
+ 			/*
+ 			 * If the watchdog must be rate-limited then it should
+ 			 * already be handled in board-specific code.
 -- 
 2.17.1
 

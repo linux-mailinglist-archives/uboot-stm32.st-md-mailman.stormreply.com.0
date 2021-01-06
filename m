@@ -2,63 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B84822EBD84
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Jan 2021 13:12:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D47C2EBDEB
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Jan 2021 13:57:02 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6C683C56634;
-	Wed,  6 Jan 2021 12:12:33 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09AFCC56634;
+	Wed,  6 Jan 2021 12:57:02 +0000 (UTC)
+Received: from mail-il1-f176.google.com (mail-il1-f176.google.com
+ [209.85.166.176])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BE5ABC5662E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF7F8C3FAD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  6 Jan 2021 12:12:31 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 106C7gfG023800; Wed, 6 Jan 2021 13:12:27 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : subject : to
- : cc : message-id : date : mime-version : content-type :
- content-transfer-encoding; s=selector1;
- bh=bcJeirHdQrCznVk6CuuZEYM76ByzBzPzcmzNwqbO1jk=;
- b=GH4lazdXOEmEuK3DYzRgUfDR80AZxfGhZvskEYOATglez0suXk2XdfC41Duam8UL/KQV
- rolZPD+Xs3XklY/j96wFmJ+HFgXgukVSoafayfT3JbppjUMU/HQeKA6bI4yUKXL+9nr4
- mVRtjWOp9C2ZWSqM0mP+MgdDKPOJHn89ytqAYFnHnfO2t/6AR/ZIXzoP92t3NDImZFiT
- DdEvektLJKYGaJo76EH7EkanRXA5Tq+4LTFyneRGGvIch6gSi+fg6lKF+ZiJ3b2TgWiy
- WdupMfk+CYh9HsFho9ciB3G8P5bi/GCpRDgLEQdNklM73lwAxdit+P1KfnQPPMmzTSfB 1A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35tf672vw9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 06 Jan 2021 13:12:27 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E6F5610002A;
- Wed,  6 Jan 2021 13:12:26 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D26DE24E772;
- Wed,  6 Jan 2021 13:12:26 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 6 Jan
- 2021 13:12:26 +0100
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Message-ID: <e362403d-b543-cd5c-1edb-41aa3afba728@foss.st.com>
-Date: Wed, 6 Jan 2021 13:12:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Wed,  6 Jan 2021 12:56:59 +0000 (UTC)
+Received: by mail-il1-f176.google.com with SMTP id b10so1047672ilr.4
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 06 Jan 2021 04:56:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=xT1x9Nf4bHZ1L9ak8zDW8FK2lA0T/EPOdiT/JhHHZbQ=;
+ b=kC++r1Z3ejKB7G6DMpk5DDdT2IQbE/gt9rG+7KxEygh32aB1hIUCdVzAHPQXOo3z6X
+ zvdfFVZ7n7Nk4nA4R2aYHavvX+rZLlc+JP7YsIs8Lwa1bhDb6C6qbeTdX5PDo/DJ2auw
+ tQlkm3bAgxfWxf/Oo3UjUm70FN38OzDkbB4RU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=xT1x9Nf4bHZ1L9ak8zDW8FK2lA0T/EPOdiT/JhHHZbQ=;
+ b=jE+iyzBOvhq8voa7fuMacN8C3EwziA5ND/1m1EjXMx5o1UmSA/7SH30GOGEELW3XyD
+ /Hr2h8SHT9xzquhRVEmb9ewCdWjCdnHFH1415nCEazO2LRHAStPG+aa6FK3R1tCo8qP7
+ ToKpw2NC5VvYMBiPl9CbTfP3DwyJpyzq99i01LwTRDgAeanAfCBwX79Xk3dpCf3jay/4
+ NJmhky/a73wHVjbZWTLnuxc/lX4WwQAZt63jdRsTcKEpyXoayUvur4v5fukM0gdlFSIR
+ rVMpFaxIAl/58W/Vk9fmGAfio4rxaY/EZBK8uyFps3o/ghu8timEogPVGp/IdrQPASqx
+ /ooA==
+X-Gm-Message-State: AOAM533kUEl92LTgAqCFTDvCYFsdNqoeRfrnfrCEACDfaFZCsv3WNtNP
+ D/yPTjVQerU59waQAyO/l8M46Q==
+X-Google-Smtp-Source: ABdhPJz5obzatOiWf0zaNqt0lM83e9AYp45RqemDUUYkgqm/TZ5bqkxPcW4dTiNj/xzIaRnnykYjnw==
+X-Received: by 2002:a05:6e02:1bcc:: with SMTP id
+ x12mr2122905ilv.28.1609937818706; 
+ Wed, 06 Jan 2021 04:56:58 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b42-3f4c-54e3-fb4c-b632-751c.res6.spectrum.com.
+ [2603:6081:7b42:3f4c:54e3:fb4c:b632:751c])
+ by smtp.gmail.com with ESMTPSA id o62sm1386791iof.5.2021.01.06.04.56.57
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 06 Jan 2021 04:56:58 -0800 (PST)
+Date: Wed, 6 Jan 2021 07:56:55 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20210106125655.GP2292@bill-the-cat>
+References: <e362403d-b543-cd5c-1edb-41aa3afba728@foss.st.com>
 MIME-Version: 1.0
-Content-Language: en-US
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
- definitions=2021-01-06_06:2021-01-06,
- 2021-01-06 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
+In-Reply-To: <e362403d-b543-cd5c-1edb-41aa3afba728@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>
-Subject: [Uboot-stm32] [PULL] Pull request for u-boot master / v2021.01 =
- u-boot-stm32-20210106
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2021.01
+ = u-boot-stm32-20210106
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,34 +72,93 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============1117220187682590608=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CkhpIFRvbSwKClBsZWFzZSBwdWxsIHRoZSBsYXRlc3QgU1RNMzIgcmVsYXRlZCBwYXRjaGVzIGZv
-ciB1LWJvb3QvbWFzdGVyLCAKdjIwMjEuMDE6IHUtYm9vdC1zdG0zMi0yMDIxMDEwNgoKLSBGaXgg
-R1BJTyBob2cgZmxhZ3Mgb24gREhDT00gYm9hcmRzCgpDSSBzdGF0dXM6IApodHRwczovL2dpdGxh
-Yi5kZW54LmRlL3UtYm9vdC9jdXN0b2RpYW5zL3UtYm9vdC1zdG0vLS9waXBlbGluZXMvNTc2NAoK
-VGhhbmtzLApQYXRyaWNrCgpnaXQgcmVxdWVzdC1wdWxsIG9yaWdpbi9tYXN0ZXIgCmh0dHBzOi8v
-Z2l0bGFiLmRlbnguZGUvdS1ib290L2N1c3RvZGlhbnMvdS1ib290LXN0bS5naXQgCnUtYm9vdC1z
-dG0zMi0yMDIxMDEwNgoKVGhlIGZvbGxvd2luZyBjaGFuZ2VzIHNpbmNlIGNvbW1pdCA2MmIwN2I1
-MTczZTNkMDRmYWJmYWM0MmNmMWY0Nzc5ZDAyMWY5NGFkOgoKIMKgIFByZXBhcmUgdjIwMjEuMDEt
-cmM1ICgyMDIxLTAxLTA1IDA3OjMwOjM5IC0wNTAwKQoKYXJlIGF2YWlsYWJsZSBpbiB0aGUgR2l0
-IHJlcG9zaXRvcnkgYXQ6CgogwqAgaHR0cHM6Ly9naXRsYWIuZGVueC5kZS91LWJvb3QvY3VzdG9k
-aWFucy91LWJvb3Qtc3RtLmdpdCAKdGFncy91LWJvb3Qtc3RtMzItMjAyMTAxMDYKCmZvciB5b3Ug
-dG8gZmV0Y2ggY2hhbmdlcyB1cCB0byBlYzRlZmQ1YWU3MjRjNTFjZjQwNDM3ZmE0YzZiZDc1OGQz
-ODE2YmNkOgoKIMKgIEFSTTogZHRzOiBzdG0zMjogRml4IEdQSU8gaG9nIGZsYWdzIG9uIERIQ09N
-IERSQzAyICgyMDIxLTAxLTA2IAoxMTowMTozMSArMDEwMCkKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLSBGaXggR1BJTyBo
-b2cgZmxhZ3Mgb24gREhDT00gYm9hcmRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCk1hcmVrIFZhc3V0ICgyKToKIMKgwqDC
-oMKgwqAgQVJNOiBkdHM6IHN0bTMyOiBGaXggR1BJTyBob2cgZmxhZ3Mgb24gREhDT00gUGljb0lU
-WAogwqDCoMKgwqDCoCBBUk06IGR0czogc3RtMzI6IEZpeCBHUElPIGhvZyBmbGFncyBvbiBESENP
-TSBEUkMwMgoKIMKgYXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRoY29tLWRyYzAyLmR0c8KgwqAg
-fCA0ICsrLS0KIMKgYXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRoY29tLXBpY29pdHguZHRzIHwg
-MiArLQogwqAyIGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0
-bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29t
-Cmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vi
-b290LXN0bTMyCg==
+
+--===============1117220187682590608==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ZmZU9S7l/XJx5q9b"
+Content-Disposition: inline
+
+
+--ZmZU9S7l/XJx5q9b
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jan 06, 2021 at 01:12:26PM +0100, Patrick DELAUNAY wrote:
+
+>=20
+> Hi Tom,
+>=20
+> Please pull the latest STM32 related patches for u-boot/master, v2021.01:
+> u-boot-stm32-20210106
+>=20
+> - Fix GPIO hog flags on DHCOM boards
+>=20
+> CI status:
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/5764
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+> u-boot-stm32-20210106
+>=20
+> The following changes since commit 62b07b5173e3d04fabfac42cf1f4779d021f94=
+ad:
+>=20
+> =A0 Prepare v2021.01-rc5 (2021-01-05 07:30:39 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+> tags/u-boot-stm32-20210106
+>=20
+> for you to fetch changes up to ec4efd5ae724c51cf40437fa4c6bd758d3816bcd:
+>=20
+> =A0 ARM: dts: stm32: Fix GPIO hog flags on DHCOM DRC02 (2021-01-06 11:01:=
+31
+> +0100)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--ZmZU9S7l/XJx5q9b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAl/1s5cACgkQFHw5/5Y0
+tyxYDQv/ZxsDGBuDtM4kgJrXcHqLDppYh+O5FExUPCzC1Ak556wCxKjgvh5ZP/tJ
+YOHYzXIuT5httWp/feOV5sT+tmsl02CA+PoEzqm2OhFVCbgLv9vDw7OInFLszPvq
+aj3OYQdF9rm1u32fZ81FSpO1eX7nqGYDlxTqbBRNaUrVQYYRDHlo4rBtfGKRW91+
+3dJ1nynR5Yrjm5u85OlclnhxB2Ifm0ZIZIlaVgwJ8XkGymr9iNtiYM6c7UBE8b4J
+TlXjTht/RTP+f40bRaw6K5evSY1T0Q7EITlUx1cFLyIm8gsXeyUWYWwUPwHJkUAd
+dG4dtuMhzCeXVpPq6sXoOec+mEFVMUU9yNBnBvOqLnLaBChbpWhRcSPQ3eBSZT36
+Pvase8QnkbVefmXHspuqDC9kfF6Y/XeZYaAxjWTgpmnevcPaKg/HUqaK353v119F
+7Mzh6lFfU+yowMYNZzkPivvETu84fRf6jgvUewV5SZpdaooOO4CsOcwEarYURSGL
+1VS4dsca
+=Uj1b
+-----END PGP SIGNATURE-----
+
+--ZmZU9S7l/XJx5q9b--
+
+--===============1117220187682590608==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1117220187682590608==--

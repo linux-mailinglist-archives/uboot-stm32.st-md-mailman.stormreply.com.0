@@ -2,49 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 599F12F122C
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Jan 2021 13:15:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54AB12F1742
+	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Jan 2021 15:03:56 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2D3E2C424C0;
-	Mon, 11 Jan 2021 12:15:11 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04AB2C32EA7;
+	Mon, 11 Jan 2021 14:03:56 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 50CCBC32EA7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 131F6C32EA7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Jan 2021 12:15:08 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4DDt2350b2z1qs3d;
- Mon, 11 Jan 2021 13:15:07 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 4DDt233YD8z1qr4M;
- Mon, 11 Jan 2021 13:15:07 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id kISlVmjp1A5c; Mon, 11 Jan 2021 13:15:05 +0100 (CET)
-X-Auth-Info: nlPJMPa4agiNKxKzavF84eGlKODZ/qZkwTcl7nsCWSQ=
-Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Mon, 11 Jan 2021 13:15:05 +0100 (CET)
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20210111123329.1.I62e8df98aef0f695209fcc494c90777fb5beccb4@changeid>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <f8971553-1707-481d-b9a7-87acff670dc8@denx.de>
-Date: Mon, 11 Jan 2021 13:15:04 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ Mon, 11 Jan 2021 14:03:55 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 10BE2Tcx014172; Mon, 11 Jan 2021 15:03:53 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=CW89HtLUJgci9Fpx8c1z7w5tPSJkBnJubSHt8ybONxQ=;
+ b=ASsvoHshIUHWaPbqm8FmuRTONHtmljQd6G2Pp2bTiGxLrwlhRhDaFvrYkNGv4FO57UZg
+ 79EVQQaFVXON6b9k6HIVkwUhmf9+u/A9lolBdouSUCyHKcwCR7jSQDJ5ECjvlD9aQrXM
+ xGyDaFILsUz/oYS/ml4q8FN8c8U41fEtb5t+Zi1hN6tk1eRm9V6paMiguBRKsc2XjiCX
+ BwhOwThCegGoQ9SGNn/3pXQdsFmL2fgHVWUCbhZyQpQLicpePSRDGO6Gr19Se5aExDoq
+ Xc3Fo6MhOFFiYDk8qkWfVE+ce7njyFcbmpmEPQBlp8BBSyvE6RmPziywf6ErPmMYBTjc 0w== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 35yp3xf5j3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 11 Jan 2021 15:03:53 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BBBA5100038;
+ Mon, 11 Jan 2021 15:03:52 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9733D2B4D28;
+ Mon, 11 Jan 2021 15:03:52 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 11 Jan 2021 15:03:52
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 11 Jan 2021 15:03:45 +0100
+Message-ID: <20210111140347.5754-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20210111123329.1.I62e8df98aef0f695209fcc494c90777fb5beccb4@changeid>
-Content-Language: en-US
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with
-	v5.11-rc2
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
+ definitions=2021-01-11_26:2021-01-11,
+ 2021-01-11 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 0/2] Fix pinmux status display with long pin's
+	name
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -56,40 +68,31 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 1/11/21 12:33 PM, Patrick Delaunay wrote:
-> Device tree alignment with Linux kernel v5.11-rc2
-> - fix DCMI DMA features on stm32mp15 family
-> - Add alternate pinmux for FMC EBI bus
-> - Harmonize EHCI/OHCI DT nodes name on stm32mp15
-> - update sdmmc IP version for STM32MP15
-> - Add LP timer irqs on stm32mp151
-> - Add LP timer wakeup-source on stm32mp151
-> - enable HASH by default on stm32mp15
-> - enable CRC1 by default on stm32mp15
-> - enable CRYP by default on stm32mp15
-> - set bus-type in DCMI endpoint for stm32mp157c-ev1 board
-> - reorder spi4 within stm32mp15-pinctrl
-> - add STUSB1600 Type-C using I2C4 on stm32mp15xx-dkx
-> - fix mdma1 clients channel priority level on stm32mp151
-> - fix dmamux reg property on stm32mp151
-> - adjust USB OTG gadget fifo sizes in stm32mp151
-> - update stm32mp151 for remote proc synchronization support
-> - support child mfd cells for the stm32mp1 TAMP syscon
 
-Are you completely sure the dhcom based boards generate the same DT 
-after the sync ?
+This series is fixing 2 issue when pin-controller pin's
+name are long :
+  _ First issue is concerning stmfx pin-controller which pin's name
+    is at least 13 char long but only 10 can be displayed.
+  _ Second issue is about pinmux command which is using PINNAME_SIZE
+    which need to be increased to displayed long pin's name.
 
-I would rather prefer sync with Linux 5.10 (LTS), or is that not an 
-option due to some extra DT patches ?
 
-Either way, if you have an upstream queue for this DT sync somewhere, 
-please give me a link, I plan to sync the dhcom boards after 2021.01 is 
-out, so I would build on top of that.
+Patrice Chotard (2):
+  pinctrl: stmfx: Fix MAX_PIN_NAME_LEN
+  pinctrl: Set PINNAME_SIZE to 16
+
+ drivers/pinctrl/pinctrl-stmfx.c | 2 +-
+ include/dm/pinctrl.h            | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

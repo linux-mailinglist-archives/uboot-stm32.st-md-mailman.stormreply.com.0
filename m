@@ -2,65 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B12762F485C
-	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Jan 2021 11:15:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE09A2F486B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Jan 2021 11:16:17 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7B1DAC32EA8;
-	Wed, 13 Jan 2021 10:15:37 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A57C3C32EA8;
+	Wed, 13 Jan 2021 10:16:17 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5A758C36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B15B6C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 13 Jan 2021 10:15:33 +0000 (UTC)
+ Wed, 13 Jan 2021 10:16:16 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 10DACYIm000652; Wed, 13 Jan 2021 11:15:33 +0100
+ 10DACXDZ000640; Wed, 13 Jan 2021 11:16:15 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=K9nK/xeDPz9AEaGq4Oz7PWy/DOZUM6M4nk7oWLux6+s=;
- b=NYuRXmrPdmo/tPUVpNkJZJEAzqW0Y6niYIUdv/UwNKy20SJirBDg1RanB82nvgBm6rOl
- dKH38TNlkPRfoTGnLGqDS/K985QQcazfDyHJNT+2QL1sGS7Bn6gsUYML+ZZvDjZJ1jbG
- gyS4suxtk2+Az4INaGfsrF/zs066GjkHt2+t78VwWhUmaf5W8VD9cBvT/g0StE962gMF
- 5QtVDzv/kbFwg7jHvAPp8pYgfZlIUFEw1v4whyjs1FxoxvOoLWXQq5ocAeBddg51Q1wl
- zTX4o3aR4vP2ISNC76nDVf06FuxCEUVkmNRVjJWEmdqrS9SFmN5X64VRLpmuJIXSq4mN xQ== 
+ bh=dI3+i1Y80SrSA3YHU2hPsboG6R9sWdR6uWb+Ys3GRQE=;
+ b=gC5fXJDa9GrQu3VDwKDKfP/oEsiSRklNcili4N2Kh5JwNQ+SJT+aZTGiOdZokkNoU/e5
+ 4KXNMgtA0OBAkPot5USrEbjRhNvFUNbWrUdNe5Ydg/q3tSaLN3ZvDEStMjcIbPXrRX7U
+ uJH0eQP9ajIL5o4+4vhj4rUnA2s8CstA5f3mbDcxWPY02HVpAvupzMEQlfaprtkPnBMs
+ Se1vzskHoAF0bCiGJrbZrcmCBCdHlW3XmiZZ8W/PAVUfC+53am3NU1IwHkrb3Epkm6H/
+ qxZ9b6s7C567w5JDgz9A03hP859RIiQsqDCyth8SGXuOq2wLDs35vlOJoZcipzIopHbu VQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35y5kypmby-1
+ by mx07-00178001.pphosted.com with ESMTP id 35y5kypmh9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 13 Jan 2021 11:15:33 +0100
+ Wed, 13 Jan 2021 11:16:15 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8706E10002A;
- Wed, 13 Jan 2021 11:15:32 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 13993100034;
+ Wed, 13 Jan 2021 11:16:15 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6CDB8231DD1;
- Wed, 13 Jan 2021 11:15:32 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.50) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BBB26231DD3;
+ Wed, 13 Jan 2021 11:16:14 +0100 (CET)
+Received: from lmecxl0994.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 13 Jan
- 2021 11:15:31 +0100
-To: <u-boot@lists.denx.de>
-References: <20201211153227.1.Ia09f70e65ce3bc2d845ad37b802d6096f690fc94@changeid>
+ 2021 11:16:12 +0100
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+References: <20210104160056.4271-1-patrice.chotard@foss.st.com>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <c7e81c73-6845-cde4-aea2-9a7b6889aee1@foss.st.com>
-Date: Wed, 13 Jan 2021 11:15:25 +0100
+Message-ID: <8d69a3c7-1c66-8988-6782-be1725e28e85@foss.st.com>
+Date: Wed, 13 Jan 2021 11:16:11 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20201211153227.1.Ia09f70e65ce3bc2d845ad37b802d6096f690fc94@changeid>
+In-Reply-To: <20210104160056.4271-1-patrice.chotard@foss.st.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
  definitions=2021-01-13_05:2021-01-13,
  2021-01-13 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp1: activate OF_LIVE for
-	DT live support
+ Simon Glass <sjg@chromium.org>, Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] MAINTAINERS: Update STi and STM32
+ maintainers emails in remaining files
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,25 +78,44 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi,
 
-On 12/11/20 3:32 PM, Patrick Delaunay wrote:
-> Activate the live DT to reduce the DT parsing time.
+On 1/4/21 5:00 PM, Patrice Chotard wrote:
+> A previous series already update STMicroelectronics emails maintainers
+> but some files have been omitted (Makefile, .dts, .dtsi and .rst files).
+> Update Patrick and my email address with the one dedicated to upstream
+> activities.
 >
-> For example the boot time is reduced by 200ms on STM32MP157C-EV1 board
-> for stm32mp15_basic_defconfig (boot with SPL) or
-> stm32mp15_trusted_defconfig (boot with TF-A).
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
-> ...
->   configs/stm32mp15_basic_defconfig   | 1 +
->   configs/stm32mp15_trusted_defconfig | 1 +
->   2 files changed, 2 insertions(+)
 >
+>   arch/arm/dts/stih410-b2260-u-boot.dtsi    | 2 +-
+>   arch/arm/dts/stih410-b2260.dts            | 2 +-
+>   arch/arm/dts/stm32429i-eval-u-boot.dtsi   | 2 +-
+>   arch/arm/dts/stm32f429-disco-u-boot.dtsi  | 2 +-
+>   arch/arm/dts/stm32f469-disco-u-boot.dtsi  | 2 +-
+>   arch/arm/dts/stm32h743i-disco.dts         | 2 +-
+>   board/st/common/MAINTAINERS               | 2 +-
+>   board/st/stih410-b2260/MAINTAINERS        | 2 +-
+>   board/st/stih410-b2260/Makefile           | 2 +-
+>   board/st/stm32f429-evaluation/MAINTAINERS | 2 +-
+>   board/st/stm32f429-evaluation/Makefile    | 2 +-
+>   board/st/stm32f469-discovery/MAINTAINERS  | 2 +-
+>   board/st/stm32f469-discovery/Makefile     | 2 +-
+>   board/st/stm32h743-disco/MAINTAINERS      | 2 +-
+>   board/st/stm32h743-disco/Makefile         | 2 +-
+>   board/st/stm32h743-eval/MAINTAINERS       | 2 +-
+>   board/st/stm32h743-eval/Makefile          | 2 +-
+>   board/st/stm32mp1/MAINTAINERS             | 2 +-
+>   doc/board/st/stm32mp1.rst                 | 2 +-
+>   doc/driver-model/bind.rst                 | 2 +-
+>   20 files changed, 20 insertions(+), 20 deletions(-)
+>
+
 Applied to u-boot-stm/master, thanks!
 
 Regards
 
 Patrick
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 741AB2F77E3
-	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Jan 2021 12:45:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE6002F7D9F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Jan 2021 15:05:08 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 854E8C424BE;
-	Fri, 15 Jan 2021 11:45:58 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9CBF2C424BE;
+	Fri, 15 Jan 2021 14:05:08 +0000 (UTC)
+Received: from mail-io1-f49.google.com (mail-io1-f49.google.com
+ [209.85.166.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7C686C32EA7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B599AC32EA7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 15 Jan 2021 11:45:57 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 10FBb4VP012880; Fri, 15 Jan 2021 12:45:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=ib4+7OCLNVJJU65TtAj5byyGlyvwBQL59tMVU54LXBY=;
- b=Cymo4cQgD0ygucMizlGwhP5l81JYk2AYPizIgb5REoJEbwE/vJbHovbY2skwlC2wDeYT
- cKdR99wUKo68PjmMe9slWPpb6Ci1Zo/R9GS7ophGjEEaZXCTwghpfew36bNb1gL+M3sl
- 4SQ3AB1B98anuN/goibp9IuSbgwT7EV1wMNzMpjHJqZlNc7HPUDfNTAnRksKpBwGX28K
- sou5cCEtAaWl1625DV2j2aiMphmG5jLHltTVpjqVzbP33XyY8WswM9unKmp/fLJe8NCm
- X6qLOKHO6gw326f+VXNq9gIybE5aI/HOnklQtCHKBRAxhTk4UxgIptKwdEbC259XT8Yd hA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 35yp3y8sbu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Jan 2021 12:45:54 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DB38610002A;
- Fri, 15 Jan 2021 12:45:53 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A2A8F232754;
- Fri, 15 Jan 2021 12:45:53 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.44) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 15 Jan
- 2021 12:45:52 +0100
-To: <u-boot@lists.denx.de>
-References: <20210111140347.5754-1-patrice.chotard@foss.st.com>
- <20210111140347.5754-2-patrice.chotard@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <6be35818-82a5-85e6-c1a0-043121a39e61@foss.st.com>
-Date: Fri, 15 Jan 2021 12:45:51 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Fri, 15 Jan 2021 14:05:06 +0000 (UTC)
+Received: by mail-io1-f49.google.com with SMTP id n4so18203383iow.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 15 Jan 2021 06:05:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=dOz75kC1pmLBovza3/e0GIYP1qBAkSCggkCT0UJeGwY=;
+ b=jURkPS+16pS82dcIRX3dKb3Qs5VW42jgL3OmUgGwMpXTheghDptct9qzcwEL2DsUct
+ xxNFfnTUu7TcVOzvsF8Xh4yK0TZ8r7c2FuacloxCcGFzAxfQTwmr4C5ZFGlX2netDGf5
+ kf3039juL6dqzkeKwsaKnJNUtDTmhCJqgiSUE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=dOz75kC1pmLBovza3/e0GIYP1qBAkSCggkCT0UJeGwY=;
+ b=HJQEBSQfmL8npoGEFEJPj2uNfOm4xaxkKjBwPe7UQ5849D/kppyxCSUwbssfkT2Ig4
+ q5sDRmjJqvkQm98hgnSzDt8siNO4AqSmgQWPiTXfvdSCkOSVpXciNZxCbhRxY9iz+AB3
+ GGfyQJjx8Xq5hfcKqmJSgFfEsYj9k/fi7Pil4ICjnSp08DXSbH3FCchYQzuzwqyOAvJi
+ 7jQmLRrnb6HwfmDF8w1+FW4sXxvIAKDhm4Zhag/tb4DkIkkEsMEQnbW9G5LpHp/bLMwj
+ SdZxqNfcjSW43hQqbmxnKIZ1+2E1uBcfGacL8Q0u6LiahchaEiCSx75yLouBCmIOzcDg
+ uAyA==
+X-Gm-Message-State: AOAM530ySwcCFbYdi615Z7EnhHVJSaEeXbepmWwr+sdRHdNsAii+C43U
+ Cq3GJ8hWhLRxwrMap8qntANnLw==
+X-Google-Smtp-Source: ABdhPJzFo66y05DP45sdXPUflJsykVimVDwM6iXQ8OZmnL4UDpd61urnipx081TEBWzv/Gj2/pm/Zg==
+X-Received: by 2002:a05:6638:d8a:: with SMTP id
+ l10mr4834602jaj.2.1610719505704; 
+ Fri, 15 Jan 2021 06:05:05 -0800 (PST)
+Received: from localhost.localdomain (c-67-190-101-114.hsd1.co.comcast.net.
+ [67.190.101.114])
+ by smtp.gmail.com with ESMTPSA id 1sm5664843ilv.37.2021.01.15.06.05.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 15 Jan 2021 06:05:04 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 15 Jan 2021 07:04:45 -0700
+Message-Id: <20210115140500.846307-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.30.0.284.gd98b1dd5eaa7-goog
 MIME-Version: 1.0
-In-Reply-To: <20210111140347.5754-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG4NODE2.st.com (10.75.127.11) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
- definitions=2021-01-15_07:2021-01-15,
- 2021-01-15 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Walter Lozano <walter.lozano@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>,
+ Pratyush Yadav <p.yadav@ti.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Heiko Schocher <hs@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Patrick DELAUNAY <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] pinctrl: stmfx: Fix MAX_PIN_NAME_LEN
+ Jean-Jacques Hiblot <jjhiblot@ti.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Dario Binacchi <dariobin@libero.it>
+Subject: [Uboot-stm32] [PATCH 00/15] gpio: Update and simplify the uclass API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,52 +79,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi 
+At present the GPIO uclass mirrors what was in U-Boot before driver model.
+It works well in most cases but is becoming cumbersome with things like
+pull-up/down and drive strength. In those cases it is easier for the
+driver to deal with all the flags at one, rather than piece by piece.
 
-This series is abandoned and will be replaced by a new one.
+In fact the current API does not officially have a method for adjusting
+anything other than the direction flags. While set_dir_flags() and
+get_dir_flags() do in fact support changing other flags, this is not
+documented.
 
-Patrice
+Secondly, set_dir_flags actually ORs the current flags with the new ones
+so it is not possible to clear flags. It seems better to use a clr/set
+interface (bit clear followed by OR) to provide more flexibility.
+
+Finally, direction_input() and direction_output() are really just the same
+thing as set_dir_flags(), with a different name. We currently use the
+latter if available, failing back to the former. But it makes sense to
+deprecate the old methods.
+
+This series makes the above changes. Existing drivers are mostly left
+alone, since they should continue to operate as is. The sandbox driver is
+updated to add the required new tests and the x86 driver is switched over
+to the new API.
+
+The STM32 driver should be checked to make sure the open source/open drain
+features still work as intended.
 
 
-On 1/11/21 3:03 PM, Patrice Chotard wrote:
-> MAX_PIN_NAME_LEN is set to 7 whereas stmfx pin name prefix "stmfx_gpio"
-> is 10 char long. So "pinmux status" output looks like:
-> 
-> STM32MP> pinmux status -a
-> --------------------------
-> stmfx@42:
-> stmfx_ : input
-> stmfx_ : input
-> stmfx_ : input
-> stmfx_ : input
-> stmfx_ : input
-> .....
-> 
-> Set MAX_PIN_NAME_LEN to 13 to get a correct pinmux command output.
-> 
-> Fixes: e27e96aa804e("pinctrl: stmfx: update pin name")
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> ---
-> 
->  drivers/pinctrl/pinctrl-stmfx.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
-> index a62be44d2d..d23ad862f2 100644
-> --- a/drivers/pinctrl/pinctrl-stmfx.c
-> +++ b/drivers/pinctrl/pinctrl-stmfx.c
-> @@ -346,7 +346,7 @@ static int stmfx_pinctrl_get_pins_count(struct udevice *dev)
->   * STMFX pins[15:0] are called "stmfx_gpio[15:0]"
->   * and STMFX pins[23:16] are called "stmfx_agpio[7:0]"
->   */
-> -#define MAX_PIN_NAME_LEN 7
-> +#define MAX_PIN_NAME_LEN 13
->  static char pin_name[MAX_PIN_NAME_LEN];
->  static const char *stmfx_pinctrl_get_pin_name(struct udevice *dev,
->  					      unsigned int selector)
-> 
+Simon Glass (15):
+  gpio: Disable functions not used with of-platdata
+  dm: gpio: Rename set_dir_flags() method to update_flags()
+  dm: gpio: Rename get_dir_flags() method to get_flags()
+  gpio: Rename dm_gpio_get_dir_flags() to dm_gpio_get_flags()
+  gpio: Drop dm_gpio_set_dir()
+  gpio: sandbox: Rename GPIO dir_flags to flags
+  gpio: sandbox: Use a separate flag for the value
+  gpio: sandbox: Fully separate pin value from output value
+  gpio: sandbox: Make sandbox_gpio_set_flags() set all flags
+  dm: gpio: Add a way to update flags
+  gpio: Replace direction_input() and direction_output()
+  gpio: Use an 'ops' variable everywhere
+  gpio: x86: Drop the deprecated methods in intel_gpio
+  gpio: sandbox: Track whether a GPIO is driven
+  gpio: Add a way to read 3-way strapping pins
+
+ arch/sandbox/include/asm/gpio.h           |  17 +-
+ arch/x86/include/asm/intel_pinctrl_defs.h |   5 +
+ drivers/gpio/gpio-uclass.c                | 228 ++++++++++++++-----
+ drivers/gpio/intel_gpio.c                 |  72 +++---
+ drivers/gpio/sandbox.c                    | 137 ++++++++----
+ drivers/gpio/stm32_gpio.c                 |  14 +-
+ drivers/pinctrl/pinctrl-stmfx.c           |  14 +-
+ include/asm-generic/gpio.h                | 130 +++++++++--
+ test/dm/gpio.c                            | 261 +++++++++++++++++++---
+ 9 files changed, 663 insertions(+), 215 deletions(-)
+
+-- 
+2.30.0.284.gd98b1dd5eaa7-goog
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

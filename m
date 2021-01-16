@@ -2,59 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8FF82F8C0E
-	for <lists+uboot-stm32@lfdr.de>; Sat, 16 Jan 2021 08:34:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A8A92F8C5F
+	for <lists+uboot-stm32@lfdr.de>; Sat, 16 Jan 2021 10:05:54 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65AA7C57183;
-	Sat, 16 Jan 2021 07:34:57 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 46FECC57183;
+	Sat, 16 Jan 2021 09:05:54 +0000 (UTC)
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
+ [209.85.219.180])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7BAD8C3089F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 05130C5717E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 16 Jan 2021 07:34:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1610782492;
- bh=1SIjIfaZBEn1BShMsPeIJtCN/04eOr+N52YF9ByGgtA=;
- h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=CsS1VIEQHh+sn5YvKMgeSwa78YdBcOxulXlAZYZPn1zGiqo7pVDConJxyNd7ArZug
- qGg48DQyGariyacGzZ+CvacEnEw0Glibb4trZbhQF1d7LQKzwIHPEOeuRw47VKbLcU
- 5xCEqxXJ0eNiKwpeQXkbZ5vhcVwvd7v9hjlCjPfo=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.123.51] ([62.143.246.89]) by mail.gmx.com (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N3bSt-1lzxk72KJ9-010dgm; Sat, 16
- Jan 2021 08:34:52 +0100
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20210114120355.1.I3bbd596e6af847434c65a45cd845fe58e55bdbc5@changeid>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <155af125-4b38-992e-b103-bd29257f3fd3@gmx.de>
-Date: Sat, 16 Jan 2021 08:34:51 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+ Sat, 16 Jan 2021 09:05:51 +0000 (UTC)
+Received: by mail-yb1-f180.google.com with SMTP id y4so7476301ybn.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sat, 16 Jan 2021 01:05:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=d5ZGotAEt9IvwLNsmY9FrZZF5pT4bINZwa0R3IzH04o=;
+ b=oGxe2GMic1l/PcWlTFdcMXD12+79LO9PftOIomGb5eUILGI3qYdZUWgNHh5kMZmkqh
+ rMXNwMAVkiOZNp/YfXRPW9n1pZ+lhfaxXkyljYSYy9Old6tyz+fCoSuPhtkWZ9rpm1VS
+ Pj8lVFly/x8FQRaL0rRJs+4Ulj8FJZ9omEE74frozz2sr6X0R2wczrVdFc+FRfj2Wmy4
+ ZQsOS0uVdoks4B26tA8HQQv5SugDILkZ0p7B4pIorciikdnfZMkNmTaO3+VD1TycOrq6
+ buMsMmCFXUlkQEQj1qa0h2hdyLSTmOelLnv0N2sM4aHWtQngMJtQ8YxXb6Vq5SQdnDA5
+ r85Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=d5ZGotAEt9IvwLNsmY9FrZZF5pT4bINZwa0R3IzH04o=;
+ b=IKzA/OJuXRB+7G+qQQ51POA/WDkOdqHtrHd+y4ahNZJw+hbmkxMHq9w1nVw/fiTV1+
+ wnx6olyG6+ifHT80MLAIRmNgQBGnd3iUpAtTP+FT5vn+hfgpN8TnihWBgFjP4XbS3Iy5
+ Cmc+S3O+0nioU8DgdLdnYe0ttTUsy3Th74TSJlVd1NEEDaCLDMlAmM+/PCh5hl9pstdW
+ KhiDt0jv1cZdSdlPZpql7ZgMouAVSeMN3It4llTplU3SwqEyKFh5R5u38n1DWhZ1kWwK
+ qDAG6YnxuPpzRVxHlGgtR0O3RdN3/kCFXCeN6AsbtxvvcGqfwLgD97S082FAR3Noh4Eu
+ Mk+A==
+X-Gm-Message-State: AOAM530u+rHS92nDakyiAzJ1Vx22zcB9j3r4nqxqO649B3obNaOFvv2S
+ bsPbFfMDqAx1DC1E4N2P5i99sed1R1RVaxb00Ck=
+X-Google-Smtp-Source: ABdhPJy3usmpLsDjHIw4W6Uww1uA9GHa7rMPnU7tXFlwVE/YCzSbTHilI3v8Y7N4umu62QvRpFrReDONSJrj1OpvTtk=
+X-Received: by 2002:a25:2041:: with SMTP id g62mr24796403ybg.152.1610787950424; 
+ Sat, 16 Jan 2021 01:05:50 -0800 (PST)
 MIME-Version: 1.0
+References: <20210114120355.1.I3bbd596e6af847434c65a45cd845fe58e55bdbc5@changeid>
 In-Reply-To: <20210114120355.1.I3bbd596e6af847434c65a45cd845fe58e55bdbc5@changeid>
-Content-Language: en-US
-X-Provags-ID: V03:K1:3vcq/CGkI+ZQnlKGqLq8hmO5x34b/cnyXs8oKLOMgvtjSnJUaAj
- acIXsGxUs7SXW2ZiRitzkXr9Hmhk10tzPYTyX6BN/e3HKcL3mICAwToOZuoRqtq+K6hYrBm
- 13s/CURR+tvUqT3hDb/yEQLhiv+XaR3usf3/mPY1Wi5pomoGHPVzjtOvm0+T+8y+pTgTKJ3
- /I9PzP5KMdphm1efEupIg==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:zRUFVNnryck=:9k/MB+2d1wNO21i0HKTlnq
- l7v7NDvUnnuD6QUwvTZQjSt/qs5/vUaOQHeO6YBEwgYuKiZhzjbGXWHHMeyZ5dCHDYv/ZyiqE
- 6AYRoBYGLp9JPCSdtqirLeXI9dhlrHQXA2w8pBew+lsMAjJEfXoh89ez4VjNPun8em4YAygPL
- 3yLFwAMREOIEqRooQH7InDAfkEGAk9+NymdOtXgzNMArMQ6E7nUggCXGqQFZfWermOOiUP9xh
- zl1J1FKVo3cvdD0jeJvpb3/pNFA7XRLMFEZyPB3lcXvK4aRldhVqvgNhsXYhtV9eA8xUt182v
- u912uicgXMcpBuVJbUJh4BVdc5gCIDzIiZj5AiQtPTQNPBhzI5tJ1CfD0cY/Avu9y/H6mDJyC
- 5Nybj/ky6GzwxE2x4+HMoJfN0Gmz6yhkvPORzVpE5KGRXbR5zIL0+UGem5goEmlIc8OUgK3sN
- KJVbw7lVKR4d2DCur//islMlzq26xMUjyauM68CcGrHGteq397LXLWMKflcyWVOgCAm9fRlAN
- 65UPN3n9WjjHVQF6/2GOYpkzRH0x9P/LhYkz2NQQh2JZMLpQvyxpAbs16PY3pG6pjyowndVPW
- hX53VBI3nJPWkBTB87wraoPeiY9Fr3P49d6RFL46dWIibzoFwOY4BoMtq2H9Azu8YNGl0FqEM
- n05486TNKHTJKGFzvqYr0YWyuU9Cgn9rmg5l3BYIxD78LgPAA/M2r+rLL8BBpraYZvNeKsULy
- cDdOw/Bh3+DsZ1X3V7SX4LDdtDPHgEJKjexWbppCZ8HSe1qxfWVTL11ND2MywAQVCg2gBrunw
- tgmiygukohnLum2z5rkfzcvNZS1p+NqOXheg0No9FDSIixTQPvu24hLYu5TioDDnDGWKTO8Qn
- JSxlc3aUDymUxb8LeH2w==
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 16 Jan 2021 17:05:15 +0800
+Message-ID: <CAEUhbmX81Mm=CF82cftkDtjtjB-EgXj4gYy8b3fnRF8fX3diNQ@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Subject: Re: [Uboot-stm32] [PATCH] doc: update help message
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -67,43 +64,29 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 1/14/21 12:04 PM, Patrick Delaunay wrote:
+On Thu, Jan 14, 2021 at 7:04 PM Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
 > Update the help message used for 'make help':
 >
->    Documentation targets:
->      Linux kernel internal documentation in different formats from ReST:
+>   Documentation targets:
+>     Linux kernel internal documentation in different formats from ReST:
 > =>
->      U-Boot documentation in different formats from ReST:
+>     U-Boot documentation in different formats from ReST:
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
 > ---
 >
->   doc/Makefile | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/doc/Makefile b/doc/Makefile
-> index 0e0da5666f..a686d4728e 100644
-> --- a/doc/Makefile
-> +++ b/doc/Makefile
-> @@ -106,7 +106,7 @@ cleandocs:
->   	$(Q)$(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) $(build)=doc/media clean
->
->   dochelp:
-> -	@echo  ' Linux kernel internal documentation in different formats from ReST:'
-> +	@echo  ' U-Boot documentation in different formats from ReST:'
->   	@echo  '  htmldocs        - HTML'
->   	@echo  '  latexdocs       - LaTeX'
->   	@echo  '  pdfdocs         - PDF'
+>  doc/Makefile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

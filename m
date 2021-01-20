@@ -2,64 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C5E4F2FCF25
-	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Jan 2021 12:36:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4254C2FD045
+	for <lists+uboot-stm32@lfdr.de>; Wed, 20 Jan 2021 13:43:55 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 80A9EC3FAD8;
-	Wed, 20 Jan 2021 11:36:58 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DCF49C3FAD8;
+	Wed, 20 Jan 2021 12:43:54 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3C1B3C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BA150C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 20 Jan 2021 11:36:55 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Wed, 20 Jan 2021 12:43:53 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 10KBXF1u003307; Wed, 20 Jan 2021 12:36:53 +0100
+ 10KCadil030791; Wed, 20 Jan 2021 13:43:51 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to :
- references : cc : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=2ULRzaW3pm0yWPGGi/xqGFf1dS1I1nitNho0qWOkOac=;
- b=in4jfaJaLtAZCg9Vu5zMbvzZaT/5EecXQmTt84iWLgP7SKuFS1FtZ0aiNJgvaMnsvz6N
- 7pe9/P8A/oCz+a2qHAsaAs1hYlM6IlKkvDnridoRf8X2iTFdm9hM/H0z53qzz2Vw7lmZ
- kwyAtmL5n+Pgz+4WIcukEjdNgfyyxyQuwKZHxORdWTLg/WDYCnu1Y34PNQJz07JQ6axD
- 35ISMMRziAjNzbIl3zvUsfkYvtcxn9HHDqk7s6VqvOj17lNkORVXjNPapo9A95GnrRIc
- pkCknhTnQ80qKe3fg/nEgniIlQGrtMgePgMq/BMDy5zvo/Gle+Xl2SyrPZ4ZUAJdiIem Ag== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=tsTmNhaniC73cHUvrgS/Y0xQh6qutOggGdXmiMmCEN0=;
+ b=LXld9rMb6SS5eUaCHLoz4MfnAlNCCH+BglytFtN4irgW323o84U/3Lpx8P35wauwTn9k
+ UqWSO+x5pOZm4+eioahOLXifoqrhTBCofAx5fnJPkV85YvKQ19oE8bG0BenyaDZzBJxI
+ GS3ZAZEF1YWr2qic9VKClsr+jivRGg8PeuCrpZo39YOCy9MMS/sXU84hPAWhoHY+jMaX
+ NbAhYQh5+lrJXav6wlUYVu4BZwFSNUEBaMYHhRvusbu8IzeNCKWzQOKPTeCx5kcp855P
+ st7ZgQYgccj9g30s6TuQN1PcGiPCwU3GNCIKsgS29S5tpRpz2iVgSgHkybapMLlZCx3+ 5Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3668pdm2fj-1
+ by mx07-00178001.pphosted.com with ESMTP id 3668pyvesc-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 20 Jan 2021 12:36:53 +0100
+ Wed, 20 Jan 2021 13:43:51 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 132C810002A;
- Wed, 20 Jan 2021 12:36:52 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0E9FA10002A;
+ Wed, 20 Jan 2021 13:43:50 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ED686236929;
- Wed, 20 Jan 2021 12:36:51 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.47) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 20 Jan
- 2021 12:36:51 +0100
-To: Fabrice GIRARDOT <fabrice.girardot@flowbird.group>, U-Boot Mailing List
- <u-boot@lists.denx.de>
-References: <1610715301-17734-1-git-send-email-fabrice.girardot@flowbird.group>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <34ac8f7a-5e14-70a9-9924-232e40624d73@foss.st.com>
-Date: Wed, 20 Jan 2021 12:36:51 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E005523E227;
+ Wed, 20 Jan 2021 13:43:50 +0100 (CET)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 20 Jan 2021 13:43:49
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 20 Jan 2021 13:43:39 +0100
+Message-ID: <20210120124340.23612-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <1610715301-17734-1-git-send-email-fabrice.girardot@flowbird.group>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
- definitions=2021-01-20_02:2021-01-18,
+ definitions=2021-01-20_05:2021-01-20,
  2021-01-20 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: Fix cosmetic typo: use
- 'kHz' as kilohertz abbreviation
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Patrick DELAUNAY <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] pinctrl: stmfx: Fix pin configuration
+	issue
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,32 +67,71 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+pin-controller pin's name must be equal to pin's name used in device
+tree with "pins" DT property.
 
-On 1/15/21 1:55 PM, Fabrice GIRARDOT wrote:
-> The kilohertz unit abbreviation should read 'kHz'.
-> Note to STM32 team: modified files were generated, it may be worth
-> to fix STM32CubeMX tool.
->
-> Signed-off-by: Fabrice GIRARDOT <fabrice.girardot@flowbird.group>
-> ---
->   arch/arm/dts/stm32mp15-ddr3-1x4Gb-1066-binG.dtsi | 2 +-
->   arch/arm/dts/stm32mp15-ddr3-2x4Gb-1066-binG.dtsi | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
+Issue detected on stm32mp157c-ev1 board with goodix touchscreen.
+In DT, the goodix's pin is declared in DT with the node:
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+        goodix_pins: goodix {
+		pins = "gpio14";
+		bias-pull-down;
+	};
 
-I also request this modification in CubeMX tool.
+Whereas in stmfx pin-controller driver, pin's name are equal to
+"stmfx_gpioxx" where xx is the pin number.
+This lead to not configure stmfx's pins at probe because pins is
+identified by its name (see pinctrl_pin_name_to_selector() in
+pinctrl-generic.c) and stmfx pin "gpio14" can't be found.
 
-Thanks
+To fix this issue, come back to the original stmfx pin's name.
 
-Patrick
+Revert "pinctrl: stmfx: update pin name"
+
+This reverts commit 38d30cdcd65c73eeefac5efa328ad444a53b77dd.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Tested-by: Patrick DELAUNAY <patrick.delaunay@st.com>
+---
+
+ drivers/pinctrl/pinctrl-stmfx.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
+index a62be44d2d..b789f3686c 100644
+--- a/drivers/pinctrl/pinctrl-stmfx.c
++++ b/drivers/pinctrl/pinctrl-stmfx.c
+@@ -343,8 +343,8 @@ static int stmfx_pinctrl_get_pins_count(struct udevice *dev)
+ }
+ 
+ /*
+- * STMFX pins[15:0] are called "stmfx_gpio[15:0]"
+- * and STMFX pins[23:16] are called "stmfx_agpio[7:0]"
++ * STMFX pins[15:0] are called "gpio[15:0]"
++ * and STMFX pins[23:16] are called "agpio[7:0]"
+  */
+ #define MAX_PIN_NAME_LEN 7
+ static char pin_name[MAX_PIN_NAME_LEN];
+@@ -352,9 +352,9 @@ static const char *stmfx_pinctrl_get_pin_name(struct udevice *dev,
+ 					      unsigned int selector)
+ {
+ 	if (selector < STMFX_MAX_GPIO)
+-		snprintf(pin_name, MAX_PIN_NAME_LEN, "stmfx_gpio%u", selector);
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+ 	else
+-		snprintf(pin_name, MAX_PIN_NAME_LEN, "stmfx_agpio%u", selector - 16);
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "agpio%u", selector - 16);
+ 	return pin_name;
+ }
+ 
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

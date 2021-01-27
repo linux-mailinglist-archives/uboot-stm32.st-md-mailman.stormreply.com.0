@@ -2,68 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32CA4305D7D
-	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Jan 2021 14:47:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25601305D7B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Jan 2021 14:47:01 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ECD79C57182;
-	Wed, 27 Jan 2021 13:47:14 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 35B77C57182;
+	Wed, 27 Jan 2021 13:47:00 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76EF0C5662E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0D6E3C5662E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 27 Jan 2021 13:47:13 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Wed, 27 Jan 2021 13:46:58 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 10RDh5km006444; Wed, 27 Jan 2021 14:46:54 +0100
+ 10RDg5xM010574; Wed, 27 Jan 2021 14:46:55 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-type; s=selector1;
- bh=dntdcg49nq/AHDY92Qgp/b8R75O7Nmg6Crg+F6uQ9Ec=;
- b=XFWg0tKjVjc7AcH6/BJ6xwCrOdlKNtwizCI0yw+KfUdYPRieenp0zYxx62x2brvWGhOp
- /t7YI6lXhoKeY4LL3YFFQUfPPHFRwWDVa7p86THwUJp49sTaGLwUCMVNcIsu81OGtqFm
- wGG9KKcQt99tRMFOD/UJPYlEyMCMX63HX7mjU95QexaEhu7GqIEnrqjyxt1Y1vW8J2Eo
- HbYV+nojHVI0nAe2XVn8Ex2mVQoYHN+omTlAdukUemxHxIlWskLA1zOjGf1fFY7E3Y9M
- aKJGU92PiF3ZJHPvjSclITkEt69mpodCSVqEO8SLD+9zxPxSL6il2MMTw0qh+XsK8tIK Fw== 
+ bh=DF7GYR00J7bPWvEtPYaqOoQHRa0nk0GiMtpGiIKhNFY=;
+ b=UItLNPFYY30TED8je9zZV4xW+4mDJzcLLNDMNXNZPOr6JaB9Eb18ChW7tEj/Z95y+VhR
+ i72gB/hEmdykdWBZSfhihxf0XIPO/SajCFgQB+IvZCbxA0O0Y92NcGkxxH1Kxr6tROY/
+ iEvcw9DXZQiDkInjFy+daCjVe0OKF3icXAcArXKMgDS3CIp2380nnrIVNvyxUnlHfhgg
+ cjb/pZQcLPo68wR57CujlbbDSRpDCzDwR8vkkju1wPUpbjVNskcenvzP1yGKLSJOa9Tb
+ 9bJSsGcvLCGrHJhFh7fniSpkiWfkzo2zplatqxz06fv2vAcDnyMSzLLhXZ5rT+vBwvbi JQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3689te0n92-1
+ by mx07-00178001.pphosted.com with ESMTP id 368bjngbcg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Jan 2021 14:46:54 +0100
+ Wed, 27 Jan 2021 14:46:55 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AACD9100034;
- Wed, 27 Jan 2021 14:46:53 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 855BD100038;
+ Wed, 27 Jan 2021 14:46:54 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 951BD243711;
- Wed, 27 Jan 2021 14:46:53 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 27 Jan 2021 14:46:53
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 75F58243713;
+ Wed, 27 Jan 2021 14:46:54 +0100 (CET)
+Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Wed, 27 Jan 2021 14:46:54
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 27 Jan 2021 14:46:47 +0100
-Message-ID: <20210127144618.v2.2.Icb31b968f623dbbdccd58b5e83ffe247c5797b01@changeid>
+Date: Wed, 27 Jan 2021 14:46:48 +0100
+Message-ID: <20210127144618.v2.3.I54be34962a84794d7c1af363107e5194e81f21bf@changeid>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210127134649.27380-1-patrick.delaunay@foss.st.com>
 References: <20210127134649.27380-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG3NODE3.st.com (10.75.127.9) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343, 18.0.737
  definitions=2021-01-27_05:2021-01-27,
  2021-01-27 signatures=0
-Cc: Peng Fan <peng.fan@nxp.com>, Mingming lee <mingming.lee@mediatek.com>,
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+Cc: Lokesh Vutla <lokeshvutla@ti.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Fabien Parent <fparent@baylibre.com>,
  Roman Kovalivskyi <roman.kovalivskyi@globallogic.com>,
  Filip Brozovic <fbrozovic@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>
-Subject: [Uboot-stm32] [PATCH v2 2/4] fastboot: mmc: extend flash/erase for
-	both emmc hwpart 1 and 2
+ Sam Protsenko <joe.skb7@gmail.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>
+Subject: [Uboot-stm32] [PATCH v2 3/4] fastboot: add command to select the
+	default emmc hwpart for boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,219 +80,129 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Update the code and the configs for eMMC boot and userdata
-partitions acces
-- FASTBOOT_MMC_BOOT_SUPPORT: boot partition 1 and 2 (erase/write)
-- FASTBOOT_MMC_BOOT1_NAME: boot partition 1, default name="mmc0boot0"
-- FASTBOOT_MMC_BOOT2_NAME: boot partition 2, default name="mmc0boot1"
+Add fastboot command oem partconf which executes the command
+``mmc partconf <id> <arg> 0`` on the current <id> mmc device
+to configure the eMMC boot partition with
+<arg>: boot_ack boot_partition, so the command is:
 
-This patch also removes the unnecessary dependency with
-ARCH_MEDIATEK and EFI_PARTITION.
+$> fastboot oem partconf:<boot_ack> <boot_partition>
+
+The partition_access argument is forced to 0 (userdata)
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
-Changes in v2:
-- new impact on pumpkin_defconfig and mt8512_bm1_emmc_defconfig
+(no changes since v1)
 
- configs/mt8512_bm1_emmc_defconfig |  2 +-
- configs/mt8518_ap1_emmc_defconfig |  2 +-
- configs/pumpkin_defconfig         |  2 +-
- drivers/fastboot/Kconfig          | 26 ++++++++++++-----
- drivers/fastboot/fb_mmc.c         | 47 ++++++++++++++++++++-----------
- 5 files changed, 52 insertions(+), 27 deletions(-)
+ doc/android/fastboot.rst      |  2 ++
+ drivers/fastboot/Kconfig      |  7 +++++++
+ drivers/fastboot/fb_command.c | 36 +++++++++++++++++++++++++++++++++++
+ include/fastboot.h            |  3 +++
+ 4 files changed, 48 insertions(+)
 
-diff --git a/configs/mt8512_bm1_emmc_defconfig b/configs/mt8512_bm1_emmc_defconfig
-index 1bda45c5d2..d8e0e86c10 100644
---- a/configs/mt8512_bm1_emmc_defconfig
-+++ b/configs/mt8512_bm1_emmc_defconfig
-@@ -28,7 +28,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x56000000
- CONFIG_FASTBOOT_BUF_SIZE=0x1e00000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
--CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
- CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
- CONFIG_DM_MMC=y
- CONFIG_MMC_HS200_SUPPORT=y
-diff --git a/configs/mt8518_ap1_emmc_defconfig b/configs/mt8518_ap1_emmc_defconfig
-index d5fb0ccd48..2c760c1591 100644
---- a/configs/mt8518_ap1_emmc_defconfig
-+++ b/configs/mt8518_ap1_emmc_defconfig
-@@ -24,7 +24,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x56000000
- CONFIG_FASTBOOT_BUF_SIZE=0x1E00000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
--CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
- CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
- CONFIG_DM_MMC=y
- CONFIG_MMC_HS200_SUPPORT=y
-diff --git a/configs/pumpkin_defconfig b/configs/pumpkin_defconfig
-index a9655f5abb..5270ec28cb 100644
---- a/configs/pumpkin_defconfig
-+++ b/configs/pumpkin_defconfig
-@@ -52,7 +52,7 @@ CONFIG_FASTBOOT_BUF_ADDR=0x4d000000
- CONFIG_FASTBOOT_BUF_SIZE=0x4000000
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
--CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
- CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
- # CONFIG_INPUT is not set
- CONFIG_DM_MMC=y
+diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
+index 2877c3cbaa..d8cb64261c 100644
+--- a/doc/android/fastboot.rst
++++ b/doc/android/fastboot.rst
+@@ -23,6 +23,8 @@ The current implementation supports the following standard commands:
+ The following OEM commands are supported (if enabled):
+ 
+ - ``oem format`` - this executes ``gpt write mmc %x $partitions``
++- ``oem partconf`` - this executes ``mmc partconf %x <arg> 0`` to configure eMMC
++  with <arg> = boot_ack boot_partition
+ 
+ Support for both eMMC and NAND devices is included.
+ 
 diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index cb8425685f..ef57290876 100644
+index ef57290876..9bd5597253 100644
 --- a/drivers/fastboot/Kconfig
 +++ b/drivers/fastboot/Kconfig
-@@ -104,18 +104,19 @@ config FASTBOOT_FLASH_NAND_TRIMFFS
- 	  When flashing NAND enable the DROP_FFS flag to drop trailing all-0xff
- 	  pages.
+@@ -189,6 +189,13 @@ config FASTBOOT_CMD_OEM_FORMAT
+ 	  relies on the env variable partitions to contain the list of
+ 	  partitions as required by the gpt command.
  
--config FASTBOOT_MMC_BOOT1_SUPPORT
--	bool "Enable EMMC_BOOT1 flash/erase"
--	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION && ARCH_MEDIATEK
-+config FASTBOOT_MMC_BOOT_SUPPORT
-+	bool "Enable EMMC_BOOT flash/erase"
-+	depends on FASTBOOT_FLASH_MMC
- 	help
- 	  The fastboot "flash" and "erase" commands normally does operations
--	  on EMMC userdata. Define this to enable the special commands to
--	  flash/erase EMMC_BOOT1.
--	  The default target name for updating EMMC_BOOT1 is "mmc0boot0".
-+	  on eMMC userdata. Define this to enable the special commands to
-+	  flash/erase eMMC boot partition.
-+	  The default target name for updating eMMC boot partition 1/2 is
-+	  CONFIG_FASTBOOT_MMC_BOOT1_NAME/CONFIG_FASTBOOT_MMC_BOOT2_NAME.
- 
- config FASTBOOT_MMC_BOOT1_NAME
- 	string "Target name for updating EMMC_BOOT1"
--	depends on FASTBOOT_MMC_BOOT1_SUPPORT
-+	depends on FASTBOOT_MMC_BOOT_SUPPORT
- 	default "mmc0boot0"
- 	help
- 	  The fastboot "flash" and "erase" commands support operations on
-@@ -124,6 +125,17 @@ config FASTBOOT_MMC_BOOT1_NAME
- 	  defined here.
- 	  The default target name for updating EMMC_BOOT1 is "mmc0boot0".
- 
-+config FASTBOOT_MMC_BOOT2_NAME
-+	string "Target name for updating EMMC_BOOT2"
-+	depends on FASTBOOT_MMC_BOOT_SUPPORT
-+	default "mmc0boot1"
++config FASTBOOT_CMD_OEM_PARTCONF
++	bool "Enable the 'oem partconf' command"
++	depends on FASTBOOT_FLASH_MMC && SUPPORT_EMMC_BOOT
 +	help
-+	  The fastboot "flash" and "erase" commands support operations on
-+	  EMMC_BOOT2. This occurs when the specified "EMMC_BOOT2 name" on
-+	  the "fastboot flash" and "fastboot erase" commands match the value
-+	  defined here.
-+	  The default target name for updating EMMC_BOOT2 is "mmc0boot1".
++	  Add support for the "oem partconf" command from a client. This set
++	  the mmc boot-partition for the selecting eMMC device.
 +
- config FASTBOOT_MMC_USER_SUPPORT
- 	bool "Enable eMMC userdata partition flash/erase"
- 	depends on FASTBOOT_FLASH_MMC
-diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
-index b5d4c90bfc..611074a3e4 100644
---- a/drivers/fastboot/fb_mmc.c
-+++ b/drivers/fastboot/fb_mmc.c
-@@ -174,7 +174,7 @@ static void write_raw_image(struct blk_desc *dev_desc,
- 	fastboot_okay(NULL, response);
- }
+ config FASTBOOT_USE_BCB_SET_REBOOT_FLAG
+ 	bool "Use BCB by fastboot to set boot reason"
+ 	depends on CMD_BCB && !ARCH_MESON && !ARCH_ROCKCHIP && !TARGET_KC1 && \
+diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+index d3c578672d..ae4a7dc7fb 100644
+--- a/drivers/fastboot/fb_command.c
++++ b/drivers/fastboot/fb_command.c
+@@ -42,6 +42,9 @@ static void reboot_recovery(char *, char *);
+ #if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT)
+ static void oem_format(char *, char *);
+ #endif
++#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
++static void oem_partconf(char *, char *);
++#endif
  
--#if defined(CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT) || \
-+#if defined(CONFIG_FASTBOOT_MMC_BOOT_SUPPORT) || \
- 	defined(CONFIG_FASTBOOT_MMC_USER_SUPPORT)
- static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
- {
-@@ -196,16 +196,16 @@ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+ static const struct {
+ 	const char *command;
+@@ -99,6 +102,12 @@ static const struct {
+ 		.dispatch = oem_format,
+ 	},
+ #endif
++#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
++	[FASTBOOT_COMMAND_OEM_PARTCONF] = {
++		.command = "oem partconf",
++		.dispatch = oem_partconf,
++	},
++#endif
+ };
+ 
+ /**
+@@ -374,3 +383,30 @@ static void oem_format(char *cmd_parameter, char *response)
+ 	}
  }
  #endif
- 
--#ifdef CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT
--static void fb_mmc_boot1_ops(struct blk_desc *dev_desc, void *buffer,
--			     u32 buff_sz, char *response)
-+#ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
-+static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
-+			    int hwpart, u32 buff_sz, char *response)
- {
- 	lbaint_t blkcnt;
- 	lbaint_t blks;
- 	unsigned long blksz;
- 
--	// To operate on EMMC_BOOT1 (mmc0boot0), we first change the hwpart
--	if (blk_dselect_hwpart(dev_desc, 1)) {
-+	// To operate on EMMC_BOOT1/2 (mmc0boot0/1) we first change the hwpart
-+	if (blk_dselect_hwpart(dev_desc, hwpart)) {
- 		pr_err("Failed to select hwpart\n");
- 		fastboot_fail("Failed to select hwpart", response);
- 		return;
-@@ -224,21 +224,24 @@ static void fb_mmc_boot1_ops(struct blk_desc *dev_desc, void *buffer,
- 			return;
- 		}
- 
--		debug("Start Flashing Image to EMMC_BOOT1...\n");
-+		debug("Start Flashing Image to EMMC_BOOT%d...\n", hwpart);
- 
- 		blks = fb_mmc_blk_write(dev_desc, 0, blkcnt, buffer);
- 
- 		if (blks != blkcnt) {
--			pr_err("Failed to write EMMC_BOOT1\n");
--			fastboot_fail("Failed to write EMMC_BOOT1", response);
-+			pr_err("Failed to write EMMC_BOOT%d\n", hwpart);
-+			fastboot_fail("Failed to write EMMC_BOOT part",
-+				      response);
- 			return;
- 		}
- 
--		printf("........ wrote %lu bytes to EMMC_BOOT1\n",
--		       blkcnt * blksz);
-+		printf("........ wrote %lu bytes to EMMC_BOOT%d\n",
-+		       blkcnt * blksz, hwpart);
- 	} else { /* erase */
- 		if (fb_mmc_erase_mmc_hwpart(dev_desc)) {
--			fastboot_fail("Failed to erase EMMC_BOOT1", response);
-+			pr_err("Failed to erase EMMC_BOOT%d\n", hwpart);
-+			fastboot_fail("Failed to erase EMMC_BOOT part",
-+				      response);
- 			return;
- 		}
- 	}
-@@ -467,10 +470,15 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
- 		return;
- 	}
- 
--#ifdef CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT
-+#ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
- 	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT1_NAME) == 0) {
--		fb_mmc_boot1_ops(dev_desc, download_buffer,
--				 download_bytes, response);
-+		fb_mmc_boot_ops(dev_desc, download_buffer, 1,
-+				download_bytes, response);
++
++#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
++/**
++ * oem_partconf() - Execute the OEM partconf command
++ *
++ * @cmd_parameter: Pointer to command parameter
++ * @response: Pointer to fastboot response buffer
++ */
++static void oem_partconf(char *cmd_parameter, char *response)
++{
++	char cmdbuf[32];
++
++	if (!cmd_parameter) {
++		fastboot_fail("Expected command parameter", response);
 +		return;
 +	}
-+	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT2_NAME) == 0) {
-+		fb_mmc_boot_ops(dev_desc, download_buffer, 2,
-+				download_bytes, response);
- 		return;
- 	}
++
++	/* execute 'mmc partconfg' command with cmd_parameter arguments*/
++	snprintf(cmdbuf, sizeof(cmdbuf), "mmc partconf %x %s 0",
++		 CONFIG_FASTBOOT_FLASH_MMC_DEV, cmd_parameter);
++	printf("Execute: %s\n", cmdbuf);
++	if (run_command(cmdbuf, 0))
++		fastboot_fail("Cannot set oem partconf", response);
++	else
++		fastboot_okay(NULL, response);
++}
++#endif
+diff --git a/include/fastboot.h b/include/fastboot.h
+index 8e9ee80907..86559d1595 100644
+--- a/include/fastboot.h
++++ b/include/fastboot.h
+@@ -38,6 +38,9 @@ enum {
+ #if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT)
+ 	FASTBOOT_COMMAND_OEM_FORMAT,
  #endif
-@@ -598,10 +606,15 @@ void fastboot_mmc_erase(const char *cmd, char *response)
- 		return;
- 	}
++#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
++	FASTBOOT_COMMAND_OEM_PARTCONF,
++#endif
  
--#ifdef CONFIG_FASTBOOT_MMC_BOOT1_SUPPORT
-+#ifdef CONFIG_FASTBOOT_MMC_BOOT_SUPPORT
- 	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT1_NAME) == 0) {
- 		/* erase EMMC boot1 */
--		fb_mmc_boot1_ops(dev_desc, NULL, 0, response);
-+		fb_mmc_boot_ops(dev_desc, NULL, 1, 0, response);
-+		return;
-+	}
-+	if (strcmp(cmd, CONFIG_FASTBOOT_MMC_BOOT2_NAME) == 0) {
-+		/* erase EMMC boot2 */
-+		fb_mmc_boot_ops(dev_desc, NULL, 2, 0, response);
- 		return;
- 	}
- #endif
+ 	FASTBOOT_COMMAND_COUNT
+ };
 -- 
 2.17.1
 

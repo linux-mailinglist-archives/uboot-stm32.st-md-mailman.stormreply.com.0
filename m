@@ -2,51 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FAD330BEEF
-	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Feb 2021 14:00:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 57B7D30BEEE
+	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Feb 2021 14:00:12 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2BB52C57184;
-	Tue,  2 Feb 2021 13:00:26 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FAF4C57184;
+	Tue,  2 Feb 2021 13:00:12 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 98221C57181
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BD769C57181
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  2 Feb 2021 13:00:23 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Tue,  2 Feb 2021 13:00:10 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 112CuTcu022759; Tue, 2 Feb 2021 13:59:43 +0100
+ 112Cuqa5000760; Tue, 2 Feb 2021 13:59:43 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=6m6XV5V9fk/DzeOR1wXX+/yA4XuQDqnJE7W2ojscZug=;
- b=4H9BghTrlzLB1zomLxTnaqZ2rWsb7ITaFwFazuz+p4DHthOXV1qUGyB8L6IvJueT0Axd
- OjHeQMgZMcxeVbuGhH0YADcliUufAj7BfrhXUaeyaaY20mCoM1xc4C+wnHHZ6vOHMv5g
- 31TQZvNkfMItTWuiI4wlXZQ/QmDgv9JXsnEgm9MZJpvrJPmFi2oBf/cE2FcWFN1OaPbK
- v5pzCwwanBYm3lFgUCGy+QJVvanEZZ/Oi9S1QnF++ykgWD+6w0pxuKCyIX6XDvnqG7XQ
- j6XIqXW2Lr49XisGuR9KQW1FTsQdd3EyUsPu48NeZqoP3X1nDqgZ9rrkcXFzX7ScftsC Cg== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=selector1;
+ bh=DpV6gWkHpRPkbxh31Ng098h5IsiKcVQ1PuiepGkDhsg=;
+ b=MUIK+Bn2PtHv/5HHfbtnZJhiG6zKDYlSjiox5o5Qs2Y5ZpTeBF7tUxhtuSRsYqh8FPQq
+ d7MNCtJpUllZY/82YAtqyY3NV6R1ujaKPp+3uAyBwpaIbp1F18AlDtzqewybj+EH9LBP
+ T0Zs90Eo1SL2q8JtN/i9MVFoR014lW7+8S+O+fG22qngyn+lzRdrHUecvdd4PKLwGvAa
+ 81x5RMmVO9lBZMwBgo9px8IAJAuNLxuZxzN7yX4RqMklHHzq+iMxvg7YDRlWjm3NAS+F
+ JEE+c1Ydv5jB5dWM/zuL4dRcvFqwfIBC/TyxBHhYNc8C1lJknzdSVDxGiFYQYW7hD2sX 1A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 36ey7gttkt-1
+ by mx07-00178001.pphosted.com with ESMTP id 36e7x0sqya-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 02 Feb 2021 13:59:43 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EB7A8100039;
- Tue,  2 Feb 2021 13:59:35 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9010910002A;
+ Tue,  2 Feb 2021 13:59:36 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6F789234481;
- Tue,  2 Feb 2021 13:59:35 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 2 Feb 2021 13:59:35
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 71AEB234482;
+ Tue,  2 Feb 2021 13:59:36 +0100 (CET)
+Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 2 Feb 2021 13:59:36
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 2 Feb 2021 13:59:07 +0100
-Message-ID: <20210202125913.13597-1-patrick.delaunay@foss.st.com>
+Date: Tue, 2 Feb 2021 13:59:08 +0100
+Message-ID: <20210202135729.1.Ifa5a03d3733bf4f5245de4d0e07f433c4889b955@changeid>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210202125913.13597-1-patrick.delaunay@foss.st.com>
+References: <20210202125913.13597-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.737
  definitions=2021-02-02_06:2021-02-02,
@@ -54,8 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.737
 Cc: Reuben Dowle <reubendowle0@gmail.com>, Lokesh Vutla <lokeshvutla@ti.com>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>, Rick Chen <rick@andestech.com>,
  uboot-snps-arc@synopsys.com, Max Filippov <jcmvbkbc@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
- Marek Vasut <marek.vasut+renesas@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marek.vasut+renesas@gmail.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Angelo Dureghello <angelo@sysam.it>, Naoki Hayama <naoki.hayama@lineo.co.jp>,
  Masahiro Yamada <masahiroy@kernel.org>,
@@ -71,12 +74,10 @@ Cc: Reuben Dowle <reubendowle0@gmail.com>, Lokesh Vutla <lokeshvutla@ti.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Atish Patra <atish.patra@wdc.com>,
  Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>, Simon Glass <sjg@chromium.org>,
- Tero Kristo <t-kristo@ti.com>, Mario Six <mario.six@gdsys.cc>,
+ Mario Six <mario.six@gdsys.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sam Protsenko <joe.skb7@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
-Subject: [Uboot-stm32] [PATCH 0/5] lmb: Add config for the number of memory
-	and reserved regions
+ Sam Protsenko <joe.skb7@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [Uboot-stm32] [PATCH 1/5] lmb: move CONFIG_LMB in Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,55 +94,265 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Migrate CONFIG_LMB in Kconfig.
 
-Hi,
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-I propose a update of the lmb library to allow the configuration
-with Kconfig of the number of memory and reserved regions in lmb
-libary:
-- CONFIG_LMB_RESERVED_REGIONS
-- CONFIG_LMB_MEMORY_REGIONS
+ arch/arc/include/asm/config.h        | 2 --
+ arch/arm/include/asm/config.h        | 1 -
+ arch/m68k/include/asm/config.h       | 1 -
+ arch/microblaze/include/asm/config.h | 2 --
+ arch/mips/include/asm/config.h       | 1 -
+ arch/nds32/include/asm/config.h      | 1 -
+ arch/powerpc/include/asm/config.h    | 1 -
+ arch/riscv/include/asm/config.h      | 1 -
+ arch/sh/include/asm/config.h         | 2 --
+ arch/x86/include/asm/config.h        | 1 -
+ arch/xtensa/include/asm/config.h     | 2 --
+ include/configs/10m50_devboard.h     | 5 -----
+ include/configs/3c120_devboard.h     | 5 -----
+ include/configs/sandbox.h            | 2 --
+ include/configs/x86-common.h         | 2 --
+ include/image.h                      | 2 +-
+ lib/Kconfig                          | 7 +++++++
+ scripts/config_whitelist.txt         | 1 -
+ 18 files changed, 8 insertions(+), 31 deletions(-)
 
-By default, I keep the default value of 8 regions.
-
-This serie avoids issue on stm32mp15 platform,
-as the kernel device tree defines many and non contiguous reserved
-regions.
-
-
-
-Patrick Delaunay (5):
-  lmb: move CONFIG_LMB in Kconfig
-  lmb: remove lmb_region.size
-  lmb: Move lmb property arrays in struct lmb
-  lmb: Add 2 config to define the max number of regions
-  configs: stm32mp15: increase the number of reserved memory region in
-    lmb
-
- arch/arc/include/asm/config.h        |  2 --
- arch/arm/include/asm/config.h        |  1 -
- arch/m68k/include/asm/config.h       |  1 -
- arch/microblaze/include/asm/config.h |  2 --
- arch/mips/include/asm/config.h       |  1 -
- arch/nds32/include/asm/config.h      |  1 -
- arch/powerpc/include/asm/config.h    |  1 -
- arch/riscv/include/asm/config.h      |  1 -
- arch/sh/include/asm/config.h         |  2 --
- arch/x86/include/asm/config.h        |  1 -
- arch/xtensa/include/asm/config.h     |  2 --
- configs/stm32mp15_basic_defconfig    |  1 +
- configs/stm32mp15_trusted_defconfig  |  1 +
- include/configs/10m50_devboard.h     |  5 ----
- include/configs/3c120_devboard.h     |  5 ----
- include/configs/sandbox.h            |  2 --
- include/configs/x86-common.h         |  2 --
- include/image.h                      |  2 +-
- include/lmb.h                        | 34 ++++++++++++++++++++++++----
- lib/Kconfig                          | 23 +++++++++++++++++++
- lib/lmb.c                            | 14 ++++++------
- scripts/config_whitelist.txt         |  1 -
- 22 files changed, 63 insertions(+), 42 deletions(-)
-
+diff --git a/arch/arc/include/asm/config.h b/arch/arc/include/asm/config.h
+index d88c361488..46e94be141 100644
+--- a/arch/arc/include/asm/config.h
++++ b/arch/arc/include/asm/config.h
+@@ -8,6 +8,4 @@
+ 
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+-#define CONFIG_LMB
+-
+ #endif /*__ASM_ARC_CONFIG_H_ */
+diff --git a/arch/arm/include/asm/config.h b/arch/arm/include/asm/config.h
+index bf692ce279..14860d89b6 100644
+--- a/arch/arm/include/asm/config.h
++++ b/arch/arm/include/asm/config.h
+@@ -6,7 +6,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #if defined(CONFIG_ARCH_LS1021A) || \
+diff --git a/arch/m68k/include/asm/config.h b/arch/m68k/include/asm/config.h
+index 7ea443673a..221eb93d58 100644
+--- a/arch/m68k/include/asm/config.h
++++ b/arch/m68k/include/asm/config.h
+@@ -6,7 +6,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #endif
+diff --git a/arch/microblaze/include/asm/config.h b/arch/microblaze/include/asm/config.h
+index 3ae71b3e01..221eb93d58 100644
+--- a/arch/microblaze/include/asm/config.h
++++ b/arch/microblaze/include/asm/config.h
+@@ -6,8 +6,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+-
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #endif
+diff --git a/arch/mips/include/asm/config.h b/arch/mips/include/asm/config.h
+index 7ea443673a..221eb93d58 100644
+--- a/arch/mips/include/asm/config.h
++++ b/arch/mips/include/asm/config.h
+@@ -6,7 +6,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #endif
+diff --git a/arch/nds32/include/asm/config.h b/arch/nds32/include/asm/config.h
+index 8964a58f27..6c1cbce7ef 100644
+--- a/arch/nds32/include/asm/config.h
++++ b/arch/nds32/include/asm/config.h
+@@ -7,6 +7,5 @@
+ 
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+-#define CONFIG_LMB
+ 
+ #endif
+diff --git a/arch/powerpc/include/asm/config.h b/arch/powerpc/include/asm/config.h
+index c9c9964630..99b410dc9b 100644
+--- a/arch/powerpc/include/asm/config.h
++++ b/arch/powerpc/include/asm/config.h
+@@ -18,7 +18,6 @@
+   #define HWCONFIG_BUFFER_SIZE 256
+ #endif
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #ifndef CONFIG_MAX_MEM_MAPPED
+diff --git a/arch/riscv/include/asm/config.h b/arch/riscv/include/asm/config.h
+index 156cb94dc0..d911007537 100644
+--- a/arch/riscv/include/asm/config.h
++++ b/arch/riscv/include/asm/config.h
+@@ -7,7 +7,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #endif
+diff --git a/arch/sh/include/asm/config.h b/arch/sh/include/asm/config.h
+index e1cd322152..406156dff5 100644
+--- a/arch/sh/include/asm/config.h
++++ b/arch/sh/include/asm/config.h
+@@ -8,8 +8,6 @@
+ 
+ #include <asm/processor.h>
+ 
+-#define CONFIG_LMB
+-
+ /* Timer */
+ #define CONFIG_SYS_TIMER_COUNTS_DOWN
+ #define CONFIG_SYS_TIMER_COUNTER	(TMU_BASE + 0xc)	/* TCNT0 */
+diff --git a/arch/x86/include/asm/config.h b/arch/x86/include/asm/config.h
+index 7ea443673a..221eb93d58 100644
+--- a/arch/x86/include/asm/config.h
++++ b/arch/x86/include/asm/config.h
+@@ -6,7 +6,6 @@
+ #ifndef _ASM_CONFIG_H_
+ #define _ASM_CONFIG_H_
+ 
+-#define CONFIG_LMB
+ #define CONFIG_SYS_BOOT_RAMDISK_HIGH
+ 
+ #endif
+diff --git a/arch/xtensa/include/asm/config.h b/arch/xtensa/include/asm/config.h
+index 5a95fc93f7..a1096ab196 100644
+--- a/arch/xtensa/include/asm/config.h
++++ b/arch/xtensa/include/asm/config.h
+@@ -9,8 +9,6 @@
+ 
+ #include <asm/arch/core.h>
+ 
+-#define CONFIG_LMB
+-
+ /*
+  * Make boot parameters available in the MMUv2 virtual memory layout by
+  * restricting used physical memory to the first 128MB.
+diff --git a/include/configs/10m50_devboard.h b/include/configs/10m50_devboard.h
+index 768b4a6dfc..3ffc744928 100644
+--- a/include/configs/10m50_devboard.h
++++ b/include/configs/10m50_devboard.h
+@@ -34,11 +34,6 @@
+  */
+ #define CONFIG_BOOTP_BOOTFILESIZE
+ 
+-/*
+- * FDT options
+- */
+-#define CONFIG_LMB
+-
+ /*
+  * MEMORY ORGANIZATION
+  * -Monitor at top of sdram.
+diff --git a/include/configs/3c120_devboard.h b/include/configs/3c120_devboard.h
+index 30bbd716b2..3f065ff315 100644
+--- a/include/configs/3c120_devboard.h
++++ b/include/configs/3c120_devboard.h
+@@ -34,11 +34,6 @@
+  */
+ #define CONFIG_BOOTP_BOOTFILESIZE
+ 
+-/*
+- * FDT options
+- */
+-#define CONFIG_LMB
+-
+ /*
+  * MEMORY ORGANIZATION
+  * -Monitor at top of sdram.
+diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
+index e0708fe573..6abb78611a 100644
+--- a/include/configs/sandbox.h
++++ b/include/configs/sandbox.h
+@@ -22,8 +22,6 @@
+ #define CONFIG_SYS_TIMER_RATE		1000000
+ #endif
+ 
+-#define CONFIG_LMB
+-
+ #define CONFIG_HOST_MAX_DEVICES 4
+ 
+ /*
+diff --git a/include/configs/x86-common.h b/include/configs/x86-common.h
+index 641ed2c5ec..f186dd6b82 100644
+--- a/include/configs/x86-common.h
++++ b/include/configs/x86-common.h
+@@ -16,8 +16,6 @@
+  */
+ #define CONFIG_PHYSMEM
+ 
+-#define CONFIG_LMB
+-
+ #define CONFIG_SYS_BOOTM_LEN		(16 << 20)
+ 
+ /* SATA AHCI storage */
+diff --git a/include/image.h b/include/image.h
+index 856bc3e1b2..b15ab309c3 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -431,7 +431,7 @@ typedef struct bootm_headers {
+ #define	BOOTM_STATE_OS_GO	(0x00000400)
+ 	int		state;
+ 
+-#ifdef CONFIG_LMB
++#if defined(CONFIG_LMB) && !defined(USE_HOSTCC)
+ 	struct lmb	lmb;		/* for memory mgmt */
+ #endif
+ } bootm_headers_t;
+diff --git a/lib/Kconfig b/lib/Kconfig
+index b35a71ac36..43bd7190b9 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -699,6 +699,13 @@ config LIB_ELF
+ 	  Support basic elf loading/validating functions.
+ 	  This supports for 32 bit and 64 bit versions.
+ 
++config LMB
++	bool "Enable the logical memory blocks library (lmb)"
++	default y if ARC || ARM || M68K || MICROBLAZE || MIPS || NDS32 || \
++		     NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
++	help
++	  Support the library logical memory blocks.
++
+ endmenu
+ 
+ config PHANDLE_CHECK_SEQ
+diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
+index c6a8312495..0b46256016 100644
+--- a/scripts/config_whitelist.txt
++++ b/scripts/config_whitelist.txt
+@@ -964,7 +964,6 @@ CONFIG_LEGACY_BOOTCMD_ENV
+ CONFIG_LINUX
+ CONFIG_LINUX_RESET_VEC
+ CONFIG_LITTLETON_LCD
+-CONFIG_LMB
+ CONFIG_LMS283GF05
+ CONFIG_LOADADDR
+ CONFIG_LOADCMD
 -- 
 2.17.1
 

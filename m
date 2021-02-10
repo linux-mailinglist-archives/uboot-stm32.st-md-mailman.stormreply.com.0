@@ -2,49 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3522316910
-	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Feb 2021 15:26:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CFDF316D4C
+	for <lists+uboot-stm32@lfdr.de>; Wed, 10 Feb 2021 18:51:19 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 49BCEC57B52;
-	Wed, 10 Feb 2021 14:26:06 +0000 (UTC)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D14CDC57B52;
+	Wed, 10 Feb 2021 17:51:18 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+ [209.85.222.175])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E1EDC5718A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C0519C5718A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 10 Feb 2021 14:26:04 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4DbMWH47M4z1ryY1;
- Wed, 10 Feb 2021 15:26:03 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
- by mail.m-online.net (Postfix) with ESMTP id 4DbMWH3GDhz1t6px;
- Wed, 10 Feb 2021 15:26:03 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
- by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
- port 10024)
- with ESMTP id vnI_re1vPoMh; Wed, 10 Feb 2021 15:26:02 +0100 (CET)
-X-Auth-Info: /UKH2W6ZtODI5BnX3fT0JdDhZeN8SQZgquKb9YMnTDo=
-Received: from [IPv6:::1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.mnet-online.de (Postfix) with ESMTPSA;
- Wed, 10 Feb 2021 15:26:02 +0100 (CET)
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-References: <20210210141759.5641-1-patrice.chotard@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <ec67a889-1639-5652-2766-aeb0badb70d3@denx.de>
-Date: Wed, 10 Feb 2021 15:26:01 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+ Wed, 10 Feb 2021 17:51:17 +0000 (UTC)
+Received: by mail-qk1-f175.google.com with SMTP id u20so2502441qku.7
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 10 Feb 2021 09:51:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=AlqH3hAleXwzwLF0nBC7duD6AApS8zQbiAX2GxppT4Q=;
+ b=scLGlIAvTv9rMfRSqgtKGPm/u+o77ZZP9vXJSWZ+a2a2YCyzxOHn/OcJyxJv3tySxF
+ bNrrfDFgvnt6A3eiqPB/tOW4cb0M8AbSQ+9XDuUK2hAocy6CVdb9y7jDDhCWHAis90WA
+ j/NY/bqHCScfKykwr+BBkD+GaUGYXTPPZoHHY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=AlqH3hAleXwzwLF0nBC7duD6AApS8zQbiAX2GxppT4Q=;
+ b=NOn5ynRUKnEtIlJ7KaOMJai8Fwtr1irs65d1eNKj8JmkLtixoAZxSeySyWjKxI/l9/
+ AMaRHm4L06EMHLOx+0llmd7c9+hRP0bZtk+7H3Pgv3zJXul0ab+YXo3QnN6gAwHz04BT
+ t48Tp1i2fntz1LNq5GsACJgFMiAwtmHIFFSK1nyDztTUi6g3nPg0vcn59RJ8MJ6BD2fx
+ PxTFbXCIL0+QNfc7JwvsLSR9SdnImHYG1TL99SxULOq+nls9IOVGLnnfXiWYC3kzf9k/
+ d+QDqCfgX1A0Sdy2j1KYOsJwwW0AtMDC3erBQOG661EXZVm8txL8Mh+Y1lXErCPZX2zC
+ ENLg==
+X-Gm-Message-State: AOAM533DCcV/hqku7lt9zB2cp1zYE7c4dV6WtPQNXe7D4ZlwfhHDqj3O
+ Df8hGTUJPwrjpqm6x3yfbRasGg==
+X-Google-Smtp-Source: ABdhPJzNJ9dFo1McjF+JmeAlg593igwqCvVZSWuvWELKrB+d6OwVNBTviejhonZLYIBUIq+kSed5LQ==
+X-Received: by 2002:a05:620a:b13:: with SMTP id
+ t19mr4654036qkg.300.1612979476128; 
+ Wed, 10 Feb 2021 09:51:16 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b07-927a-9541-aad2-0c20-3f85.res6.spectrum.com.
+ [2603:6081:7b07:927a:9541:aad2:c20:3f85])
+ by smtp.gmail.com with ESMTPSA id g20sm1720254qtq.35.2021.02.10.09.51.15
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 10 Feb 2021 09:51:15 -0800 (PST)
+Date: Wed, 10 Feb 2021 12:51:13 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20210210175113.GG10169@bill-the-cat>
+References: <4966413e-eb02-fcab-f221-05fd83aa0acd@foss.st.com>
 MIME-Version: 1.0
-In-Reply-To: <20210210141759.5641-1-patrice.chotard@foss.st.com>
-Content-Language: en-US
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] usb: gadget: dwc2_udc_otg: Fix
-	dwc2_gadget_start()
+In-Reply-To: <4966413e-eb02-fcab-f221-05fd83aa0acd@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2021.04
+ = u-boot-stm32-20210209
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -56,63 +71,95 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============5230775790077805035=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 2/10/21 3:17 PM, Patrice Chotard wrote:
-> Since commit 8745b9ebccae ("usb: gadget: add super speed support")
-> ums was no more functional on platform which use dwc2_udc_otg driver.
-> 
-> Remove the speed test in dwc2_gadget_start() to fix it.
-> Tested on stm32mp157c-ev1 board.
 
-Isn't the speed check correct though ?
-
-What is really going on when this fails ?
-
-> Fixes: c791c8431c34 ("usb: dwc2: convert driver to DM_USB_GADGET")
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
->   drivers/usb/gadget/dwc2_udc_otg.c | 10 ++--------
->   1 file changed, 2 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-> index e3871e381e..4f3d761eb1 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -248,10 +248,7 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
->   
->   	debug_cond(DEBUG_SETUP != 0, "%s: %s\n", __func__, "no name");
->   
-> -	if (!driver
-> -	    || (driver->speed != USB_SPEED_FULL
-> -		&& driver->speed != USB_SPEED_HIGH)
-> -	    || !driver->bind || !driver->disconnect || !driver->setup)
-> +	if (!driver || !driver->bind || !driver->disconnect || !driver->setup)
->   		return -EINVAL;
->   	if (!dev)
->   		return -ENODEV;
-> @@ -320,10 +317,7 @@ static int dwc2_gadget_start(struct usb_gadget *g,
->   
->   	debug_cond(DEBUG_SETUP != 0, "%s: %s\n", __func__, "no name");
->   
-> -	if (!driver ||
-> -	    (driver->speed != USB_SPEED_FULL &&
-> -	     driver->speed != USB_SPEED_HIGH) ||
-> -	    !driver->bind || !driver->disconnect || !driver->setup)
-> +	if (!driver || !driver->bind || !driver->disconnect || !driver->setup)
->   		return -EINVAL;
->   
->   	if (!dev)
-> 
+--===============5230775790077805035==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="v9zSwozLQR/G44kZ"
+Content-Disposition: inline
 
 
-[...]
+--v9zSwozLQR/G44kZ
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Feb 09, 2021 at 04:02:30PM +0100, Patrick DELAUNAY wrote:
+
+>=20
+> Hi Tom,
+>=20
+> Please pull the STM32 related patches for u-boot/master, v2021.04:
+> u-boot-stm32-20210209
+>=20
+> - Enable the fastboot oem commands in stm32mp15 defconfig
+> - Fixes pinctrol for stmfx and stm32
+> - Add support of I2C6_K in stm32mp15 clock driver
+> - Alignment with Linux kernel device tree v5.11-rc2 for ST boards
+>=20
+> CI status:
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/6326
+>=20
+> Thanks,
+> Patric
+>=20
+> git request-pull origin/master
+> https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+> u-boot-stm32-20210209
+>=20
+> The following changes since commit e14d5762de1db84cae6d84d59c1e40f3eb26c4=
+c3:
+>=20
+> =A0 Merge git://git.denx.de/u-boot-marvell (2021-02-08 10:55:51 -0500)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
+> tags/u-boot-stm32-20210209
+>=20
+> for you to fetch changes up to f050e3fe4552dc8e24b1f01d26b835eeb762c467:
+>=20
+> =A0 arm: dts: stm32mp15: alignment with v5.11-rc2 (2021-02-09 10:56:06 +0=
+100)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--v9zSwozLQR/G44kZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmAkHREACgkQFHw5/5Y0
+tyx2AAv/XfQ9+PCX0PbTNTKZUyZOxVUvQqZ+nlP/ijkXi2+ScbS6HjfZXJ27GNuY
+ioflRIgmzea86vD9OrbK1zxaYh51UfSMm5CPLLyC2qeWveBPF/q0IUnYnmiv/3u7
+cQ6tbqcoHxtVMTEBrVPhfXT6XEsPR3aUQ1Njfaj7V5eyAS1tScsxCeXzehv2Jm8L
+UHNWb6LYCArAOKnwiNotHEE9mnw9A/pewR8EfoCohy7KEJnsjstEZYwrjWMKjsV3
+Kbb6WxUJbjV3DXUepWSJwP/+iIXHFSLYSelmf+VimdBV62YBVVjikyoZe3gizn2n
+q4d8z8I58MWo+/ZxoWGkjBVrOMI3eitR8PqqkaPrh1tJDmOfM0y+debNwvbMCjSz
+QIQid+MHek7acFf4DfOsZyAgsU9fP5IimP5S0zJH4G2n7HjxaK/vvtvkSnDpM/mX
+ps9v7BKqOsoFhscOYR+GbR7qJIQwZdoZjBzQuFJzv5cOClhHdY9Hl268B207xur9
+ukZw7XVX
+=d14n
+-----END PGP SIGNATURE-----
+
+--v9zSwozLQR/G44kZ--
+
+--===============5230775790077805035==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============5230775790077805035==--

@@ -2,66 +2,46 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D389331878B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Feb 2021 10:58:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 29F6131891E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 11 Feb 2021 12:14:56 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 94B16C57B52;
-	Thu, 11 Feb 2021 09:58:39 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E31B1C57B52;
+	Thu, 11 Feb 2021 11:14:55 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [85.220.165.71])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1FE64C5718A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 294BEC57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 11 Feb 2021 09:58:36 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 11B9p3F9022746; Thu, 11 Feb 2021 10:58:33 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=gknKn6HawBn215F2wwyQKMNr/E94aHD12JUwwIEEn8I=;
- b=OUPQHSO9ICP/qx/9KRcqaclWLCfcPoXvrikv07M8NSsWfYmcrZUlZq2N4dqadX2DDO7s
- z4VNujXU4jDV3xj9OxPXP5mok7veHkfGNl7FPCOQnrHJlTszWz1eflx4HiTcnKKcfb77
- sAxuDtHpESbbcb1sXVaV5LP+B/bQzJzIcMk9VkCUjutZS8q85xTpXJg1dQuLKRu/oyAX
- snr6hmjoPiznVHSLAd76GKdJ40yx4/NBadxmCc3vr78skQqIktVJdagkvFtGka+g9f9H
- 2cWo7gRbRpOAGrP/cfXAt1I5g5LcTCc2wRKFZrZrrOHEdhJZ8Tkm2F42Ai3ZxmO3IuTA lQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 36hr2cnpew-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 11 Feb 2021 10:58:33 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C5AF3100034;
- Thu, 11 Feb 2021 10:58:32 +0100 (CET)
-Received: from Webmail-eu.st.com (gpxdag2node6.st.com [10.75.127.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD830221768;
- Thu, 11 Feb 2021 10:58:32 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.122) by GPXDAG2NODE6.st.com
- (10.75.127.70) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 11 Feb
- 2021 10:58:32 +0100
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20210210141759.5641-1-patrice.chotard@foss.st.com>
- <ec67a889-1639-5652-2766-aeb0badb70d3@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <7b665909-b1d6-323c-f6a4-4221fca616c7@foss.st.com>
-Date: Thu, 11 Feb 2021 10:58:31 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Thu, 11 Feb 2021 11:14:54 +0000 (UTC)
+Received: from gallifrey.ext.pengutronix.de
+ ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[IPv6:::1])
+ by metis.ext.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1lA9vx-0002Am-Hw; Thu, 11 Feb 2021 12:14:53 +0100
+To: Tom Rini <trini@konsulko.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+References: <20210209111438.1.If6218391a7cf47afdeda5e5e6c79937b4e8ab085@changeid>
+ <804006bd-a6bc-0352-374d-6d2b33e42db9@denx.de>
+ <a64dfb56-e43c-5adf-4c07-8935f900a47f@foss.st.com>
+ <20210210195926.GJ10169@bill-the-cat>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Message-ID: <f1d19f29-d07f-c345-a329-bd912e53ec23@pengutronix.de>
+Date: Thu, 11 Feb 2021 12:14:51 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-In-Reply-To: <ec67a889-1639-5652-2766-aeb0badb70d3@denx.de>
+In-Reply-To: <20210210195926.GJ10169@bill-the-cat>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.122]
-X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To GPXDAG2NODE6.st.com
- (10.75.127.70)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.737
- definitions=2021-02-11_05:2021-02-10,
- 2021-02-11 signatures=0
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] usb: gadget: dwc2_udc_otg: Fix
-	dwc2_gadget_start()
+X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: uboot-stm32@st-md-mailman.stormreply.com
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] usb: dwc2: change compatible st,
+ stm32mp1-hsotg to st, stm32mp15-hsotg
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,51 +53,84 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgTWFyZWsKCk9uIDIvMTAvMjEgMzoyNiBQTSwgTWFyZWsgVmFzdXQgd3JvdGU6Cj4gT24gMi8x
-MC8yMSAzOjE3IFBNLCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4+IFNpbmNlIGNvbW1pdCA4NzQ1
-YjllYmNjYWUgKCJ1c2I6IGdhZGdldDogYWRkIHN1cGVyIHNwZWVkIHN1cHBvcnQiKQo+PiB1bXMg
-d2FzIG5vIG1vcmUgZnVuY3Rpb25hbCBvbiBwbGF0Zm9ybSB3aGljaCB1c2UgZHdjMl91ZGNfb3Rn
-IGRyaXZlci4KPj4KPj4gUmVtb3ZlIHRoZSBzcGVlZCB0ZXN0IGluIGR3YzJfZ2FkZ2V0X3N0YXJ0
-KCkgdG8gZml4IGl0Lgo+PiBUZXN0ZWQgb24gc3RtMzJtcDE1N2MtZXYxIGJvYXJkLgo+IAo+IElz
-bid0IHRoZSBzcGVlZCBjaGVjayBjb3JyZWN0IHRob3VnaCA/CgpJIGFtIG5vdCBzdXJlIHRoaXMg
-c3BlZWQgdGVzdCBpcyBuZWVkZWQuCgo+IAo+IFdoYXQgaXMgcmVhbGx5IGdvaW5nIG9uIHdoZW4g
-dGhpcyBmYWlscyA/CgoKU2luY2UgODc0NWI5ZWJjY2FlICgidXNiOiBnYWRnZXQ6IGFkZCBzdXBl
-ciBzcGVlZCBzdXBwb3J0IiksIApkcml2ZXItPnNwZWVkIGlzIG5vdyBzZXQgdG8gVVNCX1NQRUVE
-X1NVUEVSIGluIGRyaXZlcnMvdXNiL2dhZGdldC9jb21wb3NpdGUuYwoKYW5kIHRoaXMgZm9yYmlk
-cyBkd2MyX3VkY19vdGcuYyB0byBiZSByZWdpc3RlcmVkLgoKUGF0cmljZQoKPiAKPj4gRml4ZXM6
-IGM3OTFjODQzMWMzNCAoInVzYjogZHdjMjogY29udmVydCBkcml2ZXIgdG8gRE1fVVNCX0dBREdF
-VCIpCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJk
-QGZvc3Muc3QuY29tPgo+PiAtLS0KPj4KPj4gwqAgZHJpdmVycy91c2IvZ2FkZ2V0L2R3YzJfdWRj
-X290Zy5jIHwgMTAgKystLS0tLS0tLQo+PiDCoCAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25z
-KCspLCA4IGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy91c2IvZ2FkZ2V0
-L2R3YzJfdWRjX290Zy5jIGIvZHJpdmVycy91c2IvZ2FkZ2V0L2R3YzJfdWRjX290Zy5jCj4+IGlu
-ZGV4IGUzODcxZTM4MWUuLjRmM2Q3NjFlYjEgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvdXNiL2dh
-ZGdldC9kd2MyX3VkY19vdGcuYwo+PiArKysgYi9kcml2ZXJzL3VzYi9nYWRnZXQvZHdjMl91ZGNf
-b3RnLmMKPj4gQEAgLTI0OCwxMCArMjQ4LDcgQEAgaW50IHVzYl9nYWRnZXRfcmVnaXN0ZXJfZHJp
-dmVyKHN0cnVjdCB1c2JfZ2FkZ2V0X2RyaXZlciAqZHJpdmVyKQo+PiDCoCDCoMKgwqDCoMKgIGRl
-YnVnX2NvbmQoREVCVUdfU0VUVVAgIT0gMCwgIiVzOiAlc1xuIiwgX19mdW5jX18sICJubyBuYW1l
-Iik7Cj4+IMKgIC3CoMKgwqAgaWYgKCFkcml2ZXIKPj4gLcKgwqDCoMKgwqDCoMKgIHx8IChkcml2
-ZXItPnNwZWVkICE9IFVTQl9TUEVFRF9GVUxMCj4+IC3CoMKgwqDCoMKgwqDCoCAmJiBkcml2ZXIt
-PnNwZWVkICE9IFVTQl9TUEVFRF9ISUdIKQo+PiAtwqDCoMKgwqDCoMKgwqAgfHwgIWRyaXZlci0+
-YmluZCB8fCAhZHJpdmVyLT5kaXNjb25uZWN0IHx8ICFkcml2ZXItPnNldHVwKQo+PiArwqDCoMKg
-IGlmICghZHJpdmVyIHx8ICFkcml2ZXItPmJpbmQgfHwgIWRyaXZlci0+ZGlzY29ubmVjdCB8fCAh
-ZHJpdmVyLT5zZXR1cCkKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtRUlOVkFMOwo+PiDC
-oMKgwqDCoMKgIGlmICghZGV2KQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FTk9ERVY7
-Cj4+IEBAIC0zMjAsMTAgKzMxNyw3IEBAIHN0YXRpYyBpbnQgZHdjMl9nYWRnZXRfc3RhcnQoc3Ry
-dWN0IHVzYl9nYWRnZXQgKmcsCj4+IMKgIMKgwqDCoMKgwqAgZGVidWdfY29uZChERUJVR19TRVRV
-UCAhPSAwLCAiJXM6ICVzXG4iLCBfX2Z1bmNfXywgIm5vIG5hbWUiKTsKPj4gwqAgLcKgwqDCoCBp
-ZiAoIWRyaXZlciB8fAo+PiAtwqDCoMKgwqDCoMKgwqAgKGRyaXZlci0+c3BlZWQgIT0gVVNCX1NQ
-RUVEX0ZVTEwgJiYKPj4gLcKgwqDCoMKgwqDCoMKgwqAgZHJpdmVyLT5zcGVlZCAhPSBVU0JfU1BF
-RURfSElHSCkgfHwKPj4gLcKgwqDCoMKgwqDCoMKgICFkcml2ZXItPmJpbmQgfHwgIWRyaXZlci0+
-ZGlzY29ubmVjdCB8fCAhZHJpdmVyLT5zZXR1cCkKPj4gK8KgwqDCoCBpZiAoIWRyaXZlciB8fCAh
-ZHJpdmVyLT5iaW5kIHx8ICFkcml2ZXItPmRpc2Nvbm5lY3QgfHwgIWRyaXZlci0+c2V0dXApCj4+
-IMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPj4gwqAgwqDCoMKgwqDCoCBpZiAo
-IWRldikKPj4KPiAKPiAKPiBbLi4uXQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQt
-bWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+Hi,
+
+On 10.02.21 20:59, Tom Rini wrote:
+> On Tue, Feb 09, 2021 at 08:51:26PM +0100, Patrick DELAUNAY wrote:
+>>
+>> On 2/9/21 11:39 AM, Marek Vasut wrote:
+>>> On 2/9/21 11:14 AM, Patrick Delaunay wrote:
+>>> Hi,
+>>>
+>>> [...]
+>>>
+>>>> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c
+>>>> b/drivers/usb/gadget/dwc2_udc_otg.c
+>>>> index e3871e381e..ecac80fc11 100644
+>>>> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+>>>> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+>>>> @@ -1176,7 +1176,7 @@ static int dwc2_udc_otg_remove(struct udevice
+>>>> *dev)
+>>>> =A0 static const struct udevice_id dwc2_udc_otg_ids[] =3D {
+>>>> =A0=A0=A0=A0=A0 { .compatible =3D "snps,dwc2" },
+>>>> =A0=A0=A0=A0=A0 { .compatible =3D "brcm,bcm2835-usb" },
+>>>> -=A0=A0=A0 { .compatible =3D "st,stm32mp1-hsotg",
+>>>> +=A0=A0=A0 { .compatible =3D "st,stm32mp15-hsotg",
+>>>> =A0=A0=A0=A0=A0=A0=A0 .data =3D (ulong)dwc2_set_stm32mp1_hsotg_params =
+},
+>>>
+>>> I have to point out the obvious, DT is ABI, this breaks ABI. However, do
+>>> we care about out-of-tree DTs here ?
+>>
+>>
+>> I know that the binding backward compatibility and "binary compatible" t=
+he
+>> is a key element of DT
+>>
+>> for the Linux kernel (for example the latest kernel image should work wi=
+th a
+>> old device tree).
+> =
+
+> The way we use DTs in U-Boot we don't enforce ABI because we allow for
+> DTS and bindings to come in before they're fully stabilized in
+> linux-next/similar and then it's required to re-sync them once they are
+> final.
+
+I think platforms like the STM32MP1 should be handled specially, because
+they support having an external device tree passed from the FSBL at runtime.
+See https://github.com/trini/u-boot/blob/master/arch/arm/mach-stm32mp/boot_=
+params.c#L32
+
+@Patrick, wouldn't this change break booting newer U-Boot with older TF-A in
+some configurations? Or is this reusing-fsbl-fdt feature unused?
+
+Cheers,
+Ahmad
+
+> =
+
+> =
+
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+> =
+
+
+-- =
+
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

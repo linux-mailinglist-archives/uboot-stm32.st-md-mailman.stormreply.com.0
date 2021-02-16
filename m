@@ -2,48 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2765319FDB
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Feb 2021 14:29:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD5AF31CF17
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Feb 2021 18:32:39 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A649CC57B5A;
-	Fri, 12 Feb 2021 13:29:59 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
- [85.220.165.71])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7357BC5718A;
+	Tue, 16 Feb 2021 17:32:39 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1563FC57B59
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 97897C32EA6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Feb 2021 13:29:57 +0000 (UTC)
-Received: from gallifrey.ext.pengutronix.de
- ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[127.0.0.1])
- by metis.ext.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1lAYWC-0008Tv-J3; Fri, 12 Feb 2021 14:29:56 +0100
-To: Tom Rini <trini@konsulko.com>
-References: <20210209111438.1.If6218391a7cf47afdeda5e5e6c79937b4e8ab085@changeid>
- <804006bd-a6bc-0352-374d-6d2b33e42db9@denx.de>
- <a64dfb56-e43c-5adf-4c07-8935f900a47f@foss.st.com>
- <20210210195926.GJ10169@bill-the-cat>
- <f1d19f29-d07f-c345-a329-bd912e53ec23@pengutronix.de>
- <20210211130236.GR10169@bill-the-cat>
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-Message-ID: <bc9e9253-be74-3958-ace0-365dec27d840@pengutronix.de>
-Date: Fri, 12 Feb 2021 14:29:47 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+ Tue, 16 Feb 2021 17:32:38 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 11GGbtIR003657; Tue, 16 Feb 2021 18:32:34 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=JoJUIvIyAbjv4cDHLYyI43gylR6Pqmys30//jyxbX/8=;
+ b=OfCgii0uWdPZ0vMAq50hlMVIlqcGiyyjcDH1AOrzAt4v6XbkpPfsAnQTH5es93XWXrI3
+ obsZV7W6aP0/rXTtbHYQzirxbS+Mgm0uNBtdE8iNIRSrik4jlqnVNCimqN8KuJ8vrC69
+ a9+1ZIY5XF1PLSv8NatbMBUkb3YyPLe3KvBtNJH6znijZ+v5/WAesucd68jfvxhuDwca
+ L41R3anNfXPauIa8zB8avTtrPwK4bV4xA/XP9CNid4cMTvsFHqBXqAtZMPiz+5dR8TFU
+ w8eAEo+kecdT9Pa3HX4Q0PaX7yrpgfLqvQ416ucbjcmhtqH1I65UXcGjyQQyKCQXTy1+ Dw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 36p547hck5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Feb 2021 18:32:34 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1A86810002A;
+ Tue, 16 Feb 2021 18:32:33 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E5FBA212051;
+ Tue, 16 Feb 2021 18:32:33 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
+ (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 16 Feb
+ 2021 18:32:33 +0100
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+References: <20210210141759.5641-1-patrice.chotard@foss.st.com>
+ <ec67a889-1639-5652-2766-aeb0badb70d3@denx.de>
+ <7b665909-b1d6-323c-f6a4-4221fca616c7@foss.st.com>
+ <7b1e8706-8fa3-44e3-4bed-ff418e9d803d@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <457ca91c-8fd3-929c-be24-90b7d0d87670@foss.st.com>
+Date: Tue, 16 Feb 2021 18:32:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210211130236.GR10169@bill-the-cat>
+In-Reply-To: <7b1e8706-8fa3-44e3-4bed-ff418e9d803d@denx.de>
 Content-Language: en-US
-X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: uboot-stm32@st-md-mailman.stormreply.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
+ definitions=2021-02-16_07:2021-02-16,
+ 2021-02-16 signatures=0
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Marek Vasut <marex@denx.de>, uboot-stm32@st-md-mailman.stormreply.com,
- Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH] usb: dwc2: change compatible st,
- stm32mp1-hsotg to st, stm32mp15-hsotg
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] usb: gadget: dwc2_udc_otg: Fix
+	dwc2_gadget_start()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -60,34 +80,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 11.02.21 14:02, Tom Rini wrote:
-> On Thu, Feb 11, 2021 at 12:14:51PM +0100, Ahmad Fatoum wrote:
->> I think platforms like the STM32MP1 should be handled specially, because
->> they support having an external device tree passed from the FSBL at runtime.
->> See https://github.com/trini/u-boot/blob/master/arch/arm/mach-stm32mp/boot_params.c#L32
+Hi Marek
+
+On 2/11/21 12:26 PM, Marek Vasut wrote:
+> On 2/11/21 10:58 AM, Patrice CHOTARD wrote:
+>> Hi Marek
 >>
->> @Patrick, wouldn't this change break booting newer U-Boot with older TF-A in
->> some configurations? Or is this reusing-fsbl-fdt feature unused?
+>> On 2/10/21 3:26 PM, Marek Vasut wrote:
+>>> On 2/10/21 3:17 PM, Patrice Chotard wrote:
+>>>> Since commit 8745b9ebccae ("usb: gadget: add super speed support")
+>>>> ums was no more functional on platform which use dwc2_udc_otg driver.
+>>>>
+>>>> Remove the speed test in dwc2_gadget_start() to fix it.
+>>>> Tested on stm32mp157c-ev1 board.
+>>>
+>>> Isn't the speed check correct though ?
+>>
+>> I am not sure this speed test is needed.
+>>
+>>>
+>>> What is really going on when this fails ?
+>>
+>>
+>> Since 8745b9ebccae ("usb: gadget: add super speed support"),
+>> driver->speed is now set to USB_SPEED_SUPER in drivers/usb/gadget/composite.c
+>>
+>> and this forbids dwc2_udc_otg.c to be registered.
 > 
-> The long stated policy of U-Boot is to allow non-final bindings to be
-> used until they're finalized in Linux in order to address the "chicken
-> and egg" problem, since it's already a terrible idea to go to production
-> with a Linux kernel that's using non-final bindings.  Any older TF-A
-> that doesn't work with this newer binding should be on a developer board
-> and they can just upgrade.  Linux says "DT is ABI" and allows the ABI to
-> break when there's a bug in the DT.  We don't say "DT is ABI" we say "we
-> use the Linux kernel binding".
+> That sounds like a bug in the USB gadget/otg core , no ?
 
-I see. Thanks for the clarification.
+After analysis, if i correctly understood, the speed test done in both usb_gadget_register_driver() 
+and in dwc2_gadget_start() in dwc2_udc_otg.c is too restrictive and accepts only gadget driver with 
+max speed equal to USB_SPEED_FULL or USB_SPEED_HIGH.
 
-I am still curious what configurations use the TF-A-provided device tree
-for U-Boot. Patrick?
+So all gadget driver with max speed set to higher speed than USB_SPEED_HIGH (USB_SPEED_SUPER in case of 
+composite gadget driver) are not allowed, which is wrong.
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+This test should check that the gadget driver max speed is higher or equal to the min speed supported by 
+dwc2_udc_otg driver, ie USB_SPEED_FULL.
+
+So the test should be :
+
+@@ -247,12 +247,11 @@ int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+ 	unsigned long flags = 0;
+ 
+ 	debug_cond(DEBUG_SETUP != 0, "%s: %s\n", __func__, "no name");
+ 
+ 	if (!driver
+-	    || (driver->speed != USB_SPEED_FULL
+-		&& driver->speed != USB_SPEED_HIGH)
++	    || driver->speed < USB_SPEED_FULL
+ 	    || !driver->bind || !driver->disconnect || !driver->setup)
+ 		return -EINVAL;
+ 	if (!dev)
+ 		return -ENODEV;
+ 	if (dev->driver)
+@@ -319,12 +318,11 @@ static int dwc2_gadget_start(struct usb_gadget *g,
+ 	struct dwc2_udc *dev = the_controller;
+ 
+ 	debug_cond(DEBUG_SETUP != 0, "%s: %s\n", __func__, "no name");
+ 
+ 	if (!driver ||
+-	    (driver->speed != USB_SPEED_FULL &&
+-	     driver->speed != USB_SPEED_HIGH) ||
++	    driver->speed < USB_SPEED_FULL ||
+ 	    !driver->bind || !driver->disconnect || !driver->setup)
+ 		return -EINVAL;
+ 
+ 	if (!dev)
+
+I you are agree, i will send a v2 with this.
+
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

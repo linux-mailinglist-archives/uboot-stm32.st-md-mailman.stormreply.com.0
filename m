@@ -2,61 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179F3323D88
-	for <lists+uboot-stm32@lfdr.de>; Wed, 24 Feb 2021 14:18:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F00BF323E74
+	for <lists+uboot-stm32@lfdr.de>; Wed, 24 Feb 2021 14:43:03 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 76775C57B53;
-	Wed, 24 Feb 2021 13:18:04 +0000 (UTC)
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
- [209.85.219.180])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AA035C57B58;
+	Wed, 24 Feb 2021 13:43:03 +0000 (UTC)
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+ [209.85.222.172])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7FBDBC3087A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 337ECC57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Feb 2021 13:18:00 +0000 (UTC)
-Received: by mail-yb1-f180.google.com with SMTP id f4so1778113ybk.11
+ Wed, 24 Feb 2021 13:43:02 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id f17so2095975qkl.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Feb 2021 05:18:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ssvFpbkzqhPg8hBDuNel9XVXbPYL3nxizF9Vwl4OCRc=;
- b=Qupj98Tpjbgo7GfkFC5A7fcaulJChM2gkl5762393SR+XUXVKRJsK/T65cIEihHaPM
- t85Dvy/Zd34xanWvTnQJXTCOBs0/dKeKI7qbKI49pmPEIPr+HP3V7kemO6oGk802hmwd
- QRZsZtaEMjiEg/UQnAeZ8e+5jGnkANW1+ZvhpN0tsFEXo8o6N7mv2DAJilHtPWlcBqUm
- DNmFwx3IHdQqmGn3oIfbmiEc17G7TwgDNjitW3NoLRvn0pSrb5v1P2Djdiq/JHtZanO5
- yYZsWwS+YicyVkyDu0DYze1f1jwt6QbksxRVFuMl/Jf2xdR9UQwVMezY353c9q/pYCJg
- QkfA==
+ Wed, 24 Feb 2021 05:43:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=moZ/cRc7YaoTMcyompL5UKfFS1uKenCrRFhSkzjhwkE=;
+ b=HUKwBPkc6guZhwfKBpBRLMnFNgTRiQ1TKugUT0jXt76V1U+K/UXOU3yAVk/K/E5fkB
+ AHyTjMM422cwAIgo6alOfv3yEFV5oL4HUqBUsljOqXIR2toVF9tYdXZJ3zcNO0Y5KyrP
+ i8RVaXy76flR3jO740/fzbqU+gcoe8QJ5Eb/4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ssvFpbkzqhPg8hBDuNel9XVXbPYL3nxizF9Vwl4OCRc=;
- b=qRrQ+gQ2qaf38ikKn9Hch7MviBGG8+JPBJIs8p3H89OPTDgfPkVRuRbf5gNYny0lj9
- l/Cc7rRIDRiPrJdGdRuAP39yU2mDH6KIVuLQRdryOUPSHeLt5FkQEvCXb65NSNFwE8sc
- nv1IKBklnvCehQy9RUIZuiwQDMAAnLwRkst7o2Yit8OSF5llBM/2/VIc4vN64H9uQz47
- u0Bu+Ts58+c/bjfYa0fK+RvJQiFaoWwi+0Xh4sNtylQEVYhAbBuYgQN5fbM8NR3dpADk
- NZKsWVykPTA5S7TR5Rhqb7+oNYD1zN+CFZORisHRPXyLNSvgYqTjHsqC94flRyiF2JvL
- rbRQ==
-X-Gm-Message-State: AOAM5334VWg2ETdWRkwz9uvfKf+PpU1+fYsQSi1RgiZyDamN7tb1iYHm
- H2lHnTLUx5qjjjE5P4BR2DDJljrv+Jd+ywb59T0=
-X-Google-Smtp-Source: ABdhPJznL/hFT6MKBYlDY9oBD87W7KyJsyiXdw6yIFS0k6iZWk+kAinLPbvpyeVQcLxM2wcHxyM1w7i7a46P2qqBdss=
-X-Received: by 2002:a25:d28b:: with SMTP id
- j133mr44563572ybg.517.1614172679608; 
- Wed, 24 Feb 2021 05:17:59 -0800 (PST)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=moZ/cRc7YaoTMcyompL5UKfFS1uKenCrRFhSkzjhwkE=;
+ b=r6YOhvBBCXiwtn7wgkmbNDK5UhtlBWTZ+8Nx5/zn8q+9qNsy6ClRKM6PIU35W7Kq/r
+ Cjqc7La/7o2iESkefuwlMmLHYPqAkC6mN4eZkHLmAiQympRxGKzG2PVEySiww3eKbYuT
+ PvHuReqEv/MArJl4z9Nvo6SY/A6nQJKRcY28BUnjnJfS/w99Gm3XCTLLL3s0siHhyRG7
+ 064zcVb+PoXzL1Xu/HkT5oU8bXBiXwX6Q1J/m1RSGx9pivmcaWKGAEMiZhnjwNoaWqJT
+ zT5xDFWvIdzll1TZvYUKukA4VWcp6eAenLSaGOtARXlN06xkOy03f/tA6CJj046ppp8F
+ p/UA==
+X-Gm-Message-State: AOAM5333YJxsPEN7GEc2a/xU/k4DM9/uVl7mFtd3S+zznVOdZNCze/+d
+ 7Q9KbrZzHPxB5RBGMqdLYL19OQ==
+X-Google-Smtp-Source: ABdhPJyU7NffsRCk+w+rPUOipGcxIJqjSLZtd8rMHLSnKZ04EiM3B7CLT0/VmAI4ngWcmyQboyq9Hg==
+X-Received: by 2002:a37:794:: with SMTP id 142mr30699946qkh.108.1614174181017; 
+ Wed, 24 Feb 2021 05:43:01 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b07-927a-359f-2326-aa06-4d35.res6.spectrum.com.
+ [2603:6081:7b07:927a:359f:2326:aa06:4d35])
+ by smtp.gmail.com with ESMTPSA id k26sm1427337qkj.131.2021.02.24.05.42.59
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 24 Feb 2021 05:42:59 -0800 (PST)
+Date: Wed, 24 Feb 2021 08:42:57 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Message-ID: <20210224134257.GJ10169@bill-the-cat>
 References: <20210224121904.13927-1-xypron.glpk@gmx.de>
-In-Reply-To: <20210224121904.13927-1-xypron.glpk@gmx.de>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Wed, 24 Feb 2021 21:17:46 +0800
-Message-ID: <CAEUhbmV-ie_-G=jASQNDQ26VO78jQXX5D-wQUJPp3psWS67snQ@mail.gmail.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+ <CAEUhbmV-ie_-G=jASQNDQ26VO78jQXX5D-wQUJPp3psWS67snQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAEUhbmV-ie_-G=jASQNDQ26VO78jQXX5D-wQUJPp3psWS67snQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Cc: Lokesh Vutla <lokeshvutla@ti.com>, Bin Meng <bin.meng@windriver.com>,
  Sean Anderson <seanga2@gmail.com>, Stefan Bosch <stefan_b@posteo.net>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Naoki Hayama <naoki.hayama@lineo.co.jp>, Weijie Gao <weijie.gao@mediatek.com>,
+ Stefan Roese <sr@denx.de>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Naoki Hayama <naoki.hayama@lineo.co.jp>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Weijie Gao <weijie.gao@mediatek.com>,
  Marek Vasut <marek.vasut@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
  Wolfgang Denk <wd@denx.de>,
@@ -76,41 +82,70 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0804305563487408264=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Heinrich,
 
-On Wed, Feb 24, 2021 at 8:20 PM Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> The U-Boot source moves to https://source.denx.de/u-boot/u-boot.git
-> effective 2021-02-28.
+--===============0804305563487408264==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="xkNb03ROHe2/B3kn"
+Content-Disposition: inline
 
-Where is this information posted?
 
->
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  .gitlab-ci.yml                              |   2 +-
->  MAINTAINERS                                 | 110 ++++++++++----------
->  README                                      |   4 +-
->  board/st/common/MAINTAINERS                 |   2 +-
->  board/st/stm32mp1/MAINTAINERS               |   2 +-
->  board/ti/j721e/README                       |   2 +-
->  board/xilinx/microblaze-generic/MAINTAINERS |   2 +-
->  board/xilinx/versal/MAINTAINERS             |   2 +-
->  board/xilinx/zynq/MAINTAINERS               |   2 +-
->  board/xilinx/zynqmp/MAINTAINERS             |   2 +-
->  doc/board/intel/slimbootloader.rst          |   2 +-
->  doc/build/source.rst                        |   2 +-
->  12 files changed, 67 insertions(+), 67 deletions(-)
->
+--xkNb03ROHe2/B3kn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Bin
+On Wed, Feb 24, 2021 at 09:17:46PM +0800, Bin Meng wrote:
+> Hi Heinrich,
+>=20
+> On Wed, Feb 24, 2021 at 8:20 PM Heinrich Schuchardt <xypron.glpk@gmx.de> =
+wrote:
+> >
+> > The U-Boot source moves to https://source.denx.de/u-boot/u-boot.git
+> > effective 2021-02-28.
+>=20
+> Where is this information posted?
+
+https://lists.denx.de/pipermail/u-boot/2021-February/442175.html
+
+Which yes, we need to figure out how to get more widely seen most
+likely.
+
+--=20
+Tom
+
+--xkNb03ROHe2/B3kn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmA2V90ACgkQFHw5/5Y0
+tywVGgwAnlILq99hKgmKncqmBtAJ5qv824Hd9/nT6UK4qftfbjdWs0+APlKYRQ8K
+5UNrQixLGJ+5Gg1gAOekl+8fXH+K1TvMF9VvQLlToV3w03NfVph1WaVTN+0iyE6L
++IPhpgOatj6z5o2/QRKmLFCP9RrkRjynDPBXC/ldaGzaPogxUj0z+VM4opn42aou
+qXV9wAVOGrJ7E+8K8+2EkKuSDyBf/9ZtaM7ZyV/6pUiD7IWA2NW0IJiFM8wZzg4z
+SMOGOB7gGNXQCG3el+U9y0IAW7uo+rYTYUoNSBACoOyrW3k7cFpDy6W25BoagOYY
+DU7dVdFzWaPDRm/gwTli87RLLYRU99xW3rScJvGL2XBRRsHkfMuDpkugaHchUEZE
+ssNEYNJGC/BIY1fPmQgLTnor5qR6Qy+DbYiZHaXCyi5YLb8cy4diqw2BfYQxRqnq
+nTozDEz2+0E7fsGjwBvW7n1aGbTFbBRNV7y6IwqCwdcb0a86YKx7j1pkNC5hlESc
+T4WECIt3
+=IQxo
+-----END PGP SIGNATURE-----
+
+--xkNb03ROHe2/B3kn--
+
+--===============0804305563487408264==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0804305563487408264==--

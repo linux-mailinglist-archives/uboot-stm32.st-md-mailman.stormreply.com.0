@@ -2,71 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F09F13241AF
-	for <lists+uboot-stm32@lfdr.de>; Wed, 24 Feb 2021 17:17:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13321324209
+	for <lists+uboot-stm32@lfdr.de>; Wed, 24 Feb 2021 17:26:07 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AF1D5C57B58;
-	Wed, 24 Feb 2021 16:17:07 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3BFDC57B58;
+	Wed, 24 Feb 2021 16:26:06 +0000 (UTC)
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com
+ [209.85.219.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 808D3C57B53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 291FDC57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Feb 2021 16:17:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1614183404;
- bh=2htUeZGa0BBnqyVhMBajSboFFZBZz0/E1gv+xm37/l8=;
- h=X-UI-Sender-Class:Date:In-Reply-To:References:Subject:To:CC:From;
- b=DBv1eQ6yQCZwdPcPU/BOAUmlnxLN9mPMeirfuwJ+46+euv5banV8ilhIgwtltdDJS
- OGzDRtXBOA9ifag79ltXuvl8zRp876ELAyMVi4O8ktmPfqY1HxxlCxv/ZWgJCryDPu
- 65ik9gxwfs7KmFDZdfpRkP2k4BVHWRUl9tm8iVlw=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from android-8ab098a1be3e92ba.fritz.box ([62.143.246.89]) by
- mail.gmx.net (mrgmx005 [212.227.17.190]) with ESMTPSA (Nemesis) id
- 1M3DJv-1lGJkX0i1V-003e60; Wed, 24 Feb 2021 17:16:44 +0100
-Date: Wed, 24 Feb 2021 17:16:38 +0100
-User-Agent: K-9 Mail for Android
-In-Reply-To: <633221.1614183196@gemini.denx.de>
+ Wed, 24 Feb 2021 16:26:04 +0000 (UTC)
+Received: by mail-qv1-f54.google.com with SMTP id s3so1255841qvn.7
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 24 Feb 2021 08:26:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=tDwe3Yl6k5+04x7KxtqoO569MhHP6vT3sTwbUOb5hSI=;
+ b=I9+wai1tIfCtGDscjHfgBvrdEgqDre8h/L8QJ8AS0/zlMFJ4Fa4CXhB7JgfiNHbHcx
+ dns+ye35iuOIIsmudtCzSZDzcQUAbAkEVP4JX2+ocdh0/YrlEkU1qKwj/F7N1FrgaMD2
+ 0S3Wsx+sr7ml7W2STExDhTdmP9ek3ERF/GWUc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=tDwe3Yl6k5+04x7KxtqoO569MhHP6vT3sTwbUOb5hSI=;
+ b=NfvxN9VZlABG+FXMEvvDt8PokUXlTaWQKLRJcFM4Fnz3erPGFR9LL1+BhLcoVOH3Yz
+ NoNJHvarVX/AIFPtTiUaQCNcKAIEd8A1iHn3X8QRqhgp82/A7Tc3cpUUpyvKolLvZ1Y3
+ 3xj23SMN79Y0OOgE5WW07Ljw0LfweF69WkcUrcjgMESuJtDvw8S9p4NLZ4qDHUOjLKJQ
+ fcyiPMYCGXwHjQG0sCLjGsg8oAnPf/MNXLS0SXgkV1FVgcell9/ijapNXP6tbs7uEKMh
+ nSnwqaK2bBebmNZkFwW4yXPK7K2v23RM91SXUNcIudDZ2bztjIaqRIOFa3wFnxiKytQm
+ RofA==
+X-Gm-Message-State: AOAM530aLEQsAAiegV0TAD3j4eNGMFLYeK8xgM4KqfCqRqYn9otcp5YA
+ MbHdK1cBm+YCb3FT4yZNK6faQQ==
+X-Google-Smtp-Source: ABdhPJz+jKC0dDazqS+0tn6ji/x/aE3e3ulmpqtBCy4wYJVQ+HydsaQLOigrMiiUMZWuFr51t7W/vQ==
+X-Received: by 2002:a0c:cc8d:: with SMTP id f13mr7446489qvl.8.1614183963771;
+ Wed, 24 Feb 2021 08:26:03 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b07-927a-359f-2326-aa06-4d35.res6.spectrum.com.
+ [2603:6081:7b07:927a:359f:2326:aa06:4d35])
+ by smtp.gmail.com with ESMTPSA id u126sm1770971qkc.107.2021.02.24.08.26.02
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Wed, 24 Feb 2021 08:26:03 -0800 (PST)
+Date: Wed, 24 Feb 2021 11:26:00 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Wolfgang Denk <wd@denx.de>
+Message-ID: <20210224162600.GN10169@bill-the-cat>
 References: <20210224121904.13927-1-xypron.glpk@gmx.de>
  <CAEUhbmV-ie_-G=jASQNDQ26VO78jQXX5D-wQUJPp3psWS67snQ@mail.gmail.com>
- <20210224134257.GJ10169@bill-the-cat> <633221.1614183196@gemini.denx.de>
+ <20210224134257.GJ10169@bill-the-cat>
+ <633221.1614183196@gemini.denx.de>
 MIME-Version: 1.0
-To: Wolfgang Denk <wd@denx.de>,Tom Rini <trini@konsulko.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <DEE92836-32D1-4113-A3DA-88EF3805968E@gmx.de>
-X-Provags-ID: V03:K1:u87cj8dazoTyy+VhFlbv7Q8mO929unnsFAiPiN9UPTUdqLuZR1I
- cK6hfCnYEbt2LhI1Ueye3I6rmxjWlMNFdjUvmeh4LfwUTACGM9unAV+8QrIenTQnEoO8Idp
- I6I7dfk3fYwBvDELrUJweDqU5MNI/Oi++YH7bIJ9fIHOKDy9RG6jIomqAg/Vq/yOAAqwcNn
- ko0fihyXOCUaW+1sRf+Gw==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:HichM5yTDR4=:xJZxTZ7qsJu/k7sw1wn/Pa
- Ah3TBIqZIyIVAS5+oq4KT2hDISBzLwxd5c845I+o5VW6ARFlmuLtT3HH3k2tbNrAh9khRZ7Ir
- YlVCsl856tdr3iYm/KY8a2s82wtv4FPqkQxS2C+1czJ9Kh85AwGNKnZWFCeyslgdtOgkNPohR
- 5aSaYupe2Gq+ONaLSALFcVpkN5p0SBlCNfpZ3hRqEnUrv5L4Okj+gOdcFJukfvG8F/aTetVSd
- CdftTuU8M8B7zLoitJziJutmCu4EJhTbXCG+SMn6OWNeZE68zRFq97Gtsg//NC9HXBep+Bk/U
- WfZFBcyk97dmllxqzhQNMH42HIV6ZC8VZKK1Y296thLJqr9YgOxikyHwFgCkfJXLg5yuKF0wS
- iYaxX1+srolzrVYQtTrRwZyDq82hkkvfSqZHH6R21uGSP5sU0ahJ1t3U2e3Ok9onDPvh8te+n
- Orbl8eCwQyqIVePnfpWSeO4XyRKLAw63K8xLPfwB8IN2sZXjHw5LYo5rvYvJwjoudpAywlutm
- zisb91gUPgEbojvOkuyv2G23cW2W6hWQZc88vYJCSki6s52XTmTnH3zeh/XnxyeEHGSalDZEz
- Mlq4WjtOGDRH40tZ2Tm2fj/VmFQxrDOAFEE57H/YVCaYp7PUg+onV6642dunVAXvU68ULE4fG
- PuCdgLMTDHt/qdL/9MaKEu6XcrF5tyTy8Dwj5MC8hu790jdfUpMmlb6L2cl4BnUaDtYcYBIpx
- JmSfTZWDW4D4T1QNMbdeVuJBA4sZ7q43BYeZahgqR1I+X51NZrx85IeLTXSfL+nF9UwFol5k4
- oC4Ocv/OHch4H01oOYHl/coZm5RFvLKhhwGnN5S1dCQeoziSkQLS30EG1w7fUkdVSs7pqwFCg
- nb1UFWxzJGFRsvW5msRw==
-Cc: Michal Simek <monstr@monstr.eu>, Robert Marko <robert.marko@sartura.hr>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Lokesh Vutla <lokeshvutla@ti.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bin.meng@windriver.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Stefan Roese <sr@denx.de>,
+In-Reply-To: <633221.1614183196@gemini.denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Lokesh Vutla <lokeshvutla@ti.com>, Bin Meng <bin.meng@windriver.com>,
  Sean Anderson <seanga2@gmail.com>, Stefan Bosch <stefan_b@posteo.net>,
- Marek Vasut <marek.vasut@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Naoki Hayama <naoki.hayama@lineo.co.jp>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bin Meng <bmeng.cn@gmail.com>, Adam Ford <aford173@gmail.com>
+ Stefan Roese <sr@denx.de>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Naoki Hayama <naoki.hayama@lineo.co.jp>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Marek Vasut <marek.vasut@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Robert Marko <robert.marko@sartura.hr>, Adam Ford <aford173@gmail.com>,
+ Michal Simek <monstr@monstr.eu>, Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
 Subject: Re: [Uboot-stm32] [PATCH 1/1] Correct U-Boot upstream repository
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -79,39 +83,76 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4842389322006097579=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Am 24. Februar 2021 17:13:16 MEZ schrieb Wolfgang Denk <wd@denx.de>:
->Dear Tom,
->
->In message <20210224134257.GJ10169@bill-the-cat> you wrote:
->> 
->> > Where is this information posted?
->>
->> https://lists.denx.de/pipermail/u-boot/2021-February/442175.html
->>
->> Which yes, we need to figure out how to get more widely seen most
->> likely.
->
->Well, I posted it on the U-Boot list, and on the Custodian and Board
->Mainteiner lists, too (plus on the Xenomai list).
->
->I also update the link on the web page.
->
->What else can be done?  If people don't even read messages flagged
->as important ?
 
-If we can have a redirect on the old server, we should be fine.
+--===============4842389322006097579==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="HWZX0a4mpW+prPEs"
+Content-Disposition: inline
 
-Best regards
 
-Heinrich
+--HWZX0a4mpW+prPEs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Feb 24, 2021 at 05:13:16PM +0100, Wolfgang Denk wrote:
+> Dear Tom,
+>=20
+> In message <20210224134257.GJ10169@bill-the-cat> you wrote:
+> >=20
+> > > Where is this information posted?
+> >
+> > https://lists.denx.de/pipermail/u-boot/2021-February/442175.html
+> >
+> > Which yes, we need to figure out how to get more widely seen most
+> > likely.
+>=20
+> Well, I posted it on the U-Boot list, and on the Custodian and Board
+> Mainteiner lists, too (plus on the Xenomai list).
+>=20
+> I also update the link on the web page.
+>=20
+> What else can be done?  If people don't even read messages flagged
+> as important ?
+
+I don't know.  I'm updating the #u-boot IRC topic as well.
+
+--=20
+Tom
+
+--HWZX0a4mpW+prPEs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmA2fhUACgkQFHw5/5Y0
+tyyCpgv/bzED+7VKOgTGacT+X6i9XdFgHdfyR/svbmb7yMXb3DTBrrlsvAjOgmJM
+qlYz293ShBTOTatINz0R5qPKcCESTgv3/OSgKldjc5bFSflvR302nsvjOQyjwxSe
+4Q1I1adiGR6vl5vjYPPSJovFW8kw2j625Vny6AwPu8uTJXRVgc3JkdabBEXM90UH
+kkZEplKo/TJ5JBaab2Zt/1nFgBIJxvy/7HiKFHruVErNZD1GTP9PZT2LO4S14fkY
+ONJ75P0M0J4TQ2zlA9w8DBQPCYChHvqhp2a594qSkPFDRZfHwwJ19KYCu4tdazGi
+tjm0Skw1soTdItSFtIbSPw38XuaMW30yMUEmMGzJWnv9eRN/acLYiWt4bewQDiUA
+Oc5xBspD1DCt3uRGHG4n9Gytj8uXUzxWzE6Lz4dXIkVANpe7/FWgTsEgDUfMed17
+SxHmyHY4KK65TWw4J8uCZwdPs9xat1GHLYkHJCXNSla6bO0wrN+LaLuqH/ZKlRik
+6IQQeKhf
+=g+K3
+-----END PGP SIGNATURE-----
+
+--HWZX0a4mpW+prPEs--
+
+--===============4842389322006097579==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============4842389322006097579==--

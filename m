@@ -2,60 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C88B324FEE
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Feb 2021 13:43:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0995A3256B6
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Feb 2021 20:31:59 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 52A5AC57B58;
-	Thu, 25 Feb 2021 12:43:13 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BDD2DC57B58;
+	Thu, 25 Feb 2021 19:31:58 +0000 (UTC)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+ [209.85.210.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C329C57B53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 71A57C57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Feb 2021 12:43:12 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 11PCaVqJ001995; Thu, 25 Feb 2021 13:43:11 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=/6CqcYO+s1IteT2QdABzJkAPW/xPtc4Oj/GAeMUzvJY=;
- b=NRCQyP1WHwQuTb/StZSFayXh2b+0ocvr85YliaYEHlaABApKk4Gb0L+kVtL4lzFtHqLR
- uR9HB/yv0KMIPRqduC0ZBk9S9tp2RjOHgk9iInQUgTix44XzERfZkLQfime3kDflvHHC
- ejMP/GyTAW7/xyxihIlY3ygfmE6KHK83nZR78RbjttUjjouM7/S/vDEQ3b6ET+uy/d3X
- mJBQPhJAh8oNvIjpxR8qPntBVbFXE6d8oO3fcvF7i0+yMtYChMUa8cmnjarJ3P6aCbhw
- SiqmSH9NU1LI/TalPlSNMsG/jQhZwuoMSKHR60HuHPG1fKoqvPqLrxWqvEjKq0bngJUE Mw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 36w66vnpr8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 Feb 2021 13:43:11 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 92A4E10002A;
- Thu, 25 Feb 2021 13:43:10 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 89E0222D635;
- Thu, 25 Feb 2021 13:43:10 +0100 (CET)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 25 Feb 2021 13:43:10
- +0100
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 25 Feb 2021 13:43:07 +0100
-Message-ID: <20210225134305.1.Iec7b40977c201f0a99cbaa730765c4888e950074@changeid>
-X-Mailer: git-send-email 2.17.1
+ Thu, 25 Feb 2021 19:31:57 +0000 (UTC)
+Received: by mail-ot1-f47.google.com with SMTP id s3so6826979otg.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 25 Feb 2021 11:31:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tr7aLauAa0XY+ZlItf+ZiiAX37Ta9H+GiFsWMRg/N7E=;
+ b=CxxuAAP2oDl8aefQYVlVjQOoUwKHrwG4SDvP15pxrpaxieQXcNkhtOxNLD5mAXwGyE
+ cC9qFSD8hc7K/oaRQS2VKXLb7MYXGUQgmNVwXK0nPox7M0BKIZ9EK+5zJKY29l2j9fMS
+ mgHSbKF71M+brEzb37AY1chfmKHbWeIG3RnvE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tr7aLauAa0XY+ZlItf+ZiiAX37Ta9H+GiFsWMRg/N7E=;
+ b=Dp+cTQbn9phrglUAtRogTOuHggOQijd09/3fV+zS39vv3aEC9rfJ8C2rSAI+iJWfX8
+ /gmay4NPaQzvQHC85taL/ZBzt+zSBGGg1mrFWVBkoGyrKMdhZ+ctJVqvjijQq0+UwggQ
+ +ly2oJEzx+ybSCPxGPFK4+BrVtauG8Ddygdk41C6MV17ujdNmgaz27qdo7NSNRr4fMxd
+ NNjmO+zhRevGlzcNONYb21j2j1N8cJuGqUpvS17+qxJlcTUfGPOXWTAgEdkwEU+4x+fE
+ VFKlGBwqdYCPNgi3HcCUiwCAUVHCXrDRjT1eEFPNTcCRRXpDcgEdkqW5zrfPgjeTdqnj
+ oKtA==
+X-Gm-Message-State: AOAM530k3ZCsqqbKJ9csXq7EAAmy6Y06gG5zKuSfu5YUYXNiu+wC6Lu0
+ Jl/4EYDJxmf9k9iY3tUgYOp/xvC8EfCWzlf6E5YpiA==
+X-Google-Smtp-Source: ABdhPJzTKImLnMjI7xiFdqiw0k2l/bG3QdfTAEMdi6FWCYNn0SW6GHWY+fdcQQt4ij9lrxPcMgMILWEoglGuC5Cea6s=
+X-Received: by 2002:a05:6830:314a:: with SMTP id
+ c10mr3581060ots.54.1614281515799; 
+ Thu, 25 Feb 2021 11:31:55 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
- definitions=2021-02-25_07:2021-02-24,
- 2021-02-25 signatures=0
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+References: <20210224101946.32003-1-patrick.delaunay@foss.st.com>
+ <20210224111907.4.I390560c87a294deb05e06e1ad92e02fb736ba9a0@changeid>
+In-Reply-To: <20210224111907.4.I390560c87a294deb05e06e1ad92e02fb736ba9a0@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 25 Feb 2021 14:31:36 -0500
+Message-ID: <CAPnjgZ0tsi6_ooMkErpaxGzHB2mdE09g2Q0x=iEzxuPHfEP=iA@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Anderson <seanga2@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp: bsec: manage clock when present in
-	device tree
+ Etienne Carriere <etienne.carriere@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH 4/6] scmi: define LOG_CATEGORY
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,45 +69,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Enable the clocks during bsec probe when they are present in device tree.
+On Wed, 24 Feb 2021 at 05:20, Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> Define LOG_CATEGORY to allow filtering with log command.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+>  drivers/firmware/scmi/mailbox_agent.c        | 2 ++
+>  drivers/firmware/scmi/sandbox-scmi_agent.c   | 2 ++
+>  drivers/firmware/scmi/sandbox-scmi_devices.c | 2 ++
+>  drivers/firmware/scmi/scmi_agent-uclass.c    | 2 ++
+>  drivers/firmware/scmi/smccc_agent.c          | 2 ++
+>  drivers/firmware/scmi/smt.c                  | 2 ++
+>  6 files changed, 12 insertions(+)
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- arch/arm/mach-stm32mp/bsec.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
-index 88c7aec8b4..fe39bd80cf 100644
---- a/arch/arm/mach-stm32mp/bsec.c
-+++ b/arch/arm/mach-stm32mp/bsec.c
-@@ -6,6 +6,7 @@
- #define LOG_CATEGORY UCLASS_MISC
- 
- #include <common.h>
-+#include <clk.h>
- #include <dm.h>
- #include <log.h>
- #include <misc.h>
-@@ -490,6 +491,15 @@ static int stm32mp_bsec_probe(struct udevice *dev)
- {
- 	int otp;
- 	struct stm32mp_bsec_plat *plat;
-+	struct clk_bulk clk_bulk;
-+	int ret;
-+
-+	ret = clk_get_bulk(dev, &clk_bulk);
-+	if (!ret) {
-+		ret = clk_enable_bulk(&clk_bulk);
-+		if (ret)
-+			return ret;
-+	}
- 
- 	/*
- 	 * update unlocked shadow for OTP cleared by the rom code
--- 
-2.17.1
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

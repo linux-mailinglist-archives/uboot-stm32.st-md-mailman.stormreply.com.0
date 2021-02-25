@@ -2,69 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13321324209
-	for <lists+uboot-stm32@lfdr.de>; Wed, 24 Feb 2021 17:26:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94612324BB1
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Feb 2021 09:07:15 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3BFDC57B58;
-	Wed, 24 Feb 2021 16:26:06 +0000 (UTC)
-Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com
- [209.85.219.54])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5631BC57B53;
+	Thu, 25 Feb 2021 08:07:15 +0000 (UTC)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 291FDC57B53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0EFA3C3FADC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Feb 2021 16:26:04 +0000 (UTC)
-Received: by mail-qv1-f54.google.com with SMTP id s3so1255841qvn.7
+ Thu, 25 Feb 2021 08:07:13 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 4DmQPF1g7kz1qsZn
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 24 Feb 2021 08:26:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=tDwe3Yl6k5+04x7KxtqoO569MhHP6vT3sTwbUOb5hSI=;
- b=I9+wai1tIfCtGDscjHfgBvrdEgqDre8h/L8QJ8AS0/zlMFJ4Fa4CXhB7JgfiNHbHcx
- dns+ye35iuOIIsmudtCzSZDzcQUAbAkEVP4JX2+ocdh0/YrlEkU1qKwj/F7N1FrgaMD2
- 0S3Wsx+sr7ml7W2STExDhTdmP9ek3ERF/GWUc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=tDwe3Yl6k5+04x7KxtqoO569MhHP6vT3sTwbUOb5hSI=;
- b=NfvxN9VZlABG+FXMEvvDt8PokUXlTaWQKLRJcFM4Fnz3erPGFR9LL1+BhLcoVOH3Yz
- NoNJHvarVX/AIFPtTiUaQCNcKAIEd8A1iHn3X8QRqhgp82/A7Tc3cpUUpyvKolLvZ1Y3
- 3xj23SMN79Y0OOgE5WW07Ljw0LfweF69WkcUrcjgMESuJtDvw8S9p4NLZ4qDHUOjLKJQ
- fcyiPMYCGXwHjQG0sCLjGsg8oAnPf/MNXLS0SXgkV1FVgcell9/ijapNXP6tbs7uEKMh
- nSnwqaK2bBebmNZkFwW4yXPK7K2v23RM91SXUNcIudDZ2bztjIaqRIOFa3wFnxiKytQm
- RofA==
-X-Gm-Message-State: AOAM530aLEQsAAiegV0TAD3j4eNGMFLYeK8xgM4KqfCqRqYn9otcp5YA
- MbHdK1cBm+YCb3FT4yZNK6faQQ==
-X-Google-Smtp-Source: ABdhPJz+jKC0dDazqS+0tn6ji/x/aE3e3ulmpqtBCy4wYJVQ+HydsaQLOigrMiiUMZWuFr51t7W/vQ==
-X-Received: by 2002:a0c:cc8d:: with SMTP id f13mr7446489qvl.8.1614183963771;
- Wed, 24 Feb 2021 08:26:03 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b07-927a-359f-2326-aa06-4d35.res6.spectrum.com.
- [2603:6081:7b07:927a:359f:2326:aa06:4d35])
- by smtp.gmail.com with ESMTPSA id u126sm1770971qkc.107.2021.02.24.08.26.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 24 Feb 2021 08:26:03 -0800 (PST)
-Date: Wed, 24 Feb 2021 11:26:00 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Wolfgang Denk <wd@denx.de>
-Message-ID: <20210224162600.GN10169@bill-the-cat>
+ Thu, 25 Feb 2021 09:07:13 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
+ by mail.m-online.net (Postfix) with ESMTP id 4DmQPF1PjNz1sP6k
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 25 Feb 2021 09:07:13 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
+ port 10024) with ESMTP id UQEkuq-dkq9v
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 25 Feb 2021 09:07:12 +0100 (CET)
+X-Auth-Info: /YamC/j18jpF/YHzyS76Wt9dUoYg2u3+2dPVVkvhptI=
+Received: from janitor.denx.de (unknown [62.91.23.180])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.mnet-online.de (Postfix) with ESMTPSA
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 25 Feb 2021 09:07:12 +0100 (CET)
+Received: by janitor.denx.de (Postfix, from userid 108)
+ id 30E8FA01CB; Thu, 25 Feb 2021 09:07:12 +0100 (CET)
+Received: from gemini.denx.de (gemini.denx.de [10.4.0.2])
+ by janitor.denx.de (Postfix) with ESMTPS id 60B68A003E;
+ Thu, 25 Feb 2021 09:07:01 +0100 (CET)
+Received: from gemini.denx.de (localhost [IPv6:::1])
+ by gemini.denx.de (Postfix) with ESMTP id 36060246410;
+ Thu, 25 Feb 2021 09:07:01 +0100 (CET)
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+From: Wolfgang Denk <wd@denx.de>
+MIME-Version: 1.0
+In-reply-to: <DEE92836-32D1-4113-A3DA-88EF3805968E@gmx.de>
 References: <20210224121904.13927-1-xypron.glpk@gmx.de>
  <CAEUhbmV-ie_-G=jASQNDQ26VO78jQXX5D-wQUJPp3psWS67snQ@mail.gmail.com>
- <20210224134257.GJ10169@bill-the-cat>
- <633221.1614183196@gemini.denx.de>
-MIME-Version: 1.0
-In-Reply-To: <633221.1614183196@gemini.denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
+ <20210224134257.GJ10169@bill-the-cat> <633221.1614183196@gemini.denx.de>
+ <DEE92836-32D1-4113-A3DA-88EF3805968E@gmx.de>
+Comments: In-reply-to Heinrich Schuchardt <xypron.glpk@gmx.de>
+ message dated "Wed, 24 Feb 2021 17:16:38 +0100."
+Date: Thu, 25 Feb 2021 09:07:01 +0100
+Message-ID: <649349.1614240421@gemini.denx.de>
 Cc: Lokesh Vutla <lokeshvutla@ti.com>, Bin Meng <bin.meng@windriver.com>,
  Sean Anderson <seanga2@gmail.com>, Stefan Bosch <stefan_b@posteo.net>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Naoki Hayama <naoki.hayama@lineo.co.jp>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Naoki Hayama <naoki.hayama@lineo.co.jp>, Weijie Gao <weijie.gao@mediatek.com>,
  Marek Vasut <marek.vasut@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -83,76 +79,46 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4842389322006097579=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Dear Heinrich,
 
---===============4842389322006097579==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="HWZX0a4mpW+prPEs"
-Content-Disposition: inline
+In message <DEE92836-32D1-4113-A3DA-88EF3805968E@gmx.de> you wrote:
+>
+> If we can have a redirect on the old server, we should be fine.
 
+I wrote:
 
---HWZX0a4mpW+prPEs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+| We will install redirects to forward HTTP accesses from the old
+| repository URLs to the new host.  This should make the transition
+| mostly transparent, but does not cover everything.  The following
+| needs to be taken care of manually:
+| 
+| - Update the SSH URI for pushing to the repositories.  Just replace
+|   gitlab.denx.de  with  source.denx.de .  We will transfer all the
+|   SSH-keys to the new host so nothing else should be needed.
+| 
+| - Make sure you're logging in on  source.denx.de .  Access to
+|   gitlab.denx.de  will no longer work!
+| 
+| - CI runners connected to  gitlab.denx.de  need to be re-registered
+|   with  source.denx.de .
 
-On Wed, Feb 24, 2021 at 05:13:16PM +0100, Wolfgang Denk wrote:
-> Dear Tom,
->=20
-> In message <20210224134257.GJ10169@bill-the-cat> you wrote:
-> >=20
-> > > Where is this information posted?
-> >
-> > https://lists.denx.de/pipermail/u-boot/2021-February/442175.html
-> >
-> > Which yes, we need to figure out how to get more widely seen most
-> > likely.
->=20
-> Well, I posted it on the U-Boot list, and on the Custodian and Board
-> Mainteiner lists, too (plus on the Xenomai list).
->=20
-> I also update the link on the web page.
->=20
-> What else can be done?  If people don't even read messages flagged
-> as important ?
+And just to avoid misunderstandings: MTTPS too, of course.
 
-I don't know.  I'm updating the #u-boot IRC topic as well.
+Best regards,
 
---=20
-Tom
+Wolfgang Denk
 
---HWZX0a4mpW+prPEs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmA2fhUACgkQFHw5/5Y0
-tyyCpgv/bzED+7VKOgTGacT+X6i9XdFgHdfyR/svbmb7yMXb3DTBrrlsvAjOgmJM
-qlYz293ShBTOTatINz0R5qPKcCESTgv3/OSgKldjc5bFSflvR302nsvjOQyjwxSe
-4Q1I1adiGR6vl5vjYPPSJovFW8kw2j625Vny6AwPu8uTJXRVgc3JkdabBEXM90UH
-kkZEplKo/TJ5JBaab2Zt/1nFgBIJxvy/7HiKFHruVErNZD1GTP9PZT2LO4S14fkY
-ONJ75P0M0J4TQ2zlA9w8DBQPCYChHvqhp2a594qSkPFDRZfHwwJ19KYCu4tdazGi
-tjm0Skw1soTdItSFtIbSPw38XuaMW30yMUEmMGzJWnv9eRN/acLYiWt4bewQDiUA
-Oc5xBspD1DCt3uRGHG4n9Gytj8uXUzxWzE6Lz4dXIkVANpe7/FWgTsEgDUfMed17
-SxHmyHY4KK65TWw4J8uCZwdPs9xat1GHLYkHJCXNSla6bO0wrN+LaLuqH/ZKlRik
-6IQQeKhf
-=g+K3
------END PGP SIGNATURE-----
-
---HWZX0a4mpW+prPEs--
-
---===============4842389322006097579==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+-- 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-10 Fax: (+49)-8142-66989-80 Email: wd@denx.de
+Imagination is more important than knowledge.      -- Albert Einstein
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============4842389322006097579==--

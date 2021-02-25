@@ -2,60 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04FB6324E7B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Feb 2021 11:49:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FCDC324FE5
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Feb 2021 13:37:10 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 558F3C57B58;
-	Thu, 25 Feb 2021 10:49:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C874C57B53;
+	Thu, 25 Feb 2021 12:37:10 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8B594C57B53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F0EBEC3FADC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Feb 2021 10:49:37 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Thu, 25 Feb 2021 12:37:07 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 11PAbCaU003688; Thu, 25 Feb 2021 11:49:36 +0100
+ 11PCaXoa002136; Thu, 25 Feb 2021 13:37:06 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-type; s=selector1;
- bh=edfnj/RQ6gLmfFxrxnjoevz10VUrNXCzrnzJpefecUo=;
- b=oPVCxJc3xsIgHJcF2px58Ucozo6bygxxXrxbfkh8WsWM/8v+We+zR4VyeXGCxT2UJRus
- vugcpj4zpSKa1TgyYzHspF4x+QIfNtahcjRP+iz1a3VLxLp2LuLCCiJ9psC7QwwPPNLQ
- rUeCWUgUXik8f+F3xcrtMPUMRC2Kw2QGf6rxyvMMppF8dzof7FYWfFKCf3/xIENDTWI9
- tjG75zWZbQjcx4KAFkc2x3F4NJMGeGr1jxU3u8PzOsNjmNrk4pS+LKrqqKbzBDPa6W5s
- FlBaxQzXktwTOoow/i9pZRopXg7QNYxnbmoCZlmrYBJ0YsK4L8drp+2ANKOjhG1ef6vI sQ== 
+ bh=lcnX/VCA6d3pIQQUHssqEzjNwoEKnbP6jK1wxyfLDgI=;
+ b=OZ1BjDIukhWtF6fyUV52nX2VXCl5WrfIe5qztIYS6aRyvz5pbOJLMH9UaI8bETwu5ZHn
+ 5oykIy+6UfPn1ZfXTkyG9WrPixe40VwLcoganu+DQJ1orAaH7hcltqd3A1y8XJePNI53
+ +3r4OzjwyH5HSaGEIFQkV+pa3dqrsUQAl+LzwV+axnoDY70hwY/GShElHBhXQZrGr4rU
+ 3ETTyPkS86zF0Wl+TJxKIDdO9EOXsAwYmIas1x33Iin8seAeDfsZLi2PbSkmuGXTJuVc
+ BSUYj35aHjBxLHOyBIqMT5596FMIhAB9C+GI5MnwYbz4UmqTT03CYev1WagEj4KHCQD0 0Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 36w66u5249-1
+ by mx07-00178001.pphosted.com with ESMTP id 36w66vnnm6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 Feb 2021 11:49:36 +0100
+ Thu, 25 Feb 2021 13:37:06 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C512B10002A;
- Thu, 25 Feb 2021 11:49:35 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E0D7F10002A;
+ Thu, 25 Feb 2021 13:37:05 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9BF40226200;
- Thu, 25 Feb 2021 11:49:35 +0100 (CET)
-Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 25 Feb 2021 11:49:35
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B5B9B22D616;
+ Thu, 25 Feb 2021 13:37:05 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 25 Feb 2021 13:37:05
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 25 Feb 2021 11:49:28 +0100
-Message-ID: <20210225114917.1.If8dd5ef8c9f53bfc56498a9c7c8f23ea05588829@changeid>
+Date: Thu, 25 Feb 2021 13:37:00 +0100
+Message-ID: <20210225133652.1.I2edaac51f69d6eb9e62ab7aeb01a3f352a364af5@changeid>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
- definitions=2021-02-25_06:2021-02-24,
+ definitions=2021-02-25_07:2021-02-24,
  2021-02-25 signatures=0
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: [Uboot-stm32] [PATCH] board: st: remove the nand MTD configuration
-	for NOR boot in stm32mp1 board
+Subject: [Uboot-stm32] [PATCH 1/4] stm32mp: stm32prog: Add Kconfig file for
+	stm32prog command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,71 +72,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Since commit d5d726d3cc47 ("configs: stm32mp1: only support SD card after
-NOR in bootcmd_stm32mp"), the stm32mp1 boards only support SD card after
-NOR boot device, so the MTD partitions for nand0 or spi-nand0 are useless
-(no need of "UBI" partition in nand0 or spi-nand0).
+Move CONFIG_CMD_STM32PROG in a specific Kconfig file for stm32prog command.
 
-This patch removes these nand MTD update for nor boot and simplify nand0
-and spi-nand0 support (remove the mtd_boot variable).
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- board/st/common/stm32mp_mtdparts.c | 16 +++++-----------
- 1 file changed, 5 insertions(+), 11 deletions(-)
+ arch/arm/mach-stm32mp/Kconfig               | 18 +-----------------
+ arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig | 18 ++++++++++++++++++
+ 2 files changed, 19 insertions(+), 17 deletions(-)
+ create mode 100644 arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
 
-diff --git a/board/st/common/stm32mp_mtdparts.c b/board/st/common/stm32mp_mtdparts.c
-index 69eb10844d..f074fc189d 100644
---- a/board/st/common/stm32mp_mtdparts.c
-+++ b/board/st/common/stm32mp_mtdparts.c
-@@ -122,28 +122,24 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 		log_debug("mtd device = %s\n", dev->name);
- 	}
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index f538d7cb83..079d66a80c 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -121,23 +121,6 @@ config STM32_ETZPC
+ 	help
+ 	  Say y to enable STM32 Extended TrustZone Protection
  
--	if (nor || nand) {
-+	if (nand) {
- 		mtd = get_mtd_device_nm("nand0");
- 		if (!IS_ERR_OR_NULL(mtd)) {
--			const char *mtd_boot = CONFIG_MTDPARTS_NAND0_BOOT;
- 			const char *mtd_tee = CONFIG_MTDPARTS_NAND0_TEE;
+-config CMD_STM32PROG
+-	bool "command stm32prog for STM32CudeProgrammer"
+-	select DFU
+-	select DFU_RAM
+-	select DFU_VIRT
+-	select PARTITION_TYPE_GUID
+-	imply CMD_GPT if MMC
+-	imply CMD_MTD if MTD
+-	imply DFU_MMC if MMC
+-	imply DFU_MTD if MTD
+-	help
+-		activate a specific command stm32prog for STM32MP soc family
+-		witch update the device with the tools STM32CubeProgrammer,
+-		using UART with STM32 protocol or USB with DFU protocol
+-		NB: access to not volatile memory (NOR/NAND/SD/eMMC) is based
+-		    on U-Boot DFU framework
 -
- 			board_set_mtdparts("nand0", ids, parts,
--					   !nor ? mtd_boot : NULL,
-+					   CONFIG_MTDPARTS_NAND0_BOOT,
- 					   !nor && tee ? mtd_tee : NULL,
- 					   "-(UBI)");
- 			put_mtd_device(mtd);
- 		}
- 	}
+ config CMD_STM32KEY
+ 	bool "command stm32key to fuse public key hash"
+ 	default y
+@@ -177,6 +160,7 @@ config DEBUG_UART_CLOCK
+ 	default 64000000
+ endif
  
--	if (nor || spinand) {
-+	if (spinand) {
- 		mtd = get_mtd_device_nm("spi-nand0");
- 		if (!IS_ERR_OR_NULL(mtd)) {
--			const char *mtd_boot = CONFIG_MTDPARTS_SPINAND0_BOOT;
- 			const char *mtd_tee = CONFIG_MTDPARTS_SPINAND0_TEE;
--
- 			board_set_mtdparts("spi-nand0", ids, parts,
--					   !nor ? mtd_boot : NULL,
-+					   CONFIG_MTDPARTS_SPINAND0_BOOT,
- 					   !nor && tee ? mtd_tee : NULL,
- 					   "-(UBI)");
- 			put_mtd_device(mtd);
-@@ -152,11 +148,9 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
++source "arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig"
+ source "board/st/stm32mp1/Kconfig"
+ source "board/dhelectronics/dh_stm32mp1/Kconfig"
  
- 	if (nor) {
- 		if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
--			const char *mtd_boot = CONFIG_MTDPARTS_NOR0_BOOT;
- 			const char *mtd_tee = CONFIG_MTDPARTS_NOR0_TEE;
--
- 			board_set_mtdparts("nor0", ids, parts,
--					   mtd_boot,
-+					   CONFIG_MTDPARTS_NOR0_BOOT,
- 					   tee ? mtd_tee : NULL,
- 					   "-(nor_user)");
- 		}
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+new file mode 100644
+index 0000000000..609a678793
+--- /dev/null
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+@@ -0,0 +1,18 @@
++
++config CMD_STM32PROG
++	bool "command stm32prog for STM32CudeProgrammer"
++	select DFU
++	select DFU_RAM
++	select DFU_VIRT
++	select PARTITION_TYPE_GUID
++	imply CMD_GPT if MMC
++	imply CMD_MTD if MTD
++	imply DFU_MMC if MMC
++	imply DFU_MTD if MTD
++	help
++		activate a specific command stm32prog for STM32MP soc family
++		witch update the device with the tools STM32CubeProgrammer,
++		using UART with STM32 protocol or USB with DFU protocol
++		NB: access to not volatile memory (NOR/NAND/SD/eMMC) is based
++		    on U-Boot DFU framework
++
 -- 
 2.17.1
 

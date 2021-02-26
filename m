@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2D413262D9
-	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Feb 2021 13:44:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B20F63262DA
+	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Feb 2021 13:45:08 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6C8ACC57B59;
-	Fri, 26 Feb 2021 12:44:53 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7B5D3C57B59;
+	Fri, 26 Feb 2021 12:45:08 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1BE80C57189
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6E93FC57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 26 Feb 2021 12:44:52 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id n4so6247745wmq.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 26 Feb 2021 04:44:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=91CuTEW7j9/JaXG4GpBp4px7maWh3dDpOfhnYiFHfrY=;
- b=FjOOyyvTzBEF/6Pf+/XuNJhm29JZ8XB1vBR8La1sn2fnuj5mikI70cMbtx6nHNI+Dg
- TQ99jPtwUiaOK+oM97zLmLyyBxGMYbPmOugSJYwWuxroQUa8VmcOWnXEqJXpfUoYvytP
- ohrcLCTA3S8fYUtFPub8g71wS4vSaMX6h5TqvfKQ5ILC3tMe0VOqu69bqJTvphhJqwNj
- 2kwdFZD2dyn54pFQIIORL67hDwmqM12JpV5WhFSnzfwjIsAhiqajolI4eA5NyPXIo9ku
- 7dvED3eq0cvRjiLRZB6ksHmmSOZHchZdQ8psSOWxBxYI7+vdsccb+VAIMZfN0LBA9vU0
- RFwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=91CuTEW7j9/JaXG4GpBp4px7maWh3dDpOfhnYiFHfrY=;
- b=Z8kUeGaa3Sjc1GMFxgR7xf8dqXoQJK+GNVUk1BMAdyK/hZUJHdX3qVrmtN7VeYhhB4
- sRjMIkcYKb1KYF+9uB8d7enEjMMYy6TJe1HaRl7IRvo46AUv6KWVt1kk+9Zac0jfdLnr
- z48N04rjyydweEqBOF2NsEYtSBUii+6oL1T58N3JL05eFR3P3g9BhCFTVZMqku/7qKjI
- E/BFl3oYByXze63lIoQCmztBr7XTdHXzyiEVm24xm7Kf+n6N+0LiX8ApXjn/46+ZLu7y
- qMFJc7MdM/BmlppwWONk9bM7yN4SsiiJaeAwH0eqyC1laMi9Y+Gj3dCeQ3ZE+o5FYNK1
- 49IA==
-X-Gm-Message-State: AOAM5320z8xO4KJHckB4DMPD1G90hAIk8n/zn5h1630yvBHzK/Yha4wP
- gfSWTfkvvNQJHOGBylZSnu5YjQ==
-X-Google-Smtp-Source: ABdhPJzPhq+D2QL5S5E5+QlgqBW+mFOjXds30+XeZT2XbK1gHL1jtWh0KSsMMOr9IdNL5PnZ5ukzpQ==
-X-Received: by 2002:a05:600c:4ba2:: with SMTP id
- e34mr2708187wmp.121.1614343492145; 
- Fri, 26 Feb 2021 04:44:52 -0800 (PST)
-Received: from apalos.home (ppp-94-64-113-158.home.otenet.gr. [94.64.113.158])
- by smtp.gmail.com with ESMTPSA id
- k15sm11218296wmj.6.2021.02.26.04.44.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Feb 2021 04:44:51 -0800 (PST)
-Date: Fri, 26 Feb 2021 14:44:49 +0200
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <YDjtQZAc8KlzaoLq@apalos.home>
-References: <20210225193754.1898064-1-ilias.apalodimas@linaro.org>
- <6b05b88b-0a6a-8f13-6255-f9b19d0e848e@foss.st.com>
+ Fri, 26 Feb 2021 12:45:07 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 11QCflhQ007931; Fri, 26 Feb 2021 13:44:56 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=72srJFbdrArgoXhDOXwDiPOkFtrXW3zM5JFhjroVCOc=;
+ b=NmXIoxxyqk2fOj4OoQZTylNVwst7nR/jx6+qyBeYs97BiQPgfex+fexvsshyu46diGuj
+ KvE4B4V5eaPnEIFQIqSI8kKKcnuq5UApZefcTmoXmraZPnwpngUTgaLpO4mMWGcmz/5h
+ zjo88kQpAQ6wf28myYLjaa0h/aMpX7NeMc1ev8ltoJYGtiNLQpltT7onDZCFrHpQruD7
+ RnwV4EmCbQA56YHJKCDBd20eBna0XCmb3/n9L+MZX3iF+Fmd34BXdi7KG+5SUBGDAxDz
+ r7PXvjGQacYPCn3BNMaK4ij9LIexq/gbvgMjPy0TirIupSerRwee60kg72o3bpx59WBP NA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 36w66cwgmg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 26 Feb 2021 13:44:56 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A0DF510002A;
+ Fri, 26 Feb 2021 13:44:54 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8BB8E23272F;
+ Fri, 26 Feb 2021 13:44:54 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 26 Feb 2021 13:44:53
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 26 Feb 2021 13:44:51 +0100
+Message-ID: <20210226124451.3799-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6b05b88b-0a6a-8f13-6255-f9b19d0e848e@foss.st.com>
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- etienne.carriere@linaro.org
-Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp1: enable uefi related
-	commands
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
+ definitions=2021-02-26_03:2021-02-24,
+ 2021-02-26 signatures=0
+Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Simon Glass <sjg@chromium.org>, Suneel Garapati <sgarapati@marvell.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, mark.kettenis@xs4all.nl
+Subject: [Uboot-stm32] [PATCH] arm64: Update memcpy_{from, to}io() helpers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,74 +74,118 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, Feb 26, 2021 at 01:38:21PM +0100, Patrick DELAUNAY wrote:
-> Hi Ilias
-> 
-> On 2/25/21 8:37 PM, Ilias Apalodimas wrote:
-> > The board can boot with UEFI. With the latest changes in U-Boot's
-> > EFI subsystem we also have support for EFI runtime variables, without
-> > SetVariable support.  We can also store the EFI variables in a file on the
-> > ESP partition and preserve them across reboots.
-> > The env and efidebug commands are missing in order to configure
-> > EFI variables and the efibootmgr though.  Since U-Boot's default config
-> > enables other EFI related commands (e.g bootefi), let's add the env related
-> > and efidebug commands and allow users to do that
-> > 
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >   configs/stm32mp15_trusted_defconfig | 3 +++
-> >   1 file changed, 3 insertions(+)
-> > 
-> > diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> > index da31b74cdeb6..107041119f1d 100644
-> > --- a/configs/stm32mp15_trusted_defconfig
-> > +++ b/configs/stm32mp15_trusted_defconfig
-> > @@ -17,6 +17,7 @@ CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-> >   CONFIG_SYS_PROMPT="STM32MP> "
-> >   CONFIG_CMD_ADTIMG=y
-> >   CONFIG_CMD_ERASEENV=y
-> > +CONFIG_CMD_NVEDIT_EFI=y
-> >   CONFIG_CMD_MEMINFO=y
-> >   CONFIG_CMD_MEMTEST=y
-> >   CONFIG_CMD_ADC=y
-> > @@ -32,6 +33,7 @@ CONFIG_CMD_USB=y
-> >   CONFIG_CMD_USB_MASS_STORAGE=y
-> >   CONFIG_CMD_BMP=y
-> >   CONFIG_CMD_CACHE=y
-> > +CONFIG_CMD_EFIDEBUG=y
-> >   CONFIG_CMD_TIME=y
-> >   CONFIG_CMD_TIMER=y
-> >   CONFIG_CMD_PMIC=y
-> > @@ -144,4 +146,5 @@ CONFIG_BMP_32BPP=y
-> >   CONFIG_WDT=y
-> >   CONFIG_WDT_STM32MP=y
-> >   CONFIG_ERRNO_STR=y
-> > +# CONFIG_HEXDUMP is not set
-> >   CONFIG_FDT_FIXUP_PARTITIONS=y
-> 
-> 
-> I am ok with tha added configs.
-> 
-> 
-> But can you update also the stm32_basic_defconfig:
-> 
-> for STMicroelectronics boards, we want to have the the same
-> 
-> configuation between basic and trusted boot chain
-> 
-> (except SPL or OP-TEE related config).
+At early U-Boot stage, before relocation, MMU is not yet configured
+and disabled. DDR may not be configured with the correct memory
+attributes (can be configured in MT_DEVICE instead of MT_MEMORY).
 
-Yea sure, 
+In this case, usage of memcpy_{from, to}io() may leads to synchronous
+abort in AARCH64 in case the normal memory address is not 64Bits aligned.
 
-Cheers
-/Ilias
-> 
-> 
-> Thanks
-> 
-> 
-> Patrick
-> 
+To avoid such situation, forbid usage of normal memory cast to (u64 *) in
+case MMU is not enabled.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: mark.kettenis@xs4all.nl
+---
+
+ arch/arm/cpu/armv8/cache_v8.c | 10 ++++++++++
+ arch/arm/include/asm/io.h     | 25 +++++++++++++++----------
+ include/cpu_func.h            |  1 +
+ 3 files changed, 26 insertions(+), 10 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 15cecb5e0b..3de18c7675 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -719,6 +719,11 @@ int icache_status(void)
+ 	return (get_sctlr() & CR_I) != 0;
+ }
+ 
++int mmu_status(void)
++{
++	return (get_sctlr() & CR_M) != 0;
++}
++
+ void invalidate_icache_all(void)
+ {
+ 	__asm_invalidate_icache_all();
+@@ -740,6 +745,11 @@ int icache_status(void)
+ 	return 0;
+ }
+ 
++int mmu_status(void)
++{
++	return 0;
++}
++
+ void invalidate_icache_all(void)
+ {
+ }
+diff --git a/arch/arm/include/asm/io.h b/arch/arm/include/asm/io.h
+index df264a170b..36b840378a 100644
+--- a/arch/arm/include/asm/io.h
++++ b/arch/arm/include/asm/io.h
+@@ -338,6 +338,7 @@ extern void __readwrite_bug(const char *fn);
+ 
+ /* Optimized copy functions to read from/write to IO sapce */
+ #ifdef CONFIG_ARM64
++#include <cpu_func.h>
+ /*
+  * Copy data from IO memory space to "real" memory space.
+  */
+@@ -351,11 +352,13 @@ void __memcpy_fromio(void *to, const volatile void __iomem *from, size_t count)
+ 		count--;
+ 	}
+ 
+-	while (count >= 8) {
+-		*(u64 *)to = __raw_readq(from);
+-		from += 8;
+-		to += 8;
+-		count -= 8;
++	if (mmu_status()) {
++		while (count >= 8) {
++			*(u64 *)to = __raw_readq(from);
++			from += 8;
++			to += 8;
++			count -= 8;
++		}
+ 	}
+ 
+ 	while (count) {
+@@ -379,11 +382,13 @@ void __memcpy_toio(volatile void __iomem *to, const void *from, size_t count)
+ 		count--;
+ 	}
+ 
+-	while (count >= 8) {
+-		__raw_writeq(*(u64 *)from, to);
+-		from += 8;
+-		to += 8;
+-		count -= 8;
++	if (mmu_status()) {
++		while (count >= 8) {
++			__raw_writeq(*(u64 *)from, to);
++			from += 8;
++			to += 8;
++			count -= 8;
++		}
+ 	}
+ 
+ 	while (count) {
+diff --git a/include/cpu_func.h b/include/cpu_func.h
+index 8aa825daa4..a8806dd295 100644
+--- a/include/cpu_func.h
++++ b/include/cpu_func.h
+@@ -59,6 +59,7 @@ int dcache_status(void);
+ void dcache_enable(void);
+ void dcache_disable(void);
+ void mmu_disable(void);
++int mmu_status(void);
+ 
+ /* arch/$(ARCH)/lib/cache.c */
+ void enable_caches(void);
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

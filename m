@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9752832733E
-	for <lists+uboot-stm32@lfdr.de>; Sun, 28 Feb 2021 16:53:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A2F2B32733F
+	for <lists+uboot-stm32@lfdr.de>; Sun, 28 Feb 2021 16:53:15 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 60582C56630;
-	Sun, 28 Feb 2021 15:53:12 +0000 (UTC)
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
- [209.85.216.50])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68B34C56630;
+	Sun, 28 Feb 2021 15:53:15 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com
+ [209.85.214.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ED8D6C36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 81C76C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Feb 2021 15:53:10 +0000 (UTC)
-Received: by mail-pj1-f50.google.com with SMTP id b15so9330884pjb.0
+ Sun, 28 Feb 2021 15:53:14 +0000 (UTC)
+Received: by mail-pl1-f173.google.com with SMTP id b8so5494346plh.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Feb 2021 07:53:10 -0800 (PST)
+ Sun, 28 Feb 2021 07:53:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amarulasolutions.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=R/0GsGG2bHP4O9FiTDmRY0Tc4aaDPGZJnzt9c5pSSpk=;
- b=WZQ6EjFB/aHd8lCKOhQWAPOzLYsf9ADAnjLxH3HizW7WfB6nWLAp6QqJKgnfFkp/iY
- ELh9Jw60Ttsx4JidQ9S5P1Se9vdP87SOai5cUeFkjpBSw7fU07aADTY/UAD9H5f9ZiGI
- XtOgELbEC9IPJdYfdcy6FF2OMIdwZtTlF+2Qo=
+ bh=zGWFmcq9mc86o9MR9vmjdfE0Lev+0u1aNZ87aPHzIFE=;
+ b=hgDCA9lqQHgkcPU5tgbTylg0tQ3IBuv40lgb8LdJ349YN8TyGQLiDwG/lbSG5QBb0d
+ pYd+og3Vol06AXjuBU54ZE0kqw8Pe8VwSDw5R1pzHMJTxwv//oyBpKUR0wXENFUXWunW
+ bN436PLTM3CcUTW2PXQw/B3qUixFUhbb3BlVM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=R/0GsGG2bHP4O9FiTDmRY0Tc4aaDPGZJnzt9c5pSSpk=;
- b=H+oYDP6dKaHMl07hSF4+t83o9MgzYFR+GxGj/I/s3zNk79diygbq5rmDGs7Wp0hRvo
- BX8S/1+g7mvIdDk8bzR8ogaqnbCsUwhjRTdSHdrFirblHRkYO0ReVe6BbmPxJ6klmxyA
- 6VgvaWtu2LphRaDX86F7PXWEUOvaPS2Mzbfd8yUNXP5aPpKpke0ffrYSzz72LlWCao8X
- r4euMN+3fbKKSehbQrVKwTpN/hRonpkkZWc8cBkaY/NgCz3y5ojgH3m7scYNM9T7sHcd
- mX+kWXK/ZNtxROqb2mGl3GL9kMTlNqMzUkE6jOA+DywaxvszvhiIOjO4zODWu4GwDMgH
- T2xQ==
-X-Gm-Message-State: AOAM533S0wj7NoiyLJqa/mkp03Fsx7dwQp3S0Pk+eXJ+UGhLQHLnITOh
- FRuOIpH26MbqlcU3EVvmwLA/FQ==
-X-Google-Smtp-Source: ABdhPJxe2PKtzy3cUjtdTHgIPF0GYNsZ55G72hxCVxRrb/nM7H+qRm1WYIZ8kf9EFBQqvgHhpirYgw==
-X-Received: by 2002:a17:902:e8d4:b029:e4:a950:c832 with SMTP id
- v20-20020a170902e8d4b02900e4a950c832mr2041054plg.3.1614527589526; 
- Sun, 28 Feb 2021 07:53:09 -0800 (PST)
+ bh=zGWFmcq9mc86o9MR9vmjdfE0Lev+0u1aNZ87aPHzIFE=;
+ b=m7MjuXet6ucZGA/2SRRwTynHJDjp61j/GzZ83d7BdFMCK6xRGUczEBuUMFhCd9By1i
+ M3qUzMCbDKfoaxmEih9/3QFb6ahFsBxYPHxOv0mKDMXLW+iTy88AsmUf9tC0kmbAWdNg
+ 8Sf65j285jPIPt2fzgCamTPePQ6I14kWtmmMLnxl0m5C6jkKEbtviLqK36JH290cWKAT
+ Pu00q9o+R+QF3yBLtn2mxPqwwWKAXAUJS5XGREOM3isaRJvzzUATWvQeqaoJjkXDBCaT
+ qsfr6uVSMVK2bruBvIik2TK1c9KjkPmNB7I896CRlMKAN55XmuyMeKMKmjs4TmuMw9g9
+ vNZw==
+X-Gm-Message-State: AOAM5333ajzyfmchDxKoyVM/BhFqOxgUurpmL5nhVQ1s/QcVQfZE59VA
+ jv3q7l6B49+i9Nmtz5bxk0k95A==
+X-Google-Smtp-Source: ABdhPJzhKX3LgJSf1mpEcjjMGABfCpIWAq027BuvG30fIbxE1SJN+ZQwcvtCBeyz99I845Qr6aYBlw==
+X-Received: by 2002:a17:90a:d0c1:: with SMTP id
+ y1mr12737551pjw.164.1614527593120; 
+ Sun, 28 Feb 2021 07:53:13 -0800 (PST)
 Received: from ub-XPS-13-9350.domain.name ([103.161.30.225])
- by smtp.gmail.com with ESMTPSA id o18sm14725779pjq.44.2021.02.28.07.53.06
+ by smtp.gmail.com with ESMTPSA id o18sm14725779pjq.44.2021.02.28.07.53.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Feb 2021 07:53:09 -0800 (PST)
+ Sun, 28 Feb 2021 07:53:12 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Matteo Lisi <matteo.lisi@engicam.com>
-Date: Sun, 28 Feb 2021 21:22:25 +0530
-Message-Id: <20210228155226.77904-9-jagan@amarulasolutions.com>
+Date: Sun, 28 Feb 2021 21:22:26 +0530
+Message-Id: <20210228155226.77904-10-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210228155226.77904-1-jagan@amarulasolutions.com>
 References: <20210228155226.77904-1-jagan@amarulasolutions.com>
 MIME-Version: 1.0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com, Jagan Teki <jagan@amarulasolutions.com>
-Subject: [Uboot-stm32] [PATCH 8/9] board: stm32: Add Engicam MicroGEA
-	STM32MP1 MicroDev 2.0 board
+Subject: [Uboot-stm32] [PATCH 9/9] board: stm32: Add Engicam MicroGEA
+	STM32MP1 MicroDev 2.0 7" OF
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,58 +76,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-MicroDev 2.0 is a general purpose miniature carrier board with CAN,
-LTE and LVDS panel interfaces.
-
-Genaral features:
-- Ethernet 10/100
-- USB Type A
-- Audio Out
-- microSD
-- LVDS panel connector
-- Wifi/BT (option)
-- UMTS LTE with sim connector (option)
+7" OF is a capacitive touch 7" Open Frame panel solutions with
+- 7" AUO B101AW03 LVDS panel
+- EDT, FT5526 Touch
 
 MicroGEA STM32MP1 is a STM32MP157A based Micro SoM.
 
-MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
-for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
+MicroDev 2.0 is a general purpose miniature carrier board with CAN,
+LTE and LVDS panel interfaces.
+
+MicroGEA STM32MP1 needs to mount on top of MicroDev 2.0 board with
+pluged 7" OF for creating complete MicroGEA STM32MP1 MicroDev 2.0
+7" Open Frame Solution board.
 
 Add support for it.
 
 Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 ---
  arch/arm/dts/Makefile                         |   1 +
- ...-microgea-stm32mp1-microdev2.0-u-boot.dtsi |  51 ++++++++
- ...32mp157a-microgea-stm32mp1-microdev2.0.dts |  55 ++++++++
- .../stm32mp157a-microgea-stm32mp1-u-boot.dtsi | 118 ++++++++++++++++++
- arch/arm/mach-stm32mp/Kconfig                 |  20 +++
- board/engicam/stm32mp1/Kconfig                |   2 +-
+ ...rogea-stm32mp1-microdev2.0-of7-u-boot.dtsi |  51 ++++++
+ ...157a-microgea-stm32mp1-microdev2.0-of7.dts | 154 ++++++++++++++++++
+ arch/arm/mach-stm32mp/Kconfig                 |   7 +
  board/engicam/stm32mp1/MAINTAINERS            |   6 +
- ...mp15-microgea-stm32mp1-microdev2_defconfig |  80 ++++++++++++
- 8 files changed, 332 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
- create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
- create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+ ...-microgea-stm32mp1-microdev2-of7_defconfig |  80 +++++++++
+ 6 files changed, 299 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+ create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 7e0fae8cf0..7b275fe46c 100644
+index 7b275fe46c..7a9a05310d 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -979,6 +979,7 @@ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
- dtb-$(CONFIG_STM32MP15x) += \
+@@ -980,6 +980,7 @@ dtb-$(CONFIG_STM32MP15x) += \
  	stm32mp157a-dk1.dtb \
  	stm32mp157a-avenger96.dtb \
-+	stm32mp157a-microgea-stm32mp1-microdev2.0.dtb \
+ 	stm32mp157a-microgea-stm32mp1-microdev2.0.dtb \
++	stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb \
  	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
  	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
  	stm32mp157c-dk2.dtb \
-diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
+diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
 new file mode 100644
 index 0000000000..e4bd215812
 --- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
 @@ -0,0 +1,51 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 +/*
@@ -180,12 +173,12 @@ index 0000000000..e4bd215812
 +		bias-pull-up;
 +	};
 +};
-diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
 new file mode 100644
-index 0000000000..7a75868164
+index 0000000000..674b2d330d
 --- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
-@@ -0,0 +1,55 @@
++++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+@@ -0,0 +1,154 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 +/*
 + * Copyright (c) STMicroelectronics 2019 - All Rights Reserved
@@ -201,8 +194,8 @@ index 0000000000..7a75868164
 +#include <dt-bindings/gpio/gpio.h>
 +
 +/ {
-+	model = "Engicam MicroGEA STM32MP1 MicroDev 2.0 Carrier Board";
-+	compatible = "engicam,microgea-stm32mp1-microdev2.0",
++	model = "Engicam MicroGEA STM32MP1 MicroDev 2.0 7\" Open Frame";
++	compatible = "engicam,microgea-stm32mp1-microdev2.0-of7",
 +		     "engicam,microgea-stm32mp1", "st,stm32mp157";
 +
 +	aliases {
@@ -212,6 +205,105 @@ index 0000000000..7a75868164
 +
 +	chosen {
 +		stdout-path = "serial0:115200n8";
++	};
++
++	backlight: backlight {
++		compatible = "gpio-backlight";
++		gpios = <&gpiod 13 GPIO_ACTIVE_HIGH>;
++		default-on;
++	};
++
++	lcd_3v3: regulator-lcd-3v3 {
++		compatible = "regulator-fixed";
++		regulator-name = "lcd_3v3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&gpiof 10 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		regulator-always-on;
++		power-supply = <&panel_pwr>;
++	};
++
++	panel_pwr: regulator-panel-pwr {
++		compatible = "regulator-fixed";
++		regulator-name = "panel_pwr";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&gpiob 10 GPIO_ACTIVE_HIGH>;
++		regulator-always-on;
++	};
++
++	panel {
++		compatible = "auo,b101aw03";
++		backlight = <&backlight>;
++		enable-gpios = <&gpiof 2 GPIO_ACTIVE_HIGH>;
++		power-supply = <&lcd_3v3>;
++
++		port {
++			panel_in: endpoint {
++				remote-endpoint = <&ltdc_ep0_out>;
++			};
++		};
++	};
++};
++
++&i2c2 {
++	i2c-scl-falling-time-ns = <20>;
++	i2c-scl-rising-time-ns = <185>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&i2c2_pins_a>;
++	pinctrl-1 = <&i2c2_sleep_pins_a>;
++	status = "okay";
++};
++
++&ltdc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&ltdc_pins>;
++	status = "okay";
++
++	port {
++		ltdc_ep0_out: endpoint@0 {
++			reg = <0>;
++			remote-endpoint = <&panel_in>;
++		};
++	};
++};
++
++&pinctrl {
++	ltdc_pins: ltdc {
++		pins {
++			pinmux = <STM32_PINMUX('G', 10, AF14)>,	/* LTDC_B2 */
++				 <STM32_PINMUX('H', 12, AF14)>,	/* LTDC_R6 */
++				 <STM32_PINMUX('H', 11, AF14)>,	/* LTDC_R5 */
++				 <STM32_PINMUX('D', 10, AF14)>,	/* LTDC_B3 */
++				 <STM32_PINMUX('D', 9, AF14)>,	/* LTDC_B0 */
++				 <STM32_PINMUX('E', 5, AF14)>,	/* LTDC_G0 */
++				 <STM32_PINMUX('E', 6, AF14)>,	/* LTDC_G1 */
++				 <STM32_PINMUX('E', 13, AF14)>,	/* LTDC_DE */
++				 <STM32_PINMUX('E', 15, AF14)>,	/* LTDC_R7 */
++				 <STM32_PINMUX('G', 7, AF14)>,	/* LTDC_CLK */
++				 <STM32_PINMUX('G', 12, AF14)>,	/* LTDC_B1 */
++				 <STM32_PINMUX('H', 2, AF14)>,	/* LTDC_R0 */
++				 <STM32_PINMUX('H', 3, AF14)>,	/* LTDC_R1 */
++				 <STM32_PINMUX('H', 8, AF14)>,	/* LTDC_R2 */
++				 <STM32_PINMUX('H', 9, AF14)>,	/* LTDC_R3 */
++				 <STM32_PINMUX('H', 10, AF14)>,	/* LTDC_R4 */
++				 <STM32_PINMUX('H', 13, AF14)>,	/* LTDC_G2 */
++				 <STM32_PINMUX('H', 14, AF14)>,	/* LTDC_G3 */
++				 <STM32_PINMUX('H', 15, AF14)>,	/* LTDC_G4 */
++				 <STM32_PINMUX('I', 0, AF14)>,	/* LTDC_G5 */
++				 <STM32_PINMUX('I', 1, AF14)>,	/* LTDC_G6 */
++				 <STM32_PINMUX('I', 2, AF14)>,	/* LTDC_G7 */
++				 <STM32_PINMUX('I', 4, AF14)>,	/* LTDC_B4 */
++				 <STM32_PINMUX('I', 5, AF14)>,	/* LTDC_B5 */
++				 <STM32_PINMUX('B', 8, AF14)>,	/* LTDC_B6 */
++				 <STM32_PINMUX('I', 7, AF14)>,	/* LTDC_B7 */
++				 <STM32_PINMUX('I', 9, AF14)>,	/* LTDC_VSYNC */
++				 <STM32_PINMUX('I', 10, AF14)>;	/* LTDC_HSYNC */
++			bias-disable;
++			drive-push-pull;
++			slew-rate = <3>;
++		};
 +	};
 +};
 +
@@ -241,190 +333,46 @@ index 0000000000..7a75868164
 +	pinctrl-0 = <&uart8_pins_a>;
 +	status = "okay";
 +};
-diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
-new file mode 100644
-index 0000000000..32ce31458a
---- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
-@@ -0,0 +1,118 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) STMicroelectronics 2019 - All Rights Reserved
-+ * Copyright (c) 2020 Amarula Solutions(India)
-+ * Author: Jagan Teki <jagan@amarulasolutions.com>
-+ */
-+
-+#include <dt-bindings/clock/stm32mp1-clksrc.h>
-+#include "stm32mp15-u-boot.dtsi"
-+#include "stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi"
-+
-+&vin {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vddcore {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdd {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vddq_ddr {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&rcc {
-+	st,clksrc = <
-+		CLK_MPU_PLL1P
-+		CLK_AXI_PLL2P
-+		CLK_MCU_PLL3P
-+		CLK_PLL12_HSE
-+		CLK_PLL3_HSE
-+		CLK_PLL4_HSE
-+		CLK_RTC_LSE
-+		CLK_MCO1_DISABLED
-+		CLK_MCO2_DISABLED
-+	>;
-+
-+	st,clkdiv = <
-+		1 /*MPU*/
-+		0 /*AXI*/
-+		0 /*MCU*/
-+		1 /*APB1*/
-+		1 /*APB2*/
-+		1 /*APB3*/
-+		1 /*APB4*/
-+		2 /*APB5*/
-+		23 /*RTC*/
-+		0 /*MCO1*/
-+		0 /*MCO2*/
-+	>;
-+
-+	st,pkcs = <
-+		CLK_CKPER_HSE
-+		CLK_FMC_ACLK
-+		CLK_QSPI_ACLK
-+		CLK_ETH_DISABLED
-+		CLK_SDMMC12_PLL4P
-+		CLK_DSI_DSIPLL
-+		CLK_STGEN_HSE
-+		CLK_USBPHY_HSE
-+		CLK_SPI2S1_PLL3Q
-+		CLK_SPI2S23_PLL3Q
-+		CLK_SPI45_HSI
-+		CLK_SPI6_HSI
-+		CLK_I2C46_HSI
-+		CLK_SDMMC3_PLL4P
-+		CLK_USBO_USBPHY
-+		CLK_ADC_CKPER
-+		CLK_CEC_LSE
-+		CLK_I2C12_HSI
-+		CLK_I2C35_HSI
-+		CLK_UART1_HSI
-+		CLK_UART24_HSI
-+		CLK_UART35_HSI
-+		CLK_UART6_HSI
-+		CLK_UART78_HSI
-+		CLK_SPDIF_PLL4P
-+		CLK_FDCAN_PLL4R
-+		CLK_SAI1_PLL3Q
-+		CLK_SAI2_PLL3Q
-+		CLK_SAI3_PLL3Q
-+		CLK_SAI4_PLL3Q
-+		CLK_RNG1_LSI
-+		CLK_RNG2_LSI
-+		CLK_LPTIM1_PCLK1
-+		CLK_LPTIM23_PCLK3
-+		CLK_LPTIM45_LSE
-+	>;
-+
-+	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
-+	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
-+		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
-+		frac = < 0x1400 >;
-+		u-boot,dm-pre-reloc;
-+	};
-+
-+	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
-+	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
-+		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
-+		frac = < 0x1a04 >;
-+		u-boot,dm-pre-reloc;
-+	};
-+
-+	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
-+	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
-+		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
-+		u-boot,dm-pre-reloc;
-+	};
-+};
 diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index 15c832b16b..c1622df7f3 100644
+index c1622df7f3..c22b132ac1 100644
 --- a/arch/arm/mach-stm32mp/Kconfig
 +++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -77,6 +77,26 @@ config TARGET_ST_STM32MP15x
- 		Evalulation board (EV1) or Discovery board (DK1 and DK2).
- 		The difference between board are managed with devicetree
+@@ -97,6 +97,13 @@ config TARGET_MICROGEA_STM32MP1
+ 	  * MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
+ 	    for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
  
-+config TARGET_MICROGEA_STM32MP1
-+	bool "Engicam MicroGEA STM32MP1 SOM"
-+	select STM32MP15x
-+	imply BOOTCOUNT_LIMIT
-+	imply BOOTSTAGE
-+	imply CMD_BOOTCOUNT
-+	imply CMD_BOOTSTAGE
-+	imply CMD_CLS if CMD_BMP
-+	imply DISABLE_CONSOLE
-+	imply PRE_CONSOLE_BUFFER
-+	imply SILENT_CONSOLE
-+	help
-+	  MicroGEA STM32MP1 is a STM32MP157A based Micro SOM.
-+
-+	  MicroGEA STM32MP1 MicroDev 2.0:
-+	  * MicroDev 2.0 is a general purpose miniature carrier board with CAN,
-+	    LTE and LVDS panel interfaces.
-+	  * MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
-+	    for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
++	  MicroGEA STM32MP1 MicroDev 2.0 7" OF:
++	  * 7" OF is a capacitive touch 7" Open Frame panel solutions with LVDS
++	    panel and toucscreen.
++	  * MicroGEA STM32MP1 needs to mount on top of MicroDev 2.0 board with
++	    pluged 7" OF for creating complete MicroGEA STM32MP1 MicroDev 2.0 7"
++	    Open Frame Solution board.
 +
  config TARGET_ICORE_STM32MP1
  	bool "Engicam i.Core STM32MP1 SOM"
  	select STM32MP15x
-diff --git a/board/engicam/stm32mp1/Kconfig b/board/engicam/stm32mp1/Kconfig
-index e7bccc09fb..c800fd4e60 100644
---- a/board/engicam/stm32mp1/Kconfig
-+++ b/board/engicam/stm32mp1/Kconfig
-@@ -1,4 +1,4 @@
--if TARGET_ICORE_STM32MP1
-+if TARGET_ICORE_STM32MP1 || TARGET_MICROGEA_STM32MP1
- 
- config SYS_BOARD
- 	default "stm32mp1"
 diff --git a/board/engicam/stm32mp1/MAINTAINERS b/board/engicam/stm32mp1/MAINTAINERS
-index 62c6925c8d..c0bb767782 100644
+index c0bb767782..712e312665 100644
 --- a/board/engicam/stm32mp1/MAINTAINERS
 +++ b/board/engicam/stm32mp1/MAINTAINERS
-@@ -1,3 +1,9 @@
-+MicroGEA-STM32MP1-MICRODEV2.0
+@@ -4,6 +4,12 @@ M:	Matteo Lisi <matteo.lisi@engicam.com>
+ S:	Maintained
+ F:	configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+ 
++MicroGEA-STM32MP1-MICRODEV2.0-OF7
 +M:	Jagan Teki <jagan@amarulasolutions.com>
 +M:	Matteo Lisi <matteo.lisi@engicam.com>
 +S:	Maintained
-+F:	configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
++F:	configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
 +
  i.Core-STM32MP1-CTOUCH2.0
  M:	Jagan Teki <jagan@amarulasolutions.com>
  M:	Matteo Lisi <matteo.lisi@engicam.com>
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
 new file mode 100644
-index 0000000000..a58f3e494d
+index 0000000000..96f52fca55
 --- /dev/null
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
++++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
 @@ -0,0 +1,80 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_STM32MP=y
@@ -438,7 +386,7 @@ index 0000000000..a58f3e494d
 +CONFIG_TARGET_MICROGEA_STM32MP1=y
 +CONFIG_ENV_OFFSET_REDUND=0x2C0000
 +# CONFIG_ARMV7_VIRT is not set
-+CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0"
++CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0-of7"
 +CONFIG_DISTRO_DEFAULTS=y
 +CONFIG_FIT=y
 +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"

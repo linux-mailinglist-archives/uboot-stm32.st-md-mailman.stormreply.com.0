@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA68432733A
-	for <lists+uboot-stm32@lfdr.de>; Sun, 28 Feb 2021 16:52:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F18532733B
+	for <lists+uboot-stm32@lfdr.de>; Sun, 28 Feb 2021 16:53:02 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 85DF6C56630;
-	Sun, 28 Feb 2021 15:52:57 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 485A1C56630;
+	Sun, 28 Feb 2021 15:53:02 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+ [209.85.216.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 80379C36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F1AB9C36B37
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Feb 2021 15:52:56 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id u12so9644254pjr.2
+ Sun, 28 Feb 2021 15:52:59 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id e9so6658963pjs.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Feb 2021 07:52:56 -0800 (PST)
+ Sun, 28 Feb 2021 07:52:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amarulasolutions.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=AUKMWG4+QTPi6dr9WE3PJIBXMzPz0XIyWEdnTgWVEMc=;
- b=oNu1TFvhjnqo0w2X+eZPoTHGjPGqMNviIzQxSEdvKPEiV2Dkzcvq1Lf916vOOyn5YG
- caYRyeUP8ST4bid5SD31X0TXoHaR1s2BSpstljOUxq4ZgXFxLUmub6L7v/4FXoXY+/Dw
- 28MFu4vVSuJWPI3rMffW4tflxccGQM05qALp0=
+ bh=QdNt/hqY6B+yTOIpJCUA85TnFuS9mLG8X5vO31iN89A=;
+ b=h5gOhNr2fXgeWCu7SzgQp8z+1w+P3ZnLCOLTIYd4z50v4bubke63BKYmPYcMTWUEWd
+ l9A2YKRosP8rB8UTRREcoPnPd/PzG6gEa3zQHlxlt6a5eaI5vuYhRCyBxz5PGu+wlGbk
+ q7YjFAdkAsaVb9G4NfDmC83ITH/ir7BI7PFDs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=AUKMWG4+QTPi6dr9WE3PJIBXMzPz0XIyWEdnTgWVEMc=;
- b=uMAu6I1q5G4iUVp/IyXUHUvxPrQWHfLx1/G/+X6cR6UawEt04hcNWmuHGkwHtedCSi
- zN1VlGhiYhHWhHuzx227lpsO7jYBYl1DZnCprP1G0s3WBrBbHEQTOPRx6syGvL0ILhNc
- nHqUNwD8bnLlIW69uOlGKdOzQf9GWZjSTqFNs1egFoGJpux7M7G1kAh9oE68h0Slo2Df
- ZlKlHRIXqA3Mh32OXKHEDkAz7DhZ1z3le3PyQ0bhAnmwF9LSjsGg26fqX+fCJLAOgNwo
- +pDojaZOAtdaX1spM9j23APYSBWKB0opxSi1IeGFw6ih3ghstFz/aaVwmxj2RVKOD/He
- sOUw==
-X-Gm-Message-State: AOAM533z2tg2I9+AKP4Z8E3Epv+6noU2o6G4PV1ASbCiMcEfcXyYhW+L
- 7WuxL/ofcfEPf5bd2WCL1DAUKg==
-X-Google-Smtp-Source: ABdhPJyZ5OIvOtQ8u4qqQMRyswyfORV4pe1glvNiPm7gpjm4BZWBjj887KNXUoEflQAy3LIXK288FQ==
-X-Received: by 2002:a17:90a:b007:: with SMTP id
- x7mr2290402pjq.27.1614527575045; 
- Sun, 28 Feb 2021 07:52:55 -0800 (PST)
+ bh=QdNt/hqY6B+yTOIpJCUA85TnFuS9mLG8X5vO31iN89A=;
+ b=acJcaenW/Kl4fD/4PRF7Ii4sl2vd7FcchEXlWHr5D1UCjmLhKtprd/qakGu1EVxuDB
+ Sa1OfQcYtVJzI4kDC8SQ6bfC0ByaazPS7H27XCjm7ZcHsO7hGopM3hvhHM88OKS0Ns33
+ iD2QCQUPrFSqMaZAbIeUQ5MWhwFnK9U+W8aaJL9gb9cN/gCEzeEij41MBB3ZxY1x0rUI
+ i59kFNKX6u0eSJ9Zhpk7zFXNEjUFBR88bExgQnE5aADT90iIwx9irr+8xucnqY154pOc
+ vBnOhkuhPrpuE2/n9penykRtlWws/jmsYJmQHYdu0nzNGVPMo11QFG+phUHj5Nc4CUv3
+ Lz1A==
+X-Gm-Message-State: AOAM532SlX3j/mi8OCGmsZtZlTZGFhtjv4lHbzePTDly7aVpeZkmiH5k
+ uJFApZRsP9zmt8MeshNsNDb/vg==
+X-Google-Smtp-Source: ABdhPJwXkIofIGY504FxKAlRfjyzML9zMfMhaECCvoy+ZSDEc3e+yLJLOJp2LrV5d+y84CHtglJN+w==
+X-Received: by 2002:a17:902:aa98:b029:e4:9648:94a7 with SMTP id
+ d24-20020a170902aa98b02900e4964894a7mr4754455plr.11.1614527578569; 
+ Sun, 28 Feb 2021 07:52:58 -0800 (PST)
 Received: from ub-XPS-13-9350.domain.name ([103.161.30.225])
- by smtp.gmail.com with ESMTPSA id o18sm14725779pjq.44.2021.02.28.07.52.51
+ by smtp.gmail.com with ESMTPSA id o18sm14725779pjq.44.2021.02.28.07.52.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 28 Feb 2021 07:52:54 -0800 (PST)
+ Sun, 28 Feb 2021 07:52:58 -0800 (PST)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Matteo Lisi <matteo.lisi@engicam.com>
-Date: Sun, 28 Feb 2021 21:22:21 +0530
-Message-Id: <20210228155226.77904-5-jagan@amarulasolutions.com>
+Date: Sun, 28 Feb 2021 21:22:22 +0530
+Message-Id: <20210228155226.77904-6-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210228155226.77904-1-jagan@amarulasolutions.com>
 References: <20210228155226.77904-1-jagan@amarulasolutions.com>
 MIME-Version: 1.0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com, Jagan Teki <jagan@amarulasolutions.com>
-Subject: [Uboot-stm32] [PATCH 4/9] board: stm32: Add Engicam i.Core STM32MP1
-	EDIMM2.2 Starter Kit
+Subject: [Uboot-stm32] [PATCH 5/9] board: stm32: Add Engicam i.Core STM32MP1
+	C.TOUCH 2.0
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,71 +76,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Engicam EDIMM2.2 Starter Kit is an EDIMM 2.2 Form Factor Capacitive
-Evaluation Board.
+Engicam C.TOUCH 2.0 is an EDIMM compliant general purpose Carrier
+board.
 
 Genaral features:
-- LCD 7" C.Touch
-- microSD slot
-- Ethernet 1Gb
+- Ethernet 10/100
 - Wifi/BT
-- 2x LVDS Full HD interfaces
-- 3x USB 2.0
-- 1x USB 3.0
-- HDMI Out
-- Mini PCIe
-- MIPI CSI
-- 2x CAN
+- USB Type A/OTG
 - Audio Out
+- CAN
+- LVDS panel connector
 
 i.Core STM32MP1 is an EDIMM SoM based on STM32MP157A from Engicam.
 
-i.Core STM32MP1 needs to mount on top of this Evaluation board for
-creating complete i.Core STM32MP1 EDIMM2.2 Starter Kit.
+i.Core STM32MP1 needs to mount on top of this Carrier board for
+creating complete i.Core STM32MP1 C.TOUCH 2.0 board.
 
 Add support for it.
 
 Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 ---
- arch/arm/dts/Makefile                         |   1 +
- ...mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi |  51 ++++++
- .../stm32mp157a-icore-stm32mp1-edimm2.2.dts   |  47 ++++++
- .../stm32mp157a-icore-stm32mp1-u-boot.dtsi    | 146 ++++++++++++++++++
- arch/arm/mach-stm32mp/Kconfig                 |  20 +++
- board/engicam/stm32mp1/Kconfig                |  12 ++
- board/engicam/stm32mp1/MAINTAINERS            |   6 +
- board/engicam/stm32mp1/Makefile               |  10 ++
- board/engicam/stm32mp1/spl.c                  |  48 ++++++
- board/engicam/stm32mp1/stm32mp1.c             | 131 ++++++++++++++++
- ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  80 ++++++++++
- 11 files changed, 552 insertions(+)
- create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts
- create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi
- create mode 100644 board/engicam/stm32mp1/Kconfig
- create mode 100644 board/engicam/stm32mp1/MAINTAINERS
- create mode 100644 board/engicam/stm32mp1/Makefile
- create mode 100644 board/engicam/stm32mp1/spl.c
- create mode 100644 board/engicam/stm32mp1/stm32mp1.c
- create mode 100644 configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+ arch/arm/dts/Makefile                         |  1 +
+ ...2mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi | 51 ++++++++++++
+ .../stm32mp157a-icore-stm32mp1-ctouch2.dts    | 47 +++++++++++
+ arch/arm/mach-stm32mp/Kconfig                 |  5 ++
+ board/engicam/stm32mp1/MAINTAINERS            |  6 ++
+ ...stm32mp15-icore-stm32mp1-ctouch2_defconfig | 80 +++++++++++++++++++
+ 6 files changed, 190 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
+ create mode 100644 configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index f478f6f18f..f4a48c65e8 100644
+index f4a48c65e8..7e0fae8cf0 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
 @@ -979,6 +979,7 @@ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
  dtb-$(CONFIG_STM32MP15x) += \
  	stm32mp157a-dk1.dtb \
  	stm32mp157a-avenger96.dtb \
-+	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
++	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
+ 	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
  	stm32mp157c-dk2.dtb \
  	stm32mp157c-ed1.dtb \
- 	stm32mp157c-ev1.dtb \
-diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi b/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi
+diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi b/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi
 new file mode 100644
 index 0000000000..96fe461235
 --- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi
 @@ -0,0 +1,51 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 +/*
@@ -193,11 +176,11 @@ index 0000000000..96fe461235
 +		bias-pull-up;
 +	};
 +};
-diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts b/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts
+diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts b/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
 new file mode 100644
-index 0000000000..ec9f1d1cd5
+index 0000000000..d3058a036c
 --- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts
++++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
 @@ -0,0 +1,47 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 +/*
@@ -214,8 +197,8 @@ index 0000000000..ec9f1d1cd5
 +#include <dt-bindings/gpio/gpio.h>
 +
 +/ {
-+	model = "Engicam i.Core STM32MP1 EDIMM2.2 Starter Kit";
-+	compatible = "engicam,icore-stm32mp1-edimm2.2",
++	model = "Engicam i.Core STM32MP1 C.TOUCH 2.0";
++	compatible = "engicam,icore-stm32mp1-ctouch2",
 +		     "engicam,icore-stm32mp1", "st,stm32mp157";
 +
 +	aliases {
@@ -246,438 +229,41 @@ index 0000000000..ec9f1d1cd5
 +	pinctrl-2 = <&uart4_idle_pins_a>;
 +	status = "okay";
 +};
-diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi
-new file mode 100644
-index 0000000000..d62c24d4ce
---- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi
-@@ -0,0 +1,146 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) STMicroelectronics 2019 - All Rights Reserved
-+ * Copyright (c) 2020 Amarula Solutions(India)
-+ * Author: Jagan Teki <jagan@amarulasolutions.com>
-+ */
-+
-+#include <dt-bindings/clock/stm32mp1-clksrc.h>
-+#include "stm32mp15-u-boot.dtsi"
-+#include "stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi"
-+
-+&vddcore {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdd {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdd_usb {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdda {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdd_ddr {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vtt_ddr {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vref_ddr {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&vdd_sd {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&v3v3 {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&v2v8 {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&v1v8 {
-+	u-boot,dm-pre-reloc;
-+};
-+
-+&rcc {
-+	st,clksrc = <
-+		CLK_MPU_PLL1P
-+		CLK_AXI_PLL2P
-+		CLK_MCU_PLL3P
-+		CLK_PLL12_HSE
-+		CLK_PLL3_HSE
-+		CLK_PLL4_HSE
-+		CLK_RTC_LSE
-+		CLK_MCO1_DISABLED
-+		CLK_MCO2_DISABLED
-+	>;
-+
-+	st,clkdiv = <
-+		1 /*MPU*/
-+		0 /*AXI*/
-+		0 /*MCU*/
-+		1 /*APB1*/
-+		1 /*APB2*/
-+		1 /*APB3*/
-+		1 /*APB4*/
-+		2 /*APB5*/
-+		23 /*RTC*/
-+		0 /*MCO1*/
-+		0 /*MCO2*/
-+	>;
-+
-+	st,pkcs = <
-+		CLK_CKPER_HSE
-+		CLK_FMC_ACLK
-+		CLK_QSPI_ACLK
-+		CLK_ETH_DISABLED
-+		CLK_SDMMC12_PLL4P
-+		CLK_DSI_DSIPLL
-+		CLK_STGEN_HSE
-+		CLK_USBPHY_HSE
-+		CLK_SPI2S1_PLL3Q
-+		CLK_SPI2S23_PLL3Q
-+		CLK_SPI45_HSI
-+		CLK_SPI6_HSI
-+		CLK_I2C46_HSI
-+		CLK_SDMMC3_PLL4P
-+		CLK_USBO_USBPHY
-+		CLK_ADC_CKPER
-+		CLK_CEC_LSE
-+		CLK_I2C12_HSI
-+		CLK_I2C35_HSI
-+		CLK_UART1_HSI
-+		CLK_UART24_HSI
-+		CLK_UART35_HSI
-+		CLK_UART6_HSI
-+		CLK_UART78_HSI
-+		CLK_SPDIF_PLL4P
-+		CLK_FDCAN_PLL4R
-+		CLK_SAI1_PLL3Q
-+		CLK_SAI2_PLL3Q
-+		CLK_SAI3_PLL3Q
-+		CLK_SAI4_PLL3Q
-+		CLK_RNG1_LSI
-+		CLK_RNG2_LSI
-+		CLK_LPTIM1_PCLK1
-+		CLK_LPTIM23_PCLK3
-+		CLK_LPTIM45_LSE
-+	>;
-+
-+	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
-+	pll2: st,pll@1 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <1>;
-+		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
-+		frac = < 0x1400 >;
-+		u-boot,dm-pre-reloc;
-+	};
-+
-+	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
-+	pll3: st,pll@2 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <2>;
-+		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
-+		frac = < 0x1a04 >;
-+		u-boot,dm-pre-reloc;
-+	};
-+
-+	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
-+	pll4: st,pll@3 {
-+		compatible = "st,stm32mp1-pll";
-+		reg = <3>;
-+		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
-+		u-boot,dm-pre-reloc;
-+	};
-+};
 diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-index 79ffd5191d..5a2123063a 100644
+index 5a2123063a..15c832b16b 100644
 --- a/arch/arm/mach-stm32mp/Kconfig
 +++ b/arch/arm/mach-stm32mp/Kconfig
-@@ -77,6 +77,25 @@ config TARGET_ST_STM32MP15x
- 		Evalulation board (EV1) or Discovery board (DK1 and DK2).
- 		The difference between board are managed with devicetree
+@@ -96,6 +96,11 @@ config TARGET_ICORE_STM32MP1
+ 	  * i.Core STM32MP1 needs to mount on top of EDIMM2.2 for
+ 	    creating complete i.Core STM32MP1 EDIMM2.2 Starter Kit.
  
-+config TARGET_ICORE_STM32MP1
-+	bool "Engicam i.Core STM32MP1 SOM"
-+	select STM32MP15x
-+	imply BOOTCOUNT_LIMIT
-+	imply BOOTSTAGE
-+	imply CMD_BOOTCOUNT
-+	imply CMD_BOOTSTAGE
-+	imply CMD_CLS if CMD_BMP
-+	imply DISABLE_CONSOLE
-+	imply PRE_CONSOLE_BUFFER
-+	imply SILENT_CONSOLE
-+	help
-+	  i.Core STM32MP1 is an EDIMM SOM based on STM32MP157A.
-+
-+	  i.Core STM32MP1 EDIMM2.2:
-+	  * EDIMM2.2 is a Form Factor Capacitive Evaluation Board.
-+	  * i.Core STM32MP1 needs to mount on top of EDIMM2.2 for
-+	    creating complete i.Core STM32MP1 EDIMM2.2 Starter Kit.
++	  i.Core STM32MP1 C.TOUCH 2.0
++	  * C.TOUCH 2.0 is a general purpose Carrier board.
++	  * i.Core STM32MP1 needs to mount on top of this Carrier board
++	    for creating complete i.Core STM32MP1 C.TOUCH 2.0 board.
 +
  config TARGET_DH_STM32MP1_PDK2
  	bool "DH STM32MP1 PDK2"
  	select STM32MP15x
-@@ -177,6 +196,7 @@ config DEBUG_UART_CLOCK
- 	default 64000000
- endif
- 
-+source "board/engicam/stm32mp1/Kconfig"
- source "board/st/stm32mp1/Kconfig"
- source "board/dhelectronics/dh_stm32mp1/Kconfig"
- 
-diff --git a/board/engicam/stm32mp1/Kconfig b/board/engicam/stm32mp1/Kconfig
-new file mode 100644
-index 0000000000..e7bccc09fb
---- /dev/null
-+++ b/board/engicam/stm32mp1/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ICORE_STM32MP1
-+
-+config SYS_BOARD
-+	default "stm32mp1"
-+
-+config SYS_VENDOR
-+	default "engicam"
-+
-+config SYS_CONFIG_NAME
-+	default "stm32mp1"
-+
-+endif
 diff --git a/board/engicam/stm32mp1/MAINTAINERS b/board/engicam/stm32mp1/MAINTAINERS
-new file mode 100644
-index 0000000000..3230a7a6e8
---- /dev/null
+index 3230a7a6e8..62c6925c8d 100644
+--- a/board/engicam/stm32mp1/MAINTAINERS
 +++ b/board/engicam/stm32mp1/MAINTAINERS
-@@ -0,0 +1,6 @@
-+i.Core-STM32MP1-EDIMM2.2
+@@ -1,3 +1,9 @@
++i.Core-STM32MP1-CTOUCH2.0
 +M:	Jagan Teki <jagan@amarulasolutions.com>
 +M:	Matteo Lisi <matteo.lisi@engicam.com>
 +S:	Maintained
-+F:	board/engicam/stm32mp1
-+F:	configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-diff --git a/board/engicam/stm32mp1/Makefile b/board/engicam/stm32mp1/Makefile
++F:	configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
++
+ i.Core-STM32MP1-EDIMM2.2
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ M:	Matteo Lisi <matteo.lisi@engicam.com>
+diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
 new file mode 100644
-index 0000000000..65560df290
+index 0000000000..cb0b7581b8
 --- /dev/null
-+++ b/board/engicam/stm32mp1/Makefile
-@@ -0,0 +1,10 @@
-+# SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+#
-+# Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-+#
-+
-+ifdef CONFIG_SPL_BUILD
-+obj-y += spl.o
-+else
-+obj-y += stm32mp1.o
-+endif
-diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
-new file mode 100644
-index 0000000000..79adb5f529
---- /dev/null
-+++ b/board/engicam/stm32mp1/spl.c
-@@ -0,0 +1,48 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-+ * Copyright (C) 2020 Engicam S.r.l.
-+ * Copyright (C) 2020 Amarula Solutions(India)
-+ */
-+
-+#include <common.h>
-+#include <asm/io.h>
-+
-+/* board early initialisation in board_f: need to use global variable */
-+static u32 opp_voltage_mv __section(".data");
-+
-+void board_vddcore_init(u32 voltage_mv)
-+{
-+	if (IS_ENABLED(CONFIG_PMIC_STPMIC1) && CONFIG_IS_ENABLED(POWER_SUPPORT))
-+		opp_voltage_mv = voltage_mv;
-+}
-+
-+int board_early_init_f(void)
-+{
-+	return 0;
-+}
-+
-+#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-+void board_debug_uart_init(void)
-+{
-+#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-+
-+#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-+#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-+
-+	/* UART4 clock enable */
-+	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-+
-+#define GPIOG_BASE 0x50008000
-+	/* GPIOG clock enable */
-+	writel(BIT(6), RCC_MP_AHB4ENSETR);
-+	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-+	writel(0xffbfffff, GPIOG_BASE + 0x00);
-+	writel(0x00006000, GPIOG_BASE + 0x24);
-+#else
-+
-+#error("CONFIG_DEBUG_UART_BASE: not supported value")
-+
-+#endif
-+}
-+#endif
-diff --git a/board/engicam/stm32mp1/stm32mp1.c b/board/engicam/stm32mp1/stm32mp1.c
-new file mode 100644
-index 0000000000..2bd71a8fd7
---- /dev/null
-+++ b/board/engicam/stm32mp1/stm32mp1.c
-@@ -0,0 +1,131 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-+ * Copyright (C) 2020 Engicam S.r.l.
-+ * Copyright (C) 2020 Amarula Solutions(India)
-+ * Author: Jagan Teki <jagan@amarulasolutions.com>
-+ */
-+
-+#include <common.h>
-+#include <env.h>
-+#include <env_internal.h>
-+#include <syscon.h>
-+#include <asm/io.h>
-+#include <asm/arch/sys_proto.h>
-+#include <power/regulator.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int board_early_init_f(void)
-+{
-+	/* nothing to do, only used in SPL */
-+	return 0;
-+}
-+
-+int checkboard(void)
-+{
-+	char *mode;
-+	const char *fdt_compat;
-+	int fdt_compat_len;
-+
-+	if (IS_ENABLED(CONFIG_TFABOOT))
-+		mode = "trusted";
-+	else
-+		mode = "basic";
-+
-+	printf("Board: stm32mp1 in %s mode", mode);
-+	fdt_compat = fdt_getprop(gd->fdt_blob, 0, "compatible",
-+				 &fdt_compat_len);
-+	if (fdt_compat && fdt_compat_len)
-+		printf(" (%s)", fdt_compat);
-+	puts("\n");
-+
-+	return 0;
-+}
-+
-+/* board dependent setup after realloc */
-+int board_init(void)
-+{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = STM32_DDR_BASE + 0x100;
-+
-+	if (IS_ENABLED(CONFIG_DM_REGULATOR))
-+		regulators_enable_boot_on(_DEBUG);
-+
-+	return 0;
-+}
-+
-+int board_late_init(void)
-+{
-+	return 0;
-+}
-+
-+enum env_location env_get_location(enum env_operation op, int prio)
-+{
-+	u32 bootmode = get_bootmode();
-+
-+	if (prio)
-+		return ENVL_UNKNOWN;
-+
-+	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
-+	case BOOT_FLASH_SD:
-+	case BOOT_FLASH_EMMC:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
-+			return ENVL_MMC;
-+		else if (CONFIG_IS_ENABLED(ENV_IS_IN_EXT4))
-+			return ENVL_EXT4;
-+		else
-+			return ENVL_NOWHERE;
-+
-+	case BOOT_FLASH_NAND:
-+	case BOOT_FLASH_SPINAND:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_UBI))
-+			return ENVL_UBI;
-+		else
-+			return ENVL_NOWHERE;
-+
-+	case BOOT_FLASH_NOR:
-+		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
-+			return ENVL_SPI_FLASH;
-+		else
-+			return ENVL_NOWHERE;
-+
-+	default:
-+		return ENVL_NOWHERE;
-+	}
-+}
-+
-+const char *env_ext4_get_intf(void)
-+{
-+	u32 bootmode = get_bootmode();
-+
-+	switch (bootmode & TAMP_BOOT_DEVICE_MASK) {
-+	case BOOT_FLASH_SD:
-+	case BOOT_FLASH_EMMC:
-+		return "mmc";
-+	default:
-+		return "";
-+	}
-+}
-+
-+const char *env_ext4_get_dev_part(void)
-+{
-+	static char *const dev_part[] = {"0:auto", "1:auto", "2:auto"};
-+	u32 bootmode = get_bootmode();
-+
-+	return dev_part[(bootmode & TAMP_BOOT_INSTANCE_MASK) - 1];
-+}
-+
-+int mmc_get_env_dev(void)
-+{
-+	u32 bootmode = get_bootmode();
-+
-+	return (bootmode & TAMP_BOOT_INSTANCE_MASK) - 1;
-+}
-+
-+#if defined(CONFIG_OF_BOARD_SETUP)
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	return 0;
-+}
-+#endif
-diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-new file mode 100644
-index 0000000000..48cf207f4c
---- /dev/null
-+++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
++++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
 @@ -0,0 +1,80 @@
 +CONFIG_ARM=y
 +CONFIG_ARCH_STM32MP=y
@@ -691,7 +277,7 @@ index 0000000000..48cf207f4c
 +CONFIG_TARGET_ICORE_STM32MP1=y
 +CONFIG_ENV_OFFSET_REDUND=0x2C0000
 +# CONFIG_ARMV7_VIRT is not set
-+CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-icore-stm32mp1-edimm2.2"
++CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-icore-stm32mp1-ctouch2"
 +CONFIG_DISTRO_DEFAULTS=y
 +CONFIG_FIT=y
 +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"

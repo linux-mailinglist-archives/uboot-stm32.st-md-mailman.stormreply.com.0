@@ -2,60 +2,85 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0CEE328BAB
-	for <lists+uboot-stm32@lfdr.de>; Mon,  1 Mar 2021 19:41:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEAAE32ABD0
+	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Mar 2021 21:51:03 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4B34FC56634;
-	Mon,  1 Mar 2021 18:41:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 83FFBC56634;
+	Tue,  2 Mar 2021 20:51:03 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+ [209.85.160.174])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 093FEC36B37
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A7B34C5660F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  1 Mar 2021 18:41:04 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 121IRm8R001461; Mon, 1 Mar 2021 19:41:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=butxMXmq6KvCc+6T6/hDrV91Dh4KvefAvbAmFqdRa30=;
- b=lPAB+WOFdwatSncIDpcmsk2Kkpvm9lEncWbU3QSJSFcoyfU3YzwotDkCPOYe9wWEEz/V
- 40jRzuZky/mtS9Tpz91C/tzCoajA7Kq6HATnDWDRBTKrbTCNdIOab5ZLTPxxY4ejXNWA
- c+gpS9+a3QdnZ8vyBHUWeh5gbQA2z/8YB4HlskCY266ijwRkcvwMCyh10OvsFgg7Bchz
- J0ukQnchVGaIS2B5ffCw7GOGpwIPrd73pJHTO+du04+vuA9garUGJkQwJCR4CGIsqL1k
- oeNM5bwGgKvjkG8CFH6FndACB/7Xo4TRVEy1/UyFHjsco9glm6h/EcsK3cRDnt2J7swy aA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 36yfc3ngn0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 01 Mar 2021 19:41:01 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 699D210002A;
- Mon,  1 Mar 2021 19:41:00 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5656F241635;
- Mon,  1 Mar 2021 19:41:00 +0100 (CET)
-Received: from localhost (10.75.127.46) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1473.3; Mon, 1 Mar 2021 19:40:59
- +0100
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 1 Mar 2021 19:40:56 +0100
-Message-ID: <20210301194052.1.Ic785baaeea3c0a6c77088a100ea10fbbda0b5bdf@changeid>
-X-Mailer: git-send-email 2.17.1
+ Tue,  2 Mar 2021 20:51:00 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id j8so112040qtq.11
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 02 Mar 2021 12:51:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=4GFHYzBB7q9EZ74rXwtAyiY21xe60xNzGJzyv4aU16Y=;
+ b=R6kXjZymD2eSvzEEfUqo9GmI1ZhZSEoy82eMwmSNfv85Fwg4Wqm5us2antRQHRVYHW
+ MD/aSZ3g5VjH96wELlgQDxOVEUK/g56DuwNdQ5z4yrq6GW8qBZbE93gpnXc42IvCuXRp
+ c0x/P5CSz5oXLgxWzPnwKPXCLQSO+gY+RBBYo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=4GFHYzBB7q9EZ74rXwtAyiY21xe60xNzGJzyv4aU16Y=;
+ b=Hao0W4Atqql76nRvWegImwqZdX88Y/ymRoSf4dnaitlZGeKHCXICHnuPl2RWTYhENj
+ Ufyi+SFiY7cLLt9t09iIgGSHemKbXqTJXzrkS7GlkIziDfFEQOEBqE2GCaxQBuLwcXVg
+ 1segw65l61QtAdWKof7/C2tDZiBt6tmeZNjvf+G1AtA2qebAVPCJVYfsBK8+iQndiQXg
+ bYQW5TaHJ068hfILXNrJ/CHoyEQI2Fn4hQQgsb+T3kVHg2BHJN6V0t3ixMwLKCm/WnUX
+ WuyCXzEYD7cus9UlY9lLClruXHmplfRSJOpDQ5uEInIIUS56g6mHYIQNNZEczWQaCmHB
+ lx6A==
+X-Gm-Message-State: AOAM531WqKG/9gGkI90nbWAzBfLFAp9VP+hDFUq7LXogG0pj86R/F7yV
+ wMzqw7PCIXWa20cO1SKusUoyxA==
+X-Google-Smtp-Source: ABdhPJzPHzMle0K+YTIkevKZW71re1OHlXDtzL0NSw6/HQPYu2F1MrWXoyHItIE1DNUfrJCZYFRrXA==
+X-Received: by 2002:ac8:649:: with SMTP id e9mr13669916qth.114.1614718259342; 
+ Tue, 02 Mar 2021 12:50:59 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b07-927a-4917-ae06-1734-d397.res6.spectrum.com.
+ [2603:6081:7b07:927a:4917:ae06:1734:d397])
+ by smtp.gmail.com with ESMTPSA id j2sm15382195qkk.96.2021.03.02.12.50.56
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 02 Mar 2021 12:50:58 -0800 (PST)
+Date: Tue, 2 Mar 2021 15:50:53 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Message-ID: <20210302205053.GF10169@bill-the-cat>
+References: <20210202125913.13597-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
- definitions=2021-03-01_12:2021-03-01,
- 2021-03-01 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH] configs: stm32mp15: move bootdelay
-	configuration in defconfig
+In-Reply-To: <20210202125913.13597-1-patrick.delaunay@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Reuben Dowle <reubendowle0@gmail.com>, Lokesh Vutla <lokeshvutla@ti.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, Rick Chen <rick@andestech.com>,
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Atish Patra <atish.patra@wdc.com>, Marek Vasut <marek.vasut+renesas@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Naoki Hayama <naoki.hayama@lineo.co.jp>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Wolfgang Denk <wd@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Andre Przywara <andre.przywara@arm.com>, Huan Wang <alison.wang@nxp.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Aswath Govindraju <a-govindraju@ti.com>, Adam Ford <aford173@gmail.com>,
+ Michal Simek <monstr@monstr.eu>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>, Simon Glass <sjg@chromium.org>,
+ Tero Kristo <t-kristo@ti.com>, Mario Six <mario.six@gdsys.cc>,
+ Sam Protsenko <joe.skb7@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH 0/5] lmb: Add config for the number of
+ memory and reserved regions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,92 +92,110 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============3152521822085898921=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The STM32MP15 boards have no reason to configure bootdelay in stm32mp1.h
-as it is already done with CONFIG_BOOTDELAY (default = 2) and in
-include/env_default.h.
 
-This patch allows configuration for customers which reuse stm32mp1.h
-and reduce the size of the default environment.
+--===============3152521822085898921==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="XhPuWTY5Vo2ftMVe"
+Content-Disposition: inline
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- configs/stm32mp15_basic_defconfig       | 1 +
- configs/stm32mp15_dhcom_basic_defconfig | 1 +
- configs/stm32mp15_dhcor_basic_defconfig | 1 +
- configs/stm32mp15_trusted_defconfig     | 1 +
- include/configs/stm32mp1.h              | 1 -
- 5 files changed, 4 insertions(+), 1 deletion(-)
+--XhPuWTY5Vo2ftMVe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 1c680984b8..0864d4f252 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SPL_SPI_SUPPORT=y
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_FIT=y
-+CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_SPL_LOG=y
- CONFIG_BOARD_EARLY_INIT_F=y
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index ed285e9161..e36d34d001 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -19,6 +19,7 @@ CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its"
- # CONFIG_USE_SPL_FIT_GENERATOR is not set
-+CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_LEGACY_IMAGE_SUPPORT=y
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index a6620561ac..4794b1a14d 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -17,6 +17,7 @@ CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its"
- # CONFIG_USE_SPL_FIT_GENERATOR is not set
-+CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_LEGACY_IMAGE_SUPPORT=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 107041119f..4becdbb238 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET_REDUND=0x2C0000
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_FIT=y
-+CONFIG_BOOTDELAY=1
- CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_SYS_PROMPT="STM32MP> "
- CONFIG_CMD_ADTIMG=y
-diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-index 36e400453e..db2117a3d7 100644
---- a/include/configs/stm32mp1.h
-+++ b/include/configs/stm32mp1.h
-@@ -160,7 +160,6 @@
-  * and the ramdisk at the end.
-  */
- #define CONFIG_EXTRA_ENV_SETTINGS \
--	"bootdelay=1\0" \
- 	"kernel_addr_r=0xc2000000\0" \
- 	"fdt_addr_r=0xc4000000\0" \
- 	"scriptaddr=0xc4100000\0" \
--- 
-2.17.1
+On Tue, Feb 02, 2021 at 01:59:07PM +0100, Patrick Delaunay wrote:
+
+> Hi,
+>=20
+> I propose a update of the lmb library to allow the configuration
+> with Kconfig of the number of memory and reserved regions in lmb
+> libary:
+> - CONFIG_LMB_RESERVED_REGIONS
+> - CONFIG_LMB_MEMORY_REGIONS
+>=20
+> By default, I keep the default value of 8 regions.
+>=20
+> This serie avoids issue on stm32mp15 platform,
+> as the kernel device tree defines many and non contiguous reserved
+> regions.
+>=20
+>=20
+>=20
+> Patrick Delaunay (5):
+>   lmb: move CONFIG_LMB in Kconfig
+>   lmb: remove lmb_region.size
+>   lmb: Move lmb property arrays in struct lmb
+>   lmb: Add 2 config to define the max number of regions
+>   configs: stm32mp15: increase the number of reserved memory region in
+>     lmb
+>=20
+>  arch/arc/include/asm/config.h        |  2 --
+>  arch/arm/include/asm/config.h        |  1 -
+>  arch/m68k/include/asm/config.h       |  1 -
+>  arch/microblaze/include/asm/config.h |  2 --
+>  arch/mips/include/asm/config.h       |  1 -
+>  arch/nds32/include/asm/config.h      |  1 -
+>  arch/powerpc/include/asm/config.h    |  1 -
+>  arch/riscv/include/asm/config.h      |  1 -
+>  arch/sh/include/asm/config.h         |  2 --
+>  arch/x86/include/asm/config.h        |  1 -
+>  arch/xtensa/include/asm/config.h     |  2 --
+>  configs/stm32mp15_basic_defconfig    |  1 +
+>  configs/stm32mp15_trusted_defconfig  |  1 +
+>  include/configs/10m50_devboard.h     |  5 ----
+>  include/configs/3c120_devboard.h     |  5 ----
+>  include/configs/sandbox.h            |  2 --
+>  include/configs/x86-common.h         |  2 --
+>  include/image.h                      |  2 +-
+>  include/lmb.h                        | 34 ++++++++++++++++++++++++----
+>  lib/Kconfig                          | 23 +++++++++++++++++++
+>  lib/lmb.c                            | 14 ++++++------
+>  scripts/config_whitelist.txt         |  1 -
+>  22 files changed, 63 insertions(+), 42 deletions(-)
+
+This series causes a little bit of size growth everywhere.  It's fatal
+on nokia_rx51 (and caught via the test script).  We can bring nokia_rx51
+back under size by disabling the optimized memcpy/memset functions, but
+that's not ideal.  Can we do your changes here in a more size-concious
+way?  Thanks!
+
+--=20
+Tom
+
+--XhPuWTY5Vo2ftMVe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmA+pSoACgkQFHw5/5Y0
+tyyZ6wv9GplI69if4nOyQe8L2F992tWiacWO4Q44KBj6fm+/M0+pdcYopJTwAR8h
+HanM0wvnakEwxpoNPD/+P23oZq7PP5rXJ57YEaCJR6jAZDucV/7nVSN6u7XDqQng
+thQDfpp05A5xNAGNNIaDAX4i4Uhub7pQeVyO8BI1lfP+dwVNRazT5ncbmG8bRueb
+8VI5tSU/JfEkheZgjL+Ow4HrgFopEAj/dtoeJdn4O1BrGi5ysDtb9N4dtStwaY+P
+x7ydnbt7gHvxsqm29ZT4ApKpNTZs5dR4mbRgPkrbSJAX2UgwW49JPQQ5qMcJxV0b
+lhtQxJDIEaZyG39HLMSxaCihxPq15bLB3qQLy673DS+hzjm8qZRNULwz7RJt/yHS
+Vi748Y7Ig6oS9KyV5OfBKo9wD+GLddXrVuXK7CDv0TvlcsFnFF7j6nHpvFRaB2On
+4vXcPLTm3C3nOG/LoqBXntU8a5Iu9U2EiAbpiSa8EfY4xp7argdHDDWHJVrZHvAI
+QRMW6tU7
+=C9MJ
+-----END PGP SIGNATURE-----
+
+--XhPuWTY5Vo2ftMVe--
+
+--===============3152521822085898921==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3152521822085898921==--

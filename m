@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21494332821
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:07:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91C35332824
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:08:10 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D3338C57195;
-	Tue,  9 Mar 2021 14:07:41 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E53F9C57195;
+	Tue,  9 Mar 2021 14:08:09 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 79B1FC57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 15DDCC57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 14:07:40 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 14:08:08 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129E214E000603; Tue, 9 Mar 2021 15:07:34 +0100
+ 129E2rIE002066; Tue, 9 Mar 2021 15:08:05 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=UiaCN4CTwY1RbRNVu0qoNg0xWWnfEcikWeBdrNnz2FY=;
- b=JvJ31D+LU5wsY1cl581wnJEY8jj4IxPBsv3/RXUFWgOyCPRV/WHsifWVkocsa8g8i8ll
- 8Qnz5RLE2FKtNYp7VmjkJ1dS81xUWWekUobHd6CNnCNa/+SrFMoHtZf5bm/lBr4leblW
- dxwxBOwQVMr3dvtno5WcEI48IVesGeOT7usNV1TJwLUH2ZRN8SMnQDefe4vXoMuOY89p
- GxLROWm7zHCW5xip0VSI3SBaUsn1hbFvULdYRkH2opOtKKo8A9iMHZBlA21iDiwbg07n
- 6P5bIxsA2u6P2n9q6iD0CrJMcjPxLyg5JrHHPZXOcCivY+Zyr3o1ll5BlsUs4fCk1g/8 jA== 
+ bh=kZ2+XeHHtsA+OGR2ZPxPI4qSgDDyYeOjAzfShY6dIas=;
+ b=gEGqdpVeW6A3wesKnpH6KhaVcT/16AZo5wjUt9m1dAd+1F2vMn7vsQBtiTMO6A2GWiYs
+ /yT/wQ+TBnk0azQ4RAJql2L3Ec5stWRDWJKKjYLH8RJwbjTJk9qaLTc5dK8vUQWiqCFU
+ QuO9Z384Fgd6+3FrP0a8qAfxG4y4iQcGxLkBt0SWDaoPTvbN3pknueBTeAIm4QwGhnqZ
+ 7DpOUEuGPL951K934mE7PwKUORZLfdtt41IBs6+RiZhbGJj7iM8ahKsP6RxtuaRrvMra
+ M+cJpUHDWHtViutUELKpBjep/L1d3X3GzUS51/bZvu2t43pfpiicYmRY9Kbk5AZIUixj Iw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3741y6spxr-1
+ by mx07-00178001.pphosted.com with ESMTP id 3741gpj67t-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 15:07:34 +0100
+ Tue, 09 Mar 2021 15:08:05 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DC27F10002A;
- Tue,  9 Mar 2021 15:07:33 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CA63810002A;
+ Tue,  9 Mar 2021 15:08:04 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CFBE2269E69;
- Tue,  9 Mar 2021 15:07:33 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.48) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C08D3269E6A;
+ Tue,  9 Mar 2021 15:08:04 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 15:07:33 +0100
+ 2021 15:08:04 +0100
 To: Jagan Teki <jagan@amarulasolutions.com>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Matteo Lisi <matteo.lisi@engicam.com>
 References: <20210228155226.77904-1-jagan@amarulasolutions.com>
- <20210228155226.77904-7-jagan@amarulasolutions.com>
+ <20210228155226.77904-8-jagan@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <9f81a78f-a54c-f289-170b-2391705e8202@foss.st.com>
-Date: Tue, 9 Mar 2021 15:07:32 +0100
+Message-ID: <e6019e85-7761-f2a6-8cbe-d63392f558e4@foss.st.com>
+Date: Tue, 9 Mar 2021 15:08:03 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210228155226.77904-7-jagan@amarulasolutions.com>
+In-Reply-To: <20210228155226.77904-8-jagan@amarulasolutions.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.48]
+X-Originating-IP: [10.75.127.51]
 X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
@@ -60,8 +60,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  2021-03-09 signatures=0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH 6/9] ARM: dts: stm32: Add Engicam MicroGEA
- STM32MP1 Micro SoM
+Subject: Re: [Uboot-stm32] [PATCH 7/9] ARM: dts: stm32: Add Engicam MicroGEA
+ STM32MP1 1X4Gb DDR3
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,183 +81,149 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Jagan
 
 On 2/28/21 4:52 PM, Jagan Teki wrote:
-> MicroGEA STM32MP1 is a STM32MP157A based Micro SoM.
+> Engicam MicroGEA STM32MP1 Micro SOM has mounted 1x4Gb DDR3
+> which has 16bits width 533Mhz frequency.
 > 
-> General features:
-> - STM32MP157AAC
-> - Up to 1GB DDR3L-800
-> - 512MB Nand flash
-> - I2S
-> 
-> MicroGEA STM32MP1 needs to mount on top of Engicam MicroDev carrier
-> boards for creating complete platform solutions.
-> 
-> Add support for it.
+> Add DDR configurations via dtsi.
 > 
 > Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 > ---
->  .../dts/stm32mp157a-microgea-stm32mp1.dtsi    | 148 ++++++++++++++++++
->  1 file changed, 148 insertions(+)
->  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
+>  ...m32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi | 121 ++++++++++++++++++
+>  1 file changed, 121 insertions(+)
+>  create mode 100644 arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
 > 
-> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
+> diff --git a/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
 > new file mode 100644
-> index 0000000000..0b85175f15
+> index 0000000000..950f292abb
 > --- /dev/null
-> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
-> @@ -0,0 +1,148 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+> +++ b/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
+> @@ -0,0 +1,121 @@
+> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
 > +/*
-> + * Copyright (c) STMicroelectronics 2019 - All Rights Reserved
-> + * Copyright (c) 2020 Engicam srl
-> + * Copyright (c) 2020 Amarula Solutons(India)
+> + * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+> + *
+> + * STM32MP157C DK1/DK2 BOARD configuration
+> + * 1x DDR3L 4Gb, 16-bit, 533MHz.
+> + * Reference used NT5CC256M16DP-DI from NANYA
+> + *
+> + * DDR type / Platform	DDR3/3L
+> + * freq		533MHz
+> + * width	16
+> + * datasheet	0  = MT41J256M16-187 / DDR3-1066 bin G
+> + * DDR density	4
+> + * timing mode	optimized
+> + * Scheduling/QoS options : type = 2
+> + * address mapping : RBC
+> + * Tc > + 85C : N
 > + */
+> +#define DDR_MEM_COMPATIBLE ddr3-microgea-1066-888-bin-g-1x4gb-533mhz
+> +#define DDR_MEM_NAME "DDR3-1066/888 bin G 1x4Gb 533MHz v1.45"
+> +#define DDR_MEM_SPEED 533000
+> +#define DDR_MEM_SIZE 0x20000000
 > +
-> +/ {
-> +	compatible = "engicam,microgea-stm32mp1", "st,stm32mp157";
+> +#define DDR_MSTR 0x00041401
+> +#define DDR_MRCTRL0 0x00000010
+> +#define DDR_MRCTRL1 0x00000000
+> +#define DDR_DERATEEN 0x00000000
+> +#define DDR_DERATEINT 0x00800000
+> +#define DDR_PWRCTL 0x00000000
+> +#define DDR_PWRTMG 0x00400010
+> +#define DDR_HWLPCTL 0x00000000
+> +#define DDR_RFSHCTL0 0x00210000
+> +#define DDR_RFSHCTL3 0x00000000
+> +#define DDR_RFSHTMG 0x0081008B
+> +#define DDR_CRCPARCTL0 0x00000000
+> +#define DDR_DRAMTMG0 0x121B2414
+> +#define DDR_DRAMTMG1 0x000A041C
+> +#define DDR_DRAMTMG2 0x0608090F
+> +#define DDR_DRAMTMG3 0x0050400C
+> +#define DDR_DRAMTMG4 0x08040608
+> +#define DDR_DRAMTMG5 0x06060403
+> +#define DDR_DRAMTMG6 0x02020002
+> +#define DDR_DRAMTMG7 0x00000202
+> +#define DDR_DRAMTMG8 0x00001005
+> +#define DDR_DRAMTMG14 0x000000A0
+> +#define DDR_ZQCTL0 0xC2000040
+> +#define DDR_DFITMG0 0x02060105
+> +#define DDR_DFITMG1 0x00000202
+> +#define DDR_DFILPCFG0 0x07000000
+> +#define DDR_DFIUPD0 0xC0400003
+> +#define DDR_DFIUPD1 0x00000000
+> +#define DDR_DFIUPD2 0x00000000
+> +#define DDR_DFIPHYMSTR 0x00000000
+> +#define DDR_ADDRMAP1 0x00070707
+> +#define DDR_ADDRMAP2 0x00000000
+> +#define DDR_ADDRMAP3 0x1F000000
+> +#define DDR_ADDRMAP4 0x00001F1F
+> +#define DDR_ADDRMAP5 0x06060606
+> +#define DDR_ADDRMAP6 0x0F060606
+> +#define DDR_ADDRMAP9 0x00000000
+> +#define DDR_ADDRMAP10 0x00000000
+> +#define DDR_ADDRMAP11 0x00000000
+> +#define DDR_ODTCFG 0x06000600
+> +#define DDR_ODTMAP 0x00000001
+> +#define DDR_SCHED 0x00000C01
+> +#define DDR_SCHED1 0x00000000
+> +#define DDR_PERFHPR1 0x01000001
+> +#define DDR_PERFLPR1 0x08000200
+> +#define DDR_PERFWR1 0x08000400
+> +#define DDR_DBG0 0x00000000
+> +#define DDR_DBG1 0x00000000
+> +#define DDR_DBGCMD 0x00000000
+> +#define DDR_POISONCFG 0x00000000
+> +#define DDR_PCCFG 0x00000010
+> +#define DDR_PCFGR_0 0x00010000
+> +#define DDR_PCFGW_0 0x00000000
+> +#define DDR_PCFGQOS0_0 0x02100C03
+> +#define DDR_PCFGQOS1_0 0x00800100
+> +#define DDR_PCFGWQOS0_0 0x01100C03
+> +#define DDR_PCFGWQOS1_0 0x01000200
+> +#define DDR_PCFGR_1 0x00010000
+> +#define DDR_PCFGW_1 0x00000000
+> +#define DDR_PCFGQOS0_1 0x02100C03
+> +#define DDR_PCFGQOS1_1 0x00800040
+> +#define DDR_PCFGWQOS0_1 0x01100C03
+> +#define DDR_PCFGWQOS1_1 0x01000200
+> +#define DDR_PGCR 0x01442E02
+> +#define DDR_PTR0 0x0022AA5B
+> +#define DDR_PTR1 0x04841104
+> +#define DDR_PTR2 0x042DA068
+> +#define DDR_ACIOCR 0x10400812
+> +#define DDR_DXCCR 0x00000C40
+> +#define DDR_DSGCR 0xF200011F
+> +#define DDR_DCR 0x0000000B
+> +#define DDR_DTPR0 0x38D488D0
+> +#define DDR_DTPR1 0x098B00D8
+> +#define DDR_DTPR2 0x10023600
+> +#define DDR_MR0 0x00000840
+> +#define DDR_MR1 0x00000000
+> +#define DDR_MR2 0x00000208
+> +#define DDR_MR3 0x00000000
+> +#define DDR_ODTCR 0x00010000
+> +#define DDR_ZQ0CR1 0x00000038
+> +#define DDR_DX0GCR 0x0000CE81
+> +#define DDR_DX0DLLCR 0x40000000
+> +#define DDR_DX0DQTR 0xFFFFFFFF
+> +#define DDR_DX0DQSTR 0x3DB02000
+> +#define DDR_DX1GCR 0x0000CE81
+> +#define DDR_DX1DLLCR 0x40000000
+> +#define DDR_DX1DQTR 0xFFFFFFFF
+> +#define DDR_DX1DQSTR 0x3DB02000
+> +#define DDR_DX2GCR 0x0000CE80
+> +#define DDR_DX2DLLCR 0x40000000
+> +#define DDR_DX2DQTR 0xFFFFFFFF
+> +#define DDR_DX2DQSTR 0x3DB02000
+> +#define DDR_DX3GCR 0x0000CE80
+> +#define DDR_DX3DLLCR 0x40000000
+> +#define DDR_DX3DQTR 0xFFFFFFFF
+> +#define DDR_DX3DQSTR 0x3DB02000
 > +
-> +	memory@c0000000 {
-> +		device_type = "memory";
-> +		reg = <0xc0000000 0x10000000>;
-> +	};
-> +
-> +	reserved-memory {
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		ranges;
-> +
-> +		mcuram2: mcuram2@10000000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x10000000 0x40000>;
-> +			no-map;
-> +		};
-> +
-> +		vdev0vring0: vdev0vring0@10040000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x10040000 0x1000>;
-> +			no-map;
-> +		};
-> +
-> +		vdev0vring1: vdev0vring1@10041000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x10041000 0x1000>;
-> +			no-map;
-> +		};
-> +
-> +		vdev0buffer: vdev0buffer@10042000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x10042000 0x4000>;
-> +			no-map;
-> +		};
-> +
-> +		mcuram: mcuram@30000000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x30000000 0x40000>;
-> +			no-map;
-> +		};
-> +
-> +		retram: retram@38000000 {
-> +			compatible = "shared-dma-pool";
-> +			reg = <0x38000000 0x10000>;
-> +			no-map;
-> +		};
-> +	};
-> +
-> +	vin: regulator-vin {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vin";
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +		regulator-always-on;
-> +	};
-> +
-> +	vddcore: regulator-vddcore {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vddcore";
-> +		regulator-min-microvolt = <1200000>;
-> +		regulator-max-microvolt = <1200000>;
-> +		regulator-always-on;
-> +		vin-supply = <&vin>;
-> +	};
-> +
-> +	vdd: regulator-vdd {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vdd";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		regulator-always-on;
-> +		vin-supply = <&vin>;
-> +	};
-> +
-> +	vddq_ddr: regulator-vddq-ddr {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vddq_ddr";
-> +		regulator-min-microvolt = <1350000>;
-> +		regulator-max-microvolt = <1350000>;
-> +		regulator-always-on;
-> +		vin-supply = <&vin>;
-> +	};
-> +};
-> +
-> +&dts {
-> +	status = "okay";
-> +};
-> +
-> +&fmc {
-> +	pinctrl-names = "default", "sleep";
-> +	pinctrl-0 = <&fmc_pins_a>;
-> +	pinctrl-1 = <&fmc_sleep_pins_a>;
-> +	status = "okay";
-> +
-> +	nand-controller@4,0 {
-> +		status = "okay";
-> +
-> +		nand@0 {
-> +			reg = <0>;
-> +			nand-on-flash-bbt;
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +		};
-> +	};
-> +};
-> +
-> +&ipcc {
-> +	status = "okay";
-> +};
-> +
-> +&iwdg2{
-> +	timeout-sec = <32>;
-> +	status = "okay";
-> +};
-> +
-> +&m4_rproc{
-> +	memory-region = <&retram>, <&mcuram>, <&mcuram2>, <&vdev0vring0>,
-> +			<&vdev0vring1>, <&vdev0buffer>;
-> +	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>;
-> +	mbox-names = "vq0", "vq1", "shutdown";
-> +	interrupt-parent = <&exti>;
-> +	interrupts = <68 1>;
-> +	status = "okay";
-> +};
-> +
-> +&rng1 {
-> +	status = "okay";
-> +};
-> +
-> +&rtc{
-> +	status = "okay";
-> +};
-> +
-> +&vrefbuf {
-> +	regulator-min-microvolt = <2500000>;
-> +	regulator-max-microvolt = <2500000>;
-> +	vdda-supply = <&vdd>;
-> +	status = "okay";
-> +};
+> +#include "stm32mp15-ddr.dtsi"
 > 
-
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Thanks
+
+Thanks 
+
 Patrice
 _______________________________________________
 Uboot-stm32 mailing list

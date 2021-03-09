@@ -2,64 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA25933261F
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 14:07:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF62033262A
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 14:08:45 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A46E6C57195;
-	Tue,  9 Mar 2021 13:07:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B7497C57195;
+	Tue,  9 Mar 2021 13:08:45 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AFDD8C57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 45BCAC57183
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 13:07:54 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 13:08:44 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129D6nEM013278; Tue, 9 Mar 2021 14:07:54 +0100
+ 129D6iCD015668; Tue, 9 Mar 2021 14:08:41 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=GsND3184FiiDpcQtIUrVsI/JQsTlXKlxaJWpyJUUlQ4=;
- b=JJkGAaD1F19J83rTO8pv9GLM9p8WSc4n7515xR1feoywIv4VUTX4sVTf+X2bOKPF8YKG
- ExQIghD1YKbjErMUBdkH6cI8oCircI0EJTV6vzTVYvuBpfKBL0H/TnwBRCu50NMIuQTS
- R1KE5s+yBxRPyWLnkvJS9hPSufFmC1v7PzcZElD5WGlt9OF9FtKaj8PbN37mk+PB7VWh
- HoaWYqnERCuCoBNDgXf+ZX+BUXAmfQX+hiM4mOEanvlNlTFcL3RaTNiOSGrghTf1JqdV
- rv6AOrv4TcFRoWU02WdumQAU9tjsuVbDA6SO/EvdshAq8BvlyXdz9McSoQ9iclQqQo3x yw== 
+ bh=2CdN9BKsxrSJuFtx6xZAaBXSJFktRq623x5fKRV/2uc=;
+ b=18q1ZuZk3X4PfJBwj+EKUlfoEkgT+l/Sw2QzdxoGvUDVN7cpjE7M/kOjW+vt/fh9CwpB
+ efIu854nt7FvTUKjskzIKOGtLhm5ubXrrRj8kpkciqIWcKdBiP12Q2DVn7VR7XMVct4x
+ hZcQ0T3AVO9NUShGIAa2FO6zjLHYWGnk9zXRhaQum86woRIO/w8hqWlLAhhdLZZzuxWk
+ IkxHWpVJpbPaO/H0H7hUiCL9YA3VSxLLWvByUUGl8iqL59WzxuP2QDV5otu09LCBMVMw
+ gNl07gPYM9s5aQf1GImVu8+EiQPMyMxFDld3zAUlyqhKPIyAD+ll44CjPGhrsCLCC6Qf gw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 374036t09x-1
+ by mx07-00178001.pphosted.com with ESMTP id 373yrejn1e-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 14:07:53 +0100
+ Tue, 09 Mar 2021 14:08:41 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4C64510002A;
- Tue,  9 Mar 2021 14:07:53 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F2A8410002A;
+ Tue,  9 Mar 2021 14:08:40 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 441A925D005;
- Tue,  9 Mar 2021 14:07:53 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E4DCD25D012;
+ Tue,  9 Mar 2021 14:08:40 +0100 (CET)
 Received: from lmecxl0573.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 14:07:52 +0100
+ 2021 14:08:39 +0100
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20210225133652.1.I2edaac51f69d6eb9e62ab7aeb01a3f352a364af5@changeid>
+ <20210225133652.2.I60352ed0b0f59ee019230f63aaa3c45fd4438531@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <8044d172-8662-5404-7644-678fe6d7de4a@foss.st.com>
-Date: Tue, 9 Mar 2021 14:07:52 +0100
+Message-ID: <c0181e26-8ec3-1057-6ae0-da85ac2666f3@foss.st.com>
+Date: Tue, 9 Mar 2021 14:08:39 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210225133652.1.I2edaac51f69d6eb9e62ab7aeb01a3f352a364af5@changeid>
+In-Reply-To: <20210225133652.2.I60352ed0b0f59ee019230f63aaa3c45fd4438531@changeid>
 Content-Language: en-US
 X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-09_11:2021-03-08,
  2021-03-09 signatures=0
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/4] stm32mp: stm32prog: Add Kconfig file
- for stm32prog command
+Subject: Re: [Uboot-stm32] [PATCH 2/4] stm32mp: stm32prog: Add
+ CONFIG_CMD_STM32PROG_SERIAL and _USB
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,76 +81,203 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Patrick
 
 On 2/25/21 1:37 PM, Patrick Delaunay wrote:
-> Move CONFIG_CMD_STM32PROG in a specific Kconfig file for stm32prog command.
+> Add CONFIG_CMD_STM32PROG_SERIAL and CONFIG_CMD_STM32PROG_USB to
+> independently select the support of UART or USB communication for
+> STM32CubeProgrammer.
+> 
+> For serial boot over UART, user can deactivate CONFIG_CMD_STM32PROG_SERIAL
+> to use U-Boot console of binary loaded by UART (for board bring-up for
+> example).
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/Kconfig               | 18 +-----------------
->  arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig | 18 ++++++++++++++++++
->  2 files changed, 19 insertions(+), 17 deletions(-)
->  create mode 100644 arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+>  arch/arm/mach-stm32mp/Makefile                |  2 +-
+>  arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig   | 20 ++++++++++++++--
+>  arch/arm/mach-stm32mp/cmd_stm32prog/Makefile  |  8 +++----
+>  .../cmd_stm32prog/cmd_stm32prog.c             |  4 ++--
+>  .../mach-stm32mp/cmd_stm32prog/stm32prog.h    | 23 ++++++++++++++++++-
+>  arch/arm/mach-stm32mp/cpu.c                   |  5 ++--
+>  board/st/common/stm32mp_dfu.c                 |  9 ++++----
+>  7 files changed, 55 insertions(+), 16 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index f538d7cb83..079d66a80c 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -121,23 +121,6 @@ config STM32_ETZPC
+> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+> index c8aa24d489..aa39867080 100644
+> --- a/arch/arm/mach-stm32mp/Makefile
+> +++ b/arch/arm/mach-stm32mp/Makefile
+> @@ -11,7 +11,7 @@ obj-y += bsec.o
+>  ifdef CONFIG_SPL_BUILD
+>  obj-y += spl.o
+>  else
+> -obj-$(CONFIG_CMD_STM32PROG) += cmd_stm32prog/
+> +obj-y += cmd_stm32prog/
+>  obj-$(CONFIG_CMD_STM32KEY) += cmd_stm32key.o
+>  obj-$(CONFIG_ARMV7_PSCI) += psci.o
+>  obj-$(CONFIG_TFABOOT) += boot_params.o
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+> index 609a678793..f4c0d18d4d 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+> @@ -11,8 +11,24 @@ config CMD_STM32PROG
+>  	imply DFU_MTD if MTD
 >  	help
->  	  Say y to enable STM32 Extended TrustZone Protection
->  
-> -config CMD_STM32PROG
-> -	bool "command stm32prog for STM32CudeProgrammer"
-> -	select DFU
-> -	select DFU_RAM
-> -	select DFU_VIRT
-> -	select PARTITION_TYPE_GUID
-> -	imply CMD_GPT if MMC
-> -	imply CMD_MTD if MTD
-> -	imply DFU_MMC if MMC
-> -	imply DFU_MTD if MTD
-> -	help
-> -		activate a specific command stm32prog for STM32MP soc family
+>  		activate a specific command stm32prog for STM32MP soc family
 > -		witch update the device with the tools STM32CubeProgrammer,
 > -		using UART with STM32 protocol or USB with DFU protocol
-> -		NB: access to not volatile memory (NOR/NAND/SD/eMMC) is based
-> -		    on U-Boot DFU framework
-> -
->  config CMD_STM32KEY
->  	bool "command stm32key to fuse public key hash"
->  	default y
-> @@ -177,6 +160,7 @@ config DEBUG_UART_CLOCK
->  	default 64000000
->  endif
+> +		witch update the device with the tools STM32CubeProgrammer
+>  		NB: access to not volatile memory (NOR/NAND/SD/eMMC) is based
+>  		    on U-Boot DFU framework
 >  
-> +source "arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig"
->  source "board/st/stm32mp1/Kconfig"
->  source "board/dhelectronics/dh_stm32mp1/Kconfig"
->  
-> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
-> new file mode 100644
-> index 0000000000..609a678793
-> --- /dev/null
-> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
-> @@ -0,0 +1,18 @@
-> +
-> +config CMD_STM32PROG
-> +	bool "command stm32prog for STM32CudeProgrammer"
-> +	select DFU
-> +	select DFU_RAM
-> +	select DFU_VIRT
-> +	select PARTITION_TYPE_GUID
-> +	imply CMD_GPT if MMC
-> +	imply CMD_MTD if MTD
-> +	imply DFU_MMC if MMC
-> +	imply DFU_MTD if MTD
+> +config CMD_STM32PROG_USB
+> +	bool "support stm32prog over USB"
+> +	depends on CMD_STM32PROG
+> +	default y
 > +	help
-> +		activate a specific command stm32prog for STM32MP soc family
+> +		activate the command "stm32prog usb" for STM32MP soc family
 > +		witch update the device with the tools STM32CubeProgrammer,
-> +		using UART with STM32 protocol or USB with DFU protocol
-> +		NB: access to not volatile memory (NOR/NAND/SD/eMMC) is based
-> +		    on U-Boot DFU framework
+> +		using USB with DFU protocol
 > +
+> +config CMD_STM32PROG_SERIAL
+> +	bool "support stm32prog over UART"
+> +	depends on CMD_STM32PROG
+> +	default y
+> +	help
+> +		activate the command "stm32prog serial" for STM32MP soc family
+> +		with the tools STM32CubeProgrammer using U-Boot serial device
+> +		and UART protocol.
+> \ No newline at end of file
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Makefile b/arch/arm/mach-stm32mp/cmd_stm32prog/Makefile
+> index 548a378921..b57e1bf870 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/Makefile
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Makefile
+> @@ -3,7 +3,7 @@
+>  # Copyright (C) 2020, STMicroelectronics - All Rights Reserved
+>  #
+>  
+> -obj-y += cmd_stm32prog.o
+> -obj-y += stm32prog.o
+> -obj-y += stm32prog_serial.o
+> -obj-y += stm32prog_usb.o
+> +obj-$(CONFIG_CMD_STM32PROG) += cmd_stm32prog.o
+> +obj-$(CONFIG_CMD_STM32PROG) += stm32prog.o
+> +obj-$(CONFIG_CMD_STM32PROG_SERIAL) += stm32prog_serial.o
+> +obj-$(CONFIG_CMD_STM32PROG_USB) += stm32prog_usb.o
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> index 34a6be66c3..a7e2861764 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> @@ -50,9 +50,9 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+>  	if (argc < 3 ||  argc > 5)
+>  		return CMD_RET_USAGE;
+>  
+> -	if (!strcmp(argv[1], "usb"))
+> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) && !strcmp(argv[1], "usb"))
+>  		link = LINK_USB;
+> -	else if (!strcmp(argv[1], "serial"))
+> +	else if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) && !strcmp(argv[1], "serial"))
+>  		link = LINK_SERIAL;
+>  
+>  	if (link == LINK_UNDEFINED) {
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> index be482c3402..18af99c78b 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> @@ -177,9 +177,30 @@ char *stm32prog_get_error(struct stm32prog_data *data);
+>  
+>  /* Main function */
+>  int stm32prog_init(struct stm32prog_data *data, ulong addr, ulong size);
+> +void stm32prog_clean(struct stm32prog_data *data);
+> +
+> +#ifdef CONFIG_CMD_STM32PROG_SERIAL
+>  int stm32prog_serial_init(struct stm32prog_data *data, int link_dev);
+>  bool stm32prog_serial_loop(struct stm32prog_data *data);
+> +#else
+> +static inline int stm32prog_serial_init(struct stm32prog_data *data, int link_dev)
+> +{
+> +	return -ENOSYS;
+> +}
+> +
+> +static inline bool stm32prog_serial_loop(struct stm32prog_data *data)
+> +{
+> +	return false;
+> +}
+> +#endif
+> +
+> +#ifdef CONFIG_CMD_STM32PROG_USB
+>  bool stm32prog_usb_loop(struct stm32prog_data *data, int dev);
+> -void stm32prog_clean(struct stm32prog_data *data);
+> +#else
+> +static inline bool stm32prog_usb_loop(struct stm32prog_data *data, int dev)
+> +{
+> +	return false;
+> +}
+> +#endif
+>  
+>  #endif
+> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+> index 3faa4ec18a..a453f89d02 100644
+> --- a/arch/arm/mach-stm32mp/cpu.c
+> +++ b/arch/arm/mach-stm32mp/cpu.c
+> @@ -265,7 +265,8 @@ int arch_cpu_init(void)
+>  
+>  	boot_mode = get_bootmode();
+>  
+> -	if ((boot_mode & TAMP_BOOT_DEVICE_MASK) == BOOT_SERIAL_UART)
+> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) &&
+> +	    (boot_mode & TAMP_BOOT_DEVICE_MASK) == BOOT_SERIAL_UART)
+>  		gd->flags |= GD_FLG_SILENT | GD_FLG_DISABLE_CONSOLE;
+>  #if defined(CONFIG_DEBUG_UART) && \
+>  	!defined(CONFIG_TFABOOT) && \
+> @@ -485,7 +486,7 @@ static void setup_boot_mode(void)
+>  		env_set("boot_instance", cmd);
+>  
+>  		/* restore console on uart when not used */
+> -		if (gd->cur_serial_dev != dev) {
+> +		if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) && gd->cur_serial_dev != dev) {
+>  			gd->flags &= ~(GD_FLG_SILENT |
+>  				       GD_FLG_DISABLE_CONSOLE);
+>  			printf("serial boot with console enabled!\n");
+> diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
+> index 5633a6cb95..00d1fb8f59 100644
+> --- a/board/st/common/stm32mp_dfu.c
+> +++ b/board/st/common/stm32mp_dfu.c
+> @@ -143,7 +143,8 @@ void set_dfu_alt_info(char *interface, char *devstr)
+>  			board_get_alt_info_mtd(mtd, buf);
+>  	}
+>  
+> -	if (IS_ENABLED(CONFIG_DFU_VIRT)) {
+> +	if (IS_ENABLED(CONFIG_DFU_VIRT) &&
+> +	    IS_ENABLED(CMD_STM32PROG_USB)) {
+>  		strncat(buf, "&virt 0=OTP", DFU_ALT_BUF_LEN);
+>  
+>  		if (IS_ENABLED(CONFIG_PMIC_STPMIC1))
+> @@ -217,7 +218,7 @@ int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
+>  		return dfu_pmic_read(offset, buf, len);
+>  	}
+>  
+> -	if (CONFIG_IS_ENABLED(CMD_STM32PROG) &&
+> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
+>  	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
+>  		return stm32prog_read_medium_virt(dfu, offset, buf, len);
+>  
+> @@ -228,7 +229,7 @@ int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
+>  int dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
+>  			  void *buf, long *len)
+>  {
+> -	if (CONFIG_IS_ENABLED(CMD_STM32PROG) &&
+> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
+>  	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
+>  		return stm32prog_write_medium_virt(dfu, offset, buf, len);
+>  
+> @@ -237,7 +238,7 @@ int dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
+>  
+>  int __weak dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
+>  {
+> -	if (CONFIG_IS_ENABLED(CMD_STM32PROG) &&
+> +	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
+>  	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
+>  		return stm32prog_get_medium_size_virt(dfu, size);
+>  
 > 
 
 

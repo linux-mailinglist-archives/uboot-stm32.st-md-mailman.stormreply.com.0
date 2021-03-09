@@ -2,66 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91C35332824
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:08:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09BBA332840
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:15:12 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E53F9C57195;
-	Tue,  9 Mar 2021 14:08:09 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF2C9C57195;
+	Tue,  9 Mar 2021 14:15:11 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 15DDCC57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7BE0CC57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 14:08:08 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 14:15:10 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129E2rIE002066; Tue, 9 Mar 2021 15:08:05 +0100
+ 129EC2oO019287; Tue, 9 Mar 2021 15:15:07 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=kZ2+XeHHtsA+OGR2ZPxPI4qSgDDyYeOjAzfShY6dIas=;
- b=gEGqdpVeW6A3wesKnpH6KhaVcT/16AZo5wjUt9m1dAd+1F2vMn7vsQBtiTMO6A2GWiYs
- /yT/wQ+TBnk0azQ4RAJql2L3Ec5stWRDWJKKjYLH8RJwbjTJk9qaLTc5dK8vUQWiqCFU
- QuO9Z384Fgd6+3FrP0a8qAfxG4y4iQcGxLkBt0SWDaoPTvbN3pknueBTeAIm4QwGhnqZ
- 7DpOUEuGPL951K934mE7PwKUORZLfdtt41IBs6+RiZhbGJj7iM8ahKsP6RxtuaRrvMra
- M+cJpUHDWHtViutUELKpBjep/L1d3X3GzUS51/bZvu2t43pfpiicYmRY9Kbk5AZIUixj Iw== 
+ bh=9oZZj5j0ne9Uoz6z85uWmKDBZVnj5Eh89uThA4ZJsac=;
+ b=vshXrj9130/QFu0vySZt8JCueou7uNyEQYEhTpQCGrDkyJmduwWIenNYw+haO4zUrAQq
+ H+kcjDkH+zrBgxrGYLFOjiBAxgAOSYUMjHLt9HWVzNnzmJq/Fj6gf9N6SP8eQ3afBA7G
+ mpK3iwYxc4SBhO32Bl9eYDLfYWK4Q/0FMiNgOKTifObzONtem5OneraAEG+bmBP0dTBV
+ yFYRZ6d03iUOY5kT+Hc299xDGbAH5hzBiHGGlaJY8zdLK53XzZ5HFZev8yZGJ6qr1i5y
+ Wcc7nUJQhhXkpRjL5Z3YK/43q8X2JehBPpOrXw7iBO1jXwO1Dklc0uZU528er1JuXe8+ NQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3741gpj67t-1
+ by mx07-00178001.pphosted.com with ESMTP id 3741y6srcf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 15:08:05 +0100
+ Tue, 09 Mar 2021 15:15:07 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CA63810002A;
- Tue,  9 Mar 2021 15:08:04 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C3C0D10002A;
+ Tue,  9 Mar 2021 15:15:06 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C08D3269E6A;
- Tue,  9 Mar 2021 15:08:04 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B86E9271165;
+ Tue,  9 Mar 2021 15:15:06 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 15:08:04 +0100
+ 2021 15:15:06 +0100
 To: Jagan Teki <jagan@amarulasolutions.com>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Matteo Lisi <matteo.lisi@engicam.com>
 References: <20210228155226.77904-1-jagan@amarulasolutions.com>
- <20210228155226.77904-8-jagan@amarulasolutions.com>
+ <20210228155226.77904-9-jagan@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <e6019e85-7761-f2a6-8cbe-d63392f558e4@foss.st.com>
-Date: Tue, 9 Mar 2021 15:08:03 +0100
+Message-ID: <1f963d4d-4601-c0fb-55ff-5dcd06b90d69@foss.st.com>
+Date: Tue, 9 Mar 2021 15:15:05 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210228155226.77904-8-jagan@amarulasolutions.com>
+In-Reply-To: <20210228155226.77904-9-jagan@amarulasolutions.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-09_11:2021-03-08,
  2021-03-09 signatures=0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH 7/9] ARM: dts: stm32: Add Engicam MicroGEA
- STM32MP1 1X4Gb DDR3
+Subject: Re: [Uboot-stm32] [PATCH 8/9] board: stm32: Add Engicam MicroGEA
+ STM32MP1 MicroDev 2.0 board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,151 +80,443 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Jagan
 
+one minor remard below
+
 On 2/28/21 4:52 PM, Jagan Teki wrote:
-> Engicam MicroGEA STM32MP1 Micro SOM has mounted 1x4Gb DDR3
-> which has 16bits width 533Mhz frequency.
+> MicroDev 2.0 is a general purpose miniature carrier board with CAN,
+> LTE and LVDS panel interfaces.
 > 
-> Add DDR configurations via dtsi.
+> Genaral features:
+> - Ethernet 10/100
+> - USB Type A
+> - Audio Out
+> - microSD
+> - LVDS panel connector
+> - Wifi/BT (option)
+> - UMTS LTE with sim connector (option)
+> 
+> MicroGEA STM32MP1 is a STM32MP157A based Micro SoM.
+> 
+> MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
+> for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
+> 
+> Add support for it.
 > 
 > Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 > ---
->  ...m32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi | 121 ++++++++++++++++++
->  1 file changed, 121 insertions(+)
->  create mode 100644 arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
+>  arch/arm/dts/Makefile                         |   1 +
+>  ...-microgea-stm32mp1-microdev2.0-u-boot.dtsi |  51 ++++++++
+>  ...32mp157a-microgea-stm32mp1-microdev2.0.dts |  55 ++++++++
+>  .../stm32mp157a-microgea-stm32mp1-u-boot.dtsi | 118 ++++++++++++++++++
+>  arch/arm/mach-stm32mp/Kconfig                 |  20 +++
+>  board/engicam/stm32mp1/Kconfig                |   2 +-
+>  board/engicam/stm32mp1/MAINTAINERS            |   6 +
+>  ...mp15-microgea-stm32mp1-microdev2_defconfig |  80 ++++++++++++
+>  8 files changed, 332 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+>  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
+>  create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
 > 
-> diff --git a/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 7e0fae8cf0..7b275fe46c 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -979,6 +979,7 @@ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
+>  dtb-$(CONFIG_STM32MP15x) += \
+>  	stm32mp157a-dk1.dtb \
+>  	stm32mp157a-avenger96.dtb \
+> +	stm32mp157a-microgea-stm32mp1-microdev2.0.dtb \
+
+follow alphabetical order, should be located below stm32mp157a-icore-stm32mp1-edimm2.2.dtb
+
+>  	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
+>  	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
+>  	stm32mp157c-dk2.dtb \
+> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
 > new file mode 100644
-> index 0000000000..950f292abb
+> index 0000000000..e4bd215812
 > --- /dev/null
-> +++ b/arch/arm/dts/stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi
-> @@ -0,0 +1,121 @@
-> +// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
+> @@ -0,0 +1,51 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
 > +/*
-> + * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
-> + *
-> + * STM32MP157C DK1/DK2 BOARD configuration
-> + * 1x DDR3L 4Gb, 16-bit, 533MHz.
-> + * Reference used NT5CC256M16DP-DI from NANYA
-> + *
-> + * DDR type / Platform	DDR3/3L
-> + * freq		533MHz
-> + * width	16
-> + * datasheet	0  = MT41J256M16-187 / DDR3-1066 bin G
-> + * DDR density	4
-> + * timing mode	optimized
-> + * Scheduling/QoS options : type = 2
-> + * address mapping : RBC
-> + * Tc > + 85C : N
+> + * Copyright (C) STMicroelectronics 2019 - All Rights Reserved
+> + * Copyright (c) 2020 Amarula Solutions(India)
+> + * Author: Jagan Teki <jagan@amarulasolutions.com>
 > + */
-> +#define DDR_MEM_COMPATIBLE ddr3-microgea-1066-888-bin-g-1x4gb-533mhz
-> +#define DDR_MEM_NAME "DDR3-1066/888 bin G 1x4Gb 533MHz v1.45"
-> +#define DDR_MEM_SPEED 533000
-> +#define DDR_MEM_SIZE 0x20000000
 > +
-> +#define DDR_MSTR 0x00041401
-> +#define DDR_MRCTRL0 0x00000010
-> +#define DDR_MRCTRL1 0x00000000
-> +#define DDR_DERATEEN 0x00000000
-> +#define DDR_DERATEINT 0x00800000
-> +#define DDR_PWRCTL 0x00000000
-> +#define DDR_PWRTMG 0x00400010
-> +#define DDR_HWLPCTL 0x00000000
-> +#define DDR_RFSHCTL0 0x00210000
-> +#define DDR_RFSHCTL3 0x00000000
-> +#define DDR_RFSHTMG 0x0081008B
-> +#define DDR_CRCPARCTL0 0x00000000
-> +#define DDR_DRAMTMG0 0x121B2414
-> +#define DDR_DRAMTMG1 0x000A041C
-> +#define DDR_DRAMTMG2 0x0608090F
-> +#define DDR_DRAMTMG3 0x0050400C
-> +#define DDR_DRAMTMG4 0x08040608
-> +#define DDR_DRAMTMG5 0x06060403
-> +#define DDR_DRAMTMG6 0x02020002
-> +#define DDR_DRAMTMG7 0x00000202
-> +#define DDR_DRAMTMG8 0x00001005
-> +#define DDR_DRAMTMG14 0x000000A0
-> +#define DDR_ZQCTL0 0xC2000040
-> +#define DDR_DFITMG0 0x02060105
-> +#define DDR_DFITMG1 0x00000202
-> +#define DDR_DFILPCFG0 0x07000000
-> +#define DDR_DFIUPD0 0xC0400003
-> +#define DDR_DFIUPD1 0x00000000
-> +#define DDR_DFIUPD2 0x00000000
-> +#define DDR_DFIPHYMSTR 0x00000000
-> +#define DDR_ADDRMAP1 0x00070707
-> +#define DDR_ADDRMAP2 0x00000000
-> +#define DDR_ADDRMAP3 0x1F000000
-> +#define DDR_ADDRMAP4 0x00001F1F
-> +#define DDR_ADDRMAP5 0x06060606
-> +#define DDR_ADDRMAP6 0x0F060606
-> +#define DDR_ADDRMAP9 0x00000000
-> +#define DDR_ADDRMAP10 0x00000000
-> +#define DDR_ADDRMAP11 0x00000000
-> +#define DDR_ODTCFG 0x06000600
-> +#define DDR_ODTMAP 0x00000001
-> +#define DDR_SCHED 0x00000C01
-> +#define DDR_SCHED1 0x00000000
-> +#define DDR_PERFHPR1 0x01000001
-> +#define DDR_PERFLPR1 0x08000200
-> +#define DDR_PERFWR1 0x08000400
-> +#define DDR_DBG0 0x00000000
-> +#define DDR_DBG1 0x00000000
-> +#define DDR_DBGCMD 0x00000000
-> +#define DDR_POISONCFG 0x00000000
-> +#define DDR_PCCFG 0x00000010
-> +#define DDR_PCFGR_0 0x00010000
-> +#define DDR_PCFGW_0 0x00000000
-> +#define DDR_PCFGQOS0_0 0x02100C03
-> +#define DDR_PCFGQOS1_0 0x00800100
-> +#define DDR_PCFGWQOS0_0 0x01100C03
-> +#define DDR_PCFGWQOS1_0 0x01000200
-> +#define DDR_PCFGR_1 0x00010000
-> +#define DDR_PCFGW_1 0x00000000
-> +#define DDR_PCFGQOS0_1 0x02100C03
-> +#define DDR_PCFGQOS1_1 0x00800040
-> +#define DDR_PCFGWQOS0_1 0x01100C03
-> +#define DDR_PCFGWQOS1_1 0x01000200
-> +#define DDR_PGCR 0x01442E02
-> +#define DDR_PTR0 0x0022AA5B
-> +#define DDR_PTR1 0x04841104
-> +#define DDR_PTR2 0x042DA068
-> +#define DDR_ACIOCR 0x10400812
-> +#define DDR_DXCCR 0x00000C40
-> +#define DDR_DSGCR 0xF200011F
-> +#define DDR_DCR 0x0000000B
-> +#define DDR_DTPR0 0x38D488D0
-> +#define DDR_DTPR1 0x098B00D8
-> +#define DDR_DTPR2 0x10023600
-> +#define DDR_MR0 0x00000840
-> +#define DDR_MR1 0x00000000
-> +#define DDR_MR2 0x00000208
-> +#define DDR_MR3 0x00000000
-> +#define DDR_ODTCR 0x00010000
-> +#define DDR_ZQ0CR1 0x00000038
-> +#define DDR_DX0GCR 0x0000CE81
-> +#define DDR_DX0DLLCR 0x40000000
-> +#define DDR_DX0DQTR 0xFFFFFFFF
-> +#define DDR_DX0DQSTR 0x3DB02000
-> +#define DDR_DX1GCR 0x0000CE81
-> +#define DDR_DX1DLLCR 0x40000000
-> +#define DDR_DX1DQTR 0xFFFFFFFF
-> +#define DDR_DX1DQSTR 0x3DB02000
-> +#define DDR_DX2GCR 0x0000CE80
-> +#define DDR_DX2DLLCR 0x40000000
-> +#define DDR_DX2DQTR 0xFFFFFFFF
-> +#define DDR_DX2DQSTR 0x3DB02000
-> +#define DDR_DX3GCR 0x0000CE80
-> +#define DDR_DX3DLLCR 0x40000000
-> +#define DDR_DX3DQTR 0xFFFFFFFF
-> +#define DDR_DX3DQSTR 0x3DB02000
+> +#include "stm32mp157a-microgea-stm32mp1-u-boot.dtsi"
 > +
-> +#include "stm32mp15-ddr.dtsi"
+> +/{
+> +	aliases {
+> +		mmc0 = &sdmmc1;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = &uart4;
+> +	};
+> +};
+> +
+> +&sdmmc1 {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&sdmmc1_b4_pins_a {
+> +	u-boot,dm-pre-reloc;
+> +
+> +	pins1 {
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +
+> +	pins2 {
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +};
+> +
+> +&uart4 {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&uart4_pins_a {
+> +	u-boot,dm-pre-reloc;
+> +
+> +	pins1 {
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +
+> +	pins2 {
+> +		u-boot,dm-pre-reloc;
+> +		bias-pull-up;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+> new file mode 100644
+> index 0000000000..7a75868164
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+> @@ -0,0 +1,55 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+> +/*
+> + * Copyright (c) STMicroelectronics 2019 - All Rights Reserved
+> + * Copyright (c) 2020 Engicam srl
+> + * Copyright (c) 2020 Amarula Solutons(India)
+> + */
+> +
+> +/dts-v1/;
+> +#include "stm32mp157.dtsi"
+> +#include "stm32mp157a-microgea-stm32mp1.dtsi"
+> +#include "stm32mp15-pinctrl.dtsi"
+> +#include "stm32mp15xxaa-pinctrl.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "Engicam MicroGEA STM32MP1 MicroDev 2.0 Carrier Board";
+> +	compatible = "engicam,microgea-stm32mp1-microdev2.0",
+> +		     "engicam,microgea-stm32mp1", "st,stm32mp157";
+> +
+> +	aliases {
+> +		serial0 = &uart4;
+> +		serial1 = &uart8;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +};
+> +
+> +&sdmmc1 {
+> +	bus-width = <4>;
+> +	disable-wp;
+> +	pinctrl-names = "default", "opendrain", "sleep";
+> +	pinctrl-0 = <&sdmmc1_b4_pins_a>;
+> +	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
+> +	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
+> +	st,neg-edge;
+> +	vmmc-supply = <&vdd>;
+> +	status = "okay";
+> +};
+> +
+> +&uart4 {
+> +	pinctrl-names = "default", "sleep", "idle";
+> +	pinctrl-0 = <&uart4_pins_a>;
+> +	pinctrl-1 = <&uart4_sleep_pins_a>;
+> +	pinctrl-2 = <&uart4_idle_pins_a>;
+> +	status = "okay";
+> +};
+> +
+> +/* J31: RS323 */
+> +&uart8 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart8_pins_a>;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..32ce31458a
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
+> @@ -0,0 +1,118 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+> +/*
+> + * Copyright (C) STMicroelectronics 2019 - All Rights Reserved
+> + * Copyright (c) 2020 Amarula Solutions(India)
+> + * Author: Jagan Teki <jagan@amarulasolutions.com>
+> + */
+> +
+> +#include <dt-bindings/clock/stm32mp1-clksrc.h>
+> +#include "stm32mp15-u-boot.dtsi"
+> +#include "stm32mp15-ddr3-microgea-1x4Gb-1066-binG.dtsi"
+> +
+> +&vin {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&vddcore {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&vdd {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&vddq_ddr {
+> +	u-boot,dm-pre-reloc;
+> +};
+> +
+> +&rcc {
+> +	st,clksrc = <
+> +		CLK_MPU_PLL1P
+> +		CLK_AXI_PLL2P
+> +		CLK_MCU_PLL3P
+> +		CLK_PLL12_HSE
+> +		CLK_PLL3_HSE
+> +		CLK_PLL4_HSE
+> +		CLK_RTC_LSE
+> +		CLK_MCO1_DISABLED
+> +		CLK_MCO2_DISABLED
+> +	>;
+> +
+> +	st,clkdiv = <
+> +		1 /*MPU*/
+> +		0 /*AXI*/
+> +		0 /*MCU*/
+> +		1 /*APB1*/
+> +		1 /*APB2*/
+> +		1 /*APB3*/
+> +		1 /*APB4*/
+> +		2 /*APB5*/
+> +		23 /*RTC*/
+> +		0 /*MCO1*/
+> +		0 /*MCO2*/
+> +	>;
+> +
+> +	st,pkcs = <
+> +		CLK_CKPER_HSE
+> +		CLK_FMC_ACLK
+> +		CLK_QSPI_ACLK
+> +		CLK_ETH_DISABLED
+> +		CLK_SDMMC12_PLL4P
+> +		CLK_DSI_DSIPLL
+> +		CLK_STGEN_HSE
+> +		CLK_USBPHY_HSE
+> +		CLK_SPI2S1_PLL3Q
+> +		CLK_SPI2S23_PLL3Q
+> +		CLK_SPI45_HSI
+> +		CLK_SPI6_HSI
+> +		CLK_I2C46_HSI
+> +		CLK_SDMMC3_PLL4P
+> +		CLK_USBO_USBPHY
+> +		CLK_ADC_CKPER
+> +		CLK_CEC_LSE
+> +		CLK_I2C12_HSI
+> +		CLK_I2C35_HSI
+> +		CLK_UART1_HSI
+> +		CLK_UART24_HSI
+> +		CLK_UART35_HSI
+> +		CLK_UART6_HSI
+> +		CLK_UART78_HSI
+> +		CLK_SPDIF_PLL4P
+> +		CLK_FDCAN_PLL4R
+> +		CLK_SAI1_PLL3Q
+> +		CLK_SAI2_PLL3Q
+> +		CLK_SAI3_PLL3Q
+> +		CLK_SAI4_PLL3Q
+> +		CLK_RNG1_LSI
+> +		CLK_RNG2_LSI
+> +		CLK_LPTIM1_PCLK1
+> +		CLK_LPTIM23_PCLK3
+> +		CLK_LPTIM45_LSE
+> +	>;
+> +
+> +	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 533 (GPU), R = 533 (DDR) */
+> +	pll2: st,pll@1 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <1>;
+> +		cfg = < 2 65 1 0 0 PQR(1,1,1) >;
+> +		frac = < 0x1400 >;
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +
+> +	/* VCO = 417.8 MHz => P = 209, Q = 24, R = 11 */
+> +	pll3: st,pll@2 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <2>;
+> +		cfg = < 1 33 1 16 36 PQR(1,1,1) >;
+> +		frac = < 0x1a04 >;
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +
+> +	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
+> +	pll4: st,pll@3 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <3>;
+> +		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
+> +		u-boot,dm-pre-reloc;
+> +	};
+> +};
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index 15c832b16b..c1622df7f3 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -77,6 +77,26 @@ config TARGET_ST_STM32MP15x
+>  		Evalulation board (EV1) or Discovery board (DK1 and DK2).
+>  		The difference between board are managed with devicetree
+>  
+> +config TARGET_MICROGEA_STM32MP1
+> +	bool "Engicam MicroGEA STM32MP1 SOM"
+> +	select STM32MP15x
+> +	imply BOOTCOUNT_LIMIT
+> +	imply BOOTSTAGE
+> +	imply CMD_BOOTCOUNT
+> +	imply CMD_BOOTSTAGE
+> +	imply CMD_CLS if CMD_BMP
+> +	imply DISABLE_CONSOLE
+> +	imply PRE_CONSOLE_BUFFER
+> +	imply SILENT_CONSOLE
+> +	help
+> +	  MicroGEA STM32MP1 is a STM32MP157A based Micro SOM.
+> +
+> +	  MicroGEA STM32MP1 MicroDev 2.0:
+> +	  * MicroDev 2.0 is a general purpose miniature carrier board with CAN,
+> +	    LTE and LVDS panel interfaces.
+> +	  * MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
+> +	    for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
+> +
+>  config TARGET_ICORE_STM32MP1
+>  	bool "Engicam i.Core STM32MP1 SOM"
+>  	select STM32MP15x
+> diff --git a/board/engicam/stm32mp1/Kconfig b/board/engicam/stm32mp1/Kconfig
+> index e7bccc09fb..c800fd4e60 100644
+> --- a/board/engicam/stm32mp1/Kconfig
+> +++ b/board/engicam/stm32mp1/Kconfig
+> @@ -1,4 +1,4 @@
+> -if TARGET_ICORE_STM32MP1
+> +if TARGET_ICORE_STM32MP1 || TARGET_MICROGEA_STM32MP1
+>  
+>  config SYS_BOARD
+>  	default "stm32mp1"
+> diff --git a/board/engicam/stm32mp1/MAINTAINERS b/board/engicam/stm32mp1/MAINTAINERS
+> index 62c6925c8d..c0bb767782 100644
+> --- a/board/engicam/stm32mp1/MAINTAINERS
+> +++ b/board/engicam/stm32mp1/MAINTAINERS
+> @@ -1,3 +1,9 @@
+> +MicroGEA-STM32MP1-MICRODEV2.0
+> +M:	Jagan Teki <jagan@amarulasolutions.com>
+> +M:	Matteo Lisi <matteo.lisi@engicam.com>
+> +S:	Maintained
+> +F:	configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> +
+>  i.Core-STM32MP1-CTOUCH2.0
+>  M:	Jagan Teki <jagan@amarulasolutions.com>
+>  M:	Matteo Lisi <matteo.lisi@engicam.com>
+> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> new file mode 100644
+> index 0000000000..a58f3e494d
+> --- /dev/null
+> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> @@ -0,0 +1,80 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_STM32MP=y
+> +CONFIG_SYS_MALLOC_F_LEN=0x3000
+> +CONFIG_SYS_MEMTEST_START=0xc0000000
+> +CONFIG_SYS_MEMTEST_END=0xc4000000
+> +CONFIG_ENV_OFFSET=0x280000
+> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
+> +CONFIG_SPL_MMC_SUPPORT=y
+> +CONFIG_SPL=y
+> +CONFIG_TARGET_MICROGEA_STM32MP1=y
+> +CONFIG_ENV_OFFSET_REDUND=0x2C0000
+> +# CONFIG_ARMV7_VIRT is not set
+> +CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0"
+> +CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_FIT=y
+> +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+> +CONFIG_BOARD_EARLY_INIT_F=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3
+> +CONFIG_SPL_ENV_SUPPORT=y
+> +CONFIG_SPL_I2C_SUPPORT=y
+> +CONFIG_SPL_POWER_SUPPORT=y
+> +CONFIG_SYS_PROMPT="STM32MP> "
+> +CONFIG_CMD_ADTIMG=y
+> +CONFIG_CMD_ERASEENV=y
+> +CONFIG_CMD_MEMINFO=y
+> +CONFIG_CMD_MEMTEST=y
+> +CONFIG_CMD_ADC=y
+> +CONFIG_CMD_CLK=y
+> +CONFIG_CMD_FUSE=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_REMOTEPROC=y
+> +CONFIG_CMD_CACHE=y
+> +CONFIG_CMD_TIME=y
+> +CONFIG_CMD_TIMER=y
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +CONFIG_CMD_EXT4_WRITE=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
+> +CONFIG_ENV_IS_NOWHERE=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +# CONFIG_SPL_ENV_IS_NOWHERE is not set
+> +CONFIG_DM_HWSPINLOCK=y
+> +CONFIG_HWSPINLOCK_STM32=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_STM32F7=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_DM_MAILBOX=y
+> +CONFIG_STM32_IPCC=y
+> +CONFIG_STM32_FMC2_EBI=y
+> +CONFIG_DM_MMC=y
+> +CONFIG_SUPPORT_EMMC_BOOT=y
+> +CONFIG_STM32_SDMMC2=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_PHY=y
+> +CONFIG_PINCONF=y
+> +# CONFIG_SPL_PINCTRL_FULL is not set
+> +CONFIG_PINCTRL_STMFX=y
+> +CONFIG_DM_PMIC=y
+> +# CONFIG_SPL_PMIC_CHILDREN is not set
+> +CONFIG_PMIC_STPMIC1=y
+> +CONFIG_DM_REGULATOR=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_DM_REGULATOR_GPIO=y
+> +CONFIG_REMOTEPROC_STM32_COPRO=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_RTC_STM32=y
+> +CONFIG_SERIAL_RX_BUFFER=y
+> +CONFIG_WDT=y
+> +CONFIG_WDT_STM32MP=y
+> +CONFIG_LZO=y
+> +CONFIG_ERRNO_STR=y
 > 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks 
-
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

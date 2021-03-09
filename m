@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19B2A332843
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:16:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28D22332850
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:16:51 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D98AAC57195;
-	Tue,  9 Mar 2021 14:16:29 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E6F67C57195;
+	Tue,  9 Mar 2021 14:16:50 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 126C2C57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C84E4C57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 14:16:29 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 14:16:49 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129ECtHF025724; Tue, 9 Mar 2021 15:16:26 +0100
+ 129EC4JW019538; Tue, 9 Mar 2021 15:16:47 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=/bz1xGyynW4ID6th6r2f43I8z1iaEbGWAuhsuDi0phQ=;
- b=ok5T9marMwZl0G8bHuMfPPIRjX3tmKz7mdyszn6yA0QJnPgEMCNhWuvRquF56zlhpT73
- PRI6ohqgU4KHRhDdpNWCnQCzzeuUPvNJU+R9L3fYT73TEICUnAQC2u30J4rZe2jfxTHp
- zNASuF+3f8G3g7f8MN3TMv0S7WsPojLsl7h+MV0cH7Dpa5m1kdLOCqrWCDe4AhVl5rWx
- hxo/oVm/7o09EOxtzGTYsLyyfTsacMwlYt0a67IPzz8bimNwsH98DMnWKhGUiwGos8n4
- RegJiEXGgtYIC98dtnuts+trGDuWA5+VheuLtel7RMLEGAuVBLvm0fFkA+7cJC6rINHT lg== 
+ bh=6T0/vkkfePZXAghP2W9lBuFZCqU+o+cde8Wk5ywOJNM=;
+ b=kaypJdZJ9DRBsZ+55jpiKnq9ws6FICdItVLxk15E7BldHJ3OWqAYvZZ+we+etnqdJJ9I
+ Q9cGrCOoyz9SHaMDQk9rJKJyX06EXAelpjJiZ1yJOt2s93SkC12aC04PLaubQZ8LX/Vf
+ /WN5841mdkcgdM2ZeC0cU3wNCHM1d1XSZNn3/mc7PgY5qAAVY40PoKaS+GAh4PwqAt6R
+ 0SvagV0sCik+f6m11zB3NzwZU9uVKD2GLoHBXGvVKpG+MSqtQF5oSNw9Bw5UUr+QcdFz
+ p2fdGw/MDTEsjS7lSn1zwJaYJiqb4mG/8UkR52cgcCRnTptRLaa9OYxhoc0csesRcEDb Rg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 373yrek038-1
+ by mx07-00178001.pphosted.com with ESMTP id 3741y6srnd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 15:16:26 +0100
+ Tue, 09 Mar 2021 15:16:47 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F3E1010002A;
- Tue,  9 Mar 2021 15:16:25 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8D10810002A;
+ Tue,  9 Mar 2021 15:16:46 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E4A3027116C;
- Tue,  9 Mar 2021 15:16:25 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 819E327116C;
+ Tue,  9 Mar 2021 15:16:46 +0100 (CET)
 Received: from lmecxl0573.lme.st.com (10.75.127.48) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 15:16:25 +0100
+ 2021 15:16:45 +0100
 To: Jagan Teki <jagan@amarulasolutions.com>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Matteo Lisi <matteo.lisi@engicam.com>
 References: <20210228155226.77904-1-jagan@amarulasolutions.com>
  <20210228155226.77904-10-jagan@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <4d0836ae-a080-ffde-c725-7af74901c9ce@foss.st.com>
-Date: Tue, 9 Mar 2021 15:16:25 +0100
+Message-ID: <8f10d371-0056-6903-bcbe-c11ad2576f71@foss.st.com>
+Date: Tue, 9 Mar 2021 15:16:45 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
 In-Reply-To: <20210228155226.77904-10-jagan@amarulasolutions.com>
 Content-Language: en-US
 X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-09_11:2021-03-08,
@@ -460,6 +460,10 @@ On 2/28/21 4:52 PM, Jagan Teki wrote:
 > +CONFIG_LZO=y
 > +CONFIG_ERRNO_STR=y
 > 
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

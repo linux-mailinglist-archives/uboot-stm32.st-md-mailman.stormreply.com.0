@@ -2,67 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B12833286A
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:21:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40043332873
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:22:57 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 139ADC57195;
-	Tue,  9 Mar 2021 14:21:57 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A785C57B77;
+	Tue,  9 Mar 2021 14:22:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E6F91C57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C8BAC57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 14:21:53 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 14:22:54 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129ECoY8017346; Tue, 9 Mar 2021 15:21:51 +0100
+ 129EMqnj011195; Tue, 9 Mar 2021 15:22:53 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=jkzgnD2JUKZ46zQl8KXVSqLtpoJiZwmxXJh8HI9r0kk=;
- b=720/Z5ovtwzPlPokXGYU89Snq/AXMT0IvotZtxyONH4n+PzVPagKVtjxyybIqXmHLyMh
- f8x2cQR/sP/ce3XuN8PLA/N3m+M8C3BgiuP0GGf6A0K29Ws+cvyGuntTF0DyuSh93BUl
- Q+KaxJA4wSCQ6Oqz9qVpP3XVLRTnso9a1D6wIaXv2vJJl+CjpFVU788UJ5u238mmnvSJ
- 3V7lvvo+7LR8i77mFOvVjt7N39z23EGQ7qf83/QV2hkB54O2mzuOb7psHWBukLN1B+WN
- LYxUthJ3aE2omthIP/AvJGVTPBGJW3daCdrfQkVeWrWI3RP1DgLiOSCDCW5O3E1JJnBw 7w== 
+ bh=arKSZADhVthxi3jRTrkMgubpB6hbEZ1ruh/iEsTtOlo=;
+ b=VBN3omhBtiY85pjsNX+Szmwndrq6NNyc1JGCgebOgvFBEAV694chHdQ2wqcMmsygRETW
+ qrrGPXPPXxHRlNAkDiUTL+lTK/3bN+Hqq3jdOefCHNv6LBs74LpEZZKiCSxqYmQoGfff
+ wWpGc3SQV/KvMTQAV8iZ06NGxvMJ+7v0xURWSyvSSAd0Aaj1ricohcB8GKCgHoPW7Vr6
+ MKA30Y7FGwVvYWl6Gey8hfUHQOPHcPiyRdRgdU0+0pplPFDi62aZ2nOaA7oDQXzlpGUr
+ 5tOa0raDwKOh2bVbUoxOgB6/qya+j5B3pOI40TlZGVjfWuNH5Bd4JEU7tAG7ZMbZLhxy Dw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 374036tcmy-1
+ by mx07-00178001.pphosted.com with ESMTP id 373yrek149-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 15:21:51 +0100
+ Tue, 09 Mar 2021 15:22:53 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 60F1C10002A;
- Tue,  9 Mar 2021 15:21:51 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 67AD610002A;
+ Tue,  9 Mar 2021 15:22:51 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5650F27118A;
- Tue,  9 Mar 2021 15:21:51 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5DE2B27118D;
+ Tue,  9 Mar 2021 15:22:51 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 15:21:38 +0100
+ 2021 15:22:12 +0100
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20210304131031.1.I7936291936df6580c70e36c7d96ed2a7c82bc577@changeid>
+References: <20210304131413.1.I2cbb4b61852b8dd63bbad5b3a2a27857b59be7ab@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <de6fa919-bae8-5c3d-5fb6-729157e90c37@foss.st.com>
-Date: Tue, 9 Mar 2021 15:21:37 +0100
+Message-ID: <c56d3c65-72fd-89ef-080e-f5a053848f8d@foss.st.com>
+Date: Tue, 9 Mar 2021 15:22:12 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210304131031.1.I7936291936df6580c70e36c7d96ed2a7c82bc577@changeid>
+In-Reply-To: <20210304131413.1.I2cbb4b61852b8dd63bbad5b3a2a27857b59be7ab@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-09_11:2021-03-08,
  2021-03-09 signatures=0
-Cc: Simon Glass <sjg@chromium.org>, Philippe Cornu <philippe.cornu@st.com>,
- Patrick Delaunay <patrick.delaunay@st.com>,
- Yannick Fertre <yannick.fertre@st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+Cc: =?UTF-8?Q?Yannick_Fertr=c3=a9?= <yannick.fertre@st.com>, U-Boot
+ STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Yannick Fertre <yannick.fertre@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] video: stm32: remove all child of DSI
- bridge when its probe failed
+Subject: Re: [Uboot-stm32] [PATCH 1/2] video: dw_mipi_dsi: missing device to
+ log debug
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,44 +80,30 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 3/4/21 1:10 PM, Patrick Delaunay wrote:
-> From: Patrick Delaunay <patrick.delaunay@st.com>
+On 3/4/21 1:14 PM, Patrick Delaunay wrote:
+> From: Yannick Fertre <yannick.fertre@foss.st.com>
 > 
-> Remove the child device of the STM32 DSI bridge when the driver probe
-> failed to stop futher probe request on panels used with STMicroelectronics
-> board (orisetech_otm8009a.c or raydium-rm68200.c driver).
+> Missing udevice to struct dw_mipi_dsi to log trace.
 > 
-> This patch avoid the trace "cannot get reset GPIO" when
-> STM32MP157 device tree is used on stm32MP151 SOC without DSI support.
-> 
-> In this hw_version value is 0, as DSI bridge is absent and the panel
-> ofdata_to_platdata is called for each try of panel probe,
-> the gpio reset pin is requested but after dsi father probe failed).
-> 
-> For the next request, the PANEL ofdata_to_platdata failed as the gpio
-> is already used.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+> Signed-off-by: Yannick Fertre <yannick.fertre@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  drivers/video/stm32/stm32_dsi.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  drivers/video/dw_mipi_dsi.c | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/video/stm32/stm32_dsi.c b/drivers/video/stm32/stm32_dsi.c
-> index 8891ca4b78..4027e978c8 100644
-> --- a/drivers/video/stm32/stm32_dsi.c
-> +++ b/drivers/video/stm32/stm32_dsi.c
-> @@ -483,6 +483,9 @@ static int stm32_dsi_probe(struct udevice *dev)
->  	if (priv->hw_version != HWVER_130 &&
->  	    priv->hw_version != HWVER_131) {
->  		dev_err(dev, "DSI version 0x%x not supported\n", priv->hw_version);
-> +		dev_dbg(dev, "remove and unbind all DSI child\n");
-> +		device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
-> +		device_chld_unbind(dev, NULL);
->  		ret = -ENODEV;
->  		goto err_clk;
->  	}
+> diff --git a/drivers/video/dw_mipi_dsi.c b/drivers/video/dw_mipi_dsi.c
+> index 4dde648814..a5beed3514 100644
+> --- a/drivers/video/dw_mipi_dsi.c
+> +++ b/drivers/video/dw_mipi_dsi.c
+> @@ -797,6 +797,7 @@ static int dw_mipi_dsi_init(struct udevice *dev,
+>  	dsi->phy_ops = phy_ops;
+>  	dsi->max_data_lanes = max_data_lanes;
+>  	dsi->device = device;
+> +	dsi->dsi_host.dev = (struct device *)dev;
+>  	dsi->dsi_host.ops = &dw_mipi_dsi_host_ops;
+>  	device->host = &dsi->dsi_host;
+>  
 > 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Thanks

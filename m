@@ -2,64 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A754332866
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:20:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F1433286B
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Mar 2021 15:21:57 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2F3B1C57195;
-	Tue,  9 Mar 2021 14:20:32 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1C375C57B53;
+	Tue,  9 Mar 2021 14:21:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8FF17C57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1AF5FC57195
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Mar 2021 14:20:29 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue,  9 Mar 2021 14:21:54 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 129ECjW2017169; Tue, 9 Mar 2021 15:20:29 +0100
+ 129ED0M2021176; Tue, 9 Mar 2021 15:21:52 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=2i+1UrN/4p72ur9IjBRctWTTt0UzNn7Mi6GRgcwc9P4=;
- b=zpisiORMy2a+6R17HTemmZWw3y/WVDPbHSOViZPFB65rRHfekmWUQvbjuVW4XbZle971
- 27LpuEIyjN86G54qf6NXVHlkooQ5U2zItDI+rqEUkdtJ5gq+w9dDof9eoUbi+QzhZtiz
- IV5LPBVVsaW5SdC5WK6F696aeyvwGVPahKgeDiBeo3mxI9i2bXBjb4i7W5QGCsOy/oHD
- puIGAMF96u9i4TBacuDa6O9fRlst2TtZna3veAmlHoxtvj8zxcOmLuMiOrSBnlL+FA2w
- FUKZwOuxEi+TYQR6WyCvONXkXbO1vxWST9Up9HK8lhUpcsBnY3o8i7TNTFnAAmp7mO1n 0Q== 
+ bh=tluGAWSq2rTjnNoVB2d7iZkeD7LXx7fqBHa5NeSxCzg=;
+ b=ZetCPY++j7SsQFOOykgCMp+5kJQ48WtxE+S8L5kUpHf/mDXEfuhvCJ8eDtl+644qqfFq
+ iLLZwhiasOIQC/C0OLP0PQ51jVOqdq2BNTUGjqBN+fYtl22ftMWlLQWA06oMunvU6R/8
+ WzGfzBIE7dFWIB/3pMvphDWVInyhlFd+O3CkobRByyMCbi7NCW3Tj31/vqv++j1W3Gvi
+ khkaiHcLGTkv6pvPvBaSvOEDCdg8/TP+FJ8h8U3mmYpRXibz0s/uRireu13bOoWrgYz4
+ C05FzIphde6NT6ES6iE/dIlo1ZCDY/s7/e1rX6Rb19RUE/+H5kvLsZUJ+dwJcxzsup4y NQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 374036tccj-1
+ by mx07-00178001.pphosted.com with ESMTP id 3741gpj8p8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Mar 2021 15:20:29 +0100
+ Tue, 09 Mar 2021 15:21:52 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9A13A10002A;
- Tue,  9 Mar 2021 15:20:26 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 63E6D100034;
+ Tue,  9 Mar 2021 15:21:51 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 91E4A271181;
- Tue,  9 Mar 2021 15:20:26 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.48) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4FC93271189;
+ Tue,  9 Mar 2021 15:21:51 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 9 Mar
- 2021 15:20:26 +0100
+ 2021 15:21:16 +0100
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20210301131752.1.I8cbd6f92056fa2d10bf3880746d89ee0779f8e27>
+References: <20210301194052.1.Ic785baaeea3c0a6c77088a100ea10fbbda0b5bdf@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <c76e78b1-7ca0-0b25-0543-3d691060b3ca@foss.st.com>
-Date: Tue, 9 Mar 2021 15:20:25 +0100
+Message-ID: <fdf9e70a-dd4f-4a15-d8df-eb9ba8492b79@foss.st.com>
+Date: Tue, 9 Mar 2021 15:21:15 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210301131752.1.I8cbd6f92056fa2d10bf3880746d89ee0779f8e27>
+In-Reply-To: <20210301194052.1.Ic785baaeea3c0a6c77088a100ea10fbbda0b5bdf@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-09_11:2021-03-08,
  2021-03-09 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH] board: stm32mp1: use
- CONFIG_SYS_MMC_ENV_DEV when available
+Cc: Marek Vasut <marex@denx.de>, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp15: move bootdelay
+ configuration in defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,74 +77,84 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 3/1/21 1:17 PM, Patrick Delaunay wrote:
-> Check whether user has explicitly defined the mmc device to use
-> in mmc_get_env_dev() with CONFIG_SYS_MMC_ENV_DEV.
+On 3/1/21 7:40 PM, Patrick Delaunay wrote:
+> The STM32MP15 boards have no reason to configure bootdelay in stm32mp1.h
+> as it is already done with CONFIG_BOOTDELAY (default = 2) and in
+> include/env_default.h.
 > 
-> On STMicroelectronics boards the used mmc device for environment is
-> the instance of boot device provided by the ROM code; the mmc instance
-> is configured by alias in device tree. The used partition is defined in
-> device tree with u-boot,mmc-env-partition = "ssbl".
-> 
-> This patch allows to override this selection for the support of customer
-> boards without alias; for example when SDMMC1 is not used and ENV in
-> mmc0=SDMMC2, user can force the value: CONFIG_SYS_MMC_ENV_DEV = 0.
-> 
-> On STMicroelectronics boards, the current behavior is kept with
-> CONFIG_SYS_MMC_ENV_DEV = -1.
+> This patch allows configuration for customers which reuse stm32mp1.h
+> and reduce the size of the default environment.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  board/st/stm32mp1/stm32mp1.c        | 8 +++++++-
->  configs/stm32mp15_basic_defconfig   | 1 +
->  configs/stm32mp15_trusted_defconfig | 1 +
->  3 files changed, 9 insertions(+), 1 deletion(-)
+>  configs/stm32mp15_basic_defconfig       | 1 +
+>  configs/stm32mp15_dhcom_basic_defconfig | 1 +
+>  configs/stm32mp15_dhcor_basic_defconfig | 1 +
+>  configs/stm32mp15_trusted_defconfig     | 1 +
+>  include/configs/stm32mp1.h              | 1 -
+>  5 files changed, 4 insertions(+), 1 deletion(-)
 > 
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index ab85d8ba68..759181fb5d 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -862,8 +862,14 @@ const char *env_ext4_get_dev_part(void)
->  
->  int mmc_get_env_dev(void)
->  {
-> -	u32 bootmode = get_bootmode();
-> +	u32 bootmode;
-> +
-> +	if (CONFIG_SYS_MMC_ENV_DEV >= 0)
-> +		return CONFIG_SYS_MMC_ENV_DEV;
-> +
-> +	bootmode = get_bootmode();
->  
-> +	/* use boot instance to select the correct mmc device identifier */
->  	return (bootmode & TAMP_BOOT_INSTANCE_MASK) - 1;
->  }
->  
 > diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-> index 1c680984b8..a2f745099e 100644
+> index 1c680984b8..0864d4f252 100644
 > --- a/configs/stm32mp15_basic_defconfig
 > +++ b/configs/stm32mp15_basic_defconfig
-> @@ -71,6 +71,7 @@ CONFIG_ENV_UBI_PART="UBI"
->  CONFIG_ENV_UBI_VOLUME="uboot_config"
->  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SYS_MMC_ENV_DEV=-1
->  # CONFIG_SPL_ENV_IS_NOWHERE is not set
->  # CONFIG_SPL_ENV_IS_IN_SPI_FLASH is not set
->  CONFIG_STM32_ADC=y
+> @@ -20,6 +20,7 @@ CONFIG_SPL_SPI_SUPPORT=y
+>  CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_FIT=y
+> +CONFIG_BOOTDELAY=1
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_SPL_LOG=y
+>  CONFIG_BOARD_EARLY_INIT_F=y
+> diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+> index ed285e9161..e36d34d001 100644
+> --- a/configs/stm32mp15_dhcom_basic_defconfig
+> +++ b/configs/stm32mp15_dhcom_basic_defconfig
+> @@ -19,6 +19,7 @@ CONFIG_FIT=y
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its"
+>  # CONFIG_USE_SPL_FIT_GENERATOR is not set
+> +CONFIG_BOOTDELAY=1
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_SPL_LEGACY_IMAGE_SUPPORT=y
+> diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+> index a6620561ac..4794b1a14d 100644
+> --- a/configs/stm32mp15_dhcor_basic_defconfig
+> +++ b/configs/stm32mp15_dhcor_basic_defconfig
+> @@ -17,6 +17,7 @@ CONFIG_FIT=y
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its"
+>  # CONFIG_USE_SPL_FIT_GENERATOR is not set
+> +CONFIG_BOOTDELAY=1
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_BOARD_EARLY_INIT_F=y
+>  CONFIG_SPL_LEGACY_IMAGE_SUPPORT=y
 > diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index 107041119f..f41aaa750f 100644
+> index 107041119f..4becdbb238 100644
 > --- a/configs/stm32mp15_trusted_defconfig
 > +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -52,6 +52,7 @@ CONFIG_ENV_UBI_PART="UBI"
->  CONFIG_ENV_UBI_VOLUME="uboot_config"
->  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SYS_MMC_ENV_DEV=-1
->  CONFIG_STM32_ADC=y
->  CONFIG_SET_DFU_ALT_INFO=y
->  CONFIG_USB_FUNCTION_FASTBOOT=y
+> @@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET_REDUND=0x2C0000
+>  CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
+>  CONFIG_DISTRO_DEFAULTS=y
+>  CONFIG_FIT=y
+> +CONFIG_BOOTDELAY=1
+>  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+>  CONFIG_SYS_PROMPT="STM32MP> "
+>  CONFIG_CMD_ADTIMG=y
+> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
+> index 36e400453e..db2117a3d7 100644
+> --- a/include/configs/stm32mp1.h
+> +++ b/include/configs/stm32mp1.h
+> @@ -160,7 +160,6 @@
+>   * and the ramdisk at the end.
+>   */
+>  #define CONFIG_EXTRA_ENV_SETTINGS \
+> -	"bootdelay=1\0" \
+>  	"kernel_addr_r=0xc2000000\0" \
+>  	"fdt_addr_r=0xc4000000\0" \
+>  	"scriptaddr=0xc4100000\0" \
 > 
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>

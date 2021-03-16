@@ -2,59 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D26333D6E5
-	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 16:13:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF10D33D918
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 17:22:24 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E360CC57B77;
-	Tue, 16 Mar 2021 15:13:23 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com
- [209.85.218.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82923C57B5A;
+	Tue, 16 Mar 2021 16:22:24 +0000 (UTC)
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+ [209.85.215.182])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9480C57B5A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AF178C56632
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Mar 2021 15:13:21 +0000 (UTC)
-Received: by mail-ej1-f52.google.com with SMTP id c10so72676962ejx.9
+ Tue, 16 Mar 2021 16:22:23 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id n10so22937937pgl.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Mar 2021 08:13:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=lK830ocSKRQja1xSTSlrj7RvRq0hbZAewi9bz4fvXnU=;
- b=zRuQJCRFrrjPS8ZwcLx8m4S1jp3isaNFeqq/iLlAcZtJ4c6a4JOm500GTnqH2gTjvJ
- USZCuoGVfxsc0yQp002hSMdpV7CV/VXhDFaCUytaoahCTYlGDv0zbONEeGGhNbaQcS1s
- a4BH4iZg68Sew1CHEB4oMa0GQbYKcpAval0o6Om+jkpkWa7PBfnbg6meYfB6O+e3E+Tr
- KbpUzatuO6JCHVDaF4IFQm7rbFE3bBnAajfz07wzaaxi7mD7Kp/0Ah5RftdqfxjF5Fcl
- C90ohhG7LFuKxC7C/HyJXbdqMMFN6mgGrD3zi2ITPQioq+n2Iq8JFWPOgzGS44jvKjMJ
- yXUw==
+ Tue, 16 Mar 2021 09:22:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=INmsnQxAq8g5OrJ9EkOyCLROnQhkLRWslWjBn0eWgHc=;
+ b=qdr27dMfK08ik0YnWxLsccPJNQxb+Wv2TwuuuaTAurc02XTlHB+MbOM+uSmgHujTiS
+ Dnm8S8p+ClgVnHDXuCe+XrGKmLj13S0/2DfamDSbxaeasK/tzVF2tzU1bB2IyLYDD0KQ
+ My2aH4B1X62RVni+nmGpFBPVyO74jMM2OW0hw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=lK830ocSKRQja1xSTSlrj7RvRq0hbZAewi9bz4fvXnU=;
- b=MmKX8q8EVMKYMfll7IuHa/uQA7Goct7yKNOtLE+WmPB15EBIPbZqXAwlLxG6tjGeQp
- AuaRhksUozF4MgX35qm/KUDpSYxPyzoYi+N1oLuOov0xHTNyOCi90iz+j1gyQKEQ29q2
- 2/79OmPwBZuTb5x5XOc3ZF1wA6xg2Ny+msIiIsw1uWJIsFT5n6MtH1VOYCnnQE0YywMQ
- Pksr6T3kHIuiDe++cLfshY2yMSsIDbAGiHW09sdGktuucz6QELwmohyOZDmHTYqVokyi
- 7cd90lvRz66VGh4K/Y2hIVI+1bEJZCYVUaTrxXTxaSvyWQjt1adpYUQOAPoHs0YwwMQA
- cokg==
-X-Gm-Message-State: AOAM530HumeL+68TNWzoMPlnmOmlgOwclDuf+nw00JQytMgqCGTmkJ+/
- SHWpzRk0afpM/8vECPAkjuZntdwAD3YaJH4/1328cQ==
-X-Google-Smtp-Source: ABdhPJwGvXPbkq0JYjlIxU8W9MSTYrC3ptQ9W1YpsubrhmAhFcIghZBdLo0LlkOfXV24aRNaCs6WEzX8MoA0EWtyDOY=
-X-Received: by 2002:a17:906:6bd1:: with SMTP id
- t17mr30530611ejs.319.1615907601020; 
- Tue, 16 Mar 2021 08:13:21 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=INmsnQxAq8g5OrJ9EkOyCLROnQhkLRWslWjBn0eWgHc=;
+ b=FAPNw3wA8ZTmomP9V/jWGr0qvKLlOouS0XQtHL6F+jeYuNW/UBTWAMWuuaMNenNneX
+ oioU+Qn4te5HIKlB4IDiPIKJGvunG2bFHXbsAJGmKj6uV3hcRJFrq9ABBIWD/HbNonAM
+ cWdHlmbP3kwtc/e9Jke+8XhEfmnGPdYMH2Fw7fwRTqFioPvRuXnHWSi6GIa4UtoJAtst
+ vgQ2pMMYAzCbSc8oI/bzd8+cOVueMO3p6xKm5o+vfZ1rgM5LypwxgbvpMOLiAuuqEHG8
+ mQz+jbDbNrkioQSDacxplXsjf06WgLR6+4b+/kEvhsm+xHP34uIu13iMlJFuaiTWbreX
+ 5RxA==
+X-Gm-Message-State: AOAM533fP9k4LaVal94pC+urH6iXnskjObXMo6i+i9WLy1p/z5/ghubj
+ 5OaNnxNcnNqwa+3az0j7W85VkQ==
+X-Google-Smtp-Source: ABdhPJxFFoqqDRZ0NvdsRzFsSSzhwKMU4X/yxJUolwyLriX/bZO4KgWK+XhtWX+XfkYX7PIEAD1mLA==
+X-Received: by 2002:aa7:980a:0:b029:20c:5402:5de9 with SMTP id
+ e10-20020aa7980a0000b029020c54025de9mr227094pfl.18.1615911742150; 
+ Tue, 16 Mar 2021 09:22:22 -0700 (PDT)
+Received: from localhost.localdomain ([2405:201:c00a:a884:9de:273e:6ee1:9865])
+ by smtp.gmail.com with ESMTPSA id
+ k27sm17678240pfg.95.2021.03.16.09.22.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Mar 2021 09:22:21 -0700 (PDT)
+From: Jagan Teki <jagan@amarulasolutions.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>
+Date: Tue, 16 Mar 2021 21:51:59 +0530
+Message-Id: <20210316162207.35641-1-jagan@amarulasolutions.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210316092937.1.Ie4df1c787d51eb06945ee580b4ff5248c609ab7b@changeid>
-In-Reply-To: <20210316092937.1.Ie4df1c787d51eb06945ee580b4ff5248c609ab7b@changeid>
-From: Etienne Carriere <etienne.carriere@linaro.org>
-Date: Tue, 16 Mar 2021 16:13:10 +0100
-Message-ID: <CAN5uoS-Ni6XOiEZtWzpfzD--1TwfCZ11k0T=TNixS-1gbWEyFQ@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] scmi: correctly configure MMU for SCMI
-	buffer
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ linux-amarula@amarulasolutions.com, Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH v3 0/8] stm32: Add Engicam STM32MP1 SoM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,54 +74,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello Patrick,
+Patch series for Engicam i.Core and MicroGEA SoM and it's
+associated carrier board dts(i) support.
 
-On Tue, 16 Mar 2021 at 09:29, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> Align the MMU area for SCMI shared buffer on section size;
-> use the ALIGN macro in mmu_set_region_dcache_behaviour call.
->
-> Since commit d877f8fd0f09 ("arm: provide a function for boards init
-> code to modify MMU virtual-physical map") the parameter of
-> mmu_set_region_dcache_behaviour need to be MMU_SECTION_SIZE
-> aligned.
->
-> Fixes: 240720e9052f ("firmware: scmi: mailbox/smt agent device")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->  drivers/firmware/scmi/smt.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
-> index d25478796a..3c41013bca 100644
-> --- a/drivers/firmware/scmi/smt.c
-> +++ b/drivers/firmware/scmi/smt.c
-> @@ -54,8 +54,10 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
->
->  #ifdef CONFIG_ARM
->         if (dcache_status())
-> -               mmu_set_region_dcache_behaviour((uintptr_t)smt->buf,
-> -                                               smt->size, DCACHE_OFF);
-> +               mmu_set_region_dcache_behaviour(ALIGN_DOWN((uintptr_t)smt->buf, MMU_SECTION_SIZE),
-> +                                               ALIGN(smt->size, MMU_SECTION_SIZE),
-> +                                               DCACHE_OFF);
-> +
->  #endif
->
->         return 0;
-> --
-> 2.17.1
->
+Changes for v3:
+- collect Patrick Delaunay r-b
+- fixed comments from Patrick Delaunay
+Changes for v2:
+- add Linux dts commit ids in commit messages
+- drop CONFIG_BOARD_EARLY_INIT_F
+- order dts files in Makefile
+- collect Patrice r-b
 
-Reviewed-by: Etienne Carriere <etienne.carriere@linaro.org>
+Any inputs?
+Jagan.
 
-This indeed fixes the scmi smt driver.
-Thanks Patrick.
+Jagan Teki (8):
+  ARM: dts: stm32: Add Engicam i.Core STM32MP1 SoM
+  ARM: dts: stm32: Add Engicam i.Core STM32MP1 1X4Gb DDR3
+  ARM: stm32: Imply SPL_SPI_LOAD
+  board: stm32: Add Engicam i.Core STM32MP1 EDIMM2.2 Starter Kit
+  board: stm32: Add Engicam i.Core STM32MP1 C.TOUCH 2.0
+  ARM: dts: stm32: Add Engicam MicroGEA STM32MP1 Micro SoM
+  board: stm32: Add Engicam MicroGEA STM32MP1 MicroDev 2.0 board
+  board: stm32: Add Engicam MicroGEA STM32MP1 MicroDev 2.0 7" OF
 
-Regards,
-Etienne
+ arch/arm/dts/Makefile                         |   4 +
+ .../stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi | 119 +++++++++++
+ ...2mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi |  51 +++++
+ .../stm32mp157a-icore-stm32mp1-ctouch2.dts    |  47 +++++
+ ...mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi |  51 +++++
+ .../stm32mp157a-icore-stm32mp1-edimm2.2.dts   |  47 +++++
+ .../stm32mp157a-icore-stm32mp1-u-boot.dtsi    | 146 +++++++++++++
+ arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi  | 196 ++++++++++++++++++
+ ...rogea-stm32mp1-microdev2.0-of7-u-boot.dtsi |  51 +++++
+ ...157a-microgea-stm32mp1-microdev2.0-of7.dts | 154 ++++++++++++++
+ ...-microgea-stm32mp1-microdev2.0-u-boot.dtsi |  51 +++++
+ ...32mp157a-microgea-stm32mp1-microdev2.0.dts |  55 +++++
+ .../stm32mp157a-microgea-stm32mp1-u-boot.dtsi | 118 +++++++++++
+ .../dts/stm32mp157a-microgea-stm32mp1.dtsi    | 148 +++++++++++++
+ arch/arm/mach-stm32mp/Kconfig                 |  54 ++++-
+ board/engicam/stm32mp1/Kconfig                |  12 ++
+ board/engicam/stm32mp1/MAINTAINERS            |  26 +++
+ board/engicam/stm32mp1/Makefile               |  10 +
+ board/engicam/stm32mp1/spl.c                  |  48 +++++
+ board/engicam/stm32mp1/stm32mp1.c             | 125 +++++++++++
+ ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  79 +++++++
+ ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  79 +++++++
+ ...-microgea-stm32mp1-microdev2-of7_defconfig |  79 +++++++
+ ...mp15-microgea-stm32mp1-microdev2_defconfig |  79 +++++++
+ 24 files changed, 1828 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-ctouch2.dts
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0.dts
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1.dtsi
+ create mode 100644 board/engicam/stm32mp1/Kconfig
+ create mode 100644 board/engicam/stm32mp1/MAINTAINERS
+ create mode 100644 board/engicam/stm32mp1/Makefile
+ create mode 100644 board/engicam/stm32mp1/spl.c
+ create mode 100644 board/engicam/stm32mp1/stm32mp1.c
+ create mode 100644 configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+ create mode 100644 configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+ create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+ create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+
+-- 
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,65 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3697A33D4D9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 14:28:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA5C433D4E6
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 14:33:46 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ED696C57B77;
-	Tue, 16 Mar 2021 13:28:52 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 652F6C57B77;
+	Tue, 16 Mar 2021 13:33:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9CDA3C57B5A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C5521C56632
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Mar 2021 13:28:51 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ Tue, 16 Mar 2021 13:33:44 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 12GDM1Dm032516; Tue, 16 Mar 2021 14:28:49 +0100
+ 12GDVdL1026067; Tue, 16 Mar 2021 14:33:41 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=hJP1RCDs0hKojpA5Z2OquSwI3xcHpnl/2Fv+J3Iygl8=;
- b=Pnq04Hx9UCyh2nn/zgbbV1VR3Wgwkd2JA8Pi2mbXNi5aFbBedHnl4Ip+NtnNppZvKDQ2
- Nw191xPh2jq5u8tfhPIyofA0PDrCGBJtfKDRGqmbarZ4S61P+h/pkksrdMJEcU+iqq8s
- FTQXYs/XjpoArmksnBgFirn9rKlDQfKlbNCpH4TzD9YSft8mQ+zVw827PCjMnm8bPXKX
- AN9SjhiosTuK/XCHTyij7j1gJoxSwQfxkk/iOALHncdX6NXKNmgbBBI/2G3MCWzecjiB
- SbwoCULVYzH1xXXjohclQMIW11V+x/VOma0cYMwk+UlsaNNyZuY7hWTGHk7xh9Ir7YrT yg== 
+ bh=tidUs5h+Ig+KjoJ6XDaNjQCC03/Byq35nrOKTmNguQM=;
+ b=EA7u50LO52BeH85779ShGQ28STXVbkaXK5OKqcOu3e0lU4wpL4Fl3kqEG//EBjVgRbPr
+ Txx+BB/beot5/kq78ZypfaeUjKk6XoFXiVwCgQB615ZuSGV0m3FaCnV9J9kVcfH8lw6n
+ 2elkbtQ6CJMN97ReaIIN5GD8P8b7AJkIjSEGOqXGtmJb/7CW7EcVLOObqIOYti5Ajxm+
+ N5aTCj8j7FfmVTkKbT74JczyJ3Q93jk9Y2yKIIT9q80HI1iEnJ5tOefiRpSgs+b4hG6p
+ EEiY/DhweMMwB9bZ/LQlEvHGj0+Jse6L4W+yKfPLm/4pi56n6X3hiFfezpDIglJ7/0La OA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 378pr5rq1m-1
+ by mx07-00178001.pphosted.com with ESMTP id 37a8pqxe8x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 16 Mar 2021 14:28:49 +0100
+ Tue, 16 Mar 2021 14:33:41 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BEB1710002A;
- Tue, 16 Mar 2021 14:28:48 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CAF9A100034;
+ Tue, 16 Mar 2021 14:33:39 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 97185231DDC;
- Tue, 16 Mar 2021 14:28:48 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.44) by SFHDAG2NODE2.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A1131231DE9;
+ Tue, 16 Mar 2021 14:33:39 +0100 (CET)
+Received: from lmecxl0994.lme.st.com (10.75.127.46) by SFHDAG2NODE2.st.com
  (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 16 Mar
- 2021 14:28:48 +0100
+ 2021 14:33:39 +0100
 To: Jagan Teki <jagan@amarulasolutions.com>, Patrice Chotard
  <patrice.chotard@foss.st.com>, Matteo Lisi <matteo.lisi@engicam.com>
 References: <20210315173256.103731-1-jagan@amarulasolutions.com>
- <20210315173256.103731-4-jagan@amarulasolutions.com>
+ <20210315173256.103731-5-jagan@amarulasolutions.com>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <39e108c0-d355-f7b4-77dd-0bc259f141bb@foss.st.com>
-Date: Tue, 16 Mar 2021 14:28:47 +0100
+Message-ID: <e6f9c59e-af88-fc3c-e8cd-c2883725a5e8@foss.st.com>
+Date: Tue, 16 Mar 2021 14:33:37 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210315173256.103731-4-jagan@amarulasolutions.com>
+In-Reply-To: <20210315173256.103731-5-jagan@amarulasolutions.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-16_04:2021-03-16,
  2021-03-16 signatures=0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH v2 3/9] ARM: stm32: Imply SPL_SPI_LOAD
+Subject: Re: [Uboot-stm32] [PATCH v2 4/9] board: stm32: Add Engicam i.Core
+ STM32MP1 EDIMM2.2 Starter Kit
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,57 +80,69 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 3/15/21 6:32 PM, Jagan Teki wrote:
-> SPI Load isn't mandatory for STM32 builds.
+> Engicam EDIMM2.2 Starter Kit is an EDIMM 2.2 Form Factor Capacitive
+> Evaluation Board.
 >
-> Let's imply instead of select it to get rid of build
-> issues for non-SPI defconfigs.
+> Genaral features:
+> - LCD 7" C.Touch
+> - microSD slot
+> - Ethernet 1Gb
+> - Wifi/BT
+> - 2x LVDS Full HD interfaces
+> - 3x USB 2.0
+> - 1x USB 3.0
+> - HDMI Out
+> - Mini PCIe
+> - MIPI CSI
+> - 2x CAN
+> - Audio Out
 >
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> i.Core STM32MP1 is an EDIMM SoM based on STM32MP157A from Engicam.
+>
+> i.Core STM32MP1 needs to mount on top of this Evaluation board for
+> creating complete i.Core STM32MP1 EDIMM2.2 Starter Kit.
+>
+> Linux dts commit details:
+>
+> commit <adc0496104b6> ("ARM: dts: stm32: Add Engicam i.Core STM32MP1
+> EDIMM2.2 Starter Kit")
+>
+> Add support for it.
+>
 > Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 > ---
 > Changes for v2:
 > - collect Patrice r-b
+> - add linux dts commit
+> - drop CONFIG_BOARD_EARLY_INIT_F
 >
->   arch/arm/mach-stm32mp/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   arch/arm/dts/Makefile                         |   1 +
+>   ...mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi |  51 ++++++
+>   .../stm32mp157a-icore-stm32mp1-edimm2.2.dts   |  47 ++++++
+>   .../stm32mp157a-icore-stm32mp1-u-boot.dtsi    | 146 ++++++++++++++++++
+>   arch/arm/mach-stm32mp/Kconfig                 |  20 +++
+>   board/engicam/stm32mp1/Kconfig                |  12 ++
+>   board/engicam/stm32mp1/MAINTAINERS            |   6 +
+>   board/engicam/stm32mp1/Makefile               |  10 ++
+>   board/engicam/stm32mp1/spl.c                  |  48 ++++++
+>   board/engicam/stm32mp1/stm32mp1.c             | 125 +++++++++++++++
+>   ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  79 ++++++++++
+>   11 files changed, 545 insertions(+)
+>   create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-edimm2.2.dts
+>   create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1-u-boot.dtsi
+>   create mode 100644 board/engicam/stm32mp1/Kconfig
+>   create mode 100644 board/engicam/stm32mp1/MAINTAINERS
+>   create mode 100644 board/engicam/stm32mp1/Makefile
+>   create mode 100644 board/engicam/stm32mp1/spl.c
+>   create mode 100644 board/engicam/stm32mp1/stm32mp1.c
+>   create mode 100644 configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
 >
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index f538d7cb83..79ffd5191d 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -16,13 +16,13 @@ config SPL
->   	select SPL_REGMAP
->   	select SPL_DM_RESET
->   	select SPL_SERIAL_SUPPORT
-> -	select SPL_SPI_LOAD
->   	select SPL_SYSCON
->   	select SPL_WATCHDOG_SUPPORT if WATCHDOG
->   	imply BOOTSTAGE_STASH if SPL_BOOTSTAGE
->   	imply SPL_BOOTSTAGE if BOOTSTAGE
->   	imply SPL_DISPLAY_PRINT
->   	imply SPL_LIBDISK_SUPPORT
-> +	imply SPL_SPI_LOAD
-
-cosmetic: you can add dependency ?
-
-	imply SPL_SPI_LOAD if SPL_SPI_SUPPORT
-
->   
->   config SYS_SOC
->   	default "stm32mp"
-
-
-Anyway
-
-
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Thanks
 Patrick
-
-
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

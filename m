@@ -2,65 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D082F33D91A
-	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 17:22:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D9BF533D91F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Mar 2021 17:22:31 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 96A53C57B5A;
-	Tue, 16 Mar 2021 16:22:28 +0000 (UTC)
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
- [209.85.210.173])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A042AC57B5A;
+	Tue, 16 Mar 2021 16:22:31 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+ [209.85.216.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 10F57C56632
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7FD58C56632
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Mar 2021 16:22:27 +0000 (UTC)
-Received: by mail-pf1-f173.google.com with SMTP id 18so9162684pfo.6
+ Tue, 16 Mar 2021 16:22:30 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id
+ q6-20020a17090a4306b02900c42a012202so1708036pjg.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Mar 2021 09:22:27 -0700 (PDT)
+ Tue, 16 Mar 2021 09:22:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amarulasolutions.com; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=Yh0b19SbgmAsTjJ4rqIXTXOCQIgEjAUHjKglAEhHaI4=;
- b=jgD0/ln0zEBhOzEFKTKVGAJJshpFDbrgBGPqVG0MT9NCuuOKhlazM7gBTH77ej/XVn
- Hv/fP8G8TzV7wPdrla2LybZZ1OUA1W0NAc8rmdcB85iuKcSnvDdgBRyHSvDv4g1UJRD3
- uGoadTpQ3xDIYd3iT4ApQfE61cdG5jGksIirM=
+ bh=dsco01rvfQRqwoKzd9g8v/23OS6+FuvEv15EYQMWyfE=;
+ b=inyYcV++Ikvm11NEuf0KEr8r0EheqzDNzG8ZKbnr2g+7dDbGojt+1Kn+1C2jLIWR6w
+ u6uCOWtYzxXRqiN5Wb2Se7O2iRcmgnUz+NSPHY61HTGVNfcA+wYAHiq3vvmzWL06KTcz
+ pGe30+X0H/KRG8ZSHkIcQQ3csKGGOj8uUPiqY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=Yh0b19SbgmAsTjJ4rqIXTXOCQIgEjAUHjKglAEhHaI4=;
- b=jrm7REAJZC4EtBfB0D9lllRtr1JkoOaFaeVonjRy6XLJYgv8k5MX+iybWQN0pa0L2x
- 2S6/95KWA7W3oUxXiJVZmyrxEU5hAWG4CNnurA+K0FXzhSpfprjLYzKxp1rsgCfchDrJ
- 5MEvjx6FMWcWDVKlnd+JIOZrX1Nr+b+9gO1XGFbNidq3beR/tJiXtOb6pamNXKCsocPu
- QdLPHa2SqvidV0iy5lfv5ilvvLc+/umoUsL24+pAAkkxhgscXoCiL7pYcN6FeLl/Rvae
- mTF4n68By7AUuXtqyk1OtMr6WPWGywMjR2CgxhMLrsS2SrI2c5AeXQYbNppq4jxdd27B
- jGVg==
-X-Gm-Message-State: AOAM532Y/nNncVMuRmUgnqLlSf7naG6UF8ZcLzPKdQRkF8xYQYURDKqc
- lercohmBhrsflG4A1mrKxNK28A==
-X-Google-Smtp-Source: ABdhPJydJhwdolne2a+Jl6w41dg19e6P/b6+pQuS7IppJ5J1JP1GCfh09Ndqn/IJc0CpE2YRfrfZwA==
-X-Received: by 2002:a62:17c4:0:b029:1f5:7cfe:ebc4 with SMTP id
- 187-20020a6217c40000b02901f57cfeebc4mr196082pfx.5.1615911745581; 
- Tue, 16 Mar 2021 09:22:25 -0700 (PDT)
+ bh=dsco01rvfQRqwoKzd9g8v/23OS6+FuvEv15EYQMWyfE=;
+ b=cTNQQAx8keM5j4wE3/ouYx6Eo62Du/4n8LkBryBPGKwbUi74LA4Trn+OUcMXxM4ef6
+ qAzdzqaAc3ub7WhbGnJ3VHJAX5HhQj9uAdoN2T++m8v4DWq7nBpiIvXrKb2UWsxRHuVH
+ cInVvibkNX8EvfgPhWnNu0esv9t2uZJsASjwt0RVExuv0ryeR/2+VwE47mo+vLoR/xkB
+ Eo6HNyKZ/06zw+kxj2JvTLIGV5S7df8Ooy21u/qrutnI0qkAkjFF/Y8UhtrcT6FyIztw
+ 49SEWQBbPm0OI5NEPNaDrdcTwdnxVUN/0dlba8xAOG21tk8UQGZEYr6Qt8sckkS4rC6C
+ PKTQ==
+X-Gm-Message-State: AOAM532EUdThoY7B7+Z/LAOCyNkHH4/ZOVEi7/Hl7M6wHxEqnZCLpNdY
+ QteOgQVNwgLBjOunx/3CkuOVwQ==
+X-Google-Smtp-Source: ABdhPJw9TTbe92wE4S2VW4CjynZE3QwllU6i+K2xU7KldExq3hKAa+XUQfA/Djh5GK4NRR39iX4+wg==
+X-Received: by 2002:a17:902:b497:b029:e6:a938:586f with SMTP id
+ y23-20020a170902b497b02900e6a938586fmr212745plr.70.1615911749053; 
+ Tue, 16 Mar 2021 09:22:29 -0700 (PDT)
 Received: from localhost.localdomain ([2405:201:c00a:a884:9de:273e:6ee1:9865])
  by smtp.gmail.com with ESMTPSA id
- k27sm17678240pfg.95.2021.03.16.09.22.22
+ k27sm17678240pfg.95.2021.03.16.09.22.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Mar 2021 09:22:25 -0700 (PDT)
+ Tue, 16 Mar 2021 09:22:28 -0700 (PDT)
 From: Jagan Teki <jagan@amarulasolutions.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Matteo Lisi <matteo.lisi@engicam.com>
-Date: Tue, 16 Mar 2021 21:52:00 +0530
-Message-Id: <20210316162207.35641-2-jagan@amarulasolutions.com>
+Date: Tue, 16 Mar 2021 21:52:01 +0530
+Message-Id: <20210316162207.35641-3-jagan@amarulasolutions.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210316162207.35641-1-jagan@amarulasolutions.com>
 References: <20210316162207.35641-1-jagan@amarulasolutions.com>
 MIME-Version: 1.0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  linux-amarula@amarulasolutions.com, Jagan Teki <jagan@amarulasolutions.com>
-Subject: [Uboot-stm32] [PATCH v3 1/8] ARM: dts: stm32: Add Engicam i.Core
-	STM32MP1 SoM
+Subject: [Uboot-stm32] [PATCH v3 2/8] ARM: dts: stm32: Add Engicam i.Core
+	STM32MP1 1X4Gb DDR3
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,244 +78,150 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-i.Core STM32MP1 is an EDIMM SoM based on STM32MP157A from Engicam.
+Engicam i.Core STM32MP1 SODIMM SoM has mounted 1x4Gb DDR3
+which has 32bits width 528000Khz frequency.
 
-General features:
-- STM32MP157A
-- Up to 1GB DDR3L
-- 4GB eMMC
-- 10/100 Ethernet
-- USB 2.0 Host/OTG
-- I2S
-- MIPI DSI to LVDS
-- rest of STM32MP157A features
-
-i.Core STM32MP1 needs to mount on top of Engicam baseboards
-for creating complete platform solutions.
-
-Linux commit details:
-
-commit <30f9a9da4ee1> ("ARM: dts: stm32: Add Engicam i.Core STM32MP1
-SoM")
-
-Add support for it.
+Add DDR configuration via dtsi.
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
 ---
 Changes for v3:
+- fixed cosmetic s/Khz/kHz 
 - collect Patrice r-b
 Changes for v2:
 - collect Patrice r-b
-- add linux dts commit 
 
- arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi | 196 +++++++++++++++++++
- 1 file changed, 196 insertions(+)
- create mode 100644 arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi
+ .../stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi | 119 ++++++++++++++++++
+ 1 file changed, 119 insertions(+)
+ create mode 100644 arch/arm/dts/stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi
 
-diff --git a/arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi b/arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi
+diff --git a/arch/arm/dts/stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi
 new file mode 100644
-index 0000000000..01166ccacf
+index 0000000000..24c81269b0
 --- /dev/null
-+++ b/arch/arm/dts/stm32mp157a-icore-stm32mp1.dtsi
-@@ -0,0 +1,196 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
++++ b/arch/arm/dts/stm32mp15-ddr3-icore-1x4Gb-1066-binG.dtsi
+@@ -0,0 +1,119 @@
++// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
 +/*
-+ * Copyright (c) STMicroelectronics 2019 - All Rights Reserved
-+ * Copyright (c) 2020 Engicam srl
-+ * Copyright (c) 2020 Amarula Solutons(India)
++ * Copyright (C) 2015-2018, STMicroelectronics - All Rights Reserved
 + */
 +
-+/ {
-+	compatible = "engicam,icore-stm32mp1", "st,stm32mp157";
++/*
++ * File generated by STMicroelectronics STM32CubeMX DDR Tool for MPUs
++ * DDR type: DDR3 / DDR3L
++ * DDR width: 32bits
++ * DDR density: 4Gb
++ * System frequency: 528000Khz
++ * Relaxed Timing Mode: false
++ * Address mapping type: RBC
++ *
++ * Save Date: 2019.05.14, save Time: 11:25:16
++ */
++#define DDR_MEM_COMPATIBLE ddr3-icore-1066-888-bin-g-1x4gb-528mhz
++#define DDR_MEM_NAME	"DDR3-DDR3L 32bits 528000kHz"
++#define DDR_MEM_SPEED	528000
++#define DDR_MEM_SIZE	0x20000000
 +
-+	memory@c0000000 {
-+		device_type = "memory";
-+		reg = <0xc0000000 0x20000000>;
-+	};
++#define DDR_MSTR 0x00040401
++#define DDR_MRCTRL0 0x00000010
++#define DDR_MRCTRL1 0x00000000
++#define DDR_DERATEEN 0x00000000
++#define DDR_DERATEINT 0x00800000
++#define DDR_PWRCTL 0x00000000
++#define DDR_PWRTMG 0x00400010
++#define DDR_HWLPCTL 0x00000000
++#define DDR_RFSHCTL0 0x00210000
++#define DDR_RFSHCTL3 0x00000000
++#define DDR_RFSHTMG 0x0080008A
++#define DDR_CRCPARCTL0 0x00000000
++#define DDR_DRAMTMG0 0x121B2414
++#define DDR_DRAMTMG1 0x000A041B
++#define DDR_DRAMTMG2 0x0607080F
++#define DDR_DRAMTMG3 0x0050400C
++#define DDR_DRAMTMG4 0x07040607
++#define DDR_DRAMTMG5 0x06060403
++#define DDR_DRAMTMG6 0x02020002
++#define DDR_DRAMTMG7 0x00000202
++#define DDR_DRAMTMG8 0x00001005
++#define DDR_DRAMTMG14 0x000000A0
++#define DDR_ZQCTL0 0xC2000040
++#define DDR_DFITMG0 0x02050105
++#define DDR_DFITMG1 0x00000202
++#define DDR_DFILPCFG0 0x07000000
++#define DDR_DFIUPD0 0xC0400003
++#define DDR_DFIUPD1 0x00000000
++#define DDR_DFIUPD2 0x00000000
++#define DDR_DFIPHYMSTR 0x00000000
++#define DDR_ODTCFG 0x06000600
++#define DDR_ODTMAP 0x00000001
++#define DDR_SCHED 0x00000C01
++#define DDR_SCHED1 0x00000000
++#define DDR_PERFHPR1 0x01000001
++#define DDR_PERFLPR1 0x08000200
++#define DDR_PERFWR1 0x08000400
++#define DDR_DBG0 0x00000000
++#define DDR_DBG1 0x00000000
++#define DDR_DBGCMD 0x00000000
++#define DDR_POISONCFG 0x00000000
++#define DDR_PCCFG 0x00000010
++#define DDR_PCFGR_0 0x00010000
++#define DDR_PCFGW_0 0x00000000
++#define DDR_PCFGQOS0_0 0x02100C03
++#define DDR_PCFGQOS1_0 0x00800100
++#define DDR_PCFGWQOS0_0 0x01100C03
++#define DDR_PCFGWQOS1_0 0x01000200
++#define DDR_PCFGR_1 0x00010000
++#define DDR_PCFGW_1 0x00000000
++#define DDR_PCFGQOS0_1 0x02100C03
++#define DDR_PCFGQOS1_1 0x00800040
++#define DDR_PCFGWQOS0_1 0x01100C03
++#define DDR_PCFGWQOS1_1 0x01000200
++#define DDR_ADDRMAP1 0x00080808
++#define DDR_ADDRMAP2 0x00000000
++#define DDR_ADDRMAP3 0x00000000
++#define DDR_ADDRMAP4 0x00001F1F
++#define DDR_ADDRMAP5 0x07070707
++#define DDR_ADDRMAP6 0x0F0F0707
++#define DDR_ADDRMAP9 0x00000000
++#define DDR_ADDRMAP10 0x00000000
++#define DDR_ADDRMAP11 0x00000000
++#define DDR_PGCR 0x01442E02
++#define DDR_PTR0 0x0022A41B
++#define DDR_PTR1 0x047C0740
++#define DDR_PTR2 0x042D9C80
++#define DDR_ACIOCR 0x10400812
++#define DDR_DXCCR 0x00000C40
++#define DDR_DSGCR 0xF200001F
++#define DDR_DCR 0x0000000B
++#define DDR_DTPR0 0x36D477D0
++#define DDR_DTPR1 0x098A00D8
++#define DDR_DTPR2 0x10023600
++#define DDR_MR0 0x00000830
++#define DDR_MR1 0x00000000
++#define DDR_MR2 0x00000208
++#define DDR_MR3 0x00000000
++#define DDR_ODTCR 0x00010000
++#define DDR_ZQ0CR1 0x00000038
++#define DDR_DX0GCR 0x0000CE81
++#define DDR_DX0DLLCR 0x40000000
++#define DDR_DX0DQTR 0xFFFFFFFF
++#define DDR_DX0DQSTR 0x3DB02000
++#define DDR_DX1GCR 0x0000CE81
++#define DDR_DX1DLLCR 0x40000000
++#define DDR_DX1DQTR 0xFFFFFFFF
++#define DDR_DX1DQSTR 0x3DB02000
++#define DDR_DX2GCR 0x0000CE81
++#define DDR_DX2DLLCR 0x40000000
++#define DDR_DX2DQTR 0xFFFFFFFF
++#define DDR_DX2DQSTR 0x3DB02000
++#define DDR_DX3GCR 0x0000CE81
++#define DDR_DX3DLLCR 0x40000000
++#define DDR_DX3DQTR 0xFFFFFFFF
++#define DDR_DX3DQSTR 0x3DB02000
 +
-+	reserved-memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		mcuram2: mcuram2@10000000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x10000000 0x40000>;
-+			no-map;
-+		};
-+
-+		vdev0vring0: vdev0vring0@10040000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x10040000 0x1000>;
-+			no-map;
-+		};
-+
-+		vdev0vring1: vdev0vring1@10041000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x10041000 0x1000>;
-+			no-map;
-+		};
-+
-+		vdev0buffer: vdev0buffer@10042000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x10042000 0x4000>;
-+			no-map;
-+		};
-+
-+		mcuram: mcuram@30000000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x30000000 0x40000>;
-+			no-map;
-+		};
-+
-+		retram: retram@38000000 {
-+			compatible = "shared-dma-pool";
-+			reg = <0x38000000 0x10000>;
-+			no-map;
-+		};
-+	};
-+
-+	vddcore: regulator-vddcore {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vddcore";
-+		regulator-min-microvolt = <1200000>;
-+		regulator-max-microvolt = <1200000>;
-+		regulator-always-on;
-+	};
-+
-+	vdd: regulator-vdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	vdd_usb: regulator-vdd-usb {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_usb";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	vdda: regulator-vdda {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdda";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	vdd_ddr: regulator-vdd-ddr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_ddr";
-+		regulator-min-microvolt = <1350000>;
-+		regulator-max-microvolt = <1350000>;
-+		regulator-always-on;
-+	};
-+
-+	vtt_ddr: regulator-vtt-ddr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vtt_ddr";
-+		regulator-min-microvolt = <675000>;
-+		regulator-max-microvolt = <675000>;
-+		regulator-always-on;
-+		vin-supply = <&vdd>;
-+	};
-+
-+	vref_ddr: regulator-vref-ddr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vref_ddr";
-+		regulator-min-microvolt = <675000>;
-+		regulator-max-microvolt = <675000>;
-+		regulator-always-on;
-+		vin-supply = <&vdd>;
-+	};
-+
-+	vdd_sd: regulator-vdd-sd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_sd";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	v3v3: regulator-v3v3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "v3v3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	v2v8: regulator-v2v8 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "v2v8";
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+		regulator-always-on;
-+		vin-supply = <&v3v3>;
-+	};
-+
-+	v1v8: regulator-v1v8 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "v1v8";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-always-on;
-+		vin-supply = <&v3v3>;
-+	};
-+};
-+
-+&dts {
-+	status = "okay";
-+};
-+
-+&i2c2 {
-+	i2c-scl-falling-time-ns = <20>;
-+	i2c-scl-rising-time-ns = <185>;
-+	pinctrl-names = "default", "sleep";
-+	pinctrl-0 = <&i2c2_pins_a>;
-+	pinctrl-1 = <&i2c2_sleep_pins_a>;
-+	status = "okay";
-+};
-+
-+&ipcc {
-+	status = "okay";
-+};
-+
-+&iwdg2{
-+	timeout-sec = <32>;
-+	status = "okay";
-+};
-+
-+&m4_rproc{
-+	memory-region = <&retram>, <&mcuram>, <&mcuram2>, <&vdev0vring0>,
-+			<&vdev0vring1>, <&vdev0buffer>;
-+	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>;
-+	mbox-names = "vq0", "vq1", "shutdown";
-+	interrupt-parent = <&exti>;
-+	interrupts = <68 1>;
-+	status = "okay";
-+};
-+
-+&rng1 {
-+	status = "okay";
-+};
-+
-+&rtc{
-+	status = "okay";
-+};
-+
-+&vrefbuf {
-+	regulator-min-microvolt = <2500000>;
-+	regulator-max-microvolt = <2500000>;
-+	vdda-supply = <&vdd>;
-+	status = "okay";
-+};
++#include "stm32mp15-ddr.dtsi"
 -- 
 2.25.1
 

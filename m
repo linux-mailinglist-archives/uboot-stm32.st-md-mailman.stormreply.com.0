@@ -2,44 +2,44 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0165134945A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Mar 2021 15:41:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4160B349474
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Mar 2021 15:46:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9C805C57B5E;
-	Thu, 25 Mar 2021 14:41:19 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F3AE1C57B5E;
+	Thu, 25 Mar 2021 14:46:40 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A458DC5662E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BEACAC5662E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Mar 2021 14:41:16 +0000 (UTC)
+ Thu, 25 Mar 2021 14:46:39 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 12PEWWTg029605; Thu, 25 Mar 2021 15:41:00 +0100
+ 12PEgXUr018116; Thu, 25 Mar 2021 15:46:29 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=Y7UggVWX08yPrDALY1OeRjEIV7AvS83TBWJxbZrEWyg=;
- b=XI+vFz8gXfZx0S7QL/UHXZUewvSvlSc8iT+CT/t/JQbNcTM/XZqDtxB/Zvd1AXr2DMg1
- 2jdDuUwZN8fASMfY8L2DaFWgi2p7HXi8PwSZkle09Wcxtj4MWCmKgzpENF/0yCnMgObS
- VGysSyl50vurqKC0OxgJT5hybsLvfGQ2s7THp9bWOQbTwb+pkmg8cdO4UintCTeHi+HZ
- NbC1epyt1xFHv7CU6SQQKUGVQRmGjHPKj3P72E+vBnkYDB1cliKAqCatMaWbwOLNbg3b
- TQ3cOwSm8rxBhwDLrdiGj6aKxSTPK2LZw1Gpai8wzrWw2SoDW+DL/Cf/7b5/L7ktM6b5 xQ== 
+ bh=aG3F26WFwvBm/Auoswzk4AgWdJA8510c+EqdPX3YhBg=;
+ b=36lFepmnq70sVOjhNTgm6rDUoJ00T1et9HPlRWPchWycmXC07KWJcHSrIQ4lQupnN2qL
+ 171B1epnyGJtv9CUFVzAoC4mtjk/B8TqVoaWAjR7MC82nb8EKI9HPSUwtgEamKtK3jb/
+ YcvE3+nixFLgeILut3JxnrFtANlzH7clEwI7GkGq/+fIX32PAjikmdJ98kEGbzvekJp1
+ itYdklDEABzGtNia8FbJBrUSkp8CEu8lZDEt3NAQx1iKMexDQ50UD3iUmKZ5OKyZDDfJ
+ n39azFTkY9rUr9ftangAMfHk7MAiOQknNKA2QQK6I/4h9bEuqm83TvcCMANg9FbFDrzK pA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 37d8tpw75n-1
+ by mx07-00178001.pphosted.com with ESMTP id 37d8tpw80b-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 25 Mar 2021 15:41:00 +0100
+ Thu, 25 Mar 2021 15:46:29 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F195D10002A;
- Thu, 25 Mar 2021 15:40:58 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AAEC410002A;
+ Thu, 25 Mar 2021 15:46:28 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BC271270002;
- Thu, 25 Mar 2021 15:40:58 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.45) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 884A827002F;
+ Thu, 25 Mar 2021 15:46:28 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.46) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 25 Mar
- 2021 15:40:56 +0100
+ 2021 15:46:27 +0100
 To: <dillon.minfei@gmail.com>, <kever.yang@rock-chips.com>,
  <andre.przywara@arm.com>, <priyanka.jain@nxp.com>,
  <jagan@amarulasolutions.com>, <narmstrong@baylibre.com>,
@@ -48,21 +48,23 @@ To: <dillon.minfei@gmail.com>, <kever.yang@rock-chips.com>,
  <heiko.stuebner@theobroma-systems.com>, <u-boot@lists.denx.de>,
  <patrick.delaunay@foss.st.com>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <1615445040-13757-1-git-send-email-dillon.minfei@gmail.com>
+ <1615445040-13757-2-git-send-email-dillon.minfei@gmail.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <102900f0-f583-2195-edd5-6d3052313de9@foss.st.com>
-Date: Thu, 25 Mar 2021 15:40:56 +0100
+Message-ID: <dc5e1830-1856-ef15-ada8-3eebc6808ebb@foss.st.com>
+Date: Thu, 25 Mar 2021 15:46:27 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <1615445040-13757-1-git-send-email-dillon.minfei@gmail.com>
+In-Reply-To: <1615445040-13757-2-git-send-email-dillon.minfei@gmail.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.45]
+X-Originating-IP: [10.75.127.46]
 X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
  definitions=2021-03-25_03:2021-03-24,
  2021-03-25 signatures=0
-Subject: Re: [Uboot-stm32] [PATCH 0/4] Add rt-thread art-pi board support
+Subject: Re: [Uboot-stm32] [PATCH 1/4] ARM: dts: stm32: split sdram pin &
+ timing parameter into specific board dts
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,70 +83,351 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Dillon
 
-One general remark, i saw that you have submitted a similar serie on kernel side
-to add rt_thread art-pi board support.
-On this kernel series, you split the DT pinctrl files by introducing stm32h7-pinctrl.dtsi file. 
-Can you apply the same device tree files split between kernel and u-boot please.
-
-The idea is that u-boot and kernel device tree files are in sync.
-
-Thanks
-Patrice
-
-
-
 On 3/11/21 7:43 AM, dillon.minfei@gmail.com wrote:
 > From: dillon min <dillon.minfei@gmail.com>
 > 
-> These patches aim to adds u-boot support on art-pi board.
+> As different boards has their own sdram hw connection, mount different
+> sdram modules, so move sdram timing parameter and pin configuration
+> to their board device tree.
 > 
-> the board resources:
-> - stm32h750xbh6 128k flash, 1024k sram
-> - 32MiB sdram
-> - 16MiB spi flash
-> - 8MiB qspi flash
-> - onboard wifi, bt, fm
+> Signed-off-by: dillon min <dillon.minfei@gmail.com>
+> ---
+>  arch/arm/dts/stm32h7-u-boot.dtsi          | 95 ------------------------------
+>  arch/arm/dts/stm32h743i-disco-u-boot.dtsi | 98 +++++++++++++++++++++++++++++++
+>  arch/arm/dts/stm32h743i-eval-u-boot.dtsi  | 98 +++++++++++++++++++++++++++++++
+>  3 files changed, 196 insertions(+), 95 deletions(-)
 > 
-> the detail board information can be found at:
-> https://art-pi.gitee.io/website/
+> diff --git a/arch/arm/dts/stm32h7-u-boot.dtsi b/arch/arm/dts/stm32h7-u-boot.dtsi
+> index 54dd406..e34d066 100644
+> --- a/arch/arm/dts/stm32h7-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32h7-u-boot.dtsi
+> @@ -36,30 +36,6 @@
+>  			pinctrl-0 = <&fmc_pins>;
+>  			pinctrl-names = "default";
+>  			status = "okay";
+> -
+> -			/*
+> -			 * Memory configuration from sdram datasheet IS42S32800G-6BLI
+> -			 * first bank is bank@0
+> -			 * second bank is bank@1
+> -			 */
+> -			bank1: bank@1 {
+> -				st,sdram-control = /bits/ 8 <NO_COL_9
+> -							     NO_ROW_12
+> -							     MWIDTH_32
+> -							     BANKS_4
+> -							     CAS_2
+> -							     SDCLK_3
+> -							     RD_BURST_EN
+> -							     RD_PIPE_DL_0>;
+> -				st,sdram-timing = /bits/ 8 <TMRD_1
+> -							    TXSR_1
+> -							    TRAS_1
+> -							    TRC_6
+> -							    TRP_2
+> -							    TWR_1
+> -							    TRCD_1>;
+> -				st,sdram-refcount = <1539>;
+> -			};
+>  		};
+>  	};
+>  };
+> @@ -136,77 +112,6 @@
+>  	compatible = "st,stm32-gpio";
+>  };
+>  
+> -&pinctrl {
+> -	fmc_pins: fmc@0 {
+> -		pins {
+> -			pinmux = <STM32_PINMUX('D', 0, AF12)>,
+> -				 <STM32_PINMUX('D', 1, AF12)>,
+> -				 <STM32_PINMUX('D', 8, AF12)>,
+> -				 <STM32_PINMUX('D', 9, AF12)>,
+> -				 <STM32_PINMUX('D',10, AF12)>,
+> -				 <STM32_PINMUX('D',14, AF12)>,
+> -				 <STM32_PINMUX('D',15, AF12)>,
+> -
+> -				 <STM32_PINMUX('E', 0, AF12)>,
+> -				 <STM32_PINMUX('E', 1, AF12)>,
+> -				 <STM32_PINMUX('E', 7, AF12)>,
+> -				 <STM32_PINMUX('E', 8, AF12)>,
+> -				 <STM32_PINMUX('E', 9, AF12)>,
+> -				 <STM32_PINMUX('E',10, AF12)>,
+> -				 <STM32_PINMUX('E',11, AF12)>,
+> -				 <STM32_PINMUX('E',12, AF12)>,
+> -				 <STM32_PINMUX('E',13, AF12)>,
+> -				 <STM32_PINMUX('E',14, AF12)>,
+> -				 <STM32_PINMUX('E',15, AF12)>,
+> -
+> -				 <STM32_PINMUX('F', 0, AF12)>,
+> -				 <STM32_PINMUX('F', 1, AF12)>,
+> -				 <STM32_PINMUX('F', 2, AF12)>,
+> -				 <STM32_PINMUX('F', 3, AF12)>,
+> -				 <STM32_PINMUX('F', 4, AF12)>,
+> -				 <STM32_PINMUX('F', 5, AF12)>,
+> -				 <STM32_PINMUX('F',11, AF12)>,
+> -				 <STM32_PINMUX('F',12, AF12)>,
+> -				 <STM32_PINMUX('F',13, AF12)>,
+> -				 <STM32_PINMUX('F',14, AF12)>,
+> -				 <STM32_PINMUX('F',15, AF12)>,
+> -
+> -				 <STM32_PINMUX('G', 0, AF12)>,
+> -				 <STM32_PINMUX('G', 1, AF12)>,
+> -				 <STM32_PINMUX('G', 2, AF12)>,
+> -				 <STM32_PINMUX('G', 4, AF12)>,
+> -				 <STM32_PINMUX('G', 5, AF12)>,
+> -				 <STM32_PINMUX('G', 8, AF12)>,
+> -				 <STM32_PINMUX('G',15, AF12)>,
+> -
+> -				 <STM32_PINMUX('H', 5, AF12)>,
+> -				 <STM32_PINMUX('H', 6, AF12)>,
+> -				 <STM32_PINMUX('H', 7, AF12)>,
+> -				 <STM32_PINMUX('H', 8, AF12)>,
+> -				 <STM32_PINMUX('H', 9, AF12)>,
+> -				 <STM32_PINMUX('H',10, AF12)>,
+> -				 <STM32_PINMUX('H',11, AF12)>,
+> -				 <STM32_PINMUX('H',12, AF12)>,
+> -				 <STM32_PINMUX('H',13, AF12)>,
+> -				 <STM32_PINMUX('H',14, AF12)>,
+> -				 <STM32_PINMUX('H',15, AF12)>,
+> -
+> -				 <STM32_PINMUX('I', 0, AF12)>,
+> -				 <STM32_PINMUX('I', 1, AF12)>,
+> -				 <STM32_PINMUX('I', 2, AF12)>,
+> -				 <STM32_PINMUX('I', 3, AF12)>,
+> -				 <STM32_PINMUX('I', 4, AF12)>,
+> -				 <STM32_PINMUX('I', 5, AF12)>,
+> -				 <STM32_PINMUX('I', 6, AF12)>,
+> -				 <STM32_PINMUX('I', 7, AF12)>,
+> -				 <STM32_PINMUX('I', 9, AF12)>,
+> -				 <STM32_PINMUX('I',10, AF12)>;
+> -
+> -			slew-rate = <3>;
+> -		};
+> -	};
+> -};
+> -
+>  &pwrcfg {
+>  	u-boot,dm-pre-reloc;
+>  };
+> diff --git a/arch/arm/dts/stm32h743i-disco-u-boot.dtsi b/arch/arm/dts/stm32h743i-disco-u-boot.dtsi
+> index 5965afc..02e28c6 100644
+> --- a/arch/arm/dts/stm32h743i-disco-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32h743i-disco-u-boot.dtsi
+> @@ -1,3 +1,101 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  
+>  #include <stm32h7-u-boot.dtsi>
+> +
+> +&fmc {
+> +
+> +	/*
+> +	 * Memory configuration from sdram datasheet IS42S32800G-6BLI
+> +	 * first bank is bank@0
+> +	 * second bank is bank@1
+> +	 */
+> +	bank1: bank@1 {
+> +		st,sdram-control = /bits/ 8 <NO_COL_9
+> +					     NO_ROW_12
+> +					     MWIDTH_32
+> +					     BANKS_4
+> +					     CAS_2
+> +					     SDCLK_3
+> +					     RD_BURST_EN
+> +					     RD_PIPE_DL_0>;
+> +		st,sdram-timing = /bits/ 8 <TMRD_1
+> +					    TXSR_1
+> +					    TRAS_1
+> +					    TRC_6
+> +					    TRP_2
+> +					    TWR_1
+> +					    TRCD_1>;
+> +		st,sdram-refcount = <1539>;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	fmc_pins: fmc@0 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('D', 0, AF12)>,
+> +				 <STM32_PINMUX('D', 1, AF12)>,
+> +				 <STM32_PINMUX('D', 8, AF12)>,
+> +				 <STM32_PINMUX('D', 9, AF12)>,
+> +				 <STM32_PINMUX('D',10, AF12)>,
+> +				 <STM32_PINMUX('D',14, AF12)>,
+> +				 <STM32_PINMUX('D',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('E', 0, AF12)>,
+> +				 <STM32_PINMUX('E', 1, AF12)>,
+> +				 <STM32_PINMUX('E', 7, AF12)>,
+> +				 <STM32_PINMUX('E', 8, AF12)>,
+> +				 <STM32_PINMUX('E', 9, AF12)>,
+> +				 <STM32_PINMUX('E',10, AF12)>,
+> +				 <STM32_PINMUX('E',11, AF12)>,
+> +				 <STM32_PINMUX('E',12, AF12)>,
+> +				 <STM32_PINMUX('E',13, AF12)>,
+> +				 <STM32_PINMUX('E',14, AF12)>,
+> +				 <STM32_PINMUX('E',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('F', 0, AF12)>,
+> +				 <STM32_PINMUX('F', 1, AF12)>,
+> +				 <STM32_PINMUX('F', 2, AF12)>,
+> +				 <STM32_PINMUX('F', 3, AF12)>,
+> +				 <STM32_PINMUX('F', 4, AF12)>,
+> +				 <STM32_PINMUX('F', 5, AF12)>,
+> +				 <STM32_PINMUX('F',11, AF12)>,
+> +				 <STM32_PINMUX('F',12, AF12)>,
+> +				 <STM32_PINMUX('F',13, AF12)>,
+> +				 <STM32_PINMUX('F',14, AF12)>,
+> +				 <STM32_PINMUX('F',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('G', 0, AF12)>,
+> +				 <STM32_PINMUX('G', 1, AF12)>,
+> +				 <STM32_PINMUX('G', 2, AF12)>,
+> +				 <STM32_PINMUX('G', 4, AF12)>,
+> +				 <STM32_PINMUX('G', 5, AF12)>,
+> +				 <STM32_PINMUX('G', 8, AF12)>,
+> +				 <STM32_PINMUX('G',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('H', 5, AF12)>,
+> +				 <STM32_PINMUX('H', 6, AF12)>,
+> +				 <STM32_PINMUX('H', 7, AF12)>,
+> +				 <STM32_PINMUX('H', 8, AF12)>,
+> +				 <STM32_PINMUX('H', 9, AF12)>,
+> +				 <STM32_PINMUX('H',10, AF12)>,
+> +				 <STM32_PINMUX('H',11, AF12)>,
+> +				 <STM32_PINMUX('H',12, AF12)>,
+> +				 <STM32_PINMUX('H',13, AF12)>,
+> +				 <STM32_PINMUX('H',14, AF12)>,
+> +				 <STM32_PINMUX('H',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('I', 0, AF12)>,
+> +				 <STM32_PINMUX('I', 1, AF12)>,
+> +				 <STM32_PINMUX('I', 2, AF12)>,
+> +				 <STM32_PINMUX('I', 3, AF12)>,
+> +				 <STM32_PINMUX('I', 4, AF12)>,
+> +				 <STM32_PINMUX('I', 5, AF12)>,
+> +				 <STM32_PINMUX('I', 6, AF12)>,
+> +				 <STM32_PINMUX('I', 7, AF12)>,
+> +				 <STM32_PINMUX('I', 9, AF12)>,
+> +				 <STM32_PINMUX('I',10, AF12)>;
+> +
+> +			slew-rate = <3>;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/stm32h743i-eval-u-boot.dtsi b/arch/arm/dts/stm32h743i-eval-u-boot.dtsi
+> index 5965afc..02e28c6 100644
+> --- a/arch/arm/dts/stm32h743i-eval-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32h743i-eval-u-boot.dtsi
+> @@ -1,3 +1,101 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  
+>  #include <stm32h7-u-boot.dtsi>
+> +
+> +&fmc {
+> +
+> +	/*
+> +	 * Memory configuration from sdram datasheet IS42S32800G-6BLI
+> +	 * first bank is bank@0
+> +	 * second bank is bank@1
+> +	 */
+> +	bank1: bank@1 {
+> +		st,sdram-control = /bits/ 8 <NO_COL_9
+> +					     NO_ROW_12
+> +					     MWIDTH_32
+> +					     BANKS_4
+> +					     CAS_2
+> +					     SDCLK_3
+> +					     RD_BURST_EN
+> +					     RD_PIPE_DL_0>;
+> +		st,sdram-timing = /bits/ 8 <TMRD_1
+> +					    TXSR_1
+> +					    TRAS_1
+> +					    TRC_6
+> +					    TRP_2
+> +					    TWR_1
+> +					    TRCD_1>;
+> +		st,sdram-refcount = <1539>;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	fmc_pins: fmc@0 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('D', 0, AF12)>,
+> +				 <STM32_PINMUX('D', 1, AF12)>,
+> +				 <STM32_PINMUX('D', 8, AF12)>,
+> +				 <STM32_PINMUX('D', 9, AF12)>,
+> +				 <STM32_PINMUX('D',10, AF12)>,
+> +				 <STM32_PINMUX('D',14, AF12)>,
+> +				 <STM32_PINMUX('D',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('E', 0, AF12)>,
+> +				 <STM32_PINMUX('E', 1, AF12)>,
+> +				 <STM32_PINMUX('E', 7, AF12)>,
+> +				 <STM32_PINMUX('E', 8, AF12)>,
+> +				 <STM32_PINMUX('E', 9, AF12)>,
+> +				 <STM32_PINMUX('E',10, AF12)>,
+> +				 <STM32_PINMUX('E',11, AF12)>,
+> +				 <STM32_PINMUX('E',12, AF12)>,
+> +				 <STM32_PINMUX('E',13, AF12)>,
+> +				 <STM32_PINMUX('E',14, AF12)>,
+> +				 <STM32_PINMUX('E',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('F', 0, AF12)>,
+> +				 <STM32_PINMUX('F', 1, AF12)>,
+> +				 <STM32_PINMUX('F', 2, AF12)>,
+> +				 <STM32_PINMUX('F', 3, AF12)>,
+> +				 <STM32_PINMUX('F', 4, AF12)>,
+> +				 <STM32_PINMUX('F', 5, AF12)>,
+> +				 <STM32_PINMUX('F',11, AF12)>,
+> +				 <STM32_PINMUX('F',12, AF12)>,
+> +				 <STM32_PINMUX('F',13, AF12)>,
+> +				 <STM32_PINMUX('F',14, AF12)>,
+> +				 <STM32_PINMUX('F',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('G', 0, AF12)>,
+> +				 <STM32_PINMUX('G', 1, AF12)>,
+> +				 <STM32_PINMUX('G', 2, AF12)>,
+> +				 <STM32_PINMUX('G', 4, AF12)>,
+> +				 <STM32_PINMUX('G', 5, AF12)>,
+> +				 <STM32_PINMUX('G', 8, AF12)>,
+> +				 <STM32_PINMUX('G',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('H', 5, AF12)>,
+> +				 <STM32_PINMUX('H', 6, AF12)>,
+> +				 <STM32_PINMUX('H', 7, AF12)>,
+> +				 <STM32_PINMUX('H', 8, AF12)>,
+> +				 <STM32_PINMUX('H', 9, AF12)>,
+> +				 <STM32_PINMUX('H',10, AF12)>,
+> +				 <STM32_PINMUX('H',11, AF12)>,
+> +				 <STM32_PINMUX('H',12, AF12)>,
+> +				 <STM32_PINMUX('H',13, AF12)>,
+> +				 <STM32_PINMUX('H',14, AF12)>,
+> +				 <STM32_PINMUX('H',15, AF12)>,
+> +
+> +				 <STM32_PINMUX('I', 0, AF12)>,
+> +				 <STM32_PINMUX('I', 1, AF12)>,
+> +				 <STM32_PINMUX('I', 2, AF12)>,
+> +				 <STM32_PINMUX('I', 3, AF12)>,
+> +				 <STM32_PINMUX('I', 4, AF12)>,
+> +				 <STM32_PINMUX('I', 5, AF12)>,
+> +				 <STM32_PINMUX('I', 6, AF12)>,
+> +				 <STM32_PINMUX('I', 7, AF12)>,
+> +				 <STM32_PINMUX('I', 9, AF12)>,
+> +				 <STM32_PINMUX('I',10, AF12)>;
+> +
+> +			slew-rate = <3>;
+> +		};
+> +	};
+> +};
 > 
-> dillon min (4):
->   ARM: dts: stm32: split sdram pin & timing parameter into specific
->     board dts
->   ARM: dts: stm32: Add RT-Thread art-pi board support
->   board: Add rt-thread art-pi board support
->   ram: stm32: fix strsep failed on read only memory
-> 
->  arch/arm/dts/Makefile                        |   3 +-
->  arch/arm/dts/stm32h7-u-boot.dtsi             |  95 --------
->  arch/arm/dts/stm32h743.dtsi                  |   8 +
->  arch/arm/dts/stm32h743i-disco-u-boot.dtsi    |  98 ++++++++
->  arch/arm/dts/stm32h743i-eval-u-boot.dtsi     |  98 ++++++++
->  arch/arm/dts/stm32h750-pinctrl.dtsi          | 319 +++++++++++++++++++++++++++
->  arch/arm/dts/stm32h750.dtsi                  |   5 +
->  arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi   |  81 +++++++
->  arch/arm/dts/stm32h750i-art-pi.dts           |  75 +++++++
->  arch/arm/mach-stm32/stm32h7/Kconfig          |   4 +
->  board/st/stm32h750-art-pi/Kconfig            |  19 ++
->  board/st/stm32h750-art-pi/MAINTAINERS        |   7 +
->  board/st/stm32h750-art-pi/Makefile           |   6 +
->  board/st/stm32h750-art-pi/stm32h750-art-pi.c |  58 +++++
->  configs/stm32h750-art-pi_defconfig           |  51 +++++
->  drivers/ram/stm32_sdram.c                    |   3 +
->  include/configs/stm32h750-art-pi.h           |  48 ++++
->  include/dt-bindings/memory/stm32-sdram.h     |   2 +
->  18 files changed, 884 insertions(+), 96 deletions(-)
->  create mode 100644 arch/arm/dts/stm32h750-pinctrl.dtsi
->  create mode 100644 arch/arm/dts/stm32h750.dtsi
->  create mode 100644 arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi
->  create mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
->  create mode 100644 board/st/stm32h750-art-pi/Kconfig
->  create mode 100644 board/st/stm32h750-art-pi/MAINTAINERS
->  create mode 100644 board/st/stm32h750-art-pi/Makefile
->  create mode 100644 board/st/stm32h750-art-pi/stm32h750-art-pi.c
->  create mode 100644 configs/stm32h750-art-pi_defconfig
->  create mode 100644 include/configs/stm32h750-art-pi.h
-> 
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

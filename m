@@ -2,51 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5DCF34C21B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Mar 2021 05:05:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDE1734C21C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Mar 2021 05:05:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AF9AC5719C;
-	Mon, 29 Mar 2021 03:05:13 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 88482C5719C;
+	Mon, 29 Mar 2021 03:05:17 +0000 (UTC)
 Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
  [209.85.216.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E69E3C5718B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EB066C5718B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 29 Mar 2021 03:05:11 +0000 (UTC)
-Received: by mail-pj1-f48.google.com with SMTP id ha17so5332117pjb.2
+ Mon, 29 Mar 2021 03:05:15 +0000 (UTC)
+Received: by mail-pj1-f48.google.com with SMTP id gb6so5347628pjb.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Mar 2021 20:05:11 -0700 (PDT)
+ Sun, 28 Mar 2021 20:05:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=Z9EnFiqGWDWVadlqINa4zBP4l9S8wL0sHEJzlTVWQCQ=;
- b=iAWX+xB27RgpHuRLYO+R4v+Bqwb128O3xMvLVXu1emmmVPgNO5REsAywBLmwBywNpG
- Q1yFXnQIf2kyXYVB3asHSTAv7ABo0X43yvq4FEk88Ae9851godtLeqLzkmN9G2uXytqw
- iXvVEfrEqtdPZ6V8nzYpCGGbKnLJ/7bi+p4wo7hQpYxFTpIe+Nvj9ZeMoUmUo9TNkigK
- A0TH6OVlzRHvdJsvZjS/kpU625id//geuHKlz0bHLyK4mKJ6FSKuQobTSHibcHcswwcp
- InxQlwIImzIS+nSjxoQYvVXHwS3Xy/tQD9YUiXqQdlxR3dymvmMTAWUF/KLPueqP+4go
- mLDg==
+ bh=Ua7GpxrnJrtWKpxiDVh/lReoacATPHAtC5BNzYUWpOA=;
+ b=vJjGF1jYna/APhjyBu6Ar1+a9qEAm4jl6/6diIegW7+XOEL3OU0yXHJpC3ULwgoDHD
+ qPcRl9BxiRLZPhhsonUy/76dvgcfJAvRZqqRPXtGyGUaxu5LwzmAMAQ7ubDtWdVDEU2I
+ Thy+qpjRSovYjzb/dwc1aqsudhzK/Ll1TUMEKEqLzz4Y/MS+V/56GOSnR46pzuB0+Vyn
+ x2rsXP4vuOX8Gh3C3cJW/t/dinZgGhRCtzYe3SVrCQd+AsPxI+aOWZ7+jleVeyjfX8wW
+ ca04S254TQ9I27ihFR6Iwzm3UAkOjFRoqptAA4C6WbA0Zp2bQxX8U35d192k5a4XlKJd
+ cVIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references;
- bh=Z9EnFiqGWDWVadlqINa4zBP4l9S8wL0sHEJzlTVWQCQ=;
- b=WAQ+5cwJXW+LBZUH/BLYQ1xvQwFRfO28Cnor5al9pRKKSOUjwZnRvnHiH31g2LFMfm
- zPXo7tsupuDDSPMDlB/h2sIjPFxE261CXA/4UwBl60rMOTr9nQJzooFbdQ2FDyW8iT9j
- QsdYTvxQf3oswZFu+WJ3m3jDZSsf1XAiaUx9NoU3yZpGRyGxyINhi5oQzuaXvQBUdFXO
- 39BOdHtwizMZamFr7N1ii+8Z51vjhhXbeD1LL3rT1tXy9u3G3ZSjBcbh5rCruQGC2+Ry
- RN4A6I9HQxcHu5ZxD7fjtvZL5mH0tywYHspai4a8npkHavhMsiQP2sWWvNgPG8GX3hkB
- nElg==
-X-Gm-Message-State: AOAM53055pwzExX2TD4o98wqKQhZK7ZZCgLC0CKqUkFczOwZmEZxuu9Y
- EiaT2f54oZmS92CHbC1ki3U=
-X-Google-Smtp-Source: ABdhPJwO6R7C0BqYj4Fb7sJrpPevqdtPiT9TOXNYqbRDODCkOw74jl7V/uWHMI6wPPUWtDnHWBEc0Q==
-X-Received: by 2002:a17:902:9303:b029:e6:f010:a5f9 with SMTP id
- bc3-20020a1709029303b02900e6f010a5f9mr26986815plb.9.1616987110573; 
- Sun, 28 Mar 2021 20:05:10 -0700 (PDT)
+ bh=Ua7GpxrnJrtWKpxiDVh/lReoacATPHAtC5BNzYUWpOA=;
+ b=a3DYmjpKU11Ba/YpB1RN8s060F46xD6YZk3mFIKNuw7dZf6ev8Ax0WJh0YA+taYIwl
+ xqJ73Wsu5dR8IBgL7VZoHWk2bUpNTQH3yqdk6KDagcrfaMhcVqeMLtRp39Rso2aFQgcO
+ NPMXpiw/Ozy4x1lofzwPMpgWel9XOWRvnTCYvI0I9gc0+SHqjjfGZxuTfwbnOeMNmhho
+ Tx3rPOyHbWo9u28gtZl78xRZLR1iKQ1xak26SNnj2Jp3motqnuks8QBQ1Odkz5je9kKf
+ P5KXRD8x86UDJ2NSsrhJOgHAn9fAh/359YVI71Se2zFhsXO1bPhlaLthM4CJyRjS1fmA
+ nSMQ==
+X-Gm-Message-State: AOAM532kCg0LlPklZTsMh+eJ9FeYTY5V6azblF1Xot1LShcKKx03TsZg
+ vDAFDqvLt07nusL7v4WFyLHF4sRLU/QT0YI0
+X-Google-Smtp-Source: ABdhPJwXOO8GupMKPwETaWZ166nLPvceJn7yj/wU0tIyi0/QMBoKR3S3dDLW/HyUbNhow1Vzh5Ju3Q==
+X-Received: by 2002:a17:902:d4cc:b029:e4:9cd9:f189 with SMTP id
+ o12-20020a170902d4ccb02900e49cd9f189mr26539236plg.53.1616987114594; 
+ Sun, 28 Mar 2021 20:05:14 -0700 (PDT)
 Received: from fmin-OptiPlex-7060.nreal.work ([137.59.103.165])
- by smtp.gmail.com with ESMTPSA id a204sm15331914pfd.106.2021.03.28.20.05.06
+ by smtp.gmail.com with ESMTPSA id a204sm15331914pfd.106.2021.03.28.20.05.10
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 28 Mar 2021 20:05:10 -0700 (PDT)
+ Sun, 28 Mar 2021 20:05:14 -0700 (PDT)
 From: dillon.minfei@gmail.com
 To: kever.yang@rock-chips.com, andre.przywara@arm.com, priyanka.jain@nxp.com,
  jagan@amarulasolutions.com, narmstrong@baylibre.com, marex@denx.de,
@@ -54,14 +54,14 @@ To: kever.yang@rock-chips.com, andre.przywara@arm.com, priyanka.jain@nxp.com,
  festevam@gmail.com, hs@denx.de, heiko.stuebner@theobroma-systems.com,
  u-boot@lists.denx.de, patrice.chotard@foss.st.com,
  patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com
-Date: Mon, 29 Mar 2021 11:04:48 +0800
-Message-Id: <1616987091-3432-4-git-send-email-dillon.minfei@gmail.com>
+Date: Mon, 29 Mar 2021 11:04:49 +0800
+Message-Id: <1616987091-3432-5-git-send-email-dillon.minfei@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
 References: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
 Cc: dillon min <dillon.minfei@gmail.com>
-Subject: [Uboot-stm32] [PATCH v3 3/6] board: Add rt-thread art-pi board
-	support
+Subject: [Uboot-stm32] [PATCH v3 4/6] ram: stm32: fix strsep failed on read
+	only memory
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,271 +81,43 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: dillon min <dillon.minfei@gmail.com>
 
-This patch adds support for rt-thread art-pi board.
+strsep will change data from original memory address,
+in case the memory is in non-sdram/sram place, will
+run into a bug(hang at SDRAM: )
 
-for more information about art-pi, please goto:
-https://art-pi.gitee.io/website/
+just add a temporary array to store bank_name[] to fix this
+bug.
 
+Fixes: f303aaf ("ram: stm32: add second SDRAM bank management")
 Signed-off-by: dillon min <dillon.minfei@gmail.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 v3: no changes
 
- arch/arm/mach-stm32/stm32h7/Kconfig          |  4 ++
- board/st/stm32h750-art-pi/Kconfig            | 19 +++++++++
- board/st/stm32h750-art-pi/MAINTAINERS        |  7 ++++
- board/st/stm32h750-art-pi/Makefile           |  6 +++
- board/st/stm32h750-art-pi/stm32h750-art-pi.c | 58 ++++++++++++++++++++++++++++
- configs/stm32h750-art-pi_defconfig           | 51 ++++++++++++++++++++++++
- include/configs/stm32h750-art-pi.h           | 48 +++++++++++++++++++++++
- 7 files changed, 193 insertions(+)
- create mode 100644 board/st/stm32h750-art-pi/Kconfig
- create mode 100644 board/st/stm32h750-art-pi/MAINTAINERS
- create mode 100644 board/st/stm32h750-art-pi/Makefile
- create mode 100644 board/st/stm32h750-art-pi/stm32h750-art-pi.c
- create mode 100644 configs/stm32h750-art-pi_defconfig
- create mode 100644 include/configs/stm32h750-art-pi.h
+ drivers/ram/stm32_sdram.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/arch/arm/mach-stm32/stm32h7/Kconfig b/arch/arm/mach-stm32/stm32h7/Kconfig
-index 55e6217..70233a4 100644
---- a/arch/arm/mach-stm32/stm32h7/Kconfig
-+++ b/arch/arm/mach-stm32/stm32h7/Kconfig
-@@ -6,7 +6,11 @@ config TARGET_STM32H743_DISCO
- config TARGET_STM32H743_EVAL
- 	bool "STM32H743 Evaluation board"
+diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
+index 540ad85..da27677 100644
+--- a/drivers/ram/stm32_sdram.c
++++ b/drivers/ram/stm32_sdram.c
+@@ -268,6 +268,7 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
+ 	u32 swp_fmc;
+ 	ofnode bank_node;
+ 	char *bank_name;
++	char _bank_name[128] = {0};
+ 	u8 bank = 0;
+ 	int ret;
  
-+config TARGET_STM32H750_ART_PI
-+	bool "STM32H750 ART Pi board"
-+
- source "board/st/stm32h743-eval/Kconfig"
- source "board/st/stm32h743-disco/Kconfig"
-+source "board/st/stm32h750-art-pi/Kconfig"
- 
- endif
-diff --git a/board/st/stm32h750-art-pi/Kconfig b/board/st/stm32h750-art-pi/Kconfig
-new file mode 100644
-index 0000000..c31b984
---- /dev/null
-+++ b/board/st/stm32h750-art-pi/Kconfig
-@@ -0,0 +1,19 @@
-+if TARGET_STM32H750_ART_PI
-+
-+config SYS_BOARD
-+	string
-+	default "stm32h750-art-pi"
-+
-+config SYS_VENDOR
-+	string
-+	default "st"
-+
-+config SYS_SOC
-+	string
-+	default "stm32h7"
-+
-+config SYS_CONFIG_NAME
-+	string
-+	default "stm32h750-art-pi"
-+
-+endif
-diff --git a/board/st/stm32h750-art-pi/MAINTAINERS b/board/st/stm32h750-art-pi/MAINTAINERS
-new file mode 100644
-index 0000000..9578833
---- /dev/null
-+++ b/board/st/stm32h750-art-pi/MAINTAINERS
-@@ -0,0 +1,7 @@
-+STM32H750 ART PI BOARD
-+M:	Dillon Min <dillon.minfei@gmail.com>
-+S:	Maintained
-+F:	board/st/stm32h750-art-pi
-+F:	include/configs/stm32h750-art-pi.h
-+F:	configs/stm32h750-art-pi_defconfig
-+F:	arch/arm/dts/stm32h7*
-diff --git a/board/st/stm32h750-art-pi/Makefile b/board/st/stm32h750-art-pi/Makefile
-new file mode 100644
-index 0000000..a06de87
---- /dev/null
-+++ b/board/st/stm32h750-art-pi/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2021, RT-Thread - All Rights Reserved
-+# Author(s): Dillon Min, <dillon.minfei@gmail.com> for RT-Thread.
-+
-+obj-y	:= stm32h750-art-pi.o
-diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-new file mode 100644
-index 0000000..c374dd3
---- /dev/null
-+++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2021, STMicroelectronics - All Rights Reserved
-+ * Author(s): Dillon Min <dillon.minfei@gmail.com> for STMicroelectronics.
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <init.h>
-+#include <log.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+int dram_init(void)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
-+	if (ret) {
-+		debug("DRAM init failed: %d\n", ret);
-+		return ret;
-+	}
-+
-+	if (fdtdec_setup_mem_size_base() != 0)
-+		ret = -EINVAL;
-+
-+	return ret;
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	fdtdec_setup_memory_banksize();
-+
-+	return 0;
-+}
-+
-+int board_early_init_f(void)
-+{
-+	return 0;
-+}
-+
-+u32 get_board_rev(void)
-+{
-+	return 0;
-+}
-+
-+int board_late_init(void)
-+{
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-+	return 0;
-+}
-diff --git a/configs/stm32h750-art-pi_defconfig b/configs/stm32h750-art-pi_defconfig
-new file mode 100644
-index 0000000..a5c4cd7
---- /dev/null
-+++ b/configs/stm32h750-art-pi_defconfig
-@@ -0,0 +1,51 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_STM32=y
-+CONFIG_SYS_TEXT_BASE=0x90000000
-+CONFIG_SYS_MALLOC_F_LEN=0xF00
-+CONFIG_NR_DRAM_BANKS=1
-+CONFIG_ENV_SIZE=0x2000
-+CONFIG_STM32H7=y
-+CONFIG_TARGET_STM32H750_ART_PI=y
-+CONFIG_DEFAULT_DEVICE_TREE="stm32h750i-art-pi"
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_AUTOBOOT_KEYED=y
-+CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
-+CONFIG_AUTOBOOT_STOP_STR=" "
-+# CONFIG_USE_BOOTCOMMAND is not set
-+CONFIG_DEFAULT_FDT_FILE="stm32h750i-art-pi"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SYS_PROMPT="U-Boot > "
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_EXT4_WRITE=y
-+# CONFIG_ISO_PARTITION is not set
-+CONFIG_OF_CONTROL=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+# CONFIG_NET is not set
-+CONFIG_DM_MMC=y
-+CONFIG_STM32_SDMMC2=y
-+# CONFIG_PINCTRL_FULL is not set
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_BAUDRATE=2000000
-+CONFIG_USE_BOOTARGS=y
-+CONFIG_BOOTARGS="console=ttySTM0,2000000 root=/dev/ram rdinit=/linuxrc loglevel=8"
-+CONFIG_BOOTCOMMAND="bootm 90080000"
-+CONFIG_REQUIRE_SERIAL_CONSOLE=y
-+CONFIG_SERIAL_PRESENT=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_STM32_SERIAL=y
-+CONFIG_FIT=y
-+CONFIG_FIT_EXTERNAL_OFFSET=0x0
-+CONFIG_FIT_ENABLE_SHA256_SUPPORT=y
-+CONFIG_FIT_FULL_CHECK=y
-+CONFIG_FIT_PRINT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_USE_BOOTCOMMAND=y
-+CONFIG_DM_DMA=y
-diff --git a/include/configs/stm32h750-art-pi.h b/include/configs/stm32h750-art-pi.h
-new file mode 100644
-index 0000000..43dc79a
---- /dev/null
-+++ b/include/configs/stm32h750-art-pi.h
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2021, STMicroelectronics - All Rights Reserved
-+ * Author(s): Dillon Min <dillon.minfei@gmail.com> for STMicroelectronics.
-+ */
-+
-+#ifndef __CONFIG_H
-+#define __CONFIG_H
-+
-+#include <config.h>
-+#include <linux/sizes.h>
-+
-+/* For booting Linux, use the first 16MB of memory */
-+#define CONFIG_SYS_BOOTMAPSZ		(SZ_16M + SZ_8M)
-+
-+#define CONFIG_SYS_FLASH_BASE		0x90000000
-+#define CONFIG_SYS_INIT_SP_ADDR		0x24040000
-+
-+/*
-+ * Configuration of the external SDRAM memory
-+ */
-+#define CONFIG_SYS_LOAD_ADDR		0xC1800000
-+#define CONFIG_LOADADDR			0xC1800000
-+
-+#define CONFIG_SYS_HZ_CLOCK		1000000
-+
-+#define CONFIG_CMDLINE_TAG
-+#define CONFIG_SETUP_MEMORY_TAGS
-+#define CONFIG_INITRD_TAG
-+#define CONFIG_REVISION_TAG
-+
-+#define CONFIG_SYS_MAXARGS		16
-+#define CONFIG_SYS_MALLOC_LEN		(1 * 1024 * 1024)
-+
-+#define BOOT_TARGET_DEVICES(func) \
-+	func(MMC, mmc, 0)
-+
-+#include <config_distro_bootcmd.h>
-+#define CONFIG_EXTRA_ENV_SETTINGS				\
-+			"kernel_addr_r=0xC0008000\0"		\
-+			"fdtfile=stm32h750i-art-pi.dtb\0"	\
-+			"fdt_addr_r=0xC0408000\0"		\
-+			"scriptaddr=0xC0418000\0"		\
-+			"pxefile_addr_r=0xC0428000\0" \
-+			"ramdisk_addr_r=0xC0438000\0"		\
-+			BOOTENV
-+
-+#endif /* __CONFIG_H */
+@@ -300,6 +301,8 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
+ 	dev_for_each_subnode(bank_node, dev) {
+ 		/* extract the bank index from DT */
+ 		bank_name = (char *)ofnode_get_name(bank_node);
++		strcpy(_bank_name, bank_name);
++		bank_name = _bank_name;
+ 		strsep(&bank_name, "@");
+ 		if (!bank_name) {
+ 			pr_err("missing sdram bank index");
 -- 
 2.7.4
 

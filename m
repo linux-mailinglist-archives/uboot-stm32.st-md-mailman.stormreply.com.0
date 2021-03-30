@@ -2,66 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A2B434C21E
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Mar 2021 05:05:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 030F734E786
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Mar 2021 14:35:02 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 11E9EC5719C;
-	Mon, 29 Mar 2021 03:05:26 +0000 (UTC)
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
- [209.85.215.169])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 91DB5C5719D;
+	Tue, 30 Mar 2021 12:35:01 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ECB84C5718B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B33F8C56631
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 29 Mar 2021 03:05:23 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id m7so8513532pgj.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 28 Mar 2021 20:05:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references;
- bh=/KNYrgzoULjCaqaLFKJCMM6mt7cPwjMSVczAX0c5MQo=;
- b=I8zfTfybm0tZqFsGWtNqUpwTSHCd7bTTmBlfS4sVDVl0jWTS/E03HARhaXduAQBGOB
- W1Kq1DhxDAC0TurqWy1TjUcWXQ7CCFTfu8946vSBb5MVGiXoiWIxIqUMZ5FjBJpNwPsZ
- 2KqVyPhXo8RvKRrGtqIgBKnYC/xNGxPcFexOrkmaZtJqVxem51f5KCXNRlaZ/QbReiMU
- UuTI7PuUdPh2gt9X/ioihUyzO/Y3mcsb1KJ/2PN1vc9bGX3pYTp7IIpPvcxMYlVRhl9B
- 2kLJlUa0y4F2xWoPU5xHam8vopcUcb00xVSsC/W5sN86HRnswlBdfScIRRkic1nf4B8O
- 3BDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references;
- bh=/KNYrgzoULjCaqaLFKJCMM6mt7cPwjMSVczAX0c5MQo=;
- b=ZcoltNweduzU6KM7fsxKXhry4Pg7lXnnKrvousBP4P7aAEZTneU6LeLlGI00vxo6Dn
- TOtiw1ThmFO3bZ5gkoGRdKgmTzq1pxPJfAH8K3QpQTnmM7nJUNNMk5qT00D7IiTQ5EoO
- vRiTZBrOzKzMii7UW0Z5JUcBGh8pdI5WuWKHtc3SZlNqFXk4eLe5gg4N38nQ6TFFSWok
- uIxPiEcm7aO89NuSSP+pATyNGhJqsou+VXtNYsSxxN7445eVRu7IM/nK2/SrfP917Rt8
- Lj34cMPM2mIJp8csuFQjuWmtlpHCjgoaA2OoPXOYeptSiI846xmjwJqBVjRlj7+nUqJE
- 9QQA==
-X-Gm-Message-State: AOAM532ouxKU8c4BEGKPs0YOOp1VVcTfaz/t4AdFIninzgzigfmogzjz
- FN+a4lX/FSwHb8UFOhyBxdk=
-X-Google-Smtp-Source: ABdhPJxSxhoBkQh/YpfijAL2s6dRPcnd3V/NSHix0XA+RigzFydwK2GMcC7IH5taL9eTJLQO0baE3A==
-X-Received: by 2002:aa7:9984:0:b029:1f8:b0ed:e423 with SMTP id
- k4-20020aa799840000b02901f8b0ede423mr23126074pfh.81.1616987122624; 
- Sun, 28 Mar 2021 20:05:22 -0700 (PDT)
-Received: from fmin-OptiPlex-7060.nreal.work ([137.59.103.165])
- by smtp.gmail.com with ESMTPSA id a204sm15331914pfd.106.2021.03.28.20.05.18
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sun, 28 Mar 2021 20:05:22 -0700 (PDT)
-From: dillon.minfei@gmail.com
-To: kever.yang@rock-chips.com, andre.przywara@arm.com, priyanka.jain@nxp.com,
- jagan@amarulasolutions.com, narmstrong@baylibre.com, marex@denx.de,
- aford173@gmail.com, ioana.ciornei@nxp.com, josip.kelecic@sartura.hr,
- festevam@gmail.com, hs@denx.de, heiko.stuebner@theobroma-systems.com,
- u-boot@lists.denx.de, patrice.chotard@foss.st.com,
- patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com
-Date: Mon, 29 Mar 2021 11:04:51 +0800
-Message-Id: <1616987091-3432-7-git-send-email-dillon.minfei@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
-References: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
-Cc: dillon min <dillon.minfei@gmail.com>
-Subject: [Uboot-stm32] [PATCH v3 6/6] pinctrl: stm32: Add st,
-	stm32h750-pinctrl compatible string
+ Tue, 30 Mar 2021 12:34:59 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 12UCM4BA007762; Tue, 30 Mar 2021 14:34:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=Hz3uXPAGXyQ6GTFKvlxWxIq8d4B0an8dvq4OV/WQEGI=;
+ b=E6eDeIKEw7Bhj5oxHEcWIViy9EE7X3+M4j/TNr8E+7Q+KMmEDO6g5NMa0BS0Mn35kVqe
+ 22lWsdwTXYn+UfdrRKBBEQ+Wvfu51roy+REaC32jJni6634Bj47/iInjPGctbUJZGwGa
+ sUWInpwwr4cT0pNiDJ1j4B38UjtVpcx2SWAxcEGIgwJDUsEKo0xO3XFMw2Q1KRwhSc9S
+ KGaU8U/ltVDbbf191QMXRVkgZfHN6pzOLXKBBOr2zTBuPQTYmU9FfIdzFgrHV87nGXax
+ jHjwjnhSFV3YSIAbRf71VK4Lf+RA8/JUPVAnFnRctB1ttsgBriuEz1htx3qGfPQe4xih XA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 37kxrwt8t1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 30 Mar 2021 14:34:53 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9585F10002A;
+ Tue, 30 Mar 2021 14:34:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7556D2397BF;
+ Tue, 30 Mar 2021 14:34:52 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 30 Mar 2021 14:34:52
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 30 Mar 2021 14:34:50 +0200
+Message-ID: <20210330143429.1.I654d7aeb07f9cd0602752861d06f4c17e9a0ee17@changeid>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
+ definitions=2021-03-30_04:2021-03-30,
+ 2021-03-30 signatures=0
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: [Uboot-stm32] [PATCH] net: dwc_eth_qos: cosmetic: remove unused
+	define EQOS_DESCRIPTOR_ALIGN
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,38 +68,35 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: dillon min <dillon.minfei@gmail.com>
+Remove the define EQOS_DESCRIPTOR_ALIGN unused since the
+commit 6f1e668d964e ("net: dwc_eth_qos: Pad descriptors to cacheline size")
 
-Due to DT kernel synchronisation, add new pinctrl compatible
-string for stm32h750.
-
-Signed-off-by: dillon min <dillon.minfei@gmail.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
-v3: no changes
 
- drivers/pinctrl/pinctrl_stm32.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/dwc_eth_qos.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c
-index 6c98538..c5279c4 100644
---- a/drivers/pinctrl/pinctrl_stm32.c
-+++ b/drivers/pinctrl/pinctrl_stm32.c
-@@ -491,6 +491,7 @@ static const struct udevice_id stm32_pinctrl_ids[] = {
- 	{ .compatible = "st,stm32f746-pinctrl" },
- 	{ .compatible = "st,stm32f769-pinctrl" },
- 	{ .compatible = "st,stm32h743-pinctrl" },
-+	{ .compatible = "st,stm32h750-pinctrl" },
- 	{ .compatible = "st,stm32mp157-pinctrl" },
- 	{ .compatible = "st,stm32mp157-z-pinctrl" },
- 	{ }
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index e8242ca4e1..0b1e95e98b 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -240,8 +240,6 @@ struct eqos_tegra186_regs {
+ #define EQOS_AUTO_CAL_STATUS_ACTIVE			BIT(31)
+ 
+ /* Descriptors */
+-/* We assume ARCH_DMA_MINALIGN >= 16; 16 is the EQOS HW minimum */
+-#define EQOS_DESCRIPTOR_ALIGN	ARCH_DMA_MINALIGN
+ #define EQOS_DESCRIPTORS_TX	4
+ #define EQOS_DESCRIPTORS_RX	4
+ #define EQOS_DESCRIPTORS_NUM	(EQOS_DESCRIPTORS_TX + EQOS_DESCRIPTORS_RX)
 -- 
-2.7.4
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,65 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CD8734FC85
-	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Mar 2021 11:20:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6257F35028E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Mar 2021 16:44:01 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2664AC5662E;
-	Wed, 31 Mar 2021 09:20:43 +0000 (UTC)
-Received: from mail-il1-f180.google.com (mail-il1-f180.google.com
- [209.85.166.180])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 06FE4C32EA6;
+	Wed, 31 Mar 2021 14:44:01 +0000 (UTC)
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
+ [209.85.210.51])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1FFA0C32EA7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6CAF3C3FAD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Mar 2021 09:20:41 +0000 (UTC)
-Received: by mail-il1-f180.google.com with SMTP id 19so16614513ilj.2
+ Wed, 31 Mar 2021 14:43:59 +0000 (UTC)
+Received: by mail-ot1-f51.google.com with SMTP id
+ 31-20020a9d00220000b02901b64b9b50b1so19141613ota.9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Mar 2021 02:20:41 -0700 (PDT)
+ Wed, 31 Mar 2021 07:43:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=uQWCgEAuRUwnAF7O5EncR1HFeegIc7W++tSQgUmy9Jg=;
- b=tsRrI8+nN1BAw4syfvMUatVZnHXTTj1yaDfrZDjRMYdie+lc8UZ/a6cgo90dVbrJ6n
- voT74EcjqC7YXHSSyvI+h3ENJDo9NSqHFoi7OhSgZgXOHoat8DfpIPk2g/hP450LC6ip
- 0MDwRBfVn+utbJtn+K2jgITRZ9NWGZUGGvJHsT5+ldgXYXQMocf4LRMlpK3vud7ace7W
- 53MaWtQbRW4wFvAEwYpPg005ZrVZV/A0c1n6g0LZpPSPCL1qWM15P5LUs/bu8GM2M3vp
- Q5mXSWAZt891lJtu03LvE98lg4eVY6XgiggxhhDeUwofDvdayi4jm1U4O5KM721Rorrw
- 7zCg==
+ :cc; bh=vjs0IYIiS6QuzIjyHWXlqxE3HILbJT36/LgplOE/E+0=;
+ b=RHdyMHLA7OD4qHvDYqg7NkDW80kirsyRV4/5szRHMOzO2yNzIbx7PlVp7IIgU+vOag
+ YxSRCa3HfDdsiA+oBbeqK1iGydZ0ROgkLOI/5s9w0HmnWLdDQS5izn+ul+4wdy6mtaPa
+ bvkJRT44LPCr47JUgn6a87ZD3bQhiXO7osZwfAHUPETZjExVjJ5ld2rm7XJZNqsMlvV8
+ dLb1+g6dfTHjZ4wJDxT5paVqff7j2jFLj/3ui3lAPVc4cl8ISz7eMIrMM5rgwBBThV/2
+ 4sDzKgVp5dIKFZkvfAbZ1IjdZLi+1bHotInDxJ5PmPSnCkCxpb5nNn8fs3mMKoSyTtlN
+ Ik9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=uQWCgEAuRUwnAF7O5EncR1HFeegIc7W++tSQgUmy9Jg=;
- b=eQ3IFlVOm9AXbcTQJQU0OWO+8dYvXDBHhy/6Q5FEja2nGyz+bqi0vbojPLt+RxDRgs
- 4oU+D7N5JMhBoNnfnFZZYbF6287x7Rvrj4WT2U55rNe8IVV0GFBHUh9beeVBbPZ3kmHu
- NPH5AV/bDWCkvZhU72MBf4ypwcQuJKfdkJWC5R54qj3BoXuk5pdhceub+CZihIasvjEv
- zWU8tJYRPe8tzOc8sxBA6WZkqJjYnzocLAF1uDzyJsF2a0Y9Tl7y2xwaQLD1yF2m/8A+
- +GX3CZljkJ+LNO56e27Y4IM9qfgZFm15uxowdGQbNQeVlnrPMy+5srub+cOf79GUnQ6W
- VDfw==
-X-Gm-Message-State: AOAM533zJdvIAEKCH36FN0a6OAbCEfmAYykYXZ3JX3tPqgluNNPSRWfs
- uzPPeKklywc9tkVVj2ZheKIplRmWYA347PqxyiI=
-X-Google-Smtp-Source: ABdhPJzl5yjMHyO/CYodipxU1P6z65va07vVmfEieXcP962D0SSnHxnJ2byuo1HzuutRslWnxJ1icGXQ+w9ji54GjTw=
-X-Received: by 2002:a05:6e02:dc5:: with SMTP id
- l5mr1932768ilj.218.1617182440096; 
- Wed, 31 Mar 2021 02:20:40 -0700 (PDT)
+ bh=vjs0IYIiS6QuzIjyHWXlqxE3HILbJT36/LgplOE/E+0=;
+ b=AjJ76sP5icZCG1jxxFtNLCnci8BiA1wGsrD1HHJhgF4kbnDwZKErjtMpqzeU2WZIsT
+ 3eUvnhJM2wQa9kkleGpD8ESHSaPcuRF5un8Q0AXgshWxARy3dwQnzrYjL6hdwPKvdq+q
+ H+BaBE0pFErAmu4mDCgbZqH5xFdfRz8b/zpGoETzZFrvSDIhqLQjY12wwuRY3/LaS2BP
+ kDycsT+3Zyc7xpR6nkCo9zabTPTY9jH4E3npDaTIpP5u2v/26pOn2FVpUa0Ci3joA4J6
+ R3CrHDq6SPQtlrERBXLrovfEwHLW/z0qHUN61iIAJwMRRIoBhW12f8p7xC/Z5djjngBd
+ 1gpA==
+X-Gm-Message-State: AOAM532fvAzt5MUezGNdtu3AzOjhSZI91QDQscgz/B8hmPzAQyI3EhnF
+ sVeO5fH+oHdtIujF3J2uJEp/F3xl6xqlkJLT0Ss=
+X-Google-Smtp-Source: ABdhPJx4qSU/x79nt7WNRJ7ZTLx2fzgxSDj1BLPtIrWG+tkObCDVhz5Kwfx1Tj6Xsfyh9w8dv315HHELJ2/8/n5B7Hk=
+X-Received: by 2002:a9d:316:: with SMTP id 22mr2901397otv.210.1617201838000;
+ Wed, 31 Mar 2021 07:43:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
- <1616987091-3432-5-git-send-email-dillon.minfei@gmail.com>
- <8858913b-8255-0461-4bb7-cc650054dc27@foss.st.com>
-In-Reply-To: <8858913b-8255-0461-4bb7-cc650054dc27@foss.st.com>
-From: dillon min <dillon.minfei@gmail.com>
-Date: Wed, 31 Mar 2021 17:20:04 +0800
-Message-ID: <CAL9mu0+_j1Z1krRCqmQ9X_XVtad+7OLrX8Cm5WF7M410C_zQCw@mail.gmail.com>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: marex@denx.de, heiko.stuebner@theobroma-systems.com,
- josip.kelecic@sartura.hr, narmstrong@baylibre.com, andre.przywara@arm.com,
- ioana.ciornei@nxp.com, kever.yang@rock-chips.com, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Jagan Teki <jagan@amarulasolutions.com>, festevam@gmail.com,
- priyanka.jain@nxp.com, patrick.delaunay@foss.st.com, hs@denx.de,
- aford173@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v3 4/6] ram: stm32: fix strsep failed on
-	read only memory
+References: <20210330143429.1.I654d7aeb07f9cd0602752861d06f4c17e9a0ee17@changeid>
+ <5d06fe48-bf97-8d23-36e7-8a509f0127ed@denx.de>
+In-Reply-To: <5d06fe48-bf97-8d23-36e7-8a509f0127ed@denx.de>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Wed, 31 Mar 2021 17:43:46 +0300
+Message-ID: <CAGi-RU+jA-zSy9n7zMJ--AEVuV0gi=vr5Q=eMZhZ5c57AT2gPQ@mail.gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH] net: dwc_eth_qos: cosmetic: remove unused
+	define EQOS_DESCRIPTOR_ALIGN
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,59 +73,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, Mar 31, 2021 at 5:09 PM Patrice CHOTARD
-<patrice.chotard@foss.st.com> wrote:
+On Tue, Mar 30, 2021 at 5:12 PM Marek Vasut <marex@denx.de> wrote:
 >
-> one remark below
+> On 3/30/21 2:34 PM, Patrick Delaunay wrote:
+> > Remove the define EQOS_DESCRIPTOR_ALIGN unused since the
+> > commit 6f1e668d964e ("net: dwc_eth_qos: Pad descriptors to cacheline size")
+> >
+> > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >
-> On 3/29/21 5:04 AM, dillon.minfei@gmail.com wrote:
-> > From: dillon min <dillon.minfei@gmail.com>
-> >
-> > strsep will change data from original memory address,
-> > in case the memory is in non-sdram/sram place, will
-> > run into a bug(hang at SDRAM: )
-> >
-> > just add a temporary array to store bank_name[] to fix this
-> > bug.
-> >
-> > Fixes: f303aaf ("ram: stm32: add second SDRAM bank management")
-> > Signed-off-by: dillon min <dillon.minfei@gmail.com>
-> > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> > ---
-> > v3: no changes
-> >
-> >  drivers/ram/stm32_sdram.c | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
-> > index 540ad85..da27677 100644
-> > --- a/drivers/ram/stm32_sdram.c
-> > +++ b/drivers/ram/stm32_sdram.c
-> > @@ -268,6 +268,7 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
-> >       u32 swp_fmc;
-> >       ofnode bank_node;
-> >       char *bank_name;
-> > +     char _bank_name[128] = {0};
-> >       u8 bank = 0;
-> >       int ret;
-> >
-> > @@ -300,6 +301,8 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
-> >       dev_for_each_subnode(bank_node, dev) {
-> >               /* extract the bank index from DT */
-> >               bank_name = (char *)ofnode_get_name(bank_node);
-> > +             strcpy(_bank_name, bank_name);
->
-> strcpy/strncpy usage is to be avoided. Instead use strlcpy()
-Agree, will add to next submission.
-thanks.
+> Acked-by: Marek Vasut <marex@denx.de>
 >
 > Thanks
->
-> > +             bank_name = _bank_name;
-> >               strsep(&bank_name, "@");
-> >               if (!bank_name) {
-> >                       pr_err("missing sdram bank index");
-> >
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

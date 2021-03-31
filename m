@@ -2,69 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E8ABB34FC35
-	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Mar 2021 11:09:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4D4734FC80
+	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Mar 2021 11:19:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9EAF8C5662E;
-	Wed, 31 Mar 2021 09:09:54 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 690CCC5662E;
+	Wed, 31 Mar 2021 09:19:44 +0000 (UTC)
+Received: from mail-io1-f54.google.com (mail-io1-f54.google.com
+ [209.85.166.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EE2D5C32EA7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C8506C32EA7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Mar 2021 09:09:52 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 12V97HZY009100; Wed, 31 Mar 2021 11:09:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=wbbCH9L8b7yCNox1s1r9SFgzc9EuwkrN8gQ1yxDNE3k=;
- b=Pekd9TgpIExdMUPIEVRWuPsVktsOUjX08O9nxhSy0FLxg5Z4pk4KYLW7Y3uEeUJsw2mq
- rElNG+1MKV28Hk5gay0vXtT6hMYqBwGp/43eg+FXSXmOeqiVgJoVv+GNr57Snyje5FT4
- ogYUe4N8xAwaZzaBA+MnnOdNvCrDVPbsJp8o8VDbonMYtigfoomflBtOmlXbpJr/u5tO
- Fhbw4jKbO9891+mhS/FPgrA+W1w7iTwls3wCdkmvwrGKFUGGIBaa8p9+rG1W7TYm8NdN
- Nnj61AHzlfKo4kBkJLbdYsHQDwIs1PwUgWtdhCN6D5igA5LCBnrNRCvETzg6xAIo964s +g== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 37maamuhpj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 31 Mar 2021 11:09:18 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6998D100034;
- Wed, 31 Mar 2021 11:09:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4C7032301D8;
- Wed, 31 Mar 2021 11:09:17 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.44) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 31 Mar
- 2021 11:09:16 +0200
-To: <dillon.minfei@gmail.com>, <kever.yang@rock-chips.com>,
- <andre.przywara@arm.com>, <priyanka.jain@nxp.com>,
- <jagan@amarulasolutions.com>, <narmstrong@baylibre.com>,
- <marex@denx.de>, <aford173@gmail.com>, <ioana.ciornei@nxp.com>,
- <josip.kelecic@sartura.hr>, <festevam@gmail.com>, <hs@denx.de>,
- <heiko.stuebner@theobroma-systems.com>, <u-boot@lists.denx.de>,
- <patrick.delaunay@foss.st.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
- <1616987091-3432-5-git-send-email-dillon.minfei@gmail.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <8858913b-8255-0461-4bb7-cc650054dc27@foss.st.com>
-Date: Wed, 31 Mar 2021 11:09:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Wed, 31 Mar 2021 09:19:41 +0000 (UTC)
+Received: by mail-io1-f54.google.com with SMTP id e186so1859252iof.7
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 31 Mar 2021 02:19:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=weY6SZCdlbSAUCelNa9pqJN4V1vD4kaEO2zbquIK0Rs=;
+ b=dyTOv4XcbiBLwcE5iPczMA9sypXbpqlyNdaaeJSzBC98RQM/e0ThRKL1oWjkQFTk1l
+ sqshNLrvGnfpDlw5lOtWPyqNkE+yNSebyjDJIQcUgLJ57Q7zWIRqTwqqgQM05xvHqgEC
+ 5/RS50ynWox8pdtjYUfZGwtke4mmeDn0iFH1UlEiB8X2lB8+VeQhsY8pnW3f3y6IIvfb
+ 9VPvWpLfL0qQDKAwOkcRTQjjZjAME2wies9RPFN+2+OJJu44yQ8D566NydIS++SnPvwh
+ U1GPpLvMjXQx+IGOVFKG8dVcVUFA0tU1lZE/sqPHwZqqqRdeojH6WaA9aGyVzWVS44lf
+ DSoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=weY6SZCdlbSAUCelNa9pqJN4V1vD4kaEO2zbquIK0Rs=;
+ b=t7pSzvUImqEqp6uGa5izZSs6O68AeP9itKpZ/w/bY5NQxny5XuDxPemdaPADBHVQHn
+ VXEcVxsw3ibny3IxLen9oEYbPbPku1dCv6e4Q8wAMp9sNze41hfXwvW2EysjDVZ3xSlk
+ tF15Ph61ownm4Z0WULXeXDhajVk/qQYst78/371r2AgBT7sdDk1YJKpfiMDofmn0YiNO
+ +akJiLG4Bs+Mo/J9Mg3/bPe5OTAG+k6Ufc4Dt5v1T3xI49s/m/Czc3PE3gAp+JwAdT05
+ JeOeQpFGxs/g/yt/6IVwLvZzT6N/lTi0e1Wmrk4o1ar/4uZi2ZND/ebjY9nScwzOJann
+ bJdQ==
+X-Gm-Message-State: AOAM5306mgPQJspA+FtYAOcj5RKCLH+Q+Ii/sM5IO5+CQ6XsjyNxHgpC
+ H/kiff98zs9B5O5fN4/Ur31rmJVyZE6YFVHt2cA=
+X-Google-Smtp-Source: ABdhPJxo869MMddXL4ZYz9gmeVgc8CD+KN7bKVkxa/oqAgMUjuc/fvebMzT0G0XH79XLOFsgsLq+Dw1popbDkMG00Cc=
+X-Received: by 2002:a05:6602:280f:: with SMTP id
+ d15mr1543935ioe.127.1617182380532; 
+ Wed, 31 Mar 2021 02:19:40 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1616987091-3432-5-git-send-email-dillon.minfei@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
- definitions=2021-03-31_03:2021-03-30,
- 2021-03-31 signatures=0
-Subject: Re: [Uboot-stm32] [PATCH v3 4/6] ram: stm32: fix strsep failed on
-	read only memory
+References: <1616987091-3432-1-git-send-email-dillon.minfei@gmail.com>
+ <cb2cd5bf-9f64-3076-6645-215769f4d271@foss.st.com>
+In-Reply-To: <cb2cd5bf-9f64-3076-6645-215769f4d271@foss.st.com>
+From: dillon min <dillon.minfei@gmail.com>
+Date: Wed, 31 Mar 2021 17:19:04 +0800
+Message-ID: <CAL9mu0KyQVqY1ZM7U5MZ14ovdGD54mXG3vfMhwTtU3wjnueMiw@mail.gmail.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: marex@denx.de, heiko.stuebner@theobroma-systems.com,
+ josip.kelecic@sartura.hr, narmstrong@baylibre.com, andre.przywara@arm.com,
+ ioana.ciornei@nxp.com, kever.yang@rock-chips.com, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Jagan Teki <jagan@amarulasolutions.com>, festevam@gmail.com,
+ priyanka.jain@nxp.com, patrick.delaunay@foss.st.com, hs@denx.de,
+ aford173@gmail.com
+Subject: Re: [Uboot-stm32] [PATCH v3 0/6] Add rt-thread art-pi board support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,54 +75,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-one remark below
+Hi Patrice,
 
-On 3/29/21 5:04 AM, dillon.minfei@gmail.com wrote:
-> From: dillon min <dillon.minfei@gmail.com>
-> 
-> strsep will change data from original memory address,
-> in case the memory is in non-sdram/sram place, will
-> run into a bug(hang at SDRAM: )
-> 
-> just add a temporary array to store bank_name[] to fix this
-> bug.
-> 
-> Fixes: f303aaf ("ram: stm32: add second SDRAM bank management")
-> Signed-off-by: dillon min <dillon.minfei@gmail.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> v3: no changes
-> 
->  drivers/ram/stm32_sdram.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/ram/stm32_sdram.c b/drivers/ram/stm32_sdram.c
-> index 540ad85..da27677 100644
-> --- a/drivers/ram/stm32_sdram.c
-> +++ b/drivers/ram/stm32_sdram.c
-> @@ -268,6 +268,7 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
->  	u32 swp_fmc;
->  	ofnode bank_node;
->  	char *bank_name;
-> +	char _bank_name[128] = {0};
->  	u8 bank = 0;
->  	int ret;
->  
-> @@ -300,6 +301,8 @@ static int stm32_fmc_of_to_plat(struct udevice *dev)
->  	dev_for_each_subnode(bank_node, dev) {
->  		/* extract the bank index from DT */
->  		bank_name = (char *)ofnode_get_name(bank_node);
-> +		strcpy(_bank_name, bank_name);
+Thanks for the reply,
 
-strcpy/strncpy usage is to be avoided. Instead use strlcpy()
+On Wed, Mar 31, 2021 at 5:05 PM Patrice CHOTARD
+<patrice.chotard@foss.st.com> wrote:
+>
+> Hi Dillon
+>
+> I discussed with Alexandre Torque about the pinctrl rework you did on kernel side for stm32h750.
+> When the kernel series will be fully accepted on kernel side, you can resubmit the equivalent on u-boot side.
+>
+Agree, I loop you to the kernel mailing list , just let you know the
+status of device tree review on kernel side,  i'll hold u-boot's patch
+submission, until kernel's patch is fully accepted.
 
-Thanks
+> Nevertheless, there is one issue I didn't spot on previous review regarding patch 4 "ram: stm32: fix strsep failed on read only memory"
+>
+Okay, i'm going to rework that patch, thanks.
 
-> +		bank_name = _bank_name;
->  		strsep(&bank_name, "@");
->  		if (!bank_name) {
->  			pr_err("missing sdram bank index");
-> 
+> Patrice
+>
+> On 3/29/21 5:04 AM, dillon.minfei@gmail.com wrote:
+> > From: dillon min <dillon.minfei@gmail.com>
+> >
+> > These patches aim to adds u-boot support on art-pi board.
+> >
+> > the board resources:
+> > - stm32h750xbh6 128k flash, 1024k sram
+> > - 32MiB sdram
+> > - 16MiB spi flash
+> > - 8MiB qspi flash
+> > - onboard wifi, bt, fm
+> >
+> > the detail board information can be found at:
+> > https://art-pi.gitee.io/website/
+> >
+> > ---
+> > changes in v3:
+> > two mirror changes in [PATCH v3 2/6], others same to version 2
+> > - remove "for STMicroelectronics." from arch/arm/dts/stm32h750-pinctrl.dtsi
+> > - correct misspelling parameters
+> > you can found detail patch v2 information at link:
+> > https://patchwork.ozlabs.org/project/uboot/list/?series=236009
+> >
+> > changes in v2:
+> > - fix wrong author/date in previous submit
+> > - sync with kernel device tree files
+> > - add st,stm32h750-pinctrl in doc and pinctrl driver
+> >
+> >
+> > *** BLURB HERE ***
+> >
+> > dillon min (6):
+> >   ARM: dts: stm32: split sdram pin & timing parameter into specific
+> >     board dts
+> >   ARM: dts: stm32: Add RT-Thread art-pi board support
+> >   board: Add rt-thread art-pi board support
+> >   ram: stm32: fix strsep failed on read only memory
+> >   dt-bindings: pinctrl: stm32: Add st,stm32h750-pinctrl for stm32h750
+> >     soc
+> >   pinctrl: stm32: Add st,stm32h750-pinctrl compatible string
+> >
+> >  arch/arm/dts/Makefile                              |   3 +-
+> >  arch/arm/dts/stm32h7-pinctrl.dtsi                  | 340 +++++++++++++++++++++
+> >  arch/arm/dts/stm32h7-u-boot.dtsi                   | 100 +-----
+> >  arch/arm/dts/stm32h743-pinctrl.dtsi                | 307 +------------------
+> >  arch/arm/dts/stm32h743.dtsi                        | 168 +++++++++-
+> >  arch/arm/dts/stm32h743i-disco-u-boot.dtsi          |  98 ++++++
+> >  arch/arm/dts/stm32h743i-eval-u-boot.dtsi           |  98 ++++++
+> >  arch/arm/dts/stm32h750-pinctrl.dtsi                |  11 +
+> >  arch/arm/dts/stm32h750.dtsi                        |   5 +
+> >  arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi         |  81 +++++
+> >  arch/arm/dts/stm32h750i-art-pi.dts                 | 188 ++++++++++++
+> >  arch/arm/mach-stm32/stm32h7/Kconfig                |   4 +
+> >  board/st/stm32h750-art-pi/Kconfig                  |  19 ++
+> >  board/st/stm32h750-art-pi/MAINTAINERS              |   7 +
+> >  board/st/stm32h750-art-pi/Makefile                 |   6 +
+> >  board/st/stm32h750-art-pi/stm32h750-art-pi.c       |  58 ++++
+> >  configs/stm32h750-art-pi_defconfig                 |  51 ++++
+> >  .../pinctrl/st,stm32-pinctrl.txt                   |   1 +
+> >  drivers/pinctrl/pinctrl_stm32.c                    |   1 +
+> >  drivers/ram/stm32_sdram.c                          |   3 +
+> >  include/configs/stm32h750-art-pi.h                 |  48 +++
+> >  include/dt-bindings/memory/stm32-sdram.h           |   2 +
+> >  22 files changed, 1198 insertions(+), 401 deletions(-)
+> >  create mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
+> >  create mode 100644 arch/arm/dts/stm32h750-pinctrl.dtsi
+> >  create mode 100644 arch/arm/dts/stm32h750.dtsi
+> >  create mode 100644 arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
+> >  create mode 100644 board/st/stm32h750-art-pi/Kconfig
+> >  create mode 100644 board/st/stm32h750-art-pi/MAINTAINERS
+> >  create mode 100644 board/st/stm32h750-art-pi/Makefile
+> >  create mode 100644 board/st/stm32h750-art-pi/stm32h750-art-pi.c
+> >  create mode 100644 configs/stm32h750-art-pi_defconfig
+> >  create mode 100644 include/configs/stm32h750-art-pi.h
+> >
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

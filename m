@@ -2,61 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6257F35028E
-	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Mar 2021 16:44:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE270352783
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Apr 2021 10:42:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 06FE4C32EA6;
-	Wed, 31 Mar 2021 14:44:01 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
- [209.85.210.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 70505C58D60;
+	Fri,  2 Apr 2021 08:42:50 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6CAF3C3FAD6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7A7BAC58D5F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Mar 2021 14:43:59 +0000 (UTC)
-Received: by mail-ot1-f51.google.com with SMTP id
- 31-20020a9d00220000b02901b64b9b50b1so19141613ota.9
+ Fri,  2 Apr 2021 08:42:49 +0000 (UTC)
+Received: by mail-pj1-f48.google.com with SMTP id
+ x21-20020a17090a5315b029012c4a622e4aso2291770pjh.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Mar 2021 07:43:59 -0700 (PDT)
+ Fri, 02 Apr 2021 01:42:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vjs0IYIiS6QuzIjyHWXlqxE3HILbJT36/LgplOE/E+0=;
- b=RHdyMHLA7OD4qHvDYqg7NkDW80kirsyRV4/5szRHMOzO2yNzIbx7PlVp7IIgU+vOag
- YxSRCa3HfDdsiA+oBbeqK1iGydZ0ROgkLOI/5s9w0HmnWLdDQS5izn+ul+4wdy6mtaPa
- bvkJRT44LPCr47JUgn6a87ZD3bQhiXO7osZwfAHUPETZjExVjJ5ld2rm7XJZNqsMlvV8
- dLb1+g6dfTHjZ4wJDxT5paVqff7j2jFLj/3ui3lAPVc4cl8ISz7eMIrMM5rgwBBThV/2
- 4sDzKgVp5dIKFZkvfAbZ1IjdZLi+1bHotInDxJ5PmPSnCkCxpb5nNn8fs3mMKoSyTtlN
- Ik9A==
+ h=from:to:cc:subject:date:message-id;
+ bh=GaCAW5XLqvm44v5M5otcm8HJlBnR/yTWmP2hYO0aAqs=;
+ b=sWvzFqT8mg+sT7eiYnKFKkiUkNGrjJdmt+Tdlxf1XJoby/6mLu2DwO/Wc3FcDUQAnq
+ UDbF7qaEe1FbZhJhhmPEAPuwo4j+tYVnvAf6ozGbigOJI1Q5C/+WWiaJGhxD/hYSiHIJ
+ thKCZB9um7LxNkZ2xCGKk+FVNFBUPa1gvMWPFrM9u3EORDZILscH975wTenFK+IYzX/2
+ t3IXgVquf8jPgzNrKZyOv/RY3cEccH5nhAw8Yxpy/lxmVjzKgER1NwDBDuphrOtKIT/y
+ WlFUGrhIBn9Rfqu9iYmhfN5h4+OTz3HQIjGIAkPbMrjo3qdqPssSrN2/+xCU305nJ1hL
+ 7IoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vjs0IYIiS6QuzIjyHWXlqxE3HILbJT36/LgplOE/E+0=;
- b=AjJ76sP5icZCG1jxxFtNLCnci8BiA1wGsrD1HHJhgF4kbnDwZKErjtMpqzeU2WZIsT
- 3eUvnhJM2wQa9kkleGpD8ESHSaPcuRF5un8Q0AXgshWxARy3dwQnzrYjL6hdwPKvdq+q
- H+BaBE0pFErAmu4mDCgbZqH5xFdfRz8b/zpGoETzZFrvSDIhqLQjY12wwuRY3/LaS2BP
- kDycsT+3Zyc7xpR6nkCo9zabTPTY9jH4E3npDaTIpP5u2v/26pOn2FVpUa0Ci3joA4J6
- R3CrHDq6SPQtlrERBXLrovfEwHLW/z0qHUN61iIAJwMRRIoBhW12f8p7xC/Z5djjngBd
- 1gpA==
-X-Gm-Message-State: AOAM532fvAzt5MUezGNdtu3AzOjhSZI91QDQscgz/B8hmPzAQyI3EhnF
- sVeO5fH+oHdtIujF3J2uJEp/F3xl6xqlkJLT0Ss=
-X-Google-Smtp-Source: ABdhPJx4qSU/x79nt7WNRJ7ZTLx2fzgxSDj1BLPtIrWG+tkObCDVhz5Kwfx1Tj6Xsfyh9w8dv315HHELJ2/8/n5B7Hk=
-X-Received: by 2002:a9d:316:: with SMTP id 22mr2901397otv.210.1617201838000;
- Wed, 31 Mar 2021 07:43:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210330143429.1.I654d7aeb07f9cd0602752861d06f4c17e9a0ee17@changeid>
- <5d06fe48-bf97-8d23-36e7-8a509f0127ed@denx.de>
-In-Reply-To: <5d06fe48-bf97-8d23-36e7-8a509f0127ed@denx.de>
-From: Ramon Fried <rfried.dev@gmail.com>
-Date: Wed, 31 Mar 2021 17:43:46 +0300
-Message-ID: <CAGi-RU+jA-zSy9n7zMJ--AEVuV0gi=vr5Q=eMZhZ5c57AT2gPQ@mail.gmail.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH] net: dwc_eth_qos: cosmetic: remove unused
-	define EQOS_DESCRIPTOR_ALIGN
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=GaCAW5XLqvm44v5M5otcm8HJlBnR/yTWmP2hYO0aAqs=;
+ b=JCSV0/V6xPfgAKuWJeGVMcMoNXqIoMlrGoaHCoKXoClz3Q+4C03F3VydSL7qX7vEYb
+ mEwAWLBtnD5tzbRPnvZWCjhLy3Mg+wuCZ9aDv1dqxMzpf6ZTcYaQmn/lj0jvZcPQ6H85
+ n6qmn5Pk1bRH02lsI8CW5irVrWEhz98CFdR9aIkNKMYc0uh9jdRUVHB7QWaB5ADwR44C
+ FRbutt8eQMFXv2HXbE+und1vqMdnxUZJ1Gp6O3cHHEX5ztAPR7FNU1me5w0yQ5JM9WPM
+ wyzOPgMIDJtEOm2NY7cyp7V79UK/N7E8osXDUvQ+LhboYCq2VvSFtGi5C5psN9kOjywM
+ WLjA==
+X-Gm-Message-State: AOAM532ZE+pUVjgGfqMBABW83om2yLKiQ2sBbIY/PzfDF2EVIGPG/cR1
+ KwGh7iizlAcFKPxu5lEWYbU=
+X-Google-Smtp-Source: ABdhPJxJA7TxWW18tTc77PrB/cOjBDZGxKUUX8FYu20hIEo2CPtRx8cakjHe7ZQZL7U4RP0wDDxwIA==
+X-Received: by 2002:a17:90a:a503:: with SMTP id
+ a3mr12826127pjq.235.1617352967943; 
+ Fri, 02 Apr 2021 01:42:47 -0700 (PDT)
+Received: from fmin-OptiPlex-7060.nreal.work ([137.59.103.165])
+ by smtp.gmail.com with ESMTPSA id fs9sm7359708pjb.40.2021.04.02.01.42.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 02 Apr 2021 01:42:47 -0700 (PDT)
+From: dillon.minfei@gmail.com
+To: kever.yang@rock-chips.com, andre.przywara@arm.com, priyanka.jain@nxp.com,
+ jagan@amarulasolutions.com, narmstrong@baylibre.com, marex@denx.de,
+ aford173@gmail.com, ioana.ciornei@nxp.com, josip.kelecic@sartura.hr,
+ festevam@gmail.com, hs@denx.de, heiko.stuebner@theobroma-systems.com,
+ u-boot@lists.denx.de, patrice.chotard@foss.st.com,
+ patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com,
+ sjg@chromium.org
+Date: Fri,  2 Apr 2021 16:42:34 +0800
+Message-Id: <1617352961-20550-1-git-send-email-dillon.minfei@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: dillon min <dillon.minfei@gmail.com>
+Subject: [Uboot-stm32] [PATCH v4 0/7] Add rt-thread art-pi board support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,23 +71,95 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, Mar 30, 2021 at 5:12 PM Marek Vasut <marex@denx.de> wrote:
->
-> On 3/30/21 2:34 PM, Patrick Delaunay wrote:
-> > Remove the define EQOS_DESCRIPTOR_ALIGN unused since the
-> > commit 6f1e668d964e ("net: dwc_eth_qos: Pad descriptors to cacheline size")
-> >
-> > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->
-> Acked-by: Marek Vasut <marex@denx.de>
->
-> Thanks
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+From: dillon min <dillon.minfei@gmail.com>
+
+These patches aim to adds u-boot support on art-pi board.
+
+the board resources:
+- stm32h750xbh6 128k flash, 1024k sram
+- 32MiB sdram
+- 16MiB spi flash
+- 8MiB qspi flash
+- onboard wifi, bt, fm
+
+the detail board information can be found at:
+https://art-pi.gitee.io/website/
+
+---
+changes in v4:
+- sync with kernel side device tree submit
+- use strlcpy in stm32_sdram.c
+- update CONFIG_BOOTARGS, remove rdinit=/linuxrc, to use kernel's devtmpfs
+- remove unused st,stm32h750-pinctrl from patch v3
+
+changes in v3:
+two mirror changes in [PATCH v3 2/6], others same to version 2
+- remove "for STMicroelectronics." from arch/arm/dts/stm32h750-pinctrl.dtsi
+- correct misspelling parameters
+you can found detail patch v2 information at link:
+https://patchwork.ozlabs.org/project/uboot/list/?series=236009
+
+changes in v2:
+- fix wrong author/date in previous submit
+- sync with kernel device tree files
+- add st,stm32h750-pinctrl in doc and pinctrl driver
+
+*** BLURB HERE ***
+
+dillon min (7):
+  ARM: dts: stm32: split sdram pin & timing parameter into specific
+    board dts
+  ARM: dts: stm32: introduce stm32h7-pinctrl.dtsi to support stm32h750
+  ARM: dts: stm32: add new instances for stm32h743 MCU
+  ARM: dts: stm32: fix i2c node typo in stm32h743, update dmamux1
+    register
+  ARM: dts: stm32: add support for art-pi board based on stm32h750xbh6
+  ram: stm32: fix strsep failed on read only memory
+  board: Add rt-thread art-pi board support
+
+ arch/arm/dts/Makefile                        |   3 +-
+ arch/arm/dts/stm32h7-pinctrl.dtsi            | 274 ++++++++++++++++++++++++
+ arch/arm/dts/stm32h7-u-boot.dtsi             | 100 +--------
+ arch/arm/dts/stm32h743-pinctrl.dtsi          | 306 ---------------------------
+ arch/arm/dts/stm32h743.dtsi                  | 178 +++++++++++++++-
+ arch/arm/dts/stm32h743i-disco-u-boot.dtsi    |  98 +++++++++
+ arch/arm/dts/stm32h743i-disco.dts            |   2 +-
+ arch/arm/dts/stm32h743i-eval-u-boot.dtsi     |  98 +++++++++
+ arch/arm/dts/stm32h743i-eval.dts             |   2 +-
+ arch/arm/dts/stm32h750.dtsi                  |   5 +
+ arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi   |  81 +++++++
+ arch/arm/dts/stm32h750i-art-pi.dts           | 188 ++++++++++++++++
+ arch/arm/mach-stm32/stm32h7/Kconfig          |   4 +
+ board/st/stm32h750-art-pi/Kconfig            |  19 ++
+ board/st/stm32h750-art-pi/MAINTAINERS        |   7 +
+ board/st/stm32h750-art-pi/Makefile           |   6 +
+ board/st/stm32h750-art-pi/stm32h750-art-pi.c |  58 +++++
+ configs/stm32h750-art-pi_defconfig           |  51 +++++
+ drivers/ram/stm32_sdram.c                    |   3 +
+ include/configs/stm32h750-art-pi.h           |  48 +++++
+ include/dt-bindings/memory/stm32-sdram.h     |   2 +
+ 21 files changed, 1126 insertions(+), 407 deletions(-)
+ create mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
+ delete mode 100644 arch/arm/dts/stm32h743-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32h750.dtsi
+ create mode 100644 arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
+ create mode 100644 board/st/stm32h750-art-pi/Kconfig
+ create mode 100644 board/st/stm32h750-art-pi/MAINTAINERS
+ create mode 100644 board/st/stm32h750-art-pi/Makefile
+ create mode 100644 board/st/stm32h750-art-pi/stm32h750-art-pi.c
+ create mode 100644 configs/stm32h750-art-pi_defconfig
+ create mode 100644 include/configs/stm32h750-art-pi.h
+
+-- 
+2.7.4
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

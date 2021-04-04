@@ -2,60 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85DAB352A77
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Apr 2021 14:05:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09637354D6C
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Apr 2021 09:10:11 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 45A0BC58D60;
-	Fri,  2 Apr 2021 12:05:45 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D3F3C56639
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AE4DEC57B69;
+	Tue,  6 Apr 2021 07:10:10 +0000 (UTC)
+Received: from smtpcmd0757.aruba.it (smtpcmd0757.aruba.it [62.149.156.57])
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2C09AC5718B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Apr 2021 12:05:42 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 132C0USk003019; Fri, 2 Apr 2021 14:05:39 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=Hi9oMT1OAOIUV1aa+Krsbe4JP4Y8CL7+4F+0sdVqMYM=;
- b=P3VRvQNQMkCgCmdQ/iuiRy/Xa8iXbBV1Y0+i8lK38OwA1gEFBZ0VWT8xqikQY7+67fj4
- 81EWifNy75hx9Jw6aNCrQjKBlXqXOnY9UWY3Tlaio+FKrIuyn+q6lnSCJzjNhWwXaz7G
- /oBqE/Pk3kEhUFWmkkZeF/QWTkVPtz+TCJWrksktyb1kcQs922arUSD3ERAQK+19VT57
- LxFxqxGjkw5LVyr92wdagJRdya3ylTBzSbAszVImDBSRWtXRoeVvsCGNKcFSj2GHIcoX
- fDWUyJlP2f6DQCvfelWX4jIxMEV2PLZLlno1RNlZVXgPM4e7C1NUZnhBlyNbnNbTD5Qz rw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 37p0d60wn8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 02 Apr 2021 14:05:39 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0A521100034;
- Fri,  2 Apr 2021 14:05:38 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EF83E242331;
- Fri,  2 Apr 2021 14:05:37 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 2 Apr 2021 14:05:37
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 2 Apr 2021 14:05:17 +0200
-Message-ID: <20210402140511.1.I81e79d4b32305a46b797f1ce405c200185a0647e@changeid>
-X-Mailer: git-send-email 2.17.1
+ Sun,  4 Apr 2021 18:21:56 +0000 (UTC)
+Received: from ubuntu.localdomain ([146.241.148.6])
+ by Aruba Outgoing Smtp  with ESMTPSA
+ id T7NiljuYb3IXUT7NiloHAb; Sun, 04 Apr 2021 20:21:56 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
+ t=1617560516; bh=9Gb2xwkHplzCHiDrpjx3vrXQib7kAZvT4QCl7QwJJFM=;
+ h=From:To:Subject:Date:MIME-Version;
+ b=U2AHW8uLYqo/qYStezY/GWXbK0FAS8YFUdctZt3M8/c/tFpzvqqelajFoF9qhDcxd
+ HbkIqIe1qyLj5ucL/W8nOeXIYmd70Cf+8aOOX2+6AjsjJiZPWnWeHWpVNJ9E0davT/
+ pwKHDca2BtqCHyMMhnuZY4QlybAqh0GluY4lFfxvZsII53EBB7fqf3GMUzLD4KIZi5
+ WgwAffXf0+oziUh9PKId92G4cRUz+AT7rDULO2uP3xKu6h5TYwndtrODYsZFDNJhu1
+ ENnT2vZlNd8nwJxNON9dH0UiBG1lsoqNzkI8hS/pn3AhxQTOGJu5CuFJO/8QJArPXB
+ tPYHHYCfU3mDw==
+From: Giulio Benetti <giulio.benetti@benettiengineering.com>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Vikas Manocha <vikas.manocha@st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Sun,  4 Apr 2021 20:21:33 +0200
+Message-Id: <20210404182135.1243077-1-giulio.benetti@benettiengineering.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
- definitions=2021-04-02_07:2021-04-01,
- 2021-04-02 signatures=0
-Cc: Simon Glass <sjg@chromium.org>, Patrick
- Delaunay <patrick.delaunay@st.com>, U-Boot
- STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp: stm32prog: add FIP header support
+X-CMAE-Envelope: MS4wfAEknoBdOA0iDjOXJ5J7yvgd3hfX4OLKhG4koBcxJoxP1KHH4UsHU1Ds9QEnmFN+xCxAxtFXNp6RGy6QVsA+04sx5xuKu3JyfcVLnYDrFjZnPsEm/4qD
+ of7DF5J/jnU6YSPHxtAsOmbzkzRyi2NlGFE99d2c8ZhlrCS7YUkIxnJQnmR2G8Zq74OGLgQuz+2vHQf2+boxxHYDHU2AzWOCxmw0Faw+AD7VAMJx+0yUlhoY
+ 4U8zLmLwLCl+Mn0lXfBlQYn3cBZWMwWSmmslNI+zKmRWIg8mhsfvJIKUqoovq3FyljwAms/Bh+hev9Pop9xTAQ7PspGZG1VagSyfrmuR33gmtlLfOT9V4eef
+ dXwK5mbDbS5Rp/50O4nKZ/W04euqnK0kKBODTe2SbseRENt9TzeW0n32s21qWCWuiGDaHoO9rWCoOyjGDBehJaShEYxHLNIarZsOKfavpXMJ7mSiD0AIeWTB
+ LsMJKxLScVgbnBLFk4pfVNr1fh1tToSSa81ClQ==
+X-Mailman-Approved-At: Tue, 06 Apr 2021 07:10:08 +0000
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: [Uboot-stm32] [PATCH 1/3] board: freescale: imxrt1020-evk: fix
+	console is not enabled while init dram
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,257 +59,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of TF-A FIP header in command stm32prog for all the boot
-partition and not only the STM32IMAGE.
+While initializing dram in spl_dram_init(), mdelay() is called that in
+order calls get_ticks() that  verifies if timer exists, if doesn't, it
+throws a panic(), but since preloader_console_init() has still not been
+called those panic()s will fail. This doesn't help debugging, so let's
+setup console before calling spl_dram_init() by moving it after
+spl_dram_init().
 
-This patch is a preliminary patch to support FIP as second boot stage
-after TF-A BL2 when CONFIG_TFABOOT is activated for trusted boot chain.
-
-The FIP is archive binary loaded by TF-A BL2, which contains the secure OS
-= OP-TEE and the non secure firmware and device tree = U-Boot.
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
 ---
+ board/freescale/imxrt1020-evk/imxrt1020-evk.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .../cmd_stm32prog/cmd_stm32prog.c             | 19 +++---
- .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 59 +++++++++++++------
- .../mach-stm32mp/cmd_stm32prog/stm32prog.h    | 12 +++-
- .../cmd_stm32prog/stm32prog_serial.c          | 11 ++--
- 4 files changed, 64 insertions(+), 37 deletions(-)
-
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index a7e2861764..e36501a86b 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -73,15 +73,16 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		size = simple_strtoul(argv[4], NULL, 16);
+diff --git a/board/freescale/imxrt1020-evk/imxrt1020-evk.c b/board/freescale/imxrt1020-evk/imxrt1020-evk.c
+index 35241acd22..479e66bddc 100644
+--- a/board/freescale/imxrt1020-evk/imxrt1020-evk.c
++++ b/board/freescale/imxrt1020-evk/imxrt1020-evk.c
+@@ -60,8 +60,8 @@ int spl_dram_init(void)
  
- 	/* check STM32IMAGE presence */
--	if (size == 0 &&
--	    !stm32prog_header_check((struct raw_header_s *)addr, &header)) {
--		size = header.image_length + BL_HEADER_SIZE;
--
--		/* uImage detected in STM32IMAGE, execute the script */
--		if (IMAGE_FORMAT_LEGACY ==
--		    genimg_get_format((void *)(addr + BL_HEADER_SIZE)))
--			return image_source_script(addr + BL_HEADER_SIZE,
--						   "script@1");
-+	if (size == 0) {
-+		stm32prog_header_check((struct raw_header_s *)addr, &header);
-+		if (header.type == HEADER_STM32IMAGE) {
-+			size = header.image_length + BL_HEADER_SIZE;
-+
-+			/* uImage detected in STM32IMAGE, execute the script */
-+			if (IMAGE_FORMAT_LEGACY ==
-+			    genimg_get_format((void *)(addr + BL_HEADER_SIZE)))
-+				return image_source_script(addr + BL_HEADER_SIZE, "script@1");
-+		}
- 	}
- 
- 	if (IS_ENABLED(CONFIG_DM_VIDEO))
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index d0518d1223..4c4d8a7a69 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -60,8 +60,6 @@ static const efi_guid_t uuid_mmc[3] = {
- 	ROOTFS_MMC2_UUID
- };
- 
--DECLARE_GLOBAL_DATA_PTR;
--
- /* order of column in flash layout file */
- enum stm32prog_col_t {
- 	COL_OPTION,
-@@ -73,6 +71,16 @@ enum stm32prog_col_t {
- 	COL_NB_STM32
- };
- 
-+#define FIP_TOC_HEADER_NAME	0xAA640001
-+
-+struct fip_toc_header {
-+	u32	name;
-+	u32	serial_number;
-+	u64	flags;
-+};
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
- /* partition handling routines : CONFIG_CMD_MTDPARTS */
- int mtdparts_init(void);
- int find_dev_and_part(const char *id, struct mtd_device **dev,
-@@ -88,46 +96,57 @@ char *stm32prog_get_error(struct stm32prog_data *data)
- 	return data->error;
- }
- 
--u8 stm32prog_header_check(struct raw_header_s *raw_header,
--			  struct image_header_s *header)
-+static bool stm32prog_is_fip_header(struct fip_toc_header *header)
-+{
-+	return (header->name == FIP_TOC_HEADER_NAME) && header->serial_number;
-+}
-+
-+void stm32prog_header_check(struct raw_header_s *raw_header,
-+			    struct image_header_s *header)
+ void spl_board_init(void)
  {
- 	unsigned int i;
- 
--	header->present = 0;
-+	if (!raw_header || !header) {
-+		log_debug("%s:no header data\n", __func__);
-+		return;
-+	}
-+
-+	header->type = HEADER_NONE;
- 	header->image_checksum = 0x0;
- 	header->image_length = 0x0;
- 
--	if (!raw_header || !header) {
--		log_debug("%s:no header data\n", __func__);
--		return -1;
-+	if (stm32prog_is_fip_header((struct fip_toc_header *)raw_header)) {
-+		header->type = HEADER_FIP;
-+		return;
- 	}
-+
- 	if (raw_header->magic_number !=
- 		(('S' << 0) | ('T' << 8) | ('M' << 16) | (0x32 << 24))) {
- 		log_debug("%s:invalid magic number : 0x%x\n",
- 			  __func__, raw_header->magic_number);
--		return -2;
-+		return;
- 	}
- 	/* only header v1.0 supported */
- 	if (raw_header->header_version != 0x00010000) {
- 		log_debug("%s:invalid header version : 0x%x\n",
- 			  __func__, raw_header->header_version);
--		return -3;
-+		return;
- 	}
- 	if (raw_header->reserved1 != 0x0 || raw_header->reserved2) {
- 		log_debug("%s:invalid reserved field\n", __func__);
--		return -4;
-+		return;
- 	}
- 	for (i = 0; i < (sizeof(raw_header->padding) / 4); i++) {
- 		if (raw_header->padding[i] != 0) {
- 			log_debug("%s:invalid padding field\n", __func__);
--			return -5;
-+			return;
- 		}
- 	}
--	header->present = 1;
-+	header->type = HEADER_STM32IMAGE;
- 	header->image_checksum = le32_to_cpu(raw_header->image_checksum);
- 	header->image_length = le32_to_cpu(raw_header->image_length);
- 
--	return 0;
-+	return;
+-	spl_dram_init();
+ 	preloader_console_init();
++	spl_dram_init();
+ 	arch_cpu_init(); /* to configure mpu for sdram rw permissions */
  }
  
- static u32 stm32prog_header_checksum(u32 addr, struct image_header_s *header)
-@@ -356,8 +375,8 @@ static int parse_flash_layout(struct stm32prog_data *data,
- 	data->part_nb = 0;
- 
- 	/* check if STM32image is detected */
--	if (!stm32prog_header_check((struct raw_header_s *)addr,
--				    &data->header)) {
-+	stm32prog_header_check((struct raw_header_s *)addr, &data->header);
-+	if (data->header.type == HEADER_STM32IMAGE) {
- 		u32 checksum;
- 
- 		addr = addr + BL_HEADER_SIZE;
-@@ -1410,7 +1429,7 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
- 
- 	if (part->target != STM32PROG_NAND &&
- 	    part->target != STM32PROG_SPI_NAND)
--		return -1;
-+		return -EINVAL;
- 
- 	dfu = dfu_get_entity(part->alt_id);
- 
-@@ -1420,8 +1439,10 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
- 	ret = dfu->read_medium(dfu, 0, (void *)&raw_header, &size);
- 	if (ret)
- 		return ret;
--	if (stm32prog_header_check(&raw_header, &header))
--		return -1;
-+
-+	stm32prog_header_check(&raw_header, &header);
-+	if (header.type != HEADER_STM32IMAGE)
-+		return -ENOENT;
- 
- 	/* read header + payload */
- 	size = header.image_length + BL_HEADER_SIZE;
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index 18af99c78b..581b10d0ac 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -37,8 +37,14 @@ enum stm32prog_link_t {
- 	LINK_UNDEFINED,
- };
- 
-+enum stm32prog_header_t {
-+	HEADER_NONE,
-+	HEADER_STM32IMAGE,
-+	HEADER_FIP,
-+};
-+
- struct image_header_s {
--	bool	present;
-+	enum stm32prog_header_t type;
- 	u32	image_checksum;
- 	u32	image_length;
- };
-@@ -160,8 +166,8 @@ int stm32prog_pmic_read(struct stm32prog_data *data, u32 offset,
- int stm32prog_pmic_start(struct stm32prog_data *data);
- 
- /* generic part*/
--u8 stm32prog_header_check(struct raw_header_s *raw_header,
--			  struct image_header_s *header);
-+void stm32prog_header_check(struct raw_header_s *raw_header,
-+			    struct image_header_s *header);
- int stm32prog_dfu_init(struct stm32prog_data *data);
- void stm32prog_next_phase(struct stm32prog_data *data);
- void stm32prog_do_reset(struct stm32prog_data *data);
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
-index a51e5e3ec8..2b92e3b149 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
-@@ -309,11 +309,10 @@ static u8 stm32prog_header(struct stm32prog_data *data)
- 	/* force cleanup to avoid issue with previous read */
- 	dfu_transaction_cleanup(dfu_entity);
- 
--	ret = stm32prog_header_check(data->header_data,
--				     &data->header);
-+	stm32prog_header_check(data->header_data, &data->header);
- 
--	/* no header : max size is partition size */
--	if (ret) {
-+	/* no stm32 image header : max size is partition size */
-+	if (data->header.type != HEADER_STM32IMAGE) {
- 		dfu_entity->get_medium_size(dfu_entity, &size);
- 		data->header.image_length = size;
- 	}
-@@ -389,7 +388,7 @@ static u8 stm32prog_start(struct stm32prog_data *data, u32 address)
- 		data->dfu_seq = 0;
- 
- 		printf("\n  received length = 0x%x\n", data->cursor);
--		if (data->header.present) {
-+		if (data->header.type == HEADER_STM32IMAGE) {
- 			if (data->cursor !=
- 			    (data->header.image_length + BL_HEADER_SIZE)) {
- 				stm32prog_err("transmission interrupted (length=0x%x expected=0x%x)",
-@@ -789,7 +788,7 @@ static void download_command(struct stm32prog_data *data)
- 		}
- 	}
- 
--	if (image_header->present) {
-+	if (data->header.type == HEADER_STM32IMAGE) {
- 		if (data->cursor <= BL_HEADER_SIZE)
- 			goto end;
- 		/* compute checksum on payload */
 -- 
-2.17.1
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

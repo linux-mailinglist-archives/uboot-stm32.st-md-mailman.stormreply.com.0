@@ -2,49 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A4C8354D6E
-	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Apr 2021 09:10:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA9D8354DD1
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Apr 2021 09:27:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BB8A7C57B6B;
-	Tue,  6 Apr 2021 07:10:10 +0000 (UTC)
-Received: from smtpcmd0757.aruba.it (smtpcmd0757.aruba.it [62.149.156.57])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2DBE2C5719D
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6555EC57B69;
+	Tue,  6 Apr 2021 07:27:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 77AC8C57B5E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  4 Apr 2021 18:21:57 +0000 (UTC)
-Received: from ubuntu.localdomain ([146.241.148.6])
- by Aruba Outgoing Smtp  with ESMTPSA
- id T7NiljuYb3IXUT7NkloHC3; Sun, 04 Apr 2021 20:21:57 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=aruba.it; s=a1;
- t=1617560517; bh=d/DW1mjBqlrI2UH7KzkVVClt5I4os5c06hZGjrDd1/k=;
- h=From:To:Subject:Date:MIME-Version;
- b=e6JW9yqlrS9xD3nR25W5ZwnGS3uPc4MeBtMMPN0Q2XO1qa4G5SETLHjUfHL/xXNH1
- BopX/j1ihsSrGhQLsr3VT+/QA9R2hMeuulwirH/YznEBakxMWhnSEIau7UfonTeML1
- dcjTGUz8IbMs43Lzp/40FrjOM4xnfRem8evwe8YWTHBSEjd9Ft7E1Uo6gskjGRnldm
- ootpq8IVHQBRMQZpkBw7/WUncVdp+fpgWGHA/KFTRBvU0HYjOpHNY7ZZcmP2AOUk6D
- lVuTiQNuROYFboQJc6Yss6Nm5tECPs48uxm8U6fV0NbkDbShv3b8RESWYzJnYU2jxa
- KX946uNZ7rVEw==
-From: Giulio Benetti <giulio.benetti@benettiengineering.com>
-To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Vikas Manocha <vikas.manocha@st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Sun,  4 Apr 2021 20:21:35 +0200
-Message-Id: <20210404182135.1243077-3-giulio.benetti@benettiengineering.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210404182135.1243077-1-giulio.benetti@benettiengineering.com>
-References: <20210404182135.1243077-1-giulio.benetti@benettiengineering.com>
+ Tue,  6 Apr 2021 07:27:44 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 1367R8fM025846; Tue, 6 Apr 2021 09:27:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=twJeGcRfOG/R56jvMU4XppOJmdL953zpmy1DYcCnk0Q=;
+ b=CRaOhMM7mE0N3fxVUZnjOieE5qjyS78ybfDEZQNpSDx2+O7qvtwiY1NWrxs+7JF27iEv
+ hiF/3LMdjQy/ab7kT4BW8iY8Xz9gbRSpFOgt57bBB+T8WUMaGjlBdvlFOb6vc7YiN3hX
+ ZJI8y7fFanpQI8UzzuJyruFw18D59OFztgZpUsrKtJyZNo9LzO5U90eaH94/3Oq7LyBM
+ Ch++muo1tKbRzbZBSdw9TY3orjIEP29Z5eitaLr4K8Lls9ohIZeE5oNmiqNojTefzyEn
+ w/cIpWKFej2ODycr0Jq+Q7DMCDzfv9vamhlk/LMshu/eK4rsJekj5tkFpqFiff/UoUuK JA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 37rjf009ph-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 06 Apr 2021 09:27:43 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BF0EC10002A;
+ Tue,  6 Apr 2021 09:27:42 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A4D7221E68E;
+ Tue,  6 Apr 2021 09:27:42 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 6 Apr 2021 09:27:42
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 6 Apr 2021 09:27:38 +0200
+Message-ID: <20210406092731.1.Iad88039569017850ed77dfae267b261f8efc8ad7@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-CMAE-Envelope: MS4wfHVjqL4z60dxWLpMtRZuHDOV7aVQOK95Qnj8rYsPvsscJyLsXPGZT5HYi68vpnWtaJ6VSu6ElrISNMMAuc00qzR5kBlyWsqML/hXCkztUtt8SYDvlCan
- te1OIuz7zTLsYiCLvDa9mUdiMIPfIsx6ppDjprVR1h9XIznVypod7A3YoxQFmVORDBlMMUs9TdtCHriVJGgzMfRGnMmsYzW2ckE43K4Y+4CYgSVDOl5n9XD1
- +maUkgYCgOisGGhWeN+1jbwEVIJ73amjBOg7YHwe3gHMTzmMWOMR5blNjQ5XbfoUwpNe4nW5dyUcz7e01rGEjAmzSBeZ9Xof6BLoJUU0ILDBYOVz0m1jhorF
- 4pVxAS6927P6uHsTOTWDTOvdXJ/aWUyvuRmMfliYWlng3bVHSp7VgE6IFgCq+YBpdG9XRwZcGxuyH1Tids4IGdGfWH9X+nUTJe2GYjEQOi/OKNwXjZ8c/4Sp
- hBVc9M4NHqCaHC2guPT+VLWy8+wIr9Lu6wRGyA==
-X-Mailman-Approved-At: Tue, 06 Apr 2021 07:10:08 +0000
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Subject: [Uboot-stm32] [PATCH 3/3] board: st: stm32f746-disco: fix console
-	is not enabled while init dram
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
+ definitions=2021-04-06_01:2021-04-01,
+ 2021-04-06 signatures=0
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] stm32mp: update uart number in trace of
+	serial device not found
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -61,34 +72,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-While initializing dram in spl_dram_init(), mdelay() is called that in
-order calls get_ticks() that  verifies if timer exists, if doesn't, it
-throws a panic(), but since preloader_console_init() has still not been
-called those panic()s will fail. This doesn't help debugging, so let's
-setup console before calling spl_dram_init() by moving it after
-spl_dram_init().
+Align the uart number in the trace of setup_boot_mode() with the name of
+the uart/usart device (start at 1) and not with the instance value
+(start at 0), i.e. the serial device sequence number and the index in
+serial_addr[].
 
-Signed-off-by: Giulio Benetti <giulio.benetti@benettiengineering.com>
+Fixes: f49eb16c17e2c ("stm32mp: stm32prog: replace alias by serial
+device sequence number")
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
- board/st/stm32f746-disco/stm32f746-disco.c | 2 +-
+
+ arch/arm/mach-stm32mp/cpu.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-index 143cc6e1ea..efa38a0e26 100644
---- a/board/st/stm32f746-disco/stm32f746-disco.c
-+++ b/board/st/stm32f746-disco/stm32f746-disco.c
-@@ -69,8 +69,8 @@ int spl_dram_init(void)
- }
- void spl_board_init(void)
- {
--	spl_dram_init();
- 	preloader_console_init();
-+	spl_dram_init();
- 	arch_cpu_init(); /* to configure mpu for sdram rw permissions */
- }
- u32 spl_boot_device(void)
+diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+index 897ec13ad8..2f05c5e91b 100644
+--- a/arch/arm/mach-stm32mp/cpu.c
++++ b/arch/arm/mach-stm32mp/cpu.c
+@@ -503,7 +503,7 @@ static void setup_boot_mode(void)
+ 				gd->flags &= ~(GD_FLG_SILENT |
+ 					       GD_FLG_DISABLE_CONSOLE);
+ 			printf("uart%d = %s not found in device tree!\n",
+-			       instance, cmd);
++			       instance + 1, cmd);
+ 			break;
+ 		}
+ 		sprintf(cmd, "%d", dev_seq(dev));
 -- 
-2.25.1
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

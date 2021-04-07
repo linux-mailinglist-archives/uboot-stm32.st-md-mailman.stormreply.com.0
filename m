@@ -2,62 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9DCE35612B
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Apr 2021 04:01:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66ABF356596
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Apr 2021 09:40:21 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AEF91C32E8F;
-	Wed,  7 Apr 2021 02:01:11 +0000 (UTC)
-Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
- [209.85.166.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 12600C56639;
+	Wed,  7 Apr 2021 07:40:21 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ADE6CC36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E1AD6C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Apr 2021 02:01:10 +0000 (UTC)
-Received: by mail-io1-f47.google.com with SMTP id e8so17694198iok.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 06 Apr 2021 19:01:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
- bh=tjbIScF4Kv5KP7ZjSs9UqPUEiBCkJChzANYf1l0U2D4=;
- b=ok1tjc6wxdp/+qZZjFLH2X1bHEzfJmjuGOAIb/zGD0r0XQF++URoLzr6GYHFP9ymwk
- ca5S2EBUfog/RirpOSbm+oy9fBaB7fhB2YFPv9RypA+EwzZEAdN7HHwQRRptKcxApVHT
- MWyy3xbnL/niw5AZ9AqfFBLfTV5msLeWgBUKTqvt9GS2ViMG3MocYz/sADoHlAaS5U91
- I7mY8Fy86knUbs6Q5OuqrSQZj2sF6hoDihhNRBFTYdYsFRqoDNpWUZ8pubAiCwxpEnSl
- e2ZnJ7zfeldLqN217hoSnfc8xBEB8H5YVGFq3xx7G0Lu0XHtdtTPH0YFQKjm5iQhxY7O
- iV0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to;
- bh=tjbIScF4Kv5KP7ZjSs9UqPUEiBCkJChzANYf1l0U2D4=;
- b=ULSSb0NsAgk8+EMbAvjZ/0RktVNwZdrx1puqPjwzb/p2S0qzpaafRmDpP8NfiWsXYX
- g9aYK2NwitfTQX0Ut9e7PRhCgVY2+CN6sHmeo3rtSOClCGkOzR9b5FqAOb5gza/YAkX6
- vJ8066qW/9y5nTWt5+DRcWilBOwk+9EqBStFWHbZnlSl+G6HRmLiSaMQZDSyXKc8pn33
- Mn+Y3fisSuw/0ELJtXd4dbKXtBVvZlO/k1DKoQQERsGk7nKUOXJOCTXwaOBnoKTuvTZI
- y0NoP5gjEihO/r9loj+DKJ8AJRX5nD+lgLjnGaExiXeSfxRkNQ6sFr7gQtwicip0gg9y
- b8CQ==
-X-Gm-Message-State: AOAM5318YgswBeQ81mfc2a7cx0yP3l11U6RjCiPG+9LXM8/1x3oKUDYI
- WplHOxoyKfEnf7Eb+FMmZhUviLr9Sp5C7We6czg=
-X-Google-Smtp-Source: ABdhPJxbXUpu94bpnVBkSHXDhPcDwfcP516lW16w+9Hg21yex3BYzr7rWSZmBM0a1Jp79FPl4HTQW54iea2vLP+YoHc=
-X-Received: by 2002:a05:6602:280f:: with SMTP id
- d15mr606407ioe.127.1617760869498; 
- Tue, 06 Apr 2021 19:01:09 -0700 (PDT)
+ Wed,  7 Apr 2021 07:40:18 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 1377bIjP026031; Wed, 7 Apr 2021 09:40:09 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : subject : to
+ : cc : references : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=oTGZsW8KKz7K/d2aXPDXYF6Mmf/EjL1aCpKlDbz16iE=;
+ b=q1vr/2pmR4EEHRBJTYgxVjdvzuBmgkXs4DVxR2wXj4OhIexABXNuonF/K60VoQjRynBS
+ S1sVjcdlVRtJtGxuYvKQHMxX3Q34T9i1Z39K1W1uNZa6aLz6oOP1wGXhzf+bP7g0n+Yz
+ NXNJsn7iHSepzDAExJCYTK2QeIyMNXh/mIKmZSGFc5Bq9LT6SmbABVPTf90aapl6EtYp
+ VLpCy26FxY/N0h4Em+HVT39RbzmNH9m+P0WODlNkrNtv7p7i2IVY9A0roXg6OcVc48Q3
+ FDOUSm/tJR+TiJgGHhnEuMUWYleCrfEuJhmzDrg3tXk9gaCgcW4x0DmGPNxmcTqPVEoo zw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 37rvaab6eq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 07 Apr 2021 09:40:09 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D7B2C10002A;
+ Wed,  7 Apr 2021 09:40:08 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BBA9521A8BA;
+ Wed,  7 Apr 2021 09:40:08 +0200 (CEST)
+Received: from lmecxl0994.lme.st.com (10.75.127.45) by SFHDAG2NODE3.st.com
+ (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 7 Apr
+ 2021 09:40:07 +0200
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+To: Horatiu Vultur <horatiu.vultur@microchip.com>
+References: <20210406093755.1.I94f875f95a48be081d332f9a2c447c0b78955e75@changeid>
+ <20210406091456.r724uooghf7mo65p@soft-dev3-1.localhost>
+Message-ID: <4f9babe6-36cf-a321-deeb-fca0a8e541e7@foss.st.com>
+Date: Wed, 7 Apr 2021 09:40:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <1617352961-20550-1-git-send-email-dillon.minfei@gmail.com>
-In-Reply-To: <1617352961-20550-1-git-send-email-dillon.minfei@gmail.com>
-From: dillon min <dillon.minfei@gmail.com>
-Date: Wed, 7 Apr 2021 10:00:33 +0800
-Message-ID: <CAL9mu0J04K3rhYq3HuKxAnGTOg-sfA+DKETtztP2i+KfKHiH-g@mail.gmail.com>
-To: kever.yang@rock-chips.com, andre.przywara@arm.com, priyanka.jain@nxp.com, 
- Jagan Teki <jagan@amarulasolutions.com>, narmstrong@baylibre.com,
- marex@denx.de, 
- aford173@gmail.com, ioana.ciornei@nxp.com, josip.kelecic@sartura.hr, 
- festevam@gmail.com, hs@denx.de, heiko.stuebner@theobroma-systems.com, 
- u-boot@lists.denx.de, Patrice CHOTARD <patrice.chotard@foss.st.com>, 
- patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com, 
- sjg@chromium.org
-Subject: Re: [Uboot-stm32] [PATCH v4 0/7] Add rt-thread art-pi board support
+In-Reply-To: <20210406091456.r724uooghf7mo65p@soft-dev3-1.localhost>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369, 18.0.761
+ definitions=2021-04-07_04:2021-04-06,
+ 2021-04-07 signatures=0
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Ramon Fried <rfried.dev@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Etienne Carriere <etienne.carriere@linaro.org>,
+ Lars Povlsen <lars.povlsen@microchip.com>
+Subject: Re: [Uboot-stm32] [PATCH] dm: core: Add address translation in
+	fdt_get_resource
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,103 +77,24 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi All,
-
-Just a gentle ping, thanks.
-
-Regards
-
-On Fri, Apr 2, 2021 at 4:42 PM <dillon.minfei@gmail.com> wrote:
->
-> From: dillon min <dillon.minfei@gmail.com>
->
-> These patches aim to adds u-boot support on art-pi board.
->
-> the board resources:
-> - stm32h750xbh6 128k flash, 1024k sram
-> - 32MiB sdram
-> - 16MiB spi flash
-> - 8MiB qspi flash
-> - onboard wifi, bt, fm
->
-> the detail board information can be found at:
-> https://art-pi.gitee.io/website/
->
-> ---
-> changes in v4:
-> - sync with kernel side device tree submit
-> - use strlcpy in stm32_sdram.c
-> - update CONFIG_BOOTARGS, remove rdinit=/linuxrc, to use kernel's devtmpfs
-> - remove unused st,stm32h750-pinctrl from patch v3
->
-> changes in v3:
-> two mirror changes in [PATCH v3 2/6], others same to version 2
-> - remove "for STMicroelectronics." from arch/arm/dts/stm32h750-pinctrl.dtsi
-> - correct misspelling parameters
-> you can found detail patch v2 information at link:
-> https://patchwork.ozlabs.org/project/uboot/list/?series=236009
->
-> changes in v2:
-> - fix wrong author/date in previous submit
-> - sync with kernel device tree files
-> - add st,stm32h750-pinctrl in doc and pinctrl driver
->
-> *** BLURB HERE ***
->
-> dillon min (7):
->   ARM: dts: stm32: split sdram pin & timing parameter into specific
->     board dts
->   ARM: dts: stm32: introduce stm32h7-pinctrl.dtsi to support stm32h750
->   ARM: dts: stm32: add new instances for stm32h743 MCU
->   ARM: dts: stm32: fix i2c node typo in stm32h743, update dmamux1
->     register
->   ARM: dts: stm32: add support for art-pi board based on stm32h750xbh6
->   ram: stm32: fix strsep failed on read only memory
->   board: Add rt-thread art-pi board support
->
->  arch/arm/dts/Makefile                        |   3 +-
->  arch/arm/dts/stm32h7-pinctrl.dtsi            | 274 ++++++++++++++++++++++++
->  arch/arm/dts/stm32h7-u-boot.dtsi             | 100 +--------
->  arch/arm/dts/stm32h743-pinctrl.dtsi          | 306 ---------------------------
->  arch/arm/dts/stm32h743.dtsi                  | 178 +++++++++++++++-
->  arch/arm/dts/stm32h743i-disco-u-boot.dtsi    |  98 +++++++++
->  arch/arm/dts/stm32h743i-disco.dts            |   2 +-
->  arch/arm/dts/stm32h743i-eval-u-boot.dtsi     |  98 +++++++++
->  arch/arm/dts/stm32h743i-eval.dts             |   2 +-
->  arch/arm/dts/stm32h750.dtsi                  |   5 +
->  arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi   |  81 +++++++
->  arch/arm/dts/stm32h750i-art-pi.dts           | 188 ++++++++++++++++
->  arch/arm/mach-stm32/stm32h7/Kconfig          |   4 +
->  board/st/stm32h750-art-pi/Kconfig            |  19 ++
->  board/st/stm32h750-art-pi/MAINTAINERS        |   7 +
->  board/st/stm32h750-art-pi/Makefile           |   6 +
->  board/st/stm32h750-art-pi/stm32h750-art-pi.c |  58 +++++
->  configs/stm32h750-art-pi_defconfig           |  51 +++++
->  drivers/ram/stm32_sdram.c                    |   3 +
->  include/configs/stm32h750-art-pi.h           |  48 +++++
->  include/dt-bindings/memory/stm32-sdram.h     |   2 +
->  21 files changed, 1126 insertions(+), 407 deletions(-)
->  create mode 100644 arch/arm/dts/stm32h7-pinctrl.dtsi
->  delete mode 100644 arch/arm/dts/stm32h743-pinctrl.dtsi
->  create mode 100644 arch/arm/dts/stm32h750.dtsi
->  create mode 100644 arch/arm/dts/stm32h750i-art-pi-u-boot.dtsi
->  create mode 100644 arch/arm/dts/stm32h750i-art-pi.dts
->  create mode 100644 board/st/stm32h750-art-pi/Kconfig
->  create mode 100644 board/st/stm32h750-art-pi/MAINTAINERS
->  create mode 100644 board/st/stm32h750-art-pi/Makefile
->  create mode 100644 board/st/stm32h750-art-pi/stm32h750-art-pi.c
->  create mode 100644 configs/stm32h750-art-pi_defconfig
->  create mode 100644 include/configs/stm32h750-art-pi.h
->
-> --
-> 2.7.4
->
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgSG9yYXRpdSwKCk9uIDQvNi8yMSAxMToxNCBBTSwgSG9yYXRpdSBWdWx0dXIgd3JvdGU6Cj4g
+VGhlIDA0LzA2LzIwMjEgMDk6MzgsIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4KPiBIaSBQYXRy
+aWNrLAo+Cj4gSSBoYXZlIGFwcGxpZWQgeW91ciBwYXRjaGVzIGFuZCBJIGhhdmUgZG9uZSBhIGJh
+c2ljIHRlc3Qgb24ganIyX3N3aXRjaC4KPiBJdCBzZWVtcyB0byB3b3JrIGZpbmUuIEkgZ290IHNv
+bWUgd2FybmluZ3MgZnJvbSB0aGUgZnVuY3Rpb24KPiAnX19vZl90cmFuc2xhdGVfYWRkcmVzcycg
+d2hpY2ggSSBuZWVkIHRvIGZpZ3VyZSBvdXQuCj4KPiBCdXQgb25lIG1vcmUgaW1wb3J0YW50IHRo
+aW5nIGlzIHRoYXQgYWxzbyBsdXRvbl9zd2l0Y2ggc2hvdWxkIGJlCj4gdXBkYXRlZC4KCgpUaGFu
+a3MgZm9yIHRoZSB0ZXN0cwoKSSBtaXNzICdsdXRvbl9zd2l0Y2gnIGltcGFjdCwgSSB3aWxsIGFk
+ZCBpdCBpbiBWMi4KCgpmb3IgaW5mb3JtYXRpb246CgpJIGNoZWNrIGFnYWluIGFsbCB0aGUgdXNl
+cjoKCiQ+IGdyZXAgLXIgb2Zub2RlX3JlYWRfcmVzb3VyY2UgKiB8IGN1dCAtZiAxwqAgLWQ6IHwg
+eGFyZ3MKCiQ+IGdyZXAgdHJhbnNsYXRlCgpJIGRvbid0IGZvdW5kIGFueSBvdGhlciBkcml2ZXIg
+d2hpY2ggdXNlIHRyYW5zbGF0ZSBhbmQgZ2V0IHJlc3NvdXJjZS4KCgpSZWdhcmRzCgpQYXRyaWNr
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qt
+c3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
+b20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8v
+dWJvb3Qtc3RtMzIK

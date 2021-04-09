@@ -2,51 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CCBBF359678
-	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Apr 2021 09:36:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D92AD359679
+	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Apr 2021 09:36:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 91F03C56639;
-	Fri,  9 Apr 2021 07:36:41 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A0EF7C5718B;
+	Fri,  9 Apr 2021 07:36:50 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C2CA8C32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8CDA0C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  9 Apr 2021 07:36:38 +0000 (UTC)
+ Fri,  9 Apr 2021 07:36:47 +0000 (UTC)
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 1397a5vP029592; Fri, 9 Apr 2021 09:36:21 +0200
+ 1397Ze5s029229; Fri, 9 Apr 2021 09:36:22 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=X+zVCdkjehWbF+A2rg5jED0HFrgMEWtmulZAqzgZbR8=;
- b=ZW/0djt0k/25P2cgiAMRpIe1pjPx3Zf7Z2shzajUtK9FBPk7g4FyhxXMd6AYUAcyW3pP
- xFoyj/HoAgEdHMQpLKnASEpLM69sMwdX0wq+HCU+xq/z/Cd/mrq4Sbr/J3kpcF8tPWw3
- jKwgn1qpB11KInBXOEmAz9J2zAzIaTaslfkTzRIRBqYi89VlKx445sSOBaU4ZAye7Fh0
- I32jXUNdmZNl9gw+XHeuqqE6TlYR3ErJuWwOfU2ecicTrymw/lUOxHL/TEe9wEQgJSwo
- iEOUlbTlMP0tmZ3KqVLRykyO17mD1dyMczSbfn6LGS+a1lFD5MrzCg9c9dcK2ocfsJcv 9A== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-type; s=selector1;
+ bh=/TSfBUDJt/UWH/nY1xl6+PWq4cy2VNQKJgp5Gvs41js=;
+ b=Xzlx5lK3nOtHqKvhBu4TvEBd4Cr1UIUNhK4CpY2tkEHcGQV3inhZ0WDSgvcOejfUGTt6
+ JHqLXHr4cyz7f5DGU0DdlENcmNTXYtYb/z8FcvRNZjxxqrHvAWDdZXP+pkdUZqyunKzr
+ 5hRWcf7pNBe/X5vcVQCb+o4uFOcVdYL9XUPElYtXlQjkuaqc9cwS+bZeaQv0AfQcJe04
+ eZQ1RPQJOKr+igtaqw+lw6CYhAthZhaYz8PLM0vBT7paOlHLDEl+cT6XweKjiPA8Y3GU
+ XFHwBx5MovROhaGFvBaS+ARMLfEqNb62JLIelHdq69dP+qKAHhoGHgCEjK0JMPLKsTbH zg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 37sw5yxuvh-1
+ by mx07-00178001.pphosted.com with ESMTP id 37sw5yxuvq-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 09 Apr 2021 09:36:21 +0200
+ Fri, 09 Apr 2021 09:36:22 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3592410002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EDFA310002A;
  Fri,  9 Apr 2021 09:36:20 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 14E7121B2EC;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B889421B2EE;
  Fri,  9 Apr 2021 09:36:20 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Apr 2021 09:36:19
+Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Apr 2021 09:36:20
  +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 9 Apr 2021 09:36:15 +0200
-Message-ID: <20210409073617.16045-1-patrice.chotard@foss.st.com>
+Date: Fri, 9 Apr 2021 09:36:16 +0200
+Message-ID: <20210409073617.16045-2-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210409073617.16045-1-patrice.chotard@foss.st.com>
+References: <20210409073617.16045-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
  definitions=2021-04-09_04:2021-04-08,
@@ -54,14 +57,15 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
 Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
  Ye Li <ye.li@nxp.com>, Masahiro Yamada <yamada.masahiro@socionext.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Pratyush Yadav <p.yadav@ti.com>,
+ Sean Anderson <seanga2@gmail.com>, Herbert Poetzl <herbert@13thfloor.at>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Vabhav Sharma <vabhav.sharma@nxp.com>,
  Ovidiu Panait <ovidiu.panait@windriver.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Subject: [Uboot-stm32] [PATCH v1 0/2] cmd: bind: Fix driver binding
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Pratyush Yadav <p.yadav@ti.com>
+Subject: [Uboot-stm32] [PATCH v1 1/2] cmd: bind: Fix driver binding on a
+	device
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,31 +82,193 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Fix a regression brings by commit 84f8e36f03fa ("cmd: bind: allow to
+bind driver with driver data")
 
-This series is fixing issues reported by Herbert Poetzl when trying to
-bind Ethernet gadget over USB on STM32MP1 platform.
-2 issues have been found:
-   - fix the bind command
-   - add dwc2 bcdDevice in USB gadget controller
+As example, the following bind command doesn't work:
 
+   bind /soc/usb-otg@49000000 usb_ether
 
-Patrice Chotard (2):
-  cmd: bind: Fix driver binding on a device
-  usb: gadget: Add bcdDevice for the DWC2 USB Gadget Controller
+As usb_ether driver has no compatible string, it can't be find by
+lists_bind_fdt(). In bind_by_node_path(), which called lists_bind_fdt(),
+the driver entry is known, pass it to lists_bind_fdt() to force the driver
+entry selection.
 
- cmd/bind.c                        |  2 +-
- drivers/core/device.c             |  2 +-
- drivers/core/lists.c              | 11 ++++++++---
- drivers/core/root.c               |  2 +-
- drivers/misc/imx8/scu.c           |  2 +-
- drivers/serial/serial-uclass.c    |  2 +-
- drivers/timer/timer-uclass.c      |  2 +-
- drivers/usb/gadget/gadget_chips.h |  8 ++++++++
- include/dm/lists.h                |  3 ++-
- test/dm/nop.c                     |  2 +-
- test/dm/test-fdt.c                |  2 +-
- 11 files changed, 26 insertions(+), 12 deletions(-)
+For this, add a new parameter struct *driver to lists_bind_fdt().
+Fix also all lists_bind_fdt() callers.
 
+Fixes: 84f8e36f03fa ("cmd: bind: allow to bind driver with driver data")
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reported-by: Herbert Poetzl <herbert@13thfloor.at>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Herbert Poetzl <herbert@13thfloor.at>
+---
+
+ cmd/bind.c                     |  2 +-
+ drivers/core/device.c          |  2 +-
+ drivers/core/lists.c           | 11 ++++++++---
+ drivers/core/root.c            |  2 +-
+ drivers/misc/imx8/scu.c        |  2 +-
+ drivers/serial/serial-uclass.c |  2 +-
+ drivers/timer/timer-uclass.c   |  2 +-
+ include/dm/lists.h             |  3 ++-
+ test/dm/nop.c                  |  2 +-
+ test/dm/test-fdt.c             |  2 +-
+ 10 files changed, 18 insertions(+), 12 deletions(-)
+
+diff --git a/cmd/bind.c b/cmd/bind.c
+index af2f22cc4c..d8f610943c 100644
+--- a/cmd/bind.c
++++ b/cmd/bind.c
+@@ -152,7 +152,7 @@ static int bind_by_node_path(const char *path, const char *drv_name)
+ 	}
+ 
+ 	ofnode = ofnode_path(path);
+-	ret = lists_bind_fdt(parent, ofnode, &dev, false);
++	ret = lists_bind_fdt(parent, ofnode, &dev, drv, false);
+ 
+ 	if (!dev || ret) {
+ 		printf("Unable to bind. err:%d\n", ret);
+diff --git a/drivers/core/device.c b/drivers/core/device.c
+index 81f6880eac..3abd89aca6 100644
+--- a/drivers/core/device.c
++++ b/drivers/core/device.c
+@@ -1133,6 +1133,6 @@ int dev_enable_by_path(const char *path)
+ 	if (ret)
+ 		return ret;
+ 
+-	return lists_bind_fdt(parent, node, NULL, false);
++	return lists_bind_fdt(parent, node, NULL, NULL, false);
+ }
+ #endif
+diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+index e214306b90..2eb808ce2d 100644
+--- a/drivers/core/lists.c
++++ b/drivers/core/lists.c
+@@ -182,7 +182,7 @@ static int driver_check_compatible(const struct udevice_id *of_match,
+ }
+ 
+ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+-		   bool pre_reloc_only)
++		   struct driver *drv, bool pre_reloc_only)
+ {
+ 	struct driver *driver = ll_entry_start(struct driver, driver);
+ 	const int n_ents = ll_entry_count(struct driver, driver);
+@@ -225,8 +225,13 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+ 		for (entry = driver; entry != driver + n_ents; entry++) {
+ 			ret = driver_check_compatible(entry->of_match, &id,
+ 						      compat);
+-			if (!ret)
+-				break;
++			if (drv) {
++				if (drv == entry)
++					break;
++			} else {
++				if (!ret)
++					break;
++			}
+ 		}
+ 		if (entry == driver + n_ents)
+ 			continue;
+diff --git a/drivers/core/root.c b/drivers/core/root.c
+index 9bc682cffe..3c6fa3838d 100644
+--- a/drivers/core/root.c
++++ b/drivers/core/root.c
+@@ -236,7 +236,7 @@ static int dm_scan_fdt_node(struct udevice *parent, ofnode parent_node,
+ 			pr_debug("   - ignoring disabled device\n");
+ 			continue;
+ 		}
+-		err = lists_bind_fdt(parent, node, NULL, pre_reloc_only);
++		err = lists_bind_fdt(parent, node, NULL, NULL, pre_reloc_only);
+ 		if (err && !ret) {
+ 			ret = err;
+ 			debug("%s: ret=%d\n", node_name, ret);
+diff --git a/drivers/misc/imx8/scu.c b/drivers/misc/imx8/scu.c
+index 035a600f71..4ab5cb4bf1 100644
+--- a/drivers/misc/imx8/scu.c
++++ b/drivers/misc/imx8/scu.c
+@@ -219,7 +219,7 @@ static int imx8_scu_bind(struct udevice *dev)
+ 
+ 	debug("%s(dev=%p)\n", __func__, dev);
+ 	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+-		ret = lists_bind_fdt(dev, node, &child, true);
++		ret = lists_bind_fdt(dev, node, &child, NULL, true);
+ 		if (ret)
+ 			return ret;
+ 		debug("bind child dev %s\n", child->name);
+diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+index 8a87eed683..6d1c671efc 100644
+--- a/drivers/serial/serial-uclass.c
++++ b/drivers/serial/serial-uclass.c
+@@ -67,7 +67,7 @@ static int serial_check_stdout(const void *blob, struct udevice **devp)
+ 	 * anyway.
+ 	 */
+ 	if (node > 0 && !lists_bind_fdt(gd->dm_root, offset_to_ofnode(node),
+-					devp, false)) {
++					devp, NULL, false)) {
+ 		if (!device_probe(*devp))
+ 			return 0;
+ 	}
+diff --git a/drivers/timer/timer-uclass.c b/drivers/timer/timer-uclass.c
+index 6f00a5d0db..b1ac604b5b 100644
+--- a/drivers/timer/timer-uclass.c
++++ b/drivers/timer/timer-uclass.c
+@@ -148,7 +148,7 @@ int notrace dm_timer_init(void)
+ 		 * If the timer is not marked to be bound before
+ 		 * relocation, bind it anyway.
+ 		 */
+-		if (!lists_bind_fdt(dm_root(), node, &dev, false)) {
++		if (!lists_bind_fdt(dm_root(), node, &dev, NULL, false)) {
+ 			ret = device_probe(dev);
+ 			if (ret)
+ 				return ret;
+diff --git a/include/dm/lists.h b/include/dm/lists.h
+index 1a86552546..5896ae3658 100644
+--- a/include/dm/lists.h
++++ b/include/dm/lists.h
+@@ -53,13 +53,14 @@ int lists_bind_drivers(struct udevice *parent, bool pre_reloc_only);
+  * @parent: parent device (root)
+  * @node: device tree node to bind
+  * @devp: if non-NULL, returns a pointer to the bound device
++ * @drv: if non-NULL, force this driver to be bound
+  * @pre_reloc_only: If true, bind only nodes with special devicetree properties,
+  * or drivers with the DM_FLAG_PRE_RELOC flag. If false bind all drivers.
+  * @return 0 if device was bound, -EINVAL if the device tree is invalid,
+  * other -ve value on error
+  */
+ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+-		   bool pre_reloc_only);
++		   struct driver *drv, bool pre_reloc_only);
+ 
+ /**
+  * device_bind_driver() - bind a device to a driver
+diff --git a/test/dm/nop.c b/test/dm/nop.c
+index 2cd92c5240..75b9e7b6cc 100644
+--- a/test/dm/nop.c
++++ b/test/dm/nop.c
+@@ -25,7 +25,7 @@ static int noptest_bind(struct udevice *parent)
+ 		const char *bind_flag = ofnode_read_string(ofnode, "bind");
+ 
+ 		if (bind_flag && (strcmp(bind_flag, "True") == 0))
+-			lists_bind_fdt(parent, ofnode, &dev, false);
++			lists_bind_fdt(parent, ofnode, &dev, NULL, false);
+ 		ofnode = dev_read_next_subnode(ofnode);
+ 	}
+ 
+diff --git a/test/dm/test-fdt.c b/test/dm/test-fdt.c
+index 6e83aeecd9..c6968b0d5f 100644
+--- a/test/dm/test-fdt.c
++++ b/test/dm/test-fdt.c
+@@ -592,7 +592,7 @@ static int zero_size_cells_bus_child_bind(struct udevice *dev)
+ 	int err;
+ 
+ 	ofnode_for_each_subnode(child, dev_ofnode(dev)) {
+-		err = lists_bind_fdt(dev, child, NULL, false);
++		err = lists_bind_fdt(dev, child, NULL, NULL, false);
+ 		if (err) {
+ 			dev_err(dev, "%s: lists_bind_fdt, err=%d\n",
+ 				__func__, err);
 -- 
 2.17.1
 

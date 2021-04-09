@@ -2,66 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5890359A0A
-	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Apr 2021 11:55:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85DE8359BF5
+	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Apr 2021 12:26:41 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 81466C5719D;
-	Fri,  9 Apr 2021 09:55:34 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 375CFC56639;
+	Fri,  9 Apr 2021 10:26:41 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+ [209.85.216.53])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 10DBDC5718B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C1B85C36B25
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  9 Apr 2021 09:55:33 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 1399pjlV014986; Fri, 9 Apr 2021 11:55:31 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=eGnjFa0hhqUPb61EmHCTu2NdCfV7wKI1NMdUCfj8+q0=;
- b=4BQ6QC8CNPkFnlGSH5V9eSfhmqk/pvhIeXdDX2dg6g7yy9RN8AqKhq6+S1YvWOv3ktsS
- X3RAXPFYKns5/w0kUAELgx3qNKQMdo+WImhhvMaijOtrZp3/oxFU5+5vVB2N+7hwFwS0
- qkl6ZcYqsxTrowiYlkV1/2xyv108vuJISqtIXV3iUlcUfeldbJQg7LdRt+xVYVLKbmAl
- mqMajd0cLhQeVaNX1gfxUkH5gVfwqo6q24qJFkMtnjbGdHMonmh5OzskMIunB5Dp0HbT
- W4sEDcPSayOV8rxpIw5jvlALVoZ4ZI/3uhMQYOA7KpauT1Nweeq7V4/wlLt8NZjVlCoP 4Q== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 37sw5yyr8u-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 09 Apr 2021 11:55:31 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 785E1100034;
- Fri,  9 Apr 2021 11:55:30 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6CE7B228A16;
- Fri,  9 Apr 2021 11:55:30 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.48) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Apr
- 2021 11:55:29 +0200
-To: Jagan Teki <jagan@amarulasolutions.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Matteo Lisi <matteo.lisi@engicam.com>
-References: <20210316162207.35641-1-jagan@amarulasolutions.com>
- <20210316162207.35641-9-jagan@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <60b82b3b-52a8-b7b8-f56d-72d755c0cb67@foss.st.com>
-Date: Fri, 9 Apr 2021 11:55:29 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Fri,  9 Apr 2021 09:16:44 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id cu16so585164pjb.4
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 09 Apr 2021 02:16:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=he8VYk+6QUKD/+QGxjzySFU1Cd0UedQWxv/mB7pK/zM=;
+ b=gEZsOqyFiC8UlndhNRhV72AdP7enhNOCbUEz9eHtljQf0JW1DFd/K7OjI+bsJ+EPzN
+ sjyDFOpawO2+clEbuMTLyFeb7rBqVjiSSW/SPPKci0Nz6aE7Z+xlsBrGcf+YiIkPpzc1
+ XYTw1otuW0l+YzYQ13/+Qxp+qpJffkSZGDv9vodSgDJBNWd1fB6IJyRwcZRz+UKOtAW/
+ wLZKYg42Qu/an6fKoEcG4lpoAtw5zvrdhD2UvOvTxOa2vDAoKFIJYUo2BJfCT5Bp1L33
+ ZtHVdcrE+ePYnFKdo0LuuW84KKfq8lEh48zPrrQl5PSZSOIhY1klN9aUUfO/+0kjLNU6
+ EeDQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=he8VYk+6QUKD/+QGxjzySFU1Cd0UedQWxv/mB7pK/zM=;
+ b=o6Er3K218+875JRAsHyA8NMYkbjmawGRr5aQJDjfvzSN7EUtQVSluDkpVRu3CH63C0
+ dw3KkReq7A1nQyOmwpokp8J2JG8zLf/UnLpglLGvhP4NEIjXnKjbupVtbeknpEhC0dF5
+ 5Al7I1r6MXqLr43UWsDLsoQx0oH4/zyTTA5Sib04HM0zx/oyBIt16sixDs2byO1SeNSr
+ B9X2tcjxs7F5+hPf2E4yZeNDkyYjZdKdghOoOOQZ/PkjxTDUVCSMUquiFFvXby/stwHX
+ BrPg4XjqLTzlCkWHtgpfL3btbJ77YZ/zJ6ey72iXbpTV/r2Imi3/5f82sWVPTcThaVRx
+ m85A==
+X-Gm-Message-State: AOAM530Bk3/argHdbN/IdMf6ScGCKpOtC1S1RbM4nP4ptP48Anw9czdV
+ OlQEG63UHCmlO1jjskiIsTZbN2e32Tj3FoBdow4=
+X-Google-Smtp-Source: ABdhPJzXbAcisnK0qCEui6ZhMZOBqRd0Dlwuy6gs5FF7zlZdm8pjZhLsTGvycGvKRkf30N9Jb2B43JpPP+KWrZAj0jI=
+X-Received: by 2002:a17:902:e803:b029:e9:1f79:2427 with SMTP id
+ u3-20020a170902e803b02900e91f792427mr12157954plg.21.1617959803051; Fri, 09
+ Apr 2021 02:16:43 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210316162207.35641-9-jagan@amarulasolutions.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
- definitions=2021-04-09_05:2021-04-09,
- 2021-04-09 signatures=0
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH v3 8/8] board: stm32: Add Engicam MicroGEA
- STM32MP1 MicroDev 2.0 7" OF
+References: <20210409073617.16045-1-patrice.chotard@foss.st.com>
+ <20210409073617.16045-2-patrice.chotard@foss.st.com>
+In-Reply-To: <20210409073617.16045-2-patrice.chotard@foss.st.com>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Fri, 9 Apr 2021 12:16:26 +0300
+Message-ID: <CAHp75Vd+ROF4B7io5QM=SY8S8hfzYe4DJCkM1h9fHkSMWgF30w@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+X-Mailman-Approved-At: Fri, 09 Apr 2021 10:26:40 +0000
+Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, Masahiro Yamada <yamada.masahiro@socionext.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, Herbert Poetzl <herbert@13thfloor.at>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Vabhav Sharma <vabhav.sharma@nxp.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Pratyush Yadav <p.yadav@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 1/2] cmd: bind: Fix driver binding on a
+	device
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,405 +81,218 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Jagan
+On Fri, Apr 9, 2021 at 10:37 AM Patrice Chotard
+<patrice.chotard@foss.st.com> wrote:
+>
+> Fix a regression brings by commit 84f8e36f03fa ("cmd: bind: allow to
+> bind driver with driver data")
+>
+> As example, the following bind command doesn't work:
+>
+>    bind /soc/usb-otg@49000000 usb_ether
+>
+> As usb_ether driver has no compatible string, it can't be find by
+> lists_bind_fdt(). In bind_by_node_path(), which called lists_bind_fdt(),
+> the driver entry is known, pass it to lists_bind_fdt() to force the driver
+> entry selection.
+>
+> For this, add a new parameter struct *driver to lists_bind_fdt().
+> Fix also all lists_bind_fdt() callers.
 
-On 3/16/21 5:22 PM, Jagan Teki wrote:
-> 7" OF is a capacitive touch 7" Open Frame panel solutions with
-> - 7" AUO B101AW03 LVDS panel
-> - EDT, FT5526 Touch
-> 
-> MicroGEA STM32MP1 is a STM32MP157A based Micro SoM.
-> 
-> MicroDev 2.0 is a general purpose miniature carrier board with CAN,
-> LTE and LVDS panel interfaces.
-> 
-> MicroGEA STM32MP1 needs to mount on top of MicroDev 2.0 board with
-> pluged 7" OF for creating complete MicroGEA STM32MP1 MicroDev 2.0
-> 7" Open Frame Solution board.
-> 
-> Linux dts commit details:
-> 
-> commit <1d278204cbaa> ("ARM: dts: stm32: Add Engicam MicroGEA STM32MP1
-> MicroDev 2.0 7" OF")
-> 
-> Add support for it.
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Jagan Teki <jagan@amarulasolutions.com>
+With or without comments addressed
+Reviewed-by: Andy Shevchenko <andy.shevchenko@gmail.com>
+
+>
+> Fixes: 84f8e36f03fa ("cmd: bind: allow to bind driver with driver data")
+
+>
+
+No blank line in the tag block.
+
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reported-by: Herbert Poetzl <herbert@13thfloor.at>
+> Cc: Marek Vasut <marex@denx.de>
+> Cc: Herbert Poetzl <herbert@13thfloor.at>
 > ---
-> Changes for v3:
-> - collect Patrice r-b
-> Changes for v2:
-> - collect Patrice r-b
-> - add linux dts commit
-> - drop CONFIG_BOARD_EARLY_INIT_F
-> 
->  arch/arm/dts/Makefile                         |   1 +
->  ...rogea-stm32mp1-microdev2.0-of7-u-boot.dtsi |  51 ++++++
->  ...157a-microgea-stm32mp1-microdev2.0-of7.dts | 154 ++++++++++++++++++
->  arch/arm/mach-stm32mp/Kconfig                 |   7 +
->  board/engicam/stm32mp1/MAINTAINERS            |   6 +
->  ...-microgea-stm32mp1-microdev2-of7_defconfig |  79 +++++++++
->  6 files changed, 298 insertions(+)
->  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
->  create mode 100644 arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
->  create mode 100644 configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 64d73b96ef..43c604f2f8 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -993,6 +993,7 @@ dtb-$(CONFIG_STM32MP15x) += \
->  	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
->  	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
->  	stm32mp157a-microgea-stm32mp1-microdev2.0.dtb \
-> +	stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb \
->  	stm32mp157c-dk2.dtb \
->  	stm32mp157c-ed1.dtb \
->  	stm32mp157c-ev1.dtb \
-> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..e4bd215812
-> --- /dev/null
-> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7-u-boot.dtsi
-> @@ -0,0 +1,51 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-> +/*
-> + * Copyright (C) STMicroelectronics 2019 - All Rights Reserved
-> + * Copyright (c) 2020 Amarula Solutions(India)
-> + * Author: Jagan Teki <jagan@amarulasolutions.com>
-> + */
-> +
-> +#include "stm32mp157a-microgea-stm32mp1-u-boot.dtsi"
-> +
-> +/{
-> +	aliases {
-> +		mmc0 = &sdmmc1;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = &uart4;
-> +	};
-> +};
-> +
-> +&sdmmc1 {
-> +	u-boot,dm-pre-reloc;
-> +};
-> +
-> +&sdmmc1_b4_pins_a {
-> +	u-boot,dm-pre-reloc;
-> +
-> +	pins1 {
-> +		u-boot,dm-pre-reloc;
-> +	};
-> +
-> +	pins2 {
-> +		u-boot,dm-pre-reloc;
-> +	};
-> +};
-> +
-> +&uart4 {
-> +	u-boot,dm-pre-reloc;
-> +};
-> +
-> +&uart4_pins_a {
-> +	u-boot,dm-pre-reloc;
-> +
-> +	pins1 {
-> +		u-boot,dm-pre-reloc;
-> +	};
-> +
-> +	pins2 {
-> +		u-boot,dm-pre-reloc;
-> +		bias-pull-up;
-> +	};
-> +};
-> diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
-> new file mode 100644
-> index 0000000000..674b2d330d
-> --- /dev/null
-> +++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
-> @@ -0,0 +1,154 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-> +/*
-> + * Copyright (c) STMicroelectronics 2019 - All Rights Reserved
-> + * Copyright (c) 2020 Engicam srl
-> + * Copyright (c) 2020 Amarula Solutons(India)
-> + */
-> +
-> +/dts-v1/;
-> +#include "stm32mp157.dtsi"
-> +#include "stm32mp157a-microgea-stm32mp1.dtsi"
-> +#include "stm32mp15-pinctrl.dtsi"
-> +#include "stm32mp15xxaa-pinctrl.dtsi"
-> +#include <dt-bindings/gpio/gpio.h>
-> +
-> +/ {
-> +	model = "Engicam MicroGEA STM32MP1 MicroDev 2.0 7\" Open Frame";
-> +	compatible = "engicam,microgea-stm32mp1-microdev2.0-of7",
-> +		     "engicam,microgea-stm32mp1", "st,stm32mp157";
-> +
-> +	aliases {
-> +		serial0 = &uart4;
-> +		serial1 = &uart8;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:115200n8";
-> +	};
-> +
-> +	backlight: backlight {
-> +		compatible = "gpio-backlight";
-> +		gpios = <&gpiod 13 GPIO_ACTIVE_HIGH>;
-> +		default-on;
-> +	};
-> +
-> +	lcd_3v3: regulator-lcd-3v3 {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "lcd_3v3";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		gpio = <&gpiof 10 GPIO_ACTIVE_HIGH>;
-> +		enable-active-high;
-> +		regulator-always-on;
-> +		power-supply = <&panel_pwr>;
-> +	};
-> +
-> +	panel_pwr: regulator-panel-pwr {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "panel_pwr";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +		gpio = <&gpiob 10 GPIO_ACTIVE_HIGH>;
-> +		regulator-always-on;
-> +	};
-> +
-> +	panel {
-> +		compatible = "auo,b101aw03";
-> +		backlight = <&backlight>;
-> +		enable-gpios = <&gpiof 2 GPIO_ACTIVE_HIGH>;
-> +		power-supply = <&lcd_3v3>;
-> +
-> +		port {
-> +			panel_in: endpoint {
-> +				remote-endpoint = <&ltdc_ep0_out>;
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&i2c2 {
-> +	i2c-scl-falling-time-ns = <20>;
-> +	i2c-scl-rising-time-ns = <185>;
-> +	pinctrl-names = "default", "sleep";
-> +	pinctrl-0 = <&i2c2_pins_a>;
-> +	pinctrl-1 = <&i2c2_sleep_pins_a>;
-> +	status = "okay";
-> +};
-> +
-> +&ltdc {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&ltdc_pins>;
-> +	status = "okay";
-> +
-> +	port {
-> +		ltdc_ep0_out: endpoint@0 {
-> +			reg = <0>;
-> +			remote-endpoint = <&panel_in>;
-> +		};
-> +	};
-> +};
-> +
-> +&pinctrl {
-> +	ltdc_pins: ltdc {
-> +		pins {
-> +			pinmux = <STM32_PINMUX('G', 10, AF14)>,	/* LTDC_B2 */
-> +				 <STM32_PINMUX('H', 12, AF14)>,	/* LTDC_R6 */
-> +				 <STM32_PINMUX('H', 11, AF14)>,	/* LTDC_R5 */
-> +				 <STM32_PINMUX('D', 10, AF14)>,	/* LTDC_B3 */
-> +				 <STM32_PINMUX('D', 9, AF14)>,	/* LTDC_B0 */
-> +				 <STM32_PINMUX('E', 5, AF14)>,	/* LTDC_G0 */
-> +				 <STM32_PINMUX('E', 6, AF14)>,	/* LTDC_G1 */
-> +				 <STM32_PINMUX('E', 13, AF14)>,	/* LTDC_DE */
-> +				 <STM32_PINMUX('E', 15, AF14)>,	/* LTDC_R7 */
-> +				 <STM32_PINMUX('G', 7, AF14)>,	/* LTDC_CLK */
-> +				 <STM32_PINMUX('G', 12, AF14)>,	/* LTDC_B1 */
-> +				 <STM32_PINMUX('H', 2, AF14)>,	/* LTDC_R0 */
-> +				 <STM32_PINMUX('H', 3, AF14)>,	/* LTDC_R1 */
-> +				 <STM32_PINMUX('H', 8, AF14)>,	/* LTDC_R2 */
-> +				 <STM32_PINMUX('H', 9, AF14)>,	/* LTDC_R3 */
-> +				 <STM32_PINMUX('H', 10, AF14)>,	/* LTDC_R4 */
-> +				 <STM32_PINMUX('H', 13, AF14)>,	/* LTDC_G2 */
-> +				 <STM32_PINMUX('H', 14, AF14)>,	/* LTDC_G3 */
-> +				 <STM32_PINMUX('H', 15, AF14)>,	/* LTDC_G4 */
-> +				 <STM32_PINMUX('I', 0, AF14)>,	/* LTDC_G5 */
-> +				 <STM32_PINMUX('I', 1, AF14)>,	/* LTDC_G6 */
-> +				 <STM32_PINMUX('I', 2, AF14)>,	/* LTDC_G7 */
-> +				 <STM32_PINMUX('I', 4, AF14)>,	/* LTDC_B4 */
-> +				 <STM32_PINMUX('I', 5, AF14)>,	/* LTDC_B5 */
-> +				 <STM32_PINMUX('B', 8, AF14)>,	/* LTDC_B6 */
-> +				 <STM32_PINMUX('I', 7, AF14)>,	/* LTDC_B7 */
-> +				 <STM32_PINMUX('I', 9, AF14)>,	/* LTDC_VSYNC */
-> +				 <STM32_PINMUX('I', 10, AF14)>;	/* LTDC_HSYNC */
-> +			bias-disable;
-> +			drive-push-pull;
-> +			slew-rate = <3>;
-> +		};
-> +	};
-> +};
-> +
-> +&sdmmc1 {
-> +	bus-width = <4>;
-> +	disable-wp;
-> +	pinctrl-names = "default", "opendrain", "sleep";
-> +	pinctrl-0 = <&sdmmc1_b4_pins_a>;
-> +	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
-> +	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
-> +	st,neg-edge;
-> +	vmmc-supply = <&vdd>;
-> +	status = "okay";
-> +};
-> +
-> +&uart4 {
-> +	pinctrl-names = "default", "sleep", "idle";
-> +	pinctrl-0 = <&uart4_pins_a>;
-> +	pinctrl-1 = <&uart4_sleep_pins_a>;
-> +	pinctrl-2 = <&uart4_idle_pins_a>;
-> +	status = "okay";
-> +};
-> +
-> +/* J31: RS323 */
-> +&uart8 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart8_pins_a>;
-> +	status = "okay";
-> +};
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index abfe835158..ee48a7070d 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -97,6 +97,13 @@ config TARGET_MICROGEA_STM32MP1
->  	  * MicroGEA STM32MP1 needs to mount on top of this MicroDev 2.0 board
->  	    for creating complete MicroGEA STM32MP1 MicroDev 2.0 Carrier board.
->  
-> +	  MicroGEA STM32MP1 MicroDev 2.0 7" OF:
-> +	  * 7" OF is a capacitive touch 7" Open Frame panel solutions with LVDS
-> +	    panel and toucscreen.
-> +	  * MicroGEA STM32MP1 needs to mount on top of MicroDev 2.0 board with
-> +	    pluged 7" OF for creating complete MicroGEA STM32MP1 MicroDev 2.0 7"
-> +	    Open Frame Solution board.
-> +
->  config TARGET_ICORE_STM32MP1
->  	bool "Engicam i.Core STM32MP1 SOM"
->  	select STM32MP15x
-> diff --git a/board/engicam/stm32mp1/MAINTAINERS b/board/engicam/stm32mp1/MAINTAINERS
-> index 40220e7ce6..405ff99185 100644
-> --- a/board/engicam/stm32mp1/MAINTAINERS
-> +++ b/board/engicam/stm32mp1/MAINTAINERS
-> @@ -5,6 +5,12 @@ S:	Maintained
->  F:	arch/arm/dts/stm32mp15*microgea*
->  F:	configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
->  
-> +MicroGEA-STM32MP1-MICRODEV2.0-OF7
-> +M:	Jagan Teki <jagan@amarulasolutions.com>
-> +M:	Matteo Lisi <matteo.lisi@engicam.com>
-> +S:	Maintained
-> +F:	configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> +
->  i.Core-STM32MP1-CTOUCH2.0
->  M:	Jagan Teki <jagan@amarulasolutions.com>
->  M:	Matteo Lisi <matteo.lisi@engicam.com>
-> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> new file mode 100644
-> index 0000000000..c0c7ff11c8
-> --- /dev/null
-> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-> @@ -0,0 +1,79 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_STM32MP=y
-> +CONFIG_SYS_MALLOC_F_LEN=0x3000
-> +CONFIG_SYS_MEMTEST_START=0xc0000000
-> +CONFIG_SYS_MEMTEST_END=0xc4000000
-> +CONFIG_ENV_OFFSET=0x280000
-> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> +CONFIG_SPL_MMC_SUPPORT=y
-> +CONFIG_SPL=y
-> +CONFIG_TARGET_MICROGEA_STM32MP1=y
-> +CONFIG_ENV_OFFSET_REDUND=0x2C0000
-> +# CONFIG_ARMV7_VIRT is not set
-> +CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0-of7"
-> +CONFIG_DISTRO_DEFAULTS=y
-> +CONFIG_FIT=y
-> +CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3
-> +CONFIG_SPL_ENV_SUPPORT=y
-> +CONFIG_SPL_I2C_SUPPORT=y
-> +CONFIG_SPL_POWER_SUPPORT=y
-> +CONFIG_SYS_PROMPT="STM32MP> "
-> +CONFIG_CMD_ADTIMG=y
-> +CONFIG_CMD_ERASEENV=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMTEST=y
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_CLK=y
-> +CONFIG_CMD_FUSE=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_REMOTEPROC=y
-> +CONFIG_CMD_CACHE=y
-> +CONFIG_CMD_TIME=y
-> +CONFIG_CMD_TIMER=y
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_EXT4_WRITE=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
-> +CONFIG_ENV_IS_NOWHERE=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +# CONFIG_SPL_ENV_IS_NOWHERE is not set
-> +CONFIG_DM_HWSPINLOCK=y
-> +CONFIG_HWSPINLOCK_STM32=y
-> +CONFIG_DM_I2C=y
-> +CONFIG_SYS_I2C_STM32F7=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_DM_MAILBOX=y
-> +CONFIG_STM32_IPCC=y
-> +CONFIG_STM32_FMC2_EBI=y
-> +CONFIG_DM_MMC=y
-> +CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_STM32_SDMMC2=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_PHY=y
-> +CONFIG_PINCONF=y
-> +# CONFIG_SPL_PINCTRL_FULL is not set
-> +CONFIG_PINCTRL_STMFX=y
-> +CONFIG_DM_PMIC=y
-> +# CONFIG_SPL_PMIC_CHILDREN is not set
-> +CONFIG_PMIC_STPMIC1=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> +CONFIG_DM_REGULATOR_GPIO=y
-> +CONFIG_REMOTEPROC_STM32_COPRO=y
-> +CONFIG_DM_RTC=y
-> +CONFIG_RTC_STM32=y
-> +CONFIG_SERIAL_RX_BUFFER=y
-> +CONFIG_WDT=y
-> +CONFIG_WDT_STM32MP=y
-> +CONFIG_LZO=y
-> +CONFIG_ERRNO_STR=y
-> 
-Applied to u-boot-stm/master
+>
+>  cmd/bind.c                     |  2 +-
+>  drivers/core/device.c          |  2 +-
+>  drivers/core/lists.c           | 11 ++++++++---
+>  drivers/core/root.c            |  2 +-
+>  drivers/misc/imx8/scu.c        |  2 +-
+>  drivers/serial/serial-uclass.c |  2 +-
+>  drivers/timer/timer-uclass.c   |  2 +-
+>  include/dm/lists.h             |  3 ++-
+>  test/dm/nop.c                  |  2 +-
+>  test/dm/test-fdt.c             |  2 +-
+>  10 files changed, 18 insertions(+), 12 deletions(-)
+>
+> diff --git a/cmd/bind.c b/cmd/bind.c
+> index af2f22cc4c..d8f610943c 100644
+> --- a/cmd/bind.c
+> +++ b/cmd/bind.c
+> @@ -152,7 +152,7 @@ static int bind_by_node_path(const char *path, const char *drv_name)
+>         }
+>
+>         ofnode = ofnode_path(path);
+> -       ret = lists_bind_fdt(parent, ofnode, &dev, false);
+> +       ret = lists_bind_fdt(parent, ofnode, &dev, drv, false);
+>
+>         if (!dev || ret) {
+>                 printf("Unable to bind. err:%d\n", ret);
+> diff --git a/drivers/core/device.c b/drivers/core/device.c
+> index 81f6880eac..3abd89aca6 100644
+> --- a/drivers/core/device.c
+> +++ b/drivers/core/device.c
+> @@ -1133,6 +1133,6 @@ int dev_enable_by_path(const char *path)
+>         if (ret)
+>                 return ret;
+>
+> -       return lists_bind_fdt(parent, node, NULL, false);
+> +       return lists_bind_fdt(parent, node, NULL, NULL, false);
+>  }
+>  #endif
+> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+> index e214306b90..2eb808ce2d 100644
+> --- a/drivers/core/lists.c
+> +++ b/drivers/core/lists.c
+> @@ -182,7 +182,7 @@ static int driver_check_compatible(const struct udevice_id *of_match,
+>  }
+>
+>  int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+> -                  bool pre_reloc_only)
+> +                  struct driver *drv, bool pre_reloc_only)
+>  {
+>         struct driver *driver = ll_entry_start(struct driver, driver);
+>         const int n_ents = ll_entry_count(struct driver, driver);
+> @@ -225,8 +225,13 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+>                 for (entry = driver; entry != driver + n_ents; entry++) {
+>                         ret = driver_check_compatible(entry->of_match, &id,
+>                                                       compat);
+> -                       if (!ret)
+> -                               break;
+> +                       if (drv) {
+> +                               if (drv == entry)
+> +                                       break;
 
-Thanks
-Patrice
+> +                       } else {
+> +                               if (!ret)
+> +                                       break;
+> +                       }
+
+This can be simplified to
+} else if (!ret)
+  break;
+
+>                 }
+>                 if (entry == driver + n_ents)
+>                         continue;
+> diff --git a/drivers/core/root.c b/drivers/core/root.c
+> index 9bc682cffe..3c6fa3838d 100644
+> --- a/drivers/core/root.c
+> +++ b/drivers/core/root.c
+> @@ -236,7 +236,7 @@ static int dm_scan_fdt_node(struct udevice *parent, ofnode parent_node,
+>                         pr_debug("   - ignoring disabled device\n");
+>                         continue;
+>                 }
+> -               err = lists_bind_fdt(parent, node, NULL, pre_reloc_only);
+> +               err = lists_bind_fdt(parent, node, NULL, NULL, pre_reloc_only);
+>                 if (err && !ret) {
+>                         ret = err;
+>                         debug("%s: ret=%d\n", node_name, ret);
+> diff --git a/drivers/misc/imx8/scu.c b/drivers/misc/imx8/scu.c
+> index 035a600f71..4ab5cb4bf1 100644
+> --- a/drivers/misc/imx8/scu.c
+> +++ b/drivers/misc/imx8/scu.c
+> @@ -219,7 +219,7 @@ static int imx8_scu_bind(struct udevice *dev)
+>
+>         debug("%s(dev=%p)\n", __func__, dev);
+>         ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+> -               ret = lists_bind_fdt(dev, node, &child, true);
+> +               ret = lists_bind_fdt(dev, node, &child, NULL, true);
+>                 if (ret)
+>                         return ret;
+>                 debug("bind child dev %s\n", child->name);
+> diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+> index 8a87eed683..6d1c671efc 100644
+> --- a/drivers/serial/serial-uclass.c
+> +++ b/drivers/serial/serial-uclass.c
+> @@ -67,7 +67,7 @@ static int serial_check_stdout(const void *blob, struct udevice **devp)
+>          * anyway.
+>          */
+>         if (node > 0 && !lists_bind_fdt(gd->dm_root, offset_to_ofnode(node),
+> -                                       devp, false)) {
+> +                                       devp, NULL, false)) {
+>                 if (!device_probe(*devp))
+>                         return 0;
+>         }
+> diff --git a/drivers/timer/timer-uclass.c b/drivers/timer/timer-uclass.c
+> index 6f00a5d0db..b1ac604b5b 100644
+> --- a/drivers/timer/timer-uclass.c
+> +++ b/drivers/timer/timer-uclass.c
+> @@ -148,7 +148,7 @@ int notrace dm_timer_init(void)
+>                  * If the timer is not marked to be bound before
+>                  * relocation, bind it anyway.
+>                  */
+> -               if (!lists_bind_fdt(dm_root(), node, &dev, false)) {
+> +               if (!lists_bind_fdt(dm_root(), node, &dev, NULL, false)) {
+>                         ret = device_probe(dev);
+>                         if (ret)
+>                                 return ret;
+> diff --git a/include/dm/lists.h b/include/dm/lists.h
+> index 1a86552546..5896ae3658 100644
+> --- a/include/dm/lists.h
+> +++ b/include/dm/lists.h
+> @@ -53,13 +53,14 @@ int lists_bind_drivers(struct udevice *parent, bool pre_reloc_only);
+>   * @parent: parent device (root)
+>   * @node: device tree node to bind
+>   * @devp: if non-NULL, returns a pointer to the bound device
+> + * @drv: if non-NULL, force this driver to be bound
+>   * @pre_reloc_only: If true, bind only nodes with special devicetree properties,
+>   * or drivers with the DM_FLAG_PRE_RELOC flag. If false bind all drivers.
+>   * @return 0 if device was bound, -EINVAL if the device tree is invalid,
+>   * other -ve value on error
+>   */
+>  int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+> -                  bool pre_reloc_only);
+> +                  struct driver *drv, bool pre_reloc_only);
+>
+>  /**
+>   * device_bind_driver() - bind a device to a driver
+> diff --git a/test/dm/nop.c b/test/dm/nop.c
+> index 2cd92c5240..75b9e7b6cc 100644
+> --- a/test/dm/nop.c
+> +++ b/test/dm/nop.c
+> @@ -25,7 +25,7 @@ static int noptest_bind(struct udevice *parent)
+>                 const char *bind_flag = ofnode_read_string(ofnode, "bind");
+>
+>                 if (bind_flag && (strcmp(bind_flag, "True") == 0))
+> -                       lists_bind_fdt(parent, ofnode, &dev, false);
+> +                       lists_bind_fdt(parent, ofnode, &dev, NULL, false);
+>                 ofnode = dev_read_next_subnode(ofnode);
+>         }
+>
+> diff --git a/test/dm/test-fdt.c b/test/dm/test-fdt.c
+> index 6e83aeecd9..c6968b0d5f 100644
+> --- a/test/dm/test-fdt.c
+> +++ b/test/dm/test-fdt.c
+> @@ -592,7 +592,7 @@ static int zero_size_cells_bus_child_bind(struct udevice *dev)
+>         int err;
+>
+>         ofnode_for_each_subnode(child, dev_ofnode(dev)) {
+> -               err = lists_bind_fdt(dev, child, NULL, false);
+> +               err = lists_bind_fdt(dev, child, NULL, NULL, false);
+>                 if (err) {
+>                         dev_err(dev, "%s: lists_bind_fdt, err=%d\n",
+>                                 __func__, err);
+> --
+> 2.17.1
+>
+
+
+-- 
+With Best Regards,
+Andy Shevchenko
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

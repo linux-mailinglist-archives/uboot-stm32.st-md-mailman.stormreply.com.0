@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 866F735FBBA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 14 Apr 2021 21:38:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A30D835FFB2
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Apr 2021 03:41:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 42CB7C57B78;
-	Wed, 14 Apr 2021 19:38:39 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
- [209.85.167.176])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2F106C57B78;
+	Thu, 15 Apr 2021 01:41:42 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
+ [209.85.167.172])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 59EF8C57192
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2392EC57192
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 14 Apr 2021 19:38:37 +0000 (UTC)
-Received: by mail-oi1-f176.google.com with SMTP id b3so7007991oie.5
+ Thu, 15 Apr 2021 01:41:39 +0000 (UTC)
+Received: by mail-oi1-f172.google.com with SMTP id a21so9602513oib.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 14 Apr 2021 12:38:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ Wed, 14 Apr 2021 18:41:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=NOesvGEI9zE7UHvRaRyagtSJhZjpwmo14MRYg/SWn3s=;
- b=fDWsXe/HOLF8dm/vrW2yq7vuDfo9UW9MkTBRAoIvl9cN/09bO/27OHsPDFR+fqp1lg
- edcLr4nWNccyY7rwpYaugyhjT0DYJYTKib/RAw3+dLI5DBepUoB2hP0qn19VPrELxR83
- O8UAa0f4dAdHRE3VXSoQR+Sz6s9tONJ1pHgW8=
+ :cc; bh=x6rJNJJADaztPE9Of6aJE0g0bxqTdHaHGf4iDGeeyDQ=;
+ b=nX+QfH7urTbUZwxGoGoswqhJw73huHGh3nTo3PeV5PNSuYC8BVCzv2pr5K8+cdRf7u
+ vRY0JPb7hu+KVtWwRR3ACkHm48dfKvHbiR4bGzO85pcIvft9y+n+lB1+WsT+fEHU5OG8
+ vCEju4WqsK70Im1x38oV/IyzwtFlPNtIU/Dux8+kjMsMTCd573FDZFKHS6AW0Soxsnol
+ wEhLdInuwuL+JIo7UC4z0ikmaZY4dzSjIOGjMk71reX2mOFpCF3oqgnOfaX0LWfhehYn
+ YV8Zbq0wY1rPV7ZHp6rvjnybgRxN6eQ2Hj9a6X1TaSesIlGePPgFl0l7WKRKYgZaLquH
+ Y9zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=NOesvGEI9zE7UHvRaRyagtSJhZjpwmo14MRYg/SWn3s=;
- b=D7YO6i07GyaF2BAZ9akA5LGpm530lQOj6WEYq5bsF3zTrt7g6mFBZwkyFVrPwueDmo
- h8CFm43cHWnI+Nm+BWb0xZ61k49Gf3C7NsMDuopDjtTAij4AejyPcdHefRsrNPyZkYTP
- uXctiYGPCFdaJwb+KO0vXgkG9qtJbQ4j8zsjQcR7As0RQLRTm7L6Kn9r7+Q/ALsC4XpQ
- cMFMwwsm8vCDP/LEyvNRQ+YURqyAvIZ1xxpomfSSlSHQzFu9r1q+RPKVHTBH3GsceEs+
- MKuTDWA9hG1gaogigEgioDgee4MB7LX9d9rBK4t8Nzav5W86lVzLNKHc9g4/zz2/64W9
- igKw==
-X-Gm-Message-State: AOAM530kMKqjcWLo5Y1m5ZV7JbAIS/ztDrVsofk1fuOmJZ86pk1N8JSx
- FD0mS7fX03Ii2OZrgM4qmrKsk8UX1BZJCADh5pKZBw==
-X-Google-Smtp-Source: ABdhPJypRkX4XZq3ncm1fxXdr9Qy47lu5EzQaE+iebFTmSaWNxoQOqul2gtJ+9NoyVd7NM1UHl3yJqZQvIX8Sw36pG4=
-X-Received: by 2002:aca:47ce:: with SMTP id u197mr3438702oia.81.1618429115857; 
- Wed, 14 Apr 2021 12:38:35 -0700 (PDT)
+ bh=x6rJNJJADaztPE9Of6aJE0g0bxqTdHaHGf4iDGeeyDQ=;
+ b=rSofK67yy1gbG/69GAh9p9l6TVB9ttyt5fHf8+LiUNSPIE/jUcyAp+6M5rXfLWffVs
+ CdW10C59errgv8l62dvssRTqnKRj09YLCAmV6DFSVzyh/dnzPaG3xmzVSgt/+GjJezPU
+ ah9DSPh0BwNg8GUFbPkQzL437klraewxzk8A2FHXZoHtLxB7S8C4Z4Vn4YnOie9cRToC
+ EIMEsb+V6HQ9btlyy60Qfe6nIcr5I6U18Fo9sirxYAfjJyUMBk9q0Y6c3OQY7ztBJbij
+ x76TdPSMaq0xnFrb4WY4f90mwS+7zO8chOXjVMX6LQ3WTNPGFOO0LlM7w+k3Wq+MYFiW
+ L9Gg==
+X-Gm-Message-State: AOAM531I47m0TF+Q0Gq37HRpBirOr+uJK5guBDebGjCWQWFDlei1K1Ij
+ Yz2xE2ARfJfP72gmCCmCjfNqgLgw3jLF1XpfYjo=
+X-Google-Smtp-Source: ABdhPJyy17QkAmiCeFgnjY/H9rpu+JQc78fe1BipfIMTwqMmNboWcUsMbDwZm/sJLOb7bhBmFesAoTWk14suo7uYsnM=
+X-Received: by 2002:aca:a989:: with SMTP id s131mr825603oie.179.1618450898613; 
+ Wed, 14 Apr 2021 18:41:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210409073617.16045-1-patrice.chotard@foss.st.com>
- <20210409073617.16045-2-patrice.chotard@foss.st.com>
-In-Reply-To: <20210409073617.16045-2-patrice.chotard@foss.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 14 Apr 2021 20:38:18 +0100
-Message-ID: <CAPnjgZ0ChJdek=+SGCde+Mu-Nmh-WtG1E87m_N463_GiXOt7UQ@mail.gmail.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, Masahiro Yamada <yamada.masahiro@socionext.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>,
- Herbert Poetzl <herbert@13thfloor.at>,
+References: <20210409100022.1.I93dea8b89ea632e7d8f2640a6eca6f6e69fed319@changeid>
+ <bf1fcbd0-b54e-b03f-1ac2-27475ee747e2@denx.de>
+ <68133a1e-5440-0a5d-d5a4-2c1d85ef0c1b@foss.st.com>
+ <5deab9a1-3326-5115-71e2-569aa4077ab6@denx.de>
+In-Reply-To: <5deab9a1-3326-5115-71e2-569aa4077ab6@denx.de>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Thu, 15 Apr 2021 04:41:25 +0300
+Message-ID: <CAGi-RU+QZRQ8EVPfX7XZET2LodgrU5mkYG+scWNzow9aLFPFEA@mail.gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Stephen Warren <swarren@nvidia.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Vabhav Sharma <vabhav.sharma@nxp.com>,
- Ovidiu Panait <ovidiu.panait@windriver.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v1 1/2] cmd: bind: Fix driver binding on a
-	device
+ Christophe Roullier <christophe.roullier@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] net: dwc_eth_qos: add support of device
+ tree configuration for reset delay
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,51 +76,100 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 9 Apr 2021 at 08:36, Patrice Chotard
-<patrice.chotard@foss.st.com> wrote:
+On Wed, Apr 14, 2021 at 5:36 PM Marek Vasut <marex@denx.de> wrote:
 >
-> Fix a regression brings by commit 84f8e36f03fa ("cmd: bind: allow to
-> bind driver with driver data")
+> On 4/14/21 4:07 PM, Patrick DELAUNAY wrote:
+> > Hi,
 >
-> As example, the following bind command doesn't work:
+> Hi,
 >
->    bind /soc/usb-otg@49000000 usb_ether
+> > On 4/9/21 2:22 PM, Marek Vasut wrote:
+> >> On 4/9/21 10:00 AM, Patrick Delaunay wrote:
+> >>> The gpio reset assert/deassert delay are today harcoded in U-Boot driver
+> >>> but the value should be read from DT.
+> >>>
+> >>> STM32 use the generic binding defined in linux:
+> >>> Documentation/devicetree/bindings/net/ethernet-phy.yaml
+> >>>
+> >>>    reset-gpios:
+> >>>      maxItems: 1
+> >>>      description:
+> >>>        The GPIO phandle and specifier for the PHY reset signal.
+> >>>
+> >>>    reset-assert-us:
+> >>>      description:
+> >>>        Delay after the reset was asserted in microseconds. If this
+> >>>        property is missing the delay will be skipped.
+> >>>
+> >>>    reset-deassert-us:
+> >>>      description:
+> >>>        Delay after the reset was deasserted in microseconds. If
+> >>>        this property is missing the delay will be skipped.
+> >>>
+> >>> See also U-Boot: doc/device-tree-bindings/net/phy.txt
+> >>
+> >> Since this is a PHY property, shouldn't that be handled in
+> >> drivers/net/phy/ instead of MAC driver ?
+> >
+> >
+> > I was my first idea but I don't found found the correct location in phy
+> > (driver or uclass)
+> >
+> > to manage these generic property and the generic property "reset-gpios"
+> > was already
+> >
+> > managed in eth driver, so I continue to patch the driver.
+> >
+> >
+> > But I come back to this idea after your remark....
+> >
+> > => in linux these property are managed in
+> >
+> >      drivers/net/mdio/of_mdio.c::of_mdiobus_phy_device_register
+> >
+> >          parse DT node and add info in mdio
+> >
+> >      drivers/net/phy/mdio_device.c::mdio_device_reset
+> >
+> >          called in  mdio_probe / mdio_remove
+> >
+> >
+> > In my first search, I don't found the same level in the U-Boot drivers
+> > in drivers/net/phy/
 >
-> As usb_ether driver has no compatible string, it can't be find by
-> lists_bind_fdt(). In bind_by_node_path(), which called lists_bind_fdt(),
-> the driver entry is known, pass it to lists_bind_fdt() to force the driver
-> entry selection.
+> Note that this is MDIO-wide PHY reset (e.g. you can have single reset
+> line connected to multiple PHYs on single MDIO bus), this is not
+> PHY-specific reset.
 >
-> For this, add a new parameter struct *driver to lists_bind_fdt().
-> Fix also all lists_bind_fdt() callers.
+> > but I miss the uclass defined in drivers/net/eth-phy-uclass.c
+> >
+> >
+> > Finally I think I need to manage the generic binding property
+> >
+> > (reset-gpios, reset-assert-us, reset-deassert-us) directly  in
+> >
+> > => drivers/net/mdio-uclass
+> >
+> >
+> > The GPIO RESET will be managed in mdio  ops: pre_probe/ post_remove
+> >
+> > as it is done in linux
+> >
+> > warning: today post_remove ops don't exit in u-class.
+> >
+> >
+> > Do you think it is the correct location ?
 >
-> Fixes: 84f8e36f03fa ("cmd: bind: allow to bind driver with driver data")
+> For single-PHY reset, the correct location is in drivers/net/phy/ somewhere.
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reported-by: Herbert Poetzl <herbert@13thfloor.at>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Herbert Poetzl <herbert@13thfloor.at>
-> ---
+> > Do you think it should be a new serie (migrate the eqos property in mdio)
+> >
+> > after this eqos is accepted
+> >
+> > or I shoudl sent a new serie to replace this serie.
 >
->  cmd/bind.c                     |  2 +-
->  drivers/core/device.c          |  2 +-
->  drivers/core/lists.c           | 11 ++++++++---
->  drivers/core/root.c            |  2 +-
->  drivers/misc/imx8/scu.c        |  2 +-
->  drivers/serial/serial-uclass.c |  2 +-
->  drivers/timer/timer-uclass.c   |  2 +-
->  include/dm/lists.h             |  3 ++-
->  test/dm/nop.c                  |  2 +-
->  test/dm/test-fdt.c             |  2 +-
->  10 files changed, 18 insertions(+), 12 deletions(-)
->
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Really this command needs a test.
-
-Regards,
-Simon
+> I'll leave that decision to Ramon/Joe.
+Joe, I'll leave this to you.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

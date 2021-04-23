@@ -2,65 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E65C83696D5
-	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Apr 2021 18:24:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC44C3696D6
+	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Apr 2021 18:24:15 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AFC61C57B54;
-	Fri, 23 Apr 2021 16:24:08 +0000 (UTC)
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
- [209.85.222.182])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B9F45C57B5A;
+	Fri, 23 Apr 2021 16:24:15 +0000 (UTC)
+Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com
+ [209.85.219.52])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76F83C57B53
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 80F35C57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 23 Apr 2021 16:24:07 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id e13so40298516qkl.6
+ Fri, 23 Apr 2021 16:24:14 +0000 (UTC)
+Received: by mail-qv1-f52.google.com with SMTP id d1so12465958qvy.11
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 23 Apr 2021 09:24:07 -0700 (PDT)
+ Fri, 23 Apr 2021 09:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=eF+X5qHPMI8Zja1yFv7dGmyJv+Wrh2cDFRolqEFnPp0=;
- b=JK9Z2J8FJPndAGJnfX8jJ5G00sW0qqhp7/cmWZnBxB6FDlpcRlKEJw5OiM214fYSxX
- ynFpbvIQQmL7xL1FIVCyxN356IDpnfyKOeT1ZMaXQ6ZetH8elKupmbxevrYYYtT+koLG
- LJuKOd02BI0aZK/y6KS1lFJERaWvFZL1BWWAM=
+ bh=TDYwno0L0tVoGunYf8HRpqKlkCrLL3rYRC9IML81PX0=;
+ b=duD414t/4Yrw45xjpSzlgm+3yGdyF39Ym5pPEGDQE/EmH9odtaN0s9GEN6KA+L9aIm
+ 5eVAFiryh2AqbX75M7CNOJX9bHCN3GTi9kXODcmWTykIwkJlqBhZFoiCdDJkWAVzU2tH
+ s5yle2DFzk7KjLzL4LFYC2LJ5Vexq9n49TZIE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=eF+X5qHPMI8Zja1yFv7dGmyJv+Wrh2cDFRolqEFnPp0=;
- b=KWQC1aYEzlZ5GgugznH/szrYswWZiwFMbp+uIofq6rMKVi+AlSeekLPv7tkLRyaEHU
- +/La2y74/Ee5Pms+fV282BPE5Y13UKYYXueHWJyVnOoDkUXLYFmMoAU9iuwnhSiy6v9F
- 4XtPV6LQ459Nu8gtnNexcyPl+PQbopMzk31yZIjD5UWZYkLefdcK7ph5fWDzWAx2wUg6
- I07/PKCyQly1WVhqV2K0IcCyVJN26GdmwOVB+K6k0NcmJ52EFZKe/LzGKzXaHarK6jFd
- WRgFKHYSM1eawp18CToGLUyqDlUFuO/kDVzR1h76ohSC9MOQLwH1+GPR70+RexYO3DKp
- RGCg==
-X-Gm-Message-State: AOAM530gjnXknuKah243535wySfL8DvubjJx5NdzR6T9vAqN4FMhEBk2
- xia22lwMIsnKbOWChLNEYtDBTRm40S8GBg==
-X-Google-Smtp-Source: ABdhPJytSnmNSkZjZIBumul5kr07yXARQg3CtsqKyGX7hcYM2R9U6MIMMzEgHcuPOQl4m5u3huUOTA==
-X-Received: by 2002:a05:620a:16db:: with SMTP id
- a27mr4843136qkn.251.1619195046495; 
- Fri, 23 Apr 2021 09:24:06 -0700 (PDT)
+ bh=TDYwno0L0tVoGunYf8HRpqKlkCrLL3rYRC9IML81PX0=;
+ b=SDaqE9okQOjT1jUgTQOJCrHu86WqR8t4k3nmkm5Jo6TM48KBD7Vn+FPWjau4TvvQoQ
+ Gqcmgp39fUn6hKQCqcKZvSEE+YkYmXp+foapbKR+E0fJGn6eIdubCU2lPMKY047WxbpN
+ UJ03KkKVZKxfmfh+6OdtBYyO/0UGrVDFWonZPQE9YBQKgK/On/TlGRM7uDU9u+mkF7it
+ udYx0NMqzF1F2Cx7iYpnTPYNjKMS6e7KuMndoENFFAwNbUZrVEhTU8DbtV+4zkdGIai7
+ y2p7kl6LnH0fWoNWPzu8SjdFp5ZcTUM1qD9hfIZQ76ctk/TygTCAV3UVAFGI3ig9FMtp
+ tJkg==
+X-Gm-Message-State: AOAM533eOCZ07FYXlPvZEdYvuWfYM+ianxxjWDV0jn+X57CZ8+G3susO
+ bR+FK3HtZ/8tD1ZDeP2yGAcwyA==
+X-Google-Smtp-Source: ABdhPJymhhm6zUenp9g+nQDUAnCA84y1k2d4ylo83QoMKgLKjZOwr9XUdeprNvUs5M5w7HKvBw7atg==
+X-Received: by 2002:a0c:9a04:: with SMTP id p4mr5282839qvd.60.1619195053443;
+ Fri, 23 Apr 2021 09:24:13 -0700 (PDT)
 Received: from bill-the-cat (cpe-65-184-140-239.ec.res.rr.com.
  [65.184.140.239])
- by smtp.gmail.com with ESMTPSA id k127sm4607387qkc.88.2021.04.23.09.24.05
+ by smtp.gmail.com with ESMTPSA id r125sm4574192qkf.24.2021.04.23.09.24.12
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 23 Apr 2021 09:24:06 -0700 (PDT)
-Date: Fri, 23 Apr 2021 12:24:04 -0400
+ Fri, 23 Apr 2021 09:24:12 -0700 (PDT)
+Date: Fri, 23 Apr 2021 12:24:11 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20210423162404.GR1310@bill-the-cat>
+Message-ID: <20210423162411.GS1310@bill-the-cat>
 References: <20210310091632.17103-1-patrick.delaunay@foss.st.com>
- <20210310101622.v2.5.I94c52853f676d92dcacf734240d54cbb6bc38ef4@changeid>
+ <20210310101622.v2.6.Id37d7acc114d58f6c20cfb3200846bdec196a740@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20210310101622.v2.5.I94c52853f676d92dcacf734240d54cbb6bc38ef4@changeid>
+In-Reply-To: <20210310101622.v2.6.Id37d7acc114d58f6c20cfb3200846bdec196a740@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Tero Kristo <t-kristo@ti.com>, u-boot@lists.denx.de,
- Masahiro Yamada <masahiroy@kernel.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 5/8] lmb: correct size of the regions
-	array
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v2 6/8] test: lmb: add test for overflow
+ protection in lmb_add_region
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,29 +70,25 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4460717143520770545=="
+Content-Type: multipart/mixed; boundary="===============7231039233645946674=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============4460717143520770545==
+--===============7231039233645946674==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3P014ifvTVSe39L0"
+	protocol="application/pgp-signature"; boundary="G8KvhGvoMBxI+G4Z"
 Content-Disposition: inline
 
 
---3P014ifvTVSe39L0
+--G8KvhGvoMBxI+G4Z
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 10, 2021 at 10:16:29AM +0100, Patrick Delaunay wrote:
+On Wed, Mar 10, 2021 at 10:16:30AM +0100, Patrick Delaunay wrote:
 
-> As in lmb_region, cnt < max and in the lmb library
-> use region[i] only with i in 0...cnt, this region array size
-> can be reduced by 1 element without overflow.
->=20
-> This patch allows to reduce the struct lmb size.
+> Add test for max number of memory regions and in reserved regions.
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
@@ -103,27 +97,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---3P014ifvTVSe39L0
+--G8KvhGvoMBxI+G4Z
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmCC9KQACgkQFHw5/5Y0
-tyyGAgv/eZBsLtVlv8K8G4qO7ysJl2G8sJgLODI+EJAAtC3E5Mm/VBT718zRNQ5A
-IpPCGYY8MbHfCt5JrYAZHdSyIpZdg5Mwnq5MEBJMgFTybMtJhn1fAJKC0AXWqlBu
-1BWrCcWWdU0XEbJtVZ8EynBcUyP7w63nJNgCY7/32Mdd4PS3MgjCZtJKLkBXidTT
-1JKAJLBTlO5xzXisAFBRq5cLKycdym194ZYhGAcl8SNuCYxM9roayAWoXm+prXCl
-KLw8hWLrgVq7g5qZUOhvjxK6Q0rGUmRNbZmGRrPoPrC0bRGcSajQA5lBpUtG25X/
-IpsEKM+SxlLtXP6dEp7UdWWeW8Urej98wmMPNa5SvAy4akri5A/8P3QMOS2dj4DD
-Dm/zDPvCW6gW6fMtcs/ZtqurMjiacwC4BcwpI9H7JyTieHIUdG7f4JV9yyjLJv/p
-ZpdT4PuytRsQjgdRvCLj4/iblP9GbQM4RLBZmhgd3z2H4eTOPMW/n2Vn08AcdeeH
-Orv/UElH
-=HagL
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmCC9KoACgkQFHw5/5Y0
+tyxxgQv/XzjvSd/NoNlaPzHV50wtZu9KJTNgFDvuJCRoynalunMRVXPPOK+xFA5X
+OWkMPqzLFw2Vic/50B3fO2WK6xJ4xuhkq5B3I2xglaoDWRYk8RCVvd0m2Ald9gVm
+2vU0+7l2w/+tIrX0fgcKKOkE2hZr9yfIoFhJ+Lqi0wV2UDFnCjEYpNHI/f9Hg84l
+DfRYDOWaFJ0duAz22uH5Df5oWj5UjZm93KWUde4foJG2F2bxSeFkBQG6yVxg5sbs
+oAGnssqcwCZN7wWW1Vl/qsQWLe7UPwq0QAbl4Wl+fd14d1CyDe3sG+NDiA/NRLlu
+yW05ECNpnargn+VwvvO9MXwIEBZxzR3jfaXDZKp7PdvU3q0cH1sq5g5nLsd0+G9K
+Cmg0ruMdW64LDOW2kZf8KV2BzF84dh2EzfbcDyOILcx8ohHqXK8kjC0spgLYs+My
+SVidgexTQt87/vSDluGcLmRE/rOfnkAHEjKC2b8+/H1J8w0aSZNwxMfbR0yxAdhE
+IW9FArIr
+=z0Pr
 -----END PGP SIGNATURE-----
 
---3P014ifvTVSe39L0--
+--G8KvhGvoMBxI+G4Z--
 
---===============4460717143520770545==
+--===============7231039233645946674==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -134,4 +128,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4460717143520770545==--
+--===============7231039233645946674==--

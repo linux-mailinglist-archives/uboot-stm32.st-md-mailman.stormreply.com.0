@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C03A636B60D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Apr 2021 17:46:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D65D36B619
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Apr 2021 17:47:09 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6BEDAC3FADC;
-	Mon, 26 Apr 2021 15:46:15 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CCE80C57B51;
+	Mon, 26 Apr 2021 15:47:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86C9FC32EA7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6249CC3FADC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 26 Apr 2021 15:46:13 +0000 (UTC)
+ Mon, 26 Apr 2021 15:47:07 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 13QFS4Qv016834; Mon, 26 Apr 2021 17:46:08 +0200
+ 13QFS4TO016829; Mon, 26 Apr 2021 17:47:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-type; s=selector1;
  bh=Es2hkrGL83RJXr4ZFYe0y+esVKS7qAA9pkaKKTKKveE=;
- b=pCcyZ2+DGOX3kGQssuTAUby8wJHjl7BPnVvvvi5N9tPceDytHvca5HTLGKDRgzW7pZkp
- wiwPXn7tM56fLxXHSVvM3b4KNFWx07jBVYBUHrzRfuxLQ+tLbI6ertQVO+UGTP1mZdd4
- oJaNrpxICmFNC8BH9sFD7ZGcj1Ny1GXiurXLniqTphfypnjRDMejrIGb2ehMZB6gV6gT
- SiykRPtfceR6bIQhfw7OtIeYo0djK4iYMBIhQemVjixCkjIxZKVBIUAoxaJwAaWGJRbu
- R6c0dqaQ6aim1sbuP/D++PDOj8JNlC1tixINQR2jrdN4fn8blTgUAU15cL5mmcRImX8Q yA== 
+ b=0Al6BKQU/3HjA/NyABSS/1sKwoLIUXnsoqa2GyE2Zg0E7U9Eime7I81k/W1WxJIJ/ntD
+ x2GIIp6a/aCUDORlKKN9zZz+rnQoarx0walXfkW+0MwVid19kcKFImB6ESXm2QJm6So7
+ ceDHU7BFlvfFb/D7DLVyC6s34uH8CKl3amYIY0kB5bveUtpJ7gzxBWEPugRTCNCsnXd/
+ dnZVsZSDobzglW9FrRXQ8Gw0Olar5u2bJVUqIUFOyXVPUq1ZduwqH/1AnaMg3m12eT/f
+ vDK1xE8y+Uicbvtf2RF42SxduDX8aW1nbL7F+8V2IZBsNrUUEJMlhUmGLudSDigPXk+Z iw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 385aeedy58-1
+ by mx07-00178001.pphosted.com with ESMTP id 385aeedy8d-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 26 Apr 2021 17:46:08 +0200
+ Mon, 26 Apr 2021 17:47:02 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C1E7A10002A;
- Mon, 26 Apr 2021 17:46:06 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2538A10002A;
+ Mon, 26 Apr 2021 17:47:02 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B434423ABD8;
- Mon, 26 Apr 2021 17:46:06 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 26 Apr 2021 17:46:06
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0DB5123BD64;
+ Mon, 26 Apr 2021 17:47:02 +0200 (CEST)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 26 Apr 2021 17:47:01
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 26 Apr 2021 17:45:58 +0200
-Message-ID: <20210426154604.3345-1-patrick.delaunay@foss.st.com>
+Date: Mon, 26 Apr 2021 17:46:46 +0200
+Message-ID: <20210426154653.3941-1-patrick.delaunay@foss.st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
  definitions=2021-04-26_07:2021-04-26,
  2021-04-26 signatures=0
-Cc: Alexandre TORGUE <alexandre.torgue@foss.st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
+Cc: Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,

@@ -2,65 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2049A36D5B9
-	for <lists+uboot-stm32@lfdr.de>; Wed, 28 Apr 2021 12:24:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B996F36D5DF
+	for <lists+uboot-stm32@lfdr.de>; Wed, 28 Apr 2021 12:39:10 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D8425C58D60;
-	Wed, 28 Apr 2021 10:24:03 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6D08AC57B75;
+	Wed, 28 Apr 2021 10:39:10 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0FB87C58D62
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EBC45C57B74
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 28 Apr 2021 10:23:59 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Wed, 28 Apr 2021 10:39:06 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 13SAGgf4025298; Wed, 28 Apr 2021 12:23:55 +0200
+ 13SAX2WU024606; Wed, 28 Apr 2021 12:39:00 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type; s=selector1;
- bh=RXVyWVMWjX/KwvzaMh+0S9EknX7dSM7IjBZbc9ztDZo=;
- b=lVEH7+teZKfp8TO7fdxBKz31+GCZegSWF24digRu+ZuiGHoM9TUox39ePaOiA7rcNCmF
- hmSdVJ6tFN2DmRWEKFp3/P6CQSJDw2MNmNvUdGGnyLpsIyv8d4TV3ZjHDOQXxiFE7B9y
- 3RgAdpG9GMTMoJBMWdyyyIiZYSO4Gv5hOPIcE6tzd1r6YuCOcmIPa3iH1P5cs2hTZT1P
- fpuJporo/ksud6MiId64qLJSC3u/KAkHFP9leky0BQTUG4DjaqdeyajH5F/2rMNnrYO0
- jGgtMPOWEsgrrD3ptpUhAhqdPzTX7L1vGu5OAtQ1HBH7N46+tV2aSVF+bTghe9fMI1q7 gg== 
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=iKGGO5+Z3kf6ZxJoVZ00POoKzcu2UwqUfPFZmp7QZ60=;
+ b=ZsblEz8DIUFpbSBpW9ZQ+erm2jwa7BOnBUr9PSw2knGiMesinbPf67vYsVbL8KZvKQr7
+ GlHZWMMcTmcEy7z5TJxmZiZChfYt0h1lU8QMx9q4E6Vcn/64PNTnJYybk9tyDDFVMZBf
+ l3t1YuWfbxuGsuf2zM0oHfBGl3ckQJ54UQj9RcFkORC815XQwOO0eqdZO9bAYRrcBib8
+ /k/XbEarUY6/FTUjtUSz5KUnPpqnxIKwCqhBB4oSDR2gtlSbVHOI7deX9/6XifwTgrnI
+ P6WXQT8S1Jc3fiHvhteq6j5EjQb02dAVDJLhtXXaWSC/2YV56+1hfoildTmH/zakCT5m zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 386ea8fm42-1
+ by mx07-00178001.pphosted.com with ESMTP id 38735whacv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 28 Apr 2021 12:23:55 +0200
+ Wed, 28 Apr 2021 12:39:00 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8F0EA10002A;
- Wed, 28 Apr 2021 12:23:54 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1BD3D10002A;
+ Wed, 28 Apr 2021 12:38:59 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 840AD211B08;
- Wed, 28 Apr 2021 12:23:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F140B212276;
+ Wed, 28 Apr 2021 12:38:58 +0200 (CEST)
 Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 28 Apr 2021 12:23:54
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 28 Apr 2021 12:38:58
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 28 Apr 2021 12:23:45 +0200
-Message-ID: <20210428122109.v3.7.Ibd5e48dc85df5bb52a2a1a54054e96d53c2e3358@changeid>
+Date: Wed, 28 Apr 2021 12:38:39 +0200
+Message-ID: <20210428123802.v2.1.I94f875f95a48be081d332f9a2c447c0b78955e75@changeid>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210428102345.3192-1-patrick.delaunay@foss.st.com>
-References: <20210428102345.3192-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
  definitions=2021-04-28_04:2021-04-27,
  2021-04-28 signatures=0
-Cc: Marek Vasut <marex@denx.de>, Patrick Delaunay <patrick.delaunay@st.com>,
- Ard Biesheuvel <ardb@kernel.org>,
+Cc: Gregory CLEMENT <gregory.clement@bootlin.com>,
+ Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, marek.bykowski@gmail.com,
- Etienne Carriere <etienne.carriere@linaro.org>
-Subject: [Uboot-stm32] [PATCH v3 7/7] stm32mp: don't map the reserved region
-	with no-map property
+ Ramon Fried <rfried.dev@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Etienne Carriere <etienne.carriere@linaro.org>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>
+Subject: [Uboot-stm32] [PATCH v2] dm: core: Add address translation in
+	fdt_get_resource
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,94 +77,231 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-No more map the reserved region with "no-map" property by marking
-the corresponding TLB entries with invalid entry (=0) to avoid
-speculative access.
+Today of_address_to_resource() is called only in
+ofnode_read_resource() for livetree support and
+fdt_get_resource() is called when livetree is not supported.
 
-The device tree parsing done in lmb_init_and_reserve() takes a
-long time when it is executed without data cache, so it is called in
-enable_caches() before to disable it.
+The fdt_get_resource() doesn't do the address translation
+so when it is required, but the address translation is done
+by ofnode_read_resource() caller, for example in
+drivers/firmware/scmi/smt.c::scmi_dt_get_smt_buffer() {
+...
+	ret = ofnode_read_resource(args.node, 0, &resource);
+	if (ret)
+		return ret;
 
-This patch fixes an issue where predictive read access on secure DDR
-OP-TEE reserved area are caught by firewall.
+	faddr = cpu_to_fdt32(resource.start);
+	paddr = ofnode_translate_address(args.node, &faddr);
+...
 
+The both behavior should be aligned and the address translation
+must be called in fdt_get_resource() and removed for each caller.
+
+Fixes: a44810123f9e ("dm: core: Add dev_read_resource() to read device resources")
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
-Changes in v3:
-- call lmb_init_and_reserve when data cache is activated in enable_caches()
-- drop v2 patch "arm: cache: cp15: don't map the reserved region
-  with no-map property"
+This patch allows to remove the workaround in smci/smt.c
+introduced by [1].
+
+But it impact with all user of
+- ofnode_read_resource
+- ofnode_read_resource_byname
+- dev_read_resource
+- dev_read_resource_byname
+
+After my first check, the only impacts are in drivers/net/mscc_eswitch
+=> I remove the unnecessary translate after code review,
+   this patch need to be verify on real hardware
+
+I proposed to merge the workaround [1] as soon as possible to avoid issue
+on stm32mp1 platform and this patch can be merged when it will be acked
+by mscc_eswitch maintainers and other API users.
+
+[1] "scmi: translate the resource only when livetree is not activated"
+    http://patchwork.ozlabs.org/project/uboot/list/?series=236526&state=*
+
 
 Changes in v2:
-- NEW: update in stm32mp specific MMU setup functions
+- remove translate in luton_switch.c:luton_probe()
 
- arch/arm/mach-stm32mp/cpu.c | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+ drivers/firmware/scmi/smt.c               | 12 +-----------
+ drivers/net/mscc_eswitch/jr2_switch.c     |  4 +---
+ drivers/net/mscc_eswitch/luton_switch.c   |  5 +----
+ drivers/net/mscc_eswitch/ocelot_switch.c  |  4 +---
+ drivers/net/mscc_eswitch/serval_switch.c  |  4 +---
+ drivers/net/mscc_eswitch/servalt_switch.c |  4 +---
+ lib/fdtdec.c                              |  6 +++++-
+ 7 files changed, 11 insertions(+), 28 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-index 8115d58b19..592bfd413d 100644
---- a/arch/arm/mach-stm32mp/cpu.c
-+++ b/arch/arm/mach-stm32mp/cpu.c
-@@ -12,6 +12,7 @@
- #include <env.h>
- #include <init.h>
- #include <log.h>
-+#include <lmb.h>
- #include <misc.h>
- #include <net.h>
- #include <asm/io.h>
-@@ -90,6 +91,8 @@
-  */
- u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
+index f1915c0074..e60c2aebc8 100644
+--- a/drivers/firmware/scmi/smt.c
++++ b/drivers/firmware/scmi/smt.c
+@@ -30,8 +30,6 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
+ 	int ret;
+ 	struct ofnode_phandle_args args;
+ 	struct resource resource;
+-	fdt32_t faddr;
+-	phys_addr_t paddr;
  
-+struct lmb lmb;
+ 	ret = dev_read_phandle_with_args(dev, "shmem", NULL, 0, 0, &args);
+ 	if (ret)
+@@ -41,21 +39,13 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
+ 	if (ret)
+ 		return ret;
+ 
+-	/* TEMP workaround for ofnode_read_resource translation issue */
+-	if (of_live_active()) {
+-		paddr = resource.start;
+-	} else {
+-		faddr = cpu_to_fdt32(resource.start);
+-		paddr = ofnode_translate_address(args.node, &faddr);
+-	}
+-
+ 	smt->size = resource_size(&resource);
+ 	if (smt->size < sizeof(struct scmi_smt_header)) {
+ 		dev_err(dev, "Shared memory buffer too small\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	smt->buf = devm_ioremap(dev, paddr, smt->size);
++	smt->buf = devm_ioremap(dev, resource.start, smt->size);
+ 	if (!smt->buf)
+ 		return -ENOMEM;
+ 
+diff --git a/drivers/net/mscc_eswitch/jr2_switch.c b/drivers/net/mscc_eswitch/jr2_switch.c
+index 570d5a5109..d1e5b61ea5 100644
+--- a/drivers/net/mscc_eswitch/jr2_switch.c
++++ b/drivers/net/mscc_eswitch/jr2_switch.c
+@@ -863,7 +863,6 @@ static int jr2_probe(struct udevice *dev)
+ 	int i;
+ 	int ret;
+ 	struct resource res;
+-	fdt32_t faddr;
+ 	phys_addr_t addr_base;
+ 	unsigned long addr_size;
+ 	ofnode eth_node, node, mdio_node;
+@@ -926,9 +925,8 @@ static int jr2_probe(struct udevice *dev)
+ 
+ 		if (ofnode_read_resource(mdio_node, 0, &res))
+ 			return -ENOMEM;
+-		faddr = cpu_to_fdt32(res.start);
+ 
+-		addr_base = ofnode_translate_address(mdio_node, &faddr);
++		addr_base = res.start;
+ 		addr_size = res.end - res.start;
+ 
+ 		/* If the bus is new then create a new bus */
+diff --git a/drivers/net/mscc_eswitch/luton_switch.c b/drivers/net/mscc_eswitch/luton_switch.c
+index 54afa14c9d..73c950d118 100644
+--- a/drivers/net/mscc_eswitch/luton_switch.c
++++ b/drivers/net/mscc_eswitch/luton_switch.c
+@@ -588,7 +588,6 @@ static int luton_probe(struct udevice *dev)
+ 	struct luton_private *priv = dev_get_priv(dev);
+ 	int i, ret;
+ 	struct resource res;
+-	fdt32_t faddr;
+ 	phys_addr_t addr_base;
+ 	unsigned long addr_size;
+ 	ofnode eth_node, node, mdio_node;
+@@ -658,9 +657,7 @@ static int luton_probe(struct udevice *dev)
+ 
+ 		if (ofnode_read_resource(mdio_node, 0, &res))
+ 			return -ENOMEM;
+-		faddr = cpu_to_fdt32(res.start);
+-
+-		addr_base = ofnode_translate_address(mdio_node, &faddr);
++		addr_base = res.start;
+ 		addr_size = res.end - res.start;
+ 
+ 		/* If the bus is new then create a new bus */
+diff --git a/drivers/net/mscc_eswitch/ocelot_switch.c b/drivers/net/mscc_eswitch/ocelot_switch.c
+index 19e725c6f9..d1d0a489ab 100644
+--- a/drivers/net/mscc_eswitch/ocelot_switch.c
++++ b/drivers/net/mscc_eswitch/ocelot_switch.c
+@@ -530,7 +530,6 @@ static int ocelot_probe(struct udevice *dev)
+ 	struct ocelot_private *priv = dev_get_priv(dev);
+ 	int i, ret;
+ 	struct resource res;
+-	fdt32_t faddr;
+ 	phys_addr_t addr_base;
+ 	unsigned long addr_size;
+ 	ofnode eth_node, node, mdio_node;
+@@ -578,9 +577,8 @@ static int ocelot_probe(struct udevice *dev)
+ 
+ 		if (ofnode_read_resource(mdio_node, 0, &res))
+ 			return -ENOMEM;
+-		faddr = cpu_to_fdt32(res.start);
+ 
+-		addr_base = ofnode_translate_address(mdio_node, &faddr);
++		addr_base = res.start;
+ 		addr_size = res.end - res.start;
+ 
+ 		/* If the bus is new then create a new bus */
+diff --git a/drivers/net/mscc_eswitch/serval_switch.c b/drivers/net/mscc_eswitch/serval_switch.c
+index 09ce33452d..c4b81f7529 100644
+--- a/drivers/net/mscc_eswitch/serval_switch.c
++++ b/drivers/net/mscc_eswitch/serval_switch.c
+@@ -482,7 +482,6 @@ static int serval_probe(struct udevice *dev)
+ 	struct serval_private *priv = dev_get_priv(dev);
+ 	int i, ret;
+ 	struct resource res;
+-	fdt32_t faddr;
+ 	phys_addr_t addr_base;
+ 	unsigned long addr_size;
+ 	ofnode eth_node, node, mdio_node;
+@@ -533,9 +532,8 @@ static int serval_probe(struct udevice *dev)
+ 
+ 		if (ofnode_read_resource(mdio_node, 0, &res))
+ 			return -ENOMEM;
+-		faddr = cpu_to_fdt32(res.start);
+ 
+-		addr_base = ofnode_translate_address(mdio_node, &faddr);
++		addr_base = res.start;
+ 		addr_size = res.end - res.start;
+ 
+ 		/* If the bus is new then create a new bus */
+diff --git a/drivers/net/mscc_eswitch/servalt_switch.c b/drivers/net/mscc_eswitch/servalt_switch.c
+index 4a4e9e4054..f114086ece 100644
+--- a/drivers/net/mscc_eswitch/servalt_switch.c
++++ b/drivers/net/mscc_eswitch/servalt_switch.c
+@@ -412,7 +412,6 @@ static int servalt_probe(struct udevice *dev)
+ 	struct servalt_private *priv = dev_get_priv(dev);
+ 	int i;
+ 	struct resource res;
+-	fdt32_t faddr;
+ 	phys_addr_t addr_base;
+ 	unsigned long addr_size;
+ 	ofnode eth_node, node, mdio_node;
+@@ -461,9 +460,8 @@ static int servalt_probe(struct udevice *dev)
+ 
+ 		if (ofnode_read_resource(mdio_node, 0, &res))
+ 			return -ENOMEM;
+-		faddr = cpu_to_fdt32(res.start);
+ 
+-		addr_base = ofnode_translate_address(mdio_node, &faddr);
++		addr_base = res.start;
+ 		addr_size = res.end - res.start;
+ 
+ 		/* If the bus is new then create a new bus */
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index 864589193b..4b097fb588 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -942,7 +942,11 @@ int fdt_get_resource(const void *fdt, int node, const char *property,
+ 
+ 	while (ptr + na + ns <= end) {
+ 		if (i == index) {
+-			res->start = fdtdec_get_number(ptr, na);
++			if (CONFIG_IS_ENABLED(OF_TRANSLATE))
++				res->start = fdt_translate_address(fdt, node, ptr);
++			else
++				res->start = fdtdec_get_number(ptr, na);
 +
- #if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
- #ifndef CONFIG_TFABOOT
- static void security_init(void)
-@@ -221,6 +224,8 @@ void dram_bank_mmu_setup(int bank)
- 	int	i;
- 	phys_addr_t start;
- 	phys_size_t size;
-+	bool use_lmb = false;
-+	enum dcache_option option;
- 
- 	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
- 		start = ALIGN_DOWN(STM32_SYSRAM_BASE, MMU_SECTION_SIZE);
-@@ -229,6 +234,7 @@ void dram_bank_mmu_setup(int bank)
- 		/* bd->bi_dram is available only after relocation */
- 		start = bd->bi_dram[bank].start;
- 		size =  bd->bi_dram[bank].size;
-+		use_lmb = true;
- 	} else {
- 		/* mark cacheable and executable the beggining of the DDR */
- 		start = STM32_DDR_BASE;
-@@ -237,8 +243,12 @@ void dram_bank_mmu_setup(int bank)
- 
- 	for (i = start >> MMU_SECTION_SHIFT;
- 	     i < (start >> MMU_SECTION_SHIFT) + (size >> MMU_SECTION_SHIFT);
--	     i++)
--		set_section_dcache(i, DCACHE_DEFAULT_OPTION);
-+	     i++) {
-+		option = DCACHE_DEFAULT_OPTION;
-+		if (use_lmb && lmb_is_reserved_flags(&lmb, i << MMU_SECTION_SHIFT, LMB_NOMAP))
-+			option = 0; /* INVALID ENTRY in TLB */
-+		set_section_dcache(i, option);
-+	}
- }
- /*
-  * initialize the MMU and activate cache in SPL or in U-Boot pre-reloc stage
-@@ -302,6 +312,9 @@ int arch_cpu_init(void)
- 
- void enable_caches(void)
- {
-+	/* parse device tree when data cache is still activated */
-+	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
-+
- 	/* I-cache is already enabled in start.S: icache_enable() not needed */
- 
- 	/* deactivate the data cache, early enabled in arch_cpu_init() */
+ 			res->end = res->start;
+ 			res->end += fdtdec_get_number(&ptr[na], ns) - 1;
+ 			return 0;
 -- 
 2.17.1
 

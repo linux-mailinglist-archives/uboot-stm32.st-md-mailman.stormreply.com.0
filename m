@@ -2,59 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E63236F0CF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 22:08:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 979AE36F0D1
+	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 22:10:23 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33661C58D59;
-	Thu, 29 Apr 2021 20:08:01 +0000 (UTC)
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com
- [209.85.210.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 599B1C58D5A;
+	Thu, 29 Apr 2021 20:10:23 +0000 (UTC)
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
+ [209.85.167.176])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 075FFC57B74
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86F81C58D59
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 20:08:00 +0000 (UTC)
-Received: by mail-ot1-f44.google.com with SMTP id
- v23-20020a9d60570000b02902a53bac99a3so7721872otj.5
+ Thu, 29 Apr 2021 20:10:21 +0000 (UTC)
+Received: by mail-oi1-f176.google.com with SMTP id i11so5764443oig.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 13:07:59 -0700 (PDT)
+ Thu, 29 Apr 2021 13:10:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fhMJqZsW9Fy8QSfdXWBTjHfnKeETJfQIdLfY3le/W58=;
- b=od4guATjhWMrqcven/dWhLjyq0YMyMEamJDUwGIfbjXAt7TBZKnKz4VcNs48yhUQAS
- lJQnrbzU4kQIgZ5sFwRoeqvUBhPrMsiUVeVverX4XFXZYLc0NzQ0lolwbcRWXL/2hiGV
- LNbgMu9CHOtk2TPUdF/5MiSLRwvtxL1mY2zr0th3GTWBM3q/JpIFCBh3OHeAh2dkKukx
- ezlTLKnGureR5hIii5Iz7/4zGBhqxZ6XKise4jbuj+VoqYtYLPWJ5B/KVicK/UHuUyDk
- 92xa167yuLh6Bm9WZbZPVQWPtlOLlrCMaItyhB+6gFZPhKkYX9GbHCfeH6wnNpjxjdQk
- suuQ==
+ :cc; bh=bKDAeABraefoSKMJIP5BtHu+sgPF9HODS3zuFqXNet8=;
+ b=NxaqBfEjzP8GsvDFU1cHJVdaF2TbVIlDA/nCZFdGXdMMPdYjlwisWDc4R26OUfbsVJ
+ 9hywtRosOv6JQHU2tBRbnW8NSUpJhbeEvyn0+7scm4wUWTMfcT9O7/qtEGK5T5vAF6n4
+ 8qmnPCy3Tg6UWq2PE5mIWApYaplMrPrnuHF0yXqIdHlB4K7HLTc9sXzfJKk1IPZt64zS
+ Q5DA+DpzD6qFGV1H7VDNV5ae+NOlYKEtLKfdudQsT1FZBfVpHdvpVoAPvOXqw9zmom5W
+ cXk86ieCKZkWZC/bVzKB1xOE52qUG5hO7wpXNmgBsFBSx0iaPJgYT0JeRZZwKRv3IxkC
+ JV1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=fhMJqZsW9Fy8QSfdXWBTjHfnKeETJfQIdLfY3le/W58=;
- b=k467AdyiPFD0tavvSMUhPz28mQQxPpJ71LTh5BmVnOP2VhjRwD/iqx4aXiK8SMwwQ9
- QMLiWksqV771VvrFklUBv1TU/E4EarsG33aYu6n820wu8XGxysS+gSeLhsPsdG35Iv9f
- NTV+EumG3DAnfrRR99ui0/Atyar4l0MSKS7okJZ+Ce65cF4jCeEkTDOiS+Y2rvUshy1j
- 1HFiW2T4pL0hSlzp0Q8TtIKrAoiBAJjFNjEb8Q8NzUzdNPHAY8xtZucHPWTiSB/JiYAQ
- SyU/Zd+W+nCVgRDN/mhNnnmOo06DQ1zsfXUmQqqe3KgnNGEYe39uKeQ5d1k48e7LPs6V
- q3Iw==
-X-Gm-Message-State: AOAM533237prd7C1iSWRQM9BiLiCrAmSparPemT3w/ZmGfFbwGaNr91n
- 7nwr02qVrODMdiJNsbMge+HhuG4yHTX85S0FSeI=
-X-Google-Smtp-Source: ABdhPJyrzLej4/2LMSvZFjrJrea18n7kvcCTAVct/VUpc+ypRoGjna8vDDQDwMb+ZpR964Zy6Sm0AxBY5CXBuBwqhgs=
-X-Received: by 2002:a9d:65c4:: with SMTP id z4mr939292oth.14.1619726878908;
- Thu, 29 Apr 2021 13:07:58 -0700 (PDT)
+ bh=bKDAeABraefoSKMJIP5BtHu+sgPF9HODS3zuFqXNet8=;
+ b=dW8YTc1AKf+r6evFnkp0D1a/OzWkQD+9M5/FKwbkipZ67rWFKPE/reHBb2YJZMLzIK
+ xBE1VMeBHx8eSX/ZdUpvO5arxaXTgqhqvB+4IQkuQYXqpgtWobbeE0nLEcyX5mP2IjLY
+ dTvZi3k1e5Yfah4goW087MRsHEbKwk9oJ7UGdTrI2YbPGmZjpBkmYSLSgUb10TJ3bRkm
+ i3K8wXM2r+KvcJFAiPvezt0Ho4JOqXAkVBd3rMzqSyOPc8bv4IlIAXS1KeaWKUl7cphT
+ bd7ShCdRanR9MDlx0S6tCUtrjrES7LBmFocytCFeUEH3opg8iT3C5dlTKOujavGoFn6t
+ x7Uw==
+X-Gm-Message-State: AOAM530xSfYqWn3Zn3MraxSpGoRmHSinyfYUpdDy+6A/zfwixaeQuQbR
+ 7teO7UrzKs1jlsNWKSXvAGzV1/P8EIpBJ5sUYBQ=
+X-Google-Smtp-Source: ABdhPJyTqmBILvC7pufuOd/DUy/DZ3+NzaNt2cNhDr5y3565U9iX+ryLrTejoQ/dBIqH6ZSACoVzm757Rb/dbwrxfI4=
+X-Received: by 2002:aca:c3cf:: with SMTP id t198mr8468776oif.179.1619727020294; 
+ Thu, 29 Apr 2021 13:10:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210426172459.1.I3fde47925951f917dbd08b6e826d91669f62b221@changeid>
- <20210426172459.2.I3fde47925951f917dbd08b6e826d91669f62b221@changeid>
-In-Reply-To: <20210426172459.2.I3fde47925951f917dbd08b6e826d91669f62b221@changeid>
+References: <20210426154653.3941-1-patrick.delaunay@foss.st.com>
+ <20210426174647.v2.1.I5a50f8eef93c11cb54dfdd3b11183422a82fb373@changeid>
+In-Reply-To: <20210426174647.v2.1.I5a50f8eef93c11cb54dfdd3b11183422a82fb373@changeid>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 29 Apr 2021 23:07:47 +0300
-Message-ID: <CAGi-RULVnWVf+3FcSE4ps=6gYd0_nCGe1Pzo5qzShubqNyykag@mail.gmail.com>
+Date: Thu, 29 Apr 2021 23:10:09 +0300
+Message-ID: <CAGi-RU+7ua3UjFW5cAL8Bc=fpozgpNm4Cf51xno4H7gbgCsZjA@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Christophe Roullier <christophe.roullier@st.com>,
  Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/3] net: dwc_eth_qos: define LOG_CATEGORY
+Subject: Re: [Uboot-stm32] [PATCH v2 1/6] net: eth-phy: add support of
+ device tree configuration for gpio reset
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,30 +72,127 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, Apr 26, 2021 at 6:25 PM Patrick Delaunay
+On Mon, Apr 26, 2021 at 6:47 PM Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Define LOG_CATEGORY to allow filtering with log command.
+> The gpio reset and the assert or deassert delay are defined in generic
+> binding of the ethernet phy in Linux:
+> Documentation/devicetree/bindings/net/ethernet-phy.yaml
+>
+>   reset-gpios:
+>     maxItems: 1
+>     description:
+>       The GPIO phandle and specifier for the PHY reset signal.
+>
+>   reset-assert-us:
+>     description:
+>       Delay after the reset was asserted in microseconds. If this
+>       property is missing the delay will be skipped.
+>
+>   reset-deassert-us:
+>     description:
+>       Delay after the reset was deasserted in microseconds. If
+>       this property is missing the delay will be skipped.
+>
+> See also U-Boot: doc/device-tree-bindings/net/phy.txt
+>
+> This patch adds the parsing of this common DT properties in the
+> u-class "eth_phy_generic", used by default in the associated driver
+> "eth_phy_generic_drv"
+>
+> This parsing function eth_phy_of_to_plat can be reused by other
+> ethernet phy drivers for this uclass UCLASS_ETH_PHY.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
->  drivers/net/dwc_eth_qos.c | 2 ++
->  1 file changed, 2 insertions(+)
+> Changes in v2:
+> - Update eth-phy driver (NEW)
 >
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index e8242ca4e1..e423c31753 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -27,6 +27,8 @@
->   *    all clock and reset signals to the HW block.
->   */
+>  drivers/net/eth-phy-uclass.c | 50 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 50 insertions(+)
 >
-> +#define LOG_CATEGORY UCLASS_ETH
-> +
+> diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
+> index 07aebd935e..153f6909eb 100644
+> --- a/drivers/net/eth-phy-uclass.c
+> +++ b/drivers/net/eth-phy-uclass.c
+> @@ -6,12 +6,17 @@
 >  #include <common.h>
->  #include <clk.h>
->  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <net.h>
+> +#include <asm-generic/gpio.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/uclass-internal.h>
+>  #include <dm/lists.h>
+> +#include <linux/delay.h>
+>
+>  struct eth_phy_device_priv {
+>         struct mii_dev *mdio_bus;
+> +       struct gpio_desc reset_gpio;
+> +       u32 reset_assert_delay;
+> +       u32 reset_deassert_delay;
+>  };
+>
+>  int eth_phy_binds_nodes(struct udevice *eth_dev)
+> @@ -110,13 +115,58 @@ int eth_phy_get_addr(struct udevice *dev)
+>         return reg;
+>  }
+>
+> +/* parsing generic properties of devicetree/bindings/net/ethernet-phy.yaml */
+> +static int eth_phy_of_to_plat(struct udevice *dev)
+> +{
+> +       struct eth_phy_device_priv *uc_priv = dev_get_uclass_priv(dev);
+> +       int ret;
+> +
+> +       /* search "reset-gpios" in phy node */
+> +       ret = gpio_request_by_name(dev, "reset-gpios", 0,
+> +                                  &uc_priv->reset_gpio,
+> +                                  GPIOD_IS_OUT);
+> +       if (ret != -ENOENT)
+> +               return ret;
+> +
+> +       uc_priv->reset_assert_delay = dev_read_u32_default(dev, "reset-assert-us", 0);
+> +       uc_priv->reset_deassert_delay = dev_read_u32_default(dev, "reset-deassert-us", 0);
+> +
+> +       return 0;
+> +}
+> +
+> +void eth_phy_reset(struct udevice *dev, int value)
+> +{
+> +       struct eth_phy_device_priv *uc_priv = dev_get_uclass_priv(dev);
+> +       u32 delay;
+> +
+> +       if (!dm_gpio_is_valid(&uc_priv->reset_gpio))
+> +               return;
+> +
+> +       dm_gpio_set_value(&uc_priv->reset_gpio, value);
+> +
+> +       delay = value ? uc_priv->reset_assert_delay : uc_priv->reset_deassert_delay;
+> +       if (delay)
+> +               udelay(delay);
+> +}
+> +
+> +static int eth_phy_pre_probe(struct udevice *dev)
+> +{
+> +       /* Assert and deassert the reset signal */
+> +       eth_phy_reset(dev, 1);
+> +       eth_phy_reset(dev, 0);
+> +
+> +       return 0;
+> +}
+> +
+>  UCLASS_DRIVER(eth_phy_generic) = {
+>         .id             = UCLASS_ETH_PHY,
+>         .name           = "eth_phy_generic",
+>         .per_device_auto        = sizeof(struct eth_phy_device_priv),
+> +       .pre_probe      = eth_phy_pre_probe,
+>  };
+>
+>  U_BOOT_DRIVER(eth_phy_generic_drv) = {
+>         .name           = "eth_phy_generic_drv",
+>         .id             = UCLASS_ETH_PHY,
+> +       .of_to_plat     = eth_phy_of_to_plat,
+>  };
 > --
 > 2.17.1
 >

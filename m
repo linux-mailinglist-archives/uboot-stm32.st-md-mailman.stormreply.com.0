@@ -2,56 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6B3E36EDE3
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 18:10:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D638436EDE4
+	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 18:10:27 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90EE4C58D59;
-	Thu, 29 Apr 2021 16:10:24 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9C34CC58D5A;
+	Thu, 29 Apr 2021 16:10:27 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+ [209.85.221.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0FC99C57B74
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83CBEC58D59
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 16:10:23 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id t18so9907592wry.1
+ Thu, 29 Apr 2021 16:10:26 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id h15so15243708wre.11
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 09:10:23 -0700 (PDT)
+ Thu, 29 Apr 2021 09:10:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=CoLROV0TwvvbgaEa2VpSQCWyhdULiL5V7g1SVA/nMjw=;
- b=g/v1TLna+B7RBWN1Wl4V8Pb3KfatxiXBoTJHjKFYKo6dwJThMtIvRGrqVsowfw1lgg
- ugPSXPqQuepmlyco54rkWi5n+bJGITQXXvO+iu7rz+qzTb1e8ZNRONiK+1H8VJxWNskd
- 5M0dSbUxz8cSZjO4KgN52b4/GNG9r9S6QhEs0=
+ :cc; bh=WIm9ODd52QNJP8uUTlDUyKPPXZPkbXWIxojLx1eA9Ro=;
+ b=GkxJ+D1VqW14T7FkQ0ZVdxiR8BY4l/g05CrKudjQxcdUn7QY7dGzbHyz2TidHqA0tm
+ Bs/9xD1PEegYB8xptGYGSHeINOiikukbmJt47rnEtmxiV0r+pSf9dANuo5hwzE30VdwU
+ da3eDTuixHwRLOOZ+S6zVgc+f8FV/bVktOPBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=CoLROV0TwvvbgaEa2VpSQCWyhdULiL5V7g1SVA/nMjw=;
- b=dQDBzIuMRbCOXxwb/eKgZ23mxBmRQqv/ul2zPtO47WU13TqReJc3RvLvHiPpFQo4CL
- PHnpGIpZXzeUYDxdgZYBFi/Dt7BINXa8xsAvg52E43jtNoOyjkREcakQaSglQJb6Xo7n
- uXtHXsbOS4zUbKHY9czAULaFLuIOAWXwxFzFBGS+VpJmGOzNfvzqQpkG51oRdMZyVQwN
- CBYU5c/pD5gZ9aELE9LFdyEPQK3P/95+dXKXXmEOfdV/PX4eSVoEB3qKm3ydzZM5ucLR
- E1xROtPHBWxB4YNdhygcCAOkXKH90LxNuMT/E1rWCvoNAYvb+7dKhefi+DpK3+yfXkJ6
- SFHA==
-X-Gm-Message-State: AOAM532FfHvyTZAuvA+cVJohzclri3WCo8uwuDUJ9zjL1YLg/ln8HJwp
- +1kUfF84LnWbGUOYwuCiNuMDdDfKxXQvC79Wpqdfhg==
-X-Google-Smtp-Source: ABdhPJw76jZcSy7NBBe/fHlp+meacQHPzsDlCw2c2PdUpm3VlvqKII/TM4m0AjzcjCe+yD8QgM41zy6upwi+AYJXEiw=
-X-Received: by 2002:a5d:4a48:: with SMTP id v8mr650327wrs.204.1619712622419;
- Thu, 29 Apr 2021 09:10:22 -0700 (PDT)
+ bh=WIm9ODd52QNJP8uUTlDUyKPPXZPkbXWIxojLx1eA9Ro=;
+ b=jRs9OSaf8YSO5YyJYvxcYEmM+cyotk3rimRUBBMLr3PqWebX18WHMBGnTummHO8HkO
+ 8Q63HfQuv6+d6wIXsu+Dl2qX+fo9C0ijGLoW9CdmzzmGJY8bkw8LmTRfLQH9bPahT+wb
+ rMl3oLGbFCkWx6c/J67ph8ckJQCSIUVfGJh67/SawnB0cfBqv2MsFipu4sM3tPIRo9mt
+ zLiJayjUWqNbm+JIav6KwICW8WdRAAayH/63jIpuA3OUWjLDr1F7ByiNHYOfU9GVBHo+
+ FhmkDM2g1UshlRMu+gbtIGHukF8cG8mZCvfIW5S5jnDFxa9DLLOXQA01Shlw7fCxs8rE
+ yghw==
+X-Gm-Message-State: AOAM5329z03hLNM08D8ozBSE5gHLvffIKH3Nky3YeshT6g00EMAyqGei
+ 8boA7Il5cx0XAqpNj7QEplFf7BYzNimYtOKogu7p1w==
+X-Google-Smtp-Source: ABdhPJw12NqvaFWjveVSCejO2kud6LxvJTjdXE30FomRHp359bTLmnsViIibfTabfL0bkLZQhHVbHZiaqUISYvptAig=
+X-Received: by 2002:a5d:47ad:: with SMTP id 13mr684204wrb.56.1619712625819;
+ Thu, 29 Apr 2021 09:10:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20201028100640.13876-1-patrick.delaunay@st.com>
- <PA4PR10MB4399E6FCFA94A7F85ED8866083489@PA4PR10MB4399.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <PA4PR10MB4399E6FCFA94A7F85ED8866083489@PA4PR10MB4399.EURPRD10.PROD.OUTLOOK.COM>
+ <20201028100640.13876-2-patrick.delaunay@st.com>
+In-Reply-To: <20201028100640.13876-2-patrick.delaunay@st.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Apr 2021 09:10:08 -0700
-Message-ID: <CAPnjgZ3Ys0SyPFYakq-UN31csKwz0skfGCknfm3OKg+rLqVxzA@mail.gmail.com>
-To: Patrice CHOTARD <patrice.chotard@st.com>
+Date: Thu, 29 Apr 2021 09:10:12 -0700
+Message-ID: <CAPnjgZ1wjs6t7G=oYArzc9j7P-KHg4BsVeLcmRzn2mogeEP05g@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Patrick DELAUNAY <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] cmd: pinmux: update result of
-	do_status
+ U-Boot Mailing List <u-boot@lists.denx.de>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/2] cmd: pinmux: support pin name in
+	status command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,146 +69,180 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick,
 
-On Tue, 20 Apr 2021 at 03:21, Patrice CHOTARD <patrice.chotard@st.com> wrote:
+On Wed, 28 Oct 2020 at 03:06, Patrick Delaunay <patrick.delaunay@st.com> wrote:
 >
-> Hi Patrick
+> Allow pin name parameter for pimux staus command,
+> as gpio command to get status of one pin.
 >
-> -----Original Message-----
-> From: Uboot-stm32 <uboot-stm32-bounces@st-md-mailman.stormreply.com> On Behalf Of Patrick DELAUNAY
-> Sent: mercredi 28 octobre 2020 11:07
-> To: u-boot@lists.denx.de
-> Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Simon Glass <sjg@chromium.org>; Patrick DELAUNAY <patrick.delaunay@st.com>; Sean Anderson <seanga2@gmail.com>
-> Subject: [Uboot-stm32] [PATCH 1/2] cmd: pinmux: update result of do_status
+> The possible usage of the command is:
 >
-> Update the result of do_status and alway returns a CMD_RET_ value (-ENOSYS was a possible result of show_pinmux).
+> > pinmux dev pinctrl
+> > pinmux status
 >
-> This patch also adds pincontrol name in error messages (dev->name) and treats correctly the status sub command when pin-controller device is not selected.
+> > pinmux status -a
+>
+> > pinmux status <pin-name>
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > ---
 >
->  cmd/pinmux.c                 | 44 +++++++++++++++++++-----------------
->  test/py/tests/test_pinmux.py |  4 ++--
->  2 files changed, 25 insertions(+), 23 deletions(-)
+>  cmd/pinmux.c                 | 41 +++++++++++++++++++++++++-----------
+>  test/py/tests/test_pinmux.py | 29 +++++++++++++++++++++++++
+>  2 files changed, 58 insertions(+), 12 deletions(-)
 >
-> diff --git a/cmd/pinmux.c b/cmd/pinmux.c index 9942b15419..af04c95a46 100644
+> diff --git a/cmd/pinmux.c b/cmd/pinmux.c
+> index af04c95a46..e096f16982 100644
 > --- a/cmd/pinmux.c
 > +++ b/cmd/pinmux.c
-> @@ -41,7 +41,7 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc,
+> @@ -41,19 +41,20 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc,
 >         return CMD_RET_SUCCESS;
 >  }
 >
-> -static int show_pinmux(struct udevice *dev)
+> -static void show_pinmux(struct udevice *dev)
+> +static bool show_pinmux(struct udevice *dev, char *name)
 
-I think it is better to return the error code and let the caller
-ignore it, If we later want to report the error code, we can.
+How about returning -ENOENT if there is no pin.
 
-> +static void show_pinmux(struct udevice *dev)
 >  {
 >         char pin_name[PINNAME_SIZE];
 >         char pin_mux[PINMUX_SIZE];
-> @@ -51,54 +51,56 @@ static int show_pinmux(struct udevice *dev)
+>         int pins_count;
+>         int i;
+>         int ret;
+> +       bool found = false;
 >
 >         pins_count = pinctrl_get_pins_count(dev);
 >
-> -       if (pins_count == -ENOSYS) {
-> -               printf("Ops get_pins_count not supported\n");
-> -               return pins_count;
-> +       if (pins_count < 0) {
+>         if (pins_count < 0) {
+>                 printf("Ops get_pins_count not supported by %s\n", dev->name);
+> -               return;
+> +               return found;
 
-Why change this to < 0 ?
+Here found will be false, so I think you are conflating different
+errors. Better to return pins_count in this case.
 
-I believe that -ENOSYS is the only valid error. We should update the
-get_pins_count() API function to indicate that.
-
-> +               printf("Ops get_pins_count not supported by %s\n", dev->name);
-> +               return;
 >         }
 >
 >         for (i = 0; i < pins_count; i++) {
->                 ret = pinctrl_get_pin_name(dev, i, pin_name, PINNAME_SIZE);
-> -               if (ret == -ENOSYS) {
-> -                       printf("Ops get_pin_name not supported\n");
-> -                       return ret;
-> +               if (ret) {
-> +                       printf("Ops get_pin_name error (%d) by %s\n",
-> +                              ret, dev->name);
-> +                       return;
+> @@ -61,43 +62,59 @@ static void show_pinmux(struct udevice *dev)
+>                 if (ret) {
+>                         printf("Ops get_pin_name error (%d) by %s\n",
+>                                ret, dev->name);
+> -                       return;
+> +                       return found;
 >                 }
->
+> -
+> +               if (name && strcmp(name, pin_name))
+> +                       continue;
+> +               found = true;
 >                 ret = pinctrl_get_pin_muxing(dev, i, pin_mux, PINMUX_SIZE);
 >                 if (ret) {
-> -                       printf("Ops get_pin_muxing error (%d)\n", ret);
-> -                       return ret;
-> +                       printf("Ops get_pin_muxing error (%d) by %s in %s\n",
-> +                              ret, pin_name, dev->name);
-> +                       return;
+>                         printf("Ops get_pin_muxing error (%d) by %s in %s\n",
+>                                ret, pin_name, dev->name);
+> -                       return;
+> +                       return found;
 >                 }
 >
 >                 printf("%-*s: %-*s\n", PINNAME_SIZE, pin_name,
 >                        PINMUX_SIZE, pin_mux);
 >         }
-> -
-> -       return 0;
+> +
+> +       return found;
 >  }
 >
 >  static int do_status(struct cmd_tbl *cmdtp, int flag, int argc,
 >                      char *const argv[])
 >  {
 >         struct udevice *dev;
-> -       int ret = CMD_RET_USAGE;
+> +       char *name;
+> +       bool found = false;
 >
-> -       if (currdev && (argc < 2 || strcmp(argv[1], "-a")))
-> -               return show_pinmux(currdev);
-> +       if (argc < 2) {
-> +               if (!currdev) {
-> +                       printf("pin-controller device not selected\n");
-> +                       return CMD_RET_FAILURE;
-> +               }
-> +               show_pinmux(currdev);
-> +               return CMD_RET_SUCCESS;
-> +       }
->
-> -       if (argc < 2 || strcmp(argv[1], "-a"))
-> -               return ret;
-> +       if (strcmp(argv[1], "-a"))
-> +               return CMD_RET_USAGE;
->
->         uclass_foreach_dev_probe(UCLASS_PINCTRL, dev) {
->                 /* insert a separator between each pin-controller display */
->                 printf("--------------------------\n");
->                 printf("%s:\n", dev->name);
-> -               ret = show_pinmux(dev);
-> -               if (ret < 0)
-> -                       printf("Can't display pin muxing for %s\n",
-> -                              dev->name);
-> +               show_pinmux(dev);
+>         if (argc < 2) {
+>                 if (!currdev) {
+>                         printf("pin-controller device not selected\n");
+>                         return CMD_RET_FAILURE;
+>                 }
+> -               show_pinmux(currdev);
+> +               show_pinmux(currdev, NULL);
+>                 return CMD_RET_SUCCESS;
 >         }
 >
-> -       return ret;
-> +       return CMD_RET_SUCCESS;
->  }
+>         if (strcmp(argv[1], "-a"))
+> -               return CMD_RET_USAGE;
+> +               name = argv[1];
+> +       else
+> +               name = NULL;
 >
->  static int do_list(struct cmd_tbl *cmdtp, int flag, int argc, diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py index 0cbbae000c..b3ae2ab024 100644
+>         uclass_foreach_dev_probe(UCLASS_PINCTRL, dev) {
+> -               /* insert a separator between each pin-controller display */
+> -               printf("--------------------------\n");
+> -               printf("%s:\n", dev->name);
+> -               show_pinmux(dev);
+> +               if (!name) {
+> +                       /* insert a separator between each pin-controller display */
+> +                       printf("--------------------------\n");
+> +                       printf("%s:\n", dev->name);
+> +               }
+> +               if (show_pinmux(dev, name))
+> +                       found = true;
+> +       }
+> +
+> +       if (name && !found) {
+> +               printf("%s not found\n", name);
+> +               return CMD_RET_FAILURE;
+>         }
+>
+>         return CMD_RET_SUCCESS;
+> @@ -148,5 +165,5 @@ U_BOOT_CMD(pinmux, CONFIG_SYS_MAXARGS, 1, do_pinmux,
+>            "show pin-controller muxing",
+>            "list                     - list UCLASS_PINCTRL devices\n"
+>            "pinmux dev [pincontroller-name] - select pin-controller device\n"
+> -          "pinmux status [-a]              - print pin-controller muxing [for all]\n"
+> +          "pinmux status [-a | pin-name]   - print pin-controller muxing [for all | for pin-name]\n"
+>  )
+> diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py
+> index b3ae2ab024..fbde1d99b1 100644
 > --- a/test/py/tests/test_pinmux.py
 > +++ b/test/py/tests/test_pinmux.py
-> @@ -13,9 +13,9 @@ def test_pinmux_usage_1(u_boot_console):
->  @pytest.mark.buildconfigspec('cmd_pinmux')
->  def test_pinmux_usage_2(u_boot_console):
->      """Test that 'pinmux status' executed without previous "pinmux dev"
-> -    command displays pinmux usage."""
-> +    command displays error message."""
->      output = u_boot_console.run_command('pinmux status')
-> -    assert 'Usage:' in output
-> +    assert 'pin-controller device not selected' in output
+> @@ -82,3 +82,32 @@ def test_pinmux_status(u_boot_console):
+>      assert ('P6        : GPIO1 drive-open-drain.' in output)
+>      assert ('P7        : GPIO2 bias-pull-down input-enable.' in output)
+>      assert ('P8        : GPIO3 bias-disable.' in output)
+> +
+> +@pytest.mark.buildconfigspec('cmd_pinmux')
+> +@pytest.mark.boardspec('sandbox')
+> +def test_pinmux_status_pinname(u_boot_console):
+> +    """Test that 'pinmux status <pinname>' displays selected pin."""
+> +
+> +    output = u_boot_console.run_command('pinmux status a5')
+> +    assert ('a5        : gpio output .' in output)
+> +    assert (not 'pinctrl-gpio:' in output)
+> +    assert (not 'pinctrl:' in output)
+> +    assert (not 'a6' in output)
+> +    assert (not 'P0' in output)
+> +    assert (not 'P8' in output)
+> +
+> +    output = u_boot_console.run_command('pinmux status P7')
+> +    assert (not 'pinctrl-gpio:' in output)
+> +    assert (not 'pinctrl:' in output)
+> +    assert (not 'a5' in output)
+> +    assert (not 'P0' in output)
+> +    assert (not 'P6' in output)
+> +    assert ('P7        : GPIO2 bias-pull-down input-enable.' in output)
+> +    assert (not 'P8' in output)
+> +
+> +    output = u_boot_console.run_command('pinmux status P9')
+> +    assert (not 'pinctrl-gpio:' in output)
+> +    assert (not 'pinctrl:' in output)
+> +    assert (not 'a5' in output)
+> +    assert (not 'P8' in output)
+> +    assert ('P9 not found' in output)
+
+Can we write this test in C? We can use run_command()...see acpi.c
+
+> --
+> 2.17.1
 >
->  @pytest.mark.buildconfigspec('cmd_pinmux')
->  @pytest.mark.boardspec('sandbox')
->
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> Thanks
-> Patrice
 
 Regards,
 Simon

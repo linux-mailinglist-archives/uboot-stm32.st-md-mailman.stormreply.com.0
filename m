@@ -2,52 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9651536EDEC
-	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 18:11:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19C1B36EDED
+	for <lists+uboot-stm32@lfdr.de>; Thu, 29 Apr 2021 18:11:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5C891C58D5A;
-	Thu, 29 Apr 2021 16:11:40 +0000 (UTC)
-Received: from mail-oo1-f49.google.com (mail-oo1-f49.google.com
- [209.85.161.49])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CCED4C58D5A;
+	Thu, 29 Apr 2021 16:11:43 +0000 (UTC)
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com
+ [209.85.210.52])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF409C58D59
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2580CC58D59
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 16:11:38 +0000 (UTC)
-Received: by mail-oo1-f49.google.com with SMTP id
- e9-20020a4ada090000b02901f91091e5acso2718071oou.0
+ Thu, 29 Apr 2021 16:11:42 +0000 (UTC)
+Received: by mail-ot1-f52.google.com with SMTP id
+ 92-20020a9d02e50000b029028fcc3d2c9eso39339128otl.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 09:11:38 -0700 (PDT)
+ Thu, 29 Apr 2021 09:11:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=dHj8BE1plNo7/flKAIqzUNVQ+IoVZ8m/cMU+143hs4M=;
- b=JfLbf+e8ggo+ijJh9upl0M5zYKFR+QEvZ3O9tu4vEhsyNmRr3tlL22IfsxrXUpjJZy
- MD8IGAVu5OgRvB+PYq8+RkVmva4urpHVqfxoPTbpVw923RhWOOdiz5GlCx+SFZ3vTa+K
- yscUX8/SFK64wEGh15+Sr7IeZRlIUfEdXOgYU=
+ :cc; bh=Y6fuVt9WL6/NZVvPoHhUuVuWKJndNWCdFgbJkE+fwho=;
+ b=gj/l8Y6zNU52sQ/1IiwrtOLZCyuf929eMkIqBcePHasRoPvATxLwlAiGuMZt2nqQx/
+ A64ypK2+6mH8xEH33ZQCjAe+E995Ml5QLJNqPIUm8E6rgDZ5t9fObWJE1h1GiPfUcHey
+ wSv1SS1nIRZeqO0GzVkAwU4tFcKpsazf2u8XU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=dHj8BE1plNo7/flKAIqzUNVQ+IoVZ8m/cMU+143hs4M=;
- b=KLxIzeFyECL4FwQt2ZOEjNxGJh4Ul50hqDWMGIyxfNegIGlWPEVzHuSJNGF4N4hoPl
- vXgvWs5ZUg99D5r+6zisN5/M8hW+tOmLDW4sDvUE+AmOz7F8eLUPKVYpRdJ1YEax4i5Z
- DFKQVc/D6WLH73kSxdMppXZX21CPZmCQxqRhjkLPwrvocfV3KH4/puVb4+MfGOcmRFqm
- F0W00rOqj46qjDAxpXlWJa4o4JZC/pBDAX6atDqRQOaONuWXmsKfT4uEXgSPARyGGbrm
- e0EZWsPNTJ+KGLwr5F5TCfugm9+7jH/4BhSa84dJFa+bh1w7/SRnqYqxCRkvdFd9AEio
- XNew==
-X-Gm-Message-State: AOAM530bMgDlAJe0mH6WKAB+YaDaYveqFQ8i2GoiJuSKX9PTugzpcq9T
- AAhgAt767zXcmIc/dC/+ZCrHwipUZyBWHozgVwCPyQ==
-X-Google-Smtp-Source: ABdhPJxbiy/V6wgsuMpzEBjByp4kvf/CH+lOC/UxNQ9ORy+BdxV64/0LMhl4hxZRc5zUW8zjSOn9Mf3Y0bObd2VAzmg=
-X-Received: by 2002:a05:6820:455:: with SMTP id
- p21mr616256oou.56.1619712697376; 
- Thu, 29 Apr 2021 09:11:37 -0700 (PDT)
+ bh=Y6fuVt9WL6/NZVvPoHhUuVuWKJndNWCdFgbJkE+fwho=;
+ b=VH14vYanT7JUJ0mcz+gvI0D2XI/70KSk7L92a957W0pASCxhXOI+38uQKaMCwYa0Z2
+ KBYf8NJTBGR62mhd+OHlsKGuLuRyd6fRew8Lkgc7M+0pgQ23asBjNNCcgTFwEEQvF0FJ
+ tqeHH0FbYz3KkxqUjZ/mxvjWAG1jXUjDhUuFw4bmxb+qiPob57/JwtzuX8z2sncoKA6q
+ u61206ruIBl323W+FZqnT9lPTKCAmdDtLvveue1scPkEqexyVMxfo9zBagUIKg77FXIN
+ 1R1r6ONxEOGXwoZkSbALmKLe2LAFaFdBA/TNjlt+SdryVHfrgXJlD3/GH8mT2aAFQbFJ
+ +taA==
+X-Gm-Message-State: AOAM532xM3cSsNpSD3OnFspjzXdtZR3DGU16NY9wDQhGKi5SFDdyn6/c
+ ofNX3YUju+8WL0ny9dGhjCR6nqRQ0zVNva6xKcTV5w==
+X-Google-Smtp-Source: ABdhPJwvhfBQc5dUijZIUY4z6Dwz+tbI57zwsP2WwB6PX9vLRLz7zTPWH28z/GBA4yWtIC0XJ+8XvhgeBg4uokd9vec=
+X-Received: by 2002:a9d:7401:: with SMTP id n1mr160700otk.28.1619712700674;
+ Thu, 29 Apr 2021 09:11:40 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210428102345.3192-1-patrick.delaunay@foss.st.com>
- <20210428122109.v3.1.Iac36d9d9036edd54d2574d712ca21283bf7c73d0@changeid>
-In-Reply-To: <20210428122109.v3.1.Iac36d9d9036edd54d2574d712ca21283bf7c73d0@changeid>
+ <20210428122109.v3.2.I22712a112842c336b2934d240f18dc64f12919db@changeid>
+In-Reply-To: <20210428122109.v3.2.I22712a112842c336b2934d240f18dc64f12919db@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Apr 2021 09:10:40 -0700
-Message-ID: <CAPnjgZ2wiokTgJau4MD5A3vJ-ZrPV=r0saiR1-dyi7Z8Oc86SA@mail.gmail.com>
+Date: Thu, 29 Apr 2021 09:10:43 -0700
+Message-ID: <CAPnjgZ2OecZEktCN6i8TKpVmGFQFCZLFcQ37s7-+9FVg6Vi+9Q@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Masahiro Yamada <masahiroy@kernel.org>, Ard Biesheuvel <ardb@kernel.org>,
@@ -55,8 +54,7 @@ Cc: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Stefan Roese <sr@denx.de>, Marek Bykowski <marek.bykowski@gmail.com>,
  Etienne Carriere <etienne.carriere@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/7] lmb: Add support of flags for
-	no-map properties
+Subject: Re: [Uboot-stm32] [PATCH v3 2/7] lmb: add lmb_is_reserved_flags
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,74 +76,77 @@ Hi Patrick,
 On Wed, 28 Apr 2021 at 03:23, Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Add "flags" in lmb_property to save the "no-map" property of
-> reserved region and a new function lmb_reserve_flags() to check
-> this flag.
+> Add a new function lmb_is_reserved_flags to check is a
+> address is reserved with a specific flags.
 >
-> The default allocation use flags = LMB_NONE.
+> This function can be used to check if an address was
+> reserved with no-map flags with:
 >
-> The adjacent reserved memory region are merged only when they have
-> the same flags value.
->
-> This patch is partially based on flags support done in Linux kernel
-> mm/memblock .c (previously lmb.c); it is why LMB_NOMAP = 0x4, it is
-> aligned with MEMBLOCK_NOMAP value.
+> lmb_is_reserved_flags(lmb, addr, LMB_NOMAP);
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
-> (no changes since v2)
+> (no changes since v1)
 >
-> Changes in v2:
-> - remove unnecessary comments in lmb.h
-> - rebase on latest lmb patches
->
->  include/lmb.h | 20 ++++++++++++++++++++
->  lib/lmb.c     | 52 ++++++++++++++++++++++++++++++++++++++++++---------
->  2 files changed, 63 insertions(+), 9 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
+>  include/lmb.h |  1 +
+>  lib/lmb.c     | 10 ++++++++--
+>  2 files changed, 9 insertions(+), 2 deletions(-)
 >
 > diff --git a/include/lmb.h b/include/lmb.h
-> index 541e17093c..aa196c63bf 100644
+> index aa196c63bf..6537d56e18 100644
 > --- a/include/lmb.h
 > +++ b/include/lmb.h
-> @@ -12,6 +12,16 @@
->   * Copyright (C) 2001 Peter Bergner, IBM Corp.
->   */
+> @@ -91,6 +91,7 @@ extern phys_addr_t lmb_alloc_addr(struct lmb *lmb, phys_addr_t base,
+>                                   phys_size_t size);
+>  extern phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr);
+>  extern int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr);
+> +extern int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags);
+
+drop extern and please add a function comment
+
+>  extern long lmb_free(struct lmb *lmb, phys_addr_t base, phys_size_t size);
 >
-> +/**
-> + * enum lmb_flags - definition of memory region attributes
-> + * @LMB_NONE: no special request
-> + * @LMB_NOMAP: don't add to mmu configuration
-> + */
-> +enum lmb_flags {
-> +       LMB_NONE                = 0x0,
-> +       LMB_NOMAP               = 0x4,
-> +};
+>  extern void lmb_dump_all(struct lmb *lmb);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 69700bf9ba..e270e86186 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -443,7 +443,7 @@ phys_size_t lmb_get_free_size(struct lmb *lmb, phys_addr_t addr)
+>         return 0;
+>  }
+>
+> -int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
+> +int lmb_is_reserved_flags(struct lmb *lmb, phys_addr_t addr, int flags)
+>  {
+>         int i;
+>
+> @@ -451,11 +451,17 @@ int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
+>                 phys_addr_t upper = lmb->reserved.region[i].base +
+>                         lmb->reserved.region[i].size - 1;
+>                 if ((addr >= lmb->reserved.region[i].base) && (addr <= upper))
+> -                       return 1;
+> +                       return !!((lmb->reserved.region[i].flags & flags)
+> +                                  == flags);
+
+I don't know what flags is since there is no comment, but it seems
+that you should drop the !!()
+
+>         }
+>         return 0;
+>  }
+>
+> +int lmb_is_reserved(struct lmb *lmb, phys_addr_t addr)
+> +{
+> +       return lmb_is_reserved_flags(lmb, addr, LMB_NONE);
+> +}
 > +
->  /**
->   * struct lmb_property - Description of one region.
->   *
-> @@ -21,6 +31,7 @@
->  struct lmb_property {
->         phys_addr_t base;
->         phys_size_t size;
-> +       enum lmb_flags flags;
->  };
+>  __weak void board_lmb_reserve(struct lmb *lmb)
+>  {
+>         /* please define platform specific board_lmb_reserve() */
+> --
+> 2.17.1
 >
->  /**
-> @@ -69,6 +80,8 @@ extern void lmb_init_and_reserve_range(struct lmb *lmb, phys_addr_t base,
->                                        phys_size_t size, void *fdt_blob);
->  extern long lmb_add(struct lmb *lmb, phys_addr_t base, phys_size_t size);
->  extern long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size);
-> +extern long lmb_reserve_flags(struct lmb *lmb, phys_addr_t base,
-> +                             phys_size_t size, enum lmb_flags flags);
-
-Needs a comment
-
-[..]
 
 Regards,
 Simon

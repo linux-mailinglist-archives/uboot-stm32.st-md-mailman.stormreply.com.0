@@ -2,58 +2,51 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3565536F3CF
-	for <lists+uboot-stm32@lfdr.de>; Fri, 30 Apr 2021 03:47:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB7AD36F5A7
+	for <lists+uboot-stm32@lfdr.de>; Fri, 30 Apr 2021 08:21:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DEB6EC58D59;
-	Fri, 30 Apr 2021 01:46:59 +0000 (UTC)
-Received: from mail-yb1-f179.google.com (mail-yb1-f179.google.com
- [209.85.219.179])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 75318C58D59;
+	Fri, 30 Apr 2021 06:21:43 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D67DCC57B74
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 266A3CFAC55
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 30 Apr 2021 01:46:56 +0000 (UTC)
-Received: by mail-yb1-f179.google.com with SMTP id z1so81061309ybf.6
+ Fri, 30 Apr 2021 06:21:40 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BF8C761409
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 29 Apr 2021 18:46:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Kw7XQppknutCfbiSyIzLRVHu+UGhT4eu/102R7oSL+U=;
- b=RfDAcsynbNHKyHPexoRXgBnjhZ2e8BHXWLuJNPwvexaSMvMVGSK0v1jUVw4c08AxNg
- 6VZT2qsoZTryZiELPuSSLeiXGvSBb6mlriOTi64xNcrvRlNs5Unyc/Bw1d1JMzeky8uH
- VeM7zjQrmQ1MqhBHz0a5k0OWCcbM3NhE+wGls5HcPaS61rBwei+mbMg7sVfX0Q++ZZs4
- lnNUQdUKaiRyQmXWAowPhD8E5jWLpqr/j7mkVrktF1290XSf4P0Orf/Y0PVBEOmNwe+B
- xdzfCVXIM7Gwylu+nwlninLOcEAgAYwvWZRT0UUrUoB81004SfioKjLm0jNQG4Dz/iL0
- s0IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=Kw7XQppknutCfbiSyIzLRVHu+UGhT4eu/102R7oSL+U=;
- b=BvxFiBOLsILS8xsXfl/uNE+LUQ7yiwWAPpPSJDGcLc6k/TSDsXqzfLbycer6k0nbP4
- cEDuVgKNo8Lak8uWOHLH8oQem6yQYnK/rhrwuLHaOacvhXmTQznMrTJ9C/w+YGvD8+Vr
- ZAheoGeyb8dB5MmJbDv4SJYlPbTMcEWt7awVxsHiEy7Dm9QAjxldC5k444D1MOf6j1E8
- IuhpGNVsshPqLZm3+Z0bHn/di6yoSQwTyUx8h+XM/zQPGuqJJQgMP5rDhMjT5FaURZxc
- nDLCahdzhD3QzagV+iCo+wECUKy7B1HW7SG78DCat2u+8v9GBVbAg0VmKaKeynT3ceTn
- AGlg==
-X-Gm-Message-State: AOAM532RqrQLGyDjnneFw9x7wPk7p3bxjzr72aRdi3y5Hzn9tTCjZJ4B
- GFKhAnLzKYq4bD0HLQ+tRJR3qQTXYSxkNzWp6Lk=
-X-Google-Smtp-Source: ABdhPJy2i7FWVqfE50c2V/KOs85V3ZnyQf3TR5yayXHGdbNWSdjjC2q3BAy8Eoq6cHyHEyjEwmaSX8aWXAGtizCJWSI=
-X-Received: by 2002:a25:db84:: with SMTP id g126mr3620551ybf.122.1619747214994; 
- Thu, 29 Apr 2021 18:46:54 -0700 (PDT)
+ Fri, 30 Apr 2021 06:21:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1619763698;
+ bh=V0xmL0d3J8pTcepDiSfeVTWItt9d7GwxCsTkcN/RuuU=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=l9N42pQFhFjeEJzMK/FWRjbAqokwKPDbyzgaVoBumuz9V4CiwDXKRUONokZEekpP/
+ d6TJTB1S3DqBCZkBStp2sZ8GBVQQ8Lnl4CCh65rQFycPdxCfZyi/l3wgBYlBQ5IS7n
+ utMdGdWlUnu4utylGY1+XFWTDJSyuSt3540xcz04aCazuWLkYDaYlXRBYZi/sKYITo
+ WWdvOBlCPkH8XCrk+KUqvFGqdVP5Jdwk0GL0CphM+N1v7pyBnzbRulptrfgrQsFAKt
+ OGua0Iymut3EvlORhKR3BAnIjMrFKmIO/P1Z3A4r+D6F7fpg1mq95BuUNZqyrFuYa1
+ x5fT3tL4MKzjg==
+Received: by mail-lj1-f173.google.com with SMTP id b21so6950278ljf.11
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 29 Apr 2021 23:21:38 -0700 (PDT)
+X-Gm-Message-State: AOAM533oomri9INu0WDOq6cNlPbj7axvK0uim4xfhIXqIE9zNOBmXYBl
+ LgYZsi+r6OFmBwcbJ2salPPIXnuVzq1rXWSsOds=
+X-Google-Smtp-Source: ABdhPJydYHESyavGzfD4pl8vNew5IOqc1HAdU/+sCJF5pfEc5/iSWoFBkhZxSZe53JCnXGVPKH65oXM+XPC5rOjvZoU=
+X-Received: by 2002:a2e:591:: with SMTP id 139mr2597828ljf.234.1619763697016; 
+ Thu, 29 Apr 2021 23:21:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210428102345.3192-1-patrick.delaunay@foss.st.com>
  <20210428122109.v3.5.Id906966934e591cb691481197488ae2cfa31ffa1@changeid>
  <CAPnjgZ2KvAKjxK=2N36G5TM3L1GuF1aK0Ftj=jgjjg=Y+WWYFw@mail.gmail.com>
 In-Reply-To: <CAPnjgZ2KvAKjxK=2N36G5TM3L1GuF1aK0Ftj=jgjjg=Y+WWYFw@mail.gmail.com>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 30 Apr 2021 09:46:43 +0800
-Message-ID: <CAEUhbmXd8vS9x5Co4MeUzP6N3O8gK7=9GHJB8yNZwFbvZh3jfg@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Fri, 30 Apr 2021 08:21:25 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXELyJgG7iULZcpoEWPFruHOJgmO2tJA=PMXoByrfD6jhw@mail.gmail.com>
+Message-ID: <CAMj1kXELyJgG7iULZcpoEWPFruHOJgmO2tJA=PMXoByrfD6jhw@mail.gmail.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Marek Vasut <marex@denx.de>, chenshuo <chenshuo@eswin.com>,
  =?UTF-8?B?RnLDqWTDqXJpYyBEYW5pcw==?= <frederic.danis@collabora.com>,
- Ard Biesheuvel <ardb@kernel.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Wasim Khan <wasim.khan@nxp.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
@@ -77,9 +70,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon,
-
-On Fri, Apr 30, 2021 at 12:13 AM Simon Glass <sjg@chromium.org> wrote:
+On Thu, 29 Apr 2021 at 18:11, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Patrick,
 >
@@ -99,15 +90,29 @@ On Fri, Apr 30, 2021 at 12:13 AM Simon Glass <sjg@chromium.org> wrote:
 > >  1 file changed, 15 insertions(+), 8 deletions(-)
 >
 > Where is no-map documented?
-
-See Linux kernel
-Documentation/devicetree/bindings/reserved-memory/reserved-memory.txt
-
 >
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Bin
+I don't remember exactly where the discussion ended up the last time,
+so please disregard this if we settled it, but I still don't think
+that secure-only memory should be described in the DT at all.
+
+The v7 and v8 documentation are not 100% aligned on this, but the S
+bit is now considered a true address bit, and so secure address 0x0
+and non-secure address zero could be decoded by different peripherals
+at the same time, even if some TZ firewall implementations don't
+implement it that way.
+
+Since DT addresses don't carry the S bit at all, any address described
+in DT must be assumed to be a non-secure address. This means that the
+no-map region essentially describes a non-secure region that does not
+exist, in order to prevent a secure region at the same offset (which
+DT cannot describe in the first place) from being covered by the
+linear mapping.
+
+So, apologies if we are going around in circles here, but could you
+please explain again why the DT is describing secure memory as
+non-secure memory, and then reserving it again using no-map?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

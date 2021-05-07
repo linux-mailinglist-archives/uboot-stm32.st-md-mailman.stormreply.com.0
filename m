@@ -2,58 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E9DB537562C
-	for <lists+uboot-stm32@lfdr.de>; Thu,  6 May 2021 17:02:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AD1537658F
+	for <lists+uboot-stm32@lfdr.de>; Fri,  7 May 2021 14:51:04 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A6206C57B74;
-	Thu,  6 May 2021 15:02:59 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F57EC59781;
+	Fri,  7 May 2021 12:51:03 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 65E1BC56630
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D48F3C59780
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  6 May 2021 15:02:56 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id t18so5975062wry.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 06 May 2021 08:02:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=KvVIkFt8GUyV/D9TrnoH047Jzy7OLs3IsjaHeQM8qwM=;
- b=eKUdJye4R6P4Q8bsahSHAVGuXHDAyhTYZdri5rR1sZx/M7PuaBQaZXvVaer4XiIe75
- ej7P/6t4f5nvipoQo/Bww6X/E0dRsPtQQtiBadlPwcTK791fpFEDS7wg2kmM8mh3SZsK
- Jvs1yEonMv7hLIPnofJWdncxHOHTfPXEN+2fs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=KvVIkFt8GUyV/D9TrnoH047Jzy7OLs3IsjaHeQM8qwM=;
- b=T4ZnKg0sM+ucUT8m9fihqEmLofqBqBUUT0fnCLuqNJ04K5OZxwSZmRw4U9QH9n7FB1
- rAN29+VcQbpmemz1Niv7cmnILxPiZvJigWv8T6r+mWiBFpxLS241QXojVqup6EV5VIvn
- MvS+qJdhKfNxUWsBLOiHPfO4f3qvPjItsgqNS1CTAQ+O5L4LHJAHg379hfioWMDaaFQC
- wuanBRFXIo7DUnEG3mJqx5d4vDKvd2QnzhbZBeq40c/6SRDN4IbRXchFMZ35I5+kXt3I
- hyl37oouJBkdeg+umA62s0MLLPJ0sPuGufKY8tLKwnEE8vEN5ANOTHBuQUmXg89i533R
- fOGw==
-X-Gm-Message-State: AOAM531j0LcRXEk+Jp5+gzOu2wuPvLK5QvIRB3n0cErejiZIKaTzzk7Z
- M9zM2ZLk2czcija4ScamVsqHCQ1jMVKMvTZ9vxUCVA==
-X-Google-Smtp-Source: ABdhPJxoT9rbRn8fxUXTcGZUTJe889bsIOeTCIvtRpD3nyQhUKkr90rrymKxfDLoZlyIIWQB4ocZz0H6BXEQnaCgaPk=
-X-Received: by 2002:adf:fd0d:: with SMTP id e13mr5947923wrr.56.1620313375603; 
- Thu, 06 May 2021 08:02:55 -0700 (PDT)
+ Fri,  7 May 2021 12:51:01 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 147ClSRJ001907; Fri, 7 May 2021 14:50:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=Oi0rVW9iCwJ2Y3jz8se58GcxPW9/M4L1zRzEXcPaCZo=;
+ b=YY3vPdx4U+IX2lfHdZleLu5JG3YL4V61W6jOW5CMAOr13hm+SaGF1BfKO8cEmeNpEKY0
+ BjGiyLVSDJfmkZu/TzHcgeCKkTJM8QRc0KlAGscnRMSQpJSVvyoI6JLb7OmLUft2uvpr
+ rIURUKON3J7px8jCpJmFrHFkppYJ8j9uVUbAUYmV+wjn9R8RfFEoU6n1d7SvmsM6tDhu
+ +hCa4/FgZx0wnvfYeAQPmAB1UHSZ7HhvvGPEPFhDBrxOrqYriORpJ0+VvYSHnlMurLEs
+ mR5QdeYwEMjfJS+CnWv8WwtNwPn8x6YCPdR4knCsDqwmklHBeR5t0TfwNSCjWR9cM6Dl yA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 38csqg3xp8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 07 May 2021 14:50:46 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D2E0310002A;
+ Fri,  7 May 2021 14:50:43 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BC41121CA8B;
+ Fri,  7 May 2021 14:50:43 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 7 May 2021 14:50:43
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 7 May 2021 14:50:28 +0200
+Message-ID: <20210507125035.1594-1-patrick.delaunay@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20201028100640.13876-1-patrick.delaunay@st.com>
- <20201028100640.13876-2-patrick.delaunay@st.com>
- <CAPnjgZ1wjs6t7G=oYArzc9j7P-KHg4BsVeLcmRzn2mogeEP05g@mail.gmail.com>
- <67cc4f09-85cd-c145-c851-faf153c1de8d@foss.st.com>
-In-Reply-To: <67cc4f09-85cd-c145-c851-faf153c1de8d@foss.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 May 2021 09:02:40 -0600
-Message-ID: <CAPnjgZ3E2-WALbbSqzOn=kWe_GDUM88urkC8GUNjU=NzFFC-aA@mail.gmail.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] cmd: pinmux: support pin name in
-	status command
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG3NODE2.st.com (10.75.127.8) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
+ definitions=2021-05-07_04:2021-05-06,
+ 2021-05-07 signatures=0
+Cc: chenshuo <chenshuo@eswin.com>,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ Masahiro Yamada <masahiroy@kernel.org>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@st.com>, Tero Kristo <t-kristo@ti.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Wasim Khan <wasim.khan@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
+Subject: [Uboot-stm32] [PATCH v4 0/7] arm: cache: cp15: don't map reserved
+	region with no-map property
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,202 +79,131 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
 
-On Thu, 6 May 2021 at 02:38, Patrick DELAUNAY
-<patrick.delaunay@foss.st.com> wrote:
->
-> Hi,
->
-> On 4/29/21 6:10 PM, Simon Glass wrote:
-> > Hi Patrick,
-> >
-> > On Wed, 28 Oct 2020 at 03:06, Patrick Delaunay <patrick.delaunay@st.com> wrote:
-> >> Allow pin name parameter for pimux staus command,
-> >> as gpio command to get status of one pin.
-> >>
-> >> The possible usage of the command is:
-> >>
-> >>> pinmux dev pinctrl
-> >>> pinmux status
-> >>> pinmux status -a
-> >>> pinmux status <pin-name>
-> >> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
-> >> ---
-> >>
-> >>   cmd/pinmux.c                 | 41 +++++++++++++++++++++++++-----------
-> >>   test/py/tests/test_pinmux.py | 29 +++++++++++++++++++++++++
-> >>   2 files changed, 58 insertions(+), 12 deletions(-)
-> >>
-> >> diff --git a/cmd/pinmux.c b/cmd/pinmux.c
-> >> index af04c95a46..e096f16982 100644
-> >> --- a/cmd/pinmux.c
-> >> +++ b/cmd/pinmux.c
-> >> @@ -41,19 +41,20 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>          return CMD_RET_SUCCESS;
-> >>   }
-> >>
-> >> -static void show_pinmux(struct udevice *dev)
-> >> +static bool show_pinmux(struct udevice *dev, char *name)
-> > How about returning -ENOENT if there is no pin.
->
->
-> OK
->
->
-> >>   {
-> >>          char pin_name[PINNAME_SIZE];
-> >>          char pin_mux[PINMUX_SIZE];
-> >>          int pins_count;
-> >>          int i;
-> >>          int ret;
-> >> +       bool found = false;
-> >>
-> >>          pins_count = pinctrl_get_pins_count(dev);
-> >>
-> >>          if (pins_count < 0) {
-> >>                  printf("Ops get_pins_count not supported by %s\n", dev->name);
-> >> -               return;
-> >> +               return found;
-> > Here found will be false, so I think you are conflating different
-> > errors. Better to return pins_count in this case.
-> OK
-> >>          }
-> >>
-> >>          for (i = 0; i < pins_count; i++) {
-> >> @@ -61,43 +62,59 @@ static void show_pinmux(struct udevice *dev)
-> >>                  if (ret) {
-> >>                          printf("Ops get_pin_name error (%d) by %s\n",
-> >>                                 ret, dev->name);
-> >> -                       return;
-> >> +                       return found;
-> >>                  }
-> >> -
-> >> +               if (name && strcmp(name, pin_name))
-> >> +                       continue;
-> >> +               found = true;
-> >>                  ret = pinctrl_get_pin_muxing(dev, i, pin_mux, PINMUX_SIZE);
-> >>                  if (ret) {
-> >>                          printf("Ops get_pin_muxing error (%d) by %s in %s\n",
-> >>                                 ret, pin_name, dev->name);
-> >> -                       return;
-> >> +                       return found;
-> >>                  }
-> >>
-> >>                  printf("%-*s: %-*s\n", PINNAME_SIZE, pin_name,
-> >>                         PINMUX_SIZE, pin_mux);
-> >>          }
-> >> +
-> >> +       return found;
-> >>   }
-> >>
-> >>   static int do_status(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>                       char *const argv[])
-> >>   {
-> >>          struct udevice *dev;
-> >> +       char *name;
-> >> +       bool found = false;
-> >>
-> >>          if (argc < 2) {
-> >>                  if (!currdev) {
-> >>                          printf("pin-controller device not selected\n");
-> >>                          return CMD_RET_FAILURE;
-> >>                  }
-> >> -               show_pinmux(currdev);
-> >> +               show_pinmux(currdev, NULL);
-> >>                  return CMD_RET_SUCCESS;
-> >>          }
-> >>
-> >>          if (strcmp(argv[1], "-a"))
-> >> -               return CMD_RET_USAGE;
-> >> +               name = argv[1];
-> >> +       else
-> >> +               name = NULL;
-> >>
-> >>          uclass_foreach_dev_probe(UCLASS_PINCTRL, dev) {
-> >> -               /* insert a separator between each pin-controller display */
-> >> -               printf("--------------------------\n");
-> >> -               printf("%s:\n", dev->name);
-> >> -               show_pinmux(dev);
-> >> +               if (!name) {
-> >> +                       /* insert a separator between each pin-controller display */
-> >> +                       printf("--------------------------\n");
-> >> +                       printf("%s:\n", dev->name);
-> >> +               }
-> >> +               if (show_pinmux(dev, name))
-> >> +                       found = true;
-> >> +       }
-> >> +
-> >> +       if (name && !found) {
-> >> +               printf("%s not found\n", name);
-> >> +               return CMD_RET_FAILURE;
-> >>          }
-> >>
-> >>          return CMD_RET_SUCCESS;
-> >> @@ -148,5 +165,5 @@ U_BOOT_CMD(pinmux, CONFIG_SYS_MAXARGS, 1, do_pinmux,
-> >>             "show pin-controller muxing",
-> >>             "list                     - list UCLASS_PINCTRL devices\n"
-> >>             "pinmux dev [pincontroller-name] - select pin-controller device\n"
-> >> -          "pinmux status [-a]              - print pin-controller muxing [for all]\n"
-> >> +          "pinmux status [-a | pin-name]   - print pin-controller muxing [for all | for pin-name]\n"
-> >>   )
-> >> diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py
-> >> index b3ae2ab024..fbde1d99b1 100644
-> >> --- a/test/py/tests/test_pinmux.py
-> >> +++ b/test/py/tests/test_pinmux.py
-> >> @@ -82,3 +82,32 @@ def test_pinmux_status(u_boot_console):
-> >>       assert ('P6        : GPIO1 drive-open-drain.' in output)
-> >>       assert ('P7        : GPIO2 bias-pull-down input-enable.' in output)
-> >>       assert ('P8        : GPIO3 bias-disable.' in output)
-> >> +
-> >> +@pytest.mark.buildconfigspec('cmd_pinmux')
-> >> +@pytest.mark.boardspec('sandbox')
-> >> +def test_pinmux_status_pinname(u_boot_console):
-> >> +    """Test that 'pinmux status <pinname>' displays selected pin."""
-> >> +
-> >> +    output = u_boot_console.run_command('pinmux status a5')
-> >> +    assert ('a5        : gpio output .' in output)
-> >> +    assert (not 'pinctrl-gpio:' in output)
-> >> +    assert (not 'pinctrl:' in output)
-> >> +    assert (not 'a6' in output)
-> >> +    assert (not 'P0' in output)
-> >> +    assert (not 'P8' in output)
-> >> +
-> >> +    output = u_boot_console.run_command('pinmux status P7')
-> >> +    assert (not 'pinctrl-gpio:' in output)
-> >> +    assert (not 'pinctrl:' in output)
-> >> +    assert (not 'a5' in output)
-> >> +    assert (not 'P0' in output)
-> >> +    assert (not 'P6' in output)
-> >> +    assert ('P7        : GPIO2 bias-pull-down input-enable.' in output)
-> >> +    assert (not 'P8' in output)
-> >> +
-> >> +    output = u_boot_console.run_command('pinmux status P9')
-> >> +    assert (not 'pinctrl-gpio:' in output)
-> >> +    assert (not 'pinctrl:' in output)
-> >> +    assert (not 'a5' in output)
-> >> +    assert (not 'P8' in output)
-> >> +    assert ('P9 not found' in output)
-> > Can we write this test in C? We can use run_command()...see acpi.c
->
->
-> Any reason to prefer C test to python...
->
-> I just complete the existing pinmux tests.
->
-> For performance ?
+Hi,
 
-I wrote this up here:
+It it the v4 serie of [1].
 
-https://u-boot.readthedocs.io/en/latest/develop/tests_writing.html
+This v4 serie is rebased on top of master branch with update after Simon
+Glass review and added tags.
 
->
-> other pinmux tests in already python should be migrate also ?
+On STM32MP15x platform we can use OP-TEE, loaded in DDR in a region
+protected by a firewall. This region is reserved in the device with
+the "no-map" property as defined in the binding file
+doc/device-tree-bindings/reserved-memory/reserved-memory.txt.
 
-They may as well be, to the extent that they only run on sandbox.
+Sometime the platform boot failed in U-Boot on a Cortex A7 access to
+this region (depending of the binary and the issue can change with compiler
+version or with code alignment), then the firewall raise an error,
+for example:
 
-Regards,
-SImon
+E/TC:0   tzc_it_handler:19 TZC permission failure
+E/TC:0   dump_fail_filter:420 Permission violation on filter 0
+E/TC:0   dump_fail_filter:425 Violation @0xde5c6bf0, non-secure privileged read,
+         AXI ID 5c0
+E/TC:0   Panic
+
+After investigation, the forbidden access is a speculative request performed
+by the Cortex A7 because all the DDR is mapped as MEMORY with CACHEABLE
+property.
+
+The issue is solved only when the region reserved by OP-TEE is no more
+mapped in U-Boot as it is already done in Linux kernel.
+
+Tested on DK2 board with OP-TEE 3.12 / TF-A 2.4:
+
+With hard-coded address for OP-TEE reserved memory,
+the error doesn't occur.
+
+ void dram_bank_mmu_setup(int bank)
+ {
+ ....
+
+    	for (i = start >> MMU_SECTION_SHIFT;
+ 	     i < (start >> MMU_SECTION_SHIFT) + (size >> MMU_SECTION_SHIFT);
+ 	     i++) {
+ 		option = DCACHE_DEFAULT_OPTION;
+ 		if (i >= 0xde0)
+ 			option = INVALID_ENTRY;
+ 		set_section_dcache(i, option);
+ 	}
+ }
+
+Just by modifying the test on 0xde0 to 0xdf0, the OP-TEE memory protected
+by firewall is mapped cacheable and the error occurs.
+
+I think that it can be a general issue for ARM architecture: the "no-map" tag
+of reserved memory in device should be respected by U-Boot if firewall
+is configured before U-Boot execution.
+
+But I don't propose a generic solution in
+arm/lib/cache-cp15.c:dram_bank_mmu_setup()
+because the device tree parsing done in lmb_init_and_reserve() takes a
+long time when it is executed without data cache.
+
+=> the previous path 7/7 of v2 series is dropped to avoid
+  performance issue on other ARM target.
+
+To avoid this performance issue on stm32mp32mp platform, the lmb
+initialization is done in enable_caches() when dcache is still enable.
+
+This v3 series is composed by 7 patches
+- 1..3/7: preliminary steps to support flags in library in lmb
+  (as it is done in memblock.c in Linux)
+- 4/7: unitary test on the added feature in lmb lib
+- 5/7: save the no-map flags in lmb when the device tree is parsed
+- 6/7: solve issue for the size of cacheable area in pre-reloc case
+- 7/7: update the stm32mp mmu support
+
+See also [2] which handle same speculative access on armv8 for area
+with Executable attribute.
+
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=241122&state=*
+[2] http://patchwork.ozlabs.org/project/uboot/patch/20200903000106.5016-1-marek.bykowski@gmail.com/
+
+Regards
+Patrick
+
+Changes in v4:
+- Add comment for lmb_reserve_flags and remove extern
+- Remove unnecessary !! on return of boolean in lmb_is_nomap
+- Add comment for lmb_is_reserved_flags and remove extern
+- Remove unnecessary !! on return of boolean in lmb_is_reserved_flags
+- map the end of the DDR only before relocation, in board_f.c;
+  this test avoid issue when board_get_usable_ram_top() is called
+  in efi_loader function efi_add_known_memory()
+
+Changes in v3:
+- NEW: solve performance issue as relocated DT is not marked cacheable
+- call lmb_init_and_reserve when data cache is activated in enable_caches()
+- drop v2 patch "arm: cache: cp15: don't map the reserved region
+  with no-map property"
+
+Changes in v2:
+- remove unnecessary comments in lmb.h
+- rebase on latest lmb patches
+- NEW: update in stm32mp specific MMU setup functions
+
+Patrick Delaunay (7):
+  lmb: Add support of flags for no-map properties
+  lmb: add lmb_is_reserved_flags
+  lmb: add lmb_dump_region() function
+  test: lmb: add test for lmb_reserve_flags
+  image-fdt: save no-map parameter of reserve-memory
+  stm32mp: Increase the reserved memory in board_get_usable_ram_top
+  stm32mp: don't map the reserved region with no-map property
+
+ arch/arm/mach-stm32mp/cpu.c       | 17 +++++-
+ arch/arm/mach-stm32mp/dram_init.c |  7 ++-
+ common/image-fdt.c                | 23 +++++---
+ include/lmb.h                     | 38 +++++++++++++
+ lib/lmb.c                         | 93 ++++++++++++++++++++++---------
+ test/lib/lmb.c                    | 89 +++++++++++++++++++++++++++++
+ 6 files changed, 228 insertions(+), 39 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

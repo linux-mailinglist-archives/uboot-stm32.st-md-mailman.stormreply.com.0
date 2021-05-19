@@ -2,56 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 519733892BA
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 May 2021 17:34:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C6B23892B9
+	for <lists+uboot-stm32@lfdr.de>; Wed, 19 May 2021 17:34:20 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1E092C57B60;
-	Wed, 19 May 2021 15:34:23 +0000 (UTC)
-Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com
- [209.85.210.43])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1505AC57B60;
+	Wed, 19 May 2021 15:34:20 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6653DC57B69
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A0548C424BD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 May 2021 15:34:21 +0000 (UTC)
-Received: by mail-ot1-f43.google.com with SMTP id
- v19-20020a0568301413b0290304f00e3d88so12115776otp.4
+ Wed, 19 May 2021 15:34:18 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id i17so14464847wrq.11
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 May 2021 08:34:21 -0700 (PDT)
+ Wed, 19 May 2021 08:34:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=ELVlvqs7fq6YOrVT0taHztiJBYr4PtaV5Xfyt5XnTFM=;
- b=H3mi5ZINqDO0Vh8GocAKwf8kw9x4XGj1Qj6PRlkwfnvUyaWSrk2QHtGPSDsiYwbLlf
- BOQSqILzBDWfSguntWCZhBciGLUDxPV0RBGhTklPN5cxMMRYwfdSHksvIc3puBvVP8Vw
- j66R9eHX1SiemZKS/u+f3PFTc3DCC8mKrFvME=
+ :cc; bh=g+PDFqsOxQwWohcGyKe2dMc/jPzoPIhia6KISKv3WhI=;
+ b=QLxZ/7NLVVfGsOdPLFEnuFFuvRB5+iyaV0GY9AE/DW0iv9FnjB0mIRlHBEla6jRZYH
+ 7TtUWydmVYM0tUks5Uj8vcv2rQc4UgJHVKE2YGjmH7fYxXhFZbwfSWLq4Js5/KyXUOAH
+ wpmei89XKRQxy+pl3LmTBwxmyOItnPuf/vnms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=ELVlvqs7fq6YOrVT0taHztiJBYr4PtaV5Xfyt5XnTFM=;
- b=E2EcDb18NZJGVfGpnN8C8zy7fEq1ETHeqVJdTE7qKLY2CR339FvpsBC/o3W+rdPpxF
- l2qhdJihtpxIewgs6QA+QB6tigFVFA2Y0ez1eWphvxg2KV7yst6AxWQ4i44bFxoepJer
- d6MfQTcdgo5zA+xP22JLek0tAhllFrv/5g4q8H8p8tzNzZQQFH3/0cxm9/VEojkjaxP/
- SQaBO8mJvhW1OzluoaOBL9cG04P8PGZnzSQzMXHDaRHvePFGZ5RF/+jlyEPt4h4f4TZz
- roFHgmxnuD+2goO5Au0X7+zGm4WQwU9z/h5o1abGPhuOp2K2eOcJk/Txmx8RAFACMbPn
- 2VBA==
-X-Gm-Message-State: AOAM5308WNMa8DF22kFou5GSih+uyArR34WU/yJeNeS2mLMR/cCATfey
- 4/PhLrAJ0SCTRzF53C0V06kl2LCVPfg62b8fvcJkiQ==
-X-Google-Smtp-Source: ABdhPJwUB/9XbWJe4YM364q8EW1v87qcGUKeuzXoAFAHW8IYxAk2xy8LmeTYDlm/4x6iICBjIfN4/WdM1xwyNKAURZ4=
-X-Received: by 2002:a9d:4b18:: with SMTP id q24mr13110otf.88.1621438459947;
- Wed, 19 May 2021 08:34:19 -0700 (PDT)
+ bh=g+PDFqsOxQwWohcGyKe2dMc/jPzoPIhia6KISKv3WhI=;
+ b=dKE6Nje4gm7q3RkYz0rGYD44ref1SnfYQvAU2YCy1C3glQMPlvq4U/9wo68pOZ7QH0
+ 9999t75NcglvAOUSfg+EW6+lZz/PpQzBia0fWVBLNobK+4nvF7jDwBABejuKKwmXE2oL
+ FuC2hue7GcJxNd0J9866YkF4N9J/+BJF2iKKh4+Fv04qDI2kZHDgbAZ1CKqRVGfO8xix
+ asEmiyIFErUBkVSasiYg44sLa1AjC5qxeSmSuCSsr2xs7fLnJN/e3rmKD69l0YR8yqcP
+ jx/6/Vrw64hejkxPuka9E0dpzuKMRs49UWdCziJdyhw7buZmHeSbAfa77i0GV1KxGMXI
+ KFSw==
+X-Gm-Message-State: AOAM530froOOCdXUUB4d9whspKDsPNpPawfYZCn8XHxVhvaYkBK7XuUI
+ 2qSGOn1tTamuAyVuovpXcBZ9cos+u2iD83E9GBVLNw==
+X-Google-Smtp-Source: ABdhPJyPwvd6CjE0nahJU8zAt6rmDIQd3YoRTCj68TcAmmGxwnmWPW5hsznKiAHERYp6hnxpLWpKVhRX4jI5PDgbDjs=
+X-Received: by 2002:adf:e0c6:: with SMTP id m6mr15868689wri.66.1621438457920; 
+ Wed, 19 May 2021 08:34:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210519142916.v2.1.I6851dcbaea90c8b6ddcca5310e3c4ee58c824706@changeid>
-In-Reply-To: <20210519142916.v2.1.I6851dcbaea90c8b6ddcca5310e3c4ee58c824706@changeid>
+ <20210519142916.v2.2.I5b7085079ee5504cad399697bf6afef6710fa02a@changeid>
+In-Reply-To: <20210519142916.v2.2.I5b7085079ee5504cad399697bf6afef6710fa02a@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 May 2021 09:34:01 -0600
-Message-ID: <CAPnjgZ3Gwgja_imuVCsLhZKmC7Ux5CCViHAGCEMn+2NXMY6NyA@mail.gmail.com>
+Date: Wed, 19 May 2021 09:34:02 -0600
+Message-ID: <CAPnjgZ0APSOr10G+nFZB+62QBC+-B=jtExVi5Au-_EJYHESgtw@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+Cc: Priyanka Jain <priyanka.jain@nxp.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick Delaunay <patrick.delaunay@st.com>, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] cmd: pinmux: update result of
-	do_status
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Pragnesh Patel <pragnesh.patel@sifive.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/2] cmd: pinmux: support pin name in
+	status command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,32 +70,113 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
+
 On Wed, 19 May 2021 at 06:30, Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> From: Patrick Delaunay <patrick.delaunay@st.com>
+> Allow pin name parameter for pimux staus command,
+> as gpio command to get status of one pin.
 >
-> Update the result of do_status and always returns a CMD_RET_ value
-> (-ENOSYS was a possible result of show_pinmux).
+> The possible usage of the command is:
 >
-> This patch also adds pincontrol name in error messages (dev->name)
-> and treats correctly the status sub command when pin-controller device is
-> not selected.
+> > pinmux dev pinctrl
+> > pinmux status
 >
+> > pinmux status -a
+>
+> > pinmux status <pin-name>
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
 > Changes in v2:
-> - keep result in show_pinmux
-> - add comment in API pinctrl_get_pins_count() for -ENOSYS result
+> - use -ENOENT when the pin name is not found
+> - move the added pytests in a C file cmd/pinmux.c
 >
->  cmd/pinmux.c                 | 31 +++++++++++++++++--------------
->  include/dm/pinctrl.h         |  2 +-
->  test/py/tests/test_pinmux.py |  4 ++--
->  3 files changed, 20 insertions(+), 17 deletions(-)
+>  cmd/pinmux.c      | 38 +++++++++++++++++++++++++++++---------
+>  test/cmd/Makefile |  1 +
+>  test/cmd/pinmux.c | 36 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 66 insertions(+), 9 deletions(-)
+>  create mode 100644 test/cmd/pinmux.c
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+nit below
+
+>
+> diff --git a/cmd/pinmux.c b/cmd/pinmux.c
+> index 0df78c71da..527d33d562 100644
+> --- a/cmd/pinmux.c
+> +++ b/cmd/pinmux.c
+> @@ -41,13 +41,14 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc,
+>         return CMD_RET_SUCCESS;
+>  }
+>
+> -static int show_pinmux(struct udevice *dev)
+> +static int show_pinmux(struct udevice *dev, char *name)
+
+Can you add a comment indicating what these args are (and that @name
+can be NULL) and return values?
+
+>  {
+>         char pin_name[PINNAME_SIZE];
+>         char pin_mux[PINMUX_SIZE];
+>         int pins_count;
+>         int i;
+>         int ret;
+> +       bool found = false;
+>
+>         pins_count = pinctrl_get_pins_count(dev);
+>
+> @@ -62,7 +63,9 @@ static int show_pinmux(struct udevice *dev)
+>                         printf("Ops get_pin_name error (%d) by %s\n", ret, dev->name);
+>                         return ret;
+>                 }
+> -
+> +               if (name && strcmp(name, pin_name))
+> +                       continue;
+> +               found = true;
+>                 ret = pinctrl_get_pin_muxing(dev, i, pin_mux, PINMUX_SIZE);
+>                 if (ret) {
+>                         printf("Ops get_pin_muxing error (%d) by %s in %s\n",
+> @@ -74,6 +77,9 @@ static int show_pinmux(struct udevice *dev)
+>                        PINMUX_SIZE, pin_mux);
+>         }
+>
+> +       if (!found)
+> +               return -ENOENT;
+> +
+>         return 0;
+>  }
+>
+> @@ -81,24 +87,38 @@ static int do_status(struct cmd_tbl *cmdtp, int flag, int argc,
+>                      char *const argv[])
+>  {
+>         struct udevice *dev;
+> +       char *name;
+> +       int ret;
+>
+>         if (argc < 2) {
+>                 if (!currdev) {
+>                         printf("pin-controller device not selected\n");
+>                         return CMD_RET_FAILURE;
+>                 }
+> -               show_pinmux(currdev);
+> +               show_pinmux(currdev, NULL);
+>                 return CMD_RET_SUCCESS;
+>         }
+>
+>         if (strcmp(argv[1], "-a"))
+> -               return CMD_RET_USAGE;
+> +               name = argv[1];
+> +       else
+> +               name = NULL;
+>
+[..]
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

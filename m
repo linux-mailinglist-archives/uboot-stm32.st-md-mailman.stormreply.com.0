@@ -2,55 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DD6A3892BB
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 May 2021 17:34:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F1F3389CC1
+	for <lists+uboot-stm32@lfdr.de>; Thu, 20 May 2021 06:38:11 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 25CAFC57B69;
-	Wed, 19 May 2021 15:34:26 +0000 (UTC)
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com
- [209.85.210.49])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D51B7C57B60;
+	Thu, 20 May 2021 04:38:10 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com
+ [209.85.210.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C0506C424BD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CC17CC57B5F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 May 2021 15:34:24 +0000 (UTC)
-Received: by mail-ot1-f49.google.com with SMTP id
- i14-20020a9d624e0000b029033683c71999so930221otk.5
+ Thu, 20 May 2021 04:38:09 +0000 (UTC)
+Received: by mail-ot1-f48.google.com with SMTP id
+ 36-20020a9d0ba70000b02902e0a0a8fe36so13736084oth.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 May 2021 08:34:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ Wed, 19 May 2021 21:38:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zST4jPDVw8Wc5DUToQobiqjdjEPo0KmNv3b3Z1IyYok=;
- b=a2LN0BAEWsIQIDnz8zlZnZ/dw4XWBE36MDyRFXiC6U6Fd9/t8PJ1JQAzb9UR/l3ECL
- R7E1t0iaMlDvzmm6mO2SRbfyf/SvUNs4xvqnwldoRBGbCv3pX9c1Yoc6UjkVTr5eAe14
- Dgq0fOPCuuwMIPWMUnrBStbqdiU4TgxA0AbQQ=
+ :cc; bh=/MGvAU9CgGXAPiFsPYyG0ckVe74+ce5TJiF05AT+lRs=;
+ b=Ua5RizHUX96Hv17hA7BEMPc2l3/rXD/zwu0uw3QIpGQBfr6b4Ym918HlVdUuKCW7bd
+ 1jsFVyXvkksSy9XbQyQTSu+6F5JvYbROf7WlRTpipHTMflQe0oTXBWygObkpbpbeZwd2
+ ZCuXevtqflX9qIX8ao/Skl64mQlxzGkqL4L+oU+Ecw6544XLAsh2Rvk/KiZTYaCdosAt
+ hSgz54We0MsqbZJnLrlpGktQsntyZdvWDTOld95ILDG5D3H6Nt/DCdHXY4jQGd53MmJg
+ UXr6D8qsNr0Vhc6f937Ravib1VSfhra6JivjoEQ9UpgspBkydP1vsAJFy05JBKr5jjVQ
+ 5rMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=zST4jPDVw8Wc5DUToQobiqjdjEPo0KmNv3b3Z1IyYok=;
- b=oJKv37AklgRfgL8+bb9f+CVKmng7R3qZpC/7gz3TbivnU3fHLuZNFrzg585J41pLCv
- jJo1UZZIk5t3Dtu0onn1HR1gkagEjC93giummuEqvQwMSA08CauZYZn6HamRxxYcY+sD
- qnQbHEX7uSWHruS3UDqw8fseRrAcSiCoTRXWLNtcSA2hckkbMmAeB3k6BS+wBdtNW6mu
- doK2dqutK9RazUvb8qKE82dQ5XhHq0QrjYOqiVg/lB9dRtqqHvIuFbAN+pq7GgSVEY1Q
- 4R5j28vyvTqB6vQo1aO+oirUsA5ap6qkmY8rs6M0bvhEgXm7o2GMDGG9oV7BRT/IZ7wt
- XoqQ==
-X-Gm-Message-State: AOAM532Yk9UxfUt9X7d0cUygAfuN2hY25hzk2IhQE2tIyjOkUt5amcWN
- wkl8rz71tN8ezB49J8R7iS42iPxZTcL+OBUSQIWLlg==
-X-Google-Smtp-Source: ABdhPJyjUtlUtQOXhuo9gBDb/1xbBLdlbcIFhNUsNpaVEkC1n+POG4J66ytri/jZpivWPskAOYTJgUPg9EFnHMnVaIQ=
-X-Received: by 2002:a9d:6117:: with SMTP id i23mr19049otj.28.1621438463352;
- Wed, 19 May 2021 08:34:23 -0700 (PDT)
+ bh=/MGvAU9CgGXAPiFsPYyG0ckVe74+ce5TJiF05AT+lRs=;
+ b=hqfffnU95DQLaH3yS7ENUIQ9vhm1GVae44TFx2CtWQ2aJHEjpD0LMT/MrQFA/rK2Iv
+ reqVeYk6hrua2wPBAuxoejM8n6F+oNC69zYIXQfaKdnzOFW6zJ3viLNK+LwnSaYYnonO
+ QBxs3J610SDGNbrgbmQ4IcDNAyBRAC1ctTHdZjBPWbhnK9fdzhQ0CumPe5bRlVmbSpEz
+ D207is63YbG8kKurqRqR2DvnPamfj6lxk8QYRKCfVi/vAm8gNNRJc2Bjj+b6S2s+BUIj
+ ggZxw41m05N+bBKugR9VS4smSxos7ggNCYM8wWEkXlkUqJgmy598MPmDFMvoMDYHRLsr
+ 9R7g==
+X-Gm-Message-State: AOAM530qxYNupGZRcm5bGwK9QFV9aj76N5CAGJ2GBcnuEtgVVG0qKozg
+ wEr600+NapJktPROrE9GjSKuTVtZrXDIzDra/ks=
+X-Google-Smtp-Source: ABdhPJxedFOFRNf9lI9zX5sKoz+BSdZjE5sLiEYdaxgSmnNCh5R3vwfaAZIIkwrMvgOWIhMkOnopqi7amZF735oq02U=
+X-Received: by 2002:a9d:66da:: with SMTP id t26mr2469643otm.370.1621485488433; 
+ Wed, 19 May 2021 21:38:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210518134039.26865-1-patrick.delaunay@foss.st.com>
- <20210518154026.2.Id119f821cb12efab440905cad658e8cb459ebd8a@changeid>
-In-Reply-To: <20210518154026.2.Id119f821cb12efab440905cad658e8cb459ebd8a@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 19 May 2021 09:34:05 -0600
-Message-ID: <CAPnjgZ2OMkyaj1UxiB_LaZ25vK08XvThcKYHp-vfwbotEwyjBw@mail.gmail.com>
+ <20210518154026.1.I98c378739e65e7fed36a680a86d1c307e71c9460@changeid>
+In-Reply-To: <20210518154026.1.I98c378739e65e7fed36a680a86d1c307e71c9460@changeid>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Thu, 20 May 2021 07:37:57 +0300
+Message-ID: <CAGi-RULO43+JFcSYA3GJ3ShTSudtQLxcz3dUks6Y1ggN=H+nig@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] test: add dm_test_read_resource
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] net: luton: remove address
+	translation after ofnode_read_resource
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,20 +75,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 18 May 2021 at 07:40, Patrick Delaunay
+On Tue, May 18, 2021 at 4:40 PM Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Add a test of dev_read_resource with translation or without translation
+> Removed call of ofnode_translate_address() after ofnode_read_resource
+> in luton_switch.c:luton_probe(); it is unnecessary since
+> the commit feb7ac457c20 ("dm: core: Add address translation in
+> fdt_get_resource").
 >
+> Fixes: feb7ac457c20 ("dm: core: Add address translation in fdt_get_resource")
+> Reported-by: Horatiu Vultur <horatiu.vultur@microchip.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
->  test/dm/test-fdt.c | 33 +++++++++++++++++++++++++++++++++
->  1 file changed, 33 insertions(+)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-But can you use lower-case hex?
+>  drivers/net/mscc_eswitch/luton_switch.c | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>
+> diff --git a/drivers/net/mscc_eswitch/luton_switch.c b/drivers/net/mscc_eswitch/luton_switch.c
+> index 54afa14c9d..73c950d118 100644
+> --- a/drivers/net/mscc_eswitch/luton_switch.c
+> +++ b/drivers/net/mscc_eswitch/luton_switch.c
+> @@ -588,7 +588,6 @@ static int luton_probe(struct udevice *dev)
+>         struct luton_private *priv = dev_get_priv(dev);
+>         int i, ret;
+>         struct resource res;
+> -       fdt32_t faddr;
+>         phys_addr_t addr_base;
+>         unsigned long addr_size;
+>         ofnode eth_node, node, mdio_node;
+> @@ -658,9 +657,7 @@ static int luton_probe(struct udevice *dev)
+>
+>                 if (ofnode_read_resource(mdio_node, 0, &res))
+>                         return -ENOMEM;
+> -               faddr = cpu_to_fdt32(res.start);
+> -
+> -               addr_base = ofnode_translate_address(mdio_node, &faddr);
+> +               addr_base = res.start;
+>                 addr_size = res.end - res.start;
+>
+>                 /* If the bus is new then create a new bus */
+> --
+> 2.17.1
+>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,63 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F1F3389CC1
-	for <lists+uboot-stm32@lfdr.de>; Thu, 20 May 2021 06:38:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E177338C0F8
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 May 2021 09:47:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D51B7C57B60;
-	Thu, 20 May 2021 04:38:10 +0000 (UTC)
-Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com
- [209.85.210.48])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9CCEEC57B60;
+	Fri, 21 May 2021 07:47:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CC17CC57B5F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86F91C57B5F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 20 May 2021 04:38:09 +0000 (UTC)
-Received: by mail-ot1-f48.google.com with SMTP id
- 36-20020a9d0ba70000b02902e0a0a8fe36so13736084oth.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 May 2021 21:38:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/MGvAU9CgGXAPiFsPYyG0ckVe74+ce5TJiF05AT+lRs=;
- b=Ua5RizHUX96Hv17hA7BEMPc2l3/rXD/zwu0uw3QIpGQBfr6b4Ym918HlVdUuKCW7bd
- 1jsFVyXvkksSy9XbQyQTSu+6F5JvYbROf7WlRTpipHTMflQe0oTXBWygObkpbpbeZwd2
- ZCuXevtqflX9qIX8ao/Skl64mQlxzGkqL4L+oU+Ecw6544XLAsh2Rvk/KiZTYaCdosAt
- hSgz54We0MsqbZJnLrlpGktQsntyZdvWDTOld95ILDG5D3H6Nt/DCdHXY4jQGd53MmJg
- UXr6D8qsNr0Vhc6f937Ravib1VSfhra6JivjoEQ9UpgspBkydP1vsAJFy05JBKr5jjVQ
- 5rMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/MGvAU9CgGXAPiFsPYyG0ckVe74+ce5TJiF05AT+lRs=;
- b=hqfffnU95DQLaH3yS7ENUIQ9vhm1GVae44TFx2CtWQ2aJHEjpD0LMT/MrQFA/rK2Iv
- reqVeYk6hrua2wPBAuxoejM8n6F+oNC69zYIXQfaKdnzOFW6zJ3viLNK+LwnSaYYnonO
- QBxs3J610SDGNbrgbmQ4IcDNAyBRAC1ctTHdZjBPWbhnK9fdzhQ0CumPe5bRlVmbSpEz
- D207is63YbG8kKurqRqR2DvnPamfj6lxk8QYRKCfVi/vAm8gNNRJc2Bjj+b6S2s+BUIj
- ggZxw41m05N+bBKugR9VS4smSxos7ggNCYM8wWEkXlkUqJgmy598MPmDFMvoMDYHRLsr
- 9R7g==
-X-Gm-Message-State: AOAM530qxYNupGZRcm5bGwK9QFV9aj76N5CAGJ2GBcnuEtgVVG0qKozg
- wEr600+NapJktPROrE9GjSKuTVtZrXDIzDra/ks=
-X-Google-Smtp-Source: ABdhPJxedFOFRNf9lI9zX5sKoz+BSdZjE5sLiEYdaxgSmnNCh5R3vwfaAZIIkwrMvgOWIhMkOnopqi7amZF735oq02U=
-X-Received: by 2002:a9d:66da:: with SMTP id t26mr2469643otm.370.1621485488433; 
- Wed, 19 May 2021 21:38:08 -0700 (PDT)
+ Fri, 21 May 2021 07:47:43 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 14L7kDqF007023; Fri, 21 May 2021 09:47:40 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=gK38DkUwd71YPXZGpK0hrfTXi6CjTkE7m0Aj3wu30LQ=;
+ b=lP1ypsDf1c/b6gqzHJVtIEGcFjtr3D+tJE2hxgVzjJlKGcjdK7Y4A8h0GGgbGgViUA2D
+ vp8H0JpwyAufYGZws4i951UgqOf6fkhvtDlf2mf3U9JPTl9r06fuXd8X9Sq07cs3dJbp
+ T90KduYLE9I2za/S0t6+5am6NlxJfIdkcdRkGydQ4M7xQagOD0gk36qVqslFarolPT2Y
+ 9pWaxpeqJFFTnO2O/eEmUXv0Wd5rfMswz8eHTqPThHDPn3JZnEG2+PVntjFIZj1e375f
+ Z9T+LSiVE3Zah7i4txaxHa+ltDO73pWEKFh1v019qkDZDqGrnVue7YgnTobCEpwmJPy+ 2Q== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 38p3c51fef-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 21 May 2021 09:47:40 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7C2EA10002A;
+ Fri, 21 May 2021 09:47:39 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6F118215C9B;
+ Fri, 21 May 2021 09:47:39 +0200 (CEST)
+Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 21 May 2021 09:47:39
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 21 May 2021 09:47:31 +0200
+Message-ID: <20210521094728.v3.1.I6851dcbaea90c8b6ddcca5310e3c4ee58c824706@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20210518134039.26865-1-patrick.delaunay@foss.st.com>
- <20210518154026.1.I98c378739e65e7fed36a680a86d1c307e71c9460@changeid>
-In-Reply-To: <20210518154026.1.I98c378739e65e7fed36a680a86d1c307e71c9460@changeid>
-From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 20 May 2021 07:37:57 +0300
-Message-ID: <CAGi-RULO43+JFcSYA3GJ3ShTSudtQLxcz3dUks6Y1ggN=H+nig@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
+ definitions=2021-05-21_03:2021-05-20,
+ 2021-05-21 signatures=0
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Lars Povlsen <lars.povlsen@microchip.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] net: luton: remove address
-	translation after ofnode_read_resource
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>
+Subject: [Uboot-stm32] [PATCH v3 1/2] cmd: pinmux: update result of do_status
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,49 +71,128 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, May 18, 2021 at 4:40 PM Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> Removed call of ofnode_translate_address() after ofnode_read_resource
-> in luton_switch.c:luton_probe(); it is unnecessary since
-> the commit feb7ac457c20 ("dm: core: Add address translation in
-> fdt_get_resource").
->
-> Fixes: feb7ac457c20 ("dm: core: Add address translation in fdt_get_resource")
-> Reported-by: Horatiu Vultur <horatiu.vultur@microchip.com>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->  drivers/net/mscc_eswitch/luton_switch.c | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
->
-> diff --git a/drivers/net/mscc_eswitch/luton_switch.c b/drivers/net/mscc_eswitch/luton_switch.c
-> index 54afa14c9d..73c950d118 100644
-> --- a/drivers/net/mscc_eswitch/luton_switch.c
-> +++ b/drivers/net/mscc_eswitch/luton_switch.c
-> @@ -588,7 +588,6 @@ static int luton_probe(struct udevice *dev)
->         struct luton_private *priv = dev_get_priv(dev);
->         int i, ret;
->         struct resource res;
-> -       fdt32_t faddr;
->         phys_addr_t addr_base;
->         unsigned long addr_size;
->         ofnode eth_node, node, mdio_node;
-> @@ -658,9 +657,7 @@ static int luton_probe(struct udevice *dev)
->
->                 if (ofnode_read_resource(mdio_node, 0, &res))
->                         return -ENOMEM;
-> -               faddr = cpu_to_fdt32(res.start);
-> -
-> -               addr_base = ofnode_translate_address(mdio_node, &faddr);
-> +               addr_base = res.start;
->                 addr_size = res.end - res.start;
->
->                 /* If the bus is new then create a new bus */
-> --
-> 2.17.1
->
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+Update the result of do_status and always returns a CMD_RET_ value
+(-ENOSYS was a possible result of show_pinmux).
+
+This patch also adds pincontrol name in error messages (dev->name)
+and treats correctly the status sub command when pin-controller device is
+not selected.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+
+(no changes since v2)
+
+Changes in v2:
+- keep result in show_pinmux
+- add comment in API pinctrl_get_pins_count() for -ENOSYS result
+
+ cmd/pinmux.c                 | 31 +++++++++++++++++--------------
+ include/dm/pinctrl.h         |  2 +-
+ test/py/tests/test_pinmux.py |  4 ++--
+ 3 files changed, 20 insertions(+), 17 deletions(-)
+
+diff --git a/cmd/pinmux.c b/cmd/pinmux.c
+index 9942b15419..0df78c71da 100644
+--- a/cmd/pinmux.c
++++ b/cmd/pinmux.c
+@@ -52,20 +52,21 @@ static int show_pinmux(struct udevice *dev)
+ 	pins_count = pinctrl_get_pins_count(dev);
+ 
+ 	if (pins_count == -ENOSYS) {
+-		printf("Ops get_pins_count not supported\n");
++		printf("Ops get_pins_count not supported by %s\n", dev->name);
+ 		return pins_count;
+ 	}
+ 
+ 	for (i = 0; i < pins_count; i++) {
+ 		ret = pinctrl_get_pin_name(dev, i, pin_name, PINNAME_SIZE);
+-		if (ret == -ENOSYS) {
+-			printf("Ops get_pin_name not supported\n");
++		if (ret) {
++			printf("Ops get_pin_name error (%d) by %s\n", ret, dev->name);
+ 			return ret;
+ 		}
+ 
+ 		ret = pinctrl_get_pin_muxing(dev, i, pin_mux, PINMUX_SIZE);
+ 		if (ret) {
+-			printf("Ops get_pin_muxing error (%d)\n", ret);
++			printf("Ops get_pin_muxing error (%d) by %s in %s\n",
++			       ret, pin_name, dev->name);
+ 			return ret;
+ 		}
+ 
+@@ -80,25 +81,27 @@ static int do_status(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     char *const argv[])
+ {
+ 	struct udevice *dev;
+-	int ret = CMD_RET_USAGE;
+ 
+-	if (currdev && (argc < 2 || strcmp(argv[1], "-a")))
+-		return show_pinmux(currdev);
++	if (argc < 2) {
++		if (!currdev) {
++			printf("pin-controller device not selected\n");
++			return CMD_RET_FAILURE;
++		}
++		show_pinmux(currdev);
++		return CMD_RET_SUCCESS;
++	}
+ 
+-	if (argc < 2 || strcmp(argv[1], "-a"))
+-		return ret;
++	if (strcmp(argv[1], "-a"))
++		return CMD_RET_USAGE;
+ 
+ 	uclass_foreach_dev_probe(UCLASS_PINCTRL, dev) {
+ 		/* insert a separator between each pin-controller display */
+ 		printf("--------------------------\n");
+ 		printf("%s:\n", dev->name);
+-		ret = show_pinmux(dev);
+-		if (ret < 0)
+-			printf("Can't display pin muxing for %s\n",
+-			       dev->name);
++		show_pinmux(dev);
+ 	}
+ 
+-	return ret;
++	return CMD_RET_SUCCESS;
+ }
+ 
+ static int do_list(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/include/dm/pinctrl.h b/include/dm/pinctrl.h
+index 1bdc8d3cbd..695e78ad0d 100644
+--- a/include/dm/pinctrl.h
++++ b/include/dm/pinctrl.h
+@@ -587,7 +587,7 @@ int pinctrl_get_pin_muxing(struct udevice *dev, int selector, char *buf,
+  *
+  * This allows to know the number of pins owned by a given pin-controller
+  *
+- * Return: Number of pins if OK, or negative error code on failure
++ * Return: Number of pins if OK, or -ENOSYS when not supported
+  */
+ int pinctrl_get_pins_count(struct udevice *dev);
+ 
+diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py
+index 0cbbae000c..b3ae2ab024 100644
+--- a/test/py/tests/test_pinmux.py
++++ b/test/py/tests/test_pinmux.py
+@@ -13,9 +13,9 @@ def test_pinmux_usage_1(u_boot_console):
+ @pytest.mark.buildconfigspec('cmd_pinmux')
+ def test_pinmux_usage_2(u_boot_console):
+     """Test that 'pinmux status' executed without previous "pinmux dev"
+-    command displays pinmux usage."""
++    command displays error message."""
+     output = u_boot_console.run_command('pinmux status')
+-    assert 'Usage:' in output
++    assert 'pin-controller device not selected' in output
+ 
+ @pytest.mark.buildconfigspec('cmd_pinmux')
+ @pytest.mark.boardspec('sandbox')
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

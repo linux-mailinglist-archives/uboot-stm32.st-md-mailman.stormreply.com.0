@@ -2,63 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED7CD398B09
-	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Jun 2021 15:50:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C6A9398B15
+	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Jun 2021 15:52:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B05B7C57196;
-	Wed,  2 Jun 2021 13:50:42 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D6B7AC57196;
+	Wed,  2 Jun 2021 13:52:53 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B6EB9C36B25
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F17CFC36B25
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  2 Jun 2021 13:50:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1622641837;
- bh=X1j0pQgPKcmoKISTffE5XyWeThnr5N5KsGc9N3BeIuY=;
- h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=dNtm08Wap3njJliRwqLw0ibCYgcQpjiZXReTd5sFSnwIzB6ahfEHrQhGcRV+YxjYu
- qb7+ejpku8AacOj8aTQhF+07y1eqEUaOuJzEjkp5v0v8QjpOw/lDEUE02r0bovFVdL
- Lk+5lkSQOoY/gpINPeXbH8rXhWblZoDPCJvqQtk8=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.123.70] ([62.143.247.63]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MV67y-1lvgnz2g7S-00SAWK; Wed, 02
- Jun 2021 15:50:37 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20210602101112.1.I43b836f3f20e75ae905f9b1e8d06c81a59d4eca6@changeid>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <bd035d13-4182-f513-6d3b-e58ac14d088c@gmx.de>
-Date: Wed, 2 Jun 2021 15:50:06 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.10.2
+ Wed,  2 Jun 2021 13:52:52 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 152Dq9DJ028730; Wed, 2 Jun 2021 15:52:50 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=Ukf2eFbHRnIITOqLbr9ZJ5hhqm0qlf33tPVva4ABgIg=;
+ b=0vz+GiQ7Fwqv7wPZrcdsg3p7khYvpgK4b5syCiZWt125VhiGQe+IDtzbjs6UrypKcyzA
+ 6T1idDtz2EiTmhpPQdOB4iR9m0WpdI2BI00IZpKsX5hzZU99uaoUq1lBorp4cEF3HtqO
+ GJ3pPQce2879BhOHFEEEJUdkEatv7xtgWI2cWvwJBpXCnkVL3VA2BVmuKYym/IxAg5S5
+ BqOBoLaPlykKmBjhP89sVdC0vscGq3k3hGB3wji9CdbCL93sQ+kTBVeFhXHz4TpqdUmU
+ FHVXezdqWKeXRGLlVWD1nXhMYWBGTI8A+LvON/Cxg0WrCegXFJ5hMpesclCb9qtSOYPL XQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 38x3gt602a-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 02 Jun 2021 15:52:50 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A31B810002A;
+ Wed,  2 Jun 2021 15:52:49 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9700F20AAA9;
+ Wed,  2 Jun 2021 15:52:49 +0200 (CEST)
+Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 2 Jun 2021 15:52:49
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 2 Jun 2021 15:52:47 +0200
+Message-ID: <20210602155241.1.I567147108d7efaa02a3532cde06cf1d5df59ce38@changeid>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20210602101112.1.I43b836f3f20e75ae905f9b1e8d06c81a59d4eca6@changeid>
-Content-Language: en-US
-X-Provags-ID: V03:K1:x9flz5wbdgzdz0v8ZL+IOm9Dh/syPzauNdA7aZ4YrzAzkhoW9P3
- 34Z5nahAhvzpbbTASuJ5ulxpV6LcaoGxLugUtJWr6t84iOZpe6n31NUx5JVaD/+1mwe7s27
- ZmDv1nDuWrHDGGNh2IwMML8M7K5EflIBwRDtAJmM531OdbWVPnl0A+Tv/snHhSisye/QVtH
- Fl7F7Ww0hr6oNJ0K7DNIA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:qs73ATctcNA=:2AQ/zbDynFbJR6dIc4zvAQ
- eOImbDewvHe/lw8qkZed4NTb4PZh2PUzo+n+zVwT8VYVGHYZORQkL/RzFb+jHJGLasbhsehoe
- UAoutt6iRqryCHUYDbXjKCi/5emjlke+HcsEb1s54DWRJbNR3qqYQf7SnX3Gjz8a6vB13bIiT
- 5s7C1Nenc+f+M8nlmTsLANChUeVZLmCCgi9CA09EargDtU6EjQs6ewlB6gZjs+fTmdztlzoR+
- q4RGect3H/HBa5LbKU5jcplVKFODDI/iEjqROWSH5sJDR7aKroC3UAQapFIH544xFPsaPscie
- bgueuANxtsjesUmTQyrUiC82PQGxB0pFQ15LCmQp/Q0vBGPw7l0bLEV1ZnkAu6G9wPA3AVtzn
- v2Bf5ZX9gVtOGC+jBhUug2ftrxjN3ENHr2kfcUZldfURfb3hdQvy/irADumhUB0Uk9WxnkQwh
- rWB2xihx66REKorM8yVvuvth3ahDWAG6yZ5t/gs9ReHljDN+fF0rPTkC42L6TVibLKyL6fT/Q
- Jhsxo3aDYmvLEAWPnt/abJD8LXDjyvJXlTmItAKgj68l5dY2xis2tvjCUuDCFmZ7Sk5rRVc6k
- 7T+rWP5a1R6nbvjV9fO3PDzS3G6BnggGADN53MlbGOFCw4CqoCymCe12qEeRPwApG2ABN8XML
- sbu8CJoibi9HGJF2P4yEBRoBya37IqQ1jeX6/spl3PJc4QT5xalSyE/71P9XqbE29rge/ECTa
- +5hNHYrK2Yh9QcEDYjsHOWF/d5gWcs0a9YM10EPUdcWY3TDafP5x/3qy/Ep9WAF4z8VWw5hRI
- XJwEOShpBo3RaxRAPEgQM7IwWd0VnpplQRJNWfPnHOm9YI+1Opa0gv1J/EWTy4/j6QSDEwJAW
- 4XT7V5VUVQDx/jIF2hH926NaOWiVatbr9EdKVx1wllIZDhQdiFjZzT570KvzaoWt2BYlAOnvU
- S0vSiwcLsGHKz4nqzWzEWOHf1n1FOqLSw0xxTWVGGFn56YnDMfRoFhSBNQMBLDPPT6WrYHn1y
- bZbRDuQEx6i4TeTdVuRxa3yTRAcnH3RtQ4LNii+5jZZim0rhNGDQICM3bmRAmcsCbQw4ts7wL
- D77prGjDowdvwDH4r6O0LQuXnXbZLAMnjbS
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH] doc: usage: reorder commands in index.rst
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG3NODE1.st.com (10.75.127.7) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
+ definitions=2021-06-02_07:2021-06-02,
+ 2021-06-02 signatures=0
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] doc: usage: man-page for ums command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,40 +71,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 02.06.21 10:11, Patrick Delaunay wrote:
-> Reorder alphabetically the command in the index of usage
-> in U-Boot documentation.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Provide a man-page for the ums command for USB Mass Storage.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-> ---
->
->  doc/usage/index.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index c1f9b6a53b..41b247bc62 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -34,12 +34,12 @@ Shell commands
->     load
->     loady
->     mbr
-> -   mmc
->     md
-> +   mmc
->     pstore
->     qfw
-> +   reset
->     sbi
-> +   scp03
->     size
->     true
-> -   scp03
-> -   reset
->
+ doc/usage/index.rst |  1 +
+ doc/usage/ums.rst   | 54 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 55 insertions(+)
+ create mode 100644 doc/usage/ums.rst
+
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 41b247bc62..1bab6ae3e9 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -43,3 +43,4 @@ Shell commands
+    scp03
+    size
+    true
++   ums
+diff --git a/doc/usage/ums.rst b/doc/usage/ums.rst
+new file mode 100644
+index 0000000000..cf0e3a9479
+--- /dev/null
++++ b/doc/usage/ums.rst
+@@ -0,0 +1,54 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++ums command
++===========
++
++Synopsis
++--------
++
++::
++
++    <USB_controller> [<devtype>] <dev[:part]>
++
++Description
++-----------
++
++Use the USB Mass Storage class (also known as USB MSC or UMS) to make
++accessible a block device (based on UCLASS_BLK) to a host computing device and
++to enable file transfers between the host and the U-Boot device.
++
++This command "ums" stays in the USB's treatment loop until user enters Ctrl-C.
++
++USB_controller
++    USB device number
++
++devtype
++    block device interface, defaults to "mmc"
++
++dev
++    device number for devtype
++
++part
++    partition number, defaults to 0 (first partition)
++
++Example
++-------
++
++::
++
++    => ums 0 mmc 0
++    => ums 0 usb 1:2
++
++Configuration
++-------------
++
++The ums command is only available if CONFIG_CMD_USB_MASS_STORAGE=y.
++
++Return value
++------------
++
++The return value $? is set to 0 (true) when the USB stack was successfully
++started and interrupted Ctrl-C or after USB cable detection issue
++(timeout or cable removal).
++
++If an error occurs, the return value $? is set to 1 (false).
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list

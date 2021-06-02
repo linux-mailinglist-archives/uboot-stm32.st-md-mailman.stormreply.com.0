@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EEDDE39890E
-	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Jun 2021 14:09:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED7CD398B09
+	for <lists+uboot-stm32@lfdr.de>; Wed,  2 Jun 2021 15:50:42 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A4517C57B6F;
-	Wed,  2 Jun 2021 12:09:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B05B7C57196;
+	Wed,  2 Jun 2021 13:50:42 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7ECB8C57B55
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B6EB9C36B25
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  2 Jun 2021 12:09:25 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 152C7lWH008683; Wed, 2 Jun 2021 14:09:22 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=F0zJ8x0HiLhxPqUOABDJs/HvP16r1TYc62b88/aIdAc=;
- b=2IH72LVZvIylZRZJE5nat3DDALQGfhq0Etv/V/kkI7/EWtMcEO8+nKBpByf2dG2Xy4z1
- viUEPM2wT0mNu/Ujgh4ZMlbLIf0dMPQfs7dWh4Ej5ySksnpv6ojdLHJSAwyqKLnM92S2
- 1FRo55U3QkjH0BPWC9qRGAfwcrQMHCIyVnbBv6i5otfA2xSAKcl8AkviJKEYmOc72eUA
- AKVPhtbfb6WSE/5bQw5CRvanuz3TZpXmkAToCdMOmJaRINd3oiwD+x/7zSGt3t6WNjkI
- Fx2AuF62NYs25QFAX16mYOkh146XhXl1EBSNBSH83/wEJfo0xDkiCxVusDNqeXtE/6/q iQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 38x3guwy83-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 02 Jun 2021 14:09:22 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AA3A8100034;
- Wed,  2 Jun 2021 14:09:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9DE6720758E;
- Wed,  2 Jun 2021 14:09:20 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.50) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 2 Jun
- 2021 14:09:19 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20210602135621.1.I567147108d7efaa02a3532cde06cf1d5df59ce38@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <8a96feac-a29f-ba95-d242-2e5b46d38c27@foss.st.com>
-Date: Wed, 2 Jun 2021 14:09:19 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ Wed,  2 Jun 2021 13:50:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1622641837;
+ bh=X1j0pQgPKcmoKISTffE5XyWeThnr5N5KsGc9N3BeIuY=;
+ h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=dNtm08Wap3njJliRwqLw0ibCYgcQpjiZXReTd5sFSnwIzB6ahfEHrQhGcRV+YxjYu
+ qb7+ejpku8AacOj8aTQhF+07y1eqEUaOuJzEjkp5v0v8QjpOw/lDEUE02r0bovFVdL
+ Lk+5lkSQOoY/gpINPeXbH8rXhWblZoDPCJvqQtk8=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.70] ([62.143.247.63]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MV67y-1lvgnz2g7S-00SAWK; Wed, 02
+ Jun 2021 15:50:37 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20210602101112.1.I43b836f3f20e75ae905f9b1e8d06c81a59d4eca6@changeid>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <bd035d13-4182-f513-6d3b-e58ac14d088c@gmx.de>
+Date: Wed, 2 Jun 2021 15:50:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.2
 MIME-Version: 1.0
-In-Reply-To: <20210602135621.1.I567147108d7efaa02a3532cde06cf1d5df59ce38@changeid>
+In-Reply-To: <20210602101112.1.I43b836f3f20e75ae905f9b1e8d06c81a59d4eca6@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.761
- definitions=2021-06-02_07:2021-06-02,
- 2021-06-02 signatures=0
+X-Provags-ID: V03:K1:x9flz5wbdgzdz0v8ZL+IOm9Dh/syPzauNdA7aZ4YrzAzkhoW9P3
+ 34Z5nahAhvzpbbTASuJ5ulxpV6LcaoGxLugUtJWr6t84iOZpe6n31NUx5JVaD/+1mwe7s27
+ ZmDv1nDuWrHDGGNh2IwMML8M7K5EflIBwRDtAJmM531OdbWVPnl0A+Tv/snHhSisye/QVtH
+ Fl7F7Ww0hr6oNJ0K7DNIA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:qs73ATctcNA=:2AQ/zbDynFbJR6dIc4zvAQ
+ eOImbDewvHe/lw8qkZed4NTb4PZh2PUzo+n+zVwT8VYVGHYZORQkL/RzFb+jHJGLasbhsehoe
+ UAoutt6iRqryCHUYDbXjKCi/5emjlke+HcsEb1s54DWRJbNR3qqYQf7SnX3Gjz8a6vB13bIiT
+ 5s7C1Nenc+f+M8nlmTsLANChUeVZLmCCgi9CA09EargDtU6EjQs6ewlB6gZjs+fTmdztlzoR+
+ q4RGect3H/HBa5LbKU5jcplVKFODDI/iEjqROWSH5sJDR7aKroC3UAQapFIH544xFPsaPscie
+ bgueuANxtsjesUmTQyrUiC82PQGxB0pFQ15LCmQp/Q0vBGPw7l0bLEV1ZnkAu6G9wPA3AVtzn
+ v2Bf5ZX9gVtOGC+jBhUug2ftrxjN3ENHr2kfcUZldfURfb3hdQvy/irADumhUB0Uk9WxnkQwh
+ rWB2xihx66REKorM8yVvuvth3ahDWAG6yZ5t/gs9ReHljDN+fF0rPTkC42L6TVibLKyL6fT/Q
+ Jhsxo3aDYmvLEAWPnt/abJD8LXDjyvJXlTmItAKgj68l5dY2xis2tvjCUuDCFmZ7Sk5rRVc6k
+ 7T+rWP5a1R6nbvjV9fO3PDzS3G6BnggGADN53MlbGOFCw4CqoCymCe12qEeRPwApG2ABN8XML
+ sbu8CJoibi9HGJF2P4yEBRoBya37IqQ1jeX6/spl3PJc4QT5xalSyE/71P9XqbE29rge/ECTa
+ +5hNHYrK2Yh9QcEDYjsHOWF/d5gWcs0a9YM10EPUdcWY3TDafP5x/3qy/Ep9WAF4z8VWw5hRI
+ XJwEOShpBo3RaxRAPEgQM7IwWd0VnpplQRJNWfPnHOm9YI+1Opa0gv1J/EWTy4/j6QSDEwJAW
+ 4XT7V5VUVQDx/jIF2hH926NaOWiVatbr9EdKVx1wllIZDhQdiFjZzT570KvzaoWt2BYlAOnvU
+ S0vSiwcLsGHKz4nqzWzEWOHf1n1FOqLSw0xxTWVGGFn56YnDMfRoFhSBNQMBLDPPT6WrYHn1y
+ bZbRDuQEx6i4TeTdVuRxa3yTRAcnH3RtQ4LNii+5jZZim0rhNGDQICM3bmRAmcsCbQw4ts7wL
+ D77prGjDowdvwDH4r6O0LQuXnXbZLAMnjbS
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH] doc: usage: man-page for pinmux command
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH] doc: usage: reorder commands in index.rst
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,145 +75,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
-
-On 6/2/21 1:56 PM, Patrick Delaunay wrote:
-> Provide a man-page for the pinmux command.
-> 
+On 02.06.21 10:11, Patrick Delaunay wrote:
+> Reorder alphabetically the command in the index of usage
+> in U-Boot documentation.
+>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
-> 
-> Dependency with [1] for the option <pin-name> for status:
-> 
->   pinmux status <pin-name>
-> 
-> [1] cmd: pinmux: support pin name in status command
->     http://patchwork.ozlabs.org/project/uboot/patch/20210521094728.v3.2.I5b7085079ee5504cad399697bf6afef6710fa02a@changeid/
-> 
-> 
->  doc/usage/index.rst  |  1 +
->  doc/usage/pinmux.rst | 95 ++++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 96 insertions(+)
->  create mode 100644 doc/usage/pinmux.rst
-> 
+>
+>  doc/usage/index.rst | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
 > diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 41b247bc62..e5717b7141 100644
+> index c1f9b6a53b..41b247bc62 100644
 > --- a/doc/usage/index.rst
 > +++ b/doc/usage/index.rst
-> @@ -36,6 +36,7 @@ Shell commands
+> @@ -34,12 +34,12 @@ Shell commands
+>     load
+>     loady
 >     mbr
+> -   mmc
 >     md
->     mmc
-> +   pinmux
+> +   mmc
 >     pstore
 >     qfw
->     reset
-> diff --git a/doc/usage/pinmux.rst b/doc/usage/pinmux.rst
-> new file mode 100644
-> index 0000000000..9f4392cd0d
-> --- /dev/null
-> +++ b/doc/usage/pinmux.rst
-> @@ -0,0 +1,95 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-> +
-> +pinmux command
-> +==============
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    pinmux list
-> +    pinmux dev [pincontroller-name]
-> +    pinmux status [-a | pin-name]
-> +
-> +Description
-> +-----------
-> +
-> +The pinmux command is used to show the pin-controller muxing.
-> +
-> +The 'pinmux list' command diplays the available pin-controller.
-> +
-> +The 'pinmux dev' command selects the pin-controller for next commands.
-> +
-> +    pincontroller-name
-> +        name of the pin-controller to select
-> +
-> +The 'pinmux status' command displays the pin muxing information.
-> +
-> +    \-a
-> +        display pin muxing of all pin-controllers.
-> +    pin-name
-> +        name of the pin to display
-> +
-> +Example
-> +-------
-> +
-> +::
-> +
-> +    => pinmux list
-> +    | Device                        | Driver                        | Parent
-> +    | pinctrl-gpio                  | sandbox_pinctrl_gpio          | root_driver
-> +    | pinctrl                       | sandbox_pinctrl               | root_driver
-> +    =>
-> +    => pinmux dev pinctrl
-> +    dev: pinctrl
-> +    =>
-> +    => pinmux status
-> +    P0        : UART TX.
-> +    P1        : UART RX.
-> +    P2        : I2S SCK.
-> +    P3        : I2S SD.
-> +    P4        : I2S WS.
-> +    P5        : GPIO0 bias-pull-up input-disable.
-> +    P6        : GPIO1 drive-open-drain.
-> +    P7        : GPIO2 bias-pull-down input-enable.
-> +    P8        : GPIO3 bias-disable.
-> +    =>
-> +    => pinmux status P0
-> +    P0        : UART TX.
-> +    =>
-> +    => pinmux status -a
-> +    --------------------------
-> +    pinctrl-gpio:
-> +    a0        : gpio input .
-> +    a1        : gpio input .
-> +    a2        : gpio input .
-> +    a3        : gpio input .
-> +    a4        : gpio input .
-> +    a5        : gpio output .
-> +    a6        : gpio output .
-> +    a7        : gpio input .
-> +    a8        : gpio input .
-> +    a9        : gpio input .
-> +    --------------------------
-> +    pinctrl:
-> +    P0        : UART TX.
-> +    P1        : UART RX.
-> +    P2        : I2S SCK.
-> +    P3        : I2S SD.
-> +    P4        : I2S WS.
-> +    P5        : GPIO0 bias-pull-up input-disable.
-> +    P6        : GPIO1 drive-open-drain.
-> +    P7        : GPIO2 bias-pull-down input-enable.
-> +    P8        : GPIO3 bias-disable.
-> +
-> +Configuration
-> +-------------
-> +
-> +The pinmux command is only available if CONFIG_CMD_PINMUX=y.
-> +
-> +Return value
-> +------------
-> +
-> +The return value $? is set to 0 (true) if the command succeded and to 1 (false)
-> +otherwise.
-> 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> +   reset
+>     sbi
+> +   scp03
+>     size
+>     true
+> -   scp03
+> -   reset
+>
 
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

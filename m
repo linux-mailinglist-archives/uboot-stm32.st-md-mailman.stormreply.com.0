@@ -2,47 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D39C339BD10
-	for <lists+uboot-stm32@lfdr.de>; Fri,  4 Jun 2021 18:26:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EE6E39BD23
+	for <lists+uboot-stm32@lfdr.de>; Fri,  4 Jun 2021 18:30:33 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90D75C57B69;
-	Fri,  4 Jun 2021 16:26:14 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D33E7C57B69;
+	Fri,  4 Jun 2021 16:30:32 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E01F3C57B5A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0116C57B55
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  4 Jun 2021 16:26:12 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Fri,  4 Jun 2021 16:30:31 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 154GCLLi011433; Fri, 4 Jun 2021 18:26:03 +0200
+ 154GRTOM016634; Fri, 4 Jun 2021 18:30:28 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-type; s=selector1;
  bh=spMu13Cg25DmkCVHyeEn7dqD9sTgo9jv4iz9G4Ih5OI=;
- b=svbZfrhtRDXvqk5/hQDNQArTUbwqpQuDYZ/NEWiIUFwx+B/3n4+AvuvJrmysaAppjKdP
- fKyTFyVnDGvqRgK0xMaVkIt/bZ4p8ECIzqFuYxYIFVVr99XRBG4k5LGGT0uM2ET8cSwD
- vrtMAKwiIUHO4a0YZaaYdzDrUqAdaRQn5YKoduKWTWWilNgTvAkkSJy83uVFr49usL7J
- SUBhUAGdck05WlA1AkpfsmuxUE/N117DYM2bMxYTKq+NLdnNV156wTIHyHgITdM9Dp0Y
- jMIJVeQy9O8sOR8GNk2oxdDLEm+ukdr9Vzz1Dwn5zWrP29B60MZi37bt+mCJ4PNL3nUp jw== 
+ b=7F+CUWBx684r5NiTVRMXstMVLKUSrgDOkXbd1VQMAutl/IZ25XS9koMTbTNcPn3EMQOr
+ i2hh/bgfkz+5gpCCLs2TiR7OzoPEMICy4zZTLsLS3BobbjWnftCzP3Pj7HLkbICk29lq
+ 9Z5W3UPxubjc2FfxXhl7fX4ej9U3qXnCMI1piuefy8geAU3zD/WPTcctEJTskkcogr3t
+ AQYjS6WVCjU/r98POa/hYkr5Vc79yto+Jcsy3IeoDr/zXTCs7SnqWsnhEbJ8n01qoLyq
+ Tik4t/wzw5281CyY9PE071HGFsYwxXpcgr4LFL3bp/YxCovsrRAy3rH8EO+q0vhHfuuc ow== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 38yq3r85sq-1
+ by mx07-00178001.pphosted.com with ESMTP id 38y4ye5xjn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 04 Jun 2021 18:26:03 +0200
+ Fri, 04 Jun 2021 18:30:28 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8C20610002A;
- Fri,  4 Jun 2021 18:26:02 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5115010002A;
+ Fri,  4 Jun 2021 18:30:27 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7821C21E69B;
- Fri,  4 Jun 2021 18:26:02 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 474C9231DD2;
+ Fri,  4 Jun 2021 18:30:27 +0200 (CEST)
 Received: from localhost (10.75.127.48) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 4 Jun 2021 18:26:01
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 4 Jun 2021 18:30:26
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Fri, 4 Jun 2021 18:25:55 +0200
-Message-ID: <20210604182552.1.Idaeedfa2eaab3b76ec60a985d8f3625b803564b8@changeid>
+Date: Fri, 4 Jun 2021 18:30:16 +0200
+Message-ID: <20210604183014.1.Idaeedfa2eaab3b76ec60a985d8f3625b803564b8@changeid>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.48]

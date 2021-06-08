@@ -2,71 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AC1939E9FA
-	for <lists+uboot-stm32@lfdr.de>; Tue,  8 Jun 2021 01:16:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFAF23A068E
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Jun 2021 00:04:29 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C8C49C58D79;
-	Mon,  7 Jun 2021 23:16:55 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
- [209.85.160.171])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 801DAC57B78;
+	Tue,  8 Jun 2021 22:04:29 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 44811C3FAD6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ACFBAC57B75
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  7 Jun 2021 23:16:54 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id t17so13911763qta.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 07 Jun 2021 16:16:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=vBu8sENPWC4x7vYD7NB0ca++uVZTVDtahsKfAEov+uk=;
- b=M4Y7vbNvk65kcJ5vTr2cVBkxhSEBJuDdopzqSrAg1+DUeM81TUhd41cQibQ9emJUtR
- PCmBC4mOG1FKjEpzUR3sPnAdp3uOIAINXaobYXcWTFlfXrNzg4uq5YHjun75+aOYVTTo
- T/7fPvWomtQwvA0/rK0U5fmv+otk42ShPOaVc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=vBu8sENPWC4x7vYD7NB0ca++uVZTVDtahsKfAEov+uk=;
- b=AwSSYtdD58qAiGwxTPv5+rTrKGFsE8RnyqZtNDrIPYf+GGMRDIUGmRGSFmwMkvr4Ex
- Q8RO+GqvTJvGPb3LMx96eo9q3Z+0cTCrCZUf6b7Fg/FlO51djoR28HcVxbsjDTaJ3d70
- YMOB37HT+mikTRGvXVZK7B+uNbgWg8dUPiAJ5AcDA9PmZpnoQe79xrTeOwaAdnN/Bi0R
- mwo9ROERw01Lw5usoVqap3FPdYxilJrCIt5QqaznBuT0mzy22BU6K70C6v0Dwoun0rjP
- 4ss58JPJwhumzz5/f5ejngR9KpmsHMd299u6nHaoTOpEJB0X2qE87sMY37im2WOEMcR8
- 6nQg==
-X-Gm-Message-State: AOAM533mrTgh5ihTHjTg/pZZmbLnuHV9avlvHh/bLmaMsAPvl6dVjmH/
- 5+eF1Vsf18G/aFgKeaF1S0O9Jg==
-X-Google-Smtp-Source: ABdhPJyPdT9VwjC4RL6TGtv+ffSe8VA1N5psek9zNB8o/hHnchGiJexOTVhGbRv3wULTHX8SzEMPuA==
-X-Received: by 2002:a05:622a:392:: with SMTP id
- j18mr18670589qtx.6.1623107812960; 
- Mon, 07 Jun 2021 16:16:52 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-a887-7949-d39f-5384.res6.spectrum.com.
- [2603:6081:7b01:cbda:a887:7949:d39f:5384])
- by smtp.gmail.com with ESMTPSA id y1sm11168803qkp.21.2021.06.07.16.16.51
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Mon, 07 Jun 2021 16:16:52 -0700 (PDT)
-Date: Mon, 7 Jun 2021 19:16:50 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20210607231650.GA4481@bill-the-cat>
-References: <20210507125035.1594-1-patrick.delaunay@foss.st.com>
+ Tue,  8 Jun 2021 22:04:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1623189862;
+ bh=hTIlIs6H/KZB8QXTKI/qFa0ngjoFS+WEr0QrxWtCTMg=;
+ h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=lajSD7mXcNVoi7kPvklmm6Uu6l3hBfX0r8W6rQlT3cDmN90OtPuKQy/3PTSE05j74
+ TsrG9VlBSH6iOUJ/Gas5w5TogJzMIEiPEGYTJpD4AzNH/vIxURadX8iEBx1YC2IRvG
+ Y2s14etgBMi6NLlhWBk6wcO/NfAzVCM0sNi1zSaM=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.35] ([62.143.247.63]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MSKy8-1lxE3a2fea-00ShpM; Wed, 09
+ Jun 2021 00:04:22 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20210604165147.31788-1-patrick.delaunay@foss.st.com>
+ <20210604185138.v2.1.I5e3a3276d6423b96b60bf2e60e6a57978c772154@changeid>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <76f13754-5a8d-2248-5d4b-b9a8c6a51f2d@gmx.de>
+Date: Wed, 9 Jun 2021 00:04:21 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210507125035.1594-1-patrick.delaunay@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: chenshuo <chenshuo@eswin.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Masahiro Yamada <masahiroy@kernel.org>,
- Patrick Delaunay <patrick.delaunay@st.com>, Tero Kristo <t-kristo@ti.com>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Wasim Khan <wasim.khan@nxp.com>, Stefan Roese <sr@denx.de>,
- Simon Glass <sjg@chromium.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PATCH v4 0/7] arm: cache: cp15: don't map
- reserved region with no-map property
+In-Reply-To: <20210604185138.v2.1.I5e3a3276d6423b96b60bf2e60e6a57978c772154@changeid>
+Content-Language: en-US
+X-Provags-ID: V03:K1:zxs7CfL8TQdtHw+nCE0YvZhDEDiv4HOsE8XbFv47i9ZcThTHw1G
+ /N2YCEgQ4dMLgZwU2abXIO62D2Q3fnVDrLAeqra8UMPMS8cEKuFgdpVP9cRzZXGpeaFbtO2
+ AI1HVkGmhQiA9tHlvmWrqRYUOLnLmMUJZtAMhQ4oAgbkjFuLljEm94Tjg5fENgMOSvan9L0
+ 2z9P/3ufPBb59/IxFecWw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:I5g79+tT1Mw=:34TPIu0BVnyDEvDsLW8Avs
+ 97PUqnaW5QSX+BZIdWO49nT2kWMGpu72Qd31bjqQSdQpBcu9C61g9AlcditCSv/AQ+zYg31GU
+ 45tJxgTWzh0HjHT47gFPLfSJnWKlJ2eJt/oeAoRqb6JS0PPH4EdcUBjleZHKZD1ySQEokMV+s
+ VKojYRmfKIEQuh3L4EBEgKhMaN6wJ8CpgXXTOD8nKuw0UTGBr/8OjN9HLn1sVqqR4KV9ntI9J
+ mWwezOIzbKG0C6Iy1KkK83hOmJV+UIVSmd9PzWLOjABqA2WTGnKcLESaHgymYGCtT2EGEqIX9
+ 875tY/o4CAa2mouKdISw7XDnXfU/s+oLYRMBdzlaYY/BUEY6j4QgOhMaD6TicSVZM3ACAu9Aj
+ YriAbvi3+CGEMAkiq+m71yD8nBc+bzdJfANkYZqIj6prfckQzrJBjkGRObl8wsW1StlIG+tfJ
+ 5LzDj63iZfJJJr1ystUiotdESAcNiE0NH658pSYgKGIu4vUExeQw1t0Kod/l54InkNtcpGalJ
+ 8Eh/rKbLoxTYeHbmlXxjDP4f/nTbHagN8RPAOh6K6wDOjCW9j3BZFjJ8uKbwNFFD+kvFkLgsp
+ VwxyNYX5GK2A50dqrkeTW+e2ZXROWdgc2XwNncZNuaB/Y/mNfAqcVSBNGJBUae+ZXCnF256jX
+ r4q0Xws/bIF3AzjASjJQWScaGHPJ2rUcHVdUqiYY7v6gpGdZ3U1AptVUeYK+i7d/ncGoeXPB+
+ BXzDFTpVIT3tYRtbMSATBk3bFhHTypl6++0rrg2BM6nu1hagOIMVgEIc9JliU/dH1eNG5hcvv
+ b1Z4dSh0boS9dA+3kTLz35W5y4lh5cdVIfGPWJJEEdR92mRFdv6YZcvIM6tko1E5ike+I88RK
+ 5Mznv2B3zPjJCdZ5TydLe0SB1VfAQlcPD7frhNTGidLQCozxdW6LMwva/+wdvku5c8dqGXDwb
+ pNZuc4vuHgWScE3rUhY8G32ms8ohsIHtpdS6nHPjpSSBqcMi3gzKGj8AqugcPC7m5eWporfyM
+ STRkcvDNWoq3xC/VAS1H3V+ZqeREC4KubxnijBDsPPtDrgwPAbTc6I7eGNalgicFqAp1xsDD6
+ uiNorCEcw5IJNA5ljlr3KNLvw0zt2oRe4gd
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ =?UTF-8?Q?Fr=c3=a9d=c3=a9ric_Danis?= <frederic.danis@collabora.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/2] cmd: Add dependency for ums command
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,146 +73,48 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0856481465068888379=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 6/4/21 6:51 PM, Patrick Delaunay wrote:
+> Add the missing dependency for the command ums:
+> - CONFIG_BLK: call of blk_* functions in usb_mass_storage.c
+> - CONFIG_USB_GADGET: required to select CONFIG_USB_FUNCTION_MASS_STORAGE
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
---===============0856481465068888379==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="FL5UXtIhxfXey3p5"
-Content-Disposition: inline
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-
---FL5UXtIhxfXey3p5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, May 07, 2021 at 02:50:28PM +0200, Patrick Delaunay wrote:
-
-> Hi,
->=20
-> It it the v4 serie of [1].
->=20
-> This v4 serie is rebased on top of master branch with update after Simon
-> Glass review and added tags.
->=20
-> On STM32MP15x platform we can use OP-TEE, loaded in DDR in a region
-> protected by a firewall. This region is reserved in the device with
-> the "no-map" property as defined in the binding file
-> doc/device-tree-bindings/reserved-memory/reserved-memory.txt.
->=20
-> Sometime the platform boot failed in U-Boot on a Cortex A7 access to
-> this region (depending of the binary and the issue can change with compil=
-er
-> version or with code alignment), then the firewall raise an error,
-> for example:
->=20
-> E/TC:0   tzc_it_handler:19 TZC permission failure
-> E/TC:0   dump_fail_filter:420 Permission violation on filter 0
-> E/TC:0   dump_fail_filter:425 Violation @0xde5c6bf0, non-secure privilege=
-d read,
->          AXI ID 5c0
-> E/TC:0   Panic
->=20
-> After investigation, the forbidden access is a speculative request perfor=
-med
-> by the Cortex A7 because all the DDR is mapped as MEMORY with CACHEABLE
-> property.
->=20
-> The issue is solved only when the region reserved by OP-TEE is no more
-> mapped in U-Boot as it is already done in Linux kernel.
->=20
-> Tested on DK2 board with OP-TEE 3.12 / TF-A 2.4:
->=20
-> With hard-coded address for OP-TEE reserved memory,
-> the error doesn't occur.
->=20
->  void dram_bank_mmu_setup(int bank)
->  {
->  ....
->=20
->     	for (i =3D start >> MMU_SECTION_SHIFT;
->  	     i < (start >> MMU_SECTION_SHIFT) + (size >> MMU_SECTION_SHIFT);
->  	     i++) {
->  		option =3D DCACHE_DEFAULT_OPTION;
->  		if (i >=3D 0xde0)
->  			option =3D INVALID_ENTRY;
->  		set_section_dcache(i, option);
->  	}
->  }
->=20
-> Just by modifying the test on 0xde0 to 0xdf0, the OP-TEE memory protected
-> by firewall is mapped cacheable and the error occurs.
->=20
-> I think that it can be a general issue for ARM architecture: the "no-map"=
- tag
-> of reserved memory in device should be respected by U-Boot if firewall
-> is configured before U-Boot execution.
->=20
-> But I don't propose a generic solution in
-> arm/lib/cache-cp15.c:dram_bank_mmu_setup()
-> because the device tree parsing done in lmb_init_and_reserve() takes a
-> long time when it is executed without data cache.
->=20
-> =3D> the previous path 7/7 of v2 series is dropped to avoid
->   performance issue on other ARM target.
->=20
-> To avoid this performance issue on stm32mp32mp platform, the lmb
-> initialization is done in enable_caches() when dcache is still enable.
->=20
-> This v3 series is composed by 7 patches
-> - 1..3/7: preliminary steps to support flags in library in lmb
->   (as it is done in memblock.c in Linux)
-> - 4/7: unitary test on the added feature in lmb lib
-> - 5/7: save the no-map flags in lmb when the device tree is parsed
-> - 6/7: solve issue for the size of cacheable area in pre-reloc case
-> - 7/7: update the stm32mp mmu support
->=20
-> See also [2] which handle same speculative access on armv8 for area
-> with Executable attribute.
->=20
-> [1] http://patchwork.ozlabs.org/project/uboot/list/?series=3D241122&state=
-=3D*
-> [2] http://patchwork.ozlabs.org/project/uboot/patch/20200903000106.5016-1=
--marek.bykowski@gmail.com/
-
-For the series, applied to u-boot/next, and I've taken the above and
-reworked it slightly to use as the merge commit message.  Thanks!
-
---=20
-Tom
-
---FL5UXtIhxfXey3p5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmC+qNYACgkQFHw5/5Y0
-tyxYXAv/b475dhqXlmy0IGUBLe31Sgl3zDACvw9wWN/wE+RjKDbf/BB3Lx66J0Cr
-gz1CKlN99SyG/uYGnjYyFw9FKkZEtaaAGjnWOS/VYEb9r2NHnZENA50LOg7DteKT
-G4M2HtWhiPweqeanehGN91KaHL+j71MVHa91NJkdggOSWNMBcvRlzQEv9Ak8w1Xk
-nSrgDl+lM/eHhwCh+btf1f+4YA7z+sh0DLsKMh5CEAFLM9RoOJNdVHMOO6cnDz08
-LcqGUDBlTgzi2mcljNJba72iwmZ9TdKi/msEgLv78JMxezFVTUxwjN2XYRcX1rk+
-okIZLNF8nvVAWfL8eCy1QZ4NYJh9iRIbdeSil/LbyuqJ3h8dc4mK9Sbt3Zu89VIM
-XUNyP0aUjNmml/eJOzQFUU5CuTUZSk18wrUWqoXNqI0kyZJUVK6hOhAVnhhXWGs4
-iSl5+w7JlO1QynOHVx4GUjpqcWFugYntZsIBYGZs9er+AkKHaqf8EmhT/E/sSqzW
-tqoD+dud
-=svFm
------END PGP SIGNATURE-----
-
---FL5UXtIhxfXey3p5--
-
---===============0856481465068888379==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+> ---
+>
+> Changes in v2:
+> - NEW: Add dependency for ums command
+>
+>   cmd/Kconfig | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index f962bb7141..a9fb4eead2 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1346,8 +1346,11 @@ config CMD_ROCKUSB
+>   config CMD_USB_MASS_STORAGE
+>   	bool "UMS usb mass storage"
+>   	select USB_FUNCTION_MASS_STORAGE
+> +	depends on BLK && USB_GADGET
+>   	help
+> -	  USB mass storage support
+> +	  Enables the command "ums" and the USB mass storage support to the
+> +	  export a block device: U-Boot, the USB device, acts as a simple
+> +	  external hard drive plugged on the host USB port.
+>
+>   config CMD_PVBLOCK
+>   	bool "Xen para-virtualized block device"
+>
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0856481465068888379==--

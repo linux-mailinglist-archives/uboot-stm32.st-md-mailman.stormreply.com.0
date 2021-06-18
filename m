@@ -2,66 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E1263AC3F7
-	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Jun 2021 08:33:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A79C3AC40A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Jun 2021 08:41:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1AEB0C59780;
-	Fri, 18 Jun 2021 06:33:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B4A7FC59780;
+	Fri, 18 Jun 2021 06:41:45 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 708E4C58D5D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E70CAC58D5D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 18 Jun 2021 06:33:06 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri, 18 Jun 2021 06:41:43 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 15I6WgvW023326; Fri, 18 Jun 2021 08:33:01 +0200
+ 15I6X8Bh006916; Fri, 18 Jun 2021 08:41:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=V0kk0Ost4Pli0j0k39EfB3H9DpPzXv5fR4g8N+wwyhc=;
- b=U/yq6y9NNBAsTCIFtG5av2Y3FpNTsrjOJ5n0dismhm0LF1rkIj6KxzdqdPz+jN9VKbzZ
- 3lUHfRPZ9ENTSx+Y1vbfYjjYeVm9u4G4B6RLvfkqNe+AVFRBm8V1wrYYskioNBVZPXDO
- 9jofFK8zmGe4c+YcbcHQHwaTThnaRKR0lWN/NrOWlSfw98fGAYa1bm7fLo3YZC+b202Q
- 3L/QuPi+z4KVqUTSqx6mNgeLinAsHOoPeNLPwl4C0plY38s2Fg12rs0xcF307aaIkeEE
- MWBThDRjJAD5kmUqa371Z1APH33e79VznEITAMDT+SEE7GmVLOhVfLFHXJMMI2QUXlCb IQ== 
+ bh=HhW3/AEaloQ6LVc4v2DkcepYl9YzKjekZX7cDlWeOhA=;
+ b=5psA+DRNoL4meLpMoea6lhPYrH8DTqPYHBXMckfREPLP32gs0vBtnYGS/OMrmwozw39u
+ 46w696UxylHuPVr7iR4Ohfd7I37idLIFWue43exf3AXTFcHVpko315HKP0G29Gy5A178
+ yK9N236qmTl2n+lZsKQIIVQHvbtn9PE5Aeie9U2bcIIRh0KYifybw6WDtTq+RD5pA7Uh
+ 60hFtaVL9rEBaIjiTER5UNMyBhJ7ZztXUhzE76isk1q26IqgG5JGJ1XWY9NOt+pHfu86
+ SLU8B1LWQ+di7suwNpleiuUnqfYgw6mNvzbMYGCoIOMOBNdw98CaspedhhAR9VRS+StS cQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3984bm5jm0-1
+ by mx07-00178001.pphosted.com with ESMTP id 398eght9tr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 18 Jun 2021 08:33:01 +0200
+ Fri, 18 Jun 2021 08:41:41 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6873910002A;
- Fri, 18 Jun 2021 08:33:00 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6229D100034;
+ Fri, 18 Jun 2021 08:41:41 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 467C4216EC0;
- Fri, 18 Jun 2021 08:33:00 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.50) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 55DB3216EE2;
+ Fri, 18 Jun 2021 08:41:41 +0200 (CEST)
+Received: from lmecxl0573.lme.st.com (10.75.127.48) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 18 Jun
- 2021 08:32:59 +0200
+ 2021 08:41:40 +0200
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20210604183014.1.Idaeedfa2eaab3b76ec60a985d8f3625b803564b8@changeid>
+References: <20210427105751.1.I8857039ef25da53d584827b3056e461a9f7b323a@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <a132832b-fa06-4452-c5c2-2375dce64791@foss.st.com>
-Date: Fri, 18 Jun 2021 08:32:59 +0200
+Message-ID: <6fb1073e-07ff-79ea-401d-66fdc6471dd7@foss.st.com>
+Date: Fri, 18 Jun 2021 08:41:40 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20210604183014.1.Idaeedfa2eaab3b76ec60a985d8f3625b803564b8@changeid>
+In-Reply-To: <20210427105751.1.I8857039ef25da53d584827b3056e461a9f7b323a@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.50]
+X-Originating-IP: [10.75.127.48]
 X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-06-17_17:2021-06-15,
  2021-06-17 signatures=0
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@dh-electronics.com,
- Christophe Roullier <christophe.roullier@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] board: stm32mp1: correct the property
-	name for eth
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] clk: cosmetic change in uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,67 +77,34 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 6/4/21 6:30 PM, Patrick Delaunay wrote:
-> Use the correct name for STMicroelectronics phys config properties,
-> replace '_' by '-':
->   "st,eth_clk_sel" => "st,eth-clk-sel"
->   "st,eth-ref-clk-sel" => st,eth-clk-sel"
-> 
-> These property name are aligned with the upstreamed Linux kernel binding:
->  linux/Documentation/devicetree/bindings/net/stm32-dwmac.yaml
-> 
-> See Linux kernel commit "dt-bindings: net: stmmac: add phys config
-> properties" merged in v5.1-rc1.
-> 
-> This patch allow to reuse the kernel device tree directly in U-Boot.
+On 4/27/21 10:57 AM, Patrick Delaunay wrote:
+> Remove the tab in clk_get_bulk to respect the coding rules.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  board/dhelectronics/dh_stm32mp1/board.c | 4 ++--
->  board/st/stm32mp1/stm32mp1.c            | 4 ++--
->  2 files changed, 4 insertions(+), 4 deletions(-)
+>  drivers/clk/clk-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index ac1af718d4..d7c1857c16 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -660,11 +660,11 @@ int board_interface_eth_init(struct udevice *dev,
->  	bool eth_ref_clk_sel_reg = false;
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index 4ab3c402ed..b126c5ed60 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -159,7 +159,7 @@ int clk_get_by_index_nodev(ofnode node, int index, struct clk *clk)
+>  int clk_get_bulk(struct udevice *dev, struct clk_bulk *bulk)
+>  {
+>  	int i, ret, err, count;
+> -	
+> +
+>  	bulk->count = 0;
 >  
->  	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth_clk_sel");
-> +	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
->  
->  	/* Ethernet 50Mhz RMII clock selection */
->  	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth_ref_clk_sel");
-> +		dev_read_bool(dev, "st,eth-ref-clk-sel");
->  
->  	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
->  
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 261ec15e1b..18b8870269 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -733,11 +733,11 @@ int board_interface_eth_init(struct udevice *dev,
->  	bool eth_ref_clk_sel_reg = false;
->  
->  	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth_clk_sel");
-> +	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
->  
->  	/* Ethernet 50Mhz RMII clock selection */
->  	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth_ref_clk_sel");
-> +		dev_read_bool(dev, "st,eth-ref-clk-sel");
->  
->  	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
->  
+>  	count = dev_count_phandle_with_args(dev, "clocks", "#clock-cells", 0);
 > 
+
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

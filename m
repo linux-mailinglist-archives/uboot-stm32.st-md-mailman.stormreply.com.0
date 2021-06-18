@@ -2,67 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01A173AC44F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Jun 2021 08:56:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80FC83AC450
+	for <lists+uboot-stm32@lfdr.de>; Fri, 18 Jun 2021 08:56:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B238BC59780;
-	Fri, 18 Jun 2021 06:56:12 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 48974C59780;
+	Fri, 18 Jun 2021 06:56:43 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66542C58D5D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 449CDC58D5D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 18 Jun 2021 06:56:11 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Fri, 18 Jun 2021 06:56:42 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 15I6ktWr021423; Fri, 18 Jun 2021 08:55:57 +0200
+ 15I6lB2v002325; Fri, 18 Jun 2021 08:56:40 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=5mY+/ma7ddO5ZSP24iYQ41wlL99ZU7SUC1zD+yelIok=;
- b=YKkLtiW0fqripcCcG4q5tmFN+oa13tUt1I3O61f9I3aGEHLIA50OvB2TQyMc0afOvUQG
- hjnQyaZ7Cjm2J6BqeCmyb41mg/MXz8IPltytPRmo9jzc0shg/qdsYMDiQ657NVGCqsYo
- 6QR3CQzt/jnpS1eNRbhkJy/rjq6vxzQkEPTBoOEmUKWgjXcAMZ3qjYWl0+DI2q/puWh+
- Fpmb/SYO6fe4tNHghB5Y802Gyyhi28pMIDZb54gf/mRTs6KzIBYPOktdMy0aYfHH2lz2
- MJSQd466wP9IfeMvXZIM/9Ntf9Bwsj32eEZRAuOQUVWyzvschPqsFJY3APrqj0CF7e1G TA== 
+ bh=8mLzsMQKIYsmbH7+ZxLdGsOoCjHi/W5+AwE/3lhD8o4=;
+ b=CNxAfOq0YSTwrf3RbB/iORDOs0+7icCxKh6tCUGSfaw9m39TbSSrAH062ZBfCjjyoIy+
+ wSUtf4gszSd7Uc6RnBGOf+u54HzGsoViFFrfxM9jMCdpN2b40TlxCxeSIeNhugSsn+/P
+ mtSHpLQP1MeIgTmZaQI1WSKmjTtMXE58P/bSXfMNM4nUJdLo9+dIeUmZr38uCEI046uT
+ PDSqJmSL5WeA4ZUfllihTy0lFWLSbogYNJvZJBSmS2v+CLGuDIfF7ZRYfuyypF1OW9+f
+ 53hbHT4gGH+qJvpXoy7b0T+BczGO0J8Oe22rX5eHb+naQzjlX6w4o8IEBFmq50EawE49 ug== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3984bm5pue-1
+ by mx07-00178001.pphosted.com with ESMTP id 398eghtcju-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 18 Jun 2021 08:55:57 +0200
+ Fri, 18 Jun 2021 08:56:40 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 74D3D10002A;
- Fri, 18 Jun 2021 08:55:55 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B25D3100034;
+ Fri, 18 Jun 2021 08:56:39 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1007121735F;
- Fri, 18 Jun 2021 08:55:55 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A391B217367;
+ Fri, 18 Jun 2021 08:56:39 +0200 (CEST)
 Received: from lmecxl0573.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 18 Jun
- 2021 08:55:54 +0200
+ 2021 08:56:39 +0200
 To: <u-boot@lists.denx.de>
 References: <20210419094534.9748-1-patrice.chotard@foss.st.com>
- <20210419094534.9748-3-patrice.chotard@foss.st.com>
+ <20210419094534.9748-4-patrice.chotard@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <ce16a34d-ac0c-2041-5aae-d755d33ff01e@foss.st.com>
-Date: Fri, 18 Jun 2021 08:55:54 +0200
+Message-ID: <983c4d52-e9b3-6ee9-b5e7-bda4c5130c19@foss.st.com>
+Date: Fri, 18 Jun 2021 08:56:38 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20210419094534.9748-3-patrice.chotard@foss.st.com>
+In-Reply-To: <20210419094534.9748-4-patrice.chotard@foss.st.com>
 Content-Language: en-US
 X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-06-17_17:2021-06-15,
  2021-06-17 signatures=0
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
  Herbert Poetzl <herbert@13thfloor.at>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/5] usb: gadget: Add bcdDevice for the
- DWC2 USB Gadget Controller
+Subject: Re: [Uboot-stm32] [PATCH v2 3/5] usb: sandbox: Add gadget callbacks
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,7 +78,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Lukasz, Marek
+Hi Marek
 
 Can you have a look a this patch please ?
 
@@ -87,45 +86,66 @@ Thanks
 Patrice
 
 On 4/19/21 11:45 AM, Patrice Chotard wrote:
-> Add an entry in usb_gadget_controller_number() for the DWC2
-> gadget controller. It is used to bind the USB Ethernet driver.
+> Add usb_gadget_handle_interrupts(), usb_gadget_register_driver()
+> and usb_gadget_unregister_driver() to be able to test
+> binding usb gadget.
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reported-by: Herbert Poetzl <herbert@13thfloor.at>
 > Cc: Marek Vasut <marex@denx.de>
 > Cc: Herbert Poetzl <herbert@13thfloor.at>
 > ---
 > 
 > (no changes since v1)
 > 
->  drivers/usb/gadget/gadget_chips.h | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  drivers/usb/host/usb-sandbox.c | 28 ++++++++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
 > 
-> diff --git a/drivers/usb/gadget/gadget_chips.h b/drivers/usb/gadget/gadget_chips.h
-> index 0cdf47c2dd..06e6a48949 100644
-> --- a/drivers/usb/gadget/gadget_chips.h
-> +++ b/drivers/usb/gadget/gadget_chips.h
-> @@ -167,6 +167,12 @@
->  #define gadget_is_mtu3(g)        0
->  #endif
->  
-> +#ifdef CONFIG_USB_GADGET_DWC2_OTG
-> +#define gadget_is_dwc2(g)        (!strcmp("dwc2-udc", (g)->name))
-> +#else
-> +#define gadget_is_dwc2(g)        0
-> +#endif
+> diff --git a/drivers/usb/host/usb-sandbox.c b/drivers/usb/host/usb-sandbox.c
+> index d7cc92aa54..d1103dcb2e 100644
+> --- a/drivers/usb/host/usb-sandbox.c
+> +++ b/drivers/usb/host/usb-sandbox.c
+> @@ -9,6 +9,13 @@
+>  #include <log.h>
+>  #include <usb.h>
+>  #include <dm/root.h>
+> +#include <linux/usb/gadget.h>
 > +
->  /**
->   * usb_gadget_controller_number - support bcdDevice id convention
->   * @gadget: the controller being driven
-> @@ -232,5 +238,7 @@ static inline int usb_gadget_controller_number(struct usb_gadget *gadget)
->  		return 0x25;
->  	else if (gadget_is_mtu3(gadget))
->  		return 0x26;
-> +	else if (gadget_is_dwc2(gadget))
-> +		return 0x27;
->  	return -ENOENT;
+> +struct sandbox_udc {
+> +	struct usb_gadget gadget;
+> +};
+> +
+> +struct sandbox_udc *this_controller;
+>  
+>  struct sandbox_usb_ctrl {
+>  	int rootdev;
+> @@ -117,6 +124,27 @@ static int sandbox_submit_int(struct udevice *bus, struct usb_device *udev,
+>  	return ret;
 >  }
+>  
+> +int usb_gadget_handle_interrupts(int index)
+> +{
+> +	return 0;
+> +}
+> +
+> +int usb_gadget_register_driver(struct usb_gadget_driver *driver)
+> +{
+> +	struct sandbox_udc *dev = this_controller;
+> +
+> +	return driver->bind(&dev->gadget);
+> +}
+> +
+> +int usb_gadget_unregister_driver(struct usb_gadget_driver *driver)
+> +{
+> +	struct sandbox_udc *dev = this_controller;
+> +
+> +	driver->unbind(&dev->gadget);
+> +
+> +	return 0;
+> +}
+> +
+>  static int sandbox_alloc_device(struct udevice *dev, struct usb_device *udev)
+>  {
+>  	struct sandbox_usb_ctrl *ctrl = dev_get_priv(dev);
 > 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,61 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C8D63B5E7F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Jun 2021 14:56:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47E8B3B5E80
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Jun 2021 14:56:16 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 038C2C59781;
-	Mon, 28 Jun 2021 12:56:14 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0EC84C59783;
+	Mon, 28 Jun 2021 12:56:16 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D26A6C3FAD6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D0D7C58D78
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Jun 2021 12:56:11 +0000 (UTC)
+ Mon, 28 Jun 2021 12:56:13 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 15SCqbPc032703; Mon, 28 Jun 2021 14:56:11 +0200
+ 15SCqciD032715; Mon, 28 Jun 2021 14:56:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=NTMIgZlY5YOfcKiPq4ITB3vu9oz93nwT+7OzT3w+Go4=;
- b=yGGT8cOgB9a4Mso2dWzI2aiOJl/94YJh3gMUmZ+K9ZofDDdgL7PqdJ2gEcDZV9POo90r
- Z97yB1f7I1dxE5uVwf1KhnY9Q6+Mi3pafuoElxAvOGJKTOnGplOOBMez/MXcbib2e/mM
- xY8cV14cIibyWwu/AP6sjyTO17ZqohlRDTEZarxGl28K7sEtW0MbLCe4pK6Iy8e/5enl
- +tc1ethF3ekjDxJa4ya5LYF1eMzi7Z/j7g11yGos9Wagc34n5SRZzJKDksT2Iha/TlNN
- RunebKjHAU++Xpb1DOUzFY423dNMNkzyvGi4y8F+lg2reUfe6eyj4YdlWlirsb9p91mI sA== 
+ bh=qlQefkGqqCQEo4S5C45+LpIzDRCcz5iglyOO5UTfQwk=;
+ b=a5qaP5qop0QD0q1b047v6TqXQMCPFQVhJwFfJh364dFNA7u6DMU2Z2dZaQGGsI2JZef6
+ umdfTO6dVoqPIsSNlLFJKf79xAmbke+1EVNUstrXq/ysY/da61sSfYeSoZ4nYdwT0acE
+ cqmp85R+6SU33GLWc+WXHtPe0lbylc4flsCZVSNduL+vkzbKQ8egONkaUFZ5V16aHU6F
+ 3J4QSyhwrYHsFrF+PFxwf0StiF2YQrVQ7abMvTE7GwJeKnIVNQb6LInm+NcRpv/wwXEc
+ 99v4zzewCBu/wZRfFK/JHs+VlOEimCqHzCEMlG0yvd+jFFvKPovNbO058qTk/xdLPQcl lg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39f1xsktvy-1
+ by mx07-00178001.pphosted.com with ESMTP id 39f1xsktw3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Jun 2021 14:56:11 +0200
+ Mon, 28 Jun 2021 14:56:12 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BBECA10002A;
- Mon, 28 Jun 2021 14:56:10 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 67E4A10002A;
+ Mon, 28 Jun 2021 14:56:12 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B22AB2291B7;
- Mon, 28 Jun 2021 14:56:10 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 28 Jun 2021 14:56:10
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 88CF720B87F;
+ Mon, 28 Jun 2021 14:56:11 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 28 Jun 2021 14:56:11
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 28 Jun 2021 14:55:58 +0200
-Message-ID: <20210628145519.2.I55399cf019408c6f6d4f86aa8783c8187b090280@changeid>
+Date: Mon, 28 Jun 2021 14:55:59 +0200
+Message-ID: <20210628145519.3.Id13cccdd894c43f0df0833fc71e3ff084eb4cc1d@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210628125603.2936135-1-patrick.delaunay@foss.st.com>
 References: <20210628125603.2936135-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-06-28_11:2021-06-25,
  2021-06-28 signatures=0
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 2/7] stm32mp: cmd_stm32key: use sub command
+Subject: [Uboot-stm32] [PATCH 3/7] stm32mp: cmd_stm32key: handle error in
+	fuse_hash_value
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,92 +74,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Simplify parsing the command argument by using
-the macro U_BOOT_CMD_WITH_SUBCMDS.
+Handle errors in fuse_hash_value function.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/cmd_stm32key.c | 55 ++++++++++++++++++----------
- 1 file changed, 36 insertions(+), 19 deletions(-)
+ arch/arm/mach-stm32mp/cmd_stm32key.c | 24 +++++++++++++++---------
+ 1 file changed, 15 insertions(+), 9 deletions(-)
 
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
-index 42fdc11238..d2045a5983 100644
+index d2045a5983..2529139ebc 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32key.c
 +++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
-@@ -67,36 +67,53 @@ static int confirm_prog(void)
- 	return 0;
+@@ -25,7 +25,7 @@ static void read_hash_value(u32 addr)
+ 	}
  }
  
--static int do_stm32key(struct cmd_tbl *cmdtp, int flag, int argc,
--		       char *const argv[])
-+static int do_stm32key_read(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-static void fuse_hash_value(u32 addr, bool print)
++static int fuse_hash_value(u32 addr, bool print)
  {
- 	u32 addr;
--	const char *op = argc >= 2 ? argv[1] : NULL;
--	int confirmed = argc > 3 && !strcmp(argv[2], "-y");
- 
--	argc -= 2 + confirmed;
--	argv += 2 + confirmed;
--
--	if (argc < 1)
-+	if (argc == 1)
- 		return CMD_RET_USAGE;
- 
--	addr = simple_strtoul(argv[0], NULL, 16);
-+	addr = simple_strtoul(argv[1], NULL, 16);
- 	if (!addr)
- 		return CMD_RET_USAGE;
- 
--	if (!strcmp(op, "read"))
--		read_hash_value(addr);
-+	read_hash_value(addr);
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int do_stm32key_fuse(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	u32 addr;
-+	bool yes = false;
- 
--	if (!strcmp(op, "fuse")) {
--		if (!confirmed && !confirm_prog())
--			return CMD_RET_FAILURE;
--		fuse_hash_value(addr, !confirmed);
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	if (argc == 3) {
-+		if (strcmp(argv[1], "-y"))
-+			return CMD_RET_USAGE;
-+		yes = true;
+ 	struct udevice *dev;
+ 	u32 word, val;
+@@ -36,21 +36,25 @@ static void fuse_hash_value(u32 addr, bool print)
+ 					  &dev);
+ 	if (ret) {
+ 		log_err("Can't find stm32mp_bsec driver\n");
+-		return;
++		return ret;
  	}
  
-+	addr = simple_strtoul(argv[argc - 1], NULL, 16);
-+	if (!addr)
-+		return CMD_RET_USAGE;
+ 	for (i = 0; i < STM32_OTP_HASH_KEY_SIZE; i++) {
+-		if (print)
+-			printf("Fuse OTP %i : %x\n",
+-			       STM32_OTP_HASH_KEY_START + i,
+-			       __be32_to_cpu(*(u32 *)addr));
+-
+ 		word = STM32_OTP_HASH_KEY_START + i;
+ 		val = __be32_to_cpu(*(u32 *)addr);
+-		misc_write(dev, STM32_BSEC_OTP(word), &val, 4);
++		if (print)
++			printf("Fuse OTP %i : %x\n", word, val);
 +
-+	if (!yes && !confirm_prog())
-+		return CMD_RET_FAILURE;
++		ret = misc_write(dev, STM32_BSEC_OTP(word), &val, 4);
++		if (ret != 4) {
++			log_err("Fuse OTP %i failed\n", word);
++			return ret;
++		}
+ 
+ 		addr += 4;
+ 	}
 +
-+	fuse_hash_value(addr, !yes);
-+	printf("Hash key updated !\n");
-+
- 	return CMD_RET_SUCCESS;
++	return 0;
  }
  
--U_BOOT_CMD(stm32key, 4, 1, do_stm32key,
--	   "Fuse ST Hash key",
--	   "read <addr>: Read the hash store at addr in memory\n"
--	   "stm32key fuse [-y] <addr> : Fuse hash store at addr in otp\n");
-+static char stm32key_help_text[] =
-+	"read <addr>: Read the hash stored at addr in memory\n"
-+	"stm32key fuse [-y] <addr> : Fuse hash stored at addr in OTP\n";
+ static int confirm_prog(void)
+@@ -104,7 +108,9 @@ static int do_stm32key_fuse(struct cmd_tbl *cmdtp, int flag, int argc, char *con
+ 	if (!yes && !confirm_prog())
+ 		return CMD_RET_FAILURE;
+ 
+-	fuse_hash_value(addr, !yes);
++	if (fuse_hash_value(addr, !yes))
++		return CMD_RET_FAILURE;
 +
-+U_BOOT_CMD_WITH_SUBCMDS(stm32key, "Fuse ST Hash key", stm32key_help_text,
-+	U_BOOT_SUBCMD_MKENT(read, 2, 0, do_stm32key_read),
-+	U_BOOT_SUBCMD_MKENT(fuse, 3, 0, do_stm32key_fuse));
+ 	printf("Hash key updated !\n");
+ 
+ 	return CMD_RET_SUCCESS;
 -- 
 2.25.1
 

@@ -2,59 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79E603B7059
-	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Jun 2021 12:01:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B95DF3B705D
+	for <lists+uboot-stm32@lfdr.de>; Tue, 29 Jun 2021 12:04:29 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 21CE5C57B53;
-	Tue, 29 Jun 2021 10:01:15 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B143C58D78;
+	Tue, 29 Jun 2021 10:04:29 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9FCF9C32EA6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B460C32EA6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 29 Jun 2021 10:01:13 +0000 (UTC)
+ Tue, 29 Jun 2021 10:04:27 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 15T9worv016454; Tue, 29 Jun 2021 12:01:12 +0200
+ 15T9woiV016468; Tue, 29 Jun 2021 12:04:26 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=selector1;
- bh=mk9VcNWxYtOn9nc7n9Z9aZQPciI1ZFBNO4St8YqGKKI=;
- b=vo3ZkltlD+Ifr8zmYhffkW5SEgxx9ovFXkE9Phj9wq8bIUun8mHn7QUuH48lh3VGQwh6
- Z2fyL1BDNXddLiTcp5qhz/3Ab8h/pxu4f9iNrTaBzZ2zmkqKD7xGD4CUU/4AngzqND3A
- rB4R7HuZViKwGIL518KhnOat8VBxSrD1JExQtsJyS5p2kbDMQeLwh075BmR51llICe9j
- AsL4GNZ0HQrRQwJV7EAerVxESI2rLhnS598kbAVHyNKaRx012R2kZZNGXYha9ZnHyp42
- A1ss4fnpnTshzIcgM2NmR9JzO2EoksqfpLCOuQ2JDxKkwAXmh/v9rLP5HeEMLRFDIeMF 6g== 
+ bh=SB/uhHmY5/Hhrrc7yoqnAb77+n5MqFlZ4irxzWNMT3s=;
+ b=b1p2pWd9POXg9nnf9KCtrgmOqmdEByJhXuB+hWsWnpjwomqly/UQH10t+zEy2YnWnV7W
+ 8XYZpxGy22IUsaTppIdqYtfy/9DFOf6/L0u5jBudSzCdQaiv7qo+9aFxnLgF4YETrKKN
+ XpamPO7Hu5bZ8S4aIm+qWLZBpe6usFBLdp8XJolL3T6W4rn7kV39bK2XtJLci9fzfBa9
+ TfHloXlpJC59Nun7QRGwnLdpoR7c1YhSNNxoyZgg5/4VDL3U0uaBOygAySnvX/yaLtmK
+ QQt5HOpiXd24uQ8NCL3rGPePHYOOFJlcpjABiGzE5tjzEKf0y3/r8QjNlyiDnGps5tG0 iA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39fxbnhcks-1
+ by mx07-00178001.pphosted.com with ESMTP id 39fxbnhddd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 29 Jun 2021 12:01:12 +0200
+ Tue, 29 Jun 2021 12:04:26 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 926A010002A;
- Tue, 29 Jun 2021 12:01:10 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8BA2F10002A;
+ Tue, 29 Jun 2021 12:04:25 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6E78221ED36;
- Tue, 29 Jun 2021 12:01:10 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 29 Jun 2021 12:01:10
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 77F9221ED39;
+ Tue, 29 Jun 2021 12:04:25 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 29 Jun 2021 12:04:25
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 29 Jun 2021 12:01:07 +0200
-Message-ID: <20210629120054.1.I66434b41cf76f1e6becd7612fea5f60f631b37d0@changeid>
+Date: Tue, 29 Jun 2021 12:04:22 +0200
+Message-ID: <20210629120417.1.I711fb255292d0f086a2632041897c48c163403bd@changeid>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
+X-Originating-IP: [10.75.127.49]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-06-29_05:2021-06-25,
  2021-06-29 signatures=0
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with v5.13
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: [Uboot-stm32] [PATCH 1/2] clk: stm32mp1: add support of SYSCFG clock
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,325 +72,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Device tree alignment with Linux kernel v5.13
-- ARM: dts: stm32: Add PTP clock to Ethernet controller
-- ARM: dts: stm32: enable the analog filter for all I2C nodes in
-  stm32mp151
-- ARM: dts: stm32: fix usart 2 & 3 pinconf to wake up with flow control
-- ARM: dts: stm32: Add wakeup management on stm32mp15x UART nodes
-- ARM: dts: stm32: add #clock-cells property to usbphyc node on stm32mp151
-- ARM: dts: stm32: Add STM32MP1 I2C6 SDA/SCL pinmux
-- ARM: dts: stm32: Rename mmc controller nodes to mmc@
-- ARM: dts: stm32: Add additional init state for SDMMC1 pins
+Add the support of SYSCFG clock used by syscon driver
+to prepare the clock management of STM32MP_SYSCON_SYSCFG.
+
+This clock is already defined in kernel device tree,
+stm32mp151.dtsi but not yet supported in the syscon driver:
+
+syscfg: syscon@50020000 {
+	compatible = "st,stm32mp157-syscfg", "syscon";
+	reg = <0x50020000 0x400>;
+	clocks = <&rcc SYSCFG>;
+};
+
+It is safe to support this clock in U-Boot driver with
+RCC_MC_APB3ENSETR, Bit 11 SYSCFGEN: SYSCFG peripheral clocks
+enable.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/dts/stm32mp15-pinctrl.dtsi | 61 +++++++++++++++++++++++++++--
- arch/arm/dts/stm32mp151.dtsi        | 39 ++++++++++++------
- 2 files changed, 86 insertions(+), 14 deletions(-)
+ drivers/clk/clk_stm32mp1.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-index 20a59e8f7a..060baa8b7e 100644
---- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-@@ -1273,6 +1273,18 @@
- 		};
- 	};
+diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
+index 0c0ef366a1..48c9514ba0 100644
+--- a/drivers/clk/clk_stm32mp1.c
++++ b/drivers/clk/clk_stm32mp1.c
+@@ -540,6 +540,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
+ 	STM32MP1_CLK_SET_CLR(RCC_MP_APB2ENSETR, 13, USART6_K, _UART6_SEL),
  
-+	sdmmc1_b4_init_pins_a: sdmmc1-b4-init-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('C', 8, AF12)>, /* SDMMC1_D0 */
-+				 <STM32_PINMUX('C', 9, AF12)>, /* SDMMC1_D1 */
-+				 <STM32_PINMUX('C', 10, AF12)>, /* SDMMC1_D2 */
-+				 <STM32_PINMUX('C', 11, AF12)>; /* SDMMC1_D3 */
-+			slew-rate = <1>;
-+			drive-push-pull;
-+			bias-disable;
-+		};
-+	};
-+
- 	sdmmc1_b4_sleep_pins_a: sdmmc1-b4-sleep-0 {
- 		pins {
- 			pinmux = <STM32_PINMUX('C', 8, ANALOG)>, /* SDMMC1_D0 */
-@@ -1299,6 +1311,17 @@
- 		};
- 	};
+ 	STM32MP1_CLK_SET_CLR_F(RCC_MP_APB3ENSETR, 13, VREF, _PCLK3),
++	STM32MP1_CLK_SET_CLR_F(RCC_MP_APB3ENSETR, 11, SYSCFG, _UNKNOWN_SEL),
  
-+	sdmmc1_dir_init_pins_a: sdmmc1-dir-init-0 {
-+		pins1 {
-+			pinmux = <STM32_PINMUX('F', 2, AF11)>, /* SDMMC1_D0DIR */
-+				 <STM32_PINMUX('C', 7, AF8)>, /* SDMMC1_D123DIR */
-+				 <STM32_PINMUX('B', 9, AF11)>; /* SDMMC1_CDIR */
-+			slew-rate = <1>;
-+			drive-push-pull;
-+			bias-pull-up;
-+		};
-+	};
-+
- 	sdmmc1_dir_sleep_pins_a: sdmmc1-dir-sleep-0 {
- 		pins {
- 			pinmux = <STM32_PINMUX('F', 2, ANALOG)>, /* SDMMC1_D0DIR */
-@@ -1868,10 +1891,15 @@
- 	usart2_idle_pins_c: usart2-idle-2 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('D', 5, ANALOG)>, /* USART2_TX */
--				 <STM32_PINMUX('D', 4, ANALOG)>, /* USART2_RTS */
- 				 <STM32_PINMUX('D', 3, ANALOG)>; /* USART2_CTS_NSS */
- 		};
- 		pins2 {
-+			pinmux = <STM32_PINMUX('D', 4, AF7)>; /* USART2_RTS */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <3>;
-+		};
-+		pins3 {
- 			pinmux = <STM32_PINMUX('D', 6, AF7)>; /* USART2_RX */
- 			bias-disable;
- 		};
-@@ -1917,10 +1945,15 @@
- 	usart3_idle_pins_b: usart3-idle-1 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
--				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
- 				 <STM32_PINMUX('I', 10, ANALOG)>; /* USART3_CTS_NSS */
- 		};
- 		pins2 {
-+			pinmux = <STM32_PINMUX('G', 8, AF8)>; /* USART3_RTS */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <0>;
-+		};
-+		pins3 {
- 			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
- 			bias-disable;
- 		};
-@@ -1953,10 +1986,15 @@
- 	usart3_idle_pins_c: usart3-idle-2 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* USART3_TX */
--				 <STM32_PINMUX('G', 8, ANALOG)>, /* USART3_RTS */
- 				 <STM32_PINMUX('B', 13, ANALOG)>; /* USART3_CTS_NSS */
- 		};
- 		pins2 {
-+			pinmux = <STM32_PINMUX('G', 8, AF8)>; /* USART3_RTS */
-+			bias-disable;
-+			drive-push-pull;
-+			slew-rate = <0>;
-+		};
-+		pins3 {
- 			pinmux = <STM32_PINMUX('B', 12, AF8)>; /* USART3_RX */
- 			bias-disable;
- 		};
-@@ -2018,6 +2056,23 @@
- 		};
- 	};
- 
-+	i2c6_pins_a: i2c6-0 {
-+		pins {
-+			pinmux = <STM32_PINMUX('Z', 6, AF2)>, /* I2C6_SCL */
-+				 <STM32_PINMUX('Z', 7, AF2)>; /* I2C6_SDA */
-+			bias-disable;
-+			drive-open-drain;
-+			slew-rate = <0>;
-+		};
-+	};
-+
-+	i2c6_sleep_pins_a: i2c6-sleep-0 {
-+		pins {
-+			pinmux = <STM32_PINMUX('Z', 6, ANALOG)>, /* I2C6_SCL */
-+				 <STM32_PINMUX('Z', 7, ANALOG)>; /* I2C6_SDA */
-+		};
-+	};
-+
- 	spi1_pins_a: spi1-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('Z', 0, AF5)>, /* SPI1_SCK */
-diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
-index b564fc6269..177927d14e 100644
---- a/arch/arm/dts/stm32mp151.dtsi
-+++ b/arch/arm/dts/stm32mp151.dtsi
-@@ -470,32 +470,36 @@
- 		usart2: serial@4000e000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x4000e000 0x400>;
--			interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 27 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc USART2_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
- 		usart3: serial@4000f000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x4000f000 0x400>;
--			interrupts = <GIC_SPI 39 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 28 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc USART3_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
- 		uart4: serial@40010000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40010000 0x400>;
--			interrupts = <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 30 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc UART4_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
- 		uart5: serial@40011000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40011000 0x400>;
--			interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 31 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc UART5_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -511,6 +515,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x1>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
-@@ -526,6 +531,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x2>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
-@@ -541,6 +547,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x4>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
-@@ -556,6 +563,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x10>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
-@@ -595,16 +603,18 @@
- 		uart7: serial@40018000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40018000 0x400>;
--			interrupts = <GIC_SPI 82 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 32 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc UART7_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
- 		uart8: serial@40019000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40019000 0x400>;
--			interrupts = <GIC_SPI 83 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 33 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc UART8_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -683,8 +693,9 @@
- 		usart6: serial@44003000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x44003000 0x400>;
--			interrupts = <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 29 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc USART6_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -1065,7 +1076,7 @@
- 			};
- 		};
- 
--		sdmmc3: sdmmc@48004000 {
-+		sdmmc3: mmc@48004000 {
- 			compatible = "arm,pl18x", "arm,primecell";
- 			arm,primecell-periphid = <0x00253180>;
- 			reg = <0x48004000 0x400>;
-@@ -1398,7 +1409,7 @@
- 			status = "disabled";
- 		};
- 
--		sdmmc1: sdmmc@58005000 {
-+		sdmmc1: mmc@58005000 {
- 			compatible = "arm,pl18x", "arm,primecell";
- 			arm,primecell-periphid = <0x00253180>;
- 			reg = <0x58005000 0x1000>;
-@@ -1413,7 +1424,7 @@
- 			status = "disabled";
- 		};
- 
--		sdmmc2: sdmmc@58007000 {
-+		sdmmc2: mmc@58007000 {
- 			compatible = "arm,pl18x", "arm,primecell";
- 			arm,primecell-periphid = <0x00253180>;
- 			reg = <0x58007000 0x1000>;
-@@ -1451,11 +1462,13 @@
- 				      "mac-clk-tx",
- 				      "mac-clk-rx",
- 				      "eth-ck",
-+				      "ptp_ref",
- 				      "ethstp";
- 			clocks = <&rcc ETHMAC>,
- 				 <&rcc ETHTX>,
- 				 <&rcc ETHRX>,
- 				 <&rcc ETHCK_K>,
-+				 <&rcc ETHPTP_K>,
- 				 <&rcc ETHSTP>;
- 			st,syscon = <&syscfg 0x4>;
- 			snps,mixed-burst;
-@@ -1512,6 +1525,7 @@
- 		usbphyc: usbphyc@5a006000 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-+			#clock-cells = <0>;
- 			compatible = "st,stm32mp1-usbphyc";
- 			reg = <0x5a006000 0x1000>;
- 			clocks = <&rcc USBPHY_K>;
-@@ -1534,8 +1548,9 @@
- 		usart1: serial@5c000000 {
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x5c000000 0x400>;
--			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupts-extended = <&exti 26 IRQ_TYPE_LEVEL_HIGH>;
- 			clocks = <&rcc USART1_K>;
-+			wakeup-source;
- 			status = "disabled";
- 		};
- 
-@@ -1565,6 +1580,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x8>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
-@@ -1605,6 +1621,7 @@
- 			#size-cells = <0>;
- 			st,syscfg-fmp = <&syscfg 0x4 0x20>;
- 			wakeup-source;
-+			i2c-analog-filter;
- 			status = "disabled";
- 		};
- 
+ 	STM32MP1_CLK_SET_CLR_F(RCC_MP_APB4ENSETR, 0, LTDC_PX, _PLL4_Q),
+ 	STM32MP1_CLK_SET_CLR_F(RCC_MP_APB4ENSETR, 4, DSI_PX, _PLL4_Q),
 -- 
 2.25.1
 

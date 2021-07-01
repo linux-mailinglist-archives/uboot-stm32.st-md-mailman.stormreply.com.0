@@ -2,115 +2,113 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91C163B9421
-	for <lists+uboot-stm32@lfdr.de>; Thu,  1 Jul 2021 17:40:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D21E3B9448
+	for <lists+uboot-stm32@lfdr.de>; Thu,  1 Jul 2021 17:48:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 47E66C59781;
-	Thu,  1 Jul 2021 15:40:35 +0000 (UTC)
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
- (mail-eopbgr50121.outbound.protection.outlook.com [40.107.5.121])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1193EC59781;
+	Thu,  1 Jul 2021 15:48:24 +0000 (UTC)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2104.outbound.protection.outlook.com [40.107.22.104])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 668EBC57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 383CBC57183
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  1 Jul 2021 15:40:31 +0000 (UTC)
+ Thu,  1 Jul 2021 15:48:21 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=G+cTBWdWX/JhxXW8tO+8y4+RNAyyE3Ujrhg8ALaV2a/5o/ikVT+eAqgsgGPffjRV4hOVVKaZfsoGqdkO/c3+PcMBKRf4pe86B3w5fioB8P3BzPxrKGr7QAkQZnxpPEleShsGmmqxgW5ULZxJMH0WUXYmGfPw/ujqe1dEy9rEokhz41t1GKgVvtoPBs2Ut74+TjQUER3SmUS4c13HSJ4nFNbnvsm9tZAxmNilNP8PocDoO7D73yQNgP2FgqKEwTTL8qFasbivI0/wO7+nhm5O9vp2iHYJs0VEvd/5Lc0M0C6eVfwG53U4aXiWbFWiVn5iPi/Axk53Wcvc/b/fVmURnw==
+ b=BGPDUw+ntVUQeulLppJYnLiUkmUPsNHW+Qrw4Jli0fdSiKk6PhyUOO3msJKRlwKisJUTvEmGnUEIP6T2iE7gABrfPAm7fpe4aFj60nUqJOw/1I3NZ/sp8Vtl6GGUkpNJBAGtcrTorp88GgE7bXoVk+JClz123CFsGp2jTw2p2jPuxBI9bDUb30btLWAljdk1PW8dzhIhS2YvWZVviX0z35t987lVm217Dysugzi244NEsZM9AE1bP6bS8uI+oGdNZPtVYQkeq4Ql41bdCdiTns4wJOogNj/L6TyAEOM/LlXsyBYzFWSiNtPpkK8DlOO/wAWg4ls05C98LpBjSDXr8w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=to/bQozXtizVL9rtTXEF0E07iJDbNRINTBkIfySX0EY=;
- b=RXv7ROjAIML+gRBJs5nn4cPiYcj8BbJSKM55gORZrnccGU2OZPXtjP+ifslIoRy1bxGSJGuGMwaHPSd2IEp6s9LG41hiPE0XjvdGwiycqxXj270VS8ysCELLu947YH+ZdLxTYYVx5YsOKhsgRC92kWKQ9CD80upJVnxg7QoKj/8c3M+BMBcJwhMOcVVpvcKBtukt2Gg/D61kbkbR5bUPg2O3yc8uhisNV842XZIfdXzmAhbUnK3u6yb+cXiT5j4j/UTRYx0TMj8CETmaDakCjn7V8zxKesp6cPpLrgEWLlwmufn/PfQACvPNoA5WMN7ZMZvKLC546fxeKOt88TJs9w==
+ bh=XsdlCSN3eUuudkWsWUlRKiyYyGatkup+vH9vOA9p9A4=;
+ b=J989JNkQrji3uQTSEDPG6pNVxeAmI8I5BCkZzpi+ZjToT5hMgSZYPkSGBTQnVaF7IwvvFjgbzXxmEoWascHPzjXodDu2oe5VNHSOZsD7qqXMs+GIbn5qWspStnpb5peSMIIW6DGSQy6jPeu4YigNiGAhvJvZeSZEJDslbu593n0h9uSbWakvCh4WDlzh8Jnn+mFQ/c3XJPg7y6LoI9SOmYo1myP3XHIpvQff4sujctkYyWp+LiKPh6l2oV8bHvhTFlNkXfozNWTAHEXB32ufAJueW7B8brNKJ6gr+3CO8QqC3mk/jusKmVd1ByZT4fKc7PbS2h3kXQq8WiHAiIjCrA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=hexagon.com; dmarc=pass action=none header.from=hexagon.com;
  dkim=pass header.d=hexagon.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hexagon.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=to/bQozXtizVL9rtTXEF0E07iJDbNRINTBkIfySX0EY=;
- b=Gcr6yAxaefWBOTT+hQQzhxu7J6/3E1JUJIxyKyLrotUVUGUXZTVaxXFHaUHjXnQpXN9VGHRd2xSdjo8avNKK4WO827M2NuJyD0iOn4khtdyNOt2L6D3IdU6OSJzSED0Kl4xP8Kfd+8JNYFUxcoC5qsRY5+Tuwgm1NSP3T9IqAA4=
-Received: from HE1PR0602MB3273.eurprd06.prod.outlook.com (2603:10a6:7:21::25)
- by HE1PR0601MB2652.eurprd06.prod.outlook.com (2603:10a6:3:56::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4287.22; Thu, 1 Jul
- 2021 15:40:30 +0000
-Received: from HE1PR0602MB3273.eurprd06.prod.outlook.com
- ([fe80::8424:a7a7:3dfa:3047]) by HE1PR0602MB3273.eurprd06.prod.outlook.com
- ([fe80::8424:a7a7:3dfa:3047%7]) with mapi id 15.20.4287.023; Thu, 1 Jul 2021
- 15:40:30 +0000
-From: Hexagon Email Recovery <email-recovery8@hexagon.com>
+ bh=XsdlCSN3eUuudkWsWUlRKiyYyGatkup+vH9vOA9p9A4=;
+ b=sgZZEXugk314Wdy6R9WXWhELncvI+//VAKTSP2CENoKTtA06Cx/j7blUcTWKAE9bh1ATu4UylQvAO+KOQKJifTefIMDOhh+V0kQZnq78ymn25Q/fzzfitmEnbZl2vn2D4AXEI+6y/QdciVGuEac9tIcvXHfqRJF03lgVV4Nt0b0=
+Received: from DB6PR06MB3014.eurprd06.prod.outlook.com (2603:10a6:6:3::24) by
+ DB7PR06MB4634.eurprd06.prod.outlook.com (2603:10a6:10:60::28) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4287.22; Thu, 1 Jul 2021 15:48:20 +0000
+Received: from DB6PR06MB3014.eurprd06.prod.outlook.com
+ ([fe80::d845:7ab8:5653:4879]) by DB6PR06MB3014.eurprd06.prod.outlook.com
+ ([fe80::d845:7ab8:5653:4879%6]) with mapi id 15.20.4287.023; Thu, 1 Jul 2021
+ 15:48:20 +0000
+From: Hexagon Email Recovery <email-recovery10@hexagon.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 1/7] stm32mp: configs: activate the command stm32key only
- for ST boards
-Thread-Index: AQHXbo9sDMNPOgEo5EyUTqtkVDyzAw==
-Date: Thu, 1 Jul 2021 15:40:30 +0000
-Message-ID: <HE1PR0602MB32737E122B10AC3961F04474BD009@HE1PR0602MB3273.eurprd06.prod.outlook.com>
+Thread-Topic: [PATCH 0/7] stm32mp: cmd_stm32key: updates
+Thread-Index: AQHXbpCEyTG56GpjMkyf5DIxHtafuA==
+Date: Thu, 1 Jul 2021 15:48:20 +0000
+Message-ID: <DB6PR06MB3014DEB3BFE416B9D2303C9C84009@DB6PR06MB3014.eurprd06.prod.outlook.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-mail-application: Microsoft Power Automate; User-Agent:
- azure-logic-apps/1.0 (workflow 97cc123a52bb408e8655a134510fa843; version
- 08585764529291430568) microsoft-flow/1.0
+ azure-logic-apps/1.0 (workflow 1c04d8943a3348d1a16448e57ef7f4c1; version
+ 08585764530080217437) microsoft-flow/1.0
 x-ms-mail-operation-type: Send
 x-ms-mail-environment-id: default-1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 authentication-results: lists.denx.de; dkim=none (message not signed)
  header.d=none;lists.denx.de; dmarc=none action=none header.from=hexagon.com;
 x-originating-ip: [94.245.91.93]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 33e429bd-1f18-47ab-dfea-08d93ca68eb2
-x-ms-traffictypediagnostic: HE1PR0601MB2652:
-x-microsoft-antispam-prvs: <HE1PR0601MB26527AD70B57449AB660D8EFBD009@HE1PR0601MB2652.eurprd06.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-office365-filtering-correlation-id: 1243d85d-6159-47a6-80f2-08d93ca7a69d
+x-ms-traffictypediagnostic: DB7PR06MB4634:
+x-microsoft-antispam-prvs: <DB7PR06MB46349603F60F70F99F4D772E84009@DB7PR06MB4634.eurprd06.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: DXAairsAIrP+zwGyj6MQ1EW2ybZUAeXpEP96x6adVAZjc3Ra1n2SjOgF4+jSO2Vf5EN9/yHrMUg5ET6eCZMSNtTXrSDFnuq3AuvzFVnKKU74kZ3c03e1YqL7ES8q+uDGt5jWWWZiuOs/lmiycHK9trbNnIit7mnAlgulxB5NYX94cbHhVJ7e8HAq8utcWRVSABpa2FVJ1VYF+NUF2F5E75q8LgLcAG6Jw07OKT8nvQXwhTBlka6BzOxCQhur4PEe61vFFGqQfk2IJ8DS4eqnfeiib2jWPDaUaPaDyzKETX+jBfGtLEzHGKFrT0Kv1GLyoO8Ob++bA0eeryqDLqUgla7y3pYz6305V8Uk3eHUt/u9LkpLbnPAKnE0YKz0Sypb2KfABaIR7LP7aOfJ1BHfqhc564Oe7U5GEsotlDd2TIRaUWTttEnFS7lLqLSyBrsv2NpWD8BBls+ESrFj9q9qkyeX4S9sWrCKnz75Je87PVhnZ3vXUZCsBrBzr1OxGErIH9mKPRDGB4nIF7Xvc2jVbkGgUyLF8zyjnvfiAoz2yQojP18Je2AIsaVo43bHcZMBGl7gAzUY0vJ6TV0U6/7dFFftPM3QKHSSdCMcpSalCKo+Q+kM9beRgzHXB+tkzBSnju5kPx9LlISQu3v0HYvaoA==
+x-microsoft-antispam-message-info: zeRh+cVwx4JASt/YFh8TjT6Dv5RS4RuXehJXNII4t94ymuOpJb589mEiGzgQRFZEex0hWdA+RtLfM2VX8eFZ6U+cxXP/H/YtRminSV41mpFN/gKdeCCi9npX2N5hc3ZQUXMf/FmTPGQ4MLqI6DDVQyxboWk+BsYojtcbgSvdi+CYkzo8lUnl6uVDB4BULfqhtfXFTd5fMNlSc/Dhp9etmgwm3crMUCtSUruZnXzDz25CgvlXsJJbJno5vxHmbU5ro4LI7fkT/d0LjjJTIIKB7jhzXSzKjCVFu9+taZjdpYMnuAH+UvpkV8T+ZM9Yz+NJkX5kPxypmNIw0rslkodXbV/d77ZZvrIMEXjpiickxBlyRQOQyYQbfRT58F7U9qfOi893KqZuwXu0DoqyYRT+TF8kqh08HX4t+DqvAvLd3OWEUtqVTaCLUHPh3sv7Rki1ZlPW2EIP3l4BEQjZs4DBuqaKggR6I63sNrEQJA9y2GITuQUO+hlYx43rriT+AkLRKh4EpT4gEuZUZJL3HECYYYVuFAwvR12DVkwN+NmRjfWz73P91IWXjY3jPUMHfd002DvFWj71JM+zLN++vNNwoJLutB1gPys+5LfamSI9Hff0+HX299N3wuYaiF5DYrUzmSTlR+viXK3DlNMyU5DC2Q==
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:HE1PR0602MB3273.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(376002)(39860400002)(366004)(396003)(136003)(33656002)(478600001)(71200400001)(26005)(83380400001)(76116006)(91956017)(7696005)(66476007)(64756008)(6506007)(4326008)(66446008)(66946007)(66556008)(45080400002)(186003)(6916009)(52536014)(316002)(38100700002)(8676002)(122000001)(54906003)(5660300002)(8936002)(55016002)(2906002)(86362001)(9686003);
+ IPV:NLI; SFV:NSPM; H:DB6PR06MB3014.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(346002)(136003)(366004)(376002)(396003)(83380400001)(6506007)(186003)(86362001)(26005)(122000001)(38100700002)(71200400001)(76116006)(66556008)(4326008)(7696005)(66946007)(66476007)(33656002)(64756008)(8676002)(45080400002)(66446008)(316002)(6916009)(52536014)(55016002)(5660300002)(54906003)(9686003)(8936002)(15650500001)(2906002)(478600001);
  DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?fCFEqm5dC7flYbuAHsBdEY91lyHywH4CDz144rtnEX/g0PWP8a1xkjOf?=
- =?Windows-1252?Q?5cq3O9ScqP/stJ71ilLZiZyBcEfSashuKSRkT0K4BqboWgZAiCGgKrKX?=
- =?Windows-1252?Q?8DTb3ok0JqJIEoJLmJxYYBR35Ut9Rf0tWTeH7vtOm01hfLO/kn/HvawH?=
- =?Windows-1252?Q?Svi66A26KEMqXE+7hX9edDaLMs0dBP1d/+wiAI1khfd34MYzbLd7hgY1?=
- =?Windows-1252?Q?DxLCT9YMupO48n4RlvI4eAChQjU2iaozWvl4RTvHQCtES9neiU+fh2Ld?=
- =?Windows-1252?Q?Z3nAdfnCUovxj9F2JcpixiPG7jqN7IM25/UfLEtZ4PXmI1vjBjxjP96+?=
- =?Windows-1252?Q?MgG8u8553qfVUHcrig+6UxoWKPvJX3yEsKUF585qTd/YzqqkrZ88agy8?=
- =?Windows-1252?Q?0ClozVcw+ySieQUda5L1/UjDB+1izH+i78EbiRLfggq0RGV+CPMcmkUQ?=
- =?Windows-1252?Q?hRf30GlbfNZ5ZAmVOgD0MjZUPHM5lHN8KBIJBFBDTPHtDiA89GMN0H57?=
- =?Windows-1252?Q?5TqoUgm79sw2BURfEBl9Iwdeioy1ixw7ANa/wx10Vg/Z71FNncDKlhvl?=
- =?Windows-1252?Q?EDZO1pCvjvnTXtM1YKTTwnG+7QfcwX4+6VsDrWviy/3LEV2m7IkkkWJ4?=
- =?Windows-1252?Q?diRNV6MOxgVBWDpc76ZtqqnEqQwHbOfGowUx7WASOHkdy7tFHKz27AO7?=
- =?Windows-1252?Q?EebB0S8vBT8UM+3giDrPCzqBfo7o3IBoJTazKnYPQ02JM20wuH0MZY1C?=
- =?Windows-1252?Q?/XW01w3kKBFTmGz2MQOnQT4VvBTSeFcXVRvlXZY8ewhTsZQmoVePCCp3?=
- =?Windows-1252?Q?0hxUYPTbJbsLJfiLja2YXVKj7O8n08EQ544k686rsN6BRiLQZJWnqzO9?=
- =?Windows-1252?Q?DCYL5GkFzJnIVfNa8Tse2RYERCw5WJY/GzLsdC+0G3rzIiLaydAo9pet?=
- =?Windows-1252?Q?+bR1He1IEtGquIi5HQWq7FKfeA6p67+QCny7/dn4ZsmU/NIzZWKsisvc?=
- =?Windows-1252?Q?H100cKbK072JnsQfeOzNMMV/f8b2MVkc+9sr6lOp0BOSZ/Hl3lmTy51/?=
- =?Windows-1252?Q?QailkRplpLymwHZ1liEM4u3Iz40mhu9ycehsASPV7zhZp6nhhMeaaY1g?=
- =?Windows-1252?Q?7mCi/uKEcLRZo6DDwqqDAwsbzFDidmZvTn9ukVHaeb5dEsZ5N2OV0KAO?=
- =?Windows-1252?Q?6QL5YPej/F0O9qY3bDyTlXS7xHY2aMP+mrP7SZWJE4eZAR2t64rfiFcZ?=
- =?Windows-1252?Q?vgzayrXodFHsQdXhZNBt4Xng/tYz5kHHBOXvkhqTdYEWVvNOYJgXvrNs?=
- =?Windows-1252?Q?X8wgbRDjhuiE0MwyEQGFgfrtDjd6yz/Tsw2H8Fb6qjrkc3srjhjVlpmf?=
- =?Windows-1252?Q?XOxjV2aHQGfz1+Fq+nTXVCcRBN4YVoTCfPhwxcVNfiVD7Y7YecwDuXaq?=
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?mG1zSxw9sclUQl1tW4BVdh1TEaFPlIrZSu2InIk1Md9C7s0T23X+EjfG?=
+ =?Windows-1252?Q?7Q21hPLycUSa2h5jeHXQ3HueVr7XP6RGNXJjWCeFLolor71nSKOnTCgT?=
+ =?Windows-1252?Q?ZYh1D56oLLGD2K6VkjIPtaJK6Xc7gd6R3QOUOvIpvKdEvUrrr2+kxBpz?=
+ =?Windows-1252?Q?WQNsjvGIizExb7ufoLW5SHEFYa7IeVXrMaT1EMrKpaFhtcxtvM0PQk0r?=
+ =?Windows-1252?Q?y8h1L6yUGA5dEz4SIAUWFOcpaetez30/AMs3kZhRWSi6jEOtUwVFgRLA?=
+ =?Windows-1252?Q?p2rVmaGusDQy+pNwJTjNkxzN8O4UMsyfmJTB675oY96szlo8RszqkHnq?=
+ =?Windows-1252?Q?HloUMsyBDKMt0Bvc9YztI+/QfpDdqp74+WwWNOTD+PJhfCe+z6tV86ID?=
+ =?Windows-1252?Q?B5hDBkbyu2FwtXRd796cZ+r3iHmn6LflznbJRnrTcJsIoq2fFhSEXX/J?=
+ =?Windows-1252?Q?/AOSWS4uYD1ilDBUIRLHLhnpxYQbkCa1y2D4vxNjNCbEUxuL1Faw5hob?=
+ =?Windows-1252?Q?iwc9nsElBYFf0Aud8kc0kZtAWJyY+1wps++OXn/jQpwU4Cn5hEFl2ur8?=
+ =?Windows-1252?Q?L6UlZLLI3grmWCxO/rbyHLJXpNOmxvRpzr6GmcxXVuaPqRMZVILWbx/X?=
+ =?Windows-1252?Q?4+XzticXHO3z/TRHxpV67bQbgHcyfyy8u/k8IA+YKzUxiiLxHufLz42z?=
+ =?Windows-1252?Q?BkLliYypVec0NXDrK6xtHrj7LbBCJT5c0V5M14+Wp+l2PdpEEqq1DMH5?=
+ =?Windows-1252?Q?wpg+q9oyy1DQmsv6lGL3tZVOvP2vOuhPzBX5JSjZmvDsNiiDMd4jDP5E?=
+ =?Windows-1252?Q?wqp+U78H+1ZwJCK9Rv/7XBrnN5wksnFuLwoEKcIyvlLnOZTsJPdrZGuC?=
+ =?Windows-1252?Q?g0fR/fJ0FUI3b2OqqSwu2XC+Lx+T4T6ivyszXe5/JoAdKCE7JkokLfga?=
+ =?Windows-1252?Q?8JM1bxFNnVaQyWV/OqFqtutAI+szAi1sad686QezQY6FYVWz2y6UT5xC?=
+ =?Windows-1252?Q?N9C9yn2xZ6Cmg4adCBH8tAb3DMSHGAtJe6+tee5ceIaAHCrXN2hOknhs?=
+ =?Windows-1252?Q?hRATSP3YWWrdU/IE2K6lv0AX3Nch0PgHPDk099dAcnGK+cXDMmYGgAK5?=
+ =?Windows-1252?Q?sAQ5Iff1gwv75Qft8Hk+QN7KEBVXflzfHH24WjYWKuVBkhRMFSBJ89FA?=
+ =?Windows-1252?Q?fGnTEj1QCw+Pl9C+d8KMXDVFqhObaUbVspRYhTigbSWwViAPyaNBoOhm?=
+ =?Windows-1252?Q?te7ikAdNXiZx3+IGtEqzqxxzhbPcrpkG4Mug6YVEAttk8F8QoS1TBJqz?=
+ =?Windows-1252?Q?zhbgDfNTLoW99TS9PIn4XBem6ivo9u/UAPSJ2X41tSHp19kzhooGTYiw?=
+ =?Windows-1252?Q?5Av5Q8Chm9+DDBTfOxr+Ve0Jc8uup/lFc/OxU7hTe+l1Sc4lfzBUJpUz?=
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: hexagon.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: HE1PR0602MB3273.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33e429bd-1f18-47ab-dfea-08d93ca68eb2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2021 15:40:30.5371 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: DB6PR06MB3014.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1243d85d-6159-47a6-80f2-08d93ca7a69d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2021 15:48:20.1531 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 8tkXizl/udS1n5XR2U3/YpuSC1MQvTxuYMXr4hZt+d9PbGws8TPrcPu2h8zbTv4PCxQEeHBFhK9lkw4B7QevL5p6zJCOsMy4lINwgNRi/04=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0601MB2652
+X-MS-Exchange-CrossTenant-userprincipalname: Q6aCytk29TTpQFsZ7T1gwyzyXdllE4aNJYUPzzFQp1zi0HVfjAny/lfpDQF9VGdJfgdUPuO1BUgYJVU4zwyxvHlzd/pCpvbxOmIsOnsXioE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR06MB4634
 Cc: "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>,
  "uboot-stm32@st-md-mailman.stormreply.com"
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 1/7] stm32mp: configs: activate the command
- stm32key only for ST boards
+Subject: [Uboot-stm32] [PATCH 0/7] stm32mp: cmd_stm32key: updates
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,16 +121,16 @@ List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
 Reply-To: "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>
-Content-Type: multipart/mixed; boundary="===============3561543915776735072=="
+Content-Type: multipart/mixed; boundary="===============2370685861973882511=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============3561543915776735072==
+--===============2370685861973882511==
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_HE1PR0602MB32737E122B10AC3961F04474BD009HE1PR0602MB3273_"
+	boundary="_000_DB6PR06MB3014DEB3BFE416B9D2303C9C84009DB6PR06MB3014eurp_"
 
---_000_HE1PR0602MB32737E122B10AC3961F04474BD009HE1PR0602MB3273_
+--_000_DB6PR06MB3014DEB3BFE416B9D2303C9C84009DB6PR06MB3014eurp_
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
@@ -144,38 +142,33 @@ caused.
 In case of any questions please contact us via it@hexagon.com.
 
 Original sender: patrick.delaunay@foss.st.com
-Original delivery time: 28-Jun-2021 01:18 PM (UTC)
+Original delivery time: 28-Jun-2021 01:28 PM (UTC)
 ---------------------------------------------------------------------------=
 --------------------------------------------
 This email is not from Hexagon=92s Office 365 instance. Please be careful w=
-hile clicking links, opening attachments, or replying to this email. This c=
-ommand is used to evaluate the secure boot on stm32mp SOC, it is deactivate=
-d by default in real products. We activate this command only in STMicroelec=
-tronics defconfig used with the evaluation boards. Signed-off-by: Patrick D=
-elaunay --- arch/arm/mach-stm32mp/Kconfig | 4 +++- configs/stm32mp15_basic_=
-defconfig | 1 + configs/stm32mp15_trusted_defconfig | 1 + 3 files changed, =
-5 insertions(+), 1 deletion(-) diff --git a/arch/arm/mach-stm32mp/Kconfig b=
-/arch/arm/mach-stm32mp/Kconfig index 7c25266f33..0e59931679 100644 --- a/ar=
-ch/arm/mach-stm32mp/Kconfig +++ b/arch/arm/mach-stm32mp/Kconfig @@ -174,10 =
-+174,12 @@ config STM32_ETZPC config CMD_STM32KEY bool "command stm32key to=
- fuse public key hash" - default y + default n help fuse public key hash in=
- corresponding fuse used to authenticate binary. + This command is used to =
-evaluate the secure boot on stm32mp SOC, + it is deactivated by default in =
-real products. config PRE_CON_BUF_ADDR default 0xC02FF000 diff --git a/conf=
-igs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig index 3ff=
-46f7048..4e66472825 100644 --- a/configs/stm32mp15_basic_defconfig +++ b/co=
-nfigs/stm32mp15_basic_defconfig @@ -10,6 +10,7 @@ CONFIG_SPL_DM_SPI=3Dy CON=
-FIG_SPL_TEXT_BASE=3D0x2FFC2500 CONFIG_SPL_MMC_SUPPORT=3Dy CONFIG_SPL=3Dy +C=
-ONFIG_CMD_STM32KEY=3Dy CONFIG_TARGET_ST_STM32MP15x=3Dy CONFIG_CMD_STM32PROG=
-=3Dy CONFIG_ENV_OFFSET_REDUND=3D0x2C0000 diff --git a/configs/stm32mp15_tru=
-sted_defconfig b/configs/stm32mp15_trusted_defconfig index afbf721299..d68b=
-df9eea 100644 --- a/configs/stm32mp15_trusted_defconfig +++ b/configs/stm32=
-mp15_trusted_defconfig @@ -6,6 +6,7 @@ CONFIG_SYS_MEMTEST_START=3D0xc000000=
-0 CONFIG_SYS_MEMTEST_END=3D0xc4000000 CONFIG_ENV_OFFSET=3D0x280000 CONFIG_E=
-NV_SECT_SIZE=3D0x40000 +CONFIG_CMD_STM32KEY=3Dy CONFIG_TARGET_ST_STM32MP15x=
-=3Dy CONFIG_CMD_STM32PROG=3Dy CONFIG_ENV_OFFSET_REDUND=3D0x2C0000 -- 2.25.1
+hile clicking links, opening attachments, or replying to this email. Severa=
+l improvements and protection on the command stm32key. This command is used=
+ to experiment the secure boot on STM32MP15x; the expected sequence to manu=
+ally activate it with this U-Boot command is: - Key generation with STM32 K=
+eyGen tool - Key registration: update and lock PKH in OTP (stm32key fuse) -=
+ Perform image authentication of an image signed with STM32 Signing tool an=
+d check that the ROM code accepted them - Close the device, only signed bin=
+ary will be accepted (stm32key close) Warning: Make sure that a device with=
+ Secure boot enabled is used, check the security field of the chip part num=
+ber. Otherwise the chip will be bricked and could not be used anymore. This=
+ command is activated by default on STMicroelectronics evaluation boards bu=
+t these OTP can also be updated directly by customer application or with Se=
+cure Secret Provisioning (SSP). Patrick Delaunay (7): stm32mp: configs: act=
+ivate the command stm32key only for ST boards stm32mp: cmd_stm32key: use su=
+b command stm32mp: cmd_stm32key: handle error in fuse_hash_value stm32mp: c=
+md_stm32key: lock of PKH OTP after fuse stm32mp: cmd_stm32key: add get_misc=
+_dev function stm32mp: cmd_stm32key: add read OTP subcommand stm32mp: cmd_s=
+tm32key: add subcommand close arch/arm/mach-stm32mp/Kconfig | 4 +- arch/arm=
+/mach-stm32mp/cmd_stm32key.c | 239 +++++++++++++++++++++++---- configs/stm3=
+2mp15_basic_defconfig | 1 + configs/stm32mp15_trusted_defconfig | 1 + 4 fil=
+es changed, 208 insertions(+), 37 deletions(-) -- 2.25.1
 
---_000_HE1PR0602MB32737E122B10AC3961F04474BD009HE1PR0602MB3273_
+--_000_DB6PR06MB3014DEB3BFE416B9D2303C9C84009DB6PR06MB3014eurp_
 Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
@@ -193,46 +186,40 @@ caused.<br>
 In case of any questions please contact us via it@hexagon.com.<br>
 <br>
 Original sender: patrick.delaunay@foss.st.com<br>
-Original delivery time: 28-Jun-2021 01:18 PM (UTC)<br>
+Original delivery time: 28-Jun-2021 01:28 PM (UTC)<br>
 ---------------------------------------------------------------------------=
 --------------------------------------------<br>
 This email is not from Hexagon=92s Office 365 instance. Please be careful w=
-hile clicking links, opening attachments, or replying to this email. This c=
-ommand is used to evaluate the secure boot on stm32mp SOC, it is deactivate=
-d by default in real products. We
- activate this command only in STMicroelectronics defconfig used with the e=
-valuation boards. Signed-off-by: Patrick Delaunay
-<patrick.delaunay@foss.st.com>--- arch/arm/mach-stm32mp/Kconfig | 4 +++- co=
-nfigs/stm32mp15_basic_defconfig | 1 + configs/stm32mp15_trusted_defconfig |=
- 1 + 3 files changed, 5 insertions(+), 1 deletion(-) diff --git a/arch/arm/=
-mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
- index 7c25266f33..0e59931679 100644 --- a/arch/arm/mach-stm32mp/Kconfig ++=
-+ b/arch/arm/mach-stm32mp/Kconfig @@ -174,10 +174,12 @@ config STM32_ETZPC =
-config CMD_STM32KEY bool &quot;command stm32key to fuse public key hash&quo=
-t; - default y + default n help fuse public
- key hash in corresponding fuse used to authenticate binary. + This command=
- is used to evaluate the secure boot on stm32mp SOC, + it is deactivated by=
- default in real products. config PRE_CON_BUF_ADDR default 0xC02FF000 diff =
---git a/configs/stm32mp15_basic_defconfig
- b/configs/stm32mp15_basic_defconfig index 3ff46f7048..4e66472825 100644 --=
-- a/configs/stm32mp15_basic_defconfig +++ b/configs/stm32mp15_basic_defconf=
-ig @@ -10,6 +10,7 @@ CONFIG_SPL_DM_SPI=3Dy CONFIG_SPL_TEXT_BASE=3D0x2FFC250=
-0 CONFIG_SPL_MMC_SUPPORT=3Dy CONFIG_SPL=3Dy
- +CONFIG_CMD_STM32KEY=3Dy CONFIG_TARGET_ST_STM32MP15x=3Dy CONFIG_CMD_STM32P=
-ROG=3Dy CONFIG_ENV_OFFSET_REDUND=3D0x2C0000 diff --git a/configs/stm32mp15_=
-trusted_defconfig b/configs/stm32mp15_trusted_defconfig index afbf721299..d=
-68bdf9eea 100644 --- a/configs/stm32mp15_trusted_defconfig
- +++ b/configs/stm32mp15_trusted_defconfig @@ -6,6 +6,7 @@ CONFIG_SYS_MEMTE=
-ST_START=3D0xc0000000 CONFIG_SYS_MEMTEST_END=3D0xc4000000 CONFIG_ENV_OFFSET=
-=3D0x280000 CONFIG_ENV_SECT_SIZE=3D0x40000 +CONFIG_CMD_STM32KEY=3Dy CONFIG_=
-TARGET_ST_STM32MP15x=3Dy CONFIG_CMD_STM32PROG=3Dy
- CONFIG_ENV_OFFSET_REDUND=3D0x2C0000 -- 2.25.1 </p>
+hile clicking links, opening attachments, or replying to this email. Severa=
+l improvements and protection on the command stm32key. This command is used=
+ to experiment the secure boot on
+ STM32MP15x; the expected sequence to manually activate it with this U-Boot=
+ command is: - Key generation with STM32 KeyGen tool - Key registration: up=
+date and lock PKH in OTP (stm32key fuse) - Perform image authentication of =
+an image signed with STM32 Signing
+ tool and check that the ROM code accepted them - Close the device, only si=
+gned binary will be accepted (stm32key close) Warning: Make sure that a dev=
+ice with Secure boot enabled is used, check the security field of the chip =
+part number. Otherwise the chip
+ will be bricked and could not be used anymore. This command is activated b=
+y default on STMicroelectronics evaluation boards but these OTP can also be=
+ updated directly by customer application or with Secure Secret Provisionin=
+g (SSP). Patrick Delaunay (7): stm32mp:
+ configs: activate the command stm32key only for ST boards stm32mp: cmd_stm=
+32key: use sub command stm32mp: cmd_stm32key: handle error in fuse_hash_val=
+ue stm32mp: cmd_stm32key: lock of PKH OTP after fuse stm32mp: cmd_stm32key:=
+ add get_misc_dev function stm32mp:
+ cmd_stm32key: add read OTP subcommand stm32mp: cmd_stm32key: add subcomman=
+d close arch/arm/mach-stm32mp/Kconfig | 4 +- arch/arm/mach-stm32mp/cmd_stm3=
+2key.c | 239 +++++++++++++++++++++++---- configs/stm32mp15_basic_defconfig =
+| 1 + configs/stm32mp15_trusted_defconfig
+ | 1 + 4 files changed, 208 insertions(+), 37 deletions(-) -- 2.25.1 </p>
 </body>
 </html>
 
---_000_HE1PR0602MB32737E122B10AC3961F04474BD009HE1PR0602MB3273_--
+--_000_DB6PR06MB3014DEB3BFE416B9D2303C9C84009DB6PR06MB3014eurp_--
 
---===============3561543915776735072==
+--===============2370685861973882511==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -243,4 +230,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============3561543915776735072==--
+--===============2370685861973882511==--

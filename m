@@ -2,115 +2,116 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B2E33B9270
-	for <lists+uboot-stm32@lfdr.de>; Thu,  1 Jul 2021 15:41:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B93D93B937F
+	for <lists+uboot-stm32@lfdr.de>; Thu,  1 Jul 2021 16:41:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44B2EC59781;
-	Thu,  1 Jul 2021 13:41:13 +0000 (UTC)
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr10117.outbound.protection.outlook.com [40.107.1.117])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 698DFC597AA;
+	Thu,  1 Jul 2021 14:41:26 +0000 (UTC)
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr20094.outbound.protection.outlook.com [40.107.2.94])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78A43C57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86AE3C3FADC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  1 Jul 2021 13:41:11 +0000 (UTC)
+ Thu,  1 Jul 2021 14:41:24 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=a4mx5cgL91/ih2d3/A1ijtc5NgNC5xg2u6ERRPAen9YWmhW6WJe/GiLOAyM4S5TVBAHcyP1gas+haDe3S4K5BhFibIW5iskBcvQOry1J91IbSwb0xM5Mu0Ee3F06hc1/jCFhJrcsSJe4PP1blajBGRi90d/W0+o1jWMR10LjXnqXBFbn+s4goB/hae/WTvH7QwrF0iiGtf391llDILM4+UNC8xyYYvaPRpwl5Rt84nt34UQkjlpGqp660KzkWf9ZNPS0+APIusLTG7QIY80y07d7aLRID1JrK99yOw2mOcaXwFGViCtLozqU22OyLUGa6Qe1ZmfDOj/BRyDaugChgQ==
+ b=Vy1X421cN1MFJLJHee+F3tofP1C7AW4+Tj+9XLcAbZeSavN+wiwbLMQydijK4mCMhSL/bpOX1ubE+b5Zq262nHK/l928eYDHK3bJlfaRWynJKBakSH/MrxLiOPAFFlpMylr7nordRRrqJRmVykAc9cjR8SUizJBBR/XYnxap8EdbyswgY5LpXk7zWCAFPMAS0mYam97L+k9KGxPcQ9Dz30uTOaFJLWqHf5Re+y/N00UFHwadqfPCozVbIzAD9BaWSYehnlqhJhYWH5ma7MX1qUctkjkhOqzsk+ltgZ42K6D7OyzKlMSE5toMnLZBVg8wRa2cImRFWHuAqjYtfebphw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XJ0mJcsYdFV9gmvNw7EImg94ycoF0JHseCnmYJWiJ3A=;
- b=XYGwMPlM22KJFK6fL/TjiX9FpYGHefGxKLnnbavlsgdUIIBgbO0ihA+DSHZF3CD34lPZ3jLysMGQShpsHmmK2f07ixg1EwNwHW39vw6rvwKjWhfmFzIyGa0uUz80Ppd/jqy25ZMnFT1CpVuCOifV8GBHQIw0fQyQzV8eg+TNhFNdR17lxWvlrvU9lmPcFwHJQ+p63ONE6sGQ/ZUyuwbe/VJD8FbSa6yYUxIWqGKbhjCkZ6IO3HEh3UUkyvMnQRGNaziSIZvZtZNvs1kySLSRSfWu3A3bvRxvbYzuJ5O0hzBuCzvWlIhe6KPc3ctTOjk7bbpZ2BM0xfNLItC7KS2HQA==
+ bh=UDeKvYSGgf8imOPnllmWSuxnVp/aKTUnFQOtPfksckQ=;
+ b=d7UqTXH8/YN4TbPEzYQ99GlInYNjAMcm7j/Ig+E1JgdRvXuxA8+DZY30bSsVs4CmMqeQTIQGvNFJ0bziho5WYfWW0sfS8x2XHspUoqNiQjezkeTjze0ecqBT+kEzVCfgra3/2RBo4iiCxkKMEf+JDeu/5U12Rgnb2kNmZo/ZXJDoSUsEoQyNxRll43l5gTswXgL1WC/gpIxkuLP0JZGhfDSJr3+oU9x/WJ2RZQ4gy7jxkabyedimy4xijd3Bl86XyYCB/PE8tR/0NUsxfw5DoeqE9efCDOnssaLz1825ArecD5kIpdBe1xP238KlZJyfWVas3kKB1tHH2QweD4r23w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=hexagon.com; dmarc=pass action=none header.from=hexagon.com;
  dkim=pass header.d=hexagon.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hexagon.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XJ0mJcsYdFV9gmvNw7EImg94ycoF0JHseCnmYJWiJ3A=;
- b=qVij2NNjCQVZ/e2aZGgnWpDfWfWebRh6D/0g9t7Cv408L5dptvaY8en92sDtF2caPLikbWS56zWJ4c3fSpg4WURrBM36ImyehopPLxzbFfbuD/ubYzplRTRQ+Rg3267r92BSMs0UHG4nVSdMjVqZrAvc02QTCXK/986Lvh5frWM=
-Received: from AM0PR06MB6178.eurprd06.prod.outlook.com (2603:10a6:208:16c::27)
- by AM8PR06MB7586.eurprd06.prod.outlook.com (2603:10a6:20b:315::12)
+ bh=UDeKvYSGgf8imOPnllmWSuxnVp/aKTUnFQOtPfksckQ=;
+ b=j02IyIQf5mjZc+vGv/+08X8zhzUcez0WqJes/pO/fCXIlW+jgRDvazjrQXeiSjke4R02AZvWHoA+s8CeEKwdmZMVPoYuLGKMCrlUl6aXbssZKbkcsRsAE6uuRptS4lVRsDFt9DsGN+TpdK1lu71vBo+BIRUKRraokzdQSR1HfdY=
+Received: from VI1PR06MB4206.eurprd06.prod.outlook.com (2603:10a6:803:6b::18)
+ by VE1PR06MB6126.eurprd06.prod.outlook.com (2603:10a6:803:11b::32)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4287.23; Thu, 1 Jul
- 2021 13:41:10 +0000
-Received: from AM0PR06MB6178.eurprd06.prod.outlook.com
- ([fe80::78aa:adee:acad:6104]) by AM0PR06MB6178.eurprd06.prod.outlook.com
- ([fe80::78aa:adee:acad:6104%5]) with mapi id 15.20.4287.022; Thu, 1 Jul 2021
- 13:41:10 +0000
-From: Hexagon Email Recovery <email-recovery4@hexagon.com>
+ 2021 14:41:23 +0000
+Received: from VI1PR06MB4206.eurprd06.prod.outlook.com
+ ([fe80::306a:b138:4d2e:339]) by VI1PR06MB4206.eurprd06.prod.outlook.com
+ ([fe80::306a:b138:4d2e:339%5]) with mapi id 15.20.4264.026; Thu, 1 Jul 2021
+ 14:41:23 +0000
+From: Hexagon Email Recovery <email-recovery6@hexagon.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 3/7] stm32mp: cmd_stm32key: handle error in
- fuse_hash_value
-Thread-Index: AQHXbn7A+eSYIChiwEeWbQTkoC+bJQ==
-Date: Thu, 1 Jul 2021 13:41:10 +0000
-Message-ID: <AM0PR06MB61786468730F600995BADBD6B1009@AM0PR06MB6178.eurprd06.prod.outlook.com>
+Thread-Topic: [PATCH] configs: stm32mp1: remove splashimage and add
+ fdtoverlay_addr_r
+Thread-Index: AQHXbocp2n8QveNPS02p6SmlwM6oVg==
+Date: Thu, 1 Jul 2021 14:41:23 +0000
+Message-ID: <VI1PR06MB420657D8474DF4F8B2D287A5B3009@VI1PR06MB4206.eurprd06.prod.outlook.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-mail-application: Microsoft Power Automate; User-Agent:
- azure-logic-apps/1.0 (workflow 860ad96c0b444dc99214a54c93918663; version
- 08585764630720889319) microsoft-flow/1.0
+ azure-logic-apps/1.0 (workflow 033cf894dba94d788dd6b27272e2ee33; version
+ 08585764603110157559) microsoft-flow/1.0
 x-ms-mail-operation-type: Send
 x-ms-mail-environment-id: default-1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 authentication-results: lists.denx.de; dkim=none (message not signed)
  header.d=none;lists.denx.de; dmarc=none action=none header.from=hexagon.com;
 x-originating-ip: [94.245.91.93]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 5ebfec73-5339-4c91-7fbc-08d93c95e2cc
-x-ms-traffictypediagnostic: AM8PR06MB7586:
-x-microsoft-antispam-prvs: <AM8PR06MB75861696833CD705ECB821A9B1009@AM8PR06MB7586.eurprd06.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-office365-filtering-correlation-id: b88b77ba-8545-48d7-eed0-08d93c9e4c82
+x-ms-traffictypediagnostic: VE1PR06MB6126:
+x-microsoft-antispam-prvs: <VE1PR06MB61260BDA03371C6B40489B6AB3009@VE1PR06MB6126.eurprd06.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 0by4GJrQm5PNzeRPZgToHq32ssr8Xp0xpqlvcfZ1wbhdDTvXMtyNl7J6QXggEbTw3FSHzhAGjPkRBku27Qa7idgO8pE0pIKWKudSSqxSjBt6gMDJGwb5Y9Q4NXzr12ZencvtGJqL6xHq1e5bi4dltQIAAMvLpbpRPFoP6FjSjql5RGMhsw1VPlzr2Pap+1aZGvOBZgZClT6Huhu21es/dsQSDA2ZjCl3jdvxr/w7bVP8MaDaWRjgR3PYJVNcIo2I74ZC/4WrcD9LCSQ/3BYfMFKJ13D3dXoI+z/KaGqueTSoQag/D4TK+E8YTshMTtFjDI8j9pYt07YshH9m9AJfvNo72DzpjOFUmsLiqrJIY3KUi8t3oCWz4lbn9Ue9tgPxox9wtNoTf0HCS5QI0ZptUohGgx8SnsofMMQUqfqQQxCDEEPd0fv+mVUKy9rvOHAayjdk1PVhi4iddQi5338i1xEL3pRJ+m6ROIXQwDtPO1Xb1PvXHrjCIsJwRSMR407k0fSo0GYIUGFW64B+sFz5ZHzu5qhZ0y08MpCkr/PNa17v6heJ9dw32SNxF6Zy1pktv4ASmBvuhhu41wcB0GG7stnxnbdYSaH4e1zgcenqfyU5gmNpbcFFIB3ogy5F9NFKsoSpNO0w96EiTKPUAOu23Q==
+x-microsoft-antispam-message-info: orJSH6B2nJ2KhHGb2dLvIkLiQZhFp3LuXNDf+H3qhwQNFR85CVsEIC4FLT9/DdqFU8E1Ml/cjN1MhPNnZry48ducnriS0/i6A8H7FjqztaL8ww1F8htkvap1MxcpJCjXRsPabTCFwsWAY9apI4xVfXg4zT42Wz4bsbtxOlLzM3UdHNCPm8sKIMZNBNREAAfkzlu0BsF9q1jSG3YRY8Ex2X/diWLC0N0XIN97DQU8Dpgn0YtWF9cIIvQRNyN43Y3YI/JbBFY9khqSWA/HvVnclMhGwk/7gvtiUAJm/AK0XaN3zDS/Qid+j9gZ92Lv/ic8zRTAPYKiTeEraXiItioeBKtwufD4Rc2Xy6lIhA2goXvCh28KX6dw02mpkaE0FJ4yzibX3Fjkz/AgozcrlplHUFAafwymmFToDnxg00Zc0zqR0jt1VQ/KcyFX5VFHOg3f5O/3ptkN8ce5Fv0DjO8Eg81gFjifndhUq6FjzUTjbIwc8v44y3eyA+IGZuvtQe20dpnjAdOUFXhC+CHlrhPU330FXQMAz5I77EQgUUuyHergCJTw36vrtvTOZaxrpdLPj9Ik8XKs906vlqYs7FUlkzPbL/vGUjCcgJuAfsPOrYqh3Hy24R261U29OjSaCmh4E2Agxt+lAfPHcPvObqoOZQ==
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR06MB6178.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(2906002)(6916009)(71200400001)(38100700002)(55016002)(122000001)(54906003)(86362001)(91956017)(76116006)(66946007)(9686003)(8936002)(66446008)(66476007)(64756008)(8676002)(33656002)(66556008)(5660300002)(45080400002)(6506007)(7696005)(498600001)(83380400001)(186003)(4326008)(52536014)(26005);
+ IPV:NLI; SFV:NSPM; H:VI1PR06MB4206.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(346002)(376002)(366004)(136003)(396003)(39860400002)(5660300002)(6506007)(4326008)(9686003)(71200400001)(86362001)(55016002)(316002)(7696005)(54906003)(478600001)(6916009)(26005)(8676002)(33656002)(52536014)(45080400002)(8936002)(66476007)(122000001)(83380400001)(38100700002)(186003)(2906002)(91956017)(64756008)(66556008)(66446008)(66946007)(76116006);
  DIR:OUT; SFP:1102; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?aqY/XzaybigodImq6FvTNWRr9Ujfxlv8rxL1jbxPhITrOWDJqJ2qZ7Pj?=
- =?Windows-1252?Q?yPy+Sru1hdQF/Rt0vYJvbi3j0SaUw2T9+7M8QUidnx5l313VQ2eVM25c?=
- =?Windows-1252?Q?WWEQcA11rMoUlTS7qImA0Eh/RUspohBMsc/VICqnRBu0lQh8Pd53RtEc?=
- =?Windows-1252?Q?jc4I5nw2/XGafGtdm+jQPa1mxrri5vdCI/eumctYOE3jwazOdLAfzBV8?=
- =?Windows-1252?Q?IlATqPOlBo5/01B+cF1mwAPDo4kk72QWL7A9MSMk/vO3Ac2rreHZJxWd?=
- =?Windows-1252?Q?8EnYPnOmJLjiE3sJR/VdOJLCop4oRI/hs2+sRimbh5Dyg1W9FdhlTSxT?=
- =?Windows-1252?Q?AiJVMd+aqDAiSzrBTewMpJgzaigQdXMb+K3P3FDSUj2S3BJDntlOVKNS?=
- =?Windows-1252?Q?9+EZVMNPM4q4A7tgsGDoNrRBU9e6Md1ILJ2ot9M98negKESYs8lGawJG?=
- =?Windows-1252?Q?CI4NBG6rxOC9f9owu4DdDLY3TTCAfLqiOtUolLaJUHInRt7wre3LIFAW?=
- =?Windows-1252?Q?lxSgyF3/E4FlDWd9lCaen3F3ythIXUVUWFc7gyN1nkseeb0Y4mYi8uRg?=
- =?Windows-1252?Q?oPJCb7PtHVi1jPHpqVmVVhUlVY8t8eSGuo8D4ZalbAWsyrsQJcKgJ5f2?=
- =?Windows-1252?Q?/WE31bd2vXwvTJaenHYxLN5mD1bWxAlnI37iV1RFVhXO1n4wmK8Rgs58?=
- =?Windows-1252?Q?FCQEfS/WF1B984gkoc2OA8sed2RulTzOSZ+JTiGjbbKNUO9XOZUI/zD4?=
- =?Windows-1252?Q?AJ7UIb3v8D3nJwFN9O+I0r0hAynqchT+ngSNUumTnmsIQV3933LWosiS?=
- =?Windows-1252?Q?3LUTp1zFIB+ftRE77AXyHWN2u8Enmls1LONP3SQQXTI8fnFWhXafWNrL?=
- =?Windows-1252?Q?vanOZ1OEepaa7AnePucvnQvViuWNTBBTYQbFJ91B+rpqh541xh0kJYkQ?=
- =?Windows-1252?Q?Ns+OCE3Pv21VwiSAiZd+2JHU/CQcWp/rX/WXn7jT+7kjB7sbD5ESP5G0?=
- =?Windows-1252?Q?kC+aDONeq9OHd3PFC1jAjL8AVpJU0tdVcimH7Zd3XYSy53GZA8kBuo15?=
- =?Windows-1252?Q?Ck+Gj8z1XD1BXqo8KkToftwi2dnjyJp0Wf5KoLkC34eVXdMivoptBH+W?=
- =?Windows-1252?Q?3X2DiqKPIHeCvU2o0Onng6+ipp+kQ6OHyaFX4UtG0a/pH2XlS4IqdemV?=
- =?Windows-1252?Q?yQvXQL1pTylmJ9MvusRWKlDXbP5C61E5/yzISMdVzwly4IAXxW474NMX?=
- =?Windows-1252?Q?JMC4ib60XugBLpDJYc+1zPezxrsblFK2+9G9z01xAAg6XaIv3aUkC5py?=
- =?Windows-1252?Q?tgNLbLjyVkxUt1H5ppYe4voYOus/6ihhKjIUXEQSePva/sw/RxG6Lzyk?=
- =?Windows-1252?Q?AH1cd244HTPIsRnOkIHsfjRyxZ+qRGxijC22cU2uw9vdceTNTBgcF1ab?=
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?QGdQERCOMXbeiG9h7D0Fuq9kx7cBC0t9iEpOyWiDRJAbpb44hj7Tns/z?=
+ =?Windows-1252?Q?1gXZfDu5YWB1SpTlnWMHNzdD0W6z6M8NlVqe7cjcG0Y7rFiG4E5QOQC9?=
+ =?Windows-1252?Q?hN7i7Yf1QvrTDmFHwM83A/JCgKvC0fHNgxt4aSohEmyNFD7yAOskAKLU?=
+ =?Windows-1252?Q?5qk9SbNwxRK6RD7gn8WbdsM70A5dfJkWZBxMUtHxVatwbmRJPHy74t+H?=
+ =?Windows-1252?Q?VeSBrbOQR2MaPLWU8Upw6V8lX9/6Rv18/xRyIpzunbYOz2LM0idFJJGR?=
+ =?Windows-1252?Q?rm5ZfgxhbYqNJQYlwxYneeKkR1XNqbAZVW8JybH7I/UxxXqtSr5BJ3YA?=
+ =?Windows-1252?Q?NdC06usTX3UGpVJ6Dzz68qzL8DfQQTIXwDAlH0qxp4ybh9Y0HAlZjDOu?=
+ =?Windows-1252?Q?wEtCwPwB2Tpr8XJTUjHjthGVef1tplCclbYnQb6mcnIUw8+5J8ZuzZzF?=
+ =?Windows-1252?Q?rdi+s+vXseBiwlm2Dgb2/bhFjZerHORQzao0yeYD3ONiRthrd1vOWqdE?=
+ =?Windows-1252?Q?J1TLx93YHJD5FfRGtW84imHeCzoBom3s2lKI1cQW7TMzZo0hBVA1YRCe?=
+ =?Windows-1252?Q?eZR4FGKTw9wyuIF7XVAd8A6mZoj8HCTRVicooSh0E2Y1vxqSytUfq/BY?=
+ =?Windows-1252?Q?bzR2MLwrzgo0pmX7iRIqH3CSnJAg5h0PVzbCLQve6VtAfx3LWex+FV6N?=
+ =?Windows-1252?Q?vYaC8aDCPh+QLNBjA8czjB4nP5+JyNYxLKvG55JEo5S8jOCHwEY63n6u?=
+ =?Windows-1252?Q?EIrvaMr9KrX+HuETOcx9Nq1BJ0k66cgwKMBXol0RSOpStCAAZ248iVxy?=
+ =?Windows-1252?Q?3V6fwS2Cq4RM+i3C/nPQ9sXEr/NFd1AHDZm1uQLJ1POqiJ6zNLqkswbb?=
+ =?Windows-1252?Q?J5M3QRtqXcSRh8S7uJktS+z29e7kQZcAiL/DDFn+fbUyRRyj6o01gk0+?=
+ =?Windows-1252?Q?GhMPePcD/Ai+a93PBB060ffU+DJtqtfj7GWwM2R1mKOeIy++35DbI1Bt?=
+ =?Windows-1252?Q?MmiV19aOPXn4IrI+z3i++QEQpkF05CnaVHqHs/DEMRGJJFJC05J2PSeE?=
+ =?Windows-1252?Q?1ISuDbWWJjFNBn/QNi0lW1YDmeq3ldtKTjvWWZSXlYv24S9z2+k0ZI4t?=
+ =?Windows-1252?Q?R9iwTGdIHfozM1bLdPhzwX1RkR5I0LZoYGFfIZMPpRUcbLCAlu3/AOaw?=
+ =?Windows-1252?Q?doZVeJlpfblafCHJfEtPP4W5sR0QzhmXl94Xe9SIY/+yXybk3AYCQgfC?=
+ =?Windows-1252?Q?o2/x8+EnoS1zUTyPcJ5N90tensuCw5e9CsKx2Z8Qg0bfXwz7KJ2Y9Wi3?=
+ =?Windows-1252?Q?6PQmuq36qRnO+rkTNpEItb+mpOLXrXKJLNqDJGEhqBwWJEnpoMZVr0Gs?=
+ =?Windows-1252?Q?TQzPrDD3dJ2tcKNZ36r5BnmcxtyFyLRVw08gEFNFMzU4xV81m9NW++6N?=
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: hexagon.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR06MB6178.eurprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ebfec73-5339-4c91-7fbc-08d93c95e2cc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2021 13:41:10.0923 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR06MB4206.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b88b77ba-8545-48d7-eed0-08d93c9e4c82
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jul 2021 14:41:23.4355 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 1b16ab3e-b8f6-4fe3-9f3e-2db7fe549f6a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4cdh0GcNeY+KljPRXrCVFBwByfLPIrSb+dLKnqe6J/M+emXXeQrPlPQoISuC9MTOMrUkoPpGWdyZXGgcbiTDxlUF66HUcIRY3xu+NZZLoLo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR06MB7586
+X-MS-Exchange-CrossTenant-userprincipalname: d6Fw9uFPOoAhFRM3ElBYnF2CTKJ35Ktsk+R4FPKxf5D4t1LyMiUAgnWVJ4OWHWENZup6UcSJcXcLEeESKUWUeN5VbgMo+MGx+MV5F1L60xg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR06MB6126
 Cc: "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 3/7] stm32mp: cmd_stm32key: handle error in
-	fuse_hash_value
+ "marex@denx.de" <marex@denx.de>, "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ "u-boot@dh-electronics.com" <u-boot@dh-electronics.com>
+Subject: [Uboot-stm32] [PATCH] configs: stm32mp1: remove splashimage and add
+ fdtoverlay_addr_r
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,16 +124,16 @@ List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
 Reply-To: "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>
-Content-Type: multipart/mixed; boundary="===============4566999939377311342=="
+Content-Type: multipart/mixed; boundary="===============5088495030975551869=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============4566999939377311342==
+--===============5088495030975551869==
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_AM0PR06MB61786468730F600995BADBD6B1009AM0PR06MB6178eurp_"
+	boundary="_000_VI1PR06MB420657D8474DF4F8B2D287A5B3009VI1PR06MB4206eurp_"
 
---_000_AM0PR06MB61786468730F600995BADBD6B1009AM0PR06MB6178eurp_
+--_000_VI1PR06MB420657D8474DF4F8B2D287A5B3009VI1PR06MB4206eurp_
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
@@ -144,35 +145,30 @@ caused.
 In case of any questions please contact us via it@hexagon.com.
 
 Original sender: patrick.delaunay@foss.st.com
-Original delivery time: 28-Jun-2021 01:03 PM (UTC)
+Original delivery time: 28-Jun-2021 01:09 PM (UTC)
 ---------------------------------------------------------------------------=
 --------------------------------------------
 This email is not from Hexagon=92s Office 365 instance. Please be careful w=
-hile clicking links, opening attachments, or replying to this email. Handle=
- errors in fuse_hash_value function. Signed-off-by: Patrick Delaunay --- ar=
-ch/arm/mach-stm32mp/cmd_stm32key.c | 24 +++++++++++++++--------- 1 file cha=
-nged, 15 insertions(+), 9 deletions(-) diff --git a/arch/arm/mach-stm32mp/c=
-md_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c index d2045a5983..2529=
-139ebc 100644 --- a/arch/arm/mach-stm32mp/cmd_stm32key.c +++ b/arch/arm/mac=
-h-stm32mp/cmd_stm32key.c @@ -25,7 +25,7 @@ static void read_hash_value(u32 =
-addr) } } -static void fuse_hash_value(u32 addr, bool print) +static int fu=
-se_hash_value(u32 addr, bool print) { struct udevice *dev; u32 word, val; @=
-@ -36,21 +36,25 @@ static void fuse_hash_value(u32 addr, bool print) &dev);=
- if (ret) { log_err("Can't find stm32mp_bsec driver\n"); - return; + return=
- ret; } for (i =3D 0; i < STM32_OTP_HASH_KEY_SIZE; i++) { - if (print) - pr=
-intf("Fuse OTP %i : %x\n", - STM32_OTP_HASH_KEY_START + i, - __be32_to_cpu(=
-*(u32 *)addr)); - word =3D STM32_OTP_HASH_KEY_START + i; val =3D __be32_to_=
-cpu(*(u32 *)addr); - misc_write(dev, STM32_BSEC_OTP(word), &val, 4); + if (=
-print) + printf("Fuse OTP %i : %x\n", word, val); + + ret =3D misc_write(de=
-v, STM32_BSEC_OTP(word), &val, 4); + if (ret !=3D 4) { + log_err("Fuse OTP =
-%i failed\n", word); + return ret; + } addr +=3D 4; } + + return 0; } stati=
-c int confirm_prog(void) @@ -104,7 +108,9 @@ static int do_stm32key_fuse(st=
-ruct cmd_tbl *cmdtp, int flag, int argc, char *con if (!yes && !confirm_pro=
-g()) return CMD_RET_FAILURE; - fuse_hash_value(addr, !yes); + if (fuse_hash=
-_value(addr, !yes)) + return CMD_RET_FAILURE; + printf("Hash key updated !\=
-n"); return CMD_RET_SUCCESS; -- 2.25.1
+hile clicking links, opening attachments, or replying to this email. Add th=
+e variable used by PXE command for fdtoverlays support since the commit 690=
+76dff2284 ("cmd: pxe: add support for FDT overlays"). Reused the unused "sp=
+lashimage" address as CONFIG_SPLASH_SOURCE and CONFIG_VIDEO_LOGO are not ac=
+tivated and U-Boot display the "BACKGROUND" image found in extlinux.conf to=
+ manage splashscreen on stm32mp1 boards. Signed-off-by: Patrick Delaunay --=
+- include/configs/stm32mp1.h | 4 ++-- 1 file changed, 2 insertions(+), 2 de=
+letions(-) diff --git a/include/configs/stm32mp1.h b/include/configs/stm32m=
+p1.h index 440efa1a55..2e7f49e7bb 100644 --- a/include/configs/stm32mp1.h +=
+++ b/include/configs/stm32mp1.h @@ -155,7 +155,7 @@ /* * memory layout for =
+32M uncompressed/compressed kernel, - * 1M fdt, 1M script, 1M pxe and 1M fo=
+r splashimage + * 1M fdt, 1M script, 1M pxe and 1M for overlay * and the ra=
+mdisk at the end. */ #define CONFIG_EXTRA_ENV_SETTINGS \ @@ -163,7 +163,7 @=
+@ "fdt_addr_r=3D0xc4000000\0" \ "scriptaddr=3D0xc4100000\0" \ "pxefile_addr=
+_r=3D0xc4200000\0" \ - "splashimage=3D0xc4300000\0" \ + "fdtoverlay_addr_r=
+=3D0xc4300000\0" \ "ramdisk_addr_r=3D0xc4400000\0" \ "altbootcmd=3Drun boot=
+cmd\0" \ "env_check=3Dif env info -p -d -q; then env save; fi\0" \ -- 2.25.=
+1
 
---_000_AM0PR06MB61786468730F600995BADBD6B1009AM0PR06MB6178eurp_
+--_000_VI1PR06MB420657D8474DF4F8B2D287A5B3009VI1PR06MB4206eurp_
 Content-Type: text/html; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
@@ -190,43 +186,37 @@ caused.<br>
 In case of any questions please contact us via it@hexagon.com.<br>
 <br>
 Original sender: patrick.delaunay@foss.st.com<br>
-Original delivery time: 28-Jun-2021 01:03 PM (UTC)<br>
+Original delivery time: 28-Jun-2021 01:09 PM (UTC)<br>
 ---------------------------------------------------------------------------=
 --------------------------------------------<br>
 This email is not from Hexagon=92s Office 365 instance. Please be careful w=
-hile clicking links, opening attachments, or replying to this email. Handle=
- errors in fuse_hash_value function. Signed-off-by: Patrick Delaunay
-<patrick.delaunay@foss.st.com>--- arch/arm/mach-stm32mp/cmd_stm32key.c | 24=
- +++++++++++++++--------- 1 file changed, 15 insertions(+), 9 deletions(-) =
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/c=
-md_stm32key.c index d2045a5983..2529139ebc
- 100644 --- a/arch/arm/mach-stm32mp/cmd_stm32key.c +++ b/arch/arm/mach-stm3=
-2mp/cmd_stm32key.c @@ -25,7 +25,7 @@ static void read_hash_value(u32 addr) =
-} } -static void fuse_hash_value(u32 addr, bool print) +static int fuse_has=
-h_value(u32 addr, bool print) {
- struct udevice *dev; u32 word, val; @@ -36,21 +36,25 @@ static void fuse_h=
-ash_value(u32 addr, bool print) &amp;dev); if (ret) { log_err(&quot;Can't f=
-ind stm32mp_bsec driver\n&quot;); - return; + return ret; } for (i =3D 0; i=
- &lt; STM32_OTP_HASH_KEY_SIZE; i++) { - if (print)
- - printf(&quot;Fuse OTP %i : %x\n&quot;, - STM32_OTP_HASH_KEY_START + i, -=
- __be32_to_cpu(*(u32 *)addr)); - word =3D STM32_OTP_HASH_KEY_START + i; val=
- =3D __be32_to_cpu(*(u32 *)addr); - misc_write(dev, STM32_BSEC_OTP(word), &=
-amp;val, 4); + if (print) + printf(&quot;Fuse OTP %i :
- %x\n&quot;, word, val); + + ret =3D misc_write(dev, STM32_BSEC_OTP(word), =
-&amp;val, 4); + if (ret !=3D 4) { + log_err(&quot;Fuse OTP %i failed\n&quot=
-;, word); + return ret; + } addr +=3D 4; } + + return 0; } static int confi=
-rm_prog(void) @@ -104,7 +108,9 @@ static int do_stm32key_fuse(struct
- cmd_tbl *cmdtp, int flag, int argc, char *con if (!yes &amp;&amp; !confirm=
-_prog()) return CMD_RET_FAILURE; - fuse_hash_value(addr, !yes); + if (fuse_=
-hash_value(addr, !yes)) + return CMD_RET_FAILURE; + printf(&quot;Hash key u=
-pdated !\n&quot;); return CMD_RET_SUCCESS; -- 2.25.1
-</p>
+hile clicking links, opening attachments, or replying to this email. Add th=
+e variable used by PXE command for fdtoverlays support since the commit 690=
+76dff2284 (&quot;cmd: pxe: add support
+ for FDT overlays&quot;). Reused the unused &quot;splashimage&quot; address=
+ as CONFIG_SPLASH_SOURCE and CONFIG_VIDEO_LOGO are not activated and U-Boot=
+ display the &quot;BACKGROUND&quot; image found in extlinux.conf to manage =
+splashscreen on stm32mp1 boards. Signed-off-by: Patrick Delaunay
+<patrick.delaunay@foss.st.com>--- include/configs/stm32mp1.h | 4 ++-- 1 fil=
+e changed, 2 insertions(+), 2 deletions(-) diff --git a/include/configs/stm=
+32mp1.h b/include/configs/stm32mp1.h index 440efa1a55..2e7f49e7bb 100644 --=
+- a/include/configs/stm32mp1.h +++
+ b/include/configs/stm32mp1.h @@ -155,7 +155,7 @@ /* * memory layout for 32=
+M uncompressed/compressed kernel, - * 1M fdt, 1M script, 1M pxe and 1M for =
+splashimage + * 1M fdt, 1M script, 1M pxe and 1M for overlay * and the ramd=
+isk at the end. */ #define CONFIG_EXTRA_ENV_SETTINGS
+ \ @@ -163,7 +163,7 @@ &quot;fdt_addr_r=3D0xc4000000\0&quot; \ &quot;script=
+addr=3D0xc4100000\0&quot; \ &quot;pxefile_addr_r=3D0xc4200000\0&quot; \ - &=
+quot;splashimage=3D0xc4300000\0&quot; \ + &quot;fdtoverlay_addr_r=3D0xc4300=
+000\0&quot; \ &quot;ramdisk_addr_r=3D0xc4400000\0&quot; \ &quot;altbootcmd=
+=3Drun bootcmd\0&quot; \ &quot;env_check=3Dif env
+ info -p -d -q; then env save; fi\0&quot; \ -- 2.25.1 </p>
 </body>
 </html>
 
---_000_AM0PR06MB61786468730F600995BADBD6B1009AM0PR06MB6178eurp_--
+--_000_VI1PR06MB420657D8474DF4F8B2D287A5B3009VI1PR06MB4206eurp_--
 
---===============4566999939377311342==
+--===============5088495030975551869==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -237,4 +227,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============4566999939377311342==--
+--===============5088495030975551869==--

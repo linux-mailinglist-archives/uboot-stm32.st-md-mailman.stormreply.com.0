@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82D593BAEC0
-	for <lists+uboot-stm32@lfdr.de>; Sun,  4 Jul 2021 22:15:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8DA73BB7FE
+	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Jul 2021 09:39:09 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2566AC5718D;
-	Sun,  4 Jul 2021 20:15:38 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A4B6C57B5B;
+	Mon,  5 Jul 2021 07:39:09 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2A9D9C424BD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 39DCCC57B53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  4 Jul 2021 20:15:34 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id t15so16060746wry.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 04 Jul 2021 13:15:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=m4gy1C2KgHsJShc1/U221gvs3pecUq38ULGfdeqomNw=;
- b=BT8tFEFXJPAeBdzoV+w+3pUa1qHRlH3Wol6vXnwOnav5yT0BduZutbAPoMNfX0sKy7
- 8fQzblIkp8UH41r7fDskwW8jtC3IeMJEq1WIo3/0t/PaX80tOH4Yqi/T43uiQTkSt6UT
- 2kw69wj+3OGH+5alssQOsk0dZjNIyNzCYSKNQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=m4gy1C2KgHsJShc1/U221gvs3pecUq38ULGfdeqomNw=;
- b=aO2FWj5ZIpOJ1C3rSg6cu+S4u+A9OsyQeTafvPInnTzgd7ODqgcUw69hJyjma4loRe
- O0JjkgKuWGyitFf3lRPHMv53z6VfzPRxBNFl2JLTezLvNozJg7T/OZornv1DHPaV8MiW
- 3rva8jAG24QIBieMT+99MAtyKS+GCks8KLTxe2zNhT0vsfRjLx2jqPkYCJFh+kAtqPUG
- mY9YTY/pe9ZcJRuYhWG5e3NFxCq0jUHF6nA0VfRK+/OQ6xe8QkhJu1IYWW4ngdvWo80x
- HdZDi27RPjAlSfohLoz8lJsxI505eYHyOfQUL0neZfGqdqFCI0jHMk8pZRrhGfpGxdeM
- P77Q==
-X-Gm-Message-State: AOAM533765vAikZxqqem2sr4qw2KB2/vlmBremHJHph8FpFPbt2OjGAl
- rTXyEzC9bjrt6agDdOgwiVAVc9wfhsAg4Lj8VlfeSw==
-X-Google-Smtp-Source: ABdhPJwtOGa9YRz4QJzCf1M4LDdbHoP+FU1OpLcTY3vJWhXdJ6y2tJTcZOUXiRps5I5lUmTXVF34++eBdSkdyQn9PBo=
-X-Received: by 2002:a5d:64ee:: with SMTP id g14mr12327311wri.66.1625429734067; 
- Sun, 04 Jul 2021 13:15:34 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 4 Jul 2021 13:15:32 -0700
+ Mon,  5 Jul 2021 07:39:07 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 1657RE6E009104; Mon, 5 Jul 2021 09:39:05 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=xD7iASd5Ua1oHYLnH2Ysx5fn2vuG8j/PMMuMZrp6rS8=;
+ b=J63wXlzzFxjPUvUwxbepjTmw+MilRTV/mfUWRs+5u0MZI1XexSmRpkLye5JmAjjKl8UI
+ RzLPrzJXX7L8lVzV93QObIZi8PWDS9QjCazBkmhZpHnH9tiu6gBacz8xOZQgCgrqXwl+
+ 0zIzznCXm9+dzLkXHnDW0TM2uoyjzGeZeeMjC3ta4XuySmbnv85f6MAEhilYGRkSI6aF
+ yfznxfn1SGMrcwMgZGU0iQHXjtXScOfS3mHCWu8CeyscFtPxk1vwTdKNq96zfIvfUZsN
+ FIWd2j5gVJN3DVSSnDT0ilAH3bHbVgIrXZVixCXkBJlpR1Z6iIHBbiGF0VOQgm9gIOV5 xw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 39k9dgc819-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 05 Jul 2021 09:39:05 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BF30A10002A;
+ Mon,  5 Jul 2021 09:39:04 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B3613215147;
+ Mon,  5 Jul 2021 09:39:04 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 5 Jul 2021 09:39:04
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 5 Jul 2021 09:39:01 +0200
+Message-ID: <20210705093834.1.I36ee8ad60f6e0ee9c3021a5e2f0fcc1863bb648e@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ19RN3gp99D=G22cLPMebh3qMZi7DwaRirckFX1TM1ZMA@mail.gmail.com>
-References: <CAPnjgZ19RN3gp99D=G22cLPMebh3qMZi7DwaRirckFX1TM1ZMA@mail.gmail.com>
- <20210427110153.1.I3fde47925951f917dbd08b6e826d91669f62b221@changeid>
-Date: Sun, 4 Jul 2021 13:15:32 -0700
-X-Google-Sender-Auth: sgjq6wogHNme8mOIC-FkMivJHNk
-Message-ID: <CAPnjgZ1+b9sb1An5uEFengkhGdey+tcRw3mwG0z-JyN9Tf4kNw@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
+ definitions=2021-07-05_04:2021-07-02,
+ 2021-07-05 signatures=0
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: define LOG_CATEGORY for all uclass
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH] stm32mp: stm32prog: use defines for virtual
+	partition size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,98 +73,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 27 Apr 2021 at 02:02, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> Define LOG_CATEGORY for all uclass to allow filtering with
-> log command.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->  drivers/adc/adc-uclass.c                    | 2 ++
->  drivers/ata/ahci-uclass.c                   | 2 ++
->  drivers/axi/axi-emul-uclass.c               | 2 ++
->  drivers/axi/axi-uclass.c                    | 2 ++
->  drivers/block/blk-uclass.c                  | 2 ++
->  drivers/block/ide.c                         | 2 ++
->  drivers/bootcount/bootcount-uclass.c        | 2 ++
->  drivers/button/button-uclass.c              | 2 ++
->  drivers/cache/cache-uclass.c                | 2 ++
->  drivers/clk/clk-uclass.c                    | 2 ++
->  drivers/core/root.c                         | 2 ++
->  drivers/core/simple-bus.c                   | 2 ++
->  drivers/cpu/cpu-uclass.c                    | 2 ++
->  drivers/crypto/rsa_mod_exp/mod_exp_uclass.c | 2 ++
->  drivers/dma/dma-uclass.c                    | 2 ++
->  drivers/firmware/firmware-uclass.c          | 2 ++
->  drivers/hwspinlock/hwspinlock-uclass.c      | 2 ++
->  drivers/i2c/i2c-emul-uclass.c               | 2 ++
->  drivers/i2c/i2c-uclass.c                    | 2 ++
->  drivers/i2c/muxes/i2c-mux-uclass.c          | 2 ++
->  drivers/input/keyboard-uclass.c             | 2 ++
->  drivers/led/led-uclass.c                    | 2 ++
->  drivers/mailbox/mailbox-uclass.c            | 2 ++
->  drivers/misc/fs_loader.c                    | 3 +++
->  drivers/misc/i2c_eeprom.c                   | 2 ++
->  drivers/misc/misc-uclass.c                  | 2 ++
->  drivers/misc/p2sb-uclass.c                  | 2 ++
->  drivers/misc/pwrseq-uclass.c                | 2 ++
->  drivers/mmc/mmc-uclass.c                    | 2 ++
->  drivers/mtd/mtd-uclass.c                    | 2 ++
->  drivers/mtd/spi/sf-uclass.c                 | 2 ++
->  drivers/mux/mux-uclass.c                    | 2 ++
->  drivers/nvme/nvme-uclass.c                  | 2 ++
->  drivers/pch/pch-uclass.c                    | 2 ++
->  drivers/pci/pci-uclass.c                    | 2 ++
->  drivers/pci_endpoint/pci_ep-uclass.c        | 2 ++
->  drivers/phy/phy-uclass.c                    | 2 ++
->  drivers/pinctrl/pinctrl-uclass.c            | 2 ++
->  drivers/power/domain/power-domain-uclass.c  | 2 ++
->  drivers/power/pmic/pmic-uclass.c            | 2 ++
->  drivers/power/regulator/regulator-uclass.c  | 2 ++
->  drivers/pwm/pwm-uclass.c                    | 2 ++
->  drivers/ram/ram-uclass.c                    | 2 ++
->  drivers/remoteproc/rproc-uclass.c           | 3 +++
->  drivers/reset/reset-uclass.c                | 2 ++
->  drivers/rng/rng-uclass.c                    | 2 ++
->  drivers/rtc/rtc-uclass.c                    | 2 ++
->  drivers/scsi/scsi-uclass.c                  | 2 ++
->  drivers/serial/serial-uclass.c              | 2 ++
->  drivers/smem/smem-uclass.c                  | 2 ++
->  drivers/soc/soc-uclass.c                    | 2 ++
->  drivers/sound/codec-uclass.c                | 2 ++
->  drivers/sound/i2s-uclass.c                  | 2 ++
->  drivers/sound/sound-uclass.c                | 2 ++
->  drivers/spi/spi-emul-uclass.c               | 2 ++
->  drivers/spmi/spmi-uclass.c                  | 2 ++
->  drivers/sysinfo/sysinfo-uclass.c            | 2 ++
->  drivers/tee/tee-uclass.c                    | 2 ++
->  drivers/thermal/thermal-uclass.c            | 2 ++
->  drivers/timer/timer-uclass.c                | 2 ++
->  drivers/ufs/ufs-uclass.c                    | 2 ++
->  drivers/usb/emul/usb-emul-uclass.c          | 2 ++
->  drivers/usb/gadget/udc/udc-uclass.c         | 2 ++
->  drivers/usb/host/usb-uclass.c               | 2 ++
->  drivers/video/backlight-uclass.c            | 2 ++
->  drivers/video/bridge/video-bridge-uclass.c  | 2 ++
->  drivers/video/display-uclass.c              | 2 ++
->  drivers/video/dsi-host-uclass.c             | 2 ++
->  drivers/video/panel-uclass.c                | 2 ++
->  drivers/video/vidconsole-uclass.c           | 2 ++
->  drivers/video/video-uclass.c                | 2 ++
->  drivers/video/video_osd-uclass.c            | 2 ++
->  drivers/virtio/virtio-uclass.c              | 2 ++
->  drivers/w1-eeprom/w1-eeprom-uclass.c        | 2 ++
->  drivers/w1/w1-uclass.c                      | 2 ++
->  drivers/watchdog/wdt-uclass.c               | 2 ++
->  drivers/xen/pvblock.c                       | 3 +++
->  77 files changed, 157 insertions(+)
->
+Use the existing defines PMIC_SIZE and OTP_SIZE and a new define
+CMD_SIZE for virtual partition size.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This patch corrects the size for OTP partition in alternate name
+(1024 instead of 512) and avoids other alignment issues.
 
-Applied to u-boot-dm/next, thanks!
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c     | 6 +++---
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h     | 1 +
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c | 2 +-
+ 3 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+index 4c4d8a7a69..8288646bb7 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+@@ -1195,13 +1195,13 @@ static int dfu_init_entities(struct stm32prog_data *data)
+ 	}
+ 
+ 	if (!ret)
+-		ret = stm32prog_alt_add_virt(dfu, "virtual", PHASE_CMD, 512);
++		ret = stm32prog_alt_add_virt(dfu, "virtual", PHASE_CMD, CMD_SIZE);
+ 
+ 	if (!ret)
+-		ret = stm32prog_alt_add_virt(dfu, "OTP", PHASE_OTP, 512);
++		ret = stm32prog_alt_add_virt(dfu, "OTP", PHASE_OTP, OTP_SIZE);
+ 
+ 	if (!ret && CONFIG_IS_ENABLED(DM_PMIC))
+-		ret = stm32prog_alt_add_virt(dfu, "PMIC", PHASE_PMIC, 8);
++		ret = stm32prog_alt_add_virt(dfu, "PMIC", PHASE_PMIC, PMIC_SIZE);
+ 
+ 	if (ret)
+ 		stm32prog_err("dfu init failed: %d", ret);
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+index 581b10d0ac..6282c34bcc 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+@@ -19,6 +19,7 @@
+ 
+ #define DEFAULT_ADDRESS		0xFFFFFFFF
+ 
++#define CMD_SIZE		512
+ #define OTP_SIZE		1024
+ #define PMIC_SIZE		8
+ 
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
+index bc44d9fc8f..3c0cc6a187 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
+@@ -178,7 +178,7 @@ int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
+ 
+ 	switch (dfu->data.virt.dev_num) {
+ 	case PHASE_CMD:
+-		*size = 512;
++		*size = CMD_SIZE;
+ 		break;
+ 	case PHASE_OTP:
+ 		*size = OTP_SIZE;
+-- 
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

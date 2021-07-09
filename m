@@ -2,61 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D2843C2364
-	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Jul 2021 14:24:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B7663C2383
+	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Jul 2021 14:38:53 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 25E14C32EA6;
-	Fri,  9 Jul 2021 12:24:47 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E3A0DCFAC5A;
+	Fri,  9 Jul 2021 12:38:52 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 658FCC424BD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83B0AC424BD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  9 Jul 2021 12:24:45 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Fri,  9 Jul 2021 12:38:51 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 169CDA59007888; Fri, 9 Jul 2021 14:24:38 +0200
+ 169CRG1x012115; Fri, 9 Jul 2021 14:38:50 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=T9Ts3bRakefbaQRVsPbGijXSHRMbBhacY84S94Ex2mA=;
- b=EVrMRWYX31JEs/93wFSmCmAgwzOIGbnm3EjgjieyM/V71472NiTig8WFquMY65RHuZmr
- VM2unnTSG6vvA17HzDz38k+RfTVZhnsBpqqJbDkytLpvatddYbgnDyiEnjvraKpg8iXB
- lz5hP3bHeoRPG08VHZDczLrBKInkgt2n2YtTN2C2e3LbCh4DycKWhERHi+ghRPpzXXtG
- AUHU9wbej4msmtG2UgrS416Xrtb+8dQvgBCUU1fhPiSkStVjFj53+QydEGNW0kx3ZUSX
- Wc+/ibFD+fwFb2vv3TsV/UWqxopseaAVCwAtbpNTMme5H+aPgk2Sar0NM1C97eRARfgZ Gg== 
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=3ps6RfhyWPQPjG/fNkR8Vn8Q1toNi/Gvu/bD2AfkBJE=;
+ b=R08jIh7AzS0aJCWez2o8jc8a4gsB1/PdpEESl00f46gfj1Zod8oiSGrA2Se2rPYzwDWy
+ 8UNXaAol/vWOQ1FcjKzShZmEl9uZSxVnbsl9bE+2KWRRG7bjCGiOgR953eQLyqTzsCA3
+ sdSAxpxT7P7QzxbrJCJIbs7zibo36ptIs/XyueyAT8d53IeHs/UxDwhth3+WD+OBHe6x
+ OwZIt0Y9LKerKNqbU6WMMPvP8JoA4Gw30KGVw27Jf8bJHGAk/dT2h5BsXYL34GeN97pW
+ oD63+BNP1HnuU+9yhWnBWhcjZ2aoIeVCSyw/gxJIg83db2bKaJxqvcFrAnWrdwclmBHn Vg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39pk0ss8mq-1
+ by mx07-00178001.pphosted.com with ESMTP id 39p4vbcx3j-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 09 Jul 2021 14:24:38 +0200
+ Fri, 09 Jul 2021 14:38:50 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B5BB310002A;
- Fri,  9 Jul 2021 14:24:36 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AF786100034;
+ Fri,  9 Jul 2021 14:38:49 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9F2842238B0;
- Fri,  9 Jul 2021 14:24:36 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Jul 2021 14:24:36
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 9 Jul 2021 14:24:34 +0200
-Message-ID: <20210709142429.1.I9f0b06646bc5c9c2a673537caa8f5364e39793b3@changeid>
-X-Mailer: git-send-email 2.25.1
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A4F2D2248A2;
+ Fri,  9 Jul 2021 14:38:49 +0200 (CEST)
+Received: from lmecxl0573.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
+ (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Jul
+ 2021 14:38:49 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20210709095322.1.I3841c4ea8add371529df3e03de5439659a69f38b@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <5770954f-afe7-1413-5e68-7bb0865f3c17@foss.st.com>
+Date: Fri, 9 Jul 2021 14:38:48 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
+In-Reply-To: <20210709095322.1.I3841c4ea8add371529df3e03de5439659a69f38b@changeid>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-07-09_05:2021-07-09,
  2021-07-09 signatures=0
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: [Uboot-stm32] [PATCH] clk: stm32mp1: add support of missing SPI
-	clocks
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp1: add pull-up for gpio button
+	PA13 and PA14
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,102 +75,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add the missing SPI clock even if these instances are not available
-on STMicroelectronics boards: SPI2_K, SPI3_K, SPI4_K, SPI6_K.
+Hi Patrick
 
-With this patch, the SPI2 / SPI3 / SPI4 / SPI6 instances can be used on
-customer design without the clock driver error:
-  stm32mp1_clk_get_id: clk id 131 not found
+On 7/9/21 9:53 AM, Patrick Delaunay wrote:
+> When a push-button is released and PA13/PA14 are defined as input (high-Z)
+> the LED should not be active as the circuit is open but a small current
+> leak through PCB or push-button close the circuit and allows a small LED
+> bias giving erroneous level voltage.
+> 
+> So it is recommended to activate an internal pull-up in order to clearly
+> fix the voltage at PA13/PA14 when button is released and to wait
+> a short delay before to read the GPIO value only when the pull-up is
+> correctly configured.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 4 ++--
+>  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 4 ++--
+>  board/st/stm32mp1/stm32mp1.c             | 2 ++
+>  3 files changed, 6 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> index 6787619290..d44da7566f 100644
+> --- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> @@ -18,8 +18,8 @@
+>  		u-boot,error-led = "error";
+>  		u-boot,mmc-env-partition = "ssbl";
+>  		st,adc_usb_pd = <&adc1 18>, <&adc1 19>;
+> -		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+> -		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
+> +		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+>  	};
+>  
+>  	firmware {
+> diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> index f3002e995b..3b94218b2f 100644
+> --- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> @@ -18,8 +18,8 @@
+>  		u-boot,boot-led = "heartbeat";
+>  		u-boot,error-led = "error";
+>  		u-boot,mmc-env-partition = "ssbl";
+> -		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+> -		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
+> +		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+> +		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+>  	};
+>  
+>  	firmware {
+> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+> index 18b8870269..e1796e7e31 100644
+> --- a/board/st/stm32mp1/stm32mp1.c
+> +++ b/board/st/stm32mp1/stm32mp1.c
+> @@ -155,6 +155,7 @@ static void board_key_check(void)
+>  					       &gpio, GPIOD_IS_IN)) {
+>  			log_debug("could not find a /config/st,fastboot-gpios\n");
+>  		} else {
+> +			udelay(20);
+>  			if (dm_gpio_get_value(&gpio)) {
+>  				log_notice("Fastboot key pressed, ");
+>  				boot_mode = BOOT_FASTBOOT;
+> @@ -168,6 +169,7 @@ static void board_key_check(void)
+>  					       &gpio, GPIOD_IS_IN)) {
+>  			log_debug("could not find a /config/st,stm32prog-gpios\n");
+>  		} else {
+> +			udelay(20);
+>  			if (dm_gpio_get_value(&gpio)) {
+>  				log_notice("STM32Programmer key pressed, ");
+>  				boot_mode = BOOT_STM32PROG;
+> 
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- drivers/clk/clk_stm32mp1.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
-index 0c0ef366a1..599c2e7095 100644
---- a/drivers/clk/clk_stm32mp1.c
-+++ b/drivers/clk/clk_stm32mp1.c
-@@ -73,6 +73,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define RCC_PLL2FRACR		0xA0
- #define RCC_PLL2CSGR		0xA4
- #define RCC_I2C46CKSELR		0xC0
-+#define RCC_SPI6CKSELR		0xC4
- #define RCC_CPERCKSELR		0xD0
- #define RCC_STGENCKSELR		0xD4
- #define RCC_DDRITFCR		0xD8
-@@ -103,6 +104,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define RCC_I2C12CKSELR		0x8C0
- #define RCC_I2C35CKSELR		0x8C4
- #define RCC_SPI2S1CKSELR	0x8D8
-+#define RCC_SPI2S23CKSELR	0x8DC
- #define RCC_SPI45CKSELR		0x8E0
- #define RCC_UART6CKSELR		0x8E4
- #define RCC_UART24CKSELR	0x8E8
-@@ -313,7 +315,9 @@ enum stm32mp1_parent_sel {
- 	_DSI_SEL,
- 	_ADC12_SEL,
- 	_SPI1_SEL,
-+	_SPI23_SEL,
- 	_SPI45_SEL,
-+	_SPI6_SEL,
- 	_RTC_SEL,
- 	_PARENT_SEL_NB,
- 	_UNKNOWN_SEL = 0xff,
-@@ -524,6 +528,8 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK(RCC_DDRITFCR, 9, DDRPHYCAPB, _UNKNOWN_SEL),
- 	STM32MP1_CLK(RCC_DDRITFCR, 10, DDRPHYCAPBLP, _UNKNOWN_SEL),
- 
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 11, SPI2_K, _SPI23_SEL),
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 12, SPI3_K, _SPI23_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 14, USART2_K, _UART24_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 15, USART3_K, _UART35_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 16, UART4_K, _UART24_SEL),
-@@ -536,6 +542,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB1ENSETR, 24, I2C5_K, _I2C35_SEL),
- 
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB2ENSETR, 8, SPI1_K, _SPI1_SEL),
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB2ENSETR, 9, SPI4_K, _SPI45_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB2ENSETR, 10, SPI5_K, _SPI45_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB2ENSETR, 13, USART6_K, _UART6_SEL),
- 
-@@ -548,6 +555,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB4ENSETR, 15, IWDG2, _UNKNOWN_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB4ENSETR, 16, USBPHY_K, _USBPHY_SEL),
- 
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 0, SPI6_K, _SPI6_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 2, I2C4_K, _I2C46_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 3, I2C6_K, _I2C46_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 8, RTCAPB, _PCLK5),
-@@ -612,10 +620,13 @@ static const u8 usbo_parents[] = {_PLL4_R, _USB_PHY_48};
- static const u8 stgen_parents[] = {_HSI_KER, _HSE_KER};
- static const u8 dsi_parents[] = {_DSI_PHY, _PLL4_P};
- static const u8 adc_parents[] = {_PLL4_R, _CK_PER, _PLL3_Q};
-+/* same parents for SPI1=RCC_SPI2S1CKSELR and SPI2&3 = RCC_SPI2S23CKSELR */
- static const u8 spi_parents[] = {_PLL4_P, _PLL3_Q, _I2S_CKIN, _CK_PER,
- 				 _PLL3_R};
- static const u8 spi45_parents[] = {_PCLK2, _PLL4_Q, _HSI_KER, _CSI_KER,
- 				   _HSE_KER};
-+static const u8 spi6_parents[] = {_PCLK5, _PLL4_Q, _HSI_KER, _CSI_KER,
-+				  _HSE_KER, _PLL3_Q};
- static const u8 rtc_parents[] = {_UNKNOWN_ID, _LSE, _LSI, _HSE};
- 
- static const struct stm32mp1_clk_sel stm32mp1_clk_sel[_PARENT_SEL_NB] = {
-@@ -642,7 +653,9 @@ static const struct stm32mp1_clk_sel stm32mp1_clk_sel[_PARENT_SEL_NB] = {
- 	STM32MP1_CLK_PARENT(_DSI_SEL, RCC_DSICKSELR, 0, 0x1, dsi_parents),
- 	STM32MP1_CLK_PARENT(_ADC12_SEL, RCC_ADCCKSELR, 0, 0x3, adc_parents),
- 	STM32MP1_CLK_PARENT(_SPI1_SEL, RCC_SPI2S1CKSELR, 0, 0x7, spi_parents),
-+	STM32MP1_CLK_PARENT(_SPI23_SEL, RCC_SPI2S23CKSELR, 0, 0x7, spi_parents),
- 	STM32MP1_CLK_PARENT(_SPI45_SEL, RCC_SPI45CKSELR, 0, 0x7, spi45_parents),
-+	STM32MP1_CLK_PARENT(_SPI6_SEL, RCC_SPI6CKSELR, 0, 0x7, spi6_parents),
- 	STM32MP1_CLK_PARENT(_RTC_SEL, RCC_BDCR, RCC_BDCR_RTCSRC_SHIFT,
- 			    (RCC_BDCR_RTCSRC_MASK >> RCC_BDCR_RTCSRC_SHIFT),
- 			    rtc_parents),
--- 
-2.25.1
-
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

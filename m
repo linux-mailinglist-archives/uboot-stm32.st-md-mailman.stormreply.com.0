@@ -2,63 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3111F3BF765
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Jul 2021 11:17:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DB023C2040
+	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Jul 2021 09:53:43 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E9D40C597AA;
-	Thu,  8 Jul 2021 09:17:58 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0F022C3FAD6;
+	Fri,  9 Jul 2021 07:53:43 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C73D0C59781
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B5E31C32EA6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Jul 2021 09:17:55 +0000 (UTC)
+ Fri,  9 Jul 2021 07:53:41 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 1689CqrK007124; Thu, 8 Jul 2021 11:17:54 +0200
+ 1697r4F0026526; Fri, 9 Jul 2021 09:53:40 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=uTPgOboWDGBiM9+5MRwGuagMPu0aA9RCCJlk1WnpYIk=;
- b=zu1KMnrBJzDMBgUlbB1aUhjO5NwI5QMcd905206dDpj9CQm2CtyGnjIjELhAXYTq60gk
- tFJ0II+sxYI9ClYFhtR9o/D1juEZysdL53IgdcCF7LGW5Xr/oOAd++oag3FFcp2CvsrD
- WNw9rBVHTeneAVtj9QpiMku0G3ZSkVH78l0IT+7AiN06I+xIMq7m+N37Gst+woFGuhj9
- 1sLEo88wympgEGS2CGklkCo3pZvTRmJb7UZjZ3dSI34/wogfWK7y5Usq04YlQLRruAKQ
- bIpqjmBFcFr0m1OPzZPCX/ZQK6n2teRzjVFUxqlv1b9GykOeD0b66QiZAWmHvzUzr49W 5g== 
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=bu1asaCFXwWFEbjlPdOlNTCi+D9b9b/UtXxvayquT1M=;
+ b=aQH4neqhidWqEgru+Lq2vBcZkcbeUm/i2xcyaYizCyDCmB2uJ38r8noUMEGemi08vd/i
+ 6UUgd5p6TOWsv9NXnYJZQzkt7J5zWUf7hhcybBivt9axT7jg9Mwnw90cO3Dpo2JQO/Dj
+ Tg3W4YNCg8C68vu6wgvLSt/mdPH0hXTwNDt7W73EXWVcL5lyq53eTROwtKPScJrjUrmU
+ yeqNmqPVxErCVgodiSqLO16PuV+Hpibk6sywWyW5+fhYxjJk9QSV9Mu7fR7Xe8NP/dB2
+ bh3uuIVe2+Dzh98ckKnk9nJ2OTdYyLg0sM90Pjk69Piqv/IBO3gVGwsBjt3VCAqahSDu ug== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39npqd2pg3-1
+ by mx07-00178001.pphosted.com with ESMTP id 39ph72ghnv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 08 Jul 2021 11:17:54 +0200
+ Fri, 09 Jul 2021 09:53:40 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7EBB2100038;
- Thu,  8 Jul 2021 11:17:53 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0DE20100034;
+ Fri,  9 Jul 2021 09:53:39 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 723F021812E;
- Thu,  8 Jul 2021 11:17:53 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 8 Jul 2021 11:17:53
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E630A216EDE;
+ Fri,  9 Jul 2021 09:53:39 +0200 (CEST)
+Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 9 Jul 2021 09:53:39
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 8 Jul 2021 11:17:47 +0200
-Message-ID: <20210708111743.5.I1aeda5b6cc2115de802f79656884387d7a7ca94c@changeid>
+Date: Fri, 9 Jul 2021 09:53:37 +0200
+Message-ID: <20210709095322.1.I3841c4ea8add371529df3e03de5439659a69f38b@changeid>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210708091747.317500-1-patrick.delaunay@foss.st.com>
-References: <20210708091747.317500-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-07-08_04:2021-07-06,
- 2021-07-08 signatures=0
-Cc: Simon Glass <sjg@chromium.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH 5/5] stm32mp1: stm32prog: remove
-	stm32prog_get_tee_partitions with FIP
+ definitions=2021-07-09_03:2021-07-09,
+ 2021-07-09 signatures=0
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] stm32mp1: add pull-up for gpio button PA13
+	and PA14
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,97 +72,74 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The MTD tee partitions used to save the OP-TEE binary are needed when
-TF-A doesn't use the FIP container to load binaries.
+When a push-button is released and PA13/PA14 are defined as input (high-Z)
+the LED should not be active as the circuit is open but a small current
+leak through PCB or push-button close the circuit and allows a small LED
+bias giving erroneous level voltage.
 
-This patch puts under CONFIG_STM32MP15x_STM32IMAGE flag the associated
-code in U-Boot binary and prepare the code cleanup when
-CONFIG_STM32MP15x_STM32IMAGE support will be removed after TF-A migration
-to FIP support.
+So it is recommended to activate an internal pull-up in order to clearly
+fix the voltage at PA13/PA14 when button is released and to wait
+a short delay before to read the GPIO value only when the pull-up is
+correctly configured.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c | 2 ++
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c     | 4 ++++
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h     | 2 ++
- arch/arm/mach-stm32mp/include/mach/stm32prog.h      | 2 ++
- 4 files changed, 10 insertions(+)
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 4 ++--
+ arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 4 ++--
+ board/st/stm32mp1/stm32mp1.c             | 2 ++
+ 3 files changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index e36501a86b..821c174bbe 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -175,6 +175,7 @@ U_BOOT_CMD(stm32prog, 5, 0, do_stm32prog,
- 	   "<size> = size of flashlayout\n"
- );
+diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+index 6787619290..d44da7566f 100644
+--- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+@@ -18,8 +18,8 @@
+ 		u-boot,error-led = "error";
+ 		u-boot,mmc-env-partition = "ssbl";
+ 		st,adc_usb_pd = <&adc1 18>, <&adc1 19>;
+-		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+-		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
++		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+ 	};
  
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- bool stm32prog_get_tee_partitions(void)
- {
- 	if (stm32prog_data)
-@@ -182,6 +183,7 @@ bool stm32prog_get_tee_partitions(void)
+ 	firmware {
+diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+index f3002e995b..3b94218b2f 100644
+--- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+@@ -18,8 +18,8 @@
+ 		u-boot,boot-led = "heartbeat";
+ 		u-boot,error-led = "error";
+ 		u-boot,mmc-env-partition = "ssbl";
+-		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+-		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
++		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+ 	};
  
- 	return false;
- }
-+#endif
- 
- bool stm32prog_get_fsbl_nor(void)
- {
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 4c4d8a7a69..2fb1f1f24a 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -823,7 +823,9 @@ static int treat_partition_list(struct stm32prog_data *data)
- 		INIT_LIST_HEAD(&data->dev[j].part_list);
- 	}
- 
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	data->tee_detected = false;
-+#endif
- 	data->fsbl_nor_detected = false;
- 	for (i = 0; i < data->part_nb; i++) {
- 		part = &data->part_array[i];
-@@ -877,10 +879,12 @@ static int treat_partition_list(struct stm32prog_data *data)
- 			/* fallthrough */
- 		case STM32PROG_NAND:
- 		case STM32PROG_SPI_NAND:
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 			if (!data->tee_detected &&
- 			    !strncmp(part->name, "tee", 3))
- 				data->tee_detected = true;
- 			break;
-+#endif
- 		default:
- 			break;
- 		}
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index 581b10d0ac..5b18f2fd4f 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -121,7 +121,9 @@ struct stm32prog_data {
- 	struct stm32prog_dev_t	dev[STM32PROG_MAX_DEV];	/* array of device */
- 	int			part_nb;	/* nb of partition */
- 	struct stm32prog_part_t	*part_array;	/* array of partition */
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	bool			tee_detected;
-+#endif
- 	bool			fsbl_nor_detected;
- 
- 	/* command internal information */
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32prog.h b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-index c080b9cc42..99be4e1d65 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-@@ -11,6 +11,8 @@ int stm32prog_read_medium_virt(struct dfu_entity *dfu, u64 offset,
- 			       void *buf, long *len);
- int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size);
- 
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- bool stm32prog_get_tee_partitions(void);
-+#endif
- 
- bool stm32prog_get_fsbl_nor(void);
+ 	firmware {
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 18b8870269..e1796e7e31 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -155,6 +155,7 @@ static void board_key_check(void)
+ 					       &gpio, GPIOD_IS_IN)) {
+ 			log_debug("could not find a /config/st,fastboot-gpios\n");
+ 		} else {
++			udelay(20);
+ 			if (dm_gpio_get_value(&gpio)) {
+ 				log_notice("Fastboot key pressed, ");
+ 				boot_mode = BOOT_FASTBOOT;
+@@ -168,6 +169,7 @@ static void board_key_check(void)
+ 					       &gpio, GPIOD_IS_IN)) {
+ 			log_debug("could not find a /config/st,stm32prog-gpios\n");
+ 		} else {
++			udelay(20);
+ 			if (dm_gpio_get_value(&gpio)) {
+ 				log_notice("STM32Programmer key pressed, ");
+ 				boot_mode = BOOT_STM32PROG;
 -- 
 2.25.1
 

@@ -2,67 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C2B63C2762
-	for <lists+uboot-stm32@lfdr.de>; Fri,  9 Jul 2021 18:15:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA8853C2C48
+	for <lists+uboot-stm32@lfdr.de>; Sat, 10 Jul 2021 03:08:27 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 72E18C57B53;
-	Fri,  9 Jul 2021 16:15:31 +0000 (UTC)
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com
- [209.85.160.182])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7A357C57B53;
+	Sat, 10 Jul 2021 01:08:27 +0000 (UTC)
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
+ [209.85.160.171])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A9A3FC32EA6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C48E3CFAC5A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  9 Jul 2021 16:15:29 +0000 (UTC)
-Received: by mail-qt1-f182.google.com with SMTP id w26so1129209qto.9
+ Sat, 10 Jul 2021 01:08:24 +0000 (UTC)
+Received: by mail-qt1-f171.google.com with SMTP id g12so8890540qtb.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 09 Jul 2021 09:15:29 -0700 (PDT)
+ Fri, 09 Jul 2021 18:08:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=WZJRKGKWGL+iAFCHNNhsI2j5RW8SvCEl0O4HL2iX4JY=;
- b=PjfoomVuFjAvf3qsIr8LBOZclQm8XkpjfLRJyf2a+NvgSZgVegGIfTmHCVT6Sh/bfU
- gdcOHm/gvDNJ78quPsKBszGT7wxP2BqQFILkvITsDiedo8hFVPkMv7Ai4wLKbJHlRtxC
- kQbsPz5xsBNtUslrRzL/MRijN90Exq+SmJPek=
+ bh=AWNugfHmU52sOe8hUW7XGrRjDTqOCjpt1zEFnPQeqCg=;
+ b=WFKFbbC6rZjVG+R7IWLdwXT8Dlq6gWhkn8k4TPGqmBsU+lbx3+mnYCd2BR9DlF/RYd
+ 6xVs29rFWWSxeVFxRvZzZefABUsHZpOCVzBf58WpS0LLad0aKSCMQrsytzZheh6K4EPx
+ sOVKo6+RLW1VOIQDgBmUWN2/YfzDz0+FLNvPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=WZJRKGKWGL+iAFCHNNhsI2j5RW8SvCEl0O4HL2iX4JY=;
- b=lQVTluCi7OUXr5AT2wWttX44mTENnAakzAADGzpIK+xe2P4pHR7Ea4b5eNeLvGPAok
- 3xSa2MqJKYeBQybT/llB2HWLVweRzENWmn0AXfVNAJmTwG23LOERKd8pbiDfJXZ3PQrR
- J4IF+oMSkbicOEIQDn1DWTHaXrjdX6ed+/Tywe4BW+zTOPhmZU/XvRhp2p8NQ3G6y6x7
- R+DlDdYg3IS7faqof/8i0rX6hptJNGWPrGuPyjglMH1A7cPMhBd4QDV3RhxZ9sZWAZl+
- DhzG5Lqh6ZvJkOgFyTBHBFIQL98iLvy8f6VfDiKsulbl/hvp0UyMQa0zhTyeHOhvJwHM
- MfiA==
-X-Gm-Message-State: AOAM533ev7w4V4F2+x29bGwnz5J6R/11ShmWcxPVrMvjYjeIQEBNOH+3
- t4PodcA5lY9U+3TMmZe+rC9MBw==
-X-Google-Smtp-Source: ABdhPJwcwV5ZnCRhuGk7gzvAYgeLHDLfd5b3dmJBM939Xs+ZfEIOLlEsvV9A+wUyxuU7KD0XEy9Clw==
-X-Received: by 2002:ac8:53d8:: with SMTP id c24mr34847480qtq.38.1625847328539; 
- Fri, 09 Jul 2021 09:15:28 -0700 (PDT)
+ bh=AWNugfHmU52sOe8hUW7XGrRjDTqOCjpt1zEFnPQeqCg=;
+ b=Ihka3rzc5TCm3OOLSdc2F+24uTxe5IQMPmhNHYZ+sMT0WBnFGlvZDxqtty9iG9kTmp
+ Eh9rKBTksmW85gT+giEeCkBP1aIQCy22ceawFvzkE1bzfrzbT4ZuZJUZMN64SOATsvrY
+ VMdkZORWdnLWELtoymiK4Em+xb8DL0dJIz/R9wYnhFOMBkrp1unke0QnpPzBBq7hO/jg
+ fRdL9i/CKRONeUIdAvmr+L2hMMvwOEPIndOdXhLEEC3Z5cwm2u62/xdvDwnHMhkwL0it
+ xvtMT4iPjVZj44fABxWQFhPKQwaUrlOj1ykvgSehis4kTGPYNCejcRSXHucfpmeIXMQG
+ HWHA==
+X-Gm-Message-State: AOAM532rhAn3ZkiQ5f5V3u4DD2l+YAqyCziRR8yQLHjBI/RmWBQ4C5HK
+ hCDEZdAAx3xs+jpBkO6drDzplA==
+X-Google-Smtp-Source: ABdhPJyYUSEqqAZ//fm9gmdiSS7ZCUHE0bESCA7Ql7NhgGW83X6SgWYwWl7OYPYba963IpSpkvVR+Q==
+X-Received: by 2002:ac8:605a:: with SMTP id k26mr6937002qtm.65.1625879303607; 
+ Fri, 09 Jul 2021 18:08:23 -0700 (PDT)
 Received: from bill-the-cat
- (2603-6081-7b01-cbda-1083-622a-b9ec-c6c6.res6.spectrum.com.
- [2603:6081:7b01:cbda:1083:622a:b9ec:c6c6])
- by smtp.gmail.com with ESMTPSA id z7sm2262743qta.92.2021.07.09.09.15.27
+ (2603-6081-7b01-cbda-a5c2-d52d-ba41-be23.res6.spectrum.com.
+ [2603:6081:7b01:cbda:a5c2:d52d:ba41:be23])
+ by smtp.gmail.com with ESMTPSA id t62sm3237471qkc.26.2021.07.09.18.08.22
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Fri, 09 Jul 2021 09:15:27 -0700 (PDT)
-Date: Fri, 9 Jul 2021 12:15:25 -0400
+ Fri, 09 Jul 2021 18:08:23 -0700 (PDT)
+Date: Fri, 9 Jul 2021 21:08:20 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20210709161525.GA7917@bill-the-cat>
-References: <20210226124451.3799-1-patrice.chotard@foss.st.com>
+Message-ID: <20210710010820.GL9516@bill-the-cat>
+References: <20210224124843.12648-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-In-Reply-To: <20210226124451.3799-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20210224124843.12648-1-patrice.chotard@foss.st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Simon Glass <sjg@chromium.org>, Suneel Garapati <sgarapati@marvell.com>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, mark.kettenis@xs4all.nl
-Subject: Re: [Uboot-stm32] [PATCH] arm64: Update memcpy_{from,
-	to}io() helpers
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>, u-boot@lists.denx.de,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Andy Fleming <afleming@gmail.com>, Stefan Roese <sr@denx.de>,
+ Marek Szyprowski <m.szyprowski@samsung.com>, Marek Vasut <marex@denx.de>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Masahiro Yamada <masahiroy@kernel.org>,
+ Macpaul Lin <macpaul@andestech.com>, Thomas Chou <thomas@wytron.com.tw>,
+ Scott McNutt <smcnutt@psyent.com>, Wolfgang Denk <wd@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Alison Wang <alison.wang@nxp.com>,
+ Michal Simek <monstr@monstr.eu>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@st.com>,
+ Mario Six <mario.six@gdsys.cc>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] arch: cache: cp15: Add
+ mmu_set_region_dcache_behaviour() when SYS_DCACHE_OFF is enable
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,76 +81,63 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5666212376550070674=="
+Content-Type: multipart/mixed; boundary="===============0809722474621082370=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============5666212376550070674==
+--===============0809722474621082370==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="zYM0uCDKw75PZbzx"
+	protocol="application/pgp-signature"; boundary="IEzoES8k7owYxfAa"
 Content-Disposition: inline
 
 
---zYM0uCDKw75PZbzx
+--IEzoES8k7owYxfAa
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 26, 2021 at 01:44:51PM +0100, Patrice Chotard wrote:
+On Wed, Feb 24, 2021 at 01:48:42PM +0100, Patrice Chotard wrote:
 
-> At early U-Boot stage, before relocation, MMU is not yet configured
-> and disabled. DDR may not be configured with the correct memory
-> attributes (can be configured in MT_DEVICE instead of MT_MEMORY).
+> From: Patrice Chotard <patrice.chotard@st.com>
 >=20
-> In this case, usage of memcpy_{from, to}io() may leads to synchronous
-> abort in AARCH64 in case the normal memory address is not 64Bits aligned.
+> Fix following compilation issue when SYS_DCACHE_OFF is enable:
+> drivers/misc/scmi_agent.c:128: undefined reference to `mmu_set_region_dca=
+che_behaviour'
 >=20
-> To avoid such situation, forbid usage of normal memory cast to (u64 *) in
-> case MMU is not enabled.
+> when SYS_DCACHE_OFF is enable, mmu_set_region_dcache_behaviour() must be
+> defined.
 >=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: mark.kettenis@xs4all.nl
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Sorry for the delay.  If this is still needed, you'll need to address
-the build failures on platforms such as cgtqmx8:
-+(cgtqmx8) board/congatec/cgtqmx8/cgtqmx8.c:377:6: error: conflicting types=
- for 'reset_cpu'
-+(cgtqmx8)  void reset_cpu(ulong addr)
-+(cgtqmx8)       ^~~~~~~~~
-+(cgtqmx8) In file included from arch/arm/include/asm/io.h:341:0,
-+(cgtqmx8)                  from board/congatec/cgtqmx8/cgtqmx8.c:12:
-+(cgtqmx8) include/cpu_func.h:88:6: note: previous declaration of 'reset_cp=
-u' was here
-+(cgtqmx8)  void reset_cpu(void);
-
-that are introduced with this patch.  Thanks.
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---zYM0uCDKw75PZbzx
+--IEzoES8k7owYxfAa
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmDodhMACgkQFHw5/5Y0
-tywKFgv+IfDignmGLHfIt1JkUgvqqzQ2LuL701Hn3iMZBJQFmi68Gy1iGj2AY5h3
-6U74MJkj+glD/zi5vcRycS2oFM6ngEhReExBRxjqiLagkk3/MswqxHUsEnbm6nYp
-w1ErIfEdpVUXOKdYeDvqfFv6hjdgWI9id0QDIwcRGQR6QQZj0h6KTOtwUM73gBHw
-jydCZQT6g9S4lL63P8xHytm3N6Xk2IIZo5xCNQz+yrP4ArUFejIp+SQUUheiVNaj
-8SfV7luhUZXnzDWukuhq1FsYoaUCAy7Y8VcSzVM3WPPfOwvJXgN50L5vmD9hN4+N
-sv+TfEAwiEr0xMFEYsNTFLE1e6EvL3ulIHyzyyi518dQQpKk2oE+AYTGvZhTRUKj
-Bw/7N9xrztiVblARudcWTWcktlnFRh5RNUMPVHTOuih61ntVNnU1NxuWS/WBhkZ/
-TYOXpgqUaYg3d8hbJYpHlyYrYNedsSG5pMbPiuorbtdjsMuddHTBH3R6igbCFZSl
-spFyhPGH
-=TEUr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmDo8wQACgkQFHw5/5Y0
+tyyYDQwAqDjt7SRTnt9SRilYtRGDR3eFrzLaNus52BR4H0d+LEbrZO5SXF5mRtrB
+p549Q47SVr3FlU8+GbK7fdjNlWj+w6pj/HD7adKQfJzUpdKVPTrenkJMooVBE8oN
+4ustN4jfxJCeFNKRhWKbDR/f+kH1e3wPd7g5AUUYC6janXYQFGb/5aa8UdDmmy67
+8tusSjY4WwzRrq243UuSB/TFdcvaKNSGsEeLoM9yliA/p+L2tdRJU+592omzjM3h
+8WPM/wxurPL89ipDKKF3OrQcqm+IpT3xmJDlauxtPeF6vZG96pgS2Tatvova9/vn
+iFN8IjtkW1ZsZnZcipdgOnGzShshrLdWTAFzHRZXioHVF4SAXEwWFqgxStYRJmg/
+2EbyWtSGi1LnW18wXK0RHofrVspfV//bK4TGCOckTBrJ5zeNGzQSIRXlNUzU5fhY
+Hdn/7xoTCofqZ7j3ATILSHRmqBm079TmL4Mn4l1lXBC0cdMaSwdghfz8p0F9WCtl
+E2+X3/0P
+=qKKa
 -----END PGP SIGNATURE-----
 
---zYM0uCDKw75PZbzx--
+--IEzoES8k7owYxfAa--
 
---===============5666212376550070674==
+--===============0809722474621082370==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -154,4 +148,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============5666212376550070674==--
+--===============0809722474621082370==--

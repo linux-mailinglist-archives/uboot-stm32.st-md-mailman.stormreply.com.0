@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C1AF3CA160
+	by mail.lfdr.de (Postfix) with ESMTPS id 615EE3CA161
 	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jul 2021 17:22:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 069FAC59783;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0F0A2C597B0;
 	Thu, 15 Jul 2021 15:22:17 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6BAABC56630
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 19038C56630
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Jul 2021 15:22:14 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Thu, 15 Jul 2021 15:22:15 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16FFCCiL013171; Thu, 15 Jul 2021 17:22:12 +0200
+ 16FFCcQM008775; Thu, 15 Jul 2021 17:22:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=+2kHV/QlySIQdV/FnSzg7p5Buuw2ZZptWda+PyqIOQE=;
- b=fk+ju7xQBTcsE+KSoh4ThiaVZ33J/KF4ZKA5SJPgeNijBndavFJgvAbIxp3r204oXx/W
- WftSxm8G6k6SXT1YQyNIpSccxPW2vZuvdm8NI1uiwOCStXeG7tX41Fr9ooujnUaEnkN4
- 3OAUwyKyMji78O2DP5FyPS8uKNETnEDUOyQon5nzNgQnMay7rqZ7UYEhQMzuOgTG/7Lq
- scaLZ1HQNCv5R1oLrKu4g3/oe8xxpXGOLuZWFoLbW81xfsBw7vG9BidHbKwReFC92/5+
- H9A9O/Nrdys5872kpuMOd6vhpKUomRKyzsWl4vSOfno6UMrnLUnQwcEHYPmlDAeURB/T Dw== 
+ bh=w+v9h5CNby9BBhFlKEGzjG8JM6QhUYQAQzUPCSG9pn8=;
+ b=VSKraJpz8QV8VsCZkiIxN8h4SMq13g1QVz5rxBharh4c3TtkRUb6w3s2PeqYzxpZqXhi
+ SjeWhauyJWzx8C/zMceqpQn2atyHxuPDilXzaGjWXOJdfmVp802V1/l0roPiSE8MVIxx
+ OY++iFmcJ1C/KU0gHehfCEqkrXN/3MTMsgHZ4+RMs85rJHbbyw7XdJC2POCTK1OIQroP
+ 9vlnAU4ayps7sbJO+Ji4A1Dft3D7cAstqngTejv49QHmOs3xF1eCQ7GRtq9XBWXHrKej
+ itbeUyGbm7/iOoC7k6c+qMDMy2B073o0W4cZ7jfbzrBDa9fq3oL1V1k5jgXdvQWI1akh 3A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39thrst6fp-1
+ by mx07-00178001.pphosted.com with ESMTP id 39ten736g7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Jul 2021 17:22:12 +0200
+ Thu, 15 Jul 2021 17:22:13 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1498310002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DE4FC100034;
  Thu, 15 Jul 2021 17:22:12 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 07EEF2309FF;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D29652309FF;
  Thu, 15 Jul 2021 17:22:12 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 15 Jul 2021 17:22:11
+Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 15 Jul 2021 17:22:12
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 15 Jul 2021 17:22:05 +0200
-Message-ID: <20210715172115.v2.3.I6cfa5180734d90381a9349794ee79a4ecd7deb01@changeid>
+Date: Thu, 15 Jul 2021 17:22:06 +0200
+Message-ID: <20210715172115.v2.4.I5b4dcc998de66f175510fed96f6930c7208b492c@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210715152207.46118-1-patrick.delaunay@foss.st.com>
 References: <20210715152207.46118-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-07-15_10:2021-07-14,
  2021-07-15 signatures=0
-Cc: Tom Rini <trini@konsulko.com>,
- Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
- Simon Glass <sjg@chromium.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 3/5] arm: stm32mp: add defconfig for
-	trusted boot with FIP
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v2 4/5] doc: st: stm32mp1: Add FIP support for
+	trusted boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,446 +74,370 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add TF-A FIP support for trusted boot on STM32MP15x,
-when STM32MP15x_STM32IMAGE is not activated.
+TF-A for STM32MP15 now supports the FIP: it is a packaging format which
+includes the secure monitor, u-boot-nodtb.bin and u-boot.dtb
 
-With FIP support the SSBL partition is named "fip" and its size is 4MB,
-so the ENV partition name in device tree  (for SD card or eMMC)
-or offset in defconfig (CONFIG_ENV_OFFSET / CONFIG_ENV_OFFSET_REDUND)
-need to be modified.
+This FIP file is loaded by FSBL = TF-A BL2.
 
-With FIP the TEE MTD partitions are removed because the OP-TEE binray are
-included in the FIP containers.
+This patch updates the board documentation to use this FIP file and no
+more u-boot.stm32 (with STM32 image header) which is no more generated.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
 Changes in v2:
-- synchronize defconfig with latest change
+- fix one typo: s/ enought / enough
 
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi |   6 +-
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi |   6 +-
- board/st/common/Kconfig                  |  21 ++-
- board/st/common/stm32mp_mtdparts.c       |  31 +++--
- board/st/stm32mp1/MAINTAINERS            |   1 +
- configs/stm32mp15_defconfig              | 158 +++++++++++++++++++++++
- 6 files changed, 207 insertions(+), 16 deletions(-)
- create mode 100644 configs/stm32mp15_defconfig
+ doc/board/st/stm32mp1.rst | 166 ++++++++++++++++++++++----------------
+ 1 file changed, 97 insertions(+), 69 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-index 36d166a0e1..f554d9359b 100644
---- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
-@@ -15,13 +15,17 @@
- 	config {
- 		u-boot,boot-led = "heartbeat";
- 		u-boot,error-led = "error";
--		u-boot,mmc-env-partition = "ssbl";
-+		u-boot,mmc-env-partition = "fip";
- 		st,adc_usb_pd = <&adc1 18>, <&adc1 19>;
- 		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
- 		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
- 	};
+diff --git a/doc/board/st/stm32mp1.rst b/doc/board/st/stm32mp1.rst
+index f0c2b09b98..7440753788 100644
+--- a/doc/board/st/stm32mp1.rst
++++ b/doc/board/st/stm32mp1.rst
+@@ -60,7 +60,7 @@ Currently the following boards are supported:
+ Boot Sequences
+ --------------
  
- #ifdef CONFIG_STM32MP15x_STM32IMAGE
-+	config {
-+		u-boot,mmc-env-partition = "ssbl";
-+	};
+-3 boot configurations are supported with:
++2 boot configurations are supported with:
+ 
+ +----------+------------------------+-------------------------+--------------+
+ | **ROM**  | **FSBL**               | **SSBL**                | **OS**       |
+@@ -70,10 +70,12 @@ Boot Sequences
+ |          | embedded RAM           | DDR                                    |
+ +----------+------------------------+-------------------------+--------------+
+ 
+-The **Trusted** boot chain
+-``````````````````````````
++The **Trusted** boot chain with TF-A
++`````````````````````````````````````
+ 
+-defconfig_file : stm32mp15_trusted_defconfig
++defconfig_file :
++   + **stm32mp15_defconfig** (for TF-A with FIP support)
++   + **stm32mp15_trusted_defconfig** (for TF-A without FIP support)
+ 
+     +-------------+-------------------------+------------+-------+
+     |  ROM code   | FSBL                    | SSBL       | OS    |
+@@ -83,19 +85,16 @@ defconfig_file : stm32mp15_trusted_defconfig
+     | TrustZone   |secure monitor                                |
+     +-------------+-------------------------+------------+-------+
+ 
+-TF-A performs a full initialization of Secure peripherals and installs a
+-secure monitor, BL32:
++TF-A (BL2) initialize the DDR and loads the next stage binaries from a FIP file:
++   + BL32: a secure monitor BL32 = SPMin provided by TF-A or OP-TEE : performs a full initialization of Secure peripherals and provides service to normal world
++   + BL33: a non-trusted firmware = U-Boot, running in normal world and uses the secure monitor to access to secure resources.
++   + HW_CONFIG: The hardware configuration file = the U-Boot device tree
+ 
+-  * SPMin provided by TF-A or
+-  * OP-TEE from specific partitions (teeh, teed, teex).
++The **Basic** boot chain with SPL
++`````````````````````````````````
+ 
+-U-Boot is running in normal world and uses the secure monitor to access
+-to secure resources.
+-
+-The **Basic** boot chain
+-````````````````````````
+-
+-defconfig_file : stm32mp15_basic_defconfig
++defconfig_file :
++   + **stm32mp15_basic_defconfig**
+ 
+     +-------------+------------+------------+-------+
+     |  ROM code   | FSBL       | SSBL       | OS    |
+@@ -163,12 +162,13 @@ Build Procedure
+ 
+    for example: use one output directory for each configuration::
+ 
++   # export KBUILD_OUTPUT=stm32mp15
+    # export KBUILD_OUTPUT=stm32mp15_trusted
+    # export KBUILD_OUTPUT=stm32mp15_basic
+ 
+    you can build outside of code directory::
+ 
+-   # export KBUILD_OUTPUT=../build/stm32mp15_trusted
++   # export KBUILD_OUTPUT=../build/stm32mp15
+ 
+ 4. Configure U-Boot::
+ 
+@@ -176,7 +176,7 @@ Build Procedure
+ 
+    with <defconfig_file>:
+ 
+-   - For **trusted** boot mode : **stm32mp15_trusted_defconfig**
++   - For **trusted** boot mode : **stm32mp15_defconfig** or stm32mp15_trusted_defconfig
+    - For basic boot mode: stm32mp15_basic_defconfig
+ 
+ 5. Configure the device-tree and build the U-Boot image::
+@@ -185,13 +185,13 @@ Build Procedure
+ 
+    Examples:
+ 
+-  a) trusted boot on ev1::
++  a) trusted boot with FIP on ev1::
+ 
+-     # export KBUILD_OUTPUT=stm32mp15_trusted
+-     # make stm32mp15_trusted_defconfig
++     # export KBUILD_OUTPUT=stm32mp15
++     # make stm32mp15_defconfig
+      # make DEVICE_TREE=stm32mp157c-ev1 all
+ 
+-  b) trusted with OP-TEE boot on dk2::
++  b) trusted boot without FIP on dk2::
+ 
+       # export KBUILD_OUTPUT=stm32mp15_trusted
+       # make stm32mp15_trusted_defconfig
+@@ -223,16 +223,32 @@ Build Procedure
+ 
+ 6. Output files
+ 
+-   BootRom and TF-A expect binaries with STM32 image header
+-   SPL expects file with U-Boot uImage header
++   The ROM code expects FSBL binaries with STM32 image header.
++   TF-A expects:
++   -   a FIP binary, including the OS monitor (SPmin or OP-TEE) and the U-Boot
++       binary + device tree
++   -  binaries with STM32 image header: U-Boot and OP-TEE
++   SPL expects file with U-Boot uImage header.
+ 
+    So in the output directory (selected by KBUILD_OUTPUT),
+    you can found the needed files:
+ 
+   - For **Trusted** boot (with or without OP-TEE)
+ 
+-     - FSBL = **tf-a.stm32** (provided by TF-A compilation)
+-     - SSBL = **u-boot.stm32**
++     - with FIP:
++        - FSBL = **tf-a.stm32** and **fip.bin** (provided by TF-A compilation)
++        - SSBL = **u-boot-nodtb.bin** and **u-boot.dtb**
 +
- 	/* only needed for boot with TF-A, witout FIP support */
- 	firmware {
- 		optee {
-diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-index e5a1cb7084..69eb285bf7 100644
---- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-@@ -15,12 +15,16 @@
- 	config {
- 		u-boot,boot-led = "heartbeat";
- 		u-boot,error-led = "error";
--		u-boot,mmc-env-partition = "ssbl";
-+		u-boot,mmc-env-partition = "fip";
- 		st,fastboot-gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
- 		st,stm32prog-gpios = <&gpioa 14 GPIO_ACTIVE_LOW>;
- 	};
- 
- #ifdef CONFIG_STM32MP15x_STM32IMAGE
-+	config {
-+		u-boot,mmc-env-partition = "ssbl";
-+	};
++     The file fip.bin includes the 2 U-Boot files, u-boot-nodtb.bin and u-boot.dtb;
++     they are needed during the TF-A compilation(BL33=u-boot-nodtb.bin BL33_CFG=u-boot.dtb).
 +
- 	/* only needed for boot with TF-A, witout FIP support */
- 	firmware {
- 		optee {
-diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-index ddcf33a122..2f57118bb2 100644
---- a/board/st/common/Kconfig
-+++ b/board/st/common/Kconfig
-@@ -8,18 +8,22 @@ config CMD_STBOARD
++     You can also update a existing it with the tools provided by TF-A:
++
++     # fiptool update --nt-fw u-boot-nodtb.bin --hw-config u-boot.dtb fip-stm32mp157c-ev1.bin
++
++      - without FIP support:
++         - FSBL = **tf-a.stm32** (provided by TF-A compilation)
++         - SSBL = **u-boot.stm32**
  
- config MTDPARTS_NAND0_BOOT
- 	string "mtd boot partitions for nand0"
--	default "2m(fsbl),2m(ssbl1),2m(ssbl2)"
-+	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15x_STM32IMAGE || \
-+						  !TFABOOT
-+	default "2m(fsbl),4m(fip1),4m(fip2)"
- 	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
- 	help
- 	  This define the partitions of nand0 used to build mtparts dynamically
- 	  for boot from nand0.
- 	  Each partition need to be aligned with the device erase block size,
- 	  512KB is the max size for the NAND supported by stm32mp1 platform.
-+	  The fsbl partition support multiple copy of the same binary, one by
-+	  erase block.
+   - For Basic boot
  
- config MTDPARTS_NAND0_TEE
- 	string "mtd tee partitions for nand0"
- 	default "512k(teeh),512k(teed),512k(teex)"
--	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
-+	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
- 	help
- 	  This define the tee partitions added in mtparts dynamically
- 	  when tee is supported with boot from nand0.
-@@ -28,7 +32,9 @@ config MTDPARTS_NAND0_TEE
+@@ -299,22 +315,27 @@ Prepare an SD card
+ The minimal requirements for STMP32MP15x boot up to U-Boot are:
  
- config MTDPARTS_NOR0_BOOT
- 	string "mtd boot partitions for nor0"
--	default "256k(fsbl1),256k(fsbl2),2m(ssbl),512k(u-boot-env)"
-+	default "256k(fsbl1),256k(fsbl2),2m(ssbl),512k(u-boot-env)" if STM32MP15x_STM32IMAGE || \
-+								       !TFABOOT
-+	default "256k(fsbl1),256k(fsbl2),4m(fip),512k(u-boot-env)"
- 	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
- 	help
- 	  This define the partitions of nand0 used to build mtparts dynamically
-@@ -40,24 +46,27 @@ config MTDPARTS_NOR0_BOOT
- config MTDPARTS_NOR0_TEE
- 	string "mtd tee partitions for nor0"
- 	default "256k(teeh),512k(teed),256k(teex)"
--	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
-+	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
- 	help
- 	  This define the tee partitions added in mtparts dynamically
- 	  when tee is supported with boot from nor0.
+ - GPT partitioning (with gdisk or with sgdisk)
+-- 2 fsbl partitions, named fsbl1 and fsbl2, size at least 256KiB
+-- one ssbl partition for U-Boot
++- 2 fsbl partitions, named "fsbl1" and "fsbl2", size at least 256KiB
++- one partition named "fip" for FIP or U-Boot (TF-A search the "fip"
++  partition and SPL search the 3th partition, because
++  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=3)
++
++Without FIP support in TF-A, the 3rd partition "fip" for u-boot.stm32 must
++be named "ssbl".
  
- config MTDPARTS_SPINAND0_BOOT
- 	string "mtd boot partitions for spi-nand0"
--	default "2m(fsbl),2m(ssbl1),2m(ssbl2)"
-+	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15x_STM32IMAGE || !TFABOOT
-+	default "2m(fsbl),4m(fip1),4m(fip2)"
- 	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
- 	help
- 	  This define the partitions of nand0 used to build mtparts dynamically
- 	  for boot from spi-nand0,
- 	  512KB is the max size for the NAND supported by stm32mp1 platform.
-+	  The fsbl partition support multiple copy of the same binary, one by
-+	  erase block.
+ Then the minimal GPT partition is:
  
- config MTDPARTS_SPINAND0_TEE
- 	string "mtd tee partitions for spi-nand0"
- 	default "512k(teeh),512k(teed),512k(teex)"
--	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
-+	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
- 	help
- 	  This define the tee partitions added in mtparts dynamically
- 	  when tee is supported with boot from spi-nand0,
-diff --git a/board/st/common/stm32mp_mtdparts.c b/board/st/common/stm32mp_mtdparts.c
-index f074fc189d..8b636d62fa 100644
---- a/board/st/common/stm32mp_mtdparts.c
-+++ b/board/st/common/stm32mp_mtdparts.c
-@@ -11,7 +11,9 @@
- #include <log.h>
- #include <mtd.h>
- #include <mtd_node.h>
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- #include <tee.h>
-+#endif
- #include <asm/arch/stm32prog.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/global_data.h>
-@@ -31,7 +33,9 @@ static void board_set_mtdparts(const char *dev,
- 			       char *mtdids,
- 			       char *mtdparts,
- 			       const char *boot,
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 			       const char *tee,
-+#endif
- 			       const char *user)
- {
- 	/* mtdids: "<dev>=<dev>, ...." */
-@@ -55,10 +59,12 @@ static void board_set_mtdparts(const char *dev,
- 		strncat(mtdparts, ",", MTDPARTS_LEN);
- 	}
+-  +-------+--------+---------+-------------+
+-  | *Num* | *Name* | *Size*  | *Content*   |
+-  +=======+========+=========+=============+
+-  | 1     | fsbl1  | 256 KiB | TF-A or SPL |
+-  +-------+--------+---------+-------------+
+-  | 2     | fsbl2  | 256 KiB | TF-A or SPL |
+-  +-------+--------+---------+-------------+
+-  | 3     | ssbl   | enought | U-Boot      |
+-  +-------+--------+---------+-------------+
+-  | 4     | <any>  | <any>   | Rootfs      |
+-  +-------+--------+---------+-------------+
++  +-------+--------+---------+------------------------------+
++  | *Num* | *Name* | *Size*  | *Content*                    |
++  +=======+========+=========+==============================+
++  | 1     | fsbl1  | 256 KiB | TF-A BL2 (tf-a.stm32) or SPL |
++  +-------+--------+---------+------------------------------+
++  | 2     | fsbl2  | 256 KiB | TF-A BL2 (tf-a.stm32) or SPL |
++  +-------+--------+---------+------------------------------+
++  | 3     | fip    | enough  | fip.bin or u-boot.img        |
++  +-------+--------+---------+------------------------------+
++  | 4     | <any>  | <any>   | Rootfs                       |
++  +-------+--------+---------+------------------------------+
  
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	if (tee) {
- 		strncat(mtdparts, tee, MTDPARTS_LEN);
- 		strncat(mtdparts, ",", MTDPARTS_LEN);
- 	}
-+#endif
+ Add a 4th partition (Rootfs) marked bootable with a file extlinux.conf
+ following the Generic Distribution feature (doc/README.distro for use).
+@@ -324,22 +345,22 @@ According the used card reader select the correct block device
  
- 	strncat(mtdparts, user, MTDPARTS_LEN);
- }
-@@ -70,7 +76,10 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 	static char parts[3 * MTDPARTS_LEN + 1];
- 	static char ids[MTDIDS_LEN + 1];
- 	static bool mtd_initialized;
--	bool tee, nor, nand, spinand, serial;
-+	bool nor, nand, spinand, serial;
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
-+	bool tee = false;
-+#endif
+ In the next example, it is /dev/mmcblk0
  
- 	if (mtd_initialized) {
- 		*mtdids = ids;
-@@ -78,7 +87,6 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 		return;
- 	}
+-For example: with gpt table with 128 entries
++For example: with gpt table with 128 entries and 4MB fip partition
  
--	tee = false;
- 	nor = false;
- 	nand = false;
- 	spinand = false;
-@@ -89,7 +97,9 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 	case BOOT_SERIAL_USB:
- 		serial = true;
- 		if (CONFIG_IS_ENABLED(CMD_STM32PROG)) {
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 			tee = stm32prog_get_tee_partitions();
-+#endif
- 			nor = stm32prog_get_fsbl_nor();
- 		}
- 		nand = true;
-@@ -108,9 +118,11 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 		break;
- 	}
+ a) remove previous formatting::
  
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	if (!serial && CONFIG_IS_ENABLED(OPTEE) &&
- 	    tee_find_device(NULL, NULL, NULL, NULL))
- 		tee = true;
-+#endif
+      # sgdisk -o /dev/<SD card dev>
  
- 	memset(parts, 0, sizeof(parts));
- 	memset(ids, 0, sizeof(ids));
-@@ -125,10 +137,11 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 	if (nand) {
- 		mtd = get_mtd_device_nm("nand0");
- 		if (!IS_ERR_OR_NULL(mtd)) {
--			const char *mtd_tee = CONFIG_MTDPARTS_NAND0_TEE;
- 			board_set_mtdparts("nand0", ids, parts,
- 					   CONFIG_MTDPARTS_NAND0_BOOT,
--					   !nor && tee ? mtd_tee : NULL,
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
-+					   !nor && tee ? CONFIG_MTDPARTS_NAND0_TEE : NULL,
-+#endif
- 					   "-(UBI)");
- 			put_mtd_device(mtd);
- 		}
-@@ -137,10 +150,11 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
- 	if (spinand) {
- 		mtd = get_mtd_device_nm("spi-nand0");
- 		if (!IS_ERR_OR_NULL(mtd)) {
--			const char *mtd_tee = CONFIG_MTDPARTS_SPINAND0_TEE;
- 			board_set_mtdparts("spi-nand0", ids, parts,
- 					   CONFIG_MTDPARTS_SPINAND0_BOOT,
--					   !nor && tee ? mtd_tee : NULL,
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
-+					   !nor && tee ? CONFIG_MTDPARTS_SPINAND0_TEE : NULL,
-+#endif
- 					   "-(UBI)");
- 			put_mtd_device(mtd);
- 		}
-@@ -148,10 +162,11 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+-b) create minimal image::
++b) create minimal image for FIP::
  
- 	if (nor) {
- 		if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
--			const char *mtd_tee = CONFIG_MTDPARTS_NOR0_TEE;
- 			board_set_mtdparts("nor0", ids, parts,
- 					   CONFIG_MTDPARTS_NOR0_BOOT,
--					   tee ? mtd_tee : NULL,
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
-+					   tee ? CONFIG_MTDPARTS_NOR0_TEE : NULL,
-+#endif
- 					   "-(nor_user)");
- 		}
- 	}
-diff --git a/board/st/stm32mp1/MAINTAINERS b/board/st/stm32mp1/MAINTAINERS
-index fe8fc6f484..0e6d80fb45 100644
---- a/board/st/stm32mp1/MAINTAINERS
-+++ b/board/st/stm32mp1/MAINTAINERS
-@@ -5,6 +5,7 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-stm.git
- S:	Maintained
- F:	arch/arm/dts/stm32mp15*
- F:	board/st/stm32mp1/
-+F:	configs/stm32mp15_defconfig
- F:	configs/stm32mp15_basic_defconfig
- F:	configs/stm32mp15_trusted_defconfig
- F:	include/configs/stm32mp1.h
-diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-new file mode 100644
-index 0000000000..b11da7dc9f
---- /dev/null
-+++ b/configs/stm32mp15_defconfig
-@@ -0,0 +1,158 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_STM32MP=y
-+CONFIG_TFABOOT=y
-+CONFIG_SYS_MALLOC_F_LEN=0x3000
-+CONFIG_SYS_MEMTEST_START=0xc0000000
-+CONFIG_SYS_MEMTEST_END=0xc4000000
-+CONFIG_ENV_OFFSET=0x480000
-+CONFIG_ENV_SECT_SIZE=0x40000
-+CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
-+CONFIG_TARGET_ST_STM32MP15x=y
-+CONFIG_CMD_STM32KEY=y
-+CONFIG_CMD_STM32PROG=y
-+CONFIG_ENV_OFFSET_REDUND=0x4C0000
-+CONFIG_TYPEC_STUSB160X=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_FIT=y
-+CONFIG_BOOTDELAY=1
-+CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-+CONFIG_SYS_PROMPT="STM32MP> "
-+CONFIG_CMD_ADTIMG=y
-+CONFIG_CMD_ERASEENV=y
-+CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_UNZIP=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_BMP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_EFIDEBUG=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_LOG=y
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_LIVE=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_IS_IN_UBI=y
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_ENV_UBI_PART="UBI"
-+CONFIG_ENV_UBI_VOLUME="uboot_config"
-+CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_DEV=-1
-+CONFIG_STM32_ADC=y
-+CONFIG_CLK_SCMI=y
-+CONFIG_SET_DFU_ALT_INFO=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x02000000
-+CONFIG_FASTBOOT_USB_DEV=1
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=1
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_BOOT1_NAME="mmc1boot0"
-+CONFIG_FASTBOOT_MMC_BOOT2_NAME="mmc1boot1"
-+CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_USER_NAME="mmc1"
-+CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
-+CONFIG_FASTBOOT_CMD_OEM_PARTCONF=y
-+CONFIG_FASTBOOT_CMD_OEM_BOOTBUS=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_DM_HWSPINLOCK=y
-+CONFIG_HWSPINLOCK_STM32=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_STM32F7=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_STM32_IPCC=y
-+CONFIG_STM32_FMC2_EBI=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_STM32_SDMMC2=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_SYS_MTDPARTS_RUNTIME=y
-+CONFIG_MTD_RAW_NAND=y
-+CONFIG_NAND_STM32_FMC2=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_PHY=y
-+CONFIG_PHY_STM32_USBPHYC=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_STMFX=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_STPMIC1=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_REGULATOR_STM32_VREFBUF=y
-+CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_REMOTEPROC_STM32_COPRO=y
-+CONFIG_RESET_SCMI=y
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_STM32MP1=y
-+CONFIG_DM_RTC=y
-+CONFIG_RTC_STM32=y
-+CONFIG_SERIAL_RX_BUFFER=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_STM32_QSPI=y
-+CONFIG_STM32_SPI=y
-+CONFIG_TEE=y
-+CONFIG_OPTEE=y
-+# CONFIG_OPTEE_TA_AVB is not set
-+CONFIG_USB=y
-+CONFIG_DM_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="STMicroelectronics"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0483
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_DM_VIDEO=y
-+CONFIG_BACKLIGHT_GPIO=y
-+CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
-+CONFIG_VIDEO_LCD_RAYDIUM_RM68200=y
-+CONFIG_VIDEO_STM32=y
-+CONFIG_VIDEO_STM32_DSI=y
-+CONFIG_VIDEO_STM32_MAX_XRES=1280
-+CONFIG_VIDEO_STM32_MAX_YRES=800
-+CONFIG_VIDEO_BMP_RLE8=y
-+CONFIG_BMP_16BPP=y
-+CONFIG_BMP_24BPP=y
-+CONFIG_BMP_32BPP=y
-+CONFIG_WDT=y
-+CONFIG_WDT_STM32MP=y
-+CONFIG_ERRNO_STR=y
-+CONFIG_FDT_FIXUP_PARTITIONS=y
-+# CONFIG_LMB_USE_MAX_REGIONS is not set
-+CONFIG_LMB_MEMORY_REGIONS=2
-+CONFIG_LMB_RESERVED_REGIONS=16
+     # sgdisk --resize-table=128 -a 1 \
+     -n 1:34:545		-c 1:fsbl1 \
+     -n 2:546:1057		-c 2:fsbl2 \
+-    -n 3:1058:5153		-c 3:ssbl \
+-    -n 4:5154:		    -c 4:rootfs \
++    -n 3:1058:9249		-c 3:fip \
++    -n 4:9250:			-c 4:rootfs -A 4:set:2 \
+     -p /dev/<SD card dev>
+ 
+-  With other partition for kernel one partition rootfs for kernel.
++   With partition 4 marked bootable (bit 2).
+ 
+ c) copy the FSBL (2 times) and SSBL file on the correct partition.
+    in this example in partition 1 to 3
+@@ -356,7 +377,7 @@ c) copy the FSBL (2 times) and SSBL file on the correct partition.
+ 
+     # dd if=tf-a.stm32 of=/dev/mmcblk0p1
+     # dd if=tf-a.stm32 of=/dev/mmcblk0p2
+-    # dd if=u-boot.stm32 of=/dev/mmcblk0p3
++    # dd if=fip.bin of=/dev/mmcblk0p3
+ 
+ To boot from SD card, select BootPinMode = 1 0 1 and reset.
+ 
+@@ -366,34 +387,41 @@ Prepare eMMC
+ You can use U-Boot to copy binary in eMMC.
+ 
+ In the next example, you need to boot from SD card and the images
+-(u-boot-spl.stm32, u-boot.img for systems without CONFIG_SPL_LOAD_FIT
+-or u-boot.itb for systems with CONFIG_SPL_LOAD_FIT=y) are presents on
+-SD card (mmc 0) in ext4 partition 4 (bootfs).
++(tf-a.stm32, fip.bin / u-boot-spl.stm32, u-boot.img for systems without CONFIG_SPL_LOAD_FIT
++or u-boot.itb for systems with CONFIG_SPL_LOAD_FIT=y) are presents
++on SD card (mmc 0) in ext4 partition 4 (bootfs)
+ 
+ To boot from SD card, select BootPinMode = 1 0 1 and reset.
+ 
+ Then you update the eMMC with the next U-Boot command :
+ 
+ a) prepare GPT on eMMC,
+-   example with 2 partitions, bootfs and roots::
++   example with 3 partitions, fip, bootfs and roots::
+ 
+-    # setenv emmc_part "name=ssbl,size=2MiB;name=bootfs,type=linux,bootable,size=64MiB;name=rootfs,type=linux,size=512"
++    # setenv emmc_part "name=fip,size=4MiB;name=bootfs,type=linux,bootable,size=64MiB;name=rootfs,type=linux,size=512"
+     # gpt write mmc 1 ${emmc_part}
+ 
+-b) copy SPL on eMMC on firts boot partition
++b) copy FSBL, TF-A or SPL, on first eMMC boot partition
+    (SPL max size is 256kB, with LBA 512, 0x200)::
+ 
++    # ext4load mmc 0:4 0xC0000000 tf-a.stm32
++    or
+     # ext4load mmc 0:4 0xC0000000 u-boot-spl.stm32
++
+     # mmc dev 1
+     # mmc partconf 1 1 1 1
+     # mmc write ${fileaddr} 0 200
+     # mmc partconf 1 1 1 0
+ 
+-c) copy U-Boot in first GPT partition of eMMC::
++c) copy SSBL, FIP or U-Boot binary, in first GPT partition of eMMC::
+ 
++    # ext4load mmc 0:4 0xC0000000 fip.bin
++    or
+     # ext4load mmc 0:4 0xC0000000 u-boot.img # Without CONFIG_SPL_LOAD_FIT
+-      OR
+-      ext4load mmc 0:4 0xC0000000 u-boot.itb # With CONFIG_SPL_LOAD_FIT=y
++    or
++    # ext4load mmc 0:4 0xC0000000 u-boot.itb # With CONFIG_SPL_LOAD_FIT=y
++
++
+     # mmc dev 1
+     # part start mmc 1 1 partstart
+     # mmc write ${fileaddr} ${partstart} ${filesize}
+@@ -526,14 +554,14 @@ On EV1 board, booting from SD card, without OP-TEE::
+   dev: RAM alt: 2 name: uramdisk.image.gz layout: RAM_ADDR
+   dev: eMMC alt: 3 name: mmc0_fsbl1 layout: RAW_ADDR
+   dev: eMMC alt: 4 name: mmc0_fsbl2 layout: RAW_ADDR
+-  dev: eMMC alt: 5 name: mmc0_ssbl layout: RAW_ADDR
++  dev: eMMC alt: 5 name: mmc0_fip layout: RAW_ADDR
+   dev: eMMC alt: 6 name: mmc0_bootfs layout: RAW_ADDR
+   dev: eMMC alt: 7 name: mmc0_vendorfs layout: RAW_ADDR
+   dev: eMMC alt: 8 name: mmc0_rootfs layout: RAW_ADDR
+   dev: eMMC alt: 9 name: mmc0_userfs layout: RAW_ADDR
+   dev: eMMC alt: 10 name: mmc1_boot1 layout: RAW_ADDR
+   dev: eMMC alt: 11 name: mmc1_boot2 layout: RAW_ADDR
+-  dev: eMMC alt: 12 name: mmc1_ssbl layout: RAW_ADDR
++  dev: eMMC alt: 12 name: mmc1_fip layout: RAW_ADDR
+   dev: eMMC alt: 13 name: mmc1_bootfs layout: RAW_ADDR
+   dev: eMMC alt: 14 name: mmc1_vendorfs layout: RAW_ADDR
+   dev: eMMC alt: 15 name: mmc1_rootfs layout: RAW_ADDR
+@@ -554,14 +582,14 @@ All the supported device are exported for dfu-util tool::
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=15, name="mmc1_rootfs", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=14, name="mmc1_vendorfs", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=13, name="mmc1_bootfs", serial="002700333338511934383330"
+-  Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=12, name="mmc1_ssbl", serial="002700333338511934383330"
++  Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=12, name="mmc1_fip", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=11, name="mmc1_boot2", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=10, name="mmc1_boot1", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=9, name="mmc0_userfs", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=8, name="mmc0_rootfs", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=7, name="mmc0_vendorfs", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=6, name="mmc0_bootfs", serial="002700333338511934383330"
+-  Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=5, name="mmc0_ssbl", serial="002700333338511934383330"
++  Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=5, name="mmc0_fip", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=4, name="mmc0_fsbl2", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=3, name="mmc0_fsbl1", serial="002700333338511934383330"
+   Found DFU: [0483:df11] ver=9999, devnum=99, cfg=1, intf=0, alt=2, name="uramdisk.image.gz", serial="002700333338511934383330"
+@@ -572,9 +600,9 @@ You can update the boot device:
+ 
+ - SD card (mmc0) ::
+ 
+-  $> dfu-util -d 0483:5720 -a 3 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 4 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 5 -D u-boot-stm32mp157c-ev1-trusted.img
++  $> dfu-util -d 0483:5720 -a 3 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 4 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 5 -D fip-stm32mp157c-ev1.bin
+   $> dfu-util -d 0483:5720 -a 6 -D st-image-bootfs-openstlinux-weston-stm32mp1.ext4
+   $> dfu-util -d 0483:5720 -a 7 -D st-image-vendorfs-openstlinux-weston-stm32mp1.ext4
+   $> dfu-util -d 0483:5720 -a 8 -D st-image-weston-openstlinux-weston-stm32mp1.ext4
+@@ -582,9 +610,9 @@ You can update the boot device:
+ 
+ - EMMC (mmc1)::
+ 
+-  $> dfu-util -d 0483:5720 -a 10 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 11 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 12 -D u-boot-stm32mp157c-ev1-trusted.img
++  $> dfu-util -d 0483:5720 -a 10 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 11 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 12 -D fip-stm32mp157c-ev1.bin
+   $> dfu-util -d 0483:5720 -a 13 -D st-image-bootfs-openstlinux-weston-stm32mp1.ext4
+   $> dfu-util -d 0483:5720 -a 14 -D st-image-vendorfs-openstlinux-weston-stm32mp1.ext4
+   $> dfu-util -d 0483:5720 -a 15 -D st-image-weston-openstlinux-weston-stm32mp1.ext4
+@@ -601,14 +629,14 @@ only the MTD partition on the boot devices are available, for example:
+ 
+ - NOR (nor0 = alt 20) & NAND (nand0 = alt 26) ::
+ 
+-  $> dfu-util -d 0483:5720 -a 21 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 22 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 23 -D u-boot-stm32mp157c-ev1-trusted.img
++  $> dfu-util -d 0483:5720 -a 21 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 22 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 23 -D fip-stm32mp157c-ev1.bin
+   $> dfu-util -d 0483:5720 -a 27 -D st-image-weston-openstlinux-weston-stm32mp1_nand_4_256_multivolume.ubi
+ 
+ - NAND (nand0 = alt 21)::
+ 
+-  $> dfu-util -d 0483:5720 -a 22 -D tf-a-stm32mp157c-ev1-trusted.stm32
+-  $> dfu-util -d 0483:5720 -a 23 -D u-boot-stm32mp157c-ev1-trusted.img
+-  $> dfu-util -d 0483:5720 -a 24 -D u-boot-stm32mp157c-ev1-trusted.img
++  $> dfu-util -d 0483:5720 -a 22 -D tf-a-stm32mp157c-ev1.stm32
++  $> dfu-util -d 0483:5720 -a 23 -D fip-stm32mp157c-ev1.bin
++  $> dfu-util -d 0483:5720 -a 24 -D fip-stm32mp157c-ev1.bin
+   $> dfu-util -d 0483:5720 -a 25 -D st-image-weston-openstlinux-weston-stm32mp1_nand_4_256_multivolume.ubi
 -- 
 2.25.1
 

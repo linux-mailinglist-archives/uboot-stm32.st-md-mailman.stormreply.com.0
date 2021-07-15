@@ -2,63 +2,44 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 555883CA164
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jul 2021 17:22:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 522563CA39E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jul 2021 19:11:24 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65813C59783;
-	Thu, 15 Jul 2021 15:22:22 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08A10C58D7F;
+	Thu, 15 Jul 2021 17:11:24 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+ [85.220.165.71])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D18F6C597AA
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE23DC56630
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Jul 2021 15:22:18 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16FFCC53003197; Thu, 15 Jul 2021 17:22:14 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=QgiKmex17IJG392T0OW8Y2WBG7cGqQ2z6iUwgmSwzo0=;
- b=Z1NIvLNXNgCkU24bE1tVnrT+DYvuQP/5Oo9pNvbFLuy9+q9xK4e3DT6mCxelmioDIFgq
- 0osfI8NrYt0kHZGOPxLDCfe/DnT+X/po12N+qrvFGbiQeQBGVNlB9ZhX7YHnupC4qA8H
- rGqWmOs/fXrcE1AFhrGtFzzLBw6SWsnkTUNzAI+aKPnXFgfZDcYJ+lpy3ACh8W2OnN6X
- os3GNQjJ+thiq3APhM/O1n9b8PxdpFN3J30a8jP/jr8WZe5/bGzm3RJhjmP6BkoHyTVh
- 2eNI1Bj91qL3J7MU7P1sxrLm0oL5f7aIZ6clObjIoRd9Ju4ydJXrSzKmWH+K1DgI2l2L NQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39tfwaayr8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Jul 2021 17:22:14 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B3E9610002A;
- Thu, 15 Jul 2021 17:22:13 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A750F2309FF;
- Thu, 15 Jul 2021 17:22:13 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 15 Jul 2021 17:22:13
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 15 Jul 2021 17:22:07 +0200
-Message-ID: <20210715172115.v2.5.I1aeda5b6cc2115de802f79656884387d7a7ca94c@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210715152207.46118-1-patrick.delaunay@foss.st.com>
+ Thu, 15 Jul 2021 17:11:21 +0000 (UTC)
+Received: from gallifrey.ext.pengutronix.de
+ ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[IPv6:::1])
+ by metis.ext.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1m44tM-00021C-V3; Thu, 15 Jul 2021 19:11:21 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
 References: <20210715152207.46118-1-patrick.delaunay@foss.st.com>
+ <20210715172115.v2.2.Ib0b251fb6120b1654e40dba8cb37ac128648318e@changeid>
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+Message-ID: <8e4ca876-a0e2-f1fc-7398-524bcb8474f7@pengutronix.de>
+Date: Thu, 15 Jul 2021 19:11:18 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-07-15_10:2021-07-14,
- 2021-07-15 signatures=0
-Cc: Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 5/5] stm32mp1: stm32prog: remove
-	stm32prog_get_tee_partitions with FIP
+In-Reply-To: <20210715172115.v2.2.Ib0b251fb6120b1654e40dba8cb37ac128648318e@changeid>
+Content-Language: en-US
+X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: uboot-stm32@st-md-mailman.stormreply.com
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/5] arm: stm32mp: handle the OP-TEE
+ nodes in DT with FIP support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,103 +56,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The MTD tee partitions used to save the OP-TEE binary are needed when
-TF-A doesn't use the FIP container to load binaries.
+Hello Patrick,
 
-This patch puts under CONFIG_STM32MP15x_STM32IMAGE flag the associated
-code in U-Boot binary and prepare the code cleanup when
-CONFIG_STM32MP15x_STM32IMAGE support will be removed after TF-A migration
-to FIP support.
+On 15.07.21 17:22, Patrick Delaunay wrote:
+> With FIP support in TF-A (when CONFIG_STM32MP15x_STM32IMAGE
+> is not activated), the DT nodes needed by OP-TEE are added by OP-TEE
+> firmware in U-Boot device tree, present in FIP.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+What about the SCMI nodes. Who will fix up those?
 
-(no changes since v1)
+> These nodes are only required in trusted boot, when TF-A load the file
+> u-boot.stm32, including the U-Boot device tree with STM32IMAGE header,
+> in this case OP-TEE can't update the U-Boot device tree.
 
- arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c | 2 ++
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c     | 4 ++++
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h     | 2 ++
- arch/arm/mach-stm32mp/include/mach/stm32prog.h      | 2 ++
- 4 files changed, 10 insertions(+)
+[snip]
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index 064f51b2c7..1bccad4e6d 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -185,6 +185,7 @@ U_BOOT_CMD(stm32prog, 5, 0, do_stm32prog,
- 	   "  <size> = size of flashlayout (optional for image with STM32 header)\n"
- );
- 
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- bool stm32prog_get_tee_partitions(void)
- {
- 	if (stm32prog_data)
-@@ -192,6 +193,7 @@ bool stm32prog_get_tee_partitions(void)
- 
- 	return false;
- }
-+#endif
- 
- bool stm32prog_get_fsbl_nor(void)
- {
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 96ebc6d978..0971ee79af 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -824,7 +824,9 @@ static int treat_partition_list(struct stm32prog_data *data)
- 		INIT_LIST_HEAD(&data->dev[j].part_list);
- 	}
- 
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	data->tee_detected = false;
-+#endif
- 	data->fsbl_nor_detected = false;
- 	for (i = 0; i < data->part_nb; i++) {
- 		part = &data->part_array[i];
-@@ -878,10 +880,12 @@ static int treat_partition_list(struct stm32prog_data *data)
- 			/* fallthrough */
- 		case STM32PROG_NAND:
- 		case STM32PROG_SPI_NAND:
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 			if (!data->tee_detected &&
- 			    !strncmp(part->name, "tee", 3))
- 				data->tee_detected = true;
- 			break;
-+#endif
- 		default:
- 			break;
- 		}
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index 9d58cf0e2d..240c5c44bc 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -122,7 +122,9 @@ struct stm32prog_data {
- 	struct stm32prog_dev_t	dev[STM32PROG_MAX_DEV];	/* array of device */
- 	int			part_nb;	/* nb of partition */
- 	struct stm32prog_part_t	*part_array;	/* array of partition */
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- 	bool			tee_detected;
-+#endif
- 	bool			fsbl_nor_detected;
- 
- 	/* command internal information */
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32prog.h b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-index c080b9cc42..99be4e1d65 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
-@@ -11,6 +11,8 @@ int stm32prog_read_medium_virt(struct dfu_entity *dfu, u64 offset,
- 			       void *buf, long *len);
- int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size);
- 
-+#ifdef CONFIG_STM32MP15x_STM32IMAGE
- bool stm32prog_get_tee_partitions(void);
-+#endif
- 
- bool stm32prog_get_fsbl_nor(void);
+Cheers,
+Ahmad
+
+
 -- 
-2.25.1
-
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

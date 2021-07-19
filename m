@@ -2,64 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC9FE3CC80F
-	for <lists+uboot-stm32@lfdr.de>; Sun, 18 Jul 2021 09:29:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90D753CD08A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 19 Jul 2021 11:22:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 77AA2C597B0;
-	Sun, 18 Jul 2021 07:29:57 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 548EFC597AB;
+	Mon, 19 Jul 2021 09:22:26 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 953FACFAC5A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CEEC5C57B6B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 18 Jul 2021 07:29:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1626593393;
- bh=0wf7NKpAlsIhYeHWT891FE/FuI0Z4lJoM4DhqcHGVk8=;
- h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
- b=hOssm9DTUpq63JK/oadwf5NvFZ2c1DsaPBHzNS61UvIKvGsvK9s9ryLI+3zu9v0zz
- u6+k2EGN34L3FJuGAYo0Cv/dS4gGCFuzEnprfIA2iFjVgUCGyLyz8Y+XSnXDJyugMI
- FEZ0MAK84BezPB/SIq05DTAvDDyW4WNwho8NglvY=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.0.189] ([88.152.144.157]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N0FxV-1l9skZ487b-00xNVf; Sun, 18
- Jul 2021 09:29:53 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-References: <20210709124630.1.I212e7cd96724368b8272300c59c2a1c1f227ed67@changeid>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <212af40f-1ae4-007b-d577-9e6cd6e59bef@gmx.de>
-Date: Sun, 18 Jul 2021 09:29:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ Mon, 19 Jul 2021 09:22:23 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 16J9Cc0j005652; Mon, 19 Jul 2021 11:22:07 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=xA5/oy1czFAqv4Vi6yKPW7xU/NpahqNtTXawl2ZdocE=;
+ b=W3zlodaZFsh8Q0Rq8IBlNaOqQoOkqm/zY2Z4C4M1HHJRWzvh5QOfD12+UjYoTjbz1YJm
+ /fk1UUfewBvc0tkM5yqBT1b7vkFczYeOAck/bQ/eShzkxAMGNinj2T4FaVxNEPtpRTPd
+ MZd15WvCO7xXKP5toBS7/rdlc4vasFU4x7kG1YiiowUp0atkDgDlGQ3KmETscOVgM3CT
+ PWzk2WshaIc5fvCN7R1utiRt6tD5GE7xiXtDtsZELFyVUbCJ1UmuS+ZXy6KK3a58OzlW
+ 36YSj80HFFWsGWGi1LpUi8pVPNeqbaAh6cLKNY9kq6ThPmdyH2DzNRBim9IzWuGnyVCh hg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 39w4kggum3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 Jul 2021 11:22:07 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7C66810002A;
+ Mon, 19 Jul 2021 11:22:04 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 427A32194FC;
+ Mon, 19 Jul 2021 11:22:04 +0200 (CEST)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 19 Jul 2021 11:22:03
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 19 Jul 2021 11:21:49 +0200
+Message-ID: <20210719092151.1346480-1-patrick.delaunay@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210709124630.1.I212e7cd96724368b8272300c59c2a1c1f227ed67@changeid>
-Content-Language: en-US
-X-Provags-ID: V03:K1:YZt/VhFfqllGnq3OjcVTreR4NpYNhOf+DZh/5Ej8l7Npv9V/NEI
- VY7RcgL9Y1+banKNQF4Ec8/1bzOHp2t6gc6+Xv2Ijf2v9109iaaNU3/jZRGIGmAjuTfQSWe
- Qs7RAiEtWfP5gx/T/w4OuSmEALyDXt0/FsDaJ0xim9/TwqsN7n/9vyJvbLKEGr4h/j7JJfk
- /1ziNCR+uls5q8UuOeiag==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:7sbJS8qv8nw=:lNKEkSHHpBrfGUu9+Sld8a
- zwDC1xxS4DaeSX6QqGZTv+Lb4ymmO1OtTHlXOUJI+yjFHFXs4j6jbPnXF4AXKQSVAvNkRp9x5
- aToi1BAFC66UL//yc6Txho6C6c4Vl7O0REJCZ0mhugZd1nOY5AkD1y0bC3NpAtGk4zQFfhleg
- hu7bNbaANXI0orY8kQ7uKrLJqtv+0rOB5EmEXxdLlS9J5w+nUrBp6sk7sGPucxeTN5hcXlVXv
- zkGOgEm7I/KKgFqJNvEKxAl4q/DaEmbU4D5+Cn/H6jVOZEXdheD5lXpq+vqvJpQvyQz6xmAtu
- UaMPKWmiP2hxYTaVYG6nK81VtYfXXLim3NZjsJkdC1gxTfHAtPIyvvQ2bkvPt+/gzqejOC1Bu
- qhitnv4kpbeHcIwX8IelZXGfxUgVPBXRG/En1UkFw0w5saub2KRJr9lkiHLl8UnWn+hkCYW4M
- 5XQ6GiwkAf1h1kVSwS6vqXN9qlSvhVk4KyRIhyshP0KEVmkwrOAcWMZoRZSO2pXfs0Wbi6lEp
- OQLQcXO2TntS1OLAt4lCvixL8SBfhM/E9o4MpHwkG+cFK1+d9DahMnb7/w6FtOxay9NArFVfK
- TaQNj9OFMb393OjupHxRaquFE1xetd4EKpq18pumXDMcSQS7mzXDn4UXbxzAH+srFjKzzf1ZR
- PSiO6cP3EcLauV5AQpEf4RViw63Db6cJhSQOJGK1YEblfYxLTdBnCb4aD49/0O2u+1DtkTlX+
- miOcBbbBt5oYQZV+SgtvakCf6RJ5fcOelMUDw+TzXUGLC4WXv09rz4mgcmF+oUBVgsbpSAMxH
- Gz72uGaeTCxSpJLtco2cmJmjQJKmR8gtK3O68VY7MIF3NPJLnKwN55u6OOhdgFUbu0ACY+FeB
- pJk3X32po3fYHd3odLxZWwk3zftelLiomupamiIT7UdCYv637V474b3hjWeEhKxoyew+h1KYx
- N1aDVmLYX4N96tnEVRznp+fLTcRkCUP1EC2mvGxfFaxtmYbaig8Q4j/qe191fZENSh4mNngFi
- uKS5mI898EHx6VdQ0TKjfcn1dUCNa+eO3sxg9BYxW/AlpY1diMTm8QmKQF7dMz/BkPSrVRCKd
- dTabjGz089Hd4sEcjcgUj8PmW/wYhbuHpHd
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Alexander Graf <agraf@csgraf.de>
-Subject: Re: [Uboot-stm32] [PATCH] efi_loader: replace
- board_get_usable_ram_top by gd->ram_top
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
+ definitions=2021-07-19_02:2021-07-16,
+ 2021-07-19 signatures=0
+Cc: Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Fabien Parent <fparent@baylibre.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Suneel Garapati <sgarapati@marvell.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Harald Seiler <hws@denx.de>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Subject: [Uboot-stm32] [PATCH v2 0/2] arm64: Update memcpy_{from,
+	to}io() helpers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,82 +78,42 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
+V2 of previous serie [1] sent by Patrice.
 
-On 7/9/21 12:46 PM, Patrick Delaunay wrote:
-> As gd->ram_top = board_get_usable_ram_top() in board_r
-> the EFI loader don't need to call this function again and after relocation.
->
-> This patch avoid issue if board assumed that this function is called
-> only one time and before relocation.
+The compilation issues raised by Tom are solved [2].
 
-Hello Patrick,
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=231203&state=*
 
-Which implementation of board_get_usable_ram_top() assumes that it is
-called only once before relocation? Please, mention this in the commit
-message.
+[2] https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/8310
 
-gd->ram_top is set in multiple places:
 
-arch/arm/mach-rockchip/spl.c:149:       gd->ram_top = gd->ram_base +
-get_effective_memsize();
-arch/arm/mach-rockchip/spl.c:150:       gd->ram_top =
-board_get_usable_ram_top(gd->ram_size);
-arch/arm/cpu/armv8/fsl-layerscape/spl.c:114:    gd->ram_top =
-gd->bd->bi_dram[0].start + gd->bd->bi_dram[0].size;
+Changes in v2:
+- NEW: solve conflicts when cpu_func.h is included
 
-I guess you refer to:
+Patrice Chotard (1):
+  arm64: Update memcpy_{from, to}io() helpers
 
-common/board_f.c:345:   gd->ram_top = gd->ram_base +
-get_effective_memsize();
-common/board_f.c:346:   gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+Patrick Delaunay (1):
+  arm: use the correct prototype for reset_cpu function
 
-I would not expect board_get_usable_ram_top(gd->mon_len) and
-board_get_usable_ram_top(0) to be the same. So, please, describe in your
-patch why you assume that board_get_usable_ram_top(gd->mon_len) is the
-value we should use.
+ arch/arm/cpu/armv8/cache_v8.c           | 10 ++++++++++
+ arch/arm/include/asm/io.h               | 25 +++++++++++++++----------
+ arch/arm/mach-mediatek/mt8183/init.c    |  2 +-
+ board/congatec/cgtqmx8/cgtqmx8.c        |  2 +-
+ board/hoperun/hihope-rzg2/hihope-rzg2.c |  2 +-
+ board/silinux/ek874/ek874.c             |  2 +-
+ include/cpu_func.h                      |  1 +
+ 7 files changed, 30 insertions(+), 14 deletions(-)
 
-Best regards
+-- 
+2.25.1
 
-Heinrich
-
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
-> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/7399
->
->
->   lib/efi_loader/efi_memory.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index be2f655dff..f5bc37a20a 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -7,7 +7,6 @@
->
->   #include <common.h>
->   #include <efi_loader.h>
-> -#include <init.h>
->   #include <malloc.h>
->   #include <mapmem.h>
->   #include <watchdog.h>
-> @@ -731,7 +730,7 @@ efi_status_t efi_add_conventional_memory_map(u64 ram_start, u64 ram_end,
->
->   __weak void efi_add_known_memory(void)
->   {
-> -	u64 ram_top = board_get_usable_ram_top(0) & ~EFI_PAGE_MASK;
-> +	u64 ram_top = gd->ram_top & ~EFI_PAGE_MASK;
->   	int i;
->
->   	/*
->
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

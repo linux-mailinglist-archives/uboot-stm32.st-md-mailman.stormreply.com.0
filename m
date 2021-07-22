@@ -2,61 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 870483D2C61
-	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 21:07:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 96A933D2C62
+	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 21:07:29 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4F2C3C5A4CD;
-	Thu, 22 Jul 2021 19:07:06 +0000 (UTC)
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com
- [209.85.167.180])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F98EC5A4CD;
+	Thu, 22 Jul 2021 19:07:29 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
+ [209.85.167.181])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1A6C7C57189
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22930C57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 19:07:05 +0000 (UTC)
-Received: by mail-oi1-f180.google.com with SMTP id p67so7726179oig.2
+ Thu, 22 Jul 2021 19:07:28 +0000 (UTC)
+Received: by mail-oi1-f181.google.com with SMTP id a132so7701357oib.6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 12:07:05 -0700 (PDT)
+ Thu, 22 Jul 2021 12:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=RY53BrB7EYz3Q2vnUd+/6g52NBY4/yVAdKYy7w83I/I=;
- b=LHqEwake8yXizw/0zHyPRRoheZMx8+S34wyqosxBtflk6O6nrTnp+WOzh028J9lMvi
- PQ7ouxUbEjqp2nRSSpDVnC5DCvUT639s8Ucm89KD3dzyRnE4jNI7go/rTv+y+bS09W5F
- 3uhx8QLhfVjN106ip0nBv+TCPkDzgrdRs1PXk+zQM2nEXZOmecBoDpV1ZWHbBWodmQob
- z1R/WzEs2Fwq+HoLUwl4Eoczx6LVSnT6sBLvHsCnVJMLgGXRc1is4MaJdCmhFYgH/jHZ
- 9BnQTWctzw2ickiE/kLM4r4uPwyrrq9KGrnEN1U/VuxtzqcnoLlbHPMD7GAWv4349fG7
- oeJQ==
+ :cc; bh=Qep0Rxw3XRWcDo1gr0aiaoFVNPcEL6J4paVrppcGm5I=;
+ b=dpeQ1DepfzRjEY2zLb82TM9ZfPoyabBcP5MpbgVU7r0J4yas6Y172eAlsRAj4nU7nW
+ tp6DcWCyHKgNgx6+G6Sw57s6pJ7vJdnnidmAhuwbr4DvG+FLh6JInBiy/CTHHfwJj3xw
+ 8/4JnBe7I2YV5TYFCNN0s2PeHQOqzikYmQ91HIdjAccLx74pzwWh8Ln2HTd6/MDBfuaW
+ aobUTwBTrVPI6WtPPMIlV9KKkI+X+yRMDnJVPwAOVbUszWsglMNmpNB0GAJkE0rW6Px/
+ 1DmDVFZvHT+C/KMvPnhjB9l4NO26jlmHtNzzQDHS1mzPZFNWNC6jD7ZbRCKV/UPFGoMX
+ 2xuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=RY53BrB7EYz3Q2vnUd+/6g52NBY4/yVAdKYy7w83I/I=;
- b=OUa64Domjqz4YTGjB1v7D+o92BxH8CI5vYw6tlzJ8OqEA9ww48jfX6if8QLNBDDEJ2
- yPw2ltFENk32y2r0o2wewMMrdkbvTBym68Diix26XyE9GXLYi4Flqb8obJGhB0hn2CQW
- MmR0JH3egg8/FBNQiW0X84rE0geYBnyfcB2jP7Udd688SjXV16cSUs6tHRKFbuD6pp0v
- LUZCYnIYiCwUydZ6Yjj9pM3J4yPVWPrIf27Y0zMNzxmOAv1tWSl/6l1fEU4ZNg65JhMN
- rMyi1CJZmxnMPlSu46twYxP5h2hr+ej+DoUJhXOJXoAPkJ/qtUs1Gr6/92baCd/ZlKm4
- /Pjg==
-X-Gm-Message-State: AOAM530Kd4VakxW2h0daesciGhoF3uRY5E9bZuMjn/Wl0guOK42Azn3T
- xAfNcGHtALwJMGWmcPYFCLCEOA8P+brrt5SJ3C8=
-X-Google-Smtp-Source: ABdhPJwqOY00lHhaHUB+dtpXwC6xONn9oaopiUp1ikhZZZaRcoRU9azDAtaobKHb4dZ3DkKLesA3tEQE1T1NWrJuh+Q=
-X-Received: by 2002:a05:6808:f8a:: with SMTP id
- o10mr6728528oiw.22.1626980823912; 
- Thu, 22 Jul 2021 12:07:03 -0700 (PDT)
+ bh=Qep0Rxw3XRWcDo1gr0aiaoFVNPcEL6J4paVrppcGm5I=;
+ b=Naifc/9FHrLQlUt68qq4z6hiSnK7nee/F9oY+/ReErD58D1e2VoQ4Ghs/O3XvCPggJ
+ wl+RIfMwnTAvKv28Z9EJo9/Qk9AaF5Oxh+l4wJpJBaM+ebY3L4CXK1ntOBDbZoBSFi8/
+ TXzIyoESSDEzPlTJAwEr4BxKUh2i8R7zZo1mmrX/RdzTjcHGqKUTBpP/o85mNoUCDyj0
+ Gtq9dlxexkAAD7hOnrx8Ah6vpt/CSMWvJ1mjtiG1CtdrI+SW9WChmVZSW+dS+TMfvbXe
+ KtuwVgNBxd7u+PO8ccr8kMi6AJOJP+4NRhN8lRuWGvZ9yDqoVWb65hOGU33igYUEcNDM
+ kgzA==
+X-Gm-Message-State: AOAM533JkLUZmnOE5ve/EcR809cA7On7E1gPfheJIB+qG8KmoqSTLPTN
+ 6O1dL7EaLlBxd8f7NrjG8H/3RSmxaScobheHmI0=
+X-Google-Smtp-Source: ABdhPJyHi8sX8atq/hw6Vfh+1zJwUFP4bURYLK9Q3J8rljZ62gVay2QYu2iM3Jrp9uuED0lznuzOPtAgJYlT9ilwGak=
+X-Received: by 2002:aca:b903:: with SMTP id j3mr5391890oif.179.1626980847002; 
+ Thu, 22 Jul 2021 12:07:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210720180957.2948197-1-patrick.delaunay@foss.st.com>
- <20210720200940.v3.2.I523f439458f0ff2d770a2b8e8a7c8e0969e783dd@changeid>
-In-Reply-To: <20210720200940.v3.2.I523f439458f0ff2d770a2b8e8a7c8e0969e783dd@changeid>
+ <20210720200940.v3.3.Ia198585f58eba36cd65105e2043f61d54e63ceb3@changeid>
+In-Reply-To: <20210720200940.v3.3.Ia198585f58eba36cd65105e2043f61d54e63ceb3@changeid>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 22 Jul 2021 22:06:52 +0300
-Message-ID: <CAGi-RULE667QmMyBLVy1=fsma_9XaKrp-rxXcvQmRQRER_nEtQ@mail.gmail.com>
+Date: Thu, 22 Jul 2021 22:07:15 +0300
+Message-ID: <CAGi-RUJjTf_tk+2uRS0bXdKsL4zET8CzK9v-2yyPSRTOOFZX=Q@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Christophe Roullier <christophe.roullier@foss.st.com>,
  Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 2/6] net: eth-phy: use dev_dbg and
-	log_notice
+Subject: Re: [Uboot-stm32] [PATCH v3 3/6] net: eth-phy: manage subnode mdio0
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,11 +74,8 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 On Tue, Jul 20, 2021 at 9:10 PM Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Replace debug trace and printf to log macros:
-> - debug() replaced by dev_dbg() when device is available, this macro
-> indicate the device name since commit ceb70bb870ac ("dm: Print device
-> name in dev_xxx like Linux")
-> - printf() replaced by log_notice() to allow  dispatch to log backends.
+> Bind any subnode with name beginning by mdio, mdio0 for example,
+> and not only the "mdio" as namei of subnode.
 >
 > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -89,84 +84,36 @@ On Tue, Jul 20, 2021 at 9:10 PM Patrick Delaunay
 > (no changes since v2)
 >
 > Changes in v2:
-> - use log macro in eth-phy driver (NEW)
+> - update eth-phy driver to support STM32 binding with a mdio0 subnode (NEW)
 >
->  drivers/net/eth-phy-uclass.c | 20 +++++++++++---------
->  1 file changed, 11 insertions(+), 9 deletions(-)
+>  drivers/net/eth-phy-uclass.c | 10 ++++++++--
+>  1 file changed, 8 insertions(+), 2 deletions(-)
 >
 > diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
-> index 7abed14392..aa5b05abc8 100644
+> index aa5b05abc8..293579dc34 100644
 > --- a/drivers/net/eth-phy-uclass.c
 > +++ b/drivers/net/eth-phy-uclass.c
-> @@ -5,8 +5,10 @@
+> @@ -27,12 +27,18 @@ int eth_phy_binds_nodes(struct udevice *eth_dev)
+>         const char *node_name;
+>         int ret;
 >
->  #include <common.h>
->  #include <dm.h>
-> +#include <log.h>
->  #include <net.h>
->  #include <asm-generic/gpio.h>
-> +#include <dm/device_compat.h>
->  #include <dm/device-internal.h>
->  #include <dm/uclass-internal.h>
->  #include <dm/lists.h>
-> @@ -27,25 +29,25 @@ int eth_phy_binds_nodes(struct udevice *eth_dev)
->
->         mdio_node = dev_read_subnode(eth_dev, "mdio");
+> -       mdio_node = dev_read_subnode(eth_dev, "mdio");
+> +       /* search a subnode named "mdio.*" */
+> +       dev_for_each_subnode(mdio_node, eth_dev) {
+> +               node_name = ofnode_get_name(mdio_node);
+> +               if (!strncmp(node_name, "mdio", 4))
+> +                       break;
+> +       }
 >         if (!ofnode_valid(mdio_node)) {
-> -               debug("%s: %s mdio subnode not found!", __func__,
-> -                     eth_dev->name);
-> +               dev_dbg(eth_dev, "%s: %s mdio subnode not found!", __func__,
-> +                       eth_dev->name);
+> -               dev_dbg(eth_dev, "%s: %s mdio subnode not found!", __func__,
+> +               dev_dbg(eth_dev, "%s: %s mdio subnode not found!\n", __func__,
+>                         eth_dev->name);
 >                 return -ENXIO;
 >         }
+> +       dev_dbg(eth_dev, "%s: %s subnode found!\n", __func__, node_name);
 >
 >         ofnode_for_each_subnode(phy_node, mdio_node) {
 >                 node_name = ofnode_get_name(phy_node);
->
-> -               debug("* Found child node: '%s'\n", node_name);
-> +               dev_dbg(eth_dev, "* Found child node: '%s'\n", node_name);
->
->                 ret = device_bind_driver_to_node(eth_dev,
->                                                  "eth_phy_generic_drv",
->                                                  node_name, phy_node, NULL);
->                 if (ret) {
-> -                       debug("  - Eth phy binding error: %d\n", ret);
-> +                       dev_dbg(eth_dev, "  - Eth phy binding error: %d\n", ret);
->                         continue;
->                 }
->
-> -               debug("  - bound phy device: '%s'\n", node_name);
-> +               dev_dbg(eth_dev, "  - bound phy device: '%s'\n", node_name);
->         }
->
->         return 0;
-> @@ -86,14 +88,14 @@ struct mii_dev *eth_phy_get_mdio_bus(struct udevice *eth_dev)
->                          */
->                         uc_priv = (struct eth_phy_device_priv *)(dev_get_uclass_priv(phy_dev));
->                         if (uc_priv->mdio_bus)
-> -                               printf("Get shared mii bus on %s\n", eth_dev->name);
-> +                               log_notice("Get shared mii bus on %s\n", eth_dev->name);
->                         else
-> -                               printf("Can't get shared mii bus on %s\n", eth_dev->name);
-> +                               log_notice("Can't get shared mii bus on %s\n", eth_dev->name);
->
->                         return uc_priv->mdio_bus;
->                 }
->         } else {
-> -               printf("FEC: can't find phy-handle\n");
-> +               log_notice("FEC: can't find phy-handle\n");
->         }
->
->         return NULL;
-> @@ -106,7 +108,7 @@ int eth_phy_get_addr(struct udevice *dev)
->
->         if (dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
->                                        &phandle_args)) {
-> -               debug("Failed to find phy-handle");
-> +               dev_dbg(dev, "Failed to find phy-handle");
->                 return -ENODEV;
->         }
->
 > --
 > 2.25.1
 >

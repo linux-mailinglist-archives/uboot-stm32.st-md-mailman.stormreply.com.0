@@ -2,59 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96A933D2C62
-	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 21:07:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB7343D2C63
+	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 21:07:37 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F98EC5A4CD;
-	Thu, 22 Jul 2021 19:07:29 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
- [209.85.167.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A4BF0C5A4CE;
+	Thu, 22 Jul 2021 19:07:37 +0000 (UTC)
+Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com
+ [209.85.167.170])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22930C57189
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ECF7EC5A4CD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 19:07:28 +0000 (UTC)
-Received: by mail-oi1-f181.google.com with SMTP id a132so7701357oib.6
+ Thu, 22 Jul 2021 19:07:34 +0000 (UTC)
+Received: by mail-oi1-f170.google.com with SMTP id w188so7673136oif.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 12:07:28 -0700 (PDT)
+ Thu, 22 Jul 2021 12:07:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=Qep0Rxw3XRWcDo1gr0aiaoFVNPcEL6J4paVrppcGm5I=;
- b=dpeQ1DepfzRjEY2zLb82TM9ZfPoyabBcP5MpbgVU7r0J4yas6Y172eAlsRAj4nU7nW
- tp6DcWCyHKgNgx6+G6Sw57s6pJ7vJdnnidmAhuwbr4DvG+FLh6JInBiy/CTHHfwJj3xw
- 8/4JnBe7I2YV5TYFCNN0s2PeHQOqzikYmQ91HIdjAccLx74pzwWh8Ln2HTd6/MDBfuaW
- aobUTwBTrVPI6WtPPMIlV9KKkI+X+yRMDnJVPwAOVbUszWsglMNmpNB0GAJkE0rW6Px/
- 1DmDVFZvHT+C/KMvPnhjB9l4NO26jlmHtNzzQDHS1mzPZFNWNC6jD7ZbRCKV/UPFGoMX
- 2xuw==
+ :cc; bh=/HUxHlG+WHU9Ihj6ZybtZ2vLWJJlfHEt14vAlYdjqsk=;
+ b=b+QFho4cSUaWzlLI0NdgPC2oU4l7r3EAtGRF69d029rT4b2V7wpDAFo+C5GQXVQCBN
+ AjwTGXgclVvhpBcHeP/sCOH2fQBM+5TUsNgyYpsD2lrbFFe/F8omps35j5ajAg6O8VpK
+ z//4Z1JZgdh/JYfwNx0ha2fLhCxxu+aUju6ypzmoUulIj4PcOeQNbeQIVvU7ew1syJoO
+ 9+AO+oYxH9BTCavIjquIZ69rOx88D55SprIU8WvWMGRHT/itZb3kUXPfkbFQ5bhMzuVv
+ ejPVFT91KrFarwtNAtc95DFdGTJ+0NeOfoJLoe6BsKbIdw/NscCyCZZFh347LumEslTZ
+ 2KfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=Qep0Rxw3XRWcDo1gr0aiaoFVNPcEL6J4paVrppcGm5I=;
- b=Naifc/9FHrLQlUt68qq4z6hiSnK7nee/F9oY+/ReErD58D1e2VoQ4Ghs/O3XvCPggJ
- wl+RIfMwnTAvKv28Z9EJo9/Qk9AaF5Oxh+l4wJpJBaM+ebY3L4CXK1ntOBDbZoBSFi8/
- TXzIyoESSDEzPlTJAwEr4BxKUh2i8R7zZo1mmrX/RdzTjcHGqKUTBpP/o85mNoUCDyj0
- Gtq9dlxexkAAD7hOnrx8Ah6vpt/CSMWvJ1mjtiG1CtdrI+SW9WChmVZSW+dS+TMfvbXe
- KtuwVgNBxd7u+PO8ccr8kMi6AJOJP+4NRhN8lRuWGvZ9yDqoVWb65hOGU33igYUEcNDM
- kgzA==
-X-Gm-Message-State: AOAM533JkLUZmnOE5ve/EcR809cA7On7E1gPfheJIB+qG8KmoqSTLPTN
- 6O1dL7EaLlBxd8f7NrjG8H/3RSmxaScobheHmI0=
-X-Google-Smtp-Source: ABdhPJyHi8sX8atq/hw6Vfh+1zJwUFP4bURYLK9Q3J8rljZ62gVay2QYu2iM3Jrp9uuED0lznuzOPtAgJYlT9ilwGak=
-X-Received: by 2002:aca:b903:: with SMTP id j3mr5391890oif.179.1626980847002; 
- Thu, 22 Jul 2021 12:07:27 -0700 (PDT)
+ bh=/HUxHlG+WHU9Ihj6ZybtZ2vLWJJlfHEt14vAlYdjqsk=;
+ b=bV0COrPX7sboeDaDR89Rh7wVVUJrgELaXRTZpb0xgLt2SQ8jIxWpzQzYHC8ePLouks
+ 2GoUh41v5ZCj0zVysLLawbVYPFjBVVCCucRIZPyJuUAiWgF/Rn3CYs1DdbeYv8RAbxb1
+ pqvZ3nZLUoatBHPpTl2yITcYqHefXybeW2xo27HZIArToJJ9YS5IeOPawv3LNcjGFSiL
+ u6apFcBDXyhF30cmoZp65WVFK48wkJok3eY03DCuHLLQaHODV3yr9PmGzskGGJzOpQ4q
+ pENGl5GQfrQU7WtyDSXNmGAao1Ggh7RBtnw6i3xu6zQKCVE8yfaVYKF2DedfZkTJsKEZ
+ JESA==
+X-Gm-Message-State: AOAM5309Tk0odZthqZVTwPFsXjrJbRflfuggUraXqVIb0mRZ57Pv58Sj
+ MjH7hv4GmnN0rcKibgrhbL/3La3gxXRgqDv9pXw=
+X-Google-Smtp-Source: ABdhPJzoO8mgjD8VTzKBKPBBBgf2kTnIcUMdW0k73GH7g4Zgw0KqMVS87RUQ5An6ST/e2CviLNuESKzoWBgM4Yw8GeY=
+X-Received: by 2002:a05:6808:f04:: with SMTP id
+ m4mr6746070oiw.92.1626980853877; 
+ Thu, 22 Jul 2021 12:07:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210720180957.2948197-1-patrick.delaunay@foss.st.com>
- <20210720200940.v3.3.Ia198585f58eba36cd65105e2043f61d54e63ceb3@changeid>
-In-Reply-To: <20210720200940.v3.3.Ia198585f58eba36cd65105e2043f61d54e63ceb3@changeid>
+ <20210720200940.v3.4.I98726d4bbd3145e65b872950a884cd8424b10131@changeid>
+In-Reply-To: <20210720200940.v3.4.I98726d4bbd3145e65b872950a884cd8424b10131@changeid>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Thu, 22 Jul 2021 22:07:15 +0300
-Message-ID: <CAGi-RUJjTf_tk+2uRS0bXdKsL4zET8CzK9v-2yyPSRTOOFZX=Q@mail.gmail.com>
+Date: Thu, 22 Jul 2021 22:07:22 +0300
+Message-ID: <CAGi-RUJrsKGPWUU5a0rPE4aNoSc-tjyRmcaOnU9EgJRGYEww3g@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Christophe Roullier <christophe.roullier@foss.st.com>,
  Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 3/6] net: eth-phy: manage subnode mdio0
+Subject: Re: [Uboot-stm32] [PATCH v3 4/6] net: dwc_eth_qos: remove the field
+ phyaddr of the struct eqos_priv
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,8 +76,13 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 On Tue, Jul 20, 2021 at 9:10 PM Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Bind any subnode with name beginning by mdio, mdio0 for example,
-> and not only the "mdio" as namei of subnode.
+> Since the commit commit 6a895d039ba7 ("net: Update eQos driver and FEC
+> driver to use eth phy interfaces") the field phyaddr of driver private data
+> struct eqos_priv is no more used in eqos_start() for the phy_connect()
+> parameter.
+>
+> Now this variable is only initialized in eqos_probe_resources_stm32()
+> it can be removed.
 >
 > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -84,36 +91,41 @@ On Tue, Jul 20, 2021 at 9:10 PM Patrick Delaunay
 > (no changes since v2)
 >
 > Changes in v2:
-> - update eth-phy driver to support STM32 binding with a mdio0 subnode (NEW)
+> - remove unused element in the struct eqos_priv (NEW)
 >
->  drivers/net/eth-phy-uclass.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
+>  drivers/net/dwc_eth_qos.c | 5 -----
+>  1 file changed, 5 deletions(-)
 >
-> diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
-> index aa5b05abc8..293579dc34 100644
-> --- a/drivers/net/eth-phy-uclass.c
-> +++ b/drivers/net/eth-phy-uclass.c
-> @@ -27,12 +27,18 @@ int eth_phy_binds_nodes(struct udevice *eth_dev)
->         const char *node_name;
->         int ret;
+> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+> index f048e9d585..a57c35785f 100644
+> --- a/drivers/net/dwc_eth_qos.c
+> +++ b/drivers/net/dwc_eth_qos.c
+> @@ -307,7 +307,6 @@ struct eqos_priv {
+>         struct clk clk_slave_bus;
+>         struct mii_dev *mii;
+>         struct phy_device *phy;
+> -       int phyaddr;
+>         u32 max_speed;
+>         void *descs;
+>         int tx_desc_idx, rx_desc_idx;
+> @@ -1813,7 +1812,6 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+>         if (ret)
+>                 pr_warn("No phy clock provided %d", ret);
 >
-> -       mdio_node = dev_read_subnode(eth_dev, "mdio");
-> +       /* search a subnode named "mdio.*" */
-> +       dev_for_each_subnode(mdio_node, eth_dev) {
-> +               node_name = ofnode_get_name(mdio_node);
-> +               if (!strncmp(node_name, "mdio", 4))
-> +                       break;
-> +       }
->         if (!ofnode_valid(mdio_node)) {
-> -               dev_dbg(eth_dev, "%s: %s mdio subnode not found!", __func__,
-> +               dev_dbg(eth_dev, "%s: %s mdio subnode not found!\n", __func__,
->                         eth_dev->name);
->                 return -ENXIO;
+> -       eqos->phyaddr = -1;
+>         ret = dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
+>                                          &phandle_args);
+>         if (!ret) {
+> @@ -1826,9 +1824,6 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
+>                 if (ret)
+>                         pr_warn("gpio_request_by_name(phy reset) not provided %d",
+>                                 ret);
+> -
+> -               eqos->phyaddr = ofnode_read_u32_default(phandle_args.node,
+> -                                                       "reg", -1);
 >         }
-> +       dev_dbg(eth_dev, "%s: %s subnode found!\n", __func__, node_name);
 >
->         ofnode_for_each_subnode(phy_node, mdio_node) {
->                 node_name = ofnode_get_name(phy_node);
+>         debug("%s: OK\n", __func__);
 > --
 > 2.25.1
 >

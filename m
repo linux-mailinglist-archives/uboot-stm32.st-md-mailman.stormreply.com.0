@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8BAD3D2638
-	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 16:51:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 964863D2C5D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 21:06:54 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 78ED1C5A4CD;
-	Thu, 22 Jul 2021 14:51:50 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4398FC5A4CD;
+	Thu, 22 Jul 2021 19:06:54 +0000 (UTC)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+ [209.85.210.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ABD14C57189
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E1394C57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 14:51:48 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16MEhgvn027821; Thu, 22 Jul 2021 16:51:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-type :
- content-transfer-encoding; s=selector1;
- bh=EOr8ze4SkAHRaGTBRqUrGFzbXwyJtTZT254TqCg2oY4=;
- b=OjYYuToDqwYDbCGtaCajHIjzAWNP0a487sG+mf4xVZKj2EklmcJjnJz4QJZzJhBgrfGL
- S07pNLdnakvSk6nbW5TWygu5/x0IMTixVP/e08lwEhsIrj0hpjAg5SFZkOIHXthJbal7
- nPTmv8x9bWuChIQAyNQ02vzkD19p2R9Q7vOHU0zJzRglyxwXIoxO3mjkJ8fqDnMqxoc9
- b33TRvDbyVvn+Zi1WdyNo1Qo4BOsRfmuPllB93z5bq7+g7TgSmyuuEWZbt0hpCmrpa3j
- akpSyXxXV9+kOkQBn5m6zKZFJIRg67k/OAuNM+6SpWXLy2ZxbhIKTQPuhmyeEFagCRYx hg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 39y43wtbqk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 22 Jul 2021 16:51:44 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3DE7E10002A;
- Thu, 22 Jul 2021 16:51:44 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 330AD226FBF;
- Thu, 22 Jul 2021 16:51:44 +0200 (CEST)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 22 Jul 2021 16:51:43
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 22 Jul 2021 16:51:42 +0200
-Message-ID: <20210722165101.v2.1.I6630d4cc18870d3e830587ffbcb61898dc045cb6@changeid>
-X-Mailer: git-send-email 2.25.1
+ Thu, 22 Jul 2021 19:06:52 +0000 (UTC)
+Received: by mail-ot1-f47.google.com with SMTP id
+ f93-20020a9d03e60000b02904b1f1d7c5f4so2732176otf.9
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 22 Jul 2021 12:06:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ay+6kjZ0wXyDmwOX6f4DeXshIDAe4JS7R6GbFZfjNMo=;
+ b=V/uE6hheEw6sKASkt1zIWFMJj8fWC1C6/fs5vtPz5FsrcPNEeAJRBCRPJDo4ULqxBr
+ xNOVhI3sTOctohVXPbfvmDZjL1Wh9Fx2Z+sEp2YYBbKHKrqfa2GM/hpb6wpzzceF5L7j
+ vlPGbMBzWmlRdEV+9dmEpEu/YEnfbzvvVO/SZNugWu7ClcX33HW7RFYgN5shALOdipLY
+ BXFQmr+ZIeD02gEV6O38yXOjMciLRIjatVwAfS7BRN0NHPSWL4W3JPh8uNJ/70Y5tBVe
+ BGx3NwrN3rsild2vlxNZ3dNNru5TBb7X6B7y+fDzqUnwJSSFxCD6gyCqddFyExNiTu2H
+ OVMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ay+6kjZ0wXyDmwOX6f4DeXshIDAe4JS7R6GbFZfjNMo=;
+ b=lRN6BbTcDtMvhjpDuvsLOsZW/qYq3BLxQRNhdVmOSscYFpIoTGIR2WCxwgcWt/eskh
+ 5+q0gBtqbHvTuqwsHYpLFXrXIqDPzF6cvgpZYPRlARVCf6KIPASWeLPGTe09cBJxSdfD
+ bFT4vuP2IrcDujqGx5zmCywzxgzA98iqm8tszd6z01sWzfbVb/qeH9Smu/Kq60Yy2kiz
+ jwgeElrtCkUYBdXmjazHjMO5iqei7V/vtRkKE88xsAdI2066Dqo9D+WeRHvl/EAbY5Jd
+ AB+eC6YyZyHlBETSAWctfq/+EJqboj6eHu5GVIDi1NCnusrSCqv0ZwQUeqHN1JHPi5tb
+ txUQ==
+X-Gm-Message-State: AOAM533MQAw/FJrqDUwAUT4cK+Z6s0D4MKc9V2vDnO4dsZ5gt2Eq4SqF
+ huRDrf2BincmM36FEg7U0105jxetpL7lvUDoirQ=
+X-Google-Smtp-Source: ABdhPJyhoJIXVj+TCsjxIBA5P8Y5u1zxMGHf8UNXw/dliXOViQ9LhTEte5QlWjuBnM7Klwe7R0ikWxxkW3Ts0ZnZbpI=
+X-Received: by 2002:a9d:12f:: with SMTP id 44mr902297otu.14.1626980811660;
+ Thu, 22 Jul 2021 12:06:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-07-22_09:2021-07-22,
- 2021-07-22 signatures=0
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+References: <20210720180957.2948197-1-patrick.delaunay@foss.st.com>
+ <20210720200940.v3.1.I5a50f8eef93c11cb54dfdd3b11183422a82fb373@changeid>
+In-Reply-To: <20210720200940.v3.1.I5a50f8eef93c11cb54dfdd3b11183422a82fb373@changeid>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Thu, 22 Jul 2021 22:06:40 +0300
+Message-ID: <CAGi-RULLcab9yb3+w-jU7MvSSS8CAFWCojxrRyrMx9Ge+ym6Vw@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH v2] patman: add warning for invalid tag
+ Christophe Roullier <christophe.roullier@foss.st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 1/6] net: eth-phy: add support of
+ device tree configuration for gpio reset
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,65 +68,148 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-QWRkIGEgZXJyb3IgaW4gcGF0bWFuIHRvb2wgd2hlbiB0aGUgY29tbWl0IG1lc3NhZ2UgY29udGVu
-dHMgYW4gaW52YWxpZAp0YWcgIlNlcmllLS4qIiBpbnN0ZWFkIG9mICJTZXJpZXMtLioiLgoKU2ln
-bmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNv
-bT4KCi0tLQpJIGNyZWF0ZSB0aGlzIHBhdGNoIHRvIGF2b2lkIG15IGZyZXF1ZW50IG1pc3Rha2U6
-CnVzaW5nICJTZXJpZS0iIHRhZyBpbnN0ZWFkIG9mICJTZXJpZXMtIiBhcyBpdCBpcyBkb25lIGlu
-IFsxXS4KClJFX0lOVl9UQUcgY2FuIGJlIGV4dGVuZGVkIHRvIG90aGVyIGZyZXF1ZW50IGVycm9y
-cy4KCkFueSAiU2VyaWUtIiB0YWcgaXMgcmVmdXNlZCB3aXRoIHRoZSBwYXRjaCwgZm9yIGV4YW1w
-bGU6CgpWYWx1ZUVycm9yOiBMaW5lIDI4OiBJbnZhbGlkIHRhZyA9CiAgICdTZXJpZS1jYzogTWFy
-ZWsgQmVow7puIDxtYXJlay5iZWh1bkBuaWMuY3o+JwoKWzFdIGh0dHA6Ly9wYXRjaHdvcmsub3ps
-YWJzLm9yZy9wcm9qZWN0L3Vib290L3BhdGNoLzIwMjEwNzIwMjAzMzUzLjEuSTU1MGI5NWY2ZDEy
-ZDU5YWVlZjViNzQ0ZDgzN2RiYjM2MDAzN2QzOWVAY2hhbmdlaWQvCgoKQ2hhbmdlcyBpbiB2MjoK
-LSBhZGQgcGF0bWFuIHRlc3QgdGVzdEludmFsaWRUYWcKCiB0b29scy9wYXRtYW4vZnVuY190ZXN0
-LnB5ICAgfCAxMSArKysrKysrKysrKwogdG9vbHMvcGF0bWFuL3BhdGNoc3RyZWFtLnB5IHwgIDkg
-KysrKysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDIwIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQg
-YS90b29scy9wYXRtYW4vZnVuY190ZXN0LnB5IGIvdG9vbHMvcGF0bWFuL2Z1bmNfdGVzdC5weQpp
-bmRleCAxY2U2NDQ4ZDAwLi45ODcxYmI1ODBkIDEwMDY0NAotLS0gYS90b29scy9wYXRtYW4vZnVu
-Y190ZXN0LnB5CisrKyBiL3Rvb2xzL3BhdG1hbi9mdW5jX3Rlc3QucHkKQEAgLTUwNiw2ICs1MDYs
-MTcgQEAgVGVzdGVkLWJ5OiAlcwogICAgICAgICAgICAgJ1Jldmlld2VkLWJ5Jzoge3NlbGYuam9l
-LCBzZWxmLm1hcnl9LAogICAgICAgICAgICAgJ1Rlc3RlZC1ieSc6IHtzZWxmLmxlYn19KQogCisg
-ICAgZGVmIHRlc3RJbnZhbGlkVGFnKHNlbGYpOgorICAgICAgICAiIiJUZXN0IGludmFsaWQgdGFn
-IGluIGEgcGF0Y2hzdHJlYW0iIiIKKyAgICAgICAgdGV4dCA9ICcnJ1RoaXMgaXMgYSBwYXRjaAor
-CitTZXJpZS12ZXJzaW9uOiAyCisnJycKKyAgICAgICAgd2l0aCBzZWxmLmFzc2VydFJhaXNlcyhW
-YWx1ZUVycm9yKSBhcyBleGM6CisgICAgICAgICAgICBwc3RybSA9IFBhdGNoU3RyZWFtLnByb2Nl
-c3NfdGV4dCh0ZXh0KQorICAgICAgICBzZWxmLmFzc2VydEVxdWFsKCJMaW5lIDM6IEludmFsaWQg
-dGFnID0gJ1NlcmllLXZlcnNpb246IDInIiwKKyAgICAgICAgICAgICAgICAgICAgICAgICBzdHIo
-ZXhjLmV4Y2VwdGlvbikpCisKICAgICBkZWYgdGVzdE1pc3NpbmdFbmQoc2VsZik6CiAgICAgICAg
-ICIiIlRlc3QgYSBtaXNzaW5nIEVORCB0YWciIiIKICAgICAgICAgdGV4dCA9ICcnJ1RoaXMgaXMg
-YSBwYXRjaApkaWZmIC0tZ2l0IGEvdG9vbHMvcGF0bWFuL3BhdGNoc3RyZWFtLnB5IGIvdG9vbHMv
-cGF0bWFuL3BhdGNoc3RyZWFtLnB5CmluZGV4IGE0NGNkODYxYWYuLmI5NjAyOTI0MjcgMTAwNjQ0
-Ci0tLSBhL3Rvb2xzL3BhdG1hbi9wYXRjaHN0cmVhbS5weQorKysgYi90b29scy9wYXRtYW4vcGF0
-Y2hzdHJlYW0ucHkKQEAgLTU5LDYgKzU5LDkgQEAgUkVfRElGRiA9IHJlLmNvbXBpbGUocidePi4q
-ZGlmZiAtLWdpdCBhLyguKikgYi8oLiopJCcpCiAjIERldGVjdCBhIGNvbnRleHQgbGluZSwgbGlr
-ZSAnPiBAQCAtMTUzLDggKzE1MywxMyBAQCBDaGVja1BhdGNoCiBSRV9MSU5FID0gcmUuY29tcGls
-ZShyJz4uKkBAIFwtKFxkKyksXGQrIFwrKFxkKyksXGQrIEBAICooLiopJykKIAorIyBEZXRlY3Qg
-bGluZSB3aXRoIGludmFsaWQgVEFHCitSRV9JTlZfVEFHID0gcmUuY29tcGlsZSgnXlNlcmllLShb
-YS16LV0qKTogKiguKiknKQorCiAjIFN0YXRlcyB3ZSBjYW4gYmUgaW4gLSBjYW4gd2UgdXNlIHJh
-bmdlKCkgYW5kIHN0aWxsIGhhdmUgY29tbWVudHM/CiBTVEFURV9NU0dfSEVBREVSID0gMCAgICAg
-ICAgIyBTdGlsbCBpbiB0aGUgbWVzc2FnZSBoZWFkZXIKIFNUQVRFX1BBVENIX1NVQkpFQ1QgPSAx
-ICAgICAjIEluIHBhdGNoIHN1YmplY3QgKGZpcnN0IGxpbmUgb2YgbG9nIGZvciBhIGNvbW1pdCkK
-QEAgLTMxOCw2ICszMjEsNyBAQCBjbGFzcyBQYXRjaFN0cmVhbToKICAgICAgICAgbGVhZGluZ193
-aGl0ZXNwYWNlX21hdGNoID0gUkVfTEVBRElOR19XSElURVNQQUNFLm1hdGNoKGxpbmUpCiAgICAg
-ICAgIGRpZmZfbWF0Y2ggPSBSRV9ESUZGLm1hdGNoKGxpbmUpCiAgICAgICAgIGxpbmVfbWF0Y2gg
-PSBSRV9MSU5FLm1hdGNoKGxpbmUpCisgICAgICAgIGludmFsaWRfbWF0Y2ggPSBSRV9JTlZfVEFH
-Lm1hdGNoKGxpbmUpCiAgICAgICAgIHRhZ19tYXRjaCA9IE5vbmUKICAgICAgICAgaWYgc2VsZi5z
-dGF0ZSA9PSBTVEFURV9QQVRDSF9IRUFERVI6CiAgICAgICAgICAgICB0YWdfbWF0Y2ggPSBSRV9U
-QUcubWF0Y2gobGluZSkKQEAgLTQ3MSw2ICs0NzUsMTEgQEAgY2xhc3MgUGF0Y2hTdHJlYW06CiAg
-ICAgICAgICAgICAgICAgc2VsZi5fYWRkX3dhcm4oJ0xpbmUgJWQ6IElnbm9yaW5nIENvbW1pdC0l
-cycgJQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChzZWxmLmxpbmVudW0sIG5hbWUp
-KQogCisgICAgICAgICMgRGV0ZWN0IGludmFsaWQgdGFncworICAgICAgICBlbGlmIGludmFsaWRf
-bWF0Y2g6CisgICAgICAgICAgICByYWlzZSBWYWx1ZUVycm9yKCJMaW5lICVkOiBJbnZhbGlkIHRh
-ZyA9ICclcyciICUKKyAgICAgICAgICAgICAgICAoc2VsZi5saW5lbnVtLCBsaW5lKSkKKwogICAg
-ICAgICAjIERldGVjdCB0aGUgc3RhcnQgb2YgYSBuZXcgY29tbWl0CiAgICAgICAgIGVsaWYgY29t
-bWl0X21hdGNoOgogICAgICAgICAgICAgc2VsZi5fY2xvc2VfY29tbWl0KCkKLS0gCjIuMjUuMQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3Rt
-MzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20K
-aHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJv
-b3Qtc3RtMzIK
+On Tue, Jul 20, 2021 at 9:10 PM Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> The gpio reset and the assert or deassert delay are defined in generic
+> binding of the ethernet phy in Linux:
+> Documentation/devicetree/bindings/net/ethernet-phy.yaml
+>
+>   reset-gpios:
+>     maxItems: 1
+>     description:
+>       The GPIO phandle and specifier for the PHY reset signal.
+>
+>   reset-assert-us:
+>     description:
+>       Delay after the reset was asserted in microseconds. If this
+>       property is missing the delay will be skipped.
+>
+>   reset-deassert-us:
+>     description:
+>       Delay after the reset was deasserted in microseconds. If
+>       this property is missing the delay will be skipped.
+>
+> See also U-Boot: doc/device-tree-bindings/net/phy.txt
+>
+> This patch adds the parsing of this common DT properties in the
+> u-class "eth_phy_generic", used by default in the associated driver
+> "eth_phy_generic_drv"
+>
+> This parsing function eth_phy_of_to_plat can be reused by other
+> ethernet phy drivers for this uclass UCLASS_ETH_PHY.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+> Changes in v3:
+> - allow compilation without DM_GPIO
+>
+> Changes in v2:
+> - Update eth-phy driver (NEW)
+>
+>  drivers/net/eth-phy-uclass.c | 56 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 56 insertions(+)
+>
+> diff --git a/drivers/net/eth-phy-uclass.c b/drivers/net/eth-phy-uclass.c
+> index 07aebd935e..7abed14392 100644
+> --- a/drivers/net/eth-phy-uclass.c
+> +++ b/drivers/net/eth-phy-uclass.c
+> @@ -6,12 +6,17 @@
+>  #include <common.h>
+>  #include <dm.h>
+>  #include <net.h>
+> +#include <asm-generic/gpio.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/uclass-internal.h>
+>  #include <dm/lists.h>
+> +#include <linux/delay.h>
+>
+>  struct eth_phy_device_priv {
+>         struct mii_dev *mdio_bus;
+> +       struct gpio_desc reset_gpio;
+> +       u32 reset_assert_delay;
+> +       u32 reset_deassert_delay;
+>  };
+>
+>  int eth_phy_binds_nodes(struct udevice *eth_dev)
+> @@ -110,13 +115,64 @@ int eth_phy_get_addr(struct udevice *dev)
+>         return reg;
+>  }
+>
+> +/* parsing generic properties of devicetree/bindings/net/ethernet-phy.yaml */
+> +static int eth_phy_of_to_plat(struct udevice *dev)
+> +{
+> +       struct eth_phy_device_priv *uc_priv = dev_get_uclass_priv(dev);
+> +       int ret;
+> +
+> +       if (!CONFIG_IS_ENABLED(DM_GPIO))
+> +               return 0;
+> +
+> +       /* search "reset-gpios" in phy node */
+> +       ret = gpio_request_by_name(dev, "reset-gpios", 0,
+> +                                  &uc_priv->reset_gpio,
+> +                                  GPIOD_IS_OUT);
+> +       if (ret != -ENOENT)
+> +               return ret;
+> +
+> +       uc_priv->reset_assert_delay = dev_read_u32_default(dev, "reset-assert-us", 0);
+> +       uc_priv->reset_deassert_delay = dev_read_u32_default(dev, "reset-deassert-us", 0);
+> +
+> +       return 0;
+> +}
+> +
+> +void eth_phy_reset(struct udevice *dev, int value)
+> +{
+> +       struct eth_phy_device_priv *uc_priv = dev_get_uclass_priv(dev);
+> +       u32 delay;
+> +
+> +       if (!CONFIG_IS_ENABLED(DM_GPIO))
+> +               return;
+> +
+> +       if (!dm_gpio_is_valid(&uc_priv->reset_gpio))
+> +               return;
+> +
+> +       dm_gpio_set_value(&uc_priv->reset_gpio, value);
+> +
+> +       delay = value ? uc_priv->reset_assert_delay : uc_priv->reset_deassert_delay;
+> +       if (delay)
+> +               udelay(delay);
+> +}
+> +
+> +static int eth_phy_pre_probe(struct udevice *dev)
+> +{
+> +       /* Assert and deassert the reset signal */
+> +       eth_phy_reset(dev, 1);
+> +       eth_phy_reset(dev, 0);
+> +
+> +       return 0;
+> +}
+> +
+>  UCLASS_DRIVER(eth_phy_generic) = {
+>         .id             = UCLASS_ETH_PHY,
+>         .name           = "eth_phy_generic",
+>         .per_device_auto        = sizeof(struct eth_phy_device_priv),
+> +       .pre_probe      = eth_phy_pre_probe,
+>  };
+>
+>  U_BOOT_DRIVER(eth_phy_generic_drv) = {
+>         .name           = "eth_phy_generic_drv",
+>         .id             = UCLASS_ETH_PHY,
+> +       .of_to_plat     = eth_phy_of_to_plat,
+>  };
+> --
+> 2.25.1
+>
+Applied to u-boot-net/network-master
+Thanks,
+Ramon.
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

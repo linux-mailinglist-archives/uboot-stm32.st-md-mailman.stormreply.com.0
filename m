@@ -2,45 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4CB53D2D11
-	for <lists+uboot-stm32@lfdr.de>; Thu, 22 Jul 2021 22:00:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2714B3D321D
+	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Jul 2021 05:07:59 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 46904C5A4CD;
-	Thu, 22 Jul 2021 20:00:36 +0000 (UTC)
-Received: from mail.nic.cz (lists.nic.cz [217.31.204.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CC383C597BE;
+	Fri, 23 Jul 2021 03:07:58 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+ [209.85.128.43])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFC28C597BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 80983C57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 22 Jul 2021 20:00:34 +0000 (UTC)
-Received: from thinkpad (unknown [172.20.6.87])
- by mail.nic.cz (Postfix) with ESMTPSA id E96D013FD0A;
- Thu, 22 Jul 2021 22:00:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1626984034; bh=qHWZ4M0Cbme2nk82HUd8BAYVGtZTGBwM3i+B9UX122U=;
- h=Date:From:To;
- b=ctEmWRKufD28WSC5K7DnTVsBupyYep1KP+u2QMxqftuchVxcjxBwx4c9vuAIXbtgt
- n0lDo73YLkMTnzYaMiaxxlq1gppiKVZo40lEgEAwAFr7yNhHNDbSyzXJdRF3MXbA2+
- 1z+HjGHXJD8XpxZpJmmzrcued7OiOK1K/zXt2Ebw=
-Date: Thu, 22 Jul 2021 22:00:33 +0200
-From: Marek Behun <marek.behun@nic.cz>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20210722220033.585757c9@thinkpad>
-In-Reply-To: <20210721095553.RESEND.1.I550b95f6d12d59aeef5b744d837dbb360037d39e@changeid>
-References: <20210721095553.RESEND.1.I550b95f6d12d59aeef5b744d837dbb360037d39e@changeid>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ Fri, 23 Jul 2021 03:07:55 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id
+ k12-20020a05600c1c8cb02901f259f3a250so773478wms.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 22 Jul 2021 20:07:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=4iqfLIaU10rRdsuTl9SwdKb4voQ4eHY320H1mETxdT4=;
+ b=ggiH7v33SuY48Y3e3ietm49WXm9P6CifCdVswTjbEszo/OtrYqwjwjtvb0iTRbeb6w
+ vD6otcVmXqMtC+FMXqcGtmtU0w+0OMh7+aTbDkNTZEUKpq55aKDLSqskXuzMryacsMDY
+ zNMR4AM8Qc+0k9k69mWiPBwQpA27RmdUUVRFo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=4iqfLIaU10rRdsuTl9SwdKb4voQ4eHY320H1mETxdT4=;
+ b=OPd8EsINpEG3mqtR7AkIECAucf1eF674lyM5VwXgbxPQJ7Udzqvjvy6gUAbCzVclnk
+ +0qkEEoLYQiz21uX8yK9RKtHo2hGPbKKK/CfnsxPBGfzGPADuO+r4ofY+3smbuRHQFo9
+ NoOserBmQ6c7JPZaNY8+stxl+UXqSKuu5t0ts9erX5DYtQ6ZGdJox5KnuYegFIDKg4zE
+ N6+pASMJitqAbukbtJMiz+qj2c89z7XkMUzJoOo1DN67pm+aZ6uTmtcMhPNelxOWSgeV
+ Kyz7xbhqUrmUoUDMbvwNqqWx5M1hEwHmuB80aD0dq5ELoXLI1iUX5f65IYlCxxaeEGLu
+ xvjw==
+X-Gm-Message-State: AOAM5315iSIqwgZ6qSvA3r3ru+XVRyqgHoISs9oei+ZbwvCYFCmcnkRJ
+ OellSZbrwXEtretIsoa5hPy770cqpP8D4djzgrv5Qw==
+X-Google-Smtp-Source: ABdhPJyyY+MJZW8ICvBgXtLaA7YQCNEQrrVq6cF8A6PTsLjTFT5sFetYoorW8zwge2M0Gjl1MHDd/6tKllk1vTrtjuI=
+X-Received: by 2002:a7b:c949:: with SMTP id i9mr2338517wml.168.1627009674810; 
+ Thu, 22 Jul 2021 20:07:54 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Status: No, score=-100.0 required=5.9 tests=SHORTCIRCUIT,
- USER_IN_WELCOMELIST,USER_IN_WHITELIST shortcircuit=ham
- autolearn=disabled version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on mail.nic.cz
-X-Virus-Scanned: clamav-milter 0.102.2 at mail
-X-Virus-Status: Clean
+References: <20210722165101.v2.1.I6630d4cc18870d3e830587ffbcb61898dc045cb6@changeid>
+In-Reply-To: <20210722165101.v2.1.I6630d4cc18870d3e830587ffbcb61898dc045cb6@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 22 Jul 2021 21:07:41 -0600
+Message-ID: <CAPnjgZ1L_tQ6Qp9oZCmNidd4bYNAsO8aKzzDyywtRdG8RhMa8A@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Andre Przywara <andre.przywara@arm.com>
-Subject: Re: [Uboot-stm32] [RESEND PATCH] build: remove the variable NM in
- gen_ll_addressable_symbols.sh
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [Uboot-stm32] [PATCH v2] patman: add warning for invalid tag
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -52,97 +62,29 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, 21 Jul 2021 09:56:07 +0200
-Patrick Delaunay <patrick.delaunay@foss.st.com> wrote:
-
-> With LTO activated, the buildman tools failed with an error on my
-> configuration (Ubuntu 20.04, stm32mp15_trusted_defconfig) with the error:
-> 
-> ../arm-linux-gnueabi/bin/nm:
-> 	scripts/gen_ll_addressable_symbols.sh: file format not recognized
-> 
-> It seems the shell variable initialization NM=$(NM) is not correctly
-> interpreted when shell is started in the Makefile, but I have not this
-> issue when I compile the same target without buildman.
-> 
-> I don't found the root reason of the problem but I solve it by
-> providing $(NM) as script parameter instead using a shell variable.
-> 
-> The command executed is identical:
-> 
-> cmd_keep-syms-lto.c := NM=arm-none-linux-gnueabihf-gcc-nm \
-> u-boot/scripts/gen_ll_addressable_symbols.sh arch/arm/cpu/built-in.o \
-> .... net/built-in.o >keep-syms-lto.c
-> 
-> cmd_keep-syms-lto.c := u-boot/scripts/gen_ll_addressable_symbols.sh \
-> arm-none-linux-gnueabihf-gcc-nm arch/arm/cpu/built-in.o \
-> ... net/built-in.o > keep-syms-lto.c
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> Resend with correct commit message for patman
->   s/Serie-cc/Series-cc/
-> 
-> 
->  Makefile                              | 2 +-
->  scripts/Makefile.spl                  | 2 +-
->  scripts/gen_ll_addressable_symbols.sh | 5 ++++-
->  3 files changed, 6 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Makefile b/Makefile
-> index ca2432c8ce..140dea09f4 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1736,7 +1736,7 @@ u-boot-keep-syms-lto_c := $(patsubst %.o,%.c,$(u-boot-keep-syms-lto))
->  
->  quiet_cmd_keep_syms_lto = KSL     $@
->        cmd_keep_syms_lto = \
-> -	NM=$(NM) $(srctree)/scripts/gen_ll_addressable_symbols.sh $^ >$@
-> +	$(srctree)/scripts/gen_ll_addressable_symbols.sh $(NM) $^ > $@
->  
->  quiet_cmd_keep_syms_lto_cc = KSLCC   $@
->        cmd_keep_syms_lto_cc = \
-> diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
-> index 5be1a9ba1b..25a3e7fa52 100644
-> --- a/scripts/Makefile.spl
-> +++ b/scripts/Makefile.spl
-> @@ -459,7 +459,7 @@ u-boot-spl-keep-syms-lto_c := \
->  
->  quiet_cmd_keep_syms_lto = KSL     $@
->        cmd_keep_syms_lto = \
-> -	NM=$(NM) $(srctree)/scripts/gen_ll_addressable_symbols.sh $^ >$@
-> +	$(srctree)/scripts/gen_ll_addressable_symbols.sh $(NM) $^ > $@
->  
->  quiet_cmd_keep_syms_lto_cc = KSLCC   $@
->        cmd_keep_syms_lto_cc = \
-> diff --git a/scripts/gen_ll_addressable_symbols.sh b/scripts/gen_ll_addressable_symbols.sh
-> index 3978a39d97..b8840dd011 100755
-> --- a/scripts/gen_ll_addressable_symbols.sh
-> +++ b/scripts/gen_ll_addressable_symbols.sh
-> @@ -5,8 +5,11 @@
->  # Generate __ADDRESSABLE(symbol) for every linker list entry symbol, so that LTO
->  # does not optimize these symbols away
->  
-> +# The expected parameter of this script is the command requested to have
-> +# the U-Boot symbols to parse, for example: $(NM) $(u-boot-main)
-> +
->  set -e
->  
->  echo '#include <common.h>'
-> -$NM "$@" 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' | \
-> +$@ 2>/dev/null | grep -oe '_u_boot_list_2_[a-zA-Z0-9_]*_2_[a-zA-Z0-9_]*' | \
->  	sort -u | sed -e 's/^\(.*\)/extern char \1[];\n__ADDRESSABLE(\1);/'
-
-Shouldn't we use "$@" ? In case the arguments contain spaces?
-
-Marek
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gVGh1LCAyMiBKdWwgMjAyMSBhdCAwODo1MSwgUGF0cmljayBEZWxhdW5heQo8cGF0cmljay5k
+ZWxhdW5heUBmb3NzLnN0LmNvbT4gd3JvdGU6Cj4KPiBBZGQgYSBlcnJvciBpbiBwYXRtYW4gdG9v
+bCB3aGVuIHRoZSBjb21taXQgbWVzc2FnZSBjb250ZW50cyBhbiBpbnZhbGlkCj4gdGFnICJTZXJp
+ZS0uKiIgaW5zdGVhZCBvZiAiU2VyaWVzLS4qIi4KPgo+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2sg
+RGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4KPiAtLS0KPiBJIGNyZWF0
+ZSB0aGlzIHBhdGNoIHRvIGF2b2lkIG15IGZyZXF1ZW50IG1pc3Rha2U6Cj4gdXNpbmcgIlNlcmll
+LSIgdGFnIGluc3RlYWQgb2YgIlNlcmllcy0iIGFzIGl0IGlzIGRvbmUgaW4gWzFdLgo+Cj4gUkVf
+SU5WX1RBRyBjYW4gYmUgZXh0ZW5kZWQgdG8gb3RoZXIgZnJlcXVlbnQgZXJyb3JzLgo+Cj4gQW55
+ICJTZXJpZS0iIHRhZyBpcyByZWZ1c2VkIHdpdGggdGhlIHBhdGNoLCBmb3IgZXhhbXBsZToKPgo+
+IFZhbHVlRXJyb3I6IExpbmUgMjg6IEludmFsaWQgdGFnID0KPiAgICAnU2VyaWUtY2M6IE1hcmVr
+IEJlaMO6biA8bWFyZWsuYmVodW5AbmljLmN6PicKPgo+IFsxXSBodHRwOi8vcGF0Y2h3b3JrLm96
+bGFicy5vcmcvcHJvamVjdC91Ym9vdC9wYXRjaC8yMDIxMDcyMDIwMzM1My4xLkk1NTBiOTVmNmQx
+MmQ1OWFlZWY1Yjc0NGQ4MzdkYmIzNjAwMzdkMzllQGNoYW5nZWlkLwo+Cj4KPiBDaGFuZ2VzIGlu
+IHYyOgo+IC0gYWRkIHBhdG1hbiB0ZXN0IHRlc3RJbnZhbGlkVGFnCj4KPiAgdG9vbHMvcGF0bWFu
+L2Z1bmNfdGVzdC5weSAgIHwgMTEgKysrKysrKysrKysKPiAgdG9vbHMvcGF0bWFuL3BhdGNoc3Ry
+ZWFtLnB5IHwgIDkgKysrKysrKysrCj4gIDIgZmlsZXMgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygr
+KQo+CgpSZXZpZXdlZC1ieTogU2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+Cl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxp
+bmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8v
+c3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMy
+Cg==

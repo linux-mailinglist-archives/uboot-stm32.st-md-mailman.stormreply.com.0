@@ -2,52 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DBA63D566A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Jul 2021 11:21:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC4B83D5667
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Jul 2021 11:21:55 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DA938C5A4CD;
-	Mon, 26 Jul 2021 09:21:57 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B685CC597B9;
+	Mon, 26 Jul 2021 09:21:55 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CBB29C5A4CC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90E84C597B9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 26 Jul 2021 09:21:55 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Mon, 26 Jul 2021 09:21:51 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16Q9BqOw023157; Mon, 26 Jul 2021 11:21:44 +0200
+ 16Q9C0XG000712; Mon, 26 Jul 2021 11:21:44 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=Me8ifIqLH0LUUO3mhN5IjfS+9C69dlQj2hP3z+Z4oWk=;
- b=H5dZNAnUiz5tRNoFf3pLA1evVSLrj8RXtWf7q8BvF/zg6lz8ctZTy+4wYUbL/Y1pDApp
- m9rztEEHFDOXr1mybIuSp8j+TbY+a9OMBex2SLXpIE7v//ID3TuRqxQPAbsiR6b7PLHc
- f30/cbq+y89Yuk7D6mPtIO+PJIR9YqQ5ThLTi+tPS5dRNhKfvZkME/5VkK3BwBQP/s4C
- 13FZCJm3/6Xhmdi+VFeknAoiDxr281Usu42C5pnGqXKd0mrMUXSdXBegMffGiRq4NtUY
- O6sls3VLp/4o1SaPBbB/5Oa1vr7Lc09cxIv+9dltr5XYEVlkabYTzULwayGbgtZhDnoS Jg== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=1XdZ2CKnxv6qPN+EwwONYoIoJnzGtAhZ+VQQOxruh+0=;
+ b=3arn1+zrDx6P/WcAHMg2HfUw4DuUxQ5O7sm9S9K5RrJE1L6Y02TxDK2W5Ja1jc/TQp+i
+ 20u4qsePerMA+3+2chU9V1Mxn905tjTdqkr7pQ4vcTqLpngvoApuatqdi9BLbWFy5GSA
+ +RlQ6+y1L//qH7hfOD0RIQrOGPzk/aG7ZjrDkgBVrgTZ9YL1Chm1TaL3y33VeU2wWUlR
+ VaHHFwJ4uK6eUSV182tCxk2XQlEYYIcTJtCGf+JuMbENRyVVj7l27LWHo/yIJqMUpEI1
+ NSRLs3i0NplrsS7OEbkox12M53ualf2CVTbJRQmEgdPFltToG05b1/uerz0ZpMy5Lyn0 aw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3a1swgr5nt-1
+ by mx07-00178001.pphosted.com with ESMTP id 3a1sy1g52f-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Mon, 26 Jul 2021 11:21:44 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E561710002A;
- Mon, 26 Jul 2021 11:21:42 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EA6DA100034;
+ Mon, 26 Jul 2021 11:21:43 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D642421B534;
- Mon, 26 Jul 2021 11:21:42 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 26 Jul 2021 11:21:42
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB32621B537;
+ Mon, 26 Jul 2021 11:21:43 +0200 (CEST)
+Received: from localhost (10.75.127.45) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 26 Jul 2021 11:21:43
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 26 Jul 2021 11:21:33 +0200
-Message-ID: <20210726092138.53762-1-patrick.delaunay@foss.st.com>
+Date: Mon, 26 Jul 2021 11:21:34 +0200
+Message-ID: <20210726111931.v3.1.I75c3a4359a6e42c20360fb1774a2e371a08a6270@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210726092138.53762-1-patrick.delaunay@foss.st.com>
+References: <20210726092138.53762-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-07-26_05:2021-07-26,
@@ -55,10 +57,10 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
 Cc: Tom Rini <trini@konsulko.com>,
  Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
  Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v3 0/5] stm32mp1: handle TF-A boot with FIP
+Subject: [Uboot-stm32] [PATCH v3 1/5] arm: stm32mp: add config for
+	STM32IMAGE support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,93 +77,94 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+By default for trusted boot with TF-A, U-Boot (u-boot-nodtb)
+is located in FIP container with its device tree and with
+the secure monitor (provided by TF-A or OP-TEE).
+The FIP file is loaded by TF-A BL2 and each components is
+extracted at the final location.
 
-In next TF-A version the stm32mp1 platform will support the Firmware
-Image Package (FIP) [1], a container filled with:
-- the U-Boot binary = u-boot-nodtb.bin
-- the U-Boot device tree = u-boot.dtb
-- the Secure OS (OP-TEE) or the secure monitor (SP_MIN)
+This patch add CONFIG_STM32MP15x_STM32IMAGE to request the
+STM32 image generation for SOC STM32MP15x
+when FIP container is not used (u-boot.stm32 is loaded by TF-A
+as done previously to keep the backward compatibility).
 
-Upstream is in progress on TF-A side ([3] but reviews don't yet start).
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-Each part of the FIP is loaded by TF-A BL2 and U-Boot
-is executed with its device tree address as parameter (nt_fw_dtb = r2
-introduced by commit 4ac345220afa ("board: stm32mp1: use FDT address
-provided by TF-A at boot time")
+(no changes since v1)
 
-This FIP container simplifies the OP-TEE management (same number of partition
-with or without OP-TEE, OP-TEE dynamically updates the U-Boot device tree
-to add the required OP-TEE nodes) and allow support of generic TF-A
-features as PKI [2].
+ arch/arm/mach-stm32mp/Kconfig       |  7 +++++++
+ arch/arm/mach-stm32mp/config.mk     |  2 +-
+ board/st/stm32mp1/stm32mp1.c        | 10 +++++++---
+ configs/stm32mp15_trusted_defconfig |  1 +
+ 4 files changed, 16 insertions(+), 4 deletions(-)
 
-This serie allows to generate U-Boot configured for the TF-A BL2 image
-types:
-- STM32IMAGE: stm32mp15_trusted_defconfig (current behavior)
-- FIP: stm32mp15_defconfig (NEW)
-
-The FIP will be the STMicroelectronics recommended image type for
-STM32MP15x and the STM32IMAGE support should be marked deprecated in a
-future TF-A release.
-
-To prepare this migration, the serie move all the specific code or
-device tree nodes for TF-A load of STM32IMAGE under compilation
-flag CONFIG_STM32MP15x_STM32IMAGE.
-
-This V3 serie of [4] is rebased on top for u-boot-stm32/master.
-
-I just update documentation after [5] message to clarify TF-A
-compilation step.
-
-[1] 4.11. Firmware Image Package (FIP)
-fiphttps://trustedfirmware-a.readthedocs.io/en/latest/design/firmware-design.html
-stm32mp1: handle TF-A boot with FIP
-[2] Authentication Framework & Chain of Trust
-https://trustedfirmware-a.readthedocs.io/en/latest/design/auth-framework.html
-
-[3] TF-A Serie proposal : FIP and FCONF for STM32MP1
-https://github.com/Yann-lms/arm-trusted-firmware/commits/fip_fconf
-
-[4] stm32mp1: handle TF-A boot with FIP
-http://patchwork.ozlabs.org/project/uboot/list/?series=253677&state=*
-
-[5] U-BOOT 2021.07 and STM32MP15x issues for Trusted Boot Chain
-https://lists.denx.de/pipermail/u-boot/2021-July/455750.html
-
-
-Changes in v3:
-- add reference for STM32 WIKI, TF-A and OP-TEE
-- add information about TF-A compilation and clarify the output files
-
-Changes in v2:
-- synchronize defconfig with latest change
-- fix one typo: s/ enought / enough
-
-Patrick Delaunay (5):
-  arm: stm32mp: add config for STM32IMAGE support
-  arm: stm32mp: handle the OP-TEE nodes in DT with FIP support
-  arm: stm32mp: add defconfig for trusted boot with FIP
-  doc: st: stm32mp1: Add FIP support for trusted boot
-  stm32mp1: stm32prog: remove stm32prog_get_tee_partitions with FIP
-
- arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi      |   9 +-
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi      |   9 +-
- arch/arm/mach-stm32mp/Kconfig                 |   7 +
- .../cmd_stm32prog/cmd_stm32prog.c             |   2 +
- .../mach-stm32mp/cmd_stm32prog/stm32prog.c    |   4 +
- .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |   2 +
- arch/arm/mach-stm32mp/config.mk               |   2 +-
- arch/arm/mach-stm32mp/fdt.c                   |  11 +-
- .../arm/mach-stm32mp/include/mach/stm32prog.h |   2 +
- board/st/common/Kconfig                       |  21 +-
- board/st/common/stm32mp_mtdparts.c            |  31 +-
- board/st/stm32mp1/MAINTAINERS                 |   1 +
- board/st/stm32mp1/stm32mp1.c                  |  10 +-
- configs/stm32mp15_defconfig                   | 158 +++++++++
- configs/stm32mp15_trusted_defconfig           |   1 +
- doc/board/st/stm32mp1.rst                     | 328 +++++++++++++-----
- 16 files changed, 481 insertions(+), 117 deletions(-)
- create mode 100644 configs/stm32mp15_defconfig
-
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index 0e59931679..b9e623bc3c 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -56,6 +56,13 @@ config STM32MP15x
+ 		dual core A7 for STM32MP157/3, monocore for STM32MP151
+ 		target all the STMicroelectronics board with SOC STM32MP1 family
+ 
++config STM32MP15x_STM32IMAGE
++	bool "Support STM32 image for generated U-Boot image"
++	depends on STM32MP15x && TFABOOT
++	help
++		Support of STM32 image generation for SOC STM32MP15x
++		for TF-A boot when FIP container is not used
++
+ choice
+ 	prompt "STM32MP15x board select"
+ 	optional
+diff --git a/arch/arm/mach-stm32mp/config.mk b/arch/arm/mach-stm32mp/config.mk
+index c30bf482f7..f7f5b77c41 100644
+--- a/arch/arm/mach-stm32mp/config.mk
++++ b/arch/arm/mach-stm32mp/config.mk
+@@ -4,7 +4,7 @@
+ #
+ 
+ ifndef CONFIG_SPL
+-INPUTS-y += u-boot.stm32
++INPUTS-$(CONFIG_STM32MP15x_STM32IMAGE) += u-boot.stm32
+ else
+ ifdef CONFIG_SPL_BUILD
+ INPUTS-y += u-boot-spl.stm32
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 2faf5c81b4..70bd4d1ed5 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -105,10 +105,14 @@ int checkboard(void)
+ 	const char *fdt_compat;
+ 	int fdt_compat_len;
+ 
+-	if (IS_ENABLED(CONFIG_TFABOOT))
+-		mode = "trusted";
+-	else
++	if (IS_ENABLED(CONFIG_TFABOOT)) {
++		if (IS_ENABLED(CONFIG_STM32MP15x_STM32IMAGE))
++			mode = "trusted - stm32image";
++		else
++			mode = "trusted";
++	} else {
+ 		mode = "basic";
++	}
+ 
+ 	fdt_compat = fdt_getprop(gd->fdt_blob, 0, "compatible",
+ 				 &fdt_compat_len);
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index a58ea91d3e..6a8ccb1f3d 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -7,6 +7,7 @@ CONFIG_SYS_MEMTEST_END=0xc4000000
+ CONFIG_ENV_OFFSET=0x280000
+ CONFIG_ENV_SECT_SIZE=0x40000
+ CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
++CONFIG_STM32MP15x_STM32IMAGE=y
+ CONFIG_TARGET_ST_STM32MP15x=y
+ CONFIG_CMD_STM32KEY=y
+ CONFIG_CMD_STM32PROG=y
 -- 
 2.25.1
 

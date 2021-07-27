@@ -2,62 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB9833D72E4
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Jul 2021 12:15:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF3273D79F7
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Jul 2021 17:39:17 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F8A8C58D5D;
-	Tue, 27 Jul 2021 10:15:37 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 70CE4C58D5D;
+	Tue, 27 Jul 2021 15:39:17 +0000 (UTC)
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+ [209.85.160.172])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B3121C5719C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 32046C5719C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 Jul 2021 10:15:34 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16RACNCN010290; Tue, 27 Jul 2021 12:15:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=n1KuxE4wBU8KMDeiLN3e2HorrmiCc6NxXjz9L75Bu64=;
- b=PAQkSMlPrmbgIhNqeTgoM5r+P1uCZ/2BPV12KyAuDOBJOx4Mkv497I4X/6JZQ3seeJbf
- /YrCKz2l+UJL9NSkc/FtlvK3/odcWL783iq7E6hjrcgKPCIr7pMnYYJDRdHy34jptPP/
- aTtmIDTlsjzSpb8YPdHld3cJoO4WVrNwAj+9iKsGu7TUX6PimWOCBYXSnpkuMCTPipP9
- 19lilcnmMrduacYDxfoVBhdYRmiRtU0VOJb06UFC/8t/KEYo6mb1GLwIfe1pvbx/Os/n
- oQfk51F0iVUejW9Icubyrjdc9T8Yc/OJfmAaf66ula0TxzXZXQIOa1y3vC6jpK3HhX1L WQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3a235n3jyx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 Jul 2021 12:15:28 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 78D6310002A;
- Tue, 27 Jul 2021 12:15:26 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5521D21ED31;
- Tue, 27 Jul 2021 12:15:26 +0200 (CEST)
-Received: from localhost (10.75.127.46) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 27 Jul 2021 12:15:25
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 27 Jul 2021 12:15:12 +0200
-Message-ID: <20210727121500.1.Ide735d274413b7aa45e4cda9d2b4a46e976d7b08@changeid>
-X-Mailer: git-send-email 2.25.1
+ Tue, 27 Jul 2021 15:39:16 +0000 (UTC)
+Received: by mail-qt1-f172.google.com with SMTP id d9so9760659qty.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 27 Jul 2021 08:39:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=+EtNc7WvvKfZRP0wXMIzAqYduCEo8TifOMvfkJLPOEI=;
+ b=fNygcbwbYmhypNxls98eXNJaV39HTGd75vWzi0y0A0/nDPqtTP1648CHSeLIQOwVFH
+ Alr4afu75gV5e73+w8BslWADlR2Kd1o4xuir5VEiHqYTxj1m4VwisEYhEEfo45HHOrP1
+ U/xh2njvdSBOSXUEysHTPntYlzEr97e8m1ifQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=+EtNc7WvvKfZRP0wXMIzAqYduCEo8TifOMvfkJLPOEI=;
+ b=hits25tShNKEngMGEXXFINSIZzssHi6XO8vDO8KnZ4fAzhHxl6lnOXOQ6rxxDrD/J7
+ JczUfp5E14YrWAzc6oZYOqvXfQAIevUztjbzgK6ifSFjciCx1d8z4FjRcg1cOydVtQ0j
+ VaabEA03DH8E9GARAcQMUCCJPwu6AaOKiT2b9BiaMJR3synAHBxs4/paX6rOw5+ZIwDv
+ PxZujVy9mqfWMezCT9vXis/QjRKgyMS3y1c61p3JP9b2Py3zJvovtlsi2DesLaxc1pVP
+ nwChR/aG4jkwxYaYPF0bt8ZDJ9j6tuWAZPg2CIH1EgEPz+P/HwGLCSezABrDSwdV4JX8
+ hWzg==
+X-Gm-Message-State: AOAM530EH7scc/sulxtbyluqMSdvqlbWOhjkutGOpmgWiy6cR6fS8dhZ
+ pKpczVYE6L+JgsjNkv/jie1Kxg==
+X-Google-Smtp-Source: ABdhPJyeV92Ylg8fc16fcAPjt1YkgGWLB+5WgyvvMBEV/2lTF7aud89aOxpICKZbg4mWBzuw/7HwKQ==
+X-Received: by 2002:ac8:7954:: with SMTP id r20mr19629510qtt.342.1627400355037; 
+ Tue, 27 Jul 2021 08:39:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-f53f-8332-072c-4f35.res6.spectrum.com.
+ [2603:6081:7b01:cbda:f53f:8332:72c:4f35])
+ by smtp.gmail.com with ESMTPSA id j7sm1449103qtx.39.2021.07.27.08.39.13
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 27 Jul 2021 08:39:14 -0700 (PDT)
+Date: Tue, 27 Jul 2021 11:39:12 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20210727153912.GH9379@bill-the-cat>
+References: <66d4e139-567f-c219-0f54-46ab5487d419@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-07-27_06:2021-07-27,
- 2021-07-27 signatures=0
-Cc: Etienne Carriere <etienne.carriere@st.com>, Tom Rini <trini@konsulko.com>,
- Christophe Kerello <christophe.kerello@st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Jagan Teki <jagan@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with v5.14
+In-Reply-To: <66d4e139-567f-c219-0f54-46ab5487d419@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2021.10
+ = u-boot-stm32-20210727
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,127 +71,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2370038893091768730=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Device tree alignment with Linux kernel v5.14-rc3
-- ARM: dts: stm32: move stmmac axi config in ethernet node on stm32mp15
-- ARM: dts: stm32: Configure qspi's mdma transfer to block for stm32mp151
-- ARM: dts: stm32: add a new DCMI pins group on stm32mp15
-- ARM: dts: stm32: fix ltdc pinctrl on microdev2.0-of7
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+--===============2370038893091768730==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="J4B64LE3ZzGsLqoW"
+Content-Disposition: inline
 
- arch/arm/dts/stm32mp15-pinctrl.dtsi           | 33 +++++++++++++++++++
- arch/arm/dts/stm32mp151.dtsi                  | 16 ++++-----
- ...157a-microgea-stm32mp1-microdev2.0-of7.dts |  2 +-
- 3 files changed, 42 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-index 060baa8b7e..5b60ecbd71 100644
---- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
-+++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
-@@ -118,6 +118,39 @@
- 		};
- 	};
- 
-+	dcmi_pins_b: dcmi-1 {
-+		pins {
-+			pinmux = <STM32_PINMUX('A', 4,  AF13)>,/* DCMI_HSYNC */
-+				 <STM32_PINMUX('B', 7,  AF13)>,/* DCMI_VSYNC */
-+				 <STM32_PINMUX('A', 6,  AF13)>,/* DCMI_PIXCLK */
-+				 <STM32_PINMUX('C', 6,  AF13)>,/* DCMI_D0 */
-+				 <STM32_PINMUX('H', 10, AF13)>,/* DCMI_D1 */
-+				 <STM32_PINMUX('H', 11, AF13)>,/* DCMI_D2 */
-+				 <STM32_PINMUX('E', 1,  AF13)>,/* DCMI_D3 */
-+				 <STM32_PINMUX('E', 11, AF13)>,/* DCMI_D4 */
-+				 <STM32_PINMUX('D', 3,  AF13)>,/* DCMI_D5 */
-+				 <STM32_PINMUX('E', 13, AF13)>,/* DCMI_D6 */
-+				 <STM32_PINMUX('B', 9,  AF13)>;/* DCMI_D7 */
-+			bias-disable;
-+		};
-+	};
-+
-+	dcmi_sleep_pins_b: dcmi-sleep-1 {
-+		pins {
-+			pinmux = <STM32_PINMUX('A', 4,  ANALOG)>,/* DCMI_HSYNC */
-+				 <STM32_PINMUX('B', 7,  ANALOG)>,/* DCMI_VSYNC */
-+				 <STM32_PINMUX('A', 6,  ANALOG)>,/* DCMI_PIXCLK */
-+				 <STM32_PINMUX('C', 6,  ANALOG)>,/* DCMI_D0 */
-+				 <STM32_PINMUX('H', 10, ANALOG)>,/* DCMI_D1 */
-+				 <STM32_PINMUX('H', 11, ANALOG)>,/* DCMI_D2 */
-+				 <STM32_PINMUX('E', 1,  ANALOG)>,/* DCMI_D3 */
-+				 <STM32_PINMUX('E', 11, ANALOG)>,/* DCMI_D4 */
-+				 <STM32_PINMUX('D', 3,  ANALOG)>,/* DCMI_D5 */
-+				 <STM32_PINMUX('E', 13, ANALOG)>,/* DCMI_D6 */
-+				 <STM32_PINMUX('B', 9,  ANALOG)>;/* DCMI_D7 */
-+		};
-+	};
-+
- 	ethernet0_rgmii_pins_a: rgmii-0 {
- 		pins1 {
- 			pinmux = <STM32_PINMUX('G', 5, AF11)>, /* ETH_RGMII_CLK125 */
-diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
-index 177927d14e..8e0a0bc1dd 100644
---- a/arch/arm/dts/stm32mp151.dtsi
-+++ b/arch/arm/dts/stm32mp151.dtsi
-@@ -1399,8 +1399,8 @@
- 			reg = <0x58003000 0x1000>, <0x70000000 0x10000000>;
- 			reg-names = "qspi", "qspi_mm";
- 			interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>;
--			dmas = <&mdma1 22 0x2 0x100002 0x0 0x0>,
--			       <&mdma1 22 0x2 0x100008 0x0 0x0>;
-+			dmas = <&mdma1 22 0x2 0x10100002 0x0 0x0>,
-+			       <&mdma1 22 0x2 0x10100008 0x0 0x0>;
- 			dma-names = "tx", "rx";
- 			clocks = <&rcc QSPI_K>;
- 			resets = <&rcc QSPI_R>;
-@@ -1446,12 +1446,6 @@
- 			status = "disabled";
- 		};
- 
--		stmmac_axi_config_0: stmmac-axi-config {
--			snps,wr_osr_lmt = <0x7>;
--			snps,rd_osr_lmt = <0x7>;
--			snps,blen = <0 0 0 0 16 8 4>;
--		};
--
- 		ethernet0: ethernet@5800a000 {
- 			compatible = "st,stm32mp1-dwmac", "snps,dwmac-4.20a";
- 			reg = <0x5800a000 0x2000>;
-@@ -1477,6 +1471,12 @@
- 			snps,axi-config = <&stmmac_axi_config_0>;
- 			snps,tso;
- 			status = "disabled";
-+
-+			stmmac_axi_config_0: stmmac-axi-config {
-+				snps,wr_osr_lmt = <0x7>;
-+				snps,rd_osr_lmt = <0x7>;
-+				snps,blen = <0 0 0 0 16 8 4>;
-+			};
- 		};
- 
- 		usbh_ohci: usb@5800c000 {
-diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
-index 674b2d330d..5670b23812 100644
---- a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
-+++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
-@@ -89,7 +89,7 @@
- };
- 
- &pinctrl {
--	ltdc_pins: ltdc {
-+	ltdc_pins: ltdc-0 {
- 		pins {
- 			pinmux = <STM32_PINMUX('G', 10, AF14)>,	/* LTDC_B2 */
- 				 <STM32_PINMUX('H', 12, AF14)>,	/* LTDC_R6 */
--- 
-2.25.1
+--J4B64LE3ZzGsLqoW
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jul 27, 2021 at 11:22:31AM +0200, Patrick DELAUNAY wrote:
+
+> Hi Tom,
+>=20
+> Please pull the STM32 related patches for u-boot/master, v2021.10:
+> u-boot-stm32-20210727
+>=20
+> - FIP Enable OP-TEE and TZC support in SPL for STM32MP15 SoC
+> - Add stm32mp15 missing SPI clock support
+> - Manage pull-up on gpio button STM32MP15 boards
+> - Correct STM32MP15 boot when TAMPER registers are invalid
+> - Fix EMMC pinmux on STM32MP15 Avenger96 board
+>=20
+> CI status:
+> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/8434
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master
+> https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> u-boot-stm32-20210727
+>=20
+>=20
+> The following changes since commit b70b9b07463db2f6937c7ea6d7fb5122feb7ba=
+1b:
+>=20
+> =A0 Prepare v2021.10-rc1 (2021-07-26 20:57:18 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> tags/u-boot-stm32-20210727
+>=20
+> for you to fetch changes up to 65b3f56d42e5ddc9183843723cf735950f062410:
+>=20
+> =A0 ARM: dts: stm32mp: Add OP-TEE reserved memory to SPL dtb (2021-07-27
+> 09:48:11 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--J4B64LE3ZzGsLqoW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmEAKJUACgkQFHw5/5Y0
+tywR4Av+MRNgzlfvu/d5D188Mnnaic1/4poWajfjbXEpJfbVBctN0lxZxjns45Vp
+POw3XqnI4cxltZ7Zx9TSaLV1iPOMdbHa8X5pStpLUFOnTNXeBgfDWtL7EelJ2VBK
+YG/TFiVlCNWUSeF8jSZwn6fpTG+cjInGUcwwd+FhEBj0gXlGB13cXpDbZJ1Kbug8
+O85AoYE+/tuy9tsJgf7JfBzOL5X7FcdL83eXNaxF2RlS3Z3hYYtGxesugKF+52tL
+zyMN2jfM+ckftlJ21cnOWC/4JPn0w/YD9D1UCC5y3vIEmxLsiOvp/Q7S9kahZ8El
+HxFKGyLuqg3sY2C28nejaEjSI8KRtufTxPqNxNZJGeDG83Hf4n4nSD4VU5AvSJ91
+UHM1WiDV36k8EUte5ZZVN/cbKtShWH3zsRA7WG6z0VCxxfrTO3rEEMa3K+hsurXP
+TGSX2/rf9JsER9spOcDlJV/v3yBdKaCoWgWUsTMqd5dPP4Be+P9u9CDIuZ1KuNyc
+HeF8n/i9
+=6Dq2
+-----END PGP SIGNATURE-----
+
+--J4B64LE3ZzGsLqoW--
+
+--===============2370038893091768730==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============2370038893091768730==--

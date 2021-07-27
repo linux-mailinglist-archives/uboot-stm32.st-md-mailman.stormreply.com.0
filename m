@@ -2,65 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AAEC3D725C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Jul 2021 11:51:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB9833D72E4
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Jul 2021 12:15:37 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4173BC58D5D;
-	Tue, 27 Jul 2021 09:51:42 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F8A8C58D5D;
+	Tue, 27 Jul 2021 10:15:37 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DDF9C5719C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B3121C5719C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 Jul 2021 09:51:40 +0000 (UTC)
+ Tue, 27 Jul 2021 10:15:34 +0000 (UTC)
 Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 16R9kOJN021902; Tue, 27 Jul 2021 11:51:37 +0200
+ 16RACNCN010290; Tue, 27 Jul 2021 12:15:28 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=J8XWP/wau8Wpi3Tkr2/VOT+L1uLV8RBSAwX9H8NCCbo=;
- b=DSVZBTlZGVui1HH368o4Ml+Il0C2nyIfDn8nmaro6UaWuLVIdAu3Xq6Zez3lv7XR0Ssb
- ua+cF6Mdw/H0kzlotgNl/MiFq9hMfF6b3rSXb3pOFhCBw164eaVMTq3nIiGU5h4ypnyM
- aFf3P0xHKLDzMV3alANbpfsEtfbSNteO9u5J2DhdVOT7uICCv7LpHNbhGBINIPS/jrtx
- qcZNXh/+a9Ch+lWGnQh2giu3Zc0DSmNkg6D3fGZnnNcZo1HiSbq8TgNlM0iV4rYR7mXy
- f9YY05zhteulAhQRHOZ3eQZXdkAAOgAjM3TQKcCFFOe9IyAYbV2Yt67rQsYZZ9lUddbQ Ig== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=n1KuxE4wBU8KMDeiLN3e2HorrmiCc6NxXjz9L75Bu64=;
+ b=PAQkSMlPrmbgIhNqeTgoM5r+P1uCZ/2BPV12KyAuDOBJOx4Mkv497I4X/6JZQ3seeJbf
+ /YrCKz2l+UJL9NSkc/FtlvK3/odcWL783iq7E6hjrcgKPCIr7pMnYYJDRdHy34jptPP/
+ aTtmIDTlsjzSpb8YPdHld3cJoO4WVrNwAj+9iKsGu7TUX6PimWOCBYXSnpkuMCTPipP9
+ 19lilcnmMrduacYDxfoVBhdYRmiRtU0VOJb06UFC/8t/KEYo6mb1GLwIfe1pvbx/Os/n
+ oQfk51F0iVUejW9Icubyrjdc9T8Yc/OJfmAaf66ula0TxzXZXQIOa1y3vC6jpK3HhX1L WQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3a235n3ew5-1
+ by mx07-00178001.pphosted.com with ESMTP id 3a235n3jyx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 Jul 2021 11:51:37 +0200
+ Tue, 27 Jul 2021 12:15:28 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D8B7910002A;
- Tue, 27 Jul 2021 11:51:36 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 78D6310002A;
+ Tue, 27 Jul 2021 12:15:26 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C9B7021D380;
- Tue, 27 Jul 2021 11:51:36 +0200 (CEST)
-Received: from lmecxl0994.lme.st.com (10.75.127.46) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 27 Jul
- 2021 11:51:36 +0200
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-References: <20210724153546.9778-1-xypron.glpk@gmx.de>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <c481032f-0099-c2b6-9b2f-f7cc3c1b1af4@foss.st.com>
-Date: Tue, 27 Jul 2021 11:51:35 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5521D21ED31;
+ Tue, 27 Jul 2021 12:15:26 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG2NODE3.st.com (10.75.127.6)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 27 Jul 2021 12:15:25
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 27 Jul 2021 12:15:12 +0200
+Message-ID: <20210727121500.1.Ide735d274413b7aa45e4cda9d2b4a46e976d7b08@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210724153546.9778-1-xypron.glpk@gmx.de>
-Content-Language: en-US
 X-Originating-IP: [10.75.127.46]
 X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
  definitions=2021-07-27_06:2021-07-27,
  2021-07-27 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- u-boot-board-maintainers@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH 1/1] lib: disable CONFIG_SPL_HEXDUMP by
-	default
+Cc: Etienne Carriere <etienne.carriere@st.com>, Tom Rini <trini@konsulko.com>,
+ Christophe Kerello <christophe.kerello@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with v5.14
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,117 +69,125 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Device tree alignment with Linux kernel v5.14-rc3
+- ARM: dts: stm32: move stmmac axi config in ethernet node on stm32mp15
+- ARM: dts: stm32: Configure qspi's mdma transfer to block for stm32mp151
+- ARM: dts: stm32: add a new DCMI pins group on stm32mp15
+- ARM: dts: stm32: fix ltdc pinctrl on microdev2.0-of7
 
-On 7/24/21 5:35 PM, Heinrich Schuchardt wrote:
-> CONFIG_HEXDUMP is needed to display UEFI variables using 'printenv -e'.
->
-> Enabling CONFIG_SPL_HEXDUMP only makes sense for debugging purposes.
-> Hence CONFIG_SPL_HEXDUMP should not be enabled by default.
->
-> The following boards currently have CONFIG_SPL_HEXDUMP=y:
->
-> axm_defconfig
-> imx8mm-cl-iot-gate_defconfig
-> imx8mm_venice_defconfig
-> imxrt1020-evk_defconfig
-> imxrt1050-evk_defconfig
-> kontron_sl28_defconfig
-> kp_imx53_defconfig
-> lx2160ardb_tfa_stmm_defconfig
-> mt7622_rfb_defconfig
-> octeon_ebb7304_defconfig
-> octeon_nic23_defconfig
-> qemu_arm64_defconfig
-> qemu_arm_defconfig
-> qemu-riscv32_defconfig
-> qemu-riscv32_smode_defconfig
-> qemu-riscv64_defconfig
-> qemu-riscv64_smode_defconfig
-> qemu-x86_64_defconfig
-> qemu-x86_defconfig
-> sandbox64_defconfig
-> sandbox_defconfig
-> stm32mp15_basic_defconfig
-> stm32mp15_trusted_defconfig
-> synquacer_developerbox_defconfig
-> taurus_defconfig
-> xilinx_versal_virt_defconfig
->
-> The patch only keeps it enabled on
->
-> sandbox64_defconfig
-> sandbox_defconfig
->
-> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->   configs/sandbox64_defconfig | 1 +
->   configs/sandbox_defconfig   | 1 +
->   lib/Kconfig                 | 1 -
->   3 files changed, 2 insertions(+), 1 deletion(-)
->
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-Acked-by: Patrick Delaunay <patrick.delaunay@foss.st.com> # for 
-stm32mp15_*_defconfig
+ arch/arm/dts/stm32mp15-pinctrl.dtsi           | 33 +++++++++++++++++++
+ arch/arm/dts/stm32mp151.dtsi                  | 16 ++++-----
+ ...157a-microgea-stm32mp1-microdev2.0-of7.dts |  2 +-
+ 3 files changed, 42 insertions(+), 9 deletions(-)
 
-
-but it is strange for "stm32mp15_trusted_defconfig" as this 
-configuration don't enable the SPL support(see after).
-
-
-> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-> index 5fb1da49e4..9e3c2d5e41 100644
-> --- a/configs/sandbox64_defconfig
-> +++ b/configs/sandbox64_defconfig
-> @@ -233,6 +233,7 @@ CONFIG_CMD_DHRYSTONE=y
->   CONFIG_TPM=y
->   CONFIG_LZ4=y
->   CONFIG_ERRNO_STR=y
-> +CONFIG_SPL_HEXDUMP=y
->   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->   CONFIG_EFI_CAPSULE_ON_DISK=y
->   CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index a1e77a511d..7e8694100c 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -281,6 +281,7 @@ CONFIG_CMD_DHRYSTONE=y
->   CONFIG_TPM=y
->   CONFIG_LZ4=y
->   CONFIG_ERRNO_STR=y
-> +CONFIG_SPL_HEXDUMP=y
->   CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->   CONFIG_EFI_CAPSULE_ON_DISK=y
->   CONFIG_EFI_CAPSULE_FIRMWARE_FIT=y
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index ad4d75e0a4..b0ea4cf91c 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -559,7 +559,6 @@ config HEXDUMP
->   config SPL_HEXDUMP
->   	bool "Enable hexdump in SPL"
->   	depends on HEXDUMP
-
-I think it should depends on SPL alos
-
-+ depends on SPL && HEXDUMP
-
-
-> -	default y
->   	help
->   	  This enables functions for printing dumps of binary data in
->   	  SPL.
-> --
-> 2.30.2
->
-
-Regards
-
-Patrick
+diff --git a/arch/arm/dts/stm32mp15-pinctrl.dtsi b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+index 060baa8b7e..5b60ecbd71 100644
+--- a/arch/arm/dts/stm32mp15-pinctrl.dtsi
++++ b/arch/arm/dts/stm32mp15-pinctrl.dtsi
+@@ -118,6 +118,39 @@
+ 		};
+ 	};
+ 
++	dcmi_pins_b: dcmi-1 {
++		pins {
++			pinmux = <STM32_PINMUX('A', 4,  AF13)>,/* DCMI_HSYNC */
++				 <STM32_PINMUX('B', 7,  AF13)>,/* DCMI_VSYNC */
++				 <STM32_PINMUX('A', 6,  AF13)>,/* DCMI_PIXCLK */
++				 <STM32_PINMUX('C', 6,  AF13)>,/* DCMI_D0 */
++				 <STM32_PINMUX('H', 10, AF13)>,/* DCMI_D1 */
++				 <STM32_PINMUX('H', 11, AF13)>,/* DCMI_D2 */
++				 <STM32_PINMUX('E', 1,  AF13)>,/* DCMI_D3 */
++				 <STM32_PINMUX('E', 11, AF13)>,/* DCMI_D4 */
++				 <STM32_PINMUX('D', 3,  AF13)>,/* DCMI_D5 */
++				 <STM32_PINMUX('E', 13, AF13)>,/* DCMI_D6 */
++				 <STM32_PINMUX('B', 9,  AF13)>;/* DCMI_D7 */
++			bias-disable;
++		};
++	};
++
++	dcmi_sleep_pins_b: dcmi-sleep-1 {
++		pins {
++			pinmux = <STM32_PINMUX('A', 4,  ANALOG)>,/* DCMI_HSYNC */
++				 <STM32_PINMUX('B', 7,  ANALOG)>,/* DCMI_VSYNC */
++				 <STM32_PINMUX('A', 6,  ANALOG)>,/* DCMI_PIXCLK */
++				 <STM32_PINMUX('C', 6,  ANALOG)>,/* DCMI_D0 */
++				 <STM32_PINMUX('H', 10, ANALOG)>,/* DCMI_D1 */
++				 <STM32_PINMUX('H', 11, ANALOG)>,/* DCMI_D2 */
++				 <STM32_PINMUX('E', 1,  ANALOG)>,/* DCMI_D3 */
++				 <STM32_PINMUX('E', 11, ANALOG)>,/* DCMI_D4 */
++				 <STM32_PINMUX('D', 3,  ANALOG)>,/* DCMI_D5 */
++				 <STM32_PINMUX('E', 13, ANALOG)>,/* DCMI_D6 */
++				 <STM32_PINMUX('B', 9,  ANALOG)>;/* DCMI_D7 */
++		};
++	};
++
+ 	ethernet0_rgmii_pins_a: rgmii-0 {
+ 		pins1 {
+ 			pinmux = <STM32_PINMUX('G', 5, AF11)>, /* ETH_RGMII_CLK125 */
+diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
+index 177927d14e..8e0a0bc1dd 100644
+--- a/arch/arm/dts/stm32mp151.dtsi
++++ b/arch/arm/dts/stm32mp151.dtsi
+@@ -1399,8 +1399,8 @@
+ 			reg = <0x58003000 0x1000>, <0x70000000 0x10000000>;
+ 			reg-names = "qspi", "qspi_mm";
+ 			interrupts = <GIC_SPI 92 IRQ_TYPE_LEVEL_HIGH>;
+-			dmas = <&mdma1 22 0x2 0x100002 0x0 0x0>,
+-			       <&mdma1 22 0x2 0x100008 0x0 0x0>;
++			dmas = <&mdma1 22 0x2 0x10100002 0x0 0x0>,
++			       <&mdma1 22 0x2 0x10100008 0x0 0x0>;
+ 			dma-names = "tx", "rx";
+ 			clocks = <&rcc QSPI_K>;
+ 			resets = <&rcc QSPI_R>;
+@@ -1446,12 +1446,6 @@
+ 			status = "disabled";
+ 		};
+ 
+-		stmmac_axi_config_0: stmmac-axi-config {
+-			snps,wr_osr_lmt = <0x7>;
+-			snps,rd_osr_lmt = <0x7>;
+-			snps,blen = <0 0 0 0 16 8 4>;
+-		};
+-
+ 		ethernet0: ethernet@5800a000 {
+ 			compatible = "st,stm32mp1-dwmac", "snps,dwmac-4.20a";
+ 			reg = <0x5800a000 0x2000>;
+@@ -1477,6 +1471,12 @@
+ 			snps,axi-config = <&stmmac_axi_config_0>;
+ 			snps,tso;
+ 			status = "disabled";
++
++			stmmac_axi_config_0: stmmac-axi-config {
++				snps,wr_osr_lmt = <0x7>;
++				snps,rd_osr_lmt = <0x7>;
++				snps,blen = <0 0 0 0 16 8 4>;
++			};
+ 		};
+ 
+ 		usbh_ohci: usb@5800c000 {
+diff --git a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+index 674b2d330d..5670b23812 100644
+--- a/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
++++ b/arch/arm/dts/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dts
+@@ -89,7 +89,7 @@
+ };
+ 
+ &pinctrl {
+-	ltdc_pins: ltdc {
++	ltdc_pins: ltdc-0 {
+ 		pins {
+ 			pinmux = <STM32_PINMUX('G', 10, AF14)>,	/* LTDC_B2 */
+ 				 <STM32_PINMUX('H', 12, AF14)>,	/* LTDC_R6 */
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

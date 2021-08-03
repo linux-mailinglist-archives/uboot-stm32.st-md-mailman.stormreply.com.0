@@ -2,48 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3AEB3DEA5C
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Aug 2021 12:05:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B4403DEA5E
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Aug 2021 12:05:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4E9F0C5A4D4;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6CEABC5A4D9;
 	Tue,  3 Aug 2021 10:05:45 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D2DCC57B51
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 93570C597BE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue,  3 Aug 2021 10:05:37 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 173A3KUK001201; Tue, 3 Aug 2021 12:05:35 +0200
+ 173A3Rin005727; Tue, 3 Aug 2021 12:05:36 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-type; s=selector1;
- bh=hlewrmojSCwwvLtZwyz+Xduhv64gpKnaFygOXwZfsGM=;
- b=lrjU/E5+UmgiW7Xh89wP9UiaZTT01m/Yh7FzTvmvkW+Lis4fMvccCUHZxkWl7kMjCgLN
- bFYycrwkmrSgJY64ApvBurqfsx1Mh2QzOcdbuSL2JtKxFm5w9gPK161pUjiWQ6cxD7fV
- YPlnaLDMCP3vJTf3E4BahAh1gtZGkAMLHNWYkha5aQFtOsEWdroncx1yNKM1GoCHrOS+
- sIbdw+EiFJ8AGlRXo1TK5Egc8SvvEEABM9A8fURH83yxX4UvjXbUhfOTmXpz1Wjr7LmN
- xClfUieTFMn4Bne1p9O+DyzA0YZiv6evLLPMilvPeauuniQX/XtzrT+Nzsth4uqi2TMU nw== 
+ bh=5jp8FzYswVNIodIjTlLOgWdUhrQWFt9mAJkUukArYs0=;
+ b=rNm8Afvu95elEW3oPQT9WRsj4JHpuqLzuytXuVIAzF79uE9keATYmS7JuIYK0SrNkRaw
+ 4wQ7dwmgT/WymCXN8syb6YknWw917gzmZEkpbeGx3OYM6lxXTN3ocJZmtLhhceK0VCXs
+ GI4F4oJhzbROb6uleaklNZrZ7I3F5OjsUBsoZ/QjS0ISTpU9jVXWkMzc0pmpAXIsjTOf
+ +o+X4ef7DTRlnEDQfi2xvY6vSnyzXx75aEDqm6IAnaAFvy/rM6GnrPEhu9ysfhLF7ihJ
+ RCD7xdzXF9H/7qMc0Hh25iIsJTJkNIjLcmDrJDxNgUyZATfXZyssWbne8KiULiAJdsgo EQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3a6fc8nerh-1
+ by mx07-00178001.pphosted.com with ESMTP id 3a73jug22q-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 03 Aug 2021 12:05:35 +0200
+ Tue, 03 Aug 2021 12:05:36 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 423C6100034;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E9F7210002A;
  Tue,  3 Aug 2021 12:05:35 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3906721BF5A;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E023321BF5A;
  Tue,  3 Aug 2021 12:05:35 +0200 (CEST)
 Received: from localhost (10.75.127.51) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 3 Aug 2021 12:05:34
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 3 Aug 2021 12:05:35
  +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 3 Aug 2021 12:05:13 +0200
-Message-ID: <20210803100515.29383-6-patrice.chotard@foss.st.com>
+Date: Tue, 3 Aug 2021 12:05:14 +0200
+Message-ID: <20210803100515.29383-7-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20210803100515.29383-1-patrice.chotard@foss.st.com>
 References: <20210803100515.29383-1-patrice.chotard@foss.st.com>
@@ -57,8 +57,8 @@ X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Heiko Schocher <hs@denx.de>
-Subject: [Uboot-stm32] [PATCH v1 5/7] i2c: stm32f7: fix configuration of the
-	digital filter
+Subject: [Uboot-stm32] [PATCH v1 6/7] i2c: stm32f7: add support for DNF
+	i2c-digital-filter binding
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,59 +77,73 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-The digital filter related computation are present in the driver
-however the programming of the filter within the IP is missing.
-The maximum value for the DNF is wrong and should be 15 instead of 16.
+Add the support for the i2c-digital-filter binding, allowing to enable
+the digital filter via the device-tree and indicate its value in the DT
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- drivers/i2c/stm32f7_i2c.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ drivers/i2c/stm32f7_i2c.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
-index e71a0e0aa3..7e6c65fadc 100644
+index 7e6c65fadc..2b2dae67a3 100644
 --- a/drivers/i2c/stm32f7_i2c.c
 +++ b/drivers/i2c/stm32f7_i2c.c
-@@ -45,6 +45,8 @@ struct stm32_i2c_regs {
+@@ -107,7 +107,6 @@ struct stm32_i2c_regs {
  
- /* STM32 I2C control 1 */
- #define STM32_I2C_CR1_ANFOFF			BIT(12)
-+#define STM32_I2C_CR1_DNF_MASK			GENMASK(11, 8)
-+#define STM32_I2C_CR1_DNF(n)			(((n) & 0xf) << 8)
- #define STM32_I2C_CR1_ERRIE			BIT(7)
- #define STM32_I2C_CR1_TCIE			BIT(6)
- #define STM32_I2C_CR1_STOPIE			BIT(5)
-@@ -106,7 +108,7 @@ struct stm32_i2c_regs {
  #define STM32_I2C_MAX_LEN			0xff
  
- #define STM32_I2C_DNF_DEFAULT			0
--#define STM32_I2C_DNF_MAX			16
-+#define STM32_I2C_DNF_MAX			15
+-#define STM32_I2C_DNF_DEFAULT			0
+ #define STM32_I2C_DNF_MAX			15
  
  #define STM32_I2C_ANALOG_FILTER_DELAY_MIN	50	/* ns */
- #define STM32_I2C_ANALOG_FILTER_DELAY_MAX	260	/* ns */
-@@ -155,7 +157,7 @@ struct stm32_i2c_spec {
-  * @clock_src: I2C clock source frequency (Hz)
-  * @rise_time: Rise time (ns)
-  * @fall_time: Fall time (ns)
-- * @dnf: Digital filter coefficient (0-16)
-+ * @dnf: value of digital filter to apply
-  * @analog_filter: Analog filter delay (On/Off)
+@@ -204,6 +203,7 @@ struct stm32_i2c_timings {
+  * @regmap_sreg: register address for setting Fast Mode Plus bits
+  * @regmap_creg: register address for clearing Fast Mode Plus bits
+  * @regmap_mask: mask for Fast Mode Plus bits
++ * @dnf_dt: value of digital filter requested via dt
   */
- struct stm32_i2c_setup {
-@@ -842,6 +844,10 @@ static int stm32_i2c_hw_config(struct stm32_i2c_priv *i2c_priv)
- 	else
- 		setbits_le32(&regs->cr1, STM32_I2C_CR1_ANFOFF);
+ struct stm32_i2c_priv {
+ 	struct stm32_i2c_regs *regs;
+@@ -214,6 +214,7 @@ struct stm32_i2c_priv {
+ 	u32 regmap_sreg;
+ 	u32 regmap_creg;
+ 	u32 regmap_mask;
++	u32 dnf_dt;
+ };
  
-+	/* Program the Digital Filter */
-+	clrsetbits_le32(&regs->cr1, STM32_I2C_CR1_DNF_MASK,
-+			STM32_I2C_CR1_DNF(i2c_priv->setup.dnf));
+ static const struct stm32_i2c_spec i2c_specs[] = {
+@@ -684,6 +685,7 @@ static int stm32_i2c_compute_timing(struct stm32_i2c_priv *i2c_priv,
+ 	const struct stm32_i2c_spec *specs;
+ 	struct stm32_i2c_timings *v, *_v;
+ 	struct list_head solutions;
++	u32 i2cclk = DIV_ROUND_CLOSEST(STM32_NSEC_PER_SEC, setup->clock_src);
+ 	int ret;
+ 
+ 	specs = get_specs(setup->speed_freq);
+@@ -701,6 +703,8 @@ static int stm32_i2c_compute_timing(struct stm32_i2c_priv *i2c_priv,
+ 		return -EINVAL;
+ 	}
+ 
++	/*  Analog and Digital Filters */
++	setup->dnf = DIV_ROUND_CLOSEST(i2c_priv->dnf_dt, i2cclk);
+ 	if (setup->dnf > STM32_I2C_DNF_MAX) {
+ 		log_err("DNF out of bound %d/%d\n",
+ 			setup->dnf, STM32_I2C_DNF_MAX);
+@@ -923,7 +927,10 @@ static int stm32_of_to_plat(struct udevice *dev)
+ 	fall_time = dev_read_u32_default(dev, "i2c-scl-falling-time-ns",
+ 					 STM32_I2C_FALL_TIME_DEFAULT);
+ 
+-	i2c_priv->setup.dnf = STM32_I2C_DNF_DEFAULT;
++	i2c_priv->dnf_dt = dev_read_u32_default(dev, "i2c-digital-filter-width-ns", 0);
++	if (!dev_read_bool(dev, "i2c-digital-filter"))
++		i2c_priv->dnf_dt = 0;
 +
- 	setbits_le32(&regs->cr1, STM32_I2C_CR1_PE);
+ 	i2c_priv->setup.analog_filter = dev_read_bool(dev, "i2c-analog-filter");
  
- 	return 0;
+ 	/* Optional */
 -- 
 2.17.1
 

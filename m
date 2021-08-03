@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9A6E3DDD3C
-	for <lists+uboot-stm32@lfdr.de>; Mon,  2 Aug 2021 18:08:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1BFF3DE999
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Aug 2021 11:17:00 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65EBFC597AE;
-	Mon,  2 Aug 2021 16:08:47 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 52678C597BC;
+	Tue,  3 Aug 2021 09:17:00 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66D26C57B51
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 74EACC597AF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  2 Aug 2021 16:08:46 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Tue,  3 Aug 2021 09:16:58 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 172G3UOi032166; Mon, 2 Aug 2021 18:08:45 +0200
+ 1738vO3a006396; Tue, 3 Aug 2021 11:16:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-type; s=selector1;
- bh=7WuHHUoXVZBpA4LZNxbtYMNz601kpKDRox6Xm2igYyk=;
- b=FNQ+Gg/N+rplNRe7dmHW7cFnX9/XNisjL5PGyltZ1CVXeN0lUHzr514uPT5zSLYpYBsU
- JBcu9taTal7r0YKsxuNDo5x2g1+dFjBeZqQWr6NRCcI+2Ulq0S38gHCb0S2iAxmQaK7c
- Y01H2Ky8mbk/HdIfIH9ppZ/Ks9/8OUJuG3K8WNfUqWjD49jHR1bagHabZXkjp4VIf7t3
- s84pmP3KEqhDt6yjwy2E7U9jCOY9Q2CdbMbeP93bsNoVg9SeUTXfUFU8ZHxhWZVI8wxo
- GgQpfTfz/Sy3RpGqVe+upuePW0CQSOQCI37TZ7HfD6BRgWwUYKH0fs7RedEKLuO2FRd6 og== 
+ bh=3bP0fAUjsUaWUKBD/+N1gRBdeMojq+lKdFOApnI40iE=;
+ b=xw/Vo1Lmu1e60Xsp2b1nKiVzCl1ejZSkf4ai4tPlLsfQE8tb6rqA0H9+qA0rJs4SBqQN
+ KhQe8PD7afQ6yJcZ+LR+baJ3bXHlG8ozPF/c6Xv3GMWGgqwtaL9LjISGqauTcLlh4jEu
+ fxGlXP9o8rHsBsBSeqzQDZUnNJms5BIjXuVJYM7etdl28JJJ7u7DQ0rczCz3g2MTM/N+
+ b2ft7fM5Y6OFz4Qn4z4qn84jyPE2GAM3/E35fNZ+EF7cyPjkqTQ6Sdeh9MBLYS53P/Q/
+ Xooz3jpPo+ToEP3huAHxSN+pahew4qKWrd0QB8mVeLu4QfE6ksG9t96jfbFo4ZJKs66i WQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3a6cx526kc-1
+ by mx07-00178001.pphosted.com with ESMTP id 3a6tqkjc9d-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 02 Aug 2021 18:08:45 +0200
+ Tue, 03 Aug 2021 11:16:56 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6FA8A10002A;
- Mon,  2 Aug 2021 18:08:44 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D35910002A;
+ Tue,  3 Aug 2021 11:16:56 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 63CA0241860;
- Mon,  2 Aug 2021 18:08:44 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 174D520FA2E;
+ Tue,  3 Aug 2021 11:16:56 +0200 (CEST)
 Received: from localhost (10.75.127.44) by SFHDAG2NODE3.st.com (10.75.127.6)
- with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 2 Aug 2021 18:08:44
+ with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 3 Aug 2021 11:16:55
  +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 2 Aug 2021 18:08:36 +0200
-Message-ID: <20210802180823.1.I3aa79d907e5213c8692d2d428f5a1fbccdce555b@changeid>
+Date: Tue, 3 Aug 2021 11:16:40 +0200
+Message-ID: <20210803091640.13146-1-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
+X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-08-02_07:2021-08-02,
- 2021-08-02 signatures=0
+ definitions=2021-08-03_02:2021-08-03,
+ 2021-08-03 signatures=0
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH] doc: stm32mp1: add page for device tree
-	bindings
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH] spi: stm32: Add ofdata_to_platdata() callback
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,1089 +71,578 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Parse DT in ofdata_to_platdata() callback instead of probe().
 
-With device tree binding migration to yaml it is difficult to synchronize
-the binding from Linux kernel to U-Boot.
-
-Instead of maintaining the same dt bindings, this patch adds in the U-Boot
-documentation the path to the device tree bindings in Linux kernel for
-STMicroelectronics devices, when they are used without modification.
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- doc/board/st/index.rst                        |   1 +
- doc/board/st/st.rst                           |  68 ++++++
- doc/device-tree-bindings/adc/st,stm32-adc.txt | 141 ------------
- .../clock/st,stm32-rcc.txt                    |  95 --------
- .../clock/st,stm32h7-rcc.txt                  | 152 -------------
- doc/device-tree-bindings/i2c/i2c-stm32.txt    |  30 ---
- .../memory-controllers/st,stm32-fmc.txt       |  58 -----
- .../mtd/stm32-fmc2-nand.txt                   |  61 -----
- .../phy/phy-stm32-usbphyc.txt                 |  75 -------
- .../pinctrl/st,stm32-pinctrl.txt              | 208 ------------------
- .../regulator/st,stm32-vrefbuf.txt            |  23 --
- .../reset/st,stm32-rcc.txt                    |   6 -
- .../spi/spi-stm32-qspi.txt                    |  44 ----
- 13 files changed, 69 insertions(+), 893 deletions(-)
- create mode 100644 doc/board/st/st.rst
- delete mode 100644 doc/device-tree-bindings/adc/st,stm32-adc.txt
- delete mode 100644 doc/device-tree-bindings/clock/st,stm32-rcc.txt
- delete mode 100644 doc/device-tree-bindings/clock/st,stm32h7-rcc.txt
- delete mode 100644 doc/device-tree-bindings/i2c/i2c-stm32.txt
- delete mode 100644 doc/device-tree-bindings/memory-controllers/st,stm32-fmc.txt
- delete mode 100644 doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
- delete mode 100644 doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
- delete mode 100644 doc/device-tree-bindings/pinctrl/st,stm32-pinctrl.txt
- delete mode 100644 doc/device-tree-bindings/regulator/st,stm32-vrefbuf.txt
- delete mode 100644 doc/device-tree-bindings/reset/st,stm32-rcc.txt
- delete mode 100644 doc/device-tree-bindings/spi/spi-stm32-qspi.txt
+ drivers/spi/stm32_spi.c | 224 +++++++++++++++++++++++-----------------
+ 1 file changed, 132 insertions(+), 92 deletions(-)
 
-diff --git a/doc/board/st/index.rst b/doc/board/st/index.rst
-index 91f1d51b42..8a06a954a2 100644
---- a/doc/board/st/index.rst
-+++ b/doc/board/st/index.rst
-@@ -6,4 +6,5 @@ STMicroelectronics
- .. toctree::
-    :maxdepth: 2
+diff --git a/drivers/spi/stm32_spi.c b/drivers/spi/stm32_spi.c
+index bd8514033d..fe5419e851 100644
+--- a/drivers/spi/stm32_spi.c
++++ b/drivers/spi/stm32_spi.c
+@@ -97,11 +97,14 @@
+ #define SPI_SIMPLEX_RX		2
+ #define SPI_HALF_DUPLEX		3
  
-+   st
-    stm32mp1
-diff --git a/doc/board/st/st.rst b/doc/board/st/st.rst
-new file mode 100644
-index 0000000000..de574fd42e
---- /dev/null
-+++ b/doc/board/st/st.rst
-@@ -0,0 +1,68 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Patrick Delaunay <patrick.delaunay@st.com>
+-struct stm32_spi_priv {
++struct stm32_spi_plat {
+ 	void __iomem *base;
+ 	struct clk clk;
+ 	struct reset_ctl rst_ctl;
+ 	struct gpio_desc cs_gpios[MAX_CS_COUNT];
++};
 +
-+U-Boot device tree bindings
-+----------------------------
++struct stm32_spi_priv {
+ 	ulong bus_clk_rate;
+ 	unsigned int fifo_size;
+ 	unsigned int cur_bpw;
+@@ -115,28 +118,32 @@ struct stm32_spi_priv {
+ 	bool cs_high;
+ };
+ 
+-static void stm32_spi_write_txfifo(struct stm32_spi_priv *priv)
++static void stm32_spi_write_txfifo(struct udevice *bus)
+ {
++	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
 +
-+The U-Boot specific bindings are defined in the U-Boot directory:
-+doc/device-tree-bindings
+ 	while ((priv->tx_len > 0) &&
+-	       (readl(priv->base + STM32_SPI_SR) & SPI_SR_TXP)) {
++	       (readl(base + STM32_SPI_SR) & SPI_SR_TXP)) {
+ 		u32 offs = priv->cur_xferlen - priv->tx_len;
+ 
+ 		if (priv->tx_len >= sizeof(u32) &&
+ 		    IS_ALIGNED((uintptr_t)(priv->tx_buf + offs), sizeof(u32))) {
+ 			const u32 *tx_buf32 = (const u32 *)(priv->tx_buf + offs);
+ 
+-			writel(*tx_buf32, priv->base + STM32_SPI_TXDR);
++			writel(*tx_buf32, base + STM32_SPI_TXDR);
+ 			priv->tx_len -= sizeof(u32);
+ 		} else if (priv->tx_len >= sizeof(u16) &&
+ 			   IS_ALIGNED((uintptr_t)(priv->tx_buf + offs), sizeof(u16))) {
+ 			const u16 *tx_buf16 = (const u16 *)(priv->tx_buf + offs);
+ 
+-			writew(*tx_buf16, priv->base + STM32_SPI_TXDR);
++			writew(*tx_buf16, base + STM32_SPI_TXDR);
+ 			priv->tx_len -= sizeof(u16);
+ 		} else {
+ 			const u8 *tx_buf8 = (const u8 *)(priv->tx_buf + offs);
+ 
+-			writeb(*tx_buf8, priv->base + STM32_SPI_TXDR);
++			writeb(*tx_buf8, base + STM32_SPI_TXDR);
+ 			priv->tx_len -= sizeof(u8);
+ 		}
+ 	}
+@@ -144,9 +151,12 @@ static void stm32_spi_write_txfifo(struct stm32_spi_priv *priv)
+ 	log_debug("%d bytes left\n", priv->tx_len);
+ }
+ 
+-static void stm32_spi_read_rxfifo(struct stm32_spi_priv *priv)
++static void stm32_spi_read_rxfifo(struct udevice *bus)
+ {
+-	u32 sr = readl(priv->base + STM32_SPI_SR);
++	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
++	u32 sr = readl(base + STM32_SPI_SR);
+ 	u32 rxplvl = (sr & SPI_SR_RXPLVL) >> SPI_SR_RXPLVL_SHIFT;
+ 
+ 	while ((priv->rx_len > 0) &&
+@@ -158,7 +168,7 @@ static void stm32_spi_read_rxfifo(struct stm32_spi_priv *priv)
+ 		    (priv->rx_len >= sizeof(u32) || (sr & SPI_SR_RXWNE))) {
+ 			u32 *rx_buf32 = (u32 *)(priv->rx_buf + offs);
+ 
+-			*rx_buf32 = readl(priv->base + STM32_SPI_RXDR);
++			*rx_buf32 = readl(base + STM32_SPI_RXDR);
+ 			priv->rx_len -= sizeof(u32);
+ 		} else if (IS_ALIGNED((uintptr_t)(priv->rx_buf + offs), sizeof(u16)) &&
+ 			   (priv->rx_len >= sizeof(u16) ||
+@@ -166,38 +176,38 @@ static void stm32_spi_read_rxfifo(struct stm32_spi_priv *priv)
+ 			    (rxplvl >= 2 || priv->cur_bpw > 8)))) {
+ 			u16 *rx_buf16 = (u16 *)(priv->rx_buf + offs);
+ 
+-			*rx_buf16 = readw(priv->base + STM32_SPI_RXDR);
++			*rx_buf16 = readw(base + STM32_SPI_RXDR);
+ 			priv->rx_len -= sizeof(u16);
+ 		} else {
+ 			u8 *rx_buf8 = (u8 *)(priv->rx_buf + offs);
+ 
+-			*rx_buf8 = readb(priv->base + STM32_SPI_RXDR);
++			*rx_buf8 = readb(base + STM32_SPI_RXDR);
+ 			priv->rx_len -= sizeof(u8);
+ 		}
+ 
+-		sr = readl(priv->base + STM32_SPI_SR);
++		sr = readl(base + STM32_SPI_SR);
+ 		rxplvl = (sr & SPI_SR_RXPLVL) >> SPI_SR_RXPLVL_SHIFT;
+ 	}
+ 
+ 	log_debug("%d bytes left\n", priv->rx_len);
+ }
+ 
+-static int stm32_spi_enable(struct stm32_spi_priv *priv)
++static int stm32_spi_enable(void __iomem *base)
+ {
+ 	log_debug("\n");
+ 
+ 	/* Enable the SPI hardware */
+-	setbits_le32(priv->base + STM32_SPI_CR1, SPI_CR1_SPE);
++	setbits_le32(base + STM32_SPI_CR1, SPI_CR1_SPE);
+ 
+ 	return 0;
+ }
+ 
+-static int stm32_spi_disable(struct stm32_spi_priv *priv)
++static int stm32_spi_disable(void __iomem *base)
+ {
+ 	log_debug("\n");
+ 
+ 	/* Disable the SPI hardware */
+-	clrbits_le32(priv->base + STM32_SPI_CR1, SPI_CR1_SPE);
++	clrbits_le32(base + STM32_SPI_CR1, SPI_CR1_SPE);
+ 
+ 	return 0;
+ }
+@@ -205,45 +215,48 @@ static int stm32_spi_disable(struct stm32_spi_priv *priv)
+ static int stm32_spi_claim_bus(struct udevice *slave)
+ {
+ 	struct udevice *bus = dev_get_parent(slave);
+-	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
+ 
+ 	dev_dbg(slave, "\n");
+ 
+ 	/* Enable the SPI hardware */
+-	return stm32_spi_enable(priv);
++	return stm32_spi_enable(base);
+ }
+ 
+ static int stm32_spi_release_bus(struct udevice *slave)
+ {
+ 	struct udevice *bus = dev_get_parent(slave);
+-	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
+ 
+ 	dev_dbg(slave, "\n");
+ 
+ 	/* Disable the SPI hardware */
+-	return stm32_spi_disable(priv);
++	return stm32_spi_disable(base);
+ }
+ 
+ static void stm32_spi_stopxfer(struct udevice *dev)
+ {
+-	struct stm32_spi_priv *priv = dev_get_priv(dev);
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
++	void __iomem *base = plat->base;
+ 	u32 cr1, sr;
+ 	int ret;
+ 
+ 	dev_dbg(dev, "\n");
+ 
+-	cr1 = readl(priv->base + STM32_SPI_CR1);
++	cr1 = readl(base + STM32_SPI_CR1);
+ 
+ 	if (!(cr1 & SPI_CR1_SPE))
+ 		return;
+ 
+ 	/* Wait on EOT or suspend the flow */
+-	ret = readl_poll_timeout(priv->base + STM32_SPI_SR, sr,
++	ret = readl_poll_timeout(base + STM32_SPI_SR, sr,
+ 				 !(sr & SPI_SR_EOT), 100000);
+ 	if (ret < 0) {
+ 		if (cr1 & SPI_CR1_CSTART) {
+-			writel(cr1 | SPI_CR1_CSUSP, priv->base + STM32_SPI_CR1);
+-			if (readl_poll_timeout(priv->base + STM32_SPI_SR,
++			writel(cr1 | SPI_CR1_CSUSP, base + STM32_SPI_CR1);
++			if (readl_poll_timeout(base + STM32_SPI_SR,
+ 					       sr, !(sr & SPI_SR_SUSP),
+ 					       100000) < 0)
+ 				dev_err(dev, "Suspend request timeout\n");
+@@ -251,11 +264,12 @@ static void stm32_spi_stopxfer(struct udevice *dev)
+ 	}
+ 
+ 	/* clear status flags */
+-	setbits_le32(priv->base + STM32_SPI_IFCR, SPI_IFCR_ALL);
++	setbits_le32(base + STM32_SPI_IFCR, SPI_IFCR_ALL);
+ }
+ 
+ static int stm32_spi_set_cs(struct udevice *dev, unsigned int cs, bool enable)
+ {
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
+ 	struct stm32_spi_priv *priv = dev_get_priv(dev);
+ 
+ 	dev_dbg(dev, "cs=%d enable=%d\n", cs, enable);
+@@ -263,18 +277,20 @@ static int stm32_spi_set_cs(struct udevice *dev, unsigned int cs, bool enable)
+ 	if (cs >= MAX_CS_COUNT)
+ 		return -ENODEV;
+ 
+-	if (!dm_gpio_is_valid(&priv->cs_gpios[cs]))
++	if (!dm_gpio_is_valid(&plat->cs_gpios[cs]))
+ 		return -EINVAL;
+ 
+ 	if (priv->cs_high)
+ 		enable = !enable;
+ 
+-	return dm_gpio_set_value(&priv->cs_gpios[cs], enable ? 1 : 0);
++	return dm_gpio_set_value(&plat->cs_gpios[cs], enable ? 1 : 0);
+ }
+ 
+ static int stm32_spi_set_mode(struct udevice *bus, uint mode)
+ {
+ 	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
+ 	u32 cfg2_clrb = 0, cfg2_setb = 0;
+ 
+ 	dev_dbg(bus, "mode=%d\n", mode);
+@@ -295,7 +311,7 @@ static int stm32_spi_set_mode(struct udevice *bus, uint mode)
+ 		cfg2_clrb |= SPI_CFG2_LSBFRST;
+ 
+ 	if (cfg2_clrb || cfg2_setb)
+-		clrsetbits_le32(priv->base + STM32_SPI_CFG2,
++		clrsetbits_le32(base + STM32_SPI_CFG2,
+ 				cfg2_clrb, cfg2_setb);
+ 
+ 	if (mode & SPI_CS_HIGH)
+@@ -308,6 +324,8 @@ static int stm32_spi_set_mode(struct udevice *bus, uint mode)
+ static int stm32_spi_set_fthlv(struct udevice *dev, u32 xfer_len)
+ {
+ 	struct stm32_spi_priv *priv = dev_get_priv(dev);
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
++	void __iomem *base = plat->base;
+ 	u32 fthlv, half_fifo;
+ 
+ 	/* data packet should not exceed 1/2 of fifo space */
+@@ -321,7 +339,7 @@ static int stm32_spi_set_fthlv(struct udevice *dev, u32 xfer_len)
+ 
+ 	if (!fthlv)
+ 		fthlv = 1;
+-	clrsetbits_le32(priv->base + STM32_SPI_CFG1, SPI_CFG1_FTHLV,
++	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_FTHLV,
+ 			(fthlv - 1) << SPI_CFG1_FTHLV_SHIFT);
+ 
+ 	return 0;
+@@ -330,6 +348,8 @@ static int stm32_spi_set_fthlv(struct udevice *dev, u32 xfer_len)
+ static int stm32_spi_set_speed(struct udevice *bus, uint hz)
+ {
+ 	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
+ 	u32 mbrdiv;
+ 	long div;
+ 
+@@ -353,7 +373,7 @@ static int stm32_spi_set_speed(struct udevice *bus, uint hz)
+ 	if (!mbrdiv)
+ 		return -EINVAL;
+ 
+-	clrsetbits_le32(priv->base + STM32_SPI_CFG1, SPI_CFG1_MBR,
++	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_MBR,
+ 			(mbrdiv - 1) << SPI_CFG1_MBR_SHIFT);
+ 
+ 	priv->cur_hz = hz;
+@@ -367,6 +387,8 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 	struct udevice *bus = dev_get_parent(slave);
+ 	struct dm_spi_slave_plat *slave_plat;
+ 	struct stm32_spi_priv *priv = dev_get_priv(bus);
++	struct stm32_spi_plat *plat = dev_get_plat(bus);
++	void __iomem *base = plat->base;
+ 	u32 sr;
+ 	u32 ifcr = 0;
+ 	u32 xferlen;
+@@ -376,7 +398,7 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 	xferlen = bitlen / 8;
+ 
+ 	if (xferlen <= SPI_CR2_TSIZE)
+-		writel(xferlen, priv->base + STM32_SPI_CR2);
++		writel(xferlen, base + STM32_SPI_CR2);
+ 	else
+ 		return -EMSGSIZE;
+ 
+@@ -396,15 +418,15 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 		priv->cur_xferlen = xferlen;
+ 
+ 		/* Disable the SPI hardware to unlock CFG1/CFG2 registers */
+-		stm32_spi_disable(priv);
++		stm32_spi_disable(base);
+ 
+-		clrsetbits_le32(priv->base + STM32_SPI_CFG2, SPI_CFG2_COMM,
++		clrsetbits_le32(base + STM32_SPI_CFG2, SPI_CFG2_COMM,
+ 				mode << SPI_CFG2_COMM_SHIFT);
+ 
+ 		stm32_spi_set_fthlv(bus, xferlen);
+ 
+ 		/* Enable the SPI hardware */
+-		stm32_spi_enable(priv);
++		stm32_spi_enable(base);
+ 	}
+ 
+ 	dev_dbg(bus, "priv->tx_len=%d priv->rx_len=%d\n",
+@@ -416,12 +438,12 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 
+ 	/* Be sure to have data in fifo before starting data transfer */
+ 	if (priv->tx_buf)
+-		stm32_spi_write_txfifo(priv);
++		stm32_spi_write_txfifo(bus);
+ 
+-	setbits_le32(priv->base + STM32_SPI_CR1, SPI_CR1_CSTART);
++	setbits_le32(base + STM32_SPI_CR1, SPI_CR1_CSTART);
+ 
+ 	while (1) {
+-		sr = readl(priv->base + STM32_SPI_SR);
++		sr = readl(base + STM32_SPI_SR);
+ 
+ 		if (sr & SPI_SR_OVR) {
+ 			dev_err(bus, "Overrun: RX data lost\n");
+@@ -433,7 +455,7 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 			dev_warn(bus, "System too slow is limiting data throughput\n");
+ 
+ 			if (priv->rx_buf && priv->rx_len > 0)
+-				stm32_spi_read_rxfifo(priv);
++				stm32_spi_read_rxfifo(bus);
+ 
+ 			ifcr |= SPI_SR_SUSP;
+ 		}
+@@ -443,23 +465,23 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 
+ 		if (sr & SPI_SR_TXP)
+ 			if (priv->tx_buf && priv->tx_len > 0)
+-				stm32_spi_write_txfifo(priv);
++				stm32_spi_write_txfifo(bus);
+ 
+ 		if (sr & SPI_SR_RXP)
+ 			if (priv->rx_buf && priv->rx_len > 0)
+-				stm32_spi_read_rxfifo(priv);
++				stm32_spi_read_rxfifo(bus);
+ 
+ 		if (sr & SPI_SR_EOT) {
+ 			if (priv->rx_buf && priv->rx_len > 0)
+-				stm32_spi_read_rxfifo(priv);
++				stm32_spi_read_rxfifo(bus);
+ 			break;
+ 		}
+ 
+-		writel(ifcr, priv->base + STM32_SPI_IFCR);
++		writel(ifcr, base + STM32_SPI_IFCR);
+ 	}
+ 
+ 	/* clear status flags */
+-	setbits_le32(priv->base + STM32_SPI_IFCR, SPI_IFCR_ALL);
++	setbits_le32(base + STM32_SPI_IFCR, SPI_IFCR_ALL);
+ 	stm32_spi_stopxfer(bus);
+ 
+ 	if (flags & SPI_XFER_END)
+@@ -470,42 +492,72 @@ static int stm32_spi_xfer(struct udevice *slave, unsigned int bitlen,
+ 
+ static int stm32_spi_get_fifo_size(struct udevice *dev)
+ {
+-	struct stm32_spi_priv *priv = dev_get_priv(dev);
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
++	void __iomem *base = plat->base;
+ 	u32 count = 0;
+ 
+-	stm32_spi_enable(priv);
++	stm32_spi_enable(base);
+ 
+-	while (readl(priv->base + STM32_SPI_SR) & SPI_SR_TXP)
+-		writeb(++count, priv->base + STM32_SPI_TXDR);
++	while (readl(base + STM32_SPI_SR) & SPI_SR_TXP)
++		writeb(++count, base + STM32_SPI_TXDR);
+ 
+-	stm32_spi_disable(priv);
++	stm32_spi_disable(base);
+ 
+ 	dev_dbg(dev, "%d x 8-bit fifo size\n", count);
+ 
+ 	return count;
+ }
+ 
++static int stm32_spi_of_to_plat(struct udevice *dev)
++{
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
++	int ret;
 +
-+* clock
-+        - clock/st,stm32mp1.txt
-+* ram
-+        - memory-controllers/st,stm32mp1-ddr.txt
++	plat->base = dev_read_addr_ptr(dev);
++	if (!plat->base) {
++		dev_err(dev, "can't get registers base address\n");
++		return -ENOENT;
++	}
 +
-+All the other device tree bindings used in U-Boot are specified in Linux
-+kernel. Please refer dt bindings from below specified paths in the Linux
-+kernel binding directory = Documentation/devicetree/bindings/
++	ret = clk_get_by_index(dev, 0, &plat->clk);
++	if (ret < 0)
++		return ret;
 +
-+* acd
-+	- iio/adc/st,stm32-adc.yaml
-+* clock
-+        - clock/st,stm32-rcc.txt
-+        - clock/st,stm32h7-rcc.txt
-+	- clock/st,stm32mp1-rcc.yaml
-+* display
-+	- display/st,stm32-dsi.yaml
-+	- display/st,stm32-ltdc.yaml
-+* gpio
-+	- pinctrl/st,stm32-pinctrl.yaml
-+* hwlock
-+	- hwlock/st,stm32-hwspinlock.yaml
-+* i2c
-+	- i2c/st,stm32-i2c.yaml
-+* mailbox
-+	- mailbox/st,stm32-ipcc.yaml
-+* mmc
-+	- mmc/arm,pl18x.yaml
-+* nand
-+	- mtd/st,stm32-fmc2-nand.yaml
-+	- memory-controllers/st,stm32-fmc2-ebi.yaml
-+* net
-+        - net/stm32-dwmac.yaml
-+* nvmem
-+        - nvmem/st,stm32-romem.yaml
-+* remoteproc
-+	- remoteproc/st,stm32-rproc.yaml
-+* regulator
-+	- regulator/st,stm32mp1-pwr-reg.yaml
-+	- regulator/st,stm32-vrefbuf.yaml
-+* reset
-+	- reset/st,stm32-rcc.txt
-+	- reset/st,stm32mp1-rcc.txt
-+* rng
-+	- rng/st,stm32-rng.yaml
-+* rtc
-+	- rtc/st,stm32-rtc.yaml
-+* serial
-+	- serial/st,stm32-uart.yaml
-+* spi
-+	- spi/st,stm32-spi.yaml
-+	- spi/st,stm32-qspi.yaml
-+* syscon
-+        - arm/stm32/st,stm32-syscon.yaml
-+* usb
-+	- phy/phy-stm32-usbphyc.yaml
-+        - usb/dwc2.yaml
-+* watchdog
-+	- watchdog/st,stm32-iwdg.yaml
-diff --git a/doc/device-tree-bindings/adc/st,stm32-adc.txt b/doc/device-tree-bindings/adc/st,stm32-adc.txt
-deleted file mode 100644
-index 07fb6cd76b..0000000000
---- a/doc/device-tree-bindings/adc/st,stm32-adc.txt
-+++ /dev/null
-@@ -1,141 +0,0 @@
--STMicroelectronics STM32 ADC device
--
--STM32 ADC is a successive approximation analog-to-digital converter.
--It has several multiplexed input channels. Conversions can be performed
--in single, continuous, scan or discontinuous mode. Result of the ADC is
--stored in a left-aligned or right-aligned 32-bit data register.
--Conversions can be launched in software or using hardware triggers.
--
--The analog watchdog feature allows the application to detect if the input
--voltage goes beyond the user-defined, higher or lower thresholds.
--
--Each STM32 ADC block can have up to 3 ADC instances.
--
--Each instance supports two contexts to manage conversions, each one has its
--own configurable sequence and trigger:
--- regular conversion can be done in sequence, running in background
--- injected conversions have higher priority, and so have the ability to
--  interrupt regular conversion sequence (either triggered in SW or HW).
--  Regular sequence is resumed, in case it has been interrupted.
--
--Contents of a stm32 adc root node:
-------------------------------------
--Required properties:
--- compatible: Should be one of:
--  "st,stm32f4-adc-core"
--  "st,stm32h7-adc-core"
--  "st,stm32mp1-adc-core"
--- reg: Offset and length of the ADC block register set.
--- interrupts: One or more interrupts for ADC block. Some parts like stm32f4
--  and stm32h7 share a common ADC interrupt line. stm32mp1 has two separate
--  interrupt lines, one for each ADC within ADC block.
--- clocks: Core can use up to two clocks, depending on part used:
--  - "adc" clock: for the analog circuitry, common to all ADCs.
--    It's required on stm32f4.
--    It's optional on stm32h7.
--  - "bus" clock: for registers access, common to all ADCs.
--    It's not present on stm32f4.
--    It's required on stm32h7.
--- clock-names: Must be "adc" and/or "bus" depending on part used.
--- interrupt-controller: Identifies the controller node as interrupt-parent
--- vref-supply: Phandle to the vref input analog reference voltage.
--- #interrupt-cells = <1>;
--- #address-cells = <1>;
--- #size-cells = <0>;
--
--Optional properties:
--- A pinctrl state named "default" for each ADC channel may be defined to set
--  inX ADC pins in mode of operation for analog input on external pin.
--
--Contents of a stm32 adc child node:
-------------------------------------
--An ADC block node should contain at least one subnode, representing an
--ADC instance available on the machine.
--
--Required properties:
--- compatible: Should be one of:
--  "st,stm32f4-adc"
--  "st,stm32h7-adc"
--  "st,stm32mp1-adc"
--- reg: Offset of ADC instance in ADC block (e.g. may be 0x0, 0x100, 0x200).
--- clocks: Input clock private to this ADC instance. It's required only on
--  stm32f4, that has per instance clock input for registers access.
--- interrupt-parent: Phandle to the parent interrupt controller.
--- interrupts: IRQ Line for the ADC (e.g. may be 0 for adc@0, 1 for adc@100 or
--  2 for adc@200).
--- st,adc-channels: List of single-ended channels muxed for this ADC.
--  It can have up to 16 channels on stm32f4 or 20 channels on stm32h7, numbered
--  from 0 to 15 or 19 (resp. for in0..in15 or in0..in19).
--- st,adc-diff-channels: List of differential channels muxed for this ADC.
--  Depending on part used, some channels can be configured as differential
--  instead of single-ended (e.g. stm32h7). List here positive and negative
--  inputs pairs as <vinp vinn>, <vinp vinn>,... vinp and vinn are numbered
--  from 0 to 19 on stm32h7)
--  Note: At least one of "st,adc-channels" or "st,adc-diff-channels" is required.
--  Both properties can be used together. Some channels can be used as
--  single-ended and some other ones as differential (mixed). But channels
--  can't be configured both as single-ended and differential (invalid).
--- #io-channel-cells = <1>: See the IIO bindings section "IIO consumers" in
--  Documentation/devicetree/bindings/iio/iio-bindings.txt
--
--Optional properties:
--- dmas: Phandle to dma channel for this ADC instance.
--  See ../../dma/dma.txt for details.
--- dma-names: Must be "rx" when dmas property is being used.
--- assigned-resolution-bits: Resolution (bits) to use for conversions. Must
--  match device available resolutions:
--  * can be 6, 8, 10 or 12 on stm32f4
--  * can be 8, 10, 12, 14 or 16 on stm32h7
--  Default is maximum resolution if unset.
--- st,min-sample-time-nsecs: Minimum sampling time in nanoseconds.
--  Depending on hardware (board) e.g. high/low analog input source impedance,
--  fine tune of ADC sampling time may be recommended.
--  This can be either one value or an array that matches 'st,adc-channels' list,
--  to set sample time resp. for all channels, or independently for each channel.
--
--Example:
--	adc: adc@40012000 {
--		compatible = "st,stm32f4-adc-core";
--		reg = <0x40012000 0x400>;
--		interrupts = <18>;
--		clocks = <&rcc 0 168>;
--		clock-names = "adc";
--		vref-supply = <&reg_vref>;
--		interrupt-controller;
--		pinctrl-names = "default";
--		pinctrl-0 = <&adc3_in8_pin>;
--
--		#interrupt-cells = <1>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		adc@0 {
--			compatible = "st,stm32f4-adc";
--			#io-channel-cells = <1>;
--			reg = <0x0>;
--			clocks = <&rcc 0 168>;
--			interrupt-parent = <&adc>;
--			interrupts = <0>;
--			st,adc-channels = <8>;
--			dmas = <&dma2 0 0 0x400 0x0>;
--			dma-names = "rx";
--			assigned-resolution-bits = <8>;
--		};
--		...
--		other adc child nodes follow...
--	};
--
--Example to setup:
--- channel 1 as single-ended
--- channels 2 & 3 as differential (with resp. 6 & 7 negative inputs)
--
--	adc: adc@40022000 {
--		compatible = "st,stm32h7-adc-core";
--		...
--		adc1: adc@0 {
--			compatible = "st,stm32h7-adc";
--			...
--			st,adc-channels = <1>;
--			st,adc-diff-channels = <2 6>, <3 7>;
--		};
--	};
-diff --git a/doc/device-tree-bindings/clock/st,stm32-rcc.txt b/doc/device-tree-bindings/clock/st,stm32-rcc.txt
-deleted file mode 100644
-index 0532d815da..0000000000
---- a/doc/device-tree-bindings/clock/st,stm32-rcc.txt
-+++ /dev/null
-@@ -1,95 +0,0 @@
--STMicroelectronics STM32 Reset and Clock Controller
--===================================================
--
--The RCC IP is both a reset and a clock controller.
--
--Please refer to clock-bindings.txt for common clock controller binding usage.
--Please also refer to reset.txt for common reset controller binding usage.
--
--Required properties:
--- compatible: Should be:
--  "st,stm32f42xx-rcc"
--  "st,stm32f469-rcc"
--- reg: should be register base and length as documented in the
--  datasheet
--- #reset-cells: 1, see below
--- #clock-cells: 2, device nodes should specify the clock in their "clocks"
--  property, containing a phandle to the clock device node, an index selecting
--  between gated clocks and other clocks and an index specifying the clock to
--  use.
--
--Example:
--
--	rcc: rcc@40023800 {
--		#reset-cells = <1>;
--		#clock-cells = <2>
--		compatible = "st,stm32f42xx-rcc", "st,stm32-rcc";
--		reg = <0x40023800 0x400>;
--	};
--
--Specifying gated clocks
--=======================
--
--The primary index must be set to 0.
--
--The secondary index is the bit number within the RCC register bank, starting
--from the first RCC clock enable register (RCC_AHB1ENR, address offset 0x30).
--
--It is calculated as: index = register_offset / 4 * 32 + bit_offset.
--Where bit_offset is the bit offset within the register (LSB is 0, MSB is 31).
--
--To simplify the usage and to share bit definition with the reset and clock
--drivers of the RCC IP, macros are available to generate the index in
--human-readble format.
--
--For STM32F4 series, the macro are available here:
-- - include/dt-bindings/mfd/stm32f4-rcc.h
--
--Example:
--
--	/* Gated clock, AHB1 bit 0 (GPIOA) */
--	... {
--		clocks = <&rcc 0 STM32F4_AHB1_CLOCK(GPIOA)>
--	};
--
--	/* Gated clock, AHB2 bit 4 (CRYP) */
--	... {
--		clocks = <&rcc 0 STM32F4_AHB2_CLOCK(CRYP)>
--	};
--
--Specifying other clocks
--=======================
--
--The primary index must be set to 1.
--
--The secondary index is bound with the following magic numbers:
--
--	0	SYSTICK
--	1	FCLK
--
--Example:
--
--	/* Misc clock, FCLK */
--	... {
--		clocks = <&rcc 1 STM32F4_APB1_CLOCK(TIM2)>
--	};
--
--
--Specifying softreset control of devices
--=======================================
--
--Device nodes should specify the reset channel required in their "resets"
--property, containing a phandle to the reset device node and an index specifying
--which channel to use.
--The index is the bit number within the RCC registers bank, starting from RCC
--base address.
--It is calculated as: index = register_offset / 4 * 32 + bit_offset.
--Where bit_offset is the bit offset within the register.
--For example, for CRC reset:
--  crc = AHB1RSTR_offset / 4 * 32 + CRCRST_bit_offset = 0x10 / 4 * 32 + 12 = 140
--
--example:
--
--	timer2 {
--		resets	= <&rcc STM32F4_APB1_RESET(TIM2)>;
--	};
-diff --git a/doc/device-tree-bindings/clock/st,stm32h7-rcc.txt b/doc/device-tree-bindings/clock/st,stm32h7-rcc.txt
-deleted file mode 100644
-index 9d4b5873d9..0000000000
---- a/doc/device-tree-bindings/clock/st,stm32h7-rcc.txt
-+++ /dev/null
-@@ -1,152 +0,0 @@
--STMicroelectronics STM32H7 Reset and Clock Controller
--=====================================================
--
--The RCC IP is both a reset and a clock controller.
--
--Please refer to clock-bindings.txt for common clock controller binding usage.
--Please also refer to reset.txt for common reset controller binding usage.
--
--Required properties:
--- compatible: Should be:
--  "st,stm32h743-rcc"
--
--- reg: should be register base and length as documented in the
--  datasheet
--
--- #reset-cells: 1, see below
--
--- #clock-cells : from common clock binding; shall be set to 1
--
--- clocks: External oscillator clock phandle
--  - high speed external clock signal (HSE)
--  - low speed external clock signal (LSE)
--  - external I2S clock (I2S_CKIN)
--
--- st,syscfg: phandle for pwrcfg, mandatory to disable/enable backup domain
--  write protection (RTC clock).
--
--- pll x node: Allow to register a pll with specific parameters.
--  Please see PLL section below.
--
--Example:
--
--	rcc: rcc@58024400 {
--		#reset-cells = <1>;
--		#clock-cells = <2>
--		compatible = "st,stm32h743-rcc", "st,stm32-rcc";
--		reg = <0x58024400 0x400>;
--		clocks = <&clk_hse>, <&clk_lse>, <&clk_i2s_ckin>;
--
--		st,syscfg = <&pwrcfg>;
--
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		vco1@58024430 {
--			#clock-cells = <0>;
--			compatible = "stm32,pll";
--			reg = <0>;
--		};
--
--		vco2@58024438 {
--			#clock-cells = <0>;
--			compatible = "stm32,pll";
--			reg = <1>;
--			st,clock-div = <2>;
--			st,clock-mult = <40>;
--			st,frac-status = <0>;
--			st,frac = <0>;
--			st,vcosel = <1>;
--			st,pllrge = <2>;
--		};
--	};
--
--
--STM32H7 PLL
-------------
--
--The VCO of STM32 PLL could be reprensented like this:
--
--  Vref    ---------       --------
--    ---->| / DIVM  |---->| x DIVN | ------> VCO
--          ---------       --------
--		             ^
--			     |
--	                  -------
--		         | FRACN |
--		          -------
--
--When the PLL is configured in integer mode:
--- VCO = ( Vref / DIVM ) * DIVN
--
--When the PLL is configured in fractional mode:
--- VCO = ( Vref / DIVM ) * ( DIVN + FRACN / 2^13)
--
--
--Required properties for pll node:
--- compatible: Should be:
--  "stm32,pll"
--
--- #clock-cells: from common clock binding; shall be set to 0
--- reg: Should be the pll number.
--
--Optional properties:
--- st,clock-div:  DIVM division factor       : <1..63>
--- st,clock-mult: DIVN multiplication factor : <4..512>
--
--- st,frac-status:
--   - 0 Pll is configured in integer mode
--   - 1 Pll is configure in fractional mode
--
--- st,frac: Fractional part of the multiplication factor : <0..8191>
--
--- st,vcosel: VCO selection
--  - 0: Wide VCO range:192 to 836 MHz
--  - 1: Medium VCO range:150 to 420 MHz
--
--- st,pllrge: PLL input frequency range
--  - 0: The PLL input (Vref / DIVM) clock range frequency is between 1 and 2 MHz
--  - 1: The PLL input (Vref / DIVM) clock range frequency is between 2 and 4 MHz
--  - 2: The PLL input (Vref / DIVM) clock range frequency is between 4 and 8 MHz
--  - 3: The PLL input (Vref / DIVM) clock range frequency is between 8 and 16 MHz
--
--
--The peripheral clock consumer should specify the desired clock by
--having the clock ID in its "clocks" phandle cell.
--
--All available clocks are defined as preprocessor macros in
--dt-bindings/clock/stm32h7-clks.h header and can be used in device
--tree sources.
--
--Example:
--
--		timer5: timer@40000c00 {
--			compatible = "st,stm32-timer";
--			reg = <0x40000c00 0x400>;
--			interrupts = <50>;
--			clocks = <&rcc TIM5_CK>;
--
--		};
--
--Specifying softreset control of devices
--=======================================
--
--Device nodes should specify the reset channel required in their "resets"
--property, containing a phandle to the reset device node and an index specifying
--which channel to use.
--The index is the bit number within the RCC registers bank, starting from RCC
--base address.
--It is calculated as: index = register_offset / 4 * 32 + bit_offset.
--Where bit_offset is the bit offset within the register.
--
--For example, for CRC reset:
--  crc = AHB4RSTR_offset / 4 * 32 + CRCRST_bit_offset = 0x88 / 4 * 32 + 19 = 1107
--
--All available preprocessor macros for reset are defined dt-bindings//mfd/stm32h7-rcc.h
--header and can be used in device tree sources.
--
--example:
--
--	timer2 {
--		resets	= <&rcc STM32H7_APB1L_RESET(TIM2)>;
--	};
-diff --git a/doc/device-tree-bindings/i2c/i2c-stm32.txt b/doc/device-tree-bindings/i2c/i2c-stm32.txt
-deleted file mode 100644
-index df03743ace..0000000000
---- a/doc/device-tree-bindings/i2c/i2c-stm32.txt
-+++ /dev/null
-@@ -1,30 +0,0 @@
--* I2C controller embedded in STMicroelectronis STM32 platforms
--
--Required properties :
--- compatible : Must be "st,stm32f7-i2c"
--- reg : Offset and length of the register set for the device
--- resets: Must contain the phandle to the reset controller
--- clocks: Must contain the input clock of the I2C instance
--- A pinctrl state named "default" must be defined to set pins in mode of
--  operation for I2C transfer
--- #address-cells = <1>;
--- #size-cells = <0>;
--
--Optional properties :
--- clock-frequency : Desired I2C bus clock frequency in Hz. If not specified,
--  the default 100 kHz frequency will be used. As only Normal, Fast and Fast+
--  modes are implemented, possible values are 100000, 400000 and 1000000.
--
--Example :
--
--	i2c1: i2c@40005400 {
--		compatible = "st,stm32f7-i2c";
--		reg = <0x40005400 0x400>;
--		resets = <&rcc 181>;
--		clocks = <&clk_pclk1>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&pinctrl_i2c1>;
--		clock-frequency = <400000>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--	};
-diff --git a/doc/device-tree-bindings/memory-controllers/st,stm32-fmc.txt b/doc/device-tree-bindings/memory-controllers/st,stm32-fmc.txt
-deleted file mode 100644
-index 99f76d515f..0000000000
---- a/doc/device-tree-bindings/memory-controllers/st,stm32-fmc.txt
-+++ /dev/null
-@@ -1,58 +0,0 @@
--ST, stm32 flexible memory controller Drive
--Required properties:
--- compatible	: "st,stm32-fmc"
--- reg		: fmc controller base address
--- clocks	: fmc controller clock
--u-boot,dm-pre-reloc: flag to initialize memory before relocation.
--
--on-board sdram memory attributes:
--- st,sdram-control : parameters for sdram configuration, in this order:
--  number of columns
--  number of rows
--  memory width
--  number of intenal banks in memory
--  cas latency
--  read burst enable or disable
--  read pipe delay
--
--- st,sdram-timing: timings for sdram, in this order:
--  tmrd
--  txsr
--  tras
--  trc
--  trp
--  trcd
--
--There is device tree include file at :
--include/dt-bindings/memory/stm32-sdram.h to define sdram control and timing
--parameters as MACROS.
--
--Example:
--	fmc: fmc@A0000000 {
--	     compatible = "st,stm32-fmc";
--	     reg = <0xA0000000 0x1000>;
--	     clocks = <&rcc 0 64>;
--	     u-boot,dm-pre-reloc;
--	};
--
--	&fmc {
--		pinctrl-0 = <&fmc_pins>;
--		pinctrl-names = "default";
--		status = "okay";
--
--		/* sdram memory configuration from sdram datasheet */
--		bank1: bank@0 {
--		       st,sdram-control = /bits/ 8 <NO_COL_8 NO_ROW_12 MWIDTH_16 BANKS_2
--						CAS_3 RD_BURST_EN RD_PIPE_DL_0>;
--		       st,sdram-timing = /bits/ 8 <TMRD_1 TXSR_60 TRAS_42 TRC_60 TRP_18
--						TRCD_18>;
--		};
--
--		/* sdram memory configuration from sdram datasheet */
--		bank2: bank@1 {
--		       st,sdram-control = /bits/ 8 <NO_COL_8 NO_ROW_12 MWIDTH_16 BANKS_2
--						CAS_3 RD_BURST_EN RD_PIPE_DL_0>;
--		       st,sdram-timing = /bits/ 8 <TMRD_1 TXSR_60 TRAS_42 TRC_60 TRP_18
--						TRCD_18>;
--		};
++	ret = reset_get_by_index(dev, 0, &plat->rst_ctl);
++	if (ret < 0)
++		goto clk_err;
++
++	ret = gpio_request_list_by_name(dev, "cs-gpios", plat->cs_gpios,
++					ARRAY_SIZE(plat->cs_gpios), 0);
++	if (ret < 0) {
++		dev_err(dev, "Can't get %s cs gpios: %d", dev->name, ret);
++		ret = -ENOENT;
++		goto clk_err;
++	}
++
++	return 0;
++
++clk_err:
++	clk_free(&plat->clk);
++
++	return ret;
++}
++
+ static int stm32_spi_probe(struct udevice *dev)
+ {
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
+ 	struct stm32_spi_priv *priv = dev_get_priv(dev);
++	void __iomem *base = plat->base;
+ 	unsigned long clk_rate;
+ 	int ret;
+ 	unsigned int i;
+ 
+-	priv->base = dev_remap_addr(dev);
+-	if (!priv->base)
+-		return -EINVAL;
+-
+ 	/* enable clock */
+-	ret = clk_get_by_index(dev, 0, &priv->clk);
++	ret = clk_enable(&plat->clk);
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret = clk_enable(&priv->clk);
+-	if (ret < 0)
+-		return ret;
+-
+-	clk_rate = clk_get_rate(&priv->clk);
++	clk_rate = clk_get_rate(&plat->clk);
+ 	if (!clk_rate) {
+ 		ret = -EINVAL;
+ 		goto clk_err;
+@@ -514,46 +566,34 @@ static int stm32_spi_probe(struct udevice *dev)
+ 	priv->bus_clk_rate = clk_rate;
+ 
+ 	/* perform reset */
+-	ret = reset_get_by_index(dev, 0, &priv->rst_ctl);
+-	if (ret < 0)
+-		goto clk_err;
+-
+-	reset_assert(&priv->rst_ctl);
++	reset_assert(&plat->rst_ctl);
+ 	udelay(2);
+-	reset_deassert(&priv->rst_ctl);
+-
+-	ret = gpio_request_list_by_name(dev, "cs-gpios", priv->cs_gpios,
+-					ARRAY_SIZE(priv->cs_gpios), 0);
+-	if (ret < 0) {
+-		dev_err(dev, "Can't get cs gpios: %d", ret);
+-		goto reset_err;
 -	}
-diff --git a/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt b/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
-deleted file mode 100644
-index ad2bef8265..0000000000
---- a/doc/device-tree-bindings/mtd/stm32-fmc2-nand.txt
-+++ /dev/null
-@@ -1,61 +0,0 @@
--STMicroelectronics Flexible Memory Controller 2 (FMC2)
--NAND Interface
++	reset_deassert(&plat->rst_ctl);
+ 
+ 	priv->fifo_size = stm32_spi_get_fifo_size(dev);
 -
--Required properties:
--- compatible: Should be one of:
--              * st,stm32mp15-fmc2
--- reg: NAND flash controller memory areas.
--       First region contains the register location.
--       Regions 2 to 4 respectively contain the data, command,
--       and address space for CS0.
--       Regions 5 to 7 contain the same areas for CS1.
--- interrupts: The interrupt number
--- pinctrl-0: Standard Pinctrl phandle (see: pinctrl/pinctrl-bindings.txt)
--- clocks: The clock needed by the NAND flash controller
+ 	priv->cur_mode = SPI_FULL_DUPLEX;
+ 	priv->cur_xferlen = 0;
+ 	priv->cur_bpw = SPI_DEFAULT_WORDLEN;
+-	clrsetbits_le32(priv->base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
++	clrsetbits_le32(base + STM32_SPI_CFG1, SPI_CFG1_DSIZE,
+ 			priv->cur_bpw - 1);
+ 
+-	for (i = 0; i < ARRAY_SIZE(priv->cs_gpios); i++) {
+-		if (!dm_gpio_is_valid(&priv->cs_gpios[i]))
++	for (i = 0; i < ARRAY_SIZE(plat->cs_gpios); i++) {
++		if (!dm_gpio_is_valid(&plat->cs_gpios[i]))
+ 			continue;
+ 
+-		dm_gpio_set_dir_flags(&priv->cs_gpios[i],
++		dm_gpio_set_dir_flags(&plat->cs_gpios[i],
+ 				      GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+ 	}
+ 
+ 	/* Ensure I2SMOD bit is kept cleared */
+-	clrbits_le32(priv->base + STM32_SPI_I2SCFGR, SPI_I2SCFGR_I2SMOD);
++	clrbits_le32(base + STM32_SPI_I2SCFGR, SPI_I2SCFGR_I2SMOD);
+ 
+ 	/*
+ 	 * - SS input value high
+ 	 * - transmitter half duplex direction
+ 	 * - automatic communication suspend when RX-Fifo is full
+ 	 */
+-	setbits_le32(priv->base + STM32_SPI_CR1,
++	setbits_le32(base + STM32_SPI_CR1,
+ 		     SPI_CR1_SSI | SPI_CR1_HDDIR | SPI_CR1_MASRX);
+ 
+ 	/*
+@@ -562,40 +602,38 @@ static int stm32_spi_probe(struct udevice *dev)
+ 	 *   SS input value is determined by the SSI bit
+ 	 * - keep control of all associated GPIOs
+ 	 */
+-	setbits_le32(priv->base + STM32_SPI_CFG2,
++	setbits_le32(base + STM32_SPI_CFG2,
+ 		     SPI_CFG2_MASTER | SPI_CFG2_SSM | SPI_CFG2_AFCNTR);
+ 
+ 	return 0;
+ 
+-reset_err:
+-	reset_free(&priv->rst_ctl);
 -
--Optional properties:
--- resets: Reference to a reset controller asserting the FMC controller
--- dmas: DMA specifiers (see: dma/stm32-mdma.txt)
--- dma-names: Must be "tx", "rx" and "ecc"
--
--* NAND device bindings:
--
--Required properties:
--- reg: describes the CS lines assigned to the NAND device.
--
--Optional properties:
--- nand-on-flash-bbt: see nand.txt
--- nand-ecc-strength: see nand.txt
--- nand-ecc-step-size: see nand.txt
--
--The following ECC strength and step size are currently supported:
-- - nand-ecc-strength = <1>, nand-ecc-step-size = <512> (Hamming)
-- - nand-ecc-strength = <4>, nand-ecc-step-size = <512> (BCH4)
-- - nand-ecc-strength = <8>, nand-ecc-step-size = <512> (BCH8) (default)
--
--Example:
--
--	fmc: nand-controller@58002000 {
--		compatible = "st,stm32mp15-fmc2";
--		reg = <0x58002000 0x1000>,
--		      <0x80000000 0x1000>,
--		      <0x88010000 0x1000>,
--		      <0x88020000 0x1000>,
--		      <0x81000000 0x1000>,
--		      <0x89010000 0x1000>,
--		      <0x89020000 0x1000>;
--		interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
--		clocks = <&rcc FMC_K>;
--		resets = <&rcc FMC_R>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&fmc_pins_a>;
--		#address-cells = <1>;
--		#size-cells = <0>;
--
--		nand@0 {
--			reg = <0>;
--			nand-on-flash-bbt;
--			#address-cells = <1>;
--			#size-cells = <1>;
--		};
--	};
-diff --git a/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt b/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
-deleted file mode 100644
-index edfe4b426c..0000000000
---- a/doc/device-tree-bindings/phy/phy-stm32-usbphyc.txt
-+++ /dev/null
-@@ -1,75 +0,0 @@
--STMicroelectronics STM32 USB HS PHY controller
--
--The STM32 USBPHYC block contains a dual port High Speed UTMI+ PHY and a UTMI
--switch. It controls PHY configuration and status, and the UTMI+ switch that
--selects either OTG or HOST controller for the second PHY port. It also sets
--PLL configuration.
--
--USBPHYC
--      |_ PLL
--      |
--      |_ PHY port#1 _________________ HOST controller
--      |                    _                 |
--      |                  / 1|________________|
--      |_ PHY port#2 ----|   |________________
--      |                  \_0|                |
--      |_ UTMI switch_______|          OTG controller
--
--
--Phy provider node
--=================
--
--Required properties:
--- compatible: must be "st,stm32mp1-usbphyc"
--- reg: address and length of the usb phy control register set
--- clocks: phandle + clock specifier for the PLL phy clock
--- vdda1v1-supply: phandle to the regulator providing 1V1 power to the PHY
--- vdda1v8-supply: phandle to the regulator providing 1V8 power to the PHY
--- #address-cells: number of address cells for phys sub-nodes, must be <1>
--- #size-cells: number of size cells for phys sub-nodes, must be <0>
--
--Optional properties:
--- assigned-clocks: phandle + clock specifier for the PLL phy clock
--- assigned-clock-parents: the PLL phy clock parent
--- resets: phandle + reset specifier
--
--Required nodes: one sub-node per port the controller provides.
--
--Phy sub-nodes
--==============
--
--Required properties:
--- reg: phy port index
--- phy-supply: phandle to the regulator providing 3V3 power to the PHY,
--	      see phy-bindings.txt in the same directory.
--- #phy-cells: see phy-bindings.txt in the same directory, must be <0> for PHY
--  port#1 and must be <1> for PHY port#2, to select USB controller
--
--Optional properties:
--- vbus-supply: phandle to the regulator providing 5V vbus to the USB connector
--
--Example:
--		usbphyc: usb-phy@5a006000 {
--			compatible = "st,stm32mp1-usbphyc";
--			reg = <0x5a006000 0x1000>;
--			clocks = <&rcc_clk USBPHY_K>;
--			resets = <&rcc_rst USBPHY_R>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			usbphyc_port0: usb-phy@0 {
--				reg = <0>;
--				phy-supply = <&vdd_usb>;
--				vdda1v1-supply = <&reg11>;
--				vdda1v8-supply = <&reg18>
--				#phy-cells = <0>;
--			};
--
--			usbphyc_port1: usb-phy@1 {
--				reg = <1>;
--				phy-supply = <&vdd_usb>;
--				vdda1v1-supply = <&reg11>;
--				vdda1v8-supply = <&reg18>
--				#phy-cells = <1>;
--			};
--		};
-diff --git a/doc/device-tree-bindings/pinctrl/st,stm32-pinctrl.txt b/doc/device-tree-bindings/pinctrl/st,stm32-pinctrl.txt
-deleted file mode 100644
-index 00169255e4..0000000000
---- a/doc/device-tree-bindings/pinctrl/st,stm32-pinctrl.txt
-+++ /dev/null
-@@ -1,208 +0,0 @@
--* STM32 GPIO and Pin Mux/Config controller
--
--STMicroelectronics's STM32 MCUs intregrate a GPIO and Pin mux/config hardware
--controller. It controls the input/output settings on the available pins and
--also provides ability to multiplex and configure the output of various on-chip
--controllers onto these pads.
--
--Pin controller node:
--Required properies:
-- - compatible: value should be one of the following:
--   "st,stm32f429-pinctrl"
--   "st,stm32f469-pinctrl"
--   "st,stm32f746-pinctrl"
--   "st,stm32f769-pinctrl"
--   "st,stm32h743-pinctrl"
--   "st,stm32mp157-pinctrl"
--   "st,stm32mp157-z-pinctrl"
-- - #address-cells: The value of this property must be 1
-- - #size-cells	: The value of this property must be 1
-- - ranges	: defines mapping between pin controller node (parent) to
--   gpio-bank node (children).
-- - pins-are-numbered: Specify the subnodes are using numbered pinmux to
--   specify pins.
--
--GPIO controller/bank node:
--Required properties:
-- - gpio-controller : Indicates this device is a GPIO controller
-- - #gpio-cells	  : Should be two.
--			The first cell is the pin number
--			The second one is the polarity:
--				- 0 for active high
--				- 1 for active low
-- - reg		  : The gpio address range, relative to the pinctrl range
-- - clocks	  : clock that drives this bank
-- - st,bank-name	  : Should be a name string for this bank as specified in
--   the datasheet
--
--Optional properties:
-- - reset:	  : Reference to the reset controller
-- - st,syscfg: Should be phandle/offset/mask.
--	-The phandle to the syscon node which includes IRQ mux selection register.
--	-The offset of the IRQ mux selection register
--	-The field mask of IRQ mux, needed if different of 0xf.
-- - gpio-ranges: Define a dedicated mapping between a pin-controller and
--   a gpio controller. Format is <&phandle a b c> with:
--	-(phandle): phandle of pin-controller.
--	-(a): gpio base offset in range.
--	-(b): pin base offset in range.
--	-(c): gpio count in range
--   This entry has to be used either if there are holes inside a bank:
--	GPIOB0/B1/B2/B14/B15 (see example 2)
--   or if banks are not contiguous:
--	GPIOA/B/C/E...
--   NOTE: If "gpio-ranges" is used for a gpio controller, all gpio-controller
--   have to use a "gpio-ranges" entry.
--   More details in Documentation/devicetree/bindings/gpio/gpio.txt.
-- - st,bank-ioport: should correspond to the EXTI IOport selection (EXTI line
--   used to select GPIOs as interrupts).
-- - hwlocks: reference to a phandle of a hardware spinlock provider node.
-- - st,package: Indicates the SOC package used.
--   More details in include/dt-bindings/pinctrl/stm32-pinfunc.h
--
--Example 1:
--#include <dt-bindings/pinctrl/stm32f429-pinfunc.h>
--...
--
--	pin-controller {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "st,stm32f429-pinctrl";
--		ranges = <0 0x40020000 0x3000>;
--		pins-are-numbered;
--
--		gpioa: gpio@40020000 {
--			gpio-controller;
--			#gpio-cells = <2>;
--			reg = <0x0 0x400>;
--			resets = <&reset_ahb1 0>;
--			st,bank-name = "GPIOA";
--		};
--		...
--		pin-functions nodes follow...
--	};
--
--Example 2:
--#include <dt-bindings/pinctrl/stm32f429-pinfunc.h>
--...
--
--	pinctrl: pin-controller {
--		#address-cells = <1>;
--		#size-cells = <1>;
--		compatible = "st,stm32f429-pinctrl";
--		ranges = <0 0x40020000 0x3000>;
--		pins-are-numbered;
--
--		gpioa: gpio@40020000 {
--			gpio-controller;
--			#gpio-cells = <2>;
--			reg = <0x0 0x400>;
--			resets = <&reset_ahb1 0>;
--			st,bank-name = "GPIOA";
--			gpio-ranges = <&pinctrl 0 0 16>;
--		};
--
--		gpiob: gpio@40020400 {
--			gpio-controller;
--			#gpio-cells = <2>;
--			reg = <0x0 0x400>;
--			resets = <&reset_ahb1 0>;
--			st,bank-name = "GPIOB";
--			ngpios = 4;
--			gpio-ranges = <&pinctrl 0 16 3>,
--				      <&pinctrl 14 30 2>;
--		};
--
--
--		...
--		pin-functions nodes follow...
--	};
--
--
--Contents of function subnode node:
------------------------------------
--Subnode format
--A pinctrl node should contain at least one subnode representing the
--pinctrl group available on the machine. Each subnode will list the
--pins it needs, and how they should be configured, with regard to muxer
--configuration, pullups, drive, output high/low and output speed.
--
--    node {
--	pinmux = <PIN_NUMBER_PINMUX>;
--	GENERIC_PINCONFIG;
--    };
--
--Required properties:
--- pinmux: integer array, represents gpio pin number and mux setting.
--  Supported pin number and mux varies for different SoCs, and are defined in
--  dt-bindings/pinctrl/<soc>-pinfunc.h directly.
--  These defines are calculated as:
--    ((port * 16 + line) << 8) | function
--  With:
--    - port: The gpio port index (PA = 0, PB = 1, ..., PK = 11)
--    - line: The line offset within the port (PA0 = 0, PA1 = 1, ..., PA15 = 15)
--    - function: The function number, can be:
--      * 0 : GPIO
--      * 1 : Alternate Function 0
--      * 2 : Alternate Function 1
--      * 3 : Alternate Function 2
--      * ...
--      * 16 : Alternate Function 15
--      * 17 : Analog
--
--  To simplify the usage, macro is available to generate "pinmux" field.
--  This macro is available here:
--    - include/dt-bindings/pinctrl/stm32-pinfunc.h
--
--  Some examples of using macro:
--    /* GPIO A9 set as alernate function 2 */
--    ... {
--		pinmux = <STM32_PINMUX('A', 9, AF2)>;
--    };
--    /* GPIO A9 set as GPIO  */
--    ... {
--		pinmux = <STM32_PINMUX('A', 9, GPIO)>;
--    };
--    /* GPIO A9 set as analog */
--    ... {
--		pinmux = <STM32_PINMUX('A', 9, ANALOG)>;
--    };
--
--Optional properties:
--- GENERIC_PINCONFIG: is the generic pinconfig options to use.
--  Available options are:
--   - bias-disable,
--   - bias-pull-down,
--   - bias-pull-up,
--   - drive-push-pull,
--   - drive-open-drain,
--   - output-low
--   - output-high
--   - slew-rate = <x>, with x being:
--       < 0 > : Low speed
--       < 1 > : Medium speed
--       < 2 > : Fast speed
--       < 3 > : High speed
--
--Example:
--
--pin-controller {
--...
--	usart1_pins_a: usart1@0 {
--		pins1 {
--			pinmux = <STM32_PINMUX('A', 9, AF7)>;
--			bias-disable;
--			drive-push-pull;
--			slew-rate = <0>;
--		};
--		pins2 {
--			pinmux = <STM32_PINMUX('A', 10, AF7)>;
--			bias-disable;
--		};
--	};
--};
--
--&usart1 {
--	pinctrl-0 = <&usart1_pins_a>;
--	pinctrl-names = "default";
--};
-diff --git a/doc/device-tree-bindings/regulator/st,stm32-vrefbuf.txt b/doc/device-tree-bindings/regulator/st,stm32-vrefbuf.txt
-deleted file mode 100644
-index 0f6b6feda3..0000000000
---- a/doc/device-tree-bindings/regulator/st,stm32-vrefbuf.txt
-+++ /dev/null
-@@ -1,23 +0,0 @@
--STM32 VREFBUF - Voltage reference buffer
--
--Some STM32 devices embed a voltage reference buffer which can be used as
--voltage reference for ADCs, DACs and also as voltage reference for external
--components through the dedicated VREF+ pin.
--
--Required properties:
--- compatible:		Must be "st,stm32-vrefbuf".
--- reg:			Offset and length of VREFBUF register set.
--- clocks:		Must contain an entry for peripheral clock.
--
--Optional properties:
--- vdda-supply:		Phandle to the parent vdda supply regulator node.
--
--Example:
--	vrefbuf: regulator@58003c00 {
--		compatible = "st,stm32-vrefbuf";
--		reg = <0x58003C00 0x8>;
--		clocks = <&rcc VREF_CK>;
--		regulator-min-microvolt = <1500000>;
--		regulator-max-microvolt = <2500000>;
--		vdda-supply = <&vdda>;
--	};
-diff --git a/doc/device-tree-bindings/reset/st,stm32-rcc.txt b/doc/device-tree-bindings/reset/st,stm32-rcc.txt
-deleted file mode 100644
-index 01db343751..0000000000
---- a/doc/device-tree-bindings/reset/st,stm32-rcc.txt
-+++ /dev/null
-@@ -1,6 +0,0 @@
--STMicroelectronics STM32 Peripheral Reset Controller
--====================================================
--
--The RCC IP is both a reset and a clock controller.
--
--Please see Documentation/devicetree/bindings/clock/st,stm32-rcc.txt
-diff --git a/doc/device-tree-bindings/spi/spi-stm32-qspi.txt b/doc/device-tree-bindings/spi/spi-stm32-qspi.txt
-deleted file mode 100644
-index adeeb63e84..0000000000
---- a/doc/device-tree-bindings/spi/spi-stm32-qspi.txt
-+++ /dev/null
-@@ -1,44 +0,0 @@
--* STMicroelectronics Quad Serial Peripheral Interface(QSPI)
--
--Required properties:
--- compatible: should be "st,stm32f469-qspi"
--- reg: the first contains the register location and length.
--       the second contains the memory mapping address and length
--- reg-names: should contain the reg names "qspi" "qspi_mm"
--- interrupts: should contain the interrupt for the device
--- clocks: the phandle of the clock needed by the QSPI controller
--- A pinctrl must be defined to set pins in mode of operation for QSPI transfer
--
--Optional properties:
--- resets: must contain the phandle to the reset controller.
--
--A spi flash (NOR/NAND) must be a child of spi node and could have some
--properties. Also see jedec,spi-nor.txt.
--
--Required properties:
--- reg: chip-Select number (QSPI controller may connect 2 flashes)
--- spi-max-frequency: max frequency of spi bus
--
--Optional property:
--- spi-rx-bus-width: see ./spi-bus.txt for the description
--
--Example:
--
--qspi: spi@a0001000 {
--	compatible = "st,stm32f469-qspi";
--	reg = <0xa0001000 0x1000>, <0x90000000 0x10000000>;
--	reg-names = "qspi", "qspi_mm";
--	interrupts = <91>;
--	resets = <&rcc STM32F4_AHB3_RESET(QSPI)>;
--	clocks = <&rcc 0 STM32F4_AHB3_CLOCK(QSPI)>;
--	pinctrl-names = "default";
--	pinctrl-0 = <&pinctrl_qspi0>;
--
--	flash@0 {
--		compatible = "jedec,spi-nor";
--		reg = <0>;
--		spi-rx-bus-width = <4>;
--		spi-max-frequency = <108000000>;
--		...
--	};
--};
+ clk_err:
+-	clk_disable(&priv->clk);
+-	clk_free(&priv->clk);
++	clk_disable(&plat->clk);
++	clk_free(&plat->clk);
+ 
+ 	return ret;
+ };
+ 
+ static int stm32_spi_remove(struct udevice *dev)
+ {
+-	struct stm32_spi_priv *priv = dev_get_priv(dev);
++	struct stm32_spi_plat *plat = dev_get_plat(dev);
++	void __iomem *base = plat->base;
+ 	int ret;
+ 
+ 	stm32_spi_stopxfer(dev);
+-	stm32_spi_disable(priv);
++	stm32_spi_disable(base);
+ 
+-	ret = reset_assert(&priv->rst_ctl);
++	ret = reset_assert(&plat->rst_ctl);
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	reset_free(&priv->rst_ctl);
++	reset_free(&plat->rst_ctl);
+ 
+-	ret = clk_disable(&priv->clk);
++	ret = clk_disable(&plat->clk);
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	clk_free(&priv->clk);
++	clk_free(&plat->clk);
+ 
+ 	return ret;
+ };
+@@ -618,7 +656,9 @@ U_BOOT_DRIVER(stm32_spi) = {
+ 	.id			= UCLASS_SPI,
+ 	.of_match		= stm32_spi_ids,
+ 	.ops			= &stm32_spi_ops,
+-	.priv_auto	= sizeof(struct stm32_spi_priv),
++	.of_to_plat		= stm32_spi_of_to_plat,
++	.plat_auto		= sizeof(struct stm32_spi_plat),
++	.priv_auto		= sizeof(struct stm32_spi_priv),
+ 	.probe			= stm32_spi_probe,
+ 	.remove			= stm32_spi_remove,
+ };
 -- 
 2.17.1
 

@@ -2,64 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 053F73ED33A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 16 Aug 2021 13:40:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE6F43EDC98
+	for <lists+uboot-stm32@lfdr.de>; Mon, 16 Aug 2021 19:50:29 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C61EEC57B60;
-	Mon, 16 Aug 2021 11:40:56 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A58E0C57B6B;
+	Mon, 16 Aug 2021 17:50:29 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EC4D4C57B51
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E9F17C57B60
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 16 Aug 2021 11:40:55 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
- 17GBVhRu003497; Mon, 16 Aug 2021 13:40:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : from : to
- : cc : references : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=wopdzVItNgkRXLK8C/sqQAlAUDnuClyEuHBN6Na4pHI=;
- b=hDupPwaz76I7iFc2MBmkvHQMKbNnlt90azXS2v1Ro+2fqe4DW1dYiQD85ejrr8fSWL0p
- huAN6JUgeCdKan6gb4SW56SJlIKw/psxarOEgc5ddXMWurU3I5/860s6IzTelWoGBpoo
- NNeV5p3mxc+v2OgvqF2zS1d7cAhsej5UDmPw7xnjcTC8h2MOqzSESpVPqQmT/3eTJ/w8
- MKCKt6Yk65UYsEOEsynB2R8MvgQ+oXFTe6NMZzSOQheH1uh3WOiXGqeCOVKyq1jYntRN
- a2GOl963549jRn/rBUo1l8PSOtKQKE/+E3I/MXnH910MX1MLN2Y7Xx7aVO2W63lOtosv 3g== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3afhp5j0f7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 16 Aug 2021 13:40:54 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 77A1B10002A;
- Mon, 16 Aug 2021 13:40:54 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6E6B323144C;
- Mon, 16 Aug 2021 13:40:54 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.45) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 16 Aug
- 2021 13:40:54 +0200
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20210716100739.1.Icd6f4c4e6a28826d31b9339af544c41d7c31d73d@changeid>
- <414c817a-fb54-269e-5158-57fb93a31b63@foss.st.com>
-Message-ID: <39e22575-bae1-4a45-75f1-0b5f368e7426@foss.st.com>
-Date: Mon, 16 Aug 2021 13:40:53 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ Mon, 16 Aug 2021 17:50:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1629136225;
+ bh=Bnwq63RmsBLB4ohzPRXFizKs7wR8YS9GbHDxqEbTgJk=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=CLIyV+Z6AZmnj8YmoKPWKcb107ra3XdgQoejbMLdkgY+ziBASgJHNwJvIAJpqzyxI
+ 7vCrBoByLTbsW+KmT3v3LMLSXrfyhkijcje0GZfF/LVSdlvJ97LrvJmxQxUvwLLtXG
+ LKCv4JvaUC44N52ppNqrDP3stMtdYS8vikfQHX6E=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from workstation5.fritz.box ([88.152.144.157]) by mail.gmx.net
+ (mrgmx004 [212.227.17.190]) with ESMTPSA (Nemesis) id
+ 1MdvmO-1mpIUJ17xe-00b2Yv; Mon, 16 Aug 2021 19:50:25 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Mon, 16 Aug 2021 19:49:59 +0200
+Message-Id: <20210816174959.1472935-1-xypron.glpk@gmx.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-In-Reply-To: <414c817a-fb54-269e-5158-57fb93a31b63@foss.st.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
- definitions=2021-08-16_04:2021-08-16,
- 2021-08-16 signatures=0
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] clk: stm32mp1: add support of BSEC clock
+X-Provags-ID: V03:K1:v8e7t5PwnelDRlk51P7m7nXcynLgXTjR0fOLS3/AA6nOu2SwA7I
+ 3mLEPjVr+04XgGzhcJWxO/qGbsiYMT8foC3izCLdVM9HD7IzPmQ90UVO1B+/WPA9OCg3JGV
+ mS8d8RPoAcmR/tABf9bM/m/qCxq0DgNYrGT9Ltq8hnndeUefWFWarcwSsV/j3oV5F2nj+Ua
+ SQUAOHQlztn+yKzksrkGg==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:MhaARf420iA=:+vwkzTzgxSV1Z290q/gOVF
+ q2KMdTpz5cwlCxs9XCEhwhCJo1oTdDpLjP5c6NuRXmfkWrhEKVwQJcilxXUoKSRIaT1qcNJ4d
+ 266kUDT6Hbd1NF8PRwtrej9np042xLk3lNiuz/pQtfBl12Ep00rQBe5VoPMr9fJQt4rkymQKH
+ +7edUCoauq2DROxPahbPHGQXJdSX4W1dFpiZx938ALFgdk/yTE2DRcNf1WwJUHcHFIvqvvARH
+ 6+2rwc2gqXrBZdu45eDEmVMPayOHYWJzutRQnye9jVaTq/dT1X1OhEMpPkNbAUafALEK5vqaT
+ 2QPVuDI2MiMcgpekOVQSwrMH4FxdOp5R0bGF6KCx2WIp3SfO1xDvQfF0ttMATYV+yLmpVkCDf
+ jsBoYN6DK3OkQuqEo8iyaD17sAMlcxA7t2M7Jm36c37Dj1GG3llX/9+JlcBxiSqq3NvxtWnwf
+ E/OVFrdAHc1huEcMXPnWm2d1KUEYHWu74L/QnCuZPQOBo1/lLfQPU4x5tz4wy4FlNiHMTFZlN
+ rJnPYUa4t2ri9+gjaBfSKeZ0xw6Mt0AblcQnc7ExXaJG6WClD6RIehcYjY/GSinDMsDv5FTGe
+ zZi7CMUSsi2kXTAcz09qNVa2ffquoCpojmZL/IIBodIIF7VoMDkNOGSCVkYZRkkQpGzkEvoxI
+ XJqbQVDnwUP60p05e4u3UaSf2xCx6qDuXniLvkxVK6vShVwNn3p9cWptF32imk+mDjxOlnX/f
+ BEiQQSVD2oxwIVZKXjt/avytq6AFsjyLZUPXsSV63wXqkK1KZJOeu+Y8thm+ju2BCg4kSfUtw
+ 7R0tPqQ34qoRRncAnCaMefotkBQX8AFCiOIrXh9mU8dHmjSQQyxw4K2m5VLN4AuV5Zoajqknu
+ jogitIdsKAW1vsSV41tRkgy+XvWxPA3ZunYIJ+xTUw58NSbDO1+JNmJfqu+57Q//IOQ+q6sTO
+ zDiwPwW9p2rK/WTh3u7+HevvHgHJB3TzVQA2XHTmPEnvhykiILCU8T7B5rDEDVexnwJtlJHNy
+ 2yzHLuzYTg7bY9sxJm51kp+DOyL/7TK1Y+4egk/zo4KOub4wJIa0NCKjcA1OvGfwBL9+Ck1YT
+ AGPdiMZccBx656kxypyuw6dFNKxPMNv9/kVkcJia9pQtgNq7rcNsZsMPw==
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [Uboot-stm32] [PATCH 1/1] doc: move doc/board/st/st.rst
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,53 +72,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
+'make htmldocs' does not use file doc/board/st/st.rst because the name
+matches the directory name. Let's rename it to st-dt.rst.
 
-On 8/2/21 1:42 PM, Patrice CHOTARD wrote:
-> Hi Patrick
-> 
-> On 7/16/21 10:10 AM, Patrick Delaunay wrote:
->> Add the support of the BSEC clock used by the STM32MP misc driver
->> since the commit 622c956cada0 ("stm32mp: bsec: manage clock when present
->> in device tree") even if this clock is not yet defined in kernel device
->> tree stm32mp151.dtsi.
->>
->> This patch avoids issue for basic boot when this secure clock are not
->> provided by secure world with SCMI.
->>
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> ---
->>
->>  drivers/clk/clk_stm32mp1.c | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
->> index 48c9514ba0..96e175f221 100644
->> --- a/drivers/clk/clk_stm32mp1.c
->> +++ b/drivers/clk/clk_stm32mp1.c
->> @@ -552,6 +552,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
->>  	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 2, I2C4_K, _I2C46_SEL),
->>  	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 3, I2C6_K, _I2C46_SEL),
->>  	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 8, RTCAPB, _PCLK5),
->> +	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 16, BSEC, _UNKNOWN_SEL),
->>  	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 20, STGEN_K, _STGEN_SEL),
->>  
->>  	STM32MP1_CLK_SET_CLR_F(RCC_MP_AHB2ENSETR, 5, ADC12, _HCLK2),
->>
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-> 
-Applied to u-boot-stm/master
+Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+ doc/board/st/index.rst             | 2 +-
+ doc/board/st/{st.rst => st-dt.rst} | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename doc/board/st/{st.rst => st-dt.rst} (100%)
 
-Thanks
-Patrice
+diff --git a/doc/board/st/index.rst b/doc/board/st/index.rst
+index 8a06a954a2..9bba42f1da 100644
+--- a/doc/board/st/index.rst
++++ b/doc/board/st/index.rst
+@@ -6,5 +6,5 @@ STMicroelectronics
+ .. toctree::
+    :maxdepth: 2
+
+-   st
++   st-dt
+    stm32mp1
+diff --git a/doc/board/st/st.rst b/doc/board/st/st-dt.rst
+similarity index 100%
+rename from doc/board/st/st.rst
+rename to doc/board/st/st-dt.rst
+--
+2.30.2
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

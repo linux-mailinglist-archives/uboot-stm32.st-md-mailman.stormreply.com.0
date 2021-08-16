@@ -2,60 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B6203E3DEE
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Aug 2021 04:31:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 610EE3ECF53
+	for <lists+uboot-stm32@lfdr.de>; Mon, 16 Aug 2021 09:26:37 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0948FC57196;
-	Mon,  9 Aug 2021 02:31:36 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
- [209.85.221.41])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A376C57B60;
+	Mon, 16 Aug 2021 07:26:37 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 95E40C5718D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA226C57B5F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 Aug 2021 02:31:34 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id h14so19325305wrx.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 08 Aug 2021 19:31:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=xXdXzH69mzkU5fkIqp3jAzzOfRvU4MhscNqC4+gGfqw=;
- b=LiODUDPOuBxp1EXzKiFMbFQ3kra9MaSet/aRzOjpXtmQxs6QrNMoUKAGZRhtK2YH/a
- dcQiCTSH2ppF0o/4zZoe+auskPlenUs6bGTAMJMlsCGJ3hwU3yn91ZiDRXQp879a1ClX
- neixp49WIGbA8Rzbjtc5VBByTzTgh2I7TY4YQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=xXdXzH69mzkU5fkIqp3jAzzOfRvU4MhscNqC4+gGfqw=;
- b=EsGKA3Dt5siT02491sFuomaMwHz1oDpkXjBIhNPmx6eF4HpXla/EF5imOFoG57dkXz
- RYhgfiB+4XwUJ+TUVyZQj/fY1OrlflD6ZULxSTMdukHRAmgFPRZWaTjbhjWAlotDNxKf
- tpb00srIUeZE0pXVctbT/vMWJf6rHuL2KiwqshwsO1n4IGDHQhHWgrPGQgUlyusH4Nw4
- SWn2xTN04girQ8LvuFrm9ophx703qYF8wZ2f0hC4l2jCNu3D7ruYrhpsUN0f2MkE1u7Q
- H0vAuAWKA7hhKjPH+VXBysisiNa2ZQnyAyUqNZ9UpqsD9w2L/fEdFEA1WJKUwx76wzCR
- Ujmw==
-X-Gm-Message-State: AOAM533nGJYnV97TNdgxnXPp7K2o5nD/XAsPz7d2krOU9t0fXuNL4LfB
- Q3pXYyySoqbEnQZQ3tfp5cuSDvAelH0fPBORAilxKQ==
-X-Google-Smtp-Source: ABdhPJxlAl71mzKZgggeZMJ4/aPPiDdvtFC6h/MXFKXoPOCE9oooW035PjeDYrH6q5y49hrCSTUFY1rHtk7oYBkjLPg=
-X-Received: by 2002:adf:9c8b:: with SMTP id d11mr9573497wre.43.1628476294007; 
- Sun, 08 Aug 2021 19:31:34 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sun, 8 Aug 2021 19:31:31 -0700
+ Mon, 16 Aug 2021 07:26:35 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id
+ 17G77vAx022255; Mon, 16 Aug 2021 09:26:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=+hE8OoO5r6AUM2BFEJw/vd+Uqd3oR5JwmJxOSnW17K8=;
+ b=eOcVdY1EO5LFUgO6UJx+9F+yA+K4hwlqLZ3kg8M23KcNuopfZIG8i+u4eMe4095Z9Mxk
+ p+70RBxRqlP5YAe86tjklHHzAGp1fZEnUYMUdTD8dIsYtGBijEYHUwzZ2ZhMnbCXtsye
+ khySSaMkK7yiiys5ATTlfDYX2jA2229P484z0P6uqaCCg4IN/jt7gdWLtMu+BCWt58r3
+ 5J6D6kyGXlgGKlfVVQlqThcaxw4juI4K5NanPxDvZieC7Hyqwn9Fn3FwoHbKgXgfeAIZ
+ VkZNSaLhLy0hvKSTCGaZyxusXr0GBuLLkOoMgfljHcRTYau9szAM6517mH2s9qVJrpNH tQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3afcd1sv99-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 16 Aug 2021 09:26:32 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2A7A410002A;
+ Mon, 16 Aug 2021 09:26:30 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E5D3E21CA9D;
+ Mon, 16 Aug 2021 09:26:30 +0200 (CEST)
+Received: from lmecxl0573.lme.st.com (10.75.127.50) by SFHDAG2NODE3.st.com
+ (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 16 Aug
+ 2021 09:26:30 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20210726115518.1.I199b974cdcfac6b770c164eef50f53ea8ad02bc5@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <70dc2611-5591-f2ba-043b-00b49e65e8e3@foss.st.com>
+Date: Mon, 16 Aug 2021 09:26:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ3kObVoBowEEjaRzrzJOO0GJcSeUnYWpKJtAq=KLBuGyg@mail.gmail.com>
-References: <CAPnjgZ3kObVoBowEEjaRzrzJOO0GJcSeUnYWpKJtAq=KLBuGyg@mail.gmail.com>
- <20210730121253.1.I548969a35a3522881113dc073f34b86bb15d29a6@changeid>
-Date: Sun, 8 Aug 2021 19:31:31 -0700
-X-Google-Sender-Auth: ab1tLTwAIRM4Clx0XkMT6f55XeM
-Message-ID: <CAPnjgZ3ZDL7keatfx=R6GM6j=qM4KXiyxOg28UNbR7drp-eTng@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: migrate the dm_warn to use the log
-	macro
+In-Reply-To: <20210726115518.1.I199b974cdcfac6b770c164eef50f53ea8ad02bc5@changeid>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+ (10.75.127.6)
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.391, 18.0.790
+ definitions=2021-08-16_02:2021-08-13,
+ 2021-08-16 signatures=0
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Alexander Graf <agraf@csgraf.de>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp: correctly handle
+	board_get_usable_ram_top(0)
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,25 +76,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 30 Jul 2021 at 04:13, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> Migrate the dm_warn function to log macro with
-> LOGC_DM category and LOGL_WARNING level.
->
-> This macro allows filtering with log command and allows
-> output on all log backend.
->
+Hi Patrick
+
+On 7/26/21 11:55 AM, Patrick Delaunay wrote:
+> The function board_get_usable_ram_top can to called after relocation
+> with total_size = 0 to get the uppermost pointer that is valid to access
+> in U-Boot.
+> 
+> When total_size = 0, the reserved memory should be not take in account
+> with lmb library and 'gd->ram_base + gd->ram_size' can be used.
+> 
+> It is the case today in lib/efi_loader/efi_memory.c:efi_add_known_memory()
+> and this patch avoids that the reserved memory for OP-TEE is not part of
+> the EFI available memory regions.
+> 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
->
->  drivers/core/util.c | 11 -----------
->  include/dm/util.h   |  2 +-
->  2 files changed, 1 insertion(+), 12 deletions(-)
+> Patch to correct the UEFI support for STM32MP platform
+> after Heinrich's remark on patch [1].
+> 
+> [1] efi_loader: replace board_get_usable_ram_top by gd->ram_top
+> http://patchwork.ozlabs.org/project/uboot/patch/20210709124630.1.I212e7cd96724368b8272300c59c2a1c1f227ed67@changeid/
+> 
+>  arch/arm/mach-stm32mp/dram_init.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
+> index 3c097029bd..94f25f34e0 100644
+> --- a/arch/arm/mach-stm32mp/dram_init.c
+> +++ b/arch/arm/mach-stm32mp/dram_init.c
+> @@ -46,6 +46,9 @@ ulong board_get_usable_ram_top(ulong total_size)
+>  	phys_addr_t reg;
+>  	struct lmb lmb;
+>  
+> +	if (!total_size)
+> +		return gd->ram_base + gd->ram_size;
+> +
+>  	/* found enough not-reserved memory to relocated U-Boot */
+>  	lmb_init(&lmb);
+>  	lmb_add(&lmb, gd->ram_base, gd->ram_size);
+> 
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Applied to u-boot-dm, thanks!
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

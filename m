@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 044663FCB30
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Aug 2021 18:05:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1EBB3FCB85
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Aug 2021 18:30:14 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 51332C57B60;
-	Tue, 31 Aug 2021 16:05:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 618FAC57B60;
+	Tue, 31 Aug 2021 16:30:14 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A2724C424AF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4C5EBC5718F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 31 Aug 2021 16:05:13 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.0.43) with SMTP id 17VEkIw4014213;
- Tue, 31 Aug 2021 18:05:10 +0200
+ Tue, 31 Aug 2021 16:30:12 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.0.43) with SMTP id 17VFfTvg012312;
+ Tue, 31 Aug 2021 18:30:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=nm0ON8NhMjtlosAS4w/gWhW0fW8Sdz0Ma81/Q4Htbr0=;
- b=ac8Qdg+yS1b3z2Jq8Hzz6lRXRxYE1kg8diwq/wHjJ0mM0bcXEU3wwQ481QL6lPiqCk33
- 6hfN8CfUE++EVzJYRdyi/2QjELADnl7cP1EYprqG5ERbF67IcVN0hzA6IavlEgzKG8I8
- ZKXVX4tfVlwbLihPTTNyMf13qSp8ETnT/4M3hi0ySJZhfwtAV1amTmd77zX+pQ3FHzxg
- GXgos0Q/xKkBYNAyhZk7Qdh2p2NRPEXwVZyLxsy3ECm8ZkyZoyGitO2GOh4WYc8tugEI
- /fLQIGuUY8jpdwwo+tSmD0Tphb6U/R2zHgd4vqZGgMb+7MhJbp9S6Q7PI8EPhvPxGFqH 0w== 
+ bh=Q8oOjAXa/c8Vlb0jNBsj5LHDYxYT7LSXlwh1gY8oVVA=;
+ b=4tcCgZrm0XHwaioqL5xNwIe70n9ABAtUAIKXZ5dfGSpYC/vydfJmmiYsirqZRoHuI3Qo
+ s14LY6of+xNT32VxbNoYUOb4qCLK+ht/OwyDY5EFbxaS8xHs1g8sePmJenY1G2b4L4Sj
+ W2B9JhvPoXVL6FXZkU6rs1bvFDzMQwsnCKS+QFFEjgrHKNGIdE9IAUQFrltCvA1bGy3v
+ 0B2rpHK1r4AvvN8eGqmKUl9aBv4AK3nK5t/1SQYJ/+inlk0Z/OGuEAcZXgLikiAJev5s
+ IHOzJyCm61H/07kP9pKTn2DF3u5EOa/6R4/oImMGYSq8eZhGFVcJII4WIGiJI9mB2DYc LA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3asheh281b-1
+ by mx07-00178001.pphosted.com with ESMTP id 3asc7e4774-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 31 Aug 2021 18:05:10 +0200
+ Tue, 31 Aug 2021 18:30:09 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AEFC410002A;
- Tue, 31 Aug 2021 18:05:08 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 161E510002A;
+ Tue, 31 Aug 2021 18:30:09 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 940C92540A2;
- Tue, 31 Aug 2021 18:05:08 +0200 (CEST)
-Received: from lmecxl0994.lme.st.com (10.75.127.51) by SFHDAG2NODE3.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 093EA2552A4;
+ Tue, 31 Aug 2021 18:30:09 +0200 (CEST)
+Received: from lmecxl0994.lme.st.com (10.75.127.49) by SFHDAG2NODE3.st.com
  (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 31 Aug
- 2021 18:05:07 +0200
+ 2021 18:30:07 +0200
 To: Alexandru Gagniuc <mr.nuke.me@gmail.com>, <u-boot@lists.denx.de>
 References: <20210826214209.254461-1-mr.nuke.me@gmail.com>
- <20210826214209.254461-2-mr.nuke.me@gmail.com>
+ <20210826214209.254461-3-mr.nuke.me@gmail.com>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <88af3bca-b1e3-0e12-db57-49d8aca30767@foss.st.com>
-Date: Tue, 31 Aug 2021 18:05:07 +0200
+Message-ID: <2e118988-b0fe-c0c9-1766-ac1353ece55c@foss.st.com>
+Date: Tue, 31 Aug 2021 18:30:07 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210826214209.254461-2-mr.nuke.me@gmail.com>
+In-Reply-To: <20210826214209.254461-3-mr.nuke.me@gmail.com>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE3.st.com
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE3.st.com
  (10.75.127.6)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
  definitions=2021-08-31_07,2021-08-31_01,2020-04-07_01
 Cc: marex@denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 01/10] stm32mp1: Add support for baudrates
- higher than 115200
+Subject: Re: [Uboot-stm32] [PATCH 02/10] stm32mp1: Add support for falcon
+ mode boot from SD card
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,47 +71,86 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-I add in CC the ARM STM STM32MP Maintainers...
-
-On 8/26/21 11:42 PM, Alexandru Gagniuc wrote:
-> The UART can reliably go up to 2000000 baud when connected to the
-> on-board st-link. Unfortunately u-boot will fall back to 115200 unless
-> higher rates are declared via CONFIG_SYS_BAUDRATE_TABLE.
->
-> Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
-> ---
->   include/configs/stm32mp1.h | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp1.h
-> index b372838be8..9fcd60285a 100644
-> --- a/include/configs/stm32mp1.h
-> +++ b/include/configs/stm32mp1.h
-> @@ -16,6 +16,10 @@
->   #define CONFIG_ARMV7_SECURE_MAX_SIZE		STM32_SYSRAM_SIZE
->   #endif
->   
-> +#define CONFIG_SYS_BAUDRATE_TABLE      { 9600, 19200, 38400, 57600, 115200, \
-> +					 230400, 460800, 921600, \
-> +					 1000000, 2000000 }
-> +
->   /*
->    * Configuration of the external SRAM memory used by U-Boot
->    */
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGksCgpBZGQgaW4gQ0MgdGhlIE1BSU5UQUlORVJTCgpPbiA4LzI2LzIxIDExOjQyIFBNLCBBbGV4
+YW5kcnUgR2Fnbml1YyB3cm90ZToKPiBGYWxjb24gbW9kZSByZXF1aXJlcyBhIGJvYXJkLXNwZWNp
+ZmljIG1lY2hhbmlzbSB0byBzZWxlY3QgYmV0d2Vlbgo+IGZhc3QgYW5kIG5vcm1hbCBib290LiBU
+aGlzIGlzIGRvbmUgdmlhIHNwbF9zdGFydF91Ym9vdCgpCj4KPiBVc2UgdGhlIEIyIGJ1dHRvbiBh
+cyB0aGUgc2VsZWN0aW9uIG1lY2hhbmlzbS4gVGhpcyBpcyBjb25uZWN0ZWQgdG8KPiBHUElPIFBB
+MTMuIEluY2lkZW50YWxseSwgdGhpcyBHUElPIGlzIGFscmVhZHkgYWNjZXNzaWJsZSB2aWEgdGhl
+Cj4gInN0LGZhc3Rib290LWdwaW9zIiBkZXZpY2V0cmVlIG5vZGUuCj4KPiBPZmZzZXRzIGZvciBy
+YXcgTU1DIGxvYWRpbmcgYXJlIGRlZmluZWQuIFRoZXNlIHBvaW50IHRvIHRoZSBwYXJ0aXRpb24K
+PiBhZnRlciAic3NibCIuCj4KPiBTaWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgR2Fnbml1YyA8bXIu
+bnVrZS5tZUBnbWFpbC5jb20+Cj4gLS0tCj4gICBib2FyZC9zdC9zdG0zMm1wMS9zcGwuYyAgICB8
+IDM5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICBpbmNsdWRlL2Nv
+bmZpZ3Mvc3RtMzJtcDEuaCB8IDEzICsrKysrKysrKysrKysKPiAgIDIgZmlsZXMgY2hhbmdlZCwg
+NTIgaW5zZXJ0aW9ucygrKQo+Cj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0L3N0bTMybXAxL3NwbC5j
+IGIvYm9hcmQvc3Qvc3RtMzJtcDEvc3BsLmMKPiBpbmRleCA4ZTQ1NDlhMWIzLi5iYjIxMGQ3NzI3
+IDEwMDY0NAo+IC0tLSBhL2JvYXJkL3N0L3N0bTMybXAxL3NwbC5jCj4gKysrIGIvYm9hcmQvc3Qv
+c3RtMzJtcDEvc3BsLmMKPiBAQCAtOCw2ICs4LDcgQEAKPiAgICNpbmNsdWRlIDxpbml0Lmg+Cj4g
+ICAjaW5jbHVkZSA8YXNtL2lvLmg+Cj4gICAjaW5jbHVkZSA8YXNtL2FyY2gvc3lzX3Byb3RvLmg+
+Cj4gKyNpbmNsdWRlIDxhc20vZ3Bpby5oPgo+ICAgI2luY2x1ZGUgPGxpbnV4L2JpdG9wcy5oPgo+
+ICAgI2luY2x1ZGUgPGxpbnV4L2RlbGF5Lmg+Cj4gICAjaW5jbHVkZSAiLi4vY29tbW9uL3N0cG1p
+YzEuaCIKPiBAQCAtMjksNiArMzAsNDQgQEAgaW50IGJvYXJkX2Vhcmx5X2luaXRfZih2b2lkKQo+
+ICAgCXJldHVybiAwOwo+ICAgfQo+ICAgCj4gKyNpZiBJU19FTkFCTEVEKENPTkZJR19TUExfT1Nf
+Qk9PVCkKPiAraW50IHNwbF9zdGFydF91Ym9vdCh2b2lkKQo+ICt7Cj4gKwlvZm5vZGUgbm9kZTsK
+PiArCXN0cnVjdCBncGlvX2Rlc2MgZ3BpbzsKPiArCWludCBib290X3Vib290ID0gMTsKPiArCj4g
+Kwlub2RlID0gb2Zub2RlX3BhdGgoIi9jb25maWciKTsKPiArCWlmICghb2Zub2RlX3ZhbGlkKG5v
+ZGUpKSB7Cj4gKwkJcHJfd2FybigiJXM6IG5vIC9jb25maWcgbm9kZT9cbiIsIF9fZnVuY19fKTsK
+PiArCQlyZXR1cm4gMDsKPiArCX0KPiArCj4gKwlpZiAoZ3Bpb19yZXF1ZXN0X2J5X25hbWVfbm9k
+ZXYobm9kZSwgInN0LGZhc3Rib290LWdwaW9zIiwgMCwgJmdwaW8sCj4gKwkJCQkgICAgICAgR1BJ
+T0RfSVNfSU4pKSB7Cj4gKwkJcHJfd2FybigiJXM6IGNvdWxkIG5vdCBmaW5kIGEgL2NvbmZpZy9z
+dCxmYXN0Ym9vdC1ncGlvc1xuIiwKPiArCQkJX19mdW5jX18pOwo+ICsJCXJldHVybiAxOwo+ICsJ
+fQoKVGhlIG5vZGUgInN0LGZhc3Rib290LWdwaW9zIiBpcyB1c2VkIGluIFNUTWljcm9lbGVjdHJv
+bmljcyBkZXZpY2V0cmVlIC8gYm9hcmQKdG8gc2VsZWN0IHRoZSBLRVkgdG8gbGF1bmNoIHRoZSBB
+TkRST0lEIGNvbW1hbmQgZmFzdGJvb3QgaW4gYm9hcmRfa2V5X2NoZWNrKCkKCj0+IGl0IGNhbid0
+IGJlIHJlLXVzZWQgdG8gb3RoZXIgcHVycG9zZSBlbHNlIHlvdSB3aWxsIGhhdmUgY29uZmxpY3Qg
+d2hlbiB0aGUga2V5CiAgICBpcyBwcmVzc2VkOgogICAgCiAgICB3aGF0IGFwcGVuZCB3aGVuIGtl
+eSBwcmVzc2VkIGluIGJhc2ljIGJvb3QgbW9kZSB3aGVuIEtFWSBpcyBwcmVzc2VkID8KICAgID0+
+IGZhbGNvbiBtb2RlIHNlbGVjdGVkIGluIFNQTCBvciBGQVNUQk9PVCBtb2RlIHNlbGVjdGVkIC4u
+Li4KCiJzdCxmYXN0Ym9vdC1ncGlvcyIgbWVhbmluZyBpcyBkZWZpbmVkIGluOgoKaHR0cHM6Ly93
+aWtpLnN0LmNvbS9zdG0zMm1wdS93aWtpL0hvd190b19jb25maWd1cmVfVS1Cb290X2Zvcl95b3Vy
+X2JvYXJkI0NvbmZpZ19ub2RlCgp5b3Ugc2hvdWxkIHVzZSBhIG90aGVyIGNvbmZpZyA/Cj0+ICJt
+cm51a2UsZmFsY29uLWdwaW9zIiBtYW5hZ2VkIGluIHlvdXIgYm9hcmQgLmMgZmlsZSAvIGR0cyBm
+aWxlCgpvciBoYXJkY29kZWQgaW4geW91ciBib2FyZC5jID8KCm9yIHVzZSBlbnZpcm9ubWVudC4u
+Li4KaWYgKGVudl9nZXRfeWVzbm8oImJvb3Rfb3MiKSAhPSAwKQoKPiArCj4gKwlib290X3Vib290
+ID0gZG1fZ3Bpb19nZXRfdmFsdWUoJmdwaW8pOwo+ICsJZG1fZ3Bpb19mcmVlKE5VTEwsICZncGlv
+KTsKPiArCj4gKwlyZXR1cm4gYm9vdF91Ym9vdDsKPiArfQo+ICsKPiArI2lmIElTX0VOQUJMRUQo
+Q09ORklHX0FSTVY3X05PTlNFQykKPiArLyoKPiArICogQSBiaXQgb2YgYSBoYWNrLCBidXQgYXJt
+djdfYm9vdF9ub25zZWMoKSBpcyBwcm92aWRlZCBieSBib290bS5jLiBUaGlzIGlzIG5vdAo+ICsg
+KiBhdmFpbGFibGUgaW4gU1BMLCBzbyB3ZSBoYXZlIHRvIHByb3ZpZGUgYW4gaW1wbGVtZW50YXRp
+b24uCj4gKyAqLwo+ICtib29sIGFybXY3X2Jvb3Rfbm9uc2VjKHZvaWQpCj4gK3sKPiArCXJldHVy
+biAwOwo+ICt9Cj4gKyNlbmRpZiAvKiBDT05GSUdfQVJNVjdfTk9OU0VDICovCj4gKyNlbmRpZiAv
+KiBDT05GSUdfU1BMX09TX0JPT1QgKi8KPiArCj4gICAjaWZkZWYgQ09ORklHX0RFQlVHX1VBUlRf
+Qk9BUkRfSU5JVAo+ICAgdm9pZCBib2FyZF9kZWJ1Z191YXJ0X2luaXQodm9pZCkKPiAgIHsKPiBk
+aWZmIC0tZ2l0IGEvaW5jbHVkZS9jb25maWdzL3N0bTMybXAxLmggYi9pbmNsdWRlL2NvbmZpZ3Mv
+c3RtMzJtcDEuaAo+IGluZGV4IDlmY2Q2MDI4NWEuLjA4NDlhMWJkZGIgMTAwNjQ0Cj4gLS0tIGEv
+aW5jbHVkZS9jb25maWdzL3N0bTMybXAxLmgKPiArKysgYi9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJt
+cDEuaAo+IEBAIC0xMCw2ICsxMCwxOSBAQAo+ICAgI2luY2x1ZGUgPGxpbnV4L3NpemVzLmg+Cj4g
+ICAjaW5jbHVkZSA8YXNtL2FyY2gvc3RtMzIuaD4KPiAgIAo+ICsvKgo+ICsgKiBBcmd1bWVudHMg
+aWYgZmFsY29uIG1vZGUgaXMgdXNlZAo+ICsgKiBDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RFX0tF
+Uk5FTF9TRUNUT1IgaXMgdGhlIHBhcnRpdGlvbiBhZnRlciAic3NibCIKPiArICogQ09ORklHX1NZ
+U19TUExfQVJHU19BRERSIGlzIG5vdCB1c2VkLCBidXQgbmVlZHMgdG8gcG9pbnQgdG8gdmFsaWQg
+UkFNLgo+ICsgKi8KPiArI2RlZmluZSBDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RFX0tFUk5FTF9T
+RUNUT1IgNTE1NAoKVGhlIG9mZnNldCBvZiBrZXJuZWwgaXMgaGFyZGNvZGVkCgo9PiBpdCBpcyBu
+b3QgYWNjZXB0YWJsZSBoZXJlIChnZW5lcmljIHN0bTMybXAxIGZpbGUpCgo+ICsjZGVmaW5lIENP
+TkZJR19TWVNfU1BMX0FSR1NfQUREUiAweGM0MDAwMDAwCj4gKwo+ICsvKiBGYWxjb24gbW9kZSBm
+cm9tIFNQSSBpcyBub3Qgc3VwcG9ydGVkLCBidXQgdGhlIGRlZmluZXMgYXJlIG5lZWRlZCAqLwo+
+ICsjZGVmaW5lIENPTkZJR19TWVNfU1BJX0tFUk5FTF9PRkZTCSh+MCkKPiArI2RlZmluZSBDT05G
+SUdfU1lTX1NQSV9BUkdTX09GRlMJKH4wKQo+ICsjZGVmaW5lIENPTkZJR19TWVNfU1BJX0FSR1Nf
+U0laRQkwCj4gKwoKRmFsY29uIG1vZGUgaXMgbm90IHN1cHBvcnRlZCBieSBTVCBNaWNyb2VsZWN0
+cm9uaWNzCmFuZCB0aGlzIGZpbGUgaXMgZXhwZWN0ZWQgdG8gc3VwcG9ydCB0aGUgU1QgYm9hcmRz
+IChib2FyZC9zdC9zdG0zMm1wMSkKCj0+IHRoZXNlIGRlZmluZXMgc2hvdWxkIGJlIGluIHlvdXIg
+Y29uZmlndXJhdGlvbiBub3QgaW4gdGhlIEdFTkVSSUMgc3RtMzJtcDEgZmlsZXMKCmZvciBleGFt
+cGxlIGluCgppbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDE1X2ZhbGNvbi5oCgojaW5jbHVkZSAic3Rt
+MzJtcDEuaCIKCi4uLi4KCndpdGggQ09ORklHX1NZU19DT05GSUdfTkFNRSA9wqAgInN0bTMybXAx
+NV9mYWxjb24iIGluIHlvdXIgS2NvbmZpZwoKCj4gICAjaWZuZGVmIENPTkZJR19URkFCT09UCj4g
+ICAvKiBQU0NJIHN1cHBvcnQgKi8KPiAgICNkZWZpbmUgQ09ORklHX0FSTVY3X1NFQ1VSRV9CQVNF
+CQlTVE0zMl9TWVNSQU1fQkFTRQoKClBhdHJpY2sKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0z
+MkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9y
+bXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

@@ -2,69 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B07873FEE1E
-	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Sep 2021 14:53:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD1BD3FEE74
+	for <lists+uboot-stm32@lfdr.de>; Thu,  2 Sep 2021 15:12:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 78F24C57B53;
-	Thu,  2 Sep 2021 12:53:34 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 86271C57B53;
+	Thu,  2 Sep 2021 13:12:44 +0000 (UTC)
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
+ [209.85.222.174])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66211C57B51
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 553BEC57B51
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  2 Sep 2021 12:53:33 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.0.43) with SMTP id 1828jVpC020413;
- Thu, 2 Sep 2021 14:53:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=5RPojt9Li+VkXN5dI3jMcADlvxilotfrmypcW0za4HM=;
- b=HQPuzZdXjV123tr+fcmT4O1o3Moqxwo1EdTN6MbPPSlL8g6UHsKenr0fsPl9gQWVda4B
- Y1cRO5c2CBKnEFVZWcl4euv6zN2TPTJLdHHp+w/UGU0KkIHmsjverDteUlhJuTEBD211
- TCEj+BX4wEgNG4fTAC4+ulo/O3Rm4PygVDVvRh3qYxx5zIu9kCEOcxbGJqJtSkpZvrI3
- vFjAf5C08afmd8IwNOLYsAenA6ipBx+70nUlEqodSfQrWfgdqhSIoJPda3huEwrMpKOi
- gVr4OWWm6EITbYFq4JpFT4Msn4LZXTSMry2JTwj0eZnQMONeC+goq24f515VyqltiNp4 fA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3atucthdx1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 02 Sep 2021 14:53:24 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D076010002A;
- Thu,  2 Sep 2021 14:53:23 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node3.st.com [10.75.127.6])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A253D256425;
- Thu,  2 Sep 2021 14:53:23 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.47) by SFHDAG2NODE3.st.com
- (10.75.127.6) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 2 Sep
- 2021 14:53:22 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+ Thu,  2 Sep 2021 13:12:43 +0000 (UTC)
+Received: by mail-qk1-f174.google.com with SMTP id 22so1937843qkg.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 02 Sep 2021 06:12:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=pHg0/J3aNWOrPZ9Q/3n4Me7aT23swOhQTE5EnaYZdZY=;
+ b=Wj6y75J9ygvB25Dw0Re8Wbsawx/Q+qHP4X8+rQjFLWxX7BvMnv6LY5REvsdeQ6PNbt
+ rp7ly6W9UXPLefBJyEkuADxuMaHl5nJ2JXxRJOEMLxOD1/fQ8KZOBF45CO2VDjq0F+aY
+ wZUMkjJfrrsw3HyeiWe2InUCa5hco5NwxqAE4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=pHg0/J3aNWOrPZ9Q/3n4Me7aT23swOhQTE5EnaYZdZY=;
+ b=Yeb0Ul4PvVWLhrxxrfUNba2Xc9J01EUis06IOkOLvPiTdOl3n5v7qFZ+WyFOEpcLN/
+ sOVV9Iyuz6bmPoAhwahZPUlM96rpV81FWuIBsWQ775qYlW2ThHyf8jK9fzBLU05uw/In
+ d96LGXNY0U90fHrOzj4EALCVICN4pTjtDKd8rf0TkIM8J0XScasJbUVqFn04d1ltyX7Y
+ 1AEZTCDhU0nXqL6HurpSpo/j+aYfA5wy7Pm9PsZXCKJCL4MABUwWqCRxetmWC7Kop2pt
+ vQsr0+2JpCX3Ux4pw33vfBYyA15X9AW9tvnRiUROIbZHuryvBwhZ0IER0HRCrWOu72km
+ j87g==
+X-Gm-Message-State: AOAM5316PSrPq1oFO9QHy9nvvKAUf9xRnSjZBrmPYxtOz2IS6yH6xHX3
+ H8+1TVVMuO/1rqpzAkt2AhLH6g==
+X-Google-Smtp-Source: ABdhPJyEKb/KhWS+xoW7wHXUls9UMuE9zDGqOQAfFXob/LeTWQdV8TV6+Ntl4XdIc/+Fjvwek6KZLQ==
+X-Received: by 2002:a05:620a:3ce:: with SMTP id
+ r14mr3014097qkm.228.1630588362218; 
+ Thu, 02 Sep 2021 06:12:42 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-95b1-4c42-35f4-d991.res6.spectrum.com.
+ [2603:6081:7b01:cbda:95b1:4c42:35f4:d991])
+ by smtp.gmail.com with ESMTPSA id p15sm1009308qti.70.2021.09.02.06.12.40
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Thu, 02 Sep 2021 06:12:41 -0700 (PDT)
+Date: Thu, 2 Sep 2021 09:12:39 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20210902131239.GV858@bill-the-cat>
 References: <20210902120202.1.If7ddbb0eecde3d5db357ef27cb0833abbdacd362@changeid>
- <20210902120202.2.I0352ea8f5786a59f261a33d2008f75f6756e9a9e@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <9bc925d7-f1db-6311-58b4-1dd40cb65e02@foss.st.com>
-Date: Thu, 2 Sep 2021 14:53:22 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <20210902120202.2.I0352ea8f5786a59f261a33d2008f75f6756e9a9e@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE3.st.com
- (10.75.127.6)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-09-02_04,2021-09-02_01,2020-04-07_01
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Manuel Reis <mluis.reis@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
+In-Reply-To: <20210902120202.1.If7ddbb0eecde3d5db357ef27cb0833abbdacd362@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Marek Vasut <marex@denx.de>,
+ Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
  dillon min <dillon.minfei@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] board: stm32: Remove the
- bi_boot_params initialization
+Subject: Re: [Uboot-stm32] [PATCH 1/2] arm: stm32: Disable ATAGs support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,167 +74,83 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4170005858971186293=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 9/2/21 12:02 PM, Patrick Delaunay wrote:
-> The stm32 platforms never had to support an ATAGs-based Linux Kernel,
-> so remove the bi_boot_params initialization.
-> 
+--===============4170005858971186293==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="YeKJDHLGyKnnNtke"
+Content-Disposition: inline
+
+
+--YeKJDHLGyKnnNtke
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Sep 02, 2021 at 12:02:06PM +0200, Patrick Delaunay wrote:
+
+> These platforms never had to support an ATAGs-based Linux Kernel, so
+> remove the options.
+>=20
+> Cc: Marek Vasut <marex@denx.de>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
-> 
->  board/dhelectronics/dh_stm32mp1/board.c              | 3 ---
->  board/engicam/stm32mp1/stm32mp1.c                    | 3 ---
->  board/st/stm32f429-discovery/stm32f429-discovery.c   | 2 --
->  board/st/stm32f429-evaluation/stm32f429-evaluation.c | 2 --
->  board/st/stm32f469-discovery/stm32f469-discovery.c   | 2 --
->  board/st/stm32f746-disco/stm32f746-disco.c           | 2 --
->  board/st/stm32h743-disco/stm32h743-disco.c           | 1 -
->  board/st/stm32h743-eval/stm32h743-eval.c             | 1 -
->  board/st/stm32h750-art-pi/stm32h750-art-pi.c         | 1 -
->  board/st/stm32mp1/stm32mp1.c                         | 3 ---
->  10 files changed, 20 deletions(-)
-> 
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index d7c1857c16..765b54a4a4 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -590,9 +590,6 @@ static void board_init_fmc2(void)
->  /* board dependent setup after realloc */
->  int board_init(void)
->  {
-> -	/* address of boot parameters */
-> -	gd->bd->bi_boot_params = STM32_DDR_BASE + 0x100;
-> -
->  	if (CONFIG_IS_ENABLED(DM_GPIO_HOG))
->  		gpio_hog_probe_all();
->  
-> diff --git a/board/engicam/stm32mp1/stm32mp1.c b/board/engicam/stm32mp1/stm32mp1.c
-> index 8bf9c9c67d..20d8603c78 100644
-> --- a/board/engicam/stm32mp1/stm32mp1.c
-> +++ b/board/engicam/stm32mp1/stm32mp1.c
-> @@ -40,9 +40,6 @@ int checkboard(void)
->  /* board dependent setup after realloc */
->  int board_init(void)
->  {
-> -	/* address of boot parameters */
-> -	gd->bd->bi_boot_params = STM32_DDR_BASE + 0x100;
-> -
->  	if (IS_ENABLED(CONFIG_DM_REGULATOR))
->  		regulators_enable_boot_on(_DEBUG);
->  
-> diff --git a/board/st/stm32f429-discovery/stm32f429-discovery.c b/board/st/stm32f429-discovery/stm32f429-discovery.c
-> index 46fcf907fc..5a50e98dd0 100644
-> --- a/board/st/stm32f429-discovery/stm32f429-discovery.c
-> +++ b/board/st/stm32f429-discovery/stm32f429-discovery.c
-> @@ -53,8 +53,6 @@ u32 get_board_rev(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-> -
->  	return 0;
->  }
->  
-> diff --git a/board/st/stm32f429-evaluation/stm32f429-evaluation.c b/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-> index 3b6df1f3ab..cf3056163c 100644
-> --- a/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-> +++ b/board/st/stm32f429-evaluation/stm32f429-evaluation.c
-> @@ -47,8 +47,6 @@ u32 get_board_rev(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-> -
->  	return 0;
->  }
->  
-> diff --git a/board/st/stm32f469-discovery/stm32f469-discovery.c b/board/st/stm32f469-discovery/stm32f469-discovery.c
-> index c5df9b0d9c..056c9dff2a 100644
-> --- a/board/st/stm32f469-discovery/stm32f469-discovery.c
-> +++ b/board/st/stm32f469-discovery/stm32f469-discovery.c
-> @@ -47,8 +47,6 @@ u32 get_board_rev(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-> -
->  	return 0;
->  }
->  
-> diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-> index efa38a0e26..2543e2a5f8 100644
-> --- a/board/st/stm32f746-disco/stm32f746-disco.c
-> +++ b/board/st/stm32f746-disco/stm32f746-disco.c
-> @@ -122,8 +122,6 @@ int board_late_init(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-> -
->  #ifdef CONFIG_ETH_DESIGNWARE
->  	const char *phy_mode;
->  	int node;
-> diff --git a/board/st/stm32h743-disco/stm32h743-disco.c b/board/st/stm32h743-disco/stm32h743-disco.c
-> index 4091d5f9fd..e493786f11 100644
-> --- a/board/st/stm32h743-disco/stm32h743-disco.c
-> +++ b/board/st/stm32h743-disco/stm32h743-disco.c
-> @@ -43,6 +43,5 @@ u32 get_board_rev(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
->  	return 0;
->  }
-> diff --git a/board/st/stm32h743-eval/stm32h743-eval.c b/board/st/stm32h743-eval/stm32h743-eval.c
-> index 4091d5f9fd..e493786f11 100644
-> --- a/board/st/stm32h743-eval/stm32h743-eval.c
-> +++ b/board/st/stm32h743-eval/stm32h743-eval.c
-> @@ -43,6 +43,5 @@ u32 get_board_rev(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
->  	return 0;
->  }
-> diff --git a/board/st/stm32h750-art-pi/stm32h750-art-pi.c b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> index 5785b2e575..bec26465d2 100644
-> --- a/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> +++ b/board/st/stm32h750-art-pi/stm32h750-art-pi.c
-> @@ -53,6 +53,5 @@ int board_late_init(void)
->  
->  int board_init(void)
->  {
-> -	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
->  	return 0;
->  }
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 032f08d795..1bceb41494 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -646,9 +646,6 @@ static void board_ev1_init(void)
->  /* board dependent setup after realloc */
->  int board_init(void)
->  {
-> -	/* address of boot parameters */
-> -	gd->bd->bi_boot_params = STM32_DDR_BASE + 0x100;
-> -
->  	if (CONFIG_IS_ENABLED(DM_GPIO_HOG))
->  		gpio_hog_probe_all();
->  
-> 
+> Hi,
+>=20
+> this patch is a rebased version of the STM32 part [1] of Tom's patchset [=
+2].
+>=20
+> I also update the new file include/configs/stm32h750-art-pi.h
+>=20
+> [1] [13/13] arm: stm32: Disable ATAGs support
+> https://patchwork.ozlabs.org/project/uboot/patch/20210204022415.20589-13-=
+trini@konsulko.com/
+>=20
+> [2] arm: nanopi2: Remove unused code
+>     https://patchwork.ozlabs.org/project/uboot/list/?series=3D227910&stat=
+e=3D*
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Note that I've posted
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D260161&state=3D*
+recently and that includes this change.  2/2 of this series is good to
+see.
 
-Thanks
-Patrice
+--=20
+Tom
+
+--YeKJDHLGyKnnNtke
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmEwzcAACgkQFHw5/5Y0
+tyxJ2wv/XtxGeK8f6wqUoCwtUGfn5nVLviBqo5YJOEnCzLT4BdpMIVXTPEoVi0Lx
+w1p7U5tHXecbmF7QhyerJg20wVQzywmzc1oA5zkorAkPPM8q7FZ01epxHT8gNCph
+/Y91eCwEGvso5CipH9RbT2+eedMipciqgNCllGSY2C8qCsOc/91yOWuWcrCD5awP
+dkQitvfMAPaRtbbhhctFgJZQi83P0jfBv+5X73U6TIhCF0bZx/dzT1jkN7lKMpe3
+xehJR23aSWtEmbtBxph40m/OaCLjS217O9R3ORQ3Kfldt3HTED/Uc5cfKWt20mAL
+DhhyD9mNqa4lyVFyvHR3JylP6EqF3gJouiEPHCpFl/WD4R1diFJFPsY1944n7qVO
+hYC9GaDbvG19AJ6AtNs96cupuiwvAA9gelYfEP0vj1WFXlmEDWAbx0cMENcDqNSJ
+a0p6yzUrJCgyIt1jWKpvsSOPENsge/Xe8CJbDtH1h/wba9jKV4UN32CLKO5lmlz1
+W5MyQ2DX
+=ml7i
+-----END PGP SIGNATURE-----
+
+--YeKJDHLGyKnnNtke--
+
+--===============4170005858971186293==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============4170005858971186293==--

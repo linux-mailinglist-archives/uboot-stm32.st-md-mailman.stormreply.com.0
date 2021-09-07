@@ -2,65 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B77B4031B0
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Sep 2021 01:59:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 942ED4031B1
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Sep 2021 01:59:47 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 562CBC5A4F4;
-	Tue,  7 Sep 2021 23:59:46 +0000 (UTC)
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
- [209.85.222.175])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5DEEDC5A4F7;
+	Tue,  7 Sep 2021 23:59:47 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9050DC5A4F4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8087BC5A4D8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Sep 2021 23:59:45 +0000 (UTC)
-Received: by mail-qk1-f175.google.com with SMTP id y144so694304qkb.6
+ Tue,  7 Sep 2021 23:59:46 +0000 (UTC)
+Received: by mail-qk1-f181.google.com with SMTP id y144so694333qkb.6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Sep 2021 16:59:45 -0700 (PDT)
+ Tue, 07 Sep 2021 16:59:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=/A42Glvy8cNQ5MTm16d7kUpOtUkMPsOCwK1Js6GhOdk=;
- b=Ct5xiTqJTROOQDaBK29cJ1uv0TpuuI8uueh+dqhsbwcBEVEuPljTIT1ZoU0VWhed9P
- N+6A9PjNOSjpVluZg7JRxB5JUydgLiD5AYz1BkDR0h+zItREMaONPdoNvS0n01kGB1PS
- pyalZ95F4cIrPwkqjWqcVtISWvFoia9/o0sm2uVrc+VHvrSF6kkk8Lu+KnFs+RubInlf
- NfABhosnlTtcTgC94KBswlRY+JUL6PBaqHBo0Z7mrwZkkVoZ0vlzSPtx4hqOrun75ml0
- +tC6j8RlEhshROd6fG2W8qAuMZDWjtWwe6gI2nsLKQgI+7UF7nzgmH3XOE8kzfxpP1RV
- yCQg==
+ bh=sGEJu4EkxMZapoclpGORUy4+ClEcEKT2o0miuvPph5U=;
+ b=ZGQG3NOBDnLj2VF0/G+Gpyu91VT7SOXzZNbU59hT8yhf+vkUjyAXZqViyD10n8AYee
+ ibHvwnTdl5omvc+uguEjm1UTiNO+yqLiJ52GW93GqUOqJ3yuHMHvFm6y5R/4S1QAeafl
+ vCOCQOWJmS33RREsnuUWQrzDX6oRYxHz55vSVEu2n+yeKlIjhgtRCWcxVOTySEwi7p/m
+ qyJwRKEanjGQKapPNy5TpNbFKZhaHlnV8x/LTTOQiFEpUfP60QgfjkWIqjQpYSXhliE2
+ A5W+PwqgJwGNzFhZ+xqDYdKKjGDkSV1l4YcmI/hv+Qc1P5OlDtBR7zSCgOW136tEkJSH
+ Hlqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=/A42Glvy8cNQ5MTm16d7kUpOtUkMPsOCwK1Js6GhOdk=;
- b=VL0U+dm46v03hJa4DSfWpKDKvRLayf8d4J1aIqVBryLINPgk4I+WaJEG0e2fzPuSJ0
- GL0CLQnKNl3/2pW/Etb2vwuV7DZPzr+GPzuf20vXnZ8DjuFRTQK3dy2sWRmsJxAP1uVh
- slx28X0qaq3Pn4NiJweigWFIvmeGRbZxpSBhvaFzvBTJZiEEJ8NMc+dangUs6w7DGhVH
- BO9iMLHidakZZ3mrMxBGp7LaY7K/NVACvcz7l72zzKs4Z/7PA3SWxTvqptywhkt9ylfi
- fJxDvx4NVBzdXs+3zefVBGARjf9bnec9h04w0Nph+Oij+Oe8VCdOouezvc+QKIe/AbtD
- tNHQ==
-X-Gm-Message-State: AOAM530wxWBa96bPyySaqayZP981pCjx/XPLLmx/YB7slJNt3+npi8G0
- CKfQ+QXYQRBGn65XnXkRoPA=
-X-Google-Smtp-Source: ABdhPJzkawoeW33LpbPCgEXqNFBGJj2FmSWJV+kHp8ZL8NWIDV5Q61vC59yGVyqZ9sHchev7FryDHg==
-X-Received: by 2002:a05:620a:444d:: with SMTP id
- w13mr845956qkp.315.1631059184667; 
- Tue, 07 Sep 2021 16:59:44 -0700 (PDT)
+ bh=sGEJu4EkxMZapoclpGORUy4+ClEcEKT2o0miuvPph5U=;
+ b=TCw10oiVrpdz4wo0ZNb+nTPqM5aNaRNsQz/rHzQLHEo4B6jqPUk7l9EmWvtFgV9WkM
+ uaWhpAGFY48UMXBfQoZ3ZPEDPYUYkQchJ+9zCuXvbMigdsQ2AGzj+cEkfdTtyolg3zh1
+ 36VP4xj3KFz7oa2+6T49P48+Q+MECwDH+QKkFhS2cReMiqzXW7Yo6qy78+EQDvlTLCms
+ NtXW/LsSHav9Gnu/5dbsNYxuWQEH+uNBxbj3BY2WT9t/pz+l4ZyO3Q6cEdrd33g5c3V9
+ 5CtVTx3jbhSTBPYCRjrhs006T8Qd5y65aIP4hG7R8rVm+rSJ1i/5HeJIviZb+9MNW3ki
+ /BHA==
+X-Gm-Message-State: AOAM531/ySNACtjpvP1KT/VMpNakelAUsuC0bzg2BfFd2Y2swPFprin3
+ 5PpZ0JGFxahld2C0JAWQI44HCncPlFA=
+X-Google-Smtp-Source: ABdhPJz4SgD9utpuhj/O2rCryETUcC3CW/lN9c/f39RAWRyPeFd7hLLCHRdO6EfXK6LtP5JCKYUSSg==
+X-Received: by 2002:a37:6d7:: with SMTP id 206mr856071qkg.251.1631059185611;
+ Tue, 07 Sep 2021 16:59:45 -0700 (PDT)
 Received: from nuclearis3.lan (c-98-195-139-126.hsd1.tx.comcast.net.
  [98.195.139.126])
- by smtp.gmail.com with ESMTPSA id d78sm460351qkg.92.2021.09.07.16.59.43
+ by smtp.gmail.com with ESMTPSA id d78sm460351qkg.92.2021.09.07.16.59.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Sep 2021 16:59:44 -0700 (PDT)
+ Tue, 07 Sep 2021 16:59:45 -0700 (PDT)
 From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
  patrick.delaunay@foss.st.com
-Date: Tue,  7 Sep 2021 18:59:29 -0500
-Message-Id: <20210907235933.2798330-8-mr.nuke.me@gmail.com>
+Date: Tue,  7 Sep 2021 18:59:30 -0500
+Message-Id: <20210907235933.2798330-9-mr.nuke.me@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210907235933.2798330-1-mr.nuke.me@gmail.com>
 References: <20210907235933.2798330-1-mr.nuke.me@gmail.com>
 MIME-Version: 1.0
 Cc: etienne.carriere@linaro.org, Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: [Uboot-stm32] [PATCH v2 07/11] arm: stm32mp: Factor out reading MAC
-	address from OTP
+Subject: [Uboot-stm32] [PATCH v2 08/11] stm32mp1: spl: Configure MAC address
+	when booting OP-TEE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,78 +76,102 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Move the reading the OTP into a separate function. This is
-required for a subsequent change which sets the MAC in SPL.
+When OP-TEE is booted as the SPL payload, the stage after OP-TEE is
+not guaranteed to be u-boot. Thus the FDT patching in u-boot is not
+guaranteed to occur. Add this step to SPL.
+
+The patching by stm32_fdt_setup_mac_addr() is done in SPL, and patches
+the target FDT directly. This differs is different from
+setup_mac_address(), which sets the "ethaddr" env variable, and does
+not work in SPL.
+
+An alternative way of setting the MAC is to patch the kernel's
+devicetree to use the "nvmem-cells" property. This would backend on
+the linux BSEC driver, which relies on an SMCC call. That call is
+implemented only by TF-A, not by SPL. Thus linux will not be able to
+read the MAC from OTP, and this alternative method will fail.
+
+Changing the linux driver is not feasible is our goal is to support
+the current linux LTS release (v5.14). Implementing the SMCC call
+would require SPL finagling, and possibly carry security side-effects.
+
+Thus, adding "mac-address" nodes to the kernel devicetree is the most
+economical method in terms of lines of code and complexity.
 
 Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
- arch/arm/mach-stm32mp/cpu.c | 37 +++++++++++++++++++++++--------------
- 1 file changed, 23 insertions(+), 14 deletions(-)
+ arch/arm/mach-stm32mp/cpu.c                   | 22 +++++++++++++++++++
+ .../arm/mach-stm32mp/include/mach/sys_proto.h |  3 +++
+ arch/arm/mach-stm32mp/spl.c                   |  1 +
+ 3 files changed, 26 insertions(+)
 
 diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-index eb79f3ffd2..8727de513c 100644
+index 8727de513c..2b8b67bb40 100644
 --- a/arch/arm/mach-stm32mp/cpu.c
 +++ b/arch/arm/mach-stm32mp/cpu.c
-@@ -593,6 +593,28 @@ static void setup_boot_mode(void)
- 	clrsetbits_le32(TAMP_BOOT_CONTEXT, TAMP_BOOT_FORCED_MASK, BOOT_NORMAL);
+@@ -10,6 +10,7 @@
+ #include <cpu_func.h>
+ #include <debug_uart.h>
+ #include <env.h>
++#include <fdt_support.h>
+ #include <init.h>
+ #include <log.h>
+ #include <lmb.h>
+@@ -646,6 +647,27 @@ __weak int setup_mac_address(void)
+ 	return 0;
  }
  
-+static int stm32_read_otp_mac(uint8_t enetaddr[ARP_HLEN])
++int stm32_fdt_setup_mac_addr(void *fdt)
 +{
-+	struct udevice *dev;
-+	int ret, i;
-+	u32 otp[2];
++	int ret;
++	uchar enetaddr[ARP_HLEN];
 +
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(stm32mp_bsec),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC), otp, sizeof(otp));
++	ret = stm32_read_otp_mac(enetaddr);
 +	if (ret < 0)
 +		return ret;
 +
-+	for (i = 0; i < ARP_HLEN; i++)
-+		enetaddr[i] = ((uint8_t *)&otp)[i];
++	if (!is_valid_ethaddr(enetaddr)) {
++		printf("invalid MAC address in OTP\n");
++		return -EINVAL;
++	}
 +
-+	return 0;
++	ret = fdt_ethernet_set_macaddr(fdt, 0, enetaddr);
++	if (ret)
++		debug("Failed to set mac address from OTP: %d\n", ret);
++
++	return ret;
 +}
 +
- /*
-  * If there is no MAC address in the environment, then it will be initialized
-  * (silently) from the value in the OTP.
-@@ -601,29 +623,16 @@ __weak int setup_mac_address(void)
+ static int setup_serial_number(void)
  {
- #if defined(CONFIG_NET)
- 	int ret;
--	int i;
--	u32 otp[2];
- 	uchar enetaddr[6];
--	struct udevice *dev;
+ 	char serial_string[25];
+diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+index 4149d3a133..2d24cfee3f 100644
+--- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
++++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+@@ -47,7 +47,10 @@ void get_soc_name(char name[SOC_NAME_SIZE]);
+ /* return boot mode */
+ u32 get_bootmode(void);
  
- 	/* MAC already in environment */
- 	if (eth_env_get_enetaddr("ethaddr", enetaddr))
- 		return 0;
++/* Set 'ethaddr' env variable with MAC from OTP (useful for u-boot proper) */
+ int setup_mac_address(void);
++/* Patch the first 'ethernet' node of FDT with MAC from OTP (useful for SPL) */
++int stm32_fdt_setup_mac_addr(void *fdt);
  
--	ret = uclass_get_device_by_driver(UCLASS_MISC,
--					  DM_DRIVER_GET(stm32mp_bsec),
--					  &dev);
--	if (ret)
--		return ret;
--
--	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC),
--			otp, sizeof(otp));
-+	ret = stm32_read_otp_mac(enetaddr);
- 	if (ret < 0)
- 		return ret;
+ /* board power management : configure vddcore according OPP */
+ void board_vddcore_init(u32 voltage_mv);
+diff --git a/arch/arm/mach-stm32mp/spl.c b/arch/arm/mach-stm32mp/spl.c
+index 405eff68a3..d9fdc5926c 100644
+--- a/arch/arm/mach-stm32mp/spl.c
++++ b/arch/arm/mach-stm32mp/spl.c
+@@ -181,6 +181,7 @@ void stm32_init_tzc_for_optee(void)
  
--	for (i = 0; i < 6; i++)
--		enetaddr[i] = ((uint8_t *)&otp)[i];
--
- 	if (!is_valid_ethaddr(enetaddr)) {
- 		log_err("invalid MAC address in OTP %pM\n", enetaddr);
- 		return -EINVAL;
+ void spl_board_prepare_for_optee(void *fdt)
+ {
++	stm32_fdt_setup_mac_addr(fdt);
+ 	stm32_init_tzc_for_optee();
+ }
+ 
 -- 
 2.31.1
 

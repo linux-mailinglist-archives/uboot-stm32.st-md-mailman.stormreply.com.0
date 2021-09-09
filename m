@@ -2,66 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2BC44059C7
-	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Sep 2021 16:55:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC3814059C8
+	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Sep 2021 16:55:48 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 985B3C5A4F4;
-	Thu,  9 Sep 2021 14:55:46 +0000 (UTC)
-Received: from mail-oi1-f169.google.com (mail-oi1-f169.google.com
- [209.85.167.169])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A06FCC5A4D8;
+	Thu,  9 Sep 2021 14:55:48 +0000 (UTC)
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
+ [209.85.167.179])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 677E2C5718D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7E329C5A4D8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  9 Sep 2021 14:55:45 +0000 (UTC)
-Received: by mail-oi1-f169.google.com with SMTP id w144so2787829oie.13
+ Thu,  9 Sep 2021 14:55:46 +0000 (UTC)
+Received: by mail-oi1-f179.google.com with SMTP id bd1so2819471oib.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 09 Sep 2021 07:55:45 -0700 (PDT)
+ Thu, 09 Sep 2021 07:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=HdE5htSNkemSPGIgu53khKlom/ipOJhrthW4WHLcC+o=;
- b=IJ8ntiCMuQyOO/rcG67GyYO3e1CnPll5lfMNzrcJrmG90XtsAv2sXB963ErIfA3MEp
- 0h2v66C5/M+B+Ppwg+bLjXyg4eQF2gRg3j4RMaNOz0g5vlgRJfrID7k32Ua3ZV++SFXp
- PqASN+r4q/ei0UKtqHwOZG0OvuVVnDB1WYNQ2F2DqOXgBk772zObQCgGQoSbYMBX621C
- zJCkfCHz062JA/SsYyQztszi9MMnukE8ZfNClp4K8uxe1C6IICTWDuUUljxEJ8eIL0e5
- SSE/HOIbgpp3NTI6Az2iwpL4aJwuYT4U52AOuWKoDvAHEzJID5/aySc8kofa4FWwLXHl
- uGPQ==
+ bh=Qxif+yOtaPPwCaTReKIk2k7HnPl5MDfeNwPYdRxUOLk=;
+ b=ntEEw9uFRWkDTPR/lqHAF5PdEAlbSBr9tE7iQ3KEkyY+OZ1N/sUZWWYdK5gs9cQSz5
+ Hy6hpzHRgNFPmp37657meUxjdc6zcP1hGrZDCImpZvNTy55YLnLR6SJmuLyKNzMqabNq
+ FK279YXaZv00SXOvRES+O8SVmu30OssBS/0rLbmYwUwZn9tqFBNppGcuNYKRBrFV/93J
+ 49c3nR+JOcGc9VeGew5iDDYfKH3MFbrJ4OLLf1uUqYsgmUrf96jJ4FmVWLcWGNxgrXZl
+ GFApkx7ml3Bw9Dep03Pz+fQDzptriSHXVrPXuHG/mmIoTBxRr29LAzf4chxVfhRXlYUb
+ wCbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=HdE5htSNkemSPGIgu53khKlom/ipOJhrthW4WHLcC+o=;
- b=Ji82GEF4UcBazfiPdS1XQaERlfCt9O1hSMUdvRKW5+y/+aB6ws7mGZfS7dQW5duJOu
- ZMvy399o73E2864i4Dh5j3MA7J0UpPb7qyVXRCq8JeQ934xjgk3gfA48gPjg6p+O2Dl5
- 89duDJgwalsNzYSFnWAd2Dll9OQhnlXnX19O0onl8plyIrtFaKxZlpMj2NXa+ROHJcrR
- zH84WLMHbBu2l8sxbNsyqHtEkgPt7bDOf72vEgs6eJm9QJiUhXYYNb+r5Yuskr9ZpypK
- kbYd0t0e1/P2LVw9Kf4Ru/7Yxtbx7CdsqFjUT5pqtu3m2YneL3XXtk/Y4R0y+qCAEl6O
- fiRw==
-X-Gm-Message-State: AOAM532tB3dBaPY5o8Sg9LCynu3oMyDqNBsQG5OWNCw1lRLhZpfdCN7H
- 7vY+YHwOQ/52V/vIolhIjlQ=
-X-Google-Smtp-Source: ABdhPJygcKtZRDkgp6NVgHrVEyTSpmOEwZ1RUrvMU20YfVjeIMO6t679cfX6C1c0pTQPlJ0pfijpxQ==
-X-Received: by 2002:a05:6808:214:: with SMTP id
- l20mr127210oie.134.1631199344327; 
- Thu, 09 Sep 2021 07:55:44 -0700 (PDT)
+ bh=Qxif+yOtaPPwCaTReKIk2k7HnPl5MDfeNwPYdRxUOLk=;
+ b=w8sy6vOIfNX1apmm+/tDVrQOn59FmF+rlE/umGV840sYHdCooEvOMfKLoGqp9c0T0+
+ 6yvGLe/ur5NaeQQqsanjAozGk4JLHgT734+o1TccqNSBDKLxitLPy4br/Lbl3olwENqF
+ CR8D+odW246f+ht7WyFmfcdbekd6gcjtFmdY0cSUEctcEd+GYZ7IFmI/XycnhLWNu0kc
+ VSxUA0Fw9BLU7LOQlW76pmMOoom6jkuJzXj9/+qGllqXXOZEc/OqQh4EsTMBmvicq6rY
+ 1sod4SJE95AuKVveKhBc5nI3e4JSRZycHwb6I59Wk4fD+xxmCFYJCSAYLBvsn8A4Kb19
+ knJg==
+X-Gm-Message-State: AOAM532jkOtOQGKHPmOFwPsApJuzgfG74ri+2ah3ZNe0YWywtxS4RXYZ
+ T4zm2J0ZMQTbutYndqQ0BNo=
+X-Google-Smtp-Source: ABdhPJxttaDAx96X6vnFV6uClc1Psi6tOUv9mOCjZhoh9Beb5cobqJhbt7NgcCVickrwcJaAUPFjDQ==
+X-Received: by 2002:aca:df07:: with SMTP id w7mr135566oig.110.1631199345463;
+ Thu, 09 Sep 2021 07:55:45 -0700 (PDT)
 Received: from nuclearis3.lan (c-98-195-139-126.hsd1.tx.comcast.net.
  [98.195.139.126])
- by smtp.gmail.com with ESMTPSA id l21sm447898oop.22.2021.09.09.07.55.43
+ by smtp.gmail.com with ESMTPSA id l21sm447898oop.22.2021.09.09.07.55.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Sep 2021 07:55:43 -0700 (PDT)
+ Thu, 09 Sep 2021 07:55:44 -0700 (PDT)
 From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 To: u-boot@lists.denx.de,
 	patrick.delaunay@foss.st.com
-Date: Thu,  9 Sep 2021 09:55:34 -0500
-Message-Id: <20210909145536.2979951-2-mr.nuke.me@gmail.com>
+Date: Thu,  9 Sep 2021 09:55:35 -0500
+Message-Id: <20210909145536.2979951-3-mr.nuke.me@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210909145536.2979951-1-mr.nuke.me@gmail.com>
 References: <20210909145536.2979951-1-mr.nuke.me@gmail.com>
 MIME-Version: 1.0
 Cc: uboot-stm32@st-md-mailman.stormreply.com, marex@denx.de,
  etienne.carriere@linaro.org, Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: [Uboot-stm32] [PATCH 1/3] stm32mp: Rename FIP config to
-	stm32mp15_tfaboot_fip_defconig
+Subject: [Uboot-stm32] [PATCH 2/3] arm: Kconfig: Introduce a
+	TFABOOT_FIP_CONTAINER option
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,101 +77,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-STM32MP has several possible boot flows with either SPL or TF-A. The
-word from STM is that they only want to support TF-A with FIP images,
-and this should be default. We don't disagree. However, this argument
-is orthogonal to naming our defconfigs clearly.
+This option is intended to tell u-boot platform code that this u-boot
+build is expected to be used in a FIP container, as part of a TF-A
+boot flow.
 
-I'm concerned that users might be confused by the current naming. When
-given the choice between "basic", "trusted", or "<empty>", someone
-used with how u-boot works will think that the "<empty>" config is the
-customary "SPL + u-boot". However, such confusion is far less likely
-when the choices are "basic", "trusted", and "tfaboot_fip".
+It is introduced because STM32MP1 platform code needs special
+considerations on a FIP boot, such as a different partition layout,
+and decisions about who should patch the FDT optee nodes.
 
-To this effect, avoid having a naked config name and rename it to
-"stm32mp15_tfaboot_fip_defconig".
+This Kconfig can be justified as a natural extension of TFABOOT.
 
 Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
- board/st/stm32mp1/MAINTAINERS                    |  2 +-
- ...defconfig => stm32mp15_tfaboot_fip_defconfig} |  0
- doc/board/st/stm32mp1.rst                        | 16 ++++++++--------
- 3 files changed, 9 insertions(+), 9 deletions(-)
- rename configs/{stm32mp15_defconfig => stm32mp15_tfaboot_fip_defconfig} (100%)
+ arch/arm/Kconfig | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/board/st/stm32mp1/MAINTAINERS b/board/st/stm32mp1/MAINTAINERS
-index 0e6d80fb45..e2da11b46d 100644
---- a/board/st/stm32mp1/MAINTAINERS
-+++ b/board/st/stm32mp1/MAINTAINERS
-@@ -5,7 +5,7 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-stm.git
- S:	Maintained
- F:	arch/arm/dts/stm32mp15*
- F:	board/st/stm32mp1/
--F:	configs/stm32mp15_defconfig
- F:	configs/stm32mp15_basic_defconfig
- F:	configs/stm32mp15_trusted_defconfig
-+F:	configs/stm32mp15_tfaboot_fip_defconfig
- F:	include/configs/stm32mp1.h
-diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_tfaboot_fip_defconfig
-similarity index 100%
-rename from configs/stm32mp15_defconfig
-rename to configs/stm32mp15_tfaboot_fip_defconfig
-diff --git a/doc/board/st/stm32mp1.rst b/doc/board/st/stm32mp1.rst
-index 42bb94148d..89981023be 100644
---- a/doc/board/st/stm32mp1.rst
-+++ b/doc/board/st/stm32mp1.rst
-@@ -76,7 +76,7 @@ The **Trusted** boot chain with TF-A_
- `````````````````````````````````````
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 2d59562665..0bfdc2adc4 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1907,6 +1907,21 @@ config TFABOOT
+ 	  Enabling this option will make a U-Boot binary that is relying
+ 	  on other firmware layers to provide secure functionality.
  
- defconfig_file :
--   + **stm32mp15_defconfig** (for TF-A_ with FIP support)
-+   + **stm32mp15_tfaboot_fip_defconfig** (for TF-A_ with FIP support)
-    + **stm32mp15_trusted_defconfig** (for TF-A_ without FIP support)
- 
-     +-------------+--------------------------+------------+-------+
-@@ -184,7 +184,7 @@ Build Procedure
- 
-    with <defconfig_file>:
- 
--   - For **trusted** boot mode : **stm32mp15_defconfig** or
-+   - For **trusted** boot mode : **stm32mp15_tfaboot_fip_defconfig** or
-      stm32mp15_trusted_defconfig
-    - For basic boot mode: stm32mp15_basic_defconfig
- 
-@@ -197,7 +197,7 @@ Build Procedure
-   a) trusted boot with FIP on ev1::
- 
-      # export KBUILD_OUTPUT=stm32mp15
--     # make stm32mp15_defconfig
-+     # make stm32mp15_tfaboot_fip_defconfig
-      # make DEVICE_TREE=stm32mp157c-ev1 all
- 
-   b) trusted boot without FIP on dk2::
-@@ -235,7 +235,7 @@ Build Procedure
-    So in the output directory (selected by KBUILD_OUTPUT),
-    you can found the needed U-Boot files:
- 
--     - stm32mp15_defconfig = **u-boot-nodtb.bin** and **u-boot.dtb**
-+     - stm32mp15_tfaboot_fip_defconfig = **u-boot-nodtb.bin** and **u-boot.dtb**
- 
-      - stm32mp15_trusted_defconfig = u-boot.stm32
- 
-@@ -248,11 +248,11 @@ Build Procedure
- 
- 7. TF-A_ compilation
- 
--   This step is required only for **Trusted** boot (stm32mp15_defconfig and
--   stm32mp15_trusted_defconfig); see OP-TEE_ and TF-A_ documentation for build
--   commands.
-+   This step is required only for **Trusted** boot
-+   (stm32mp15_tfaboot_fip_defconfig and stm32mp15_trusted_defconfig); see
-+   OP-TEE_ and TF-A_ documentation for build commands.
- 
--   - For TF-A_ with FIP support: **stm32mp15_defconfig**
-+   - For TF-A_ with FIP support: **stm32mp15_tfaboot_fip_defconfig**
- 
-      - with OP-TEE_ support, compile the OP-TEE to generate the binary included
-        in FIP
++config TFABOOT_FIP_CONTAINER
++	bool "Support for booting from TF-A inside a FIP container"
++	depends on TFABOOT
++	help
++	  TF-A has its own container format, named FIP (not to be confused with
++	  FIT). The assumptions u-boot makes about the platform in a non-FIP
++	  boot are not always true with FIP.
++	  These differences could in theory be resolved with dynamic devicetree
++	  patching. However TF-A either can't patch devicetrees, or is
++	  unwilling to do so. Even then, passing such devicetree to u-boot
++	  might require custom mechanisms.
++	  Enabling this option will tell u-boot platform code that it is okay
++	  to assume U-Boot will be started from a FIP container, even if such
++	  assumptions would break things in a more normal setting.
++
+ config TI_SECURE_DEVICE
+ 	bool "HS Device Type Support"
+ 	depends on ARCH_KEYSTONE || ARCH_OMAP2PLUS || ARCH_K3
 -- 
 2.31.1
 

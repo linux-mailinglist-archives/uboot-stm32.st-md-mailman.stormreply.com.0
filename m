@@ -2,64 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7334840AD88
-	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Sep 2021 14:26:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4914440ADB9
+	for <lists+uboot-stm32@lfdr.de>; Tue, 14 Sep 2021 14:31:25 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2CB78C597BC;
-	Tue, 14 Sep 2021 12:26:31 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 02A78C597BC;
+	Tue, 14 Sep 2021 12:31:25 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CE5AEC56630
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B2081C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Sep 2021 12:26:28 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18E9MjFL029740; 
- Tue, 14 Sep 2021 14:26:25 +0200
+ Tue, 14 Sep 2021 12:31:22 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18E9q8eI028975; 
+ Tue, 14 Sep 2021 14:31:19 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=GntkML+DMhya8HYc32cMgWD0YhvTze9EQ18mxgBntSo=;
- b=m6LGCZcwYMK5BA2sqytuTDo4Kl9hIUhhxhj2h4eVqsczYT7zVUPmkmqRQpiSpGlrr9HK
- J6tpK+oYjJeTAbgsvWj1XqO1L5nbakXnVw0wYYyJ2bFgd8/WGaKrgeP+sIlDzpGuPJon
- LsBko8AaQK1Ml/3OMx1QD2y3UoqiOWxmjBVSBxdjQe1szB0hvd2swK0Hr9HCJAuw+aNo
- avlRO29VfTzRSIhCqy590eRc4FTp5UA/sOSSxJ6EFcTPQq5d1rPl9oLDI5wpnvEK3BAu
- KkWF6RqZ+jJyCIK0t6dWzWH17rsjcwI8EPwkk/e5gQHYw3ynvWmqp3utffG4ptFrsbE7 nw== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=1+yvVfgE3bCruy5O0yhjKh6P0tE0etZWBkeprvDICgs=;
+ b=jkAFFiWQd305xvnlBW8z87Y+kBkWLYCGNChiRigJJc2II1pcupAR0fWAl6/fgGxsCscs
+ gLSAyrzG0ybSqLNGRgcyiUXBVQTrxGPCEIyOPDACH/XNkPb7dcpbOMDxIk6O2RL4nYB/
+ 81y63LI1cij+U2m7SodvP4yFUYn1MPSHgmFKhU4pRRDAE9uBRj7wCluLnKsViU16rHgx
+ lpcKVGalmS7c2FGK+VdJl9zFlSLhH4235Pcq/sF/fYrITMGv4IaTWvZcHwv1xhq69UKY
+ MWEGV9GWiiIzSKX7menLQKq4gJRQTVeMrMpu77BftNwjyyE+a//YAYVWOWw+pvDWRIEz Ng== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3b2jmq37dq-1
+ by mx07-00178001.pphosted.com with ESMTP id 3b2sg18tp2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Sep 2021 14:26:25 +0200
+ Tue, 14 Sep 2021 14:31:19 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B982A10002A;
- Tue, 14 Sep 2021 14:26:24 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 02D3110002A;
+ Tue, 14 Sep 2021 14:31:19 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A415421BF4C;
- Tue, 14 Sep 2021 14:26:24 +0200 (CEST)
-Received: from lmecxl0994.lme.st.com (10.75.127.49) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 14 Sep
- 2021 14:26:24 +0200
-To: Alexandru Gagniuc <mr.nuke.me@gmail.com>, <u-boot@lists.denx.de>
-References: <20210909145536.2979951-1-mr.nuke.me@gmail.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <f517fc64-f8e2-f722-40f0-174bf709c145@foss.st.com>
-Date: Tue, 14 Sep 2021 14:26:23 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EC1B921BF57;
+ Tue, 14 Sep 2021 14:31:18 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 14 Sep 2021 14:31:18
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 14 Sep 2021 14:31:16 +0200
+Message-ID: <20210914143026.1.I48db0a17460592df70f33306da8d8196cd13e0e9@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210909145536.2979951-1-mr.nuke.me@gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
  definitions=2021-09-14_03,2021-09-14_01,2020-04-07_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com, marex@denx.de,
- etienne.carriere@linaro.org
-Subject: Re: [Uboot-stm32] [PATCH 0/3] stm32mp: Attempt to resolve
- unintended breakage with v2021.10-rc2
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [Uboot-stm32] [PATCH 1/2] phy: stm32-usbphyc: use connector for
+	vbus-supply with phy-stm32-usbphyc
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,155 +68,69 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgQWxleGFuZHJ1LAoKT24gOS85LzIxIDQ6NTUgUE0sIEFsZXhhbmRydSBHYWduaXVjIHdyb3Rl
-Ogo+IHUtYm9vdCB2MjAyMS4xMC1yYzIgSW50cm9kdWNlZCBzdXBwb3J0IGZvciBib290aW5nIGZy
-b20gRklQIGltYWdlcwo+IChub3QgdG8gYmUgY29uZnVzZWQgd2l0aCBGSVQpIGZvciBzdG0zMm1w
-LiBJIGFtIGFsc28gd29ya2luZyBvbiBhCj4gZGlmZmVyZW50IGJvb3QgZmxvdyBiYXNlZCBvbiB1
-LWJvb3QncyBmYWxjb24gbW9kZS4gVGhlIGNoYW5nZXMgdG8KPiBhY2NvbW1vZGF0ZSB0aGUgRklQ
-IG1vZGUgaW5hZHZlcnRlbnRseSBicm9rZSB0aGUgZmFsY29uIGZsb3cuIFRoaXMKPiBzZXJpZXMg
-aW50ZW5kcyB0byBhZGRyZXNzIHRoYXQuCj4KPiBUaGUgY29yZSBpc3N1ZSBpcyB0aGF0IG9wdGVl
-IG5vZGVzIGFyZSByZW1vdmVkIGZyb20gdGhlIHUtYm9vdAo+IGRldmljZXRyZWUuIEZvciByZWFz
-b25zIGRldGFpbGVkIGluIG15IG90aGVyIHNlcmllcwo+ICgiW1BBVENIIHYyIDAwLzExXSBzdG0z
-Mm1wMTogU3VwcG9ydCBmYWxjb24gbW9kZSB3aXRoIE9QLVRFRSBwYXlsb2FkcyIpCj4gdGhlICJv
-cHRlZSIgbm9kZXMgYXJlIHJlcXVpcmVkLgo+Cj4gSXQgbWlnaHQgc2VlbSBsaWtlIGFuIG9idmlv
-dXMgc29sdXRpb24gdG8gImp1c3QgcmUtYWRkIHRoZSBub2RlcyIsIGJ1dAo+IEkgZm91bmQgb3V0
-IGl0IGRpZG4ndCB3b3JrIGxpa2UgdGhhdC4gSSBjb3VsZG4ndCB1c2UKPiBTVE0zMk1QMTV4X1NU
-TTMySU1BR0UgdG8gZ2V0IG1lIGJhY2sgbXkgbm9kZXMsIGJlY2F1c2UgdGhhdCB3b3VsZCBoYXZl
-Cj4gcmVxdWlyZWQgVEZBQk9PVC4gV2hhdCBJIG5lZWRlZCB3YXMgYSBuZXcgY29uZmlnIHRoYXQg
-bW9yZSBhY2N1cmF0ZWx5cmVmbGVjdGVkIHRoZSBhdmFpbGFibGUgYm9vdCBmbG93cy4KPgo+IFNU
-TTMyTVAxNXhfU1RNMzJJTUFHRSBpcyBhIGNvbmZ1c2luZyBiZWNhdXNlIGl0IGNvbmZsYXRlcyBp
-bWFnZQo+IGdlbmVyYXRpb24gd2l0aCB1LWJvb3QgYmVoYXZpb3IuIEknbSBwcm9wb3NpbmcgcmVw
-bGFjaW5nIGl0IHdpdGgKPiBURkFCT09UX0ZJUF9DT05UQUlORVIgYmVjYXVzZSBJIHRoaW5rIHRo
-aXMgbmV3IGNvbmZpZyBpcyBtdWNoIGVhc2llcgo+IHRvIHVuZGVyc3RhbmQgaW4gbGF5bWFuJ3Mg
-dGVybXMuIEkgYWxzbyB0aGlua3MgaXQgbWFwcyBtb3JlIGVsZWdhbnRseQo+IHRvIHdoYXQgU1RN
-IGlzIHRyeWluZyB0byBkbzogYWRkIGEgbmV3IGJvb3QgZmxvdy4KCkFnYWluLCBJIGRvbid0IGFk
-ZCBhIG5ldyBib290IGZsb3cgQlVUIHRoZSBzdXBwb3J0IG9mIHRoZSBkZWZhdWx0Cgpjb250YWlu
-ZXIgPSB0aGUgRklQIGZvciB0aGUgZXhpc3RpbmcgVEZBIEJPT1QgZmxvdyAuCgoKSXQgaXMgdGhl
-IFNBTUUgYm9vdCBmbG93LCBwcmV2aW91c2x5IG5hbWVkICJ0cnVzdGVkIgoKClRGLUEgKEJMMikg
-PT4gc2VjdXJlIG1vbml0b3IgPT4gVS1Cb290ID0+IGtlcm5lbAoKCkFuZCB3ZSBoYXZlIGFsc28g
-MiB2YXJpYW50IGhlcmU6IHRoZSBzZWN1cmUgbW9uaXRvciBjYW4gYmUgT1AtVEVFIG9yIFNQX01J
-TgoKClRoZSBvbmx5IGRpZmZlcmVuY2UgaXMgdGhlIGNvbnRhaW5lcnMgdXNlZCBieSBURi1BIEJM
-MiAoRlNCTCkgdG8gbG9hZAoKdGhlIG5leHQgc3RhZ2UgKHNlY3VyZSBtb25pdG9yIC8gU1NCTCkg
-YW5kIHRoZSBEVCBpcyBwcm92aWRlZCB0byBVLUJvb3QgCmJ5IFRGLUEvT1AtVEVFLgoKQW5kIGJv
-b3RoIGNvbnRhaW5lciBjYW4gYmUgdXNlZCB3aXRowqAgT1AtVEVFIG9yIFNQX01JTi4KCgpJbiB0
-aGUgZmlyc3Qgc3VwcG9ydCBvZiBTVE0zMk1QMTUgaW4gVEYtQSwgd2UgdXNlIHRoZSBTVE0zMklN
-QUdFIApjb250YWluZXIgKHNldmVyYWwgZmlsZXMgKi5zdG0zMikKCmJ1dCBhZnRlciBzb21lIHJl
-cXVlc3RzIChQS0kpIGFuZCBldm9sdXRpb24gYW5kIHRvIGF2b2lkIGxpbWl0YXRpb24gCihTWVNS
-QU0gc2l6ZSkKCndlIGNvbmNsdWRlIGl0IHdhcyBhIGVycm9yIHRvIGEgdXNlIHRoaXMgcHJvcHJp
-ZXRhcnkgZm9ybWF0IGFmdGVyIFRGLUEgQkwyLgoKCldlIGtlZXAgdGhpcyBmb3JtYXQgb25seSBm
-b3IgUk9NIGNvZGUsIGZvciB0aGUgZmlyc3QgYm9vdCBzdGFnZSBsb2FkZXIgPSAKVEYtQSBCTDIg
-b3IgU1BMLgoKCk5vdyB3ZSBhcmUgbWlncmF0aW5nIHRoZSAidHJ1c3RlZCIgYm9vdCAod2l0aCBU
-Ri1BIGJvb3QpIHRvIHVzZSB0aGUgRklQCgpjb250YWluZXIuCgoKU28gdGhlIHVzYWdlIG9mIFNU
-TTMySU1BR0UgY29udGFpbmVyIGZvciBVLUJvb3QgaXMgU1RNMzJNUDE1eCBzcGVjaWZpYwoKYW5k
-IHRoZSBGSVAgaXMgdGhlIGRlZmF1bHQgY29udGFpbmVyIGZvciBURkFCT09UCgooZm9yIG1lIG5v
-IG5lZWQgdG8gc3BlY2lmaWMgQ09ORklHIHRvIG1hbmFnZWQgZ2VuZXJpYyBiZWhhdmlvciksCgoK
-SXQgaXMgc3RyYW5nZSB0byBhZGQgYSBjb25maWcgZm9yIGFsbCBib2FyZCAoc28gYWx3YXlzIGFj
-dGl2YXRlZCksIHRvIApzb2x2ZSBhIHByb2JsZW0KCm9ubHkgcHJlc2VudCBpbiB0aGUgU1RNMzJN
-UCBwbGF0Zm9ybSBiZWNhdXNlIHdlIGJhZGx5IHN1cHBvcnQgVEZBIGluIHRoZQoKZmlyc3QgdXBz
-dHJlYW1lZCBjb2RlLgoKClNvIEkgcHJlZmVyIHVzZSBhICJDT05GSUdfU1RNMzJNUDE1eF8iIGNv
-bmZpZyB0byBtYW5hZ2UgaXQ7CgppdCBpcyBvbmx5IGFjdGl2YXRlZCBmb3IgVEZBQk9PVCBhbmQg
-Zm9yIFNUTTMyTVAxNQoKCkJ1dCBwZXJoYXBzIHlvdSBwcmVmZXIgYSBsb25nZXIgbmFtZSA/CgoK
-PT4gQ09ORklHX1NUTTMyTVAxNXhfVEZBQk9PVF9TVE0zMklNQUdFX0NPTlRBSU5FUgoKb3IKCj0+
-IENPTkZJR19TVE0zMk1QMTV4X1RGQUJPT1RfV0lUSF9TVE0zMklNQUdFCgoKRm9yIHRoZSBPUC1U
-RUUgbm9kZXMsIG9uIFNUIGJvYXJkcyBhdCBsZWFzdCwgdGhleSBhcmUgYXNzdW1lcyBhZGRlZCBi
-eSAKT1AtVEVFCgpmaXJtd2FyZS4gSXQgaXMgdGhlIGV4cGVjdGVkIGJlaGF2aW9yIHdoZW4gT1At
-VEVFIGlzIGNvbXBpbGVkIGZvciBTVCBib2FyZHMuCgoKU28gZm9yIG1lIGl0IGlzIG5vdCBhIGlz
-c3VlIGJ1dCB0aGUgZXhwZWN0ZWQgYmVoYXZpb3IgZm9yIFNUIGJvYXJkcyBmb3IgCnVwc3RyZWFt
-LgoKClRoaXMgYmVoYXZpb3IgYWxsb3dzIHRvIGR5bmFtaWNhbGx5IG1hbmFnZSB0aGUgY2FzZSB3
-aGVuIE9QLVRFRSBpcyBub3QgCnByZXNlbnQ6IGRyaXZlciBpcyBub3QgcHJvYmVkLAoKYmVjYXVz
-ZSBpdCBjYW4gYmUgcmVwbGFjZWQgYnkgU1AtTUlOIGluIEZJUCBvciBpbiBTVE0zMklNQUdFLCBh
-bmQgYXZvaWQgCnRvIGZvcmNlIGluZm9ybWF0aW9uCgppbiBVLUJvb3QgZGV2aWNlIHRyZWUgY29u
-ZmlndXJhdGlvbiB3aGljaCBjYW4gYmUgbWFuYWdlZCBieSBPUC1URUUuCgoKVS1Cb290IGNhbiBz
-dGFydCBhbnkgT1AtVEVFIGJpbmFyeSwgZXZlbiBpZiBtZW1vcnkgY29uZmlndXJhdGlvbiBjaGFu
-Z2UKCmFuZCBJIHRyeSB0byBsaW1pdCB0aGUgbnVtYmVyIG9mIFUtQm90IGFkZC1vbiBpbiAic3Rt
-MzJtcCotdS1ib290LmR0c2kiLgoKCkkgYWdyZWUgdGhhdCBmb3IgeW91IHVzZSBjYW4geW91IGNv
-dWxkIGZvcmNlIE9QLVRFRSBub2Rlcywgd2hlbiBPUC1URUUgaXMKCm5vdCBjb21waWxlZCB0byB1
-cGRhdGUgZGV2aWNlIHRyZWUsIGJ5IGl0IGlzIG5vdCBhIG9wdGlvbiBjaG9zZW4KCm9uIFNUIE1p
-Y3JvZWxlY3Ryb25pY3MgYm9hcmRzIGZvciB1cHN0cmVhbSBzdXBwb3J0LgoKCk1vcmVvdmVyIGZv
-ciBtZSBpdCBpcyBub3QgcG9zc2libGUgdG8gaGF2ZSBvbmUgY29tcGlsYXRpb24gZmxhZyB3aGlj
-aCAKZGVmaW5lZCB0aGUgYm9vdCBmbG93CgphbmQgSSBzZWUgc2V2ZXJhbCBvdGhlciBpc3N1ZSB3
-aXRoIHRoZSAiZmFsY29uIE9QLVRFRSIgbW9kZToKCgpTUEwgPT4gT1AtVEVFID0+IFUtQm9vdAoK
-Ck9QLVRFRSBzaG91bGQgcHJvdmlkZSBQU0NJIC8gU0NNSSBzZXJ2ZXIgdG8gVS1Cb290IHJ1bm5p
-bmcgaW4gbm9uIHNlY3VyZSwKCnNvIHRoZSBVLUJvb3QgY29uZmlndXJhdGlvbiBjaGFuZ2U6Cgo9
-PiBDT05GSUdfQVJDSF9TVVBQT1JUX1BTQ0kgPSBuCgo9PiBDT05GSUdfQVJNX1NNQ0NDCgo9PiBD
-T05GSUdfQ1BVX1Y3X0hBU19OT05TRUMKCj0+IENPTkZJR19TWVNSRVNFVF9QU0NJCgo9PiBDT05G
-SUdfU0NNSV9GSVJNV0FSRSAvIENPTkZJR19DTEtfU0NNSSAvIENPTkZJR19SRVNFVF9TQ01JCgo9
-PiBDT05GSUdfVEVFIC8gQ09ORklHX09QVEVFCgpUb2RheSB0aGV5IGNvbmZpZ3VyYXRpb24gYXJl
-IG9ubHkgYWN0aXZhdGUgZm9yIFRGLUEgYm9vdApiZWNhdXNlIEkgYXNzdW1lIHRoYXQgd2l0aCBT
-UEwsIFUtQm9vdCBpcyBydW5uaW5nIGlzIHNlY3VyZSBsZXZlbCB3aXRoIGRpcmVjdCBhY2Nlc3MK
-dG8gc2VjdXJlIHJlc3NvdXJjZXMgLyB3aWh0b3V0IE9QVEVFCgoKSSB0aGluayB5b3UgbmVlZCB0
-byB1cGRhdGXCoCBhcmNoL2FybS9tYWNoLXN0bTMybXAvS2NvbmZpZwoKCnNvbWV0aGluZyBsaWtl
-OgoKCiDCoGNvbmZpZyBTVE0zMk1QMTV4CiDCoMKgwqDCoCBib29sICJTdXBwb3J0IFNUTWljcm9l
-bGVjdHJvbmljcyBTVE0zMk1QMTV4IFNvYyIKLcKgwqDCoCBzZWxlY3QgQVJDSF9TVVBQT1JUX1BT
-Q0kgaWYgIVRGQUJPT1QKLcKgwqDCoCBzZWxlY3QgQVJNX1NNQ0NDIGlmIFRGQUJPT1QKK8KgwqDC
-oCBzZWxlY3QgQVJDSF9TVVBQT1JUX1BTQ0kgaWYgIVRGQUJPT1QgJiYgIVNQTF9PUFRFRV9JTUFH
-RQorwqDCoMKgIHNlbGVjdCBBUk1fU01DQ0MgaWYgVEZBQk9PVCB8fCBTUExfT1BURUVfSU1BR0UK
-IMKgwqDCoMKgIHNlbGVjdCBDUFVfVjdBCi3CoMKgwqAgc2VsZWN0IENQVV9WN19IQVNfTk9OU0VD
-IGlmICFURkFCT09UCivCoMKgwqAgc2VsZWN0IENQVV9WN19IQVNfTk9OU0VDIGlmICFURkFCT09U
-ICYmICFTUExfT1BURUVfSU1BR0UKIMKgwqDCoMKgIHNlbGVjdCBDUFVfVjdfSEFTX1ZJUlQKIMKg
-wqDCoMKgIHNlbGVjdCBPRl9CT0FSRF9TRVRVUAogwqDCoMKgwqAgc2VsZWN0IFBJTkNUUkxfU1RN
-MzIKQEAgLTQ3LDggKzQ3LDggQEAgY29uZmlnIFNUTTMyTVAxNXgKIMKgwqDCoMKgIHNlbGVjdCBT
-VE0zMl9TRVJJQUwKIMKgwqDCoMKgIHNlbGVjdCBTWVNfQVJDSF9USU1FUgogwqDCoMKgwqAgaW1w
-bHkgQ01EX05WRURJVF9JTkZPCi3CoMKgwqAgaW1wbHkgU1lTUkVTRVRfUFNDSSBpZiBURkFCT09U
-Ci3CoMKgwqAgaW1wbHkgU1lTUkVTRVRfU1lTQ09OIGlmICFURkFCT09UCivCoMKgwqAgaW1wbHkg
-U1lTUkVTRVRfUFNDSSBpZiBURkFCT09UIHx8IFNQTF9PUFRFRV9JTUFHRQorwqDCoMKgIGltcGx5
-IFNZU1JFU0VUX1NZU0NPTiBpZiAhVEZBQk9PVCAmJiAhU1BMX09QVEVFX0lNQUdFCiDCoMKgwqDC
-oCBoZWxwCiDCoMKgwqDCoCDCoMKgwqAgc3VwcG9ydCBvZiBTVE1pY3JvZWxlY3Ryb25pY3MgU09D
-IFNUTTMyTVAxNXggZmFtaWx5CiDCoMKgwqDCoCDCoMKgwqAgU1RNMzJNUDE1NywgU1RNMzJNUDE1
-MyBvciBTVE0zMk1QMTUxCkBAIC0xNTMsNyArMTUzLDcgQEAgY29uZmlnIE5SX0RSQU1fQkFOS1MK
-CiDCoGNvbmZpZyBERFJfQ0FDSEVBQkxFX1NJWkUKIMKgwqDCoMKgIGhleCAiU2l6ZSBvZiB0aGUg
-RERSIG1hcmtlZCBjYWNoZWFibGUgaW4gcHJlLXJlbG9jIHN0YWdlIgotwqDCoMKgIGRlZmF1bHQg
-MHgxMDAwMDAwMCBpZiBURkFCT09UCivCoMKgwqAgZGVmYXVsdCAweDEwMDAwMDAwIGlmIFRGQUJP
-T1QgfHwgU1BMX09QVEVFX0lNQUdFCiDCoMKgwqDCoCBkZWZhdWx0IDB4NDAwMDAwMDAKIMKgwqDC
-oMKgIGhlbHAKIMKgwqDCoMKgIMKgwqDCoCBEZWZpbmUgdGhlIHNpemUgb2YgdGhlIEREUiBtYXJr
-ZWQgYXMgY2FjaGVhYmxlIGluIFUtQm9vdAoKCm9yIG1vdmUgYWxsIHRoZXNlIEFSQ0ggb3B0aW9u
-IGZyb20gS2NvbmZpZyBpbiBlYWNoIGRlZmNvbmZpZy4uLi4KCgpTbyBqdXN0IGludHJvZHVjZSBD
-T05GSUdfVEZBQk9PVF9GSVBfQ09OVEFJTkVSIGRvbid0IHNvbHZlIGFsbCB0aGUgCmlzc3Vlcy4u
-Li4KCgpJIHRoaW5rIHlvdSBuZWVkIHRvIG1hbmFnZSBDT05GSUdfU1BMX09QVEVFX0lNQUdFCgp0
-byBoYW5kbGUgc3BlY2lmaWMgY2FzZSB3aGVuIE9QVEVFIGlzIHJ1bm5pbmcgYWZ0ZXIgU1BMLgoK
-CkkgdHJ5IHRvIGV4cGVyaW1lbnQgdGhlIE9QVEVFIGxvYWQgYnkgU1BMIGJ1dCBJIGRvbid0IHNl
-ZSBob3cKCnRoZSBPUC1URUUgcGFnZXIgY2FuIGJlIG1hbmFnZWQgYnkgU1BMIGluIHRoZSBjdXJy
-ZW50IGNvZGUuCgoKSXQgbXVzdCBsb2FkZWQgaW4gU1lSQU0gYXQgMHgyZmZjMDAwMCwgd2l0aCBh
-IHJpc2sgdG8gb3ZlcndyaXRlIHRoZSBTUEwKCmNvZGUgbG9hZGVkIGJ5IHJvbSBjb2RlIGF0IDB4
-MmZmYzI1MDAuCgoKb3IgaG93IHRvIG1hbmFnZSBzZXZlcmFsIGJpbmFyeSwgc2VlIE9QLVRFRSBo
-ZWFkZXIgdjIgc3VwcG9ydCBpbiBPUC1URUUsCgpTZXZlcmFsIGZpbGUgaXQgaXMgYWxyZWFkeSBz
-dXBwb3J0ZWQgaW4gVEYtQSBCTDIgd2l0aCBGSVA6Cgp0ZWUtaGVhZGVyX3YyLmJpbgp0ZWUtcGFn
-ZXJfdjIuYmluCnRlZS1wYWdlYWJsZV92Mi5iaW4KCj4KPiBBbGV4YW5kcnUgR2Fnbml1YyAoMyk6
-Cj4gICAgc3RtMzJtcDogUmVuYW1lIEZJUCBjb25maWcgdG8gc3RtMzJtcDE1X3RmYWJvb3RfZmlw
-X2RlZmNvbmlnCj4gICAgYXJtOiBLY29uZmlnOiBJbnRyb2R1Y2UgYSBURkFCT09UX0ZJUF9DT05U
-QUlORVIgb3B0aW9uCj4gICAgc3RtMzJtcDE6IFJlcGxhY2UgU1RNMzJNUDE1eF9TVE0zMklNQUdF
-IHdpdGggVEZBQk9PVF9GSVBfQ09OVEFJTkVSCj4KPiAgIGFyY2gvYXJtL0tjb25maWcgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICB8IDE1ICsrKysrKysrKysrKwo+ICAgYXJjaC9hcm0vZHRz
-L3N0bTMybXAxNTdhLWRrMS11LWJvb3QuZHRzaSAgICAgIHwgIDkgKysrKy0tLS0KPiAgIGFyY2gv
-YXJtL2R0cy9zdG0zMm1wMTU3Yy1lZDEtdS1ib290LmR0c2kgICAgICB8ICA5ICsrKystLS0tCj4g
-ICBhcmNoL2FybS9tYWNoLXN0bTMybXAvS2NvbmZpZyAgICAgICAgICAgICAgICAgfCAgNyAtLS0t
-LS0KPiAgIC4uLi9jbWRfc3RtMzJwcm9nL2NtZF9zdG0zMnByb2cuYyAgICAgICAgICAgICB8ICA1
-ICsrLS0KPiAgIC4uLi9tYWNoLXN0bTMybXAvY21kX3N0bTMycHJvZy9zdG0zMnByb2cuYyAgICB8
-ICA0IC0tLS0KPiAgIC4uLi9tYWNoLXN0bTMybXAvY21kX3N0bTMycHJvZy9zdG0zMnByb2cuaCAg
-ICB8ICAyIC0tCj4gICBhcmNoL2FybS9tYWNoLXN0bTMybXAvY29uZmlnLm1rICAgICAgICAgICAg
-ICAgfCAgMiArLQo+ICAgYXJjaC9hcm0vbWFjaC1zdG0zMm1wL2ZkdC5jICAgICAgICAgICAgICAg
-ICAgIHwgIDQgKy0tLQo+ICAgLi4uL2FybS9tYWNoLXN0bTMybXAvaW5jbHVkZS9tYWNoL3N0bTMy
-cHJvZy5oIHwgIDIgLS0KPiAgIGJvYXJkL3N0L2NvbW1vbi9LY29uZmlnICAgICAgICAgICAgICAg
-ICAgICAgICB8IDIzICsrKysrKysrKystLS0tLS0tLS0KPiAgIGJvYXJkL3N0L2NvbW1vbi9zdG0z
-Mm1wX210ZHBhcnRzLmMgICAgICAgICAgICB8IDIwICstLS0tLS0tLS0tLS0tLS0KPiAgIGJvYXJk
-L3N0L3N0bTMybXAxL01BSU5UQUlORVJTICAgICAgICAgICAgICAgICB8ICAyICstCj4gICBib2Fy
-ZC9zdC9zdG0zMm1wMS9zdG0zMm1wMS5jICAgICAgICAgICAgICAgICAgfCAgNiArKy0tLQo+ICAg
-Li4uY29uZmlnID0+IHN0bTMybXAxNV90ZmFib290X2ZpcF9kZWZjb25maWd9IHwgIDEgKwo+ICAg
-Y29uZmlncy9zdG0zMm1wMTVfdHJ1c3RlZF9kZWZjb25maWcgICAgICAgICAgIHwgIDEgLQo+ICAg
-ZG9jL2JvYXJkL3N0L3N0bTMybXAxLnJzdCAgICAgICAgICAgICAgICAgICAgIHwgMTYgKysrKysr
-LS0tLS0tLQo+ICAgMTcgZmlsZXMgY2hhbmdlZCwgNTQgaW5zZXJ0aW9ucygrKSwgNzQgZGVsZXRp
-b25zKC0pCj4gICByZW5hbWUgY29uZmlncy97c3RtMzJtcDE1X2RlZmNvbmZpZyA9PiBzdG0zMm1w
-MTVfdGZhYm9vdF9maXBfZGVmY29uZmlnfSAoOTklKQo+CgpQUzogSSBwdXNoIGEgcGF0Y2ggdG8g
-c29sdmUgdGhlIEdQVCBwYXJ0aXRpb24gbmFtZSBmb3JjZSB0byBmaXAgaW4gYmFzaWMgCmJvb3QK
-Cmh0dHA6Ly9wYXRjaHdvcmsub3psYWJzLm9yZy9wcm9qZWN0L3Vib290L2xpc3QvP3Nlcmllcz0y
-NjIyNTcmc3RhdGU9KgoKCk5COiBJIHdpbGwgc2hhcmUgbXkgd29ya2luZyBicmFuY2ggd2l0aCBt
-eSBwcm9wb3NhbCBvZiBTUEwgJiBPUFQtVEVFCgogwqDCoMKgwqDCoMKgIHN1cHBvcnQgaW4gZmV3
-IGRheXMKCgpSZWdhcmRzCgpQYXRyaWNrCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3Qt
-bWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBs
-eS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+The vbus-supply is an optional property of sub-node connector node.
+and no more in the usb phyc node (in first proposed binding).
+
+This regulator for USB VBUS may be needed for host mode.
+
+See the latest kernel binding for details in
+Documentation/devicetree/bindings/phy/phy-stm32-usbphyc.yaml.
+
+  usbphyc_port0: usb-phy@0 {
+      reg = <0>;
+      phy-supply = <&vdd_usb>;
+      #phy-cells = <0>;
+      connector {
+          compatible = "usb-a-connector";
+          vbus-supply = <&vbus_sw>;
+      };
+  };
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ drivers/phy/phy-stm32-usbphyc.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
+index 02d859a039..c206efd28d 100644
+--- a/drivers/phy/phy-stm32-usbphyc.c
++++ b/drivers/phy/phy-stm32-usbphyc.c
+@@ -339,7 +339,7 @@ static int stm32_usbphyc_probe(struct udevice *dev)
+ {
+ 	struct stm32_usbphyc *usbphyc = dev_get_priv(dev);
+ 	struct reset_ctl reset;
+-	ofnode node;
++	ofnode node, connector;
+ 	int i, ret;
+ 
+ 	usbphyc->base = dev_read_addr(dev);
+@@ -395,10 +395,12 @@ static int stm32_usbphyc_probe(struct udevice *dev)
+ 			return ret;
+ 		}
+ 
+-		ret = stm32_usbphyc_get_regulator(node, "vbus-supply",
+-						  &usbphyc_phy->vbus);
+-		if (ret)
+-			usbphyc_phy->vbus = NULL;
++		usbphyc_phy->vbus = NULL;
++		connector = ofnode_find_subnode(node, "connector");
++		if (ofnode_valid(connector)) {
++			ret = stm32_usbphyc_get_regulator(connector, "vbus-supply",
++							  &usbphyc_phy->vbus);
++		}
+ 
+ 		node = dev_read_next_subnode(node);
+ 	}
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

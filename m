@@ -2,72 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A63A40F4DB
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Sep 2021 11:35:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 84C2F40F65C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Sep 2021 12:56:11 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EE284C597BC;
-	Fri, 17 Sep 2021 09:35:11 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
- [209.85.128.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A8B7C597BC;
+	Fri, 17 Sep 2021 10:56:11 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0F9CCC5718F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83D98C5719E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 16 Sep 2021 14:49:43 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id
- c8-20020a7bc008000000b002e6e462e95fso7591303wmb.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 16 Sep 2021 07:49:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=date:from:to:cc:subject:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=r7QFRX8PBAbyeCR6FK19Z+LiM7KadU/IlIr3Chk0uwc=;
- b=iDPrwsCbJq8s70yk8hDTUlKKV8nok+Xou/0v6zbXi8ptcFO6O81mP1urEYQhmzo1eZ
- 5Z2j5m3rlVhPYR3Bw96BVARKCJ6OTQQnLkQaxlNZBmjnhVSgOqfMO9S4WxqU1s/bTdDN
- wem/aVV/2RHhHYzqhcCVS/n+wf9PJX2gToSlhMuyt3RPVNP+SXrORd7VXqK/I5mYpHIa
- gMxiszsn2u9jkYI8cGV8exhaHfGNV2I8hHvbnEmhAW1eBuSKZWUhscwjqbCU63QvE3/K
- bYdfVZlHsmYBfte3tbxT9cfqzZ00U0iuuMS1yrdW8edNFYqCmBhRNBJWUto5O9RiW8Sn
- gVxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=r7QFRX8PBAbyeCR6FK19Z+LiM7KadU/IlIr3Chk0uwc=;
- b=sMQZA0FLnIiALrVVzGGg+7AspVbdysMmtA3ldbrR8rttMYAAsOhBf1Bm30Gun6c4QA
- nUeXI7WsMJRZ/XYRYWORi4mXUPO1Y/kS5etsQMyx4gjrHwb+7kbSnUP8a+3KsnirRJAy
- vtMZ4o3vK2pmdzUPDHWPNw8KKxl4tdMftDKSw/8ONf9QyejonOk/6gEPd4nBoVU5yYxe
- wMQG55mIkSjqRsW7GZVAq1V7k5xV0XnucOc+5dFGBfFvXlw2t5v2TVNZwUUa0WRXQdbj
- 7prOgSsC7y5n9Ej0/VKbFwwp5AftOeMCJ1kJfqzE3lBaRXl0DlNXTotGCSBCKyEcSppn
- a+iw==
-X-Gm-Message-State: AOAM53019BokHfR1Ew2++vJJ/e8p32Ap8T+jJKz3qInlcaKcvYqPnsBG
- S2iwHnLlERqWqEA7HHJVtK0=
-X-Google-Smtp-Source: ABdhPJxPa2Z3r4FIPtuPbd8Rd0KZzTk0aaAubBlAKhQM0fcNGd/7vhnEp2A9V662v1Vk/lN65GkEww==
-X-Received: by 2002:a05:600c:4f52:: with SMTP id
- m18mr10164314wmq.34.1631803782643; 
- Thu, 16 Sep 2021 07:49:42 -0700 (PDT)
-Received: from thinkpad ([2a0e:b107:ae1:0:3e97:eff:fe61:c680])
- by smtp.gmail.com with ESMTPSA id k1sm3767521wrz.61.2021.09.16.07.49.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Sep 2021 07:49:42 -0700 (PDT)
-Date: Thu, 16 Sep 2021 16:49:37 +0200
-From: Marek =?UTF-8?B?QmVow7pu?= <behunmarek@gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20210916164937.6b87b1ff@thinkpad>
-In-Reply-To: <20210916155040.v3.2.Ia461e670c7438478aa8f8939209d45c818ccd284@changeid>
+ Fri, 17 Sep 2021 10:56:09 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18H8uR4b007331; 
+ Fri, 17 Sep 2021 12:56:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=sU0HhjX+g1m4RcnixVBWo7sYTH//9FYqz7WLBIvOpZc=;
+ b=CCrCswlZgd/Yjw8CmTDw6HRbrYzCKoucqdppRei+v520AxjW5xpGLy5XBbrRt53YyYGO
+ qPwfFqP+u1onQKQtNNcGm5okMpPzKA6Lg4uc6Edyiped/san4Ini//0CjsD+pNf7an3+
+ LMbdrGHYdhf1phNf5lUCiFqDEhS418REC5dMsYvEtEDmaEvb8qfXMrSoUUGLG6OLIR8Q
+ eUzjmaA059Xb3eVxCO2okQYTT/07V9pCa6g1IpJDI0Sr8RpYbMhUv2qrKwY5WKmJauuZ
+ uN8lxNmeYnpxf1kuHWoRKyepPM8Sdsgzh0n79RV4mZ1e6FJ993/pyb+SEQjl6NEDRDNn xg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3b4j29tjt8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Sep 2021 12:56:02 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3984C10002A;
+ Fri, 17 Sep 2021 12:56:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 17DDC233C77;
+ Fri, 17 Sep 2021 12:56:01 +0200 (CEST)
+Received: from lmecxl0994.lme.st.com (10.75.127.51) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Fri, 17 Sep
+ 2021 12:56:00 +0200
+To: <u-boot@lists.denx.de>
 References: <20210916140118.874028-1-patrick.delaunay@foss.st.com>
- <20210916155040.v3.2.Ia461e670c7438478aa8f8939209d45c818ccd284@changeid>
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ <20210916155040.v3.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <70b0c139-b384-a2b9-91b1-7addc084eaa1@foss.st.com>
+Date: Fri, 17 Sep 2021 12:55:59 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-X-Mailman-Approved-At: Fri, 17 Sep 2021 09:35:11 +0000
-Cc: Marek Vasut <marex@denx.de>, Vignesh R <vigneshr@ti.com>,
+In-Reply-To: <20210916155040.v3.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-09-17_04,2021-09-16_01,2020-04-07_01
+Cc: Marek Vasut <marex@denx.de>,
  Christophe KERELLO <christophe.kerello@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, u-boot@lists.denx.de,
- Jagan Teki <jagan@amarulasolutions.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Heiko Schocher <hs@denx.de>, Pali =?UTF-8?B?Um9ow6Fy?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PATCH v3 2/2] mtd: spi: nor: force mtd name to
-	"nor%d"
+ Heiko Schocher <hs@denx.de>, =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH v3 1/2] mtd: cfi_flash: use
+ cfi_flash_num_flash_banks only when supported
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,37 +76,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 16 Sep 2021 16:01:18 +0200
-Patrick Delaunay <patrick.delaunay@foss.st.com> wrote:
-
-> Force the mtd name of spi-nor to "nor" + the driver sequence number:
-> "nor0", "nor1"... beginning after the existing nor devices.
-> 
-> This patch is coherent with existing "nand" and "spi-nand"
-> mtd device names.
-> 
-> When CFI MTD NOR device are supported, the spi-nor index is chosen after
-> the last CFI device defined by CONFIG_SYS_MAX_FLASH_BANKS.
-> 
-> When CONFIG_SYS_MAX_FLASH_BANKS_DETECT is activated, this config
-> is replaced by to cfi_flash_num_flash_banks in the include file
-> mtd/cfi_flash.h.
-> 
-> This generic name "nor%d" can be use to identify the mtd spi-nor device
-> without knowing the real device name or the DT path of the device,
-> used with API get_mtd_device_nm() and is used in mtdparts command.
-> 
-> This patch also avoids issue when the same NOR device is present 2 times,
-> for example on STM32MP15F-EV1:
-
-This is an unfortunate hack :( This is another reason why the whole mtd
-subsystem should be refactored.
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgTWFyZWssCgogPiBNYXJlayBWYXN1dFNlcHQuIDE2LCAyMDIxLCA1OjI0IHAubS4gVVRDIHwg
+IzEKCiA+IE9uIDkvMTYvMjEgNDowMSBQTSwgUGF0cmljayBEZWxhdW5heSB3cm90ZToKCiA+PiBX
+aGVuIENPTkZJR19TWVNfTUFYX0ZMQVNIX0JBTktTX0RFVEVDVCBpcyBhY3RpdmF0ZWQsCiA+PiBD
+T05GSUdfU1lTX01BWF9GTEFTSF9CQU5LUyBpcyByZXBsYWNlZCBieSBjZmlfZmxhc2hfbnVtX2Zs
+YXNoX2JhbmtzLAogPj4gYnV0IHRoaXMgdmFyaWFibGUgaXMgZGVmaW5lZCBpbiBkcml2ZXJzL210
+ZC9jZmlfZmxhc2guYywgd2hpY2ggaXMKID4+IGNvbXBpbGVkIG9ubHkgd2hlbiBDT05GSUdfRkxB
+U0hfQ0ZJX0RSSVZFUiBpcyBhY3RpdmF0ZWQsIGluIFUtQm9vdAogPj4gb3IgaW4gU1BMIHdoZW4g
+Q09ORklHX1NQTF9NVERfU1VQUE9SVCBpcyBhY3RpdmF0ZWQuCiA+PgogPj4gVGhpcyBwYXRjaCBk
+ZWFjdGl2YXRlcyB0aGlzIGZlYXR1cmUgQ09ORklHX1NZU19NQVhfRkxBU0hfQkFOS1NfREVURUNU
+CiA+PiB3aGVuIGZsYXNoIGNmaSBkcml2ZXIgaXMgbm90IGFjdGl2YXRlZCB0byBhdm9pZCBjb21w
+aWxhdGlvbiBpc3N1ZSBpbgogPj4gdGhlIG5leHQgcGF0Y2gsIHdoZW4gQ09ORklHX1NZU19NQVhf
+RkxBU0hfQkFOS1MgaXMgdXNlZCBpbiAKc3BpX25vcl9zY2FuKCkuCgogPiBNYXliZSBqdXN0IG1p
+Z3JhdGUgdGhpcyBjb25maWcgb3B0aW9uIHRvIEtjb25maWcgYW5kIGxldCBLY29uZmlnIGhhbmRs
+ZQogPiB0aGUgbWFjcm8gbWFnaWMgPwoKClNvcnJ5IGZvciB0aGUgZm9ybWF0wqAgb2YgbXkgYW5z
+d2VyIChpdCBpcyBqdXN0IGNvcHkgcGFzdGUgZnJvbSBhcmNoaXZlKQoKYmVjYXVzZSBJIGRvbid0
+IHJlY2VpdmVkIHRoZSBVLUJvb3QgbWFpbHMgb24gbXkgQGZvc3Muc3QuY29tIG1haWxibwoKc2lu
+Y2UgeWVzdGVyZGF5LgoKCkkgdGhpbmsgYWJvdXQgbWlncmF0aW9uIGJ1dCBpcyBkaWZmaWN1bHQg
+dG8gZG9uJ3QgYnJlYWsgdGhlIGV4aXN0aW5nIApiZWhhdmlvdXIgaW4ga2NvbmZpZwoKQ09ORklH
+X1NZU19NQVhfRkxBU0hfQkFOS1MgYW5kIENPTkZJR19TWVNfTUFYX0ZMQVNIX0JBTktTX0RFVEVD
+VCBhcmUgCmRlZmluZSBhcyAnaW50JwoKYnV0IGNhbiBiZSBhYnNlbnQgPT4gMiBuZXcgY29uZmln
+IENPTkZJR19VU0UgbmVlZCB0byBiZSBhZGRlZAoKQ09ORklHX1VTRV9TWVNfTUFYX0ZMQVNIX0JB
+TktTCgpDT05GSUdfVVNFX1NZU19NQVhfRkxBU0hfQkFOS1NfREVURUNUCgoKYW5kIEkgZG9uJ3Qg
+ZnVsbHkgdW5kZXJzdG9vZCB0aGUgbWl4IGJldHdlZW4gdGhlIDIgb3B0aW9ucyBhbmQgCkNGSV9N
+QVhfRkxBU0hfQkFOS1MKCmluIHNvbWUgcGFydCBvZiBjb2RlIEkgdGhpbmsgQ09ORklHX1NZU19N
+QVhfRkxBU0hfQkFOS1Mgc2hvdWxkIGJlIApyZXBsYWNlZCBieSBDRklfTUFYX0ZMQVNIX0JBTktT
+Cgp0byBhdm9pZCB0byBkZWZpbmUgQ09ORklHX1NZU19NQVhfRkxBU0hfQkFOS1MgPSAKY2ZpX2Zs
+YXNoX251bV9mbGFzaF9iYW5rcyAoYXMgaXQgaXMgbm90IHBvc3NpYmxlIGluIEtjb25maWcpCgoK
+PT4gdG9vIGh1Z2UgdGFzayBqdXN0IHRvIHNvbHZlIGNvbXBpbGF0aW9uIGlzc3Vlcy4KCgphbmQg
+SSBhbHNvIHRoaW5rIHRvIHVzZSBDT05GSUdfSVNfRU5BQkxFRChNVERfU1VQUE9SVCkKCmJ1dCBp
+dCBub3QgcG9zc2libGUgYmVjYXVzZSB0b2RheQoKLSBDT05GSUdfU1BMX01URF9TVVBQT1JUIGV4
+aXN0CgotIENPTkZJR19NVERfU1VQUE9SVCBkb24ndCBleGl0ICggdGVzdCBvbiAkKG10ZC15KSBp
+biBNYWtlZmlsZSkKCgo9PiB0aGUgY3JlYXRpb24gb2YgdGhpcyBjb25maWcgaXMgYSBodWdlIHRh
+c2sganVzdCB0byBzb2x2ZSBjb21waWxhdGlvbiAKaXNzdWUuCgoKUGF0cmljawoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxp
+bmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8v
+c3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMy
+Cg==

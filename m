@@ -2,54 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 32DF5412A2E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Sep 2021 03:11:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 37237412F70
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Sep 2021 09:28:35 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EF657C5A4D1;
-	Tue, 21 Sep 2021 01:11:44 +0000 (UTC)
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com
- [209.85.222.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E5042C5A4CC;
+	Tue, 21 Sep 2021 07:28:34 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76319C5A4D0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 508B9C0614D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Sep 2021 01:11:43 +0000 (UTC)
-Received: by mail-ua1-f49.google.com with SMTP id g16so12362983uam.7
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Sep 2021 18:11:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=GYTHLFwzplS167Y2rgrK4PpzJbsdwId7VDGFm1YL+Z8=;
- b=T8QK2URSx1CHyacigNW93brNqTrh+tdH3SXOF2HsKm2O290S/xSJdakxrvv8HCVmCW
- AZ1+UYXwpS9jqKi6BEsc9zRamlwuDzP3I8c3t89UKSkZ2dMymPF9221pC9XQuygIsYaz
- cL2S4bZHkIkpNbGzfcPuss/Pp0xwAwFFGd7BI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=GYTHLFwzplS167Y2rgrK4PpzJbsdwId7VDGFm1YL+Z8=;
- b=kaZ1eZ25cUQYNisA690VP4oArOJpUNDfXwaxFSOmFa2vLMTjzXCA2jm0T8wyJXoKNH
- 3mLnPVsOS4G1IQWWhNS+MkCGI61yJirnj0frpps4fEFb7PVZmwmmxZmbcM/S7oQ16Bv3
- Eo2p91cI5b8pV5z585f9+CCh19q+xv+W7VQ505gUW+1ISWA6H3XWTnLy5rMJOTGZUh4W
- Z8cq4VjTE76OaM/77ei+psnp1rg3xUhFBkhTpqYrgvlau+21RzLlSLuvxCnrDFQmYTE0
- lhFZQONnFjqLTLu9yGHJLPSpgsS6KjJB+bH/3AH0HF+qhJfAtK/A+aBw+ubuK0wBuxOZ
- 9dcw==
-X-Gm-Message-State: AOAM530rkLD9SK1FP25J/NJBBQq48GF+ZzUpQM2IFb/rCijLHI1uGdG6
- wMQchDp/RtERHMh+qM4lZIIUM1jenuvFUqsiHDSt/w==
-X-Google-Smtp-Source: ABdhPJywea8dLoGlno+I9V4yvAuCh4ujEisds5V4LRon+1z/ECNP7/dUJvr4KD6bNxxgJYjoUyynFjyFbjqIRTtC2t0=
-X-Received: by 2002:ab0:14a7:: with SMTP id d36mr14328655uae.96.1632186702280; 
- Mon, 20 Sep 2021 18:11:42 -0700 (PDT)
+ Tue, 21 Sep 2021 07:28:32 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18L7AJS6006195; 
+ Tue, 21 Sep 2021 09:28:30 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=uARfGMH41BGy1EpS0zGqYWlHy4vcg/nLo6tSsD0IvD0=;
+ b=q823a/s9hR3ceZWo2sY7ivvJ5GAu7pvbSv9TZdPp7R7Vf/rlnr4WvG9GPMOLG3q7kzT9
+ 6LwLntpBJYaUkfiAHq2uYgE4mec3/Xs2TMo3n/WnG9WOXFJQ9ERvw4x8iuIj6xlKo9Uh
+ oYLDRHLfqum6UsiZ+AIFXH7owIoJPBqs3sAllWzpknFv/Hkhbs62j/RhZ5Gz2LLMvR3O
+ e8D1daP7fiV9YGe3XkCf0yDMp4LCVkc2gUrf9WFIABLRsWF7zl1Vdt7ubrRp5aI1hcgd
+ Te2KCq6Dwsn8YcPpeZAsLHTW+MRvhAHgTZUJyn8BaFdgOs+tRyQnbHdHajHcmwB3rnwf eA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3b7as50302-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 21 Sep 2021 09:28:30 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7B1AA100034;
+ Tue, 21 Sep 2021 09:28:29 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 733AF21BF6C;
+ Tue, 21 Sep 2021 09:28:29 +0200 (CEST)
+Received: from lmecxl0994.lme.st.com (10.75.127.49) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 21 Sep
+ 2021 09:28:28 +0200
+To: <u-boot@lists.denx.de>
+References: <20210914141449.1.I0015d48aa38713a09d1789547c90a9c444f1321e@changeid>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <2640a8d4-be28-3836-46d1-111df4a5bb72@foss.st.com>
+Date: Tue, 21 Sep 2021 09:28:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
-In-Reply-To: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Sep 2021 19:11:30 -0600
-Message-ID: <CAPnjgZ2oEy3kSYihsFdoPR6kn=tVprH3s4WHKYGJGZfmQNvqBA@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+In-Reply-To: <20210914141449.1.I0015d48aa38713a09d1789547c90a9c444f1321e@changeid>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-09-21_01,2021-09-20_01,2020-04-07_01
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Nandor Han <nandor.han@vaisala.com>
-Subject: Re: [Uboot-stm32] [PATCH] reboot-mode: migrate uclass to livetree
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] arm: dts: stm32mp1: use ssbl partition
+	name for U-Boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -61,23 +72,35 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 20 Sept 2021 at 10:27, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
+Hi,
+
+On 9/14/21 2:14 PM, Patrick Delaunay wrote:
+> Continue to use the "ssbl" name for GPT partition of secondary boot
+> stage = U-Boot for basic boot with SPL to avoid to disturb existing user.
 >
-> Use dev_ function to support a live tree.
+> The "fip" partition name is only used for TFA_BOOT with FIP, it is a TF-A
+> BL2 requirement; it the default configuration for STMicroelectronics
+> boards.
 >
+> Fixes: b73e8bf453f8 ("arm: stm32mp: add defconfig for trusted boot with FIP")
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
->  drivers/reboot-mode/reboot-mode-uclass.c | 20 ++++++--------------
->  1 file changed, 6 insertions(+), 14 deletions(-)
+>   arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 4 +++-
+>   arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 4 +++-
+>   2 files changed, 6 insertions(+), 2 deletions(-)
+>
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Applied to u-boot-stm/master, thanks!
+
+Regards
+Patrick
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

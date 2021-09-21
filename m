@@ -2,55 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B20D412A2D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Sep 2021 03:11:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32DF5412A2E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Sep 2021 03:11:45 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4771C5A4CF;
-	Tue, 21 Sep 2021 01:11:42 +0000 (UTC)
-Received: from mail-vk1-f170.google.com (mail-vk1-f170.google.com
- [209.85.221.170])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EF657C5A4D1;
+	Tue, 21 Sep 2021 01:11:44 +0000 (UTC)
+Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com
+ [209.85.222.49])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EE7ECC5A4CC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76319C5A4D0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Sep 2021 01:11:41 +0000 (UTC)
-Received: by mail-vk1-f170.google.com with SMTP id t186so7388844vkd.3
+ Tue, 21 Sep 2021 01:11:43 +0000 (UTC)
+Received: by mail-ua1-f49.google.com with SMTP id g16so12362983uam.7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Sep 2021 18:11:41 -0700 (PDT)
+ Mon, 20 Sep 2021 18:11:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=J8u43aBEWBl8AhYSgDveusMZHl+Co4nQDmig9SaAJww=;
- b=SIUxXdKBD7znAp4jGBfxMkYxCXQ931jBv99nUkMfXAbPnfHJEs/l7RWGm+dBUCIE7l
- qEyOvIoq03EDM/oHrgeskyyONSef4mV8uXI46POtQ4jZGgLZU07e/a5M7awwn9w6ldSh
- Uz93zqvmvB3aYS0P5QhcNXCTWRUEwPtbcou9w=
+ :cc; bh=GYTHLFwzplS167Y2rgrK4PpzJbsdwId7VDGFm1YL+Z8=;
+ b=T8QK2URSx1CHyacigNW93brNqTrh+tdH3SXOF2HsKm2O290S/xSJdakxrvv8HCVmCW
+ AZ1+UYXwpS9jqKi6BEsc9zRamlwuDzP3I8c3t89UKSkZ2dMymPF9221pC9XQuygIsYaz
+ cL2S4bZHkIkpNbGzfcPuss/Pp0xwAwFFGd7BI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=J8u43aBEWBl8AhYSgDveusMZHl+Co4nQDmig9SaAJww=;
- b=iY4W5DVwQy3yXRavWIJBfQq3eaYlWIvGAExKoFOs6AIHLAGzwPiy9+JcZd3VBcAzWI
- sw+zTOm10yMwsSGxTBVVo5TOd1yEdmVCgifcKDq+qL4QyZE4opPjjasX4F2jD3BhaipJ
- wBoy9RoIsvJDgcfJDkvJJ5o1Fw8fj/WqgiYchXu+tffjNNOO/YycT7iSIAbBFvRp//qt
- vH432oTd0xfVst+9EAtvbRTp++fvnuaDctFS+LZz0UVU3EIMUpivScDpziiIY4LFCRqf
- kbbJY/HxVbZwmHQgDmkLWiusFwss64zCjYFzLYJmy0Q0bMpOxKMHJezH8GGD80whBhQ7
- U9PQ==
-X-Gm-Message-State: AOAM533BJTV4/KEfwZsAXmrEsP7ChB9YEsKa5XXdhG+OtzY3b7rEaNPR
- vz1kNRZNb62w4DJl7sjq2MplXkusUJ/zjdrgicsNzQ==
-X-Google-Smtp-Source: ABdhPJyvkDC9wNhRJd85oHgAsBzXQeQD7yShpEQBx5Xui2GXV+9MOt1DQRZgCV38bZfAQc78IxwnH+jT0vtNjfqqcUc=
-X-Received: by 2002:a1f:9f4c:: with SMTP id i73mr17028716vke.9.1632186700702; 
- Mon, 20 Sep 2021 18:11:40 -0700 (PDT)
+ bh=GYTHLFwzplS167Y2rgrK4PpzJbsdwId7VDGFm1YL+Z8=;
+ b=kaZ1eZ25cUQYNisA690VP4oArOJpUNDfXwaxFSOmFa2vLMTjzXCA2jm0T8wyJXoKNH
+ 3mLnPVsOS4G1IQWWhNS+MkCGI61yJirnj0frpps4fEFb7PVZmwmmxZmbcM/S7oQ16Bv3
+ Eo2p91cI5b8pV5z585f9+CCh19q+xv+W7VQ505gUW+1ISWA6H3XWTnLy5rMJOTGZUh4W
+ Z8cq4VjTE76OaM/77ei+psnp1rg3xUhFBkhTpqYrgvlau+21RzLlSLuvxCnrDFQmYTE0
+ lhFZQONnFjqLTLu9yGHJLPSpgsS6KjJB+bH/3AH0HF+qhJfAtK/A+aBw+ubuK0wBuxOZ
+ 9dcw==
+X-Gm-Message-State: AOAM530rkLD9SK1FP25J/NJBBQq48GF+ZzUpQM2IFb/rCijLHI1uGdG6
+ wMQchDp/RtERHMh+qM4lZIIUM1jenuvFUqsiHDSt/w==
+X-Google-Smtp-Source: ABdhPJywea8dLoGlno+I9V4yvAuCh4ujEisds5V4LRon+1z/ECNP7/dUJvr4KD6bNxxgJYjoUyynFjyFbjqIRTtC2t0=
+X-Received: by 2002:ab0:14a7:: with SMTP id d36mr14328655uae.96.1632186702280; 
+ Mon, 20 Sep 2021 18:11:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210920175547.1.I72392b8ba601c9d559c976adcbfb03bd5b559833@changeid>
-In-Reply-To: <20210920175547.1.I72392b8ba601c9d559c976adcbfb03bd5b559833@changeid>
+References: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
+In-Reply-To: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 20 Sep 2021 19:11:29 -0600
-Message-ID: <CAPnjgZ2V=r4u-K+w5irc_giLNj0X_Dr0x2kBhogC+Ed+fe8jDQ@mail.gmail.com>
+Date: Mon, 20 Sep 2021 19:11:30 -0600
+Message-ID: <CAPnjgZ2oEy3kSYihsFdoPR6kn=tVprH3s4WHKYGJGZfmQNvqBA@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH] remoteproc: migrate uclass to livetree
+ Nandor Han <nandor.han@vaisala.com>
+Subject: Re: [Uboot-stm32] [PATCH] reboot-mode: migrate uclass to livetree
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,16 +66,16 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, 20 Sept 2021 at 09:56, Patrick Delaunay
+On Mon, 20 Sept 2021 at 10:27, Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Use dev_ function to read the name and boolean to support a live tree.
+> Use dev_ function to support a live tree.
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
->  drivers/remoteproc/rproc-uclass.c | 16 ++--------------
->  1 file changed, 2 insertions(+), 14 deletions(-)
+>  drivers/reboot-mode/reboot-mode-uclass.c | 20 ++++++--------------
+>  1 file changed, 6 insertions(+), 14 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

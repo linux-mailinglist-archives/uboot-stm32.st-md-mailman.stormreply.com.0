@@ -2,62 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1A8B414468
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Sep 2021 11:02:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD9A2414485
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Sep 2021 11:06:01 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3B5CCC5A4CC;
-	Wed, 22 Sep 2021 09:02:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 78789C5A4CC;
+	Wed, 22 Sep 2021 09:06:01 +0000 (UTC)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [91.198.250.253])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 414F3C5718F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 47CDFC5718F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Sep 2021 09:02:45 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18M6pm1x002897; 
- Wed, 22 Sep 2021 11:02:30 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=o/lm/Ovm3QGz9a4QzovlljJRdVxdBIUX06TTq4n+WVE=;
- b=z42CXH/8SA/gQrK0S+5hDA1Pe3YpObDc32qOO7zNdWdasoVrxy0Gl9gByx5/VOGslrGv
- xTimjqsfkcdFBMGgAQfxvXjmxvfQSOjkskAQyrrBLi/eAm8zxtLtSZucKEkuLn9XzVvG
- KZbJ8R50fcRVt6hH5UllXBdhFS8UhCwzJcnFB63xJYza4aeLV0/1wcSLhrayEBsFUtWi
- Tc4Rve9SWHuf4ILtXuCOj+WOeYd3Ri3pZRqcALqzbTTWQ29BP/+hGvtUGpDIog3Ax/xy
- 0NREKSNsTarCbjsFfjTaOAIctFTnjyrVDwbqUyTnjLkiPP74gdHpiJr7zL3BZga5oWv8 Uw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3b7q3w2vdp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 22 Sep 2021 11:02:30 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7435E10003A;
- Wed, 22 Sep 2021 11:02:29 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1C614226FAE;
- Wed, 22 Sep 2021 11:02:29 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 22 Sep 2021 11:02:28
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 22 Sep 2021 11:02:26 +0200
-Message-ID: <20210922110223.1.I82d7f080bc204e75e2f305a8056363038d3d9c0d@changeid>
-X-Mailer: git-send-email 2.25.1
+ Wed, 22 Sep 2021 09:06:00 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [80.241.60.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4HDspb4ylJzQjx3;
+ Wed, 22 Sep 2021 11:05:59 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20210922110223.1.I82d7f080bc204e75e2f305a8056363038d3d9c0d@changeid>
+From: Stefan Roese <sr@denx.de>
+Message-ID: <a9201d8f-f390-b71b-6541-93338ec30e47@denx.de>
+Date: Wed, 22 Sep 2021 11:05:51 +0200
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-09-22_03,2021-09-20_01,2020-04-07_01
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Rick Chen <rick@andestech.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>
-Subject: [Uboot-stm32] [PATCH] mtd: remove SPEAr flash driver st_smi
+In-Reply-To: <20210922110223.1.I82d7f080bc204e75e2f305a8056363038d3d9c0d@changeid>
+Content-Language: de-DE
+X-Rspamd-Queue-Id: 1B84C268
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Rick Chen <rick@andestech.com>, Priyanka Jain <priyanka.jain@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH] mtd: remove SPEAr flash driver st_smi
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,756 +44,408 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Remove the driver st_smic.c used in SPEAr products and the associated
-config CONFIG_ST_SMI; this driver is no more used in U-Boot after the
-commit 570c3dcfc153 ("arm: Remove spear600 boards and the rest of SPEAr
-support").
-
-Fixes: 570c3dcfc153 ("arm: Remove spear600 boards and the rest of SPEAr support")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-Even if CONFIG_ST_SMI was activated in 2 board, the compiled driver was
-empty because CONFIG_MTD_NOR_FLASH wasn't activated in:
-- bcm7260_defconfig
-- bcm7445_defconfig
-
-The U-Boot size don't change for these 2 defconfig (tested with buildman).
-
-This patch replace the previous "configs: Migrate CONFIG_ST_SMI to Kconfig".
-http://patchwork.ozlabs.org/project/uboot/list/?series=263365&state=*
-
-
- drivers/mtd/Makefile         |   1 -
- drivers/mtd/st_smi.c         | 565 -----------------------------------
- include/configs/bcmstb.h     |   1 -
- include/linux/mtd/st_smi.h   | 100 -------
- scripts/config_whitelist.txt |   1 -
- 5 files changed, 668 deletions(-)
- delete mode 100644 drivers/mtd/st_smi.c
- delete mode 100644 include/linux/mtd/st_smi.h
-
-diff --git a/drivers/mtd/Makefile b/drivers/mtd/Makefile
-index 6d77ebfaa5..ce0451108e 100644
---- a/drivers/mtd/Makefile
-+++ b/drivers/mtd/Makefile
-@@ -12,7 +12,6 @@ mtd-$(CONFIG_FLASH_CFI_DRIVER) += cfi_flash.o
- mtd-$(CONFIG_FLASH_CFI_MTD) += cfi_mtd.o
- mtd-$(CONFIG_FLASH_CFI_LEGACY) += jedec_flash.o
- mtd-$(CONFIG_FLASH_PIC32) += pic32_flash.o
--mtd-$(CONFIG_ST_SMI) += st_smi.o
- mtd-$(CONFIG_STM32_FLASH) += stm32_flash.o
- mtd-$(CONFIG_RENESAS_RPC_HF) += renesas_rpc_hf.o
- mtd-$(CONFIG_HBMC_AM654) += hbmc-am654.o
-diff --git a/drivers/mtd/st_smi.c b/drivers/mtd/st_smi.c
-deleted file mode 100644
-index 7c652e6c53..0000000000
---- a/drivers/mtd/st_smi.c
-+++ /dev/null
-@@ -1,565 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2009
-- * Vipin Kumar, ST Microelectronics, vipin.kumar@st.com.
-- */
--
--#include <common.h>
--#include <flash.h>
--#include <linux/delay.h>
--#include <linux/err.h>
--#include <linux/mtd/st_smi.h>
--
--#include <asm/io.h>
--#include <asm/arch/hardware.h>
--
--#if defined(CONFIG_MTD_NOR_FLASH)
--
--static struct smi_regs *const smicntl =
--    (struct smi_regs * const)CONFIG_SYS_SMI_BASE;
--static ulong bank_base[CONFIG_SYS_MAX_FLASH_BANKS] =
--    CONFIG_SYS_FLASH_ADDR_BASE;
--flash_info_t flash_info[CONFIG_SYS_MAX_FLASH_BANKS];
--
--/* data structure to maintain flash ids from different vendors */
--struct flash_device {
--	char *name;
--	u8 erase_cmd;
--	u32 device_id;
--	u32 pagesize;
--	unsigned long sectorsize;
--	unsigned long size_in_bytes;
--};
--
--#define FLASH_ID(n, es, id, psize, ssize, size)	\
--{				\
--	.name = n,		\
--	.erase_cmd = es,	\
--	.device_id = id,	\
--	.pagesize = psize,	\
--	.sectorsize = ssize,	\
--	.size_in_bytes = size	\
--}
--
--/*
-- * List of supported flash devices.
-- * Currently the erase_cmd field is not used in this driver.
-- */
--static struct flash_device flash_devices[] = {
--	FLASH_ID("st m25p16"     , 0xd8, 0x00152020, 0x100, 0x10000, 0x200000),
--	FLASH_ID("st m25p32"     , 0xd8, 0x00162020, 0x100, 0x10000, 0x400000),
--	FLASH_ID("st m25p64"     , 0xd8, 0x00172020, 0x100, 0x10000, 0x800000),
--	FLASH_ID("st m25p128"    , 0xd8, 0x00182020, 0x100, 0x40000, 0x1000000),
--	FLASH_ID("st m25p05"     , 0xd8, 0x00102020, 0x80 , 0x8000 , 0x10000),
--	FLASH_ID("st m25p10"     , 0xd8, 0x00112020, 0x80 , 0x8000 , 0x20000),
--	FLASH_ID("st m25p20"     , 0xd8, 0x00122020, 0x100, 0x10000, 0x40000),
--	FLASH_ID("st m25p40"     , 0xd8, 0x00132020, 0x100, 0x10000, 0x80000),
--	FLASH_ID("st m25p80"     , 0xd8, 0x00142020, 0x100, 0x10000, 0x100000),
--	FLASH_ID("st m45pe10"    , 0xd8, 0x00114020, 0x100, 0x10000, 0x20000),
--	FLASH_ID("st m45pe20"    , 0xd8, 0x00124020, 0x100, 0x10000, 0x40000),
--	FLASH_ID("st m45pe40"    , 0xd8, 0x00134020, 0x100, 0x10000, 0x80000),
--	FLASH_ID("st m45pe80"    , 0xd8, 0x00144020, 0x100, 0x10000, 0x100000),
--	FLASH_ID("sp s25fl004"   , 0xd8, 0x00120201, 0x100, 0x10000, 0x80000),
--	FLASH_ID("sp s25fl008"   , 0xd8, 0x00130201, 0x100, 0x10000, 0x100000),
--	FLASH_ID("sp s25fl016"   , 0xd8, 0x00140201, 0x100, 0x10000, 0x200000),
--	FLASH_ID("sp s25fl032"   , 0xd8, 0x00150201, 0x100, 0x10000, 0x400000),
--	FLASH_ID("sp s25fl064"   , 0xd8, 0x00160201, 0x100, 0x10000, 0x800000),
--	FLASH_ID("mac 25l512"    , 0xd8, 0x001020C2, 0x010, 0x10000, 0x10000),
--	FLASH_ID("mac 25l1005"   , 0xd8, 0x001120C2, 0x010, 0x10000, 0x20000),
--	FLASH_ID("mac 25l2005"   , 0xd8, 0x001220C2, 0x010, 0x10000, 0x40000),
--	FLASH_ID("mac 25l4005"   , 0xd8, 0x001320C2, 0x010, 0x10000, 0x80000),
--	FLASH_ID("mac 25l4005a"  , 0xd8, 0x001320C2, 0x010, 0x10000, 0x80000),
--	FLASH_ID("mac 25l8005"   , 0xd8, 0x001420C2, 0x010, 0x10000, 0x100000),
--	FLASH_ID("mac 25l1605"   , 0xd8, 0x001520C2, 0x100, 0x10000, 0x200000),
--	FLASH_ID("mac 25l1605a"  , 0xd8, 0x001520C2, 0x010, 0x10000, 0x200000),
--	FLASH_ID("mac 25l3205"   , 0xd8, 0x001620C2, 0x100, 0x10000, 0x400000),
--	FLASH_ID("mac 25l3205a"  , 0xd8, 0x001620C2, 0x100, 0x10000, 0x400000),
--	FLASH_ID("mac 25l6405"   , 0xd8, 0x001720C2, 0x100, 0x10000, 0x800000),
--	FLASH_ID("wbd w25q128" , 0xd8, 0x001840EF, 0x100, 0x10000, 0x1000000),
--};
--
--/*
-- * smi_wait_xfer_finish - Wait until TFF is set in status register
-- * @timeout:	 timeout in milliseconds
-- *
-- * Wait until TFF is set in status register
-- */
--static int smi_wait_xfer_finish(int timeout)
--{
--	ulong start = get_timer(0);
--
--	while (get_timer(start) < timeout) {
--		if (readl(&smicntl->smi_sr) & TFF)
--			return 0;
--
--		/* Try after 10 ms */
--		udelay(10);
--	};
--
--	return -1;
--}
--
--/*
-- * smi_read_id - Read flash id
-- * @info:	 flash_info structure pointer
-- * @banknum:	 bank number
-- *
-- * Read the flash id present at bank #banknum
-- */
--static unsigned int smi_read_id(flash_info_t *info, int banknum)
--{
--	unsigned int value;
--
--	writel(readl(&smicntl->smi_cr1) | SW_MODE, &smicntl->smi_cr1);
--	writel(READ_ID, &smicntl->smi_tr);
--	writel((banknum << BANKSEL_SHIFT) | SEND | TX_LEN_1 | RX_LEN_3,
--	       &smicntl->smi_cr2);
--
--	if (smi_wait_xfer_finish(XFER_FINISH_TOUT))
--		return -EIO;
--
--	value = (readl(&smicntl->smi_rr) & 0x00FFFFFF);
--
--	writel(readl(&smicntl->smi_sr) & ~TFF, &smicntl->smi_sr);
--	writel(readl(&smicntl->smi_cr1) & ~SW_MODE, &smicntl->smi_cr1);
--
--	return value;
--}
--
--/*
-- * flash_get_size - Detect the SMI flash by reading the ID.
-- * @base:	 Base address of the flash area bank #banknum
-- * @banknum:	 Bank number
-- *
-- * Detect the SMI flash by reading the ID. Initializes the flash_info structure
-- * with size, sector count etc.
-- */
--static ulong flash_get_size(ulong base, int banknum)
--{
--	flash_info_t *info = &flash_info[banknum];
--	int value;
--	int i;
--
--	value = smi_read_id(info, banknum);
--
--	if (value < 0) {
--		printf("Flash id could not be read\n");
--		return 0;
--	}
--
--	/* Matches chip-id to entire list of 'serial-nor flash' ids */
--	for (i = 0; i < ARRAY_SIZE(flash_devices); i++) {
--		if (flash_devices[i].device_id == value) {
--			info->size = flash_devices[i].size_in_bytes;
--			info->flash_id = value;
--			info->start[0] = base;
--			info->sector_count =
--					info->size/flash_devices[i].sectorsize;
--
--			return info->size;
--		}
--	}
--
--	return 0;
--}
--
--/*
-- * smi_read_sr - Read status register of SMI
-- * @bank:	 bank number
-- *
-- * This routine will get the status register of the flash chip present at the
-- * given bank
-- */
--static int smi_read_sr(int bank)
--{
--	u32 ctrlreg1, val;
--
--	/* store the CTRL REG1 state */
--	ctrlreg1 = readl(&smicntl->smi_cr1);
--
--	/* Program SMI in HW Mode */
--	writel(readl(&smicntl->smi_cr1) & ~(SW_MODE | WB_MODE),
--	       &smicntl->smi_cr1);
--
--	/* Performing a RSR instruction in HW mode */
--	writel((bank << BANKSEL_SHIFT) | RD_STATUS_REG, &smicntl->smi_cr2);
--
--	if (smi_wait_xfer_finish(XFER_FINISH_TOUT))
--		return -1;
--
--	val = readl(&smicntl->smi_sr);
--
--	/* Restore the CTRL REG1 state */
--	writel(ctrlreg1, &smicntl->smi_cr1);
--
--	return val;
--}
--
--/*
-- * smi_wait_till_ready - Wait till last operation is over.
-- * @bank:	 bank number shifted.
-- * @timeout:	 timeout in milliseconds.
-- *
-- * This routine checks for WIP(write in progress)bit in Status register(SMSR-b0)
-- * The routine checks for #timeout loops, each at interval of 1 milli-second.
-- * If successful the routine returns 0.
-- */
--static int smi_wait_till_ready(int bank, int timeout)
--{
--	int sr;
--	ulong start = get_timer(0);
--
--	/* One chip guarantees max 5 msec wait here after page writes,
--	   but potentially three seconds (!) after page erase. */
--	while (get_timer(start) < timeout) {
--		sr = smi_read_sr(bank);
--		if ((sr >= 0) && (!(sr & WIP_BIT)))
--			return 0;
--
--		/* Try again after 10 usec */
--		udelay(10);
--	} while (timeout--);
--
--	printf("SMI controller is still in wait, timeout=%d\n", timeout);
--	return -EIO;
--}
--
--/*
-- * smi_write_enable - Enable the flash to do write operation
-- * @bank:	 bank number
-- *
-- * Set write enable latch with Write Enable command.
-- * Returns negative if error occurred.
-- */
--static int smi_write_enable(int bank)
--{
--	u32 ctrlreg1;
--	u32 start;
--	int timeout = WMODE_TOUT;
--	int sr;
--
--	/* Store the CTRL REG1 state */
--	ctrlreg1 = readl(&smicntl->smi_cr1);
--
--	/* Program SMI in H/W Mode */
--	writel(readl(&smicntl->smi_cr1) & ~SW_MODE, &smicntl->smi_cr1);
--
--	/* Give the Flash, Write Enable command */
--	writel((bank << BANKSEL_SHIFT) | WE, &smicntl->smi_cr2);
--
--	if (smi_wait_xfer_finish(XFER_FINISH_TOUT))
--		return -1;
--
--	/* Restore the CTRL REG1 state */
--	writel(ctrlreg1, &smicntl->smi_cr1);
--
--	start = get_timer(0);
--	while (get_timer(start) < timeout) {
--		sr = smi_read_sr(bank);
--		if ((sr >= 0) && (sr & (1 << (bank + WM_SHIFT))))
--			return 0;
--
--		/* Try again after 10 usec */
--		udelay(10);
--	};
--
--	return -1;
--}
--
--/*
-- * smi_init - SMI initialization routine
-- *
-- * SMI initialization routine. Sets SMI control register1.
-- */
--void smi_init(void)
--{
--	/* Setting the fast mode values. SMI working at 166/4 = 41.5 MHz */
--	writel(HOLD1 | FAST_MODE | BANK_EN | DSEL_TIME | PRESCAL4,
--	       &smicntl->smi_cr1);
--}
--
--/*
-- * smi_sector_erase - Erase flash sector
-- * @info:	 flash_info structure pointer
-- * @sector:	 sector number
-- *
-- * Set write enable latch with Write Enable command.
-- * Returns negative if error occurred.
-- */
--static int smi_sector_erase(flash_info_t *info, unsigned int sector)
--{
--	int bank;
--	unsigned int sect_add;
--	unsigned int instruction;
--
--	switch (info->start[0]) {
--	case SMIBANK0_BASE:
--		bank = BANK0;
--		break;
--	case SMIBANK1_BASE:
--		bank = BANK1;
--		break;
--	case SMIBANK2_BASE:
--		bank = BANK2;
--		break;
--	case SMIBANK3_BASE:
--		bank = BANK3;
--		break;
--	default:
--		return -1;
--	}
--
--	sect_add = sector * (info->size / info->sector_count);
--	instruction = ((sect_add >> 8) & 0x0000FF00) | SECTOR_ERASE;
--
--	writel(readl(&smicntl->smi_sr) & ~(ERF1 | ERF2), &smicntl->smi_sr);
--
--	/* Wait until finished previous write command. */
--	if (smi_wait_till_ready(bank, CONFIG_SYS_FLASH_ERASE_TOUT))
--		return -EBUSY;
--
--	/* Send write enable, before erase commands. */
--	if (smi_write_enable(bank))
--		return -EIO;
--
--	/* Put SMI in SW mode */
--	writel(readl(&smicntl->smi_cr1) | SW_MODE, &smicntl->smi_cr1);
--
--	/* Send Sector Erase command in SW Mode */
--	writel(instruction, &smicntl->smi_tr);
--	writel((bank << BANKSEL_SHIFT) | SEND | TX_LEN_4,
--		       &smicntl->smi_cr2);
--	if (smi_wait_xfer_finish(XFER_FINISH_TOUT))
--		return -EIO;
--
--	if (smi_wait_till_ready(bank, CONFIG_SYS_FLASH_ERASE_TOUT))
--		return -EBUSY;
--
--	/* Put SMI in HW mode */
--	writel(readl(&smicntl->smi_cr1) & ~SW_MODE,
--		       &smicntl->smi_cr1);
--
--	return 0;
--}
--
--/*
-- * smi_write - Write to SMI flash
-- * @src_addr:	 source buffer
-- * @dst_addr:	 destination buffer
-- * @length:	 length to write in bytes
-- * @bank:	 bank base address
-- *
-- * Write to SMI flash
-- */
--static int smi_write(unsigned int *src_addr, unsigned int *dst_addr,
--		     unsigned int length, ulong bank_addr)
--{
--	u8 *src_addr8 = (u8 *)src_addr;
--	u8 *dst_addr8 = (u8 *)dst_addr;
--	int banknum;
--	int i;
--
--	switch (bank_addr) {
--	case SMIBANK0_BASE:
--		banknum = BANK0;
--		break;
--	case SMIBANK1_BASE:
--		banknum = BANK1;
--		break;
--	case SMIBANK2_BASE:
--		banknum = BANK2;
--		break;
--	case SMIBANK3_BASE:
--		banknum = BANK3;
--		break;
--	default:
--		return -1;
--	}
--
--	if (smi_wait_till_ready(banknum, CONFIG_SYS_FLASH_WRITE_TOUT))
--		return -EBUSY;
--
--	/* Set SMI in Hardware Mode */
--	writel(readl(&smicntl->smi_cr1) & ~SW_MODE, &smicntl->smi_cr1);
--
--	if (smi_write_enable(banknum))
--		return -EIO;
--
--	/* Perform the write command */
--	for (i = 0; i < length; i += 4) {
--		if (((ulong) (dst_addr) % SFLASH_PAGE_SIZE) == 0) {
--			if (smi_wait_till_ready(banknum,
--						CONFIG_SYS_FLASH_WRITE_TOUT))
--				return -EBUSY;
--
--			if (smi_write_enable(banknum))
--				return -EIO;
--		}
--
--		if (length < 4) {
--			int k;
--
--			/*
--			 * Handle special case, where length < 4 (redundant env)
--			 */
--			for (k = 0; k < length; k++)
--				*dst_addr8++ = *src_addr8++;
--		} else {
--			/* Normal 32bit write */
--			*dst_addr++ = *src_addr++;
--		}
--
--		if ((readl(&smicntl->smi_sr) & (ERF1 | ERF2)))
--			return -EIO;
--	}
--
--	if (smi_wait_till_ready(banknum, CONFIG_SYS_FLASH_WRITE_TOUT))
--		return -EBUSY;
--
--	writel(readl(&smicntl->smi_sr) & ~(WCF), &smicntl->smi_sr);
--
--	return 0;
--}
--
--/*
-- * write_buff - Write to SMI flash
-- * @info:	 flash info structure
-- * @src:	 source buffer
-- * @dest_addr:	 destination buffer
-- * @length:	 length to write in words
-- *
-- * Write to SMI flash
-- */
--int write_buff(flash_info_t *info, uchar *src, ulong dest_addr, ulong length)
--{
--	return smi_write((unsigned int *)src, (unsigned int *)dest_addr,
--			 length, info->start[0]);
--}
--
--/*
-- * flash_init - SMI flash initialization
-- *
-- * SMI flash initialization
-- */
--unsigned long flash_init(void)
--{
--	unsigned long size = 0;
--	int i, j;
--
--	smi_init();
--
--	for (i = 0; i < CONFIG_SYS_MAX_FLASH_BANKS; i++) {
--		flash_info[i].flash_id = FLASH_UNKNOWN;
--		size += flash_info[i].size = flash_get_size(bank_base[i], i);
--	}
--
--	for (j = 0; j < CONFIG_SYS_MAX_FLASH_BANKS; j++) {
--		for (i = 1; i < flash_info[j].sector_count; i++)
--			flash_info[j].start[i] =
--			    flash_info[j].start[i - 1] +
--			    flash_info->size / flash_info->sector_count;
--
--	}
--
--	return size;
--}
--
--/*
-- * flash_print_info - Print SMI flash information
-- *
-- * Print SMI flash information
-- */
--void flash_print_info(flash_info_t *info)
--{
--	int i;
--	if (info->flash_id == FLASH_UNKNOWN) {
--		puts("missing or unknown FLASH type\n");
--		return;
--	}
--
--	if (info->size >= 0x100000)
--		printf("  Size: %ld MB in %d Sectors\n",
--		       info->size >> 20, info->sector_count);
--	else
--		printf("  Size: %ld KB in %d Sectors\n",
--		       info->size >> 10, info->sector_count);
--
--	puts("  Sector Start Addresses:");
--	for (i = 0; i < info->sector_count; ++i) {
--#ifdef CONFIG_SYS_FLASH_EMPTY_INFO
--		int size;
--		int erased;
--		u32 *flash;
--
--		/*
--		 * Check if whole sector is erased
--		 */
--		size = (info->size) / (info->sector_count);
--		flash = (u32 *) info->start[i];
--		size = size / sizeof(int);
--
--		while ((size--) && (*flash++ == ~0))
--			;
--
--		size++;
--		if (size)
--			erased = 0;
--		else
--			erased = 1;
--
--		if ((i % 5) == 0)
--			printf("\n");
--
--		printf(" %08lX%s%s",
--		       info->start[i],
--		       erased ? " E" : "  ", info->protect[i] ? "RO " : "   ");
--#else
--		if ((i % 5) == 0)
--			printf("\n   ");
--		printf(" %08lX%s",
--		       info->start[i], info->protect[i] ? " (RO)  " : "     ");
--#endif
--	}
--	putc('\n');
--	return;
--}
--
--/*
-- * flash_erase - Erase SMI flash
-- *
-- * Erase SMI flash
-- */
--int flash_erase(flash_info_t *info, int s_first, int s_last)
--{
--	int rcode = 0;
--	int prot = 0;
--	flash_sect_t sect;
--
--	if ((s_first < 0) || (s_first > s_last)) {
--		puts("- no sectors to erase\n");
--		return 1;
--	}
--
--	for (sect = s_first; sect <= s_last; ++sect) {
--		if (info->protect[sect])
--			prot++;
--	}
--	if (prot) {
--		printf("- Warning: %d protected sectors will not be erased!\n",
--		       prot);
--	} else {
--		putc('\n');
--	}
--
--	for (sect = s_first; sect <= s_last; sect++) {
--		if (info->protect[sect] == 0) {
--			if (smi_sector_erase(info, sect))
--				rcode = 1;
--			else
--				putc('.');
--		}
--	}
--	puts(" done\n");
--	return rcode;
--}
--#endif
-diff --git a/include/configs/bcmstb.h b/include/configs/bcmstb.h
-index 7f1c298cdc..54e5655af6 100644
---- a/include/configs/bcmstb.h
-+++ b/include/configs/bcmstb.h
-@@ -127,7 +127,6 @@ extern phys_addr_t prior_stage_fdt_address;
- /*
-  * Flash configuration.
-  */
--#define CONFIG_ST_SMI
- #define CONFIG_SPI_FLASH_STMICRO
- #define CONFIG_SPI_FLASH_MACRONIX
- 
-diff --git a/include/linux/mtd/st_smi.h b/include/linux/mtd/st_smi.h
-deleted file mode 100644
-index 6058969787..0000000000
---- a/include/linux/mtd/st_smi.h
-+++ /dev/null
-@@ -1,100 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * (C) Copyright 2009
-- * Vipin Kumar, ST Micoelectronics, vipin.kumar@st.com.
-- */
--
--#ifndef ST_SMI_H
--#define ST_SMI_H
--
--/* 0xF800.0000 . 0xFBFF.FFFF	64MB	SMI (Serial Flash Mem) */
--/* 0xFC00.0000 . 0xFC1F.FFFF	2MB	SMI (Serial Flash Reg.) */
--
--#define FLASH_START_ADDRESS	CONFIG_SYS_FLASH_BASE
--#define FLASH_BANK_SIZE		CONFIG_SYS_FLASH_BANK_SIZE
--
--#define SMIBANK0_BASE		(FLASH_START_ADDRESS)
--#define SMIBANK1_BASE		(SMIBANK0_BASE + FLASH_BANK_SIZE)
--#define SMIBANK2_BASE		(SMIBANK1_BASE + FLASH_BANK_SIZE)
--#define SMIBANK3_BASE		(SMIBANK2_BASE + FLASH_BANK_SIZE)
--
--#define BANK0			0
--#define BANK1			1
--#define BANK2			2
--#define BANK3			3
--
--struct smi_regs {
--	u32 smi_cr1;
--	u32 smi_cr2;
--	u32 smi_sr;
--	u32 smi_tr;
--	u32 smi_rr;
--};
--
--/* CONTROL REG 1 */
--#define BANK_EN			0x0000000F	/* enables all banks */
--#define DSEL_TIME		0x00000060	/* Deselect time */
--#define PRESCAL5		0x00000500	/* AHB_CK prescaling value */
--#define PRESCALA		0x00000A00	/* AHB_CK prescaling value */
--#define PRESCAL3		0x00000300	/* AHB_CK prescaling value */
--#define PRESCAL4		0x00000400	/* AHB_CK prescaling value */
--#define SW_MODE			0x10000000	/* enables SW Mode */
--#define WB_MODE			0x20000000	/* Write Burst Mode */
--#define FAST_MODE		0x00008000	/* Fast Mode */
--#define HOLD1			0x00010000
--
--/* CONTROL REG 2 */
--#define RD_STATUS_REG		0x00000400	/* reads status reg */
--#define WE			0x00000800	/* Write Enable */
--#define BANK0_SEL		0x00000000	/* Select Banck0 */
--#define BANK1_SEL		0x00001000	/* Select Banck1 */
--#define BANK2_SEL		0x00002000	/* Select Banck2 */
--#define BANK3_SEL		0x00003000	/* Select Banck3 */
--#define BANKSEL_SHIFT		12
--#define SEND			0x00000080	/* Send data */
--#define TX_LEN_1		0x00000001	/* data length = 1 byte */
--#define TX_LEN_2		0x00000002	/* data length = 2 byte */
--#define TX_LEN_3		0x00000003	/* data length = 3 byte */
--#define TX_LEN_4		0x00000004	/* data length = 4 byte */
--#define RX_LEN_1		0x00000010	/* data length = 1 byte */
--#define RX_LEN_2		0x00000020	/* data length = 2 byte */
--#define RX_LEN_3		0x00000030	/* data length = 3 byte */
--#define RX_LEN_4		0x00000040	/* data length = 4 byte */
--#define TFIE			0x00000100	/* Tx Flag Interrupt Enable */
--#define WCIE			0x00000200	/* WCF Interrupt Enable */
--
--/* STATUS_REG */
--#define INT_WCF_CLR		0xFFFFFDFF	/* clear: WCF clear */
--#define INT_TFF_CLR		0xFFFFFEFF	/* clear: TFF clear */
--#define WIP_BIT			0x00000001	/* WIP Bit of SPI SR */
--#define WEL_BIT			0x00000002	/* WEL Bit of SPI SR */
--#define RSR			0x00000005	/* Read Status regiser */
--#define TFF			0x00000100	/* Transfer Finished FLag */
--#define WCF			0x00000200	/* Transfer Finished FLag */
--#define ERF1			0x00000400	/* Error Flag 1 */
--#define ERF2			0x00000800	/* Error Flag 2 */
--#define WM0			0x00001000	/* WM Bank 0 */
--#define WM1			0x00002000	/* WM Bank 1 */
--#define WM2			0x00004000	/* WM Bank 2 */
--#define WM3			0x00008000	/* WM Bank 3 */
--#define WM_SHIFT		12
--
--/* TR REG */
--#define READ_ID			0x0000009F	/* Read Identification */
--#define BULK_ERASE		0x000000C7	/* BULK erase */
--#define SECTOR_ERASE		0x000000D8	/* SECTOR erase */
--#define WRITE_ENABLE		0x00000006	/* Wenable command to FLASH */
--
--struct flash_dev {
--	u32 density;
--	ulong size;
--	ushort sector_count;
--};
--
--#define SFLASH_PAGE_SIZE	0x100	/* flash page size */
--#define XFER_FINISH_TOUT	15	/* xfer finish timeout(in ms) */
--#define WMODE_TOUT		15	/* write enable timeout(in ms) */
--
--extern void smi_init(void);
--
--#endif
-diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
-index 36b8cc1db0..6c8277cba9 100644
---- a/scripts/config_whitelist.txt
-+++ b/scripts/config_whitelist.txt
-@@ -1308,7 +1308,6 @@ CONFIG_STM32_FLASH
- CONFIG_STV0991
- CONFIG_STV0991_HZ
- CONFIG_STV0991_HZ_CLOCK
--CONFIG_ST_SMI
- CONFIG_SXNI855T
- CONFIG_SYSFS
- CONFIG_SYSMGR_ISWGRP_HANDOFF
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gMjIuMDkuMjEgMTE6MDIsIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4gUmVtb3ZlIHRoZSBk
+cml2ZXIgc3Rfc21pYy5jIHVzZWQgaW4gU1BFQXIgcHJvZHVjdHMgYW5kIHRoZSBhc3NvY2lhdGVk
+Cj4gY29uZmlnIENPTkZJR19TVF9TTUk7IHRoaXMgZHJpdmVyIGlzIG5vIG1vcmUgdXNlZCBpbiBV
+LUJvb3QgYWZ0ZXIgdGhlCj4gY29tbWl0IDU3MGMzZGNmYzE1MyAoImFybTogUmVtb3ZlIHNwZWFy
+NjAwIGJvYXJkcyBhbmQgdGhlIHJlc3Qgb2YgU1BFQXIKPiBzdXBwb3J0IikuCj4gCj4gRml4ZXM6
+IDU3MGMzZGNmYzE1MyAoImFybTogUmVtb3ZlIHNwZWFyNjAwIGJvYXJkcyBhbmQgdGhlIHJlc3Qg
+b2YgU1BFQXIgc3VwcG9ydCIpCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0
+cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KClJldmlld2VkLWJ5OiBTdGVmYW4gUm9lc2UgPHNy
+QGRlbnguZGU+CgpUaGFua3MsClN0ZWZhbgoKPiAtLS0KPiBFdmVuIGlmIENPTkZJR19TVF9TTUkg
+d2FzIGFjdGl2YXRlZCBpbiAyIGJvYXJkLCB0aGUgY29tcGlsZWQgZHJpdmVyIHdhcwo+IGVtcHR5
+IGJlY2F1c2UgQ09ORklHX01URF9OT1JfRkxBU0ggd2Fzbid0IGFjdGl2YXRlZCBpbjoKPiAtIGJj
+bTcyNjBfZGVmY29uZmlnCj4gLSBiY203NDQ1X2RlZmNvbmZpZwo+IAo+IFRoZSBVLUJvb3Qgc2l6
+ZSBkb24ndCBjaGFuZ2UgZm9yIHRoZXNlIDIgZGVmY29uZmlnICh0ZXN0ZWQgd2l0aCBidWlsZG1h
+bikuCj4gCj4gVGhpcyBwYXRjaCByZXBsYWNlIHRoZSBwcmV2aW91cyAiY29uZmlnczogTWlncmF0
+ZSBDT05GSUdfU1RfU01JIHRvIEtjb25maWciLgo+IGh0dHA6Ly9wYXRjaHdvcmsub3psYWJzLm9y
+Zy9wcm9qZWN0L3Vib290L2xpc3QvP3Nlcmllcz0yNjMzNjUmc3RhdGU9Kgo+IAo+IAo+ICAgZHJp
+dmVycy9tdGQvTWFrZWZpbGUgICAgICAgICB8ICAgMSAtCj4gICBkcml2ZXJzL210ZC9zdF9zbWku
+YyAgICAgICAgIHwgNTY1IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gICBp
+bmNsdWRlL2NvbmZpZ3MvYmNtc3RiLmggICAgIHwgICAxIC0KPiAgIGluY2x1ZGUvbGludXgvbXRk
+L3N0X3NtaS5oICAgfCAxMDAgLS0tLS0tLQo+ICAgc2NyaXB0cy9jb25maWdfd2hpdGVsaXN0LnR4
+dCB8ICAgMSAtCj4gICA1IGZpbGVzIGNoYW5nZWQsIDY2OCBkZWxldGlvbnMoLSkKPiAgIGRlbGV0
+ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL210ZC9zdF9zbWkuYwo+ICAgZGVsZXRlIG1vZGUgMTAwNjQ0
+IGluY2x1ZGUvbGludXgvbXRkL3N0X3NtaS5oCj4gCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbXRk
+L01ha2VmaWxlIGIvZHJpdmVycy9tdGQvTWFrZWZpbGUKPiBpbmRleCA2ZDc3ZWJmYWE1Li5jZTA0
+NTExMDhlIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvbXRkL01ha2VmaWxlCj4gKysrIGIvZHJpdmVy
+cy9tdGQvTWFrZWZpbGUKPiBAQCAtMTIsNyArMTIsNiBAQCBtdGQtJChDT05GSUdfRkxBU0hfQ0ZJ
+X0RSSVZFUikgKz0gY2ZpX2ZsYXNoLm8KPiAgIG10ZC0kKENPTkZJR19GTEFTSF9DRklfTVREKSAr
+PSBjZmlfbXRkLm8KPiAgIG10ZC0kKENPTkZJR19GTEFTSF9DRklfTEVHQUNZKSArPSBqZWRlY19m
+bGFzaC5vCj4gICBtdGQtJChDT05GSUdfRkxBU0hfUElDMzIpICs9IHBpYzMyX2ZsYXNoLm8KPiAt
+bXRkLSQoQ09ORklHX1NUX1NNSSkgKz0gc3Rfc21pLm8KPiAgIG10ZC0kKENPTkZJR19TVE0zMl9G
+TEFTSCkgKz0gc3RtMzJfZmxhc2gubwo+ICAgbXRkLSQoQ09ORklHX1JFTkVTQVNfUlBDX0hGKSAr
+PSByZW5lc2FzX3JwY19oZi5vCj4gICBtdGQtJChDT05GSUdfSEJNQ19BTTY1NCkgKz0gaGJtYy1h
+bTY1NC5vCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvbXRkL3N0X3NtaS5jIGIvZHJpdmVycy9tdGQv
+c3Rfc21pLmMKPiBkZWxldGVkIGZpbGUgbW9kZSAxMDA2NDQKPiBpbmRleCA3YzY1MmU2YzUzLi4w
+MDAwMDAwMDAwCj4gLS0tIGEvZHJpdmVycy9tdGQvc3Rfc21pLmMKPiArKysgL2Rldi9udWxsCj4g
+QEAgLTEsNTY1ICswLDAgQEAKPiAtLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjAr
+Cj4gLS8qCj4gLSAqIChDKSBDb3B5cmlnaHQgMjAwOQo+IC0gKiBWaXBpbiBLdW1hciwgU1QgTWlj
+cm9lbGVjdHJvbmljcywgdmlwaW4ua3VtYXJAc3QuY29tLgo+IC0gKi8KPiAtCj4gLSNpbmNsdWRl
+IDxjb21tb24uaD4KPiAtI2luY2x1ZGUgPGZsYXNoLmg+Cj4gLSNpbmNsdWRlIDxsaW51eC9kZWxh
+eS5oPgo+IC0jaW5jbHVkZSA8bGludXgvZXJyLmg+Cj4gLSNpbmNsdWRlIDxsaW51eC9tdGQvc3Rf
+c21pLmg+Cj4gLQo+IC0jaW5jbHVkZSA8YXNtL2lvLmg+Cj4gLSNpbmNsdWRlIDxhc20vYXJjaC9o
+YXJkd2FyZS5oPgo+IC0KPiAtI2lmIGRlZmluZWQoQ09ORklHX01URF9OT1JfRkxBU0gpCj4gLQo+
+IC1zdGF0aWMgc3RydWN0IHNtaV9yZWdzICpjb25zdCBzbWljbnRsID0KPiAtICAgIChzdHJ1Y3Qg
+c21pX3JlZ3MgKiBjb25zdClDT05GSUdfU1lTX1NNSV9CQVNFOwo+IC1zdGF0aWMgdWxvbmcgYmFu
+a19iYXNlW0NPTkZJR19TWVNfTUFYX0ZMQVNIX0JBTktTXSA9Cj4gLSAgICBDT05GSUdfU1lTX0ZM
+QVNIX0FERFJfQkFTRTsKPiAtZmxhc2hfaW5mb190IGZsYXNoX2luZm9bQ09ORklHX1NZU19NQVhf
+RkxBU0hfQkFOS1NdOwo+IC0KPiAtLyogZGF0YSBzdHJ1Y3R1cmUgdG8gbWFpbnRhaW4gZmxhc2gg
+aWRzIGZyb20gZGlmZmVyZW50IHZlbmRvcnMgKi8KPiAtc3RydWN0IGZsYXNoX2RldmljZSB7Cj4g
+LQljaGFyICpuYW1lOwo+IC0JdTggZXJhc2VfY21kOwo+IC0JdTMyIGRldmljZV9pZDsKPiAtCXUz
+MiBwYWdlc2l6ZTsKPiAtCXVuc2lnbmVkIGxvbmcgc2VjdG9yc2l6ZTsKPiAtCXVuc2lnbmVkIGxv
+bmcgc2l6ZV9pbl9ieXRlczsKPiAtfTsKPiAtCj4gLSNkZWZpbmUgRkxBU0hfSUQobiwgZXMsIGlk
+LCBwc2l6ZSwgc3NpemUsIHNpemUpCVwKPiAtewkJCQlcCj4gLQkubmFtZSA9IG4sCQlcCj4gLQku
+ZXJhc2VfY21kID0gZXMsCVwKPiAtCS5kZXZpY2VfaWQgPSBpZCwJXAo+IC0JLnBhZ2VzaXplID0g
+cHNpemUsCVwKPiAtCS5zZWN0b3JzaXplID0gc3NpemUsCVwKPiAtCS5zaXplX2luX2J5dGVzID0g
+c2l6ZQlcCj4gLX0KPiAtCj4gLS8qCj4gLSAqIExpc3Qgb2Ygc3VwcG9ydGVkIGZsYXNoIGRldmlj
+ZXMuCj4gLSAqIEN1cnJlbnRseSB0aGUgZXJhc2VfY21kIGZpZWxkIGlzIG5vdCB1c2VkIGluIHRo
+aXMgZHJpdmVyLgo+IC0gKi8KPiAtc3RhdGljIHN0cnVjdCBmbGFzaF9kZXZpY2UgZmxhc2hfZGV2
+aWNlc1tdID0gewo+IC0JRkxBU0hfSUQoInN0IG0yNXAxNiIgICAgICwgMHhkOCwgMHgwMDE1MjAy
+MCwgMHgxMDAsIDB4MTAwMDAsIDB4MjAwMDAwKSwKPiAtCUZMQVNIX0lEKCJzdCBtMjVwMzIiICAg
+ICAsIDB4ZDgsIDB4MDAxNjIwMjAsIDB4MTAwLCAweDEwMDAwLCAweDQwMDAwMCksCj4gLQlGTEFT
+SF9JRCgic3QgbTI1cDY0IiAgICAgLCAweGQ4LCAweDAwMTcyMDIwLCAweDEwMCwgMHgxMDAwMCwg
+MHg4MDAwMDApLAo+IC0JRkxBU0hfSUQoInN0IG0yNXAxMjgiICAgICwgMHhkOCwgMHgwMDE4MjAy
+MCwgMHgxMDAsIDB4NDAwMDAsIDB4MTAwMDAwMCksCj4gLQlGTEFTSF9JRCgic3QgbTI1cDA1IiAg
+ICAgLCAweGQ4LCAweDAwMTAyMDIwLCAweDgwICwgMHg4MDAwICwgMHgxMDAwMCksCj4gLQlGTEFT
+SF9JRCgic3QgbTI1cDEwIiAgICAgLCAweGQ4LCAweDAwMTEyMDIwLCAweDgwICwgMHg4MDAwICwg
+MHgyMDAwMCksCj4gLQlGTEFTSF9JRCgic3QgbTI1cDIwIiAgICAgLCAweGQ4LCAweDAwMTIyMDIw
+LCAweDEwMCwgMHgxMDAwMCwgMHg0MDAwMCksCj4gLQlGTEFTSF9JRCgic3QgbTI1cDQwIiAgICAg
+LCAweGQ4LCAweDAwMTMyMDIwLCAweDEwMCwgMHgxMDAwMCwgMHg4MDAwMCksCj4gLQlGTEFTSF9J
+RCgic3QgbTI1cDgwIiAgICAgLCAweGQ4LCAweDAwMTQyMDIwLCAweDEwMCwgMHgxMDAwMCwgMHgx
+MDAwMDApLAo+IC0JRkxBU0hfSUQoInN0IG00NXBlMTAiICAgICwgMHhkOCwgMHgwMDExNDAyMCwg
+MHgxMDAsIDB4MTAwMDAsIDB4MjAwMDApLAo+IC0JRkxBU0hfSUQoInN0IG00NXBlMjAiICAgICwg
+MHhkOCwgMHgwMDEyNDAyMCwgMHgxMDAsIDB4MTAwMDAsIDB4NDAwMDApLAo+IC0JRkxBU0hfSUQo
+InN0IG00NXBlNDAiICAgICwgMHhkOCwgMHgwMDEzNDAyMCwgMHgxMDAsIDB4MTAwMDAsIDB4ODAw
+MDApLAo+IC0JRkxBU0hfSUQoInN0IG00NXBlODAiICAgICwgMHhkOCwgMHgwMDE0NDAyMCwgMHgx
+MDAsIDB4MTAwMDAsIDB4MTAwMDAwKSwKPiAtCUZMQVNIX0lEKCJzcCBzMjVmbDAwNCIgICAsIDB4
+ZDgsIDB4MDAxMjAyMDEsIDB4MTAwLCAweDEwMDAwLCAweDgwMDAwKSwKPiAtCUZMQVNIX0lEKCJz
+cCBzMjVmbDAwOCIgICAsIDB4ZDgsIDB4MDAxMzAyMDEsIDB4MTAwLCAweDEwMDAwLCAweDEwMDAw
+MCksCj4gLQlGTEFTSF9JRCgic3AgczI1ZmwwMTYiICAgLCAweGQ4LCAweDAwMTQwMjAxLCAweDEw
+MCwgMHgxMDAwMCwgMHgyMDAwMDApLAo+IC0JRkxBU0hfSUQoInNwIHMyNWZsMDMyIiAgICwgMHhk
+OCwgMHgwMDE1MDIwMSwgMHgxMDAsIDB4MTAwMDAsIDB4NDAwMDAwKSwKPiAtCUZMQVNIX0lEKCJz
+cCBzMjVmbDA2NCIgICAsIDB4ZDgsIDB4MDAxNjAyMDEsIDB4MTAwLCAweDEwMDAwLCAweDgwMDAw
+MCksCj4gLQlGTEFTSF9JRCgibWFjIDI1bDUxMiIgICAgLCAweGQ4LCAweDAwMTAyMEMyLCAweDAx
+MCwgMHgxMDAwMCwgMHgxMDAwMCksCj4gLQlGTEFTSF9JRCgibWFjIDI1bDEwMDUiICAgLCAweGQ4
+LCAweDAwMTEyMEMyLCAweDAxMCwgMHgxMDAwMCwgMHgyMDAwMCksCj4gLQlGTEFTSF9JRCgibWFj
+IDI1bDIwMDUiICAgLCAweGQ4LCAweDAwMTIyMEMyLCAweDAxMCwgMHgxMDAwMCwgMHg0MDAwMCks
+Cj4gLQlGTEFTSF9JRCgibWFjIDI1bDQwMDUiICAgLCAweGQ4LCAweDAwMTMyMEMyLCAweDAxMCwg
+MHgxMDAwMCwgMHg4MDAwMCksCj4gLQlGTEFTSF9JRCgibWFjIDI1bDQwMDVhIiAgLCAweGQ4LCAw
+eDAwMTMyMEMyLCAweDAxMCwgMHgxMDAwMCwgMHg4MDAwMCksCj4gLQlGTEFTSF9JRCgibWFjIDI1
+bDgwMDUiICAgLCAweGQ4LCAweDAwMTQyMEMyLCAweDAxMCwgMHgxMDAwMCwgMHgxMDAwMDApLAo+
+IC0JRkxBU0hfSUQoIm1hYyAyNWwxNjA1IiAgICwgMHhkOCwgMHgwMDE1MjBDMiwgMHgxMDAsIDB4
+MTAwMDAsIDB4MjAwMDAwKSwKPiAtCUZMQVNIX0lEKCJtYWMgMjVsMTYwNWEiICAsIDB4ZDgsIDB4
+MDAxNTIwQzIsIDB4MDEwLCAweDEwMDAwLCAweDIwMDAwMCksCj4gLQlGTEFTSF9JRCgibWFjIDI1
+bDMyMDUiICAgLCAweGQ4LCAweDAwMTYyMEMyLCAweDEwMCwgMHgxMDAwMCwgMHg0MDAwMDApLAo+
+IC0JRkxBU0hfSUQoIm1hYyAyNWwzMjA1YSIgICwgMHhkOCwgMHgwMDE2MjBDMiwgMHgxMDAsIDB4
+MTAwMDAsIDB4NDAwMDAwKSwKPiAtCUZMQVNIX0lEKCJtYWMgMjVsNjQwNSIgICAsIDB4ZDgsIDB4
+MDAxNzIwQzIsIDB4MTAwLCAweDEwMDAwLCAweDgwMDAwMCksCj4gLQlGTEFTSF9JRCgid2JkIHcy
+NXExMjgiICwgMHhkOCwgMHgwMDE4NDBFRiwgMHgxMDAsIDB4MTAwMDAsIDB4MTAwMDAwMCksCj4g
+LX07Cj4gLQo+IC0vKgo+IC0gKiBzbWlfd2FpdF94ZmVyX2ZpbmlzaCAtIFdhaXQgdW50aWwgVEZG
+IGlzIHNldCBpbiBzdGF0dXMgcmVnaXN0ZXIKPiAtICogQHRpbWVvdXQ6CSB0aW1lb3V0IGluIG1p
+bGxpc2Vjb25kcwo+IC0gKgo+IC0gKiBXYWl0IHVudGlsIFRGRiBpcyBzZXQgaW4gc3RhdHVzIHJl
+Z2lzdGVyCj4gLSAqLwo+IC1zdGF0aWMgaW50IHNtaV93YWl0X3hmZXJfZmluaXNoKGludCB0aW1l
+b3V0KQo+IC17Cj4gLQl1bG9uZyBzdGFydCA9IGdldF90aW1lcigwKTsKPiAtCj4gLQl3aGlsZSAo
+Z2V0X3RpbWVyKHN0YXJ0KSA8IHRpbWVvdXQpIHsKPiAtCQlpZiAocmVhZGwoJnNtaWNudGwtPnNt
+aV9zcikgJiBURkYpCj4gLQkJCXJldHVybiAwOwo+IC0KPiAtCQkvKiBUcnkgYWZ0ZXIgMTAgbXMg
+Ki8KPiAtCQl1ZGVsYXkoMTApOwo+IC0JfTsKPiAtCj4gLQlyZXR1cm4gLTE7Cj4gLX0KPiAtCj4g
+LS8qCj4gLSAqIHNtaV9yZWFkX2lkIC0gUmVhZCBmbGFzaCBpZAo+IC0gKiBAaW5mbzoJIGZsYXNo
+X2luZm8gc3RydWN0dXJlIHBvaW50ZXIKPiAtICogQGJhbmtudW06CSBiYW5rIG51bWJlcgo+IC0g
+Kgo+IC0gKiBSZWFkIHRoZSBmbGFzaCBpZCBwcmVzZW50IGF0IGJhbmsgI2JhbmtudW0KPiAtICov
+Cj4gLXN0YXRpYyB1bnNpZ25lZCBpbnQgc21pX3JlYWRfaWQoZmxhc2hfaW5mb190ICppbmZvLCBp
+bnQgYmFua251bSkKPiAtewo+IC0JdW5zaWduZWQgaW50IHZhbHVlOwo+IC0KPiAtCXdyaXRlbChy
+ZWFkbCgmc21pY250bC0+c21pX2NyMSkgfCBTV19NT0RFLCAmc21pY250bC0+c21pX2NyMSk7Cj4g
+LQl3cml0ZWwoUkVBRF9JRCwgJnNtaWNudGwtPnNtaV90cik7Cj4gLQl3cml0ZWwoKGJhbmtudW0g
+PDwgQkFOS1NFTF9TSElGVCkgfCBTRU5EIHwgVFhfTEVOXzEgfCBSWF9MRU5fMywKPiAtCSAgICAg
+ICAmc21pY250bC0+c21pX2NyMik7Cj4gLQo+IC0JaWYgKHNtaV93YWl0X3hmZXJfZmluaXNoKFhG
+RVJfRklOSVNIX1RPVVQpKQo+IC0JCXJldHVybiAtRUlPOwo+IC0KPiAtCXZhbHVlID0gKHJlYWRs
+KCZzbWljbnRsLT5zbWlfcnIpICYgMHgwMEZGRkZGRik7Cj4gLQo+IC0Jd3JpdGVsKHJlYWRsKCZz
+bWljbnRsLT5zbWlfc3IpICYgflRGRiwgJnNtaWNudGwtPnNtaV9zcik7Cj4gLQl3cml0ZWwocmVh
+ZGwoJnNtaWNudGwtPnNtaV9jcjEpICYgflNXX01PREUsICZzbWljbnRsLT5zbWlfY3IxKTsKPiAt
+Cj4gLQlyZXR1cm4gdmFsdWU7Cj4gLX0KPiAtCj4gLS8qCj4gLSAqIGZsYXNoX2dldF9zaXplIC0g
+RGV0ZWN0IHRoZSBTTUkgZmxhc2ggYnkgcmVhZGluZyB0aGUgSUQuCj4gLSAqIEBiYXNlOgkgQmFz
+ZSBhZGRyZXNzIG9mIHRoZSBmbGFzaCBhcmVhIGJhbmsgI2JhbmtudW0KPiAtICogQGJhbmtudW06
+CSBCYW5rIG51bWJlcgo+IC0gKgo+IC0gKiBEZXRlY3QgdGhlIFNNSSBmbGFzaCBieSByZWFkaW5n
+IHRoZSBJRC4gSW5pdGlhbGl6ZXMgdGhlIGZsYXNoX2luZm8gc3RydWN0dXJlCj4gLSAqIHdpdGgg
+c2l6ZSwgc2VjdG9yIGNvdW50IGV0Yy4KPiAtICovCj4gLXN0YXRpYyB1bG9uZyBmbGFzaF9nZXRf
+c2l6ZSh1bG9uZyBiYXNlLCBpbnQgYmFua251bSkKPiAtewo+IC0JZmxhc2hfaW5mb190ICppbmZv
+ID0gJmZsYXNoX2luZm9bYmFua251bV07Cj4gLQlpbnQgdmFsdWU7Cj4gLQlpbnQgaTsKPiAtCj4g
+LQl2YWx1ZSA9IHNtaV9yZWFkX2lkKGluZm8sIGJhbmtudW0pOwo+IC0KPiAtCWlmICh2YWx1ZSA8
+IDApIHsKPiAtCQlwcmludGYoIkZsYXNoIGlkIGNvdWxkIG5vdCBiZSByZWFkXG4iKTsKPiAtCQly
+ZXR1cm4gMDsKPiAtCX0KPiAtCj4gLQkvKiBNYXRjaGVzIGNoaXAtaWQgdG8gZW50aXJlIGxpc3Qg
+b2YgJ3NlcmlhbC1ub3IgZmxhc2gnIGlkcyAqLwo+IC0JZm9yIChpID0gMDsgaSA8IEFSUkFZX1NJ
+WkUoZmxhc2hfZGV2aWNlcyk7IGkrKykgewo+IC0JCWlmIChmbGFzaF9kZXZpY2VzW2ldLmRldmlj
+ZV9pZCA9PSB2YWx1ZSkgewo+IC0JCQlpbmZvLT5zaXplID0gZmxhc2hfZGV2aWNlc1tpXS5zaXpl
+X2luX2J5dGVzOwo+IC0JCQlpbmZvLT5mbGFzaF9pZCA9IHZhbHVlOwo+IC0JCQlpbmZvLT5zdGFy
+dFswXSA9IGJhc2U7Cj4gLQkJCWluZm8tPnNlY3Rvcl9jb3VudCA9Cj4gLQkJCQkJaW5mby0+c2l6
+ZS9mbGFzaF9kZXZpY2VzW2ldLnNlY3RvcnNpemU7Cj4gLQo+IC0JCQlyZXR1cm4gaW5mby0+c2l6
+ZTsKPiAtCQl9Cj4gLQl9Cj4gLQo+IC0JcmV0dXJuIDA7Cj4gLX0KPiAtCj4gLS8qCj4gLSAqIHNt
+aV9yZWFkX3NyIC0gUmVhZCBzdGF0dXMgcmVnaXN0ZXIgb2YgU01JCj4gLSAqIEBiYW5rOgkgYmFu
+ayBudW1iZXIKPiAtICoKPiAtICogVGhpcyByb3V0aW5lIHdpbGwgZ2V0IHRoZSBzdGF0dXMgcmVn
+aXN0ZXIgb2YgdGhlIGZsYXNoIGNoaXAgcHJlc2VudCBhdCB0aGUKPiAtICogZ2l2ZW4gYmFuawo+
+IC0gKi8KPiAtc3RhdGljIGludCBzbWlfcmVhZF9zcihpbnQgYmFuaykKPiAtewo+IC0JdTMyIGN0
+cmxyZWcxLCB2YWw7Cj4gLQo+IC0JLyogc3RvcmUgdGhlIENUUkwgUkVHMSBzdGF0ZSAqLwo+IC0J
+Y3RybHJlZzEgPSByZWFkbCgmc21pY250bC0+c21pX2NyMSk7Cj4gLQo+IC0JLyogUHJvZ3JhbSBT
+TUkgaW4gSFcgTW9kZSAqLwo+IC0Jd3JpdGVsKHJlYWRsKCZzbWljbnRsLT5zbWlfY3IxKSAmIH4o
+U1dfTU9ERSB8IFdCX01PREUpLAo+IC0JICAgICAgICZzbWljbnRsLT5zbWlfY3IxKTsKPiAtCj4g
+LQkvKiBQZXJmb3JtaW5nIGEgUlNSIGluc3RydWN0aW9uIGluIEhXIG1vZGUgKi8KPiAtCXdyaXRl
+bCgoYmFuayA8PCBCQU5LU0VMX1NISUZUKSB8IFJEX1NUQVRVU19SRUcsICZzbWljbnRsLT5zbWlf
+Y3IyKTsKPiAtCj4gLQlpZiAoc21pX3dhaXRfeGZlcl9maW5pc2goWEZFUl9GSU5JU0hfVE9VVCkp
+Cj4gLQkJcmV0dXJuIC0xOwo+IC0KPiAtCXZhbCA9IHJlYWRsKCZzbWljbnRsLT5zbWlfc3IpOwo+
+IC0KPiAtCS8qIFJlc3RvcmUgdGhlIENUUkwgUkVHMSBzdGF0ZSAqLwo+IC0Jd3JpdGVsKGN0cmxy
+ZWcxLCAmc21pY250bC0+c21pX2NyMSk7Cj4gLQo+IC0JcmV0dXJuIHZhbDsKPiAtfQo+IC0KPiAt
+LyoKPiAtICogc21pX3dhaXRfdGlsbF9yZWFkeSAtIFdhaXQgdGlsbCBsYXN0IG9wZXJhdGlvbiBp
+cyBvdmVyLgo+IC0gKiBAYmFuazoJIGJhbmsgbnVtYmVyIHNoaWZ0ZWQuCj4gLSAqIEB0aW1lb3V0
+OgkgdGltZW91dCBpbiBtaWxsaXNlY29uZHMuCj4gLSAqCj4gLSAqIFRoaXMgcm91dGluZSBjaGVj
+a3MgZm9yIFdJUCh3cml0ZSBpbiBwcm9ncmVzcyliaXQgaW4gU3RhdHVzIHJlZ2lzdGVyKFNNU1It
+YjApCj4gLSAqIFRoZSByb3V0aW5lIGNoZWNrcyBmb3IgI3RpbWVvdXQgbG9vcHMsIGVhY2ggYXQg
+aW50ZXJ2YWwgb2YgMSBtaWxsaS1zZWNvbmQuCj4gLSAqIElmIHN1Y2Nlc3NmdWwgdGhlIHJvdXRp
+bmUgcmV0dXJucyAwLgo+IC0gKi8KPiAtc3RhdGljIGludCBzbWlfd2FpdF90aWxsX3JlYWR5KGlu
+dCBiYW5rLCBpbnQgdGltZW91dCkKPiAtewo+IC0JaW50IHNyOwo+IC0JdWxvbmcgc3RhcnQgPSBn
+ZXRfdGltZXIoMCk7Cj4gLQo+IC0JLyogT25lIGNoaXAgZ3VhcmFudGVlcyBtYXggNSBtc2VjIHdh
+aXQgaGVyZSBhZnRlciBwYWdlIHdyaXRlcywKPiAtCSAgIGJ1dCBwb3RlbnRpYWxseSB0aHJlZSBz
+ZWNvbmRzICghKSBhZnRlciBwYWdlIGVyYXNlLiAqLwo+IC0Jd2hpbGUgKGdldF90aW1lcihzdGFy
+dCkgPCB0aW1lb3V0KSB7Cj4gLQkJc3IgPSBzbWlfcmVhZF9zcihiYW5rKTsKPiAtCQlpZiAoKHNy
+ID49IDApICYmICghKHNyICYgV0lQX0JJVCkpKQo+IC0JCQlyZXR1cm4gMDsKPiAtCj4gLQkJLyog
+VHJ5IGFnYWluIGFmdGVyIDEwIHVzZWMgKi8KPiAtCQl1ZGVsYXkoMTApOwo+IC0JfSB3aGlsZSAo
+dGltZW91dC0tKTsKPiAtCj4gLQlwcmludGYoIlNNSSBjb250cm9sbGVyIGlzIHN0aWxsIGluIHdh
+aXQsIHRpbWVvdXQ9JWRcbiIsIHRpbWVvdXQpOwo+IC0JcmV0dXJuIC1FSU87Cj4gLX0KPiAtCj4g
+LS8qCj4gLSAqIHNtaV93cml0ZV9lbmFibGUgLSBFbmFibGUgdGhlIGZsYXNoIHRvIGRvIHdyaXRl
+IG9wZXJhdGlvbgo+IC0gKiBAYmFuazoJIGJhbmsgbnVtYmVyCj4gLSAqCj4gLSAqIFNldCB3cml0
+ZSBlbmFibGUgbGF0Y2ggd2l0aCBXcml0ZSBFbmFibGUgY29tbWFuZC4KPiAtICogUmV0dXJucyBu
+ZWdhdGl2ZSBpZiBlcnJvciBvY2N1cnJlZC4KPiAtICovCj4gLXN0YXRpYyBpbnQgc21pX3dyaXRl
+X2VuYWJsZShpbnQgYmFuaykKPiAtewo+IC0JdTMyIGN0cmxyZWcxOwo+IC0JdTMyIHN0YXJ0Owo+
+IC0JaW50IHRpbWVvdXQgPSBXTU9ERV9UT1VUOwo+IC0JaW50IHNyOwo+IC0KPiAtCS8qIFN0b3Jl
+IHRoZSBDVFJMIFJFRzEgc3RhdGUgKi8KPiAtCWN0cmxyZWcxID0gcmVhZGwoJnNtaWNudGwtPnNt
+aV9jcjEpOwo+IC0KPiAtCS8qIFByb2dyYW0gU01JIGluIEgvVyBNb2RlICovCj4gLQl3cml0ZWwo
+cmVhZGwoJnNtaWNudGwtPnNtaV9jcjEpICYgflNXX01PREUsICZzbWljbnRsLT5zbWlfY3IxKTsK
+PiAtCj4gLQkvKiBHaXZlIHRoZSBGbGFzaCwgV3JpdGUgRW5hYmxlIGNvbW1hbmQgKi8KPiAtCXdy
+aXRlbCgoYmFuayA8PCBCQU5LU0VMX1NISUZUKSB8IFdFLCAmc21pY250bC0+c21pX2NyMik7Cj4g
+LQo+IC0JaWYgKHNtaV93YWl0X3hmZXJfZmluaXNoKFhGRVJfRklOSVNIX1RPVVQpKQo+IC0JCXJl
+dHVybiAtMTsKPiAtCj4gLQkvKiBSZXN0b3JlIHRoZSBDVFJMIFJFRzEgc3RhdGUgKi8KPiAtCXdy
+aXRlbChjdHJscmVnMSwgJnNtaWNudGwtPnNtaV9jcjEpOwo+IC0KPiAtCXN0YXJ0ID0gZ2V0X3Rp
+bWVyKDApOwo+IC0Jd2hpbGUgKGdldF90aW1lcihzdGFydCkgPCB0aW1lb3V0KSB7Cj4gLQkJc3Ig
+PSBzbWlfcmVhZF9zcihiYW5rKTsKPiAtCQlpZiAoKHNyID49IDApICYmIChzciAmICgxIDw8IChi
+YW5rICsgV01fU0hJRlQpKSkpCj4gLQkJCXJldHVybiAwOwo+IC0KPiAtCQkvKiBUcnkgYWdhaW4g
+YWZ0ZXIgMTAgdXNlYyAqLwo+IC0JCXVkZWxheSgxMCk7Cj4gLQl9Owo+IC0KPiAtCXJldHVybiAt
+MTsKPiAtfQo+IC0KPiAtLyoKPiAtICogc21pX2luaXQgLSBTTUkgaW5pdGlhbGl6YXRpb24gcm91
+dGluZQo+IC0gKgo+IC0gKiBTTUkgaW5pdGlhbGl6YXRpb24gcm91dGluZS4gU2V0cyBTTUkgY29u
+dHJvbCByZWdpc3RlcjEuCj4gLSAqLwo+IC12b2lkIHNtaV9pbml0KHZvaWQpCj4gLXsKPiAtCS8q
+IFNldHRpbmcgdGhlIGZhc3QgbW9kZSB2YWx1ZXMuIFNNSSB3b3JraW5nIGF0IDE2Ni80ID0gNDEu
+NSBNSHogKi8KPiAtCXdyaXRlbChIT0xEMSB8IEZBU1RfTU9ERSB8IEJBTktfRU4gfCBEU0VMX1RJ
+TUUgfCBQUkVTQ0FMNCwKPiAtCSAgICAgICAmc21pY250bC0+c21pX2NyMSk7Cj4gLX0KPiAtCj4g
+LS8qCj4gLSAqIHNtaV9zZWN0b3JfZXJhc2UgLSBFcmFzZSBmbGFzaCBzZWN0b3IKPiAtICogQGlu
+Zm86CSBmbGFzaF9pbmZvIHN0cnVjdHVyZSBwb2ludGVyCj4gLSAqIEBzZWN0b3I6CSBzZWN0b3Ig
+bnVtYmVyCj4gLSAqCj4gLSAqIFNldCB3cml0ZSBlbmFibGUgbGF0Y2ggd2l0aCBXcml0ZSBFbmFi
+bGUgY29tbWFuZC4KPiAtICogUmV0dXJucyBuZWdhdGl2ZSBpZiBlcnJvciBvY2N1cnJlZC4KPiAt
+ICovCj4gLXN0YXRpYyBpbnQgc21pX3NlY3Rvcl9lcmFzZShmbGFzaF9pbmZvX3QgKmluZm8sIHVu
+c2lnbmVkIGludCBzZWN0b3IpCj4gLXsKPiAtCWludCBiYW5rOwo+IC0JdW5zaWduZWQgaW50IHNl
+Y3RfYWRkOwo+IC0JdW5zaWduZWQgaW50IGluc3RydWN0aW9uOwo+IC0KPiAtCXN3aXRjaCAoaW5m
+by0+c3RhcnRbMF0pIHsKPiAtCWNhc2UgU01JQkFOSzBfQkFTRToKPiAtCQliYW5rID0gQkFOSzA7
+Cj4gLQkJYnJlYWs7Cj4gLQljYXNlIFNNSUJBTksxX0JBU0U6Cj4gLQkJYmFuayA9IEJBTksxOwo+
+IC0JCWJyZWFrOwo+IC0JY2FzZSBTTUlCQU5LMl9CQVNFOgo+IC0JCWJhbmsgPSBCQU5LMjsKPiAt
+CQlicmVhazsKPiAtCWNhc2UgU01JQkFOSzNfQkFTRToKPiAtCQliYW5rID0gQkFOSzM7Cj4gLQkJ
+YnJlYWs7Cj4gLQlkZWZhdWx0Ogo+IC0JCXJldHVybiAtMTsKPiAtCX0KPiAtCj4gLQlzZWN0X2Fk
+ZCA9IHNlY3RvciAqIChpbmZvLT5zaXplIC8gaW5mby0+c2VjdG9yX2NvdW50KTsKPiAtCWluc3Ry
+dWN0aW9uID0gKChzZWN0X2FkZCA+PiA4KSAmIDB4MDAwMEZGMDApIHwgU0VDVE9SX0VSQVNFOwo+
+IC0KPiAtCXdyaXRlbChyZWFkbCgmc21pY250bC0+c21pX3NyKSAmIH4oRVJGMSB8IEVSRjIpLCAm
+c21pY250bC0+c21pX3NyKTsKPiAtCj4gLQkvKiBXYWl0IHVudGlsIGZpbmlzaGVkIHByZXZpb3Vz
+IHdyaXRlIGNvbW1hbmQuICovCj4gLQlpZiAoc21pX3dhaXRfdGlsbF9yZWFkeShiYW5rLCBDT05G
+SUdfU1lTX0ZMQVNIX0VSQVNFX1RPVVQpKQo+IC0JCXJldHVybiAtRUJVU1k7Cj4gLQo+IC0JLyog
+U2VuZCB3cml0ZSBlbmFibGUsIGJlZm9yZSBlcmFzZSBjb21tYW5kcy4gKi8KPiAtCWlmIChzbWlf
+d3JpdGVfZW5hYmxlKGJhbmspKQo+IC0JCXJldHVybiAtRUlPOwo+IC0KPiAtCS8qIFB1dCBTTUkg
+aW4gU1cgbW9kZSAqLwo+IC0Jd3JpdGVsKHJlYWRsKCZzbWljbnRsLT5zbWlfY3IxKSB8IFNXX01P
+REUsICZzbWljbnRsLT5zbWlfY3IxKTsKPiAtCj4gLQkvKiBTZW5kIFNlY3RvciBFcmFzZSBjb21t
+YW5kIGluIFNXIE1vZGUgKi8KPiAtCXdyaXRlbChpbnN0cnVjdGlvbiwgJnNtaWNudGwtPnNtaV90
+cik7Cj4gLQl3cml0ZWwoKGJhbmsgPDwgQkFOS1NFTF9TSElGVCkgfCBTRU5EIHwgVFhfTEVOXzQs
+Cj4gLQkJICAgICAgICZzbWljbnRsLT5zbWlfY3IyKTsKPiAtCWlmIChzbWlfd2FpdF94ZmVyX2Zp
+bmlzaChYRkVSX0ZJTklTSF9UT1VUKSkKPiAtCQlyZXR1cm4gLUVJTzsKPiAtCj4gLQlpZiAoc21p
+X3dhaXRfdGlsbF9yZWFkeShiYW5rLCBDT05GSUdfU1lTX0ZMQVNIX0VSQVNFX1RPVVQpKQo+IC0J
+CXJldHVybiAtRUJVU1k7Cj4gLQo+IC0JLyogUHV0IFNNSSBpbiBIVyBtb2RlICovCj4gLQl3cml0
+ZWwocmVhZGwoJnNtaWNudGwtPnNtaV9jcjEpICYgflNXX01PREUsCj4gLQkJICAgICAgICZzbWlj
+bnRsLT5zbWlfY3IxKTsKPiAtCj4gLQlyZXR1cm4gMDsKPiAtfQo+IC0KPiAtLyoKPiAtICogc21p
+X3dyaXRlIC0gV3JpdGUgdG8gU01JIGZsYXNoCj4gLSAqIEBzcmNfYWRkcjoJIHNvdXJjZSBidWZm
+ZXIKPiAtICogQGRzdF9hZGRyOgkgZGVzdGluYXRpb24gYnVmZmVyCj4gLSAqIEBsZW5ndGg6CSBs
+ZW5ndGggdG8gd3JpdGUgaW4gYnl0ZXMKPiAtICogQGJhbms6CSBiYW5rIGJhc2UgYWRkcmVzcwo+
+IC0gKgo+IC0gKiBXcml0ZSB0byBTTUkgZmxhc2gKPiAtICovCj4gLXN0YXRpYyBpbnQgc21pX3dy
+aXRlKHVuc2lnbmVkIGludCAqc3JjX2FkZHIsIHVuc2lnbmVkIGludCAqZHN0X2FkZHIsCj4gLQkJ
+ICAgICB1bnNpZ25lZCBpbnQgbGVuZ3RoLCB1bG9uZyBiYW5rX2FkZHIpCj4gLXsKPiAtCXU4ICpz
+cmNfYWRkcjggPSAodTggKilzcmNfYWRkcjsKPiAtCXU4ICpkc3RfYWRkcjggPSAodTggKilkc3Rf
+YWRkcjsKPiAtCWludCBiYW5rbnVtOwo+IC0JaW50IGk7Cj4gLQo+IC0Jc3dpdGNoIChiYW5rX2Fk
+ZHIpIHsKPiAtCWNhc2UgU01JQkFOSzBfQkFTRToKPiAtCQliYW5rbnVtID0gQkFOSzA7Cj4gLQkJ
+YnJlYWs7Cj4gLQljYXNlIFNNSUJBTksxX0JBU0U6Cj4gLQkJYmFua251bSA9IEJBTksxOwo+IC0J
+CWJyZWFrOwo+IC0JY2FzZSBTTUlCQU5LMl9CQVNFOgo+IC0JCWJhbmtudW0gPSBCQU5LMjsKPiAt
+CQlicmVhazsKPiAtCWNhc2UgU01JQkFOSzNfQkFTRToKPiAtCQliYW5rbnVtID0gQkFOSzM7Cj4g
+LQkJYnJlYWs7Cj4gLQlkZWZhdWx0Ogo+IC0JCXJldHVybiAtMTsKPiAtCX0KPiAtCj4gLQlpZiAo
+c21pX3dhaXRfdGlsbF9yZWFkeShiYW5rbnVtLCBDT05GSUdfU1lTX0ZMQVNIX1dSSVRFX1RPVVQp
+KQo+IC0JCXJldHVybiAtRUJVU1k7Cj4gLQo+IC0JLyogU2V0IFNNSSBpbiBIYXJkd2FyZSBNb2Rl
+ICovCj4gLQl3cml0ZWwocmVhZGwoJnNtaWNudGwtPnNtaV9jcjEpICYgflNXX01PREUsICZzbWlj
+bnRsLT5zbWlfY3IxKTsKPiAtCj4gLQlpZiAoc21pX3dyaXRlX2VuYWJsZShiYW5rbnVtKSkKPiAt
+CQlyZXR1cm4gLUVJTzsKPiAtCj4gLQkvKiBQZXJmb3JtIHRoZSB3cml0ZSBjb21tYW5kICovCj4g
+LQlmb3IgKGkgPSAwOyBpIDwgbGVuZ3RoOyBpICs9IDQpIHsKPiAtCQlpZiAoKCh1bG9uZykgKGRz
+dF9hZGRyKSAlIFNGTEFTSF9QQUdFX1NJWkUpID09IDApIHsKPiAtCQkJaWYgKHNtaV93YWl0X3Rp
+bGxfcmVhZHkoYmFua251bSwKPiAtCQkJCQkJQ09ORklHX1NZU19GTEFTSF9XUklURV9UT1VUKSkK
+PiAtCQkJCXJldHVybiAtRUJVU1k7Cj4gLQo+IC0JCQlpZiAoc21pX3dyaXRlX2VuYWJsZShiYW5r
+bnVtKSkKPiAtCQkJCXJldHVybiAtRUlPOwo+IC0JCX0KPiAtCj4gLQkJaWYgKGxlbmd0aCA8IDQp
+IHsKPiAtCQkJaW50IGs7Cj4gLQo+IC0JCQkvKgo+IC0JCQkgKiBIYW5kbGUgc3BlY2lhbCBjYXNl
+LCB3aGVyZSBsZW5ndGggPCA0IChyZWR1bmRhbnQgZW52KQo+IC0JCQkgKi8KPiAtCQkJZm9yIChr
+ID0gMDsgayA8IGxlbmd0aDsgaysrKQo+IC0JCQkJKmRzdF9hZGRyOCsrID0gKnNyY19hZGRyOCsr
+Owo+IC0JCX0gZWxzZSB7Cj4gLQkJCS8qIE5vcm1hbCAzMmJpdCB3cml0ZSAqLwo+IC0JCQkqZHN0
+X2FkZHIrKyA9ICpzcmNfYWRkcisrOwo+IC0JCX0KPiAtCj4gLQkJaWYgKChyZWFkbCgmc21pY250
+bC0+c21pX3NyKSAmIChFUkYxIHwgRVJGMikpKQo+IC0JCQlyZXR1cm4gLUVJTzsKPiAtCX0KPiAt
+Cj4gLQlpZiAoc21pX3dhaXRfdGlsbF9yZWFkeShiYW5rbnVtLCBDT05GSUdfU1lTX0ZMQVNIX1dS
+SVRFX1RPVVQpKQo+IC0JCXJldHVybiAtRUJVU1k7Cj4gLQo+IC0Jd3JpdGVsKHJlYWRsKCZzbWlj
+bnRsLT5zbWlfc3IpICYgfihXQ0YpLCAmc21pY250bC0+c21pX3NyKTsKPiAtCj4gLQlyZXR1cm4g
+MDsKPiAtfQo+IC0KPiAtLyoKPiAtICogd3JpdGVfYnVmZiAtIFdyaXRlIHRvIFNNSSBmbGFzaAo+
+IC0gKiBAaW5mbzoJIGZsYXNoIGluZm8gc3RydWN0dXJlCj4gLSAqIEBzcmM6CSBzb3VyY2UgYnVm
+ZmVyCj4gLSAqIEBkZXN0X2FkZHI6CSBkZXN0aW5hdGlvbiBidWZmZXIKPiAtICogQGxlbmd0aDoJ
+IGxlbmd0aCB0byB3cml0ZSBpbiB3b3Jkcwo+IC0gKgo+IC0gKiBXcml0ZSB0byBTTUkgZmxhc2gK
+PiAtICovCj4gLWludCB3cml0ZV9idWZmKGZsYXNoX2luZm9fdCAqaW5mbywgdWNoYXIgKnNyYywg
+dWxvbmcgZGVzdF9hZGRyLCB1bG9uZyBsZW5ndGgpCj4gLXsKPiAtCXJldHVybiBzbWlfd3JpdGUo
+KHVuc2lnbmVkIGludCAqKXNyYywgKHVuc2lnbmVkIGludCAqKWRlc3RfYWRkciwKPiAtCQkJIGxl
+bmd0aCwgaW5mby0+c3RhcnRbMF0pOwo+IC19Cj4gLQo+IC0vKgo+IC0gKiBmbGFzaF9pbml0IC0g
+U01JIGZsYXNoIGluaXRpYWxpemF0aW9uCj4gLSAqCj4gLSAqIFNNSSBmbGFzaCBpbml0aWFsaXph
+dGlvbgo+IC0gKi8KPiAtdW5zaWduZWQgbG9uZyBmbGFzaF9pbml0KHZvaWQpCj4gLXsKPiAtCXVu
+c2lnbmVkIGxvbmcgc2l6ZSA9IDA7Cj4gLQlpbnQgaSwgajsKPiAtCj4gLQlzbWlfaW5pdCgpOwo+
+IC0KPiAtCWZvciAoaSA9IDA7IGkgPCBDT05GSUdfU1lTX01BWF9GTEFTSF9CQU5LUzsgaSsrKSB7
+Cj4gLQkJZmxhc2hfaW5mb1tpXS5mbGFzaF9pZCA9IEZMQVNIX1VOS05PV047Cj4gLQkJc2l6ZSAr
+PSBmbGFzaF9pbmZvW2ldLnNpemUgPSBmbGFzaF9nZXRfc2l6ZShiYW5rX2Jhc2VbaV0sIGkpOwo+
+IC0JfQo+IC0KPiAtCWZvciAoaiA9IDA7IGogPCBDT05GSUdfU1lTX01BWF9GTEFTSF9CQU5LUzsg
+aisrKSB7Cj4gLQkJZm9yIChpID0gMTsgaSA8IGZsYXNoX2luZm9bal0uc2VjdG9yX2NvdW50OyBp
+KyspCj4gLQkJCWZsYXNoX2luZm9bal0uc3RhcnRbaV0gPQo+IC0JCQkgICAgZmxhc2hfaW5mb1tq
+XS5zdGFydFtpIC0gMV0gKwo+IC0JCQkgICAgZmxhc2hfaW5mby0+c2l6ZSAvIGZsYXNoX2luZm8t
+PnNlY3Rvcl9jb3VudDsKPiAtCj4gLQl9Cj4gLQo+IC0JcmV0dXJuIHNpemU7Cj4gLX0KPiAtCj4g
+LS8qCj4gLSAqIGZsYXNoX3ByaW50X2luZm8gLSBQcmludCBTTUkgZmxhc2ggaW5mb3JtYXRpb24K
+PiAtICoKPiAtICogUHJpbnQgU01JIGZsYXNoIGluZm9ybWF0aW9uCj4gLSAqLwo+IC12b2lkIGZs
+YXNoX3ByaW50X2luZm8oZmxhc2hfaW5mb190ICppbmZvKQo+IC17Cj4gLQlpbnQgaTsKPiAtCWlm
+IChpbmZvLT5mbGFzaF9pZCA9PSBGTEFTSF9VTktOT1dOKSB7Cj4gLQkJcHV0cygibWlzc2luZyBv
+ciB1bmtub3duIEZMQVNIIHR5cGVcbiIpOwo+IC0JCXJldHVybjsKPiAtCX0KPiAtCj4gLQlpZiAo
+aW5mby0+c2l6ZSA+PSAweDEwMDAwMCkKPiAtCQlwcmludGYoIiAgU2l6ZTogJWxkIE1CIGluICVk
+IFNlY3RvcnNcbiIsCj4gLQkJICAgICAgIGluZm8tPnNpemUgPj4gMjAsIGluZm8tPnNlY3Rvcl9j
+b3VudCk7Cj4gLQllbHNlCj4gLQkJcHJpbnRmKCIgIFNpemU6ICVsZCBLQiBpbiAlZCBTZWN0b3Jz
+XG4iLAo+IC0JCSAgICAgICBpbmZvLT5zaXplID4+IDEwLCBpbmZvLT5zZWN0b3JfY291bnQpOwo+
+IC0KPiAtCXB1dHMoIiAgU2VjdG9yIFN0YXJ0IEFkZHJlc3NlczoiKTsKPiAtCWZvciAoaSA9IDA7
+IGkgPCBpbmZvLT5zZWN0b3JfY291bnQ7ICsraSkgewo+IC0jaWZkZWYgQ09ORklHX1NZU19GTEFT
+SF9FTVBUWV9JTkZPCj4gLQkJaW50IHNpemU7Cj4gLQkJaW50IGVyYXNlZDsKPiAtCQl1MzIgKmZs
+YXNoOwo+IC0KPiAtCQkvKgo+IC0JCSAqIENoZWNrIGlmIHdob2xlIHNlY3RvciBpcyBlcmFzZWQK
+PiAtCQkgKi8KPiAtCQlzaXplID0gKGluZm8tPnNpemUpIC8gKGluZm8tPnNlY3Rvcl9jb3VudCk7
+Cj4gLQkJZmxhc2ggPSAodTMyICopIGluZm8tPnN0YXJ0W2ldOwo+IC0JCXNpemUgPSBzaXplIC8g
+c2l6ZW9mKGludCk7Cj4gLQo+IC0JCXdoaWxlICgoc2l6ZS0tKSAmJiAoKmZsYXNoKysgPT0gfjAp
+KQo+IC0JCQk7Cj4gLQo+IC0JCXNpemUrKzsKPiAtCQlpZiAoc2l6ZSkKPiAtCQkJZXJhc2VkID0g
+MDsKPiAtCQllbHNlCj4gLQkJCWVyYXNlZCA9IDE7Cj4gLQo+IC0JCWlmICgoaSAlIDUpID09IDAp
+Cj4gLQkJCXByaW50ZigiXG4iKTsKPiAtCj4gLQkJcHJpbnRmKCIgJTA4bFglcyVzIiwKPiAtCQkg
+ICAgICAgaW5mby0+c3RhcnRbaV0sCj4gLQkJICAgICAgIGVyYXNlZCA/ICIgRSIgOiAiICAiLCBp
+bmZvLT5wcm90ZWN0W2ldID8gIlJPICIgOiAiICAgIik7Cj4gLSNlbHNlCj4gLQkJaWYgKChpICUg
+NSkgPT0gMCkKPiAtCQkJcHJpbnRmKCJcbiAgICIpOwo+IC0JCXByaW50ZigiICUwOGxYJXMiLAo+
+IC0JCSAgICAgICBpbmZvLT5zdGFydFtpXSwgaW5mby0+cHJvdGVjdFtpXSA/ICIgKFJPKSAgIiA6
+ICIgICAgICIpOwo+IC0jZW5kaWYKPiAtCX0KPiAtCXB1dGMoJ1xuJyk7Cj4gLQlyZXR1cm47Cj4g
+LX0KPiAtCj4gLS8qCj4gLSAqIGZsYXNoX2VyYXNlIC0gRXJhc2UgU01JIGZsYXNoCj4gLSAqCj4g
+LSAqIEVyYXNlIFNNSSBmbGFzaAo+IC0gKi8KPiAtaW50IGZsYXNoX2VyYXNlKGZsYXNoX2luZm9f
+dCAqaW5mbywgaW50IHNfZmlyc3QsIGludCBzX2xhc3QpCj4gLXsKPiAtCWludCByY29kZSA9IDA7
+Cj4gLQlpbnQgcHJvdCA9IDA7Cj4gLQlmbGFzaF9zZWN0X3Qgc2VjdDsKPiAtCj4gLQlpZiAoKHNf
+Zmlyc3QgPCAwKSB8fCAoc19maXJzdCA+IHNfbGFzdCkpIHsKPiAtCQlwdXRzKCItIG5vIHNlY3Rv
+cnMgdG8gZXJhc2VcbiIpOwo+IC0JCXJldHVybiAxOwo+IC0JfQo+IC0KPiAtCWZvciAoc2VjdCA9
+IHNfZmlyc3Q7IHNlY3QgPD0gc19sYXN0OyArK3NlY3QpIHsKPiAtCQlpZiAoaW5mby0+cHJvdGVj
+dFtzZWN0XSkKPiAtCQkJcHJvdCsrOwo+IC0JfQo+IC0JaWYgKHByb3QpIHsKPiAtCQlwcmludGYo
+Ii0gV2FybmluZzogJWQgcHJvdGVjdGVkIHNlY3RvcnMgd2lsbCBub3QgYmUgZXJhc2VkIVxuIiwK
+PiAtCQkgICAgICAgcHJvdCk7Cj4gLQl9IGVsc2Ugewo+IC0JCXB1dGMoJ1xuJyk7Cj4gLQl9Cj4g
+LQo+IC0JZm9yIChzZWN0ID0gc19maXJzdDsgc2VjdCA8PSBzX2xhc3Q7IHNlY3QrKykgewo+IC0J
+CWlmIChpbmZvLT5wcm90ZWN0W3NlY3RdID09IDApIHsKPiAtCQkJaWYgKHNtaV9zZWN0b3JfZXJh
+c2UoaW5mbywgc2VjdCkpCj4gLQkJCQlyY29kZSA9IDE7Cj4gLQkJCWVsc2UKPiAtCQkJCXB1dGMo
+Jy4nKTsKPiAtCQl9Cj4gLQl9Cj4gLQlwdXRzKCIgZG9uZVxuIik7Cj4gLQlyZXR1cm4gcmNvZGU7
+Cj4gLX0KPiAtI2VuZGlmCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvY29uZmlncy9iY21zdGIuaCBi
+L2luY2x1ZGUvY29uZmlncy9iY21zdGIuaAo+IGluZGV4IDdmMWMyOThjZGMuLjU0ZTU2NTVhZjYg
+MTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS9jb25maWdzL2JjbXN0Yi5oCj4gKysrIGIvaW5jbHVkZS9j
+b25maWdzL2JjbXN0Yi5oCj4gQEAgLTEyNyw3ICsxMjcsNiBAQCBleHRlcm4gcGh5c19hZGRyX3Qg
+cHJpb3Jfc3RhZ2VfZmR0X2FkZHJlc3M7Cj4gICAvKgo+ICAgICogRmxhc2ggY29uZmlndXJhdGlv
+bi4KPiAgICAqLwo+IC0jZGVmaW5lIENPTkZJR19TVF9TTUkKPiAgICNkZWZpbmUgQ09ORklHX1NQ
+SV9GTEFTSF9TVE1JQ1JPCj4gICAjZGVmaW5lIENPTkZJR19TUElfRkxBU0hfTUFDUk9OSVgKPiAg
+IAo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L210ZC9zdF9zbWkuaCBiL2luY2x1ZGUvbGlu
+dXgvbXRkL3N0X3NtaS5oCj4gZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggNjA1ODk2
+OTc4Ny4uMDAwMDAwMDAwMAo+IC0tLSBhL2luY2x1ZGUvbGludXgvbXRkL3N0X3NtaS5oCj4gKysr
+IC9kZXYvbnVsbAo+IEBAIC0xLDEwMCArMCwwIEBACj4gLS8qIFNQRFgtTGljZW5zZS1JZGVudGlm
+aWVyOiBHUEwtMi4wKyAqLwo+IC0vKgo+IC0gKiAoQykgQ29weXJpZ2h0IDIwMDkKPiAtICogVmlw
+aW4gS3VtYXIsIFNUIE1pY29lbGVjdHJvbmljcywgdmlwaW4ua3VtYXJAc3QuY29tLgo+IC0gKi8K
+PiAtCj4gLSNpZm5kZWYgU1RfU01JX0gKPiAtI2RlZmluZSBTVF9TTUlfSAo+IC0KPiAtLyogMHhG
+ODAwLjAwMDAgLiAweEZCRkYuRkZGRgk2NE1CCVNNSSAoU2VyaWFsIEZsYXNoIE1lbSkgKi8KPiAt
+LyogMHhGQzAwLjAwMDAgLiAweEZDMUYuRkZGRgkyTUIJU01JIChTZXJpYWwgRmxhc2ggUmVnLikg
+Ki8KPiAtCj4gLSNkZWZpbmUgRkxBU0hfU1RBUlRfQUREUkVTUwlDT05GSUdfU1lTX0ZMQVNIX0JB
+U0UKPiAtI2RlZmluZSBGTEFTSF9CQU5LX1NJWkUJCUNPTkZJR19TWVNfRkxBU0hfQkFOS19TSVpF
+Cj4gLQo+IC0jZGVmaW5lIFNNSUJBTkswX0JBU0UJCShGTEFTSF9TVEFSVF9BRERSRVNTKQo+IC0j
+ZGVmaW5lIFNNSUJBTksxX0JBU0UJCShTTUlCQU5LMF9CQVNFICsgRkxBU0hfQkFOS19TSVpFKQo+
+IC0jZGVmaW5lIFNNSUJBTksyX0JBU0UJCShTTUlCQU5LMV9CQVNFICsgRkxBU0hfQkFOS19TSVpF
+KQo+IC0jZGVmaW5lIFNNSUJBTkszX0JBU0UJCShTTUlCQU5LMl9CQVNFICsgRkxBU0hfQkFOS19T
+SVpFKQo+IC0KPiAtI2RlZmluZSBCQU5LMAkJCTAKPiAtI2RlZmluZSBCQU5LMQkJCTEKPiAtI2Rl
+ZmluZSBCQU5LMgkJCTIKPiAtI2RlZmluZSBCQU5LMwkJCTMKPiAtCj4gLXN0cnVjdCBzbWlfcmVn
+cyB7Cj4gLQl1MzIgc21pX2NyMTsKPiAtCXUzMiBzbWlfY3IyOwo+IC0JdTMyIHNtaV9zcjsKPiAt
+CXUzMiBzbWlfdHI7Cj4gLQl1MzIgc21pX3JyOwo+IC19Owo+IC0KPiAtLyogQ09OVFJPTCBSRUcg
+MSAqLwo+IC0jZGVmaW5lIEJBTktfRU4JCQkweDAwMDAwMDBGCS8qIGVuYWJsZXMgYWxsIGJhbmtz
+ICovCj4gLSNkZWZpbmUgRFNFTF9USU1FCQkweDAwMDAwMDYwCS8qIERlc2VsZWN0IHRpbWUgKi8K
+PiAtI2RlZmluZSBQUkVTQ0FMNQkJMHgwMDAwMDUwMAkvKiBBSEJfQ0sgcHJlc2NhbGluZyB2YWx1
+ZSAqLwo+IC0jZGVmaW5lIFBSRVNDQUxBCQkweDAwMDAwQTAwCS8qIEFIQl9DSyBwcmVzY2FsaW5n
+IHZhbHVlICovCj4gLSNkZWZpbmUgUFJFU0NBTDMJCTB4MDAwMDAzMDAJLyogQUhCX0NLIHByZXNj
+YWxpbmcgdmFsdWUgKi8KPiAtI2RlZmluZSBQUkVTQ0FMNAkJMHgwMDAwMDQwMAkvKiBBSEJfQ0sg
+cHJlc2NhbGluZyB2YWx1ZSAqLwo+IC0jZGVmaW5lIFNXX01PREUJCQkweDEwMDAwMDAwCS8qIGVu
+YWJsZXMgU1cgTW9kZSAqLwo+IC0jZGVmaW5lIFdCX01PREUJCQkweDIwMDAwMDAwCS8qIFdyaXRl
+IEJ1cnN0IE1vZGUgKi8KPiAtI2RlZmluZSBGQVNUX01PREUJCTB4MDAwMDgwMDAJLyogRmFzdCBN
+b2RlICovCj4gLSNkZWZpbmUgSE9MRDEJCQkweDAwMDEwMDAwCj4gLQo+IC0vKiBDT05UUk9MIFJF
+RyAyICovCj4gLSNkZWZpbmUgUkRfU1RBVFVTX1JFRwkJMHgwMDAwMDQwMAkvKiByZWFkcyBzdGF0
+dXMgcmVnICovCj4gLSNkZWZpbmUgV0UJCQkweDAwMDAwODAwCS8qIFdyaXRlIEVuYWJsZSAqLwo+
+IC0jZGVmaW5lIEJBTkswX1NFTAkJMHgwMDAwMDAwMAkvKiBTZWxlY3QgQmFuY2swICovCj4gLSNk
+ZWZpbmUgQkFOSzFfU0VMCQkweDAwMDAxMDAwCS8qIFNlbGVjdCBCYW5jazEgKi8KPiAtI2RlZmlu
+ZSBCQU5LMl9TRUwJCTB4MDAwMDIwMDAJLyogU2VsZWN0IEJhbmNrMiAqLwo+IC0jZGVmaW5lIEJB
+TkszX1NFTAkJMHgwMDAwMzAwMAkvKiBTZWxlY3QgQmFuY2szICovCj4gLSNkZWZpbmUgQkFOS1NF
+TF9TSElGVAkJMTIKPiAtI2RlZmluZSBTRU5ECQkJMHgwMDAwMDA4MAkvKiBTZW5kIGRhdGEgKi8K
+PiAtI2RlZmluZSBUWF9MRU5fMQkJMHgwMDAwMDAwMQkvKiBkYXRhIGxlbmd0aCA9IDEgYnl0ZSAq
+Lwo+IC0jZGVmaW5lIFRYX0xFTl8yCQkweDAwMDAwMDAyCS8qIGRhdGEgbGVuZ3RoID0gMiBieXRl
+ICovCj4gLSNkZWZpbmUgVFhfTEVOXzMJCTB4MDAwMDAwMDMJLyogZGF0YSBsZW5ndGggPSAzIGJ5
+dGUgKi8KPiAtI2RlZmluZSBUWF9MRU5fNAkJMHgwMDAwMDAwNAkvKiBkYXRhIGxlbmd0aCA9IDQg
+Ynl0ZSAqLwo+IC0jZGVmaW5lIFJYX0xFTl8xCQkweDAwMDAwMDEwCS8qIGRhdGEgbGVuZ3RoID0g
+MSBieXRlICovCj4gLSNkZWZpbmUgUlhfTEVOXzIJCTB4MDAwMDAwMjAJLyogZGF0YSBsZW5ndGgg
+PSAyIGJ5dGUgKi8KPiAtI2RlZmluZSBSWF9MRU5fMwkJMHgwMDAwMDAzMAkvKiBkYXRhIGxlbmd0
+aCA9IDMgYnl0ZSAqLwo+IC0jZGVmaW5lIFJYX0xFTl80CQkweDAwMDAwMDQwCS8qIGRhdGEgbGVu
+Z3RoID0gNCBieXRlICovCj4gLSNkZWZpbmUgVEZJRQkJCTB4MDAwMDAxMDAJLyogVHggRmxhZyBJ
+bnRlcnJ1cHQgRW5hYmxlICovCj4gLSNkZWZpbmUgV0NJRQkJCTB4MDAwMDAyMDAJLyogV0NGIElu
+dGVycnVwdCBFbmFibGUgKi8KPiAtCj4gLS8qIFNUQVRVU19SRUcgKi8KPiAtI2RlZmluZSBJTlRf
+V0NGX0NMUgkJMHhGRkZGRkRGRgkvKiBjbGVhcjogV0NGIGNsZWFyICovCj4gLSNkZWZpbmUgSU5U
+X1RGRl9DTFIJCTB4RkZGRkZFRkYJLyogY2xlYXI6IFRGRiBjbGVhciAqLwo+IC0jZGVmaW5lIFdJ
+UF9CSVQJCQkweDAwMDAwMDAxCS8qIFdJUCBCaXQgb2YgU1BJIFNSICovCj4gLSNkZWZpbmUgV0VM
+X0JJVAkJCTB4MDAwMDAwMDIJLyogV0VMIEJpdCBvZiBTUEkgU1IgKi8KPiAtI2RlZmluZSBSU1IJ
+CQkweDAwMDAwMDA1CS8qIFJlYWQgU3RhdHVzIHJlZ2lzZXIgKi8KPiAtI2RlZmluZSBURkYJCQkw
+eDAwMDAwMTAwCS8qIFRyYW5zZmVyIEZpbmlzaGVkIEZMYWcgKi8KPiAtI2RlZmluZSBXQ0YJCQkw
+eDAwMDAwMjAwCS8qIFRyYW5zZmVyIEZpbmlzaGVkIEZMYWcgKi8KPiAtI2RlZmluZSBFUkYxCQkJ
+MHgwMDAwMDQwMAkvKiBFcnJvciBGbGFnIDEgKi8KPiAtI2RlZmluZSBFUkYyCQkJMHgwMDAwMDgw
+MAkvKiBFcnJvciBGbGFnIDIgKi8KPiAtI2RlZmluZSBXTTAJCQkweDAwMDAxMDAwCS8qIFdNIEJh
+bmsgMCAqLwo+IC0jZGVmaW5lIFdNMQkJCTB4MDAwMDIwMDAJLyogV00gQmFuayAxICovCj4gLSNk
+ZWZpbmUgV00yCQkJMHgwMDAwNDAwMAkvKiBXTSBCYW5rIDIgKi8KPiAtI2RlZmluZSBXTTMJCQkw
+eDAwMDA4MDAwCS8qIFdNIEJhbmsgMyAqLwo+IC0jZGVmaW5lIFdNX1NISUZUCQkxMgo+IC0KPiAt
+LyogVFIgUkVHICovCj4gLSNkZWZpbmUgUkVBRF9JRAkJCTB4MDAwMDAwOUYJLyogUmVhZCBJZGVu
+dGlmaWNhdGlvbiAqLwo+IC0jZGVmaW5lIEJVTEtfRVJBU0UJCTB4MDAwMDAwQzcJLyogQlVMSyBl
+cmFzZSAqLwo+IC0jZGVmaW5lIFNFQ1RPUl9FUkFTRQkJMHgwMDAwMDBEOAkvKiBTRUNUT1IgZXJh
+c2UgKi8KPiAtI2RlZmluZSBXUklURV9FTkFCTEUJCTB4MDAwMDAwMDYJLyogV2VuYWJsZSBjb21t
+YW5kIHRvIEZMQVNIICovCj4gLQo+IC1zdHJ1Y3QgZmxhc2hfZGV2IHsKPiAtCXUzMiBkZW5zaXR5
+Owo+IC0JdWxvbmcgc2l6ZTsKPiAtCXVzaG9ydCBzZWN0b3JfY291bnQ7Cj4gLX07Cj4gLQo+IC0j
+ZGVmaW5lIFNGTEFTSF9QQUdFX1NJWkUJMHgxMDAJLyogZmxhc2ggcGFnZSBzaXplICovCj4gLSNk
+ZWZpbmUgWEZFUl9GSU5JU0hfVE9VVAkxNQkvKiB4ZmVyIGZpbmlzaCB0aW1lb3V0KGluIG1zKSAq
+Lwo+IC0jZGVmaW5lIFdNT0RFX1RPVVQJCTE1CS8qIHdyaXRlIGVuYWJsZSB0aW1lb3V0KGluIG1z
+KSAqLwo+IC0KPiAtZXh0ZXJuIHZvaWQgc21pX2luaXQodm9pZCk7Cj4gLQo+IC0jZW5kaWYKPiBk
+aWZmIC0tZ2l0IGEvc2NyaXB0cy9jb25maWdfd2hpdGVsaXN0LnR4dCBiL3NjcmlwdHMvY29uZmln
+X3doaXRlbGlzdC50eHQKPiBpbmRleCAzNmI4Y2MxZGIwLi42YzgyNzdjYmE5IDEwMDY0NAo+IC0t
+LSBhL3NjcmlwdHMvY29uZmlnX3doaXRlbGlzdC50eHQKPiArKysgYi9zY3JpcHRzL2NvbmZpZ193
+aGl0ZWxpc3QudHh0Cj4gQEAgLTEzMDgsNyArMTMwOCw2IEBAIENPTkZJR19TVE0zMl9GTEFTSAo+
+ICAgQ09ORklHX1NUVjA5OTEKPiAgIENPTkZJR19TVFYwOTkxX0haCj4gICBDT05GSUdfU1RWMDk5
+MV9IWl9DTE9DSwo+IC1DT05GSUdfU1RfU01JCj4gICBDT05GSUdfU1hOSTg1NVQKPiAgIENPTkZJ
+R19TWVNGUwo+ICAgQ09ORklHX1NZU01HUl9JU1dHUlBfSEFORE9GRgo+IAoKClZpZWxlIEdyw7zD
+n2UsClN0ZWZhbgoKLS0gCkRFTlggU29mdHdhcmUgRW5naW5lZXJpbmcgR21iSCwgICAgICBNYW5h
+Z2luZyBEaXJlY3RvcjogV29sZmdhbmcgRGVuawpIUkIgMTY1MjM1IE11bmljaCwgT2ZmaWNlOiBL
+aXJjaGVuc3RyLjUsIEQtODIxOTQgR3JvZWJlbnplbGwsIEdlcm1hbnkKUGhvbmU6ICgrNDkpLTgx
+NDItNjY5ODktNTEgRmF4OiAoKzQ5KS04MTQyLTY2OTg5LTgwIEVtYWlsOiBzckBkZW54LmRlCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMy
+IG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0
+dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290
+LXN0bTMyCg==

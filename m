@@ -2,62 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF34A417E8F
-	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Sep 2021 02:12:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 218B4417EA6
+	for <lists+uboot-stm32@lfdr.de>; Sat, 25 Sep 2021 02:37:07 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7778BC5A4F4;
-	Sat, 25 Sep 2021 00:12:04 +0000 (UTC)
-Received: from mail.nic.cz (mail.nic.cz [217.31.204.67])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3B0FC5A4F4;
+	Sat, 25 Sep 2021 00:37:06 +0000 (UTC)
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
+ [209.85.219.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 893B7C0614D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C693C57B6F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 25 Sep 2021 00:12:01 +0000 (UTC)
-Received: from thinkpad (unknown [172.20.6.87])
- by mail.nic.cz (Postfix) with ESMTPSA id C5378142627;
- Sat, 25 Sep 2021 02:12:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nic.cz; s=default;
- t=1632528721; bh=glCfIUomaAlH08lUnS2WwFGYTh87Chy7WqBvYcGQipw=;
- h=Date:From:To;
- b=WzH2hYFnxe7EUEfceAFYBtBzh0289QAZsAeTuBsT7RfvRxiUnl6ncA1Hbish8qxMr
- nEcUicqsyPsXzdVb9iwVUIIM3Ru5W0M/+6bnIPnH52daLe+AmFF+7XNiD+MK3b7KPP
- gD21zuOVE7+QK+ggPf0eC59NmbdjfAMUwacw7kJk=
-Date: Sat, 25 Sep 2021 02:12:00 +0200
-From: Marek =?UTF-8?B?QmVow7pu?= <marek.behun@nic.cz>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Message-ID: <20210925021200.7d5b62e2@thinkpad>
-In-Reply-To: <f3c1e30e-a7d7-a492-2ca1-789edf1f9290@denx.de>
-References: <20210922162909.1857566-1-patrick.delaunay@foss.st.com>
- <20210922192925.723abcba@thinkpad>
- <a38d6126-2d09-34d4-0b08-0d1da94ed415@denx.de>
- <20210922210536.6c9c2f9e@thinkpad>
- <56df80f7-aa1d-3cff-5b29-16fdafcf7bcf@denx.de>
- <20210922194615.GD31748@bill-the-cat>
- <59ce8fa7-64f2-07c9-ee2b-4b59335b3907@denx.de>
- <20210922200053.GE31748@bill-the-cat>
- <a0fa4277-80be-ce67-73fa-08a5be23088f@denx.de>
- <4f1609c3-0aca-3f49-715b-95c8a3336f61@foss.st.com>
- <20210924182257.GG31748@bill-the-cat>
- <20210924212559.22006a61@thinkpad>
- <f3c1e30e-a7d7-a492-2ca1-789edf1f9290@denx.de>
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ Sat, 25 Sep 2021 00:37:05 +0000 (UTC)
+Received: by mail-qv1-f48.google.com with SMTP id cv2so1347521qvb.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 24 Sep 2021 17:37:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=fBw+iW5HyXj8M9Ip5J4aH/oS5Zs1PwEksa5muyy0XKM=;
+ b=JIqxUjKyHa2dhzlZfCAl4Z1wIz7mwYEOmqo7gVQaEU83MZKigtiUrfjH+YwmelwkLv
+ kfzk4MDOYL6L9lz4hhkKNgiFW9p+/A42uSvN/NFecp6Q0j79KD7qE9nyDTcht5KEDwyE
+ /QiqDc2nOb3hkdTEgS8OaSj/khwfDu3XPfIG4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=fBw+iW5HyXj8M9Ip5J4aH/oS5Zs1PwEksa5muyy0XKM=;
+ b=sKY72y1t/TemCAToIgyo47GzsQv4iRj2sqAJgWNHsTo/GwFV+DUxMgUTAM2mdAvoJ1
+ iTwr2rgMJIBIGvK8Kdm3oC9XMy+hdCtDIIt3SY3rCIdl0b6+SYCuSH5MyD9GXvOn753j
+ 3bc9ncb3PEqEerQZCu4ZI3hpeUyCDWRm2S+k0M7x+PBGRNL2KkTOyaFI+PE2EbvFkyZu
+ T5ydzvIcdPVBqZl3fe04t21J9yjuZBQxQY5onyXvp5fOZmR5rbpoEnWoEa4r4F8yD7Ze
+ bxIqUrdGMn1swtxlMd4jp5FA+K/dJvrVgs2h8Lv2d7VzuaMIHmrH+VGWgGhlWMgJGEoS
+ TQVg==
+X-Gm-Message-State: AOAM530FyW5nXzlYfodmJZD/NXjjft0RmOGdfmRYDu+d7FBLjiRP65mj
+ +0zO5U+XCJ8ndWi8UEXa40N52Q==
+X-Google-Smtp-Source: ABdhPJzWrur497akCDU42I5Ly07nBr8QECj6RY1RaV+GLTXSVwMUps0mH+UcZdKtK4x0mgN34utrzA==
+X-Received: by 2002:a05:6214:44a:: with SMTP id
+ cc10mr13362222qvb.58.1632530224354; 
+ Fri, 24 Sep 2021 17:37:04 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-9907-3395-6a0a-dd86.res6.spectrum.com.
+ [2603:6081:7b01:cbda:9907:3395:6a0a:dd86])
+ by smtp.gmail.com with ESMTPSA id a16sm6501158qkn.16.2021.09.24.17.37.03
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Fri, 24 Sep 2021 17:37:03 -0700 (PDT)
+Date: Fri, 24 Sep 2021 20:37:01 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20210925003701.GR31748@bill-the-cat>
+References: <20210903102331.1.If60c46be1f9a6ba3b7ad548fda51ef631f3a33b2@changeid>
 MIME-Version: 1.0
-X-Spam-Status: No, score=-100.0 required=5.9 tests=SHORTCIRCUIT,
- USER_IN_WELCOMELIST,USER_IN_WHITELIST shortcircuit=ham
- autolearn=disabled version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on mail.nic.cz
-X-Virus-Scanned: clamav-milter 0.102.2 at mail
-X-Virus-Status: Clean
-Cc: Vignesh R <vigneshr@ti.com>,
- Christophe KERELLO <christophe.kerello@foss.st.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Heiko Schocher <hs@denx.de>,
- Pali =?UTF-8?B?Um9ow6Fy?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PATCH v4 0/2] mtd: spi: nor: force mtd name to
-	"nor%d"
+In-Reply-To: <20210903102331.1.If60c46be1f9a6ba3b7ad548fda51ef631f3a33b2@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Rick Chen <rick@andestech.com>
+Subject: Re: [Uboot-stm32] [PATCH] arm: use CONFIG_SUPPORT_PASSING_ATAGS
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,51 +71,64 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============7881724050040816559=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 24 Sep 2021 22:09:15 +0200
-Marek Vasut <marex@denx.de> wrote:
 
-> I have a feeling the discussion is again banking toward "mtdparts" and 
-> "DT", which really is a solved problem, or at least we agreed upon the 
-> solution.
+--===============7881724050040816559==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="fL5uibfitsvsbG47"
+Content-Disposition: inline
 
-I was trying to explain to Patrick how he can convert the ST board so
-that the mtd partitions will be defined in DT and board code won't need
-mtdids if he also converts to distro boot correctly.
 
-> The patch is trying to fix MTDIDS and their look up in 
-> get_mtd_device_nm(). This is all U-Boot stuff, it has nothing to do with 
-> passing mtd partitions to Linux at all.
+--fL5uibfitsvsbG47
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The solution here is to get rid of MTDIDS also. But I guess this will
-take some time, so it does make sense for get_mtd_device_nm() to
-return the same device as previously when given argument "norN".
+On Fri, Sep 03, 2021 at 10:24:39AM +0200, Patrick Delaunay wrote:
 
-The reason why I put SPI NOR name into mtd->name was because otherwise
-the `mtd list` command did not print that name anywhere (since it
-doesn't know how, because that SPI-NOR data are private for the
-jedec_spi_nor driver).
+> Simplify the bootm and the spl code by using the new config
+> CONFIG_SUPPORT_PASSING_ATAGS.
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
 
-Since
-- every mtd device has mtd->type, for NOR flash this is MTD_NORFLASH
-- we can iterate mtd devices in order they were registered
-  (mtd_for_each_device does this)
-we can easily implement a function
-  get_mtd_device_by_type_and_id()
-that, when given string "norN" will find the N-th mtd device of type
-MTD_NORFLASH.
+Applied to u-boot/next, thanks!
 
-This function could than be called from get_mtd_device_nm() if
-everything failed, or in some other way.
+--=20
+Tom
 
-Tom, Marek, Patrick, what do you think?
+--fL5uibfitsvsbG47
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Marek
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFOby0ACgkQFHw5/5Y0
+tyxKXAv/e8KmOOGhi3uHEplfdJaLyda9NrTMaJ7Kt+jJNbt6uUObrWBOMY21bVzs
+2gnLv39IRDtCHUcXEBp+DN3RAwX2CFGHlmi2yJE3H6cgEHvNpdSrxjR7ExsvR9rY
+fODBkFrIkcLyzP2cgr1AiM1pubHYrfrTTwSMvaAmCy6azxEZwCSSGdUXnvR3xWas
+i/gJc8zFUbXe2G3Ew307EkR+UoBtPa3M4MsLSfxe4cJE6JrwNaNyLeuqhEFXsjuv
+i5Gr3gJKsth7UuDSR/6gP/okhLbY7WAeEQU2aNEUbt3fD86Jxr+m2qQaXi48dWKT
+baf+2ic7NkSDPjR1KMc97/aVnaqe7K+pO/Jl9UEM8xgu1TyoyjhgIVOXEIrFEOmc
+eJEbUkuRUVFJTRJvfeJj30093CbQTQJuu7MOsSEpMgz5YzbuhWJ3oxPL811ZI00L
+skBcmKsEiKCYhTsARKs3Qevx1O0hPaMvTke/pg6GyBX3RhgbZZU/5ILAQSYLr+ua
+tcDqukzF
+=lA4+
+-----END PGP SIGNATURE-----
+
+--fL5uibfitsvsbG47--
+
+--===============7881724050040816559==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============7881724050040816559==--

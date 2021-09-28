@@ -2,65 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12E3C41B67E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Sep 2021 20:45:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8320641B680
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Sep 2021 20:45:21 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 62878C57B6F;
-	Tue, 28 Sep 2021 18:45:04 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
- [209.85.219.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AD61EC57B6F;
+	Tue, 28 Sep 2021 18:45:20 +0000 (UTC)
+Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
+ [209.85.160.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1388EC5719E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0C086C5719E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Sep 2021 18:45:02 +0000 (UTC)
-Received: by mail-qv1-f42.google.com with SMTP id jo30so14075813qvb.3
+ Tue, 28 Sep 2021 18:45:19 +0000 (UTC)
+Received: by mail-qt1-f173.google.com with SMTP id a13so20853838qtw.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Sep 2021 11:45:01 -0700 (PDT)
+ Tue, 28 Sep 2021 11:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to:user-agent;
- bh=6ypCrSmqHUbA2N/vhzdHHf9Tqi9GOxihYK+bmZNdWeY=;
- b=qVYUih8LYGX1N25YmIZezFuorhTACfqWeNbbkcBwOWBI5n6JvbruTZAm4id5k5SNyH
- PtI2k5DtdXO4NIGI0yn4RCzh43kX6LRjxzMKCG/JxiBwiAsgXz/6KiQZ0OwGMCtQst2L
- CVyPgbR8TQq5oZsArRnfiuGONPzgB6kPtlQ74=
+ bh=9sfA5aEaLqPEDqduiDaprCWpUXBQt9/SYQAwo0r8lRQ=;
+ b=cghghXXWypn+tS7mnrYhu9cS3uFF8D85fxk0HTCuy4nvpzcmAqAoNZS3GfnbCnK72I
+ X2CXKS0C8+lfJfab/izdAZECNEU61Rcpv/SplrPqPJO737W7O+cW1km4LK7dRUYcD1zz
+ PANs7Q5KVXBx+oQ/QYKTszzq4t/JqrI1oOZT8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to:user-agent;
- bh=6ypCrSmqHUbA2N/vhzdHHf9Tqi9GOxihYK+bmZNdWeY=;
- b=k0ILs1d9x2XVjpXbbwnhVVfCxObLKSYdS1emJS/2kvExeOnpBouL6/vUScQtRyI8ls
- eEsew66WYZvV/54nI9gq5FJHdWasIlnoO9cE8H+HnugAyfn6uculbD9DplJZzPLYH7A1
- GtaeOQEN5LTajJVKHICYQRj+aL+hoLuYbwzn0tcm4yOcD8nIRSNxQGJ9lJ+/l1zBxkZ+
- +LLpwTTtU7mF2MSozdi7ay98Sstl7+eq/mtnMtpQCqJ3KG1TqVtQAB8/PfUFnflSrDM5
- eudZF1q/BQncfjOhXQaCDuUlNX2gsTgONL73UsxFOc5S7lpA0ocWBMruqgiCzkbsDGK0
- BVXw==
-X-Gm-Message-State: AOAM533RE1DRGDjnRNITMfwrvA+IZxg2zb81jtBlWyEmBw8VzDx8kBl0
- PqdJXYkbvGSIm+ILOqUdgcHrNQ==
-X-Google-Smtp-Source: ABdhPJyfNBgOi2OHj90rqQcBx8HFw3+tfSbZ8x+9xT9aW40w7d2jSWJv+KFFzzMkcOqy2LssClivZw==
-X-Received: by 2002:a0c:b45a:: with SMTP id e26mr7368678qvf.59.1632854700356; 
- Tue, 28 Sep 2021 11:45:00 -0700 (PDT)
+ bh=9sfA5aEaLqPEDqduiDaprCWpUXBQt9/SYQAwo0r8lRQ=;
+ b=D8/2xy8IeoDCnegpc+UlHTMOUEpZZyj6hGjC5e868Ncaqq3sJPhmKmqrexYJpvc33f
+ PpuVwpr9NBHhaEWE74gKa17fQgUo4a1Tz78jqrTbsbKsOr6qI15rs+Avl2yk+/KI9HIL
+ GyIvsFQDKzeg7RtG8TixSU30iSMPi/KkKZn6i7JW0Pn9yFaO/WzaUGRWar356kdUeNyO
+ fH9CRKzwYfl9j4xtj4f9pUIGGI/vy3P/xHzPhTSgx1lQmo4jpinfmYLda94C3ChCwgqf
+ 2c7r2LRlylGoZMG6Cnopx7fjNwYusBgvzGvmrsiiJhZphidAc2PKZtlxE9IQ65NCS30X
+ M0OA==
+X-Gm-Message-State: AOAM531ya4Dn1I8Uo5FND7M1E0ua+k+Ue74bL+7td4VRBU0FHw3suYKo
+ IEjsRNZVFkUGlcDCSyeF6Pykfg==
+X-Google-Smtp-Source: ABdhPJxfJiqVRbqTtI4ikhl2YTpfPzQwAUAhymSzmZtBpoy3VGnPK3IHhqp44RXcXY8zzsjcUD/EzA==
+X-Received: by 2002:ac8:1090:: with SMTP id a16mr7345131qtj.297.1632854718062; 
+ Tue, 28 Sep 2021 11:45:18 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b01-cbda-c022-6242-d139-1392.res6.spectrum.com.
  [2603:6081:7b01:cbda:c022:6242:d139:1392])
- by smtp.gmail.com with ESMTPSA id w9sm7292647qki.80.2021.09.28.11.44.59
+ by smtp.gmail.com with ESMTPSA id s185sm8421959qke.93.2021.09.28.11.45.16
  (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 28 Sep 2021 11:44:59 -0700 (PDT)
-Date: Tue, 28 Sep 2021 14:44:57 -0400
+ Tue, 28 Sep 2021 11:45:17 -0700 (PDT)
+Date: Tue, 28 Sep 2021 14:45:15 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20210928184457.GT31748@bill-the-cat>
-References: <20210913142553.24333-1-patrice.chotard@foss.st.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20210928184515.GW31748@bill-the-cat>
+References: <20210922162909.1857566-1-patrick.delaunay@foss.st.com>
+ <20210922182841.v4.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20210913142553.24333-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20210922182841.v4.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
 User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Farhan Ali <farhan.ali@broadcom.com>
-Subject: Re: [Uboot-stm32] [PATCH] mtd: nand: raw: convert nand_dt_init() to
- ofnode_xx() interface
+Cc: Marek Vasut <marex@denx.de>,
+ Christophe KERELLO <christophe.kerello@foss.st.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, u-boot@lists.denx.de,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heiko Schocher <hs@denx.de>, Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH v4 1/2] mtd: cfi_flash: use
+ cfi_flash_num_flash_banks only when supported
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,66 +76,62 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============9201131965702862914=="
+Content-Type: multipart/mixed; boundary="===============0974629199339493756=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============9201131965702862914==
+--===============0974629199339493756==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="U3jK8g368jZ6I4TC"
+	protocol="application/pgp-signature"; boundary="MhDS85o8hQkNlKhq"
 Content-Disposition: inline
 
 
---U3jK8g368jZ6I4TC
+--MhDS85o8hQkNlKhq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 13, 2021 at 04:25:53PM +0200, Patrice Chotard wrote:
+On Wed, Sep 22, 2021 at 06:29:07PM +0200, Patrick Delaunay wrote:
 
-> nand_dt_init() is still using fdtdec_xx() interface.
-> If OF_LIVE flag is enabled, dt property can't be get anymore.
-> Updating all fdtdec_xx() interface to ofnode_xx() to solve this issue.
+> When CONFIG_SYS_MAX_FLASH_BANKS_DETECT is activated,
+> CONFIG_SYS_MAX_FLASH_BANKS is replaced by cfi_flash_num_flash_banks,
+> but this variable is defined in drivers/mtd/cfi_flash.c, which is
+> compiled only when CONFIG_FLASH_CFI_DRIVER is activated, in U-Boot
+> or in SPL when CONFIG_SPL_MTD_SUPPORT is activated.
 >=20
-> For doing this, node parameter type must be ofnode.
+> This patch deactivates this feature CONFIG_SYS_MAX_FLASH_BANKS_DETECT
+> when flash cfi driver is not activated to avoid compilation issue in
+> the next patch, when CONFIG_SYS_MAX_FLASH_BANKS is used in spi_nor_scan().
 >=20
-> First idea was to convert "node" parameter to ofnode type inside
-> nand_dt_init() using offset_to_ofnode(node). But offset_to_ofnode()
-> is not bijective, in case OF_LIVE flag is enabled, it performs an assert(=
-).
->=20
-> So, this leads to update nand_chip struct flash_node field from int to
-> ofnode and to update all nand_dt_init() callers.
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---U3jK8g368jZ6I4TC
+--MhDS85o8hQkNlKhq
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFTYqIACgkQFHw5/5Y0
-tywsuQv+PoLh02oZqiH8LyWNdKsqUuy22gmr00UXCqPLGxnhlawuxCy8xILMj0Lt
-trkZ6ih2wgoDzWoBeOeRD01b4fY6mg8B9ULUimOW2CafcJFx7us4A2SDXvccUeqo
-W2lI5xt6I+Bh43TYg9LXZ3bFLlVDuGmpN6NQmHWNnuj5zbOqtOt7WsgSCBG4qD25
-QApam9757JoDl6rUtSttM/NK3oqa5mXrzmEfW42bsHyA2PwWJpktZShrox/vcG0Y
-dGMIc3TNq9f7TdvQUex+aNkP2P6ChSUh40FHRlrbeoxSzS1bE+IdFVpI0jnYaAvw
-HpbRJRbHuqVEFdpStyel8W349d8yUJ3VoKOutK9GIdqRJhRrLcpnRVnVvRicuglL
-BNtXPmrUYQKosy3baPPVimNBy6e+gCNwtvVrrZI1rKrPTvMoc8cWBuMLj6uekjl+
-2GoagfWGk2O86HEcgES5eka+KNP4+vX3tDcKhdgUOqKw9sz5TUFoVxfKV44kb8Fq
-JbTpa/My
-=QeUK
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFTYrsACgkQFHw5/5Y0
+tyxs5Qv+Ps2vswliBe5on4gI/RecCQ4MEiMrj+bbpO0BiSSqyQTgPXHV2rkPnXMy
+bErvuq8QHSqbOEBujD54/il93uG1Y0S6tEOcevDaFeADvp8hl4SR1aP/sdB/3/EA
+vCSd770hcttO5kT0FAHIaXcd+X+hR5QD3txcuaXzZel1ff3pWTHgY+s8jNc9XMpm
+AsifE5ZhtApR9pdY4F+xB4n0zoj5JJzftllYQ9haa3ULJXzSKumQdFUGypSvUA1X
+wrlXeK7ih+CPG5wJNLkwp+JVmrHWz7hLWmoRt8pcDr9QupIAqpFyOKVxI3Nl7sXl
+/KxL6RgbIMpctMJajH4EBd40O7CZ+TrurcH2ZqL1+V85ughCICh6Q76z4045zjbK
+pmOz7p9m+Rv2mhBHluu2U+pKzPllHQgF08fFg5eFQmiHO5g/EiDkUzxzE0FXYTUk
+wBadiO/8G//KkSTNf9giuqCaVajSYWZtwF5BCU9iA3nfXMBdgBpLQ+keG9Vo3/Wd
+f3MoBCw1
+=2qDz
 -----END PGP SIGNATURE-----
 
---U3jK8g368jZ6I4TC--
+--MhDS85o8hQkNlKhq--
 
---===============9201131965702862914==
+--===============0974629199339493756==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -142,4 +142,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============9201131965702862914==--
+--===============0974629199339493756==--

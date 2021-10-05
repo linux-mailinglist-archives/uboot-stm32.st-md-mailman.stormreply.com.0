@@ -2,65 +2,79 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EACA7421F40
-	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Oct 2021 09:08:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07832423323
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Oct 2021 00:01:49 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8EDA1C5AB7E;
-	Tue,  5 Oct 2021 07:08:24 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8B53DC5AB7C;
+	Tue,  5 Oct 2021 22:01:48 +0000 (UTC)
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+ [209.85.160.170])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E8F73C5AB7B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 80136C5AB64
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  5 Oct 2021 07:08:22 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1956dwPf032451; 
- Tue, 5 Oct 2021 09:08:12 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=0asxng0OTwRxJFyQ8dYu+2adywiWmeiceuoeXuZAq6s=;
- b=73YrlK83cwaxWNgj4vE33ddBCA95PrwCGLPRegcvQ4YTM8je8Fzyj3MFVyq5bO2TRIWk
- lmpcNUGmFgsMSD7qc4wxyxvay9i9xqnW6XMVSsNrEQjRgmCiisYas1L24bul3gG56oZ+
- 1dlPbZabjBnYnesIBfpMuqkhxAtIY1k9v/n2fttZLyg0vZtW0VJicp080SIGXfwJvgjb
- lsK9zel9BGVPgbOOuuImb44/g3VD39DKxuDQQmiPwwhrGobWXwH7U5/9VqlRdT7zcfIQ
- JxaDqU25wKo1R7u/+jfPT9cJUaR8tnbFyzsjNyN13B3PQ1KzViEHyAEe1FVz6RV7N1P6 vA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bg8kdth35-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 05 Oct 2021 09:08:12 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2F8B0100034;
- Tue,  5 Oct 2021 09:08:11 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D18DC21D387;
- Tue,  5 Oct 2021 09:08:11 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.47) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 5 Oct
- 2021 09:08:10 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20211004110532.1.I006395ca4c0d4d1a24dac3794ac25b42ab326f9e@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <f1eb2244-9e7d-0996-fff8-ae0bf231d267@foss.st.com>
-Date: Tue, 5 Oct 2021 09:08:11 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ Tue,  5 Oct 2021 22:01:46 +0000 (UTC)
+Received: by mail-qt1-f170.google.com with SMTP id a20so613307qtp.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 05 Oct 2021 15:01:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=cRUQXYVBmZ4MmOuLFIri8yQX3NL9BL9G5Blbki/1+iQ=;
+ b=EdiPQJYam1wcjpBDpyIb2AXLCjqt3ivuBgEPdI9E/4K3F378mPfER4Q8MXIYbAwHg2
+ VQc3BJ29twmAuSvuOUdOY38NoUMqC7CuZFXQJSG7NqNqJuP9T87gWF9ff4lVD2cZwV07
+ lSWbXJ7cAUpdRd1sI1XZgeqWWs/SYRLG6mwm4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=cRUQXYVBmZ4MmOuLFIri8yQX3NL9BL9G5Blbki/1+iQ=;
+ b=1R6Rsbgf/BK1S0a8GSsTgbuG0cHFmuW2KuRkCFTCp3q3mYZmj54RAW9IvV0sq6twv4
+ RIlFJrVs2sug1gidkskkkHiVqJ1xs2DSSssVWr7lNGf7OZGTT5tnrBhB81GyN2goxXjz
+ Kmr6pjoG7yLyf6tLt9hKeqcObicEsyvzYTJhV3Hy2cQCI7IJmlafDVncAbdMv2Sr7wAD
+ mp1VnU/SC1+TSqbNZI17nLiX2bIvmpV4+1M4xLjuqZq42WOs4zdXdXZpfnIcpAytwEY7
+ Bq9yLbkPjvMMcIBnr6Biu3Uaboll3FGMgoJQbslotavS0C78hDDnWmfJixUClB2qgE6d
+ gPIw==
+X-Gm-Message-State: AOAM533sdmdTtXVYCst9ZvErTImLqah3fV3r85VexOyBkYd+Wu1PtXnW
+ NM9wOraM1xRP5kBxwZaoZOPHtw==
+X-Google-Smtp-Source: ABdhPJzj/WapWFrwqLpDxVfOSg8KmA+ar7D0cp76xLKQpVE36DyOKvN13eCJLFLTuOe4Nz2Em+G3dg==
+X-Received: by 2002:ac8:7458:: with SMTP id h24mr4705853qtr.355.1633471305405; 
+ Tue, 05 Oct 2021 15:01:45 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-acff-2c31-c6db-812f.res6.spectrum.com.
+ [2603:6081:7b01:cbda:acff:2c31:c6db:812f])
+ by smtp.gmail.com with ESMTPSA id p190sm10085859qkf.15.2021.10.05.15.01.43
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 05 Oct 2021 15:01:44 -0700 (PDT)
+Date: Tue, 5 Oct 2021 18:01:41 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20211005220141.GA31748@bill-the-cat>
+References: <20210902115512.1.I1c6536da7609f8240549cccae2708e075dc9fcf3@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20211004110532.1.I006395ca4c0d4d1a24dac3794ac25b42ab326f9e@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-10-04_05,2021-10-04_01,2020-04-07_01
-Cc: Bin Meng <bmeng.cn@gmail.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
- Stefan Roese <sr@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] Convert CONFIG_STM32_FLASH to Kconfig
+In-Reply-To: <20210902115512.1.I1c6536da7609f8240549cccae2708e075dc9fcf3@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <royger@FreeBSD.org>,
+ Kever Yang <kever.yang@rock-chips.com>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, Stefan Roese <sr@denx.de>,
+ Samuel Holland <samuel@sholland.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ "Alex G ." <mr.nuke.me@gmail.com>,
+ Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Tero Kristo <t-kristo@ti.com>,
+ Michael Walle <michael@walle.cc>, Ovidiu Panait <ovidiu.panait@windriver.com>,
+ etienne.carriere@linaro.org, Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] lib: optee: remove the duplicate
+	CONFIG_OPTEE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,175 +86,84 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============2483833030848354677=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 10/4/21 11:05 AM, Patrick Delaunay wrote:
-> This converts the CONFIG_STM32_FLASH to Kconfig by using
-> tools/moveconfig.py
-> 
+--===============2483833030848354677==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="KfXI8UIjd/jaDaxZ"
+Content-Disposition: inline
+
+
+--KfXI8UIjd/jaDaxZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Sep 02, 2021 at 11:56:16AM +0200, Patrick Delaunay wrote:
+
+> The configuration CONFIG_OPTEE is defined 2 times:
+> 1- in lib/optee/Kconfig for support of OPTEE images loaded by bootm comma=
+nd
+> 2- in drivers/tee/optee/Kconfig for support of OP-TEE driver.
+>=20
+> It is abnormal to have the same CONFIG define for 2 purpose;
+> and it is difficult to managed correctly their dependencies.
+>=20
+> Moreover CONFIG_SPL_OPTEE is defined in common/spl/Kconfig
+> to manage OPTEE image load in SPL.
+>=20
+> This definition causes an issue with the macro CONFIG_IS_ENABLED(OPTEE)
+> to test the availability of the OP-TEE driver.
+>=20
+> This patch cleans the configuration dependency with:
+> - CONFIG_OPTEE_IMAGE (renamed) =3D> support of OP-TEE image in U-Boot
+> - CONFIG_SPL_OPTEE_IMAGE (renamed) =3D> support of OP-TEE image in SPL
+> - CONFIG_OPTEE (same) =3D> support of OP-TEE driver in U-Boot
+> - CONFIG_OPTEE_LIB (new) =3D> support of OP-TEE library
+>=20
+> After this patch, the macro have the correct behavior:
+> - CONFIG_IS_ENABLED(OPTEE_IMAGE) =3D> Load of OP-TEE image is supported
+> - CONFIG_IS_ENABLED(OPTEE) =3D> OP-TEE driver is supported
+>=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  configs/stm32f429-discovery_defconfig  | 1 +
->  configs/stm32f429-evaluation_defconfig | 1 +
->  configs/stm32f469-discovery_defconfig  | 1 +
->  configs/stm32f746-disco_defconfig      | 1 +
->  configs/stm32f769-disco_defconfig      | 1 +
->  drivers/mtd/Kconfig                    | 7 +++++++
->  include/configs/stm32f429-discovery.h  | 2 --
->  include/configs/stm32f429-evaluation.h | 2 --
->  include/configs/stm32f469-discovery.h  | 2 --
->  include/configs/stm32f746-disco.h      | 2 --
->  scripts/config_whitelist.txt           | 1 -
->  11 files changed, 12 insertions(+), 9 deletions(-)
-> 
-> diff --git a/configs/stm32f429-discovery_defconfig b/configs/stm32f429-discovery_defconfig
-> index b6388cf00a..ed96c370d5 100644
-> --- a/configs/stm32f429-discovery_defconfig
-> +++ b/configs/stm32f429-discovery_defconfig
-> @@ -28,3 +28,4 @@ CONFIG_ENV_ADDR=0x8040000
->  # CONFIG_NET is not set
->  # CONFIG_MMC is not set
->  CONFIG_MTD_NOR_FLASH=y
-> +CONFIG_STM32_FLASH=y
-> diff --git a/configs/stm32f429-evaluation_defconfig b/configs/stm32f429-evaluation_defconfig
-> index a75c269d9b..9cbd56c41e 100644
-> --- a/configs/stm32f429-evaluation_defconfig
-> +++ b/configs/stm32f429-evaluation_defconfig
-> @@ -28,3 +28,4 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->  # CONFIG_NET is not set
->  CONFIG_ARM_PL180_MMCI=y
->  CONFIG_MTD_NOR_FLASH=y
-> +CONFIG_STM32_FLASH=y
-> diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
-> index ecca110850..85639e2a48 100644
-> --- a/configs/stm32f469-discovery_defconfig
-> +++ b/configs/stm32f469-discovery_defconfig
-> @@ -30,6 +30,7 @@ CONFIG_ARM_PL180_MMCI=y
->  CONFIG_MTD=y
->  CONFIG_DM_MTD=y
->  CONFIG_MTD_NOR_FLASH=y
-> +CONFIG_STM32_FLASH=y
->  CONFIG_DM_SPI_FLASH=y
->  CONFIG_SPI_FLASH_STMICRO=y
->  # CONFIG_PINCTRL_FULL is not set
-> diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
-> index 2694a32f7d..e5e7ef798c 100644
-> --- a/configs/stm32f746-disco_defconfig
-> +++ b/configs/stm32f746-disco_defconfig
-> @@ -45,6 +45,7 @@ CONFIG_ARM_PL180_MMCI=y
->  CONFIG_MTD=y
->  CONFIG_DM_MTD=y
->  CONFIG_MTD_NOR_FLASH=y
-> +CONFIG_STM32_FLASH=y
->  CONFIG_DM_SPI_FLASH=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_STMICRO=y
-> diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
-> index 10af638840..bb122d691d 100644
-> --- a/configs/stm32f769-disco_defconfig
-> +++ b/configs/stm32f769-disco_defconfig
-> @@ -44,6 +44,7 @@ CONFIG_ARM_PL180_MMCI=y
->  CONFIG_MTD=y
->  CONFIG_DM_MTD=y
->  CONFIG_MTD_NOR_FLASH=y
-> +CONFIG_STM32_FLASH=y
->  CONFIG_DM_SPI_FLASH=y
->  CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_STMICRO=y
-> diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
-> index b303fabe0f..ed69ea114e 100644
-> --- a/drivers/mtd/Kconfig
-> +++ b/drivers/mtd/Kconfig
-> @@ -109,6 +109,13 @@ config HBMC_AM654
->  	 This is the driver for HyperBus controller on TI's AM65x and
->  	 other SoCs
->  
-> +config STM32_FLASH
-> +	bool "STM32 MCU Flash driver"
-> +	depends on ARCH_STM32
-> +	help
-> +	 This is the driver of embedded flash for some STMicroelectronics
-> +	 STM32 MCU.
-> +
->  source "drivers/mtd/nand/Kconfig"
->  
->  source "drivers/mtd/spi/Kconfig"
-> diff --git a/include/configs/stm32f429-discovery.h b/include/configs/stm32f429-discovery.h
-> index 525a5277d8..ef9525574d 100644
-> --- a/include/configs/stm32f429-discovery.h
-> +++ b/include/configs/stm32f429-discovery.h
-> @@ -21,8 +21,6 @@
->  #define CONFIG_RED_LED			110
->  #define CONFIG_GREEN_LED		109
->  
-> -#define CONFIG_STM32_FLASH
-> -
->  #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
->  
->  #define CONFIG_SYS_CBSIZE		1024
-> diff --git a/include/configs/stm32f429-evaluation.h b/include/configs/stm32f429-evaluation.h
-> index 609b4c2c3b..c490e2d98b 100644
-> --- a/include/configs/stm32f429-evaluation.h
-> +++ b/include/configs/stm32f429-evaluation.h
-> @@ -23,8 +23,6 @@
->  #define CONFIG_SYS_MAX_FLASH_SECT	12
->  #define CONFIG_SYS_MAX_FLASH_BANKS	2
->  
-> -#define CONFIG_STM32_FLASH
-> -
->  #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
->  
->  #define CONFIG_SYS_CBSIZE		1024
-> diff --git a/include/configs/stm32f469-discovery.h b/include/configs/stm32f469-discovery.h
-> index a8f6fbf9cf..246dc1f9c6 100644
-> --- a/include/configs/stm32f469-discovery.h
-> +++ b/include/configs/stm32f469-discovery.h
-> @@ -23,8 +23,6 @@
->  #define CONFIG_SYS_MAX_FLASH_SECT	12
->  #define CONFIG_SYS_MAX_FLASH_BANKS	2
->  
-> -#define CONFIG_STM32_FLASH
-> -
->  #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
->  
->  #define CONFIG_SYS_CBSIZE		1024
-> diff --git a/include/configs/stm32f746-disco.h b/include/configs/stm32f746-disco.h
-> index c76d290a57..493699e950 100644
-> --- a/include/configs/stm32f746-disco.h
-> +++ b/include/configs/stm32f746-disco.h
-> @@ -22,8 +22,6 @@
->  #define CONFIG_SYS_MAX_FLASH_SECT	8
->  #define CONFIG_SYS_MAX_FLASH_BANKS	1
->  
-> -#define CONFIG_STM32_FLASH
-> -
->  #define CONFIG_DW_GMAC_DEFAULT_DMA_PBL	(8)
->  #define CONFIG_DW_ALTDESCRIPTOR
->  
-> diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
-> index 61ae682dcd..e1e9d65e84 100644
-> --- a/scripts/config_whitelist.txt
-> +++ b/scripts/config_whitelist.txt
-> @@ -1302,7 +1302,6 @@ CONFIG_STACKBASE
->  CONFIG_STANDALONE_LOAD_ADDR
->  CONFIG_STATIC_BOARD_REV
->  CONFIG_STD_DEVICES_SETTINGS
-> -CONFIG_STM32_FLASH
->  CONFIG_STV0991
->  CONFIG_STV0991_HZ
->  CONFIG_STV0991_HZ_CLOCK
-> 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Thanks
-Patrice
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--KfXI8UIjd/jaDaxZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFcy0IACgkQFHw5/5Y0
+tywRLgv/W5yOzO6cebcBAc0BETufmNQv3z4jMpPxJrmsrsrsC+ipQMJsiaGY9iyW
++S1D850Tn28fOgQ6uFWj8XLOgbQF7CtPskGBX2fzBCKl6VOg1zdl1E0GAgRpiEMU
+lyNh/D/Mgv7jg1DeAqXuv4FDNKM4kR8kFvO0ym4/ySRDtesHypEFLTcp1rV3AFOq
+E141QbMwRBxFAHv29Ox9dVJuShS+F9F8DOJmeC8vz9nzmBM49eco4/8sxsIU8fH+
+BDZQ64nsItJ+GRV0uXyM6GtQz+zCvtY4VOyNfDIik7YCozX/Our/A1XyVHRVSgne
+xxnwF8FOcftaoZAqirHvwzz25lE0/PU40kSI+RGdvH8i5OeR/GCdVC+3HjQWdxsd
+3tmn7zSbQzr0XGzit4y47aMCI7Vvue+s9yOkfDgFZR6FtXpHd8y6+PwRRxXhXrF6
+fTUH15jxjYnVULx2rj3nixH5Fqzr54IJ4SdKSfpGtIarMbdzhi5lFzr9I69YqD93
+b02/6o4Q
+=2xdk
+-----END PGP SIGNATURE-----
+
+--KfXI8UIjd/jaDaxZ--
+
+--===============2483833030848354677==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============2483833030848354677==--

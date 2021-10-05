@@ -2,64 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A278542123C
-	for <lists+uboot-stm32@lfdr.de>; Mon,  4 Oct 2021 17:05:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54EE7421F35
+	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Oct 2021 09:02:21 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4E957C5AB74;
-	Mon,  4 Oct 2021 15:05:01 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CC1BDC5AB7C;
+	Tue,  5 Oct 2021 07:02:20 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60850C5AB73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C8BBFC5AB74
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  4 Oct 2021 15:04:58 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19493RZv008940; 
- Mon, 4 Oct 2021 17:04:57 +0200
+ Tue,  5 Oct 2021 07:02:17 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19567wqQ015249; 
+ Tue, 5 Oct 2021 09:01:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=ISdm+ee0HhUesFTVY2jgLgXDcmbp1PeVpYpfW/3+ElE=;
- b=NAgXqQdWGnPopu0vN+OUNMNmf8K3xNZ0hB2BIiAIRLTOgZKFVxCvI6nmGMe635gxl2HQ
- oEmV1mMosk3X1O+lnXQtGNTJCJDdrxDCPrxjK5y2zq5iftXYFpl/zDNCQHiy5l9c8XFk
- lA+/bfYPMEq9uPf7bAXtYUiyBcWcJLvHIQlGpaAP2WuX/rHr/f3i1oxdCLIgnJWzxpav
- 2GI1OV0ARd0YiPqs/2PHDVzWGB0l4xXdD92LgPmHT04zqrorPVZVwmDN0st2xvkZJuNK
- GjM5ogJgVEon93L0j2SOBExTt9zfzF2ocY2q7ml6omhkb2F6Yg2xXq+6xQOlw9SZFrdg Yg== 
+ bh=HA1J7rwZ7XJMhNW3RNfEnoYhi/5JjTJChxpoki6zqnk=;
+ b=ZFklmNOiHYiwpOciq+8VWp/9P2ocLh/szZ6ZvVa/MfKnhQ3dXwazkPDAJLCmbOWrPlsp
+ 8z6SkcIBz6kS41tzjH1gQ8d+huKxp5RoTwWoIvVRy638novviVFCDrGZtozxqulyU6NO
+ GhewutPOLhkcZWa7RAtXbBtCn7S8+5p11pUmp2vycqncESMQ1iPKtI6D+cMO5HNIc08+
+ bXkTr7WX7uWwUhUwxuohHwnqf1q76kridgfy0C/j1qhmYhF6fjnyY1nE92pkTBAI98Vx
+ HzQwZ+rKn8CunWz/FX6RHjzfjQRst6H8FDW6dggIjOtO6rkbkBfgrkLUnbJeJRqjyuSb Iw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bfxn79r6n-1
+ by mx07-00178001.pphosted.com with ESMTP id 3bg6bu2r11-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 04 Oct 2021 17:04:57 +0200
+ Tue, 05 Oct 2021 09:01:58 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DB7DB10002A;
- Mon,  4 Oct 2021 17:04:55 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 76CFB100034;
+ Tue,  5 Oct 2021 09:01:56 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CE4A0227F7B;
- Mon,  4 Oct 2021 17:04:55 +0200 (CEST)
-Received: from lmecxl0994.lme.st.com (10.75.127.48) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Mon, 4 Oct
- 2021 17:04:54 +0200
-To: Alexandru Gagniuc <mr.nuke.me@gmail.com>, <u-boot@lists.denx.de>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20210907235933.2798330-1-mr.nuke.me@gmail.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <3f81151b-1e09-2e6e-6519-505974d43155@foss.st.com>
-Date: Mon, 4 Oct 2021 17:04:54 +0200
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2DD5621CA8F;
+ Tue,  5 Oct 2021 09:01:56 +0200 (CEST)
+Received: from lmecxl0573.lme.st.com (10.75.127.45) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 5 Oct
+ 2021 09:01:55 +0200
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20211004112322.1.Ibee20141b9082ea184cc316944070e647a60fc92@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <bd94b9b2-987b-420f-dc77-e1d85d2da0fa@foss.st.com>
+Date: Tue, 5 Oct 2021 09:01:55 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.13.0
 MIME-Version: 1.0
-In-Reply-To: <20210907235933.2798330-1-mr.nuke.me@gmail.com>
+In-Reply-To: <20211004112322.1.Ibee20141b9082ea184cc316944070e647a60fc92@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-10-04_04,2021-10-04_01,2020-04-07_01
-Cc: etienne.carriere@linaro.org
-Subject: Re: [Uboot-stm32] [PATCH v2 00/11] stm32mp1: Support falcon mode
- with OP-TEE payloads
+ definitions=2021-10-04_05,2021-10-04_01,2020-04-07_01
+Cc: Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@toradex.com>,
+ Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Rick Chen <rick@andestech.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Ian Ray <ian.ray@ge.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Aswath Govindraju <a-govindraju@ti.com>, Sean Anderson <seanga2@gmail.com>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: Re: [Uboot-stm32] [PATCH] configs: Move some usb config in defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,150 +77,157 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgQWxleGFuZHJ1CgpPbiA5LzgvMjEgMTo1OSBBTSwgQWxleGFuZHJ1IEdhZ25pdWMgd3JvdGU6
-Cj4gTXkgZ29hbCB3aGVuIEkgc3RhcnRlZCBvbiB0aGlzIHByb2plY3QgYSB5ZWFyIGFnbyB3YXMg
-dG8gZ2V0IHRvIGxpbnV4Cj4gdXNlcnNwYWNlIHdpdGhpbiBhIHNlY29uZCBmcm9tIHBvd2VyIG9u
-LiBPaCwgYW5kIGl0IGhhZCB0byBiZSBzZWN1cmUhCj4gQ29udHJhc3QgdGhhdCB0byB0aGUgdHdv
-IG1pbnV0ZXMgaXQgdG9vayB0aGUgU1RMaW51eCBkZW1vIHRvIGNvbWUgdXAuCj4KPiBJdCB3YXMg
-b2J2aW91cyB0aGF0IHRoZSBhY2NlcHRlZCB3YXkgb2YgcnVubmluZyBhbiBGU0JMLCB0aGVuIFNT
-Qkwgd2FzCj4gZ29pbmcgdG8gYmxvdyB0aGUgdGltZSBidWRnZXQuIFRoZXJlIHJlYWxseSB3YXNu
-J3QgYSBnb29kIHNvbHV0aW9uLAo+IGFuZCB0cmFkaXRpb25hbCBmYWxjb24gbW9kZSB3aXRoICJz
-cGwgZXhwb3J0IiBjb21tYW5kIHdhcyBub3Qgc2VjdXJlLgo+Cj4gSSBjaG9zZSB0byB1c2UgU1BM
-IHdpdGggYSBGSVQgcGF5bG9hZC4gV2UgaGF2ZSB0byBhZGQgY2VydGFpbiBsb2dpYyB0bwo+IFNQ
-TCwgYXMgd2VsbCBhcyBzb21lIEZEVCBtb2RpZmljYXRpb25zIHRoYXQgd291bGQgYmUgbm9ybWFs
-bHkgZG9uZSBpbgo+IHUtYm9vdC4gVGhlIGJvb3QgZmxvdyBpcwo+Cj4gCVNQTCAtPiBPUC1URUUg
-LT4gTGludXgKPgo+Cj4gT25lIG9mIHRoZSBtYWpvciBjb21wbGFpbnRzIG9mIHYxIHdhcyB0aGF0
-IHdlIHNob3VsZG4ndCBiZSBwYXRjaGluZwo+IHRoZSBkZXZpY2V0cmVlIHdpdGggb3B0ZWUgbm9k
-ZXMgaW4gU1BMLiBJbnN0ZWFkLCB3ZSBzaG91bGQgbGV0IE9QLVRFRQo+IGFkZCB0aGUgcmVxdWly
-ZWQgbm9kZXMuIEkgdHJpZWQgaXQsIGZvdW5kIGEgaHVnZSBib290IHRpbWUgcGVuYWx0eSwKPiBh
-bmQgZGVjaWRlZCBhZ2FpbnN0IGl0Lgo+Cj4gQW5vdGhlciBpc3N1ZSBmcm9tIHYxIHRoYXQgSSB3
-YXMgdW5hYmxlIHRvIGFkZHJlc3MgaXMgdGhlIE1BQyBhZGRyZXNzLgo+IEl0IHdhcyBzdWdnZXN0
-ZWQgdG8gdXNlIHRoZSAibnZtZW0tY2VsbHMiIEZEVCBwcm9wZXJ0eSB0byB0ZWxsIGxpbnV4Cj4g
-d2hlcmUgaW4gdGhlIE9UUCB0byByZWFkIHRoZSBNQUMuIEJlY2F1c2Ugb2YgdGhlIHdheSB0aGUg
-bGludXggQlNFQwo+IGRyaXZlciBpcyB3cml0dGVuLCB0aGlzIHdvdWxkIG9ubHkgd29yayB3aXRo
-IFRGLUEsIGJ1dCBmYWlscyB3aXRoIFNQTC4KPgo+IFRoZXJlIGlzIGFsc28gdGhlIGlzc3VlIG9m
-IGhvdyB0byBtYWtlIHRoZSBvcHRlZS8gbGlicmFyeSBhdmFpbGFibGUgdG8KPiBTUEwuIFBhdHJp
-Y2sgaGFzIGEgY291cGxlIG9mIHBhdGNoZXMgdXAgcmVnYXJkaW5nIHRoZSBpc3N1ZSwgc28gSSBo
-YXZlCj4gbm90IHRvdWNoZWQgaXQgaW4gdGhpcyBzZXJpZXMuCj4KPgo+IENoYW5nZXMgc2luY2Ug
-djE6Cj4gICAgICAtIE1vdmUgU1lTX01NQ1NEX1JBV19NT0RFX0tFUk5FTF9TRUNUT1IgdG8gS2Nv
-bmZpZyBpbnN0ZWFkIG9mIHN0bTMybXAxLmgKPiAgICAgIC0gQ3JlYXRlIGEgbmV3IGRlZmNvbmZp
-ZyBmb3IgU1RNMzJNUCBpbiBmYWxjb24gbW9kZQo+ICAgICAgLSBSZXdvcmsgYm9hcmRfZml0X2Nv
-bmZpZ19uYW1lX21hdGNoKCkgcGVyIFBhdHJpY2sncyBzdWdnZXN0aW9ucwo+ICAgICAgLSBVc2Ug
-InUtYm9vdCxmYWxjb24tZ3Bpb3MiIGluc3RlYWQgb2YgInN0LGZhc3Rib290LWdwaW9zIgo+ICAg
-ICAgLSBPbmx5IHVwZGF0ZSBzaGFkb3cgcmVnaXN0ZXJzIGluIFNQTCBmb3IgQlNFQyAucHJvYmUo
-KQo+Cj4gQWxleGFuZHJ1IEdhZ25pdWMgKDExKToKPiAgICBzcGw6IE1vdmUgU1lTX01NQ1NEX1JB
-V19NT0RFX0tFUk5FTF9TRUNUT1IgdG8gS2NvbmZpZwoKPT4gT0sKCj4gICAgc3RtMzJtcDE6IEFk
-ZCBzdXBwb3J0IGZvciBiYXVkcmF0ZXMgaGlnaGVyIHRoYW4gMTE1MjAwCj0+IE9LCj4gICAgc3Rt
-MzJtcDE6IEFkZCBzdXBwb3J0IGZvciBmYWxjb24gbW9kZSBib290IGZyb20gU0QgY2FyZAoKCj0+
-IHNvbWUgcmVtYXJrcwoKCj4gICAgYm9hcmQ6IHN0bTMybXAxOiAgSW1wbGVtZW50IGJvYXJkX2Zp
-dF9jb25maWdfbmFtZV9tYXRjaCgpIGZvciBTUEwKPT4gT0sKCgpGb3IgdGhlIG5leHQgY29tbWl0
-IG9mIHRoZSBzZXJpZS4uLi4KCgpJIGFtIG5vdCBhIHNwZWNpYWxpc3Qgb2YgZmFsY29uIG1vZGUg
-YnV0IEkgdGhpbmsgYWxsIHRoZSBuZXh0IGNvbW1pdCAKc2hvdWxkIGJlIHJlbW92ZWQgaWYgdGhl
-IGZhbGNvbiBtb2RlIGlzIGNvcnJlY3RseSBtYW5hZ2VkCgoKc2VlIHRoZSBjb21tYW5kICJzcGwg
-ZXhwb3J0IiBpbiBkb2MvUkVBRE1FLmZhbGNvbgoKYXJjaC9hcm0vY3B1L2FybXY4L2ZzbC1sYXll
-cnNjYXBlL2RvYy9SRUFETUUuZmFsY29uOjE5OgoKCj0+IHRoZSBmaXh1cCBpcyBkb25lIG9uZSB0
-aW1lIGFuZCBzYXZlZCBpbiBVLUJvb3QgcHJvcGVyIChmaXJzdCBib290ID8pIApiZWZvcmUgdG8g
-YWN0aXZhdGUgdGhlIEZhbGNvbiBtb2RlCgpzZWUgYWxzbyBDT05GSUdfU1lTX1NQTF9BUkdTX0FE
-RFIgdXNhZ2UgaW4gbHMxMDQzYQoKYW5kIGluIDoKCnZvaWQgYm9hcmRfaW5pdF9yKGdkX3QgKmR1
-bW15MSwgdWxvbmcgZHVtbXkyKQp7CgouLi4uCgpjYXNlIElIX09TX0xJTlVYOgpkZWJ1ZygiSnVt
-cGluZyB0byBMaW51eFxuIik7CiNpZmRlZmluZWQoQ09ORklHX1NZU19TUExfQVJHU19BRERSKQpz
-cGxfZml4dXBfZmR0KCh2b2lkKilDT05GSUdfU1lTX1NQTF9BUkdTX0FERFIpOwojZW5kaWYKCgo9
-Pmp1bXBfdG9faW1hZ2VfbGludXggdXNlIHRoZSBhZGRyZXNzIHNwbF9pbWFnZS0+YXJnID0gCkNP
-TkZJR19TWVNfU1BMX0FSR1NfQUREUgoKRm9yIG1lIFUtYm9vdCBtdXN0IHNhdmVkIHRoZSBkZXZp
-Y2UgdHJlZSBnZXQgZnJvbSBGSVQgd2l0aCB0aGUgbmVlZGVkIApmaXh1cCBpbgpDT05GSUdfU1lT
-X01NQ1NEX1JBV19NT0RFX0FSR1NfU0VDVE9SIC4uIApDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RF
-X0FSR1NfU0VDVE9SUwoKPT4gbG9hZGVkIGJ5IFNQTCBpbiBDT05GSUdfU1lTX1NQTF9BUkdTX0FE
-RFIgaW4gbW1jX2xvYWRfaW1hZ2VfcmF3X29zKCkKCiDCoMKgwqDCoMKgIGFuZCB0aGlzIEZEVCBp
-cyB1c2VkIHRvIHN0YXJ0IExpbnV4IGluIGZhbHNjb24gbW9kZSB3aXRoIApzcGxfaW1hZ2UuYXJn
-IChhdCBsZWFzdCB3aGVuIE9QLVRFRSBpcyBub3QgcHJlc2VudCkKCgpJIGFtIHdvcmtpbmcgb2Yg
-c3Vwb3J0IG9uIGFsbCBteSB3b3JraW5nIGJyYW5jaCAoV0lQKQoKaHR0cHM6Ly9naXRodWIuY29t
-L3UtYm9vdC91LWJvb3QvY29tcGFyZS9tYXN0ZXIuLi5wYXRyaWNrZGVsYXVuYXk6c3BsX29wdGVl
-X1cyMTQwCgoKPiAgICBmZHRfc3VwcG9ydDogSW1wbGVtZW50IGZkdF9ldGhlcm5ldF9zZXRfbWFj
-YWRkcigpCj4gICAgYXJtOiBzdG0zMm1wOiBic2VjOiBVcGRhdGUgT1RQIHNoYWRvdyByZWdpc3Rl
-cnMgaW4gU1BMCj4gICAgYXJtOiBzdG0zMm1wOiBGYWN0b3Igb3V0IHJlYWRpbmcgTUFDIGFkZHJl
-c3MgZnJvbSBPVFAKPiAgICBzdG0zMm1wMTogc3BsOiBDb25maWd1cmUgTUFDIGFkZHJlc3Mgd2hl
-biBib290aW5nIE9QLVRFRQo+ICAgIGxpYjogTWFrZWZpbGU6IE1ha2Ugb3B0ZWUgbGlicmFyeSBh
-dmFpbGFibGUgaW4gU1BMCj4gICAgQVJNOiBkdHM6IHN0bTMybXA6IEFkZCBPUC1URUUgIi9maXJt
-d2FyZSIgbm9kZSB0byBTUEwgZHRiCj4gICAgc3RtMzJtcDE6IHNwbDogQ29weSBvcHRlZSBub2Rl
-cyB0byB0YXJnZXQgRkRUIGZvciBPUC1URUUgcGF5bG9hZHMKPgo+ICAgUkVBRE1FICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA0IC0KPiAgIGFyY2gvYXJtL2R0cy9z
-dG0zMm1wMTU3YS1kazEtdS1ib290LmR0c2kgICAgICB8ICAgMyArCj4gICBhcmNoL2FybS9tYWNo
-LXN0bTMybXAvYnNlYy5jICAgICAgICAgICAgICAgICAgfCAgIDQgKy0KPiAgIGFyY2gvYXJtL21h
-Y2gtc3RtMzJtcC9jcHUuYyAgICAgICAgICAgICAgICAgICB8ICA1OSArKysrLS0KPiAgIC4uLi9h
-cm0vbWFjaC1zdG0zMm1wL2luY2x1ZGUvbWFjaC9zeXNfcHJvdG8uaCB8ICAgMyArCj4gICBhcmNo
-L2FybS9tYWNoLXN0bTMybXAvc3BsLmMgICAgICAgICAgICAgICAgICAgfCAgIDMgKwo+ICAgYm9h
-cmQvc3Qvc3RtMzJtcDEvc3BsLmMgICAgICAgICAgICAgICAgICAgICAgIHwgIDUzICsrKysrCj4g
-ICBjb21tb24vZmR0X3N1cHBvcnQuYyAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMzAgKysr
-Cj4gICBjb21tb24vc3BsL0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTEg
-KysKPiAgIGNvbmZpZ3MvYW0zMzV4X2JvbmVibGFja192Ym9vdF9kZWZjb25maWcgICAgICB8ICAg
-MSArCj4gICBjb25maWdzL2FtMzM1eF9ldm1fZGVmY29uZmlnICAgICAgICAgICAgICAgICAgfCAg
-IDEgKwo+ICAgY29uZmlncy9hbTMzNXhfaWdlcDAwM3hfZGVmY29uZmlnICAgICAgICAgICAgIHwg
-ICAxICsKPiAgIGNvbmZpZ3MvYW0zMzV4X3NoY19kZWZjb25maWcgICAgICAgICAgICAgICAgICB8
-ICAgMSArCj4gICBjb25maWdzL2FtMzM1eF9zaGNfaWN0X2RlZmNvbmZpZyAgICAgICAgICAgICAg
-fCAgIDEgKwo+ICAgY29uZmlncy9hbTMzNXhfc2hjX25ldGJvb3RfZGVmY29uZmlnICAgICAgICAg
-IHwgICAxICsKPiAgIGNvbmZpZ3MvYW0zMzV4X3NoY19zZGJvb3RfZGVmY29uZmlnICAgICAgICAg
-ICB8ICAgMSArCj4gICBjb25maWdzL2FtMzM1eF9zbDUwX2RlZmNvbmZpZyAgICAgICAgICAgICAg
-ICAgfCAgIDEgKwo+ICAgY29uZmlncy9hbTM1MTdfZXZtX2RlZmNvbmZpZyAgICAgICAgICAgICAg
-ICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvYW00M3h4X2V2bV9kZWZjb25maWcgICAgICAgICAgICAg
-ICAgICB8ICAgMSArCj4gICBjb25maWdzL2FtNDN4eF9ldm1fcnRjb25seV9kZWZjb25maWcgICAg
-ICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9hbTQzeHhfZXZtX3VzYmhvc3RfYm9vdF9kZWZjb25m
-aWcgICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvYW01N3h4X2V2bV9kZWZjb25maWcgICAgICAgICAg
-ICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL2RldmtpdDgwMDBfZGVmY29uZmlnICAgICAgICAg
-ICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9kaXNwbGF5NV9kZWZjb25maWcgICAgICAgICAg
-ICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvZGlzcGxheTVfZmFjdG9yeV9kZWZjb25maWcg
-ICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL2RyYTd4eF9ldm1fZGVmY29uZmlnICAgICAg
-ICAgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9nd3ZlbnRhbmFfZW1tY19kZWZjb25maWcg
-ICAgICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvZ3d2ZW50YW5hX2d3NTkwNF9kZWZjb25m
-aWcgICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL2d3dmVudGFuYV9uYW5kX2RlZmNvbmZp
-ZyAgICAgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9pZ2VwMDB4MF9kZWZjb25maWcgICAg
-ICAgICAgICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvaW14NmRsX21hbW9qX2RlZmNvbmZp
-ZyAgICAgICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL2lteDZxX2xvZ2ljX2RlZmNvbmZp
-ZyAgICAgICAgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9pbXg2cWRsX2ljb3JlX21pcGlf
-ZGVmY29uZmlnICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3MvaW14NnFkbF9pY29yZV9tbWNf
-ZGVmY29uZmlnICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL2lteDZxZGxfaWNvcmVfcnFz
-X2RlZmNvbmZpZyAgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9tY2Ntb242X25vcl9kZWZj
-b25maWcgICAgICAgICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3Mvb21hcDM1X2xvZ2ljX2Rl
-ZmNvbmZpZyAgICAgICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL29tYXAzNV9sb2dpY19z
-b21sdl9kZWZjb25maWcgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9vbWFwM19sb2dpY19k
-ZWZjb25maWcgICAgICAgICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3Mvb21hcDNfbG9naWNf
-c29tbHZfZGVmY29uZmlnICAgICAgICAgICB8ICAgMSArCj4gICBjb25maWdzL29tYXA0X3BhbmRh
-X2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgfCAgIDEgKwo+ICAgY29uZmlncy9vbWFwNV91ZXZt
-X2RlZmNvbmZpZyAgICAgICAgICAgICAgICAgIHwgICAxICsKPiAgIGNvbmZpZ3Mvc3RtMzJtcDE1
-X2ZhbGNvbl9kZWZjb25maWcgICAgICAgICAgICB8IDE4MSArKysrKysrKysrKysrKysrKysKPiAg
-IGluY2x1ZGUvY29uZmlncy9icnBwdDEuaCAgICAgICAgICAgICAgICAgICAgICB8ICAgMSAtCj4g
-ICBpbmNsdWRlL2NvbmZpZ3MvZGV2a2l0ODAwMC5oICAgICAgICAgICAgICAgICAgfCAgIDIgLQo+
-ICAgaW5jbHVkZS9jb25maWdzL2Rpc3BsYXk1LmggICAgICAgICAgICAgICAgICAgIHwgICAxIC0K
-PiAgIGluY2x1ZGUvY29uZmlncy9lbWJlc3RteDZib2FyZHMuaCAgICAgICAgICAgICB8ICAgMSAt
-Cj4gICBpbmNsdWRlL2NvbmZpZ3MvZ3dfdmVudGFuYS5oICAgICAgICAgICAgICAgICAgfCAgIDEg
-LQo+ICAgaW5jbHVkZS9jb25maWdzL2lteDYtZW5naWNhbS5oICAgICAgICAgICAgICAgIHwgICAx
-IC0KPiAgIGluY2x1ZGUvY29uZmlncy9pbXg2X2xvZ2ljLmggICAgICAgICAgICAgICAgICB8ICAg
-MSAtCj4gICBpbmNsdWRlL2NvbmZpZ3MvaW14NmRsLW1hbW9qLmggICAgICAgICAgICAgICAgfCAg
-IDEgLQo+ICAgaW5jbHVkZS9jb25maWdzL2xzMTA0M2FyZGIuaCAgICAgICAgICAgICAgICAgIHwg
-ICAxIC0KPiAgIGluY2x1ZGUvY29uZmlncy9tY2Ntb242LmggICAgICAgICAgICAgICAgICAgICB8
-ICAgMSAtCj4gICBpbmNsdWRlL2NvbmZpZ3MvbXg2c2FicmVhdXRvLmggICAgICAgICAgICAgICAg
-fCAgIDEgLQo+ICAgaW5jbHVkZS9jb25maWdzL214NnNhYnJlc2QuaCAgICAgICAgICAgICAgICAg
-IHwgICAxIC0KPiAgIGluY2x1ZGUvY29uZmlncy9waWNvLWlteDYuaCAgICAgICAgICAgICAgICAg
-ICB8ICAgMSAtCj4gICBpbmNsdWRlL2NvbmZpZ3MvcGljby1pbXg2dWwuaCAgICAgICAgICAgICAg
-ICAgfCAgIDEgLQo+ICAgaW5jbHVkZS9jb25maWdzL3BpY28taW14N2QuaCAgICAgICAgICAgICAg
-ICAgIHwgICAxIC0KPiAgIGluY2x1ZGUvY29uZmlncy9zYW1hNWQzX3hwbGFpbmVkLmggICAgICAg
-ICAgICB8ICAgMSAtCj4gICBpbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDEuaCAgICAgICAgICAgICAg
-ICAgICAgfCAgIDQgKwo+ICAgaW5jbHVkZS9jb25maWdzL3RhbTM1MTctY29tbW9uLmggICAgICAg
-ICAgICAgIHwgICAxIC0KPiAgIGluY2x1ZGUvY29uZmlncy90aV9hcm12N19jb21tb24uaCAgICAg
-ICAgICAgICB8ICAgMSAtCj4gICBpbmNsdWRlL2NvbmZpZ3Mvdnlhc2EtcmszMjg4LmggICAgICAg
-ICAgICAgICAgfCAgIDEgLQo+ICAgaW5jbHVkZS9jb25maWdzL3hlYS5oICAgICAgICAgICAgICAg
-ICAgICAgICAgIHwgICAxIC0KPiAgIGluY2x1ZGUvY29uZmlncy94aWxpbnhfenlucW1wLmggICAg
-ICAgICAgICAgICB8ICAgMSAtCj4gICBpbmNsdWRlL2NvbmZpZ3MvenlucS1jb21tb24uaCAgICAg
-ICAgICAgICAgICAgfCAgIDEgLQo+ICAgaW5jbHVkZS9mZHRfc3VwcG9ydC5oICAgICAgICAgICAg
-ICAgICAgICAgICAgIHwgIDE3ICsrCj4gICBsaWIvTWFrZWZpbGUgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgfCAgIDIgKy0KPiAgIHNjcmlwdHMvY29uZmlnX3doaXRlbGlzdC50eHQg
-ICAgICAgICAgICAgICAgICB8ICAgMSAtCj4gICA2OSBmaWxlcyBjaGFuZ2VkLCAzODYgaW5zZXJ0
-aW9ucygrKSwgNDUgZGVsZXRpb25zKC0pCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmlncy9z
-dG0zMm1wMTVfZmFsY29uX2RlZmNvbmZpZwo+CnJlZ2FyZHMKClBhdHJpY2sKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcg
-bGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3Qt
-bWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+HI Patrick
+
+On 10/4/21 11:23 AM, Patrick Delaunay wrote:
+> Using the tools moveconfig.py to move the following config in the
+> defconfig files:
+>  CONFIG_USB_HOST_ETHER
+>  CONFIG_USB_ETHER_ASIX
+>  CONFIG_USB_ETHER_MCS7830
+>  CONFIG_USB_ETHER_SMSC95XX
+> 
+> These option are already migrated since the commit f58ad98a621c ("usb: net:
+> migrate USB Ethernet adapters to Kconfig") and the commit ae3584498bf8
+> ("usb: net: migrate CONFIG_USB_HOST_ETHER to Kconfig").
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  configs/dh_imx6_defconfig       | 2 ++
+>  configs/kp_imx6q_tpc_defconfig  | 2 ++
+>  configs/mx53ppd_defconfig       | 4 ++++
+>  configs/stih410-b2260_defconfig | 4 ++++
+>  include/configs/dh_imx6.h       | 2 --
+>  include/configs/kp_imx6q_tpc.h  | 2 --
+>  include/configs/mx53ppd.h       | 4 ----
+>  include/configs/stih410-b2260.h | 5 -----
+>  8 files changed, 12 insertions(+), 13 deletions(-)
+> 
+> diff --git a/configs/dh_imx6_defconfig b/configs/dh_imx6_defconfig
+> index eb588b68d3..abbb6412e8 100644
+> --- a/configs/dh_imx6_defconfig
+> +++ b/configs/dh_imx6_defconfig
+> @@ -97,6 +97,8 @@ CONFIG_MXC_SPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_SYSRESET_WATCHDOG=y
+>  CONFIG_USB=y
+> +CONFIG_USB_HOST_ETHER=y
+> +CONFIG_USB_ETHER_ASIX=y
+>  CONFIG_USB_GADGET=y
+>  CONFIG_USB_GADGET_MANUFACTURER="dh"
+>  CONFIG_USB_GADGET_VENDOR_NUM=0x0525
+> diff --git a/configs/kp_imx6q_tpc_defconfig b/configs/kp_imx6q_tpc_defconfig
+> index 85fdfad834..bcaa82ab89 100644
+> --- a/configs/kp_imx6q_tpc_defconfig
+> +++ b/configs/kp_imx6q_tpc_defconfig
+> @@ -76,5 +76,7 @@ CONFIG_SYSRESET_WATCHDOG=y
+>  CONFIG_IMX_THERMAL=y
+>  CONFIG_USB=y
+>  # CONFIG_SPL_DM_USB is not set
+> +CONFIG_USB_HOST_ETHER=y
+> +CONFIG_USB_ETHER_ASIX=y
+>  CONFIG_WATCHDOG_TIMEOUT_MSECS=60000
+>  CONFIG_IMX_WATCHDOG=y
+> diff --git a/configs/mx53ppd_defconfig b/configs/mx53ppd_defconfig
+> index 081707f27e..5f39df85ef 100644
+> --- a/configs/mx53ppd_defconfig
+> +++ b/configs/mx53ppd_defconfig
+> @@ -70,6 +70,10 @@ CONFIG_SYSRESET=y
+>  CONFIG_SYSRESET_WATCHDOG=y
+>  CONFIG_USB=y
+>  CONFIG_USB_EHCI_MX5=y
+> +CONFIG_USB_HOST_ETHER=y
+> +CONFIG_USB_ETHER_ASIX=y
+> +CONFIG_USB_ETHER_MCS7830=y
+> +CONFIG_USB_ETHER_SMSC95XX=y
+>  CONFIG_DM_VIDEO=y
+>  CONFIG_SYS_WHITE_ON_BLACK=y
+>  CONFIG_VIDEO_IPUV3=y
+> diff --git a/configs/stih410-b2260_defconfig b/configs/stih410-b2260_defconfig
+> index d5ec00e1e0..a7ad277066 100644
+> --- a/configs/stih410-b2260_defconfig
+> +++ b/configs/stih410-b2260_defconfig
+> @@ -53,6 +53,10 @@ CONFIG_USB_EHCI_GENERIC=y
+>  CONFIG_USB_OHCI_HCD=y
+>  CONFIG_USB_OHCI_GENERIC=y
+>  CONFIG_USB_DWC3=y
+> +CONFIG_USB_HOST_ETHER=y
+> +CONFIG_USB_ETHER_ASIX=y
+> +CONFIG_USB_ETHER_MCS7830=y
+> +CONFIG_USB_ETHER_SMSC95XX=y
+>  CONFIG_USB_GADGET=y
+>  CONFIG_USB_GADGET_MANUFACTURER="STMicroelectronics"
+>  CONFIG_USB_GADGET_VENDOR_NUM=0x483
+> diff --git a/include/configs/dh_imx6.h b/include/configs/dh_imx6.h
+> index 7af8fceb71..ee56eb691a 100644
+> --- a/include/configs/dh_imx6.h
+> +++ b/include/configs/dh_imx6.h
+> @@ -50,8 +50,6 @@
+>  /* USB Configs */
+>  #ifdef CONFIG_CMD_USB
+>  #define CONFIG_EHCI_HCD_INIT_AFTER_RESET
+> -#define CONFIG_USB_HOST_ETHER
+> -#define CONFIG_USB_ETHER_ASIX
+>  #define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+>  #define CONFIG_MXC_USB_FLAGS		0
+>  #define CONFIG_USB_MAX_CONTROLLER_COUNT	2 /* Enabled USB controller number */
+> diff --git a/include/configs/kp_imx6q_tpc.h b/include/configs/kp_imx6q_tpc.h
+> index 8471dffe83..3061c96e76 100644
+> --- a/include/configs/kp_imx6q_tpc.h
+> +++ b/include/configs/kp_imx6q_tpc.h
+> @@ -23,8 +23,6 @@
+>  /* USB Configs */
+>  #ifdef CONFIG_CMD_USB
+>  #define CONFIG_EHCI_HCD_INIT_AFTER_RESET
+> -#define CONFIG_USB_HOST_ETHER
+> -#define CONFIG_USB_ETHER_ASIX
+>  #define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+>  #define CONFIG_MXC_USB_FLAGS		0
+>  #define CONFIG_USB_MAX_CONTROLLER_COUNT	2 /* Enabled USB controller number */
+> diff --git a/include/configs/mx53ppd.h b/include/configs/mx53ppd.h
+> index b623242256..f8118818b0 100644
+> --- a/include/configs/mx53ppd.h
+> +++ b/include/configs/mx53ppd.h
+> @@ -14,10 +14,6 @@
+>  #define CONFIG_SYS_FSL_CLK
+>  
+>  /* USB Configs */
+> -#define CONFIG_USB_HOST_ETHER
+> -#define CONFIG_USB_ETHER_ASIX
+> -#define CONFIG_USB_ETHER_MCS7830
+> -#define CONFIG_USB_ETHER_SMSC95XX
+>  #define CONFIG_MXC_USB_PORT	1
+>  #define CONFIG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+>  #define CONFIG_MXC_USB_FLAGS	0
+> diff --git a/include/configs/stih410-b2260.h b/include/configs/stih410-b2260.h
+> index b1917c9d3f..2fe0900e9f 100644
+> --- a/include/configs/stih410-b2260.h
+> +++ b/include/configs/stih410-b2260.h
+> @@ -57,11 +57,6 @@
+>  #define CONFIG_USB_OHCI_NEW
+>  #define CONFIG_SYS_USB_OHCI_MAX_ROOT_PORTS	2
+>  
+> -#define CONFIG_USB_HOST_ETHER
+> -#define CONFIG_USB_ETHER_ASIX
+> -#define CONFIG_USB_ETHER_MCS7830
+> -#define CONFIG_USB_ETHER_SMSC95XX
+> -
+>  /* NET Configs */
+>  
+>  #endif /* __CONFIG_H */
+> 
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

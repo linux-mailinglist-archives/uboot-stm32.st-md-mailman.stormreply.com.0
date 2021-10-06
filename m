@@ -2,62 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EA6F424240
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Oct 2021 18:10:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4F19424279
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Oct 2021 18:20:26 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CDF51C5719E;
-	Wed,  6 Oct 2021 16:10:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5C12AC597B3;
+	Wed,  6 Oct 2021 16:20:26 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8C774C32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 57649C5719E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  6 Oct 2021 16:10:47 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 196DG91u003912; 
- Wed, 6 Oct 2021 18:10:36 +0200
+ Wed,  6 Oct 2021 16:20:25 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 196ExnVT018931; 
+ Wed, 6 Oct 2021 18:20:21 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=/K7npBJE59Sc8OnZqk053vAadI0RtGWSKNKt+If5Eww=;
- b=Di/FMhFBt7WybwtMbk+pQZu5ylU9/OnT0//M8478vDUlQys/vCEylYb5fCO0Qhqu/jrk
- HjJJgBFWAuktTPdUsF8oV6qXK6XOr6IihIm04W9urqGpO9tRWz0W5DC/pxve5msK80PV
- Doc98dYFuhhqXcTMn6y1u1+QPNXIaI+4qrmwtDVM2KJMU4J4QKwYn9OT5O0OSiKLrkWm
- aeFol94u1i7GO4r/Cs29g+TM/KG/DJ0kM1GQEwVPry1v0Kdijm0DokYVxat/iWNlDfGK
- rr8q77whY+VfTlD2tPuhwQbbWjoNEYZkQ+tHP911+D3l4LzTcjKj+jyUY+3SO+p0O6W2 iw== 
+ references : in-reply-to : subject : date : message-id : mime-version :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=pEC1lAH+ohxpMTo7rucmzQG6/xt7Zh0nBslfgVo4G2Q=;
+ b=QAVXkn1ni42qOXf0VeHPab83D9SFmN362xR2sEnSWERVR4Y7TsfsHCOnaHpd5YDQAVPO
+ LiGkvYj1TojYP1n8nxcepBIKud5AxTcqHIVdqvAzdg4JdtjFrB0B5hIE+7/jhUoa6W54
+ ZzR6L7iZgkRbY9rZPBs49srCx0XQMnCGLzls+Ua0qY8I2DpVTe6tYgi4Rq1DEpamIbcH
+ sTgO7vgi9d7u9CRJ3rvKUwkwhr+KvKIl/kHj45peLhNDq6FrUAXUiLCYnd2GxWqSJvCU
+ P+FwEA3AqyKPSC4Dy7+sMEe4tuTO9Eic+tloo/KSvgHaPuxXxioiA1ClA4K0wWkrwveJ nQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bh86jardb-1
+ by mx07-00178001.pphosted.com with ESMTP id 3bh9c8advw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 06 Oct 2021 18:10:36 +0200
+ Wed, 06 Oct 2021 18:20:21 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2D6CF10002A;
- Wed,  6 Oct 2021 18:10:34 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A66A210002A;
+ Wed,  6 Oct 2021 18:20:20 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D10E122FA57;
- Wed,  6 Oct 2021 18:10:34 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 6 Oct 2021 18:10:34
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9B38A2309D6;
+ Wed,  6 Oct 2021 18:20:20 +0200 (CEST)
+Received: from LMECWL0930 (10.75.127.47) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18;
+ Wed, 6 Oct 2021 18:20:19 +0200
+From: <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 6 Oct 2021 18:10:32 +0200
-Message-ID: <20211006181004.1.I0774e750b5e88f0d91ea2273a4616b784019c1dd@changeid>
-X-Mailer: git-send-email 2.25.1
+References: <20211006171839.1.I0774e750b5e88f0d91ea2273a4616b784019c1dd@changeid>
+In-Reply-To: <20211006171839.1.I0774e750b5e88f0d91ea2273a4616b784019c1dd@changeid>
+Date: Wed, 6 Oct 2021 18:20:18 +0200
+Message-ID: <00f801d7bace$0e39fe70$2aadfb50$@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: fr
+Thread-Index: AQHXgWTOQcr2necpScXmzqz1IrhDVqvGl6dQ
+msip_labels: MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Enabled=true;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_SetDate=2021-10-06T16:20:17Z;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Method=Standard;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_Name=23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_SiteId=75e027c9-20d5-47d5-b82f-77d7cd041e8f;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_ActionId=bdf33f27-1442-4392-928a-a47bca3d38e3;
+ MSIP_Label_23add6c0-cfdb-4bb9-b90f-bf23b83aa6c0_ContentBits=2
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
  definitions=2021-10-06_04,2021-10-06_01,2020-04-07_01
-Cc: Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
- Rick Chen <rick@andestech.com>, Sean Anderson <seanga2@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>,
- Vikas Manocha <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH] stv0991: remove specific CONFIG_STV0991
+Cc: 'U-Boot STM32' <uboot-stm32@st-md-mailman.stormreply.com>,
+ 'Priyanka Jain' <priyanka.jain@nxp.com>, 'Simon Glass' <sjg@chromium.org>,
+ 'Stefan Roese' <sr@denx.de>, 'Vikas Manocha' <vikas.manocha@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] stv0991: remove specific CONFIG_STV0991
 	configs
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -75,93 +84,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Remove the following STV0991 specific configs:
-- CONFIG_STV0991 (never used, only defined in CONFIG_SYS_EXTRA_OPTIONS)
-- CONFIG_STV0991_HZ (replaced by generic CONFIG_SYS_HZ)
-- CONFIG_STV0991_HZ_CLOCK (replaced by generic CONFIG_SYS_HZ_CLOCK)
+Hi,
 
-This patch allows to reduce the file config_whitelist.txt.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+ST Restricted
 
- arch/arm/cpu/armv7/stv0991/timer.c              | 6 +++---
- arch/arm/include/asm/arch-stv0991/stv0991_gpt.h | 4 ++--
- configs/stv0991_defconfig                       | 1 -
- scripts/config_whitelist.txt                    | 3 ---
- 4 files changed, 5 insertions(+), 9 deletions(-)
+> -----Original Message-----
+> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Sent: mercredi 6 octobre 2021 17:19
+> To: u-boot@lists.denx.de
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>; Priyanka Jain
+> <priyanka.jain@nxp.com>; Simon Glass <sjg@chromium.org>; Stefan Roese
+> <sr@denx.de>; Vikas Manocha <vikas.manocha@st.com>; U-Boot STM32
+> <uboot-stm32@st-md-mailman.stormreply.com>
+> Subject: [PATCH] stv0991: remove specific CONFIG_STV0991 configs
+> 
+> Remove the following STV0991 specific configs:
+> - CONFIG_STV0991 (never used)
+> - CONFIG_STV0991_HZ (replaced by generic CONFIG_SYS_HZ)
+> - CONFIG_STV0991_HZ_CLOCK (replaced by generic
+> CONFIG_SYS_HZ_CLOCK)
+> 
+> This patch allows to reduce the file config_whitelist.txt.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  arch/arm/cpu/armv7/stv0991/timer.c              | 6 +++---
+>  arch/arm/include/asm/arch-stv0991/stv0991_gpt.h | 4 ++--
+>  scripts/config_whitelist.txt                    | 3 ---
+>  3 files changed, 5 insertions(+), 8 deletions(-)
+> 
 
-diff --git a/arch/arm/cpu/armv7/stv0991/timer.c b/arch/arm/cpu/armv7/stv0991/timer.c
-index 07033acb5c..67764ccf66 100644
---- a/arch/arm/cpu/armv7/stv0991/timer.c
-+++ b/arch/arm/cpu/armv7/stv0991/timer.c
-@@ -18,7 +18,7 @@ static struct stv0991_cgu_regs *const stv0991_cgu_regs = \
- 				(struct stv0991_cgu_regs *) (CGU_BASE_ADDR);
- 
- #define READ_TIMER()	(readl(&gpt1_regs_ptr->cnt) & GPT_FREE_RUNNING)
--#define GPT_RESOLUTION	(CONFIG_STV0991_HZ_CLOCK / CONFIG_STV0991_HZ)
-+#define GPT_RESOLUTION	(CONFIG_SYS_HZ_CLOCK / CONFIG_SYS_HZ)
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -67,7 +67,7 @@ void __udelay(unsigned long usec)
- {
- 	ulong tmo;
- 	ulong start = get_timer_masked();
--	ulong tenudelcnt = CONFIG_STV0991_HZ_CLOCK / (1000 * 100);
-+	ulong tenudelcnt = CONFIG_SYS_HZ_CLOCK / (1000 * 100);
- 	ulong rndoff;
- 
- 	rndoff = (usec % 10) ? 1 : 0;
-@@ -110,5 +110,5 @@ unsigned long long get_ticks(void)
-  */
- ulong get_tbclk(void)
- {
--	return CONFIG_STV0991_HZ;
-+	return CONFIG_SYS_HZ;
- }
-diff --git a/arch/arm/include/asm/arch-stv0991/stv0991_gpt.h b/arch/arm/include/asm/arch-stv0991/stv0991_gpt.h
-index cd27472ad7..f1d5667c32 100644
---- a/arch/arm/include/asm/arch-stv0991/stv0991_gpt.h
-+++ b/arch/arm/include/asm/arch-stv0991/stv0991_gpt.h
-@@ -36,7 +36,7 @@ struct gpt_regs *const gpt1_regs_ptr =
- #define GPT_FREE_RUNNING		0xFFFF
- 
- /* Timer, HZ specific defines */
--#define CONFIG_STV0991_HZ		1000
--#define CONFIG_STV0991_HZ_CLOCK		(27*1000*1000)/GPT_PRESCALER_128
-+#define CONFIG_SYS_HZ			1000
-+#define CONFIG_SYS_HZ_CLOCK		((27 * 1000 * 1000) / GPT_PRESCALER_128)
- 
- #endif
-diff --git a/configs/stv0991_defconfig b/configs/stv0991_defconfig
-index b6ec831e6d..e06664047f 100644
---- a/configs/stv0991_defconfig
-+++ b/configs/stv0991_defconfig
-@@ -12,7 +12,6 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_SYS_MALLOC_LEN=0x14000
- CONFIG_DEFAULT_DEVICE_TREE="stv0991"
- CONFIG_SYS_LOAD_ADDR=0x0
--CONFIG_SYS_EXTRA_OPTIONS="STV0991"
- CONFIG_BOOTDELAY=3
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
-diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
-index 61ae682dcd..58f4b02f60 100644
---- a/scripts/config_whitelist.txt
-+++ b/scripts/config_whitelist.txt
-@@ -1303,9 +1303,6 @@ CONFIG_STANDALONE_LOAD_ADDR
- CONFIG_STATIC_BOARD_REV
- CONFIG_STD_DEVICES_SETTINGS
- CONFIG_STM32_FLASH
--CONFIG_STV0991
--CONFIG_STV0991_HZ
--CONFIG_STV0991_HZ_CLOCK
- CONFIG_SXNI855T
- CONFIG_SYSFS
- CONFIG_SYSMGR_ISWGRP_HANDOFF
--- 
-2.25.1
+Even if I don't update patchset version to V2 this patch is replaced by next
+one
+http://patchwork.ozlabs.org/project/uboot/list/?series=265724&state=*
+
+It is a push error, sorry.
+
+I need to add a modification to avoid the remaining error
+
++Error: You must add new CONFIG options using Kconfig
++The following new ad-hoc CONFIG options were detected:
++CONFIG_STV0991
+
+CONFIG_STV0991 was never used in code but define in autoconfig by
+  CONFIG_SYS_EXTRA_OPTIONS="STV0991"
+
+
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

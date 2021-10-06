@@ -2,63 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F92C423327
-	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Oct 2021 00:02:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23D2A424112
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Oct 2021 17:16:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 28FC0C5AB80;
-	Tue,  5 Oct 2021 22:02:38 +0000 (UTC)
-Received: from mail-qt1-f178.google.com (mail-qt1-f178.google.com
- [209.85.160.178])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACA31C5719E;
+	Wed,  6 Oct 2021 15:16:43 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E9EB6C5AB7F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EAD0DC5719C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  5 Oct 2021 22:02:36 +0000 (UTC)
-Received: by mail-qt1-f178.google.com with SMTP id l13so630211qtv.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 05 Oct 2021 15:02:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=0v+Es+hPysxkfM6fhs0mbGvwQYoDzp0NOmyHR+Ayi8w=;
- b=MTuY5tLR/E/oF8Kb4e+P1jdfjCd0CXiABdiTFwGD2l7iWoakIVSS2+xQz5uL/IU9YW
- u7TAxk1/F522EgaOfkQovphf6CzqjvCb8+PEh5cbIwTXiMDS1bAhGgHWbKJKhbaHnvYw
- 2r6d34FGawhsqIhq0KL/Q88cyDiIvzQ8zvZ1o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=0v+Es+hPysxkfM6fhs0mbGvwQYoDzp0NOmyHR+Ayi8w=;
- b=kgKJ3dMTfTkxwVQ2kw/45CKixiiEkX/owX0NJpSVvwZWlNfbf3parK1dmKX3KoSnUj
- 3gmuk5mb2sYB7tQs2Y49I09/QBfnYzzTYFgwMsmZcxgPTYw4TPnqFAkxFScngFQ2HaGt
- LuarpZV0xvYWWpeMeSnaSW4TUmwM9zCYZHL4cQPNWU1ScDFjBZlC+w/JfV3Uu3FA7JPA
- SdIFGAXTn90NU9PbVRS/Vqp/aWRi8nmGihBSwYIDHmQkvxDop5OAr94r+fPcYr1EFn6B
- +rrqL1YoHPzefzKttuTYTQIVbM/CIHzMFYZVCq68h4MoPDEG0R1EpQRiA+LryeODFvyK
- ISpA==
-X-Gm-Message-State: AOAM531HpLv1k3e0dRtRzHI58Mq5Wka+Xq5DwjjqZjVWHbqDhTNA9r2q
- qfl3Q9iZ0DR3V6yi9kDYV+4Saw==
-X-Google-Smtp-Source: ABdhPJxoTlgq6LHdxQhZXeVkDFOWwbQcMh4fJbOfbS6AaYtCetr8xJaTvfd/LkYS5pwp2Rjywf7YrA==
-X-Received: by 2002:ac8:7d91:: with SMTP id c17mr22948582qtd.40.1633471356068; 
- Tue, 05 Oct 2021 15:02:36 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-acff-2c31-c6db-812f.res6.spectrum.com.
- [2603:6081:7b01:cbda:acff:2c31:c6db:812f])
- by smtp.gmail.com with ESMTPSA id s20sm10357958qkj.116.2021.10.05.15.02.35
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Tue, 05 Oct 2021 15:02:35 -0700 (PDT)
-Date: Tue, 5 Oct 2021 18:02:33 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20211005220233.GM31748@bill-the-cat>
-References: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
+ Wed,  6 Oct 2021 15:16:40 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1969wF2H030073; 
+ Wed, 6 Oct 2021 17:16:30 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=AaB8uLDKEP0gg6YDo5eAg/+QKCgumEw8/38ig7RfQk8=;
+ b=EtdE0hZVgAj01SKLhJBXKYjesu0OkhnoRZi2/1lci4zOvbjS8yyFiD2Wj1DowqEqgV0F
+ kDIP2N5uTqW3oSJ7BE9si8eSxhg7dd45Bhcb0N0aMjKqgBJFpk2l/qHEVIRzFQYIxF2p
+ Xl281uB2mSCJ7My4X8UgB6wg9+LUFXxtmAoYppXUTKHXRzVKal40BojOl9wSnAjdm/CD
+ YN07BBXdJIv22HNuNB1Br2bysAFgsYKNrWwbRO7j3gyWYfajkP9iUuHGWT0EsiFYUqaD
+ uswE6JbG/ws54o/TyOjR1KFBdGlSn8NPsZ0iKcrisvGE2el54UKuCQgjqKcwR2Z1jr+w kw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com with ESMTP id 3bh9mv1xd3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 06 Oct 2021 17:16:30 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 08C7010002A;
+ Wed,  6 Oct 2021 17:16:28 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9AB6722D61A;
+ Wed,  6 Oct 2021 17:16:28 +0200 (CEST)
+Received: from localhost (10.75.127.45) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 6 Oct 2021 17:16:28
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 6 Oct 2021 17:16:23 +0200
+Message-ID: <20211006171607.1.Ifd4a8d41835a2a90cc00f00a5862d97f60e23c6f@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210920182717.1.I218b17a86b820ee611e9dd643c1fb40e2b480257@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Nandor Han <nandor.han@vaisala.com>
-Subject: Re: [Uboot-stm32] [PATCH] reboot-mode: migrate uclass to livetree
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-10-06_04,2021-10-06_01,2020-04-07_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Sean Anderson <seanga2@gmail.com>,
+ Rick Chen <rick@andestech.com>
+Subject: [Uboot-stm32] [PATCH] stm32f429: move CONFIG_BOOTCOMMAND in
+	defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,63 +68,50 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5787736110848062884=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Move CONFIG_BOOTCOMMAND defined in Kconfig in the board defconfig.
 
---===============5787736110848062884==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="DLFWJW30b8/EguhV"
-Content-Disposition: inline
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
+ configs/stm32f429-discovery_defconfig | 1 +
+ include/configs/stm32f429-discovery.h | 3 ---
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
---DLFWJW30b8/EguhV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 20, 2021 at 06:27:20PM +0200, Patrick Delaunay wrote:
-
-> Use dev_ function to support a live tree.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---DLFWJW30b8/EguhV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFcy3kACgkQFHw5/5Y0
-tywNFAv2IYNG/nRjJ0199IAWPVlj8oFCPw2LK4UvqEQoDUkhxBTEciYoaruGm0Ia
-7c47Itngztp+/L2XLiSQgL/TouDrEGpvtpGDrQVEs3qHDX2wfpAilAg0lvNSsOAI
-PWD4yI/gj6b34Z6YqS8HZXYWNsyAzJKGYcMxOpiqs/hxfEw+1Ks6XHyEA6LO8wKv
-1RLA+1gNRWv0Olh0EevWzA0Q5YQV53o3zBlV8UpX57xiKt+4shRMKfJ8HSvAwoSa
-E86xXxlOdkxIBh4QjmDURgvhOeEQJIIkh2tmrXGTqk9RCfnfoRDgeFAT0ob2flD1
-yt6V9xZMjnzTbZwPU2CguNe8l01CyGHBqhslQfx0I8AuOOY1TsX13ipbAMOCpV8s
-ExwgmdBwm1YYWazRIVulpB5o0o3VZiM63am78oHpYKEXu2ZLwR+WQEdpKbh4Kbp6
-GqiViJGtWDazBU+/n6qBE2lVVo0VStoOq5DieiSQoObA0waxcP7uVwu3Qt1rZexv
-4fmAtP8=
-=vQxl
------END PGP SIGNATURE-----
-
---DLFWJW30b8/EguhV--
-
---===============5787736110848062884==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/configs/stm32f429-discovery_defconfig b/configs/stm32f429-discovery_defconfig
+index b6388cf00a..2b0f93fd65 100644
+--- a/configs/stm32f429-discovery_defconfig
++++ b/configs/stm32f429-discovery_defconfig
+@@ -12,6 +12,7 @@ CONFIG_TARGET_STM32F429_DISCOVERY=y
+ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_SYS_LOAD_ADDR=0x90400000
+ CONFIG_BOOTDELAY=3
++CONFIG_BOOTCOMMAND="run bootcmd_romfs"
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
+ # CONFIG_DISPLAY_CPUINFO is not set
+diff --git a/include/configs/stm32f429-discovery.h b/include/configs/stm32f429-discovery.h
+index 525a5277d8..162001d457 100644
+--- a/include/configs/stm32f429-discovery.h
++++ b/include/configs/stm32f429-discovery.h
+@@ -27,9 +27,6 @@
+ 
+ #define CONFIG_SYS_CBSIZE		1024
+ 
+-#define CONFIG_BOOTCOMMAND						\
+-	"run bootcmd_romfs"
+-
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	"bootargs_romfs=uclinux.physaddr=0x08180000 root=/dev/mtdblock0\0" \
+ 	"bootcmd_romfs=setenv bootargs ${bootargs} ${bootargs_romfs};" \
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============5787736110848062884==--

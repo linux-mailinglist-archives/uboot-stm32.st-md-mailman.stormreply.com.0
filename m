@@ -2,69 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 112E1425901
-	for <lists+uboot-stm32@lfdr.de>; Thu,  7 Oct 2021 19:13:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 785C5425B56
+	for <lists+uboot-stm32@lfdr.de>; Thu,  7 Oct 2021 21:09:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8CAFC597B2;
-	Thu,  7 Oct 2021 17:13:15 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
- [209.85.167.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 28660C597B2;
+	Thu,  7 Oct 2021 19:09:38 +0000 (UTC)
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
+ [209.85.210.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0D28AC57182
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3668BC57182
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  7 Oct 2021 17:13:14 +0000 (UTC)
-Received: by mail-oi1-f181.google.com with SMTP id y207so6762096oia.11
+ Thu,  7 Oct 2021 19:09:34 +0000 (UTC)
+Received: by mail-ot1-f45.google.com with SMTP id
+ v2-20020a05683018c200b0054e3acddd91so4230098ote.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 07 Oct 2021 10:13:13 -0700 (PDT)
+ Thu, 07 Oct 2021 12:09:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=kWNPhbOu+7vuaQO4crTSDg8LwHDoSbrgsTdidHuVNJI=;
- b=ZBx9cruq3EYs5JrZBilvyO1U6o7A6BSNBj4majx3YAKa8wJrPK07KY2XpiX5r8WRXH
- x9df6/stSFGjdmEt3lAj8fYBGeudQoqBoHArrlrsKVyrpoYyi9Dz+CcRn14TR+jHEjHN
- 6MZT10/HNAb7ZHjpvaLTwhZ9TZcxpfY5olGH0AeaLlclmzhFXau1f36MmVZGhSvnvhQL
- 3RGq4NUto9C0BprPD6Ls9mHgp0x+gXNALq2zCXRoOvmwuBivVV/OFEbsyp+Aq4Kns3uC
- OWTVbdHsqlPIyRnCePRa2sSWuRZHhpFmeLZU72kNkPY5SIpTQ304ranZ4YGluYUs1XrR
- IwNQ==
+ bh=IACTJiBcXiA7+Ff+xBg3vtrrbqdW0qXHpv3etNgzYm4=;
+ b=LPz3QMY9IwFokLRHnoqSI2SN4dqmIyjfgcuK6TcH0lWA2dM+XbiHarEfkPa6baKP3x
+ 7EnXeXiji+NcG+nbQbPImy+1je3f4MkuzgNRJBlHmpC1Fd5k+3FMl25Z1s9f40wF+ac6
+ b4Io11I81EYLLdk+4UNQAYylvAFnQ0FdYGdtiDoQT0yQvHV7mu9pbawWV6JXuHAMKFJd
+ vUL4R1N0z69DToLQUMyIxFeok+7ADZUMKxxg0OP9aphLfAHv0/hnNLn6977+OfMGqmxS
+ +c9XhQM8HELjWyy7UU7a784v3LX3ske6C+oIqFjBbOKJI9DjwpXxyIMir+huXq18Dnn9
+ NJNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=kWNPhbOu+7vuaQO4crTSDg8LwHDoSbrgsTdidHuVNJI=;
- b=5w6yOXYPdAFax+1Ys2DIcIs/XSpzND1Gf+p6f6vYqWSYeC/WbqcDSKP3/Pj+da/7bw
- iLeQ8xW3TB0NiPtgj8ZrZKa/MrAZAGXi7Dm5/IC9EqqDOzKnRXW2KzVLj61AN4NjTB8C
- yJb3XHUCXKxTZjY3LKtjqxy0jRlxGQrPHHBgp/+G2SGKcIfewN9SzHBO9T0A2Lu5i06K
- Ds6KgyC2ivuJPGrcrZlD52It+6mrMOBm67Opx7pyw55JWNF3YNpaJ3yty1YWq0s22J1S
- R6gBGpekAk5cFfoFBs0yfidkrumt82+iFpQmSyLPP5CU3wUiLh+TI/nMpnI/HCmd59M7
- zHhQ==
-X-Gm-Message-State: AOAM533c08HIGsgIa8Kkq1PcwnjNf+u5CW/6a/VMpmirZM2TZm1xcHC3
- Ty8GFlA5wlSe5XQrSYLttd8=
-X-Google-Smtp-Source: ABdhPJzkjcwFA23WpuioskeM826HbxOEmpWGMfSQgpC4deUzskONhAP0GmBMm9yrI6iIT0pc+g3iDg==
-X-Received: by 2002:a05:6808:21a8:: with SMTP id
- be40mr2229225oib.20.1633626792834; 
- Thu, 07 Oct 2021 10:13:12 -0700 (PDT)
+ bh=IACTJiBcXiA7+Ff+xBg3vtrrbqdW0qXHpv3etNgzYm4=;
+ b=GpUQRUoMdfRdnp3P7k63Pu6QRYAKbibsJBKTBO8JHkhr2Uor69lz7YN1pZn/MIrR8g
+ t0hcfo9K4ivwkFmavca6fH+sS/cxKl8peovKy6eN6sFsSSJdReumzE9ATy0qWecyE9mR
+ qARMqZAXz9KwAO0MxpEfIpIzb0buEj+0IFwC0dP1eRBglKIvcsrtjtmy+hEMsisdLcHE
+ uN/hzTDane2oklG/EqtZW0y1OHMI3g/QcYfXzs5BNMvdxBo9AH6nd7gLb7zq0RMQgz+0
+ bWHqxwFvFEI9wXopL18WTytutMnXX0OciZ55dEX5+GLUSeF59cS70r1pjs2n/3gpAc4e
+ 1mqA==
+X-Gm-Message-State: AOAM5329i14agPGXYGZhy5kFjLWDaR/uFwESZrRCfIoR7F2c0+dUWOZa
+ YgpWV7JrftnASXOGut3YrwkLhFJJf6c=
+X-Google-Smtp-Source: ABdhPJyq1NpxMY2BRGfxoUqX6yxWNIslu20noIvWV8zD5yf6DrpMEnX30bq9SW8IClU161Se2G1A7g==
+X-Received: by 2002:a9d:8e1:: with SMTP id 88mr5252623otf.339.1633633772863;
+ Thu, 07 Oct 2021 12:09:32 -0700 (PDT)
 Received: from nuclearis3.gtech (c-98-195-139-126.hsd1.tx.comcast.net.
  [98.195.139.126])
- by smtp.gmail.com with ESMTPSA id bl23sm7248oib.40.2021.10.07.10.13.11
+ by smtp.gmail.com with ESMTPSA id s24sm51079otp.36.2021.10.07.12.09.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Oct 2021 10:13:12 -0700 (PDT)
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20210909145536.2979951-1-mr.nuke.me@gmail.com>
- <f517fc64-f8e2-f722-40f0-174bf709c145@foss.st.com>
+ Thu, 07 Oct 2021 12:09:32 -0700 (PDT)
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20210907235933.2798330-1-mr.nuke.me@gmail.com>
+ <20210907235933.2798330-4-mr.nuke.me@gmail.com>
+ <4df50b6a-2536-dd89-cba3-f8362d5b1c7a@foss.st.com>
 From: "Alex G." <mr.nuke.me@gmail.com>
-Message-ID: <ccf4d20e-907f-02f4-aafc-e6c75f0932a5@gmail.com>
-Date: Thu, 7 Oct 2021 12:13:11 -0500
+Message-ID: <45dc816b-78f2-1764-60ac-e9373f4ed540@gmail.com>
+Date: Thu, 7 Oct 2021 14:09:31 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <f517fc64-f8e2-f722-40f0-174bf709c145@foss.st.com>
+In-Reply-To: <4df50b6a-2536-dd89-cba3-f8362d5b1c7a@foss.st.com>
 Content-Language: en-US
-Cc: uboot-stm32@st-md-mailman.stormreply.com, marex@denx.de,
- etienne.carriere@linaro.org
-Subject: Re: [Uboot-stm32] [PATCH 0/3] stm32mp: Attempt to resolve
- unintended breakage with v2021.10-rc2
+Cc: etienne.carriere@linaro.org
+Subject: Re: [Uboot-stm32] [PATCH v2 03/11] stm32mp1: Add support for falcon
+ mode boot from SD card
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,71 +77,137 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgUGF0cmljaywKCk9uIDkvMTQvMjEgNzoyNiBBTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToK
-PiBIaSBBbGV4YW5kcnUsCgo+IEkgdGhpbmsgeW91IG5lZWQgdG8gdXBkYXRlwqAgYXJjaC9hcm0v
-bWFjaC1zdG0zMm1wL0tjb25maWcKPiAKPiAKPiBzb21ldGhpbmcgbGlrZToKPiAKPiAKPiAgwqBj
-b25maWcgU1RNMzJNUDE1eAo+ICDCoMKgwqDCoCBib29sICJTdXBwb3J0IFNUTWljcm9lbGVjdHJv
-bmljcyBTVE0zMk1QMTV4IFNvYyIKPiAtwqDCoMKgIHNlbGVjdCBBUkNIX1NVUFBPUlRfUFNDSSBp
-ZiAhVEZBQk9PVAo+IC3CoMKgwqAgc2VsZWN0IEFSTV9TTUNDQyBpZiBURkFCT09UCj4gK8KgwqDC
-oCBzZWxlY3QgQVJDSF9TVVBQT1JUX1BTQ0kgaWYgIVRGQUJPT1QgJiYgIVNQTF9PUFRFRV9JTUFH
-RQo+ICvCoMKgwqAgc2VsZWN0IEFSTV9TTUNDQyBpZiBURkFCT09UIHx8IFNQTF9PUFRFRV9JTUFH
-RQo+ICDCoMKgwqDCoCBzZWxlY3QgQ1BVX1Y3QQo+IC3CoMKgwqAgc2VsZWN0IENQVV9WN19IQVNf
-Tk9OU0VDIGlmICFURkFCT09UCj4gK8KgwqDCoCBzZWxlY3QgQ1BVX1Y3X0hBU19OT05TRUMgaWYg
-IVRGQUJPT1QgJiYgIVNQTF9PUFRFRV9JTUFHRQo+ICDCoMKgwqDCoCBzZWxlY3QgQ1BVX1Y3X0hB
-U19WSVJUCj4gIMKgwqDCoMKgIHNlbGVjdCBPRl9CT0FSRF9TRVRVUAo+ICDCoMKgwqDCoCBzZWxl
-Y3QgUElOQ1RSTF9TVE0zMgo+IEBAIC00Nyw4ICs0Nyw4IEBAIGNvbmZpZyBTVE0zMk1QMTV4Cj4g
-IMKgwqDCoMKgIHNlbGVjdCBTVE0zMl9TRVJJQUwKPiAgwqDCoMKgwqAgc2VsZWN0IFNZU19BUkNI
-X1RJTUVSCj4gIMKgwqDCoMKgIGltcGx5IENNRF9OVkVESVRfSU5GTwo+IC3CoMKgwqAgaW1wbHkg
-U1lTUkVTRVRfUFNDSSBpZiBURkFCT09UCj4gLcKgwqDCoCBpbXBseSBTWVNSRVNFVF9TWVNDT04g
-aWYgIVRGQUJPT1QKPiArwqDCoMKgIGltcGx5IFNZU1JFU0VUX1BTQ0kgaWYgVEZBQk9PVCB8fCBT
-UExfT1BURUVfSU1BR0UKPiArwqDCoMKgIGltcGx5IFNZU1JFU0VUX1NZU0NPTiBpZiAhVEZBQk9P
-VCAmJiAhU1BMX09QVEVFX0lNQUdFCj4gIMKgwqDCoMKgIGhlbHAKPiAgwqDCoMKgwqAgwqDCoMKg
-IHN1cHBvcnQgb2YgU1RNaWNyb2VsZWN0cm9uaWNzIFNPQyBTVE0zMk1QMTV4IGZhbWlseQo+ICDC
-oMKgwqDCoCDCoMKgwqAgU1RNMzJNUDE1NywgU1RNMzJNUDE1MyBvciBTVE0zMk1QMTUxCj4gQEAg
-LTE1Myw3ICsxNTMsNyBAQCBjb25maWcgTlJfRFJBTV9CQU5LUwoKVGhpcyBpcyBhIHRlcnJpYmxl
-IGlkZWEuIFdlJ3JlIHRyeWluZyB0byBhbnN3ZXIgYSBmZXcgcXVlc3Rpb25zOgogICAgKiBEaWQg
-dGhlIEZTQkwgcHJvdmlkZSBhIFBTQ0kgc2VjdXJlIG1vbml0b3IKICAgICogSXMgdS1ib290IHJ1
-bm5pbmcgaW4gbm9ybWFsIG9yIHNlY3VyZSB3b3JsZAoKQnV0IGluc3RlYWQgb2YgY2xlYXJseSBk
-ZWZpbmluZyB0aG9zZSBhbnN3ZXJzLCB3ZSdyZSB0cnlpbmcgdG8gaW5mZXIgCnRoZW0gZnJvbSBv
-dGhlciBjb25maWcgb3B0aW9ucy4gVGhpcyBpcyBjb25mdXNpbmcgdG8gc3RhcnQgd2l0aCwgYnV0
-IAppdCdzIGFsc28gd3JvbmcuCgpGb3IgZXhhbXBsZSwgU1BMX09QVEVFX0lNQUdFIG1lYW5zICJ3
-ZSBzdXBwb3J0IE9QVEVFIGltYWdlcyBpbiBTUEwiLiBJdCAKZG9lc24ndCBtZWFuIHRoYXQgd2Ug
-bG9hZGVkIGFuIE9QLVRFRSBrZXJuZWwgYXQgYWxsLiBTUEwgd2l0aCAKU1BMX09QVEVFX0lNQUdF
-IG1heSBhcyB3ZWxsIGJvb3QgYSBsZWdhY3kgdWJvb3QgaW1hZ2UgLS0gbm90aGluZyAKcHJldmVu
-dHMgaXQuIFNvIHRvIGluZmVyIGZyb20gdGhpcyB0aGF0IHUtYm9vdCBydW5zIGluIHRoZSBub3Jt
-YWwgd29ybGQgCmlzIHdyb25nLgoKV2l0aG91dCBsb3NzIG9mIGdlbmVyYWxpdHksIGFueSBDT05G
-SUcgdGhhdCBjb25mbGF0ZXMgdS1ib290IG9wdGlvbnMgCndpdGggU1BMIG9wdGlvbnMgaXMgbGlr
-ZWx5IHRvIGNhdXNlIHNvbWUgY2hhbmdlcyBkb3duIHRoZSBsaW5lLgoKCj4gU28ganVzdCBpbnRy
-b2R1Y2UgQ09ORklHX1RGQUJPT1RfRklQX0NPTlRBSU5FUiBkb24ndCBzb2x2ZSBhbGwgdGhlIAo+
-IGlzc3Vlcy4uLi4KPiAKPiAKPiBJIHRoaW5rIHlvdSBuZWVkIHRvIG1hbmFnZSBDT05GSUdfU1BM
-X09QVEVFX0lNQUdFCj4gdG8gaGFuZGxlIHNwZWNpZmljIGNhc2Ugd2hlbiBPUFRFRSBpcyBydW5u
-aW5nIGFmdGVyIFNQTC4KClN1cmUsIGJ1dCBJJ2QgaGF2ZSB0byBhZGp1c3QgdGhpcyBhdCBydW50
-aW1lLCBub3QgaW4gS2NvbmZpZyBmb3IgdGhlIApyZWFzb25zIGFib3ZlLgoKPiBJIHRyeSB0byBl
-eHBlcmltZW50IHRoZSBPUFRFRSBsb2FkIGJ5IFNQTCBidXQgSSBkb24ndCBzZWUgaG93IAo+IHRo
-ZSBPUC1URUUgcGFnZXIgY2FuIGJlIG1hbmFnZWQgYnkgU1BMIGluIHRoZSBjdXJyZW50IGNvZGUu
-Cj4gSXQgbXVzdCBsb2FkZWQgaW4gU1lSQU0gYXQgMHgyZmZjMDAwMCwgd2l0aCBhIHJpc2sgdG8g
-b3ZlcndyaXRlIHRoZSBTUEwKPiBjb2RlIGxvYWRlZCBieSByb20gY29kZSBhdCAweDJmZmMyNTAw
-LgoKVGhpcyBjb25zaWRlcmF0aW9uIGlzIG5vdCB1bmlxdWUgdG8gU1BMLiBJIGRvbid0IGhhdmUg
-dGhhdCBwcm9ibGVtIApiZWNhdXNlIFNQTCBsb2FkcyBPUC1URUUgdG8gRFJBTSBhdCAweGRlMDAw
-MDAwLiBJZiBPUC1URUUgd2FudHMgdG8gbG9hZCAKcGFydHMgb2YgaXRzZWxmIHRvIFNZU1JBTSwg
-dGhhdCBoYXBwZW5zIGFmdGVyIFNQTCBwYXNzZWQgY29udHJvbCwgc28gdGhlIApjb25mbGljdCBp
-cyBub3QgcmVsZXZhbnQuCgo+IG9yIGhvdyB0byBtYW5hZ2Ugc2V2ZXJhbCBiaW5hcnksIHNlZSBP
-UC1URUUgaGVhZGVyIHYyIHN1cHBvcnQgaW4gT1AtVEVFLAo+IAo+IFNldmVyYWwgZmlsZSBpdCBp
-cyBhbHJlYWR5IHN1cHBvcnRlZCBpbiBURi1BIEJMMiB3aXRoIEZJUDoKPiAKPiB0ZWUtaGVhZGVy
-X3YyLmJpbgo+IHRlZS1wYWdlcl92Mi5iaW4KPiB0ZWUtcGFnZWFibGVfdjIuYmluCgpJIGRvbid0
-IGtub3cgaG93IHRvIHVzZSB1c2UgdGhlIE9QLVRFRSBwYWdlciB3aXRoIFNQTCwgc28gSSBlbGVj
-dGVkIG5vdCB0bzoKCkVYVFJBX09FTUFLRSA9ICJQTEFURk9STT0ke09QVEVFX1BMQVRGT1JNfSBc
-CgkJQ0ZHX1dJVEhfUEFHRVI9biBcCgkJQ0ZHX05TX0VOVFJZX0FERFI9JHtLRVJORUxfVUlNQUdF
-X0xPQURBRERSRVNTfSBcCgkJQ1JPU1NfQ09NUElMRT0ke0hPU1RfUFJFRklYfSBcCgkJQ0ZHX1RF
-RV9DT1JFX0RFQlVHPXkgXAoJCUNGR19URUVfQ09SRV9MT0dfTEVWRUw9MiBcCgkJJHtUWkRSQU1f
-RkxBR1N9IFwKICAgICAgICAgIgoKVFpEUkFNX0ZMQUdTID0gIkNGR19UWkRSQU1fU1RBUlQ9IDB4
-ZGUwMDAwMDBcCiAgICAgICAgICAgICAgICAgQ0ZHX0RSQU1fU0laRT0weDIwMDAwMDAwICIKCkFs
-ZXgKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qt
-c3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8v
-dWJvb3Qtc3RtMzIK
+
+
+On 10/4/21 9:57 AM, Patrick DELAUNAY wrote:
+> Hi,
+> 
+> => if OPTEE is loaded after SPL the U-Boot configuration change (running 
+> in secure world or not)
+> 
+> I am starting to work on these issues in the branch
+> 
+> https://github.com/u-boot/u-boot/compare/master...patrickdelaunay:spl_optee_W2140 
+> https://github.com/u-boot/u-boot/commit/04ad553e9c6bee62781460d2952df4962e58ae14 
+> https://github.com/u-boot/u-boot/commit/aebb687a1557590bf070cf5d3478544ffff20ca1 
+> 
+> But it is still not working, OP-TEE is not correctly started
+
+What do you mean by "OP-TEE is not correctly started". Here's the .its 
+that I use for my FIT image. I hope this will be helpful.
+
+/dts-v1/
+;/ {
+	description = "U-Boot fitImage for stm32mp1";
+	#address-cells = <1>;
+	images {	
+		optee-1 {
+			description = "OP-TEE secure world firmware";
+			data = /incbin/("firmware/tee.bin");
+			type = "tee";
+			arch = "arm";
+			os = "tee";
+			compression = "none";
+			load = <0xddffffe4>;
+			entry = <0xde000000>;
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		kernel-1 {
+			description = "Linux kernel";
+			data = /incbin/("kernel/zImage");
+			type = "kernel";
+			arch = "arm";
+			os = "linux";
+			compression = "none";
+			load = <0xc2000040>;
+			entry = <0xc2000040>;
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-stm32mp157c-ev1.dtb {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("kernel/stm32mp157c-ev1.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-stm32mp157c-dk2.dtb {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("kernel/stm32mp157c-dk2.dtb");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-dk2-optee.dto {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("firmware/dk2-optee.dto");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-dk2-can1-enable.dto {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("firmware/dk2-can1-enable.dto");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		fdt-bootargs.dto {
+			description = "Flattened Device Tree blob";
+			data = /incbin/("firmware/bootargs.dto");
+			type = "flat_dt";
+			arch = "arm";
+			compression = "none";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+	};
+	configurations {
+		default = "secure-stm32mp157c-ev1.dtb";
+		secure-stm32mp157c-ev1.dtb {
+			description = "Linux with OP-TEE for stm32mp157c-ev1.dtb";
+			kernel = "optee-1";
+			fdt = "fdt-stm32mp157c-ev1.dtb", "fdt-bootargs.dto";
+			loadables = "kernel-1";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+		secure-stm32mp157c-dk2.dtb {
+			description = "Linux with OP-TEE for stm32mp157c-dk2.dtb";
+			kernel = "optee-1";
+			fdt = "fdt-stm32mp157c-dk2.dtb", "fdt-bootargs.dto", 
+"fdt-dk2-can1-enable.dto", "fdt-dk2-optee.dto";
+			loadables = "kernel-1";
+			hash-1 {
+				algo = "sha256";
+			};
+		};
+	};
+};
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

@@ -2,64 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4AF084271A4
+	by mail.lfdr.de (Postfix) with ESMTPS id 62ACA4271A5
 	for <lists+uboot-stm32@lfdr.de>; Fri,  8 Oct 2021 21:57:12 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1119BC5C823;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1E4BDC5C825;
 	Fri,  8 Oct 2021 19:57:12 +0000 (UTC)
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com
- [209.85.167.178])
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com
+ [209.85.210.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D09FDC32E8F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8C11CC32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  8 Oct 2021 19:57:07 +0000 (UTC)
-Received: by mail-oi1-f178.google.com with SMTP id s24so15125684oij.8
+ Fri,  8 Oct 2021 19:57:09 +0000 (UTC)
+Received: by mail-ot1-f44.google.com with SMTP id
+ x33-20020a9d37a4000000b0054733a85462so12946395otb.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 08 Oct 2021 12:57:07 -0700 (PDT)
+ Fri, 08 Oct 2021 12:57:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=8OpHEYlQb8Mu5hcRIaotjRf4RRob815sMXJYLVBAtjw=;
- b=YqQ7mr0TFBia75a+cg+WHgSYEreOHXuZCXYzjMwpoApfkBqWjdfnIz5Jru2pgCrkMe
- oovdOvyy2LPDs3Yekd8GaRqbpGq3H7xNjvldqunr5WsIIdXbuZYJV+kVdCXpekGNxej7
- wWQeMvFSPbk7cH3Vll5QZdYqvHKfhbfYx37as9LxqOpykYT09ItATjzSzZWPtvUZzxns
- R1vJl1tdlU9CFsjmutmTjYaySz8ISv1lljcfoSYEp0it2ceNA62LNISfMYdJVYEVYwBO
- gZkgyNHt+qVNb+huoLjfqQhNgo8/6hRB+Hilt6IIOBGZgzxeVb+o8Y9s6Y+1iYQ+xEl/
- vlKQ==
+ bh=/A42Glvy8cNQ5MTm16d7kUpOtUkMPsOCwK1Js6GhOdk=;
+ b=OZ53lHBrdwRVj8+9PFLgkqYA/OibU56g9l2QYMSQi/fGou026kW8JQ5TzC0VUah7W1
+ dRf4IUgMFzSMlSOFf40V/oMbhDGb6Y3DQSPzw28zN+Nf2noy/pqronwEhWLY7Jo2CjCa
+ BlhIQE9vn/K9zP2i0RPJcM+QojLnC9/ub2eke0IIW50bj+hGxu+vhrSBIOnTYTROvbsP
+ znpuvLdX6DEJsTH6AemYh4eoh2wSUWR/JM07kVk4Tc92MX0TpLhLKel4bOztDKFAa+yb
+ YZDScXQl2+1gr6ywvF7viwSmbIGbzakSpTXbrB2kWZqigNm94tQJaPAU2kcdPL4XrkJf
+ jVgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=8OpHEYlQb8Mu5hcRIaotjRf4RRob815sMXJYLVBAtjw=;
- b=45Z80MeTFyIeUAn2rIxZn2V71f5rN5qE85SKgkCtQZnWtq/VeQZdM26FjDfbciIAVv
- +WJWVTt4ph8ha5QqprccoSZaklvJN8I0E8SsvNP19+kSOdS3m0aa0ofQOKF5iI4Z+0XD
- 9USUsJjQBwDyOmj6NwhufAQ77n8BkEHWVBX+U2Xf1jmmnSf/Qdd3fZvmkCTaVBYvVFwB
- 4zRaR3yl6aM0RIi6yEwkX46+fK6Vkp8JtB2kohCjkoy6biJ4GU4AxoDnr4wIW458LHzG
- NsQ1ZVuegcebWd2qsZ37JQtWKY8S+wKCYDYiH44P/CdFdFmiKNmFTCtUgQneJHPcgsG6
- cU/Q==
-X-Gm-Message-State: AOAM530br7EjMpbpoYMXu28bswFTxnGF9HUvzr0bYzk+I1vXh3WuneL4
- uYVE++rn/wu3wOjYTrO8wHpbVbIB69A=
-X-Google-Smtp-Source: ABdhPJx5LZenvi9nDjXeSCWg5gpD/8gr7nOmHDriWDD/YOdNe+LdHhxd4+iIu33t8P/GrxuN45b1fw==
-X-Received: by 2002:aca:3c8a:: with SMTP id j132mr9623413oia.171.1633723026840; 
- Fri, 08 Oct 2021 12:57:06 -0700 (PDT)
+ bh=/A42Glvy8cNQ5MTm16d7kUpOtUkMPsOCwK1Js6GhOdk=;
+ b=WYsK4HWAy9MjfcQv9OjgKvuvL9w82LJl+LSU+PFtlKNQkStYVfiYI942US4w/quatX
+ 8Tb1kL3anddFU00A1iDS1uBJnIThXuYLvR1wsJKFMcgmEDth1ZTFG195a7no4+bIz4DI
+ EkcXMm0PAYwY+pi7ecti/vWWsRln40iCUnIHb+5jrV/ySFZirUpikX43DTZMdSqtecpH
+ 4mUWU9+BsuM17TPwSY3paySxCUG8t+Rx56Obl8RcEKjHlWztfADg/t5OTskB7v3WpB87
+ jpTFVyiqHOonDVcI3yn0aKAUi/8lxHLjM5/4a4hx7AVY9hgTPzl51t7foa2rQkL8OkCZ
+ +vlg==
+X-Gm-Message-State: AOAM531uUC8sm+Bbgmh5lSXtfMCPZJkwOEcZLiAnsMc6spoq0VsxgCPf
+ 9OmS8Pumhnrzzt5woIwRscQ=
+X-Google-Smtp-Source: ABdhPJy22te1hrZZ6hHCTIyu5J8l4MjigfSvqFY6yOsxAOmuCUDolc3JdJQisaWjH4bE/Wc11fI41A==
+X-Received: by 2002:a9d:71d8:: with SMTP id z24mr10555950otj.245.1633723027835; 
+ Fri, 08 Oct 2021 12:57:07 -0700 (PDT)
 Received: from nuclearis3.lan (c-98-195-139-126.hsd1.tx.comcast.net.
  [98.195.139.126])
- by smtp.gmail.com with ESMTPSA id x8sm67409otg.31.2021.10.08.12.57.05
+ by smtp.gmail.com with ESMTPSA id x8sm67409otg.31.2021.10.08.12.57.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Oct 2021 12:57:06 -0700 (PDT)
+ Fri, 08 Oct 2021 12:57:07 -0700 (PDT)
 From: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 To: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
  patrick.delaunay@foss.st.com
-Date: Fri,  8 Oct 2021 14:56:49 -0500
-Message-Id: <20211008195655.46046-8-mr.nuke.me@gmail.com>
+Date: Fri,  8 Oct 2021 14:56:50 -0500
+Message-Id: <20211008195655.46046-9-mr.nuke.me@gmail.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211008195655.46046-1-mr.nuke.me@gmail.com>
 References: <20211008195655.46046-1-mr.nuke.me@gmail.com>
 MIME-Version: 1.0
 Cc: etienne.carriere@linaro.org, Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: [Uboot-stm32] [PATCH v3 07/13] arm: stm32mp: bsec: Update OTP
-	shadow registers in SPL
+Subject: [Uboot-stm32] [PATCH v3 08/13] arm: stm32mp: Factor out reading MAC
+	address from OTP
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,38 +77,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-For TFABOOT and SPL_BUILD, stm32mp_bsec_probe() skipped updating the
-OTP shadow registers. The idea is that we can't access BSEC from the
-normal world. This is true with TFABOOT. However, in SPL, we are in
-the secure world, so skipping probe is incorrect. In fact, SPL is not
-even built when TFABOOT is selected.
-
-Thus, do not skip this step for SPL_BUILD. Note that because SPL is
-now doing this step, we no longer need to do it in u-boot. The new
-logic is "let the FSBL do it", which is simpler.
+Move the reading the OTP into a separate function. This is
+required for a subsequent change which sets the MAC in SPL.
 
 Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
- arch/arm/mach-stm32mp/bsec.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-stm32mp/cpu.c | 37 +++++++++++++++++++++++--------------
+ 1 file changed, 23 insertions(+), 14 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
-index fe39bd80cf..41ed5f3cf5 100644
---- a/arch/arm/mach-stm32mp/bsec.c
-+++ b/arch/arm/mach-stm32mp/bsec.c
-@@ -503,10 +503,10 @@ static int stm32mp_bsec_probe(struct udevice *dev)
+diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+index eb79f3ffd2..8727de513c 100644
+--- a/arch/arm/mach-stm32mp/cpu.c
++++ b/arch/arm/mach-stm32mp/cpu.c
+@@ -593,6 +593,28 @@ static void setup_boot_mode(void)
+ 	clrsetbits_le32(TAMP_BOOT_CONTEXT, TAMP_BOOT_FORCED_MASK, BOOT_NORMAL);
+ }
  
- 	/*
- 	 * update unlocked shadow for OTP cleared by the rom code
--	 * only executed in U-Boot proper when TF-A is not used
-+	 * Executed only by FSBL (SPL or TF-A)
- 	 */
++static int stm32_read_otp_mac(uint8_t enetaddr[ARP_HLEN])
++{
++	struct udevice *dev;
++	int ret, i;
++	u32 otp[2];
++
++	ret = uclass_get_device_by_driver(UCLASS_MISC,
++					  DM_DRIVER_GET(stm32mp_bsec),
++					  &dev);
++	if (ret)
++		return ret;
++
++	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC), otp, sizeof(otp));
++	if (ret < 0)
++		return ret;
++
++	for (i = 0; i < ARP_HLEN; i++)
++		enetaddr[i] = ((uint8_t *)&otp)[i];
++
++	return 0;
++}
++
+ /*
+  * If there is no MAC address in the environment, then it will be initialized
+  * (silently) from the value in the OTP.
+@@ -601,29 +623,16 @@ __weak int setup_mac_address(void)
+ {
+ #if defined(CONFIG_NET)
+ 	int ret;
+-	int i;
+-	u32 otp[2];
+ 	uchar enetaddr[6];
+-	struct udevice *dev;
  
--	if (!IS_ENABLED(CONFIG_TFABOOT) && !IS_ENABLED(CONFIG_SPL_BUILD)) {
-+	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
- 		plat = dev_get_plat(dev);
+ 	/* MAC already in environment */
+ 	if (eth_env_get_enetaddr("ethaddr", enetaddr))
+ 		return 0;
  
- 		for (otp = 57; otp <= BSEC_OTP_MAX_VALUE; otp++)
+-	ret = uclass_get_device_by_driver(UCLASS_MISC,
+-					  DM_DRIVER_GET(stm32mp_bsec),
+-					  &dev);
+-	if (ret)
+-		return ret;
+-
+-	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC),
+-			otp, sizeof(otp));
++	ret = stm32_read_otp_mac(enetaddr);
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	for (i = 0; i < 6; i++)
+-		enetaddr[i] = ((uint8_t *)&otp)[i];
+-
+ 	if (!is_valid_ethaddr(enetaddr)) {
+ 		log_err("invalid MAC address in OTP %pM\n", enetaddr);
+ 		return -EINVAL;
 -- 
 2.31.1
 

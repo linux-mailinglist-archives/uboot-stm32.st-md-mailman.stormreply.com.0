@@ -2,63 +2,88 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CA58428825
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Oct 2021 09:53:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F98742988E
+	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Oct 2021 23:01:44 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 481D2C5C827;
-	Mon, 11 Oct 2021 07:53:04 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 13EF0C597B0;
+	Mon, 11 Oct 2021 21:01:44 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+ [209.85.208.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA604C58D58
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A36F5C32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Oct 2021 07:53:00 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19B7GLbP020232; 
- Mon, 11 Oct 2021 09:52:59 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=o9Y0NsbOFIylxVE+2T/kumAsR0mSD12YFf3HEZU9Gm0=;
- b=jCtrhZTqKieST2BG/R20vy9w97qT5t6Aaf7gXiGAbk3Llez34EubBcB9XlGrla26VpLJ
- C1yxI9m7AFSjiQaEmx4/a2dr8vdrLJnyRGqM6lIVsbxS4D92rHaeyfj0B3i4QNalhuiK
- VrsR8WB9REcnwa1amrxl5qN3ne/q9VDqDsTrIgECVSBZ61oUlXqZX/5kgDJQHlIM9aWF
- rWKKPYFmQ/KzzOyOBCwTcUop2dRtH+2o1ok46eeuY7rHeLK8Uz1rdXwWwNe6fqkB7jzG
- NwDOj/y1cBOxCfgeNPyVt61EajR5CeywvBKRSCC12XRP7Z1EfS2RkRfGadpPhH5aqSZh 7A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bmgqu87bv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Oct 2021 09:52:59 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5335100038;
- Mon, 11 Oct 2021 09:52:58 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9D52021513A;
- Mon, 11 Oct 2021 09:52:58 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Mon, 11 Oct 2021 09:52:58
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 11 Oct 2021 09:52:51 +0200
-Message-ID: <20211011075244.4.Id047d97a30c68f46ac2bcb57014faa42067dd1ba@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211011075244.1.Icb805e47dd8102559236013264342b52c187813f@changeid>
-References: <20211011075244.1.Icb805e47dd8102559236013264342b52c187813f@changeid>
+ Mon, 11 Oct 2021 21:01:42 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id d9so48645559edh.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 11 Oct 2021 14:01:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=JrUfpJ7vB0q95/uhNtlqg0fIxG+xAz03oAX603ONm3I=;
+ b=kB28ByGNKJVaSKXhQvwwnFUVqmQJg7NW57gipyDqTF36aJltLyfz3Wfh0NvGTQcNGq
+ o2yJqOstV4Suz4wpQf1Ha2Borf0fw/unuBBjrq6Hp+vKVTkJpiYouigC6586GrVDF7wM
+ Bd27cRD3e06GWSkHT0Cm7nmx5MeFiLT18eLQMlTujjcqI1/JdU8Mzy8Zq9gtvu8G3UK8
+ VAbW5OxWCUT+MB4izjGGqRTfeB7KjuMH/QOB13aKudgSjo5TN+AiOKBCBV09ENQIR8Q5
+ mfW8cgDwdk1sgNJVkBbwLxzAN/laqgFje5BqClL4mNgoqD7vrLLov99+usjE/vnK6d9O
+ LSxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=JrUfpJ7vB0q95/uhNtlqg0fIxG+xAz03oAX603ONm3I=;
+ b=fA9eSERzch1e0DsjdyYHJQ0ey8sOy/7jyOR8Dhxj3Abtxp4ZvY60iKD+ZV6jzKIoZ/
+ ylyR5l5NIx7Cz2KeCcd5jKZXOTW5Enj3KWsGvyWUadMXaSCqnVo4EGine3uba53/fjLv
+ IxQXHGUxb/vUaGabcf7VoV+bKV3vXCVSlclMMIC08/alTzw/hGCM86sDyZTjywqtlakx
+ 5Cqhr8vnfQS5P8Eu70CBY2f1lj+4tzvP7dsnTTeJa1rtytNq4UCPAtY9RRC7CRsk4xqg
+ 3X5fNElSWzVA5cyuCVzy8URXBr7dePEJ7gAU2Mzlfv36+WC2RGuhvfeKy216WRzXdLe0
+ DUAQ==
+X-Gm-Message-State: AOAM5329asAdetURt9uqGfWTpAdhE4H3WCEiL9+2BvDAe/cNviGUl6/5
+ vs/UQpMUrxbrVJYmt4mqijY13A==
+X-Google-Smtp-Source: ABdhPJwSV0+/woax3/DEL6VYZytyEj6m1qlRM9PC9SNP0xfpiBoo5aALV0Lx7VGGjI5Yb6ErOeaDdQ==
+X-Received: by 2002:a05:6402:27cd:: with SMTP id
+ c13mr32569794ede.377.1633986101547; 
+ Mon, 11 Oct 2021 14:01:41 -0700 (PDT)
+Received: from apalos.home ([2a02:587:468e:477f:2e56:dcff:fe9a:8f06])
+ by smtp.gmail.com with ESMTPSA id z5sm4857769edm.82.2021.10.11.14.01.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Oct 2021 14:01:41 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: sjg@chromium.org
+Date: Tue, 12 Oct 2021 00:01:33 +0300
+Message-Id: <20211011210137.136188-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-10-11_02,2021-10-07_02,2020-04-07_01
-Cc: Marek Vasut <marex@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Zong Li <zong.li@sifive.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@denx.de>,
+ Asherah Connor <ashe@kivikakk.ee>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Wasim Khan <wasim.khan@nxp.com>,
+ Harald Seiler <hws@denx.de>, Dario Binacchi <dariobin@libero.it>,
+ Nandor Han <nandor.han@vaisala.com>, Andre Przywara <andre.przywara@arm.com>,
+ Tim Harvey <tharvey@gateworks.com>, Green Wan <green.wan@sifive.com>,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>, Michal Simek <monstr@monstr.eu>,
+ Matthias Brugger <mbrugger@suse.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
  Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: [Uboot-stm32] [PATCH 4/4] stm32mp15: tidy up #ifdefs in cpu.c
+Subject: [Uboot-stm32] [PATCH v2] sandbox: Remove OF_HOSTFILE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,121 +100,669 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-We should avoid #ifdef in C modules and the unused functions
-are eliminated by the linker.
+OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
+unique and not causing any confusions,  we are better of having simpler
+config options for the DTB.
 
-Use the more readable IS_ENABLE() instead.
+So let's replace that with the existing OF_BOARD.  U-Boot would then
+have only three config options for the DTB origin.
+- OF_SEPARATE, build separately from U-Boot
+- OF_BOARD, board specific way of providing the DTB
+- OF_EMBED embedded in the u-boot binary(should not be used in production
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+Note that this must be applied on top of
+https://lore.kernel.org/u-boot/20210930071800.443059-1-ilias.apalodimas@linaro.org/
+Changes since v1:
+- Added internal error value on board_fdt_blob_setup().  Arguably
+  we can just check against NULL and simplify this even more if we
+  don't care about the errno
+- OF_BOARD is now default for sandbox builds
+ Makefile                                    |  6 ++---
+ arch/arm/mach-stm32mp/boot_params.c         |  3 ++-
+ arch/sandbox/cpu/cpu.c                      | 27 +++++++++++++--------
+ arch/sandbox/include/asm/u-boot-sandbox.h   |  8 ------
+ board/AndesTech/ax25-ae350/ax25-ae350.c     |  4 ++-
+ board/Marvell/octeontx/board-fdt.c          |  3 ++-
+ board/Marvell/octeontx2/board-fdt.c         |  3 ++-
+ board/Marvell/octeontx2/board.c             |  3 ++-
+ board/armltd/vexpress64/vexpress64.c        |  7 ++++--
+ board/broadcom/bcmstb/bcmstb.c              |  3 ++-
+ board/emulation/qemu-arm/qemu-arm.c         |  3 ++-
+ board/emulation/qemu-ppce500/qemu-ppce500.c |  3 ++-
+ board/emulation/qemu-riscv/qemu-riscv.c     |  3 ++-
+ board/highbank/highbank.c                   |  3 ++-
+ board/raspberrypi/rpi/rpi.c                 |  8 ++++--
+ board/sifive/unleashed/unleashed.c          |  3 ++-
+ board/sifive/unmatched/unmatched.c          |  3 ++-
+ board/socrates/socrates.c                   |  4 ++-
+ board/xen/xenguest_arm64/xenguest_arm64.c   |  7 ++++--
+ board/xilinx/common/board.c                 |  3 ++-
+ configs/sandbox64_defconfig                 |  1 -
+ configs/sandbox_defconfig                   |  1 -
+ configs/sandbox_flattree_defconfig          |  1 -
+ configs/sandbox_noinst_defconfig            |  1 -
+ configs/sandbox_spl_defconfig               |  1 -
+ configs/tools-only_defconfig                |  1 -
+ doc/develop/devicetree/control.rst          |  7 +++---
+ dts/Kconfig                                 | 10 +-------
+ include/fdtdec.h                            |  4 ++-
+ lib/fdtdec.c                                | 14 +++++------
+ scripts/Makefile.spl                        |  4 +--
+ 31 files changed, 82 insertions(+), 70 deletions(-)
 
- arch/arm/mach-stm32mp/cpu.c | 34 +++++++++++++++-------------------
- 1 file changed, 15 insertions(+), 19 deletions(-)
-
-diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-index 7421ea42a1..325d710100 100644
---- a/arch/arm/mach-stm32mp/cpu.c
-+++ b/arch/arm/mach-stm32mp/cpu.c
-@@ -93,7 +93,6 @@ u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
+diff --git a/Makefile b/Makefile
+index 3014788e14e8..cf3d98d00a62 100644
+--- a/Makefile
++++ b/Makefile
+@@ -957,7 +957,7 @@ INPUTS-$(CONFIG_BINMAN_STANDALONE_FDT) += u-boot.dtb
+ ifeq ($(CONFIG_SPL_FRAMEWORK),y)
+ INPUTS-$(CONFIG_OF_SEPARATE) += u-boot-dtb.img
+ endif
+-INPUTS-$(CONFIG_OF_HOSTFILE) += u-boot.dtb
++INPUTS-$(CONFIG_SANDBOX) += u-boot.dtb
+ ifneq ($(CONFIG_SPL_TARGET),)
+ INPUTS-$(CONFIG_SPL) += $(CONFIG_SPL_TARGET:"%"=%)
+ endif
+@@ -1423,7 +1423,7 @@ u-boot-lzma.img: u-boot.bin.lzma FORCE
  
- struct lmb lmb;
+ u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl u-boot-ivt.img: \
+ 		$(if $(CONFIG_SPL_LOAD_FIT),u-boot-nodtb.bin \
+-			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_OF_HOSTFILE)$(CONFIG_BINMAN_STANDALONE_FDT),dts/dt.dtb) \
++			$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX)$(CONFIG_BINMAN_STANDALONE_FDT),dts/dt.dtb) \
+ 		,$(UBOOT_BIN)) FORCE
+ 	$(call if_changed,mkimage)
+ 	$(BOARD_SIZE_CHECK)
+@@ -1437,7 +1437,7 @@ MKIMAGEFLAGS_u-boot.itb += -B 0x8
  
--#if defined(CONFIG_SPL_BUILD)
- static void security_init(void)
- {
- 	/* Disable the backup domain write protection */
-@@ -208,7 +207,6 @@ static void update_bootmode(void)
- 			TAMP_BOOT_MODE_MASK,
- 			boot_mode << TAMP_BOOT_MODE_SHIFT);
- }
--#endif /* defined(CONFIG_SPL_BUILD) */
- 
- u32 get_bootmode(void)
- {
-@@ -286,28 +284,26 @@ int arch_cpu_init(void)
- 	/* early armv7 timer init: needed for polling */
- 	timer_init();
- 
--#if defined(CONFIG_SPL_BUILD)
--	security_init();
--	update_bootmode();
--#endif
-+	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
-+		security_init();
-+		update_bootmode();
-+	}
- /* reset copro state in SPL, when used, or in U-Boot */
--#if !defined(CONFIG_SPL) || defined(CONFIG_SPL_BUILD)
--	/* Reset Coprocessor state unless it wakes up from Standby power mode */
--	if (!(readl(PWR_MCUCR) & PWR_MCUCR_SBF)) {
--		writel(TAMP_COPRO_STATE_OFF, TAMP_COPRO_STATE);
--		writel(0, TAMP_COPRO_RSC_TBL_ADDRESS);
-+	if (!IS_ENABLED(CONFIG_SPL) || IS_ENABLED(CONFIG_SPL_BUILD)) {
-+		/* Reset Coprocessor state unless it wakes up from Standby power mode */
-+		if (!(readl(PWR_MCUCR) & PWR_MCUCR_SBF)) {
-+			writel(TAMP_COPRO_STATE_OFF, TAMP_COPRO_STATE);
-+			writel(0, TAMP_COPRO_RSC_TBL_ADDRESS);
-+		}
- 	}
--#endif
- 
- 	boot_mode = get_bootmode();
- 
- 	if (IS_ENABLED(CONFIG_CMD_STM32PROG_SERIAL) &&
- 	    (boot_mode & TAMP_BOOT_DEVICE_MASK) == BOOT_SERIAL_UART)
- 		gd->flags |= GD_FLG_SILENT | GD_FLG_DISABLE_CONSOLE;
--#if defined(CONFIG_DEBUG_UART) && defined(CONFIG_SPL_BUILD)
--	else
-+	else if (IS_ENABLED(CONFIG_DEBUG_UART) && IS_ENABLED(CONFIG_SPL_BUILD))
- 		debug_uart_init();
--#endif
- 
- 	return 0;
- }
-@@ -461,7 +457,7 @@ void get_soc_name(char name[SOC_NAME_SIZE])
- 		 soc_type[type], soc_pkg[pkg], soc_rev[rev]);
- }
- 
--#if defined(CONFIG_DISPLAY_CPUINFO)
-+/* used when CONFIG_DISPLAY_CPUINFO is activated */
- int print_cpuinfo(void)
- {
- 	char name[SOC_NAME_SIZE];
-@@ -471,7 +467,6 @@ int print_cpuinfo(void)
- 
- 	return 0;
- }
--#endif /* CONFIG_DISPLAY_CPUINFO */
- 
- static void setup_boot_mode(void)
- {
-@@ -601,13 +596,15 @@ static void setup_boot_mode(void)
+ ifdef U_BOOT_ITS
+ u-boot.itb: u-boot-nodtb.bin \
+-		$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_OF_HOSTFILE),dts/dt.dtb) \
++		$(if $(CONFIG_OF_SEPARATE)$(CONFIG_OF_EMBED)$(CONFIG_SANDBOX),dts/dt.dtb) \
+ 		$(U_BOOT_ITS) FORCE
+ 	$(call if_changed,mkfitimage)
+ 	$(BOARD_SIZE_CHECK)
+diff --git a/arch/arm/mach-stm32mp/boot_params.c b/arch/arm/mach-stm32mp/boot_params.c
+index 84647e70398b..e91ef1b2fc70 100644
+--- a/arch/arm/mach-stm32mp/boot_params.c
++++ b/arch/arm/mach-stm32mp/boot_params.c
+@@ -33,10 +33,11 @@ void save_boot_params(unsigned long r0, unsigned long r1, unsigned long r2,
+  * Use the saved FDT address provided by TF-A at boot time (NT_FW_CONFIG =
+  * Non Trusted Firmware configuration file) when the pointer is valid
   */
- __weak int setup_mac_address(void)
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
  {
--#if defined(CONFIG_NET)
- 	int ret;
- 	int i;
- 	u32 otp[2];
- 	uchar enetaddr[6];
- 	struct udevice *dev;
+ 	log_debug("%s: nt_fw_dtb=%lx\n", __func__, nt_fw_dtb);
  
-+	if (!IS_ENABLED(CONFIG_NET))
-+		return 0;
++	*err = 0;
+ 	/* use external device tree only if address is valid */
+ 	if (nt_fw_dtb >= STM32_DDR_BASE) {
+ 		if (fdt_magic(nt_fw_dtb) == FDT_MAGIC)
+diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+index 48636ab63919..9887d09272a3 100644
+--- a/arch/sandbox/cpu/cpu.c
++++ b/arch/sandbox/cpu/cpu.c
+@@ -291,44 +291,51 @@ void invalidate_dcache_range(unsigned long start, unsigned long stop)
+ {
+ }
+ 
+-int sandbox_read_fdt_from_file(void)
++void *board_fdt_blob_setup(int *ret)
+ {
+ 	struct sandbox_state *state = state_get_current();
+ 	const char *fname = state->fdt_fname;
+-	void *blob;
++	void *blob = NULL;
+ 	loff_t size;
+ 	int err;
+ 	int fd;
+ 
+ 	blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
++	*ret = 0;
+ 	if (!state->fdt_fname) {
+ 		err = fdt_create_empty_tree(blob, 256);
+ 		if (!err)
+ 			goto done;
+ 		printf("Unable to create empty FDT: %s\n", fdt_strerror(err));
+-		return -EINVAL;
++		*ret = -EINVAL;
++		goto fail;
+ 	}
+ 
+ 	err = os_get_filesize(fname, &size);
+ 	if (err < 0) {
+-		printf("Failed to file FDT file '%s'\n", fname);
+-		return err;
++		printf("Failed to find FDT file '%s'\n", fname);
++		*ret = err;
++		goto fail;
+ 	}
+ 	fd = os_open(fname, OS_O_RDONLY);
+ 	if (fd < 0) {
+ 		printf("Failed to open FDT file '%s'\n", fname);
+-		return -EACCES;
++		*ret = -EACCES;
++		goto fail;
+ 	}
 +
- 	/* MAC already in environment */
- 	if (eth_env_get_enetaddr("ethaddr", enetaddr))
- 		return 0;
-@@ -634,7 +631,6 @@ __weak int setup_mac_address(void)
- 	ret = eth_env_set_enetaddr("ethaddr", enetaddr);
- 	if (ret)
- 		log_err("Failed to set mac address %pM from OTP: %d\n", enetaddr, ret);
--#endif
+ 	if (os_read(fd, blob, size) != size) {
+ 		os_close(fd);
+-		return -EIO;
++		printf("Failed to read FDT file '%s'\n", fname);
++		*ret =  -EIO;
++		goto fail;
+ 	}
+ 	os_close(fd);
  
+ done:
+-	gd->fdt_blob = blob;
+-
+-	return 0;
++	return blob;
++fail:
++	return NULL;
+ }
+ 
+ ulong timer_get_boot_us(void)
+diff --git a/arch/sandbox/include/asm/u-boot-sandbox.h b/arch/sandbox/include/asm/u-boot-sandbox.h
+index 73b1897191d5..56dc13c3eb11 100644
+--- a/arch/sandbox/include/asm/u-boot-sandbox.h
++++ b/arch/sandbox/include/asm/u-boot-sandbox.h
+@@ -76,14 +76,6 @@ int pci_unmap_physmem(const void *addr, unsigned long len,
+  */
+ void sandbox_set_enable_pci_map(int enable);
+ 
+-/**
+- * sandbox_read_fdt_from_file() - Read a device tree from a file
+- *
+- * Read a device tree file from a host file and set it up for use as the
+- * control FDT.
+- */
+-int sandbox_read_fdt_from_file(void);
+-
+ /**
+  * sandbox_reset() - reset sandbox
+  *
+diff --git a/board/AndesTech/ax25-ae350/ax25-ae350.c b/board/AndesTech/ax25-ae350/ax25-ae350.c
+index 6de91208258f..f68a3fa29b48 100644
+--- a/board/AndesTech/ax25-ae350/ax25-ae350.c
++++ b/board/AndesTech/ax25-ae350/ax25-ae350.c
+@@ -54,13 +54,15 @@ ulong board_flash_get_legacy(ulong base, int banknum, flash_info_t *info)
  	return 0;
  }
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ #if CONFIG_IS_ENABLED(OF_BOARD)
+ 	return (void *)gd->arch.firmware_fdt_addr;
+ #elif CONFIG_IS_ENABLED(OF_SEPARATE)
+ 	return (void *)CONFIG_SYS_FDT_BASE;
+ #else
++	*err = -EINVAL;
+ 	return NULL;
+ #endif
+ }
+diff --git a/board/Marvell/octeontx/board-fdt.c b/board/Marvell/octeontx/board-fdt.c
+index 1db2a4a26750..e989c374f2b2 100644
+--- a/board/Marvell/octeontx/board-fdt.c
++++ b/board/Marvell/octeontx/board-fdt.c
+@@ -301,7 +301,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+  *
+  * @return	FDT base address received from ATF in x1 register
+  */
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	return (void *)fdt_base_addr;
+ }
+diff --git a/board/Marvell/octeontx2/board-fdt.c b/board/Marvell/octeontx2/board-fdt.c
+index a4771af4c1d8..e2cfe017e83c 100644
+--- a/board/Marvell/octeontx2/board-fdt.c
++++ b/board/Marvell/octeontx2/board-fdt.c
+@@ -215,7 +215,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+  *
+  * @return	FDT base address received from ATF in x1 register
+  */
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	return (void *)fdt_base_addr;
+ }
+diff --git a/board/Marvell/octeontx2/board.c b/board/Marvell/octeontx2/board.c
+index 4e8cb839f5ee..63aa2d613496 100644
+--- a/board/Marvell/octeontx2/board.c
++++ b/board/Marvell/octeontx2/board.c
+@@ -226,12 +226,13 @@ static int do_go_uboot(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	uboot_entry_t entry;
+ 	ulong addr;
+ 	void *fdt;
++	int err;
+ 
+ 	if (argc < 2)
+ 		return CMD_RET_USAGE;
+ 
+ 	addr = hextoul(argv[1], NULL);
+-	fdt = board_fdt_blob_setup();
++	fdt = board_fdt_blob_setup(&err);
+ 	entry = (uboot_entry_t)addr;
+ 	flush_cache((ulong)addr, 1 << 20);	/* 1MiB should be enough */
+ 	dcache_disable();
+diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
+index 2e4260286b5a..d2f307cca5d2 100644
+--- a/board/armltd/vexpress64/vexpress64.c
++++ b/board/armltd/vexpress64/vexpress64.c
+@@ -131,12 +131,15 @@ static phys_addr_t find_dtb_in_nor_flash(const char *partname)
+ 	return ~0;
+ }
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
+ 	phys_addr_t fdt_rom_addr = find_dtb_in_nor_flash(CONFIG_JUNO_DTB_PART);
+ 
+-	if (fdt_rom_addr == ~0UL)
++	*err = 0;
++	if (fdt_rom_addr == ~0UL) {
++		*err = -ENXIO;
+ 		return NULL;
++	}
+ 
+ 	return (void *)fdt_rom_addr;
+ }
+diff --git a/board/broadcom/bcmstb/bcmstb.c b/board/broadcom/bcmstb/bcmstb.c
+index 40d9def24b7b..e27a86c7fc50 100644
+--- a/board/broadcom/bcmstb/bcmstb.c
++++ b/board/broadcom/bcmstb/bcmstb.c
+@@ -136,8 +136,9 @@ int board_late_init(void)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	/* Stored the DTB address there during our init */
+ 	return (void *)prior_stage_fdt_address;
+ }
+diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+index aa68bef469a6..16d5a97167a6 100644
+--- a/board/emulation/qemu-arm/qemu-arm.c
++++ b/board/emulation/qemu-arm/qemu-arm.c
+@@ -94,8 +94,9 @@ int dram_init_banksize(void)
+ 	return 0;
+ }
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	/* QEMU loads a generated DTB for us at the start of RAM. */
+ 	return (void *)CONFIG_SYS_SDRAM_BASE;
+ }
+diff --git a/board/emulation/qemu-ppce500/qemu-ppce500.c b/board/emulation/qemu-ppce500/qemu-ppce500.c
+index 924cc02c4be8..7d8ba34b2588 100644
+--- a/board/emulation/qemu-ppce500/qemu-ppce500.c
++++ b/board/emulation/qemu-ppce500/qemu-ppce500.c
+@@ -333,8 +333,9 @@ u32 cpu_mask(void)
+  *
+  * @return virtual address of FDT received from QEMU in r3 register
+  */
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	return get_fdt_virt();
+ }
+ 
+diff --git a/board/emulation/qemu-riscv/qemu-riscv.c b/board/emulation/qemu-riscv/qemu-riscv.c
+index aa91ca91325c..c53ab6596dd2 100644
+--- a/board/emulation/qemu-riscv/qemu-riscv.c
++++ b/board/emulation/qemu-riscv/qemu-riscv.c
+@@ -72,8 +72,9 @@ int board_fit_config_name_match(const char *name)
+ }
+ #endif
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	/* Stored the DTB address there during our init */
+ 	return (void *)gd->arch.firmware_fdt_addr;
+ }
+diff --git a/board/highbank/highbank.c b/board/highbank/highbank.c
+index ffb6fd922daf..b5fa5101e881 100644
+--- a/board/highbank/highbank.c
++++ b/board/highbank/highbank.c
+@@ -111,8 +111,9 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+ }
+ #endif
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	/*
+ 	 * The ECME management processor loads the DTB from NOR flash
+ 	 * into DRAM (at 4KB), where it gets patched to contain the
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index 372b26b6f2c0..d64aa933b804 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -488,10 +488,14 @@ int board_init(void)
+ /*
+  * If the firmware passed a device tree use it for U-Boot.
+  */
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
+-	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC)
++	*err = 0;
++	if (fdt_magic(fw_dtb_pointer) != FDT_MAGIC) {
++		*err = -ENXIO;
+ 		return NULL;
++	}
++
+ 	return (void *)fw_dtb_pointer;
+ }
+ 
+diff --git a/board/sifive/unleashed/unleashed.c b/board/sifive/unleashed/unleashed.c
+index 8cd514df3005..8f57ca9b9da6 100644
+--- a/board/sifive/unleashed/unleashed.c
++++ b/board/sifive/unleashed/unleashed.c
+@@ -114,8 +114,9 @@ int misc_init_r(void)
+ 
+ #endif
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
+ 		if (gd->arch.firmware_fdt_addr)
+ 			return (ulong *)gd->arch.firmware_fdt_addr;
+diff --git a/board/sifive/unmatched/unmatched.c b/board/sifive/unmatched/unmatched.c
+index d90b252baef7..549f9f8f5aa3 100644
+--- a/board/sifive/unmatched/unmatched.c
++++ b/board/sifive/unmatched/unmatched.c
+@@ -11,8 +11,9 @@
+ #include <dm.h>
+ #include <asm/sections.h>
+ 
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
++	*err = 0;
+ 	if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
+ 		if (gd->arch.firmware_fdt_addr)
+ 			return (ulong *)gd->arch.firmware_fdt_addr;
+diff --git a/board/socrates/socrates.c b/board/socrates/socrates.c
+index 3ba2fbbd5604..a81cb7b2ba66 100644
+--- a/board/socrates/socrates.c
++++ b/board/socrates/socrates.c
+@@ -220,13 +220,15 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ #endif /* CONFIG_OF_BOARD_SETUP */
+ 
+ #if defined(CONFIG_OF_SEPARATE)
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
+ 	void *fw_dtb;
+ 
++	*err = 0;
+ 	fw_dtb = (void *)(CONFIG_SYS_TEXT_BASE - CONFIG_ENV_SECT_SIZE);
+ 	if (fdt_magic(fw_dtb) != FDT_MAGIC) {
+ 		printf("DTB is not passed via %x\n", (u32)fw_dtb);
++		*err = -ENXIO;
+ 		return NULL;
+ 	}
+ 
+diff --git a/board/xen/xenguest_arm64/xenguest_arm64.c b/board/xen/xenguest_arm64/xenguest_arm64.c
+index 21363d878f75..6aa432d847f9 100644
+--- a/board/xen/xenguest_arm64/xenguest_arm64.c
++++ b/board/xen/xenguest_arm64/xenguest_arm64.c
+@@ -39,10 +39,13 @@ int board_init(void)
+  * x0 is the physical address of the device tree blob (dtb) in system RAM.
+  * This is stored in rom_pointer during low level init.
+  */
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
+-	if (fdt_magic(rom_pointer[0]) != FDT_MAGIC)
++	*err = 0;
++	if (fdt_magic(rom_pointer[0]) != FDT_MAGIC) {
++		*err = -ENXIO;
+ 		return NULL;
++	}
+ 	return (void *)rom_pointer[0];
+ }
+ 
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index 9006bd3b4d2e..c577fc313037 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -320,7 +320,7 @@ __maybe_unused int xilinx_read_eeprom(void)
+ }
+ 
+ #if defined(CONFIG_OF_BOARD) || defined(CONFIG_OF_SEPARATE)
+-void *board_fdt_blob_setup(void)
++void *board_fdt_blob_setup(int *err)
+ {
+ 	void *fdt_blob;
+ 
+@@ -353,6 +353,7 @@ void *board_fdt_blob_setup(void)
+ 		return fdt_blob;
+ 
+ 	debug("DTB is also not passed via %p\n", fdt_blob);
++	*err = -ENXIO;
+ 
+ 	return NULL;
+ }
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index f7098b496983..6ceffa7d7cae 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -86,7 +86,6 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_EXT4=y
+ CONFIG_ENV_EXT4_INTERFACE="host"
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index ea08a9e5bd18..17974b05999f 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -110,7 +110,6 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_LIVE=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_EXT4=y
+ CONFIG_ENV_EXT4_INTERFACE="host"
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index a6e2544dc138..8f50410bb052 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -67,7 +67,6 @@ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_MAC_PARTITION=y
+ CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_EXT4=y
+ CONFIG_ENV_EXT4_INTERFACE="host"
+diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
+index 88443f5ab274..f1098987fe17 100644
+--- a/configs/sandbox_noinst_defconfig
++++ b/configs/sandbox_noinst_defconfig
+@@ -85,7 +85,6 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_SPL_OF_PLATDATA=y
+ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_EXT4=y
+diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
+index 77dd83cf6fdd..454bf4d166a0 100644
+--- a/configs/sandbox_spl_defconfig
++++ b/configs/sandbox_spl_defconfig
+@@ -86,7 +86,6 @@ CONFIG_MAC_PARTITION=y
+ CONFIG_AMIGA_PARTITION=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_SPL_OF_PLATDATA=y
+ CONFIG_SPL_OF_PLATDATA_INST=y
+ CONFIG_ENV_IS_NOWHERE=y
+diff --git a/configs/tools-only_defconfig b/configs/tools-only_defconfig
+index f54bc1802ca7..e0866c11c47b 100644
+--- a/configs/tools-only_defconfig
++++ b/configs/tools-only_defconfig
+@@ -12,7 +12,6 @@ CONFIG_MISC_INIT_F=y
+ CONFIG_BOOTP_DNS2=y
+ # CONFIG_CMD_DATE is not set
+ CONFIG_OF_CONTROL=y
+-CONFIG_OF_HOSTFILE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_BOOTP_SEND_HOSTNAME=y
+ CONFIG_IP_DEFRAG=y
+diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+index e84dfb6677a6..0e6f85d5af11 100644
+--- a/doc/develop/devicetree/control.rst
++++ b/doc/develop/devicetree/control.rst
+@@ -108,10 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
+ devicetree at runtime, for example if an earlier bootloader stage creates
+ it and passes it to U-Boot.
+ 
+-If CONFIG_OF_HOSTFILE is defined, then it will be read from a file on
+-startup. This is only useful for sandbox. Use the -d flag to U-Boot to
+-specify the file to read, -D for the default and -T for the test devicetree,
+-used to run sandbox unit tests.
++If CONFIG_SANDBOX is defined, then it will be read from a file on
++startup. Use the -d flag to U-Boot to specify the file to read, -D for the
++default and -T for the test devicetree, used to run sandbox unit tests.
+ 
+ You cannot use more than one of these options at the same time.
+ 
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 100769017e12..4728e7f39374 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -90,6 +90,7 @@ config OF_LIVE
+ choice
+ 	prompt "Provider of DTB for DT control"
+ 	depends on OF_CONTROL
++	default OF_BOARD if SANDBOX
+ 
+ config OF_SEPARATE
+ 	bool "Separate DTB for DT control"
+@@ -108,20 +109,11 @@ config OF_EMBED
+ 
+ config OF_BOARD
+ 	bool "Provided by the board (e.g a previous loader) at runtime"
+-	depends on !SANDBOX
+ 	help
+ 	  If this option is enabled, the device tree will be provided by
+ 	  the board at runtime if the board supports it, instead of being
+ 	  bundled with the image.
+ 
+-config OF_HOSTFILE
+-	bool "Host filed DTB for DT control"
+-	depends on SANDBOX
+-	help
+-	  If this option is enabled, DTB will be read from a file on startup.
+-	  This is only useful for Sandbox.  Use the -d flag to U-Boot to
+-	  specify the file to read.
+-
+ endchoice
+ 
+ config DEFAULT_DEVICE_TREE
+diff --git a/include/fdtdec.h b/include/fdtdec.h
+index d0e13fc18313..a7e68d47097a 100644
+--- a/include/fdtdec.h
++++ b/include/fdtdec.h
+@@ -1172,8 +1172,10 @@ int fdtdec_resetup(int *rescan);
+  * Board-specific FDT initialization. Returns the address to a device tree blob.
+  * Called when CONFIG_OF_BOARD is defined, or if CONFIG_OF_SEPARATE is defined
+  * and the board implements it.
++ *
++ * @err internal error code if we fail to setup a DTB
+  */
+-void *board_fdt_blob_setup(void);
++void *board_fdt_blob_setup(int *err);
+ 
+ /*
+  * Decode the size of memory
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index 7b379564600d..25c176126ae4 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1257,9 +1257,11 @@ static int uncompress_blob(const void *src, ulong sz_src, void **dstp)
+  * For CONFIG_OF_SEPARATE, the board may optionally implement this to
+  * provide and/or fixup the fdt.
+  */
+-__weak void *board_fdt_blob_setup(void)
++__weak void *board_fdt_blob_setup(int *err)
+ {
+ 	void *fdt_blob = NULL;
++
++	*err = 0;
+ #ifdef CONFIG_SPL_BUILD
+ 	/* FDT is at end of BSS unless it is in a different memory region */
+ 	if (IS_ENABLED(CONFIG_SPL_SEPARATE_BSS))
+@@ -1270,6 +1272,7 @@ __weak void *board_fdt_blob_setup(void)
+ 	/* FDT is at end of image */
+ 	fdt_blob = (ulong *)&_end;
+ #endif
++
+ 	return fdt_blob;
+ }
+ #endif
+@@ -1574,12 +1577,9 @@ int fdtdec_setup(void)
+ #  endif
+ # elif defined(CONFIG_OF_BOARD) || defined(CONFIG_OF_SEPARATE)
+ 	/* Allow the board to override the fdt address. */
+-	gd->fdt_blob = board_fdt_blob_setup();
+-# elif defined(CONFIG_OF_HOSTFILE)
+-	if (sandbox_read_fdt_from_file()) {
+-		puts("Failed to read control FDT\n");
+-		return -1;
+-	}
++	gd->fdt_blob = board_fdt_blob_setup(&ret);
++	if (ret)
++		return ret;
+ # endif
+ # ifndef CONFIG_SPL_BUILD
+ 	/* Allow the early environment to override the fdt address */
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+index 25a3e7fa52e9..307eff76ad07 100644
+--- a/scripts/Makefile.spl
++++ b/scripts/Makefile.spl
+@@ -298,11 +298,11 @@ endif
+ # Build the .dtb file if:
+ #   - we are not using OF_PLATDATA
+ #   - we are using OF_CONTROL
+-#   - we have either OF_SEPARATE or OF_HOSTFILE
++#   - we have either OF_SEPARATE or SANDBOX
+ build_dtb :=
+ ifeq ($(CONFIG_$(SPL_TPL_)OF_PLATDATA),)
+ ifneq ($(CONFIG_$(SPL_TPL_)OF_CONTROL),)
+-ifeq ($(CONFIG_OF_SEPARATE)$(CONFIG_OF_HOSTFILE),y)
++ifeq ($(CONFIG_OF_SEPARATE)$(CONFIG_SANDBOX),y)
+ build_dtb := y
+ endif
+ endif
 -- 
-2.25.1
+2.33.0
 
 _______________________________________________
 Uboot-stm32 mailing list

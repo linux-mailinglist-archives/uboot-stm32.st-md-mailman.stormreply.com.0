@@ -2,64 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8AD242A7F5
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Oct 2021 17:12:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41AB942C113
+	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Oct 2021 15:11:47 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FEF9C5C831;
-	Tue, 12 Oct 2021 15:12:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DB280C5C834;
+	Wed, 13 Oct 2021 13:11:46 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16B61C06F81
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5377FC597AC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Oct 2021 15:12:04 +0000 (UTC)
+ Wed, 13 Oct 2021 13:11:45 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19CEXDXB032174; 
- Tue, 12 Oct 2021 17:12:03 +0200
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19D8QMnP011459; 
+ Wed, 13 Oct 2021 15:11:29 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=PtBognX3xNHQYGniZZG5fQ9x+CbHeuu5DGN0XqF6oX0=;
- b=3n/vYrOPI5/QChu+QdzX5EXzJ4Ze2lDzgWmwgG/7tNWwAXAIz+a6GQHx5ZttiT+jMbAH
- SuWxESdAdrFqLC4eBZphI80RQDF4g3pVhHFHrlzkSHgqQMWqExdrSCRJ9CamsI0Kw7aa
- dZCVavdsheRdf5rItQgWir9qrdPAZsxlMmf4ogdl9okEMThwaSPgigAxqrCXv79KW5uA
- R/chqssR0PhDSW4l+ono+wa8AtV4Ub1tkhi8rTYr2tMWsjqcjA19Ali7PwsgVEQHBbKi
- SOMSWr0NVlAFLhn2+72tHmORRk55VsNlFm7MoRpEghsHBaZorG3g4I5/1lanU0Ds8PnM aQ== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=nsTf2DJLjS+TjBH9IbeR5byKgOOGrYHPDqv35YuSd+4=;
+ b=fXD/4WfFQyu706kbItZ1HdmR538hIp2ZQzzGzvjWkizYLkFLqZOEDGrwvYxBQPef82MO
+ bQRqzfjQYqod/wbmYs9+wBkuGYeiXuNAuLvIp4lJe7X2rDC47J6f1+1RpI7kzSUgVzSV
+ OrxJUtZiRxkCWJDWR8ww7ZwilVhqzLTy5J9/IhybbUB7ShqvWVcIJ8fGeDxpJr8lvOwz
+ okbxg/SD34WqepUUTCbs83J9ZSdGYdLwAckH+qNRL2jAabUdt37HklPFgZB/ofUB8U+y
+ SbsetZDiOBF7cAAOswYVvIZDw8hlMpoIcYpdF7eq4sykWr82bgiUmMgf5/hOvD/Ja137 fw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bnc7sr731-1
+ by mx07-00178001.pphosted.com with ESMTP id 3bnuxtt0f5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Oct 2021 17:12:03 +0200
+ Wed, 13 Oct 2021 15:11:29 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5F09710002A;
- Tue, 12 Oct 2021 17:12:02 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9DAEC10002A;
+ Wed, 13 Oct 2021 15:11:26 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 561E322F7BE;
- Tue, 12 Oct 2021 17:12:02 +0200 (CEST)
-Received: from lmecxl0994.lme.st.com (10.75.127.51) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 12 Oct
- 2021 17:12:01 +0200
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 800F022A6DB;
+ Wed, 13 Oct 2021 15:11:26 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 13 Oct 2021 15:11:25
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-References: <20211008093443.1.Ic6dad451e1dc50483b0d69ebebb481ce70dbe27f@changeid>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <d900b0e7-1fea-abfb-f7f1-5c71fd669f14@foss.st.com>
-Date: Tue, 12 Oct 2021 17:12:01 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Date: Wed, 13 Oct 2021 15:11:18 +0200
+Message-ID: <20211013151014.v2.1.I558b557c1bc3ca451e11dae245417c8bfecf33ad@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20211008093443.1.Ic6dad451e1dc50483b0d69ebebb481ce70dbe27f@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-12_04,2021-10-12_01,2020-04-07_01
+ definitions=2021-10-13_05,2021-10-13_02,2020-04-07_01
 Cc: Marek Vasut <marex@denx.de>,
+ Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rick Chen <rick@andestech.com>, Jaehoon Chung <jh80.chung@samsung.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp: add binman support for STM32MP15x
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Heiko Schocher <hs@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH v2] stm32mp: add binman support for STM32MP15x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,99 +72,241 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiAxMC84LzIxIDk6MzQgQU0sIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4gVXNlIGJp
-bm1hbiB0byBhZGQgdGhlIHN0bTMyaW1hZ2UgaGVhZGVyIG9uIFNQTCBiaW5hcnkgZm9yIGJhc2lj
-IGJvb3QKPiBvciBvbiBVLUJvb3QgYmluYXJ5IHdoZW4gaXQgaXMgcmVxdWlyZWQsIGkuZS4gZm9y
-IFRGLUEgYm9vdCB3aXRob3V0IEZJUAo+IHN1cHBvcnQsIHdoZW4gQ09ORklHX1NUTTMyTVAxNXhf
-U1RNMzJJTUFHRSBpcyBhY3RpdmF0ZWQuCj4KPiBUaGUgImJpbm1hbiIgdG9vbCBpcyB0aGUgcmVj
-b21tZW5kZWQgdG9vbCBmb3Igc3BlY2lmaWMgaW1hZ2UgZ2VuZXJhdGlvbi4KPiBUaGlzIHBhdGNo
-IGFsbG93cyB0byBzdXBwcmVzcyB0aGUgY29uZmlnLm1rIGZpbGUgYW5kIGl0IGlzIGEgcHJlbGlt
-aW5hcnkKPiBzdGVwIHRvIG1hbmFnZSBGSVQgZ2VuZXJhdGlvbiB3aXRoIGJpbm1hbi4KPgo+IFNp
-Z25lZC1vZmYtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5j
-b20+Cj4gLS0tCj4KPiAgIGFyY2gvYXJtL2R0cy9zdG0zMm1wMTUtdS1ib290LmR0c2kgfCAyOSAr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICAgYXJjaC9hcm0vbWFjaC1zdG0zMm1wL0tj
-b25maWcgICAgICB8ICAxICsKPiAgIGFyY2gvYXJtL21hY2gtc3RtMzJtcC9jb25maWcubWsgICAg
-fCAyOSAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAgMyBmaWxlcyBjaGFuZ2VkLCAz
-MCBpbnNlcnRpb25zKCspLCAyOSBkZWxldGlvbnMoLSkKPiAgIGRlbGV0ZSBtb2RlIDEwMDY0NCBh
-cmNoL2FybS9tYWNoLXN0bTMybXAvY29uZmlnLm1rCj4KPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0v
-ZHRzL3N0bTMybXAxNS11LWJvb3QuZHRzaSBiL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTUtdS1ib290
-LmR0c2kKPiBpbmRleCA0M2E3OTA5OTc4Li5kYjIzZDgwZWVmIDEwMDY0NAo+IC0tLSBhL2FyY2gv
-YXJtL2R0cy9zdG0zMm1wMTUtdS1ib290LmR0c2kKPiArKysgYi9hcmNoL2FybS9kdHMvc3RtMzJt
-cDE1LXUtYm9vdC5kdHNpCj4gQEAgLTIxLDYgKzIxLDEwIEBACj4gICAJCXBpbmN0cmwxID0gJnBp
-bmN0cmxfejsKPiAgIAl9Owo+ICAgCj4gKwliaW5tYW46IGJpbm1hbiB7Cj4gKwkJbXVsdGlwbGUt
-aW1hZ2VzOwo+ICsJfTsKPiArCj4gICAJY2xvY2tzIHsKPiAgIAkJdS1ib290LGRtLXByZS1yZWxv
-YzsKPiAgIAl9Owo+IEBAIC0yMjgsMyArMjMyLDI4IEBACj4gICAJcmVzZXRzID0gPCZyY2MgVUFS
-VDhfUj47Cj4gICB9Owo+ICAgCj4gKyNpZiBkZWZpbmVkKENPTkZJR19TVE0zMk1QMTV4X1NUTTMy
-SU1BR0UpCj4gKyZiaW5tYW4gewo+ICsJdS1ib290LXN0bTMyIHsKPiArCQlmaWxlbmFtZSA9ICJ1
-LWJvb3Quc3RtMzIiOwo+ICsJCW1raW1hZ2Ugewo+ICsJCQlhcmdzID0gIi1UIHN0bTMyaW1hZ2Ug
-LWEgMHhDMDEwMDAwMCAtZSAweEMwMTAwMDAwIjsKPiArCQkJdS1ib290IHsKPiArCQkJfTsKPiAr
-CQl9Owo+ICsJfTsKPiArfTsKPiArI2VuZGlmCj4gKwo+ICsjaWYgZGVmaW5lZChDT05GSUdfU1BM
-KQo+ICsmYmlubWFuIHsKPiArCXNwbC1zdG0zMiB7Cj4gKwkJZmlsZW5hbWUgPSAidS1ib290LXNw
-bC5zdG0zMiI7Cj4gKwkJbWtpbWFnZSB7Cj4gKwkJCWFyZ3MgPSAiLVQgc3RtMzJpbWFnZSAtYSAw
-eDJGRkMyNTAwIC1lIDB4MkZGQzI1MDAiOwo+ICsJCQl1LWJvb3Qtc3BsIHsKPiArCQkJfTsKPiAr
-CQl9Owo+ICsJfTsKPiArfTsKPiArI2VuZGlmCj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL21hY2gt
-c3RtMzJtcC9LY29uZmlnIGIvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL0tjb25maWcKPiBpbmRleCA2
-OWQ1NmMyM2UxLi40YWNiMjkzMzNjIDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL21hY2gtc3RtMzJt
-cC9LY29uZmlnCj4gKysrIGIvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL0tjb25maWcKPiBAQCAtMzcs
-NiArMzcsNyBAQCBjb25maWcgU1RNMzJNUDE1eAo+ICAgCWJvb2wgIlN1cHBvcnQgU1RNaWNyb2Vs
-ZWN0cm9uaWNzIFNUTTMyTVAxNXggU29jIgo+ICAgCXNlbGVjdCBBUkNIX1NVUFBPUlRfUFNDSSBp
-ZiAhVEZBQk9PVAo+ICAgCXNlbGVjdCBBUk1fU01DQ0MgaWYgVEZBQk9PVAo+ICsJc2VsZWN0IEJJ
-Tk1BTgo+ICAgCXNlbGVjdCBDUFVfVjdBCj4gICAJc2VsZWN0IENQVV9WN19IQVNfTk9OU0VDIGlm
-ICFURkFCT09UCj4gICAJc2VsZWN0IENQVV9WN19IQVNfVklSVAo+IGRpZmYgLS1naXQgYS9hcmNo
-L2FybS9tYWNoLXN0bTMybXAvY29uZmlnLm1rIGIvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL2NvbmZp
-Zy5tawo+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4IGY3ZjViNzdjNDEuLjAwMDAw
-MDAwMDAKPiAtLS0gYS9hcmNoL2FybS9tYWNoLXN0bTMybXAvY29uZmlnLm1rCj4gKysrIC9kZXYv
-bnVsbAo+IEBAIC0xLDI5ICswLDAgQEAKPiAtIyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BM
-LTIuMCsgT1IgQlNELTMtQ2xhdXNlCj4gLSMKPiAtIyBDb3B5cmlnaHQgKEMpIDIwMTgsIFNUTWlj
-cm9lbGVjdHJvbmljcyAtIEFsbCBSaWdodHMgUmVzZXJ2ZWQKPiAtIwo+IC0KPiAtaWZuZGVmIENP
-TkZJR19TUEwKPiAtSU5QVVRTLSQoQ09ORklHX1NUTTMyTVAxNXhfU1RNMzJJTUFHRSkgKz0gdS1i
-b290LnN0bTMyCj4gLWVsc2UKPiAtaWZkZWYgQ09ORklHX1NQTF9CVUlMRAo+IC1JTlBVVFMteSAr
-PSB1LWJvb3Qtc3BsLnN0bTMyCj4gLWVuZGlmCj4gLWVuZGlmCj4gLQo+IC1NS0lNQUdFRkxBR1Nf
-dS1ib290LnN0bTMyID0gLVQgc3RtMzJpbWFnZSAtYSAkKENPTkZJR19TWVNfVEVYVF9CQVNFKSAt
-ZSAkKENPTkZJR19TWVNfVEVYVF9CQVNFKQo+IC0KPiAtdS1ib290LnN0bTMyOiBNS0lNQUdFT1VU
-UFVUID0gdS1ib290LnN0bTMyLmxvZwo+IC0KPiAtdS1ib290LnN0bTMyOiB1LWJvb3QuYmluIEZP
-UkNFCj4gLQkkKGNhbGwgaWZfY2hhbmdlZCxta2ltYWdlKQo+IC0KPiAtTUtJTUFHRUZMQUdTX3Ut
-Ym9vdC1zcGwuc3RtMzIgPSAtVCBzdG0zMmltYWdlIC1hICQoQ09ORklHX1NQTF9URVhUX0JBU0Up
-IC1lICQoQ09ORklHX1NQTF9URVhUX0JBU0UpCj4gLQo+IC1zcGwvdS1ib290LXNwbC5zdG0zMjog
-TUtJTUFHRU9VVFBVVCA9IHNwbC91LWJvb3Qtc3BsLnN0bTMyLmxvZwo+IC0KPiAtc3BsL3UtYm9v
-dC1zcGwuc3RtMzI6IHNwbC91LWJvb3Qtc3BsLmJpbiBGT1JDRQo+IC0JJChjYWxsIGlmX2NoYW5n
-ZWQsbWtpbWFnZSkKPiAtCj4gLXUtYm9vdC1zcGwuc3RtMzIgOiBzcGwvdS1ib290LXNwbC5zdG0z
-Mgo+IC0JJChjYWxsIGlmX2NoYW5nZWQsY29weSkKCgpUaGUgYmluYXJ5IGFyZSBjb3JyZWN0bHkg
-bWFuYWdlZCBmb3IgYmFzaWMgYm9vdCBvciB0cnVzdGVkIGJvb3QgKFRGQUJPT1QgCndpdGggU1RN
-MzJJTUFHRSBzdXBwb3J0KQoKCmJ1dCB0aGUgVEYtQSBib290IHdpdGggRklQIGZhaWxlZCB3aXRo
-IHRoZSBlcnJvcjoKCgpOT1RJQ0U6wqAgQ1BVOiBTVE0zMk1QMTU3Q0FDIFJldi5CCk5PVElDRTrC
-oCBNb2RlbDogU1RNaWNyb2VsZWN0cm9uaWNzIFNUTTMyTVAxNTdDLURLMiBEaXNjb3ZlcnkgQm9h
-cmQKTk9USUNFOsKgIEJvYXJkOiBNQjEyNzIgVmFyMi4wIFJldi5DLTAxCk5PVElDRTrCoCBCTDI6
-IHYyLjUocmVsZWFzZSk6djIuNS02MTQtZzQwMzU4ZmM1NApOT1RJQ0U6wqAgQkwyOiBCdWlsdCA6
-IDE0OjU0OjM1LCBPY3QgMTIgMjAyMQpOT1RJQ0U6wqAgQkwyOiBCb290aW5nIEJMMzIKSS9UQzog
-RWFybHkgY29uc29sZSBvbiBVQVJUIzQKSS9UQzoKSS9UQzogUGFnZXIgaXMgZW5hYmxlZC4gSGFz
-aGVzOiAyMTc2IGJ5dGVzCkkvVEM6IFBhZ2VyIHBvb2wgc2l6ZTogOTZrQgpJL1RDOiBOb24tc2Vj
-dXJlIGV4dGVybmFsIERUIGZvdW5kCkkvVEM6IEVtYmVkZGVkIERUQiBmb3VuZApJL1RDOiBPUC1U
-RUUgdmVyc2lvbjogMy4xNS4wLXJjMS0xLWc5NmM3YjYzM2IgKGdjYyB2ZXJzaW9uIDkuMy4wIChH
-Q0MpKSAKIzEgVHVlIE9jdCAxMiAxNDo1NjoyNSBVVEMgMjAyMSBhcm0KSS9UQzogUHJpbWFyeSBD
-UFUgaW5pdGlhbGl6aW5nCkkvVEM6IFBsYXRmb3JtIHN0bTMybXAxOiBmbGF2b3IgUExBVEZPUk1f
-RkxBVk9SIC0gRFQgc3RtMzJtcDE1N2MtZGsyLmR0cwpJL1RDOiBSQ0MgaXMgbm9uLXNlY3VyZQpJ
-L1RDOiBEVEIgZW5hYmxlcyBjb25zb2xlIChub24tc2VjdXJlKQpJL1RDOiBQcmltYXJ5IENQVSBz
-d2l0Y2hpbmcgdG8gbm9ybWFsIHdvcmxkIGJvb3QKCgpVLUJvb3QgMjAyMS4xMC0wMDYwOS1nYmQ2
-YzJkMzhkMSAoT2N0IDEyIDIwMjEgLSAxNjo1OTo0MiArMDIwMCkKCkNQVTogU1RNMzJNUDE1N0NB
-QyBSZXYuQgpNb2RlbDogU1RNaWNyb2VsZWN0cm9uaWNzIFNUTTMyTVAxNTdDLURLMiBEaXNjb3Zl
-cnkgQm9hcmQKQm9hcmQ6IHN0bTMybXAxIGluIHRydXN0ZWQgbW9kZSAoc3Qsc3RtMzJtcDE1N2Mt
-ZGsyKQpCb2FyZDogTUIxMjcyIFZhcjIuMCBSZXYuQy0wMQpEUkFNOsKgIDUxMiBNaUIKQ2xvY2tz
-OgotIE1QVSA6IDY1MCBNSHoKLSBNQ1UgOiAyMDguODc4IE1IegotIEFYSSA6IDI2Ni41MDAgTUh6
-Ci0gUEVSIDogMjQgTUh6Ci0gRERSIDogNTMzIE1IegpiaW5tYW5faW5pdCBmYWlsZWQ6LTIKaW5p
-dGNhbGwgc2VxdWVuY2UgZGRjZTkxYjggZmFpbGVkIGF0IGNhbGwgYzAxMWE4MjUgKGVycj0tMikK
-IyMjIEVSUk9SICMjIyBQbGVhc2UgUkVTRVQgdGhlIGJvYXJkICMjIwoKCj0+IGFmdGVyIGFuYWx5
-c2lzLCB0aGUgQ09ORklHX0JJTk1BTl9GRFQgc2hvdWxkIGJlIGRlYWN0aXZhdGVkCgogwqDCoMKg
-wqDCoCBhcyBTVE0zMk1QMTV4IFUtQm9vdCBoYXZlIG5vIHJlYXNvbiB0byBwYXJzZSB0aGUgYmlu
-bWFuIG5vZGUKCiDCoMKgwqDCoCAobm8gYmluYXJ5IHRvIHNlbGVjdCBvciB0byBsb2FkKSA9IHRo
-ZSBiaW5tYW4gbGlicmFyeSBjYW4gYmUgCmRlYWN0aXZhdGVkCgoKSSB3aWxsIGFkZCBpbiBWMgoK
-IyBDT05GSUdfQklOTUFOX0ZEVCBpcyBub3Qgc2V0CgppbiBhbGwgc3RtMzJtcDE1XypfZGVmY29u
-ZmlnCgoKClJlZ2FyZHMKClBhdHJpY2sKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3Qt
-bWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBs
-eS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+Use binman to add the stm32image header on SPL binary for basic boot
+or on U-Boot binary when it is required, i.e. for TF-A boot without FIP
+support, when CONFIG_STM32MP15x_STM32IMAGE is activated.
+
+The "binman" tool is the recommended tool for specific image generation.
+This patch allows to suppress the config.mk file and it is a preliminary
+step to manage FIT generation with binman.
+
+The init_r parsing of U-Boot device tree to search the binman
+information is not required for STM32MP15, so the binman library
+can be removed in U-Boot (CONFIG_BINMAN_FDT is deactivated).
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+Changes in v2:
+- deactivate CONFIG_BINMAN_FDT
+
+ arch/arm/dts/stm32mp15-u-boot.dtsi            | 29 +++++++++++++++++++
+ arch/arm/mach-stm32mp/Kconfig                 |  1 +
+ arch/arm/mach-stm32mp/config.mk               | 29 -------------------
+ ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  1 +
+ ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  1 +
+ ...-microgea-stm32mp1-microdev2-of7_defconfig |  1 +
+ ...mp15-microgea-stm32mp1-microdev2_defconfig |  1 +
+ configs/stm32mp15_basic_defconfig             |  1 +
+ configs/stm32mp15_defconfig                   |  1 +
+ configs/stm32mp15_dhcom_basic_defconfig       |  1 +
+ configs/stm32mp15_dhcor_basic_defconfig       |  1 +
+ configs/stm32mp15_trusted_defconfig           |  1 +
+ 12 files changed, 39 insertions(+), 29 deletions(-)
+ delete mode 100644 arch/arm/mach-stm32mp/config.mk
+
+diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
+index 43a7909978..db23d80eef 100644
+--- a/arch/arm/dts/stm32mp15-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
+@@ -21,6 +21,10 @@
+ 		pinctrl1 = &pinctrl_z;
+ 	};
+ 
++	binman: binman {
++		multiple-images;
++	};
++
+ 	clocks {
+ 		u-boot,dm-pre-reloc;
+ 	};
+@@ -228,3 +232,28 @@
+ 	resets = <&rcc UART8_R>;
+ };
+ 
++#if defined(CONFIG_STM32MP15x_STM32IMAGE)
++&binman {
++	u-boot-stm32 {
++		filename = "u-boot.stm32";
++		mkimage {
++			args = "-T stm32image -a 0xC0100000 -e 0xC0100000";
++			u-boot {
++			};
++		};
++	};
++};
++#endif
++
++#if defined(CONFIG_SPL)
++&binman {
++	spl-stm32 {
++		filename = "u-boot-spl.stm32";
++		mkimage {
++			args = "-T stm32image -a 0x2FFC2500 -e 0x2FFC2500";
++			u-boot-spl {
++			};
++		};
++	};
++};
++#endif
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index 69d56c23e1..4acb29333c 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -37,6 +37,7 @@ config STM32MP15x
+ 	bool "Support STMicroelectronics STM32MP15x Soc"
+ 	select ARCH_SUPPORT_PSCI if !TFABOOT
+ 	select ARM_SMCCC if TFABOOT
++	select BINMAN
+ 	select CPU_V7A
+ 	select CPU_V7_HAS_NONSEC if !TFABOOT
+ 	select CPU_V7_HAS_VIRT
+diff --git a/arch/arm/mach-stm32mp/config.mk b/arch/arm/mach-stm32mp/config.mk
+deleted file mode 100644
+index f7f5b77c41..0000000000
+--- a/arch/arm/mach-stm32mp/config.mk
++++ /dev/null
+@@ -1,29 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+-#
+-# Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+-#
+-
+-ifndef CONFIG_SPL
+-INPUTS-$(CONFIG_STM32MP15x_STM32IMAGE) += u-boot.stm32
+-else
+-ifdef CONFIG_SPL_BUILD
+-INPUTS-y += u-boot-spl.stm32
+-endif
+-endif
+-
+-MKIMAGEFLAGS_u-boot.stm32 = -T stm32image -a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_TEXT_BASE)
+-
+-u-boot.stm32: MKIMAGEOUTPUT = u-boot.stm32.log
+-
+-u-boot.stm32: u-boot.bin FORCE
+-	$(call if_changed,mkimage)
+-
+-MKIMAGEFLAGS_u-boot-spl.stm32 = -T stm32image -a $(CONFIG_SPL_TEXT_BASE) -e $(CONFIG_SPL_TEXT_BASE)
+-
+-spl/u-boot-spl.stm32: MKIMAGEOUTPUT = spl/u-boot-spl.stm32.log
+-
+-spl/u-boot-spl.stm32: spl/u-boot-spl.bin FORCE
+-	$(call if_changed,mkimage)
+-
+-u-boot-spl.stm32 : spl/u-boot-spl.stm32
+-	$(call if_changed,copy)
+diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+index 14bf6d1376..ce7aece4b8 100644
+--- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
++++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+@@ -75,5 +75,6 @@ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+index 648ecbfc67..52a0779802 100644
+--- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
++++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+@@ -75,5 +75,6 @@ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+index f422ffbeda..31e890725c 100644
+--- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
++++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+@@ -75,5 +75,6 @@ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+index 244d9ccf4e..61714b9df7 100644
+--- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
++++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+@@ -75,5 +75,6 @@ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index 77ed82c99f..f9b51f7349 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -170,6 +170,7 @@ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+index 701b1510c5..02457eb8d6 100644
+--- a/configs/stm32mp15_defconfig
++++ b/configs/stm32mp15_defconfig
+@@ -152,6 +152,7 @@ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+index 5b85f6ad03..17907dad7e 100644
+--- a/configs/stm32mp15_dhcom_basic_defconfig
++++ b/configs/stm32mp15_dhcom_basic_defconfig
+@@ -153,5 +153,6 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+index 37dd2754c0..d0c8d829f6 100644
+--- a/configs/stm32mp15_dhcor_basic_defconfig
++++ b/configs/stm32mp15_dhcor_basic_defconfig
+@@ -147,5 +147,6 @@ CONFIG_VIDEO_BMP_RLE8=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_LZO=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index b4ed090e3f..5963064312 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -153,6 +153,7 @@ CONFIG_BMP_24BPP=y
+ CONFIG_BMP_32BPP=y
+ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
++# CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+ # CONFIG_LMB_USE_MAX_REGIONS is not set
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

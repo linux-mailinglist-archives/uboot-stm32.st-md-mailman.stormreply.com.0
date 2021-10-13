@@ -2,62 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1685442C458
-	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Oct 2021 17:01:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4752942C70B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Oct 2021 18:58:50 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A2DBFC5C834;
-	Wed, 13 Oct 2021 15:01:47 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 02CDEC5C834;
+	Wed, 13 Oct 2021 16:58:50 +0000 (UTC)
+Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com
+ [209.85.222.50])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7C284C5C831
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 135FFC5C831
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 13 Oct 2021 15:01:44 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19DDKX9a011459; 
- Wed, 13 Oct 2021 17:01:43 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=jhab7mR9ZMYgNR1RBQTrmwsgteiVIZvDdDKBkEq5gKs=;
- b=KMVsgar9LZAytkX1FOp/BhfkMekvAx5+s1jJt2eF/w1WjNT7lD8+abU1RHebqXplR4f7
- RBQzLIqQKamPPs/Uwk8dWhZtYtD7edx5pZamXvZTaMXB/R5jcKPgt5ZQ02TAgAQfKtNA
- dEK/CwKwrADchzfkiuqHZPn56zKp2+U8aNT6RV7qFY3SZ5P6lnkVqmF6PcA981HgD5om
- 7aRn+RvVou0rUUmmKxFMOBuRiKgp+Y6tf9Fhxecfvji4UgQSJ/F99LjbIp95TZoWdOV6
- QKl3bx5zKf1K4trEfDP12ZnfhUrxT8hrFMBbhLbDmP2w2nZmV/X1PR0lXDm4ge7hCEn0 2g== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bnuxttrek-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 13 Oct 2021 17:01:43 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 87F4910002A;
- Wed, 13 Oct 2021 17:01:42 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5E873231509;
- Wed, 13 Oct 2021 17:01:42 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Wed, 13 Oct 2021 17:01:41
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 13 Oct 2021 17:01:37 +0200
-Message-ID: <20211013170053.1.I1158bd6d095c996f2dbd4b0aa9327e4eee202331@changeid>
-X-Mailer: git-send-email 2.25.1
+ Wed, 13 Oct 2021 16:58:47 +0000 (UTC)
+Received: by mail-ua1-f50.google.com with SMTP id i15so5981741uap.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 13 Oct 2021 09:58:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8Zv4xLIGOc4/nly6myS5sswINQEwDw3iDu3NlQapiuo=;
+ b=Mq5lkIH3zAgAPbPRYotILo0xvywj67nmv89dsprWeN8iPdPd1RlzPPLuZsZN8M2r4L
+ qT8Sc/Bey4U331A1Gtdyo4u62jYkSTYiXCOutMozz5Vcsqhn8gJunbOYUn450l6DTecF
+ alTlitvuGHhmPIqFCcO7NgqYZaGTKdn7i1xLM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=8Zv4xLIGOc4/nly6myS5sswINQEwDw3iDu3NlQapiuo=;
+ b=r4ZROmnxDHOmig6WMRHzk+MTN4lxTVjXXl9wYQXSvsmj2W3+9kOndlNHcxCd/Kz5H1
+ 0rS08ysom4nLLWfREhlLN/7FaSBRf+MJ7C8u2fsQ+vRvSayTtxCI2+jjwVahv+ccKZow
+ xWFblVioXzzC7Y2F4ffXxuPvmRCsK7q3AcxyjOFswDgJBOY/OPvgTYwLi1MXO3xOBeUd
+ uxXxNazgux+1QWHWOykHPrfH4nG2H1YK4CNRA07rcG1cvXoujIvjB0i1kJL7AoC/fbEM
+ CCi1Qhav3oVoatKwPn0u8lAK8Ot3w6dqzivT3hLRvXA/EqFl6a3+Zy9uZ860qIhUQtKw
+ qpXA==
+X-Gm-Message-State: AOAM530MvOamSzBs2MU724CL8hPsPGIRcdttcGyAP34ou7iA6bdAR+Lf
+ Fs7i2PEOiF3Z7HvxVclWuz+dZYQFMbPCLwEC0oSUww==
+X-Google-Smtp-Source: ABdhPJyubL1Rj3I+KhuTYX91kKChr2zKB8AR5Rq4QvutdfzQiPhweARUS/c5VgQF5Gr2xGKPSw5acGQMBqDiSPXDbbI=
+X-Received: by 2002:a67:d498:: with SMTP id g24mr610171vsj.15.1634144326632;
+ Wed, 13 Oct 2021 09:58:46 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-13_06,2021-10-13_02,2020-04-07_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Marek Vasut <marex@denx.de>,
+References: <20211013151014.v2.1.I558b557c1bc3ca451e11dae245417c8bfecf33ad@changeid>
+In-Reply-To: <20211013151014.v2.1.I558b557c1bc3ca451e11dae245417c8bfecf33ad@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 13 Oct 2021 10:58:35 -0600
+Message-ID: <CAPnjgZ3ZVc94z6zgHwRU-iGcn40ibO__EiXPjDbzO2i8rHoT-w@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>,
+ Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Rick Chen <rick@andestech.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: [Uboot-stm32] [PATCH] dfu: handle short frame result of UPLOAD in
-	state_dfu_idle
+ Heiko Schocher <hs@denx.de>, Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] stm32mp: add binman support for
+	STM32MP15x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,100 +72,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In DFU v1.1 specification [1] the DFU_UPLOAD (Short Frame)
-is handled only in dfuUPLOADIDLE state:
+On Wed, 13 Oct 2021 at 07:11, Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> Use binman to add the stm32image header on SPL binary for basic boot
+> or on U-Boot binary when it is required, i.e. for TF-A boot without FIP
+> support, when CONFIG_STM32MP15x_STM32IMAGE is activated.
+>
+> The "binman" tool is the recommended tool for specific image generation.
+> This patch allows to suppress the config.mk file and it is a preliminary
+> step to manage FIT generation with binman.
+>
+> The init_r parsing of U-Boot device tree to search the binman
+> information is not required for STM32MP15, so the binman library
+> can be removed in U-Boot (CONFIG_BINMAN_FDT is deactivated).
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+> Changes in v2:
+> - deactivate CONFIG_BINMAN_FDT
+>
+>  arch/arm/dts/stm32mp15-u-boot.dtsi            | 29 +++++++++++++++++++
+>  arch/arm/mach-stm32mp/Kconfig                 |  1 +
+>  arch/arm/mach-stm32mp/config.mk               | 29 -------------------
+>  ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  1 +
+>  ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  1 +
+>  ...-microgea-stm32mp1-microdev2-of7_defconfig |  1 +
+>  ...mp15-microgea-stm32mp1-microdev2_defconfig |  1 +
+>  configs/stm32mp15_basic_defconfig             |  1 +
+>  configs/stm32mp15_defconfig                   |  1 +
+>  configs/stm32mp15_dhcom_basic_defconfig       |  1 +
+>  configs/stm32mp15_dhcor_basic_defconfig       |  1 +
+>  configs/stm32mp15_trusted_defconfig           |  1 +
+>  12 files changed, 39 insertions(+), 29 deletions(-)
+>  delete mode 100644 arch/arm/mach-stm32mp/config.mk
 
-- Figure A.1 Interface state transition diagram
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-- the state description in chapter A.2
-
-A.2.3 State 2 dfuIDLE
-  on Receipt of the DFU_UPLOAD request,and bitCanUpload = 1
-  the Next State is dfuUPLOADIDLE
-
-A.2.10 State 9 dfuUPLOAD-IDLE
-  When the length of the data transferred by the device in response
-  to a DFU_UPLOAD request is less than wLength. (Short frame)
-  the Next State is dfuIDLE
-
-In current code, when an UPLOAD is completely performed after the first
-request (for example with wLength=200 and data read = 9), the DFU state
-stay at dfuUPLOADIDLE until receiving a DFU_UPLOAD or a DFU_ABORT request
-even it is unnecessary as the previous DFU_UPLOAD request already reached
-the EOF.
-
-This patch proposes to finish the DFU uploading (don't go to dfuUPLOADIDLE)
-and completes the control-read operation (go to DFU_STATE_dfuIDLE) when
-the first UPLOAD response has a short frame as an end of file (EOF)
-indicator even if it is not explicitly allowed in the DFU specification
-but this seems logical.
-
-[1] https://www.usb.org/sites/default/files/DFU_1.1.pdf
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-Hi Lukasz,
-
-This case is correctly handle in dfu-util, see dfu_load.c
-
-dfuload_do_upload()
-{
-....
-        while (1) {
-...
-                rc = dfu_upload(dif->dev_handle, dif->interface,
-                    xfer_size, transaction++, buf);
-....
-                dfu_file_write_crc(fd, 0, buf, rc);
-                total_bytes += rc;
-
-                if (total_bytes < 0)
-                        errx(EX_SOFTWARE, "\nReceived too many bytes (wraparound)");
-
-                if (rc < xfer_size) {
-                        /* last block, return */
-                        ret = 0;
-                        break;
-                }
-        }
-}
-
-In the upload loop the code doesn't make difference for the first request
-and the next one: the last block is detected as soon as the
-received data < requested size.
-
-So it is safe to do the same in U-Boot's DFU stack, skip the dfuUPLOADIDLE
-state when the upload operation is finished after the first request.
-
-This patch avoid to ABORT the unfinished UPLOAD request before the next
-command.
-
-This patch was previously sent as RFC =
-[RFC] dfu: handle short frame result of UPLOAD in state_dfu_idle
-http://patchwork.ozlabs.org/project/uboot/list/?series=248838&state=*
-
-Patrick.
-
-
- drivers/usb/gadget/f_dfu.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/usb/gadget/f_dfu.c b/drivers/usb/gadget/f_dfu.c
-index 4bedc7d3a1..e9340ff5cb 100644
---- a/drivers/usb/gadget/f_dfu.c
-+++ b/drivers/usb/gadget/f_dfu.c
-@@ -336,6 +336,8 @@ static int state_dfu_idle(struct f_dfu *f_dfu,
- 		f_dfu->dfu_state = DFU_STATE_dfuUPLOAD_IDLE;
- 		f_dfu->blk_seq_num = 0;
- 		value = handle_upload(req, len);
-+		if (value >= 0 && value < len)
-+			f_dfu->dfu_state = DFU_STATE_dfuIDLE;
- 		break;
- 	case USB_REQ_DFU_ABORT:
- 		/* no zlp? */
--- 
-2.25.1
-
+Suggest lower-case hex for the addresses though.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

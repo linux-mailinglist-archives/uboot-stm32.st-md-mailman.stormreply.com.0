@@ -2,65 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0D3142FAB6
-	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Oct 2021 20:02:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AC6142FAB7
+	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Oct 2021 20:02:34 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7926BC5C841;
-	Fri, 15 Oct 2021 18:02:28 +0000 (UTC)
-Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
- [209.85.219.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BD61C5C843;
+	Fri, 15 Oct 2021 18:02:34 +0000 (UTC)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+ [209.85.160.176])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E751EC06F81
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EAB9C5C842
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 15 Oct 2021 18:02:24 +0000 (UTC)
-Received: by mail-qv1-f48.google.com with SMTP id j12so6197507qvk.12
+ Fri, 15 Oct 2021 18:02:30 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id r17so9517747qtx.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 15 Oct 2021 11:02:24 -0700 (PDT)
+ Fri, 15 Oct 2021 11:02:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=aANw5K+a+ShlYMq8i1gCAY4LpS+Fnytwvrzse2sSEY4=;
- b=SprNgr8J7bKZZfNMWoBMLfzIyupbZ9LogzCic/GvsJbYmKKYiRTUZATqzAu2d5MRK5
- Ypmbz2nNLQy6YItq9cm6qkp3+RZN6Byl0Ft3T113S7i/fWvhCtAmc2Op9rhvs3mwP+lx
- NFfZQtclk2THbLPC6mvn9sSEV/EL3/Xz/GTwM=
+ bh=fODOe1Vz/9Ub/RJMf/ALDt55ing6du5982GvuL46GmA=;
+ b=qbXGJTmX4oX68saExYU1QIQ/6YA06p2NKkcPtbXI2yKeBnNIAzKRszUYXFvdJs0uxv
+ 59xh7SlmVgqw2n2l0WG8CD8yCZvt1EuFFXjZm77xUuibj20/nG4uDeS2nDyWni/Y+521
+ Qkpw8zOJrIw7tv6RlTTpxf0DC8lnve3AuG1Ww=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=aANw5K+a+ShlYMq8i1gCAY4LpS+Fnytwvrzse2sSEY4=;
- b=OCVwPJk2pyqVrG/qPBgfQBHzJzvlygW/YAs131FQxjwxtc0+we61HtBOfqBeOFjKOp
- +pD7/d6Qs9+s6rNd6mYj+JjlfKDsaKSJi/EbqSyiD3i61H7Kk4NImdeqMwbG9EuEzkE2
- d3UgoLFfiIfVJHwfJWLq7iKnrzFctLP2wftfGP3MOSqZ+IJpi+GUtERDAoTolyNncX7R
- Cakxzvk0woMPawXuSoApbuTnYlaPvMtDumeT2S+eGEjJNV/xxhU9Dya+RmiGQzYwWbAM
- qGTdnJorr5UmdplT/VCylseUhO5NJTNXg0F5XnhVb3Wc+zcx0o9pyKNlQLTIg4sL3P4C
- B+FQ==
-X-Gm-Message-State: AOAM532qyhzZVIlq7LHBTLRbxUH1ynRtd0jFzFfRVBskquviiu5zNyi5
- I5MpIyU5rD/Nf8Cz8sIpik2g8A==
-X-Google-Smtp-Source: ABdhPJxTR5zIrcODbdkreT6nblFBjxkRvnSI2QFulzLbAq0Yfs6onZsgqQp99pz3Lt+HqUHkeWPMbA==
-X-Received: by 2002:a0c:b38a:: with SMTP id t10mr12467323qve.42.1634320943168; 
- Fri, 15 Oct 2021 11:02:23 -0700 (PDT)
+ bh=fODOe1Vz/9Ub/RJMf/ALDt55ing6du5982GvuL46GmA=;
+ b=7esDbp9wbrcshD2lgbH/oxXPDzZOBufxYUDmCkQAK5yTFwRfxf2a4pHjyJW2qojZBy
+ q7FFI4PMtTYZ2Jl507PKKxGPSe4uJ93bse6OV6+E1Rn3VdJuDsdvEljOtFXjXx8VqNcW
+ /T/ZnLgAqc6oIoOAH6mOSv9H6/6NDpQSHY9WUvzEzZWaSIPbrV34xk+gFvj8rRJut2dS
+ 9OMqfhnUoBynxSk0FzKWyvAJc2DzN7UNEge4OKdQK07/qIoEvjrsYVNv9tdiyJpCXM6M
+ yfBjhsuC6gD39XU4C2/4ETxElYKel0ChYz03h1V3LgJ3NZKknfbQDGoaXo5I69vzl44f
+ Vu4A==
+X-Gm-Message-State: AOAM533ZWmU1sdg2RN/Dx7DCWZfP7/nxrnLCFluyDZ6NYVf4KiAsv/HY
+ fB+jjbxOoxHdadnJhTVrDg3Nig==
+X-Google-Smtp-Source: ABdhPJzqaaXK4RWQIFRsGMQCK88PLRhiOeJAi6y7qv7ZfykxfDEhxNwIrlv1eSPdHs+xFAJ/I/5WgQ==
+X-Received: by 2002:ac8:578d:: with SMTP id v13mr15219583qta.61.1634320949115; 
+ Fri, 15 Oct 2021 11:02:29 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b01-cbda-f8b0-5c25-4d47-ecdb.res6.spectrum.com.
  [2603:6081:7b01:cbda:f8b0:5c25:4d47:ecdb])
- by smtp.gmail.com with ESMTPSA id t24sm2957557qkj.52.2021.10.15.11.02.22
+ by smtp.gmail.com with ESMTPSA id h68sm2945969qkf.126.2021.10.15.11.02.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 Oct 2021 11:02:22 -0700 (PDT)
-Date: Fri, 15 Oct 2021 14:02:20 -0400
+ Fri, 15 Oct 2021 11:02:28 -0700 (PDT)
+Date: Fri, 15 Oct 2021 14:02:26 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20211015180220.GA7964@bill-the-cat>
+Message-ID: <20211015180226.GB7964@bill-the-cat>
 References: <20211004115942.1.Ic01b4a3063c0b09cac503a4dc8356f5ff64b5c6e@changeid>
+ <20211004115942.2.Ie0f69e59ca3de9def2b0cf0a825c333bed4707fa@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20211004115942.1.Ic01b4a3063c0b09cac503a4dc8356f5ff64b5c6e@changeid>
+In-Reply-To: <20211004115942.2.Ie0f69e59ca3de9def2b0cf0a825c333bed4707fa@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Stefan Roese <sr@denx.de>, Priyanka Jain <priyanka.jain@nxp.com>,
- Simon Glass <sjg@chromium.org>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Heiko Schocher <hs@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 1/6] scripts: remove some configs in
-	config_whitelist.txt
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Priyanka Jain <priyanka.jain@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/6] am33x: Remove unused define
+	CONFIG_MUSB_HOST
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,71 +71,55 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5726619162097119112=="
+Content-Type: multipart/mixed; boundary="===============7923663145193292683=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============5726619162097119112==
+--===============7923663145193292683==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="EGSOW1ksd/vhoQGa"
+	protocol="application/pgp-signature"; boundary="CJG28G0aS4yi9xey"
 Content-Disposition: inline
 
 
---EGSOW1ksd/vhoQGa
+--CJG28G0aS4yi9xey
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 04, 2021 at 11:59:50AM +0200, Patrick Delaunay wrote:
+On Mon, Oct 04, 2021 at 11:59:51AM +0200, Patrick Delaunay wrote:
 
-> Remove some config finishing by _ badly added by
-> scripts/build-whitelist.sh when joker is used in comments.
->=20
-> for example:
->   doc/uImage.FIT/command_syntax_extensions.txt:
->      ... #ifdef CONFIG_OF_*  |	...
->=20
->   cmd/nvedit.c:# error Define one of CONFIG_ENV_IS_IN_{EEPROM| \
->      FLASH|MMC|FAT|EXT4|\
->=20
-> Remove also configs only used in comments:
-> - CONFIG_BOOGER in include/linux/kconfig.h
-> - CONFIG_COMMANDS
-> - CONFIG_INIT_IGNORE_ERROR
-> - CONFIG_REG_*
-> - CONFIG_HOTPLUG : drivers/watchdog/omap_wdt.c:18
+> This define was left over from a previous revision, and was never used.
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
-> Tested-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---EGSOW1ksd/vhoQGa
+--CJG28G0aS4yi9xey
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFpwikACgkQFHw5/5Y0
-tywa1gv/TZ6Dkm9XmrWvLEUs6MKZ9ZtKyhhKTonPAdcd/o8OrRN5vl364f2U+Stx
-Cs7nF9HWoeGJe+SZUh3x0v9k7qre3EeT0AfuhVibwcn4K2nyvnfLAUz+aH+CEMIL
-UZZgAyROHBQNvRw0jLC81WH4pb04/Pa42kufmKMaBMfzBkckZfj6iZkO2nvCU69u
-dLzEhk+SmOKQvJBa6RjeZemkFk+Q701iW4uldoF3iVa16k2/LVdf655n6KJOwOWW
-x61GFU0ymlX8mwj2noIkG+xvb8wSxKxF67GONd6Ct4b3zh2ITkZjhyMzEJxksfI8
-570g55PyHzOKxEcuZffIT10mqVhOx9zuzqfgI6hchN2uX5q5Ma4O1vdD7o93UcMn
-Pi/6H9k8vGXoJR03wu/6fr/MiePYJYrsC3VgGt2gFigsutxVUe9L0Zp8ukeF2p53
-B6F58VdH0ZYW2Lso/Sz49hpYinaQ27+7PoI2ReiPIUTqm0yzCHYL87pAMfFHuGt3
-/G1gEUHt
-=rhso
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFpwjIACgkQFHw5/5Y0
+tywsuwv/Q4IoRQnmLPQKorY7wOMPpezk7DCEzyJC5P9ZpuprzSknsZ1PPYTMjwOd
+6PGivIqstzVJx/uD+ccZ/4RpxMPDMX6XGytBRfA1x/U6V9ttgKCgm651fcblr9xR
+EPmZJrxBQVGNnAXcdYOV5c3H5vVg6kqf2EO3/W6pLftKdAdf70Hwb6l2H615QCKz
+6Nkdkkqx3g//8DItI5cG5FuQ/CetsSZwnq+EqZPKeyv/hFUTRHPvqjkGxEdmGUEr
+yIg4apTohFTfL+rCKKJl1bSg05LE65plUlxlcAJhEbwQonz6RJPejXrVLzhXtcM0
+IiAHbuG9z5AiRP5NYA0CN1ZSoiVkyfZ/SabK/8ZKqgW70oQOpT+2/Pn5pKsw2R1u
+5o2m+zzKoVsmVxg6DwikTJW0sCsBn7pqyaAHtJgobmqR4Sgb4+oCjqA+ID8vR/Z0
+PDtzsem90ZHF/PAuo59OS5jDskz3BkDVdFidh5zvFAJfqErdPL1FfiEA2sXcyd1w
+OSENwFIv
+=PNuf
 -----END PGP SIGNATURE-----
 
---EGSOW1ksd/vhoQGa--
+--CJG28G0aS4yi9xey--
 
---===============5726619162097119112==
+--===============7923663145193292683==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -147,4 +130,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============5726619162097119112==--
+--===============7923663145193292683==--

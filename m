@@ -2,61 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E644433AB8
-	for <lists+uboot-stm32@lfdr.de>; Tue, 19 Oct 2021 17:36:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F698433ACE
+	for <lists+uboot-stm32@lfdr.de>; Tue, 19 Oct 2021 17:38:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1332BC5C854;
-	Tue, 19 Oct 2021 15:36:27 +0000 (UTC)
-Received: from mail-qv1-f50.google.com (mail-qv1-f50.google.com
- [209.85.219.50])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A7C0C5C854;
+	Tue, 19 Oct 2021 15:38:46 +0000 (UTC)
+Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com
+ [209.85.219.175])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B76CFC5C852
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 19193C5C853
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 19 Oct 2021 15:36:25 +0000 (UTC)
-Received: by mail-qv1-f50.google.com with SMTP id k29so196270qve.6
+ Tue, 19 Oct 2021 15:38:43 +0000 (UTC)
+Received: by mail-yb1-f175.google.com with SMTP id v195so3895424ybb.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 19 Oct 2021 08:36:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=L3u0zmJce+8APvYNSgjg8d4glj4bzm1whSpCR5hfJ/Q=;
- b=qYEsMzf007heZC3n3o1i6FPGHQqiPv2mmWOV55C5VqBnBR0FToC702ySHrjwRK0SXB
- 9EQGsQE6o5pnX+eOnn2g2Psix5PeJKZC887YFXHz1iUcRGS3b1n7yd19S0gTHmkyfFNv
- Cx+ohbh4MeDBP2oVgSU6Tx6puW69/5HQpyZ3c=
+ Tue, 19 Oct 2021 08:38:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=p7iHZuVM7j9qr48DIoUn57aGfWjpoBdOW01a9VfjRWY=;
+ b=W4Wee8oZ3dIbQjU3ENn+EuA87jc8BQsyebDccNpoWoDSYZHCj/ktvqmY9iooJbQOOB
+ NrzQq0oObflVnbZngyeUOTEJR6dgtSu2FVMQXd99Bwsm/msui6zkrCpc1s+CB7vOWNnO
+ Vy7KxD2PWAFZe10muJticBcsSjxfNGTiqjZTndO3TeNPk7JN1O6SLh31mlsXLqA4QDO2
+ 1ALAaIX9Xaw7xLFEJvRXlhrT7SAzPfwCnmd5hCVsfXmXM9FylC4YRxlQznM4xoR5BVFz
+ 5kE0fy6e61X3+Ey5NIUdPWAMGLB92o9GxqcBrTVV5hXWnFaC7WmU6Cx1PdeVcUah0yuf
+ hL8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=L3u0zmJce+8APvYNSgjg8d4glj4bzm1whSpCR5hfJ/Q=;
- b=H8v0OwgXOeGVKQRPA9oyb+CIfI7OLESV9QbVMaCxIVYPb2ecp3TJKVpb0LmzirhJvq
- +HJcxMYGv69MImNfEh9LIoJBdjXSu9FHicvJR+Ha+Gigrur7yJKzpdCC9I2QvENKnShz
- h4leWdfiVESVD3157LZKRunbL3+4d6cYUWz36PjU/BmfpuffNYV7cEaxMHImk3QXqNDS
- YlTW2pMCHgsQQn4c9A4+kNXARdmEkX9oxvfv2jIYq1/X3fJXLbxqxWdv4Lyq5CggBOj0
- 14ZQkALH8tRwgg17jndxRcSDouMZe+XBDWbZ10uwm/dskc7wJlXDb4P7IOGlXgKvJZNs
- 8s0w==
-X-Gm-Message-State: AOAM530dx1SOurOqoXN1gvw8AxngQP0jIhU7nppIEO9P24EVj3QhWZwi
- CeMF9zeY3YdJt3lNHWKxxe3i0A==
-X-Google-Smtp-Source: ABdhPJy5rCHi35C3Tx+AtwdE8oAD9TRT3SdrRkksNMmDQ4WnSrBzyz+kutp8xqLadSpCAxbVNYzoFQ==
-X-Received: by 2002:a05:6214:308:: with SMTP id i8mr522215qvu.7.1634657784385; 
- Tue, 19 Oct 2021 08:36:24 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-b5ac-d4ae-96e7-5d3d.res6.spectrum.com.
- [2603:6081:7b01:cbda:b5ac:d4ae:96e7:5d3d])
- by smtp.gmail.com with ESMTPSA id c19sm7931984qkj.132.2021.10.19.08.36.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 08:36:22 -0700 (PDT)
-Date: Tue, 19 Oct 2021 11:36:19 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Message-ID: <20211019153619.GH7964@bill-the-cat>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=p7iHZuVM7j9qr48DIoUn57aGfWjpoBdOW01a9VfjRWY=;
+ b=UQkY0Y1SHuUBI4nZ2MfcQjzQtNYOTbhC4MevxqQDFVud7FGDBpEf1hYkbc0OkijXI6
+ UH2GCH5x79IZovvBHsanuLG/WOGkwbtCBdtcOl5hoNRqi0UapaLUSJXkiN0w8xG+RXiJ
+ sFimV9Izx6wYm6tjL3v2RJNYUOs2b7Vi5KHpmB7Nr7Pi1/HsczZaBn8W2of5ghhIvZc/
+ OyBkq1UpWksDnZoorqN55zYihZGA/tMl43kQ96g/1uSUwX/QHW0II/78sgqvh+gWZBDZ
+ 18tP5DSC1M3OBN48TsuEXsw1ZODXHwm7OBR1nJlIdVqNHmOlCDLEBN5sDRCAgiu3p8sX
+ qKFQ==
+X-Gm-Message-State: AOAM533tsqmH2ZN/RhZsnmLj9229qo2RsA6rThnZZA8PZx2YD4Vl5gxh
+ UMpnjEQmz/qP0aQJ2u9HQWhwOyIqX7P6t0xNOPz5qQ==
+X-Google-Smtp-Source: ABdhPJyTXU0cldkGhcZ0dmQTmpMB5HnCoZNyf/AIkrXpNnEc5EAmOV6JtfRycoN5USWBn/7YK4WND+rYWa7HwkL8htw=
+X-Received: by 2002:a25:bacd:: with SMTP id a13mr39475149ybk.216.1634657922523; 
+ Tue, 19 Oct 2021 08:38:42 -0700 (PDT)
+MIME-Version: 1.0
 References: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
  <CAPnjgZ3TOc7aEBWx0JDy3L=b1C-u39A6gnFFjqT5U1L9H4dDug@mail.gmail.com>
  <20211019141733.GD7964@bill-the-cat>
  <CAC_iWjKLDA8eK+rGkYHnvH5je7RoOeXOruzKhr=MM3j-4VvxLA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAC_iWjKLDA8eK+rGkYHnvH5je7RoOeXOruzKhr=MM3j-4VvxLA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20211019153619.GH7964@bill-the-cat>
+In-Reply-To: <20211019153619.GH7964@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 19 Oct 2021 18:38:05 +0300
+Message-ID: <CAC_iWj+SMQMVx_ckTsc_YySAOiW85ANaToDGvsBp0C4_B8EZnw@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
  Vladimir Oltean <vladimir.oltean@nxp.com>,
  Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
@@ -67,7 +63,7 @@ Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@denx.de>,
  Asherah Connor <ashe@kivikakk.ee>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <marek.behun@nic.cz>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
  "Ivan T. Ivanov" <iivanov@suse.de>, Wasim Khan <wasim.khan@nxp.com>,
@@ -81,8 +77,7 @@ Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
  Matthias Brugger <mbrugger@suse.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
  Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Pratyush Yadav <p.yadav@ti.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, Pratyush Yadav <p.yadav@ti.com>,
  Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
  Alexandru Gagniuc <mr.nuke.me@gmail.com>
 Subject: Re: [Uboot-stm32] [PATCH v4] sandbox: Remove OF_HOSTFILE
@@ -97,76 +92,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0316620131881018566=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============0316620131881018566==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="oujlcGzp7w3KXnJ4"
-Content-Disposition: inline
-
-
---oujlcGzp7w3KXnJ4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 19, 2021 at 06:30:59PM +0300, Ilias Apalodimas wrote:
-> On Tue, 19 Oct 2021 at 17:17, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Oct 19, 2021 at 08:03:07AM -0600, Simon Glass wrote:
->=20
-> [...]
->=20
+On Tue, 19 Oct 2021 at 18:36, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 19, 2021 at 06:30:59PM +0300, Ilias Apalodimas wrote:
+> > On Tue, 19 Oct 2021 at 17:17, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > For some reason this still does not apply for me on -master. Can you
-> > > please confirm the hash you are using?
+> > > On Tue, Oct 19, 2021 at 08:03:07AM -0600, Simon Glass wrote:
 > >
-> > The hunk for scripts/Makefile.spl still fails (it failed on v3 as well),
-> > but is easily fixed-up, fwiw.
->=20
-> The reason is that I rebased on top of the prerequisite series, but
-> failed to pull in -master.  As Tom says it's a single line of code
-> that's in conflict.  Shall I send a v5 or will you pull that in Tom?
+> > [...]
+> >
+> > > >
+> > > > For some reason this still does not apply for me on -master. Can you
+> > > > please confirm the hash you are using?
+> > >
+> > > The hunk for scripts/Makefile.spl still fails (it failed on v3 as well),
+> > > but is easily fixed-up, fwiw.
+> >
+> > The reason is that I rebased on top of the prerequisite series, but
+> > failed to pull in -master.  As Tom says it's a single line of code
+> > that's in conflict.  Shall I send a v5 or will you pull that in Tom?
+>
+> Well, what should that look like exactly?  It fails to apply cleanly on
+> current master.  I had swapped it to CONFIG_SANDBOX, but I gather from
+> Simon's comment it should be OF_BOARD?
+>
 
-Well, what should that look like exactly?  It fails to apply cleanly on
-current master.  I had swapped it to CONFIG_SANDBOX, but I gather from
-Simon's comment it should be OF_BOARD?
+It should be OF_SANDBOX.  I tried to fold SANDBOX to OF_BOARD befire
+sending it, but I had some failures I didn't have time to investigate.
+So I'll leave that to Simon's further cleanup
 
---=20
-Tom
-
---oujlcGzp7w3KXnJ4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFu5fAACgkQFHw5/5Y0
-tyzCSAwAh6kbfT0Yppsb9eu8e0D9k9cm3nKVLLytu4jYmywS+ztmfGB/UhQlgsjS
-jKqknWMsX5xjlOyyTl+lQ2D13WcKA1XA/FY1X6XONTtiOWe4gbFX3TfK/ICBzHZH
-oamZ5LGbQ2PN684lO7XQxAezRv0hT0Jf+4GoMU2eb0QNMRVRayEHEwFs8lqVAlFF
-ZDkZlHK30ECTmdKXEK88rxbFxIMVSDLFvJjTS3GD/FOC0kHgVCN5Qizj0Pq+NxA0
-ftmF+ENf5Wt7TY59KPMH3IRPNxtzWZtwfWyvuhtEnuWUul9FHaE6Zjn1hLtDN/ZT
-wWPNiig59bP/PCJCgOSKhLFvM0Cmb27lXhDOWtsmwU3+WuJ23a8JJQXQoYLvK9Pv
-Y9SyT5vzleN/ybwfJ5e6xguJfCQbt9UW0rb0M4eP93h/WBzPtT6t75ltPwk3XyUQ
-cM5Z5mKoSHnvyuJH5qKYc7VVsVvlXskmXK37Ok0xll7es2Iuz+TUoKqtQZtZGkxf
-wHsFXmW6
-=k4zV
------END PGP SIGNATURE-----
-
---oujlcGzp7w3KXnJ4--
-
---===============0316620131881018566==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards
+/Ilias
+> --
+> Tom
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0316620131881018566==--

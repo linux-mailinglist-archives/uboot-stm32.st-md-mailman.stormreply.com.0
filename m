@@ -2,60 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 672C0432B35
-	for <lists+uboot-stm32@lfdr.de>; Tue, 19 Oct 2021 02:29:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7D03433042
+	for <lists+uboot-stm32@lfdr.de>; Tue, 19 Oct 2021 09:56:33 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 203C4C5A4D3;
-	Tue, 19 Oct 2021 00:29:31 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 63B59C5C849;
+	Tue, 19 Oct 2021 07:56:33 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0CC94C32E90
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 018CDC5C848
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 19 Oct 2021 00:29:28 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id 77so16995246qkh.6
+ Tue, 19 Oct 2021 07:56:31 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id v127so10991949wme.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 18 Oct 2021 17:29:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ Tue, 19 Oct 2021 00:56:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=PNEumrUWFn8jGOfu00JJDfi7tTngCVlUsrD7BTiP3AY=;
- b=tEavTUlHrfeWU8jNkBUie+dqtDBk5vVXiJfX09SABWro1bfW2omBNIm/AMjPIazouY
- 9WDdBi9HgHZ/7JRiWTt1PFQHDRUEVUFumJpDpCrCgoZwcNQqnsIm8nw86DMUJE0HxijK
- 4hqZlTEB3imO0mo4DFrUw+taM33MpcmMShzIY=
+ bh=JCijkpm+MDVEv2aCCE8gcjIEY2wS1dmhV7v4Y14Uno8=;
+ b=Kyy8FX+6Cw1Dg8fZkToGIXV+n9oq1EXKZhye0hsy5AEbd5ryzQJ15rfBJkXJeOhbRM
+ S0Hb6+u6Ib3s7RWKHT0r++1oZR2tjYmZIed///WlWubaSoV1tbolKAiDgvpB5+XvPwzr
+ IFa/JA/heRYfbNKdiOd+hPri8CvS1DoJ151XPaARRDC91T7uSnQppOcZrQrLNOCZrMAS
+ eS1AtbH/sKKzMujBpKHWfn+lgXNo4OHDRuc7GMJ4SVGJEmVd8KSo51UF3W5hC4rYbwDD
+ swibJUDZrgBSYeYkFrgYxSICEpPw2yuTjMYyqXycO5zIjcZljFClK9EwbLVE1VpFrySZ
+ Z3lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=PNEumrUWFn8jGOfu00JJDfi7tTngCVlUsrD7BTiP3AY=;
- b=Szd3SZb432GXMqGeUW7CN3m/gho4s60jX1D8TV3nPx+NDHLsQW/Z+MLj8IFD9hbv3L
- Pxg5WJZI1z36/6sZ6CtwcobgnoalORNtgnTS5fr3gnVYYpIBhJDW0K3FW2e6qagKPVO+
- nG6T/4yUEtgwCpLKTZnwSYmkkRx+/wYujHn24lt3Xsvh8ytQWWeoiDMvMNm9IRdHKAOr
- 6ZADjXMZW+XpUB6LAnjyDegGrSw/1eJJ2s3BxaOle6xL3NsdDz2/pF9a+hLnt2mDROpE
- r4IFrbopvyGUgoWtk/ItjiYhMklyT+nAnlPy/WFT4yhyxd6Sxpu+Gy46nGdgMxhbtPQg
- W6eg==
-X-Gm-Message-State: AOAM531vTDYYVBEuvcZBHV5Eyvi/PZht7Ncw+TdJFJ84WRADuyV/yNhm
- kXsFub3q0NmbcVCTbGZMBhGYZA==
-X-Google-Smtp-Source: ABdhPJweYlOqUrdgQgsTYnZx9mqZDhPUofYjyqi/fbtsexH9YhtY+8U6qdL6WhZgMhYuwM3WddW0DA==
-X-Received: by 2002:a05:620a:46aa:: with SMTP id
- bq42mr10394763qkb.291.1634603367963; 
- Mon, 18 Oct 2021 17:29:27 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-b5ac-d4ae-96e7-5d3d.res6.spectrum.com.
- [2603:6081:7b01:cbda:b5ac:d4ae:96e7:5d3d])
- by smtp.gmail.com with ESMTPSA id q22sm7228642qkj.64.2021.10.18.17.29.25
+ bh=JCijkpm+MDVEv2aCCE8gcjIEY2wS1dmhV7v4Y14Uno8=;
+ b=JIDOpM3oTl45CMsIsxjgTi40OYEPIG7WPtPSqYjYUBuatgibVgZu1hgQcyfWehkJaa
+ seK3pmjoJFkcz2c+AP1xHp+FAeasmrsB7tWFl7FhoXKlBr2AnYHAY+zIAMYTosSn4pFB
+ nRBE1EfnKczeMGMEjBguWCskGXRGCyjQMJgUNFWEHP4BvWvDcQ6CRDVs4+K6XkYNEZXU
+ lOCawsHwBsgbzn+eO/PkCJFggAvRFC9sbTMOJImMDB2my4Q1gDR35/THf9S37LVotp9R
+ H+GtWssTDaoQ0+H96JhtKPNpD83wKgTRjX9LniU4iS54o9oQHhhjSsY/gvy2mXeu5DFq
+ WWNQ==
+X-Gm-Message-State: AOAM532ozyUg8xLfW9NNsCp+fknYCnvH0rjKa5KMrc31/JFeNNpOd6jl
+ xeT3awiNuYqOixxeTX8P+Ggo5Q==
+X-Google-Smtp-Source: ABdhPJy3tWWgPZ15I93iX7dQ1HExAR5w9KqhYMWspBesKHb6ljgicYWHOSW8Tbbu/UMZg8ll7aRaYw==
+X-Received: by 2002:a1c:740e:: with SMTP id p14mr4286873wmc.109.1634630191501; 
+ Tue, 19 Oct 2021 00:56:31 -0700 (PDT)
+Received: from apalos.home (ppp-94-66-220-13.home.otenet.gr. [94.66.220.13])
+ by smtp.gmail.com with ESMTPSA id g2sm14314995wrq.62.2021.10.19.00.56.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Oct 2021 17:29:27 -0700 (PDT)
-Date: Mon, 18 Oct 2021 20:29:24 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Message-ID: <20211019002924.GW7964@bill-the-cat>
+ Tue, 19 Oct 2021 00:56:30 -0700 (PDT)
+Date: Tue, 19 Oct 2021 10:56:26 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Message-ID: <YW56KurTNFyaMnAY@apalos.home>
 References: <20211015084243.285423-1-ilias.apalodimas@linaro.org>
  <20211018205033.GA3078606@bill-the-cat>
+ <20211019002924.GW7964@bill-the-cat>
 MIME-Version: 1.0
-In-Reply-To: <20211018205033.GA3078606@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Disposition: inline
+In-Reply-To: <20211019002924.GW7964@bill-the-cat>
 Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
  Vladimir Oltean <vladimir.oltean@nxp.com>,
  Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
@@ -93,92 +94,65 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6709964097850781137=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On Mon, Oct 18, 2021 at 08:29:24PM -0400, Tom Rini wrote:
+> On Mon, Oct 18, 2021 at 04:50:33PM -0400, Tom Rini wrote:
+> > On Fri, Oct 15, 2021 at 11:42:40AM +0300, Ilias Apalodimas wrote:
+> > 
+> > > OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
+> > > unique and rarely causes confusion,  we are better of having simpler
+> > > config options for the DTB.
+> > > 
+> > > So let's replace that with the existing OF_BOARD.  U-Boot would then
+> > > have only three config options for the DTB origin.
+> > > - OF_SEPARATE, build separately from U-Boot
+> > > - OF_BOARD, board specific way of providing the DTB
+> > > - OF_EMBED embedded in the u-boot binary(should not be used in production)
+> > > 
+> > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > ---
+> > > Note that this must be applied on top of
+> > > https://lore.kernel.org/u-boot/20211011210016.135929-1-ilias.apalodimas@linaro.org/
+> > > changes since v2:
+> > > - Rebased on top of the updated OF_BOARD patchset
+> > > Changes since v1:
+> > > - Added internal error value on board_fdt_blob_setup().  Arguably
+> > >   we can just check against NULL and simplify this even more if we
+> > >   don't care about the errno
+> > > - OF_BOARD is now default for sandbox builds
+> > 
+> > With the previous series applied, this breaks xilinx_zynq_virt:
+> > https://source.denx.de/u-boot/u-boot/-/jobs/337428 
+> > 
+> > I had a little trouble in general getting the board to run locally, even
+> > without the patches, so I didn't debug further yet.
+> 
+> Here's another thing, that might be related.  The dependency series has
+> minor size changes, in basically expected platforms and places.  This
+> patch adds tons of size changes on virtually all platforms.  That might
+> provide a clue or two as to what's going on.
 
---===============6709964097850781137==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="06N9xnU2hL237cv1"
-Content-Disposition: inline
+I'll have a look. What changes here is an extra argument to preserve the
+errno (which we can get rid of).
 
+> 
 
---06N9xnU2hL237cv1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is it the OF_HOSTFILE patch that breaks it?  There's one thing this patch
+changes in functionality.  In the new version fdtdec_setup() will return an
+error if the DTB is not found.  
+Can I reproduce this locally?
 
-On Mon, Oct 18, 2021 at 04:50:33PM -0400, Tom Rini wrote:
-> On Fri, Oct 15, 2021 at 11:42:40AM +0300, Ilias Apalodimas wrote:
->=20
-> > OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
-> > unique and rarely causes confusion,  we are better of having simpler
-> > config options for the DTB.
-> >=20
-> > So let's replace that with the existing OF_BOARD.  U-Boot would then
-> > have only three config options for the DTB origin.
-> > - OF_SEPARATE, build separately from U-Boot
-> > - OF_BOARD, board specific way of providing the DTB
-> > - OF_EMBED embedded in the u-boot binary(should not be used in producti=
-on)
-> >=20
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> > Note that this must be applied on top of
-> > https://lore.kernel.org/u-boot/20211011210016.135929-1-ilias.apalodimas=
-@linaro.org/
-> > changes since v2:
-> > - Rebased on top of the updated OF_BOARD patchset
-> > Changes since v1:
-> > - Added internal error value on board_fdt_blob_setup().  Arguably
-> >   we can just check against NULL and simplify this even more if we
-> >   don't care about the errno
-> > - OF_BOARD is now default for sandbox builds
->=20
-> With the previous series applied, this breaks xilinx_zynq_virt:
-> https://source.denx.de/u-boot/u-boot/-/jobs/337428=20
->=20
-> I had a little trouble in general getting the board to run locally, even
-> without the patches, so I didn't debug further yet.
+Thanks!
+/Ilias
+> -- 
+> Tom
 
-Here's another thing, that might be related.  The dependency series has
-minor size changes, in basically expected platforms and places.  This
-patch adds tons of size changes on virtually all platforms.  That might
-provide a clue or two as to what's going on.
-
---=20
-Tom
-
---06N9xnU2hL237cv1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmFuEWEACgkQFHw5/5Y0
-tyynrAv/QLNgKIgKmDJ3axs1mj976nhCqaUcVM5QcRTVbUkEsSite20MgyQsJxS1
-8I8pbOurHOvlROgddk+7UJ7pImgKYm36slWWcqal/mCm3LKRjm9YCBsLgug5LJ/w
-sslBWtRDz+ldJ3ugNcmngerKFsO8Dap2Rehg5YMJPgpINbC3G0Dzm91p2N/tqHD1
-PXLOohmfICGqYaMTcJ6gUmRYBI0j/n6ApW6SxMzkOVcPKXXPiMQpY2coLJWv9gXi
-BihuxlnPvpcwpenT2uO9cJSk0XOev0eTFe/82rr11lMv3/dUAvNypkNUgEcKyNbd
-0BFIFx8GVh7r1gT1VrQTkHwMNpThqk7lqZIm+KMrcypICGs6Odp7plyX9NNWUEDU
-VhmQ/3LDq6wn68v/8PJfA5fCCln++ZXMnCH3lYFrPazDgBVZhaXpW1mDxFMRzApS
-/AB1TS3w83mFmg023e03+aHSvl+3s1GyQP0+0k0zyexTfC03QRXT7j3oXXG8ftNw
-wPYOSTo+
-=BUCa
------END PGP SIGNATURE-----
-
---06N9xnU2hL237cv1--
-
---===============6709964097850781137==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6709964097850781137==--

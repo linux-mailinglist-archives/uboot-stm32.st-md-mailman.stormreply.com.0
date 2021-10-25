@@ -2,67 +2,86 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 444E4439009
-	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Oct 2021 09:07:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7840243A5AD
+	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Oct 2021 23:17:23 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E632CC57183;
-	Mon, 25 Oct 2021 07:07:24 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 038EAC57183;
+	Mon, 25 Oct 2021 21:17:23 +0000 (UTC)
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+ [209.85.222.179])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 903B2C57182
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7000BC57182
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 25 Oct 2021 07:07:23 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19P5UmX2002498; 
- Mon, 25 Oct 2021 09:06:51 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=n8UJVdegcYfRURurww0UPmq+oj40U2fkI1zyVhA4V50=;
- b=OGpz7cI74C97YV70iaaX47P9yyDIJ+7d+29HzucLW+jA3bw7tjvMDcY5gXTiZZ1+DlS/
- C0oUUOZKUyJzlFbDyXTbt4BEWJLIBThCLpLLS7ednZf9N3Ic41X5sC6CN2N1d/cHfZMH
- OL5JSrz1AlHFyqLckkAmIIPK3LqqbsYG1XqrNnNVxfU1WkP9EH0nhgyfZwwJ+vGh1G/q
- /0UNaxaIExL/pV0sV6e8Gxng2QnMQpBVZHbz/UuQn3eiV3Wc8T0D9JafRUSFQJghGA8f
- yHjEpl3nRTanOfEGRKptzPzNb92JlthSGsyeqktjG6wSx8e1SSdgB6J4ttn2srUtcKBH zQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bwjg39mat-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 25 Oct 2021 09:06:51 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9378D10002A;
- Mon, 25 Oct 2021 09:06:50 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3626B2132F9;
- Mon, 25 Oct 2021 09:06:50 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.45) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Mon, 25 Oct
- 2021 09:06:49 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20211022101915.1.I92213ff1dee3962016055fd447781cc3c9a8cb2c@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <66ecbb65-4d3e-3580-c471-b212383d2d2b@foss.st.com>
-Date: Mon, 25 Oct 2021 09:06:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ Mon, 25 Oct 2021 21:17:19 +0000 (UTC)
+Received: by mail-qk1-f179.google.com with SMTP id h20so13021683qko.13
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 25 Oct 2021 14:17:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=v+9paet9Jo9509MvsZN31TmwBLTrm3nhOPKdnPIxDj0=;
+ b=sGMbRdD0/UV2cM4gboqnBEEtsA8YbeOBx4b6t/orwPtHKkld2ZtY2jg/SZv9At8QP4
+ pGNu2KrYMVD9+skZUImpd5+3lb83ChOgrGgS1sGAEO8u9PISr6AQApZQ2FEvMs5dk9UK
+ shlnoo7d8LC7ZJ7hlkjBBeIHSW8u2jJmS3bBU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=v+9paet9Jo9509MvsZN31TmwBLTrm3nhOPKdnPIxDj0=;
+ b=uztIsWvVzH/qtnRwccvZ8W5jey3Ola9xt1TfN+vh7mabhSfPlpKUEJEtej3/NE+gq5
+ oi61fr+24TPt2DVy79ldnDdIz6iXeasWDbgKVjI//p8GCtBqYeszUyrAeb0rFtD4LxE6
+ tfkbOIgn5j7dFINB8lnvnt/ryPIfLI3UNjRIS3XUveDK4tLlFqi6RXtnFffWGjjiyX0w
+ 0y8z9Vf3CkD2L1BV/6O+B9dkRm4kjx8i5ukcbqnTwRaHJschWaPgX0yrm09CRKntT9oU
+ pTBX4OwFoZf0FRePiIPQrbLt6Ut+B+aY6qFkUyuvA77wY8PXsfLJ+IgVE3EUSsCHPLFo
+ 8OFQ==
+X-Gm-Message-State: AOAM531sQc76jGP23/zfkPimwT2LIHxKcPaEhJSSFNWc0WwcLy92/VXU
+ AyUoLyohS3slCsuNUmrCcfqFPA==
+X-Google-Smtp-Source: ABdhPJwDcG5kUjtTo01PT732FKc/GN8xNQTpGnzuFB5jcISrzbAN1HP1ctz9LpGpAxc+yWHhMPmxkA==
+X-Received: by 2002:a37:d09:: with SMTP id 9mr15711322qkn.409.1635196637918;
+ Mon, 25 Oct 2021 14:17:17 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-c992-6a97-7d08-4b0c.res6.spectrum.com.
+ [2603:6081:7b01:cbda:c992:6a97:7d08:4b0c])
+ by smtp.gmail.com with ESMTPSA id k8sm8970547qth.2.2021.10.25.14.17.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Oct 2021 14:17:17 -0700 (PDT)
+Date: Mon, 25 Oct 2021 17:17:13 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Message-ID: <20211025211713.GA1992726@bill-the-cat>
+References: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <20211022101915.1.I92213ff1dee3962016055fd447781cc3c9a8cb2c@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-25_02,2021-10-25_01,2020-04-07_01
-Cc: Marek Vasut <marex@denx.de>,
- Jean-Philippe ROMAIN <jean-philippe.romain@st.com>,
- Rick Chen <rick@andestech.com>, Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [Uboot-stm32] [PATCH] board: stmp32mp1: split board and SOC
- STM32MP15 configuration
+In-Reply-To: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Zong Li <zong.li@sifive.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@denx.de>,
+ Asherah Connor <ashe@kivikakk.ee>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <marek.behun@nic.cz>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Wasim Khan <wasim.khan@nxp.com>,
+ Harald Seiler <hws@denx.de>, Nandor Han <nandor.han@vaisala.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Green Wan <green.wan@sifive.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>, Michal Simek <monstr@monstr.eu>,
+ Matthias Brugger <mbrugger@suse.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, sjg@chromium.org,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v4] sandbox: Remove OF_HOSTFILE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,280 +93,98 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1074106841490936512=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 10/22/21 10:19 AM, Patrick Delaunay wrote:
-> Add a configuration file "stm32mp15_st_common.h" to handle the
-> STMicroelectronics boards configuration and rename stm32mp1.h to
-> "stm32mp15_common.h" to handle the generic STM32MP15x series configuration.
-> 
-> The configuration file "dh_stm32mp1.h" is also renamed to
-> "stm32mp15_dh_dhcom" for the configuration of board based on the
-> dhelectronics STM32MP15x SOM.
-> 
-> In the STMicroelectronics board configuration the default bootcmd
-> "bootcmd_stm32mp" is updated to only select the extlinux file found on
-> SD-Card on STM32MP15x EV1 for boot from NOR device.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  board/dhelectronics/dh_stm32mp1/Kconfig       |  2 +-
->  board/dhelectronics/dh_stm32mp1/MAINTAINERS   |  2 +-
->  board/engicam/stm32mp1/Kconfig                |  2 +-
->  board/st/stm32mp1/Kconfig                     |  2 +-
->  board/st/stm32mp1/MAINTAINERS                 |  3 +-
->  .../{stm32mp1.h => stm32mp15_common.h}        | 51 ++++++++++++-------
->  .../{dh_stm32mp1.h => stm32mp15_dh_dhsom.h}   |  6 +--
->  include/configs/stm32mp15_st_common.h         | 46 +++++++++++++++++
->  8 files changed, 87 insertions(+), 27 deletions(-)
->  rename include/configs/{stm32mp1.h => stm32mp15_common.h} (78%)
->  rename include/configs/{dh_stm32mp1.h => stm32mp15_dh_dhsom.h} (65%)
->  create mode 100644 include/configs/stm32mp15_st_common.h
-> 
-> diff --git a/board/dhelectronics/dh_stm32mp1/Kconfig b/board/dhelectronics/dh_stm32mp1/Kconfig
-> index 1fc792c9d1..dc707c2753 100644
-> --- a/board/dhelectronics/dh_stm32mp1/Kconfig
-> +++ b/board/dhelectronics/dh_stm32mp1/Kconfig
-> @@ -7,7 +7,7 @@ config SYS_VENDOR
->  	default "dhelectronics"
->  
->  config SYS_CONFIG_NAME
-> -	default "dh_stm32mp1"
-> +	default "stm32mp15_dh_dhsom"
->  
->  config ENV_SECT_SIZE
->  	default 0x10000 if ENV_IS_IN_SPI_FLASH
-> diff --git a/board/dhelectronics/dh_stm32mp1/MAINTAINERS b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
-> index 9ce21c3ab2..865588f5b8 100644
-> --- a/board/dhelectronics/dh_stm32mp1/MAINTAINERS
-> +++ b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
-> @@ -6,4 +6,4 @@ F:	arch/arm/dts/stm32mp15xx-dhcom*
->  F:	board/dhelectronics/dh_stm32mp1/
->  F:	configs/stm32mp15_dhcom_basic_defconfig
->  F:	configs/stm32mp15_dhcor_basic_defconfig
-> -F:	include/configs/stm32mp1.h
-> +F:	include/configs/stm32mp15_dh_dhsom.h
-> diff --git a/board/engicam/stm32mp1/Kconfig b/board/engicam/stm32mp1/Kconfig
-> index c800fd4e60..3802d44cef 100644
-> --- a/board/engicam/stm32mp1/Kconfig
-> +++ b/board/engicam/stm32mp1/Kconfig
-> @@ -7,6 +7,6 @@ config SYS_VENDOR
->  	default "engicam"
->  
->  config SYS_CONFIG_NAME
-> -	default "stm32mp1"
-> +	default "stm32mp15_common"
->  
->  endif
-> diff --git a/board/st/stm32mp1/Kconfig b/board/st/stm32mp1/Kconfig
-> index c5ab7553d4..89e97aec2b 100644
-> --- a/board/st/stm32mp1/Kconfig
-> +++ b/board/st/stm32mp1/Kconfig
-> @@ -7,7 +7,7 @@ config SYS_VENDOR
->  	default "st"
->  
->  config SYS_CONFIG_NAME
-> -	default "stm32mp1"
-> +	default "stm32mp15_st_common"
->  
->  source "board/st/common/Kconfig"
->  endif
-> diff --git a/board/st/stm32mp1/MAINTAINERS b/board/st/stm32mp1/MAINTAINERS
-> index 0e6d80fb45..6451195269 100644
-> --- a/board/st/stm32mp1/MAINTAINERS
-> +++ b/board/st/stm32mp1/MAINTAINERS
-> @@ -8,4 +8,5 @@ F:	board/st/stm32mp1/
->  F:	configs/stm32mp15_defconfig
->  F:	configs/stm32mp15_basic_defconfig
->  F:	configs/stm32mp15_trusted_defconfig
-> -F:	include/configs/stm32mp1.h
-> +F:	include/configs/stm32mp15_common.h
-> +F:	include/configs/stm32mp15_st_common.h
-> diff --git a/include/configs/stm32mp1.h b/include/configs/stm32mp15_common.h
-> similarity index 78%
-> rename from include/configs/stm32mp1.h
-> rename to include/configs/stm32mp15_common.h
-> index 30d4e8ff1f..46a92a06e5 100644
-> --- a/include/configs/stm32mp1.h
-> +++ b/include/configs/stm32mp15_common.h
-> @@ -5,8 +5,8 @@
->   * Configuration settings for the STM32MP15x CPU
->   */
->  
-> -#ifndef __CONFIG_H
-> -#define __CONFIG_H
-> +#ifndef __CONFIG_STM32MP15_COMMMON_H
-> +#define __CONFIG_STM32MP15_COMMMON_H
->  #include <linux/sizes.h>
->  #include <asm/arch/stm32.h>
->  
-> @@ -104,11 +104,11 @@
->  	BOOT_TARGET_PXE(func)
->  
->  /*
-> - * bootcmd for stm32mp1:
-> + * default bootcmd for stm32mp1:
->   * for serial/usb: execute the stm32prog command
-> - * for mmc boot (eMMC, SD card), boot only on the same device
-> - * for nand or spi-nand boot, boot with on ubifs partition on UBI partition
-> - * for nor boot, use the default order
-> + * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-> + * for nand or spi-nand boot, distro boot with ubifs on UBI partition
-> + * for nor boot, use the default distro order in ${boot_targets}
->   */
->  #define STM32MP_BOOTCMD "bootcmd_stm32mp=" \
->  	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-> @@ -126,7 +126,7 @@
->  
->  #ifdef CONFIG_FASTBOOT_CMD_OEM_FORMAT
->  /* eMMC default partitions for fastboot command: oem format */
-> -#define PARTS_DEFAULT \
-> +#define STM32MP_PARTS_DEFAULT \
->  	"partitions=" \
->  	"name=ssbl,size=2M;" \
->  	"name=bootfs,size=64MB,bootable;" \
-> @@ -134,9 +134,14 @@
->  	"name=rootfs,size=746M;" \
->  	"name=userfs,size=-\0"
->  #else
-> -#define PARTS_DEFAULT
-> +#define STM32MP_PARTS_DEFAULT
->  #endif
->  
-> +#define STM32MP_EXTRA \
-> +	"altbootcmd=run bootcmd\0" \
-> +	"env_check=if env info -p -d -q; then env save; fi\0" \
-> +	"boot_net_usb_start=true\0"
-> +
->  #include <config_distro_bootcmd.h>
->  
->  /*
-> @@ -144,21 +149,29 @@
->   * 1M fdt, 1M script, 1M pxe and 1M for overlay
->   * and the ramdisk at the end.
->   */
-> +#define __KERNEL_ADDR_R     __stringify(0xc2000000)
-> +#define __FDT_ADDR_R        __stringify(0xc4000000)
-> +#define __SCRIPT_ADDR_R     __stringify(0xc4100000)
-> +#define __PXEFILE_ADDR_R    __stringify(0xc4200000)
-> +#define __FDTOVERLAY_ADDR_R __stringify(0xc4300000)
-> +#define __RAMDISK_ADDR_R    __stringify(0xc4400000)
-> +
-> +#define STM32MP_MEM_LAYOUT \
-> +	"kernel_addr_r=" __KERNEL_ADDR_R "\0" \
-> +	"fdt_addr_r=" __FDT_ADDR_R "\0" \
-> +	"scriptaddr=" __SCRIPT_ADDR_R "\0" \
-> +	"pxefile_addr_r=" __PXEFILE_ADDR_R "\0" \
-> +	"fdtoverlay_addr_r=" __FDTOVERLAY_ADDR_R "\0" \
-> +	"ramdisk_addr_r=" __RAMDISK_ADDR_R "\0"
-> +
->  #define CONFIG_EXTRA_ENV_SETTINGS \
-> -	"kernel_addr_r=0xc2000000\0" \
-> -	"fdt_addr_r=0xc4000000\0" \
-> -	"scriptaddr=0xc4100000\0" \
-> -	"pxefile_addr_r=0xc4200000\0" \
-> -	"fdtoverlay_addr_r=0xc4300000\0" \
-> -	"ramdisk_addr_r=0xc4400000\0" \
-> -	"altbootcmd=run bootcmd\0" \
-> -	"env_check=if env info -p -d -q; then env save; fi\0" \
-> +	STM32MP_MEM_LAYOUT \
->  	STM32MP_BOOTCMD \
-> -	PARTS_DEFAULT \
-> +	STM32MP_PARTS_DEFAULT \
->  	BOOTENV \
-> -	"boot_net_usb_start=true\0"
-> +	STM32MP_EXTRA
->  
->  #endif /* ifndef CONFIG_SPL_BUILD */
->  #endif /* ifdef CONFIG_DISTRO_DEFAULTS*/
->  
-> -#endif /* __CONFIG_H */
-> +#endif /* __CONFIG_STM32MP15_COMMMON_H */
-> diff --git a/include/configs/dh_stm32mp1.h b/include/configs/stm32mp15_dh_dhsom.h
-> similarity index 65%
-> rename from include/configs/dh_stm32mp1.h
-> rename to include/configs/stm32mp15_dh_dhsom.h
-> index 89d317ba2b..c559cd72da 100644
-> --- a/include/configs/dh_stm32mp1.h
-> +++ b/include/configs/stm32mp15_dh_dhsom.h
-> @@ -5,10 +5,10 @@
->   * Configuration settings for the DH STM32MP15x SoMs
->   */
->  
-> -#ifndef __CONFIG_DH_STM32MP1_H__
-> -#define __CONFIG_DH_STM32MP1_H__
-> +#ifndef __CONFIG_STM32MP15_DH_DHSOM_H__
-> +#define __CONFIG_STM32MP15_DH_DHSOM_H__
->  
-> -#include <configs/stm32mp1.h>
-> +#include <configs/stm32mp15_common.h>
->  
->  #define CONFIG_SPL_TARGET		"u-boot.itb"
->  
-> diff --git a/include/configs/stm32mp15_st_common.h b/include/configs/stm32mp15_st_common.h
-> new file mode 100644
-> index 0000000000..10248bffc1
-> --- /dev/null
-> +++ b/include/configs/stm32mp15_st_common.h
-> @@ -0,0 +1,46 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause */
-> +/*
-> + * Copyright (C) 2021, STMicroelectronics - All Rights Reserved
-> + *
-> + * Configuration settings for the STMicroelectonics STM32MP15x boards
-> + */
-> +
-> +#ifndef __CONFIG_STM32MP15_ST_COMMON_H__
-> +#define __CONFIG_STM32MP15_ST_COMMON_H__
-> +
-> +#include <configs/stm32mp15_common.h>
-> +
-> +#ifdef CONFIG_EXTRA_ENV_SETTINGS
-> +/*
-> + * default bootcmd for stm32mp1 STMicroelectronics boards:
-> + * for serial/usb: execute the stm32prog command
-> + * for mmc boot (eMMC, SD card), distro boot on the same mmc device
-> + * for nand or spi-nand boot, distro boot with ubifs on UBI partition
-> + * for nor boot, distro boot on SD card = mmc0 ONLY !
-> + */
-> +#define ST_STM32MP1_BOOTCMD "bootcmd_stm32mp=" \
-> +	"echo \"Boot over ${boot_device}${boot_instance}!\";" \
-> +	"if test ${boot_device} = serial || test ${boot_device} = usb;" \
-> +	"then stm32prog ${boot_device} ${boot_instance}; " \
-> +	"else " \
-> +		"run env_check;" \
-> +		"if test ${boot_device} = mmc;" \
-> +		"then env set boot_targets \"mmc${boot_instance}\"; fi;" \
-> +		"if test ${boot_device} = nand ||" \
-> +		  " test ${boot_device} = spi-nand ;" \
-> +		"then env set boot_targets ubifs0; fi;" \
-> +		"if test ${boot_device} = nor;" \
-> +		"then env set boot_targets mmc0; fi;" \
-> +		"run distro_bootcmd;" \
-> +	"fi;\0"
-> +
-> +#undef CONFIG_EXTRA_ENV_SETTINGS
-> +#define CONFIG_EXTRA_ENV_SETTINGS \
-> +	STM32MP_MEM_LAYOUT \
-> +	ST_STM32MP1_BOOTCMD \
-> +	STM32MP_PARTS_DEFAULT \
-> +	BOOTENV \
-> +	STM32MP_EXTRA
-> +
-> +#endif
-> +#endif
-> 
+--===============1074106841490936512==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="tKW2IUtsqtDRztdT"
+Content-Disposition: inline
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Thanks
-Patrice
+
+--tKW2IUtsqtDRztdT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 19, 2021 at 04:07:21PM +0300, Ilias Apalodimas wrote:
+
+> OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
+> unique and not causing any confusions,  we are better of having simpler
+> config options for the DTB.
+>=20
+> So let's replace that with the existing OF_BOARD.  U-Boot would then
+> have only three config options for the DTB origin.
+> - OF_SEPARATE, build separately from U-Boot
+> - OF_BOARD, board specific way of providing the DTB
+> - OF_EMBED embedded in the u-boot binary(should not be used in production
+>=20
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+This doesn't build on riscv:
++(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:57:7: error: conflict=
+ing types for 'board_fdt_blob_setup'; have 'void *(void)'
++(ae350_rv64)    57 | void *board_fdt_blob_setup(void)
++(ae350_rv64)       |       ^~~~~~~~~~~~~~~~~~~~
++(ae350_rv64) In file included from include/asm-generic/global_data.h:23,
++(ae350_rv64)                  from arch/riscv/include/asm/global_data.h:35,
++(ae350_rv64)                  from include/init.h:21,
++(ae350_rv64)                  from board/AndesTech/ax25-ae350/ax25-ae350.c=
+:10:
++(ae350_rv64) include/fdtdec.h:1164:7: note: previous declaration of 'board=
+_fdt_blob_setup' with type 'void *(int *)'
++(ae350_rv64)  1164 | void *board_fdt_blob_setup(int *err);
++(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c: In function 'board_f=
+dt_blob_setup':
++(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: error: 'err' u=
+ndeclared (first use in this function); did you mean 'errno'?
++(ae350_rv64)    59 |         *err =3D 0;
++(ae350_rv64)       |          ^~~
++(ae350_rv64)       |          errno
++(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: note: each und=
+eclared identifier is reported only once for each function it appears in
++(ae350_rv64) make[2]: *** [scripts/Makefile.build:254: board/AndesTech/ax2=
+5-ae350/ax25-ae350.o] Error 1
++(ae350_rv64) make[1]: *** [Makefile:1801: board/AndesTech/ax25-ae350] Erro=
+r 2
++(ae350_rv64) make: *** [Makefile:177: sub-make] Error 2
+
+--=20
+Tom
+
+--tKW2IUtsqtDRztdT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmF3HtYACgkQFHw5/5Y0
+tyyxHwv8DbBlDiUk1CW5VPrkU6p/ZoP2l7As0drMLOfsonoOSpJ2m8II4+ryWyul
+ioaQmmWyt9QNnwDqtM9Qsh0lhFKZVRgT4ZVWN5N0X85/dMBHxwg/S+9Bt+HDH3AZ
+VbYSsjYY32DZnX1biRTlFN4RXSjw4bHymMN08txo99nNXg9no01Ptjgdp60GxttO
+V2FRsMLWv4HbiPgpJ96g3k1D3KfYz1zb4V3GuXsts+5zuS4xP06m6V6wA/hTjTFK
+f9YFZUujReG5Qe1IVyc37PpDG/EBhS825/08J/CrkUv30wLscEdFAgO/yQ9/6qOT
+Vvnen1R5CO+RhlBIGsW8+lEdf4nE4m/EXkImL1Yt5iv6INgLwy16Wj+z0x4lOZii
+evZygcJ38hHjzXWkQXM3do+9rutLHn85GtV29rCIN/nTf6BqEi85Us7woiyoTY8j
+DVR1wp2CYY1YxJWRtYrD+aiIkTqzHstEN85dbbbObDMN6RD3UJC+bdLkqhdDSs9c
+x0QQfZe6
+=P/1z
+-----END PGP SIGNATURE-----
+
+--tKW2IUtsqtDRztdT--
+
+--===============1074106841490936512==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1074106841490936512==--

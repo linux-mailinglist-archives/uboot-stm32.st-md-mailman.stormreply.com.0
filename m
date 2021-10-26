@@ -2,58 +2,82 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A99643AABE
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Oct 2021 05:29:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09F6643ABF1
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Oct 2021 07:58:38 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B10FCC57182;
-	Tue, 26 Oct 2021 03:29:45 +0000 (UTC)
-Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com
- [209.85.222.46])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AE187C5719C;
+	Tue, 26 Oct 2021 05:58:37 +0000 (UTC)
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com
+ [209.85.219.169])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8FEDCC0614D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4E51EC06B6C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Oct 2021 03:29:43 +0000 (UTC)
-Received: by mail-ua1-f46.google.com with SMTP id e2so26388151uax.7
+ Tue, 26 Oct 2021 05:58:36 +0000 (UTC)
+Received: by mail-yb1-f169.google.com with SMTP id y80so14044840ybe.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 25 Oct 2021 20:29:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ Mon, 25 Oct 2021 22:58:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+b0T5ASV9OMNfMo2u0lTyoXTEe5rqUyrHqevBvBiJVI=;
- b=n6crB90y7GgfWqpx2DNmcQAJSzOEJH1c0gjyzOaiG1JaWRIHZdZaZMbHODuPIM/fST
- 8te4XvK7WME2zH7VjYw91LnVqhPOwnfZWyMvPyjkyfwbL5zDYDkDH6guTUEB7lmcMplw
- VefLyq5+Hi006ktjM8T/wp67Bxq1n9/KoTQ/8=
+ :cc; bh=+YKUal6iG9NSHTbWImghg1rg994lb0uA3AdV8hWqe84=;
+ b=d0/hKrCFY95KArStBf7Ruf++SccxC31Oec2zE15mHQsvLMcCDlvuvut+STEsP4sdCn
+ M6e6X8iR8KJKqM21HhCr71Y6EkXuA2siu6mcF+I5G6HG9wxYXL1+RtIFpLe52s0afEhV
+ cuR0Zzgsb3QakBhPrHM1S1lSyDxAtOe4TNJK0RyhR3PzhchuhDyFQyklM3XwW380avrd
+ rudSo1PzC1UwJQQ8612gruhQ9pnq9NCcBSu5RQFtaFaOGFv97r0+dk6HXAD/dh2uyig3
+ RTfIJROchI0EcmptH9O69zTzrO3AYDSwuOKSj+duhWNMUiX4mojdiGBvYAYxCgcg8+nS
+ Jgkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=+b0T5ASV9OMNfMo2u0lTyoXTEe5rqUyrHqevBvBiJVI=;
- b=x3y5nuzEJ/PeuHLW6vpvKU4o0fr5mVAVNXSv/8FM2uP+Z+4XkJ9oefaG0eAPrmEMV9
- Rak2VoL0izJHT9g+R2mFvspHc6c+EYpGyEE9/oVxWreys0adL9htyT0qpAe9Xra5A6dM
- XZ7jESarqbVPx+SekCnworPHIGwqA8OyhzhHNIESN3A6aCU0Zjf6l42sizr1JH+on0Oz
- uoqp+7ag21LGIWz4H6siKF9QoGJnYphMo1EFEW5eIVwtMs40m+Z2A+pRJE9Y2wlubzsF
- xd85O68UM+rtzi7hAHYB3S5DTonrAcvszlJ9Saj4EaMo8t0Qvy8YYDH92vM3l+OIBDPw
- Q7Lw==
-X-Gm-Message-State: AOAM531VtS7bMEQzTFh4uL9iK2Ot3IIhE/5qrVNKgN5cJr95DIgUAApj
- M4vhgrEdHF6lK8IyMd+4pAoUFS+WBAIZiOqU8Xr/nQ==
-X-Google-Smtp-Source: ABdhPJzYDndtgqoTqAQ7r1qIn62s7R3cyjMXVMCt7Lp0wDayF7qoKNYZ17GEHKruU/vK6QM+Z6elrgFjnykEeMjfb9Q=
-X-Received: by 2002:a67:f909:: with SMTP id t9mr923621vsq.8.1635218981800;
- Mon, 25 Oct 2021 20:29:41 -0700 (PDT)
+ bh=+YKUal6iG9NSHTbWImghg1rg994lb0uA3AdV8hWqe84=;
+ b=YlHQ9lKmZLFAnJaoY1SUwfrUxGDMuxhP4yt5KHCs3GAb4z+rPYp1VZH3U/VeZDVK2W
+ RHh8vb2UDthlxL9M34W1q/bxu35O211PDABLV+54rIxV2N8sgRczs31NZZwRNNTGD/xT
+ aoRTiijQ+DAvF0m+Wl6Ir7Z1K3zNUchZIKf7hb6ZLnI0kc0g2vwP4BDCrwpKEVOBpHB+
+ 0DRFPeZqI/sIAmPV3/vuDchUZZgxOLDf+QEmCl9rsU5DdlRAualjwk+prpe7yiuHK7xI
+ m9+2RryYPHXUih06C/pVTuyd2hIqf5FFT2AqpNWiyz7IRnZLSaZZ62ajtBKZ2E5zQcVw
+ kTvA==
+X-Gm-Message-State: AOAM531H9jlBKYedgC6nUELUmh9D9E9wTzGuB3pgwEb40ve/QnF+fxS1
+ whapQPcudf/GPRsJuKhSWO/sKlCLmnIVKZEsFMVt8A==
+X-Google-Smtp-Source: ABdhPJwJCGQ3fGoT1uPPHjPzpvuVx5wsIjT2fjRAB1h+z0U36/I4aUSI+vVFTKTT+tEJiimJVPaeBqYAzktp7BMEmsA=
+X-Received: by 2002:a25:d3cc:: with SMTP id
+ e195mr24375594ybf.410.1635227915247; 
+ Mon, 25 Oct 2021 22:58:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20211004115942.1.Ic01b4a3063c0b09cac503a4dc8356f5ff64b5c6e@changeid>
- <20211004115942.6.Ia3825658ff431b2f6ff143ee01c2d44d24219558@changeid>
- <CAPnjgZ1CEK4QUVTEZ9YP7wKs5RrdVLLmyhpkwFz=exvaaMUHKA@mail.gmail.com>
- <dedad256-8e72-6e70-f5ba-88fd7e27fa3a@foss.st.com>
-In-Reply-To: <dedad256-8e72-6e70-f5ba-88fd7e27fa3a@foss.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Oct 2021 21:29:29 -0600
-Message-ID: <CAPnjgZ0sBtm63+bWAywEQaLAR2rkjMfYf2SnBikkr43cz+6R4A@mail.gmail.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Priyanka Jain <priyanka.jain@nxp.com>
-Subject: Re: [Uboot-stm32] [PATCH 6/6] scripts: remove CONFIG_IS_ENABLED in
-	config_whitelist.txt
+References: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
+ <20211025211713.GA1992726@bill-the-cat>
+In-Reply-To: <20211025211713.GA1992726@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 26 Oct 2021 08:57:59 +0300
+Message-ID: <CAC_iWjJdmAFRNPc9nikEbucH5zTgL4RRmjhQ57Yqo8W5CMfatQ@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Zong Li <zong.li@sifive.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@denx.de>,
+ Asherah Connor <ashe@kivikakk.ee>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Wasim Khan <wasim.khan@nxp.com>,
+ Harald Seiler <hws@denx.de>, Nandor Han <nandor.han@vaisala.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Green Wan <green.wan@sifive.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>, Michal Simek <monstr@monstr.eu>,
+ Matthias Brugger <mbrugger@suse.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, sjg@chromium.org,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, Pratyush Yadav <p.yadav@ti.com>,
+ Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v4] sandbox: Remove OF_HOSTFILE
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,75 +94,52 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
+On Tue, 26 Oct 2021 at 00:17, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 19, 2021 at 04:07:21PM +0300, Ilias Apalodimas wrote:
+>
+> > OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
+> > unique and not causing any confusions,  we are better of having simpler
+> > config options for the DTB.
+> >
+> > So let's replace that with the existing OF_BOARD.  U-Boot would then
+> > have only three config options for the DTB origin.
+> > - OF_SEPARATE, build separately from U-Boot
+> > - OF_BOARD, board specific way of providing the DTB
+> > - OF_EMBED embedded in the u-boot binary(should not be used in production
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+>
+> This doesn't build on riscv:
+> +(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:57:7: error: conflicting types for 'board_fdt_blob_setup'; have 'void *(void)'
+> +(ae350_rv64)    57 | void *board_fdt_blob_setup(void)
+> +(ae350_rv64)       |       ^~~~~~~~~~~~~~~~~~~~
+> +(ae350_rv64) In file included from include/asm-generic/global_data.h:23,
+> +(ae350_rv64)                  from arch/riscv/include/asm/global_data.h:35,
+> +(ae350_rv64)                  from include/init.h:21,
+> +(ae350_rv64)                  from board/AndesTech/ax25-ae350/ax25-ae350.c:10:
+> +(ae350_rv64) include/fdtdec.h:1164:7: note: previous declaration of 'board_fdt_blob_setup' with type 'void *(int *)'
+> +(ae350_rv64)  1164 | void *board_fdt_blob_setup(int *err);
+> +(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c: In function 'board_fdt_blob_setup':
+> +(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: error: 'err' undeclared (first use in this function); did you mean 'errno'?
+> +(ae350_rv64)    59 |         *err = 0;
+> +(ae350_rv64)       |          ^~~
+> +(ae350_rv64)       |          errno
+> +(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: note: each undeclared identifier is reported only once for each function it appears in
+> +(ae350_rv64) make[2]: *** [scripts/Makefile.build:254: board/AndesTech/ax25-ae350/ax25-ae350.o] Error 1
+> +(ae350_rv64) make[1]: *** [Makefile:1801: board/AndesTech/ax25-ae350] Error 2
+> +(ae350_rv64) make: *** [Makefile:177: sub-make] Error 2
 
-On Fri, 22 Oct 2021 at 11:13, Patrick DELAUNAY
-<patrick.delaunay@foss.st.com> wrote:
->
-> Hi Simon
->
-> On 10/14/21 5:09 PM, Simon Glass wrote:
-> > Hi Patrick,
-> >
-> > On Mon, 4 Oct 2021 at 04:00, Patrick Delaunay
-> > <patrick.delaunay@foss.st.com> wrote:
-> >> Redefine the macro CONFIG_IS_ENABLED is not allowed,
-> >> so this entry can be removed in whitelist file.
-> >>
-> >> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> >> ---
-> >>
-> >>   scripts/config_whitelist.txt | 1 -
-> >>   1 file changed, 1 deletion(-)
-> >>
-> >> diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
-> >> index b3ebd20c57..41a0952c97 100644
-> >> --- a/scripts/config_whitelist.txt
-> >> +++ b/scripts/config_whitelist.txt
-> >> @@ -649,7 +649,6 @@ CONFIG_IRAM_SIZE
-> >>   CONFIG_IRAM_STACK
-> >>   CONFIG_IRAM_TOP
-> >>   CONFIG_IRDA_BASE
-> >> -CONFIG_IS_ENABLED
-> >>   CONFIG_JFFS2_DEV
-> >>   CONFIG_JFFS2_LZO
-> >>   CONFIG_JFFS2_NAND
-> >> --
-> >> 2.25.1
-> >>
-> > For this to work you need to actually remove it from the source tree
-> > (which we can't), otherwise you get:
-> >
-> > Error: You must add new CONFIG options using Kconfig
-> > The following new ad-hoc CONFIG options were detected:
-> > CONFIG_IS_ENABLED
-> >
-> > I don't think this is worth it though, so I suggest dropping this patch.
-> >
-> > Regards,
-> > Simon
->
->
-> Yes ! sorry
->
-> CONFIG_IS_ENABLED is present in u-boot.cfg,
->
-> as CONFIG_VAL
->
->
-> even if it is strange for these macro defined in "linux/kconfig.h"
->
-> but agree to drop this tentative.
->
->
-> Do you think I can remove the CONFIG_IS_ENABLED and CONFIG_VAL
->
-> in u-boot.cfg when the file is generated ?
+Yea I somehow managed to mess up my merges.  Apologies for the noise,
+I'll send a v5
 
-If you like.
-
-Regards,
-Simon
+Cheers
+/Ilias
+>
+> --
+> Tom
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

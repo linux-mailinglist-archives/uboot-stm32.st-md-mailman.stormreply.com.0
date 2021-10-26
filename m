@@ -2,86 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7840243A5AD
-	for <lists+uboot-stm32@lfdr.de>; Mon, 25 Oct 2021 23:17:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A99643AABE
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Oct 2021 05:29:46 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 038EAC57183;
-	Mon, 25 Oct 2021 21:17:23 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B10FCC57182;
+	Tue, 26 Oct 2021 03:29:45 +0000 (UTC)
+Received: from mail-ua1-f46.google.com (mail-ua1-f46.google.com
+ [209.85.222.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7000BC57182
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8FEDCC0614D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 25 Oct 2021 21:17:19 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id h20so13021683qko.13
+ Tue, 26 Oct 2021 03:29:43 +0000 (UTC)
+Received: by mail-ua1-f46.google.com with SMTP id e2so26388151uax.7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 25 Oct 2021 14:17:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=v+9paet9Jo9509MvsZN31TmwBLTrm3nhOPKdnPIxDj0=;
- b=sGMbRdD0/UV2cM4gboqnBEEtsA8YbeOBx4b6t/orwPtHKkld2ZtY2jg/SZv9At8QP4
- pGNu2KrYMVD9+skZUImpd5+3lb83ChOgrGgS1sGAEO8u9PISr6AQApZQ2FEvMs5dk9UK
- shlnoo7d8LC7ZJ7hlkjBBeIHSW8u2jJmS3bBU=
+ Mon, 25 Oct 2021 20:29:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+b0T5ASV9OMNfMo2u0lTyoXTEe5rqUyrHqevBvBiJVI=;
+ b=n6crB90y7GgfWqpx2DNmcQAJSzOEJH1c0gjyzOaiG1JaWRIHZdZaZMbHODuPIM/fST
+ 8te4XvK7WME2zH7VjYw91LnVqhPOwnfZWyMvPyjkyfwbL5zDYDkDH6guTUEB7lmcMplw
+ VefLyq5+Hi006ktjM8T/wp67Bxq1n9/KoTQ/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=v+9paet9Jo9509MvsZN31TmwBLTrm3nhOPKdnPIxDj0=;
- b=uztIsWvVzH/qtnRwccvZ8W5jey3Ola9xt1TfN+vh7mabhSfPlpKUEJEtej3/NE+gq5
- oi61fr+24TPt2DVy79ldnDdIz6iXeasWDbgKVjI//p8GCtBqYeszUyrAeb0rFtD4LxE6
- tfkbOIgn5j7dFINB8lnvnt/ryPIfLI3UNjRIS3XUveDK4tLlFqi6RXtnFffWGjjiyX0w
- 0y8z9Vf3CkD2L1BV/6O+B9dkRm4kjx8i5ukcbqnTwRaHJschWaPgX0yrm09CRKntT9oU
- pTBX4OwFoZf0FRePiIPQrbLt6Ut+B+aY6qFkUyuvA77wY8PXsfLJ+IgVE3EUSsCHPLFo
- 8OFQ==
-X-Gm-Message-State: AOAM531sQc76jGP23/zfkPimwT2LIHxKcPaEhJSSFNWc0WwcLy92/VXU
- AyUoLyohS3slCsuNUmrCcfqFPA==
-X-Google-Smtp-Source: ABdhPJwDcG5kUjtTo01PT732FKc/GN8xNQTpGnzuFB5jcISrzbAN1HP1ctz9LpGpAxc+yWHhMPmxkA==
-X-Received: by 2002:a37:d09:: with SMTP id 9mr15711322qkn.409.1635196637918;
- Mon, 25 Oct 2021 14:17:17 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-c992-6a97-7d08-4b0c.res6.spectrum.com.
- [2603:6081:7b01:cbda:c992:6a97:7d08:4b0c])
- by smtp.gmail.com with ESMTPSA id k8sm8970547qth.2.2021.10.25.14.17.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Oct 2021 14:17:17 -0700 (PDT)
-Date: Mon, 25 Oct 2021 17:17:13 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Message-ID: <20211025211713.GA1992726@bill-the-cat>
-References: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+b0T5ASV9OMNfMo2u0lTyoXTEe5rqUyrHqevBvBiJVI=;
+ b=x3y5nuzEJ/PeuHLW6vpvKU4o0fr5mVAVNXSv/8FM2uP+Z+4XkJ9oefaG0eAPrmEMV9
+ Rak2VoL0izJHT9g+R2mFvspHc6c+EYpGyEE9/oVxWreys0adL9htyT0qpAe9Xra5A6dM
+ XZ7jESarqbVPx+SekCnworPHIGwqA8OyhzhHNIESN3A6aCU0Zjf6l42sizr1JH+on0Oz
+ uoqp+7ag21LGIWz4H6siKF9QoGJnYphMo1EFEW5eIVwtMs40m+Z2A+pRJE9Y2wlubzsF
+ xd85O68UM+rtzi7hAHYB3S5DTonrAcvszlJ9Saj4EaMo8t0Qvy8YYDH92vM3l+OIBDPw
+ Q7Lw==
+X-Gm-Message-State: AOAM531VtS7bMEQzTFh4uL9iK2Ot3IIhE/5qrVNKgN5cJr95DIgUAApj
+ M4vhgrEdHF6lK8IyMd+4pAoUFS+WBAIZiOqU8Xr/nQ==
+X-Google-Smtp-Source: ABdhPJzYDndtgqoTqAQ7r1qIn62s7R3cyjMXVMCt7Lp0wDayF7qoKNYZ17GEHKruU/vK6QM+Z6elrgFjnykEeMjfb9Q=
+X-Received: by 2002:a67:f909:: with SMTP id t9mr923621vsq.8.1635218981800;
+ Mon, 25 Oct 2021 20:29:41 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20211019130725.171193-1-ilias.apalodimas@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Liviu Dudau <liviu.dudau@foss.arm.com>,
- Vladimir Oltean <vladimir.oltean@nxp.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Rick Chen <rick@andestech.com>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Zong Li <zong.li@sifive.com>, uboot-stm32@st-md-mailman.stormreply.com,
- Stefan Roese <sr@denx.de>, Marek Szyprowski <m.szyprowski@samsung.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Heiko Schocher <hs@denx.de>,
- Asherah Connor <ashe@kivikakk.ee>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <marek.behun@nic.cz>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
- "Ivan T. Ivanov" <iivanov@suse.de>, Wasim Khan <wasim.khan@nxp.com>,
- Harald Seiler <hws@denx.de>, Nandor Han <nandor.han@vaisala.com>,
- Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
- Green Wan <green.wan@sifive.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
- T Karthik Reddy <t.karthik.reddy@xilinx.com>, Michal Simek <monstr@monstr.eu>,
- Matthias Brugger <mbrugger@suse.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, sjg@chromium.org,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Pratyush Yadav <p.yadav@ti.com>,
- Nicolas Saenz Julienne <nsaenzjulienne@suse.de>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v4] sandbox: Remove OF_HOSTFILE
+References: <20211004115942.1.Ic01b4a3063c0b09cac503a4dc8356f5ff64b5c6e@changeid>
+ <20211004115942.6.Ia3825658ff431b2f6ff143ee01c2d44d24219558@changeid>
+ <CAPnjgZ1CEK4QUVTEZ9YP7wKs5RrdVLLmyhpkwFz=exvaaMUHKA@mail.gmail.com>
+ <dedad256-8e72-6e70-f5ba-88fd7e27fa3a@foss.st.com>
+In-Reply-To: <dedad256-8e72-6e70-f5ba-88fd7e27fa3a@foss.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 Oct 2021 21:29:29 -0600
+Message-ID: <CAPnjgZ0sBtm63+bWAywEQaLAR2rkjMfYf2SnBikkr43cz+6R4A@mail.gmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Priyanka Jain <priyanka.jain@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH 6/6] scripts: remove CONFIG_IS_ENABLED in
+	config_whitelist.txt
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,98 +65,81 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1074106841490936512=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
 
---===============1074106841490936512==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="tKW2IUtsqtDRztdT"
-Content-Disposition: inline
+On Fri, 22 Oct 2021 at 11:13, Patrick DELAUNAY
+<patrick.delaunay@foss.st.com> wrote:
+>
+> Hi Simon
+>
+> On 10/14/21 5:09 PM, Simon Glass wrote:
+> > Hi Patrick,
+> >
+> > On Mon, 4 Oct 2021 at 04:00, Patrick Delaunay
+> > <patrick.delaunay@foss.st.com> wrote:
+> >> Redefine the macro CONFIG_IS_ENABLED is not allowed,
+> >> so this entry can be removed in whitelist file.
+> >>
+> >> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> >> ---
+> >>
+> >>   scripts/config_whitelist.txt | 1 -
+> >>   1 file changed, 1 deletion(-)
+> >>
+> >> diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
+> >> index b3ebd20c57..41a0952c97 100644
+> >> --- a/scripts/config_whitelist.txt
+> >> +++ b/scripts/config_whitelist.txt
+> >> @@ -649,7 +649,6 @@ CONFIG_IRAM_SIZE
+> >>   CONFIG_IRAM_STACK
+> >>   CONFIG_IRAM_TOP
+> >>   CONFIG_IRDA_BASE
+> >> -CONFIG_IS_ENABLED
+> >>   CONFIG_JFFS2_DEV
+> >>   CONFIG_JFFS2_LZO
+> >>   CONFIG_JFFS2_NAND
+> >> --
+> >> 2.25.1
+> >>
+> > For this to work you need to actually remove it from the source tree
+> > (which we can't), otherwise you get:
+> >
+> > Error: You must add new CONFIG options using Kconfig
+> > The following new ad-hoc CONFIG options were detected:
+> > CONFIG_IS_ENABLED
+> >
+> > I don't think this is worth it though, so I suggest dropping this patch.
+> >
+> > Regards,
+> > Simon
+>
+>
+> Yes ! sorry
+>
+> CONFIG_IS_ENABLED is present in u-boot.cfg,
+>
+> as CONFIG_VAL
+>
+>
+> even if it is strange for these macro defined in "linux/kconfig.h"
+>
+> but agree to drop this tentative.
+>
+>
+> Do you think I can remove the CONFIG_IS_ENABLED and CONFIG_VAL
+>
+> in u-boot.cfg when the file is generated ?
 
+If you like.
 
---tKW2IUtsqtDRztdT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 19, 2021 at 04:07:21PM +0300, Ilias Apalodimas wrote:
-
-> OF_HOSTFILE is used on sandbox configs only.  Although it's pretty
-> unique and not causing any confusions,  we are better of having simpler
-> config options for the DTB.
->=20
-> So let's replace that with the existing OF_BOARD.  U-Boot would then
-> have only three config options for the DTB origin.
-> - OF_SEPARATE, build separately from U-Boot
-> - OF_BOARD, board specific way of providing the DTB
-> - OF_EMBED embedded in the u-boot binary(should not be used in production
->=20
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
-This doesn't build on riscv:
-+(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:57:7: error: conflict=
-ing types for 'board_fdt_blob_setup'; have 'void *(void)'
-+(ae350_rv64)    57 | void *board_fdt_blob_setup(void)
-+(ae350_rv64)       |       ^~~~~~~~~~~~~~~~~~~~
-+(ae350_rv64) In file included from include/asm-generic/global_data.h:23,
-+(ae350_rv64)                  from arch/riscv/include/asm/global_data.h:35,
-+(ae350_rv64)                  from include/init.h:21,
-+(ae350_rv64)                  from board/AndesTech/ax25-ae350/ax25-ae350.c=
-:10:
-+(ae350_rv64) include/fdtdec.h:1164:7: note: previous declaration of 'board=
-_fdt_blob_setup' with type 'void *(int *)'
-+(ae350_rv64)  1164 | void *board_fdt_blob_setup(int *err);
-+(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c: In function 'board_f=
-dt_blob_setup':
-+(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: error: 'err' u=
-ndeclared (first use in this function); did you mean 'errno'?
-+(ae350_rv64)    59 |         *err =3D 0;
-+(ae350_rv64)       |          ^~~
-+(ae350_rv64)       |          errno
-+(ae350_rv64) board/AndesTech/ax25-ae350/ax25-ae350.c:59:10: note: each und=
-eclared identifier is reported only once for each function it appears in
-+(ae350_rv64) make[2]: *** [scripts/Makefile.build:254: board/AndesTech/ax2=
-5-ae350/ax25-ae350.o] Error 1
-+(ae350_rv64) make[1]: *** [Makefile:1801: board/AndesTech/ax25-ae350] Erro=
-r 2
-+(ae350_rv64) make: *** [Makefile:177: sub-make] Error 2
-
---=20
-Tom
-
---tKW2IUtsqtDRztdT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmF3HtYACgkQFHw5/5Y0
-tyyxHwv8DbBlDiUk1CW5VPrkU6p/ZoP2l7As0drMLOfsonoOSpJ2m8II4+ryWyul
-ioaQmmWyt9QNnwDqtM9Qsh0lhFKZVRgT4ZVWN5N0X85/dMBHxwg/S+9Bt+HDH3AZ
-VbYSsjYY32DZnX1biRTlFN4RXSjw4bHymMN08txo99nNXg9no01Ptjgdp60GxttO
-V2FRsMLWv4HbiPgpJ96g3k1D3KfYz1zb4V3GuXsts+5zuS4xP06m6V6wA/hTjTFK
-f9YFZUujReG5Qe1IVyc37PpDG/EBhS825/08J/CrkUv30wLscEdFAgO/yQ9/6qOT
-Vvnen1R5CO+RhlBIGsW8+lEdf4nE4m/EXkImL1Yt5iv6INgLwy16Wj+z0x4lOZii
-evZygcJ38hHjzXWkQXM3do+9rutLHn85GtV29rCIN/nTf6BqEi85Us7woiyoTY8j
-DVR1wp2CYY1YxJWRtYrD+aiIkTqzHstEN85dbbbObDMN6RD3UJC+bdLkqhdDSs9c
-x0QQfZe6
-=P/1z
------END PGP SIGNATURE-----
-
---tKW2IUtsqtDRztdT--
-
---===============1074106841490936512==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1074106841490936512==--

@@ -2,63 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A381543AC99
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Oct 2021 09:05:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4890943BD5B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Oct 2021 00:42:05 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 423D3C5719C;
-	Tue, 26 Oct 2021 07:05:40 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 01AF7C23E53;
+	Tue, 26 Oct 2021 22:42:05 +0000 (UTC)
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+ [209.85.222.175])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF5B1C0614D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EC1D8C0614D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Oct 2021 07:05:37 +0000 (UTC)
-Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19PLMhgE029413; 
- Tue, 26 Oct 2021 09:05:36 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=Q9lIT+j0lEC3sMtHqdXxBfm9HzWjzq0kw+445Ddw9Y8=;
- b=Wpv5XXY8Mp0pWNFVzFDIUF0DidbtdY45XzCCLdoYOyBJ/ImfXyUiTUx3ii1vJeCNnOJJ
- oU9lCbPr1MDY0T4Tyj8+e1oJ4XKK/4AdxCFoey67pePzERDBBZ3LUzge3zXwFcL6pHCK
- 1mN3ERgs8yzMarzDcuhY0Tz9z3V6WtqjMyxyRoNQNWt9nJubZY2DKsN8qtcTaoXmZARB
- zgGFxZ9xueXjG0VgF7jBHJVTJmt4XGRrJ4qi0K/a0gIfD6NAnElQvHbB1vIK1jwvJkO2
- NLBe9EnUxbGXZ+euh8JXDfyrEJfFiEESB6obwW8p4T27iZl/QnPW38doQu+NwHc0ws+N uA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bx4er2gjf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Oct 2021 09:05:36 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CD2FB10002A;
- Tue, 26 Oct 2021 09:05:35 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BDD1C212308;
- Tue, 26 Oct 2021 09:05:35 +0200 (CEST)
-Received: from lmecxl0573.lme.st.com (10.75.127.44) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Tue, 26 Oct
- 2021 09:05:35 +0200
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20211021115403.1.I74f77fe0ac99dd20cbf08dee326bc81e814b86c6@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <ffc9c68a-7aed-7d90-eb81-0ed58788bed6@foss.st.com>
-Date: Tue, 26 Oct 2021 09:05:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ Tue, 26 Oct 2021 22:42:02 +0000 (UTC)
+Received: by mail-qk1-f175.google.com with SMTP id br18so701171qkb.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 26 Oct 2021 15:42:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=TtINjRQV4QvnzBHhwJxtUzu/F96J4xM5QBHRGIN+WfY=;
+ b=mSSTd01e4I5dfLSeUaVYN66LiyGNvy2rceZTEV2N5Uaj6zq3VMos7I3JkVv+7UK+ZT
+ UkOr53z5kUQKBKun9nWTq23orEHZ1wBSg1ZKUlMdSFWmRu/IfCebzWsWEUtsG0reWwpD
+ nkHvUdSMIcY12RVOexyYSflE01oXoYN3Y8EBI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=TtINjRQV4QvnzBHhwJxtUzu/F96J4xM5QBHRGIN+WfY=;
+ b=YVNRd0OPOOYOstefM5P6b2dAF3ZpplHKTtnGQOvYeWJygiLxoodqfHDnwI3EK2tCEG
+ PSrPbVjVSwGxizFFpfUB+NYLfybkeKHTR+1kz9LCphmTxNTkKYWTaE9emRFR2LC54eZp
+ MjfM2330hmI7WKdikoJ8GtwMOH9GKlTzxhcw9rVIg8DpkZzEwAkZSLadGvbLadWo5Gb4
+ Z4w1oVmYDfOvgDLLm4qP/6sz6rTr5SeRkTKVPHQjqQzaXr96vePnwfQHVS6o0MBTy0qk
+ ESw0Fzh6ua9Z958M9TsN9Y2v/BXlZ2N6C3Oz3fLqlLSle1xeiKvDxyC2sQlAvv+Xd63a
+ YmDg==
+X-Gm-Message-State: AOAM5308Ety//wftFO2G0RbcALDA4PZ2Jt/6zoNU4cwh/Jas47FhBHN+
+ f4MHVwhRyMwyKRNtQaoLlBHVLg==
+X-Google-Smtp-Source: ABdhPJyhxc971gYdAyKylomckfH5DItRLUbtcVMOfgOlcba13sV50szYH+FiQ9CoOd5/9gNYgcQayQ==
+X-Received: by 2002:a05:620a:2481:: with SMTP id
+ i1mr21447426qkn.286.1635288121040; 
+ Tue, 26 Oct 2021 15:42:01 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b01-cbda-0044-6cb5-81ac-bb0c.res6.spectrum.com.
+ [2603:6081:7b01:cbda:44:6cb5:81ac:bb0c])
+ by smtp.gmail.com with ESMTPSA id c15sm11201794qkg.60.2021.10.26.15.42.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Oct 2021 15:42:00 -0700 (PDT)
+Date: Tue, 26 Oct 2021 18:41:58 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20211026224158.GN8284@bill-the-cat>
+References: <20211022170544.1.Ib218a8a747f99cab44c3fac6af649f17f003b2e2@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20211021115403.1.I74f77fe0ac99dd20cbf08dee326bc81e814b86c6@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-10-25_08,2021-10-25_02,2020-04-07_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with
-	v5.15-rc6
+In-Reply-To: <20211022170544.1.Ib218a8a747f99cab44c3fac6af649f17f003b2e2@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Torsten Duwe <duwe@suse.de>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH] lib: uuid: fix the test on RNG device
+	presence
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,82 +72,73 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6851014513345266747=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 10/21/21 11:54 AM, Patrick Delaunay wrote:
-> Device tree alignment with Linux kernel v5.15-rc6
-> - Set {bitclock,frame}-master phandles on ST DKx
-> - Add coprocessor detach mbox on stm32mp15x-dkx boards
-> - Add coprocessor detach mbox on stm32mp157c-ed1 board
-> 
+--===============6851014513345266747==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="6CiRFyVmOOJ3DkBX"
+Content-Disposition: inline
+
+
+--6CiRFyVmOOJ3DkBX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Oct 22, 2021 at 05:05:47PM +0200, Patrick Delaunay wrote:
+
+> Correct the test on RNG device presence,when ret is equal to 0,
+> before to call dm_rng_read function.
+>=20
+> Without this patch the RNG device is not used when present (when ret =3D=
+=3D 0)
+> or a data abort occurs in dm_rng_read when CONFIG_DM_RNG is activated but
+> the RNG device is not present in device tree (ret !=3D 0 and devp =3D NUL=
+L).
+>=20
+> Fixes: 92fdad28cfdf ("lib: uuid: use RNG device if present")
+> CC: Matthias Brugger <mbrugger@suse.com>
+> CC: Torsten Duwe <duwe@suse.de>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  arch/arm/dts/stm32mp157c-ed1.dts  |  4 ++--
->  arch/arm/dts/stm32mp15xx-dkx.dtsi | 12 ++++++------
->  2 files changed, 8 insertions(+), 8 deletions(-)
-> 
-> diff --git a/arch/arm/dts/stm32mp157c-ed1.dts b/arch/arm/dts/stm32mp157c-ed1.dts
-> index 6e89f88a17..f62b46b8dd 100644
-> --- a/arch/arm/dts/stm32mp157c-ed1.dts
-> +++ b/arch/arm/dts/stm32mp157c-ed1.dts
-> @@ -321,8 +321,8 @@
->  &m4_rproc {
->  	memory-region = <&retram>, <&mcuram>, <&mcuram2>, <&vdev0vring0>,
->  			<&vdev0vring1>, <&vdev0buffer>;
-> -	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>;
-> -	mbox-names = "vq0", "vq1", "shutdown";
-> +	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>, <&ipcc 3>;
-> +	mbox-names = "vq0", "vq1", "shutdown", "detach";
->  	interrupt-parent = <&exti>;
->  	interrupts = <68 1>;
->  	status = "okay";
-> diff --git a/arch/arm/dts/stm32mp15xx-dkx.dtsi b/arch/arm/dts/stm32mp15xx-dkx.dtsi
-> index 68987f64c5..8fc93b0f94 100644
-> --- a/arch/arm/dts/stm32mp15xx-dkx.dtsi
-> +++ b/arch/arm/dts/stm32mp15xx-dkx.dtsi
-> @@ -228,15 +228,15 @@
->  			cs42l51_tx_endpoint: endpoint@0 {
->  				reg = <0>;
->  				remote-endpoint = <&sai2a_endpoint>;
-> -				frame-master;
-> -				bitclock-master;
-> +				frame-master = <&cs42l51_tx_endpoint>;
-> +				bitclock-master = <&cs42l51_tx_endpoint>;
->  			};
->  
->  			cs42l51_rx_endpoint: endpoint@1 {
->  				reg = <1>;
->  				remote-endpoint = <&sai2b_endpoint>;
-> -				frame-master;
-> -				bitclock-master;
-> +				frame-master = <&cs42l51_rx_endpoint>;
-> +				bitclock-master = <&cs42l51_rx_endpoint>;
->  			};
->  		};
->  	};
-> @@ -478,8 +478,8 @@
->  &m4_rproc {
->  	memory-region = <&retram>, <&mcuram>, <&mcuram2>, <&vdev0vring0>,
->  			<&vdev0vring1>, <&vdev0buffer>;
-> -	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>;
-> -	mbox-names = "vq0", "vq1", "shutdown";
-> +	mboxes = <&ipcc 0>, <&ipcc 1>, <&ipcc 2>, <&ipcc 3>;
-> +	mbox-names = "vq0", "vq1", "shutdown", "detach";
->  	interrupt-parent = <&exti>;
->  	interrupts = <68 1>;
->  	status = "okay";
-> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Thanks
-Patrice
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--6CiRFyVmOOJ3DkBX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmF4hDYACgkQFHw5/5Y0
+tyyIcgv/eV9zOkABp3ydZBjZR++dPbDj1PIUR1LHdg74X9SLwatAJ7TJ3ECi0wyN
+KqJXV5j/tIgw2V/HsRsBLxwXq84CompUvxhAKSlxN6DaQ0qYpl/+tMXdyknQ099f
+hMfeWkQCQE4Sq0ymKN3oev/EozaVwaE5zHKXDT84MIFYH18BjASYl1RUj1UCBhiT
+7OJN25xBrqDa1az0WdMRAC1Aj/0kquYROYpvrUIbLHWLhaXcu10TGB28dD/levq3
+IIbYe6eKJUS2873HpR8DgH9kzH1buTGjfg9+ptE+qUJdJFGYp4IxbH00Z3aCKPjr
+sv87mGdcDO+YNiLTWASGHioZaoSrSmqBcnnkWh4+7GJtHcKywU5zmAID/xdShbND
+8RkJ5nP+SMa9ZeCIZYuO/mzGi8HJDqzzxco6MvIdwRQ+2Zqs8CnpKQ5woiZfoBFE
+tufivz510srwUdLgrJ2lJEOjNcoDPrQJSCDUx7/7dzCfCAfQUUYaM7SZOL13F7xc
+JFMkCXNC
+=qCT1
+-----END PGP SIGNATURE-----
+
+--6CiRFyVmOOJ3DkBX--
+
+--===============6851014513345266747==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6851014513345266747==--

@@ -2,51 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9915143E464
+	by mail.lfdr.de (Postfix) with ESMTPS id C55D443E465
 	for <lists+uboot-stm32@lfdr.de>; Thu, 28 Oct 2021 16:57:34 +0200 (CEST)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 49078C5E2B7;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 55720C5E2BA;
 	Thu, 28 Oct 2021 14:57:34 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E7BA5C5E2B0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2B8CFC5E2B7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 28 Oct 2021 14:57:31 +0000 (UTC)
+ Thu, 28 Oct 2021 14:57:32 +0000 (UTC)
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19SCR0LG000352; 
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 19SCR0LH000352; 
  Thu, 28 Oct 2021 16:57:30 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=pB3B6TIlVZBTMxFoXWILtyA5Hk+UJgPttuXngi2eFxo=;
- b=bFu4ZwKi6mZbueHu1rC6oI9naWKZhMOkxV3yYKpeg9RXacAqCq5Nyx0aCcH/JCZXdtKB
- Gi6JWgfeyxjn9rAgigJqoSROrQcBC5LvX/STpPeYNGYnl1HkbTXgm9bLy/a4Tns5XjJp
- 7+nnOmK9xURslg9GG1dNcmU6qTvmSAQDH0xMvbLFvGEY/PQ3SJgDx9zeT7YejhAioSZ6
- D2vi7yPjM2cfwvTuBhw16iB92L1S3O/gP1y/NQcRAKuTK1CXXX3a6yv50YjzTZ0Yos0b
- pXXHXTk/JRtubYwY7V9q+b4UB9TYMrWJTa+Ozew6Kg0jwGnpWCkwvunlCKaKk+osrZDK Bw== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=QYNrbKSSss5PmfJ9vbr3JSZkhQkGVoOGabR3ka42duc=;
+ b=m48Or8HOWBseJzk3r+VY7Dfyb3xygJ82eWFp1hvedfNNHkOQAsX4cocNmi5ofwtCnbrE
+ Li5l6cg1HS9Py4HF8El5eO8QWj7tFTaIaiBCu8/B2sm7/CpsRofX3Yb6i8nAxOn5KGDN
+ Hsr275W2NUI7vX5VEAN4pu1A0GoCjrN3M8yRC5dNZoU5yRgbjVmxz3jmHXr+qTQl+MsI
+ 27KcmHU8Eb8SfObjuFJ83o3gS0wHYcLBVZFECj0hO5QyuA9KUfsueA2ysR4pjS1By4iq
+ b7MxWGL5R7vNZBTmgwgoBQ0vbLmcBvhLzNn1Xgnx23oJbkrlu5kW3SAG6Wap8p0MNw/W /w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com with ESMTP id 3bym0gkqeh-1
+ by mx07-00178001.pphosted.com with ESMTP id 3bym0gkqek-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Thu, 28 Oct 2021 16:57:30 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 530F810002A;
- Thu, 28 Oct 2021 16:57:29 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 25509100034;
+ Thu, 28 Oct 2021 16:57:30 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 456B421152C;
- Thu, 28 Oct 2021 16:57:29 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Thu, 28 Oct 2021 16:57:28
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 144CA21152C;
+ Thu, 28 Oct 2021 16:57:30 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18; Thu, 28 Oct 2021 16:57:29
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 28 Oct 2021 16:57:22 +0200
-Message-ID: <20211028165656.v2.1.I8edf9d3b9867194e233bba15ce32a1477ce4@changeid>
+Date: Thu, 28 Oct 2021 16:57:23 +0200
+Message-ID: <20211028165656.v2.2.I674536257f276fde2471129e4809106d62e226e2@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211028165656.v2.1.I8edf9d3b9867194e233bba15ce32a1477ce4@changeid>
+References: <20211028165656.v2.1.I8edf9d3b9867194e233bba15ce32a1477ce4@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
+X-Originating-IP: [10.75.127.51]
 X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
@@ -55,8 +57,9 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Etienne Carriere <etienne.carriere@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 1/5] reset: scmi: define LOG_CATEGORY
+Subject: [Uboot-stm32] [PATCH v2 2/5] clk: scmi: define LOG_CATEGORY
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,23 +84,23 @@ Acked-by: Etienne Carriere <etienne.carriere@linaro.org>
 
 (no changes since v1)
 
- drivers/reset/reset-scmi.c | 3 +++
+ drivers/clk/clk_scmi.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/drivers/reset/reset-scmi.c b/drivers/reset/reset-scmi.c
-index 1bff8075ee..ca0135a420 100644
---- a/drivers/reset/reset-scmi.c
-+++ b/drivers/reset/reset-scmi.c
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index 93a4819501..9a0a6f6643 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
 @@ -2,6 +2,9 @@
  /*
   * Copyright (C) 2019-2020 Linaro Limited
   */
 +
-+#define LOG_CATEGORY UCLASS_RESET
++#define LOG_CATEGORY UCLASS_CLK
 +
  #include <common.h>
+ #include <clk-uclass.h>
  #include <dm.h>
- #include <errno.h>
 -- 
 2.25.1
 

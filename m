@@ -2,60 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A74CB447CB1
-	for <lists+uboot-stm32@lfdr.de>; Mon,  8 Nov 2021 10:21:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA3AC447CB2
+	for <lists+uboot-stm32@lfdr.de>; Mon,  8 Nov 2021 10:21:41 +0100 (CET)
 Received: from ip-172-31-3-76.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5BE70C5E2CD;
-	Mon,  8 Nov 2021 09:21:28 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6A27AC5E2CD;
+	Mon,  8 Nov 2021 09:21:36 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C5DC5C5718D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A7738C5E2CC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  8 Nov 2021 09:21:26 +0000 (UTC)
+ Mon,  8 Nov 2021 09:21:33 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1A89BHIx000911;
- Mon, 8 Nov 2021 10:21:25 +0100
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1A87NwVL000757;
+ Mon, 8 Nov 2021 10:21:27 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=bSouxXYWeYkI0sgD45V3Tcj09L8iAj6sJyXPFWBdP7I=;
- b=CTtTqGbvOYHaQ6MTocOf8WZghLuyozpM9tCrfcS/b78M9h5xYAyX6NMJnQX9eB5nJes7
- z3pnsXgcrIielrPI3L1GZKYr8XcKB7SSp9tqxHXGYdeEBJX/JxKm2JgmHX1DtCwd4TD6
- Ru/LIDEIJZDzIU33svVXEcvvkJ2eYYMoUNozU6ecRKP7ArNAiaZhQANJRbZlVHfYsp7Y
- rc4JbbUII0wCsbIeEFRdHy3cMey1p9RLtgfXZGxsoNA8H31W62O5DosFXvhw3dv5dxHr
- 9J/D/KEWHzgk7M5dDVgEuBlrPGE4VYjC/SS+fHyS217rw/K6fnkJsxUqC41t5myjFp6/ Zg== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=zBeRgSHmYeKf2V1Uj2/qEjlnD2aP+LvSuAb3FPBohsc=;
+ b=UJVzumgvLcpX32dLqak/24I/oTMmDvQKLGy3w+Vt9RqB0EuLCnYin4rVw+0axPDoN7e0
+ 52PTX+MCspipyKmBnSQ7VT9d9eDd7OvsIP/1kOiAMcOnG2ZeC0zo/GYQshlk4LZvyV/y
+ hDILh8ywhcHd6kD78UN5o32xEjCo71OL0Lo4SwRqKyw0/quGo7wn23bc+Ieeo1qREjP2
+ LiI10/Od/WylMon6kkoJElCROUn850h6ZCs5aKi0ZYxo65bBNyNYOgaMkakRuSWaW8Hk
+ OlJSz/WarL5x6/AdW13crYdM3sWrwMkPRvIGC5H2ylOx2ClJl+lgjVO4SBj3HzRwdSVW ow== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3c6qvp46j8-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3c6qvp46jm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 08 Nov 2021 10:21:25 +0100
+ Mon, 08 Nov 2021 10:21:27 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2248610002A;
- Mon,  8 Nov 2021 10:21:24 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6B12F10002A;
+ Mon,  8 Nov 2021 10:21:25 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EB5AB216ED3;
- Mon,  8 Nov 2021 10:21:24 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D2667216ED3;
+ Mon,  8 Nov 2021 10:21:25 +0100 (CET)
 Received: from localhost (10.75.127.46) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.18; Mon, 8 Nov 2021 10:21:24
+ with Microsoft SMTP Server (TLS) id 15.0.1497.18; Mon, 8 Nov 2021 10:21:25
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 8 Nov 2021 10:21:21 +0100
-Message-ID: <20211108102034.1.I5bb33aa84680ff548976f04f18cafca7ebb0ec91@changeid>
+Date: Mon, 8 Nov 2021 10:21:22 +0100
+Message-ID: <20211108102034.2.I275896d33cc3ef96ef439f13eda5cc6a8f9665c3@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211108102034.1.I5bb33aa84680ff548976f04f18cafca7ebb0ec91@changeid>
+References: <20211108102034.1.I5bb33aa84680ff548976f04f18cafca7ebb0ec91@changeid>
 MIME-Version: 1.0
 X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
  definitions=2021-11-08_03,2021-11-03_01,2020-04-07_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 1/2] scripts: remove CONFIG_IS_ENABLED and
-	CONFIG_VAL in generated u_boot.cfg
+Cc: Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>
+Subject: [Uboot-stm32] [PATCH 2/2] scripts: remove CONFIG_IS_ENABLED and
+	CONFIG_VAL in config_whitelist.txt
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,32 +76,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The two helpers macros CONFIG_IS_ENABLED and CONFIG_VAL are defined in
-include/linux/kconfig.h but they are not real configurations; they can
-be safely removed in the generated configuration file "u-boot.cfg".
-
-This patch simplifies the comparison of this U-Boot configuration file.
+The helper macro CONFIG_IS_ENABLED and CONFIG_VAL are not real
+configurations and they are no more present in u-boot.cfg so they can
+be removed in config_whitelist.txt.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- scripts/Makefile.autoconf | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ scripts/config_whitelist.txt | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-index 0bfc1b2a62..9bf72784c4 100644
---- a/scripts/Makefile.autoconf
-+++ b/scripts/Makefile.autoconf
-@@ -67,7 +67,8 @@ quiet_cmd_autoconf = GEN     $@
- quiet_cmd_u_boot_cfg = CFG     $@
-       cmd_u_boot_cfg = \
- 	$(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM $(srctree)/include/common.h > $@.tmp && { \
--		grep 'define CONFIG_' $@.tmp > $@;			\
-+		grep 'define CONFIG_' $@.tmp | \
-+			sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_VAL(/d;' > $@; \
- 		rm $@.tmp;						\
- 	} || {								\
- 		rm $@.tmp; false;					\
+diff --git a/scripts/config_whitelist.txt b/scripts/config_whitelist.txt
+index 6792e284a1..cc2e241417 100644
+--- a/scripts/config_whitelist.txt
++++ b/scripts/config_whitelist.txt
+@@ -634,7 +634,6 @@ CONFIG_IRAM_SIZE
+ CONFIG_IRAM_STACK
+ CONFIG_IRAM_TOP
+ CONFIG_IRDA_BASE
+-CONFIG_IS_ENABLED
+ CONFIG_JFFS2_DEV
+ CONFIG_JFFS2_LZO
+ CONFIG_JFFS2_NAND
+@@ -3051,7 +3050,6 @@ CONFIG_USE_ONENAND_BOARD_INIT
+ CONFIG_UTBIPAR_INIT_TBIPA
+ CONFIG_U_BOOT_HDR_ADDR
+ CONFIG_U_BOOT_HDR_SIZE
+-CONFIG_VAL
+ CONFIG_VAR_SIZE_SPL
+ CONFIG_VERY_BIG_RAM
+ CONFIG_VIDEO_BCM2835
 -- 
 2.25.1
 

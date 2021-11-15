@@ -2,65 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 415304503AE
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Nov 2021 12:40:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 433F245070A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Nov 2021 15:32:39 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07E2DC5C82B;
-	Mon, 15 Nov 2021 11:40:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E3DF5C5C82A;
+	Mon, 15 Nov 2021 14:32:38 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 83B54C5C82A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2586EC5C829
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Nov 2021 11:40:13 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AF8smK7006691;
- Mon, 15 Nov 2021 12:40:12 +0100
+ Mon, 15 Nov 2021 14:32:38 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AF9m1pC030750;
+ Mon, 15 Nov 2021 15:32:37 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=6spINsG+0H2BHqrJk50bN9yenpO8V3Ryb86VvNXBKk4=;
- b=UKcY8VplgwaTmdiIRn8Y1DHFc+MNSaiUM6FwvADPxvzVfdQr2ad3Rhf28NgEawUrM25N
- lr2KwtRXyxYcFg2W37m1QydqOoH9lj2kuCWpVQAHCms2ZXl/EMUHfPvbSiCJMwdj2v5/
- xtdsVQrAeTXIs30falpHVYjpUS+Np9aH610nnUPn7GTssHbYhf66ArDYLy24520fA/a+
- Tex9RRPpF4b0sgihrJGRIgsCrdMpozh0LdAQGIgPj9THc5wYkhjyDVHErOoHM7xveGk1
- TFR5RV/HMbdqBC9i85C9y+ijKXhbXmF0lVZIijiLubGd8R6uRDvI2xObYOqj8joKz2gK AA== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=2Q5CltTOxEbMtS8+nKHBIgwW25qaTxCttf47EaLenXI=;
+ b=tZDI21D+n59yBDZR032MEy7Ojmi2k2lx0kTYsU+z8tK/LOE9yjehwvUX7Qz2RRBKt8dX
+ QrfTJvYHJjdg8xvfAFPOLV96DF8bL0JdlHB2YVJxnQYrIbFyiAO2lgPMG87Hr6EA9wLg
+ IoFQD+/bRoQ4lyWywasR7RuixAw3MzeTHZ/PoKSRgs7RORBS0eM1L3uJmS3AqaI7ryMa
+ fjq9D8AJOPgKiIUIVLIlMsHBJSQeQ/FX9BEKfsmrx+vXepmPtjevhkF+piJUI8p5m2wr
+ gWJOR7ghc2V4CDlGr8ASo0fiAyeeizfQ4zq6vqHvjA7jwUl5r+fRHRByRGPSphgwZwKV +A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cbmf410as-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cben9vbw8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Nov 2021 12:40:12 +0100
+ Mon, 15 Nov 2021 15:32:37 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E317A10002A;
- Mon, 15 Nov 2021 12:40:11 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 33C7E100038;
+ Mon, 15 Nov 2021 15:32:36 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB06A21A21A;
- Mon, 15 Nov 2021 12:40:11 +0100 (CET)
-Received: from lmecxl0994.lme.st.com (10.75.127.50) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 15 Nov
- 2021 12:40:11 +0100
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-References: <20211115103920.30149-1-patrice.chotard@foss.st.com>
- <20211115103920.30149-9-patrice.chotard@foss.st.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <1c87eeef-dddb-38bd-d2ee-22ea6421cd13@foss.st.com>
-Date: Mon, 15 Nov 2021 12:40:11 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1BB9221C782;
+ Mon, 15 Nov 2021 15:32:36 +0100 (CET)
+Received: from localhost (10.75.127.47) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 15 Nov 2021 15:32:35
+ +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 15 Nov 2021 15:32:28 +0100
+Message-ID: <20211115153214.1.I1a0a5850a0ac39ae33620ed14822892c394b1a98@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20211115103920.30149-9-patrice.chotard@foss.st.com>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
  definitions=2021-11-15_10,2021-11-15_01,2020-04-07_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH 8/8] ARM: dts: stm32: Use lower-case hex
- for address for stm32429i-eval-u-boot.dtsi
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 1/3] stm32mp1: ram: add read valid training
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,31 +67,57 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+Add the read data eye training = training for optimal read valid placement
+(RVTRN) when the built-in calibration is executed for LPDDR2 and LPDDR3.
 
-On 11/15/21 11:39 AM, Patrice Chotard wrote:
-> Replace upper-case hex with lower-case hex for address.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->
-> ---
->
->   arch/arm/dts/stm32429i-eval-u-boot.dtsi | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
+This training is supported on the PUBL integrated in the STM32MP15x
+DDR subsystem and it is not required for DDR3.
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+ drivers/ram/stm32mp1/stm32mp1_ddr.c      | 8 ++++++--
+ drivers/ram/stm32mp1/stm32mp1_ddr_regs.h | 1 +
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-Thanks
-Patrick
-
-
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+index 0457166b12..1f8422518b 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
++++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
+@@ -826,8 +826,12 @@ start:
+  */
+ 
+ /* 10. configure PUBL PIR register to specify which training step to run */
+-	/* warning : RVTRN  is not supported by this PUBL */
+-		stm32mp1_ddrphy_init(priv->phy, DDRPHYC_PIR_QSTRN);
++		/* RVTRN is excuted only on LPDDR2/LPDDR3 */
++		if (config->c_reg.mstr & DDRCTRL_MSTR_DDR3)
++			pir = DDRPHYC_PIR_QSTRN;
++		else
++			pir = DDRPHYC_PIR_QSTRN | DDRPHYC_PIR_RVTRN;
++		stm32mp1_ddrphy_init(priv->phy, pir);
+ 
+ /* 11. monitor PUB PGSR.IDONE to poll cpmpletion of training sequence */
+ 		ddrphy_idone_wait(priv->phy);
+diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
+index 3c8885a965..ada3087328 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
++++ b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
+@@ -309,6 +309,7 @@ struct stm32mp1_ddrphy {
+ #define DDRPHYC_PIR_DRAMRST			BIT(5)
+ #define DDRPHYC_PIR_DRAMINIT			BIT(6)
+ #define DDRPHYC_PIR_QSTRN			BIT(7)
++#define DDRPHYC_PIR_RVTRN			BIT(8)
+ #define DDRPHYC_PIR_ICPC			BIT(16)
+ #define DDRPHYC_PIR_ZCALBYP			BIT(30)
+ #define DDRPHYC_PIR_INITSTEPS_MASK		GENMASK(31, 7)
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

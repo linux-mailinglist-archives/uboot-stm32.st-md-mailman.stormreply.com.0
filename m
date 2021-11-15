@@ -2,63 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6313144FFF6
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Nov 2021 09:20:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45B5845029D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Nov 2021 11:39:26 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FA21C5C82A;
-	Mon, 15 Nov 2021 08:20:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0323CC5C82A;
+	Mon, 15 Nov 2021 10:39:26 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9CB71C57B6F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6F33CC5C829
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Nov 2021 08:20:13 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AF6MxwF030739;
- Mon, 15 Nov 2021 09:20:12 +0100
+ Mon, 15 Nov 2021 10:39:24 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AF7WanC010527;
+ Mon, 15 Nov 2021 11:39:23 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=7YbSv/hRKBMJQn7qjPoFxQ+Lhwy4XMewBpaNEDKB2HI=;
- b=sZA49Ejirv+yBUkGb56Iuwoi5POM8yZiONrZOx1hX1vdXBL5Vn2yAj6BW58XHS7vy0Bx
- wsodAc+fkHt1nx8olgewfPmCL5iS0oWtqTPy9Q0E4JIlmmaPBKiXIehrWTPqy2AsYGle
- nrH90ULjyom7GlG3E5x3qotf4Y8zACe3EXfrTYIfWFpFkhLbbNJG6uacOT94twmn369F
- IwPu8Hgdf8x06ErSZqo0Zy1ZOXIyBDZ/pt7h/9lGhzVacqlR9LIjXMyciGcLvlCuV74q
- MxeJXOR148L/nOxoPZW9QGz/95nHKnCFLmKQx5NlORNyojg2LbhKV/HdReERkl5tHVJn HA== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=49wr6l/zOuw/4Aom/E/JTWPecTz2xuWajiko7gP0deA=;
+ b=PaTXLVYpl64HJSBahm1ilCK7FllA8BVKvUBRpZ7HgFwTT6yC4CCd4/uTXYiOsxEVNuEx
+ V0nWSU+xPv5H2wCe3vP1eXxfhCLM0w2aoaqEXcTlVWS8Zju58xR1Z7aOfoOCVDSHceta
+ VDtnvtPyBK50U6jXBcSrMrHJWmiHHQ6/b6uv4im3u3aGZQcBMcfqNCZRw6S/XM8rim9X
+ InoMdzsofZk65j/tSDqrKDoR0hiuKlaqHneAWEVttEUAGgwIvhFbVZYdrHwphGt/izQL
+ PDaIYDACJrfpsutTLJzEOvMTsyOhe67ziU6XA3T9ncLmcRB83Ym+vGh4o5SskpJyFNIK Kw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cben9t6t7-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cbk8j17fx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Nov 2021 09:20:12 +0100
+ Mon, 15 Nov 2021 11:39:23 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 481D710002A;
- Mon, 15 Nov 2021 09:20:11 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 83D1110002A;
+ Mon, 15 Nov 2021 11:39:22 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4097A2128AF;
- Mon, 15 Nov 2021 09:20:11 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.46) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 15 Nov
- 2021 09:20:10 +0100
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20211110181402.1.I2300405d8f776ab7d8c372b93b10bd39df4ed633@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <1e4957ea-b0b4-6957-20a1-1f09b483a213@foss.st.com>
-Date: Mon, 15 Nov 2021 09:20:09 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 75BF0229A80;
+ Mon, 15 Nov 2021 11:39:22 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 15 Nov 2021 11:39:22
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 15 Nov 2021 11:39:12 +0100
+Message-ID: <20211115103920.30149-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20211110181402.1.I2300405d8f776ab7d8c372b93b10bd39df4ed633@changeid>
-Content-Language: en-US
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-11-15_07,2021-11-12_01,2020-04-07_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Simon Glass <sjg@chromium.org>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH] pinctrl: stmfx: define LOG_CATEGORY
+ definitions=2021-11-15_10,2021-11-12_01,2020-04-07_01
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [Uboot-stm32] [PATCH 0/8] ARM: dts: stm32: use lower-case hex for
+	address
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,39 +72,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
+Replace upper-case hex with lower-case hex for address in STM32 device tree
 
-On 11/10/21 6:14 PM, Patrick Delaunay wrote:
-> Define LOG_CATEGORY to allow filtering with log command.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  drivers/pinctrl/pinctrl-stmfx.c | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/pinctrl/pinctrl-stmfx.c b/drivers/pinctrl/pinctrl-stmfx.c
-> index fe7a59d431..509e2a80e9 100644
-> --- a/drivers/pinctrl/pinctrl-stmfx.c
-> +++ b/drivers/pinctrl/pinctrl-stmfx.c
-> @@ -5,8 +5,12 @@
->   * Driver for STMicroelectronics Multi-Function eXpander (STMFX) GPIO expander
->   * based on Linux driver : pinctrl/pinctrl-stmfx.c
->   */
-> +
-> +#define LOG_CATEGORY UCLASS_PINCTRL
-> +
->  #include <common.h>
->  #include <dm.h>
-> +#include <log.h>
->  #include <i2c.h>
->  #include <asm/gpio.h>
->  #include <dm/device.h>
-> 
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Thanks
-Patrice
+Patrice Chotard (8):
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32mp15-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32f769-disco-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32746-disco-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32f7-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32f469-disco-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32f429-disco-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32f746g-eval-u-boot.dtsi
+  ARM: dts: stm32: Use lower-case hex for address for
+    stm32429i-eval-u-boot.dtsi
+
+ arch/arm/dts/stm32429i-eval-u-boot.dtsi  | 2 +-
+ arch/arm/dts/stm32746g-eval-u-boot.dtsi  | 2 +-
+ arch/arm/dts/stm32f429-disco-u-boot.dtsi | 2 +-
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi | 6 +++---
+ arch/arm/dts/stm32f7-u-boot.dtsi         | 4 ++--
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi | 2 +-
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi | 6 +++---
+ arch/arm/dts/stm32mp15-u-boot.dtsi       | 8 ++++----
+ 8 files changed, 16 insertions(+), 16 deletions(-)
+
+-- 
+2.17.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,69 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C48E45861E
-	for <lists+uboot-stm32@lfdr.de>; Sun, 21 Nov 2021 20:16:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94E494589D2
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Nov 2021 08:28:15 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2D0D0C597BE;
-	Sun, 21 Nov 2021 19:16:06 +0000 (UTC)
-Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
- [209.85.160.170])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 56A77C5F1C1;
+	Mon, 22 Nov 2021 07:28:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AFAFAC597BC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C439C5F1C0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 21 Nov 2021 19:16:04 +0000 (UTC)
-Received: by mail-qt1-f170.google.com with SMTP id a2so14564049qtx.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 21 Nov 2021 11:16:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=p5PJ8449ez4mQZDXRvtsQAx2zBL/ji0eJaVTfRsyiFc=;
- b=AbPO9ldNdwchRiVkAdWhMl0QZhsEP9BQW/eH+e+Kz1iBJln66TqM4bqUewZo3HRAh/
- DKNnbbCmvVsU7N/DPZWuCZJiO+RRDtZwhuXtLVcNAhNUBLX/xB+PLPdTcr2XtB08v5h0
- HsMnfg70QLD6m1FZQIoOCWa9dUa9fm4RiuGcf5vS+PQDh92kyOBwFIUN2vVbi7g37kkn
- nwkP5iZ+27UyXOZGdtXkhYc2Z39jM2aMZwu62ZWBuzFJJrWQsu0ESg3AQA+/VCgXCPQf
- A0SJJ/f2GO/VYFFpEGfDa58zYLkUaze/W5OzqQki3osxNuv/4NpmRkx2sZaWJYU5zMZL
- /TEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=p5PJ8449ez4mQZDXRvtsQAx2zBL/ji0eJaVTfRsyiFc=;
- b=QZkAHI2xf99HOCdUDs48u6iPb9gPqOps+stSXLqfnPp3NDBfXzA//qX8YRSdwgc8p9
- nVeUbvcuU/QNuUG8ulbk88e20X4kMF0Npdc4FuBLBWp2hlga5CCyPx/C4fCjo0JgUGk1
- qqKt+wAvj18RyQNGshqHxycUDE/XBI+hwruOUMedvjWy+yelBWiDSdbTblzZ3HdpM2Yw
- mHxFbFKcgtmW6aSTRSYuXwixYeHrJM5AWxyoUncYwCPBjKo5NzzzbTO3RyFM336JXizb
- kU1H8lnuvMYQNVwIr+Q5hEG+03EUOaDoQjlpiQPQbx3bxEHTCzlZr3H1UuKfk3EjVOwc
- owkQ==
-X-Gm-Message-State: AOAM532yTg1k1PKuHKp5K263G0R6eYeKV8TX8YFrPmpDk1ZXHtjNPGNy
- bv4vWuPMZLS/B5m1K+2ctuGESwRE11w=
-X-Google-Smtp-Source: ABdhPJwFSu80vfUOQCHh9BaFUs5D8Q4O+9ivzIMK+ik7IWGw22ahgdViIJFRTIJWG+d1Gu2WtLS0UA==
-X-Received: by 2002:a05:622a:2d1:: with SMTP id
- a17mr24608752qtx.130.1637522163478; 
- Sun, 21 Nov 2021 11:16:03 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-18-207-184.washdc.fios.verizon.net.
- [108.18.207.184])
- by smtp.googlemail.com with ESMTPSA id 9sm3239838qkm.5.2021.11.21.11.16.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 21 Nov 2021 11:16:03 -0800 (PST)
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20211119151203.1.I011e780560149e15eea06471822a1fedfac58766@changeid>
- <20211119151203.2.Ieb1b1a0cf6385c2ce53b33a6d925c0abc3aebfa0@changeid>
-From: Sean Anderson <seanga2@gmail.com>
-Message-ID: <c61ab9ea-42d3-e716-d492-41142db09011@gmail.com>
-Date: Sun, 21 Nov 2021 14:16:02 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+ Mon, 22 Nov 2021 07:28:14 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AM3kPC8014943;
+ Mon, 22 Nov 2021 08:27:56 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=Z14enwx8Mc/YyrKHqUogtSFaEWKdp3B8rbWyqUxqj3w=;
+ b=4s3ZkskyjJ+r/JhhWuTh8W51ZXGHaHzsNmT+5LiyJhbrg66ywnmh+6ZbVwBhQTcXnvdX
+ m36xz5amNLpHxANYkB2AGNRibXU6HSMKGLElfMmzAbmR1MShRtQAQggixl7RxSkd3fm7
+ BxMvjpmNPZRosvKgv0JxU6njYAsCpaAKRMLAYv71E4C8JSbneqf+rE9XcBZCm/+0gxCg
+ oMQlLXwC8Fe5sEj315Su50n+jUTpr6AfcnK5oyeEh4uN3Gb09i3UgQfm7HtNUJkk/hvf
+ zV6sTyuBSjLdQ55co0Hc56by4l2na1kGXFlycQKT9W+x3NjeWZwSaIBrzBI9nVYMct1q 5g== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cfntjk7rm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 22 Nov 2021 08:27:56 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8ADAF10002A;
+ Mon, 22 Nov 2021 08:27:55 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 565D2216EF7;
+ Mon, 22 Nov 2021 08:27:55 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.47) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 22 Nov
+ 2021 08:27:54 +0100
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20211119100728.1.I8482c13fb850207cc6b028072073f7f84ce1488c@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <7a4d61b1-d36d-d1b6-6819-37745da23dc3@foss.st.com>
+Date: Mon, 22 Nov 2021 08:27:54 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211119151203.2.Ieb1b1a0cf6385c2ce53b33a6d925c0abc3aebfa0@changeid>
+In-Reply-To: <20211119100728.1.I8482c13fb850207cc6b028072073f7f84ce1488c@changeid>
 Content-Language: en-US
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] clk: define LOG_CATEGORY for generic
-	and ccf clocks
+X-Originating-IP: [10.75.127.47]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
+ definitions=2021-11-22_02,2021-11-22_01,2020-04-07_01
+Cc: Marek Vasut <marex@denx.de>, u-boot@dh-electronics.com,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Fabien Dessenne <fabien.dessenne@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Arnaud POULIQUEN <arnaud.pouliquen@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp15: deactivate the
+	CONFIG_STM32_IPCC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,252 +75,158 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 11/19/21 9:12 AM, Patrick Delaunay wrote:
-> Define LOG_CATEGORY to allow filtering with log command
-> for generic clock and CCF clocks.
+HI Patrick
+
+On 11/19/21 10:07 AM, Patrick Delaunay wrote:
+> The IPCC mailbox is only used for communication with M4 firmware but
+> it is not used in the stm32 remoteproc driver; it was planed but the
+> support of this mailbox in remoteproc for STM32MP15x is dropped.
 > 
-> This patch also change existing printf, debug and pr_ macro
-> to log_ or dev_ macro.
+> So the associated drivers and config CONFIG_STM32_IPCC can be
+> deactivated to reduce the U-Boot size; the CONFIG_DM_MAILBOX can be
+> also deactivated as the mailbox UCLASS is no more used.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->   drivers/clk/clk-composite.c    |  3 +++
->   drivers/clk/clk-divider.c      |  6 +++++-
->   drivers/clk/clk-fixed-factor.c |  4 ++++
->   drivers/clk/clk-gate.c         |  6 +++++-
->   drivers/clk/clk-mux.c          |  8 ++++++--
->   drivers/clk/clk.c              | 18 ++++++++++--------
->   drivers/clk/clk_fixed_factor.c |  3 +++
->   drivers/clk/clk_fixed_rate.c   |  3 +++
->   8 files changed, 39 insertions(+), 12 deletions(-)
+>  configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig          | 2 --
+>  configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig         | 2 --
+>  configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig | 2 --
+>  configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig     | 2 --
+>  configs/stm32mp15_basic_defconfig                           | 2 --
+>  configs/stm32mp15_defconfig                                 | 2 --
+>  configs/stm32mp15_dhcom_basic_defconfig                     | 2 --
+>  configs/stm32mp15_dhcor_basic_defconfig                     | 2 --
+>  configs/stm32mp15_trusted_defconfig                         | 2 --
+>  9 files changed, 18 deletions(-)
 > 
-> diff --git a/drivers/clk/clk-composite.c b/drivers/clk/clk-composite.c
-> index 12288e10b3..6eb2b8133a 100644
-> --- a/drivers/clk/clk-composite.c
-> +++ b/drivers/clk/clk-composite.c
-> @@ -4,9 +4,12 @@
->    * Copyright 2019 NXP
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
-> +#include <log.h>
->   #include <malloc.h>
->   #include <asm/io.h>
->   #include <dm/device.h>
-> diff --git a/drivers/clk/clk-divider.c b/drivers/clk/clk-divider.c
-> index 9df50a5e72..7e8e62feee 100644
-> --- a/drivers/clk/clk-divider.c
-> +++ b/drivers/clk/clk-divider.c
-> @@ -9,14 +9,18 @@
->    *
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <asm/io.h>
->   #include <malloc.h>
->   #include <clk-uclass.h>
-> +#include <log.h>
->   #include <dm/device.h>
->   #include <dm/devres.h>
->   #include <dm/uclass.h>
->   #include <dm/lists.h>
-> +#include <dm/device_compat.h>
->   #include <dm/device-internal.h>
->   #include <linux/bug.h>
->   #include <linux/clk-provider.h>
-> @@ -190,7 +194,7 @@ static struct clk *_register_divider(struct device *dev, const char *name,
->   
->   	if (clk_divider_flags & CLK_DIVIDER_HIWORD_MASK) {
->   		if (width + shift > 16) {
-> -			pr_warn("divider value exceeds LOWORD field\n");
-> +			dev_warn(dev, "divider value exceeds LOWORD field\n");
->   			return ERR_PTR(-EINVAL);
->   		}
->   	}
-> diff --git a/drivers/clk/clk-fixed-factor.c b/drivers/clk/clk-fixed-factor.c
-> index 9fcf30fd2e..2a446788e1 100644
-> --- a/drivers/clk/clk-fixed-factor.c
-> +++ b/drivers/clk/clk-fixed-factor.c
-> @@ -5,10 +5,14 @@
->    *
->    * Copyright (C) 2011 Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>
->    */
-> +
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
->   #include <div64.h>
-> +#include <log.h>
->   #include <malloc.h>
->   #include <dm/device.h>
->   #include <dm/devres.h>
-> diff --git a/drivers/clk/clk-gate.c b/drivers/clk/clk-gate.c
-> index 708499d95a..aa40daf3d7 100644
-> --- a/drivers/clk/clk-gate.c
-> +++ b/drivers/clk/clk-gate.c
-> @@ -7,12 +7,16 @@
->    * Gated clock implementation
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk.h>
-> +#include <log.h>
->   #include <clk-uclass.h>
->   #include <malloc.h>
->   #include <asm/io.h>
->   #include <dm/device.h>
-> +#include <dm/device_compat.h>
->   #include <dm/devres.h>
->   #include <linux/bitops.h>
->   #include <linux/clk-provider.h>
-> @@ -124,7 +128,7 @@ struct clk *clk_register_gate(struct device *dev, const char *name,
->   
->   	if (clk_gate_flags & CLK_GATE_HIWORD_MASK) {
->   		if (bit_idx > 15) {
-> -			pr_err("gate bit exceeds LOWORD field\n");
-> +			dev_err(dev, "gate bit exceeds LOWORD field\n");
->   			return ERR_PTR(-EINVAL);
->   		}
->   	}
-> diff --git a/drivers/clk/clk-mux.c b/drivers/clk/clk-mux.c
-> index fd746f2de3..b49946fbcd 100644
-> --- a/drivers/clk/clk-mux.c
-> +++ b/drivers/clk/clk-mux.c
-> @@ -21,12 +21,16 @@
->    * clock.
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
-> +#include <log.h>
->   #include <malloc.h>
->   #include <asm/io.h>
->   #include <dm/device.h>
-> +#include <dm/device_compat.h>
->   #include <dm/devres.h>
->   #include <dm/uclass.h>
->   #include <linux/bitops.h>
-> @@ -124,7 +128,7 @@ static int clk_mux_set_parent(struct clk *clk, struct clk *parent)
->   
->   	index = clk_fetch_parent_index(clk, parent);
->   	if (index < 0) {
-> -		printf("Could not fetch index\n");
-> +		log_err("Could not fetch index\n");
->   		return index;
->   	}
->   
-> @@ -170,7 +174,7 @@ struct clk *clk_hw_register_mux_table(struct device *dev, const char *name,
->   	if (clk_mux_flags & CLK_MUX_HIWORD_MASK) {
->   		width = fls(mask) - ffs(mask) + 1;
->   		if (width + shift > 16) {
-> -			pr_err("mux value exceeds LOWORD field\n");
-> +			dev_err(dev, "mux value exceeds LOWORD field\n");
->   			return ERR_PTR(-EINVAL);
->   		}
->   	}
-> diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> index d1a9787071..eff0fa134f 100644
-> --- a/drivers/clk/clk.c
-> +++ b/drivers/clk/clk.c
-> @@ -4,6 +4,8 @@
->    * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk.h>
->   #include <clk-uclass.h>
-> @@ -22,24 +24,24 @@ int clk_register(struct clk *clk, const char *drv_name,
->   
->   	ret = uclass_get_device_by_name(UCLASS_CLK, parent_name, &parent);
->   	if (ret) {
-> -		printf("%s: failed to get %s device (parent of %s)\n",
-> -		       __func__, parent_name, name);
-> +		log_err("%s: failed to get %s device (parent of %s)\n",
-> +			__func__, parent_name, name);
->   	} else {
-> -		debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
-> -		      parent->name, parent);
-> +		log_debug("%s: name: %s parent: %s [0x%p]\n", __func__, name,
-> +			  parent->name, parent);
->   	}
->   
->   	drv = lists_driver_lookup_name(drv_name);
->   	if (!drv) {
-> -		printf("%s: %s is not a valid driver name\n",
-> -		       __func__, drv_name);
-> +		log_err("%s: %s is not a valid driver name\n",
-> +			__func__, drv_name);
->   		return -ENOENT;
->   	}
->   
->   	ret = device_bind(parent, drv, name, NULL, ofnode_null(), &clk->dev);
->   	if (ret) {
-> -		printf("%s: CLK: %s driver bind error [%d]!\n", __func__, name,
-> -		       ret);
-> +		log_err("%s: CLK: %s driver bind error [%d]!\n", __func__, name,
-> +			ret);
->   		return ret;
->   	}
->   
-> diff --git a/drivers/clk/clk_fixed_factor.c b/drivers/clk/clk_fixed_factor.c
-> index 41b0d9c060..6c1139e5c5 100644
-> --- a/drivers/clk/clk_fixed_factor.c
-> +++ b/drivers/clk/clk_fixed_factor.c
-> @@ -5,10 +5,13 @@
->    * Author: Anup Patel <anup.patel@wdc.com>
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk-uclass.h>
->   #include <div64.h>
->   #include <dm.h>
-> +#include <log.h>
->   #include <linux/err.h>
->   
->   struct clk_fixed_factor {
-> diff --git a/drivers/clk/clk_fixed_rate.c b/drivers/clk/clk_fixed_rate.c
-> index c5a2a42c92..b5e78c7055 100644
-> --- a/drivers/clk/clk_fixed_rate.c
-> +++ b/drivers/clk/clk_fixed_rate.c
-> @@ -3,9 +3,12 @@
->    * Copyright (C) 2016 Masahiro Yamada <yamada.masahiro@socionext.com>
->    */
->   
-> +#define LOG_CATEGORY UCLASS_CLK
-> +
->   #include <common.h>
->   #include <clk-uclass.h>
->   #include <dm.h>
-> +#include <log.h>
->   #include <dm/device-internal.h>
->   #include <linux/clk-provider.h>
->   
+> diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+> index adb8f10b17..11a2885a5c 100644
+> --- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+> +++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
+> @@ -51,8 +51,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+> index dca35db014..7973e0f46f 100644
+> --- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+> +++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
+> @@ -51,8 +51,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+> index aa6a28e6a7..5eadd63100 100644
+> --- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
+> @@ -51,8 +51,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> index 9abd1a100c..1dde46a0ce 100644
+> --- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> +++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
+> @@ -51,8 +51,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+> index 2cc26d4066..055336c266 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -102,8 +102,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+> index 4c6a52fc54..d5bb4b27c2 100644
+> --- a/configs/stm32mp15_defconfig
+> +++ b/configs/stm32mp15_defconfig
+> @@ -84,8 +84,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
+> diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+> index 84375589c5..8fbcef2699 100644
+> --- a/configs/stm32mp15_dhcom_basic_defconfig
+> +++ b/configs/stm32mp15_dhcom_basic_defconfig
+> @@ -96,8 +96,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_I2C_EEPROM=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+> diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+> index aa000effc4..c551a4c411 100644
+> --- a/configs/stm32mp15_dhcor_basic_defconfig
+> +++ b/configs/stm32mp15_dhcor_basic_defconfig
+> @@ -92,8 +92,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_I2C_EEPROM=y
+>  CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+> index feca26e973..c0ac1ef319 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -85,8 +85,6 @@ CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_STM32F7=y
+>  CONFIG_LED=y
+>  CONFIG_LED_GPIO=y
+> -CONFIG_DM_MAILBOX=y
+> -CONFIG_STM32_IPCC=y
+>  CONFIG_STM32_FMC2_EBI=y
+>  CONFIG_SUPPORT_EMMC_BOOT=y
+>  CONFIG_STM32_SDMMC2=y
 > 
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

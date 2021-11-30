@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A61A46307D
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Nov 2021 11:02:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A41EC46307F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Nov 2021 11:02:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B619C597BA;
-	Tue, 30 Nov 2021 10:02:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 67F92C597BA;
+	Tue, 30 Nov 2021 10:02:53 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 63142C57B6F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 58D29C57B6F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Nov 2021 10:02:30 +0000 (UTC)
+ Tue, 30 Nov 2021 10:02:52 +0000 (UTC)
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AU6eo6g000458;
- Tue, 30 Nov 2021 11:02:29 +0100
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AU6eqXf000471;
+ Tue, 30 Nov 2021 11:02:51 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=mhbUgUcqFS97soGFgKzS/Ak4NaNBea4S286VZ0p+FlY=;
- b=fqkq3XkAX52zo9C6ZJxYA1CJGNB6dL1hN9Zxmymk7v56qD7yImrA7fhzFZW0KDC08/7a
- GbqiztDnJ66lkRGPk46R92wCud8kjSgOnY8WMq18PTLCaJ/a420iE8y5UIEi+ucYmQyO
- IqiFmauwRm/GIkVhJVVI2tdvp8oGr6CVnj+rBR9MV1DW/u3SriJyte2ep4JBRchkIfev
- tnvrpRGDzO4Jg0vB6MmH/jFTOS1THv4A96y76eISuCUKVdrxKKj69DIUyOcJY3kUPW60
- 7a38WcpVnODYqlHde29hE2ZMaS6LihL8xG5T5mgc0oXI/U1NO7/DV21lVj2/kp+cwlgV 5g== 
+ bh=rY9W7ibsxzfGdV1ZyYwx5Vy0cScUtC5CGl4XoHUjwm4=;
+ b=39/pWleESErcgL4KLcrfOEHjUZVFUpKVmnyITIGG/oJJW1wGhQayDqZITDFrFJk4P1hJ
+ OEGCc/TFoPc0VNSWLAuqXE0ju3z5XLvLhVRy7SY3Q99Vj0pcrFAdAe0RJ42IYVOj6A/Y
+ 588d+XvefsVZBdUnbXkdL9HX8UVP3NGohdHjkb7vJNlesi95iUyiUMnnotw6ljV8iG/g
+ 6jXdzKW4SS88zAPSYSDXbkOXyQ++30GF1ni33dkxFJLKhUvCVGdlcOLaTXjp39834/Jg
+ PC81OUbtfAu5GTtixYkhW4rss3eIu3CnoWT0Oi9uiZV+5zLFgPjxxg8B27eufn6sxhPq Zg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cnewbh7qr-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3cnewbh7u5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 30 Nov 2021 11:02:29 +0100
+ Tue, 30 Nov 2021 11:02:51 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8F4EE10002A;
- Tue, 30 Nov 2021 11:02:28 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 05E0D10002A;
+ Tue, 30 Nov 2021 11:02:51 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 86C642248B3;
- Tue, 30 Nov 2021 11:02:28 +0100 (CET)
-Received: from lmecxl0573.lme.st.com (10.75.127.46) by SFHDAG2NODE2.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F115E2248B5;
+ Tue, 30 Nov 2021 11:02:50 +0100 (CET)
+Received: from lmecxl0573.lme.st.com (10.75.127.45) by SFHDAG2NODE2.st.com
  (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 30 Nov
- 2021 11:02:27 +0100
+ 2021 11:02:50 +0100
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20211124105216.1.I2f1cd5fa86d23797b452eecde73e8b52ac0f878f@changeid>
+ <20211124105216.2.I9be593bea27d9cdb1d37cc5f8afc16d8e2e8a5be@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <4956597c-1168-559e-9370-c0595f1cb9e6@foss.st.com>
-Date: Tue, 30 Nov 2021 11:02:27 +0100
+Message-ID: <252441a9-1172-10d6-cb16-3da9c67119d0@foss.st.com>
+Date: Tue, 30 Nov 2021 11:02:50 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20211124105216.1.I2f1cd5fa86d23797b452eecde73e8b52ac0f878f@changeid>
+In-Reply-To: <20211124105216.2.I9be593bea27d9cdb1d37cc5f8afc16d8e2e8a5be@changeid>
 Content-Language: en-US
-X-Originating-IP: [10.75.127.46]
+X-Originating-IP: [10.75.127.45]
 X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
  definitions=2021-11-30_06,2021-11-28_01,2020-04-07_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] ram: stm32mp1: compute DDR size from
-	DDRCTL registers
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/2] ram: stm32mp1: remove __maybe_unused
+ on stm32mp1_ddr_setup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,272 +78,36 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-just a minor remark
-
 On 11/24/21 10:52 AM, Patrick Delaunay wrote:
-> Compute the DDR size from DDR controller register (mstr and addrmap)
-> in U-Boot proper as the DDR information are useful only for SPL
-> but not for U-Boot proper, for example with TFABOOT.
+> Since the commit f42045b2e750 ("stm32mp15: replace CONFIG_TFABOOT when
+> it is possible") the function stm32mp1_ddr_setup is always called so the
+> __maybe_unused can be removed.
 > 
-> This patch simplify U-Boot DT when several DDR size are supported
-> and support of next SOC in STM32MP family.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  drivers/ram/stm32mp1/stm32mp1_ddr_regs.h |   1 +
->  drivers/ram/stm32mp1/stm32mp1_ram.c      | 192 ++++++++++++++++++++++-
->  2 files changed, 190 insertions(+), 3 deletions(-)
+>  drivers/ram/stm32mp1/stm32mp1_ram.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-> index 3c8885a965..d6b9a76a76 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr_regs.h
-> @@ -238,6 +238,7 @@ struct stm32mp1_ddrphy {
->  #define DDRCTRL_MSTR_LPDDR2			BIT(2)
->  #define DDRCTRL_MSTR_LPDDR3			BIT(3)
->  #define DDRCTRL_MSTR_DATA_BUS_WIDTH_MASK	GENMASK(13, 12)
-> +#define DDRCTRL_MSTR_DATA_BUS_WIDTH_SHIFT	12
->  #define DDRCTRL_MSTR_DATA_BUS_WIDTH_FULL	(0 << 12)
->  #define DDRCTRL_MSTR_DATA_BUS_WIDTH_HALF	(1 << 12)
->  #define DDRCTRL_MSTR_DATA_BUS_WIDTH_QUARTER	(2 << 12)
 > diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> index 98fa1f4f11..c9335e59df 100644
+> index c9335e59df..43702f3576 100644
 > --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
 > +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> @@ -16,6 +16,12 @@
->  #include <asm/io.h>
->  #include <dm/device_compat.h>
->  #include "stm32mp1_ddr.h"
-> +#include "stm32mp1_ddr_regs.h"
-> +
-> +/* DDR subsystem configuration */
-> +struct stm32mp1_ddr_cfg {
-> +	u8 nb_bytes;	/* MEMC_DRAM_DATA_WIDTH */
-> +};
->  
->  static const char *const clkname[] = {
->  	"ddrc1",
-> @@ -183,6 +189,182 @@ static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
->  	return 0;
+> @@ -88,7 +88,7 @@ static ofnode stm32mp1_ddr_get_ofnode(struct udevice *dev)
+>  	return dev_ofnode(dev);
 >  }
 >  
-> +static u8 get_data_bus_width(struct stm32mp1_ddrctl *ctl)
-> +{
-> +	u32 reg = readl(&ctl->mstr) & DDRCTRL_MSTR_DATA_BUS_WIDTH_MASK;
-> +	u8 data_bus_width = reg >> DDRCTRL_MSTR_DATA_BUS_WIDTH_SHIFT;
-> +
-> +	return data_bus_width;
-> +}
-> +
-> +static u8 get_nb_bank(struct stm32mp1_ddrctl *ctl)
-> +{
-> +	/* Count bank address bits */
-> +	u8 bits = 0;
-> +	u32 reg, val;
-> +
-> +	reg = readl(&ctl->addrmap1);
-> +	/* addrmap1.addrmap_bank_b1 */
-> +	val = (reg & GENMASK(5, 0)) >> 0;
-> +	if (val <= 31)
-> +		bits++;
-> +	/* addrmap1.addrmap_bank_b2 */
-> +	val = (reg & GENMASK(13, 8)) >> 8;
-> +	if (val <= 31)
-> +		bits++;
-> +	/* addrmap1.addrmap_bank_b3 */
-> +	val = (reg & GENMASK(21, 16)) >> 16;
-> +	if (val <= 31)
-> +		bits++;
-> +
-> +	return bits;
-> +}
-> +
-> +static u8 get_nb_col(struct stm32mp1_ddrctl *ctl, u8 data_bus_width)
-> +{
-> +	u8 bits;
-> +	u32 reg, val;
-> +
-> +	/* Count column address bits, start at 2 for b0 and b1 (fixed) */
-> +	bits = 2;
-> +
-> +	reg = readl(&ctl->addrmap2);
-> +	/* addrmap2.addrmap_col_b2 */
-> +	val = (reg & GENMASK(3, 0)) >> 0;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap2.addrmap_col_b3 */
-> +	val = (reg & GENMASK(11, 8)) >> 8;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap2.addrmap_col_b4 */
-> +	val = (reg & GENMASK(19, 16)) >> 16;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap2.addrmap_col_b5 */
-> +	val = (reg & GENMASK(27, 24)) >> 24;
-> +	if (val <= 7)
-> +		bits++;
-> +
-> +	reg = readl(&ctl->addrmap3);
-> +	/* addrmap3.addrmap_col_b6 */
-> +	val = (reg & GENMASK(3, 0)) >> 0;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap3.addrmap_col_b7 */
-> +	val = (reg & GENMASK(11, 8)) >> 8;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap3.addrmap_col_b8 */
-> +	val = (reg & GENMASK(19, 16)) >> 16;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap3.addrmap_col_b9 */
-> +	val = (reg & GENMASK(27, 24)) >> 24;
-> +	if (val <= 7)
-> +		bits++;
-> +
-> +	reg = readl(&ctl->addrmap4);
-> +	/* addrmap4.addrmap_col_b10 */
-> +	val = (reg & GENMASK(3, 0)) >> 0;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap4.addrmap_col_b11 */
-> +	val = (reg & GENMASK(11, 8)) >> 8;
-> +	if (val <= 7)
-> +		bits++;
-> +
-> +	/* column bits shift up:
-
-/*
- * column bits shift up:
-
-With that fix, you can add my reviewed-by
-
-Thanks
-Patrice
-
-> +	 * 1 when half the data bus is used (data_bus_width = 1)
-> +	 * 2 when a quarter the data bus is used (data_bus_width = 2)
-> +	 * nothing to do for full data bus (data_bus_width = 0)
-> +	 */
-> +	bits += data_bus_width;
-> +
-> +	return bits;
-> +}
-> +
-> +static u8 get_nb_row(struct stm32mp1_ddrctl *ctl)
-> +{
-> +	/* Count row address bits */
-> +	u8 bits = 0;
-> +	u32 reg, val;
-> +
-> +	reg = readl(&ctl->addrmap5);
-> +	/* addrmap5.addrmap_row_b0 */
-> +	val = (reg & GENMASK(3, 0)) >> 0;
-> +	if (val <= 11)
-> +		bits++;
-> +	/* addrmap5.addrmap_row_b1 */
-> +	val = (reg & GENMASK(11, 8)) >> 8;
-> +	if (val <= 11)
-> +		bits++;
-> +	/* addrmap5.addrmap_row_b2_10 */
-> +	val = (reg & GENMASK(19, 16)) >> 16;
-> +	if (val <= 11)
-> +		bits += 9;
-> +	else
-> +		printf("warning: addrmap5.addrmap_row_b2_10 not supported\n");
-> +	/* addrmap5.addrmap_row_b11 */
-> +	val = (reg & GENMASK(27, 24)) >> 24;
-> +	if (val <= 11)
-> +		bits++;
-> +
-> +	reg = readl(&ctl->addrmap6);
-> +	/* addrmap6.addrmap_row_b12 */
-> +	val = (reg & GENMASK(3, 0)) >> 0;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap6.addrmap_row_b13 */
-> +	val = (reg & GENMASK(11, 8)) >> 8;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap6.addrmap_row_b14 */
-> +	val = (reg & GENMASK(19, 16)) >> 16;
-> +	if (val <= 7)
-> +		bits++;
-> +	/* addrmap6.addrmap_row_b15 */
-> +	val = (reg & GENMASK(27, 24)) >> 24;
-> +	if (val <= 7)
-> +		bits++;
-> +
-> +	return bits;
-> +}
-> +
-> +/*
-> + * stm32mp1_ddr_size
-> + *
-> + * Get the current DRAM size from the DDR CTL registers
-> + *
-> + * @return: DRAM size
-> + */
-> +u32 stm32mp1_ddr_size(struct udevice *dev)
-> +{
-> +	u8 nb_bit;
-> +	u32 ddr_size;
-> +	u8 data_bus_width;
-> +	struct ddr_info *priv = dev_get_priv(dev);
-> +	struct stm32mp1_ddrctl *ctl = priv->ctl;
-> +	struct stm32mp1_ddr_cfg *cfg = (struct stm32mp1_ddr_cfg *)dev_get_driver_data(dev);
-> +	const u8 nb_bytes = cfg->nb_bytes;
-> +
-> +	data_bus_width = get_data_bus_width(ctl);
-> +	nb_bit = get_nb_bank(ctl) + get_nb_col(ctl, data_bus_width) +
-> +		 get_nb_row(ctl);
-> +	if (nb_bit > 32) {
-> +		nb_bit = 32;
-> +		debug("invalid DDR configuration: %d bits\n", nb_bit);
-> +	}
-> +
-> +	ddr_size = (nb_bytes >> data_bus_width) << nb_bit;
-> +	if (ddr_size > STM32_DDR_SIZE) {
-> +		ddr_size = STM32_DDR_SIZE;
-> +		debug("invalid DDR configuration: size = %x\n", ddr_size);
-> +	}
-> +
-> +	return ddr_size;
-> +}
-> +
->  static int stm32mp1_ddr_probe(struct udevice *dev)
+> -static __maybe_unused int stm32mp1_ddr_setup(struct udevice *dev)
+> +static int stm32mp1_ddr_setup(struct udevice *dev)
 >  {
 >  	struct ddr_info *priv = dev_get_priv(dev);
-> @@ -209,8 +391,8 @@ static int stm32mp1_ddr_probe(struct udevice *dev)
->  		return log_ret(ret);
->  	}
->  
-> -	ofnode node = stm32mp1_ddr_get_ofnode(dev);
-> -	priv->info.size = ofnode_read_u32_default(node, "st,mem-size", 0);
-> +	priv->info.size = stm32mp1_ddr_size(dev);
-> +
->  	return 0;
->  }
->  
-> @@ -227,8 +409,12 @@ static struct ram_ops stm32mp1_ddr_ops = {
->  	.get_info = stm32mp1_ddr_get_info,
->  };
->  
-> +static const struct stm32mp1_ddr_cfg stm32mp15x_ddr_cfg = {
-> +	.nb_bytes = 4,
-> +};
-> +
->  static const struct udevice_id stm32mp1_ddr_ids[] = {
-> -	{ .compatible = "st,stm32mp1-ddr" },
-> +	{ .compatible = "st,stm32mp1-ddr", .data = (ulong)&stm32mp15x_ddr_cfg},
->  	{ }
->  };
->  
+>  	int ret;
 > 
 
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

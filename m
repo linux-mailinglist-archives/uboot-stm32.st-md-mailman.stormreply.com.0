@@ -2,100 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B16947BFBB
-	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Dec 2021 13:32:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A27347E62D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 23 Dec 2021 17:09:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1DFA2C5E2C4;
-	Tue, 21 Dec 2021 12:32:07 +0000 (UTC)
-Received: from mail-ua1-f49.google.com (mail-ua1-f49.google.com
- [209.85.222.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1B1E6C5F1F6;
+	Thu, 23 Dec 2021 16:09:52 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 62B57C5E2C3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 860FBC5F1F5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Dec 2021 12:32:05 +0000 (UTC)
-Received: by mail-ua1-f49.google.com with SMTP id 30so23323797uag.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 21 Dec 2021 04:32:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=M+Irlh/WHwyhXQvbW4Brz6uCAKYa7ItoEOiumo2Pbp8=;
- b=gwYlxImklTn/AqwTclW2+IQC2jr6A7QRZbxhLg21dVw9Pe+1VRykWK30yXKr8gZdZ6
- L67N3fMtpz1r3MjjZVI/UUmC5K41FR8S5Qg/BWOcwFGJrFL9qXGpMzeGoBUkkJUxzUjB
- Y7rYzUlBscGQxjF/+lpspggohhn6m13U+MuDY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=M+Irlh/WHwyhXQvbW4Brz6uCAKYa7ItoEOiumo2Pbp8=;
- b=OM36fhZlQGm9Tlcxxv9J2m22Pcw9HwmP5e4/RIA8K19+6d4ZBQlkWCjTjycEjliTAJ
- P61AFlU69ohWK+iF3okf8RRLmaAPXW2krW5TjIkkrK08yK5UTLb+wDWTmcfupNSYuPRI
- GOwxw4k0BOF854l7h4XcFM8tEcygztSbAFPx8fRkkZ04u2ZFq9BMgq00qbhBuzjZ17FM
- RXd7JH3OFKTSeqJf4OT5hbAyVWpLSz68sKjb2FXo8fc9+9jaj5dGm/krmbHk7CaHqw39
- cx0PCBRqiW6MXZ8pgssVDjc010hC0yoOJif9phvJUNIp+TbfXRrOsBn5MO344Q1Xrjs7
- Qtgw==
-X-Gm-Message-State: AOAM5313dgHIVHkEEIDudX9QCwZgBiVbYT3opp9x5bMF5CbsLvAGPWfC
- Fus7svtWaf2zo5cbpaS9yj/ot3N1k5+02LrRd0k0hg==
-X-Google-Smtp-Source: ABdhPJzvvs7Nmcw08ug3rHnX/X5N+cJZ2+PEHh2vFYp4uHnK3+4Tto9FprJenNSoN10oVYtC2DSz8ZjRLwR4k3wdeEE=
-X-Received: by 2002:ab0:4465:: with SMTP id m92mr1160504uam.47.1640089923911; 
- Tue, 21 Dec 2021 04:32:03 -0800 (PST)
+ Thu, 23 Dec 2021 16:09:50 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1BN9KUhB030753;
+ Thu, 23 Dec 2021 17:09:48 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=aBf4iE9mZNf4SL3DkrAgEKQwDQDqpgACRnPnnnCqKZQ=;
+ b=WhXlWo4yxKUMirUSypPE6odtPhp6EcOw7+UhKKw/rK18L1sXF5YHxCt+37K6oiucGe1h
+ xdzQ4NW9qDx1rg3EB8Ysr/VBots1ttwyc/4mMkheipaRIwyrmqA/kcp7KL5/0RtKJ7u4
+ XYW81cTq1cu6j63ifkYA/zDh1BHCE9uFgLxrjGGfNJATmmwaN3N8H3SK2fAY+O5WimFp
+ KdBks3jMhFkQrGpwoyv2B0kANSI01V7CMZKq/UG5WjopTQC5+gtPlaejaUKyK7CvDXYk
+ JaSE80jtiVOuE8TmWOn7t5lhR1WLNo2dwcYyIUqhAqdYNRGVg70BjE0DOxjp412AutqF Tg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3d4en2knhe-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 23 Dec 2021 17:09:48 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7CD6A10002A;
+ Thu, 23 Dec 2021 17:09:47 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D05720BE58;
+ Thu, 23 Dec 2021 17:09:47 +0100 (CET)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Thu, 23 Dec 2021 17:09:46
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Thu, 23 Dec 2021 17:09:32 +0100
+Message-ID: <20211223160932.4311-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20211218150805.1083645-1-sjg@chromium.org>
- <20211218150805.1083645-3-sjg@chromium.org>
- <f2c32018-7708-6384-fe59-c1d45846d866@gmail.com>
-In-Reply-To: <f2c32018-7708-6384-fe59-c1d45846d866@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 21 Dec 2021 16:31:51 +0400
-Message-ID: <CAPnjgZ0XmZ6u88iCJw1pXhpwD+HW+uziRtVAz_is8psK75F_rA@mail.gmail.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Lokesh Vutla <lokeshvutla@ti.com>, Rick Chen <rick@andestech.com>,
- Chin-Liang See <clsee@altera.com>,
- Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@toradex.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
- Marcin Niestroj <m.niestroj@grinn-global.com>, Wolfgang Denk <wd@denx.de>,
- Ran Wang <ran.wang_1@nxp.com>,
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2021-12-23_04,2021-12-22_01,2021-12-02_01
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>, Stefan Roese <sr@denx.de>,
- Michal Simek <michal.simek@xilinx.com>,
- Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>,
- Tom Rini <trini@konsulko.com>, Vladimir Oltean <olteanv@gmail.com>,
- Angelo Dureghello <angelo@sysam.it>, "Chia-Wei,
- Wang" <chiawei_wang@aspeedtech.com>, Lukasz Majewski <lukma@denx.de>,
- Ley Foon Tan <ley.foon.tan@intel.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
- Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marek.vasut@gmail.com>,
- Ludovic Desroches <ludovic.desroches@microchip.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>,
- Wasim Khan <wasim.khan@nxp.com>, Heiko Schocher <hs@denx.de>,
- Wolfgang Grandegger <wg@aries-embedded.de>,
- Bharat Gooty <bharat.gooty@broadcom.com>,
- Otavio Salvador <otavio@ossystems.com.br>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Rajesh Bhagat <rajesh.bhagat@nxp.com>, Yangbo Lu <yangbo.lu@nxp.com>,
- Purna Chandra Mandal <purna.mandal@microchip.com>,
- Vitaly Andrianov <vitalya@ti.com>,
- Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
- Igor Grinberg <grinberg@compulab.co.il>,
- Aswath Govindraju <a-govindraju@ti.com>,
- Sandeep Sheriker M <sandeep.sheriker@microchip.com>,
- Olaf Mandel <o.mandel@menlosystems.com>, Anatolij Gustschin <agust@denx.de>,
- Steffen Jaeckel <jaeckel-floss@eyet-services.de>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Joe Hershberger <joe.hershberger@ni.com>, Pavel Machek <pavel@denx.de>,
- Dave Gerlach <d-gerlach@ti.com>, Nicolas Ferre <nicolas.ferre@microchip.com>,
- "Andrew F. Davis" <afd@ti.com>, Dinh Nguyen <dinguyen@kernel.org>,
- Michael Walle <michael@walle.cc>, Mario Six <mario.six@gdsys.cc>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Alban Bedel <alban.bedel@aerq.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Enric Balletbo i Serra <enric.balletbo@collabora.com>,
- Eugen Hristev <eugen.hristev@microchip.com>,
- Dalon Westergreen <dwesterg@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/4] Convert CONFIG_TIMESTAMP to Kconfig
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH] dm: Fix OF_BAD_ADDR definition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,105 +66,46 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0989981799486500128=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============0989981799486500128==
-Content-Type: multipart/alternative; boundary="00000000000050fb1705d3a731b1"
+When OF_LIVE flag is enabled on a 64 bits platform, there is an
+issue when dev_read_addr() is called and need to perform an address
+translation using __of_translate_address().
 
---00000000000050fb1705d3a731b1
-Content-Type: text/plain; charset="UTF-8"
+In case of error, __of_translate_address() return value is OF_BAD_ADDR
+(wich is defined in include/dm/of.h to ((u64)-1) = 0xffffffffffffffff).
+The return value of dev_read_addr() is often compared to FDT_ADDR_T_NONE
+which is defined as (-1U) = 0xffffffff.
+In this case the comparison is always false.
 
-Hi Sean,
+To fix this issue, define OF_BAD_ADDR to FDT_ADDR_T_NONE.
 
-On Sat, 18 Dec 2021 at 08:16, Sean Anderson <seanga2@gmail.com> wrote:
->
-> On 12/18/21 10:08 AM, Simon Glass wrote:
-> > This converts the following to Kconfig:
-> >     CONFIG_TIMESTAMP
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
->
-> [...]
->
-> > diff --git a/net/Kconfig b/net/Kconfig
-> > index 3d3329912da..1983506bb8e 100644
-> > --- a/net/Kconfig
-> > +++ b/net/Kconfig
-> > @@ -109,6 +109,7 @@ config KEEP_SERVERADDR
-> >
-> >   config UDP_CHECKSUM
-> >       bool "Check the UDP checksum"
-> > +     default y if SANDBOX
-> >       help
-> >         Enable this to verify the checksum on UDP packets. If the
-checksum
-> >         is wrong then the packet is discussed and an error is shown,
-like
->
-> Should this hunk be part of the previous patch?
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-Yes, it should. I will fix it when I send another version.
+ include/dm/of.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Regards,
-Simon
-
---00000000000050fb1705d3a731b1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">Hi Sean,<br>
-<br>
-On Sat, 18 Dec 2021 at 08:16, Sean Anderson &lt;<a href=3D"mailto:seanga2@g=
-mail.com" target=3D"_blank" rel=3D"noreferrer">seanga2@gmail.com</a>&gt; wr=
-ote:<br>
-&gt;<br>
-&gt; On 12/18/21 10:08 AM, Simon Glass wrote:<br>
-&gt; &gt; This converts the following to Kconfig:<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0CONFIG_TIMESTAMP<br>
-&gt; &gt;<br>
-&gt; &gt; Signed-off-by: Simon Glass &lt;<a href=3D"mailto:sjg@chromium.org=
-" target=3D"_blank" rel=3D"noreferrer">sjg@chromium.org</a>&gt;<br>
-&gt; &gt; ---<br>
-&gt;<br>
-&gt; [...]<br>
-&gt;<br>
-&gt; &gt; diff --git a/net/Kconfig b/net/Kconfig<br>
-&gt; &gt; index 3d3329912da..1983506bb8e 100644<br>
-&gt; &gt; --- a/net/Kconfig<br>
-&gt; &gt; +++ b/net/Kconfig<br>
-&gt; &gt; @@ -109,6 +109,7 @@ config KEEP_SERVERADDR<br>
-&gt; &gt;=C2=A0 <br>
-&gt; &gt;=C2=A0 =C2=A0config UDP_CHECKSUM<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool &quot;Check the UDP checksum&quot;=
-<br>
-&gt; &gt; +=C2=A0 =C2=A0 =C2=A0default y if SANDBOX<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0help<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Enable this to verify the checks=
-um on UDP packets. If the checksum<br>
-&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0is wrong then the packet is disc=
-ussed and an error is shown, like<br>
-&gt;<br>
-&gt; Should this hunk be part of the previous patch?<br>
-<br>
-Yes, it should. I will fix it when I send another version.<br>
-<br>
-Regards,<br>
-Simon<br></div>
-
---00000000000050fb1705d3a731b1--
-
---===============0989981799486500128==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/include/dm/of.h b/include/dm/of.h
+index 5cb6f44a6c..0208cc234a 100644
+--- a/include/dm/of.h
++++ b/include/dm/of.h
+@@ -95,7 +95,7 @@ static inline bool of_live_active(void)
+ 	return gd_of_root() != NULL;
+ }
+ 
+-#define OF_BAD_ADDR	((u64)-1)
++#define OF_BAD_ADDR	FDT_ADDR_T_NONE
+ 
+ static inline const char *of_node_full_name(const struct device_node *np)
+ {
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0989981799486500128==--

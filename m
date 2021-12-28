@@ -2,59 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A3C8480769
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Dec 2021 09:33:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72A7E48076A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Dec 2021 09:33:13 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33725C5F1EF;
-	Tue, 28 Dec 2021 08:33:10 +0000 (UTC)
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
- [209.85.167.179])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BEF5C5F1F0;
+	Tue, 28 Dec 2021 08:33:13 +0000 (UTC)
+Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
+ [209.85.167.172])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4395DC57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BB848C5F1F0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Dec 2021 08:33:09 +0000 (UTC)
-Received: by mail-oi1-f179.google.com with SMTP id p4so28986130oia.9
+ Tue, 28 Dec 2021 08:33:11 +0000 (UTC)
+Received: by mail-oi1-f172.google.com with SMTP id u21so15782144oie.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Dec 2021 00:33:09 -0800 (PST)
+ Tue, 28 Dec 2021 00:33:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=e0qzHgmNFDOIKFcEzMtY5ovPKo8dis4U/F7UiKMXb1w=;
- b=ddZBphey/pQfYvhuxds/y6uAl1mQlq7YkyzlC8R9BogaqL3NdnRcKwL0H05IQCxhDa
- C68+StvOKCRen8HNx85nSHAPW10bVxWw1YXng4vmbrKJWt12sIgqntzNHHJlWbsHV0CI
- pexvuSCzUwClEeIZiAH2aX0/LrvaQ+flXpBZ0=
+ :cc; bh=J4tfXh6dRbChuhAbkR0jSunIa0WGMl4ZUxC/ehxmtyM=;
+ b=SnWl7EvnTTZWCfmxQZ7XNw1jkHrKXv74vWgT26ly2LurX2wLVu8SNG+DYH8ETLadaw
+ RQ4Pn16hLTLc6Asbl+fhVzbBRRp6iaLPYmnwgnBF0yFAmTqSz5r9YDnJ8rA7PUs9zrYi
+ BYIGoO9MUmq/GKs28V5AnB+EMbzMT+p9oddx8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=e0qzHgmNFDOIKFcEzMtY5ovPKo8dis4U/F7UiKMXb1w=;
- b=hf8nKLIzodACDs3q0OFDVrP81KLDYzri8gC5OpG9jvHvgBpsTlUvGQGtLeXKK/K6gc
- /1f21Hez0eX93+1sGcU4IXWm3SlkJYzH3Eck6POpp+PeRGZjAbQ2bvdfO/ppwKFkP5eb
- EPA7uuLWuUak6fZdmwAC1S02M29zbUbCiajMKN5KOxsjZAOqtfXkK9qfUgKBuYkBKXiz
- Q1GDiT1Ma0dmLIaUNxb0GfSIa3Aspkk4ef7Oza9cJKY1CYpca/vQbyFd/7uOyQXi2tcZ
- g/vBz1sB1JMWsfSnuU5lq4lPfVe6WHesw3+FSkJg1GsQHFibNsh1SZkkxNKFz+zwPuFx
- nHEg==
-X-Gm-Message-State: AOAM5330O73BemK24wITd/PeGguZcJC1rJgvEYggA0XgBysSl+Z+KfxO
- YT7NrnInGMp6StFNXm5XoLPCovOPOabMji3MTMjrzA==
-X-Google-Smtp-Source: ABdhPJyps8KsIItzS8+TaL6NfRY52poGyly5DoC7xBs4t4Iz9aasob/eGpeGahCKhvjE5FH3bUWrE1ngQDCngVw9HFk=
-X-Received: by 2002:a05:6808:bc9:: with SMTP id
- o9mr15859392oik.150.1640680387876; 
- Tue, 28 Dec 2021 00:33:07 -0800 (PST)
+ bh=J4tfXh6dRbChuhAbkR0jSunIa0WGMl4ZUxC/ehxmtyM=;
+ b=K0A3i/ISCuXUJ54CF3i9Aadw3Nv9XhBJ33xXZY/q5LO/73n+hjoJiW9t4eBHRNV2Sb
+ GIeOrTPfiOnrs/BhiaaTuC8j+6G2mGf4UAQiKjfB8EHxDoHmlRGOdOA0mLVWz2Rac5S8
+ ll0CwJDXEYzzRlU4NJp7e5Jxi5XpB5bzhHWU72at+XHrIOoS8c0m6PXRTAridLSmioQ1
+ Xc9lgcJUfMys5IcpA9mdfhxBgqSlwycKMZ60Cdr3C6zFhiHM/w0cLZSMN++m5EsnMmpb
+ 9FxLYLF18vUFPFOaq4OaUK7ozsa7wM2s6h1ibAtHskds9pt/w+YbrAo3fmHnFFyW1PQn
+ sHVQ==
+X-Gm-Message-State: AOAM531aw6hRbh2lWg9ORaoQE3mxgl32uGEQVhPzx0p4pdEhmQEFwFXg
+ +t5hXJXtYTnlim/P5k1fmwyz3C9EkM56JCYmT4GR1w==
+X-Google-Smtp-Source: ABdhPJw5QHoyzbo9uixslX6MXRPicDBsKqJ5/Zr3VHIWFnlMsTZWXYMZamJMi4XxDMQZ3MuE1BKvQk4euwf1l5/MPP8=
+X-Received: by 2002:aca:aa12:: with SMTP id t18mr8954146oie.81.1640680390432; 
+ Tue, 28 Dec 2021 00:33:10 -0800 (PST)
 MIME-Version: 1.0
 References: <20211214165704.479015-1-patrick.delaunay@foss.st.com>
- <20211214175652.RFC.2.I0180e07a31210ff2679a02de4221a54e12169593@changeid>
-In-Reply-To: <20211214175652.RFC.2.I0180e07a31210ff2679a02de4221a54e12169593@changeid>
+ <20211214175652.RFC.1.Iaa7c4564c1e7d57e198f7621d124cddaa3296c4a@changeid>
+In-Reply-To: <20211214175652.RFC.1.Iaa7c4564c1e7d57e198f7621d124cddaa3296c4a@changeid>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Dec 2021 01:32:56 -0700
-Message-ID: <CAPnjgZ2wrB8EKjNyRFkAcDgwpcY-DEDq1XhL3dAS_iNq3Ez7gA@mail.gmail.com>
+Date: Tue, 28 Dec 2021 01:32:58 -0700
+Message-ID: <CAPnjgZ3Gpv6SZ1vcoEZw=0452=MzDKw-W87hDRdRZgmOw0rs6Q@mail.gmail.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [Uboot-stm32] [RFC PATCH 2/5] mtd: cfi: introduce
-	CFI_FLASH_BANKS
+Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [RFC PATCH 1/5] cmd: Fix up warnings in flash.c
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,28 +69,13 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 On Tue, 14 Dec 2021 at 09:57, Patrick Delaunay
 <patrick.delaunay@foss.st.com> wrote:
 >
-> Replace CONFIG_SYS_MAX_FLASH_BANKS by CFI_FLASH_BANKS to prepare
-> Kconfig migration and avoid to redefine CONFIG_SYS_MAX_FLASH_BANKS
-> in cfi_flash.h.
->
-> After this patch CONFIG_SYS_MAX_FLASH_BANKS should be never used in
-> the cfi code: use CFI_MAX_FLASH_BANKS for struct size or CFI_FLASH_BANKS
-> for number of CFI banks which can be dynamic.
->
-> This patch modify all the files which include mtd/cfi_flash.h.
+> Tidy up the warnings reported by checkpatch.pl to prepare next patches
 >
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 >
->  cmd/bootm.c             |  2 +-
->  cmd/flash.c             | 34 +++++++++++++++++-----------------
->  common/flash.c          |  2 +-
->  common/update.c         |  4 ++--
->  drivers/mtd/cfi_flash.c |  4 ++--
->  drivers/mtd/cfi_mtd.c   |  4 ++--
->  include/mtd/cfi_flash.h |  9 ++++++---
->  7 files changed, 31 insertions(+), 28 deletions(-)
->
+>  cmd/flash.c | 239 +++++++++++++++++++++++++---------------------------
+>  1 file changed, 117 insertions(+), 122 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

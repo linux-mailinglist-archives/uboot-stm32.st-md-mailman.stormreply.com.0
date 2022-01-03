@@ -2,98 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 86CDC48076B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 28 Dec 2021 09:33:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B493483786
+	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Jan 2022 20:24:19 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 47632C5F1EF;
-	Tue, 28 Dec 2021 08:33:18 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com
- [209.85.210.54])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 48E62C5F1F3;
+	Mon,  3 Jan 2022 19:24:19 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BF03EC57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7FF82C57189
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Dec 2021 08:33:16 +0000 (UTC)
-Received: by mail-ot1-f54.google.com with SMTP id
- s21-20020a05683004d500b0058f585672efso18741768otd.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 28 Dec 2021 00:33:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=afIQysNJQf/hjgLi9fetsyfTXQy3zJ9L0+IL2zCPL+U=;
- b=TU3xKFckuBytQXzGRrnZihl0yeKbwPG8JB/TOw1KehrBJANQhXLrGMTOwHa72CKI2K
- TfVgzuySnZIU/pGlaY7iO8BSejsmufpK6wGvplqWm+hGk4DrKC+CkFvdT5BKTxC5rIsV
- f5rnwzoAogqm38Ak8FibY7hG7lMKlVOhcyO1U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=afIQysNJQf/hjgLi9fetsyfTXQy3zJ9L0+IL2zCPL+U=;
- b=bQ5AYA6l0i28jhs1tlSaQTkA1eO268PPnSzu3V24Ma9PbtreCClq3JGSh/LAPWxhHs
- UDamuvaxB35rfyIRFhZRMgsKyRisxiGUNptLB2lCZpY+0EwLXl1uNCi9JmlM6sP4GpGj
- XhhjBR4MJtXIN4UYYECAo8giSJ+mLggmTpPszwP13uWy3eP64yo5yYJAwDT/oc+vpMG5
- XGlOmIsgdvnwN8pC7OXPB9tttUtUPSn3Pt1kryfttmS++Ai0hqAiNoPApi/gHA6hiFTN
- DOuOHtGPJ5uCeWfmOYTMxGvktoli3idOBP7AvscHmYRHQ1w6hvHMnBRXtxlRTYoOCOqS
- a4JQ==
-X-Gm-Message-State: AOAM533rmDuTPFIn69XBhQGnisvwy33UrZbwoA641p/1W70eCYGp7iV0
- CulljFee4uCQNMDNAqvLyifX4vSvw8Vu1UWISmszCQ==
-X-Google-Smtp-Source: ABdhPJzZTdsVoYVCTBQu1q1sYqw5C7NZ1pW8MHAHj3gTV5ltiByZow4hmo5F0r2pVDXTsCUjBMqlmxEf0rKOXKNAg1A=
-X-Received: by 2002:a9d:24e4:: with SMTP id z91mr14338401ota.11.1640680395359; 
- Tue, 28 Dec 2021 00:33:15 -0800 (PST)
-MIME-Version: 1.0
+ Mon,  3 Jan 2022 19:24:17 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 203J0GPm006398;
+ Mon, 3 Jan 2022 20:23:43 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=f61el9pWEavxoNwWslyZx7aED4oKGC05virqeIoSCWg=;
+ b=n/f2DRpgvbJFbJ0aHkGO6qo7S0tP8B1QQ9UttAuLNGMXeyl3MCE84m4BJJ4L/I1EKQK0
+ vRgxIXlXHQej+TGU1i8ey5UO1t2fCq4WxErS7+H4KcDm4C3zag4SflMwI3gqXzFGamOL
+ QU72vr7dKfC06Im2xeaJxW5heg3Sm8UX2Cw5lHZeB1kGAd5A2cv5RrZh1EcTDxTFUxvY
+ /yEsQtLMPpvN7ITGHRrpUbO4sGM/GQqbrS2QK+H3+Y+9GqMzVahMMqWaSdOViQkRVodN
+ poBCY6UDrbDanax1Ub3zAvyES0FTnn8G9G17QJx4oljWbp+MsyHeQ+GggZScZ14pBkgw KA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dbp33uhsm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 03 Jan 2022 20:23:43 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2E0CA10002A;
+ Mon,  3 Jan 2022 20:23:41 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8F9A22122F2;
+ Mon,  3 Jan 2022 20:23:41 +0100 (CET)
+Received: from lmecxl0994.lme.st.com (10.75.127.44) by SFHDAG2NODE2.st.com
+ (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 3 Jan
+ 2022 20:23:40 +0100
+To: Simon Glass <sjg@chromium.org>
 References: <20211214165704.479015-1-patrick.delaunay@foss.st.com>
- <20211214175652.RFC.4.I0d0c7b01c8aefb9ef4b2d5f78feda422bc59593e@changeid>
-In-Reply-To: <20211214175652.RFC.4.I0d0c7b01c8aefb9ef4b2d5f78feda422bc59593e@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 28 Dec 2021 01:33:01 -0700
-Message-ID: <CAPnjgZ0krbOuwpwGZiTtKRsHwjTaA67RcvbDxUKge9kJkCsjjA@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: David Feng <fenghua@phytium.com.cn>,
- =?UTF-8?B?w4FsdmFybyBGZXJuw6FuZGV6IFJvamFz?= <noltari@gmail.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>,
- Siew Chin Lim <elly.siew.chin.lim@intel.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Chin-Liang See <clsee@altera.com>, Sean Anderson <seanga2@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Rainer Boschung <rainer.boschung@hitachienergy.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Wolfgang Wegner <w.wegner@astro-kom.de>, Kamil Lulko <kamil.lulko@gmail.com>,
- Fabio Estevam <festevam@gmail.com>,
- Dalon Westergreen <dalon.westergreen@intel.com>,
- Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
- Marek Vasut <marek.vasut+renesas@gmail.com>, Marek Vasut <marex@denx.de>,
- Stefan Roese <sr@denx.de>, Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Angelo Dureghello <angelo@sysam.it>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Stelian Pop <stelian@popies.net>, Niel Fourie <lusus@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Kristian Amlie <kristian.amlie@northern.tech>,
- egnite GmbH <info@egnite.de>, Ruchika Gupta <ruchika.gupta@nxp.com>,
- Shengzhou Liu <Shengzhou.Liu@nxp.com>, Dirk Eibach <dirk.eibach@gdsys.cc>,
- Heiko Schocher <hs@denx.de>, Qiang Zhao <qiang.zhao@nxp.com>,
- Ilko Iliev <iliev@ronetix.at>, Thomas Chou <thomas@wytron.com.tw>,
- Tetsuyuki Kobayashi <koba@kmckk.co.jp>, Sinan Akman <sinan@writeme.com>,
- Vikas Manocha <vikas.manocha@st.com>, Wolfgang Denk <wd@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rajesh Bhagat <rajesh.bhagat@nxp.com>, Alison Wang <alison.wang@nxp.com>,
- Ashish Kumar <Ashish.Kumar@nxp.com>, Rick Chen <rick@andestech.com>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Chee Hong Ang <chee.hong.ang@intel.com>, Jens Scharsig <esw@bus-elektronik.de>,
- Vladimir Zapolskiy <vz@mleia.com>, Adam Ford <aford173@gmail.com>,
- Mingkai Hu <Mingkai.Hu@nxp.com>, Simon Guinot <simon.guinot@sequanux.org>,
- Christophe Leroy <christophe.leroy@c-s.fr>, Michal Simek <monstr@monstr.eu>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
- Igor Opaniuk <igor.opaniuk@foundries.io>, Max Filippov <jcmvbkbc@gmail.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, "Andrew F. Davis" <afd@ti.com>,
- Aaron Williams <awilliams@marvell.com>, Dinh Nguyen <dinguyen@kernel.org>,
- Michael Walle <michael@walle.cc>, Paul Burton <paul.burton@mips.com>,
- Usama Arif <usama.arif@arm.com>, Eugen Hristev <eugen.hristev@microchip.com>,
- TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Bin Meng <bmeng.cn@gmail.com>,
- Andes <uboot@andestech.com>
-Subject: Re: [Uboot-stm32] [RFC PATCH 4/5] configs: Migrate
-	CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
+ <20211214175652.RFC.5.I5fc8065d06afb12c358588f9078ba15b1cbbe94c@changeid>
+ <CAPnjgZ3hrh4S7XC3xKEHaCmC67-FZe9BwP7H0M80Zqz+S+pPug@mail.gmail.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <470d4868-d0b7-4047-d9f9-2a0f5aec3565@foss.st.com>
+Date: Mon, 3 Jan 2022 20:23:40 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+MIME-Version: 1.0
+In-Reply-To: <CAPnjgZ3hrh4S7XC3xKEHaCmC67-FZe9BwP7H0M80Zqz+S+pPug@mail.gmail.com>
+Content-Language: en-US
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-01-03_07,2022-01-01_01,2021-12-02_01
+Cc: Marek Vasut <marex@denx.de>, Priyanka Jain <priyanka.jain@nxp.com>,
+ =?UTF-8?Q?Marek_Beh=c3=ban?= <marek.behun@nic.cz>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, egnite GmbH <info@egnite.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>, Stefan Roese <sr@denx.de>
+Subject: Re: [Uboot-stm32] [RFC PATCH 5/5] Convert CONFIG_AT91_EFLASH to
+	Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,35 +76,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
+Hi Simon,
 
-On Tue, 14 Dec 2021 at 10:01, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
+On 12/28/21 9:32 AM, Simon Glass wrote:
+> On Tue, 14 Dec 2021 at 09:57, Patrick Delaunay
+> <patrick.delaunay@foss.st.com> wrote:
+>> This converts the following to Kconfig:
+>>     CONFIG_AT91_EFLASH
+>>
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> ---
+>>
+>>   arch/arm/mach-at91/Kconfig   | 8 ++++++++
+>>   configs/ethernut5_defconfig  | 2 +-
+>>   include/configs/ethernut5.h  | 1 -
+>>   scripts/config_whitelist.txt | 1 -
+>>   4 files changed, 9 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+>> index 4448ca1592..5267a7d15d 100644
+>> --- a/arch/arm/mach-at91/Kconfig
+>> +++ b/arch/arm/mach-at91/Kconfig
+>> @@ -302,6 +302,14 @@ config ATMEL_SFR
+>>   config SYS_SOC
+>>          default "at91"
+>>
+>> +config AT91_EFLASH
+>> +       bool "Support AT91 flash driver"
+>> +       depends on AT91SAM9XE
+>> +       select USE_SYS_MAX_FLASH_BANKS
+>> +       help
+>> +         Enable the driver for the enhanced embedded flash in the Atmel
+>> +         AT91SAM9XE devices.
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> Use moveconfig.py script to convert define CONFIG_SYS_MAX_FLASH_BANKS
-> and CONFIG_SYS_MAX_FLASH_BANKS_DETECT to Kconfig and move these entries
-> to defconfigs.
+> Please describe what it actually means. Enhanced in what way?
+
+I will dropped the "enhanced" word, copied for header
+of arch/arm/mach-at91/arm926ejs/eflash.c
+
+
+/*
+  * this driver supports the enhanced embedded flash in the Atmel
+  * AT91SAM9XE devices with the following geometry:
+  *
+  * AT91SAM9XE128: 1 plane of  8 regions of 32 pages (total  256 pages)
+  * AT91SAM9XE256: 1 plane of 16 regions of 32 pages (total  512 pages)
+  * AT91SAM9XE512: 1 plane of 32 regions of 32 pages (total 1024 pages)
+  * (the exact geometry is read from the flash at runtime, so any
+  *  future devices should already be covered)
+
+....
+
+
+but not present in commit header
+
+d88bebe16d81 ("AT91SAM9XE: add embedded flash support")
+
+
+It is more clear
+
 >
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->  README                                       |  3 ---
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-Note that if you use -Cy flags to moveconfig it will create a commit
-and message for you.
-
-[..]
+> Regards,
+> Simon
 
 
->  174 files changed, 101 insertions(+), 127 deletions(-)
->
+Thanks
+
+Patrick
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,105 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE172484253
-	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jan 2022 14:24:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 806F648424E
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jan 2022 14:24:13 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8010DC5F1FA;
-	Tue,  4 Jan 2022 13:24:50 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3B59CC5F1F6;
+	Tue,  4 Jan 2022 13:24:13 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 608CEC5F1F6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86589C5A4FD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  4 Jan 2022 13:24:49 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 204B2g1w030926;
- Tue, 4 Jan 2022 14:24:12 +0100
+ Tue,  4 Jan 2022 13:24:11 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 2049tstu016890;
+ Tue, 4 Jan 2022 14:24:08 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=Frq5gDoyqiVYQIragDWH3HwGfwiO7C6nSgm/S+do0ho=;
- b=OAJNzVtVgkUzB33ddfI4yVUDV79i/mUFph565W1Y7PJ3wPFP9Xrv65i497h99P9Az0TZ
- Y4jufvw3RpSHA7wGLZsy0sHp2TWWiwFE2J79iV00i6PPIqWIEcbDAR5qL+kcqy2BR6jV
- wBS0Y8anITzOVTaXy+bK1Rq6ApipF40JB21wkbYjzHCwo/31aMkVoCq13o24M/mDZKjB
- 3VJVxN3UtLujBNDT6snNXGYIQG2sTV+whWcNgVbf710GfsIo2oRwIfrefVYkVQYZ2ooR
- R95N868l4uiiFXEeosGCrawzjhJnNTXqIEdm94HPPMhm4o2jZNNf+J2znkaLrqfV5YWh jQ== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=JwyWlr311QT6AlyYpPFzjIVvdDLNNBqNji/CP5tq4dY=;
+ b=Ebubs/fjntjOlHccTJuOm+eBA8NiYAryXCwAIBZyHSlej/e1eCXthfBo1euN8ELhdZ/n
+ 8fscvH2KRc6Edtu478TftBcKsPK55gYs3XXQD2Rtea+Hrxt3q6avOmVbUovyd6Df8cmJ
+ 3mz0H7gMAbT0DmaAppX2MePWRfs37ZLsGpI4NqRSz/aTc9jgXDVBe+wHHwkq1flM6Vgm
+ 89zl43pWWrSaVsqjbku+RU5jvgNg+3iBpRuPepcGmITymDpTSybeVHf/zA1SlvGg4b4O
+ CTPbHQQa+BlgOMQVHRZpajgrFswyYH25aSNssusL7V+8jX1RRFs3UJOAl5BnBECiqwBl og== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dcewm264x-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dccdntmcr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 04 Jan 2022 14:24:12 +0100
+ Tue, 04 Jan 2022 14:24:08 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1E7E710002A;
- Tue,  4 Jan 2022 14:24:07 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0ACD9100038;
+ Tue,  4 Jan 2022 14:24:08 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0416626029E;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EBF0E26029F;
  Tue,  4 Jan 2022 14:24:07 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 4 Jan 2022 14:24:06
+Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 4 Jan 2022 14:24:07
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 4 Jan 2022 14:23:56 +0100
-Message-ID: <20220104132401.3573475-1-patrick.delaunay@foss.st.com>
+Date: Tue, 4 Jan 2022 14:23:57 +0100
+Message-ID: <20220104142328.v1.1.Iaa7c4564c1e7d57e198f7621d124cddaa3296c4a@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220104132401.3573475-1-patrick.delaunay@foss.st.com>
+References: <20220104132401.3573475-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG1NODE2.st.com (10.75.127.2) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-04_05,2022-01-04_01,2021-12-02_01
-Cc: David Feng <fenghua@phytium.com.cn>,
- =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>,
- Vignesh R <vigneshr@ti.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
- Chin-Liang See <clsee@altera.com>, Sean Anderson <seanga2@gmail.com>,
- Max Filippov <jcmvbkbc@gmail.com>,
- Rainer Boschung <rainer.boschung@hitachienergy.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Ruchika Gupta <ruchika.gupta@nxp.com>, Wolfgang Wegner <w.wegner@astro-kom.de>,
- Kamil Lulko <kamil.lulko@gmail.com>, Fabio Estevam <festevam@gmail.com>,
- Dalon Westergreen <dalon.westergreen@intel.com>, Aleksandar
- Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
- Marek Vasut <marek.vasut+renesas@gmail.com>, Marek Vasut <marex@denx.de>,
- Stefan Roese <sr@denx.de>, Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Angelo Dureghello <angelo@sysam.it>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Stelian Pop <stelian@popies.net>, Niel Fourie <lusus@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Kristian Amlie <kristian.amlie@northern.tech>,
- egnite GmbH <info@egnite.de>, Jagan
- Teki <jagan@amarulasolutions.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>,
- Dirk Eibach <dirk.eibach@gdsys.cc>, Heiko Schocher <hs@denx.de>,
- Qiang Zhao <qiang.zhao@nxp.com>, Ilko Iliev <iliev@ronetix.at>,
- Thomas Chou <thomas@wytron.com.tw>, Tetsuyuki Kobayashi <koba@kmckk.co.jp>,
- Sinan Akman <sinan@writeme.com>, Vikas Manocha <vikas.manocha@st.com>,
- Wolfgang Denk <wd@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Rajesh Bhagat <rajesh.bhagat@nxp.com>, Alison Wang <alison.wang@nxp.com>,
- Ashish Kumar <Ashish.Kumar@nxp.com>, Rick Chen <rick@andestech.com>,
- Jassi Brar <jaswinder.singh@linaro.org>, Usama Arif <usama.arif@arm.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Chee Hong Ang <chee.hong.ang@intel.com>, Jens Scharsig <esw@bus-elektronik.de>,
- Vladimir Zapolskiy <vz@mleia.com>, Adam Ford <aford173@gmail.com>,
- Mingkai Hu <Mingkai.Hu@nxp.com>, Simon Guinot <simon.guinot@sequanux.org>,
- Christophe
- Leroy <christophe.leroy@c-s.fr>, Michal Simek <monstr@monstr.eu>,
- Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>, Igor
- Opaniuk <igor.opaniuk@foundries.io>,
- Siew Chin Lim <elly.siew.chin.lim@intel.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, "Andrew F. Davis" <afd@ti.com>,
- Aaron Williams <awilliams@marvell.com>, Dinh
- Nguyen <dinguyen@kernel.org>, Michael Walle <michael@walle.cc>, Paul
- Burton <paul.burton@mips.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Eugen
- Hristev <eugen.hristev@microchip.com>, TsiChung
- Liew <Tsi-Chung.Liew@nxp.com>, Bin Meng <bmeng.cn@gmail.com>,
- Andes <uboot@andestech.com>
-Subject: [Uboot-stm32] [PATCH v1 0/5] configs: Migrate
-	CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
+ definitions=2022-01-04_06,2022-01-04_01,2021-12-02_01
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v1 1/5] cmd: Fix up warnings in flash.c
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,224 +75,592 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Tidy up the warnings reported by checkpatch.pl to prepare next patches
 
-Proposal after Marek comment in [1], move CONFIG_SYS_MAX_FLASH_BANKS
-and CONFIG_SYS_MAX_FLASH_BANKS_DETECT in Kconfig.
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
-Series based on the previous RFC [2], rebased on top of the next
-branch and added reviewed-by.
+ cmd/flash.c | 239 +++++++++++++++++++++++++---------------------------
+ 1 file changed, 117 insertions(+), 122 deletions(-)
 
-I wasn't not sure of the solution when I introduced the
-CFI_FLASH_BANKS to simplify the support of all the options in
-include/mtd/cfi_flash.h
-
-No compilation issue after rebase but not tested =
-https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/10431
-
-[1] [v3,1/2] mtd: cfi_flash: use cfi_flash_num_flash_banks only when supported
-http: //patchwork.ozlabs.org/project/uboot/patch/20210916155040.v3.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid/#2754501
-
-[2] [RFC] configs: Migrate CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
-http: //patchwork.ozlabs.org/project/uboot/list/?series=276760&state=*
-
-Changes in v1:
-- update drivers/mtd/spi/spi-nor-core.c for cfi_mtd_nb
-  needed after RFC rebase
-- solve issue in cfi_flash.h, with
-  CFI_FLASH_BANKS=CONFIG_SYS_MAX_FLASH_BANKS_DETECT
-
-Patrick Delaunay (5):
-  cmd: Fix up warnings in flash.c
-  mtd: cfi: introduce CFI_FLASH_BANKS
-  mtd: cfi: change CONFIG_SYS_MAX_FLASH_BANKS_DETECT as boolean
-  configs: Migrate CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
-  Convert CONFIG_AT91_EFLASH to Kconfig
-
- README                                       |   3 -
- arch/arm/mach-at91/Kconfig                   |   8 +
- cmd/bootm.c                                  |   2 +-
- cmd/flash.c                                  | 247 +++++++++----------
- common/flash.c                               |   2 +-
- common/update.c                              |   4 +-
- configs/3c120_defconfig                      |   1 +
- configs/M5253DEMO_defconfig                  |   1 +
- configs/MPC8548CDS_36BIT_defconfig           |   1 +
- configs/MPC8548CDS_defconfig                 |   1 +
- configs/MPC8548CDS_legacy_defconfig          |   1 +
- configs/P3041DS_NAND_defconfig               |   1 +
- configs/P3041DS_SDCARD_defconfig             |   1 +
- configs/P3041DS_SPIFLASH_defconfig           |   1 +
- configs/P3041DS_defconfig                    |   1 +
- configs/P4080DS_SDCARD_defconfig             |   1 +
- configs/P4080DS_SPIFLASH_defconfig           |   1 +
- configs/P4080DS_defconfig                    |   1 +
- configs/P5040DS_NAND_defconfig               |   1 +
- configs/P5040DS_SDCARD_defconfig             |   1 +
- configs/P5040DS_SPIFLASH_defconfig           |   1 +
- configs/P5040DS_defconfig                    |   1 +
- configs/T1042D4RDB_NAND_defconfig            |   1 +
- configs/T1042D4RDB_SDCARD_defconfig          |   1 +
- configs/T1042D4RDB_SPIFLASH_defconfig        |   1 +
- configs/T1042D4RDB_defconfig                 |   1 +
- configs/T2080QDS_NAND_defconfig              |   1 +
- configs/T2080QDS_SDCARD_defconfig            |   1 +
- configs/T2080QDS_SECURE_BOOT_defconfig       |   1 +
- configs/T2080QDS_SPIFLASH_defconfig          |   1 +
- configs/T2080QDS_defconfig                   |   1 +
- configs/T4240RDB_SDCARD_defconfig            |   1 +
- configs/T4240RDB_defconfig                   |   1 +
- configs/boston32r2_defconfig                 |   1 +
- configs/boston32r2el_defconfig               |   1 +
- configs/boston32r6_defconfig                 |   1 +
- configs/boston32r6el_defconfig               |   1 +
- configs/boston64r2_defconfig                 |   1 +
- configs/boston64r2el_defconfig               |   1 +
- configs/boston64r6_defconfig                 |   1 +
- configs/boston64r6el_defconfig               |   1 +
- configs/cobra5272_defconfig                  |   1 +
- configs/comtrend_ct5361_ram_defconfig        |   1 +
- configs/comtrend_wap5813n_ram_defconfig      |   1 +
- configs/ethernut5_defconfig                  |   1 +
- configs/huawei_hg556a_ram_defconfig          |   1 +
- configs/j7200_evm_a72_defconfig              |   1 +
- configs/j7200_evm_r5_defconfig               |   1 +
- configs/j721e_evm_a72_defconfig              |   1 +
- configs/j721e_hs_evm_a72_defconfig           |   1 +
- configs/ls1021aqds_ddr4_nor_defconfig        |   1 +
- configs/ls1021aqds_ddr4_nor_lpuart_defconfig |   1 +
- configs/ls1021aqds_nand_defconfig            |   1 +
- configs/ls1021aqds_nor_SECURE_BOOT_defconfig |   1 +
- configs/ls1021aqds_nor_defconfig             |   1 +
- configs/ls1021aqds_nor_lpuart_defconfig      |   1 +
- configs/ls1021aqds_sdcard_ifc_defconfig      |   1 +
- configs/ls1046aqds_SECURE_BOOT_defconfig     |   1 +
- configs/ls1046aqds_defconfig                 |   1 +
- configs/ls1046aqds_lpuart_defconfig          |   1 +
- configs/ls1046aqds_nand_defconfig            |   1 +
- configs/ls1046aqds_sdcard_ifc_defconfig      |   1 +
- configs/ls1046aqds_tfa_SECURE_BOOT_defconfig |   1 +
- configs/ls1046aqds_tfa_defconfig             |   1 +
- configs/ls1088aqds_defconfig                 |   1 +
- configs/ls1088aqds_sdcard_ifc_defconfig      |   1 +
- configs/ls1088aqds_tfa_defconfig             |   1 +
- configs/ls2080aqds_SECURE_BOOT_defconfig     |   1 +
- configs/ls2080aqds_defconfig                 |   1 +
- configs/ls2088aqds_tfa_defconfig             |   1 +
- configs/qemu_arm64_defconfig                 |   2 +
- configs/qemu_arm_defconfig                   |   2 +
- configs/r8a77990_ebisu_defconfig             |   1 +
- configs/r8a77995_draak_defconfig             |   1 +
- configs/rcar3_salvator-x_defconfig           |   1 +
- configs/rcar3_ulcb_defconfig                 |   1 +
- configs/sfr_nb4-ser_ram_defconfig            |   1 +
- configs/socrates_defconfig                   |   1 +
- drivers/mtd/Kconfig                          |  27 ++
- drivers/mtd/cfi_flash.c                      |   6 +-
- drivers/mtd/cfi_mtd.c                        |   4 +-
- drivers/mtd/spi/spi-nor-core.c               |   5 +-
- include/configs/10m50_devboard.h             |   1 -
- include/configs/3c120_devboard.h             |   1 -
- include/configs/M5208EVBE.h                  |   1 -
- include/configs/M5235EVB.h                   |   1 -
- include/configs/M5249EVB.h                   |   1 -
- include/configs/M5253DEMO.h                  |   1 -
- include/configs/M5272C3.h                    |   1 -
- include/configs/M5275EVB.h                   |   1 -
- include/configs/M5282EVB.h                   |   1 -
- include/configs/M53017EVB.h                  |   1 -
- include/configs/M5329EVB.h                   |   1 -
- include/configs/M5373EVB.h                   |   1 -
- include/configs/MCR3000.h                    |   1 -
- include/configs/MPC837XERDB.h                |   1 -
- include/configs/MPC8540ADS.h                 |   1 -
- include/configs/MPC8548CDS.h                 |   1 -
- include/configs/MPC8560ADS.h                 |   1 -
- include/configs/P1010RDB.h                   |   1 -
- include/configs/P2041RDB.h                   |   1 -
- include/configs/T102xRDB.h                   |   1 -
- include/configs/T104xRDB.h                   |   1 -
- include/configs/T208xQDS.h                   |   1 -
- include/configs/T208xRDB.h                   |   1 -
- include/configs/T4240RDB.h                   |   1 -
- include/configs/adp-ae3xx.h                  |   6 -
- include/configs/adp-ag101p.h                 |   3 -
- include/configs/am335x_evm.h                 |   1 -
- include/configs/am3517_evm.h                 |   1 -
- include/configs/amcore.h                     |   1 -
- include/configs/armadillo-800eva.h           |   1 -
- include/configs/astro_mcf5373l.h             |   1 -
- include/configs/at91sam9263ek.h              |   1 -
- include/configs/ax25-ae350.h                 |   6 -
- include/configs/bcm7445.h                    |   2 -
- include/configs/blanche.h                    |   1 -
- include/configs/bmips_bcm6338.h              |   1 -
- include/configs/bmips_bcm6348.h              |   1 -
- include/configs/bmips_bcm6358.h              |   1 -
- include/configs/bmips_bcm6368.h              |   1 -
- include/configs/boston.h                     |   2 +-
- include/configs/cobra5272.h                  |   1 -
- include/configs/colibri_pxa270.h             |   1 -
- include/configs/corenet_ds.h                 |   1 -
- include/configs/da850evm.h                   |   1 -
- include/configs/devkit3250.h                 |   1 -
- include/configs/dra7xx_evm.h                 |   1 -
- include/configs/draak.h                      |   1 -
- include/configs/eb_cpu5282.h                 |   1 -
- include/configs/ebisu.h                      |   1 -
- include/configs/edminiv2.h                   |   1 -
- include/configs/ethernut5.h                  |   2 -
- include/configs/gazerbeam.h                  |   1 -
- include/configs/ids8313.h                    |   1 -
- include/configs/imx27lite-common.h           |   1 -
- include/configs/integrator-common.h          |   1 -
- include/configs/j721e_evm.h                  |   1 -
- include/configs/km/km-mpc83xx.h              |   1 -
- include/configs/km/pg-wcom-ls102xa.h         |   1 -
- include/configs/kmcent2.h                    |   1 -
- include/configs/kzm9g.h                      |   1 -
- include/configs/ls1021aqds.h                 |   1 -
- include/configs/ls1021atwr.h                 |   1 -
- include/configs/ls1043aqds.h                 |   1 -
- include/configs/ls1043ardb.h                 |   1 -
- include/configs/ls1046aqds.h                 |   1 -
- include/configs/ls1088aqds.h                 |   1 -
- include/configs/ls1088ardb.h                 |   1 -
- include/configs/ls2080aqds.h                 |   1 -
- include/configs/ls2080ardb.h                 |   1 -
- include/configs/lsxl.h                       |   1 -
- include/configs/malta.h                      |   1 -
- include/configs/mccmon6.h                    |   1 -
- include/configs/microblaze-generic.h         |   1 -
- include/configs/mx6sabreauto.h               |   1 -
- include/configs/octeon_ebb7304.h             |   1 -
- include/configs/omap3_logic.h                |   1 -
- include/configs/p1_p2_rdb_pc.h               |   2 -
- include/configs/pm9261.h                     |   1 -
- include/configs/pm9263.h                     |   1 -
- include/configs/qemu-arm.h                   |   1 -
- include/configs/qemu-riscv.h                 |   2 -
- include/configs/r2dplus.h                    |   1 -
- include/configs/salvator-x.h                 |   1 -
- include/configs/sama5d3xek.h                 |   1 -
- include/configs/socfpga_arria10_socdk.h      |   1 -
- include/configs/socfpga_soc64_common.h       |   1 -
- include/configs/socrates.h                   |   1 -
- include/configs/stih410-b2260.h              |   2 -
- include/configs/stm32f429-discovery.h        |   1 -
- include/configs/stm32f429-evaluation.h       |   1 -
- include/configs/stm32f469-discovery.h        |   1 -
- include/configs/stm32f746-disco.h            |   1 -
- include/configs/synquacer.h                  |   1 -
- include/configs/total_compute.h              |   1 -
- include/configs/ulcb.h                       |   1 -
- include/configs/vexpress_aemv8a.h            |   1 -
- include/configs/vexpress_common.h            |   1 -
- include/configs/xtfpga.h                     |   1 -
- include/configs/zynq-common.h                |   1 -
- include/mtd/cfi_flash.h                      |  17 +-
- scripts/config_whitelist.txt                 |   3 -
- 183 files changed, 252 insertions(+), 267 deletions(-)
-
+diff --git a/cmd/flash.c b/cmd/flash.c
+index 819febc10e..594e2caa59 100644
+--- a/cmd/flash.c
++++ b/cmd/flash.c
+@@ -19,7 +19,7 @@
+ int mtdparts_init(void);
+ int mtd_id_parse(const char *id, const char **ret_id, u8 *dev_type, u8 *dev_num);
+ int find_dev_and_part(const char *id, struct mtd_device **dev,
+-		u8 *part_num, struct part_info **part);
++		      u8 *part_num, struct part_info **part);
+ #endif
+ 
+ #ifdef CONFIG_MTD_NOR_FLASH
+@@ -47,34 +47,39 @@ extern flash_info_t flash_info[];	/* info for FLASH chips */
+  *			  or an invalid flash bank.
+  */
+ static int
+-abbrev_spec (char *str, flash_info_t ** pinfo, int *psf, int *psl)
++abbrev_spec(char *str, flash_info_t **pinfo, int *psf, int *psl)
+ {
+ 	flash_info_t *fp;
+ 	int bank, first, last;
+ 	char *p, *ep;
+ 
+-	if ((p = strchr (str, ':')) == NULL)
++	p = strchr(str, ':');
++	if (!p)
+ 		return 0;
+ 	*p++ = '\0';
+ 
+ 	bank = dectoul(str, &ep);
+ 	if (ep == str || *ep != '\0' ||
+-		bank < 1 || bank > CONFIG_SYS_MAX_FLASH_BANKS ||
+-		(fp = &flash_info[bank - 1])->flash_id == FLASH_UNKNOWN)
++	    bank < 1 || bank > CONFIG_SYS_MAX_FLASH_BANKS)
++		return -1;
++
++	fp = &flash_info[bank - 1];
++	if (fp->flash_id == FLASH_UNKNOWN)
+ 		return -1;
+ 
+ 	str = p;
+-	if ((p = strchr (str, '-')) != NULL)
++	p = strchr(str, '-');
++	if (p)
+ 		*p++ = '\0';
+ 
+ 	first = dectoul(str, &ep);
+ 	if (ep == str || *ep != '\0' || first >= fp->sector_count)
+ 		return -1;
+ 
+-	if (p != NULL) {
++	if (p) {
+ 		last = dectoul(p, &ep);
+ 		if (ep == p || *ep != '\0' ||
+-			last < first || last >= fp->sector_count)
++		    last < first || last >= fp->sector_count)
+ 			return -1;
+ 	} else {
+ 		last = first;
+@@ -107,11 +112,10 @@ int flash_sect_roundb(ulong *addr)
+ 				sector_end_addr = info->start[0] +
+ 								info->size - 1;
+ 			} else {
+-				sector_end_addr = info->start[i+1] - 1;
++				sector_end_addr = info->start[i + 1] - 1;
+ 			}
+ 
+-			if (*addr <= sector_end_addr &&
+-						*addr >= info->start[i]) {
++			if (*addr <= sector_end_addr && *addr >= info->start[i]) {
+ 				found = 1;
+ 				/* adjust *addr if necessary */
+ 				if (*addr < sector_end_addr)
+@@ -144,7 +148,7 @@ int flash_sect_roundb(ulong *addr)
+  * Return:
+  *    1: success
+  *   -1: failure (bad format, bad address).
+-*/
++ */
+ static int
+ addr_spec(char *arg1, char *arg2, ulong *addr_first, ulong *addr_last)
+ {
+@@ -156,7 +160,7 @@ addr_spec(char *arg1, char *arg2, ulong *addr_first, ulong *addr_last)
+ 		return -1;
+ 
+ 	len_used = 0;
+-	if (arg2 && *arg2 == '+'){
++	if (arg2 && *arg2 == '+') {
+ 		len_used = 1;
+ 		++arg2;
+ 	}
+@@ -165,7 +169,7 @@ addr_spec(char *arg1, char *arg2, ulong *addr_first, ulong *addr_last)
+ 	if (ep == arg2 || *ep != '\0')
+ 		return -1;
+ 
+-	if (len_used){
++	if (len_used) {
+ 		/*
+ 		 * *addr_last has the length, compute correct *addr_last
+ 		 * XXX watch out for the integer overflow! Right now it is
+@@ -187,9 +191,9 @@ addr_spec(char *arg1, char *arg2, ulong *addr_first, ulong *addr_last)
+ }
+ 
+ static int
+-flash_fill_sect_ranges (ulong addr_first, ulong addr_last,
+-			int *s_first, int *s_last,
+-			int *s_count )
++flash_fill_sect_ranges(ulong addr_first, ulong addr_last,
++		       int *s_first, int *s_last,
++		       int *s_count)
+ {
+ 	flash_info_t *info;
+ 	ulong bank;
+@@ -197,27 +201,25 @@ flash_fill_sect_ranges (ulong addr_first, ulong addr_last,
+ 
+ 	*s_count = 0;
+ 
+-	for (bank=0; bank < CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
++	for (bank = 0; bank < CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
+ 		s_first[bank] = -1;	/* first sector to erase	*/
+-		s_last [bank] = -1;	/* last  sector to erase	*/
++		s_last[bank] = -1;	/* last  sector to erase	*/
+ 	}
+ 
+-	for (bank=0,info = &flash_info[0];
++	for (bank = 0, info = &flash_info[0];
+ 	     (bank < CONFIG_SYS_MAX_FLASH_BANKS) && (addr_first <= addr_last);
+ 	     ++bank, ++info) {
+ 		ulong b_end;
+ 		int sect;
+ 		short s_end;
+ 
+-		if (info->flash_id == FLASH_UNKNOWN) {
++		if (info->flash_id == FLASH_UNKNOWN)
+ 			continue;
+-		}
+ 
+ 		b_end = info->start[0] + info->size - 1;	/* bank end addr */
+ 		s_end = info->sector_count - 1;			/* last sector   */
+ 
+-
+-		for (sect=0; sect < info->sector_count; ++sect) {
++		for (sect = 0; sect < info->sector_count; ++sect) {
+ 			ulong end;	/* last address in current sect	*/
+ 
+ 			end = (sect == s_end) ? b_end : info->start[sect + 1] - 1;
+@@ -227,40 +229,37 @@ flash_fill_sect_ranges (ulong addr_first, ulong addr_last,
+ 			if (addr_last < info->start[sect])
+ 				continue;
+ 
+-			if (addr_first == info->start[sect]) {
++			if (addr_first == info->start[sect])
+ 				s_first[bank] = sect;
+-			}
+-			if (addr_last  == end) {
++
++			if (addr_last  == end)
+ 				s_last[bank]  = sect;
+-			}
+ 		}
+ 		if (s_first[bank] >= 0) {
+ 			if (s_last[bank] < 0) {
+ 				if (addr_last > b_end) {
+ 					s_last[bank] = s_end;
+ 				} else {
+-					puts ("Error: end address"
+-						" not on sector boundary\n");
++					puts("Error: end address not on sector boundary\n");
+ 					rcode = 1;
+ 					break;
+ 				}
+ 			}
+ 			if (s_last[bank] < s_first[bank]) {
+-				puts ("Error: end sector"
+-					" precedes start sector\n");
++				puts("Error: end sector precedes start sector\n");
+ 				rcode = 1;
+ 				break;
+ 			}
+ 			sect = s_last[bank];
+-			addr_first = (sect == s_end) ? b_end + 1: info->start[sect + 1];
++			addr_first = (sect == s_end) ? b_end + 1 : info->start[sect + 1];
+ 			(*s_count) += s_last[bank] - s_first[bank] + 1;
+ 		} else if (addr_first >= info->start[0] && addr_first < b_end) {
+-			puts ("Error: start address not on sector boundary\n");
++			puts("Error: start address not on sector boundary\n");
+ 			rcode = 1;
+ 			break;
+ 		} else if (s_last[bank] >= 0) {
+-			puts ("Error: cannot span across banks when they are"
+-			       " mapped in reverse order\n");
++			puts("Error: cannot span across banks when they are"
++			     " mapped in reverse order\n");
+ 			rcode = 1;
+ 			break;
+ 		}
+@@ -279,8 +278,8 @@ static int do_flinfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ #ifdef CONFIG_MTD_NOR_FLASH
+ 	if (argc == 1) {	/* print info for all FLASH banks */
+-		for (bank=0; bank <CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
+-			printf ("\nBank # %ld: ", bank+1);
++		for (bank = 0; bank < CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
++			printf("\nBank # %ld: ", bank + 1);
+ 
+ 			flash_print_info(&flash_info[bank]);
+ 		}
+@@ -288,12 +287,12 @@ static int do_flinfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	}
+ 
+ 	bank = hextoul(argv[1], NULL);
+-	if ((bank < 1) || (bank > CONFIG_SYS_MAX_FLASH_BANKS)) {
+-		printf ("Only FLASH Banks # 1 ... # %d supported\n",
+-			CONFIG_SYS_MAX_FLASH_BANKS);
++	if (bank < 1 || bank > CONFIG_SYS_MAX_FLASH_BANKS) {
++		printf("Only FLASH Banks # 1 ... # %d supported\n",
++		       CONFIG_SYS_MAX_FLASH_BANKS);
+ 		return 1;
+ 	}
+-	printf ("\nBank # %ld: ", bank);
++	printf("\nBank # %ld: ", bank);
+ 	flash_print_info(&flash_info[bank - 1]);
+ #endif /* CONFIG_MTD_NOR_FLASH */
+ 	return 0;
+@@ -317,28 +316,29 @@ static int do_flerase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		return CMD_RET_USAGE;
+ 
+ 	if (strcmp(argv[1], "all") == 0) {
+-		for (bank=1; bank<=CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
+-			printf ("Erase Flash Bank # %ld ", bank);
+-			info = &flash_info[bank-1];
++		for (bank = 1; bank <= CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
++			printf("Erase Flash Bank # %ld ", bank);
++			info = &flash_info[bank - 1];
+ 			rcode = flash_erase(info, 0, info->sector_count - 1);
+ 		}
+ 		return rcode;
+ 	}
+ 
+-	if ((n = abbrev_spec(argv[1], &info, &sect_first, &sect_last)) != 0) {
++	n = abbrev_spec(argv[1], &info, &sect_first, &sect_last);
++	if (n) {
+ 		if (n < 0) {
+-			puts ("Bad sector specification\n");
++			puts("Bad sector specification\n");
+ 			return 1;
+ 		}
+-		printf ("Erase Flash Sectors %d-%d in Bank # %zu ",
+-			sect_first, sect_last, (info-flash_info)+1);
++		printf("Erase Flash Sectors %d-%d in Bank # %zu ",
++		       sect_first, sect_last, (info - flash_info) + 1);
+ 		rcode = flash_erase(info, sect_first, sect_last);
+ 		return rcode;
+ 	}
+ 
+ #if defined(CONFIG_CMD_MTDPARTS)
+ 	/* erase <part-id> - erase partition */
+-	if ((argc == 2) && (mtd_id_parse(argv[1], NULL, &dev_type, &dev_num) == 0)) {
++	if (argc == 2 && mtd_id_parse(argv[1], NULL, &dev_type, &dev_num) == 0) {
+ 		mtdparts_init();
+ 		if (find_dev_and_part(argv[1], &dev, &pnum, &part) == 0) {
+ 			if (dev->id->type == MTD_DEV_TYPE_NOR) {
+@@ -347,10 +347,9 @@ static int do_flerase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 				addr_first = part->offset + info->start[0];
+ 				addr_last = addr_first + part->size - 1;
+ 
+-				printf ("Erase Flash Partition %s, "
+-						"bank %ld, 0x%08lx - 0x%08lx ",
+-						argv[1], bank, addr_first,
+-						addr_last);
++				printf("Erase Flash Partition %s, bank %ld, 0x%08lx - 0x%08lx ",
++				       argv[1], bank, addr_first,
++				       addr_last);
+ 
+ 				rcode = flash_sect_erase(addr_first, addr_last);
+ 				return rcode;
+@@ -367,19 +366,19 @@ static int do_flerase(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	if (strcmp(argv[1], "bank") == 0) {
+ 		bank = hextoul(argv[2], NULL);
+-		if ((bank < 1) || (bank > CONFIG_SYS_MAX_FLASH_BANKS)) {
+-			printf ("Only FLASH Banks # 1 ... # %d supported\n",
+-				CONFIG_SYS_MAX_FLASH_BANKS);
++		if (bank < 1 || bank > CONFIG_SYS_MAX_FLASH_BANKS) {
++			printf("Only FLASH Banks # 1 ... # %d supported\n",
++			       CONFIG_SYS_MAX_FLASH_BANKS);
+ 			return 1;
+ 		}
+-		printf ("Erase Flash Bank # %ld ", bank);
+-		info = &flash_info[bank-1];
++		printf("Erase Flash Bank # %ld ", bank);
++		info = &flash_info[bank - 1];
+ 		rcode = flash_erase(info, 0, info->sector_count - 1);
+ 		return rcode;
+ 	}
+ 
+-	if (addr_spec(argv[1], argv[2], &addr_first, &addr_last) < 0){
+-		printf ("Bad address format\n");
++	if (addr_spec(argv[1], argv[2], &addr_first, &addr_last) < 0) {
++		printf("Bad address format\n");
+ 		return 1;
+ 	}
+ 
+@@ -403,14 +402,13 @@ int flash_sect_erase(ulong addr_first, ulong addr_last)
+ 	int planned;
+ 	int rcode = 0;
+ 
+-	rcode = flash_fill_sect_ranges (addr_first, addr_last,
+-					s_first, s_last, &planned );
++	rcode = flash_fill_sect_ranges(addr_first, addr_last, s_first, s_last, &planned);
+ 
+-	if (planned && (rcode == 0)) {
+-		for (bank=0,info = &flash_info[0];
+-		     (bank < CONFIG_SYS_MAX_FLASH_BANKS) && (rcode == 0);
++	if (planned && rcode == 0) {
++		for (bank = 0, info = &flash_info[0];
++		     bank < CONFIG_SYS_MAX_FLASH_BANKS && rcode == 0;
+ 		     ++bank, ++info) {
+-			if (s_first[bank]>=0) {
++			if (s_first[bank] >= 0) {
+ 				erased += s_last[bank] - s_first[bank] + 1;
+ 				debug("Erase Flash from 0x%08lx to 0x%08lx in Bank # %ld ",
+ 				      info->start[s_first[bank]],
+@@ -425,8 +423,7 @@ int flash_sect_erase(ulong addr_first, ulong addr_last)
+ 		if (rcode == 0)
+ 			printf("Erased %d sectors\n", erased);
+ 	} else if (rcode == 0) {
+-		puts ("Error: start and/or end address"
+-			" not on sector boundary\n");
++		puts("Error: start and/or end address not on sector boundary\n");
+ 		rcode = 1;
+ 	}
+ 	return rcode;
+@@ -466,50 +463,52 @@ static int do_protect(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ #ifdef CONFIG_MTD_NOR_FLASH
+ 	if (strcmp(argv[2], "all") == 0) {
+-		for (bank=1; bank<=CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
+-			info = &flash_info[bank-1];
+-			if (info->flash_id == FLASH_UNKNOWN) {
++		for (bank = 1; bank <= CONFIG_SYS_MAX_FLASH_BANKS; ++bank) {
++			info = &flash_info[bank - 1];
++			if (info->flash_id == FLASH_UNKNOWN)
+ 				continue;
+-			}
+-			printf ("%sProtect Flash Bank # %ld\n",
+-				p ? "" : "Un-", bank);
+ 
+-			for (i=0; i<info->sector_count; ++i) {
++			printf("%sProtect Flash Bank # %ld\n",
++			       p ? "" : "Un-", bank);
++
++			for (i = 0; i < info->sector_count; ++i) {
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+ 				if (flash_real_protect(info, i, p))
+ 					rcode = 1;
+-				putc ('.');
++				putc('.');
+ #else
+ 				info->protect[i] = p;
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 			}
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+-			if (!rcode) puts (" done\n");
++			if (!rcode)
++				puts(" done\n");
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 		}
+ 		return rcode;
+ 	}
+-
+-	if ((n = abbrev_spec(argv[2], &info, &sect_first, &sect_last)) != 0) {
++	n = abbrev_spec(argv[2], &info, &sect_first, &sect_last);
++	if (n) {
+ 		if (n < 0) {
+-			puts ("Bad sector specification\n");
++			puts("Bad sector specification\n");
+ 			return 1;
+ 		}
+ 		printf("%sProtect Flash Sectors %d-%d in Bank # %zu\n",
+-			p ? "" : "Un-", sect_first, sect_last,
+-			(info-flash_info)+1);
++		       p ? "" : "Un-", sect_first, sect_last,
++		       (info - flash_info) + 1);
+ 		for (i = sect_first; i <= sect_last; i++) {
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+ 			if (flash_real_protect(info, i, p))
+ 				rcode =  1;
+-			putc ('.');
++			putc('.');
+ #else
+ 			info->protect[i] = p;
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 		}
+ 
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+-		if (!rcode) puts (" done\n");
++		if (!rcode)
++			puts(" done\n");
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 
+ 		return rcode;
+@@ -517,7 +516,7 @@ static int do_protect(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ #if defined(CONFIG_CMD_MTDPARTS)
+ 	/* protect on/off <part-id> */
+-	if ((argc == 3) && (mtd_id_parse(argv[2], NULL, &dev_type, &dev_num) == 0)) {
++	if (argc == 3 && mtd_id_parse(argv[2], NULL, &dev_type, &dev_num) == 0) {
+ 		mtdparts_init();
+ 		if (find_dev_and_part(argv[2], &dev, &pnum, &part) == 0) {
+ 			if (dev->id->type == MTD_DEV_TYPE_NOR) {
+@@ -526,10 +525,10 @@ static int do_protect(struct cmd_tbl *cmdtp, int flag, int argc,
+ 				addr_first = part->offset + info->start[0];
+ 				addr_last = addr_first + part->size - 1;
+ 
+-				printf ("%sProtect Flash Partition %s, "
+-						"bank %ld, 0x%08lx - 0x%08lx\n",
+-						p ? "" : "Un", argv[1],
+-						bank, addr_first, addr_last);
++				printf("%sProtect Flash Partition %s, "
++				       "bank %ld, 0x%08lx - 0x%08lx\n",
++				       p ? "" : "Un", argv[1],
++				       bank, addr_first, addr_last);
+ 
+ 				rcode = flash_sect_protect(p, addr_first,
+ 							   addr_last);
+@@ -537,7 +536,7 @@ static int do_protect(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			}
+ 
+ 			printf("cannot %sprotect, not a NOR device\n",
+-					p ? "" : "un");
++			       p ? "" : "un");
+ 			return 1;
+ 		}
+ 	}
+@@ -548,37 +547,38 @@ static int do_protect(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	if (strcmp(argv[2], "bank") == 0) {
+ 		bank = hextoul(argv[3], NULL);
+-		if ((bank < 1) || (bank > CONFIG_SYS_MAX_FLASH_BANKS)) {
+-			printf ("Only FLASH Banks # 1 ... # %d supported\n",
+-				CONFIG_SYS_MAX_FLASH_BANKS);
++		if (bank < 1 || bank > CONFIG_SYS_MAX_FLASH_BANKS) {
++			printf("Only FLASH Banks # 1 ... # %d supported\n",
++			       CONFIG_SYS_MAX_FLASH_BANKS);
+ 			return 1;
+ 		}
+-		printf ("%sProtect Flash Bank # %ld\n",
+-			p ? "" : "Un-", bank);
+-		info = &flash_info[bank-1];
++		printf("%sProtect Flash Bank # %ld\n",
++		       p ? "" : "Un-", bank);
++		info = &flash_info[bank - 1];
+ 
+ 		if (info->flash_id == FLASH_UNKNOWN) {
+-			puts ("missing or unknown FLASH type\n");
++			puts("missing or unknown FLASH type\n");
+ 			return 1;
+ 		}
+-		for (i=0; i<info->sector_count; ++i) {
++		for (i = 0; i < info->sector_count; ++i) {
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+ 			if (flash_real_protect(info, i, p))
+ 				rcode =  1;
+-			putc ('.');
++			putc('.');
+ #else
+ 			info->protect[i] = p;
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 		}
+ 
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+-		if (!rcode) puts (" done\n");
++		if (!rcode)
++			puts(" done\n");
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 
+ 		return rcode;
+ 	}
+ 
+-	if (addr_spec(argv[2], argv[3], &addr_first, &addr_last) < 0){
++	if (addr_spec(argv[2], argv[3], &addr_first, &addr_last) < 0) {
+ 		printf("Bad address format\n");
+ 		return 1;
+ 	}
+@@ -601,26 +601,26 @@ int flash_sect_protect(int p, ulong addr_first, ulong addr_last)
+ 	int planned;
+ 	int rcode;
+ 
+-	rcode = flash_fill_sect_ranges( addr_first, addr_last, s_first, s_last, &planned );
++	rcode = flash_fill_sect_ranges(addr_first, addr_last, s_first, s_last, &planned);
+ 
+ 	protected = 0;
+ 
+-	if (planned && (rcode == 0)) {
+-		for (bank=0,info = &flash_info[0]; bank < CONFIG_SYS_MAX_FLASH_BANKS; ++bank, ++info) {
+-			if (info->flash_id == FLASH_UNKNOWN) {
++	if (planned && rcode == 0) {
++		for (bank = 0, info = &flash_info[0];
++		     bank < CONFIG_SYS_MAX_FLASH_BANKS; ++bank, ++info) {
++			if (info->flash_id == FLASH_UNKNOWN)
+ 				continue;
+-			}
+ 
+-			if (s_first[bank]>=0 && s_first[bank]<=s_last[bank]) {
++			if (s_first[bank] >= 0 && s_first[bank] <= s_last[bank]) {
+ 				debug("%sProtecting sectors %d..%d in bank %ld\n",
+ 				      p ? "" : "Un-", s_first[bank],
+ 				      s_last[bank], bank + 1);
+ 				protected += s_last[bank] - s_first[bank] + 1;
+-				for (i=s_first[bank]; i<=s_last[bank]; ++i) {
++				for (i = s_first[bank]; i <= s_last[bank]; ++i) {
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+ 					if (flash_real_protect(info, i, p))
+ 						rcode = 1;
+-					putc ('.');
++					putc('.');
+ #else
+ 					info->protect[i] = p;
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+@@ -628,21 +628,19 @@ int flash_sect_protect(int p, ulong addr_first, ulong addr_last)
+ 			}
+ 		}
+ #if defined(CONFIG_SYS_FLASH_PROTECTION)
+-		puts (" done\n");
++		puts(" done\n");
+ #endif	/* CONFIG_SYS_FLASH_PROTECTION */
+ 
+-		printf ("%sProtected %d sectors\n",
+-			p ? "" : "Un-", protected);
++		printf("%sProtected %d sectors\n",
++		       p ? "" : "Un-", protected);
+ 	} else if (rcode == 0) {
+-		puts ("Error: start and/or end address"
+-			" not on sector boundary\n");
++		puts("Error: start and/or end address not on sector boundary\n");
+ 		rcode = 1;
+ 	}
+ 	return rcode;
+ }
+ #endif /* CONFIG_MTD_NOR_FLASH */
+ 
+-
+ /**************************************************/
+ #if defined(CONFIG_CMD_MTDPARTS)
+ # define TMP_ERASE	"erase <part-id>\n    - erase partition\n"
+@@ -667,8 +665,7 @@ U_BOOT_CMD(
+ 	"start end\n"
+ 	"    - erase FLASH from addr 'start' to addr 'end'\n"
+ 	"erase start +len\n"
+-	"    - erase FLASH from addr 'start' to the end of sect "
+-	"w/addr 'start'+'len'-1\n"
++	"    - erase FLASH from addr 'start' to the end of sect w/addr 'start'+'len'-1\n"
+ 	"erase N:SF[-SL]\n    - erase sectors SF-SL in FLASH bank # N\n"
+ 	"erase bank N\n    - erase FLASH bank # N\n"
+ 	TMP_ERASE
+@@ -681,8 +678,7 @@ U_BOOT_CMD(
+ 	"on  start end\n"
+ 	"    - protect FLASH from addr 'start' to addr 'end'\n"
+ 	"protect on start +len\n"
+-	"    - protect FLASH from addr 'start' to end of sect "
+-	"w/addr 'start'+'len'-1\n"
++	"    - protect FLASH from addr 'start' to end of sect w/addr 'start'+'len'-1\n"
+ 	"protect on  N:SF[-SL]\n"
+ 	"    - protect sectors SF-SL in FLASH bank # N\n"
+ 	"protect on  bank N\n    - protect FLASH bank # N\n"
+@@ -691,8 +687,7 @@ U_BOOT_CMD(
+ 	"protect off start end\n"
+ 	"    - make FLASH from addr 'start' to addr 'end' writable\n"
+ 	"protect off start +len\n"
+-	"    - make FLASH from addr 'start' to end of sect "
+-	"w/addr 'start'+'len'-1 wrtable\n"
++	"    - make FLASH from addr 'start' to end of sect w/addr 'start'+'len'-1 wrtable\n"
+ 	"protect off N:SF[-SL]\n"
+ 	"    - make sectors SF-SL writable in FLASH bank # N\n"
+ 	"protect off bank N\n    - make FLASH bank # N writable\n"
 -- 
 2.25.1
 

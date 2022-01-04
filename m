@@ -2,59 +2,105 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF601483D1C
-	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jan 2022 08:42:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE172484253
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Jan 2022 14:24:50 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 70E66C5F1F5;
-	Tue,  4 Jan 2022 07:42:57 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8010DC5F1FA;
+	Tue,  4 Jan 2022 13:24:50 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E5104C5F1F1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 608CEC5F1F6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  4 Jan 2022 07:42:55 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 2041FEKc016868;
- Tue, 4 Jan 2022 08:42:54 +0100
+ Tue,  4 Jan 2022 13:24:49 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 204B2g1w030926;
+ Tue, 4 Jan 2022 14:24:12 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-type; s=selector1;
- bh=VFpD7QLGxZPueyTZJ2CWgrEam3uZ5xvmErzQFijIz48=;
- b=oG5ivyK0xOtYV+ZmB2BZ5DniUoPj9Y0vcZqE4ExZRM122z5NsXtcK4M9lL6zshQ3CXQw
- 7GiKVi5SmvvjxXcv87h+obPYMIeL737hVyzNeA498mddWnqojPP20P8fxtjaVWgbu8GA
- U8YyIBvlDLhPnKbgibdE+bcwL4cvTsEZAcOEIsFMn27D0+QDczelh+kycOU4pV56Urng
- wda87DmS98CLeld1eCe+1XRZPeSOypQMt7+/hqQ4rDTeGXShByE4wOMNOlJ4sIE9G0ql
- Wyh9UNTuzjEeGHOpfEZwMWShGB2Jw7sXRPnMciY/8YwkRFQYQY/rCkJHzoOLaiuV4vM/ +A== 
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=Frq5gDoyqiVYQIragDWH3HwGfwiO7C6nSgm/S+do0ho=;
+ b=OAJNzVtVgkUzB33ddfI4yVUDV79i/mUFph565W1Y7PJ3wPFP9Xrv65i497h99P9Az0TZ
+ Y4jufvw3RpSHA7wGLZsy0sHp2TWWiwFE2J79iV00i6PPIqWIEcbDAR5qL+kcqy2BR6jV
+ wBS0Y8anITzOVTaXy+bK1Rq6ApipF40JB21wkbYjzHCwo/31aMkVoCq13o24M/mDZKjB
+ 3VJVxN3UtLujBNDT6snNXGYIQG2sTV+whWcNgVbf710GfsIo2oRwIfrefVYkVQYZ2ooR
+ R95N868l4uiiFXEeosGCrawzjhJnNTXqIEdm94HPPMhm4o2jZNNf+J2znkaLrqfV5YWh jQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dccdns5gq-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dcewm264x-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 04 Jan 2022 08:42:54 +0100
+ Tue, 04 Jan 2022 14:24:12 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5F0C8100034;
- Tue,  4 Jan 2022 08:42:54 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1E7E710002A;
+ Tue,  4 Jan 2022 14:24:07 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 571DD222C9F;
- Tue,  4 Jan 2022 08:42:54 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 4 Jan 2022 08:42:53
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0416626029E;
+ Tue,  4 Jan 2022 14:24:07 +0100 (CET)
+Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 4 Jan 2022 14:24:06
  +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 4 Jan 2022 08:42:48 +0100
-Message-ID: <20220104074248.25015-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.17.1
+Date: Tue, 4 Jan 2022 14:23:56 +0100
+Message-ID: <20220104132401.3573475-1-patrick.delaunay@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-04_03,2022-01-01_01,2021-12-02_01
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH v2] dm: Fix OF_BAD_ADDR definition
+ definitions=2022-01-04_05,2022-01-04_01,2021-12-02_01
+Cc: David Feng <fenghua@phytium.com.cn>,
+ =?UTF-8?q?=C3=81lvaro=20Fern=C3=A1ndez=20Rojas?= <noltari@gmail.com>,
+ Vignesh R <vigneshr@ti.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>, Peng Fan <peng.fan@nxp.com>,
+ Chin-Liang See <clsee@altera.com>, Sean Anderson <seanga2@gmail.com>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ Rainer Boschung <rainer.boschung@hitachienergy.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Ruchika Gupta <ruchika.gupta@nxp.com>, Wolfgang Wegner <w.wegner@astro-kom.de>,
+ Kamil Lulko <kamil.lulko@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Dalon Westergreen <dalon.westergreen@intel.com>, Aleksandar
+ Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>, Marek Vasut <marex@denx.de>,
+ Stefan Roese <sr@denx.de>, Masami Hiramatsu <masami.hiramatsu@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Stelian Pop <stelian@popies.net>, Niel Fourie <lusus@denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Kristian Amlie <kristian.amlie@northern.tech>,
+ egnite GmbH <info@egnite.de>, Jagan
+ Teki <jagan@amarulasolutions.com>, Shengzhou Liu <Shengzhou.Liu@nxp.com>,
+ Dirk Eibach <dirk.eibach@gdsys.cc>, Heiko Schocher <hs@denx.de>,
+ Qiang Zhao <qiang.zhao@nxp.com>, Ilko Iliev <iliev@ronetix.at>,
+ Thomas Chou <thomas@wytron.com.tw>, Tetsuyuki Kobayashi <koba@kmckk.co.jp>,
+ Sinan Akman <sinan@writeme.com>, Vikas Manocha <vikas.manocha@st.com>,
+ Wolfgang Denk <wd@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Rajesh Bhagat <rajesh.bhagat@nxp.com>, Alison Wang <alison.wang@nxp.com>,
+ Ashish Kumar <Ashish.Kumar@nxp.com>, Rick Chen <rick@andestech.com>,
+ Jassi Brar <jaswinder.singh@linaro.org>, Usama Arif <usama.arif@arm.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Chee Hong Ang <chee.hong.ang@intel.com>, Jens Scharsig <esw@bus-elektronik.de>,
+ Vladimir Zapolskiy <vz@mleia.com>, Adam Ford <aford173@gmail.com>,
+ Mingkai Hu <Mingkai.Hu@nxp.com>, Simon Guinot <simon.guinot@sequanux.org>,
+ Christophe
+ Leroy <christophe.leroy@c-s.fr>, Michal Simek <monstr@monstr.eu>,
+ Masakazu Mochizuki <masakazu.mochizuki.wd@hitachi.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <marek.behun@nic.cz>, Igor
+ Opaniuk <igor.opaniuk@foundries.io>,
+ Siew Chin Lim <elly.siew.chin.lim@intel.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, "Andrew F. Davis" <afd@ti.com>,
+ Aaron Williams <awilliams@marvell.com>, Dinh
+ Nguyen <dinguyen@kernel.org>, Michael Walle <michael@walle.cc>, Paul
+ Burton <paul.burton@mips.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Eugen
+ Hristev <eugen.hristev@microchip.com>, TsiChung
+ Liew <Tsi-Chung.Liew@nxp.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Andes <uboot@andestech.com>
+Subject: [Uboot-stm32] [PATCH v1 0/5] configs: Migrate
+	CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,102 +117,226 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-When OF_LIVE flag is enabled on a 64 bits platform, there is an
-issue when dev_read_addr() is called and need to perform an address
-translation using __of_translate_address().
 
-In case of error, __of_translate_address() return's value is OF_BAD_ADDR
-(wich is defined in include/dm/of.h to ((u64)-1) = 0xffffffffffffffff).
-The return value of dev_read_addr() is often compared to FDT_ADDR_T_NONE
-which is defined as (-1U) = 0xffffffff.
-In this case the comparison is always false.
+Proposal after Marek comment in [1], move CONFIG_SYS_MAX_FLASH_BANKS
+and CONFIG_SYS_MAX_FLASH_BANKS_DETECT in Kconfig.
 
-To fix this issue, define FDT_ADDR_T_NONE to (ulong)(-1) in case of
-AARCH64. Update accordingly related tests.
+Series based on the previous RFC [2], rebased on top of the next
+branch and added reviewed-by.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+I wasn't not sure of the solution when I introduced the
+CFI_FLASH_BANKS to simplify the support of all the options in
+include/mtd/cfi_flash.h
 
----
+No compilation issue after rebase but not tested =
+https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/10431
 
-Changes in v2:
- - define FDT_ADDR_T_NONE as ((ulong)(-1)) and keep OF_BAD_ADDR unchanged
+[1] [v3,1/2] mtd: cfi_flash: use cfi_flash_num_flash_banks only when supported
+http: //patchwork.ozlabs.org/project/uboot/patch/20210916155040.v3.1.I81b4f1edfe925b001299e3b7ba0cf602d9268d59@changeid/#2754501
 
- include/fdtdec.h   | 5 ++++-
- test/dm/ofnode.c   | 2 +-
- test/dm/pci.c      | 4 ++--
- test/dm/test-fdt.c | 2 +-
- 4 files changed, 8 insertions(+), 5 deletions(-)
+[2] [RFC] configs: Migrate CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
+http: //patchwork.ozlabs.org/project/uboot/list/?series=276760&state=*
 
-diff --git a/include/fdtdec.h b/include/fdtdec.h
-index 6c7ab887b2..e9e2916d6e 100644
---- a/include/fdtdec.h
-+++ b/include/fdtdec.h
-@@ -24,16 +24,19 @@
- typedef phys_addr_t fdt_addr_t;
- typedef phys_size_t fdt_size_t;
- 
--#define FDT_ADDR_T_NONE (-1U)
- #define FDT_SIZE_T_NONE (-1U)
- 
- #ifdef CONFIG_PHYS_64BIT
-+#define FDT_ADDR_T_NONE ((ulong)(-1))
-+
- #define fdt_addr_to_cpu(reg) be64_to_cpu(reg)
- #define fdt_size_to_cpu(reg) be64_to_cpu(reg)
- #define cpu_to_fdt_addr(reg) cpu_to_be64(reg)
- #define cpu_to_fdt_size(reg) cpu_to_be64(reg)
- typedef fdt64_t fdt_val_t;
- #else
-+#define FDT_ADDR_T_NONE (-1U)
-+
- #define fdt_addr_to_cpu(reg) be32_to_cpu(reg)
- #define fdt_size_to_cpu(reg) be32_to_cpu(reg)
- #define cpu_to_fdt_addr(reg) cpu_to_be32(reg)
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index cea0746bb3..e6c925eba6 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -286,7 +286,7 @@ static int dm_test_ofnode_get_reg(struct unit_test_state *uts)
- 	ut_assert(ofnode_valid(node));
- 	addr = ofnode_get_addr(node);
- 	size = ofnode_get_size(node);
--	ut_asserteq(FDT_ADDR_T_NONE, addr);
-+	ut_asserteq_64(FDT_ADDR_T_NONE, addr);
- 	ut_asserteq(FDT_SIZE_T_NONE, size);
- 
- 	node = ofnode_path("/translation-test@8000/noxlatebus@3,300/dev@42");
-diff --git a/test/dm/pci.c b/test/dm/pci.c
-index fa2e4a8559..00e4440a9d 100644
---- a/test/dm/pci.c
-+++ b/test/dm/pci.c
-@@ -331,10 +331,10 @@ static int dm_test_pci_addr_live(struct unit_test_state *uts)
- 	struct udevice *swap1f, *swap1;
- 
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
--	ut_asserteq(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
-+	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
- 
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
--	ut_asserteq(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
-+	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
- 
- 	return 0;
- }
-diff --git a/test/dm/test-fdt.c b/test/dm/test-fdt.c
-index 8866d4d959..e1de066226 100644
---- a/test/dm/test-fdt.c
-+++ b/test/dm/test-fdt.c
-@@ -768,7 +768,7 @@ static int dm_test_fdt_livetree_writing(struct unit_test_state *uts)
- 	/* Test setting generic properties */
- 
- 	/* Non-existent in DTB */
--	ut_asserteq(FDT_ADDR_T_NONE, dev_read_addr(dev));
-+	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr(dev));
- 	/* reg = 0x42, size = 0x100 */
- 	ut_assertok(ofnode_write_prop(node, "reg", 8,
- 				      "\x00\x00\x00\x42\x00\x00\x01\x00"));
+Changes in v1:
+- update drivers/mtd/spi/spi-nor-core.c for cfi_mtd_nb
+  needed after RFC rebase
+- solve issue in cfi_flash.h, with
+  CFI_FLASH_BANKS=CONFIG_SYS_MAX_FLASH_BANKS_DETECT
+
+Patrick Delaunay (5):
+  cmd: Fix up warnings in flash.c
+  mtd: cfi: introduce CFI_FLASH_BANKS
+  mtd: cfi: change CONFIG_SYS_MAX_FLASH_BANKS_DETECT as boolean
+  configs: Migrate CONFIG_SYS_MAX_FLASH_BANKS to Kconfig
+  Convert CONFIG_AT91_EFLASH to Kconfig
+
+ README                                       |   3 -
+ arch/arm/mach-at91/Kconfig                   |   8 +
+ cmd/bootm.c                                  |   2 +-
+ cmd/flash.c                                  | 247 +++++++++----------
+ common/flash.c                               |   2 +-
+ common/update.c                              |   4 +-
+ configs/3c120_defconfig                      |   1 +
+ configs/M5253DEMO_defconfig                  |   1 +
+ configs/MPC8548CDS_36BIT_defconfig           |   1 +
+ configs/MPC8548CDS_defconfig                 |   1 +
+ configs/MPC8548CDS_legacy_defconfig          |   1 +
+ configs/P3041DS_NAND_defconfig               |   1 +
+ configs/P3041DS_SDCARD_defconfig             |   1 +
+ configs/P3041DS_SPIFLASH_defconfig           |   1 +
+ configs/P3041DS_defconfig                    |   1 +
+ configs/P4080DS_SDCARD_defconfig             |   1 +
+ configs/P4080DS_SPIFLASH_defconfig           |   1 +
+ configs/P4080DS_defconfig                    |   1 +
+ configs/P5040DS_NAND_defconfig               |   1 +
+ configs/P5040DS_SDCARD_defconfig             |   1 +
+ configs/P5040DS_SPIFLASH_defconfig           |   1 +
+ configs/P5040DS_defconfig                    |   1 +
+ configs/T1042D4RDB_NAND_defconfig            |   1 +
+ configs/T1042D4RDB_SDCARD_defconfig          |   1 +
+ configs/T1042D4RDB_SPIFLASH_defconfig        |   1 +
+ configs/T1042D4RDB_defconfig                 |   1 +
+ configs/T2080QDS_NAND_defconfig              |   1 +
+ configs/T2080QDS_SDCARD_defconfig            |   1 +
+ configs/T2080QDS_SECURE_BOOT_defconfig       |   1 +
+ configs/T2080QDS_SPIFLASH_defconfig          |   1 +
+ configs/T2080QDS_defconfig                   |   1 +
+ configs/T4240RDB_SDCARD_defconfig            |   1 +
+ configs/T4240RDB_defconfig                   |   1 +
+ configs/boston32r2_defconfig                 |   1 +
+ configs/boston32r2el_defconfig               |   1 +
+ configs/boston32r6_defconfig                 |   1 +
+ configs/boston32r6el_defconfig               |   1 +
+ configs/boston64r2_defconfig                 |   1 +
+ configs/boston64r2el_defconfig               |   1 +
+ configs/boston64r6_defconfig                 |   1 +
+ configs/boston64r6el_defconfig               |   1 +
+ configs/cobra5272_defconfig                  |   1 +
+ configs/comtrend_ct5361_ram_defconfig        |   1 +
+ configs/comtrend_wap5813n_ram_defconfig      |   1 +
+ configs/ethernut5_defconfig                  |   1 +
+ configs/huawei_hg556a_ram_defconfig          |   1 +
+ configs/j7200_evm_a72_defconfig              |   1 +
+ configs/j7200_evm_r5_defconfig               |   1 +
+ configs/j721e_evm_a72_defconfig              |   1 +
+ configs/j721e_hs_evm_a72_defconfig           |   1 +
+ configs/ls1021aqds_ddr4_nor_defconfig        |   1 +
+ configs/ls1021aqds_ddr4_nor_lpuart_defconfig |   1 +
+ configs/ls1021aqds_nand_defconfig            |   1 +
+ configs/ls1021aqds_nor_SECURE_BOOT_defconfig |   1 +
+ configs/ls1021aqds_nor_defconfig             |   1 +
+ configs/ls1021aqds_nor_lpuart_defconfig      |   1 +
+ configs/ls1021aqds_sdcard_ifc_defconfig      |   1 +
+ configs/ls1046aqds_SECURE_BOOT_defconfig     |   1 +
+ configs/ls1046aqds_defconfig                 |   1 +
+ configs/ls1046aqds_lpuart_defconfig          |   1 +
+ configs/ls1046aqds_nand_defconfig            |   1 +
+ configs/ls1046aqds_sdcard_ifc_defconfig      |   1 +
+ configs/ls1046aqds_tfa_SECURE_BOOT_defconfig |   1 +
+ configs/ls1046aqds_tfa_defconfig             |   1 +
+ configs/ls1088aqds_defconfig                 |   1 +
+ configs/ls1088aqds_sdcard_ifc_defconfig      |   1 +
+ configs/ls1088aqds_tfa_defconfig             |   1 +
+ configs/ls2080aqds_SECURE_BOOT_defconfig     |   1 +
+ configs/ls2080aqds_defconfig                 |   1 +
+ configs/ls2088aqds_tfa_defconfig             |   1 +
+ configs/qemu_arm64_defconfig                 |   2 +
+ configs/qemu_arm_defconfig                   |   2 +
+ configs/r8a77990_ebisu_defconfig             |   1 +
+ configs/r8a77995_draak_defconfig             |   1 +
+ configs/rcar3_salvator-x_defconfig           |   1 +
+ configs/rcar3_ulcb_defconfig                 |   1 +
+ configs/sfr_nb4-ser_ram_defconfig            |   1 +
+ configs/socrates_defconfig                   |   1 +
+ drivers/mtd/Kconfig                          |  27 ++
+ drivers/mtd/cfi_flash.c                      |   6 +-
+ drivers/mtd/cfi_mtd.c                        |   4 +-
+ drivers/mtd/spi/spi-nor-core.c               |   5 +-
+ include/configs/10m50_devboard.h             |   1 -
+ include/configs/3c120_devboard.h             |   1 -
+ include/configs/M5208EVBE.h                  |   1 -
+ include/configs/M5235EVB.h                   |   1 -
+ include/configs/M5249EVB.h                   |   1 -
+ include/configs/M5253DEMO.h                  |   1 -
+ include/configs/M5272C3.h                    |   1 -
+ include/configs/M5275EVB.h                   |   1 -
+ include/configs/M5282EVB.h                   |   1 -
+ include/configs/M53017EVB.h                  |   1 -
+ include/configs/M5329EVB.h                   |   1 -
+ include/configs/M5373EVB.h                   |   1 -
+ include/configs/MCR3000.h                    |   1 -
+ include/configs/MPC837XERDB.h                |   1 -
+ include/configs/MPC8540ADS.h                 |   1 -
+ include/configs/MPC8548CDS.h                 |   1 -
+ include/configs/MPC8560ADS.h                 |   1 -
+ include/configs/P1010RDB.h                   |   1 -
+ include/configs/P2041RDB.h                   |   1 -
+ include/configs/T102xRDB.h                   |   1 -
+ include/configs/T104xRDB.h                   |   1 -
+ include/configs/T208xQDS.h                   |   1 -
+ include/configs/T208xRDB.h                   |   1 -
+ include/configs/T4240RDB.h                   |   1 -
+ include/configs/adp-ae3xx.h                  |   6 -
+ include/configs/adp-ag101p.h                 |   3 -
+ include/configs/am335x_evm.h                 |   1 -
+ include/configs/am3517_evm.h                 |   1 -
+ include/configs/amcore.h                     |   1 -
+ include/configs/armadillo-800eva.h           |   1 -
+ include/configs/astro_mcf5373l.h             |   1 -
+ include/configs/at91sam9263ek.h              |   1 -
+ include/configs/ax25-ae350.h                 |   6 -
+ include/configs/bcm7445.h                    |   2 -
+ include/configs/blanche.h                    |   1 -
+ include/configs/bmips_bcm6338.h              |   1 -
+ include/configs/bmips_bcm6348.h              |   1 -
+ include/configs/bmips_bcm6358.h              |   1 -
+ include/configs/bmips_bcm6368.h              |   1 -
+ include/configs/boston.h                     |   2 +-
+ include/configs/cobra5272.h                  |   1 -
+ include/configs/colibri_pxa270.h             |   1 -
+ include/configs/corenet_ds.h                 |   1 -
+ include/configs/da850evm.h                   |   1 -
+ include/configs/devkit3250.h                 |   1 -
+ include/configs/dra7xx_evm.h                 |   1 -
+ include/configs/draak.h                      |   1 -
+ include/configs/eb_cpu5282.h                 |   1 -
+ include/configs/ebisu.h                      |   1 -
+ include/configs/edminiv2.h                   |   1 -
+ include/configs/ethernut5.h                  |   2 -
+ include/configs/gazerbeam.h                  |   1 -
+ include/configs/ids8313.h                    |   1 -
+ include/configs/imx27lite-common.h           |   1 -
+ include/configs/integrator-common.h          |   1 -
+ include/configs/j721e_evm.h                  |   1 -
+ include/configs/km/km-mpc83xx.h              |   1 -
+ include/configs/km/pg-wcom-ls102xa.h         |   1 -
+ include/configs/kmcent2.h                    |   1 -
+ include/configs/kzm9g.h                      |   1 -
+ include/configs/ls1021aqds.h                 |   1 -
+ include/configs/ls1021atwr.h                 |   1 -
+ include/configs/ls1043aqds.h                 |   1 -
+ include/configs/ls1043ardb.h                 |   1 -
+ include/configs/ls1046aqds.h                 |   1 -
+ include/configs/ls1088aqds.h                 |   1 -
+ include/configs/ls1088ardb.h                 |   1 -
+ include/configs/ls2080aqds.h                 |   1 -
+ include/configs/ls2080ardb.h                 |   1 -
+ include/configs/lsxl.h                       |   1 -
+ include/configs/malta.h                      |   1 -
+ include/configs/mccmon6.h                    |   1 -
+ include/configs/microblaze-generic.h         |   1 -
+ include/configs/mx6sabreauto.h               |   1 -
+ include/configs/octeon_ebb7304.h             |   1 -
+ include/configs/omap3_logic.h                |   1 -
+ include/configs/p1_p2_rdb_pc.h               |   2 -
+ include/configs/pm9261.h                     |   1 -
+ include/configs/pm9263.h                     |   1 -
+ include/configs/qemu-arm.h                   |   1 -
+ include/configs/qemu-riscv.h                 |   2 -
+ include/configs/r2dplus.h                    |   1 -
+ include/configs/salvator-x.h                 |   1 -
+ include/configs/sama5d3xek.h                 |   1 -
+ include/configs/socfpga_arria10_socdk.h      |   1 -
+ include/configs/socfpga_soc64_common.h       |   1 -
+ include/configs/socrates.h                   |   1 -
+ include/configs/stih410-b2260.h              |   2 -
+ include/configs/stm32f429-discovery.h        |   1 -
+ include/configs/stm32f429-evaluation.h       |   1 -
+ include/configs/stm32f469-discovery.h        |   1 -
+ include/configs/stm32f746-disco.h            |   1 -
+ include/configs/synquacer.h                  |   1 -
+ include/configs/total_compute.h              |   1 -
+ include/configs/ulcb.h                       |   1 -
+ include/configs/vexpress_aemv8a.h            |   1 -
+ include/configs/vexpress_common.h            |   1 -
+ include/configs/xtfpga.h                     |   1 -
+ include/configs/zynq-common.h                |   1 -
+ include/mtd/cfi_flash.h                      |  17 +-
+ scripts/config_whitelist.txt                 |   3 -
+ 183 files changed, 252 insertions(+), 267 deletions(-)
+
 -- 
-2.17.1
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

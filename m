@@ -2,54 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F253F48C1B4
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Jan 2022 10:54:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 321E248C1B9
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Jan 2022 10:55:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B34F8C60461;
-	Wed, 12 Jan 2022 09:54:02 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E5E86C60461;
+	Wed, 12 Jan 2022 09:55:52 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 44B6AC60460
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0AB0AC60460
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Jan 2022 09:54:01 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20C7I3BF005683;
- Wed, 12 Jan 2022 10:53:59 +0100
+ Wed, 12 Jan 2022 09:55:51 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20C6UO2b018222;
+ Wed, 12 Jan 2022 10:55:50 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
  bh=r80AdfBx+IvdR4Td01P+RZPzpA+0ru4Gm7qes3QuXqA=;
- b=anqOdAcJPCHREsnP3alSr3tGZcUuncfDcDsQVpbbSMVtsGEa/GdqQMHk/GCQCB8MyeVI
- 2l7/6zmw8lTt9wzZbHR0oLvB3UNl/W5FYjBwbVtBax1XT7MUgR2HVqnQ2qupOEJxvaZS
- /YmqdqzBTdzFTf7PMta6nTSGZK3pYaXtxaTdiprrmzyJANhgWwTmF0yeeHzBnlGEJY8e
- oyHEAQEaCTNsHHstYSbDFyTqKwDNzyTG/59GyBC9pQ2f9uGY7VNZM29DWhUSzeqrbMrj
- hlw0fzWupl8g5/jTp//P8JNKfAZUYwS6pin6dKAAfe+siqRizXSm1lNgQ1GhW/xXuIlJ 8g== 
+ b=teb+8mKLa964rPhTyFYRn3e9N8a0NqbO4URs/jtklRqJ+uU0yfK2tu0OTKIPd8k6heZf
+ s13rOu1Vs2R5CMvxSWVtsSn5SeIqgfaD6spkj2OsxGQZsBO3C18ren6m08D4h4wCEvKV
+ cvolrQH0CtNywjk/Ae0Xbpt8GCuc/j9Ug3WdZHmxXqYxLgu9SVSxugaRN19Wih99gr8/
+ hK7F0GnB4C4iU2kEmntI5jAKiYg0gdoVo06uyBbnEFeVisUjKCrOZH7i5KtYQYTHqOPJ
+ zS2GdIj/uj0/aGBC/T4qoy9uETDjB++abvhENU8swJ3s2Ni4abAR550ko/79/Fc9BYnz 0w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dhtft1242-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dhssdsbdu-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 12 Jan 2022 10:53:59 +0100
+ Wed, 12 Jan 2022 10:55:50 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 14B4810002A;
- Wed, 12 Jan 2022 10:53:58 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 58A2F10002A;
+ Wed, 12 Jan 2022 10:55:50 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 08B922194F4;
- Wed, 12 Jan 2022 10:53:58 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Wed, 12 Jan 2022 10:53:57
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4D8B621A209;
+ Wed, 12 Jan 2022 10:55:50 +0100 (CET)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Wed, 12 Jan 2022 10:55:49
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 12 Jan 2022 10:53:49 +0100
-Message-ID: <20220112105327.8.Ie3a53cf98ca389d4d05b0d353047f19ddc1c2530@changeid>
+Date: Wed, 12 Jan 2022 10:55:40 +0100
+Message-ID: <20220112105532.8.Ie3a53cf98ca389d4d05b0d353047f19ddc1c2530@changeid>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220112105327.1.I74f7b02a4d65313e46a505e7c371c3691701a0f9@changeid>
-References: <20220112105327.1.I74f7b02a4d65313e46a505e7c371c3691701a0f9@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513

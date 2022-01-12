@@ -2,127 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B61C48C1C3
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Jan 2022 10:57:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA31B48C1B0
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Jan 2022 10:53:57 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 23D0FC60461;
-	Wed, 12 Jan 2022 09:57:22 +0000 (UTC)
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01on2132.outbound.protection.outlook.com [40.107.24.132])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 73251C60461;
+	Wed, 12 Jan 2022 09:53:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D7041C5C82A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 45C57C5F1F7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Jan 2022 09:29:58 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gt9+WjGF4nthOi9IaDHOp/9dPcdKm/KwEr8KpH4+QoYRCznM4MQ+qqfH3SwEzg4yhsPHXe9gydf+3efXKpI2sBwE3IQpTJU373MnDTGU+ZsVp6UsEZv0HAu15zgF9/k32FxVfW5GDBpg99Tgv5JMc+7m2JaqKg+fbi7CyLye96Jg6/gDP1ZsNsttgc6NW2zkDK8uZg56Sl2hA9VE3qplZe9oyriodgsA9x9Ijy/hZr9QSFwB77rHm2K0L436VAGeN8dd8hAeZNYHSEOV8F3QzjcdkG/vhCQsKH/AmomCloBino310f8KgYw6nNJzxWawUJreM7QxJLVQnGqeWqTFug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nvtv9shYZrskKYIk4miu3TFZaEX6kHV5XipbPF+ddzM=;
- b=BQ4P9DxTInCtwBbEdU1bxKrYfdT76j4TN0uEmwx/mxFWuwZy51Y81GOhrRlkpFPUJF2WEQWNby8/r+gL86h6XMZhHf6McZL0J1sv1X0hEXcfJSNqzxTaetSzYqfcrWLWy5GGUiPkgUPSaGXTtHuzG0yyBCfihR3LMX3g42oMHjwvzPUoLgtMkVRmcvBLhcicpuqGx9FlbPJjODK4SJdzpkfb+ZPMz7tDjsXL9ek0xhcR3Nqk9pfaBkpyuHgKE2/ukHQm8cMLLpaq61FWtaKkvXNXXOpNBwk6SjueE5QxZz+TYu+P6hGG5860VJ4qm+z2s6jDX4wM2jsbvjxMrp2udg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=toradex.com; dmarc=pass action=none header.from=toradex.com;
- dkim=pass header.d=toradex.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nvtv9shYZrskKYIk4miu3TFZaEX6kHV5XipbPF+ddzM=;
- b=XqZK5pJeMKbvX7A7wwMxJbiNVJX2+gmCifigcQktUR7uNlGkIeTPg9SSnqa0/YMhALeAUfSf1/9zYDQrrXINa6rX9Xd+rNPFqYovHnSEhM3B1PPNtCC+B9D/novB/OjFuFnnUHKi0XyI3408G3+Nwrmw99Q8D2WLAnSJ6Kjw/7U=
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB0554.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:39::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4867.9; Wed, 12 Jan 2022 09:29:57 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::7067:aadd:1aa2:85ee]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::7067:aadd:1aa2:85ee%8]) with mapi id 15.20.4888.010; Wed, 12 Jan 2022
- 09:29:57 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "patrick.delaunay@foss.st.com" <patrick.delaunay@foss.st.com>
-Thread-Topic: [PATCH 0/3] sandox: test: activate tests for the command LOG
-Thread-Index: AQHYB5b2uqSNlMLVl0+eoHYlHaww/w==
-Date: Wed, 12 Jan 2022 09:29:57 +0000
-Message-ID: <852bbfb816e1c6cde3364563e479766c46c0b9ce.camel@toradex.com>
-References: <20220111162713.632395-1-patrick.delaunay@foss.st.com>
-In-Reply-To: <20220111162713.632395-1-patrick.delaunay@foss.st.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=toradex.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: c80295b4-f620-4daa-448a-08d9d5ae193f
-x-ms-traffictypediagnostic: ZR0P278MB0554:EE_
-x-microsoft-antispam-prvs: <ZR0P278MB05548BE562944AE8F073FD5FFB529@ZR0P278MB0554.CHEP278.PROD.OUTLOOK.COM>
-x-ms-oob-tlc-oobclassifiers: OLM:6790;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: SjCF+VX5L8sFMaTGZxY4fC4t0WUvWnaw32G4RodVpL+BgDoRGyRUo6cxhN9ZtDOCOksu/jda+TmmOrRDwOfjET8V3zmwcPjDYTGYx74jVC7drGZtMcLJMFA8F/lYniwNtV+DKHw2sQW6M3CANemUkB9VcSOuRIud5k6iByjOaKT3Yg1oC6TtmatecHkj1Icq/p5QoVfgUx1czHdlIn79ERu5++j7jICmCSmusvbysE+PCnsIXB2YaTb9Imy+DI9U/xMdxqMRganUQnnU1PJsKuKO5nyDnkS9hFJ9VkPuOj+4hAEPoe9zaTEYv9q+MjXh/KnWgCp5vopGOPUSzPz1UsmcFSphZVtHJeOwejp0gU1DXntlv281ueVEXqCV/WDQEni1f8jBBxVPuM5KW/cO/h1ZZEK6uTyimagfeVHKsgcj3XEPnshX1cup5Om8HWZhIssA+3FMYD5Wfzr/+9xSX32U5pcH1pCKIOe94aIglK0ykTrOzE2jz1zUvN0u8ZhbHPNnM2NLyfLXZwhQMiGFJ+2L/E+qx8enGS107lggxf2IqWUwhx45SlQD6uok350n8SKIt00u0XB9+PsuV9z/crg94o7lowheVor+3e0DYsa4WnMtrGQJOGxdtkqanS+Vm1/iYPz7efJlqAyVsnd9MCbx3egKL6V9MP44GPgHN6q0b16YVwVHZaSeCZT1rwG6V8oQ8cT3JGfMZhihxR5ECA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(4636009)(39850400004)(396003)(136003)(346002)(376002)(366004)(36756003)(4326008)(6512007)(66556008)(66946007)(71200400001)(76116006)(38070700005)(6506007)(54906003)(110136005)(316002)(66446008)(6486002)(64756008)(66476007)(5660300002)(8676002)(8936002)(86362001)(2906002)(26005)(122000001)(4744005)(508600001)(186003)(38100700002)(83380400001)(44832011)(2616005);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?OTdYem1SNzhhYjJsZlBtak5qVjdURitocTFrbzBORlJIbDRzdGlkTXBodVI4?=
- =?utf-8?B?bEt5dWpveDV1TG56YVhCakNVVnFDaEJTc3BkcXNoVThNamZqbjByVUsvaEtM?=
- =?utf-8?B?SE5iYWorTldkTnVOS3BpNTQwZzVuNkc0T0JQUWtrQXlWQ2R0dEcwZ1gxbE1K?=
- =?utf-8?B?ZThoYzVIM3pGekFtOEVZdVZCNmdQMXhJdWoyc3czSk9lRER5NUhvMnpubG1k?=
- =?utf-8?B?aUxvbVp4QldFc1BJTFUyS0F5L3VmT2gybFBTMU5TZjBZd3Bvdld3ejB5Sm1P?=
- =?utf-8?B?S2o2a0VzVzFPaVFFbVFHSFFrbU9xcWhNMVdJY2dVOVp3ZXJIQjN4d0xYdUlz?=
- =?utf-8?B?L3hPWCt1MjF4RnliQmFOS0ViRWFJcGZvOGtaU3hQdnRweDFhTFR2UEhMV0VH?=
- =?utf-8?B?YWJ5QUZhMC9FZjVwb0JqM28vdVdRMEVaeEJGZWpWK0krUGF0Z010M0pLcFVu?=
- =?utf-8?B?WEU1cnljbDAweEczS3RXSW5iRzJMQ2thajUwbldUbTdaM09IMzBpcDI5QU4w?=
- =?utf-8?B?a3RYeGtNSUFsTm1jaW5wa0Z3blVjZDBDNGFnaEhuV3lOaUxSYkdyVzd6cC9j?=
- =?utf-8?B?S1lKK3l4WXpweEt3alphdC9XQm1obzJ6MDlqZXgrZEFLOGZma0VBNWNwNXFG?=
- =?utf-8?B?LytscFI5ZlB1alM1VThndDdXSGVYaG10U2ZIdkpHZzNjRnNDOXVKbnN2cnV6?=
- =?utf-8?B?OHRqTFdSckFnbm9tUTA4N2NyYXNHRm8vVDlCVlpyNWhCNC9BZWN4VmtRSnZ6?=
- =?utf-8?B?TFlEQlVQYS9iYUJtTEthdEU3Z1Y2V3BIbGROSDI3b1U4SEhTTXFRZXZLSlFj?=
- =?utf-8?B?clhQN0lNdURuWHVoMXlVZU9NNkpjbDdsbTR4eXdMdFhkc1NjZEVoaWQyU0pR?=
- =?utf-8?B?ejZyczBQMys5em5vbVNGT09qdHVxbm1MVXlWeDFLbGtOQ01BRnpCMGFZY2ZX?=
- =?utf-8?B?MGNuVkZUclpkVTRmdzJKTkdta1pOc0d0THdOTUFUK28xeTFXdVBjcllmYnln?=
- =?utf-8?B?T0xURktjMXdFUUpaMWFYalY2L1FNMjBwVitGS054c29tNUdKZ1U2Yk0yaVlr?=
- =?utf-8?B?WVAreitDTlVqb3Fqc2dOd1ZhSXlKZGhwOXdKMUNwK0w5T0dBTENlMWlVbTRo?=
- =?utf-8?B?QTRHQis3b3dLeEJ1bEtKWXpicGFWSjgxMjVXVW9jU3ZMKzI4UjNjQlBBdmxH?=
- =?utf-8?B?SnYzTDFjN0hwOTBwdHpFZzhiU3R4c0wzeGg4eWFxZjhZbmVuSFZaSDVhWXF3?=
- =?utf-8?B?MUx1bEk2N092aHVQaG5vZzcxK3M0WndWZFN5L0JiOVBsM2RkOXI2ZXZjcExY?=
- =?utf-8?B?dEc0YmxwbFQweDdHUE9NZ2Z4TWtaaGJLOVRTYWMyM1B2ZWp4OTFXbk1qa3Vv?=
- =?utf-8?B?VDZSRURKREZDa0NUd3g1VXdWTzlOUVFvVUpGZzVnMDVXcHlvOUtYRXg5eWFW?=
- =?utf-8?B?cEFxMG1rSENVM1RWb0pMcEJrSkovS05yK2IrRGNFWCtFaVAwSjJvQWI4Y29t?=
- =?utf-8?B?OUtDTm54NzhRb002UFQxTDMveGNpblhlODhEN0F5azlQM0MvRGVjY2FWS2ox?=
- =?utf-8?B?b2VPQjNlWDBuMGp1VXZIN2txdlAzSkw2NDZHby91VzFPQWt3NnpXRTlpbHk3?=
- =?utf-8?B?RW9aOFFRczgvTDJWTlBSZGYwRzZTVDFtQlM1UGJrd0dqOVVUUmRSK1RyL3FS?=
- =?utf-8?B?MHZwM1lYd0ZYcWd4UTJWTUhrUDFPbzE2MWhncnhtQ01kUkpvVXpTeW9vdDZu?=
- =?utf-8?B?dXNVYWx5VktpYitiMGd0TUUvL0dIMGhvUlQzS2ZTcjd3MXBNTlZOSGI1OWU0?=
- =?utf-8?B?a3J1dVo2QVpNUWxqc0p3eU1UNGxJS3ZxU0dpNytkWEcxL0g1NUI1bXQwdmZX?=
- =?utf-8?B?bWhTakhxdUF3UjJ6MzhETm8rVDVkR3h1UlJQUVNOa2tyWm9ZbDJtMDFxUzBy?=
- =?utf-8?B?QnNETWZ0MlRXMVh4eW5XSUhXazIzL0R6NVBQWHRoL01wUGc2anNaZHordDhK?=
- =?utf-8?B?RVdZZ1FDdndCWkk3V2xoR0VXelFtT3JuVFVaeWl5OEEvMk10V0ZUL2xPYi94?=
- =?utf-8?B?dUhnMC85OHNKM3cvTWV6UTNabEQ0dUc0NjJVTHV6QTN5dVN4MEZOYWw2RWtM?=
- =?utf-8?B?U2s4OCsxeTF5U0xQekIzTzN2NlFVUFBFaUR0QngyWWZpV3BlVzZ0dUEvVUls?=
- =?utf-8?B?VHZiazQ3Rmo0STVBd2FmcWJWN25td00zYlFxaEh5aUxiZjFVZmxncnkzd3V2?=
- =?utf-8?Q?e3i4AAMocaRi4VKsC6pDUkRQURa/Pq2VU2ESsqH7I4=3D?=
-Content-ID: <1B9F25188370E048B8B45543371863C1@CHEP278.PROD.OUTLOOK.COM>
+ Wed, 12 Jan 2022 09:53:56 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20C6UMvf018214;
+ Wed, 12 Jan 2022 10:53:52 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=JjPSPdjKdzbOx5OmcEP+qRnnv5xjx5CbUJ1rMDZ3e6M=;
+ b=DFJ2C4n7WbaFPvm458u9HcRf9bxk/qmhk+QSjBB0WecAqmPKFx1xIzYyfFaqrKWtqrEf
+ MNmPN/6UQ4YiJ6bYhgxfdQr+F4QH8du1Li26eCICcJFjhqVBXzeqh2+8xoiW4+qac3s1
+ zQ3hnhEa2Px1YoYLokfsNJH3OsR95wRux91PWbamhoNOUv15w4MDpN994SS528v5voi9
+ RCRp3Ii1dOpacW2w6c0TDMSMewCBnsZS3dB1IhzSJkxoHGy94+7QifUg0DiTcqtUrOrv
+ S9K/ExwSUHYm3aRueqjR+g+57qunPbReMyPPw0my0nCTQduviWwothi1vdh6iUFFgGfh Kg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dhssdsb2q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 12 Jan 2022 10:53:52 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F0C7610002A;
+ Wed, 12 Jan 2022 10:53:51 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E82DB2194F4;
+ Wed, 12 Jan 2022 10:53:51 +0100 (CET)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Wed, 12 Jan 2022 10:53:51
+ +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 12 Jan 2022 10:53:42 +0100
+Message-ID: <20220112105327.1.I74f7b02a4d65313e46a505e7c371c3691701a0f9@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: c80295b4-f620-4daa-448a-08d9d5ae193f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Jan 2022 09:29:57.3769 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 5PjXos0pKIuWISkE6SsqYiY6JasFSnPy44/MnIgfKuu1fX1bPX72r/2Klkf9K9wZPcd2Bo/WJrZiZHgqwWuJMo+hBdfOKpp+yz0rRMEAgAs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0554
-X-Mailman-Approved-At: Wed, 12 Jan 2022 09:57:21 +0000
-Cc: "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 0/3] sandox: test: activate tests for the
-	command LOG
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-01-12_03,2022-01-11_01,2021-12-02_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 1/9] doc: add include/dm/uclass.h to the HTML
+	documentation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -134,25 +69,312 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gVHVlLCAyMDIyLTAxLTExIGF0IDE3OjI3ICswMTAwLCBQYXRyaWNrIERlbGF1bmF5IHdyb3Rl
-Og0KPiANCj4gVGhpcyBwYXRjaGVzIGFjdGl2YXRlIHRoZSBjb21tYW5kIExPRyBhbmQgdGhlIGFz
-c29jaWF0ZWQgdGVzdHMNCj4gaW4gc2FuZGJveCB3aXRoIENPTkZJR19DTURfTE9HPXkgYW5kIHNv
-bHZlIHRoZSBhc3NvY2lhdGVkIGlzc3Vlcw0KPiB3aGVuIHRoZXNlIHRlc3RzIGFyZSBleGVjdXRl
-ZC4NCj4gDQo+IFBhdHJpY2sNCj4gDQo+IA0KPiBQYXRyaWNrIERlbGF1bmF5ICgzKToNCj4gwqAg
-ZG06IGZpeCB1cCBkb2N1bWVudGF0aW9uIGZvciB1Y2xhc3NfZ2V0X2J5X25hbWVfbGVuDQo+IMKg
-IGRtOiBjb21wYXJlIGZ1bGwgbmFtZSBpbiB1Y2xhc3NfZ2V0X2J5X25hbWUNCj4gwqAgc2FuZG94
-OiB0ZXN0OiBhY3RpdmF0ZSB0ZXN0cyBmb3IgdGhlIGNvbW1hbmQgTE9HDQoNClByb2JhYmx5IHNo
-b3VsZCByZWFkIHNhbmRib3guIFNhbWUgZm9yIHRoaXMgY292ZXItbGV0dGVyJ3Mgc3ViamVjdCA7
-LXAuDQoNCj4gwqBjb25maWdzL3NhbmRib3hfZGVmY29uZmlnIHzCoCAyICstDQo+IMKgZHJpdmVy
-cy9jb3JlL3VjbGFzcy5jwqDCoMKgwqAgfCAxMSArKysrKysrKysrLQ0KPiDCoGluY2x1ZGUvZG0v
-dWNsYXNzLmjCoMKgwqDCoMKgwqAgfMKgIDQgKystLQ0KPiDCoHRlc3QvcHkvdGVzdHMvdGVzdF9s
-b2cucHkgfMKgIDggKysrKy0tLS0NCj4gwqA0IGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMo
-KyksIDggZGVsZXRpb25zKC0pDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFp
-bG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20v
-bWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+Correct Sphinx style comments in include/dm/uclass.h
+and add the driver model UCLASS API to the HTML documentation.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ doc/api/dm.rst      |  9 ++++++
+ doc/api/index.rst   |  1 +
+ include/dm/uclass.h | 75 ++++++++++++++++++++++-----------------------
+ 3 files changed, 47 insertions(+), 38 deletions(-)
+ create mode 100644 doc/api/dm.rst
+
+diff --git a/doc/api/dm.rst b/doc/api/dm.rst
+new file mode 100644
+index 0000000000..edce25da51
+--- /dev/null
++++ b/doc/api/dm.rst
+@@ -0,0 +1,9 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Driver Model
++============
++
++Uclass and Driver
++-----------------
++
++.. kernel-doc:: include/dm/uclass.h
+diff --git a/doc/api/index.rst b/doc/api/index.rst
+index 806c7385a6..3f36174167 100644
+--- a/doc/api/index.rst
++++ b/doc/api/index.rst
+@@ -7,6 +7,7 @@ U-Boot API documentation
+    :maxdepth: 2
+ 
+    dfu
++   dm
+    efi
+    getopt
+    linker_lists
+diff --git a/include/dm/uclass.h b/include/dm/uclass.h
+index f1fd2ba246..a12a872d94 100644
+--- a/include/dm/uclass.h
++++ b/include/dm/uclass.h
+@@ -84,7 +84,7 @@ struct udevice;
+  * its children. If non-zero this is the size of this data, to be allocated
+  * in the child device's parent_plat pointer. This value is only used as
+  * a fallback if this member is 0 in the driver.
+- * @flags: Flags for this uclass (DM_UC_...)
++ * @flags: Flags for this uclass ``(DM_UC_...)``
+  */
+ struct uclass_driver {
+ 	const char *name;
+@@ -127,17 +127,16 @@ struct uclass_driver {
+  * build time. Before this is used, an extern UCLASS_DRIVER() must have been
+  * declared.
+  *
+- * For example:
++ * For example: ::
+  *
+- * extern UCLASS_DRIVER(clk);
+- *
+- * struct uclass_driver *drvs[] = {
+- *	DM_UCLASS_DRIVER_REF(clk),
+- * };
++ *   extern UCLASS_DRIVER(clk);
++ *   struct uclass_driver *drvs[] = {
++ *       DM_UCLASS_DRIVER_REF(clk),
++ *   };
+  *
+  * @_name: Name of the uclass_driver. This must be a valid C identifier, used by
+  *	the linker_list.
+- * @returns struct uclass_driver * for the uclass driver
++ * Return: struct uclass_driver * for the uclass driver
+  */
+ #define DM_UCLASS_DRIVER_REF(_name)					\
+ 	ll_entry_ref(struct uclass_driver, _name, uclass_driver)
+@@ -145,8 +144,8 @@ struct uclass_driver {
+ /**
+  * uclass_get_priv() - Get the private data for a uclass
+  *
+- * @uc		Uclass to check
+- * @return private data, or NULL if none
++ * @uc:	Uclass to check
++ * Return: private data, or NULL if none
+  */
+ void *uclass_get_priv(const struct uclass *uc);
+ 
+@@ -159,8 +158,8 @@ void *uclass_get_priv(const struct uclass *uc);
+  *
+  * @key: ID to look up
+  * @ucp: Returns pointer to uclass (there is only one per ID)
+- * @return 0 if OK, -EDEADLK if driver model is not yet inited, other -ve on
+- *	other error
++ * Return: 0 if OK, -EDEADLK if driver model is not yet inited, other -ve on
++ * other error
+  */
+ int uclass_get(enum uclass_id key, struct uclass **ucp);
+ 
+@@ -168,16 +167,16 @@ int uclass_get(enum uclass_id key, struct uclass **ucp);
+  * uclass_get_name() - Get the name of a uclass driver
+  *
+  * @id: ID to look up
+- * @returns the name of the uclass driver for that ID, or NULL if none
++ * Return: the name of the uclass driver for that ID, or NULL if none
+  */
+ const char *uclass_get_name(enum uclass_id id);
+ 
+ /**
+- * uclass_get_by_name() - Look up a uclass by its driver name
++ * uclass_get_by_name_len() - Look up a uclass by its partial driver name
+  *
+  * @name: Name to look up
+- * @len: Length of name
+- * @returns the associated uclass ID, or UCLASS_INVALID if not found
++ * @len: Length of the partial name
++ * Return: the associated uclass ID, or UCLASS_INVALID if not found
+  */
+ enum uclass_id uclass_get_by_name_len(const char *name, int len);
+ 
+@@ -185,7 +184,7 @@ enum uclass_id uclass_get_by_name_len(const char *name, int len);
+  * uclass_get_by_name() - Look up a uclass by its driver name
+  *
+  * @name: Name to look up
+- * @returns the associated uclass ID, or UCLASS_INVALID if not found
++ * Return: the associated uclass ID, or UCLASS_INVALID if not found
+  */
+ enum uclass_id uclass_get_by_name(const char *name);
+ 
+@@ -197,7 +196,7 @@ enum uclass_id uclass_get_by_name(const char *name);
+  * @id: ID to look up
+  * @index: Device number within that uclass (0=first)
+  * @devp: Returns pointer to device (there is only one per for each ID)
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device(enum uclass_id id, int index, struct udevice **devp);
+ 
+@@ -211,7 +210,7 @@ int uclass_get_device(enum uclass_id id, int index, struct udevice **devp);
+  * @id: ID to look up
+  * @name: name of a device to get
+  * @devp: Returns pointer to device (the first one with the name)
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device_by_name(enum uclass_id id, const char *name,
+ 			      struct udevice **devp);
+@@ -228,7 +227,7 @@ int uclass_get_device_by_name(enum uclass_id id, const char *name,
+  * @id: ID to look up
+  * @seq: Sequence number to find (0=first)
+  * @devp: Returns pointer to device (there is only one for each seq)
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device_by_seq(enum uclass_id id, int seq, struct udevice **devp);
+ 
+@@ -243,7 +242,7 @@ int uclass_get_device_by_seq(enum uclass_id id, int seq, struct udevice **devp);
+  * @id: ID to look up
+  * @node: Device tree offset to search for (if -ve then -ENODEV is returned)
+  * @devp: Returns pointer to device (there is only one for each node)
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device_by_of_offset(enum uclass_id id, int node,
+ 				   struct udevice **devp);
+@@ -257,9 +256,9 @@ int uclass_get_device_by_of_offset(enum uclass_id id, int node,
+  * The device is probed to activate it ready for use.
+  *
+  * @id: ID to look up
+- * @np: Device tree node to search for (if NULL then -ENODEV is returned)
++ * @node: Device tree node to search for (if NULL then -ENODEV is returned)
+  * @devp: Returns pointer to device (there is only one for each node)
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
+ 				struct udevice **devp);
+@@ -275,8 +274,8 @@ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
+  * @phandle_id: the phandle id to look up
+  * @devp: Returns pointer to device (there is only one for each node). NULL if
+  *	there is no such device.
+- * @return 0 if OK, -ENODEV if there is no device match the phandle, other
+- *	-ve on error
++ * Return: 0 if OK, -ENODEV if there is no device match the phandle, other
++ * -ve on error
+  */
+ int uclass_get_device_by_phandle_id(enum uclass_id id, uint phandle_id,
+ 				    struct udevice **devp);
+@@ -292,8 +291,8 @@ int uclass_get_device_by_phandle_id(enum uclass_id id, uint phandle_id,
+  * @parent: Parent device containing the phandle pointer
+  * @name: Name of property in the parent device node
+  * @devp: Returns pointer to device (there is only one for each node)
+- * @return 0 if OK, -ENOENT if there is no @name present in the node, other
+- *	-ve on error
++ * Return: 0 if OK, -ENOENT if there is no @name present in the node, other
++ * -ve on error
+  */
+ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+ 				 const char *name, struct udevice **devp);
+@@ -310,7 +309,7 @@ int uclass_get_device_by_phandle(enum uclass_id id, struct udevice *parent,
+  * @id: ID to look up
+  * @drv: Driver to look for
+  * @devp: Returns pointer to the first device with that driver
+- * @return 0 if OK, -ve on error
++ * Return: 0 if OK, -ve on error
+  */
+ int uclass_get_device_by_driver(enum uclass_id id, const struct driver *drv,
+ 				struct udevice **devp);
+@@ -327,7 +326,7 @@ int uclass_get_device_by_driver(enum uclass_id id, const struct driver *drv,
+  * @devp: Returns pointer to the first device in that uclass if no error
+  * occurred, or NULL if there is no first device, or an error occurred with
+  * that device.
+- * @return 0 if OK (found or not found), other -ve on error
++ * Return: 0 if OK (found or not found), other -ve on error
+  */
+ int uclass_first_device(enum uclass_id id, struct udevice **devp);
+ 
+@@ -338,7 +337,7 @@ int uclass_first_device(enum uclass_id id, struct udevice **devp);
+  *
+  * @id: Uclass ID to look up
+  * @devp: Returns pointer to the first device in that uclass, or NULL if none
+- * @return 0 if found, -ENODEV if not found, other -ve on error
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
+  */
+ int uclass_first_device_err(enum uclass_id id, struct udevice **devp);
+ 
+@@ -353,7 +352,7 @@ int uclass_first_device_err(enum uclass_id id, struct udevice **devp);
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if no error occurred, or NULL if there is
+  * no next device, or an error occurred with that next device.
+- * @return 0 if OK (found or not found), other -ve on error
++ * Return: 0 if OK (found or not found), other -ve on error
+  */
+ int uclass_next_device(struct udevice **devp);
+ 
+@@ -365,7 +364,7 @@ int uclass_next_device(struct udevice **devp);
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if no error occurred, or NULL if
+  * there is no next device.
+- * @return 0 if found, -ENODEV if not found, other -ve on error
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
+  */
+ int uclass_next_device_err(struct udevice **devp);
+ 
+@@ -380,7 +379,7 @@ int uclass_next_device_err(struct udevice **devp);
+  * @id: Uclass ID to look up
+  * @devp: Returns pointer to the first device in that uclass, or NULL if there
+  * is no first device
+- * @return 0 if OK (found or not found), other -ve on error. If an error occurs
++ * Return: 0 if OK (found or not found), other -ve on error. If an error occurs
+  * it is still possible to move to the next device.
+  */
+ int uclass_first_device_check(enum uclass_id id, struct udevice **devp);
+@@ -395,7 +394,7 @@ int uclass_first_device_check(enum uclass_id id, struct udevice **devp);
+  *
+  * @devp: On entry, pointer to device to lookup. On exit, returns pointer
+  * to the next device in the uclass if any
+- * @return 0 if OK (found or not found), other -ve on error. If an error occurs
++ * Return: 0 if OK (found or not found), other -ve on error. If an error occurs
+  * it is still possible to move to the next device.
+  */
+ int uclass_next_device_check(struct udevice **devp);
+@@ -409,7 +408,7 @@ int uclass_next_device_check(struct udevice **devp);
+  * @id: Uclass ID to check
+  * @driver_data: Driver data to search for
+  * @devp: Returns pointer to the first matching device in that uclass, if found
+- * @return 0 if found, -ENODEV if not found, other -ve on error
++ * Return: 0 if found, -ENODEV if not found, other -ve on error
+  */
+ int uclass_first_device_drvdata(enum uclass_id id, ulong driver_data,
+ 				struct udevice **devp);
+@@ -421,7 +420,7 @@ int uclass_first_device_drvdata(enum uclass_id id, ulong driver_data,
+  * looking for its ID.
+  *
+  * @id: uclass ID to look up
+- * @return 0 if OK, other -ve on error
++ * Return: 0 if OK, other -ve on error
+  */
+ int uclass_probe_all(enum uclass_id id);
+ 
+@@ -429,7 +428,7 @@ int uclass_probe_all(enum uclass_id id);
+  * uclass_id_count() - Count the number of devices in a uclass
+  *
+  * @id: uclass ID to look up
+- * @return number of devices in that uclass (0 if none)
++ * Return: number of devices in that uclass (0 if none)
+  */
+ int uclass_id_count(enum uclass_id id);
+ 
+@@ -444,7 +443,7 @@ int uclass_id_count(enum uclass_id id);
+  * @id: enum uclass_id ID to use
+  * @pos: struct udevice * to hold the current device. Set to NULL when there
+  * are no more devices.
+- * @uc: temporary uclass variable (struct uclass *)
++ * @uc: temporary uclass variable (``struct uclass *``)
+  */
+ #define uclass_id_foreach_dev(id, pos, uc) \
+ 	if (!uclass_get(id, &uc)) \
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

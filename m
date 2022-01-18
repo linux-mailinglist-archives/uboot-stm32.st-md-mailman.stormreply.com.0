@@ -2,61 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55FE84922B1
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jan 2022 10:26:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C414E4922CE
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Jan 2022 10:33:39 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0B7F0C57B6C;
-	Tue, 18 Jan 2022 09:26:34 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 774A1C57B6C;
+	Tue, 18 Jan 2022 09:33:39 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E32C3C56630
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 85210C06F81
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jan 2022 09:26:32 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20I7fuR7023849;
- Tue, 18 Jan 2022 10:26:31 +0100
+ Tue, 18 Jan 2022 09:33:37 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20I7b62P002926;
+ Tue, 18 Jan 2022 10:33:31 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=selector1;
- bh=mwcqJqbYBXYMw232WY4jcb7b3WVSCGObJYNyQCCEY24=;
- b=16UKwHpDSHLZHIhWewC43BRuAAG5UT6NYsA95QMFE3JBfjCWYN6XEj/TC7ELy2Q+cePU
- pTYf9r8bheAgvpqM+8Q/g1Yi9Xq5jwFy5Dcjok1uYUXuocXVrmWfu152ALjdAXThdkxf
- ZWDbj+4ZKXOSSkfyrHJMAJ9ucYTEZ7F2CE+aFYtApr5W+t2aNkNzOm2al1i5Y7IO92EA
- jym3yw6o0DRGHY/k3nWBsUlSo8DZkOKIinFiNg3o19XNpC7GmMa0f+oEW2OGHp+GUA+5
- y7+sypxRORzcgJlV2ZilD4HzjMD9y5NyUcM05bHrjVnHUZo2qpXSK2I4DyDwZ1uI3Xid YA== 
+ bh=WDzXm02rdKBW/oSwEsRXwaaOmPJYlINpExQ0xVf6LSY=;
+ b=0b5/hXiHhTQNqqQHcph+gcbbLbD1MUpos4Y4N13PCzDoQSrInvGrk+GEJG652rPUoL4a
+ WnNf2lUHXNWfVdlxe2QMpf9wudNN2dX1VEKVYlDi+XQNAXlI/8D0YQ2LyhTqaz9cL8aM
+ Z6XzWPTebQ+3jOApXR35TBYfn1PVZBO2Ti/02gHWpkm9QFn6Tetg0RIlTUqbLE8xScKz
+ 5bKOEsPgrdn9odt0rmgk4/UKXyTsR4WYr0GnCZj8rGaxGYEtJLARheDd7eFntYKm5oH+
+ yhBV1xDKCZaF24V2VPGsoqUT9Dw6OUojBQ3o6R+s/vliFagiZmfbSK812tjPg7AXnmj1 Og== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dnsd08m48-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dnsaq0p2h-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Jan 2022 10:26:31 +0100
+ Tue, 18 Jan 2022 10:33:31 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C1FD110002A;
- Tue, 18 Jan 2022 10:26:30 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 63A5110002A;
+ Tue, 18 Jan 2022 10:33:30 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node1.st.com [10.75.127.4])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B19EB20FA31;
- Tue, 18 Jan 2022 10:26:30 +0100 (CET)
-Received: from localhost (10.75.127.44) by SFHDAG2NODE1.st.com (10.75.127.4)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 18 Jan 2022 10:26:30
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5CD1C20FA4F;
+ Tue, 18 Jan 2022 10:33:30 +0100 (CET)
+Received: from localhost (10.75.127.47) by SFHDAG2NODE1.st.com (10.75.127.4)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 18 Jan 2022 10:33:29
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 18 Jan 2022 10:26:21 +0100
-Message-ID: <20220118102619.1.I161a621b6f151ada380bedac41d2a2bd67d47933@changeid>
+Date: Tue, 18 Jan 2022 10:33:14 +0100
+Message-ID: <20220118103311.1.Ic9dd7501d7e1e832827438c6a94605cdfdb17f0b@changeid>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
+X-Originating-IP: [10.75.127.47]
 X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE1.st.com
  (10.75.127.4)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
  definitions=2022-01-18_02,2022-01-14_01,2021-12-02_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: [Uboot-stm32] [PATCH] dfu: mtd: skip empty pages when writing page
-	for UBI partition
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [Uboot-stm32] [PATCH] stm32prog: add partition name in
+	treat_partition_list error messages
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,70 +73,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Align the DFU MTD backend for the UBI partitions with the mtd command write
-behavior when the option .dontskipff is not used: don't write the empty
-pages (full of 0xFF); it is not required for UBI, see [1] for details.
+Add the partition name and remove the line number in error messages
+of treat_partition_list() to provide correct information to user of
+STM32CubeProgrammer.
 
-This patch avoids the "free space fixup" procedure in the kernel [2]
-and allows to program a UBIFS volume generated by mkfs.ubifs without the
-option -F, --space-fixup.
-
-The MTD DFU backend implements this behavior introduced on DFU NAND
-backend by the commit 13cb7cc9e8e4 ("dfu: Add option to skip empty pages
-when flashing UBI images to NAND") and also supported by the command nand
-by CONFIG_CMD_NAND_TRIMFFS and by commit c9494866df83 ("cmd_nand: add nand
-write.trimffs command").
-
-[1] http://www.linux-mtd.infradead.org/doc/ubi.html#L_flasher_algo
-[2] http://www.linux-mtd.infradead.org/faq/ubifs.html#L_free_space_fixup
+The "line number" value was confusing because it is incorrect here;
+the index in  part_array[] is not aligned with the line number in
+the parsed Layout file, because the empty lines and the lines beginning
+by '#' are skipped during the first parsing in parse_flash_layout().
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- drivers/dfu/dfu_mtd.c | 22 +++++++++++++++++++++-
- 1 file changed, 21 insertions(+), 1 deletion(-)
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
-index 0b7f17761f..cce9ce0845 100644
---- a/drivers/dfu/dfu_mtd.c
-+++ b/drivers/dfu/dfu_mtd.c
-@@ -18,6 +18,20 @@ static bool mtd_is_aligned_with_block_size(struct mtd_info *mtd, u64 size)
- 	return !do_div(size, mtd->erasesize);
- }
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+index 3b6ca4e773..61cba157fd 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+@@ -835,8 +835,8 @@ static int treat_partition_list(struct stm32prog_data *data)
+ 		/* skip partition with IP="none" */
+ 		if (part->target == STM32PROG_NONE) {
+ 			if (IS_SELECT(part)) {
+-				stm32prog_err("Layout: selected none phase = 0x%x",
+-					      part->id);
++				stm32prog_err("Layout: selected none phase = 0x%x for part %s",
++					      part->id, part->name);
+ 				return -EINVAL;
+ 			}
+ 			continue;
+@@ -844,14 +844,14 @@ static int treat_partition_list(struct stm32prog_data *data)
  
-+/* Logic taken from cmd/mtd.c:mtd_oob_write_is_empty() */
-+static bool mtd_page_is_empty(struct mtd_oob_ops *op)
-+{
-+	int i;
-+
-+	for (i = 0; i < op->len; i++)
-+		if (op->datbuf[i] != 0xff)
-+			return false;
-+
-+	/* oob is not used, with MTD_OPS_AUTO_OOB & ooblen=0 */
-+
-+	return true;
-+}
-+
- static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
- 			u64 offset, void *buf, long *len)
- {
-@@ -129,8 +143,14 @@ static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
- 
- 		if (op == DFU_OP_READ)
- 			ret = mtd_read_oob(mtd, off, &io_op);
--		else
-+		else if (has_pages && dfu->data.mtd.ubi && mtd_page_is_empty(&io_op)) {
-+			/* in case of ubi partition, do not write an empty page, only skip it */
-+			ret = 0;
-+			io_op.retlen = mtd->writesize;
-+			io_op.oobretlen = mtd->oobsize;
-+		} else {
- 			ret = mtd_write_oob(mtd, off, &io_op);
-+		}
- 
- 		if (ret) {
- 			printf("Failure while %s at offset 0x%llx\n",
+ 		if (part->id == PHASE_FLASHLAYOUT ||
+ 		    part->id > PHASE_LAST_USER) {
+-			stm32prog_err("Layout: invalid phase = 0x%x",
+-				      part->id);
++			stm32prog_err("Layout: invalid phase = 0x%x for part %s",
++				      part->id, part->name);
+ 			return -EINVAL;
+ 		}
+ 		for (j = i + 1; j < data->part_nb; j++) {
+ 			if (part->id == data->part_array[j].id) {
+-				stm32prog_err("Layout: duplicated phase 0x%x at line %d and %d",
+-					      part->id, i, j);
++				stm32prog_err("Layout: duplicated phase 0x%x for part %s and %s",
++					      part->id, part->name, data->part_array[j].name);
+ 				return -EINVAL;
+ 			}
+ 		}
 -- 
 2.25.1
 

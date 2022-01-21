@@ -2,72 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60728496561
-	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jan 2022 20:02:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E3A9496565
+	for <lists+uboot-stm32@lfdr.de>; Fri, 21 Jan 2022 20:03:04 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 264C1C5F1EC;
-	Fri, 21 Jan 2022 19:02:45 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33B58C5F1EC;
+	Fri, 21 Jan 2022 19:03:04 +0000 (UTC)
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
+ [209.85.219.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BBA2CC5F1EB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CDEF0C5F1EB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 21 Jan 2022 19:02:43 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id d11so10940006qkj.12
+ Fri, 21 Jan 2022 19:03:01 +0000 (UTC)
+Received: by mail-qv1-f48.google.com with SMTP id s6so4310875qvv.11
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 21 Jan 2022 11:02:43 -0800 (PST)
+ Fri, 21 Jan 2022 11:03:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=7/EJOQ6MUlWplwEnPINJ8kV22ENbnvw/mJDTNmVBr+8=;
- b=cYsKk9erD3kGp0dVTX42ol2c0u1700PJrkk6imATVXjL3RXOr1KIY2mgKW17aAFgh+
- nip/u/+++jULt6NtZvDUki1P6XQymJ/RK/UH0mZbkH/wIL0Kr496gKifP0y/0Y6E9OaD
- 2jXVT9oYObXJTx6Xp3Oh36ZMk3LktwiuDd+xQ=
+ bh=R2U5GzdK7eXkrQZ0p+7c7IkCfxgOd+7b3rQMQuW21js=;
+ b=JL360faRT4EIy371RJKxLScqG4yw5iKHEHT6NN/q5xRREjxbxniAcuC2XYZsHeKQom
+ O2xwHJR6po+bE4oZ4ER9+nEs5irKtwFBbVaFz/4V6MHucFhUB/z5dsHduNVMGII3z6Gh
+ 6FczY2RJPmNxYLbGOKfT/9fOKn3jdRtk3JGNk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=7/EJOQ6MUlWplwEnPINJ8kV22ENbnvw/mJDTNmVBr+8=;
- b=J7hsbL8pZNB8tHy89L23p26azD40skMpFTbiRNXVbkgyqBWx5cG6AK5FSrievmnFoS
- 9DRdfqFHkEsSAU+DBxWuRAqcTq7T4auJnfsBGe0dwv4QTqDAwDdrtMm9gsZRvtVuRpKn
- ChGuVLrbVVvRu/gyhlmM+lcb8gVKoDKUpWwEkic/Fecu1nZ15wvPmlgRaTPcltBlo/N0
- /W3J/edTNoj9jrDtQcXwQJ90Vk5ykwIBpKKdGhILYIAzBKzeoQr2d5uAp05mHHkooX9e
- Jv+Z3ndIDgZ8NQH4eNv3pSWyFEa5gsd9Fd4nOr47tEozN7jJFYNP1H0jt0PzfB0FHVAO
- o5Tg==
-X-Gm-Message-State: AOAM532I2dy04uffp+MCWHKaIk0D5+O7hunbEetAG5DwWLMthwvwydmM
- FavccpD9gmUEPZKLIDAmC3O5Ng==
-X-Google-Smtp-Source: ABdhPJxEc2B/HwBZ8asjFWcRlqedmAFKO80QuaxFE+/XLLBN7rr55JzqAYgWlxviWXylTI7vB97U2A==
-X-Received: by 2002:a05:620a:1a95:: with SMTP id
- bl21mr3918664qkb.177.1642791762827; 
- Fri, 21 Jan 2022 11:02:42 -0800 (PST)
+ bh=R2U5GzdK7eXkrQZ0p+7c7IkCfxgOd+7b3rQMQuW21js=;
+ b=YVu542i2svGLeKItE5xfNNc9Ducl7smJNDfEu7TaPW78kv+rvbSXQy/nQiVwsGDnTc
+ miv0tbr8VKe468CrLsf06+WaJsorxRgzroJG98/qTYQ3HruhlqpcP/hko+ugKoaQoI+r
+ AiEjA10xI9oDovIH0roOO1pQ+WZGvHgZUGhhIP+wx4FDfqwmtuiTAVCvX6H6d27Ity0U
+ dPtj39YirEVDA4Dj1W7oJyjzj0cGNtO1XcQuSN4IRzt4GQPY2+pwY5CP23qctGWqlnot
+ 0Ms4h7PWgFrEmNc5NfwkhYkJVrMFD62Y9QSlczPTCeTend0t1V3LNrvvGN/WEjhcuF5O
+ OqgA==
+X-Gm-Message-State: AOAM533o0UzE/ImY70PVVFJ/fTG+XxeGTZc1YfChh5Nj2VdOXbMW2wBY
+ UrmobipboSJ0pBxfpvl53f4HEA==
+X-Google-Smtp-Source: ABdhPJzoSiPOgJto8TTPK+4TC5vxCRLr9aDw1QnsbWpI0RFluk2H6f00uu9L0cXizlbIumpfCeqvmQ==
+X-Received: by 2002:a05:6214:1cc4:: with SMTP id
+ g4mr5019416qvd.89.1642791780927; 
+ Fri, 21 Jan 2022 11:03:00 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b01-cbda-2ef0-5dff-fedb-a8ba.res6.spectrum.com.
  [2603:6081:7b01:cbda:2ef0:5dff:fedb:a8ba])
- by smtp.gmail.com with ESMTPSA id g74sm3378491qke.48.2022.01.21.11.02.41
+ by smtp.gmail.com with ESMTPSA id j14sm3533879qkp.131.2022.01.21.11.03.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Jan 2022 11:02:42 -0800 (PST)
-Date: Fri, 21 Jan 2022 14:02:40 -0500
+ Fri, 21 Jan 2022 11:03:00 -0800 (PST)
+Date: Fri, 21 Jan 2022 14:02:58 -0500
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Message-ID: <20220121190240.GE7004@bill-the-cat>
-References: <20211218182752.1121322-1-sjg@chromium.org>
- <20211218182752.1121322-4-sjg@chromium.org>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20220121190258.GH7004@bill-the-cat>
+References: <20220104132401.3573475-1-patrick.delaunay@foss.st.com>
+ <20220104142328.v1.1.Iaa7c4564c1e7d57e198f7621d124cddaa3296c4a@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20211218182752.1121322-4-sjg@chromium.org>
+In-Reply-To: <20220104142328.v1.1.Iaa7c4564c1e7d57e198f7621d124cddaa3296c4a@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Michal Simek <monstr@monstr.eu>, Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <marek.behun@nic.cz>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com, Mario Six <mario.six@gdsys.cc>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>, Stefan Roese <sr@denx.de>,
- Andes <uboot@andestech.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 4/5] Convert CONFIG_BOOTP_SERVERIP to
-	Kconfig
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 1/5] cmd: Fix up warnings in flash.c
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,55 +71,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6418451585815415290=="
+Content-Type: multipart/mixed; boundary="===============7764383082012195253=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============6418451585815415290==
+--===============7764383082012195253==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="I7gN1YuHeqxrxkIZ"
+	protocol="application/pgp-signature"; boundary="R9b51G30WkD62Ue3"
 Content-Disposition: inline
 
 
---I7gN1YuHeqxrxkIZ
+--R9b51G30WkD62Ue3
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 18, 2021 at 11:27:51AM -0700, Simon Glass wrote:
+On Tue, Jan 04, 2022 at 02:23:57PM +0100, Patrick Delaunay wrote:
 
-> This converts the following to Kconfig:
->    CONFIG_BOOTP_SERVERIP
+> Tidy up the warnings reported by checkpatch.pl to prepare next patches
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Stefan Roese <sr@denx.de>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---I7gN1YuHeqxrxkIZ
+--R9b51G30WkD62Ue3
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmHrA1AACgkQFHw5/5Y0
-tyyzfQv/frr2J1s//NOlB2+5rCPXuWTcCVEJZLSCNdNBksn+Eyfv+iJ/obB4sm9g
-eqrE+ZK4GF7LG0u13e/Y/WoqemxmQ6LMy4hGZYk2c6K9J8KBWFGIb9pIjTqse6f0
-Uho/O1DtfLqdvYMw6EtYz8khnGKBRDulaV1RWLyL0fPp/h63nGuj5y4nKFz6yFEE
-+S4EbLDCUBObGqZf33GYAqbeLI2CAdNGqHi2KOTTdjtZuWW4e8H+w+CDro33LX3k
-gXuUxxvvXgXmd/xum2STcvR2VFYJgVNCvxiDEJ4b55vHhJkuGgdYqs/DlVdGcDk9
-D/JD9+rp/TyJSwn4bsjlDYBBqO11OqhTwV2Mtqep85MQUFF2LSe9NV80NEbCB8Tw
-ZCfZPiMtsiXIq089BJhthCJGGlYJzP3D6YHkQG0NU1tVp9nxUGQlaLcfolQLpxuY
-yqigavVwoooAk+ZQ4Q8Hc1rhL/R8adV5XajZnWJ+J65WI56tudhg2VJ5b/FlpuiP
-tZcTZjU1
-=/hXT
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmHrA2IACgkQFHw5/5Y0
+tyzE9QwAuVPQnbhsw8Xr9bjj+AJnVYkUrOa3BpruHT6Avvpn9oVURlReLPEI0Z9S
+ExlWdlNB6QbwVP7wGAvDLpqmFR4BUxLONpcH1pPKV5MAXm1BisJTYikls9C3bMEN
+hHo08xiKdufGLPxu81hhzJ8NYZf7w7MboYDaKAa7SIdwVCRUAuR7ZuqTxMmLO5k3
+JMfjisAlz/yoK75LE5O9PpB9J1L+nfnQ4FJE+cEtmqntI9w7h6GLQnWp+KzmWAQp
+wQMwghXuDov3z6iWHBNVPlkPvNiWDe4LLZUnnzj58EsqEhS4pOVNm/ots+13P1v6
+sOo9ZPfEcB7QM6+C/13I2p+NCI2S/VN8sll3Vvc9LcGC36Nk2GL+zPG/IwOY/Hws
+ku9Ns7/UYvKQPB5aAzb3KJwhRWj7zdwbXX8K2rbhsNHJYGHq84kTPHfWXKnj34NN
+JGUM+Eqxl3h786Qs8NjYFMfBqQcKela1r3FLsZWEUsXYgUyUoszUVskjK+oaiU7g
+PF9PLZjV
+=MBzM
 -----END PGP SIGNATURE-----
 
---I7gN1YuHeqxrxkIZ--
+--R9b51G30WkD62Ue3--
 
---===============6418451585815415290==
+--===============7764383082012195253==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -138,4 +131,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============6418451585815415290==--
+--===============7764383082012195253==--

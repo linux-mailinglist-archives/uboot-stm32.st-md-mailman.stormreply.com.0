@@ -2,62 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 428A24980E0
-	for <lists+uboot-stm32@lfdr.de>; Mon, 24 Jan 2022 14:17:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C817649CEB6
+	for <lists+uboot-stm32@lfdr.de>; Wed, 26 Jan 2022 16:37:24 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 05658C5F1D3;
-	Mon, 24 Jan 2022 13:17:29 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AF96C5F1D8;
+	Wed, 26 Jan 2022 15:37:24 +0000 (UTC)
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com
+ [209.85.210.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A9BC6C5AB61
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 18E3AC5718D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 24 Jan 2022 13:17:28 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20O8b4Q8017029;
- Mon, 24 Jan 2022 14:17:23 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=9U+gxFiQYSay/yhD57A1BxPvi+dQrhzpQ74xHHTNp98=;
- b=fdEVsuRu1C33Wp2XYMjCOKoVB0wy0VSnZulVpFZRlIfGe60Ke4Skk0wNDbnMuSEfV95C
- AnXp0wOlyyl4RF8KV8s0yY5R2eRWW/PSLKXVbliG3XekGZbURHQeXevbb/n9X/2i5624
- 9fqsVf+MPooZHa4mwgLlUFHdeckEDxfsSTUrTx3J7VX55hNcrp4tFBppwqEj1M+XACle
- eqQDjMO4XMrjWIk9Nr4Atg0cl2fuMir7JKh3k3WXe4wzOopMnUB7sspcs1ET6t7vqkQt
- /xvPjJvZEnEqorNPmD9lT1XAAzUeRRTZCMg55zJDqQEjnHQJxYhmeI2nskpguGtSqW/3 +A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dsrru1gtm-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 24 Jan 2022 14:17:23 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A75DB10002A;
- Mon, 24 Jan 2022 14:17:22 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 88E262171EF;
- Mon, 24 Jan 2022 14:17:22 +0100 (CET)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 24 Jan 2022 14:17:22
- +0100
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 24 Jan 2022 14:17:14 +0100
-Message-ID: <20220124141711.1.Ic9cd1563aac729132cadae8c5df372be1a49ecc7@changeid>
-X-Mailer: git-send-email 2.25.1
+ Wed, 26 Jan 2022 15:37:23 +0000 (UTC)
+Received: by mail-ot1-f48.google.com with SMTP id
+ b17-20020a9d4791000000b005a17fc2dfc1so2259322otf.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 26 Jan 2022 07:37:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:sender:from:in-reply-to:references:date:message-id
+ :subject:to:cc;
+ bh=38+ZPtSOCGMEBIzUVLcu28VbvETZ+V+NyepF+F23eiQ=;
+ b=ipeGoW2P6iIrKyjD1e6PqGT6MQi3vzYjsXQkV7vMnVZB+zI6dg+bcQuV8Q3uvsBnAy
+ BrCTXkV8iEXTfezzt0RBFrVTnH9U6+w+n0Vdh3+e91EjlU3baBHtLumtKmenRvvBQLao
+ Qdh9wECwTXTVCsDqdtxobx1UlHLLw7Oab40S4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
+ :date:message-id:subject:to:cc;
+ bh=38+ZPtSOCGMEBIzUVLcu28VbvETZ+V+NyepF+F23eiQ=;
+ b=FXaR0OpXTKsncjA/IMkgN0lddmTFL/yOUt8PgWO5DKiVOvYxSHkl3gv31w7zt7sI/C
+ yodKRbsIRSFIkanJJLYsUDxjR505/75RHbvq8b3D7kv8oCwtycAA453rCDmMZiLhToNW
+ QB8C89ZJ7A2oEux7lKOWXfHMEqx9gwo7aJ2i2cAZgPNNCtxrg6+W04g3pHkt0IGnXlVR
+ 0HrnrfSz3qALehw9TuuslgJW3++OhgXGILouQgHnYQ7bm9Zy5HtEzFpbeAA4u9G1JEdq
+ JXftiBCci6And9NnvOtvo7CWC4X5gFxQPJpWCVZTGp+H0LuHYtrcHmD7QhFDeE3h4vmS
+ epew==
+X-Gm-Message-State: AOAM533HJt7a2v8nrbfcSu9E9meZquOBernRXXEv1sLgb5XccqiFCOeT
+ Cjh1YujmP+4WDxVy3/deK7hq3HOsZVxEupfMgT5PHw==
+X-Google-Smtp-Source: ABdhPJy6KC40GT9vb4TVwBh/V/8MMTndu6Yr3h2YBsfIMToUs/BDDdeJXk3siyEuwEs0F4ybgEV+oYk2B5Qqe+3GVxE=
+X-Received: by 2002:a05:6830:2683:: with SMTP id
+ l3mr17934020otu.203.1643211441630; 
+ Wed, 26 Jan 2022 07:37:21 -0800 (PST)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 26 Jan 2022 10:37:19 -0500
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-24_07,2022-01-24_01,2021-12-02_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Peng Fan <peng.fan@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [Uboot-stm32] [PATCH] clk: ccf: correct the test on the parent
-	uclass in clk_enable/clk_disable
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <CAPnjgZ2uJjByHMftsfUn=Nbh54KhACNmEnmgDVTgF7SOpqo3Zw@mail.gmail.com>
+References: <CAPnjgZ2uJjByHMftsfUn=Nbh54KhACNmEnmgDVTgF7SOpqo3Zw@mail.gmail.com>
+ <20220104074248.25015-1-patrice.chotard@foss.st.com>
+Date: Wed, 26 Jan 2022 10:37:19 -0500
+X-Google-Sender-Auth: 1dWMZ6muWv7Aga5g5gVnLLIiEqk
+Message-ID: <CAPnjgZ05PHGsFecS3XhofKqMBpObTmd8SvAeCpTwxuzo0qqxeA@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] dm: Fix OF_BAD_ADDR definition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,47 +73,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-It is safe to check if the uclass id on the device is UCLASS_CLK
-before to call the clk_ functions, but today this comparison is
-not done on the device used in API: clkp->dev->parent
-but on the device himself: clkp->dev.
+On Tue, 4 Jan 2022 at 00:42, Patrice Chotard
+<patrice.chotard@foss.st.com> wrote:
+>
+> When OF_LIVE flag is enabled on a 64 bits platform, there is an
+> issue when dev_read_addr() is called and need to perform an address
+> translation using __of_translate_address().
+>
+> In case of error, __of_translate_address() return's value is OF_BAD_ADDR
+> (wich is defined in include/dm/of.h to ((u64)-1) = 0xffffffffffffffff).
+> The return value of dev_read_addr() is often compared to FDT_ADDR_T_NONE
+> which is defined as (-1U) = 0xffffffff.
+> In this case the comparison is always false.
+>
+> To fix this issue, define FDT_ADDR_T_NONE to (ulong)(-1) in case of
+> AARCH64. Update accordingly related tests.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>
+> ---
+>
+> Changes in v2:
+>  - define FDT_ADDR_T_NONE as ((ulong)(-1)) and keep OF_BAD_ADDR unchanged
+>
+>  include/fdtdec.h   | 5 ++++-
+>  test/dm/ofnode.c   | 2 +-
+>  test/dm/pci.c      | 4 ++--
+>  test/dm/test-fdt.c | 2 +-
+>  4 files changed, 8 insertions(+), 5 deletions(-)
 
-This patch corrects this behavior and tests if the parent device
-is a clock device before to call the clock API, clk_enable or
-clk_disable, on this device.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Fixes: 0520be0f67e3 ("clk: prograte clk enable/disable to parent")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- drivers/clk/clk-uclass.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index d245b672fa..8b6981a307 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -652,7 +652,7 @@ int clk_enable(struct clk *clk)
- 				return 0;
- 			}
- 			if (clkp->dev->parent &&
--			    device_get_uclass_id(clkp->dev) == UCLASS_CLK) {
-+			    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
- 				ret = clk_enable(dev_get_clk_ptr(clkp->dev->parent));
- 				if (ret) {
- 					printf("Enable %s failed\n",
-@@ -726,7 +726,7 @@ int clk_disable(struct clk *clk)
- 		}
- 
- 		if (clkp && clkp->dev->parent &&
--		    device_get_uclass_id(clkp->dev) == UCLASS_CLK) {
-+		    device_get_uclass_id(clkp->dev->parent) == UCLASS_CLK) {
- 			ret = clk_disable(dev_get_clk_ptr(clkp->dev->parent));
- 			if (ret) {
- 				printf("Disable %s failed\n",
--- 
-2.25.1
-
+Applied to u-boot-dm, thanks!
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

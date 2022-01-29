@@ -2,63 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A1964A01C0
-	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Jan 2022 21:15:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9903D4A3170
+	for <lists+uboot-stm32@lfdr.de>; Sat, 29 Jan 2022 19:49:48 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AF0B4C6046A;
-	Fri, 28 Jan 2022 20:15:32 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
- [209.85.219.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33DA8C5EC56;
+	Sat, 29 Jan 2022 18:49:48 +0000 (UTC)
+Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
+ [209.85.160.177])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3C097C60468
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E1262C57B6C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Jan 2022 20:15:31 +0000 (UTC)
-Received: by mail-qv1-f53.google.com with SMTP id hu2so6894655qvb.8
+ Sat, 29 Jan 2022 18:49:46 +0000 (UTC)
+Received: by mail-qt1-f177.google.com with SMTP id y8so7995052qtn.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Jan 2022 12:15:31 -0800 (PST)
+ Sat, 29 Jan 2022 10:49:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=6QOKksIhGav7CfkYlsOw7Hh4bOyFt/zxD6N6hF23E3g=;
- b=qW6nB/0JuZIahywpYCmBGANxqEX6eBxndtnEkUhZxDBlQtJGi5xJZCSasmE0wkseOI
- ejE6XDbmFx2QGOMYp+il7HP7TkY9/hft9PYIoIqsEQAcH7HGa8lRVd/Y6FQFYSEvXiqM
- 1yF7olfw7cuClq8YmKSkEjLW1vbxCAfjwAlX4=
+ bh=VV+JoKddFafoeu+mauf3VlT+0xAaQzhR46NuEwh6eHc=;
+ b=uWtCYmJ3b/tVJfnxTpomhl9JYa9XbqUO7dVeJQxYd5YFBMcHAcP9rNgoBtWgtjOhtu
+ z08goQHoZx/7SHrAFxMB96bfyyA5Q3ob2vwuP3eyZNS77ewvEa9RywxIrIkRTAwKLHRg
+ Xs3dFvF47epP3c7miOgJkYbykfTsUICTp0JYg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=6QOKksIhGav7CfkYlsOw7Hh4bOyFt/zxD6N6hF23E3g=;
- b=xK2pdXs5/V8tD7qWRmt3/Fq7f6jt3OpImmcpfmB30lHeJUUH8r0VH7n+n8bvZ6Iyt+
- cL1EHVc7x/Qi9OO3l/VHUymoeghYgj1f80l/Kz+N+HsjmRF1MxXbKoatgt8wWpjRZTeY
- pSYySQGGpmyx73At4DDlad59LDsXn47MyLZVHmLxZDwOexGWNGtHV6qxgyczLytuDBFm
- IhcROQyDLyGZtnv2jpxVY0kjzDxqC4ourp7DxDfy0MzwYDTDkKwIgGE4WnZbw5Y/GHt4
- JzSFDFupa82F+sJZ1lfDI/QJQEP/CBmuVrv7JLMDZFDQTXjt1CK5mtI9txUE4/Zpu2Ef
- TmYQ==
-X-Gm-Message-State: AOAM531wWmGjuyY2EXu3fk4Tn+FrBhPZTcDkkNlxsjFj/98Zpq5072Xk
- HRpB4biq7VNHZ/SazPvJTbGn0w==
-X-Google-Smtp-Source: ABdhPJz3l+2fOf2eX6zTvbxtl8VI7FzdY+pcMNLqC6wWYNRjnGLt2r13UbVEtcepnYdCc6tnbk3o7A==
-X-Received: by 2002:ad4:5949:: with SMTP id eo9mr8572642qvb.95.1643400930193; 
- Fri, 28 Jan 2022 12:15:30 -0800 (PST)
+ bh=VV+JoKddFafoeu+mauf3VlT+0xAaQzhR46NuEwh6eHc=;
+ b=N17TDsrhDSdBj701vj8jbg/2PmvuyiBFDsoIZ3uNK822gJpMRtFIcc601TVan3cvuk
+ iYdjpLD4ogw3eqfg4nkcDqMCvdT808+kTdrGsjT6urUbbd3PVk5DSHCmD6aU4JXSCxtq
+ +q/nEfX10QzhoNORgvlQcZSQVjV+BIXJvrHT2Fjky+t897DuTh5CpkRO2gE/ma/nbhJm
+ eTdOv9X+QVBNaOgIhnaE2yDMvfYoovhSBscHUM8DZdGSjkefhjpftAiQxDLMmhVZdiPO
+ adrIqy062DruM0A0KJ10edHuDLu18q5nJ19hTTcW83BGzdGZD0nHGlQcL61TI7Ed9kzy
+ JlSQ==
+X-Gm-Message-State: AOAM532sS+PFe2QAiJRaub9ssTiOgveHvkMnihY02euDBni2KpwJm2ke
+ ecQIRbMA64V1kbrDgYY6HuldtA==
+X-Google-Smtp-Source: ABdhPJwsPHPiXW+sEHFzjovexj4wicackjHbqaJHFXiB7jzqxSjQzaHsz9zT3hauvsnDlChNQK/Snw==
+X-Received: by 2002:ac8:5c16:: with SMTP id i22mr10058694qti.669.1643482185851; 
+ Sat, 29 Jan 2022 10:49:45 -0800 (PST)
 Received: from bill-the-cat
  (2603-6081-7b01-cbda-2ef0-5dff-fedb-a8ba.res6.spectrum.com.
  [2603:6081:7b01:cbda:2ef0:5dff:fedb:a8ba])
- by smtp.gmail.com with ESMTPSA id d13sm3487898qtx.35.2022.01.28.12.15.29
+ by smtp.gmail.com with ESMTPSA id s34sm5381610qtc.88.2022.01.29.10.49.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Jan 2022 12:15:29 -0800 (PST)
-Date: Fri, 28 Jan 2022 15:15:28 -0500
+ Sat, 29 Jan 2022 10:49:45 -0800 (PST)
+Date: Sat, 29 Jan 2022 13:49:43 -0500
 From: Tom Rini <trini@konsulko.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20220128201528.GL7515@bill-the-cat>
-References: <20211013170053.1.I1158bd6d095c996f2dbd4b0aa9327e4eee202331@changeid>
+Message-ID: <20220129184943.GC7515@bill-the-cat>
+References: <20220118102619.1.I161a621b6f151ada380bedac41d2a2bd67d47933@changeid>
 MIME-Version: 1.0
-In-Reply-To: <20211013170053.1.I1158bd6d095c996f2dbd4b0aa9327e4eee202331@changeid>
+In-Reply-To: <20220118102619.1.I161a621b6f151ada380bedac41d2a2bd67d47933@changeid>
 X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] dfu: handle short frame result of UPLOAD
- in state_dfu_idle
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] dfu: mtd: skip empty pages when writing
+ page for UBI partition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,55 +69,41 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7076944127632694881=="
+Content-Type: multipart/mixed; boundary="===============1465014254203313556=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============7076944127632694881==
+--===============1465014254203313556==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="3h0UNLyY10zL13pE"
+	protocol="application/pgp-signature"; boundary="8lT/blNmSiRvUClR"
 Content-Disposition: inline
 
 
---3h0UNLyY10zL13pE
+--8lT/blNmSiRvUClR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 13, 2021 at 05:01:37PM +0200, Patrick Delaunay wrote:
+On Tue, Jan 18, 2022 at 10:26:21AM +0100, Patrick Delaunay wrote:
 
-> In DFU v1.1 specification [1] the DFU_UPLOAD (Short Frame)
-> is handled only in dfuUPLOADIDLE state:
->=20
-> - Figure A.1 Interface state transition diagram
->=20
-> - the state description in chapter A.2
->=20
-> A.2.3 State 2 dfuIDLE
->   on Receipt of the DFU_UPLOAD request,and bitCanUpload =3D 1
->   the Next State is dfuUPLOADIDLE
->=20
-> A.2.10 State 9 dfuUPLOAD-IDLE
->   When the length of the data transferred by the device in response
->   to a DFU_UPLOAD request is less than wLength. (Short frame)
->   the Next State is dfuIDLE
->=20
-> In current code, when an UPLOAD is completely performed after the first
-> request (for example with wLength=3D200 and data read =3D 9), the DFU sta=
+> Align the DFU MTD backend for the UBI partitions with the mtd command wri=
 te
-> stay at dfuUPLOADIDLE until receiving a DFU_UPLOAD or a DFU_ABORT request
-> even it is unnecessary as the previous DFU_UPLOAD request already reached
-> the EOF.
+> behavior when the option .dontskipff is not used: don't write the empty
+> pages (full of 0xFF); it is not required for UBI, see [1] for details.
 >=20
-> This patch proposes to finish the DFU uploading (don't go to dfuUPLOADIDL=
-E)
-> and completes the control-read operation (go to DFU_STATE_dfuIDLE) when
-> the first UPLOAD response has a short frame as an end of file (EOF)
-> indicator even if it is not explicitly allowed in the DFU specification
-> but this seems logical.
+> This patch avoids the "free space fixup" procedure in the kernel [2]
+> and allows to program a UBIFS volume generated by mkfs.ubifs without the
+> option -F, --space-fixup.
 >=20
-> [1] https://www.usb.org/sites/default/files/DFU_1.1.pdf
+> The MTD DFU backend implements this behavior introduced on DFU NAND
+> backend by the commit 13cb7cc9e8e4 ("dfu: Add option to skip empty pages
+> when flashing UBI images to NAND") and also supported by the command nand
+> by CONFIG_CMD_NAND_TRIMFFS and by commit c9494866df83 ("cmd_nand: add nand
+> write.trimffs command").
+>=20
+> [1] http://www.linux-mtd.infradead.org/doc/ubi.html#L_flasher_algo
+> [2] http://www.linux-mtd.infradead.org/faq/ubifs.html#L_free_space_fixup
 >=20
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
@@ -127,27 +112,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---3h0UNLyY10zL13pE
+--8lT/blNmSiRvUClR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmH0Tt8ACgkQFHw5/5Y0
-tyyAiwv+Lbun7lMUL/ObifB6e5CicnOQSIEW5k8dri3PAjxgi2IVNJ1G/ooc6wPe
-/TbxtnW7sfC05J9fc2Egs2rAiybZXmgbXXgOidkaZcTzvToKpOcMaRlyDyt3bEFy
-s/F8clUoz9ienZ2OnX3imO+sHbt0Pav5hDPXT2HHP9E19XmtTfKXQGX5gOZLFSZW
-ipLIS0HgbaG08talzN4B7zdwTzL++gFtQ3wmcVcnvJP4GLBUON9vBqnxBF4Q1mSs
-uE3TCwfm5b7fBTJC1qMfP+a3aBFG1sa0nvJBX+dhH7ZrIrxY1DQUeSadodE9yU7b
-0vJECahyNlFh64l8APfwTQUJYexhqOqGG3iLsYtpVOwlKgMPYAgLsZDOZuQt9htv
-VsiAePHLY91vEEHcsGGIU0qxVHaAuFh53AVdFV9Ffn1OxyJCC/Q+nOT0brRRwQZG
-qzQQPOPeDRdinGsYBmKCocivHDgV1oGfuwgAlJAEQhdyc/k/d0BW8oGNx5N9YbLE
-/WChQR6q
-=ysKS
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmH1jEcACgkQFHw5/5Y0
+tyz2pwv9HHiHk4p73ZW4Bkmkb1MMjDhKPb77xyYK3Mw6aX/2FC8tZOU9a7hVHdL8
+qnMs6UrUbXXUX2H/UgIw4yVlyfGJyOMUJcAedj4BTnMv2YsGyq8KqY5l2pQU6XkI
+c3c9DXEY/DuyGi0uce/lixkB6dUZd/xKyNSNjR1ZD6XASq/J+kmWV8uhPqUdBZx8
+k4JJqrBSsH17EnenMDy/q9iwST0rL/JXj9mZGM5HamgaG7yQy6AaqcmErXmNpTr2
+teOWrkHK4kuBqCNq382Y91KP6c73CfCixCvQAia6Ot/Xj9XCQaDeAfVDv4eA9flA
+hKU1Ny7+IJ3nNp3bLvKLro/yUVhLOVbvQTiveEKW+bch/duNrFiwveYYvVhgTUvU
+r/gVguUp7uHrzaXH51xLJcVgqNQ5SOX9p4SOkM47rMKcYOO/mngoCoWI0Wp/n7Bl
+54xa73QFM20aCdbS+xyT8vmTlZFLTcm1s6s/+NfxSRbzNSnuKBt/VpEJjUXzxlfs
+KM+3UXa2
+=T8+K
 -----END PGP SIGNATURE-----
 
---3h0UNLyY10zL13pE--
+--8lT/blNmSiRvUClR--
 
---===============7076944127632694881==
+--===============1465014254203313556==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -158,4 +143,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============7076944127632694881==--
+--===============1465014254203313556==--

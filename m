@@ -2,27 +2,27 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AD584A5984
-	for <lists+uboot-stm32@lfdr.de>; Tue,  1 Feb 2022 10:56:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7890A4A5B98
+	for <lists+uboot-stm32@lfdr.de>; Tue,  1 Feb 2022 12:53:58 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C67BFC5F1EC;
-	Tue,  1 Feb 2022 09:56:28 +0000 (UTC)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [91.198.250.253])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 350CDC5F1EC;
+	Tue,  1 Feb 2022 11:53:58 +0000 (UTC)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [91.198.250.252])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BDBB9C597BA
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A9A16C597BA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  1 Feb 2022 09:56:26 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:105:465:1:2:0])
+ Tue,  1 Feb 2022 11:53:56 +0000 (UTC)
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:105:465:1:4:0])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Jp0gt00J2z9sWb;
- Tue,  1 Feb 2022 10:56:26 +0100 (CET)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Jp3HR3PqRz9sT7;
+ Tue,  1 Feb 2022 12:53:55 +0100 (CET)
 X-Virus-Scanned: amavisd-new at heinlein-support.de
-Message-ID: <2e12f47e-188a-7ae6-10b0-08da8c17850e@denx.de>
-Date: Tue, 1 Feb 2022 10:56:17 +0100
+Message-ID: <6cb11226-1004-020b-edef-5fb84db2920a@denx.de>
+Date: Tue, 1 Feb 2022 12:53:50 +0100
 MIME-Version: 1.0
 Content-Language: en-US
 To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
@@ -77,7 +77,7 @@ On 12/3/21 10:27, Patrice Chotard wrote:
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Applied to u-boot-cfi-flash/master
 
 Thanks,
 Stefan

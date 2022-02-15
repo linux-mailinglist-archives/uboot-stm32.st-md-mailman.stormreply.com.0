@@ -2,61 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A2104B6FAE
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Feb 2022 16:23:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A8E744B6FAD
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Feb 2022 16:23:37 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F832C5F1F9;
-	Tue, 15 Feb 2022 15:23:39 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 542D2C5F1F2;
+	Tue, 15 Feb 2022 15:23:37 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C4D6FC5F1F9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5A321C23E53
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Feb 2022 15:23:37 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 21FA8msC024927;
+ Tue, 15 Feb 2022 15:23:36 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 21FEUh09026018;
  Tue, 15 Feb 2022 16:23:31 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=wgTBgt0Kc2bHRa6mWxtkmWrCyRLJR6MFI0TrMNVPAxQ=;
- b=wVSroEzWJR7Qu3zvekGbhq52JAMyXIkVj15W2iOsoyFx984Nnovvjn/gRR0YiF4eGCO7
- QdmtNUCy+fGa3hnfNieIUd69An9Eu6X3MAtEJZuFW5j28gzP2gXjz389vkAW4xyex1Gx
- THntM3hfZ71aF3rg8hGzqUfH0wzIPs//Av89B/QEc/DVqEmtsUvh1ub4HUSeV5t28GDJ
- BjwH3/aPSpSYFnezBuo4sV6yWGx+x3DUTy84hF9KKiO4nlbiULzp+Ya+OJs0X2AzfPqM
- 0inx/KkYW5+0VCHS/qSzNZyL8y+i/2eTF8O3yu4AnrOLe5NKo2OWDjz01+xVfAZQFXG6 jg== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=GUoA0VsKHnmCzufT3J5OgItXOAsc0DtGyaV4AXg3O4s=;
+ b=Tu1jjh/dEZfHfSrWeFxn7OquMsedNbfMKMT3KIaNby3cUoYW8NxFn2Ka9hZvD1nKftgq
+ vvElqJzDQhjlsxcTfspUbPSFXh/FR+la+/Z0BYqTrwmtZkDlop4fxKKxo8WVOgW3zJmL
+ cf/c0iSoLbceqv8vaIj0YRShSWnOHhfnuG0BYXGz+yowdeNn/gVESwIf+dVeat/Vnjn9
+ DBGDLAqOFne6WLEl04JQIlyoqyDVnts6csHd0dqQaNg/ywVwOVD4pzZGlWf4r4wiVseM
+ +BTvMPPLFb3Q9Vav+JZDbwHPRCtC5AxYz4RqKAuS+M0Lt+MHVNTLZNscqomie8hr9TWH 9g== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3e84wwkfrm-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3e89b5j4vp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
  Tue, 15 Feb 2022 16:23:31 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 36FC010002A;
- Tue, 15 Feb 2022 16:23:30 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1B8C3100034;
+ Tue, 15 Feb 2022 16:23:31 +0100 (CET)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2FD9822A6DF;
- Tue, 15 Feb 2022 16:23:30 +0100 (CET)
-Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 15 Feb 2022 16:23:29
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 10F1E22A6DF;
+ Tue, 15 Feb 2022 16:23:31 +0100 (CET)
+Received: from localhost (10.75.127.49) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 15 Feb 2022 16:23:30
  +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 15 Feb 2022 16:23:22 +0100
-Message-ID: <20220215162301.1.I5f92544259c3d1dad2df30c9d7762ec7860f07cf@changeid>
+Date: Tue, 15 Feb 2022 16:23:23 +0100
+Message-ID: <20220215162301.2.I26fa615c6898db0d17024664b17b20412638bfd7@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220215162301.1.I5f92544259c3d1dad2df30c9d7762ec7860f07cf@changeid>
+References: <20220215162301.1.I5f92544259c3d1dad2df30c9d7762ec7860f07cf@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
+X-Originating-IP: [10.75.127.49]
 X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
  definitions=2022-02-15_04,2022-02-14_04,2021-12-02_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 1/2] mmc: fix error message for unaligned
-	erase request
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Wolfgang Denk <wd@denx.de>
+Subject: [Uboot-stm32] [PATCH 2/2] env: mmc : align erase address and size
+	on erase_grp_size
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,44 +76,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Fix the end address in the message for unaligned erase request in
-mmc_berase() when start + blkcnt is aligned to erase_grp_size.
+On eMMC device, the erase_grp_size > 1 so the address and size for the
+erase block command in env/mmc.c can be unaligned on erase group size and
+some strange trace occurs and the result is not guarantee by MMC devices.
 
-for example:
-  - start = 0x2000 - 26
-  - count = 26
-  - erase_grp_size = 0x400
+The SD-Card behavior doesn't change as erase_grp_size = 1 for SD-Card.
+
+For example, on eMMC present on STM32MP15C-EV1 and before the patch:
+
+  STM32MP> env erase
+
+  Erasing Environment on MMC...
 
   Caution! Your devices Erase group is 0x400
   The erase range would be change to 0x2000~0x27ff
 
-But no issue when the end address is not aligned, for example
-  - start = 0x2000 - 2 * 26
-  - count = 26
-  - erase_grp_size = 0x400
+  16 blocks erased: OK
 
   Caution! Your devices Erase group is 0x400
   The erase range would be change to 0x2000~0x23ff
 
+  16 blocks erased: OK
+  OK
+
+After this patch:
+  STM32MP> env erase
+  Erasing Environment on MMC...
+  1024 blocks erased at 0x2000: OK
+  1024 blocks erased at 0x2000: OK
+  OK
+
+Here the 2 copies of U-Boot environment are in the same devices Erase
+group: it is erased twice.
+
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- drivers/mmc/mmc_write.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ env/mmc.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/mmc/mmc_write.c b/drivers/mmc/mmc_write.c
-index d23b7d9729..eab94c7b60 100644
---- a/drivers/mmc/mmc_write.c
-+++ b/drivers/mmc/mmc_write.c
-@@ -102,7 +102,7 @@ ulong mmc_berase(struct blk_desc *block_dev, lbaint_t start, lbaint_t blkcnt)
- 		       "The erase range would be change to "
- 		       "0x" LBAF "~0x" LBAF "\n\n",
- 		       mmc->erase_grp_size, start & ~(mmc->erase_grp_size - 1),
--		       ((start + blkcnt + mmc->erase_grp_size)
-+		       ((start + blkcnt + mmc->erase_grp_size - 1)
- 		       & ~(mmc->erase_grp_size - 1)) - 1);
+diff --git a/env/mmc.c b/env/mmc.c
+index 465b104559..0c498d9a46 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -257,12 +257,15 @@ static inline int erase_env(struct mmc *mmc, unsigned long size,
+ {
+ 	uint blk_start, blk_cnt, n;
+ 	struct blk_desc *desc = mmc_get_blk_desc(mmc);
++	u32 erase_size;
  
- 	while (blk < blkcnt) {
+-	blk_start	= ALIGN(offset, mmc->write_bl_len) / mmc->write_bl_len;
+-	blk_cnt		= ALIGN(size, mmc->write_bl_len) / mmc->write_bl_len;
++	erase_size = mmc->erase_grp_size * desc->blksz;
++	blk_start = ALIGN_DOWN(offset, erase_size) / desc->blksz;
++	blk_cnt = ALIGN(size, erase_size) / desc->blksz;
+ 
+ 	n = blk_derase(desc, blk_start, blk_cnt);
+-	printf("%d blocks erased: %s\n", n, (n == blk_cnt) ? "OK" : "ERROR");
++	printf("%d blocks erased at 0x%x: %s\n", n, blk_start,
++	       (n == blk_cnt) ? "OK" : "ERROR");
+ 
+ 	return (n == blk_cnt) ? 0 : 1;
+ }
+@@ -286,6 +289,7 @@ static int env_mmc_erase(void)
+ 		goto fini;
+ 	}
+ 
++	printf("\n");
+ 	ret = erase_env(mmc, CONFIG_ENV_SIZE, offset);
+ 
+ #ifdef CONFIG_ENV_OFFSET_REDUND
 -- 
 2.25.1
 

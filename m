@@ -2,47 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99DBC4B84C6
-	for <lists+uboot-stm32@lfdr.de>; Wed, 16 Feb 2022 10:49:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80C5C4BD6D3
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Feb 2022 08:34:29 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4D026C5F1F2;
-	Wed, 16 Feb 2022 09:49:51 +0000 (UTC)
-Received: from mx2.securetransport.de (mx2.securetransport.de [188.68.39.254])
- (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 343F2C60463;
+	Mon, 21 Feb 2022 07:34:29 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E5F95C0614D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 96A77C60461
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 16 Feb 2022 09:41:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1645004460;
- bh=pHwOeEPf6LvK95WpzZg98bR4sz8Xf6dib7HIrvE+TDM=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=BzqSlaskHGJXkZcYow+DBnH5CFnJtKhnJMdpwPzTnvGdyfTMXNXxvMVjCJkYUMALg
- mLlrOf0zSUC+hxJDD1kKp2kWMTwFmW7cVugHplqRVlJKNcNWqYFVIAKvPrf4hg2hQE
- u7gUhVL8Kb5SFsyNssx2qaGuR9c+kUa9+12BtF3+/NPr3BsNrA0+5apsINbUXYLZtE
- AjvnaszW15rA0cVJ93c8PpWrfR7S9BHEaakFnKfr4ibLMnjTUnF0FKyEBqfO1CRPS0
- iLe4cVla+1+2Ho5cq06cEckXg2XxRm5L4ZNLMUloN9YTFjLXbREjYEZIdNPmEHZbjG
- 1+1pZ1/sIrr4A==
-X-secureTransport-forwarded: yes
-From: Johann Neuhauser <jneuhauser@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Thread-Topic: [PATCH 1/2] stm32mp: bsec: add permanent lock write support
-Thread-Index: AQHYIn32UdMCwa/tq0KZUTTKg1pgX6yV6pBQ
-Date: Wed, 16 Feb 2022 09:40:56 +0000
-Message-ID: <e70e6fefd5594a9cb8bc1d848f09c968@dh-electronics.com>
-References: <20220215160841.1.Ieacd0bc93c53f5b38d6e1d228a498bc40758f121@changeid>
-In-Reply-To: <20220215160841.1.Ieacd0bc93c53f5b38d6e1d228a498bc40758f121@changeid>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
+ Mon, 21 Feb 2022 07:34:28 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 21L7KbdV003317;
+ Mon, 21 Feb 2022 08:33:56 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=selector1;
+ bh=0YlzHfFNPfxb8/x9p5uBQMeR9EI3IrsOqOLTj0NuWkA=;
+ b=BIiHUjS9/1g6NUdbcZcvyRjvzxdV35gGiZxciTXgI204YmyBjMNbSzyuQbPcTbnGjVEQ
+ YckPaph4FtbyHUcV+7LGTp7hrUs2ObghxAu1jIQ/USNnwi+wHhyEdh58znvgIdmLEPi3
+ UJQnYeHiCpa18y9ONY9fjjKBsv/Pa69F+2djbur/OA7EvAW+qLxKMB3uBMxFJLIEu9/Z
+ Mlyy4BiRnkYTYcNlhCOqORS+HhvamwBfRfN+t/FGXYjlT6nYMtuqMxFxb8jpRpRvDUvA
+ +5wKTL9qSFbLpsJAvF0G1twU3FR4W6yaNCznU6eLl5dZMbBeDjcWOPdSrYJgKnX8Tn6h wA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ebsceth80-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 21 Feb 2022 08:33:56 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8028910002A;
+ Mon, 21 Feb 2022 08:33:51 +0100 (CET)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6B969212FD7;
+ Mon, 21 Feb 2022 08:33:51 +0100 (CET)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 21 Feb 2022 08:33:51
+ +0100
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 21 Feb 2022 08:33:49 +0100
+Message-ID: <20220221073349.482-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 16 Feb 2022 09:49:50 +0000
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] stm32mp: bsec: add permanent lock
-	write support
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
+ definitions=2022-02-21_02,2022-02-18_01,2021-12-02_01
+Cc: Vignesh R <vigneshr@ti.com>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
+ Marek Behun <marek.behun@nic.cz>, Ramon Fried <rfried.dev@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Konstantin Porotchkin <kostap@marvell.com>, Biwen Li <biwen.li@nxp.com>,
+ Wolfgang Denk <wd@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
+ Igal Liberman <igall@marvell.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Simon Glass <sjg@chromium.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Pratyush Yadav <p.yadav@ti.com>
+Subject: [Uboot-stm32] [PATCH v2] spi: Add spi_get_bus_and_cs() new use_dt
+	param
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -54,174 +80,236 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-> -----Original Message-----
-> From: Patrick Delaunay [mailto:patrick.delaunay@foss.st.com]
-> Sent: Tuesday, February 15, 2022 4:09 PM
-> 
-> Add support of the permanent lock support in U-Boot proper
-> when BSEC is not managed by secure monitor (TF-A SP_MIN or OP-TEE).
-> 
-> This patch avoid issue with stm32key command and fuse command
-> on basic boot for this missing feature of U-Boot BSEC driver.
-> 
-> Reported-by: Johann Neuhauser <jneuhauser@dh-electronics.com>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  arch/arm/mach-stm32mp/bsec.c | 90 +++++++++++++++++++++++++++++++++---
->  1 file changed, 84 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
-> index 27d1829501..fd6e1a3957 100644
-> --- a/arch/arm/mach-stm32mp/bsec.c
-> +++ b/arch/arm/mach-stm32mp/bsec.c
-> @@ -18,6 +18,7 @@
->  #include <linux/iopoll.h>
-> 
->  #define BSEC_OTP_MAX_VALUE             95
-> +#define BSEC_OTP_UPPER_START           32
->  #define BSEC_TIMEOUT_US                        10000
-> 
->  /* BSEC REGISTER OFFSET (base relative) */
-> @@ -41,6 +42,7 @@
->  /* BSEC_CONTROL Register */
->  #define BSEC_READ                      0x000
->  #define BSEC_WRITE                     0x100
-> +#define BSEC_LOCK                      0x200
-> 
->  /* LOCK Register */
->  #define OTP_LOCK_MASK                  0x1F
-> @@ -61,6 +63,11 @@
->   */
->  #define BSEC_LOCK_PROGRAM              0x04
-> 
-> +/*
-> + * OTP status: bit 0 permanent lock
-> + */
-> +#define BSEC_LOCK_PERM                 BIT(0)
-> +
->  /**
->   * bsec_lock() - manage lock for each type SR/SP/SW
->   * @address: address of bsec IP register
-> @@ -284,6 +291,65 @@ static int bsec_program_otp(struct udevice *dev, long base, u32 val, u32 otp)
->         return ret;
->  }
-> 
-> +/**
-> + * bsec_permanent_lock_otp() - permanent lock of OTP in SAFMEM
-> + * @dev: bsec IP device
-> + * @base: base address of bsec IP
-> + * @otp: otp number (0 - BSEC_OTP_MAX_VALUE)
-> + * Return: 0 if no error
-> + */
-> +static int bsec_permanent_lock_otp(struct udevice *dev, long base, uint32_t otp)
-> +{
-> +       int ret;
-> +       bool power_up = false;
-> +       u32 val, addr;
-> +
-> +       /* check if safemem is power up */
-> +       if (!(readl(base + BSEC_OTP_STATUS_OFF) & BSEC_MODE_PWR_MASK)) {
-> +               ret = bsec_power_safmem(base, true);
-> +               if (ret)
-> +                       return ret;
-> +
-> +               power_up = true;
-> +       }
-> +
-> +       /*
-> +        * low OTPs = 2 bits word for low OTPs, 1 bits per word for upper OTP
-> +        * and only 16 bits used in WRDATA
-> +        */
-> +       if (otp < BSEC_OTP_UPPER_START) {
-> +               addr = otp / 8;
-> +               val = 0x03 << ((otp * 2) & 0xF);
-> +       } else {
-> +               addr = BSEC_OTP_UPPER_START / 8 +
-> +                      ((otp - BSEC_OTP_UPPER_START) / 16);
-> +               val = 0x01 << (otp & 0xF);
-> +       }
-> +
-> +       /* set value in write register*/
-> +       writel(val, base + BSEC_OTP_WRDATA_OFF);
-> +
-> +       /* set BSEC_OTP_CTRL_OFF with the otp addr and lock request*/
-> +       writel(addr | BSEC_WRITE | BSEC_LOCK, base + BSEC_OTP_CTRL_OFF);
-> +
-> +       /* check otp status*/
-> +       ret = readl_poll_timeout(base + BSEC_OTP_STATUS_OFF,
-> +                                val, (val & BSEC_MODE_BUSY_MASK) == 0,
-> +                                BSEC_TIMEOUT_US);
-> +       if (ret)
-> +               return ret;
-> +
-> +       if (val & BSEC_MODE_PROGFAIL_MASK)
-> +               ret = -EACCES;
-> +       else
-> +               ret = bsec_check_error(base, otp);
-> +
-> +       if (power_up)
-> +               bsec_power_safmem(base, false);
-> +
-> +       return ret;
-> +}
-> +
->  /* BSEC MISC driver *******************************************************/
->  struct stm32mp_bsec_plat {
->         u32 base;
-> @@ -339,9 +405,14 @@ static int stm32mp_bsec_read_shadow(struct udevice *dev, u32 *val, u32 otp)
->  static int stm32mp_bsec_read_lock(struct udevice *dev, u32 *val, u32 otp)
->  {
->         struct stm32mp_bsec_plat *plat = dev_get_plat(dev);
-> +       u32 wrlock;
-> 
->         /* return OTP permanent write lock status */
-> -       *val = bsec_read_lock(plat->base + BSEC_WRLOCK_OFF, otp);
-> +       wrlock = bsec_read_lock(plat->base + BSEC_WRLOCK_OFF, otp);
-> +
-> +       *val = 0;
-> +       if (wrlock)
-> +               *val = BSEC_LOCK_PERM;
-> 
->         return 0;
->  }
-> @@ -377,15 +448,22 @@ static int stm32mp_bsec_write_shadow(struct udevice *dev, u32 val, u32 otp)
-> 
->  static int stm32mp_bsec_write_lock(struct udevice *dev, u32 val, u32 otp)
->  {
-> -       if (!IS_ENABLED(CONFIG_ARM_SMCCC) || IS_ENABLED(CONFIG_SPL_BUILD))
-> -               return -ENOTSUPP;
-> +       struct stm32mp_bsec_plat *plat;
-> +
-> +       /* only permanent write lock is supported in U-Boot */
-> +       if (!(val & BSEC_LOCK_PERM)) {
-> +               dev_dbg(dev, "lock option without BSEC_LOCK_PERM: %x\n", val);
-> +               return 0; /* nothing to do */
-> +       }
-> 
-> -       if (val == 1)
-> +       if (IS_ENABLED(CONFIG_ARM_SMCCC) && !IS_ENABLED(CONFIG_SPL_BUILD))
->                 return stm32_smc_exec(STM32_SMC_BSEC,
->                                       STM32_SMC_WRLOCK_OTP,
->                                       otp, 0);
-> -       if (val == 0)
-> -               return 0; /* nothing to do */
-> +
-> +       plat = dev_get_plat(dev);
-> +
-> +       return bsec_permanent_lock_otp(dev, plat->base, otp);
-> 
->         return -EINVAL;
->  }
-> --
-> 2.25.1
-Tested-by: Johann Neuhauser <jneuhauser@dh-electronics.com>
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+QWRkIHNwaV9nZXRfYnVzX2FuZF9jcygpIG5ldyAidXNlX2R0IiBwYXJhbSB3aGljaCBhbGxvd3Mg
+dG8Kc2VsZWN0IFNQSSBzcGVlZCBhbmQgbW9kZSBmcm9tIERUIG9yIGZyb20gZGVmYXVsdCB2YWx1
+ZSBwYXNzZWQKaW4gcGFyYW1ldGVycy4KCkludHJvZHVjZSBzcGlfZmxhc2hfcHJvYmVfYnVzX2Nz
+X2RlZmF1bHQoKSB3aGljaCBpcyBpZGVudGljYWwKdG8gc3BpX2ZsYXNoX3Byb2JlX2J1c19jcygp
+IGV4Y2VwdCBpdCBjYWxscyBzcGlfZ2V0X2J1c19hbmRfY3MoKQp3aXRoIHVzZV9kdCBwYXJhbSBz
+ZXQgdG8gZmFsc2UuCgpTaW5jZSBjb21taXQgZTJlOTVlNWUyNTQyICgic3BpOiBVcGRhdGUgc3Bl
+ZWQvbW9kZSBvbiBjaGFuZ2UiKQp3aGVuIGNhbGxpbmcgInNmIHByb2JlIiBvciAiZW52IHNhdmUi
+IG9uIFNQSSBmbGFzaCwKc3BpX3NldF9zcGVlZF9tb2RlKCkgaXMgY2FsbGVkIHR3aWNlLgoKc3Bp
+X2dldF9idXNfYW5kX2NzKCkKICAgICAgfC0tPiBzcGlfY2xhaW1fYnVzKCkKICAgICAgfCAgICAg
+ICB8LS0+IHNwaV9zZXRfc3BlZWRfbW9kZShzcGVlZCBhbmQgbW9kZSBmcm9tIERUKQogICAgICAu
+Li4KICAgICAgfC0tPiBzcGlfc2V0X3NwZWVkX21vZGUoZGVmYXVsdCBzcGVlZCBhbmQgbW9kZSB2
+YWx1ZSkKClRoZSBmaXJzdCBzcGlfc2V0X3NwZWVkX21vZGUoKSBjYWxsIGlzIGRvbmUgd2l0aCBz
+cGVlZCBhbmQgbW9kZQp2YWx1ZXMgZnJvbSBEVCwgd2hlcmVhcyB0aGUgc2Vjb25kIGNhbGwgaXMg
+ZG9uZSB3aXRoIHNwZWVkCmFuZCBtb2RlIHNldCB0byBkZWZhdWx0IHZhbHVlIChzcGVlZCBpcyBz
+ZXQgdG8gQ09ORklHX1NGX0RFRkFVTFRfU1BFRUQpCgpUaGlzIGlzIGFuIGlzc3VlIGJlY2F1c2Ug
+U1BJIGZsYXNoIHBlcmZvcm1hbmNlIGFyZSBpbXBhY3RlZCBieQp1c2luZyBkZWZhdWx0IHNwZWVk
+IHdoaWNoIGNhbiBiZSBsb3dlciB0aGFuIHRoZSBvbmUgZGVmaW5lZCBpbiBEVC4KCk9uZSBzb2x1
+dGlvbiBpcyB0byBzZXQgQ09ORklHX1NGX0RFRkFVTFRfU1BFRUQgdG8gdGhlIHNwZWVkIGRlZmlu
+ZWQKaW4gRFQsIGJ1dCB3ZSBsb29zZSBmbGV4aWJpbGl0eSBvZmZlcmVkIGJ5IERULgoKQW5vdGhl
+ciBpc3N1ZSBjYW4gYmUgZW5jb3VudGVyZWQgd2l0aCAyIFNQSSBmbGFzaGVzIHVzaW5nIDIgZGlm
+ZmVyZW50CnNwZWVkcy4gSW4gdGhpcyBzcGVjaWZpYyBjYXNlIHVzYWdlIG9mIENPTkZJR19TRl9E
+RUZBVUxUX1NQRUVEIGlzIG5vdApmbGV4aWJsZSBjb21wYXJlZCB0byBnZXQgdGhlIDIgZGlmZmVy
+ZW50IHNwZWVkcyBmcm9tIERULgoKQnkgYWRkaW5nIG5ldyBwYXJhbWV0ZXIgInVzZV9kdCIgdG8g
+c3BpX2dldF9idXNfYW5kX2NzKCksIHRoaXMgYWxsb3dzCnRvIGZvcmNlIHVzYWdlIG9mIGVpdGhl
+ciBzcGVlZCBhbmQgbW9kZSBmcm9tIERUICh1c2VfZHQgPSB0cnVlKSBvciB0bwp1c2Ugc3BlZWQg
+YW5kIG1vZGUgcGFyYW1ldGVyIHZhbHVlLgoKU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJk
+IDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+CkNjOiBNYXJlayBCZWh1biA8bWFyZWsuYmVo
+dW5AbmljLmN6PgpDYzogSmFnYW4gVGVraSA8amFnYW5AYW1hcnVsYXNvbHV0aW9ucy5jb20+CkNj
+OiBWaWduZXNoIFIgPHZpZ25lc2hyQHRpLmNvbT4KQ2M6IEpvZSBIZXJzaGJlcmdlciA8am9lLmhl
+cnNoYmVyZ2VyQG5pLmNvbT4KQ2M6IFJhbW9uIEZyaWVkIDxyZnJpZWQuZGV2QGdtYWlsLmNvbT4K
+Q2M6IEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT4KQ2M6IE1hcmVrIFZhc3V0IDxtYXJl
+eEBkZW54LmRlPgpDYzogV29sZmdhbmcgRGVuayA8d2RAZGVueC5kZT4KQ2M6IFNpbW9uIEdsYXNz
+IDxzamdAY2hyb21pdW0ub3JnPgpDYzogU3RlZmFuIFJvZXNlIDxzckBkZW54LmRlPgpDYzogIlBh
+bGkgUm9ow6FyIiA8cGFsaUBrZXJuZWwub3JnPgpDYzogS29uc3RhbnRpbiBQb3JvdGNoa2luIDxr
+b3N0YXBAbWFydmVsbC5jb20+CkNjOiBJZ2FsIExpYmVybWFuIDxpZ2FsbEBtYXJ2ZWxsLmNvbT4K
+Q2M6IEJpbiBNZW5nIDxibWVuZy5jbkBnbWFpbC5jb20+CkNjOiBQcmF0eXVzaCBZYWRhdiA8cC55
+YWRhdkB0aS5jb20+CkNjOiBTZWFuIEFuZGVyc29uIDxzZWFuZ2EyQGdtYWlsLmNvbT4KQ2M6IEFu
+amkgSiA8YW5qaS5qYWdhcmxtdWRpQG54cC5jb20+CkNjOiBCaXdlbiBMaSA8Yml3ZW4ubGlAbnhw
+LmNvbT4KQ2M6IFByaXlhbmthIEphaW4gPHByaXlhbmthLmphaW5AbnhwLmNvbT4KQ2M6IENoYWl0
+YW55YSBTYWtpbmFtIDxjaGFpdGFueWEuc2FraW5hbUBueHAuY29tPgoKLS0tCgpDaGFuZ2VzIGlu
+IHYyOgogIC0gYWRkIHNwaV9mbGFzaF9wcm9iZV9idXNfY3NfZGVmYXVsdCgpIHdoaWNoIGNhbGxz
+IHNwaV9nZXRfYnVzX2FuZF9jcygpCiAgICB3aXRoICJ1c2VfZHQiIHBhcmFtIHNldCB0byB0cnVl
+LCB3aGVyZWFzIHNwaV9mbGFzaF9wcm9iZV9idXNfY3MoKSBjYWxscwogICAgc3BpX2dldF9idXNf
+YW5kX2NzKCkgd2l0aCAidXNlX2R0IiBwYXJhbSBzZXQgdG8gdHJ1ZS4KCiBib2FyZC9DWi5OSUMv
+dHVycmlzX21veC90dXJyaXNfbW94LmMgfCAgMiArLQogY21kL3NmLmMgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHwgIDkgKysrKysrKystCiBjbWQvc3BpLmMgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgfCAgMiArLQogZHJpdmVycy9tdGQvc3BpL3NmLXVjbGFzcy5jICAgICAgICAgIHwg
+MzAgKysrKysrKysrKysrKysrKysrKysrKysrKystLQogZHJpdmVycy9zcGkvc3BpLXVjbGFzcy5j
+ICAgICAgICAgICAgIHwgIDggKysrKy0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC9tYXgzNDIwX3Vk
+Yy5jICAgICB8ICAyICstCiBpbmNsdWRlL3NwaS5oICAgICAgICAgICAgICAgICAgICAgICAgfCAg
+NyArKysrLS0tCiBpbmNsdWRlL3NwaV9mbGFzaC5oICAgICAgICAgICAgICAgICAgfCAgNCArKysr
+CiB0ZXN0L2RtL3NwaS5jICAgICAgICAgICAgICAgICAgICAgICAgfCAxNSArKysrKysrLS0tLS0t
+LQogOSBmaWxlcyBjaGFuZ2VkLCA1OSBpbnNlcnRpb25zKCspLCAyMCBkZWxldGlvbnMoLSkKCmRp
+ZmYgLS1naXQgYS9ib2FyZC9DWi5OSUMvdHVycmlzX21veC90dXJyaXNfbW94LmMgYi9ib2FyZC9D
+Wi5OSUMvdHVycmlzX21veC90dXJyaXNfbW94LmMKaW5kZXggZjBjNWFhNmE1Mi4uNGI3NTVlMTQy
+MCAxMDA2NDQKLS0tIGEvYm9hcmQvQ1ouTklDL3R1cnJpc19tb3gvdHVycmlzX21veC5jCisrKyBi
+L2JvYXJkL0NaLk5JQy90dXJyaXNfbW94L3R1cnJpc19tb3guYwpAQCAtMTQ4LDcgKzE0OCw3IEBA
+IHN0YXRpYyBpbnQgbW94X2RvX3NwaSh1OCAqaW4sIHU4ICpvdXQsIHNpemVfdCBzaXplKQogCXN0
+cnVjdCB1ZGV2aWNlICpkZXY7CiAJaW50IHJldDsKIAotCXJldCA9IHNwaV9nZXRfYnVzX2FuZF9j
+cygwLCAxLCAxMDAwMDAwLCBTUElfQ1BIQSB8IFNQSV9DUE9MLAorCXJldCA9IHNwaV9nZXRfYnVz
+X2FuZF9jcygwLCAxLCAxMDAwMDAwLCBTUElfQ1BIQSB8IFNQSV9DUE9MLCBmYWxzZSwKIAkJCQkg
+InNwaV9nZW5lcmljX2RydiIsICJtb3h0ZXRAMSIsICZkZXYsCiAJCQkJICZzbGF2ZSk7CiAJaWYg
+KHJldCkKZGlmZiAtLWdpdCBhL2NtZC9zZi5jIGIvY21kL3NmLmMKaW5kZXggOGJkZWJkOWZkOC4u
+NDBiMmNjMzI5NyAxMDA2NDQKLS0tIGEvY21kL3NmLmMKKysrIGIvY21kL3NmLmMKQEAgLTkxLDYg
+KzkxLDcgQEAgc3RhdGljIGludCBkb19zcGlfZmxhc2hfcHJvYmUoaW50IGFyZ2MsIGNoYXIgKmNv
+bnN0IGFyZ3ZbXSkKIAl1bnNpZ25lZCBpbnQgc3BlZWQgPSBDT05GSUdfU0ZfREVGQVVMVF9TUEVF
+RDsKIAl1bnNpZ25lZCBpbnQgbW9kZSA9IENPTkZJR19TRl9ERUZBVUxUX01PREU7CiAJY2hhciAq
+ZW5kcDsKKwlib29sIHVzZV9kdCA9IHRydWU7CiAjaWYgQ09ORklHX0lTX0VOQUJMRUQoRE1fU1BJ
+X0ZMQVNIKQogCXN0cnVjdCB1ZGV2aWNlICpuZXcsICpidXNfZGV2OwogCWludCByZXQ7CkBAIC0x
+MTcsMTEgKzExOCwxMyBAQCBzdGF0aWMgaW50IGRvX3NwaV9mbGFzaF9wcm9iZShpbnQgYXJnYywg
+Y2hhciAqY29uc3QgYXJndltdKQogCQlzcGVlZCA9IHNpbXBsZV9zdHJ0b3VsKGFyZ3ZbMl0sICZl
+bmRwLCAwKTsKIAkJaWYgKCphcmd2WzJdID09IDAgfHwgKmVuZHAgIT0gMCkKIAkJCXJldHVybiAt
+MTsKKwkJdXNlX2R0ID0gZmFsc2U7CiAJfQogCWlmIChhcmdjID49IDQpIHsKIAkJbW9kZSA9IGhl
+eHRvdWwoYXJndlszXSwgJmVuZHApOwogCQlpZiAoKmFyZ3ZbM10gPT0gMCB8fCAqZW5kcCAhPSAw
+KQogCQkJcmV0dXJuIC0xOworCQl1c2VfZHQgPSBmYWxzZTsKIAl9CiAKICNpZiBDT05GSUdfSVNf
+RU5BQkxFRChETV9TUElfRkxBU0gpCkBAIC0xMzEsNyArMTM0LDExIEBAIHN0YXRpYyBpbnQgZG9f
+c3BpX2ZsYXNoX3Byb2JlKGludCBhcmdjLCBjaGFyICpjb25zdCBhcmd2W10pCiAJCWRldmljZV9y
+ZW1vdmUobmV3LCBETV9SRU1PVkVfTk9STUFMKTsKIAl9CiAJZmxhc2ggPSBOVUxMOwotCXJldCA9
+IHNwaV9mbGFzaF9wcm9iZV9idXNfY3MoYnVzLCBjcywgc3BlZWQsIG1vZGUsICZuZXcpOworCWlm
+ICh1c2VfZHQpCisJCXJldCA9IHNwaV9mbGFzaF9wcm9iZV9idXNfY3MoYnVzLCBjcywgc3BlZWQs
+IG1vZGUsICZuZXcpOworCWVsc2UKKwkJcmV0ID0gc3BpX2ZsYXNoX3Byb2JlX2J1c19jc19kZWZh
+dWx0KGJ1cywgY3MsIHNwZWVkLCBtb2RlLCAmbmV3KTsKKwogCWlmIChyZXQpIHsKIAkJcHJpbnRm
+KCJGYWlsZWQgdG8gaW5pdGlhbGl6ZSBTUEkgZmxhc2ggYXQgJXU6JXUgKGVycm9yICVkKVxuIiwK
+IAkJICAgICAgIGJ1cywgY3MsIHJldCk7CmRpZmYgLS1naXQgYS9jbWQvc3BpLmMgYi9jbWQvc3Bp
+LmMKaW5kZXggNmRjMzI2NzhkYS4uNDZiZDgxN2U2MCAxMDA2NDQKLS0tIGEvY21kL3NwaS5jCisr
+KyBiL2NtZC9zcGkuYwpAQCAtNDYsNyArNDYsNyBAQCBzdGF0aWMgaW50IGRvX3NwaV94ZmVyKGlu
+dCBidXMsIGludCBjcykKIAlzdHIgPSBzdHJkdXAobmFtZSk7CiAJaWYgKCFzdHIpCiAJCXJldHVy
+biAtRU5PTUVNOwotCXJldCA9IHNwaV9nZXRfYnVzX2FuZF9jcyhidXMsIGNzLCBmcmVxLCBtb2Rl
+LCAic3BpX2dlbmVyaWNfZHJ2IiwKKwlyZXQgPSBzcGlfZ2V0X2J1c19hbmRfY3MoYnVzLCBjcywg
+ZnJlcSwgbW9kZSwgZmFsc2UsICJzcGlfZ2VuZXJpY19kcnYiLAogCQkJCSBzdHIsICZkZXYsICZz
+bGF2ZSk7CiAJaWYgKHJldCkKIAkJcmV0dXJuIHJldDsKZGlmZiAtLWdpdCBhL2RyaXZlcnMvbXRk
+L3NwaS9zZi11Y2xhc3MuYyBiL2RyaXZlcnMvbXRkL3NwaS9zZi11Y2xhc3MuYwppbmRleCA2M2Qx
+NjI5MWZmLi5mMzg1MThiN2ZkIDEwMDY0NAotLS0gYS9kcml2ZXJzL210ZC9zcGkvc2YtdWNsYXNz
+LmMKKysrIGIvZHJpdmVycy9tdGQvc3BpL3NmLXVjbGFzcy5jCkBAIC03NCw4ICs3NCwzNCBAQCBp
+bnQgc3BpX2ZsYXNoX3Byb2JlX2J1c19jcyh1bnNpZ25lZCBpbnQgYnVzbnVtLCB1bnNpZ25lZCBp
+bnQgY3MsCiAJc25wcmludGYobmFtZSwgc2l6ZW9mKG5hbWUpLCAic3BpX2ZsYXNoQCVkOiVkIiwg
+YnVzbnVtLCBjcyk7CiAJc3RyID0gc3RyZHVwKG5hbWUpOwogI2VuZGlmCi0JcmV0ID0gc3BpX2dl
+dF9idXNfYW5kX2NzKGJ1c251bSwgY3MsIG1heF9oeiwgc3BpX21vZGUsCi0JCQkJICAiamVkZWNf
+c3BpX25vciIsIHN0ciwgJmJ1cywgJnNsYXZlKTsKKwlyZXQgPSBzcGlfZ2V0X2J1c19hbmRfY3Mo
+YnVzbnVtLCBjcywgbWF4X2h6LCBzcGlfbW9kZSwgdHJ1ZSwKKwkJCQkgImplZGVjX3NwaV9ub3Ii
+LCBzdHIsICZidXMsICZzbGF2ZSk7CisJaWYgKHJldCkKKwkJcmV0dXJuIHJldDsKKworCSpkZXZw
+ID0gc2xhdmUtPmRldjsKKwlyZXR1cm4gMDsKK30KKworaW50IHNwaV9mbGFzaF9wcm9iZV9idXNf
+Y3NfZGVmYXVsdCh1bnNpZ25lZCBpbnQgYnVzbnVtLCB1bnNpZ25lZCBpbnQgY3MsCisJCQkJICAg
+dW5zaWduZWQgaW50IG1heF9oeiwgdW5zaWduZWQgaW50IHNwaV9tb2RlLAorCQkJCSAgIHN0cnVj
+dCB1ZGV2aWNlICoqZGV2cCkKK3sKKwlzdHJ1Y3Qgc3BpX3NsYXZlICpzbGF2ZTsKKwlzdHJ1Y3Qg
+dWRldmljZSAqYnVzOworCWNoYXIgKnN0cjsKKwlpbnQgcmV0OworCisjaWYgZGVmaW5lZChDT05G
+SUdfU1BMX0JVSUxEKSAmJiBDT05GSUdfSVNfRU5BQkxFRChVU0VfVElOWV9QUklOVEYpCisJc3Ry
+ID0gInNwaV9mbGFzaCI7CisjZWxzZQorCWNoYXIgbmFtZVszMF07CisKKwlzbnByaW50ZihuYW1l
+LCBzaXplb2YobmFtZSksICJzcGlfZmxhc2hAJWQ6JWQiLCBidXNudW0sIGNzKTsKKwlzdHIgPSBz
+dHJkdXAobmFtZSk7CisjZW5kaWYKKwlyZXQgPSBzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBj
+cywgbWF4X2h6LCBzcGlfbW9kZSwgZmFsc2UsCisJCQkJICJqZWRlY19zcGlfbm9yIiwgc3RyLCAm
+YnVzLCAmc2xhdmUpOwogCWlmIChyZXQpCiAJCXJldHVybiByZXQ7CiAKZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvc3BpL3NwaS11Y2xhc3MuYyBiL2RyaXZlcnMvc3BpL3NwaS11Y2xhc3MuYwppbmRleCBm
+OGVjMzEyZDcxLi40MzY2MTI0ZTNjIDEwMDY0NAotLS0gYS9kcml2ZXJzL3NwaS9zcGktdWNsYXNz
+LmMKKysrIGIvZHJpdmVycy9zcGkvc3BpLXVjbGFzcy5jCkBAIC0zNDAsNyArMzQwLDcgQEAgaW50
+IHNwaV9maW5kX2J1c19hbmRfY3MoaW50IGJ1c251bSwgaW50IGNzLCBzdHJ1Y3QgdWRldmljZSAq
+KmJ1c3AsCiAJcmV0dXJuIHJldDsKIH0KIAotaW50IHNwaV9nZXRfYnVzX2FuZF9jcyhpbnQgYnVz
+bnVtLCBpbnQgY3MsIGludCBzcGVlZCwgaW50IG1vZGUsCitpbnQgc3BpX2dldF9idXNfYW5kX2Nz
+KGludCBidXNudW0sIGludCBjcywgaW50IHNwZWVkLCBpbnQgbW9kZSwgYm9vbCB1c2VfZHQsCiAJ
+CSAgICAgICBjb25zdCBjaGFyICpkcnZfbmFtZSwgY29uc3QgY2hhciAqZGV2X25hbWUsCiAJCSAg
+ICAgICBzdHJ1Y3QgdWRldmljZSAqKmJ1c3AsIHN0cnVjdCBzcGlfc2xhdmUgKipkZXZwKQogewpA
+QCAtNDE5LDggKzQxOSw4IEBAIGludCBzcGlfZ2V0X2J1c19hbmRfY3MoaW50IGJ1c251bSwgaW50
+IGNzLCBpbnQgc3BlZWQsIGludCBtb2RlLAogCX0KIAogCS8qIEluIGNhc2UgYnVzIGZyZXF1ZW5j
+eSBvciBtb2RlIGNoYW5nZWQsIHVwZGF0ZSBpdC4gKi8KLQlpZiAoKHNwZWVkICYmIGJ1c19kYXRh
+LT5zcGVlZCAmJiBidXNfZGF0YS0+c3BlZWQgIT0gc3BlZWQpIHx8Ci0JICAgIChwbGF0ICYmIHBs
+YXQtPm1vZGUgIT0gbW9kZSkpIHsKKwlpZiAoKChzcGVlZCAmJiBidXNfZGF0YS0+c3BlZWQgJiYg
+YnVzX2RhdGEtPnNwZWVkICE9IHNwZWVkKSB8fAorCSAgICAgKHBsYXQgJiYgcGxhdC0+bW9kZSAh
+PSBtb2RlKSkgJiYgIXVzZV9kdCkgewogCQlyZXQgPSBzcGlfc2V0X3NwZWVkX21vZGUoYnVzLCBz
+cGVlZCwgbW9kZSk7CiAJCWlmIChyZXQpCiAJCQlnb3RvIGVycl9zcGVlZF9tb2RlOwpAQCAtNDUz
+LDcgKzQ1Myw3IEBAIHN0cnVjdCBzcGlfc2xhdmUgKnNwaV9zZXR1cF9zbGF2ZSh1bnNpZ25lZCBp
+bnQgYnVzbnVtLCB1bnNpZ25lZCBpbnQgY3MsCiAJc3RydWN0IHVkZXZpY2UgKmRldjsKIAlpbnQg
+cmV0OwogCi0JcmV0ID0gc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3MsIHNwZWVkLCBtb2Rl
+LCBOVUxMLCAwLCAmZGV2LAorCXJldCA9IHNwaV9nZXRfYnVzX2FuZF9jcyhidXNudW0sIGNzLCBz
+cGVlZCwgbW9kZSwgZmFsc2UsIE5VTEwsIDAsICZkZXYsCiAJCQkJICZzbGF2ZSk7CiAJaWYgKHJl
+dCkKIAkJcmV0dXJuIE5VTEw7CmRpZmYgLS1naXQgYS9kcml2ZXJzL3VzYi9nYWRnZXQvbWF4MzQy
+MF91ZGMuYyBiL2RyaXZlcnMvdXNiL2dhZGdldC9tYXgzNDIwX3VkYy5jCmluZGV4IGExNjA5NWY4
+OTIuLmNjZWMzMzdmOTkgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvdXNiL2dhZGdldC9tYXgzNDIwX3Vk
+Yy5jCisrKyBiL2RyaXZlcnMvdXNiL2dhZGdldC9tYXgzNDIwX3VkYy5jCkBAIC04MzAsNyArODMw
+LDcgQEAgc3RhdGljIGludCBtYXgzNDIwX3VkY19wcm9iZShzdHJ1Y3QgdWRldmljZSAqZGV2KQog
+CWNzID0gc2xhdmVfcGRhdGEtPmNzOwogCXNwZWVkID0gc2xhdmVfcGRhdGEtPm1heF9oejsKIAlt
+b2RlID0gc2xhdmVfcGRhdGEtPm1vZGU7Ci0Jc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Ms
+IHNwZWVkLCBtb2RlLCAic3BpX2dlbmVyaWNfZHJ2IiwKKwlzcGlfZ2V0X2J1c19hbmRfY3MoYnVz
+bnVtLCBjcywgc3BlZWQsIG1vZGUsIGZhbHNlLCAic3BpX2dlbmVyaWNfZHJ2IiwKIAkJCSAgIE5V
+TEwsICZzcGlkLCAmdWRjLT5zbGF2ZSk7CiAKIAl1ZGMtPmRldiA9IGRldjsKZGlmZiAtLWdpdCBh
+L2luY2x1ZGUvc3BpLmggYi9pbmNsdWRlL3NwaS5oCmluZGV4IGZhOWFiMTJkYmUuLjBhYTVmZTAz
+M2MgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvc3BpLmgKKysrIGIvaW5jbHVkZS9zcGkuaApAQCAtNTgy
+LDE1ICs1ODIsMTYgQEAgaW50IHNwaV9maW5kX2J1c19hbmRfY3MoaW50IGJ1c251bSwgaW50IGNz
+LCBzdHJ1Y3QgdWRldmljZSAqKmJ1c3AsCiAgKiBAY3M6CQlDaGlwIHNlbGVjdCB0byBsb29rIGZv
+cgogICogQHNwZWVkOglTUEkgc3BlZWQgdG8gdXNlIGZvciB0aGlzIHNsYXZlIHdoZW4gbm90IGF2
+YWlsYWJsZSBpbiBwbGF0CiAgKiBAbW9kZToJU1BJIG1vZGUgdG8gdXNlIGZvciB0aGlzIHNsYXZl
+IHdoZW4gbm90IGF2YWlsYWJsZSBpbiBwbGF0CisgKiBAdXNlX2R0OiAgICAgRm9yY2UgdXNhZ2Ug
+b2YgU1BJIHNwZWVkIGFuZCBTUEkgbW9kZSBmcm9tIERUCiAgKiBAZHJ2X25hbWU6CU5hbWUgb2Yg
+ZHJpdmVyIHRvIGF0dGFjaCB0byB0aGlzIGNoaXAgc2VsZWN0CiAgKiBAZGV2X25hbWU6CU5hbWUg
+b2YgdGhlIG5ldyBkZXZpY2UgdGh1cyBjcmVhdGVkCiAgKiBAYnVzcDoJUmV0dXJucyBidXMgZGV2
+aWNlCiAgKiBAZGV2cDoJUmV0dXJuIHNsYXZlIGRldmljZQogICogUmV0dXJuOiAwIGlmIGZvdW5k
+LCAtdmUgb24gZXJyb3IKICAqLwotaW50IHNwaV9nZXRfYnVzX2FuZF9jcyhpbnQgYnVzbnVtLCBp
+bnQgY3MsIGludCBzcGVlZCwgaW50IG1vZGUsCi0JCQljb25zdCBjaGFyICpkcnZfbmFtZSwgY29u
+c3QgY2hhciAqZGV2X25hbWUsCi0JCQlzdHJ1Y3QgdWRldmljZSAqKmJ1c3AsIHN0cnVjdCBzcGlf
+c2xhdmUgKipkZXZwKTsKK2ludCBzcGlfZ2V0X2J1c19hbmRfY3MoaW50IGJ1c251bSwgaW50IGNz
+LCBpbnQgc3BlZWQsIGludCBtb2RlLCBib29sIHVzZV9kdCwKKwkJICAgICAgIGNvbnN0IGNoYXIg
+KmRydl9uYW1lLCBjb25zdCBjaGFyICpkZXZfbmFtZSwKKwkJICAgICAgIHN0cnVjdCB1ZGV2aWNl
+ICoqYnVzcCwgc3RydWN0IHNwaV9zbGF2ZSAqKmRldnApOwogCiAvKioKICAqIHNwaV9jaGlwX3Nl
+bGVjdCgpIC0gR2V0IHRoZSBjaGlwIHNlbGVjdCBmb3IgYSBzbGF2ZQpkaWZmIC0tZ2l0IGEvaW5j
+bHVkZS9zcGlfZmxhc2guaCBiL2luY2x1ZGUvc3BpX2ZsYXNoLmgKaW5kZXggZDMzZDBkZDQ2YS4u
+MjU2ODc4ZGY2YSAxMDA2NDQKLS0tIGEvaW5jbHVkZS9zcGlfZmxhc2guaAorKysgYi9pbmNsdWRl
+L3NwaV9mbGFzaC5oCkBAIC0xMDUsNiArMTA1LDEwIEBAIGludCBzcGlfZmxhc2hfcHJvYmVfYnVz
+X2NzKHVuc2lnbmVkIGludCBidXNudW0sIHVuc2lnbmVkIGludCBjcywKIAkJCSAgIHVuc2lnbmVk
+IGludCBtYXhfaHosIHVuc2lnbmVkIGludCBzcGlfbW9kZSwKIAkJCSAgIHN0cnVjdCB1ZGV2aWNl
+ICoqZGV2cCk7CiAKK2ludCBzcGlfZmxhc2hfcHJvYmVfYnVzX2NzX2RlZmF1bHQodW5zaWduZWQg
+aW50IGJ1c251bSwgdW5zaWduZWQgaW50IGNzLAorCQkJCSAgIHVuc2lnbmVkIGludCBtYXhfaHos
+IHVuc2lnbmVkIGludCBzcGlfbW9kZSwKKwkJCQkgICBzdHJ1Y3QgdWRldmljZSAqKmRldnApOwor
+CiAvKiBDb21wYXRpYmlsaXR5IGZ1bmN0aW9uIC0gdGhpcyBpcyB0aGUgb2xkIFUtQm9vdCBBUEkg
+Ki8KIHN0cnVjdCBzcGlfZmxhc2ggKnNwaV9mbGFzaF9wcm9iZSh1bnNpZ25lZCBpbnQgYnVzLCB1
+bnNpZ25lZCBpbnQgY3MsCiAJCQkJICB1bnNpZ25lZCBpbnQgbWF4X2h6LCB1bnNpZ25lZCBpbnQg
+c3BpX21vZGUpOwpkaWZmIC0tZ2l0IGEvdGVzdC9kbS9zcGkuYyBiL3Rlc3QvZG0vc3BpLmMKaW5k
+ZXggZWU0YWQzYWJhYS4uMmIxZjU1MzVjNiAxMDA2NDQKLS0tIGEvdGVzdC9kbS9zcGkuYworKysg
+Yi90ZXN0L2RtL3NwaS5jCkBAIC00Nyw3ICs0Nyw3IEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlf
+ZmluZChzdHJ1Y3QgdW5pdF90ZXN0X3N0YXRlICp1dHMpCiAJLyogVGhpcyBmaW5kcyBub3RoaW5n
+IGJlY2F1c2Ugd2UgcmVtb3ZlZCB0aGUgZGV2aWNlICovCiAJdXRfYXNzZXJ0ZXEoLUVOT0RFViwg
+c3BpX2ZpbmRfYnVzX2FuZF9jcyhidXNudW0sIGNzLCAmYnVzLCAmZGV2KSk7CiAJdXRfYXNzZXJ0
+ZXEoLUVOT0RFViwgc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3MsIHNwZWVkLCBtb2RlLAot
+CQkJCQkJTlVMTCwgMCwgJmJ1cywgJnNsYXZlKSk7CisJCQkJCQlmYWxzZSwgTlVMTCwgMCwgJmJ1
+cywgJnNsYXZlKSk7CiAKIAkvKgogCSAqIFRoaXMgZm9yY2VzIHRoZSBkZXZpY2UgdG8gYmUgcmUt
+YWRkZWQsIGJ1dCB0aGVyZSBpcyBubyBlbXVsYXRpb24KQEAgLTU2LDcgKzU2LDcgQEAgc3RhdGlj
+IGludCBkbV90ZXN0X3NwaV9maW5kKHN0cnVjdCB1bml0X3Rlc3Rfc3RhdGUgKnV0cykKIAkgKiBh
+ICdwYXJ0aWFsbHktaW5pdGVkJyBkZXZpY2UuCiAJICovCiAJdXRfYXNzZXJ0ZXEoLUVOT0RFViwg
+c3BpX2ZpbmRfYnVzX2FuZF9jcyhidXNudW0sIGNzLCAmYnVzLCAmZGV2KSk7Ci0JdXRfYXNzZXJ0
+ZXEoLUVOT0VOVCwgc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3MsIHNwZWVkLCBtb2RlLAor
+CXV0X2Fzc2VydGVxKC1FTk9FTlQsIHNwaV9nZXRfYnVzX2FuZF9jcyhidXNudW0sIGNzLCBzcGVl
+ZCwgbW9kZSwgZmFsc2UsCiAJCQkJCQkiamVkZWNfc3BpX25vciIsICJuYW1lIiwgJmJ1cywKIAkJ
+CQkJCSZzbGF2ZSkpOwogCXNhbmRib3hfc2ZfdW5iaW5kX2VtdWwoc3RhdGVfZ2V0X2N1cnJlbnQo
+KSwgYnVzbnVtLCBjcyk7CkBAIC02Nyw3ICs2Nyw3IEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlf
+ZmluZChzdHJ1Y3QgdW5pdF90ZXN0X3N0YXRlICp1dHMpCiAJdXRfYXNzZXJ0b2soc2FuZGJveF9z
+Zl9iaW5kX2VtdWwoc3RhdGUsIGJ1c251bSwgY3MsIGJ1cywgbm9kZSwKIAkJCQkJICJuYW1lIikp
+OwogCXV0X2Fzc2VydG9rKHNwaV9maW5kX2J1c19hbmRfY3MoYnVzbnVtLCBjcywgJmJ1cywgJmRl
+dikpOwotCXV0X2Fzc2VydG9rKHNwaV9nZXRfYnVzX2FuZF9jcyhidXNudW0sIGNzLCBzcGVlZCwg
+bW9kZSwKKwl1dF9hc3NlcnRvayhzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBjcywgc3BlZWQs
+IG1vZGUsIGZhbHNlLAogCQkJCSAgICAgICAiamVkZWNfc3BpX25vciIsICJuYW1lIiwgJmJ1cywg
+JnNsYXZlKSk7CiAKIAl1dF9hc3NlcnRvayhzcGlfY3NfaW5mbyhidXMsIGNzLCAmaW5mbykpOwpA
+QCAtNzcsNyArNzcsOCBAQCBzdGF0aWMgaW50IGRtX3Rlc3Rfc3BpX2ZpbmQoc3RydWN0IHVuaXRf
+dGVzdF9zdGF0ZSAqdXRzKQogCXV0X2Fzc2VydG9rKHNhbmRib3hfc2ZfYmluZF9lbXVsKHN0YXRl
+LCBidXNudW0sIGNzX2IsIGJ1cywgbm9kZSwKIAkJCQkJICJuYW1lIikpOwogCXV0X2Fzc2VydGVx
+KC1FSU5WQUwsIHNwaV9nZXRfYnVzX2FuZF9jcyhidXNudW0sIGNzX2IsIHNwZWVkLCBtb2RlLAot
+CQkJCSAgICAgICAiamVkZWNfc3BpX25vciIsICJuYW1lIiwgJmJ1cywgJnNsYXZlKSk7CisJCQkJ
+CQlmYWxzZSwgImplZGVjX3NwaV9ub3IiLCAibmFtZSIsCisJCQkJCQkmYnVzLCAmc2xhdmUpKTsK
+IAl1dF9hc3NlcnRlcSgtRUlOVkFMLCBzcGlfY3NfaW5mbyhidXMsIGNzX2IsICZpbmZvKSk7CiAJ
+dXRfYXNzZXJ0ZXFfcHRyKE5VTEwsIGluZm8uZGV2KTsKIApAQCAtMTQ1LDEwICsxNDYsMTAgQEAg
+c3RhdGljIGludCBkbV90ZXN0X3NwaV9jbGFpbV9idXMoc3RydWN0IHVuaXRfdGVzdF9zdGF0ZSAq
+dXRzKQogCWNvbnN0IGludCBidXNudW0gPSAwLCBjc19hID0gMCwgY3NfYiA9IDEsIG1vZGUgPSAw
+OwogCiAJLyogR2V0IHNwaSBzbGF2ZSBvbiBDUzAgKi8KLQl1dF9hc3NlcnRvayhzcGlfZ2V0X2J1
+c19hbmRfY3MoYnVzbnVtLCBjc19hLCAxMDAwMDAwLCBtb2RlLCBOVUxMLCAwLAorCXV0X2Fzc2Vy
+dG9rKHNwaV9nZXRfYnVzX2FuZF9jcyhidXNudW0sIGNzX2EsIDEwMDAwMDAsIG1vZGUsIGZhbHNl
+LCBOVUxMLCAwLAogCQkJCSAgICAgICAmYnVzLCAmc2xhdmVfYSkpOwogCS8qIEdldCBzcGkgc2xh
+dmUgb24gQ1MxICovCi0JdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Nf
+YiwgMTAwMDAwMCwgbW9kZSwgTlVMTCwgMCwKKwl1dF9hc3NlcnRvayhzcGlfZ2V0X2J1c19hbmRf
+Y3MoYnVzbnVtLCBjc19iLCAxMDAwMDAwLCBtb2RlLCBmYWxzZSwgTlVMTCwgMCwKIAkJCQkgICAg
+ICAgJmJ1cywgJnNsYXZlX2IpKTsKIAogCS8qIERpZmZlcmVudCBtYXhfaHosIGRpZmZlcmVudCBt
+b2RlLiAqLwpAQCAtMTgyLDcgKzE4Myw3IEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlfeGZlcihz
+dHJ1Y3QgdW5pdF90ZXN0X3N0YXRlICp1dHMpCiAJY29uc3QgY2hhciBkb3V0WzVdID0gezB4OWZ9
+OwogCXVuc2lnbmVkIGNoYXIgZGluWzVdOwogCi0JdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5k
+X2NzKGJ1c251bSwgY3MsIDEwMDAwMDAsIG1vZGUsIE5VTEwsIDAsCisJdXRfYXNzZXJ0b2soc3Bp
+X2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3MsIDEwMDAwMDAsIG1vZGUsIGZhbHNlLCBOVUxMLCAw
+LAogCQkJCSAgICAgICAmYnVzLCAmc2xhdmUpKTsKIAl1dF9hc3NlcnRvayhzcGlfY2xhaW1fYnVz
+KHNsYXZlKSk7CiAJdXRfYXNzZXJ0b2soc3BpX3hmZXIoc2xhdmUsIDQwLCBkb3V0LCBkaW4sCi0t
+IAoyLjE3LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+ClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3Jt
+cmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xp
+c3RpbmZvL3Vib290LXN0bTMyCg==

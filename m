@@ -2,52 +2,111 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D80F64D9801
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Mar 2022 10:46:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13AC14DAC0E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 16 Mar 2022 08:51:40 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 91CBEC60467;
-	Tue, 15 Mar 2022 09:46:15 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF43EC5F1EF;
+	Wed, 16 Mar 2022 07:51:39 +0000 (UTC)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B7102C60464
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 47820C5F1ED
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Mar 2022 09:46:13 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E558D839AC;
- Tue, 15 Mar 2022 10:46:12 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1647337573;
- bh=Ko7Nv1kXO3jVJX6rlMHkAkvhaP5JmYhAU0jGU4mLx2A=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Edrhp9wk2KofiohPIpcVWKhUdbB1VY/nHfIrldr2+BAGgF/ApF0mZNVD3tsjhhauh
- q2g9D0Hzwtp18fGJvLkU51PshdMOhxcvondoFMw2Ejs8O+X3DO0Yx5roF+xVSUYWa5
- x4KQQbESpQJeJKWIJNmSrWXPLspvZhIdXwUKu1fg3fmBMPSvEFbVbW7CqdB1nBt8M6
- HK7bZrU++RtCUZS1GK78PRxgYM062XkMJwKn/5A/jRPNt4aiR5a6gB1MwcFBW0zaqv
- 3seIpJjUA3x3cJjNr9u2dZdIoXBcZg/l11+zyLD2jsU70DxBOn0SOJTt4JrFXzP7Rl
- 4YkWXWCjbAcug==
-Message-ID: <e4d5489e-e1c9-4af2-8c51-b52d04b98bbd@denx.de>
-Date: Tue, 15 Mar 2022 10:46:12 +0100
+ Wed, 16 Mar 2022 07:51:37 +0000 (UTC)
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20220316075134epoutp04dc30f1c8288fa9b8878d3fd282329329~czR5zXnqc0400804008epoutp04a
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 16 Mar 2022 07:51:34 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20220316075134epoutp04dc30f1c8288fa9b8878d3fd282329329~czR5zXnqc0400804008epoutp04a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1647417094;
+ bh=zyMCZOx+Bql5Lv6uhFcxzOvK3x4uXpIiM2gH77YhC3c=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=u4gmsltl5Qh+Yr6WkykBfa/7y3J/gc/vmVrZZmv1v+dCaiy8/A4jwgFTfDJN9rBvt
+ pAoo1B5r5rjwSqA+YPQPZToAcfmKenmRgf6widOUAy3YHxlPkYb+KJbb1F9jHQGkJG
+ EMbZ+17jONe7cq9IVZNWdAV7CvlSGciIQ3W/qLF4=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20220316075134epcas1p1272e4bbb9dc016895196de75826e012f~czR5gr9m51157111571epcas1p1N;
+ Wed, 16 Mar 2022 07:51:34 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.38.231]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4KJMsq0lSNz4x9QC; Wed, 16 Mar
+ 2022 07:51:27 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 72.59.09592.8F691326; Wed, 16 Mar 2022 16:51:20 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20220316075120epcas1p3d2e447bbaa259f716f5fbece7c4f9378~czRskl3wC1092710927epcas1p3j;
+ Wed, 16 Mar 2022 07:51:20 +0000 (GMT)
+Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20220316075120epsmtrp2bffb116f2a528755d7387b0f3bfb719a~czRsjraR01247812478epsmtrp2q;
+ Wed, 16 Mar 2022 07:51:20 +0000 (GMT)
+X-AuditID: b6c32a37-28fff70000002578-a5-623196f878b1
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 2C.55.03370.7F691326; Wed, 16 Mar 2022 16:51:20 +0900 (KST)
+Received: from [10.113.113.235] (unknown [10.113.113.235]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20220316075119epsmtip28355a9910109927f25e7f0c05f13ba29~czRsHvnZV0789707897epsmtip2K;
+ Wed, 16 Mar 2022 07:51:19 +0000 (GMT)
+Message-ID: <9490c25d-e9bf-e151-e8d7-fe0d23a07e2e@samsung.com>
+Date: Wed, 16 Mar 2022 16:51:19 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.2
+ Thunderbird/91.5.0
 Content-Language: en-US
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20220131160751.1.I886802ece25fd6731914c9467a57628799d72f33@changeid>
- <1f72cc27-3209-2246-f3cb-62d786b86dd5@foss.st.com>
- <aba5a42b-eacb-7a8d-3c18-0a66a965ec5e@foss.st.com>
- <325ff321-b68b-26ee-c980-000d2450cbf5@denx.de>
- <44045982-be42-f50a-b847-92d726f8c79a@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <44045982-be42-f50a-b847-92d726f8c79a@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] arm: dts: stm32mp15: alignment with v5.17
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+From: Jaehoon Chung <jh80.chung@samsung.com>
+In-Reply-To: <20220215162301.1.I5f92544259c3d1dad2df30c9d7762ec7860f07cf@changeid>
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpjk+LIzCtJLcpLzFFi42LZdlhTT/fHNMMkg+V7JS0mrb/GbvFj1RdW
+ i7d7O9ktFm5dzuLA4vG0fyu7x9k7Oxg9Nr7bweRxcJ9hAEtUtk1GamJKapFCal5yfkpmXrqt
+ kndwvHO8qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0EolhbLEnFKgUEBicbGSvp1NUX5pSapC
+ Rn5xia1SakFKToFpgV5xYm5xaV66Xl5qiZWhgYGRKVBhQnbGlCW7GAs+clcc2r2TuYGxgbOL
+ kZNDQsBEYnJXK3MXIxeHkMAORokbUx6zQDifGCW+netig3A+M0pce3+SHaal699yVojELkaJ
+ hZvvQDnvGSW2Nv1nBaniFbCT2LbkKlgHi4CqRO+PDVBxQYmTM5+wgNiiAhESL4/8ZQKxhQW8
+ JU5PWswIYjMLiEvcejIfLC4i4Clx89luqHiURNvUV2C9bAI6Etu/HQer4RQIkrh09ApUjbzE
+ 9rdzwB6SEPjILvHw1W8WiLNdJL73v2OEsIUlXh3fAvWOlMTnd3vZIBqaGSWWLjnICuH0MEr8
+ a7jOBlFlLLF/6WSgdRxAKzQl1u/ShwgrSuz8PRdqM5/Eu689rCAlEgK8Eh1tQhAlKhKXXr9k
+ gtl19wkkgCQEPCRO7jzHOIFRcRZSuMxC8v8sJP/MQli8gJFlFaNYakFxbnpqsWGBMTy+k/Nz
+ NzGCE6SW+Q7GaW8/6B1iZOJgPMQowcGsJMJ75oV+khBvSmJlVWpRfnxRaU5q8SFGU2DsTGSW
+ Ek3OB6bovJJ4QxNLAxMzI2MTC0MzQyVx3lXTTicKCaQnlqRmp6YWpBbB9DFxcEo1MJXtmWGw
+ RFjuypVUhZ8BKzZM6w+q/viIRaJwkaZAyqfb4V5qc7ikLY/s3X91oqEam0bcv+ffep13iNxI
+ TD3zxvNW3d//9QIbW2Tbt124eLyeN/HTajOlQxcyVwYEbP5btjLk5eaHX8QeGXrNStk7/bpy
+ y1bHX28vLORquWtbci7Z2j0g17U/d0uk977EvJyZK46fYck+oPh7jcb2Qrm4RQK15zOnVB6P
+ PZDqbfWn5mh+OGur5C2bmDCtzpyUfyV7dp2pq3/15dHcS5Fbi77lRv+Q8rOaHy15NDXG/mVh
+ rUZ/5neHtQLfHlzfH1pl9qf50cJjwWJzhdP+GT3mm6ibtak/nd9aYFYXw8uepm0JKUosxRmJ
+ hlrMRcWJAMWYi4wZBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrALMWRmVeSWpSXmKPExsWy7bCSvO6PaYZJBrPWs1pMWn+N3eLHqi+s
+ Fm/3drJbLNy6nMWBxeNp/1Z2j7N3djB6bHy3g8nj4D7DAJYoLpuU1JzMstQifbsErowpS3Yx
+ Fnzkrji0eydzA2MDZxcjJ4eEgIlE17/lrF2MXBxCAjsYJe5PPssEkZCS+Px0KlsXIweQLSxx
+ +HAxRM1bRoltR/uZQWp4Bewkti25yg5iswioSvT+2MAKEReUODnzCQuILSoQIdG2bApYvbCA
+ t8TpSYsZQWxmAXGJW0/mg+0SEfCUuPlsNyPILmaBKIlNZ4Qgdi1llLgy5QzYHDYBHYnt346D
+ 1XMKBElcOnoFql5dYv08IYiR8hLb385hnsAoNAvJFbOQbJuF0DELSccCRpZVjJKpBcW56bnF
+ hgVGeanlesWJucWleel6yfm5mxjBkaCltYNxz6oPeocYmTgYDzFKcDArifCeeaGfJMSbklhZ
+ lVqUH19UmpNafIhRmoNFSZz3QtfJeCGB9MSS1OzU1ILUIpgsEwenVANT2fUp4vYsb34elz0h
+ 0+aX3rY//nt/ocb5P28bm6SU1j6eWf3q8UqRFMUF64QnKsy4ETCtW0J3/a0nsQFXS+5vfruR
+ a2pg/4mMkP4X2w9uuZrYeN2y7JwTb4m0U/hFpcczZ/V9Opz7MpIrSNszakW/o9GrFTtX3Xhr
+ mHtkoZ3DVNeKVQuK+nT/9za+M6iR54lV1zkb2D/JdIaNnlprEsu5g1ul91cwlxprpRWeKvuy
+ VWpCiFLc7NxPFs7R05ZKXZr+32HGncfCFhs/8cwM1r4SH334y0l/hwKvgt3r4pfFnv9ltjFz
+ cvPB2FM+CpL+O3xao1RnRfuy7Nm/f05v2oWqVcZ2LMl9ZhkWe28/vrpZiaU4I9FQi7moOBEA
+ khEt2/MCAAA=
+X-CMS-MailID: 20220316075120epcas1p3d2e447bbaa259f716f5fbece7c4f9378
+X-Msg-Generator: CA
+X-Sendblock-Type: SVC_REQ_APPROVE
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20220215152338epcas1p2880ad243ab3e035ec077670cce6476ca
+References: <CGME20220215152338epcas1p2880ad243ab3e035ec077670cce6476ca@epcas1p2.samsung.com>
+ <20220215162301.1.I5f92544259c3d1dad2df30c9d7762ec7860f07cf@changeid>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Peng Fan <peng.fan@nxp.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] mmc: fix error message for unaligned
+	erase request
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -59,145 +118,58 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMy8xNS8yMiAxMDowNCwgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+IAo+IAo+IE9uIDMvMTUv
-MjIgMDk6NDksIE1hcmVrIFZhc3V0IHdyb3RlOgo+PiBPbiAzLzE1LzIyIDA4OjU0LCBQYXRyaWNl
-IENIT1RBUkQgd3JvdGU6Cj4+PiBIaSBQYXRyaWNrCj4+Pgo+Pj4gT24gMi8yMy8yMiAxMDowNSwg
-UGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+Pj4+IEhpIFBhdHJpY2sKPj4+Pgo+Pj4+IE9uIDEvMzEv
-MjIgMTY6MDcsIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4+Pj4+IERldmljZSB0cmVlIGFsaWdu
-bWVudCB3aXRoIExpbnV4IGtlcm5lbCB2NS4xNy1yYzEKPj4+Pj4gLSBBUk06IGR0czogc3RtMzI6
-IGFkZCBwdWxsLXVwIHRvIFVTQVJUMyBhbmQgVUFSVDcgUlggcGlucwo+Pj4+PiAgwqDCoCBvbiBT
-VE0zMk1QMTUgREt4IGJvYXJkcwo+Pj4+PiAtIEFSTTogZHRzOiBzdG0zMjogY2xlYW4gdWFydDRf
-aWRsZV9waW5zX2Egbm9kZSBmb3Igc3RtMzJtcDE1Cj4+Pj4+IC0gQVJNOiBkdHM6IHN0bTMyOiB0
-dW5lIHRoZSBIUyBVU0IgUEhZcyBvbiBzdG0zMm1wMTV4eC1ka3gKPj4+Pj4gLSBBUk06IGR0czog
-c3RtMzI6IHR1bmUgdGhlIEhTIFVTQiBQSFlzIG9uIHN0bTMybXAxNTdjLWV2MQo+Pj4+PiAtIEFS
-TTogZHRzOiBzdG0zMjogZml4IHN0dXNiMTYwMCBwaW5jdHJsIHVzZWQgb24gc3RtMzJtcDE1N2Mt
-ZGsKPj4+Pj4KPj4+Pj4gU2lnbmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5k
-ZWxhdW5heUBmb3NzLnN0LmNvbT4KPj4+Pj4gLS0tCj4+Pj4+Cj4+Pj4+ICDCoCBhcmNoL2FybS9k
-dHMvc3RtMzJtcDE1LXBpbmN0cmwuZHRzaSB8IDMyICsrKysrKysrKysrKysrLS0tLS0tLS0tLS0t
-LS0tCj4+Pj4+ICDCoCBhcmNoL2FybS9kdHMvc3RtMzJtcDE1N2MtZXYxLmR0c8KgwqDCoCB8IDIy
-ICsrKysrKysrKysrKysrKysrKysrCj4+Pj4+ICDCoCBhcmNoL2FybS9kdHMvc3RtMzJtcDE1eHgt
-ZGt4LmR0c2nCoMKgIHwgMTYgKysrKysrKysrKysrKysrCj4+Pj4+ICDCoCAzIGZpbGVzIGNoYW5n
-ZWQsIDU0IGluc2VydGlvbnMoKyksIDE2IGRlbGV0aW9ucygtKQo+Pj4+Pgo+Pj4+PiBkaWZmIC0t
-Z2l0IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNS1waW5jdHJsLmR0c2kgYi9hcmNoL2FybS9kdHMv
-c3RtMzJtcDE1LXBpbmN0cmwuZHRzaQo+Pj4+PiBpbmRleCBkMzU1M2UwZjAxLi42MTYxZjU5MDZl
-IDEwMDY0NAo+Pj4+PiAtLS0gYS9hcmNoL2FybS9kdHMvc3RtMzJtcDE1LXBpbmN0cmwuZHRzaQo+
-Pj4+PiArKysgYi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1LXBpbmN0cmwuZHRzaQo+Pj4+PiBAQCAt
-MTcxOCw3ICsxNzE4LDcgQEAKPj4+Pj4gIMKgIMKgwqDCoMKgwqAgc3R1c2IxNjAwX3BpbnNfYTog
-c3R1c2IxNjAwLTAgewo+Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIHBpbnMgewo+Pj4+PiAtwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXggPSA8U1RNMzJfUElOTVVYKCdJJywgMTEsIEFOQUxP
-Ryk+Owo+Pj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXggPSA8U1RNMzJfUElOTVVY
-KCdJJywgMTEsIEdQSU8pPjsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJpYXMt
-cHVsbC11cDsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqDCoMKgwqDCoCB9
-Owo+Pj4+PiBAQCAtMTczNywyMCArMTczNywyMCBAQAo+Pj4+PiAgwqDCoMKgwqDCoCB9Owo+Pj4+
-PiAgwqAgwqDCoMKgwqDCoCB1YXJ0NF9pZGxlX3BpbnNfYTogdWFydDQtaWRsZS0wIHsKPj4+Pj4g
-LcKgwqDCoMKgwqDCoMKgwqDCoMKgIHBpbnMxIHsKPj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCBwaW5tdXggPSA8U1RNMzJfUElOTVVYKCdHJywgMTEsIEFOQUxPRyk+OyAvKiBVQVJUNF9U
-WCAqLwo+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPj4+Pj4gLcKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHBpbnMyIHsKPj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXggPSA8
-U1RNMzJfUElOTVVYKCdCJywgMiwgQUY4KT47IC8qIFVBUlQ0X1JYICovCj4+Pj4+IC3CoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgYmlhcy1kaXNhYmxlOwo+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgfTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgIHBpbnMxIHsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgcGlubXV4ID0gPFNUTTMyX1BJTk1VWCgnRycsIDExLCBBTkFMT0cpPjsgLyogVUFS
-VDRfVFggKi8KPj4+Pj4gK8KgwqDCoMKgwqDCoMKgIH07Cj4+Pj4+ICvCoMKgwqDCoMKgwqDCoCBw
-aW5zMiB7Cj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHBpbm11eCA9IDxTVE0zMl9QSU5N
-VVgoJ0InLCAyLCBBRjgpPjsgLyogVUFSVDRfUlggKi8KPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgYmlhcy1kaXNhYmxlOwo+Pj4+PiArwqDCoMKgwqDCoMKgwqAgfTsKPj4+Pj4gIMKgwqDC
-oMKgwqAgfTsKPj4+Pj4gIMKgIMKgwqDCoMKgwqAgdWFydDRfc2xlZXBfcGluc19hOiB1YXJ0NC1z
-bGVlcC0wIHsKPj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgIHBpbnMgewo+Pj4+PiArwqDCoMKg
-wqDCoMKgwqAgcGlucyB7Cj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXgg
-PSA8U1RNMzJfUElOTVVYKCdHJywgMTEsIEFOQUxPRyk+LCAvKiBVQVJUNF9UWCAqLwo+Pj4+PiAg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDxTVE0zMl9QSU5NVVgoJ0InLCAy
-LCBBTkFMT0cpPjsgLyogVUFSVDRfUlggKi8KPj4+Pj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-fTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDC
-oCDCoMKgwqDCoMKgIHVhcnQ0X3BpbnNfYjogdWFydDQtMSB7Cj4+Pj4+IEBAIC0xODE2LDcgKzE4
-MTYsNyBAQAo+Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDCoMKgwqDCoMKgwqDC
-oMKgwqAgcGluczIgewo+Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcGlubXV4ID0g
-PFNUTTMyX1BJTk1VWCgnRScsIDcsIEFGNyk+OyAvKiBVQVJUN19SWCAqLwo+Pj4+PiAtwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBiaWFzLWRpc2FibGU7Cj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIGJpYXMtcHVsbC11cDsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqDC
-oMKgwqDCoCB9Owo+Pj4+PiAgwqAgQEAgLTE4MjYsNyArMTgyNiw3IEBACj4+Pj4+ICDCoMKgwqDC
-oMKgwqDCoMKgwqAgfTsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5zMiB7Cj4+Pj4+ICDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXggPSA8U1RNMzJfUElOTVVYKCdFJywgNywg
-QUY3KT47IC8qIFVBUlQ3X1JYICovCj4+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJpYXMt
-ZGlzYWJsZTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYmlhcy1wdWxsLXVwOwo+Pj4+
-PiAgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDCoCBA
-QCAtMTk3MSw3ICsxOTcxLDcgQEAKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5zMiB7Cj4+
-Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXggPSA8U1RNMzJfUElOTVVYKCdC
-JywgMTIsIEFGOCk+LCAvKiBVU0FSVDNfUlggKi8KPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCA8U1RNMzJfUElOTVVYKCdJJywgMTAsIEFGOCk+OyAvKiBVU0FSVDNf
-Q1RTX05TUyAqLwo+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiaWFzLWRpc2FibGU7Cj4+
-Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJpYXMtcHVsbC11cDsKPj4+Pj4gIMKgwqDCoMKg
-wqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqAgQEAgLTE5ODgsNyAr
-MTk4OCw3IEBACj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPj4+Pj4gIMKgwqDCoMKgwqDC
-oMKgwqDCoCBwaW5zMyB7Cj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBwaW5tdXgg
-PSA8U1RNMzJfUElOTVVYKCdCJywgMTIsIEFGOCk+OyAvKiBVU0FSVDNfUlggKi8KPj4+Pj4gLcKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgYmlhcy1kaXNhYmxlOwo+Pj4+PiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCBiaWFzLXB1bGwtdXA7Cj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqAgfTsKPj4+Pj4g
-IMKgwqDCoMKgwqAgfTsKPj4+Pj4gIMKgIEBAIC0yMDEyLDcgKzIwMTIsNyBAQAo+Pj4+PiAgwqDC
-oMKgwqDCoMKgwqDCoMKgIHBpbnMyIHsKPj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IHBpbm11eCA9IDxTVE0zMl9QSU5NVVgoJ0InLCAxMiwgQUY4KT4sIC8qIFVTQVJUM19SWCAqLwo+
-Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDxTVE0zMl9QSU5NVVgo
-J0InLCAxMywgQUY3KT47IC8qIFVTQVJUM19DVFNfTlNTICovCj4+Pj4+IC3CoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIGJpYXMtZGlzYWJsZTsKPj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYmlh
-cy1wdWxsLXVwOwo+Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIH07Cj4+Pj4+ICDCoMKgwqDCoMKg
-IH07Cj4+Pj4+ICDCoCBAQCAtMjAyOSw3ICsyMDI5LDcgQEAKPj4+Pj4gIMKgwqDCoMKgwqDCoMKg
-wqDCoCB9Owo+Pj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIHBpbnMzIHsKPj4+Pj4gIMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIHBpbm11eCA9IDxTVE0zMl9QSU5NVVgoJ0InLCAxMiwgQUY4KT47
-IC8qIFVTQVJUM19SWCAqLwo+Pj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiaWFzLWRpc2Fi
-bGU7Cj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJpYXMtcHVsbC11cDsKPj4+Pj4gIMKg
-wqDCoMKgwqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqDCoMKgwqDCoCB9Owo+Pj4+PiAgwqAgZGlmZiAt
-LWdpdCBhL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy1ldjEuZHRzIGIvYXJjaC9hcm0vZHRzL3N0
-bTMybXAxNTdjLWV2MS5kdHMKPj4+Pj4gaW5kZXggNWM1YjFkZGY3Yi4uZTIyMmQyZDJjYiAxMDA2
-NDQKPj4+Pj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMKPj4+Pj4gKysr
-IGIvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMKPj4+Pj4gQEAgLTM3NSwzICszNzUs
-MjUgQEAKPj4+Pj4gIMKgICZ1c2JwaHljIHsKPj4+Pj4gIMKgwqDCoMKgwqAgc3RhdHVzID0gIm9r
-YXkiOwo+Pj4+PiAgwqAgfTsKPj4+Pj4gKwo+Pj4+PiArJnVzYnBoeWNfcG9ydDAgewo+Pj4+PiAr
-wqDCoMKgIHN0LHR1bmUtaHMtZGMtbGV2ZWwgPSA8Mj47Cj4+Pj4+ICvCoMKgwqAgc3QsZW5hYmxl
-LWZzLXJmdGltZS10dW5pbmc7Cj4+Pj4+ICvCoMKgwqAgc3QsZW5hYmxlLWhzLXJmdGltZS1yZWR1
-Y3Rpb247Cj4+Pj4+ICvCoMKgwqAgc3QsdHJpbS1ocy1jdXJyZW50ID0gPDE1PjsKPj4+Pj4gK8Kg
-wqDCoCBzdCx0cmltLWhzLWltcGVkYW5jZSA9IDwxPjsKPj4+Pj4gK8KgwqDCoCBzdCx0dW5lLXNx
-dWVsY2gtbGV2ZWwgPSA8Mz47Cj4+Pj4+ICvCoMKgwqAgc3QsdHVuZS1ocy1yeC1vZmZzZXQgPSA8
-Mj47Cj4+Pj4+ICvCoMKgwqAgc3Qsbm8tbHNmcy1zYzsKPj4+Pj4gK307Cj4+Pj4+ICsKPj4+Pj4g
-KyZ1c2JwaHljX3BvcnQxIHsKPj4+Pj4gK8KgwqDCoCBzdCx0dW5lLWhzLWRjLWxldmVsID0gPDI+
-Owo+Pj4+PiArwqDCoMKgIHN0LGVuYWJsZS1mcy1yZnRpbWUtdHVuaW5nOwo+Pj4+PiArwqDCoMKg
-IHN0LGVuYWJsZS1ocy1yZnRpbWUtcmVkdWN0aW9uOwo+Pj4+PiArwqDCoMKgIHN0LHRyaW0taHMt
-Y3VycmVudCA9IDwxNT47Cj4+Pj4+ICvCoMKgwqAgc3QsdHJpbS1ocy1pbXBlZGFuY2UgPSA8MT47
-Cj4+Pj4+ICvCoMKgwqAgc3QsdHVuZS1zcXVlbGNoLWxldmVsID0gPDM+Owo+Pj4+PiArwqDCoMKg
-IHN0LHR1bmUtaHMtcngtb2Zmc2V0ID0gPDI+Owo+Pj4+PiArwqDCoMKgIHN0LG5vLWxzZnMtc2M7
-Cj4+Pj4+ICt9Owo+Pj4+PiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRr
-eC5kdHNpIGIvYXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRreC5kdHNpCj4+Pj4+IGluZGV4IDU1
-MDJlZWM5NGIuLmY4MTMwYmY0NDUgMTAwNjQ0Cj4+Pj4+IC0tLSBhL2FyY2gvYXJtL2R0cy9zdG0z
-Mm1wMTV4eC1ka3guZHRzaQo+Pj4+PiArKysgYi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1eHgtZGt4
-LmR0c2kKPj4+Pj4gQEAgLTcwMiwxMCArNzAyLDI2IEBACj4+Pj4+ICDCoCDCoCAmdXNicGh5Y19w
-b3J0MCB7Cj4+Pj4+ICDCoMKgwqDCoMKgIHBoeS1zdXBwbHkgPSA8JnZkZF91c2I+Owo+Pj4+PiAr
-wqDCoMKgIHN0LHR1bmUtaHMtZGMtbGV2ZWwgPSA8Mj47Cj4+Pj4+ICvCoMKgwqAgc3QsZW5hYmxl
-LWZzLXJmdGltZS10dW5pbmc7Cj4+Pj4+ICvCoMKgwqAgc3QsZW5hYmxlLWhzLXJmdGltZS1yZWR1
-Y3Rpb247Cj4+Pj4+ICvCoMKgwqAgc3QsdHJpbS1ocy1jdXJyZW50ID0gPDE1PjsKPj4+Pj4gK8Kg
-wqDCoCBzdCx0cmltLWhzLWltcGVkYW5jZSA9IDwxPjsKPj4+Pj4gK8KgwqDCoCBzdCx0dW5lLXNx
-dWVsY2gtbGV2ZWwgPSA8Mz47Cj4+Pj4+ICvCoMKgwqAgc3QsdHVuZS1ocy1yeC1vZmZzZXQgPSA8
-Mj47Cj4+Pj4+ICvCoMKgwqAgc3Qsbm8tbHNmcy1zYzsKPj4+Pj4gIMKgIH07Cj4+Pj4+ICDCoCDC
-oCAmdXNicGh5Y19wb3J0MSB7Cj4+Pj4+ICDCoMKgwqDCoMKgIHBoeS1zdXBwbHkgPSA8JnZkZF91
-c2I+Owo+Pj4+PiArwqDCoMKgIHN0LHR1bmUtaHMtZGMtbGV2ZWwgPSA8Mj47Cj4+Pj4+ICvCoMKg
-wqAgc3QsZW5hYmxlLWZzLXJmdGltZS10dW5pbmc7Cj4+Pj4+ICvCoMKgwqAgc3QsZW5hYmxlLWhz
-LXJmdGltZS1yZWR1Y3Rpb247Cj4+Pj4+ICvCoMKgwqAgc3QsdHJpbS1ocy1jdXJyZW50ID0gPDE1
-PjsKPj4+Pj4gK8KgwqDCoCBzdCx0cmltLWhzLWltcGVkYW5jZSA9IDwxPjsKPj4+Pj4gK8KgwqDC
-oCBzdCx0dW5lLXNxdWVsY2gtbGV2ZWwgPSA8Mz47Cj4+Pj4+ICvCoMKgwqAgc3QsdHVuZS1ocy1y
-eC1vZmZzZXQgPSA8Mj47Cj4+Pj4+ICvCoMKgwqAgc3Qsbm8tbHNmcy1zYzsKPj4+Pj4gIMKgIH07
-Cj4+Pj4+ICDCoCDCoCAmdnJlZmJ1ZiB7Cj4+Pj4KPj4+Pgo+Pj4+IFJldmlld2VkLWJ5OiBQYXRy
-aWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4+Pgo+Pj4+IFRoYW5r
-cwo+Pj4+IFBhdHJpY2UKPj4+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwo+Pj4+IFVib290LXN0bTMyIG1haWxpbmcgbGlzdAo+Pj4+IFVib290LXN0bTMy
-QHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KPj4+PiBodHRwczovL3N0LW1kLW1haWxtYW4u
-c3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo+Pj4KPj4+IEFwcGxp
-ZWQgdG8gdS1ib290LXN0bTMyCj4+Cj4+IFRoaXMgaXMgZm9yIG5leHQsIHJpZ2h0ID8KPiAKPiBU
-aGlzIHB1bGwgcmVxdWVzdCBpcyBmb3IgdjIwMjIuMDQKCkxvb2tpbmcgYXQgaXQgb25lIG1vcmUg
-dGltZSAsIEkgdGhpbmsgdGhpcyBwYXRjaCBzaG91bGQgYmUgaGFybWxlc3MsIHNvIApnbyBhaGVh
-ZC4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qt
-c3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8v
-dWJvb3Qtc3RtMzIK
+On 2/16/22 00:23, Patrick Delaunay wrote:
+> Fix the end address in the message for unaligned erase request in
+> mmc_berase() when start + blkcnt is aligned to erase_grp_size.
+> 
+> for example:
+>   - start = 0x2000 - 26
+>   - count = 26
+>   - erase_grp_size = 0x400
+> 
+>   Caution! Your devices Erase group is 0x400
+>   The erase range would be change to 0x2000~0x27ff
+> 
+> But no issue when the end address is not aligned, for example
+>   - start = 0x2000 - 2 * 26
+>   - count = 26
+>   - erase_grp_size = 0x400
+> 
+>   Caution! Your devices Erase group is 0x400
+>   The erase range would be change to 0x2000~0x23ff
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Best Regards,
+Jaehoon Chung
+
+> ---
+> 
+>  drivers/mmc/mmc_write.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/mmc/mmc_write.c b/drivers/mmc/mmc_write.c
+> index d23b7d9729..eab94c7b60 100644
+> --- a/drivers/mmc/mmc_write.c
+> +++ b/drivers/mmc/mmc_write.c
+> @@ -102,7 +102,7 @@ ulong mmc_berase(struct blk_desc *block_dev, lbaint_t start, lbaint_t blkcnt)
+>  		       "The erase range would be change to "
+>  		       "0x" LBAF "~0x" LBAF "\n\n",
+>  		       mmc->erase_grp_size, start & ~(mmc->erase_grp_size - 1),
+> -		       ((start + blkcnt + mmc->erase_grp_size)
+> +		       ((start + blkcnt + mmc->erase_grp_size - 1)
+>  		       & ~(mmc->erase_grp_size - 1)) - 1);
+>  
+>  	while (blk < blkcnt) {
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

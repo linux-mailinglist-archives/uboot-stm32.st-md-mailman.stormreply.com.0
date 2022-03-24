@@ -2,63 +2,86 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0EEA4E62EC
-	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Mar 2022 13:07:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D51364E698E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Mar 2022 20:54:36 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A194FC60496;
-	Thu, 24 Mar 2022 12:07:55 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8D9A0C60496;
+	Thu, 24 Mar 2022 19:54:36 +0000 (UTC)
+Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com
+ [209.85.217.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D29E4C57B6F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5AB47C60468
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Mar 2022 12:07:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
- s=badeba3b8450; t=1648123671;
- bh=LCNhkWmD0qT6Kx/2q65D9XGWswbG0ypA2tHO/dGKtB0=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=ZevBNQ1nrvVHwhf/EIZxnH2AFeXivzMr6Xl9mJ5cQ9ZSLFdU0kH/KAIkuOzSLmYVV
- W2D1yoIPE4sOdoYanJqBxwhVsiQLo4aSxBgpfKCbiBZOZ/UPCKtoKG6pWM2/F6c57g
- pJ5GESmcCa4oDz7Uf3yVAYz6pUxePThTa2sdwrZM=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from [192.168.123.67] ([88.152.144.107]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mv31W-1oODxP0NUW-00r19N; Thu, 24
- Mar 2022 13:07:51 +0100
-Message-ID: <25548736-ce8a-5d7f-59e5-6f448a130847@gmx.de>
-Date: Thu, 24 Mar 2022 13:06:52 +0100
+ Thu, 24 Mar 2022 19:54:35 +0000 (UTC)
+Received: by mail-vs1-f42.google.com with SMTP id y198so6096129vsy.10
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 24 Mar 2022 12:54:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=0805HgBSkTSbmJLHjUIQ52Vl3V9VwMyj2EHMrWdqL7Y=;
+ b=XMQUNlfQgrm0plLArEklEO7VwuJXY5nmJqqaMa/nGfCDy4Z24tuuc9NYXMpf/niRUL
+ YfgJkUI3O8LFphU/CSqSAMDtShXXNMBy1PmJxt0FCfoViH+3RSRAE306Mjld+NPMb+CF
+ JpdPtC3Tf1VCO0oW5ms2gJGIFmY2r9bQmSo7k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=0805HgBSkTSbmJLHjUIQ52Vl3V9VwMyj2EHMrWdqL7Y=;
+ b=OwptwUtYuZWRN2Re9uhE1Cm9M9pKlKw3WeAvkIvQfR+8OKc9yJ30IOeewc3zGJWw+G
+ WoNegALuLt8U4spnMigNiLn5rowg6/CIm80z8PYl8rTw63UPm8BsHjQkuclxdCI0VFLn
+ /ZBFAvvYBYNyTC1igiW6+F+J+4FSg5M1Pz8yZH8moFt/mrDNvcqyqS8G2G9wVxPrJZ4W
+ +eF1Bksy09gLzb2X+4OgojxCFH1/Qxnxhl7d1fkyrq61mFionWNlvI1Rj9dgSVEBXUqX
+ C3LomEnImJ5lIrWjdRONdisYr7vULXnKTa/02lRZLoURU3xs3ezFbxmJQzs98q3kvVbs
+ IU2w==
+X-Gm-Message-State: AOAM533WtaoP4t6gu/H7O6V9B6HukwQ9jXNzrXbf0ABPqe2CF2OZG3Hl
+ 4TqzwYkLKqHke4fBk8nbIEOMxTM6NxrgirNAYFQr7A==
+X-Google-Smtp-Source: ABdhPJyDP+lrWIWgSvrjHuLKPKAsdwnLwYBxDGEwMY5cTBE1KDjrgYZPcDhMSN6HM5u3Cz6BnJEs1ZVRHK5h04DElNw=
+X-Received: by 2002:a67:b60a:0:b0:325:5b49:31d2 with SMTP id
+ d10-20020a67b60a000000b003255b4931d2mr2824649vsm.51.1648151673976; Thu, 24
+ Mar 2022 12:54:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-References: <20220322150558.1.I2d5fc62b65a61d4e11ce442f3b5572ec03f39cf6@changeid>
- <30f14c6e-bc88-40cf-49b8-d2beecbf0ee8@gmx.de>
- <3250c951-7a01-c2f6-e25c-ef65cbe3deae@foss.st.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <3250c951-7a01-c2f6-e25c-ef65cbe3deae@foss.st.com>
-X-Provags-ID: V03:K1:pSRqaGZduNOE7Xax346mt9dUAw+58WFZX6s9MgFee2pJgTNkyse
- r8q+E35r1Y1JC3iv1hFc81oYfE1dA2dWWLJlOT+5V7+7VkMSeBRYhS9/cGGxNekQe5iha5i
- 5bdD3nJKNGvO4o8nJUQ15VhIgCmFID2JsWBZVmsegbJVMJPEZq0lklFS9BZ+5gbjlUEURvy
- inWOGNZtbQ1in82IojINQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:sF4OIxisyUQ=:eCwUMGvLN6RJ7jlpbOi8la
- nfJvFp+B2mwHTQFX0En1UQ5DJO6ZSD/lMW87EaP+mTxRTYQyiJEoSb91oUHHQgK1Hn5d4GSbG
- taYvaI+Bf5gOR16Mrg5oSkvdrS0hAXIFWv22J/gl4H98O04Z8Is73dtuBT2mIdGUx7pLio+S5
- uiCRgEPoU/EIlQ7XSP7aaPdoVk3xQwLIBYMCuXVvxZHZT8DVqoLBKc6zJfIG1+zyGByX5XugO
- WqtfhYKI5HUL5ycGi43K7P0v5TfBjoZQb04Nb0H9ISOEbUxOaSA5rv+EZPr+vlRQ5uxDB78EI
- Zas51URe4DOEWLTlL9T10oVyTnJzT37TWU39qZmrDIWr7bnJuPnbDth936+k3qQ9+8+SQqya4
- 1H2lC+wd/LaQ+li5pmvTR60WmiU/fyelUZga1oTU9afDhS1fGWTzDwPGhb8o2O0N/mQY/3kbP
- vb3EOxAe/84KCjPaIFmASmSLxUiN1IZ05uf4F+NHyqKOpxzBBnTfBiqqa37mHPZh6f459SlTQ
- Wk40Zl4kw2H+QX13B7K5x+qAHyMYA4VpgacbFr00k1rIz/g83BPhFxuXa9bDF2T9SQG/zfhcd
- 6HvgjkTfmBhdosvIewdgXY7blq9ffe+ORmNL72M6tSFK/hHvh2YmcoyHkd0GCMPX2ums7tl3o
- wxgvWKyKuin4ZT498nL2PuAMQaEsg5EHBVMB9b8eIZkMn9DHagUq2f2i7JFUe1I2UIlbSdEEJ
- jIqrQpfuYD2ewszG6wrNG70j77ZAnOGsee0WayMNPNVDp3gokse4ClmMDA0YfvpTBARcse9J4
- 0K+J2QehCd1mowA9U6eV8DzTctINM8Z/NOC4YRwoWjDrfWkipA=
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] rng: add OP-TEE based Random Number
-	Generator
+References: <20220123140415.3091482-1-sjg@chromium.org>
+In-Reply-To: <20220123140415.3091482-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Mar 2022 13:54:22 -0600
+Message-ID: <CAPnjgZ0UhAcCPmDeEPzrvYLXnPFC_sAZa6ssk=MwJkqDzHCMzQ@mail.gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Baruch Siach <baruch@tkos.co.il>, Aymen Sghaier <aymen.sghaier@nxp.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Adrian Alonso <adrian.alonso@nxp.com>, Samuel Egli <samuel.egli@siemens.com>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Bosch <stefan_b@posteo.net>,
+ =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Richard Hu <richard.hu@technexion.com>,
+ Nikita Kiryanov <nikita@compulab.co.il>, Marek Vasut <marex@denx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Vanessa Maegima <vanessa.maegima@nxp.com>,
+ Michal Simek <michal.simek@xilinx.com>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <marek.behun@nic.cz>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Jason Liu <jason.hui.liu@nxp.com>,
+ Heiko Schocher <hs@denx.de>, Dario Binacchi <dariobin@libero.it>,
+ Otavio Salvador <otavio@ossystems.com.br>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Alison Wang <alison.wang@nxp.com>, Rick Chen <rick@andestech.com>,
+ Matthias Brugger <mbrugger@suse.com>, Aswath Govindraju <a-govindraju@ti.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Stefano Babic <sbabic@denx.de>, Kory Maincent <kory.maincent@bootlin.com>,
+ Anatolij Gustschin <agust@denx.de>, Joel Peshkin <joel.peshkin@broadcom.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH 00/14] video: Drop old CFB code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,138 +93,173 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMy8yNC8yMiAxMjowMywgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiBIaSwKPgo+IE9uIDMv
-MjIvMjIgMTU6MzgsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6Cj4+IE9uIDMvMjIvMjIgMTU6
-MDYsIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4+PiBBZGQgZHJpdmVyIGZvciBPUC1URUUgYmFz
-ZWQgUmFuZG9tIE51bWJlciBHZW5lcmF0b3Igb24gQVJNIFNvQ3MKPj4+IHdoZXJlIGhhcmR3YXJl
-IGVudHJvcHkgc291cmNlcyBhcmUgbm90IGFjY2Vzc2libGUgdG8gbm9ybWFsIHdvcmxkCj4+PiBh
-bmQgdGhlIFJORyBzZXJ2aWNlIGlzIHByb3ZpZGVkIGJ5IGEgSFdSTkcgVHJ1c3RlZCBBcHBsaWNh
-dGlvbiAoVEEpLgo+Pj4KPj4+IFRoaXMgZHJpdmVyIGlzIGJhc2VkIG9uIHRoZSBsaW51eCBkcml2
-ZXI6IGNoYXIvaHdfcmFuZG9tL29wdGVlLXJuZy5jCj4+Pgo+Pj4gU2lnbmVkLW9mZi1ieTogUGF0
-cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPj4+IC0tLQo+Pj4K
-Pj4+IMKgIE1BSU5UQUlORVJTwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDEgKwo+Pj4g
-wqAgZHJpdmVycy9ybmcvS2NvbmZpZ8KgwqDCoMKgIHzCoMKgIDggKysrCj4+PiDCoCBkcml2ZXJz
-L3JuZy9NYWtlZmlsZcKgwqDCoCB8wqDCoCAxICsKPj4+IMKgIGRyaXZlcnMvcm5nL29wdGVlX3Ju
-Zy5jIHwgMTU2ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPj4+IMKg
-IDQgZmlsZXMgY2hhbmdlZCwgMTY2IGluc2VydGlvbnMoKykKPj4+IMKgIGNyZWF0ZSBtb2RlIDEw
-MDY0NCBkcml2ZXJzL3JuZy9vcHRlZV9ybmcuYwo+Pj4KPj4+IGRpZmYgLS1naXQgYS9NQUlOVEFJ
-TkVSUyBiL01BSU5UQUlORVJTCj4+PiBpbmRleCBmMjVjYTdjZDAwLi4zMzU2YzY1ZGQwIDEwMDY0
-NAo+Pj4gLS0tIGEvTUFJTlRBSU5FUlMKPj4+ICsrKyBiL01BSU5UQUlORVJTCj4+PiBAQCAtNDgx
-LDYgKzQ4MSw3IEBAIEY6wqDCoMKgIGRyaXZlcnMvcG93ZXIvcmVndWxhdG9yL3N0cG1pYzEuYwo+
-Pj4gwqAgRjrCoMKgwqAgZHJpdmVycy9yYW0vc3RtMzJtcDEvCj4+PiDCoCBGOsKgwqDCoCBkcml2
-ZXJzL3JlbW90ZXByb2Mvc3RtMzJfY29wcm8uYwo+Pj4gwqAgRjrCoMKgwqAgZHJpdmVycy9yZXNl
-dC9zdG0zMi1yZXNldC5jCj4+PiArRjrCoMKgwqAgZHJpdmVycy9ybmcvb3B0ZWVfcm5nLmMKPj4+
-IMKgIEY6wqDCoMKgIGRyaXZlcnMvcm5nL3N0bTMybXAxX3JuZy5jCj4+PiDCoCBGOsKgwqDCoCBk
-cml2ZXJzL3J0Yy9zdG0zMl9ydGMuYwo+Pj4gwqAgRjrCoMKgwqAgZHJpdmVycy9zZXJpYWwvc2Vy
-aWFsX3N0bTMyLioKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3JuZy9LY29uZmlnIGIvZHJpdmVy
-cy9ybmcvS2NvbmZpZwo+Pj4gaW5kZXggYjFjNWFiOTNkMS4uYTAyYzU4NWY2MSAxMDA2NDQKPj4+
-IC0tLSBhL2RyaXZlcnMvcm5nL0tjb25maWcKPj4+ICsrKyBiL2RyaXZlcnMvcm5nL0tjb25maWcK
-Pj4+IEBAIC0zMSw2ICszMSwxNCBAQCBjb25maWcgUk5HX01TTQo+Pj4gwqDCoMKgwqDCoMKgwqAg
-VGhpcyBkcml2ZXIgcHJvdmlkZXMgc3VwcG9ydCBmb3IgdGhlIFJhbmRvbSBOdW1iZXIKPj4+IMKg
-wqDCoMKgwqDCoMKgIEdlbmVyYXRvciBoYXJkd2FyZSBmb3VuZCBvbiBRdWFsY29tbSBTb0NzLgo+
-Pj4KPj4+ICtjb25maWcgUk5HX09QVEVFCj4+PiArwqDCoMKgIGJvb2wgIk9QLVRFRSBiYXNlZCBS
-YW5kb20gTnVtYmVyIEdlbmVyYXRvciBzdXBwb3J0Igo+Pj4gK8KgwqDCoCBkZXBlbmRzIG9uIERN
-X1JORyAmJiBPUFRFRQo+Pj4gK8KgwqDCoCBoZWxwCj4+PiArwqDCoMKgwqDCoCBUaGlzIGRyaXZl
-ciBwcm92aWRlcyBzdXBwb3J0IGZvciBPUC1URUUgYmFzZWQgUmFuZG9tIE51bWJlcgo+Pj4gK8Kg
-wqDCoMKgwqAgR2VuZXJhdG9yIG9uIEFSTSBTb0NzIHdoZXJlIGhhcmR3YXJlIGVudHJvcHkgc291
-cmNlcyBhcmUgbm90Cj4+PiArwqDCoMKgwqDCoCBhY2Nlc3NpYmxlIHRvIG5vcm1hbCB3b3JsZC4K
-Pj4KPj4KPj4gaHR0cHM6Ly9vcHRlZS5yZWFkdGhlZG9jcy5pby9lbi9sYXRlc3QvYXJjaGl0ZWN0
-dXJlL3BvcnRpbmdfZ3VpZGVsaW5lcy5odG1sCj4+Cj4+IGhhczoKPj4KPj4gIkJ5IGRlZmF1bHQg
-T1AtVEVFIGlzIGNvbmZpZ3VyZWQgd2l0aCBhIHNvZnR3YXJlIFBSTkcuIFRoZSBlbnRyb3B5IGlz
-Cj4+IGFkZGVkIHRvIHNvZnR3YXJlIFBSTkcgYXQgdmFyaW91cyBwbGFjZXMsIGJ1dCB1bmZvcnR1
-bmF0ZWx5IGl0IGlzIHN0aWxsCj4+IHF1aXRlIGVhc3kgdG8gcHJlZGljdCB0aGUgZGF0YSBhZGRl
-ZCBhcyBlbnRyb3B5LiBBcyBhIGNvbnNlcXVlbmNlLAo+PiB1bmxlc3MgdGhlIFJORyBpcyBiYXNl
-ZCBvbiBoYXJkd2FyZSB0aGUgZ2VuZXJhdGVkIHJhbmRvbSB3aWxsIGJlIHF1aXRlCj4+IHdlYWsu
-Igo+Pgo+PiBIYXZpbmcgYSBzaW1pbGlhciB3YXJuaW5nIGluIHRoZSBsb25nIHRleHQgZm9yIHRo
-ZSBDT05GSUdfUk5HX09QVEVFCj4+IHN5bWJvbCB3b3VsZCBiZSBoZWxwZnVsLgo+Pgo+Cj4gSSBw
-cm9wb3NlIHNvbWV0aGluZyBhcyA6Cj4KPgo+ICtjb25maWcgUk5HX09QVEVFCj4gK8KgwqDCoCBi
-b29sICJPUC1URUUgYmFzZWQgUmFuZG9tIE51bWJlciBHZW5lcmF0b3Igc3VwcG9ydCIKPiArwqDC
-oMKgIGRlcGVuZHMgb24gRE1fUk5HICYmIE9QVEVFCj4gK8KgwqDCoCBoZWxwCj4gK8KgwqDCoMKg
-wqAgVGhpcyBkcml2ZXIgcHJvdmlkZXMgc3VwcG9ydCBmb3IgT1AtVEVFIGJhc2VkIFJhbmRvbSBO
-dW1iZXIKCiVzL2Zvci9mb3IgdGhlLwoKPiArwqDCoMKgwqDCoCBHZW5lcmF0b3Igb24gQVJNIFNv
-Q3Mgd2hlcmUgaGFyZHdhcmUgZW50cm9weSBzb3VyY2VzIGFyZSBub3QKPiArwqDCoMKgwqDCoCBh
-Y2Nlc3NpYmxlIHRvIG5vcm1hbCB3b3JsZCBidXQgcmVzZXJ2ZWQgYW5kIHVzZWQgYnkgdGhlIE9Q
-LVRFRQo+Cgolcy9cbi8vCgo+ICvCoMKgwqDCoMKgIHRvIGF2b2lkIHdlYWtuZXNzIG9mIHRoZSBz
-b2Z0d2FyZSBQUk5HLgoKJXMvYXZvaWQgd2Vha25lc3Mgb2YgdGhlL2F2b2lkIHRoZSB3ZWFrbmVz
-cyBvZiBhLwoKTG9va3Mgb2sgdG8gbWUuCgpCZXN0IHJlZ2FyZHMKCkhlaW5yaWNoCgo+Cj4KPj4+
-ICsKPj4+IMKgIGNvbmZpZyBSTkdfU1RNMzJNUDEKPj4+IMKgwqDCoMKgwqAgYm9vbCAiRW5hYmxl
-IHJhbmRvbSBudW1iZXIgZ2VuZXJhdG9yIGZvciBTVE0zMk1QMSIKPj4+IMKgwqDCoMKgwqAgZGVw
-ZW5kcyBvbiBBUkNIX1NUTTMyTVAKPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3JuZy9NYWtlZmls
-ZSBiL2RyaXZlcnMvcm5nL01ha2VmaWxlCj4+PiBpbmRleCAzOWY3ZWUzZjAzLi40MzViM2I5NjVh
-IDEwMDY0NAo+Pj4gLS0tIGEvZHJpdmVycy9ybmcvTWFrZWZpbGUKPj4+ICsrKyBiL2RyaXZlcnMv
-cm5nL01ha2VmaWxlCj4+PiBAQCAtNyw2ICs3LDcgQEAgb2JqLSQoQ09ORklHX0RNX1JORykgKz0g
-cm5nLXVjbGFzcy5vCj4+PiDCoCBvYmotJChDT05GSUdfUk5HX01FU09OKSArPSBtZXNvbi1ybmcu
-bwo+Pj4gwqAgb2JqLSQoQ09ORklHX1JOR19TQU5EQk9YKSArPSBzYW5kYm94X3JuZy5vCj4+PiDC
-oCBvYmotJChDT05GSUdfUk5HX01TTSkgKz0gbXNtX3JuZy5vCj4+PiArb2JqLSQoQ09ORklHX1JO
-R19PUFRFRSkgKz0gb3B0ZWVfcm5nLm8KPj4+IMKgIG9iai0kKENPTkZJR19STkdfU1RNMzJNUDEp
-ICs9IHN0bTMybXAxX3JuZy5vCj4+PiDCoCBvYmotJChDT05GSUdfUk5HX1JPQ0tDSElQKSArPSBy
-b2NrY2hpcF9ybmcubwo+Pj4gwqAgb2JqLSQoQ09ORklHX1JOR19JUFJPQzIwMCkgKz0gaXByb2Nf
-cm5nMjAwLm8KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3JuZy9vcHRlZV9ybmcuYyBiL2RyaXZl
-cnMvcm5nL29wdGVlX3JuZy5jCj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+Pj4gaW5kZXggMDAw
-MDAwMDAwMC4uYTA4MzNkMDg2Mgo+Pj4gLS0tIC9kZXYvbnVsbAo+Pj4gKysrIGIvZHJpdmVycy9y
-bmcvb3B0ZWVfcm5nLmMKPj4+IEBAIC0wLDAgKzEsMTU2IEBACj4+PiArLy8gU1BEWC1MaWNlbnNl
-LUlkZW50aWZpZXI6IEdQTC0yLjArIE9SIEJTRC0zLUNsYXVzZQo+Pj4gKy8qCj4+PiArICogQ29w
-eXJpZ2h0IChDKSAyMDIyLCBTVE1pY3JvZWxlY3Ryb25pY3MgLSBBbGwgUmlnaHRzIFJlc2VydmVk
-Cj4+PiArICovCj4+PiArI2RlZmluZSBMT0dfQ0FURUdPUlkgVUNMQVNTX1JORwo+Pj4gKwo+Pj4g
-KyNpbmNsdWRlIDxjb21tb24uaD4KPj4+ICsKPj4+ICsjaW5jbHVkZSA8cm5nLmg+Cj4+PiArI2lu
-Y2x1ZGUgPHRlZS5oPgo+Pj4gKyNpbmNsdWRlIDxkbS9kZXZpY2UuaD4KPj4+ICsjaW5jbHVkZSA8
-ZG0vZGV2aWNlX2NvbXBhdC5oPgo+Pj4gKyNpbmNsdWRlIDxsaW51eC9zaXplcy5oPgo+Pj4gKwo+
-Pj4gKyNkZWZpbmUgVEVFX0VSUk9SX0hFQUxUSF9URVNUX0ZBSUzCoMKgwqAgMHgwMDAwMDAwMQo+
-Pj4gKwo+Pj4gKy8qCj4+PiArICogVEFfQ01EX0dFVF9FTlRST1BZIC0gR2V0IEVudHJvcHkgZnJv
-bSBSTkcKPj4+ICsgKgo+Pj4gKyAqIHBhcmFtWzBdIChpbm91dCBtZW1yZWYpIC0gRW50cm9weSBi
-dWZmZXIgbWVtb3J5IHJlZmVyZW5jZQo+Pj4gKyAqIHBhcmFtWzFdIHVudXNlZAo+Pj4gKyAqIHBh
-cmFtWzJdIHVudXNlZAo+Pj4gKyAqIHBhcmFtWzNdIHVudXNlZAo+Pj4gKyAqCj4+PiArICogUmVz
-dWx0Ogo+Pj4gKyAqIFRFRV9TVUNDRVNTIC0gSW52b2tlIGNvbW1hbmQgc3VjY2Vzcwo+Pj4gKyAq
-IFRFRV9FUlJPUl9CQURfUEFSQU1FVEVSUyAtIEluY29ycmVjdCBpbnB1dCBwYXJhbQo+Pj4gKyAq
-IFRFRV9FUlJPUl9OT1RfU1VQUE9SVEVEIC0gUmVxdWVzdGVkIGVudHJvcHkgc2l6ZSBncmVhdGVy
-IHRoYW4KPj4+IHNpemUgb2YgcG9vbAo+Pj4gKyAqIFRFRV9FUlJPUl9IRUFMVEhfVEVTVF9GQUlM
-IC0gQ29udGludW91cyBoZWFsdGggdGVzdGluZyBmYWlsZWQKPj4+ICsgKi8KPj4+ICsjZGVmaW5l
-IFRBX0NNRF9HRVRfRU5UUk9QWcKgwqDCoMKgwqDCoMKgIDB4MAo+Pj4gKwo+Pj4gKyNkZWZpbmUg
-TUFYX0VOVFJPUFlfUkVRX1NawqDCoMKgwqDCoMKgwqAgU1pfNEsKPj4+ICsKPj4+ICsjZGVmaW5l
-IFRBX0hXUk5HX1VVSUQgeyAweGFiN2E2MTdjLCAweGI4ZTcsIDB4NGQ4ZiwgXAo+Pj4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgeyAweDgzLCAweDAxLCAweGQwLCAweDliLCAweDYxLCAweDAzLCAw
-eDZiLCAweDY0IH0gfQo+Pj4gKwo+Pj4gKy8qKgo+Pj4gKyAqIHN0cnVjdCBvcHRlZV9ybmdfcHJp
-diAtIE9QLVRFRSBSYW5kb20gTnVtYmVyIEdlbmVyYXRvciBwcml2YXRlIGRhdGEKPj4+ICsgKiBA
-c2Vzc2lvbl9pZDrCoMKgwqDCoMKgwqDCoCBSTkcgVEEgc2Vzc2lvbiBpZGVudGlmaWVyLgo+Pj4g
-KyAqLwo+Pj4gK3N0cnVjdCBvcHRlZV9ybmdfcHJpdiB7Cj4+PiArwqDCoMKgIHUzMiBzZXNzaW9u
-X2lkOwo+Pj4gK307Cj4+PiArCj4+Cj4+IFBsZWFzZSwgcHJvdmlkZSBhcyBTcGhpbnggc3R5bGUg
-ZnVuY3Rpb24gZGVzY3JpcHRpb24uCj4+Cj4KPiBPSwo+Cj4KPj4+ICtzdGF0aWMgaW50IGdldF9v
-cHRlZV9ybmdfZGF0YShzdHJ1Y3QgdWRldmljZSAqZGV2LAo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IHRlZV9zaG0gKmVudHJvcHlfc2htX3Bvb2wsCj4+PiAr
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2b2lkICpidWYsIHNpemVfdCAqc2l6
-ZSkKPj4+ICt7Cj4+PiArwqDCoMKgIHN0cnVjdCBvcHRlZV9ybmdfcHJpdiAqcHJpdiA9IGRldl9n
-ZXRfcHJpdihkZXYpOwo+Pj4gK8KgwqDCoCBpbnQgcmV0ID0gMDsKPj4+ICvCoMKgwqAgc3RydWN0
-IHRlZV9pbnZva2VfYXJnIGFyZzsKPj4KPj4gV291bGRuJ3QgaXQgYmUgcHJlZmVyYWJsZSB0byB1
-c2UKPj4KPj4gc3RydWN0IHRlZV9pbnZva2VfYXJnIGFyZyA9IHsgMCB9OyA/Cj4+Cj4+IFRoaXMg
-d2F5IHRoZSBjb21waWxlciBjYW4gb3B0aW1pemUgdGhlIGluaXRpYWxpemF0aW9uIGFuZCBzZXQg
-YWxsIDAKPj4gaW5pdGlhbGl6ZWQgdmFyaWFibGVzIHdpdGggYSBzaW5nbGUgbWVtc2V0KCkgY2Fs
-bC4KPj4KPgo+IEkgd2Fzbid0IHN1cmUgb2YgdGhlIHBvcnRhYmlsaXR5IGZvciBzdHJ1Y3QgemVy
-by1pbml0aWFsaXNhdGlvbi4KPgo+IEJ1dCBJIHdpbGwgY2hhbmdlIGl0IGluIFYyLgo+Cj4KPj4g
-QmVzdCByZWdhcmRzCj4+Cj4+IEhlaW5yaWNoCj4+Cj4+PiArwqDCoMKgIHN0cnVjdCB0ZWVfcGFy
-YW0gcGFyYW07Cj4+PiArCj4+PiArwqDCoMKgIG1lbXNldCgmYXJnLCAwLCBzaXplb2YoYXJnKSk7
-Cj4+PiArwqDCoMKgIG1lbXNldCgmcGFyYW0sIDAsIHNpemVvZihwYXJhbSkpOwo+Pj4gKwo+Pj4g
-K8KgwqDCoCAvKiBJbnZva2UgVEFfQ01EX0dFVF9FTlRST1BZIGZ1bmN0aW9uIG9mIFRydXN0ZWQg
-QXBwICovCj4+PiArwqDCoMKgIGFyZy5mdW5jID0gVEFfQ01EX0dFVF9FTlRST1BZOwo+Pj4gK8Kg
-wqDCoCBhcmcuc2Vzc2lvbiA9IHByaXYtPnNlc3Npb25faWQ7Cj4+PiArCj4+PiArwqDCoMKgIC8q
-IEZpbGwgaW52b2tlIGNtZCBwYXJhbXMgKi8KPj4+ICvCoMKgwqAgcGFyYW0uYXR0ciA9IFRFRV9Q
-QVJBTV9BVFRSX1RZUEVfTUVNUkVGX0lOT1VUOwo+Pj4gK8KgwqDCoCBwYXJhbS51Lm1lbXJlZi5z
-aG0gPSBlbnRyb3B5X3NobV9wb29sOwo+Pj4gK8KgwqDCoCBwYXJhbS51Lm1lbXJlZi5zaXplID0g
-KnNpemU7Cj4+PiArCj4+PiArwqDCoMKgIHJldCA9IHRlZV9pbnZva2VfZnVuYyhkZXYtPnBhcmVu
-dCwgJmFyZywgMSwgJnBhcmFtKTsKPj4+ICvCoMKgwqAgaWYgKHJldCB8fCBhcmcucmV0KSB7Cj4+
-PiArwqDCoMKgwqDCoMKgwqAgaWYgKCFyZXQpCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBy
-ZXQgPSAtRVBST1RPOwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGRldl9lcnIoZGV2LCAiVEFfQ01EX0dF
-VF9FTlRST1BZIGludm9rZSBlcnI6ICVkIDB4JXhcbiIsCj4+PiByZXQsIGFyZy5yZXQpOwo+Pj4g
-K8KgwqDCoMKgwqDCoMKgICpzaXplID0gMDsKPj4+ICsKPj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1
-cm4gcmV0Owo+Pj4gK8KgwqDCoCB9Cj4+PiArCj4+PiArwqDCoMKgIG1lbWNweShidWYsIHBhcmFt
-LnUubWVtcmVmLnNobS0+YWRkciwgcGFyYW0udS5tZW1yZWYuc2l6ZSk7Cj4+PiArwqDCoMKgICpz
-aXplID0gcGFyYW0udS5tZW1yZWYuc2l6ZTsKPj4+ICsKPj4+ICvCoMKgwqAgcmV0dXJuIDA7Cj4+
-PiArfQo+Pj4gKwo+Cj4KPiAoLi4uKQo+Cj4gUmVnYXJkcwo+Cj4KPiBQYXRyaWNrCj4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1h
-aWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBz
-Oi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0
-bTMyCg==
+Hi Anatolij,
+
+On Sun, 23 Jan 2022 at 07:04, Simon Glass <sjg@chromium.org> wrote:
+>
+> There is still quite a bit of cruft in the video subsystem. Mainly this is
+> users of the now-removed CONFIG_VIDEO, cfb_console and CONFIG_LCD.
+>
+> This series removes most of the first two. The exception is videomodes.c
+> and its header, since these are used by sunxi. It looks like the code
+> could be removed, but I did not attempt it.
+>
+> This is left for the sunxi maintainer.
+>
+> The LCD clean-up can come later. Once done, we can rename CONFIG_DM_VIDEO
+> to CONFIG_VIDEO, thus completing the migration.
+>
+>
+> Simon Glass (14):
+>   video: Drop cfg_console
+>   video: nokia_rx51: Drop obsolete video code
+>   video: siemens: Drop unused video code
+>   video: nexell: Drop unused and invalid code
+>   video: Drop video_fb header
+>   video: Drop CONFIG_VIDEO_BMP_LOGO
+>   video: Drop references to CONFIG_VIDEO et al
+>   video: Clean up the uclass header
+>   video: Drop da8xx-fb
+>   video: fsl: colibri_vf: Drop FSL DCU driver
+>   video: Drop FSL DIU driver
+>   video: mxs: Drop old video code
+>   video: Convert CONFIG_VIDEO_BCM2835 to Kconfig
+>   video: Drop formike driver
+>
+>  README                                        |   18 -
+>  arch/arm/cpu/armv7/ls102xa/soc.c              |    4 -
+>  arch/arm/include/asm/arch-ls102xa/config.h    |    1 -
+>  arch/arm/include/asm/mach-imx/mx5_video.h     |    5 -
+>  .../mach-nexell/include/mach/display_dev.h    |    7 +-
+>  board/aristainetos/aristainetos.c             |    1 -
+>  board/freescale/common/Makefile               |    4 -
+>  board/freescale/common/dcu_sii9022a.c         |  248 ---
+>  board/freescale/common/dcu_sii9022a.h         |   12 -
+>  board/freescale/common/diu_ch7301.c           |  217 --
+>  board/freescale/common/diu_ch7301.h           |   12 -
+>  board/freescale/ls1021aiot/Makefile           |    1 -
+>  board/freescale/ls1021aiot/dcu.c              |   48 -
+>  board/freescale/ls1021aqds/Makefile           |    1 -
+>  board/freescale/ls1021aqds/dcu.c              |  110 -
+>  board/freescale/ls1021atwr/Makefile           |    1 -
+>  board/freescale/ls1021atwr/dcu.c              |   48 -
+>  board/freescale/mx51evk/Makefile              |    1 -
+>  board/freescale/mx53loco/Makefile             |    1 -
+>  board/freescale/t104xrdb/Makefile             |    1 -
+>  board/freescale/t104xrdb/diu.c                |   84 -
+>  board/kosagi/novena/novena_spl.c              |   23 -
+>  board/nokia/rx51/rx51.c                       |   19 -
+>  board/siemens/common/board.c                  |    3 -
+>  board/siemens/common/factoryset.c             |    7 -
+>  board/siemens/common/factoryset.h             |    3 -
+>  board/siemens/pxm2/board.c                    |  189 --
+>  board/siemens/rut/board.c                     |  247 ---
+>  board/socrates/socrates.c                     |    1 -
+>  board/toradex/colibri_vf/Makefile             |    1 -
+>  board/toradex/colibri_vf/colibri_vf.c         |   62 -
+>  board/toradex/colibri_vf/dcu.c                |   38 -
+>  cmd/Kconfig                                   |    2 +-
+>  cmd/bdinfo.c                                  |    2 +-
+>  cmd/bmp.c                                     |    4 +-
+>  cmd/cls.c                                     |    2 -
+>  common/fdt_support.c                          |    2 +-
+>  common/stdio.c                                |    4 +-
+>  configs/colibri_vf_defconfig                  |    1 -
+>  configs/nokia_rx51_defconfig                  |    3 -
+>  configs/rpi_0_w_defconfig                     |    1 +
+>  configs/rpi_2_defconfig                       |    1 +
+>  configs/rpi_3_32b_defconfig                   |    1 +
+>  configs/rpi_3_b_plus_defconfig                |    1 +
+>  configs/rpi_3_defconfig                       |    1 +
+>  configs/rpi_4_32b_defconfig                   |    1 +
+>  configs/rpi_4_defconfig                       |    1 +
+>  configs/rpi_arm64_defconfig                   |    1 +
+>  configs/rpi_defconfig                         |    1 +
+>  doc/usage/bootmenu.rst                        |    5 -
+>  drivers/pci/pci_rom.c                         |    1 -
+>  drivers/video/Kconfig                         |  129 +-
+>  drivers/video/Makefile                        |    5 -
+>  drivers/video/cfb_console.c                   | 1865 -----------------
+>  drivers/video/da8xx-fb.c                      | 1048 ---------
+>  drivers/video/da8xx-fb.h                      |  115 -
+>  drivers/video/formike.c                       |  513 -----
+>  drivers/video/fsl_dcu_fb.c                    |  549 -----
+>  drivers/video/fsl_diu_fb.c                    |  416 ----
+>  drivers/video/imx/mxc_ipuv3_fb.c              |    1 -
+>  drivers/video/mxsfb.c                         |   90 -
+>  drivers/video/nexell_display.c                |   18 +-
+>  drivers/video/omap3_dss.c                     |   29 -
+>  drivers/video/sunxi/sunxi_display.c           |    1 -
+>  include/asm-generic/global_data.h             |    2 +-
+>  include/configs/T102xRDB.h                    |   13 -
+>  include/configs/T104xRDB.h                    |   20 -
+>  include/configs/apalis_imx6.h                 |    1 -
+>  include/configs/aristainetos2.h               |    1 -
+>  include/configs/cm_fx6.h                      |    2 -
+>  include/configs/colibri-imx6ull.h             |    1 -
+>  include/configs/colibri_imx6.h                |    1 -
+>  include/configs/colibri_imx7.h                |    4 -
+>  include/configs/colibri_vf.h                  |    8 -
+>  include/configs/embestmx6boards.h             |    1 -
+>  include/configs/gw_ventana.h                  |    1 -
+>  include/configs/imx6-engicam.h                |    2 -
+>  include/configs/imxrt1050-evk.h               |    2 -
+>  include/configs/ls1021aqds.h                  |   12 -
+>  include/configs/ls1021atwr.h                  |   15 -
+>  include/configs/mx6cuboxi.h                   |    1 -
+>  include/configs/mx6sabre_common.h             |    1 -
+>  include/configs/mx6sxsabresd.h                |    1 -
+>  include/configs/mx6ul_14x14_evk.h             |    1 -
+>  include/configs/mx7dsabresd.h                 |    4 -
+>  include/configs/nokia_rx51.h                  |   11 -
+>  include/configs/opos6uldev.h                  |    1 -
+>  include/configs/pico-imx6.h                   |    1 -
+>  include/configs/pico-imx6ul.h                 |    1 -
+>  include/configs/pico-imx7d.h                  |    4 -
+>  include/configs/pxm2.h                        |    8 -
+>  include/configs/rpi.h                         |    1 -
+>  include/configs/rut.h                         |   10 -
+>  include/configs/wandboard.h                   |    1 -
+>  include/fsl_dcu_fb.h                          |   22 -
+>  include/fsl_diu_fb.h                          |   14 -
+>  include/video.h                               |   84 +-
+>  include/video_fb.h                            |   91 -
+>  lib/efi_loader/Kconfig                        |    1 -
+>  scripts/config_whitelist.txt                  |   10 -
+>  100 files changed, 33 insertions(+), 6553 deletions(-)
+>  delete mode 100644 board/freescale/common/dcu_sii9022a.c
+>  delete mode 100644 board/freescale/common/dcu_sii9022a.h
+>  delete mode 100644 board/freescale/common/diu_ch7301.c
+>  delete mode 100644 board/freescale/common/diu_ch7301.h
+>  delete mode 100644 board/freescale/ls1021aiot/dcu.c
+>  delete mode 100644 board/freescale/ls1021aqds/dcu.c
+>  delete mode 100644 board/freescale/ls1021atwr/dcu.c
+>  delete mode 100644 board/freescale/t104xrdb/diu.c
+>  delete mode 100644 board/toradex/colibri_vf/dcu.c
+>  delete mode 100644 drivers/video/cfb_console.c
+>  delete mode 100644 drivers/video/da8xx-fb.c
+>  delete mode 100644 drivers/video/da8xx-fb.h
+>  delete mode 100644 drivers/video/formike.c
+>  delete mode 100644 drivers/video/fsl_dcu_fb.c
+>  delete mode 100644 drivers/video/fsl_diu_fb.c
+>  delete mode 100644 include/fsl_dcu_fb.h
+>  delete mode 100644 include/fsl_diu_fb.h
+>  delete mode 100644 include/video_fb.h
+>
+> --
+> 2.35.0.rc0.227.g00780c9af4-goog
+>
+
+Is there any word on this series, please?
+
+Regards,
+Simon
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

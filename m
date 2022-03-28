@@ -2,64 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDD284E9D6D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Mar 2022 19:25:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15C364E9D6F
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Mar 2022 19:25:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ABF67C5EC76;
-	Mon, 28 Mar 2022 17:25:45 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CB717C60465;
+	Mon, 28 Mar 2022 17:25:48 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88253C5E2CC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3C464C60464
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Mar 2022 17:25:44 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 22SDRBjK021207;
- Mon, 28 Mar 2022 19:25:39 +0200
+ Mon, 28 Mar 2022 17:25:47 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 22SDeQsB025447;
+ Mon, 28 Mar 2022 19:25:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=g7j9FzVeiJwuBpgl0jSWjqcbDhVCdhTJ50SspGEb+90=;
- b=v9TZ8OWM4CespNm9uIggdJJxVEHrEqvDs9QQHSeFdxKmbD4X4DwwdMXIC99aXHkejMjL
- 5YbDI4SprNBkzcaiIEsmojX5FYKDnDhcloZRwNPsbX3rXs52sMgYPK1bfkgkuukR2+3y
- TtRjNsFNi7ibvdIEKtJVKjuGUxjNLHtU5NcIX6sjTgT83uFP/TZcHYJlu9JT+TxgOvP4
- yl9sxzwKmqq57zF9eYlPG1J6lMwE7iZX5FYhDIU/U5+KJk/pas3rWEuIxQR843TqVDSP
- wg4kZQxC8euZMwXJ3j55mDBeh2x1eWorGtANHG/hefFE/ESXWoJJIdoyOGABcJ83PR+a /A== 
+ bh=i22QoLkiN8CoGlnfEKhz22H0au3BLpYGPUArUBVKfXE=;
+ b=VlejVaQeDtll2Xe4Kq1cTIJEqsXe+EW9kmd8ozVSZgjT+F+pe85h9tgne6vho39VTm5a
+ gUOlj19kiD57c8mdGcF/uxN6dcyqehPd+TNmrROSCvt3kEehkKIN8aKPl497OyE/7YJw
+ uw2kRnUaFazQsrfG5sZFWbhe69jueInL8PIVhKeY/zhUsVCdW1Ad1g72IGuhv/3CZd0o
+ 2HcaOdz2RBU2AVaR3L09fEhmqlkb/5WfLrosXCYWePF5Il7FzJQ40n+Fo3t28KpNJ+nk
+ q+wUOzj3kuPhdnBxc4hht+AJXsM14cg3somzdIMf+xn5xqIZHoBddBld2WdbWdc37awL WQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f1u242qpq-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f1tkm442c-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Mar 2022 19:25:39 +0200
+ Mon, 28 Mar 2022 19:25:41 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 62570100034;
- Mon, 28 Mar 2022 19:25:39 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2BDAB10002A;
+ Mon, 28 Mar 2022 19:25:40 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5AC9224B890;
- Mon, 28 Mar 2022 19:25:39 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 28 Mar 2022 19:25:38
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 224F124B890;
+ Mon, 28 Mar 2022 19:25:40 +0200 (CEST)
+Received: from localhost (10.75.127.51) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 28 Mar 2022 19:25:39
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 28 Mar 2022 19:25:28 +0200
-Message-ID: <20220328192520.3.Ic62ab0b22b898fc5dfae530e3560849cd33d5902@changeid>
+Date: Mon, 28 Mar 2022 19:25:29 +0200
+Message-ID: <20220328192520.4.I23385079e2fd8a2cab3b25e5883b94a25898736d@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220328172534.1196119-1-patrick.delaunay@foss.st.com>
 References: <20220328172534.1196119-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
+X-Originating-IP: [10.75.127.51]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
  definitions=2022-03-28_08,2022-03-28_01,2022-02-23_01
-Cc: Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- William Grant <wgrant@ubuntu.com>
-Subject: [Uboot-stm32] [PATCH 3/8] stm32mp: stm32prog: add TEE support in
-	stm32prog command
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 4/8] stm32mp: stm32prog: add support of
+	STM32IMAGE version 2
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,311 +75,291 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-When OP-TEE is used, the SMC for BSEC management are not
-available and the PTA provisioning for OTP must be used.
-
-U-Boot opens the session to this PTA and use it for OTP
-access.
+Add support of new header for the STM32IMAGE version V2
+in command stm32prog command for STM32MP13x family.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig   |   2 +-
- .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 145 ++++++++++++++++--
- .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |   7 +-
- .../cmd_stm32prog/stm32prog_usb.c             |   2 +-
- 4 files changed, 142 insertions(+), 14 deletions(-)
+ .../cmd_stm32prog/cmd_stm32prog.c             |   8 +-
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 119 ++++++++++++------
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |  35 ++++--
+ 3 files changed, 114 insertions(+), 48 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
-index 81d2b87035..8f91db4b46 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
-@@ -35,6 +35,6 @@ config CMD_STM32PROG_SERIAL
- config CMD_STM32PROG_OTP
- 	bool "support stm32prog for OTP update"
- 	depends on CMD_STM32PROG
--	default y if ARM_SMCCC
-+	default y if ARM_SMCCC || OPTEE
- 	help
- 		Support the OTP update with the command "stm32prog" for STM32MP
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+index 41452b5a29..3957e06e5d 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+@@ -73,15 +73,15 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ 	/* check STM32IMAGE presence */
+ 	if (size == 0) {
+-		stm32prog_header_check((struct raw_header_s *)addr, &header);
++		stm32prog_header_check(addr, &header);
+ 		if (header.type == HEADER_STM32IMAGE) {
+-			size = header.image_length + BL_HEADER_SIZE;
++			size = header.image_length + header.length;
+ 
+ #if defined(CONFIG_LEGACY_IMAGE_FORMAT)
+ 			/* uImage detected in STM32IMAGE, execute the script */
+ 			if (IMAGE_FORMAT_LEGACY ==
+-			    genimg_get_format((void *)(addr + BL_HEADER_SIZE)))
+-				return image_source_script(addr + BL_HEADER_SIZE, "script@1");
++			    genimg_get_format((void *)(addr + header.length)))
++				return image_source_script(addr + header.length, "script@1");
+ #endif
+ 		}
+ 	}
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 3e9354b51d..5d53e6146f 100644
+index 5d53e6146f..3e1fdee5b3 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -10,8 +10,10 @@
- #include <misc.h>
- #include <mmc.h>
- #include <part.h>
-+#include <tee.h>
- #include <asm/arch/stm32mp1_smc.h>
- #include <asm/global_data.h>
-+#include <dm/device_compat.h>
- #include <dm/uclass.h>
- #include <jffs2/load_kernel.h>
- #include <linux/list.h>
-@@ -79,8 +81,110 @@ struct fip_toc_header {
- 	u64	flags;
- };
- 
-+#define TA_NVMEM_UUID { 0x1a8342cc, 0x81a5, 0x4512, \
-+		{ 0x99, 0xfe, 0x9e, 0x2b, 0x3e, 0x37, 0xd6, 0x26 } }
-+
-+/*
-+ * Read NVMEM memory for STM32CubeProgrammer
-+ *
-+ * [in]		value[0].a:		Type (0 for OTP access)
-+ * [out]	memref[1].buffer	Output buffer to return all read values
-+ * [out]	memref[1].size		Size of buffer to be read
-+ *
-+ * Return codes:
-+ * TEE_SUCCESS - Invoke command success
-+ * TEE_ERROR_BAD_PARAMETERS - Incorrect input param
-+ */
-+#define TA_NVMEM_READ		0x0
-+
-+/*
-+ * Write NVMEM memory for STM32CubeProgrammer
-+ *
-+ * [in]	     value[0].a		Type (0 for OTP access)
-+ * [in]      memref[1].buffer	Input buffer with the values to write
-+ * [in]      memref[1].size	Size of buffer to be written
-+ *
-+ * Return codes:
-+ * TEE_SUCCESS - Invoke command success
-+ * TEE_ERROR_BAD_PARAMETERS - Incorrect input param
-+ */
-+#define TA_NVMEM_WRITE		0x1
-+
-+/* value of TA_NVMEM type = value[in] a */
-+#define NVMEM_OTP		0
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
-+/* OPTEE TA NVMEM open helper */
-+static int optee_ta_open(struct stm32prog_data *data)
-+{
-+	const struct tee_optee_ta_uuid uuid = TA_NVMEM_UUID;
-+	struct tee_open_session_arg arg;
-+	struct udevice *tee = NULL;
-+	int rc;
-+
-+	if (data->tee)
-+		return 0;
-+
-+	tee = tee_find_device(NULL, NULL, NULL, NULL);
-+	if (!tee)
-+		return -ENODEV;
-+
-+	memset(&arg, 0, sizeof(arg));
-+	tee_optee_ta_uuid_to_octets(arg.uuid, &uuid);
-+	rc = tee_open_session(tee, &arg, 0, NULL);
-+	if (rc < 0)
-+		return -ENODEV;
-+
-+	data->tee = tee;
-+	data->tee_session = arg.session;
-+
-+	return 0;
-+}
-+
-+/* OPTEE TA NVMEM invoke helper */
-+static int optee_ta_invoke(struct stm32prog_data *data, int cmd, int type,
-+			   void *buff, ulong size)
-+{
-+	struct tee_invoke_arg arg;
-+	struct tee_param param[2];
-+	struct tee_shm *buff_shm;
-+	int rc;
-+
-+	rc = tee_shm_register(data->tee, buff, size, 0, &buff_shm);
-+	if (rc)
-+		return rc;
-+
-+	memset(&arg, 0, sizeof(arg));
-+	arg.func = cmd;
-+	arg.session = data->tee_session;
-+
-+	memset(param, 0, sizeof(param));
-+	param[0].attr = TEE_PARAM_ATTR_TYPE_VALUE_INPUT;
-+	param[0].u.value.a = type;
-+
-+	if (cmd == TA_NVMEM_WRITE)
-+		param[1].attr = TEE_PARAM_ATTR_TYPE_MEMREF_INPUT;
-+	else
-+		param[1].attr = TEE_PARAM_ATTR_TYPE_MEMREF_OUTPUT;
-+
-+	param[1].u.memref.shm = buff_shm;
-+	param[1].u.memref.size = size;
-+
-+	rc = tee_invoke_func(data->tee, &arg, 2, param);
-+	if (rc < 0 || arg.ret != 0) {
-+		dev_err(data->tee,
-+			"TA_NVMEM invoke failed TEE err: %x, err:%x\n",
-+			arg.ret, rc);
-+		if (!rc)
-+			rc = -EIO;
-+	}
-+
-+	tee_shm_free(buff_shm);
-+
-+	return rc;
-+}
-+
- /* partition handling routines : CONFIG_CMD_MTDPARTS */
- int mtdparts_init(void);
- int find_dev_and_part(const char *id, struct mtd_device **dev,
-@@ -1208,7 +1312,11 @@ static int dfu_init_entities(struct stm32prog_data *data)
- 		ret = stm32prog_alt_add_virt(dfu, "virtual", PHASE_CMD, CMD_SIZE);
- 
- 	if (!ret && IS_ENABLED(CONFIG_CMD_STM32PROG_OTP)) {
--		ret = stm32prog_alt_add_virt(dfu, "OTP", PHASE_OTP, OTP_SIZE);
-+		ret = optee_ta_open(data);
-+		log_debug("optee_ta result %d\n", ret);
-+		ret = stm32prog_alt_add_virt(dfu, "OTP", PHASE_OTP,
-+					     data->tee ? OTP_SIZE_TA : OTP_SIZE_SMC);
-+	}
- 
- 	if (!ret && CONFIG_IS_ENABLED(DM_PMIC))
- 		ret = stm32prog_alt_add_virt(dfu, "PMIC", PHASE_PMIC, PMIC_SIZE);
-@@ -1226,6 +1334,7 @@ static int dfu_init_entities(struct stm32prog_data *data)
- int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 			long *size)
- {
-+	u32 otp_size = data->tee ? OTP_SIZE_TA : OTP_SIZE_SMC;
- 	log_debug("%s: %x %lx\n", __func__, offset, *size);
- 
- 	if (!IS_ENABLED(CONFIG_CMD_STM32PROG_OTP)) {
-@@ -1233,17 +1342,18 @@ int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 
- 		return -EOPNOTSUPP;
- 	}
-+
- 	if (!data->otp_part) {
--		data->otp_part = memalign(CONFIG_SYS_CACHELINE_SIZE, OTP_SIZE);
-+		data->otp_part = memalign(CONFIG_SYS_CACHELINE_SIZE, otp_size);
- 		if (!data->otp_part)
- 			return -ENOMEM;
- 	}
- 
- 	if (!offset)
--		memset(data->otp_part, 0, OTP_SIZE);
-+		memset(data->otp_part, 0, otp_size);
- 
--	if (offset + *size > OTP_SIZE)
--		*size = OTP_SIZE - offset;
-+	if (offset + *size > otp_size)
-+		*size = otp_size - offset;
- 
- 	memcpy((void *)((u32)data->otp_part + offset), buffer, *size);
- 
-@@ -1253,6 +1363,7 @@ int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
- int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 		       long *size)
- {
-+	u32 otp_size = data->tee ? OTP_SIZE_TA : OTP_SIZE_SMC;
- 	int result = 0;
- 
- 	if (!IS_ENABLED(CONFIG_CMD_STM32PROG_OTP)) {
-@@ -1266,7 +1377,7 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 	if (!offset) {
- 		if (!data->otp_part)
- 			data->otp_part =
--				memalign(CONFIG_SYS_CACHELINE_SIZE, OTP_SIZE);
-+				memalign(CONFIG_SYS_CACHELINE_SIZE, otp_size);
- 
- 		if (!data->otp_part) {
- 			result = -ENOMEM;
-@@ -1274,11 +1385,14 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 		}
- 
- 		/* init struct with 0 */
--		memset(data->otp_part, 0, OTP_SIZE);
-+		memset(data->otp_part, 0, otp_size);
- 
- 		/* call the service */
- 		result = -EOPNOTSUPP;
--		if (IS_ENABLED(CONFIG_ARM_SMCCC))
-+		if (data->tee && CONFIG_IS_ENABLED(OPTEE))
-+			result = optee_ta_invoke(data, TA_NVMEM_READ, NVMEM_OTP,
-+						 data->otp_part, OTP_SIZE_TA);
-+		else if (IS_ENABLED(CONFIG_ARM_SMCCC))
- 			result = stm32_smc_exec(STM32_SMC_BSEC, STM32_SMC_READ_ALL,
- 						(u32)data->otp_part, 0);
- 		if (result)
-@@ -1290,8 +1404,8 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
- 		goto end_otp_read;
- 	}
- 
--	if (offset + *size > OTP_SIZE)
--		*size = OTP_SIZE - offset;
-+	if (offset + *size > otp_size)
-+		*size = otp_size - offset;
- 	memcpy(buffer, (void *)((u32)data->otp_part + offset), *size);
- 
- end_otp_read:
-@@ -1317,7 +1431,10 @@ int stm32prog_otp_start(struct stm32prog_data *data)
- 	}
- 
- 	result = -EOPNOTSUPP;
--	if (IS_ENABLED(CONFIG_ARM_SMCCC)) {
-+	if (data->tee && CONFIG_IS_ENABLED(OPTEE)) {
-+		result = optee_ta_invoke(data, TA_NVMEM_WRITE, NVMEM_OTP,
-+					 data->otp_part, OTP_SIZE_TA);
-+	} else if (IS_ENABLED(CONFIG_ARM_SMCCC)) {
- 		arm_smccc_smc(STM32_SMC_BSEC, STM32_SMC_WRITE_ALL,
- 			      (u32)data->otp_part, 0, 0, 0, 0, 0, &res);
- 
-@@ -1751,6 +1868,12 @@ void stm32prog_clean(struct stm32prog_data *data)
- 	free(data->part_array);
- 	free(data->otp_part);
- 	free(data->buffer);
-+
-+	if (CONFIG_IS_ENABLED(OPTEE) && data->tee) {
-+		tee_close_session(data->tee, data->tee_session);
-+		data->tee = NULL;
-+		data->tee_session = 0x0;
-+	}
+@@ -205,52 +205,98 @@ static bool stm32prog_is_fip_header(struct fip_toc_header *header)
+ 	return (header->name == FIP_TOC_HEADER_NAME) && header->serial_number;
  }
  
- /* DFU callback: used after serial and direct DFU USB access */
+-void stm32prog_header_check(struct raw_header_s *raw_header,
+-			    struct image_header_s *header)
++static bool stm32prog_is_stm32_header_v1(struct stm32_header_v1 *header)
+ {
+ 	unsigned int i;
+ 
+-	if (!raw_header || !header) {
+-		log_debug("%s:no header data\n", __func__);
+-		return;
++	if (header->magic_number !=
++		(('S' << 0) | ('T' << 8) | ('M' << 16) | (0x32 << 24))) {
++		log_debug("%s:invalid magic number : 0x%x\n",
++			  __func__, header->magic_number);
++		return false;
++	}
++	if (header->header_version != 0x00010000) {
++		log_debug("%s:invalid header version : 0x%x\n",
++			  __func__, header->header_version);
++		return false;
+ 	}
+ 
+-	header->type = HEADER_NONE;
+-	header->image_checksum = 0x0;
+-	header->image_length = 0x0;
+-
+-	if (stm32prog_is_fip_header((struct fip_toc_header *)raw_header)) {
+-		header->type = HEADER_FIP;
+-		return;
++	if (header->reserved1 || header->reserved2) {
++		log_debug("%s:invalid reserved field\n", __func__);
++		return false;
++	}
++	for (i = 0; i < sizeof(header->padding); i++) {
++		if (header->padding[i] != 0) {
++			log_debug("%s:invalid padding field\n", __func__);
++			return false;
++		}
+ 	}
+ 
+-	if (raw_header->magic_number !=
++	return true;
++}
++
++static bool stm32prog_is_stm32_header_v2(struct stm32_header_v2 *header)
++{
++	unsigned int i;
++
++	if (header->magic_number !=
+ 		(('S' << 0) | ('T' << 8) | ('M' << 16) | (0x32 << 24))) {
+ 		log_debug("%s:invalid magic number : 0x%x\n",
+-			  __func__, raw_header->magic_number);
+-		return;
++			  __func__, header->magic_number);
++		return false;
+ 	}
+-	/* only header v1.0 supported */
+-	if (raw_header->header_version != 0x00010000) {
++	if (header->header_version != 0x00020000) {
+ 		log_debug("%s:invalid header version : 0x%x\n",
+-			  __func__, raw_header->header_version);
++			  __func__, header->header_version);
++		return false;
++	}
++	if (header->reserved1 || header->reserved2)
++		return false;
++
++	for (i = 0; i < sizeof(header->padding); i++) {
++		if (header->padding[i] != 0) {
++			log_debug("%s:invalid padding field\n", __func__);
++			return false;
++		}
++	}
++
++	return true;
++}
++
++void stm32prog_header_check(uintptr_t raw_header, struct image_header_s *header)
++{
++	struct stm32_header_v1 *v1_header = (struct stm32_header_v1 *)raw_header;
++	struct stm32_header_v2 *v2_header = (struct stm32_header_v2 *)raw_header;
++
++	if (!raw_header || !header) {
++		log_debug("%s:no header data\n", __func__);
+ 		return;
+ 	}
+-	if (raw_header->reserved1 != 0x0 || raw_header->reserved2) {
+-		log_debug("%s:invalid reserved field\n", __func__);
++
++	if (stm32prog_is_fip_header((struct fip_toc_header *)raw_header)) {
++		header->type = HEADER_FIP;
++		header->length = 0;
+ 		return;
+ 	}
+-	for (i = 0; i < (sizeof(raw_header->padding) / 4); i++) {
+-		if (raw_header->padding[i] != 0) {
+-			log_debug("%s:invalid padding field\n", __func__);
+-			return;
+-		}
++	if (stm32prog_is_stm32_header_v1(v1_header)) {
++		header->type = HEADER_STM32IMAGE;
++		header->image_checksum = le32_to_cpu(v1_header->image_checksum);
++		header->image_length = le32_to_cpu(v1_header->image_length);
++		header->length = sizeof(struct stm32_header_v1);
++		return;
++	}
++	if (stm32prog_is_stm32_header_v2(v2_header)) {
++		header->type = HEADER_STM32IMAGE_V2;
++		header->image_checksum = le32_to_cpu(v2_header->image_checksum);
++		header->image_length = le32_to_cpu(v2_header->image_length);
++		header->length = sizeof(struct stm32_header_v1) +
++				 v2_header->extension_headers_length;
++		return;
+ 	}
+-	header->type = HEADER_STM32IMAGE;
+-	header->image_checksum = le32_to_cpu(raw_header->image_checksum);
+-	header->image_length = le32_to_cpu(raw_header->image_length);
+ 
+-	return;
++	header->type = HEADER_NONE;
++	header->image_checksum = 0x0;
++	header->image_length = 0x0;
+ }
+ 
+ static u32 stm32prog_header_checksum(u32 addr, struct image_header_s *header)
+@@ -480,11 +526,11 @@ static int parse_flash_layout(struct stm32prog_data *data,
+ 	data->part_nb = 0;
+ 
+ 	/* check if STM32image is detected */
+-	stm32prog_header_check((struct raw_header_s *)addr, &header);
++	stm32prog_header_check(addr, &header);
+ 	if (header.type == HEADER_STM32IMAGE) {
+ 		u32 checksum;
+ 
+-		addr = addr + BL_HEADER_SIZE;
++		addr = addr + header.length;
+ 		size = header.image_length;
+ 
+ 		checksum = stm32prog_header_checksum(addr, &header);
+@@ -1560,7 +1606,7 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
+ 	int ret, i;
+ 	void *fsbl;
+ 	struct image_header_s header;
+-	struct raw_header_s raw_header;
++	struct stm32_header_v2 raw_header; /* V2 size > v1 size */
+ 	struct dfu_entity *dfu;
+ 	long size, offset;
+ 
+@@ -1572,17 +1618,18 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
+ 
+ 	/* read header */
+ 	dfu_transaction_cleanup(dfu);
+-	size = BL_HEADER_SIZE;
++	size = sizeof(raw_header);
+ 	ret = dfu->read_medium(dfu, 0, (void *)&raw_header, &size);
+ 	if (ret)
+ 		return ret;
+ 
+-	stm32prog_header_check(&raw_header, &header);
+-	if (header.type != HEADER_STM32IMAGE)
++	stm32prog_header_check((ulong)&raw_header, &header);
++	if (header.type != HEADER_STM32IMAGE &&
++	    header.type != HEADER_STM32IMAGE_V2)
+ 		return -ENOENT;
+ 
+ 	/* read header + payload */
+-	size = header.image_length + BL_HEADER_SIZE;
++	size = header.image_length + header.length;
+ 	size = round_up(size, part->dev->mtd->erasesize);
+ 	fsbl = calloc(1, size);
+ 	if (!fsbl)
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index 240c5c44bc..928b7b3a0e 100644
+index 928b7b3a0e..90cdc2ba47 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -20,7 +20,8 @@
- #define DEFAULT_ADDRESS		0xFFFFFFFF
- 
- #define CMD_SIZE		512
--#define OTP_SIZE		1024
-+#define OTP_SIZE_SMC		1024
-+#define OTP_SIZE_TA		776
- #define PMIC_SIZE		8
- 
- enum stm32prog_target {
-@@ -147,6 +148,10 @@ struct stm32prog_data {
- 	u32	dtb;
- 	u32	initrd;
- 	u32	initrd_size;
-+
-+	/* OPTEE PTA NVMEM */
-+	struct udevice *tee;
-+	u32 tee_session;
+@@ -42,6 +42,7 @@ enum stm32prog_link_t {
+ enum stm32prog_header_t {
+ 	HEADER_NONE,
+ 	HEADER_STM32IMAGE,
++	HEADER_STM32IMAGE_V2,
+ 	HEADER_FIP,
  };
  
- extern struct stm32prog_data *stm32prog_data;
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
-index e8acc302f9..82b702f93b 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
-@@ -181,7 +181,7 @@ int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
- 		*size = CMD_SIZE;
- 		break;
- 	case PHASE_OTP:
--		*size = OTP_SIZE;
-+		*size = stm32prog_data->tee ? OTP_SIZE_TA : OTP_SIZE_SMC;
- 		break;
- 	case PHASE_PMIC:
- 		*size = PMIC_SIZE;
+@@ -49,11 +50,12 @@ struct image_header_s {
+ 	enum stm32prog_header_t type;
+ 	u32	image_checksum;
+ 	u32	image_length;
++	u32	length;
+ };
+ 
+-struct raw_header_s {
++struct stm32_header_v1 {
+ 	u32 magic_number;
+-	u32 image_signature[64 / 4];
++	u8 image_signature[64];
+ 	u32 image_checksum;
+ 	u32 header_version;
+ 	u32 image_length;
+@@ -64,12 +66,30 @@ struct raw_header_s {
+ 	u32 version_number;
+ 	u32 option_flags;
+ 	u32 ecdsa_algorithm;
+-	u32 ecdsa_public_key[64 / 4];
+-	u32 padding[83 / 4];
+-	u32 binary_type;
++	u8 ecdsa_public_key[64];
++	u8 padding[83];
++	u8 binary_type;
+ };
+ 
+-#define BL_HEADER_SIZE	sizeof(struct raw_header_s)
++struct stm32_header_v2 {
++	u32 magic_number;
++	u8 image_signature[64];
++	u32 image_checksum;
++	u32 header_version;
++	u32 image_length;
++	u32 image_entry_point;
++	u32 reserved1;
++	u32 load_address;
++	u32 reserved2;
++	u32 version_number;
++	u32 extension_flags;
++	u32 extension_headers_length;
++	u32 binary_type;
++	u8 padding[16];
++	u32 extension_header_type;
++	u32 extension_header_length;
++	u8 extension_padding[376];
++};
+ 
+ /* partition type in flashlayout file */
+ enum stm32prog_part_type {
+@@ -171,8 +191,7 @@ int stm32prog_pmic_read(struct stm32prog_data *data, u32 offset,
+ int stm32prog_pmic_start(struct stm32prog_data *data);
+ 
+ /* generic part*/
+-void stm32prog_header_check(struct raw_header_s *raw_header,
+-			    struct image_header_s *header);
++void stm32prog_header_check(uintptr_t raw_header, struct image_header_s *header);
+ int stm32prog_dfu_init(struct stm32prog_data *data);
+ void stm32prog_next_phase(struct stm32prog_data *data);
+ void stm32prog_do_reset(struct stm32prog_data *data);
 -- 
 2.25.1
 

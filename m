@@ -2,108 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 720964EB760
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Mar 2022 02:14:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A8C14EBB90
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Mar 2022 09:15:51 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2FD0DC5EC56;
-	Wed, 30 Mar 2022 00:14:06 +0000 (UTC)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D6650C628A1;
+	Wed, 30 Mar 2022 07:15:50 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1FB5FC5AB61
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4F647C5AB61
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Mar 2022 00:14:05 +0000 (UTC)
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20220330001401epoutp04c7f4c3a8dfe070a8da9f0da4c623ae51~hAEaIMY9u0331103311epoutp04j
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Mar 2022 00:14:01 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20220330001401epoutp04c7f4c3a8dfe070a8da9f0da4c623ae51~hAEaIMY9u0331103311epoutp04j
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1648599241;
- bh=Vi4+2EoNo6zNCU+pVyCU6QwM1VIn2Wje5Y6ftme1pQI=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=X+mQSvZQpLqHI9OXK4A/jcGo+S8u0a6le2582iwXYFJiifJjZCH5MQC3GwCFUKIy5
- yU+Wuo02gUicAQgpIx4A8x4Kvx/k/TUPrWAQ7vJJzz88MEa2G0Klm9ErxIVZqHKd6v
- 1suY6IenpUxAZXUL6i18U4juRD9s1wql0IiUrc9o=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20220330001401epcas1p1204888d23c0286d3ee73cf2575e83084~hAEZvWe1q0351003510epcas1p1h;
- Wed, 30 Mar 2022 00:14:01 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.36.145]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4KSn3S6yH6z4x9QX; Wed, 30 Mar
- 2022 00:13:56 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 17.49.21932.BB0A3426; Wed, 30 Mar 2022 09:13:47 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20220330001347epcas1p1af7ef24f9034f45761b3e6ce9c4427bb~hAENGYVN11034910349epcas1p1e;
- Wed, 30 Mar 2022 00:13:47 +0000 (GMT)
-Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20220330001347epsmtrp2f7a1c689763609fe5097b4c8a80e87f2~hAENFlHdS2694026940epsmtrp2J;
- Wed, 30 Mar 2022 00:13:47 +0000 (GMT)
-X-AuditID: b6c32a38-93fff700000255ac-db-6243a0bbbda5
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- DD.10.03370.BB0A3426; Wed, 30 Mar 2022 09:13:47 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20220330001347epsmtip149a292d145a01d8d229f347921a4dc69~hAEMv9Et41046410464epsmtip1A;
- Wed, 30 Mar 2022 00:13:47 +0000 (GMT)
-Message-ID: <15e158ce-91cb-a37f-7535-42fc2b235311@samsung.com>
-Date: Wed, 30 Mar 2022 09:13:47 +0900
+ Tue, 29 Mar 2022 14:27:23 +0000 (UTC)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 22TERAHE062580;
+ Tue, 29 Mar 2022 09:27:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1648564030;
+ bh=RZZMi9VxMSkXp/Zmg51GTZO9FhWRFKSwfZbDGzFfcBI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Xk1Gp+9YVRYO9hfFL5+WNqYaRBxv9qAeqlEBMY2Fi4kKQ+TilpWUILwwauGQKM5XB
+ Vy7NCGorM/m6cWVLfzT6HbxYymq4BVxsmqPOF5lsq1ZSmCiI7Q4cQwt7lvcVd5vRW6
+ XnLbAmxMMLQwgGC+S0DgI/EaI3QNkpQkQH0hGvgw=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 22TERAIt071533
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 29 Mar 2022 09:27:10 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14; Tue, 29
+ Mar 2022 09:27:10 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.14 via
+ Frontend Transport; Tue, 29 Mar 2022 09:27:10 -0500
+Received: from [10.24.69.236] (ileax41-snat.itg.ti.com [10.172.224.153])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 22TER7XP113412;
+ Tue, 29 Mar 2022 09:27:08 -0500
+Message-ID: <a5da4bab-a125-b452-8859-cec4fa058a1b@ti.com>
+Date: Tue, 29 Mar 2022 19:57:07 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
 Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-From: Jaehoon Chung <jh80.chung@samsung.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220329160058.1.Idf1aae409d6bace710ad5e51ceeb5b8854e363bd@changeid>
+From: Aswath Govindraju <a-govindraju@ti.com>
 In-Reply-To: <20220329160058.1.Idf1aae409d6bace710ad5e51ceeb5b8854e363bd@changeid>
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprNJsWRmVeSWpSXmKPExsWy7bCmru7uBc5JBvMOWlnMe3KJ1WJqT7zF
- pPXX2C2m3l/LbPF2bye7xcKty1ksDk/9wOjA7vG0fyu7x85Zd9k9PnyM8zh7Zwejx8F9hh7H
- b2xnCmCLyrbJSE1MSS1SSM1Lzk/JzEu3VfIOjneONzUzMNQ1tLQwV1LIS8xNtVVy8QnQdcvM
- AbpESaEsMacUKBSQWFyspG9nU5RfWpKqkJFfXGKrlFqQklNgWqBXnJhbXJqXrpeXWmJlaGBg
- ZApUmJCdsfP7XcaCN4IVM5YtZWlgfMDdxcjJISFgInHw9D9WEFtIYAejRNNupS5GLiD7E6PE
- wSmf2SCcz4wSf5tessB07Nu4hhUisYtR4tOKtYwQzntGicntt4BaODh4BewkblxXBmlgEVCV
- +N15FayZV0BQ4uTMJ2C2qECExK9bj9hBbGEBRYnT0yaA2cwC4hK3nsxnArFFBDwlbj7bDTaf
- WeAWo8SOtqOMIAk2AR2J7d+OgxVxCgRJLJx8lA2iWV5i+9s5zBCXTuWQWHGOA8J2kTh4/g4j
- hC0s8er4FnYIW0ri87u9YG9KCDQzSixdcpAVwulhlPjXcJ0NospYYv/SyUwgnzELaEqs36UP
- EVaU2Pl7LiPEYj6Jd197WEFKJAR4JTrahCBKVCQuvX7JBLPr7pP/rBC2h8S1n4+ZJjAqzkIK
- l1lI/p+F5J1ZCIsXMLKsYhRLLSjOTU8tNiwwgcd2cn7uJkZwKtWy2ME49+0HvUOMTByMhxgl
- OJiVRHhlz9onCfGmJFZWpRblxxeV5qQWH2I0BcbORGYp0eR8YDLPK4k3NLE0MDEzMjaxMDQz
- VBLn7Z16OlFIID2xJDU7NbUgtQimj4mDU6qBybqifQLH80cZH/9sKv3m5SWzYpc716Zf2/aa
- MnHN0lHI3Mj2P/mdkCRH5Rd5rhU1lf7ix2fNaHJ97pVhdlLjfvcj2576uNdT/P4lmcvNf52p
- ZP6Jh3f7nFLWvM2FUcvs24L/n3QJFnO3XmFdI2jLKPL77tm18iFnZSoUtnFPeBPOskf6ZwO7
- jYjtW444pRVVFX/9zJ63+3z1viQfUhu/TKBesSH3VLqZ2amZlvtmfj8aqi80d3HL9pnbj+iH
- vflv/VDZTEks5VD+kqjSSW88b7EzOy4OWC6flu9/+YHbtKDkKzc/tAc+/qBx49iBh7sfTL3D
- bt31uljNnSd/vSeHtEpGtGZF2Y6pCREMjGFKLMUZiYZazEXFiQA5Mkg+LgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrBLMWRmVeSWpSXmKPExsWy7bCSnO7uBc5JBqvfSFvMe3KJ1WJqT7zF
- pPXX2C2m3l/LbPF2bye7xcKty1ksDk/9wOjA7vG0fyu7x85Zd9k9PnyM8zh7Zwejx8F9hh7H
- b2xnCmCL4rJJSc3JLEst0rdL4MrY+f0uY8EbwYoZy5ayNDA+4O5i5OSQEDCR2LdxDWsXIxeH
- kMAORolFky6xQySkJD4/ncrWxcgBZAtLHD5cDFHzllGivfs+M0icV8BO4sZ1ZZByFgFVid+d
- V1lAbF4BQYmTM5+A2aICERLLdk0Fs4UFFCVOT5sANp5ZQFzi1pP5TCC2iICnxM1nuxlB5jML
- 3GKUmH5gCxvEsqWMEu9bv4NVsQnoSGz/dhzM5hQIklg4+SjYccwC6hLr5wlBDJWX2P52DvME
- RqFZSO6YhWTfLISOWUg6FjCyrGKUTC0ozk3PLTYsMMpLLdcrTswtLs1L10vOz93ECI4cLa0d
- jHtWfdA7xMjEwXiIUYKDWUmEV/asfZIQb0piZVVqUX58UWlOavEhRmkOFiVx3gtdJ+OFBNIT
- S1KzU1MLUotgskwcnFINTKkLEjUXPrsbcK7t3epJ2pUMFxZe8Jm5sOJF3KNj+pPNZh58c13v
- +iT2hGnSpxUSU1z+x1dN3rZj2hd+7cPHbWUP34xhcC5K7tRUeF0T+np9qWSlSPTi9jCrrjmW
- uz8fuXecl3uVZLFvq13lVK8D9lb7zbM2/duf3GD2au2iJX1p188pJh7NehaTYviuvYndZ8vk
- qIzrGl85ROK/exxf+FvosfbHKbpSHizLLNakSSw+m5f1VSUq1FvDTO/2r9M2P1Q6tv99MfWn
- 1S+/PtdNDh+2WjC8vf52PZejwX/VUD7v9uIwZ/aFPbPqlzN9PpIRxRlj7u5x2aOtm2VH/r76
- 5t1LHhfHzP/yZdXtltSTjUosxRmJhlrMRcWJAK+aVTcLAwAA
-X-CMS-MailID: 20220330001347epcas1p1af7ef24f9034f45761b3e6ce9c4427bb
-X-Msg-Generator: CA
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20220329140125epcas1p2b8a01db5c7295761d20cb51ebf85d0bb
-References: <CGME20220329140125epcas1p2b8a01db5c7295761d20cb51ebf85d0bb@epcas1p2.samsung.com>
- <20220329160058.1.Idf1aae409d6bace710ad5e51ceeb5b8854e363bd@changeid>
-Cc: Aswath Govindraju <a-govindraju@ti.com>,
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 30 Mar 2022 07:15:49 +0000
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Bin Meng <bmeng.cn@gmail.com>, Reuben Dowle <reubendowle0@gmail.com>
@@ -124,17 +71,19 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 3/29/22 23:01, Patrick Delaunay wrote:
+Hi Patrick,
+
+On 29/03/22 19:31, Patrick Delaunay wrote:
 > Provide human readable descriptions of the speed nodes instead of the name
 > of constants from the code as it is already done for 'mmc rescan'
 > command in commit 212f078496e4 ("doc: mmc rescan speed mode").
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+Reviewed-by: Aswath Govindraju <a-govindraju@ti.com>
 
-Best Regards,
-Jaehoon Chung
+Thanks,
+Aswath
 
 > ---
 > 
@@ -188,7 +137,6 @@ Jaehoon Chung
 >  
 >         A speed mode can be set only if it has already been enabled in the device tree
 >  
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

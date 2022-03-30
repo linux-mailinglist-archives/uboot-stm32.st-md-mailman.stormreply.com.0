@@ -2,75 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E8884EBBCB
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Mar 2022 09:33:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B01E4ECF59
+	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Mar 2022 00:07:47 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2825DC60465;
-	Wed, 30 Mar 2022 07:33:58 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 27D6AC6046A;
+	Wed, 30 Mar 2022 22:07:47 +0000 (UTC)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+ [209.85.160.176])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 95CE7C01577
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D59B2C60465
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Mar 2022 07:33:56 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 22U375YI029084;
- Wed, 30 Mar 2022 09:33:30 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=selector1;
- bh=lxH8PaG1TrePHauHmxQoDKmkaMoWlezcFWrOedPbcIg=;
- b=lp39RMFqk1A18YIwwd/VRiZS0WjGIdP6zftCFEr5LwUvURyWsOfrVBjLnLipcQmHwyBr
- sP1rQRLN8OWj0BVSazC6iQxyCpED6G9kxfeBlYib1jENGsMK5lcr6FDNP9OvPH4HokxX
- ChiBRLDiiWHjEtXdGD11dQpnAOxeCIVJqjy4i6pxBJqOjzm8qaTu3a7p7njxe6pPWGfQ
- K2YSH3LylFsojcN8DLxnPxzkx2EBmLb8Q5H4Y5jgBkUB3CCQ1yge7NKdE0pHHh79ghKg
- PxqfcGutSzfa7CAf8B09a+UxMn4GPZwnNGV69fQ6ElPq8ot+jbHnYuVUcoLIjLgyi3Or dA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f1rudftas-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 30 Mar 2022 09:33:30 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5631510002A;
- Wed, 30 Mar 2022 09:33:28 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 485FB2132F2;
- Wed, 30 Mar 2022 09:33:28 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 30 Mar
- 2022 09:33:28 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 30 Mar 2022 09:33:15 +0200
-Message-ID: <20220330073315.7703-4-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220330073315.7703-1-patrice.chotard@foss.st.com>
-References: <20220330073315.7703-1-patrice.chotard@foss.st.com>
+ Wed, 30 Mar 2022 22:07:45 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id bp39so19648053qtb.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 30 Mar 2022 15:07:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=sRUEm1X/1/QbZlRYOeI8IxvD9u7O2x2v7gb0o8DsW3g=;
+ b=AwLCZ9VfhY6zQYww87XZf+poil2mzI5ofgq419xIQaRZqyPcLh1yGhCfD1znm5j2Bu
+ vNOktJqqFG1R3+VvB7xmUtX7ycqY9N3yvhlUSEuOcNwqjYVutgAYL2H9JKE7i5BkTwxY
+ ktedBfEh67uRM1iqV1OpGu9tbn8n+13kP3NwBE77zHdQMF2HTLLWXAS2o/BVYkrmUWvT
+ GdThjXfLyGMubDZ+IbBD7QegN1xrjnP7XOvZtWhbRuXGLbrxq0MNOIiG9x1xChOW8anf
+ ZT0xb7gUkEaA4ZJFyeKpGTcsKtEXIpNCVx7zYeBLJ/C9Buu01XDVG6oHpdZ9aHwjfpFi
+ nDxw==
+X-Gm-Message-State: AOAM532wFAZ+bdO8xO1xr3o0ijzP5AIoX+hbPzunnYRp+tP62wMPOlle
+ QIWAlxUWcsaDkNXkbxR8lw==
+X-Google-Smtp-Source: ABdhPJzYq2SbPhVNjzg0tqghKK3MYXvQgYH1U9Bi46PMPPhtPz7j/+L4E9B6UYKhah6q6FLzZV4Ahg==
+X-Received: by 2002:a05:622a:256:b0:2e1:a01b:a538 with SMTP id
+ c22-20020a05622a025600b002e1a01ba538mr1667678qtx.167.1648678064831; 
+ Wed, 30 Mar 2022 15:07:44 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b01-cbda-2ef0-5dff-fedb-a8ba.res6.spectrum.com.
+ [2603:6081:7b01:cbda:2ef0:5dff:fedb:a8ba])
+ by smtp.gmail.com with ESMTPSA id
+ h2-20020ac85842000000b002e1ec550506sm17749694qth.87.2022.03.30.15.07.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Mar 2022 15:07:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Date: Wed, 30 Mar 2022 18:07:19 -0400
+Message-Id: <20220330220735.908616-9-trini@konsulko.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220330220735.908616-1-trini@konsulko.com>
+References: <20220330220735.908616-1-trini@konsulko.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-30_02,2022-03-29_01,2022-02-23_01
-Cc: Vignesh R <vigneshr@ti.com>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Marek Behun <marek.behun@nic.cz>,
- Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Konstantin Porotchkin <kostap@marvell.com>, Biwen Li <biwen.li@nxp.com>,
- Wolfgang Denk <wd@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
- Igal Liberman <igall@marvell.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Simon Glass <sjg@chromium.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: [Uboot-stm32] [PATCH v4 3/3] test: dm: spi: Replace
-	_spi_get_bus_and_cs() by spi_get_bus_and_cs() in some case
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Kamil Lulko <kamil.lulko@gmail.com>
+Subject: [Uboot-stm32] [PATCH 09/25] stm32f429-discovery: Migrate
+	CONFIG_*_LED out of CONFIG namespace
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,63 +64,87 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SW4gY2FzZSBfc3BpX2dldF9idXNfYW5kX2NzKCkncyBwYXJhbWV0ZXJzIGRydl9uYW1lIGFuZCBk
-ZXZfbmFtZSBhcmUKcmVzcGVjdGl2ZWx5IHNldCB0byBOVUxMIGFuZCAwLCB1c2Ugc3BpX2dldF9i
-dXNfYW5kX2NzKCkgaW5zdGVhZC4KClNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0
-cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgoKQ2M6IE1hcmVrIEJlaHVuIDxtYXJlay5iZWh1bkBu
-aWMuY3o+CkNjOiBKYWdhbiBUZWtpIDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT4KQ2M6IFZp
-Z25lc2ggUiA8dmlnbmVzaHJAdGkuY29tPgpDYzogSm9lIEhlcnNoYmVyZ2VyIDxqb2UuaGVyc2hi
-ZXJnZXJAbmkuY29tPgpDYzogUmFtb24gRnJpZWQgPHJmcmllZC5kZXZAZ21haWwuY29tPgpDYzog
-THVrYXN6IE1hamV3c2tpIDxsdWttYUBkZW54LmRlPgpDYzogTWFyZWsgVmFzdXQgPG1hcmV4QGRl
-bnguZGU+CkNjOiBXb2xmZ2FuZyBEZW5rIDx3ZEBkZW54LmRlPgpDYzogU2ltb24gR2xhc3MgPHNq
-Z0BjaHJvbWl1bS5vcmc+CkNjOiBTdGVmYW4gUm9lc2UgPHNyQGRlbnguZGU+CkNjOiAiUGFsaSBS
-b2jDoXIiIDxwYWxpQGtlcm5lbC5vcmc+CkNjOiBLb25zdGFudGluIFBvcm90Y2hraW4gPGtvc3Rh
-cEBtYXJ2ZWxsLmNvbT4KQ2M6IElnYWwgTGliZXJtYW4gPGlnYWxsQG1hcnZlbGwuY29tPgpDYzog
-QmluIE1lbmcgPGJtZW5nLmNuQGdtYWlsLmNvbT4KQ2M6IFByYXR5dXNoIFlhZGF2IDxwLnlhZGF2
-QHRpLmNvbT4KQ2M6IFNlYW4gQW5kZXJzb24gPHNlYW5nYTJAZ21haWwuY29tPgpDYzogQW5qaSBK
-IDxhbmppLmphZ2FybG11ZGlAbnhwLmNvbT4KQ2M6IEJpd2VuIExpIDxiaXdlbi5saUBueHAuY29t
-PgpDYzogUHJpeWFua2EgSmFpbiA8cHJpeWFua2EuamFpbkBueHAuY29tPgpDYzogQ2hhaXRhbnlh
-IFNha2luYW0gPGNoYWl0YW55YS5zYWtpbmFtQG54cC5jb20+Ci0tLQoKKG5vIGNoYW5nZXMgc2lu
-Y2UgdjEpCgogdGVzdC9kbS9zcGkuYyB8IDE2ICsrKysrKy0tLS0tLS0tLS0KIDEgZmlsZSBjaGFu
-Z2VkLCA2IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Rlc3Qv
-ZG0vc3BpLmMgYi90ZXN0L2RtL3NwaS5jCmluZGV4IDdhYjA4MjBhYmIuLjMyNTc5OWJiZjEgMTAw
-NjQ0Ci0tLSBhL3Rlc3QvZG0vc3BpLmMKKysrIGIvdGVzdC9kbS9zcGkuYwpAQCAtNDYsOCArNDYs
-NyBAQCBzdGF0aWMgaW50IGRtX3Rlc3Rfc3BpX2ZpbmQoc3RydWN0IHVuaXRfdGVzdF9zdGF0ZSAq
-dXRzKQogCiAJLyogVGhpcyBmaW5kcyBub3RoaW5nIGJlY2F1c2Ugd2UgcmVtb3ZlZCB0aGUgZGV2
-aWNlICovCiAJdXRfYXNzZXJ0ZXEoLUVOT0RFViwgc3BpX2ZpbmRfYnVzX2FuZF9jcyhidXNudW0s
-IGNzLCAmYnVzLCAmZGV2KSk7Ci0JdXRfYXNzZXJ0ZXEoLUVOT0RFViwgX3NwaV9nZXRfYnVzX2Fu
-ZF9jcyhidXNudW0sIGNzLCBzcGVlZCwgbW9kZSwKLQkJCQkJCSBOVUxMLCAwLCAmYnVzLCAmc2xh
-dmUpKTsKKwl1dF9hc3NlcnRlcSgtRU5PREVWLCBzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBj
-cywgJmJ1cywgJnNsYXZlKSk7CiAKIAkvKgogCSAqIFRoaXMgZm9yY2VzIHRoZSBkZXZpY2UgdG8g
-YmUgcmUtYWRkZWQsIGJ1dCB0aGVyZSBpcyBubyBlbXVsYXRpb24KQEAgLTE0MywxNCArMTQyLDEy
-IEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlfY2xhaW1fYnVzKHN0cnVjdCB1bml0X3Rlc3Rfc3Rh
-dGUgKnV0cykKIAlzdHJ1Y3QgdWRldmljZSAqYnVzOwogCXN0cnVjdCBzcGlfc2xhdmUgKnNsYXZl
-X2EsICpzbGF2ZV9iOwogCXN0cnVjdCBkbV9zcGlfc2xhdmVfcGxhdCAqc2xhdmVfcGxhdDsKLQlj
-b25zdCBpbnQgYnVzbnVtID0gMCwgY3NfYSA9IDAsIGNzX2IgPSAxLCBtb2RlID0gMDsKKwljb25z
-dCBpbnQgYnVzbnVtID0gMCwgY3NfYSA9IDAsIGNzX2IgPSAxOwogCiAJLyogR2V0IHNwaSBzbGF2
-ZSBvbiBDUzAgKi8KLQl1dF9hc3NlcnRvayhfc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Nf
-YSwgMTAwMDAwMCwgbW9kZSwgTlVMTCwgMCwKLQkJCQkJJmJ1cywgJnNsYXZlX2EpKTsKKwl1dF9h
-c3NlcnRvayhzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBjc19hLCAmYnVzLCAmc2xhdmVfYSkp
-OwogCS8qIEdldCBzcGkgc2xhdmUgb24gQ1MxICovCi0JdXRfYXNzZXJ0b2soX3NwaV9nZXRfYnVz
-X2FuZF9jcyhidXNudW0sIGNzX2IsIDEwMDAwMDAsIG1vZGUsIE5VTEwsIDAsCi0JCQkJCSZidXMs
-ICZzbGF2ZV9iKSk7CisJdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Nf
-YiwgJmJ1cywgJnNsYXZlX2IpKTsKIAogCS8qIERpZmZlcmVudCBtYXhfaHosIGRpZmZlcmVudCBt
-b2RlLiAqLwogCXV0X2Fzc2VydChzbGF2ZV9hLT5tYXhfaHogIT0gc2xhdmVfYi0+bWF4X2h6KTsK
-QEAgLTE3OSwxMiArMTc2LDExIEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlfeGZlcihzdHJ1Y3Qg
-dW5pdF90ZXN0X3N0YXRlICp1dHMpCiB7CiAJc3RydWN0IHNwaV9zbGF2ZSAqc2xhdmU7CiAJc3Ry
-dWN0IHVkZXZpY2UgKmJ1czsKLQljb25zdCBpbnQgYnVzbnVtID0gMCwgY3MgPSAwLCBtb2RlID0g
-MDsKKwljb25zdCBpbnQgYnVzbnVtID0gMCwgY3MgPSAwOwogCWNvbnN0IGNoYXIgZG91dFs1XSA9
-IHsweDlmfTsKIAl1bnNpZ25lZCBjaGFyIGRpbls1XTsKIAotCXV0X2Fzc2VydG9rKF9zcGlfZ2V0
-X2J1c19hbmRfY3MoYnVzbnVtLCBjcywgMTAwMDAwMCwgbW9kZSwgTlVMTCwgMCwKLQkJCQkJJmJ1
-cywgJnNsYXZlKSk7CisJdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Ms
-ICZidXMsICZzbGF2ZSkpOwogCXV0X2Fzc2VydG9rKHNwaV9jbGFpbV9idXMoc2xhdmUpKTsKIAl1
-dF9hc3NlcnRvayhzcGlfeGZlcihzbGF2ZSwgNDAsIGRvdXQsIGRpbiwKIAkJCSAgICAgU1BJX1hG
-RVJfQkVHSU4gfCBTUElfWEZFUl9FTkQpKTsKLS0gCjIuMTcuMQoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVi
-b290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWls
-bWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+These values are only used in one file, reference them more directly.
+
+Cc: Kamil Lulko <kamil.lulko@gmail.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ board/st/stm32f429-discovery/led.c    | 19 +++++++++++--------
+ include/configs/stm32f429-discovery.h |  3 ---
+ 2 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
+index 539c139bb5dd..8dda6a97bd1c 100644
+--- a/board/st/stm32f429-discovery/led.c
++++ b/board/st/stm32f429-discovery/led.c
+@@ -8,30 +8,33 @@
+ #include <status_led.h>
+ #include <asm-generic/gpio.h>
+ 
++#define RED_LED			110
++#define GREEN_LED		109
++
+ void coloured_LED_init(void)
+ {
+-	gpio_request(CONFIG_RED_LED, "red led");
+-	gpio_direction_output(CONFIG_RED_LED, 0);
+-	gpio_request(CONFIG_GREEN_LED, "green led");
+-	gpio_direction_output(CONFIG_GREEN_LED, 0);
++	gpio_request(RED_LED, "red led");
++	gpio_direction_output(RED_LED, 0);
++	gpio_request(GREEN_LED, "green led");
++	gpio_direction_output(GREEN_LED, 0);
+ }
+ 
+ void red_led_off(void)
+ {
+-	gpio_set_value(CONFIG_RED_LED, 0);
++	gpio_set_value(RED_LED, 0);
+ }
+ 
+ void green_led_off(void)
+ {
+-	gpio_set_value(CONFIG_GREEN_LED, 0);
++	gpio_set_value(GREEN_LED, 0);
+ }
+ 
+ void red_led_on(void)
+ {
+-	gpio_set_value(CONFIG_RED_LED, 1);
++	gpio_set_value(RED_LED, 1);
+ }
+ 
+ void green_led_on(void)
+ {
+-	gpio_set_value(CONFIG_GREEN_LED, 1);
++	gpio_set_value(GREEN_LED, 1);
+ }
+diff --git a/include/configs/stm32f429-discovery.h b/include/configs/stm32f429-discovery.h
+index c9649a085ef1..21bab5aafd54 100644
+--- a/include/configs/stm32f429-discovery.h
++++ b/include/configs/stm32f429-discovery.h
+@@ -17,9 +17,6 @@
+ 
+ #define CONFIG_SYS_MAX_FLASH_SECT	12
+ 
+-#define CONFIG_RED_LED			110
+-#define CONFIG_GREEN_LED		109
+-
+ #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
+ 
+ #define CONFIG_SYS_CBSIZE		1024
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

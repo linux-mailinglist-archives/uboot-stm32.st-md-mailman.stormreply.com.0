@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF9654ED4B6
-	for <lists+uboot-stm32@lfdr.de>; Thu, 31 Mar 2022 09:20:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 099064F57D4
+	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Apr 2022 10:38:06 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9DDC5C6046A;
-	Thu, 31 Mar 2022 07:20:39 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B2EDDC60492;
+	Wed,  6 Apr 2022 08:38:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 752C3C5E2CC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 550A0C60467
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 31 Mar 2022 07:20:37 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 22V7BVCa029218;
- Thu, 31 Mar 2022 09:20:35 +0200
+ Wed,  6 Apr 2022 08:38:04 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 2364PJWk021551;
+ Wed, 6 Apr 2022 10:37:57 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=Y3VcB3mk8h7IZihMr19WdrwAp5PlVii2UVOEEWs35z4=;
- b=07az/pvi7IwcSXuTNm6oz4TqzzEeaxwTPDVClrlPEgXwN7DN9xsQxrOnKuyQPwyio05c
- jmSm73g16HlgQm3U4/fBFV5tg5AWhAjaMP+uKgoCy1O7oy41mRfrFcoj8bj2HXtPRMwz
- dDd2+GJwUCohxgHfKUO1MO9YW3dy+1XKGU4zMneyLEIUSz48trFrVXFAM0BKzqbsczvI
- zvPdJCnt6sQ0plFfeooGzb9E8s/W3HEXK1ZrIxKhtqV4HSdxbc0cZqYHJoTHT+1by3R5
- jZJjhes06wiQjTBmHM6wg1dpj/BidcWrHhsiPzLqNX/Sr2sOEK+aGTkn3O9jNQ0YGlzB MA== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=4GiV+kEiBHntEKmx3ybxjqXWLfxGH1Ex3jKJ+3t16Fs=;
+ b=5i9UmC5zgWDqP9iAEv81lMfosbp8Cr2LPY9HBl/tCHXppzzfssduC3ld8tjXUoW0gNPp
+ B14FF4r5waUzF5eGsMOPJomyRuMOb1IHhAOMv9Kd7mk9oEYaOmdSgE45L98gVCAd8g56
+ yC/Pcl/2+CVJ7AozKIo2j4eLH8UKawlq0SqgJ4tzrMdqaM1cBvdp2N/mPNwqsixzRsZX
+ UOycJbQvy1hkwoGAj1OnkdTMEwQwOZS29l/Fw8zOjCGPSwiMtMM/uT2E0M3q2OgYe7Kq
+ rzSHr9qHdqSqpA96CJ/Ejxv1qr6zEK32AwJoRVEPgS2+UQ6zdk8XjtS/KAp2MxqNEw6m Qg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f1rudqc2b-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3f6bwk4mb5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 31 Mar 2022 09:20:35 +0200
+ Wed, 06 Apr 2022 10:37:57 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E06AC10002A;
- Thu, 31 Mar 2022 09:20:32 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D95B62138E2;
- Thu, 31 Mar 2022 09:20:32 +0200 (CEST)
-Received: from [10.201.21.201] (10.75.127.51) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Thu, 31 Mar
- 2022 09:20:32 +0200
-Message-ID: <48d8af86-104b-06e1-9894-10a7cec229cb@foss.st.com>
-Date: Thu, 31 Mar 2022 09:20:31 +0200
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 96EA410002A;
+ Wed,  6 Apr 2022 10:37:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 76607209748;
+ Wed,  6 Apr 2022 10:37:56 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Wed, 6 Apr 2022 10:37:56
+ +0200
+From: Yannick FERTRE <yannick.fertre@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 6 Apr 2022 10:37:42 +0200
+Message-ID: <20220406083742.291491-1-yannick.fertre@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-References: <20220330220735.908616-1-trini@konsulko.com>
- <20220330220735.908616-9-trini@konsulko.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20220330220735.908616-9-trini@konsulko.com>
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
- (10.75.129.69)
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
+ (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.850,Hydra:6.0.425,FMLib:17.11.64.514
- definitions=2022-03-31_02,2022-03-30_01,2022-02-23_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Kamil Lulko <kamil.lulko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 09/25] stm32f429-discovery: Migrate
- CONFIG_*_LED out of CONFIG namespace
+ definitions=2022-04-06_02,2022-04-05_01,2022-02-23_01
+Cc: Yannick FERTRE <yannick.fertre@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: [Uboot-stm32] [PATCH] video: stm32: stm32_ltdc: fix data enable
+	polarity
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,85 +74,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom
+Wrong DISPLAY_FLAGS used to set the data enable polarity.
 
-On 3/31/22 00:07, Tom Rini wrote:
-> These values are only used in one file, reference them more directly.
-> 
-> Cc: Kamil Lulko <kamil.lulko@gmail.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  board/st/stm32f429-discovery/led.c    | 19 +++++++++++--------
->  include/configs/stm32f429-discovery.h |  3 ---
->  2 files changed, 11 insertions(+), 11 deletions(-)
-> 
-> diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
-> index 539c139bb5dd..8dda6a97bd1c 100644
-> --- a/board/st/stm32f429-discovery/led.c
-> +++ b/board/st/stm32f429-discovery/led.c
-> @@ -8,30 +8,33 @@
->  #include <status_led.h>
->  #include <asm-generic/gpio.h>
->  
-> +#define RED_LED			110
-> +#define GREEN_LED		109
-> +
->  void coloured_LED_init(void)
->  {
-> -	gpio_request(CONFIG_RED_LED, "red led");
-> -	gpio_direction_output(CONFIG_RED_LED, 0);
-> -	gpio_request(CONFIG_GREEN_LED, "green led");
-> -	gpio_direction_output(CONFIG_GREEN_LED, 0);
-> +	gpio_request(RED_LED, "red led");
-> +	gpio_direction_output(RED_LED, 0);
-> +	gpio_request(GREEN_LED, "green led");
-> +	gpio_direction_output(GREEN_LED, 0);
->  }
->  
->  void red_led_off(void)
->  {
-> -	gpio_set_value(CONFIG_RED_LED, 0);
-> +	gpio_set_value(RED_LED, 0);
->  }
->  
->  void green_led_off(void)
->  {
-> -	gpio_set_value(CONFIG_GREEN_LED, 0);
-> +	gpio_set_value(GREEN_LED, 0);
->  }
->  
->  void red_led_on(void)
->  {
-> -	gpio_set_value(CONFIG_RED_LED, 1);
-> +	gpio_set_value(RED_LED, 1);
->  }
->  
->  void green_led_on(void)
->  {
-> -	gpio_set_value(CONFIG_GREEN_LED, 1);
-> +	gpio_set_value(GREEN_LED, 1);
->  }
-> diff --git a/include/configs/stm32f429-discovery.h b/include/configs/stm32f429-discovery.h
-> index c9649a085ef1..21bab5aafd54 100644
-> --- a/include/configs/stm32f429-discovery.h
-> +++ b/include/configs/stm32f429-discovery.h
-> @@ -17,9 +17,6 @@
->  
->  #define CONFIG_SYS_MAX_FLASH_SECT	12
->  
-> -#define CONFIG_RED_LED			110
-> -#define CONFIG_GREEN_LED		109
-> -
->  #define CONFIG_SYS_HZ_CLOCK		1000000	/* Timer is clocked at 1MHz */
->  
->  #define CONFIG_SYS_CBSIZE		1024
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Signed-off-by: Yannick FERTRE <yannick.fertre@foss.st.com>
+---
 
-Thanks
-Patrice
+ drivers/video/stm32/stm32_ltdc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
+index e741e74739..9269d4bfb4 100644
+--- a/drivers/video/stm32/stm32_ltdc.c
++++ b/drivers/video/stm32/stm32_ltdc.c
+@@ -255,7 +255,7 @@ static void stm32_ltdc_set_mode(struct stm32_ltdc_priv *priv,
+ 		val |= GCR_HSPOL;
+ 	if (timings->flags & DISPLAY_FLAGS_VSYNC_HIGH)
+ 		val |= GCR_VSPOL;
+-	if (timings->flags & DISPLAY_FLAGS_DE_HIGH)
++	if (timings->flags & DISPLAY_FLAGS_DE_LOW)
+ 		val |= GCR_DEPOL;
+ 	if (timings->flags & DISPLAY_FLAGS_PIXDATA_NEGEDGE)
+ 		val |= GCR_PCPOL;
+-- 
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

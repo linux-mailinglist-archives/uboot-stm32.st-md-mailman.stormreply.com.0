@@ -2,66 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D09A34FC598
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Apr 2022 22:15:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C85B4FF9AE
+	for <lists+uboot-stm32@lfdr.de>; Wed, 13 Apr 2022 17:05:18 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 97A47C628AC;
-	Mon, 11 Apr 2022 20:15:13 +0000 (UTC)
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
- [209.85.222.179])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D84B6C6049C;
+	Wed, 13 Apr 2022 15:05:17 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90ED7C628A6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 99CE4C60496
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Apr 2022 20:15:11 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id bk12so12012679qkb.7
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Apr 2022 13:15:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=2X50+opRYd7AZ5Cv6PAnIs0fIg/GUY5wZ+Q02ZwmO4o=;
- b=qiPUuqQy67A22IrcxWwPJet6Jd3uK/zo+mpIhdf3xNjTa+NFaeFk/qY6tay/s7AxD/
- sLao4810ZOv8X/2A3e70RB0X32V/JFkuKuHENRzzQAu/vHH/XnSbHijNgVsewVvUF95v
- BVEj9gSCfsoMNfBTYeQwforY38vwN50LOMBg4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=2X50+opRYd7AZ5Cv6PAnIs0fIg/GUY5wZ+Q02ZwmO4o=;
- b=3XGyGnzm+/M4aO3BkZMAqy6FWk0enUP1lU6LPcF3xrPbxZfjxOE52qTEl4uHHH38q1
- rZXeJFse8SATWmFa2dpHtUx+EVIHlNisByJAiS3iqkCyyL9fix3VVy9Q1JxTwk8EFwRM
- uNWeqX1hWtsj8qbwZUuCCKReFR82QukZNHpBnpHjZrsljj/PAUT8BdX8lwYhE8V85WeF
- Mo4xQvnS5A3ChUhrDRa51DgKGkcfpoYuntsJLBi5pxGFNOa78FvlBaz5jcbRnC031prC
- VTUsEJ4bup4xbXukaOCppVHep3nPay/o+/OZzT5R+vcR6EpOYHYMGkpqn7RNiLssb3qd
- ADtg==
-X-Gm-Message-State: AOAM531BHhYbJ7wf918+Brj4CB9MazjS7WpXUtHOT0Mt7zUcoDjKCOA9
- cqFQI5joAw2r0AgS/WQZ3WniFQ==
-X-Google-Smtp-Source: ABdhPJy/jeyJKyals1jrDfj/nJKpEyf+rZvgQPgZY1all0cXtAgZdd3va7rsPm/dXELR3KaGSDLGJQ==
-X-Received: by 2002:a37:845:0:b0:47e:c3fb:b11c with SMTP id
- 66-20020a370845000000b0047ec3fbb11cmr866386qki.92.1649708110651; 
- Mon, 11 Apr 2022 13:15:10 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b01-cbda-2ef0-5dff-fedb-a8ba.res6.spectrum.com.
- [2603:6081:7b01:cbda:2ef0:5dff:fedb:a8ba])
- by smtp.gmail.com with ESMTPSA id
- t3-20020a05622a148300b002ef8ff7afa1sm1285279qtx.21.2022.04.11.13.15.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 11 Apr 2022 13:15:09 -0700 (PDT)
-Date: Mon, 11 Apr 2022 16:15:07 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20220411201507.GY14282@bill-the-cat>
-References: <20220322170840.v2.1.I87cd34696829974a97e4eae53f9652577d6e2e4b@changeid>
+ Wed, 13 Apr 2022 15:05:16 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23DEwJn5000824;
+ Wed, 13 Apr 2022 17:05:14 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type; s=selector1;
+ bh=DNnQOTxLX30BVz/uWGPw+tv3QYPhEms58TdWkc31F2w=;
+ b=Jyn9fekgrS+2vE0YnaEhV2/McE1GLT6bRdeQO0jf/dwsk4xb5DY0I3nIMUlq+AYdJEOe
+ 0PmAPKauWvhzmX8/ea5Bk0dfW02BnI8nWZ8trUL7SnmNc8SytG8tBfIb0hzvbtlNsns6
+ 4Vb7S04TzkIj4zycEdqmven9t8v0ioB3uxvJdA9xjU8yl2j8QWi9OQUpFBnrcEIe9d4R
+ cxDUp538JaOiDX+yn2p2tzd+3lqXsJQ8wTkqtJ+d/cJWpN71+qQIZB0+P3PmU8RRZVmf
+ /vjt4mvj1uC8Dt3AgghSvzlNF+Wf4druBKWzXTeWDY8JXgSUQXDwxJhuFZVhC/CqrzZI xQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fb74qeues-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 13 Apr 2022 17:05:14 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3431E10002A;
+ Wed, 13 Apr 2022 17:05:13 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9C7CA221789;
+ Wed, 13 Apr 2022 17:05:13 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 13 Apr
+ 2022 17:05:13 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 13 Apr 2022 17:04:48 +0200
+Message-ID: <20220413150500.23883-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20220322170840.v2.1.I87cd34696829974a97e4eae53f9652577d6e2e4b@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Artem Lapkin <email2tema@gmail.com>, Zhaofeng Li <hello@zhaofeng.li>,
- u-boot@lists.denx.de, Ramon Fried <rfried.dev@gmail.com>,
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
+ definitions=2022-04-13_02,2022-04-13_01,2022-02-23_01
+Cc: Vikas Manocha <vikas.manocha@st.com>, Simon Glass <sjg@chromium.org>,
+ Kamil Lulko <kamil.lulko@gmail.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2] cmd: pxe_utils: sysboot: replace cls
- command by video_clear in PXE parser
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Dillon Min <dillon.minfei@gmail.com>
+Subject: [Uboot-stm32] [PATCH v1 00/12] stm32: add new board support,
+	defconfig and documentation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,71 +70,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5759186862261947351=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Add new stm32746g-eval board support
+Add defconfig for SPL and none SPL mode for STM32F7 boards.
+Add documentation on how to build and flash STM32 MCUs.
 
---===============5759186862261947351==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="1jfuqZkEwGIrd2rY"
-Content-Disposition: inline
+Patrice Chotard (12):
+  configs: stm32f746-disco: Concatenate spl and u-boot binaries
+  configs: stm32f746-disco: Rename stm32f746-disco_defconfig to
+    stm32f746-disco_spl_defconfig
+  configs: stm32f746-disco: Add stm32f746-disco_defconfig
+  configs: stm32f769-disco: Rename stm32f769-disco_defconfig to
+    stm32f769-disco_spl_defconfig
+  configs: stm32f769-disco: Add stm32f769-disco_defconfig
+  configs: stm32f769-disco: Migrate SPL flags to defconfig
+  configs: stm32f746-disco: Migrate SPL flags to defconfig
+  board: stm32f746-disco: Fix dram_init() in none SPL config
+  configs: stm32f746-disco: use CONFIG_DEFAULT_DEVICE_TREE as fdtfile
+  configs: stm32746g-eval: Add stm32746g-eval_defconfig
+  configs: stm32746g-eval: Add stm32746g-eval_spl_defconfig
+  doc: Add documentation for STM32 MCUs
 
+ arch/arm/mach-stm32/Kconfig                |  20 ---
+ board/st/stm32f429-discovery/MAINTAINERS   |   1 +
+ board/st/stm32f429-evaluation/MAINTAINERS  |   1 +
+ board/st/stm32f469-discovery/MAINTAINERS   |   1 +
+ board/st/stm32f746-disco/MAINTAINERS       |   5 +
+ board/st/stm32f746-disco/stm32f746-disco.c |   2 +-
+ board/st/stm32h743-disco/MAINTAINERS       |   1 +
+ board/st/stm32h743-eval/MAINTAINERS        |   1 +
+ board/st/stm32h750-art-pi/MAINTAINERS      |   1 +
+ configs/stm32746g-eval_defconfig           |  64 +++++++
+ configs/stm32746g-eval_spl_defconfig       |  86 ++++++++++
+ configs/stm32f746-disco_defconfig          |   7 +-
+ configs/stm32f746-disco_spl_defconfig      |  86 ++++++++++
+ configs/stm32f769-disco_defconfig          |   7 +-
+ configs/stm32f769-disco_spl_defconfig      |  87 ++++++++++
+ doc/board/st/index.rst                     |   1 +
+ doc/board/st/stm32_MCU.rst                 | 186 +++++++++++++++++++++
+ include/configs/stm32f746-disco.h          |   3 +-
+ 18 files changed, 526 insertions(+), 34 deletions(-)
+ create mode 100644 configs/stm32746g-eval_defconfig
+ create mode 100644 configs/stm32746g-eval_spl_defconfig
+ create mode 100644 configs/stm32f746-disco_spl_defconfig
+ create mode 100644 configs/stm32f769-disco_spl_defconfig
+ create mode 100644 doc/board/st/stm32_MCU.rst
 
---1jfuqZkEwGIrd2rY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Mar 22, 2022 at 05:08:43PM +0100, Patrick Delaunay wrote:
-
-> Since the commit bfaa51dd4adf ("cmd: add serial console support
-> for the cls command") the cls command is not enough to clear the
-> video display when ANSI console is activated.
->=20
-> This patch clears the video device with the video_clear() API
-> before to display the bitmap used for the PXE background.
->=20
-> This patch avoids to display the LOGO, activated by default with
-> commit 7a8555d87136 ("video: Show the U-Boot logo by default").
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---1jfuqZkEwGIrd2rY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmJUjEsACgkQFHw5/5Y0
-tyxEZwwApYbZcFXZV5swuikg19XXZ+sHa2s1LIKyEOkT/wCWOi2AqWdLen4VKPlj
-yEVUxBx5trzNm0hiWmnhMCz7n2huJwzwoU7MJnRqjVSljd1Nn9+RaoN+XVP8IZMo
-SeNX+hnW1YsY86fF2gPIRzPFTPJXkWoac1hzu6LsH+IBLiOibHJ3+tyjIZm8aB9H
-5WO0d561FJdRSwDGQ9WsnrT1iByYe7BOtUajgMyGvgmDStg0efE22GCYjAUt0Fv7
-4wqlGHOSDJ5o2gvz8UsNz9LsMjg+3qIEPVM/3l3wosGSEmJ13heoXNyslLfsla4j
-1GzhBbq267pnUAOPb/525J0bXWO1nl1fgW/qLHAnXE8t8gUpElt2XkNbwDOTnl9A
-kgxem7fOsIHFnQ4CZmrEdQwdAoWGh7g2yfl3Af5WKQzPvFwvA3YHMO/+8Ryqj3BX
-2BQbbxTJMxTFwtW+uCwLbKYXFtlWRYBauEewHzRe8Rv0t7G0ytlTFfonsueVtruc
-5RQzrZ02
-=mbf4
------END PGP SIGNATURE-----
-
---1jfuqZkEwGIrd2rY--
-
---===============5759186862261947351==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.17.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============5759186862261947351==--

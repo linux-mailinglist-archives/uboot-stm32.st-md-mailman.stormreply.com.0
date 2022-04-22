@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E67750B1DF
-	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Apr 2022 09:42:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B3FF50B1E0
+	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Apr 2022 09:42:41 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 16DADC60496;
-	Fri, 22 Apr 2022 07:42:26 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 21D6EC60496;
+	Fri, 22 Apr 2022 07:42:41 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F2795C60492
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BBFF2C60492
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 22 Apr 2022 07:42:24 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23M5etC8028323;
- Fri, 22 Apr 2022 09:42:19 +0200
+ Fri, 22 Apr 2022 07:42:39 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23M1eZBA015687;
+ Fri, 22 Apr 2022 09:42:35 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=mBXqFOFG2SvqjGUMzG5aOSaX3ywoxZT0vfMqcRmCo3w=;
- b=gyEDX7/opJ+q6/kRRjn7b9W6Myyb7AE1O43kc54IbOG4j+53V+eulfsPManH8wdnmrqY
- 4CmqrEj48HsrK0CbLszVWvOZSoGkLrJdyAyBQL55J1l/BbEx10Th8B3ubmHvdWxZ5srC
- PC2dHIJC6wwQEVD0XGSWlCUkpGH/NCfHfDBn92JXkGuQXJPkANm1dSVVjRoH8XClhjcN
- 49gbCTVMp9iMfeexe/fEeSLe7frHA7pTr0epwBucaiyr0PPAS6hH8/3BeW+MFza1c5Zc
- 9z+muyspjMn6nD2sNYjc1FLY71+xCtcbtMqIiM7voqAxXF/4fHQKMxEGMpkOmdsOGgSg Kw== 
+ bh=UktlFo3ZPOExVtIU3wHwQnAeyWl7kl9+fw48pBh5VDE=;
+ b=aPN8vYeUtULwCYHRvUmqlokdMiVnVAxSz+Vzkmi3Y2fD45xXYasOxJre4M6nfqCfrk7F
+ He7niK1nyIYkscMtfKAptIXUeXKpyMFGMTtbHDMsvghzNsMss6s748VbEgOz0kLxQJtT
+ UZNJwpy7dD2qFJH+RqeFZWOcwtJOylrLecCZGl4omx26LxiryGX5AcsgEPLGx3LL3fJH
+ eAmfqi9GqrZmOcQ5ucG7sGRVSDSgGbFm57Lx+8fxlCWu5BN5jLPuSF8VL54TGAEjyFvi
+ 5y5PmWwNby/M5oVVKl9HzRKzAUITEhf6BFdOedVZVQNdqnX64lWmLM+Wo0Uvuh2nHyE9 qA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ffpqh797c-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ffpqe7gxm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 22 Apr 2022 09:42:19 +0200
+ Fri, 22 Apr 2022 09:42:35 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 67A3310002A;
- Fri, 22 Apr 2022 09:42:19 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AA15710002A;
+ Fri, 22 Apr 2022 09:42:34 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5FFDF21683B;
- Fri, 22 Apr 2022 09:42:19 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A100C21683B;
+ Fri, 22 Apr 2022 09:42:34 +0200 (CEST)
 Received: from [10.201.21.201] (10.75.127.46) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Fri, 22 Apr
- 2022 09:42:18 +0200
-Message-ID: <008e6a3e-0008-cba9-c218-3a719760c9be@foss.st.com>
-Date: Fri, 22 Apr 2022 09:42:18 +0200
+ 2022 09:42:33 +0200
+Message-ID: <96607d26-b6da-6662-4f98-dfc464c3a526@foss.st.com>
+Date: Fri, 22 Apr 2022 09:42:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20220328172534.1196119-1-patrick.delaunay@foss.st.com>
- <20220328192520.4.I23385079e2fd8a2cab3b25e5883b94a25898736d@changeid>
+ <20220328192520.5.I94e74b521fd55dcc68ab8d000cb93ef48fc12f14@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20220328192520.4.I23385079e2fd8a2cab3b25e5883b94a25898736d@changeid>
+In-Reply-To: <20220328192520.5.I94e74b521fd55dcc68ab8d000cb93ef48fc12f14@changeid>
 X-Originating-IP: [10.75.127.46]
 X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -61,8 +61,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Jaehoon Chung <jh80.chung@samsung.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 4/8] stm32mp: stm32prog: add support of
- STM32IMAGE version 2
+Subject: Re: [Uboot-stm32] [PATCH 5/8] stm32mp: stm32prog: add support of
+ UUID for FIP partition
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,294 +79,163 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-HI Patrick
+Hi Patrick
 
 On 3/28/22 19:25, Patrick Delaunay wrote:
-> Add support of new header for the STM32IMAGE version V2
-> in command stm32prog command for STM32MP13x family.
+> Add support of UUID for FIP parttion, required by Firmware update
+> support in TF-A:
+> - UUID TYPE for FIP partition: 19d5df83-11b0-457b-be2c-7559c13142a5
+> - "fip-a" partition UUID: 4fd84c93-54ef-463f-a7ef-ae25ff887087
+> - "fip-b" partition UUID: 09c54952-d5bf-45af-acee-335303766fb3
+> 
+> This check is done with a new partition type "FIP" associated
+> at the FIP UUID.
+> 
+> The A/B partition UUID is detected by the partition name:
+> "fip-a", "fip-b".
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  .../cmd_stm32prog/cmd_stm32prog.c             |   8 +-
->  .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 119 ++++++++++++------
->  .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |  35 ++++--
->  3 files changed, 114 insertions(+), 48 deletions(-)
+>  .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 76 ++++++++++++++-----
+>  .../mach-stm32mp/cmd_stm32prog/stm32prog.h    |  3 +-
+>  2 files changed, 59 insertions(+), 20 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> index 41452b5a29..3957e06e5d 100644
-> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> @@ -73,15 +73,15 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
->  
->  	/* check STM32IMAGE presence */
->  	if (size == 0) {
-> -		stm32prog_header_check((struct raw_header_s *)addr, &header);
-> +		stm32prog_header_check(addr, &header);
->  		if (header.type == HEADER_STM32IMAGE) {
-> -			size = header.image_length + BL_HEADER_SIZE;
-> +			size = header.image_length + header.length;
->  
->  #if defined(CONFIG_LEGACY_IMAGE_FORMAT)
->  			/* uImage detected in STM32IMAGE, execute the script */
->  			if (IMAGE_FORMAT_LEGACY ==
-> -			    genimg_get_format((void *)(addr + BL_HEADER_SIZE)))
-> -				return image_source_script(addr + BL_HEADER_SIZE, "script@1");
-> +			    genimg_get_format((void *)(addr + header.length)))
-> +				return image_source_script(addr + header.length, "script@1");
->  #endif
->  		}
->  	}
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> index 5d53e6146f..3e1fdee5b3 100644
+> index 3e1fdee5b3..d3b3e1ed72 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> @@ -205,52 +205,98 @@ static bool stm32prog_is_fip_header(struct fip_toc_header *header)
->  	return (header->name == FIP_TOC_HEADER_NAME) && header->serial_number;
->  }
+> @@ -62,6 +62,28 @@ static const efi_guid_t uuid_mmc[3] = {
+>  	ROOTFS_MMC2_UUID
+>  };
 >  
-> -void stm32prog_header_check(struct raw_header_s *raw_header,
-> -			    struct image_header_s *header)
-> +static bool stm32prog_is_stm32_header_v1(struct stm32_header_v1 *header)
->  {
->  	unsigned int i;
->  
-> -	if (!raw_header || !header) {
-> -		log_debug("%s:no header data\n", __func__);
-> -		return;
-> +	if (header->magic_number !=
-> +		(('S' << 0) | ('T' << 8) | ('M' << 16) | (0x32 << 24))) {
-> +		log_debug("%s:invalid magic number : 0x%x\n",
-> +			  __func__, header->magic_number);
-> +		return false;
-> +	}
-> +	if (header->header_version != 0x00010000) {
-> +		log_debug("%s:invalid header version : 0x%x\n",
-> +			  __func__, header->header_version);
-> +		return false;
->  	}
->  
-> -	header->type = HEADER_NONE;
-> -	header->image_checksum = 0x0;
-> -	header->image_length = 0x0;
-> -
-> -	if (stm32prog_is_fip_header((struct fip_toc_header *)raw_header)) {
-> -		header->type = HEADER_FIP;
-> -		return;
-> +	if (header->reserved1 || header->reserved2) {
-> +		log_debug("%s:invalid reserved field\n", __func__);
-> +		return false;
-> +	}
-> +	for (i = 0; i < sizeof(header->padding); i++) {
-> +		if (header->padding[i] != 0) {
-> +			log_debug("%s:invalid padding field\n", __func__);
-> +			return false;
-> +		}
->  	}
->  
-> -	if (raw_header->magic_number !=
-> +	return true;
-> +}
+> +/* FIP type partition UUID used by TF-A*/
+> +#define FIP_TYPE_UUID "19D5DF83-11B0-457B-BE2C-7559C13142A5"
 > +
-> +static bool stm32prog_is_stm32_header_v2(struct stm32_header_v2 *header)
-> +{
-> +	unsigned int i;
+> +/* unique partition guid (uuid) for FIP partitions A/B */
+> +#define FIP_A_UUID \
+> +	EFI_GUID(0x4FD84C93, 0x54EF, 0x463F, \
+> +		 0xA7, 0xEF, 0xAE, 0x25, 0xFF, 0x88, 0x70, 0x87)
 > +
-> +	if (header->magic_number !=
->  		(('S' << 0) | ('T' << 8) | ('M' << 16) | (0x32 << 24))) {
->  		log_debug("%s:invalid magic number : 0x%x\n",
-> -			  __func__, raw_header->magic_number);
-> -		return;
-> +			  __func__, header->magic_number);
-> +		return false;
->  	}
-> -	/* only header v1.0 supported */
-> -	if (raw_header->header_version != 0x00010000) {
-> +	if (header->header_version != 0x00020000) {
->  		log_debug("%s:invalid header version : 0x%x\n",
-> -			  __func__, raw_header->header_version);
-> +			  __func__, header->header_version);
-> +		return false;
-> +	}
-> +	if (header->reserved1 || header->reserved2)
-> +		return false;
+> +#define FIP_B_UUID \
+> +	EFI_GUID(0x09C54952, 0xD5BF, 0x45AF, \
+> +		 0xAC, 0xEE, 0x33, 0x53, 0x03, 0x76, 0x6F, 0xB3)
 > +
-> +	for (i = 0; i < sizeof(header->padding); i++) {
-> +		if (header->padding[i] != 0) {
-> +			log_debug("%s:invalid padding field\n", __func__);
-> +			return false;
-> +		}
-> +	}
+> +static const char * const fip_part_name[] = {
+> +	"fip-a",
+> +	"fip-b"
+> +};
 > +
-> +	return true;
-> +}
+> +static const efi_guid_t fip_part_uuid[] = {
+> +	FIP_A_UUID,
+> +	FIP_B_UUID
+> +};
 > +
-> +void stm32prog_header_check(uintptr_t raw_header, struct image_header_s *header)
-> +{
-> +	struct stm32_header_v1 *v1_header = (struct stm32_header_v1 *)raw_header;
-> +	struct stm32_header_v2 *v2_header = (struct stm32_header_v2 *)raw_header;
-> +
-> +	if (!raw_header || !header) {
-> +		log_debug("%s:no header data\n", __func__);
->  		return;
->  	}
-> -	if (raw_header->reserved1 != 0x0 || raw_header->reserved2) {
-> -		log_debug("%s:invalid reserved field\n", __func__);
-> +
-> +	if (stm32prog_is_fip_header((struct fip_toc_header *)raw_header)) {
-> +		header->type = HEADER_FIP;
-> +		header->length = 0;
->  		return;
->  	}
-> -	for (i = 0; i < (sizeof(raw_header->padding) / 4); i++) {
-> -		if (raw_header->padding[i] != 0) {
-> -			log_debug("%s:invalid padding field\n", __func__);
-> -			return;
-> -		}
-> +	if (stm32prog_is_stm32_header_v1(v1_header)) {
-> +		header->type = HEADER_STM32IMAGE;
-> +		header->image_checksum = le32_to_cpu(v1_header->image_checksum);
-> +		header->image_length = le32_to_cpu(v1_header->image_length);
-> +		header->length = sizeof(struct stm32_header_v1);
-> +		return;
-> +	}
-> +	if (stm32prog_is_stm32_header_v2(v2_header)) {
-> +		header->type = HEADER_STM32IMAGE_V2;
-> +		header->image_checksum = le32_to_cpu(v2_header->image_checksum);
-> +		header->image_length = le32_to_cpu(v2_header->image_length);
-> +		header->length = sizeof(struct stm32_header_v1) +
-> +				 v2_header->extension_headers_length;
-> +		return;
->  	}
-> -	header->type = HEADER_STM32IMAGE;
-> -	header->image_checksum = le32_to_cpu(raw_header->image_checksum);
-> -	header->image_length = le32_to_cpu(raw_header->image_length);
+>  /* order of column in flash layout file */
+>  enum stm32prog_col_t {
+>  	COL_OPTION,
+> @@ -405,6 +427,8 @@ static int parse_type(struct stm32prog_data *data,
+>  				part->bin_nb =
+>  					dectoul(&p[7], NULL);
+>  		}
+> +	} else if (!strcmp(p, "FIP")) {
+> +		part->part_type = PART_FIP;
+>  	} else if (!strcmp(p, "System")) {
+>  		part->part_type = PART_SYSTEM;
+>  	} else if (!strcmp(p, "FileSystem")) {
+> @@ -1056,9 +1080,10 @@ static int create_gpt_partitions(struct stm32prog_data *data)
+>  	char uuid[UUID_STR_LEN + 1];
+>  	unsigned char *uuid_bin;
+>  	unsigned int mmc_id;
+> -	int i;
+> +	int i, j;
+>  	bool rootfs_found;
+>  	struct stm32prog_part_t *part;
+> +	const char *type_str;
 >  
-> -	return;
-> +	header->type = HEADER_NONE;
-> +	header->image_checksum = 0x0;
-> +	header->image_length = 0x0;
->  }
+>  	buf = malloc(buflen);
+>  	if (!buf)
+> @@ -1100,33 +1125,46 @@ static int create_gpt_partitions(struct stm32prog_data *data)
+>  					   part->addr,
+>  					   part->size);
 >  
->  static u32 stm32prog_header_checksum(u32 addr, struct image_header_s *header)
-> @@ -480,11 +526,11 @@ static int parse_flash_layout(struct stm32prog_data *data,
->  	data->part_nb = 0;
+> -			if (part->part_type == PART_BINARY)
+> -				offset += snprintf(buf + offset,
+> -						   buflen - offset,
+> -						   ",type="
+> -						   LINUX_RESERVED_UUID);
+> -			else
+> -				offset += snprintf(buf + offset,
+> -						   buflen - offset,
+> -						   ",type=linux");
+> +			switch (part->part_type) {
+> +			case PART_BINARY:
+> +				type_str = LINUX_RESERVED_UUID;
+> +				break;
+> +			case PART_FIP:
+> +				type_str = FIP_TYPE_UUID;
+> +				break;
+> +			default:
+> +				type_str = "linux";
+> +				break;
+> +			}
+> +			offset += snprintf(buf + offset,
+> +					   buflen - offset,
+> +					   ",type=%s", type_str);
 >  
->  	/* check if STM32image is detected */
-> -	stm32prog_header_check((struct raw_header_s *)addr, &header);
-> +	stm32prog_header_check(addr, &header);
->  	if (header.type == HEADER_STM32IMAGE) {
->  		u32 checksum;
+>  			if (part->part_type == PART_SYSTEM)
+>  				offset += snprintf(buf + offset,
+>  						   buflen - offset,
+>  						   ",bootable");
 >  
-> -		addr = addr + BL_HEADER_SIZE;
-> +		addr = addr + header.length;
->  		size = header.image_length;
+> +			/* partition UUID */
+> +			uuid_bin = NULL;
+>  			if (!rootfs_found && !strcmp(part->name, "rootfs")) {
+>  				mmc_id = part->dev_id;
+>  				rootfs_found = true;
+> -				if (mmc_id < ARRAY_SIZE(uuid_mmc)) {
+> -					uuid_bin =
+> -					  (unsigned char *)uuid_mmc[mmc_id].b;
+> -					uuid_bin_to_str(uuid_bin, uuid,
+> -							UUID_STR_FORMAT_GUID);
+> -					offset += snprintf(buf + offset,
+> -							   buflen - offset,
+> -							   ",uuid=%s", uuid);
+> -				}
+> +				if (mmc_id < ARRAY_SIZE(uuid_mmc))
+> +					uuid_bin = (unsigned char *)uuid_mmc[mmc_id].b;
+> +			}
+> +			if (part->part_type == PART_FIP) {
+> +				for (j = 0; j < ARRAY_SIZE(fip_part_name); j++)
+> +					if (!strcmp(part->name, fip_part_name[j])) {
+> +						uuid_bin = (unsigned char *)fip_part_uuid[j].b;
+> +						break;
+> +					}
+> +			}
+> +			if (uuid_bin) {
+> +				uuid_bin_to_str(uuid_bin, uuid, UUID_STR_FORMAT_GUID);
+> +				offset += snprintf(buf + offset,
+> +						   buflen - offset,
+> +						   ",uuid=%s", uuid);
+>  			}
 >  
->  		checksum = stm32prog_header_checksum(addr, &header);
-> @@ -1560,7 +1606,7 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
->  	int ret, i;
->  	void *fsbl;
->  	struct image_header_s header;
-> -	struct raw_header_s raw_header;
-> +	struct stm32_header_v2 raw_header; /* V2 size > v1 size */
->  	struct dfu_entity *dfu;
->  	long size, offset;
->  
-> @@ -1572,17 +1618,18 @@ static int stm32prog_copy_fsbl(struct stm32prog_part_t *part)
->  
->  	/* read header */
->  	dfu_transaction_cleanup(dfu);
-> -	size = BL_HEADER_SIZE;
-> +	size = sizeof(raw_header);
->  	ret = dfu->read_medium(dfu, 0, (void *)&raw_header, &size);
->  	if (ret)
->  		return ret;
->  
-> -	stm32prog_header_check(&raw_header, &header);
-> -	if (header.type != HEADER_STM32IMAGE)
-> +	stm32prog_header_check((ulong)&raw_header, &header);
-> +	if (header.type != HEADER_STM32IMAGE &&
-> +	    header.type != HEADER_STM32IMAGE_V2)
->  		return -ENOENT;
->  
->  	/* read header + payload */
-> -	size = header.image_length + BL_HEADER_SIZE;
-> +	size = header.image_length + header.length;
->  	size = round_up(size, part->dev->mtd->erasesize);
->  	fsbl = calloc(1, size);
->  	if (!fsbl)
+>  			offset += snprintf(buf + offset, buflen - offset, ";");
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-> index 928b7b3a0e..90cdc2ba47 100644
+> index 90cdc2ba47..b3e5c74810 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-> @@ -42,6 +42,7 @@ enum stm32prog_link_t {
->  enum stm32prog_header_t {
->  	HEADER_NONE,
->  	HEADER_STM32IMAGE,
-> +	HEADER_STM32IMAGE_V2,
->  	HEADER_FIP,
->  };
->  
-> @@ -49,11 +50,12 @@ struct image_header_s {
->  	enum stm32prog_header_t type;
->  	u32	image_checksum;
->  	u32	image_length;
-> +	u32	length;
->  };
->  
-> -struct raw_header_s {
-> +struct stm32_header_v1 {
->  	u32 magic_number;
-> -	u32 image_signature[64 / 4];
-> +	u8 image_signature[64];
->  	u32 image_checksum;
->  	u32 header_version;
->  	u32 image_length;
-> @@ -64,12 +66,30 @@ struct raw_header_s {
->  	u32 version_number;
->  	u32 option_flags;
->  	u32 ecdsa_algorithm;
-> -	u32 ecdsa_public_key[64 / 4];
-> -	u32 padding[83 / 4];
-> -	u32 binary_type;
-> +	u8 ecdsa_public_key[64];
-> +	u8 padding[83];
-> +	u8 binary_type;
->  };
->  
-> -#define BL_HEADER_SIZE	sizeof(struct raw_header_s)
-> +struct stm32_header_v2 {
-> +	u32 magic_number;
-> +	u8 image_signature[64];
-> +	u32 image_checksum;
-> +	u32 header_version;
-> +	u32 image_length;
-> +	u32 image_entry_point;
-> +	u32 reserved1;
-> +	u32 load_address;
-> +	u32 reserved2;
-> +	u32 version_number;
-> +	u32 extension_flags;
-> +	u32 extension_headers_length;
-> +	u32 binary_type;
-> +	u8 padding[16];
-> +	u32 extension_header_type;
-> +	u32 extension_header_length;
-> +	u8 extension_padding[376];
-> +};
->  
+> @@ -94,9 +94,10 @@ struct stm32_header_v2 {
 >  /* partition type in flashlayout file */
 >  enum stm32prog_part_type {
-> @@ -171,8 +191,7 @@ int stm32prog_pmic_read(struct stm32prog_data *data, u32 offset,
->  int stm32prog_pmic_start(struct stm32prog_data *data);
+>  	PART_BINARY,
+> +	PART_FIP,
+>  	PART_SYSTEM,
+>  	PART_FILESYSTEM,
+> -	RAW_IMAGE
+> +	RAW_IMAGE,
+>  };
 >  
->  /* generic part*/
-> -void stm32prog_header_check(struct raw_header_s *raw_header,
-> -			    struct image_header_s *header);
-> +void stm32prog_header_check(uintptr_t raw_header, struct image_header_s *header);
->  int stm32prog_dfu_init(struct stm32prog_data *data);
->  void stm32prog_next_phase(struct stm32prog_data *data);
->  void stm32prog_do_reset(struct stm32prog_data *data);
+>  /* device information */
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Thanks
 Patrice

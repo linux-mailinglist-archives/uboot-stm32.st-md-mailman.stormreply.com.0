@@ -2,53 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 161E350FD2E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Apr 2022 14:38:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2470950FD31
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Apr 2022 14:38:03 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC25DC60466;
-	Tue, 26 Apr 2022 12:38:01 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DC795C6049D;
+	Tue, 26 Apr 2022 12:38:02 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7D7FBC5F1D6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 326D5C5F1D6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Apr 2022 12:38:00 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23QALrmB009527;
- Tue, 26 Apr 2022 14:37:57 +0200
+ Tue, 26 Apr 2022 12:38:01 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23QAWpL9025876;
+ Tue, 26 Apr 2022 14:37:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=m2PWDQSyKOIws1R7jAcw9YgR2jX2RjhZ4FE9aetZ7cU=;
- b=0uEnvnRiNgX7UhekGG0JBlYEeQQDi9SEmcqX+MVv0Sufey32nNixM6/h3K/86T0yReio
- KwZ+uDdZ0RmFQrqHhUg9Cm6XtD+4s/P0hSlkCD5dJMqRL9V6jYwhR/6HeSd3eHKuK3+p
- cP3CMkrqFIcGRTu1aLCoQdTg1UwT2CockwhwtdJZ+bPMeqgSd9SpOzGMqaFb5La6H80g
- DaQVsa3uYMoMyh601tY16voLwxhOuQjXPs3LR60YpA8p8h1pfkk+gP5NGOVm8SgKEvGp
- C4zq7u7vcbF6eq0w/zn6xxaq60XBUzLsgBMzfYxbFc+OdnhjXPLkzxvGeEuPIJqzHvjz dg== 
+ bh=XrBpn9vtJMIQb7rg/E9srNA4gJvW+rTpIQING55R4w4=;
+ b=1zDT0KfgDjwXoKNMzx0iRu1slrSx836CU0fHF8F+z07dFnFtTG3du3nW+Sx7clb1HiIu
+ 03AKMvl4DOFqVft7ZUcLypdZtFXykg8djhzUTWW6HqraZAvTg7ciacUvRzrscYVwrlna
+ s7yPUftgfVip0h4w5qIRgmhvKNSD40KMDxHeJHJWht8e3L8AwPOwXSrmnEdb67Fbr+pq
+ TUwVio0NhlUoK7C/y0JOfI5mf1QERaseDAcumgX3TRPx/BbY2Id/vwi8MZhJ9qTgBLQP
+ ovPET+pZwUXnQEmC7hK40C5iiri4IeI05aYMZuxg/i3fWPFZqM6mSGRMAH8s73c5ITku cw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fm6vkf962-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fm8t1px9p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Apr 2022 14:37:57 +0200
+ Tue, 26 Apr 2022 14:37:58 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 15B4F10002A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DBB8B10002A;
  Tue, 26 Apr 2022 14:37:57 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0EE85222CBB;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D4FAC2248B0;
  Tue, 26 Apr 2022 14:37:57 +0200 (CEST)
-Received: from localhost (10.75.127.51) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 26 Apr 2022 14:37:56
+Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 26 Apr 2022 14:37:57
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 26 Apr 2022 14:37:47 +0200
-Message-ID: <20220426143736.1.I15bd7c3c8c983d6a6cec3d2ee371d75fe72fcd41@changeid>
+Date: Tue, 26 Apr 2022 14:37:48 +0200
+Message-ID: <20220426143736.2.I0322692ca3c12c0bcacc7da24804b7dcf3402e58@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
 References: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.51]
+X-Originating-IP: [10.75.127.48]
 X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
@@ -57,8 +57,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH 1/3] phy: stm32-usbphyc: add counter of PLL
-	consumer
+Subject: [Uboot-stm32] [PATCH 2/3] phy: stm32-usbphyc: usbphyc is a clock
+	provider of ck_usbo_48m clock
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,146 +75,135 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add the counter of the PLL user n_pll_cons managed by the 2 functions
-stm32_usbphyc_pll_enable / stm32_usbphyc_pll_disable.
+ck_usbo_48m is generated by usbphyc PLL and used by OTG controller
+for Full-Speed use cases with dedicated Full-Speed transceiver.
 
-This counter allow to remove the function stm32_usbphyc_is_init
-and it is a preliminary step for ck_usbo_48m introduction.
+ck_usbo_48m is available as soon as the PLL is enabled.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- drivers/phy/phy-stm32-usbphyc.c | 76 +++++++++++++++++++++------------
- 1 file changed, 48 insertions(+), 28 deletions(-)
+ drivers/phy/phy-stm32-usbphyc.c | 79 +++++++++++++++++++++++++++++++++
+ 1 file changed, 79 insertions(+)
 
 diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-index 9c1dcfae52..16c8799eca 100644
+index 16c8799eca..e0b8fcb8f2 100644
 --- a/drivers/phy/phy-stm32-usbphyc.c
 +++ b/drivers/phy/phy-stm32-usbphyc.c
-@@ -65,6 +65,7 @@ struct stm32_usbphyc {
- 		bool init;
- 		bool powered;
- 	} phys[MAX_PHYS];
-+	int n_pll_cons;
+@@ -7,6 +7,7 @@
+ 
+ #include <common.h>
+ #include <clk.h>
++#include <clk-uclass.h>
+ #include <div64.h>
+ #include <dm.h>
+ #include <fdtdec.h>
+@@ -17,6 +18,7 @@
+ #include <usb.h>
+ #include <asm/io.h>
+ #include <dm/device_compat.h>
++#include <dm/lists.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <power/regulator.h>
+@@ -49,6 +51,9 @@
+ #define PLL_INFF_MIN_RATE	19200000 /* in Hz */
+ #define PLL_INFF_MAX_RATE	38400000 /* in Hz */
+ 
++/* USBPHYC_CLK48 */
++#define USBPHYC_CLK48_FREQ	48000000 /* in Hz */
++
+ struct pll_params {
+ 	u8 ndiv;
+ 	u16 frac;
+@@ -355,6 +360,16 @@ static const struct phy_ops stm32_usbphyc_phy_ops = {
+ 	.of_xlate = stm32_usbphyc_of_xlate,
  };
  
- static void stm32_usbphyc_get_pll_params(u32 clk_rate,
-@@ -124,18 +125,6 @@ static int stm32_usbphyc_pll_init(struct stm32_usbphyc *usbphyc)
- 	return 0;
- }
- 
--static bool stm32_usbphyc_is_init(struct stm32_usbphyc *usbphyc)
--{
--	int i;
--
--	for (i = 0; i < MAX_PHYS; i++) {
--		if (usbphyc->phys[i].init)
--			return true;
--	}
--
--	return false;
--}
--
- static bool stm32_usbphyc_is_powered(struct stm32_usbphyc *usbphyc)
- {
- 	int i;
-@@ -148,18 +137,17 @@ static bool stm32_usbphyc_is_powered(struct stm32_usbphyc *usbphyc)
- 	return false;
- }
- 
--static int stm32_usbphyc_phy_init(struct phy *phy)
-+static int stm32_usbphyc_pll_enable(struct stm32_usbphyc *usbphyc)
- {
--	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
--	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
- 	bool pllen = readl(usbphyc->base + STM32_USBPHYC_PLL) & PLLEN ?
- 		     true : false;
- 	int ret;
- 
--	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
--	/* Check if one phy port has already configured the pll */
--	if (pllen && stm32_usbphyc_is_init(usbphyc))
--		goto initialized;
-+	/* Check if one consumer has already configured the pll */
-+	if (pllen && usbphyc->n_pll_cons) {
-+		usbphyc->n_pll_cons++;
-+		return 0;
-+	}
- 
- 	if (usbphyc->vdda1v1) {
- 		ret = regulator_set_enable(usbphyc->vdda1v1, true);
-@@ -190,23 +178,19 @@ static int stm32_usbphyc_phy_init(struct phy *phy)
- 	if (!(readl(usbphyc->base + STM32_USBPHYC_PLL) & PLLEN))
- 		return -EIO;
- 
--initialized:
--	usbphyc_phy->init = true;
-+	usbphyc->n_pll_cons++;
- 
- 	return 0;
- }
- 
--static int stm32_usbphyc_phy_exit(struct phy *phy)
-+static int stm32_usbphyc_pll_disable(struct stm32_usbphyc *usbphyc)
- {
--	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
--	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
- 	int ret;
- 
--	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
--	usbphyc_phy->init = false;
-+	usbphyc->n_pll_cons--;
- 
--	/* Check if other phy port requires pllen */
--	if (stm32_usbphyc_is_init(usbphyc))
-+	/* Check if other consumer requires pllen */
-+	if (usbphyc->n_pll_cons)
- 		return 0;
- 
- 	clrbits_le32(usbphyc->base + STM32_USBPHYC_PLL, PLLEN);
-@@ -235,6 +219,42 @@ static int stm32_usbphyc_phy_exit(struct phy *phy)
- 	return 0;
- }
- 
-+static int stm32_usbphyc_phy_init(struct phy *phy)
++static int stm32_usbphyc_bind(struct udevice *dev)
 +{
-+	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
-+	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
 +	int ret;
 +
-+	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
-+	if (usbphyc_phy->init)
-+		return 0;
-+
-+	ret = stm32_usbphyc_pll_enable(usbphyc);
-+	if (ret)
-+		return log_ret(ret);
-+
-+	usbphyc_phy->init = true;
-+
-+	return 0;
-+}
-+
-+static int stm32_usbphyc_phy_exit(struct phy *phy)
-+{
-+	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
-+	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
-+	int ret;
-+
-+	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
-+	if (!usbphyc_phy->init)
-+		return 0;
-+
-+	ret = stm32_usbphyc_pll_disable(usbphyc);
-+
-+	usbphyc_phy->init = false;
++	ret = device_bind_driver_to_node(dev, "stm32-usbphyc-clk", "ck_usbo_48m",
++					 dev_ofnode(dev), NULL);
 +
 +	return log_ret(ret);
 +}
 +
- static int stm32_usbphyc_phy_power_on(struct phy *phy)
+ static int stm32_usbphyc_probe(struct udevice *dev)
  {
- 	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
+ 	struct stm32_usbphyc *usbphyc = dev_get_priv(dev);
+@@ -444,6 +459,70 @@ U_BOOT_DRIVER(stm32_usb_phyc) = {
+ 	.id = UCLASS_PHY,
+ 	.of_match = stm32_usbphyc_of_match,
+ 	.ops = &stm32_usbphyc_phy_ops,
++	.bind = stm32_usbphyc_bind,
+ 	.probe = stm32_usbphyc_probe,
+ 	.priv_auto	= sizeof(struct stm32_usbphyc),
+ };
++
++struct stm32_usbphyc_clk {
++	bool enable;
++};
++
++static ulong stm32_usbphyc_clk48_get_rate(struct clk *clk)
++{
++	return USBPHYC_CLK48_FREQ;
++}
++
++static int stm32_usbphyc_clk48_enable(struct clk *clk)
++{
++	struct stm32_usbphyc_clk *usbphyc_clk = dev_get_priv(clk->dev);
++	struct stm32_usbphyc *usbphyc;
++	int ret;
++
++	if (usbphyc_clk->enable)
++		return 0;
++
++	usbphyc = dev_get_priv(clk->dev->parent);
++
++	/* ck_usbo_48m is generated by usbphyc PLL */
++	ret = stm32_usbphyc_pll_enable(usbphyc);
++	if (ret)
++		return ret;
++
++	usbphyc_clk->enable = true;
++
++	return 0;
++}
++
++static int stm32_usbphyc_clk48_disable(struct clk *clk)
++{
++	struct stm32_usbphyc_clk *usbphyc_clk = dev_get_priv(clk->dev);
++	struct stm32_usbphyc *usbphyc;
++	int ret;
++
++	if (!usbphyc_clk->enable)
++		return 0;
++
++	usbphyc = dev_get_priv(clk->dev->parent);
++
++	ret = stm32_usbphyc_pll_disable(usbphyc);
++	if (ret)
++		return ret;
++
++	usbphyc_clk->enable = false;
++
++	return 0;
++}
++
++const struct clk_ops usbphyc_clk48_ops = {
++	.get_rate = stm32_usbphyc_clk48_get_rate,
++	.enable = stm32_usbphyc_clk48_enable,
++	.disable = stm32_usbphyc_clk48_disable,
++};
++
++U_BOOT_DRIVER(stm32_usb_phyc_clk) = {
++	.name = "stm32-usbphyc-clk",
++	.id = UCLASS_CLK,
++	.ops = &usbphyc_clk48_ops,
++	.priv_auto = sizeof(struct stm32_usbphyc_clk),
++};
 -- 
 2.25.1
 

@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2470950FD31
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Apr 2022 14:38:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2500A50FD30
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Apr 2022 14:38:02 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DC795C6049D;
-	Tue, 26 Apr 2022 12:38:02 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CEAC2C60492;
+	Tue, 26 Apr 2022 12:38:01 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 326D5C5F1D6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D16B0C5F1D6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Apr 2022 12:38:01 +0000 (UTC)
+ Tue, 26 Apr 2022 12:38:00 +0000 (UTC)
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23QAWpL9025876;
- Tue, 26 Apr 2022 14:37:58 +0200
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23QA8BGp025671;
+ Tue, 26 Apr 2022 14:37:59 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=XrBpn9vtJMIQb7rg/E9srNA4gJvW+rTpIQING55R4w4=;
- b=1zDT0KfgDjwXoKNMzx0iRu1slrSx836CU0fHF8F+z07dFnFtTG3du3nW+Sx7clb1HiIu
- 03AKMvl4DOFqVft7ZUcLypdZtFXykg8djhzUTWW6HqraZAvTg7ciacUvRzrscYVwrlna
- s7yPUftgfVip0h4w5qIRgmhvKNSD40KMDxHeJHJWht8e3L8AwPOwXSrmnEdb67Fbr+pq
- TUwVio0NhlUoK7C/y0JOfI5mf1QERaseDAcumgX3TRPx/BbY2Id/vwi8MZhJ9qTgBLQP
- ovPET+pZwUXnQEmC7hK40C5iiri4IeI05aYMZuxg/i3fWPFZqM6mSGRMAH8s73c5ITku cw== 
+ bh=bwS5uKefxutQzGmGXE0S/5pP+6VRtfGJvAVKtQGK2L4=;
+ b=ZY2AyPh7JOftXiFUiCHD1dLvRcy3j+tLc45mCBHoVXFOkXs1j9YSI6nGTvhKFFOjlaWr
+ /LqAY8wi6m2AUbKIKY7p2YbO/Q8cwy/5aBXs7sHbkhnvYu982miiDAST8BtgdDPF0avU
+ StZMkXJfgzxx+SZiCjEl8LtRmdm9HluCIbU4oRoMuB+DGPOdQzMO8xlEAvHCMM7ozIYL
+ aIPARXh1QQr1EF+Rev99y1672dUV/I2GOYtwPCD0W7tPpm8ZDun1LbERmRPKjX1mh/8e
+ hsZFXyc8pha8DWXUbrb1QiaNtVjnzj6Zr2W8WGkkl4iEo5//KpnQomI5aRjYJ3z203H7 Cg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fm8t1px9p-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fm8t1px9r-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Apr 2022 14:37:58 +0200
+ Tue, 26 Apr 2022 14:37:59 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DBB8B10002A;
- Tue, 26 Apr 2022 14:37:57 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5026100038;
+ Tue, 26 Apr 2022 14:37:58 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D4FAC2248B0;
- Tue, 26 Apr 2022 14:37:57 +0200 (CEST)
-Received: from localhost (10.75.127.48) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 26 Apr 2022 14:37:57
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9DABE2248B0;
+ Tue, 26 Apr 2022 14:37:58 +0200 (CEST)
+Received: from localhost (10.75.127.50) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 26 Apr 2022 14:37:58
  +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 26 Apr 2022 14:37:48 +0200
-Message-ID: <20220426143736.2.I0322692ca3c12c0bcacc7da24804b7dcf3402e58@changeid>
+Date: Tue, 26 Apr 2022 14:37:49 +0200
+Message-ID: <20220426143736.3.Idf10564d4e488df57f60640bbe1f8a43e200b56f@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
 References: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.48]
+X-Originating-IP: [10.75.127.50]
 X-ClientProxiedBy: SFHDAG2NODE1.st.com (10.75.127.4) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
  definitions=2022-04-26_02,2022-04-26_02,2022-02-23_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH 2/3] phy: stm32-usbphyc: usbphyc is a clock
-	provider of ck_usbo_48m clock
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
+Subject: [Uboot-stm32] [PATCH 3/3] clk: stm32mp: handle ck_usbo_48m clock
+	provided by USBPHYC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,135 +75,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-ck_usbo_48m is generated by usbphyc PLL and used by OTG controller
-for Full-Speed use cases with dedicated Full-Speed transceiver.
-
-ck_usbo_48m is available as soon as the PLL is enabled.
+Handle the input clock of RCC USB_PHY_48, provided by USBPHYC
+and named "ck_usbo_48m".
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- drivers/phy/phy-stm32-usbphyc.c | 79 +++++++++++++++++++++++++++++++++
- 1 file changed, 79 insertions(+)
+ drivers/clk/clk_stm32mp1.c | 35 ++++++++++++++++++++---------------
+ 1 file changed, 20 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
-index 16c8799eca..e0b8fcb8f2 100644
---- a/drivers/phy/phy-stm32-usbphyc.c
-+++ b/drivers/phy/phy-stm32-usbphyc.c
-@@ -7,6 +7,7 @@
+diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/clk_stm32mp1.c
+index 83ab6b728e..a02921c43a 100644
+--- a/drivers/clk/clk_stm32mp1.c
++++ b/drivers/clk/clk_stm32mp1.c
+@@ -962,6 +962,24 @@ static ulong stm32mp1_read_pll_freq(struct stm32mp1_clk_priv *priv,
+ 	return dfout;
+ }
  
- #include <common.h>
- #include <clk.h>
-+#include <clk-uclass.h>
- #include <div64.h>
- #include <dm.h>
- #include <fdtdec.h>
-@@ -17,6 +18,7 @@
- #include <usb.h>
- #include <asm/io.h>
- #include <dm/device_compat.h>
-+#include <dm/lists.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
- #include <power/regulator.h>
-@@ -49,6 +51,9 @@
- #define PLL_INFF_MIN_RATE	19200000 /* in Hz */
- #define PLL_INFF_MAX_RATE	38400000 /* in Hz */
- 
-+/* USBPHYC_CLK48 */
-+#define USBPHYC_CLK48_FREQ	48000000 /* in Hz */
-+
- struct pll_params {
- 	u8 ndiv;
- 	u16 frac;
-@@ -355,6 +360,16 @@ static const struct phy_ops stm32_usbphyc_phy_ops = {
- 	.of_xlate = stm32_usbphyc_of_xlate,
- };
- 
-+static int stm32_usbphyc_bind(struct udevice *dev)
++static ulong stm32mp1_clk_get_by_name(const char *name)
 +{
-+	int ret;
++	struct clk clk;
++	struct udevice *dev = NULL;
++	ulong clock = 0;
 +
-+	ret = device_bind_driver_to_node(dev, "stm32-usbphyc-clk", "ck_usbo_48m",
-+					 dev_ofnode(dev), NULL);
++	if (!uclass_get_device_by_name(UCLASS_CLK, name, &dev)) {
++		if (clk_request(dev, &clk)) {
++			log_err("%s request", name);
++		} else {
++			clk.id = 0;
++			clock = clk_get_rate(&clk);
++		}
++	}
 +
-+	return log_ret(ret);
++	return clock;
 +}
 +
- static int stm32_usbphyc_probe(struct udevice *dev)
+ static ulong stm32mp1_clk_get(struct stm32mp1_clk_priv *priv, int p)
  {
- 	struct stm32_usbphyc *usbphyc = dev_get_priv(dev);
-@@ -444,6 +459,70 @@ U_BOOT_DRIVER(stm32_usb_phyc) = {
- 	.id = UCLASS_PHY,
- 	.of_match = stm32_usbphyc_of_match,
- 	.ops = &stm32_usbphyc_phy_ops,
-+	.bind = stm32_usbphyc_bind,
- 	.probe = stm32_usbphyc_probe,
- 	.priv_auto	= sizeof(struct stm32_usbphyc),
- };
-+
-+struct stm32_usbphyc_clk {
-+	bool enable;
-+};
-+
-+static ulong stm32_usbphyc_clk48_get_rate(struct clk *clk)
-+{
-+	return USBPHYC_CLK48_FREQ;
-+}
-+
-+static int stm32_usbphyc_clk48_enable(struct clk *clk)
-+{
-+	struct stm32_usbphyc_clk *usbphyc_clk = dev_get_priv(clk->dev);
-+	struct stm32_usbphyc *usbphyc;
-+	int ret;
-+
-+	if (usbphyc_clk->enable)
-+		return 0;
-+
-+	usbphyc = dev_get_priv(clk->dev->parent);
-+
-+	/* ck_usbo_48m is generated by usbphyc PLL */
-+	ret = stm32_usbphyc_pll_enable(usbphyc);
-+	if (ret)
-+		return ret;
-+
-+	usbphyc_clk->enable = true;
-+
-+	return 0;
-+}
-+
-+static int stm32_usbphyc_clk48_disable(struct clk *clk)
-+{
-+	struct stm32_usbphyc_clk *usbphyc_clk = dev_get_priv(clk->dev);
-+	struct stm32_usbphyc *usbphyc;
-+	int ret;
-+
-+	if (!usbphyc_clk->enable)
-+		return 0;
-+
-+	usbphyc = dev_get_priv(clk->dev->parent);
-+
-+	ret = stm32_usbphyc_pll_disable(usbphyc);
-+	if (ret)
-+		return ret;
-+
-+	usbphyc_clk->enable = false;
-+
-+	return 0;
-+}
-+
-+const struct clk_ops usbphyc_clk48_ops = {
-+	.get_rate = stm32_usbphyc_clk48_get_rate,
-+	.enable = stm32_usbphyc_clk48_enable,
-+	.disable = stm32_usbphyc_clk48_disable,
-+};
-+
-+U_BOOT_DRIVER(stm32_usb_phyc_clk) = {
-+	.name = "stm32-usbphyc-clk",
-+	.id = UCLASS_CLK,
-+	.ops = &usbphyc_clk48_ops,
-+	.priv_auto = sizeof(struct stm32_usbphyc_clk),
-+};
+ 	u32 reg;
+@@ -1127,24 +1145,11 @@ static ulong stm32mp1_clk_get(struct stm32mp1_clk_priv *priv, int p)
+ 		break;
+ 	/* other */
+ 	case _USB_PHY_48:
+-		clock = 48000000;
++		clock = stm32mp1_clk_get_by_name("ck_usbo_48m");
+ 		break;
+ 	case _DSI_PHY:
+-	{
+-		struct clk clk;
+-		struct udevice *dev = NULL;
+-
+-		if (!uclass_get_device_by_name(UCLASS_CLK, "ck_dsi_phy",
+-					       &dev)) {
+-			if (clk_request(dev, &clk)) {
+-				log_err("ck_dsi_phy request");
+-			} else {
+-				clk.id = 0;
+-				clock = clk_get_rate(&clk);
+-			}
+-		}
++		clock = stm32mp1_clk_get_by_name("ck_dsi_phy");
+ 		break;
+-	}
+ 	default:
+ 		break;
+ 	}
 -- 
 2.25.1
 

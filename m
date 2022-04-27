@@ -2,75 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCA60511441
-	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Apr 2022 11:22:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EC0F511549
+	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Apr 2022 13:27:42 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F491C60466;
-	Wed, 27 Apr 2022 09:22:29 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3DCB3C60466;
+	Wed, 27 Apr 2022 11:27:42 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 32B7DC5A4FE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EB7FC5A4FE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 27 Apr 2022 09:22:28 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23R5Zep3000334;
- Wed, 27 Apr 2022 11:22:04 +0200
+ Wed, 27 Apr 2022 11:27:40 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 23RAIa66007325;
+ Wed, 27 Apr 2022 13:27:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=content-type :
- message-id : date : mime-version : subject : to : cc : references : from :
- in-reply-to; s=selector1; bh=0THFy0BZcjk2HX+KAyGr7YAgBpXxVbOtwbvJi1MyDyo=;
- b=HEcbBkANxtEIqo2OzUEb2m3Q/5Ih9l3428vr42xjA1L7/NSgjNGN4+NkSLolU7KsFW5A
- 60coo/tViMsBQalez64vJhDxP6+QO6xXKotDGB95yc/G0tUrY3EugVZQGkA4DgG40piu
- bR2idym1HYpy2al7oUbJVqJAZmZBcjHVukKTOcdHE3OPx2rB5FP5eegcEpPVg9KvAq0u
- QcW4lT1+UQTHCZ+FZDs8Bxc088WGS2O4Sb4gxfiyCXW5eTO92i9MdClmr/yxrDfNqiFY
- 8dVJ++fMdTXkGajWZkaCYBTASTKTaMjIw5dPMFyp6F85G8YcJgNDmtCbZTZaxvEETtxo 7Q== 
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=mT3IEcyUguVQuHpypaJTQgcVAcOGmz2tPbXTDX6JPpQ=;
+ b=l/WyA0HE9ShYiStL03KHdV7+MtzBbvfcX7pJRAmI32Inb7si5DAixAUDGbzUDWZ//W33
+ fgh2Lglx4h6mF86ebDsEIPQd6xrkYGftnLvnbrJywz70JLoxv50c/HoznKhyta/NTM3l
+ 2hHGpVFnKm+e2hbmJYnLVhK3rBRvpt3oUr1+LEccdoIkJtdxypLSIX/6jTPjftSLJaHM
+ 1l6+EDi0A96WqofZa7XnRSb998Abw/IBd2alFV5nHSoYxM2CxpLqs6vn03jndUf0XYfF
+ di10cNGyQt/Yf+eZvsuZNkHs6xbdi7qXsTVcpeD6lcCCGRsYu7l1th0v+nesKmKRGUw1 sA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fprr9at8j-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fprt4ue7g-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Apr 2022 11:22:04 +0200
+ Wed, 27 Apr 2022 13:27:37 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BD8C8100039;
- Wed, 27 Apr 2022 11:21:54 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AD3DA10002A;
+ Wed, 27 Apr 2022 13:27:35 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B00CC2171DF;
- Wed, 27 Apr 2022 11:21:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A554A21D3B1;
+ Wed, 27 Apr 2022 13:27:35 +0200 (CEST)
 Received: from [10.201.20.162] (10.75.127.49) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 27 Apr
- 2022 11:21:53 +0200
-Message-ID: <3734ffff-de4e-df39-864f-cdd7b56b396d@foss.st.com>
-Date: Wed, 27 Apr 2022 11:21:53 +0200
+ 2022 13:27:34 +0200
+Message-ID: <17420cd9-8adc-844c-19e0-a5fc119eb17c@foss.st.com>
+Date: Wed, 27 Apr 2022 13:27:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
 Content-Language: en-US
-To: <u-boot@lists.denx.de>, <jagan@amarulasolutions.com>
-References: <20220330073315.7703-1-patrice.chotard@foss.st.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220413150500.23883-1-patrice.chotard@foss.st.com>
+ <20220413150500.23883-13-patrice.chotard@foss.st.com>
+ <5eca4bdc-bf9f-5017-3020-6ef40e237524@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20220330073315.7703-1-patrice.chotard@foss.st.com>
+In-Reply-To: <5eca4bdc-bf9f-5017-3020-6ef40e237524@foss.st.com>
 X-Originating-IP: [10.75.127.49]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-04-27_03,2022-04-26_02,2022-02-23_01
-Cc: Marek Vasut <marex@denx.de>, Vignesh R <vigneshr@ti.com>,
- Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
- =?UTF-8?Q?Marek_Beh=c3=ban?= <marek.behun@nic.cz>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Pratyush Yadav <p.yadav@ti.com>, Wolfgang Denk <wd@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v4 0/3] spi: spi_flash_probe_bus_cs() rely
- on DT for spi speed and mode
+ definitions=2022-04-27_04,2022-04-27_01,2022-02-23_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Vikas Manocha <vikas.manocha@st.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v1 12/12] doc: Add documentation for STM32
+	MCUs
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,191 +75,230 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3329100549027746857=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============3329100549027746857==
-Content-Type: multipart/alternative;
-	boundary="------------ORBDxrpfJ0UM7dRDlPOu0bjr"
-Content-Language: en-US
-
---------------ORBDxrpfJ0UM7dRDlPOu0bjr
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Hi Jagan
-
-Could you have a look at this series ?
-It would be great if this series can be merged in the v2022.07
-
-Thanks
-
-Patrice
-
-
-On 3/30/22 09:33, Patrice Chotard wrote:
-> Since commit e2e95e5e2542 ("spi: Update speed/mode on change")
-> when calling "sf probe" or "env save" on SPI flash,
-> spi_set_speed_mode() is called twice.
->
-> spi_get_bus_and_cs()
->        |--> spi_claim_bus()
->        |       |--> spi_set_speed_mode(speed and mode from DT)
->        ...
->        |--> spi_set_speed_mode(default speed and mode value)
->
-> The first spi_set_speed_mode() call is done with speed and mode
-> values from DT, whereas the second call is done with speed
-> and mode set to default value (speed is set to CONFIG_SF_DEFAULT_SPEED)
->
-> This is an issue because SPI flash performance are impacted by
-> using default speed which can be lower than the one defined in DT.
->
-> One solution is to set CONFIG_SF_DEFAULT_SPEED to the speed defined
-> in DT, but we loose flexibility offered by DT.
->
-> Another issue can be encountered with 2 SPI flashes using 2 different
-> speeds. In this specific case usage of CONFIG_SF_DEFAULT_SPEED is not
-> flexible compared to get the 2 different speeds from DT.
->
->
-> Changes in v4:
->    - Split previous series in 3 patches
->    - Update commit message with additionnal information
->
-> Changes in v3:
->    - Update commit header to reflect what the patch really do.
->    - Rename legacy spi_get_bus_and_cs() to _spi_get_bus_and_cs().
->    - New spi_get_bus_and_cs() rely on DT for spi speed and mode values.
->    - spi_flash_probe_bus_cs() rely also on DT for spi and mode values.
->
-> Changes in v2:
->    - add spi_flash_probe_bus_cs_default() which calls spi_get_bus_and_cs()
->      with "use_dt" param set to true, whereas spi_flash_probe_bus_cs() calls
->      spi_get_bus_and_cs() with "use_dt" param set to true.
->
-> Patrice Chotard (3):
->    spi: spi-uclass: Add new spi_get_bus_and_cs() implementation
->    spi: spi_flash_probe_bus_cs() rely on DT for spi speed and mode
->    test: dm: spi: Replace _spi_get_bus_and_cs() by spi_get_bus_and_cs()
->      in some case
->
->   board/CZ.NIC/turris_mox/turris_mox.c |  6 +--
->   cmd/sf.c                             | 15 +++++--
->   cmd/spi.c                            |  4 +-
->   drivers/mtd/spi/sf-uclass.c          | 33 +++++++-------
->   drivers/net/fm/fm.c                  |  4 +-
->   drivers/net/pfe_eth/pfe_firmware.c   | 19 ++------
->   drivers/net/sni_netsec.c             |  6 +--
->   drivers/spi/spi-uclass.c             | 66 +++++++++++++++++++++++++---
->   drivers/usb/gadget/max3420_udc.c     |  4 +-
->   env/sf.c                             |  1 -
->   include/spi.h                        | 19 +++++++-
->   include/spi_flash.h                  |  1 -
->   test/dm/spi.c                        | 33 +++++++-------
->   13 files changed, 137 insertions(+), 74 deletions(-)
->
---------------ORBDxrpfJ0UM7dRDlPOu0bjr
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><font size="2">Hi Jagan</font></p>
-    <font size="2">Could you have a look at this series ?<br>
-      It would be great if this series can be merged in the v2022.07</font>
-    <p><font size="2">Thanks</font></p>
-    <p><font size="2">Patrice</font><br>
-    </p>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 3/30/22 09:33, Patrice Chotard
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:20220330073315.7703-1-patrice.chotard@foss.st.com">
-      <pre class="moz-quote-pre" wrap="">
-Since commit e2e95e5e2542 ("spi: Update speed/mode on change")
-when calling "sf probe" or "env save" on SPI flash,
-spi_set_speed_mode() is called twice.
-
-spi_get_bus_and_cs()
-      |--&gt; spi_claim_bus()
-      |       |--&gt; spi_set_speed_mode(speed and mode from DT)
-      ...
-      |--&gt; spi_set_speed_mode(default speed and mode value)
-
-The first spi_set_speed_mode() call is done with speed and mode
-values from DT, whereas the second call is done with speed
-and mode set to default value (speed is set to CONFIG_SF_DEFAULT_SPEED)
-
-This is an issue because SPI flash performance are impacted by
-using default speed which can be lower than the one defined in DT.
-
-One solution is to set CONFIG_SF_DEFAULT_SPEED to the speed defined
-in DT, but we loose flexibility offered by DT.
-
-Another issue can be encountered with 2 SPI flashes using 2 different
-speeds. In this specific case usage of CONFIG_SF_DEFAULT_SPEED is not
-flexible compared to get the 2 different speeds from DT.
-
-
-Changes in v4:
-  - Split previous series in 3 patches
-  - Update commit message with additionnal information
-
-Changes in v3:
-  - Update commit header to reflect what the patch really do.
-  - Rename legacy spi_get_bus_and_cs() to _spi_get_bus_and_cs().
-  - New spi_get_bus_and_cs() rely on DT for spi speed and mode values.
-  - spi_flash_probe_bus_cs() rely also on DT for spi and mode values.
-
-Changes in v2:
-  - add spi_flash_probe_bus_cs_default() which calls spi_get_bus_and_cs()
-    with "use_dt" param set to true, whereas spi_flash_probe_bus_cs() calls
-    spi_get_bus_and_cs() with "use_dt" param set to true.
-
-Patrice Chotard (3):
-  spi: spi-uclass: Add new spi_get_bus_and_cs() implementation
-  spi: spi_flash_probe_bus_cs() rely on DT for spi speed and mode
-  test: dm: spi: Replace _spi_get_bus_and_cs() by spi_get_bus_and_cs()
-    in some case
-
- board/CZ.NIC/turris_mox/turris_mox.c |  6 +--
- cmd/sf.c                             | 15 +++++--
- cmd/spi.c                            |  4 +-
- drivers/mtd/spi/sf-uclass.c          | 33 +++++++-------
- drivers/net/fm/fm.c                  |  4 +-
- drivers/net/pfe_eth/pfe_firmware.c   | 19 ++------
- drivers/net/sni_netsec.c             |  6 +--
- drivers/spi/spi-uclass.c             | 66 +++++++++++++++++++++++++---
- drivers/usb/gadget/max3420_udc.c     |  4 +-
- env/sf.c                             |  1 -
- include/spi.h                        | 19 +++++++-
- include/spi_flash.h                  |  1 -
- test/dm/spi.c                        | 33 +++++++-------
- 13 files changed, 137 insertions(+), 74 deletions(-)
-
-</pre>
-    </blockquote>
-  </body>
-</html>
-
---------------ORBDxrpfJ0UM7dRDlPOu0bjr--
-
---===============3329100549027746857==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============3329100549027746857==--
+SGkgUGF0cmljawoKb2sgdjIgd2lsbCBiZSBzZW50IHdpdGggeW91ciByZW1hcmtzCgpUaGFua3MK
+ClBhdHJpY2UKCk9uIDQvMjYvMjIgMTM6NTksIFBhdHJpY2sgREVMQVVOQVkgd3JvdGU6Cj4gSGkg
+UGF0cmljZQo+Cj4gRmV3IG1pbm9yIHJlbWFya3MsCj4KPiBPbiA0LzEzLzIyIDE3OjA1LCBQYXRy
+aWNlIENob3RhcmQgd3JvdGU6Cj4+IEFkZCBkb2N1bWVudGF0aW9uIGZvciBTVE0zMiBNQ1VzIChG
+NCwgRjcgYW5kIEg3IHNlcmllcykuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFy
+ZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+Pgo+PiAtLS0KPj4KPj4gwqAgYm9hcmQv
+c3Qvc3RtMzJmNDI5LWRpc2NvdmVyeS9NQUlOVEFJTkVSU8KgIHzCoMKgIDEgKwo+PiDCoCBib2Fy
+ZC9zdC9zdG0zMmY0MjktZXZhbHVhdGlvbi9NQUlOVEFJTkVSUyB8wqDCoCAxICsKPj4gwqAgYm9h
+cmQvc3Qvc3RtMzJmNDY5LWRpc2NvdmVyeS9NQUlOVEFJTkVSU8KgIHzCoMKgIDEgKwo+PiDCoCBi
+b2FyZC9zdC9zdG0zMmY3NDYtZGlzY28vTUFJTlRBSU5FUlPCoMKgwqDCoMKgIHzCoMKgIDEgKwo+
+PiDCoCBib2FyZC9zdC9zdG0zMmg3NDMtZGlzY28vTUFJTlRBSU5FUlPCoMKgwqDCoMKgIHzCoMKg
+IDEgKwo+PiDCoCBib2FyZC9zdC9zdG0zMmg3NDMtZXZhbC9NQUlOVEFJTkVSU8KgwqDCoMKgwqDC
+oCB8wqDCoCAxICsKPj4gwqAgYm9hcmQvc3Qvc3RtMzJoNzUwLWFydC1waS9NQUlOVEFJTkVSU8Kg
+wqDCoMKgIHzCoMKgIDEgKwo+PiDCoCBkb2MvYm9hcmQvc3QvaW5kZXgucnN0wqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMSArCj4+IMKgIGRvYy9ib2FyZC9zdC9z
+dG0zMl9NQ1UucnN0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTg2ICsrKysrKysr
+KysrKysrKysrKysrKysKPj4gwqAgOSBmaWxlcyBjaGFuZ2VkLCAxOTQgaW5zZXJ0aW9ucygrKQo+
+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZG9jL2JvYXJkL3N0L3N0bTMyX01DVS5yc3QKPj4KPj4g
+ZGlmZiAtLWdpdCBhL2JvYXJkL3N0L3N0bTMyZjQyOS1kaXNjb3ZlcnkvTUFJTlRBSU5FUlMgCj4+
+IGIvYm9hcmQvc3Qvc3RtMzJmNDI5LWRpc2NvdmVyeS9NQUlOVEFJTkVSUwo+PiBpbmRleCBmZGI2
+MmU5OGU4Li43NjYxYTE1ZmRkIDEwMDY0NAo+PiAtLS0gYS9ib2FyZC9zdC9zdG0zMmY0MjktZGlz
+Y292ZXJ5L01BSU5UQUlORVJTCj4+ICsrKyBiL2JvYXJkL3N0L3N0bTMyZjQyOS1kaXNjb3Zlcnkv
+TUFJTlRBSU5FUlMKPj4gQEAgLTEsNiArMSw3IEBACj4+IMKgIFNUTTMyRjQyOS1ESVNDT1ZFUlkg
+Qk9BUkQKPj4gwqAgTTrCoMKgwqAgS2FtaWwgTHVsa28gPGthbWlsLmx1bGtvQGdtYWlsLmNvbT4K
+Pj4gwqAgUzrCoMKgwqAgTWFpbnRhaW5lZAo+PiArRjrCoMKgwqAgZG9jL2JvYXJkL3N0Lwo+PiDC
+oCBGOsKgwqDCoCBib2FyZC9zdC9zdG0zMmY0MjktZGlzY292ZXJ5Lwo+PiDCoCBGOsKgwqDCoCBp
+bmNsdWRlL2NvbmZpZ3Mvc3RtMzJmNDI5LWRpc2NvdmVyeS5oCj4+IMKgIEY6wqDCoMKgIGNvbmZp
+Z3Mvc3RtMzJmNDI5LWRpc2NvdmVyeV9kZWZjb25maWcKPj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0
+L3N0bTMyZjQyOS1ldmFsdWF0aW9uL01BSU5UQUlORVJTIAo+PiBiL2JvYXJkL3N0L3N0bTMyZjQy
+OS1ldmFsdWF0aW9uL01BSU5UQUlORVJTCj4+IGluZGV4IDI5ZDAwZWYyN2UuLmIyNzI4OTNlZjcg
+MTAwNjQ0Cj4+IC0tLSBhL2JvYXJkL3N0L3N0bTMyZjQyOS1ldmFsdWF0aW9uL01BSU5UQUlORVJT
+Cj4+ICsrKyBiL2JvYXJkL3N0L3N0bTMyZjQyOS1ldmFsdWF0aW9uL01BSU5UQUlORVJTCj4+IEBA
+IC0xLDYgKzEsNyBAQAo+PiDCoCBTVE0zMkY0MjktRVZBTFVBVElPTiBCT0FSRAo+PiDCoCBNOsKg
+wqDCoCBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4gwqAg
+UzrCoMKgwqAgTWFpbnRhaW5lZAo+PiArRjrCoMKgwqAgZG9jL2JvYXJkL3N0Lwo+PiDCoCBGOsKg
+wqDCoCBib2FyZC9zdC9zdG0zMmY0MjktZXZhbHVhdGlvbi8KPj4gwqAgRjrCoMKgwqAgaW5jbHVk
+ZS9jb25maWdzL3N0bTMyZjQyOS1ldmFsdWF0aW9uLmgKPj4gwqAgRjrCoMKgwqAgY29uZmlncy9z
+dG0zMmY0MjktZXZhbHVhdGlvbl9kZWZjb25maWcKPj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0L3N0
+bTMyZjQ2OS1kaXNjb3ZlcnkvTUFJTlRBSU5FUlMgCj4+IGIvYm9hcmQvc3Qvc3RtMzJmNDY5LWRp
+c2NvdmVyeS9NQUlOVEFJTkVSUwo+PiBpbmRleCA1YTZhNzhiMzllLi5hOTVmOTNmNmY2IDEwMDY0
+NAo+PiAtLS0gYS9ib2FyZC9zdC9zdG0zMmY0NjktZGlzY292ZXJ5L01BSU5UQUlORVJTCj4+ICsr
+KyBiL2JvYXJkL3N0L3N0bTMyZjQ2OS1kaXNjb3ZlcnkvTUFJTlRBSU5FUlMKPj4gQEAgLTEsNiAr
+MSw3IEBACj4+IMKgIFNUTTMyRjQ2OS1ESVNDT1ZFUlkgQk9BUkQKPj4gwqAgTTrCoMKgwqAgUGF0
+cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4+IMKgIFM6wqDCoMKg
+IE1haW50YWluZWQKPj4gK0Y6wqDCoMKgIGRvYy9ib2FyZC9zdC8KPj4gwqAgRjrCoMKgwqAgYm9h
+cmQvc3Qvc3RtMzJmNDY5LWRpc2NvdmVyeS8KPj4gwqAgRjrCoMKgwqAgaW5jbHVkZS9jb25maWdz
+L3N0bTMyZjQ2OS1kaXNjb3ZlcnkuaAo+PiDCoCBGOsKgwqDCoCBjb25maWdzL3N0bTMyZjQ2OS1k
+aXNjb3ZlcnlfZGVmY29uZmlnCj4+IGRpZmYgLS1naXQgYS9ib2FyZC9zdC9zdG0zMmY3NDYtZGlz
+Y28vTUFJTlRBSU5FUlMgCj4+IGIvYm9hcmQvc3Qvc3RtMzJmNzQ2LWRpc2NvL01BSU5UQUlORVJT
+Cj4+IGluZGV4IGJjMDk1MmM1NjMuLjE4ZTRjOTljNGYgMTAwNjQ0Cj4+IC0tLSBhL2JvYXJkL3N0
+L3N0bTMyZjc0Ni1kaXNjby9NQUlOVEFJTkVSUwo+PiArKysgYi9ib2FyZC9zdC9zdG0zMmY3NDYt
+ZGlzY28vTUFJTlRBSU5FUlMKPj4gQEAgLTEsNiArMSw3IEBACj4+IMKgIFNUTTMyRjc0NiBESVND
+T1ZFUlkgQk9BUkQKPj4gwqAgTTrCoMKgwqAgVmlrYXMgTWFub2NoYSA8dmlrYXMubWFub2NoYUBz
+dC5jb20+Cj4+IMKgIFM6wqDCoMKgIE1haW50YWluZWQKPj4gK0Y6wqDCoMKgIGRvYy9ib2FyZC9z
+dC8KPj4gwqAgRjrCoMKgwqAgYm9hcmQvc3Qvc3RtMzJmNzQ2LWRpc2NvCj4+IMKgIEY6wqDCoMKg
+IGluY2x1ZGUvY29uZmlncy9zdG0zMmY3NDYtZGlzY28uaAo+PiDCoCBGOsKgwqDCoCBjb25maWdz
+L3N0bTMyZjc0Ni1kaXNjb19kZWZjb25maWcKPj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0L3N0bTMy
+aDc0My1kaXNjby9NQUlOVEFJTkVSUyAKPj4gYi9ib2FyZC9zdC9zdG0zMmg3NDMtZGlzY28vTUFJ
+TlRBSU5FUlMKPj4gaW5kZXggNjBmYmUzNDRmOC4uZjRlY2VmM2FhNSAxMDA2NDQKPj4gLS0tIGEv
+Ym9hcmQvc3Qvc3RtMzJoNzQzLWRpc2NvL01BSU5UQUlORVJTCj4+ICsrKyBiL2JvYXJkL3N0L3N0
+bTMyaDc0My1kaXNjby9NQUlOVEFJTkVSUwo+PiBAQCAtMSw2ICsxLDcgQEAKPj4gwqAgU1RNMzJI
+NzQzIERJU0NPVkVSWSBCT0FSRAo+PiDCoCBNOsKgwqDCoCBQYXRyaWNlIENob3RhcmQgPHBhdHJp
+Y2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4gwqAgUzrCoMKgwqAgTWFpbnRhaW5lZAo+PiArRjrC
+oMKgwqAgZG9jL2JvYXJkL3N0Lwo+PiDCoCBGOsKgwqDCoCBib2FyZC9zdC9zdG0zMmg3NDMtZGlz
+Y28KPj4gwqAgRjrCoMKgwqAgaW5jbHVkZS9jb25maWdzL3N0bTMyaDc0My1kaXNjby5oCj4+IMKg
+IEY6wqDCoMKgIGNvbmZpZ3Mvc3RtMzJoNzQzLWRpc2NvX2RlZmNvbmZpZwo+PiBkaWZmIC0tZ2l0
+IGEvYm9hcmQvc3Qvc3RtMzJoNzQzLWV2YWwvTUFJTlRBSU5FUlMgCj4+IGIvYm9hcmQvc3Qvc3Rt
+MzJoNzQzLWV2YWwvTUFJTlRBSU5FUlMKPj4gaW5kZXggZmRhOTNkYjc3Ny4uYjY5ZTBkNGFiYiAx
+MDA2NDQKPj4gLS0tIGEvYm9hcmQvc3Qvc3RtMzJoNzQzLWV2YWwvTUFJTlRBSU5FUlMKPj4gKysr
+IGIvYm9hcmQvc3Qvc3RtMzJoNzQzLWV2YWwvTUFJTlRBSU5FUlMKPj4gQEAgLTEsNiArMSw3IEBA
+Cj4+IMKgIFNUTTMySDc0MyBFVkFMVUFUSU9OIEJPQVJECj4+IMKgIE06wqDCoMKgIFBhdHJpY2Ug
+Q2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+PiDCoCBTOsKgwqDCoCBNYWlu
+dGFpbmVkCj4+ICtGOsKgwqDCoCBkb2MvYm9hcmQvc3QvCj4+IMKgIEY6wqDCoMKgIGJvYXJkL3N0
+L3N0bTMyaDc0My1ldmFsCj4+IMKgIEY6wqDCoMKgIGluY2x1ZGUvY29uZmlncy9zdG0zMmg3NDMt
+ZXZhbC5oCj4+IMKgIEY6wqDCoMKgIGNvbmZpZ3Mvc3RtMzJoNzQzLWV2YWxfZGVmY29uZmlnCj4+
+IGRpZmYgLS1naXQgYS9ib2FyZC9zdC9zdG0zMmg3NTAtYXJ0LXBpL01BSU5UQUlORVJTIAo+PiBi
+L2JvYXJkL3N0L3N0bTMyaDc1MC1hcnQtcGkvTUFJTlRBSU5FUlMKPj4gaW5kZXggOTU3ODgzMzA2
+OC4uMmZkNjllNmQxYyAxMDA2NDQKPj4gLS0tIGEvYm9hcmQvc3Qvc3RtMzJoNzUwLWFydC1waS9N
+QUlOVEFJTkVSUwo+PiArKysgYi9ib2FyZC9zdC9zdG0zMmg3NTAtYXJ0LXBpL01BSU5UQUlORVJT
+Cj4+IEBAIC0xLDYgKzEsNyBAQAo+PiDCoCBTVE0zMkg3NTAgQVJUIFBJIEJPQVJECj4+IMKgIE06
+wqDCoMKgIERpbGxvbiBNaW4gPGRpbGxvbi5taW5mZWlAZ21haWwuY29tPgo+PiDCoCBTOsKgwqDC
+oCBNYWludGFpbmVkCj4+ICtGOsKgwqDCoCBkb2MvYm9hcmQvc3QvCj4+IMKgIEY6wqDCoMKgIGJv
+YXJkL3N0L3N0bTMyaDc1MC1hcnQtcGkKPj4gwqAgRjrCoMKgwqAgaW5jbHVkZS9jb25maWdzL3N0
+bTMyaDc1MC1hcnQtcGkuaAo+PiDCoCBGOsKgwqDCoCBjb25maWdzL3N0bTMyaDc1MC1hcnQtcGlf
+ZGVmY29uZmlnCj4+IGRpZmYgLS1naXQgYS9kb2MvYm9hcmQvc3QvaW5kZXgucnN0IGIvZG9jL2Jv
+YXJkL3N0L2luZGV4LnJzdAo+PiBpbmRleCA5YmJhNDJmMWRhLi4yYThhNGVmM2I4IDEwMDY0NAo+
+PiAtLS0gYS9kb2MvYm9hcmQvc3QvaW5kZXgucnN0Cj4+ICsrKyBiL2RvYy9ib2FyZC9zdC9pbmRl
+eC5yc3QKPj4gQEAgLTgsMyArOCw0IEBAIFNUTWljcm9lbGVjdHJvbmljcwo+PiDCoCDCoMKgwqDC
+oCBzdC1kdAo+PiDCoMKgwqDCoCBzdG0zMm1wMQo+PiArwqDCoCBzdG0zMl9NQ1UKPj4gZGlmZiAt
+LWdpdCBhL2RvYy9ib2FyZC9zdC9zdG0zMl9NQ1UucnN0IGIvZG9jL2JvYXJkL3N0L3N0bTMyX01D
+VS5yc3QKPj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPj4gaW5kZXggMDAwMDAwMDAwMC4uODRmN2Mw
+MDE2ZQo+PiAtLS0gL2Rldi9udWxsCj4+ICsrKyBiL2RvYy9ib2FyZC9zdC9zdG0zMl9NQ1UucnN0
+Cj4+IEBAIC0wLDAgKzEsMTg2IEBACj4+ICsuLiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BM
+LTIuMCsgT1IgQlNELTMtQ2xhdXNlCj4+ICsuLiBzZWN0aW9uYXV0aG9yOjogUGF0cmljZSBDaG90
+YXJkIDxwYXRyaWNlLmNob3RhcmR5QGZvc3Muc3QuY29tPgo+PiArCj4+ICtTVE0zMiBNQ1UgYm9h
+cmRzCj4+ICs9PT09PT09PT09PT09PT09PQo+PiArCj4+ICtUaGlzIGlzIGEgcXVpY2sgaW5zdHJ1
+Y3Rpb24gZm9yIHNldHVwIFNUTTMyIE1DVSBib2FyZHMuCj4+ICsKPj4gK1N1cHBvcnRlZCBkZXZp
+Y2VzCj4+ICstLS0tLS0tLS0tLS0tLS0tLQo+PiArCj4+ICtVLUJvb3Qgc3VwcG9ydHMgdGhlIGZv
+bGxvd2luZyBTVE1QMzIgTUNVIFNvQ3M6Cj4+ICsKPj4gKyAtIFNUTTMyRjQyOQo+PiArIC0gU1RN
+MzJGNDY5Cj4+ICsgLSBTVE0zMkY3NDYKPj4gKyAtIFNUTTMyRjc2OQo+PiArIC0gU1RNMzJINzQz
+Cj4+ICsgLSBTVE0zMkg3NTAKPj4gKwo+PiArU29DcyBpbmZvcm1hdGlvbjoKPj4gKy0tLS0tLS0t
+LS0tLS0tLS0tCj4+ICtTVE0zMkY0IHNlcmllcyBhcmUgQ29ydGV4LU00IE1DVS4KPj4gK1NUTTMy
+RjcgYW5kIFNUTTMySDcgc2VyaWVzIGFyZSBDb3J0ZXgtTTcgTUNVLgo+PiArCj4+ICsgKyBTVE0z
+MkY0IHNlcmllczogCj4+IGh0dHBzOi8vd3d3LnN0LmNvbS9lbi9taWNyb2NvbnRyb2xsZXJzLW1p
+Y3JvcHJvY2Vzc29ycy9zdG0zMmY0LXNlcmllcy5odG1sCj4+ICsgKyBTVE0zMkY3IHNlcmllczog
+Cj4+IGh0dHBzOi8vd3d3LnN0LmNvbS9lbi9taWNyb2NvbnRyb2xsZXJzLW1pY3JvcHJvY2Vzc29y
+cy9zdG0zMmY3LXNlcmllcy5odG1sCj4+ICsgKyBTVE0zMkg3IHNlcmllczogCj4+IGh0dHBzOi8v
+d3d3LnN0LmNvbS9lbi9taWNyb2NvbnRyb2xsZXJzLW1pY3JvcHJvY2Vzc29ycy9zdG0zMmg3LXNl
+cmllcy5odG1sCj4+ICsKPj4gK0N1cnJlbnRseSB0aGUgZm9sbG93aW5nIGJvYXJkcyBhcmUgc3Vw
+cG9ydGVkOgo+PiArCj4+ICsgKyBzdG0zMmY0MjktZGlzY28uZHRzCj4+ICsgKyBzdG0zMmY0Njkt
+ZGlzY28uZHRzCj4+ICsgKyBzdG0zMjc0NmctZXZhbC5kdHMKPj4gKyArIHN0bTMyZjc0Ni1kaXNj
+by5kdHMKPj4gKyArIHN0bTMyZjc2OS1kaXNjby5kdHMKPj4gKyArIHN0bTMyaDc0M2ktZGlzY28u
+ZHRzCj4+ICsgKyBzdG0zMmg3NDNpLWV2YWwuZHRzCj4+ICsgKyBzdG0zMmg3NTBpLWFydC1waS5k
+dHMKPj4gKwo+PiArQm9vdCBTZXF1ZW5jZXMKPj4gKy0tLS0tLS0tLS0tLS0tCj4+ICsKPj4gK0Zv
+ciBTVE0zMkY3IHNlcmllcywgMiBib290IGNvbmZpZ3VyYXRpb25zIGFyZSBzdXBwb3J0ZWQgd2l0
+aCBhbmQgCj4+IHdpdGhvdXQgU1BMCj4+ICsKPj4gKystLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tKyAKPj4K
+Pj4gK3wgKipST00qKsKgIHwgKipGU0JMKirCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwg
+KipTU0JMKirCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAKPj4gKipPUyoqwqDCoMKg
+wqDCoMKgIHwKPj4gKysgKipjb2RlKiogCj4+ICstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLSsKPj4gK3zCoMKgwqDCoMKgwqDC
+oMKgwqAgfCBGaXJzdCBTdGFnZSBCb290bG9hZGVyIHwgU2Vjb25kIFN0YWdlIEJvb3Rsb2FkZXIg
+fCAKPj4gTGludXggS2VybmVsIHwKPj4gKysgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tKwo+PiArfMKgwqDCoMKgwqDCoMKg
+wqDCoCB8IGVtYmVkZGVkIEZsYXNowqDCoMKgwqDCoMKgwqDCoCB8IAo+PiBERFLCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHwKPj4gKystLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tKyAKPj4KPgo+Cj4gbm8gIlJPTSBjb2RlIiBp
+biBTVE0zMiBNQ1UKPgo+Cj4+ICsKPj4gK1RoZSBib290IGNoYWluIHdpdGggU1BMCj4+ICtgYGBg
+YGBgYGBgYGBgYGBgYGBgYGBgYAo+PiArCj4+ICtkZWZjb25maWdfZmlsZSA6Cj4+ICvCoMKgICsg
+KipzdG0zMjc0NmctZXZhbF9zcGxfZGVmY29uZmlnKioKPj4gK8KgwqAgKyAqKnN0bTMyZjc0Ni1k
+aXNjb19zcGxfZGVmY29uZmlnKioKPj4gK8KgwqAgKyAqKnN0bTMyZjc2OS1kaXNjb19zcGxfZGVm
+Y29uZmlnKioKPj4gKwo+PiArKy0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0t
+LSstLS0tLS0tKwo+PiArfMKgIFJPTSBjb2RlwqDCoCB8IEZTQkzCoMKgwqDCoMKgwqAgfCBTU0JM
+wqDCoMKgwqDCoMKgIHwgT1PCoMKgwqAgfAo+PiArK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAr
+LS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLSstLS0tLS0tKwo+PiArfMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCB8VS1Cb290IFNQTMKgIHwgVS1Cb290wqDCoMKgwqAgfCBMaW51eCB8Cj4+ICsrLS0t
+LS0tLS0tLS0tLSstLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tKy0tLS0tLS0rCj4KPgo+IG5vICJS
+T00gY29kZSIgaW4gU1RNMzIgTUNVCj4KPj4gKwo+PiArVGhlIGJvb3QgY2hhaW4gd2l0aG91dCBT
+UEwKPj4gK2BgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgCj4+ICsKPj4gK2RlZmNvbmZpZ19maWxl
+IDoKPj4gK8KgwqAgKyAqKnN0bTMyZjQyOS1kaXNjb3ZlcnlfZGVmY29uZmlnKioKPj4gK8KgwqAg
+KyAqKnN0bTMyZjQyOS1ldmFsdWF0aW9uX2RlZmNvbmZpZyoqCj4+ICvCoMKgICsgKipzdG0zMmY0
+NjktZGlzY292ZXJ5X2RlZmNvbmZpZyoqCj4+ICvCoMKgICsgKipzdG0zMjc0NmctZXZhbF9kZWZj
+b25maWcqKgo+PiArwqDCoCArICoqc3RtMzJmNzQ2LWRpc2NvX2RlZmNvbmZpZyoqCj4+ICvCoMKg
+ICsgKipzdG0zMmY3NjktZGlzY29fZGVmY29uZmlnKioKPj4gK8KgwqAgKyAqKnN0bTMyaDc0My1k
+aXNjb19kZWZjb25maWcqKgo+PiArwqDCoCArICoqc3RtMzJoNzQzLWV2YWxfZGVmY29uZmlnKioK
+Pj4gK8KgwqAgKyAqKnN0bTMyaDc1MC1hcnQtcGlfZGVmY29uZmlnKioKPj4gKwo+PiArKy0tLS0t
+LS0tLS0tLS0rLS0tLS0tLS0tLS0rLS0tLS0tLSsKPj4gK3zCoCBST00gY29kZcKgwqAgfCBGU0JM
+wqDCoMKgwqDCoCB8IE9TwqDCoMKgIHwKPj4gKyvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgKy0t
+LS0tLS0tLS0tKy0tLS0tLS0rCj4+ICt8wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHxVLUJvb3TC
+oMKgwqDCoCB8IExpbnV4IHwKPj4gKystLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tKy0tLS0tLS0r
+Cj4KPiBubyAiUk9NIGNvZGUiIGluIFNUTTMyIE1DVQo+Cj4+ICsKPj4gK0J1aWxkIFByb2NlZHVy
+ZQo+PiArLS0tLS0tLS0tLS0tLS0tCj4+ICsKPj4gKzEuIEluc3RhbGwgdGhlIHJlcXVpcmVkIHRv
+b2xzIGZvciBVLUJvb3QKPj4gKwo+PiArwqDCoCAqIGluc3RhbGwgcGFja2FnZSBuZWVkZWQgaW4g
+VS1Cb290IG1ha2VmaWxlCj4+ICvCoMKgwqDCoCAobGlic3NsLWRldiwgc3dpZywgbGlicHl0aG9u
+LWRldi4uLikKPj4gKwo+PiArwqAgKiBpbnN0YWxsIEFSTXY3IHRvb2xjaGFpbiBmb3IgMzJiaXQg
+Q29ydGV4LUEgKGZyb20gTGluYXJvLAo+PiArwqDCoMKgwqAgZnJvbSBTREsgZm9yIFNUTTMyTVAx
+NXgsIG9yIGFueSBjcm9zc3Rvb2xjaGFpbnMgZnJvbSB5b3VyIAo+PiBkaXN0cmlidXRpb24pCj4+
+ICvCoMKgwqDCoCAoeW91IGNhbiB1c2UgYW55IGdjYyBjcm9zcyBjb21waWxlciBjb21wYXRpYmxl
+IHdpdGggVS1Cb290KQo+PiArCj4+ICsyLiBTZXQgdGhlIGNyb3NzIGNvbXBpbGVyOjoKPj4gKwo+
+PiArwqDCoMKgICMgZXhwb3J0IENST1NTX0NPTVBJTEU9L3BhdGgvdG8vdG9vbGNoYWluL2FybS1s
+aW51eC1nbnVlYWJpLQo+PiArCj4+ICszLiBTZWxlY3QgdGhlIG91dHB1dCBkaXJlY3RvcnkgKG9w
+dGlvbmFsKTo6Cj4+ICsKPj4gK8KgwqAgIyBleHBvcnQgS0JVSUxEX09VVFBVVD0vcGF0aC90by9v
+dXRwdXQKPj4gKwo+PiArwqDCoCBmb3IgZXhhbXBsZTogdXNlIG9uZSBvdXRwdXQgZGlyZWN0b3J5
+IGZvciBlYWNoIGNvbmZpZ3VyYXRpb246Ogo+PiArCj4+ICvCoMKgICMgZXhwb3J0IEtCVUlMRF9P
+VVRQVVQ9c3RtMzJmNAo+PiArwqDCoCAjIGV4cG9ydCBLQlVJTERfT1VUUFVUPXN0bTMyZjcKPj4g
+K8KgwqAgIyBleHBvcnQgS0JVSUxEX09VVFBVVD1zdG0zMmg3Cj4+ICsKPj4gK8KgwqAgeW91IGNh
+biBidWlsZCBvdXRzaWRlIG9mIGNvZGUgZGlyZWN0b3J5OjoKPj4gKwo+PiArwqDCoCAjIGV4cG9y
+dCBLQlVJTERfT1VUUFVUPS4uL2J1aWxkL3N0bTMyZjQKPj4gKwo+PiArNC4gQ29uZmlndXJlIFUt
+Qm9vdDo6Cj4+ICsKPj4gK8KgwqAgIyBtYWtlIDxkZWZjb25maWdfZmlsZT4KPj4gKwo+PiArwqDC
+oCBGb3IgZXhhbXBsZSB3aXRoIDxkZWZjb25maWdfZmlsZT46Cj4+ICsKPj4gK8KgwqAgLSBGb3Ig
+KipzdG0zMmY0MjkgZGlzY292ZXJ5KiogYm9hcmQgOiAKPj4gKipzdG0zMmY0MjktZGlzY292ZXJ5
+X2RlZmNvbmZpZyoqCj4+ICvCoMKgIC0gRm9yICoqc3RtMzJmNzY5IGRpc2NvdmVyeSoqIGJvYXJk
+IHdpdGggU1BMOiAKPj4gKipzdG0zMmY3NjktZGlzY29fc3BsX2RlZmNvbmZpZyoqCj4+ICvCoMKg
+IC0gRm9yICoqc3RtMzJmNzY5IGRpc2NvdmVyeSoqIGJvYXJkIHdpdGhvdXQgU1BMOiAKPj4gKipz
+dG0zMmY3NjktZGlzY29fZGVmY29uZmlnKioKPj4gKwo+PiArNS4gQ29uZmlndXJlIHRoZSBkZXZp
+Y2UtdHJlZSBhbmQgYnVpbGQgdGhlIFUtQm9vdCBpbWFnZTo6Cj4+ICsKPj4gK8KgwqAgIyBtYWtl
+IERFVklDRV9UUkVFPTxuYW1lPiBhbGwKPiBpdCBpcyBub3QgcmVxdWlyZWQgYXMgdGhlIHN1cHBv
+cnRlZCBkZXZpY2UgdHJlZSBpcyBzZWxlY3RlZCBpbiBlYWNoIAo+IGRlZmNvbmZpZy4KPgo+ICMg
+bWFrZSBhbGwKPgo+PiArCj4+ICvCoMKgIEV4YW1wbGVzOgo+PiArCj4+ICvCoCBhKSBib290IHdp
+dGggU1BMIG9uIHN0bTMyZjc0NiBkaXNjb3ZlcnkgYm9hcmQ6Ogo+PiArCj4+ICvCoMKgwqDCoCAj
+IGV4cG9ydCBLQlVJTERfT1VUUFVUPXN0bTMyZjc0Ni1kaXNjbwo+PiArwqDCoMKgwqAgIyBtYWtl
+IHN0bTMyZjc0Ni1kaXNjb19zcGxfZGVmY29uZmlnCj4+ICvCoMKgwqDCoCAjIG1ha2UgREVWSUNF
+X1RSRUU9c3RtMzJmNzQ2LWRpc2NvIGFsbAo+ICMgbWFrZSBhbGwKPj4gKwo+PiArwqAgYikgYm9v
+dCB3aXRob3V0IFNQTCBvbiBzdG0zMmY3NDYgZGlzY292ZXJ5IGJvYXJkOjoKPj4gKwo+PiArwqDC
+oMKgwqAgIyBleHBvcnQgS0JVSUxEX09VVFBVVD1zdG0zMmY3NDYtZGlzY28KPj4gK8KgwqDCoMKg
+ICMgbWFrZSBzdG0zMmY3NDYtZGlzY29fZGVmY29uZmlnCj4+ICvCoMKgwqDCoCAjIG1ha2UgREVW
+SUNFX1RSRUU9c3RtMzJmNzQ2LWRpc2NvIGFsbAo+Cj4KPiAjIG1ha2UgYWxsCj4KPj4gKwo+PiAr
+wqAgYykgYm9vdCBvbiBzdG0zMmg3NDMgZGlzY292ZXJ5IGJvYXJkOjoKPj4gKwo+PiArwqDCoMKg
+wqDCoCAjIGV4cG9ydCBLQlVJTERfT1VUUFVUPXN0bTMyaDc0My1kaXNjbwo+PiArwqDCoMKgwqDC
+oCAjIG1ha2Ugc3RtMzJoNzQzLWRpc2NvX2RlZmNvbmZpZwo+PiArwqDCoMKgwqDCoCAjIG1ha2Ug
+REVWSUNFX1RSRUU9c3RtMzJoNzQzaS1kaXNjbyBhbGwKPgo+ICMgbWFrZSBhbGwKPgo+PiArCj4+
+ICvCoCBkKSBib290IG9uIHN0bTMyaDc0MyBldmFsdWF0aW9uIGJvYXJkOjoKPj4gKwo+PiArwqDC
+oMKgwqDCoCAjIGV4cG9ydCBLQlVJTERfT1VUUFVUPXN0bTMyaDc0My1kaXNjbwo+PiArwqDCoMKg
+wqDCoCAjIG1ha2Ugc3RtMzJoNzQzLWV2YWxfZGVmY29uZmlnCj4+ICvCoMKgwqDCoMKgICMgbWFr
+ZSBERVZJQ0VfVFJFRT1zdG0zMmg3NDNpLWV2YWwgYWxsCj4KPiAjIG1ha2UgYWxsCj4KPj4gKwo+
+PiArNi4gVS1Cb290IE91dHB1dCBmaWxlcwo+PiArCj4+ICvCoMKgIFNvIGluIHRoZSBvdXRwdXQg
+ZGlyZWN0b3J5IChzZWxlY3RlZCBieSBLQlVJTERfT1VUUFVUKSwKPj4gK8KgwqAgeW91IGNhbiBm
+b3VuZCB0aGUgbmVlZGVkIFUtQm9vdCBmaWxlcywgZm9yIGV4YW1wbGU6Ogo+PiArCj4+ICvCoMKg
+wqDCoCAtIHN0bTMyZjc0Ni1kaXNjb19kZWZjb25maWcgPSAqKnUtYm9vdC1kdGIuYmluKiogYW5k
+IAo+PiAqKnUtYm9vdC5kdGIqKgo+PiArCj4+ICvCoMKgwqDCoMKgwqDCoCAtIEZTQkwgPSB1LWJv
+b3QtZHRiLmJpbgo+PiArCj4+ICvCoMKgwqDCoCAtIHN0bTMyZjc0Ni1kaXNjb19zcGxfZGVmY29u
+ZmlnID0gKip1LWJvb3QtZHRiLmJpbioqLCAKPj4gKip1LWJvb3QuZHRiKiogYW5kICoqdS1ib290
+LXdpdGgtc3BsLmJpbioqCj4+ICsKPj4gK8KgwqDCoMKgwqDCoCAtIEZTQkwgKyBTU0JMID0gdS1i
+b290LXdpdGgtc3BsLmJpbgo+PiArwqDCoMKgwqDCoMKgIC0gU1NCTCA9IHUtYm9vdC1kdGIuYmlu
+Cj4+ICsKPj4gKzcuIEZsYXNoIFUtQm9vdCBmaWxlcwo+PiArCj4+ICtQbHVnIFNUTTMyIE1DVXMg
+Ym9hcmQgdXNpbmcgdGhlIFVTQiBTVC1MaW5rIGNvbm5lY3RvciwgaGVuY2UgaXQgd2lsbCAKPj4g
+ZXhwb3NlCj4+ICt0aGUgZmxhc2ggYXJlYSBhcyBhIG1hc3Mtc3RvcmFnZS4gSW4gdGhpcyBtYXNz
+LXN0b3JhZ2UgeW91IHdpbGwgZmluZCAKPj4gdGhlCj4+ICtmb2xsb3dpbmcgZmlsZXM6Cj4+ICsK
+Pj4gKy0gREVUQUlMUy5UWFQ6IGdpdmUgdGhlIGJvb3Ryb20gdmVyc2lvbiBhbmQgYnVpbGQKPj4g
+Ky0gTUJFRC5IVE06IHNob3J0Y3VsIHRvIHRoZSBoYXJkd2FyZSBib2FyZCBkZXNjcmlwdGlvbiB3
+ZWIgcGFnZSBmcm9tIAo+PiBzdC5jb20uCj4+ICsKPj4gK0NvcHkvcGFzdGUgdGhlIHUtYm9vdC5i
+aW4gdG8gdGhpcyBtYXNzLXN0b3JhZ2UuIFRoZSAiQ09NIiBMRUQgd2lsbAo+PiArYmxpbmsgYWx0
+ZXJuYXRpdmVseSByZWQgYW5kIGdyZWVuIGR1cmluZyB0aGUgZmxhc2ggcHJvY2Vzcy4KPj4gK1do
+ZW4gZG9uZSB0aGUgYm9hcmQgd2lsbCByZWJvb3QgYXV0b21hdGljYWxseS4KPj4gKwo+PiArSW4g
+Y2FzZSBvZiBib290IHdpdGggU1BMLCBieSBkZWZhdWx0IFNQTCB3aWxsIHRyeSB0byBsb2FkIGVp
+dGhlciBhIAo+PiBMaW51eAo+PiAra2VybmVsIChmYWxjb24gbW9kZSkgb3IsIGlmIHRoZSBrZXkg
+ImMiIGlzIG1haW50YWluZWQgcHJlc3NlZCwgdGhlIAo+PiBtYWluIFUtQm9vdC4KPgo+IHJlZ2Fy
+ZHMKPgo+IFBhdHJpY2sKPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxt
+YW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21h
+aWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

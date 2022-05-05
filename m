@@ -2,64 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C53C51C065
-	for <lists+uboot-stm32@lfdr.de>; Thu,  5 May 2022 15:18:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1BAE51C125
+	for <lists+uboot-stm32@lfdr.de>; Thu,  5 May 2022 15:44:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E4A5C6047D;
-	Thu,  5 May 2022 13:18:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9B941C6047D;
+	Thu,  5 May 2022 13:44:53 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 52379C5E2CC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8846FC5F1F1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  5 May 2022 13:18:04 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2458RK3Q015243;
- Thu, 5 May 2022 15:18:02 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=plrteWAsr8uOv7Yi4B/ke+j601/BNRSeka3L/J2EaQ4=;
- b=NdWikNgtUkLRvTCNDnET6MJbp27b6OJTbigVSsvdLba42UQUgaTkPvpKoryko+6q5//k
- u4YUBXVBMkHz/Lui7r6ZmfFGOA+UuldKEvjO4CXBqaOrm907gv/sYiym/KzwR7dIucpv
- h6mMell30lUNAaFiMCgJ2JZRGKEceqAFD0VW951wmxDYZNp1rrEQsGiKgjdOUqh18NMy
- gEPDf+AwD0/TSiuyWvCC3b97DKDmtb3wuckSjZkTgzA1IDirJua/R7HEtWbm3x5kH05G
- EAk0L5RwYE6xLNhQT/mZk0FL6yJk86PGupxuv/AS6/+hR81ydRXuMEFcjKPnWvFn8QDK Rw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3frvf0t9m0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 05 May 2022 15:18:02 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3695F10003A;
- Thu,  5 May 2022 15:18:02 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 30B3821F0A6;
- Thu,  5 May 2022 15:18:02 +0200 (CEST)
-Received: from localhost (10.75.127.44) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Thu, 5 May
- 2022 15:18:01 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 5 May 2022 15:17:59 +0200
-Message-ID: <20220505151756.2.Ic4641ddc829feecc12b775615bd175f3f35c3ea9@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220505151756.1.Ia5711b14a17cf1d042bdab9d3f28437d5c53272c@changeid>
-References: <20220505151756.1.Ia5711b14a17cf1d042bdab9d3f28437d5c53272c@changeid>
+ Thu,  5 May 2022 13:44:51 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BC02683D7D;
+ Thu,  5 May 2022 15:44:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1651758291;
+ bh=P+IBEUHb/MQrCuc8muZcbBfRldYqxRd1EZ45bu/YY6w=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=lm64nekNz0QMAnXurhW0PUxQl8ax+aSqqTg0Z/U8uaF/81Eb6oD6OdYkvd6GuzsQn
+ tsokpfgn4CHKE3B2q3B5lzsMRDX0lV7/sha5aVfwALytfX//z8HjLQ+DjeC8UXo/Ty
+ ZZ+lPOReFM/uiXWIoHQkKeYhwIZE6RbKIB11T9QHRLkT1mYteRpI5/RH24dG4aYLiA
+ botvto1nc6ewNQozgqPzdgIAuMINGVosn+MEQNsJGL1i+nKFNOuYUjD/AZPo4osfI6
+ 5ZcIUHteFt+elrCqpKfxShf6Qh5FfgSOu0HXIVZaL2ahIlYbGKXdncJpf/hVwB3glD
+ vrREgZRvMaBVg==
+Message-ID: <40514ed1-9899-059f-0010-eb6b972c217a@denx.de>
+Date: Thu, 5 May 2022 15:44:50 +0200
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-05_05,2022-05-05_01,2022-02-23_01
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20220505151756.1.Ia5711b14a17cf1d042bdab9d3f28437d5c53272c@changeid>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20220505151756.1.Ia5711b14a17cf1d042bdab9d3f28437d5c53272c@changeid>
+X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
+X-Virus-Status: Clean
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>
-Subject: [Uboot-stm32] [PATCH 2/2] usb: host: ehci-generic: Remove
-	DM_REGULATOR flag
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] usb: host: ehci-generic: Make usage
+ of clock/reset bulk() API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,58 +56,63 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Currently, DM_REGULATOR flag is no more needed to protect no DM core,
-remove it.
+On 5/5/22 15:17, Patrice Chotard wrote:
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+[...]
 
- drivers/usb/host/ehci-generic.c | 14 --------------
- 1 file changed, 14 deletions(-)
+> @@ -81,68 +79,31 @@ static int ehci_usb_probe(struct udevice *dev)
+>   	struct generic_ehci *priv = dev_get_priv(dev);
+>   	struct ehci_hccr *hccr;
+>   	struct ehci_hcor *hcor;
+> -	int i, err, ret, clock_nb, reset_nb;
+> +	int err, ret;
+>   
+>   	err = 0;
+> -	priv->clock_count = 0;
+> -	clock_nb = ofnode_count_phandle_with_args(dev_ofnode(dev), "clocks",
+> -						  "#clock-cells", 0);
+> -	if (clock_nb > 0) {
+> -		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
+> -					    GFP_KERNEL);
+> -		if (!priv->clocks)
+> -			return -ENOMEM;
+> -
+> -		for (i = 0; i < clock_nb; i++) {
+> -			err = clk_get_by_index(dev, i, &priv->clocks[i]);
+> -
+> -			if (err < 0)
+> -				break;
+> -			err = clk_enable(&priv->clocks[i]);
+> -			if (err && err != -ENOSYS) {
+> -				dev_err(dev, "failed to enable clock %d\n", i);
+> -				clk_free(&priv->clocks[i]);
+> -				goto clk_err;
+> -			}
+> -			priv->clock_count++;
+> -		}
+> -	} else {
+> -		if (clock_nb != -ENOENT) {
+> -			dev_err(dev, "failed to get clock phandle(%d)\n",
+> -				clock_nb);
+> -			return clock_nb;
+> -		}
+> +	ret = clk_get_bulk(dev, &priv->clocks);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to get clocks\n");
 
-diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
-index 5856e898a8..9c385d8c33 100644
---- a/drivers/usb/host/ehci-generic.c
-+++ b/drivers/usb/host/ehci-generic.c
-@@ -26,12 +26,9 @@ struct generic_ehci {
- 	struct clk_bulk clocks;
- 	struct reset_ctl_bulk resets;
- 	struct phy phy;
--#ifdef CONFIG_DM_REGULATOR
- 	struct udevice *vbus_supply;
--#endif
- };
- 
--#ifdef CONFIG_DM_REGULATOR
- static int ehci_enable_vbus_supply(struct udevice *dev)
- {
- 	struct generic_ehci *priv = dev_get_priv(dev);
-@@ -62,17 +59,6 @@ static int ehci_disable_vbus_supply(struct generic_ehci *priv)
- 	else
- 		return 0;
- }
--#else
--static int ehci_enable_vbus_supply(struct udevice *dev)
--{
--	return 0;
--}
--
--static int ehci_disable_vbus_supply(struct generic_ehci *priv)
--{
--	return 0;
--}
--#endif
- 
- static int ehci_usb_probe(struct udevice *dev)
- {
--- 
-2.25.1
+Print the error code in the error message, so the user can immediately 
+determine what went wrong without rebuilding the code with extra debug 
+prints (and that goes for other messages and other drivers too, the 
+error code is useful there).
 
+dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+
+[...]
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

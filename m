@@ -2,61 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 621B151BF32
-	for <lists+uboot-stm32@lfdr.de>; Thu,  5 May 2022 14:21:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7FEF751C066
+	for <lists+uboot-stm32@lfdr.de>; Thu,  5 May 2022 15:18:06 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1DD8DC5F1FB;
-	Thu,  5 May 2022 12:21:40 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 37016C628AA;
+	Thu,  5 May 2022 13:18:06 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E990BC5F1D6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 75B42C6047D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  5 May 2022 12:21:37 +0000 (UTC)
+ Thu,  5 May 2022 13:18:04 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2458U0JD001536;
- Thu, 5 May 2022 14:21:36 +0200
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2458km4F001608;
+ Thu, 5 May 2022 15:18:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=selector1;
- bh=cFmLZYXghr6ygDt7tLyk7BCZy7rd1/HOm51oTJArvCk=;
- b=5xRE4yK1J3hJ9VozK33kCi0noFY2BLq3WIXODT9SaJ+AcCoUEHXltXcblfS8huSOH9ca
- G+8BOk3kg9E8qyRMvCwyP81i1xjNKVOsr+zqMGk2VaPhd2w6P2EVZX0mebOA7KF7MF52
- sQAJhleACeg13OlHMjaXG4eDVWRVx8/4GGPEvlNziM5rn4gzl6KuMqu5iTLgZ9inP3jV
- o8/gyCncV0uWRLrHwKabv5jCMvtkcJXDbPGmUWaYfKecJzzlwVd69konskm3T71CgkM1
- 4cCCKUjA4PIBqRe17cGrCa4w4Jq/z8A9Y5imoXYBdL0CT6a51jrtduzyV83QGZ+MPix3 Yg== 
+ bh=sbdiYcT9fqmtmij/SwLnC1Cc/9HFKraX/+blcXDQIzM=;
+ b=bNpDV49ukFOQyLfXGgTQpIvRllzMX+66d0XO/g9GBMkPYppMqwMP6GiULp1VWk7h5K3r
+ su2Vy+MfDMVtc7PWviEhdepwKL+fk6dU5uvaEbcnlQP5gVZpRsGQTYfxBaDG48rIJaKr
+ /aWLsTbLds1aGefgS+mMp+hn3NGeNF0BbeZlngnHEITHxHWjj0HZSi9A+XPYzj9b9ZJ/
+ GRduswuCWfUtIDJC45qRsw28EPGTgE1rvc9qyXJxtrXiUDFLXCvoiOD2uL6r+hBQIkt+
+ 16Qc5mBqpIlR3IBj0UIig+BgcDetLUeDNgM0VX6pc+u/lJCKHpw0LmPHBGvQZ4sHFf2E VQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3frv0gkfjf-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3frv0gkrpx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 05 May 2022 14:21:36 +0200
+ Thu, 05 May 2022 15:18:02 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A394A10002A;
- Thu,  5 May 2022 14:21:35 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9852121D385;
- Thu,  5 May 2022 14:21:35 +0200 (CEST)
-Received: from localhost (10.75.127.49) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Thu, 5 May 2022 14:21:35
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A1E6D100034;
+ Thu,  5 May 2022 15:18:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9369421F0A6;
+ Thu,  5 May 2022 15:18:01 +0200 (CEST)
+Received: from localhost (10.75.127.44) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Thu, 5 May
+ 2022 15:18:01 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 5 May 2022 14:21:32 +0200
-Message-ID: <20220505142126.1.I46677af5f2426ff2eef1afa2365059a93019ed87@changeid>
+Date: Thu, 5 May 2022 15:17:58 +0200
+Message-ID: <20220505151756.1.Ia5711b14a17cf1d042bdab9d3f28437d5c53272c@changeid>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
- (10.75.127.5)
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
  definitions=2022-05-05_05,2022-05-05_01,2022-02-23_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH] ARM: stm32: Use CONFIG_TFTP_TSIZE on
-	STMicroelectronics boards
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>
+Subject: [Uboot-stm32] [PATCH 1/2] usb: host: ehci-generic: Make usage of
+	clock/reset bulk() API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,54 +74,157 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Long TFTP transfers lead to a wall of # characters on UART, which in
-the end may slow down the transfer itself. Use CONFIG_TFTP_TSIZE to
-print progress in fewer # characters.
+Make usage of clock and reset bulk API in order to simplify the code
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- configs/stm32mp15_basic_defconfig   | 1 +
- configs/stm32mp15_defconfig         | 1 +
- configs/stm32mp15_trusted_defconfig | 1 +
- 3 files changed, 3 insertions(+)
+ drivers/usb/host/ehci-generic.c | 97 ++++++++++-----------------------
+ 1 file changed, 29 insertions(+), 68 deletions(-)
 
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 5d1b2e0fd7..1b1c255b98 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -80,6 +80,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=-1
- # CONFIG_SPL_ENV_IS_NOWHERE is not set
- # CONFIG_SPL_ENV_IS_IN_SPI_FLASH is not set
-+CONFIG_TFTP_TSIZE=y
- CONFIG_STM32_ADC=y
- CONFIG_SET_DFU_ALT_INFO=y
- CONFIG_USB_FUNCTION_FASTBOOT=y
-diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-index f6e7fc81b0..02b37e14ea 100644
---- a/configs/stm32mp15_defconfig
-+++ b/configs/stm32mp15_defconfig
-@@ -61,6 +61,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
- CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=-1
-+CONFIG_TFTP_TSIZE=y
- CONFIG_STM32_ADC=y
- CONFIG_CLK_SCMI=y
- CONFIG_SET_DFU_ALT_INFO=y
-diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-index 855a394893..df31c0fbb1 100644
---- a/configs/stm32mp15_trusted_defconfig
-+++ b/configs/stm32mp15_trusted_defconfig
-@@ -62,6 +62,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
- CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=-1
-+CONFIG_TFTP_TSIZE=y
- CONFIG_STM32_ADC=y
- CONFIG_CLK_SCMI=y
- CONFIG_SET_DFU_ALT_INFO=y
+diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
+index 4c28a69b98..5856e898a8 100644
+--- a/drivers/usb/host/ehci-generic.c
++++ b/drivers/usb/host/ehci-generic.c
+@@ -23,14 +23,12 @@
+  */
+ struct generic_ehci {
+ 	struct ehci_ctrl ctrl;
+-	struct clk *clocks;
+-	struct reset_ctl *resets;
++	struct clk_bulk clocks;
++	struct reset_ctl_bulk resets;
+ 	struct phy phy;
+ #ifdef CONFIG_DM_REGULATOR
+ 	struct udevice *vbus_supply;
+ #endif
+-	int clock_count;
+-	int reset_count;
+ };
+ 
+ #ifdef CONFIG_DM_REGULATOR
+@@ -81,68 +79,31 @@ static int ehci_usb_probe(struct udevice *dev)
+ 	struct generic_ehci *priv = dev_get_priv(dev);
+ 	struct ehci_hccr *hccr;
+ 	struct ehci_hcor *hcor;
+-	int i, err, ret, clock_nb, reset_nb;
++	int err, ret;
+ 
+ 	err = 0;
+-	priv->clock_count = 0;
+-	clock_nb = ofnode_count_phandle_with_args(dev_ofnode(dev), "clocks",
+-						  "#clock-cells", 0);
+-	if (clock_nb > 0) {
+-		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
+-					    GFP_KERNEL);
+-		if (!priv->clocks)
+-			return -ENOMEM;
+-
+-		for (i = 0; i < clock_nb; i++) {
+-			err = clk_get_by_index(dev, i, &priv->clocks[i]);
+-
+-			if (err < 0)
+-				break;
+-			err = clk_enable(&priv->clocks[i]);
+-			if (err && err != -ENOSYS) {
+-				dev_err(dev, "failed to enable clock %d\n", i);
+-				clk_free(&priv->clocks[i]);
+-				goto clk_err;
+-			}
+-			priv->clock_count++;
+-		}
+-	} else {
+-		if (clock_nb != -ENOENT) {
+-			dev_err(dev, "failed to get clock phandle(%d)\n",
+-				clock_nb);
+-			return clock_nb;
+-		}
++	ret = clk_get_bulk(dev, &priv->clocks);
++	if (ret) {
++		dev_err(dev, "Failed to get clocks\n");
++		return ret;
+ 	}
+ 
+-	priv->reset_count = 0;
+-	reset_nb = ofnode_count_phandle_with_args(dev_ofnode(dev), "resets",
+-						  "#reset-cells", 0);
+-	if (reset_nb > 0) {
+-		priv->resets = devm_kcalloc(dev, reset_nb,
+-					    sizeof(struct reset_ctl),
+-					    GFP_KERNEL);
+-		if (!priv->resets)
+-			return -ENOMEM;
+-
+-		for (i = 0; i < reset_nb; i++) {
+-			err = reset_get_by_index(dev, i, &priv->resets[i]);
+-			if (err < 0)
+-				break;
+-
+-			if (reset_deassert(&priv->resets[i])) {
+-				dev_err(dev, "failed to deassert reset %d\n",
+-					i);
+-				reset_free(&priv->resets[i]);
+-				goto reset_err;
+-			}
+-			priv->reset_count++;
+-		}
+-	} else {
+-		if (reset_nb != -ENOENT) {
+-			dev_err(dev, "failed to get reset phandle(%d)\n",
+-				reset_nb);
+-			goto clk_err;
+-		}
++	err = clk_enable_bulk(&priv->clocks);
++	if (err) {
++		dev_err(dev, "Failed to enable clocks\n");
++		goto clk_err;
++	}
++
++	err = reset_get_bulk(dev, &priv->resets);
++	if (err) {
++		dev_err(dev, "Failed to get resets\n");
++		goto clk_err;
++	}
++
++	err = reset_deassert_bulk(&priv->resets);
++	if (err) {
++		dev_err(dev, "Failed to get deassert resets\n");
++		goto reset_err;
+ 	}
+ 
+ 	err = ehci_enable_vbus_supply(dev);
+@@ -174,13 +135,13 @@ regulator_err:
+ 		dev_err(dev, "failed to disable VBUS supply\n");
+ 
+ reset_err:
+-	ret = reset_release_all(priv->resets, priv->reset_count);
++	ret = reset_release_bulk(&priv->resets);
+ 	if (ret)
+-		dev_err(dev, "failed to assert all resets\n");
++		dev_err(dev, "failed to release resets\n");
+ clk_err:
+-	ret = clk_release_all(priv->clocks, priv->clock_count);
++	ret = clk_release_bulk(&priv->clocks);
+ 	if (ret)
+-		dev_err(dev, "failed to disable all clocks\n");
++		dev_err(dev, "failed to release clocks\n");
+ 
+ 	return err;
+ }
+@@ -202,11 +163,11 @@ static int ehci_usb_remove(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret =  reset_release_all(priv->resets, priv->reset_count);
++	ret = reset_release_bulk(&priv->resets);
+ 	if (ret)
+ 		return ret;
+ 
+-	return clk_release_all(priv->clocks, priv->clock_count);
++	return clk_release_bulk(&priv->clocks);
+ }
+ 
+ static const struct udevice_id ehci_usb_ids[] = {
 -- 
 2.25.1
 

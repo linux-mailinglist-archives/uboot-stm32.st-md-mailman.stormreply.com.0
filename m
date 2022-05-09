@@ -2,67 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE87520002
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 May 2022 16:38:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D153A5200D0
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 May 2022 17:13:37 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 49AFDC5EC6C;
-	Mon,  9 May 2022 14:38:05 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FA49C5EC6C;
+	Mon,  9 May 2022 15:13:37 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 53C0DC57183
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4430CC57183
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 May 2022 14:38:03 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 249DZrQI015065;
- Mon, 9 May 2022 16:37:57 +0200
+ Mon,  9 May 2022 15:13:35 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 249EOP4E011800;
+ Mon, 9 May 2022 17:13:33 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=csUyIk2yYuSKE2Ai8Xr/xwWoCEGfJQ4tNK9UnLgfYsI=;
- b=lX4B1/KVMP3GolCslXp/BlqsBS+bm+stH7XjHoI48hBxrf//vh5pm0k3+Oq4NwhmJlJ4
- fRbN9BQvaxyMWjih6PDW4IDYM09e94eU6g/i6wONLlIkPXCI9M9WPSFLTmSTHhlXL9vu
- r7Yy+0RN9tpMbgJYNtetR7qv3pK+4W9dXTVj0Z8yJnf9I7Lzu577xI7YwAcXDGy/E0/x
- 7KWKYBdaR7aJOuYmB1EkO8R2bpRIG9sy30+KqmuvdA/wVc/TNc/sXEcMI2UtiKpUduwM
- YhBRp5TTJVvE9+ZXZKzrSmfwlgy3PR3zceCHNWGJRBqwyWY0CHutRTHI+Ve6216VOzFS TA== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=IFOxyQ37Bsmjh2K/bY/tNgEhPmCthrDpZlv7DjaBYr0=;
+ b=RXeoRawQp0p4p9/uPFKss3sPfpuJRRRPm/jXRGQLVXhqGzwdGHynDeXln+E63jKpKnfe
+ WFBOPKCizHLkMGyLQ7UQ853T23nYej1TfCxSxagmLiCHottXAgQF160Cpvjp+V5gpYog
+ JPa5Aal6uZTw9aWPJPeGL6+OTm5ZrZDalDvBV+E8pzqFi+gRPIpp3kNcmA9QfKiXROvW
+ jXGz4Kz6yx2stauLAhAIbLqLLOLqEik6a4zU8WfKqhlO9tlE4vW7VkU0c8JOgnYzSV34
+ TWOFelcAGL+xAyV5u//lvLnsJDXBgWAiP17D+P9Ig604MgBLjjSywCXo5xu5esc7wywW Tg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwg40tdar-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwfngc7af-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 09 May 2022 16:37:57 +0200
+ Mon, 09 May 2022 17:13:33 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3B49510002A;
- Mon,  9 May 2022 16:37:40 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9B74F100034;
+ Mon,  9 May 2022 17:13:32 +0200 (CEST)
 Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2C09F2291B4;
- Mon,  9 May 2022 16:37:40 +0200 (CEST)
-Received: from [10.48.0.213] (10.75.127.49) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 9 May
- 2022 16:37:39 +0200
-Message-ID: <0aeffe8a-b73a-5e3d-de89-9938d8d53150@foss.st.com>
-Date: Mon, 9 May 2022 16:37:38 +0200
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 944E022A6DD;
+ Mon,  9 May 2022 17:13:32 +0200 (CEST)
+Received: from localhost (10.75.127.45) by SFHDAG2NODE2.st.com (10.75.127.5)
+ with Microsoft SMTP Server (TLS) id 15.0.1497.26; Mon, 9 May 2022 17:13:32
+ +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 9 May 2022 17:13:21 +0200
+Message-ID: <20220509171309.1.Ie4f29021d76802af1c22e1df1a6a55ae6a5f55d9@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Content-Language: en-US
-To: Sean Anderson <seanga2@gmail.com>, <u-boot@lists.denx.de>
-References: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
- <20220426143736.1.I15bd7c3c8c983d6a6cec3d2ee371d75fe72fcd41@changeid>
- <27373592-d6c9-ff00-799b-a2f04f4500b1@gmail.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <27373592-d6c9-ff00-799b-a2f04f4500b1@gmail.com>
-X-Originating-IP: [10.75.127.49]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SFHDAG2NODE2.st.com
+X-Originating-IP: [10.75.127.45]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
  (10.75.127.5)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-09_04,2022-05-09_01,2022-02-23_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
- Joe Hershberger <joe.hershberger@ni.com>,
- Amelie DELAUNAY <amelie.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] phy: stm32-usbphyc: add counter of
-	PLL consumer
+ definitions=2022-05-09_04,2022-05-09_02,2022-02-23_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] stm32mp: fdt: update etzpc for STM32MP15x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,107 +67,230 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgU2VhbiwKCk9uIDUvOC8yMiAyMDoyMSwgU2VhbiBBbmRlcnNvbiB3cm90ZToKPiBPbiA0LzI2
-LzIyIDg6MzcgQU0sIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4+IEFkZCB0aGUgY291bnRlciBv
-ZiB0aGUgUExMIHVzZXIgbl9wbGxfY29ucyBtYW5hZ2VkIGJ5IHRoZSAyIGZ1bmN0aW9ucwo+PiBz
-dG0zMl91c2JwaHljX3BsbF9lbmFibGUgLyBzdG0zMl91c2JwaHljX3BsbF9kaXNhYmxlLgo+Pgo+
-PiBUaGlzIGNvdW50ZXIgYWxsb3cgdG8gcmVtb3ZlIHRoZSBmdW5jdGlvbiBzdG0zMl91c2JwaHlj
-X2lzX2luaXQKPj4gYW5kIGl0IGlzIGEgcHJlbGltaW5hcnkgc3RlcCBmb3IgY2tfdXNib180OG0g
-aW50cm9kdWN0aW9uLgo+Cj4gSXMgaXQgbmVjZXNzYXJ5IHRvIGRpc2FibGUgdGhpcyBjbG9jayBi
-ZWZvcmUgYm9vdGluZyB0byBMaW51eD8gSWYgaXQgCj4gaXNuJ3QsCj4gdGhlbiBwZXJoYXBzIGl0
-IGlzIHNpbXBsZXIgdG8ganVzdCBub3QgZGlzYWJsZSB0aGUgY2xvY2suCj4KPiAtLVNlYW4KCgpO
-bywgaXQgaXMgbm90IG5lY2Vzc2FyeSwgd2Ugb25seSBuZWVkIHRvIGVuYWJsZSB0aGUgY2xvY2sg
-Zm9yIHRoZSBmaXJzdCAKdXNlci4KCkkgY29weSB0aGUgY2xvY2sgYmVoYXZpb3IgZnJvbSBrZXJu
-ZWwsCgpidXQgSSBhZ3JlZSB0aGF0IGNhbiBiZSBzaW1wbGVyLgoKCkFtZWxpZSBhbnkgbm90aWNl
-IGFib3V0IHRoaXMgcG9pbnQgPwoKRG8geW91IHByZWZlciB0aGF0IEkga2VwdCB0aGUgYmVoYXZp
-b3IgLSBzYW1lIGFzIGtlcm5lbCBkcml2ZXIgLSBvciBJIApzaW1wbGlmeSB0aGUgVS1Cb290IGRy
-aXZlciA/CgoKUGF0cmljawoKCj4KPj4gU2lnbmVkLW9mZi1ieTogUGF0cmljayBEZWxhdW5heSA8
-cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPj4gLS0tCj4+Cj4+IMKgIGRyaXZlcnMvcGh5
-L3BoeS1zdG0zMi11c2JwaHljLmMgfCA3NiArKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0t
-LS0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDQ4IGluc2VydGlvbnMoKyksIDI4IGRlbGV0aW9ucygt
-KQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9waHkvcGh5LXN0bTMyLXVzYnBoeWMuYyAKPj4g
-Yi9kcml2ZXJzL3BoeS9waHktc3RtMzItdXNicGh5Yy5jCj4+IGluZGV4IDljMWRjZmFlNTIuLjE2
-Yzg3OTllY2EgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvcGh5L3BoeS1zdG0zMi11c2JwaHljLmMK
-Pj4gKysrIGIvZHJpdmVycy9waHkvcGh5LXN0bTMyLXVzYnBoeWMuYwo+PiBAQCAtNjUsNiArNjUs
-NyBAQCBzdHJ1Y3Qgc3RtMzJfdXNicGh5YyB7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBib29sIGlu
-aXQ7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBib29sIHBvd2VyZWQ7Cj4+IMKgwqDCoMKgwqAgfSBw
-aHlzW01BWF9QSFlTXTsKPj4gK8KgwqDCoCBpbnQgbl9wbGxfY29uczsKPj4gwqAgfTsKPj4gwqAg
-wqAgc3RhdGljIHZvaWQgc3RtMzJfdXNicGh5Y19nZXRfcGxsX3BhcmFtcyh1MzIgY2xrX3JhdGUs
-Cj4+IEBAIC0xMjQsMTggKzEyNSw2IEBAIHN0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19wbGxfaW5p
-dChzdHJ1Y3QgCj4+IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMpCj4+IMKgwqDCoMKgwqAgcmV0dXJu
-IDA7Cj4+IMKgIH0KPj4gwqAgLXN0YXRpYyBib29sIHN0bTMyX3VzYnBoeWNfaXNfaW5pdChzdHJ1
-Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YykKPj4gLXsKPj4gLcKgwqDCoCBpbnQgaTsKPj4gLQo+
-PiAtwqDCoMKgIGZvciAoaSA9IDA7IGkgPCBNQVhfUEhZUzsgaSsrKSB7Cj4+IC3CoMKgwqDCoMKg
-wqDCoCBpZiAodXNicGh5Yy0+cGh5c1tpXS5pbml0KQo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCByZXR1cm4gdHJ1ZTsKPj4gLcKgwqDCoCB9Cj4+IC0KPj4gLcKgwqDCoCByZXR1cm4gZmFsc2U7
-Cj4+IC19Cj4+IC0KPj4gwqAgc3RhdGljIGJvb2wgc3RtMzJfdXNicGh5Y19pc19wb3dlcmVkKHN0
-cnVjdCBzdG0zMl91c2JwaHljICp1c2JwaHljKQo+PiDCoCB7Cj4+IMKgwqDCoMKgwqAgaW50IGk7
-Cj4+IEBAIC0xNDgsMTggKzEzNywxNyBAQCBzdGF0aWMgYm9vbCBzdG0zMl91c2JwaHljX2lzX3Bv
-d2VyZWQoc3RydWN0IAo+PiBzdG0zMl91c2JwaHljICp1c2JwaHljKQo+PiDCoMKgwqDCoMKgIHJl
-dHVybiBmYWxzZTsKPj4gwqAgfQo+PiDCoCAtc3RhdGljIGludCBzdG0zMl91c2JwaHljX3BoeV9p
-bml0KHN0cnVjdCBwaHkgKnBoeSkKPj4gK3N0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19wbGxfZW5h
-YmxlKHN0cnVjdCBzdG0zMl91c2JwaHljICp1c2JwaHljKQo+PiDCoCB7Cj4+IC3CoMKgwqAgc3Ry
-dWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMgPSBkZXZfZ2V0X3ByaXYocGh5LT5kZXYpOwo+PiAt
-wqDCoMKgIHN0cnVjdCBzdG0zMl91c2JwaHljX3BoeSAqdXNicGh5Y19waHkgPSB1c2JwaHljLT5w
-aHlzICsgcGh5LT5pZDsKPj4gwqDCoMKgwqDCoCBib29sIHBsbGVuID0gcmVhZGwodXNicGh5Yy0+
-YmFzZSArIFNUTTMyX1VTQlBIWUNfUExMKSAmIFBMTEVOID8KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCB0cnVlIDogZmFsc2U7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gwqAgLcKg
-wqDCoCBkZXZfZGJnKHBoeS0+ZGV2LCAicGh5IElEID0gJWx1XG4iLCBwaHktPmlkKTsKPj4gLcKg
-wqDCoCAvKiBDaGVjayBpZiBvbmUgcGh5IHBvcnQgaGFzIGFscmVhZHkgY29uZmlndXJlZCB0aGUg
-cGxsICovCj4+IC3CoMKgwqAgaWYgKHBsbGVuICYmIHN0bTMyX3VzYnBoeWNfaXNfaW5pdCh1c2Jw
-aHljKSkKPj4gLcKgwqDCoMKgwqDCoMKgIGdvdG8gaW5pdGlhbGl6ZWQ7Cj4+ICvCoMKgwqAgLyog
-Q2hlY2sgaWYgb25lIGNvbnN1bWVyIGhhcyBhbHJlYWR5IGNvbmZpZ3VyZWQgdGhlIHBsbCAqLwo+
-PiArwqDCoMKgIGlmIChwbGxlbiAmJiB1c2JwaHljLT5uX3BsbF9jb25zKSB7Cj4+ICvCoMKgwqDC
-oMKgwqDCoCB1c2JwaHljLT5uX3BsbF9jb25zKys7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4g
-MDsKPj4gK8KgwqDCoCB9Cj4+IMKgIMKgwqDCoMKgwqAgaWYgKHVzYnBoeWMtPnZkZGExdjEpIHsK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldCA9IHJlZ3VsYXRvcl9zZXRfZW5hYmxlKHVzYnBoeWMt
-PnZkZGExdjEsIHRydWUpOwo+PiBAQCAtMTkwLDIzICsxNzgsMTkgQEAgc3RhdGljIGludCBzdG0z
-Ml91c2JwaHljX3BoeV9pbml0KHN0cnVjdCBwaHkgKnBoeSkKPj4gwqDCoMKgwqDCoCBpZiAoIShy
-ZWFkbCh1c2JwaHljLT5iYXNlICsgU1RNMzJfVVNCUEhZQ19QTEwpICYgUExMRU4pKQo+PiDCoMKg
-wqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU87Cj4+IMKgIC1pbml0aWFsaXplZDoKPj4gLcKgwqDC
-oCB1c2JwaHljX3BoeS0+aW5pdCA9IHRydWU7Cj4+ICvCoMKgwqAgdXNicGh5Yy0+bl9wbGxfY29u
-cysrOwo+PiDCoCDCoMKgwqDCoMKgIHJldHVybiAwOwo+PiDCoCB9Cj4+IMKgIC1zdGF0aWMgaW50
-IHN0bTMyX3VzYnBoeWNfcGh5X2V4aXQoc3RydWN0IHBoeSAqcGh5KQo+PiArc3RhdGljIGludCBz
-dG0zMl91c2JwaHljX3BsbF9kaXNhYmxlKHN0cnVjdCBzdG0zMl91c2JwaHljICp1c2JwaHljKQo+
-PiDCoCB7Cj4+IC3CoMKgwqAgc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMgPSBkZXZfZ2V0
-X3ByaXYocGh5LT5kZXYpOwo+PiAtwqDCoMKgIHN0cnVjdCBzdG0zMl91c2JwaHljX3BoeSAqdXNi
-cGh5Y19waHkgPSB1c2JwaHljLT5waHlzICsgcGh5LT5pZDsKPj4gwqDCoMKgwqDCoCBpbnQgcmV0
-Owo+PiDCoCAtwqDCoMKgIGRldl9kYmcocGh5LT5kZXYsICJwaHkgSUQgPSAlbHVcbiIsIHBoeS0+
-aWQpOwo+PiAtwqDCoMKgIHVzYnBoeWNfcGh5LT5pbml0ID0gZmFsc2U7Cj4+ICvCoMKgwqAgdXNi
-cGh5Yy0+bl9wbGxfY29ucy0tOwo+PiDCoCAtwqDCoMKgIC8qIENoZWNrIGlmIG90aGVyIHBoeSBw
-b3J0IHJlcXVpcmVzIHBsbGVuICovCj4+IC3CoMKgwqAgaWYgKHN0bTMyX3VzYnBoeWNfaXNfaW5p
-dCh1c2JwaHljKSkKPj4gK8KgwqDCoCAvKiBDaGVjayBpZiBvdGhlciBjb25zdW1lciByZXF1aXJl
-cyBwbGxlbiAqLwo+PiArwqDCoMKgIGlmICh1c2JwaHljLT5uX3BsbF9jb25zKQo+PiDCoMKgwqDC
-oMKgwqDCoMKgwqAgcmV0dXJuIDA7Cj4+IMKgIMKgwqDCoMKgwqAgY2xyYml0c19sZTMyKHVzYnBo
-eWMtPmJhc2UgKyBTVE0zMl9VU0JQSFlDX1BMTCwgUExMRU4pOwo+PiBAQCAtMjM1LDYgKzIxOSw0
-MiBAQCBzdGF0aWMgaW50IHN0bTMyX3VzYnBoeWNfcGh5X2V4aXQoc3RydWN0IHBoeSAqcGh5KQo+
-PiDCoMKgwqDCoMKgIHJldHVybiAwOwo+PiDCoCB9Cj4+IMKgICtzdGF0aWMgaW50IHN0bTMyX3Vz
-YnBoeWNfcGh5X2luaXQoc3RydWN0IHBoeSAqcGh5KQo+PiArewo+PiArwqDCoMKgIHN0cnVjdCBz
-dG0zMl91c2JwaHljICp1c2JwaHljID0gZGV2X2dldF9wcml2KHBoeS0+ZGV2KTsKPj4gK8KgwqDC
-oCBzdHJ1Y3Qgc3RtMzJfdXNicGh5Y19waHkgKnVzYnBoeWNfcGh5ID0gdXNicGh5Yy0+cGh5cyAr
-IHBoeS0+aWQ7Cj4+ICvCoMKgwqAgaW50IHJldDsKPj4gKwo+PiArwqDCoMKgIGRldl9kYmcocGh5
-LT5kZXYsICJwaHkgSUQgPSAlbHVcbiIsIHBoeS0+aWQpOwo+PiArwqDCoMKgIGlmICh1c2JwaHlj
-X3BoeS0+aW5pdCkKPj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+PiArCj4+ICvCoMKgwqAg
-cmV0ID0gc3RtMzJfdXNicGh5Y19wbGxfZW5hYmxlKHVzYnBoeWMpOwo+PiArwqDCoMKgIGlmIChy
-ZXQpCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gbG9nX3JldChyZXQpOwo+PiArCj4+ICvCoMKg
-wqAgdXNicGh5Y19waHktPmluaXQgPSB0cnVlOwo+PiArCj4+ICvCoMKgwqAgcmV0dXJuIDA7Cj4+
-ICt9Cj4+ICsKPj4gK3N0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19waHlfZXhpdChzdHJ1Y3QgcGh5
-ICpwaHkpCj4+ICt7Cj4+ICvCoMKgwqAgc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMgPSBk
-ZXZfZ2V0X3ByaXYocGh5LT5kZXYpOwo+PiArwqDCoMKgIHN0cnVjdCBzdG0zMl91c2JwaHljX3Bo
-eSAqdXNicGh5Y19waHkgPSB1c2JwaHljLT5waHlzICsgcGh5LT5pZDsKPj4gK8KgwqDCoCBpbnQg
-cmV0Owo+PiArCj4+ICvCoMKgwqAgZGV2X2RiZyhwaHktPmRldiwgInBoeSBJRCA9ICVsdVxuIiwg
-cGh5LT5pZCk7Cj4+ICvCoMKgwqAgaWYgKCF1c2JwaHljX3BoeS0+aW5pdCkKPj4gK8KgwqDCoMKg
-wqDCoMKgIHJldHVybiAwOwo+PiArCj4+ICvCoMKgwqAgcmV0ID0gc3RtMzJfdXNicGh5Y19wbGxf
-ZGlzYWJsZSh1c2JwaHljKTsKPj4gKwo+PiArwqDCoMKgIHVzYnBoeWNfcGh5LT5pbml0ID0gZmFs
-c2U7Cj4+ICsKPj4gK8KgwqDCoCByZXR1cm4gbG9nX3JldChyZXQpOwo+PiArfQo+PiArCj4+IMKg
-IHN0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19waHlfcG93ZXJfb24oc3RydWN0IHBoeSAqcGh5KQo+
-PiDCoCB7Cj4+IMKgwqDCoMKgwqAgc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMgPSBkZXZf
-Z2V0X3ByaXYocGh5LT5kZXYpOwo+Pgo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1t
-ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5
-LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+Introduce STM32MP15 function and defines to prepare the
+STM32MP13 introduction.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ arch/arm/mach-stm32mp/fdt.c | 123 ++++++++++++++++++++----------------
+ 1 file changed, 67 insertions(+), 56 deletions(-)
+
+diff --git a/arch/arm/mach-stm32mp/fdt.c b/arch/arm/mach-stm32mp/fdt.c
+index ad45728949..5d37a44d97 100644
+--- a/arch/arm/mach-stm32mp/fdt.c
++++ b/arch/arm/mach-stm32mp/fdt.c
+@@ -28,13 +28,13 @@
+ 
+ #define ETZPC_RESERVED		0xffffffff
+ 
+-#define STM32_FDCAN_BASE	0x4400e000
+-#define STM32_CRYP2_BASE	0x4c005000
+-#define STM32_CRYP1_BASE	0x54001000
+-#define STM32_GPU_BASE		0x59000000
+-#define STM32_DSI_BASE		0x5a000000
++#define STM32MP15_FDCAN_BASE	0x4400e000
++#define STM32MP15_CRYP2_BASE	0x4c005000
++#define STM32MP15_CRYP1_BASE	0x54001000
++#define STM32MP15_GPU_BASE	0x59000000
++#define STM32MP15_DSI_BASE	0x5a000000
+ 
+-static const u32 stm32mp1_ip_addr[] = {
++static const u32 stm32mp15_ip_addr[] = {
+ 	0x5c008000,	/* 00 stgenc */
+ 	0x54000000,	/* 01 bkpsram */
+ 	0x5c003000,	/* 02 iwdg1 */
+@@ -44,7 +44,7 @@ static const u32 stm32mp1_ip_addr[] = {
+ 	ETZPC_RESERVED,	/* 06 reserved */
+ 	0x54003000,	/* 07 rng1 */
+ 	0x54002000,	/* 08 hash1 */
+-	STM32_CRYP1_BASE,	/* 09 cryp1 */
++	STM32MP15_CRYP1_BASE,	/* 09 cryp1 */
+ 	0x5a003000,	/* 0A ddrctrl */
+ 	0x5a004000,	/* 0B ddrphyc */
+ 	0x5c009000,	/* 0C i2c6 */
+@@ -97,7 +97,7 @@ static const u32 stm32mp1_ip_addr[] = {
+ 	0x4400b000,	/* 3B sai2 */
+ 	0x4400c000,	/* 3C sai3 */
+ 	0x4400d000,	/* 3D dfsdm */
+-	STM32_FDCAN_BASE,	/* 3E tt_fdcan */
++	STM32MP15_FDCAN_BASE,	/* 3E tt_fdcan */
+ 	ETZPC_RESERVED,	/* 3F reserved */
+ 	0x50021000,	/* 40 lptim2 */
+ 	0x50022000,	/* 41 lptim3 */
+@@ -110,7 +110,7 @@ static const u32 stm32mp1_ip_addr[] = {
+ 	0x48003000,	/* 48 adc */
+ 	0x4c002000,	/* 49 hash2 */
+ 	0x4c003000,	/* 4A rng2 */
+-	STM32_CRYP2_BASE,	/* 4B cryp2 */
++	STM32MP15_CRYP2_BASE,	/* 4B cryp2 */
+ 	ETZPC_RESERVED,	/* 4C reserved */
+ 	ETZPC_RESERVED,	/* 4D reserved */
+ 	ETZPC_RESERVED,	/* 4E reserved */
+@@ -163,8 +163,13 @@ static int stm32_fdt_fixup_etzpc(void *fdt, int soc_node)
+ 	int offset, shift;
+ 	u32 addr, status, decprot[ETZPC_DECPROT_NB];
+ 
+-	array = stm32mp1_ip_addr;
+-	array_size = ARRAY_SIZE(stm32mp1_ip_addr);
++	if (IS_ENABLED(CONFIG_STM32MP13x))
++		return 0;
++
++	if (IS_ENABLED(CONFIG_STM32MP15x)) {
++		array = stm32mp15_ip_addr;
++		array_size = ARRAY_SIZE(stm32mp15_ip_addr);
++	}
+ 
+ 	for (i = 0; i < ETZPC_DECPROT_NB; i++)
+ 		decprot[i] = readl(ETZPC_DECPROT(i));
+@@ -248,33 +253,9 @@ static void stm32_fdt_disable_optee(void *blob)
+ 	}
+ }
+ 
+-/*
+- * This function is called right before the kernel is booted. "blob" is the
+- * device tree that will be passed to the kernel.
+- */
+-int ft_system_setup(void *blob, struct bd_info *bd)
++static void stm32mp15_fdt_fixup(void *blob, int soc, u32 cpu, char *name)
+ {
+-	int ret = 0;
+-	int soc;
+-	u32 pkg, cpu;
+-	char name[SOC_NAME_SIZE];
+-
+-	if (IS_ENABLED(CONFIG_STM32MP13x))
+-		return 0;
+-
+-	soc = fdt_path_offset(blob, "/soc");
+-	if (soc < 0)
+-		return soc;
+-
+-	if (CONFIG_IS_ENABLED(STM32_ETZPC)) {
+-		ret = stm32_fdt_fixup_etzpc(blob, soc);
+-		if (ret)
+-			return ret;
+-	}
+-
+-	/* MPUs Part Numbers and name*/
+-	cpu = get_cpu_type();
+-	get_soc_name(name);
++	u32 pkg;
+ 
+ 	switch (cpu) {
+ 	case CPU_STM32MP151Fxx:
+@@ -284,19 +265,18 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 		stm32_fdt_fixup_cpu(blob, name);
+ 		/* after cpu delete we can't trust the soc offsets anymore */
+ 		soc = fdt_path_offset(blob, "/soc");
+-		stm32_fdt_disable(blob, soc, STM32_FDCAN_BASE, "can", name);
+-		/* fall through */
++		stm32_fdt_disable(blob, soc, STM32MP15_FDCAN_BASE, "can", name);
++		fallthrough;
+ 	case CPU_STM32MP153Fxx:
+ 	case CPU_STM32MP153Dxx:
+ 	case CPU_STM32MP153Cxx:
+ 	case CPU_STM32MP153Axx:
+-		stm32_fdt_disable(blob, soc, STM32_GPU_BASE, "gpu", name);
+-		stm32_fdt_disable(blob, soc, STM32_DSI_BASE, "dsi", name);
++		stm32_fdt_disable(blob, soc, STM32MP15_GPU_BASE, "gpu", name);
++		stm32_fdt_disable(blob, soc, STM32MP15_DSI_BASE, "dsi", name);
+ 		break;
+ 	default:
+ 		break;
+ 	}
+-
+ 	switch (cpu) {
+ 	case CPU_STM32MP157Dxx:
+ 	case CPU_STM32MP157Axx:
+@@ -304,13 +284,14 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 	case CPU_STM32MP153Axx:
+ 	case CPU_STM32MP151Dxx:
+ 	case CPU_STM32MP151Axx:
+-		stm32_fdt_disable(blob, soc, STM32_CRYP1_BASE, "cryp", name);
+-		stm32_fdt_disable(blob, soc, STM32_CRYP2_BASE, "cryp", name);
++		stm32_fdt_disable(blob, soc, STM32MP15_CRYP1_BASE, "cryp",
++				  name);
++		stm32_fdt_disable(blob, soc, STM32MP15_CRYP2_BASE, "cryp",
++				  name);
+ 		break;
+ 	default:
+ 		break;
+ 	}
+-
+ 	switch (get_cpu_package()) {
+ 	case STM32MP15_PKG_AA_LBGA448:
+ 		pkg = STM32MP_PKG_AA;
+@@ -334,18 +315,48 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+ 		do_fixup_by_compat_u32(blob, "st,stm32mp157-z-pinctrl",
+ 				       "st,package", pkg, false);
+ 	}
++}
++
++/*
++ * This function is called right before the kernel is booted. "blob" is the
++ * device tree that will be passed to the kernel.
++ */
++int ft_system_setup(void *blob, struct bd_info *bd)
++{
++	int ret = 0;
++	int soc;
++	u32 cpu;
++	char name[SOC_NAME_SIZE];
++
++	soc = fdt_path_offset(blob, "/soc");
++	if (soc < 0)
++		return soc;
++
++	if (CONFIG_IS_ENABLED(STM32_ETZPC)) {
++		ret = stm32_fdt_fixup_etzpc(blob, soc);
++		if (ret)
++			return ret;
++	}
+ 
+-	/*
+-	 * TEMP: remove OP-TEE nodes in kernel device tree
+-	 *       copied from U-Boot device tree by optee_copy_fdt_nodes
+-	 *       when OP-TEE is not detected (probe failed)
+-	 * these OP-TEE nodes are present in <board>-u-boot.dtsi
+-	 * under CONFIG_STM32MP15x_STM32IMAGE only for compatibility
+-	 * when FIP is not used by TF-A
+-	 */
+-	if (CONFIG_IS_ENABLED(STM32MP15x_STM32IMAGE) &&
+-	    !tee_find_device(NULL, NULL, NULL, NULL))
+-		stm32_fdt_disable_optee(blob);
++	/* MPUs Part Numbers and name*/
++	cpu = get_cpu_type();
++	get_soc_name(name);
++
++	if (IS_ENABLED(CONFIG_STM32MP15x)) {
++		stm32mp15_fdt_fixup(blob, soc, cpu, name);
++
++		/*
++		 * TEMP: remove OP-TEE nodes in kernel device tree
++		 *       copied from U-Boot device tree by optee_copy_fdt_nodes
++		 *       when OP-TEE is not detected (probe failed)
++		 * these OP-TEE nodes are present in <board>-u-boot.dtsi
++		 * under CONFIG_STM32MP15x_STM32IMAGE only for compatibility
++		 * when FIP is not used by TF-A
++		 */
++		if (CONFIG_IS_ENABLED(STM32MP15x_STM32IMAGE) &&
++		    !tee_find_device(NULL, NULL, NULL, NULL))
++			stm32_fdt_disable_optee(blob);
++	}
+ 
+ 	return ret;
+ }
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

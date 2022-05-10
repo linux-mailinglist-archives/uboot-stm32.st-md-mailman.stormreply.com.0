@@ -2,64 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E6B3B520F17
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 09:51:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3685A520F33
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 09:55:57 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACAE3C0D2BD;
-	Tue, 10 May 2022 07:51:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ED3B1C0D2B9;
+	Tue, 10 May 2022 07:55:56 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4D33CC0D2B9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76812C0D2B8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 May 2022 07:51:22 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24A2NPoQ023055;
- Tue, 10 May 2022 09:51:21 +0200
+ Tue, 10 May 2022 07:55:55 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24A1pxWr011776;
+ Tue, 10 May 2022 09:55:54 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=owOwhhjBaZ6yutXk6np/eIv9Bjq3oJKMF3656T93EEY=;
- b=bJpgM0FkoaL/3vjjAeq1mNss6rIkz2KHN5Vz4Xtj6gmLjxJ+m53fam2SYyYcBdK1dbUq
- 5WbRY+OibIgunxkMhNP2816lUkGDHuvmBjGCu1cHejZ2rVKH9pfyUim5DUx8L6YLq/Yx
- JKNlGGZuBTedfJHSmIfbLKDT2DokiykSDWW3NxMAdVRHFUOSGPEOlu/TpkOaSRNvnc+4
- 9Lrn5ozT8tetzFkMcrZubnyLRxDyemjxyUaTjIee5u7ZiLxKxA+MP0aZR8uxhxhWfjNl
- W7JbVF07ewOcK3cPK14AhB+7ZzKS3qADxbXn2H4WtAhza8Q1kPydxKA/+cQmnyTI+t6h 7Q== 
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=Yt68pewPOIIXa2Q6piksehKw4npOc8LrekuZxxIMDDY=;
+ b=oykSt5XbRfyGolcLqMMWChY1LV7n9icori8eed+knTaAWHs7b/kuKMagZVKV1wMiqcJv
+ avfbUnJqjeWbvHCKFz89NzdFT8uxCEm3FJldycLCjCitB+sO33ptoHzAtnMS/LENXCT/
+ V0PEUg2I40LKIgCKbkXulwZyqPpluouMtQ8iMN6rnbzrNJjDFSaSHMYuoYxoBbrWYKHQ
+ w4pczTCSh8hK8z6dLcWRavMtfFc4TXGS45ImORi6EOzt2rZvfvWDE25W51VEH5zDEknQ
+ 06pI3PxKIGtcHiOTpUxXMNoj4FlJTOmKaJk7H0sa8XYQH0X1w9tOF/k/fCb3Q+oLVDG2 1A== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwg40x9jh-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwfngg9bg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 May 2022 09:51:21 +0200
+ Tue, 10 May 2022 09:55:54 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9E34E10002A;
- Tue, 10 May 2022 09:51:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 97D1D20FA5E;
- Tue, 10 May 2022 09:51:20 +0200 (CEST)
-Received: from localhost (10.75.127.47) by SFHDAG2NODE2.st.com (10.75.127.5)
- with Microsoft SMTP Server (TLS) id 15.0.1497.26; Tue, 10 May 2022 09:51:19
- +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 10 May 2022 09:51:13 +0200
-Message-ID: <20220510095041.4.I43cd48cb3b34ee1655bd373e119c9072ef04d8c7@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220510075114.1238086-1-patrick.delaunay@foss.st.com>
-References: <20220510075114.1238086-1-patrick.delaunay@foss.st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 50B3710002A;
+ Tue, 10 May 2022 09:55:53 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 46AF8212FA2;
+ Tue, 10 May 2022 09:55:53 +0200 (CEST)
+Received: from [10.201.20.162] (10.75.127.51) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 10 May
+ 2022 09:55:52 +0200
+Message-ID: <367a22f9-fe39-cd88-1210-ee1f0f8e2d6e@foss.st.com>
+Date: Tue, 10 May 2022 09:55:52 +0200
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.47]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220505142126.1.I46677af5f2426ff2eef1afa2365059a93019ed87@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20220505142126.1.I46677af5f2426ff2eef1afa2365059a93019ed87@changeid>
+X-Originating-IP: [10.75.127.51]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
  definitions=2022-05-10_01,2022-05-09_02,2022-02-23_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 4/4] ARM: dts: stm32: add rcc node for
-	STM32MP13
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Use CONFIG_TFTP_TSIZE on
+ STMicroelectronics boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,52 +77,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add the RCC node, not yet in Linux kernel device tree
-to handle the U-Boot RCC drivers.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- arch/arm/dts/stm32mp13-u-boot.dtsi | 4 ++++
- arch/arm/dts/stm32mp131.dtsi       | 7 +++++++
- 2 files changed, 11 insertions(+)
+On 5/5/22 14:21, Patrick Delaunay wrote:
+> Long TFTP transfers lead to a wall of # characters on UART, which in
+> the end may slow down the transfer itself. Use CONFIG_TFTP_TSIZE to
+> print progress in fewer # characters.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  configs/stm32mp15_basic_defconfig   | 1 +
+>  configs/stm32mp15_defconfig         | 1 +
+>  configs/stm32mp15_trusted_defconfig | 1 +
+>  3 files changed, 3 insertions(+)
+> 
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+> index 5d1b2e0fd7..1b1c255b98 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -80,6 +80,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_SYS_MMC_ENV_DEV=-1
+>  # CONFIG_SPL_ENV_IS_NOWHERE is not set
+>  # CONFIG_SPL_ENV_IS_IN_SPI_FLASH is not set
+> +CONFIG_TFTP_TSIZE=y
+>  CONFIG_STM32_ADC=y
+>  CONFIG_SET_DFU_ALT_INFO=y
+>  CONFIG_USB_FUNCTION_FASTBOOT=y
+> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+> index f6e7fc81b0..02b37e14ea 100644
+> --- a/configs/stm32mp15_defconfig
+> +++ b/configs/stm32mp15_defconfig
+> @@ -61,6 +61,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
+>  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_SYS_MMC_ENV_DEV=-1
+> +CONFIG_TFTP_TSIZE=y
+>  CONFIG_STM32_ADC=y
+>  CONFIG_CLK_SCMI=y
+>  CONFIG_SET_DFU_ALT_INFO=y
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+> index 855a394893..df31c0fbb1 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -62,6 +62,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
+>  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_SYS_MMC_ENV_DEV=-1
+> +CONFIG_TFTP_TSIZE=y
+>  CONFIG_STM32_ADC=y
+>  CONFIG_CLK_SCMI=y
+>  CONFIG_SET_DFU_ALT_INFO=y
+Applied to u-boot-stm32
 
-diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
-index 1b5b358690..126f282816 100644
---- a/arch/arm/dts/stm32mp13-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
-@@ -86,6 +86,10 @@
- 	u-boot,dm-pre-reloc;
- };
- 
-+&rcc {
-+	u-boot,dm-pre-reloc;
-+};
-+
- &syscfg {
- 	u-boot,dm-pre-reloc;
- };
-diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
-index 950e172e45..fcb0af09b5 100644
---- a/arch/arm/dts/stm32mp131.dtsi
-+++ b/arch/arm/dts/stm32mp131.dtsi
-@@ -159,6 +159,13 @@
- 			dma-channels = <16>;
- 		};
- 
-+		rcc: rcc@50000000 {
-+			compatible = "st,stm32mp13-rcc", "syscon";
-+			reg = <0x50000000 0x1000>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+		};
-+
- 		exti: interrupt-controller@5000d000 {
- 			compatible = "st,stm32mp13-exti", "syscon";
- 			interrupt-controller;
--- 
-2.25.1
-
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

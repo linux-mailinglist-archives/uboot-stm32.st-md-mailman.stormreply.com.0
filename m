@@ -2,68 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 009ED521437
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 13:51:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1553052143F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 13:52:07 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC050C03FC0;
-	Tue, 10 May 2022 11:51:02 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D1C1EC035BF;
+	Tue, 10 May 2022 11:52:06 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7723BC035BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D5485C56630
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 May 2022 11:51:02 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24A91Gpx000318;
- Tue, 10 May 2022 13:50:58 +0200
+ Tue, 10 May 2022 11:52:05 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24AA2VIs032368;
+ Tue, 10 May 2022 13:52:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : from : to : cc : references : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=BeTMV36yOaSBou2pIXprBAccxSBLXEndeNWMr/+na0o=;
- b=2Lc9/5OaU+deWrVVQ/SjDjELOK0ImZ32FMcYFIfRJL5qdhQOblylgkwnMvm73X0bWjVO
- bD1v/+eOlsYVLUsSmeyglcbhlLdwiAwW8rY2uyAOGnLEw5/1BDZnbC+00/mHm9T9D6y2
- r1rmVAP/+D3gRMLoDbOVadbPI5BS6amCGTghRHx/+aHsesDH5urPn37i13Bwmqk2aVw5
- 3H5VQUC4nxtL+5a4x/wX5vmw4nRMULKeTiu7wACnGTRt8vXllbpUgDNJQvrwMgrcnT4W
- hts9jWvhJaDOf5MJwUu+nKcGEwPbCkn2miAS6vji8bEuLO3+ktYPTK9GlV+pDXIl6v6S FA== 
+ bh=otVdAjI/OSJzzKD16o1Zxy8XfBtoqaabx1IXqs2iN7Q=;
+ b=KE1OUpR9c523JEUsZZI8w3SmkZ+747gNwt92+VaOVdLJ5Gq4XDAkou1xKTc4b/TfV7KX
+ KeswEYtPP5CtIX7gRbfoSkBVTlB2pPhgkddzx4JUgwfEMJJZQFuh9Ch7mGXAovJEYYwm
+ HSGAMiCJUPd1Le0U5fQs081yE0JQPJ7YRa95yKGRYSKEdMrg3VXCN35iQJIYTznAuVSW
+ 3JVPVOfxY8ngBk+UN+2RTzZIUW6+G47wx8RbTzatUG+37Zkiads4dhEnEovs1WbTDYvw
+ RKAalppX5ECgAq+wszxI4su/9TQHJ/lCBj5KvofB1RiLQNf8gamQNe/Lu4SoRYsYdh7v bg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwe6kr64g-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwfnghurb-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 May 2022 13:50:58 +0200
+ Tue, 10 May 2022 13:52:02 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8211E100034;
- Tue, 10 May 2022 13:50:58 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C56B110002A;
+ Tue, 10 May 2022 13:52:01 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7AAB321BF4B;
- Tue, 10 May 2022 13:50:58 +0200 (CEST)
-Received: from [10.201.20.162] (10.75.127.45) by SHFDAG1NODE1.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BF0FF21BF4B;
+ Tue, 10 May 2022 13:52:01 +0200 (CEST)
+Received: from [10.201.20.162] (10.75.127.46) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 10 May
- 2022 13:50:58 +0200
-Message-ID: <eef7ed55-ebe4-f7fa-3cff-1842aaee90ee@foss.st.com>
-Date: Tue, 10 May 2022 13:50:57 +0200
+ 2022 13:52:01 +0200
+Message-ID: <153bde2f-1faa-c46d-f4f0-310942a826dd@foss.st.com>
+Date: Tue, 10 May 2022 13:52:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.1
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
- <20220426143736.1.I15bd7c3c8c983d6a6cec3d2ee371d75fe72fcd41@changeid>
- <ba65c436-1d9f-bce9-aa1d-cf8246ef6d46@foss.st.com>
- <35055a10-b07d-8478-c4ca-d98cb176c5f2@foss.st.com>
-In-Reply-To: <35055a10-b07d-8478-c4ca-d98cb176c5f2@foss.st.com>
-X-Originating-IP: [10.75.127.45]
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220422073900.15786-1-patrice.chotard@foss.st.com>
+ <53a81962-1ef9-3796-cae7-8072afd6af4c@foss.st.com>
+ <bd53472a-3406-954c-40db-0bc9ea7e9772@foss.st.com>
+ <93b168ef-5a2b-762a-3d59-726d15060f19@foss.st.com>
+In-Reply-To: <93b168ef-5a2b-762a-3d59-726d15060f19@foss.st.com>
+X-Originating-IP: [10.75.127.46]
 X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
  definitions=2022-05-10_01,2022-05-10_01,2022-02-23_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] phy: stm32-usbphyc: add counter of
- PLL consumer
+Subject: Re: [Uboot-stm32] [PATCH] phy: stm32-usbphyc: stm32-usbphyc: Add DT
+ phy tuning support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,182 +75,30 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-
-On 5/10/22 09:45, Patrice CHOTARD wrote:
-> 
-> 
-> On 5/6/22 16:18, Patrice CHOTARD wrote:
->> Hi Patrick
->>
->> On 4/26/22 14:37, Patrick Delaunay wrote:
->>> Add the counter of the PLL user n_pll_cons managed by the 2 functions
->>> stm32_usbphyc_pll_enable / stm32_usbphyc_pll_disable.
->>>
->>> This counter allow to remove the function stm32_usbphyc_is_init
->>> and it is a preliminary step for ck_usbo_48m introduction.
->>>
->>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> ---
->>>
->>>  drivers/phy/phy-stm32-usbphyc.c | 76 +++++++++++++++++++++------------
->>>  1 file changed, 48 insertions(+), 28 deletions(-)
->>>
->>> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
->>> index 9c1dcfae52..16c8799eca 100644
->>> --- a/drivers/phy/phy-stm32-usbphyc.c
->>> +++ b/drivers/phy/phy-stm32-usbphyc.c
->>> @@ -65,6 +65,7 @@ struct stm32_usbphyc {
->>>  		bool init;
->>>  		bool powered;
->>>  	} phys[MAX_PHYS];
->>> +	int n_pll_cons;
->>>  };
->>>  
->>>  static void stm32_usbphyc_get_pll_params(u32 clk_rate,
->>> @@ -124,18 +125,6 @@ static int stm32_usbphyc_pll_init(struct stm32_usbphyc *usbphyc)
->>>  	return 0;
->>>  }
->>>  
->>> -static bool stm32_usbphyc_is_init(struct stm32_usbphyc *usbphyc)
->>> -{
->>> -	int i;
->>> -
->>> -	for (i = 0; i < MAX_PHYS; i++) {
->>> -		if (usbphyc->phys[i].init)
->>> -			return true;
->>> -	}
->>> -
->>> -	return false;
->>> -}
->>> -
->>>  static bool stm32_usbphyc_is_powered(struct stm32_usbphyc *usbphyc)
->>>  {
->>>  	int i;
->>> @@ -148,18 +137,17 @@ static bool stm32_usbphyc_is_powered(struct stm32_usbphyc *usbphyc)
->>>  	return false;
->>>  }
->>>  
->>> -static int stm32_usbphyc_phy_init(struct phy *phy)
->>> +static int stm32_usbphyc_pll_enable(struct stm32_usbphyc *usbphyc)
->>>  {
->>> -	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
->>> -	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
->>>  	bool pllen = readl(usbphyc->base + STM32_USBPHYC_PLL) & PLLEN ?
->>>  		     true : false;
->>>  	int ret;
->>>  
->>> -	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
->>> -	/* Check if one phy port has already configured the pll */
->>> -	if (pllen && stm32_usbphyc_is_init(usbphyc))
->>> -		goto initialized;
->>> +	/* Check if one consumer has already configured the pll */
->>> +	if (pllen && usbphyc->n_pll_cons) {
->>> +		usbphyc->n_pll_cons++;
->>> +		return 0;
->>> +	}
->>>  
->>>  	if (usbphyc->vdda1v1) {
->>>  		ret = regulator_set_enable(usbphyc->vdda1v1, true);
->>> @@ -190,23 +178,19 @@ static int stm32_usbphyc_phy_init(struct phy *phy)
->>>  	if (!(readl(usbphyc->base + STM32_USBPHYC_PLL) & PLLEN))
->>>  		return -EIO;
->>>  
->>> -initialized:
->>> -	usbphyc_phy->init = true;
->>> +	usbphyc->n_pll_cons++;
->>>  
->>>  	return 0;
->>>  }
->>>  
->>> -static int stm32_usbphyc_phy_exit(struct phy *phy)
->>> +static int stm32_usbphyc_pll_disable(struct stm32_usbphyc *usbphyc)
->>>  {
->>> -	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
->>> -	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
->>>  	int ret;
->>>  
->>> -	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
->>> -	usbphyc_phy->init = false;
->>> +	usbphyc->n_pll_cons--;
->>>  
->>> -	/* Check if other phy port requires pllen */
->>> -	if (stm32_usbphyc_is_init(usbphyc))
->>> +	/* Check if other consumer requires pllen */
->>> +	if (usbphyc->n_pll_cons)
->>>  		return 0;
->>>  
->>>  	clrbits_le32(usbphyc->base + STM32_USBPHYC_PLL, PLLEN);
->>> @@ -235,6 +219,42 @@ static int stm32_usbphyc_phy_exit(struct phy *phy)
->>>  	return 0;
->>>  }
->>>  
->>> +static int stm32_usbphyc_phy_init(struct phy *phy)
->>> +{
->>> +	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
->>> +	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
->>> +	int ret;
->>> +
->>> +	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
->>> +	if (usbphyc_phy->init)
->>> +		return 0;
->>> +
->>> +	ret = stm32_usbphyc_pll_enable(usbphyc);
->>> +	if (ret)
->>> +		return log_ret(ret);
->>> +
->>> +	usbphyc_phy->init = true;
->>> +
->>> +	return 0;
->>> +}
->>> +
->>> +static int stm32_usbphyc_phy_exit(struct phy *phy)
->>> +{
->>> +	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
->>> +	struct stm32_usbphyc_phy *usbphyc_phy = usbphyc->phys + phy->id;
->>> +	int ret;
->>> +
->>> +	dev_dbg(phy->dev, "phy ID = %lu\n", phy->id);
->>> +	if (!usbphyc_phy->init)
->>> +		return 0;
->>> +
->>> +	ret = stm32_usbphyc_pll_disable(usbphyc);
->>> +
->>> +	usbphyc_phy->init = false;
->>> +
->>> +	return log_ret(ret);
->>> +}
->>> +
->>>  static int stm32_usbphyc_phy_power_on(struct phy *phy)
->>>  {
->>>  	struct stm32_usbphyc *usbphyc = dev_get_priv(phy->dev);
->> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>
->> Thanks
->> Patrice
-
-After discussion with Patrick, the whole series will not be merged in stm32 git custodian master branch
-
-Patrice
-
->> _______________________________________________
->> Uboot-stm32 mailing list
->> Uboot-stm32@st-md-mailman.stormreply.com
->> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-> Applied to u-boot-stm32
-> 
-> Thanks
-> Patrice
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+TXkgQmFkLCB0aGlzIHBhdGNoIGlzIG5vdCBjb25jZXJuZWQsIGkga2VlcCBpdCBtZXJnZWQgaW4g
+U1RNMzIgY3VzdG9kaWFuIG1hc3Rlci4KCk9uIDUvMTAvMjIgMTM6NTAsIFBhdHJpY2UgQ0hPVEFS
+RCB3cm90ZToKPiBBZnRlciBkaXNjdXNzaW9uIHdpdGggUGF0cmljaywgdGhlIHdob2xlIHNlcmll
+cyB3aWxsIG5vdCBiZSBtZXJnZWQgaW4gc3RtMzIgZ2l0IGN1c3RvZGlhbiBtYXN0ZXIgYnJhbmNo
+Cj4gCj4gUGF0cmljZQo+IAo+IE9uIDUvMTAvMjIgMTA6MTAsIFBhdHJpY2UgQ0hPVEFSRCB3cm90
+ZToKPj4KPj4KPj4gT24gNS82LzIyIDEwOjUwLCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+Pj4g
+SGkKPj4+Cj4+PiBPbiA0LzIyLzIyIDA5OjM5LCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4+Pj4g
+QWRkIHN1cHBvcnQgb2YgcGh5LXR1bmluZyBwcm9wZXJ0aWVzIGZvciBzbTMyLXVzYnBoeWMncyBw
+aHkgdHVuaW5nCj4+Pj4gYWxpZ25lZCB3aXRoIHY1LjE1IGtlcm5lbCBiaW5kaW5ncy4KPj4+Pgo+
+Pj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQGZvc3Mu
+c3QuY29tPgo+Pj4+IC0tLQo+Pj4+Cj4+Pj4gwqAgZHJpdmVycy9waHkvcGh5LXN0bTMyLXVzYnBo
+eWMuYyB8IDE2NyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+Pj4+IMKgIDEgZmls
+ZSBjaGFuZ2VkLCAxNjcgaW5zZXJ0aW9ucygrKQo+Pj4+Cj4+Pgo+Pj4gUmV2aWV3ZWQtYnk6IFBh
+dHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+Pgo+Pj4gVGhh
+bmtzCj4+PiBQYXRyaWNrCj4+Pgo+Pj4KPj4gQXBwbGllZCB0byB1LWJvb3Qtc3RtMzIKPj4KPj4g
+VGhhbmtzCj4+IFBhdHJpY2UKPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwo+IFVib290LXN0bTMyIG1haWxpbmcgbGlzdAo+IFVib290LXN0bTMyQHN0LW1k
+LW1haWxtYW4uc3Rvcm1yZXBseS5jb20KPiBodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBs
+eS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qt
+c3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4u
+c3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

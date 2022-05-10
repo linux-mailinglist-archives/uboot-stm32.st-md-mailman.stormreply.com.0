@@ -2,57 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7729520EC5
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 09:39:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFBE2520ED5
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 May 2022 09:42:32 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7C8C3C0D2BE;
-	Tue, 10 May 2022 07:39:05 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B2B36C035BD;
+	Tue, 10 May 2022 07:42:32 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0AB86C0D2BD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90FE7C035BC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 May 2022 07:39:04 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24A2HhsI014477;
- Tue, 10 May 2022 09:39:02 +0200
+ Tue, 10 May 2022 07:42:30 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24A6eF1k011337;
+ Tue, 10 May 2022 09:42:29 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : from : to : cc : references : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=aNRlE9cwpXNNVfo2hnysmR85Ubjy66o0PVq65a6aiDo=;
- b=vH7wVtkLsIY8DuLwha94Z96ep8gxu0EbeF7RftjDf9DLkOuY+BZ5CmKwqBKBG2hsCJpq
- ZN0QMfigpciHDKMN44uGJes89hWTDhZEPkFw50bParGkd51K8H/AVq9Sx8vxv7PizETF
- BXTJmzS/dZRs4XAQX5CoCzMHEc+JemDWlF3L4qqcorQUeFeZDf+eB0RZ+M/GM7ESUUC7
- OEKxF312SSRFr2kbU3asSYPPpDxsr1uxMJk10177UbGx5d+KeNIFuj7Zc8mugNl41gun
- ZKXeCsFOTF4irYNDUxXccDNC6jtXWsx39X5ZSL9QXPQCdgtO73Dod6kzByzn/u3FI7hZ 6Q== 
+ bh=dibngNHux1kNFAMNZm/EzHk+pJ9XanSBzSLwyAWbD00=;
+ b=Fq866/BlKwJhXbHhXVWo948QQyIuHDalbRKdoNQnMPjLQX4z2/JG0sJ8mjrqoTdGfb1F
+ AaKzx3iZhYfmTxCdRThgK3C3Rs4hLQ4nOfejVxxGSCxLIrkMe8PSrX+IFh+FRX1h4LsX
+ FvyQ5Xw45AjwD2hAOX1bslPMgFJiedovVeGcXfeVEllr7Yw4CMkFzgdZiTM/7YsFWIZv
+ Sjj6zylNaP3Czbf0jcM3U9pazzXb0lm4HneZPrnmQkq4e5rNuZ9yIWUTOKQ6LjWK7D59
+ cUbRkrBlKjstBvbDHWoU5zr3RKRmpkCR8dECZqvf3jIeXovq8a4BpRyz1som1WwfbU1T Tw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwg40x72a-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3fwe6kpkca-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 10 May 2022 09:39:02 +0200
+ Tue, 10 May 2022 09:42:29 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 58A7F10002A;
- Tue, 10 May 2022 09:39:02 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7D6D610002A;
+ Tue, 10 May 2022 09:42:28 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4F40B2128BB;
- Tue, 10 May 2022 09:39:02 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 71F072128CD;
+ Tue, 10 May 2022 09:42:28 +0200 (CEST)
 Received: from [10.201.20.162] (10.75.127.49) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 10 May
- 2022 09:39:01 +0200
-Message-ID: <245839a6-3e3f-0459-6b79-347361535eac@foss.st.com>
-Date: Tue, 10 May 2022 09:39:01 +0200
+ 2022 09:42:28 +0200
+Message-ID: <70d00262-cdb6-c709-9854-e80fc923bb26@foss.st.com>
+Date: Tue, 10 May 2022 09:42:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.1
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20220415144321.1.Ic7fcf7558ba1c08e031b54acd7b9f3544addb1d8@changeid>
- <834cd6d1-6ee4-9a11-ddc5-ef498dc33b58@foss.st.com>
- <664ece1e-b2cc-922d-8d58-94f70d2d1c3f@foss.st.com>
-In-Reply-To: <664ece1e-b2cc-922d-8d58-94f70d2d1c3f@foss.st.com>
+References: <20220415150041.1.I46d09f298319fd632eaee4cd8888d751b908f0e6@changeid>
+ <5530a10f-27ea-1172-1293-2c1f023370a1@foss.st.com>
+In-Reply-To: <5530a10f-27ea-1172-1293-2c1f023370a1@foss.st.com>
 X-Originating-IP: [10.75.127.49]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -61,8 +60,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2022-05-10_01,2022-05-09_02,2022-02-23_01
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32mp: skip ft_system_setup when
- the soc node is absent
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32mp: correctly handle Silicon
+ revision
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,49 +80,77 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 5/10/22 09:38, Patrice CHOTARD wrote:
-> I will fix the typo when applying this patch to u-boot-stm32 branch
+On 4/22/22 09:49, Patrice CHOTARD wrote:
+> Hi Patrick
 > 
+> On 4/15/22 15:00, Patrick Delaunay wrote:
+>> Handle correctly the silicon revision = REV_ID[15:0] of Device Version
+>> and the associated device marking, A to Z on STMicroelectronics STM32MP
+>> SOCs.
+>>
+>> This patch prepare the introduction of next STM32MP family,
+>> with STM32MP13x Rev.Z for REV_ID = 1.1.
+>>
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> ---
+>>
+>>  arch/arm/mach-stm32mp/cpu.c                    | 6 +++---
+>>  arch/arm/mach-stm32mp/include/mach/sys_proto.h | 9 +++++----
+>>  2 files changed, 8 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
+>> index 325d710100..0ad5f307db 100644
+>> --- a/arch/arm/mach-stm32mp/cpu.c
+>> +++ b/arch/arm/mach-stm32mp/cpu.c
+>> @@ -432,13 +432,13 @@ static void get_cpu_string_offsets(unsigned int *type, unsigned int *pkg,
+>>  
+>>  	/* Revision */
+>>  	switch (get_cpu_rev()) {
+>> -	case CPU_REVA:
+>> +	case CPU_REV1:
+>>  		*rev = 1;
+>>  		break;
+>> -	case CPU_REVB:
+>> +	case CPU_REV2:
+>>  		*rev = 2;
+>>  		break;
+>> -	case CPU_REVZ:
+>> +	case CPU_REV2_1:
+>>  		*rev = 3;
+>>  		break;
+>>  	default:
+>> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+>> index 4149d3a133..b91f98eb45 100644
+>> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+>> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+>> @@ -25,11 +25,12 @@ u32 get_cpu_type(void);
+>>  /* return CPU_DEV constants */
+>>  u32 get_cpu_dev(void);
+>>  
+>> -#define CPU_REVA	0x1000
+>> -#define CPU_REVB	0x2000
+>> -#define CPU_REVZ	0x2001
+>> +#define CPU_REV1	0x1000
+>> +#define CPU_REV1_1	0x1001
+>> +#define CPU_REV2	0x2000
+>> +#define CPU_REV2_1	0x2001
+>>  
+>> -/* return CPU_REV constants */
+>> +/* return Silicon revision = REV_ID[15:0] of Device Version */
+>>  u32 get_cpu_rev(void);
+>>  
+>>  /* Get Package options from OTP */
+> 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Thanks
 > Patrice
-> 
-> On 4/22/22 09:47, Patrice CHOTARD wrote:
->>
->>
->> On 4/15/22 14:43, Patrick Delaunay wrote:
->>> The function ft_system_setup should don't return an error when the
->>
->> s/should don't/shouldn't
->> with this fix you can had my reviewed-by
->>
->> Thanks
->>
->>> /soc node is absent in the provided device tree but just skip the
->>> updates.
->>>
->>> This patch solves an issue when the U-Boot pytest is executed on board.
->>>
->>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> ---
->>>
->>>  arch/arm/mach-stm32mp/fdt.c | 3 +++
->>>  1 file changed, 3 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-stm32mp/fdt.c b/arch/arm/mach-stm32mp/fdt.c
->>> index 91330a68a4..b1a4b76566 100644
->>> --- a/arch/arm/mach-stm32mp/fdt.c
->>> +++ b/arch/arm/mach-stm32mp/fdt.c
->>> @@ -260,6 +260,9 @@ int ft_system_setup(void *blob, struct bd_info *bd)
->>>  	char name[SOC_NAME_SIZE];
->>>  
->>>  	soc = fdt_path_offset(blob, "/soc");
->>> +	/* when absent, nothing to do */
->>> +	if (soc == -FDT_ERR_NOTFOUND)
->>> +		return 0;
->>>  	if (soc < 0)
->>>  		return soc;
->>>  
->>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+Applied to u-boot-stm32
 
 Thanks
 Patrice

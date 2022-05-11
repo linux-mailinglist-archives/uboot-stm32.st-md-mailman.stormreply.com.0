@@ -2,70 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A2B2523A8B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 May 2022 18:44:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F9F9523AAA
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 May 2022 18:48:21 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BE95AC03FC3;
-	Wed, 11 May 2022 16:44:23 +0000 (UTC)
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
- [209.85.160.175])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07DFFC03FC3;
+	Wed, 11 May 2022 16:48:21 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+ [209.85.222.169])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90593C035BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9D2CEC035BE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 May 2022 16:44:22 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id fu47so2422138qtb.5
+ Wed, 11 May 2022 16:48:19 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id a76so2684076qkg.12
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 May 2022 09:44:22 -0700 (PDT)
+ Wed, 11 May 2022 09:48:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=mR3v+XOMHDXL4v/SJZtfJ+YpdcF+fj8rNIeihTl174o=;
- b=OiusNln6NUMRqqmGCbKkTiUrDHTemhTUI7k6G3s2+uhdiiAcAI7po8BU8o6gyO7hM0
- hEi5QbIFRLn4CEmq3mrIDhIpSuqxdQ0m3XK9seU7w66hekvvvLkWwM6n/bH2s52SRXa2
- 6dtOUArPc/K64H2G/keMPwh/ZksGfQBLVxgREPO57Z3WoO9NjDFZFbj0RbKjFzrlrPXJ
- qiMARVMhipCZ3ruYL9Mje/qT3kj7h2rhIsHeZ8Xd7rwrbW/tJ0jnlbq1tJWFrNISdA44
- EEMe0vL+e+E91x1IIbF8ZAenCkaQuojZpKDNYbp8e1I46JXOrmm89a0IQ87TYX/qfdrk
- w/0w==
+ bh=o5+USrEQA8BpbzmuZc9XHkh1p/ezsrSCxNUTeZ3i3xc=;
+ b=F/iInwaw9DrPYzW5C3ExA1IcQpLWg6THuwbXQAueXhEX0n5Dtviq08/VC1sNJyVDEM
+ JrRSrqlSn51MlGxzaQnByV31sVvuc9Cd4ZPfoEWBaInZTRIv88eRpwK+AA443VVz8BgZ
+ 6YBo8Rk7ym5XMi73fVwvwV8zt2u9tI4+stI5MQaD7oKXu12fkGdG/HYp9uew+GU2vvmp
+ LpWtFYeV9JESvKF8Sq7sHeaE6YhDbppOC0WfleSYPO8QTVMmhzZSko7fp/233H9Ru3ex
+ ufN/OjmG2hZwU78NWCJXp1IpvLBSwlbg91KUSo39Z+pWVDxKnaA32lgv5MCV1Kqbkr3n
+ ehQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-language
  :content-transfer-encoding;
- bh=mR3v+XOMHDXL4v/SJZtfJ+YpdcF+fj8rNIeihTl174o=;
- b=dirZXFOJzYyqe6hw49chN8vw2pL/FCNTdCsuDXaj5CInY12crILmi2Hdc0gj65bGtY
- w/T9TRTLoK2PBYRePmVv++Y09VbLwI2xUb5RdKLC8t8nAwmW7UBDzc6iunykSNri9pO9
- 0bZr7GBvxMo2bObP3g8VJxkWVniimBQlO8UrQfzi0zuoEXcZB8MTNvH29/0Sly0eXV5y
- N4XcDPMoy5m+8IyzUTT7telwjNxWATzJLSh7OEiKHQubI70KqF36d9ayQxd14aOgtJg1
- IUuJzjFiObJ+oNIb1EbhsL+49D/88hHBRH2WcsKfosQzFvEJXKGWA6tQ+dlFSKqmyqr2
- YabA==
-X-Gm-Message-State: AOAM530x+8d72mtwDGDYDNNq1r/H4yRz4tUFhlI8gY02hD2aBJWFB1MM
- nviGG9JiSd1eZNMcYOWjJR4PYhkHdhA=
-X-Google-Smtp-Source: ABdhPJwwW9t8KBw/LCBafa1B2hzh6K4XRlgA4Xrcb95p2jw1/iTixaQfDXgb7QZ88V0wIo+AuHc/vg==
-X-Received: by 2002:ac8:5a86:0:b0:2f3:c9f8:3807 with SMTP id
- c6-20020ac85a86000000b002f3c9f83807mr23339768qtc.552.1652287461206; 
- Wed, 11 May 2022 09:44:21 -0700 (PDT)
+ bh=o5+USrEQA8BpbzmuZc9XHkh1p/ezsrSCxNUTeZ3i3xc=;
+ b=6mJ5yX0QX5kIjmoOgneZHq1JI8JWVx2bUHs8Lsrl3KOkB+N5uGBAsoBVHIhA35YF7K
+ kFMjK/ATNeun8135L0zYBBmenQ2qu3/2PhtxJJHY+MFelOvHiVjG93CJgDBxbfWZHB0N
+ FdL5fSI5Hm5Goqtdnrf0LN2m+ZqXhq9B0Eb/hnN7NtfKnAkmLjzGuiN469lr4OGOgseo
+ AbejnF+p9XmrwWXp+6CsayCRFUmbFeI3PXCNa6LOPEp4EamDZarBSf/wFZhpZ8pwUy6J
+ 9Ikmy4ArI5xdSbSRkE3A8hVCPMzPLkDcbSRPYRqLrdkiLdnqROOHtoHy1JSiHPdOjr09
+ GMPQ==
+X-Gm-Message-State: AOAM530igAu08vXMrt7pAWfqKLUthZhsmnta2lqhe+bnIFKbeF/4pONy
+ iFOh8vJcLFWSRO74KWvLQ1kcTU+FUNA=
+X-Google-Smtp-Source: ABdhPJy97hIB7OJp+7DoySgjmha2bJ+eZ72wrAQ6BhTUITj2KCUTpzcTkItHrAMNr8lmKXAXD2TxIg==
+X-Received: by 2002:a37:4242:0:b0:6a0:b27b:805a with SMTP id
+ p63-20020a374242000000b006a0b27b805amr9140625qka.580.1652287698220; 
+ Wed, 11 May 2022 09:48:18 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-18-248-138.washdc.fios.verizon.net.
  [108.18.248.138]) by smtp.googlemail.com with ESMTPSA id
- h7-20020a05620a10a700b0069fc13ce23csm1424280qkk.109.2022.05.11.09.44.20
+ 10-20020a05620a078a00b0069fc167df92sm1422133qka.82.2022.05.11.09.48.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 May 2022 09:44:20 -0700 (PDT)
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20220510075114.1238086-1-patrick.delaunay@foss.st.com>
+ Wed, 11 May 2022 09:48:17 -0700 (PDT)
+To: Amelie Delaunay <amelie.delaunay@foss.st.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20220426123750.579726-1-patrick.delaunay@foss.st.com>
+ <20220426143736.1.I15bd7c3c8c983d6a6cec3d2ee371d75fe72fcd41@changeid>
+ <27373592-d6c9-ff00-799b-a2f04f4500b1@gmail.com>
+ <0aeffe8a-b73a-5e3d-de89-9938d8d53150@foss.st.com>
+ <8776d357-028b-0d21-cb90-4cbdd73f4ffb@foss.st.com>
 From: Sean Anderson <seanga2@gmail.com>
-Message-ID: <41b170c1-99ba-18ac-4a94-01c90f67b97c@gmail.com>
-Date: Wed, 11 May 2022 12:44:20 -0400
+Message-ID: <78061a89-ab5e-af21-d02a-9deeece3e454@gmail.com>
+Date: Wed, 11 May 2022 12:48:17 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20220510075114.1238086-1-patrick.delaunay@foss.st.com>
+In-Reply-To: <8776d357-028b-0d21-cb90-4cbdd73f4ffb@foss.st.com>
 Content-Language: en-US
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>,
- Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH 0/4] stm32mp: add minimal RCC support for
-	STM32MP13
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/3] phy: stm32-usbphyc: add counter of
+	PLL consumer
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,40 +80,125 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
-
-On 5/10/22 3:51 AM, Patrick Delaunay wrote:
-> 
-> Add a minimal support for STM32MP13 RCC, the reset and clock controller
-> - update of the RCC MISC driver to bind the correct clock and reset driver
-> - reset driver, same than STM32MP15x = drivers/reset/stm32-reset.c
-> - clock driver, add a empty driver for STM32MP13x =
->    drivers/clk/stm32/clk-stm32mp13.c
-> - Add RCC node in SOC device tree with u-boot,dm-pre-reloc property
-> 
-> This serie is only a preliminary step for STM32MP13 clock and reset support
-> in U-Boot, based on Linux kernel binding introduced by [1] and it prepares
-> the next device tree alignment with Linux kernel.
-> 
-> The functional STMP13 clock driver based on CCF and on SCMI clocks
-> provided by OP-TEE and the clock and reset references in SOC device tree
-> will be pushed when the associated patches in [1] will be accepted.
-> 
-> [1] Introduction of STM32MP13 RCC driver (Reset Clock Controller)
->      https://lore.kernel.org/linux-arm-kernel/20220316131000.9874-1-gabriel.fernandez@foss.st.com/
-
-I'm not really sure what the purpose of this series is. Can you
-elaborate a bit on why we need a dummy clock driver? Why don't
-you just add the binding to the device tree without the associated
-driver?
-
---Sean
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gNS8xMC8yMiA1OjUxIEFNLCBBbWVsaWUgRGVsYXVuYXkgd3JvdGU6Cj4gSGkgUGF0cmljaywK
+PiBIaSBTZWFuLAo+IAo+IE9uIDUvOS8yMiAxNjozNywgUGF0cmljayBERUxBVU5BWSB3cm90ZToK
+Pj4gSGkgU2VhbiwKPj4KPj4gT24gNS84LzIyIDIwOjIxLCBTZWFuIEFuZGVyc29uIHdyb3RlOgo+
+Pj4gT24gNC8yNi8yMiA4OjM3IEFNLCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+Pj4+IEFkZCB0
+aGUgY291bnRlciBvZiB0aGUgUExMIHVzZXIgbl9wbGxfY29ucyBtYW5hZ2VkIGJ5IHRoZSAyIGZ1
+bmN0aW9ucwo+Pj4+IHN0bTMyX3VzYnBoeWNfcGxsX2VuYWJsZSAvIHN0bTMyX3VzYnBoeWNfcGxs
+X2Rpc2FibGUuCj4+Pj4KPj4+PiBUaGlzIGNvdW50ZXIgYWxsb3cgdG8gcmVtb3ZlIHRoZSBmdW5j
+dGlvbiBzdG0zMl91c2JwaHljX2lzX2luaXQKPj4+PiBhbmQgaXQgaXMgYSBwcmVsaW1pbmFyeSBz
+dGVwIGZvciBja191c2JvXzQ4bSBpbnRyb2R1Y3Rpb24uCj4+Pgo+Pj4gSXMgaXQgbmVjZXNzYXJ5
+IHRvIGRpc2FibGUgdGhpcyBjbG9jayBiZWZvcmUgYm9vdGluZyB0byBMaW51eD8gSWYgaXQgaXNu
+J3QsCj4+PiB0aGVuIHBlcmhhcHMgaXQgaXMgc2ltcGxlciB0byBqdXN0IG5vdCBkaXNhYmxlIHRo
+ZSBjbG9jay4KPj4+Cj4+PiAtLVNlYW4KPj4KPj4KPj4gTm8sIGl0IGlzIG5vdCBuZWNlc3Nhcnks
+IHdlIG9ubHkgbmVlZCB0byBlbmFibGUgdGhlIGNsb2NrIGZvciB0aGUgZmlyc3QgdXNlci4KPj4K
+Pj4gSSBjb3B5IHRoZSBjbG9jayBiZWhhdmlvciBmcm9tIGtlcm5lbCwKPj4KPj4gYnV0IEkgYWdy
+ZWUgdGhhdCBjYW4gYmUgc2ltcGxlci4KPj4KPj4KPj4gQW1lbGllIGFueSBub3RpY2UgYWJvdXQg
+dGhpcyBwb2ludCA/Cj4+Cj4+IERvIHlvdSBwcmVmZXIgdGhhdCBJIGtlcHQgdGhlIGJlaGF2aW9y
+IC0gc2FtZSBhcyBrZXJuZWwgZHJpdmVyIC0gb3IgSSBzaW1wbGlmeSB0aGUgVS1Cb290IGRyaXZl
+ciA/Cj4gCj4gSW4gY2FzZSB0aGUgUExMIGhhcyBub3QgYmVlbiBkaXNhYmxlZCBiZWZvcmUgS2Vy
+bmVsIGJvb3QsIHVzYnBoeWMgS2VybmVsIGRyaXZlciB3aWxsIHdhaXQgZm9yIHRoZSBQTEwgcHdl
+cmRvd24uCj4gVVNCIGNvdWxkIGFsc28gbm90IGJlaW5nIHVzZWQgaW4gS2VybmVsLCBzbyBQTEwg
+d291bGQgcmVtYWluIGVuYWJsZWQsIGFuZCB3b3VsZCB3YXN0ZSBwb3dlci4KPiBJIGFtIHJhdGhl
+ciBpbiBmYXZvciBvZiBkaXNhYmxpbmcgdGhlIFBMTC4KCkl0IHNob3VsZCBiZSBkaXNhYmxlZCBp
+ZiBjbGtfaWdub3JlX3VudXNlZCBpcyBub3QgaW4gdGhlIGtlcm5lbCBwYXJhbWV0ZXJzLAphcyBs
+b25nIGFzIExpbnV4IGlzIGFsc28gYXdhcmUgb2YgdGhlIGNsb2NrLgoKR2VuZXJhbGx5LCBJIHdv
+dWxkIGxpa2UgdG8gYXZvaWQgcmVmY291bnRpbmcgaWYgcG9zc2libGUuIE1hbnkgVS1Cb290CmRy
+aXZlcnMgZG8gbm90IGRpc2FibGUgdGhlaXIgY2xvY2tzIChiZWNhdXNlIHRoZXkgZG9uJ3QgZG8g
+YW55IGNsZWFudXApLApzbyB5b3UgY2FuIGVuZCB1cCB3aXRoIHRoZSBjbG9jayBzdGF5aW5nIG9u
+IGFueXdheS4KCi0tU2VhbgoKPiBSZWdhcmRzLAo+IEFtZWxpZQo+IAo+Pgo+Pgo+PiBQYXRyaWNr
+Cj4+Cj4+Cj4+Pgo+Pj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2su
+ZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+Pj4gLS0tCj4+Pj4KPj4+PiDCoCBkcml2ZXJzL3BoeS9w
+aHktc3RtMzItdXNicGh5Yy5jIHwgNzYgKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0t
+Cj4+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDQ4IGluc2VydGlvbnMoKyksIDI4IGRlbGV0aW9ucygt
+KQo+Pj4+Cj4+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcGh5L3BoeS1zdG0zMi11c2JwaHljLmMg
+Yi9kcml2ZXJzL3BoeS9waHktc3RtMzItdXNicGh5Yy5jCj4+Pj4gaW5kZXggOWMxZGNmYWU1Mi4u
+MTZjODc5OWVjYSAxMDA2NDQKPj4+PiAtLS0gYS9kcml2ZXJzL3BoeS9waHktc3RtMzItdXNicGh5
+Yy5jCj4+Pj4gKysrIGIvZHJpdmVycy9waHkvcGh5LXN0bTMyLXVzYnBoeWMuYwo+Pj4+IEBAIC02
+NSw2ICs2NSw3IEBAIHN0cnVjdCBzdG0zMl91c2JwaHljIHsKPj4+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgYm9vbCBpbml0Owo+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBib29sIHBvd2VyZWQ7Cj4+Pj4g
+wqDCoMKgwqDCoCB9IHBoeXNbTUFYX1BIWVNdOwo+Pj4+ICvCoMKgwqAgaW50IG5fcGxsX2NvbnM7
+Cj4+Pj4gwqAgfTsKPj4+PiDCoCDCoCBzdGF0aWMgdm9pZCBzdG0zMl91c2JwaHljX2dldF9wbGxf
+cGFyYW1zKHUzMiBjbGtfcmF0ZSwKPj4+PiBAQCAtMTI0LDE4ICsxMjUsNiBAQCBzdGF0aWMgaW50
+IHN0bTMyX3VzYnBoeWNfcGxsX2luaXQoc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMpCj4+
+Pj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4+PiDCoCB9Cj4+Pj4gwqAgLXN0YXRpYyBib29sIHN0
+bTMyX3VzYnBoeWNfaXNfaW5pdChzdHJ1Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YykKPj4+PiAt
+ewo+Pj4+IC3CoMKgwqAgaW50IGk7Cj4+Pj4gLQo+Pj4+IC3CoMKgwqAgZm9yIChpID0gMDsgaSA8
+IE1BWF9QSFlTOyBpKyspIHsKPj4+PiAtwqDCoMKgwqDCoMKgwqAgaWYgKHVzYnBoeWMtPnBoeXNb
+aV0uaW5pdCkKPj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gdHJ1ZTsKPj4+PiAt
+wqDCoMKgIH0KPj4+PiAtCj4+Pj4gLcKgwqDCoCByZXR1cm4gZmFsc2U7Cj4+Pj4gLX0KPj4+PiAt
+Cj4+Pj4gwqAgc3RhdGljIGJvb2wgc3RtMzJfdXNicGh5Y19pc19wb3dlcmVkKHN0cnVjdCBzdG0z
+Ml91c2JwaHljICp1c2JwaHljKQo+Pj4+IMKgIHsKPj4+PiDCoMKgwqDCoMKgIGludCBpOwo+Pj4+
+IEBAIC0xNDgsMTggKzEzNywxNyBAQCBzdGF0aWMgYm9vbCBzdG0zMl91c2JwaHljX2lzX3Bvd2Vy
+ZWQoc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMpCj4+Pj4gwqDCoMKgwqDCoCByZXR1cm4g
+ZmFsc2U7Cj4+Pj4gwqAgfQo+Pj4+IMKgIC1zdGF0aWMgaW50IHN0bTMyX3VzYnBoeWNfcGh5X2lu
+aXQoc3RydWN0IHBoeSAqcGh5KQo+Pj4+ICtzdGF0aWMgaW50IHN0bTMyX3VzYnBoeWNfcGxsX2Vu
+YWJsZShzdHJ1Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YykKPj4+PiDCoCB7Cj4+Pj4gLcKgwqDC
+oCBzdHJ1Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YyA9IGRldl9nZXRfcHJpdihwaHktPmRldik7
+Cj4+Pj4gLcKgwqDCoCBzdHJ1Y3Qgc3RtMzJfdXNicGh5Y19waHkgKnVzYnBoeWNfcGh5ID0gdXNi
+cGh5Yy0+cGh5cyArIHBoeS0+aWQ7Cj4+Pj4gwqDCoMKgwqDCoCBib29sIHBsbGVuID0gcmVhZGwo
+dXNicGh5Yy0+YmFzZSArIFNUTTMyX1VTQlBIWUNfUExMKSAmIFBMTEVOID8KPj4+PiDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHRydWUgOiBmYWxzZTsKPj4+PiDCoMKgwqDCoMKgIGludCBy
+ZXQ7Cj4+Pj4gwqAgLcKgwqDCoCBkZXZfZGJnKHBoeS0+ZGV2LCAicGh5IElEID0gJWx1XG4iLCBw
+aHktPmlkKTsKPj4+PiAtwqDCoMKgIC8qIENoZWNrIGlmIG9uZSBwaHkgcG9ydCBoYXMgYWxyZWFk
+eSBjb25maWd1cmVkIHRoZSBwbGwgKi8KPj4+PiAtwqDCoMKgIGlmIChwbGxlbiAmJiBzdG0zMl91
+c2JwaHljX2lzX2luaXQodXNicGh5YykpCj4+Pj4gLcKgwqDCoMKgwqDCoMKgIGdvdG8gaW5pdGlh
+bGl6ZWQ7Cj4+Pj4gK8KgwqDCoCAvKiBDaGVjayBpZiBvbmUgY29uc3VtZXIgaGFzIGFscmVhZHkg
+Y29uZmlndXJlZCB0aGUgcGxsICovCj4+Pj4gK8KgwqDCoCBpZiAocGxsZW4gJiYgdXNicGh5Yy0+
+bl9wbGxfY29ucykgewo+Pj4+ICvCoMKgwqDCoMKgwqDCoCB1c2JwaHljLT5uX3BsbF9jb25zKys7
+Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+Pj4+ICvCoMKgwqAgfQo+Pj4+IMKgIMKg
+wqDCoMKgwqAgaWYgKHVzYnBoeWMtPnZkZGExdjEpIHsKPj4+PiDCoMKgwqDCoMKgwqDCoMKgwqAg
+cmV0ID0gcmVndWxhdG9yX3NldF9lbmFibGUodXNicGh5Yy0+dmRkYTF2MSwgdHJ1ZSk7Cj4+Pj4g
+QEAgLTE5MCwyMyArMTc4LDE5IEBAIHN0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19waHlfaW5pdChz
+dHJ1Y3QgcGh5ICpwaHkpCj4+Pj4gwqDCoMKgwqDCoCBpZiAoIShyZWFkbCh1c2JwaHljLT5iYXNl
+ICsgU1RNMzJfVVNCUEhZQ19QTEwpICYgUExMRU4pKQo+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBy
+ZXR1cm4gLUVJTzsKPj4+PiDCoCAtaW5pdGlhbGl6ZWQ6Cj4+Pj4gLcKgwqDCoCB1c2JwaHljX3Bo
+eS0+aW5pdCA9IHRydWU7Cj4+Pj4gK8KgwqDCoCB1c2JwaHljLT5uX3BsbF9jb25zKys7Cj4+Pj4g
+wqAgwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4+PiDCoCB9Cj4+Pj4gwqAgLXN0YXRpYyBpbnQgc3Rt
+MzJfdXNicGh5Y19waHlfZXhpdChzdHJ1Y3QgcGh5ICpwaHkpCj4+Pj4gK3N0YXRpYyBpbnQgc3Rt
+MzJfdXNicGh5Y19wbGxfZGlzYWJsZShzdHJ1Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YykKPj4+
+PiDCoCB7Cj4+Pj4gLcKgwqDCoCBzdHJ1Y3Qgc3RtMzJfdXNicGh5YyAqdXNicGh5YyA9IGRldl9n
+ZXRfcHJpdihwaHktPmRldik7Cj4+Pj4gLcKgwqDCoCBzdHJ1Y3Qgc3RtMzJfdXNicGh5Y19waHkg
+KnVzYnBoeWNfcGh5ID0gdXNicGh5Yy0+cGh5cyArIHBoeS0+aWQ7Cj4+Pj4gwqDCoMKgwqDCoCBp
+bnQgcmV0Owo+Pj4+IMKgIC3CoMKgwqAgZGV2X2RiZyhwaHktPmRldiwgInBoeSBJRCA9ICVsdVxu
+IiwgcGh5LT5pZCk7Cj4+Pj4gLcKgwqDCoCB1c2JwaHljX3BoeS0+aW5pdCA9IGZhbHNlOwo+Pj4+
+ICvCoMKgwqAgdXNicGh5Yy0+bl9wbGxfY29ucy0tOwo+Pj4+IMKgIC3CoMKgwqAgLyogQ2hlY2sg
+aWYgb3RoZXIgcGh5IHBvcnQgcmVxdWlyZXMgcGxsZW4gKi8KPj4+PiAtwqDCoMKgIGlmIChzdG0z
+Ml91c2JwaHljX2lzX2luaXQodXNicGh5YykpCj4+Pj4gK8KgwqDCoCAvKiBDaGVjayBpZiBvdGhl
+ciBjb25zdW1lciByZXF1aXJlcyBwbGxlbiAqLwo+Pj4+ICvCoMKgwqAgaWYgKHVzYnBoeWMtPm5f
+cGxsX2NvbnMpCj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+Pj4+IMKgIMKgwqDC
+oMKgwqAgY2xyYml0c19sZTMyKHVzYnBoeWMtPmJhc2UgKyBTVE0zMl9VU0JQSFlDX1BMTCwgUExM
+RU4pOwo+Pj4+IEBAIC0yMzUsNiArMjE5LDQyIEBAIHN0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19w
+aHlfZXhpdChzdHJ1Y3QgcGh5ICpwaHkpCj4+Pj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKPj4+PiDC
+oCB9Cj4+Pj4gwqAgK3N0YXRpYyBpbnQgc3RtMzJfdXNicGh5Y19waHlfaW5pdChzdHJ1Y3QgcGh5
+ICpwaHkpCj4+Pj4gK3sKPj4+PiArwqDCoMKgIHN0cnVjdCBzdG0zMl91c2JwaHljICp1c2JwaHlj
+ID0gZGV2X2dldF9wcml2KHBoeS0+ZGV2KTsKPj4+PiArwqDCoMKgIHN0cnVjdCBzdG0zMl91c2Jw
+aHljX3BoeSAqdXNicGh5Y19waHkgPSB1c2JwaHljLT5waHlzICsgcGh5LT5pZDsKPj4+PiArwqDC
+oMKgIGludCByZXQ7Cj4+Pj4gKwo+Pj4+ICvCoMKgwqAgZGV2X2RiZyhwaHktPmRldiwgInBoeSBJ
+RCA9ICVsdVxuIiwgcGh5LT5pZCk7Cj4+Pj4gK8KgwqDCoCBpZiAodXNicGh5Y19waHktPmluaXQp
+Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+Pj4+ICsKPj4+PiArwqDCoMKgIHJldCA9
+IHN0bTMyX3VzYnBoeWNfcGxsX2VuYWJsZSh1c2JwaHljKTsKPj4+PiArwqDCoMKgIGlmIChyZXQp
+Cj4+Pj4gK8KgwqDCoMKgwqDCoMKgIHJldHVybiBsb2dfcmV0KHJldCk7Cj4+Pj4gKwo+Pj4+ICvC
+oMKgwqAgdXNicGh5Y19waHktPmluaXQgPSB0cnVlOwo+Pj4+ICsKPj4+PiArwqDCoMKgIHJldHVy
+biAwOwo+Pj4+ICt9Cj4+Pj4gKwo+Pj4+ICtzdGF0aWMgaW50IHN0bTMyX3VzYnBoeWNfcGh5X2V4
+aXQoc3RydWN0IHBoeSAqcGh5KQo+Pj4+ICt7Cj4+Pj4gK8KgwqDCoCBzdHJ1Y3Qgc3RtMzJfdXNi
+cGh5YyAqdXNicGh5YyA9IGRldl9nZXRfcHJpdihwaHktPmRldik7Cj4+Pj4gK8KgwqDCoCBzdHJ1
+Y3Qgc3RtMzJfdXNicGh5Y19waHkgKnVzYnBoeWNfcGh5ID0gdXNicGh5Yy0+cGh5cyArIHBoeS0+
+aWQ7Cj4+Pj4gK8KgwqDCoCBpbnQgcmV0Owo+Pj4+ICsKPj4+PiArwqDCoMKgIGRldl9kYmcocGh5
+LT5kZXYsICJwaHkgSUQgPSAlbHVcbiIsIHBoeS0+aWQpOwo+Pj4+ICvCoMKgwqAgaWYgKCF1c2Jw
+aHljX3BoeS0+aW5pdCkKPj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIDA7Cj4+Pj4gKwo+Pj4+
+ICvCoMKgwqAgcmV0ID0gc3RtMzJfdXNicGh5Y19wbGxfZGlzYWJsZSh1c2JwaHljKTsKPj4+PiAr
+Cj4+Pj4gK8KgwqDCoCB1c2JwaHljX3BoeS0+aW5pdCA9IGZhbHNlOwo+Pj4+ICsKPj4+PiArwqDC
+oMKgIHJldHVybiBsb2dfcmV0KHJldCk7Cj4+Pj4gK30KPj4+PiArCj4+Pj4gwqAgc3RhdGljIGlu
+dCBzdG0zMl91c2JwaHljX3BoeV9wb3dlcl9vbihzdHJ1Y3QgcGh5ICpwaHkpCj4+Pj4gwqAgewo+
+Pj4+IMKgwqDCoMKgwqAgc3RydWN0IHN0bTMyX3VzYnBoeWMgKnVzYnBoeWMgPSBkZXZfZ2V0X3By
+aXYocGh5LT5kZXYpOwo+Pj4+Cj4+PgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1t
+ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5
+LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

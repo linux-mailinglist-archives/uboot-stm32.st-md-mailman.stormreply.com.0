@@ -2,66 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C8DE522D24
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 May 2022 09:24:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2D0C523A7B
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 May 2022 18:40:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E6D90C03FC2;
-	Wed, 11 May 2022 07:24:09 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7BBC7C03FC3;
+	Wed, 11 May 2022 16:40:05 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+ [209.85.160.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C4C8C03FC1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A39ABC035BE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 May 2022 07:24:09 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24B6fC9c016362;
- Wed, 11 May 2022 09:24:06 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=ARjaZ/IcRXxmNlclRCSm2oMIAWiixWXrLS4fGz/93IE=;
- b=FBG2Ay1ryKREOBtpEfh6vkZz/qQ5k/qbRwlOOtjBNNo2im8D3T55UQNmovdGI1IaRhAP
- DhPoo5F5RNdq9RBvKNxTi76zz3xdcijpnmiSqrbZOV3sinPtKy+5LXS52t/pXmv1pfhw
- TPZa4Ieimaf2PpXhTxNebdq9SjQoEtUOl/nmIfX6ELPP6nXtZbfzoX2z+pgf7kEneweM
- DxdQTKRH1A56AGpUrn8g4w15X+OlZDmHJH9bYXqWLIBL8Gpbq0yKtLA2M4JGaDXrxKN+
- Y55D9Tfw5ahn8GIgaiV+C52sRSM0onFmDdJwacw6nyRTUZR1cJCdo2FjgBHtI7TOhNOP ag== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3g083hr8h1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 11 May 2022 09:24:06 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 096AA10002A;
- Wed, 11 May 2022 09:24:06 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 01A7D211F2F;
- Wed, 11 May 2022 09:24:06 +0200 (CEST)
-Received: from [10.201.20.162] (10.75.127.45) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 11 May
- 2022 09:24:05 +0200
-Message-ID: <50bc1097-8791-ae96-631b-abdc14962a01@foss.st.com>
-Date: Wed, 11 May 2022 09:24:05 +0200
+ Wed, 11 May 2022 16:40:03 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id fu47so2412284qtb.5
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 11 May 2022 09:40:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=rXZ5XE6r38cfYmV/ZlJZimdPmFe11X380z1Fj3bSwuA=;
+ b=UdRb3MgB85JzeVe6XLnO0dUD+oo4yQ0rFvvo4+SOUGeQ/nTPAUseesnL7+UWJoX7Ff
+ U3maIwu9+GrXfo3NsgG8qZEAn9Xyw/odja0xpx/DmxC0GJechX4V6BPiXs4N4IFU7pxX
+ f/2duWx2BccDm9fhtZH3243Zg5MAkKNlEjy3kJbdgb3QrHvsJ+8ocglLVAroaDUAf8Ho
+ OyqgIY9nSmDCiomF7ZucFKTiOK8J5nsaNSWS5/6lPLZdf8lC5SwXOHLikQcG2HYsB8zq
+ 38Y/7aYLgai7lLEkxZhiZU+xSOhdu4GrSqnl+aLXSRWHR0WzGnK0VQh6hP9IYNrsb+/5
+ 8Rtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=rXZ5XE6r38cfYmV/ZlJZimdPmFe11X380z1Fj3bSwuA=;
+ b=l6UjXjVeFxjepuaUlOAdjczQ9J+dX2enny6kvYwrG+zLBx80eMKufiERYTwzz6fpCY
+ DRg3v8P1dJ2d2E4CVyByCnR3z5SFiVMNseOsa+yWdBpz+JJZzIzUXtWsxJ6ds44+lIeU
+ 32q4/XjPVW+Al++fLG13a4MGI8gFwsT7XmWmOduLWKrziVYgUJVU8+jY/09Qed5hP0i/
+ m6jeJdfH1yxf6NQidMpKscMEoh5rmqzgF2ujBKe04cYn3XsEgjArNIny4ni6Hli6c+oP
+ +emQplYFUE7NvSzxzwjollCMXKaqOAYCVZN9qZzXP6sYiICJ5soMPhyM8+urOks4L7n4
+ CxiQ==
+X-Gm-Message-State: AOAM530dtoewg/L9WSWJN85rfbB4XC86Ep9/zj99yBUwstNWRqTLnc9G
+ U+k2Lk/loHrd53OwvKND9x66cUX+GNE=
+X-Google-Smtp-Source: ABdhPJyWkc46usUmHZA1NZrHPgFrJwhPy2cP5I1TrUkYveRIAqnQzJbeQkxJv7e6oxyFkPZkZFV5tw==
+X-Received: by 2002:ac8:59d3:0:b0:2f3:d7ee:2b54 with SMTP id
+ f19-20020ac859d3000000b002f3d7ee2b54mr16042505qtf.290.1652287202111; 
+ Wed, 11 May 2022 09:40:02 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-18-248-138.washdc.fios.verizon.net.
+ [108.18.248.138]) by smtp.googlemail.com with ESMTPSA id
+ h197-20020a379ece000000b0069fc13ce227sm1416865qke.88.2022.05.11.09.40.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 May 2022 09:40:01 -0700 (PDT)
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20220510075114.1238086-1-patrick.delaunay@foss.st.com>
+ <20220510095041.1.Ieec76f320c9cc6885d7b519dffddff9ad4c97b59@changeid>
+From: Sean Anderson <seanga2@gmail.com>
+Message-ID: <bd624113-dc28-eb83-35af-c1366b0595e1@gmail.com>
+Date: Wed, 11 May 2022 12:40:01 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
+In-Reply-To: <20220510095041.1.Ieec76f320c9cc6885d7b519dffddff9ad4c97b59@changeid>
 Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20220509171309.1.Ie4f29021d76802af1c22e1df1a6a55ae6a5f55d9@changeid>
- <20220509171309.2.I3679840747612f44044942f225f344af9a26dcfd@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20220509171309.2.I3679840747612f44044942f225f344af9a26dcfd@changeid>
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-11_02,2022-05-10_01,2022-02-23_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Patrick Delaunay <patrick.delaunay@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] stm32mp: fdt: update etzpc for
-	STM32MP13x
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>,
+ Lukasz Majewski <lukma@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 1/4] clk: Add directory for STM32 clock
+	drivers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,218 +77,166 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
-
-On 5/9/22 17:13, Patrick Delaunay wrote:
-> Add support of STM32MP13x the ETZPC part of fdt.c
+On 5/10/22 3:51 AM, Patrick Delaunay wrote:
+> Add a directory in drivers/clk to regroup the clock drivers for all
+> STM32 Soc with CONFIG_ARCH_STM32 (MCUs with cortex M) or
+> CONFIG_ARCH_STM32MP (MPUs with cortex A).
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/fdt.c | 153 +++++++++++++++++++++++++++++++++++-
->  1 file changed, 151 insertions(+), 2 deletions(-)
+>   MAINTAINERS                            |  2 +-
+>   drivers/clk/Kconfig                    | 17 +----------------
+>   drivers/clk/Makefile                   |  5 ++---
+>   drivers/clk/stm32/Kconfig              | 23 +++++++++++++++++++++++
+>   drivers/clk/stm32/Makefile             |  7 +++++++
+>   drivers/clk/{ => stm32}/clk_stm32f.c   |  0
+>   drivers/clk/{ => stm32}/clk_stm32h7.c  |  0
+>   drivers/clk/{ => stm32}/clk_stm32mp1.c |  0
+>   8 files changed, 34 insertions(+), 20 deletions(-)
+>   create mode 100644 drivers/clk/stm32/Kconfig
+>   create mode 100644 drivers/clk/stm32/Makefile
+>   rename drivers/clk/{ => stm32}/clk_stm32f.c (100%)
+>   rename drivers/clk/{ => stm32}/clk_stm32h7.c (100%)
+>   rename drivers/clk/{ => stm32}/clk_stm32mp1.c (100%)
 > 
-> diff --git a/arch/arm/mach-stm32mp/fdt.c b/arch/arm/mach-stm32mp/fdt.c
-> index 5d37a44d97..bf2ef66034 100644
-> --- a/arch/arm/mach-stm32mp/fdt.c
-> +++ b/arch/arm/mach-stm32mp/fdt.c
-> @@ -28,12 +28,119 @@
->  
->  #define ETZPC_RESERVED		0xffffffff
->  
-> +#define STM32MP13_FDCAN_BASE	0x4400F000
-> +#define STM32MP13_ADC1_BASE	0x48003000
-> +#define STM32MP13_TSC_BASE	0x5000B000
-> +#define STM32MP13_CRYP_BASE	0x54002000
-> +#define STM32MP13_ETH2_BASE	0x5800E000
-> +#define STM32MP13_DCMIPP_BASE	0x5A000000
-> +#define STM32MP13_LTDC_BASE	0x5A010000
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 56be0bfad0..3f37edd716 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -469,7 +469,7 @@ S:	Maintained
+>   F:	arch/arm/mach-stm32mp/
+>   F:	doc/board/st/
+>   F:	drivers/adc/stm32-adc*
+> -F:	drivers/clk/clk_stm32mp1.c
+> +F:	drivers/clk/stm32/
+>   F:	drivers/gpio/stm32_gpio.c
+>   F:	drivers/hwspinlock/stm32_hwspinlock.c
+>   F:	drivers/i2c/stm32f7_i2c.c
+> diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+> index 6dc271f71b..98ad481d9e 100644
+> --- a/drivers/clk/Kconfig
+> +++ b/drivers/clk/Kconfig
+> @@ -140,22 +140,6 @@ config CLK_SCMI
+>   	  by a SCMI agent based on SCMI clock protocol communication
+>   	  with a SCMI server.
+>   
+> -config CLK_STM32F
+> -	bool "Enable clock driver support for STM32F family"
+> -	depends on CLK && (STM32F7 || STM32F4)
+> -	default y
+> -	help
+> -	  This clock driver adds support for RCC clock management
+> -	  for STM32F4 and STM32F7 SoCs.
+> -
+> -config CLK_STM32MP1
+> -	bool "Enable RCC clock driver for STM32MP1"
+> -	depends on ARCH_STM32MP && CLK
+> -	default y
+> -	help
+> -	  Enable the STM32 clock (RCC) driver. Enable support for
+> -	  manipulating STM32MP1's on-SoC clocks.
+> -
+>   config CLK_HSDK
+>   	bool "Enable cgu clock driver for HSDK boards"
+>   	depends on CLK && TARGET_HSDK
+> @@ -225,6 +209,7 @@ source "drivers/clk/owl/Kconfig"
+>   source "drivers/clk/renesas/Kconfig"
+>   source "drivers/clk/sunxi/Kconfig"
+>   source "drivers/clk/sifive/Kconfig"
+> +source "drivers/clk/stm32/Kconfig"
+>   source "drivers/clk/tegra/Kconfig"
+>   source "drivers/clk/ti/Kconfig"
+>   source "drivers/clk/uniphier/Kconfig"
+> diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+> index bb4eee5d99..09fbaf6233 100644
+> --- a/drivers/clk/Makefile
+> +++ b/drivers/clk/Makefile
+> @@ -22,6 +22,8 @@ obj-$(CONFIG_ARCH_MESON) += meson/
+>   obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
+>   obj-$(CONFIG_ARCH_ROCKCHIP) += rockchip/
+>   obj-$(CONFIG_ARCH_SOCFPGA) += altera/
+> +obj-$(CONFIG_ARCH_STM32) += stm32/
+> +obj-$(CONFIG_ARCH_STM32MP) += stm32/
+>   obj-$(CONFIG_ARCH_SUNXI) += sunxi/
+>   obj-$(CONFIG_CLK_AT91) += at91/
+>   obj-$(CONFIG_CLK_BCM6345) += clk_bcm6345.o
+> @@ -38,8 +40,6 @@ obj-$(CONFIG_CLK_OWL) += owl/
+>   obj-$(CONFIG_CLK_RENESAS) += renesas/
+>   obj-$(CONFIG_CLK_SCMI) += clk_scmi.o
+>   obj-$(CONFIG_CLK_SIFIVE) += sifive/
+> -obj-$(CONFIG_CLK_STM32F) += clk_stm32f.o
+> -obj-$(CONFIG_CLK_STM32MP1) += clk_stm32mp1.o
+>   obj-$(CONFIG_CLK_UNIPHIER) += uniphier/
+>   obj-$(CONFIG_CLK_VERSACLOCK) += clk_versaclock.o
+>   obj-$(CONFIG_CLK_VERSAL) += clk_versal.o
+> @@ -52,4 +52,3 @@ obj-$(CONFIG_MACH_PIC32) += clk_pic32.o
+>   obj-$(CONFIG_SANDBOX_CLK_CCF) += clk_sandbox_ccf.o
+>   obj-$(CONFIG_SANDBOX) += clk_sandbox.o
+>   obj-$(CONFIG_SANDBOX) += clk_sandbox_test.o
+> -obj-$(CONFIG_STM32H7) += clk_stm32h7.o
+> diff --git a/drivers/clk/stm32/Kconfig b/drivers/clk/stm32/Kconfig
+> new file mode 100644
+> index 0000000000..eac3fc1e9d
+> --- /dev/null
+> +++ b/drivers/clk/stm32/Kconfig
+> @@ -0,0 +1,23 @@
+> +config CLK_STM32F
+> +	bool "Enable clock driver support for STM32F family"
+> +	depends on CLK && (STM32F7 || STM32F4)
+> +	default y
+> +	help
+> +	  This clock driver adds support for RCC clock management
+> +	  for STM32F4 and STM32F7 SoCs.
 > +
->  #define STM32MP15_FDCAN_BASE	0x4400e000
->  #define STM32MP15_CRYP2_BASE	0x4c005000
->  #define STM32MP15_CRYP1_BASE	0x54001000
->  #define STM32MP15_GPU_BASE	0x59000000
->  #define STM32MP15_DSI_BASE	0x5a000000
->  
-> +static const u32 stm32mp13_ip_addr[] = {
-> +	0x50025000,		/* 0 VREFBUF APB3 */
-> +	0x50021000,		/* 1 LPTIM2 APB3 */
-> +	0x50022000,		/* 2 LPTIM3 APB3 */
-> +	STM32MP13_LTDC_BASE,	/* 3 LTDC APB4 */
-> +	STM32MP13_DCMIPP_BASE,	/* 4 DCMIPP APB4 */
-> +	0x5A006000,		/* 5 USBPHYCTRL APB4 */
-> +	0x5A003000,		/* 6 DDRCTRLPHY APB4 */
-> +	ETZPC_RESERVED,		/* 7 Reserved*/
-> +	ETZPC_RESERVED,		/* 8 Reserved*/
-> +	ETZPC_RESERVED,		/* 9 Reserved*/
-> +	0x5C006000,		/* 10 TZC APB5 */
-> +	0x58001000,		/* 11 MCE APB5 */
-> +	0x5C000000,		/* 12 IWDG1 APB5 */
-> +	0x5C008000,		/* 13 STGENC APB5 */
-> +	ETZPC_RESERVED,		/* 14 Reserved*/
-> +	ETZPC_RESERVED,		/* 15 Reserved*/
-> +	0x4C000000,		/* 16 USART1 APB6 */
-> +	0x4C001000,		/* 17 USART2 APB6 */
-> +	0x4C002000,		/* 18 SPI4 APB6 */
-> +	0x4C003000,		/* 19 SPI5 APB6 */
-> +	0x4C004000,		/* 20 I2C3 APB6 */
-> +	0x4C005000,		/* 21 I2C4 APB6 */
-> +	0x4C006000,		/* 22 I2C5 APB6 */
-> +	0x4C007000,		/* 23 TIM12 APB6 */
-> +	0x4C008000,		/* 24 TIM13 APB6 */
-> +	0x4C009000,		/* 25 TIM14 APB6 */
-> +	0x4C00A000,		/* 26 TIM15 APB6 */
-> +	0x4C00B000,		/* 27 TIM16 APB6 */
-> +	0x4C00C000,		/* 28 TIM17 APB6 */
-> +	ETZPC_RESERVED,		/* 29 Reserved*/
-> +	ETZPC_RESERVED,		/* 30 Reserved*/
-> +	ETZPC_RESERVED,		/* 31 Reserved*/
-> +	STM32MP13_ADC1_BASE,	/* 32 ADC1 AHB2 */
-> +	0x48004000,		/* 33 ADC2 AHB2 */
-> +	0x49000000,		/* 34 OTG AHB2 */
-> +	ETZPC_RESERVED,		/* 35 Reserved*/
-> +	ETZPC_RESERVED,		/* 36 Reserved*/
-> +	STM32MP13_TSC_BASE,	/* 37 TSC AHB4 */
-> +	ETZPC_RESERVED,		/* 38 Reserved*/
-> +	ETZPC_RESERVED,		/* 39 Reserved*/
-> +	0x54004000,		/* 40 RNG AHB5 */
-> +	0x54003000,		/* 41 HASH AHB5 */
-> +	STM32MP13_CRYP_BASE,	/* 42 CRYPT AHB5 */
-> +	0x54005000,		/* 43 SAES AHB5 */
-> +	0x54006000,		/* 44 PKA AHB5 */
-> +	0x54000000,		/* 45 BKPSRAM AHB5 */
-> +	ETZPC_RESERVED,		/* 46 Reserved*/
-> +	ETZPC_RESERVED,		/* 47 Reserved*/
-> +	0x5800A000,		/* 48 ETH1 AHB6 */
-> +	STM32MP13_ETH2_BASE,	/* 49 ETH2 AHB6 */
-> +	0x58005000,		/* 50 SDMMC1 AHB6 */
-> +	0x58007000,		/* 51 SDMMC2 AHB6 */
-> +	ETZPC_RESERVED,		/* 52 Reserved*/
-> +	ETZPC_RESERVED,		/* 53 Reserved*/
-> +	0x58002000,		/* 54 FMC AHB6 */
-> +	0x58003000,		/* 55 QSPI AHB6 */
-> +	ETZPC_RESERVED,		/* 56 Reserved*/
-> +	ETZPC_RESERVED,		/* 57 Reserved*/
-> +	ETZPC_RESERVED,		/* 58 Reserved*/
-> +	ETZPC_RESERVED,		/* 59 Reserved*/
-> +	0x30000000,		/* 60 SRAM1 MLAHB */
-> +	0x30004000,		/* 61 SRAM2 MLAHB */
-> +	0x30006000,		/* 62 SRAM3 MLAHB */
-> +	ETZPC_RESERVED,		/* 63 Reserved*/
-> +	ETZPC_RESERVED,		/* 64 Reserved*/
-> +	ETZPC_RESERVED,		/* 65 Reserved*/
-> +	ETZPC_RESERVED,		/* 66 Reserved*/
-> +	ETZPC_RESERVED,		/* 67 Reserved*/
-> +	ETZPC_RESERVED,		/* 68 Reserved*/
-> +	ETZPC_RESERVED,		/* 69 Reserved*/
-> +	ETZPC_RESERVED,		/* 70 Reserved*/
-> +	ETZPC_RESERVED,		/* 71 Reserved*/
-> +	ETZPC_RESERVED,		/* 72 Reserved*/
-> +	ETZPC_RESERVED,		/* 73 Reserved*/
-> +	ETZPC_RESERVED,		/* 74 Reserved*/
-> +	ETZPC_RESERVED,		/* 75 Reserved*/
-> +	ETZPC_RESERVED,		/* 76 Reserved*/
-> +	ETZPC_RESERVED,		/* 77 Reserved*/
-> +	ETZPC_RESERVED,		/* 78 Reserved*/
-> +	ETZPC_RESERVED,		/* 79 Reserved*/
-> +	ETZPC_RESERVED,		/* 80 Reserved*/
-> +	ETZPC_RESERVED,		/* 81 Reserved*/
-> +	ETZPC_RESERVED,		/* 82 Reserved*/
-> +	ETZPC_RESERVED,		/* 83 Reserved*/
-> +	ETZPC_RESERVED,		/* 84 Reserved*/
-> +	ETZPC_RESERVED,		/* 85 Reserved*/
-> +	ETZPC_RESERVED,		/* 86 Reserved*/
-> +	ETZPC_RESERVED,		/* 87 Reserved*/
-> +	ETZPC_RESERVED,		/* 88 Reserved*/
-> +	ETZPC_RESERVED,		/* 89 Reserved*/
-> +	ETZPC_RESERVED,		/* 90 Reserved*/
-> +	ETZPC_RESERVED,		/* 91 Reserved*/
-> +	ETZPC_RESERVED,		/* 92 Reserved*/
-> +	ETZPC_RESERVED,		/* 93 Reserved*/
-> +	ETZPC_RESERVED,		/* 94 Reserved*/
-> +	ETZPC_RESERVED,		/* 95 Reserved*/
-> +};
+> +config CLK_STM32H7
+> +	bool "Enable clock driver support for STM32H7 family"
+> +	depends on CLK && STM32H7
+> +	default y
+> +	help
+> +	  This clock driver adds support for RCC clock management
+> +	  for STM32H7 SoCs.
 > +
->  static const u32 stm32mp15_ip_addr[] = {
->  	0x5c008000,	/* 00 stgenc */
->  	0x54000000,	/* 01 bkpsram */
-> @@ -163,8 +270,10 @@ static int stm32_fdt_fixup_etzpc(void *fdt, int soc_node)
->  	int offset, shift;
->  	u32 addr, status, decprot[ETZPC_DECPROT_NB];
->  
-> -	if (IS_ENABLED(CONFIG_STM32MP13x))
-> -		return 0;
-> +	if (IS_ENABLED(CONFIG_STM32MP13x)) {
-> +		array = stm32mp13_ip_addr;
-> +		array_size = ARRAY_SIZE(stm32mp13_ip_addr);
-> +	}
->  
->  	if (IS_ENABLED(CONFIG_STM32MP15x)) {
->  		array = stm32mp15_ip_addr;
-> @@ -253,6 +362,43 @@ static void stm32_fdt_disable_optee(void *blob)
->  	}
->  }
->  
-> +static void stm32mp13_fdt_fixup(void *blob, int soc, u32 cpu, char *name)
-> +{
-> +	switch (cpu) {
-> +	case CPU_STM32MP131Fxx:
-> +	case CPU_STM32MP131Dxx:
-> +	case CPU_STM32MP131Cxx:
-> +	case CPU_STM32MP131Axx:
-> +		stm32_fdt_disable(blob, soc, STM32MP13_FDCAN_BASE, "can", name);
-> +		stm32_fdt_disable(blob, soc, STM32MP13_ADC1_BASE, "adc", name);
-> +		fallthrough;
-> +	case CPU_STM32MP133Fxx:
-> +	case CPU_STM32MP133Dxx:
-> +	case CPU_STM32MP133Cxx:
-> +	case CPU_STM32MP133Axx:
-> +		stm32_fdt_disable(blob, soc, STM32MP13_LTDC_BASE, "ltdc", name);
-> +		stm32_fdt_disable(blob, soc, STM32MP13_DCMIPP_BASE, "dcmipp",
-> +				  name);
-> +		stm32_fdt_disable(blob, soc, STM32MP13_TSC_BASE, "tsc", name);
-> +		break;
-> +	default:
-> +		break;
-> +	}
+> +config CLK_STM32MP1
+> +	bool "Enable RCC clock driver for STM32MP15"
+> +	depends on ARCH_STM32MP && CLK
+> +	default y if STM32MP15x
+> +	help
+> +	  Enable the STM32 clock (RCC) driver. Enable support for
+> +	  manipulating STM32MP15's on-SoC clocks.
+> diff --git a/drivers/clk/stm32/Makefile b/drivers/clk/stm32/Makefile
+> new file mode 100644
+> index 0000000000..b420eeaa4e
+> --- /dev/null
+> +++ b/drivers/clk/stm32/Makefile
+> @@ -0,0 +1,7 @@
+> +# SPDX-License-Identifier: GPL-2.0-or-later
+> +#
+> +# Copyright (C) 2022, STMicroelectronics - All Rights Reserved
 > +
-> +	switch (cpu) {
-> +	case CPU_STM32MP135Dxx:
-> +	case CPU_STM32MP135Axx:
-> +	case CPU_STM32MP133Dxx:
-> +	case CPU_STM32MP133Axx:
-> +	case CPU_STM32MP131Dxx:
-> +	case CPU_STM32MP131Axx:
-> +		stm32_fdt_disable(blob, soc, STM32MP13_CRYP_BASE, "cryp", name);
-> +		break;
-> +	default:
-> +		break;
-> +	}
-> +}
-> +
->  static void stm32mp15_fdt_fixup(void *blob, int soc, u32 cpu, char *name)
->  {
->  	u32 pkg;
-> @@ -342,6 +488,9 @@ int ft_system_setup(void *blob, struct bd_info *bd)
->  	cpu = get_cpu_type();
->  	get_soc_name(name);
->  
-> +	if (IS_ENABLED(CONFIG_STM32MP13x))
-> +		stm32mp13_fdt_fixup(blob, soc, cpu, name);
-> +
->  	if (IS_ENABLED(CONFIG_STM32MP15x)) {
->  		stm32mp15_fdt_fixup(blob, soc, cpu, name);
->  
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> +obj-$(CONFIG_CLK_STM32F) += clk_stm32f.o
+> +obj-$(CONFIG_CLK_STM32H7) += clk_stm32h7.o
+> +obj-$(CONFIG_CLK_STM32MP1) += clk_stm32mp1.o
+> diff --git a/drivers/clk/clk_stm32f.c b/drivers/clk/stm32/clk_stm32f.c
+> similarity index 100%
+> rename from drivers/clk/clk_stm32f.c
+> rename to drivers/clk/stm32/clk_stm32f.c
+> diff --git a/drivers/clk/clk_stm32h7.c b/drivers/clk/stm32/clk_stm32h7.c
+> similarity index 100%
+> rename from drivers/clk/clk_stm32h7.c
+> rename to drivers/clk/stm32/clk_stm32h7.c
+> diff --git a/drivers/clk/clk_stm32mp1.c b/drivers/clk/stm32/clk_stm32mp1.c
+> similarity index 100%
+> rename from drivers/clk/clk_stm32mp1.c
+> rename to drivers/clk/stm32/clk_stm32mp1.c
+> 
 
-Thanks
-Patrice
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

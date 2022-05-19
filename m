@@ -2,75 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DBF1D52B296
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 May 2022 08:47:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F1C852CC7D
+	for <lists+uboot-stm32@lfdr.de>; Thu, 19 May 2022 09:07:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A706DC03FC9;
-	Wed, 18 May 2022 06:47:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4E39C03FCC;
+	Thu, 19 May 2022 07:07:38 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D1821C035BD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 62F6AC03FC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 May 2022 06:47:09 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24I4MVVj005786;
- Wed, 18 May 2022 08:46:53 +0200
+ Thu, 19 May 2022 07:07:36 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 24J4ZAMp021908;
+ Thu, 19 May 2022 09:07:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=selector1;
- bh=xQCGUw3oAk+kL4rFKAqo8c1MKNtPaBQktGPdUWMp8fI=;
- b=q+fcxusDRkn3BmiA1LkvC+glJuektBr4tfKrAx1i5acsAen0fTFnngAw4MlAagTgj3DG
- NIj0yngPyVwPDDY+2Oi+a13Sg6C0rE1j4S/2oAnx3ysJ//uAdUichfKOkYezDzpC7z7l
- WUqONiksCZhka4xKzFvs+Sph7DaiMcNvO+zr8eYWMO8HmNJaxnehyYlZicp0Dl7EKi/Q
- 0RTXgAW0WJdbPQNkQ6jcFSGLCaR95TGAKA7kt9Bq/qmYvV0OONDXi8T2AH/9qpbjADxE
- 0H/mO/0lQubEHYBYEGaOFyO/VXS4YyptYHrsSxYPBKZDIdhFmwylVs1U35Retd5fvIFS Sw== 
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=D1MXTarB9LTM0x9tpFDsU4iqFB5eA5g8ERqa86decxk=;
+ b=EgqBu1hEUd/IzR9KsT/yc3C7B8gjzObfePMPJYEKSGdileEmxBByRCjTRrEKIS1TAKMe
+ F/nX3nc+MMnaP5Vy98zNFQpOQZoiebEXG98N1b8sx3dRao0Ay7cnfNaT1dog8iFTgeHS
+ wEXBu9DcH/5jn3P0u6r9xzrIAsATw3cPU0Vc03spnJCT1bdJA6HYSaDi6AC+OEu9iIk0
+ SJtxwUh2c2fL6f0t2DDWPbUdvybRvH/SuV5DYfa6mVdHf0SjSoZzaJgCOs440J4oH2mx
+ dgbEwvuKGYw46gJXe3hz/2AL7fy41/zPNUC5kV27ce75b+btiMjE9Y2aGtQra0XYl9Jz Mw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3g21j8yc4p-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3g21um3yd4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 18 May 2022 08:46:53 +0200
+ Thu, 19 May 2022 09:07:34 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6D9E1100034;
- Wed, 18 May 2022 08:46:52 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5C90D20FA5C;
- Wed, 18 May 2022 08:46:52 +0200 (CEST)
-Received: from localhost (10.75.127.45) by SHFDAG1NODE1.st.com (10.75.129.69)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2A30F100034;
+ Thu, 19 May 2022 09:07:34 +0200 (CEST)
+Received: from Webmail-eu.st.com (eqndag1node6.st.com [10.75.129.135])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 115392122F0;
+ Thu, 19 May 2022 09:07:34 +0200 (CEST)
+Received: from localhost (10.75.127.49) by EQNDAG1NODE6.st.com (10.75.129.135)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 18 May
- 2022 08:46:52 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Thu, 19 May
+ 2022 09:07:33 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 18 May 2022 08:46:48 +0200
-Message-ID: <20220518064648.1843664-4-patrice.chotard@foss.st.com>
+Date: Thu, 19 May 2022 09:07:29 +0200
+Message-ID: <20220519090726.1.I90e5b703cfebfe4c411fc13420155b9f9cfb0380@changeid>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220518064648.1843664-1-patrice.chotard@foss.st.com>
-References: <20220518064648.1843664-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
- (10.75.129.69)
+X-Originating-IP: [10.75.127.49]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To EQNDAG1NODE6.st.com
+ (10.75.129.135)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.486,FMLib:17.11.64.514
- definitions=2022-05-18_02,2022-05-17_02,2022-02-23_01
-Cc: Vignesh R <vigneshr@ti.com>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Marek Behun <marek.behun@nic.cz>,
- Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Konstantin Porotchkin <kostap@marvell.com>, Biwen Li <biwen.li@nxp.com>,
- Wolfgang Denk <wd@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
- Igal Liberman <igall@marvell.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Simon Glass <sjg@chromium.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: [Uboot-stm32] [RESEND PATCH v4 3/3] test: dm: spi: Replace
-	_spi_get_bus_and_cs() by spi_get_bus_and_cs() in some case
+ definitions=2022-05-19_01,2022-05-17_02,2022-02-23_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 1/2] board: stm32mp1: convert to livetree
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,63 +67,62 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SW4gY2FzZSBfc3BpX2dldF9idXNfYW5kX2NzKCkncyBwYXJhbWV0ZXJzIGRydl9uYW1lIGFuZCBk
-ZXZfbmFtZSBhcmUKcmVzcGVjdGl2ZWx5IHNldCB0byBOVUxMIGFuZCAwLCB1c2Ugc3BpX2dldF9i
-dXNfYW5kX2NzKCkgaW5zdGVhZC4KClNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0
-cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgoKQ2M6IE1hcmVrIEJlaHVuIDxtYXJlay5iZWh1bkBu
-aWMuY3o+CkNjOiBKYWdhbiBUZWtpIDxqYWdhbkBhbWFydWxhc29sdXRpb25zLmNvbT4KQ2M6IFZp
-Z25lc2ggUiA8dmlnbmVzaHJAdGkuY29tPgpDYzogSm9lIEhlcnNoYmVyZ2VyIDxqb2UuaGVyc2hi
-ZXJnZXJAbmkuY29tPgpDYzogUmFtb24gRnJpZWQgPHJmcmllZC5kZXZAZ21haWwuY29tPgpDYzog
-THVrYXN6IE1hamV3c2tpIDxsdWttYUBkZW54LmRlPgpDYzogTWFyZWsgVmFzdXQgPG1hcmV4QGRl
-bnguZGU+CkNjOiBXb2xmZ2FuZyBEZW5rIDx3ZEBkZW54LmRlPgpDYzogU2ltb24gR2xhc3MgPHNq
-Z0BjaHJvbWl1bS5vcmc+CkNjOiBTdGVmYW4gUm9lc2UgPHNyQGRlbnguZGU+CkNjOiAiUGFsaSBS
-b2jDoXIiIDxwYWxpQGtlcm5lbC5vcmc+CkNjOiBLb25zdGFudGluIFBvcm90Y2hraW4gPGtvc3Rh
-cEBtYXJ2ZWxsLmNvbT4KQ2M6IElnYWwgTGliZXJtYW4gPGlnYWxsQG1hcnZlbGwuY29tPgpDYzog
-QmluIE1lbmcgPGJtZW5nLmNuQGdtYWlsLmNvbT4KQ2M6IFByYXR5dXNoIFlhZGF2IDxwLnlhZGF2
-QHRpLmNvbT4KQ2M6IFNlYW4gQW5kZXJzb24gPHNlYW5nYTJAZ21haWwuY29tPgpDYzogQW5qaSBK
-IDxhbmppLmphZ2FybG11ZGlAbnhwLmNvbT4KQ2M6IEJpd2VuIExpIDxiaXdlbi5saUBueHAuY29t
-PgpDYzogUHJpeWFua2EgSmFpbiA8cHJpeWFua2EuamFpbkBueHAuY29tPgpDYzogQ2hhaXRhbnlh
-IFNha2luYW0gPGNoYWl0YW55YS5zYWtpbmFtQG54cC5jb20+Ci0tLQoKKG5vIGNoYW5nZXMgc2lu
-Y2UgdjEpCgogdGVzdC9kbS9zcGkuYyB8IDE2ICsrKysrKy0tLS0tLS0tLS0KIDEgZmlsZSBjaGFu
-Z2VkLCA2IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Rlc3Qv
-ZG0vc3BpLmMgYi90ZXN0L2RtL3NwaS5jCmluZGV4IDdhYjA4MjBhYmIuLjMyNTc5OWJiZjEgMTAw
-NjQ0Ci0tLSBhL3Rlc3QvZG0vc3BpLmMKKysrIGIvdGVzdC9kbS9zcGkuYwpAQCAtNDYsOCArNDYs
-NyBAQCBzdGF0aWMgaW50IGRtX3Rlc3Rfc3BpX2ZpbmQoc3RydWN0IHVuaXRfdGVzdF9zdGF0ZSAq
-dXRzKQogCiAJLyogVGhpcyBmaW5kcyBub3RoaW5nIGJlY2F1c2Ugd2UgcmVtb3ZlZCB0aGUgZGV2
-aWNlICovCiAJdXRfYXNzZXJ0ZXEoLUVOT0RFViwgc3BpX2ZpbmRfYnVzX2FuZF9jcyhidXNudW0s
-IGNzLCAmYnVzLCAmZGV2KSk7Ci0JdXRfYXNzZXJ0ZXEoLUVOT0RFViwgX3NwaV9nZXRfYnVzX2Fu
-ZF9jcyhidXNudW0sIGNzLCBzcGVlZCwgbW9kZSwKLQkJCQkJCSBOVUxMLCAwLCAmYnVzLCAmc2xh
-dmUpKTsKKwl1dF9hc3NlcnRlcSgtRU5PREVWLCBzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBj
-cywgJmJ1cywgJnNsYXZlKSk7CiAKIAkvKgogCSAqIFRoaXMgZm9yY2VzIHRoZSBkZXZpY2UgdG8g
-YmUgcmUtYWRkZWQsIGJ1dCB0aGVyZSBpcyBubyBlbXVsYXRpb24KQEAgLTE0MywxNCArMTQyLDEy
-IEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlfY2xhaW1fYnVzKHN0cnVjdCB1bml0X3Rlc3Rfc3Rh
-dGUgKnV0cykKIAlzdHJ1Y3QgdWRldmljZSAqYnVzOwogCXN0cnVjdCBzcGlfc2xhdmUgKnNsYXZl
-X2EsICpzbGF2ZV9iOwogCXN0cnVjdCBkbV9zcGlfc2xhdmVfcGxhdCAqc2xhdmVfcGxhdDsKLQlj
-b25zdCBpbnQgYnVzbnVtID0gMCwgY3NfYSA9IDAsIGNzX2IgPSAxLCBtb2RlID0gMDsKKwljb25z
-dCBpbnQgYnVzbnVtID0gMCwgY3NfYSA9IDAsIGNzX2IgPSAxOwogCiAJLyogR2V0IHNwaSBzbGF2
-ZSBvbiBDUzAgKi8KLQl1dF9hc3NlcnRvayhfc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Nf
-YSwgMTAwMDAwMCwgbW9kZSwgTlVMTCwgMCwKLQkJCQkJJmJ1cywgJnNsYXZlX2EpKTsKKwl1dF9h
-c3NlcnRvayhzcGlfZ2V0X2J1c19hbmRfY3MoYnVzbnVtLCBjc19hLCAmYnVzLCAmc2xhdmVfYSkp
-OwogCS8qIEdldCBzcGkgc2xhdmUgb24gQ1MxICovCi0JdXRfYXNzZXJ0b2soX3NwaV9nZXRfYnVz
-X2FuZF9jcyhidXNudW0sIGNzX2IsIDEwMDAwMDAsIG1vZGUsIE5VTEwsIDAsCi0JCQkJCSZidXMs
-ICZzbGF2ZV9iKSk7CisJdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Nf
-YiwgJmJ1cywgJnNsYXZlX2IpKTsKIAogCS8qIERpZmZlcmVudCBtYXhfaHosIGRpZmZlcmVudCBt
-b2RlLiAqLwogCXV0X2Fzc2VydChzbGF2ZV9hLT5tYXhfaHogIT0gc2xhdmVfYi0+bWF4X2h6KTsK
-QEAgLTE3OSwxMiArMTc2LDExIEBAIHN0YXRpYyBpbnQgZG1fdGVzdF9zcGlfeGZlcihzdHJ1Y3Qg
-dW5pdF90ZXN0X3N0YXRlICp1dHMpCiB7CiAJc3RydWN0IHNwaV9zbGF2ZSAqc2xhdmU7CiAJc3Ry
-dWN0IHVkZXZpY2UgKmJ1czsKLQljb25zdCBpbnQgYnVzbnVtID0gMCwgY3MgPSAwLCBtb2RlID0g
-MDsKKwljb25zdCBpbnQgYnVzbnVtID0gMCwgY3MgPSAwOwogCWNvbnN0IGNoYXIgZG91dFs1XSA9
-IHsweDlmfTsKIAl1bnNpZ25lZCBjaGFyIGRpbls1XTsKIAotCXV0X2Fzc2VydG9rKF9zcGlfZ2V0
-X2J1c19hbmRfY3MoYnVzbnVtLCBjcywgMTAwMDAwMCwgbW9kZSwgTlVMTCwgMCwKLQkJCQkJJmJ1
-cywgJnNsYXZlKSk7CisJdXRfYXNzZXJ0b2soc3BpX2dldF9idXNfYW5kX2NzKGJ1c251bSwgY3Ms
-ICZidXMsICZzbGF2ZSkpOwogCXV0X2Fzc2VydG9rKHNwaV9jbGFpbV9idXMoc2xhdmUpKTsKIAl1
-dF9hc3NlcnRvayhzcGlfeGZlcihzbGF2ZSwgNDAsIGRvdXQsIGRpbiwKIAkJCSAgICAgU1BJX1hG
-RVJfQkVHSU4gfCBTUElfWEZFUl9FTkQpKTsKLS0gCjIuMjUuMQoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVi
-b290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWls
-bWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+Replace gd->fdt_blob access with fdt_getprop() function to the
+function ofnode_get_property() to support a live tree.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ board/st/stm32mp1/stm32mp1.c | 13 ++++---------
+ 1 file changed, 4 insertions(+), 9 deletions(-)
+
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 07b1a63db7..700ff9ca07 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -82,11 +82,6 @@
+ #define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
+ #define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
+ 
+-/*
+- * Get a global data pointer
+- */
+-DECLARE_GLOBAL_DATA_PTR;
+-
+ #define USB_LOW_THRESHOLD_UV		200000
+ #define USB_WARNING_LOW_THRESHOLD_UV	660000
+ #define USB_START_LOW_THRESHOLD_UV	1230000
+@@ -116,8 +111,8 @@ int checkboard(void)
+ 		mode = "basic";
+ 	}
+ 
+-	fdt_compat = fdt_getprop(gd->fdt_blob, 0, "compatible",
+-				 &fdt_compat_len);
++	fdt_compat = ofnode_get_property(ofnode_root(), "compatible",
++					 &fdt_compat_len);
+ 
+ 	log_info("Board: stm32mp1 in %s mode (%s)\n", mode,
+ 		 fdt_compat && fdt_compat_len ? fdt_compat : "");
+@@ -690,8 +685,8 @@ int board_late_init(void)
+ 	int buf_len;
+ 
+ 	if (IS_ENABLED(CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG)) {
+-		fdt_compat = fdt_getprop(gd->fdt_blob, 0, "compatible",
+-					 &fdt_compat_len);
++		fdt_compat = ofnode_get_property(ofnode_root(), "compatible",
++						 &fdt_compat_len);
+ 		if (fdt_compat && fdt_compat_len) {
+ 			if (strncmp(fdt_compat, "st,", 3) != 0) {
+ 				env_set("board_name", fdt_compat);
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

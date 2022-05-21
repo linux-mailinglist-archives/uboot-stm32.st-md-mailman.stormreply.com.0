@@ -2,50 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CEBC52F759
-	for <lists+uboot-stm32@lfdr.de>; Sat, 21 May 2022 03:33:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77BEE52F77D
+	for <lists+uboot-stm32@lfdr.de>; Sat, 21 May 2022 04:07:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 40CCFC56630;
-	Sat, 21 May 2022 01:33:35 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1ACA5C03FDE;
+	Sat, 21 May 2022 02:07:39 +0000 (UTC)
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
+ [209.85.222.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B505FC03FEB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 133B4C03FD1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 21 May 2022 01:33:32 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E37FB8334E;
- Sat, 21 May 2022 03:33:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1653096811;
- bh=byaFN939JWJM9FbppPm2bKf35pIA4SwY2W/OM60601Q=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=iOjmePXwJmrFwFq+1YMVciO48WQGchGcrJP8dl8/dn/GQA0cyw9IHMWS1ka9wOwFQ
- 4mGV+7OViPzUykWzNa6f7QdFOiJqwvrK4SD2Vb+B7mh6nbRt8NEQF12PPJI/hy4mNb
- GsIYT7W3qIGdbqghWjRtTGTBVQw4H8m4BoozASqeY8nwgYezMu88ULxswU/Gvj/ELM
- 9+qzjoReUcJ9aCQwgYE/+vwBG0PegQwnIuHzDL7U7m1iS0vPSvfa26btPc1LIvGLpH
- UeXDuFE0b5tF5syy9sAAEpMAhh5xJiyQ/WzACVXYAppUL/nXG85PBl8GxcRVysr6vQ
- Bu0NxFiKZGs5A==
-Message-ID: <ea75b7dd-05bc-999a-e827-39c23d046809@denx.de>
-Date: Sat, 21 May 2022 03:33:23 +0200
+ Sat, 21 May 2022 02:07:37 +0000 (UTC)
+Received: by mail-qk1-f173.google.com with SMTP id c1so9121256qkf.13
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 20 May 2022 19:07:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=YyUqXpBeU3UVp6dbBllYn5LstT3AE2Nxixk+V3b3srM=;
+ b=tPZdkdqCrK8/guFamtI32TlEROb+4NeTMED0mNEvp0lHc8vnxnQF0GnMk2sy9lbIS4
+ kjeEdKJ4YQfrlv5JYqdere5Np2LwdPUUa+v1m3YmQDiI4I0AQhAyqYeeOEyol5UEw6Ub
+ EJVdTUiVap56IX8YjFjFR+7Do76ZSZbO0lK3I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=YyUqXpBeU3UVp6dbBllYn5LstT3AE2Nxixk+V3b3srM=;
+ b=mtwNy1qar++BVcDLrCul6jBZFGswX/jUTf32jjrWbwPafchqgSZwi2loDCSKV1jy+t
+ 3SXjLcoD/M0nxtbtC7q7rR9RL6wyrjlNms1U0fwjLoID5PYHwvggIM3XMy/VIMezrJ3e
+ zQl4cJxX+L9V0/NpX9R8XbJ6O7U1d2mYQAwsqDA1S8cbIMR9lm8q/ebFmjAuk54+k7GH
+ zDJvGycOoh3LF+gM5zod7TcS/k/nX4LDh0qHfAV8PLntz067ERFQYXS0xRRZKJgG9O2n
+ RN93YBUWhVONU1lp16yU+wMOHA6hKB3yOa9V1h7QMr0JrFPJ9B6O9FgSNuUQvF3NQa7E
+ rFnQ==
+X-Gm-Message-State: AOAM532jRz4CS1J1+NOjRxadVkaYjrZxwNDF+TNhRh5dxtkZIlNiTl3T
+ T6zaNsCWtT+H/FQ+8m8NwZzYmg==
+X-Google-Smtp-Source: ABdhPJyl0N4HOP5TC19Ux3tghsuwFXS3Lt0saU9P7nKst7cfrLo3+VDZiXqB/YNwiZ14kdAsmps+zQ==
+X-Received: by 2002:a05:620a:bc9:b0:67b:e954:e3e2 with SMTP id
+ s9-20020a05620a0bc900b0067be954e3e2mr8058184qki.491.1653098855926; 
+ Fri, 20 May 2022 19:07:35 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-200-14.ec.res.rr.com. [65.184.200.14])
+ by smtp.gmail.com with ESMTPSA id
+ o25-20020ac86999000000b002f3e127be41sm656587qtq.20.2022.05.20.19.07.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 20 May 2022 19:07:34 -0700 (PDT)
+Date: Fri, 20 May 2022 22:07:32 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20220521020732.GH13239@bill-the-cat>
+References: <174e5807-917a-7363-2daa-93c90ac9a118@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20220519184552.RFC.1.I4f6455f026820524103f7fbdffaafd3b75585197@changeid>
- <20220519184552.RFC.2.Ida901b98d25a7f60b6fb05d18f2e030d9c9ecc5c@changeid>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20220519184552.RFC.2.Ida901b98d25a7f60b6fb05d18f2e030d9c9ecc5c@changeid>
-X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [RFC PATCH 2/2] ARM: stm32: activate OF_LIVE for
-	DHSOM
+In-Reply-To: <174e5807-917a-7363-2daa-93c90ac9a118@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2022.07
+ = u-boot-stm32-20220520
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -57,19 +69,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============0868237198457728004=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 5/19/22 18:46, Patrick Delaunay wrote:
-> Activate the live DT with CONFIG_OF_LIVE to reduce the DT parsing
-> time.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-Tested-by: Marek Vasut <marex@denx.de>
+--===============0868237198457728004==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="vJguvTgX93MxBIIe"
+Content-Disposition: inline
+
+
+--vJguvTgX93MxBIIe
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, May 20, 2022 at 09:25:16AM +0200, Patrick DELAUNAY wrote:
+
+> Hi Tom,
+>=20
+> Please pull the STM32 related fixes for u-boot/master, v2022.07:
+> u-boot-stm32-20220520
+>=20
+> - spi: fix busy bit check in stm32_qspi driver
+> - stm32mp15: configure Buck3 voltage per PMIC NVM on Avenger96 board
+>=20
+> CI status:
+> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/12043
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master
+> https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> u-boot-stm32-20220520
+>=20
+>=20
+>=20
+> The following changes since commit f83bd23e2a0e9861969c9d43395299a14f25dd=
+da:
+>=20
+> =A0 Merge https://source.denx.de/u-boot/custodians/u-boot-marvell (2022-0=
+5-18
+> 08:41:13 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> tags/u-boot-stm32-20220520
+>=20
+> for you to fetch changes up to b6a469360a0dec01dbbf087c5184a59dda494569:
+>=20
+> =A0 spi: stm32_qspi: Remove SR_BUSY bit check before sending command
+> (2022-05-19 18:54:18 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--vJguvTgX93MxBIIe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKISWEACgkQFHw5/5Y0
+tyxR+AwAq3PZhM9xRALp+scOWErN7vZ7opFKMXowCLiFzp5SWIjRoWorNkE/BF8G
+R23Hlmym8RbJCyideJWEBLp24mhBW8L0DxzYamOgHsstd4PxcSYT8KT0aJXpYNXs
+Os5Gz0sZlytae/o0cMSR+z5ZYgNjrXEzLdzLWgvRNPqd4GJZLEYy0Gfid1rvJSOi
+4BldYAR9aq1GSPCPAXAZ+HOGuBx+EiIWX2cCzDa6nMPQe1+g3BfPZFpqX2rw/CuG
+hRRW/4jP0iw1gGaldTkpqcIo7d/dZpSC1bb8rz4BBBiWz5nGzy9NwkxNOUXkqmzO
+G/jV6GrRuOgCL7oBrFnDOkgpIBMczY4R4IfVHPwSdjM7dHzgxcMvrTySMv1fyavo
+K4D4zNwz9Gk/nglmYRtXA0tEblW/n/LvBHMbCOJuNLx4DmV+bFQ9woA2ivXPZzqS
+KOpvSmCrH8gBsHkR6ta5Sn7ouUGSsDsBQIKiWS28YnkFxc+/sqnooiukxIVsDLt0
+UUZlr1bl
+=LZUE
+-----END PGP SIGNATURE-----
+
+--vJguvTgX93MxBIIe--
+
+--===============0868237198457728004==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0868237198457728004==--

@@ -2,78 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70C8253155A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 23 May 2022 19:57:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77C2353155C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 23 May 2022 19:57:42 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 304FCC03FC8;
-	Mon, 23 May 2022 17:57:34 +0000 (UTC)
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
- [209.85.219.47])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FB50C56630;
+	Mon, 23 May 2022 17:57:42 +0000 (UTC)
+Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
+ [209.85.219.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9DB25C035BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E5FA6C5662F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 23 May 2022 17:57:32 +0000 (UTC)
-Received: by mail-qv1-f47.google.com with SMTP id l1so12653285qvh.1
+ Mon, 23 May 2022 17:57:40 +0000 (UTC)
+Received: by mail-qv1-f46.google.com with SMTP id cv1so451820qvb.5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 23 May 2022 10:57:32 -0700 (PDT)
+ Mon, 23 May 2022 10:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=gyA7N40gZYZz4hkHb1t9UB+NeE9ISeyrdI6kIYpVQdE=;
- b=roGqmRoGwzhYZomgQAL2IqegIqnTwhyIiREOD3y7vlhBXUXkUw2u9ck1et+LNfXmWM
- f51/aNTDIhR2WW9VFbqtwkMLqW6A6AcIKYMV1/X71tLD5YdagsviT7ZvNAycyMsrx0w8
- cXqgD/S3Zd+w/4KsP+jNSbcjL1znf1XHQ2O3Q=
+ bh=xFM3S5PyoKziiGWNeE1CymmWaWIjRui8YlBPleKuDRQ=;
+ b=jsiFkmdz8x6wV+G5YBnCJfTq76WfBHm0UbhU2Y2p29/kGzKUjDdgddJAMOlaljGFuP
+ 7XbaiukMQz6lSk1mwDJ5N2+0FNFwbZ3Ghc8SOGqfAes+1f5gwQ3gZ6P5laM6Gtrgo0Ge
+ B7XZI4cALxHeHa+LPeKqHZpU1voGghfd7BbyE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=gyA7N40gZYZz4hkHb1t9UB+NeE9ISeyrdI6kIYpVQdE=;
- b=2w+Hw/5ieC9i33anx/Xzxc82vVQ/P3H4d6fbBzu8Oe0bL+krOs5+wYzDc/GvkgSr1U
- Ngk5tewF45kQ8R9SwfWMdth3kT+Kwgl4CX4wmYCLE+SDhrSXFjyFIo9eCRklcQSeHaqT
- ijovybXWWlDXHQKnEU+DuMDVtgdXvTdLgPWbqkI6rZqx4gX1x5bAIdYusHON6wbjES3J
- CzZwSxF+ofXTn9R987OBR9k3MSpu2nqtINv9+aHbdXxNyzToLwDIpT5qhTVAWcT81Z9w
- TK77MYdC3OyaqYdScZBueOeIncp1rrY1tpAbNx7uKzduAylqUjxUaGq3PBzBentJzas6
- my6Q==
-X-Gm-Message-State: AOAM530MWbS+GJa4aj3m8oWalqi6RvG7973SIx35pNFjO18O5YAzuntj
- H0t2wDX2PUSZJ6VQyN8R+EMcnQ==
-X-Google-Smtp-Source: ABdhPJycWVIyYaUSAWHtPz0l3mGRFBo23XhEa2/8p22iduSbuYDlCWyNFiHQ9XCHKMocI2/vXKiQgg==
-X-Received: by 2002:ad4:5b8e:0:b0:45e:727e:581 with SMTP id
- 14-20020ad45b8e000000b0045e727e0581mr18163805qvp.91.1653328651667; 
- Mon, 23 May 2022 10:57:31 -0700 (PDT)
+ bh=xFM3S5PyoKziiGWNeE1CymmWaWIjRui8YlBPleKuDRQ=;
+ b=Y+wi0klmxBKaWepKcQ7VUyI7qHvIGz1Ga/vrIdtRAQ7ao3UEWeJEuRysYGvZPxlvO9
+ OAsx04R+chvjsh1POD+HCij84hy9l+K1gHE4D5zcGsp3Z1MZRA0BTfQCWGa5GVmgXrBw
+ nbdLPRTiHoSMZnaE5IVI1AiFQCMdqSJE4iN2o3AlyWRn2+/fBL8vuepr1usgeFYHUh5w
+ hOwVuRU6hGFW4WhFiqRZGOReDobPDG2mOcz45sYU2IV+QLYdbSWxFuMMz44XZgn4wdjs
+ AIs1bVdpNKYwkDp7a0iJBOZpYjvr+DNdFNN4sWjeIei9u7E8IQI0Bj6Pq+5OHE4Cep0j
+ GrDQ==
+X-Gm-Message-State: AOAM532pKnRGAUu+1ovlnhzhjZm1DrEBM/tsThLm4cAsJwYpa6fHVTC1
+ J6xGukRdHd4NflPOKwyW0CumOrvxFxmD9g==
+X-Google-Smtp-Source: ABdhPJzpQD4F3WB3LD9zb5y5MW0oxuNnCMPTVgaqHs0mcQwPl4pROcd36Gp23fofqJLchhN5qE2YKw==
+X-Received: by 2002:a05:6214:764:b0:462:35eb:f822 with SMTP id
+ f4-20020a056214076400b0046235ebf822mr5685254qvz.34.1653328660039; 
+ Mon, 23 May 2022 10:57:40 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-25fd-0000-0000-0000-1003.res6.spectrum.com.
  [2603:6081:7b00:25fd::1003]) by smtp.gmail.com with ESMTPSA id
- w7-20020ac857c7000000b002f9303ce545sm4285492qta.39.2022.05.23.10.57.29
+ c22-20020a05622a025600b002f39b99f689sm4673634qtx.35.2022.05.23.10.57.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 May 2022 10:57:30 -0700 (PDT)
-Date: Mon, 23 May 2022 13:57:28 -0400
+ Mon, 23 May 2022 10:57:39 -0700 (PDT)
+Date: Mon, 23 May 2022 13:57:36 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20220523175728.GU13239@bill-the-cat>
+Message-ID: <20220523175736.GV13239@bill-the-cat>
 References: <20220330073315.7703-1-patrice.chotard@foss.st.com>
- <20220330073315.7703-3-patrice.chotard@foss.st.com>
+ <20220330073315.7703-4-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-In-Reply-To: <20220330073315.7703-3-patrice.chotard@foss.st.com>
+In-Reply-To: <20220330073315.7703-4-patrice.chotard@foss.st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Vignesh R <vigneshr@ti.com>, Masami Hiramatsu <masami.hiramatsu@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+Cc: Vignesh R <vigneshr@ti.com>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
- Marek Behun <marek.behun@nic.cz>, Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
+ Lukasz Majewski <lukma@denx.de>, Marek Behun <marek.behun@nic.cz>,
+ Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Konstantin Porotchkin <kostap@marvell.com>, Biwen Li <biwen.li@nxp.com>,
  Wolfgang Denk <wd@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
- Jassi Brar <jaswinder.singh@linaro.org>, Igal Liberman <igall@marvell.com>,
- u-boot@lists.denx.de, Priyanka Jain <priyanka.jain@nxp.com>,
- Simon Glass <sjg@chromium.org>,
+ Igal Liberman <igall@marvell.com>, u-boot@lists.denx.de,
+ Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
  Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
  Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 2/3] spi: spi_flash_probe_bus_cs() rely
- on DT for spi speed and mode
+Subject: Re: [Uboot-stm32] [PATCH v4 3/3] test: dm: spi: Replace
+ _spi_get_bus_and_cs() by spi_get_bus_and_cs() in some case
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,58 +83,26 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2760981547526615996=="
+Content-Type: multipart/mixed; boundary="===============0238249729973089539=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============2760981547526615996==
+--===============0238249729973089539==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7kD9y3RnPUgTZee0"
+	protocol="application/pgp-signature"; boundary="5xr6Gr0irOxp3+3c"
 Content-Disposition: inline
 
 
---7kD9y3RnPUgTZee0
+--5xr6Gr0irOxp3+3c
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 30, 2022 at 09:33:14AM +0200, Patrice Chotard wrote:
+On Wed, Mar 30, 2022 at 09:33:15AM +0200, Patrice Chotard wrote:
 
-> Now, spi_flash_probe_bus_cs() relies on DT for spi speed and mode
-> and logically calls spi_get_bus_and_cs(). In case spi mode and speed are
-> not read from DT, make usage of spi_flash_probe() instead.
->=20
-> To sum-up:
->  - Previous call tree was:
->     spi_flash_probe() -> spi_flash_probe_bus_cs() -> spi_get_bus_and_cs()
->=20
->  - Current call tree is:
->     spi_flash_probe() -> _spi_get_bus_and_cs()
->     spi_flash_probe_bus_cs() -> spi_get_bus_and_cs()
->=20
-> This patch impacts the following :
->   - cmd/sf.c: if spi mode and/or speed is passed in argument of
->     do_spi_flash_probe(), call spi_flash_probe() otherwise call
->     spi_flash_probe_bus_cs().
->=20
->   - drivers/net/fm/fm.c: as by default spi speed and mode was set to
->     0 and a comment indicates that speed and mode are read from DT,
->     use spi_flash_probe_bus_cs().
->=20
->   - drivers/net/pfe_eth/pfe_firmware.c: spi speed and mode are not read
->     from DT by all platforms using this driver, so keep legacy and replace
->     spi_flash_probe_bus_cs() by spi_flash_probe();
->=20
->   - drivers/net/sni_netsec.c : spi speed and mode are not read from DT,
->     so replace spi_flash_probe_bus_cs() by spi_flash_probe().
->=20
->   - drivers/usb/gadget/max3420_udc.c: Can't find any platform which make
->     usage of this driver, nevertheless, keep legacy and replace
->     spi_get_bus_and_cs() by _spi_get_bus_and_cs().
->=20
->   - env/sf.c: a comment indicates that speed and mode are read
->     from DT. So use spi_flash_probe_bus_cs().
+> In case _spi_get_bus_and_cs()'s parameters drv_name and dev_name are
+> respectively set to NULL and 0, use spi_get_bus_and_cs() instead.
 >=20
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >=20
@@ -166,27 +132,27 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---7kD9y3RnPUgTZee0
+--5xr6Gr0irOxp3+3c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKLywcACgkQFHw5/5Y0
-tyxUCAwAtFcguDn8jxk1yaJW5QWt6y8dxNPPafzYzJTEbtEiDbP0ZMDGIjQYoczF
-DzAeRAWU77wvMK6vKx1CvO8AVBxQXipoJSvv83lz1Ba2rgWrOVtryZI8YUkP+kq+
-yrAkWgxWQ8MrOBRtmVxnjkSvP+4B/9X87Ey5kcrvv+NddLoy2UGwq45ihSLlxhyT
-/kcu3LGz3+wjSmPbCmfrgqEFGMCCumEtS2TGW5sclrbZ/7H3oLRCMQ0U61wsX1Fz
-Py9CNMxK/8406Sh0CE1EusRxbb0f7UUwSI0xgFYf72V7XUAJ8Mpph6Dh+NGD4QkI
-i5rhfqnHGANplxkJWG318h0dZlW05LJGNizXwObVPJIyCS27PXFQuKUSx7/HV9sJ
-+k7wqe88eHQ9DK6H+eeikYSwZ0FrSbyYnF5IPPQG7tXg7CBOan/JCkHUxNdVJIke
-jT3XyPEfDZ6uvQA3m82Carv/fF9rv5JoDMqP2FB7XCkGkxEbwp/TISptw9bDB0D7
-z2jostbE
-=RCSx
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKLyxAACgkQFHw5/5Y0
+tyxINAwAmxjz4iMiKPcDhAzJecvNlJ/ZWZKlCen6DSr3raUJi1UCN4Vxtk6e02JP
+zXbWeBKKEqL45QRO0u5pGlmt3852bevi+yIiDAlCW4Qth+ZjtjXCPlD8H+1OmgS6
+fsZw+AP5iYLiBRI6IyCDjP5hgEzzr04+g8nWS47dHWp9nBbV0mh7w+K9gKn2IErJ
++Ab7zEWrz+t0cMDeODsCa3XJM6aD++PT80AEb4CNQgJFFs7LjxbfXVz/6Yo9FKqY
+RBdmRPKqpTHmTUqrXipjmD61UynltzoAE3aTIKN/0Ei27i4j+sngCQC/XSt8KVLl
+Tuwgm/Pin3HVxtcI4F2LwuLT8Tdy3Wi/LCxlGKPOAPgO7Ww4vjcuavY9ILE0RxOL
+mzukwVfb8949zH7l+ns41Q0Z7SgUexxBaueObpDr/sc+FKypKvlduf/zpQHCpN6b
+vzHmZdz2aFX/zzf/SmqgP/6r9f1no+8uS8v3SWJaQbbITMijlMWw1IRi6r7Qb/S9
+QeuVF3Ia
+=WgKu
 -----END PGP SIGNATURE-----
 
---7kD9y3RnPUgTZee0--
+--5xr6Gr0irOxp3+3c--
 
---===============2760981547526615996==
+--===============0238249729973089539==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -197,4 +163,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============2760981547526615996==--
+--===============0238249729973089539==--

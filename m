@@ -2,40 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB03A52F983
-	for <lists+uboot-stm32@lfdr.de>; Sat, 21 May 2022 09:19:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 488CE530873
+	for <lists+uboot-stm32@lfdr.de>; Mon, 23 May 2022 06:35:12 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7E246C03FDF;
-	Sat, 21 May 2022 07:19:45 +0000 (UTC)
-Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EFC14C0AA15;
+	Mon, 23 May 2022 04:35:11 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 068C5C035BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 69EACC08D1F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 21 May 2022 07:19:43 +0000 (UTC)
-Received: from [192.168.192.146] (port=38330 helo=nx64de-df6d00)
- by mx01.ayax.eu with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <gszymaszek@short.pl>)
- id 1nsJOk-0003GX-F7; Sat, 21 May 2022 09:19:38 +0200
-Date: Sat, 21 May 2022 09:19:37 +0200
-From: Grzegorz Szymaszek <gszymaszek@short.pl>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <YoiSiRnxydsHXNSR@nx64de-df6d00>
-Mail-Followup-To: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@lists.denx.de,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Lukasz Majewski <lukma@denx.de>
-References: <20220519155647.1433652-1-patrick.delaunay@foss.st.com>
- <20220519175614.v2.1.Ieec76f320c9cc6885d7b519dffddff9ad4c97b59@changeid>
+ Mon, 23 May 2022 04:35:10 +0000 (UTC)
+Received: from [192.168.1.107] (87-97-105-216.pool.digikabel.hu
+ [87.97.105.216])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9561483EE2;
+ Mon, 23 May 2022 06:35:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1653280509;
+ bh=Kts/kdBrZZu4M2G4aSzRIUwq2t54jqGLCl0w02eO4hI=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=PguVerXlo52nsDfDU1rfvDWDjaknUu3IpqqgFWWWbE7x8LRJ+I2dFg5cByQPwoEYr
+ 4+J4xbZQxZdFhmv8yOacvcBRA61DA5XonN/IUIVgnP9jnix3GF9z7h+/Z2UlGvNv9e
+ SWlXkEnWS43DCYA8M35/dhskaWF9hzz/Kn3hDrEvb3yxxj2LgUph5lqu/EAHhpeAKv
+ WrASL38SS/Ys6fEu2ZGAnb1c8XH59JMgInOe7FkLRhQ58elzAOOLeivYrPylgB5Z7a
+ TU4kykM+TnC3UTbvyDg4j9TPKustpDo5IYjR6CFF8h0hBuHWPWC7wxDjf/4LtqghqN
+ bVy1saeSrS68A==
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20220520183718.1.I3ee35f18672107aad869bbd4b3e53957b16cb304@changeid>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <c28ce4a9-5d4b-b362-f28d-af4ef5668285@denx.de>
+Date: Mon, 23 May 2022 06:35:18 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <20220519175614.v2.1.Ieec76f320c9cc6885d7b519dffddff9ad4c97b59@changeid>
-Cc: Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, Sean Anderson <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/3] clk: Add directory for STM32 clock
-	drivers
+In-Reply-To: <20220520183718.1.I3ee35f18672107aad869bbd4b3e53957b16cb304@changeid>
+Content-Language: en-US
+X-Virus-Scanned: clamav-milter 0.103.5 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Vignesh R <vigneshr@ti.com>, vipin.kumar@st.com,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Dylan Hung <dylan_hung@aspeedtech.com>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <kettenis@openbsd.org>, Samuel Holland <samuel@sholland.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Vikas Manocha <vikas.manocha@st.com>, Bharat Gooty <bharat.gooty@broadcom.com>,
+ armando.visconti@st.com, Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Yuan Fang <fangyuanseu@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH] stm32mp1: fix reference for
+	STMicroelectronics
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -47,64 +67,48 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4404405914144731095=="
+Reply-To: hs@denx.de
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hello Patrick,
 
---===============4404405914144731095==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="WCn44sSbdq6fekPi"
-Content-Disposition: inline
+On 20.05.22 18:38, Patrick Delaunay wrote:
+> Replace reference to the correct name STMicroelectronics
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  arch/arm/Kconfig                      | 2 +-
+>  arch/arm/cpu/armv7/stv0991/lowlevel.S | 2 +-
+>  arch/arm/mach-sti/Kconfig             | 2 +-
+>  drivers/i2c/designware_i2c.c          | 2 +-
+>  drivers/i2c/designware_i2c.h          | 2 +-
+>  drivers/i2c/designware_i2c_pci.c      | 2 +-
+>  drivers/mtd/nand/raw/fsmc_nand.c      | 4 ++--
+>  drivers/mtd/spi/spi-nor-ids.c         | 2 +-
+>  drivers/net/designware.c              | 2 +-
+>  drivers/net/designware.h              | 2 +-
+>  drivers/pinctrl/Kconfig               | 2 +-
+>  drivers/spi/pl022_spi.c               | 2 +-
+>  drivers/usb/gadget/designware_udc.c   | 2 +-
+>  include/configs/stm32mp15_st_common.h | 2 +-
+>  include/elf.h                         | 4 ++--
+>  include/linux/mtd/fsmc_nand.h         | 2 +-
+>  include/usb/designware_udc.h          | 2 +-
+>  17 files changed, 19 insertions(+), 19 deletions(-)
 
+Reviewed-by: Heiko Schocher <hs@denx.de>
 
---WCn44sSbdq6fekPi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Thu, May 19, 2022 at 05:56:45PM +0200, Patrick Delaunay wrote:
-> Add a directory in drivers/clk to regroup the clock drivers for all
-> STM32 Soc with CONFIG_ARCH_STM32 (MCUs with cortex M) or
-> CONFIG_ARCH_STM32MP (MPUs with cortex A).
-
-Some nits:
-- s/Soc/SoCs/
-- s/cortex /Cortex-/
-
-Even if you will not include these two changes, feel free to add:
-Reviewed-by: Grzegorz Szymaszek <gszymaszek@short.pl>
-
---WCn44sSbdq6fekPi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmKIkokACgkQeE9lGUIc
-pz4U/A//S5PAZKs4Kr6o2hqRCzz5jNlKbLmVVw4sXL8B5WzpOcIJlNh82TsBlIJE
-+sUn4kQE/dGGVWrdqNdYOGCcYqXIgLWT1kjy6GZ7kmW/8P9QX1Jxg6zWsYUkvnjn
-ohdlxwkO1apuRdMb7pNMZQ+4RSqpEv0dZ0qr8sC6iSKQjNb4YQnuwxuGDVa7Yqqf
-qj1tNLKFDE2g0X4msb41bjI5XKRuCqhR4Bg15RqWbjIzg8KOjpffTHR/Uw8XMfoc
-9tEKvlAz167ryNWQeLIJSEoeWg0Bs2CuLBkRV3fpHsUoe1saGXDCMPOW/04DrnCh
-Jr19i+Wq/x/4kC5tkqlnHb8FXhyBwqIo94kmMfOaxtXDABCy8y4Iwy28KkSKDsYO
-I/n7C88ciZxaSDXSOTFbygwxEUFCV2V1Jsvn3Q3IoAv1ZGXffi+dd94dRrkeGhq+
-wCkiOD09krUea7CV/Tg4Y9KRSbPz0hpcv+YL5DeAqdIdvzWWr55xEfbYknT64oeM
-EZTlS3QnXlUt4S6eSkR9EZE29hB34fQP8XNFd5oeTIfQ75Qsds1UCCd8nJ77ACmg
-sQFN2JySGLkZYVFqZqsIww3Dj5uQ7tM0wtY4RSAhU3iUQvt8NeiagCCS/2p0YZEP
-4MniR1Qbwz/q2D/kV4J1VjD4bh9zM1I9WSBK0y/Z89lmhBTldIo=
-=/s94
------END PGP SIGNATURE-----
-
---WCn44sSbdq6fekPi--
-
---===============4404405914144731095==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============4404405914144731095==--

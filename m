@@ -2,76 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77C2353155C
-	for <lists+uboot-stm32@lfdr.de>; Mon, 23 May 2022 19:57:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA1B153AB15
+	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Jun 2022 18:33:45 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FB50C56630;
-	Mon, 23 May 2022 17:57:42 +0000 (UTC)
-Received: from mail-qv1-f46.google.com (mail-qv1-f46.google.com
- [209.85.219.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 64AB6C03FC1;
+	Wed,  1 Jun 2022 16:33:45 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E5FA6C5662F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C0B1DC32E8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 23 May 2022 17:57:40 +0000 (UTC)
-Received: by mail-qv1-f46.google.com with SMTP id cv1so451820qvb.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 23 May 2022 10:57:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=xFM3S5PyoKziiGWNeE1CymmWaWIjRui8YlBPleKuDRQ=;
- b=jsiFkmdz8x6wV+G5YBnCJfTq76WfBHm0UbhU2Y2p29/kGzKUjDdgddJAMOlaljGFuP
- 7XbaiukMQz6lSk1mwDJ5N2+0FNFwbZ3Ghc8SOGqfAes+1f5gwQ3gZ6P5laM6Gtrgo0Ge
- B7XZI4cALxHeHa+LPeKqHZpU1voGghfd7BbyE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=xFM3S5PyoKziiGWNeE1CymmWaWIjRui8YlBPleKuDRQ=;
- b=Y+wi0klmxBKaWepKcQ7VUyI7qHvIGz1Ga/vrIdtRAQ7ao3UEWeJEuRysYGvZPxlvO9
- OAsx04R+chvjsh1POD+HCij84hy9l+K1gHE4D5zcGsp3Z1MZRA0BTfQCWGa5GVmgXrBw
- nbdLPRTiHoSMZnaE5IVI1AiFQCMdqSJE4iN2o3AlyWRn2+/fBL8vuepr1usgeFYHUh5w
- hOwVuRU6hGFW4WhFiqRZGOReDobPDG2mOcz45sYU2IV+QLYdbSWxFuMMz44XZgn4wdjs
- AIs1bVdpNKYwkDp7a0iJBOZpYjvr+DNdFNN4sWjeIei9u7E8IQI0Bj6Pq+5OHE4Cep0j
- GrDQ==
-X-Gm-Message-State: AOAM532pKnRGAUu+1ovlnhzhjZm1DrEBM/tsThLm4cAsJwYpa6fHVTC1
- J6xGukRdHd4NflPOKwyW0CumOrvxFxmD9g==
-X-Google-Smtp-Source: ABdhPJzpQD4F3WB3LD9zb5y5MW0oxuNnCMPTVgaqHs0mcQwPl4pROcd36Gp23fofqJLchhN5qE2YKw==
-X-Received: by 2002:a05:6214:764:b0:462:35eb:f822 with SMTP id
- f4-20020a056214076400b0046235ebf822mr5685254qvz.34.1653328660039; 
- Mon, 23 May 2022 10:57:40 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-25fd-0000-0000-0000-1003.res6.spectrum.com.
- [2603:6081:7b00:25fd::1003]) by smtp.gmail.com with ESMTPSA id
- c22-20020a05622a025600b002f39b99f689sm4673634qtx.35.2022.05.23.10.57.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 May 2022 10:57:39 -0700 (PDT)
-Date: Mon, 23 May 2022 13:57:36 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20220523175736.GV13239@bill-the-cat>
-References: <20220330073315.7703-1-patrice.chotard@foss.st.com>
- <20220330073315.7703-4-patrice.chotard@foss.st.com>
+ Wed,  1 Jun 2022 16:33:44 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 251FCRLM017967;
+ Wed, 1 Jun 2022 18:33:42 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=kC9UoDIgiPe/LsBVix8PBvU4oYx6U9gg15fnKmzkmRI=;
+ b=VVZnNhPQDAgVzWFr3XvHVTi5zLVT2FqTpxySw6auoHQi56NE4l2HrW/IUK/sCDM1YOx8
+ c+OR//YKJgMpxLQK6JMcq3GWgEtnMGeQtRH5NeYQmJVubb6WE++JeBe2HNQFavlycTQC
+ kWE3YxQLTd3gsQ/wvEuW8UPb85j/6bNSti5wRuYQWrAC4lkhzPOg4K61oGOp5B6bzY41
+ MrECpr4yYpOrsW6b+Umq/XKROWwWnVkH+R3Wjf4DVkRNW2l96r6mvwQ4zI94SCOxwqOn
+ PaNxgU8ZZDDU+Dj4kuH3IxVMSiZmZmWqD1MUmqQr7UphKQnO3BDg0tUBYyNm7Jmpmv0D QA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gbc2vt6wb-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 01 Jun 2022 18:33:42 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 027DD100034;
+ Wed,  1 Jun 2022 18:33:41 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D60C922FA53;
+ Wed,  1 Jun 2022 18:33:41 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 1 Jun
+ 2022 18:33:41 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 1 Jun 2022 18:33:40 +0200
+Message-ID: <20220601183338.1.I50f3ce7fb4a4bb3169f40cf4bab0ec75936e5c03@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20220330073315.7703-4-patrice.chotard@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Vignesh R <vigneshr@ti.com>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Chaitanya Sakinam <chaitanya.sakinam@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
- Lukasz Majewski <lukma@denx.de>, Marek Behun <marek.behun@nic.cz>,
- Ramon Fried <rfried.dev@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Konstantin Porotchkin <kostap@marvell.com>, Biwen Li <biwen.li@nxp.com>,
- Wolfgang Denk <wd@denx.de>, Anji J <anji.jagarlmudi@nxp.com>,
- Igal Liberman <igall@marvell.com>, u-boot@lists.denx.de,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 3/3] test: dm: spi: Replace
- _spi_get_bus_and_cs() by spi_get_bus_and_cs() in some case
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.517,FMLib:17.11.64.514
+ definitions=2022-06-01_05,2022-06-01_01,2022-02-23_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] stm32mp: stpmic1: remove the debug unit
+	request by debugger
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,84 +69,86 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0238249729973089539=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Depending on backup register value, U-Boot SPL maintains the debug unit
+powered-on for debugging purpose; only BUCK1 is required for powering
+the debug unit, so revert the setting for all the other power lanes,
+except BUCK3 that has to be always on.
 
---===============0238249729973089539==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5xr6Gr0irOxp3+3c"
-Content-Disposition: inline
+To be functional this patch requires a modification in the debugger
+,openocd for example, to update the STM32MP15 backup register when it is
+required to debug SPL after reset. After deeper analysis this behavior
+will be never supported in tools so the associated code, will be never
+used and the associated code can be removed.
 
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
---5xr6Gr0irOxp3+3c
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ arch/arm/mach-stm32mp/include/mach/stm32.h |  1 -
+ board/st/common/stpmic1.c                  | 14 --------------
+ include/power/stpmic1.h                    |  3 ---
+ 3 files changed, 18 deletions(-)
 
-On Wed, Mar 30, 2022 at 09:33:15AM +0200, Patrice Chotard wrote:
-
-> In case _spi_get_bus_and_cs()'s parameters drv_name and dev_name are
-> respectively set to NULL and 0, use spi_get_bus_and_cs() instead.
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->=20
-> Cc: Marek Behun <marek.behun@nic.cz>
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Vignesh R <vigneshr@ti.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Wolfgang Denk <wd@denx.de>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Stefan Roese <sr@denx.de>
-> Cc: "Pali Roh=E1r" <pali@kernel.org>
-> Cc: Konstantin Porotchkin <kostap@marvell.com>
-> Cc: Igal Liberman <igall@marvell.com>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Pratyush Yadav <p.yadav@ti.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Anji J <anji.jagarlmudi@nxp.com>
-> Cc: Biwen Li <biwen.li@nxp.com>
-> Cc: Priyanka Jain <priyanka.jain@nxp.com>
-> Cc: Chaitanya Sakinam <chaitanya.sakinam@nxp.com>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---5xr6Gr0irOxp3+3c
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKLyxAACgkQFHw5/5Y0
-tyxINAwAmxjz4iMiKPcDhAzJecvNlJ/ZWZKlCen6DSr3raUJi1UCN4Vxtk6e02JP
-zXbWeBKKEqL45QRO0u5pGlmt3852bevi+yIiDAlCW4Qth+ZjtjXCPlD8H+1OmgS6
-fsZw+AP5iYLiBRI6IyCDjP5hgEzzr04+g8nWS47dHWp9nBbV0mh7w+K9gKn2IErJ
-+Ab7zEWrz+t0cMDeODsCa3XJM6aD++PT80AEb4CNQgJFFs7LjxbfXVz/6Yo9FKqY
-RBdmRPKqpTHmTUqrXipjmD61UynltzoAE3aTIKN/0Ei27i4j+sngCQC/XSt8KVLl
-Tuwgm/Pin3HVxtcI4F2LwuLT8Tdy3Wi/LCxlGKPOAPgO7Ww4vjcuavY9ILE0RxOL
-mzukwVfb8949zH7l+ns41Q0Z7SgUexxBaueObpDr/sc+FKypKvlduf/zpQHCpN6b
-vzHmZdz2aFX/zzf/SmqgP/6r9f1no+8uS8v3SWJaQbbITMijlMWw1IRi6r7Qb/S9
-QeuVF3Ia
-=WgKu
------END PGP SIGNATURE-----
-
---5xr6Gr0irOxp3+3c--
-
---===============0238249729973089539==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
+index 47e88fc3dc..13cb7db9f0 100644
+--- a/arch/arm/mach-stm32mp/include/mach/stm32.h
++++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
+@@ -117,7 +117,6 @@ enum boot_device {
+ #define TAMP_BOOT_DEVICE_MASK		GENMASK(7, 4)
+ #define TAMP_BOOT_INSTANCE_MASK		GENMASK(3, 0)
+ #define TAMP_BOOT_FORCED_MASK		GENMASK(7, 0)
+-#define TAMP_BOOT_DEBUG_ON		BIT(16)
+ 
+ enum forced_boot_mode {
+ 	BOOT_NORMAL = 0x00,
+diff --git a/board/st/common/stpmic1.c b/board/st/common/stpmic1.c
+index 5fb1be2fd3..d52dce4f65 100644
+--- a/board/st/common/stpmic1.c
++++ b/board/st/common/stpmic1.c
+@@ -202,18 +202,4 @@ void stpmic1_init(u32 voltage_mv)
+ 			STPMIC1_BUCKS_MRST_CR,
+ 			STPMIC1_MRST_BUCK(STPMIC1_BUCK3),
+ 			STPMIC1_MRST_BUCK(STPMIC1_BUCK3));
+-
+-	/* Check if debug is enabled to program PMIC according to the bit */
+-	if (readl(TAMP_BOOT_CONTEXT) & TAMP_BOOT_DEBUG_ON) {
+-		log_info("Keep debug unit ON\n");
+-
+-		pmic_clrsetbits(dev, STPMIC1_BUCKS_MRST_CR,
+-				STPMIC1_MRST_BUCK_DEBUG,
+-				STPMIC1_MRST_BUCK_DEBUG);
+-
+-		if (STPMIC1_MRST_LDO_DEBUG)
+-			pmic_clrsetbits(dev, STPMIC1_LDOS_MRST_CR,
+-					STPMIC1_MRST_LDO_DEBUG,
+-					STPMIC1_MRST_LDO_DEBUG);
+-	}
+ }
+diff --git a/include/power/stpmic1.h b/include/power/stpmic1.h
+index d3567df326..201b1df762 100644
+--- a/include/power/stpmic1.h
++++ b/include/power/stpmic1.h
+@@ -23,12 +23,9 @@
+ 
+ /* BUCKS_MRST_CR */
+ #define STPMIC1_MRST_BUCK(buck)		BIT(buck)
+-#define STPMIC1_MRST_BUCK_DEBUG		(STPMIC1_MRST_BUCK(STPMIC1_BUCK1) | \
+-					 STPMIC1_MRST_BUCK(STPMIC1_BUCK3))
+ 
+ /* LDOS_MRST_CR */
+ #define STPMIC1_MRST_LDO(ldo)		BIT(ldo)
+-#define STPMIC1_MRST_LDO_DEBUG		0
+ 
+ /* BUCKx_MAIN_CR (x=1...4) */
+ #define STPMIC1_BUCK_ENA		BIT(0)
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0238249729973089539==--

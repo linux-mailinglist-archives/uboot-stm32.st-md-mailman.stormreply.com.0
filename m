@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACA7A53E505
-	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jun 2022 16:21:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 009D053E50D
+	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Jun 2022 16:26:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 72BF3C0D2C0;
-	Mon,  6 Jun 2022 14:21:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B69B8C57183;
+	Mon,  6 Jun 2022 14:26:04 +0000 (UTC)
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
+ [209.85.219.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E5E1AC0D2C0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2C0DBC5662F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  6 Jun 2022 14:21:36 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 256D2Jhf030658;
- Mon, 6 Jun 2022 16:21:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=hHx5igdwB13kmT6Va02grm2yHF5UNTVFTdGxVd8Voc4=;
- b=yvj+rkXkqxS4Z0+GC11p89FsMpOS8tdK0aiCBJP2YjP719oWK64zEHp3oQ4imWoE/slJ
- umbYl32fUpPBMdIkSpO61IVTzKrwLmOUw75bztD+lJ6U2uZdpLxxv5qT4lJWU+dkrGEL
- dfloXZc85wD2hFSTfr4mIo0pd+64Djdc1D7adUWjwCrv20uOx6/wiJE10WoWYJPVyzdB
- 1b+j1NgTx0Ssy8JRXhgBxi2+VYL+ToZ5bs8K7wTmXy5hDL9IHgjHcjWGiLcrLkzbwJRU
- LAaVhRUy/zeh54lQbVmE0tT3kEoBFT46K9sVC5PUfj9M4gruxEfwMiUl0ZwlUEz4tfsJ Qg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gfvha37fn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 06 Jun 2022 16:21:24 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 28A261000FD;
- Mon,  6 Jun 2022 16:04:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 038B022A6DF;
- Mon,  6 Jun 2022 16:04:20 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Mon, 6 Jun
- 2022 16:04:19 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 6 Jun 2022 16:04:16 +0200
-Message-ID: <20220606160414.v1.2.Ida901b98d25a7f60b6fb05d18f2e030d9c9ecc5c@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220606160414.v1.1.I4f6455f026820524103f7fbdffaafd3b75585197@changeid>
-References: <20220606160414.v1.1.I4f6455f026820524103f7fbdffaafd3b75585197@changeid>
+ Mon,  6 Jun 2022 14:26:03 +0000 (UTC)
+Received: by mail-qv1-f42.google.com with SMTP id b17so1816184qvz.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 06 Jun 2022 07:26:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=ZKfrlGYNkGuhoObcyzL79O2L1p+ylKt6aqYiCQ3KNfw=;
+ b=SmmWa2xdyRrdy9h0769Aa4nTo/HT4ElOxs8EuYLhl9Yd1jfhOhALf9fCoH7bi6AbSq
+ sIQqzUTQUvPVdsqSZe49Y1XVYxv2H3gA+JHf+9ellbn33n7jZFiPvfvcu0CU3sWIhjLf
+ 6FkbsMBz58GzwIu6SIO3jnd1Ye60QKXs8J9Tw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=ZKfrlGYNkGuhoObcyzL79O2L1p+ylKt6aqYiCQ3KNfw=;
+ b=X1cW1uMAL7q/MIRC8YtKY42zj/IxKMZ4idrcbXyUWJc+JjwMuEcx97zfdwpsw8Acfr
+ paUP13EG3PVIvYs4tjxQ9QRthwDCxdeLJ8VRSJoKnBYKYDx3YqITh/GQ4lm/FO8eY8F0
+ 4hXyCUBrzmZa+fIuPdA1QsZPCX63RS7H5npaYjHi0QHa0suZg6SNeR1qS2P5IaDbnPVy
+ 39HfDCrU0vfZ33ZaqhM3nYMglX7NoFRXnOolYCfjb4JNvBmK0Z03z2KABP1R2pm5SlNJ
+ VRDED9QmshFhqufDnP9tcAZ4OONsv1gusqmgi+EthnKKQuzzNDzNYc0qL7pXfaHR0Nci
+ loDQ==
+X-Gm-Message-State: AOAM53098cGAHknQJK+uobaKNIPmkuml1MUKqT7gEZvpoCairk1cuW8y
+ OM3jQIlkTtYkvplHQ8yucFisgw==
+X-Google-Smtp-Source: ABdhPJymbjkQSt5ht53S4epqA4yegu4wkmLT+eSPh5imMSWjkW6NqcKMJWV+NbfgjHEM0ElqIl+wlg==
+X-Received: by 2002:ad4:5be6:0:b0:464:4f31:870 with SMTP id
+ k6-20020ad45be6000000b004644f310870mr31206371qvc.109.1654525562123; 
+ Mon, 06 Jun 2022 07:26:02 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
+ [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
+ e2-20020ac80642000000b002f905347586sm9711716qth.14.2022.06.06.07.26.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 06 Jun 2022 07:26:01 -0700 (PDT)
+Date: Mon, 6 Jun 2022 10:25:59 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20220606142559.GR1958597@bill-the-cat>
+References: <20220602183406.1.Ie33bfca463591ba2decd642aa4a57220a3b2bffa@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.874,Hydra:6.0.517,FMLib:17.11.64.514
- definitions=2022-06-06_04,2022-06-03_01,2022-02-23_01
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v1 2/2] ARM: stm32: activate OF_LIVE for DHSOM
+In-Reply-To: <20220602183406.1.Ie33bfca463591ba2decd642aa4a57220a3b2bffa@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ Kamil Lulko <kamil.lulko@gmail.com>, Dillon Min <dillon.minfei@gmail.com>,
+ Vikas Manocha <vikas.manocha@st.com>
+Subject: Re: [Uboot-stm32] [PATCH] doc: update mail author for st-dt.rst
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,54 +69,63 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6209820206786444525=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Activate the live DT with CONFIG_OF_LIVE to reduce the DT parsing
-time.
 
-Tested-by: Marek Vasut <marex@denx.de>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+--===============6209820206786444525==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="CKf/2jVYos1l2hij"
+Content-Disposition: inline
 
-Changes in v1:
-- previously sent as RFC, Tested by Marek
-  http://patchwork.ozlabs.org/project/uboot/list/?series=301157
 
- configs/stm32mp15_dhcom_basic_defconfig | 1 +
- configs/stm32mp15_dhcor_basic_defconfig | 1 +
- 2 files changed, 2 insertions(+)
+--CKf/2jVYos1l2hij
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index ca3873c7e6..f91bc173d5 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -72,6 +72,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=nor0:256k(fsbl1),256k(fsbl2),1408k(uboot),64k(
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_ISO_PARTITION is not set
- # CONFIG_SPL_PARTITION_UUIDS is not set
-+CONFIG_OF_LIVE=y
- CONFIG_OF_LIST="stm32mp15xx-dhcom-pdk2 stm32mp15xx-dhcom-drc02 stm32mp15xx-dhcom-picoitx"
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index 4e70566e3f..b19033bdaa 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -70,6 +70,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=nor0:256k(fsbl1),256k(fsbl2),1408k(uboot),64k(
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_ISO_PARTITION is not set
- # CONFIG_SPL_PARTITION_UUIDS is not set
-+CONFIG_OF_LIVE=y
- CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
--- 
-2.25.1
+On Thu, Jun 02, 2022 at 06:34:49PM +0200, Patrick Delaunay wrote:
+
+> Update author email address with the one dedicated to
+> upstream activities.
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--CKf/2jVYos1l2hij
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKeDncACgkQFHw5/5Y0
+tyzBJAv/ZJ4KzCE7bX9oJflKQEaO47I1ghAsHjky+drjpjF6foYEOueXm1wcxXbw
+bvGunsW9KnXxpF6BIdt9EA363Id+9R+uUME9NqBaFJ60x755xQkJrm2uKTUuOOoX
+f0Je1taldb/CtOWHrPr8TPOHx77aFAx3eY6N4yircD2A1waC55zF9Pk+lLgdRMpW
+rPRci/zlACo5VaONM3+n5GALAsvkU9rTasQa54Ck5AapZdCoTxFF6j4bFtujRh92
+0ol23Vmlnjy9XfPltAbCqu86uldmDcdEywGenL49dU5yKTfTEIn1X8C7e3VGl3jN
+neTujAhLNGBm/yt9zZ6C38E7ov9cvKHmRHJ7nneKCg9ClKFPGKyZd8Lu7lMKbek4
+ZghkKnTMMBAsr7NODQn4v497BOxcgRMXyl8u+SO50WQJ1dlD/P1pj2CS/uSfsJ8P
+/vnM/6odQ8djaByiRr+kFNUlg8eHcEoxihXJIZDcfDA5XaTrJxbPQPi6EjpNPlw2
+DenVYXu5
+=7lbi
+-----END PGP SIGNATURE-----
+
+--CKf/2jVYos1l2hij--
+
+--===============6209820206786444525==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6209820206786444525==--

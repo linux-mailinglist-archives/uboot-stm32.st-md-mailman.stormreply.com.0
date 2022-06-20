@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ADEAD551AC8
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 15:37:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24B0C551F9E
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 17:02:27 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E3A2C56630;
-	Mon, 20 Jun 2022 13:37:37 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CF4F3C56630;
+	Mon, 20 Jun 2022 15:02:26 +0000 (UTC)
+Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
+ [209.85.219.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C3134C5662F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 451B0C0D2BF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jun 2022 13:37:36 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25K9DkcT018523;
- Mon, 20 Jun 2022 15:37:29 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=tPprqWMabUj7h9wFbGxK6JHIiM91Eypu0SiNXJGveuw=;
- b=d+zAA09nhc0gp6CdsZoG4aOv9EjYQz09M+1OPBoZ3k5yzjZ57JrizRcu+RN04hHlrDHU
- UvDd8wClzB0/Y6Jm9qrqr+AmFQFp7vAjcbTHDzpWG6PkgiiLpm7+roIUUJSsGHdldbsE
- vetCh0yuaMLHLM67M3+pFlBi11pw27tSwedFfyHehNGkMEU7WPLXM1HNpPXi9OS6PvTs
- O5aysGjk1SF5JJrKTs0m+j+Dg15xAjWONny/OPK3y+pRp9UDFTtsadZK1ddkxpI0CKSN
- MSTkL4Q7KCL6YVcLPbzdfTti4Gej8qjx17VaRi2FIEW28WCaI8QE72vX3yK+AqIm240d jg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gtp31skme-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Jun 2022 15:37:29 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0434210002A;
- Mon, 20 Jun 2022 15:37:27 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EB0D12278A8;
- Mon, 20 Jun 2022 15:37:27 +0200 (CEST)
-Received: from localhost (10.75.127.118) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Mon, 20 Jun
- 2022 15:37:27 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 20 Jun 2022 15:37:25 +0200
-Message-ID: <20220620153717.v2.1.Ifa06360115ffa3f3307372e6cdd98ec16759d6ba@changeid>
-X-Mailer: git-send-email 2.25.1
+ Mon, 20 Jun 2022 15:02:25 +0000 (UTC)
+Received: by mail-qv1-f42.google.com with SMTP id n15so12220329qvh.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 20 Jun 2022 08:02:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=HQPSipzNwkIdH+lJ9fqMq0I7ebgetZSmmH1b7nFJMg4=;
+ b=ubvhdjE1uaNa9Ri7gdQxuPap7tYzhJxmxiSi9d35MaWBibX8UpIFiSqWrq8E+wXznv
+ lxE/J2zxG3DORFIOxmis3fsgwZpvXpMN6XG91b48W76ppfoRHQE3dMXMB4QvhMX4IgOF
+ VeMn5lIFDpj5FM3FHL4/l62VW+iy3d53euyjA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=HQPSipzNwkIdH+lJ9fqMq0I7ebgetZSmmH1b7nFJMg4=;
+ b=VtlAHYf9Vl04ja+RGMK4n+CxDr6UhZk4Bri3XpYW3OjYMYNTFKxlVUc+zikSW43S9G
+ /VRQ3pSTtjrDqiFQGIrJ3L9sDdMD5PN/ALnc6bGcHja5ShT5G6GO6Op2sz8oJokn0AYh
+ KgK/qnhv4wFDZ+EgOe9iFKw3vMK4WL2OfUinClxRpP7qjNyY+pkm/TtqDRI9sataRMje
+ I4r2PaaN2E8DIHZv4rEyZzWoYUhMQbaOKghkWLDaazPJgz4TRSlnGO3s6T/AqC7K6pIx
+ ap3eAgGTbzZDuUFPlmX5zdEL6MpXqncrlaK7agqdXMyb73H73KdckUrrOpZDNMTLRXO5
+ YU7A==
+X-Gm-Message-State: AJIora93bSdmyfFPbF3QpGBgedw/kGEjGdbjCvvE+JY9EJ/R3enyPvs+
+ K077HOwZ0WpkIuZKZVWPBx+ZRA==
+X-Google-Smtp-Source: AGRyM1sGltiD5BCUGEOjXAjfNDzWlOoPGZeyCnX6oIYXWvKLvxQxtKFSZQR3ECEQXJ+hzMGlbcN4bQ==
+X-Received: by 2002:a05:622a:87:b0:305:209f:3dd5 with SMTP id
+ o7-20020a05622a008700b00305209f3dd5mr19742474qtw.24.1655737343937; 
+ Mon, 20 Jun 2022 08:02:23 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
+ [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
+ i3-20020a05620a248300b0069fc13ce23dsm12579534qkn.110.2022.06.20.08.02.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jun 2022 08:02:23 -0700 (PDT)
+Date: Mon, 20 Jun 2022 11:02:21 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20220620150221.GM2484912@bill-the-cat>
+References: <1fea8945-ebde-1c34-60f9-580ab4e3974b@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.118]
-X-ClientProxiedBy: GPXDAG2NODE5.st.com (10.75.127.69) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.64.514
- definitions=2022-06-20_05,2022-06-17_01,2022-02-23_01
-Cc: Tero Kristo <kristo@kernel.org>, Sean Anderson <sean.anderson@seco.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tero Kristo <t-kristo@ti.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2] clk: update clk_clean_rate_cache to use
-	private clk struct
+In-Reply-To: <1fea8945-ebde-1c34-60f9-580ab4e3974b@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot next / v2022.10 =
+ u-boot-stm32-20220620
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,79 +69,95 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1021330918659952877=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In clk_clean_rate_cache, clk->rate should update the private clock
-struct, in particular when CCF is activated, to save the cached
-rate value.
 
-When clk_get_parent_rate is called, the cached information
-is read from pclk->rate, with pclk = clk_get_parent(clk).
+--===============1021330918659952877==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="bnKz9hMOyugZBVhf"
+Content-Disposition: inline
 
-As the cached is read from private clk data, the update should
-be done also on it.
 
-Fixes: 6b7fd3128f7 ("clk: fix set_rate to clean up cached rates for the hierarchy")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+--bnKz9hMOyugZBVhf
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- set *clkp = clk when CCF is not activated and when the clock is not found
+On Mon, Jun 20, 2022 at 11:32:20AM +0200, Patrick DELAUNAY wrote:
 
- drivers/clk/clk-uclass.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+> I Tom,
+>=20
+> Please pull the STM32 related fixes for u-boot/next, v2022.10:
+> u-boot-stm32-20220620
+>=20
+> - Add STM32MP13 SoCs support with associated board STM32M135F-DK
+> - Correct livetree support in stm32mp1 boards
+> - Activate livetree for stm32mp15 DHSOM boards
+>=20
+> CI status:
+> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/12393
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull
+> origin/nexthttps://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> u-boot-stm32-20220620
+>=20
+> The following changes since commit 98c4828740f4944462b7d9608b95d5b73850c7=
+b0:
+>=20
+> =A0 Merge branch 'next' of https://gitlab.denx.de/u-boot/custodians/u-boo=
+t-imx
+> into next (2022-06-16 09:27:43 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> tags/u-boot-stm32-20220620
+>=20
+> for you to fetch changes up to eae488b77906692627622abc61f5b7160b6eb2a4:
+>=20
+> =A0 stm32mp1: fix reference for STMicroelectronics (2022-06-17 14:12:27 +=
+0200)
+>=20
 
-diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
-index b89c77bf794..5cfa022a6dc 100644
---- a/drivers/clk/clk-uclass.c
-+++ b/drivers/clk/clk-uclass.c
-@@ -544,6 +544,19 @@ ulong clk_round_rate(struct clk *clk, ulong rate)
- 	return ops->round_rate(clk, rate);
- }
- 
-+static void clk_get_priv(struct clk *clk, struct clk **clkp)
-+{
-+	*clkp = clk;
-+
-+	/* get private clock struct associated to the provided clock */
-+	if (CONFIG_IS_ENABLED(CLK_CCF)) {
-+		/* Take id 0 as a non-valid clk, such as dummy */
-+		if (clk->id)
-+			clk_get_by_id(clk->id, clkp);
-+	}
-+}
-+
-+/* clean cache, called with private clock struct */
- static void clk_clean_rate_cache(struct clk *clk)
- {
- 	struct udevice *child_dev;
-@@ -563,6 +576,7 @@ static void clk_clean_rate_cache(struct clk *clk)
- ulong clk_set_rate(struct clk *clk, ulong rate)
- {
- 	const struct clk_ops *ops;
-+	struct clk *clkp;
- 
- 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
- 	if (!clk_valid(clk))
-@@ -572,8 +586,10 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
- 	if (!ops->set_rate)
- 		return -ENOSYS;
- 
-+	/* get private clock struct used for cache */
-+	clk_get_priv(clk, &clkp);
- 	/* Clean up cached rates for us and all child clocks */
--	clk_clean_rate_cache(clk);
-+	clk_clean_rate_cache(clkp);
- 
- 	return ops->set_rate(clk, rate);
- }
--- 
-2.25.1
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--bnKz9hMOyugZBVhf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKwi/wACgkQFHw5/5Y0
+tyxhQAv9GnXLdGSfaO3Nyq/ZsbNQ+Ts3h0kiOhptz9cBbAFjILLrAP4qjPSbteAc
+a4amOxx9zdQivUIRDSZnGZvcvDUAbRhbcA+p3Zumkh3AHR9aPE23+ozAGawSwsgU
+C8St8jJbIiasUG0I1+SenuChGumE6gN7JbsspFCwGv2SrqTuMsR3Jmy+iYHUbR2s
+0xDxNZ78AKs15E0mIRffdpHm/IbAm83l+FnkUYmTOuZlE2wjwH35Q9XneOyqZFUJ
+6BydTX1BtYZKGmAQdOO5T7wfWkO5uOe5DDtsfDFjNWRH4tAriGXERCTG09MpX8lk
+JB8OCN4MYxPUQbVIN9ZMvQHlHQYWI+ZsbIqK35I0i3oVsezhUWGcqurszMrGEYg1
+VglUt8oJEmy8KBTMZQE5mC8jHS+t00BnDOPgZ2TREZBHNRkaQii24mBGdX5NPMgz
+PsRq5ssk82REpN48T+CJzOiHpJIzjXPux+/XaXhJB/njJWOEsz82ZFAAUTsnWo3x
+3J/nfLT/
+=7lfn
+-----END PGP SIGNATURE-----
+
+--bnKz9hMOyugZBVhf--
+
+--===============1021330918659952877==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1021330918659952877==--

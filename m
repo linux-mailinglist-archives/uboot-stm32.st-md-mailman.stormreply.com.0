@@ -2,62 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24B0C551F9E
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 17:02:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9E9455217A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 17:46:28 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CF4F3C56630;
-	Mon, 20 Jun 2022 15:02:26 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
- [209.85.219.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65FE2C57B6C;
+	Mon, 20 Jun 2022 15:46:28 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 451B0C0D2BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 643C0C5662F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jun 2022 15:02:25 +0000 (UTC)
-Received: by mail-qv1-f42.google.com with SMTP id n15so12220329qvh.12
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jun 2022 08:02:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=HQPSipzNwkIdH+lJ9fqMq0I7ebgetZSmmH1b7nFJMg4=;
- b=ubvhdjE1uaNa9Ri7gdQxuPap7tYzhJxmxiSi9d35MaWBibX8UpIFiSqWrq8E+wXznv
- lxE/J2zxG3DORFIOxmis3fsgwZpvXpMN6XG91b48W76ppfoRHQE3dMXMB4QvhMX4IgOF
- VeMn5lIFDpj5FM3FHL4/l62VW+iy3d53euyjA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=HQPSipzNwkIdH+lJ9fqMq0I7ebgetZSmmH1b7nFJMg4=;
- b=VtlAHYf9Vl04ja+RGMK4n+CxDr6UhZk4Bri3XpYW3OjYMYNTFKxlVUc+zikSW43S9G
- /VRQ3pSTtjrDqiFQGIrJ3L9sDdMD5PN/ALnc6bGcHja5ShT5G6GO6Op2sz8oJokn0AYh
- KgK/qnhv4wFDZ+EgOe9iFKw3vMK4WL2OfUinClxRpP7qjNyY+pkm/TtqDRI9sataRMje
- I4r2PaaN2E8DIHZv4rEyZzWoYUhMQbaOKghkWLDaazPJgz4TRSlnGO3s6T/AqC7K6pIx
- ap3eAgGTbzZDuUFPlmX5zdEL6MpXqncrlaK7agqdXMyb73H73KdckUrrOpZDNMTLRXO5
- YU7A==
-X-Gm-Message-State: AJIora93bSdmyfFPbF3QpGBgedw/kGEjGdbjCvvE+JY9EJ/R3enyPvs+
- K077HOwZ0WpkIuZKZVWPBx+ZRA==
-X-Google-Smtp-Source: AGRyM1sGltiD5BCUGEOjXAjfNDzWlOoPGZeyCnX6oIYXWvKLvxQxtKFSZQR3ECEQXJ+hzMGlbcN4bQ==
-X-Received: by 2002:a05:622a:87:b0:305:209f:3dd5 with SMTP id
- o7-20020a05622a008700b00305209f3dd5mr19742474qtw.24.1655737343937; 
- Mon, 20 Jun 2022 08:02:23 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
- [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
- i3-20020a05620a248300b0069fc13ce23dsm12579534qkn.110.2022.06.20.08.02.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Jun 2022 08:02:23 -0700 (PDT)
-Date: Mon, 20 Jun 2022 11:02:21 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <20220620150221.GM2484912@bill-the-cat>
-References: <1fea8945-ebde-1c34-60f9-580ab4e3974b@foss.st.com>
+ Mon, 20 Jun 2022 15:46:27 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25KDag9L025753;
+ Mon, 20 Jun 2022 17:46:26 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=pG4YDx2g9l9jkeqg7RCYZZn9FDZEPjWtE8sX6BWE0b8=;
+ b=LdYToV2DELDcYK5oLUopw5GzpHWERL6NcgrJvyxXahqWqix9EamKwsmLcGfHG7LCFD3w
+ 8NTZ9UOB2TsDlbnwoFYbU5Qm1NGm42ax8aS3u43RWCwYrKTge/jRsiu/ZBmRKxvKrIY3
+ p+zvOSyLXO3hjx2pY1f8wen0iwF9P+d2uj22OtWfas5fAWWi8PtIokhJbPkX4iiTa29J
+ z+8VJqBVy3cvt6hEykCZqcQTLJdCYyqEothp8bqqm6WJUEdu8KJQwpflfDyucg9GvGvL
+ y31e44fKJvM8ThMxrakUQ8dRfdmPp7EvafQsgje25yfszN/gjggJtsjsP42j/I2AN4ey aQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gtntu2jd9-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 20 Jun 2022 17:46:26 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A39B010002A;
+ Mon, 20 Jun 2022 17:46:25 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8F82822ECDB;
+ Mon, 20 Jun 2022 17:46:25 +0200 (CEST)
+Received: from [10.48.0.213] (10.75.127.50) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Mon, 20 Jun
+ 2022 17:46:25 +0200
+Message-ID: <671901e4-ec08-f51e-e0a9-543a8c59e119@foss.st.com>
+Date: Mon, 20 Jun 2022 17:46:24 +0200
 MIME-Version: 1.0
-In-Reply-To: <1fea8945-ebde-1c34-60f9-580ab4e3974b@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot next / v2022.10 =
- u-boot-stm32-20220620
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: <u-boot@lists.denx.de>
+References: <20220620111707.1.I32e861dc46886c23a866443be2bace22d86ae24e@changeid>
+ <20220620111707.3.I09a7e6bd976c0720cef2de21e3acd62ff8a7b846@changeid>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20220620111707.3.I09a7e6bd976c0720cef2de21e3acd62ff8a7b846@changeid>
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.64.514
+ definitions=2022-06-20_05,2022-06-17_01,2022-02-23_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 03/10] stm32mp: add support of STM32MP13x
+	Rev.Y
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,95 +72,68 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1021330918659952877=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi,
 
---===============1021330918659952877==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="bnKz9hMOyugZBVhf"
-Content-Disposition: inline
+On 6/20/22 11:17, Patrick Delaunay wrote:
+> Add support of STM32MP13x Rev.Y for the Silicon revision REV_ID = 0x1002.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+>   arch/arm/mach-stm32mp/include/mach/sys_proto.h | 1 +
+>   arch/arm/mach-stm32mp/stm32mp13x.c             | 3 +++
+>   2 files changed, 4 insertions(+)
+>
+> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> index 4b564e86dc5..02debea5469 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> @@ -41,6 +41,7 @@ u32 get_cpu_dev(void);
+>   
+>   #define CPU_REV1	0x1000
+>   #define CPU_REV1_1	0x1001
+> +#define CPU_REV1_2	0x1002
+
+Bad value for register decoding, REV_ID[15:0]: Silicon revision
+
+as minor version is a bitfield:
+
+#define CPU_REV1_2	0x1003
 
 
---bnKz9hMOyugZBVhf
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I will update this value in V2.
 
-On Mon, Jun 20, 2022 at 11:32:20AM +0200, Patrick DELAUNAY wrote:
 
-> I Tom,
->=20
-> Please pull the STM32 related fixes for u-boot/next, v2022.10:
-> u-boot-stm32-20220620
->=20
-> - Add STM32MP13 SoCs support with associated board STM32M135F-DK
-> - Correct livetree support in stm32mp1 boards
-> - Activate livetree for stm32mp15 DHSOM boards
->=20
-> CI status:
-> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/12393
->=20
-> Thanks,
-> Patrick
->=20
-> git request-pull
-> origin/nexthttps://source.denx.de/u-boot/custodians/u-boot-stm.git/
-> u-boot-stm32-20220620
->=20
-> The following changes since commit 98c4828740f4944462b7d9608b95d5b73850c7=
-b0:
->=20
-> =A0 Merge branch 'next' of https://gitlab.denx.de/u-boot/custodians/u-boo=
-t-imx
-> into next (2022-06-16 09:27:43 -0400)
->=20
-> are available in the Git repository at:
->=20
-> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
-> tags/u-boot-stm32-20220620
->=20
-> for you to fetch changes up to eae488b77906692627622abc61f5b7160b6eb2a4:
->=20
-> =A0 stm32mp1: fix reference for STMicroelectronics (2022-06-17 14:12:27 +=
-0200)
->=20
+>   #define CPU_REV2	0x2000
+>   #define CPU_REV2_1	0x2001
+>   
+> diff --git a/arch/arm/mach-stm32mp/stm32mp13x.c b/arch/arm/mach-stm32mp/stm32mp13x.c
+> index bd3f24c349a..845d973ad1b 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp13x.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp13x.c
+> @@ -126,6 +126,9 @@ void get_soc_name(char name[SOC_NAME_SIZE])
+>   	case CPU_REV1_1:
+>   		cpu_r = "Z";
+>   		break;
+> +	case CPU_REV1_2:
+> +		cpu_r = "Y";
+> +		break;
+>   	default:
+>   		cpu_r = "?";
+>   		break;
 
-Applied to u-boot/next, thanks!
 
---=20
-Tom
+Regards
 
---bnKz9hMOyugZBVhf
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmKwi/wACgkQFHw5/5Y0
-tyxhQAv9GnXLdGSfaO3Nyq/ZsbNQ+Ts3h0kiOhptz9cBbAFjILLrAP4qjPSbteAc
-a4amOxx9zdQivUIRDSZnGZvcvDUAbRhbcA+p3Zumkh3AHR9aPE23+ozAGawSwsgU
-C8St8jJbIiasUG0I1+SenuChGumE6gN7JbsspFCwGv2SrqTuMsR3Jmy+iYHUbR2s
-0xDxNZ78AKs15E0mIRffdpHm/IbAm83l+FnkUYmTOuZlE2wjwH35Q9XneOyqZFUJ
-6BydTX1BtYZKGmAQdOO5T7wfWkO5uOe5DDtsfDFjNWRH4tAriGXERCTG09MpX8lk
-JB8OCN4MYxPUQbVIN9ZMvQHlHQYWI+ZsbIqK35I0i3oVsezhUWGcqurszMrGEYg1
-VglUt8oJEmy8KBTMZQE5mC8jHS+t00BnDOPgZ2TREZBHNRkaQii24mBGdX5NPMgz
-PsRq5ssk82REpN48T+CJzOiHpJIzjXPux+/XaXhJB/njJWOEsz82ZFAAUTsnWo3x
-3J/nfLT/
-=7lfn
------END PGP SIGNATURE-----
-
---bnKz9hMOyugZBVhf--
-
---===============1021330918659952877==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1021330918659952877==--

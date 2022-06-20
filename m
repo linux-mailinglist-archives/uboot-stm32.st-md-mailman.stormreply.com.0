@@ -2,61 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F9BB5511CB
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 09:50:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DED345513F9
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jun 2022 11:17:28 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4DB2C0D2BF;
-	Mon, 20 Jun 2022 07:50:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9A4DDC57183;
+	Mon, 20 Jun 2022 09:17:28 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 886B0C035BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 239B3C03FDF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jun 2022 07:50:07 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25K7LYPK025696;
- Mon, 20 Jun 2022 09:50:06 +0200
+ Mon, 20 Jun 2022 09:17:27 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25K8uFvh025790;
+ Mon, 20 Jun 2022 11:17:25 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : mime-version : content-transfer-encoding :
  content-type; s=selector1;
- bh=8SfvNCCDzkj3PqbnAXVKVeQbR0qPEcu4ij0Oy+lsg4Y=;
- b=c87yB/mcW/a6VkrAZdJ4OtTrvd5w3kt4PwwSUW67PN77ROjBqVpYSv5YOSfHYwRcS4qX
- hzcu2lZb+Jo5TMrpLAY9z824+SuNd7sHkeccPr8HbX52lNe53TpgaGAiN1+Kg32hqE0y
- vzn1P5wtxvYVg5FInOpZrCshNtDt5A6ORcdwfCAMIHWb2xHlxL7rDt86vsh3nZPoeaHN
- 4QvtvKvE4AGJSJ3a6dAWQpwOYj0eWSOL3CONxw2xdufVYa9ES5Mi6bCc1ScMa0D25rZQ
- UjWJYU5eMrbTyus+D4GiVBm6HuICDGO05FrDe3Y9eRGMNpDksTgWnp72fqbJU8OFO6Qs Ew== 
+ bh=isMa0vB0jNvjDW7i/pmwn98nFjZEsSxW1rPP09etp9k=;
+ b=1jRT9FnARmFBkR054FUeHlYpnBSG09uh2rxTXK6WNTPuAAHsxdngUhByGZnCJdbj13+b
+ PESxt6LgpQjX8UU2Qnxx/WxkJcRiokRKkz/KP+4Q/rNfgYA0hbixDrwAS3UoJnFLL1NQ
+ YB0n1FJ1cOaUclzjS7qQmtugK8Lz8rjeRj53G0YbHa7FsAxHbhpJYwiXxNxuUDusFsWY
+ ZjJRu7AxON0muqRBiI57wqAcUhZZvKkxPKKc7meYxtmSD+066MGTgnJ7ozL+fTX/vLKQ
+ HxOkv54b2d3PmEXv/T41Gm8j0AgneRTQnkxb/3vHGwX7uSlmbf86SgMA6BmHSC2u8hx2 Cg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gs6wc0u3k-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3gtntu04df-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Jun 2022 09:50:06 +0200
+ Mon, 20 Jun 2022 11:17:25 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D856D10002A;
- Mon, 20 Jun 2022 09:50:05 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 96B6F10002A;
+ Mon, 20 Jun 2022 11:17:23 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B2E522138D4;
- Mon, 20 Jun 2022 09:50:05 +0200 (CEST)
-Received: from localhost (10.75.127.116) by SHFDAG1NODE1.st.com (10.75.129.69)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BBA772171F8;
+ Mon, 20 Jun 2022 11:17:23 +0200 (CEST)
+Received: from localhost (10.75.127.118) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Mon, 20 Jun
- 2022 09:50:05 +0200
+ 2022 11:17:23 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 20 Jun 2022 09:50:01 +0200
-Message-ID: <20220620094959.1.I4d177d06061a5973e5cd25d2b61e74fdb2861a2a@changeid>
+Date: Mon, 20 Jun 2022 11:17:04 +0200
+Message-ID: <20220620111707.1.I32e861dc46886c23a866443be2bace22d86ae24e@changeid>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.116]
+X-Originating-IP: [10.75.127.118]
 X-ClientProxiedBy: GPXDAG2NODE5.st.com (10.75.127.69) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.64.514
  definitions=2022-06-20_05,2022-06-17_01,2022-02-23_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp: simplify the STM32MP15x package
-	parsing code
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heiko Schocher <hs@denx.de>
+Subject: [Uboot-stm32] [PATCH 01/10] i2c: stm32: add support for the st,
+	stm32mp13 SOC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,48 +74,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Simplify the package parsing code for STM32MP15X as package can be
-affected with get_cpu_package() result.
+The stm32mp13 soc differs from the stm32mp15 in terms of
+clear register offset for controlling the FMP (Fast Mode Plus).
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/stm32mp15x.c | 15 +++------------
- 1 file changed, 3 insertions(+), 12 deletions(-)
+ drivers/i2c/stm32f7_i2c.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp15x.c
-index a093e6163e6..660c907a6ba 100644
---- a/arch/arm/mach-stm32mp/stm32mp15x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp15x.c
-@@ -274,7 +274,6 @@ static void get_cpu_string_offsets(unsigned int *type, unsigned int *pkg,
- 	u32 cpu_type = get_cpu_type();
- 	u32 ct = cpu_type & ~(BIT(7) | BIT(0));
- 	u32 cm = ((cpu_type & BIT(7)) >> 6) | (cpu_type & BIT(0));
--	u32 cp = get_cpu_package();
+diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
+index c6ae65badb7..bf2a6c9b4bd 100644
+--- a/drivers/i2c/stm32f7_i2c.c
++++ b/drivers/i2c/stm32f7_i2c.c
+@@ -267,6 +267,10 @@ static const struct stm32_i2c_data stm32mp15_data = {
+ 	.fmp_clr_offset = 0x40,
+ };
  
- 	/* Bits 0 and 7 are the ACDF, 00:C 01:A 10:F 11:D */
- 	switch (ct) {
-@@ -293,17 +292,9 @@ static void get_cpu_string_offsets(unsigned int *type, unsigned int *pkg,
- 	}
++static const struct stm32_i2c_data stm32mp13_data = {
++	.fmp_clr_offset = 0x4,
++};
++
+ static int stm32_i2c_check_device_busy(struct stm32_i2c_priv *i2c_priv)
+ {
+ 	struct stm32_i2c_regs *regs = i2c_priv->regs;
+@@ -957,6 +961,7 @@ static const struct dm_i2c_ops stm32_i2c_ops = {
+ static const struct udevice_id stm32_i2c_of_match[] = {
+ 	{ .compatible = "st,stm32f7-i2c", .data = (ulong)&stm32f7_data },
+ 	{ .compatible = "st,stm32mp15-i2c", .data = (ulong)&stm32mp15_data },
++	{ .compatible = "st,stm32mp13-i2c", .data = (ulong)&stm32mp13_data },
+ 	{}
+ };
  
- 	/* Package */
--	switch (cp) {
--	case STM32MP15_PKG_AA_LBGA448:
--	case STM32MP15_PKG_AB_LBGA354:
--	case STM32MP15_PKG_AC_TFBGA361:
--	case STM32MP15_PKG_AD_TFBGA257:
--		*pkg = cp;
--		break;
--	default:
--		*pkg = 0;
--		break;
--	}
-+	*pkg = get_cpu_package();
-+	if (*pkg > STM32MP15_PKG_AA_LBGA448)
-+		*pkg = STM32MP15_PKG_UNKNOWN;
- 
- 	/* Revision */
- 	switch (get_cpu_rev()) {
 -- 
 2.25.1
 

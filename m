@@ -2,61 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A022562151
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jun 2022 19:33:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE422562CC8
+	for <lists+uboot-stm32@lfdr.de>; Fri,  1 Jul 2022 09:36:41 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E991C5662F;
-	Thu, 30 Jun 2022 17:33:22 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 30DE6C0D2BF;
+	Fri,  1 Jul 2022 07:36:41 +0000 (UTC)
+Received: from mx4.securetransport.de (mx4.securetransport.de [178.254.6.145])
+ (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 76452C03FC8
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 401ABC03FDF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Jun 2022 17:33:20 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25UDvsnf014884;
- Thu, 30 Jun 2022 19:33:17 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=LlhtZ/uHNGVx1yPg+7a7MOjAbaND0huGUoNjpglMH78=;
- b=GA97aJmjgT8Hdy4mAzLAn3kb1jfMD74IoQOdMf0BqopgyrWdq6914hBbKPB77LKB0CIN
- 4YxAEkJ+YOmD4SGsBiMUUjgv6d96orcxxu29x83bZW7unKFWKBjzCt3EPqP3kTzgXsM4
- /zmVjr7hUL5jKzcnq17AB5wTYzen83L/CEpOEKLJ/SYRQ20C0skB8u9eqtzjQkxeLxgi
- zaVXgDaE1bXtl2XYH8ElF7LOkHYnXjJB5oYMjuao4YOFy3WGtFkKNe0+lr1KlVygGLFY
- 4ijnSM+ToPlPOrqLjapvv5e3ioFtSty4YopkmTeSVllWz4EOkxZQ1Z/lvQvbnOWZb2C8 DA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3h1d6497tf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jun 2022 19:33:17 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C453D10002A;
- Thu, 30 Jun 2022 19:33:16 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node6.st.com [10.75.129.135])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BF448229A73;
- Thu, 30 Jun 2022 19:33:16 +0200 (CEST)
-Received: from localhost (10.75.127.50) by EQNDAG1NODE6.st.com (10.75.129.135)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Thu, 30 Jun
- 2022 19:32:46 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 30 Jun 2022 19:32:45 +0200
-Message-ID: <20220630193228.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
-X-Mailer: git-send-email 2.25.1
+ Fri,  1 Jul 2022 07:36:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
+ s=dhelectronicscom; t=1656660979;
+ bh=vrt5QH/LfP1DPOAZ4gbtTVz2YSN+JrDNDOS7b4ISqXg=;
+ h=From:To:CC:Subject:Date:References:In-Reply-To:From;
+ b=nqEU06fWOthLnrXSuSWWy++y6QZqN3XNToaDobbQgmT2+6ltwYAynJ0CAJ3zOILFr
+ +7RZtb8Oaq23R7U0n7zUxClyF6S5IVRBgUE2FXz29E1FsDPCi/JfXIBpsYbeWwfVNN
+ Rl7KvH0OiMn0Rr/I9neIr1C6ngm1Y9bjuG/8UFiwPXf3n9WW0rhuUy1a0OA+TAOUS8
+ a8tOkMcd9eQSokO2wB13W4hVjRlgaYkNfmbxZpRc+Dti1VP0a0LAzgoGQ4kezhMGFU
+ A3Tj4Q7Zu9aWUIFXCX36YQ0tRnJqyA6Ik33AHNSEKlRFnF47NOS4os3llKQXF47YA6
+ 0d+Uu6rDsEouA==
+X-secureTransport-forwarded: yes
+From: Johann Neuhauser <jneuhauser@dh-electronics.com>
+Complaints-To: abuse@cubewerk.de
+To: Marek Vasut <marex@denx.de>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Thread-Topic: [PATCH] arm: dts: stm32mp1: Drop fastboot and stm32prog trigger
+ gpios on DHCOM
+Thread-Index: AQHYjIyDQjm2hhwoCUaOoTwCzRC3qa1n7xGAgAExFcA=
+Date: Fri, 1 Jul 2022 07:36:11 +0000
+Message-ID: <8ebbf6d336cd410aac13d92a0ff44e08@dh-electronics.com>
+References: <20220630141949.10585-1-jneuhauser@dh-electronics.com>
+ <a4962258-852b-fc7c-0c19-166fa1cdde00@denx.de>
+In-Reply-To: <a4962258-852b-fc7c-0c19-166fa1cdde00@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To EQNDAG1NODE6.st.com
- (10.75.129.135)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-06-30_12,2022-06-28_01,2022-06-22_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH] log: force DEBUG when LOG_DEBUG is activated
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>, u-boot <u-boot@dh-electronics.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] arm: dts: stm32mp1: Drop fastboot and
+ stm32prog trigger gpios on DHCOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,41 +62,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-When CONFIG_LOG is activated, if LOG_DEBUG is defined in a file and
-DEBUG is not defined the trace with debug() macro are not displayed,
-because the parameter cond : _DEBUG = 0 is checked in debug_cond().
+> -----Original Message-----
+> From: Marek Vasut [mailto:marex@denx.de]
+> Sent: Thursday, June 30, 2022 5:20 PM
+> 
+> On 6/30/22 16:19, Johann Neuhauser wrote:
+> > PA13 and PA14 are used for USB power control and can't be used
+> > to enforce fastboot or stm32prog mode by pressing a button.
+> >
+> > Defining CONFIG_FASTBOOT/CONFIG_CMD_STM32PROG without this patch applied
+> > results in fastboot/stm32prog always starting, because PA13/PA14 are always
+> > low during boot. So drop the wrong trigger gpios definitions.
+> >
+> > Signed-off-by: Johann Neuhauser <jneuhauser@dh-electronics.com>
+> 
+> Those GPIOs also likely make no sense on DHCOM , right ?
 
-With this patch the define DEBUG, used to force the trace generated by
-debug() macro, is linked with the define LOG_DEBUG, used to force the
-trace generated by other macros (log_debug, dev_dbg, pr_debug).
-
-We only need to define LOG_DEBUG in a file to activate all the
-traces generated by any U-Boot debug macro, as it is described in
-/doc/develop/logging.rst
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- include/log.h | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/include/log.h b/include/log.h
-index 8f35c10abb5..7abc70e4398 100644
---- a/include/log.h
-+++ b/include/log.h
-@@ -194,6 +194,9 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
- 
- #ifdef LOG_DEBUG
- #define _LOG_DEBUG	LOGL_FORCE_DEBUG
-+#ifndef DEBUG
-+#define DEBUG
-+#endif
- #else
- #define _LOG_DEBUG	0
- #endif
--- 
-2.25.1
-
+They would only make sense on the DHCOM PDK2, since this is the only
+mainline baseboard with user buttons available in U-Boot.
+> 
+> Reviewed-by: Marek Vasut <marex@denx.de>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

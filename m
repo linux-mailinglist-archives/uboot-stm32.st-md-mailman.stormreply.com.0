@@ -2,62 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7204571336
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Jul 2022 09:39:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 188165715A3
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Jul 2022 11:24:16 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 731A1C640F8;
-	Tue, 12 Jul 2022 07:39:59 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9CBA1C640F7;
+	Tue, 12 Jul 2022 09:24:15 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7BD74C03FC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 59A6FC03FD4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Jul 2022 07:39:57 +0000 (UTC)
+ Tue, 12 Jul 2022 09:24:14 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 26C7MPWb023227;
- Tue, 12 Jul 2022 09:39:55 +0200
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 26C7MORI023208;
+ Tue, 12 Jul 2022 11:24:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=SsPj1WabC4WdRaHpyKp4lGc+1mmeFDQFLHpXWJfaZGs=;
- b=lLswSDVViHBT680A4LylVXayy2/EJrQyvO+tFz02iNr821g52yErRVZ/RmNap3SFMYem
- qNUtSNLM7B9erq6CyRuBeegso7A4meV21Cw9sYCtF2zi3mO+id+KOb4cP1nHFJ634tGV
- spZWTmHigF7eqTg6nUD8+Q0Kiyv2shz7k+B8URwRER/viphXriKLxhnXTdL6Kf4RNAp2
- 0vYcFB61zTmDq1et7SiOf1ZvzlhkT5vf+l2S17Sfa+VtXDBOxr3Lx3bJbdXEw6tn2oH2
- aRJ41RBBLT2KnQtVHn0HlvU9X2MTnZC2NI91AtxjbUMeKcez1xhyV7qfzkmssE0OnDBc ew== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=NEimgfniXp+RmJ0BG3XygpB0pzuUFlfxp8iYcuykYPo=;
+ b=jiq/5M4FocBoKVU948+sNfxkYjBFK34XKhKdVj1e8STz+xwIfDwwm3BGw+a2ozS2sdMp
+ ia04ODmVnH87UYAbeEYJGnGBEDC8+DC1gr3bekHe7uce7zxWgNXM8rYfSbNKldCVmA7C
+ RE7iksB9kBHqL5fujEcxOMZBOglgzs/Kh3a++WMSmJB7BeAt2jON5qkRSwT4CCWHtnwt
+ o8TlAngjDHSi9aA4kyNK9nlVymnVhdnPQnTH2yOaHyBbwmr+3dmu23lff86Ud7nN5XG4
+ n8t9ovfQP39p61/0qpcY2nufTZWhTyxDtWpzq/QcIrdJCCvu1Owcpw5uqjVNAUDliLdh 1Q== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3h94gu837a-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3h94gu8rgx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Jul 2022 09:39:55 +0200
+ Tue, 12 Jul 2022 11:24:13 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D715310002A;
- Tue, 12 Jul 2022 09:39:54 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8D34D10002A;
+ Tue, 12 Jul 2022 11:24:12 +0200 (CEST)
 Received: from Webmail-eu.st.com (eqndag1node6.st.com [10.75.129.135])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B4AB4211F1D;
- Tue, 12 Jul 2022 09:39:53 +0200 (CEST)
-Received: from localhost (10.75.127.46) by EQNDAG1NODE6.st.com (10.75.129.135)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6507D215135;
+ Tue, 12 Jul 2022 11:24:12 +0200 (CEST)
+Received: from localhost (10.75.127.45) by EQNDAG1NODE6.st.com (10.75.129.135)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 12 Jul
- 2022 09:39:53 +0200
+ 2022 11:24:12 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 12 Jul 2022 09:39:49 +0200
-Message-ID: <20220712093902.v2.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
+To: <u-boot@lists.denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>
+Date: Tue, 12 Jul 2022 11:24:07 +0200
+Message-ID: <165761774974.78107.9106866015167631531.b4-ty@foss.st.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220711194539.1.I96e7509b1edb4889e3d0d8a48e942556015ac705@changeid>
+References: <20220711194539.1.I96e7509b1edb4889e3d0d8a48e942556015ac705@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.46]
+X-Originating-IP: [10.75.127.45]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To EQNDAG1NODE6.st.com
  (10.75.129.135)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
  definitions=2022-07-12_05,2022-07-08_01,2022-06-22_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH v2] log: force DEBUG when LOG_DEBUG is
-	activated
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Gatien CHEVALLIER <gatien.chevallier@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32m15: support
+	STM32MP_BOARD_EXTRA_ENV for st boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,83 +75,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-When CONFIG_LOG is activated, if LOG_DEBUG is defined in a file and
-DEBUG is not defined the trace with debug() macro are not displayed,
-because the parameter cond : _DEBUG = 0 is checked in debug_cond().
+On Mon, 11 Jul 2022 19:45:50 +0200, Patrick Delaunay wrote:
+> Correctly handle STM32MP_BOARD_EXTRA_ENV define in stm32mp15_st_common.h;
+> the STM32MP_BOARD_EXTRA_ENV is added in CONFIG_EXTRA_ENV_SETTINGS
+> definition, as it is done "stm32mp15_st_common.h"
+> 
+> Without this patch, the content of STM32MP_BOARD_EXTRA_ENV is not used in
+> the default environment for STMicroelectronics boards.
+> 
+> [...]
 
-With this patch the define DEBUG, used to force the trace generated by
-debug() macro, is linked with the define LOG_DEBUG, used to force the
-trace generated by other macros (log_debug, dev_dbg, pr_debug).
+Applied to stm32/master, thanks!
 
-We only need to define LOG_DEBUG in a file to activate all the
-traces generated by any U-Boot debug macro, as it is described in
-/doc/develop/logging.rst
+[1/1] configs: stm32m15: support STM32MP_BOARD_EXTRA_ENV for st boards
+      commit: 6500c5760ccf8dffbb21cd74df8eabffb13d70dd
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
-Changes in v2:
-- update logging.rst
-
- doc/develop/logging.rst | 19 +++++++------------
- include/log.h           |  3 +++
- 2 files changed, 10 insertions(+), 12 deletions(-)
-
-diff --git a/doc/develop/logging.rst b/doc/develop/logging.rst
-index 51095b05ba9..704a6bf1d84 100644
---- a/doc/develop/logging.rst
-+++ b/doc/develop/logging.rst
-@@ -66,26 +66,21 @@ Sometimes it is useful to turn on logging just in one file. You can use this
-    #define LOG_DEBUG
- 
- to enable building in of all logging statements in a single file. Put it at
--the top of the file, before any #includes.
--
--To actually get U-Boot to output this you need to also set the default logging
--level - e.g. set CONFIG_LOG_DEFAULT_LEVEL to 7 (:c:data:`LOGL_DEBUG`) or more.
--Otherwise debug output is suppressed and will not be generated.
-+the top of the file, before any #includes and any message in the file will be
-+written, regardless of the value of CONFIG_LOG_DEFAULT_LEVEL.
- 
- Using DEBUG
- -----------
- 
- U-Boot has traditionally used a #define called DEBUG to enable debugging on a
--file-by-file basis. The debug() macro compiles to a printf() statement if
--DEBUG is enabled, and an empty statement if not.
-+file-by-file basis but LOG_DEBUG are intended to replace it with the logging
-+facilities; DEBUG is activated when LOG_DEBUG is activated.
- 
- With logging enabled, debug() statements are interpreted as logging output
--with a level of LOGL_DEBUG and a category of LOGC_NONE.
-+with a level of LOGL_DEBUG and a category of LOG_CATEGORY.
- 
--The logging facilities are intended to replace DEBUG, but if DEBUG is defined
--at the top of a file, then it takes precedence. This means that debug()
--statements will result in output to the console and this output will not be
--logged.
-+With logging disabled, the debug() macro compiles to a printf() statement
-+if DEBUG is enabled and to an empty statement if not.
- 
- Logging statements
- ------------------
-diff --git a/include/log.h b/include/log.h
-index 8f35c10abb5..7abc70e4398 100644
---- a/include/log.h
-+++ b/include/log.h
-@@ -194,6 +194,9 @@ int _log_buffer(enum log_category_t cat, enum log_level_t level,
- 
- #ifdef LOG_DEBUG
- #define _LOG_DEBUG	LOGL_FORCE_DEBUG
-+#ifndef DEBUG
-+#define DEBUG
-+#endif
- #else
- #define _LOG_DEBUG	0
- #endif
+Best regards,
 -- 
-2.25.1
-
+Patrick Delaunay <patrick.delaunay@foss.st.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

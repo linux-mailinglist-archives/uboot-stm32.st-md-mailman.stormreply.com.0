@@ -2,62 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD3A05813C7
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Jul 2022 15:05:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33986581A8F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Jul 2022 21:52:58 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 73DC6C640ED;
-	Tue, 26 Jul 2022 13:05:30 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D55DFC5C829;
+	Tue, 26 Jul 2022 19:52:57 +0000 (UTC)
+Received: from mail-vs1-f45.google.com (mail-vs1-f45.google.com
+ [209.85.217.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D61CAC5C829
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C89D5C035BE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Jul 2022 13:05:28 +0000 (UTC)
-Received: from janitor.denx.de (unknown [62.91.23.180])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: noc@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 824C184125
+ Tue, 26 Jul 2022 19:52:56 +0000 (UTC)
+Received: by mail-vs1-f45.google.com with SMTP id k129so14665655vsk.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Jul 2022 15:05:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1658840728;
- bh=z2FP+vdtQNRxkskSGpvCd5EDTLH/9HZNJANUB8cLfxc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=l08yz0Ja9Kuh006KUexjglfGVHa5UDwSjoNDeKynHuVCoCdPEwr4TsvIL8IQxwn2c
- sEdM4cfuu6sZLztAHwnqJzPK7tPmZOdcjTpTfbyTDOe459S4nQ27YvOvm4Trrdutig
- V6LubhTpunkzvYRVJx5YyzA5GwkEHHbr8fVYqZrBaZuS+tLzW8Mhkxj7rVZ4amrIZz
- RAVj/LN7MQVcLf7ApQ3aKWMcJtyUZdcH82QWWyO4ygOzMbe9yy/HxRQuCWTmxjsipy
- 3d7qptTP7s/EZeyFEhSm4Bn7wg3pnxYxTMYwDtccVZOnn0lquZDhcOl+3KtlDXE7q4
- 7nLfp4n43YY2Q==
-Received: by janitor.denx.de (Postfix, from userid 108)
- id 31BE4A02A4; Tue, 26 Jul 2022 15:05:28 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on janitor.denx.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,URIBL_BLOCKED
- autolearn=unavailable autolearn_force=no version=3.4.2
-Received: from xpert.denx.de (xpert.denx.de [192.168.0.4])
- by janitor.denx.de (Postfix) with ESMTPS id 39B7BA009C;
- Tue, 26 Jul 2022 15:05:10 +0200 (CEST)
-Received: by xpert.denx.de (Postfix, from userid 535)
- id 2A5583E0087; Tue, 26 Jul 2022 15:05:10 +0200 (CEST)
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Date: Tue, 26 Jul 2022 15:04:53 +0200
-Message-Id: <20220726130454.2829205-5-pro@denx.de>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20220726130454.2829205-1-pro@denx.de>
-References: <20220726130454.2829205-1-pro@denx.de>
+ Tue, 26 Jul 2022 12:52:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=mime-version:sender:from:in-reply-to:references:date:message-id
+ :subject:to:cc;
+ bh=wJBHx+MsxJXoghGB+Q/BUM/LIN3KHAz14tRidFjoLao=;
+ b=B9umZWr7F4YsgeUQWkn73PWfNCwcxke0fL7LS6M1/W9PpxzZQn7wWEa9j+Ol/UHgOK
+ ozCf37bxCE5i1rctnFilJjFrY1tp/JJngJPdhc6lHFZVO15ic+doLT5thX3gRtJ4QBXH
+ fHgSgaqbrVofyS8somk801njxZ0mVhGIBMASc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
+ :date:message-id:subject:to:cc;
+ bh=wJBHx+MsxJXoghGB+Q/BUM/LIN3KHAz14tRidFjoLao=;
+ b=spuo0Huo/+WpnbfyMg5lD8th3swi5/sYl01dkXTt5rnkSPTRx0ySg9ti63qw8szHk8
+ BNAKo32vk8wOFAsgF5uWOInnijiXk709bOG0pqyjUG9s1BV/dsma1CO6ankV+q4wOInr
+ 5YwAGRj13vGkZsjXXgjmBv+Ky5RtAfeRw4sHTOB3tA2njmqICisSAZEyRUuYGKGSGH7o
+ DpXHv6qTRVnEk9zVZSu1ovTZnMQh4HMjtnRle7mB0qwVpcx9V3oYya4XqupYRBNR7pWe
+ vdAaxIfw6O1xvpfcZUgPXu+NkLzesVPkvI44FhLXhi0CvgHYMULW47/RK+UyfIbzCOJg
+ /hVg==
+X-Gm-Message-State: AJIora8toRj91G751ATasDBIWKss5odsb7/0fJTMItDkXzo7tD1s6A/C
+ jcXF8nFV7MMhJKAfClU8ZahmCjxJorIMIuUplNa0KQ==
+X-Google-Smtp-Source: AGRyM1vZCmA8lilBADyIBfOaLB+peGl9K/L2IO1J85mLj3a+23QHWr3Cwc4v1rl4Xjm1yEw7iljWL3bZcTyV30IhXtc=
+X-Received: by 2002:a67:cc1a:0:b0:358:3a5f:fec1 with SMTP id
+ q26-20020a67cc1a000000b003583a5ffec1mr5701565vsl.61.1658865175573; Tue, 26
+ Jul 2022 12:52:55 -0700 (PDT)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 26 Jul 2022 15:52:53 -0400
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: Marek Vasut <marex@denx.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, peng.fan@nxp.com,
- festevam@denx.de, u-boot@dh-electronics.com, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philip Oberfichtner <pro@denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, sbabic@denx.de
-Subject: [Uboot-stm32] [PATCH v4 4/4] ARM: stm32: DH: Use common MAC address
-	functions
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20220712093902.v2.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
+References: <20220712093902.v2.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
+Date: Tue, 26 Jul 2022 15:52:53 -0400
+X-Google-Sender-Auth: 3VCEk4e1G08vEc6t4wbFyLj3lRY
+Message-ID: <CAPnjgZ3QbauJOdGaPCGnc-oCtnba+6qVMMUavJky-8S21MpDJQ@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v2] log: force DEBUG when LOG_DEBUG is
+	activated
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,183 +71,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-To reduce code duplication, let the stm32 based DH boards use the common
-code for setting up their MAC addresses.
+When CONFIG_LOG is activated, if LOG_DEBUG is defined in a file and
+DEBUG is not defined the trace with debug() macro are not displayed,
+because the parameter cond : _DEBUG = 0 is checked in debug_cond().
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
-Tested-by: Marek Vasut <marex@denx.de>
-Reviewed-by: Marek Vasut <marex@denx.de>
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+With this patch the define DEBUG, used to force the trace generated by
+debug() macro, is linked with the define LOG_DEBUG, used to force the
+trace generated by other macros (log_debug, dev_dbg, pr_debug).
 
+We only need to define LOG_DEBUG in a file to activate all the
+traces generated by any U-Boot debug macro, as it is described in
+/doc/develop/logging.rst
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
-Changes in v4:
-        - Replace printf() by log_err()
-        - Reviewed by Patrick
-
-Changes in v3:
-        - Reviewed by Marek
-
 Changes in v2:
-        - convert to livetree (rebase on commit 5a605b7c86152)
-        - Tested-by Marek
+- update logging.rst
 
- board/dhelectronics/dh_stm32mp1/board.c | 102 +++++++++++-------------
- 1 file changed, 45 insertions(+), 57 deletions(-)
+ doc/develop/logging.rst | 19 +++++++------------
+ include/log.h           |  3 +++
+ 2 files changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 7a4c08cb7f..e3c7ed1049 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -42,6 +42,7 @@
- #include <usb/dwc2_udc.h>
- #include <watchdog.h>
- #include <dm/ofnode.h>
-+#include "../common/dh_common.h"
- #include "../../st/common/stpmic1.h"
- 
- /* SYSCFG registers */
-@@ -84,36 +85,17 @@
- #define KS_CIDER	0xC0
- #define CIDER_ID	0x8870
- 
--int setup_mac_address(void)
-+static bool dh_stm32_mac_is_in_ks8851(void)
- {
--	unsigned char enetaddr[6];
--	bool skip_eth0 = false;
--	bool skip_eth1 = false;
--	struct udevice *dev;
--	int ret;
- 	ofnode node;
--
--	ret = eth_env_get_enetaddr("ethaddr", enetaddr);
--	if (ret)	/* ethaddr is already set */
--		skip_eth0 = true;
-+	u32 reg, cider, ccr;
- 
- 	node = ofnode_path("ethernet1");
--	if (!ofnode_valid(node)) {
--		/* ethernet1 is not present in the system */
--		skip_eth1 = true;
--		goto out_set_ethaddr;
--	}
-+	if (!ofnode_valid(node))
-+		return false;
- 
--	ret = eth_env_get_enetaddr("eth1addr", enetaddr);
--	if (ret) {
--		/* eth1addr is already set */
--		skip_eth1 = true;
--		goto out_set_ethaddr;
--	}
--
--	ret = ofnode_device_is_compatible(node, "micrel,ks8851-mll");
--	if (ret)
--		goto out_set_ethaddr;
-+	if (ofnode_device_is_compatible(node, "micrel,ks8851-mll"))
-+		return false;
- 
- 	/*
- 	 * KS8851 with EEPROM may use custom MAC from EEPROM, read
-@@ -121,56 +103,62 @@ int setup_mac_address(void)
- 	 * is present. If EEPROM is present, it must contain valid
- 	 * MAC address.
- 	 */
--	u32 reg, cider, ccr;
- 	reg = ofnode_get_addr(node);
- 	if (!reg)
--		goto out_set_ethaddr;
-+		return false;
- 
- 	writew(KS_BE0 | KS_BE1 | KS_CIDER, reg + 2);
- 	cider = readw(reg);
--	if ((cider & 0xfff0) != CIDER_ID) {
--		skip_eth1 = true;
--		goto out_set_ethaddr;
--	}
-+	if ((cider & 0xfff0) != CIDER_ID)
-+		return true;
- 
- 	writew(KS_BE0 | KS_BE1 | KS_CCR, reg + 2);
- 	ccr = readw(reg);
--	if (ccr & KS_CCR_EEPROM) {
--		skip_eth1 = true;
--		goto out_set_ethaddr;
--	}
-+	if (ccr & KS_CCR_EEPROM)
-+		return true;
-+
-+	return false;
-+}
- 
--out_set_ethaddr:
--	if (skip_eth0 && skip_eth1)
-+static int dh_stm32_setup_ethaddr(void)
-+{
-+	unsigned char enetaddr[6];
-+
-+	if (dh_mac_is_in_env("ethaddr"))
- 		return 0;
- 
--	node = ofnode_path("eeprom0");
--	if (!ofnode_valid(node)) {
--		printf("%s: No eeprom0 path offset\n", __func__);
--		return -ENOENT;
--	}
-+	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
-+		return eth_env_set_enetaddr("ethaddr", enetaddr);
- 
--	ret = uclass_get_device_by_ofnode(UCLASS_I2C_EEPROM, node, &dev);
--	if (ret) {
--		printf("Cannot find EEPROM!\n");
--		return ret;
--	}
-+	return -ENXIO;
-+}
- 
--	ret = i2c_eeprom_read(dev, 0xfa, enetaddr, 0x6);
--	if (ret) {
--		printf("Error reading configuration EEPROM!\n");
--		return ret;
--	}
-+static int dh_stm32_setup_eth1addr(void)
-+{
-+	unsigned char enetaddr[6];
- 
--	if (is_valid_ethaddr(enetaddr)) {
--		if (!skip_eth0)
--			eth_env_set_enetaddr("ethaddr", enetaddr);
-+	if (dh_mac_is_in_env("eth1addr"))
-+		return 0;
- 
-+	if (dh_stm32_mac_is_in_ks8851())
-+		return 0;
-+
-+	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0")) {
- 		enetaddr[5]++;
--		if (!skip_eth1)
--			eth_env_set_enetaddr("eth1addr", enetaddr);
-+		return eth_env_set_enetaddr("eth1addr", enetaddr);
- 	}
- 
-+	return -ENXIO;
-+}
-+
-+int setup_mac_address(void)
-+{
-+	if (dh_stm32_setup_ethaddr())
-+		log_err("%s: Unable to setup ethaddr!\n", __func__);
-+
-+	if (dh_stm32_setup_eth1addr())
-+		log_err("%s: Unable to setup eth1addr!\n", __func__);
-+
- 	return 0;
- }
- 
--- 
-2.37.1
-
+Applied to u-boot-dm, thanks!
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

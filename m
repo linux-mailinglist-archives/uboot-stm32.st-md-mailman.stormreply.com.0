@@ -2,59 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 33986581A8F
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Jul 2022 21:52:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 111DD5878EC
+	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Aug 2022 10:21:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D55DFC5C829;
-	Tue, 26 Jul 2022 19:52:57 +0000 (UTC)
-Received: from mail-vs1-f45.google.com (mail-vs1-f45.google.com
- [209.85.217.45])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AF9EEC640F0;
+	Tue,  2 Aug 2022 08:21:52 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C89D5C035BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 24CC6C035BF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Jul 2022 19:52:56 +0000 (UTC)
-Received: by mail-vs1-f45.google.com with SMTP id k129so14665655vsk.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Jul 2022 12:52:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:sender:from:in-reply-to:references:date:message-id
- :subject:to:cc;
- bh=wJBHx+MsxJXoghGB+Q/BUM/LIN3KHAz14tRidFjoLao=;
- b=B9umZWr7F4YsgeUQWkn73PWfNCwcxke0fL7LS6M1/W9PpxzZQn7wWEa9j+Ol/UHgOK
- ozCf37bxCE5i1rctnFilJjFrY1tp/JJngJPdhc6lHFZVO15ic+doLT5thX3gRtJ4QBXH
- fHgSgaqbrVofyS8somk801njxZ0mVhGIBMASc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:sender:from:in-reply-to:references
- :date:message-id:subject:to:cc;
- bh=wJBHx+MsxJXoghGB+Q/BUM/LIN3KHAz14tRidFjoLao=;
- b=spuo0Huo/+WpnbfyMg5lD8th3swi5/sYl01dkXTt5rnkSPTRx0ySg9ti63qw8szHk8
- BNAKo32vk8wOFAsgF5uWOInnijiXk709bOG0pqyjUG9s1BV/dsma1CO6ankV+q4wOInr
- 5YwAGRj13vGkZsjXXgjmBv+Ky5RtAfeRw4sHTOB3tA2njmqICisSAZEyRUuYGKGSGH7o
- DpXHv6qTRVnEk9zVZSu1ovTZnMQh4HMjtnRle7mB0qwVpcx9V3oYya4XqupYRBNR7pWe
- vdAaxIfw6O1xvpfcZUgPXu+NkLzesVPkvI44FhLXhi0CvgHYMULW47/RK+UyfIbzCOJg
- /hVg==
-X-Gm-Message-State: AJIora8toRj91G751ATasDBIWKss5odsb7/0fJTMItDkXzo7tD1s6A/C
- jcXF8nFV7MMhJKAfClU8ZahmCjxJorIMIuUplNa0KQ==
-X-Google-Smtp-Source: AGRyM1vZCmA8lilBADyIBfOaLB+peGl9K/L2IO1J85mLj3a+23QHWr3Cwc4v1rl4Xjm1yEw7iljWL3bZcTyV30IhXtc=
-X-Received: by 2002:a67:cc1a:0:b0:358:3a5f:fec1 with SMTP id
- q26-20020a67cc1a000000b003583a5ffec1mr5701565vsl.61.1658865175573; Tue, 26
- Jul 2022 12:52:55 -0700 (PDT)
-Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 26 Jul 2022 15:52:53 -0400
+ Tue,  2 Aug 2022 08:21:51 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2723eGkK018967;
+ Tue, 2 Aug 2022 10:21:44 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=EV2BOufjixjXqBBRLGaYU4HzFbKuPLENZM9fzFFQBeE=;
+ b=GdQuSyoLdIlimQFK2EDtacj23FS0I966nDv+be/30zDfLTo845XtmazOporko0wBD3qw
+ UVfvcCb98NN4liJPqB17UmYlO68HAxfg30kJ+rc3GdargC62OCydsG7GGMtzB0IwNPeE
+ R1VBQ2P8SgldbD49Z2+LG5xuIxrt/iCNDJ9q2xJuLwMdmoYnkauaXiTFkdIjRkCALbXY
+ A1qio3QBaIxPOuoSkYDAfyBHA+Eq7hoh1P0PrBXvJw1fbzal2H1fcSd9parwU/tnfKxM
+ ZtWYo7YJiJeotcsHOY2IWvyQvXXWrpU82bU1pwYtzRmxIENDS88bs5/hpFffFHw8DxHx gg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3hmuhhm1vm-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 02 Aug 2022 10:21:44 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A78BA10002A;
+ Tue,  2 Aug 2022 10:21:41 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9AC75212300;
+ Tue,  2 Aug 2022 10:21:41 +0200 (CEST)
+Received: from localhost (10.75.127.48) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 2 Aug
+ 2022 10:21:41 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 2 Aug 2022 10:21:35 +0200
+Message-ID: <20220802082135.271308-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20220712093902.v2.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
-References: <20220712093902.v2.1.I17bc391d4515e4ec767e7d44b04b3b81a6e242e0@changeid>
-Date: Tue, 26 Jul 2022 15:52:53 -0400
-X-Google-Sender-Auth: 3VCEk4e1G08vEc6t4wbFyLj3lRY
-Message-ID: <CAPnjgZ3QbauJOdGaPCGnc-oCtnba+6qVMMUavJky-8S21MpDJQ@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2] log: force DEBUG when LOG_DEBUG is
-	activated
+X-Originating-IP: [10.75.127.48]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-02_04,2022-08-01_01,2022-06-22_01
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [Uboot-stm32] [PATCH] lmb: Fix LMB_MEMORY_REGIONS flag usage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,29 +76,50 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-When CONFIG_LOG is activated, if LOG_DEBUG is defined in a file and
-DEBUG is not defined the trace with debug() macro are not displayed,
-because the parameter cond : _DEBUG = 0 is checked in debug_cond().
+This patch is fixing a broken boot observed on stm32mp157c-dk2 board.
 
-With this patch the define DEBUG, used to force the trace generated by
-debug() macro, is linked with the define LOG_DEBUG, used to force the
-trace generated by other macros (log_debug, dev_dbg, pr_debug).
+IS_ENABLED macro should be used to check if a compilation flag is set
+to "y" or "m".
+LMB_MEMORY_REGIONS is set to a numerical value, IS_ENABLED macro is not
+suitable in this case.
 
-We only need to define LOG_DEBUG in a file to activate all the
-traces generated by any U-Boot debug macro, as it is described in
-/doc/develop/logging.rst
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Fixes: 7c1860fce4e3 ("lmb: Fix lmb property's defination under struct lmb")
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
-Changes in v2:
-- update logging.rst
+ include/lmb.h | 2 +-
+ lib/lmb.c     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- doc/develop/logging.rst | 19 +++++++------------
- include/log.h           |  3 +++
- 2 files changed, 10 insertions(+), 12 deletions(-)
+diff --git a/include/lmb.h b/include/lmb.h
+index 1476d78c28..7298c2ccc4 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -68,7 +68,7 @@ struct lmb_region {
+ struct lmb {
+ 	struct lmb_region memory;
+ 	struct lmb_region reserved;
+-#if IS_ENABLED(CONFIG_LMB_MEMORY_REGIONS)
++#ifdef CONFIG_LMB_MEMORY_REGIONS
+ 	struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
+ 	struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
+ #endif
+diff --git a/lib/lmb.c b/lib/lmb.c
+index f21fe672ae..c599608fa3 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -108,7 +108,7 @@ void lmb_init(struct lmb *lmb)
+ #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+ 	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
+-#elif IS_ENABLED(CONFIG_LMB_MEMORY_REGIONS)
++#elif defined(CONFIG_LMB_MEMORY_REGIONS)
+ 	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
+ 	lmb->memory.region = lmb->memory_regions;
+-- 
+2.25.1
 
-Applied to u-boot-dm, thanks!
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

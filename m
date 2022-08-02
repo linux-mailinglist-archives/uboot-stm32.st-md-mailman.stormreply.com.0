@@ -2,59 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E079587C8F
-	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Aug 2022 14:42:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98D06587E74
+	for <lists+uboot-stm32@lfdr.de>; Tue,  2 Aug 2022 16:56:16 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C7581C0D2C0;
-	Tue,  2 Aug 2022 12:42:04 +0000 (UTC)
-Received: from mail-vk1-f175.google.com (mail-vk1-f175.google.com
- [209.85.221.175])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 43073C640F8;
+	Tue,  2 Aug 2022 14:56:16 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3E93AC0D2C0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E0C59C640F5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  2 Aug 2022 12:42:03 +0000 (UTC)
-Received: by mail-vk1-f175.google.com with SMTP id b2so7032058vkg.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 02 Aug 2022 05:42:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=baTog5BhIQkmXXSuE7D5vfoxEsZ0rQugy1Q3YmWgN9s=;
- b=MDYR3gEwiAFlo0iN0axaN1bERRVeLuaLAey3NkBAOCpxhxgio2ShWg6zzvZQgcLbhR
- 56iPCC/w/3/OMOFr9m/OdR7bBsuGxkkyLG6UwsO5L1iaiiBgALUA7HRyv9quRcDnqKTR
- bCrrCYhLxtUgr0FlhokG90uMyW77nxvBwPUnU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=baTog5BhIQkmXXSuE7D5vfoxEsZ0rQugy1Q3YmWgN9s=;
- b=zHE/Z69B/Qj6JfThAdqwEDPNFEU5B1/O00qN/vSQx/jCoKlxxGwYa3rvUb2BYE77Hy
- u4MymBOMrwQusmL6Gr0UoD4p8aLOLps/AMVI6efZdBBIXrW/Y3IfVBgOu3LHTalAeB/X
- MBY/Bid2yha/KQRC8vWzkbII9+lHiW69XV6SN3TtGvu/slBRJZcrFH8+4E14jPSngNrY
- k9RObr9tsCKMC36msGqV42Q2KHDUPlNhvSvl6pprvdJjuXhanAqX8+OmfIWrLzlK+Fbj
- 52tfaw/T1On5+7N5XmW0fLQzP2NXDQuOKSs+kzjx6dKQBVNiuohjn5EbTJRtxXJ3iiPP
- TdiQ==
-X-Gm-Message-State: AJIora8gJtSr82QqR6zxaZ4c3L3FW8rRE8YQvljnojRpxBBju92tFqGy
- oFe0mjg4d44K77G7NbKsiMn8BI8ib18ausKvw3kY8g==
-X-Google-Smtp-Source: AGRyM1tcbWBhDJ+Olzfzaj80aVIJJ0+CIPhNA+kG+OwsBLNEQTszUSdOPIh2rMYryqCzl2QctkQjr6ozMvIH1aMVTFg=
-X-Received: by 2002:a1f:c687:0:b0:374:9549:741b with SMTP id
- w129-20020a1fc687000000b003749549741bmr7810751vkf.16.1659444121986; Tue, 02
- Aug 2022 05:42:01 -0700 (PDT)
+ Tue,  2 Aug 2022 14:56:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+ s=badeba3b8450; t=1659452165;
+ bh=GM9JJ/473o8PkW8UaaJEEFrIJcuIV1hp470VyBv1Nu0=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=aWkn7S2B1Yumhs7he4GQy/3VhArhqzJOMs7td/X2gJg56gcYBvbujTjUqbTRaYbfr
+ +qcbTB+BMaKhmN4iJwAxawEsxN+OUJOVr4s3Wn3/Own4pYzrJyEc4cV8eYrLuiziNg
+ y3P5fUY6R4BUBrXKBHxTdrpYvjTwx07KMasHcmZI=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.94] ([62.143.94.109]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MuDXp-1nQvBR3dcL-00udgA; Tue, 02
+ Aug 2022 16:56:04 +0200
+Message-ID: <b6f6e2af-741b-6de6-8b14-c69b8d4d333d@gmx.de>
+Date: Tue, 2 Aug 2022 16:56:03 +0200
 MIME-Version: 1.0
-References: <20220802090910.277343-1-patrice.chotard@foss.st.com>
- <20220802090910.277343-3-patrice.chotard@foss.st.com>
-In-Reply-To: <20220802090910.277343-3-patrice.chotard@foss.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 2 Aug 2022 06:41:45 -0600
-Message-ID: <CAPnjgZ1jTyLZdCFYKu1U64TdqRucWu_o5Jb8hr_4Oyf+7OHRTg@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.1.0
+Content-Language: en-US
 To: Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20220802090910.277343-1-patrice.chotard@foss.st.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20220802090910.277343-1-patrice.chotard@foss.st.com>
+X-Provags-ID: V03:K1:Wnlg3QrZN+0HXas2hdAkV54h4Jie1IaXVdR4IQkbwBBd//QURFj
+ WGHLNz2Wn8UG1XZlTDEyxioONjoNHczdPqPLc6R+FZ0nFVnme9Rdzp2GshVM9sCYrZVJENK
+ nfrWw/HbyQWSNgfeMRYO/cnCcMdVZ2TMPb27JxkuEWjdMyyEGjgCVg1cAjwUMiMBPMLTr3C
+ 7YxSS+EiGXU6XKTQI4aOw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:2GJRZvRT5ic=:NZsNbwPQTC22P7y4EkLe0j
+ h5GGZLr8+Hca2TqwV9zCI0KNXcYwnVPWEGJcnVm8u9G+/Eh1x9hOQ5HlvexzmX7t7LpxGulu9
+ kLh/EGb0p6tnw3OIDrEBFzjAiWLhJVJJz3DhD3g13NleOAH2p9DcMZbS1qTF+GL3je2DpjFUp
+ HMuZ+i1ActyvVqzqZpdnNjda8h81XTCQwBO52emPVgQGqxnNCaKhcQFt299seinDX8+00JqQM
+ dRuDQ7vxhfsgO52Ahe5SBjNdZ79wluSFgCwrZDqizasFvGNU7aWGwQBJQRTDSybMpL7py7A8k
+ 9tzlr/GMCxSATlrhi0Qo//bXL3kkG2QjOR++kt9yYsDQQo3dHmO1Ql7sENV9xnd+ZofLXBVSk
+ gKUTkIHgGv+0O7kh7VqL67W6VYnfWiALmaSF+/xXVUYDCgh2nE2zwV8WBZB2CUJbZ4zqwQsxp
+ I1ff0PX6s/U3eElbIzxZsrzZFeM5EGHXO3XRINdzbNmorebcwZcCsLbOSjKtaHl6yFhoYXDtU
+ 8MSsQtF1dVy1BLFVf2wP7ADnlCqp6dsfhsYZjlezLTI56X6GcC4EpHzW4+mDLC+VzKWjT4dy6
+ +UQhksllFroSKN1dKfeZ3E/hImJ4wLGZddjBFXnf9LH0We/tL712BgjquZklAbEd8P+YsVy8H
+ tL5p8nLyXiuddkH94bqMoWSUv/e/46ClRwqLyUhZUYSrf+/pfjXa3T7NkiigxcjGb7YiwWW86
+ yfzP+3zYy3Sgp230Abdzw3eIaYJNaW+E2j3I/zGgKGXjnLT6wmPXlczcbQnu7+h5rMOxb/0Ke
+ qPuygC6rVxYap+sfWg4IGfM05SOWSovK+QwS/6hW5hfZLJameyuVs4nC/k4nxA/Ggi3S4JRLd
+ CyMnB0ALFTyxscZHjuaqjhb/ZD+rDFmPM+MiCSiF2obiOVN/9KDHVDC8q+fXZVLvKDYUSYN8W
+ U77N84YGO+dCmY/CkZDGFQWgYo8gkYyS2U9NogMbBetNp502yMW/8zkTZL28jWLik9d3qMWD3
+ 7yZWUuEK5RtZBFn8QjfICIugg5rGwR2d0suaOVVjFPbUbkjHmklo585sNiPk8M8TBWdsemEeE
+ 9i1Ys+Ydx1ahoHgR2lbUwzBc9TXswd9DxxVvNABw65W9LryKq67XtfAdQ==
 Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Eddie James <eajames@linux.ibm.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
+ Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/3] gpio: Fix pin's status display for
- pin with GPIOF_UNUSED function
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH 0/3] gpio: update gpio_get_status()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,25 +72,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 2 Aug 2022 at 03:09, Patrice Chotard
-<patrice.chotard@foss.st.com> wrote:
+On 8/2/22 11:09, Patrice Chotard wrote:
 >
-> Even pin with GPIOF_UNUSED function can have a label.
-> The criteria to add or not a space character is linked to label not to
-> the used/unused status.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->  drivers/gpio/gpio-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Currently, if pin's function is GPIOF_FUNC, only "func" if displayed
+> without any other information. It would be interesting, if information is
+> available, to indicate which pinmuxing's name is used.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Maybe you can add on top of my gpio man-page patch a description of the
+output fields of gpio status.
+
+[PATCH 1/1] doc: man-page for gpio command
+https://lists.denx.de/pipermail/u-boot/2022-August/490666.html
+
+Best regards
+
+Heinrich
+
+>
+>
+> Patrice Chotard (3):
+>    gpio: Allow to print pin's label even for pin with GPIOF_FUNC function
+>    gpio: Fix pin's status display for pin with GPIOF_UNUSED function
+>    pinctrl: pinctrl_stm32: Populate uc_priv->name[] with pinmux node's
+>      name
+>
+>   drivers/gpio/gpio-uclass.c      | 18 ++++++++++++------
+>   drivers/pinctrl/pinctrl_stm32.c |  8 ++++++--
+>   2 files changed, 18 insertions(+), 8 deletions(-)
+>
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

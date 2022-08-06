@@ -2,70 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73B65588CBC
-	for <lists+uboot-stm32@lfdr.de>; Wed,  3 Aug 2022 15:12:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C30BC58B752
+	for <lists+uboot-stm32@lfdr.de>; Sat,  6 Aug 2022 19:45:16 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 37BB1C640F8;
-	Wed,  3 Aug 2022 13:12:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5A037C035BE;
+	Sat,  6 Aug 2022 17:45:16 +0000 (UTC)
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+ [209.85.221.44])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 787C8C640F1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AE18EC035BD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  3 Aug 2022 13:12:47 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 273901KN030991;
- Wed, 3 Aug 2022 15:12:35 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=P9xE81BDILdWea265Q9t5HZk0Qj4L1fXBLl65Nf/WGU=;
- b=YXheNMWPine69Ne16XQZW3rjTCJoIj1jbn5MmRTxge4xExnUu847S+6+IkA0WaSSF5vq
- e0/bTEEl+Bnkbs8jl+TDSR1FVNgE7XsBGablIxCptFAzaa04+KWYdudkZr15egp4qEAw
- h+syDxUdqGKIhol6uZ2eAJbW58fF8H1uok39f7hTQLGoyDBygSmFoj7LsmtNB4icd3jQ
- 87FKTZRYlbLBuC2jsuwmBDTJVfiNJn7H22pZIrQFwQL3cIZBDqnmzV9OnGThBwSOh/b4
- iu3Xl01NSDDG9QmRPdPqGhdfdlzeFRjGdUwB6UP09iKWUFMlrEVyRvAQqap7FolYnhPN hQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3hq06kt1da-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 03 Aug 2022 15:12:35 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DDAE710002A;
- Wed,  3 Aug 2022 15:12:34 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D751B21F0A1;
- Wed,  3 Aug 2022 15:12:34 +0200 (CEST)
-Received: from [10.201.21.72] (10.75.127.46) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Wed, 3 Aug
- 2022 15:12:34 +0200
-Message-ID: <741c622f-b9ac-85dc-5882-982b76b94a2a@foss.st.com>
-Date: Wed, 3 Aug 2022 15:12:33 +0200
+ Sat,  6 Aug 2022 17:45:14 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id z16so6405600wrh.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sat, 06 Aug 2022 10:45:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=Bkle/bbVg/P9DGJKleHsNQQo80z8KdSgB0rdqER8zvI=;
+ b=kjJL/loOY6uaD7bo/FUaGk4UIlOyDwGdpPkQhANp1gLE08u5Aajkk4O0I1CiCcxpwT
+ RFkmVcSxxi30QkMqCOAH7r0GrM33DA18B30UftvoTVodaEJu5U7SK4dAV3RabhecJ3BL
+ OObLmPIs6M0Y3SmuRwQj9/SOyCgk9g4Cnd4ZjUncFuQcRrWweqUt2ekF/PcHDB+Kw4YA
+ 0q6Nuk36Fnw/6HWPHhiR9JAKATvqbV1uXYpcTzYs4JQp0Gsp3LcHUvHSo2M/+i2NZ2P3
+ 1yUJRVTArMCqkGk/wsgZD0D6FcAfb/YuspxwFoUkDMI4hPKJfPTIqPIQIJCP9nB0ETnB
+ xdXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Bkle/bbVg/P9DGJKleHsNQQo80z8KdSgB0rdqER8zvI=;
+ b=0miUGtdjPLBNjG9AwVBMy6hlfppC2JRR8p2o9D2xpqUo9tsCh0NlTcB9ehX4Q9a654
+ WwXrP9nJN7wO38O3dsz/s81k6lxuz1kRJ1e9psklGngsWVfu7hU53QaHpe9J3IvcYhn5
+ 6KO7Lb9hqFABvFXwcNC0hXiZ8Bw975/bhceoBfO4CD/GJvjdEBEkVLgAOpKPMuKvqec0
+ U35yOOI2hXzSlVGlgnQgxfKNKkCNZwn/1PKq7Crmu0bqVH7/JW/Z+76jvkO4dSqWD6qZ
+ dvS4U5gnxVcVNkttMkxSN3VAi9sFlo2dpSSPf97HGdTnmmC+LXMGRho7RsT8gcKWIXNW
+ /uaQ==
+X-Gm-Message-State: ACgBeo3qFhvuEWqJvDdUgAp59yRoZbSbSVsLD6UA5IjocAOqv2iRe4Va
+ O5kShEnwEaeEn945Uq7Bcn8J+WuIjifauD8Qbzs=
+X-Google-Smtp-Source: AA6agR6ks4z9l4KLOCu+24DXsrlkTTtrzAfZubK/va6WMpDvuswpQ6FtJ3nicxU+blx6pBxDYmEgeZBsymuMSisf2II=
+X-Received: by 2002:a5d:60d0:0:b0:220:4e23:9934 with SMTP id
+ x16-20020a5d60d0000000b002204e239934mr7308198wrt.474.1659807914305; Sat, 06
+ Aug 2022 10:45:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-References: <20220802090910.277343-1-patrice.chotard@foss.st.com>
- <20220802090910.277343-2-patrice.chotard@foss.st.com>
- <CAPnjgZ0GGjA4RCB9dr8bLDSG=7RDCJTrXx7A93fjKdyhvo4+Lg@mail.gmail.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAPnjgZ0GGjA4RCB9dr8bLDSG=7RDCJTrXx7A93fjKdyhvo4+Lg@mail.gmail.com>
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-08-03_03,2022-08-02_01,2022-06-22_01
-Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Eddie James <eajames@linux.ibm.com>,
+References: <20220802085526.272953-1-patrice.chotard@foss.st.com>
+ <20220802085526.272953-2-patrice.chotard@foss.st.com>
+In-Reply-To: <20220802085526.272953-2-patrice.chotard@foss.st.com>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Sat, 6 Aug 2022 20:45:02 +0300
+Message-ID: <CAGi-RUKjbdhHqFMLu3+Wqtma+ghptxhHDYFUq5CDX9dUtp4F-w@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] gpio: Allow to print pin's label even
- for pin with GPIOF_FUNC function
+ Peng Fan <peng.fan@nxp.com>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/2] net: dwc_eth_qos: Add
+	eqos_get_enetaddr callback for stm32
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,76 +73,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon
-
-On 8/2/22 14:41, Simon Glass wrote:
-> On Tue, 2 Aug 2022 at 03:09, Patrice Chotard
-> <patrice.chotard@foss.st.com> wrote:
->>
->> Currently, if pin's function is GPIOF_FUNC, only "func" if displayed
->> without any other information. It would be interesting, if information is
->> available, to indicate which pinmuxing's name is used.
->>
->> For example, for STM32 SoC's based platform, "gpio status" command
->> output :
->>
->>    before
->>     Bank GPIOZ:
->>       GPIOZ0: unused : 0 [ ]
->>       GPIOZ1: unused : 0 [ ]
->>       GPIOZ2: unused : 0 [ ]
->>       GPIOZ3: unused : 0 [ ]
->>       GPIOZ4: func
->>       GPIOZ5: func
->>       GPIOZ6: unused : 0 [ ]
->>       GPIOZ7: unused : 0 [ ]
->>       GPIOZ8: unknown
->>       GPIOZ9: unknown
->>       GPIOZ10: unknown
->>       GPIOZ11: unknown
->>       GPIOZ12: unknown
->>       GPIOZ13: unknown
->>       GPIOZ14: unknown
->>       GPIOZ15: unknown
->>
->>    After
->>     Bank GPIOZ:
->>       GPIOZ0: unused : 0 [ ]
->>       GPIOZ1: unused : 0 [ ]
->>       GPIOZ2: unused : 0 [ ]
->>       GPIOZ3: unused : 0 [ ]
->>       GPIOZ4: func i2c4-0
->>       GPIOZ5: func i2c4-0
->>       GPIOZ6: unused : 0 [ ]
->>       GPIOZ7: unused : 0 [ ]
->>       GPIOZ8: unknown
->>       GPIOZ9: unknown
->>       GPIOZ10: unknown
->>       GPIOZ11: unknown
->>       GPIOZ12: unknown
->>       GPIOZ13: unknown
->>       GPIOZ14: unknown
->>       GPIOZ15: unknown
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->>  drivers/gpio/gpio-uclass.c | 16 +++++++++++-----
->>  1 file changed, 11 insertions(+), 5 deletions(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Do you think you could create a basic test for the gpio command? See
-> test/dm/acpi.c for an example.
-
-OK i will send a v2 with a test
-
-Thanks
-Patrice
-
-> 
-> Regards,
-> Simon
+On Tue, Aug 2, 2022 at 11:56 AM Patrice Chotard
+<patrice.chotard@foss.st.com> wrote:
+>
+> Add .eqos_get_enetaddr callback defined as eqos_null_ops() to avoid
+> illegal access.
+>
+> Fixes: a624251461bf ("net: dwc_eth_qos: introduce eqos hook eqos_get_enetaddr")
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>  drivers/net/dwc_eth_qos.c | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+> index 09d95e4bc3..5b2e7cba14 100644
+> --- a/drivers/net/dwc_eth_qos.c
+> +++ b/drivers/net/dwc_eth_qos.c
+> @@ -1638,6 +1638,7 @@ static struct eqos_ops eqos_stm32_ops = {
+>         .eqos_calibrate_pads = eqos_null_ops,
+>         .eqos_disable_calibration = eqos_null_ops,
+>         .eqos_set_tx_clk_speed = eqos_null_ops,
+> +       .eqos_get_enetaddr = eqos_null_ops,
+>         .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32
+>  };
+>
+> --
+> 2.25.1
+>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

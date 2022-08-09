@@ -2,65 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51F8658CE53
-	for <lists+uboot-stm32@lfdr.de>; Mon,  8 Aug 2022 21:08:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D19558D44E
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Aug 2022 09:14:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A9EEC5E2C6;
-	Mon,  8 Aug 2022 19:08:53 +0000 (UTC)
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
- [209.85.160.173])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3DAA8C04000;
+	Tue,  9 Aug 2022 07:14:35 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 251A1C04000
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC5C7C04000
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  8 Aug 2022 19:08:51 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id z3so7225917qtv.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 08 Aug 2022 12:08:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc;
- bh=oZOsnrOem05UuX654csfNjq61s3rujJshalARyYTN0o=;
- b=X5acNb+DnSOJ62/NaDnj/XEf6de3XhTGgRVeZQwevfiGIHAGTnuC1nSeuZ9IEUU4fK
- tTz2EPOa34sneeCGpTooeKyNn7P88zwPJRk9fx7cAVfXqED0RpJr3Z/kPxUgKN23W/rd
- oJ1fqCDZgZ/nnIdNQxpsiVdalGd6Egfjxgvz4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
- bh=oZOsnrOem05UuX654csfNjq61s3rujJshalARyYTN0o=;
- b=KMQzqV8YsiLUBJZsrPni/7x3CdhoRmps6AufwegZxTM3b+lyOY5TSMhwjvKwvEXmFz
- EQ4KA8HoUce9OUoFdbN3vFTQd88sz4unlB+Ncj1ceP+VswYKwMFucaZlKDu265+h41fy
- ZKWzOQJwBnLhjffVIj94fyBwoyz70G2jyZbSQnhXWfGbg7SsoapO/AzWcqae275vJVLp
- 08oDBwBH+Vq4EYdP8thfyNPxqn5Sa2f+6EOTUyvsZW7YI/yjCZnbNNLGQjoIVEeMSsg9
- bHJZryAtEuV83hWMvzxvKQIkjyW97zTqRLRKslpYDXYu0jPrJ67bg1zhCNz+9DCWxSxr
- qe+g==
-X-Gm-Message-State: ACgBeo1VfJ6PwFgXQiLStrE3mGP5YnWBWSVIyCpfr59ccfPiPuuF2jMt
- 9itkSyxQcW5dstv+WhhLaxwsrA==
-X-Google-Smtp-Source: AA6agR6MnjvJLodG2HpDyaiel3xBpSRSJPcMJ4rIeqX3XeSlwBzCNTaYifxAdTwjtU2ZCV7r9/d8dA==
-X-Received: by 2002:ac8:5915:0:b0:31f:31c8:7406 with SMTP id
- 21-20020ac85915000000b0031f31c87406mr17827350qty.347.1659985730189; 
- Mon, 08 Aug 2022 12:08:50 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
- [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
- i25-20020ac871d9000000b00342f960d26esm2407100qtp.15.2022.08.08.12.08.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Aug 2022 12:08:49 -0700 (PDT)
-Date: Mon, 8 Aug 2022 15:08:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20220808190847.GS1146598@bill-the-cat>
-References: <20220802085526.272953-1-patrice.chotard@foss.st.com>
- <20220802085526.272953-2-patrice.chotard@foss.st.com>
+ Tue,  9 Aug 2022 07:14:33 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2791I7B7013029;
+ Tue, 9 Aug 2022 09:14:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=hI/O/YbtY2zHs5mW7RG0E/VW7QdUFT5d8FKlHIkBnzo=;
+ b=PaM8rNqmn43W1IdJuuWglyCvyDnSJny+SBIgNhzosQ7pkAFz/rr6HbDWSEx5YsieQFBw
+ H3V5HsweKt9ON56nikuNkkhIwKogDVXMHjmT3j0G5IEVN61ErfWz9EStn+3A17yRoUbA
+ k/xA31udRnfAoFdNkEHzTVVR+OE3lTGlf+tbvf0e/dtScZn5N7v1EFnApG1CUEvuAsIu
+ xPknfsk2Du3RmWH1UCZ5z05s60wnx9t0bTxn28z6TDt9wqEo/FNvlGB5cLSwjt9S6y5G
+ LB212hEt2FTOdnaKXdcb12DjUKbc4grzEHfImk0Oj5jTKSPTCAtguu0ipoejIBRUkKqJ Kw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3hudt11ch5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 09 Aug 2022 09:14:24 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9E21310002A;
+ Tue,  9 Aug 2022 09:14:20 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A36A3215159;
+ Tue,  9 Aug 2022 09:14:20 +0200 (CEST)
+Received: from localhost (10.75.127.117) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.20; Tue, 9 Aug
+ 2022 09:14:20 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 9 Aug 2022 09:14:11 +0200
+Message-ID: <20220809071415.366133-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20220802085526.272953-2-patrice.chotard@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Peng Fan <peng.fan@nxp.com>, Joe Hershberger <joe.hershberger@ni.com>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ramon Fried <rfried.dev@gmail.com>,
+X-Originating-IP: [10.75.127.117]
+X-ClientProxiedBy: GPXDAG2NODE6.st.com (10.75.127.70) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
+ definitions=2022-08-09_03,2022-08-09_01,2022-06-22_01
+Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Eddie James <eajames@linux.ibm.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] net: dwc_eth_qos: Add
- eqos_get_enetaddr callback for stm32
+Subject: [Uboot-stm32] [PATCH v2 0/4] gpio: update gpio_get_status()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,67 +70,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1957855415254969454=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============1957855415254969454==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="h87GnGnUMDU+BcVC"
-Content-Disposition: inline
+Currently, if pin's function is GPIOF_FUNC, only "func" if displayed
+without any other information. It would be interesting, if information is
+available, to indicate which pinmuxing's name is used.
 
 
---h87GnGnUMDU+BcVC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v2:
+   - add gpio test
 
-On Tue, Aug 02, 2022 at 10:55:26AM +0200, Patrice Chotard wrote:
+Patrice Chotard (4):
+  gpio: Allow to print pin's label even for pin with GPIOF_FUNC function
+  gpio: Fix pin's status display for pin with GPIOF_UNUSED function
+  pinctrl: pinctrl_stm32: Populate uc_priv->name[] with pinmux node's
+    name
+  gpio: sandbox: Add GPIOD_IS_AF for gpio configured in alternate
+    function
 
-> Add .eqos_get_enetaddr callback defined as eqos_null_ops() to avoid
-> illegal access.
->=20
-> Fixes: a624251461bf ("net: dwc_eth_qos: introduce eqos hook eqos_get_enet=
-addr")
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+ drivers/gpio/gpio-uclass.c              | 18 ++++++++++-----
+ drivers/gpio/sandbox.c                  |  5 +++++
+ drivers/pinctrl/pinctrl_stm32.c         |  8 +++++--
+ include/asm-generic/gpio.h              |  1 +
+ include/dt-bindings/gpio/sandbox-gpio.h |  3 +++
+ test/dm/gpio.c                          | 30 +++++++++++++++++++++++++
+ 6 files changed, 57 insertions(+), 8 deletions(-)
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---h87GnGnUMDU+BcVC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmLxXz8ACgkQFHw5/5Y0
-tyyrVgv/SOPLWONKUate86tiD82/uE0HjPTvoZS2qosthN4gPSgKHswEirk2JZ9z
-cSPfnCxPbESobuArIJ2brDwKhHiLKT1jS030Vqk1d7xpZW3rRA3yUWz/4pidVyu8
-MVs/oPmGRNzCbDcZR9XBygTn0O85lBLCmu3io0xzYDsb3LDuW7Y6PgUgz1LSNWHN
-AqEFQ2Nhx/isShGxJ0ngGUJ0BS/ZUOSX7OAwdTyrkd+oFjoInSRmtsJhY5IkxppK
-En0GI8nfpfvAk9yBQlteGr8GrvoFOvbreEULdiaabByTJu7qs5JveWa1mgQMv0h3
-I0w60gQHEkLYBN5GEz+4/ieUp5Zw78MHI3VKHCj0bMlFAEXidUpG9+sAqZSRugYi
-mNwm/bNFDXe1oMJsrS1GTMwy0cipt3rHqNJNNRWsmt0xyTDj9D+UytBpQkKzxn6i
-AQ5mB5XYGX8ugPH3WpBzop6y28NORRsxlYUCo43zaXuqcE4z3NjBtQlfgIFkNzSR
-g1ToNlpO
-=OblV
------END PGP SIGNATURE-----
-
---h87GnGnUMDU+BcVC--
-
---===============1957855415254969454==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1957855415254969454==--

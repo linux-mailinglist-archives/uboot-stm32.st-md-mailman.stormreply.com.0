@@ -2,80 +2,97 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24D3E5909F0
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Aug 2022 03:35:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE8C95912A9
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Aug 2022 17:11:20 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E59F4C5EC56;
-	Fri, 12 Aug 2022 01:35:56 +0000 (UTC)
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
- [209.85.167.172])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7EABCC04005;
+	Fri, 12 Aug 2022 15:11:20 +0000 (UTC)
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com
+ [209.85.167.182])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 67DE5C5E2C6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B005FC04004
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Aug 2022 01:35:55 +0000 (UTC)
-Received: by mail-oi1-f172.google.com with SMTP id n133so23395222oib.0
+ Fri, 12 Aug 2022 15:11:18 +0000 (UTC)
+Received: by mail-oi1-f182.google.com with SMTP id j5so1447110oih.6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 11 Aug 2022 18:35:55 -0700 (PDT)
+ Fri, 12 Aug 2022 08:11:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc;
- bh=D7X/Lu1HlIhmIhi1gmcj5+zmkZJ3mkChSjJQ5DP0Hbw=;
- b=aR4DKohNXP7MqB6VsYBmZkYVX5p1oJnuOaRzE9bHEJV/S7+h4zetfWHSsTlPg6h8+C
- FybtlfjJ00iA8iOSbmiLShWAsnEKXBp+ElpnezrGbeF4zM7Z1jRyV4qkgHVUY60ZfDd9
- T1GVOTzRV6aMlRow+o/XN/IXXgz7WfZ5SInGo=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=zdlBsg7sQAhivhK/n5uu2N9NxDVvH8KdNpV5wk9Zsss=;
+ b=gwGDsRPiNBxnK3azbBxC49qz74Caci3gReJK6ZoheGnG0CmJdLTKClGBDC2PR62Hjx
+ eJAQQflGPO1zpn663lUL4qqcxGravio84DvQZ1MCrM5JVi0fKJT/KDI6WXhGixEeANHY
+ AGh678pJpcANyYkFCcf1MQFnbAj8evzOmZVJ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc;
- bh=D7X/Lu1HlIhmIhi1gmcj5+zmkZJ3mkChSjJQ5DP0Hbw=;
- b=BhYve0v63U4ggP9tLLC1mOnlyJR3J863z7n/MlcoTVUNvAkR5OR9k+oagFGgmP3yx4
- pGz15MMGy0hjF+ho6RtyRR8khgInWJmMR4bqQaQnHVQ8OE5BXZzDhOJdRZE4qEqHmpDy
- 0ZteMhixlkWA7t9VJAVqbwIhaKh6JUMcQ/lsTAmNrAdMQa5OBRBJxDyXy5iqYCFoZn/h
- nPyqEGhR42rJ0xNtMlXwDzsElhxblEWftsJf5DTR24cpM65vHYzBe2Yvu8Q9ijyUkFd/
- mdrpSudgSx605Llfv1QwPItniM7T1Aclf95o+FQMdVDB16NYgsdpI4a1YNPRs1mYTzBT
- vpgw==
-X-Gm-Message-State: ACgBeo3G79PFlD9XG9OMeizJbQycUgYNg75SKZWxpb+ws6bHNWu+bh5l
- x95EFhrlZ64hRbdV95euOCVy7A==
-X-Google-Smtp-Source: AA6agR5VNVZSWAQ85h8iGDFPBjPo4cTizXT2T7JaKjf9ZL4/bhYMpskafHTO8jCBIbmS0o9f+8w8cw==
-X-Received: by 2002:a05:6808:16a2:b0:339:acd7:793a with SMTP id
- bb34-20020a05680816a200b00339acd7793amr4654087oib.241.1660268154069; 
- Thu, 11 Aug 2022 18:35:54 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com
- (c-67-190-102-125.hsd1.co.comcast.net. [67.190.102.125])
- by smtp.gmail.com with ESMTPSA id
- x21-20020a056870b41500b0010c5005d427sm158518oap.33.2022.08.11.18.35.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Aug 2022 18:35:53 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Thu, 11 Aug 2022 19:35:03 -0600
-Message-Id: <20220812013503.1724919-25-sjg@chromium.org>
-X-Mailer: git-send-email 2.37.1.595.g718a3a8f04-goog
-In-Reply-To: <20220812013503.1724919-1-sjg@chromium.org>
-References: <20220812013503.1724919-1-sjg@chromium.org>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=zdlBsg7sQAhivhK/n5uu2N9NxDVvH8KdNpV5wk9Zsss=;
+ b=DjrKcGrEoHjhOWn2xQxE5RjzUchWs7Jsr8ARVbdVIJEvvhee74286G+1AEvXv/+mHf
+ 46Q3DC+LSI1RUPsdgkt4sFT4C8R9x5q4oER7Gb8Vr6HwUOIKA3sGBuwRfG41OBjkiyWG
+ cALkFCO9kAjQO537itjqDmwWo7OeHzoYIr84WKQ3E4LEfX/m8b1oa1b+5XAdvO5+iVnO
+ 1Ime/TvzSX5WEsFHwBIt2nJf3ImxDFLlnsuAyN7Ij96fE75KyRxqOp7yJYFOSVi1MdmK
+ bEinzn8NozqVejVVl511vQeQggOR/VMEI3irHINf3ZW4hRed/arh1hdhknQxNIZosg9X
+ 91KQ==
+X-Gm-Message-State: ACgBeo0F3nlmd/kCNdqpIWBB/khu367+OTxwcTRn+fyym4my1LsWsoP5
+ Tv+YhfrfREVVZidyJ0VAcR5LAr8eZOBLkLc9dW/Y+g==
+X-Google-Smtp-Source: AA6agR4a+xquRRmMaL9GYeNGrIdGs/1vCvnYMc4tXln1YcWAa0aAQrTvdTBR/+t4tOij/V5qUMQUoNBUK85m3khBCXc=
+X-Received: by 2002:a05:6808:bcb:b0:33a:c532:54fc with SMTP id
+ o11-20020a0568080bcb00b0033ac53254fcmr5635102oik.170.1660317077013; Fri, 12
+ Aug 2022 08:11:17 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Peng Fan <peng.fan@nxp.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+References: <20220812013503.1724919-1-sjg@chromium.org>
+ <fc7f6587-4ac8-2b65-a71c-3ba6930912b3@gmail.com>
+In-Reply-To: <fc7f6587-4ac8-2b65-a71c-3ba6930912b3@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 12 Aug 2022 09:11:06 -0600
+Message-ID: <CAPnjgZ0Tof+K_nxpQuJQN5t+ypYiQ-+f642u-qz=oq3zMovJMg@mail.gmail.com>
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
  Oleksii Bidnichenko <oleksii.bidnichenko@toradex.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Rick Chen <rick@andestech.com>,
+ Lukasz Majewski <lukma@denx.de>, Gary Bisson <gary.bisson@boundarydevices.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
  "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>, Stefan Roese <sr@denx.de>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Wolfgang Denk <wd@denx.de>, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
  Markus Niebel <Markus.Niebel@ew.tq-group.com>,
  Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
  Sean Anderson <sean.anderson@seco.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alexey Brodkin <abrodkin@synopsys.com>, Huang Jianan <jnhuang95@gmail.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Ricardo Salveti <ricardo@foundries.io>, Ramon Fried <rfried.dev@gmail.com>,
- schspa <schspa@gmail.com>, Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Tony Dinh <mibodhi@gmail.com>, Heiko Schocher <hs@denx.de>,
+ Marek Vasut <marex@denx.de>, Philippe Schenker <philippe.schenker@toradex.com>,
+ Ye Li <ye.li@nxp.com>, Judy Wang <wangjudy@microsoft.com>,
+ Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alexander Graf <agraf@csgraf.de>,
+ Alexandru Gagniuc <mr.nuke.me@gmail.com>,
+ Chris Morgan <macromorgan@hotmail.com>,
  Aswath Govindraju <a-govindraju@ti.com>,
- Max Merchel <Max.Merchel@tq-group.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, schspa <schspa@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Denys Drozdov <denys.drozdov@toradex.com>,
+ Loic Poulain <loic.poulain@linaro.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>,
  Anastasiia Lukianenko <vicooodin@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
-Subject: [Uboot-stm32] [PATCH v2 24/24] blk: Rename if_type to uclass_id
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ Max Merchel <Max.Merchel@tq-group.com>, TsiChung Liew <Tsi-Chung.Liew@nxp.com>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>, Andrew Scull <ascull@google.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 00/24] blk: Rationalise the block
+	interface
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,1815 +109,294 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use the word 'uclass' instead of 'if_type' to complete the conversion.
+Hi Johan,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Fri, 12 Aug 2022 at 07:51, Johan Jonker <jbx6244@gmail.com> wrote:
+>
+> Hi Simon and others,
+>
+> Some comments. Have a look if it's useful.
+> Include is an example of how currently a new Rockchip external RKNAND FTL block device must be included in U-boot.
+> Changes must be made all over the place. EFI has now become a somewhat "obligation" for block devices, then handling
+> should be made more easy I propose.
+>
+> 1:
+> The creation and removal of block devices is kind of dynamic with the blk_create_device function.
+> Is it possible to make the necessary functions in efi_device_path.c and part.c more flexible as well by
+> a new "blk_create_efi_device()" and "blk_remove_efi_device()" function? So everything combined in one function.
 
-Changes in v2:
-- Use conv_uclass_id() instead of the confusing uclass_id_to_uclass_id()
+Do you mean to automatically create a device with the right uclass?
+Yes I think that could be done, but I have not looked at it.
 
- board/st/common/stm32mp_dfu.c            |   2 +-
- cmd/blk_common.c                         |  18 +--
- cmd/lsblk.c                              |   2 +-
- cmd/mmc.c                                |   2 +-
- common/usb_storage.c                     |   6 +-
- disk/disk-uclass.c                       |   8 +-
- disk/part.c                              |  12 +-
- doc/usage/partitions.rst                 |   2 +-
- drivers/ata/sata.c                       |   2 +-
- drivers/block/blk-uclass.c               | 145 +++++++++++------------
- drivers/block/blk_legacy.c               |  58 ++++-----
- drivers/block/ide.c                      |   8 +-
- drivers/block/sandbox.c                  |   6 +-
- drivers/mmc/mmc-uclass.c                 |   2 +-
- drivers/mmc/mmc_legacy.c                 |   8 +-
- drivers/net/fsl_enetc.c                  |  12 +-
- drivers/net/fsl_enetc.h                  |   2 +-
- drivers/scsi/scsi.c                      |   6 +-
- drivers/virtio/virtio_blk.c              |   2 +-
- drivers/xen/pvblock.c                    |   2 +-
- fs/fat/fat.c                             |   2 +-
- include/blk.h                            | 116 +++++++++---------
- include/efi_api.h                        |   4 +-
- include/efi_loader.h                     |   4 +-
- lib/efi_loader/efi_device_path.c         |   2 +-
- lib/efi_loader/efi_device_path_to_text.c |   4 +-
- lib/efi_loader/efi_disk.c                |  26 ++--
- lib/efi_loader/efi_net.c                 |   2 +-
- lib/efi_loader/efi_var_file.c            |   4 +-
- 29 files changed, 234 insertions(+), 235 deletions(-)
+>
+> 2:
+> Make the class list more dynamic/expendable. Each time a new clas is needed the source code must be changed.
+> Include a function that returns a generated class number that takes in account the existing know classes.
+> ie,: "uclass_create" and "uclass_remove".
+>
+> Example block device creation:
+>
+>         ret = uclass_get_device(UCLASS_RK_IDB, 0, &dev);
+>
+> // Be able to use a dynamic generated UCLASS for block devices.
+>
+>         if (ret) {
+>                 printf("no IDB device found\n");
+>                 return CMD_RET_FAILURE;
+>         }
+>         ret = blk_get_device(IF_TYPE_RK_IDB, 0, &bdev);
+>         if (ret) {
+>                 ret = blk_create_device(dev, "idb_blk", "blk",
+>                                         IF_TYPE_RK_IDB, 0, 512,
+>                                         LBA, &bdev);
+>                 if (ret)
+>                         return ret;
+>
+>                 ret = blk_probe_or_unbind(bdev);
+>                 if (ret)
+>                         return ret;
+>         }
+>
+> Example block device removal:
+>
+>         ret = blk_find_device(IF_TYPE_RK_IDB, 0, &bdev);
 
-diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
-index fa48b2a35ee..0096f71dfc1 100644
---- a/board/st/common/stm32mp_dfu.c
-+++ b/board/st/common/stm32mp_dfu.c
-@@ -37,7 +37,7 @@ static void board_get_alt_info_mmc(struct udevice *dev, char *buf)
- 	if (!desc)
- 		return;
- 
--	name = blk_get_if_type_name(desc->if_type);
-+	name = blk_get_uclass_name(desc->uclass_id);
- 	devnum = desc->devnum;
- 	len = strlen(buf);
- 
-diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-index 369c5ae4bbe..75a072caf51 100644
---- a/cmd/blk_common.c
-+++ b/cmd/blk_common.c
-@@ -12,10 +12,10 @@
- #include <blk.h>
- #include <command.h>
- 
--int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
-+int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
- 		   int *cur_devnump)
- {
--	const char *if_name = blk_get_if_type_name(if_type);
-+	const char *if_name = blk_get_uclass_name(uclass_id);
- 
- 	switch (argc) {
- 	case 0:
-@@ -23,16 +23,16 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
- 		return CMD_RET_USAGE;
- 	case 2:
- 		if (strncmp(argv[1], "inf", 3) == 0) {
--			blk_list_devices(if_type);
-+			blk_list_devices(uclass_id);
- 			return 0;
- 		} else if (strncmp(argv[1], "dev", 3) == 0) {
--			if (blk_print_device_num(if_type, *cur_devnump)) {
-+			if (blk_print_device_num(uclass_id, *cur_devnump)) {
- 				printf("\nno %s devices available\n", if_name);
- 				return CMD_RET_FAILURE;
- 			}
- 			return 0;
- 		} else if (strncmp(argv[1], "part", 4) == 0) {
--			if (blk_list_part(if_type))
-+			if (blk_list_part(uclass_id))
- 				printf("\nno %s partition table available\n",
- 				       if_name);
- 			return 0;
-@@ -42,7 +42,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
- 		if (strncmp(argv[1], "dev", 3) == 0) {
- 			int dev = (int)dectoul(argv[2], NULL);
- 
--			if (!blk_show_device(if_type, dev)) {
-+			if (!blk_show_device(uclass_id, dev)) {
- 				*cur_devnump = dev;
- 				printf("... is now current device\n");
- 			} else {
-@@ -52,7 +52,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
- 		} else if (strncmp(argv[1], "part", 4) == 0) {
- 			int dev = (int)dectoul(argv[2], NULL);
- 
--			if (blk_print_part_devnum(if_type, dev)) {
-+			if (blk_print_part_devnum(uclass_id, dev)) {
- 				printf("\n%s device %d not available\n",
- 				       if_name, dev);
- 				return CMD_RET_FAILURE;
-@@ -71,7 +71,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
- 			printf("\n%s read: device %d block # "LBAFU", count %lu ... ",
- 			       if_name, *cur_devnump, blk, cnt);
- 
--			n = blk_read_devnum(if_type, *cur_devnump, blk, cnt,
-+			n = blk_read_devnum(uclass_id, *cur_devnump, blk, cnt,
- 					    (ulong *)addr);
- 
- 			printf("%ld blocks read: %s\n", n,
-@@ -86,7 +86,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
- 			printf("\n%s write: device %d block # "LBAFU", count %lu ... ",
- 			       if_name, *cur_devnump, blk, cnt);
- 
--			n = blk_write_devnum(if_type, *cur_devnump, blk, cnt,
-+			n = blk_write_devnum(uclass_id, *cur_devnump, blk, cnt,
- 					     (ulong *)addr);
- 
- 			printf("%ld blocks written: %s\n", n,
-diff --git a/cmd/lsblk.c b/cmd/lsblk.c
-index 6a1c8f5ef40..d214dafc3be 100644
---- a/cmd/lsblk.c
-+++ b/cmd/lsblk.c
-@@ -36,7 +36,7 @@ static int do_lsblk(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv
- 				continue;
- 			desc = dev_get_uclass_plat(udev);
- 			printf("%c %s %u", i ? ',' : ':',
--			       blk_get_if_type_name(desc->if_type),
-+			       blk_get_uclass_name(desc->uclass_id),
- 			       desc->devnum);
- 			i++;
- 		}
-diff --git a/cmd/mmc.c b/cmd/mmc.c
-index 0f1f4e0a71d..6718e99ea7d 100644
---- a/cmd/mmc.c
-+++ b/cmd/mmc.c
-@@ -154,7 +154,7 @@ static struct mmc *__init_mmc_device(int dev, bool force_init,
- 
- #ifdef CONFIG_BLOCK_CACHE
- 	struct blk_desc *bd = mmc_get_blk_desc(mmc);
--	blkcache_invalidate(bd->if_type, bd->devnum);
-+	blkcache_invalidate(bd->uclass_id, bd->devnum);
- #endif
- 
- 	return mmc;
-diff --git a/common/usb_storage.c b/common/usb_storage.c
-index 7d420160cd5..e59c819bac5 100644
---- a/common/usb_storage.c
-+++ b/common/usb_storage.c
-@@ -279,7 +279,7 @@ static int usb_stor_probe_device(struct usb_device *udev)
- 
- 		blkdev = &usb_dev_desc[usb_max_devs];
- 		memset(blkdev, '\0', sizeof(struct blk_desc));
--		blkdev->if_type = UCLASS_USB;
-+		blkdev->uclass_id = UCLASS_USB;
- 		blkdev->devnum = usb_max_devs;
- 		blkdev->part_type = PART_TYPE_UNKNOWN;
- 		blkdev->target = 0xff;
-@@ -1577,8 +1577,8 @@ U_BOOT_DRIVER(usb_storage_blk) = {
- };
- #else
- U_BOOT_LEGACY_BLK(usb) = {
--	.if_typename	= "usb",
--	.if_type	= UCLASS_USB,
-+	.uclass_idname	= "usb",
-+	.uclass_id	= UCLASS_USB,
- 	.max_devs	= USB_MAX_STOR_DEV,
- 	.desc		= usb_dev_desc,
- };
-diff --git a/disk/disk-uclass.c b/disk/disk-uclass.c
-index 9351a5cfa68..551f8b1dca4 100644
---- a/disk/disk-uclass.c
-+++ b/disk/disk-uclass.c
-@@ -191,12 +191,12 @@ unsigned long dev_read(struct udevice *dev, lbaint_t start,
- 		start_in_disk += part->gpt_part_info.start;
- 	}
- 
--	if (blkcache_read(block_dev->if_type, block_dev->devnum,
-+	if (blkcache_read(block_dev->uclass_id, block_dev->devnum,
- 			  start_in_disk, blkcnt, block_dev->blksz, buffer))
- 		return blkcnt;
- 	blks_read = ops->read(dev, start, blkcnt, buffer);
- 	if (blks_read == blkcnt)
--		blkcache_fill(block_dev->if_type, block_dev->devnum,
-+		blkcache_fill(block_dev->uclass_id, block_dev->devnum,
- 			      start_in_disk, blkcnt, block_dev->blksz, buffer);
- 
- 	return blks_read;
-@@ -216,7 +216,7 @@ unsigned long dev_write(struct udevice *dev, lbaint_t start,
- 	if (!ops->write)
- 		return -ENOSYS;
- 
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 
- 	return ops->write(dev, start, blkcnt, buffer);
- }
-@@ -235,7 +235,7 @@ unsigned long dev_erase(struct udevice *dev, lbaint_t start,
- 	if (!ops->erase)
- 		return -ENOSYS;
- 
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 
- 	return ops->erase(dev, start, blkcnt);
- }
-diff --git a/disk/part.c b/disk/part.c
-index 5705c229d59..d73318c8ffe 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -120,7 +120,7 @@ void dev_print(struct blk_desc *dev_desc)
- 		return;
- 	}
- 
--	switch (dev_desc->if_type) {
-+	switch (dev_desc->uclass_id) {
- 	case UCLASS_SCSI:
- 		printf ("(%d:%d) Vendor: %s Prod.: %s Rev: %s\n",
- 			dev_desc->target,dev_desc->lun,
-@@ -155,7 +155,7 @@ void dev_print(struct blk_desc *dev_desc)
- 		puts("device type unknown\n");
- 		return;
- 	default:
--		printf("Unhandled device type: %i\n", dev_desc->if_type);
-+		printf("Unhandled device type: %i\n", dev_desc->uclass_id);
- 		return;
- 	}
- 	puts ("            Type: ");
-@@ -225,7 +225,7 @@ void part_init(struct blk_desc *dev_desc)
- 	const int n_ents = ll_entry_count(struct part_driver, part_driver);
- 	struct part_driver *entry;
- 
--	blkcache_invalidate(dev_desc->if_type, dev_desc->devnum);
-+	blkcache_invalidate(dev_desc->uclass_id, dev_desc->devnum);
- 
- 	dev_desc->part_type = PART_TYPE_UNKNOWN;
- 	for (entry = drv; entry != drv + n_ents; entry++) {
-@@ -248,7 +248,7 @@ static void print_part_header(const char *type, struct blk_desc *dev_desc)
- 	CONFIG_IS_ENABLED(AMIGA_PARTITION) || \
- 	CONFIG_IS_ENABLED(EFI_PARTITION)
- 	puts ("\nPartition Map for ");
--	switch (dev_desc->if_type) {
-+	switch (dev_desc->uclass_id) {
- 	case UCLASS_IDE:
- 		puts ("IDE");
- 		break;
-@@ -408,7 +408,7 @@ int blk_get_device_by_str(const char *ifname, const char *dev_hwpart_str,
- 		 * Always should be done, otherwise hw partition 0 will return
- 		 * stale data after displaying a non-zero hw partition.
- 		 */
--		if ((*dev_desc)->if_type == UCLASS_MMC)
-+		if ((*dev_desc)->uclass_id == UCLASS_MMC)
- 			part_init(*dev_desc);
- 	}
- 
-@@ -762,7 +762,7 @@ void part_set_generic_name(const struct blk_desc *dev_desc,
- {
- 	char *devtype;
- 
--	switch (dev_desc->if_type) {
-+	switch (dev_desc->uclass_id) {
- 	case UCLASS_IDE:
- 	case UCLASS_AHCI:
- 		devtype = "hd";
-diff --git a/doc/usage/partitions.rst b/doc/usage/partitions.rst
-index 2c1a12b6bf5..628469bbec9 100644
---- a/doc/usage/partitions.rst
-+++ b/doc/usage/partitions.rst
-@@ -20,7 +20,7 @@ generic syntax.
- interface
-         The interface used to access the partition's device, like ``mmc`` or
-         ``scsi``. For a full list of supported interfaces, consult the
--        ``if_typename_str`` array in ``drivers/block/blk-uclass.c``
-+        ``uclass_idname_str`` array in ``drivers/block/blk-uclass.c``
- 
- devnum
-         The device number. This defaults to 0.
-diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-index 604c721cfdc..ce3e9b5a400 100644
---- a/drivers/ata/sata.c
-+++ b/drivers/ata/sata.c
-@@ -79,7 +79,7 @@ int __sata_initialize(void)
- 
- 	for (i = 0; i < CONFIG_SYS_SATA_MAX_DEVICE; i++) {
- 		memset(&sata_dev_desc[i], 0, sizeof(struct blk_desc));
--		sata_dev_desc[i].if_type = UCLASS_AHCI;
-+		sata_dev_desc[i].uclass_id = UCLASS_AHCI;
- 		sata_dev_desc[i].devnum = i;
- 		sata_dev_desc[i].part_type = PART_TYPE_UNKNOWN;
- 		sata_dev_desc[i].type = DEV_TYPE_HARDDISK;
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index a9a85aa37f3..f8157c8d6ae 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -20,7 +20,7 @@
- static struct {
- 	enum uclass_id id;
- 	const char *name;
--} if_typename_str[] = {
-+} uclass_idname_str[] = {
- 	{ UCLASS_IDE, "ide" },
- 	{ UCLASS_SCSI, "scsi" },
- 	{ UCLASS_USB, "usb" },
-@@ -34,19 +34,19 @@ static struct {
- 	{ UCLASS_PVBLOCK, "pvblock" },
- };
- 
--static enum uclass_id if_typename_to_iftype(const char *if_typename)
-+static enum uclass_id uclass_idname_to_iftype(const char *uclass_idname)
- {
- 	int i;
- 
--	for (i = 0; i < ARRAY_SIZE(if_typename_str); i++) {
--		if (!strcmp(if_typename, if_typename_str[i].name))
--			return if_typename_str[i].id;
-+	for (i = 0; i < ARRAY_SIZE(uclass_idname_str); i++) {
-+		if (!strcmp(uclass_idname, uclass_idname_str[i].name))
-+			return uclass_idname_str[i].id;
- 	}
- 
- 	return UCLASS_INVALID;
- }
- 
--static enum uclass_id if_type_to_uclass_id(enum uclass_id if_type)
-+static enum uclass_id conv_uclass_id(enum uclass_id uclass_id)
- {
- 	/*
- 	 * This strange adjustment is used because we use UCLASS_MASS_STORAGE
-@@ -65,31 +65,30 @@ static enum uclass_id if_type_to_uclass_id(enum uclass_id if_type)
- 	 *    - rename UCLASS_USB name to "usb_ctlr"
- 	 *    - use UCLASS_MASS_STORAGE instead of UCLASS_USB in if_typename_str
- 	 */
--	if (if_type == UCLASS_USB)
-+	if (uclass_id == UCLASS_USB)
- 		return UCLASS_MASS_STORAGE;
--
--	return if_type;
-+	return uclass_id;
- }
- 
--const char *blk_get_if_type_name(enum uclass_id if_type)
-+const char *blk_get_uclass_name(enum uclass_id uclass_id)
- {
- 	int i;
- 
--	for (i = 0; i < ARRAY_SIZE(if_typename_str); i++) {
--		if (if_typename_str[i].id == if_type)
--			return if_typename_str[i].name;
-+	for (i = 0; i < ARRAY_SIZE(uclass_idname_str); i++) {
-+		if (uclass_idname_str[i].id == uclass_id)
-+			return uclass_idname_str[i].name;
- 	}
- 
- 	return "(none)";
- }
- 
--struct blk_desc *blk_get_devnum_by_type(enum uclass_id if_type, int devnum)
-+struct blk_desc *blk_get_devnum_by_type(enum uclass_id uclass_id, int devnum)
- {
- 	struct blk_desc *desc;
- 	struct udevice *dev;
- 	int ret;
- 
--	ret = blk_get_device(if_type, devnum, &dev);
-+	ret = blk_get_device(uclass_id, devnum, &dev);
- 	if (ret)
- 		return NULL;
- 	desc = dev_get_uclass_plat(dev);
-@@ -102,7 +101,7 @@ struct blk_desc *blk_get_devnum_by_type(enum uclass_id if_type, int devnum)
-  * name in a local table. This gives us an interface type which we can match
-  * against the uclass of the block device's parent.
-  */
--struct blk_desc *blk_get_devnum_by_typename(const char *if_typename, int devnum)
-+struct blk_desc *blk_get_devnum_by_typename(const char *uclass_idname, int devnum)
- {
- 	enum uclass_id uclass_id;
- 	enum uclass_id type;
-@@ -110,16 +109,16 @@ struct blk_desc *blk_get_devnum_by_typename(const char *if_typename, int devnum)
- 	struct uclass *uc;
- 	int ret;
- 
--	type = if_typename_to_iftype(if_typename);
-+	type = uclass_idname_to_iftype(uclass_idname);
- 	if (type == UCLASS_INVALID) {
- 		debug("%s: Unknown interface type '%s'\n", __func__,
--		      if_typename);
-+		      uclass_idname);
- 		return NULL;
- 	}
--	uclass_id = if_type_to_uclass_id(type);
-+	uclass_id = conv_uclass_id(type);
- 	if (uclass_id == UCLASS_INVALID) {
- 		debug("%s: Unknown uclass for interface type'\n",
--		      blk_get_if_type_name(type));
-+		      blk_get_uclass_name(type));
- 		return NULL;
- 	}
- 
-@@ -129,8 +128,8 @@ struct blk_desc *blk_get_devnum_by_typename(const char *if_typename, int devnum)
- 	uclass_foreach_dev(dev, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		debug("%s: if_type=%d, devnum=%d: %s, %d, %d\n", __func__,
--		      type, devnum, dev->name, desc->if_type, desc->devnum);
-+		debug("%s: uclass_id=%d, devnum=%d: %s, %d, %d\n", __func__,
-+		      type, devnum, dev->name, desc->uclass_id, desc->devnum);
- 		if (desc->devnum != devnum)
- 			continue;
- 
-@@ -178,14 +177,14 @@ struct blk_desc *blk_get_by_device(struct udevice *dev)
- /**
-  * get_desc() - Get the block device descriptor for the given device number
-  *
-- * @if_type:	Interface type
-+ * @uclass_id:	Interface type
-  * @devnum:	Device number (0 = first)
-  * @descp:	Returns block device descriptor on success
-  * Return: 0 on success, -ENODEV if there is no such device and no device
-  * with a higher device number, -ENOENT if there is no such device but there
-  * is one with a higher number, or other -ve on other error.
-  */
--static int get_desc(enum uclass_id if_type, int devnum, struct blk_desc **descp)
-+static int get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp)
- {
- 	bool found_more = false;
- 	struct udevice *dev;
-@@ -199,9 +198,9 @@ static int get_desc(enum uclass_id if_type, int devnum, struct blk_desc **descp)
- 	uclass_foreach_dev(dev, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		debug("%s: if_type=%d, devnum=%d: %s, %d, %d\n", __func__,
--		      if_type, devnum, dev->name, desc->if_type, desc->devnum);
--		if (desc->if_type == if_type) {
-+		debug("%s: uclass_id=%d, devnum=%d: %s, %d, %d\n", __func__,
-+		      uclass_id, devnum, dev->name, desc->uclass_id, desc->devnum);
-+		if (desc->uclass_id == uclass_id) {
- 			if (desc->devnum == devnum) {
- 				ret = device_probe(dev);
- 				if (ret)
-@@ -218,26 +217,26 @@ static int get_desc(enum uclass_id if_type, int devnum, struct blk_desc **descp)
- 	return found_more ? -ENOENT : -ENODEV;
- }
- 
--int blk_select_hwpart_devnum(enum uclass_id if_type, int devnum, int hwpart)
-+int blk_select_hwpart_devnum(enum uclass_id uclass_id, int devnum, int hwpart)
- {
- 	struct udevice *dev;
- 	int ret;
- 
--	ret = blk_get_device(if_type, devnum, &dev);
-+	ret = blk_get_device(uclass_id, devnum, &dev);
- 	if (ret)
- 		return ret;
- 
- 	return blk_select_hwpart(dev, hwpart);
- }
- 
--int blk_list_part(enum uclass_id if_type)
-+int blk_list_part(enum uclass_id uclass_id)
- {
- 	struct blk_desc *desc;
- 	int devnum, ok;
- 	int ret;
- 
- 	for (ok = 0, devnum = 0;; ++devnum) {
--		ret = get_desc(if_type, devnum, &desc);
-+		ret = get_desc(uclass_id, devnum, &desc);
- 		if (ret == -ENODEV)
- 			break;
- 		else if (ret)
-@@ -255,12 +254,12 @@ int blk_list_part(enum uclass_id if_type)
- 	return 0;
- }
- 
--int blk_print_part_devnum(enum uclass_id if_type, int devnum)
-+int blk_print_part_devnum(enum uclass_id uclass_id, int devnum)
- {
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(if_type, devnum, &desc);
-+	ret = get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	if (desc->type == DEV_TYPE_UNKNOWN)
-@@ -270,14 +269,14 @@ int blk_print_part_devnum(enum uclass_id if_type, int devnum)
- 	return 0;
- }
- 
--void blk_list_devices(enum uclass_id if_type)
-+void blk_list_devices(enum uclass_id uclass_id)
- {
- 	struct blk_desc *desc;
- 	int ret;
- 	int i;
- 
- 	for (i = 0;; ++i) {
--		ret = get_desc(if_type, i, &desc);
-+		ret = get_desc(uclass_id, i, &desc);
- 		if (ret == -ENODEV)
- 			break;
- 		else if (ret)
-@@ -289,12 +288,12 @@ void blk_list_devices(enum uclass_id if_type)
- 	}
- }
- 
--int blk_print_device_num(enum uclass_id if_type, int devnum)
-+int blk_print_device_num(enum uclass_id uclass_id, int devnum)
- {
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(if_type, devnum, &desc);
-+	ret = get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	printf("\nIDE device %d: ", devnum);
-@@ -303,13 +302,13 @@ int blk_print_device_num(enum uclass_id if_type, int devnum)
- 	return 0;
- }
- 
--int blk_show_device(enum uclass_id if_type, int devnum)
-+int blk_show_device(enum uclass_id uclass_id, int devnum)
- {
- 	struct blk_desc *desc;
- 	int ret;
- 
- 	printf("\nDevice %d: ", devnum);
--	ret = get_desc(if_type, devnum, &desc);
-+	ret = get_desc(uclass_id, devnum, &desc);
- 	if (ret == -ENODEV || ret == -ENOENT) {
- 		printf("unknown device\n");
- 		return -ENODEV;
-@@ -324,14 +323,14 @@ int blk_show_device(enum uclass_id if_type, int devnum)
- 	return 0;
- }
- 
--ulong blk_read_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_read_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		      lbaint_t blkcnt, void *buffer)
- {
- 	struct blk_desc *desc;
- 	ulong n;
- 	int ret;
- 
--	ret = get_desc(if_type, devnum, &desc);
-+	ret = get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	n = blk_dread(desc, start, blkcnt, buffer);
-@@ -341,13 +340,13 @@ ulong blk_read_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
- 	return n;
- }
- 
--ulong blk_write_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_write_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		       lbaint_t blkcnt, const void *buffer)
- {
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(if_type, devnum, &desc);
-+	ret = get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	return blk_dwrite(desc, start, blkcnt, buffer);
-@@ -370,7 +369,7 @@ int blk_dselect_hwpart(struct blk_desc *desc, int hwpart)
- 	return blk_select_hwpart(desc->bdev, hwpart);
- }
- 
--int blk_first_device(int if_type, struct udevice **devp)
-+int blk_first_device(int uclass_id, struct udevice **devp)
- {
- 	struct blk_desc *desc;
- 	int ret;
-@@ -382,7 +381,7 @@ int blk_first_device(int if_type, struct udevice **devp)
- 		return -ENODEV;
- 	do {
- 		desc = dev_get_uclass_plat(*devp);
--		if (desc->if_type == if_type)
-+		if (desc->uclass_id == uclass_id)
- 			return 0;
- 		ret = uclass_find_next_device(devp);
- 		if (ret)
-@@ -395,10 +394,10 @@ int blk_first_device(int if_type, struct udevice **devp)
- int blk_next_device(struct udevice **devp)
- {
- 	struct blk_desc *desc;
--	int ret, if_type;
-+	int ret, uclass_id;
- 
- 	desc = dev_get_uclass_plat(*devp);
--	if_type = desc->if_type;
-+	uclass_id = desc->uclass_id;
- 	do {
- 		ret = uclass_find_next_device(devp);
- 		if (ret)
-@@ -406,12 +405,12 @@ int blk_next_device(struct udevice **devp)
- 		if (!*devp)
- 			return -ENODEV;
- 		desc = dev_get_uclass_plat(*devp);
--		if (desc->if_type == if_type)
-+		if (desc->uclass_id == uclass_id)
- 			return 0;
- 	} while (1);
- }
- 
--int blk_find_device(int if_type, int devnum, struct udevice **devp)
-+int blk_find_device(int uclass_id, int devnum, struct udevice **devp)
- {
- 	struct uclass *uc;
- 	struct udevice *dev;
-@@ -423,9 +422,9 @@ int blk_find_device(int if_type, int devnum, struct udevice **devp)
- 	uclass_foreach_dev(dev, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		debug("%s: if_type=%d, devnum=%d: %s, %d, %d\n", __func__,
--		      if_type, devnum, dev->name, desc->if_type, desc->devnum);
--		if (desc->if_type == if_type && desc->devnum == devnum) {
-+		debug("%s: uclass_id=%d, devnum=%d: %s, %d, %d\n", __func__,
-+		      uclass_id, devnum, dev->name, desc->uclass_id, desc->devnum);
-+		if (desc->uclass_id == uclass_id && desc->devnum == devnum) {
- 			*devp = dev;
- 			return 0;
- 		}
-@@ -434,11 +433,11 @@ int blk_find_device(int if_type, int devnum, struct udevice **devp)
- 	return -ENODEV;
- }
- 
--int blk_get_device(int if_type, int devnum, struct udevice **devp)
-+int blk_get_device(int uclass_id, int devnum, struct udevice **devp)
- {
- 	int ret;
- 
--	ret = blk_find_device(if_type, devnum, devp);
-+	ret = blk_find_device(uclass_id, devnum, devp);
- 	if (ret)
- 		return ret;
- 
-@@ -455,12 +454,12 @@ unsigned long blk_dread(struct blk_desc *block_dev, lbaint_t start,
- 	if (!ops->read)
- 		return -ENOSYS;
- 
--	if (blkcache_read(block_dev->if_type, block_dev->devnum,
-+	if (blkcache_read(block_dev->uclass_id, block_dev->devnum,
- 			  start, blkcnt, block_dev->blksz, buffer))
- 		return blkcnt;
- 	blks_read = ops->read(dev, start, blkcnt, buffer);
- 	if (blks_read == blkcnt)
--		blkcache_fill(block_dev->if_type, block_dev->devnum,
-+		blkcache_fill(block_dev->uclass_id, block_dev->devnum,
- 			      start, blkcnt, block_dev->blksz, buffer);
- 
- 	return blks_read;
-@@ -475,7 +474,7 @@ unsigned long blk_dwrite(struct blk_desc *block_dev, lbaint_t start,
- 	if (!ops->write)
- 		return -ENOSYS;
- 
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 	return ops->write(dev, start, blkcnt, buffer);
- }
- 
-@@ -488,7 +487,7 @@ unsigned long blk_derase(struct blk_desc *block_dev, lbaint_t start,
- 	if (!ops->erase)
- 		return -ENOSYS;
- 
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 	return ops->erase(dev, start, blkcnt);
- }
- 
-@@ -525,7 +524,7 @@ const char *blk_get_devtype(struct udevice *dev)
- 	return uclass_get_name(device_get_uclass_id(parent));
- };
- 
--int blk_find_max_devnum(enum uclass_id if_type)
-+int blk_find_max_devnum(enum uclass_id uclass_id)
- {
- 	struct udevice *dev;
- 	int max_devnum = -ENODEV;
-@@ -538,18 +537,18 @@ int blk_find_max_devnum(enum uclass_id if_type)
- 	uclass_foreach_dev(dev, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		if (desc->if_type == if_type && desc->devnum > max_devnum)
-+		if (desc->uclass_id == uclass_id && desc->devnum > max_devnum)
- 			max_devnum = desc->devnum;
- 	}
- 
- 	return max_devnum;
- }
- 
--int blk_next_free_devnum(enum uclass_id if_type)
-+int blk_next_free_devnum(enum uclass_id uclass_id)
- {
- 	int ret;
- 
--	ret = blk_find_max_devnum(if_type);
-+	ret = blk_find_max_devnum(uclass_id);
- 	if (ret == -ENODEV)
- 		return 0;
- 	if (ret < 0)
-@@ -631,7 +630,7 @@ int blk_count_devices(enum blk_flag_t flag)
- 	return count;
- }
- 
--static int blk_claim_devnum(enum uclass_id if_type, int devnum)
-+static int blk_claim_devnum(enum uclass_id uclass_id, int devnum)
- {
- 	struct udevice *dev;
- 	struct uclass *uc;
-@@ -643,8 +642,8 @@ static int blk_claim_devnum(enum uclass_id if_type, int devnum)
- 	uclass_foreach_dev(dev, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		if (desc->if_type == if_type && desc->devnum == devnum) {
--			int next = blk_next_free_devnum(if_type);
-+		if (desc->uclass_id == uclass_id && desc->devnum == devnum) {
-+			int next = blk_next_free_devnum(uclass_id);
- 
- 			if (next < 0)
- 				return next;
-@@ -657,7 +656,7 @@ static int blk_claim_devnum(enum uclass_id if_type, int devnum)
- }
- 
- int blk_create_device(struct udevice *parent, const char *drv_name,
--		      const char *name, int if_type, int devnum, int blksz,
-+		      const char *name, int uclass_id, int devnum, int blksz,
- 		      lbaint_t lba, struct udevice **devp)
- {
- 	struct blk_desc *desc;
-@@ -665,9 +664,9 @@ int blk_create_device(struct udevice *parent, const char *drv_name,
- 	int ret;
- 
- 	if (devnum == -1) {
--		devnum = blk_next_free_devnum(if_type);
-+		devnum = blk_next_free_devnum(uclass_id);
- 	} else {
--		ret = blk_claim_devnum(if_type, devnum);
-+		ret = blk_claim_devnum(uclass_id, devnum);
- 		if (ret < 0 && ret != -ENOENT)
- 			return ret;
- 	}
-@@ -677,7 +676,7 @@ int blk_create_device(struct udevice *parent, const char *drv_name,
- 	if (ret)
- 		return ret;
- 	desc = dev_get_uclass_plat(dev);
--	desc->if_type = if_type;
-+	desc->uclass_id = uclass_id;
- 	desc->blksz = blksz;
- 	desc->log2blksz = LOG2(desc->blksz);
- 	desc->lba = lba;
-@@ -690,7 +689,7 @@ int blk_create_device(struct udevice *parent, const char *drv_name,
- }
- 
- int blk_create_devicef(struct udevice *parent, const char *drv_name,
--		       const char *name, int if_type, int devnum, int blksz,
-+		       const char *name, int uclass_id, int devnum, int blksz,
- 		       lbaint_t lba, struct udevice **devp)
- {
- 	char dev_name[30], *str;
-@@ -701,7 +700,7 @@ int blk_create_devicef(struct udevice *parent, const char *drv_name,
- 	if (!str)
- 		return -ENOMEM;
- 
--	ret = blk_create_device(parent, drv_name, str, if_type, devnum,
-+	ret = blk_create_device(parent, drv_name, str, uclass_id, devnum,
- 				blksz, lba, devp);
- 	if (ret) {
- 		free(str);
-@@ -725,7 +724,7 @@ int blk_probe_or_unbind(struct udevice *dev)
- 	return ret;
- }
- 
--int blk_unbind_all(int if_type)
-+int blk_unbind_all(int uclass_id)
- {
- 	struct uclass *uc;
- 	struct udevice *dev, *next;
-@@ -737,7 +736,7 @@ int blk_unbind_all(int if_type)
- 	uclass_foreach_dev_safe(dev, next, uc) {
- 		struct blk_desc *desc = dev_get_uclass_plat(dev);
- 
--		if (desc->if_type == if_type) {
-+		if (desc->uclass_id == uclass_id) {
- 			ret = device_remove(dev, DM_REMOVE_NORMAL);
- 			if (ret)
- 				return ret;
-diff --git a/drivers/block/blk_legacy.c b/drivers/block/blk_legacy.c
-index 8c6f9cb208e..2ba5cc2d5a8 100644
---- a/drivers/block/blk_legacy.c
-+++ b/drivers/block/blk_legacy.c
-@@ -9,14 +9,14 @@
- #include <part.h>
- #include <linux/err.h>
- 
--struct blk_driver *blk_driver_lookup_type(int if_type)
-+struct blk_driver *blk_driver_lookup_type(int uclass_id)
- {
- 	struct blk_driver *drv = ll_entry_start(struct blk_driver, blk_driver);
- 	const int n_ents = ll_entry_count(struct blk_driver, blk_driver);
- 	struct blk_driver *entry;
- 
- 	for (entry = drv; entry != drv + n_ents; entry++) {
--		if (if_type == entry->if_type)
-+		if (uclass_id == entry->uclass_id)
- 			return entry;
- 	}
- 
-@@ -24,14 +24,14 @@ struct blk_driver *blk_driver_lookup_type(int if_type)
- 	return NULL;
- }
- 
--static struct blk_driver *blk_driver_lookup_typename(const char *if_typename)
-+static struct blk_driver *blk_driver_lookup_typename(const char *uclass_idname)
- {
- 	struct blk_driver *drv = ll_entry_start(struct blk_driver, blk_driver);
- 	const int n_ents = ll_entry_count(struct blk_driver, blk_driver);
- 	struct blk_driver *entry;
- 
- 	for (entry = drv; entry != drv + n_ents; entry++) {
--		if (!strcmp(if_typename, entry->if_typename))
-+		if (!strcmp(uclass_idname, entry->uclass_idname))
- 			return entry;
- 	}
- 
-@@ -39,11 +39,11 @@ static struct blk_driver *blk_driver_lookup_typename(const char *if_typename)
- 	return NULL;
- }
- 
--const char *blk_get_if_type_name(enum uclass_id if_type)
-+const char *blk_get_uclass_name(enum uclass_id uclass_id)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 
--	return drv ? drv->if_typename : NULL;
-+	return drv ? drv->uclass_idname : NULL;
- }
- 
- /**
-@@ -70,14 +70,14 @@ static int get_desc(struct blk_driver *drv, int devnum, struct blk_desc **descp)
- 	return drv->get_dev(devnum, descp);
- }
- 
--int blk_list_part(enum uclass_id if_type)
-+int blk_list_part(enum uclass_id uclass_id)
- {
- 	struct blk_driver *drv;
- 	struct blk_desc *desc;
- 	int devnum, ok;
- 	bool first = true;
- 
--	drv = blk_driver_lookup_type(if_type);
-+	drv = blk_driver_lookup_type(uclass_id);
- 	if (!drv)
- 		return -ENOSYS;
- 	for (ok = 0, devnum = 0; devnum < drv->max_devs; ++devnum) {
-@@ -97,9 +97,9 @@ int blk_list_part(enum uclass_id if_type)
- 	return 0;
- }
- 
--int blk_print_part_devnum(enum uclass_id if_type, int devnum)
-+int blk_print_part_devnum(enum uclass_id uclass_id, int devnum)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int ret;
- 
-@@ -115,9 +115,9 @@ int blk_print_part_devnum(enum uclass_id if_type, int devnum)
- 	return 0;
- }
- 
--void blk_list_devices(enum uclass_id if_type)
-+void blk_list_devices(enum uclass_id uclass_id)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int i;
- 
-@@ -133,9 +133,9 @@ void blk_list_devices(enum uclass_id if_type)
- 	}
- }
- 
--int blk_print_device_num(enum uclass_id if_type, int devnum)
-+int blk_print_device_num(enum uclass_id uclass_id, int devnum)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int ret;
- 
-@@ -144,15 +144,15 @@ int blk_print_device_num(enum uclass_id if_type, int devnum)
- 	ret = get_desc(drv, devnum, &desc);
- 	if (ret)
- 		return ret;
--	printf("\n%s device %d: ", drv->if_typename, devnum);
-+	printf("\n%s device %d: ", drv->uclass_idname, devnum);
- 	dev_print(desc);
- 
- 	return 0;
- }
- 
--int blk_show_device(enum uclass_id if_type, int devnum)
-+int blk_show_device(enum uclass_id uclass_id, int devnum)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int ret;
- 
-@@ -174,9 +174,9 @@ int blk_show_device(enum uclass_id if_type, int devnum)
- 	return 0;
- }
- 
--struct blk_desc *blk_get_devnum_by_type(enum uclass_id if_type, int devnum)
-+struct blk_desc *blk_get_devnum_by_type(enum uclass_id uclass_id, int devnum)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 
- 	if (!drv)
-@@ -190,7 +190,7 @@ struct blk_desc *blk_get_devnum_by_type(enum uclass_id if_type, int devnum)
- 
- int blk_dselect_hwpart(struct blk_desc *desc, int hwpart)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(desc->if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(desc->uclass_id);
- 
- 	if (!drv)
- 		return -ENOSYS;
-@@ -200,9 +200,9 @@ int blk_dselect_hwpart(struct blk_desc *desc, int hwpart)
- 	return 0;
- }
- 
--struct blk_desc *blk_get_devnum_by_typename(const char *if_typename, int devnum)
-+struct blk_desc *blk_get_devnum_by_typename(const char *uclass_idname, int devnum)
- {
--	struct blk_driver *drv = blk_driver_lookup_typename(if_typename);
-+	struct blk_driver *drv = blk_driver_lookup_typename(uclass_idname);
- 	struct blk_desc *desc;
- 
- 	if (!drv)
-@@ -214,10 +214,10 @@ struct blk_desc *blk_get_devnum_by_typename(const char *if_typename, int devnum)
- 	return desc;
- }
- 
--ulong blk_read_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_read_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		      lbaint_t blkcnt, void *buffer)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	ulong n;
- 	int ret;
-@@ -234,10 +234,10 @@ ulong blk_read_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
- 	return n;
- }
- 
--ulong blk_write_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_write_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		       lbaint_t blkcnt, const void *buffer)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int ret;
- 
-@@ -249,9 +249,9 @@ ulong blk_write_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
- 	return desc->block_write(desc, start, blkcnt, buffer);
- }
- 
--int blk_select_hwpart_devnum(enum uclass_id if_type, int devnum, int hwpart)
-+int blk_select_hwpart_devnum(enum uclass_id uclass_id, int devnum, int hwpart)
- {
--	struct blk_driver *drv = blk_driver_lookup_type(if_type);
-+	struct blk_driver *drv = blk_driver_lookup_type(uclass_id);
- 	struct blk_desc *desc;
- 	int ret;
- 
-diff --git a/drivers/block/ide.c b/drivers/block/ide.c
-index 73da29ad552..ef5644d0b90 100644
---- a/drivers/block/ide.c
-+++ b/drivers/block/ide.c
-@@ -537,7 +537,7 @@ static void ide_ident(struct blk_desc *dev_desc)
- 	/* Select device
- 	 */
- 	ide_outb(device, ATA_DEV_HD, ATA_LBA | ATA_DEVICE(device));
--	dev_desc->if_type = UCLASS_IDE;
-+	dev_desc->uclass_id = UCLASS_IDE;
- #ifdef CONFIG_ATAPI
- 
- 	retries = 0;
-@@ -752,7 +752,7 @@ void ide_init(void)
- 
- 	for (i = 0; i < CONFIG_SYS_IDE_MAXDEVICE; ++i) {
- 		ide_dev_desc[i].type = DEV_TYPE_UNKNOWN;
--		ide_dev_desc[i].if_type = UCLASS_IDE;
-+		ide_dev_desc[i].uclass_id = UCLASS_IDE;
- 		ide_dev_desc[i].devnum = i;
- 		ide_dev_desc[i].part_type = PART_TYPE_UNKNOWN;
- 		ide_dev_desc[i].blksz = 0;
-@@ -1143,8 +1143,8 @@ UCLASS_DRIVER(ide) = {
- };
- #else
- U_BOOT_LEGACY_BLK(ide) = {
--	.if_typename	= "ide",
--	.if_type	= UCLASS_IDE,
-+	.uclass_idname	= "ide",
-+	.uclass_id	= UCLASS_IDE,
- 	.max_devs	= CONFIG_SYS_IDE_MAXDEVICE,
- 	.desc		= ide_dev_desc,
- };
-diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
-index 2de12e0a93e..6e43404bcaa 100644
---- a/drivers/block/sandbox.c
-+++ b/drivers/block/sandbox.c
-@@ -192,7 +192,7 @@ int host_dev_bind(int dev, char *filename, bool removable)
- 	}
- 
- 	struct blk_desc *blk_dev = &host_dev->blk_dev;
--	blk_dev->if_type = UCLASS_ROOT;
-+	blk_dev->uclass_id = UCLASS_ROOT;
- 	blk_dev->priv = host_dev;
- 	blk_dev->blksz = 512;
- 	blk_dev->lba = os_lseek(host_dev->fd, 0, OS_SEEK_END) / blk_dev->blksz;
-@@ -262,8 +262,8 @@ U_BOOT_DRIVER(sandbox_host_blk) = {
- };
- #else
- U_BOOT_LEGACY_BLK(sandbox_host) = {
--	.if_typename	= "host",
--	.if_type	= UCLASS_ROOT,
-+	.uclass_idname	= "host",
-+	.uclass_id	= UCLASS_ROOT,
- 	.max_devs	= SANDBOX_HOST_MAX_DEVICES,
- 	.get_dev	= host_get_dev_err,
- };
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index b1bd4ae1bc8..759a6b728c8 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -472,7 +472,7 @@ static int mmc_select_hwpart(struct udevice *bdev, int hwpart)
- 
- 	ret = mmc_switch_part(mmc, hwpart);
- 	if (!ret)
--		blkcache_invalidate(desc->if_type, desc->devnum);
-+		blkcache_invalidate(desc->uclass_id, desc->devnum);
- 
- 	return ret;
- }
-diff --git a/drivers/mmc/mmc_legacy.c b/drivers/mmc/mmc_legacy.c
-index 4e0891e5dfe..a101ee43fde 100644
---- a/drivers/mmc/mmc_legacy.c
-+++ b/drivers/mmc/mmc_legacy.c
-@@ -132,7 +132,7 @@ static struct mmc mmc_static = {
- 	.dsr_imp		= 0,
- 	.dsr			= 0xffffffff,
- 	.block_dev = {
--		.if_type	= UCLASS_MMC,
-+		.uclass_id	= UCLASS_MMC,
- 		.removable	= 1,
- 		.devnum		= 0,
- 		.block_read	= mmc_bread,
-@@ -194,7 +194,7 @@ struct mmc *mmc_create(const struct mmc_config *cfg, void *priv)
- 	mmc->dsr = 0xffffffff;
- 	/* Setup the universal parts of the block interface just once */
- 	bdesc = mmc_get_blk_desc(mmc);
--	bdesc->if_type = UCLASS_MMC;
-+	bdesc->uclass_id = UCLASS_MMC;
- 	bdesc->removable = 1;
- 	bdesc->devnum = mmc_get_next_devnum();
- 	bdesc->block_read = mmc_bread;
-@@ -253,8 +253,8 @@ static int mmc_get_dev(int dev, struct blk_desc **descp)
- }
- 
- U_BOOT_LEGACY_BLK(mmc) = {
--	.if_typename	= "mmc",
--	.if_type	= UCLASS_MMC,
-+	.uclass_idname	= "mmc",
-+	.uclass_id	= UCLASS_MMC,
- 	.max_devs	= -1,
- 	.get_dev	= mmc_get_dev,
- 	.select_hwpart	= mmc_select_hwpartp,
-diff --git a/drivers/net/fsl_enetc.c b/drivers/net/fsl_enetc.c
-index cd4c2c29a65..f1682864611 100644
---- a/drivers/net/fsl_enetc.c
-+++ b/drivers/net/fsl_enetc.c
-@@ -144,7 +144,7 @@ static int enetc_init_sgmii(struct udevice *dev)
- 	if (!enetc_has_imdio(dev))
- 		return 0;
- 
--	if (priv->if_type == PHY_INTERFACE_MODE_2500BASEX)
-+	if (priv->uclass_id == PHY_INTERFACE_MODE_2500BASEX)
- 		is2500 = true;
- 
- 	/*
-@@ -219,7 +219,7 @@ static void enetc_setup_mac_iface(struct udevice *dev,
- 	struct enetc_priv *priv = dev_get_priv(dev);
- 	u32 if_mode;
- 
--	switch (priv->if_type) {
-+	switch (priv->uclass_id) {
- 	case PHY_INTERFACE_MODE_RGMII:
- 	case PHY_INTERFACE_MODE_RGMII_ID:
- 	case PHY_INTERFACE_MODE_RGMII_RXID:
-@@ -276,14 +276,14 @@ static void enetc_start_pcs(struct udevice *dev)
- 		return;
- 	}
- 
--	priv->if_type = dev_read_phy_mode(dev);
--	if (priv->if_type == PHY_INTERFACE_MODE_NA) {
-+	priv->uclass_id = dev_read_phy_mode(dev);
-+	if (priv->uclass_id == PHY_INTERFACE_MODE_NA) {
- 		enetc_dbg(dev,
- 			  "phy-mode property not found, defaulting to SGMII\n");
--		priv->if_type = PHY_INTERFACE_MODE_SGMII;
-+		priv->uclass_id = PHY_INTERFACE_MODE_SGMII;
- 	}
- 
--	switch (priv->if_type) {
-+	switch (priv->uclass_id) {
- 	case PHY_INTERFACE_MODE_SGMII:
- 	case PHY_INTERFACE_MODE_2500BASEX:
- 		enetc_init_sgmii(dev);
-diff --git a/drivers/net/fsl_enetc.h b/drivers/net/fsl_enetc.h
-index 69f2f4aaff1..f2acf367aa3 100644
---- a/drivers/net/fsl_enetc.h
-+++ b/drivers/net/fsl_enetc.h
-@@ -158,7 +158,7 @@ struct enetc_priv {
- 	struct bd_ring tx_bdr;
- 	struct bd_ring rx_bdr;
- 
--	int if_type;
-+	int uclass_id;
- 	struct mii_dev imdio;
- 	struct phy_device *phy;
- };
-diff --git a/drivers/scsi/scsi.c b/drivers/scsi/scsi.c
-index 99be5aef877..3e769b0843f 100644
---- a/drivers/scsi/scsi.c
-+++ b/drivers/scsi/scsi.c
-@@ -456,7 +456,7 @@ static void scsi_init_dev_desc(struct blk_desc *dev_desc, int devnum)
- {
- 	dev_desc->lba = 0;
- 	dev_desc->blksz = 0;
--	dev_desc->if_type = UCLASS_SCSI;
-+	dev_desc->uclass_id = UCLASS_SCSI;
- 	dev_desc->devnum = devnum;
- 	dev_desc->part_type = PART_TYPE_UNKNOWN;
- 
-@@ -706,8 +706,8 @@ U_BOOT_DRIVER(scsi_blk) = {
- };
- #else
- U_BOOT_LEGACY_BLK(scsi) = {
--	.if_typename	= "scsi",
--	.if_type	= UCLASS_SCSI,
-+	.uclass_idname	= "scsi",
-+	.uclass_id	= UCLASS_SCSI,
- 	.max_devs	= SCSI_MAX_DEVICE,
- 	.desc		= scsi_dev_desc,
- };
-diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
-index 9710b79117c..30cfc56725c 100644
---- a/drivers/virtio/virtio_blk.c
-+++ b/drivers/virtio/virtio_blk.c
-@@ -75,7 +75,7 @@ static int virtio_blk_bind(struct udevice *dev)
- 	struct blk_desc *desc = dev_get_uclass_plat(dev);
- 	int devnum;
- 
--	desc->if_type = UCLASS_VIRTIO;
-+	desc->uclass_id = UCLASS_VIRTIO;
- 	/*
- 	 * Initialize the devnum to -ENODEV. This is to make sure that
- 	 * blk_next_free_devnum() works as expected, since the default
-diff --git a/drivers/xen/pvblock.c b/drivers/xen/pvblock.c
-index 1090e528d02..970182cd904 100644
---- a/drivers/xen/pvblock.c
-+++ b/drivers/xen/pvblock.c
-@@ -665,7 +665,7 @@ static int pvblock_blk_bind(struct udevice *udev)
- 	struct blk_desc *desc = dev_get_uclass_plat(udev);
- 	int devnum;
- 
--	desc->if_type = UCLASS_PVBLOCK;
-+	desc->uclass_id = UCLASS_PVBLOCK;
- 	/*
- 	 * Initialize the devnum to -ENODEV. This is to make sure that
- 	 * blk_next_free_devnum() works as expected, since the default
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index c64e253abd4..a945904785f 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -1145,7 +1145,7 @@ int file_fat_detectfs(void)
- 	}
- 
- 	if (blk_enabled()) {
--		printf("Interface:  %s\n", blk_get_if_type_name(cur_dev->if_type));
-+		printf("Interface:  %s\n", blk_get_uclass_name(cur_dev->uclass_id));
- 		printf("  Device %d: ", cur_dev->devnum);
- 		dev_print(cur_dev);
- 	}
-diff --git a/include/blk.h b/include/blk.h
-index 279f9ea4a9d..cdc6f0fc7eb 100644
---- a/include/blk.h
-+++ b/include/blk.h
-@@ -54,7 +54,7 @@ struct blk_desc {
- 	 * TODO: With driver model we should be able to use the parent
- 	 * device's uclass instead.
- 	 */
--	enum uclass_id	if_type;	/* type of the interface */
-+	enum uclass_id	uclass_id;	/* type of the interface */
- 	int		devnum;		/* device number */
- 	unsigned char	part_type;	/* partition type */
- 	unsigned char	target;		/* target SCSI ID */
-@@ -114,7 +114,7 @@ int blkcache_init(void);
- /**
-  * blkcache_read() - attempt to read a set of blocks from cache
-  *
-- * @param iftype - IF_TYPE_x for type of device
-+ * @param iftype - uclass_id_x for type of device
-  * @param dev - device index of particular type
-  * @param start - starting block number
-  * @param blkcnt - number of blocks to read
-@@ -131,7 +131,7 @@ int blkcache_read(int iftype, int dev,
-  * blkcache_fill() - make data read from a block device available
-  * to the block cache
-  *
-- * @param iftype - IF_TYPE_x for type of device
-+ * @param iftype - uclass_id_x for type of device
-  * @param dev - device index of particular type
-  * @param start - starting block number
-  * @param blkcnt - number of blocks available
-@@ -147,7 +147,7 @@ void blkcache_fill(int iftype, int dev,
-  * blkcache_invalidate() - discard the cache for a set of blocks
-  * because of a write or device (re)initialization.
-  *
-- * @param iftype - IF_TYPE_x for type of device
-+ * @param iftype - uclass_id_x for type of device
-  * @param dev - device index of particular type
-  */
- void blkcache_invalidate(int iftype, int dev);
-@@ -279,22 +279,22 @@ unsigned long blk_derase(struct blk_desc *block_dev, lbaint_t start,
-  * This function does not activate the device. The device will be returned
-  * whether or not it is activated.
-  *
-- * @if_type:	Interface type (enum uclass_id_t)
-+ * @uclass_id:	Interface type (enum uclass_id_t)
-  * @devnum:	Device number (specific to each interface type)
-  * @devp:	the device, if found
-  * Return: 0 if found, -ENODEV if no device found, or other -ve error value
-  */
--int blk_find_device(int if_type, int devnum, struct udevice **devp);
-+int blk_find_device(int uclass_id, int devnum, struct udevice **devp);
- 
- /**
-  * blk_get_device() - Find and probe a block device ready for use
-  *
-- * @if_type:	Interface type (enum uclass_id_t)
-+ * @uclass_id:	Interface type (enum uclass_id_t)
-  * @devnum:	Device number (specific to each interface type)
-  * @devp:	the device, if found
-  * Return: 0 if found, -ENODEV if no device found, or other -ve error value
-  */
--int blk_get_device(int if_type, int devnum, struct udevice **devp);
-+int blk_get_device(int uclass_id, int devnum, struct udevice **devp);
- 
- /**
-  * blk_first_device() - Find the first device for a given interface
-@@ -305,7 +305,7 @@ int blk_get_device(int if_type, int devnum, struct udevice **devp);
-  * @devp:	the device, if found
-  * Return: 0 if found, -ENODEV if no device, or other -ve error value
-  */
--int blk_first_device(int if_type, struct udevice **devp);
-+int blk_first_device(int uclass_id, struct udevice **devp);
- 
- /**
-  * blk_next_device() - Find the next device for a given interface
-@@ -327,7 +327,7 @@ int blk_next_device(struct udevice **devp);
-  * @parent:	Parent of the new device
-  * @drv_name:	Driver name to use for the block device
-  * @name:	Name for the device
-- * @if_type:	Interface type (enum uclass_id_t)
-+ * @uclass_id:	Interface type (enum uclass_id_t)
-  * @devnum:	Device number, specific to the interface type, or -1 to
-  *		allocate the next available number
-  * @blksz:	Block size of the device in bytes (typically 512)
-@@ -335,7 +335,7 @@ int blk_next_device(struct udevice **devp);
-  * @devp:	the new device (which has not been probed)
-  */
- int blk_create_device(struct udevice *parent, const char *drv_name,
--		      const char *name, int if_type, int devnum, int blksz,
-+		      const char *name, int uclass_id, int devnum, int blksz,
- 		      lbaint_t lba, struct udevice **devp);
- 
- /**
-@@ -344,7 +344,7 @@ int blk_create_device(struct udevice *parent, const char *drv_name,
-  * @parent:	Parent of the new device
-  * @drv_name:	Driver name to use for the block device
-  * @name:	Name for the device (parent name is prepended)
-- * @if_type:	Interface type (enum uclass_id_t)
-+ * @uclass_id:	Interface type (enum uclass_id_t)
-  * @devnum:	Device number, specific to the interface type, or -1 to
-  *		allocate the next available number
-  * @blksz:	Block size of the device in bytes (typically 512)
-@@ -352,7 +352,7 @@ int blk_create_device(struct udevice *parent, const char *drv_name,
-  * @devp:	the new device (which has not been probed)
-  */
- int blk_create_devicef(struct udevice *parent, const char *drv_name,
--		       const char *name, int if_type, int devnum, int blksz,
-+		       const char *name, int uclass_id, int devnum, int blksz,
- 		       lbaint_t lba, struct udevice **devp);
- 
- /**
-@@ -372,33 +372,33 @@ int blk_probe_or_unbind(struct udevice *dev);
-  *
-  * The devices are removed and then unbound.
-  *
-- * @if_type:	Interface type to unbind
-+ * @uclass_id:	Interface type to unbind
-  * Return: 0 if OK, -ve on error
-  */
--int blk_unbind_all(int if_type);
-+int blk_unbind_all(int uclass_id);
- 
- /**
-  * blk_find_max_devnum() - find the maximum device number for an interface type
-  *
-- * Finds the last allocated device number for an interface type @if_type. The
-+ * Finds the last allocated device number for an interface type @uclass_id. The
-  * next number is safe to use for a newly allocated device.
-  *
-- * @if_type:	Interface type to scan
-+ * @uclass_id:	Interface type to scan
-  * Return: maximum device number found, or -ENODEV if none, or other -ve on
-  * error
-  */
--int blk_find_max_devnum(enum uclass_id if_type);
-+int blk_find_max_devnum(enum uclass_id uclass_id);
- 
- /**
-  * blk_next_free_devnum() - get the next device number for an interface type
-  *
-  * Finds the next number that is safe to use for a newly allocated device for
-- * an interface type @if_type.
-+ * an interface type @uclass_id.
-  *
-- * @if_type:	Interface type to scan
-+ * @uclass_id:	Interface type to scan
-  * Return: next device number safe to use, or -ve on error
-  */
--int blk_next_free_devnum(enum uclass_id if_type);
-+int blk_next_free_devnum(enum uclass_id uclass_id);
- 
- /**
-  * blk_select_hwpart() - select a hardware partition
-@@ -447,7 +447,7 @@ static inline ulong blk_dread(struct blk_desc *block_dev, lbaint_t start,
- 			      lbaint_t blkcnt, void *buffer)
- {
- 	ulong blks_read;
--	if (blkcache_read(block_dev->if_type, block_dev->devnum,
-+	if (blkcache_read(block_dev->uclass_id, block_dev->devnum,
- 			  start, blkcnt, block_dev->blksz, buffer))
- 		return blkcnt;
- 
-@@ -458,7 +458,7 @@ static inline ulong blk_dread(struct blk_desc *block_dev, lbaint_t start,
- 	 */
- 	blks_read = block_dev->block_read(block_dev, start, blkcnt, buffer);
- 	if (blks_read == blkcnt)
--		blkcache_fill(block_dev->if_type, block_dev->devnum,
-+		blkcache_fill(block_dev->uclass_id, block_dev->devnum,
- 			      start, blkcnt, block_dev->blksz, buffer);
- 
- 	return blks_read;
-@@ -467,14 +467,14 @@ static inline ulong blk_dread(struct blk_desc *block_dev, lbaint_t start,
- static inline ulong blk_dwrite(struct blk_desc *block_dev, lbaint_t start,
- 			       lbaint_t blkcnt, const void *buffer)
- {
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 	return block_dev->block_write(block_dev, start, blkcnt, buffer);
- }
- 
- static inline ulong blk_derase(struct blk_desc *block_dev, lbaint_t start,
- 			       lbaint_t blkcnt)
- {
--	blkcache_invalidate(block_dev->if_type, block_dev->devnum);
-+	blkcache_invalidate(block_dev->uclass_id, block_dev->devnum);
- 	return block_dev->block_erase(block_dev, start, blkcnt);
- }
- 
-@@ -485,15 +485,15 @@ static inline ulong blk_derase(struct blk_desc *block_dev, lbaint_t start,
-  * driver should be provided using U_BOOT_LEGACY_BLK() for each interface
-  * type that is to be supported.
-  *
-- * @if_typename:	Interface type name
-- * @if_type:		Interface type
-+ * @uclass_idname:	Interface type name
-+ * @uclass_id:		Interface type
-  * @max_devs:		Maximum number of devices supported
-  * @desc:		Pointer to list of devices for this interface type,
-  *			or NULL to use @get_dev() instead
-  */
- struct blk_driver {
--	const char *if_typename;
--	enum uclass_id if_type;
-+	const char *uclass_idname;
-+	enum uclass_id uclass_id;
- 	int max_devs;
- 	struct blk_desc *desc;
- 	/**
-@@ -540,7 +540,7 @@ struct blk_driver {
- #define U_BOOT_LEGACY_BLK(__name)					\
- 	ll_entry_declare(struct blk_driver, __name, blk_driver)
- 
--struct blk_driver *blk_driver_lookup_type(int if_type);
-+struct blk_driver *blk_driver_lookup_type(int uclass_id);
- 
- #endif /* !CONFIG_BLK */
- 
-@@ -550,23 +550,23 @@ struct blk_driver *blk_driver_lookup_type(int if_type);
-  * This looks through the available block devices of the given type, returning
-  * the one with the given @devnum.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * Return: point to block device descriptor, or NULL if not found
-  */
--struct blk_desc *blk_get_devnum_by_type(enum uclass_id if_type, int devnum);
-+struct blk_desc *blk_get_devnum_by_type(enum uclass_id uclass_id, int devnum);
- 
- /**
-  * blk_get_devnum_by_type() - Get a block device by type name, and number
-  *
-- * This looks up the block device type based on @if_typename, then calls
-+ * This looks up the block device type based on @uclass_idname, then calls
-  * blk_get_devnum_by_type().
-  *
-- * @if_typename:	Block device type name
-+ * @uclass_idname:	Block device type name
-  * @devnum:		Device number
-  * Return: point to block device descriptor, or NULL if not found
-  */
--struct blk_desc *blk_get_devnum_by_typename(const char *if_typename,
-+struct blk_desc *blk_get_devnum_by_typename(const char *uclass_idname,
- 					    int devnum);
- 
- /**
-@@ -585,34 +585,34 @@ int blk_dselect_hwpart(struct blk_desc *desc, int hwpart);
- /**
-  * blk_list_part() - list the partitions for block devices of a given type
-  *
-- * This looks up the partition type for each block device of type @if_type,
-+ * This looks up the partition type for each block device of type @uclass_id,
-  * then displays a list of partitions.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * Return: 0 if OK, -ENODEV if there is none of that type
-  */
--int blk_list_part(enum uclass_id if_type);
-+int blk_list_part(enum uclass_id uclass_id);
- 
- /**
-  * blk_list_devices() - list the block devices of a given type
-  *
-- * This lists each block device of the type @if_type, showing the capacity
-+ * This lists each block device of the type @uclass_id, showing the capacity
-  * as well as type-specific information.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  */
--void blk_list_devices(enum uclass_id if_type);
-+void blk_list_devices(enum uclass_id uclass_id);
- 
- /**
-  * blk_show_device() - show information about a given block device
-  *
-  * This shows the block device capacity as well as type-specific information.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * Return: 0 if OK, -ENODEV for invalid device number
-  */
--int blk_show_device(enum uclass_id if_type, int devnum);
-+int blk_show_device(enum uclass_id uclass_id, int devnum);
- 
- /**
-  * blk_print_device_num() - show information about a given block device
-@@ -620,45 +620,45 @@ int blk_show_device(enum uclass_id if_type, int devnum);
-  * This is similar to blk_show_device() but returns an error if the block
-  * device type is unknown.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * Return: 0 if OK, -ENODEV for invalid device number, -ENOENT if the block
-  * device is not connected
-  */
--int blk_print_device_num(enum uclass_id if_type, int devnum);
-+int blk_print_device_num(enum uclass_id uclass_id, int devnum);
- 
- /**
-  * blk_print_part_devnum() - print the partition information for a device
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * Return: 0 if OK, -ENOENT if the block device is not connected, -ENOSYS if
-  * the interface type is not supported, other -ve on other error
-  */
--int blk_print_part_devnum(enum uclass_id if_type, int devnum);
-+int blk_print_part_devnum(enum uclass_id uclass_id, int devnum);
- 
- /**
-  * blk_read_devnum() - read blocks from a device
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * @blkcnt:	Number of blocks to read
-  * @buffer:	Address to write data to
-  * Return: number of blocks read, or -ve error number on error
-  */
--ulong blk_read_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_read_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		      lbaint_t blkcnt, void *buffer);
- 
- /**
-  * blk_write_devnum() - write blocks to a device
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * @blkcnt:	Number of blocks to write
-  * @buffer:	Address to read data from
-  * Return: number of blocks written, or -ve error number on error
-  */
--ulong blk_write_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-+ulong blk_write_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 		       lbaint_t blkcnt, const void *buffer);
- 
- /**
-@@ -667,31 +667,31 @@ ulong blk_write_devnum(enum uclass_id if_type, int devnum, lbaint_t start,
-  * This is similar to blk_dselect_hwpart() but it looks up the interface and
-  * device number.
-  *
-- * @if_type:	Block device type
-+ * @uclass_id:	Block device type
-  * @devnum:	Device number
-  * @hwpart:	Partition number to select
-  * Return: 0 if OK, -ve on error
-  */
--int blk_select_hwpart_devnum(enum uclass_id if_type, int devnum, int hwpart);
-+int blk_select_hwpart_devnum(enum uclass_id uclass_id, int devnum, int hwpart);
- 
- /**
-- * blk_get_if_type_name() - Get the name of an interface type
-+ * blk_get_uclass_name() - Get the name of an interface type
-  *
-- * @if_type: Interface type to check
-+ * @uclass_id: Interface type to check
-  * Return: name of interface, or NULL if none
-  */
--const char *blk_get_if_type_name(enum uclass_id if_type);
-+const char *blk_get_uclass_name(enum uclass_id uclass_id);
- 
- /**
-  * blk_common_cmd() - handle common commands with block devices
-  *
-  * @args: Number of arguments to the command (argv[0] is the command itself)
-  * @argv: Command arguments
-- * @if_type: Interface type
-+ * @uclass_id: Interface type
-  * @cur_devnump: Current device number for this interface type
-  * Return: 0 if OK, CMD_RET_ERROR on error
-  */
--int blk_common_cmd(int argc, char *const argv[], enum uclass_id if_type,
-+int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
- 		   int *cur_devnump);
- 
- enum blk_flag_t {
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 83c01085fde..f9c9aa64b24 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -622,7 +622,7 @@ struct efi_device_path_sata {
- struct efi_device_path_mac_addr {
- 	struct efi_device_path dp;
- 	struct efi_mac_addr mac;
--	u8 if_type;
-+	u8 uclass_id;
- } __packed;
- 
- struct efi_device_path_usb_class {
-@@ -1410,7 +1410,7 @@ struct efi_simple_network_mode {
- 	struct efi_mac_address current_address;
- 	struct efi_mac_address broadcast_address;
- 	struct efi_mac_address permanent_address;
--	u8 if_type;
-+	u8 uclass_id;
- 	u8 mac_changeable;
- 	u8 multitx_supported;
- 	u8 media_present_supported;
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index ae58efb0036..aab128a6dda 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -156,7 +156,7 @@ extern bool efi_st_keep_devices;
- 
- /* EFI system partition */
- extern struct efi_system_partition {
--	enum uclass_id if_type;
-+	enum uclass_id uclass_id;
- 	int devnum;
- 	u8 part;
- } efi_system_partition;
-@@ -545,7 +545,7 @@ efi_status_t tcg2_measure_pe_image(void *efi, u64 efi_size,
- 				   struct efi_loaded_image *loaded_image_info);
- /* Create handles and protocols for the partitions of a block device */
- int efi_disk_create_partitions(efi_handle_t parent, struct blk_desc *desc,
--			       const char *if_typename, int diskid,
-+			       const char *uclass_idname, int diskid,
- 			       const char *pdevname);
- /* Called by bootefi to make GOP (graphical) interface available */
- efi_status_t efi_gop_register(void);
-diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-index ebffb771228..9787033c3df 100644
---- a/lib/efi_loader/efi_device_path.c
-+++ b/lib/efi_loader/efi_device_path.c
-@@ -626,7 +626,7 @@ __maybe_unused static void *dp_fill(void *buf, struct udevice *dev)
- 		/* We only support IPv4 */
- 		memcpy(&dp->mac, &pdata->enetaddr, ARP_HLEN);
- 		/* Ethernet */
--		dp->if_type = 1;
-+		dp->uclass_id = 1;
- 		return &dp[1];
- 	}
- #endif
-diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
-index 4d73954ef89..aef18483c3a 100644
---- a/lib/efi_loader/efi_device_path_to_text.c
-+++ b/lib/efi_loader/efi_device_path_to_text.c
-@@ -156,12 +156,12 @@ static char *dp_msging(char *s, struct efi_device_path *dp)
- 		struct efi_device_path_mac_addr *mdp =
- 			(struct efi_device_path_mac_addr *)dp;
- 
--		if (mdp->if_type <= 1)
-+		if (mdp->uclass_id <= 1)
- 			n = 6;
- 		s += sprintf(s, "MAC(");
- 		for (i = 0; i < n; ++i)
- 			s += sprintf(s, "%02x", mdp->mac.addr[i]);
--		s += sprintf(s, ",%u)", mdp->if_type);
-+		s += sprintf(s, ",%u)", mdp->uclass_id);
- 
- 		break;
- 	}
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index ad543bc117e..83126f55ea1 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -379,7 +379,7 @@ static int efi_fs_exists(struct blk_desc *desc, int part)
-  *
-  * @parent:		parent handle
-  * @dp_parent:		parent device path
-- * @if_typename:	interface name for block device
-+ * @uclass_idname:	interface name for block device
-  * @desc:		internal block device
-  * @dev_index:		device index for block device
-  * @part_info:		partition info
-@@ -390,7 +390,7 @@ static int efi_fs_exists(struct blk_desc *desc, int part)
- static efi_status_t efi_disk_add_dev(
- 				efi_handle_t parent,
- 				struct efi_device_path *dp_parent,
--				const char *if_typename,
-+				const char *uclass_idname,
- 				struct blk_desc *desc,
- 				int dev_index,
- 				struct disk_partition *part_info,
-@@ -502,13 +502,13 @@ static efi_status_t efi_disk_add_dev(
- 		  diskobj->media.last_block);
- 
- 	/* Store first EFI system partition */
--	if (part && !efi_system_partition.if_type) {
-+	if (part && !efi_system_partition.uclass_id) {
- 		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
--			efi_system_partition.if_type = desc->if_type;
-+			efi_system_partition.uclass_id = desc->uclass_id;
- 			efi_system_partition.devnum = desc->devnum;
- 			efi_system_partition.part = part;
- 			EFI_PRINT("EFI system partition: %s %x:%x\n",
--				  blk_get_if_type_name(desc->if_type),
-+				  blk_get_uclass_name(desc->uclass_id),
- 				  desc->devnum, part);
- 		}
- 	}
-@@ -532,15 +532,15 @@ static int efi_disk_create_raw(struct udevice *dev)
- {
- 	struct efi_disk_obj *disk;
- 	struct blk_desc *desc;
--	const char *if_typename;
-+	const char *uclass_idname;
- 	int diskid;
- 	efi_status_t ret;
- 
- 	desc = dev_get_uclass_plat(dev);
--	if_typename = blk_get_if_type_name(desc->if_type);
-+	uclass_idname = blk_get_uclass_name(desc->uclass_id);
- 	diskid = desc->devnum;
- 
--	ret = efi_disk_add_dev(NULL, NULL, if_typename, desc,
-+	ret = efi_disk_add_dev(NULL, NULL, uclass_idname, desc,
- 			       diskid, NULL, 0, &disk);
- 	if (ret != EFI_SUCCESS) {
- 		if (ret == EFI_NOT_READY)
-@@ -575,7 +575,7 @@ static int efi_disk_create_part(struct udevice *dev)
- {
- 	efi_handle_t parent;
- 	struct blk_desc *desc;
--	const char *if_typename;
-+	const char *uclass_idname;
- 	struct disk_part *part_data;
- 	struct disk_partition *info;
- 	unsigned int part;
-@@ -589,7 +589,7 @@ static int efi_disk_create_part(struct udevice *dev)
- 		return -1;
- 
- 	desc = dev_get_uclass_plat(dev_get_parent(dev));
--	if_typename = blk_get_if_type_name(desc->if_type);
-+	uclass_idname = blk_get_uclass_name(desc->uclass_id);
- 	diskid = desc->devnum;
- 
- 	part_data = dev_get_uclass_plat(dev);
-@@ -601,7 +601,7 @@ static int efi_disk_create_part(struct udevice *dev)
- 		return -1;
- 	dp_parent = (struct efi_device_path *)handler->protocol_interface;
- 
--	ret = efi_disk_add_dev(parent, dp_parent, if_typename, desc, diskid,
-+	ret = efi_disk_add_dev(parent, dp_parent, uclass_idname, desc, diskid,
- 			       info, part, &disk);
- 	if (ret != EFI_SUCCESS) {
- 		log_err("Adding partition for %s failed\n", dev->name);
-@@ -650,7 +650,7 @@ static int efi_disk_probe(void *ctx, struct event *event)
- 	 * has already created an efi_disk at this moment.
- 	 */
- 	desc = dev_get_uclass_plat(dev);
--	if (desc->if_type != UCLASS_EFI_LOADER) {
-+	if (desc->uclass_id != UCLASS_EFI_LOADER) {
- 		ret = efi_disk_create_raw(dev);
- 		if (ret)
- 			return -1;
-@@ -685,7 +685,7 @@ static int efi_disk_delete_raw(struct udevice *dev)
- 		return -1;
- 
- 	desc = dev_get_uclass_plat(dev);
--	if (desc->if_type != UCLASS_EFI_LOADER) {
-+	if (desc->uclass_id != UCLASS_EFI_LOADER) {
- 		diskobj = container_of(handle, struct efi_disk_obj, header);
- 		efi_free_pool(diskobj->dp);
- 	}
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 69276b275d9..0cdc1ff5381 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -924,7 +924,7 @@ efi_status_t efi_net_register(void)
- 	netobj->net_mode.hwaddr_size = ARP_HLEN;
- 	netobj->net_mode.media_header_size = ETHER_HDR_SIZE;
- 	netobj->net_mode.max_packet_size = PKTSIZE;
--	netobj->net_mode.if_type = ARP_ETHER;
-+	netobj->net_mode.uclass_id = ARP_ETHER;
- 
- 	netobj->pxe.revision = EFI_PXE_BASE_CODE_PROTOCOL_REVISION;
- 	netobj->pxe.start = efi_pxe_base_code_start;
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index 994e66392fb..3d58caa13da 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -38,13 +38,13 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
- 	char part_str[PART_STR_LEN];
- 	int r;
- 
--	if (efi_system_partition.if_type == UCLASS_INVALID) {
-+	if (efi_system_partition.uclass_id == UCLASS_INVALID) {
- 		log_err("No EFI system partition\n");
- 		return EFI_DEVICE_ERROR;
- 	}
- 	snprintf(part_str, PART_STR_LEN, "%x:%x",
- 		 efi_system_partition.devnum, efi_system_partition.part);
--	r = fs_set_blk_dev(blk_get_if_type_name(efi_system_partition.if_type),
-+	r = fs_set_blk_dev(blk_get_uclass_name(efi_system_partition.uclass_id),
- 			   part_str, FS_TYPE_ANY);
- 	if (r) {
- 		log_err("Cannot read EFI system partition\n");
--- 
-2.37.1.595.g718a3a8f04-goog
+Note that the IF_TYPE goes away with this series and there is just the uclass.
 
+>
+> // Be able to find back a dynamic generated UCLASS.
+>
+>         if (ret) {
+>                 printf("no IDB blk device found\n");
+>                 return 0;
+>         }
+>
+>         device_remove(bdev, DM_REMOVE_NORMAL);
+>         device_unbind(bdev);
+>
+> Make efi functions more flexible by replacing switch() functions by call back functions for:
+>
+> dp_fill
+> dp_size
+> dev_print
+> print_part_header
+>
+> Add them with "blk_create_efi_device()" in a structure.
+> If not defined fall back to standard functions.
+
+We are trying to integrate EFI better into U-Boot so that it uses the
+normal devices. At present it has some parallel infrastructure.
+
+Please take a look at your patch after applying this series, then let
+me know what you think is needed.
+
+Regards,
+Simon
+
+
+
+>
+> ====
+>
+> Kind regards,
+>
+> Johan Jonker
+>
+> On 8/12/22 03:34, Simon Glass wrote:
+> > The block interface has two separate implementations, one using driver
+> > model and one not. The latter is really only needed for SPL, where
+> > size constraints allegedly don't allow use of driver model. Of course
+> > we still need space for filesystems and other code, so it isn't clear
+> > that driver model is anything more than the straw that breaks the
+> > camel's back.
+> >
+> > The driver model version uses a uclass ID for the interface time, but
+> > converts back and forth between that and if_type, which is the legacy
+> > type.
+> >
+> > The HAVE_BLOCK_DEVICE define is mostly a hangover from the old days.
+> > At present its main purpose is to enable the legacy block implementation
+> > in SPL.
+> >
+> > Finally the use of 'select' to enable BLK does not work very well. It
+> > causes kconfig errors when another option depends on BLK and it is
+> > not recommended by the kconfig style guide.
+> >
+> > This series aims to clean things up:
+> > - Enable BLK based on whether different media types are used, but still
+> >   allow boards to disable it
+> > - Rename HAVE_BLOCK_DEVICE to indicates its real purpose
+> > - Drop if_type and use the uclass instead
+> > - Drop some obsolete if_type values
+> >
+> > An issue not resolved by this series is that the sandbox host interface
+> > does not actually have a device. At present it uses the root device, which
+> > was convenience for the driver model conversion but not really correct. It
+> > should be possible to clean this up, in a future series.
+> >
+> > Another minor issue is the use of UCLASS_USB for a mass-storage device.
+> > This has been the case for a while and is not addresed by this series,
+> > other than to add a comment.
+> >
+> > Note that this test relies on Tom Rini's series to drop various boards
+> > including warp and cm_t335
+> >
+> > Finally, a patch is included to make binman put fake files in a
+> > subdirectory, since repeated runs of certain boards can cause unrelated
+> > failues (e.g. chromebook_coral) when fake files are left around.
+> >
+> > Changes in v2:
+> > - Update commit message
+> > - Fix SPL_PARTITIONS too
+> > - Add SATA also
+> > - Refer to a suffix, not a prefix
+> > - Add new patch to handle UCLASS_EFI_MEDIA in dev_print()
+> > - Add new patch to drop ifname field from struct efi_disk_obj
+> > - Use conv_uclass_id() instead of the confusing uclass_id_to_uclass_id()
+> >
+>
+> From d0bb794b966a0134a6f321a414b48c28e8894180 Mon Sep 17 00:00:00 2001
+> From: Johan Jonker <jbx6244@gmail.com>
+> Date: Sun, 7 Aug 2022 15:25:55 +0200
+> Subject: prepare rknand
+>
+>
+> diff --git a/disk/part.c b/disk/part.c
+> index 79955c7fb0..3f8b97a6c6 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -150,6 +150,7 @@ void dev_print (struct blk_desc *dev_desc)
+>         case IF_TYPE_USB:
+>         case IF_TYPE_NVME:
+>         case IF_TYPE_PVBLOCK:
+> +       case IF_TYPE_RKNAND:
+>         case IF_TYPE_HOST:
+>                 printf ("Vendor: %s Rev: %s Prod: %s\n",
+>                         dev_desc->vendor,
+> @@ -293,6 +294,9 @@ static void print_part_header(const char *type, struct blk_desc *dev_desc)
+>         case IF_TYPE_PVBLOCK:
+>                 puts("PV BLOCK");
+>                 break;
+> +       case IF_TYPE_RKNAND:
+> +               puts("RKNAND");
+> +               break;
+>         case IF_TYPE_VIRTIO:
+>                 puts("VirtIO");
+>                 break;
+> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+> index 0b5f219d90..28b21836c4 100644
+> --- a/drivers/block/blk-uclass.c
+> +++ b/drivers/block/blk-uclass.c
+> @@ -33,6 +33,7 @@ static const char *if_typename_str[IF_TYPE_COUNT] = {
+>         [IF_TYPE_VIRTIO]        = "virtio",
+>         [IF_TYPE_PVBLOCK]       = "pvblock",
+>         [IF_TYPE_RK_IDB]        = "idb",
+> +       [IF_TYPE_RKNAND]        = "rknand",
+>  };
+>
+>  static enum uclass_id if_type_uclass_id[IF_TYPE_COUNT] = {
+> @@ -51,6 +52,7 @@ static enum uclass_id if_type_uclass_id[IF_TYPE_COUNT] = {
+>         [IF_TYPE_VIRTIO]        = UCLASS_VIRTIO,
+>         [IF_TYPE_PVBLOCK]       = UCLASS_PVBLOCK,
+>         [IF_TYPE_RK_IDB]        = UCLASS_RK_IDB,
+> +       [IF_TYPE_RKNAND]        = UCLASS_RKNAND,
+>  };
+>
+>  static enum if_type if_typename_to_iftype(const char *if_typename)
+> diff --git a/include/blk.h b/include/blk.h
+> index a73cc577a0..56f2415e21 100644
+> --- a/include/blk.h
+> +++ b/include/blk.h
+> @@ -30,6 +30,7 @@ enum if_type {
+>         IF_TYPE_USB,
+>         IF_TYPE_DOC,
+>         IF_TYPE_MMC,
+> +       IF_TYPE_RKNAND,
+>         IF_TYPE_SD,
+>         IF_TYPE_SATA,
+>         IF_TYPE_HOST,
+> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+> index 38a227f006..b102cdf46e 100644
+> --- a/include/dm/uclass-id.h
+> +++ b/include/dm/uclass-id.h
+> @@ -104,6 +104,7 @@ enum uclass_id {
+>         UCLASS_REGULATOR,       /* Regulator device */
+>         UCLASS_REMOTEPROC,      /* Remote Processor device */
+>         UCLASS_RESET,           /* Reset controller device */
+> +       UCLASS_RKNAND,          /* Rockchip nand device with ftl */
+>         UCLASS_RK_IDB,          /* Rockchip IDB device */
+>         UCLASS_RNG,             /* Random Number Generator */
+>         UCLASS_RTC,             /* Real time clock device */
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 44d426035a..ddc7082ad6 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -145,6 +145,10 @@ static inline efi_status_t efi_launch_capsules(void)
+>  #define U_BOOT_IDB_DEV_GUID \
+>         EFI_GUID(0xadc021df, 0x5f24, 0x464f, \
+>                  0x9a, 0x88, 0xdb, 0xee, 0x3f, 0x1d, 0x14, 0x0f)
+> +/* GUID used as root for Rockchip RKNAND devices */
+> +#define U_BOOT_RKNAND_DEV_GUID \
+> +       EFI_GUID(0xe39f6cbb, 0x055a, 0x45a0, \
+> +                0xb2, 0x75, 0x56, 0x0d, 0xa5, 0x22, 0x25, 0x99)
+>
+>  /* Use internal device tree when starting UEFI application */
+>  #define EFI_FDT_USE_INTERNAL NULL
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> index b7535373e7..9691f02b2e 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -31,6 +31,9 @@ const efi_guid_t efi_guid_virtio_dev = U_BOOT_VIRTIO_DEV_GUID;
+>  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
+>  const efi_guid_t efi_guid_idb_dev = U_BOOT_IDB_DEV_GUID;
+>  #endif
+> +#if CONFIG_IS_ENABLED(RKNAND)
+> +const efi_guid_t efi_guid_rknand_dev = U_BOOT_IDB_DEV_GUID;
+> +#endif
+>
+>  /* template END node: */
+>  static const struct efi_device_path END = {
+> @@ -578,6 +581,16 @@ __maybe_unused static unsigned int dp_size(struct udevice *dev)
+>                         return dp_size(dev->parent)
+>                                 + sizeof(struct efi_device_path_vendor) + 1;
+>  #endif
+> +#if CONFIG_IS_ENABLED(RKNAND)
+> +               case UCLASS_RKNAND:
+> +                        /*
+> +                         * Rockchip IDB device will be represented
+> +                         * as vendor device with extra one byte for
+> +                         * device number
+> +                         */
+> +                       return dp_size(dev->parent)
+> +                               + sizeof(struct efi_device_path_vendor) + 1;
+> +#endif
+>  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
+>                 case UCLASS_RK_IDB:
+>                          /*
+> @@ -680,6 +693,23 @@ __maybe_unused static void *dp_fill(void *buf, struct udevice *dev)
+>                         return &dp->vendor_data[1];
+>                         }
+>  #endif
+> +#if CONFIG_IS_ENABLED(RKNAND)
+> +               case UCLASS_RKNAND: {
+> +                       struct efi_device_path_vendor *dp;
+> +                       struct blk_desc *desc = dev_get_uclass_plat(dev);
+> +
+> +                       dp_fill(buf, dev->parent);
+> +                       dp = buf;
+> +                       ++dp;
+> +                       dp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
+> +                       dp->dp.sub_type = DEVICE_PATH_SUB_TYPE_VENDOR;
+> +                       dp->dp.length = sizeof(*dp) + 1;
+> +                       memcpy(&dp->guid, &efi_guid_rknand_dev,
+> +                              sizeof(efi_guid_t));
+> +                       dp->vendor_data[0] = desc->devnum;
+> +                       return &dp->vendor_data[1];
+> +                       }
+> +#endif
+>  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
+>                 case UCLASS_RK_IDB: {
+>                         struct efi_device_path_vendor *dp;
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

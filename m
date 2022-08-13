@@ -2,66 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD5A359183B
-	for <lists+uboot-stm32@lfdr.de>; Sat, 13 Aug 2022 03:41:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C147B59188A
+	for <lists+uboot-stm32@lfdr.de>; Sat, 13 Aug 2022 06:11:41 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6688AC04004;
-	Sat, 13 Aug 2022 01:41:46 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
- [209.85.219.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6DC73C04004;
+	Sat, 13 Aug 2022 04:11:41 +0000 (UTC)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EAB1AC03FC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16B2CC03FC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 13 Aug 2022 01:41:44 +0000 (UTC)
-Received: by mail-qv1-f53.google.com with SMTP id d1so1851597qvs.0
+ Sat, 13 Aug 2022 04:11:40 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id n21so2180076qkk.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Aug 2022 18:41:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc;
- bh=JNaHFunjZ+uNB5JpI5FkKCwJcDCv52Jd+msZDTxzkKs=;
- b=Lkhl+6MpJMiPxYprkhNySVHMHsqRc2vyrLlpf8Hz++MYiwBnMjhUxfKR8Ur+dx9nc/
- f/qSjyvtjbVsMtbZlRlKMngwCm27WYPrleuoQKi89D/sZBf0onQOhdnsdYh+hUkLCtjC
- CT5FdXfkg5NNSpeuUeGV3gAl/tD5ImAKYmcV4=
+ Fri, 12 Aug 2022 21:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:content-language:in-reply-to:mime-version
+ :user-agent:date:message-id:from:references:cc:to:subject:from:to:cc;
+ bh=/CreIji414y2RbvFJDNXK6c6JIpEpUlaLTZGehAvxmM=;
+ b=OYZfWqDZnUiWyhgqsUUm0kB9/7XGe7FChtD0qipt+B+yB8FEm2u83ztYmmuKRaCgWz
+ Lp1ziWaCqR+MuRjFEE/8e3HQEOBYMazK4uzQGn4DLaHVhXQFCKo/blQAer7PNAvJxmX2
+ rnUT6S7pid09L2F31Tg+ZQaqHuzgLmdamn/qkZSKfu4F9x0nVcAPCiv/gZbPiJvCQlrM
+ X3NxAtw215k5qL8/lyTnuIkKt/kWm+uvKRjlDa9P5ODvwdqOMAhDgYxzkSdjxY0JVexw
+ g3RBzfWMDl/ok2MoWc00Um8J1b6nDjwhq3aD+iDEFVSqkKy/Q3ruMqZubZnkHT2goVMH
+ LQhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
- bh=JNaHFunjZ+uNB5JpI5FkKCwJcDCv52Jd+msZDTxzkKs=;
- b=dMRweHY/o5t6gOzukdP/WmYc/Cx34hM2UX0/aekQxuStuEMex5K5z8rUL1xATLsFku
- 1oAzoxgvQ6cG5Hlmfr1aKxiqywHImoDiF5M5C9rIp6KESBVPQpdJdXEIP01qF6oepGrZ
- fW3+g5E8PQ0BESVEAGYQq2E2nxQVdRR3wdtZ1o4ulhhcgNZTLXlb6jym0g1EXQaDGaW2
- 6HXY5foz9dzFYsb0EAcm9aHC/U9N2CT1JgLKgeNjggdt4I+W7ZukpzT3nJ9HOAYmaUED
- N85gQq1/qULf5Gfc8EBK1fES3yWUlif0Uun6qoVDF9VwLZOLWkqefVdI4Qq5ljYIRqrq
- vzEQ==
-X-Gm-Message-State: ACgBeo26A+Ia2dXw1RWoTrYr2l5QFTyUYva8XhD/bXtrwafND6Qj7H3z
- J2HO3b6JQFHqtBlbcxD7LacAmQ==
-X-Google-Smtp-Source: AA6agR60dTt0aBZwXLzeYVc97gg8cMIs/bX3TPCEe7uZcCMnsFpluoMdgt7E3YLCEF14ApkwFd+oQg==
-X-Received: by 2002:a05:6214:2345:b0:473:a82c:34eb with SMTP id
- hu5-20020a056214234500b00473a82c34ebmr5782491qvb.9.1660354903847; 
- Fri, 12 Aug 2022 18:41:43 -0700 (PDT)
-Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
- [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
- r2-20020a05620a298200b006b555509398sm2830870qkp.136.2022.08.12.18.41.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Aug 2022 18:41:43 -0700 (PDT)
-Date: Fri, 12 Aug 2022 21:41:40 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Philip Oberfichtner <pro@denx.de>
-Message-ID: <20220813014140.GK1146598@bill-the-cat>
-References: <20220726130454.2829205-1-pro@denx.de>
- <20220726130454.2829205-5-pro@denx.de>
+ h=content-transfer-encoding:content-language:in-reply-to:mime-version
+ :user-agent:date:message-id:from:references:cc:to:subject
+ :x-gm-message-state:from:to:cc;
+ bh=/CreIji414y2RbvFJDNXK6c6JIpEpUlaLTZGehAvxmM=;
+ b=fKVOwjhnDoof6vtEjeL1x2Z9caFzwfYQCnp5lmFEIeqDrCoTepSy0TRq3PUNX1WlJW
+ 2o6QhNTbRp/B81JHpZf2uzXERtd6seo8CqVTiuABO9sAwh1Xd0kyWfElCl8UwRbqPyQ7
+ tuyAxbrlFMlXoVdHbEjrfnbvKug3wY5/G9WtnaB4JK1XUm2SvV7f+MwXrRTl5F6Pjg43
+ W7PP/9oys/T61thaYN8MNyj7l3N8x+Ias0vxXublbLtK7t/ZqGu/virJQ//oFg8XRd2T
+ CsoOVKXivmgvvhPxmHQutdjEtZsKziz30330nACEuakyWJzkHR8lNcCJQ9UbeVsLU3gp
+ xD/Q==
+X-Gm-Message-State: ACgBeo0beRRxBOjOSMCLEDjdi8ixvecxAEbDNVkHOtFvxiCL3+xeESdh
+ yorPK9aycPmaYMzRvJ2zi+A2OPyybek=
+X-Google-Smtp-Source: AA6agR7rMoeziC0mw89ua5aBUSmijI6kBN+eev8QeB5cZ3R+CUzBcyoveua2Bi5flVNZkJheUPKmYw==
+X-Received: by 2002:a05:620a:458c:b0:6b6:1713:2b0f with SMTP id
+ bp12-20020a05620a458c00b006b617132b0fmr4934498qkb.244.1660363898576; 
+ Fri, 12 Aug 2022 21:11:38 -0700 (PDT)
+Received: from [192.168.1.201] (pool-173-73-95-180.washdc.fios.verizon.net.
+ [173.73.95.180]) by smtp.gmail.com with ESMTPSA id
+ x25-20020ac85399000000b00341f912e64dsm3059401qtp.93.2022.08.12.21.11.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 12 Aug 2022 21:11:38 -0700 (PDT)
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20220712142352.RESEND.v2.1.Ifa06360115ffa3f3307372e6cdd98ec16759d6ba@changeid>
+From: Sean Anderson <seanga2@gmail.com>
+Message-ID: <b778f10b-7c13-e4a9-1f91-9408f39eed98@gmail.com>
+Date: Sat, 13 Aug 2022 00:11:36 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-In-Reply-To: <20220726130454.2829205-5-pro@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marex@denx.de>,
- Christoph Niedermaier <cniedermaier@dh-electronics.com>, peng.fan@nxp.com,
- festevam@denx.de, u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, sbabic@denx.de
-Subject: Re: [Uboot-stm32] [PATCH v4 4/4] ARM: stm32: DH: Use common MAC
-	address functions
+In-Reply-To: <20220712142352.RESEND.v2.1.Ifa06360115ffa3f3307372e6cdd98ec16759d6ba@changeid>
+Content-Language: en-US
+Cc: Sean Anderson <sean.anderson@seco.com>, Tero Kristo <t-kristo@ti.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>, Tero Kristo <kristo@kernel.org>
+Subject: Re: [Uboot-stm32] [RESEND PATCH v2] clk: update
+ clk_clean_rate_cache to use private clk struct
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,66 +76,84 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0285593700235556780=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
 
---===============0285593700235556780==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="i6PHWhsiXSwjYqSc"
-Content-Disposition: inline
+Sorry for the (very late) response.
 
+On 7/12/22 8:24 AM, Patrick Delaunay wrote:
+> In clk_clean_rate_cache, clk->rate should update the private clock
+> struct, in particular when CCF is activated, to save the cached
+> rate value.
+> 
+> When clk_get_parent_rate is called, the cached information
+> is read from pclk->rate, with pclk = clk_get_parent(clk).
+> 
+> As the cached is read from private clk data, the update should
+> be done also on it.
+> 
+> Fixes: 6b7fd3128f7 ("clk: fix set_rate to clean up cached rates for the hierarchy")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+> Changes in v2:
+> - set *clkp = clk when CCF is not activated and when the clock is not found
+> 
+>   drivers/clk/clk-uclass.c | 18 +++++++++++++++++-
+>   1 file changed, 17 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index b89c77bf794..5cfa022a6dc 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -544,6 +544,19 @@ ulong clk_round_rate(struct clk *clk, ulong rate)
+>   	return ops->round_rate(clk, rate);
+>   }
+>   
+> +static void clk_get_priv(struct clk *clk, struct clk **clkp)
+> +{
+> +	*clkp = clk;
+> +
+> +	/* get private clock struct associated to the provided clock */
+> +	if (CONFIG_IS_ENABLED(CLK_CCF)) {
+> +		/* Take id 0 as a non-valid clk, such as dummy */
+> +		if (clk->id)
+> +			clk_get_by_id(clk->id, clkp);
+> +	}
+> +}
+> +
+> +/* clean cache, called with private clock struct */
+>   static void clk_clean_rate_cache(struct clk *clk)
+>   {
+>   	struct udevice *child_dev;
+> @@ -563,6 +576,7 @@ static void clk_clean_rate_cache(struct clk *clk)
+>   ulong clk_set_rate(struct clk *clk, ulong rate)
+>   {
+>   	const struct clk_ops *ops;
+> +	struct clk *clkp;
+>   
+>   	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
+>   	if (!clk_valid(clk))
+> @@ -572,8 +586,10 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
+>   	if (!ops->set_rate)
+>   		return -ENOSYS;
+>   
+> +	/* get private clock struct used for cache */
+> +	clk_get_priv(clk, &clkp);
+>   	/* Clean up cached rates for us and all child clocks */
+> -	clk_clean_rate_cache(clk);
+> +	clk_clean_rate_cache(clkp);
+>   
+>   	return ops->set_rate(clk, rate);
+>   }
+> 
 
---i6PHWhsiXSwjYqSc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Jul 26, 2022 at 03:04:53PM +0200, Philip Oberfichtner wrote:
-
-> To reduce code duplication, let the stm32 based DH boards use the common
-> code for setting up their MAC addresses.
->=20
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
-> Tested-by: Marek Vasut <marex@denx.de>
-> Reviewed-by: Marek Vasut <marex@denx.de>
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---i6PHWhsiXSwjYqSc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmL3AVQACgkQFHw5/5Y0
-tyxxEgv/RcFIEpzlkIeD7b7esfOfv2HC3g0t46jdzaIrO3ehHLLsbgkcqx0a2XT9
-96pN654bbhWwKYF6wVA7j8Xp9JvUO2OG7e27Cjj4yvYtbNqcWML/Z7p2YQtCvtO8
-5Ug5/y2mjDKYzhIALrWTcrwm6635asQH2vXHmZGBVf2tC+C/jn7+YSMh5iJSBIiy
-H5I1qa1fP4GpxhIj6ZHATw7ANlBaBYJaBR7izjwEn4TnEa1PTw7XAByFRbwrg1sp
-3uLmKpeDJBAsFt9v37or81d03jlcXSH/kbq8pHC4y87eywzpzZVn/HrnG/yOwmX9
-4jkN7wCWVHJzJlFALGCsfFbcpH4VUGdRceCx6yWr4C//ycQriYrQ153WPq1kZI/f
-cBgI4gQBE2vMnjWMMSt5bzi7gXMHo6LSrMqH9gWduanfOtB/IfrNuMxreeuPDrLW
-z9SMuSBbApScRqKOGBP6OkfTgSpDGKBE7zRD7FgOAcGevU/lzbXTF3ZnithX5rDv
-mshssbLq
-=FWsD
------END PGP SIGNATURE-----
-
---i6PHWhsiXSwjYqSc--
-
---===============0285593700235556780==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0285593700235556780==--

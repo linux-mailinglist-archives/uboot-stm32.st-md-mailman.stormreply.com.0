@@ -2,97 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE8C95912A9
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 Aug 2022 17:11:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD5A359183B
+	for <lists+uboot-stm32@lfdr.de>; Sat, 13 Aug 2022 03:41:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7EABCC04005;
-	Fri, 12 Aug 2022 15:11:20 +0000 (UTC)
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com
- [209.85.167.182])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6688AC04004;
+	Sat, 13 Aug 2022 01:41:46 +0000 (UTC)
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
+ [209.85.219.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B005FC04004
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EAB1AC03FC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Aug 2022 15:11:18 +0000 (UTC)
-Received: by mail-oi1-f182.google.com with SMTP id j5so1447110oih.6
+ Sat, 13 Aug 2022 01:41:44 +0000 (UTC)
+Received: by mail-qv1-f53.google.com with SMTP id d1so1851597qvs.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 Aug 2022 08:11:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=zdlBsg7sQAhivhK/n5uu2N9NxDVvH8KdNpV5wk9Zsss=;
- b=gwGDsRPiNBxnK3azbBxC49qz74Caci3gReJK6ZoheGnG0CmJdLTKClGBDC2PR62Hjx
- eJAQQflGPO1zpn663lUL4qqcxGravio84DvQZ1MCrM5JVi0fKJT/KDI6WXhGixEeANHY
- AGh678pJpcANyYkFCcf1MQFnbAj8evzOmZVJ0=
+ Fri, 12 Aug 2022 18:41:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc;
+ bh=JNaHFunjZ+uNB5JpI5FkKCwJcDCv52Jd+msZDTxzkKs=;
+ b=Lkhl+6MpJMiPxYprkhNySVHMHsqRc2vyrLlpf8Hz++MYiwBnMjhUxfKR8Ur+dx9nc/
+ f/qSjyvtjbVsMtbZlRlKMngwCm27WYPrleuoQKi89D/sZBf0onQOhdnsdYh+hUkLCtjC
+ CT5FdXfkg5NNSpeuUeGV3gAl/tD5ImAKYmcV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=zdlBsg7sQAhivhK/n5uu2N9NxDVvH8KdNpV5wk9Zsss=;
- b=DjrKcGrEoHjhOWn2xQxE5RjzUchWs7Jsr8ARVbdVIJEvvhee74286G+1AEvXv/+mHf
- 46Q3DC+LSI1RUPsdgkt4sFT4C8R9x5q4oER7Gb8Vr6HwUOIKA3sGBuwRfG41OBjkiyWG
- cALkFCO9kAjQO537itjqDmwWo7OeHzoYIr84WKQ3E4LEfX/m8b1oa1b+5XAdvO5+iVnO
- 1Ime/TvzSX5WEsFHwBIt2nJf3ImxDFLlnsuAyN7Ij96fE75KyRxqOp7yJYFOSVi1MdmK
- bEinzn8NozqVejVVl511vQeQggOR/VMEI3irHINf3ZW4hRed/arh1hdhknQxNIZosg9X
- 91KQ==
-X-Gm-Message-State: ACgBeo0F3nlmd/kCNdqpIWBB/khu367+OTxwcTRn+fyym4my1LsWsoP5
- Tv+YhfrfREVVZidyJ0VAcR5LAr8eZOBLkLc9dW/Y+g==
-X-Google-Smtp-Source: AA6agR4a+xquRRmMaL9GYeNGrIdGs/1vCvnYMc4tXln1YcWAa0aAQrTvdTBR/+t4tOij/V5qUMQUoNBUK85m3khBCXc=
-X-Received: by 2002:a05:6808:bcb:b0:33a:c532:54fc with SMTP id
- o11-20020a0568080bcb00b0033ac53254fcmr5635102oik.170.1660317077013; Fri, 12
- Aug 2022 08:11:17 -0700 (PDT)
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
+ bh=JNaHFunjZ+uNB5JpI5FkKCwJcDCv52Jd+msZDTxzkKs=;
+ b=dMRweHY/o5t6gOzukdP/WmYc/Cx34hM2UX0/aekQxuStuEMex5K5z8rUL1xATLsFku
+ 1oAzoxgvQ6cG5Hlmfr1aKxiqywHImoDiF5M5C9rIp6KESBVPQpdJdXEIP01qF6oepGrZ
+ fW3+g5E8PQ0BESVEAGYQq2E2nxQVdRR3wdtZ1o4ulhhcgNZTLXlb6jym0g1EXQaDGaW2
+ 6HXY5foz9dzFYsb0EAcm9aHC/U9N2CT1JgLKgeNjggdt4I+W7ZukpzT3nJ9HOAYmaUED
+ N85gQq1/qULf5Gfc8EBK1fES3yWUlif0Uun6qoVDF9VwLZOLWkqefVdI4Qq5ljYIRqrq
+ vzEQ==
+X-Gm-Message-State: ACgBeo26A+Ia2dXw1RWoTrYr2l5QFTyUYva8XhD/bXtrwafND6Qj7H3z
+ J2HO3b6JQFHqtBlbcxD7LacAmQ==
+X-Google-Smtp-Source: AA6agR60dTt0aBZwXLzeYVc97gg8cMIs/bX3TPCEe7uZcCMnsFpluoMdgt7E3YLCEF14ApkwFd+oQg==
+X-Received: by 2002:a05:6214:2345:b0:473:a82c:34eb with SMTP id
+ hu5-20020a056214234500b00473a82c34ebmr5782491qvb.9.1660354903847; 
+ Fri, 12 Aug 2022 18:41:43 -0700 (PDT)
+Received: from bill-the-cat (cpe-65-184-195-139.ec.res.rr.com.
+ [65.184.195.139]) by smtp.gmail.com with ESMTPSA id
+ r2-20020a05620a298200b006b555509398sm2830870qkp.136.2022.08.12.18.41.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Aug 2022 18:41:43 -0700 (PDT)
+Date: Fri, 12 Aug 2022 21:41:40 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Philip Oberfichtner <pro@denx.de>
+Message-ID: <20220813014140.GK1146598@bill-the-cat>
+References: <20220726130454.2829205-1-pro@denx.de>
+ <20220726130454.2829205-5-pro@denx.de>
 MIME-Version: 1.0
-References: <20220812013503.1724919-1-sjg@chromium.org>
- <fc7f6587-4ac8-2b65-a71c-3ba6930912b3@gmail.com>
-In-Reply-To: <fc7f6587-4ac8-2b65-a71c-3ba6930912b3@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 12 Aug 2022 09:11:06 -0600
-Message-ID: <CAPnjgZ0Tof+K_nxpQuJQN5t+ypYiQ-+f642u-qz=oq3zMovJMg@mail.gmail.com>
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
- Oleksii Bidnichenko <oleksii.bidnichenko@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Rick Chen <rick@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Gary Bisson <gary.bisson@boundarydevices.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>, Stefan Roese <sr@denx.de>,
- Wolfgang Denk <wd@denx.de>, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Mark Kettenis <kettenis@openbsd.org>,
- Markus Niebel <Markus.Niebel@ew.tq-group.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Sean Anderson <sean.anderson@seco.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alexey Brodkin <abrodkin@synopsys.com>, Huang Jianan <jnhuang95@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Ricardo Salveti <ricardo@foundries.io>, Ramon Fried <rfried.dev@gmail.com>,
- Tony Dinh <mibodhi@gmail.com>, Heiko Schocher <hs@denx.de>,
- Marek Vasut <marex@denx.de>, Philippe Schenker <philippe.schenker@toradex.com>,
- Ye Li <ye.li@nxp.com>, Judy Wang <wangjudy@microsoft.com>,
- Bharat Gooty <bharat.gooty@broadcom.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alexander Graf <agraf@csgraf.de>,
- Alexandru Gagniuc <mr.nuke.me@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>,
- Aswath Govindraju <a-govindraju@ti.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, schspa <schspa@gmail.com>,
- Michal Simek <michal.simek@amd.com>, Denys Drozdov <denys.drozdov@toradex.com>,
- Loic Poulain <loic.poulain@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>,
- Anastasiia Lukianenko <vicooodin@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Ovidiu Panait <ovidiu.panait@windriver.com>,
- Max Merchel <Max.Merchel@tq-group.com>, TsiChung Liew <Tsi-Chung.Liew@nxp.com>,
- Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
- Jens Wiklander <jens.wiklander@linaro.org>, Andrew Scull <ascull@google.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 00/24] blk: Rationalise the block
-	interface
+In-Reply-To: <20220726130454.2829205-5-pro@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Marek Vasut <marex@denx.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>, peng.fan@nxp.com,
+ festevam@denx.de, u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, sbabic@denx.de
+Subject: Re: [Uboot-stm32] [PATCH v4 4/4] ARM: stm32: DH: Use common MAC
+	address functions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,300 +73,66 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0285593700235556780=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Johan,
 
-On Fri, 12 Aug 2022 at 07:51, Johan Jonker <jbx6244@gmail.com> wrote:
->
-> Hi Simon and others,
->
-> Some comments. Have a look if it's useful.
-> Include is an example of how currently a new Rockchip external RKNAND FTL block device must be included in U-boot.
-> Changes must be made all over the place. EFI has now become a somewhat "obligation" for block devices, then handling
-> should be made more easy I propose.
->
-> 1:
-> The creation and removal of block devices is kind of dynamic with the blk_create_device function.
-> Is it possible to make the necessary functions in efi_device_path.c and part.c more flexible as well by
-> a new "blk_create_efi_device()" and "blk_remove_efi_device()" function? So everything combined in one function.
-
-Do you mean to automatically create a device with the right uclass?
-Yes I think that could be done, but I have not looked at it.
-
->
-> 2:
-> Make the class list more dynamic/expendable. Each time a new clas is needed the source code must be changed.
-> Include a function that returns a generated class number that takes in account the existing know classes.
-> ie,: "uclass_create" and "uclass_remove".
->
-> Example block device creation:
->
->         ret = uclass_get_device(UCLASS_RK_IDB, 0, &dev);
->
-> // Be able to use a dynamic generated UCLASS for block devices.
->
->         if (ret) {
->                 printf("no IDB device found\n");
->                 return CMD_RET_FAILURE;
->         }
->         ret = blk_get_device(IF_TYPE_RK_IDB, 0, &bdev);
->         if (ret) {
->                 ret = blk_create_device(dev, "idb_blk", "blk",
->                                         IF_TYPE_RK_IDB, 0, 512,
->                                         LBA, &bdev);
->                 if (ret)
->                         return ret;
->
->                 ret = blk_probe_or_unbind(bdev);
->                 if (ret)
->                         return ret;
->         }
->
-> Example block device removal:
->
->         ret = blk_find_device(IF_TYPE_RK_IDB, 0, &bdev);
-
-Note that the IF_TYPE goes away with this series and there is just the uclass.
-
->
-> // Be able to find back a dynamic generated UCLASS.
->
->         if (ret) {
->                 printf("no IDB blk device found\n");
->                 return 0;
->         }
->
->         device_remove(bdev, DM_REMOVE_NORMAL);
->         device_unbind(bdev);
->
-> Make efi functions more flexible by replacing switch() functions by call back functions for:
->
-> dp_fill
-> dp_size
-> dev_print
-> print_part_header
->
-> Add them with "blk_create_efi_device()" in a structure.
-> If not defined fall back to standard functions.
-
-We are trying to integrate EFI better into U-Boot so that it uses the
-normal devices. At present it has some parallel infrastructure.
-
-Please take a look at your patch after applying this series, then let
-me know what you think is needed.
-
-Regards,
-Simon
+--===============0285593700235556780==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="i6PHWhsiXSwjYqSc"
+Content-Disposition: inline
 
 
+--i6PHWhsiXSwjYqSc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> ====
->
-> Kind regards,
->
-> Johan Jonker
->
-> On 8/12/22 03:34, Simon Glass wrote:
-> > The block interface has two separate implementations, one using driver
-> > model and one not. The latter is really only needed for SPL, where
-> > size constraints allegedly don't allow use of driver model. Of course
-> > we still need space for filesystems and other code, so it isn't clear
-> > that driver model is anything more than the straw that breaks the
-> > camel's back.
-> >
-> > The driver model version uses a uclass ID for the interface time, but
-> > converts back and forth between that and if_type, which is the legacy
-> > type.
-> >
-> > The HAVE_BLOCK_DEVICE define is mostly a hangover from the old days.
-> > At present its main purpose is to enable the legacy block implementation
-> > in SPL.
-> >
-> > Finally the use of 'select' to enable BLK does not work very well. It
-> > causes kconfig errors when another option depends on BLK and it is
-> > not recommended by the kconfig style guide.
-> >
-> > This series aims to clean things up:
-> > - Enable BLK based on whether different media types are used, but still
-> >   allow boards to disable it
-> > - Rename HAVE_BLOCK_DEVICE to indicates its real purpose
-> > - Drop if_type and use the uclass instead
-> > - Drop some obsolete if_type values
-> >
-> > An issue not resolved by this series is that the sandbox host interface
-> > does not actually have a device. At present it uses the root device, which
-> > was convenience for the driver model conversion but not really correct. It
-> > should be possible to clean this up, in a future series.
-> >
-> > Another minor issue is the use of UCLASS_USB for a mass-storage device.
-> > This has been the case for a while and is not addresed by this series,
-> > other than to add a comment.
-> >
-> > Note that this test relies on Tom Rini's series to drop various boards
-> > including warp and cm_t335
-> >
-> > Finally, a patch is included to make binman put fake files in a
-> > subdirectory, since repeated runs of certain boards can cause unrelated
-> > failues (e.g. chromebook_coral) when fake files are left around.
-> >
-> > Changes in v2:
-> > - Update commit message
-> > - Fix SPL_PARTITIONS too
-> > - Add SATA also
-> > - Refer to a suffix, not a prefix
-> > - Add new patch to handle UCLASS_EFI_MEDIA in dev_print()
-> > - Add new patch to drop ifname field from struct efi_disk_obj
-> > - Use conv_uclass_id() instead of the confusing uclass_id_to_uclass_id()
-> >
->
-> From d0bb794b966a0134a6f321a414b48c28e8894180 Mon Sep 17 00:00:00 2001
-> From: Johan Jonker <jbx6244@gmail.com>
-> Date: Sun, 7 Aug 2022 15:25:55 +0200
-> Subject: prepare rknand
->
->
-> diff --git a/disk/part.c b/disk/part.c
-> index 79955c7fb0..3f8b97a6c6 100644
-> --- a/disk/part.c
-> +++ b/disk/part.c
-> @@ -150,6 +150,7 @@ void dev_print (struct blk_desc *dev_desc)
->         case IF_TYPE_USB:
->         case IF_TYPE_NVME:
->         case IF_TYPE_PVBLOCK:
-> +       case IF_TYPE_RKNAND:
->         case IF_TYPE_HOST:
->                 printf ("Vendor: %s Rev: %s Prod: %s\n",
->                         dev_desc->vendor,
-> @@ -293,6 +294,9 @@ static void print_part_header(const char *type, struct blk_desc *dev_desc)
->         case IF_TYPE_PVBLOCK:
->                 puts("PV BLOCK");
->                 break;
-> +       case IF_TYPE_RKNAND:
-> +               puts("RKNAND");
-> +               break;
->         case IF_TYPE_VIRTIO:
->                 puts("VirtIO");
->                 break;
-> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-> index 0b5f219d90..28b21836c4 100644
-> --- a/drivers/block/blk-uclass.c
-> +++ b/drivers/block/blk-uclass.c
-> @@ -33,6 +33,7 @@ static const char *if_typename_str[IF_TYPE_COUNT] = {
->         [IF_TYPE_VIRTIO]        = "virtio",
->         [IF_TYPE_PVBLOCK]       = "pvblock",
->         [IF_TYPE_RK_IDB]        = "idb",
-> +       [IF_TYPE_RKNAND]        = "rknand",
->  };
->
->  static enum uclass_id if_type_uclass_id[IF_TYPE_COUNT] = {
-> @@ -51,6 +52,7 @@ static enum uclass_id if_type_uclass_id[IF_TYPE_COUNT] = {
->         [IF_TYPE_VIRTIO]        = UCLASS_VIRTIO,
->         [IF_TYPE_PVBLOCK]       = UCLASS_PVBLOCK,
->         [IF_TYPE_RK_IDB]        = UCLASS_RK_IDB,
-> +       [IF_TYPE_RKNAND]        = UCLASS_RKNAND,
->  };
->
->  static enum if_type if_typename_to_iftype(const char *if_typename)
-> diff --git a/include/blk.h b/include/blk.h
-> index a73cc577a0..56f2415e21 100644
-> --- a/include/blk.h
-> +++ b/include/blk.h
-> @@ -30,6 +30,7 @@ enum if_type {
->         IF_TYPE_USB,
->         IF_TYPE_DOC,
->         IF_TYPE_MMC,
-> +       IF_TYPE_RKNAND,
->         IF_TYPE_SD,
->         IF_TYPE_SATA,
->         IF_TYPE_HOST,
-> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-> index 38a227f006..b102cdf46e 100644
-> --- a/include/dm/uclass-id.h
-> +++ b/include/dm/uclass-id.h
-> @@ -104,6 +104,7 @@ enum uclass_id {
->         UCLASS_REGULATOR,       /* Regulator device */
->         UCLASS_REMOTEPROC,      /* Remote Processor device */
->         UCLASS_RESET,           /* Reset controller device */
-> +       UCLASS_RKNAND,          /* Rockchip nand device with ftl */
->         UCLASS_RK_IDB,          /* Rockchip IDB device */
->         UCLASS_RNG,             /* Random Number Generator */
->         UCLASS_RTC,             /* Real time clock device */
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 44d426035a..ddc7082ad6 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -145,6 +145,10 @@ static inline efi_status_t efi_launch_capsules(void)
->  #define U_BOOT_IDB_DEV_GUID \
->         EFI_GUID(0xadc021df, 0x5f24, 0x464f, \
->                  0x9a, 0x88, 0xdb, 0xee, 0x3f, 0x1d, 0x14, 0x0f)
-> +/* GUID used as root for Rockchip RKNAND devices */
-> +#define U_BOOT_RKNAND_DEV_GUID \
-> +       EFI_GUID(0xe39f6cbb, 0x055a, 0x45a0, \
-> +                0xb2, 0x75, 0x56, 0x0d, 0xa5, 0x22, 0x25, 0x99)
->
->  /* Use internal device tree when starting UEFI application */
->  #define EFI_FDT_USE_INTERNAL NULL
-> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> index b7535373e7..9691f02b2e 100644
-> --- a/lib/efi_loader/efi_device_path.c
-> +++ b/lib/efi_loader/efi_device_path.c
-> @@ -31,6 +31,9 @@ const efi_guid_t efi_guid_virtio_dev = U_BOOT_VIRTIO_DEV_GUID;
->  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
->  const efi_guid_t efi_guid_idb_dev = U_BOOT_IDB_DEV_GUID;
->  #endif
-> +#if CONFIG_IS_ENABLED(RKNAND)
-> +const efi_guid_t efi_guid_rknand_dev = U_BOOT_IDB_DEV_GUID;
-> +#endif
->
->  /* template END node: */
->  static const struct efi_device_path END = {
-> @@ -578,6 +581,16 @@ __maybe_unused static unsigned int dp_size(struct udevice *dev)
->                         return dp_size(dev->parent)
->                                 + sizeof(struct efi_device_path_vendor) + 1;
->  #endif
-> +#if CONFIG_IS_ENABLED(RKNAND)
-> +               case UCLASS_RKNAND:
-> +                        /*
-> +                         * Rockchip IDB device will be represented
-> +                         * as vendor device with extra one byte for
-> +                         * device number
-> +                         */
-> +                       return dp_size(dev->parent)
-> +                               + sizeof(struct efi_device_path_vendor) + 1;
-> +#endif
->  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
->                 case UCLASS_RK_IDB:
->                          /*
-> @@ -680,6 +693,23 @@ __maybe_unused static void *dp_fill(void *buf, struct udevice *dev)
->                         return &dp->vendor_data[1];
->                         }
->  #endif
-> +#if CONFIG_IS_ENABLED(RKNAND)
-> +               case UCLASS_RKNAND: {
-> +                       struct efi_device_path_vendor *dp;
-> +                       struct blk_desc *desc = dev_get_uclass_plat(dev);
-> +
-> +                       dp_fill(buf, dev->parent);
-> +                       dp = buf;
-> +                       ++dp;
-> +                       dp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
-> +                       dp->dp.sub_type = DEVICE_PATH_SUB_TYPE_VENDOR;
-> +                       dp->dp.length = sizeof(*dp) + 1;
-> +                       memcpy(&dp->guid, &efi_guid_rknand_dev,
-> +                              sizeof(efi_guid_t));
-> +                       dp->vendor_data[0] = desc->devnum;
-> +                       return &dp->vendor_data[1];
-> +                       }
-> +#endif
->  #if CONFIG_IS_ENABLED(ROCKCHIP_IDB)
->                 case UCLASS_RK_IDB: {
->                         struct efi_device_path_vendor *dp;
+On Tue, Jul 26, 2022 at 03:04:53PM +0200, Philip Oberfichtner wrote:
+
+> To reduce code duplication, let the stm32 based DH boards use the common
+> code for setting up their MAC addresses.
+>=20
+> Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> Tested-by: Marek Vasut <marex@denx.de>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--i6PHWhsiXSwjYqSc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmL3AVQACgkQFHw5/5Y0
+tyxxEgv/RcFIEpzlkIeD7b7esfOfv2HC3g0t46jdzaIrO3ehHLLsbgkcqx0a2XT9
+96pN654bbhWwKYF6wVA7j8Xp9JvUO2OG7e27Cjj4yvYtbNqcWML/Z7p2YQtCvtO8
+5Ug5/y2mjDKYzhIALrWTcrwm6635asQH2vXHmZGBVf2tC+C/jn7+YSMh5iJSBIiy
+H5I1qa1fP4GpxhIj6ZHATw7ANlBaBYJaBR7izjwEn4TnEa1PTw7XAByFRbwrg1sp
+3uLmKpeDJBAsFt9v37or81d03jlcXSH/kbq8pHC4y87eywzpzZVn/HrnG/yOwmX9
+4jkN7wCWVHJzJlFALGCsfFbcpH4VUGdRceCx6yWr4C//ycQriYrQ153WPq1kZI/f
+cBgI4gQBE2vMnjWMMSt5bzi7gXMHo6LSrMqH9gWduanfOtB/IfrNuMxreeuPDrLW
+z9SMuSBbApScRqKOGBP6OkfTgSpDGKBE7zRD7FgOAcGevU/lzbXTF3ZnithX5rDv
+mshssbLq
+=FWsD
+-----END PGP SIGNATURE-----
+
+--i6PHWhsiXSwjYqSc--
+
+--===============0285593700235556780==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0285593700235556780==--

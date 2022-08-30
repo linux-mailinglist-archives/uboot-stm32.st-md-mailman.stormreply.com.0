@@ -2,59 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E5D95A67CB
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Aug 2022 17:57:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD0E95A77F4
+	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Aug 2022 09:46:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 39B2AC57B6C;
-	Tue, 30 Aug 2022 15:57:16 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com
- [209.85.160.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82035C640FB;
+	Wed, 31 Aug 2022 07:46:53 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D8691C03FD4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 043C6C03FD4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Aug 2022 15:57:14 +0000 (UTC)
-Received: by mail-oa1-f51.google.com with SMTP id
- 586e51a60fabf-11edd61a9edso11688631fac.5
+ Tue, 30 Aug 2022 19:50:54 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id
+ n23-20020a7bc5d7000000b003a62f19b453so10541535wmk.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Aug 2022 08:57:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc;
- bh=xElvYJ/YS/d3VSieHH659t1w9xHyGsIY3s10tExyjgc=;
- b=XFxaFZAM7zNHG31DJBQsD+JzbPhvrWHzXCghK5RpzEKrViudGLc0d5q/eTaGHxexv2
- C5OCTH0u9tN/oD2b1mXxdr61stoGk5IQr3XoTv05D41+FZFAKR5fffNoDVs8xdysV7rd
- kRsF8CrVHtEfldUerGZmC3w/Adl6WgL4k97Uw=
+ Tue, 30 Aug 2022 12:50:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foundries.io; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc;
+ bh=A26s4rjud7WyT5e0KyOiwNtWfwSVEhhuyxr5uHxk7S0=;
+ b=KbuikaWXV2R+H8mDVG0TguHNySGla9TM9rTWKsrvAHx6ZeMDAEM/gUaQGjtzHGkDh6
+ ktLr1jRUuYyA9hHNZ2rMA0rYbWBUZil4TrYdmMTmmsxGt5c747mR4FVPIkV3/obwwWV7
+ UeqWRKdHhUmHwjlZBDGmblNHznIFyhHROT9p2F2aVpCDIcb8k7zsSjjJweth6miafCfO
+ J4X+gJP/VQ9fpUimL4hsl04Eoy/wrntBgClJCaHCVTSK1115EyASpS+lwtEq4pLqiP7e
+ AOE+H2zxlXHzh78NDY3Gj2MpeF4fVUh0pg5zkGfBw3TWCUDj+0zWsmr9owPmDZOziSeO
+ 2cMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc;
- bh=xElvYJ/YS/d3VSieHH659t1w9xHyGsIY3s10tExyjgc=;
- b=XUKURXjhCuj6TbQe2KbK0JmtJhg4U0Vws4xYVF3LuHKkpl+7C4U4xTgWtg+xkzG9PJ
- 1qTt5jR7/GejJaDjDFD1Ev/bcsH8ETEgisFUJfyqwRs/mic6uNlrhRd58xGegB8kG00u
- JElSimJgy3ab5N35VKcvgroedgE/muKEBFv/nCRA5hXezUbWzeFVS6gmzcokWxHEWhwt
- 425+/IuAgS/HDSx6sg5FL5+A0sU0upvuMQs5Vp05fU++V1RsfqtSvnPzzJ2nzKI8kvc2
- sycbVo+a+N41jzEuvk2eDCWk2TlKaU60YD7eXSPrQEfQU2Qmfg3u3eVR2sw9X2wJ2ZZX
- +98A==
-X-Gm-Message-State: ACgBeo1SQ41XYb0cGwaG7TWhPX6J5D4YG0fGgmUAQr6PzO+6TxIuA7uz
- fLS0NzEW/JnHO1SUS+Ya9w5sF+ootW83fQhoZ0WToA==
-X-Google-Smtp-Source: AA6agR4HDh0QqnI1j8BMmhQGnvovQV2AAxo0R9jZsliwooVKQ6AEYtOxMJRDaiwdDXx0ponUSd4BH3bt8Aejtyk7PwI=
-X-Received: by 2002:aca:1901:0:b0:344:d4b5:9a1f with SMTP id
- l1-20020aca1901000000b00344d4b59a1fmr9362205oii.170.1661875033546; Tue, 30
- Aug 2022 08:57:13 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc;
+ bh=A26s4rjud7WyT5e0KyOiwNtWfwSVEhhuyxr5uHxk7S0=;
+ b=adG+XB+GTFPMsaXep9C7WKm6vqulMaOj63w2Ya06kRdEv6DnpjK2Xff/4Wf9wuhzJY
+ ALg/5oOeHeShig0RWurYyiPvuj90xV3CvtJcmWxBX3dpxUt9tWhWRW346+m+QfICuPP7
+ MHWIqNsSp17QggWQ/0lbSKR/pUaro7232XYwu1JImxymyeDF8A3F8+T/nRH1BeMycu88
+ m3wWB8pRn3aP/hdZutCl9AMI6m6Az8XZ9SFxF98IRTnq9xbK6yGshE6bp4OMBxLu9XVm
+ PF/4D9AjMtwjpro1Wx4434GwO63EKk+zwayJfWx6VtlP3QUbccYNTG6rvXBZleSJzTTN
+ zwmA==
+X-Gm-Message-State: ACgBeo1j21iRhBJQctfI/gJdSvAADLxoGNef3EQ2eFdiWQfHh0LENmNf
+ FbYaUCEwbOcQGtYo0NekrOpMF5I0NSod3A==
+X-Google-Smtp-Source: AA6agR7CezvX+yNWSwwDd3EgHO8xqe1aNoM9hzxJ+9aLM5rjzbWB06T99vxPjrmd/b0Md+ZdCn6hrg==
+X-Received: by 2002:a05:600c:1c0f:b0:3a5:4d6b:a883 with SMTP id
+ j15-20020a05600c1c0f00b003a54d6ba883mr10763112wms.45.1661889054405; 
+ Tue, 30 Aug 2022 12:50:54 -0700 (PDT)
+Received: from localhost.localdomain (131.red-83-60-92.dynamicip.rima-tde.net.
+ [83.60.92.131]) by smtp.gmail.com with ESMTPSA id
+ u14-20020adfdd4e000000b0021f131de6aesm10417258wrm.34.2022.08.30.12.50.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Aug 2022 12:50:53 -0700 (PDT)
+From: Jorge Ramirez-Ortiz <jorge@foundries.io>
+To: jorge@foundries.io, patrick.delaunay@foss.st.com,
+ patrice.chotard@foss.st.com
+Date: Tue, 30 Aug 2022 21:50:49 +0200
+Message-Id: <20220830195049.1068973-1-jorge@foundries.io>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220830145628.2386366-1-patrice.chotard@foss.st.com>
-In-Reply-To: <20220830145628.2386366-1-patrice.chotard@foss.st.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 30 Aug 2022 09:56:58 -0600
-Message-ID: <CAPnjgZ1FZdj9N=9A+nt=D4Pn=Pd3XNJ2_Zrd+eDcUQ0o5X+K1g@mail.gmail.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [Uboot-stm32] [PATCH] doc: Add gpio status output fields
-	description
+X-Mailman-Approved-At: Wed, 31 Aug 2022 07:46:52 +0000
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ mike@foundries.io
+Subject: [Uboot-stm32] [PATCH] configs: stm32mp*: reset via CONFIG_RESET_SCMI
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,18 +77,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 30 Aug 2022 at 08:56, Patrice Chotard
-<patrice.chotard@foss.st.com> wrote:
->
-> Add gpio status output fields description and one output example.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->  doc/usage/cmd/gpio.rst | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
+Enabling CONFIG_SYSRESET_PSCI prevents CONFIG_RESET_SCMI
+from executing.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+The side effect observed are I2C devices no longer being
+accessible from U-boot after a soft reset.
+
+Signed-off-by: Jorge Ramirez-Ortiz <jorge@foundries.io>
+---
+ configs/stm32mp13_defconfig         | 1 -
+ configs/stm32mp15_defconfig         | 1 -
+ configs/stm32mp15_trusted_defconfig | 1 -
+ 3 files changed, 3 deletions(-)
+
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index 673b468d31..44cee2e656 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -69,7 +69,6 @@ CONFIG_RNG_OPTEE=y
+ CONFIG_DM_RTC=y
+ CONFIG_RTC_STM32=y
+ CONFIG_SERIAL_RX_BUFFER=y
+-CONFIG_SYSRESET_PSCI=y
+ CONFIG_TEE=y
+ CONFIG_OPTEE=y
+ # CONFIG_OPTEE_TA_AVB is not set
+diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+index e5a2996c2c..2ad02f3652 100644
+--- a/configs/stm32mp15_defconfig
++++ b/configs/stm32mp15_defconfig
+@@ -133,7 +133,6 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_STM32_QSPI=y
+ CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_PSCI=y
+ CONFIG_TEE=y
+ CONFIG_OPTEE=y
+ # CONFIG_OPTEE_TA_AVB is not set
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index e14668042f..9e24e82920 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -134,7 +134,6 @@ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_STM32_QSPI=y
+ CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_PSCI=y
+ CONFIG_TEE=y
+ CONFIG_OPTEE=y
+ # CONFIG_OPTEE_TA_AVB is not set
+-- 
+2.34.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

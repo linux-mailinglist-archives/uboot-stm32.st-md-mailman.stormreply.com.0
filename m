@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8CA315A62E8
-	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Aug 2022 14:09:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74EFD5A62E4
+	for <lists+uboot-stm32@lfdr.de>; Tue, 30 Aug 2022 14:09:25 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 43455C57B6C;
-	Tue, 30 Aug 2022 12:09:34 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24134C57B6C;
+	Tue, 30 Aug 2022 12:09:25 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C1837C5EC6B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF916C03FD4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 30 Aug 2022 12:09:32 +0000 (UTC)
+ Tue, 30 Aug 2022 12:09:23 +0000 (UTC)
 Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 27U9QRv1018055;
- Tue, 30 Aug 2022 14:09:23 +0200
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 27U9QRv0018055;
+ Tue, 30 Aug 2022 14:09:22 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=oqNrbOLdZqeNrACdL4l0qFnU9acfzC3M8e+oaDTF1rk=;
- b=5//Mdue/pobYshMGKi21EIq0/Q16fTxi5Zc0xSXInqqh5WzR5BvRmzQ2Bd1LTahFrf5I
- jB/OrSQcuYfGOrp1h/Xfb8YoxhSbrPp8ivYhyiyGdiITcZ4vrIBNugSIhyBA4x83K/CX
- 9QxaKP8w2IFfikCT8xJGaTSjZSLRp00Fpix7wSK/6FPm8EKtlFCbgsetN8058n2LVEBO
- LU3TYYNHloCaq08ZQNCPck+e7iufE7HBALR2n6bkbMbdo1+6nQlWnI9+IFX8RqG4P2vl
- KlL+0Lk34yDqKb1WNnw/tFRbzwaX+ynGLi/icvjPuc05ZVIRYXJhTZvfnG+fqTMGiMnu Ng== 
+ bh=M3gqVIWCqeezOz5NuY9+kI/wcRhXUxCGP2DffOJLKu8=;
+ b=DzEcbLUe/VxBOLmKV9D01fTPStRfHwraDVjn8FpHA5tMR8emNp4/guxnpQpkF001fbze
+ vbHO2JDjoC8QBeiJabQin6SdDgc5gpsYn/H5KFHibpknTlX++VnhtuCmGQKIAHa54D7r
+ lscDUZs+qvnrO2aLAnF6Jb+ym21A88iypfayq3ai/vQ8X1TXbrFAXLhPDU75hC3scHP/
+ fDfBLltldFtE5fFdtlV5mK3ghdIHF9xDY6nI5VGsiMk7oEH9zB0Lyx6vJfV44XPxVuen
+ d09bGgrK2N8oZEbe3aC6vJNJKZ0KvPGo3CiPi41xlO77d835K+QlF3yu8QF4IhzW8Pbk Yw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3j78pk7xs5-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3j78pk7xs3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 30 Aug 2022 14:09:23 +0200
+ Tue, 30 Aug 2022 14:09:22 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id ADC2E100034;
- Tue, 30 Aug 2022 14:09:21 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 400B9100039;
+ Tue, 30 Aug 2022 14:09:22 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 99530226FCC;
- Tue, 30 Aug 2022 14:09:21 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 38204226FCD;
+ Tue, 30 Aug 2022 14:09:22 +0200 (CEST)
 Received: from localhost (10.75.127.118) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7; Tue, 30 Aug
- 2022 14:09:21 +0200
+ 2022 14:09:22 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 30 Aug 2022 14:09:12 +0200
-Message-ID: <20220830120914.2329522-3-patrice.chotard@foss.st.com>
+Date: Tue, 30 Aug 2022 14:09:13 +0200
+Message-ID: <20220830120914.2329522-4-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220830120914.2329522-1-patrice.chotard@foss.st.com>
 References: <20220830120914.2329522-1-patrice.chotard@foss.st.com>
@@ -55,13 +55,10 @@ X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE1.st.com
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.517,FMLib:17.11.122.1
  definitions=2022-08-30_06,2022-08-30_01,2022-06-22_01
-Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Eddie James <eajames@linux.ibm.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v3 2/4] gpio: Fix pin's status display for pin
-	with GPIOF_UNUSED function
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH v3 3/4] pinctrl: pinctrl_stm32: Populate
+	uc_priv->name[] with pinmux node's name
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,33 +75,94 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Even pin with GPIOF_UNUSED function can have a label.
-The criteria to add or not a space character is linked to label not to
-the used/unused status.
+Populate uc_priv->name[] with pinmux node's name in order to indicate
+the pinmuxing's name in case GPIO is configured in alternate.
+
+For example, for STM32 SoC's based platform, "gpio status" command
+output :
+
+  before
+    Bank GPIOZ:
+      GPIOZ0: unused : 0 [ ]
+      GPIOZ1: unused : 0 [ ]
+      GPIOZ2: unused : 0 [ ]
+      GPIOZ3: unused : 0 [ ]
+      GPIOZ4: func
+      GPIOZ5: func
+      GPIOZ6: unused : 0 [ ]
+      GPIOZ7: unused : 0 [ ]
+      GPIOZ8: unknown
+      GPIOZ9: unknown
+      GPIOZ10: unknown
+      GPIOZ11: unknown
+      GPIOZ12: unknown
+      GPIOZ13: unknown
+      GPIOZ14: unknown
+      GPIOZ15: unknown
+
+  After
+    Bank GPIOZ:
+      GPIOZ0: unused : 0 [ ]
+      GPIOZ1: unused : 0 [ ]
+      GPIOZ2: unused : 0 [ ]
+      GPIOZ3: unused : 0 [ ]
+      GPIOZ4: func i2c4-0
+      GPIOZ5: func i2c4-0
+      GPIOZ6: unused : 0 [ ]
+      GPIOZ7: unused : 0 [ ]
+      GPIOZ8: unknown
+      GPIOZ9: unknown
+      GPIOZ10: unknown
+      GPIOZ11: unknown
+      GPIOZ12: unknown
+      GPIOZ13: unknown
+      GPIOZ14: unknown
+      GPIOZ15: unknown
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-   - add lost Simon Glass's reviewed-by during v1 review
+(no changes since v1)
 
- drivers/gpio/gpio-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/pinctrl/pinctrl_stm32.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index d60e46159a..a00880e446 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -916,7 +916,7 @@ int gpio_get_status(struct udevice *dev, int offset, char *buf, int buffsize)
- 		snprintf(str + len, buffsize - len, ": %d [%c]%s%s",
- 			 ret,
- 			 used ? 'x' : ' ',
--			 used ? " " : "",
-+			 label ? " " : "",
- 			 label ? label : "");
- 		break;
- 	}
+diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c
+index 990cd19286..b755fa42b4 100644
+--- a/drivers/pinctrl/pinctrl_stm32.c
++++ b/drivers/pinctrl/pinctrl_stm32.c
+@@ -257,10 +257,12 @@ static int stm32_pinctrl_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int stm32_gpio_config(struct gpio_desc *desc,
++static int stm32_gpio_config(ofnode node,
++			     struct gpio_desc *desc,
+ 			     const struct stm32_gpio_ctl *ctl)
+ {
+ 	struct stm32_gpio_priv *priv = dev_get_priv(desc->dev);
++	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(desc->dev);
+ 	struct stm32_gpio_regs *regs = priv->regs;
+ 	struct stm32_pinctrl_priv *ctrl_priv;
+ 	int ret;
+@@ -291,6 +293,8 @@ static int stm32_gpio_config(struct gpio_desc *desc,
+ 	index = desc->offset;
+ 	clrsetbits_le32(&regs->otyper, OTYPE_MSK << index, ctl->otype << index);
+ 
++	uc_priv->name[desc->offset] = strdup(ofnode_get_name(node));
++
+ 	hwspinlock_unlock(&ctrl_priv->hws);
+ 
+ 	return 0;
+@@ -385,7 +389,7 @@ static int stm32_pinctrl_config(ofnode node)
+ 			if (rv)
+ 				return rv;
+ 			desc.offset = gpio_dsc.pin;
+-			rv = stm32_gpio_config(&desc, &gpio_ctl);
++			rv = stm32_gpio_config(node, &desc, &gpio_ctl);
+ 			log_debug("rv = %d\n\n", rv);
+ 			if (rv)
+ 				return rv;
 -- 
 2.25.1
 

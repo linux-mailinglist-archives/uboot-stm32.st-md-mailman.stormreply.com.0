@@ -2,59 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21BFE5AD8EE
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 Sep 2022 20:16:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6ABA55ADF9D
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Sep 2022 08:16:05 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AEB47C0C920;
-	Mon,  5 Sep 2022 18:16:43 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com
- [209.85.160.51])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 35C71C640FE;
+	Tue,  6 Sep 2022 06:16:05 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5CAA2C03FC6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2E2B2C640F2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  5 Sep 2022 18:16:42 +0000 (UTC)
-Received: by mail-oa1-f51.google.com with SMTP id
- 586e51a60fabf-11f34610d4aso22979574fac.9
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 05 Sep 2022 11:16:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date;
- bh=Zf+sO5cXB1kP+NvA3P8u0L68wTUwo+xf7A/Hb6KmVaM=;
- b=lZ4fGRYFRTMa9iALexj9EbHSEJBDbRW+0L7aXBNfjjwIHBaedAmDhYhMUt3HCLBRdI
- CxMLJ1y6LmX3p6NZxf205lqPobGiLcmeOS9UuWi2zntv+Et6359HBd1VypQppi0Ilnz7
- JL53Ud2L1uHPaa8rYViTSYexbKOr0cZZUoMjWDzmfBBQyJOfMJQpLfHYXc3CU0m+6vua
- OFNXeHoNh8HQUlFkRfPKKV+bdYvWmp0TYQcP07jDmEoXel/xSgpDif35zdInnNgtkdqP
- SXAsERuUkeOt+j6nPKEChdQpzLYb3yh/M5Dx0MPAa4t+gvPxC4PhcV8l1lJcP3x2ggz5
- 6KEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date;
- bh=Zf+sO5cXB1kP+NvA3P8u0L68wTUwo+xf7A/Hb6KmVaM=;
- b=xS2F0GXMO157GMd6sFaHr6PJI2Z5+xQ+M9e+4IBI1Thoqy/D2+qTmFdOyqxOlKhEW9
- 3R5j4NJ9utYQQsF8H2n134DZMERHlCUyRrfbnNR//dF82Oo9p/SPvdHyDEnI6H7vBKiL
- LeK/Bt9h+L0FWruQDmZelextdk30vBQIChaqXGeG/QUV3Zi9LuUq4SGhAxN6Zzee0OKK
- mQq0UttDk3to/SIFTUb2IzvOmxbEhz9RyI3AT54OybTNR0ZGq6rp8g0hI+BEvxkFAKpJ
- eOG6Vg75Sfc229OJIVDLrq8sxR4x4Zut84nSxZ6tjJMcEiJttC40mMNqxwOlRVUtaQsA
- nLCw==
-X-Gm-Message-State: ACgBeo1wDXgjKBXEPqWgAkghGRBmg/J9ic5K21KRUxHGGfK3V2mKKYTN
- IbSlienMAVbQtna2vb9a0/B/3xFaVfJFykSacqM=
-X-Google-Smtp-Source: AA6agR6Oz2SMNzXGtaxVLVnzutyGqe82Nt08M8f73Z3DWAHAdwMtkW1GF46ZXmxxJ3aOpB0+eff8xwgs+KigzdE8V1E=
-X-Received: by 2002:a05:6870:5624:b0:127:8ff5:1cb2 with SMTP id
- m36-20020a056870562400b001278ff51cb2mr1728087oao.201.1662401801126; Mon, 05
- Sep 2022 11:16:41 -0700 (PDT)
+ Tue,  6 Sep 2022 06:16:03 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2865AeZQ014214;
+ Tue, 6 Sep 2022 08:15:34 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=lO1MuN5JNxhBYx8CjSu2u2L1kOXHbQCOGheAZnDKLEU=;
+ b=o+yXJ7gqIsdfiR+TRuerOwC8fSj7sgcdP0BYcW6D1FYokAc+TARHxY/sv5oqZ0NMrsXl
+ 66b4+8B80L0kASeLxXvYUQSGRJuhtkGtp6PH+HP4dKiQ8U4iSoKykRGN1CVchJ5t1sQy
+ Qm6ILiNFUsAYd+XXRtIf3B+QPF+c7d7R5OKhDiIs4nnAIi4SHMTh0+ZhFGo8Y2cJKgzC
+ mtI/VeCvqJg7/W99flWyS1YpGKwRsG8Uk0TaCjXcvH4JjdDpdRVWxmds7O28O459Bsuy
+ 5I13TPMHb5zjUlTw+/9Gd9MMEw0tHSjj9k4HCGsU0LJ+U5pcl4MTEV1sa8sslOTddBBU 2g== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jdamg7077-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 06 Sep 2022 08:15:34 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A7840100038;
+ Tue,  6 Sep 2022 08:15:32 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2AD452132D2;
+ Tue,  6 Sep 2022 08:15:32 +0200 (CEST)
+Received: from localhost (10.75.127.46) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7; Tue, 6 Sep 2022
+ 08:15:31 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 6 Sep 2022 08:15:25 +0200
+Message-ID: <20220906061529.3788894-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20220905173357.2231466-1-jorge@foundries.io>
-In-Reply-To: <20220905173357.2231466-1-jorge@foundries.io>
-From: Oleksandr Suvorov <cryosay@gmail.com>
-Date: Mon, 5 Sep 2022 21:16:29 +0300
-Message-ID: <CAGgjyvGSqrOiZu5=KUj5aahHhZBEEYxCQW1ijOjctq59LD11_A@mail.gmail.com>
-To: Jorge Ramirez-Ortiz <jorge@foundries.io>
-Cc: patrick.delaunay@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com,
- u-boot@lists.denx.de
-Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp*: fix system reset
+X-Originating-IP: [10.75.127.46]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-06_03,2022-09-05_03,2022-06-22_01
+Cc: Fabio Estevam <festevam@denx.de>, Angus Ainslie <angus@akkea.ca>,
+ Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Adam Ford <aford173@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ramon Fried <rfried.dev@gmail.com>,
+ Marek Vasut <marex@denx.de>, Wolfgang Denk <wd@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Scull <ascull@google.com>,
+ Michal Simek <michal.simek@amd.com>, Alexander Dahl <ada@thorsis.com>,
+ Simon Glass <sjg@chromium.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [Uboot-stm32] [PATCH v1 0/4] phy: Add generic_{setup,
+	shutdown}_phy() helpers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,75 +85,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Mon, Sep 5, 2022 at 8:34 PM Jorge Ramirez-Ortiz <jorge@foundries.io> wrote:
->
-> Enabling CONFIG_SYSRESET_PSCI prevents CONFIG_RESET_SCMI
-> from executing.
->
-> The side effect observed are I2C devices no longer being
-> accessible from U-boot after a soft reset.
->
-> Fixes: 11517ccc8c52 ("configs: add stm32mp13 defconfig")
-> Fixes: 17aeb589fa9d ("stm32mp15: remove configs dependency on
->                       CONFIG_TFABOOT")
->
-> Signed-off-by: Jorge Ramirez-Ortiz <jorge@foundries.io>
 
-Acked-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+In drivers ehci-generic.c and ohci-generic.c, specific phy
+helpers has been added and shared 95% of common code.
+Factorize this code in generic_{setup,shutdown}_phy() helpers
+and update all consumers.
 
-> ---
->  configs/stm32mp13_defconfig         | 1 -
->  configs/stm32mp15_defconfig         | 1 -
->  configs/stm32mp15_trusted_defconfig | 1 -
->  3 files changed, 3 deletions(-)
->
-> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-> index 673b468d31..44cee2e656 100644
-> --- a/configs/stm32mp13_defconfig
-> +++ b/configs/stm32mp13_defconfig
-> @@ -69,7 +69,6 @@ CONFIG_RNG_OPTEE=y
->  CONFIG_DM_RTC=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
-> -CONFIG_SYSRESET_PSCI=y
->  CONFIG_TEE=y
->  CONFIG_OPTEE=y
->  # CONFIG_OPTEE_TA_AVB is not set
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index e5a2996c2c..2ad02f3652 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -133,7 +133,6 @@ CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
->  CONFIG_STM32_SPI=y
-> -CONFIG_SYSRESET_PSCI=y
->  CONFIG_TEE=y
->  CONFIG_OPTEE=y
->  # CONFIG_OPTEE_TA_AVB is not set
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index e14668042f..9e24e82920 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -134,7 +134,6 @@ CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
->  CONFIG_STM32_SPI=y
-> -CONFIG_SYSRESET_PSCI=y
->  CONFIG_TEE=y
->  CONFIG_OPTEE=y
->  # CONFIG_OPTEE_TA_AVB is not set
-> --
-> 2.34.1
->
 
+
+Patrice Chotard (4):
+  phy: Add generic_{setup,shutdown}_phy() helpers
+  usb: ohci: Make usage of generic_{setup,shutdown}_phy() helpers
+  usb: ehci: Make usage of generic_{setup,shutdown}_phy() helpers
+  usb: ehci: Remove unused ehci_{setup,shutdown}_phy() helpers
+
+ drivers/phy/phy-uclass.c        | 42 +++++++++++++++++++++
+ drivers/usb/host/ehci-generic.c |  6 +--
+ drivers/usb/host/ehci-hcd.c     | 66 ---------------------------------
+ drivers/usb/host/ehci-msm.c     |  4 +-
+ drivers/usb/host/ehci-mx6.c     |  6 +--
+ drivers/usb/host/ehci-pci.c     |  4 +-
+ drivers/usb/host/ehci.h         |  4 --
+ drivers/usb/host/ohci-generic.c | 56 ++--------------------------
+ include/generic-phy.h           | 30 +++++++++++++++
+ 9 files changed, 85 insertions(+), 133 deletions(-)
 
 -- 
-Best regards
-Oleksandr
+2.25.1
 
-Oleksandr Suvorov
-cryosay@gmail.com
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

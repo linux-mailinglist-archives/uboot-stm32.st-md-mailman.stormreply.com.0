@@ -2,57 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E3435AFCB3
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Sep 2022 08:41:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C2065AFCB4
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Sep 2022 08:42:19 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 557A4C0D2BF;
-	Wed,  7 Sep 2022 06:41:50 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65AF3C0D2BF;
+	Wed,  7 Sep 2022 06:42:19 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 39DB4C03FCB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF9CAC03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Sep 2022 06:41:49 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2875KQcs017285;
- Wed, 7 Sep 2022 08:41:47 +0200
+ Wed,  7 Sep 2022 06:42:17 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2875L1rL016765;
+ Wed, 7 Sep 2022 08:42:16 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=qevca9bX0ariQ2IttRY3ShnaQqLxFlK7N8DcjXS98dM=;
- b=5+3XaVItwApRABN3yCocXyxo5YnzBZLn0q04LPg0nbMAFVOJ590jiYSmBNIBEQjzSYba
- MgVPsAuoNlkQsaNHFQX18InVvCCx4U9slKMSaEddEmJV2eFBmfm35kgjExmMUYFQNv/S
- f4yS0BuYoHhM0uvSg3cwTopPrl3uC9Xbj2zgR6aNbDGrZk9i+lA4ebYHQFNuLFYtqX5E
- Kie9p6Blxn1lIiNkHQsVsR8Wa2JqJuJ0ikzzQZ9Eo8hacZf++O41iJPmUFJMZconWAgG
- kpxChyEJ8T08HcrfsShPHlv34c3dQCv+SpE8r2NcKuVuv1bzJdmPBe9ejnceR1wQGy6g 4A== 
+ bh=twfJUUJBm5YkRFVCOuGFjLlSVR6FRCsfXL3i20aPwok=;
+ b=evnMiO4GtDTeLBSJrhybrymKNgtf3kiGylrhihaddJzyFpsSIwQzPYoG2wnIeQONnJUa
+ 7WTpbLPg9ZjYrSsYvM2tNPEvbIhSZIe10tTAOPq151XXfoNXjZ/IdpLf8sKnYgwJaKPL
+ SHWZ0upMD1wSVxvOyMhWYMViuFzdWNvtsYYW7iWTApwFjrCmnB25yRqzw31FlVd0x4Po
+ KL0mu70djW1qTDf/kjjxsl493qKX/DtMEKVOn2B4q6HKo07PLnQwEaffHkZn94TVp8vd
+ Xu6DyFw/L2VhTMDiUDSRelyOFUZo8AYaw7EmlTjwUJD6Y1OHl8TMtPJHOCSuGnHTLFj+ Zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jdcav5bmn-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jbx91meht-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 07 Sep 2022 08:41:47 +0200
+ Wed, 07 Sep 2022 08:42:16 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AB39410002A;
- Wed,  7 Sep 2022 08:41:46 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 12F0B100034;
+ Wed,  7 Sep 2022 08:42:16 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6928C2128A8;
- Wed,  7 Sep 2022 08:41:46 +0200 (CEST)
-Received: from [10.201.21.72] (10.75.127.119) by SHFDAG1NODE1.st.com
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0CFE62128B7;
+ Wed,  7 Sep 2022 08:42:16 +0200 (CEST)
+Received: from [10.201.21.72] (10.75.127.118) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7; Wed, 7 Sep 2022
- 08:41:46 +0200
-Message-ID: <6b1090bc-ff11-1203-bd8d-b6976580efdb@foss.st.com>
-Date: Wed, 7 Sep 2022 08:41:45 +0200
+ 08:42:15 +0200
+Message-ID: <bb7f0cfe-4978-4dcd-2958-a7da394f160a@foss.st.com>
+Date: Wed, 7 Sep 2022 08:42:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20220906185314.1.I9928b88f3a453611043b484158b02efe9b0c06bf@changeid>
- <20220906185314.2.I7b7ee82b94c5a086ab8f1177294fe72a5b62c06c@changeid>
+ <20220906185314.3.I481093701859eb171c9270f859756d0564bdebe6@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20220906185314.2.I7b7ee82b94c5a086ab8f1177294fe72a5b62c06c@changeid>
-X-Originating-IP: [10.75.127.119]
+In-Reply-To: <20220906185314.3.I481093701859eb171c9270f859756d0564bdebe6@changeid>
+X-Originating-IP: [10.75.127.118]
 X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
@@ -60,8 +60,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2022-09-07_04,2022-09-06_02,2022-06-22_01
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [Uboot-stm32] [PATCH 2/4] stm32mp: stm32prog: change default
- flashlayout location to CONFIG_SYS_LOAD_ADDR
+Subject: Re: [Uboot-stm32] [PATCH 3/4] stm32mp: stm32prog: solve warning for
+ 64bits compilation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,94 +81,260 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi Patrick
 
 On 9/6/22 18:53, Patrick Delaunay wrote:
-> Change the defaut flashlayout location, hardcoded at STM32_DDR_BASE,
-> to CONFIG_SYS_LOAD_ADDR to avoid issue on board with reserved memory
-> at STM32_DDR_BASE.
-> 
-> This patch changes the command behavior for STM32MP13 and STM32MP15
-> platform, as CONFIG_SYS_LOAD_ADDR(0xc2000000) != STM32_DDR_BASE
-> but without impact for serial boot with STM32CubeProgrammer.
+> Solve many compilation warning when stm32prog is activated on the aarch64.
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c    | 2 +-
->  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c        | 8 ++++----
->  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c | 2 +-
->  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c    | 2 +-
->  4 files changed, 7 insertions(+), 7 deletions(-)
+>  .../mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c   | 14 +++++++-------
+>  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c  | 16 ++++++++--------
+>  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h  | 14 +++++++-------
+>  .../cmd_stm32prog/stm32prog_serial.c             | 15 +++++++--------
+>  .../mach-stm32mp/cmd_stm32prog/stm32prog_usb.c   |  4 ++--
+>  5 files changed, 31 insertions(+), 32 deletions(-)
 > 
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> index f59414e716f..cb9e20da136 100644
+> index cb9e20da136..d2666b97757 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-> @@ -61,7 +61,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+> @@ -126,21 +126,21 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+>  		char *bootm_argv[5] = {
+>  			"bootm", boot_addr_start, "-", dtb_addr, NULL
+>  		};
+> -		u32 uimage = data->uimage;
+> -		u32 dtb = data->dtb;
+> -		u32 initrd = data->initrd;
+> +		const void *uimage = (void *)data->uimage;
+> +		const void *dtb = (void *)data->dtb;
+> +		const void *initrd = (void *)data->initrd;
 >  
->  	dev = (int)dectoul(argv[2], NULL);
+>  		if (!dtb)
+>  			bootm_argv[3] = env_get("fdtcontroladdr");
+>  		else
+>  			snprintf(dtb_addr, sizeof(dtb_addr) - 1,
+> -				 "0x%x", dtb);
+> +				 "0x%p", dtb);
 >  
-> -	addr = STM32_DDR_BASE;
-> +	addr = CONFIG_SYS_LOAD_ADDR;
->  	size = 0;
->  	if (argc > 3) {
->  		addr = hextoul(argv[3], NULL);
+>  		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
+> -			 "0x%x", uimage);
+> +			 "0x%p", uimage);
+>  
+>  		if (initrd) {
+> -			snprintf(initrd_addr, sizeof(initrd_addr) - 1, "0x%x:0x%x",
+> +			snprintf(initrd_addr, sizeof(initrd_addr) - 1, "0x%p:0x%zx",
+>  				 initrd, data->initrd_size);
+>  			bootm_argv[2] = initrd_addr;
+>  		}
+> @@ -148,7 +148,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+>  		printf("Booting kernel at %s %s %s...\n\n\n",
+>  		       boot_addr_start, bootm_argv[2], bootm_argv[3]);
+>  		/* Try bootm for legacy and FIT format image */
+> -		if (genimg_get_format((void *)uimage) != IMAGE_FORMAT_INVALID)
+> +		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
+>  			do_bootm(cmdtp, 0, 4, bootm_argv);
+>  		else if (CONFIG_IS_ENABLED(CMD_BOOTZ))
+>  			do_bootz(cmdtp, 0, 4, bootm_argv);
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> index 65e32288af7..3b2652a0e0d 100644
+> index 3b2652a0e0d..67be1ac7ff8 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> @@ -1388,7 +1388,7 @@ static int dfu_init_entities(struct stm32prog_data *data)
->  		char buf[ALT_BUF_LEN];
+> @@ -322,7 +322,7 @@ void stm32prog_header_check(uintptr_t raw_header, struct image_header_s *header)
+>  	header->image_length = 0x0;
+>  }
 >  
->  		sprintf(buf, "@FlashLayout/0x%02x/1*256Ke ram %x 40000",
-> -			PHASE_FLASHLAYOUT, STM32_DDR_BASE);
-> +			PHASE_FLASHLAYOUT, CONFIG_SYS_LOAD_ADDR);
->  		ret = dfu_alt_add(dfu, "ram", NULL, buf);
->  		log_debug("dfu_alt_add(ram, NULL,%s) result %d\n", buf, ret);
->  	}
-> @@ -1699,15 +1699,15 @@ static void stm32prog_end_phase(struct stm32prog_data *data, u64 offset)
+> -static u32 stm32prog_header_checksum(u32 addr, struct image_header_s *header)
+> +static u32 stm32prog_header_checksum(uintptr_t addr, struct image_header_s *header)
 >  {
->  	if (data->phase == PHASE_FLASHLAYOUT) {
->  #if defined(CONFIG_LEGACY_IMAGE_FORMAT)
-> -		if (genimg_get_format((void *)STM32_DDR_BASE) == IMAGE_FORMAT_LEGACY) {
-> -			data->script = STM32_DDR_BASE;
-> +		if (genimg_get_format((void *)CONFIG_SYS_LOAD_ADDR) == IMAGE_FORMAT_LEGACY) {
-> +			data->script = CONFIG_SYS_LOAD_ADDR;
->  			data->phase = PHASE_END;
->  			log_notice("U-Boot script received\n");
->  			return;
->  		}
->  #endif
->  		log_notice("\nFlashLayout received, size = %lld\n", offset);
-> -		if (parse_flash_layout(data, STM32_DDR_BASE, offset))
-> +		if (parse_flash_layout(data, CONFIG_SYS_LOAD_ADDR, offset))
->  			stm32prog_err("Layout: invalid FlashLayout");
->  		return;
+>  	u32 i, checksum;
+>  	u8 *payload;
+> @@ -398,7 +398,7 @@ static int parse_name(struct stm32prog_data *data,
+>  	if (strlen(p) < sizeof(part->name)) {
+>  		strcpy(part->name, p);
+>  	} else {
+> -		stm32prog_err("Layout line %d: partition name too long [%d]: %s",
+> +		stm32prog_err("Layout line %d: partition name too long [%zd]: %s",
+>  			      i, strlen(p), p);
+>  		result = -EINVAL;
 >  	}
+> @@ -537,7 +537,7 @@ int (* const parse[COL_NB_STM32])(struct stm32prog_data *data, int i, char *p,
+>  };
+>  
+>  static int parse_flash_layout(struct stm32prog_data *data,
+> -			      ulong addr,
+> +			      uintptr_t addr,
+>  			      ulong size)
+>  {
+>  	int column = 0, part_nb = 0, ret;
+> @@ -1440,7 +1440,7 @@ int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>  	if (offset + *size > otp_size)
+>  		*size = otp_size - offset;
+>  
+> -	memcpy((void *)((u32)data->otp_part + offset), buffer, *size);
+> +	memcpy((void *)((uintptr_t)data->otp_part + offset), buffer, *size);
+>  
+>  	return 0;
+>  }
+> @@ -1479,7 +1479,7 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>  						 data->otp_part, OTP_SIZE_TA);
+>  		else if (IS_ENABLED(CONFIG_ARM_SMCCC))
+>  			result = stm32_smc_exec(STM32_SMC_BSEC, STM32_SMC_READ_ALL,
+> -						(u32)data->otp_part, 0);
+> +						(unsigned long)data->otp_part, 0);
+>  		if (result)
+>  			goto end_otp_read;
+>  	}
+> @@ -1491,7 +1491,7 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
+>  
+>  	if (offset + *size > otp_size)
+>  		*size = otp_size - offset;
+> -	memcpy(buffer, (void *)((u32)data->otp_part + offset), *size);
+> +	memcpy(buffer, (void *)((uintptr_t)data->otp_part + offset), *size);
+>  
+>  end_otp_read:
+>  	log_debug("%s: result %i\n", __func__, result);
+> @@ -1521,7 +1521,7 @@ int stm32prog_otp_start(struct stm32prog_data *data)
+>  					 data->otp_part, OTP_SIZE_TA);
+>  	} else if (IS_ENABLED(CONFIG_ARM_SMCCC)) {
+>  		arm_smccc_smc(STM32_SMC_BSEC, STM32_SMC_WRITE_ALL,
+> -			      (u32)data->otp_part, 0, 0, 0, 0, 0, &res);
+> +			      (uintptr_t)data->otp_part, 0, 0, 0, 0, 0, &res);
+>  
+>  		if (!res.a0) {
+>  			switch (res.a1) {
+> @@ -1951,7 +1951,7 @@ int stm32prog_dfu_init(struct stm32prog_data *data)
+>  	return dfu_init_entities(data);
+>  }
+>  
+> -int stm32prog_init(struct stm32prog_data *data, ulong addr, ulong size)
+> +int stm32prog_init(struct stm32prog_data *data, uintptr_t addr, ulong size)
+>  {
+>  	memset(data, 0x0, sizeof(*data));
+>  	data->read_phase = PHASE_RESET;
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> index ac300768ca0..397506ac47c 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> @@ -154,7 +154,7 @@ struct stm32prog_data {
+>  	u32			offset;
+>  	char			error[255];
+>  	struct stm32prog_part_t	*cur_part;
+> -	u32			*otp_part;
+> +	void			*otp_part;
+>  	u8			pmic_part[PMIC_SIZE];
+>  
+>  	/* SERIAL information */
+> @@ -165,12 +165,12 @@ struct stm32prog_data {
+>  	u8	read_phase;
+>  
+>  	/* bootm information */
+> -	u32	uimage;
+> -	u32	dtb;
+> -	u32	initrd;
+> -	u32	initrd_size;
+> +	uintptr_t	uimage;
+> +	uintptr_t	dtb;
+> +	uintptr_t	initrd;
+> +	size_t		initrd_size;
+>  
+> -	u32	script;
+> +	uintptr_t	script;
+>  
+>  	/* OPTEE PTA NVMEM */
+>  	struct udevice *tee;
+> @@ -209,7 +209,7 @@ char *stm32prog_get_error(struct stm32prog_data *data);
+>  	}
+>  
+>  /* Main function */
+> -int stm32prog_init(struct stm32prog_data *data, ulong addr, ulong size);
+> +int stm32prog_init(struct stm32prog_data *data, uintptr_t addr, ulong size);
+>  void stm32prog_clean(struct stm32prog_data *data);
+>  
+>  #ifdef CONFIG_CMD_STM32PROG_SERIAL
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
-> index 2932eae7578..1bf5f5ae0ac 100644
+> index 1bf5f5ae0ac..9f2ab2b625c 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
-> @@ -462,7 +462,7 @@ static void get_phase_command(struct stm32prog_data *data)
->  		length = strlen(err_msg);
->  	}
->  	if (phase == PHASE_FLASHLAYOUT)
-> -		destination = STM32_DDR_BASE;
-> +		destination = CONFIG_SYS_LOAD_ADDR;
+> @@ -300,7 +300,7 @@ static void stm32prog_serial_putc(u8 w_byte)
+>  }
 >  
->  	stm32prog_serial_putc(length + 5);           /* Total length */
->  	stm32prog_serial_putc(phase & 0xFF);         /* partition ID */
+>  /* Helper function ************************************************/
+> -static u8 stm32prog_start(struct stm32prog_data *data, u32 address)
+> +static u8 stm32prog_start(struct stm32prog_data *data, uintptr_t address)
+>  {
+>  	u8 ret = 0;
+>  	struct dfu_entity *dfu_entity;
+> @@ -353,7 +353,7 @@ static u8 stm32prog_start(struct stm32prog_data *data, u32 address)
+>  	} else {
+>  		void (*entry)(void) = (void *)address;
+>  
+> -		printf("## Starting application at 0x%x ...\n", address);
+> +		printf("## Starting application at 0x%p ...\n", (void *)address);
+>  		(*entry)();
+>  		printf("## Application terminated\n");
+>  		ret = -ENOEXEC;
+> @@ -368,9 +368,9 @@ static u8 stm32prog_start(struct stm32prog_data *data, u32 address)
+>   * @tmp_xor:		Current xor value to update
+>   * Return: The address area
+>   */
+> -static u32 get_address(u8 *tmp_xor)
+> +static uintptr_t get_address(u8 *tmp_xor)
+>  {
+> -	u32 address = 0x0;
+> +	uintptr_t address = 0x0;
+>  	u8 data;
+>  
+>  	data = stm32prog_serial_getc();
+> @@ -487,7 +487,7 @@ static void get_phase_command(struct stm32prog_data *data)
+>   */
+>  static void read_memory_command(struct stm32prog_data *data)
+>  {
+> -	u32 address = 0x0;
+> +	uintptr_t address = 0x0;
+>  	u8 rcv_data = 0x0, tmp_xor = 0x0;
+>  	u32 counter = 0x0;
+>  
+> @@ -532,7 +532,7 @@ static void read_memory_command(struct stm32prog_data *data)
+>   */
+>  static void start_command(struct stm32prog_data *data)
+>  {
+> -	u32 address = 0;
+> +	uintptr_t address = 0;
+>  	u8 tmp_xor = 0x0;
+>  	u8 ret, rcv_data;
+>  
+> @@ -546,8 +546,7 @@ static void start_command(struct stm32prog_data *data)
+>  		return;
+>  	}
+>  	/* validate partition */
+> -	ret = stm32prog_start(data,
+> -			      address);
+> +	ret = stm32prog_start(data, address);
+>  
+>  	if (ret)
+>  		stm32prog_serial_result(ABORT_BYTE);
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
-> index a8b57c4d8f0..bcb4d373f69 100644
+> index bcb4d373f69..be38ff239b2 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_usb.c
-> @@ -90,7 +90,7 @@ static int stm32prog_cmd_read(u64 offset, void *buf, long *len)
->  	}
->  	phase = stm32prog_data->phase;
->  	if (phase == PHASE_FLASHLAYOUT)
-> -		destination = STM32_DDR_BASE;
-> +		destination = CONFIG_SYS_LOAD_ADDR;
->  	dfu_offset = stm32prog_data->offset;
->  
->  	/* mandatory header, size = PHASE_MIN_SIZE */
+> @@ -41,7 +41,7 @@ static int stm32prog_set_phase(struct stm32prog_data *data, u8 phase,
+>  static int stm32prog_cmd_write(u64 offset, void *buf, long *len)
+>  {
+>  	u8 phase;
+> -	u32 address;
+> +	uintptr_t address;
+>  	u8 *pt = buf;
+>  	void (*entry)(void);
+>  	int ret;
+> @@ -58,7 +58,7 @@ static int stm32prog_cmd_write(u64 offset, void *buf, long *len)
+>  	address = (pt[1] << 24) | (pt[2] << 16) | (pt[3] << 8) | pt[4];
+>  	if (phase == PHASE_RESET) {
+>  		entry = (void *)address;
+> -		printf("## Starting application at 0x%x ...\n", address);
+> +		printf("## Starting application at 0x%p ...\n", entry);
+>  		(*entry)();
+>  		printf("## Application terminated\n");
+>  		return 0;
+
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks

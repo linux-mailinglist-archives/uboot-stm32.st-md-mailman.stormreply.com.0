@@ -2,68 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E734E5B2365
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Sep 2022 18:16:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70B145B2842
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Sep 2022 23:16:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6364AC6410D;
-	Thu,  8 Sep 2022 16:16:59 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 257FDC63328;
+	Thu,  8 Sep 2022 21:16:52 +0000 (UTC)
+Received: from mail-qt1-f169.google.com (mail-qt1-f169.google.com
+ [209.85.160.169])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7C7B0C64101
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88943C03FCD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Sep 2022 16:16:57 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 288FhNhf031613;
- Thu, 8 Sep 2022 18:16:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=PJ+NcpBUpH/cQ76oRW8VAbW3DEvs0U7HMcjQBF4TirI=;
- b=12JjThqzs0EeBzu2N9xDFA5l5keNX+wqaCtovBoaIDr0RF6gqvOebAwoFXDK6yDEKMdk
- 721Yhl6Xs5HYcrupJ7e7Wz5eg5YhZSJLiIejJFiXdI0I/ZHwKGOZl+E4Z5/kU7pxlt/r
- a5G8McpfoVAVXyRe7xZYMe0diFOEi6MIhyRrYctX4zYjE8KVmn1dkC5zKXp5/Qi5HvCH
- McUP8Q4mdzNyO9sy4mfHhkoFj7Xm9zZs/1GY0Ku9aIEAXh+fdkH2zAy2xEUcAFQz0WIe
- EtZmetS7Z2jM2UUNrfQxGsE2iMQIcDZlURtMsbvF6pHBAqYZgRKBnULZQPNcrgvFEPFL Gw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jergbbnnr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 08 Sep 2022 18:16:54 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0EDC510002A;
- Thu,  8 Sep 2022 18:16:52 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8231D236959;
- Thu,  8 Sep 2022 18:16:52 +0200 (CEST)
-Received: from [10.48.0.213] (10.75.127.50) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Thu, 8 Sep
- 2022 18:16:51 +0200
-Message-ID: <a982dbe2-9b75-2d12-fe98-b69ec7bd8a8b@foss.st.com>
-Date: Thu, 8 Sep 2022 18:16:50 +0200
+ Thu,  8 Sep 2022 21:16:50 +0000 (UTC)
+Received: by mail-qt1-f169.google.com with SMTP id j17so13907711qtp.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 08 Sep 2022 14:16:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date;
+ bh=sm9LnfvHTEiAHYKn6IxBKfCmpGHGb8Ip1higouFSpYo=;
+ b=bGKrGv+6UxqrLrCuu/wNOh5tFmeMcS17QC2Xx+Uxo70wXabmOMgNxNQDGN4H0BMo9k
+ prWVK6sSmqdL0bW/7C2ZVhqp1mH7GP1NARAJJcFHtNR6ImpdBESc7EMD6mJYST8rIzeu
+ 5Su0pUVJg0tCRZg0q3Uo9SZLYY45SKzx+jajg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+ bh=sm9LnfvHTEiAHYKn6IxBKfCmpGHGb8Ip1higouFSpYo=;
+ b=8B9FLvqtZtTdzKUGawRP1zlDKOUxdauNyVQ1C21Po6fqguty+Iz4Nn6ym9GsVCCeKk
+ DO5pJj6Dm94kOgXoGgPigU7LxVUOYfXPpft9EukUIUcIA1hRUMKLdiRnm7dI3fa0bW9B
+ NDqXEYMPHxotoRAxO9v+Ss+b4RA5QT3Itrv1Dz3MOrfMUDXKErPaaxDQHqEcP/5Ib18v
+ LWIRT3JVNmc90kP0MMQ+S3tZuMeGXZXmdpBpzR7xHh9VOUCNXD8w7bmiyUCr3EiYjhwa
+ sZGSkFrcmpvnYIDGAlFBn4UoNLDml7kFgSX5nGjhuGfaKWxU6SRo3eR4z6jvKGGHiP97
+ BlNA==
+X-Gm-Message-State: ACgBeo1ouoWNstXUsxelsdIBhAtOijBtv1mzcQMvJ0Qy+icz5AUAxPQs
+ U1QhOTZ9RIXEJAJBXfAiLnA6qg==
+X-Google-Smtp-Source: AA6agR7pZDVRDhFBpXx2CwobBJlsM/A8mAJ3PISl4uV6CnBOXEfw3vDwXqxqs+EDZzcYcG/1TOoP0w==
+X-Received: by 2002:a05:622a:310:b0:344:89e4:cf8a with SMTP id
+ q16-20020a05622a031000b0034489e4cf8amr9735404qtw.206.1662671809401; 
+ Thu, 08 Sep 2022 14:16:49 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-e8f3-4bcb-5977-bee6.res6.spectrum.com.
+ [2603:6081:7b00:6400:e8f3:4bcb:5977:bee6])
+ by smtp.gmail.com with ESMTPSA id
+ x9-20020a05620a448900b006b5e296452csm19176178qkp.54.2022.09.08.14.16.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Sep 2022 14:16:48 -0700 (PDT)
+Date: Thu, 8 Sep 2022 17:16:46 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20220908211646.GU7942@bill-the-cat>
+References: <80f5c40e-4915-2291-cb70-130c1fbe050b@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: "Jorge Ramirez-Ortiz, Foundries" <jorge@foundries.io>, Alain Volmat
- <alain.volmat@foss.st.com>
-References: <20220905173357.2231466-1-jorge@foundries.io>
- <04ba2a69-9c29-dd84-547c-76043b017e0b@foss.st.com>
- <20220906145325.GA2015520@trex>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20220906145325.GA2015520@trex>
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-08_10,2022-09-08_01,2022-06-22_01
-Cc: Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Etienne Carriere <etienne.carriere@linaro.org>, cryosay@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp*: fix system reset
+In-Reply-To: <80f5c40e-4915-2291-cb70-130c1fbe050b@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Johann Neuhauser <jneuhauser@dh-electronics.com>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2022.10
+ = u-boot-stm32-20220907
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,141 +72,100 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============3921507184678126571=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiA5LzYvMjIgMTY6NTMsIEpvcmdlIFJhbWlyZXotT3J0aXosIEZvdW5kcmllcyB3cm90
-ZToKPiBPbiAwNi8wOS8yMiwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPj4gSGksCj4+Cj4+IE9u
-IDkvNS8yMiAxOTozMywgSm9yZ2UgUmFtaXJlei1PcnRpeiB3cm90ZToKPj4+IEVuYWJsaW5nIENP
-TkZJR19TWVNSRVNFVF9QU0NJIHByZXZlbnRzIENPTkZJR19SRVNFVF9TQ01JCj4+PiBmcm9tIGV4
-ZWN1dGluZy4KPj4+Cj4+PiBUaGUgc2lkZSBlZmZlY3Qgb2JzZXJ2ZWQgYXJlIEkyQyBkZXZpY2Vz
-IG5vIGxvbmdlciBiZWluZwo+Pj4gYWNjZXNzaWJsZSBmcm9tIFUtYm9vdCBhZnRlciBhIHNvZnQg
-cmVzZXQuCj4+Pgo+Pj4gRml4ZXM6IDExNTE3Y2NjOGM1MiAoImNvbmZpZ3M6IGFkZCBzdG0zMm1w
-MTMgZGVmY29uZmlnIikKPj4+IEZpeGVzOiAxN2FlYjU4OWZhOWQgKCJzdG0zMm1wMTU6IHJlbW92
-ZSBjb25maWdzIGRlcGVuZGVuY3kgb24KPj4+ICAgICAgICAgICAgICAgICAgICAgICAgIENPTkZJ
-R19URkFCT09UIikKPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBKb3JnZSBSYW1pcmV6LU9ydGl6IDxq
-b3JnZUBmb3VuZHJpZXMuaW8+Cj4+PiAtLS0KPj4+ICAgIGNvbmZpZ3Mvc3RtMzJtcDEzX2RlZmNv
-bmZpZyAgICAgICAgIHwgMSAtCj4+PiAgICBjb25maWdzL3N0bTMybXAxNV9kZWZjb25maWcgICAg
-ICAgICB8IDEgLQo+Pj4gICAgY29uZmlncy9zdG0zMm1wMTVfdHJ1c3RlZF9kZWZjb25maWcgfCAx
-IC0KPj4+ICAgIDMgZmlsZXMgY2hhbmdlZCwgMyBkZWxldGlvbnMoLSkKPj4KPj4gVGhlIHJlc2V0
-IGRyaXZlciAodXNlZCB0byBtYW5hZ2VkIEhhcmR3YXJlIGRldmljZSByZXNldCB3aXRoIFJDQykK
-Pj4KPj4gYmFzZWQgb24gUkNDIHJlZ2lzdGVyIG9yIG9uIFNDTUkgZm9yICdzeXN0ZW0nIC8gJ3Nl
-Y3VyZWQnIHJlc3NvdXJjZQo+Pgo+PiBhbmQgdGhlIHN5c3JldCBmb3IgZ2xvYmFsIHBsYXRmb3Jt
-IGJhc2VkIG9uIFBTQ0kgYXJlIGluZGVuZGVudC4KPiBZZXMuIEJ1dCBBRkFJQ1MgaW4gdGhlIHRy
-YWNlIG9ubHkgb25lIGV4ZWN1dGVzIGR1cmluZyB0aGUgc3lzIHJlc2V0IHdhbGsgYW5kCj4gUFND
-SSBnZXRzIGluIGZpcnN0IChzbyBTQ01JIGRvZXNudCBydW4gd2hlbiBVLWJvb3QgcmVib290cyku
-CgoKRm9yIG15IHVuZGVyc3RhbmRpbmcgdGhlIFNUTTMyTVAxNSBMaW51eCBLZXJuZWwgYWxzbyB1
-c2UKClBTQ0kgZm9yIHJlc2V0IChmb3IgY29tbWFuZCByZWJvb3QpCgpkcml2ZXJzL2Zpcm13YXJl
-L3BzY2kvcHNjaS5jOjpwc2NpX3N5c19yZXNldAoKcmVmOiBodHRwczovL3dpa2kuc3QuY29tL3N0
-bTMybXB1L3dpa2kvUG93ZXJfb3ZlcnZpZXcKCgpZb3Ugc2hvdWxkIGhhdmUgYWxzbyB0aGUgaXNz
-dWUgd2l0aCByZWJvb3QgY29tbWFuZCBpbiBMaW51eC4uLgoKCkFuZCBmb3IgU0NNSSBkZXZpY2Ug
-dHJlZSBvciBkb3duc3RyZWFtIHRoZSBQU0NJIGlzIHRoZSBvbmx5IHN1cHBvcnQKClNZU1JFU0VU
-IGRyaXZlciBzdXBwb3J0ZWQgKFNZU0NPTiBvbiBSQ0Mgbm90IGF2YWlsYWJsZSBvbiBzZWN1cmVk
-CgpkZXZpY2UgYW5kIEkgZG9uJ3Qga25vd24gU0NNSSBzeXNyZXNldCBkcml2ZXIgaW4gVS1Cb290
-KQoKCldlIGhhdmUgYWxzbyBTVFBNSUMxIHN5c3Jlc2V0IHN1cHBvcnQgYnkgb25seSB3aGVuIHRo
-ZSBQTUlDIGlzIG1hbmFnZWQgCmJ5IFUtQm9vdAoKKHByZXNlbnQgaW4gVS1Cb290IGRldmljZSBE
-VCwgbm90IHNlY3VyZWQpLgoKClNUTTMyTVA+IGRtIHRyZWUKIMKgQ2xhc3PCoMKgwqDCoCBJbmRl
-eMKgIFByb2JlZMKgIERyaXZlcsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBOYW1lCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-CiDCoHJvb3TCoMKgwqDCoMKgwqDCoMKgwqAgMMKgIFsgKyBdwqDCoCByb290X2RyaXZlcsKgwqDC
-oMKgwqDCoMKgwqDCoMKgIHJvb3RfZHJpdmVyCiDCoGZpcm13YXJlwqDCoMKgwqDCoCAwwqAgW8Kg
-wqAgXcKgwqAgcHNjacKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfC0tIHBzY2kK
-IMKgc3lzcmVzZXTCoMKgwqDCoMKgIDDCoCBbwqDCoCBdwqDCoCBwc2NpLXN5c3Jlc2V0wqDCoMKg
-wqDCoMKgwqDCoCB8wqDCoCBgLS0gcHNjaS1zeXNyZXNldAogwqBpMmPCoMKgwqDCoMKgwqDCoMKg
-wqDCoCAxwqAgWyArIF3CoMKgIHN0bTMyZjctaTJjwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAg
-fC0tIGkyY0A1YzAwMjAwMAogwqBpMmNfZ2VuZXJpwqDCoMKgIDDCoCBbwqDCoCBdwqDCoCBzdHVz
-YjE2MHjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgfMKgwqAgfC0tIHN0dXNiMTYwMEAy
-OAogwqBwbWljwqDCoMKgwqDCoMKgwqDCoMKgIDDCoCBbICsgXcKgwqAgc3RwbWljMV9wbWljwqDC
-oMKgwqDCoMKgwqDCoMKgIHzCoMKgIHzCoMKgIGAtLSBzdHBtaWNAMzMKCi4uLgogwqBtaXNjwqDC
-oMKgwqDCoMKgwqDCoMKgIDDCoCBbwqDCoCBdwqDCoCBzdHBtaWMxLW52bcKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHzCoMKgIHzCoMKgwqDCoMKgwqAgfC0tIHN0cG1pYzEtbnZtCiDCoHN5c3Jlc2V0wqDC
-oMKgwqDCoCAxwqAgW8KgwqAgXcKgwqAgc3RwbWljMS1zeXNyZXNldMKgwqDCoMKgwqAgfMKgwqAg
-fMKgwqDCoMKgwqDCoCBgLS0gCnN0cG1pYzEtc3lzcmVzZXQKCgpGb3IgbWUsIHRoZSBQU0NJIGNh
-biBiZSB1c2VkIGluIHRoZSBzeXNyZXNldF93YWxrKCkgd2l0aG91dCBpc3N1ZSBvbiBJMkMgCmRl
-dmljZXMKCm1hbmFnZWQgaW4gc2VjdXJlIHdvcmxkIG9yIGluIG5vbiBzZWN1cmUgd29ybGQKCih0
-ZXN0ZWQgb24gU1RNaWNyb2VsZWN0cm9uaWNzIGJvYXJkcyB3aXRoIHNldmVyYWwgSTJDIGRldmlj
-ZQoKIMKgID0gU1RQTUlDLCBTVFVTQjE2MDAsIFNUTUZYLCB0b3VjaHNjcmVlbiwgcGFuZWwuLi4p
-LgoKCkJ1dCB3ZSBkb24ndCB0ZXN0IEkyQyBkZXZpY2UgdXNlZCBieSBib290aCB3b3JsZHMuCgoK
-Pj4gRGVhY3RpdmF0ZSBDT05GSUdfU1lTUkVTRVRfUFNDSSBvbmx5IHByZXZlbnQgc29mdCByZXNl
-dCBzdXBwb3J0Cj4+IHdpdGggdGhlIGNvbW1hbmQgcmVzZXQgb3IgYWZ0ZXIgY3Jhc2guCj4gQWxz
-byBBRkFJQ1MsIHRoZSBrZXJuZWwgb25seSB1c2VzIFNDTUkgZm9yIHJlc2V0ICh3aGljaCBwcm9i
-YWJseSBleHBsYWlucyB3aHkKPiBPUC1URUUgY29udHJvbGxlZCBJMkMgZGV2aWNlcyBzdGlsbCB3
-b3JrIHdoZW4gdGhlIGJvYXJkIHJlYm9vdHMpLgoKPj4KPj4gSSBkb24ndCB0aGluayBpdCBpcyB0
-aGUgY29ycmVjdCBzb2x1dGlvbiBpZiB0aGUgSTJDIGRldmljZXMgaXMgbm8gbG9uZ2VyIGFjY2Vz
-c2libGUKPj4gYWZ0ZXIgU1cgcmVzZXQuCj4+Cj4+IGkgdGhpbmsgdGhhdCBpdCBpcyBtb3JlIGEg
-YnVnIC8gcHJvYmxlbSBmb3IgcmVpbml0IG9mIEkyQyBpbiBTVE0zMiBkcml2ZXIKPj4gc28gdGhl
-IGNvbmZpZ3VyYXRpb24gaXMgbm90IGNvcnJlY3QgYWZ0ZXIgYSBTVyByZXNldC4KPiBOb3Qgc3Vy
-ZSBhYm91dCB0aGF0Li4uYnV0IGxldHMgZmluZCBvdXQgYmVjYXVzZSBzb21ldGhpbmcgaXMgd3Jv
-bmcgZm9yIHN1cmUuCj4KPj4KPj4gV2UgaGF2ZSBub3QgZGV0ZWN0IHRoaXMgaXNzdWUgZm9yIEky
-QyBjb21tdW5pY2F0aW9uIHRvIFBNSUMgYWZ0ZXIgU1cgcmVzZXQuCj4gdGhhdCBjb3VsZCBiZSBi
-ZWNhdXNlIHRoZSBQTUlDIHVzZXMgdGhlIG9ubHkgSTJDIG1vZGUgdGhhdCB3b3JrcyB3aXRoCj4g
-T1AtVEVFICh0aGUgbWFzdGVyIHRyYW5zZmVyIG1vZGUgaXMgYnJva2VuIHVudGlsIG15IGZpeGVz
-IGFyZSBtZXJnZWQuLi5ob3BlZnVsbHkKPiBzb29uKQo+Cj4+Cj4+IENhbiB5b3UgcHJvdmlkZSBt
-b3JlIGluZm9ybWF0aW9uIGZvciB5b3VyIHVzZS1jYXNlLCBmb3IgcmVwcm9kdWN0aW9uIG9uIG15
-Cj4+IHNpZGUKPj4KPj4gLSBwbGF0Zm9ybSB1c2VkIChTVE0zMk1QMTMgb3IgU1RNMzJNUDE1KSwg
-Ym9hcmQgdXNlZAo+IFNUTTMyTVAxNQo+Cj4+IC0gSTJDIGluc3RhbmNlIHVzZWQgYW5kIEkyQyBk
-ZXZpY2UgY29ubmVjdGVkCj4gTlhQU0UwNTAgLSBpMmMgaW4gbWFzdGVyIHhmZXIgbW9kZSwgYWNj
-ZXNzaWJsZSBvbmx5IGZyb20gT1AtVEVFCj4gaHR0cHM6Ly93d3cubnhwLmNvbS9kb2NzL2VuL2Rh
-dGEtc2hlZXQvU0UwNTAtREFUQVNIRUVULnBkZgoKClNvIGluIHlvdXIgdXNlLWNhc2UsIGlmIEkg
-Y29ycmVjdGx5IHVuZGVyc3Rvb2QKCgoxLyBJMkMgYWNjZXNzZXMgaW4gT1AtVEVFIHRvIE5YUFNF
-MDUwIGluIHNlY3VyZSB3b3JsZCA9IE9QLVRFRSBJMkMgZHJpdmVyCgoyLyBqdW1wIHRvIG5vcm1h
-bCB3b3JsZCBkdXJpbmcgYm9vdCA9IFUtQm9vdAoKMy8gSTJDIGFjY2Vzc2VzIGluIFUtQm9vdCAo
-b3Iga2VybmVsID8pIHRvIE5YUFNFMDUwIGluIG5vcm1hbCB3b3JsZCA9PiAKVS1Cb290IEkyQyBk
-cml2ZXIKCjQvIDw8PCByZXNldCByZXF1ZXN0IGluIFUtQm9vdCAhPyA+Pj4KCmEpIHdoZW4gUFND
-SSBzeXNyZXNldCBpcyB1c2VkICh3aXRob3V0IHlvdXIgcGF0Y2gpCgogwqDCoMKgwqDCoCA9PiBQ
-U0NJIHN0YWNrIG1hbmFnZSBpbiBPUC1URUUgcmVxdWVzdCBzeXN0ZW0gcmVzZXQuLi4uCgogwqDC
-oMKgIMKgwqDCoCDCoMKgwqAgPT4gcHNjaV9zeXN0ZW1fcmVzZXQoKQogwqAgwqDCoCDCoMKgwqDC
-oCDCoMKgwqAgPT4gwqAgaW9fd3JpdGUzMihyY2NfYmFzZSArIFJDQ19NUF9HUlNUQ1NFVFIsIApS
-Q0NfTVBfR1JTVENTRVRSX01QU1lTUlNUKTsKCgogwqDCoMKgwqDCoCA9PiBPUC1URUUgSTJDIGRy
-aXZlciBmYWlsZWQgYWZ0ZXIgcmVib290ICE/CgogwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpdCBp
-cyB0aGUgcHJvYmxlbQoKCmIpIHdoZW4gYW4gb3RoZXIgc3lzcmVzZXQgaXMgdXNlZCwgU1RQTUlD
-MSA/CgogwqDCoMKgwqAgPT4gT1AtVEVFIEkyQyBkcml2ZXIgb2sgYWZ0ZXIgcmVib290CgogwqDC
-oCDCoCDCoCDCoMKgwqAgSSBhc3N1bWVkIHRoYXQgaGVyZSB0aGF0IFNUUE1JQzEgaXMgdXNlZCwg
-aXQgaXMgdGhlIG9ubHkgCm90aGVyIHN5c3Jlc2V0IHN1cHBvcnRlZAoKIMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHNvIGl0IGlzIGEgY29sZCBib290IGhhcyB0aGUgU1RNMzJNUDE1eCBzdXBwbHkgaXMg
-c2h1dC1kb3duCgoKc28gbXkgYW5hbHlzaXM6CgogwqDCoMKgIHlvdSBoYXZlIGEgSTJDIGlzc3Vl
-IHdoZW4gdGhlIHNhbWUgSTJDIGluc3RhbmNlIGlzIHVzZWQgaW4gT1AtVEVFIAphbmQgaW4gbm9y
-bWFsIHdvcmxkCgogwqDCoMKgIGFmdGVyIGEgYXBwbGljYXRpb24gLyBzeXN0ZW0gcmVzZXQgZ2Vu
-ZXJhdGVkIGJ5IApSQ0NfTVBfR1JTVENTRVRSLk1QU1lTUlNUCgogwqDCoMKgIHRoZSBJMkMgYnVz
-IHRoYXQgeW91IGFyZSB1c2luZyBmb3IgTlhQU0UwNTAgaXMgbm90IGNvcnJlY3RseSAKcmUtaW5p
-dGlhbGl6ZWQgYW5kIGNvbW11bmljYXRpb24gZmFpbGVkCgoKQXQgdGhpcyBwb2ludCBJIGRvbid0
-IHVuZGVyc3Rvb2QgdGhlIHJvb3QgY2F1c2Ugb2YgdGhlIGlzc3VlLAoKYXMgYWxsIHRoZSBJMkMg
-aW5zdGFuY2VzIChpbiBtYXN0ZXIgbW9kZSkgYXJlIHJlc2V0ZWQgaW4gU1RNMzJNUDE1IE1QVSAK
-YWZ0ZXIgYSBzeXN0ZW0gcmVzZXQKCihpbmNsdWRpbmcgY2xvY2sgYW5kIHBpbmNvbnRyb2wgY29u
-ZmlndXJhdGlvbikgYW5kIHRoZSBpbml0IG9mIHRoZSBJMkMgCklQIGlzIGRvbmUgYWdhaW4KCmlu
-IE9QLVRFRSBhZnRlciBhIHN5c3RlbSByZXNldC4KCgpTbyBmb3IgdGhlIE9QLVRFRSBJMkMgZHJp
-dmVyIHRoZSBjb2xkIGJvdCBhbmQgYm9vdCBhZnRlciBzeXN0ZW0gcmVzZXQgCmhhdmUgbm8gZGlm
-ZmVyZW5jZQoKKHRoZSBJMkMgSVAgcmVnaXN0ZXJzIGFuZCBpbnRlcm5hbCBzdGF0ZSBhcmUgcmVz
-ZXRlZCkuCgoKSSBzZWUgb25seSBvbmUgcmVhc29uIHRvIGhhdmUgY29tbXVuaWNhdGlvbiBpc3N1
-ZToKCiDCoCB0aGUgSTJDIGJ1cyBpcyBmcm96ZW4gYnkgYSBJMkMgZGV2aWNlIG9uIHRoaXMgYnVz
-IChOWFBTRTA1MCwgLi4uKQoKClBlcmhhcHMgdGhlIEkyQyBkZXZpY2UgTlhQU0UwNTAgaXMgbm90
-IHJlaW5pdGlhbGl6ZWQgb24gU1RNMzJNUDE1eCAKc3lzdGVtIHJlc2V0Cgooc2VlIGFwcF9yc3Qg
-b3IgbnJlc2V0IGluIHJlZmVyZW5jZSBtYW51ZWwpLMKgIHRoZSBNUFUgcmVzZXQgc2lnbmFsIGlz
-IApyZWFsbHkgcHJvcGFnYXRlZCB0bwoKZWFjaCBkZXZpY2Ugb24gdGhlIEkyQyBidXMgaW4geW91
-IEhXIGRlc2lnbiA/LgoKCkZvciBtZSBubyBtb3JlIHVzaW5nIFBTQ0kgc3lyZXNldCBkcml2ZXIg
-aW4gVS1Cb290IG9ubHkgbWFzayB0aGUgaXNzdWUgCm9uIEkyQyBidXM6Cgp0aGF0IGF2b2lkcyB0
-byBoYXZlIGEgV0FSTSBSRVNFVCBwZXJmb3JtZWQgd2l0aCBSQ0MgYXBwbGljYXRpb24gcmVzZXQg
-CmRvbmUgaW4gT1AtVEVFIFBTQ0kgc3RhY2sKCmFuZCByZXBsYWNlZCBpdCBieSBhIFNUUE1JQzEg
-cmVzZXQuCgoKRm9yIFNUTWljcm9lbGVjdHJvbmljcyBib2FyZCwgdGhlIFNUUE1JQzEgYWNjZXNz
-IGNhbiBiZSBzZWN1cmVkIChvbmx5IAphY2Nlc3NpYmxlIGJ5IE9QLVRFRSkKCnRoZW4gdGhlIFBT
-Q0kgc3lzcmVzZXQgaXMgdGhlIG9ubHkgLyB0aGUgbWFpbiAvIHByZWZlcnJlZCBzdXBwb3J0ZWQg
-CnN5c3Jlc2V0IGZvciBub24tc2VjdXJlIChVLUJvb3Qgb3IgTGludXgpLAoKVGhpcyBvcHRpb24g
-c2hvdWxkIGtlZXAgaW4gdGhlIFNUTWljcm9lbGVjdHJvbmljcyBkZWZjb25maWdzLCB1c2VkIHdp
-dGggCnRoZSBTVE1pY3JvZWxlY3Ryb25pY3MgZGV2aWNlIHRyZWUuCgoKYnV0IHlvdSBjYW4gY3Jl
-YXRlIHlvdXIgZGVmY29uZmlnIGZvciB5b3VyIGJvYXJkIGlmIHlvdSByZWFsbHkgZGVhY3RpdmV0
-IGl0LgoKCm9yIHlvdSBjYW4gbW9kaWZ5IHRoZSBkZXZpY2UgdHJlZSBmb3IgeW91ciBib2FyZDoK
-CgppbiBrZXJuZWwgRFQgZmlsZSA9ID0gLi9hcmNoL2FybS9kdHMvc3RtMzJtcDE1N2MtPHlvdWJv
-YXJkPi5kdHMKCm9yIGluIGFkZG9uIGZpbGUgPSAuL2FyY2gvYXJtL2R0cy9zdG0zMm1wMTU3Yy08
-eW91Ym9hcmQ+LXUtYm9vdC5kdHNpCgoKb3B0aW9uIDEgPT4gZGVncmFkZSBQU0NJIHN1cHBvcnQg
-dG8gMC4xIHRvIGRlYWN0aXZhdGUgdGhlIHN5c3Jlc2V0IHN1cHBvcnQKCi8gewogwqDCoMKgIHBz
-Y2kgewogwqDCoCDCoMKgwqDCoCBjb21wYXRpYmxlID0gImFybSxwc2NpLTAuMSI7CiDCoMKgIMKg
-fTsKCiDCoCB9OwoKCm9wdGlvbiAyID0+IGRlYWN0aXZhdGUgdGhlIFBTQ0kgc3VwcG9ydCAoaW5j
-bHVkaW5nIHRoZSBwb3dlci1vZmYgc3VwcG9ydCkKCgovIHsKCiDCoMKgwqAgL2RlbGV0ZS1ub2Rl
-LyBwc2NpOwoKIMKgIH07CgoKCj4+IC0gdmVyc2lvbiBvZiBURi1BIC8gT1AtVEVFIHVzZWQKPiBP
-UC1URUU6IDMuMTgKPiBURi1BOiAyLjcuMAo+Cj4+Cj4+IFBhdHJpY2sKPj4KPj4KClBhdHJpY2sK
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0
-bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29t
-Cmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vi
-b290LXN0bTMyCg==
+
+--===============3921507184678126571==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="P4FumoV6cQve47oF"
+Content-Disposition: inline
+
+
+--P4FumoV6cQve47oF
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Sep 08, 2022 at 10:03:34AM +0200, Patrick DELAUNAY wrote:
+
+> Hi Tom,
+>=20
+> Please pull the STM32 related fixes for u-boot/master, v2022.10:
+> u-boot-stm32-20220907
+>=20
+> - simplify the STM32MP15x package parsing code
+> - remove test on CONFIG_DM_REGULATOR in stm32mp1 board
+> =A0 and enable CONFIG_DM_REGULATOR for stm32f769-disco
+> - handle ck_usbo_48m clock provided by USBPHYC to fix the command 'usb
+> start'
+> =A0 after alignment with Linux kernel v5.19 DT (clocks =3D <&usbphyc>)
+> - Fix SYS_HZ_CLOCK value for stih410-b2260 board
+> - Switch STMM32MP15x DHSOM to FMC2 EBI driver
+> - Remove hwlocks from pinctrl in STM32MP15x to avoid issue with kernel
+>=20
+> CI status:
+> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/13383
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master
+> https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> u-boot-stm32-20220907
+>=20
+>=20
+> The following changes since commit 51601397fcbb13e6dc2e4223408230c82955a6=
+01:
+>=20
+> =A0 Prepare v2022.10-rc4 (2022-09-05 20:32:56 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> tags/u-boot-stm32-20220907
+>=20
+> for you to fetch changes up to d6ff3c9f04f744345fe77a3d82c5b5e0c07c456a:
+>=20
+> =A0 ARM: dts: stm32mp15: remove hwlocks from pinctrl (2022-09-06 15:40:14
+> +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--P4FumoV6cQve47oF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMaW7sACgkQFHw5/5Y0
+tyx+5AwAmZCQpS5R5YDznE9wOSha1g3LtKQMGWvCAv1Ym90rBUut/3P3wE5rBxKx
+BRGbd9t3zLdSLX0dQ5gvpv+N/h53G7d1FiQwvc031k8t9wkLaWrk2p3QKB10yZqU
+RVwgWHqHPUyR5ac5M1Apz+YhHYVUiwmt0QBKaeF6Fg+ynMnqay2hnLTmROA45gYB
++9n0Z562m8K9MMSPU2qQ8rVvf4+inO9xMlI5YDYohG3ZakWLaYOaIrhJzLs6JmFB
+YC2PrfX4cchhTXRAjrnVtyu8bKbKcsUisuBweLVH9+Z9bRC+T0O2LbUDq+rwIFLG
+4H0X7nmlobLyrDaOiyZuVq1qfu6A+ml2UUG334uR65BKl6ISZN231DvG/okESQEo
+Z71KmQDBCNqHe44apZyOzySZbii3RalsgiWkaaKwIsdWN4GFBvDF3uG26Ao/Xsz4
+vB89/lOoALbAC1KXKnDvA1QdT0XWE7Y1F2yJKq2ck5sDwGoBo7viZ69FBkXQX8d1
+7N+GpiJk
+=azBq
+-----END PGP SIGNATURE-----
+
+--P4FumoV6cQve47oF--
+
+--===============3921507184678126571==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3921507184678126571==--

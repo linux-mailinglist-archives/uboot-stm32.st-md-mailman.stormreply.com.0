@@ -2,67 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6075C5B1768
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Sep 2022 10:44:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4167F5B1632
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Sep 2022 10:03:51 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0917AC63328;
-	Thu,  8 Sep 2022 08:44:21 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 005CCC63327;
+	Thu,  8 Sep 2022 08:03:50 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7EDE7C035BC
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFBF4C63325
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Sep 2022 09:20:09 +0000 (UTC)
+ Thu,  8 Sep 2022 08:03:48 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2879EQlO031642;
- Wed, 7 Sep 2022 11:20:07 +0200
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 2887SXlE031613;
+ Thu, 8 Sep 2022 10:03:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=date : from : to :
- cc : subject : message-id : references : mime-version : content-type :
- in-reply-to; s=selector1; bh=Z4zrY6oUicmqw2ti6GbS2pKSONsH20X/ID4/9OIKCDM=;
- b=mtAwgLxWvRJzmnZM4B7mXonAQFl8tNfJDaSWSpj3+Ik3sVeF0w6xBFAopWuSajdXQCNW
- vw84rYA+pJpC6Nv2+fFFY7YVOBNveJEh2E4wpAzCrkkx0LTTzEIugMDRDpF7RtOFmTnn
- pUyc0yXcMGjNA975iWpR7yTujHOg1em4O7N0cm4kmUredFCVB1+qginxUmlodISHmLeA
- pFoPAi4uv07FLKjOWj8tCBSOmb1fbkKAEbPvNEmfsyi0Zhf0wJJAECkze5dhKmYrp7eG
- ChPnadamIKtJVXCTUHWdESnPXc2MdWSFhrReZaH6SQYwUh2TaWNWYVqJWfD3105vJRSB AA== 
+ h=message-id : date :
+ mime-version : to : cc : from : subject : content-type :
+ content-transfer-encoding; s=selector1;
+ bh=9AaHR1Vuc8xZnWW7XEy+T/9fthfQRDMhX0tFRwdyX6w=;
+ b=JF4fRFQudoFEXYllnSibSOB9v4rTRjYi08e9Chk/OxFj4aIZriNQnX5YHmWjjivCAVU9
+ 7Bb6GWL/GvGEkLQ44JiwpgxWeBu3r487EfGtY2PaAlgf9QBOybjMuoYHD+nPrx+ctzkA
+ eruA+P1NaKq/z5Zh/Kun/8nX87eFNZUX6z4Wze07tvKF6d4NYG96gEPUpduYqmk0rlib
+ /pm5WvGaqnVACWN+6bgAvpzffigMuLZO3kda8c5yfgk3g4zsB033GY+QqUN9vwTLr61r
+ vHACW3D3y5boraIKaGiUNjCVx1GhBFy077/dWeiHQQ7Vd4Sb+0B85FU/ssh7CPhNmgah LQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jergb01p7-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jergb6y1w-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 07 Sep 2022 11:20:07 +0200
+ Thu, 08 Sep 2022 10:03:39 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B502610002A;
- Wed,  7 Sep 2022 11:20:06 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9B5DD2194FF;
- Wed,  7 Sep 2022 11:20:06 +0200 (CEST)
-Received: from gnbcxd0016.gnb.st.com (10.75.127.45) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.7; Wed, 7 Sep 2022
- 11:20:06 +0200
-Date: Wed, 7 Sep 2022 11:20:00 +0200
-From: Alain Volmat <alain.volmat@foss.st.com>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Message-ID: <20220907092000.GA1713256@gnbcxd0016.gnb.st.com>
-References: <20220815145211.31342-1-jorge@foundries.io>
- <20220815145211.31342-2-jorge@foundries.io>
- <80f7f6f4-22bf-7ece-2a6e-0ae34c493cd9@foss.st.com>
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 83A1F100034;
+ Thu,  8 Sep 2022 10:03:38 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 656212194C2;
+ Thu,  8 Sep 2022 10:03:38 +0200 (CEST)
+Received: from [10.48.0.213] (10.75.127.120) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Thu, 8 Sep
+ 2022 10:03:35 +0200
+Message-ID: <80f5c40e-4915-2291-cb70-130c1fbe050b@foss.st.com>
+Date: Thu, 8 Sep 2022 10:03:34 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <80f7f6f4-22bf-7ece-2a6e-0ae34c493cd9@foss.st.com>
-X-Disclaimer: ce message est personnel / this message is private
-X-Originating-IP: [10.75.127.45]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
- (10.75.129.69)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+X-Originating-IP: [10.75.127.120]
+X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-07_04,2022-09-06_02,2022-06-22_01
-X-Mailman-Approved-At: Thu, 08 Sep 2022 08:44:19 +0000
-Cc: u-boot@lists.denx.de, oleksandr.suvorov@foundries.io,
- uboot-stm32@st-md-mailman.stormreply.com, patrick.delaunay@foss.st.com,
- hs@denx.de
-Subject: Re: [Uboot-stm32] [PATCHv2 2/2] i2c: stm32f7: do not set the STOP
- condition on error
+ definitions=2022-09-08_06,2022-09-07_02,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, Johann Neuhauser <jneuhauser@dh-electronics.com>
+Subject: [Uboot-stm32] [PULL] Pull request for u-boot master / v2022.10 =
+ u-boot-stm32-20220907
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,78 +70,83 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-I confirm that a fix is necessary regarding this setting of the stop
-condition.  As a matter of fact, the controller is already sending
-the stop condition in case of NACK so there is no need to send the
-stop condition.
-However, this fix is not enough since the nack could be detected
-few lines above 
-
-	if (status & (STM32_I2C_ISR_NACKF | STM32_I2C_ISR_ERRORS))
-		break;
-
-and in this case the current check would not catch it.
-
-I propose to set the STOP condition upon handling of the transfer
-complete.
-
-I've put this fix within a small 3 patches series that I'm going to
-send, could you check it to confirm this fixes the issue ?
-
-Regards,
-Alain
-
-On Thu, Aug 25, 2022 at 03:36:36PM +0200, Patrice CHOTARD wrote:
-> +Alain (with the correct email address ;-))
-> 
-> Alain, can you have a look a this patch and give your feedback on it.
-> 
-> On my side i tested it on stm32mp157c-ev1 and stm32mp157c-dk2, i didn't see any regression
-> but i prefer to get expert feedback 
-> 
-> Thanks
-> Patrice
-> 
-> On 8/15/22 16:52, Jorge Ramirez-Ortiz wrote:
-> > Sending the stop condition without waiting for transfer complete
-> > has been found to lock the bus (BUSY) when NACKF is raised.
-> > 
-> > Tested accessing the NXP SE05X I2C device.
-> > https://www.nxp.com/docs/en/application-note/AN12399.pdf
-> > 
-> > Signed-off-by: Jorge Ramirez-Ortiz <jorge@foundries.io>
-> > Reviewed-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-> > ---
-> >  drivers/i2c/stm32f7_i2c.c | 8 +++++---
-> >  1 file changed, 5 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
-> > index 3a727e68ac..14827e5cec 100644
-> > --- a/drivers/i2c/stm32f7_i2c.c
-> > +++ b/drivers/i2c/stm32f7_i2c.c
-> > @@ -485,9 +485,11 @@ static int stm32_i2c_message_xfer(struct stm32_i2c_priv *i2c_priv,
-> >  		}
-> >  	}
-> >  
-> > -	/* End of transfer, send stop condition */
-> > -	mask = STM32_I2C_CR2_STOP;
-> > -	setbits_le32(&regs->cr2, mask);
-> > +	if (!ret) {
-> > +		/* End of transfer, send stop condition */
-> > +		mask = STM32_I2C_CR2_STOP;
-> > +		setbits_le32(&regs->cr2, mask);
-> > +	}
-> >  
-> >  	return stm32_i2c_check_end_of_message(i2c_priv);
-> >  }
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgVG9tLAoKUGxlYXNlIHB1bGwgdGhlIFNUTTMyIHJlbGF0ZWQgZml4ZXMgZm9yIHUtYm9vdC9t
+YXN0ZXIsIHYyMDIyLjEwOiAKdS1ib290LXN0bTMyLTIwMjIwOTA3CgotIHNpbXBsaWZ5IHRoZSBT
+VE0zMk1QMTV4IHBhY2thZ2UgcGFyc2luZyBjb2RlCi0gcmVtb3ZlIHRlc3Qgb24gQ09ORklHX0RN
+X1JFR1VMQVRPUiBpbiBzdG0zMm1wMSBib2FyZAogwqAgYW5kIGVuYWJsZSBDT05GSUdfRE1fUkVH
+VUxBVE9SIGZvciBzdG0zMmY3NjktZGlzY28KLSBoYW5kbGUgY2tfdXNib180OG0gY2xvY2sgcHJv
+dmlkZWQgYnkgVVNCUEhZQyB0byBmaXggdGhlIGNvbW1hbmQgJ3VzYiAKc3RhcnQnCiDCoCBhZnRl
+ciBhbGlnbm1lbnQgd2l0aCBMaW51eCBrZXJuZWwgdjUuMTkgRFQgKGNsb2NrcyA9IDwmdXNicGh5
+Yz4pCi0gRml4IFNZU19IWl9DTE9DSyB2YWx1ZSBmb3Igc3RpaDQxMC1iMjI2MCBib2FyZAotIFN3
+aXRjaCBTVE1NMzJNUDE1eCBESFNPTSB0byBGTUMyIEVCSSBkcml2ZXIKLSBSZW1vdmUgaHdsb2Nr
+cyBmcm9tIHBpbmN0cmwgaW4gU1RNMzJNUDE1eCB0byBhdm9pZCBpc3N1ZSB3aXRoIGtlcm5lbAoK
+Q0kgc3RhdHVzOiAKaHR0cHM6Ly9zb3VyY2UuZGVueC5kZS91LWJvb3QvY3VzdG9kaWFucy91LWJv
+b3Qtc3RtLy0vcGlwZWxpbmVzLzEzMzgzCgpUaGFua3MsClBhdHJpY2sKCmdpdCByZXF1ZXN0LXB1
+bGwgb3JpZ2luL21hc3RlciAKaHR0cHM6Ly9zb3VyY2UuZGVueC5kZS91LWJvb3QvY3VzdG9kaWFu
+cy91LWJvb3Qtc3RtLmdpdC8gCnUtYm9vdC1zdG0zMi0yMDIyMDkwNwoKClRoZSBmb2xsb3dpbmcg
+Y2hhbmdlcyBzaW5jZSBjb21taXQgNTE2MDEzOTdmY2JiMTNlNmRjMmU0MjIzNDA4MjMwYzgyOTU1
+YTYwMToKCiDCoCBQcmVwYXJlIHYyMDIyLjEwLXJjNCAoMjAyMi0wOS0wNSAyMDozMjo1NiAtMDQw
+MCkKCmFyZSBhdmFpbGFibGUgaW4gdGhlIEdpdCByZXBvc2l0b3J5IGF0OgoKIMKgIGh0dHBzOi8v
+c291cmNlLmRlbnguZGUvdS1ib290L2N1c3RvZGlhbnMvdS1ib290LXN0bS5naXQvIAp0YWdzL3Ut
+Ym9vdC1zdG0zMi0yMDIyMDkwNwoKZm9yIHlvdSB0byBmZXRjaCBjaGFuZ2VzIHVwIHRvIGQ2ZmYz
+YzlmMDRmNzQ0MzQ1ZmU3N2EzZDgyYzViNWUwYzA3YzQ1NmE6CgogwqAgQVJNOiBkdHM6IHN0bTMy
+bXAxNTogcmVtb3ZlIGh3bG9ja3MgZnJvbSBwaW5jdHJsICgyMDIyLTA5LTA2IDE1OjQwOjE0IAor
+MDIwMCkKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0KLSBzaW1wbGlmeSB0aGUgU1RNMzJNUDE1eCBwYWNrYWdlIHBhcnNpbmcg
+Y29kZQotIHJlbW92ZSB0ZXN0IG9uIENPTkZJR19ETV9SRUdVTEFUT1IgaW4gc3RtMzJtcDEgYm9h
+cmQKIMKgIGFuZCBlbmFibGUgQ09ORklHX0RNX1JFR1VMQVRPUiBmb3Igc3RtMzJmNzY5LWRpc2Nv
+Ci0gaGFuZGxlIGNrX3VzYm9fNDhtIGNsb2NrIHByb3ZpZGVkIGJ5IFVTQlBIWUMgdG8gZml4IHRo
+ZSBjb21tYW5kICd1c2IgCnN0YXJ0JwogwqAgYWZ0ZXIgYWxpZ25tZW50IHdpdGggTGludXgga2Vy
+bmVsIHY1LjE5IERUIChjbG9ja3MgPSA8JnVzYnBoeWM+KQotIEZpeCBTWVNfSFpfQ0xPQ0sgdmFs
+dWUgZm9yIHN0aWg0MTAtYjIyNjAgYm9hcmQKLSBTd2l0Y2ggU1RNTTMyTVAxNXggREhTT00gdG8g
+Rk1DMiBFQkkgZHJpdmVyCi0gUmVtb3ZlIGh3bG9ja3MgZnJvbSBwaW5jdHJsIGluIFNUTTMyTVAx
+NXggdG8gYXZvaWQgaXNzdWUgd2l0aCBrZXJuZWwKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KRXRpZW5uZSBDYXJyaWVyZSAo
+MSk6CiDCoMKgwqDCoMKgIEFSTTogZHRzOiBzdG0zMm1wMTU6IHJlbW92ZSBod2xvY2tzIGZyb20g
+cGluY3RybAoKTWFyZWsgVmFzdXQgKDEpOgogwqDCoMKgwqDCoCBBUk06IHN0bTMyOiBTd2l0Y2gg
+REhTT00gdG8gRk1DMiBFQkkgZHJpdmVyCgpQYXRyaWNlIENob3RhcmQgKDMpOgogwqDCoMKgwqDC
+oCBBUk06IGR0czogc3RtMzI6IEZpeCBkaXNwbGF5LXRpbWluZ3Mgc2V0dGluZ3MgZm9yIHN0bTMy
+Zjc0Ni1kaXNjbwogwqDCoMKgwqDCoCBjb25maWdzOiBzdG0zMjogRW5hYmxlIENPTkZJR19ETV9S
+RUdVTEFUT1IgZm9yIHN0bTMyZjc2OS1kaXNjbwogwqDCoMKgwqDCoCBjb25maWdzOiBzdGloNDEw
+LWIyMjYwOiBGaXggU1lTX0haX0NMT0NLIHZhbHVlCgpQYXRyaWNrIERlbGF1bmF5ICg1KToKIMKg
+wqDCoMKgwqAgc3RtMzJtcDogc2ltcGxpZnkgdGhlIFNUTTMyTVAxNXggcGFja2FnZSBwYXJzaW5n
+IGNvZGUKIMKgwqDCoMKgwqAgYm9hcmQ6IHN0bTMybXAxOiByZW1vdmUgdGVzdCBvbiBDT05GSUdf
+RE1fUkVHVUxBVE9SCiDCoMKgwqDCoMKgIHBoeTogc3RtMzItdXNicGh5YzogYWRkIGNvdW50ZXIg
+b2YgUExMIGNvbnN1bWVyCiDCoMKgwqDCoMKgIHBoeTogc3RtMzItdXNicGh5YzogdXNicGh5YyBp
+cyBhIGNsb2NrIHByb3ZpZGVyIG9mIGNrX3VzYm9fNDhtIGNsb2NrCiDCoMKgwqDCoMKgIGNsazog
+c3RtMzJtcDogaGFuZGxlIGNrX3VzYm9fNDhtIGNsb2NrIHByb3ZpZGVkIGJ5IFVTQlBIWUMKCiDC
+oGFyY2gvYXJtL2R0cy9zdG0zMmY3NDYtZGlzY28tdS1ib290LmR0c2nCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHzCoMKgIDIgKy0KIMKgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTEuZHRzacKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAg
+MiAtLQogwqBhcmNoL2FybS9kdHMvc3RtMzJtcDE1eHgtZGhjb20tcGljb2l0eC11LWJvb3QuZHRz
+acKgwqDCoMKgIHzCoMKgIDggLS0tLS0KIMKgYXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRoY29t
+LXUtYm9vdC5kdHNpwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxNCAtLS0tLS0tLS0KIMKg
+YXJjaC9hcm0vZHRzL3N0bTMybXAxNXh4LWRoY29yLWRyYy1jb21wYWN0LXUtYm9vdC5kdHNpIHzC
+oCAxNiAtLS0tLS0tLS0tCiDCoGFyY2gvYXJtL21hY2gtc3RtMzJtcC9zdG0zMm1wMTV4LmPCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxNSArKy0tLS0tLS0tCiDC
+oGJvYXJkL2RoZWxlY3Ryb25pY3MvZGhfc3RtMzJtcDEvYm9hcmQuY8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCB8wqAgNTIgCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiDC
+oGJvYXJkL3N0L3N0bTMybXAxL3N0bTMybXAxLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDggKystLS0KIMKgY29uZmlncy9zdG0zMmY3
+NjktZGlzY29fZGVmY29uZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHzCoMKgIDEgKwogwqBjb25maWdzL3N0bTMyZjc2OS1kaXNjb19zcGxfZGVmY29uZmlnwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAxICsKIMKgY29uZmlncy9zdG0z
+Mm1wMTVfZGhjb21fYmFzaWNfZGVmY29uZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHzCoMKgIDEgKwogwqBjb25maWdzL3N0bTMybXAxNV9kaGNvcl9iYXNpY19kZWZjb25maWfCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgMSArCiDCoGRyaXZlcnMvY2xrL3N0bTMy
+L2Nsay1zdG0zMm1wMS5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgfMKgIDM1IAorKysrKysrKysrKystLS0tLS0tLS0tCiDCoGRyaXZlcnMvcGh5L3BoeS1zdG0z
+Mi11c2JwaHljLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHwgMTU1IAorKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tCiDCoGluY2x1ZGUv
+Y29uZmlncy9zdGloNDEwLWIyMjYwLmjCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHzCoMKgIDIgKy0KIMKgMTUgZmlsZXMgY2hhbmdlZCwgMTU4IGluc2VydGlv
+bnMoKyksIDE1NSBkZWxldGlvbnMoLSkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1t
+ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5
+LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

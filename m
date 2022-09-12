@@ -2,66 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F8CE5B5B5A
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Sep 2022 15:38:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DC0D5B5D6D
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Sep 2022 17:41:06 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A207C04003;
-	Mon, 12 Sep 2022 13:38:57 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8974DC04004;
+	Mon, 12 Sep 2022 15:41:05 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1821C035BE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4FAA4C04003
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 Sep 2022 13:38:55 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28C9kJI4027174;
- Mon, 12 Sep 2022 15:38:51 +0200
+ Mon, 12 Sep 2022 15:41:04 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28CDuxPb018008;
+ Mon, 12 Sep 2022 17:41:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=87wYqJN/DORYRKn+5AmY6BAvYdvmSvfWVKEsUn3r32c=;
- b=EKugZBiSN9yoCosGqmavrVuJrRrNp8FK/sVT1Gy7G4vSajEaak20u4DNtoDUjV7NXSvD
- 1vX/HNmfHBhxATraGRW7wY4Rm6FOVQQRwghh7sftdflnUjZay/8XMuoliApYrj9zfsRI
- BOkrmC3rEsc3pINx3K5dFmRMStMPUl+qNR3k3z3eW4g4aWakfoHpWVF9qf94Bw18HGFT
- x/qzODAqXgNt5bEHLR7NLAEZ89hNtF/jjuzfMr08/9i0bfarUQ8eZ6pybybSBnweW4x0
- +pz6km9v5T1ccNdEd2EETou512XHou50AD50/BqT8WtkKh/M1/wG1MzB19qOb5aWT2uv JQ== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=DdgTXYOMSKTJUl9v0X7c8rF3KZ1hRrOOtL3tTHF6eck=;
+ b=OGnNHRo0q5FutRujuIbJGjNdPwdh+6Q7c4Krge/OXyIYLJerLFBzY5aeo4TE2fzJM7Rn
+ bo/GFLI9qkRyL9Fn8VYG/1fIDy+Q2rhJbqLxgse1zl7hIxsFF+RmzweDVUlxh+AB8lpe
+ a71qsfPqLVSTSdpFY+B+h2nJG2qtLfnH4bVe7uZyOdDLuHRZODjLzShgWOLPAyDfpIH5
+ /UiqyyN0nwtaCaWVkc0urWq7q+8nFQ8WzLZ3izVtIjeBaXQ54KO3FnDSZ/ez8GU3SKtE
+ ALWJFrXVQ4ueZOLnrEW7H5Ja6wCgyF4Xp/t7tu5Egaq5DorHYI8pL+bk4pM8jfB7CfcE tA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jgjttaytr-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jgjvjus6p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Sep 2022 15:38:50 +0200
+ Mon, 12 Sep 2022 17:41:03 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7236510002A;
- Mon, 12 Sep 2022 15:38:49 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7348B10002A;
+ Mon, 12 Sep 2022 17:41:02 +0200 (CEST)
 Received: from Webmail-eu.st.com (eqndag1node6.st.com [10.75.129.135])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6D77F2309E8;
- Mon, 12 Sep 2022 15:38:49 +0200 (CEST)
-Received: from [10.48.0.213] (10.75.127.49) by EQNDAG1NODE6.st.com
- (10.75.129.135) with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D8FE23BE08;
+ Mon, 12 Sep 2022 17:41:02 +0200 (CEST)
+Received: from localhost (10.75.127.49) by EQNDAG1NODE6.st.com (10.75.129.135)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Mon, 12 Sep
- 2022 15:37:47 +0200
-Message-ID: <29cf32ad-9e0c-c11b-abf5-e0d7f26126a6@foss.st.com>
-Date: Mon, 12 Sep 2022 15:37:46 +0200
+ 2022 17:40:58 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 12 Sep 2022 17:40:50 +0200
+Message-ID: <20220912174045.1.Iae28ab1a0be932b26f9cf8b17d870508efa88b79@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20220909114513.v2.1.I5eabf3f9fdbbaf763cd44e9c018cb5b74a0c65ac@changeid>
- <49a948fd-a392-6f30-f110-747ad3f3173b@denx.de>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <49a948fd-a392-6f30-f110-747ad3f3173b@denx.de>
 X-Originating-IP: [10.75.127.49]
 X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To EQNDAG1NODE6.st.com
  (10.75.129.135)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-12_08,2022-09-12_01,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] usb: hub: allow to increase
-	HUB_DEBOUNCE_TIMEOUT
+ definitions=2022-09-12_10,2022-09-12_02,2022-06-22_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Christophe Kerello <christophe.kerello@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] board: st: stm32mp1: use of correct
+	compatible string to add partitions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,106 +69,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiA5LzkvMjIgMTQ6MjQsIE1hcmVrIFZhc3V0IHdyb3RlOgo+IE9uIDkvOS8yMiAxMTo0
-NSwgUGF0cmljayBEZWxhdW5heSB3cm90ZToKPj4gQWRkIGEgbmV3IENPTkZJR19VU0JfSFVCX0RF
-Qk9VTkNFX1RJTUVPVVQgdG8gaW5jcmVhc2UgdGhlCj4+IEhVQl9ERUJPVU5DRV9USU1FT1VUIHZh
-bHVlLCBmb3IgZXhhbXBsZSB0byAycyBiZWNhdXNlIHNvbWUgdXNiIGRldmljZQo+PiBuZWVkcyBh
-cm91bmQgMS41cyBvciBtb3JlIHRvIG1ha2UgdGhlIGh1YiBwb3J0IHN0YXR1cyB0byBiZQo+PiBj
-b25uZWN0ZWQgc3RlYWRpbHkgYWZ0ZXIgYmVpbmcgcG93ZXJlZCBvZmYgYW5kIHBvd2VyZWQgb24u
-Cj4+Cj4+IFRoaXMgMnMgdmFsdWUgaXMgYWxpZ25lZCB3aXRoIExpbnV4IGRyaXZlciBhbmQgYXZv
-aWRzIHRvIGNvbmZpZ3VyZQo+PiAidXNiX3Bnb29kX2RlbGF5IiBhcyBhIHdvcmthcm91bmQgZm9y
-IGNvbm5lY3Rpb24gdGltZW91dCBvbgo+PiBzb21lIFVTQiBkZXZpY2U7IG5vcm1hbGx5IHRoZSBl
-bnYgdmFyaWFibGUgInVzYl9wZ29vZF9kZWxheSIgaXMgdXNlZAo+PiB0byBkZWxheSB0aGUgZmly
-c3QgcXVlcnkgYWZ0ZXIgcG93ZXIgT04gYW5kIHRodXMgdGhlIGRldmljZSBhbnN3ZXIsCj4+IGJ1
-dCB0aGlzIHZhcmlhYmxlIG5vdCB1c2VkIHRvIGluY3JlYXNlIHRoZSBjb25uZWN0aW9uIHRpbWVv
-dXQgZGVsYXkuCj4KPiBJIHJlYWxpemVkIHRoaXMgaGFzIG9uZSBwcm9ibGVtIC0tIHdoYXQgaGFw
-cGVucyBpZiB5b3UgaGF2ZSBtdWx0aXBsZSAKPiBVU0IgY29udHJvbGxlcnMgaW4geW91ciBzeXN0
-ZW0gPyBUaGUgYW5zd2VyIGlzLCBhbGwgb2YgdGhlbSBhcmUgCj4gYWZmZWN0ZWQgYnkgdGhlIGlu
-Y3JlYXNlZCBkZWxheSwgcG9zc2libHkgZXZlbiB0aG9zZSB3aGljaCBkbyBub3QgCj4gcmVxdWly
-ZSB0aGUgZXh0cmEgZGVsYXkuCj4KPiBXb3VsZCBpdCBiZSBwb3NzaWJsZSB0byBjb25maWd1cmUg
-dGhpcyBwZXItY29udHJvbGxlciAob3Igc2hvdWxkIHRoaXMgCj4gZXZlbiBiZSBwZXItZGV2aWNl
-PykgaW4gRFQgPyBJbiBmYWN0LCBJIHdvbmRlciB3aGV0aGVyIHRoaXMgaXMgbm90IAo+IGJlY29t
-aW5nIGEgVmJ1cyByZWd1bGF0b3IgcmFtcC11cCB0aW1lIGtpbmQgb2YgZGVsYXkgaGVyZSA/CgoK
-WWVzLCBidXQgSSBkb24ndCB0aGluaywgaXQgaXMgYmxvY2tpbmcuCgpUaGlzIHRpbWVvdXQgd2ls
-bCBiZSBjb21tb24gZm9yIGFsbCB0aGUgVVNCIEhVQiBpbiB0aGUgc3lzdGVtLCBhcyBpdCBpcyAK
-ZG9uZSBpbiBMaW51eCBrZXJuZWwuCgoKCkFuZCBJIGRvbid0IHRoaW5nIHRoZSBpc3N1ZSBpcyBs
-aW5rZWQgdG8gVkJVU8KgIHJlZ3VsYXRvciByYW1wdXAsIGJlY2F1c2UKCi0gd2l0aCBVU0IgYW5h
-bHlzZXIgd2UgY2hlY2sgdGhhdCB0aGUgYW5zd2VyIGZvciB0aGUgcHJvYmxlbWF0aWMga2V5IGFy
-ZSAKcmVhbGx5IHNsb3csCgogwqAgbm8gYW5zd2VyIGluIHRoZSAxcyBub3JtYWwgZGVsYXkKCi0g
-YW5kIGFueSBpc3N1ZSBvbiB2YnVzIGNhbiBiZSBoYW5kbGVkIGJ5IHF1ZXJ5X2RlbGF5ID0gcGdv
-b2QgZGVsYXkgPQoKIMKgwqAgdGhlIHBvd2VyIGlzIHN0YWJsaXplZCBiZWZvcmUgdGhlIGRldmlj
-ZXMgYXJlIHF1ZXJpZWQuCgogwqDCoCBCdXQgRm9yIG91ciB1c2UgY2FzZSwgaW5jcmVhc2luZyBw
-Z29vZCBkZWxheSBpcyBub3QgZW5vdWdodCB0aGUgCnByb2JsZW1hdGljCgogwqDCoCAobG93IGNv
-c3QgLyBwb29yIHF1YWxpdHkgLyBzbG93KSBVU0Iga2V5cy4KCgoKU28gdGhpcyBDT05GSUcgaXMg
-dXNlZCB0byBzdXBwb3J0IHNvbWUgc2xvdyBVU0IgZGV2aWNlcyBvbiBhbnkgVVNCIEhVQiwKCmFu
-ZCBpdCBpcyBub3QgYSB3b3JrYXJvdW5kIGZvciBIVUIgaXNzdWUuCgoKCkZvciBteSBwb2ludCBv
-ZiB2aWV3IDFzIGlzIGEgbGl0dGxlIHBlbmFsdHkgZm9yIHVzYiBzdGFydCB0byBzdXBwb3J0IApt
-b3JlIFVTQiBkZXZpY2VzIG9uIGFsbAoKdGhlIFVTQiBIVUIgb24gdGhlIHN5c3RlbSwgZXZlbiB3
-aGVuIHRoZSAxcyBkZWxheSBkZWZpbmVkIGJ5IHRoZSBzcGVjIGlzIApub3Qgc3VwcG9ydGVkLgoK
-CkZvciBrZXJuZWwgdGhpcyBkZWxheSBpcyBub3QgbWFuYWdlZCBieSB0aGUgZGV2aWNlIHRyZWUg
-YnV0IGhhcmRjb2RlZCBpbiAKdGhlIFVTQiBIVUIgZHJpdmVyCgpkcml2ZXJzL3VzYi9jb3JlL2h1
-Yi5jCgojZGVmaW5lIEhVQl9ERUJPVU5DRV9USU1FT1VUwqDCoMKgIDIwMDAKCi8qIFVTQiAyLjAg
-c3BlYywgNy4xLjcuMyAvIGZpZyA3LTI5OgoqCiogQmV0d2VlbiBjb25uZWN0IGRldGVjdGlvbiBh
-bmQgcmVzZXQgc2lnbmFsaW5nIHRoZXJlIG11c3QgYmUgYSBkZWxheQoqIG9mIDEwMG1zIGF0IGxl
-YXN0IGZvciBkZWJvdW5jZSBhbmQgcG93ZXItc2V0dGxpbmcuIFRoZSBjb3JyZXNwb25kaW5nCiog
-dGltZXIgc2hhbGwgcmVzdGFydCB3aGVuZXZlciB0aGUgZG93bnN0cmVhbSBwb3J0IGRldGVjdHMg
-YSBkaXNjb25uZWN0LgoqCiogQXBwYXJlbnRseSB0aGVyZSBhcmUgc29tZSBibHVldG9vdGggYW5k
-IGlyZGEtZG9uZ2xlcyBhbmQgYSBudW1iZXIgb2YKKiBsb3ctc3BlZWQgZGV2aWNlcyBmb3Igd2hp
-Y2ggdGhpcyBkZWJvdW5jZSBwZXJpb2QgbWF5IGxhc3Qgb3ZlciBhIHNlY29uZC4KKiBOb3QgY292
-ZXJlZCBieSB0aGUgc3BlYyAtIGJ1dCBlYXN5IHRvIGRlYWwgd2l0aC4KKgoqIFRoaXMgaW1wbGVt
-ZW50YXRpb24gdXNlcyBhIDE1MDBtcyB0b3RhbCBkZWJvdW5jZSB0aW1lb3V0OyBpZiB0aGUKKiBj
-b25uZWN0aW9uIGlzbid0IHN0YWJsZSBieSB0aGVuIGl0IHJldHVybnMgLUVUSU1FRE9VVC4gSXQg
-Y2hlY2tzCiogZXZlcnkgMjVtcyBmb3IgdHJhbnNpZW50IGRpc2Nvbm5lY3RzLiBXaGVuIHRoZSBw
-b3J0IHN0YXR1cyBoYXMgYmVlbgoqIHVuY2hhbmdlZCBmb3IgMTAwbXMgaXQgcmV0dXJucyB0aGUg
-cG9ydCBzdGF0dXMuCiovCmludGh1Yl9wb3J0X2RlYm91bmNlKHN0cnVjdHVzYl9odWIgKmh1Yiwg
-aW50cG9ydDEsIGJvb2xtdXN0X2JlX2Nvbm5lY3RlZCkKCgpGb3IgbWUgaW4gVS1Cb290IGRyaXZl
-ciB0aGlzIGRlYm91bmNlIGlzIG1hbmFnZWQgYXMgTGludXgga2VybmVsICh3aXRoIAoxcyA8PT4g
-MnMpCgo9PiBpbiBVLUJvb3QgdGhlIGNvbm5lY3RfdGltZW91dCBpcyB1c2VkIGluIHVzYl9zY2Fu
-X3BvcnQoKToKCjEtIHRoZSBwb3J0IGlzIHJlbW92ZWQgZnJvbSB0aGUgbGlzdCB3aGVuIHVzYl9n
-ZXRfcG9ydF9zdGF0dXMoKSByZXR1cm4gYSAKZXJyb3IKCiDCoMKgwqAgZHVyaW5nIHRoZSBjb25u
-ZWN0X3RpbWVvdXQKCjItIHRoZSBwb3J0IGlzIHJlbW92ZWQgd2hlbiB0aGUgd2hlbiB1c2JfZ2V0
-X3BvcnRfc3RhdHVzKCkgcmV0dXJuIG5vIGVycm9yCgogwqDCoMKgIGFuZCB0aGUgY29ubmVjdGlv
-biBjaGFuZ2UgaGFwcGVuZWQsCgoKPT4gbm8gaXNzdWUgd2hlbiB0aGUgUE9SVCBpcyBiZWNvbWUg
-cmVhZHkgYW5kIGNvbm5lY3RlZAoKIMKgwqDCoMKgwqAgdGhlIHVzYl9nZXRfcG9ydF9zdGF0dXMo
-KSB3aWxsIGJlIHJldHVybiBubyBlcnJvcgogwqDCoMKgwqDCoCBhbmQgdGhlIHBvcnRzdGF0dXMg
-KGFuc3dlciBvZiBVU0JfUkVRX0dFVF9TVEFUVVMpCgogwqDCoMKgwqDCoCBpcyBoYW5kbGVkIGJ5
-IHVzYl9zY2FuX3BvcnQoKQoKCj0+IHRoZSBwb3RlbnRpYWwgaXNzdWUgZm9yIHRpbWVvdXQgaXMg
-d2hlbiB0aGUgUE9SVCBpcyByZWFkeSAobm8gZXJyb3IgCmZvciB1c2JfZ2V0X3BvcnRfc3RhdHVz
-KCkpCiDCoMKgwqDCoMKgIGFuZCBub3QgY29ubmVjdGlvbiBkZXRlY3RlZCBwb3J0Y2hhbmdlID0g
-MCAvIHBvcnRzdGF0dXMgPSAwIGFmdGVyIApyZXNldAoKIMKgIMKgIMKgIGluIHVzYl9zY2FuX3Bv
-cnQoKToKCgogwqDCoMKgIC8qCiDCoMKgIMKgICogTm8gY29ubmVjdGlvbiBjaGFuZ2UgaGFwcGVu
-ZWQsIHdhaXQgYSBiaXQgbW9yZS4KIMKgwqAgwqAgKgogwqDCoCDCoCAqIEZvciBzb21lIHNpdHVh
-dGlvbiwgdGhlIGh1YiByZXBvcnRzIG5vIGNvbm5lY3Rpb24gY2hhbmdlIGJ1dCBhCiDCoMKgIMKg
-ICogZGV2aWNlIGlzIGNvbm5lY3RlZCB0byB0aGUgcG9ydCAoZWc6IENDUyBiaXQgaXMgc2V0IGJ1
-dCBDU0MgaXMgbm90CiDCoMKgIMKgICogaW4gdGhlIFBPUlRTQyByZWdpc3RlciBvZiBhIHJvb3Qg
-aHViKSwgaWdub3JlIHN1Y2ggY2FzZS4KIMKgwqAgwqAgKi8KIMKgwqAgwqBpZiAoIShwb3J0Y2hh
-bmdlICYgVVNCX1BPUlRfU1RBVF9DX0NPTk5FQ1RJT04pICYmCiDCoMKgIMKgwqDCoMKgICEocG9y
-dHN0YXR1cyAmIFVTQl9QT1JUX1NUQVRfQ09OTkVDVElPTikpIHsKIMKgwqAgwqDCoMKgwqAgaWYg
-KGdldF90aW1lcigwKSA+PSBodWItPmNvbm5lY3RfdGltZW91dCkgewogwqDCoCDCoMKgwqDCoCDC
-oMKgwqAgZGVidWcoImRldm51bT0lZCBwb3J0PSVkOiB0aW1lb3V0XG4iLAogwqDCoCDCoMKgwqDC
-oCDCoMKgwqAgwqDCoMKgwqDCoCBkZXYtPmRldm51bSwgaSArIDEpOwogwqDCoCDCoMKgwqDCoCDC
-oMKgwqAgLyogUmVtb3ZlIHRoaXMgZGV2aWNlIGZyb20gc2Nhbm5pbmcgbGlzdCAqLwogwqDCoCDC
-oMKgwqDCoCDCoMKgwqAgbGlzdF9kZWwoJnVzYl9zY2FuLT5saXN0KTsKIMKgwqAgwqDCoMKgwqAg
-wqDCoMKgIGZyZWUodXNiX3NjYW4pOwogwqDCoCDCoMKgwqDCoCDCoMKgwqAgcmV0dXJuIDA7CiDC
-oMKgIMKgwqDCoMKgIH0KIMKgwqAgwqDCoMKgwqAgcmV0dXJuIDA7CiDCoMKgIMKgfQoKCkkgdGhp
-bmsgdGhlICJjb25uZWN0X3RpbWVvdXQiIGNvdWxkIGJlIG5vdCB1c2VkIGhlcmUKCmFzIFRJTUVP
-VVQgZm9yICJObyBjb25uZWN0aW9uIGNoYW5nZSBoYXBwZW5lZCwgd2FpdCBhIGJpdCBtb3JlLiIK
-CgpJbiBsaW51eCBrZXJuZWwgYSBvdGhlciB0aW1lb3V0IGlzIHVzZWQ6IEhVQl9ERUJPVU5DRV9T
-VEFCTEUgPSAxMDBtcwoKZm9yIHRoaXMgY29uZGl0aW9uLi4uCgp3aGVuIHVzYl9nZXRfcG9ydF9z
-dGF0dXMoKSByZXR1cm4gbm90IGVycm9yIGFuZCB0aGUgdGhlIGNvbm5lY3RpbwoKaXMgU1RBQkxF
-IGR1cmluZyB0aGlzIGR1cmF0aW9uLCBpdCBpcyBlbm91Z2h0LgoKClBlcmhhcHMgYSBvcHRpbWl6
-YXRpb24gY2FuIGJlIGRvbmUgaGVyZS4uLi4KCmJ1dCBJIHRoaW5rIGl0IGlzIGEgb3RoZXIgc3Vi
-amVjdCBhbmQgSSBhbSBub3QgZW5vdWdodCBleHBlcnQgb24gVVNCCgp0byBwcm9wb3NlIHNvbWV0
-aGluZwoKCnNvIEkgZG9uJ3Qgc2VlIHRoZSBpc3N1ZSBoZXJlOiBJIGp1c3QgaW5jcmVhc2UgdGhl
-IENPTk5FQ1RJT04gVElNRU9VVCB0byAycwoKd2l0aCBLY29uZmlnLCBhbGlnbmVkIG9uIExpbnV4
-IHZhbHVlIGFuZCBvbmx5IGZvciBTVE1pY3JvbGVjdHJvbmljcyAKZGVmY29uZmlnCgo9PiBubyBp
-bXBhY3Qgb24gb3RoZXIgYm9hcmRzCgo9PiBjb21tb24gZm9yIGFsbCBVU0IgSFVCIHVzZWQgb24g
-dGhlIFNUTTMyTVAgYm9hcmRzCgoKUGF0cmljawoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0z
-MkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9y
-bXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+From: Christophe Kerello <christophe.kerello@foss.st.com>
+
+Current compatible string used to update SPI NAND and SPI NOR devices
+can lead to a wrong partitions update (for example, SPI NAND partitions
+added to SPI NOR node in the device tree). To avoid this wrong behavior,
+use jedec,spi-nor compatible string for SPI NOR devices and spi-nand
+compatible string for SPI NAND devices.
+
+Signed-off-by: Christophe Kerello <christophe.kerello@foss.st.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ board/st/stm32mp1/stm32mp1.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index 8c162b42a59..7dc26f850ff 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -898,8 +898,8 @@ int mmc_get_env_dev(void)
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
+ 	static const struct node_info nodes[] = {
+-		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_NOR,  },
+-		{ "st,stm32f469-qspi",		MTD_DEV_TYPE_SPINAND},
++		{ "jedec,spi-nor",		MTD_DEV_TYPE_NOR,  },
++		{ "spi-nand",			MTD_DEV_TYPE_SPINAND},
+ 		{ "st,stm32mp15-fmc2",		MTD_DEV_TYPE_NAND, },
+ 		{ "st,stm32mp1-fmc2-nfc",	MTD_DEV_TYPE_NAND, },
+ 	};
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

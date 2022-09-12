@@ -2,64 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFD9E5B56BA
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Sep 2022 10:52:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BFF05B56EA
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Sep 2022 11:02:41 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 904E1C6410F;
-	Mon, 12 Sep 2022 08:52:37 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2955DC03FD5;
+	Mon, 12 Sep 2022 09:02:41 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1BD74C640E7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DB233C03FC7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 Sep 2022 08:52:36 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28C6nB3s025278;
- Mon, 12 Sep 2022 10:52:30 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=yUwca3YbuPWkrCX/WI4fpozXeLVlInUdXHMNBcXG2tM=;
- b=i9K+hbMPWFwhfuGHdDuMDQ6asxYsm0LWF+cIb69NWUacjHvm+DzFGQdEXrl5IvPqEWiU
- 1c9fYCxv5YH0fARVAFnzGavtsn1AFBVMhX3ayuiUTS+MfQL+KquoR5ne4Tv0KTCfdE42
- kdJWuK8dgS6nwJhQGeYTcVrOluyt4lOTzc5R1MqbmL7Gpj4RpF53a6u+bYb24DZpYTlG
- 8uXu3skwoOa+m8SbQDLHIZ0r8kpaAbLi2fT2C7SI1VtMaJPw/muVU9I8jVxUg32tknB7
- XFUy0OFI9BS6O/wd/vk5BrNnKyUlL+D6gUpdwvMonR3esQYYTZSo9BCmlF7hrIo8PraI 0w== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jgjxnrpm5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Sep 2022 10:52:30 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4858710002A;
- Mon, 12 Sep 2022 10:52:29 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4369821A205;
- Mon, 12 Sep 2022 10:52:29 +0200 (CEST)
-Received: from [10.201.21.72] (10.75.127.123) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Mon, 12 Sep
- 2022 10:52:28 +0200
-Message-ID: <b6bb0d53-032a-f76f-ca33-38c2d00b4ede@foss.st.com>
-Date: Mon, 12 Sep 2022 10:52:28 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
+ Mon, 12 Sep 2022 09:02:39 +0000 (UTC)
+Received: from [192.168.1.107] (82-131-156-25.pool.digikabel.hu
+ [82.131.156.25])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3C98B81F45;
+ Mon, 12 Sep 2022 11:02:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1662973359;
+ bh=UvYpxouRPQwUSl9MXJcPxvd4JgI5Ayc4vfUscPUNF28=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=ODldvLJAal4VTsyhJHVgLUrGyJNhm/1g0Y08fSFup+Iyj9Uae/2HSg2dbX6FcyHY7
+ YZM13QjDFvw8bvAwxZf5RtDG6IrN7xHbXZCVHybGvbbSzYktXPewjctaPGQtrNseYk
+ a3KbSaeFfb2SQwo93oAXUAcbtvUX8lDb2ouyrVpuNAzs+Kj6JBtv9Hqjx+PomyJ6IP
+ lJXGutHBrKPdAu7sXJ4dHxN21F2wGJci49Y9kWsCrRXmhgePVhIMZyRxZH0TYVKV7t
+ wptPSFtXreBiqOFQ30RiM97I9HpXULI04bWG4Y/5GodBjpd8xsyyYPKZD8lmwIqGbp
+ ycP0TV7+KemeQ==
 To: Alain Volmat <alain.volmat@foss.st.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
 References: <20220912084201.1826979-1-alain.volmat@foss.st.com>
  <20220912084201.1826979-4-alain.volmat@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <dcfc4a5b-a1e3-f043-5c0f-a5c079c7bc26@denx.de>
+Date: Mon, 12 Sep 2022 11:02:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
+MIME-Version: 1.0
 In-Reply-To: <20220912084201.1826979-4-alain.volmat@foss.st.com>
-X-Originating-IP: [10.75.127.123]
-X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-12_04,2022-09-09_01,2022-06-22_01
-Cc: patrick.delaunay@foss.st.com, oleksandr.suvorov@foundries.io, hs@denx.de
+Content-Language: en-US
+X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: patrick.delaunay@foss.st.com, oleksandr.suvorov@foundries.io
 Subject: Re: [Uboot-stm32] [PATCH v4 3/4] i2c: stm32: do not set the STOP
 	condition on error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -73,14 +57,15 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Reply-To: hs@denx.de
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hello Alain,
 
-
-On 9/12/22 10:42, Alain Volmat wrote:
+On 12.09.22 10:42, Alain Volmat wrote:
 > Current function stm32_i2c_message_xfer is sending a STOP
 > whatever the result of the transaction is.  This can cause issues
 > such as making the bus busy since the controller itself is already
@@ -97,6 +82,15 @@ On 9/12/22 10:42, Alain Volmat wrote:
 > ---
 >  drivers/i2c/stm32f7_i2c.c | 6 +++---
 >  1 file changed, 3 insertions(+), 3 deletions(-)
+
+
+Reviewed-by: Heiko Schocher <hs@denx.de>
+
+Oh... isn;t here missing the Reviewed-by and Tested-by tag from
+Patrick?
+
+bye,
+Heiko
 > 
 > diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
 > index 0ec67b5c12..2db7f44d44 100644
@@ -115,10 +109,12 @@ On 9/12/22 10:42, Alain Volmat wrote:
 >  
 >  	return stm32_i2c_check_end_of_message(i2c_priv);
 >  }
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
 
-Thanks 
-Patrice
+-- 
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,65 +2,82 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F2255B6C55
-	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Sep 2022 13:24:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE5E5B7604
+	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Sep 2022 18:03:29 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5A49AC640F0;
-	Tue, 13 Sep 2022 11:24:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 79721C640E7;
+	Tue, 13 Sep 2022 16:03:29 +0000 (UTC)
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+ [209.85.222.182])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EB390C01577
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A9D2FC0D2BB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Sep 2022 11:24:03 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28DB9HZg001287;
- Tue, 13 Sep 2022 13:23:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=IVpjVCNcSlp/CgJ/mywLiwUkGrc7MFbuQjrjpQZmZ1s=;
- b=Vps8C7GC9I+3L5ea6jv1LC/LVnxMxGIWnayDSw78kbTnUmtrz/V3xp2kHEKH2EJ4wWU+
- 5H1VC/Qp7/RLOB37lywYLOHqA9GZVZ+u329xkz7PJwge36BqqHhFpK8gThGWRXE6TG3M
- NzjD9SKwLjnCfGmj8+2frHAkHGLXZo3UZ29KH+4NkyJuVtQ//8QCw0SsNyHnejoxFaTn
- t2As18f21uGGeaN3VLip+RoNp8A2wxWOmt7W+4g4Ks1iw/cOhC1/ph1sCXPQJZupr1td
- rFzZQwWP06S7773vkyAua0gWcLJxiLgg+/Q5jinl4hazJAScaSLE+/Xx49H4tnQTd6Ik yA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jgjwv8mhg-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 Sep 2022 13:23:58 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6D13D10002A;
- Tue, 13 Sep 2022 13:23:57 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node5.st.com [10.75.129.134])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 68CFC222CA8;
- Tue, 13 Sep 2022 13:23:57 +0200 (CEST)
-Received: from localhost (10.75.127.44) by EQNDAG1NODE5.st.com (10.75.129.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Tue, 13 Sep
- 2022 13:23:57 +0200
-From: Yann Gautier <yann.gautier@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 13 Sep 2022 13:23:46 +0200
-Message-ID: <20220913112346.301480-3-yann.gautier@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220913112346.301480-1-yann.gautier@foss.st.com>
-References: <20220913112346.301480-1-yann.gautier@foss.st.com>
+ Tue, 13 Sep 2022 16:03:27 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id i3so4011148qkl.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 13 Sep 2022 09:03:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date;
+ bh=uoO7yBaLTsAVEdwHW9bcsT3GZzqCyJBcNmkwn26Isq4=;
+ b=ccXTMWz6uJRjhrRkj0duEU0bXzjsOz3zmNntyVRzjxyo9G8AYLEtEh1zyQ1/J+Hjbd
+ rj2RlOAoZnMRx2b5J3xQupbTEpxIbqhQmAhVnOr9T9NftgvcM+O8uHrp1JdD7qaq0XIn
+ jyi4gOPYiP+mm8sPfZGtYhvNI3zQpNYDHYoCI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+ bh=uoO7yBaLTsAVEdwHW9bcsT3GZzqCyJBcNmkwn26Isq4=;
+ b=N7SE9rnvBGlblWxwGDFj9O1kJIYEViRzc1JvV0WE6lQba/VgmCSEdZ3VjZJUdohpth
+ tDu/y/KeiXF6LgNPNHsNvdtm3qi2D2NuK4A4h+SHmKtI27UA5+BVmvxcrEeHdoKaL/24
+ sjQI+trvFcSI8T86zs+v5071Y8OsdUH23oy8PUynfDEhomJEs8Jk7jxHJeXzbVDIZLp9
+ nHBX/B9MzAK10yzKC4AIRi4JkRJkeSP5T4i7QNwTaZJeBpAeQWgYzIBDvXAdBkvf3JEd
+ mqqOj9gVy0iUGrMsd2KNbR3iCnY5la7Sm3ahZ7ZRQfYtBxgKM6J1+hu3PHO9JUVbrH4Y
+ /O2A==
+X-Gm-Message-State: ACgBeo2x4yPFrGmdovy/9mew2QfKCmmMCe8o48eAMKkwfeFgu7b92GGF
+ Et3om7bkNDDAz1ktLrGPT1Mc3A==
+X-Google-Smtp-Source: AA6agR5fT4OIX0OCQzC540fu6JXJlLeJxlPWeTXQX9SvfPznd17tnPBKJkQ7TrW08gCBav1L6dCnmA==
+X-Received: by 2002:a37:8e06:0:b0:6cd:cca0:5fb2 with SMTP id
+ q6-20020a378e06000000b006cdcca05fb2mr14158009qkd.646.1663085006566; 
+ Tue, 13 Sep 2022 09:03:26 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-f8ad-dcc3-5c01-45c1.res6.spectrum.com.
+ [2603:6081:7b00:6400:f8ad:dcc3:5c01:45c1])
+ by smtp.gmail.com with ESMTPSA id
+ h11-20020a05620a244b00b006cbe3be300esm9489363qkn.12.2022.09.13.09.03.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Sep 2022 09:03:26 -0700 (PDT)
+Date: Tue, 13 Sep 2022 12:03:22 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Message-ID: <20220913160322.GA2036901@bill-the-cat>
+References: <20220812013503.1724919-1-sjg@chromium.org>
+ <20220812013503.1724919-25-sjg@chromium.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To EQNDAG1NODE5.st.com
- (10.75.129.134)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-13_05,2022-09-13_01,2022-06-22_01
-Cc: Peng Fan <peng.fan@nxp.com>,
- Christophe Kerello <christophe.kerello@foss.st.com>,
+In-Reply-To: <20220812013503.1724919-25-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Peng Fan <peng.fan@nxp.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Oleksii Bidnichenko <oleksii.bidnichenko@toradex.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>, Stefan Roese <sr@denx.de>,
+ Marek Vasut <marex@denx.de>, Markus Niebel <Markus.Niebel@ew.tq-group.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
  Jaehoon Chung <jh80.chung@samsung.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 3/3] mmc: stm32_sdmmc2: manage vqmmc
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ricardo Salveti <ricardo@foundries.io>, Ramon Fried <rfried.dev@gmail.com>,
+ schspa <schspa@gmail.com>, Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Aswath Govindraju <a-govindraju@ti.com>,
+ Max Merchel <Max.Merchel@tq-group.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Anastasiia Lukianenko <vicooodin@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 24/24] blk: Rename if_type to uclass_id
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,74 +89,70 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============6868203060439305720=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The SDMMC IOs can be in an IO domain, that has to be enabled.
-This is done by enabling vqmmc in the driver.
-This has no impact on configurations not using an IO domain, the check
-can then be executed on all platforms managing regulator, and the vqmmc
-regulator enabled on all platforms having it in their DT.
 
-Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
+--===============6868203060439305720==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="d6Gm4EdcadzBjdND"
+Content-Disposition: inline
 
----
-There are 2 checkpatch warnings:
-drivers/mmc/stm32_sdmmc2.c:40: warning: Use 'if (IS_ENABLED(CONFIG...))'
- instead of '#if or #ifdef' where possible
-drivers/mmc/stm32_sdmmc2.c:580: warning: Use 'if (IS_ENABLED(CONFIG...))'
- instead of '#if or #ifdef' where possible
-But this cannot be changed as the vqmmc_supply field in struct mmc is
-under flag: #if CONFIG_IS_ENABLED(DM_REGULATOR). For platforms not
-enabling this flag there would be a compilation error.
 
- drivers/mmc/stm32_sdmmc2.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+--d6Gm4EdcadzBjdND
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-index e1240b0cf3..1195134844 100644
---- a/drivers/mmc/stm32_sdmmc2.c
-+++ b/drivers/mmc/stm32_sdmmc2.c
-@@ -25,6 +25,7 @@
- #include <asm/io.h>
- #include <asm/gpio.h>
- #include <linux/iopoll.h>
-+#include <power/regulator.h>
- #include <watchdog.h>
- 
- struct stm32_sdmmc2_plat {
-@@ -36,6 +37,9 @@ struct stm32_sdmmc2_plat {
- 	struct gpio_desc cd_gpio;
- 	u32 clk_reg_msk;
- 	u32 pwr_reg_msk;
-+#if CONFIG_IS_ENABLED(DM_REGULATOR)
-+	bool vqmmc_enabled;
-+#endif
- };
- 
- struct stm32_sdmmc2_ctx {
-@@ -572,6 +576,15 @@ static void stm32_sdmmc2_pwron(struct stm32_sdmmc2_plat *plat)
- 	       plat->base + SDMMC_POWER);
- 
- 	/* during the first 74 SDMMC_CK cycles the SDMMC is still disabled. */
-+
-+#if CONFIG_IS_ENABLED(DM_REGULATOR)
-+	if (plat->mmc.vqmmc_supply && !plat->vqmmc_enabled) {
-+		if (regulator_set_enable_if_allowed(plat->mmc.vqmmc_supply, true))
-+			dev_dbg(plat->mmc.dev, "failed to enable vqmmc-supply\n");
-+		else
-+			plat->vqmmc_enabled = true;
-+	}
-+#endif
- }
- 
- #define IS_RISING_EDGE(reg) (reg & SDMMC_CLKCR_NEGEDGE ? 0 : 1)
--- 
-2.25.1
+On Thu, Aug 11, 2022 at 07:35:03PM -0600, Simon Glass wrote:
+
+> Use the word 'uclass' instead of 'if_type' to complete the conversion.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> Changes in v2:
+> - Use conv_uclass_id() instead of the confusing uclass_id_to_uclass_id()
+
+So, for this series, 1 through 22 apply cleanly (one easy fixup
+required), and 23/24 appears to be applied already. But large chunks of
+this patch do not apply to lib/efi_loader/efi_disk.c and it's unclear
+what I should do here. Should I just apply 1-22 of this series? Or do
+you expect to v3 this? Thanks!
+
+--=20
+Tom
+
+--d6Gm4EdcadzBjdND
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMgqcoACgkQFHw5/5Y0
+tyybcwv/We9B98bEkjKzl0RFxfJ6X4M8tsFMyBh/9fsVfWu3TSlcYPHGooclwOu0
+MgR+NobZGV6HDxih/xqHDycj0NhCZhwpeUbzakJEUDcxRiqDLD8U9bzMcA9tutoz
+VLzuzaFWf03wQdte2zfBtWlT/I7xvdQ6Xbqg8cW3NKZrXnROqaQou7dQq3FY6Dwt
+DyLty8BszHNq9192ua8fKAkue9jyofgk8u/FBfLPmQ1PCqoeDJdaf0GHEdpkZZOD
+PRwAaMGOAlDDKSqwu/UY15mQhwya7l3fjnR7ekTwwmq/LsdvYYkUcTHDIaYDBwFE
+0ODU/AfKFGAg8bpe5+1VcLeEh06PtWGSSg8RaZBAGTP2NNkU7tYxWV0QVg81c9Ja
+Yqj5IKV5XHpVOnAammTgLqmVMldGDJJFR5BUcsKxXje7bZEr4tD7oWhcLFGk1P1Q
+g+mK37O4AZ+KPMsX4ieUTmbINJJMeN2LGWTVt1eefopHEocC8zorJvphzLtvR8j2
+E6CuJXc1
+=NxDR
+-----END PGP SIGNATURE-----
+
+--d6Gm4EdcadzBjdND--
+
+--===============6868203060439305720==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============6868203060439305720==--

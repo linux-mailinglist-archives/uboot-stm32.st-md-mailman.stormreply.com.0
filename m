@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C057B5B9C7F
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 16:03:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA33C5B9C80
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 16:03:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9FBABC63324;
-	Thu, 15 Sep 2022 14:03:21 +0000 (UTC)
-Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
- [209.85.160.171])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACEC2C63324;
+	Thu, 15 Sep 2022 14:03:26 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com
+ [209.85.219.49])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCB9BC0D2BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6233DC0D2BF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 14:03:19 +0000 (UTC)
-Received: by mail-qt1-f171.google.com with SMTP id j10so10747954qtv.4
+ Thu, 15 Sep 2022 14:03:25 +0000 (UTC)
+Received: by mail-qv1-f49.google.com with SMTP id g4so14219219qvo.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 07:03:19 -0700 (PDT)
+ Thu, 15 Sep 2022 07:03:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=krJSm1jWGm1WKDMeYlYmzsX8dhLoFzmGRvaUfVorwlQ=;
- b=LlmLka6VsvuHAzyC0WfWFcnIJ2J5gF1JhmT6zfjveJLpGjfgZ2iUkxzQbNwndoUUMn
- H60tHs7hnGk2VBU//Rq0qK2NYT3ANqF/I4tjTpwUC6/s380KQeOT6POJ1lo5qdYVrlDQ
- XuMDy9KsKqVp0eunUFtjzWYHAsulcM01mat2g=
+ bh=75BUga7fnotRuADvfS9lnC2gAqTFFaSoQ2V6xbCSa1M=;
+ b=e1zRXl5v9mGET562lr9H658Y1DocCmhWjb5QBo5My/n4tXMR08EGFjl7sGJcBF7dMF
+ WSznz/ClspB0ikWF4gS+QTi3VIzrteFrRgElM5uPcJft+dpGihBV5qjB4S+6GN0rtckx
+ zrGrCWYUDHeSaI6iT1XBBICd2PHAYZB/4Nuok=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=krJSm1jWGm1WKDMeYlYmzsX8dhLoFzmGRvaUfVorwlQ=;
- b=3OE5skJLueKPBJRwot9CqjbbmPOmvVLVqGnUn3tT8Ctb56vvy/9X3kCBQAPSiY+64c
- 7QgRGJB++mWR8mT33bVn9Y4xyn0qO53jHleJ/6hjYN5+7gIGUS/h7TWV1is3SMTfIgfK
- +PorPVH9i/2R9vdrKJOveutzy4c+ykN7cpbV5DL9Ho3up4DKvEQb1gDhpOgiDuqZPcxF
- n5uiKKaRk4Gz2WIHhx0D44Rt4IgBjgLKFXKEIm4L7HnZsv+FSgE5WPoxN+dxZOxo0nF6
- Fslha2rKPiZ0h+8Lx62JfVkcBv+L/Jl7gHF5ptAmeRzRHZYYbBmNZ/W0GMw0jNAn/fRn
- 0CoQ==
-X-Gm-Message-State: ACrzQf1/3YVoVVgq8IhMozAhqvQH/xl8W6uP3ZFh8oLWzKoY6SHTvdSq
- BrUo7QThfCavdxY/mXVbVbuK4U+nyjnZJ91V
-X-Google-Smtp-Source: AMsMyM7hccEPCg7yi/XaHZRX9nEes1HhtYlg6Eb2zW9R1NIOeQESsget6I9SjZu6ovjyRx2bz0+qMg==
-X-Received: by 2002:a05:622a:1706:b0:35c:cbab:af49 with SMTP id
- h6-20020a05622a170600b0035ccbabaf49mr114328qtk.394.1663250598759; 
- Thu, 15 Sep 2022 07:03:18 -0700 (PDT)
+ bh=75BUga7fnotRuADvfS9lnC2gAqTFFaSoQ2V6xbCSa1M=;
+ b=cZZh258cMe+E2Nmi1ie7Q4OHm15Je7mkA9LrVfMgzkBXsOK0yNPl5M2TOPsApI5sl8
+ O3P6iKXNhkr2L8HktuyFjRTNx8VCckctLfVMfh8bDnNZUM2mZ5q9GY2RRfqWcppldM37
+ epfULywyYaLQCHviWJcColIpT8MjQ5oCx2Q01uryVIx1I2u1dMtJ2xC2DEunASRA6UK+
+ 3WZiTw2I4Lq3RKJin/n+xBfqtwvwyewnEiTgJqi1GVVVRGypTw5BK6MFc7hsLIyK2OGS
+ Gs04naHeTwTdBqw3ZgL4QwIoXGvstJ1+SDNw9njtsZ+7jpfXlks8nvfkYXUSznT2MmS4
+ 2xbg==
+X-Gm-Message-State: ACrzQf1SWdFEu3P7tQ82R5X7uvdM3iXY8dyW0fGt+TOxU1wmW77bChd2
+ 5/hiTE4P8xWg0mWcyNvdiUYQRQ==
+X-Google-Smtp-Source: AMsMyM7QX3uasx8YAk9Ae9q+15v2TXdXLIupMY9SjHEm8FVXVoN93QZRxyQyBca5kPSp8eDYIhYCUg==
+X-Received: by 2002:a05:6214:5609:b0:4ac:aa5e:5425 with SMTP id
+ mg9-20020a056214560900b004acaa5e5425mr115351qvb.81.1663250604339; 
+ Thu, 15 Sep 2022 07:03:24 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6011-212c-4988-e1af.res6.spectrum.com.
  [2603:6081:7b00:6400:6011:212c:4988:e1af])
  by smtp.gmail.com with ESMTPSA id
- l20-20020a37f914000000b006bc6aef46basm3971468qkj.114.2022.09.15.07.03.17
+ x5-20020a05620a258500b006bc1512986esm4154074qko.97.2022.09.15.07.03.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Sep 2022 07:03:18 -0700 (PDT)
-Date: Thu, 15 Sep 2022 10:03:16 -0400
+ Thu, 15 Sep 2022 07:03:23 -0700 (PDT)
+Date: Thu, 15 Sep 2022 10:03:22 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20220915140316.GL6993@bill-the-cat>
+Message-ID: <20220915140322.GM6993@bill-the-cat>
 References: <20220830120914.2329522-1-patrice.chotard@foss.st.com>
- <20220830120914.2329522-4-patrice.chotard@foss.st.com>
+ <20220830120914.2329522-5-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-In-Reply-To: <20220830120914.2329522-4-patrice.chotard@foss.st.com>
+In-Reply-To: <20220830120914.2329522-5-patrice.chotard@foss.st.com>
 X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 3/4] pinctrl: pinctrl_stm32: Populate
- uc_priv->name[] with pinmux node's name
+Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 4/4] gpio: sandbox: Add GPIOD_IS_AF for
+ gpio configured in alternate function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,69 +74,29 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0341150131564343076=="
+Content-Type: multipart/mixed; boundary="===============4466733375383141298=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
---===============0341150131564343076==
+--===============4466733375383141298==
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="KqIDP7BYbqnwKRO+"
+	protocol="application/pgp-signature"; boundary="jxJZfy9MYHgKPwT/"
 Content-Disposition: inline
 
 
---KqIDP7BYbqnwKRO+
+--jxJZfy9MYHgKPwT/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 30, 2022 at 02:09:13PM +0200, Patrice Chotard wrote:
+On Tue, Aug 30, 2022 at 02:09:14PM +0200, Patrice Chotard wrote:
 
-> Populate uc_priv->name[] with pinmux node's name in order to indicate
-> the pinmuxing's name in case GPIO is configured in alternate.
->=20
-> For example, for STM32 SoC's based platform, "gpio status" command
-> output :
->=20
->   before
->     Bank GPIOZ:
->       GPIOZ0: unused : 0 [ ]
->       GPIOZ1: unused : 0 [ ]
->       GPIOZ2: unused : 0 [ ]
->       GPIOZ3: unused : 0 [ ]
->       GPIOZ4: func
->       GPIOZ5: func
->       GPIOZ6: unused : 0 [ ]
->       GPIOZ7: unused : 0 [ ]
->       GPIOZ8: unknown
->       GPIOZ9: unknown
->       GPIOZ10: unknown
->       GPIOZ11: unknown
->       GPIOZ12: unknown
->       GPIOZ13: unknown
->       GPIOZ14: unknown
->       GPIOZ15: unknown
->=20
->   After
->     Bank GPIOZ:
->       GPIOZ0: unused : 0 [ ]
->       GPIOZ1: unused : 0 [ ]
->       GPIOZ2: unused : 0 [ ]
->       GPIOZ3: unused : 0 [ ]
->       GPIOZ4: func i2c4-0
->       GPIOZ5: func i2c4-0
->       GPIOZ6: unused : 0 [ ]
->       GPIOZ7: unused : 0 [ ]
->       GPIOZ8: unknown
->       GPIOZ9: unknown
->       GPIOZ10: unknown
->       GPIOZ11: unknown
->       GPIOZ12: unknown
->       GPIOZ13: unknown
->       GPIOZ14: unknown
->       GPIOZ15: unknown
+> This allows to test if a pin's label if displayed using gpio_get_status()
+> when this pin is configured in alternate function.
 >=20
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Applied to u-boot/next, thanks!
@@ -142,27 +104,27 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---KqIDP7BYbqnwKRO+
+--jxJZfy9MYHgKPwT/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMjMKQACgkQFHw5/5Y0
-tywrqwwAmTaUjWBrumMqUTh9pQTv30WRCwsPlLtFraKFz2mmhjD+MnTd1DTePXY7
-Msc4UvE/z7geDC6q88cUsvnMjo1DcZaCb2lvr+W80nJ83xdPFEpfRqpWqEVvJjy3
-KvKFtOEbr0Yx+FAZkkyunSPYOFkoAcurNkXJwnA01AidU/JRMjrIB60ZvYS4RjPS
-127q9ZoI/FAiY7LXnsxyISxSoVAHSOe+P/mpnBYyyj2Sw3T5JjcqSPGvh1QSiRFU
-3+BA4d+I1R2qanfVENMKip8fdGN5JBdE0YCuTkz1lpXw84IeZhUeNRT9IrADzMgP
-j9SCvU2Q9HItPaAb1grXdPb1zlbWBTR2yA9uCcGhz1BA5Hn1DCjVRI5qc7baSDNU
-i3fwdFbXCA9SN/XT6la0byAQifKaAMJDGxFXuybmSvpCrGSUl9dbCV0j3apF2Er3
-yAmJ566G83CsG5w/muo1JXWhXZx8xO6z+dB+fO4/mXJRDlKdbwFi9YDPwS6OLotD
-nyOYjJsb
-=L1mz
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMjMKkACgkQFHw5/5Y0
+tyzXsAv8DyyWQZrl9DciIrkM3e1BtRhIISbMeZXqV9HkwTwDupwngxiidc0wNDPU
+kXGLn5zLZ/cUS7ACiTykIMNmlKbpzTqIsr0AYOKdJYu/NM3D8PitkbGNFjoo3Ua2
+CoO2bYLR3JSYUf9M+3OzinQNuIGleOzW0Hdp5eG5SMVWxIz7XoCoS2nScStp4Rv9
+xWz7psyKDxNAeAgfg8Nm8IkFMfKn9H8stDsbzuZVfbXH4B+MKzaasRILV+rAMGQo
+svoFeyVuJhMlsnnAal0dxdyPY8sQe12Z0sRdScn3WRHnz6q+GVPgD+AQZssFtpb1
+XemaPpOdoTNNv1w7F7fBtNQoIqItsSD87WpAY/glU4efl2HvTjWKjMmd+9d1ffIn
+7YQ14v5EUThqkpmJyVAGU5CgRVqvU3hiZUoyoFfhfZhJicwzNYS51F18Cv7UDFJO
+bFMAWpNAWLDnGICV0hRoB3p2FWc/+hfomftJO4u2UH3stRAMOZXtVmIU/wA84cN9
+DwcRg/y8
+=fb9t
 -----END PGP SIGNATURE-----
 
---KqIDP7BYbqnwKRO+--
+--jxJZfy9MYHgKPwT/--
 
---===============0341150131564343076==
+--===============4466733375383141298==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -173,4 +135,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============0341150131564343076==--
+--===============4466733375383141298==--

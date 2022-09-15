@@ -2,65 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0D5BF5B9DEF
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 17:02:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87F155B9E81
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 17:14:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AB4A8C03FE0;
-	Thu, 15 Sep 2022 15:02:55 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 53F94C03FE0;
+	Thu, 15 Sep 2022 15:14:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2E59DC03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D3D6FC03FC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 15:02:54 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28FASdwl011551;
- Thu, 15 Sep 2022 17:02:53 +0200
+ Thu, 15 Sep 2022 15:14:44 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28FBCgJO013255;
+ Thu, 15 Sep 2022 17:14:42 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=RkMrLdX72839XMmSU63N1RoNDJN550rrtMUJ4cX9OeM=;
- b=Da39gd4hcsT/u8U4x0BLCiQCUabZF95f2c+O2kD7ovutkcyENwXHoCCBJzBEKyjMSJRU
- n4jHSujTYfDx0dZWT0dJJ92gqrYPA3nqclH0cYOKIssHHajSYmypZLDZnB8fYx/LFPcp
- PrxAf3oo0sSUlGj328R6neB8zpSY6IYFvUzjZ7Xs1Pbpq/RtHb9QOnmg0XcjjRomHEwn
- Oyiasii9khNumd1jyk/HOaYDtYofohJkciRuRXKM5RmqYOy0SKJq5XGIW0mAPef+v/y/
- Dpp/SH4hmarlIIwDHVIVwUj8E5Vp+CNW8uiooGtSeyydCXQgrifUNtzFRVL2SFoRTtPN hg== 
+ bh=zpNsRhLBCmgR8NhfeIDmiQ9o2s7wo/kSPtSF3uMmqNQ=;
+ b=R415oCdovkcGIafsd0419VgfcATXkj2d/l8TQFSg0gNPiXriXuHMl9sa1NNUsE42QuBK
+ q2eHJXMDjwGEacFanQzGjfqzZ8Pln3Iy9x8rptQT8Z8AMOLNG7pAo1FRMD75aMoiz7vG
+ CFA+W6DOJw2mzqltnUfmaeVTopPBbP4CSVV0xMOWxeVmctMMnqL90mYw/+vjiQ+xf7+e
+ txheoS7cRdFT0m5Bclasd7//PSEI452WGFPkDlfj/5XB+JKe43jxvgtEnGYhv9L1cbKn
+ sxA0+IB+rR+rNdfCi+16S/hpND2PicdI0AQH4WI3Gp8Ovjcw7hTRiFZC7s7RMyDbLP6u KA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jjy07nbr6-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jjxxcx849-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Sep 2022 17:02:53 +0200
+ Thu, 15 Sep 2022 17:14:42 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C529E10002A;
- Thu, 15 Sep 2022 17:02:52 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C874110002A;
+ Thu, 15 Sep 2022 17:14:40 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A3F48231DC7;
- Thu, 15 Sep 2022 17:02:52 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BB540231DE1;
+ Thu, 15 Sep 2022 17:14:40 +0200 (CEST)
 Received: from [10.48.0.213] (10.75.127.120) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Thu, 15 Sep
- 2022 17:02:52 +0200
-Message-ID: <4e0b5bb5-bb96-a1b2-62f5-44f84f28dd40@foss.st.com>
-Date: Thu, 15 Sep 2022 17:02:50 +0200
+ 2022 17:14:37 +0200
+Message-ID: <eabdfdf7-ddfb-da89-9f9b-f20101cdf67b@foss.st.com>
+Date: Thu, 15 Sep 2022 17:14:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
 Content-Language: en-US
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-References: <20220907181837.1.I0747e53f8be04bfad23047f27b2485dd916eab75@changeid>
- <720e22cc-2cc2-b552-0f73-f19b45f913ef@foss.st.com>
+To: Jorge Ramirez-Ortiz <jorge@foundries.io>, <hs@denx.de>,
+ <patrice.chotard@foss.st.com>, <oleksandr.suvorov@foundries.io>
+References: <20220815145211.31342-1-jorge@foundries.io>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <720e22cc-2cc2-b552-0f73-f19b45f913ef@foss.st.com>
+In-Reply-To: <20220815145211.31342-1-jorge@foundries.io>
 X-Originating-IP: [10.75.127.120]
 X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
  definitions=2022-09-15_09,2022-09-14_04,2022-06-22_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] confis: stm32mp15: activate
-	DM_REGULATOR_SCMI
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCHv2 1/2] i2c: stm32f7: fix clearing the
+	control register
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,44 +79,30 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi,
 
-On 9/9/22 11:57, Patrice CHOTARD wrote:
-> Hi Patrick
+On 8/15/22 16:52, Jorge Ramirez-Ortiz wrote:
+> Bits should be set to 0, not 1.
 >
-> Don't forget to fix the confis/configs when applying this patch ;-)
+> Signed-off-by: Jorge Ramirez-Ortiz <jorge@foundries.io>
+> ---
+>   drivers/i2c/stm32f7_i2c.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> On 9/7/22 18:18, Patrick Delaunay wrote:
->> Activate the support of SCMI regulator to support the scmi_reg11,
->> scmi_reg18 and scmi_usb33 regulators present in the scmi device tree of
->> STMicroelectronics boards with stm32mp15-scmi.dtsi
->>
->> Fixes: 6cccc8d396bf ("ARM: dts: stm32: add SCMI version of STM32 boards (DK1/DK2/ED1/EV1)")
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> ---
->>
->>   configs/stm32mp15_defconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
->> index fd2a5de8d13..0f6b3738cad 100644
->> --- a/configs/stm32mp15_defconfig
->> +++ b/configs/stm32mp15_defconfig
->> @@ -120,6 +120,7 @@ CONFIG_DM_REGULATOR_FIXED=y
->>   CONFIG_DM_REGULATOR_GPIO=y
->>   CONFIG_DM_REGULATOR_STM32_VREFBUF=y
->>   CONFIG_DM_REGULATOR_STPMIC1=y
->> +CONFIG_DM_REGULATOR_SCMI=y
->>   CONFIG_REMOTEPROC_STM32_COPRO=y
->>   CONFIG_RESET_SCMI=y
->>   CONFIG_DM_RNG=y
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
+> index bf2a6c9b4b..3a727e68ac 100644
+> --- a/drivers/i2c/stm32f7_i2c.c
+> +++ b/drivers/i2c/stm32f7_i2c.c
+> @@ -413,7 +413,7 @@ static int stm32_i2c_check_end_of_message(struct stm32_i2c_priv *i2c_priv)
+>   		setbits_le32(&regs->icr, STM32_I2C_ICR_STOPCF);
+>   
+>   		/* Clear control register 2 */
+> -		setbits_le32(&regs->cr2, STM32_I2C_CR2_RESET_MASK);
+> +		clrbits_le32(&regs->cr2, STM32_I2C_CR2_RESET_MASK);
+>   	}
+>   
+>   	return ret;
 
 
 Applied to u-boot-stm/master, thanks!
-
-
-I just change the commit title to "configs: stm32mp15: activate 
-DM_REGULATOR_SCMI"
-
 
 Regards
 Patrick

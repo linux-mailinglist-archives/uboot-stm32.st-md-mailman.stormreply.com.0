@@ -2,67 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA33C5B9C80
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 16:03:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0D5BF5B9DEF
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 17:02:56 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id ACEC2C63324;
-	Thu, 15 Sep 2022 14:03:26 +0000 (UTC)
-Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com
- [209.85.219.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AB4A8C03FE0;
+	Thu, 15 Sep 2022 15:02:55 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6233DC0D2BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2E59DC03FC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 14:03:25 +0000 (UTC)
-Received: by mail-qv1-f49.google.com with SMTP id g4so14219219qvo.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 07:03:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date;
- bh=75BUga7fnotRuADvfS9lnC2gAqTFFaSoQ2V6xbCSa1M=;
- b=e1zRXl5v9mGET562lr9H658Y1DocCmhWjb5QBo5My/n4tXMR08EGFjl7sGJcBF7dMF
- WSznz/ClspB0ikWF4gS+QTi3VIzrteFrRgElM5uPcJft+dpGihBV5qjB4S+6GN0rtckx
- zrGrCWYUDHeSaI6iT1XBBICd2PHAYZB/4Nuok=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
- bh=75BUga7fnotRuADvfS9lnC2gAqTFFaSoQ2V6xbCSa1M=;
- b=cZZh258cMe+E2Nmi1ie7Q4OHm15Je7mkA9LrVfMgzkBXsOK0yNPl5M2TOPsApI5sl8
- O3P6iKXNhkr2L8HktuyFjRTNx8VCckctLfVMfh8bDnNZUM2mZ5q9GY2RRfqWcppldM37
- epfULywyYaLQCHviWJcColIpT8MjQ5oCx2Q01uryVIx1I2u1dMtJ2xC2DEunASRA6UK+
- 3WZiTw2I4Lq3RKJin/n+xBfqtwvwyewnEiTgJqi1GVVVRGypTw5BK6MFc7hsLIyK2OGS
- Gs04naHeTwTdBqw3ZgL4QwIoXGvstJ1+SDNw9njtsZ+7jpfXlks8nvfkYXUSznT2MmS4
- 2xbg==
-X-Gm-Message-State: ACrzQf1SWdFEu3P7tQ82R5X7uvdM3iXY8dyW0fGt+TOxU1wmW77bChd2
- 5/hiTE4P8xWg0mWcyNvdiUYQRQ==
-X-Google-Smtp-Source: AMsMyM7QX3uasx8YAk9Ae9q+15v2TXdXLIupMY9SjHEm8FVXVoN93QZRxyQyBca5kPSp8eDYIhYCUg==
-X-Received: by 2002:a05:6214:5609:b0:4ac:aa5e:5425 with SMTP id
- mg9-20020a056214560900b004acaa5e5425mr115351qvb.81.1663250604339; 
- Thu, 15 Sep 2022 07:03:24 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6011-212c-4988-e1af.res6.spectrum.com.
- [2603:6081:7b00:6400:6011:212c:4988:e1af])
- by smtp.gmail.com with ESMTPSA id
- x5-20020a05620a258500b006bc1512986esm4154074qko.97.2022.09.15.07.03.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Sep 2022 07:03:23 -0700 (PDT)
-Date: Thu, 15 Sep 2022 10:03:22 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20220915140322.GM6993@bill-the-cat>
-References: <20220830120914.2329522-1-patrice.chotard@foss.st.com>
- <20220830120914.2329522-5-patrice.chotard@foss.st.com>
+ Thu, 15 Sep 2022 15:02:54 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28FASdwl011551;
+ Thu, 15 Sep 2022 17:02:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=RkMrLdX72839XMmSU63N1RoNDJN550rrtMUJ4cX9OeM=;
+ b=Da39gd4hcsT/u8U4x0BLCiQCUabZF95f2c+O2kD7ovutkcyENwXHoCCBJzBEKyjMSJRU
+ n4jHSujTYfDx0dZWT0dJJ92gqrYPA3nqclH0cYOKIssHHajSYmypZLDZnB8fYx/LFPcp
+ PrxAf3oo0sSUlGj328R6neB8zpSY6IYFvUzjZ7Xs1Pbpq/RtHb9QOnmg0XcjjRomHEwn
+ Oyiasii9khNumd1jyk/HOaYDtYofohJkciRuRXKM5RmqYOy0SKJq5XGIW0mAPef+v/y/
+ Dpp/SH4hmarlIIwDHVIVwUj8E5Vp+CNW8uiooGtSeyydCXQgrifUNtzFRVL2SFoRTtPN hg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jjy07nbr6-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 15 Sep 2022 17:02:53 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C529E10002A;
+ Thu, 15 Sep 2022 17:02:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A3F48231DC7;
+ Thu, 15 Sep 2022 17:02:52 +0200 (CEST)
+Received: from [10.48.0.213] (10.75.127.120) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Thu, 15 Sep
+ 2022 17:02:52 +0200
+Message-ID: <4e0b5bb5-bb96-a1b2-62f5-44f84f28dd40@foss.st.com>
+Date: Thu, 15 Sep 2022 17:02:50 +0200
 MIME-Version: 1.0
-In-Reply-To: <20220830120914.2329522-5-patrice.chotard@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Samuel Holland <samuel@sholland.org>, Andrew Jeffery <andrew@aj.id.au>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 4/4] gpio: sandbox: Add GPIOD_IS_AF for
- gpio configured in alternate function
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220907181837.1.I0747e53f8be04bfad23047f27b2485dd916eab75@changeid>
+ <720e22cc-2cc2-b552-0f73-f19b45f913ef@foss.st.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <720e22cc-2cc2-b552-0f73-f19b45f913ef@foss.st.com>
+X-Originating-IP: [10.75.127.120]
+X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-15_09,2022-09-14_04,2022-06-22_01
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] confis: stm32mp15: activate
+	DM_REGULATOR_SCMI
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,65 +72,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4466733375383141298=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi,
 
---===============4466733375383141298==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="jxJZfy9MYHgKPwT/"
-Content-Disposition: inline
+On 9/9/22 11:57, Patrice CHOTARD wrote:
+> Hi Patrick
+>
+> Don't forget to fix the confis/configs when applying this patch ;-)
+>
+> On 9/7/22 18:18, Patrick Delaunay wrote:
+>> Activate the support of SCMI regulator to support the scmi_reg11,
+>> scmi_reg18 and scmi_usb33 regulators present in the scmi device tree of
+>> STMicroelectronics boards with stm32mp15-scmi.dtsi
+>>
+>> Fixes: 6cccc8d396bf ("ARM: dts: stm32: add SCMI version of STM32 boards (DK1/DK2/ED1/EV1)")
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> ---
+>>
+>>   configs/stm32mp15_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
+>>
+>> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+>> index fd2a5de8d13..0f6b3738cad 100644
+>> --- a/configs/stm32mp15_defconfig
+>> +++ b/configs/stm32mp15_defconfig
+>> @@ -120,6 +120,7 @@ CONFIG_DM_REGULATOR_FIXED=y
+>>   CONFIG_DM_REGULATOR_GPIO=y
+>>   CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+>>   CONFIG_DM_REGULATOR_STPMIC1=y
+>> +CONFIG_DM_REGULATOR_SCMI=y
+>>   CONFIG_REMOTEPROC_STM32_COPRO=y
+>>   CONFIG_RESET_SCMI=y
+>>   CONFIG_DM_RNG=y
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 
---jxJZfy9MYHgKPwT/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Applied to u-boot-stm/master, thanks!
 
-On Tue, Aug 30, 2022 at 02:09:14PM +0200, Patrice Chotard wrote:
 
-> This allows to test if a pin's label if displayed using gpio_get_status()
-> when this pin is configured in alternate function.
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+I just change the commit title to "configs: stm32mp15: activate 
+DM_REGULATOR_SCMI"
 
-Applied to u-boot/next, thanks!
 
---=20
-Tom
-
---jxJZfy9MYHgKPwT/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMjMKkACgkQFHw5/5Y0
-tyzXsAv8DyyWQZrl9DciIrkM3e1BtRhIISbMeZXqV9HkwTwDupwngxiidc0wNDPU
-kXGLn5zLZ/cUS7ACiTykIMNmlKbpzTqIsr0AYOKdJYu/NM3D8PitkbGNFjoo3Ua2
-CoO2bYLR3JSYUf9M+3OzinQNuIGleOzW0Hdp5eG5SMVWxIz7XoCoS2nScStp4Rv9
-xWz7psyKDxNAeAgfg8Nm8IkFMfKn9H8stDsbzuZVfbXH4B+MKzaasRILV+rAMGQo
-svoFeyVuJhMlsnnAal0dxdyPY8sQe12Z0sRdScn3WRHnz6q+GVPgD+AQZssFtpb1
-XemaPpOdoTNNv1w7F7fBtNQoIqItsSD87WpAY/glU4efl2HvTjWKjMmd+9d1ffIn
-7YQ14v5EUThqkpmJyVAGU5CgRVqvU3hiZUoyoFfhfZhJicwzNYS51F18Cv7UDFJO
-bFMAWpNAWLDnGICV0hRoB3p2FWc/+hfomftJO4u2UH3stRAMOZXtVmIU/wA84cN9
-DwcRg/y8
-=fb9t
------END PGP SIGNATURE-----
-
---jxJZfy9MYHgKPwT/--
-
---===============4466733375383141298==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Regards
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============4466733375383141298==--

@@ -2,64 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B2A05B9F6B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 18:11:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 789045BA0D9
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Sep 2022 20:32:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DF18CC640F1;
-	Thu, 15 Sep 2022 16:11:56 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2AF9CC0D2BB;
+	Thu, 15 Sep 2022 18:32:08 +0000 (UTC)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 58BBFC640F0
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 82B1BC03FC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Sep 2022 16:11:55 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28FFetYj011566;
- Thu, 15 Sep 2022 18:11:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=pf/wlrq+koHuIvC67Tzmdxzc445Fh2C8/H9klIAzxc4=;
- b=Sf0+guSt1wrPnrAUkLIrCIutPjU8CINQV1xF5pckHxOprXk+10Mde8qy77MOvkCWv81b
- RqG3LWFDDK9sZY5TW0pfbxRWwvCbE+bzetY1avj/BR14Pt9ZZ4kixn5qNapNXHEzZHzj
- Xr78FtOrm2FUaEA7Ew6RQiPh0bt7EdWWnULI1P3cdXa2KxRgqsE7aST704fJjmS2HXvQ
- SEEjDmUHUPg8dxaAsaTLxabgUg6byjjUlNTHpehhKRR1iRYuteP/2sqDqetxsTs384nt
- 5jvWkF1G9Azhm/YKhcpTGptBUwsu9F8hYKoTl7TXwWGxZrxC1LdwdW/sbiY0rGTlGeaW eg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jjy07nsh7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 15 Sep 2022 18:11:54 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 550F010002A;
- Thu, 15 Sep 2022 18:11:53 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 50A7F235F18;
- Thu, 15 Sep 2022 18:11:53 +0200 (CEST)
-Received: from localhost (10.75.127.50) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Thu, 15 Sep
- 2022 18:11:50 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 15 Sep 2022 18:11:41 +0200
-Message-ID: <20220915181132.4.I1431827b62d294343069ff0aa7e59abaacb8bdd5@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220915161141.301299-1-patrick.delaunay@foss.st.com>
-References: <20220915161141.301299-1-patrick.delaunay@foss.st.com>
+ Thu, 15 Sep 2022 18:32:06 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id h28so14032805qka.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 15 Sep 2022 11:32:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date;
+ bh=+ZmbDWe7UTXZV86+vkgmLkPvQcelbqxhDXsxU/aHHro=;
+ b=AL1TshYfKxARWzkekfsgjsZBekE5bLqbaTRgDoWy/3QzBL52OurggKBZ4Ir/2QgnOS
+ fpOYTIy5yBlG26SL+E4bRGETVfA2JAgWUUUwTc0/mjMRXhUlwiJISMPCO9VcFjelKUDn
+ faRNbAGTTZEZ52R918zv5GZk2AEOwF6jBoIBQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+ bh=+ZmbDWe7UTXZV86+vkgmLkPvQcelbqxhDXsxU/aHHro=;
+ b=gBbpPlVBuCN+Louu+uWtNMfKvYvQV0I1okXlNJPvKLmXpl/AlvmXKUmspcAEG25NEa
+ 3u2x+3OQ7AMpAq7SWhYe/hLdyFQyoJv8ixVdEFp3tDEXNggqnLeyACYB081C5oN5GK+d
+ TLt0zGKz80RXPZBJVfhBKWcI2JDetb6IYceyBTt7NhhyHQgTiiVvWhxXk+HZaSuvNw8H
+ NAAH9JZvpVTO92EjJ6Cp7U0wHRdC5D3SQXjO9M2CW4tdZ1cm2G48YvaVScN3IPUf3YXg
+ u16tdIKpICS7tqNq5fime4+AAAG+O8sr+JFai6wCOsenJDYhmhtfGimWI3eF6vWxQneM
+ gWbQ==
+X-Gm-Message-State: ACrzQf0eAlEc/i1zqDDehNI7bLI+BBuwhbbTMgTJxEC23Mc1VZQhcSDV
+ iuDddXbj5cu0Edc9ECaKsIOnL9bsvueSWRzk
+X-Google-Smtp-Source: AMsMyM73lxB2ODix4qbFpiPyzCl0pzU0Au+/zOUi65CnG3jmgDAjl+00VzJnGynPLSkcCdWeGXOjOA==
+X-Received: by 2002:a05:620a:290a:b0:6ce:afe1:4d84 with SMTP id
+ m10-20020a05620a290a00b006ceafe14d84mr1182396qkp.140.1663266725462; 
+ Thu, 15 Sep 2022 11:32:05 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-7c7f-be09-1cf9-0c48.res6.spectrum.com.
+ [2603:6081:7b00:6400:7c7f:be09:1cf9:c48])
+ by smtp.gmail.com with ESMTPSA id
+ u8-20020a05620a430800b006bb208bd889sm4457661qko.120.2022.09.15.11.32.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Sep 2022 11:32:04 -0700 (PDT)
+Date: Thu, 15 Sep 2022 14:32:02 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Message-ID: <20220915183202.GP6993@bill-the-cat>
+References: <7dc1d636-7b90-6ac3-be94-7512bd4163bb@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.75.127.50]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-15_10,2022-09-14_04,2022-06-22_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 4/4] arm: stm32mp: adapt the command stm32key
-	for STM32MP13x
+In-Reply-To: <7dc1d636-7b90-6ac3-be94-7512bd4163bb@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Heiko Schocher <hs@denx.de>
+Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2022.10
+ = u-boot-stm32-20220915
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,133 +72,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1653614854669310901=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Change the mask of OTP0 used to close the device on STM32MP
-- STM32MP15x: bit 6 of OPT0
-- STM32MP13x: 0b111111 = 0x3F for OTP_SECURED closed device
 
-And support the 2 keys for STM32MP13x
-- PKHTH : Hash of the 8 ECC Public Keys Hashes Table
-          (ECDSA is the authentication algorithm)
-- EDMK : Encryption/Decryption Master Key
+--===============1653614854669310901==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="WHG05yakhlzm8Hk1"
+Content-Disposition: inline
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- arch/arm/mach-stm32mp/cmd_stm32key.c | 52 ++++++++++++++++++++++++----
- 1 file changed, 45 insertions(+), 7 deletions(-)
+--WHG05yakhlzm8Hk1
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
-index 4eac56082db..278253e472f 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32key.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
-@@ -11,9 +11,14 @@
- #include <dm/device.h>
- #include <dm/uclass.h>
- 
--/* Closed device : bit 6 of OPT0*/
-+/*
-+ * Closed device: OTP0
-+ * STM32MP15x: bit 6 of OPT0
-+ * STM32MP13x: 0b111111 = 0x3F for OTP_SECURED closed device
-+ */
- #define STM32_OTP_CLOSE_ID		0
--#define STM32_OTP_CLOSE_MASK		BIT(6)
-+#define STM32_OTP_STM32MP13x_CLOSE_MASK	0x3F
-+#define STM32_OTP_STM32MP15x_CLOSE_MASK	BIT(6)
- 
- /* PKH is the first element of the key list */
- #define STM32KEY_PKH 0
-@@ -25,6 +30,21 @@ struct stm32key {
- 	u8 size;
- };
- 
-+const struct stm32key stm32mp13_list[] = {
-+	[STM32KEY_PKH] = {
-+		.name = "PKHTH",
-+		.desc = "Hash of the 8 ECC Public Keys Hashes Table (ECDSA is the authentication algorithm)",
-+		.start = 24,
-+		.size = 8,
-+	},
-+	{
-+		.name = "EDMK",
-+		.desc = "Encryption/Decryption Master Key",
-+		.start = 92,
-+		.size = 4,
-+	}
-+};
-+
- const struct stm32key stm32mp15_list[] = {
- 	[STM32KEY_PKH] = {
- 		.name = "PKH",
-@@ -39,12 +59,29 @@ static u8 stm32key_index;
- 
- static u8 get_key_nb(void)
- {
--	return ARRAY_SIZE(stm32mp15_list);
-+	if (IS_ENABLED(CONFIG_STM32MP13x))
-+		return ARRAY_SIZE(stm32mp13_list);
-+
-+	if (IS_ENABLED(CONFIG_STM32MP15x))
-+		return ARRAY_SIZE(stm32mp15_list);
- }
- 
- static const struct stm32key *get_key(u8 index)
- {
--	return &stm32mp15_list[index];
-+	if (IS_ENABLED(CONFIG_STM32MP13x))
-+		return &stm32mp13_list[index];
-+
-+	if (IS_ENABLED(CONFIG_STM32MP15x))
-+		return &stm32mp15_list[index];
-+}
-+
-+static u32 get_otp_close_mask(void)
-+{
-+	if (IS_ENABLED(CONFIG_STM32MP13x))
-+		return STM32_OTP_STM32MP13x_CLOSE_MASK;
-+
-+	if (IS_ENABLED(CONFIG_STM32MP15x))
-+		return STM32_OTP_STM32MP15x_CLOSE_MASK;
- }
- 
- #define BSEC_LOCK_ERROR			(-1)
-@@ -123,7 +160,7 @@ static int read_key_otp(struct udevice *dev, const struct stm32key *key, bool pr
- static int read_close_status(struct udevice *dev, bool print, bool *closed)
- {
- 	int word, ret, result;
--	u32 val, lock;
-+	u32 val, lock, mask;
- 	bool status;
- 
- 	result = 0;
-@@ -140,7 +177,8 @@ static int read_close_status(struct udevice *dev, bool print, bool *closed)
- 	if (ret != 4)
- 		lock = BSEC_LOCK_ERROR;
- 
--	status = (val & STM32_OTP_CLOSE_MASK) == STM32_OTP_CLOSE_MASK;
-+	mask = get_otp_close_mask();
-+	status = (val & mask) == mask;
- 	if (closed)
- 		*closed = status;
- 	if (print)
-@@ -371,7 +409,7 @@ static int do_stm32key_close(struct cmd_tbl *cmdtp, int flag, int argc, char *co
- 	if (!yes && !confirm_prog())
- 		return CMD_RET_FAILURE;
- 
--	val = STM32_OTP_CLOSE_MASK;
-+	val = get_otp_close_mask();
- 	ret = misc_write(dev, STM32_BSEC_OTP(STM32_OTP_CLOSE_ID), &val, 4);
- 	if (ret != 4) {
- 		printf("Error: can't update OTP %d\n", STM32_OTP_CLOSE_ID);
--- 
-2.25.1
+On Thu, Sep 15, 2022 at 05:37:58PM +0200, Patrick DELAUNAY wrote:
+
+> Hi Tom,
+>=20
+> Please pull the STM32 related fixes for u-boot/master, v2022.10:
+> u-boot-stm32-20220915
+>=20
+> - Fixes on STM32 I2C drivers
+> - Activate SCMI regulator for STM32MP15 defconfig, fix the usb start comm=
+and
+> =A0 for scmi device tree
+>=20
+> CI status:
+> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/13457
+>=20
+> Thanks,
+> Patrick
+>=20
+> git request-pull origin/master
+> https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> u-boot-stm32-20220915
+>=20
+> The following changes since commit d6a03711fde2a6c99614af20ee95a9efe7ad23=
+2b:
+>=20
+> =A0 Merge https://source.denx.de/u-boot/custodians/u-boot-marvell (2022-0=
+9-13
+> 08:19:42 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+> =A0 https://source.denx.de/u-boot/custodians/u-boot-stm.git/
+> tags/u-boot-stm32-20220915
+>=20
+> for you to fetch changes up to a22692dd815c20b3fc6354be954ce65922761ad1:
+>=20
+> =A0 i2c: stm32: fix usage of rise/fall device tree properties (2022-09-15
+> 14:59:29 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--WHG05yakhlzm8Hk1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmMjb5gACgkQFHw5/5Y0
+tywbVAv7BzuJF+lon3Woi2NF2ro415RnCqMD7eLP9zWiqMSdkEXQvKHFWn6tKuEd
+WUGvqkANwBZNlUJzjSmTDVrxkomXBA1SzfrbarV4pbu/zORw2FF3T/bdo5rS8fvW
+RIldEdiOuF4JbftclTvwA4dn4j7epNbDDphle8oUZmw2IzCVMhVU1MyXMxircAHr
+QRkqIxmSrwAScqVXVIj/UY6g9PwVsGP9/ZJqXmujyLTa1mlrth5vZ+0mWL5xMb9S
+7CLAh5HcmKSB9PTb5X9Es3SVzLxnG2hhmZEwFkThsgTIu+jk23qbzZttb7FqgmOD
+Yd8oDkqWdmsN7518HAPtAQ7jDWgvdzSSt0l5b0lig1R3j70FYe0ena7Jb+PdUyyo
+tolwswq9CNz1LYN/4ABNgDnGQ+3GcSi3TH+ilkVAxbobKkkhrN9LIbcKaC2AM9ze
+//PPSPz1baWdaMdruAE7r6AvNDpqzu74dZEl3O5wA0h879F510QFW8zs1jUSX+89
+Biwt3x0/
+=adA4
+-----END PGP SIGNATURE-----
+
+--WHG05yakhlzm8Hk1--
+
+--===============1653614854669310901==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1653614854669310901==--

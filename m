@@ -2,74 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F7985BB9C2
-	for <lists+uboot-stm32@lfdr.de>; Sat, 17 Sep 2022 19:27:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 74E075BC302
+	for <lists+uboot-stm32@lfdr.de>; Mon, 19 Sep 2022 08:42:29 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C35FC03FC6;
-	Sat, 17 Sep 2022 17:27:23 +0000 (UTC)
-Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
- [209.85.128.175])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FF8BC0D2C1;
+	Mon, 19 Sep 2022 06:42:29 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C78D1C035A5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3E443C03FD5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 17 Sep 2022 17:27:22 +0000 (UTC)
-Received: by mail-yw1-f175.google.com with SMTP id
- 00721157ae682-345528ceb87so294703997b3.11
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 17 Sep 2022 10:27:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date;
- bh=YDUvf1fwLM/UATJLlP54Bin990us17fbwSG1NdLSZco=;
- b=M6jeFTin2N/CIczyE7sL7XwFgBtYlfh5RiC181OFaeLz1d40doPh+lqdfc8H8tDdcm
- +xC7XNmcggJhP2wHOfGDPm8GbIoP6NhCV/kjJtEudqsHwOzo91KoQ77s6Hm65QNRLSMz
- wR/B+Y2QSG9YL0/iuY4vxf7cNh6FspRl3NRXo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date;
- bh=YDUvf1fwLM/UATJLlP54Bin990us17fbwSG1NdLSZco=;
- b=nFxttq6DZqTMAhW5u668tIPokpFEdFWPBWVyhutVNF5RQx/KNQttaU+QDUXGOdGWIs
- McAKKsuvoh5xXsSo/SEZBqJkWzDta3rpqSoha8gqys0MbeE7FlkAE9lxwIjcX2lD1Iez
- 1NasmwPSKiMRhBIOdoelPvg+t59KNUrvTgGQWKemA4j283fsvW0P4LzfCG4N2Cm98zLs
- miShGnVn/5gU0eRWul3cLaPrKeLAK7roGhBbbLGV4b/LQLcfT8AZnLd6nK02uZf29RiD
- KLcl9XNDjYSO899IMBjltXS2qupU95Ko4YIkEMwkfrWsa/wyL61RAdAxNR7QJee2YCIn
- Nlwg==
-X-Gm-Message-State: ACrzQf1wUwTMbYTAXN5LeGEXDL9T3dzw1mfbt2OJnHDLa9GkKKerbRDy
- D7DZa0VmpJOZ903F46U5+/YzdyS86S7s7k0hBj5XHQ==
-X-Google-Smtp-Source: AMsMyM66mh6LP6pHtwtWLsrE2MwRFArYCy3lRwD4yffz+khWIAXapF4TbpUz4Z2Xp129H4qzpPyzDokfAPeSZnk764w=
-X-Received: by 2002:a81:1246:0:b0:345:222d:d994 with SMTP id
- 67-20020a811246000000b00345222dd994mr8660990yws.423.1663435641533; Sat, 17
- Sep 2022 10:27:21 -0700 (PDT)
+ Mon, 19 Sep 2022 06:42:28 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28J0XRBu032263;
+ Mon, 19 Sep 2022 08:42:27 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=iJftyYYVoFg5q4e2Mc4d9VZgO61eult30HK2XFha6vA=;
+ b=QShDdCErHXK72dihDeD5ZIHga+GZIGqtBTeIYPk6BKxCpxJkH+x1aWEZy8OgpgVYr3zc
+ IkhnfIqFRFqT3Cj8dtfV9tCrLDzwOiLyXIbQhoLPX2umgKiPWsVPoDGzSSKpFhS8+p14
+ 2/Q7guzFjGDEhCIz918moXXd7dE2dbGzREP6h7Tt0NYL5pWyQDg/INVtankEFHRc2lD+
+ HnHbN7rUqzWHBGEWa4btEzfDe1xAHpbU/iPlez8TAqxTSqvKi40bioFsQRHvnvJ4XW8y
+ ibnKQuAAetl7TFDkKU2p2/cCeGSn/ZCyvIrYfcBIeVMF+zpsVXPYSVP78/9LGKiNoMjh tA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jn6a0hfs2-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 19 Sep 2022 08:42:27 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3B96410002A;
+ Mon, 19 Sep 2022 08:42:25 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 54F892128B3;
+ Mon, 19 Sep 2022 08:42:25 +0200 (CEST)
+Received: from [10.201.21.72] (10.75.127.50) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Mon, 19 Sep
+ 2022 08:42:25 +0200
+Message-ID: <9f4dd203-a66f-a7c1-8aac-0da3e2a00b59@foss.st.com>
+Date: Mon, 19 Sep 2022 08:42:24 +0200
 MIME-Version: 1.0
-References: <20220917082550.74511-2-sjg@chromium.org>
- <20220917105204.GA5873@laputa>
-In-Reply-To: <20220917105204.GA5873@laputa>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 17 Sep 2022 11:27:09 -0600
-Message-ID: <CAPnjgZ2X5RZLqC_j5=xyhoCLJDJLLZ4Z5sav0RHdhV+EkHnYsw@mail.gmail.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Anastasiia Lukianenko <vicooodin@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Marek Vasut <marex@denx.de>, 
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Max Merchel <Max.Merchel@tq-group.com>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Oleksii Bidnichenko <oleksii.bidnichenko@toradex.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Ricardo Salveti <ricardo@foundries.io>, 
- Sean Anderson <sean.anderson@seco.com>, Stefan Roese <sr@denx.de>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, schspa <schspa@gmail.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/1] blk: Rename if_type to uclass_id
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220916165244.1.I22e7aeac596c03aca2236b69fd3cdf41a1f11339@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20220916165244.1.I22e7aeac596c03aca2236b69fd3cdf41a1f11339@changeid>
+X-Originating-IP: [10.75.127.50]
+X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-19_03,2022-09-16_01,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp1: cleanup config file
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,29 +75,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Takahiro,
+Hi PAtrick
 
-On Sat, 17 Sept 2022 at 04:52, AKASHI Takahiro
-<takahiro.akashi@linaro.org> wrote:
->
-> On Sat, Sep 17, 2022 at 02:25:50AM -0600, Simon Glass wrote:
-> > Use the word 'uclass' instead of 'if_type' to complete the conversion.
->
-> NAK.
-> You seem to have missed out some of my comments.
-> See:
-> https://lists.denx.de/pipermail/u-boot/2022-September/494583.html
-> (against efi_api.h, efi_device_path.c, efi_device_path_to_text.c and efi_net.c)
+On 9/16/22 16:52, Patrick Delaunay wrote:
+> Remove the unnecessary comment after the CONFIG_SYS_BOOTM_LEN
+> migration to Kconfig.
+> 
+> Fixes: c45568cc4e51 ("Convert CONFIG_SYS_BOOTM_LEN to Kconfig")
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  include/configs/stm32mp13_common.h | 2 --
+>  include/configs/stm32mp15_common.h | 2 --
+>  2 files changed, 4 deletions(-)
+> 
+> diff --git a/include/configs/stm32mp13_common.h b/include/configs/stm32mp13_common.h
+> index 3ca65ea2a37..78089b965ae 100644
+> --- a/include/configs/stm32mp13_common.h
+> +++ b/include/configs/stm32mp13_common.h
+> @@ -21,8 +21,6 @@
+>   */
+>  #define CONFIG_SYS_BOOTMAPSZ		SZ_256M
+>  
+> -/* Extend size of kernel image for uncompression */
+> -
+>  /*MMC SD*/
+>  #define CONFIG_SYS_MMC_MAX_DEVICE	2
+>  
+> diff --git a/include/configs/stm32mp15_common.h b/include/configs/stm32mp15_common.h
+> index c5412ffeb31..bd8e16bc1b9 100644
+> --- a/include/configs/stm32mp15_common.h
+> +++ b/include/configs/stm32mp15_common.h
+> @@ -21,8 +21,6 @@
+>   */
+>  #define CONFIG_SYS_BOOTMAPSZ		SZ_256M
+>  
+> -/* Extend size of kernel image for uncompression */
+> -
+>  /*MMC SD*/
+>  #define CONFIG_SYS_MMC_MAX_DEVICE	3
+>  
 
-OK yes I missed that, sorry.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-I sent a new version.
-
-Also, are you planning to do another series to better integrate EFI
-with driver model?
-
-Regards,
-Simon
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47AEA5BF853
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 Sep 2022 09:54:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD8295E794E
+	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Sep 2022 13:20:44 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EA79BC0D2BF;
-	Wed, 21 Sep 2022 07:54:13 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4BA5FC57B6C;
+	Fri, 23 Sep 2022 11:20:44 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 28C74C03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2B069C03FD6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 Sep 2022 07:54:12 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28L6LJYQ020934;
- Wed, 21 Sep 2022 09:54:11 +0200
+ Fri, 23 Sep 2022 11:20:43 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28N9bvYq022592;
+ Fri, 23 Sep 2022 13:20:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=bjJOPANytmOF/Ps7AM+TIki/BWQbbawy8FWIPDF99/0=;
- b=1yCwZcmdqWweDZ2V0ADCaOIG8QxeDUCge+pI2E4adtXwqCmd0n+Bn+1G881y9RViK48/
- IX0ENyPUze9mEZluJSHghlNnX7RZQ6Q6WSeXUHtZmaG23Z95MlNDqHv1MVveP3cXorC5
- 4igbfc/MSOKMBdBETVMCsBvuvmFT/FxaWkWKKciwt7IjPmLyMYDJ+C5C5qZFAJWtcqva
- M/6EzjKTEdEemdM7mLs3shZPB7RxxgvYmQ4EJ+HKqFC8IM1ig/uEdeAYtkchSmUt62my
- HrL6Padf0AR8GDTX+Pr9ZLW9RlGQLxeH+srx6ZojwY2bN5ufBKZUdJYJxeEjwAOShlAm kw== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=8zo/0tUeCikcyD4mmPisBucj7ZCH+HbzNm+OtrpiKLM=;
+ b=P7xtVrXBOh8d5Au0w+SV2sWdSYvWsxTgh2Ido7M18RKZ3FIRN2KtEvAEBDkKvmcb65Aj
+ uW4iDWVFQ68XvutTgDUvg5EC+DDolbTH3uqpwyqGQy7IQIg3MjsZj6SvCB4t9GKG+vh7
+ 6L5bGA8Y2EiBLxrCQM9VpPznbufGe3tMw/GbXQPX+xD3apoaAoveooLJtADbt7ZMYCb6
+ XoZrDI/rjVRYVXZMYn8qZ1aW2hqajlPJZYNFdXvhE+Jg8dF+MZpM3lHEtDDeoPqZEh0o
+ zVUNEad5DBe2lGyPfEJDeFu6H174vw5ONyXFDKrp9rqcI6Z7sal2OSnoL+umJNtHuUhZ Dw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jn6ckrcf1-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jn6auempa-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 Sep 2022 09:54:11 +0200
+ Fri, 23 Sep 2022 13:20:40 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 805BA10002A;
- Wed, 21 Sep 2022 09:54:10 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 77723217B91;
- Wed, 21 Sep 2022 09:54:10 +0200 (CEST)
-Received: from [10.48.0.213] (10.75.127.121) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Wed, 21 Sep
- 2022 09:54:10 +0200
-Message-ID: <2c0a62c9-ac6d-0507-206d-bb880dde60f7@foss.st.com>
-Date: Wed, 21 Sep 2022 09:53:50 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 47A34100034;
+ Fri, 23 Sep 2022 13:20:40 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E11A321B527;
+ Fri, 23 Sep 2022 13:20:38 +0200 (CEST)
+Received: from localhost (10.75.127.117) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Fri, 23 Sep
+ 2022 13:20:38 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-References: <20220907134201.1.I8c8568a1dada00ca09ce1f3d5abaf38e6fdf66d5@changeid>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20220907134201.1.I8c8568a1dada00ca09ce1f3d5abaf38e6fdf66d5@changeid>
-X-Originating-IP: [10.75.127.121]
-X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE3.st.com
- (10.75.129.71)
+Date: Fri, 23 Sep 2022 13:20:33 +0200
+Message-ID: <20220923112033.2458836-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+X-Originating-IP: [10.75.127.117]
+X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-21_04,2022-09-20_02,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32mp: alignment with v6.0-rc3
+ definitions=2022-09-23_03,2022-09-22_02,2022-06-22_01
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Dillon Min <dillon.minfei@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32: DT sync with kernel v6.0-rc4
+	for MCU's boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,64 +69,1055 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiA5LzcvMjIgMTM6NDIsIFBhdHJpY2sgRGVsYXVuYXkgd3JvdGU6Cj4gRGV2aWNlIHRy
-ZWUgYWxpZ25tZW50IHdpdGggTGludXgga2VybmVsIHY2LjAtcmMzOgo+IC0gQVJNOiBkdHM6IHN0
-bTMyOiBhZGQgc3VwcG9ydCBmb3IgVVNCMjUxNEIgb25ib2FyZCBodWIgb24gc3RtMzJtcDE1eHgt
-ZGt4Cj4gLSBBUk06IGR0czogc3RtMzI6IEFkZCBhbHRlcm5hdGUgcGlubXV4IGZvciBSQ0MgcGlu
-Cj4gLSBBUk06IGR0czogc3RtMzI6IEFkZCBhbHRlcm5hdGUgcGlubXV4IGZvciBEQ01JIHBpbnMK
-PiAtIEFSTTogZHRzOiBzdG0zMjogQWRkIGFsdGVybmF0ZSBwaW5tdXggZm9yIFNQSTIgcGlucwo+
-IC0gQVJNOiBkdHM6IHN0bTMyOiBGaXggU1BJMiBwaW5tdXggcGluIGNvbW1lbnRzIG9uIHN0bTMy
-bXAxNQo+IC0gQVJNOiBkdHM6IHN0bTMyOiBhZGQgb3B0ZWUgcmVzZXJ2ZWQgbWVtb3J5IG9uIHN0
-bTMybXAxMzVmLWRrCj4gLSBBUk06IGR0czogc3RtMzI6IGVuYWJsZSBvcHRlZSBmaXJtd2FyZSBh
-bmQgU0NNSSBzdXBwb3J0IG9uIFNUTTMyTVAxMwo+IC0gQVJNOiBkdHM6IHN0bTMyOiByZW1vdmUg
-dGhlIElQQ0MgIndha2V1cCIgSVJRIG9uIHN0bTMybXAxNTEKPgo+IFNpZ25lZC1vZmYtYnk6IFBh
-dHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4gLS0tCj4KPiAg
-IGFyY2gvYXJtL2R0cy9zdG0zMm1wMTMtdS1ib290LmR0c2kgIHwgMTAgKysrLS0KPiAgIGFyY2gv
-YXJtL2R0cy9zdG0zMm1wMTMxLmR0c2kgICAgICAgIHwgMjggKysrKysrLS0tLS0tLQo+ICAgYXJj
-aC9hcm0vZHRzL3N0bTMybXAxMzVmLWRrLmR0cyAgICAgfCAgNCArLQo+ICAgYXJjaC9hcm0vZHRz
-L3N0bTMybXAxNS1waW5jdHJsLmR0c2kgfCA2NCArKysrKysrKysrKysrKysrKysrKysrKysrKy0t
-LQo+ICAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTEuZHRzaSAgICAgICAgfCAgNyArKy0tCj4gICBh
-cmNoL2FybS9kdHMvc3RtMzJtcDE1eHgtZGt4LmR0c2kgICB8ICA4ICsrKysKPiAgIDYgZmlsZXMg
-Y2hhbmdlZCwgOTEgaW5zZXJ0aW9ucygrKSwgMzAgZGVsZXRpb25zKC0pCj4KCi4uLgoKRm9yIGlu
-Zm9ybWF0aW9uIHRoaXMgcGF0Y2ggY2F1c2UgYSB0cmFjZSBkdXJpbmcgYm9vdCBmb3IgYSBtaXNz
-IAphbGlnbm1lbnQgb2YgdGhlIHNpemUgb2YgdGhlCgpyZXNlcnZlZCBtZW1vcnkgZm9yIE9QLVRF
-RSBpbiB0aGUga2VybmVsIGRldmljZSB0cmVlKG5vdyAweDMwMDAwMDAgdG8gCnByZXBhcmUgdGhl
-IHNlY3VyZSBVSSBzdXBwb3J0KQoKYW5kIHRoZSBub2RlIGFkZGVkIGR5bmFtaWNhbGx5IGJ5IE9Q
-LVRFRSBpbiBtYXN0ZXIgYnJhbmNoICgweDIwMDAwMDApLCAKd2l0aCA6CgoKPiBkaWZmIC0tZ2l0
-IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxMzVmLWRrLmR0cyBiL2FyY2gvYXJtL2R0cy9zdG0zMm1w
-MTM1Zi1kay5kdHMKPiBpbmRleCBmNDM2ZmZhYjk5OC4uZTZiOGZmZDMzMmMgMTAwNjQ0Cj4gLS0t
-IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxMzVmLWRrLmR0cwo+ICsrKyBiL2FyY2gvYXJtL2R0cy9z
-dG0zMm1wMTM1Zi1kay5kdHMKPiBAQCAtMzEsOCArMzEsOCBAQAo+ICAgCQkjc2l6ZS1jZWxscyA9
-IDwxPjsKPiAgIAkJcmFuZ2VzOwo+ICAgCj4gLQkJb3B0ZWVAZGUwMDAwMDAgewo+IC0JCQlyZWcg
-PSA8MHhkZTAwMDAwMCAweDIwMDAwMDA+Owo+ICsJCW9wdGVlQGRkMDAwMDAwIHsKPiArCQkJcmVn
-ID0gPDB4ZGQwMDAwMDAgMHgzMDAwMDAwPjsKPiAgIAkJCW5vLW1hcDsKPiAgIAkJfTsKPiAgIAl9
-OwoKLi4uCgoKVGhlc2UgMiBkaWZmZXJlbnQgbWVtb3J5IG5vZGVzIGluIFUtQm9vdCBEVCBjYXVz
-ZSBvdmVybGFwIGFuZCB0aGUgMiAKRVJST1IgdHJhY2VzIGZyb20gbG1iOgoKcmVzZXJ2aW5nIGZk
-dCBtZW1vcnkgcmVnaW9uIGZhaWxlZCAoYWRkcj1kZDAwMDAwMCBzaXplPTMwMDAwMDAgZmxhZ3M9
-NCkKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KVS1Cb290IDIwMjIuMTAtcmM0LTAwMDExLWczNTEzM2Vl
-OWNhMCAoU2VwIDA3IDIwMjIgLSAxNDowNjo1MiArMDIwMCkKCkNQVTogU1RNMzJNUDEzNUMgUmV2
-LloKTW9kZWw6IFNUTWljcm9lbGVjdHJvbmljcyBTVE0zMk1QMTM1Ri1ESyBEaXNjb3ZlcnkgQm9h
-cmQKQm9hcmQ6IHN0bTMybXAxIGluIHRydXN0ZWQgbW9kZSAoc3Qsc3RtMzJtcDEzNWYtZGspCkRS
-QU06wqAgRVJST1I6IHJlc2VydmluZyBmZHQgbWVtb3J5IHJlZ2lvbiBmYWlsZWQgKGFkZHI9ZGQw
-MDAwMDAgCnNpemU9MzAwMDAwMCBmbGFncz00KQo1MTIgTWlCCkVSUk9SOiByZXNlcnZpbmcgZmR0
-IG1lbW9yeSByZWdpb24gZmFpbGVkIChhZGRyPWRkMDAwMDAwIHNpemU9MzAwMDAwMCAKZmxhZ3M9
-NCkKQ29yZTrCoCA1MyBkZXZpY2VzLCAyMyB1Y2xhc3NlcywgZGV2aWNldHJlZTogYm9hcmQKTU1D
-OsKgwqAgU1RNMzIgU0QvTU1DOiAwCkxvYWRpbmcgRW52aXJvbm1lbnQgZnJvbSBNTUMuLi4gT0sK
-SW46wqDCoMKgIHNlcmlhbEA0MDAxMDAwMApPdXQ6wqDCoCBzZXJpYWxANDAwMTAwMDAKRXJyOsKg
-wqAgc2VyaWFsQDQwMDEwMDAwCk5ldDrCoMKgIE5vIGV0aGVybmV0IGZvdW5kLgpIaXQgYW55IGtl
-eSB0byBzdG9wIGF1dG9ib290OsKgIDAKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKVGhlIExNQiBkb24ndCBn
-ZW5lcmF0ZSBlcnJvciB3aGVuIDIgcmVnaW9ucyBhcmUgaWRlbnRpY2FsIChzYW1lIGFkZHJlc3Mg
-CmFuZCBzaXplKS4KCgpBIHBlbmRpbmcgT1AtVEVFIHBhdGNoIGFsbG93IHRvIGF2b2lkIHRoZSBV
-LUJvb3QgZGV2aWNlIHRlZSBtb2RpZmljYXRpb24gCmFuZCByZW1vdmUgdGhpcyB0cmFjZToKCmh0
-dHBzOi8vZ2l0aHViLmNvbS9PUC1URUUvb3B0ZWVfb3MvcHVsbC81NTI3CgoKUmVnYXJkcwoKUGF0
-cmljawoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
-b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
-bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
-bmZvL3Vib290LXN0bTMyCg==
+Device tree alignment with kernel v6.0-rc4.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+
+ arch/arm/dts/stm32429i-eval-u-boot.dtsi  |  2 +-
+ arch/arm/dts/stm32746g-eval.dts          | 18 ++++-
+ arch/arm/dts/stm32f4-pinctrl.dtsi        |  2 +-
+ arch/arm/dts/stm32f429-disco-u-boot.dtsi |  4 +-
+ arch/arm/dts/stm32f429-disco.dts         | 20 +++--
+ arch/arm/dts/stm32f429-pinctrl.dtsi      | 94 +++++++++++------------
+ arch/arm/dts/stm32f429.dtsi              | 69 +++--------------
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  4 +-
+ arch/arm/dts/stm32f469-disco.dts         | 24 ++++--
+ arch/arm/dts/stm32f469-pinctrl.dtsi      | 96 ++++++++++++------------
+ arch/arm/dts/stm32f7-pinctrl.dtsi        |  2 +-
+ arch/arm/dts/stm32f7-u-boot.dtsi         |  2 +-
+ arch/arm/dts/stm32f746-disco.dts         | 12 +++
+ arch/arm/dts/stm32f746.dtsi              | 67 +----------------
+ arch/arm/dts/stm32f769-disco.dts         | 18 ++++-
+ arch/arm/dts/stm32h743.dtsi              | 19 ++---
+ arch/arm/dts/stm32h743i-disco.dts        |  8 +-
+ arch/arm/dts/stm32h743i-eval.dts         |  8 +-
+ arch/arm/dts/stm32h750i-art-pi.dts       |  8 +-
+ 19 files changed, 207 insertions(+), 270 deletions(-)
+
+diff --git a/arch/arm/dts/stm32429i-eval-u-boot.dtsi b/arch/arm/dts/stm32429i-eval-u-boot.dtsi
+index fcab9ae977..030da47b7a 100644
+--- a/arch/arm/dts/stm32429i-eval-u-boot.dtsi
++++ b/arch/arm/dts/stm32429i-eval-u-boot.dtsi
+@@ -218,6 +218,6 @@
+ 	};
+ };
+ 
+-&timer5 {
++&timers5 {
+ 	u-boot,dm-pre-reloc;
+ };
+diff --git a/arch/arm/dts/stm32746g-eval.dts b/arch/arm/dts/stm32746g-eval.dts
+index 9940cf1873..0e6445a539 100644
+--- a/arch/arm/dts/stm32746g-eval.dts
++++ b/arch/arm/dts/stm32746g-eval.dts
+@@ -45,12 +45,10 @@
+ 		};
+ 	};
+ 
+-	gpio_keys {
++	gpio-keys {
+ 		compatible = "gpio-keys";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 		autorepeat;
+-		button@0 {
++		button-0 {
+ 			label = "Wake up";
+ 			linux,code = <KEY_WAKEUP>;
+ 			gpios = <&gpioc 13 0>;
+@@ -160,6 +158,18 @@
+ 	bus-width = <4>;
+ };
+ 
++&timers5 {
++	/* Override timer5 to act as clockevent */
++	compatible = "st,stm32-timer";
++	interrupts = <50>;
++	status = "okay";
++	/delete-property/#address-cells;
++	/delete-property/#size-cells;
++	/delete-property/clock-names;
++	/delete-node/pwm;
++	/delete-node/timer@4;
++};
++
+ &usart1 {
+ 	pinctrl-0 = <&usart1_pins_a>;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/stm32f4-pinctrl.dtsi b/arch/arm/dts/stm32f4-pinctrl.dtsi
+index adf502694b..46815c965d 100644
+--- a/arch/arm/dts/stm32f4-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f4-pinctrl.dtsi
+@@ -9,7 +9,7 @@
+ 
+ / {
+ 	soc {
+-		pinctrl: pin-controller {
++		pinctrl: pinctrl@40020000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <1>;
+ 			ranges = <0 0x40020000 0x3000>;
+diff --git a/arch/arm/dts/stm32f429-disco-u-boot.dtsi b/arch/arm/dts/stm32f429-disco-u-boot.dtsi
+index c993f86be8..dcc68c4bcc 100644
+--- a/arch/arm/dts/stm32f429-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f429-disco-u-boot.dtsi
+@@ -27,7 +27,7 @@
+ 
+ 	soc {
+ 		u-boot,dm-pre-reloc;
+-		pin-controller {
++		pinctrl@40020000 {
+ 			u-boot,dm-pre-reloc;
+ 		};
+ 
+@@ -193,6 +193,6 @@
+ 	u-boot,dm-pre-reloc;
+ };
+ 
+-&timer5 {
++&timers5 {
+ 	u-boot,dm-pre-reloc;
+ };
+diff --git a/arch/arm/dts/stm32f429-disco.dts b/arch/arm/dts/stm32f429-disco.dts
+index 42477c8d3f..30daabd10a 100644
+--- a/arch/arm/dts/stm32f429-disco.dts
++++ b/arch/arm/dts/stm32f429-disco.dts
+@@ -39,12 +39,10 @@
+ 		};
+ 	};
+ 
+-	gpio_keys {
++	gpio-keys {
+ 		compatible = "gpio-keys";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 		autorepeat;
+-		button@0 {
++		button-0 {
+ 			label = "User";
+ 			linux,code = <KEY_HOME>;
+ 			gpios = <&gpioa 0 0>;
+@@ -152,7 +150,7 @@
+ 
+ 	display: display@1{
+ 		/* Connect panel-ilitek-9341 to ltdc */
+-		compatible = "st,sf-tc240t-9370-t";
++		compatible = "st,sf-tc240t-9370-t", "ilitek,ili9341";
+ 		reg = <1>;
+ 		spi-3wire;
+ 		spi-max-frequency = <10000000>;
+@@ -165,6 +163,18 @@
+ 	};
+ };
+ 
++&timers5 {
++	/* Override timer5 to act as clockevent */
++	compatible = "st,stm32-timer";
++	interrupts = <50>;
++	status = "okay";
++	/delete-property/#address-cells;
++	/delete-property/#size-cells;
++	/delete-property/clock-names;
++	/delete-node/pwm;
++	/delete-node/timer@4;
++};
++
+ &usart1 {
+ 	pinctrl-0 = <&usart1_pins_a>;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/stm32f429-pinctrl.dtsi b/arch/arm/dts/stm32f429-pinctrl.dtsi
+index 575c7eecab..5be171eea5 100644
+--- a/arch/arm/dts/stm32f429-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f429-pinctrl.dtsi
+@@ -6,54 +6,50 @@
+ 
+ #include "stm32f4-pinctrl.dtsi"
+ 
+-/ {
+-	soc {
+-		pinctrl: pin-controller {
+-			compatible = "st,stm32f429-pinctrl";
+-
+-			gpioa: gpio@40020000 {
+-				gpio-ranges = <&pinctrl 0 0 16>;
+-			};
+-
+-			gpiob: gpio@40020400 {
+-				gpio-ranges = <&pinctrl 0 16 16>;
+-			};
+-
+-			gpioc: gpio@40020800 {
+-				gpio-ranges = <&pinctrl 0 32 16>;
+-			};
+-
+-			gpiod: gpio@40020c00 {
+-				gpio-ranges = <&pinctrl 0 48 16>;
+-			};
+-
+-			gpioe: gpio@40021000 {
+-				gpio-ranges = <&pinctrl 0 64 16>;
+-			};
+-
+-			gpiof: gpio@40021400 {
+-				gpio-ranges = <&pinctrl 0 80 16>;
+-			};
+-
+-			gpiog: gpio@40021800 {
+-				gpio-ranges = <&pinctrl 0 96 16>;
+-			};
+-
+-			gpioh: gpio@40021c00 {
+-				gpio-ranges = <&pinctrl 0 112 16>;
+-			};
+-
+-			gpioi: gpio@40022000 {
+-				gpio-ranges = <&pinctrl 0 128 16>;
+-			};
+-
+-			gpioj: gpio@40022400 {
+-				gpio-ranges = <&pinctrl 0 144 16>;
+-			};
+-
+-			gpiok: gpio@40022800 {
+-				gpio-ranges = <&pinctrl 0 160 8>;
+-			};
+-		};
++&pinctrl {
++	compatible = "st,stm32f429-pinctrl";
++
++	gpioa: gpio@40020000 {
++		gpio-ranges = <&pinctrl 0 0 16>;
++	};
++
++	gpiob: gpio@40020400 {
++		gpio-ranges = <&pinctrl 0 16 16>;
++	};
++
++	gpioc: gpio@40020800 {
++		gpio-ranges = <&pinctrl 0 32 16>;
++	};
++
++	gpiod: gpio@40020c00 {
++		gpio-ranges = <&pinctrl 0 48 16>;
++	};
++
++	gpioe: gpio@40021000 {
++		gpio-ranges = <&pinctrl 0 64 16>;
++	};
++
++	gpiof: gpio@40021400 {
++		gpio-ranges = <&pinctrl 0 80 16>;
++	};
++
++	gpiog: gpio@40021800 {
++		gpio-ranges = <&pinctrl 0 96 16>;
++	};
++
++	gpioh: gpio@40021c00 {
++		gpio-ranges = <&pinctrl 0 112 16>;
++	};
++
++	gpioi: gpio@40022000 {
++		gpio-ranges = <&pinctrl 0 128 16>;
++	};
++
++	gpioj: gpio@40022400 {
++		gpio-ranges = <&pinctrl 0 144 16>;
++	};
++
++	gpiok: gpio@40022800 {
++		gpio-ranges = <&pinctrl 0 160 8>;
+ 	};
+ };
+diff --git a/arch/arm/dts/stm32f429.dtsi b/arch/arm/dts/stm32f429.dtsi
+index a81e916064..e5b13aca40 100644
+--- a/arch/arm/dts/stm32f429.dtsi
++++ b/arch/arm/dts/stm32f429.dtsi
+@@ -52,14 +52,6 @@
+ 			};
+ 		};
+ 
+-		timer2: timer@40000000 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000000 0x400>;
+-			interrupts = <28>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM2)>;
+-			status = "disabled";
+-		};
+-
+ 		timers2: timers@40000000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -82,14 +74,6 @@
+ 			};
+ 		};
+ 
+-		timer3: timer@40000400 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000400 0x400>;
+-			interrupts = <29>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM3)>;
+-			status = "disabled";
+-		};
+-
+ 		timers3: timers@40000400 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -112,14 +96,6 @@
+ 			};
+ 		};
+ 
+-		timer4: timer@40000800 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000800 0x400>;
+-			interrupts = <30>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM4)>;
+-			status = "disabled";
+-		};
+-
+ 		timers4: timers@40000800 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -142,13 +118,6 @@
+ 			};
+ 		};
+ 
+-		timer5: timer@40000c00 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000c00 0x400>;
+-			interrupts = <50>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM5)>;
+-		};
+-
+ 		timers5: timers@40000c00 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -171,14 +140,6 @@
+ 			};
+ 		};
+ 
+-		timer6: timer@40001000 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40001000 0x400>;
+-			interrupts = <54>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM6)>;
+-			status = "disabled";
+-		};
+-
+ 		timers6: timers@40001000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -195,14 +156,6 @@
+ 			};
+ 		};
+ 
+-		timer7: timer@40001400 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40001400 0x400>;
+-			interrupts = <55>;
+-			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM7)>;
+-			status = "disabled";
+-		};
+-
+ 		timers7: timers@40001400 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -242,8 +195,6 @@
+ 		};
+ 
+ 		timers13: timers@40001c00 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40001C00 0x400>;
+ 			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM13)>;
+@@ -258,8 +209,6 @@
+ 		};
+ 
+ 		timers14: timers@40002000 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40002000 0x400>;
+ 			clocks = <&rcc 0 STM32F4_APB1_CLOCK(TIM14)>;
+@@ -525,7 +474,7 @@
+ 			};
+ 		};
+ 
+-		sdio: sdio@40012c00 {
++		sdio: mmc@40012c00 {
+ 			compatible = "arm,pl180", "arm,primecell";
+ 			arm,primecell-periphid = <0x00880180>;
+ 			reg = <0x40012c00 0x400>;
+@@ -592,8 +541,6 @@
+ 		};
+ 
+ 		timers10: timers@40014400 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40014400 0x400>;
+ 			clocks = <&rcc 0 STM32F4_APB2_CLOCK(TIM10)>;
+@@ -608,8 +555,6 @@
+ 		};
+ 
+ 		timers11: timers@40014800 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40014800 0x400>;
+ 			clocks = <&rcc 0 STM32F4_APB2_CLOCK(TIM11)>;
+@@ -668,7 +613,7 @@
+ 			status = "disabled";
+ 		};
+ 
+-		rcc: rcc@40023810 {
++		rcc: rcc@40023800 {
+ 			#reset-cells = <1>;
+ 			#clock-cells = <2>;
+ 			compatible = "st,stm32f42xx-rcc", "st,stm32-rcc";
+@@ -726,6 +671,16 @@
+ 			status = "disabled";
+ 		};
+ 
++		dma2d: dma2d@4002b000 {
++			compatible = "st,stm32-dma2d";
++			reg = <0x4002b000 0xc00>;
++			interrupts = <90>;
++			resets = <&rcc STM32F4_AHB1_RESET(DMA2D)>;
++			clocks = <&rcc 0 STM32F4_AHB1_CLOCK(DMA2D)>;
++			clock-names = "dma2d";
++			status = "disabled";
++		};
++
+ 		usbotg_hs: usb@40040000 {
+ 			compatible = "snps,dwc2";
+ 			reg = <0x40040000 0x40000>;
+diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+index cd173623ef..7f012b49f0 100644
+--- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+@@ -28,7 +28,7 @@
+ 
+ 	soc {
+ 		u-boot,dm-pre-reloc;
+-		pin-controller {
++		pinctrl@40020000 {
+ 			u-boot,dm-pre-reloc;
+ 		};
+ 
+@@ -256,6 +256,6 @@
+ 	u-boot,dm-pre-reloc;
+ };
+ 
+-&timer5 {
++&timers5 {
+ 	u-boot,dm-pre-reloc;
+ };
+diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
+index 23d87ee27a..6e0ffc1903 100644
+--- a/arch/arm/dts/stm32f469-disco.dts
++++ b/arch/arm/dts/stm32f469-disco.dts
+@@ -19,7 +19,7 @@
+ 		stdout-path = "serial0:115200n8";
+ 	};
+ 
+-	memory@00000000 {
++	memory@0 {
+ 		device_type = "memory";
+ 		reg = <0x00000000 0x1000000>;
+ 	};
+@@ -63,12 +63,10 @@
+ 		};
+ 	};
+ 
+-	gpio_keys {
++	gpio-keys {
+ 		compatible = "gpio-keys";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 		autorepeat;
+-		button@0 {
++		button-0 {
+ 			label = "User";
+ 			linux,code = <KEY_WAKEUP>;
+ 			gpios = <&gpioa 0 GPIO_ACTIVE_HIGH>;
+@@ -93,6 +91,10 @@
+ 	clock-frequency = <8000000>;
+ };
+ 
++&dma2d {
++	status = "okay";
++};
++
+ &dsi {
+ 	#address-cells = <1>;
+ 	#size-cells = <0>;
+@@ -185,6 +187,18 @@
+ 	bus-width = <4>;
+ };
+ 
++&timers5 {
++	/* Override timer5 to act as clockevent */
++	compatible = "st,stm32-timer";
++	interrupts = <50>;
++	status = "okay";
++	/delete-property/#address-cells;
++	/delete-property/#size-cells;
++	/delete-property/clock-names;
++	/delete-node/pwm;
++	/delete-node/timer@4;
++};
++
+ &usart3 {
+ 	pinctrl-0 = <&usart3_pins_a>;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/stm32f469-pinctrl.dtsi b/arch/arm/dts/stm32f469-pinctrl.dtsi
+index 1e2bb0191e..0610407c7b 100644
+--- a/arch/arm/dts/stm32f469-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f469-pinctrl.dtsi
+@@ -5,55 +5,51 @@
+ 
+ #include "stm32f4-pinctrl.dtsi"
+ 
+-/ {
+-	soc {
+-		pinctrl: pin-controller {
+-			compatible = "st,stm32f469-pinctrl";
+-
+-			gpioa: gpio@40020000 {
+-				gpio-ranges = <&pinctrl 0 0 16>;
+-			};
+-
+-			gpiob: gpio@40020400 {
+-				gpio-ranges = <&pinctrl 0 16 16>;
+-			};
+-
+-			gpioc: gpio@40020800 {
+-				gpio-ranges = <&pinctrl 0 32 16>;
+-			};
+-
+-			gpiod: gpio@40020c00 {
+-				gpio-ranges = <&pinctrl 0 48 16>;
+-			};
+-
+-			gpioe: gpio@40021000 {
+-				gpio-ranges = <&pinctrl 0 64 16>;
+-			};
+-
+-			gpiof: gpio@40021400 {
+-				gpio-ranges = <&pinctrl 0 80 16>;
+-			};
+-
+-			gpiog: gpio@40021800 {
+-				gpio-ranges = <&pinctrl 0 96 16>;
+-			};
+-
+-			gpioh: gpio@40021c00 {
+-				gpio-ranges = <&pinctrl 0 112 16>;
+-			};
+-
+-			gpioi: gpio@40022000 {
+-				gpio-ranges = <&pinctrl 0 128 16>;
+-			};
+-
+-			gpioj: gpio@40022400 {
+-				gpio-ranges = <&pinctrl 0 144 6>,
+-					      <&pinctrl 12 156 4>;
+-			};
+-
+-			gpiok: gpio@40022800 {
+-				gpio-ranges = <&pinctrl 3 163 5>;
+-			};
+-		};
++&pinctrl {
++	compatible = "st,stm32f469-pinctrl";
++
++	gpioa: gpio@40020000 {
++		gpio-ranges = <&pinctrl 0 0 16>;
++	};
++
++	gpiob: gpio@40020400 {
++		gpio-ranges = <&pinctrl 0 16 16>;
++	};
++
++	gpioc: gpio@40020800 {
++		gpio-ranges = <&pinctrl 0 32 16>;
++	};
++
++	gpiod: gpio@40020c00 {
++		gpio-ranges = <&pinctrl 0 48 16>;
++	};
++
++	gpioe: gpio@40021000 {
++		gpio-ranges = <&pinctrl 0 64 16>;
++	};
++
++	gpiof: gpio@40021400 {
++		gpio-ranges = <&pinctrl 0 80 16>;
++	};
++
++	gpiog: gpio@40021800 {
++		gpio-ranges = <&pinctrl 0 96 16>;
++	};
++
++	gpioh: gpio@40021c00 {
++		gpio-ranges = <&pinctrl 0 112 16>;
++	};
++
++	gpioi: gpio@40022000 {
++		gpio-ranges = <&pinctrl 0 128 16>;
++	};
++
++	gpioj: gpio@40022400 {
++		gpio-ranges = <&pinctrl 0 144 6>,
++			      <&pinctrl 12 156 4>;
++	};
++
++	gpiok: gpio@40022800 {
++		gpio-ranges = <&pinctrl 3 163 5>;
+ 	};
+ };
+diff --git a/arch/arm/dts/stm32f7-pinctrl.dtsi b/arch/arm/dts/stm32f7-pinctrl.dtsi
+index fe4cfda72a..8f37aefa73 100644
+--- a/arch/arm/dts/stm32f7-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f7-pinctrl.dtsi
+@@ -9,7 +9,7 @@
+ 
+ / {
+ 	soc {
+-		pinctrl: pin-controller {
++		pinctrl: pinctrl@40020000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <1>;
+ 			ranges = <0 0x40020000 0x3000>;
+diff --git a/arch/arm/dts/stm32f7-u-boot.dtsi b/arch/arm/dts/stm32f7-u-boot.dtsi
+index c1b2ac25c3..0ba8031c33 100644
+--- a/arch/arm/dts/stm32f7-u-boot.dtsi
++++ b/arch/arm/dts/stm32f7-u-boot.dtsi
+@@ -119,7 +119,7 @@
+ 	u-boot,dm-pre-reloc;
+ };
+ 
+-&timer5 {
++&timers5 {
+ 	u-boot,dm-pre-reloc;
+ };
+ 
+diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
+index 9430dc08ec..1ed58f2361 100644
+--- a/arch/arm/dts/stm32f746-disco.dts
++++ b/arch/arm/dts/stm32f746-disco.dts
+@@ -73,6 +73,18 @@
+ 	bus-width = <4>;
+ };
+ 
++&timers5 {
++	/* Override timer5 to act as clockevent */
++	compatible = "st,stm32-timer";
++	interrupts = <50>;
++	status = "okay";
++	/delete-property/#address-cells;
++	/delete-property/#size-cells;
++	/delete-property/clock-names;
++	/delete-node/pwm;
++	/delete-node/timer@4;
++};
++
+ &usart1 {
+ 	pinctrl-0 = <&usart1_pins_b>;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/stm32f746.dtsi b/arch/arm/dts/stm32f746.dtsi
+index 78facde2b5..c97b3d0d07 100644
+--- a/arch/arm/dts/stm32f746.dtsi
++++ b/arch/arm/dts/stm32f746.dtsi
+@@ -39,14 +39,6 @@
+ 	};
+ 
+ 	soc {
+-		timer2: timer@40000000 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000000 0x400>;
+-			interrupts = <28>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM2)>;
+-			status = "disabled";
+-		};
+-
+ 		timers2: timers@40000000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -69,14 +61,6 @@
+ 			};
+ 		};
+ 
+-		timer3: timer@40000400 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000400 0x400>;
+-			interrupts = <29>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM3)>;
+-			status = "disabled";
+-		};
+-
+ 		timers3: timers@40000400 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -99,14 +83,6 @@
+ 			};
+ 		};
+ 
+-		timer4: timer@40000800 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000800 0x400>;
+-			interrupts = <30>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM4)>;
+-			status = "disabled";
+-		};
+-
+ 		timers4: timers@40000800 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -129,13 +105,6 @@
+ 			};
+ 		};
+ 
+-		timer5: timer@40000c00 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40000c00 0x400>;
+-			interrupts = <50>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM5)>;
+-		};
+-
+ 		timers5: timers@40000c00 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -158,14 +127,6 @@
+ 			};
+ 		};
+ 
+-		timer6: timer@40001000 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40001000 0x400>;
+-			interrupts = <54>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM6)>;
+-			status = "disabled";
+-		};
+-
+ 		timers6: timers@40001000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -182,14 +143,6 @@
+ 			};
+ 		};
+ 
+-		timer7: timer@40001400 {
+-			compatible = "st,stm32-timer";
+-			reg = <0x40001400 0x400>;
+-			interrupts = <55>;
+-			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM7)>;
+-			status = "disabled";
+-		};
+-
+ 		timers7: timers@40001400 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+@@ -229,8 +182,6 @@
+ 		};
+ 
+ 		timers13: timers@40001c00 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40001C00 0x400>;
+ 			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM13)>;
+@@ -245,8 +196,6 @@
+ 		};
+ 
+ 		timers14: timers@40002000 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40002000 0x400>;
+ 			clocks = <&rcc 0 STM32F7_APB1_CLOCK(TIM14)>;
+@@ -313,7 +262,6 @@
+ 			clocks = <&rcc 1 CLK_I2C1>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -326,20 +274,18 @@
+ 			clocks = <&rcc 1 CLK_I2C2>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+-		i2c3: i2c@40005C00 {
++		i2c3: i2c@40005c00 {
+ 			compatible = "st,stm32f7-i2c";
+-			reg = <0x40005C00 0x400>;
++			reg = <0x40005c00 0x400>;
+ 			interrupts = <72>,
+ 				     <73>;
+ 			resets = <&rcc STM32F7_APB1_RESET(I2C3)>;
+ 			clocks = <&rcc 1 CLK_I2C3>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -352,7 +298,6 @@
+ 			clocks = <&rcc 1 CLK_I2C4>;
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -441,7 +386,7 @@
+ 			status = "disabled";
+ 		};
+ 
+-		sdio2: sdio2@40011c00 {
++		sdio2: mmc@40011c00 {
+ 			compatible = "arm,pl180", "arm,primecell";
+ 			arm,primecell-periphid = <0x00880180>;
+ 			reg = <0x40011c00 0x400>;
+@@ -452,7 +397,7 @@
+ 			status = "disabled";
+ 		};
+ 
+-		sdio1: sdio1@40012c00 {
++		sdio1: mmc@40012c00 {
+ 			compatible = "arm,pl180", "arm,primecell";
+ 			arm,primecell-periphid = <0x00880180>;
+ 			reg = <0x40012c00 0x400>;
+@@ -499,8 +444,6 @@
+ 		};
+ 
+ 		timers10: timers@40014400 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40014400 0x400>;
+ 			clocks = <&rcc 0 STM32F7_APB2_CLOCK(TIM10)>;
+@@ -515,8 +458,6 @@
+ 		};
+ 
+ 		timers11: timers@40014800 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-timers";
+ 			reg = <0x40014800 0x400>;
+ 			clocks = <&rcc 0 STM32F7_APB2_CLOCK(TIM11)>;
+diff --git a/arch/arm/dts/stm32f769-disco.dts b/arch/arm/dts/stm32f769-disco.dts
+index 03cfbd7cc2..6f93fc7bcf 100644
+--- a/arch/arm/dts/stm32f769-disco.dts
++++ b/arch/arm/dts/stm32f769-disco.dts
+@@ -39,12 +39,10 @@
+ 		};
+ 	};
+ 
+-	gpio_keys {
++	gpio-keys {
+ 		compatible = "gpio-keys";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 		autorepeat;
+-		button@0 {
++		button-0 {
+ 			label = "User";
+ 			linux,code = <KEY_HOME>;
+ 			gpios = <&gpioa 0 GPIO_ACTIVE_HIGH>;
+@@ -103,6 +101,18 @@
+ 	bus-width = <4>;
+ };
+ 
++&timers5 {
++	/* Override timer5 to act as clockevent */
++	compatible = "st,stm32-timer";
++	interrupts = <50>;
++	status = "okay";
++	/delete-property/#address-cells;
++	/delete-property/#size-cells;
++	/delete-property/clock-names;
++	/delete-node/pwm;
++	/delete-node/timer@4;
++};
++
+ &usart1 {
+ 	pinctrl-0 = <&usart1_pins_a>;
+ 	pinctrl-names = "default";
+diff --git a/arch/arm/dts/stm32h743.dtsi b/arch/arm/dts/stm32h743.dtsi
+index dbfebf07f2..ceb629c4fa 100644
+--- a/arch/arm/dts/stm32h743.dtsi
++++ b/arch/arm/dts/stm32h743.dtsi
+@@ -124,7 +124,6 @@
+ 				     <32>;
+ 			resets = <&rcc STM32H7_APB1L_RESET(I2C1)>;
+ 			clocks = <&rcc I2C1_CK>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -137,7 +136,6 @@
+ 				     <34>;
+ 			resets = <&rcc STM32H7_APB1L_RESET(I2C2)>;
+ 			clocks = <&rcc I2C2_CK>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -150,7 +148,6 @@
+ 				     <73>;
+ 			resets = <&rcc STM32H7_APB1L_RESET(I2C3)>;
+ 			clocks = <&rcc I2C3_CK>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -337,12 +334,12 @@
+ 			dma-requests = <32>;
+ 		};
+ 
+-		sdmmc1: sdmmc@52007000 {
++		sdmmc1: mmc@52007000 {
+ 			compatible = "arm,pl18x", "arm,primecell";
+ 			arm,primecell-periphid = <0x10153180>;
+ 			reg = <0x52007000 0x1000>;
+ 			interrupts = <49>;
+-			interrupt-names	= "cmd_irq";
++			interrupt-names = "cmd_irq";
+ 			clocks = <&rcc SDMMC1_CK>;
+ 			clock-names = "apb_pclk";
+ 			resets = <&rcc STM32H7_AHB3_RESET(SDMMC1)>;
+@@ -351,18 +348,19 @@
+ 			max-frequency = <120000000>;
+ 		};
+ 
+-		sdmmc2: sdmmc@48022400 {
++		sdmmc2: mmc@48022400 {
+ 			compatible = "arm,pl18x", "arm,primecell";
+ 			arm,primecell-periphid = <0x10153180>;
+ 			reg = <0x48022400 0x400>;
+ 			interrupts = <124>;
+-			interrupt-names	= "cmd_irq";
++			interrupt-names = "cmd_irq";
+ 			clocks = <&rcc SDMMC2_CK>;
+ 			clock-names = "apb_pclk";
+ 			resets = <&rcc STM32H7_AHB2_RESET(SDMMC2)>;
+ 			cap-sd-highspeed;
+ 			cap-mmc-highspeed;
+ 			max-frequency = <120000000>;
++			status = "disabled";
+ 		};
+ 
+ 		exti: interrupt-controller@58000000 {
+@@ -398,7 +396,6 @@
+ 				     <96>;
+ 			resets = <&rcc STM32H7_APB4_RESET(I2C4)>;
+ 			clocks = <&rcc I2C4_CK>;
+-			i2c-analog-filter;
+ 			status = "disabled";
+ 		};
+ 
+@@ -452,8 +449,6 @@
+ 		};
+ 
+ 		lptimer4: timer@58002c00 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-lptimer";
+ 			reg = <0x58002c00 0x400>;
+ 			clocks = <&rcc LPTIM4_CK>;
+@@ -468,8 +463,6 @@
+ 		};
+ 
+ 		lptimer5: timer@58003000 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+ 			compatible = "st,stm32-lptimer";
+ 			reg = <0x58003000 0x400>;
+ 			clocks = <&rcc LPTIM5_CK>;
+@@ -554,7 +547,7 @@
+ 			status = "disabled";
+ 		};
+ 
+-		pinctrl: pin-controller@58020000 {
++		pinctrl: pinctrl@58020000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <1>;
+ 			compatible = "st,stm32h743-pinctrl";
+diff --git a/arch/arm/dts/stm32h743i-disco.dts b/arch/arm/dts/stm32h743i-disco.dts
+index 3a01ebd563..b31188f8b9 100644
+--- a/arch/arm/dts/stm32h743i-disco.dts
++++ b/arch/arm/dts/stm32h743i-disco.dts
+@@ -41,10 +41,10 @@
+ 
+ &mac {
+ 	status = "disabled";
+-	pinctrl-0	= <&ethernet_rmii>;
+-	pinctrl-names	= "default";
+-	phy-mode	= "rmii";
+-	phy-handle	= <&phy0>;
++	pinctrl-0 = <&ethernet_rmii>;
++	pinctrl-names = "default";
++	phy-mode = "rmii";
++	phy-handle = <&phy0>;
+ 
+ 	mdio0 {
+ 		#address-cells = <1>;
+diff --git a/arch/arm/dts/stm32h743i-eval.dts b/arch/arm/dts/stm32h743i-eval.dts
+index 38cc7faf68..5c5d8059bd 100644
+--- a/arch/arm/dts/stm32h743i-eval.dts
++++ b/arch/arm/dts/stm32h743i-eval.dts
+@@ -115,10 +115,10 @@
+ 
+ &mac {
+ 	status = "disabled";
+-	pinctrl-0	= <&ethernet_rmii>;
+-	pinctrl-names	= "default";
+-	phy-mode	= "rmii";
+-	phy-handle	= <&phy0>;
++	pinctrl-0 = <&ethernet_rmii>;
++	pinctrl-names = "default";
++	phy-mode = "rmii";
++	phy-handle = <&phy0>;
+ 
+ 	mdio0 {
+ 		#address-cells = <1>;
+diff --git a/arch/arm/dts/stm32h750i-art-pi.dts b/arch/arm/dts/stm32h750i-art-pi.dts
+index 2a4d1cb496..c7c7132f22 100644
+--- a/arch/arm/dts/stm32h750i-art-pi.dts
++++ b/arch/arm/dts/stm32h750i-art-pi.dts
+@@ -87,10 +87,10 @@
+ 
+ &mac {
+ 	status = "disabled";
+-	pinctrl-0	= <&ethernet_rmii>;
+-	pinctrl-names	= "default";
+-	phy-mode	= "rmii";
+-	phy-handle	= <&phy0>;
++	pinctrl-0 = <&ethernet_rmii>;
++	pinctrl-names = "default";
++	phy-mode = "rmii";
++	phy-handle = <&phy0>;
+ 
+ 	mdio0 {
+ 		#address-cells = <1>;
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

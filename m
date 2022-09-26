@@ -2,51 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 853EC5E8EC5
-	for <lists+uboot-stm32@lfdr.de>; Sat, 24 Sep 2022 19:04:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32A965E9A14
+	for <lists+uboot-stm32@lfdr.de>; Mon, 26 Sep 2022 09:07:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2783CC5F1D3;
-	Sat, 24 Sep 2022 17:04:54 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C1FF8C03FC7;
+	Mon, 26 Sep 2022 07:07:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 89827C03FD6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 18A80C035BA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 24 Sep 2022 17:04:53 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A47D1849CD;
- Sat, 24 Sep 2022 19:04:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1664039093;
- bh=C4+RkS//aO/Kbk/S4ia5q6VHfvcwWryLxNYtQvAfjDc=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=PmlzbeOZcgoNBeKcAR8XZu0rBsC8+e4ZI90jC1K+WSg7S5bqmNZI/HaXbv/ZG2zxR
- E9CJNtRqLuxy0CJz9iAPKi8Mc0wTyBOM2lhpkQtyOHkf/lqyYjdFrLsS6dnnvzmB67
- kmBKsPT5aEbRRNq/VUf38QY1sp02QjGHeA3fWbG9vTrZ2CMrA9utV64FV/Bi55OSCx
- 8VxAqcX9YJJHhuZjIAYljM7JTST/4wf5jHOt37240Z+XU2DmNaymOE7muSVWoxO3xE
- MQfUn+n4fBtP1WepSL9OOdvFhG92pQCqSUnL7+gLp2qfmJn1lyHP8xj5JE8+cu5CHJ
- IbnRSAmwWU3UQ==
-Message-ID: <23426234-56e0-f5d7-c09c-f2ffa63258bd@denx.de>
-Date: Sat, 24 Sep 2022 19:04:52 +0200
+ Mon, 26 Sep 2022 07:07:04 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28Q6n3vn004276;
+ Mon, 26 Sep 2022 09:07:02 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=JTEZFj4r1gCzJA7BMAXafa2FtNbSnNEFU2QcqTy4j64=;
+ b=dpB4IogrY8wQIuUmWdYloesLqASp62cOQwdN6hQLHm+WUmv2IZ0j92retHDvhFAQvHwL
+ l/xnoTnBA3vV3snNVzlcE+tBFzQI0A6qaD30HaLCpFxfqlcWp0Fg4OqXFpDPvMnExuxO
+ O2y0Io8qiUVTaccfl0atak3wTct9N1wXZ9qcSalb3jA+OmHA91BrOEZb2Aj0UC+PpXeM
+ QoLaid2YnN5gjwvv3nOrUzGUvrpMQ3DnUqJVy+2MQnBY5qxrHiOKeg02GkXZPV1rtRyV
+ NkTAJ5Bfthd89+C0hNwFzCuwO0NuVJKRGAu+22fL+K9cGfFn6OjCyUrVhcUa+IRWZfam TA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jsrsj9e4e-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 26 Sep 2022 09:07:02 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8C40010002A;
+ Mon, 26 Sep 2022 09:07:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 760162132F7;
+ Mon, 26 Sep 2022 09:07:01 +0200 (CEST)
+Received: from [10.201.21.72] (10.75.127.121) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Mon, 26 Sep
+ 2022 09:07:01 +0200
+Message-ID: <a133e873-d977-f1e7-71e2-31fcf6a28b3a@foss.st.com>
+Date: Mon, 26 Sep 2022 09:07:00 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
 Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20220909114513.v2.1.I5eabf3f9fdbbaf763cd44e9c018cb5b74a0c65ac@changeid>
- <49a948fd-a392-6f30-f110-747ad3f3173b@denx.de>
- <29cf32ad-9e0c-c11b-abf5-e0d7f26126a6@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <29cf32ad-9e0c-c11b-abf5-e0d7f26126a6@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] usb: hub: allow to increase
-	HUB_DEBOUNCE_TIMEOUT
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220920133954.1.Iff08cf94aa6c6d3678acb28a8dd012d466184b42@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20220920133954.1.Iff08cf94aa6c6d3678acb28a8dd012d466184b42@changeid>
+X-Originating-IP: [10.75.127.121]
+X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
+ definitions=2022-09-26_04,2022-09-22_02,2022-06-22_01
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH] phy: usbphyc: use
+ regulator_set_enable_if_allowed for disabling vbus supply
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -58,51 +72,61 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 9/12/22 15:37, Patrick DELAUNAY wrote:
-> Hi,
+Hi Patrick
 
-Hi,
-
-> On 9/9/22 14:24, Marek Vasut wrote:
->> On 9/9/22 11:45, Patrick Delaunay wrote:
->>> Add a new CONFIG_USB_HUB_DEBOUNCE_TIMEOUT to increase the
->>> HUB_DEBOUNCE_TIMEOUT value, for example to 2s because some usb device
->>> needs around 1.5s or more to make the hub port status to be
->>> connected steadily after being powered off and powered on.
->>>
->>> This 2s value is aligned with Linux driver and avoids to configure
->>> "usb_pgood_delay" as a workaround for connection timeout on
->>> some USB device; normally the env variable "usb_pgood_delay" is used
->>> to delay the first query after power ON and thus the device answer,
->>> but this variable not used to increase the connection timeout delay.
->>
->> I realized this has one problem -- what happens if you have multiple 
->> USB controllers in your system ? The answer is, all of them are 
->> affected by the increased delay, possibly even those which do not 
->> require the extra delay.
->>
->> Would it be possible to configure this per-controller (or should this 
->> even be per-device?) in DT ? In fact, I wonder whether this is not 
->> becoming a Vbus regulator ramp-up time kind of delay here ?
+On 9/20/22 13:39, Patrick Delaunay wrote:
+> Use regulator_set_enable_if_allowed() api instead of regulator_set_enable()
+> while disabling vbus supply. This way the driver doesn't see an error
+> when it disable an always-on regulator for VBUS.
 > 
+> This patch is needed for STM32MP157C-DK2 board when the regulator
+> v3v3: buck4 used as the phy vbus supply in kernel device tree
+> is always on with the next hack for low power use-case:
 > 
-> Yes, but I don't think, it is blocking.
+> &usbphyc_port0 {
+>         ...
+> 	/*
+> 	 * Hack to keep hub active until all connected devices are suspended
+> 	 * otherwise the hub will be powered off as soon as the v3v3 is disabled
+> 	 * and it can disturb connected devices.
+> 	 */
+> 	connector {
+> 		compatible = "usb-a-connector";
+> 		vbus-supply = <&v3v3>;
+> 	};
+> };
 > 
-> This timeout will be common for all the USB HUB in the system, as it is 
-> done in Linux kernel.
+> Without this patch and the previous update in DT the command
+> "usb stop" failed and the next command "usb start" cause a crash.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  drivers/phy/phy-stm32-usbphyc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
+> index 9f0b7d71187..dcf2194e9a7 100644
+> --- a/drivers/phy/phy-stm32-usbphyc.c
+> +++ b/drivers/phy/phy-stm32-usbphyc.c
+> @@ -375,7 +375,7 @@ static int stm32_usbphyc_phy_power_off(struct phy *phy)
+>  		return 0;
+>  
+>  	if (usbphyc_phy->vbus) {
+> -		ret = regulator_set_enable(usbphyc_phy->vbus, false);
+> +		ret = regulator_set_enable_if_allowed(usbphyc_phy->vbus, false);
+>  		if (ret)
+>  			return ret;
+>  	}
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-I just realized this is not the same delay as the usb_pgood_delay, right ?
-
-This is actually the maximum wait for a device to start communicating, 
-i.e. even if this timeout is set to a very high value, most devices will 
-not take that long and will start communicating in shorter time anyway, 
-so the time of completion for e.g. '=> usb reset' is not affected by 
-this change on very much all systems, correct ?
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

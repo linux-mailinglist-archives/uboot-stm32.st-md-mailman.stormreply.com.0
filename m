@@ -2,67 +2,78 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE1645EC1D8
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Sep 2022 13:49:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22CF15ECF5E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 Sep 2022 23:38:20 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9B9D0C63325;
-	Tue, 27 Sep 2022 11:49:08 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C05C1C63327;
+	Tue, 27 Sep 2022 21:38:19 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF96AC03FC4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7E199C63326
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 Sep 2022 11:49:06 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 28RAmFre018530;
- Tue, 27 Sep 2022 13:49:05 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=pW7GDI8/lupY97pUoapDxs1N6LLyS13LwTt9mgmGg8w=;
- b=4MnyktaGR3aNUReARj1iXyNyhTVRlpjtba+IdcD+AbOzqSemgym92g7a3DLHcrheqeTv
- 7uY1WSPIR7nE7ChnvwoGh+8QS/1g1UVP2tYsXh/ByRiOQk3S2vD8oD94mwRc8Mt6whBV
- q9Cg9xNk/IovaqToz2n63fimmiaSCEKCkvBjDc1pTSBfYmGCCvRZe/8yqIIwfshPxkYf
- Dd1egoQMjI3LFYKazqhzCuAReE5Fava55cndcsgVIJ61qKiKE8CvdwO/ikcmoquZJY1/
- NJgSoPyuoyDzWZs7jVsM5MnyvY+xsKo//tNcP+Nj/2P8qX5OUkJHj3+i/fX+nqdrINKr /A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3jss82995v-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 Sep 2022 13:49:05 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 34BEE100038;
- Tue, 27 Sep 2022 13:49:05 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 30B1721FE88;
- Tue, 27 Sep 2022 13:49:05 +0200 (CEST)
-Received: from [10.201.21.72] (10.75.127.51) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Tue, 27 Sep
- 2022 13:49:04 +0200
-Message-ID: <469b6b39-7391-1109-4daa-500ac7e789a4@foss.st.com>
-Date: Tue, 27 Sep 2022 13:49:03 +0200
+ Tue, 27 Sep 2022 21:38:18 +0000 (UTC)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 7D2D51FA0E;
+ Tue, 27 Sep 2022 21:38:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1664314697; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PryPdTrW8+SCCPoV8L65eWKpnTLM9TJcLBho6SAr+3A=;
+ b=vLNMQMdf0EHZLtqB8Cnhjji0+MDHVa8N3r5n0JC46wOdUaHCdjDixQfC3zgLtQmWi4szG7
+ QZghUSptXjXaapZxBfnxIuSZmQLbYE7SZqe/Z3/Idgq9RgnMeFzyjOZFax62/J8tBhoZu4
+ w0wfEvhUtH2M+x/PR1O7alI7kBXXNEA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1664314697;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PryPdTrW8+SCCPoV8L65eWKpnTLM9TJcLBho6SAr+3A=;
+ b=+8jKXLmh4Ifh2Zsw17vNQIw6if3WEHqIoyF9U8+9e1s/Y4qXHwk7s2fSa33tVrp+zNPfId
+ I6aDN73HpH/rlPCQ==
+Received: from naga.suse.cz (unknown [10.100.224.114])
+ by relay2.suse.de (Postfix) with ESMTP id 5CDE82C187;
+ Tue, 27 Sep 2022 21:38:14 +0000 (UTC)
+From: Michal Suchanek <msuchanek@suse.de>
+To: u-boot@lists.denx.de
+Date: Tue, 27 Sep 2022 23:37:52 +0200
+Message-Id: <cover.1664314042.git.msuchanek@suse.de>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <cover.1664093812.git.msuchanek@suse.de>
+References: <cover.1664093812.git.msuchanek@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20220926155936.550320-1-patrice.chotard@foss.st.com>
- <5aa3eff0-2477-a121-a5cc-008147d24c3b@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <5aa3eff0-2477-a121-a5cc-008147d24c3b@foss.st.com>
-X-Originating-IP: [10.75.127.51]
-X-ClientProxiedBy: SFHDAG2NODE3.st.com (10.75.127.6) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.528,FMLib:17.11.122.1
- definitions=2022-09-27_03,2022-09-27_01,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Dillon Min <dillon.minfei@gmail.com>, Vikas Manocha <vikas.manocha@st.com>,
- Kamil Lulko <kamil.lulko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] configs: increase SYS_MALLOC_F_LEN for
-	STM32 MCU's board
+Cc: Peng Fan <peng.fan@nxp.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Vyacheslav Bocharov <adeep@lexina.in>,
+ Samuel Holland <samuel@sholland.org>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
+ Diego Rondini <diego.rondini@kynetics.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Jason Liu <jason.hui.liu@nxp.com>, Michal Suchanek <msuchanek@suse.de>,
+ Anatolij Gustschin <agust@denx.de>, Matthias Brugger <mbrugger@suse.com>,
+ Ovidiu Panait <ovpanait@gmail.com>, Andrew Jeffery <andrew@aj.id.au>,
+ Mark Kettenis <kettenis@openbsd.org>, Loic Poulain <loic.poulain@linaro.org>,
+ Andrew Scull <ascull@google.com>, Vabhav Sharma <vabhav.sharma@nxp.com>,
+ =?UTF-8?q?Viktor=20K=C5=99iv=C3=A1k?= <viktor.krivak@gmail.com>,
+ Tomas Hlavacek <tmshlvck@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Heiko Schocher <hs@denx.de>, Alexander Dahl <ada@thorsis.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>, Tom Warren <twarren@nvidia.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>,
+ Maxime Ripard <maxime.ripard@free-electrons.com>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
+Subject: [Uboot-stm32] [PATCH v5 00/15] Do not stop uclass iteration on error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,137 +85,114 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiA5LzI3LzIyIDEwOjM5LCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhpLAo+IAo+IE9u
-IDkvMjYvMjIgMTc6NTksIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPj4gU29tZSBTVE0zMiBNQ1Un
-cyBib2FyZCBuZWVkIHRoZWlyIFNZU19NQUxMT0NfRl9MRU4gdmFsdWUgZW5sYXJnZWQKPj4gdG8g
-YXZvaWQgdGhlICJhbGxvYyBzcGFjZSBleGhhdXN0ZWQiIGVycm9yIG1lc3NhZ2UgZHVyaW5nIHRo
-ZWlyIGJvb3QKPj4gcHJvY2Vzcy4KPj4gVXNlIHRoZSBkZWZhdWx0IFNZU19NQUxMT0NfRl9MRU4g
-dmFsdWUgd2hpY2ggaXMgc2V0IHRvIDB4MjAwMCBpbgo+PiBLY29uZmlnLgo+Pgo+PiBTaWduZWQt
-b2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4g
-LS0tCj4+Cj4+IMKgIGNvbmZpZ3Mvc3RtMzI3NDZnLWV2YWxfZGVmY29uZmlnwqDCoMKgwqDCoMKg
-IHwgMSAtCj4+IMKgIGNvbmZpZ3Mvc3RtMzI3NDZnLWV2YWxfc3BsX2RlZmNvbmZpZ8KgwqAgfCAx
-IC0KPj4gwqAgY29uZmlncy9zdG0zMmY0MjktZGlzY292ZXJ5X2RlZmNvbmZpZ8KgIHwgMSAtCj4+
-IMKgIGNvbmZpZ3Mvc3RtMzJmNDI5LWV2YWx1YXRpb25fZGVmY29uZmlnIHwgMSAtCj4+IMKgIGNv
-bmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWfCoCB8IDEgLQo+PiDCoCBjb25maWdz
-L3N0bTMyZjc0Ni1kaXNjb19kZWZjb25maWfCoMKgwqDCoMKgIHwgMSAtCj4+IMKgIGNvbmZpZ3Mv
-c3RtMzJmNzQ2LWRpc2NvX3NwbF9kZWZjb25maWfCoCB8IDEgLQo+PiDCoCBjb25maWdzL3N0bTMy
-Zjc2OS1kaXNjb19kZWZjb25maWfCoMKgwqDCoMKgIHwgMSAtCj4+IMKgIGNvbmZpZ3Mvc3RtMzJm
-NzY5LWRpc2NvX3NwbF9kZWZjb25maWfCoCB8IDEgLQo+PiDCoCBjb25maWdzL3N0bTMyaDc0My1k
-aXNjb19kZWZjb25maWfCoMKgwqDCoMKgIHwgMSAtCj4+IMKgIGNvbmZpZ3Mvc3RtMzJoNzQzLWV2
-YWxfZGVmY29uZmlnwqDCoMKgwqDCoMKgIHwgMSAtCj4+IMKgIGNvbmZpZ3Mvc3RtMzJoNzUwLWFy
-dC1waV9kZWZjb25maWfCoMKgwqDCoCB8IDEgLQo+PiDCoCAxMiBmaWxlcyBjaGFuZ2VkLCAxMiBk
-ZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3Mvc3RtMzI3NDZnLWV2YWxfZGVm
-Y29uZmlnIGIvY29uZmlncy9zdG0zMjc0NmctZXZhbF9kZWZjb25maWcKPj4gaW5kZXggNTgyMzJh
-NzExNC4uNzIwMDQ0NmQyOCAxMDA2NDQKPj4gLS0tIGEvY29uZmlncy9zdG0zMjc0NmctZXZhbF9k
-ZWZjb25maWcKPj4gKysrIGIvY29uZmlncy9zdG0zMjc0NmctZXZhbF9kZWZjb25maWcKPj4gQEAg
-LTIsNyArMiw2IEBAIENPTkZJR19BUk09eQo+PiDCoCBDT05GSUdfQVJDSF9TVE0zMj15Cj4+IMKg
-IENPTkZJR19TWVNfVEVYVF9CQVNFPTB4MDgwMDAwMDAKPj4gwqAgQ09ORklHX1NZU19NQUxMT0Nf
-TEVOPTB4MTAwMDAwCj4+IC1DT05GSUdfU1lTX01BTExPQ19GX0xFTj0weEUwMAo+PiDCoCBDT05G
-SUdfTlJfRFJBTV9CQU5LUz0xCj4+IMKgIENPTkZJR19FTlZfU0laRT0weDIwMDAKPj4gwqAgQ09O
-RklHX0RFRkFVTFRfREVWSUNFX1RSRUU9InN0bTMyNzQ2Zy1ldmFsIgo+PiBkaWZmIC0tZ2l0IGEv
-Y29uZmlncy9zdG0zMjc0NmctZXZhbF9zcGxfZGVmY29uZmlnIGIvY29uZmlncy9zdG0zMjc0Nmct
-ZXZhbF9zcGxfZGVmY29uZmlnCj4+IGluZGV4IDI4ZjUyMmIxNWUuLmZmNDI5NTJhNzYgMTAwNjQ0
-Cj4+IC0tLSBhL2NvbmZpZ3Mvc3RtMzI3NDZnLWV2YWxfc3BsX2RlZmNvbmZpZwo+PiArKysgYi9j
-b25maWdzL3N0bTMyNzQ2Zy1ldmFsX3NwbF9kZWZjb25maWcKPj4gQEAgLTIsNyArMiw2IEBAIENP
-TkZJR19BUk09eQo+PiDCoCBDT05GSUdfQVJDSF9TVE0zMj15Cj4+IMKgIENPTkZJR19TWVNfVEVY
-VF9CQVNFPTB4MDgwMDkwMDAKPj4gwqAgQ09ORklHX1NZU19NQUxMT0NfTEVOPTB4MTAwMDAwCj4+
-IC1DT05GSUdfU1lTX01BTExPQ19GX0xFTj0weEUwMAo+PiDCoCBDT05GSUdfU1BMX0dQSU89eQo+
-PiDCoCBDT05GSUdfU1BMX0xJQkNPTU1PTl9TVVBQT1JUPXkKPj4gwqAgQ09ORklHX1NQTF9MSUJH
-RU5FUklDX1NVUFBPUlQ9eQo+PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9zdG0zMmY0MjktZGlzY292
-ZXJ5X2RlZmNvbmZpZyBiL2NvbmZpZ3Mvc3RtMzJmNDI5LWRpc2NvdmVyeV9kZWZjb25maWcKPj4g
-aW5kZXggZTZlNTk1ZDQ5NS4uOTE0YWMxNDY0MSAxMDA2NDQKPj4gLS0tIGEvY29uZmlncy9zdG0z
-MmY0MjktZGlzY292ZXJ5X2RlZmNvbmZpZwo+PiArKysgYi9jb25maWdzL3N0bTMyZjQyOS1kaXNj
-b3ZlcnlfZGVmY29uZmlnCj4+IEBAIC0yLDcgKzIsNiBAQCBDT05GSUdfQVJNPXkKPj4gwqAgQ09O
-RklHX0FSQ0hfU1RNMzI9eQo+PiDCoCBDT05GSUdfU1lTX1RFWFRfQkFTRT0weDA4MDAwMDAwCj4+
-IMKgIENPTkZJR19TWVNfTUFMTE9DX0xFTj0weDAyMDAwMDAKPj4gLUNPTkZJR19TWVNfTUFMTE9D
-X0ZfTEVOPTB4RjAwCj4+IMKgIENPTkZJR19OUl9EUkFNX0JBTktTPTEKPj4gwqAgQ09ORklHX0VO
-Vl9TSVpFPTB4MjAwMAo+PiDCoCBDT05GSUdfRU5WX1NFQ1RfU0laRT0weDIwMDAwCj4+IGRpZmYg
-LS1naXQgYS9jb25maWdzL3N0bTMyZjQyOS1ldmFsdWF0aW9uX2RlZmNvbmZpZyBiL2NvbmZpZ3Mv
-c3RtMzJmNDI5LWV2YWx1YXRpb25fZGVmY29uZmlnCj4+IGluZGV4IDA3M2YyNzE2OGEuLmFmN2E4
-YmYwNzYgMTAwNjQ0Cj4+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJmNDI5LWV2YWx1YXRpb25fZGVmY29u
-ZmlnCj4+ICsrKyBiL2NvbmZpZ3Mvc3RtMzJmNDI5LWV2YWx1YXRpb25fZGVmY29uZmlnCj4+IEBA
-IC0yLDcgKzIsNiBAQCBDT05GSUdfQVJNPXkKPj4gwqAgQ09ORklHX0FSQ0hfU1RNMzI9eQo+PiDC
-oCBDT05GSUdfU1lTX1RFWFRfQkFTRT0weDA4MDAwMDAwCj4+IMKgIENPTkZJR19TWVNfTUFMTE9D
-X0xFTj0weDEwMDAwMAo+PiAtQ09ORklHX1NZU19NQUxMT0NfRl9MRU49MHhGMDAKPj4gwqAgQ09O
-RklHX05SX0RSQU1fQkFOS1M9MQo+PiDCoCBDT05GSUdfRU5WX1NJWkU9MHgyMDAwCj4+IMKgIENP
-TkZJR19ERUZBVUxUX0RFVklDRV9UUkVFPSJzdG0zMjQyOWktZXZhbCIKPj4gZGlmZiAtLWdpdCBh
-L2NvbmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWcgYi9jb25maWdzL3N0bTMyZjQ2
-OS1kaXNjb3ZlcnlfZGVmY29uZmlnCj4+IGluZGV4IGJkMzY5MzI3NWUuLjkwNjgwZmRiMDUgMTAw
-NjQ0Cj4+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWcKPj4gKysr
-IGIvY29uZmlncy9zdG0zMmY0NjktZGlzY292ZXJ5X2RlZmNvbmZpZwo+PiBAQCAtMiw3ICsyLDYg
-QEAgQ09ORklHX0FSTT15Cj4+IMKgIENPTkZJR19BUkNIX1NUTTMyPXkKPj4gwqAgQ09ORklHX1NZ
-U19URVhUX0JBU0U9MHgwODAwMDAwMAo+PiDCoCBDT05GSUdfU1lTX01BTExPQ19MRU49MHgxMDAw
-MDAKPj4gLUNPTkZJR19TWVNfTUFMTE9DX0ZfTEVOPTB4RjAwCj4+IMKgIENPTkZJR19OUl9EUkFN
-X0JBTktTPTEKPj4gwqAgQ09ORklHX0VOVl9TSVpFPTB4MjAwMAo+PiDCoCBDT05GSUdfREVGQVVM
-VF9ERVZJQ0VfVFJFRT0ic3RtMzJmNDY5LWRpc2NvIgo+PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9z
-dG0zMmY3NDYtZGlzY29fZGVmY29uZmlnIGIvY29uZmlncy9zdG0zMmY3NDYtZGlzY29fZGVmY29u
-ZmlnCj4+IGluZGV4IGVkNTM3YjA1NzguLmE4ZWRmMTFiNDAgMTAwNjQ0Cj4+IC0tLSBhL2NvbmZp
-Z3Mvc3RtMzJmNzQ2LWRpc2NvX2RlZmNvbmZpZwo+PiArKysgYi9jb25maWdzL3N0bTMyZjc0Ni1k
-aXNjb19kZWZjb25maWcKPj4gQEAgLTIsNyArMiw2IEBAIENPTkZJR19BUk09eQo+PiDCoCBDT05G
-SUdfQVJDSF9TVE0zMj15Cj4+IMKgIENPTkZJR19TWVNfVEVYVF9CQVNFPTB4MDgwMDAwMDAKPj4g
-wqAgQ09ORklHX1NZU19NQUxMT0NfTEVOPTB4MTAwMDAwCj4+IC1DT05GSUdfU1lTX01BTExPQ19G
-X0xFTj0weEUwMAo+PiDCoCBDT05GSUdfTlJfRFJBTV9CQU5LUz0xCj4+IMKgIENPTkZJR19FTlZf
-U0laRT0weDIwMDAKPj4gwqAgQ09ORklHX0RFRkFVTFRfREVWSUNFX1RSRUU9InN0bTMyZjc0Ni1k
-aXNjbyIKPj4gZGlmZiAtLWdpdCBhL2NvbmZpZ3Mvc3RtMzJmNzQ2LWRpc2NvX3NwbF9kZWZjb25m
-aWcgYi9jb25maWdzL3N0bTMyZjc0Ni1kaXNjb19zcGxfZGVmY29uZmlnCj4+IGluZGV4IGQ0YTY1
-YmRlMjQuLjBlMzU4ZTg2ZmYgMTAwNjQ0Cj4+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJmNzQ2LWRpc2Nv
-X3NwbF9kZWZjb25maWcKPj4gKysrIGIvY29uZmlncy9zdG0zMmY3NDYtZGlzY29fc3BsX2RlZmNv
-bmZpZwo+PiBAQCAtMiw3ICsyLDYgQEAgQ09ORklHX0FSTT15Cj4+IMKgIENPTkZJR19BUkNIX1NU
-TTMyPXkKPj4gwqAgQ09ORklHX1NZU19URVhUX0JBU0U9MHgwODAwOTAwMAo+PiDCoCBDT05GSUdf
-U1lTX01BTExPQ19MRU49MHgxMDAwMDAKPj4gLUNPTkZJR19TWVNfTUFMTE9DX0ZfTEVOPTB4RTAw
-Cj4+IMKgIENPTkZJR19TUExfR1BJTz15Cj4+IMKgIENPTkZJR19TUExfTElCQ09NTU9OX1NVUFBP
-UlQ9eQo+PiDCoCBDT05GSUdfU1BMX0xJQkdFTkVSSUNfU1VQUE9SVD15Cj4+IGRpZmYgLS1naXQg
-YS9jb25maWdzL3N0bTMyZjc2OS1kaXNjb19kZWZjb25maWcgYi9jb25maWdzL3N0bTMyZjc2OS1k
-aXNjb19kZWZjb25maWcKPj4gaW5kZXggNWI1MzA3Y2ExZC4uM2U3YjViZDA2ZSAxMDA2NDQKPj4g
-LS0tIGEvY29uZmlncy9zdG0zMmY3NjktZGlzY29fZGVmY29uZmlnCj4+ICsrKyBiL2NvbmZpZ3Mv
-c3RtMzJmNzY5LWRpc2NvX2RlZmNvbmZpZwo+PiBAQCAtMiw3ICsyLDYgQEAgQ09ORklHX0FSTT15
-Cj4+IMKgIENPTkZJR19BUkNIX1NUTTMyPXkKPj4gwqAgQ09ORklHX1NZU19URVhUX0JBU0U9MHgw
-ODAwMDAwMAo+PiDCoCBDT05GSUdfU1lTX01BTExPQ19MRU49MHgxMDAwMDAKPj4gLUNPTkZJR19T
-WVNfTUFMTE9DX0ZfTEVOPTB4RTAwCj4+IMKgIENPTkZJR19OUl9EUkFNX0JBTktTPTEKPj4gwqAg
-Q09ORklHX0VOVl9TSVpFPTB4MjAwMAo+PiDCoCBDT05GSUdfREVGQVVMVF9ERVZJQ0VfVFJFRT0i
-c3RtMzJmNzY5LWRpc2NvIgo+PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9zdG0zMmY3NjktZGlzY29f
-c3BsX2RlZmNvbmZpZyBiL2NvbmZpZ3Mvc3RtMzJmNzY5LWRpc2NvX3NwbF9kZWZjb25maWcKPj4g
-aW5kZXggYjVkNTRiNDhlYy4uZjBhMWI2NjdiOCAxMDA2NDQKPj4gLS0tIGEvY29uZmlncy9zdG0z
-MmY3NjktZGlzY29fc3BsX2RlZmNvbmZpZwo+PiArKysgYi9jb25maWdzL3N0bTMyZjc2OS1kaXNj
-b19zcGxfZGVmY29uZmlnCj4+IEBAIC0yLDcgKzIsNiBAQCBDT05GSUdfQVJNPXkKPj4gwqAgQ09O
-RklHX0FSQ0hfU1RNMzI9eQo+PiDCoCBDT05GSUdfU1lTX1RFWFRfQkFTRT0weDA4MDA5MDAwCj4+
-IMKgIENPTkZJR19TWVNfTUFMTE9DX0xFTj0weDEwMDAwMAo+PiAtQ09ORklHX1NZU19NQUxMT0Nf
-Rl9MRU49MHhFMDAKPj4gwqAgQ09ORklHX1NQTF9HUElPPXkKPj4gwqAgQ09ORklHX1NQTF9MSUJD
-T01NT05fU1VQUE9SVD15Cj4+IMKgIENPTkZJR19TUExfTElCR0VORVJJQ19TVVBQT1JUPXkKPj4g
-ZGlmZiAtLWdpdCBhL2NvbmZpZ3Mvc3RtMzJoNzQzLWRpc2NvX2RlZmNvbmZpZyBiL2NvbmZpZ3Mv
-c3RtMzJoNzQzLWRpc2NvX2RlZmNvbmZpZwo+PiBpbmRleCBkMzNkYTQzMDY1Li44YzYyYzcwYTU3
-IDEwMDY0NAo+PiAtLS0gYS9jb25maWdzL3N0bTMyaDc0My1kaXNjb19kZWZjb25maWcKPj4gKysr
-IGIvY29uZmlncy9zdG0zMmg3NDMtZGlzY29fZGVmY29uZmlnCj4+IEBAIC0yLDcgKzIsNiBAQCBD
-T05GSUdfQVJNPXkKPj4gwqAgQ09ORklHX0FSQ0hfU1RNMzI9eQo+PiDCoCBDT05GSUdfU1lTX1RF
-WFRfQkFTRT0weDA4MDAwMDAwCj4+IMKgIENPTkZJR19TWVNfTUFMTE9DX0xFTj0weDEwMDAwMAo+
-PiAtQ09ORklHX1NZU19NQUxMT0NfRl9MRU49MHhGMDAKPj4gwqAgQ09ORklHX05SX0RSQU1fQkFO
-S1M9MQo+PiDCoCBDT05GSUdfRU5WX1NJWkU9MHgyMDAwCj4+IMKgIENPTkZJR19ERUZBVUxUX0RF
-VklDRV9UUkVFPSJzdG0zMmg3NDNpLWRpc2NvIgo+PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9zdG0z
-Mmg3NDMtZXZhbF9kZWZjb25maWcgYi9jb25maWdzL3N0bTMyaDc0My1ldmFsX2RlZmNvbmZpZwo+
-PiBpbmRleCBhNzJkZTQ4NjkwLi4xZmY2YjUwODE5IDEwMDY0NAo+PiAtLS0gYS9jb25maWdzL3N0
-bTMyaDc0My1ldmFsX2RlZmNvbmZpZwo+PiArKysgYi9jb25maWdzL3N0bTMyaDc0My1ldmFsX2Rl
-ZmNvbmZpZwo+PiBAQCAtMiw3ICsyLDYgQEAgQ09ORklHX0FSTT15Cj4+IMKgIENPTkZJR19BUkNI
-X1NUTTMyPXkKPj4gwqAgQ09ORklHX1NZU19URVhUX0JBU0U9MHgwODAwMDAwMAo+PiDCoCBDT05G
-SUdfU1lTX01BTExPQ19MRU49MHgxMDAwMDAKPj4gLUNPTkZJR19TWVNfTUFMTE9DX0ZfTEVOPTB4
-RjAwCj4+IMKgIENPTkZJR19OUl9EUkFNX0JBTktTPTEKPj4gwqAgQ09ORklHX0VOVl9TSVpFPTB4
-MjAwMAo+PiDCoCBDT05GSUdfREVGQVVMVF9ERVZJQ0VfVFJFRT0ic3RtMzJoNzQzaS1ldmFsIgo+
-PiBkaWZmIC0tZ2l0IGEvY29uZmlncy9zdG0zMmg3NTAtYXJ0LXBpX2RlZmNvbmZpZyBiL2NvbmZp
-Z3Mvc3RtMzJoNzUwLWFydC1waV9kZWZjb25maWcKPj4gaW5kZXggYjgyOTZhOThiNC4uYTVmY2U1
-ZTg2NiAxMDA2NDQKPj4gLS0tIGEvY29uZmlncy9zdG0zMmg3NTAtYXJ0LXBpX2RlZmNvbmZpZwo+
-PiArKysgYi9jb25maWdzL3N0bTMyaDc1MC1hcnQtcGlfZGVmY29uZmlnCj4+IEBAIC0yLDcgKzIs
-NiBAQCBDT05GSUdfQVJNPXkKPj4gwqAgQ09ORklHX0FSQ0hfU1RNMzI9eQo+PiDCoCBDT05GSUdf
-U1lTX1RFWFRfQkFTRT0weDkwMDAwMDAwCj4+IMKgIENPTkZJR19TWVNfTUFMTE9DX0xFTj0weDEw
-MDAwMAo+PiAtQ09ORklHX1NZU19NQUxMT0NfRl9MRU49MHhGMDAKPj4gwqAgQ09ORklHX05SX0RS
-QU1fQkFOS1M9MQo+PiDCoCBDT05GSUdfRU5WX1NJWkU9MHgyMDAwCj4+IMKgIENPTkZJR19ERUZB
-VUxUX0RFVklDRV9UUkVFPSJzdG0zMmg3NTBpLWFydC1waSIKPiAKPiAKPiAKPiAKPiBSZXZpZXdl
-ZC1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPiAK
-PiBUaGFua3MKPiBQYXRyaWNrCj4gCkFwcGxpZWQgb24gdS1ib290LXN0bTMyL25leHQKClRoYW5r
-cwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
-dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
-bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
-Ym9vdC1zdG0zMgo=
+Hello,
+
+this patch series fixes the simple uclass iterators to be usable for
+iterating uclasses even if some devices fail to probe.
+
+Before this series when a probe error happens an error is returned
+without any device pointer, and iteration cannot continue to devices
+that happen to be after the failing device in the uclass list.
+
+This is rarely expected, nor clearly documented, and for the most part
+not useful in any way.
+
+All but the last patch are new in v4 removing problematic iterator use.
+
+v5:
+
+Split off patches that can be applied independently
+
+Fix uclass_foreach_dev_probe, pci_sriov_init, and sysinfo_get to work
+after the uclass_first_device_err change.
+
+Document that uclass_first_device_err and uclass_first_device_check can
+return non-activated device on error.
+
+Consolidate multiple similar cleanups into one patch.
+
+Thanks
+
+Michal
+
+Michal Suchanek (15):
+  dm: core: Fix uclass_probe_all to really probe all devices
+  dm: treewide: Do not opencode uclass_probe_all()
+  dm: pci: Fix device PCI iteration
+  bootstd: Fix listing boot devices
+  usb: ether: Fix error handling in usb_ether_init
+  stdio: Fix class iteration in stdio_add_devices()
+  video: ipuv3: Fix error handling when getting the display
+  w1: Fix bus counting in w1_get_bus
+  cmd: List all uclass devices regardless of probe error
+  dm: treewide: Use uclass_first_device_err when accessing one device
+  dm: treewide: Use uclass_next_device_err when accessing second device
+  dm: blk: Do not use uclass_next_device_err
+  dm: core: Switch uclass_*_device_err to use uclass_*_device_check
+  dm: treewide: Do not use the return value of simple uclass iterator
+  dm: core: Do not stop uclass iteration on error
+
+ arch/arm/mach-k3/j721s2_init.c            |  2 +-
+ arch/arm/mach-omap2/am33xx/board.c        |  4 +-
+ arch/x86/cpu/broadwell/cpu.c              |  4 +-
+ arch/x86/cpu/intel_common/cpu.c           |  4 +-
+ arch/x86/lib/pinctrl_ich6.c               |  4 +-
+ board/atmel/common/mac_eeprom.c           |  2 +-
+ board/intel/cougarcanyon2/cougarcanyon2.c |  4 +-
+ boot/bootdev-uclass.c                     |  7 +--
+ cmd/adc.c                                 | 22 ++++-----
+ cmd/demo.c                                | 16 ++++---
+ cmd/gpio.c                                | 15 ++++--
+ cmd/pmic.c                                | 15 +++---
+ cmd/regulator.c                           | 13 +++---
+ cmd/virtio.c                              |  9 ++--
+ common/stdio.c                            | 33 ++++++-------
+ drivers/block/blk-uclass.c                | 16 +++----
+ drivers/core/uclass.c                     | 56 ++++++++++++-----------
+ drivers/cpu/cpu-uclass.c                  | 20 ++------
+ drivers/dma/dma-uclass.c                  |  7 ++-
+ drivers/gpio/gpio-uclass.c                | 14 +++---
+ drivers/mmc/omap_hsmmc.c                  |  2 +-
+ drivers/pci/pci-uclass.c                  | 26 ++++-------
+ drivers/serial/serial-uclass.c            |  2 +-
+ drivers/serial/serial_bcm283x_mu.c        |  2 +-
+ drivers/serial/serial_bcm283x_pl011.c     |  2 +-
+ drivers/sysinfo/sysinfo-uclass.c          | 10 +++-
+ drivers/sysreset/sysreset_ast.c           |  2 +-
+ drivers/usb/gadget/ether.c                | 11 ++---
+ drivers/video/exynos/exynos_fb.c          | 24 ++++------
+ drivers/video/imx/mxc_ipuv3_fb.c          |  9 ++--
+ drivers/video/mali_dp.c                   |  2 +-
+ drivers/video/stm32/stm32_dsi.c           |  6 ++-
+ drivers/video/tegra124/dp.c               |  7 +--
+ drivers/virtio/virtio-uclass.c            | 15 +-----
+ drivers/w1/w1-uclass.c                    | 29 ++++++------
+ include/dm/uclass.h                       | 49 ++++++++++----------
+ lib/acpi/acpi_table.c                     |  2 +-
+ lib/efi_loader/efi_gop.c                  |  2 +-
+ net/eth-uclass.c                          |  6 ++-
+ test/boot/bootmeth.c                      |  2 +-
+ test/dm/acpi.c                            | 14 +++---
+ test/dm/core.c                            | 27 +++--------
+ test/dm/devres.c                          |  4 +-
+ test/dm/i2c.c                             |  8 ++--
+ test/dm/test-fdt.c                        | 27 ++++++++---
+ test/dm/virtio_device.c                   |  8 ++--
+ test/dm/virtio_rng.c                      |  2 +-
+ test/fuzz/cmd_fuzz.c                      |  2 +-
+ test/fuzz/virtio.c                        |  2 +-
+ test/test-main.c                          | 11 +----
+ 50 files changed, 269 insertions(+), 313 deletions(-)
+
+--
+2.37.3
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

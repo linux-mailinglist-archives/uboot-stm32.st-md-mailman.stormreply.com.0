@@ -2,65 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C50675FC22C
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Oct 2022 10:43:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CF195FC7CE
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Oct 2022 16:53:56 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6C8D6C640F3;
-	Wed, 12 Oct 2022 08:43:16 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2B527C640FE;
+	Wed, 12 Oct 2022 14:53:56 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7B780C0D2BF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BD1F0C640F3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Oct 2022 08:43:14 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29C8gmvM004082;
- Wed, 12 Oct 2022 10:43:12 +0200
+ Wed, 12 Oct 2022 12:33:58 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29CAd0Dt004900;
+ Wed, 12 Oct 2022 14:33:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=oQowizQAN1MDgiW0EKoOh+l48C+0YKyyyfFOvMfK+KQ=;
- b=L30xYdybWjdieMO2PRHfPzBFU2B8PX16AJDvy6jgJyHwl8JXuy5dMzh47dL0qZ6ObcVB
- pcrDR4lgWWgFnjQDNOV3gXfA1IjkkuJ39k5rbu8jcgl7JIs/QfaoLKch55jRjCY5NKpl
- kO8VITojyNPcI1n9fKTueDCeh89vhUcaA2tWQgDS+xiWkLvkdaRwzM3SKStx62YhJBmr
- nlPiJKY0bUFJM2cF4FUFp6EcJlNcMWLoL8JoFo+/XAG/l7MK+aGpzrWwrs8IDoQVXCv0
- Ib4V/uZ4uniiMqyDm4o9Ytdz8Pa3oEtg/RLJi4z1/pI4weC5GkuJSiFrywm/BBwbOxmf 5g== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=EeDI84gKYcHT1KDv6yYbenknw7Zo60L4x8Hj9kzHvjM=;
+ b=BCm1rf3bGs177Qz470NYBKZwd0cnRv07rvIU2k/08NzDpf+1YowA2urc93yqKx5WAC/2
+ Kk1WFGk1YiRHRsmsxi7yl3lDsfzUqQLLHTtI1AqDwN4eoYwTEYTiTN8sies8LSk63s5V
+ mD4DeASeBXSe+WA5ggH3PB0Bl/GyfI+wmYvsISizras024EHR/NbxK/gB5XAqnJHHePV
+ E0XvLWasXhIHiqt8seskZAUKcZpP9faad2C6aSPfhsqXbMXrUOFJkv4D0qw7kqYYvpMb
+ ZedF0nKd1FjioDdEdJmVmPu9gVTYusHLGb8DHTplmXqsMbfzyhvkSkW7+hOaCBxlOp1m mw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3k31gq1akb-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3k31exsyfc-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 12 Oct 2022 10:43:12 +0200
+ Wed, 12 Oct 2022 14:33:56 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 968CF100034;
- Wed, 12 Oct 2022 10:43:07 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E02FF10002A;
+ Wed, 12 Oct 2022 14:33:51 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8E41C2171EA;
- Wed, 12 Oct 2022 10:43:07 +0200 (CEST)
-Received: from [10.201.21.72] (10.75.127.118) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D69EC228A2A;
+ Wed, 12 Oct 2022 14:33:51 +0200 (CEST)
+Received: from localhost (10.75.127.121) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2375.31; Wed, 12 Oct
- 2022 10:43:07 +0200
-Message-ID: <23d025e1-8a42-83d1-7711-7964761bdb26@foss.st.com>
-Date: Wed, 12 Oct 2022 10:43:06 +0200
+ 2022 14:33:51 +0200
+From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 12 Oct 2022 14:33:14 +0200
+Message-ID: <20221012123317.434898-1-gabriel.fernandez@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20221011164402.1.I3c89f22e6e60ebb6bd63a7f99fd60f89009bf39b@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20221011164402.1.I3c89f22e6e60ebb6bd63a7f99fd60f89009bf39b@changeid>
-X-Originating-IP: [10.75.127.118]
+X-Originating-IP: [10.75.127.121]
 X-ClientProxiedBy: GPXDAG2NODE4.st.com (10.75.127.68) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-12_04,2022-10-11_02,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp: fix compilation issue with
-	DEBUG_UART
+ definitions=2022-10-12_06,2022-10-12_01,2022-06-22_01
+X-Mailman-Approved-At: Wed, 12 Oct 2022 14:53:55 +0000
+Cc: Tom Rini <trini@konsulko.com>,
+ Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 0/3] Introduce STM32MP13 RCC driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,193 +77,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+This serie adds support of clock and reset for STM32MP13.
 
-On 10/11/22 16:44, Patrick Delaunay wrote:
-> Fix the compilation issue when CONFIG_DEBUG_UART is activated
-> 
->  drivers/serial/serial_stm32.o: in function `debug_uart_init':
->  drivers/serial/serial_stm32.c:291: undefined reference to \
->     `board_debug_uart_init'
-> 
-> The board_debug_uart_init is needed for SPL boot, called in
-> cpu.c::mach_cpu_init(); it is defined in board/st/stm32mp1/spl.c.
-> 
-> But with the removal #ifdefs patch, the function debug_uart_init() is
-> always compiled even if not present in the final U-Boot image.
-> 
-> This patch adds a file to provided this function when DEBUG_UART and SPL
-> are activated.
-> 
-> Fixes: c8b2eef52b6c ("stm32mp15: tidy up #ifdefs in cpu.c")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  arch/arm/mach-stm32mp/Kconfig.15x |  2 +-
->  board/engicam/stm32mp1/Makefile   |  2 ++
->  board/engicam/stm32mp1/spl.c      | 25 -------------------------
->  board/st/stm32mp1/Makefile        |  2 ++
->  board/st/stm32mp1/debug_uart.c    | 29 +++++++++++++++++++++++++++++
->  board/st/stm32mp1/spl.c           | 28 ----------------------------
->  6 files changed, 34 insertions(+), 54 deletions(-)
->  create mode 100644 board/st/stm32mp1/debug_uart.c
-> 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
-> index d516270292a..5bd9b53a5d8 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig.15x
-> +++ b/arch/arm/mach-stm32mp/Kconfig.15x
-> @@ -117,7 +117,7 @@ endif
->  if DEBUG_UART
->  
->  config DEBUG_UART_BOARD_INIT
-> -	default y
-> +	default y if SPL
->  
->  # debug on UART4 by default
->  config DEBUG_UART_BASE
-> diff --git a/board/engicam/stm32mp1/Makefile b/board/engicam/stm32mp1/Makefile
-> index 65560df2900..155d33f9eec 100644
-> --- a/board/engicam/stm32mp1/Makefile
-> +++ b/board/engicam/stm32mp1/Makefile
-> @@ -8,3 +8,5 @@ obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
->  endif
-> +
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += ../../st/stm32mp1/debug_uart.o
-> diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
-> index 3aa738b3faa..2b7779cc01d 100644
-> --- a/board/engicam/stm32mp1/spl.c
-> +++ b/board/engicam/stm32mp1/spl.c
-> @@ -6,7 +6,6 @@
->   */
->  
->  #include <common.h>
-> -#include <asm/io.h>
->  
->  /* board early initialisation in board_f: need to use global variable */
->  static u32 opp_voltage_mv __section(".data");
-> @@ -22,27 +21,3 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> -#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> -void board_debug_uart_init(void)
-> -{
-> -#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> -
-> -#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> -#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> -
-> -	/* UART4 clock enable */
-> -	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> -
-> -#define GPIOG_BASE 0x50008000
-> -	/* GPIOG clock enable */
-> -	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> -	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> -	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> -	writel(0x00006000, GPIOG_BASE + 0x24);
-> -#else
-> -
-> -#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> -
-> -#endif
-> -}
-> -#endif
-> diff --git a/board/st/stm32mp1/Makefile b/board/st/stm32mp1/Makefile
-> index 65560df2900..f2d720b67b3 100644
-> --- a/board/st/stm32mp1/Makefile
-> +++ b/board/st/stm32mp1/Makefile
-> @@ -8,3 +8,5 @@ obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
->  endif
-> +
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += debug_uart.o
-> diff --git a/board/st/stm32mp1/debug_uart.c b/board/st/stm32mp1/debug_uart.c
-> new file mode 100644
-> index 00000000000..24e3f9f2201
-> --- /dev/null
-> +++ b/board/st/stm32mp1/debug_uart.c
-> @@ -0,0 +1,29 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
-> + */
-> +
-> +#include <config.h>
-> +#include <debug_uart.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/stm32.h>
-> +#include <linux/bitops.h>
-> +
-> +#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> +#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> +
-> +#define GPIOG_BASE 0x50008000
-> +
-> +void board_debug_uart_init(void)
-> +{
-> +	if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE) {
-> +		/* UART4 clock enable */
-> +		setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> +
-> +		/* GPIOG clock enable */
-> +		writel(BIT(6), RCC_MP_AHB4ENSETR);
-> +		/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> +		writel(0xffbfffff, GPIOG_BASE + 0x00);
-> +		writel(0x00006000, GPIOG_BASE + 0x24);
-> +	}
-> +}
-> diff --git a/board/st/stm32mp1/spl.c b/board/st/stm32mp1/spl.c
-> index 8e4549a1b35..747ec7e445a 100644
-> --- a/board/st/stm32mp1/spl.c
-> +++ b/board/st/stm32mp1/spl.c
-> @@ -5,11 +5,7 @@
->  
->  #include <config.h>
->  #include <common.h>
-> -#include <init.h>
-> -#include <asm/io.h>
->  #include <asm/arch/sys_proto.h>
-> -#include <linux/bitops.h>
-> -#include <linux/delay.h>
->  #include "../common/stpmic1.h"
->  
->  /* board early initialisation in board_f: need to use global variable */
-> @@ -29,27 +25,3 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> -#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> -void board_debug_uart_init(void)
-> -{
-> -#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> -
-> -#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> -#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> -
-> -	/* UART4 clock enable */
-> -	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> -
-> -#define GPIOG_BASE 0x50008000
-> -	/* GPIOG clock enable */
-> -	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> -	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> -	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> -	writel(0x00006000, GPIOG_BASE + 0x24);
-> -#else
-> -
-> -#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> -
-> -#endif
-> -}
-> -#endif
+Gabriel Fernandez (3):
+  dt-bindings: stm32mp13: add clock & reset support for STM32MP13
+  clk: stm32mp13: introduce STM32MP13 RCC driver
+  arm: dts: stm32mp13: add support of RCC driver
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ MAINTAINERS                                  |    2 +
+ arch/arm/dts/stm32mp13-u-boot.dtsi           |    4 +
+ arch/arm/dts/stm32mp131.dtsi                 |  119 +-
+ arch/arm/dts/stm32mp133.dtsi                 |    4 +-
+ arch/arm/dts/stm32mp13xf.dtsi                |    3 +-
+ drivers/clk/stm32/Kconfig                    |   15 +
+ drivers/clk/stm32/Makefile                   |    2 +
+ drivers/clk/stm32/clk-stm32-core.c           |  349 ++++
+ drivers/clk/stm32/clk-stm32-core.h           |  154 ++
+ drivers/clk/stm32/clk-stm32mp13.c            |  839 +++++++++
+ drivers/clk/stm32/stm32mp13_rcc.h            | 1751 ++++++++++++++++++
+ include/dt-bindings/clock/stm32mp13-clks.h   |  229 +++
+ include/dt-bindings/reset/stm32mp13-resets.h |  100 +
+ 13 files changed, 3493 insertions(+), 78 deletions(-)
+ create mode 100644 drivers/clk/stm32/clk-stm32-core.c
+ create mode 100644 drivers/clk/stm32/clk-stm32-core.h
+ create mode 100644 drivers/clk/stm32/clk-stm32mp13.c
+ create mode 100644 drivers/clk/stm32/stm32mp13_rcc.h
+ create mode 100644 include/dt-bindings/clock/stm32mp13-clks.h
+ create mode 100644 include/dt-bindings/reset/stm32mp13-resets.h
 
-Thanks
-Patrice
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

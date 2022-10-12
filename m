@@ -2,66 +2,78 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A10F35FCB5A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Oct 2022 21:14:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BCC35FCBBF
+	for <lists+uboot-stm32@lfdr.de>; Wed, 12 Oct 2022 21:58:30 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4ED03C0D2BF;
-	Wed, 12 Oct 2022 19:14:23 +0000 (UTC)
-Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
- [209.85.219.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC876C640F2;
+	Wed, 12 Oct 2022 19:58:29 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90BC7C03FD5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 719A2C0D2BF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Oct 2022 19:14:21 +0000 (UTC)
-Received: by mail-qv1-f48.google.com with SMTP id o67so11065777qvo.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 12 Oct 2022 12:14:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=343VWZjqiHj5FtmAZCQzIEBlHA621+v+n/ieSx6cQGM=;
- b=VbwLFLxyTd3gX6FbENayL8eAG4t1cOCadH1NTZHA/OXGVPEj45QdS8JaO5/SbcGsCo
- jGPeD+82wPqelpPHR2Q+OkuPZVImSW2diWa8kq6UqCBgZKIiaSR0HYn41X6p/8UXUT7Z
- iBDC7PoRj5QmA8MWy7ECoj4YOWradGDYF2PLk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=343VWZjqiHj5FtmAZCQzIEBlHA621+v+n/ieSx6cQGM=;
- b=nluK3HluR0oEI/SEwFokSH3v9kV6DE1KN6mBP/33PycuR7j1F0BcWPPo2DhouT9cf0
- 8aNMX1X6wWSzayiptNSIobkLdoTDaKTHSUTS0jk/VWt5j/OuciJSwugXmtOYsAXGDS3x
- LBLJEWydNDoBPoCTW4Cm8kjFtKRPgjl2MLODBfeeQr3rftO+Y8JZ0Q0iNUoB+v0Xz53y
- MOLpdlUTq4evMI/MIy+dPAy16DtTulS0WI4tX0VyyWVWLm1z0JMBKkIUA49IFFouLGgH
- 6yuo7vt9u6mV6C9dPMODI++gC5rfJWRni8KAo3syKKzkfROOKkcfWgHX+gTHr3ffQRNZ
- judw==
-X-Gm-Message-State: ACrzQf0usKJjGm8gjGfblIifGgDXUlx5bAiJ6y47DepAmMV8AavcFINH
- NVevAKA1j8BfSx8/H3idD9otJmXUu+R10A==
-X-Google-Smtp-Source: AMsMyM58eNnb/Hp5KT4j3uZrChShQJTnUJI81iqI+TdJJ1ybNrsb4PZmFyGxt76J5tRuAx1R3ssgLA==
-X-Received: by 2002:a0c:9064:0:b0:4ad:5294:b224 with SMTP id
- o91-20020a0c9064000000b004ad5294b224mr24312988qvo.39.1665602060488; 
- Wed, 12 Oct 2022 12:14:20 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-295e-6c71-581f-29f1.res6.spectrum.com.
- [2603:6081:7b00:6400:295e:6c71:581f:29f1])
- by smtp.gmail.com with ESMTPSA id
- i7-20020a05622a08c700b0035a6f972f84sm13022005qte.62.2022.10.12.12.14.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Oct 2022 12:14:20 -0700 (PDT)
-Date: Wed, 12 Oct 2022 15:14:18 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20221012191418.GA2020586@bill-the-cat>
-References: <20220930093635.1.I38e66d79350b381b6059a6a80ce60c62f01f3894@changeid>
+ Wed, 12 Oct 2022 19:58:28 +0000 (UTC)
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out1.suse.de (Postfix) with ESMTP id D82EA21DBA;
+ Wed, 12 Oct 2022 19:58:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1665604707; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z/sMWdTjbzC0gro8STZy4Jgj0MJvaSW0TzmJrKSWZJo=;
+ b=UkuFgx6IqWhzz9giISffjsnDecXQckleM8k1PXurGaN46DXHzQazGnl6q/hC8Ub7m3zFd4
+ uZkivjm21WwE4Op6QncT93U7hlHPobdeNMbhk7eKMabjkNV7iDs2LZaqHjISaThTEs2a48
+ 4DcersPTIovUPRtDcIwevfhbSDTZDTY=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1665604707;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Z/sMWdTjbzC0gro8STZy4Jgj0MJvaSW0TzmJrKSWZJo=;
+ b=yCxD25jfIwD7WzMEw+oH0W1ByUZzLSSN2Udlk1c2ae4pGDCCz3+k+MkX0onBnEPHQHtNTS
+ Mtcs43O0eZwDC6AA==
+Received: from naga.suse.cz (unknown [10.100.224.114])
+ by relay2.suse.de (Postfix) with ESMTP id 591382C141;
+ Wed, 12 Oct 2022 19:58:24 +0000 (UTC)
+From: Michal Suchanek <msuchanek@suse.de>
+To: u-boot@lists.denx.de
+Date: Wed, 12 Oct 2022 21:57:49 +0200
+Message-Id: <cover.1665604425.git.msuchanek@suse.de>
+X-Mailer: git-send-email 2.37.3
+In-Reply-To: <cover.1664314042.git.msuchanek@suse.de>
+References: <cover.1664314042.git.msuchanek@suse.de>
 MIME-Version: 1.0
-In-Reply-To: <20220930093635.1.I38e66d79350b381b6059a6a80ce60c62f01f3894@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Etienne CARRIERE <etienne.carriere@linaro.org>,
- Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] firmware: scmi: fix the multi channel
-	support with CCF
+Cc: Peng Fan <peng.fan@nxp.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Andrew Jeffery <andrew@aj.id.au>, Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "moderated list:ARM STM STM32MP" <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Vyacheslav Bocharov <adeep@lexina.in>,
+ Samuel Dionne-Riel <samuel@dionne-riel.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
+ Diego Rondini <diego.rondini@kynetics.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Jason Liu <jason.hui.liu@nxp.com>, Michal Suchanek <msuchanek@suse.de>,
+ Matthias Brugger <mbrugger@suse.com>, Ovidiu Panait <ovpanait@gmail.com>,
+ Mark Kettenis <kettenis@openbsd.org>, Loic Poulain <loic.poulain@linaro.org>,
+ Heiko Schocher <hs@denx.de>, Vabhav Sharma <vabhav.sharma@nxp.com>,
+ =?UTF-8?q?Viktor=20K=C5=99iv=C3=A1k?= <viktor.krivak@gmail.com>,
+ Tomas Hlavacek <tmshlvck@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Anatolij Gustschin <agust@denx.de>, Alexander Dahl <ada@thorsis.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sean Anderson <sean.anderson@seco.com>, Mario Six <mario.six@gdsys.cc>,
+ Tom Warren <twarren@nvidia.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>,
+ Maxime Ripard <maxime.ripard@free-electrons.com>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
+ Andrew Scull <ascull@google.com>
+Subject: [Uboot-stm32] [PATCH v6 00/20] Do not stop uclass iteration on error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,71 +85,124 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0843803311962428754=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hello,
 
---===============0843803311962428754==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="0+/s3RgBAfRJTJO/"
-Content-Disposition: inline
+this patch series fixes the simple uclass iterators to be usable for
+iterating uclasses even if some devices fail to probe.
 
+Before this series when a probe error happens an error is returned
+without any device pointer, and iteration cannot continue to devices
+that happen to be after the failing device in the uclass list.
 
---0+/s3RgBAfRJTJO/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is rarely expected, nor clearly documented, and for the most part
+not useful in any way.
 
-On Fri, Sep 30, 2022 at 09:36:38AM +0200, Patrick Delaunay wrote:
+All but the last patch are new in v4 removing problematic iterator use.
 
-> When the CCF is activated, the dev->parent is not necessary
-> the reference to SCMI transport and the function devm_scmi_of_get_channel
-> failed for the registered SCMI clock, child for protocol@14,
-> the channel is null and the SCMI clock driver crash for any operations.
->=20
-> This patch changes the first parameter of the ops of_get_channel(),
-> aligned with other process_msg() to pass directly the good reference,
-> i.e. parent result of find_scmi_transport_device(dev)
-> which return the reference of the scmi transport device.
->=20
-> Fixes: 8e96801aa6a ("firmware: scmi: add multi-channel support")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+v5:
 
-Applied to u-boot/master, thanks!
+Split off patches that can be applied independently
 
---=20
-Tom
+Fix uclass_foreach_dev_probe, pci_sriov_init, and sysinfo_get to work
+after the uclass_first_device_err change.
 
---0+/s3RgBAfRJTJO/
-Content-Type: application/pgp-signature; name="signature.asc"
+Document that uclass_first_device_err and uclass_first_device_check can
+return non-activated device on error.
 
------BEGIN PGP SIGNATURE-----
+Consolidate multiple similar cleanups into one patch.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmNHEgoACgkQFHw5/5Y0
-tyxtLgv/Tt/x8cPfn2vI/HPqX/pFgxyAotNfGpu6HfcRtcYM10sQHDhC78ZIols9
-kyRfxtHgQl7edeFf4kxTfT62GzT/fyQTLZSkG9YXszU3GkpnZYYfLNg7yDg5sqdh
-2V5wtcYXG20+oPNra4Sjfotm6+Xx+GPsClmBXNn73SJ30LNWNMt+JjpNLfxrrEc4
-ZhnCUpMPdOZFKO/Tus5vl2lpeQjzR725m1VNrhgPexus74jJPi6PtbJMD+Mb4z7U
-Az784jytBMLQVbxH1bd/GVZvrCaWLDo1dOye73cYZHWHknQMW38nOFmepm1nfWEG
-l3lBw0VXriI2AYCCa13vq7Yuk0jLY0g6yUpAFVtaZn/SbTnFWW4Y7lxxP9ykwcGc
-rGrRp1tJjYjiB4s2INOvECuv6UjDMc/spn9zXM6EtZ5M9yT+jvkqOF8z8PAxwa8Y
-H9Tj9kkvIuzEwBQbRhQBE6KZ7yVWENrO98F2VfiFZFVXcmJuGgn9D2zAGAxK1l3i
-0bFNsFfc
-=d9Ir
------END PGP SIGNATURE-----
+v6:
 
---0+/s3RgBAfRJTJO/--
+Split off the fixups from uclass_*_device_err switch patch.
 
---===============0843803311962428754==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+Thanks
+
+Michal
+
+Michal Suchanek (20):
+  dm: core: Fix uclass_probe_all to really probe all devices
+  dm: treewide: Do not opencode uclass_probe_all()
+  dm: pci: Fix device PCI iteration
+  bootstd: Fix listing boot devices
+  usb: ether: Fix error handling in usb_ether_init
+  stdio: Fix class iteration in stdio_add_devices()
+  video: ipuv3: Fix error handling when getting the display
+  w1: Fix bus counting in w1_get_bus
+  cmd: List all uclass devices regardless of probe error
+  dm: treewide: Use uclass_first_device_err when accessing one device
+  dm: treewide: Use uclass_next_device_err when accessing second device
+  dm: blk: Do not use uclass_next_device_err
+  net: eth-uclass: Do not set device on error
+  dm: pci: Update error handling in pci_sriov_init
+  mpc83xx: gazerbeam: Update sysinfo_get error handling
+  dm: core: Switch uclass_foreach_dev_probe to use simple iterator
+  dm: core: Switch uclass_*_device_err to use uclass_*_device_check
+  dm: core: Non-activated device may be returned from uclass iterators
+    that provide error handling
+  dm: treewide: Do not use the return value of simple uclass iterator
+  dm: core: Do not stop uclass iteration on error
+
+ arch/arm/mach-k3/j721s2_init.c            |  2 +-
+ arch/arm/mach-omap2/am33xx/board.c        |  4 +-
+ arch/x86/cpu/broadwell/cpu.c              |  4 +-
+ arch/x86/cpu/intel_common/cpu.c           |  4 +-
+ arch/x86/lib/pinctrl_ich6.c               |  4 +-
+ board/atmel/common/mac_eeprom.c           |  2 +-
+ board/gdsys/mpc8308/gazerbeam.c           | 12 +++--
+ board/intel/cougarcanyon2/cougarcanyon2.c |  4 +-
+ boot/bootdev-uclass.c                     |  4 +-
+ cmd/adc.c                                 | 20 ++++----
+ cmd/demo.c                                | 15 +++---
+ cmd/gpio.c                                | 15 ++++--
+ cmd/pmic.c                                | 15 +++---
+ cmd/regulator.c                           | 13 +++---
+ cmd/virtio.c                              |  9 ++--
+ common/stdio.c                            | 32 ++++++-------
+ drivers/block/blk-uclass.c                | 16 +++----
+ drivers/core/uclass.c                     | 56 ++++++++++++-----------
+ drivers/cpu/cpu-uclass.c                  | 20 ++------
+ drivers/dma/dma-uclass.c                  |  7 ++-
+ drivers/gpio/gpio-uclass.c                | 14 +++---
+ drivers/mmc/omap_hsmmc.c                  |  2 +-
+ drivers/pci/pci-uclass.c                  | 26 ++++-------
+ drivers/serial/serial-uclass.c            |  2 +-
+ drivers/serial/serial_bcm283x_mu.c        |  2 +-
+ drivers/serial/serial_bcm283x_pl011.c     |  2 +-
+ drivers/sysreset/sysreset_ast.c           |  2 +-
+ drivers/usb/gadget/ether.c                | 11 ++---
+ drivers/video/exynos/exynos_fb.c          | 14 ++----
+ drivers/video/imx/mxc_ipuv3_fb.c          |  9 ++--
+ drivers/video/mali_dp.c                   |  2 +-
+ drivers/video/stm32/stm32_dsi.c           |  2 +-
+ drivers/video/tegra124/dp.c               |  4 +-
+ drivers/virtio/virtio-uclass.c            | 15 +-----
+ drivers/w1/w1-uclass.c                    | 29 ++++++------
+ include/dm/uclass.h                       | 49 ++++++++++----------
+ lib/acpi/acpi_table.c                     |  2 +-
+ lib/efi_loader/efi_gop.c                  |  2 +-
+ net/eth-uclass.c                          |  6 ++-
+ test/boot/bootmeth.c                      |  2 +-
+ test/dm/acpi.c                            | 14 +++---
+ test/dm/core.c                            | 27 +++--------
+ test/dm/devres.c                          |  4 +-
+ test/dm/i2c.c                             |  8 ++--
+ test/dm/test-fdt.c                        | 46 ++++++++++++++-----
+ test/dm/virtio_device.c                   |  8 ++--
+ test/dm/virtio_rng.c                      |  2 +-
+ test/fuzz/cmd_fuzz.c                      |  2 +-
+ test/fuzz/virtio.c                        |  2 +-
+ test/test-main.c                          | 11 +----
+ 50 files changed, 266 insertions(+), 313 deletions(-)
+
+-- 
+2.37.3
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0843803311962428754==--

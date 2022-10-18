@@ -2,65 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59AD3602490
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Oct 2022 08:38:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E2906031D6
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Oct 2022 19:57:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1EAE1C640F9;
-	Tue, 18 Oct 2022 06:38:23 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CE4D5C64104;
+	Tue, 18 Oct 2022 17:57:30 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A9C1EC03FC4
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6ABF7C64101
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Oct 2022 06:38:22 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29I3CERu022314;
- Tue, 18 Oct 2022 08:38:19 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=g7H3fh6OnClUB/vRkmGdtxFPJGoagGoTSpcG3ej/dCM=;
- b=OTlpa2oCOBfpaR8zAVMpasuLaUlpZdRAnSjkUg3vzCjV9oDEjvcwl7rajrpybOVzGR/a
- 3bal8qpF/FcjKJCW6zm1vb5erXIxgZtxqqJHco1TkTlP7NS2Z7BMH4S1HEsIuNVUcHyG
- eGN2aXPDdEY3wi9MoIJgdpqawkkrhhWOxIZTqa4U+OFfUpmCGo8F8r5c1gJX+qJ5Nf1J
- qEwEycNGoZTuC4e9Im15GHnRJ45gzF4uhKQY1W1XPNggl4xrlXbst8/veMH59ZPq+SRm
- RXlvp4Bkz7aTNXNGhrxWBum9Qb21CtwrgbCrUmHxMYMUVvyeMIOc28w+y72sr8es7BvQ +w== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3k7krjst0u-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Oct 2022 08:38:19 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 53466100038;
- Tue, 18 Oct 2022 08:38:15 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 263112132CF;
- Tue, 18 Oct 2022 08:38:15 +0200 (CEST)
-Received: from [10.201.21.72] (10.201.21.72) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Tue, 18 Oct
- 2022 08:38:14 +0200
-Message-ID: <dd4b28f7-b19a-4f33-12fb-fc6103a185ca@foss.st.com>
-Date: Tue, 18 Oct 2022 08:38:14 +0200
+ Tue, 18 Oct 2022 17:57:30 +0000 (UTC)
+Received: by mail-qk1-f181.google.com with SMTP id a5so9161022qkl.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 18 Oct 2022 10:57:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ktqHfIq6ZjaqaHI8Ck6GMivlyr3LcQZ/2gX51N21SVk=;
+ b=boqdVRiHAwNJqeGNQWfpICyaZC6L/7S8mmid09qTor6VWTtHh8zKsWmmHwhd9zMjFN
+ vr3FfvrIaxbmOKWIDj5qCkd/+hXfyaga/ZggXr4stDHTwl1rnie86vNek9lTVTC+b9Of
+ BjAEWNIJMn5fkLKRRIsrZoFRXCtGD+5wjXC3M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ktqHfIq6ZjaqaHI8Ck6GMivlyr3LcQZ/2gX51N21SVk=;
+ b=sjkvCoue0MC3sF6XQxcvEPEnYkNzEGq1xUfvUydikOtIKtiLmO3c4nJmNg4ioOXKx+
+ KxQs0wnJWGaNo90MLGulhg+j211radTbEiJkKoCNsvBO3TdHychUzbTYnhfgd6Xh2HKX
+ j32ZvzEqoORMzZpPpqxndKlejnFxL/G+BWbC/SN9JWA3uysDWQi15r2fn5tm4KtsHzmu
+ Al/Tw49KYXyhlmCAJYhXyZM8380aEx4YT96DDVZhdxbWgYnILyVxnpeAg5XdViB6vaH4
+ Ahj6/yofgZQeRhR5l1GqCw2Ls7wPRkEEe1FLUF1sbe83M4uJl/0suUs8zbV0Jeysr1Bx
+ BtsA==
+X-Gm-Message-State: ACrzQf1hpaB685lfvTx6S+fAyyotpG63nJseC8Wes1QsmrihrTRQ1iKn
+ WOeEmZ/67ZUcuHEs/BAS/tDuzQ==
+X-Google-Smtp-Source: AMsMyM5wGzG6o/m1Yq2Ahn/RR00JujN8EkFiiBHIGhVskkJ2Y/A/Z0o5StI8796W3j40/KnBevxcNA==
+X-Received: by 2002:ae9:f312:0:b0:6ee:ec00:8944 with SMTP id
+ p18-20020ae9f312000000b006eeec008944mr2667919qkg.157.1666115849329; 
+ Tue, 18 Oct 2022 10:57:29 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-9c58-0588-a5a5-a6b0.res6.spectrum.com.
+ [2603:6081:7b00:6400:9c58:588:a5a5:a6b0])
+ by smtp.gmail.com with ESMTPSA id
+ bk18-20020a05620a1a1200b006ec771d8f89sm2864863qkb.112.2022.10.18.10.57.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 18 Oct 2022 10:57:28 -0700 (PDT)
+Date: Tue, 18 Oct 2022 13:57:26 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Max Krummenacher <max.oss.09@gmail.com>
+Message-ID: <20221018175726.GO2020586@bill-the-cat>
+References: <20221018174827.1393211-1-max.oss.09@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20221011164402.1.I3c89f22e6e60ebb6bd63a7f99fd60f89009bf39b@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20221011164402.1.I3c89f22e6e60ebb6bd63a7f99fd60f89009bf39b@changeid>
-X-Originating-IP: [10.201.21.72]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-18_01,2022-10-17_02,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Matteo Lisi <matteo.lisi@engicam.com>
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp: fix compilation issue with
-	DEBUG_UART
+In-Reply-To: <20221018174827.1393211-1-max.oss.09@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] Makefile: fix u-boot-initial-env target
+	if lto is enabled
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,199 +78,113 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0575813373798680120=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
+--===============0575813373798680120==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="wrNCEKhXQ1Rm601q"
+Content-Disposition: inline
 
-On 10/11/22 16:44, Patrick Delaunay wrote:
-> Fix the compilation issue when CONFIG_DEBUG_UART is activated
-> 
->  drivers/serial/serial_stm32.o: in function `debug_uart_init':
->  drivers/serial/serial_stm32.c:291: undefined reference to \
->     `board_debug_uart_init'
-> 
-> The board_debug_uart_init is needed for SPL boot, called in
-> cpu.c::mach_cpu_init(); it is defined in board/st/stm32mp1/spl.c.
-> 
-> But with the removal #ifdefs patch, the function debug_uart_init() is
-> always compiled even if not present in the final U-Boot image.
-> 
-> This patch adds a file to provided this function when DEBUG_UART and SPL
-> are activated.
-> 
-> Fixes: c8b2eef52b6c ("stm32mp15: tidy up #ifdefs in cpu.c")
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+--wrNCEKhXQ1Rm601q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Oct 18, 2022 at 07:48:27PM +0200, Max Krummenacher wrote:
+> From: Max Krummenacher <max.krummenacher@toradex.com>
+>=20
+> With LTO enabled the U-Boot initial environment is no longer stored
+> in an easy accessible section in env/common.o. I.e. the section name
+> changes from build to build, its content maybe compressed and it is
+> annotated with additional data.
+>=20
+> For GCC adding the option '-ffat-lto-objects' when compiling common.o
+> adds additionally the traditional sections in the object file and
+> 'make u-boot-initial-env' would work also for the LTO enabled case.
+> However clang doesn't have that option.
+>=20
+> Fix this by recompiling common.o into a object file only used for
+> the creation of u-boot-initial-env if LTO is enabled.
+>=20
+> See also:
+> https://lore.kernel.org/all/927b122e-1f62-e790-f5ca-30bae4332c77@foss.st.=
+com/
+>=20
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+>=20
 > ---
-> 
->  arch/arm/mach-stm32mp/Kconfig.15x |  2 +-
->  board/engicam/stm32mp1/Makefile   |  2 ++
->  board/engicam/stm32mp1/spl.c      | 25 -------------------------
->  board/st/stm32mp1/Makefile        |  2 ++
->  board/st/stm32mp1/debug_uart.c    | 29 +++++++++++++++++++++++++++++
->  board/st/stm32mp1/spl.c           | 28 ----------------------------
->  6 files changed, 34 insertions(+), 54 deletions(-)
->  create mode 100644 board/st/stm32mp1/debug_uart.c
-> 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
-> index d516270292a..5bd9b53a5d8 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig.15x
-> +++ b/arch/arm/mach-stm32mp/Kconfig.15x
-> @@ -117,7 +117,7 @@ endif
->  if DEBUG_UART
->  
->  config DEBUG_UART_BOARD_INIT
-> -	default y
-> +	default y if SPL
->  
->  # debug on UART4 by default
->  config DEBUG_UART_BASE
-> diff --git a/board/engicam/stm32mp1/Makefile b/board/engicam/stm32mp1/Makefile
-> index 65560df2900..155d33f9eec 100644
-> --- a/board/engicam/stm32mp1/Makefile
-> +++ b/board/engicam/stm32mp1/Makefile
-> @@ -8,3 +8,5 @@ obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
->  endif
-> +
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += ../../st/stm32mp1/debug_uart.o
-> diff --git a/board/engicam/stm32mp1/spl.c b/board/engicam/stm32mp1/spl.c
-> index 3aa738b3faa..2b7779cc01d 100644
-> --- a/board/engicam/stm32mp1/spl.c
-> +++ b/board/engicam/stm32mp1/spl.c
-> @@ -6,7 +6,6 @@
->   */
->  
->  #include <common.h>
-> -#include <asm/io.h>
->  
->  /* board early initialisation in board_f: need to use global variable */
->  static u32 opp_voltage_mv __section(".data");
-> @@ -22,27 +21,3 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> -#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> -void board_debug_uart_init(void)
-> -{
-> -#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> -
-> -#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> -#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> -
-> -	/* UART4 clock enable */
-> -	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> -
-> -#define GPIOG_BASE 0x50008000
-> -	/* GPIOG clock enable */
-> -	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> -	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> -	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> -	writel(0x00006000, GPIOG_BASE + 0x24);
-> -#else
-> -
-> -#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> -
-> -#endif
-> -}
-> -#endif
-> diff --git a/board/st/stm32mp1/Makefile b/board/st/stm32mp1/Makefile
-> index 65560df2900..f2d720b67b3 100644
-> --- a/board/st/stm32mp1/Makefile
-> +++ b/board/st/stm32mp1/Makefile
-> @@ -8,3 +8,5 @@ obj-y += spl.o
->  else
->  obj-y += stm32mp1.o
->  endif
-> +
-> +obj-$(CONFIG_DEBUG_UART_BOARD_INIT) += debug_uart.o
-> diff --git a/board/st/stm32mp1/debug_uart.c b/board/st/stm32mp1/debug_uart.c
-> new file mode 100644
-> index 00000000000..24e3f9f2201
-> --- /dev/null
-> +++ b/board/st/stm32mp1/debug_uart.c
-> @@ -0,0 +1,29 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
-> + */
-> +
-> +#include <config.h>
-> +#include <debug_uart.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/stm32.h>
-> +#include <linux/bitops.h>
-> +
-> +#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> +#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> +
-> +#define GPIOG_BASE 0x50008000
-> +
-> +void board_debug_uart_init(void)
-> +{
-> +	if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE) {
-> +		/* UART4 clock enable */
-> +		setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> +
-> +		/* GPIOG clock enable */
-> +		writel(BIT(6), RCC_MP_AHB4ENSETR);
-> +		/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> +		writel(0xffbfffff, GPIOG_BASE + 0x00);
-> +		writel(0x00006000, GPIOG_BASE + 0x24);
-> +	}
-> +}
-> diff --git a/board/st/stm32mp1/spl.c b/board/st/stm32mp1/spl.c
-> index 8e4549a1b35..747ec7e445a 100644
-> --- a/board/st/stm32mp1/spl.c
-> +++ b/board/st/stm32mp1/spl.c
-> @@ -5,11 +5,7 @@
->  
->  #include <config.h>
->  #include <common.h>
-> -#include <init.h>
-> -#include <asm/io.h>
->  #include <asm/arch/sys_proto.h>
-> -#include <linux/bitops.h>
-> -#include <linux/delay.h>
->  #include "../common/stpmic1.h"
->  
->  /* board early initialisation in board_f: need to use global variable */
-> @@ -29,27 +25,3 @@ int board_early_init_f(void)
->  	return 0;
->  }
->  
-> -#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-> -void board_debug_uart_init(void)
-> -{
-> -#if (CONFIG_DEBUG_UART_BASE == STM32_UART4_BASE)
-> -
-> -#define RCC_MP_APB1ENSETR (STM32_RCC_BASE + 0x0A00)
-> -#define RCC_MP_AHB4ENSETR (STM32_RCC_BASE + 0x0A28)
-> -
-> -	/* UART4 clock enable */
-> -	setbits_le32(RCC_MP_APB1ENSETR, BIT(16));
-> -
-> -#define GPIOG_BASE 0x50008000
-> -	/* GPIOG clock enable */
-> -	writel(BIT(6), RCC_MP_AHB4ENSETR);
-> -	/* GPIO configuration for ST boards: Uart4 TX = G11 */
-> -	writel(0xffbfffff, GPIOG_BASE + 0x00);
-> -	writel(0x00006000, GPIOG_BASE + 0x24);
-> -#else
-> -
-> -#error("CONFIG_DEBUG_UART_BASE: not supported value")
-> -
-> -#endif
-> -}
-> -#endif
-Applied on u-boot-stm32/master
+>=20
+>  Makefile | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>=20
+> diff --git a/Makefile b/Makefile
+> index 3866cc62f9a..cd45c720d23 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2451,9 +2451,17 @@ endif
+>  	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
+> =20
+>  quiet_cmd_genenv =3D GENENV  $@
+> +ifeq ($(LTO_ENABLE),y)
+> +cmd_genenv =3D $(CC) $(filter-out $(LTO_CFLAGS),$(c_flags)) -c -o env/in=
+itial_env.o env/common.c; \
+> +	$(OBJCOPY) --dump-section .rodata.default_environment=3D$@ env/initial_=
+env.o; \
+> +	sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@;=
+ \
+> +	sort --field-separator=3D=3D -k1,1 --stable $@ -o $@; \
+> +	rm -f env/initial_env.o env/initial_env.su
+> +else
+>  cmd_genenv =3D $(OBJCOPY) --dump-section .rodata.default_environment=3D$=
+@ env/common.o; \
+>  	sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@;=
+ \
+>  	sort --field-separator=3D=3D -k1,1 --stable $@ -o $@
+> +endif
+> =20
+>  u-boot-initial-env: u-boot.bin
+>  	$(call if_changed,genenv)
 
-Thanks
-Patrice
+Can we pipe the output instead of making a new object file? Maybe not,
+in a portable way it seems. But, I'm not sure the above respects using
+O=3D as well so that does need to be checked and fixed if so.
+
+--=20
+Tom
+
+--wrNCEKhXQ1Rm601q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmNO6QMACgkQFHw5/5Y0
+tyw6Ogv+LeDcK9ENJ89iCgmhwcWN/G3AVFCllhwS8Aut82W0azb3ZYYHplOmVpuv
+I6BKIOxH1Ad+AgzVnzX8W1HngpACPSjwpHq9PT334bUSZ947mxbfsrCWMUIiQanW
+Gt8qQ6Pf5AALIjvdx7JBo21DI1ZuOQrRfxcGyvk7jPyv07jqp46uGACqDebRa2t2
+UwKxCsBV3vFSGF/JvNwNASOxyVhL3yRem//AqFBfSiOC/ZrRmtpQVUUenr849J5u
+Pb0rFfTpW4YlCTx5n+JjU9UGQJiQLts5RWVTrDV0/PnwXJl4L+y92RonuX/xcOlh
+WFuTurx5Tb2P9Wo8ygPuogFXJdTeql+cqS3eY/CoUvM5kz9F26EQlB8icSMG6uC1
+Uq6qaIbGA2+ABy/Mvk6VKI1X4bHDgfToOhnhMN+yDAc9s7JOsbqhGIXZXOTXrxRQ
+q9Xy26NHSDDyKfb8VIpE7JZ85WQ4iAn8goa1FcFdyT5Kp9mpPghMKg3sg/G/mX4i
+rsm4s4ov
+=EyRn
+-----END PGP SIGNATURE-----
+
+--wrNCEKhXQ1Rm601q--
+
+--===============0575813373798680120==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0575813373798680120==--

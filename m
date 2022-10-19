@@ -2,68 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF601604619
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Oct 2022 14:58:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02EB6604626
+	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Oct 2022 15:00:04 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 98E7DC64101;
-	Wed, 19 Oct 2022 12:58:24 +0000 (UTC)
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
- [209.85.215.176])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B8062C64101;
+	Wed, 19 Oct 2022 13:00:03 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+ [209.85.214.178])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 063E3C63326
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9198FC63326
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Oct 2022 12:58:22 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id bh13so16177129pgb.4
+ Wed, 19 Oct 2022 13:00:02 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id l4so17163769plb.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Oct 2022 05:58:22 -0700 (PDT)
+ Wed, 19 Oct 2022 06:00:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DzCb3itzBpHVSgPjHI0LX0fN3B1X1QNoZSSmuoxXiLs=;
- b=D/tGhVGxXKG2Va1CCS/7g+HRElb4Kg+O+rus5n+D1nXSmLoSDIEmPykiqFY4TZ/AsS
- DZV/r5xDSVW6rh0Km+qlLex7abFbSSCFDwGWyJtAicvqR/nFn+V5Dem+L61KzwJAqXZ5
- 5auLyvZ9H3fR6bwnkjnu2xfiCFIEqEkcbHI8VlT1DWdEW73m25xZM0jC7FqYdGoPOfw0
- DJJyQSmE5E+iWu9CCC6QkCKwprBIQCP9F/X6PL0Ke54E/Vf47bUJDc6W1zAF/nLqK/KP
- oto9ApMVeon1PzlCaHIEf0MI8VG+48XeUXdWyMEtGGhmcDjmjI7sAaVUwfbRiJx3lJS4
- s6XQ==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GUmJYIeBij9aJ6ZNACjKa8PJW8wLh62kab6fQwHXg6o=;
+ b=W5QPFwkFUlj5/p1ugZ6jJwYEr94Fi2jROb8ExsKsUPvGH2NQiJJAqA9UuoNSQHRb4o
+ J4rOlGQADRyMhT4pW7wrQhoRQyi0zQOY3TIOIUQzPtj7UOb/bu0zsUQV8SGEuWE7Azrc
+ bkJBJdJzGbguyPyVfr2yCxSsDVJAGVkSN7p1yJ3bVwow66PlIqaa+QefzAnyXGHvkHRW
+ 6dJytuBzcFPyQDWal7M6CNCTZSdTjDrHw3+C5zCwzdY3srp/KaCyWXnmeMiftd0FwHyk
+ YBvIRc3Ffkk/XZVuI/1gEJOOcDKTqBssMTTFtRR+IVN3Jo/pxLP/jT+J67QWilRU9Gim
+ PpQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DzCb3itzBpHVSgPjHI0LX0fN3B1X1QNoZSSmuoxXiLs=;
- b=n6jXOhzkO3SgGh9nQmElQMliA5CSap+yswIvG4bkt9QvAxVRqYqmYp9Gg8uZxa7vbQ
- sX+PCxn+xozBzYeYH02Y6LR9NGYa23hczz+KzeX0v+u3W0Llzp6VGfk+6TgqdVvNbq1H
- 0JOkCh/oB/H3+1eylaxtElsoc2gwZmfzrl+8jl3ZVpglL41j+r3/UqlgtZ5maIDIQg+r
- O3usmW5IdTTYC2ia+mI+JVs+90lHodnHP8ImhDZ/M7wQBYMo0ux1TYMDpYJBZUScLjdI
- 0dMu4yUAqrA3Lm6LktZtXhGxZkL0MwRn0RP2KFM8wC/3RMr5AmaFFTGzOIOD1NH2FZnk
- dPPQ==
-X-Gm-Message-State: ACrzQf2ShcUZ68D9fgLEca+ATS502RG4Cc5jA9MJF07QOT2+bSSdSVcU
- T0g9c375+kCARe926+RZZcvMqqSsYzEqofruas0=
-X-Google-Smtp-Source: AMsMyM5gnZhzQI0PhydLqscgGFGCBd6zLOX14DNoRm7XSItITnHu8LaEs2VESCvMYfE4AwNQDb7y0ZDw0BvrviXYG58=
-X-Received: by 2002:a63:2a97:0:b0:457:23e9:586d with SMTP id
- q145-20020a632a97000000b0045723e9586dmr7134458pgq.190.1666184301531; Wed, 19
- Oct 2022 05:58:21 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=GUmJYIeBij9aJ6ZNACjKa8PJW8wLh62kab6fQwHXg6o=;
+ b=2gVL+zv0JQDqTn2eam332K2E383+/VCm2paqsRf6dCTZ/2JmO2IIji6n1qGaSJ9mSJ
+ kkfwRcDoDGFNc66PoxwyB14xaSColNInBTBIQwxBzrzawfT/qzzm9VmhYfZYUllZXvEJ
+ uTy6mnj0gWnUe46c18jg09mMUpcPJDtPpiZWBdVMqteQeaYocRR9gUi5ZOzUHTo+QO5w
+ uXpE1nFrDUOVA8/sVt1tCaLM7w9NUZDcMhRwmp/NhgiRY9X1ME8x8WrzNsDLKHsqeA80
+ 5ktMsNaoDev4a84ebSxMdbe/e5EaGTxd2RE/xsm2g6JJjvl1DXotlyu8X1Pt29bnYpc8
+ md/A==
+X-Gm-Message-State: ACrzQf2GmGBSRUOhrXSBzuY8+nNv8wylOKaRNRCMQkDe4EE26WTGvFBu
+ nT/xK/n1cSqA0iUHwA5czbXeytHLEVsMax6NDiQ=
+X-Google-Smtp-Source: AMsMyM48UVeXTeBBH/QBotLylX49XLFQVPUZ5yCNJw24A1G8gYvuzKOBjrwq0fv+sMw0TMPT7AhdkXOEAaJYGw6DlYY=
+X-Received: by 2002:a17:90b:3a90:b0:20d:a54c:e5cb with SMTP id
+ om16-20020a17090b3a9000b0020da54ce5cbmr9839231pjb.109.1666184401195; Wed, 19
+ Oct 2022 06:00:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20221018174827.1393211-1-max.oss.09@gmail.com>
- <20221018180331.sgsufsip2p2544ip@pali> <20221018180446.GP2020586@bill-the-cat>
- <20221018180627.eezooyqb2yyhyodu@pali> <20221018181723.GQ2020586@bill-the-cat>
- <20221018181923.4vuaskvw3bkfil7b@pali> <20221018182301.GR2020586@bill-the-cat>
-In-Reply-To: <20221018182301.GR2020586@bill-the-cat>
+ <20221018175726.GO2020586@bill-the-cat>
+In-Reply-To: <20221018175726.GO2020586@bill-the-cat>
 From: Max Krummenacher <max.oss.09@gmail.com>
-Date: Wed, 19 Oct 2022 14:58:10 +0200
-Message-ID: <CAEHkU3WK3vfG6HGqdd8ueFRcejeg4vPGUNZcJXh7MJPStOmwFg@mail.gmail.com>
+Date: Wed, 19 Oct 2022 14:59:49 +0200
+Message-ID: <CAEHkU3WyAvVb3Bqu6KrmrrhD9frXszFipWbsdxKoMkz=bNSmzQ@mail.gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
- Adam Ford <aford173@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>
+ Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>
 Subject: Re: [Uboot-stm32] [PATCH] Makefile: fix u-boot-initial-env target
 	if lto is enabled
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -77,79 +74,76 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgYWxsCgpUaGFua3MgZm9yIHRoZSBmZWVkYmFjawoKT24gVHVlLCBPY3QgMTgsIDIwMjIgYXQg
-ODoyMyBQTSBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPiB3cm90ZToKPgo+IE9uIFR1ZSwg
-T2N0IDE4LCAyMDIyIGF0IDA4OjE5OjIzUE0gKzAyMDAsIFBhbGkgUm9ow6FyIHdyb3RlOgo+ID4g
-T24gVHVlc2RheSAxOCBPY3RvYmVyIDIwMjIgMTQ6MTc6MjMgVG9tIFJpbmkgd3JvdGU6Cj4gPiA+
-IE9uIFR1ZSwgT2N0IDE4LCAyMDIyIGF0IDA4OjA2OjI3UE0gKzAyMDAsIFBhbGkgUm9ow6FyIHdy
-b3RlOgo+ID4gPiA+IE9uIFR1ZXNkYXkgMTggT2N0b2JlciAyMDIyIDE0OjA0OjQ2IFRvbSBSaW5p
-IHdyb3RlOgo+ID4gPiA+ID4gT24gVHVlLCBPY3QgMTgsIDIwMjIgYXQgMDg6MDM6MzFQTSArMDIw
-MCwgUGFsaSBSb2jDoXIgd3JvdGU6Cj4gPiA+ID4gPiA+IE9uIFR1ZXNkYXkgMTggT2N0b2JlciAy
-MDIyIDE5OjQ4OjI3IE1heCBLcnVtbWVuYWNoZXIgd3JvdGU6Cj4gPiA+ID4gPiA+ID4gRnJvbTog
-TWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5hY2hlckB0b3JhZGV4LmNvbT4KPiA+ID4gPiA+
-ID4gPgo+ID4gPiA+ID4gPiA+IFdpdGggTFRPIGVuYWJsZWQgdGhlIFUtQm9vdCBpbml0aWFsIGVu
-dmlyb25tZW50IGlzIG5vIGxvbmdlciBzdG9yZWQKPiA+ID4gPiA+ID4gPiBpbiBhbiBlYXN5IGFj
-Y2Vzc2libGUgc2VjdGlvbiBpbiBlbnYvY29tbW9uLm8uIEkuZS4gdGhlIHNlY3Rpb24gbmFtZQo+
-ID4gPiA+ID4gPiA+IGNoYW5nZXMgZnJvbSBidWlsZCB0byBidWlsZCwgaXRzIGNvbnRlbnQgbWF5
-YmUgY29tcHJlc3NlZCBhbmQgaXQgaXMKPiA+ID4gPiA+ID4gPiBhbm5vdGF0ZWQgd2l0aCBhZGRp
-dGlvbmFsIGRhdGEuCj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiBGb3IgR0NDIGFkZGluZyB0
-aGUgb3B0aW9uICctZmZhdC1sdG8tb2JqZWN0cycgd2hlbiBjb21waWxpbmcgY29tbW9uLm8KPiA+
-ID4gPiA+ID4gPiBhZGRzIGFkZGl0aW9uYWxseSB0aGUgdHJhZGl0aW9uYWwgc2VjdGlvbnMgaW4g
-dGhlIG9iamVjdCBmaWxlIGFuZAo+ID4gPiA+ID4gPiA+ICdtYWtlIHUtYm9vdC1pbml0aWFsLWVu
-dicgd291bGQgd29yayBhbHNvIGZvciB0aGUgTFRPIGVuYWJsZWQgY2FzZS4KPiA+ID4gPiA+ID4g
-PiBIb3dldmVyIGNsYW5nIGRvZXNuJ3QgaGF2ZSB0aGF0IG9wdGlvbi4KPiA+ID4gPiA+ID4gPgo+
-ID4gPiA+ID4gPiA+IEZpeCB0aGlzIGJ5IHJlY29tcGlsaW5nIGNvbW1vbi5vIGludG8gYSBvYmpl
-Y3QgZmlsZSBvbmx5IHVzZWQgZm9yCj4gPiA+ID4gPiA+ID4gdGhlIGNyZWF0aW9uIG9mIHUtYm9v
-dC1pbml0aWFsLWVudiBpZiBMVE8gaXMgZW5hYmxlZC4KPiA+ID4gPiA+ID4gPgo+ID4gPiA+ID4g
-PiA+IFNlZSBhbHNvOgo+ID4gPiA+ID4gPiA+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC85
-MjdiMTIyZS0xZjYyLWU3OTAtZjVjYS0zMGJhZTQzMzJjNzdAZm9zcy5zdC5jb20vCj4gPiA+ID4g
-PiA+ID4KPiA+ID4gPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBNYXggS3J1bW1lbmFjaGVyIDxtYXgu
-a3J1bW1lbmFjaGVyQHRvcmFkZXguY29tPgo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gLS0t
-Cj4gPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPiAgTWFrZWZpbGUgfCA4ICsrKysrKysrCj4gPiA+
-ID4gPiA+ID4gIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKykKPiA+ID4gPiA+ID4gPgo+
-ID4gPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9NYWtlZmlsZSBiL01ha2VmaWxlCj4gPiA+ID4gPiA+
-ID4gaW5kZXggMzg2NmNjNjJmOWEuLmNkNDVjNzIwZDIzIDEwMDY0NAo+ID4gPiA+ID4gPiA+IC0t
-LSBhL01ha2VmaWxlCj4gPiA+ID4gPiA+ID4gKysrIGIvTWFrZWZpbGUKPiA+ID4gPiA+ID4gPiBA
-QCAtMjQ1MSw5ICsyNDUxLDE3IEBAIGVuZGlmCj4gPiA+ID4gPiA+ID4gICAgICQoUSkkKE1BS0Up
-IC1mICQoc3JjdHJlZSkvc2NyaXB0cy9NYWtlZmlsZS5tb2Rwb3N0Cj4gPiA+ID4gPiA+ID4KPiA+
-ID4gPiA+ID4gPiAgcXVpZXRfY21kX2dlbmVudiA9IEdFTkVOViAgJEAKPiA+ID4gPiA+ID4gPiAr
-aWZlcSAoJChMVE9fRU5BQkxFKSx5KQo+ID4gPiA+ID4gPiA+ICtjbWRfZ2VuZW52ID0gJChDQykg
-JChmaWx0ZXItb3V0ICQoTFRPX0NGTEFHUyksJChjX2ZsYWdzKSkgLWMgLW8gZW52L2luaXRpYWxf
-ZW52Lm8gZW52L2NvbW1vbi5jOyBcCj4gPiA+ID4gPiA+ID4gKyAgICQoT0JKQ09QWSkgLS1kdW1w
-LXNlY3Rpb24gLnJvZGF0YS5kZWZhdWx0X2Vudmlyb25tZW50PSRAIGVudi9pbml0aWFsX2Vudi5v
-OyBcCj4gPiA+ID4gPiA+ID4gKyAgIHNlZCAtLWluLXBsYWNlIC1lICdzL1x4MDAvXHgwQS9nJyAk
-QDsgc2VkIC0taW4tcGxhY2UgLWUgJy9eXHMqJCQvZCcgJEA7IFwKPiA+ID4gPiA+ID4gPiArICAg
-c29ydCAtLWZpZWxkLXNlcGFyYXRvcj09IC1rMSwxIC0tc3RhYmxlICRAIC1vICRAOyBcCj4gPiA+
-ID4gPiA+ID4gKyAgIHJtIC1mIGVudi9pbml0aWFsX2Vudi5vIGVudi9pbml0aWFsX2Vudi5zdQo+
-ID4gPiA+ID4gPiA+ICtlbHNlCj4gPiA+ID4gPiA+ID4gIGNtZF9nZW5lbnYgPSAkKE9CSkNPUFkp
-IC0tZHVtcC1zZWN0aW9uIC5yb2RhdGEuZGVmYXVsdF9lbnZpcm9ubWVudD0kQCBlbnYvY29tbW9u
-Lm87IFwKPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gVGhpcyBjb2RlIGlzIHN0aWxsIGJyb2tlbiBi
-ZWNhdXNlIGluIHNvbWUgY2FzZXMgc2VjdGlvbiBuYW1lIGlzIG5vdCBSTy4KPiA+ID4gPiA+Cj4g
-PiA+ID4gPiBXYWl0LCB3aGVuIGRvZXMgdGhhdCBoYXBwZW4/Cj4gPiA+ID4KPiA+ID4gPiBFLmcu
-IGZvciBtdmVidV9lc3ByZXNzb2Jpbi04OGYzNzIwX2RlZmNvbmZpZwo+ID4gPgo+ID4gPiBFcm0s
-IHVnaC4gSSBzZWUgNDRiZTgzNWQyNWJhICgiYXJtOiBtdmVidTogRXNwcmVzc29iaW46IFNldCBk
-ZWZhdWx0Cj4gPiA+IHZhbHVlIGZvciAkZXRoTmFkZHIgZW52IHZhcmlhYmxlIikgYW5kIGM0ZGYw
-ZjZmMzE1YyAoImFybTogbXZlYnU6Cj4gPiA+IEVzcHJlc3NvYmluOiBTZXQgZGVmYXVsdCB2YWx1
-ZSBmb3IgJGZkdGZpbGUgZW52IHZhcmlhYmxlIikgSSBndWVzcyB3ZQo+ID4gPiBjb3VsZG4ndCBz
-b2x2ZSB0aGlzIGFueSBvdGhlciB3YXk/IFRoZSBwbGF0Zm9ybXMgYXJlbid0IHVuaXF1ZSBpbgo+
-ID4gPiBuZWVkaW5nIC8gd2FudGluZyB0byBzZXQgTUFDIG9yIGZkdGZpbGUgdmFyaWFibGVzLgo+
-ID4KPiA+IFllcywgd2UgY2FuIHNvbHZlIGl0LiBNYXJlayB3YXMgd29ya2luZyBvbiBzb2x1dGlv
-biBmb3Igc2V0dGluZyBkZWZhdWx0Cj4gPiB2YXJpYWJsZXMgYXQgcnVudGltZSBidXQgc2VlbXMg
-aXQgaXMgbm90IGZpbmlzaGVkIHlldC4KPgo+IE9LLCB0aGVuIGxldHMgbm90IGFzc3VtZSBERUZB
-VUxUX0VOVl9JU19SVyBpcyBzb21ldGhpbmcgd2UgbmVlZCB0byB3b3JyeQo+IGFib3V0IGxvbmcg
-dGVybS4KClRoZSBwYXRjaCB3YXMgaW50ZW5kZWQgdG8gZml4IHUtYm9vdC1pbml0aWFsLWVudiBt
-YWtlIHRhcmdldCBmb3IgY2FzZXMKd2hlcmUgaXQgd29ya2VkCndpdGhvdXQgJ0NPTkZJR19MVE8n
-IHRvIGFsc28gd29yayBpZiB0aGF0IGNvbmZpZyBnZXRzIGVuYWJsZWQuCgpBbnkgdXNlIGNhc2Ug
-d2hlcmUgaXQgYWxyZWFkeSBmYWlscyB3aXRob3V0ICdDT05GSUdfTFRPJyBzZXQgd2lsbCBub3Qg
-YmVuZWZpdC4KCkkgYWdyZWUgdGhhdCBhIHZhcmlhbnQgb2YgdG9vbHMvZW52L2Z3X3ByaW50ZW52
-IGNvbXBpbGVkIGZvciB0aGUgYnVpbGQgaG9zdCBtYXkKc29sdmUgYWRkaXRpb25hbCBpc3N1ZXMg
-cHJlc2VudC4gSG93ZXZlciBJIHdpbGwgbm90IGJlIGFibGUgdG8gd29yayBvbiBzdWNoIGEKc29s
-dXRpb24gaW4gdGhlIG5lYXIgZnV0dXJlLgoKTWF4Cgo+Cj4gLS0KPiBUb20KX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBs
-aXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1t
-ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+Hi Tom
+
+On Tue, Oct 18, 2022 at 7:57 PM Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 18, 2022 at 07:48:27PM +0200, Max Krummenacher wrote:
+> > From: Max Krummenacher <max.krummenacher@toradex.com>
+> >
+> > With LTO enabled the U-Boot initial environment is no longer stored
+> > in an easy accessible section in env/common.o. I.e. the section name
+> > changes from build to build, its content maybe compressed and it is
+> > annotated with additional data.
+> >
+> > For GCC adding the option '-ffat-lto-objects' when compiling common.o
+> > adds additionally the traditional sections in the object file and
+> > 'make u-boot-initial-env' would work also for the LTO enabled case.
+> > However clang doesn't have that option.
+> >
+> > Fix this by recompiling common.o into a object file only used for
+> > the creation of u-boot-initial-env if LTO is enabled.
+> >
+> > See also:
+> > https://lore.kernel.org/all/927b122e-1f62-e790-f5ca-30bae4332c77@foss.st.com/
+> >
+> > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> >
+> > ---
+> >
+> >  Makefile | 8 ++++++++
+> >  1 file changed, 8 insertions(+)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index 3866cc62f9a..cd45c720d23 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -2451,9 +2451,17 @@ endif
+> >       $(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
+> >
+> >  quiet_cmd_genenv = GENENV  $@
+> > +ifeq ($(LTO_ENABLE),y)
+> > +cmd_genenv = $(CC) $(filter-out $(LTO_CFLAGS),$(c_flags)) -c -o env/initial_env.o env/common.c; \
+> > +     $(OBJCOPY) --dump-section .rodata.default_environment=$@ env/initial_env.o; \
+> > +     sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@; \
+> > +     sort --field-separator== -k1,1 --stable $@ -o $@; \
+> > +     rm -f env/initial_env.o env/initial_env.su
+> > +else
+> >  cmd_genenv = $(OBJCOPY) --dump-section .rodata.default_environment=$@ env/common.o; \
+> >       sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@; \
+> >       sort --field-separator== -k1,1 --stable $@ -o $@
+> > +endif
+> >
+> >  u-boot-initial-env: u-boot.bin
+> >       $(call if_changed,genenv)
+>
+> Can we pipe the output instead of making a new object file? Maybe not,
+> in a portable way it seems. But, I'm not sure the above respects using
+> O= as well so that does need to be checked and fixed if so.
+
+While I didn't test it seems that objcopy doesn't allow to pipe data in and out
+of it.
+
+Max
+>
+> --
+> Tom
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

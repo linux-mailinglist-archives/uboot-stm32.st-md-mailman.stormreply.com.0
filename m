@@ -2,57 +2,90 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78BD5604DE3
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Oct 2022 18:56:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 908DB604F26
+	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Oct 2022 19:52:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E106C64101;
-	Wed, 19 Oct 2022 16:56:19 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3FAAAC64101;
+	Wed, 19 Oct 2022 17:52:26 +0000 (UTC)
+Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com
+ [209.85.222.53])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B25FC63326
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D3911C55596
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Oct 2022 16:56:17 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4CC3161932;
- Wed, 19 Oct 2022 16:56:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BB92C433C1;
- Wed, 19 Oct 2022 16:56:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666198575;
- bh=u2Kl+DunR/CbPCAgm/JJPQWOlbO9iEpQTCCLPwgF0Bk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=QtmGfQPUiNpw/I1XUu2C118P9edwvZ8Uv9T1SYXErzDi7KRerAz/hB3VvN92n0ENH
- qMreBlFt0dzA9twKqfMSllyRQv8NIi4mDVLycl5rmyV/5LZ9CTbp7uNLdx0dpiqBPz
- HQCcnVVpf7tEty6adEN4Lud8azBHmhrAYoO4rXJBn4JI8VriPU9QjdUR6CddsvW+AR
- b3IjZqHlJUndd9PtW/nJzPWSUDFuFldfwsBAeHNmZnryRJ1jWbxlrJCLCKwcUOcjEC
- 5XwpSE5L1aSjY+K5yRUtwagL9QrNPTEYf3xr1wST46S4AHMdXWLrCiVSjdYRw4ETZ3
- KsfasDXpmGjQQ==
-Received: by pali.im (Postfix)
- id 710AA3AC; Wed, 19 Oct 2022 18:56:12 +0200 (CEST)
-Date: Wed, 19 Oct 2022 18:56:12 +0200
-From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Message-ID: <20221019165612.nilrbyqi5zudjpup@pali>
-References: <20221018174827.1393211-1-max.oss.09@gmail.com>
- <20221018175726.GO2020586@bill-the-cat>
- <CAEHkU3WyAvVb3Bqu6KrmrrhD9frXszFipWbsdxKoMkz=bNSmzQ@mail.gmail.com>
+ Wed, 19 Oct 2022 17:52:24 +0000 (UTC)
+Received: by mail-ua1-f53.google.com with SMTP id p89so7678934uap.12
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 19 Oct 2022 10:52:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3rttrwoFo2aK6SVHFCgtGUPYDSGhRampUXyYBkSvNsk=;
+ b=QQ06MwDJHkA2VeP3dV5NttbZI1PJK2ek/KVsUEgfr2CNFkF/v0OrIoF7l/4Eh2spKh
+ VgEhitUQCYBcaRT/NF2gWswbTqADtgIZGOLfxKU7pcp8Ue49BNJORvEzhkWblWmQUeZr
+ 1qvIDi0dRAcoxkR1ngS3u8LMJ69H6ZRJzv0xA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3rttrwoFo2aK6SVHFCgtGUPYDSGhRampUXyYBkSvNsk=;
+ b=hwpOl6jn4ttUfPRTD5vvJcScfwhncmYNNGJ5iNN0dLeklNwjaC2yODTLRAAn/bkY6u
+ p/HViKMGymbYq8UrtZbrTCQEwM8Wp0VtMW938ubto7pEIqrNCaSi2XoVzmBzZbMzUdXP
+ p0V0WqneHVkDl5RzO/wLy6hicpQOUkZm8PDAuhU70vbuJN2PmTz05GyIPAjNbXQD+ZEr
+ zVPlWbzjah2IR8WHOoEC0CZLSw15irwGX5wiP5siZXoJufs/lSCeYoXGiGApM5lzypQ0
+ hrS/U2iWrVOHC9ILmvA3yjqHmIWvC9mU6XDBoSsX2u0Lar+X+/vDcsyDkAaV3Q9zRFkZ
+ kUcg==
+X-Gm-Message-State: ACrzQf15m/zji14vyNamOUz2gLxHGteN9KFxkpLe1azTrVzHDIuv3GH2
+ DTbsNUcHANWNN5aJgLZJJndy23IrSyVoFFjHAurEvw==
+X-Google-Smtp-Source: AMsMyM5iSjyIrU2g6EA2O2fnF5ZAztLE/bzkej5aSSPjVaZ11mCHP6UXC6+bjosT+U20ROXenGz2xoTA/PfE/AV6BM4=
+X-Received: by 2002:ab0:5b01:0:b0:39f:9086:8227 with SMTP id
+ u1-20020ab05b01000000b0039f90868227mr2237527uae.77.1666201943413; Wed, 19 Oct
+ 2022 10:52:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAEHkU3WyAvVb3Bqu6KrmrrhD9frXszFipWbsdxKoMkz=bNSmzQ@mail.gmail.com>
-User-Agent: NeoMutt/20180716
-Cc: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] Makefile: fix u-boot-initial-env target
-	if lto is enabled
+References: <20221019112356.1042065-1-sjg@chromium.org>
+ <CAJ+vNU2s--gn6OGFqpDi6T_oOLDg6axJnPMhpD6DRKjZbrqO0g@mail.gmail.com>
+In-Reply-To: <CAJ+vNU2s--gn6OGFqpDi6T_oOLDg6axJnPMhpD6DRKjZbrqO0g@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 19 Oct 2022 11:52:11 -0600
+Message-ID: <CAPnjgZ3i_3TchfNHq+PNUOSiPZi1H0FHPqiZr-VE9NVoBO4dgA@mail.gmail.com>
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Stephen Warren <swarren@wwwdotorg.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Heiko Thiery <heiko.thiery@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Richard Hu <richard.hu@technexion.com>, Wolfgang Denk <wd@denx.de>,
+ Marek Vasut <marex@denx.de>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Ian Ray <ian.ray@ge.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Rui Miguel Silva <rui.silva@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Sven Schwermer <sven@svenschwermer.de>, Jason Liu <jason.hui.liu@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>, Harald Seiler <hws@denx.de>,
+ Vikas Manocha <vikas.manocha@st.com>, Icenowy Zheng <icenowy@aosc.io>,
+ Michal Suchanek <msuchanek@suse.de>, Ye Li <ye.li@nxp.com>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, Samuel Holland <samuel@sholland.org>,
+ Ilko Iliev <iliev@ronetix.com>, Ovidiu Panait <ovpanait@gmail.com>,
+ Troy Kisky <troy.kisky@boundarydevices.com>,
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Andrew Scull <ascull@google.com>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ Jens Scharsig <esw@bus-elektronik.de>, Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ =?UTF-8?Q?Antti_M=C3=A4entausta?= <antti.maentausta@ge.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ Artem Lapkin <email2tema@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jesse Taube <Mr.Bossman075@gmail.com>, John Keeping <john@metanate.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alban Bedel <alban.bedel@avionic-design.de>
+Subject: Re: [Uboot-stm32] [PATCH 00/39] lcd: Drop old LCD support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,78 +102,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wednesday 19 October 2022 14:59:49 Max Krummenacher wrote:
-> Hi Tom
-> 
-> On Tue, Oct 18, 2022 at 7:57 PM Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Oct 18, 2022 at 07:48:27PM +0200, Max Krummenacher wrote:
-> > > From: Max Krummenacher <max.krummenacher@toradex.com>
-> > >
-> > > With LTO enabled the U-Boot initial environment is no longer stored
-> > > in an easy accessible section in env/common.o. I.e. the section name
-> > > changes from build to build, its content maybe compressed and it is
-> > > annotated with additional data.
-> > >
-> > > For GCC adding the option '-ffat-lto-objects' when compiling common.o
-> > > adds additionally the traditional sections in the object file and
-> > > 'make u-boot-initial-env' would work also for the LTO enabled case.
-> > > However clang doesn't have that option.
-> > >
-> > > Fix this by recompiling common.o into a object file only used for
-> > > the creation of u-boot-initial-env if LTO is enabled.
-> > >
-> > > See also:
-> > > https://lore.kernel.org/all/927b122e-1f62-e790-f5ca-30bae4332c77@foss.st.com/
-> > >
-> > > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> > >
-> > > ---
-> > >
-> > >  Makefile | 8 ++++++++
-> > >  1 file changed, 8 insertions(+)
-> > >
-> > > diff --git a/Makefile b/Makefile
-> > > index 3866cc62f9a..cd45c720d23 100644
-> > > --- a/Makefile
-> > > +++ b/Makefile
-> > > @@ -2451,9 +2451,17 @@ endif
-> > >       $(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
-> > >
-> > >  quiet_cmd_genenv = GENENV  $@
-> > > +ifeq ($(LTO_ENABLE),y)
-> > > +cmd_genenv = $(CC) $(filter-out $(LTO_CFLAGS),$(c_flags)) -c -o env/initial_env.o env/common.c; \
-> > > +     $(OBJCOPY) --dump-section .rodata.default_environment=$@ env/initial_env.o; \
-> > > +     sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@; \
-> > > +     sort --field-separator== -k1,1 --stable $@ -o $@; \
-> > > +     rm -f env/initial_env.o env/initial_env.su
-> > > +else
-> > >  cmd_genenv = $(OBJCOPY) --dump-section .rodata.default_environment=$@ env/common.o; \
-> > >       sed --in-place -e 's/\x00/\x0A/g' $@; sed --in-place -e '/^\s*$$/d' $@; \
-> > >       sort --field-separator== -k1,1 --stable $@ -o $@
-> > > +endif
-> > >
-> > >  u-boot-initial-env: u-boot.bin
-> > >       $(call if_changed,genenv)
-> >
-> > Can we pipe the output instead of making a new object file? Maybe not,
-> > in a portable way it seems. But, I'm not sure the above respects using
-> > O= as well so that does need to be checked and fixed if so.
-> 
-> While I didn't test it seems that objcopy doesn't allow to pipe data in and out
-> of it.
+Hi Tim,
 
-I think it should be easier to compile a new application which includes
-header file with env data and prints it to stdout. There are already
-host tools like mkimage which are run during u-boot build process, so
-adding a new simple host tool should not be a problem -- instead of
-trying to hack objcopy, or try to find a way how to play with its
-input/output redirection and symbol names to achieve same thing.
-
-> Max
+On Wed, 19 Oct 2022 at 11:07, Tim Harvey <tharvey@gateworks.com> wrote:
+>
+> On Wed, Oct 19, 2022 at 4:58 AM Simon Glass <sjg@chromium.org> wrote:
 > >
-> > --
-> > Tom
+> > The conversion to DM_VIDEO was completed some years ago. The old video
+> > code has been removed but the LCD code remains. This series removes it,
+> > to complete the driver model migration.
+> >
+> >
+> > Simon Glass (39):
+> >   video: Split SPLASH_SCREEN_ALIGN from bmp command
+> >   Convert CONFIG_HIDE_LOGO_VERSION to Kconfig
+> >   video: Rename CONFIG_SYS_VIDEO_LOGO_MAX_SIZE
+> >   Convert CONFIG_VIDEO_LOGO_MAX_SIZE to Kconfig
+> >   video: lcd: Drop console rotation
+> >   video: Drop CONFIG_LCD_ALIGNMENT
+> >   video: Drop CONFIG_LCD_MENU
+> >   video: Drop CONFIG_LCD_INFO_BELOW_LOGO
+> >   video: Drop CONFIG_LCD_INFO
+> >   video: Move bmp_display() prototype to video.h
+> >   api: Drop LCD implementation
+> >   Drop CONFIG_LCD_LOGO
+> >   video: Drop VCXK video controller
+> >   BuR: Drop old LCD code
+> >   video: Drop CONFIG_AM335X_LCD
+> >   video: atmel: Drop pre-DM parts of video driver
+> >   video: Drop ld9040 driver
+> >   video: atmel: Drop CONFIG_LCD_IN_PSRAM
+> >   treewide: Stop enabling CONFIG_LCD
+> >   video: Drop atmel LCD code
+> >   video: samsung: Drop old LCD code
+> >   nexell: Drop old LCD code
+> >   compulab: Drop old LCD code
+> >   tegra: Drop old LCD code
+> >   BuR: ronetix: siemens: Drop old LCD code
+> >   video: cmd: Drop old LCD code
+> >   efi: Drop old LCD code
+> >   video: Drop remaining references to CONFIG_LCD
+> >   fdt: Drop support for LCD fixup in simplefb
+> >   video: Drop LCD_BPP
+> >   video: Drop CONFIG_VIDEO
+> >   video: Drop CONFIG_VIDEO
+> >   video: Drop CONFIG_LCD
+> >   video: Drop use of the lcd header file
+> >   video: Drop common LCD implementation
+> >   video: Drop SPLASHIMAGE_CALLBACK
+> >   video: Make all video options depend on DM_VIDEO
+> >   pci: Drop test for DM_VIDEO
+> >   video: Rename CONFIG_DM_VIDEO to CONFIG_VIDEO
+> >
+>
+> Simon,
+>
+> Where can I find a repo with this series for testing? I can't get it
+> to apply to master/next.
+
+It is u-boot-dm/lcd-working
+
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

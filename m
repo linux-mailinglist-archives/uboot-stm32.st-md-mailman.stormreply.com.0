@@ -2,112 +2,95 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CADC60BF2B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Oct 2022 02:02:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86FC560D651
+	for <lists+uboot-stm32@lfdr.de>; Tue, 25 Oct 2022 23:48:51 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 18245C03FC6;
-	Tue, 25 Oct 2022 00:02:09 +0000 (UTC)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1E066C03FC9;
+	Tue, 25 Oct 2022 21:48:51 +0000 (UTC)
+Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
+ [209.85.214.177])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E93DCC03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 74B80C01E96
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 25 Oct 2022 00:02:05 +0000 (UTC)
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20221025000202epoutp03b9ef48d1bd2397568c861bf962cf4c87~hJumrxAua2178621786epoutp03M
+ Tue, 25 Oct 2022 21:48:49 +0000 (UTC)
+Received: by mail-pl1-f177.google.com with SMTP id p3so11215029pld.10
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 25 Oct 2022 00:02:02 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20221025000202epoutp03b9ef48d1bd2397568c861bf962cf4c87~hJumrxAua2178621786epoutp03M
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1666656122;
- bh=8FT7J4iUsjg8YOBZgpsn+DYX3wMG0jomdW6nbW/5jxU=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=lfWrhH3h4/VLpB2XoEt6xT8Yp+EMPBTOxBMIsC2yUUiVIfiincczaTK4jbQWrskHA
- BlrC56IlWV5GbnJX+r1DviEiioMqPSbR5HnW95IuvTzEqiRPPV+ED3zaRWGZ4sj8YG
- w+enRNWcgAwdYL4DwEvKTiuvCHKP60VKzvvFQR/c=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20221025000201epcas1p32c856cea33a7a6a7d1a9e7c49e806ca9~hJumOMvAK0218302183epcas1p3W;
- Tue, 25 Oct 2022 00:02:01 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.231]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4MxBvD4pf0z4x9QH; Tue, 25 Oct
- 2022 00:02:00 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- E2.2C.48750.87727536; Tue, 25 Oct 2022 09:02:00 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20221025000200epcas1p1b194bdef2ee24c76f15d8ff58ba98a10~hJuk-9mPq0457704577epcas1p16;
- Tue, 25 Oct 2022 00:02:00 +0000 (GMT)
-Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20221025000200epsmtrp2a72f9d943744e57127f81a01d72bdb21~hJuk-MFK41825418254epsmtrp2P;
- Tue, 25 Oct 2022 00:02:00 +0000 (GMT)
-X-AuditID: b6c32a39-295ff7000000be6e-5c-635727789e73
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- AB.79.18644.87727536; Tue, 25 Oct 2022 09:02:00 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20221025000200epsmtip104857d7750922c498007eb19dbde74f4~hJuktNXQ90169101691epsmtip1d;
- Tue, 25 Oct 2022 00:02:00 +0000 (GMT)
-Message-ID: <b7d328f1-9737-f93f-a679-582936be266d@samsung.com>
-Date: Tue, 25 Oct 2022 09:01:59 +0900
+ Tue, 25 Oct 2022 14:48:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=oHz6gxfxxE5j0bGS8weH1NZrnwjLmuT+6Q/cdK5U6Hw=;
+ b=6LhoHdHenfnlKpDihsa3bJpA2GCSsSS9oGIauaoxiPcKNuLH2lQ/LRuagA900O1aBC
+ 0XXIi2zJBEDDYAXORslaOvAwVeB9yWx88n8WDEDz4IkcX2Foj6yMvVD9ADwxFDdNYab7
+ rQiaBJKBXuIoeQqpG3Ey4u52rqN+vC4uwy8VnX2w8SpXe8UoGbEeaLNUYgbfXWrW5zBf
+ p8jhZ4UPsPGDcZH1FYyTToh9DHLIJlPmLx30asWDRusEDxFvNprRXKAxI/2IR0Zcbyqi
+ UZC6stdP4yUhfELpuWs8503YemIQNhlwNiior0b9Oaf0s5Iu5gPqtY/5mF1xLuvH+qHf
+ M6tQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oHz6gxfxxE5j0bGS8weH1NZrnwjLmuT+6Q/cdK5U6Hw=;
+ b=HESXzRMYRgqKG8ohlQ9cOubXrU8aptkv30FRxaKMzDn3Sn7wcjHJFvAaf/Au8ErwsB
+ mrrntizPWUtqF3U2fm2j0Y07qJApQ4kNL8pk4yopbHu6qPcgXnUNaLvLXbK7I88x2fIv
+ vUs4/oqptgeHl/4HmvgJDpMwCgJWmkvqJ52jYwog3CkcMAH+YQMRPOuXbD5d6Ce0dqfv
+ mFrDpDHea6I6Vdk+EDsSX7cyI6UN1H3fZ7OpHFw8raoU1koYXBo2pe2taCIZGh/CDnuC
+ PHHX/BEYfLmyoobRyPFu1YhUVnIdBIPUQ66/6+pt4P5srt0Fr2SrpSWtWXFGp3205a2B
+ 8psQ==
+X-Gm-Message-State: ACrzQf1Y0q//Su9Bfbbur1yZnWtBM+Iy6tQCOY8FFOVAGd7ohrCjZwFT
+ 2L2ycw2hX4+4nZAPI8zLUch8pHurejF5NaXoGX8Zwg==
+X-Google-Smtp-Source: AMsMyM41zHwLiM1g17OJldfVEff/Jjn5xxer+4RdglUr97YQo1TI6ixWCuDz8LYR8kQ1l9xYy4G/GET5e3NR8fMCywA=
+X-Received: by 2002:a17:902:d490:b0:186:c544:8ac7 with SMTP id
+ c16-20020a170902d49000b00186c5448ac7mr4083173plg.158.1666734527885; Tue, 25
+ Oct 2022 14:48:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Yann Gautier <yann.gautier@foss.st.com>, u-boot@lists.denx.de
-From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20220913112346.301480-1-yann.gautier@foss.st.com>
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprMJsWRmVeSWpSXmKPExsWy7bCmrm6FeniywZXrqhaHz79jt/h58j27
- xaT119gtfqz6wmrxdm8nu8XCrctZLF78/cPowO7xtH8ru8fZOzsYPTa+28HkcXCfYQBLVLZN
- RmpiSmqRQmpecn5KZl66rZJ3cLxzvKmZgaGuoaWFuZJCXmJuqq2Si0+ArltmDtAFSgpliTml
- QKGAxOJiJX07m6L80pJUhYz84hJbpdSClJwC0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjPdX
- 6wo6uSuunlVrYHzE0cXIySEhYCJx7stxpi5GLg4hgR2MEv0fpzNDOJ8YJSbeamSEcD4zSlxb
- vI4JpmXJ/k5WiMQuRokvs35C9b9nlLi0/wsLSBWvgJ3E50MvwTpYBFQlpt18xQQRF5Q4OfMJ
- WI2oQJTEpU1vWEFsYQE3ie6t98FsZgFxiVtP5oPViwg4SryefQTsJmaQMyY92wfWzCagI7H9
- 23GwIk4Be4lPn86wQDTLS2x/OwesQUKgk0Pi+cf/LBB3u0jsWzcR6gdhiVfHt7BD2FISn9/t
- ZYNoaGaUWLrkICuE08Mo8a/hOhtElbHE/qWTgbo5gFZoSqzfpQ8RVpTY+XsuI8RmPol3X3tY
- QUokBHglOtqEIEpUJC69fskEs+vuk/9QJR4S95r9JzAqzkIKl1lI/p+F5J1ZCHsXMLKsYhRL
- LSjOTU8tNiwwhcd2cn7uJkZw6tSy3ME4/e0HvUOMTByMhxglOJiVRHhZngQnC/GmJFZWpRbl
- xxeV5qQWH2I0BcbORGYp0eR8YPLOK4k3NLE0MDEzMjaxMDQzVBLnbZihlSwkkJ5YkpqdmlqQ
- WgTTx8TBKdXAxHBbb3ltk7vMqt/s1UxXZ4drHD+ufvOM2neZjxrCXx9/SGySTru2vpJ7NcP+
- pfemiyy7Yvw+9M22TZsePHcKOOBfcr45+N6/5On2sSYZh3f6xxd2tKrP4L7vf/5JhpuCRZeF
- QsBGrmifVRm9PGH9fwSiFX/t8zhY/6cg+MjVOfpVL120/0yZVly2/nHsctVQl5bPcqFfMlom
- 7wuewvVa2lppl8GsOdOyet9cYZVamq8ccYzL10CizHb7pPzPaTvvJc9iXH73pkOTwYfDPmee
- Gvi+j5pZliKyInGD/I1ldxUjGU4st3M42KEY3FrAGpATvDHyU+j5huynF9PaA598UlCvqix4
- zqnp63yd1fCHEktxRqKhFnNRcSIAVltCCyYEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrHLMWRmVeSWpSXmKPExsWy7bCSnG6FeniywZS5QhaHz79jt/h58j27
- xaT119gtfqz6wmrxdm8nu8XCrctZLF78/cPowO7xtH8ru8fZOzsYPTa+28HkcXCfYQBLFJdN
- SmpOZllqkb5dAlfG+6t1BZ3cFVfPqjUwPuLoYuTkkBAwkViyv5O1i5GLQ0hgB6PEo2mPmCAS
- UhKfn05l62LkALKFJQ4fLoaoecsoMWvNcXaQGl4BO4nPh16C1bMIqEpMu/mKCSIuKHFy5hMW
- EFtUIEpi6eMeMFtYwE2ie+t9VhCbWUBc4taT+WD1IgKOEq9nH2EGWcAs8JlRovfKGrCEENCC
- uZv+gzWwCehIbP92HCzOKWAv8enTGRaQ45gF1CXWzxOCmCkvsf3tHOYJjEKzkJwxC8m6WQgd
- s5B0LGBkWcUomVpQnJueW2xYYJSXWq5XnJhbXJqXrpecn7uJERwlWlo7GPes+qB3iJGJg/EQ
- owQHs5IIL8uT4GQh3pTEyqrUovz4otKc1OJDjNIcLErivBe6TsYLCaQnlqRmp6YWpBbBZJk4
- OKUamPa6Hu6Oql/L7a9i//Of4dI+/jM7GbeU7ghlfGDE8NAvZapxSuCjqfbXjEtS98y7KJXt
- nJAX+WbW0Vn7Ju+xjpV9enJ5xzMz3YUz4pPD/FjMA19aJG4JXt05vfVvwq0lf867nmu4NSNg
- rxj75kw3Iz+O2t559WrxWWsCTvv/WXTa5l2hWs5fSePrMyp1N4nmPjG0OWL30T3/iqMYy2Z3
- zRdr93qxMywRrI2zOTTvQIfbu5U9aQfCfqqYftqwa3VzYXasXl7Tih7tB7N5LjImnP4mveUd
- 3/W7i5y03wcm3OvfuPr/LNukdy01z/bXXdnfveuvQdyqZL7Ggv8zwv/YH/lzwczg47mzt6/f
- ymF+I6PEUpyRaKjFXFScCAC/w87vAQMAAA==
-X-CMS-MailID: 20221025000200epcas1p1b194bdef2ee24c76f15d8ff58ba98a10
-X-Msg-Generator: CA
-X-Sendblock-Type: SVC_REQ_APPROVE
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20221025000200epcas1p1b194bdef2ee24c76f15d8ff58ba98a10
-References: <20220913112346.301480-1-yann.gautier@foss.st.com>
- <CGME20221025000200epcas1p1b194bdef2ee24c76f15d8ff58ba98a10@epcas1p1.samsung.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Christophe Kerello <christophe.kerello@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] mmc: stm32_sdmmc2: add dual data rate
-	support
+References: <20221019112356.1042065-1-sjg@chromium.org>
+ <CAJ+vNU2s--gn6OGFqpDi6T_oOLDg6axJnPMhpD6DRKjZbrqO0g@mail.gmail.com>
+ <CAPnjgZ3i_3TchfNHq+PNUOSiPZi1H0FHPqiZr-VE9NVoBO4dgA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3i_3TchfNHq+PNUOSiPZi1H0FHPqiZr-VE9NVoBO4dgA@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Tue, 25 Oct 2022 14:48:35 -0700
+Message-ID: <CAJ+vNU0OrwFtGE=7xx-0dzf6Q5AjRqD93T=S-9zW2SUf47ZJkQ@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Stephen Warren <swarren@wwwdotorg.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Heiko Thiery <heiko.thiery@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Richard Hu <richard.hu@technexion.com>, Wolfgang Denk <wd@denx.de>,
+ Marek Vasut <marex@denx.de>, Dzmitry Sankouski <dsankouski@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Ian Ray <ian.ray@ge.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Rui Miguel Silva <rui.silva@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Sven Schwermer <sven@svenschwermer.de>, Jason Liu <jason.hui.liu@nxp.com>,
+ Mario Six <mario.six@gdsys.cc>, Harald Seiler <hws@denx.de>,
+ Vikas Manocha <vikas.manocha@st.com>, Icenowy Zheng <icenowy@aosc.io>,
+ Michal Suchanek <msuchanek@suse.de>, Ye Li <ye.li@nxp.com>,
+ Bharat Gooty <bharat.gooty@broadcom.com>, Samuel Holland <samuel@sholland.org>,
+ Ilko Iliev <iliev@ronetix.com>, Ovidiu Panait <ovpanait@gmail.com>,
+ Troy Kisky <troy.kisky@boundarydevices.com>,
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ Andrew Scull <ascull@google.com>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ Jens Scharsig <esw@bus-elektronik.de>, Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ Anatolij Gustschin <agust@denx.de>,
+ =?UTF-8?Q?Antti_M=C3=A4entausta?= <antti.maentausta@ge.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ Artem Lapkin <email2tema@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jesse Taube <Mr.Bossman075@gmail.com>, John Keeping <john@metanate.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alban Bedel <alban.bedel@avionic-design.de>
+Subject: Re: [Uboot-stm32] [PATCH 00/39] lcd: Drop old LCD support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -124,49 +107,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 9/13/22 20:23, Yann Gautier wrote:
-> To support dual data rate with STM32 sdmmc2 driver, the dedicated bit
-> (DDR - BIT(18)) needs to be set in the CLKRC register. Clock bypass
-> (no divider) is not allowed in this case. This is required for the
-> eMMC DDR modes.
-> 
-> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+On Wed, Oct 19, 2022 at 10:52 AM Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Tim,
+>
+> On Wed, 19 Oct 2022 at 11:07, Tim Harvey <tharvey@gateworks.com> wrote:
+> >
+> > On Wed, Oct 19, 2022 at 4:58 AM Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > The conversion to DM_VIDEO was completed some years ago. The old video
+> > > code has been removed but the LCD code remains. This series removes it,
+> > > to complete the driver model migration.
+> > >
+> > >
+> > > Simon Glass (39):
+> > >   video: Split SPLASH_SCREEN_ALIGN from bmp command
+> > >   Convert CONFIG_HIDE_LOGO_VERSION to Kconfig
+> > >   video: Rename CONFIG_SYS_VIDEO_LOGO_MAX_SIZE
+> > >   Convert CONFIG_VIDEO_LOGO_MAX_SIZE to Kconfig
+> > >   video: lcd: Drop console rotation
+> > >   video: Drop CONFIG_LCD_ALIGNMENT
+> > >   video: Drop CONFIG_LCD_MENU
+> > >   video: Drop CONFIG_LCD_INFO_BELOW_LOGO
+> > >   video: Drop CONFIG_LCD_INFO
+> > >   video: Move bmp_display() prototype to video.h
+> > >   api: Drop LCD implementation
+> > >   Drop CONFIG_LCD_LOGO
+> > >   video: Drop VCXK video controller
+> > >   BuR: Drop old LCD code
+> > >   video: Drop CONFIG_AM335X_LCD
+> > >   video: atmel: Drop pre-DM parts of video driver
+> > >   video: Drop ld9040 driver
+> > >   video: atmel: Drop CONFIG_LCD_IN_PSRAM
+> > >   treewide: Stop enabling CONFIG_LCD
+> > >   video: Drop atmel LCD code
+> > >   video: samsung: Drop old LCD code
+> > >   nexell: Drop old LCD code
+> > >   compulab: Drop old LCD code
+> > >   tegra: Drop old LCD code
+> > >   BuR: ronetix: siemens: Drop old LCD code
+> > >   video: cmd: Drop old LCD code
+> > >   efi: Drop old LCD code
+> > >   video: Drop remaining references to CONFIG_LCD
+> > >   fdt: Drop support for LCD fixup in simplefb
+> > >   video: Drop LCD_BPP
+> > >   video: Drop CONFIG_VIDEO
+> > >   video: Drop CONFIG_VIDEO
+> > >   video: Drop CONFIG_LCD
+> > >   video: Drop use of the lcd header file
+> > >   video: Drop common LCD implementation
+> > >   video: Drop SPLASHIMAGE_CALLBACK
+> > >   video: Make all video options depend on DM_VIDEO
+> > >   pci: Drop test for DM_VIDEO
+> > >   video: Rename CONFIG_DM_VIDEO to CONFIG_VIDEO
+> > >
+> >
+> > Simon,
+> >
+> > Where can I find a repo with this series for testing? I can't get it
+> > to apply to master/next.
+>
+> It is u-boot-dm/lcd-working
+>
+> Regards,
+> Simon
 
-Applied to u-boot-mmc. Thanks! (with [PATCH 2/3] and [PATCH 3/3])
+Simon,
+
+Thanks. I've tested the series with gwventana_nand with an LVDS
+display as well as HDMI and the custom splash/position work fine as
+well as vidconsole.
+
+Tested-by: Tim Harvey <tharvey@gateworks.com> # gwventana /
+gwventana_nand_defconfig
 
 Best Regards,
-Jaehoon Chung
 
-
-> ---
-> 
->  drivers/mmc/stm32_sdmmc2.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-> index bfce8a2e4a..3cfa5a66f1 100644
-> --- a/drivers/mmc/stm32_sdmmc2.c
-> +++ b/drivers/mmc/stm32_sdmmc2.c
-> @@ -598,13 +598,16 @@ static int stm32_sdmmc2_set_ios(struct udevice *dev)
->  	 * clk_div > 0 and NEGEDGE = 1 => command and data generated on
->  	 * SDMMCCLK falling edge
->  	 */
-> -	if (desired && ((sys_clock > desired) ||
-> +	if (desired && (sys_clock > desired || mmc->ddr_mode ||
->  			IS_RISING_EDGE(plat->clk_reg_msk))) {
->  		clk = DIV_ROUND_UP(sys_clock, 2 * desired);
->  		if (clk > SDMMC_CLKCR_CLKDIV_MAX)
->  			clk = SDMMC_CLKCR_CLKDIV_MAX;
->  	}
->  
-> +	if (mmc->ddr_mode)
-> +		clk |= SDMMC_CLKCR_DDR;
-> +
->  	if (mmc->bus_width == 4)
->  		clk |= SDMMC_CLKCR_WIDBUS_4;
->  	if (mmc->bus_width == 8)
-
+Tim
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

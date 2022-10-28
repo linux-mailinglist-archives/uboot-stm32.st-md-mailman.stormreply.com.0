@@ -2,57 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FC7E60FBCA
-	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Oct 2022 17:22:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4772A610CA0
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Oct 2022 11:01:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2EFF7C03FDA;
-	Thu, 27 Oct 2022 15:22:45 +0000 (UTC)
-Received: from mail-io1-f51.google.com (mail-io1-f51.google.com
- [209.85.166.51])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 010CCC63324;
+	Fri, 28 Oct 2022 09:01:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 73045C03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5E327C04003
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Oct 2022 15:22:44 +0000 (UTC)
-Received: by mail-io1-f51.google.com with SMTP id 11so1835741iou.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Oct 2022 08:22:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HxpllMXSyRRubxLgoayjUesqyGC/uinE0txBvVN+Cnc=;
- b=FVaQQJ1qKo9y9KEoyRhSEF/Ibux2MrwOZWCh+KifQHnF68LiEIyBvvIQ8TVb6ovDE4
- XkJnmQnxmQ9IK4xZNLffhe6ZmU6bM4I6BoaC1+9d5eUPkMgeAAwbNGiREW/SX8mDqjc5
- 0XrwB9K1MKjP2Xr9AFpF1a2O4DCY/iOadNI+w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HxpllMXSyRRubxLgoayjUesqyGC/uinE0txBvVN+Cnc=;
- b=Bsa0gU3lygb+MNZ6+H8kj84CWHalInV8jOL7NgAla9BYsOPZ7tH0jbIu5iQG9hHFDj
- LtCwXVl74jdVePtE60lm8+zUOsmVug80H1ZnmPq0zmBM++5USqiwosV/NhXp2i8/mQol
- R1UbZAfGphKaBzaQhmWjCw7bsUhLO6vUrwcSVE+dqB2JURBgCyDHYFxAojk7SJrmX/WW
- hMkE3Kvnf7rjtOU2W/ND+MR+cIuOyE/iTjyPiwlijvLMfWv/lxvxXxzgPaVcDjzEqOII
- Udh5w10ACK5eAQfXh2XAFSePjyxCzStM3eosbmVHeR/3BeomRBzUpCLmYcrvIjWD7iiY
- YCuw==
-X-Gm-Message-State: ACrzQf3YD7JVsKqCZW+pXWxUaxhO+c0514VORe4vDeuRC1n9V5CGdMPG
- OgwJqqyX3JxiMSH2Y1DUFFugOKh8n3bcSNR4jxGHsQ==
-X-Google-Smtp-Source: AMsMyM4cIYqgeVvSnez6Botw44EPni4GK8eSD71Kniq/06xl0u5MySvvWdl9uHVIkZ3LMAxRnMTn7EkvPDC7xGlVTlA=
-X-Received: by 2002:a05:6602:2c04:b0:6ab:d29a:7000 with SMTP id
- w4-20020a0566022c0400b006abd29a7000mr28371958iov.204.1666884163064; Thu, 27
- Oct 2022 08:22:43 -0700 (PDT)
+ Fri, 28 Oct 2022 09:01:45 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29S886mV008626;
+ Fri, 28 Oct 2022 11:01:36 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=uQZXYAPwTS7FG6o+ZcNUSZg8CFac9mMv7SbCYCuZS0U=;
+ b=ID7VuEeaKJZ3FWWOc0lP0ARF4HdrGW5bpVWUuhhz0T8Sgn+X0Dlu/x3NXjs7ohblK0PR
+ lvaWJNPtU/cH6No351/ILqLTSQoMjrbPwiCHVuxiJCK+pAGtO88gIjWwEPdSwkZ75Q1q
+ LYUxwjoPwuIGyREMhvpvCP+Gk6JeJt76TgCraGxA2lFoVXMlvEmfQre9K5kfE6OJFUgR
+ VbobJJkcWZ/mLdQr9Z4QhwDTv4XgXhaXe3BPVeJ2VwYr7tdztmYO2mfobdNhZPgDv/T0
+ c7bK7yOi+/ScEhDXkORfMKZt38UUIg+xMnAlxGSYXuT8PcD6qVwhwHQObUYHzvq1cxxq kQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3kfagcbj3t-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 28 Oct 2022 11:01:36 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4F7DF10002A;
+ Fri, 28 Oct 2022 11:01:31 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 29524215133;
+ Fri, 28 Oct 2022 11:01:31 +0200 (CEST)
+Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Fri, 28 Oct
+ 2022 11:01:30 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 28 Oct 2022 11:01:17 +0200
+Message-ID: <20221028090120.1536827-1-patrick.delaunay@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20221026150508.1.I1b5ffc3bca09502549c075039f405dceb1646084@changeid>
-In-Reply-To: <20221026150508.1.I1b5ffc3bca09502549c075039f405dceb1646084@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Oct 2022 09:22:28 -0600
-Message-ID: <CAPnjgZ1mJid6+9M0yumPdE79f7b2cAOKx1oZ7tnxkMM6y-aJkw@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: pmic: ignore disabled node in
-	pmic_bind_children
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-10-28_04,2022-10-27_01,2022-06-22_01
+Cc: Edoardo Tomelleri <e.tomell@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Artem Lapkin <email2tema@gmail.com>,
+ Zhang Ning <zhangn1985@qq.com>, Zhaofeng Li <hello@zhaofeng.li>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Amjad Ouled-Ameur <aouledameur@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH 0/3] cmd: pxe: support INITRD and FDT
+	selection with FIT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,32 +80,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Wed, 26 Oct 2022 at 07:05, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> Ignore the disabled children node in pmic_bind_children() so the
-> disabled regulators in device tree are not registered.
->
-> This patch is based on the dm_scan_fdt_node() code - only the
-> activated nodes are bound -  and it solves possible issue when a
-> deactivated regulator is bound, error for duplicated regulator name
-> for example.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> This patch solves the errors for duplicated regulator names on STM32MP15x
-> boards since the alignment with Linux device tree with the commit
-> 9157a4ce36b18 ("ARM: dts: stm32: update SCMI dedicated file").
->
-> When SCMI is activated in "<board>-scmi.dts" device tree, the 3 regulators
-> reg11, reg18, usb33 are duplicated (children of scmi_reguls and of
-> pwr_regulators) even if the children of pwr_regulators are deactivated in
-> the file arch/arm/dts/stm32mp15-scmi.dtsi.
->
->  drivers/power/pmic/pmic-uclass.c | 4 ++++
->  1 file changed, 4 insertions(+)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Since the commit d5ba6188dfbf ("cmd: pxe_utils: Check fdtcontroladdr
+in label_boot") the FDT or the FDTDIR label is required in extlinux.conf
+and the fallback done by bootm command when only the device tree is present
+in this command parameters is no more performed when FIT is used for
+kernel.
+
+The next file "extlinux.conf" no more selects the device tree in FIT
+but use the pxe fallback with the device tree of U-Boot.
+
+menu title Select the boot mode
+DEFAULT test
+LABEL test
+        KERNEL /fitImage
+
+This serie restores the possibility to use a FIT in extlinux.conf
+by using FDT label with the same string.
+
+menu title Select the boot mode
+DEFAULT test
+LABEL test
+        KERNEL /fitImage
+        FDT /fitImage
+
+even when a specific FIT config is used:
+
+menu title Select the boot mode
+DEFAULT test
+LABEL test
+        KERNEL /fitImage#config
+        FDT /fitImage#config
+
+The last commit of the series is only a minor improvement.
+
+
+
+Patrick Delaunay (3):
+  cmd: pxe: reorder kernel treatment in label_boot
+  cmd: pxe: support INITRD and FDT selection with FIT
+  cmd: pxe: use strdup to copy config
+
+ boot/pxe_utils.c    | 69 +++++++++++++++++++++++++--------------------
+ doc/README.pxe      |  8 ++++++
+ include/pxe_utils.h |  2 ++
+ 3 files changed, 49 insertions(+), 30 deletions(-)
+
+-- 
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

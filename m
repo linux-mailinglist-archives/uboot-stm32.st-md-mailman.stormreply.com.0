@@ -2,80 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7624961127C
-	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Oct 2022 15:15:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 11E4D611768
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Oct 2022 18:20:22 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E78D8C640F9;
-	Fri, 28 Oct 2022 13:15:03 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 73857C640F5;
+	Fri, 28 Oct 2022 16:20:21 +0000 (UTC)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C85CDC03FC9
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22CB3C0AA15
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Oct 2022 09:15:09 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id
- l16-20020a05600c4f1000b003c6c0d2a445so3197273wmq.4
+ Fri, 28 Oct 2022 16:20:20 +0000 (UTC)
+Received: by mail-ej1-f43.google.com with SMTP id ud5so14132284ejc.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:organization:references:cc:to
- :content-language:subject:reply-to:from:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=hNUfmJl+0sTiUOzqIEc0UDoY2ojJqdKVKKuDZXACX3c=;
- b=tdHnpSEuqwGbTPKKHD2fh7Dx/yj8ijCq3PrUOofI0pSjDY0X1oircqLFkiFqJbWsM/
- Mj8RMH14PeiqhGYXRvBKDYVMTBN7H3+024oSSKjqtH+2S+sE+IlmpjDYIB+nsIaQmSzA
- nU2r/B2OMtIhsMM699zNqxmXUD8ODqRvkU6EXb5xItaibGARaUQwIZvEO6taXj+IDTcj
- whK8NPlKsZ/EfLzrRZCS/FdUTBz4WpR0KiNyhddhBGPK7IFW3Oo4PS+LApHa+nZXxwTj
- b7sJzTlZmTlgNUnCsVEfeCD1/uLpHVqTkmyBN1SvfENLuxGIgrygdTgEBy9AVUJ82hXq
- RXgg==
+ Fri, 28 Oct 2022 09:20:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7xB0H1DwRgEkn3/xDPq05dYiQ9GZouPw98phwKVDGus=;
+ b=nw4/RiwPbhqNM0BX4/TxN1WMYE7oDc61iRfhDO+/8Td54nTCpEsj1hMHBPwqgSsbZZ
+ FuvyNAFcg1VwEVbwLh/ZOjaOPveO5eo2gyqnSJL9T21CXc8ltSSgahShBfpyWliQj/v7
+ F/pMgWiwD8Ep8TFXDcF6PQULW2HxSBs7cas8pYxZX4SAyki26f3cfZlOciIBQClFQGHz
+ mrEfAYjnQ4yE7nf/psJL5yvFj6LAlYjlaUZ7gdyAn59ohUDobrpaMOiPbuhr6kbxIB0p
+ 3MBcjNdMZ752oISLwem3BUyw5WIrmMNQB4FS2F6b6TmZldtOf8zPPQR1OV7jd6YKYr+V
+ EUGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:organization:references:cc:to
- :content-language:subject:reply-to:from:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hNUfmJl+0sTiUOzqIEc0UDoY2ojJqdKVKKuDZXACX3c=;
- b=e4vjiMvyfBU3aOapN38GTeDfFUkzrrWcoFT5KJ9D9zsgLoCFAS20cj/SIAVvdLxbRT
- V0dlZB9uGkoiqPoPu7eeRyoqO42/PEwSgKYSNy5MClM28vrtLa8JvSGU7GJNr7yUzWOJ
- DR5FukRNEKrhIQt33M/2tmuCUJZvvU8hrxREEdGIkK8gb56v7oz6w79GxziUgDyTd55R
- 1T81LwP3RB21wzCq9mkz+tzEOYa7fMC4nMZD+eJcclWNsWCvo93e2Mjaxsi/WHwybmH4
- +hlD0oArdNOWS4etJA3iLp/3Kppxjx3rRyc68c5IbhILDaOxZ3jtYEwjis9Ll45FoK7V
- dgeg==
-X-Gm-Message-State: ACrzQf3TBlrLixHa0A5rzxNLMltg1NGMJr5KVPOei6ydCQr3ldQ58B4j
- aO+WcwvzCgy4wDilOVRn0glQAg==
-X-Google-Smtp-Source: AMsMyM44dQx8YWmNgNQr4LWMhtm360DARjOfsdLtDl9NgPib6LNdnY/E0UaHw/2TBGrGpxKBg1suqA==
-X-Received: by 2002:adf:9d88:0:b0:236:57e2:c90 with SMTP id
- p8-20020adf9d88000000b0023657e20c90mr23549888wre.712.1666948509341; 
- Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:898:f380:9e9c:c6c2:95a3:c182?
- ([2a01:e0a:898:f380:9e9c:c6c2:95a3:c182])
- by smtp.gmail.com with ESMTPSA id
- bo12-20020a056000068c00b0023691d62cffsm3544954wrb.70.2022.10.28.02.15.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
-Message-ID: <5747d291-0ab8-9318-6d28-bc761ecf2445@linaro.org>
-Date: Fri, 28 Oct 2022 11:15:07 +0200
+ bh=7xB0H1DwRgEkn3/xDPq05dYiQ9GZouPw98phwKVDGus=;
+ b=wOIyj5sS6B3gMQqm1BgqsGqhW0z8h10jOqx7QEaon3tanCAn5mFCRpEQbaQt70qMWp
+ icjYgCgjG5VUTWP7Ry9Ii/wb0PrIjXOidtIAQ4K0NVIQTn+LAWnu9ovhrSkwcSicxEO5
+ U3Rj8IZkT3jAts0uidUuqXjr73umxJNwtO+1RRl3kk7MQO8kuNUOSib2mWMQKRwfh9Sw
+ GJeqTckkhItuY+o6bydmPIbbGrukQDIMyCxvVQcv2c9owlwbQN+iV56gFkAlxyrles9x
+ JMplOFhD6xvhU8TfLARtZ00yZmrqNroonm3EnJbjVZ1oqJ6POs7cV4xnnXlQoYxNXPCN
+ 7wYQ==
+X-Gm-Message-State: ACrzQf1agx8IKKX2dZIPcuvUEw6+g19icV1wTsI9FORRig0fRrVN//31
+ 1wiOrKJL07nE0tWf9OBZKgM=
+X-Google-Smtp-Source: AMsMyM4Z18SI2db0e7lb+oJ25eoJ8rsbsKKKlJsaGst7jFwfZ5yK7zek4ZFHTued7c7ng4/sKYq6nw==
+X-Received: by 2002:a17:907:743:b0:740:ef93:2ffc with SMTP id
+ xc3-20020a170907074300b00740ef932ffcmr126671ejb.514.1666974019560; 
+ Fri, 28 Oct 2022 09:20:19 -0700 (PDT)
+Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ le5-20020a170907170500b00781e7d364ebsm2458478ejc.144.2022.10.28.09.20.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Oct 2022 09:20:19 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: u-boot@lists.denx.de
+Date: Fri, 28 Oct 2022 18:18:48 +0200
+Message-Id: <20221028161850.565610-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20221028090120.1536827-1-patrick.delaunay@foss.st.com>
- <20221028110055.2.I4662774cdd525de1992f84f0ea97255e2e43d8c2@changeid>
-Organization: Linaro Developer Services
-In-Reply-To: <20221028110055.2.I4662774cdd525de1992f84f0ea97255e2e43d8c2@changeid>
-X-Mailman-Approved-At: Fri, 28 Oct 2022 13:15:02 +0000
-Cc: Edoardo Tomelleri <e.tomell@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Artem Lapkin <email2tema@gmail.com>,
- Zhang Ning <zhangn1985@qq.com>, Zhaofeng Li <hello@zhaofeng.li>,
- Ramon Fried <rfried.dev@gmail.com>,
- Amjad Ouled-Ameur <aouledameur@baylibre.com>,
+Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Adam Ford <aford173@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 2/3] cmd: pxe: support INITRD and FDT
-	selection with FIT
+ Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
+Subject: [Uboot-stm32] [PATCH v2 0/1] Makefile: rework u-boot-initial-env
+	target
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,164 +80,31 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
-
-On 28/10/2022 11:01, Patrick Delaunay wrote:
-> Since the commit d5ba6188dfbf ("cmd: pxe_utils: Check fdtcontroladdr
-> in label_boot") the FDT or the FDTDIR label is required in extlinux.conf
-> and the fallback done by bootm command when only the device tree present
-> in this command parameters is no more performed when FIT is used for
-> kernel.
-> 
-> When the label FDT or FDTDIR are absent or if the device tree file is
-> absent, the PXE command in U-Boot uses the default U-Boot device tree
-> selected by fdtcontroladdr = gd->fdt_blob, it is the "Scenario 3".
-> 
-> With this scenario the bootm FIP fallback is no more possible with
-> the extlinux.conf when only "kernel" label is present and is a FIP:
-> 
->    kernel <path>#<conf>[#<extra-conf[#...]]
-> 
-> As the U-Boot FDT is always provided in the third bootm argument,
-> the device tree found in FIP is not used as fallback, it was done
-> previously in boot_get_fdt().
-> 
-> This patch adds a new field kernel_label to save the full kernel label.
-> The FDT bootm parameters use the kernel address (to avoid to load a
-> second time the same FIP) and the config when this full label is reused
-> for "fdt" or "initrd" label.
-> 
-> This FIP support in extlinux.conf is restored when the "FDT" label
-> can be found and select the same FIP (identical file and configuration):
-> 
->    kernel <path>#<conf>[#<extra-conf[#...]]
->    fdt <path>#<conf>[#<extra-conf[#...]]
-> 
-> The patch add also this possibility for initrd.
-> 
->    initrd <path>#<conf>[#<extra-conf[#...]]
-
-
-Thanks for providing this solution, indeed it solves the original
-issue and permits specifying different DT and INITRD configs which
-is neat.
-
-I haven't tested it yet, but so far:
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->   boot/pxe_utils.c    | 17 ++++++++++++++---
->   doc/README.pxe      |  8 ++++++++
->   include/pxe_utils.h |  2 ++
->   3 files changed, 24 insertions(+), 3 deletions(-)
-> 
-> diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> index 844ab72252bf..756b201eda91 100644
-> --- a/boot/pxe_utils.c
-> +++ b/boot/pxe_utils.c
-> @@ -259,6 +259,7 @@ static struct pxe_label *label_create(void)
->   static void label_destroy(struct pxe_label *label)
->   {
->   	free(label->name);
-> +	free(label->kernel_label);
->   	free(label->kernel);
->   	free(label->config);
->   	free(label->append);
-> @@ -543,9 +544,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
->   		kernel_addr = fit_addr;
->   	}
->   
-> -	if (label->initrd) {
-> +	/* For FIT, the label can be identical to kernel one */
-> +	if (label->initrd && !strcmp(label->kernel_label, label->initrd)) {
-> +		initrd_addr_str =  kernel_addr;
-> +	} else if (label->initrd) {
->   		ulong size;
-> -
->   		if (get_relfile_envaddr(ctx, label->initrd, "ramdisk_addr_r",
->   					&size) < 0) {
->   			printf("Skipping %s for failure retrieving initrd\n",
-> @@ -623,8 +626,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
->   	 */
->   	bootm_argv[3] = env_get("fdt_addr_r");
->   
-> +	/* For FIT, the label can be identical to kernel one */
-> +	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
-> +		bootm_argv[3] = kernel_addr;
->   	/* if fdt label is defined then get fdt from server */
-> -	if (bootm_argv[3]) {
-> +	} else if (bootm_argv[3]) {
->   		char *fdtfile = NULL;
->   		char *fdtfilefree = NULL;
->   
-> @@ -1165,6 +1171,11 @@ static int parse_label_kernel(char **c, struct pxe_label *label)
->   	if (err < 0)
->   		return err;
->   
-> +	/* copy the kernel label to compare with FDT / INITRD when FIT is used */
-> +	label->kernel_label = strdup(label->kernel);
-> +	if (!label->kernel_label)
-> +		return -ENOMEM;
-> +
->   	s = strstr(label->kernel, "#");
->   	if (!s)
->   		return 1;
-> diff --git a/doc/README.pxe b/doc/README.pxe
-> index d14d2bdcc9b0..172201093d02 100644
-> --- a/doc/README.pxe
-> +++ b/doc/README.pxe
-> @@ -179,11 +179,19 @@ initrd <path>	    - if this label is chosen, use tftp to retrieve the initrd
->   		      at <path>. it will be stored at the address indicated in
->   		      the initrd_addr_r environment variable, and that address
->   		      will be passed to bootm.
-> +		      For FIT image, the initrd can be provided with the same value than
-> +		      kernel, including configuration:
-> +		        <path>#<conf>[#<extra-conf[#...]]
-> +		      In this case, kernel_addr_r is passed to bootm.
->   
->   fdt <path>	    - if this label is chosen, use tftp to retrieve the fdt blob
->   		      at <path>. it will be stored at the address indicated in
->   		      the fdt_addr_r environment variable, and that address will
->   		      be passed to bootm.
-> +		      For FIT image, the device tree can be provided with the same value
-> +		      than kernel, including configuration:
-> +		        <path>#<conf>[#<extra-conf[#...]]
-> +		      In this case, kernel_addr_r is passed to bootm.
->   
->   devicetree <path>   - if this label is chosen, use tftp to retrieve the fdt blob
->   		      at <path>. it will be stored at the address indicated in
-> diff --git a/include/pxe_utils.h b/include/pxe_utils.h
-> index 4a73b2aace34..1e5e8424f53f 100644
-> --- a/include/pxe_utils.h
-> +++ b/include/pxe_utils.h
-> @@ -28,6 +28,7 @@
->    * Create these with the 'label_create' function given below.
->    *
->    * name - the name of the menu as given on the 'menu label' line.
-> + * kernel_label - the kernel label, including FIT config if present.
->    * kernel - the path to the kernel file to use for this label.
->    * append - kernel command line to use when booting this label
->    * initrd - path to the initrd to use for this label.
-> @@ -40,6 +41,7 @@ struct pxe_label {
->   	char num[4];
->   	char *name;
->   	char *menu;
-> +	char *kernel_label;
->   	char *kernel;
->   	char *config;
->   	char *append;
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+RnJvbTogTWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5hY2hlckB0b3JhZGV4LmNvbT4KCgpX
+aXRoIENPTkZJR19MVE8gZW5hYmxlZCB0aGUgY3VycmVudCB3YXkgb2YgZXh0cmFjdGluZyB0aGUK
+Y29uZmlndXJlZCBlbnZpcm9ubWVudCBubyBsb25nZXIgd29ya3MsIGkuZS4gdGhlIG9iamVjdCBm
+aWxlCmNvbnRlbnQgY2hhbmdlcyBkdWUgdG8gTFRPLgoKQnVpbGQgYSBob3N0IHRvb2wgd2hpY2gg
+cHJpbnRzIHRoZSBjb25maWd1cmVkIGVudmlyb25tZW50IGluc3RlYWQKb2YgdXNpbmcgb2JqY29w
+eSBhbmQgZnJpZW5kcyB0byBhY2hpdmUgdGhlIHNhbWUuCgpUaGUgY29kZSBhbmQgTWFrZWZpbGUg
+Y2hhbmdlcyB3ZXJlIG1vc3RseSBzdG9sZW4gZnJvbSB0b29scy9lbnYvCmkuZS4gdGhlIHRhcmdl
+dCB1c2Vyc3BhY2UgdG9vbHMgdG8gYWNjZXNzIHRoZSBlbnZpcm9ubWVudC4KCgpDaGFuZ2VzIGlu
+IHYyOgotIHJld29ya2VkIHRvIGJ1aWxkIGEgaG9zdCB0b29sIHdoaWNoIHByaW50cyB0aGUgY29u
+ZmlndXJlZAogIGVudmlyb25tZW50IGFzIHByb3Bvc2VkIGJ5IFBhbGkgUm9ow6FyCiAgaHR0cHM6
+Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjIxMDE4MTc0ODI3LjEzOTMyMTEtMS1tYXgub3Nz
+LjA5QGdtYWlsLmNvbS8KLSByZW5hbWVkIHBhdGNoLCB2MSB1c2VkICJNYWtlZmlsZTogZml4IHUt
+Ym9vdC1pbml0aWFsLWVudiB0YXJnZXQgaWYgbHRvIGlzIGVuYWJsZWQiCgpNYXggS3J1bW1lbmFj
+aGVyICgxKToKICBNYWtlZmlsZTogcmV3b3JrIHUtYm9vdC1pbml0aWFsLWVudiB0YXJnZXQKCiBN
+YWtlZmlsZSAgICAgICAgICAgICAgICAgIHwgIDcgKysrKy0tLQogc2NyaXB0cy8uZ2l0aWdub3Jl
+ICAgICAgICB8ICAxICsKIHNjcmlwdHMvTWFrZWZpbGUgICAgICAgICAgfCAgNSArKysrKwogc2Ny
+aXB0cy9wcmludGluaXRpYWxlbnYuYyB8IDQ0ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKwogNCBmaWxlcyBjaGFuZ2VkLCA1NCBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9u
+cygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0IHNjcmlwdHMvcHJpbnRpbml0aWFsZW52LmMKCi0tIAoy
+LjM1LjMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
+b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
+bmZvL3Vib290LXN0bTMyCg==

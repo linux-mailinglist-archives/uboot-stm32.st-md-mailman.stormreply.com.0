@@ -2,78 +2,80 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D27061127A
+	by mail.lfdr.de (Postfix) with ESMTPS id 7624961127C
 	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Oct 2022 15:15:04 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D5F37C63324;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E78D8C640F9;
 	Fri, 28 Oct 2022 13:15:03 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
- [209.85.128.47])
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+ [209.85.128.41])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 94D9FC640F5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C85CDC03FC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Oct 2022 09:12:00 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id
- bh7-20020a05600c3d0700b003c6fb3b2052so3201071wmb.2
+ Fri, 28 Oct 2022 09:15:09 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id
+ l16-20020a05600c4f1000b003c6c0d2a445so3197273wmq.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Oct 2022 02:12:00 -0700 (PDT)
+ Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=content-transfer-encoding:in-reply-to:organization:from:reply-to
- :references:cc:to:content-language:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=YBuXlDPYeEjxpNG7Es7wfj+ggyXAJ10na939zgwdVRw=;
- b=aM5TFsbkCrraNRQC5H861D/Z7JY0WCo/4AjIb1Ph7HwzM/EsSY1PwLNOthJG1lJ+Wu
- EPkl+Pu50wBoLrJAu6bYykfKT5HUrsvkVY5/+6YCNPJGsDLC5E1m2ue+Rz67FSkIje0/
- hgujUzSa2lBLrj6tevBu8yz9/ZKJIIDAmiWKzzjIZs4H+nKfRHeUPQnlF+umSZx+QEUN
- 7Wnd6Qcdmkug7mFJiZJwKz+00/Dwl97BoNzDu3MTOxlo6cuDkq2o6fhpnEnTS9Ll5ER9
- PLgHBXKXELBze8VIszfw9Icw/v/Dj6LLyfr3zRU7EZ7+wVCIRUjjwVet3WIqYZJvbuyX
- g80Q==
+ h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+ :content-language:subject:reply-to:from:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=hNUfmJl+0sTiUOzqIEc0UDoY2ojJqdKVKKuDZXACX3c=;
+ b=tdHnpSEuqwGbTPKKHD2fh7Dx/yj8ijCq3PrUOofI0pSjDY0X1oircqLFkiFqJbWsM/
+ Mj8RMH14PeiqhGYXRvBKDYVMTBN7H3+024oSSKjqtH+2S+sE+IlmpjDYIB+nsIaQmSzA
+ nU2r/B2OMtIhsMM699zNqxmXUD8ODqRvkU6EXb5xItaibGARaUQwIZvEO6taXj+IDTcj
+ whK8NPlKsZ/EfLzrRZCS/FdUTBz4WpR0KiNyhddhBGPK7IFW3Oo4PS+LApHa+nZXxwTj
+ b7sJzTlZmTlgNUnCsVEfeCD1/uLpHVqTkmyBN1SvfENLuxGIgrygdTgEBy9AVUJ82hXq
+ RXgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:organization:from:reply-to
- :references:cc:to:content-language:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YBuXlDPYeEjxpNG7Es7wfj+ggyXAJ10na939zgwdVRw=;
- b=toCxQ1Jy9oTBfsYBEa8kejk+B5lsRxXrmkdH3NNLjHvkoJ1RssGrhd5nRjkEY5xVQJ
- wO6Td2DbbdQhpI9SxtMozrri9FKAnosLFUYCXl5uV406EYhfnoOHFb15WrYv16dB5X7a
- TpHExBxj4CKIHGqgrNM4UftYQltoyU6ouSIVwBE9xB9AFk2c2ZisAwHIo/M9vujkC/tl
- eMWypYYHXLBJyFqZCIdgJiAHAAJ9Ga/1fuS/eAYrLgmFjhpNj3Z6roFKaIHCgZn2QBEE
- B2RZ+T8fBrDUvN21JBvmVaOY3OabxQ3u+llJwJaP8A8ZeQMaRiwrEE8pg3I0lRnItcOS
- Murg==
-X-Gm-Message-State: ACrzQf2FzFXBFkldxXyPILgWrhGywKwkWBjenw751sNXB2YFIMvQxYir
- +hqC6hXihdRdrlZtDuuVNVO9Xw==
-X-Google-Smtp-Source: AMsMyM6nXyj4PGcxixUBg3I/8/ndBadn0TH2TGkvx+PLFeR05azxTwwO8PYJOz8PtFdrjXlMMPKHDQ==
-X-Received: by 2002:a1c:7c03:0:b0:3cf:4969:9bab with SMTP id
- x3-20020a1c7c03000000b003cf49699babmr8569899wmc.176.1666948320184; 
- Fri, 28 Oct 2022 02:12:00 -0700 (PDT)
+ h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+ :content-language:subject:reply-to:from:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hNUfmJl+0sTiUOzqIEc0UDoY2ojJqdKVKKuDZXACX3c=;
+ b=e4vjiMvyfBU3aOapN38GTeDfFUkzrrWcoFT5KJ9D9zsgLoCFAS20cj/SIAVvdLxbRT
+ V0dlZB9uGkoiqPoPu7eeRyoqO42/PEwSgKYSNy5MClM28vrtLa8JvSGU7GJNr7yUzWOJ
+ DR5FukRNEKrhIQt33M/2tmuCUJZvvU8hrxREEdGIkK8gb56v7oz6w79GxziUgDyTd55R
+ 1T81LwP3RB21wzCq9mkz+tzEOYa7fMC4nMZD+eJcclWNsWCvo93e2Mjaxsi/WHwybmH4
+ +hlD0oArdNOWS4etJA3iLp/3Kppxjx3rRyc68c5IbhILDaOxZ3jtYEwjis9Ll45FoK7V
+ dgeg==
+X-Gm-Message-State: ACrzQf3TBlrLixHa0A5rzxNLMltg1NGMJr5KVPOei6ydCQr3ldQ58B4j
+ aO+WcwvzCgy4wDilOVRn0glQAg==
+X-Google-Smtp-Source: AMsMyM44dQx8YWmNgNQr4LWMhtm360DARjOfsdLtDl9NgPib6LNdnY/E0UaHw/2TBGrGpxKBg1suqA==
+X-Received: by 2002:adf:9d88:0:b0:236:57e2:c90 with SMTP id
+ p8-20020adf9d88000000b0023657e20c90mr23549888wre.712.1666948509341; 
+ Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:898:f380:9e9c:c6c2:95a3:c182?
  ([2a01:e0a:898:f380:9e9c:c6c2:95a3:c182])
  by smtp.gmail.com with ESMTPSA id
- iv9-20020a05600c548900b003cf483ee8e0sm7401866wmb.24.2022.10.28.02.11.58
+ bo12-20020a056000068c00b0023691d62cffsm3544954wrb.70.2022.10.28.02.15.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Oct 2022 02:11:59 -0700 (PDT)
-Message-ID: <b12e98c6-757e-a425-bdf7-84dbdc80a2a7@linaro.org>
-Date: Fri, 28 Oct 2022 11:11:58 +0200
+ Fri, 28 Oct 2022 02:15:09 -0700 (PDT)
+Message-ID: <5747d291-0ab8-9318-6d28-bc761ecf2445@linaro.org>
+Date: Fri, 28 Oct 2022 11:15:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
+From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
 References: <20221028090120.1536827-1-patrick.delaunay@foss.st.com>
- <20221028110055.1.If04f25e393f3af8cd75af331ca2f432a7a1b88e8@changeid>
-From: Neil Armstrong <neil.armstrong@linaro.org>
+ <20221028110055.2.I4662774cdd525de1992f84f0ea97255e2e43d8c2@changeid>
 Organization: Linaro Developer Services
-In-Reply-To: <20221028110055.1.If04f25e393f3af8cd75af331ca2f432a7a1b88e8@changeid>
+In-Reply-To: <20221028110055.2.I4662774cdd525de1992f84f0ea97255e2e43d8c2@changeid>
 X-Mailman-Approved-At: Fri, 28 Oct 2022 13:15:02 +0000
-Cc: Peter Hoyes <Peter.Hoyes@arm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Artem Lapkin <email2tema@gmail.com>, Zhaofeng Li <hello@zhaofeng.li>,
+Cc: Edoardo Tomelleri <e.tomell@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Artem Lapkin <email2tema@gmail.com>,
+ Zhang Ning <zhangn1985@qq.com>, Zhaofeng Li <hello@zhaofeng.li>,
  Ramon Fried <rfried.dev@gmail.com>,
+ Amjad Ouled-Ameur <aouledameur@baylibre.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] cmd: pxe: reorder kernel treatment in
-	label_boot
+Subject: Re: [Uboot-stm32] [PATCH 2/3] cmd: pxe: support INITRD and FDT
+	selection with FIT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,109 +93,157 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
+
 On 28/10/2022 11:01, Patrick Delaunay wrote:
-> Reorder kernel treatment in label_boot at the beginning of the function.
+> Since the commit d5ba6188dfbf ("cmd: pxe_utils: Check fdtcontroladdr
+> in label_boot") the FDT or the FDTDIR label is required in extlinux.conf
+> and the fallback done by bootm command when only the device tree present
+> in this command parameters is no more performed when FIT is used for
+> kernel.
 > 
-> This patch doesn't change the pxe command behavior, it is only a
-> preliminary step for next patch, build kernel_addr before parsing
-> the label initrd and fdt to build the next bootm arguments.
+> When the label FDT or FDTDIR are absent or if the device tree file is
+> absent, the PXE command in U-Boot uses the default U-Boot device tree
+> selected by fdtcontroladdr = gd->fdt_blob, it is the "Scenario 3".
+> 
+> With this scenario the bootm FIP fallback is no more possible with
+> the extlinux.conf when only "kernel" label is present and is a FIP:
+> 
+>    kernel <path>#<conf>[#<extra-conf[#...]]
+> 
+> As the U-Boot FDT is always provided in the third bootm argument,
+> the device tree found in FIP is not used as fallback, it was done
+> previously in boot_get_fdt().
+> 
+> This patch adds a new field kernel_label to save the full kernel label.
+> The FDT bootm parameters use the kernel address (to avoid to load a
+> second time the same FIP) and the config when this full label is reused
+> for "fdt" or "initrd" label.
+> 
+> This FIP support in extlinux.conf is restored when the "FDT" label
+> can be found and select the same FIP (identical file and configuration):
+> 
+>    kernel <path>#<conf>[#<extra-conf[#...]]
+>    fdt <path>#<conf>[#<extra-conf[#...]]
+> 
+> The patch add also this possibility for initrd.
+> 
+>    initrd <path>#<conf>[#<extra-conf[#...]]
+
+
+Thanks for providing this solution, indeed it solves the original
+issue and permits specifying different DT and INITRD configs which
+is neat.
+
+I haven't tested it yet, but so far:
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+
 > 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->   boot/pxe_utils.c | 49 ++++++++++++++++++++++++------------------------
->   1 file changed, 24 insertions(+), 25 deletions(-)
+>   boot/pxe_utils.c    | 17 ++++++++++++++---
+>   doc/README.pxe      |  8 ++++++++
+>   include/pxe_utils.h |  2 ++
+>   3 files changed, 24 insertions(+), 3 deletions(-)
 > 
 > diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-> index d5c215ae2c1d..844ab72252bf 100644
+> index 844ab72252bf..756b201eda91 100644
 > --- a/boot/pxe_utils.c
 > +++ b/boot/pxe_utils.c
-> @@ -522,6 +522,27 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
->   		return 1;
+> @@ -259,6 +259,7 @@ static struct pxe_label *label_create(void)
+>   static void label_destroy(struct pxe_label *label)
+>   {
+>   	free(label->name);
+> +	free(label->kernel_label);
+>   	free(label->kernel);
+>   	free(label->config);
+>   	free(label->append);
+> @@ -543,9 +544,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+>   		kernel_addr = fit_addr;
 >   	}
 >   
-> +	if (get_relfile_envaddr(ctx, label->kernel, "kernel_addr_r",
-> +				NULL) < 0) {
-> +		printf("Skipping %s for failure retrieving kernel\n",
-> +		       label->name);
-> +		return 1;
-> +	}
-> +
-> +	kernel_addr = env_get("kernel_addr_r");
-> +	/* for FIT, append the configuration identifier */
-> +	if (label->config) {
-> +		int len = strlen(kernel_addr) + strlen(label->config) + 1;
-> +
-> +		fit_addr = malloc(len);
-> +		if (!fit_addr) {
-> +			printf("malloc fail (FIT address)\n");
-> +			return 1;
-> +		}
-> +		snprintf(fit_addr, len, "%s%s", kernel_addr, label->config);
-> +		kernel_addr = fit_addr;
-> +	}
-> +
->   	if (label->initrd) {
+> -	if (label->initrd) {
+> +	/* For FIT, the label can be identical to kernel one */
+> +	if (label->initrd && !strcmp(label->kernel_label, label->initrd)) {
+> +		initrd_addr_str =  kernel_addr;
+> +	} else if (label->initrd) {
 >   		ulong size;
->   
-> @@ -529,21 +550,14 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+> -
+>   		if (get_relfile_envaddr(ctx, label->initrd, "ramdisk_addr_r",
 >   					&size) < 0) {
 >   			printf("Skipping %s for failure retrieving initrd\n",
->   			       label->name);
-> -			return 1;
-> +			goto cleanup;
->   		}
+> @@ -623,8 +626,11 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+>   	 */
+>   	bootm_argv[3] = env_get("fdt_addr_r");
 >   
->   		initrd_addr_str = env_get("ramdisk_addr_r");
->   		size = snprintf(initrd_str, sizeof(initrd_str), "%s:%lx",
->   				initrd_addr_str, size);
->   		if (size >= sizeof(initrd_str))
-> -			return 1;
-> -	}
-> -
-> -	if (get_relfile_envaddr(ctx, label->kernel, "kernel_addr_r",
-> -				NULL) < 0) {
-> -		printf("Skipping %s for failure retrieving kernel\n",
-> -		       label->name);
-> -		return 1;
-> +			goto cleanup;
->   	}
+> +	/* For FIT, the label can be identical to kernel one */
+> +	if (label->fdt && !strcmp(label->kernel_label, label->fdt)) {
+> +		bootm_argv[3] = kernel_addr;
+>   	/* if fdt label is defined then get fdt from server */
+> -	if (bootm_argv[3]) {
+> +	} else if (bootm_argv[3]) {
+>   		char *fdtfile = NULL;
+>   		char *fdtfilefree = NULL;
 >   
->   	if (label->ipappend & 0x1) {
-> @@ -573,7 +587,7 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
->   			       strlen(label->append ?: ""),
->   			       strlen(ip_str), strlen(mac_str),
->   			       sizeof(bootargs));
-> -			return 1;
-> +			goto cleanup;
->   		}
+> @@ -1165,6 +1171,11 @@ static int parse_label_kernel(char **c, struct pxe_label *label)
+>   	if (err < 0)
+>   		return err;
 >   
->   		if (label->append)
-> @@ -588,21 +602,6 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
->   		printf("append: %s\n", finalbootargs);
->   	}
+> +	/* copy the kernel label to compare with FDT / INITRD when FIT is used */
+> +	label->kernel_label = strdup(label->kernel);
+> +	if (!label->kernel_label)
+> +		return -ENOMEM;
+> +
+>   	s = strstr(label->kernel, "#");
+>   	if (!s)
+>   		return 1;
+> diff --git a/doc/README.pxe b/doc/README.pxe
+> index d14d2bdcc9b0..172201093d02 100644
+> --- a/doc/README.pxe
+> +++ b/doc/README.pxe
+> @@ -179,11 +179,19 @@ initrd <path>	    - if this label is chosen, use tftp to retrieve the initrd
+>   		      at <path>. it will be stored at the address indicated in
+>   		      the initrd_addr_r environment variable, and that address
+>   		      will be passed to bootm.
+> +		      For FIT image, the initrd can be provided with the same value than
+> +		      kernel, including configuration:
+> +		        <path>#<conf>[#<extra-conf[#...]]
+> +		      In this case, kernel_addr_r is passed to bootm.
 >   
-> -	kernel_addr = env_get("kernel_addr_r");
-> -
-> -	/* for FIT, append the configuration identifier */
-> -	if (label->config) {
-> -		int len = strlen(kernel_addr) + strlen(label->config) + 1;
-> -
-> -		fit_addr = malloc(len);
-> -		if (!fit_addr) {
-> -			printf("malloc fail (FIT address)\n");
-> -			return 1;
-> -		}
-> -		snprintf(fit_addr, len, "%s%s", kernel_addr, label->config);
-> -		kernel_addr = fit_addr;
-> -	}
-> -
->   	/*
->   	 * fdt usage is optional:
->   	 * It handles the following scenarios.
+>   fdt <path>	    - if this label is chosen, use tftp to retrieve the fdt blob
+>   		      at <path>. it will be stored at the address indicated in
+>   		      the fdt_addr_r environment variable, and that address will
+>   		      be passed to bootm.
+> +		      For FIT image, the device tree can be provided with the same value
+> +		      than kernel, including configuration:
+> +		        <path>#<conf>[#<extra-conf[#...]]
+> +		      In this case, kernel_addr_r is passed to bootm.
+>   
+>   devicetree <path>   - if this label is chosen, use tftp to retrieve the fdt blob
+>   		      at <path>. it will be stored at the address indicated in
+> diff --git a/include/pxe_utils.h b/include/pxe_utils.h
+> index 4a73b2aace34..1e5e8424f53f 100644
+> --- a/include/pxe_utils.h
+> +++ b/include/pxe_utils.h
+> @@ -28,6 +28,7 @@
+>    * Create these with the 'label_create' function given below.
+>    *
+>    * name - the name of the menu as given on the 'menu label' line.
+> + * kernel_label - the kernel label, including FIT config if present.
+>    * kernel - the path to the kernel file to use for this label.
+>    * append - kernel command line to use when booting this label
+>    * initrd - path to the initrd to use for this label.
+> @@ -40,6 +41,7 @@ struct pxe_label {
+>   	char num[4];
+>   	char *name;
+>   	char *menu;
+> +	char *kernel_label;
+>   	char *kernel;
+>   	char *config;
+>   	char *append;
 
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

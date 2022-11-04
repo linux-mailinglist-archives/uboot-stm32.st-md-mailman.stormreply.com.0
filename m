@@ -2,59 +2,79 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF5C5619E24
-	for <lists+uboot-stm32@lfdr.de>; Fri,  4 Nov 2022 18:08:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AB4261A4C8
+	for <lists+uboot-stm32@lfdr.de>; Fri,  4 Nov 2022 23:48:58 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6037EC65042;
-	Fri,  4 Nov 2022 17:08:11 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CC990C65043;
+	Fri,  4 Nov 2022 22:48:57 +0000 (UTC)
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
+ [209.85.166.52])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A4FC3C6411F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7FEEAC65040
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  4 Nov 2022 17:08:09 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 7C258622B9;
- Fri,  4 Nov 2022 17:08:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7600AC433C1;
- Fri,  4 Nov 2022 17:08:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1667581687;
- bh=pNG2zHnR1rojOSZWQkHa4FHK9JfAZb5MLXTtWQXbOhY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ZSqOk3RG/tJD4q/hik+NseH1HE6uR32Ky0nYo6do4lwPXDLvX4jM9TPt7TBqBrWXR
- 5hntspjJQdG0OjHpwBRSnOoNTjbr9Zz9f8RuvpfVp3R+WV8Pr20chOJnfSE3TCEPBG
- NwcRp1XLITyFkeenBpriZqj6ASpR/fW3EvdddV2svx45qh/SIeEZgmuWXFAxrfxdL2
- ccMxPAlE/lp/H81W6U+6juEgGNQkrjtk4P6UckHjnSKN7prDjClpPXfvwPFEga2NYj
- Ze5OI04TrfUjnHvruZwwqpIcLNCNYvG4lmvKLcvC5YEXGZ4Nlc4o+8z9CFIhNJo6GN
- wdAMwkaHN/GoQ==
-Received: by pali.im (Postfix)
- id 3C68683A; Fri,  4 Nov 2022 18:08:04 +0100 (CET)
-Date: Fri, 4 Nov 2022 18:08:04 +0100
-From: Pali =?utf-8?B?Um9ow6Fy?= <pali@kernel.org>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Message-ID: <20221104170804.omrqy6x2sx6sc6ee@pali>
-References: <20221104124458.890133-1-max.oss.09@gmail.com>
- <20221104124458.890133-2-max.oss.09@gmail.com>
+ Fri,  4 Nov 2022 22:48:56 +0000 (UTC)
+Received: by mail-io1-f52.google.com with SMTP id p141so4928941iod.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 04 Nov 2022 15:48:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lUr/vDZ/YX9e73A0iuqEcLtoIiSuQUGCZhMZ/D8nS5E=;
+ b=k0jdN3PcYh9EViGDpybdqOxyH+3JElLarHy4ajPSyb+NjiaMN6luduhNQPvmcA1Xom
+ Xs0I/XGUrT2k62erRpDSU+LOVNAqqnxEH66P941G6/xKPXcip27t5KjmqC+Y6IHHytB9
+ pGZgL1RLTZEUKJosoCYh4TYq9OfQ+PhxBQP9I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lUr/vDZ/YX9e73A0iuqEcLtoIiSuQUGCZhMZ/D8nS5E=;
+ b=no55Y8DQydVT1a7Vyrx5ohOjkUctQQQ4ybrRHci+e/m2to2ycwSuPnU5fmYZpnNrRB
+ oCazQRpcQGmXPzc0ch1RIWLFGToXe5W0Ye0NDygav0hEFq5xv5OKEVNZ+1A4WU6pO3bj
+ KpSOnGk0WzLmB8MJSAQnfCFGx4IEyTj3IgNeBf1jvcs+G+/9DKa9lNqOr4iU8yS6SUjV
+ YDErbR0ON7FwAI+Y2OJ7Qsdtvgaa6aYgF78r3mp+GA3y8ZPslS2px2YCm6cjd1Xx5w7N
+ wv2I2zTPOIMb1FxFVmsT+WBib9BI1Gi4+H4SBnqV5EtlhHLYnhfnIVRspKDndk1/07sL
+ dwhg==
+X-Gm-Message-State: ACrzQf2XImXcC/BX5+57P/y+qj1XwYzKiN4Wr8OJVKrV1Dg8QLl+UhLP
+ 3pT8zz89pJfX+HR/rvu7yZL1Ww==
+X-Google-Smtp-Source: AMsMyM5yGn6RkypOej1shkMDTwYnhklPkGP85V6pBFju6xOgbCSBKpSDAf7QrF5XACsBRZsum1tXzQ==
+X-Received: by 2002:a02:a49:0:b0:375:496b:b233 with SMTP id
+ 70-20020a020a49000000b00375496bb233mr21083016jaw.78.1667602135292; 
+ Fri, 04 Nov 2022 15:48:55 -0700 (PDT)
+Received: from sjg1.roam.corp.google.com
+ (c-67-190-102-125.hsd1.co.comcast.net. [67.190.102.125])
+ by smtp.gmail.com with ESMTPSA id
+ w24-20020a05663800d800b003734c4d01d2sm95189jao.61.2022.11.04.15.48.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Nov 2022 15:48:54 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri,  4 Nov 2022 16:48:18 -0600
+Message-Id: <20221104224844.467576-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.38.1.431.g37b22c650d-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221104124458.890133-2-max.oss.09@gmail.com>
-User-Agent: NeoMutt/20180716
-Cc: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Du Huanpeng <dhu@hodcarrier.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Samuel Holland <samuel@sholland.org>, Weijie Gao <weijie.gao@mediatek.com>,
- u-boot@lists.denx.de, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Heiko Thiery <heiko.thiery@gmail.com>,
- Stefan Roese <sr@denx.de>, Adam Ford <aford173@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 1/1] Makefile: rework
-	u-boot-initial-env target
+Cc: Jan Kiszka <jan.kiszka@siemens.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Steven Lawrance <steven.lawrance@softathome.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Masahisa Kojima <masahisa.kojima@linaro.org>, Stefan Roese <sr@denx.de>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ Marek Vasut <marex@denx.de>, Thomas Huth <thuth@redhat.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Scull <ascull@google.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andrew Davis <afd@ti.com>, John Keeping <john@metanate.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ Artem Lapkin <email2tema@gmail.com>
+Subject: [Uboot-stm32] [PATCH v2 00/25] bootstd: Add a boot menu
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,90 +86,153 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gRnJpZGF5IDA0IE5vdmVtYmVyIDIwMjIgMTM6NDQ6NTcgTWF4IEtydW1tZW5hY2hlciB3cm90
-ZToKPiBGcm9tOiBNYXggS3J1bW1lbmFjaGVyIDxtYXgua3J1bW1lbmFjaGVyQHRvcmFkZXguY29t
-Pgo+IAo+IFdpdGggTFRPIGVuYWJsZWQgdGhlIFUtQm9vdCBpbml0aWFsIGVudmlyb25tZW50IGlz
-IG5vIGxvbmdlciBzdG9yZWQKPiBpbiBhbiBlYXN5IGFjY2Vzc2libGUgc2VjdGlvbiBpbiBlbnYv
-Y29tbW9uLm8uIEkuZS4gdGhlIHNlY3Rpb24gbmFtZQo+IGNoYW5nZXMgZnJvbSBidWlsZCB0byBi
-dWlsZCwgaXRzIGNvbnRlbnQgbWF5YmUgY29tcHJlc3NlZCBhbmQgaXQgaXMKPiBhbm5vdGF0ZWQg
-d2l0aCBhZGRpdGlvbmFsIGRhdGEuCj4gCj4gRHJvcCB0cnlpbmcgdG8gcmVhZCB0aGUgaW5pdGlh
-bCBlbnYgd2l0aCBlbGYgdG9vbHMgZnJvbSB0aGUgY29tcGlsZXIKPiBzcGVjaWZpYyBvYmplY3Qg
-ZmlsZSBpbiBmYXZvdXIgb2YgYWRkaW5nIGFuZCB1c2luZyBhIGhvc3QgdG9vbCB3aXRoCj4gdGhl
-IG9ubHkgZnVuY3Rpb25hbGl0eSBvZiBwcmludGluZyB0aGUgaW5pdGlhbCBlbnYgdG8gc3Rkb3V0
-Lgo+IAo+IFNlZSBhbHNvOgo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC85MjdiMTIyZS0x
-ZjYyLWU3OTAtZjVjYS0zMGJhZTQzMzJjNzdAZm9zcy5zdC5jb20vCj4gCj4gU2lnbmVkLW9mZi1i
-eTogTWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5hY2hlckB0b3JhZGV4LmNvbT4KPiAKPiAt
-LS0KPiAKPiBDaGFuZ2VzIGluIHYzOgo+IC0gbW92ZWQgdGhlIHRvb2wgZnJvbSBzY3JpcHRzLyB0
-byB0b29scy8uIFN1Z2dlc3RlZCBieSBUb20gUmluaQo+IC0gY2hhbmdlZCB0aGUgZGVwZW5kZW5j
-aWVzIHRvICckKGVudl9oKScgYW5kICd0b29scycuCj4gICBTdWdnZXN0ZWQgYnkgVG9tIFJpbmkg
-YW5kIFBhbGkgUm9ow6FyLgo+IC0gcmVtb3ZlZCB0aGUgc2VkIHJ1bGUgd2hpY2ggcmVwbGFjZXMg
-XHgwMCB3aXRoIFx4MEEgYXMgdGhpcyBpcyBhbHJlYWR5Cj4gICBkb25lIGJ5IHRoZSB0b29sLiBT
-dWdnZXN0ZWQgYnkgUGFsaSBSb2jDoXIuCj4gCj4gQ2hhbmdlcyBpbiB2MjoKPiAtIHJld29ya2Vk
-IHRvIGJ1aWxkIGEgaG9zdCB0b29sIHdoaWNoIHByaW50cyB0aGUgY29uZmlndXJlZAo+ICAgZW52
-aXJvbm1lbnQgYXMgcHJvcG9zZWQgYnkgUGFsaSBSb2jDoXIKPiAgIGh0dHBzOi8vbG9yZS5rZXJu
-ZWwub3JnL3UtYm9vdC8yMDIyMTAxODE3NDgyNy4xMzkzMjExLTEtbWF4Lm9zcy4wOUBnbWFpbC5j
-b20vCj4gLSByZW5hbWVkIHBhdGNoLCB2MSB1c2VkICJNYWtlZmlsZTogZml4IHUtYm9vdC1pbml0
-aWFsLWVudiB0YXJnZXQgaWYgbHRvIGlzIGVuYWJsZWQiCj4gCj4gIE1ha2VmaWxlICAgICAgICAg
-ICAgICAgIHwgIDkgKysrKystLS0tCj4gIHRvb2xzLy5naXRpZ25vcmUgICAgICAgIHwgIDEgKwo+
-ICB0b29scy9NYWtlZmlsZSAgICAgICAgICB8ICAzICsrKwo+ICB0b29scy9wcmludGluaXRpYWxl
-bnYuYyB8IDQ0ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gIDQg
-ZmlsZXMgY2hhbmdlZCwgNTMgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKPiAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IHRvb2xzL3ByaW50aW5pdGlhbGVudi5jCj4gCj4gZGlmZiAtLWdpdCBhL01h
-a2VmaWxlIGIvTWFrZWZpbGUKPiBpbmRleCAwZjExNzQ3MThmNy4uYjhlZTJkZWIzZWMgMTAwNjQ0
-Cj4gLS0tIGEvTWFrZWZpbGUKPiArKysgYi9NYWtlZmlsZQo+IEBAIC0yNDQyLDExICsyNDQyLDEy
-IEBAIGVuZGlmCj4gIAkkKFEpJChNQUtFKSAtZiAkKHNyY3RyZWUpL3NjcmlwdHMvTWFrZWZpbGUu
-bW9kcG9zdAo+ICAKPiAgcXVpZXRfY21kX2dlbmVudiA9IEdFTkVOViAgJEAKPiAtY21kX2dlbmVu
-diA9ICQoT0JKQ09QWSkgLS1kdW1wLXNlY3Rpb24gLnJvZGF0YS5kZWZhdWx0X2Vudmlyb25tZW50
-PSRAIGVudi9jb21tb24ubzsgXAo+IC0Jc2VkIC0taW4tcGxhY2UgLWUgJ3MvXHgwMC9ceDBBL2cn
-ICRAOyBzZWQgLS1pbi1wbGFjZSAtZSAnL15ccyokJC9kJyAkQDsgXAo+IC0Jc29ydCAtLWZpZWxk
-LXNlcGFyYXRvcj09IC1rMSwxIC0tc3RhYmxlICRAIC1vICRACj4gK2NtZF9nZW5lbnYgPSBcCj4g
-Kwl0b29scy9wcmludGluaXRpYWxlbnYgfCBcCgpNaXNzaW5nICQob2JqdHJlZSkvCgo+ICsJc2Vk
-IC1lICcvXlxzKiQkL2QnIHwgXAo+ICsJc29ydCAtLWZpZWxkLXNlcGFyYXRvcj09IC1rMSwxIC0t
-c3RhYmxlIC1vICRACj4gIAo+IC11LWJvb3QtaW5pdGlhbC1lbnY6IHUtYm9vdC5iaW4KPiArdS1i
-b290LWluaXRpYWwtZW52OiAkKGVudl9oKSB0b29scyBGT1JDRQo+ICAJJChjYWxsIGlmX2NoYW5n
-ZWQsZ2VuZW52KQo+ICAKPiAgIyBDb25zaXN0ZW5jeSBjaGVja3MKPiBkaWZmIC0tZ2l0IGEvdG9v
-bHMvLmdpdGlnbm9yZSBiL3Rvb2xzLy5naXRpZ25vcmUKPiBpbmRleCBkM2E5M2ZmMjk0YS4uMjhl
-OGNlMmEwN2EgMTAwNjQ0Cj4gLS0tIGEvdG9vbHMvLmdpdGlnbm9yZQo+ICsrKyBiL3Rvb2xzLy5n
-aXRpZ25vcmUKPiBAQCAtMjgsNiArMjgsNyBAQAo+ICAvbXhzYm9vdAo+ICAvbmNiCj4gIC9wcmVs
-aW5rLXJpc2N2Cj4gKy9wcmludGluaXRpYWxlbnYKPiAgL3Byb2Z0b29sCj4gIC9yZWxvY2F0ZS1y
-ZWxhCj4gIC9zcGxfc2l6ZV9saW1pdAo+IGRpZmYgLS1naXQgYS90b29scy9NYWtlZmlsZSBiL3Rv
-b2xzL01ha2VmaWxlCj4gaW5kZXggMzRhMWFhN2E4YjcuLmEzYWZkZWU3ODEzIDEwMDY0NAo+IC0t
-LSBhL3Rvb2xzL01ha2VmaWxlCj4gKysrIGIvdG9vbHMvTWFrZWZpbGUKPiBAQCAtMjQ1LDYgKzI0
-NSw5IEBAIGhvc3Rwcm9ncy0kKENPTkZJR19NSVBTKSArPSBtaXBzLXJlbG9jcwo+ICBob3N0cHJv
-Z3MtJChDT05GSUdfQVNOMV9DT01QSUxFUikJKz0gYXNuMV9jb21waWxlcgo+ICBIT1NUQ0ZMQUdT
-X2FzbjFfY29tcGlsZXIubyA9IC1pZGlyYWZ0ZXIgJChzcmN0cmVlKS9pbmNsdWRlCj4gIAo+ICsj
-IGhvc3QgdG9vbCB0byBkdW1wIHRoZSBjdXJyZW50bHkgY29uZmlndXJlZCBkZWZhdWx0IGVudmly
-b25tZW50Cj4gK2hvc3Rwcm9ncy15CQkJCSs9IHByaW50aW5pdGlhbGVudgo+ICsKPiAgSE9TVENG
-TEFHU19ta2VmaWNhcHN1bGUubyArPSBcCj4gIAkkKHNoZWxsIHBrZy1jb25maWcgLS1jZmxhZ3Mg
-Z251dGxzIDI+IC9kZXYvbnVsbCB8fCBlY2hvICIiKQo+ICBIT1NUQ0ZMQUdTX21rZWZpY2Fwc3Vs
-ZS5vICs9IFwKPiBkaWZmIC0tZ2l0IGEvdG9vbHMvcHJpbnRpbml0aWFsZW52LmMgYi90b29scy9w
-cmludGluaXRpYWxlbnYuYwo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMDAw
-MDAuLmM1OGIyMzRkNjc5Cj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL3Rvb2xzL3ByaW50aW5pdGlh
-bGVudi5jCj4gQEAgLTAsMCArMSw0NCBAQAo+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjog
-R1BMLTIuMCsKPiArLyoKPiArICogKEMpIENvcHlyaWdodCAyMDIyCj4gKyAqIE1heCBLcnVtbWVu
-YWNoZXIsIFRvcmFkZXgKPiArICoKPiArICogU25pcHBldHMgdGFrZW4gZnJvbSB0b29scy9lbnYv
-ZndfZW52LmMKPiArICoKPiArICogVGhpcyBwcmludHMgdGhlIGxpc3Qgb2YgZGVmYXVsdCBlbnZp
-cm9ubWVudCB2YXJpYWJsZXMgYXMgY3VycmVudGx5Cj4gKyAqIGNvbmZpZ3VyZWQuCj4gKyAqCj4g
-KyAqLwo+ICsKPiArI2luY2x1ZGUgPHN0ZGlvLmg+Cj4gKwo+ICsvKiBQdWxsIGluIHRoZSBjdXJy
-ZW50IGNvbmZpZyB0byBkZWZpbmUgdGhlIGRlZmF1bHQgZW52aXJvbm1lbnQgKi8KPiArI2luY2x1
-ZGUgPGxpbnV4L2tjb25maWcuaD4KPiArCj4gKyNpZm5kZWYgX19BU1NFTUJMWV9fCj4gKyNkZWZp
-bmUgX19BU1NFTUJMWV9fIC8qIGdldCBvbmx5ICNkZWZpbmVzIGZyb20gY29uZmlnLmggKi8KPiAr
-I2luY2x1ZGUgPGNvbmZpZy5oPgo+ICsjdW5kZWYJX19BU1NFTUJMWV9fCj4gKyNlbHNlCj4gKyNp
-bmNsdWRlIDxjb25maWcuaD4KPiArI2VuZGlmCj4gKwo+ICsjZGVmaW5lIERFRkFVTFRfRU5WX0lO
-U1RBTkNFX1NUQVRJQwo+ICsjaW5jbHVkZSA8Z2VuZXJhdGVkL2Vudmlyb25tZW50Lmg+Cj4gKyNp
-bmNsdWRlIDxlbnZfZGVmYXVsdC5oPgo+ICsKPiAraW50IG1haW4odm9pZCkKPiArewo+ICsJY2hh
-ciAqZW52LCAqbnh0Owo+ICsKPiArCWZvciAoZW52ID0gZGVmYXVsdF9lbnZpcm9ubWVudDsgKmVu
-djsgZW52ID0gbnh0ICsgMSkgewo+ICsJCWZvciAobnh0ID0gZW52OyAqbnh0OyArK254dCkgewo+
-ICsJCQlpZiAobnh0ID49ICZkZWZhdWx0X2Vudmlyb25tZW50W3NpemVvZihkZWZhdWx0X2Vudmly
-b25tZW50KV0pIHsKPiArCQkJCWZwcmludGYoc3RkZXJyLCAiIyMgRXJyb3I6IGVudmlyb25tZW50
-IG5vdCB0ZXJtaW5hdGVkXG4iKTsKPiArCQkJCXJldHVybiAtMTsKPiArCQkJfQo+ICsJCX0KPiAr
-CQlwcmludGYoIiVzXG4iLCBlbnYpOwo+ICsJfQo+ICsJcmV0dXJuIDA7Cj4gK30KPiAtLSAKPiAy
-LjM1LjMKPiAKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-VWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1y
-ZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlz
-dGluZm8vdWJvb3Qtc3RtMzIK
+So far standard boot lacks a boot menu, although it is possible to create
+a rudimentary one using the existing 'bootmenu' command.
+
+Even then, this text-based menu offer only basic functionality and does
+not take full advantage of the displays which are common on many devices.
+
+This series provides a 'bootflow menu' command which allows the user to
+select from the available bootflows. An attempt is made to show the name
+of the available operating systems, by reading more information into the
+bootflow. A logo can be read also, where supported, so that this can be
+presented to the user when an option is highlighted.
+
+Full use is made of TrueType fonts, if enabled. For cases where only a
+serial console is available, it falls back to a simple text-based menu.
+
+All of this is implementing using a new 'expo' construct, a collection of
+scenes (like menu screens) which can be navigated by the user to view
+information and select options. This is fairly general and should be able
+to cope with a wider array of use cases, with less hacking of the menu
+code, such as is currently needed for CMD_BOOTEFI_BOOTMGR.
+
+Of course it would be possible to enhance the existing menu rather than
+creating a new setup. Instead it seems better to make the existing menu
+use expo, if code space permits. It avoids the event-loop problem and
+should be more extensible, given its loosely coupled components and use of
+IDs instead of pointers. Further motivation is provided in the
+documentation.
+
+For now the CLI keypress-decoding code is split out to be used by the new
+menu. The key codes defined by menu.h are reused also.
+
+This is of course just a starting point. Some ideas for future work are
+included in the documentation.
+
+Changes in v2:
+- Drop the _add suffix on expo creation function
+- Fix 'touse' typo
+- Fix pylint warning in mkdir_cond()
+- Put strings in a separate structure referenced by ID
+- Rebase to master
+- Rename vidconsole_get_font() to vidconsole_get_font_size()
+- Update for new API
+
+Simon Glass (25):
+  sandbox: Enable mmc command and legacy images
+  cli: Move readline character-processing to a state machine
+  bootmenu: Add a few comments
+  menu: Rename KEY_... to BKEY_...
+  menu: Update bootmenu_autoboot_loop() to return the code
+  menu: Update bootmenu_loop() to return the code
+  menu: Use a switch statement
+  menu: Make use of CLI character processing
+  image: Add a function to find a script in an image
+  image: Move common image code to image_board and command
+  video: Enable VIDEO_ANSI by default only with EFI
+  video: truetype: Rename the metrics function
+  video: Fix unchnaged typo
+  video: Add font functions to the vidconsole API
+  bootstd: Read the Operating System name for distro/scripts
+  bootstd: Allow reading a logo for the OS
+  menu: Factor out menu-keypress decoding
+  expo: Add basic implementation
+  expo: Add support for scenes
+  expo: Add support for scene menus
+  expo: Add basic tests
+  bootstd: Support creating a boot menu
+  bootstd: Add a test for the bootstd menu
+  bootstd: Support setting a theme for the menu
+  expo: Add documentation
+
+ .../cmd_stm32prog/cmd_stm32prog.c             |   2 +-
+ arch/sandbox/dts/test.dts                     |  11 +
+ boot/Kconfig                                  |  12 +
+ boot/Makefile                                 |   3 +
+ boot/bootflow.c                               |   1 +
+ boot/bootflow_internal.h                      |  47 ++
+ boot/bootflow_menu.c                          | 284 +++++++++
+ boot/bootmeth-uclass.c                        |  69 ++-
+ boot/bootmeth_distro.c                        |  36 ++
+ boot/bootmeth_script.c                        |  40 +-
+ boot/bootstd-uclass.c                         |   2 +
+ boot/expo.c                                   | 170 ++++++
+ boot/image-board.c                            | 133 +++++
+ boot/scene.c                                  | 414 ++++++++++++++
+ boot/scene_internal.h                         | 123 ++++
+ boot/scene_menu.c                             | 390 +++++++++++++
+ cmd/bootflow.c                                |  44 +-
+ cmd/bootmenu.c                                |  19 +-
+ cmd/eficonfig.c                               |  38 +-
+ cmd/font.c                                    |  11 +-
+ cmd/source.c                                  | 140 +----
+ common/Makefile                               |   6 +-
+ common/cli_getch.c                            | 208 +++++++
+ common/cli_readline.c                         | 150 +----
+ common/command.c                              |  19 +
+ common/menu.c                                 | 157 +++--
+ configs/sandbox_defconfig                     |   2 +
+ configs/sandbox_flattree_defconfig            |   2 +
+ configs/snow_defconfig                        |   4 +
+ configs/tools-only_defconfig                  |   2 +
+ doc/develop/expo.rst                          | 188 ++++++
+ doc/develop/index.rst                         |   1 +
+ drivers/usb/gadget/f_sdp.c                    |   2 +-
+ drivers/video/Kconfig                         |   7 +-
+ drivers/video/console_truetype.c              |  37 +-
+ drivers/video/vidconsole-uclass.c             |  33 ++
+ include/bootflow.h                            |  40 ++
+ include/bootmeth.h                            |  16 +
+ include/bootstd.h                             |   4 +
+ include/cli.h                                 |  74 +++
+ include/command.h                             |  12 +
+ include/expo.h                                | 521 +++++++++++++++++
+ include/image.h                               |  17 +-
+ include/menu.h                                |  77 ++-
+ include/video.h                               |   2 +-
+ include/video_console.h                       |  75 ++-
+ test/boot/Makefile                            |   2 +
+ test/boot/bootflow.c                          | 130 +++++
+ test/boot/expo.c                              | 539 ++++++++++++++++++
+ test/cmd/font.c                               |   6 +-
+ test/py/tests/bootstd/armbian.bmp.xz          | Bin 0 -> 1384 bytes
+ test/py/tests/bootstd/mmc4.img.xz             | Bin 0 -> 7072 bytes
+ test/py/tests/test_android/test_avb.py        |   2 +
+ test/py/tests/test_ut.py                      | 218 ++++++-
+ 54 files changed, 4075 insertions(+), 467 deletions(-)
+ create mode 100644 boot/bootflow_internal.h
+ create mode 100644 boot/bootflow_menu.c
+ create mode 100644 boot/expo.c
+ create mode 100644 boot/scene.c
+ create mode 100644 boot/scene_internal.h
+ create mode 100644 boot/scene_menu.c
+ create mode 100644 common/cli_getch.c
+ create mode 100644 doc/develop/expo.rst
+ create mode 100644 include/expo.h
+ create mode 100644 test/boot/expo.c
+ create mode 100644 test/py/tests/bootstd/armbian.bmp.xz
+ create mode 100644 test/py/tests/bootstd/mmc4.img.xz
+
+-- 
+2.38.1.431.g37b22c650d-goog
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

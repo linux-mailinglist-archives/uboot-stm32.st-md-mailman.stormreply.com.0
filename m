@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34AD4624052
-	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Nov 2022 11:50:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E333624053
+	for <lists+uboot-stm32@lfdr.de>; Thu, 10 Nov 2022 11:50:36 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EE4EEC65056;
-	Thu, 10 Nov 2022 10:50:34 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 041D3C6505C;
+	Thu, 10 Nov 2022 10:50:36 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1D491C65053
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 563DAC65055
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Thu, 10 Nov 2022 10:50:34 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2AA9DkRi006401; Thu, 10 Nov 2022 11:50:24 +0100
+ 2AAAlr28005595; Thu, 10 Nov 2022 11:50:25 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=JBp4X4cmku+q1nKc53+tkYMPLMvuR8JgBmmBajWcHwE=;
- b=luzDnqriQSH++UqUXQvwXXtytDguAP3sX9+eKNYjhN6MbVBNt8f+DdbQeKtQRxA+YJUG
- GHDbJ+/yGWnICLO5HBF+c298BzNKTLpUr24ITGGvXEfd1fFZJbCeKxhDBgoMP8ZxlIf5
- bOnBF1fVFdVT28+/E8225CBn/SOP2RWe6vceV3ESptRcD/Zp3dibosknK1D+qPZuT8/A
- RaITNAVtpps65hkRRY6PQ2fpKlj9XnWvcyNbIZE+juUYcroWwLi/B5e3R/L+zN8uZv4U
- Lj+DCWbHs8ZR6gh+sJRyfCQ1/QKu0LerZx44HnsKqvM4haSrQ3CladvPWH+sLkM4mRp3 oA== 
+ bh=/t+JjaNe9SrFQouACg0vcYm3TZhTt31iozEIRFZHV8U=;
+ b=uRjk6GSnxBLSJwEHb1uYXWRU8RFHvb4k9lvFlRX3CxZhdWp2r7/739IdzZDAYQeKJwVn
+ 9n7V6F0/gHT07SO3Dxp6YwHbYEpojA3xNyu1nP8sfrz6guYiK4CC0FvZaeRM9fRAUMIK
+ 6w6p/E2gGjO16KLiksavEKzUU/QIsLB4ukW6wl2x8XpbnPiG/pPBER3lbYQPp4KS4+My
+ d3lP6kRLUaMNMYYB5NNd7dWSRNTHGIquANgMr2wv8c1lZ+ApZx9SY0dHgh/jNxAyeXXL
+ HGxg3qfafDjakvD2D/gZ+Aebi+RkAKwI/bghdWzBOD7s97IKMXFC2Nt9zPEbKpFsOPz3 vw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3krxfu8xqm-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3kryv4g0p9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 10 Nov 2022 11:50:24 +0100
+ Thu, 10 Nov 2022 11:50:25 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A6963100038;
- Thu, 10 Nov 2022 11:50:19 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7DE0B100039;
+ Thu, 10 Nov 2022 11:50:20 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A0FDD218625;
- Thu, 10 Nov 2022 11:50:19 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 78312218625;
+ Thu, 10 Nov 2022 11:50:20 +0100 (CET)
 Received: from localhost (10.252.15.206) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.32; Thu, 10 Nov
- 2022 11:50:18 +0100
+ 2022 11:50:19 +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 10 Nov 2022 11:49:03 +0100
-Message-ID: <20221110114828.6.I6580e1953c9b27a410bc6e6223aa71b118b11672@changeid>
+Date: Thu, 10 Nov 2022 11:49:04 +0100
+Message-ID: <20221110114828.7.Id632e4ff9cc36841b7ad0b73ccadb2f869aa456e@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221110104905.3076915-1-patrick.delaunay@foss.st.com>
 References: <20221110104905.3076915-1-patrick.delaunay@foss.st.com>
@@ -60,8 +60,8 @@ Cc: Peng Fan <peng.fan@nxp.com>, Wolfgang Denk <wd@denx.de>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 6/8] env: mmc: select GPT env partition by
-	type guid
+Subject: [Uboot-stm32] [PATCH 7/8] env: mmc: add debug message when
+	mmc-env-partition is not found
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,61 +78,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Since commit c0364ce1c695 ("doc/README.gpt: define partition type GUID for
-U-Boot environment"), a specific type GUID can be used to indicate
-the U-Boot environment partition on the device with GPT partition table.
-
-This patch uses this type GUID to found the env partition as fallback
-when the partition name property "u-boot,mmc-env-partition" is not present
-in config node or if the indicated partition name is not found.
-
-The mmc_offset_try_partition() function is reused, it selects the first
-partition with the correct type GUID when the parameter 'str' is NULL.
+Add a debug message to indicate a potential issue when
+"u-boot,mmc-env-partition" is present in config node of device tree
+but this partition name is not found in the mmc device.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- env/mmc.c | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ env/mmc.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/env/mmc.c b/env/mmc.c
-index 1894b6483220..bd7d51e6b633 100644
+index bd7d51e6b633..8941e0f5ff39 100644
 --- a/env/mmc.c
 +++ b/env/mmc.c
-@@ -74,8 +74,18 @@ static inline int mmc_offset_try_partition(const char *str, int copy, s64 *val)
- 		if (ret < 0)
- 			return ret;
- 
--		if (!strncmp((const char *)info.name, str, sizeof(info.name)))
-+		if (str && !strncmp((const char *)info.name, str, sizeof(info.name)))
- 			break;
-+#ifdef CONFIG_PARTITION_TYPE_GUID
-+		if (!str) {
-+			const efi_guid_t env_guid = PARTITION_U_BOOT_ENVIRONMENT;
-+			efi_guid_t type_guid;
-+
-+			uuid_str_to_bin(info.type_guid, type_guid.b, UUID_STR_FORMAT_GUID);
-+			if (!memcmp(&env_guid, &type_guid, sizeof(efi_guid_t)))
-+				break;
-+		}
-+#endif
- 	}
- 
- 	/* round up to info.blksz */
-@@ -112,6 +122,13 @@ static inline s64 mmc_offset(int copy)
+@@ -120,6 +120,7 @@ static inline s64 mmc_offset(int copy)
+ 		err = mmc_offset_try_partition(str, copy, &val);
+ 		if (!err)
  			return val;
++		debug("env partition '%s' not found (%d)", str, err);
  	}
  
-+	/* try the GPT partition with "U-Boot ENV" TYPE GUID */
-+	if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID)) {
-+		err = mmc_offset_try_partition(NULL, copy, &val);
-+		if (!err)
-+			return val;
-+	}
-+
- 	defvalue = ENV_MMC_OFFSET;
- 	propname = dt_prop.offset;
- 
+ 	/* try the GPT partition with "U-Boot ENV" TYPE GUID */
 -- 
 2.25.1
 

@@ -2,65 +2,79 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E0F63369B
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Nov 2022 09:05:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0440263445E
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Nov 2022 20:11:40 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1538BC6507F;
-	Tue, 22 Nov 2022 08:05:53 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A0AB5C5F1ED;
+	Tue, 22 Nov 2022 19:11:39 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+ [209.85.221.45])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C266AC6504E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9F668C03FC9
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Nov 2022 08:05:51 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2AM7IeiQ009308; Tue, 22 Nov 2022 09:05:49 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=I+4s/CzpnTPrrpBjeWxtoGHdJhmp7LOUR+bUARWB39Y=;
- b=CBujFOwAGzzluPg9s8Gc5Abbx4ILwMwLa9YubHrAxw0pU7Cz9cAq95HUEZg+rNJxazZN
- sKaOyaRxGrgal59wU47Qwwdnw+Qolza08TKMU77vFnLmhyrNY61dsNjMqnDbIxe+b9mx
- 8ZypjgWQMVmSlPIPcYLmNgmCcX3h7BzRp2Orsk8D87sWx9gNWka+QODf/gaL+xCDRD+j
- qzJtIhI35dJZX8oG1O4Iii3Nivpz95fwAeaAeEh66sU0RLBweKtDXzzkeEvdjiTfCnpy
- 80oOXaE5QqZ2zkiC+SBK7qiFOI2x8+GV4DmWW2Q9xPLQCMhEPCMasYXnBtvLdUxfaavW MA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3kxrdc7jr6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Nov 2022 09:05:49 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B5A02100039;
- Tue, 22 Nov 2022 09:05:44 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AF5E1216851;
- Tue, 22 Nov 2022 09:05:44 +0100 (CET)
-Received: from localhost (10.201.22.79) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 22 Nov
- 2022 09:05:44 +0100
-From: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 22 Nov 2022 09:05:40 +0100
-Message-ID: <20221122080540.351469-4-gabriel.fernandez@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20221122080540.351469-1-gabriel.fernandez@foss.st.com>
-References: <20221122080540.351469-1-gabriel.fernandez@foss.st.com>
+ Tue, 22 Nov 2022 19:11:38 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id i12so22312446wrb.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 22 Nov 2022 11:11:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+ :content-language:subject:reply-to:from:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=oux2agNqoYxrYmYdaFKpNuQ2r9Vb7GLQflfcDZTlaF0=;
+ b=r0LHhCUmEVOLPimxwBk/KdH5xOxs9imFWFmmKZMjOYNbVBSgLXFg9VgtnHvzFgudiT
+ tYYP0JjXTZRKfoVr5XLDrlk+QKMV2NTBm4bvT+RPj5ebQOqNKtgHIZCblc58ZdMGQLaq
+ Zkg57hp1em8jRu0gh6EH6X+pY4CvRAl09uNxHoxLOcM/n6DbPkN2nFTWBLHikj1eORyy
+ jXysGnCsIGMSOP7rpmo0u7RaslEe5rdeYxBazhJWlPVrL4D3Y7y7VSYeVD6BZ13rNfjp
+ hb67LCMi+QkhHe2UW+EqDdmfGBCnZPpcdMs33mCzax5YHtugCqL4ps8zNZ5Liqte6fSe
+ /3xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:organization:references:cc:to
+ :content-language:subject:reply-to:from:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=oux2agNqoYxrYmYdaFKpNuQ2r9Vb7GLQflfcDZTlaF0=;
+ b=VuME4fvzPQRzTQwvRlaE8O9HQpfxgF6/6SgjQZrSl+ZeZcaic8oQRQf8Q0V08BGtzl
+ JUzMUbxdi9i787foxOHYGAkRL9i32NY//y4F3KCtGUtzXIsa3I5dNKtuwvbQVBkbwyFF
+ e4rH8oycTaiLikKXJnOf7cffC7MwRV9qblRbEAtlovP8RTcnlmPAJoJiKWvXuLNjqFdS
+ RtlnSSjNd0WqayHo4Y4C2o8F7hs0m7V9j6rtYNQEQd9xBvx/SLgLQfIGINOsgmgO8XhW
+ fGVwLx2WoR4MdGaHcu45A/QHZwYDD+yTdsMwp2DSZWQ9SWo953U9++1ZbcsWALd9dwhM
+ k7hg==
+X-Gm-Message-State: ANoB5ple3o3Ut+aTpCm13Bv0UJncPXwFmH7rwk1AfwhLPioQjVGLTieU
+ D3sBt5G9YpUXAc0dZcfaR8PGnA==
+X-Google-Smtp-Source: AA0mqf6DfYjYQ/XK64eS2k4CC3XFHYf/fvypD7AWWgMF1hcQnAQcZcZyDpEU1FnMHM+onR2dpwI6EA==
+X-Received: by 2002:a5d:5914:0:b0:236:57f3:c9e6 with SMTP id
+ v20-20020a5d5914000000b0023657f3c9e6mr15001430wrd.21.1669144297577; 
+ Tue, 22 Nov 2022 11:11:37 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:6969:11a1:a2af:e8c0?
+ ([2a01:e0a:982:cbb0:6969:11a1:a2af:e8c0])
+ by smtp.gmail.com with ESMTPSA id
+ v14-20020a5d4b0e000000b002416e383e1csm14896956wrq.25.2022.11.22.11.11.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Nov 2022 11:11:37 -0800 (PST)
+Message-ID: <5f67e057-c41a-d4a0-b199-5840ae771e35@linaro.org>
+Date: Tue, 22 Nov 2022 20:11:35 +0100
 MIME-Version: 1.0
-X-Originating-IP: [10.201.22.79]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-22_04,2022-11-18_01,2022-06-22_01
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20221028090120.1536827-1-patrick.delaunay@foss.st.com>
+ <b7e891d1-d134-b489-eb2d-6125d4c7b6c6@theobroma-systems.com>
+Organization: Linaro Developer Services
+In-Reply-To: <b7e891d1-d134-b489-eb2d-6125d4c7b6c6@theobroma-systems.com>
+Cc: Edoardo Tomelleri <e.tomell@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Artem Lapkin <email2tema@gmail.com>,
+ Zhang Ning <zhangn1985@qq.com>, Zhaofeng Li <hello@zhaofeng.li>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Amjad Ouled-Ameur <aouledameur@baylibre.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH v3 3/3] arm: dts: stm32mp13: add support of
-	RCC driver
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 0/3] cmd: pxe: support INITRD and FDT
+	selection with FIT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,385 +86,54 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: neil.armstrong@linaro.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Adds support of Clock and Reset drivers for STM32MP13 platform.
-
-Signed-off-by: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
-
-
----
-
-Changes in v3:
-- fix cosmetic
-- add comments in commit message
-- explanation of stm32 clock gating
-
-Changes in v2:
-- deference check_security() call back
-- use of ccf_clk_(enable/disable/get_rate/set_rate) ops
-- fix gate refcounting
-- documented structures in clock-core API
-- remove useless spinlocks
-- cosmetic changes
-- remove useless defines
-
- arch/arm/dts/stm32mp13-u-boot.dtsi |   4 +
- arch/arm/dts/stm32mp131.dtsi       | 119 +++++++++++------------------
- arch/arm/dts/stm32mp133.dtsi       |   4 +-
- arch/arm/dts/stm32mp13xc.dtsi      |   3 +-
- arch/arm/dts/stm32mp13xf.dtsi      |   3 +-
- 5 files changed, 54 insertions(+), 79 deletions(-)
-
-diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
-index 47a43649bb..3730f474b2 100644
---- a/arch/arm/dts/stm32mp13-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
-@@ -92,6 +92,10 @@
- 	u-boot,dm-pre-reloc;
- };
- 
-+&rcc {
-+	u-boot,dm-pre-reloc;
-+};
-+
- &scmi {
- 	u-boot,dm-pre-reloc;
- };
-diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
-index a1c6d0d00b..d893bc24b4 100644
---- a/arch/arm/dts/stm32mp131.dtsi
-+++ b/arch/arm/dts/stm32mp131.dtsi
-@@ -4,6 +4,8 @@
-  * Author: Alexandre Torgue <alexandre.torgue@foss.st.com> for STMicroelectronics.
-  */
- #include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/clock/stm32mp13-clks.h>
-+#include <dt-bindings/reset/stm32mp13-resets.h>
- 
- / {
- 	#address-cells = <1>;
-@@ -52,62 +54,6 @@
- 		};
- 	};
- 
--	clocks {
--		clk_axi: clk-axi {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <266500000>;
--		};
--
--		clk_hse: clk-hse {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <24000000>;
--		};
--
--		clk_hsi: clk-hsi {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <64000000>;
--		};
--
--		clk_lsi: clk-lsi {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <32000>;
--		};
--
--		clk_pclk3: clk-pclk3 {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <104438965>;
--		};
--
--		clk_pclk4: clk-pclk4 {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <133250000>;
--		};
--
--		clk_pll4_p: clk-pll4_p {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <50000000>;
--		};
--
--		clk_pll4_r: clk-pll4_r {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <99000000>;
--		};
--
--		clk_rtc_k: clk-rtc-k {
--			#clock-cells = <0>;
--			compatible = "fixed-clock";
--			clock-frequency = <32768>;
--		};
--	};
--
- 	intc: interrupt-controller@a0021000 {
- 		compatible = "arm,cortex-a7-gic";
- 		#interrupt-cells = <3>;
-@@ -155,7 +101,8 @@
- 			compatible = "st,stm32h7-uart";
- 			reg = <0x40010000 0x400>;
- 			interrupts = <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_hsi>;
-+			clocks = <&rcc UART4_K>;
-+			resets = <&rcc UART4_R>;
- 			status = "disabled";
- 		};
- 
-@@ -170,7 +117,8 @@
- 				     <GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_pclk4>;
-+			clocks = <&rcc DMA1>;
-+			resets = <&rcc DMA1_R>;
- 			#dma-cells = <4>;
- 			st,mem2mem;
- 			dma-requests = <8>;
-@@ -187,7 +135,8 @@
- 				     <GIC_SPI 69 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 70 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 71 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_pclk4>;
-+			clocks = <&rcc DMA2>;
-+			resets = <&rcc DMA2_R>;
- 			#dma-cells = <4>;
- 			st,mem2mem;
- 			dma-requests = <8>;
-@@ -196,13 +145,29 @@
- 		dmamux1: dma-router@48002000 {
- 			compatible = "st,stm32h7-dmamux";
- 			reg = <0x48002000 0x40>;
--			clocks = <&clk_pclk4>;
-+			clocks = <&rcc DMAMUX1>;
-+			resets = <&rcc DMAMUX1_R>;
- 			#dma-cells = <3>;
- 			dma-masters = <&dma1 &dma2>;
- 			dma-requests = <128>;
- 			dma-channels = <16>;
- 		};
- 
-+		rcc: rcc@50000000 {
-+			compatible = "st,stm32mp13-rcc", "syscon";
-+			reg = <0x50000000 0x1000>;
-+			#clock-cells = <1>;
-+			#reset-cells = <1>;
-+			interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
-+
-+			clock-names = "hse", "hsi", "csi", "lse", "lsi";
-+			clocks = <&scmi_clk CK_SCMI_HSE>,
-+				 <&scmi_clk CK_SCMI_HSI>,
-+				 <&scmi_clk CK_SCMI_CSI>,
-+				 <&scmi_clk CK_SCMI_LSE>,
-+				 <&scmi_clk CK_SCMI_LSI>;
-+		};
-+
- 		exti: interrupt-controller@5000d000 {
- 			compatible = "st,stm32mp13-exti", "syscon";
- 			interrupt-controller;
-@@ -213,14 +178,14 @@
- 		syscfg: syscon@50020000 {
- 			compatible = "st,stm32mp157-syscfg", "syscon";
- 			reg = <0x50020000 0x400>;
--			clocks = <&clk_pclk3>;
-+			clocks = <&rcc SYSCFG>;
- 		};
- 
- 		mdma: dma-controller@58000000 {
- 			compatible = "st,stm32h7-mdma";
- 			reg = <0x58000000 0x1000>;
- 			interrupts = <GIC_SPI 107 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_pclk4>;
-+			clocks = <&rcc MDMA>;
- 			#dma-cells = <5>;
- 			dma-channels = <32>;
- 			dma-requests = <48>;
-@@ -232,8 +197,9 @@
- 			reg = <0x58005000 0x1000>, <0x58006000 0x1000>;
- 			interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
- 			interrupt-names = "cmd_irq";
--			clocks = <&clk_pll4_p>;
-+			clocks = <&rcc SDMMC1_K>;
- 			clock-names = "apb_pclk";
-+			resets = <&rcc SDMMC1_R>;
- 			cap-sd-highspeed;
- 			cap-mmc-highspeed;
- 			max-frequency = <130000000>;
-@@ -246,8 +212,10 @@
- 			reg = <0x58007000 0x1000>, <0x58008000 0x1000>;
- 			interrupts = <GIC_SPI 108 IRQ_TYPE_LEVEL_HIGH>;
- 			interrupt-names = "cmd_irq";
--			clocks = <&clk_pll4_p>;
-+			clocks = <&rcc SDMMC2_K>;
- 			clock-names = "apb_pclk";
-+			resets = <&rcc SDMMC2_R>;
-+
- 			cap-sd-highspeed;
- 			cap-mmc-highspeed;
- 			max-frequency = <130000000>;
-@@ -257,7 +225,7 @@
- 		iwdg2: watchdog@5a002000 {
- 			compatible = "st,stm32mp1-iwdg";
- 			reg = <0x5a002000 0x400>;
--			clocks = <&clk_pclk4>, <&clk_lsi>;
-+			clocks = <&rcc IWDG2>, <&scmi_clk CK_SCMI_LSI>;
- 			clock-names = "pclk", "lsi";
- 			status = "disabled";
- 		};
-@@ -266,7 +234,8 @@
- 			compatible = "st,stm32mp1-rtc";
- 			reg = <0x5c004000 0x400>;
- 			interrupts-extended = <&exti 19 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_pclk4>, <&clk_rtc_k>;
-+			clocks = <&scmi_clk CK_SCMI_RTCAPB>,
-+				 <&scmi_clk CK_SCMI_RTC>;
- 			clock-names = "pclk", "rtc_ck";
- 			status = "disabled";
- 		};
-@@ -307,7 +276,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x0 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOA>;
- 				st,bank-name = "GPIOA";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 0 16>;
-@@ -319,7 +288,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x1000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOB>;
- 				st,bank-name = "GPIOB";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 16 16>;
-@@ -331,7 +300,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x2000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOC>;
- 				st,bank-name = "GPIOC";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 32 16>;
-@@ -343,7 +312,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x3000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOD>;
- 				st,bank-name = "GPIOD";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 48 16>;
-@@ -355,7 +324,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x4000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOE>;
- 				st,bank-name = "GPIOE";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 64 16>;
-@@ -367,7 +336,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x5000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOF>;
- 				st,bank-name = "GPIOF";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 80 16>;
-@@ -379,7 +348,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x6000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOG>;
- 				st,bank-name = "GPIOG";
- 				ngpios = <16>;
- 				gpio-ranges = <&pinctrl 0 96 16>;
-@@ -391,7 +360,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x7000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOH>;
- 				st,bank-name = "GPIOH";
- 				ngpios = <15>;
- 				gpio-ranges = <&pinctrl 0 112 15>;
-@@ -403,7 +372,7 @@
- 				interrupt-controller;
- 				#interrupt-cells = <2>;
- 				reg = <0x8000 0x400>;
--				clocks = <&clk_pclk4>;
-+				clocks = <&rcc GPIOI>;
- 				st,bank-name = "GPIOI";
- 				ngpios = <8>;
- 				gpio-ranges = <&pinctrl 0 128 8>;
-diff --git a/arch/arm/dts/stm32mp133.dtsi b/arch/arm/dts/stm32mp133.dtsi
-index 0fb1386257..531c263c9f 100644
---- a/arch/arm/dts/stm32mp133.dtsi
-+++ b/arch/arm/dts/stm32mp133.dtsi
-@@ -15,7 +15,7 @@
- 			interrupts = <GIC_SPI 20 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 22 IRQ_TYPE_LEVEL_HIGH>;
- 			interrupt-names = "int0", "int1";
--			clocks = <&clk_hse>, <&clk_pll4_r>;
-+			clocks = <&scmi_clk CK_SCMI_HSE>, <&rcc FDCAN_K>;
- 			clock-names = "hclk", "cclk";
- 			bosch,mram-cfg = <0x0 0 0 32 0 0 2 2>;
- 			status = "disabled";
-@@ -28,7 +28,7 @@
- 			interrupts = <GIC_SPI 21 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH>;
- 			interrupt-names = "int0", "int1";
--			clocks = <&clk_hse>, <&clk_pll4_r>;
-+			clocks = <&scmi_clk CK_SCMI_HSE>, <&rcc FDCAN_K>;
- 			clock-names = "hclk", "cclk";
- 			bosch,mram-cfg = <0x1400 0 0 32 0 0 2 2>;
- 			status = "disabled";
-diff --git a/arch/arm/dts/stm32mp13xc.dtsi b/arch/arm/dts/stm32mp13xc.dtsi
-index fa6889e305..4d00e75928 100644
---- a/arch/arm/dts/stm32mp13xc.dtsi
-+++ b/arch/arm/dts/stm32mp13xc.dtsi
-@@ -10,7 +10,8 @@
- 			compatible = "st,stm32mp1-cryp";
- 			reg = <0x54002000 0x400>;
- 			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_axi>;
-+			clocks = <&rcc CRYP1>;
-+			resets = <&rcc CRYP1_R>;
- 			status = "disabled";
- 		};
- 	};
-diff --git a/arch/arm/dts/stm32mp13xf.dtsi b/arch/arm/dts/stm32mp13xf.dtsi
-index fa6889e305..4d00e75928 100644
---- a/arch/arm/dts/stm32mp13xf.dtsi
-+++ b/arch/arm/dts/stm32mp13xf.dtsi
-@@ -10,7 +10,8 @@
- 			compatible = "st,stm32mp1-cryp";
- 			reg = <0x54002000 0x400>;
- 			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>;
--			clocks = <&clk_axi>;
-+			clocks = <&rcc CRYP1>;
-+			resets = <&rcc CRYP1_R>;
- 			status = "disabled";
- 		};
- 	};
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGksCgpPbiAyMS8xMS8yMDIyIDEzOjIzLCBRdWVudGluIFNjaHVseiB3cm90ZToKPiBIaSBQYXRy
+aWNrLAo+IAo+IFRoYW5rcyBmb3IgbG9va2luZyBhdCBpdC4KPiAKPiBPbiAxMC8yOC8yMiAxMTow
+MSwgUGF0cmljayBEZWxhdW5heSB3cm90ZToKPj4KPj4gU2luY2UgdGhlIGNvbW1pdCBkNWJhNjE4
+OGRmYmYgKCJjbWQ6IHB4ZV91dGlsczogQ2hlY2sgZmR0Y29udHJvbGFkZHIKPj4gaW4gbGFiZWxf
+Ym9vdCIpIHRoZSBGRFQgb3IgdGhlIEZEVERJUiBsYWJlbCBpcyByZXF1aXJlZCBpbiBleHRsaW51
+eC5jb25mCj4+IGFuZCB0aGUgZmFsbGJhY2sgZG9uZSBieSBib290bSBjb21tYW5kIHdoZW4gb25s
+eSB0aGUgZGV2aWNlIHRyZWUgaXMgcHJlc2VudAo+PiBpbiB0aGlzIGNvbW1hbmQgcGFyYW1ldGVy
+cyBpcyBubyBtb3JlIHBlcmZvcm1lZCB3aGVuIEZJVCBpcyB1c2VkIGZvcgo+PiBrZXJuZWwuCj4+
+Cj4+IFRoZSBuZXh0IGZpbGUgImV4dGxpbnV4LmNvbmYiIG5vIG1vcmUgc2VsZWN0cyB0aGUgZGV2
+aWNlIHRyZWUgaW4gRklUCj4+IGJ1dCB1c2UgdGhlIHB4ZSBmYWxsYmFjayB3aXRoIHRoZSBkZXZp
+Y2UgdHJlZSBvZiBVLUJvb3QuCj4+Cj4+IG1lbnUgdGl0bGUgU2VsZWN0IHRoZSBib290IG1vZGUK
+Pj4gREVGQVVMVCB0ZXN0Cj4+IExBQkVMIHRlc3QKPj4gwqDCoMKgwqDCoMKgwqDCoCBLRVJORUwg
+L2ZpdEltYWdlCj4+Cj4+IFRoaXMgc2VyaWUgcmVzdG9yZXMgdGhlIHBvc3NpYmlsaXR5IHRvIHVz
+ZSBhIEZJVCBpbiBleHRsaW51eC5jb25mCj4+IGJ5IHVzaW5nIEZEVCBsYWJlbCB3aXRoIHRoZSBz
+YW1lIHN0cmluZy4KPj4KPj4gbWVudSB0aXRsZSBTZWxlY3QgdGhlIGJvb3QgbW9kZQo+PiBERUZB
+VUxUIHRlc3QKPj4gTEFCRUwgdGVzdAo+PiDCoMKgwqDCoMKgwqDCoMKgIEtFUk5FTCAvZml0SW1h
+Z2UKPj4gwqDCoMKgwqDCoMKgwqDCoCBGRFQgL2ZpdEltYWdlCj4+Cj4+IGV2ZW4gd2hlbiBhIHNw
+ZWNpZmljIEZJVCBjb25maWcgaXMgdXNlZDoKPj4KPj4gbWVudSB0aXRsZSBTZWxlY3QgdGhlIGJv
+b3QgbW9kZQo+PiBERUZBVUxUIHRlc3QKPj4gTEFCRUwgdGVzdAo+PiDCoMKgwqDCoMKgwqDCoMKg
+IEtFUk5FTCAvZml0SW1hZ2UjY29uZmlnCj4+IMKgwqDCoMKgwqDCoMKgwqAgRkRUIC9maXRJbWFn
+ZSNjb25maWcKPj4KPj4gVGhlIGxhc3QgY29tbWl0IG9mIHRoZSBzZXJpZXMgaXMgb25seSBhIG1p
+bm9yIGltcHJvdmVtZW50Lgo+Pgo+IAo+IEkgdGVzdGVkIHRoaXMgb24gbXkgUHVtYSBSSzMzOTkg
+YW5kIGl0IGRvZXMgd29yayBhZ2FpbiwgdGhhbmtzLgo+IAo+IEhvd2V2ZXIsIEknbSBub3Qgc3Vy
+ZSB0aGlzIGlzIHdoYXQgd2Ugc2hvdWxkIGdvIGZvcj8KPiAKPiBNeSB3b3JyeSBpcyB0aGUgZm9s
+bG93aW5nOgo+IFdoYXQgaGFwcGVucyBmb3Igb2xkIHJlbGVhc2VzIChwcmUtdjIwMjIuMDQpIHdo
+ZXJlIEtFUk5FTCB3b3JrZWQganVzdCBmaW5lIHdpdGhvdXQgdGhlIEZEVCB0byBsb2FkIHRoZSBm
+ZHQgZnJvbSB0aGUgZml0aW1hZ2UgY29uZiBzcGVjaWZpZWQgaW4gS0VSTkVMIGZpZWxkPyBXb3Vs
+ZCB3ZSBub3cgbmVlZCB0byBrZWVwIGFuIGV4dGxpbnV4LmNvbmYgZm9yIHByZS0yMDIyLjA0IHJl
+bGVhc2VzIHdoZXJlIEZEVCB3b3VsZG4ndCBiZSBzZXQgYW5kIG9uZSBmb3IgMjAyMy4wMSBhbmQg
+bGF0ZXIgd2hlcmUgRkRUIHdvdWxkIGJlIG1lbnRpb25lZD8gVGhhdCBkb2VzIG5vdCBzZWVtIGxp
+a2UgYSBnb29kIHRoaW5nIGZvciBkaXN0cm9zLgo+IAo+IEkgdW5mb3J0dW5hdGVseSBjYW5ub3Qg
+YW5zd2VyIHRoZSBxdWVzdGlvbiBteXNlbGYgd2l0aG91dCBzcGVuZGluZyBzaWduaWZpY2FudCBl
+ZmZvcnQgcGF0Y2hpbmcgdjIwMjIuMDEgdG8gZ2V0IGl0IHRvIHdvcmsgb24gb3VyIFB1bWEgbW9k
+dWxlLiBEb2VzIGFueW9uZSBoYXZlIGFjY2VzcyB0byBhIGJvYXJkIHRvIHF1aWNrbHkgY2hlY2sg
+YW4gZXh0bGludXguY29uZiB3aXRoIEtFUk5FTCBhbmQgRkRUIHNldCB0byAvZml0SW1hZ2Ugb24g
+YSB2MjAyMi4wMSByZWxlYXNlPwoKSSdtIGJ1aWxkaW5nIGtpcmtzdG9uZSBpbWFnZXMgd2l0aCBt
+ZXRhLW1lc29uIGhhdmluZyB2MjAyMi4wMSwgSSdsbCB0ZXN0IHdpdGggRkRUIHNldCB0byAvZml0
+SW1hZ2UgdG8gc2VlIGlmIGl0IGJyZWFrcy4KCk5laWwKCj4gCj4gSXMgdGhlcmUgcmVhbGx5IG5v
+IG90aGVyIHdheSB0aGFuIGFkZGluZyB0aGlzIG5ldyByZXF1aXJlbWVudD8gKE5vdGhpbmcgYWdh
+aW5zdCBpdCBpZiBpdCBkb2VzIG5vdCBicmVhayBvbGRlciByZWxlYXNlcyB3aXRoIHRoZSAibmV3
+IiBleHRsaW51eC5jb25mIHRob3VnaCkuCj4gCj4gQ2hlZXJzLAo+IFF1ZW50aW4KCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxp
+bmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8v
+c3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMy
+Cg==

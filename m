@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6891D63A557
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Nov 2022 10:46:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68DA763A674
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Nov 2022 11:56:18 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2AF2FC65E59;
-	Mon, 28 Nov 2022 09:46:26 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 12D66C65E59;
+	Mon, 28 Nov 2022 10:56:18 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5ED24C65E58
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7E165C6507A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Nov 2022 09:46:24 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Mon, 28 Nov 2022 10:56:17 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2AS8tSGQ006048; Mon, 28 Nov 2022 10:46:23 +0100
+ 2AS96ank017240; Mon, 28 Nov 2022 11:56:12 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=efdBS8GVeTnT/4dL/vMGgTPwN+Lq+HyLaZ2hBoni5ys=;
- b=7q08HwRXnV08Uh8oC0CMOHMJW0I0C7B8mJ9ExYxsYrgASw+Q/fR7TOzCuVgvkU/LhZ3m
- qs1HyrNIbjGubdDvrQ7nxZhPReQPBhU55KevM7W+I24yzhIgW0KBxFU4//7qWAvWuLLS
- LJyr2rAHtUR9nWrQtvseeLZzqJUgJP4QO/oEb4Jr9CJ9zDR0zNyGkoQKPPQH1tibDxZW
- X/VRfK3Fwv9bWK2SV/WWQRF8BiIe+ixzeDyYb7ekB+EgD/djkZUhjXI9JzTalMsvAfs2
- KfHTkWDUjunuMo30acam6eefzm80Krv/y6FRqm6wjCw2dRSDzF4vAr8IjfgIG/A8OyDt qA== 
+ bh=9O3PuRwd4T6CATmS/ohC4n5m6PCWDGTu0sUWDAHk9Sc=;
+ b=fHTyNXr2RsbB60Qe6DpFGGU1sbFOwA/KzrPwAmSjgqQOoDGPEC/jdsqhAeWYHpFKDb27
+ 4iYafF9i5qARFTvsuw8Y3oKUSrMzx0tESyR1CsZO/FB8ZjLY7++E2blSYCBK25OMi4DQ
+ dJApUqT2w+RWkdGzIdks/033Dtjdnv8opVlcdWRQcDlSIrOG2ZAmEdq769e85sO0565t
+ so7BDywEx52UdTNn8j4eoRR3uhZ9fatMfsGE1WDrBc33cRJ4Pa/PkM9WCCdZjfHOY28j
+ tySarMaV+DIaAsDHamQb4HfDh4LMs/Vo0WHmMu1JYC5fZ9Sg7kQcNf753o45gNIA0YyG qw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m3ajq9wkv-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m393rjpjg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Nov 2022 10:46:21 +0100
+ Mon, 28 Nov 2022 11:56:12 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3A0B6100039;
- Mon, 28 Nov 2022 10:46:17 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31FCA216EF5;
- Mon, 28 Nov 2022 10:46:17 +0100 (CET)
-Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 28 Nov
- 2022 10:46:16 +0100
-Message-ID: <0a8a6908-c7f2-52a2-45f9-1d71c2646ef5@foss.st.com>
-Date: Mon, 28 Nov 2022 10:46:16 +0100
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2B48510002A;
+ Mon, 28 Nov 2022 11:56:07 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 24A4D207FFB;
+ Mon, 28 Nov 2022 11:56:07 +0100 (CET)
+Received: from [10.211.0.247] (10.211.0.247) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Mon, 28 Nov
+ 2022 11:56:06 +0100
+Message-ID: <bd2d5217-6561-bf93-1486-69df9032f1f4@foss.st.com>
+Date: Mon, 28 Nov 2022 11:56:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
 Content-Language: en-US
-To: Olivier Moysan <olivier.moysan@foss.st.com>, <u-boot@lists.denx.de>
-References: <20221123152016.27936-1-olivier.moysan@foss.st.com>
- <20221123162012.2.Ifb433baf31af3661271d98b7c155958aa5f7afdb@changeid>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20221123162012.2.Ifb433baf31af3661271d98b7c155958aa5f7afdb@changeid>
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221128102154.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20221128102154.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
+X-Originating-IP: [10.211.0.247]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-28_07,2022-11-25_01,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] adc: stm32mp15: add support of
- generic channels binding
+ definitions=2022-11-28_09,2022-11-28_01,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Lukasz Majewski <lukma@denx.de>,
+ Christophe KERELLO <christophe.kerello@foss.st.com>,
+ Boris Brezillon <bbrezillon@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH] dfu: mtd: mark bad the MTD block on erase
+ error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,107 +74,86 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+Hi Patrick
 
-On 11/23/22 16:20, Olivier Moysan wrote:
-> Add support of generic IIO channels binding:
-> ./devicetree/bindings/iio/adc/adc.yaml
-> Keep support of st,adc-channels for backward compatibility.
->
-> Signed-off-by: Olivier Moysan <olivier.moysan@foss.st.com>
+On 11/28/22 10:22, Patrick Delaunay wrote:
+> In the MTD DFU backend, it is needed to mark the NAND block bad when the
+> erase failed with the -EIO error, as it is done in UBI and JFFS2 code.
+> 
+> This operation is not done in the MTD framework, but the bad block
+> tag (in BBM or in BBT) is required to avoid to write data on this block
+> in the next DFU_OP_WRITE loop in mtd_block_op(): the code skip the bad
+> blocks, tested by mtd_block_isbad().
+> 
+> Without this patch, when the NAND block become bad on DFU write operation
+> - low probability on new NAND - the DFU write operation will always failed
+> because the failing block is never marked bad.
+> 
+> This patch also adds a test to avoid to request an erase operation on a
+> block already marked bad; this test is not performed in MTD framework
+> in mtd_erase().
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
->
->   drivers/adc/stm32-adc.c | 51 ++++++++++++++++++++++++++++++++++++-----
->   1 file changed, 45 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/adc/stm32-adc.c b/drivers/adc/stm32-adc.c
-> index 1250385fbb92..85efc119dbf1 100644
-> --- a/drivers/adc/stm32-adc.c
-> +++ b/drivers/adc/stm32-adc.c
-> @@ -200,24 +200,63 @@ static int stm32_adc_legacy_chan_init(struct udevice *dev, unsigned int num_chan
->   	return ret;
->   }
->   
-> +static int stm32_adc_generic_chan_init(struct udevice *dev, unsigned int num_channels)
-> +{
-> +	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
-> +	struct stm32_adc *adc = dev_get_priv(dev);
-> +	ofnode child;
-> +	int val, ret;
+> 
+>  drivers/dfu/dfu_mtd.c | 26 ++++++++++++++++++--------
+>  1 file changed, 18 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
+> index c7075f12eca9..4fb02c4c806c 100644
+> --- a/drivers/dfu/dfu_mtd.c
+> +++ b/drivers/dfu/dfu_mtd.c
+> @@ -91,22 +91,32 @@ static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
+>  				return -EIO;
+>  			}
+>  
+> +			/* Skip the block if it is bad, don't erase it again */
+> +			if (mtd_block_isbad(mtd, off)) {
+> +				erase_op.addr += mtd->erasesize;
+> +				continue;
+> +			}
 > +
-> +	ofnode_for_each_subnode(child, dev_ofnode(dev)) {
-> +		ret = ofnode_read_u32(child, "reg", &val);
-> +		if (ret) {
-> +			dev_err(dev, "Missing channel index %d\n", ret);
-> +			return ret;
-> +		}
-> +
-> +		if (val >= adc->cfg->max_channels) {
-> +			dev_err(dev, "Invalid channel %d\n", val);
-> +			return -EINVAL;
-> +		}
-> +
-> +		uc_pdata->channel_mask |= 1 << val;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->   static int stm32_adc_chan_of_init(struct udevice *dev)
->   {
->   	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
->   	struct stm32_adc *adc = dev_get_priv(dev);
->   	unsigned int num_channels;
->   	int ret;
-> -
-> -	ret = stm32_adc_get_legacy_chan_count(dev);
-> -	if (ret < 0)
-> -		return ret;
-> -	num_channels = ret;
-> +	bool legacy = false;
-> +
-> +	num_channels = dev_get_child_count(dev);
-> +	/* If no channels have been found, fallback to channels legacy properties. */
-> +	if (!num_channels) {
-> +		legacy = true;
-> +
-> +		ret = stm32_adc_get_legacy_chan_count(dev);
-> +		if (!ret) {
-> +			dev_err(dev, "No channel found\n");
-> +			return -ENODATA;
-> +		} else if (ret < 0) {
-> +			return ret;
-> +		}
-> +		num_channels = ret;
-> +	}
->   
->   	if (num_channels > adc->cfg->max_channels) {
->   		dev_err(dev, "too many st,adc-channels: %d\n", num_channels);
->   		return -EINVAL;
->   	}
->   
-> -	ret = stm32_adc_legacy_chan_init(dev, num_channels);
-> +	if (legacy)
-> +		ret = stm32_adc_legacy_chan_init(dev, num_channels);
-> +	else
-> +		ret = stm32_adc_generic_chan_init(dev, num_channels);
->   	if (ret < 0)
->   		return ret;
->   
+>  			ret = mtd_erase(mtd, &erase_op);
+>  
+>  			if (ret) {
+> -				/* Abort if its not a bad block error */
+> -				if (ret != -EIO) {
+> -					printf("Failure while erasing at offset 0x%llx\n",
+> -					       erase_op.fail_addr);
+> -					return 0;
+> +				/* If this is not -EIO, we have no idea what to do. */
+> +				if (ret == -EIO) {
+> +					printf("Marking bad block at 0x%08llx (%d)\n",
+> +					       erase_op.fail_addr, ret);
+> +					ret = mtd_block_markbad(mtd, erase_op.addr);
+> +				}
+> +				/* Abort if it is not -EIO or can't mark bad */
+> +				if (ret) {
+> +					printf("Failure while erasing at offset 0x%llx (%d)\n",
+> +					       erase_op.fail_addr, ret);
+> +					return ret;
+>  				}
+> -				printf("Skipping bad block at 0x%08llx\n",
+> -				       erase_op.addr);
+>  			} else {
+>  				remaining -= mtd->erasesize;
+>  			}
+>  
+> -			/* Continue erase behind bad block */
+> +			/* Continue erase behind the current block */
+>  			erase_op.addr += mtd->erasesize;
+>  		}
+>  	}
 
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
-Patrick
-
-
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

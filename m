@@ -2,62 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2E09638948
-	for <lists+uboot-stm32@lfdr.de>; Fri, 25 Nov 2022 12:56:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA56463A346
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Nov 2022 09:41:41 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5A0C0C65E4B;
-	Fri, 25 Nov 2022 11:56:47 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 97909C6507A;
+	Mon, 28 Nov 2022 08:41:41 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
+ [209.85.208.44])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00896C65E43
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2FDEDC63325
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 25 Nov 2022 11:56:45 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2AP8DuEI029091; Fri, 25 Nov 2022 12:56:43 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=aCMPHCOCl0iEzG/TR/5z7dNpUYj1q2Z0uTbVuY84er8=;
- b=gW7o7G0w6URmS++SYvCVGAVlop+PhD56uu8eFrK0wQ61QVmhc0Gfuzwm8c2KbTQ3rPrP
- N5RT/b/lzu0SO2jYCxpHyTs5mNCnS0qgZ4y2PN8PVv+RodQtRAd4HUy2E1f2lDBUVe2u
- wnDPuNpCZ19eqJJvS+JbLonQeTEgFt8Q1/pHjclWbrA/l2t+LNxKGgEybnBIrK2EzABW
- 3Ga76lu7aVa7nwhwVWtIUxFRz3v8vEe+RPOXcqz6sHFG96pbGEhIzn6n8ccLdty1XI6c
- EwtogTobcJhYHd5zpFK7SmeoBIeqY+ug7cx1Hsu8coPPE21PCZOCMcWlTuC3CQA46Vl6 AA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m10c4vcst-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 25 Nov 2022 12:56:43 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E92F1100034;
- Fri, 25 Nov 2022 12:56:37 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E0BE4218D1B;
- Fri, 25 Nov 2022 12:56:37 +0100 (CET)
-Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 25 Nov
- 2022 12:56:37 +0100
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 25 Nov 2022 12:56:29 +0100
-Message-ID: <20221125125600.1.I04ba2df902dce6162fd1cc11153417c1935d0ea9@changeid>
-X-Mailer: git-send-email 2.25.1
+ Mon, 28 Nov 2022 08:41:40 +0000 (UTC)
+Received: by mail-ed1-f44.google.com with SMTP id z18so14391466edb.9
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 28 Nov 2022 00:41:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TC0T9OkyLy+fI7+EhilYnNH3p+JlTMoNkHGjGbBu3P8=;
+ b=ZTvlDom66YrwMUrzIDzS3FrQDST3QcC98O806K2xQbZewwfptMsdKLyZT6bBFKI3Ip
+ QpX/J+aZ+OGMq7iF1fNQ3VrE9IQlFS8y2s2NhRqJsEoCxsfDH2vXzmUFJpqj9QLxnK7W
+ BpUNWzuBakAi+1vAgyewpTagbeUivTYJZS9gaas8tb2HboK/nvVxpaUvQtDx4ZkRms3c
+ pvoD2yrtP5oWMZg1V2BKzE0Q+UFv5uDSvJltxNnJkNkgPkLTAXsPrU5j/ukuucYVnC2u
+ O+MZDtbb9uqUD7uRrm7nDMOykRT93qYxBlqYNaHPRKLujsO4metJQ3c0HRN/LK+YHG5e
+ CfIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TC0T9OkyLy+fI7+EhilYnNH3p+JlTMoNkHGjGbBu3P8=;
+ b=MH0jlPA9mK+XC+P3q8OeAhnUUZKke0IVgisXbPRiCoMKxFzPZbEqGmLVSOE00wSzsJ
+ c7c08yoENugXXLNZjAW4Bq2bGnngfRdTYyEHPf+DxfavsC2Z4moEO5+0k0anj00iJ2zU
+ /bc/7jDXFmVNOgOPOoGZmeeV5fKtLHYXXIc8/LiT6feIYmx3nG8c/CUmh5BTONFCfV2T
+ +KSJ7bDakr80TU6BE7LGNW+9zD5+rI4j3XBiW1nJWrJDzdW+DzoYoxl95jFnA611396b
+ c6yCMt5zTjORqPX8P//380CusKqMfq2pllRqy2kscxX6iStwkJgnY4HZy8qIAHKW9XBz
+ sM3w==
+X-Gm-Message-State: ANoB5pnOfkHn/AI1PCua4ex0iK/MWDBtbsJPKOKSKG1svs9LPae0GXm1
+ z0Zip2i7YNzIEUIc6hjNFDE=
+X-Google-Smtp-Source: AA0mqf4PRo5tD2rCOkNHi/O19JIXWPz5CnAbOuW2onPptoRordEunrIwVJbl1eCMmtYvgST5maLh5Q==
+X-Received: by 2002:a05:6402:5021:b0:460:5340:d522 with SMTP id
+ p33-20020a056402502100b004605340d522mr34834518eda.87.1669624899583; 
+ Mon, 28 Nov 2022 00:41:39 -0800 (PST)
+Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ cd10-20020a170906b34a00b007aa239cf4d9sm4671961ejb.89.2022.11.28.00.41.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Nov 2022 00:41:39 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: u-boot@lists.denx.de
+Date: Mon, 28 Nov 2022 09:41:21 +0100
+Message-Id: <20221128084122.3456680-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-25_04,2022-11-25_01,2022-06-22_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>, Du Huanpeng <dhu@hodcarrier.org>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, Adam Ford <aford173@gmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Etienne CARRIERE <etienne.carriere@linaro.org>
-Subject: [Uboot-stm32] [PATCH] firmware: scmi: use protocol node name to
-	bind the scmi regulator driver
+ Simon Glass <sjg@chromium.org>, Heiko Thiery <heiko.thiery@gmail.com>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
+Subject: [Uboot-stm32] [PATCH v5 0/1] Makefile: rework u-boot-initial-env
+	target
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,122 +80,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In scmi firmware driver, it is better to bind the scmi protocol driver
-"scmi_voltage_domain" with the node name of the protocol 17 and not
-the sub-node named "regulator", because is a fixed string which doesn't
-provide information and because it is not aligned with the other scmi
-protocol nodes.
-
-For example on stm32mp135f-dk board with device tree in stm32mp131.dtsi
-
-scmi: scmi {
-	compatible = "linaro,scmi-optee";
-	#address-cells = <1>;
-	#size-cells = <0>;
-	linaro,optee-channel-id = <0>;
-	shmem = <&scmi_shm>;
-	scmi_clk: protocol@14 {
-		reg = <0x14>;
-		#clock-cells = <1>;
-	};
-	scmi_reset: protocol@16 {
-		reg = <0x16>;
-		#reset-cells = <1>;
-	};
-	scmi_voltd: protocol@17 {
-		reg = <0x17>;
-		scmi_regu: regulators {
-			#address-cells = <1>;
-			#size-cells = <0>;
-			scmi_reg11: voltd-reg11 {
-				reg = <VOLTD_SCMI_REG11>;
-				regulator-name = "reg11";
-			};
-			scmi_reg18: voltd-reg18 {
-				reg = <VOLTD_SCMI_REG18>;
-				regulator-name = "reg18";
-			};
-			scmi_usb33: voltd-usb33 {
-				reg = <VOLTD_SCMI_USB33>;
-				regulator-name = "usb33";
-			};
-		};
-	};
-};
-
-Before the patch:
-
-> dm tree
-
- scmi_agent    0  [ + ]   scmi-over-optee       |-- scmi
- clk           1  [ + ]   scmi_clk              |   |-- protocol@14
- ...
- reset         1  [   ]   scmi_reset_domain     |   |-- protocol@16
- nop           2  [ + ]   scmi_voltage_domain   |   `-- regulators
- regulator     0  [ + ]   scmi_regulator        |       |-- voltd-reg11
- regulator     1  [ + ]   scmi_regulator        |       |-- voltd-reg18
- regulator     2  [ + ]   scmi_regulator        |       |-- voltd-usb33
- ...
-
-after the patch:
-
-> dm tree
-
- scmi_agent    0  [ + ]   scmi-over-optee       |-- scmi
- clk           1  [ + ]   scmi_clk              |   |-- protocol@14
- ...
- reset         1  [   ]   scmi_reset_domain     |   |-- protocol@16
- nop           2  [ + ]   scmi_voltage_domain   |   `-- protocol@17
- regulator     0  [ + ]   scmi_regulator        |       |-- voltd-reg11
- regulator     1  [ + ]   scmi_regulator        |       |-- voltd-reg18
- regulator     2  [ + ]   scmi_regulator        |       |-- voltd-usb33
- ...
-
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- drivers/firmware/scmi/scmi_agent-uclass.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index 8f48de30c8cc..9a32678617d7 100644
---- a/drivers/firmware/scmi/scmi_agent-uclass.c
-+++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -60,6 +60,7 @@ static int scmi_bind_protocols(struct udevice *dev)
- {
- 	int ret = 0;
- 	ofnode node;
-+	const char *name;
- 
- 	dev_for_each_subnode(node, dev) {
- 		struct driver *drv = NULL;
-@@ -71,6 +72,7 @@ static int scmi_bind_protocols(struct udevice *dev)
- 		if (ofnode_read_u32(node, "reg", &protocol_id))
- 			continue;
- 
-+		name = ofnode_get_name(node);
- 		switch (protocol_id) {
- 		case SCMI_PROTOCOL_ID_CLOCK:
- 			if (IS_ENABLED(CONFIG_CLK_SCMI))
-@@ -100,8 +102,7 @@ static int scmi_bind_protocols(struct udevice *dev)
- 			continue;
- 		}
- 
--		ret = device_bind(dev, drv, ofnode_get_name(node), NULL, node,
--				  NULL);
-+		ret = device_bind(dev, drv, name, NULL, node, NULL);
- 		if (ret)
- 			break;
- 	}
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+RnJvbTogTWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5hY2hlckB0b3JhZGV4LmNvbT4KCgpX
+aXRoIENPTkZJR19MVE8gZW5hYmxlZCB0aGUgY3VycmVudCB3YXkgb2YgZXh0cmFjdGluZyB0aGUK
+Y29uZmlndXJlZCBlbnZpcm9ubWVudCBubyBsb25nZXIgd29ya3MsIGkuZS4gdGhlIG9iamVjdCBm
+aWxlCmNvbnRlbnQgY2hhbmdlcyBkdWUgdG8gTFRPLgoKQnVpbGQgYSBob3N0IHRvb2wgd2hpY2gg
+cHJpbnRzIHRoZSBjb25maWd1cmVkIGVudmlyb25tZW50IGluc3RlYWQKb2YgdXNpbmcgb2JqY29w
+eSBhbmQgZnJpZW5kcyB0byBhY2hpdmUgdGhlIHNhbWUuCgpUaGUgY29kZSBhbmQgTWFrZWZpbGUg
+Y2hhbmdlcyB3ZXJlIG1vc3RseSBzdG9sZW4gZnJvbSB0b29scy9lbnYvCmkuZS4gdGhlIHRhcmdl
+dCB1c2Vyc3BhY2UgdG9vbHMgdG8gYWNjZXNzIHRoZSBlbnZpcm9ubWVudC4KCgpDaGFuZ2VzIGlu
+IHY1OgotIGRvbid0IGJ1aWxkIHRoZSBwcmludGluaXRpYWxlbnYgdG9vbCB1bmNvbmRpdGlvbmFs
+bHkgYnV0IGJ1aWxkIGl0CiAgb25seSBhcyBwYXJ0IG9mIHRoZSB1LWJvb3QtaW5pdGlhbC1lbnYg
+dGFyZ2V0LgogIFRoaXMgbm8gbG9uZ2VyIGZhaWxzIHRoZSAnbWFrZSB0b29scy1vbmx5X2RlZmNv
+bmZpZyB0b29scy1vbmx5JwogIHVzZS1jYXNlIHdoaWNoIGlzIHJlcG9ydGVkIGJ5IFRvbSBSaW5p
+LgogIEFkZGluZyB0aGUgJChlbnZfaCkgZGVwZW5kZW5jaWVzIHRvIHRoZSB0b29scyB0YXJnZXQg
+bWlnaHQgZ2l2ZQogIGNpcmN1bGFyIGRlcGVuZGVuY2llcyBpc3N1ZXMgd2l0aCBzb21lIGZ1dHVy
+ZSB0b29sLgotIGFkZCBBY2tlZC1ieTogUGFsaSBSb2jDoXIgPHBhbGlAa2VybmVsLm9yZz4KCkNo
+YW5nZXMgaW4gdjQ6Ci0gYWRkICcob2JqdHJlZSkvJyB3aGVuIGNhbGxpbmcgdGhlIHRvb2wuIFN1
+Z2dlc3RlZCBieSBQYWxpIFJvaMOhci4KLSByZW5hbWVkIHBhdGNoLCBhcyBtb3JlIHRoYW4ganVz
+dCB0aGUgTWFrZWZpbGUgaGFzIGNoYW5nZXMKCkNoYW5nZXMgaW4gdjM6Ci0gbW92ZWQgdGhlIHRv
+b2wgZnJvbSBzY3JpcHRzLyB0byB0b29scy8uIFN1Z2dlc3RlZCBieSBUb20gUmluaQotIGNoYW5n
+ZWQgdGhlIGRlcGVuZGVuY2llcyB0byAnJChlbnZfaCknIGFuZCAndG9vbHMnLgogIFN1Z2dlc3Rl
+ZCBieSBUb20gUmluaSBhbmQgUGFsaSBSb2jDoXIuCi0gcmVtb3ZlZCB0aGUgc2VkIHJ1bGUgd2hp
+Y2ggcmVwbGFjZXMgXHgwMCB3aXRoIFx4MEEgYXMgdGhpcyBpcyBhbHJlYWR5CiAgZG9uZSBieSB0
+aGUgdG9vbC4gU3VnZ2VzdGVkIGJ5IFBhbGkgUm9ow6FyLgoKQ2hhbmdlcyBpbiB2MjoKLSByZXdv
+cmtlZCB0byBidWlsZCBhIGhvc3QgdG9vbCB3aGljaCBwcmludHMgdGhlIGNvbmZpZ3VyZWQKICBl
+bnZpcm9ubWVudCBhcyBwcm9wb3NlZCBieSBQYWxpIFJvaMOhcgogIGh0dHBzOi8vbG9yZS5rZXJu
+ZWwub3JnL3UtYm9vdC8yMDIyMTAxODE3NDgyNy4xMzkzMjExLTEtbWF4Lm9zcy4wOUBnbWFpbC5j
+b20vCi0gcmVuYW1lZCBwYXRjaCwgdjEgdXNlZCAiTWFrZWZpbGU6IGZpeCB1LWJvb3QtaW5pdGlh
+bC1lbnYgdGFyZ2V0IGlmIGx0byBpcyBlbmFibGVkIgoKTWF4IEtydW1tZW5hY2hlciAoMSk6CiAg
+dS1ib290LWluaXRpYWwtZW52OiByZXdvcmsgbWFrZSB0YXJnZXQKCiBNYWtlZmlsZSAgICAgICAg
+ICAgICAgICB8IDEwICsrKysrKy0tLS0KIHRvb2xzLy5naXRpZ25vcmUgICAgICAgIHwgIDEgKwog
+dG9vbHMvTWFrZWZpbGUgICAgICAgICAgfCAgNCArKysrCiB0b29scy9wcmludGluaXRpYWxlbnYu
+YyB8IDQ0ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCiA0IGZpbGVz
+IGNoYW5nZWQsIDU1IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25zKC0pCiBjcmVhdGUgbW9kZSAx
+MDA2NDQgdG9vbHMvcHJpbnRpbml0aWFsZW52LmMKCi0tIAoyLjM1LjMKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlz
+dApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQt
+bWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

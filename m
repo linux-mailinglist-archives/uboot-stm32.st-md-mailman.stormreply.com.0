@@ -2,75 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E241763A347
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Nov 2022 09:41:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3355063A4C4
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Nov 2022 10:22:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A3D18C65E59;
-	Mon, 28 Nov 2022 08:41:42 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com
- [209.85.218.54])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CB062C65E58;
+	Mon, 28 Nov 2022 09:22:31 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7D40DC640ED
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01B79C64113
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Nov 2022 08:41:41 +0000 (UTC)
-Received: by mail-ej1-f54.google.com with SMTP id vp12so22643163ejc.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Nov 2022 00:41:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=95Ccw1OHIlU8aJ0+cVh3HT3PGgcJW2huX+adMniGKtQ=;
- b=QxNwcdCtoIMztmMRfNS4JetfxNQ9Zkb8wKm+tDtFG7K77CTjwR5Fs/Vr9wUgzcl+Wp
- 4ueMGwaZbUCW866/GI3zKLaKyAVA21jhuBX2F2YbCb0A1nYUVmi/ffpjUGcOU+5NvAgp
- 7qYh7utRR1l4QjwJEkL1JZx+acovM1d9TqzPQbiY5R/5txeHrRwNZJPOIqnXlGEe0Pnq
- RLEkUpnclQS8GW04ve/Elia/ZH2fq2BI4k1m+P2hq3JB+fjgTAMuM9ERglpjVwOo4xcS
- S7zb3OYBw4xiIB6cd/bBoQzbLA1ycgfvDsj04Yo0FiCnq9Jx5uVoIdUdbqAKcpuMl9lL
- 2GTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=95Ccw1OHIlU8aJ0+cVh3HT3PGgcJW2huX+adMniGKtQ=;
- b=zh579ijw36mRL8HwRyQNVkqx3md/jGpKdeQ23TQ7M9myk+RKKDyNwWdazo6EaIUQEq
- SFQtGiofYQoqdg4HdfmcZWMeSXkBmIfku7QcpyjDuYKxgOjFbmBjEcIUFx9KtB7bLzi7
- eklFoMht2XXeSXmCTv1Deoiaf6RFyb01Iv2KwhpjrCv8/lzN0i0ZKoKWHG0QeJoN1HIw
- xtXWWXPnXprE8l+Twaeu1WNYothY3UXS9kGeb/tVywnqouIlmjhO9tuuKjfQV9ErmRs/
- agBKlaZ+6/8XXxT/cXeBOgJhPIZ6Tt/tjz7kvfJ5thhEA4nGynHe6nDu2weRmU0Md178
- MnGw==
-X-Gm-Message-State: ANoB5pkG05J4YKNucXsNdSuRiXFCN6fLLGOYNxlZpuUuZjx3ZeI80pNf
- zVe+DOzcYJ6abKVebOz077I=
-X-Google-Smtp-Source: AA0mqf5Gr99PAOPol5nQs17zc5lIumOtYlB0/1tVLwSBroN9GsKfU+F0ncK65PUTpYoI5F84YFuwrA==
-X-Received: by 2002:a17:906:c303:b0:7ad:95d2:9df2 with SMTP id
- s3-20020a170906c30300b007ad95d29df2mr41236252ejz.607.1669624901110; 
- Mon, 28 Nov 2022 00:41:41 -0800 (PST)
-Received: from linuxdev2.toradex.int (31-10-206-125.static.upc.ch.
- [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- cd10-20020a170906b34a00b007aa239cf4d9sm4671961ejb.89.2022.11.28.00.41.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Nov 2022 00:41:40 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-To: u-boot@lists.denx.de
-Date: Mon, 28 Nov 2022 09:41:22 +0100
-Message-Id: <20221128084122.3456680-2-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20221128084122.3456680-1-max.oss.09@gmail.com>
-References: <20221128084122.3456680-1-max.oss.09@gmail.com>
+ Mon, 28 Nov 2022 09:22:29 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 2AS93cHQ016733; Mon, 28 Nov 2022 10:22:24 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=KLysYKj6Q1vkWOxOoSFmm6FaNUQcvsMF98aHORsp418=;
+ b=EzaGOvlaC7hfh9WoOtiIW0dCf+FA5jRqRej6RwFaa+sZlcsYOgEnjefjpT+KzQJWUz56
+ Hf9npgTZM6s49iQMgxeqQsVptEhCGZfPMM9n8F3Whjsupwrj8i/kMlf9c0IFv7qi+FQy
+ avl0q2eV/F5gecK+0eZnxoqFWGBQHMlsA7EX2QKS3zN1jqtNVVUsxj6olGPQrbNDh16y
+ M1pj+Bh9zM89ne8j2tCr48j0OW0xI/hfGFegJHpJxm1bq/jWl3et9lgKjFpzsDQz7h2E
+ WkHcYtoqxCz3DdKw6bYrc83vaLICQiBXA8BqFjAp1mlGJNBfVJ2gVjHNF8DziniJrGXT fA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m3b16hn3b-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 28 Nov 2022 10:22:24 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3353F10002A;
+ Mon, 28 Nov 2022 10:22:19 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2012F216833;
+ Mon, 28 Nov 2022 10:22:19 +0100 (CET)
+Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 28 Nov
+ 2022 10:22:16 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 28 Nov 2022 10:22:03 +0100
+Message-ID: <20221128102154.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Du Huanpeng <dhu@hodcarrier.org>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, Adam Ford <aford173@gmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Samuel Holland <samuel@sholland.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-28_07,2022-11-25_01,2022-06-22_01
+Cc: Christophe KERELLO <christophe.kerello@foss.st.com>,
+ Boris Brezillon <bbrezillon@kernel.org>, Lukasz Majewski <lukma@denx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Heiko Thiery <heiko.thiery@gmail.com>,
- Stefan Roese <sr@denx.de>, =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>
-Subject: [Uboot-stm32] [PATCH v5 1/1] u-boot-initial-env: rework make target
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] dfu: mtd: mark bad the MTD block on erase
+	error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,94 +71,82 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-RnJvbTogTWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5hY2hlckB0b3JhZGV4LmNvbT4KCldp
-dGggTFRPIGVuYWJsZWQgdGhlIFUtQm9vdCBpbml0aWFsIGVudmlyb25tZW50IGlzIG5vIGxvbmdl
-ciBzdG9yZWQKaW4gYW4gZWFzeSBhY2Nlc3NpYmxlIHNlY3Rpb24gaW4gZW52L2NvbW1vbi5vLiBJ
-LmUuIHRoZSBzZWN0aW9uIG5hbWUKY2hhbmdlcyBmcm9tIGJ1aWxkIHRvIGJ1aWxkLCBpdHMgY29u
-dGVudCBtYXliZSBjb21wcmVzc2VkIGFuZCBpdCBpcwphbm5vdGF0ZWQgd2l0aCBhZGRpdGlvbmFs
-IGRhdGEuCgpEcm9wIHRyeWluZyB0byByZWFkIHRoZSBpbml0aWFsIGVudiB3aXRoIGVsZiB0b29s
-cyBmcm9tIHRoZSBjb21waWxlcgpzcGVjaWZpYyBvYmplY3QgZmlsZSBpbiBmYXZvdXIgb2YgYWRk
-aW5nIGFuZCB1c2luZyBhIGhvc3QgdG9vbCB3aXRoCnRoZSBvbmx5IGZ1bmN0aW9uYWxpdHkgb2Yg
-cHJpbnRpbmcgdGhlIGluaXRpYWwgZW52IHRvIHN0ZG91dC4KClNlZSBhbHNvOgpodHRwczovL2xv
-cmUua2VybmVsLm9yZy9hbGwvOTI3YjEyMmUtMWY2Mi1lNzkwLWY1Y2EtMzBiYWU0MzMyYzc3QGZv
-c3Muc3QuY29tLwoKU2lnbmVkLW9mZi1ieTogTWF4IEtydW1tZW5hY2hlciA8bWF4LmtydW1tZW5h
-Y2hlckB0b3JhZGV4LmNvbT4KQWNrZWQtYnk6IFBhbGkgUm9ow6FyIDxwYWxpQGtlcm5lbC5vcmc+
-CgotLS0KCkNoYW5nZXMgaW4gdjU6Ci0gZG9uJ3QgYnVpbGQgdGhlIHByaW50aW5pdGlhbGVudiB0
-b29sIHVuY29uZGl0aW9uYWxseSBidXQgYnVpbGQgaXQKICBvbmx5IGFzIHBhcnQgb2YgdGhlIHUt
-Ym9vdC1pbml0aWFsLWVudiB0YXJnZXQuCiAgVGhpcyBubyBsb25nZXIgZmFpbHMgdGhlICdtYWtl
-IHRvb2xzLW9ubHlfZGVmY29uZmlnIHRvb2xzLW9ubHknCiAgdXNlLWNhc2Ugd2hpY2ggaXMgcmVw
-b3J0ZWQgYnkgVG9tIFJpbmkuCiAgQWRkaW5nIHRoZSAkKGVudl9oKSBkZXBlbmRlbmNpZXMgdG8g
-dGhlIHRvb2xzIHRhcmdldCBtaWdodCBnaXZlCiAgY2lyY3VsYXIgZGVwZW5kZW5jaWVzIGlzc3Vl
-cyB3aXRoIHNvbWUgZnV0dXJlIHRvb2wuCi0gYWRkIEFja2VkLWJ5OiBQYWxpIFJvaMOhciA8cGFs
-aUBrZXJuZWwub3JnPgoKQ2hhbmdlcyBpbiB2NDoKLSBhZGQgJyhvYmp0cmVlKS8nIHdoZW4gY2Fs
-bGluZyB0aGUgdG9vbC4gU3VnZ2VzdGVkIGJ5IFBhbGkgUm9ow6FyLgotIHJlbmFtZWQgcGF0Y2gs
-IGFzIG1vcmUgdGhhbiBqdXN0IHRoZSBNYWtlZmlsZSBoYXMgY2hhbmdlcwoKQ2hhbmdlcyBpbiB2
-MzoKLSBtb3ZlZCB0aGUgdG9vbCBmcm9tIHNjcmlwdHMvIHRvIHRvb2xzLy4gU3VnZ2VzdGVkIGJ5
-IFRvbSBSaW5pCi0gY2hhbmdlZCB0aGUgZGVwZW5kZW5jaWVzIHRvICckKGVudl9oKScgYW5kICd0
-b29scycuCiAgU3VnZ2VzdGVkIGJ5IFRvbSBSaW5pIGFuZCBQYWxpIFJvaMOhci4KLSByZW1vdmVk
-IHRoZSBzZWQgcnVsZSB3aGljaCByZXBsYWNlcyBceDAwIHdpdGggXHgwQSBhcyB0aGlzIGlzIGFs
-cmVhZHkKICBkb25lIGJ5IHRoZSB0b29sLiBTdWdnZXN0ZWQgYnkgUGFsaSBSb2jDoXIuCgpDaGFu
-Z2VzIGluIHYyOgotIHJld29ya2VkIHRvIGJ1aWxkIGEgaG9zdCB0b29sIHdoaWNoIHByaW50cyB0
-aGUgY29uZmlndXJlZAogIGVudmlyb25tZW50IGFzIHByb3Bvc2VkIGJ5IFBhbGkgUm9ow6FyCiAg
-aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjIxMDE4MTc0ODI3LjEzOTMyMTEtMS1t
-YXgub3NzLjA5QGdtYWlsLmNvbS8KLSByZW5hbWVkIHBhdGNoLCB2MSB1c2VkICJNYWtlZmlsZTog
-Zml4IHUtYm9vdC1pbml0aWFsLWVudiB0YXJnZXQgaWYgbHRvIGlzIGVuYWJsZWQiCgogTWFrZWZp
-bGUgICAgICAgICAgICAgICAgfCAxMCArKysrKystLS0tCiB0b29scy8uZ2l0aWdub3JlICAgICAg
-ICB8ICAxICsKIHRvb2xzL01ha2VmaWxlICAgICAgICAgIHwgIDQgKysrKwogdG9vbHMvcHJpbnRp
-bml0aWFsZW52LmMgfCA0NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KwogNCBmaWxlcyBjaGFuZ2VkLCA1NSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQogY3Jl
-YXRlIG1vZGUgMTAwNjQ0IHRvb2xzL3ByaW50aW5pdGlhbGVudi5jCgpkaWZmIC0tZ2l0IGEvTWFr
-ZWZpbGUgYi9NYWtlZmlsZQppbmRleCAyZDI0YWMzOTU5Zi4uMzJlNGJlZjEwZjUgMTAwNjQ0Ci0t
-LSBhL01ha2VmaWxlCisrKyBiL01ha2VmaWxlCkBAIC0yNDM5LDExICsyNDM5LDEzIEBAIGVuZGlm
-CiAJJChRKSQoTUFLRSkgLWYgJChzcmN0cmVlKS9zY3JpcHRzL01ha2VmaWxlLm1vZHBvc3QKIAog
-cXVpZXRfY21kX2dlbmVudiA9IEdFTkVOViAgJEAKLWNtZF9nZW5lbnYgPSAkKE9CSkNPUFkpIC0t
-ZHVtcC1zZWN0aW9uIC5yb2RhdGEuZGVmYXVsdF9lbnZpcm9ubWVudD0kQCBlbnYvY29tbW9uLm87
-IFwKLQlzZWQgLS1pbi1wbGFjZSAtZSAncy9ceDAwL1x4MEEvZycgJEA7IHNlZCAtLWluLXBsYWNl
-IC1lICcvXlxzKiQkL2QnICRAOyBcCi0Jc29ydCAtLWZpZWxkLXNlcGFyYXRvcj09IC1rMSwxIC0t
-c3RhYmxlICRAIC1vICRACitjbWRfZ2VuZW52ID0gXAorCSQob2JqdHJlZSkvdG9vbHMvcHJpbnRp
-bml0aWFsZW52IHwgXAorCXNlZCAtZSAnL15ccyokJC9kJyB8IFwKKwlzb3J0IC0tZmllbGQtc2Vw
-YXJhdG9yPT0gLWsxLDEgLS1zdGFibGUgLW8gJEAKIAotdS1ib290LWluaXRpYWwtZW52OiB1LWJv
-b3QuYmluCit1LWJvb3QtaW5pdGlhbC1lbnY6ICQoZW52X2gpIEZPUkNFCisJJChRKSQoTUFLRSkg
-JChidWlsZCk9dG9vbHMgJChvYmp0cmVlKS90b29scy9wcmludGluaXRpYWxlbnYKIAkkKGNhbGwg
-aWZfY2hhbmdlZCxnZW5lbnYpCiAKICMgQ29uc2lzdGVuY3kgY2hlY2tzCmRpZmYgLS1naXQgYS90
-b29scy8uZ2l0aWdub3JlIGIvdG9vbHMvLmdpdGlnbm9yZQppbmRleCBkM2E5M2ZmMjk0YS4uMjhl
-OGNlMmEwN2EgMTAwNjQ0Ci0tLSBhL3Rvb2xzLy5naXRpZ25vcmUKKysrIGIvdG9vbHMvLmdpdGln
-bm9yZQpAQCAtMjgsNiArMjgsNyBAQAogL214c2Jvb3QKIC9uY2IKIC9wcmVsaW5rLXJpc2N2Cisv
-cHJpbnRpbml0aWFsZW52CiAvcHJvZnRvb2wKIC9yZWxvY2F0ZS1yZWxhCiAvc3BsX3NpemVfbGlt
-aXQKZGlmZiAtLWdpdCBhL3Rvb2xzL01ha2VmaWxlIGIvdG9vbHMvTWFrZWZpbGUKaW5kZXggMjZi
-ZTBhN2JhMmUuLjgwYmM2MmJlZmNiIDEwMDY0NAotLS0gYS90b29scy9NYWtlZmlsZQorKysgYi90
-b29scy9NYWtlZmlsZQpAQCAtMjc1LDYgKzI3NSwxMCBAQCBjbGVhbi1kaXJzIDo9IGxpYiBjb21t
-b24KIAogYWx3YXlzIDo9ICQoaG9zdHByb2dzLXkpCiAKKyMgSG9zdCB0b29sIHRvIGR1bXAgdGhl
-IGN1cnJlbnRseSBjb25maWd1cmVkIGRlZmF1bHQgZW52aXJvbm1lbnQsCisjIGJ1aWxkIGl0IG9u
-IGRlbWFuZCwgaS5lLiBub3QgYWRkIGl0IHRvICdhbHdheXMnLgoraG9zdHByb2dzLXkgKz0gcHJp
-bnRpbml0aWFsZW52CisKICMgR2VuZXJhdGVkIExDRC92aWRlbyBsb2dvCiBMT0dPX0ggPSAkKG9i
-anRyZWUpL2luY2x1ZGUvYm1wX2xvZ28uaAogTE9HT19EQVRBX0ggPSAkKG9ianRyZWUpL2luY2x1
-ZGUvYm1wX2xvZ29fZGF0YS5oCmRpZmYgLS1naXQgYS90b29scy9wcmludGluaXRpYWxlbnYuYyBi
-L3Rvb2xzL3ByaW50aW5pdGlhbGVudi5jCm5ldyBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAw
-MDAwMDAwLi5jNThiMjM0ZDY3OQotLS0gL2Rldi9udWxsCisrKyBiL3Rvb2xzL3ByaW50aW5pdGlh
-bGVudi5jCkBAIC0wLDAgKzEsNDQgQEAKKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwt
-Mi4wKworLyoKKyAqIChDKSBDb3B5cmlnaHQgMjAyMgorICogTWF4IEtydW1tZW5hY2hlciwgVG9y
-YWRleAorICoKKyAqIFNuaXBwZXRzIHRha2VuIGZyb20gdG9vbHMvZW52L2Z3X2Vudi5jCisgKgor
-ICogVGhpcyBwcmludHMgdGhlIGxpc3Qgb2YgZGVmYXVsdCBlbnZpcm9ubWVudCB2YXJpYWJsZXMg
-YXMgY3VycmVudGx5CisgKiBjb25maWd1cmVkLgorICoKKyAqLworCisjaW5jbHVkZSA8c3RkaW8u
-aD4KKworLyogUHVsbCBpbiB0aGUgY3VycmVudCBjb25maWcgdG8gZGVmaW5lIHRoZSBkZWZhdWx0
-IGVudmlyb25tZW50ICovCisjaW5jbHVkZSA8bGludXgva2NvbmZpZy5oPgorCisjaWZuZGVmIF9f
-QVNTRU1CTFlfXworI2RlZmluZSBfX0FTU0VNQkxZX18gLyogZ2V0IG9ubHkgI2RlZmluZXMgZnJv
-bSBjb25maWcuaCAqLworI2luY2x1ZGUgPGNvbmZpZy5oPgorI3VuZGVmCV9fQVNTRU1CTFlfXwor
-I2Vsc2UKKyNpbmNsdWRlIDxjb25maWcuaD4KKyNlbmRpZgorCisjZGVmaW5lIERFRkFVTFRfRU5W
-X0lOU1RBTkNFX1NUQVRJQworI2luY2x1ZGUgPGdlbmVyYXRlZC9lbnZpcm9ubWVudC5oPgorI2lu
-Y2x1ZGUgPGVudl9kZWZhdWx0Lmg+CisKK2ludCBtYWluKHZvaWQpCit7CisJY2hhciAqZW52LCAq
-bnh0OworCisJZm9yIChlbnYgPSBkZWZhdWx0X2Vudmlyb25tZW50OyAqZW52OyBlbnYgPSBueHQg
-KyAxKSB7CisJCWZvciAobnh0ID0gZW52OyAqbnh0OyArK254dCkgeworCQkJaWYgKG54dCA+PSAm
-ZGVmYXVsdF9lbnZpcm9ubWVudFtzaXplb2YoZGVmYXVsdF9lbnZpcm9ubWVudCldKSB7CisJCQkJ
-ZnByaW50ZihzdGRlcnIsICIjIyBFcnJvcjogZW52aXJvbm1lbnQgbm90IHRlcm1pbmF0ZWRcbiIp
-OworCQkJCXJldHVybiAtMTsKKwkJCX0KKwkJfQorCQlwcmludGYoIiVzXG4iLCBlbnYpOworCX0K
-KwlyZXR1cm4gMDsKK30KLS0gCjIuMzUuMwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0
-LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVw
-bHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+In the MTD DFU backend, it is needed to mark the NAND block bad when the
+erase failed with the -EIO error, as it is done in UBI and JFFS2 code.
+
+This operation is not done in the MTD framework, but the bad block
+tag (in BBM or in BBT) is required to avoid to write data on this block
+in the next DFU_OP_WRITE loop in mtd_block_op(): the code skip the bad
+blocks, tested by mtd_block_isbad().
+
+Without this patch, when the NAND block become bad on DFU write operation
+- low probability on new NAND - the DFU write operation will always failed
+because the failing block is never marked bad.
+
+This patch also adds a test to avoid to request an erase operation on a
+block already marked bad; this test is not performed in MTD framework
+in mtd_erase().
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ drivers/dfu/dfu_mtd.c | 26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
+index c7075f12eca9..4fb02c4c806c 100644
+--- a/drivers/dfu/dfu_mtd.c
++++ b/drivers/dfu/dfu_mtd.c
+@@ -91,22 +91,32 @@ static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
+ 				return -EIO;
+ 			}
+ 
++			/* Skip the block if it is bad, don't erase it again */
++			if (mtd_block_isbad(mtd, off)) {
++				erase_op.addr += mtd->erasesize;
++				continue;
++			}
++
+ 			ret = mtd_erase(mtd, &erase_op);
+ 
+ 			if (ret) {
+-				/* Abort if its not a bad block error */
+-				if (ret != -EIO) {
+-					printf("Failure while erasing at offset 0x%llx\n",
+-					       erase_op.fail_addr);
+-					return 0;
++				/* If this is not -EIO, we have no idea what to do. */
++				if (ret == -EIO) {
++					printf("Marking bad block at 0x%08llx (%d)\n",
++					       erase_op.fail_addr, ret);
++					ret = mtd_block_markbad(mtd, erase_op.addr);
++				}
++				/* Abort if it is not -EIO or can't mark bad */
++				if (ret) {
++					printf("Failure while erasing at offset 0x%llx (%d)\n",
++					       erase_op.fail_addr, ret);
++					return ret;
+ 				}
+-				printf("Skipping bad block at 0x%08llx\n",
+-				       erase_op.addr);
+ 			} else {
+ 				remaining -= mtd->erasesize;
+ 			}
+ 
+-			/* Continue erase behind bad block */
++			/* Continue erase behind the current block */
+ 			erase_op.addr += mtd->erasesize;
+ 		}
+ 	}
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

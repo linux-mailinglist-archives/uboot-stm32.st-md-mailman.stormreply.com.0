@@ -2,76 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B95A06439C6
-	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Dec 2022 01:06:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0448B643E1F
+	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Dec 2022 09:11:25 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F716C65E6B;
-	Tue,  6 Dec 2022 00:06:11 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
- [209.85.218.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A586CC65E6E;
+	Tue,  6 Dec 2022 08:11:24 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 70F34C65E6A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1B365C65E6C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  6 Dec 2022 00:06:10 +0000 (UTC)
-Received: by mail-ej1-f46.google.com with SMTP id n20so2469305ejh.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 05 Dec 2022 16:06:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ndo3svFslN2+sMw2rTCOZ6oRaL8L6J9avwJSKY85Hcw=;
- b=EoPeb4AdcCLYXoYa0Qug+DeA965uQ2iW3KV/y85M3qrCwg6YiVbQogU6zxuW31U4cL
- SKyOwcr79fPF3c+FqvdsHgYilSk5Kuxl8l64t/TR23PqZXDzPX8eFDCUO9AbziryZyTT
- y9YRcMC1idvdSE9fYX97m0B0wov+xlVYWCD3s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ndo3svFslN2+sMw2rTCOZ6oRaL8L6J9avwJSKY85Hcw=;
- b=t9nECwWLOEKKoQBdDBtdADVYxwvfXk5UjMs7SqGSPrOR8NGnyNPaWONN2pCZV4tBwM
- dz2iT5W8Bipe4/U9/627Xqn93L7TAv3quOHEuaAJz8QWG0heeCiGJ3tedAn92Ii5K1/t
- M9j2DRbwp70xvCRv7Xaer5CPfg4a6VO9kr/ydsUEUVASFo6s0xLbykGfb6JKZ6/vlFhV
- Gkk8e6kmBn2cteL+++HCWaOOInISgnczIsPpGlihUC+mDrzZUb6dZ53/6J+7BjLijEsB
- Ns4l8E014knQ+nZd93NnRo6tyFMmR1OXMqH1Ny4+Mewp7ltqLFL5mMxNHpkabjGe8w3b
- Z/tg==
-X-Gm-Message-State: ANoB5pkn2pVnWdDIJ9AcWjHAnt5Xpt8eCLjzK6tCFmXt+KZTZjlcfd7s
- jeXmhrnTMgeqFBlSGsF1m/MJYwcLfYtUb37Kf1rWiA==
-X-Google-Smtp-Source: AA0mqf5bRkCTZmZxqFIqvWKGbMFdy77zyj2/8hyf60/fQYXMUJY3spP1ltkuiZsg1m1yWPWqW7EPznXAx0cQ0YuBXt8=
-X-Received: by 2002:a17:906:e87:b0:78d:b88f:1548 with SMTP id
- p7-20020a1709060e8700b0078db88f1548mr74074359ejf.221.1670285169529; Mon, 05
- Dec 2022 16:06:09 -0800 (PST)
+ Tue,  6 Dec 2022 08:11:23 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 2B63Hojg023741; Tue, 6 Dec 2022 09:11:14 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=aSo4LUkugPxYSo86GC58ik0iTQryXjVMVacaZ+whigs=;
+ b=ImRXyLme9E07Ti0p5T1kGqQXbKz3Is7+c/VHCP0r9Fa+v1k1DyFsfO5sJr1pKz4UfYXu
+ ds8OBrSiM0/DJ3DG1GaLgh8maNmpL/7Lq4ecrykOUm23VG3dfWz0HirVNCNLsPOSTXCl
+ +rjEEQI0lKglh7DwWpWta6qGcsVDpBOJcH67ajPHgkFRhKCwt7DUIgkMTsXy9vk/cKnj
+ j2iYh9fvyXn7xw10G8Ge3Y06LQFt7eyw6na0yu6tjW05jtZ2zWKrnGzjFRK8JKk7VgNZ
+ fdqYXe6qCM+z4StrTSSAEmy4utVf2BupK5kUHOqg5erO8tdffUd/lmLfrEq8tUdcGY3b fQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m7x7pqeh4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 06 Dec 2022 09:11:14 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E2DD010002A;
+ Tue,  6 Dec 2022 09:11:08 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BBB962132F6;
+ Tue,  6 Dec 2022 09:11:08 +0100 (CET)
+Received: from [10.201.20.130] (10.201.20.130) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 6 Dec
+ 2022 09:11:08 +0100
+Message-ID: <4de9711e-e109-e192-de27-cdb2726af669@foss.st.com>
+Date: Tue, 6 Dec 2022 09:11:07 +0100
 MIME-Version: 1.0
-References: <20221104224844.467576-1-sjg@chromium.org>
- <24ff452a-e787-1816-0c70-5e3c931bda7e@gmx.de>
- <CAPnjgZ3-EGARntQYTVsg0=yjkWvpiggq2HMLt=7ghtRx3RxQnw@mail.gmail.com>
- <CAPnjgZ3JWS7qo6xRVGWbDhoSrALUPNw-qGMqO8MmSSR6egtsTw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3JWS7qo6xRVGWbDhoSrALUPNw-qGMqO8MmSSR6egtsTw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Dec 2022 13:05:58 +1300
-Message-ID: <CAPnjgZ2+8=cFauCp9Z7GacPz-boveoiO0A=SeA3yFdFa8wnerw@mail.gmail.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Steven Lawrance <steven.lawrance@softathome.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Masahisa Kojima <masahisa.kojima@linaro.org>, Stefan Roese <sr@denx.de>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
- Sean Anderson <sean.anderson@seco.com>, Lukasz Majewski <lukma@denx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
- Marek Vasut <marex@denx.de>, Thomas Huth <thuth@redhat.com>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Scull <ascull@google.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Artem Lapkin <email2tema@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Andrew Davis <afd@ti.com>,
- John Keeping <john@metanate.com>, Ovidiu Panait <ovidiu.panait@windriver.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Etienne Carriere <etienne.carriere@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH v2 00/25] bootstd: Add a boot menu
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221110104905.3076915-1-patrick.delaunay@foss.st.com>
+ <20221110114828.1.Id1b34c2a5cfbd6b1fbc2f49e4d542c3954c1e9f2@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20221110114828.1.Id1b34c2a5cfbd6b1fbc2f49e4d542c3954c1e9f2@changeid>
+X-Originating-IP: [10.201.20.130]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-06_05,2022-12-05_01,2022-06-22_01
+Cc: Jaehoon Chung <jh80.chung@samsung.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>,
+ Wolfgang Denk <wd@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/8] env: mmc: introduced ENV_MMC_OFFSET
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,95 +79,86 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Heinrich (and anyone else),
 
-On Thu, 10 Nov 2022 at 15:15, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Heinrich,
->
-> On Mon, 7 Nov 2022 at 16:35, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Heinrich,
-> >
-> > On Mon, 7 Nov 2022 at 12:15, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 11/4/22 23:48, Simon Glass wrote:
-> > > > So far standard boot lacks a boot menu, although it is possible to create
-> > > > a rudimentary one using the existing 'bootmenu' command.
-> > > >
-> > > > Even then, this text-based menu offer only basic functionality and does
-> > > > not take full advantage of the displays which are common on many devices.
-> > > >
-> > > > This series provides a 'bootflow menu' command which allows the user to
-> > > > select from the available bootflows. An attempt is made to show the name
-> > > > of the available operating systems, by reading more information into the
-> > > > bootflow. A logo can be read also, where supported, so that this can be
-> > > > presented to the user when an option is highlighted.
-> > > >
-> > > > Full use is made of TrueType fonts, if enabled. For cases where only a
-> > > > serial console is available, it falls back to a simple text-based menu.
-> > >
-> > > Please, add the link to your design document
-> > >
-> > > https://docs.google.com/document/d/1VQeApnLlH6xKm_OI36AhWkJLUEd9OXEvIJXB8aM2de8/edit?resourcekey=0-DwgHpR2S8vJEJzvvwPb-AQ#heading=h.17wg41voij6q
-> > > is broken.
-> >
-> > What happens when you click that? It works for me.
-> >
-> > >
-> > > in future version of this series.
-> > >
-> > > The series leaves us with duplicate code in
-> > >
-> > > bootmenu_choice_entry() and eficonfig_choice_entry() as well as
-> > > bootmenu_loop() and bootmenu_autoboot_loop().
-> >
-> > Yes OK, but that is the case today and my series actually removes some
-> > duplicated code, so perhaps that could be cleaned up later?
-> >
-> > >
-> > > The bootmenu command relies heavily on ANSI sequences but VIDEO_ANSI is
-> > > disabled by default for CONFIG_EFI_LOADER=n which means that the
-> > > bootmenu command will not work anymore.
-> >
-> > Does it not work, or does it just work but in a serial fashion? I
-> > don't see ANSI codes as being necessary to show a menu.
-> >
-> > >
-> > > >
-> > > > All of this is implementing using a new 'expo' construct, a collection of
-> > >
-> > > Expo is not an English word. Expo is typically used as name of trade
-> > > fairs. Transaction probably is the right word to use here.
-> >
-> > That is debatable I think. Transaction is quite generic and appears in
-> > U-Boot >400 times. I think it will just be confusing, like the word
-> > 'metadata' used in the FWU stuff.
-> >
-> > Expo is short for exposition. My use of it is somewhat archaic
-> > perhaps, but even for the meaning you mention, a public exposition is
-> > not a bad description of what is provided here.
-> >
-> > I am not 100% convinced about 'expo' either. Do you have any other ideas?
-> >
-> > >
-> > > Files expo.c and scene.c are in boot/ which does not match a generic GUI
-> > > feature. They should be placed in lib/.
-> >
-> > Yes I was wondering about that, but thought that boot/ made at least
-> > some sense since the menu will only ever be used for booting...?
-> >
-> > I can move it, but I am a little nervous about that, since lib/
-> > normally has utility libraries. Perhaps lib/expo would be better?
->
-> Just to say that I replied to your comments on the doc also, so let me
-> know what you think.
 
-I'd like to get this applied now that -next is opening. Do you have
-any more comments?
+On 11/10/22 11:48, Patrick Delaunay wrote:
+> Introduce ENV_MMC_OFFSET defines.
+> It is a preliminary step to the next patches to simplify the code.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  env/mmc.c | 24 ++++++++++++++++++++----
+>  1 file changed, 20 insertions(+), 4 deletions(-)
+> 
+> diff --git a/env/mmc.c b/env/mmc.c
+> index c28f4c6c6dc0..42bcf7e775cc 100644
+> --- a/env/mmc.c
+> +++ b/env/mmc.c
+> @@ -24,6 +24,17 @@
+>  #define __STR(X) #X
+>  #define STR(X) __STR(X)
+>  
+> +#define ENV_MMC_INVALID_OFFSET ((s64)-1)
+> +
+> +/* Default ENV offset when not defined in Device Tree */
+> +#define ENV_MMC_OFFSET		CONFIG_ENV_OFFSET
+> +
+> +#if defined(CONFIG_ENV_OFFSET_REDUND)
+> +#define ENV_MMC_OFFSET_REDUND	CONFIG_ENV_OFFSET_REDUND
+> +#else
+> +#define ENV_MMC_OFFSET_REDUND	ENV_MMC_INVALID_OFFSET
+> +#endif
+> +
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+>  /*
+> @@ -94,12 +105,12 @@ static inline s64 mmc_offset(int copy)
+>  			return val;
+>  	}
+>  
+> -	defvalue = CONFIG_ENV_OFFSET;
+> +	defvalue = ENV_MMC_OFFSET;
+>  	propname = dt_prop.offset;
+>  
+>  #if defined(CONFIG_ENV_OFFSET_REDUND)
+>  	if (copy) {
+> -		defvalue = CONFIG_ENV_OFFSET_REDUND;
+> +		defvalue = ENV_MMC_OFFSET_REDUND;
+>  		propname = dt_prop.offset_redund;
+>  	}
+>  #endif
+> @@ -108,11 +119,11 @@ static inline s64 mmc_offset(int copy)
+>  #else
+>  static inline s64 mmc_offset(int copy)
+>  {
+> -	s64 offset = CONFIG_ENV_OFFSET;
+> +	s64 offset = ENV_MMC_OFFSET;
+>  
+>  #if defined(CONFIG_ENV_OFFSET_REDUND)
+>  	if (copy)
+> -		offset = CONFIG_ENV_OFFSET_REDUND;
+> +		offset = ENV_MMC_OFFSET_REDUND;
+>  #endif
+>  	return offset;
+>  }
+> @@ -122,6 +133,11 @@ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+>  {
+>  	s64 offset = mmc_offset(copy);
+>  
+> +	if (offset == ENV_MMC_INVALID_OFFSET) {
+> +		printf("Invalid ENV offset in MMC, copy=%d\n", copy);
+> +		return -ENOENT;
+> +	}
+> +
+>  	if (offset < 0)
+>  		offset += mmc->capacity;
+>  
 
-Regards,
-Simon
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

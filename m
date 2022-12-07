@@ -2,65 +2,101 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E87E643E56
-	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Dec 2022 09:17:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15F766450C8
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Dec 2022 02:08:45 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 56680C65E6E;
-	Tue,  6 Dec 2022 08:17:59 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B7E82C65E71;
+	Wed,  7 Dec 2022 01:08:44 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D224DC65E6C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E3E33C65E70
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  6 Dec 2022 08:17:57 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2B63HoXi023669; Tue, 6 Dec 2022 09:17:57 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=LweMDb45mEIDyZOSHM65RNkpDJmv+jBAxe5nkoi+hY0=;
- b=N9drWv6IWMNHDFSxRKOZdPx5SAo4Qtptwgb7LpeqnTlkTflyICsmdO2Is3BWTZmcDTkB
- 3DhfhWX5HvekSacXwVSJ2knW1UY53cL9+fccfQGbs4uoPmgeVSFTjcKOxvHTxXmVnTe+
- lm1KPHeTGXUXjJAY4hD8cXHASRXZMgbTpzhySaZ5D7/KUzu59QT/cfziiItzsMjDLd+/
- 8R8Vpued3QZwoBnyLFygWTzEQHQ/WqP/Jz79O9iS6lqdMYlKhv4TSTKuwi19KQIryuVq
- fyBNBXDWyA4Eu+cuXPys9AFuFa8HZLwBwJWbeHuC7btYl/uvB87yCartYbaOWahpa3AQ FA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m7x7pqfxb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 06 Dec 2022 09:17:57 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4580C10002A;
- Tue,  6 Dec 2022 09:17:53 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3E6752138E0;
- Tue,  6 Dec 2022 09:17:53 +0100 (CET)
-Received: from [10.201.20.130] (10.201.20.130) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 6 Dec
- 2022 09:17:52 +0100
-Message-ID: <07963d80-d534-e9b1-81d1-22eb8dbbab5f@foss.st.com>
-Date: Tue, 6 Dec 2022 09:17:52 +0100
+ Wed,  7 Dec 2022 01:08:42 +0000 (UTC)
+Received: by mail-ej1-f48.google.com with SMTP id gh17so10459523ejb.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 06 Dec 2022 17:08:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RRn3d/BZBBYMm8+N0ForMj0A1oHZpS9XVvYBvyQT4ls=;
+ b=S1bgEOGDAVRQBAniLLCW4NeDLP1PgGxH6/P9REHjPiltkR5gY2ANfU2kzooU/x7VLg
+ 0QcWT66hxEBM2G7n7sCZDYUp3lZL+mfxXv4rIcjc+SFEwcR+3OE/pvKuvhQqH+oOWF/R
+ 0vvb1GP/Lg70/wM/dmA+59xXTFeJ2M6w4W9/U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RRn3d/BZBBYMm8+N0ForMj0A1oHZpS9XVvYBvyQT4ls=;
+ b=ll0WT/rjEB/rgBCODsRDRZxwHQjlf13YFB5xr4d2GimccM89SkUC/RbUDcKDbATPDk
+ Y2VAmfBbBMl7b1dnPRBFznaBQ8r5M5f7cawH9ojBswR2/+K9pm2nCNaiNvMZekz6E7Bt
+ SirsvS9ffq5nhfBy7mgWFp25CLTSG/s1vesPib15JQXE+oBBgtRSGN/aqwMBOYkgbvco
+ ylLSL0GaenoYBp7zM3s9fGYVl0s7xjXHUTVrfIu791uiS6gEAvOZjjLBwcL4l/i8RfCP
+ lfsuZbvWiNWJlcBivwbhb46UUlY5OFfSKVXr7lOHd9t7zjfGSETggYGIpG18Fi1knSbx
+ SKTg==
+X-Gm-Message-State: ANoB5pkXEO73qgoREwp5U4d7e5Fxp2qBHBWRc0TOqhtatvfluWipJHIr
+ x3kFsCfMIWnMsicPinFSgVa7YLVXAeXQuwCBqQEldQ==
+X-Google-Smtp-Source: AA0mqf4dnUf8xTAHjt0ghBrfIuFJpOSdBSi2c+u5262qcFwekFZpCcoiJ/gL91cOcyH79aec5P6toQWIAzZdK9G3rso=
+X-Received: by 2002:a17:906:e87:b0:78d:b88f:1548 with SMTP id
+ p7-20020a1709060e8700b0078db88f1548mr77921245ejf.221.1670375321974; Tue, 06
+ Dec 2022 17:08:41 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20221110104905.3076915-1-patrick.delaunay@foss.st.com>
- <20221110114828.5.Ic76d234844d7f990415f7286b9b971c59ec8b35a@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20221110114828.5.Ic76d234844d7f990415f7286b9b971c59ec8b35a@changeid>
-X-Originating-IP: [10.201.20.130]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-06_05,2022-12-05_01,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 5/8] configs: stm32mp: activate
-	CONFIG_ENV_MMC_USE_DT
+References: <20221106224011.606743-1-sjg@chromium.org>
+In-Reply-To: <20221106224011.606743-1-sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 7 Dec 2022 14:08:29 +1300
+Message-ID: <CAPnjgZ0U=pwxYiPNJddn9Zs_UXrChuvoc7wDVJ_XyU2Z52pB_Q@mail.gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Angus Ainslie <angus@akkea.ca>, Kever Yang <kever.yang@rock-chips.com>,
+ Chin-Liang See <clsee@altera.com>, Ivan Mikhaylov <ivan.mikhaylov@siemens.com>,
+ Teresa Remmet <t.remmet@phytec.de>, Ley Foon Tan <ley.foon.tan@intel.com>,
+ Olaf Mandel <o.mandel@menlosystems.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Heiko Thiery <heiko.thiery@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Chee Tien Fong <tien.fong.chee@intel.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ =?UTF-8?Q?Pawe=C5=82_Anikiel?= <pan@semihalf.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, "Chia-Wei,
+ Wang" <chiawei_wang@aspeedtech.com>, kernel@puri.sm,
+ Mingkai Hu <mingkai.hu@nxp.com>, Le Jin <le.jin@siemens.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Marco Franchi <marcofrk@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Tim Harvey <tharvey@gateworks.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Ilko Iliev <iliev@ronetix.at>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Marek Vasut <marex@denx.de>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Andre Przywara <andre.przywara@arm.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Aswath Govindraju <a-govindraju@ti.com>,
+ Chee Hong Ang <chee.hong.ang@intel.com>, Adam Ford <aford173@gmail.com>,
+ Alifer Moraes <alifer.wsdm@gmail.com>, Roger Quadros <rogerq@ti.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ huang lin <hl@rock-chips.com>, Siew Chin Lim <elly.siew.chin.lim@intel.com>,
+ Lukasz Majewski <lukma@denx.de>, "Andrew F. Davis" <afd@ti.com>,
+ Dinh Nguyen <dinguyen@kernel.org>, Michael Walle <michael@walle.cc>,
+ Rajesh Bhagat <rajesh.bhagat@nxp.com>, Peter Geis <pgwipeout@gmail.com>,
+ Luca Ceresoli <luca@lucaceresoli.net>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>, u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH v4 0/7] binman: rockchip: Migrate from
+ rockchip SPL_FIT_GENERATOR script
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,78 +113,83 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Kevar,
 
+On Mon, 7 Nov 2022 at 11:40, Simon Glass <sjg@chromium.org> wrote:
+>
+> At present rockchip 64-bit boards make use of a FIT-generator script
+> written in Python. The script supports splitting an ELF file into several
+> 'loadable' nodes in the FIT. Binman does not current support this feature.
+>
+> This series adds binman support for ELF splitting. This works by adding a
+> new 'fit,operation' property to the FIT subnodes, allowing this new way of
+> generating nodes.
+>
+> Some other fixes and improvements are needed along the way.
+>
+> A new, common binman description is added for 64-bit boards which includes
+> the required u-boot.itb file.
+>
+> The existing script is removed, so that only a few zynq boards are now
+> using a SPL_FIT_GENERATOR script:
+>
+>    avnet_ultrazedev_cc_v1_0_ultrazedev_som_v1_0
+>    xilinx_zynqmp_virt
+>
+> Migration of those is hopefully in progress.
+>
+> Note however that tools/k3_fit_atf.sh remains, used by a few boards that
+> enable CONFIG_TI_SECURE_DEVICE so this series is copied there too:
+>
+>     am335x_hs_evm
+>     am335x_hs_evm_uart
+>     am43xx_hs_evm
+>     am57xx_hs_evm
+>     am57xx_hs_evm_usb
+>     am65x_hs_evm_a53
+>     am65x_hs_evm_r5
+>     dra7xx_hs_evm
+>     dra7xx_hs_evm_usb
+>     j721e_hs_evm_a72
+>     j721e_hs_evm_r5
+>     k2e_hs_evm
+>     k2g_hs_evm
+>     k2hk_hs_evm
+>     k2l_hs_evm
+>
+> Ivan Mikhaylov has sent a patch to help with these, but I need to take a
+> look at the testing side. In any case they should really be using binman
+> for the image generation.
+>
+> Changes in v4:
+> - Add new patch to disable USE_SPL_FIT_GENERATOR by default
+>
+> Changes in v3:
+> - Add an offset to the FIT description
+> - Add support for writing sections in binman
+> - Rebase to master
+>
+> Changes in v2:
+> - Rename op-tee to tee-os
+> - Drop use of .itb2
+> - Drop patches previously applied
+> - Add various suggestions from Alper Nebi Yasak
+> - Add patches to refactor binman's FIT support
+>
+> Simon Glass (7):
+>   binman: Allow writing section contents to a file
+>   rockchip: evb-rk3288: Drop raw-image support
+>   rockchip: Include binman script in 64-bit boards
+>   rockchip: Support building the all output files in binman
+>   rockchip: Convert all boards to use binman
+>   rockchip: Drop the FIT generator script
+>   treewide: Disable USE_SPL_FIT_GENERATOR by default
+>
 
-On 11/10/22 11:49, Patrick Delaunay wrote:
-> Activate by default CONFIG_ENV_MMC_USE_DT as "u-boot,mmc-env-partition"
-> should be always use in STMicroelectronics boards device tree to locate
-> the environment for mmc backend. The 2 defines:
->   CONFIG_ENV_OFFSET=0x280000
->   CONFIG_ENV_OFFSET_REDUND=0x2C0000
-> are only valid for spi-nor and not for SD-Card or eMMC.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  configs/stm32mp13_defconfig         | 1 +
->  configs/stm32mp15_basic_defconfig   | 1 +
->  configs/stm32mp15_defconfig         | 1 +
->  configs/stm32mp15_trusted_defconfig | 1 +
->  4 files changed, 4 insertions(+)
-> 
-> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-> index af6b1839d039..4cab07647349 100644
-> --- a/configs/stm32mp13_defconfig
-> +++ b/configs/stm32mp13_defconfig
-> @@ -46,6 +46,7 @@ CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->  CONFIG_SYS_MMC_ENV_DEV=-1
-> +CONFIG_ENV_MMC_USE_DT=y
->  CONFIG_CLK_SCMI=y
->  CONFIG_GPIO_HOG=y
->  CONFIG_DM_I2C=y
-> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-> index 86ebbef0a6c8..4a96ad22bcc8 100644
-> --- a/configs/stm32mp15_basic_defconfig
-> +++ b/configs/stm32mp15_basic_defconfig
-> @@ -91,6 +91,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
->  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->  CONFIG_SYS_MMC_ENV_DEV=-1
-> +CONFIG_ENV_MMC_USE_DT=y
->  # CONFIG_SPL_ENV_IS_NOWHERE is not set
->  # CONFIG_SPL_ENV_IS_IN_SPI_FLASH is not set
->  CONFIG_TFTP_TSIZE=y
-> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-> index caa79e68834f..151981849de9 100644
-> --- a/configs/stm32mp15_defconfig
-> +++ b/configs/stm32mp15_defconfig
-> @@ -65,6 +65,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
->  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->  CONFIG_SYS_MMC_ENV_DEV=-1
-> +CONFIG_ENV_MMC_USE_DT=y
->  CONFIG_TFTP_TSIZE=y
->  CONFIG_STM32_ADC=y
->  CONFIG_CLK_SCMI=y
-> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
-> index 3309c2e79246..098eedc9b727 100644
-> --- a/configs/stm32mp15_trusted_defconfig
-> +++ b/configs/stm32mp15_trusted_defconfig
-> @@ -66,6 +66,7 @@ CONFIG_ENV_UBI_VOLUME="uboot_config"
->  CONFIG_ENV_UBI_VOLUME_REDUND="uboot_config_r"
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->  CONFIG_SYS_MMC_ENV_DEV=-1
-> +CONFIG_ENV_MMC_USE_DT=y
->  CONFIG_TFTP_TSIZE=y
->  CONFIG_STM32_ADC=y
->  CONFIG_CLK_SCMI=y
+Can this one please be applied in time for the release?
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

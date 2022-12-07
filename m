@@ -2,72 +2,103 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D6315645E51
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Dec 2022 17:03:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 163D36460E7
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Dec 2022 19:11:06 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99CB7C6411C;
-	Wed,  7 Dec 2022 16:03:11 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B0D5CC6411C;
+	Wed,  7 Dec 2022 18:11:05 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com
+ [209.85.218.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C84BAC01E99
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 97080C01E99
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Dec 2022 16:03:09 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2B7EVq1k015570; Wed, 7 Dec 2022 17:03:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : from : to : cc : references : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=szcYNwbWzg4ukgdv3PLMXmoKL4ekOSBwkd5iePFOmuA=;
- b=sSPsm6PvlLlPBwcacffAHAYS4kaKeTURWsW0vxoe/R6A/b/BLqUjiRLBL6PtxAmCneUU
- bQl4XmYFdi+jTk9NP4iq5ja3c5z+k2+DC+yJHgEcO59gsMCc+Q7Exmfjh7f9/J1KgeSz
- hkR+LieiKguxgbd12MikPPuLZYFjBsKDFwX8a4XVpwS/vNWAq1zVy3bpmdNtKKcqYNcj
- iUAkrM3ADCw390Oc8MtLRST1I+ThzfveQxEsH3s2MZkNCduXhlZJkeQGtpripREQwI72
- SncQlEbtQAN6E/sDb6CuF/2I8MJzqz2eltXoXvOPQ1qRvka/qKGFcy7duewPoVZCNsu0 Wg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m7vff1pr8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 07 Dec 2022 17:03:00 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 43B4810002A;
- Wed,  7 Dec 2022 17:02:56 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3C9FB23D3F2;
- Wed,  7 Dec 2022 17:02:56 +0100 (CET)
-Received: from [10.201.20.130] (10.201.20.130) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Wed, 7 Dec
- 2022 17:02:55 +0100
-Message-ID: <d3ff4ff8-f723-b4ba-f373-a8bf3ffdf603@foss.st.com>
-Date: Wed, 7 Dec 2022 17:02:55 +0100
+ Wed,  7 Dec 2022 18:11:03 +0000 (UTC)
+Received: by mail-ej1-f54.google.com with SMTP id x22so15876331ejs.11
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 07 Dec 2022 10:11:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QPpATxMB+AngzOO9WO/UYFom3Si+qdB2E2dAx/Q+V6E=;
+ b=cxi+ruN3rQTlE1SlLNO8EWJjRWuh7EXKLSftf+UQMO5nnD1mueSu2iz3rWI5qKlH2b
+ +rsoVEsZ8Jyt//6wHBcbHkvkzWNBIsFuj+Kmx+5sq/skqKGbHN0/sv7iZXDXu4UHRTKm
+ 0Swt8L5a6s83Pwo/qn/lR2Lta9xAhYEbt9Fr8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QPpATxMB+AngzOO9WO/UYFom3Si+qdB2E2dAx/Q+V6E=;
+ b=ybqTw/zmonf445QbQTeC0ec+UzpQ0OkecGigwsmM/ss33vnTag/5phVCBOMP1HotYH
+ zgrNH/fXhGw8TOpQZG56I+irhElNQMpVck0pXOnemyuESM+6tNQ/rTGUAetbuurbDyrx
+ 2uVNPcfRI7B5RMSKYvbdcNEVlKfLG4gHQw+zD3xArrNpkY2GC06TCn6alFHE6BdIe8dH
+ TkntFFh+q5pueZNtoBPxBWBnR11NwHQTs7n27fAfOcEGBtiLvHKQg91rONM1C3nF76Zu
+ /6IHR29Y1tYH7VlxX+O5AVbAM+9r8MzxgQtCC9z8IPyDbXJfRwyvg3lpDDdDCrncu3Yz
+ SDNw==
+X-Gm-Message-State: ANoB5pn2P4kcuOl14Zg414KYFcq07WeyileWnrUQHOq7pKSYQItv4yly
+ 79Odp+65zSH1olTnRdwgvo02lRI9iM1Mb+PxWJCerw==
+X-Google-Smtp-Source: AA0mqf4RykIKjNpOaZ6lDdxFp/ZMA9NxaXppWUEDT+x/VaNEo2487Cpqu4R7XM5/eMRjEkQcrfIuqZZmR9E8vxBrRj8=
+X-Received: by 2002:a17:907:d412:b0:7bc:68cc:7913 with SMTP id
+ vi18-20020a170907d41200b007bc68cc7913mr49575050ejc.589.1670436662828; Wed, 07
+ Dec 2022 10:11:02 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Yann Gautier <yann.gautier@foss.st.com>, <u-boot@lists.denx.de>
-References: <20221102135349.102615-1-yann.gautier@foss.st.com>
- <20221102135349.102615-2-yann.gautier@foss.st.com>
- <6160c6e0-cc53-48ff-767b-e0a5f43ee7be@foss.st.com>
-In-Reply-To: <6160c6e0-cc53-48ff-767b-e0a5f43ee7be@foss.st.com>
-X-Originating-IP: [10.201.20.130]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-07_08,2022-12-07_01,2022-06-22_01
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Christophe KERELLO <christophe.kerello@foss.st.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+References: <20221106224011.606743-1-sjg@chromium.org>
+ <CAPnjgZ0U=pwxYiPNJddn9Zs_UXrChuvoc7wDVJ_XyU2Z52pB_Q@mail.gmail.com>
+ <f9bb49c1-df40-a4e8-9250-65aebfb826c4@theobroma-systems.com>
+In-Reply-To: <f9bb49c1-df40-a4e8-9250-65aebfb826c4@theobroma-systems.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 8 Dec 2022 07:10:51 +1300
+Message-ID: <CAPnjgZ1xitpKBRWxv21ZDxn_nkMuyTe5d4JS_1OKDhxO336qkA@mail.gmail.com>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Peng Fan <peng.fan@nxp.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Angus Ainslie <angus@akkea.ca>,
+ Kever Yang <kever.yang@rock-chips.com>, Chin-Liang See <clsee@altera.com>,
+ Ivan Mikhaylov <ivan.mikhaylov@siemens.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ley Foon Tan <ley.foon.tan@intel.com>, Olaf Mandel <o.mandel@menlosystems.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Heiko Thiery <heiko.thiery@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Chee Tien Fong <tien.fong.chee@intel.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ =?UTF-8?Q?Pawe=C5=82_Anikiel?= <pan@semihalf.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, "Chia-Wei,
+ Wang" <chiawei_wang@aspeedtech.com>, kernel@puri.sm,
+ Mingkai Hu <mingkai.hu@nxp.com>, Le Jin <le.jin@siemens.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Marco Franchi <marcofrk@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Tim Harvey <tharvey@gateworks.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Ilko Iliev <iliev@ronetix.at>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Marek Vasut <marex@denx.de>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Andre Przywara <andre.przywara@arm.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] ARM: dts: stm32: Drop MMCI
- interrupt-names
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Aswath Govindraju <a-govindraju@ti.com>,
+ Chee Hong Ang <chee.hong.ang@intel.com>, Adam Ford <aford173@gmail.com>,
+ Alifer Moraes <alifer.wsdm@gmail.com>, Roger Quadros <rogerq@ti.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ huang lin <hl@rock-chips.com>, Siew Chin Lim <elly.siew.chin.lim@intel.com>,
+ Teresa Remmet <t.remmet@phytec.de>, Lukasz Majewski <lukma@denx.de>,
+ "Andrew F. Davis" <afd@ti.com>, Dinh Nguyen <dinguyen@kernel.org>,
+ Michael Walle <michael@walle.cc>, Rajesh Bhagat <rajesh.bhagat@nxp.com>,
+ Peter Geis <pgwipeout@gmail.com>, Luca Ceresoli <luca@lucaceresoli.net>,
+ Bin Meng <bmeng.cn@gmail.com>, =?UTF-8?Q?Pali_Roh=C3=A1r?= <pali@kernel.org>,
+ u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH v4 0/7] binman: rockchip: Migrate from
+ rockchip SPL_FIT_GENERATOR script
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,114 +115,100 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Quentin,
 
+On Wed, 7 Dec 2022 at 23:19, Quentin Schulz
+<quentin.schulz@theobroma-systems.com> wrote:
+>
+> Hi Simon,
+>
+> On 12/7/22 02:08, Simon Glass wrote:
+> > Hi Kevar,
+> >
+> > On Mon, 7 Nov 2022 at 11:40, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> At present rockchip 64-bit boards make use of a FIT-generator script
+> >> written in Python. The script supports splitting an ELF file into several
+> >> 'loadable' nodes in the FIT. Binman does not current support this feature.
+> >>
+> >> This series adds binman support for ELF splitting. This works by adding a
+> >> new 'fit,operation' property to the FIT subnodes, allowing this new way of
+> >> generating nodes.
+> >>
+> >> Some other fixes and improvements are needed along the way.
+> >>
+> >> A new, common binman description is added for 64-bit boards which includes
+> >> the required u-boot.itb file.
+> >>
+> >> The existing script is removed, so that only a few zynq boards are now
+> >> using a SPL_FIT_GENERATOR script:
+> >>
+> >>     avnet_ultrazedev_cc_v1_0_ultrazedev_som_v1_0
+> >>     xilinx_zynqmp_virt
+> >>
+> >> Migration of those is hopefully in progress.
+> >>
+> >> Note however that tools/k3_fit_atf.sh remains, used by a few boards that
+> >> enable CONFIG_TI_SECURE_DEVICE so this series is copied there too:
+> >>
+> >>      am335x_hs_evm
+> >>      am335x_hs_evm_uart
+> >>      am43xx_hs_evm
+> >>      am57xx_hs_evm
+> >>      am57xx_hs_evm_usb
+> >>      am65x_hs_evm_a53
+> >>      am65x_hs_evm_r5
+> >>      dra7xx_hs_evm
+> >>      dra7xx_hs_evm_usb
+> >>      j721e_hs_evm_a72
+> >>      j721e_hs_evm_r5
+> >>      k2e_hs_evm
+> >>      k2g_hs_evm
+> >>      k2hk_hs_evm
+> >>      k2l_hs_evm
+> >>
+> >> Ivan Mikhaylov has sent a patch to help with these, but I need to take a
+> >> look at the testing side. In any case they should really be using binman
+> >> for the image generation.
+> >>
+> >> Changes in v4:
+> >> - Add new patch to disable USE_SPL_FIT_GENERATOR by default
+> >>
+> >> Changes in v3:
+> >> - Add an offset to the FIT description
+> >> - Add support for writing sections in binman
+> >> - Rebase to master
+> >>
+> >> Changes in v2:
+> >> - Rename op-tee to tee-os
+> >> - Drop use of .itb2
+> >> - Drop patches previously applied
+> >> - Add various suggestions from Alper Nebi Yasak
+> >> - Add patches to refactor binman's FIT support
+> >>
+> >> Simon Glass (7):
+> >>    binman: Allow writing section contents to a file
+> >>    rockchip: evb-rk3288: Drop raw-image support
+> >>    rockchip: Include binman script in 64-bit boards
+> >>    rockchip: Support building the all output files in binman
+> >>    rockchip: Convert all boards to use binman
+> >>    rockchip: Drop the FIT generator script
+> >>    treewide: Disable USE_SPL_FIT_GENERATOR by default
+> >>
+> >
+> > Can this one please be applied in time for the release?
+> >
+>
+> You still have review/questions left unanswered/unaddressed:
+> https://lore.kernel.org/u-boot/a29f8d62-c7be-60e7-8a79-b52f589a93e7@linaro.org/
+> https://lore.kernel.org/u-boot/67717a66-13d5-a72c-a34c-fac191a238ad@theobroma-systems.com/
+> https://lore.kernel.org/u-boot/67717a66-13d5-a72c-a34c-fac191a238ad@theobroma-systems.com/
 
-On 11/3/22 08:46, Patrice CHOTARD wrote:
-> 
-> 
-> On 11/2/22 14:53, Yann Gautier wrote:
->> From: Marek Vasut <marex@denx.de>
->>
->> The pl18x MMCI driver does not use the interrupt-names property,
->> the binding document has been updated to recommend this property
->> be unused, remove it.
->> Backport of Marek's Linux patch:
->> https://lore.kernel.org/linux-arm-kernel/20221013221242.218808-3-marex@denx.de/
->>
->> Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
->> Reviewed-by: Yann Gautier <yann.gautier@foss.st.com>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
->> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
->> ---
->>
->>  arch/arm/dts/stm32h743.dtsi  | 2 --
->>  arch/arm/dts/stm32mp131.dtsi | 2 --
->>  arch/arm/dts/stm32mp151.dtsi | 3 ---
->>  3 files changed, 7 deletions(-)
->>
->> diff --git a/arch/arm/dts/stm32h743.dtsi b/arch/arm/dts/stm32h743.dtsi
->> index ceb629c4fa..c490d0a571 100644
->> --- a/arch/arm/dts/stm32h743.dtsi
->> +++ b/arch/arm/dts/stm32h743.dtsi
->> @@ -339,7 +339,6 @@
->>  			arm,primecell-periphid = <0x10153180>;
->>  			reg = <0x52007000 0x1000>;
->>  			interrupts = <49>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&rcc SDMMC1_CK>;
->>  			clock-names = "apb_pclk";
->>  			resets = <&rcc STM32H7_AHB3_RESET(SDMMC1)>;
->> @@ -353,7 +352,6 @@
->>  			arm,primecell-periphid = <0x10153180>;
->>  			reg = <0x48022400 0x400>;
->>  			interrupts = <124>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&rcc SDMMC2_CK>;
->>  			clock-names = "apb_pclk";
->>  			resets = <&rcc STM32H7_AHB2_RESET(SDMMC2)>;
->> diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
->> index a1c6d0d00b..661d329b45 100644
->> --- a/arch/arm/dts/stm32mp131.dtsi
->> +++ b/arch/arm/dts/stm32mp131.dtsi
->> @@ -231,7 +231,6 @@
->>  			arm,primecell-periphid = <0x20253180>;
->>  			reg = <0x58005000 0x1000>, <0x58006000 0x1000>;
->>  			interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&clk_pll4_p>;
->>  			clock-names = "apb_pclk";
->>  			cap-sd-highspeed;
->> @@ -245,7 +244,6 @@
->>  			arm,primecell-periphid = <0x20253180>;
->>  			reg = <0x58007000 0x1000>, <0x58008000 0x1000>;
->>  			interrupts = <GIC_SPI 108 IRQ_TYPE_LEVEL_HIGH>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&clk_pll4_p>;
->>  			clock-names = "apb_pclk";
->>  			cap-sd-highspeed;
->> diff --git a/arch/arm/dts/stm32mp151.dtsi b/arch/arm/dts/stm32mp151.dtsi
->> index f0fb022fc6..8bbb1aef2e 100644
->> --- a/arch/arm/dts/stm32mp151.dtsi
->> +++ b/arch/arm/dts/stm32mp151.dtsi
->> @@ -1102,7 +1102,6 @@
->>  			arm,primecell-periphid = <0x00253180>;
->>  			reg = <0x48004000 0x400>;
->>  			interrupts = <GIC_SPI 137 IRQ_TYPE_LEVEL_HIGH>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&rcc SDMMC3_K>;
->>  			clock-names = "apb_pclk";
->>  			resets = <&rcc SDMMC3_R>;
->> @@ -1435,7 +1434,6 @@
->>  			arm,primecell-periphid = <0x00253180>;
->>  			reg = <0x58005000 0x1000>;
->>  			interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&rcc SDMMC1_K>;
->>  			clock-names = "apb_pclk";
->>  			resets = <&rcc SDMMC1_R>;
->> @@ -1450,7 +1448,6 @@
->>  			arm,primecell-periphid = <0x00253180>;
->>  			reg = <0x58007000 0x1000>;
->>  			interrupts = <GIC_SPI 124 IRQ_TYPE_LEVEL_HIGH>;
->> -			interrupt-names = "cmd_irq";
->>  			clocks = <&rcc SDMMC2_K>;
->>  			clock-names = "apb_pclk";
->>  			resets = <&rcc SDMMC2_R>;
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> Thanks
-> Patrice
-> _______________________________________________
-> Uboot-stm32 mailing list
-> Uboot-stm32@st-md-mailman.stormreply.com
-> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+Oh I see. I did v5 but never sent it out! Thanks for noticing it. I
+will get it out soon.
 
-Applied to u-boot-stm/master
-
-Thanks
-Patrice
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

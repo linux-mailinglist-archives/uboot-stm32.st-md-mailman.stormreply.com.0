@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81EAA645566
-	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Dec 2022 09:27:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9732D645567
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Dec 2022 09:27:14 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44D45C65E6B;
-	Wed,  7 Dec 2022 08:27:08 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5CB4AC65E6D;
+	Wed,  7 Dec 2022 08:27:14 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 15D13C65E69
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF7B6C65E6C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  7 Dec 2022 08:27:07 +0000 (UTC)
+ Wed,  7 Dec 2022 08:27:12 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2B73eoKZ015901; Wed, 7 Dec 2022 09:26:59 +0100
+ 2B73eoKf015901; Wed, 7 Dec 2022 09:27:08 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=IXcKSxIeyeZeevjdJzbs3fpGsbtEyv90XYDx5xXsI9k=;
- b=hLFCwtz7v4rzhAvepyMjGNJrJ0TsQ/z3u/BgyCfmGUAcRTJk+J3epT4eeAkVAum4IDa2
- 4PaA24vz0Y4B5jlTKinuZr1MV/Pf1G3xA6AKvQ37QCQUHNIFILxceQDTEy42Ib1Wn30U
- uPxEDOWH8H5rRtj4EfZ6dsFOWSbuhNsZJJECbiv4gkkXzudUESOZRkv1mUDVP/9MZiuC
- SvACw0MDXFJ5RqIqYkPMhsp37t4e+n24xZpJQWscVjt7j5GWIpkAcoBQGTsKF/LJBipS
- W1Rg+b1aqZUspi5oVYGIzdXDvIcYjnhqqKLqfiCtDRaMs+GXcGwu15VTC4ANkRFhmMQj Ow== 
+ bh=mPTNpfjrxptFZ9p6XJMjpQKbkfPmv6mQEt6jBSbJmWc=;
+ b=MSO4Eo5mJCUY3yLXT5wlJw0oJIcwrZlBYS15eDMULcyDGBHSlZPt39KNLzR/lGgAvLGS
+ MftcSJT2JFpPUaJcYBxWPpqgRZ5CSU7gtIux48gtnLcqynz2Ju5W2bBovov97yTchAG0
+ 8YQyvBARwHK8UAzE9k7S51iYc0hPvSu29wkbiRVu7AmuR2Dw6rSiU1s75oAfJQ1fK7d5
+ ZhMs/uP8BaTflZ7ntYnKdWf6AJbZ+7MQHJ2ugnvDvYzomXK9wwTXNWTTLE9QDZw27tn2
+ MygxKfFyp15SirA0+MBmgejXzQzqJfIcYaSDOnaLZC4qZ7kmaMWvi8KBfxGjbPHqWoUe xg== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m7vfexth4-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3m7vfexth7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 07 Dec 2022 09:26:58 +0100
+ Wed, 07 Dec 2022 09:27:06 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 98B4D10003E;
- Wed,  7 Dec 2022 09:26:48 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 66163100042;
+ Wed,  7 Dec 2022 09:26:49 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 938AD2194C9;
- Wed,  7 Dec 2022 09:26:48 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5F6AD2194C3;
+ Wed,  7 Dec 2022 09:26:49 +0100 (CET)
 Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Wed, 7 Dec
- 2022 09:26:47 +0100
+ 2022 09:26:48 +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 7 Dec 2022 09:26:41 +0100
-Message-ID: <20221207092619.2.I849d172d58c5b8ac785a9fd4e1ad3d0fec2f22ad@changeid>
+Date: Wed, 7 Dec 2022 09:26:42 +0100
+Message-ID: <20221207092619.3.I18679d6b943d4f01727b3eccbdc853a210c90077@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20221207082644.3515486-1-patrick.delaunay@foss.st.com>
 References: <20221207082644.3515486-1-patrick.delaunay@foss.st.com>
@@ -58,8 +58,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Chris Packham <chris.packham@alliedtelesis.co.nz>
-Subject: [Uboot-stm32] [PATCH 2/5] configs: x530: move
-	MTDPART/MTDIDS_DEFAULT in defconfig
+Subject: [Uboot-stm32] [PATCH 3/5] configs: SBx81LIFXCAT: move
+	MTDPART_DEFAULT in defconfig
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,43 +76,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Replace MTDIDS_DEFAULT and MTDPARTS_DEFAULT in the config include file by
-CONFIG_MTDIDS_DEFAULT and CONFIG_MTDPARTS_DEFAULT in defconfig to complete
-the Kconfig migration.
+Replace MTDPARTS_DEFAULT in the config include file by
+CONFIG_MTDPARTS_DEFAULT in defconfig to complete the Kconfig migration.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- configs/x530_defconfig | 2 ++
- include/configs/x530.h | 2 --
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ configs/SBx81LIFXCAT_defconfig | 1 +
+ include/configs/SBx81LIFXCAT.h | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/x530_defconfig b/configs/x530_defconfig
-index 2f8be2fcd776..70c08adcde97 100644
---- a/configs/x530_defconfig
-+++ b/configs/x530_defconfig
-@@ -57,6 +57,8 @@ CONFIG_CMD_EXT4=y
- CONFIG_CMD_FAT=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_CMD_MTDPARTS=y
-+CONFIG_MTDIDS_DEFAULT="nand0=nand"
-+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand:240M(user),8M(errlog),8M(nand-bbt)"
- CONFIG_CMD_UBI=y
+diff --git a/configs/SBx81LIFXCAT_defconfig b/configs/SBx81LIFXCAT_defconfig
+index 125871301e34..80dbbb11c9ba 100644
+--- a/configs/SBx81LIFXCAT_defconfig
++++ b/configs/SBx81LIFXCAT_defconfig
+@@ -35,6 +35,7 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_SNTP=y
+ # CONFIG_CMD_LED is not set
++CONFIG_MTDPARTS_DEFAULT="mtdparts=spi0.0:768K(boot)ro,256K(boot-env),14M(user),1M(errlog)"
+ CONFIG_DOS_PARTITION=y
+ CONFIG_OF_CONTROL=y
  CONFIG_ENV_OVERWRITE=y
- CONFIG_ARP_TIMEOUT=200
-diff --git a/include/configs/x530.h b/include/configs/x530.h
-index dee87cb77325..c213dc6074b0 100644
---- a/include/configs/x530.h
-+++ b/include/configs/x530.h
-@@ -32,8 +32,6 @@
+diff --git a/include/configs/SBx81LIFXCAT.h b/include/configs/SBx81LIFXCAT.h
+index 9a9663b34ba8..23d37394e076 100644
+--- a/include/configs/SBx81LIFXCAT.h
++++ b/include/configs/SBx81LIFXCAT.h
+@@ -21,7 +21,6 @@
+  * for your console driver.
+  */
  
- /* SPI NOR flash default params, used by sf commands */
+-#define MTDPARTS_DEFAULT "mtdparts=spi0.0:768K(boot)ro,256K(boot-env),14M(user),1M(errlog)"
+ #define MTDPARTS_MTDOOPS "errlog"
  
--#define MTDIDS_DEFAULT			"nand0=nand"
--#define MTDPARTS_DEFAULT		"mtdparts=nand:240M(user),8M(errlog),8M(nand-bbt)"
- #define MTDPARTS_MTDOOPS		"errlog"
- 
- /* Partition support */
+ /*
 -- 
 2.25.1
 

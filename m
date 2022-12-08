@@ -2,53 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB423647118
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Dec 2022 14:55:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF34564772C
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Dec 2022 21:24:08 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7D920C65067;
-	Thu,  8 Dec 2022 13:55:17 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4F343C65E63;
+	Thu,  8 Dec 2022 20:24:08 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+ [209.85.221.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2E4E2C6411C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AF952C65E5D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Dec 2022 13:55:16 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7E35F817FB;
- Thu,  8 Dec 2022 14:55:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1670507715;
- bh=eaohQgrJCJ0T4Dcbm6T7FKhtc0ZgTeJWJWrC3Irm5yM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hVTaSf+Wsr8aakjmsfjo3Ms8brVU/DA3fA+efw4bczTQc/A/baksNAa8HKVzBqRT+
- vujO2Q+KobuRCVrTV/1ekNihfIJgH161+jW0rzigjWCFAdpYNY0anIEb7IcnAzcxm0
- r70FNiDe2wBw3/oef15ww7X8hZ+XaKVqHqyIoIdgbh3IXwJURHta7KzIHTLDUL8Umc
- 2Pwc2rjEuDR+bSBIWQVnBuR1OD66lKy7eXK77ZuPY+pWGZ6wNxhPAwVN+Ber2YSCE5
- qdIQaH8c2VIWxfTlgVbLHIPDumca2JfIR//0VCZPH7/L2goC7dxSrDJ/5Na21CI9TE
- 6my0GplSzawZQ==
-Message-ID: <a868016a-e9cd-e47a-ccc1-6588686ea6c5@denx.de>
-Date: Thu, 8 Dec 2022 14:55:15 +0100
+ Thu,  8 Dec 2022 20:24:06 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id bx10so3090838wrb.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 08 Dec 2022 12:24:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YtqjhKxF1oISnLgVV7CJpFOuz+k8lFtG+TgfiQXrKcc=;
+ b=O7Ey6xHxX0H9hMiOzoSqe5cl4Uh5ibLdVIErUhpoi1etNv8lQ/++/5BreLttNQGGDU
+ Dvmqg8iuyG5MYvHsRD0tX24Ow9gutEYThLr74jx4+dE0YsgMxW3iLAa+r4DMSHighhKd
+ KTyb1NhY1RloYHZAvpzgvYplnlL1To9ZmW0vk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YtqjhKxF1oISnLgVV7CJpFOuz+k8lFtG+TgfiQXrKcc=;
+ b=1ZB6b7eNuIJAduqx1X8wheu6KiQwjD2D8us4qc7+a6sFsYsF0glvLswnBaLsy+3jsh
+ lxUXfnTJMv5GaQY7rUKfqOCjOnW3lB0em+n2dhpYUmVbwabgiyXFw7S7QAP61ODfMTEy
+ eH387yUlg/dYeeqxvBaznkPDyMtN7kCoccJev8iY6G3CeCk8pJPOgC9x9BRMTruTwzyY
+ 0YHlcaZC0fqGCVfo/bM3UtA80NTLoKG0OEF3gBrR4ci3NfWeexxasUWxN4InqKqJf+fI
+ bG7ryMFdmDNGifEP9aZwKuV/VXD0xdqCcCAH5b6DqPByBvShoK9CqrHJIg4erwg2/RvP
+ lIRA==
+X-Gm-Message-State: ANoB5pmtyyodFmak2VF5vNOIwiOCAykiAeqWxw6rP1XfVYFTbxbN/zzK
+ 4KUiyBo5u+4qZqKFLJrfBwSZ5g==
+X-Google-Smtp-Source: AA0mqf5L4wnh/Vwucak7qQg4xKXsCXetkQOS9QZ6hABlOrsu1EWw8Nmroj+G36k5xkGbwpFMHumvRw==
+X-Received: by 2002:adf:ed05:0:b0:242:1ea7:2bbb with SMTP id
+ a5-20020adfed05000000b002421ea72bbbmr2216490wro.27.1670531046216; 
+ Thu, 08 Dec 2022 12:24:06 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0511-db36-5a97-af74.res6.spectrum.com.
+ [2603:6081:7b00:6400:511:db36:5a97:af74])
+ by smtp.gmail.com with ESMTPSA id
+ t12-20020adfeb8c000000b0023662245d3csm22855832wrn.95.2022.12.08.12.24.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Dec 2022 12:24:05 -0800 (PST)
+Date: Thu, 8 Dec 2022 15:24:02 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20221208202402.GM3787616@bill-the-cat>
+References: <20221125125600.1.I04ba2df902dce6162fd1cc11153417c1935d0ea9@changeid>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.1
-Content-Language: en-US
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20221130114146.1.I1944fc560e894329a83e9cf8f50cab3610f4f334@changeid>
- <0a41cbe2-8f9f-4ba9-5ffc-e1047d0e37c8@denx.de>
- <6c8b6387-17bf-a4d1-8c75-d9cfdf512351@foss.st.com>
- <a50b41c6-b6e9-4a9d-9995-d7e3baf412ce@denx.de>
- <35330e71-f6d5-7a05-c1a9-51e3b9ecc488@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <35330e71-f6d5-7a05-c1a9-51e3b9ecc488@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
-X-Virus-Status: Clean
+In-Reply-To: <20221125125600.1.I04ba2df902dce6162fd1cc11153417c1935d0ea9@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH] dfu: Make DFU virtual backend SPL friendly
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Etienne CARRIERE <etienne.carriere@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH] firmware: scmi: use protocol node name to
+ bind the scmi regulator driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -60,46 +73,131 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============2966139128189343406=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTIvOC8yMiAxNDo1MywgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+IAo+IAo+IE9uIDEyLzgv
-MjIgMTQ6MjcsIE1hcmVrIFZhc3V0IHdyb3RlOgo+PiBPbiAxMi84LzIyIDA5OjE5LCBQYXRyaWNl
-IENIT1RBUkQgd3JvdGU6Cj4+PiBIaSBNYXJlawo+Pgo+PiBIZWxsbyBQYXRyaWNlLAo+Pgo+Pj4g
-SSBhbSBwcmVwYXJpbmcgYSBTVE0zMiBwdWxsIHJlcXVlc3Qgd2hpY2ggaW5jbHVkZXMgdGhpcyBz
-ZXJpZXMKPj4+Cj4+PiBodHRwczovL3BhdGNod29yay5vemxhYnMub3JnL3Byb2plY3QvdWJvb3Qv
-cGF0Y2gvMjAyMjEyMDYwMjM1MTUuMTEzNTU2LTEtbWFyZXhAZGVueC5kZS8KPj4+Cj4+PiBXZSBn
-b3QgYSBERlUgY29tcGlsYXRpb24gaXNzdWUgd2l0aCB0aGlzIHNlcmllcyA6Cj4+Pgo+Pj4gIMKg
-wqDCoMKgwqDCoMKgIGFybTrCoCArwqDCoCBzdG0zMm1wMTVfZGhjb21fYmFzaWMKPj4+ICsvdXNy
-L2xpYi9weXRob24zL2Rpc3QtcGFja2FnZXMvc2V0dXB0b29scy9kaXN0LnB5OjQ3MzogVXNlcldh
-cm5pbmc6IE5vcm1hbGl6aW5nICcyMDIzLjAxJyB0byAnMjAyMy4xJwo+Pj4gK8KgIHdhcm5pbmdz
-Lndhcm4oCj4+PiArYXJtLWxpbnV4LWdudWVhYmktbGQuYmZkOiBkcml2ZXJzL2RmdS9kZnUubzog
-aW4gZnVuY3Rpb24gYGRmdV9maWxsX2VudGl0eSc6Cj4+PiArZHJpdmVycy9kZnUvZGZ1LmM6NTQ4
-OiB1bmRlZmluZWQgcmVmZXJlbmNlIHRvIGBkZnVfZmlsbF9lbnRpdHlfdmlydCcKPj4+ICttYWtl
-WzJdOiAqKiogW3NjcmlwdHMvTWFrZWZpbGUuc3BsOjUyNzogc3BsL3UtYm9vdC1zcGxdIEVycm9y
-IDEKPj4+ICttYWtlWzFdOiAqKiogW01ha2VmaWxlOjIwNzE6IHNwbC91LWJvb3Qtc3BsXSBFcnJv
-ciAyCj4+PiArbWFrZTogKioqIFtNYWtlZmlsZToxNzc6IHN1Yi1tYWtlXSBFcnJvciAyCj4+PiAg
-wqDCoMKgwqDCoMKgwqAgYXJtOsKgICvCoMKgIHN0bTMybXAxNV9kaGNvcl9iYXNpYwo+Pj4gKy91
-c3IvbGliL3B5dGhvbjMvZGlzdC1wYWNrYWdlcy9zZXR1cHRvb2xzL2Rpc3QucHk6NDczOiBVc2Vy
-V2FybmluZzogTm9ybWFsaXppbmcgJzIwMjMuMDEnIHRvICcyMDIzLjEnCj4+PiArwqAgd2Fybmlu
-Z3Mud2FybigKPj4+ICthcm0tbGludXgtZ251ZWFiaS1sZC5iZmQ6IGRyaXZlcnMvZGZ1L2RmdS5v
-OiBpbiBmdW5jdGlvbiBgZGZ1X2ZpbGxfZW50aXR5JzoKPj4+ICtkcml2ZXJzL2RmdS9kZnUuYzo1
-NDg6IHVuZGVmaW5lZCByZWZlcmVuY2UgdG8gYGRmdV9maWxsX2VudGl0eV92aXJ0Jwo+Pj4gK21h
-a2VbMl06ICoqKiBbc2NyaXB0cy9NYWtlZmlsZS5zcGw6NTI3OiBzcGwvdS1ib290LXNwbF0gRXJy
-b3IgMQo+Pj4gK21ha2VbMV06ICoqKiBbTWFrZWZpbGU6MjA3MTogc3BsL3UtYm9vdC1zcGxdIEVy
-cm9yIDIKPj4+ICttYWtlOiAqKiogW01ha2VmaWxlOjE3Nzogc3ViLW1ha2VdIEVycm9yIDIKPj4+
-Cj4+Pgo+Pj4gVGhlIGNvcnJlY3QgZml4IGlzIHRoaXMgcGF0Y2ggYmVsb3cgd2hpY2ggaXMgY3Vy
-cmVudGx5IGluIHlvdXIgdXNiL21hc3RlciBicmFuY2guCj4+PiBJIHByb3Bvc2UgdG8gdGFrZSB0
-aGlzIHBhdGNoIGluIG15IHB1bGwgcmVxdWVzdCAoYXZhaWxhYmxlIHRvZGF5IG9yIHRvbW9ycm93
-KSB0byBtYWtlIEdpdExhYiBDaSB0ZXN0cyBoYXBweS4KPj4+Cj4+PiBBcmUgeW91IE9LID8KPj4K
-Pj4gSSBzdGlsbCBoYXZlIG9uZSBtb3JlIHBhdGNoIHRvIHBpY2svcmV2aWV3IGFuZCB0aGVuIEkn
-bGwgc2VuZCBVU0IgTVIuCj4+IEkgY2FuIGFzayBUb20gdG8gcGljayBpdCBiZWZvcmUgdGhlIFNU
-TSBNUiBhdCB3aGljaCBwb2ludCBpdCBzaG91bGQgYWxsIGJlIGZpbmUgPwo+IAo+IE9rLCBwZXJm
-ZWN0Lgo+IEkgd2lsbCBwdXQgYW4gYWRkaXRpb25hbCBpbmZvcm1hdGlvbiBpbmRpY2F0aW5nIHRo
-ZSBkZXBlbmRlbmNpZXMgYmV0d2VlbiB0aGUgU1RNMzIgcHVsbCByZXF1ZXN0IGFuZCB0aGUgVVNC
-IG9uZS4KClRoYW5rIHlvdS4KClRoZSBVU0IgTVIgaXMgbm93IGluIHRoZSBDSS4KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGlu
-ZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9z
-dC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+
+--===============2966139128189343406==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="qlO3cJeIUypwojD8"
+Content-Disposition: inline
+
+
+--qlO3cJeIUypwojD8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Nov 25, 2022 at 12:56:29PM +0100, Patrick Delaunay wrote:
+
+> In scmi firmware driver, it is better to bind the scmi protocol driver
+> "scmi_voltage_domain" with the node name of the protocol 17 and not
+> the sub-node named "regulator", because is a fixed string which doesn't
+> provide information and because it is not aligned with the other scmi
+> protocol nodes.
+>=20
+> For example on stm32mp135f-dk board with device tree in stm32mp131.dtsi
+>=20
+> scmi: scmi {
+> 	compatible =3D "linaro,scmi-optee";
+> 	#address-cells =3D <1>;
+> 	#size-cells =3D <0>;
+> 	linaro,optee-channel-id =3D <0>;
+> 	shmem =3D <&scmi_shm>;
+> 	scmi_clk: protocol@14 {
+> 		reg =3D <0x14>;
+> 		#clock-cells =3D <1>;
+> 	};
+> 	scmi_reset: protocol@16 {
+> 		reg =3D <0x16>;
+> 		#reset-cells =3D <1>;
+> 	};
+> 	scmi_voltd: protocol@17 {
+> 		reg =3D <0x17>;
+> 		scmi_regu: regulators {
+> 			#address-cells =3D <1>;
+> 			#size-cells =3D <0>;
+> 			scmi_reg11: voltd-reg11 {
+> 				reg =3D <VOLTD_SCMI_REG11>;
+> 				regulator-name =3D "reg11";
+> 			};
+> 			scmi_reg18: voltd-reg18 {
+> 				reg =3D <VOLTD_SCMI_REG18>;
+> 				regulator-name =3D "reg18";
+> 			};
+> 			scmi_usb33: voltd-usb33 {
+> 				reg =3D <VOLTD_SCMI_USB33>;
+> 				regulator-name =3D "usb33";
+> 			};
+> 		};
+> 	};
+> };
+>=20
+> Before the patch:
+>=20
+> > dm tree
+>=20
+>  scmi_agent    0  [ + ]   scmi-over-optee       |-- scmi
+>  clk           1  [ + ]   scmi_clk              |   |-- protocol@14
+>  ...
+>  reset         1  [   ]   scmi_reset_domain     |   |-- protocol@16
+>  nop           2  [ + ]   scmi_voltage_domain   |   `-- regulators
+>  regulator     0  [ + ]   scmi_regulator        |       |-- voltd-reg11
+>  regulator     1  [ + ]   scmi_regulator        |       |-- voltd-reg18
+>  regulator     2  [ + ]   scmi_regulator        |       |-- voltd-usb33
+>  ...
+>=20
+> after the patch:
+>=20
+> > dm tree
+>=20
+>  scmi_agent    0  [ + ]   scmi-over-optee       |-- scmi
+>  clk           1  [ + ]   scmi_clk              |   |-- protocol@14
+>  ...
+>  reset         1  [   ]   scmi_reset_domain     |   |-- protocol@16
+>  nop           2  [ + ]   scmi_voltage_domain   |   `-- protocol@17
+>  regulator     0  [ + ]   scmi_regulator        |       |-- voltd-reg11
+>  regulator     1  [ + ]   scmi_regulator        |       |-- voltd-reg18
+>  regulator     2  [ + ]   scmi_regulator        |       |-- voltd-usb33
+>  ...
+>=20
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--qlO3cJeIUypwojD8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmOSR+IACgkQFHw5/5Y0
+tyx2HQwAjIC0zfqIxkXLcU87wMooOXr+r1NPhDu+l9m/kIwAMqjPhLjN6E6kaia/
+esa8oA3BX63uvDowxrd+fioFhEilYUah7csaeWYxsjF0JwDVVs8AOIQTuYLb7ryD
+ZlGVh9r4c/2bPcBBi3tgPETnJOyxvmfTlzlSLzpv/90E4TDHZLrBSQ2wjGYGdRmJ
+lN2ZLqNk3HDoCf7NONpYeJ2hFvKMNBQNQ9Dug+hwu5yrnI42YkpO87a2p+t98Ke0
+bhNRpmjBNnXo6mTQcJn6lFFZ8m1xh9isHCzxON/N6PuZ+9SX+46pxyqqxz45hC0l
+yMDkGQQHoCh/KgmxJRI2HFtBCPmfTfwQ6UTaIThJM5pkctjewMwwQEVH58XDktA3
+3MO+DoHtzsUP14WQRi9MHe0OOAvvOcxDEZx3aCHkpAGJHvuiCmQ4z++DrlRPXYkJ
+ZUirjDsKc2rHcQxbwAummCQgaGSbUaJx5FWq20+yIAwVfAIX524vQSTsvK0ht17r
+EMmPMott
+=kACb
+-----END PGP SIGNATURE-----
+
+--qlO3cJeIUypwojD8--
+
+--===============2966139128189343406==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============2966139128189343406==--

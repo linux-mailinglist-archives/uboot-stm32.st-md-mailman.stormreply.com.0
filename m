@@ -2,66 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87C50649E7B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Dec 2022 13:13:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6079D64A016
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Dec 2022 14:19:52 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4E913C65E75;
-	Mon, 12 Dec 2022 12:13:54 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E3804C65047;
+	Mon, 12 Dec 2022 13:19:51 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 63665C65E74
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2966FC035BC
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 Dec 2022 12:13:53 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2BCBDoiI020807; Mon, 12 Dec 2022 13:13:50 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=jFlt+BkNIcL1732ikNWlxsj+PuJy+oBDGiJ5dpC27O0=;
- b=HP/uEx5xG2hf9+uMqwbeYMO+vAJtLs7aKkC+zyyP2k3jMX7KyNoTNP3rCTxmQXt26Qg+
- hQRev614KoLY00X6KGTXRW2OZDI+wpqC4WvNdbvdTHw8QEPN0fh4oP5ZFOK3qwTyCt+I
- 9OVZ4gQkd4cBSWB33/hbkfO6PFDnessrPfgq5p4jLapnv+rF07uGtHEQwUHIYxMjO8Id
- QPGNfm2H6eqMshQxAV7fP4kS9/99s67nmwbVDFRXZuRN8ElcLohIELrpJQ3aOjiQPyrC
- TK6lTMoJFcVhDn80fhJetbKmzHlvrnXqNzld8najlr+QxkuICK1rVFQNzxT8O2IQ5/bq 0A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mcgdpb551-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Dec 2022 13:13:50 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2918A10002A;
- Mon, 12 Dec 2022 13:13:45 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 21D492248C3;
- Mon, 12 Dec 2022 13:13:45 +0100 (CET)
-Received: from [10.201.20.130] (10.201.20.130) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Mon, 12 Dec
- 2022 13:13:44 +0100
-Message-ID: <5f30262f-4525-e5ca-cd7c-f1dddd5dc3b9@foss.st.com>
-Date: Mon, 12 Dec 2022 13:13:43 +0100
+ Mon, 12 Dec 2022 13:19:50 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 365C1838DB;
+ Mon, 12 Dec 2022 14:19:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1670851189;
+ bh=uh32mogpwhGVhSW6scv8Ifso5CPYrZlF/nkdHD9Fqws=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=dYIsZk8ABqDPC4OhUIERQF4zdCIMJ1peChblDXh4dvA5IHM4vIV8dNk7gMf4z/clw
+ LoI7c7Ge+S8AKA+B2AhXjkH+AwVsrGQIudl0Ln58kGZXw4ZYThPy16X6LnEu8vKxLh
+ Ff4Bvvs7T/67MyAHyQWdWdwWmsOn6KGTvBccEzh4hNFQ/voaqwxQ261tGUTjohIubb
+ 3upVoK0vbyFSYNl38VosDvfHbQGmsMGa8J2MbesIv6MxbjdSp8fyAFk51tmCnpfG4W
+ dQK2110sBhlVykTS6t4f7MSlF5/wqYbHV2fsI2HD0kbuGpMXsIM79kAxTZgwZ1z2on
+ 121yajstNIKsg==
+Message-ID: <78cd07dc-3a80-2dbe-9295-4594520f84b8@denx.de>
+Date: Mon, 12 Dec 2022 14:19:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
+ Thunderbird/102.5.1
 Content-Language: en-US
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, <u-boot@lists.denx.de>
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
 References: <20221212104437.15838-1-fabrice.gasnier@foss.st.com>
- <20221212104437.15838-4-fabrice.gasnier@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20221212104437.15838-4-fabrice.gasnier@foss.st.com>
-X-Originating-IP: [10.201.20.130]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-12-12_02,2022-12-12_01,2022-06-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/3] ARM: dts: stm32: add support for
- USB2514B onboard hub on stm32mp157c-ev1
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20221212104437.15838-1-fabrice.gasnier@foss.st.com>
+X-Virus-Scanned: clamav-milter 0.103.6 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Tom Rini <trini@konsulko.com>, Thomas Huth <thuth@redhat.com>,
+ Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 0/3] Add support for USB onboard HUB,
+	used on stm32 boards
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,47 +61,42 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Fabrice
-
 On 12/12/22 11:44, Fabrice Gasnier wrote:
-> Add support for USB2514B onboard hub on stm32mp157c EV1 board. The HUB
-> is supplied by a 3v3 PMIC regulator.
+> This series adds a driver to support USB onboard HUB, inspired by Linux
+> onboard hub driver.
 > 
-> [backport from linux ad9591b01d24]
-> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-> ---
+> Purpose is to manage the power supply regulator on STM32 boards, for
+> low power use case in Linux. U-boot driver allows to benefit of the
+> device tree part to supply the HUB when need, instead using an
+> always-on regulator.
 > 
->  arch/arm/dts/stm32mp157c-ev1.dts | 8 ++++++++
->  1 file changed, 8 insertions(+)
+> It aligns the relevant DT part from emerging Linux v6.2. It also adds the
+> relevant default configuration on stm32mp15.
 > 
-> diff --git a/arch/arm/dts/stm32mp157c-ev1.dts b/arch/arm/dts/stm32mp157c-ev1.dts
-> index d142dd30e16b..07bcd7c50672 100644
-> --- a/arch/arm/dts/stm32mp157c-ev1.dts
-> +++ b/arch/arm/dts/stm32mp157c-ev1.dts
-> @@ -362,6 +362,14 @@
->  &usbh_ehci {
->  	phys = <&usbphyc_port0>;
->  	status = "okay";
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +	/* onboard HUB */
-> +	hub@1 {
-> +		compatible = "usb424,2514";
-> +		reg = <1>;
-> +		vdd-supply = <&v3v3>;
-> +	};
->  };
->  
->  &usbotg_hs {
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Fabrice Gasnier (3):
+>    usb: onboard-hub: add driver to manage onboard hub supplies
+>    configs: stm32: enable USB onboard HUB driver
+>    ARM: dts: stm32: add support for USB2514B onboard hub on
+>      stm32mp157c-ev1
+> 
+>   arch/arm/dts/stm32mp157c-ev1.dts    |  8 ++++
+>   common/Makefile                     |  1 +
+>   common/usb_onboard_hub.c            | 62 +++++++++++++++++++++++++++++
+>   configs/stm32mp15_basic_defconfig   |  1 +
+>   configs/stm32mp15_defconfig         |  1 +
+>   configs/stm32mp15_trusted_defconfig |  1 +
+>   drivers/usb/Kconfig                 | 10 +++++
+>   drivers/usb/host/usb-uclass.c       | 16 +++++---
+>   8 files changed, 94 insertions(+), 6 deletions(-)
+>   create mode 100644 common/usb_onboard_hub.c
 
-Thanks
-Patrice
++CC Michal
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

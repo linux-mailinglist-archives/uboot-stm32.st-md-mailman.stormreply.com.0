@@ -2,67 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE3D6649CF6
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Dec 2022 11:48:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C6204649CF8
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 Dec 2022 11:48:49 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 812C8C65E62;
-	Mon, 12 Dec 2022 10:48:19 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 906F3C65E62;
+	Mon, 12 Dec 2022 10:48:49 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1595CC65E60
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D47E8C65E60
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 Dec 2022 10:48:18 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Mon, 12 Dec 2022 10:48:48 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 2BCAaxkL022306; Mon, 12 Dec 2022 11:48:13 +0100
+ 2BCAaxDR024898; Mon, 12 Dec 2022 11:48:45 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
+ mime-version : subject : from : to : cc : references : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=UsOSqYAarOC3+oxSMqVgXTOVthccNwkg1rK+lm/AI3o=;
- b=g2jkkCNIsbF5wkZIpCwAZ9jpA5h2yCPf1sFvIXXL6tRhbDBGO2UoJ8SOSbR7LjAXIzel
- zQLMRJvnCnTbmqciwcju9ytcMBwd7rHKXDJHQSHgqBL1g7kPO+IiE97LVeLscyh8rTxu
- 54h+Ggwb7YKrhlu7JjM0ToN0s6Hst4/QAHdZQqj3MPrysMQHm8FM0nZEfB7iZaqUTeAa
- TqqWatOoGFn9zMj29lVXZ5cxvEUUUT6H8+EeA/8TJpU1PJg+LyA5K2y/walrIJa2Uh74
- ypmulyfiNT1i/T7gPtbhJk3BlVTq/UDxhUjO5V0RhK2c6Wgk4CcRGb3eiwFzJ1X8JBre zg== 
+ bh=l2hzPTOguoYuRzy1L2uUwfjhv7lK/7VZVcOSYd1zGZg=;
+ b=BTNz4kdPtc/UooivQYd1xpK7jrBaqxrY0NJKRYB8KyeAo1pHjeXStNxnwSovbsmRtnAM
+ 5I9C0JSgoclA8b/6Fv1djEAsLUWJzPDRO+aDS/A3fwgmrJZ4YR7bXnp+yGUthPFJxUhY
+ RS4H8lyLAZH1Gjbq5NLOQTJPwrTqspB7zXcCCx3FglnPgBbpDWD5Y/RrZkh/xWqiyDGh
+ GEycNJGcC0F8RLBYePZPsShihEx7DHcODQ4DaMYiNqXmjIIflwb2dEUeyTxCJbmpxhmn
+ 3hO7aectnqsKMADifes32arw2qDpbpwy4IC4N41+jys9HJ8dRxdaTffyz5pex08diQ5Z bA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mcjb5a50r-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mcgdpahug-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 12 Dec 2022 11:48:13 +0100
+ Mon, 12 Dec 2022 11:48:45 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 20C17100038;
- Mon, 12 Dec 2022 11:48:09 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5CAD100034;
+ Mon, 12 Dec 2022 11:48:40 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 196EC21A22C;
- Mon, 12 Dec 2022 11:48:09 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9F49C21A22C;
+ Mon, 12 Dec 2022 11:48:40 +0100 (CET)
 Received: from [10.201.20.130] (10.201.20.130) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Mon, 12 Dec
- 2022 11:48:08 +0100
-Message-ID: <41b45896-86d9-f38f-d5d4-902144c01c05@foss.st.com>
-Date: Mon, 12 Dec 2022 11:48:08 +0100
+ 2022 11:48:40 +0100
+Message-ID: <0a2d5074-b1eb-3389-91b1-235ca6b42230@foss.st.com>
+Date: Mon, 12 Dec 2022 11:48:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>
-References: <20221026150508.1.I1b5ffc3bca09502549c075039f405dceb1646084@changeid>
- <CAPnjgZ1mJid6+9M0yumPdE79f7b2cAOKx1oZ7tnxkMM6y-aJkw@mail.gmail.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAPnjgZ1mJid6+9M0yumPdE79f7b2cAOKx1oZ7tnxkMM6y-aJkw@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20220920133954.1.Iff08cf94aa6c6d3678acb28a8dd012d466184b42@changeid>
+ <a133e873-d977-f1e7-71e2-31fcf6a28b3a@foss.st.com>
+In-Reply-To: <a133e873-d977-f1e7-71e2-31fcf6a28b3a@foss.st.com>
 X-Originating-IP: [10.201.20.130]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2022-12-12_02,2022-12-12_01,2022-06-22_01
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] dm: pmic: ignore disabled node in
- pmic_bind_children
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Joe Hershberger <joe.hershberger@ni.com>
+Subject: Re: [Uboot-stm32] [PATCH] phy: usbphyc: use
+ regulator_set_enable_if_allowed for disabling vbus supply
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,33 +80,57 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi Patrick
 
-On 10/27/22 17:22, Simon Glass wrote:
-> On Wed, 26 Oct 2022 at 07:05, Patrick Delaunay
-> <patrick.delaunay@foss.st.com> wrote:
+On 9/26/22 09:07, Patrice CHOTARD wrote:
+> Hi Patrick
+> 
+> On 9/20/22 13:39, Patrick Delaunay wrote:
+>> Use regulator_set_enable_if_allowed() api instead of regulator_set_enable()
+>> while disabling vbus supply. This way the driver doesn't see an error
+>> when it disable an always-on regulator for VBUS.
 >>
->> Ignore the disabled children node in pmic_bind_children() so the
->> disabled regulators in device tree are not registered.
+>> This patch is needed for STM32MP157C-DK2 board when the regulator
+>> v3v3: buck4 used as the phy vbus supply in kernel device tree
+>> is always on with the next hack for low power use-case:
 >>
->> This patch is based on the dm_scan_fdt_node() code - only the
->> activated nodes are bound -  and it solves possible issue when a
->> deactivated regulator is bound, error for duplicated regulator name
->> for example.
+>> &usbphyc_port0 {
+>>         ...
+>> 	/*
+>> 	 * Hack to keep hub active until all connected devices are suspended
+>> 	 * otherwise the hub will be powered off as soon as the v3v3 is disabled
+>> 	 * and it can disturb connected devices.
+>> 	 */
+>> 	connector {
+>> 		compatible = "usb-a-connector";
+>> 		vbus-supply = <&v3v3>;
+>> 	};
+>> };
+>>
+>> Without this patch and the previous update in DT the command
+>> "usb stop" failed and the next command "usb start" cause a crash.
 >>
 >> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >> ---
->> This patch solves the errors for duplicated regulator names on STM32MP15x
->> boards since the alignment with Linux device tree with the commit
->> 9157a4ce36b18 ("ARM: dts: stm32: update SCMI dedicated file").
 >>
->> When SCMI is activated in "<board>-scmi.dts" device tree, the 3 regulators
->> reg11, reg18, usb33 are duplicated (children of scmi_reguls and of
->> pwr_regulators) even if the children of pwr_regulators are deactivated in
->> the file arch/arm/dts/stm32mp15-scmi.dtsi.
+>>  drivers/phy/phy-stm32-usbphyc.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->>  drivers/power/pmic/pmic-uclass.c | 4 ++++
->>  1 file changed, 4 insertions(+)
+>> diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
+>> index 9f0b7d71187..dcf2194e9a7 100644
+>> --- a/drivers/phy/phy-stm32-usbphyc.c
+>> +++ b/drivers/phy/phy-stm32-usbphyc.c
+>> @@ -375,7 +375,7 @@ static int stm32_usbphyc_phy_power_off(struct phy *phy)
+>>  		return 0;
+>>  
+>>  	if (usbphyc_phy->vbus) {
+>> -		ret = regulator_set_enable(usbphyc_phy->vbus, false);
+>> +		ret = regulator_set_enable_if_allowed(usbphyc_phy->vbus, false);
+>>  		if (ret)
+>>  			return ret;
+>>  	}
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Thanks
+> Patrice
 > _______________________________________________
 > Uboot-stm32 mailing list
 > Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,71 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C88E65C000
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 13:39:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4656065C076
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 14:10:24 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 32A83C64110;
-	Tue,  3 Jan 2023 12:39:51 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D7845C64110;
+	Tue,  3 Jan 2023 13:10:23 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9F41C03FCB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E102BC03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 12:39:49 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Tue,  3 Jan 2023 13:10:21 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3039AO6g017080; Tue, 3 Jan 2023 13:39:39 +0100
+ 3039O0v3015000; Tue, 3 Jan 2023 14:10:20 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=eG9l0wvuLDbrmokXnq3Cnn4Hs4PyVqxNWwKB0OL+7i0=;
- b=atlGLran9uU9mKJJXHwaw8LfWr5Bbw6Tz3isG6BR6EGYXzd9A+d1RFdcoCR0Tx3Mrofj
- usChNu9jAEuKr1DtSIUZmw1o+E1mIKvbg0v5ckz/AkZIXNmMFUAmTS13x0lZoWc9vm9E
- ZH//+cLSb1k6eTlNH/pXAiS9wf9ukXj9c4r/yWTxciyk1MlZM75UcZOxyN3qqyy2DkDL
- IqX0PwfKfLuLNsSzKnilXZ+amFRZoyKRTJ9o9dvt9OKSLsOjp24nO2X3XdbEonBApG+Y
- 6B/s8hvz5Og7SFc+nQhT+GnUVcyRuMDxbSdEVIV7SsmaC7JPO6iU88/Yg3bDDEygDNRg pA== 
+ bh=H+a0v8tqqFHe3K5Xb9fGWozOvOS7TYXfhK6sz8EdziI=;
+ b=RUwRDqH6OK3OyOdKqFoD1IKS5pClH/i6zfUUtlTeMrGC9fa89eMSOZ2sELWcSsuDNjc1
+ VMiffpBNIPCXK17C7IZkROJZ/URYITjQZQ4RwUZQapdgqSOqzs7kfxCTLyPoYUg8VI4o
+ 7yj8LeOWRfMKjxYZzGw/et9kIOvhqqlIZfVhjfNPE4Buttk+tVQvLbX9TYZPOWwKV7qn
+ Gc9NzL8pxwV7hjApkDznoM39z0JWGzw+WRYcam237ailrUMHClQJ+XwGPs4pAN1KkhPB
+ 0eR8esvT2D8nN8AJ5Zm0ArtpZQKLHyvRfFiwwtAwTSjK8ozSx0gXRcuEcLFPdyOIfea0 YA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtbcpw5aj-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtcupn80k-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 03 Jan 2023 13:39:39 +0100
+ Tue, 03 Jan 2023 14:10:20 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DA4CB10002A;
- Tue,  3 Jan 2023 13:39:36 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D320721BF4D;
- Tue,  3 Jan 2023 13:39:36 +0100 (CET)
-Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1C19810002A;
+ Tue,  3 Jan 2023 14:10:19 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0131421D3D0;
+ Tue,  3 Jan 2023 14:10:19 +0100 (CET)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 3 Jan
- 2023 13:39:36 +0100
-Message-ID: <e1f2bdba-db39-6ac4-5649-acee3d252834@foss.st.com>
-Date: Tue, 3 Jan 2023 13:39:35 +0100
+ 2023 14:10:18 +0100
+Message-ID: <f608fc63-2e2d-61cc-9f9d-60ed5ffba30d@foss.st.com>
+Date: Tue, 3 Jan 2023 14:10:04 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221215095446.1.Ia16a826f3adcee45569a6d47e8ba5b5e3c1d7373@changeid>
 Content-Language: en-US
-To: Sean Anderson <sean.anderson@seco.com>, <u-boot@lists.denx.de>
-References: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
- <a08c4f80-677a-eba1-7180-7b7e2de6d8de@seco.com>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <a08c4f80-677a-eba1-7180-7b7e2de6d8de@seco.com>
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20221215095446.1.Ia16a826f3adcee45569a6d47e8ba5b5e3c1d7373@changeid>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2023-01-03_04,2023-01-03_02,2022-06-22_01
-Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] fastboot: remove #ifdef CONFIG when it is
-	possible
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Etienne CARRIERE <etienne.carriere@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH] optee: bind the TA drivers on OP-TEE node
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,211 +72,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiAxMi8xNS8yMiAxNjo0MCwgU2VhbiBBbmRlcnNvbiB3cm90ZToKPiBPbiAxMi8xNS8y
-MiAwNDoxNSwgUGF0cmljayBEZWxhdW5heSB3cm90ZToKPj4gTXVjaCBvZiB0aGUgZmFzdGJvb3Qg
-Y29kZSBwcmVkYXRlcyB0aGUgaW50cm9kdWN0aW9uIG9mIEtjb25maWcgYW5kCj4+IGhhcyBxdWl0
-ZSBhIGZldyAjaWZkZWZzIGluIGl0IHdoaWNoIGlzIHVubmVjZXNzYXJ5IG5vdyB0aGF0IHdlIGNh
-biB1c2UKPj4gSVNfRU5BQkxFRCgpIGV0IGFsLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNr
-IERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPgo+PiAtLS0KPj4KPj4gwqAg
-Y21kL2Zhc3Rib290LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzNSAr
-KysrKy0tLS0tLQo+PiDCoCBkcml2ZXJzL2Zhc3Rib290L2ZiX2NvbW1hbmQuY8KgwqAgfCAxMDQg
-KysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4gwqAgZHJpdmVycy9mYXN0Ym9vdC9m
-Yl9jb21tb24uY8KgwqDCoCB8wqAgMTEgKystLQo+PiDCoCBkcml2ZXJzL2Zhc3Rib290L2ZiX2dl
-dHZhci5jwqDCoMKgIHzCoCA0OSArKysrKystLS0tLS0tLS0KPj4gwqAgZHJpdmVycy91c2IvZ2Fk
-Z2V0L2ZfZmFzdGJvb3QuYyB8wqDCoCA3ICstLQo+PiDCoCBpbmNsdWRlL2Zhc3Rib290LmjCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTMgLS0tLQo+PiDCoCBuZXQvZmFzdGJvb3QuY8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOCArLS0KPj4gwqAgNyBmaWxl
-cyBjaGFuZ2VkLCA4MiBpbnNlcnRpb25zKCspLCAxNDUgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYg
-LS1naXQgYS9jbWQvZmFzdGJvb3QuYyBiL2NtZC9mYXN0Ym9vdC5jCj4+IGluZGV4IGI0OThlNGIy
-MmJiMy4uYjk0ZGJkNTQ4ODQzIDEwMDY0NAo+PiAtLS0gYS9jbWQvZmFzdGJvb3QuYwo+PiArKysg
-Yi9jbWQvZmFzdGJvb3QuYwo+PiBAQCAtMTksOCArMTksMTQgQEAKPj4gwqAgc3RhdGljIGludCBk
-b19mYXN0Ym9vdF91ZHAoaW50IGFyZ2MsIGNoYXIgKmNvbnN0IGFyZ3ZbXSwKPj4gwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdWludHB0cl90IGJ1Zl9hZGRyLCBzaXplX3QgYnVmX3Np
-emUpCj4+IMKgIHsKPj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChVRFBfRlVOQ1RJT05fRkFTVEJP
-T1QpCj4+IC3CoMKgwqAgaW50IGVyciA9IG5ldF9sb29wKEZBU1RCT09UKTsKPj4gK8KgwqDCoCBp
-bnQgZXJyOwo+PiArCj4+ICvCoMKgwqAgaWYgKCFDT05GSUdfSVNfRU5BQkxFRChVRFBfRlVOQ1RJ
-T05fRkFTVEJPT1QpKSB7Cj4+ICvCoMKgwqDCoMKgwqDCoCBwcl9lcnIoIkZhc3Rib290IFVEUCBu
-b3QgZW5hYmxlZFxuIik7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9GQUlMVVJF
-Owo+PiArwqDCoMKgIH0KPj4gKwo+PiArwqDCoMKgIGVyciA9IG5ldF9sb29wKEZBU1RCT09UKTsK
-Pj4gwqAgwqDCoMKgwqDCoCBpZiAoZXJyIDwgMCkgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcHJp
-bnRmKCJmYXN0Ym9vdCB1ZHAgZXJyb3I6ICVkXG4iLCBlcnIpOwo+PiBAQCAtMjgsMjEgKzM0LDIx
-IEBAIHN0YXRpYyBpbnQgZG9fZmFzdGJvb3RfdWRwKGludCBhcmdjLCBjaGFyICpjb25zdCAKPj4g
-YXJndltdLAo+PiDCoMKgwqDCoMKgIH0KPj4gwqAgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9T
-VUNDRVNTOwo+PiAtI2Vsc2UKPj4gLcKgwqDCoCBwcl9lcnIoIkZhc3Rib290IFVEUCBub3QgZW5h
-YmxlZFxuIik7Cj4+IC3CoMKgwqAgcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsKPj4gLSNlbmRpZgo+
-PiDCoCB9Cj4+IMKgIMKgIHN0YXRpYyBpbnQgZG9fZmFzdGJvb3RfdXNiKGludCBhcmdjLCBjaGFy
-ICpjb25zdCBhcmd2W10sCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHVpbnRw
-dHJfdCBidWZfYWRkciwgc2l6ZV90IGJ1Zl9zaXplKQo+PiDCoCB7Cj4+IC0jaWYgQ09ORklHX0lT
-X0VOQUJMRUQoVVNCX0ZVTkNUSU9OX0ZBU1RCT09UKQo+PiDCoMKgwqDCoMKgIGludCBjb250cm9s
-bGVyX2luZGV4Owo+PiDCoMKgwqDCoMKgIGNoYXIgKnVzYl9jb250cm9sbGVyOwo+PiDCoMKgwqDC
-oMKgIGNoYXIgKmVuZHA7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gwqAgK8KgwqDCoCBpZiAo
-IUNPTkZJR19JU19FTkFCTEVEKFVTQl9GVU5DVElPTl9GQVNUQk9PVCkpIHsKPj4gK8KgwqDCoMKg
-wqDCoMKgIHByX2VycigiRmFzdGJvb3QgVVNCIG5vdCBlbmFibGVkXG4iKTsKPj4gK8KgwqDCoMKg
-wqDCoMKgIHJldHVybiBDTURfUkVUX0ZBSUxVUkU7Cj4+ICvCoMKgwqAgfQo+PiArCj4+IMKgwqDC
-oMKgwqAgaWYgKGFyZ2MgPCAyKQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIENNRF9SRVRf
-VVNBR0U7Cj4+IMKgIEBAIC04OCwxMCArOTQsNiBAQCBleGl0Ogo+PiDCoMKgwqDCoMKgIGdfZG5s
-X2NsZWFyX2RldGFjaCgpOwo+PiDCoCDCoMKgwqDCoMKgIHJldHVybiByZXQ7Cj4+IC0jZWxzZQo+
-PiAtwqDCoMKgIHByX2VycigiRmFzdGJvb3QgVVNCIG5vdCBlbmFibGVkXG4iKTsKPj4gLcKgwqDC
-oCByZXR1cm4gQ01EX1JFVF9GQUlMVVJFOwo+PiAtI2VuZGlmCj4+IMKgIH0KPj4gwqAgwqAgc3Rh
-dGljIGludCBkb19mYXN0Ym9vdChzdHJ1Y3QgY21kX3RibCAqY21kdHAsIGludCBmbGFnLCBpbnQg
-YXJnYywKPj4gQEAgLTE0OCwxNyArMTUwLDEyIEBAIE5YVEFSRzoKPj4gwqDCoMKgwqDCoCByZXR1
-cm4gZG9fZmFzdGJvb3RfdXNiKGFyZ2MsIGFyZ3YsIGJ1Zl9hZGRyLCBidWZfc2l6ZSk7Cj4+IMKg
-IH0KPj4gwqAgLSNpZmRlZiBDT05GSUdfU1lTX0xPTkdIRUxQCj4+IC1zdGF0aWMgY2hhciBmYXN0
-Ym9vdF9oZWxwX3RleHRbXSA9Cj4+ICtVX0JPT1RfQ01EKAo+PiArwqDCoMKgIGZhc3Rib290LCBD
-T05GSUdfU1lTX01BWEFSR1MsIDEsIGRvX2Zhc3Rib290LAo+PiArwqDCoMKgICJydW4gYXMgYSBm
-YXN0Ym9vdCB1c2Igb3IgdWRwIGRldmljZSIsCj4+IMKgwqDCoMKgwqAgIlstbCBhZGRyXSBbLXMg
-c2l6ZV0gdXNiIDxjb250cm9sbGVyPiB8IHVkcFxuIgo+PiDCoMKgwqDCoMKgICJcdGFkZHIgLSBh
-ZGRyZXNzIG9mIGJ1ZmZlciB1c2VkIGR1cmluZyBkYXRhIHRyYW5zZmVycyAoIgo+PiDCoMKgwqDC
-oMKgIF9fc3RyaW5naWZ5KENPTkZJR19GQVNUQk9PVF9CVUZfQUREUikgIilcbiIKPj4gwqDCoMKg
-wqDCoCAiXHRzaXplIC0gc2l6ZSBvZiBidWZmZXIgdXNlZCBkdXJpbmcgZGF0YSB0cmFuc2ZlcnMg
-KCIKPj4gwqDCoMKgwqDCoCBfX3N0cmluZ2lmeShDT05GSUdfRkFTVEJPT1RfQlVGX1NJWkUpICIp
-Igo+PiAtwqDCoMKgIDsKPj4gLSNlbmRpZgo+PiAtCj4+IC1VX0JPT1RfQ01EKAo+PiAtwqDCoMKg
-IGZhc3Rib290LCBDT05GSUdfU1lTX01BWEFSR1MsIDEsIGRvX2Zhc3Rib290LAo+PiAtwqDCoMKg
-ICJydW4gYXMgYSBmYXN0Ym9vdCB1c2Igb3IgdWRwIGRldmljZSIsIGZhc3Rib290X2hlbHBfdGV4
-dAo+PiDCoCApOwo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9mYXN0Ym9vdC9mYl9jb21tYW5kLmMg
-Cj4+IGIvZHJpdmVycy9mYXN0Ym9vdC9mYl9jb21tYW5kLmMKPj4gaW5kZXggYmRmZGYyNjJjOGEz
-Li5mMGZkNjA1ODU0ZGEgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZmFzdGJvb3QvZmJfY29tbWFu
-ZC5jCj4+ICsrKyBiL2RyaXZlcnMvZmFzdGJvb3QvZmJfY29tbWFuZC5jCj4+IEBAIC0zMSwyNyAr
-MzEsMTYgQEAgc3RhdGljIHUzMiBmYXN0Ym9vdF9ieXRlc19leHBlY3RlZDsKPj4gwqAgc3RhdGlj
-IHZvaWQgb2theShjaGFyICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIGdldHZhcihjaGFy
-ICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIGRvd25sb2FkKGNoYXIgKiwgY2hhciAqKTsK
-Pj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9GTEFTSCkKPj4gwqAgc3RhdGljIHZv
-aWQgZmxhc2goY2hhciAqLCBjaGFyICopOwo+PiDCoCBzdGF0aWMgdm9pZCBlcmFzZShjaGFyICos
-IGNoYXIgKik7Cj4+IC0jZW5kaWYKPj4gwqAgc3RhdGljIHZvaWQgcmVib290X2Jvb3Rsb2FkZXIo
-Y2hhciAqLCBjaGFyICopOwo+PiDCoCBzdGF0aWMgdm9pZCByZWJvb3RfZmFzdGJvb3RkKGNoYXIg
-KiwgY2hhciAqKTsKPj4gwqAgc3RhdGljIHZvaWQgcmVib290X3JlY292ZXJ5KGNoYXIgKiwgY2hh
-ciAqKTsKPj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX0ZPUk1BVCkK
-Pj4gwqAgc3RhdGljIHZvaWQgb2VtX2Zvcm1hdChjaGFyICosIGNoYXIgKik7Cj4+IC0jZW5kaWYK
-Pj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX1BBUlRDT05GKQo+PiDC
-oCBzdGF0aWMgdm9pZCBvZW1fcGFydGNvbmYoY2hhciAqLCBjaGFyICopOwo+PiAtI2VuZGlmCj4+
-IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9CT09UQlVTKQo+PiDCoCBz
-dGF0aWMgdm9pZCBvZW1fYm9vdGJ1cyhjaGFyICosIGNoYXIgKik7Cj4+IC0jZW5kaWYKPj4gLQo+
-PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX1VVVV9TVVBQT1JUKQo+PiDCoCBzdGF0
-aWMgdm9pZCBydW5fdWNtZChjaGFyICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIHJ1bl9h
-Y21kKGNoYXIgKiwgY2hhciAqKTsKPj4gLSNlbmRpZgo+PiDCoCDCoCBzdGF0aWMgY29uc3Qgc3Ry
-dWN0IHsKPj4gwqDCoMKgwqDCoCBjb25zdCBjaGFyICpjb21tYW5kOwo+PiBAQCAtNjUsMTYgKzU0
-LDE0IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1h
-bmQgPSAiZG93bmxvYWQiLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0gZG93bmxv
-YWQKPj4gwqDCoMKgwqDCoCB9LAo+PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZM
-QVNIKQo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX0ZMQVNIXSA9wqAgewo+PiDCoMKg
-wqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiZmxhc2giLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRp
-c3BhdGNoID0gZmxhc2gKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENPTkZJR19JU19F
-TkFCTEVEKEZBU1RCT09UX0ZMQVNILCAoZmxhc2gpLCAoTlVMTCkpCj4+IMKgwqDCoMKgwqAgfSwK
-Pj4gwqDCoMKgwqDCoCBbRkFTVEJPT1RfQ09NTUFORF9FUkFTRV0gPcKgIHsKPj4gwqDCoMKgwqDC
-oMKgwqDCoMKgIC5jb21tYW5kID0gImVyYXNlIiwKPj4gLcKgwqDCoMKgwqDCoMKgIC5kaXNwYXRj
-aCA9IGVyYXNlCj4+ICvCoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBDT05GSUdfSVNfRU5BQkxF
-RChGQVNUQk9PVF9GTEFTSCwgKGVyYXNlKSwgKE5VTEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0j
-ZW5kaWYKPj4gwqDCoMKgwqDCoCBbRkFTVEJPT1RfQ09NTUFORF9CT09UXSA9wqAgewo+PiDCoMKg
-wqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiYm9vdCIsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAu
-ZGlzcGF0Y2ggPSBva2F5Cj4+IEBAIC0xMDMsMzQgKzkwLDI2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
-Y3Qgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAic2V0X2FjdGl2ZSIsCj4+IMKg
-wqDCoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBva2F5Cj4+IMKgwqDCoMKgwqAgfSwKPj4gLSNp
-ZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX0ZPUk1BVCkKPj4gwqDCoMKgwqDC
-oCBbRkFTVEJPT1RfQ09NTUFORF9PRU1fRk9STUFUXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKg
-IC5jb21tYW5kID0gIm9lbSBmb3JtYXQiLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0g
-b2VtX2Zvcm1hdCwKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENPTkZJR19JU19FTkFC
-TEVEKEZBU1RCT09UX0NNRF9PRU1fRk9STUFULCAKPj4gKG9lbV9mb3JtYXQpLCAoTlVMTCkpCj4+
-IMKgwqDCoMKgwqAgfSwKPj4gLSNlbmRpZgo+PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RC
-T09UX0NNRF9PRU1fUEFSVENPTkYpCj4+IMKgwqDCoMKgwqAgW0ZBU1RCT09UX0NPTU1BTkRfT0VN
-X1BBUlRDT05GXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5kID0gIm9lbSBwYXJ0
-Y29uZiIsCj4+IC3CoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBvZW1fcGFydGNvbmYsCj4+ICvC
-oMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURf
-T0VNX1BBUlRDT05GLCAKPj4gKG9lbV9wYXJ0Y29uZiksIChOVUxMKSkKPj4gwqDCoMKgwqDCoCB9
-LAo+PiAtI2VuZGlmCj4+IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9C
-T09UQlVTKQo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX09FTV9CT09UQlVTXSA9IHsK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5kID0gIm9lbSBib290YnVzIiwKPj4gLcKgwqDC
-oMKgwqDCoMKgIC5kaXNwYXRjaCA9IG9lbV9ib290YnVzLAo+PiArwqDCoMKgwqDCoMKgwqAgLmRp
-c3BhdGNoID0gQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9CT09UQlVTLCAKPj4g
-KG9lbV9ib290YnVzKSwgKE5VTEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0jZW5kaWYKPj4gLSNp
-ZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9VVVVfU1VQUE9SVCkKPj4gwqDCoMKgwqDCoCBb
-RkFTVEJPT1RfQ09NTUFORF9VQ01EXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5k
-ID0gIlVDbWQiLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0gcnVuX3VjbWQsCj4+ICvC
-oMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSAKPj4gQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1Rf
-VVVVX1NVUFBPUl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Cj4+IFVib290LXN0bTMyIG1haWxpbmcgbGlzdAo+PiBVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFu
-LnN0b3JtcmVwbHkuY29tCj4+IGh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9t
-YWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCj4+IFQsIChydW5fdWNtZCksIChOVUxMKSkKPj4g
-wqDCoMKgwqDCoCB9LAo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX0FDTURdID0gewo+
-PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiQUNtZCIsCj4+IC3CoMKgwqDCoMKgwqDC
-oCAuZGlzcGF0Y2ggPSBydW5fYWNtZCwKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENP
-TkZJR19JU19FTkFCTEVEKEZBU1RCT09UX1VVVV9TVVBQT1JULCAKPj4gKHJ1bl9hY21kKSwgKE5V
-TEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0jZW5kaWYKPiBEb2VzIHRoaXMgYWZmZWN0IGJpbmFy
-eSBzaXplPwoKClllcyB0aGUgc2l6ZSBvZiBVLUJvb3QgYmluYXJ5IHdpdGggRmFzdEJvb3Qgb3B0
-aW9uIGlzIGluY3JlYXNpbmcgd2l0aCAKdGhpcyBwYXRjaC4KCgpiZWNhdXNlICJjb21tYW5kc1tG
-QVNUQk9PVF9DT01NQU5EX0NPVU5UXSIKCmhhdmUgYWx3YXlzIHRoZSBtYXggc2l6ZSBmb3Iga25v
-d24gY29tbWFuZHMgaW4gVS1Cb290LAoKZXZlbiBmb3Igbm90IHN1cHBvcnRlZCBjb21tYW5kcyB3
-aGVuIC5kaXNwYXRjaCBvcHMgaXMgTlVMTCwKCmFuZCBpdCBpcyBkZXRlY3RlZCBkeW5hbWljYWxs
-eSBpbiBmYXN0Ym9vdF9oYW5kbGVfY29tbWFuZCgpCgp3aXRoIHRoZSBhZGRlZCB0cmFjZSAiY29t
-bWFuZCAlcyBub3Qgc3VwcG9ydGVkLiIKCgpJIGRvbid0IGZvdW5kIGEgYmV0dGVyIHNvbHV0aW9u
-IGJlY2F1c2UgaW4gaW5jbHVkZS9mYXN0Ym9vdC5oCgpJIHJlbW92ZSB0aGUgaWZkZWYgZm9yIEZB
-U1RCT09UX0NPTU1BTkRfQ09VTlQgZGVmaW5pdGlvbgoKClRvZGF5IGl0IGlzIG5vdCBibG9ja2lu
-ZywgdGhlIENJIGJ1aWxkIGFyZSBvaywKCkkgaG9wZSBpdCBpcyBub3QgYSBibG9ja2luZyBwcm9i
-bGVtLgoKCj4KPj4gwqAgfTsKPj4gwqAgwqAgLyoqCj4+IEBAIC0xNTYsNyArMTM1LDkgQEAgaW50
-IGZhc3Rib290X2hhbmRsZV9jb21tYW5kKGNoYXIgKmNtZF9zdHJpbmcsIAo+PiBjaGFyICpyZXNw
-b25zZSkKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCByZXNwb25zZSk7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgcmV0dXJuIGk7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxzZSB7Cj4+IC3C
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgcHJfZXJyKCJjb21tYW5kICVzIG5vdCBzdXBwb3J0ZWQuXG4iLCBjbWRf
-c3RyaW5nKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmYXN0Ym9vdF9mYWls
-KCJVbnN1cHBvcnRlZCBjb21tYW5kIiwgcmVzcG9uc2UpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldHVybiAtMTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+
-PiDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+PiDCoMKgwqDCoMKgIH0KPj4gQEAgLTI5OSw3ICsyODAs
-NiBAQCB2b2lkIGZhc3Rib290X2RhdGFfY29tcGxldGUoY2hhciAqcmVzcG9uc2UpCj4+IMKgwqDC
-oMKgwqAgZmFzdGJvb3RfYnl0ZXNfcmVjZWl2ZWQgPSAwOwo+PiDCoCB9CgoKLi4uLgoKCj4+IMKg
-IGRpZmYgLS1naXQgYS9pbmNsdWRlL2Zhc3Rib290LmggYi9pbmNsdWRlL2Zhc3Rib290LmgKPj4g
-aW5kZXggNTdkYWFmMTI5ODIxLi5kMDYyYTM0NjllZjkgMTAwNjQ0Cj4+IC0tLSBhL2luY2x1ZGUv
-ZmFzdGJvb3QuaAo+PiArKysgYi9pbmNsdWRlL2Zhc3Rib290LmgKPj4gQEAgLTI0LDEwICsyNCw4
-IEBACj4+IMKgIGVudW0gewo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfR0VUVkFSID0g
-MCwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5EX0RPV05MT0FELAo+PiAtI2lmIENPTkZJ
-R19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1B
-TkRfRkxBU0gsCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9FUkFTRSwKPj4gLSNlbmRp
-Zgo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfQk9PVCwKPj4gwqDCoMKgwqDCoCBGQVNU
-Qk9PVF9DT01NQU5EX0NPTlRJTlVFLAo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfUkVC
-T09ULAo+PiBAQCAtMzUsMjAgKzMzLDExIEBAIGVudW0gewo+PiDCoMKgwqDCoMKgIEZBU1RCT09U
-X0NPTU1BTkRfUkVCT09UX0ZBU1RCT09URCwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5E
-X1JFQk9PVF9SRUNPVkVSWSwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5EX1NFVF9BQ1RJ
-VkUsCj4+IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9GT1JNQVQpCj4+
-IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9PRU1fRk9STUFULAo+PiAtI2VuZGlmCj4+IC0j
-aWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9QQVJUQ09ORikKPj4gwqDCoMKg
-wqDCoCBGQVNUQk9PVF9DT01NQU5EX09FTV9QQVJUQ09ORiwKPj4gLSNlbmRpZgo+PiAtI2lmIENP
-TkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0NNRF9PRU1fQk9PVEJVUykKPj4gwqDCoMKgwqDCoCBG
-QVNUQk9PVF9DT01NQU5EX09FTV9CT09UQlVTLAo+PiAtI2VuZGlmCj4+IC0jaWYgQ09ORklHX0lT
-X0VOQUJMRUQoRkFTVEJPT1RfVVVVX1NVUFBPUlQpCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09N
-TUFORF9BQ01ELAo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfVUNNRCwKPj4gLSNlbmRp
-Zgo+PiAtCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9DT1VOVAo+PiDCoCB9Owo+PiDC
-oCBAQCAtMTczLDcgKzE2Miw1IEBAIHZvaWQgZmFzdGJvb3RfZGF0YV9kb3dubG9hZChjb25zdCB2
-b2lkIAo+PiAqZmFzdGJvb3RfZGF0YSwKPj4gwqDCoCAqLwo+PiDCoCB2b2lkIGZhc3Rib290X2Rh
-dGFfY29tcGxldGUoY2hhciAqcmVzcG9uc2UpOwo+PiDCoCAtI2lmIENPTkZJR19JU19FTkFCTEVE
-KEZBU1RCT09UX1VVVV9TVVBQT1JUKQo+PiDCoCB2b2lkIGZhc3Rib290X2FjbWRfY29tcGxldGUo
-dm9pZCk7Cj4+IC0jZW5kaWYKPj4gwqAgI2VuZGlmIC8qIF9GQVNUQk9PVF9IXyAqLwo+PiBkaWZm
-IC0tZ2l0IGEvbmV0L2Zhc3Rib290LmMgYi9uZXQvZmFzdGJvb3QuYwo+PiBpbmRleCAxMzkyMzNi
-ODZjNjEuLjk2YmRmNTQ4NmZhNiAxMDA2NDQKPj4gLS0tIGEvbmV0L2Zhc3Rib290LmMKPj4gKysr
-IGIvbmV0L2Zhc3Rib290LmMKPj4gQEAgLTQyLDcgKzQyLDYgQEAgc3RhdGljIGludCBmYXN0Ym9v
-dF9vdXJfcG9ydDsKPj4gwqAgwqAgc3RhdGljIHZvaWQgYm9vdF9kb3dubG9hZGVkX2ltYWdlKHZv
-aWQpOwo+PiDCoCAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiDCoCAv
-KioKPj4gwqDCoCAqIGZhc3Rib290X3VkcF9zZW5kX2luZm8oKSAtIFNlbmQgYW4gSU5GTyBwYWNr
-ZXQgZHVyaW5nIGxvbmcgCj4+IGNvbW1hbmRzLgo+PiDCoMKgICoKPj4gQEAgLTEwNCw3ICsxMDMs
-NiBAQCBzdGF0aWMgdm9pZCBmYXN0Ym9vdF90aW1lZF9zZW5kX2luZm8oY29uc3QgY2hhciAKPj4g
-Km1zZykKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGZhc3Rib290X3VkcF9zZW5kX2luZm8obXNnKTsK
-Pj4gwqDCoMKgwqDCoCB9Cj4+IMKgIH0KPj4gLSNlbmRpZgo+PiDCoCDCoCAvKioKPj4gwqDCoCAq
-IGZhc3Rib290X3NlbmQoKSAtIFNlbmRzIGEgcGFja2V0IGluIHJlc3BvbnNlIHRvIHJlY2VpdmVk
-IAo+PiBmYXN0Ym9vdCBwYWNrZXQKPj4gQEAgLTMwOSw5ICszMDcsOSBAQCB2b2lkIGZhc3Rib290
-X3N0YXJ0X3NlcnZlcih2b2lkKQo+PiDCoCDCoMKgwqDCoMKgIGZhc3Rib290X291cl9wb3J0ID0g
-Q09ORklHX1VEUF9GVU5DVElPTl9GQVNUQk9PVF9QT1JUOwo+PiDCoCAtI2lmIENPTkZJR19JU19F
-TkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiAtwqDCoMKgIGZhc3Rib290X3NldF9wcm9ncmVzc19j
-YWxsYmFjayhmYXN0Ym9vdF90aW1lZF9zZW5kX2luZm8pOwo+PiAtI2VuZGlmCj4+ICvCoMKgwqAg
-aWYgKENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKSkKPj4gKyBmYXN0Ym9vdF9zZXRf
-cHJvZ3Jlc3NfY2FsbGJhY2soZmFzdGJvb3RfdGltZWRfc2VuZF9pbmZvKTsKPj4gKwo+PiDCoMKg
-wqDCoMKgIG5ldF9zZXRfdWRwX2hhbmRsZXIoZmFzdGJvb3RfaGFuZGxlcik7Cj4+IMKgIMKgwqDC
-oMKgwqAgLyogemVybyBvdXQgc2VydmVyIGV0aGVyIGluIGNhc2UgdGhlIHNlcnZlciBpcCBoYXMg
-Y2hhbmdlZCAqLwo+IFJldmlld2VkLWJ5OiBTZWFuIEFuZGVyc29uIDxzZWFuLmFuZGVyc29uQHNl
-Y28uY29tPgoKcmVnYXJkcwoKUGF0cmljawoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0
-LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVw
-bHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+Hi Patrick
+
+just one typo
+
+On 12/15/22 09:54, Patrick Delaunay wrote:
+> In U-Boot driver model the devices can be referenced by
+> phandle in the U-Boot configuration nodes.
+> 
+> Without a valid node provided during the bind, the driver
+> associated to OP-TEE TA can't be referenced.
+> 
+> For example to force the sequence number with alias
+> (.flags = DM_UC_FLAG_SEQ_ALIAS)
+> 
+>  	aliases {
+> 		rng0 = &optee;
+>  	};
+> 
+> or other configuration:
+> 
+> board-sysinfo {
+>    compatible = "vendor,sysinfo-board";
+>    ramdom = <&optee>;
+> }
+> 
+> With this patch all drivers bound from OP-TEE service
+> discovery are now associated are associated to OP-TEE
+
+s/are now associated are associated/are now associated
+
+> node, allowing to identify by phandle the driver
+> provided by the TA for one UCLASS without modifying
+> device tree.
+> 
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  drivers/tee/optee/core.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/tee/optee/core.c b/drivers/tee/optee/core.c
+> index 9240277579be..96f08074443f 100644
+> --- a/drivers/tee/optee/core.c
+> +++ b/drivers/tee/optee/core.c
+> @@ -92,7 +92,8 @@ static int bind_service_list(struct udevice *dev, struct tee_shm *service_list,
+>  		if (!service)
+>  			continue;
+>  
+> -		ret = device_bind_driver(dev, service->driver_name, service->driver_name, NULL);
+> +		ret = device_bind_driver_to_node(dev, service->driver_name, service->driver_name,
+> +						 dev_ofnode(dev), NULL);
+>  		if (ret) {
+>  			dev_warn(dev, "%s was not bound: %d, ignored\n", service->driver_name, ret);
+>  			continue;
+> @@ -832,7 +833,8 @@ static int optee_probe(struct udevice *dev)
+>  		 * Discovery of TAs on the TEE bus is not supported in U-Boot:
+>  		 * only bind the drivers associated to the supported OP-TEE TA
+>  		 */
+> -		ret = device_bind_driver(dev, "optee-rng", "optee-rng", NULL);
+> +		ret = device_bind_driver_to_node(dev, "optee-rng", "optee-rng",
+> +						 dev_ofnode(dev), NULL);
+>  		if (ret)
+>  			return ret;
+>  	}
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

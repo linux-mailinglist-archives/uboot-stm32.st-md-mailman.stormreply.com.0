@@ -2,135 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD8F065C3EF
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 17:32:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A548865C3F4
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 17:34:08 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4318DC65048;
-	Tue,  3 Jan 2023 16:32:43 +0000 (UTC)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2073.outbound.protection.outlook.com [40.107.22.73])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6CB3CC65048;
+	Tue,  3 Jan 2023 16:34:08 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7F98FC03FCB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 14EB4C03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 16:32:42 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mae1GEkmNThzexP8N2UmPEgKxvr3MSTYN5WffvRflxIu4ytDfEW0nVLv+NO2pfZh54BIVgsliJzGbcEgIs2qlreewoWvxhuTMR+C9Xn3cu+Byrugf1VTPmwqnB9vdvyOx1pU+7Sogoi1L8TvJfVkItt+WrtvZUE7Rsk1AHN6pMmDbjwTr8YcstaKBub+UzjAtojWEnzSB51phw0DH62HtISVJg3FRjtDNjlo37TEO2BgjYJ31PnAEE/s94l03KLXUaxBOZAHknDmn+NDRQJXrWxugfFwQimLaA7cTCt9DMZooT3ivyN/xUO2yC80s2eOC+6V9Dffu0ghcYoYoe4lFA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SStsxqoL9SpMOmU4B8IMmjJNbiyv35S/ysSUZLjJzfE=;
- b=XpHT3XI1n3OKk3kmt4job3fTpgNs0uYltcDqAsiQ9NMyxC/1OYPigBRuSjjz97ygArhHs4bVH236bu8/YclxqGokVIUL9wUSHGN4fa2Qba9endN3XLvCyK1BCB4A/d97Ii/+qAshRE8Z8WSB03gyuzi9nqR+XoZQ+G9ZKhdYmbSQCeEjQnhWBGMsN59eOZDTVc3HXusum7uEDNud0ebrSrGsQvBZeujsa1dFr9/pcztCGlx1HBBN6DkRL+SsIbUFubDlM5DSxaQjMqyWsLXAoTjXFuwyDATOtphPZmJI5cjL779e3wOIVDxIq7fi+U5xDNvZrJ4QzZDrfFyvsdF9EQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SStsxqoL9SpMOmU4B8IMmjJNbiyv35S/ysSUZLjJzfE=;
- b=J1EdafzBkbwVOHV8E7EnqZ9lWUUfyVSaB+BtMJbmjSHFn6DmOZJRYOyrHx24/JxI2PSn1PZWKAILDtLZNK5c5WKiB5ZTs3Ljw5qcZFyrh5BjS9/lB2Z8f01nTdPuHRNjlk8YXMXmz3su71szeGRtoBclOwfaap8eM13A0mqoOBGatbJHsuNGiIhT5BV5tSNCEU0NNOG6QbXJnpyqPyPyHA8f1dNWnrxKFoA0x7VFVOqDauRcufNS7iNnkVsG72aJMI9LyX8E0XPRVfGzndHdC753sNsT5VW5zVcykakhzPxtSMEwpO8HajtCmfstRJBmy5nqcscJv2VBfUgpd2fECA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by PR3PR04MB7339.eurprd04.prod.outlook.com (2603:10a6:102:8b::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Tue, 3 Jan
- 2023 16:32:40 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::9ebd:cd48:9396:76f6]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::9ebd:cd48:9396:76f6%6]) with mapi id 15.20.5944.019; Tue, 3 Jan 2023
- 16:32:40 +0000
-Message-ID: <8b8c936b-b4bb-8902-6006-31cc54477f9f@theobroma-systems.com>
-Date: Tue, 3 Jan 2023 17:32:05 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- neil.armstrong@linaro.org, u-boot@lists.denx.de
-References: <20221028090120.1536827-1-patrick.delaunay@foss.st.com>
- <b7e891d1-d134-b489-eb2d-6125d4c7b6c6@theobroma-systems.com>
- <5f67e057-c41a-d4a0-b199-5840ae771e35@linaro.org>
- <f0dd213c-4a34-926d-3f3b-f2ed49bb92c3@linaro.org>
- <5ce0e4ad-b015-3487-614c-a60099dbede9@foss.st.com>
- <9f0641d9-b5f6-ed05-1563-ae96ca873052@linaro.org>
- <90a47202-6f6b-e8e7-521c-9df6a5730a5b@theobroma-systems.com>
- <71bbd180-331f-8d7a-46a4-7bfe6703a3eb@foss.st.com>
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <71bbd180-331f-8d7a-46a4-7bfe6703a3eb@foss.st.com>
-X-ClientProxiedBy: VI1PR09CA0150.eurprd09.prod.outlook.com
- (2603:10a6:803:12c::34) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ Tue,  3 Jan 2023 16:34:07 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 303ERXXq022737; Tue, 3 Jan 2023 17:34:01 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=iGuElrPjj3uShhzHnD6lX7DDHaKtqGqmeqYDsILo7xM=;
+ b=WdxUK1gOLussDMsBlWacd6wm1E0/e7H5zgP5WamGWve5+gf1Cgqj5dDOc3O2x4OGyzkq
+ tAolNJ7Jkg0jdD9e6a0YJ2Nb3c1q8nv5s9OMSJPLhgXLd2gjvEr+KeweQztRtfooi5rd
+ hKf2Qb7rcjO6XxGgEnPUgTZ6x0icsamusH5jEE4QI20Xjn5nMjdYoGToj3VNb6+40IDL
+ YBRu3bVVfqsPEy0ftriTVo7iHm9o3vn786WSHZeT6XirKJKRIw1yP0lubVI8xLQINTgi
+ Y3V4WIyTJNOmuq23W5t/XTOLX+cSOMNxpocsAwFUu0xkTyzHOVFBCbJ6tLH1QaepcPAy qA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtda65xfb-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Jan 2023 17:34:01 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A8A4610002A;
+ Tue,  3 Jan 2023 17:34:00 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A12AD22A6F9;
+ Tue,  3 Jan 2023 17:34:00 +0100 (CET)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 3 Jan
+ 2023 17:34:00 +0100
+Message-ID: <813b84fb-7c38-7768-07dd-3e9d1737608f@foss.st.com>
+Date: Tue, 3 Jan 2023 17:33:59 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PR3PR04MB7339:EE_
-X-MS-Office365-Filtering-Correlation-Id: 12ac107b-01a9-43a8-392b-08daeda821a1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: mjv7hFWglHGfRJ0lk/3j8BaFH1nqWrgd/XLdU5ED1fZi5AyZ2GFbXMQgwogcZzF6WY4yvgB7oDtBFGGsCRi3HRbpI21yiUrViVXhR8Bxgo2OQlwUbqw+6HRZszF47FUBZVf2LHWlWlOf2LlZrZYnmNbcAQk/hrj7qTrPFAdmlJKMyOtiXehz/8awY/cKcVbVSi8n7auxE1UMRA/1SnZCmH1P418nsBWYRbvJSH5Qdv/SOHFudp8Ivu5+btpDBv1wmf+YhRUOnfEJcByMf2KlnqAk5Kbhz06OMYwZSC1FvxCcsNPvu9xRliLDhe1oJ8/rEbMhiUQuVOqg4CDiLRAN42avBrucXP7psDTpWn8ZDD6KtZmS3bU4YJeTKC/xrlItSHTAhCqqkzHD5yJ8JcCoFQ159nRbhP9AV2ydcsVu5DfHPmYAhglZ7SyD0TG9ln//IlQ1qAoKgzcC7V+EopzB+qNd8d+rRI7FfeHCB268TFLJUoVkhUuWxX6xy4UGrdqi8hY73rWDTyA02B01Mad4xyLNNP4hpPvbZJVHCvbgqumHF8bLMXLkYqQp9ZZQfBZxeVVSpeDlRi6tcWetPnznfIGNirmE45gEitUqHylL/FOSp6TRBOlebhdAChPao+Me/25hAJI2bENN7L2i0yJ5O1jx0roak7+aLf3UPh2FVQwdoCxD0E3T/Qr4xrDjh6ZfwSPFsIpZo8NLqZ86cW/uskMppxkGZssWFmRHpZm68YH/gzgcsEC5pWkls08iMv4P1rP76QeWHPplKnL5pPBXjY8ObWu2danE1+M0GRSjADFQvD7tC/cwNttPNM6CDS3D7hclJLiplLvbeUwbK3VS5Q==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(4636009)(136003)(366004)(346002)(396003)(39850400004)(376002)(451199015)(31686004)(36756003)(4326008)(66946007)(66556008)(66476007)(8676002)(2906002)(5660300002)(7416002)(44832011)(38100700002)(83380400001)(86362001)(31696002)(478600001)(316002)(54906003)(6486002)(966005)(2616005)(41300700001)(8936002)(6666004)(53546011)(6512007)(6506007)(186003)(22166006)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cW5sMXB4UmVLK2FNeDdkeDg5RUtiaXRBLzZFT2NoTVF1TTZYMTV4NzRiblNy?=
- =?utf-8?B?dVFDQ3lPOFhzMlUzdmhDR09mVHQxbkVrTGVSaGl2d1JqclFDVHNRWmdVWHhM?=
- =?utf-8?B?WWUzdS9GVWJLSmh4b3NMZGRQdWVLdkUvNXhReldHaGxudzJTQzB6azlRcmo2?=
- =?utf-8?B?RGNlUkxMZEUvaGViaVl6UzJJSTZTMVJ4YWVFK3NXL3lTM3dVSlE3TXNjYVkr?=
- =?utf-8?B?RFY2aWthMlYvT292MjN2QVhHZmt0WVlBUTV4Y2NZd05Jczh5ZlBLY3NmMzVG?=
- =?utf-8?B?NmpqZ09pM2JnWEx4RklYWGVxb0ZBNGtMVGtHcUlmVFBEZUwvbnkyZ2I2Njl3?=
- =?utf-8?B?NUhRR04vZW5iYmFla2pDeHBCWTF2bk5qUERNL1d6bS96NlBQcCtueWIwZGZ6?=
- =?utf-8?B?eFc3Q0JodElZNzAreUhPMWtxNnFGSVBDbktVYlltSW1rT1hJZ3lOK0pWZHhF?=
- =?utf-8?B?ZGwyRm1ZeWtsUzJxV3pSNEJWZWM2dmx1VnlPT3pZNjJFdlNVQmk1R0RKVmJt?=
- =?utf-8?B?bnhTandzdzNpSmQraXRBOFg0NVFxencyZWRUK3BhQ0pnT2hnWm5rZ0loYWZz?=
- =?utf-8?B?ZDZPMVpRZjk0WmRBMEFabTg4MlNYY0dCZVo3MGVTTkpmdjRHaWZsMTE5eEl1?=
- =?utf-8?B?dVpHY05saVRHWU8vMDhkcVdTcWM1UFhINXAzMFhybDJIWUJEaUJoZ0xxQ0R0?=
- =?utf-8?B?RGtKZGc5dkRJdDFoaTF1SzlTSXREM2RKRkpReWZ2NWI3dnJ6MVN4emNBcFNF?=
- =?utf-8?B?bVl4Zk5PR1RwSHdkNHdka1piRmJHZWhCcjJlUHBDTVgvdUw0L1BLamVSVmRs?=
- =?utf-8?B?Z2dUUy9qRGdXdHJadmpNVWpnOGlyMyt5YkU5VlRXRm9yZC9TZ29YSmE2S0hp?=
- =?utf-8?B?eXI4VnFWUENyckZRd0M5c2o5YllYdFhVclpDeVhSbmNCeEhRb1YzS2F2Z0Yv?=
- =?utf-8?B?aG9jWnNCWDVJNmZGYXhPM1l4aURyNERKU3o3Ri9zcGtYdGMyeUkxR2NNMzkv?=
- =?utf-8?B?SmRwR0JRR242akkwUnFHN0MzUmFtdFZrK1dML1NQUjBFTzYrVXNNSHZkcU9N?=
- =?utf-8?B?WU5uRHFJS29SMDVpbXV4NzZxSWlHSjQ0RmhuYUd0U1BlWWNOamU5eGQxZFVk?=
- =?utf-8?B?bE43RkU4T3J6ekRtakhjZFZOaEQ5Z3FZUDV0WVRtNTFvdnBOdkZWNnBKa0lt?=
- =?utf-8?B?YzU1aWVCOEU1QWt4Ykh2ZmR2a2hjV2I5Zk1QeFBnQnY0UlIvUUZrc2VUM0Mv?=
- =?utf-8?B?cHNxbEdkQUFBSWZSallsaTlaL3M0UnAzQUdRNFh0RmQzckl0K0tPMTA3VDZX?=
- =?utf-8?B?bUwwbEVVNmRUWFVtMUk0L21nb1VnWE1oU1JWZFZxRkRuV1NXb2RwWTh6cW91?=
- =?utf-8?B?N0hoVEgzOHJ1UHBwM05kanpIT1kyU0RReFJ4ZHh2ZC9SK1JsdEIwaU9DaHFR?=
- =?utf-8?B?S2xUYy9JRDI3OWQrREdBYXNjYm1kenVVS0x6NG9WSmxLSDRXa2poK3ZELy83?=
- =?utf-8?B?Z2lHRGdhL2VKRjhFNE0rVGZTRVNROXJYV2JZWGNjcVBKSjlSOXB4SVZmNWlM?=
- =?utf-8?B?SVFTVWJJYmtXWjU1bUliME53UFZialIrM1d2T2c5L3gyaFFXUHZ1RzVuV3Rj?=
- =?utf-8?B?aWgvL0ZlNkEwVjZSbmllWW5wV2RpZ3hVa0xTWDFLMDZiejZCamljbjJ6dTg5?=
- =?utf-8?B?bVI0WHZ3dVJuZkZ2Tll2NjNCYVUycitaY0gvbGJRdEo2KzlTalJFTllNNTFS?=
- =?utf-8?B?UUU2VnpXQkR0NnBhSkpJZ2t5SEZEeXRaTDMwSkZsQXlYRU1yL3ZhSEwwVHp4?=
- =?utf-8?B?VzRjUWVRbWpGM0RRTjh0MjdIdHk0dG5TOTFMcFF1QytpbGx4MGIxQ2RyWlVq?=
- =?utf-8?B?YWFIUlRCRXljNXpaOGhkM3FwQjZ6NjNQS1BQRHR3OVRLOWlqSXNWaElzbkZm?=
- =?utf-8?B?ZmlKZzg3Y3BEK3Q4ODNzSjFFT2R1aWJja25SK2kxSmRPY3c3QmdpRmFLVTUz?=
- =?utf-8?B?ZFpjQlAwNDRnaGV1ZzZZSG1BMVo5ZTJoakhITkRPbUppQW1iR2VjRlBFQ1Mx?=
- =?utf-8?B?K3QwZHkzVk9lRlpGckdiTk0xeDVKZGlEVUpmelE0QlpZRzVwWmVlK0s5M0R2?=
- =?utf-8?B?NW1CSnVpM21Sakx0QUpueTIrRTFPNWxZYXo0aGZUR2dlaDBsNHdIYUZpVlAv?=
- =?utf-8?B?aDEyTzcvWGVzQ1MyUmpiTm5RcGZIbDA4R3MyaEVHcFlEL0Z5YjJVY2RDZjY1?=
- =?utf-8?B?ZThXSnpJcUp1Tk1zNU5xbktxWmNBPT0=?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 12ac107b-01a9-43a8-392b-08daeda821a1
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Jan 2023 16:32:40.4598 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: J5JQF8QRMHT23bX90ycYRf+M+tRRo/3SOPl5i38gVrI6HPw+WDeQbCcjBb1OSFI867ju+2914YXAzztzO9Of5Wg2vUZoSc7M5le9cZrt8+CIcQOtPgVSLZiyT0yaJrG/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7339
-Cc: Edoardo Tomelleri <e.tomell@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Artem Lapkin <email2tema@gmail.com>,
- Zhang Ning <zhangn1985@qq.com>, Zhaofeng Li <hello@zhaofeng.li>,
- Ramon Fried <rfried.dev@gmail.com>,
- Amjad Ouled-Ameur <aouledameur@baylibre.com>,
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221212104437.15838-1-fabrice.gasnier@foss.st.com>
+ <20221212104437.15838-2-fabrice.gasnier@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20221212104437.15838-2-fabrice.gasnier@foss.st.com>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-03_05,2023-01-03_02,2022-06-22_01
+Cc: Marek Vasut <marex@denx.de>, Thomas Huth <thuth@redhat.com>,
+ Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 0/3] cmd: pxe: support INITRD and FDT
-	selection with FIT
+ Stefan Roese <sr@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH 1/3] usb: onboard-hub: add driver to
+ manage onboard hub supplies
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -142,140 +77,203 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgUGF0cmljaywKCk9uIDEvMy8yMyAxNzoxMCwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiAK
-PiBPbiAxMi8xMy8yMiAxNTo0OCwgUXVlbnRpbiBTY2h1bHogd3JvdGU6Cj4+IEhpIFBhdHJpY2ss
-Cj4+Cj4+IE9uIDEyLzEzLzIyIDE1OjM0LCBuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnIHdyb3Rl
-Ogo+Pj4gT24gMTMvMTIvMjAyMiAxNTozMSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPj4+PiBI
-aSwKPj4+Pgo+Pj4+IE9uIDExLzIyLzIyIDIwOjQzLCBOZWlsIEFybXN0cm9uZyB3cm90ZToKPj4+
-Pj4gT24gMjIvMTEvMjAyMiAyMDoxMSwgTmVpbCBBcm1zdHJvbmcgd3JvdGU6Cj4+Pj4+PiBIaSwK
-Pj4+Pj4+Cj4+Pj4+PiBPbiAyMS8xMS8yMDIyIDEzOjIzLCBRdWVudGluIFNjaHVseiB3cm90ZToK
-Pj4+Pj4+PiBIaSBQYXRyaWNrLAo+Pj4+Pj4+Cj4+Pj4+Pj4gVGhhbmtzIGZvciBsb29raW5nIGF0
-IGl0Lgo+Pj4+Pj4+Cj4+Pj4+Pj4gT24gMTAvMjgvMjIgMTE6MDEsIFBhdHJpY2sgRGVsYXVuYXkg
-d3JvdGU6Cj4+Pj4+Pj4+Cj4+Pj4+Pj4+IFNpbmNlIHRoZSBjb21taXQgZDViYTYxODhkZmJmICgi
-Y21kOiBweGVfdXRpbHM6IENoZWNrIAo+Pj4+Pj4+PiBmZHRjb250cm9sYWRkcgo+Pj4+Pj4+PiBp
-biBsYWJlbF9ib290IikgdGhlIEZEVCBvciB0aGUgRkRURElSIGxhYmVsIGlzIHJlcXVpcmVkIGlu
-IAo+Pj4+Pj4+PiBleHRsaW51eC5jb25mCj4+Pj4+Pj4+IGFuZCB0aGUgZmFsbGJhY2sgZG9uZSBi
-eSBib290bSBjb21tYW5kIHdoZW4gb25seSB0aGUgZGV2aWNlIHRyZWUgCj4+Pj4+Pj4+IGlzIHBy
-ZXNlbnQKPj4+Pj4+Pj4gaW4gdGhpcyBjb21tYW5kIHBhcmFtZXRlcnMgaXMgbm8gbW9yZSBwZXJm
-b3JtZWQgd2hlbiBGSVQgaXMgdXNlZCAKPj4+Pj4+Pj4gZm9yCj4+Pj4+Pj4+IGtlcm5lbC4KPj4+
-Pj4+Pj4KPj4+Pj4+Pj4gVGhlIG5leHQgZmlsZSAiZXh0bGludXguY29uZiIgbm8gbW9yZSBzZWxl
-Y3RzIHRoZSBkZXZpY2UgdHJlZSBpbiAKPj4+Pj4+Pj4gRklUCj4+Pj4+Pj4+IGJ1dCB1c2UgdGhl
-IHB4ZSBmYWxsYmFjayB3aXRoIHRoZSBkZXZpY2UgdHJlZSBvZiBVLUJvb3QuCj4+Pj4+Pj4+Cj4+
-Pj4+Pj4+IG1lbnUgdGl0bGUgU2VsZWN0IHRoZSBib290IG1vZGUKPj4+Pj4+Pj4gREVGQVVMVCB0
-ZXN0Cj4+Pj4+Pj4+IExBQkVMIHRlc3QKPj4+Pj4+Pj4gwqDCoMKgwqDCoMKgwqDCoCBLRVJORUwg
-L2ZpdEltYWdlCj4+Pj4+Pj4+Cj4+Pj4+Pj4+IFRoaXMgc2VyaWUgcmVzdG9yZXMgdGhlIHBvc3Np
-YmlsaXR5IHRvIHVzZSBhIEZJVCBpbiBleHRsaW51eC5jb25mCj4+Pj4+Pj4+IGJ5IHVzaW5nIEZE
-VCBsYWJlbCB3aXRoIHRoZSBzYW1lIHN0cmluZy4KPj4+Pj4+Pj4KPj4+Pj4+Pj4gbWVudSB0aXRs
-ZSBTZWxlY3QgdGhlIGJvb3QgbW9kZQo+Pj4+Pj4+PiBERUZBVUxUIHRlc3QKPj4+Pj4+Pj4gTEFC
-RUwgdGVzdAo+Pj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgIEtFUk5FTCAvZml0SW1hZ2UKPj4+Pj4+
-Pj4gwqDCoMKgwqDCoMKgwqDCoCBGRFQgL2ZpdEltYWdlCj4+Pj4+Pj4+Cj4+Pj4+Pj4+IGV2ZW4g
-d2hlbiBhIHNwZWNpZmljIEZJVCBjb25maWcgaXMgdXNlZDoKPj4+Pj4+Pj4KPj4+Pj4+Pj4gbWVu
-dSB0aXRsZSBTZWxlY3QgdGhlIGJvb3QgbW9kZQo+Pj4+Pj4+PiBERUZBVUxUIHRlc3QKPj4+Pj4+
-Pj4gTEFCRUwgdGVzdAo+Pj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgIEtFUk5FTCAvZml0SW1hZ2Uj
-Y29uZmlnCj4+Pj4+Pj4+IMKgwqDCoMKgwqDCoMKgwqAgRkRUIC9maXRJbWFnZSNjb25maWcKPj4+
-Pj4+Pj4KPj4+Pj4+Pj4gVGhlIGxhc3QgY29tbWl0IG9mIHRoZSBzZXJpZXMgaXMgb25seSBhIG1p
-bm9yIGltcHJvdmVtZW50Lgo+Pj4+Pj4+Pgo+Pj4+Pj4+Cj4+Pj4+Pj4gSSB0ZXN0ZWQgdGhpcyBv
-biBteSBQdW1hIFJLMzM5OSBhbmQgaXQgZG9lcyB3b3JrIGFnYWluLCB0aGFua3MuCj4+Pj4+Pj4K
-Pj4+Pj4+PiBIb3dldmVyLCBJJ20gbm90IHN1cmUgdGhpcyBpcyB3aGF0IHdlIHNob3VsZCBnbyBm
-b3I/Cj4+Pj4+Pj4KPj4+Pj4+PiBNeSB3b3JyeSBpcyB0aGUgZm9sbG93aW5nOgo+Pj4+Pj4+IFdo
-YXQgaGFwcGVucyBmb3Igb2xkIHJlbGVhc2VzIChwcmUtdjIwMjIuMDQpIHdoZXJlIEtFUk5FTCB3
-b3JrZWQgCj4+Pj4+Pj4ganVzdCBmaW5lIHdpdGhvdXQgdGhlIEZEVCB0byBsb2FkIHRoZSBmZHQg
-ZnJvbSB0aGUgZml0aW1hZ2UgY29uZiAKPj4+Pj4+PiBzcGVjaWZpZWQgaW4gS0VSTkVMIGZpZWxk
-PyBXb3VsZCB3ZSBub3cgbmVlZCB0byBrZWVwIGFuIAo+Pj4+Pj4+IGV4dGxpbnV4LmNvbmYgZm9y
-IHByZS0yMDIyLjA0IHJlbGVhc2VzIHdoZXJlIEZEVCB3b3VsZG4ndCBiZSBzZXQgCj4+Pj4+Pj4g
-YW5kIG9uZSBmb3IgMjAyMy4wMSBhbmQgbGF0ZXIgd2hlcmUgRkRUIHdvdWxkIGJlIG1lbnRpb25l
-ZD8gVGhhdCAKPj4+Pj4+PiBkb2VzIG5vdCBzZWVtIGxpa2UgYSBnb29kIHRoaW5nIGZvciBkaXN0
-cm9zLgo+Pj4+Pj4+Cj4+Pj4+Pj4gSSB1bmZvcnR1bmF0ZWx5IGNhbm5vdCBhbnN3ZXIgdGhlIHF1
-ZXN0aW9uIG15c2VsZiB3aXRob3V0IAo+Pj4+Pj4+IHNwZW5kaW5nIHNpZ25pZmljYW50IGVmZm9y
-dCBwYXRjaGluZyB2MjAyMi4wMSB0byBnZXQgaXQgdG8gd29yayAKPj4+Pj4+PiBvbiBvdXIgUHVt
-YSBtb2R1bGUuIERvZXMgYW55b25lIGhhdmUgYWNjZXNzIHRvIGEgYm9hcmQgdG8gcXVpY2tseSAK
-Pj4+Pj4+PiBjaGVjayBhbiBleHRsaW51eC5jb25mIHdpdGggS0VSTkVMIGFuZCBGRFQgc2V0IHRv
-IC9maXRJbWFnZSBvbiBhIAo+Pj4+Pj4+IHYyMDIyLjAxIHJlbGVhc2U/Cj4+Pj4+Pgo+Pj4+Pj4g
-SSdtIGJ1aWxkaW5nIGtpcmtzdG9uZSBpbWFnZXMgd2l0aCBtZXRhLW1lc29uIGhhdmluZyB2MjAy
-Mi4wMSwgCj4+Pj4+PiBJJ2xsIHRlc3Qgd2l0aCBGRFQgc2V0IHRvIC9maXRJbWFnZSB0byBzZWUg
-aWYgaXQgYnJlYWtzLgo+Pj4+Pgo+Pj4+PiBJdCBicmVha3M6Cj4+Pj4+IEZvdW5kIC9leHRsaW51
-eC9leHRsaW51eC5jb25mCj4+Pj4+IFJldHJpZXZpbmcgZmlsZTogL2V4dGxpbnV4L2V4dGxpbnV4
-LmNvbmYKPj4+Pj4gMTrCoMKgwqAgWW9jdG8KPj4+Pj4gUmV0cmlldmluZyBmaWxlOiAvZml0SW1h
-Z2UKPj4+Pj4gYXBwZW5kOiByb290PVBBUlRVVUlEPTNlYmMwMDA1LTAyIHJvb3R3YWl0IGNvbnNv
-bGU9dHR5QU1MMCwxMTUyMDAKPj4+Pj4gUmV0cmlldmluZyBmaWxlOiAvZml0SW1hZ2UKPj4+Pj4g
-QmFkIExpbnV4IEFSTTY0IEltYWdlIG1hZ2ljIQo+Pj4+PiBTQ1JJUFQgRkFJTEVEOiBjb250aW51
-aW5nLi4uCj4+Pj4+Cj4+Pj4KPj4+PiBDYW4geW91IHNoYXJlIHRoZSBleHRsaW51eCBmaWxlIHVz
-ZWQgZm9yIHlvdXIgdGVzdCA/ZG8geW91IGhhdmUgbXkgCj4+Pj4gcGF0Y2ggPwo+Pj4KPj4+IEl0
-IHdhcyBleHBsaWNpdGx5IHdpdGhvdXQgeW91ciBwYXRjaCBhcyBRdWVudGluIGFza2VkLCBoZSBo
-b3BlZCBhZGRpbmdoCj4+PiAiRkRUIC9maXRJbWFnZSIgd291bGQgbm90IGJyZWFrIHUtYm9vdCBw
-cmUgZDViYTYxODhkZmJmLCBidXQgbm8uCj4+Pgo+Pgo+PiBZb3VyIGltcGxlbWVudGF0aW9uIHJl
-cXVpcmVzIGNoYW5nZXMgaW4gZXh0bGludXguY29uZiAod2hpY2ggY291bGQgYmUgCj4+IGZpbmUs
-IEknbSBub3QgYXJndWluZyBhYm91dCB0aGlzIHNwZWNpZmljYWxseSkuIEkgaG93ZXZlciB0aGlu
-ayB3ZSAKPj4gbmVlZCB0aG9zZSByZXF1aXJlZCBjaGFuZ2VzIHRvIGJlIGJhY2t3YXJkIGNvbXBh
-dGlibGUgd2l0aCBvbGRlciBVLUJvb3QuCj4+Cj4+IFRoaXMgbWVhbnMsIGEgbmV3IGV4dGxpbnV4
-LmNvbmYgdGhhdCB3b3JrcyBvbiBuZXdlciBVLUJvb3Qgc2hvdWxkIGFsc28gCj4+IHdvcmsgb24g
-b2xkZXIgVS1Cb290IHdpdGhvdXQgeW91ciBwYXRjaC4KPj4KPj4gT3RoZXJ3aXNlLCB3ZSB3b3Vs
-ZCBoYXZlIHRoZSBmb2xsb3dpbmc6Cj4+Cj4+IFUtQm9vdCBcIGV4dGxpbnV4LmNvbmYgfHwgb2xk
-IHwgbmV3Cj4+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQo+PiBvbGTCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8fCBPS8KgIHwgTk9LCj4+IG5ld8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHx8IE5PSyB8IE9LCj4+Cj4+IFdo
-YXQgSSBhbSBob3BpbmcgZm9yIGlzOgo+PiBVLUJvb3QgXCBleHRsaW51eC5jb25mIHx8IG9sZCB8
-IG5ldwo+PiA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KPj4gb2xkwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfHwgT0vCoCB8IE9LCj4+IG5ld8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHx8IE5PSyB8IE9LCj4+Cj4+IG9yIGV2
-ZW4gZml4IHRoZSBzdXBwb3J0IGZvciBuZXcgVS1Cb290IHdpdGggb2xkIGV4dGxpbnV4LmNvbmYg
-KGJ1dCAKPj4gdGhhdCBzZWVtcyBub3QgcG9zc2libGUgYmVjYXVzZSBob3cgZDViYTYxODhkZmJm
-ICgiY21kOiBweGVfdXRpbHM6IAo+PiBDaGVjayBmZHRjb250cm9sYWRkciBpbiBsYWJlbF9ib290
-Iikgd29ya3M/KS4KPj4KPiAKPiBZZXMgYnV0IEkgZG9uJ3Qgc2VlIGFueSBwb3NzaWJsZSBzb2x1
-dGlvbiB0byBzb2x2ZSBhbGwgdGhlIGNvbWJpbmF0aW9uIAo+IHdpdGggZDViYTYxODhkZmJmIGFu
-ZCB3aXRob3V0IG9yIHdpdGhvdXQgRklUOgo+IAo+IHRoZSBvbGQgZXh0bGludXguY29uZiB3aXRo
-IEZJVCBhcmUgYWxyZWFkeSBubyBtb3JlIHdvcmtpbmcgYXMgZXhwZWN0ZWQgCj4gd2l0aCBjdXJy
-ZW50IFUtQm9vdCAoMSkKPiAKPiB3aGVuIEZEVCBhbmQgRkRURElSIGFyZSBhYnNlbnQKPiAKPiAK
-PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZXh0bGludXguY29uZiB8fCBrZXJuZWwgPSB1SW1hZ2Ug
-fCDCoMKgIGtlcm5lbD0gRklUIMKgwqAgfCAKPiBrZXJuZWwgPSBGSVQKPiAKPiAgwqDCoMKgIMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfHzCoCBGRFQgYWJzZW50wqDC
-oMKgwqAgfCBGRFQgYWJzZW50wqDCoMKgwqDCoMKgwqAgfCBGRFQgPSAKPiBGSVQgKG15IHByb3Bv
-c2FsKQo+IAo+ID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Cj4gCj4gVS1Cb290
-IDw9IHYyMDIyLjAxLXJjMsKgwqAgfHwgS0/CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IE9L
-IHVzaW5nIERUIGluIEZJVMKgwqAgfCBub3QgCj4gc3VwcG9ydGVkCj4gCj4gVS1Cb290ID49IDIw
-MjIuMDEtcmMzwqDCoCB8fCBPSyAoMSkgwqDCoMKgwqDCoMKgwqAgfCBPSygyKXVzaW5nIFUtQm9v
-dCBEVCB8IG5vdCAKPiBzdXBwb3J0ZWQKPiAKPiBuZXh0IHdpdGggbXkgcHJvcG9zYWzCoMKgwqAg
-fHwgT0sgKDEpwqDCoMKgwqDCoMKgwqDCoMKgIHwgT0soMil1c2luZyBVLUJvb3QgRFQgfCBPSyAK
-PiAodXNpbmcgRFQgaW4gRklUKQo+IAo+IAo+ICgxKSB3aXRoIGQ1YmE2MTg4ZGZiZgo+IAo+ICgy
-KSBSaXNrIHRvIGhhdmUgdW5hbGlnbmVkIERUIGJldHdlZW4gVS1Cb290IChvbGQpIGFuZCBrZXJu
-ZWwgKG5ldykKPiAKPiAgwqDCoMKgID0+IFUtQm9vdCBiZWhhdmlvciBjaGFuZ2Ugd2l0aCAyMDIy
-LjAxLXJjMygxKQo+IAo+IAo+PiBUaGlzIHdvdWxkIGdpdmUgYW4gZWFzeSBtaWdyYXRpb24gcGF0
-aCB0byBhbnkgY3JlYXRvciBvZiB0aGlzIAo+PiBleHRsaW51eC5jb25mIGZpbGUgYnkganVzdCBt
-aWdyYXRpbmcgdG8gdGhlIG5ldyBmb3JtYXQgd2hpbGUgbm90IAo+PiByZXF1aXJpbmcgaXQgdG8g
-Y2FyZSBhYm91dCB0aGUgdmVyc2lvbiBvZiBVLUJvb3QgYmVpbmcgdXNlZC4KPiAKPiAKPiBJIGFn
-cmVlLCBpdCBpcyBiZXR0ZXIgdG8gYmUgYmFja3dhcmQgY29tcGF0aWJsZS4KPiAKPiBTbyBJIHNl
-YXJjaCBhIHNvbHV0aW9uIHRvIGtlZXAgdGhlIG5ldyBmZWF0dXJlIGludHJvZHVjZWQgYnkgCj4g
-ZDViYTYxODhkZmJmICgiY21kOiBweGVfdXRpbHM6IENoZWNrIGZkdGNvbnRyb2xhZGRyIGluIGxh
-YmVsX2Jvb3QiKSBidXQgCj4gb25seSB3aGVuIEZJVCBpcyBub3QgdXNlZCBhbmQgZmFsbGJhY2sg
-dG8gcHJldmlvdXMgYmVoYXZpb3IgZm9yIEZJVC4uLi4KPiAKPiAKPiBidXQgaXQgaXMgdG9vIGNv
-bXBsaWNhdGVkOiBweGUgdXRpbHMgbmVlZCB0byBsb2FkIHRoZSAia2VybmVsX2FkZHIiIGFuZCAK
-PiB2ZXJpZnkgaWYgaXQgaXMgYSBGSVQgYmVmb3JlIHRvIGNoZWNrIGlmICJmZHRjb250cm9sYWRk
-ciIgaXMgcHJvdmlkZWQsIAo+IGJ1dCBJIGNhbiB0ZXN0IGFuIHNvbHV0aW9uIGlmIHlvdSBoYXZl
-IGEgcHJvcG9zYWwuCj4gCj4gCj4gTW9yZW92ZXIgSSBhc3N1bWVkIHRoZSBGSVQgZmVhdHVyZSBp
-cyBub3QgbGFyZ2VseSB1c2VkIGluIGdlbmVyYXRlZCAKPiBleHRsaW51eC5jb25mIGZpbGUgYXMg
-dGhlIHJlZ3Jlc3Npb24gaW50cm9kdWNlZCBieSAyMDIyLjAxLXJjMndhc24ndCAKPiBkZXRlY3Rl
-ZCB1bnRpbCBub3cuCj4gCgpJdCdzIHRoZSBkZWZhdWx0IGluIFlvY3RvIHdoZW4geW91J3JlIGJ1
-aWxkaW5nIGZpdCBpbWFnZXMgOikgVS1Cb290IAoyMDIyLjAxIGlzIG9ubHkgaW4gWW9jdG8gc2lu
-Y2UgS2lya3N0b25lIGFuZCBpdCdzIG9ubHkgdGhlIGRlZmF1bHQgCnZlcnNpb24sIHdoaWNoIGlz
-IHJhcmVseSB1c2VkLiBWZW5kb3JzIGFsc28gaGF2ZSBhIHRlbmRlbmN5IHRvIHN0YXkgd2F5IApi
-ZWhpbmQgYW5kIG5vdCB1cGdyYWRlIFUtQm9vdCAod2UndmUgZG9uZSB0aGlzLCB0cnlpbmcgdG8g
-Zml4IGl0IHJpZ2h0IApub3csIHlvdSBwcm9iYWJseSBzYXcgdGhlIG51bWJlciBvZiBwYXRjaGVz
-IEkgc2VudCB0byBmaXggb3VyIHBvb3IgUHVtYSAKbW9kdWxlIGluIHRoZSBsYXN0IHllYXIgOikg
-KS4KCkFueXdheXMsIEkgdGhpbmsgd2UndmUgc29tZXRoaW5nIHdlIGNhbiB3b3JrIHdpdGggbm93
-OiAKaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjIxMjE0MDY0NTE4Ljc1MzQzMi0x
-LW1hcmV4QGRlbnguZGUvCgpXZSBuZWVkIHRvIHRha2UgdGhpcyBvbmUgYW5kIHRoZW4gYXBwbHkg
-Cmh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3UtYm9vdC8yMDIyMTIxNzE3NDExMy43NDU5LTEtbWFy
-ZXhAZGVueC5kZS8gYWdhaW4uCgpJJ2xsIGFzayBNYXJlayB0byBtYWtlIHRoaXMgYSB2MyBhbGwg
-dG9nZXRoZXIgYW5kIG1hcmsgaXQgdXJnZW50IGZvciAKbmV4dCByZWxlYXNlIHNvIFRvbSBrbm93
-cyBoZSBzaG91bGQgbWVyZ2UgaXQgQVNBUC4gRG9uJ3QgaGVzaXRhdGUgdG8gCnByb3ZpZGUgZmVl
-ZGJhY2sgb24gdGhvc2UgcGF0Y2hlcyBiZWNhdXNlIEkgZXhwZWN0IHRob3NlIHRvIGJlIG1lcmdl
-ZCAKcXVpdGUgZmFzdC4KCkNoZWVycywKUXVlbnRpbgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3Rt
-MzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rv
-cm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+Hi Fabrice
+
+On 12/12/22 11:44, Fabrice Gasnier wrote:
+> The main issue the driver addresses is that a USB hub needs to be
+> powered before it can be discovered. This is often solved by using
+> "regulator-always-on".
+> 
+> This driver is inspired by the Linux v6.1 driver. It only enables (or
+> disables) the hub vdd (3v3) supply, so it can be enumerated.
+> Scanning of the device tree is done in a similar manner to the sandbox,
+> by the usb-uclass. DT part looks like:
+> 
+> &usbh_ehci {
+> 	...
+> 	#address-cells = <1>;
+> 	#size-cells = <0>;
+> 	hub@1 {
+> 		compatible = "usb424,2514";
+> 		reg = <1>;
+> 		vdd-supply = <&v3v3>;
+> 	};
+> };
+> 
+> When the bus gets probed, the driver is automatically probed/removed from
+> the bus tree, as an example on stm32:
+> STM32MP> usb start
+> starting USB...
+> STM32MP> dm tree
+>  Class     Index  Probed  Driver                Name
+> -----------------------------------------------------------
+>  usb           0  [ + ]   ehci_generic          |   |-- usb@5800d000
+>  usb_hub       0  [ + ]   usb_onboard_hub       |   |   `-- hub@1
+>  usb_hub       1  [ + ]   usb_hub               |   |       `-- usb_hub
+> 
+> STM32MP> usb tree
+> USB device tree:
+>   1  Hub (480 Mb/s, 0mA)
+>   |  u-boot EHCI Host Controller
+>   |
+>   +-2  Hub (480 Mb/s, 2mA)
+> 
+> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> ---
+> 
+>  common/Makefile               |  1 +
+>  common/usb_onboard_hub.c      | 62 +++++++++++++++++++++++++++++++++++
+>  drivers/usb/Kconfig           | 10 ++++++
+>  drivers/usb/host/usb-uclass.c | 16 +++++----
+>  4 files changed, 83 insertions(+), 6 deletions(-)
+>  create mode 100644 common/usb_onboard_hub.c
+> 
+> diff --git a/common/Makefile b/common/Makefile
+> index 20addfb244c2..7789aab484fd 100644
+> --- a/common/Makefile
+> +++ b/common/Makefile
+> @@ -26,6 +26,7 @@ obj-$(CONFIG_PHYLIB) += miiphyutil.o
+>  obj-$(CONFIG_USB_HOST) += usb.o usb_hub.o
+>  obj-$(CONFIG_USB_GADGET) += usb.o usb_hub.o
+>  obj-$(CONFIG_USB_STORAGE) += usb_storage.o
+> +obj-$(CONFIG_USB_ONBOARD_HUB) += usb_onboard_hub.o
+>  
+>  # others
+>  obj-$(CONFIG_CONSOLE_MUX) += iomux.o
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> new file mode 100644
+> index 000000000000..89e18a2ddad6
+> --- /dev/null
+> +++ b/common/usb_onboard_hub.c
+> @@ -0,0 +1,62 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Driver for onboard USB hubs
+> + *
+> + * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
+> + *
+> + * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
+> + */
+> +
+> +#include <common.h>
+> +#include <dm.h>
+> +#include <dm/device_compat.h>
+> +#include <power/regulator.h>
+> +
+> +struct onboard_hub {
+> +	struct udevice *vdd;
+> +};
+> +
+> +static int usb_onboard_hub_probe(struct udevice *dev)
+> +{
+> +	struct onboard_hub *hub = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = device_get_supply_regulator(dev, "vdd-supply", &hub->vdd);
+> +	if (ret) {
+> +		dev_err(dev, "can't get vdd-supply: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = regulator_set_enable_if_allowed(hub->vdd, true);
+> +	if (ret)
+> +		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+> +
+> +	return ret;
+> +}
+> +
+> +static int usb_onboard_hub_remove(struct udevice *dev)
+> +{
+> +	struct onboard_hub *hub = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = regulator_set_enable_if_allowed(hub->vdd, false);
+> +	if (ret)
+> +		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
+> +
+> +	return ret;
+> +}
+> +
+> +static const struct udevice_id usb_onboard_hub_ids[] = {
+> +	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
+> +	{ .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(usb_onboard_hub) = {
+> +	.name	= "usb_onboard_hub",
+> +	.id	= UCLASS_USB_HUB,
+> +	.probe = usb_onboard_hub_probe,
+> +	.remove = usb_onboard_hub_remove,
+> +	.of_match = usb_onboard_hub_ids,
+> +	.priv_auto = sizeof(struct onboard_hub),
+> +};
+> diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
+> index 3afb45d5ccb2..d10ee6853d40 100644
+> --- a/drivers/usb/Kconfig
+> +++ b/drivers/usb/Kconfig
+> @@ -106,6 +106,16 @@ config USB_KEYBOARD
+>  	  Say Y here if you want to use a USB keyboard for U-Boot command line
+>  	  input.
+>  
+> +config USB_ONBOARD_HUB
+> +	bool "Onboard USB hub support"
+> +	depends on DM_USB
+> +	---help---
+> +	  Say Y here if you want to support discrete onboard USB hubs that
+> +	  don't require an additional control bus for initialization, but
+> +	  need some non-trivial form of initialization, such as enabling a
+> +	  power regulator. An example for such a hub is the Microchip
+> +	  USB2514B.
+> +
+>  if USB_KEYBOARD
+>  
+>  config USB_KEYBOARD_FN_KEYS
+> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+> index 060f3441df0c..f5dc93ffee39 100644
+> --- a/drivers/usb/host/usb-uclass.c
+> +++ b/drivers/usb/host/usb-uclass.c
+> @@ -271,19 +271,23 @@ int usb_init(void)
+>  		/* init low_level USB */
+>  		printf("Bus %s: ", bus->name);
+>  
+> -#ifdef CONFIG_SANDBOX
+>  		/*
+>  		 * For Sandbox, we need scan the device tree each time when we
+>  		 * start the USB stack, in order to re-create the emulated USB
+>  		 * devices and bind drivers for them before we actually do the
+>  		 * driver probe.
+> +		 *
+> +		 * For USB onboard HUB, we need to do some non-trivial init
+> +		 * like enabling a power regulator, before enumeration.
+>  		 */
+> -		ret = dm_scan_fdt_dev(bus);
+> -		if (ret) {
+> -			printf("Sandbox USB device scan failed (%d)\n", ret);
+> -			continue;
+> +		if (IS_ENABLED(CONFIG_SANDBOX) ||
+> +		    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
+> +			ret = dm_scan_fdt_dev(bus);
+> +			if (ret) {
+> +				printf("USB device scan from fdt failed (%d)", ret);
+> +				continue;
+> +			}
+>  		}
+> -#endif
+>  
+>  		ret = device_probe(bus);
+>  		if (ret == -ENODEV) {	/* No such device. */
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

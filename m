@@ -2,57 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4360F65BFFA
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 13:37:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C88E65C000
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 13:39:51 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 08731C64110;
-	Tue,  3 Jan 2023 12:37:31 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 32A83C64110;
+	Tue,  3 Jan 2023 12:39:51 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5DE74C03FC6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9F41C03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 12:37:29 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Tue,  3 Jan 2023 12:39:49 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 303AUg9O021722
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 3 Jan 2023 13:37:29 +0100
+ 3039AO6g017080; Tue, 3 Jan 2023 13:39:39 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
- mime-version : subject : to : references : from : in-reply-to :
+ mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=v8F98QdguD7HXgXMXrkB8/fQ8DF/DFrSilNAOoyAy4U=;
- b=YCMGPFtavelfbwIRPWoq39b6zA2u6kNXh/lxZZvsuQXiS/UpocuXmvpFZ4Wa39SctGog
- 78awJ2i+QOteCV9jIub8gjOniIUbkk0KAhH07wHwPQNxX4W29OTTT9usueYBMfmyzZOI
- sK12aBk0JAXk7XIjQkoSMg1vO1sYGSxXp9naOX6dAOCbWoFW0ukgAAy/pycyh4PuqMoE
- xCgCdGZzMEHUfJNy/W+F+HvvaHWhvF65eMTBNH8KDiDG2NeP81+JuVMfq6GodIYIj77O
- qK+VO8JOZttFU4byjAwFFUlMhkajPeL+C3UYNzxLov94gTz93AnOTahDXaTK39U9aNr1 BQ== 
+ bh=eG9l0wvuLDbrmokXnq3Cnn4Hs4PyVqxNWwKB0OL+7i0=;
+ b=atlGLran9uU9mKJJXHwaw8LfWr5Bbw6Tz3isG6BR6EGYXzd9A+d1RFdcoCR0Tx3Mrofj
+ usChNu9jAEuKr1DtSIUZmw1o+E1mIKvbg0v5ckz/AkZIXNmMFUAmTS13x0lZoWc9vm9E
+ ZH//+cLSb1k6eTlNH/pXAiS9wf9ukXj9c4r/yWTxciyk1MlZM75UcZOxyN3qqyy2DkDL
+ IqX0PwfKfLuLNsSzKnilXZ+amFRZoyKRTJ9o9dvt9OKSLsOjp24nO2X3XdbEonBApG+Y
+ 6B/s8hvz5Og7SFc+nQhT+GnUVcyRuMDxbSdEVIV7SsmaC7JPO6iU88/Yg3bDDEygDNRg pA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtcupn33y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 03 Jan 2023 13:37:28 +0100
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtbcpw5aj-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Jan 2023 13:39:39 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5ECBA100034
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 13:37:28 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DA4CB10002A;
+ Tue,  3 Jan 2023 13:39:36 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 53F3021BF49
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 13:37:28 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D320721BF4D;
+ Tue,  3 Jan 2023 13:39:36 +0100 (CET)
 Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 3 Jan
- 2023 13:37:25 +0100
-Message-ID: <1ca70846-0e9a-3a96-8d58-6545306bd9dc@foss.st.com>
-Date: Tue, 3 Jan 2023 13:37:24 +0100
+ 2023 13:39:36 +0100
+Message-ID: <e1f2bdba-db39-6ac4-5649-acee3d252834@foss.st.com>
+Date: Tue, 3 Jan 2023 13:39:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
-To: <uboot-stm32@st-md-mailman.stormreply.com>
+Content-Language: en-US
+To: Sean Anderson <sean.anderson@seco.com>, <u-boot@lists.denx.de>
 References: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
  <a08c4f80-677a-eba1-7180-7b7e2de6d8de@seco.com>
-Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
 In-Reply-To: <a08c4f80-677a-eba1-7180-7b7e2de6d8de@seco.com>
 X-Originating-IP: [10.48.0.157]
@@ -61,6 +58,13 @@ X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
  definitions=2023-01-03_04,2023-01-03_02,2022-06-22_01
+Cc: Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>
 Subject: Re: [Uboot-stm32] [PATCH] fastboot: remove #ifdef CONFIG when it is
 	possible
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -74,340 +78,211 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-On 12/15/22 16:40, Sean Anderson wrote:
-> On 12/15/22 04:15, Patrick Delaunay wrote:
->> Much of the fastboot code predates the introduction of Kconfig and
->> has quite a few #ifdefs in it which is unnecessary now that we can use
->> IS_ENABLED() et al.
->>
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> ---
->>
->>   cmd/fastboot.c                  |  35 +++++------
->>   drivers/fastboot/fb_command.c   | 104 ++++++++++++--------------------
->>   drivers/fastboot/fb_common.c    |  11 ++--
->>   drivers/fastboot/fb_getvar.c    |  49 ++++++---------
->>   drivers/usb/gadget/f_fastboot.c |   7 +--
->>   include/fastboot.h              |  13 ----
->>   net/fastboot.c                  |   8 +--
->>   7 files changed, 82 insertions(+), 145 deletions(-)
->>
->> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
->> index b498e4b22bb3..b94dbd548843 100644
->> --- a/cmd/fastboot.c
->> +++ b/cmd/fastboot.c
->> @@ -19,8 +19,14 @@
->>   static int do_fastboot_udp(int argc, char *const argv[],
->>   			   uintptr_t buf_addr, size_t buf_size)
->>   {
->> -#if CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)
->> -	int err = net_loop(FASTBOOT);
->> +	int err;
->> +
->> +	if (!CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)) {
->> +		pr_err("Fastboot UDP not enabled\n");
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->> +	err = net_loop(FASTBOOT);
->>   
->>   	if (err < 0) {
->>   		printf("fastboot udp error: %d\n", err);
->> @@ -28,21 +34,21 @@ static int do_fastboot_udp(int argc, char *const argv[],
->>   	}
->>   
->>   	return CMD_RET_SUCCESS;
->> -#else
->> -	pr_err("Fastboot UDP not enabled\n");
->> -	return CMD_RET_FAILURE;
->> -#endif
->>   }
->>   
->>   static int do_fastboot_usb(int argc, char *const argv[],
->>   			   uintptr_t buf_addr, size_t buf_size)
->>   {
->> -#if CONFIG_IS_ENABLED(USB_FUNCTION_FASTBOOT)
->>   	int controller_index;
->>   	char *usb_controller;
->>   	char *endp;
->>   	int ret;
->>   
->> +	if (!CONFIG_IS_ENABLED(USB_FUNCTION_FASTBOOT)) {
->> +		pr_err("Fastboot USB not enabled\n");
->> +		return CMD_RET_FAILURE;
->> +	}
->> +
->>   	if (argc < 2)
->>   		return CMD_RET_USAGE;
->>   
->> @@ -88,10 +94,6 @@ exit:
->>   	g_dnl_clear_detach();
->>   
->>   	return ret;
->> -#else
->> -	pr_err("Fastboot USB not enabled\n");
->> -	return CMD_RET_FAILURE;
->> -#endif
->>   }
->>   
->>   static int do_fastboot(struct cmd_tbl *cmdtp, int flag, int argc,
->> @@ -148,17 +150,12 @@ NXTARG:
->>   	return do_fastboot_usb(argc, argv, buf_addr, buf_size);
->>   }
->>   
->> -#ifdef CONFIG_SYS_LONGHELP
->> -static char fastboot_help_text[] =
->> +U_BOOT_CMD(
->> +	fastboot, CONFIG_SYS_MAXARGS, 1, do_fastboot,
->> +	"run as a fastboot usb or udp device",
->>   	"[-l addr] [-s size] usb <controller> | udp\n"
->>   	"\taddr - address of buffer used during data transfers ("
->>   	__stringify(CONFIG_FASTBOOT_BUF_ADDR) ")\n"
->>   	"\tsize - size of buffer used during data transfers ("
->>   	__stringify(CONFIG_FASTBOOT_BUF_SIZE) ")"
->> -	;
->> -#endif
->> -
->> -U_BOOT_CMD(
->> -	fastboot, CONFIG_SYS_MAXARGS, 1, do_fastboot,
->> -	"run as a fastboot usb or udp device", fastboot_help_text
->>   );
->> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
->> index bdfdf262c8a3..f0fd605854da 100644
->> --- a/drivers/fastboot/fb_command.c
->> +++ b/drivers/fastboot/fb_command.c
->> @@ -31,27 +31,16 @@ static u32 fastboot_bytes_expected;
->>   static void okay(char *, char *);
->>   static void getvar(char *, char *);
->>   static void download(char *, char *);
->> -#if CONFIG_IS_ENABLED(FASTBOOT_FLASH)
->>   static void flash(char *, char *);
->>   static void erase(char *, char *);
->> -#endif
->>   static void reboot_bootloader(char *, char *);
->>   static void reboot_fastbootd(char *, char *);
->>   static void reboot_recovery(char *, char *);
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT)
->>   static void oem_format(char *, char *);
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
->>   static void oem_partconf(char *, char *);
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_BOOTBUS)
->>   static void oem_bootbus(char *, char *);
->> -#endif
->> -
->> -#if CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT)
->>   static void run_ucmd(char *, char *);
->>   static void run_acmd(char *, char *);
->> -#endif
->>   
->>   static const struct {
->>   	const char *command;
->> @@ -65,16 +54,14 @@ static const struct {
->>   		.command = "download",
->>   		.dispatch = download
->>   	},
->> -#if CONFIG_IS_ENABLED(FASTBOOT_FLASH)
->>   	[FASTBOOT_COMMAND_FLASH] =  {
->>   		.command = "flash",
->> -		.dispatch = flash
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_FLASH, (flash), (NULL))
->>   	},
->>   	[FASTBOOT_COMMAND_ERASE] =  {
->>   		.command = "erase",
->> -		.dispatch = erase
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_FLASH, (erase), (NULL))
->>   	},
->> -#endif
->>   	[FASTBOOT_COMMAND_BOOT] =  {
->>   		.command = "boot",
->>   		.dispatch = okay
->> @@ -103,34 +90,26 @@ static const struct {
->>   		.command = "set_active",
->>   		.dispatch = okay
->>   	},
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT)
->>   	[FASTBOOT_COMMAND_OEM_FORMAT] = {
->>   		.command = "oem format",
->> -		.dispatch = oem_format,
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT, (oem_format), (NULL))
->>   	},
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
->>   	[FASTBOOT_COMMAND_OEM_PARTCONF] = {
->>   		.command = "oem partconf",
->> -		.dispatch = oem_partconf,
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF, (oem_partconf), (NULL))
->>   	},
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_BOOTBUS)
->>   	[FASTBOOT_COMMAND_OEM_BOOTBUS] = {
->>   		.command = "oem bootbus",
->> -		.dispatch = oem_bootbus,
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_BOOTBUS, (oem_bootbus), (NULL))
->>   	},
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT)
->>   	[FASTBOOT_COMMAND_UCMD] = {
->>   		.command = "UCmd",
->> -		.dispatch = run_ucmd,
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPOR_______________________________________________
->> Uboot-stm32 mailing list
->> Uboot-stm32@st-md-mailman.stormreply.com
->> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
->> T, (run_ucmd), (NULL))
->>   	},
->>   	[FASTBOOT_COMMAND_ACMD] = {
->>   		.command = "ACmd",
->> -		.dispatch = run_acmd,
->> +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_acmd), (NULL))
->>   	},
->> -#endif
-> Does this affect binary size?
-
-
-Yes the size of U-Boot binary with FastBoot option is increasing with 
-this patch.
-
-
-because "commands[FASTBOOT_COMMAND_COUNT]"
-
-have always the max size for known commands in U-Boot,
-
-even for not supported commands when .dispatch ops is NULL,
-
-and it is detected dynamically in fastboot_handle_command()
-
-with the added trace "command %s not supported."
-
-
-I don't found a better solution because in include/fastboot.h
-
-I remove the ifdef for FASTBOOT_COMMAND_COUNT definition
-
-
-Today it is not blocking, the CI build are ok,
-
-I hope it is not a blocking problem.
-
-
->
->>   };
->>   
->>   /**
->> @@ -156,7 +135,9 @@ int fastboot_handle_command(char *cmd_string, char *response)
->>   							response);
->>   				return i;
->>   			} else {
->> -				break;
->> +				pr_err("command %s not supported.\n", cmd_string);
->> +				fastboot_fail("Unsupported command", response);
->> +				return -1;
->>   			}
->>   		}
->>   	}
->> @@ -299,7 +280,6 @@ void fastboot_data_complete(char *response)
->>   	fastboot_bytes_received = 0;
->>   }
->>   
-
-
-....
-
-
->>   
->> diff --git a/include/fastboot.h b/include/fastboot.h
->> index 57daaf129821..d062a3469ef9 100644
->> --- a/include/fastboot.h
->> +++ b/include/fastboot.h
->> @@ -24,10 +24,8 @@
->>   enum {
->>   	FASTBOOT_COMMAND_GETVAR = 0,
->>   	FASTBOOT_COMMAND_DOWNLOAD,
->> -#if CONFIG_IS_ENABLED(FASTBOOT_FLASH)
->>   	FASTBOOT_COMMAND_FLASH,
->>   	FASTBOOT_COMMAND_ERASE,
->> -#endif
->>   	FASTBOOT_COMMAND_BOOT,
->>   	FASTBOOT_COMMAND_CONTINUE,
->>   	FASTBOOT_COMMAND_REBOOT,
->> @@ -35,20 +33,11 @@ enum {
->>   	FASTBOOT_COMMAND_REBOOT_FASTBOOTD,
->>   	FASTBOOT_COMMAND_REBOOT_RECOVERY,
->>   	FASTBOOT_COMMAND_SET_ACTIVE,
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_FORMAT)
->>   	FASTBOOT_COMMAND_OEM_FORMAT,
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_PARTCONF)
->>   	FASTBOOT_COMMAND_OEM_PARTCONF,
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_CMD_OEM_BOOTBUS)
->>   	FASTBOOT_COMMAND_OEM_BOOTBUS,
->> -#endif
->> -#if CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT)
->>   	FASTBOOT_COMMAND_ACMD,
->>   	FASTBOOT_COMMAND_UCMD,
->> -#endif
->> -
->>   	FASTBOOT_COMMAND_COUNT
->>   };
->>   
->> @@ -173,7 +162,5 @@ void fastboot_data_download(const void *fastboot_data,
->>    */
->>   void fastboot_data_complete(char *response);
->>   
->> -#if CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT)
->>   void fastboot_acmd_complete(void);
->> -#endif
->>   #endif /* _FASTBOOT_H_ */
->> diff --git a/net/fastboot.c b/net/fastboot.c
->> index 139233b86c61..96bdf5486fa6 100644
->> --- a/net/fastboot.c
->> +++ b/net/fastboot.c
->> @@ -42,7 +42,6 @@ static int fastboot_our_port;
->>   
->>   static void boot_downloaded_image(void);
->>   
->> -#if CONFIG_IS_ENABLED(FASTBOOT_FLASH)
->>   /**
->>    * fastboot_udp_send_info() - Send an INFO packet during long commands.
->>    *
->> @@ -104,7 +103,6 @@ static void fastboot_timed_send_info(const char *msg)
->>   		fastboot_udp_send_info(msg);
->>   	}
->>   }
->> -#endif
->>   
->>   /**
->>    * fastboot_send() - Sends a packet in response to received fastboot packet
->> @@ -309,9 +307,9 @@ void fastboot_start_server(void)
->>   
->>   	fastboot_our_port = CONFIG_UDP_FUNCTION_FASTBOOT_PORT;
->>   
->> -#if CONFIG_IS_ENABLED(FASTBOOT_FLASH)
->> -	fastboot_set_progress_callback(fastboot_timed_send_info);
->> -#endif
->> +	if (CONFIG_IS_ENABLED(FASTBOOT_FLASH))
->> +		fastboot_set_progress_callback(fastboot_timed_send_info);
->> +
->>   	net_set_udp_handler(fastboot_handler);
->>   
->>   	/* zero out server ether in case the server ip has changed */
-> Reviewed-by: Sean Anderson <sean.anderson@seco.com>
-
-regards
-
-Patrick
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGksCgpPbiAxMi8xNS8yMiAxNjo0MCwgU2VhbiBBbmRlcnNvbiB3cm90ZToKPiBPbiAxMi8xNS8y
+MiAwNDoxNSwgUGF0cmljayBEZWxhdW5heSB3cm90ZToKPj4gTXVjaCBvZiB0aGUgZmFzdGJvb3Qg
+Y29kZSBwcmVkYXRlcyB0aGUgaW50cm9kdWN0aW9uIG9mIEtjb25maWcgYW5kCj4+IGhhcyBxdWl0
+ZSBhIGZldyAjaWZkZWZzIGluIGl0IHdoaWNoIGlzIHVubmVjZXNzYXJ5IG5vdyB0aGF0IHdlIGNh
+biB1c2UKPj4gSVNfRU5BQkxFRCgpIGV0IGFsLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNr
+IERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPgo+PiAtLS0KPj4KPj4gwqAg
+Y21kL2Zhc3Rib290LmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzNSAr
+KysrKy0tLS0tLQo+PiDCoCBkcml2ZXJzL2Zhc3Rib290L2ZiX2NvbW1hbmQuY8KgwqAgfCAxMDQg
+KysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4gwqAgZHJpdmVycy9mYXN0Ym9vdC9m
+Yl9jb21tb24uY8KgwqDCoCB8wqAgMTEgKystLQo+PiDCoCBkcml2ZXJzL2Zhc3Rib290L2ZiX2dl
+dHZhci5jwqDCoMKgIHzCoCA0OSArKysrKystLS0tLS0tLS0KPj4gwqAgZHJpdmVycy91c2IvZ2Fk
+Z2V0L2ZfZmFzdGJvb3QuYyB8wqDCoCA3ICstLQo+PiDCoCBpbmNsdWRlL2Zhc3Rib290LmjCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTMgLS0tLQo+PiDCoCBuZXQvZmFzdGJvb3QuY8Kg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOCArLS0KPj4gwqAgNyBmaWxl
+cyBjaGFuZ2VkLCA4MiBpbnNlcnRpb25zKCspLCAxNDUgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYg
+LS1naXQgYS9jbWQvZmFzdGJvb3QuYyBiL2NtZC9mYXN0Ym9vdC5jCj4+IGluZGV4IGI0OThlNGIy
+MmJiMy4uYjk0ZGJkNTQ4ODQzIDEwMDY0NAo+PiAtLS0gYS9jbWQvZmFzdGJvb3QuYwo+PiArKysg
+Yi9jbWQvZmFzdGJvb3QuYwo+PiBAQCAtMTksOCArMTksMTQgQEAKPj4gwqAgc3RhdGljIGludCBk
+b19mYXN0Ym9vdF91ZHAoaW50IGFyZ2MsIGNoYXIgKmNvbnN0IGFyZ3ZbXSwKPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdWludHB0cl90IGJ1Zl9hZGRyLCBzaXplX3QgYnVmX3Np
+emUpCj4+IMKgIHsKPj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChVRFBfRlVOQ1RJT05fRkFTVEJP
+T1QpCj4+IC3CoMKgwqAgaW50IGVyciA9IG5ldF9sb29wKEZBU1RCT09UKTsKPj4gK8KgwqDCoCBp
+bnQgZXJyOwo+PiArCj4+ICvCoMKgwqAgaWYgKCFDT05GSUdfSVNfRU5BQkxFRChVRFBfRlVOQ1RJ
+T05fRkFTVEJPT1QpKSB7Cj4+ICvCoMKgwqDCoMKgwqDCoCBwcl9lcnIoIkZhc3Rib290IFVEUCBu
+b3QgZW5hYmxlZFxuIik7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9GQUlMVVJF
+Owo+PiArwqDCoMKgIH0KPj4gKwo+PiArwqDCoMKgIGVyciA9IG5ldF9sb29wKEZBU1RCT09UKTsK
+Pj4gwqAgwqDCoMKgwqDCoCBpZiAoZXJyIDwgMCkgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcHJp
+bnRmKCJmYXN0Ym9vdCB1ZHAgZXJyb3I6ICVkXG4iLCBlcnIpOwo+PiBAQCAtMjgsMjEgKzM0LDIx
+IEBAIHN0YXRpYyBpbnQgZG9fZmFzdGJvb3RfdWRwKGludCBhcmdjLCBjaGFyICpjb25zdCAKPj4g
+YXJndltdLAo+PiDCoMKgwqDCoMKgIH0KPj4gwqAgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9T
+VUNDRVNTOwo+PiAtI2Vsc2UKPj4gLcKgwqDCoCBwcl9lcnIoIkZhc3Rib290IFVEUCBub3QgZW5h
+YmxlZFxuIik7Cj4+IC3CoMKgwqAgcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsKPj4gLSNlbmRpZgo+
+PiDCoCB9Cj4+IMKgIMKgIHN0YXRpYyBpbnQgZG9fZmFzdGJvb3RfdXNiKGludCBhcmdjLCBjaGFy
+ICpjb25zdCBhcmd2W10sCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHVpbnRw
+dHJfdCBidWZfYWRkciwgc2l6ZV90IGJ1Zl9zaXplKQo+PiDCoCB7Cj4+IC0jaWYgQ09ORklHX0lT
+X0VOQUJMRUQoVVNCX0ZVTkNUSU9OX0ZBU1RCT09UKQo+PiDCoMKgwqDCoMKgIGludCBjb250cm9s
+bGVyX2luZGV4Owo+PiDCoMKgwqDCoMKgIGNoYXIgKnVzYl9jb250cm9sbGVyOwo+PiDCoMKgwqDC
+oMKgIGNoYXIgKmVuZHA7Cj4+IMKgwqDCoMKgwqAgaW50IHJldDsKPj4gwqAgK8KgwqDCoCBpZiAo
+IUNPTkZJR19JU19FTkFCTEVEKFVTQl9GVU5DVElPTl9GQVNUQk9PVCkpIHsKPj4gK8KgwqDCoMKg
+wqDCoMKgIHByX2VycigiRmFzdGJvb3QgVVNCIG5vdCBlbmFibGVkXG4iKTsKPj4gK8KgwqDCoMKg
+wqDCoMKgIHJldHVybiBDTURfUkVUX0ZBSUxVUkU7Cj4+ICvCoMKgwqAgfQo+PiArCj4+IMKgwqDC
+oMKgwqAgaWYgKGFyZ2MgPCAyKQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIENNRF9SRVRf
+VVNBR0U7Cj4+IMKgIEBAIC04OCwxMCArOTQsNiBAQCBleGl0Ogo+PiDCoMKgwqDCoMKgIGdfZG5s
+X2NsZWFyX2RldGFjaCgpOwo+PiDCoCDCoMKgwqDCoMKgIHJldHVybiByZXQ7Cj4+IC0jZWxzZQo+
+PiAtwqDCoMKgIHByX2VycigiRmFzdGJvb3QgVVNCIG5vdCBlbmFibGVkXG4iKTsKPj4gLcKgwqDC
+oCByZXR1cm4gQ01EX1JFVF9GQUlMVVJFOwo+PiAtI2VuZGlmCj4+IMKgIH0KPj4gwqAgwqAgc3Rh
+dGljIGludCBkb19mYXN0Ym9vdChzdHJ1Y3QgY21kX3RibCAqY21kdHAsIGludCBmbGFnLCBpbnQg
+YXJnYywKPj4gQEAgLTE0OCwxNyArMTUwLDEyIEBAIE5YVEFSRzoKPj4gwqDCoMKgwqDCoCByZXR1
+cm4gZG9fZmFzdGJvb3RfdXNiKGFyZ2MsIGFyZ3YsIGJ1Zl9hZGRyLCBidWZfc2l6ZSk7Cj4+IMKg
+IH0KPj4gwqAgLSNpZmRlZiBDT05GSUdfU1lTX0xPTkdIRUxQCj4+IC1zdGF0aWMgY2hhciBmYXN0
+Ym9vdF9oZWxwX3RleHRbXSA9Cj4+ICtVX0JPT1RfQ01EKAo+PiArwqDCoMKgIGZhc3Rib290LCBD
+T05GSUdfU1lTX01BWEFSR1MsIDEsIGRvX2Zhc3Rib290LAo+PiArwqDCoMKgICJydW4gYXMgYSBm
+YXN0Ym9vdCB1c2Igb3IgdWRwIGRldmljZSIsCj4+IMKgwqDCoMKgwqAgIlstbCBhZGRyXSBbLXMg
+c2l6ZV0gdXNiIDxjb250cm9sbGVyPiB8IHVkcFxuIgo+PiDCoMKgwqDCoMKgICJcdGFkZHIgLSBh
+ZGRyZXNzIG9mIGJ1ZmZlciB1c2VkIGR1cmluZyBkYXRhIHRyYW5zZmVycyAoIgo+PiDCoMKgwqDC
+oMKgIF9fc3RyaW5naWZ5KENPTkZJR19GQVNUQk9PVF9CVUZfQUREUikgIilcbiIKPj4gwqDCoMKg
+wqDCoCAiXHRzaXplIC0gc2l6ZSBvZiBidWZmZXIgdXNlZCBkdXJpbmcgZGF0YSB0cmFuc2ZlcnMg
+KCIKPj4gwqDCoMKgwqDCoCBfX3N0cmluZ2lmeShDT05GSUdfRkFTVEJPT1RfQlVGX1NJWkUpICIp
+Igo+PiAtwqDCoMKgIDsKPj4gLSNlbmRpZgo+PiAtCj4+IC1VX0JPT1RfQ01EKAo+PiAtwqDCoMKg
+IGZhc3Rib290LCBDT05GSUdfU1lTX01BWEFSR1MsIDEsIGRvX2Zhc3Rib290LAo+PiAtwqDCoMKg
+ICJydW4gYXMgYSBmYXN0Ym9vdCB1c2Igb3IgdWRwIGRldmljZSIsIGZhc3Rib290X2hlbHBfdGV4
+dAo+PiDCoCApOwo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9mYXN0Ym9vdC9mYl9jb21tYW5kLmMg
+Cj4+IGIvZHJpdmVycy9mYXN0Ym9vdC9mYl9jb21tYW5kLmMKPj4gaW5kZXggYmRmZGYyNjJjOGEz
+Li5mMGZkNjA1ODU0ZGEgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZmFzdGJvb3QvZmJfY29tbWFu
+ZC5jCj4+ICsrKyBiL2RyaXZlcnMvZmFzdGJvb3QvZmJfY29tbWFuZC5jCj4+IEBAIC0zMSwyNyAr
+MzEsMTYgQEAgc3RhdGljIHUzMiBmYXN0Ym9vdF9ieXRlc19leHBlY3RlZDsKPj4gwqAgc3RhdGlj
+IHZvaWQgb2theShjaGFyICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIGdldHZhcihjaGFy
+ICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIGRvd25sb2FkKGNoYXIgKiwgY2hhciAqKTsK
+Pj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9GTEFTSCkKPj4gwqAgc3RhdGljIHZv
+aWQgZmxhc2goY2hhciAqLCBjaGFyICopOwo+PiDCoCBzdGF0aWMgdm9pZCBlcmFzZShjaGFyICos
+IGNoYXIgKik7Cj4+IC0jZW5kaWYKPj4gwqAgc3RhdGljIHZvaWQgcmVib290X2Jvb3Rsb2FkZXIo
+Y2hhciAqLCBjaGFyICopOwo+PiDCoCBzdGF0aWMgdm9pZCByZWJvb3RfZmFzdGJvb3RkKGNoYXIg
+KiwgY2hhciAqKTsKPj4gwqAgc3RhdGljIHZvaWQgcmVib290X3JlY292ZXJ5KGNoYXIgKiwgY2hh
+ciAqKTsKPj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX0ZPUk1BVCkK
+Pj4gwqAgc3RhdGljIHZvaWQgb2VtX2Zvcm1hdChjaGFyICosIGNoYXIgKik7Cj4+IC0jZW5kaWYK
+Pj4gLSNpZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX1BBUlRDT05GKQo+PiDC
+oCBzdGF0aWMgdm9pZCBvZW1fcGFydGNvbmYoY2hhciAqLCBjaGFyICopOwo+PiAtI2VuZGlmCj4+
+IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9CT09UQlVTKQo+PiDCoCBz
+dGF0aWMgdm9pZCBvZW1fYm9vdGJ1cyhjaGFyICosIGNoYXIgKik7Cj4+IC0jZW5kaWYKPj4gLQo+
+PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX1VVVV9TVVBQT1JUKQo+PiDCoCBzdGF0
+aWMgdm9pZCBydW5fdWNtZChjaGFyICosIGNoYXIgKik7Cj4+IMKgIHN0YXRpYyB2b2lkIHJ1bl9h
+Y21kKGNoYXIgKiwgY2hhciAqKTsKPj4gLSNlbmRpZgo+PiDCoCDCoCBzdGF0aWMgY29uc3Qgc3Ry
+dWN0IHsKPj4gwqDCoMKgwqDCoCBjb25zdCBjaGFyICpjb21tYW5kOwo+PiBAQCAtNjUsMTYgKzU0
+LDE0IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3Qgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1h
+bmQgPSAiZG93bmxvYWQiLAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0gZG93bmxv
+YWQKPj4gwqDCoMKgwqDCoCB9LAo+PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZM
+QVNIKQo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX0ZMQVNIXSA9wqAgewo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiZmxhc2giLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRp
+c3BhdGNoID0gZmxhc2gKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENPTkZJR19JU19F
+TkFCTEVEKEZBU1RCT09UX0ZMQVNILCAoZmxhc2gpLCAoTlVMTCkpCj4+IMKgwqDCoMKgwqAgfSwK
+Pj4gwqDCoMKgwqDCoCBbRkFTVEJPT1RfQ09NTUFORF9FUkFTRV0gPcKgIHsKPj4gwqDCoMKgwqDC
+oMKgwqDCoMKgIC5jb21tYW5kID0gImVyYXNlIiwKPj4gLcKgwqDCoMKgwqDCoMKgIC5kaXNwYXRj
+aCA9IGVyYXNlCj4+ICvCoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBDT05GSUdfSVNfRU5BQkxF
+RChGQVNUQk9PVF9GTEFTSCwgKGVyYXNlKSwgKE5VTEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0j
+ZW5kaWYKPj4gwqDCoMKgwqDCoCBbRkFTVEJPT1RfQ09NTUFORF9CT09UXSA9wqAgewo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiYm9vdCIsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoCAu
+ZGlzcGF0Y2ggPSBva2F5Cj4+IEBAIC0xMDMsMzQgKzkwLDI2IEBAIHN0YXRpYyBjb25zdCBzdHJ1
+Y3Qgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAic2V0X2FjdGl2ZSIsCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBva2F5Cj4+IMKgwqDCoMKgwqAgfSwKPj4gLSNp
+ZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURfT0VNX0ZPUk1BVCkKPj4gwqDCoMKgwqDC
+oCBbRkFTVEJPT1RfQ09NTUFORF9PRU1fRk9STUFUXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+IC5jb21tYW5kID0gIm9lbSBmb3JtYXQiLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0g
+b2VtX2Zvcm1hdCwKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENPTkZJR19JU19FTkFC
+TEVEKEZBU1RCT09UX0NNRF9PRU1fRk9STUFULCAKPj4gKG9lbV9mb3JtYXQpLCAoTlVMTCkpCj4+
+IMKgwqDCoMKgwqAgfSwKPj4gLSNlbmRpZgo+PiAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RC
+T09UX0NNRF9PRU1fUEFSVENPTkYpCj4+IMKgwqDCoMKgwqAgW0ZBU1RCT09UX0NPTU1BTkRfT0VN
+X1BBUlRDT05GXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5kID0gIm9lbSBwYXJ0
+Y29uZiIsCj4+IC3CoMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBvZW1fcGFydGNvbmYsCj4+ICvC
+oMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9DTURf
+T0VNX1BBUlRDT05GLCAKPj4gKG9lbV9wYXJ0Y29uZiksIChOVUxMKSkKPj4gwqDCoMKgwqDCoCB9
+LAo+PiAtI2VuZGlmCj4+IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9C
+T09UQlVTKQo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX09FTV9CT09UQlVTXSA9IHsK
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5kID0gIm9lbSBib290YnVzIiwKPj4gLcKgwqDC
+oMKgwqDCoMKgIC5kaXNwYXRjaCA9IG9lbV9ib290YnVzLAo+PiArwqDCoMKgwqDCoMKgwqAgLmRp
+c3BhdGNoID0gQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9CT09UQlVTLCAKPj4g
+KG9lbV9ib290YnVzKSwgKE5VTEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0jZW5kaWYKPj4gLSNp
+ZiBDT05GSUdfSVNfRU5BQkxFRChGQVNUQk9PVF9VVVVfU1VQUE9SVCkKPj4gwqDCoMKgwqDCoCBb
+RkFTVEJPT1RfQ09NTUFORF9VQ01EXSA9IHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIC5jb21tYW5k
+ID0gIlVDbWQiLAo+PiAtwqDCoMKgwqDCoMKgwqAgLmRpc3BhdGNoID0gcnVuX3VjbWQsCj4+ICvC
+oMKgwqDCoMKgwqDCoCAuZGlzcGF0Y2ggPSAKPj4gQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1Rf
+VVVVX1NVUFBPUl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Cj4+IFVib290LXN0bTMyIG1haWxpbmcgbGlzdAo+PiBVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFu
+LnN0b3JtcmVwbHkuY29tCj4+IGh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9t
+YWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCj4+IFQsIChydW5fdWNtZCksIChOVUxMKSkKPj4g
+wqDCoMKgwqDCoCB9LAo+PiDCoMKgwqDCoMKgIFtGQVNUQk9PVF9DT01NQU5EX0FDTURdID0gewo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqAgLmNvbW1hbmQgPSAiQUNtZCIsCj4+IC3CoMKgwqDCoMKgwqDC
+oCAuZGlzcGF0Y2ggPSBydW5fYWNtZCwKPj4gK8KgwqDCoMKgwqDCoMKgIC5kaXNwYXRjaCA9IENP
+TkZJR19JU19FTkFCTEVEKEZBU1RCT09UX1VVVV9TVVBQT1JULCAKPj4gKHJ1bl9hY21kKSwgKE5V
+TEwpKQo+PiDCoMKgwqDCoMKgIH0sCj4+IC0jZW5kaWYKPiBEb2VzIHRoaXMgYWZmZWN0IGJpbmFy
+eSBzaXplPwoKClllcyB0aGUgc2l6ZSBvZiBVLUJvb3QgYmluYXJ5IHdpdGggRmFzdEJvb3Qgb3B0
+aW9uIGlzIGluY3JlYXNpbmcgd2l0aCAKdGhpcyBwYXRjaC4KCgpiZWNhdXNlICJjb21tYW5kc1tG
+QVNUQk9PVF9DT01NQU5EX0NPVU5UXSIKCmhhdmUgYWx3YXlzIHRoZSBtYXggc2l6ZSBmb3Iga25v
+d24gY29tbWFuZHMgaW4gVS1Cb290LAoKZXZlbiBmb3Igbm90IHN1cHBvcnRlZCBjb21tYW5kcyB3
+aGVuIC5kaXNwYXRjaCBvcHMgaXMgTlVMTCwKCmFuZCBpdCBpcyBkZXRlY3RlZCBkeW5hbWljYWxs
+eSBpbiBmYXN0Ym9vdF9oYW5kbGVfY29tbWFuZCgpCgp3aXRoIHRoZSBhZGRlZCB0cmFjZSAiY29t
+bWFuZCAlcyBub3Qgc3VwcG9ydGVkLiIKCgpJIGRvbid0IGZvdW5kIGEgYmV0dGVyIHNvbHV0aW9u
+IGJlY2F1c2UgaW4gaW5jbHVkZS9mYXN0Ym9vdC5oCgpJIHJlbW92ZSB0aGUgaWZkZWYgZm9yIEZB
+U1RCT09UX0NPTU1BTkRfQ09VTlQgZGVmaW5pdGlvbgoKClRvZGF5IGl0IGlzIG5vdCBibG9ja2lu
+ZywgdGhlIENJIGJ1aWxkIGFyZSBvaywKCkkgaG9wZSBpdCBpcyBub3QgYSBibG9ja2luZyBwcm9i
+bGVtLgoKCj4KPj4gwqAgfTsKPj4gwqAgwqAgLyoqCj4+IEBAIC0xNTYsNyArMTM1LDkgQEAgaW50
+IGZhc3Rib290X2hhbmRsZV9jb21tYW5kKGNoYXIgKmNtZF9zdHJpbmcsIAo+PiBjaGFyICpyZXNw
+b25zZSkKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCByZXNwb25zZSk7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgcmV0dXJuIGk7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIH0gZWxzZSB7Cj4+IC3C
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgYnJlYWs7Cj4+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgcHJfZXJyKCJjb21tYW5kICVzIG5vdCBzdXBwb3J0ZWQuXG4iLCBjbWRf
+c3RyaW5nKTsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmYXN0Ym9vdF9mYWls
+KCJVbnN1cHBvcnRlZCBjb21tYW5kIiwgcmVzcG9uc2UpOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIHJldHVybiAtMTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+
+PiDCoMKgwqDCoMKgwqDCoMKgwqAgfQo+PiDCoMKgwqDCoMKgIH0KPj4gQEAgLTI5OSw3ICsyODAs
+NiBAQCB2b2lkIGZhc3Rib290X2RhdGFfY29tcGxldGUoY2hhciAqcmVzcG9uc2UpCj4+IMKgwqDC
+oMKgwqAgZmFzdGJvb3RfYnl0ZXNfcmVjZWl2ZWQgPSAwOwo+PiDCoCB9CgoKLi4uLgoKCj4+IMKg
+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2Zhc3Rib290LmggYi9pbmNsdWRlL2Zhc3Rib290LmgKPj4g
+aW5kZXggNTdkYWFmMTI5ODIxLi5kMDYyYTM0NjllZjkgMTAwNjQ0Cj4+IC0tLSBhL2luY2x1ZGUv
+ZmFzdGJvb3QuaAo+PiArKysgYi9pbmNsdWRlL2Zhc3Rib290LmgKPj4gQEAgLTI0LDEwICsyNCw4
+IEBACj4+IMKgIGVudW0gewo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfR0VUVkFSID0g
+MCwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5EX0RPV05MT0FELAo+PiAtI2lmIENPTkZJ
+R19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1B
+TkRfRkxBU0gsCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9FUkFTRSwKPj4gLSNlbmRp
+Zgo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfQk9PVCwKPj4gwqDCoMKgwqDCoCBGQVNU
+Qk9PVF9DT01NQU5EX0NPTlRJTlVFLAo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfUkVC
+T09ULAo+PiBAQCAtMzUsMjAgKzMzLDExIEBAIGVudW0gewo+PiDCoMKgwqDCoMKgIEZBU1RCT09U
+X0NPTU1BTkRfUkVCT09UX0ZBU1RCT09URCwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5E
+X1JFQk9PVF9SRUNPVkVSWSwKPj4gwqDCoMKgwqDCoCBGQVNUQk9PVF9DT01NQU5EX1NFVF9BQ1RJ
+VkUsCj4+IC0jaWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9GT1JNQVQpCj4+
+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9PRU1fRk9STUFULAo+PiAtI2VuZGlmCj4+IC0j
+aWYgQ09ORklHX0lTX0VOQUJMRUQoRkFTVEJPT1RfQ01EX09FTV9QQVJUQ09ORikKPj4gwqDCoMKg
+wqDCoCBGQVNUQk9PVF9DT01NQU5EX09FTV9QQVJUQ09ORiwKPj4gLSNlbmRpZgo+PiAtI2lmIENP
+TkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0NNRF9PRU1fQk9PVEJVUykKPj4gwqDCoMKgwqDCoCBG
+QVNUQk9PVF9DT01NQU5EX09FTV9CT09UQlVTLAo+PiAtI2VuZGlmCj4+IC0jaWYgQ09ORklHX0lT
+X0VOQUJMRUQoRkFTVEJPT1RfVVVVX1NVUFBPUlQpCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09N
+TUFORF9BQ01ELAo+PiDCoMKgwqDCoMKgIEZBU1RCT09UX0NPTU1BTkRfVUNNRCwKPj4gLSNlbmRp
+Zgo+PiAtCj4+IMKgwqDCoMKgwqAgRkFTVEJPT1RfQ09NTUFORF9DT1VOVAo+PiDCoCB9Owo+PiDC
+oCBAQCAtMTczLDcgKzE2Miw1IEBAIHZvaWQgZmFzdGJvb3RfZGF0YV9kb3dubG9hZChjb25zdCB2
+b2lkIAo+PiAqZmFzdGJvb3RfZGF0YSwKPj4gwqDCoCAqLwo+PiDCoCB2b2lkIGZhc3Rib290X2Rh
+dGFfY29tcGxldGUoY2hhciAqcmVzcG9uc2UpOwo+PiDCoCAtI2lmIENPTkZJR19JU19FTkFCTEVE
+KEZBU1RCT09UX1VVVV9TVVBQT1JUKQo+PiDCoCB2b2lkIGZhc3Rib290X2FjbWRfY29tcGxldGUo
+dm9pZCk7Cj4+IC0jZW5kaWYKPj4gwqAgI2VuZGlmIC8qIF9GQVNUQk9PVF9IXyAqLwo+PiBkaWZm
+IC0tZ2l0IGEvbmV0L2Zhc3Rib290LmMgYi9uZXQvZmFzdGJvb3QuYwo+PiBpbmRleCAxMzkyMzNi
+ODZjNjEuLjk2YmRmNTQ4NmZhNiAxMDA2NDQKPj4gLS0tIGEvbmV0L2Zhc3Rib290LmMKPj4gKysr
+IGIvbmV0L2Zhc3Rib290LmMKPj4gQEAgLTQyLDcgKzQyLDYgQEAgc3RhdGljIGludCBmYXN0Ym9v
+dF9vdXJfcG9ydDsKPj4gwqAgwqAgc3RhdGljIHZvaWQgYm9vdF9kb3dubG9hZGVkX2ltYWdlKHZv
+aWQpOwo+PiDCoCAtI2lmIENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiDCoCAv
+KioKPj4gwqDCoCAqIGZhc3Rib290X3VkcF9zZW5kX2luZm8oKSAtIFNlbmQgYW4gSU5GTyBwYWNr
+ZXQgZHVyaW5nIGxvbmcgCj4+IGNvbW1hbmRzLgo+PiDCoMKgICoKPj4gQEAgLTEwNCw3ICsxMDMs
+NiBAQCBzdGF0aWMgdm9pZCBmYXN0Ym9vdF90aW1lZF9zZW5kX2luZm8oY29uc3QgY2hhciAKPj4g
+Km1zZykKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGZhc3Rib290X3VkcF9zZW5kX2luZm8obXNnKTsK
+Pj4gwqDCoMKgwqDCoCB9Cj4+IMKgIH0KPj4gLSNlbmRpZgo+PiDCoCDCoCAvKioKPj4gwqDCoCAq
+IGZhc3Rib290X3NlbmQoKSAtIFNlbmRzIGEgcGFja2V0IGluIHJlc3BvbnNlIHRvIHJlY2VpdmVk
+IAo+PiBmYXN0Ym9vdCBwYWNrZXQKPj4gQEAgLTMwOSw5ICszMDcsOSBAQCB2b2lkIGZhc3Rib290
+X3N0YXJ0X3NlcnZlcih2b2lkKQo+PiDCoCDCoMKgwqDCoMKgIGZhc3Rib290X291cl9wb3J0ID0g
+Q09ORklHX1VEUF9GVU5DVElPTl9GQVNUQk9PVF9QT1JUOwo+PiDCoCAtI2lmIENPTkZJR19JU19F
+TkFCTEVEKEZBU1RCT09UX0ZMQVNIKQo+PiAtwqDCoMKgIGZhc3Rib290X3NldF9wcm9ncmVzc19j
+YWxsYmFjayhmYXN0Ym9vdF90aW1lZF9zZW5kX2luZm8pOwo+PiAtI2VuZGlmCj4+ICvCoMKgwqAg
+aWYgKENPTkZJR19JU19FTkFCTEVEKEZBU1RCT09UX0ZMQVNIKSkKPj4gKyBmYXN0Ym9vdF9zZXRf
+cHJvZ3Jlc3NfY2FsbGJhY2soZmFzdGJvb3RfdGltZWRfc2VuZF9pbmZvKTsKPj4gKwo+PiDCoMKg
+wqDCoMKgIG5ldF9zZXRfdWRwX2hhbmRsZXIoZmFzdGJvb3RfaGFuZGxlcik7Cj4+IMKgIMKgwqDC
+oMKgwqAgLyogemVybyBvdXQgc2VydmVyIGV0aGVyIGluIGNhc2UgdGhlIHNlcnZlciBpcCBoYXMg
+Y2hhbmdlZCAqLwo+IFJldmlld2VkLWJ5OiBTZWFuIEFuZGVyc29uIDxzZWFuLmFuZGVyc29uQHNl
+Y28uY29tPgoKcmVnYXJkcwoKUGF0cmljawoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0
+LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

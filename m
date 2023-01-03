@@ -2,23 +2,23 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3ACBA65EE18
+	by mail.lfdr.de (Postfix) with ESMTPS id 432A265EE19
 	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Jan 2023 15:01:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 766D3C69075;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 81867C69077;
 	Thu,  5 Jan 2023 14:01:31 +0000 (UTC)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A5A7C65048
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AFD71C6904C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue,  3 Jan 2023 21:50:10 +0000 (UTC)
 Received: from localhost.localdomain
  (dynamic-092-225-244-121.92.225.pool.telefonica.de [92.225.244.121])
- by csgraf.de (Postfix) with ESMTPSA id 50B126080F3C;
+ by csgraf.de (Postfix) with ESMTPSA id 0206A6081042;
  Tue,  3 Jan 2023 22:50:09 +0100 (CET)
 From: Alexander Graf <agraf@csgraf.de>
 To: u-boot@lists.denx.de
-Date: Tue,  3 Jan 2023 22:50:00 +0100
-Message-Id: <20230103215004.22646-6-agraf@csgraf.de>
+Date: Tue,  3 Jan 2023 22:50:01 +0100
+Message-Id: <20230103215004.22646-7-agraf@csgraf.de>
 X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
 In-Reply-To: <20230103215004.22646-1-agraf@csgraf.de>
 References: <20230103215004.22646-1-agraf@csgraf.de>
@@ -34,8 +34,7 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Andre Przywara <andre.przywara@arm.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v4 5/9] efi_loader: GOP: Add damage
-	notification on BLT
+Subject: [Uboot-stm32] [PATCH v4 6/9] video: Only dcache flush damaged lines
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -52,8 +51,10 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Now that we have a damage tracking API, let's populate damage done by
-UEFI payloads when they BLT data onto the screen.
+Now that we have a damage area tells us which parts of the frame buffer
+actually need updating, let's only dcache flush those on video_sync()
+calls. With this optimization in place, frame buffer updates - especially
+on large screen such as 4k displays - speed up significantly.
 
 Signed-off-by: Alexander Graf <agraf@csgraf.de>
 Reported-by: Da Xue <da@libre.computer>
@@ -62,57 +63,83 @@ Reported-by: Da Xue <da@libre.computer>
 
 v1 -> v2:
 
-  - Remove ifdefs from gop
-
-v2 -> v3:
-
-  - Adapt to always assume DM is used
+  - Fix dcache range; we were flushing too much before
+  - Remove ifdefs
 
 v3 -> v4:
 
-  - Skip damage on EfiBltVideoToBltBuffer
+  - Simplify first damage logic
 ---
- lib/efi_loader/efi_gop.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/video/video-uclass.c | 45 +++++++++++++++++++++++++++++-------
+ 1 file changed, 37 insertions(+), 8 deletions(-)
 
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index d1dc2f22d0..425dcbf6b1 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -32,6 +32,7 @@ struct efi_gop_obj {
- 	struct efi_gop ops;
- 	struct efi_gop_mode_info info;
- 	struct efi_gop_mode mode;
-+	struct udevice *vdev;
- 	/* Fields we only have access to during init */
- 	u32 bpix;
- 	void *fb;
-@@ -120,6 +121,7 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
- 	u32 *fb32 = gopobj->fb;
- 	u16 *fb16 = gopobj->fb;
- 	struct efi_gop_pixel *buffer = __builtin_assume_aligned(bufferp, 4);
-+	bool blt_to_video = (operation != EFI_BLT_VIDEO_TO_BLT_BUFFER);
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index 48fc29aeb0..37ab9f7ca4 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -289,9 +289,45 @@ int video_damage(struct udevice *vid, int x, int y, int width, int height)
+ 	return 0;
+ }
  
- 	if (delta) {
- 		/* Check for 4 byte alignment */
-@@ -243,6 +245,9 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
- 		dlineoff += dwidth;
- 	}
- 
-+	if (blt_to_video)
-+		video_damage(gopobj->vdev, dx, dy, width, height);
++#if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
++static void video_flush_dcache(struct udevice *vid)
++{
++	struct video_priv *priv = dev_get_uclass_priv(vid);
 +
- 	return EFI_SUCCESS;
- }
++	if (!priv->flush_dcache)
++		return;
++
++	if (!CONFIG_IS_ENABLED(VIDEO_DAMAGE)) {
++		flush_dcache_range((ulong)priv->fb,
++				   ALIGN((ulong)priv->fb + priv->fb_size,
++					 CONFIG_SYS_CACHELINE_SIZE));
++
++		return;
++	}
++
++	if (priv->damage.endx > priv->damage.x) {
++		int lstart = priv->damage.x * VNBYTES(priv->bpix);
++		int lend = priv->damage.endx * VNBYTES(priv->bpix);
++		int y;
++
++		for (y = priv->damage.y; y < priv->damage.endy; y++) {
++			ulong fb = (ulong)priv->fb;
++			ulong start = fb + (y * priv->line_length) + lstart;
++			ulong end = start + lend - lstart;
++
++			start = ALIGN_DOWN(start, CONFIG_SYS_CACHELINE_SIZE);
++			end = ALIGN(end, CONFIG_SYS_CACHELINE_SIZE);
++
++			flush_dcache_range(start, end);
++		}
++	}
++}
++#endif
++
+ /* Flush video activity to the caches */
+ int video_sync(struct udevice *vid, bool force)
+ {
++	struct video_priv *priv = dev_get_uclass_priv(vid);
+ 	struct video_ops *ops = video_get_ops(vid);
+ 	int ret;
  
-@@ -547,6 +552,7 @@ efi_status_t efi_gop_register(void)
- 	gopobj->info.pixels_per_scanline = col;
- 	gopobj->bpix = bpix;
- 	gopobj->fb = fb;
-+	gopobj->vdev = vdev;
+@@ -307,15 +343,8 @@ int video_sync(struct udevice *vid, bool force)
+ 	 * out whether it exists? For now, ARM is safe.
+ 	 */
+ #if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
+-	struct video_priv *priv = dev_get_uclass_priv(vid);
+-
+-	if (priv->flush_dcache) {
+-		flush_dcache_range((ulong)priv->fb,
+-				   ALIGN((ulong)priv->fb + priv->fb_size,
+-					 CONFIG_SYS_CACHELINE_SIZE));
+-	}
++	video_flush_dcache(vid);
+ #elif defined(CONFIG_VIDEO_SANDBOX_SDL)
+-	struct video_priv *priv = dev_get_uclass_priv(vid);
+ 	static ulong last_sync;
  
- 	return EFI_SUCCESS;
- }
+ 	if (force || get_timer(last_sync) > 100) {
 -- 
 2.37.1 (Apple Git-137.1)
 

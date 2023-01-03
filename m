@@ -2,23 +2,23 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3A2865EE14
-	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Jan 2023 15:01:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 07C3465EE15
+	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Jan 2023 15:01:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 428C6C6906A;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 50C7BC6906C;
 	Thu,  5 Jan 2023 14:01:31 +0000 (UTC)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C119C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B71FFC65048
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Tue,  3 Jan 2023 21:50:07 +0000 (UTC)
 Received: from localhost.localdomain
  (dynamic-092-225-244-121.92.225.pool.telefonica.de [92.225.244.121])
- by csgraf.de (Postfix) with ESMTPSA id 41F1960805E6;
+ by csgraf.de (Postfix) with ESMTPSA id E64A26080912;
  Tue,  3 Jan 2023 22:50:06 +0100 (CET)
 From: Alexander Graf <agraf@csgraf.de>
 To: u-boot@lists.denx.de
-Date: Tue,  3 Jan 2023 22:49:56 +0100
-Message-Id: <20230103215004.22646-2-agraf@csgraf.de>
+Date: Tue,  3 Jan 2023 22:49:57 +0100
+Message-Id: <20230103215004.22646-3-agraf@csgraf.de>
 X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
 In-Reply-To: <20230103215004.22646-1-agraf@csgraf.de>
 References: <20230103215004.22646-1-agraf@csgraf.de>
@@ -34,7 +34,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Andre Przywara <andre.przywara@arm.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v4 1/9] dm: video: Add damage tracking API
+Subject: [Uboot-stm32] [PATCH v4 2/9] dm: video: Add damage notification on
+	display clear
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -51,180 +52,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-We are going to introduce image damage tracking to fasten up screen
-refresh on large displays. This patch adds damage tracking for up to
-one rectangle of the screen which is typically enough to hold blt or
-text print updates. Callers into this API and a reduced dcache flush
-code path will follow in later patches.
+Let's report the video damage when we clear the screen. This
+way we can later lazily flush only relevant regions to hardware.
 
 Signed-off-by: Alexander Graf <agraf@csgraf.de>
 Reported-by: Da Xue <da@libre.computer>
-
 ---
+ drivers/video/video-uclass.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-v1 -> v2:
-
-  - Remove ifdefs
-
-v2 -> v3:
-
-  - Adapt Kconfig to DM always
-
-v3 -> v4:
-
-  - Move damage clear from patch 6 to this one
-  - Simplify first damage logic
-  - Remove VIDEO_DAMAGE default for ARM
----
- drivers/video/Kconfig        | 13 ++++++++++++
- drivers/video/video-uclass.c | 41 ++++++++++++++++++++++++++++++++++++
- include/video.h              | 29 +++++++++++++++++++++++--
- 3 files changed, 81 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index f539977d9b..826a1a6587 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -62,6 +62,19 @@ config VIDEO_COPY
- 	  To use this, your video driver must set @copy_base in
- 	  struct video_uc_plat.
- 
-+config VIDEO_DAMAGE
-+	bool "Enable damage tracking of frame buffer regions"
-+	help
-+	  On some machines (most ARM), the display frame buffer resides in
-+	  RAM. To make the display controller pick up screen updates, we
-+	  have to flush frame buffer contents from CPU caches into RAM which
-+	  can be a slow operation.
-+
-+	  This feature adds damage tracking to collect information about regions
-+	  that received updates. When we want to sync, we then only flush
-+	  regions of the frame buffer that were modified before, speeding up
-+	  screen refreshes significantly.
-+
- config BACKLIGHT_PWM
- 	bool "Generic PWM based Backlight Driver"
- 	depends on BACKLIGHT && DM_PWM
 diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index 0ce376ca3f..d18c8cd2b1 100644
+index d18c8cd2b1..48fc29aeb0 100644
 --- a/drivers/video/video-uclass.c
 +++ b/drivers/video/video-uclass.c
-@@ -21,6 +21,8 @@
- #include <dm/device_compat.h>
- #include <dm/device-internal.h>
- #include <dm/uclass-internal.h>
-+#include <linux/types.h>
-+#include <linux/bitmap.h>
- #ifdef CONFIG_SANDBOX
- #include <asm/sdl.h>
- #endif
-@@ -254,6 +256,37 @@ void video_set_default_colors(struct udevice *dev, bool invert)
- 	priv->colour_bg = video_index_to_colour(priv, back);
+@@ -160,6 +160,8 @@ int video_fill(struct udevice *dev, u32 colour)
+ 	if (ret)
+ 		return ret;
+ 
++	video_damage(dev, 0, 0, priv->xsize, priv->ysize);
++
+ 	return video_sync(dev, false);
  }
  
-+/* Notify about changes in the frame buffer */
-+int video_damage(struct udevice *vid, int x, int y, int width, int height)
-+{
-+	struct video_priv *priv = dev_get_uclass_priv(vid);
-+	int endx = x + width;
-+	int endy = y + height;
-+
-+	if (!CONFIG_IS_ENABLED(VIDEO_DAMAGE))
-+		return 0;
-+
-+	if (x > priv->xsize)
-+		return 0;
-+
-+	if (y > priv->ysize)
-+		return 0;
-+
-+	if (endx > priv->xsize)
-+		endx = priv->xsize;
-+
-+	if (endy > priv->ysize)
-+		endy = priv->ysize;
-+
-+	/* Span a rectangle across all old and new damage */
-+	priv->damage.x = min(x, priv->damage.x);
-+	priv->damage.y = min(y, priv->damage.y);
-+	priv->damage.endx = max(endx, priv->damage.endx);
-+	priv->damage.endy = max(endy, priv->damage.endy);
-+
-+	return 0;
-+}
-+
- /* Flush video activity to the caches */
- int video_sync(struct udevice *vid, bool force)
- {
-@@ -288,6 +321,14 @@ int video_sync(struct udevice *vid, bool force)
- 		last_sync = get_timer(0);
- 	}
- #endif
-+
-+	if (CONFIG_IS_ENABLED(VIDEO_DAMAGE)) {
-+		priv->damage.x = priv->xsize;
-+		priv->damage.y = priv->ysize;
-+		priv->damage.endx = 0;
-+		priv->damage.endy = 0;
-+	}
-+
- 	return 0;
- }
- 
-diff --git a/include/video.h b/include/video.h
-index 43f2e2c02f..4b35e97f79 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -109,6 +109,12 @@ struct video_priv {
- 	void *fb;
- 	int fb_size;
- 	void *copy_fb;
-+	struct {
-+		int x;
-+		int y;
-+		int endx;
-+		int endy;
-+	} damage;
- 	int line_length;
- 	u32 colour_fg;
- 	u32 colour_bg;
-@@ -211,8 +217,9 @@ int video_fill(struct udevice *dev, u32 colour);
-  * @return: 0 on success, error code otherwise
-  *
-  * Some frame buffers are cached or have a secondary frame buffer. This
-- * function syncs these up so that the current contents of the U-Boot frame
-- * buffer are displayed to the user.
-+ * function syncs the damaged parts of them up so that the current contents
-+ * of the U-Boot frame buffer are displayed to the user. It clears the damage
-+ * buffer.
-  */
- int video_sync(struct udevice *vid, bool force);
- 
-@@ -332,6 +339,24 @@ static inline int video_sync_copy_all(struct udevice *dev)
- 
- #endif
- 
-+/**
-+ * video_damage() - Notify the video subsystem about screen updates.
-+ *
-+ * @vid:	Device to sync
-+ * @x:	        Upper left X coordinate of the damaged rectangle
-+ * @y:	        Upper left Y coordinate of the damaged rectangle
-+ * @width:	Width of the damaged rectangle
-+ * @height:	Height of the damaged rectangle
-+ *
-+ * @return: 0
-+ *
-+ * Some frame buffers are cached or have a secondary frame buffer. This
-+ * function notifies the video subsystem about rectangles that were updated
-+ * within the frame buffer. They may only get written to the screen on the
-+ * next call to video_sync().
-+ */
-+int video_damage(struct udevice *vid, int x, int y, int width, int height);
-+
- /**
-  * video_is_active() - Test if one video device it active
-  *
 -- 
 2.37.1 (Apple Git-137.1)
 

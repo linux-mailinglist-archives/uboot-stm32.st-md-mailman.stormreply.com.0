@@ -2,71 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCC6265C81F
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Jan 2023 21:35:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C42565D05E
+	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Jan 2023 11:07:49 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6CB70C65E73;
-	Tue,  3 Jan 2023 20:35:09 +0000 (UTC)
-Received: from mail-qv1-f47.google.com (mail-qv1-f47.google.com
- [209.85.219.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B8062C6905D;
+	Wed,  4 Jan 2023 10:07:48 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1ED2FC65048
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6604DC6905B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 20:35:08 +0000 (UTC)
-Received: by mail-qv1-f47.google.com with SMTP id q10so22193806qvt.10
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 03 Jan 2023 12:35:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KRG0t3C2GRWLS5M8Y2zqSCSGET7ZZXO1SZPO+IvNzds=;
- b=gzLzTTFW2CBjZYaUTDtWpyuDW93adNMsD7Mrc5k76yfPKl4Gcg+fOgZiTraAM2xoCA
- 6eqBZg2iIEqr+iRFra2wzLlAFHUQxatbJmLE3o0MFSF4q4jy6jbV9B15CuGwELstB13y
- pcEI9e85ZTb23xubTzoPqOV/YY8Nu6Zk2p8PI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KRG0t3C2GRWLS5M8Y2zqSCSGET7ZZXO1SZPO+IvNzds=;
- b=svi595efFfa7DPNGP7UsJPE9jkD2AuE4LbnaBgvYuNW+YmwWbtciWs1o0GPuClaQcp
- snrlyNjyekuFuRub2scpGqJVnW/ftziz9pRocMeCydCz9M1kebMjE9ehxD1Px83GdZlk
- pe3ABLP+YsuSiA04I2P2m+szWjSKc11DCjgXjkoyqjtT/BMActCn151F2a8G7QspTIJ2
- 87K/Q/SAriw6GZ9Bg1k9IpzRsCLwoqY8STAT2yCfgUp63UQsHKkSEQwQ1x2zaA+mMYCo
- ex7ku8I+Rm4cUb1wOS8DNoGLblCw63MeeK7eUircsGD+kXuW+eAAEPT3xnhzmLdoRRU/
- J8qA==
-X-Gm-Message-State: AFqh2krD4aQGBu5+kME2krnooGTlTfHcnmpohemio7Y1VtkGuO09dY2e
- 2rFdy6ytkFNNSrSbcxVtknZxgg==
-X-Google-Smtp-Source: AMrXdXvgSp/hChM7KpvRpVlsmxxtDVivWOpw+ta5DPv979LEC8xnWwYrYh3XAWJsQ+uy8+FDALPY4Q==
-X-Received: by 2002:a05:6214:5e09:b0:4f1:2bc5:de14 with SMTP id
- li9-20020a0562145e0900b004f12bc5de14mr84306822qvb.9.1672778106999; 
- Tue, 03 Jan 2023 12:35:06 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-f40a-aab8-e211-5b44.res6.spectrum.com.
- [2603:6081:7b00:6400:f40a:aab8:e211:5b44])
- by smtp.gmail.com with ESMTPSA id
- q12-20020a05620a2a4c00b006fef61300fesm23095970qkp.16.2023.01.03.12.35.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jan 2023 12:35:06 -0800 (PST)
-Date: Tue, 3 Jan 2023 15:35:04 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20230103203504.GM3787616@bill-the-cat>
-References: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
+ Wed,  4 Jan 2023 10:07:47 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3047PIE6006262; Wed, 4 Jan 2023 11:07:46 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=js/jQJfWpv/WxWWFMyp9rNNEZNhtLRjMIvqBr2bWUAk=;
+ b=NdDszcVmi9eSBX04FA3JWrO1M1jSjrr6cFzdHUyrcWeom7hwsujUPCcA8tpj7uhwKbUZ
+ 2RcC+5YaPoW732WAiU43zwNcDOFW9VO1q75+vbgGidZy4L5AkLkyAwUxfnSrnG39Tn7A
+ FxK+8kSOoaRyM+ZeluVKYXLnIxMUW7/xkfSoRMGPOCikftWQEiourlxnUlQLLAuteTnq
+ av3Lx//S3p1eTPM88rW6QRCugmwHy+OFqPpoBEO2eUKk/wloxjxeq0ah2Z9l5TIGxPt1
+ WFg0lPf7xv1i4mch9GXk1ezvIwfLisDJtMgYiMIiJX2STKiYpIWKYDR6sk88HWzpyZGp IQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtbcq255s-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 04 Jan 2023 11:07:46 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5A8DB10002A;
+ Wed,  4 Jan 2023 11:07:45 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 539562171EA;
+ Wed,  4 Jan 2023 11:07:45 +0100 (CET)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Wed, 4 Jan
+ 2023 11:07:44 +0100
+Message-ID: <eafa9cac-bb89-a638-6f02-b441d58d992e@foss.st.com>
+Date: Wed, 4 Jan 2023 11:07:44 +0100
 MIME-Version: 1.0
-In-Reply-To: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] fastboot: remove #ifdef CONFIG when it is
-	possible
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Olivier Moysan <olivier.moysan@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221215125058.1.I12616a161ad14b61957ff2da5357c1220bc0d77b@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20221215125058.1.I12616a161ad14b61957ff2da5357c1220bc0d77b@changeid>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-04_06,2023-01-04_01,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH] adc: stm32mp15: add calibration support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,106 +71,232 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============3267025224372673126=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Olivier
 
---===============3267025224372673126==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="pgw/fgLwMA5bWWfh"
-Content-Disposition: inline
-
-
---pgw/fgLwMA5bWWfh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 15, 2022 at 10:15:50AM +0100, Patrick Delaunay wrote:
-> Much of the fastboot code predates the introduction of Kconfig and
-> has quite a few #ifdefs in it which is unnecessary now that we can use
-> IS_ENABLED() et al.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+On 12/15/22 13:51, Olivier Moysan wrote:
+> Add support of offset and linear calibration for STM32MP15.
+> The calibration is performed once at probe. The ADC is set in power on
+> state for calibration. It remains in this state after calibration,
+> to give to the kernel the opportunity to retrieve calibration data,
+> directly from the ADC.
+> 
+> Signed-off-by: Olivier Moysan <olivier.moysan@foss.st.com>
 > ---
->=20
->  cmd/fastboot.c                  |  35 +++++------
->  drivers/fastboot/fb_command.c   | 104 ++++++++++++--------------------
->  drivers/fastboot/fb_common.c    |  11 ++--
->  drivers/fastboot/fb_getvar.c    |  49 ++++++---------
->  drivers/usb/gadget/f_fastboot.c |   7 +--
->  include/fastboot.h              |  13 ----
->  net/fastboot.c                  |   8 +--
->  7 files changed, 82 insertions(+), 145 deletions(-)
->=20
-> diff --git a/cmd/fastboot.c b/cmd/fastboot.c
-> index b498e4b22bb3..b94dbd548843 100644
-> --- a/cmd/fastboot.c
-> +++ b/cmd/fastboot.c
-> @@ -19,8 +19,14 @@
->  static int do_fastboot_udp(int argc, char *const argv[],
->  			   uintptr_t buf_addr, size_t buf_size)
+> 
+>  drivers/adc/stm32-adc.c | 134 ++++++++++++++++++++++++++++++++++------
+>  1 file changed, 116 insertions(+), 18 deletions(-)
+> 
+> diff --git a/drivers/adc/stm32-adc.c b/drivers/adc/stm32-adc.c
+> index 85efc119dbf1..1fba707c6f7d 100644
+> --- a/drivers/adc/stm32-adc.c
+> +++ b/drivers/adc/stm32-adc.c
+> @@ -33,8 +33,11 @@
+>  #define STM32H7_ADRDY			BIT(0)
+>  
+>  /* STM32H7_ADC_CR - bit fields */
+> +#define STM32H7_ADCAL			BIT(31)
+> +#define STM32H7_ADCALDIF		BIT(30)
+>  #define STM32H7_DEEPPWD			BIT(29)
+>  #define STM32H7_ADVREGEN		BIT(28)
+> +#define STM32H7_ADCALLIN		BIT(16)
+>  #define STM32H7_BOOST			BIT(8)
+>  #define STM32H7_ADSTART			BIT(2)
+>  #define STM32H7_ADDIS			BIT(1)
+> @@ -65,47 +68,72 @@ struct stm32_adc {
+>  	const struct stm32_adc_cfg *cfg;
+>  };
+>  
+> -static int stm32_adc_stop(struct udevice *dev)
+> +static void stm32_adc_enter_pwr_down(struct udevice *dev)
 >  {
-> -#if CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)
-> -	int err =3D net_loop(FASTBOOT);
-> +	int err;
+>  	struct stm32_adc *adc = dev_get_priv(dev);
+>  
+> -	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADDIS);
+>  	clrbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_BOOST);
+>  	/* Setting DEEPPWD disables ADC vreg and clears ADVREGEN */
+>  	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_DEEPPWD);
+> -	adc->active_channel = -1;
+> -
+> -	return 0;
+>  }
+>  
+> -static int stm32_adc_start_channel(struct udevice *dev, int channel)
+> +static int stm32_adc_exit_pwr_down(struct udevice *dev)
+>  {
+> -	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
+>  	struct stm32_adc_common *common = dev_get_priv(dev_get_parent(dev));
+>  	struct stm32_adc *adc = dev_get_priv(dev);
+>  	int ret;
+>  	u32 val;
+>  
+> +	/* return immediately if ADC is not in deep power down mode */
+> +	if (!(readl(adc->regs + STM32H7_ADC_CR) & STM32H7_DEEPPWD))
+> +		return 0;
 > +
-> +	if (!CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)) {
-> +		pr_err("Fastboot UDP not enabled\n");
-> +		return CMD_RET_FAILURE;
+>  	/* Exit deep power down, then enable ADC voltage regulator */
+>  	clrbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_DEEPPWD);
+>  	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADVREGEN);
+> +
+>  	if (common->rate > STM32H7_BOOST_CLKRATE)
+>  		setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_BOOST);
+>  
+>  	/* Wait for startup time */
+>  	if (!adc->cfg->has_vregready) {
+>  		udelay(20);
+> -	} else {
+> -		ret = readl_poll_timeout(adc->regs + STM32H7_ADC_ISR, val,
+> -					 val & STM32MP1_VREGREADY,
+> -					 STM32_ADC_TIMEOUT_US);
+> -		if (ret < 0) {
+> -			stm32_adc_stop(dev);
+> -			dev_err(dev, "Failed to enable vreg: %d\n", ret);
+> -			return ret;
+> -		}
+> +		return 0;
 > +	}
 > +
-> +	err =3D net_loop(FASTBOOT);
-> =20
->  	if (err < 0) {
->  		printf("fastboot udp error: %d\n", err);
-> @@ -28,21 +34,21 @@ static int do_fastboot_udp(int argc, char *const argv=
-[],
+> +	ret = readl_poll_timeout(adc->regs + STM32H7_ADC_ISR, val,
+> +				 val & STM32MP1_VREGREADY,
+> +				 STM32_ADC_TIMEOUT_US);
+> +	if (ret < 0) {
+> +		stm32_adc_enter_pwr_down(dev);
+> +		dev_err(dev, "Failed to enable vreg: %d\n", ret);
 >  	}
-> =20
->  	return CMD_RET_SUCCESS;
-> -#else
-> -	pr_err("Fastboot UDP not enabled\n");
-> -	return CMD_RET_FAILURE;
-> -#endif
+>  
+> +	return ret;
+> +}
+> +
+> +static int stm32_adc_stop(struct udevice *dev)
+> +{
+> +	struct stm32_adc *adc = dev_get_priv(dev);
+> +
+> +	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADDIS);
+> +	stm32_adc_enter_pwr_down(dev);
+> +	adc->active_channel = -1;
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_adc_start_channel(struct udevice *dev, int channel)
+> +{
+> +	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
+> +	struct stm32_adc *adc = dev_get_priv(dev);
+> +	int ret;
+> +	u32 val;
+> +
+> +	ret = stm32_adc_exit_pwr_down(dev);
+> +	if (ret < 0)
+> +		return ret;
+> +
+>  	/* Only use single ended channels */
+>  	writel(0, adc->regs + STM32H7_ADC_DIFSEL);
+>  
+> @@ -162,6 +190,64 @@ static int stm32_adc_channel_data(struct udevice *dev, int channel,
+>  	return 0;
 >  }
+>  
+> +/**
+> + * Fixed timeout value for ADC calibration.
+> + * worst cases:
+> + * - low clock frequency (0.12 MHz min)
+> + * - maximum prescalers
+> + * Calibration requires:
+> + * - 16384 ADC clock cycle for the linear calibration
+> + * - 20 ADC clock cycle for the offset calibration
+> + *
+> + * Set to 100ms for now
+> + */
+> +#define STM32H7_ADC_CALIB_TIMEOUT_US		100000
+> +
+> +static int stm32_adc_selfcalib(struct udevice *dev)
+> +{
+> +	struct stm32_adc *adc = dev_get_priv(dev);
+> +	int ret;
+> +	u32 val;
+> +
+> +	/*
+> +	 * Select calibration mode:
+> +	 * - Offset calibration for single ended inputs
+> +	 * - No linearity calibration. Done in next step.
+> +	 */
+> +	clrbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADCALDIF | STM32H7_ADCALLIN);
+> +
+> +	/* Start calibration, then wait for completion */
+> +	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADCAL);
+> +	ret = readl_poll_sleep_timeout(adc->regs + STM32H7_ADC_CR, val,
+> +				       !(val & STM32H7_ADCAL), 100,
+> +				       STM32H7_ADC_CALIB_TIMEOUT_US);
+> +	if (ret) {
+> +		dev_err(dev, "calibration failed\n");
+> +		goto out;
+> +	}
+> +
+> +	/*
+> +	 * Select calibration mode, then start calibration:
+> +	 * - Offset calibration for differential input
+> +	 * - Linearity calibration (needs to be done only once for single/diff)
+> +	 *   will run simultaneously with offset calibration.
+> +	 */
+> +	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADCALDIF | STM32H7_ADCALLIN);
+> +
+> +	/* Start calibration, then wait for completion */
+> +	setbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADCAL);
+> +	ret = readl_poll_sleep_timeout(adc->regs + STM32H7_ADC_CR, val,
+> +				       !(val & STM32H7_ADCAL), 100,
+> +				       STM32H7_ADC_CALIB_TIMEOUT_US);
+> +	if (ret)
+> +		dev_err(dev, "calibration failed\n");
+> +
+> +out:
+> +	clrbits_le32(adc->regs + STM32H7_ADC_CR, STM32H7_ADCALDIF | STM32H7_ADCALLIN);
+> +
+> +	return ret;
+> +}
+> +
+>  static int stm32_adc_get_legacy_chan_count(struct udevice *dev)
+>  {
+>  	int ret;
+> @@ -272,7 +358,7 @@ static int stm32_adc_probe(struct udevice *dev)
+>  	struct adc_uclass_plat *uc_pdata = dev_get_uclass_plat(dev);
+>  	struct stm32_adc_common *common = dev_get_priv(dev_get_parent(dev));
+>  	struct stm32_adc *adc = dev_get_priv(dev);
+> -	int offset;
+> +	int offset, ret;
+>  
+>  	offset = dev_read_u32_default(dev, "reg", -ENODATA);
+>  	if (offset < 0) {
+> @@ -287,7 +373,19 @@ static int stm32_adc_probe(struct udevice *dev)
+>  	uc_pdata->vdd_microvolts = common->vref_uv;
+>  	uc_pdata->vss_microvolts = 0;
+>  
+> -	return stm32_adc_chan_of_init(dev);
+> +	ret = stm32_adc_chan_of_init(dev);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = stm32_adc_exit_pwr_down(dev);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ret = stm32_adc_selfcalib(dev);
+> +	if (ret)
+> +		stm32_adc_enter_pwr_down(dev);
+> +
+> +	return ret;
+>  }
+>  
+>  static const struct adc_ops stm32_adc_ops = {
 
-This probably needs to become an if (CONFIG_IS_ENABLED(...)) { ... }
-else { ... } in order to remain size-neutral.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
---=20
-Tom
-
---pgw/fgLwMA5bWWfh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmO0kXQACgkQFHw5/5Y0
-tyxDxQv+KRQL0UkdUwuxq7A4fWA7+PAvgLLs4abINCBR4Fu6NbTSGd3kNP/8lMDk
-nKaEMyza3brSM0S1tctMqibfD8QwMV1QcHaJkdis4yTMQX25ndi1vaIOwHOwePGE
-LEWdujbodE5RO/vn5opcroAG6wANuT7cWWID57clpCnLucd/IqLXyey357J2hlZN
-HqKkoRKxUL+eI8t/tNKgEi+ufToNt1OGdMFK49yF+m/y1mP+uJIhWfMncla8F0GK
-UawSt2V1rzBna03lsnAc5ICKNreeGble5Lm+8JlgBBL+XVlOpAHCWJxUcRrGi4dU
-M3P1B0YfBgB5N7rKwTJf+ZWbYCWisVIB8XYtA0o/0IsbhP1ChBk+mjNpzDuPP3/O
-sl+F5ag9GdiPftpv6v6c9H1rjmB+isjONiD+cun2fo3dDKTpeqQV+kuAeQuZCIE+
-8G5sY2KeG5EqeAol0CkpZd1yUCEoMs2yMDn5lO88Obn6Xuwh7y8QBTHYSrQQRI9Z
-N/N4gYFn
-=8dLn
------END PGP SIGNATURE-----
-
---pgw/fgLwMA5bWWfh--
-
---===============3267025224372673126==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============3267025224372673126==--

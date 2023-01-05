@@ -2,73 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DACFF65D30D
-	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Jan 2023 13:50:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C89465EA0F
+	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Jan 2023 12:38:16 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 86EB1C6905D;
-	Wed,  4 Jan 2023 12:50:46 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D70E7C69067;
+	Thu,  5 Jan 2023 11:38:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B77F3C6905B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CA2DBC03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  4 Jan 2023 12:50:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1672836636; bh=NIcLtSrGBLXlEu4KrdkOBtj81sTlg1NukJV/luPbQAc=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=iPWKbFAUe7e7rkrr4gcka8qnf72YvO+GJyHntjTfdGXFgnOO/KurwxHkCsoDwqQXh
- nS9JY6tw+C4/DHod5MLoMYQQWLtSMwF2W/T435O+OWpA5F6kv9FgO6iRqJN9C9ZcPX
- bmDQzc9HjE1nkWX3vkYygznfws7IWr2uhDAmpPxS5jY1ex7ioGXEHbflq7zoMcppvM
- GNepNbeGwXF5EgJkfU0OBN1MeSEiultF7Zt7YgGYzNRjhv8+K0VNtIZJAJ0jkp3o6R
- i7pVDg2qKj5tzh9sdjDOdMlLZo2wjqP4vrKzyb9QHjL/Qm9+L+pBFUXxjF/j8Gup6j
- LY9nchni+X0ig==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([88.152.145.137]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MtfNf-1owtql0DyJ-00v6D3; Wed, 04
- Jan 2023 13:50:36 +0100
-Message-ID: <9a6fa7c3-7ff2-1530-f884-fad0e54da72f@gmx.de>
-Date: Wed, 4 Jan 2023 13:50:33 +0100
+ Thu,  5 Jan 2023 11:38:13 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3059sYj6024071; Thu, 5 Jan 2023 12:38:03 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=gHM3VJyGfSfkQUzZhAOOCsSjZH566/EB5Jn9Bz0rE8M=;
+ b=ykn8InafwKckU6OUIr4hhFm7PEE0XN9FBQzQe2LEtidOm+3KRl3jXeocMe40Mc2PfvAI
+ 6WeiyQbXnqRiuBB+tpNq4Ph22QDeBnY7390NQfOdpJ10jm8fABLljxcI5jxzes1GMl8s
+ 1rb8WzgwWY7GDGc/X2mnTVny5Hl2Ar9WdZ71Zb7q98y9mf1gLVJR3DUFReXnNfCifgtA
+ dOMqZWO3QGTBjV1AzZcVHUcJ7YGjDv3kA+89GYRfCDbQYqUeI9wAUCnIjiJYqF2dwiwB
+ Y9hRk07RIhnnuIsL2jJN8dLoayD6DWOaXzUgCvQ32v2TsFuylG8Jo70Xoyv5ynE8yeNG FA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mwuw28u2y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 05 Jan 2023 12:38:03 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0DEC110002A;
+ Thu,  5 Jan 2023 12:38:02 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EC71F22FA55;
+ Thu,  5 Jan 2023 12:38:01 +0100 (CET)
+Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Thu, 5 Jan
+ 2023 12:37:58 +0100
+Message-ID: <89f414c5-306d-8a10-9a72-f32381ec593e@foss.st.com>
+Date: Thu, 5 Jan 2023 12:37:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-To: Alexander Graf <agraf@csgraf.de>
-References: <20230103215004.22646-1-agraf@csgraf.de>
- <20230103215004.22646-6-agraf@csgraf.de>
+ Thunderbird/102.4.2
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230103215004.22646-6-agraf@csgraf.de>
-X-Provags-ID: V03:K1:LwjdPE4huN3WwW5PT8w+VL+LC9VgAxMDd1mf9Lzv/1bJQJHHoEp
- Q1ZFIG07zayPMWoYsugOWc2Ultti2030Lh4G4ENkZkDjpFkPwP9Q+TjFnP5F9OFR7BqqGPU
- EZjF41l25/HW58LJ7CTdaQYt9h5pIeP4bwImMtI8V7jLrCj1eK2jyqzvMCrKBN00M0McIqn
- Ql5lUU7IRCImnavVyOdDQ==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:MGZRjeo5Ntg=;8/5r8ZR6aNalrHychuBFEEyaYPa
- tv+2Hda2EP+QUeKm80X0qFrDblEv68Ort9feHLZIcnn2zYoYR5g5+3EMAflbp3alK8BlSdeN9
- YMEx5sL8Z742QeuQEw63320s7j7g4vGh1y+mJe934jFw0Vo9EKAV8C8VzMbi+BizPPi1Q0QCh
- sOM9XENZV/rlsEUa2Uk+LD2Yd50lyEL2gXxyEL7odUaFUhp8qpBcwqp2iHiXH9o+s2PpTCFSi
- h28HvdRQhywp1FFFG5v70zhxC+/nGB9IRiuV6K1obNoic0rHtDT7fKaz9zY+fu/PiXI3h6fxR
- EeciQAfUIa0QBIUcZSeH19qkTAbdzPaRQAX2geEXhgO8p+nsTKpAk4SQvPSCIDVCP4mMt0PwJ
- sMs8GDzQmLY9dWBpCkr+0obdeW7i5tUhyXWOE7fBBjcLKkPfYwf4F8XYkH7VhzjqwQCltnl/u
- TXIeR1laLL/kWmzlmLpedL/A7r1lmnjnNRHDN6HARhlQIZfplh5UjJwELlnzwaxDZBXWovRjb
- YsFbQ3yi5TC5Zg9oHaBkiUnzKFiuHi3XBk7X9WRhgoRnB/Rsx6YKcilmi/+EVDH2rO70oyMYW
- nR94IdFpZ3txPNIna2bG5vT+jnX9s3gKE7vU/5ZnW9vAizVj80gjEnPI3qlJJJmUFWYnCXpDQ
- 7+gAXoBh1VgrHgY9YUsIM4tP0fTf6f4Hm9XJkUajdt3Q4nYkYgJZluOrJSypvUrZvKf1EnUq/
- NmTKBuLlFOUqKx2WWVHFWHMtIq66Tsxt0kCIYuR/zOMS3rB01CoMZRX+Q9bUnwr9i56PVHf/K
- 53YifHPfnXeiiD+Jvp9oFJJNCx8MNy7lFm6S4dXN8K9Jvpm2+3l9FpY+7QXq534eVghQKDTVB
- gpQSDnnKFYQMdetB08jPkBeodhZsy6Xq824huD2loKO93+ShmXFAuodQ6RmsHOgxb6NhY0Lg9
- Q/et0ojwNZqxFVqCEAWuqBuPkgs=
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Matthias Brugger <mbrugger@suse.com>, u-boot@lists.denx.de,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-amlogic@groups.io,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Jagan Teki <jagan@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v4 5/9] efi_loader: GOP: Add damage
-	notification on BLT
+To: Tom Rini <trini@konsulko.com>
+References: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
+ <20230103203504.GM3787616@bill-the-cat>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230103203504.GM3787616@bill-the-cat>
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-05_04,2023-01-04_02,2022-06-22_01
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH] fastboot: remove #ifdef CONFIG when it is
+	possible
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,81 +79,53 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 1/3/23 22:50, Alexander Graf wrote:
-> Now that we have a damage tracking API, let's populate damage done by
-> UEFI payloads when they BLT data onto the screen.
->
-> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> Reported-by: Da Xue <da@libre.computer>
->
-> ---
->
-> v1 -> v2:
->
->    - Remove ifdefs from gop
->
-> v2 -> v3:
->
->    - Adapt to always assume DM is used
->
-> v3 -> v4:
->
->    - Skip damage on EfiBltVideoToBltBuffer
-> ---
->   lib/efi_loader/efi_gop.c | 6 ++++++
->   1 file changed, 6 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-> index d1dc2f22d0..425dcbf6b1 100644
-> --- a/lib/efi_loader/efi_gop.c
-> +++ b/lib/efi_loader/efi_gop.c
-> @@ -32,6 +32,7 @@ struct efi_gop_obj {
->   	struct efi_gop ops;
->   	struct efi_gop_mode_info info;
->   	struct efi_gop_mode mode;
-> +	struct udevice *vdev;
->   	/* Fields we only have access to during init */
->   	u32 bpix;
->   	void *fb;
-> @@ -120,6 +121,7 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
->   	u32 *fb32 = gopobj->fb;
->   	u16 *fb16 = gopobj->fb;
->   	struct efi_gop_pixel *buffer = __builtin_assume_aligned(bufferp, 4);
-> +	bool blt_to_video = (operation != EFI_BLT_VIDEO_TO_BLT_BUFFER);
-
-Using a variable is not really necessary but it could make the code more
-accessible to readers.
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
->
->   	if (delta) {
->   		/* Check for 4 byte alignment */
-> @@ -243,6 +245,9 @@ static __always_inline efi_status_t gop_blt_int(struct efi_gop *this,
->   		dlineoff += dwidth;
->   	}
->
-> +	if (blt_to_video)
-> +		video_damage(gopobj->vdev, dx, dy, width, height);
-> +
->   	return EFI_SUCCESS;
->   }
->
-> @@ -547,6 +552,7 @@ efi_status_t efi_gop_register(void)
->   	gopobj->info.pixels_per_scanline = col;
->   	gopobj->bpix = bpix;
->   	gopobj->fb = fb;
-> +	gopobj->vdev = vdev;
->
->   	return EFI_SUCCESS;
->   }
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgVG9tLAoKT24gMS8zLzIzIDIxOjM1LCBUb20gUmluaSB3cm90ZToKPiBPbiBUaHUsIERlYyAx
+NSwgMjAyMiBhdCAxMDoxNTo1MEFNICswMTAwLCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+PiBN
+dWNoIG9mIHRoZSBmYXN0Ym9vdCBjb2RlIHByZWRhdGVzIHRoZSBpbnRyb2R1Y3Rpb24gb2YgS2Nv
+bmZpZyBhbmQKPj4gaGFzIHF1aXRlIGEgZmV3ICNpZmRlZnMgaW4gaXQgd2hpY2ggaXMgdW5uZWNl
+c3Nhcnkgbm93IHRoYXQgd2UgY2FuIHVzZQo+PiBJU19FTkFCTEVEKCkgZXQgYWwuCj4+Cj4+IFNp
+Z25lZC1vZmYtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5j
+b20+Cj4+IC0tLQo+Pgo+PiAgIGNtZC9mYXN0Ym9vdC5jICAgICAgICAgICAgICAgICAgfCAgMzUg
+KysrKystLS0tLS0KPj4gICBkcml2ZXJzL2Zhc3Rib290L2ZiX2NvbW1hbmQuYyAgIHwgMTA0ICsr
+KysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tCj4+ICAgZHJpdmVycy9mYXN0Ym9vdC9mYl9j
+b21tb24uYyAgICB8ICAxMSArKy0tCj4+ICAgZHJpdmVycy9mYXN0Ym9vdC9mYl9nZXR2YXIuYyAg
+ICB8ICA0OSArKysrKystLS0tLS0tLS0KPj4gICBkcml2ZXJzL3VzYi9nYWRnZXQvZl9mYXN0Ym9v
+dC5jIHwgICA3ICstLQo+PiAgIGluY2x1ZGUvZmFzdGJvb3QuaCAgICAgICAgICAgICAgfCAgMTMg
+LS0tLQo+PiAgIG5ldC9mYXN0Ym9vdC5jICAgICAgICAgICAgICAgICAgfCAgIDggKy0tCj4+ICAg
+NyBmaWxlcyBjaGFuZ2VkLCA4MiBpbnNlcnRpb25zKCspLCAxNDUgZGVsZXRpb25zKC0pCj4+Cj4+
+IGRpZmYgLS1naXQgYS9jbWQvZmFzdGJvb3QuYyBiL2NtZC9mYXN0Ym9vdC5jCj4+IGluZGV4IGI0
+OThlNGIyMmJiMy4uYjk0ZGJkNTQ4ODQzIDEwMDY0NAo+PiAtLS0gYS9jbWQvZmFzdGJvb3QuYwo+
+PiArKysgYi9jbWQvZmFzdGJvb3QuYwo+PiBAQCAtMTksOCArMTksMTQgQEAKPj4gICBzdGF0aWMg
+aW50IGRvX2Zhc3Rib290X3VkcChpbnQgYXJnYywgY2hhciAqY29uc3QgYXJndltdLAo+PiAgIAkJ
+CSAgIHVpbnRwdHJfdCBidWZfYWRkciwgc2l6ZV90IGJ1Zl9zaXplKQo+PiAgIHsKPj4gLSNpZiBD
+T05GSUdfSVNfRU5BQkxFRChVRFBfRlVOQ1RJT05fRkFTVEJPT1QpCj4+IC0JaW50IGVyciA9IG5l
+dF9sb29wKEZBU1RCT09UKTsKPj4gKwlpbnQgZXJyOwo+PiArCj4+ICsJaWYgKCFDT05GSUdfSVNf
+RU5BQkxFRChVRFBfRlVOQ1RJT05fRkFTVEJPT1QpKSB7Cj4+ICsJCXByX2VycigiRmFzdGJvb3Qg
+VURQIG5vdCBlbmFibGVkXG4iKTsKPj4gKwkJcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsKPj4gKwl9
+Cj4+ICsKPj4gKwllcnIgPSBuZXRfbG9vcChGQVNUQk9PVCk7Cj4+ICAgCj4+ICAgCWlmIChlcnIg
+PCAwKSB7Cj4+ICAgCQlwcmludGYoImZhc3Rib290IHVkcCBlcnJvcjogJWRcbiIsIGVycik7Cj4+
+IEBAIC0yOCwyMSArMzQsMjEgQEAgc3RhdGljIGludCBkb19mYXN0Ym9vdF91ZHAoaW50IGFyZ2Ms
+IGNoYXIgKmNvbnN0IGFyZ3ZbXSwKPj4gICAJfQo+PiAgIAo+PiAgIAlyZXR1cm4gQ01EX1JFVF9T
+VUNDRVNTOwo+PiAtI2Vsc2UKPj4gLQlwcl9lcnIoIkZhc3Rib290IFVEUCBub3QgZW5hYmxlZFxu
+Iik7Cj4+IC0JcmV0dXJuIENNRF9SRVRfRkFJTFVSRTsKPj4gLSNlbmRpZgo+PiAgIH0KPiBUaGlz
+IHByb2JhYmx5IG5lZWRzIHRvIGJlY29tZSBhbiBpZiAoQ09ORklHX0lTX0VOQUJMRUQoLi4uKSkg
+eyAuLi4gfQo+IGVsc2UgeyAuLi4gfSBpbiBvcmRlciB0byByZW1haW4gc2l6ZS1uZXV0cmFsLgoK
+CkFyZSB5b3Ugc3VyZSA/CgoKewogwqDCoMKgIGlmICghQ09ORklHX0lTX0VOQUJMRUQoVURQX0ZV
+TkNUSU9OX0ZBU1RCT09UKSkgewogwqDCoMKgIMKgwqDCoCAuLi4uCiDCoMKgwqAgwqDCoMKgIHJl
+dHVybiBDTURfUkVUX0ZBSUxVUkU7CiDCoMKgwqAgfQoKIMKgwqDCoCAuLi4uCgogwqDCoMKgIHJl
+dHVybiBDTURfUkVUX1NVQ0NFU1M7Cn0KCgpGb3IgbWUsIGl0IGlzIGV4YWN0bHkgdGhlIHNhbWUg
+c2l6ZSBhZnRlciBjb21waWxlci9saW5rZXIgdGhhbiA6CgoKewogwqDCoMKgIGlmICghQ09ORklH
+X0lTX0VOQUJMRUQoVURQX0ZVTkNUSU9OX0ZBU1RCT09UKSkgewogwqDCoMKgIMKgwqDCoCAuLi4u
+CiDCoMKgwqAgwqDCoMKgIHJldHVybiBDTURfUkVUX0ZBSUxVUkU7CiDCoMKgwqAgfSBlbHNlIHsK
+IMKgwqDCoCAuLi4uCiDCoMKgwqAgwqDCoMKgwqDCoCByZXR1cm4gQ01EX1JFVF9TVUNDRVNTOwoK
+IMKgwqDCoCB9Cgp9CgoKaWYgVURQX0ZVTkNUSU9OX0ZBU1RCT09UaXMgYWN0aXZhdGVkIG9yIG5v
+dC4uLi4KCm9yIEkgZm9yZ2V0IHNvbWV0aGluZyBkdXJpbmcgdGhlIENocmlzdG1hcyBicmVhay4K
+CgpQYXRyaWNrCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9y
+bXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9s
+aXN0aW5mby91Ym9vdC1zdG0zMgo=

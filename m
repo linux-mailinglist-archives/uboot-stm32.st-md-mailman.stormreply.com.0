@@ -2,40 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56D6A65EE1B
-	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Jan 2023 15:01:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4AEE65FF24
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Jan 2023 11:49:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 99429C6907D;
-	Thu,  5 Jan 2023 14:01:31 +0000 (UTC)
-Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C8AEBC69052
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C933C69066;
+	Fri,  6 Jan 2023 10:49:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 13069C03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Jan 2023 21:50:12 +0000 (UTC)
-Received: from localhost.localdomain
- (dynamic-092-225-244-121.92.225.pool.telefonica.de [92.225.244.121])
- by csgraf.de (Postfix) with ESMTPSA id 167746080DD2;
- Tue,  3 Jan 2023 22:50:12 +0100 (CET)
-From: Alexander Graf <agraf@csgraf.de>
-To: u-boot@lists.denx.de
-Date: Tue,  3 Jan 2023 22:50:04 +0100
-Message-Id: <20230103215004.22646-10-agraf@csgraf.de>
-X-Mailer: git-send-email 2.37.1 (Apple Git-137.1)
-In-Reply-To: <20230103215004.22646-1-agraf@csgraf.de>
-References: <20230103215004.22646-1-agraf@csgraf.de>
+ Fri,  6 Jan 2023 10:49:06 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3068YoY5006314; Fri, 6 Jan 2023 11:49:00 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : to : cc : from : subject : content-type :
+ content-transfer-encoding; s=selector1;
+ bh=kgg2y84WfKJhwYaK36bytfMMZMBEQn7q5Kpyk2zeAjM=;
+ b=TMEcc7EuBlCYGupaffOxGgCUAbvjuwMXWi9Y9ONYo+W+yIXipMreNqcKwpftQt8sfVRU
+ HlbERSJL2aVXUcjfBuimyLP+FYQd2p/GH3EdF54keIAf96pSgGx9EkAHVQhFCvoXB0on
+ KzgZDEYWE1ntqlaL9v6jBNys1xDxNUlTrVYZW2svWzNYWzksgadvhcfeYqHOhmqiEHxX
+ YUtIFb7wMRKT3+TYGvVdBzhtWZEpAQFegEhWRHXk1iJ7rl+m9g6ITMkoinph7agulyUJ
+ zTaGtPEa3/HGMv3+017BYAp/t9p7SenDlHWFyC/Q6/wBzC2HGYifcKaFBTBDhbAb5s0t ag== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3mtbcqf17x-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 06 Jan 2023 11:49:00 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0161210002A;
+ Fri,  6 Jan 2023 11:48:58 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 24EB320DB71;
+ Fri,  6 Jan 2023 11:48:58 +0100 (CET)
+Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Fri, 6 Jan
+ 2023 11:48:55 +0100
+Message-ID: <348bc74e-fb7c-3911-680a-b6dff96a70b4@foss.st.com>
+Date: Fri, 6 Jan 2023 11:48:54 +0100
 MIME-Version: 1.0
-X-Mailman-Approved-At: Thu, 05 Jan 2023 14:01:29 +0000
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- Matthias Brugger <mbrugger@suse.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v4 9/9] video: Enable VIDEO_DAMAGE for drivers
-	that need it
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-06_05,2023-01-06_01,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marex@denx.de>, =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
+Subject: [Uboot-stm32] [PULL] Pull request for u-boot master / v2023.01 =
+ u-boot-stm32-20230106
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -47,194 +70,49 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Some drivers call video_set_flush_dcache() to indicate that they want to
-have the dcache flushed for the frame buffer. These drivers benefit from
-our new video damage control, because we can reduce the amount of memory
-that gets flushed significantly.
-
-This patch enables video damage control for all device drivers that call
-video_set_flush_dcache() to make sure they benefit from it.
-
-Signed-off-by: Alexander Graf <agraf@csgraf.de>
----
- arch/arm/mach-omap2/omap3/Kconfig | 1 +
- arch/arm/mach-sunxi/Kconfig       | 1 +
- drivers/video/Kconfig             | 9 +++++++++
- drivers/video/exynos/Kconfig      | 1 +
- drivers/video/imx/Kconfig         | 1 +
- drivers/video/meson/Kconfig       | 1 +
- drivers/video/rockchip/Kconfig    | 1 +
- drivers/video/stm32/Kconfig       | 1 +
- 8 files changed, 16 insertions(+)
-
-diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
-index 3e97ec2629..ea231f16a2 100644
---- a/arch/arm/mach-omap2/omap3/Kconfig
-+++ b/arch/arm/mach-omap2/omap3/Kconfig
-@@ -113,6 +113,7 @@ config TARGET_NOKIA_RX51
- 	select CMDLINE_TAG
- 	select INITRD_TAG
- 	select REVISION_TAG
-+	select VIDEO_DAMAGE
- 
- config TARGET_TAO3530
- 	bool "TAO3530"
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index dbe6005daa..373bf58731 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -790,6 +790,7 @@ config VIDEO_SUNXI
- 	depends on !SUN50I_GEN_H6
- 	select VIDEO
- 	select DISPLAY
-+	select VIDEO_DAMAGE
- 	imply VIDEO_DT_SIMPLEFB
- 	default y
- 	---help---
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index 472e9c7c61..a186bd8525 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -436,6 +436,7 @@ config VIDEO_LCD_ANX9804
- 
- config ATMEL_LCD
- 	bool "Atmel LCD panel support"
-+	select VIDEO_DAMAGE
- 	depends on ARCH_AT91
- 
- config ATMEL_LCD_BGR555
-@@ -445,6 +446,7 @@ config ATMEL_LCD_BGR555
- 
- config VIDEO_BCM2835
- 	bool "Display support for BCM2835"
-+	select VIDEO_DAMAGE
- 	help
- 	  The graphics processor already sets up the display so this driver
- 	  simply checks the resolution and then sets up the frame buffer with
-@@ -554,6 +556,7 @@ source "drivers/video/meson/Kconfig"
- 
- config VIDEO_MVEBU
- 	bool "Armada XP LCD controller"
-+	select VIDEO_DAMAGE
- 	---help---
- 	Support for the LCD controller integrated in the Marvell
- 	Armada XP SoC.
-@@ -588,6 +591,7 @@ config NXP_TDA19988
- 
- config ATMEL_HLCD
- 	bool "Enable ATMEL video support using HLCDC"
-+	select VIDEO_DAMAGE
- 	help
- 	   HLCDC supports video output to an attached LCD panel.
- 
-@@ -652,6 +656,7 @@ source "drivers/video/stm32/Kconfig"
- config VIDEO_TEGRA20
- 	bool "Enable LCD support on Tegra20"
- 	depends on OF_CONTROL
-+	select VIDEO_DAMAGE
- 	help
- 	   Tegra20 supports video output to an attached LCD panel as well as
- 	   other options such as HDMI. Only the LCD is supported in U-Boot.
-@@ -660,6 +665,7 @@ config VIDEO_TEGRA20
- 
- config VIDEO_TEGRA124
- 	bool "Enable video support on Tegra124"
-+	select VIDEO_DAMAGE
- 	help
- 	   Tegra124 supports many video output options including eDP and
- 	   HDMI. At present only eDP is supported by U-Boot. This option
-@@ -672,6 +678,7 @@ source "drivers/video/imx/Kconfig"
- 
- config VIDEO_MXS
- 	bool "Enable video support on i.MX28/i.MX6UL/i.MX7 SoCs"
-+	select VIDEO_DAMAGE
- 	help
- 	  Enable framebuffer driver for i.MX28/i.MX6UL/i.MX7 processors
- 
-@@ -741,6 +748,7 @@ config VIDEO_DW_MIPI_DSI
- 
- config VIDEO_SIMPLE
- 	bool "Simple display driver for preconfigured display"
-+	select VIDEO_DAMAGE
- 	help
- 	  Enables a simple generic display driver which utilizes the
- 	  simple-framebuffer devicetree bindings.
-@@ -759,6 +767,7 @@ config VIDEO_DT_SIMPLEFB
- 
- config VIDEO_MCDE_SIMPLE
- 	bool "Simple driver for ST-Ericsson MCDE with preconfigured display"
-+	select VIDEO_DAMAGE
- 	help
- 	  Enables a simple display driver for ST-Ericsson MCDE
- 	  (Multichannel Display Engine), which reads the configuration from
-diff --git a/drivers/video/exynos/Kconfig b/drivers/video/exynos/Kconfig
-index 599d19d5ec..66aa11661c 100644
---- a/drivers/video/exynos/Kconfig
-+++ b/drivers/video/exynos/Kconfig
-@@ -12,6 +12,7 @@ config EXYNOS_DP
- 
- config EXYNOS_FB
- 	bool "Exynos FIMD support"
-+	select VIDEO_DAMAGE
- 
- config EXYNOS_MIPI_DSIM
- 	bool "Exynos MIPI DSI support"
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index 34e8b64059..50d8b05365 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -2,6 +2,7 @@
- config VIDEO_IPUV3
- 	bool "i.MX IPUv3 Core video support"
- 	depends on VIDEO && (MX5 || MX6)
-+	select VIDEO_DAMAGE
- 	help
- 	  This enables framebuffer driver for i.MX processors working
- 	  on the IPUv3(Image Processing Unit) internal graphic processor.
-diff --git a/drivers/video/meson/Kconfig b/drivers/video/meson/Kconfig
-index 3c2d72d019..70fb75607b 100644
---- a/drivers/video/meson/Kconfig
-+++ b/drivers/video/meson/Kconfig
-@@ -8,5 +8,6 @@ config VIDEO_MESON
- 	bool "Enable Amlogic Meson video support"
- 	depends on VIDEO
- 	select DISPLAY
-+	select VIDEO_DAMAGE
- 	help
- 	  Enable Amlogic Meson Video Processing Unit video support.
-diff --git a/drivers/video/rockchip/Kconfig b/drivers/video/rockchip/Kconfig
-index b03866347b..1a3b02cee0 100644
---- a/drivers/video/rockchip/Kconfig
-+++ b/drivers/video/rockchip/Kconfig
-@@ -11,6 +11,7 @@
- menuconfig VIDEO_ROCKCHIP
- 	bool "Enable Rockchip Video Support"
- 	depends on VIDEO
-+	select VIDEO_DAMAGE
- 	help
- 	  Rockchip SoCs provide video output capabilities for High-Definition
- 	  Multimedia Interface (HDMI), Low-voltage Differential Signalling
-diff --git a/drivers/video/stm32/Kconfig b/drivers/video/stm32/Kconfig
-index 48066063e4..cce2255706 100644
---- a/drivers/video/stm32/Kconfig
-+++ b/drivers/video/stm32/Kconfig
-@@ -8,6 +8,7 @@
- menuconfig VIDEO_STM32
- 	bool "Enable STM32 video support"
- 	depends on VIDEO
-+	select VIDEO_DAMAGE
- 	help
- 	  STM32 supports many video output options including RGB and
- 	  DSI. This option enables these supports which can be used on
--- 
-2.37.1 (Apple Git-137.1)
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgVG9tLAoKUGxlYXNlIHB1bGwgdGhlIFNUTTMyIHJlbGF0ZWQgZml4ZXMgZm9yIHUtYm9vdC9t
+YXN0ZXIsIHYyMDIzLjAxOiAKdS1ib290LXN0bTMyLTIwMjMwMTA2CgoKLSBzdG0zMm1wOiBGaXgg
+Ym9hcmRfZ2V0X3VzYWJsZV9yYW1fdG9wKCk6IHdvcmthcm91bmQgdG8gYXZvaWQgaXNzdWUgCmFm
+dGVyIHRoZQoKIMKgIGNvbW1pdCA3NzdhYWFhNzA2YiAoImNvbW1vbi9tZW1zaXplLmM6IEZpeCBn
+ZXRfZWZmZWN0aXZlX21lbXNpemUoKSB0byAKY2hlY2sKCiDCoCBmb3Igb3ZlcmZsb3ciKSBiZWNh
+dXNlIHRoZSBlZmZlY3RpdmUgRERSIGVmZmVjdGl2ZSBzaXplIGlzIHJlZHVjZSBieSA0S2lCCiDC
+oCBhbmQgc29tZXRpbWUgdGhlIGJvYXJkIGhhbmcgb24gYm9vdAoKCkNJIHN0YXR1czogCmh0dHBz
+Oi8vc291cmNlLmRlbnguZGUvdS1ib290L2N1c3RvZGlhbnMvdS1ib290LXN0bS8tL3BpcGVsaW5l
+cy8xNDYyMwoKClRoaXMgbGFzdCBwYXRjaCBmb3IgdjIwMjMuMDEgYXZvaWRzIGEgaGFuZyBvbiAx
+R0IgRERSIFNUTTMyTVAxNSBib2FyZCAKZGV0ZWN0ZWQKCmJ5IE1hcmVrIGFuZCBjYXVzZWQgYnkg
+UGFsaSBwYXRjaC4KCgpGb3IgbXkgcG9pbnQgYSB2aWV3ICwgdGhpcyBwYXRjaCBpcyBhbiBhY2Nl
+cHRhYmxlIHdvcmthcm91bmQgZm9yIG1hc3RlciAKYnJhbmNoIGFuZCB2MjAyMy4wMSBkZWxpdmVy
+eQoKYnV0IHRoZSBpbml0aWFsIHBhdGNoIHNob3VsZCBiZSByZXZpc2l0ZWQgb3IgcmV2ZXJ0ZWQg
+KGluIG1hc3RlciBvciBpbiAKbmV4dCA/KS4KCgpGb3IgZGV0YWlscyBzZWUgY29tbWVudHMgaW4g
+cGF0Y2gKCiJhcm06IHN0bTMybXA6IEZpeCBib2FyZF9nZXRfdXNhYmxlX3JhbV90b3AoKSBhZ2Fp
+biIKCmh0dHA6Ly9wYXRjaHdvcmsub3psYWJzLm9yZy9wcm9qZWN0L3Vib290L3BhdGNoLzIwMjMw
+MTA1MDEyMjIyLjIzODA3NS0xLW1hcmV4QGRlbnguZGUvCgpodHRwczovL2xvcmUua2VybmVsLm9y
+Zy91LWJvb3QvMjAyMzAxMDUwMTIyMjIuMjM4MDc1LTEtbWFyZXhAZGVueC5kZS8KCgpUaGFua3Ms
+ClBhdHJpY2sKCj09PT09CgoKVGhlIGZvbGxvd2luZyBjaGFuZ2VzIHNpbmNlIGNvbW1pdCA4ZDZj
+YmY1ZTZiYzRlMTBlMzhiOTU0NzYzZmEwMjVjYWVkNTE3Y2MyOgoKIMKgIE1lcmdlIHRhZyAnZWZp
+LTIwMjMtMDEtcmM1LTMnIG9mIApodHRwczovL3NvdXJjZS5kZW54LmRlL3UtYm9vdC9jdXN0b2Rp
+YW5zL3UtYm9vdC1lZmkgKDIwMjMtMDEtMDQgMDg6NTA6MjQgCi0wNTAwKQoKYXJlIGF2YWlsYWJs
+ZSBpbiB0aGUgR2l0IHJlcG9zaXRvcnkgYXQ6CgogwqAgaHR0cHM6Ly9naXRsYWIuZGVueC5kZS91
+LWJvb3QvY3VzdG9kaWFucy91LWJvb3Qtc3RtLmdpdCAKdGFncy91LWJvb3Qtc3RtMzItMjAyMzAx
+MDYKCmZvciB5b3UgdG8gZmV0Y2ggY2hhbmdlcyB1cCB0byBhMmUwYjA0MWQ2NjJlNGM4MDUwMmNk
+NWM5YTgzMjZkMDI2ZjlkZWIxOgoKIMKgIGFybTogc3RtMzJtcDogRml4IGJvYXJkX2dldF91c2Fi
+bGVfcmFtX3RvcCgpIGFnYWluICgyMDIzLTAxLTA2IAoxMTowMjoxNyArMDEwMCkKCi0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0K
+LSBzdG0zMm1wOiBGaXggYm9hcmRfZ2V0X3VzYWJsZV9yYW1fdG9wKCk6IHdvcmthcm91bmQgdG8g
+YXZvaWQgaXNzdWUgCmFmdGVyIHRoZQogwqAgY29tbWl0IDc3N2FhYWE3MDZiICgiY29tbW9uL21l
+bXNpemUuYzogRml4IGdldF9lZmZlY3RpdmVfbWVtc2l6ZSgpIHRvIApjaGVjawogwqAgZm9yIG92
+ZXJmbG93IikgYmVjYXVzZSB0aGUgZWZmZWN0aXZlIEREUiBlZmZlY3RpdmUgc2l6ZSBpcyByZWR1
+Y2UgYnkgNEtpQgogwqAgYW5kIHNvbWV0aW1lIHRoZSBib2FyZCBoYW5nIG9uIGJvb3QKCi0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0KTWFyZWsgVmFzdXQgKDEpOgogwqDCoMKgwqDCoCBhcm06IHN0bTMybXA6IEZpeCBib2FyZF9n
+ZXRfdXNhYmxlX3JhbV90b3AoKSBhZ2FpbgoKIMKgYXJjaC9hcm0vbWFjaC1zdG0zMm1wL2RyYW1f
+aW5pdC5jIHwgMiArLQogwqAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
+b24oLSkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
+b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
+bmZvL3Vib290LXN0bTMyCg==

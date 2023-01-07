@@ -2,66 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BACD366051A
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Jan 2023 17:52:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A54C2660AA7
+	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jan 2023 01:14:33 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 67487C69060;
-	Fri,  6 Jan 2023 16:52:55 +0000 (UTC)
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
- [209.85.160.172])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6101FC69069;
+	Sat,  7 Jan 2023 00:14:33 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
+ [209.85.128.175])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E140FC6905D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DDD1AC69066
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Jan 2023 16:52:53 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id a16so2442217qtw.10
+ Sat,  7 Jan 2023 00:14:31 +0000 (UTC)
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-4c15c4fc8ccso42944847b3.4
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 06 Jan 2023 08:52:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=d68kbFeWw68nc5Se9UJRHNLXOz6kH9dzv3+K5mGBSRM=;
- b=h7qmeB46SvzqmNK7il4MjcQ8zuJbAF/neeF6SsuckZZGan6u4Z6l8SJkVC2KDGZQQ8
- AxQWP4Framje90fSAwIMpfNaknspOr5/5q0kQDWj7C71ImFaiGO7Z+ctwh4tYXCYTR1H
- 1zDXd9tK8caVKI5uzX3KX5e7waThGmOHvYKUA=
+ Fri, 06 Jan 2023 16:14:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fF9LMAV9ZWAuTltQqLjReBhFcZlOY2ZG1nq6P8vDKWg=;
+ b=fCXTMrD5Fu2G4d4U1EViWb+9NBtIxwO/8NJM2+yE44yTWPM7sWHK7xNQgQDHmOe0fR
+ KwQrJro2BjnYXMeb2hmHLnCnvc2i7UhAvjrCMfVglYP/vInWw2uRx5KW2rRzw82MLrxc
+ wz3uv7bkWPmzzse3B2TUbLRcQdEhIMtNmsQNQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d68kbFeWw68nc5Se9UJRHNLXOz6kH9dzv3+K5mGBSRM=;
- b=SJyFfek2NLK85WzPzgDqJluKsIPMRMvDwnhS9AyiHMeYYxt+kXLMGOMEggTAa84Zlq
- /6/RL4lPe9TeYsihKZrhqOKq66Zbj7kFKo91BmIkiAylCxrCE57R3qd+6qO59Rx/tYK+
- IBguOG7txtbO4c16GyyKa9dtzG0/PgEwyo6BExzdlIfhupqcPH9Plfc22RnfXGkA8cqC
- Qg79Zx7oihQ38RiPIKGa+9bOUZKzhlbqCQNfsPsNFAdlteF7q2/t42vp0J0BBqlM4Fic
- 76NizF6Vi28CkFP3jaF2VSJCn/cQLmXIXn9bZcY+fSYp5H7Tvuh7L1iXtNQ1dLinGy00
- Sc4A==
-X-Gm-Message-State: AFqh2kpo1xp5r1d9EpGOE6fG1KBlHjoS7fjE61zkoQEYSnnNERGWlXSn
- wpXW9ag0m0eTpa0n9MOZX2AO7BRKDgElBb3qPPo=
-X-Google-Smtp-Source: AMrXdXs3+q2QzjLXSuhXoB9M4K3yBel8vEnIOhNG9DsX/n4Pq22kGrogAfX76XdYELT1p867tDcXDw==
-X-Received: by 2002:ac8:4705:0:b0:3ab:5a62:453b with SMTP id
- f5-20020ac84705000000b003ab5a62453bmr71215120qtp.53.1673023972818; 
- Fri, 06 Jan 2023 08:52:52 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-9162-adb5-1773-34c0.res6.spectrum.com.
- [2603:6081:7b00:6400:9162:adb5:1773:34c0])
- by smtp.gmail.com with ESMTPSA id
- v7-20020a05620a440700b006fb112f512csm771218qkp.74.2023.01.06.08.52.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Jan 2023 08:52:52 -0800 (PST)
-Date: Fri, 6 Jan 2023 11:52:50 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Message-ID: <20230106165250.GD3787616@bill-the-cat>
-References: <348bc74e-fb7c-3911-680a-b6dff96a70b4@foss.st.com>
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fF9LMAV9ZWAuTltQqLjReBhFcZlOY2ZG1nq6P8vDKWg=;
+ b=W/b0vkY+ARbRwdgbzq6994hYoawiKngVboNYZlTxBBH0ix2V32w8w6xAG7Cnt5laM0
+ AH4H9GuiIDqedpjgNM2rH+AVNxKrE3cHu/46dWCA9XCWx9JHuheEOk6TfAjR4DUfpiVZ
+ QfclXGh7dnvD+Xv1/T64JKdcYmszWcJFvBgLPeUupxd04Od42P3jsckz0ulnBkF6cWtN
+ IV98ZVRYf3WfKkthTumtTaZ7aLiCa9ZabYEoxinreEXQNpKr9+KHDgzNAAw2LTXoTjLW
+ cA3a5KofgKYxLpzYx4oJ3oHeimC/R8FKgqtlIfJMVd5nTlnxQFpINXBKy81qX/AYUYHn
+ eRYA==
+X-Gm-Message-State: AFqh2koDq1hwsKP+of7ZJ8pwlEJl2pTBF+jsINK9I0rfoPKznePtpW5c
+ EqBUT2rgnrLD2exseJMTjVt3ZAetiUo20AbUte+jdw==
+X-Google-Smtp-Source: AMrXdXv+AvpMM7Q5hmDTx0fd7n30utq5Go4D7mxlULkVdAlnNNyYLX20H8oFWD1uuEaF3zmYDVDAWOWBlZHaNBMIrpc=
+X-Received: by 2002:a81:25cf:0:b0:426:6938:b154 with SMTP id
+ l198-20020a8125cf000000b004266938b154mr1029010ywl.511.1673050470605; Fri, 06
+ Jan 2023 16:14:30 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <348bc74e-fb7c-3911-680a-b6dff96a70b4@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PULL] Pull request for u-boot master / v2023.01
- = u-boot-stm32-20230106
+References: <20230103215004.22646-1-agraf@csgraf.de>
+ <20230103215004.22646-2-agraf@csgraf.de>
+In-Reply-To: <20230103215004.22646-2-agraf@csgraf.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 6 Jan 2023 17:13:30 -0700
+Message-ID: <CAPnjgZ3pmF60WMNFipBUN9nqd4pQC=FeYOy5zgt6pvEWckROqw@mail.gmail.com>
+To: Alexander Graf <agraf@csgraf.de>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
+ Matthias Brugger <mbrugger@suse.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
+Subject: Re: [Uboot-stm32] [PATCH v4 1/9] dm: video: Add damage tracking API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,132 +73,207 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6058624783272327172=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Alex,
 
---===============6058624783272327172==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="ArpPm2uaigKwCCI4"
-Content-Disposition: inline
+On Tue, 3 Jan 2023 at 14:50, Alexander Graf <agraf@csgraf.de> wrote:
+>
+> We are going to introduce image damage tracking to fasten up screen
+> refresh on large displays. This patch adds damage tracking for up to
+> one rectangle of the screen which is typically enough to hold blt or
+> text print updates. Callers into this API and a reduced dcache flush
+> code path will follow in later patches.
+>
+> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+> Reported-by: Da Xue <da@libre.computer>
+>
+> ---
+>
+> v1 -> v2:
+>
+>   - Remove ifdefs
+>
+> v2 -> v3:
+>
+>   - Adapt Kconfig to DM always
+>
+> v3 -> v4:
+>
+>   - Move damage clear from patch 6 to this one
+>   - Simplify first damage logic
+>   - Remove VIDEO_DAMAGE default for ARM
+> ---
+>  drivers/video/Kconfig        | 13 ++++++++++++
+>  drivers/video/video-uclass.c | 41 ++++++++++++++++++++++++++++++++++++
+>  include/video.h              | 29 +++++++++++++++++++++++--
+>  3 files changed, 81 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+> index f539977d9b..826a1a6587 100644
+> --- a/drivers/video/Kconfig
+> +++ b/drivers/video/Kconfig
+> @@ -62,6 +62,19 @@ config VIDEO_COPY
+>           To use this, your video driver must set @copy_base in
+>           struct video_uc_plat.
+>
+> +config VIDEO_DAMAGE
+> +       bool "Enable damage tracking of frame buffer regions"
+> +       help
+> +         On some machines (most ARM), the display frame buffer resides in
+> +         RAM. To make the display controller pick up screen updates, we
+> +         have to flush frame buffer contents from CPU caches into RAM which
+> +         can be a slow operation.
+> +
+> +         This feature adds damage tracking to collect information about regions
+> +         that received updates. When we want to sync, we then only flush
+> +         regions of the frame buffer that were modified before, speeding up
+> +         screen refreshes significantly.
+> +
+>  config BACKLIGHT_PWM
+>         bool "Generic PWM based Backlight Driver"
+>         depends on BACKLIGHT && DM_PWM
+> diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+> index 0ce376ca3f..d18c8cd2b1 100644
+> --- a/drivers/video/video-uclass.c
+> +++ b/drivers/video/video-uclass.c
+> @@ -21,6 +21,8 @@
+>  #include <dm/device_compat.h>
+>  #include <dm/device-internal.h>
+>  #include <dm/uclass-internal.h>
+> +#include <linux/types.h>
+> +#include <linux/bitmap.h>
+>  #ifdef CONFIG_SANDBOX
+>  #include <asm/sdl.h>
+>  #endif
+> @@ -254,6 +256,37 @@ void video_set_default_colors(struct udevice *dev, bool invert)
+>         priv->colour_bg = video_index_to_colour(priv, back);
+>  }
+>
+> +/* Notify about changes in the frame buffer */
+> +int video_damage(struct udevice *vid, int x, int y, int width, int height)
+> +{
+> +       struct video_priv *priv = dev_get_uclass_priv(vid);
+> +       int endx = x + width;
+> +       int endy = y + height;
+> +
+> +       if (!CONFIG_IS_ENABLED(VIDEO_DAMAGE))
+> +               return 0;
+> +
+> +       if (x > priv->xsize)
+> +               return 0;
+> +
+> +       if (y > priv->ysize)
+> +               return 0;
+> +
+> +       if (endx > priv->xsize)
+> +               endx = priv->xsize;
+> +
+> +       if (endy > priv->ysize)
+> +               endy = priv->ysize;
+> +
+> +       /* Span a rectangle across all old and new damage */
+> +       priv->damage.x = min(x, priv->damage.x);
+> +       priv->damage.y = min(y, priv->damage.y);
+> +       priv->damage.endx = max(endx, priv->damage.endx);
+> +       priv->damage.endy = max(endy, priv->damage.endy);
+> +
+> +       return 0;
 
+Should we make this void, then?
 
---ArpPm2uaigKwCCI4
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> +}
+> +
+>  /* Flush video activity to the caches */
+>  int video_sync(struct udevice *vid, bool force)
+>  {
+> @@ -288,6 +321,14 @@ int video_sync(struct udevice *vid, bool force)
+>                 last_sync = get_timer(0);
+>         }
+>  #endif
+> +
+> +       if (CONFIG_IS_ENABLED(VIDEO_DAMAGE)) {
+> +               priv->damage.x = priv->xsize;
+> +               priv->damage.y = priv->ysize;
+> +               priv->damage.endx = 0;
+> +               priv->damage.endy = 0;
+> +       }
+> +
+>         return 0;
+>  }
+>
+> diff --git a/include/video.h b/include/video.h
+> index 43f2e2c02f..4b35e97f79 100644
+> --- a/include/video.h
+> +++ b/include/video.h
+> @@ -109,6 +109,12 @@ struct video_priv {
 
-On Fri, Jan 06, 2023 at 11:48:54AM +0100, Patrick DELAUNAY wrote:
+Please update the comment when you add struct members.
 
-> Hi Tom,
->=20
-> Please pull the STM32 related fixes for u-boot/master, v2023.01:
-> u-boot-stm32-20230106
->=20
->=20
-> - stm32mp: Fix board_get_usable_ram_top(): workaround to avoid issue after
-> the
->=20
-> =A0 commit 777aaaa706b ("common/memsize.c: Fix get_effective_memsize() to
-> check
->=20
-> =A0 for overflow") because the effective DDR effective size is reduce by =
-4KiB
-> =A0 and sometime the board hang on boot
->=20
->=20
-> CI status:
-> https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/14623
->=20
->=20
-> This last patch for v2023.01 avoids a hang on 1GB DDR STM32MP15 board
-> detected
->=20
-> by Marek and caused by Pali patch.
->=20
->=20
-> For my point a view , this patch is an acceptable workaround for master
-> branch and v2023.01 delivery
->=20
-> but the initial patch should be revisited or reverted (in master or in ne=
-xt
-> ?).
->=20
->=20
-> For details see comments in patch
->=20
-> "arm: stm32mp: Fix board_get_usable_ram_top() again"
->=20
-> http://patchwork.ozlabs.org/project/uboot/patch/20230105012222.238075-1-m=
-arex@denx.de/
->=20
-> https://lore.kernel.org/u-boot/20230105012222.238075-1-marex@denx.de/
+>         void *fb;
+>         int fb_size;
+>         void *copy_fb;
+> +       struct {
+> +               int x;
+> +               int y;
+> +               int endx;
+> +               int endy;
+> +       } damage;
+>         int line_length;
+>         u32 colour_fg;
+>         u32 colour_bg;
+> @@ -211,8 +217,9 @@ int video_fill(struct udevice *dev, u32 colour);
+>   * @return: 0 on success, error code otherwise
+>   *
+>   * Some frame buffers are cached or have a secondary frame buffer. This
+> - * function syncs these up so that the current contents of the U-Boot frame
+> - * buffer are displayed to the user.
+> + * function syncs the damaged parts of them up so that the current contents
+> + * of the U-Boot frame buffer are displayed to the user. It clears the damage
+> + * buffer.
+>   */
+>  int video_sync(struct udevice *vid, bool force);
+>
+> @@ -332,6 +339,24 @@ static inline int video_sync_copy_all(struct udevice *dev)
+>
+>  #endif
+>
+> +/**
+> + * video_damage() - Notify the video subsystem about screen updates.
+> + *
+> + * @vid:       Device to sync
+> + * @x:         Upper left X coordinate of the damaged rectangle
+> + * @y:         Upper left Y coordinate of the damaged rectangle
+> + * @width:     Width of the damaged rectangle
+> + * @height:    Height of the damaged rectangle
+> + *
+> + * @return: 0
 
-Yes, I want to see how this progresses, thanks for taking a work-around
-for now.  But for now I have also posted a revert, to help spur
-discussion.
+Returns: 0
 
->=20
-> Thanks,
-> Patrick
->=20
-> =3D=3D=3D=3D=3D
->=20
->=20
-> The following changes since commit 8d6cbf5e6bc4e10e38b954763fa025caed517c=
-c2:
->=20
-> =A0 Merge tag 'efi-2023-01-rc5-3' of
-> https://source.denx.de/u-boot/custodians/u-boot-efi (2023-01-04 08:50:24
-> -0500)
->=20
-> are available in the Git repository at:
->=20
-> =A0 https://gitlab.denx.de/u-boot/custodians/u-boot-stm.git
-> tags/u-boot-stm32-20230106
->=20
-> for you to fetch changes up to a2e0b041d662e4c80502cd5c9a8326d026f9deb1:
->=20
-> =A0 arm: stm32mp: Fix board_get_usable_ram_top() again (2023-01-06 11:02:=
-17
-> +0100)
->=20
+(that is the style now, sadly meaning that much of U-Boot needs to be updated)
 
-Applied to u-boot/master, thanks!
+> + *
+> + * Some frame buffers are cached or have a secondary frame buffer. This
+> + * function notifies the video subsystem about rectangles that were updated
+> + * within the frame buffer. They may only get written to the screen on the
+> + * next call to video_sync().
+> + */
+> +int video_damage(struct udevice *vid, int x, int y, int width, int height);
+> +
+>  /**
+>   * video_is_active() - Test if one video device it active
+>   *
+> --
+> 2.37.1 (Apple Git-137.1)
+>
 
---=20
-Tom
-
---ArpPm2uaigKwCCI4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmO4UeIACgkQFHw5/5Y0
-tywCrAv/aE4/XGLAeSIhWuwe6mXHEhCFkQlTTlsseQiyOgYwbNWCQX8mb5JwBNpR
-Aycgx9yvQjU1+DCe6Is9KETlZE58n+aZV21z2tG6CG4bfoukR+E4YeZnQi887jgH
-rUhUBG/R0fsjWgB8G0+ZDuh466Pwbm7QGEipQ2rNeblMdwKxQfJspckm3n4Q7keG
-jeU0gKvNLxaBIEYmbK2WsvDCIeMVREK8W7U8o2EglFKZQ9tuwEE1AYYWBo7a43SS
-a6ZB2NULQ3bEKqBzxViBphNOPzuRU7hsUIefZGRJHlyYIpAodx58zFCyKugA41XD
-CB3dYyxK2kPrVv87p4kdaZHBCKELXQPr6H17cjJ6RAcuWIAHU+HF/yxFlZDqWno6
-TekphBRnbRXPSEdt26YapLqaYaBvb23Vym3Xg4vvHOMblm8qidm58sKSZFyIOgEa
-P1LkqUX6MQkoLpoefni8Jr9wztZBdiu8Kiuj0cSgZV5crDn+CYjDJ5x+wGOf50pe
-b6CP8hSW
-=79I6
------END PGP SIGNATURE-----
-
---ArpPm2uaigKwCCI4--
-
---===============6058624783272327172==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============6058624783272327172==--

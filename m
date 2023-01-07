@@ -2,53 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id ACC24660AA8
-	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jan 2023 01:14:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00F71660AAE
+	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jan 2023 01:15:00 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 72163C69066;
-	Sat,  7 Jan 2023 00:14:40 +0000 (UTC)
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com
- [209.85.219.178])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B78F0C69069;
+	Sat,  7 Jan 2023 00:15:00 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com
+ [209.85.219.170])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 221A1C69062
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 215C3C69069
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  7 Jan 2023 00:14:39 +0000 (UTC)
-Received: by mail-yb1-f178.google.com with SMTP id j206so3552145ybj.1
+ Sat,  7 Jan 2023 00:14:59 +0000 (UTC)
+Received: by mail-yb1-f170.google.com with SMTP id 194so1262849ybf.8
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 06 Jan 2023 16:14:39 -0800 (PST)
+ Fri, 06 Jan 2023 16:14:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qBH+N5sW9ZV4cqPQF4JOwEm501eXtSezEi905kpazbI=;
- b=d2EpE/4lXwes6TBX1Dc4CTfiJ9NmlXZJJb1MDodoY5WpNkk9wadYhwpCRWvovtwmCB
- OF14wROURpbDBacyBwNvW4Yf2SgUHv8ic5TUjd8/Va7poxr7IpD5v6zWV5gh+TC9EGKc
- ofnFpYH5SJukFq4XDwh7o8we/QZSoTzuZKvNw=
+ bh=9nlcr1MaP75MRPGOTCNBS5WKL1SI8NFsmRCC6xIZOnY=;
+ b=KZZD3fsLugLnPm/mh8lCdxfHbtduOCW1NKpUtwRyhYHnTLRG2BG1BMAIUBYyo9vATR
+ DOHWwQ9gPYgIT1lDI0QGjtrlBF1xj/mqACC1O+hWSZR3thJcuG3fo8isLFNshapc6Ru/
+ p+dvsQfxXnfJn3VN8QNT8mlLFi75/YMuseom0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qBH+N5sW9ZV4cqPQF4JOwEm501eXtSezEi905kpazbI=;
- b=XzEeJZQW1ekSH3JbAR+QtIoi6mtTIr/wbpg5j+p31lRXYHGiGhyZatbtYu/CHe0sVb
- P+PqMWn+/wAhPGUN/7Z5duDkFZAKh9yXCW4Ss6GC2AMj7o5fZiUYcxTE7ATN0hOiIP7m
- lxnTdLLydeo/M1z6UgyY8dKe8StPcnNjn5bbRu3YdOGQjQDU6ZhOY++HhEMSkemnp5xH
- P4NqPHaBY6wEvDSZMdfZwtCVQtcX0rebzctZr3U1RWZFNb1JoZFaOOTy+R02skFNJQIX
- UAs6JthyHe9TEOWI0dS6KuJYDYD3gnDpRylF9xeM04szDJF3VY3TnxLwFExtXBGb0AFc
- wwcg==
-X-Gm-Message-State: AFqh2kp9C2zQ73tGFQVPml2RGP571Ir3sg6StEwOnUXD4y7BN86u4bDf
- qMHu36Znw/rUgd5Xa+5B+1X408RkIAVKfMs33RJ1gQ==
-X-Google-Smtp-Source: AMrXdXuwr93St8N82aK+QaD9/3ZkZn/IL+8Z0So70+gj5CZ5yPlk5icJVQ/hasK1ZTwi97w4JuYS2XU9gJuYxO1XS2w=
-X-Received: by 2002:a25:6fd5:0:b0:74a:a7d6:43b9 with SMTP id
- k204-20020a256fd5000000b0074aa7d643b9mr4240341ybc.545.1673050477903; Fri, 06
- Jan 2023 16:14:37 -0800 (PST)
+ bh=9nlcr1MaP75MRPGOTCNBS5WKL1SI8NFsmRCC6xIZOnY=;
+ b=jPyPPcV9qHzMs1dEHaTfDp+tQCTsGs7cRrYuPxL7SGbRJRR0iCh/hv8auhSkp3pr3e
+ 6NKdbPsGvb5P4PL+bDwcuJ3OavL7hSrJ0nTRnPNAqzjDtsLh5TyhIGDq7kwldWgC1vGb
+ 2p4Plyfjy2dC1MC+2BN3Kxfg/L6+Nb9VAFbJswpuLmKxUXclbfjHSsDiY+Xhxs0TJx/g
+ Gc+PtFXuJlGz6D6cIeXpE5ResW2u1iajQ+2e/ez6TdGTlKK5qCCMmW9skvanSvgMmBJb
+ bquZdWMORt8KlDXnljOLk2x//jQUhnsMCgpW314VjxJAJdpRa3QiU4qheX647hGEHo8f
+ L0Tw==
+X-Gm-Message-State: AFqh2kp5ctLoITjmz58p3BE2ZcMsWE4SWiJkohaG2NT9ukR/kXk+20ob
+ PSTbSnJk+osLyzdP0pGAFhyeLTc57p7dNBvW/kbVjQ==
+X-Google-Smtp-Source: AMrXdXtAytsxvZGisHTqgdh/uUgrgI5mWDZ6RzKTemDCyGYXUKPbQyeUxXKubmDjAzLAed52xl518fxUomgy1ynkqwk=
+X-Received: by 2002:a25:258:0:b0:7ab:1c67:8c7 with SMTP id
+ 85-20020a250258000000b007ab1c6708c7mr1446437ybc.50.1673050497821; 
+ Fri, 06 Jan 2023 16:14:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20230103215004.22646-1-agraf@csgraf.de>
- <20230103215004.22646-4-agraf@csgraf.de>
-In-Reply-To: <20230103215004.22646-4-agraf@csgraf.de>
+ <20230103215004.22646-5-agraf@csgraf.de>
+In-Reply-To: <20230103215004.22646-5-agraf@csgraf.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Jan 2023 17:13:32 -0700
-Message-ID: <CAPnjgZ0+ApQYVHnNNV=Yfp_YDsFuzi52s_sUAzd3dQgsQyyp-A@mail.gmail.com>
+Date: Fri, 6 Jan 2023 17:13:33 -0700
+Message-ID: <CAPnjgZ3Gd3AZyUPi_9BzWmZUYhizipXgjeg9qU1MjnJ8aiVUXA@mail.gmail.com>
 To: Alexander Graf <agraf@csgraf.de>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -60,8 +60,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Andre Przywara <andre.przywara@arm.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v4 3/9] vidconsole: Add damage
- notifications to all vidconsole drivers
+Subject: Re: [Uboot-stm32] [PATCH v4 4/9] video: Add damage notification on
+	bmp display
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,26 +80,14 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Tue, 3 Jan 2023 at 14:50, Alexander Graf <agraf@csgraf.de> wrote:
 >
-> Now that we have a damage tracking API, let's populate damage done by
-> vidconsole drivers. We try to declare as little memory as damaged as
-> possible, with the exception of rotated screens that I couldn't get my
-> head wrapped around. On those, we revert to the old behavior and mark
-> the full screen as damaged on every update.
+> Let's report the video damage when we draw a bitmap on the screen. This
+> way we can later lazily flush only relevant regions to hardware.
 >
 > Signed-off-by: Alexander Graf <agraf@csgraf.de>
 > Reported-by: Da Xue <da@libre.computer>
->
 > ---
->
-> v1 -> v2:
->
->   - Fix ranges in truetype target
->   - Limit rotate to necessary damange
-> ---
->  drivers/video/console_normal.c   | 10 ++++++
->  drivers/video/console_rotate.c   | 54 ++++++++++++++++++++++++++++++++
->  drivers/video/console_truetype.c | 15 +++++++++
->  3 files changed, 79 insertions(+)
+>  drivers/video/video_bmp.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>

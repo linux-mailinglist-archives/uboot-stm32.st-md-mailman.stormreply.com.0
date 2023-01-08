@@ -2,67 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA312661650
-	for <lists+uboot-stm32@lfdr.de>; Sun,  8 Jan 2023 16:49:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93620661F65
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jan 2023 08:43:56 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B687C65E58;
-	Sun,  8 Jan 2023 15:49:00 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
- [209.85.218.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 34695C65E4C;
+	Mon,  9 Jan 2023 07:43:56 +0000 (UTC)
+Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com
+ [209.85.218.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AC26BC65E45
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 936E1C03FC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  8 Jan 2023 15:48:59 +0000 (UTC)
-Received: by mail-ej1-f48.google.com with SMTP id qk9so14459658ejc.3
+ Sun,  8 Jan 2023 10:07:40 +0000 (UTC)
+Received: by mail-ej1-f43.google.com with SMTP id lc27so3948259ejc.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 08 Jan 2023 07:48:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a+JOWs4wj4/oiFUG6FbaopMRN1qj7IG0blzXydEiJR0=;
- b=GSFFlwRxl8Hy4q2YdmnWXzVH4kQeG4JQBbWE33zyYMrj5hDlbEmgKocNFota7LPiJf
- gaARsgTZSK7EnaNQPIfsFPvsjx+ZUBTXxSdj8WbdAvOUbJpwMh4WbubhXL2nSZwyD2BV
- maIGJWauWAUgaB/jY3nXPwUw83HmFAASpGqzY=
+ Sun, 08 Jan 2023 02:07:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4Ls8Oyt5zShYmiXI6PjuP0n3sP1QrFKY5o2LmwvADNk=;
+ b=hrf3a0T5Kd3yYDtTUXO89vuskZsEJb4BTMW+JMYSywRDF77CQhsKdcacER8G2b9F4R
+ NX+elzVTjfr6f5wE0IMN9u7EmxT/pBC/HvLwrzbFkepAkSZYcHDwyMP9HttIVAjhlMIo
+ 3ezy0HhH+Ffv9XqGdKAQetREpsVq78e1NMQKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a+JOWs4wj4/oiFUG6FbaopMRN1qj7IG0blzXydEiJR0=;
- b=rAxdPQz6hpVhip3Gn18ZrZF0M5Z7mTLQJVuk3B65CR3AGBuAX/LKBqlVsJTlRHYcsq
- IkS6fmB/skm69UcQVbOHe2+RJbhY/Cf5wVem1wmWda7lkJuq34ph9gVp+fZntiks6DFR
- 5tnC5c/y2p0Uz0DCqJUusoZcrgYESXY4pIhK7LKCmkUoZ7yyYQuxjQiCkWoW2kRGs5gb
- hqeW0RwgH02K0o6ZMQQQUpppUUThYawhxbCMNA58GdsMVE15x00iiR01kpqHUe/5ogkQ
- U8Z972ROFPRjdMXn2HkrklOzb1ufzjf3QLz+yPopMPF2EA4nd6FShyTjyj2xGLBGdF0y
- VuxQ==
-X-Gm-Message-State: AFqh2kog0Hvy7sk4XImYKC88z+dL7/HOkxqtXc9cTy7tXeFnVZ7sqjSL
- PW5+qG9esU8I9VQn27QBcuA3sOQwLs2Pk4uyONI8Pg==
-X-Google-Smtp-Source: AMrXdXt9GVN471F9OVv/yjc4ArEeIYJbacvSNSh6r0E4gL7oMuKUZyJ2hp7Cv45KLW2QJSqNr71X931I31yc+5I3DUI=
-X-Received: by 2002:a17:906:cb85:b0:7ea:608f:23bd with SMTP id
- mf5-20020a170906cb8500b007ea608f23bdmr6757334ejb.221.1673192938979; Sun, 08
- Jan 2023 07:48:58 -0800 (PST)
+ bh=4Ls8Oyt5zShYmiXI6PjuP0n3sP1QrFKY5o2LmwvADNk=;
+ b=kZyoyT4XzvAwcFhaRLiT/iluK+/y4TdgCZesutKkbXZL8/UzgQ3kskdQhFgUlX6zP9
+ oAHmtMVKZIqrtBD9nFFYx2oFSL2k88Gp1DWotizyNP2OSethO7spGHk/lDUJ6apNJQly
+ LEllpH93rbXdnn5h8UBgG9WIEKEs1v0cwD30FkUZMrirAO6FYMM4HnzACl6k24dTu/cr
+ Y+fZdwO/iX3jrf5N053IjvNKHzdyM3TPs/QIcm8b/W0aAmh+gbx6enJAVkFkfOpi4ZGg
+ SyuyzASXjdaIJm99aGQSuVTvuawSjZM0zLG9tuiA5QlJ/DMWrcHJDjg+rujCUFFcHwc9
+ xvzA==
+X-Gm-Message-State: AFqh2koeNWD5WOLXX0x5KNpt2hgaKJnfzQILtSn2LHeO7ZM29Wi7HpdS
+ h/pK2o6+FlT6SuPp+S3aZwG2Bg==
+X-Google-Smtp-Source: AMrXdXtehnKPdR2kZncl/FSUwl+XEKx/rz4mrsZ6d8EqFboBHtGoM0rkkGp/JlTJBQ3qb0FWGxROFw==
+X-Received: by 2002:a17:906:71b:b0:7c1:9462:2dd3 with SMTP id
+ y27-20020a170906071b00b007c194622dd3mr50877407ejb.70.1673172460035; 
+ Sun, 08 Jan 2023 02:07:40 -0800 (PST)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-80-180-23-57.retail.telecomitalia.it. [80.180.23.57])
+ by smtp.gmail.com with ESMTPSA id
+ fu17-20020a170907b01100b0084c723b4c40sm2364097ejc.103.2023.01.08.02.07.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Jan 2023 02:07:39 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Date: Sun,  8 Jan 2023 11:07:35 +0100
+Message-Id: <20230108100735.3684180-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.32.0
 MIME-Version: 1.0
-References: <20230103215004.22646-1-agraf@csgraf.de>
- <20230103215004.22646-8-agraf@csgraf.de>
- <CAPnjgZ1uDNY4T65Q4EdW-xRnFiGhvWcCs=YtcwLCpRbZpTNJQg@mail.gmail.com>
- <b03e611b-2150-9bf9-0cb1-b15752ef9ae5@gmx.de>
-In-Reply-To: <b03e611b-2150-9bf9-0cb1-b15752ef9ae5@gmx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 8 Jan 2023 08:48:47 -0700
-Message-ID: <CAPnjgZ0Bw9=oVC5gy_d4x5DeWHWJt_Uyq2EdXoxbY1o1Zmzw5Q@mail.gmail.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- Matthias Brugger <mbrugger@suse.com>, Andre Przywara <andre.przywara@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, Alexander Graf <agraf@csgraf.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v4 7/9] video: Use VIDEO_DAMAGE for
-	VIDEO_COPY
+X-Mailman-Approved-At: Mon, 09 Jan 2023 07:43:55 +0000
+Cc: Vikas Manocha <vikas.manocha@st.com>, Simon Glass <sjg@chromium.org>,
+ Kamil Lulko <kamil.lulko@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Soeren Moch <smoch@web.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Dillon Min <dillon.minfei@gmail.com>
+Subject: [Uboot-stm32] [PATCH] doc: fix references to distro documentation
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,64 +78,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Heinrich,
+Commit 37c5195dfcd157 ("doc: Move distro boot doc to rST") renamed
+doc/README.distro to doc/develop/distro.rst.
 
-On Sat, 7 Jan 2023 at 16:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 1/7/23 01:13, Simon Glass wrote:
-> > Hi Alexander,
-> >
-> > On Tue, 3 Jan 2023 at 14:50, Alexander Graf <agraf@csgraf.de> wrote:
-> >>
-> >> CONFIG_VIDEO_COPY implemented a range based copying mechanism: If we
-> >
-> > range-based
-> >
-> >> print a single character, it will always copy the full range of bytes
-> >> from the top left corner of the character to the lower right onto the
-> >> uncached frame buffer. This includes pretty much the full line contents
-> >> of the printed character.
-> >>
-> >> Since we now have proper damage tracking, let's make use of that to reduce
-> >> the amount of data we need to copy. With this patch applied, we will only
-> >> copy the tiny rectangle surrounding characters when we print them,
-> >> speeding up the video console.
-> >>
-> >> As a bonus, we remove a lot of code.
-> >>
-> >> Signed-off-by: Alexander Graf <agraf@csgraf.de>
-> >>
-> >> ---
-> >>
-> >> v2 -> v3:
-> >>
-> >>    - Rebase
-> >>    - Make CONFIG_COPY always select VIDEO_DAMAGE
-> >> ---
-> >>   drivers/video/Kconfig             |  5 ++
-> >>   drivers/video/console_normal.c    | 14 +----
-> >>   drivers/video/console_rotate.c    | 37 ++-----------
-> >>   drivers/video/console_truetype.c  | 17 +-----
-> >>   drivers/video/vidconsole-uclass.c | 16 ------
-> >>   drivers/video/video-uclass.c      | 91 ++++++++-----------------------
-> >>   drivers/video/video_bmp.c         |  7 ---
-> >>   include/video.h                   | 37 -------------
-> >>   include/video_console.h           | 49 -----------------
-> >>   9 files changed, 37 insertions(+), 236 deletions(-)
-> >>
-> >
-> > This feature needs some tests in test/dm/video.c
-> >
-> > For sandbox, I think you will need to allow it to be enabled /
-> > disabled at runtime, so the some tests can use it and some not?
->
-> It should be good enough to enable the feature in one of the sandbox
-> defconfigs and disable it in another.
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
 
-Yes that would work, e.g. enable in sandbox but not sandbox_flattree
+ doc/README.gpt                   | 2 +-
+ doc/README.uniphier              | 2 +-
+ doc/board/emulation/qemu-x86.rst | 2 +-
+ doc/board/st/stm32mp1.rst        | 2 +-
+ doc/board/tbs/tbs2910.rst        | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-Regards,
-Simon
+diff --git a/doc/README.gpt b/doc/README.gpt
+index 91e397d06f88..394cea0aa875 100644
+--- a/doc/README.gpt
++++ b/doc/README.gpt
+@@ -177,7 +177,7 @@ To restore GUID partition table one needs to:
+      "name=u-boot,size=60MiB;name=boot,size=60Mib,bootable;name=rootfs,size=0"
+    It can be used to locate bootable disks with command
+    "part list <interface> <dev> -bootable <varname>",
+-   please check out doc/README.distro for use.
++   please check out doc/develop/distro.rst for use.
+ 
+ 2. Define 'CONFIG_EFI_PARTITION' and 'CONFIG_CMD_GPT'
+ 
+diff --git a/doc/README.uniphier b/doc/README.uniphier
+index badfacd66aa5..af746f6c316e 100644
+--- a/doc/README.uniphier
++++ b/doc/README.uniphier
+@@ -336,7 +336,7 @@ Deployment for Distro Boot
+ --------------------------
+ 
+ UniPhier SoC family boot the kernel in a generic manner as described in
+-doc/README.distro .
++doc/develop/distro.rst.
+ 
+ To boot the kernel, you need to deploy necesssary components to a file
+ system on one of your block devices (eMMC, NAND, USB drive, etc.).
+diff --git a/doc/board/emulation/qemu-x86.rst b/doc/board/emulation/qemu-x86.rst
+index db842f2ece6e..e605ae3ab32e 100644
+--- a/doc/board/emulation/qemu-x86.rst
++++ b/doc/board/emulation/qemu-x86.rst
+@@ -57,7 +57,7 @@ to instantiate. Note, the maximum supported CPU number in QEMU is 255.
+ U-Boot uses 'distro_bootcmd' by default when booting on x86 QEMU. This tries to
+ load a boot script, kernel, and ramdisk from several different interfaces. For
+ the default boot order, see 'qemu-x86.h'. For more information, see
+-'README.distro'. Most Linux distros can be booted by writing a uboot script.
++'distro.rst'. Most Linux distros can be booted by writing a uboot script.
+ For example, Debian (stretch) can be booted by creating a script file named
+ 'boot.txt' with the contents::
+ 
+diff --git a/doc/board/st/stm32mp1.rst b/doc/board/st/stm32mp1.rst
+index 3759df353ee5..0dcc6b783b89 100644
+--- a/doc/board/st/stm32mp1.rst
++++ b/doc/board/st/stm32mp1.rst
+@@ -478,7 +478,7 @@ or:
+   +-------+--------+---------+------------------------+------------------------+
+ 
+ And the 4th partition (Rootfs) is marked bootable with a file extlinux.conf
+-following the Generic Distribution feature (doc/README.distro for use).
++following the Generic Distribution feature (doc/develop/distro.rst for use).
+ 
+ The size of fip or ssbl partition must be enough for the associated binary file,
+ 4MB and 2MB are default values.
+diff --git a/doc/board/tbs/tbs2910.rst b/doc/board/tbs/tbs2910.rst
+index e97f2b6e6135..4760922a93e6 100644
+--- a/doc/board/tbs/tbs2910.rst
++++ b/doc/board/tbs/tbs2910.rst
+@@ -181,7 +181,7 @@ If that fails it will then try to boot from several interfaces using
+ 'distro_bootcmd': It will first try to boot from the microSD slot, then the
+ SD slot, then the internal eMMC, then the SATA interface and finally the USB
+ interface. For more information on how to configure your distribution to boot,
+-see 'README.distro'.
++see 'distro.rst'.
+ 
+ Links:
+ ------
+-- 
+2.32.0
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,66 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AC916676A7
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Jan 2023 15:34:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C4536678E3
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Jan 2023 16:18:04 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DB2E6C640EE;
-	Thu, 12 Jan 2023 14:34:14 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BB170C69049;
+	Thu, 12 Jan 2023 15:18:03 +0000 (UTC)
+Received: from mail-yw1-f176.google.com (mail-yw1-f176.google.com
+ [209.85.128.176])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA8F8C03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16DBEC69048
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Jan 2023 14:34:12 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 30CCD1XY010069; Thu, 12 Jan 2023 15:34:11 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=h36Gp3czgbSKr45c9022ky89FgqChrtzQtDYKM97xSs=;
- b=2H7SpB0DB1sIwNEadlvkvp+hRtiS0B+tHX0Mmqc9P1cGUIanuE0v93EJug2VcKD//vXV
- cpbA7lXcreBEAt98hnV3+BkPuFwJc4HFoYLegYD5NY+MwScfWiSHd/K3WTmFp10ZmwJ2
- gOYFPZczqrIu+MLkMOtnGyGQDfZmNlWyAO5ukJhcelgcjgd30oT4+ifw2lOTomlW+hSo
- owFp98xpS0D3DUn7QtiATE/OhdfUxGNwXLNVQP9DhhFwmWmbbS+MbxfAoDrL2K7lV4KX
- VeSTd3fKQdH84Vqu2YBhriRGYhz27N8TPBKttA/N0hg3eCIAG9Spue6qhRT4bHi06fPG /A== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3n1k43k84c-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Jan 2023 15:34:11 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1FC0510002A;
- Thu, 12 Jan 2023 15:34:10 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4497121A234;
- Thu, 12 Jan 2023 15:34:10 +0100 (CET)
-Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Thu, 12 Jan
- 2023 15:34:09 +0100
-Message-ID: <826ee832-9f89-6220-50b3-7ccb4cf2a24d@foss.st.com>
-Date: Thu, 12 Jan 2023 15:34:09 +0100
+ Thu, 12 Jan 2023 15:18:02 +0000 (UTC)
+Received: by mail-yw1-f176.google.com with SMTP id
+ 00721157ae682-4bf16baa865so243129527b3.13
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 12 Jan 2023 07:18:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=emV2hqp/B6DlDmQ+24+NnsMhmp9dUOKJb7lFWLqSOK8=;
+ b=CAFiHJEcCWh1dbK0h0BP/MU4RXH1cWeMOjuGsz4Qyz4tsmW6jcewnEJekVXRXa2M0g
+ 178EB+ACtaZYsmSSe1CLTqTp8Ev1NCWSt2bZblXtdFzEW+oCfKFKYMoiFivOzEwyW0ef
+ kCaPxiXHsRrt0+DkYosjMtz4FCS1w/Akk9t7M=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=emV2hqp/B6DlDmQ+24+NnsMhmp9dUOKJb7lFWLqSOK8=;
+ b=MaUrFkU7JeQkQ3G/zMz5OCDvukVYu9Qm3KHsBg+kNiwvO3+zMoeemeXhowKD88u5QM
+ v8A/A+J/HhCXcU8xAbFKZm3Sui/XiKTnSrFoUh/tIJiuxWf7Duw3jqhFcyRzss7CwrxV
+ DhCCcYiLP2afGa1QrC3r6MAvhhhSpObBt4fjX8TGQsx8Ct4MIR4dL2G0qPZraaY3J5dK
+ AYHhRQ/z/CJhsK1RBoR8/R5p45W7S7mEpceVpsOlfl3PVBVRgOgoo05uq9N2Rxez75Kk
+ HkrX1sk41vD4cQcz6AfXKhBgAPMDUprNeU6DH/dxGsIvXZRgfxyREeaTGvUsIRM4qkh4
+ 3NMw==
+X-Gm-Message-State: AFqh2krfqV7v+xB5TCapvl32AzY4BEbsRa4URTKPNB5/HIo2L/HVAADw
+ sWLLNqaaWO+o5YL3r0uZp751bg==
+X-Google-Smtp-Source: AMrXdXs+mIab5oqNh0h+jx2QX+MUTk5ck9s2oKZkqccAjy6d93yaeJqcVyjyQwKsSj11cb99O0RqFw==
+X-Received: by 2002:a05:7500:7206:b0:f1:989f:65b5 with SMTP id
+ kf6-20020a057500720600b000f1989f65b5mr162006gab.48.1673536680843; 
+ Thu, 12 Jan 2023 07:18:00 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-38c4-8177-7e9d-a94f.res6.spectrum.com.
+ [2603:6081:7b00:6400:38c4:8177:7e9d:a94f])
+ by smtp.gmail.com with ESMTPSA id
+ q5-20020a37f705000000b006fab416015csm10924941qkj.25.2023.01.12.07.17.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Jan 2023 07:18:00 -0800 (PST)
+Date: Thu, 12 Jan 2023 10:17:58 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20230112151758.GY3787616@bill-the-cat>
+References: <20221208091010.1.I87acf9c65e708df1d5a45a57ce8508a14dfeb6a6@changeid>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20230106122020.1110552-1-patrick.delaunay@foss.st.com>
- <20230106131952.5.I5ced2665787083835d5ce398a3bd10163cca62c9@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230106131952.5.I5ced2665787083835d5ce398a3bd10163cca62c9@changeid>
-X-Originating-IP: [10.201.21.26]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2023-01-12_08,2023-01-12_01,2022-06-22_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
- Etienne CARRIERE <etienne.carriere@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH 5/6] board: st: Add support of STM32MP13x
- boards in stm32board cmd
+In-Reply-To: <20221208091010.1.I87acf9c65e708df1d5a45a57ce8508a14dfeb6a6@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>, u-boot@lists.denx.de,
+ Ovidiu Panait <ovidiu.panait@windriver.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH] cmd: mtdparts: add SYS_MTDPARTS_RUNTIME
+ dependency on CONFIG_MTDIDS/MTDPARTS_DEFAULT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,76 +78,82 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============8925823254627889500=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
 
-On 1/6/23 13:20, Patrick Delaunay wrote:
-> Add board identifiers for STMicroelectronics STM32MP13x boards:
-> - DISCO board: MB1635
-> 
+--===============8925823254627889500==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="qMftkJ3bVh5S8osR"
+Content-Disposition: inline
+
+
+--qMftkJ3bVh5S8osR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 08, 2022 at 09:10:13AM +0100, Patrick Delaunay wrote:
+
+> The two configuration CONFIG_MTDIDS_DEFAULT and CONFIG_MTDPARTS_DEFAULT
+> are not needed with mtd configuration CONFIG_SYS_MTDPARTS_RUNTIME which
+> allows the MTDIDS and MTDPARTS to be configured at runtime.
+>=20
+> This patch has no defconfig impacts because CONFIG_SYS_MTDPARTS_RUNTIME
+> is only used by two platforms (stm32mp and igep00x0) which don't define
+> CONFIG_MTDIDS_DEFAULT or CONFIG_MTDPARTS_DEFAULT.
+>=20
+> This patch solves an UBI environment load issue for NAND boot for
+> stm32mp15 platform. In mtd_uboot.c, when GD_FLG_ENV_READY is not set,
+> env_get_f() return a EMPTY string, define in default_environment[]
+> because CONFIG_MTDIDS_DEFAULT=3D"" and CONFIG_MTDPARTS_DEFAULT=3D"",
+> but a NULL pointer is expected to allow call of board_mtdparts_default.
+> Without mtdparts, the env partition [CONFIG_ENV_UBI_PART=3D"UBI"] is not
+> found in env/ubi.c [CONFIG_ENV_IS_IN_UBI].
+>=20
+> It is not a problem when env becomes ready, as these empty variables are
+> removed form U-Boot environment in env_import() / himport_r().
+>=20
+> Fixes: a331017c237c ("Complete migration of MTDPARTS_DEFAULT / MTDIDS_DEF=
+AULT, include in environment")
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  board/st/common/Kconfig       | 2 +-
->  board/st/common/cmd_stboard.c | 7 ++++---
->  2 files changed, 5 insertions(+), 4 deletions(-)
-> 
-> diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-> index 2f57118bb265..aba3590866e0 100644
-> --- a/board/st/common/Kconfig
-> +++ b/board/st/common/Kconfig
-> @@ -1,7 +1,7 @@
->  config CMD_STBOARD
->  	bool "stboard - command for OTP board information"
->  	depends on ARCH_STM32MP
-> -	default y if TARGET_ST_STM32MP15x
-> +	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
->  	help
->  	  This compile the stboard command to
->  	  read and write the board in the OTP.
-> diff --git a/board/st/common/cmd_stboard.c b/board/st/common/cmd_stboard.c
-> index 213fb5d30208..853ab78bbf16 100644
-> --- a/board/st/common/cmd_stboard.c
-> +++ b/board/st/common/cmd_stboard.c
-> @@ -2,8 +2,8 @@
->  /*
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   *
-> - * the st command stboard supports the STMicroelectronics board identification
-> - * saved in OTP 59.
-> + * the command stboard supports the STMicroelectronics board identification
-> + * saved in OTP_BOARD.
->   *
->   * The ST product codification have several element
->   * - "Commercial Product Name" (CPN): type of product board (DKX, EVX)
-> @@ -18,7 +18,7 @@
->   * - Finished Good = EVA32MP157A1$AU1
->   *
->   * Both information are written on board and these information are also saved
-> - * in OTP59, with:
-> + * in OTP_BOARD (59 for STM32MP15x or 60 for STM32MP13x), with:
->   * bit [31:16] (hex) => Board id, MBxxxx
->   * bit [15:12] (dec) => Variant CPN (1....15)
->   * bit [11:8]  (dec) => Revision board (index with A = 1, Z = 26)
-> @@ -49,6 +49,7 @@ static bool check_stboard(u16 board)
->  		0x1298,
->  		0x1341,
->  		0x1497,
-> +		0x1635,
->  	};
->  
->  	for (i = 0; i < ARRAY_SIZE(st_board_id); i++)
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
+Applied to u-boot/master, thanks!
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+--=20
+Tom
 
-Thanks
-Patrice
+--qMftkJ3bVh5S8osR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmPAJKYACgkQFHw5/5Y0
+tywNdAv/UKN4bKg8LnnrDlYGbqlm4ehMkZ3guM3E+I/sPYlx5HsasOR4nPMne2yN
+U+FLM/mrya5/9+mL0s6EgC2RCimHg7Sgf3tBfECpwREKzhfZAoeMzMb3PSKc4ng8
+EiGvz45t8gamKFdzbMOUt+2VqumpIZ7CLrTvfuurpml7cD2FVto3TUUlx/vvu+lW
+VBxaeeCMy8mQHPcADn+8r4romGNT3lR6bU/9VuQyTd1RQ/haIemIYJJh8O/6fMtU
+g/q0D3yS1fuOLgxg4eBJv39R4MlQRgEIJiRhApzlTWZdC2IaCWeZstaKPO+tYlPV
+EBi4mN1AqjQ+uxrBYMkKetkawQR179BfybNcGoykOOc7BOgCceYUULZXMbHyKnat
+bGVM5ln2Przs27fS3XfMPEAMV0xENuLWsVrvDe3LMMsQnbOXVbgxRxI+ytj8AW0D
+8WNcBdANTlwlGmX8C/2Z/2t/XaHNKL82T9k28W3QP+xzQOlQTMSD5ntIhuwlRFpp
+OMXXAbQk
+=xx6i
+-----END PGP SIGNATURE-----
+
+--qMftkJ3bVh5S8osR--
+
+--===============8925823254627889500==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============8925823254627889500==--

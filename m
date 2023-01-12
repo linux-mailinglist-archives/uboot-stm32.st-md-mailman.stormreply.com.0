@@ -2,71 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 511356678EB
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Jan 2023 16:18:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 60FB16678ED
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Jan 2023 16:19:00 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 10A6EC69049;
-	Thu, 12 Jan 2023 15:18:38 +0000 (UTC)
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
- [209.85.219.53])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 26276C69049;
+	Thu, 12 Jan 2023 15:19:00 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 24D3FC69048
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 34914C69048
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Jan 2023 15:18:36 +0000 (UTC)
-Received: by mail-qv1-f53.google.com with SMTP id qb7so12898440qvb.5
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Jan 2023 07:18:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gUcUvWmrYDw9m2xCQk5CDKV21qGvK/66zs/G7zGdeQg=;
- b=PqQ/gxiH6mZAqVqNLcgM4C8IPGIiGR+XPbvkCyZhxPOMvbGNfyVsqHqVojsPfhqz2f
- YWmK/WA0gR8xRJ4MlK7s1bLOeoQwx6JgXRaP23dsNxnteLSJrWRHV5IqZjcP9nx5Bd/g
- 6LgnhEvFVNCzGGzqx+icjVMWBKLolK1Zc/OXk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gUcUvWmrYDw9m2xCQk5CDKV21qGvK/66zs/G7zGdeQg=;
- b=c05Rhuq+8k9euqFcRHJ6ziokBjtYUhbqgHfuzejYeL0lM0OSQ2jBPomZCpCvxuVmqO
- eNj/Nk55gI4BTSY7uBh0RdbHAzKjm44Stz5B5ZopMkGdlxdHqh4MRlX4mvXVXgkg1Y1B
- /54YPGGNAx09N2n6eaqyJTJX4IhmYq1Gohw/RKNOVoYsZTRtFqsiwzPB0xKW8REK4NJU
- 5j0SOGW0v4ks/kZTKIqa8OJpOV1WkD776Dnx0QZOckM0HExTZWlxs3neasNyW5jq5H6k
- lkMhXXPJFFgTIkntcVkmmQQiQqm/JZ7w4oSfTFYaDtUPFnnMY8hRKBDnzhDmBeW5qHJd
- IYHg==
-X-Gm-Message-State: AFqh2krr/USay3m8+CPIKKFNGYga33jwDqNX1Qyv+HA4sm18L2FGx88F
- 56AH/XqghLsU35QHrJMfwY7jbQ==
-X-Google-Smtp-Source: AMrXdXsSxWnUqKl8tc+06VJfc2TGl29FWQZ4Pum3mj9MYCkfgEl3jhWrPunvWvcCrxsLYE1jVOgC2g==
-X-Received: by 2002:a0c:d68d:0:b0:521:dc66:8a95 with SMTP id
- k13-20020a0cd68d000000b00521dc668a95mr99493508qvi.32.1673536715170; 
- Thu, 12 Jan 2023 07:18:35 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-38c4-8177-7e9d-a94f.res6.spectrum.com.
- [2603:6081:7b00:6400:38c4:8177:7e9d:a94f])
- by smtp.gmail.com with ESMTPSA id
- l23-20020a37f917000000b006fc2b672950sm10922342qkj.37.2023.01.12.07.18.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Jan 2023 07:18:34 -0800 (PST)
-Date: Thu, 12 Jan 2023 10:18:32 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20230112151832.GE3787616@bill-the-cat>
-References: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
+ Thu, 12 Jan 2023 15:18:59 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 30CBHMAl003657; Thu, 12 Jan 2023 16:18:58 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=Ls20Y/u0W+GqTsYCT+1mGYmcWw3ktm5LqRH5bOV0TC0=;
+ b=1qH3NnVZUgo4gLgA0ufA4qq+r35FUXxwgEpE9hlbm+164/Dkmq+1enK0oYpw5P8l8Izk
+ iE49BukXR8+c9texCHkr0PVTWaUdukH45jrrulbzXdc2eBnBLIfv0Hu+wnRztbz37OZz
+ 3rMgF4wJuK83DTUxBYn6g0USncvxc43G7dANG8GX1OUl1cwW9gBs/uIMWLD3FjR4CmL8
+ Jey7fmpSblDLB+Yei4c/vY5t7u/MJpSFh4A/oWYrjlnGl7KxOqAvOTvVVtW/w5tslwYS
+ zYX4Gz5wM0KAERs03pTrt3S9+ArW1sjjLaIxCG7cgHGJZUCZnaIKJEx+1szwbJw+Ansg cA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3n1k64kuk0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Jan 2023 16:18:58 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8E285100034;
+ Thu, 12 Jan 2023 16:18:57 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8174421ADDB;
+ Thu, 12 Jan 2023 16:18:57 +0100 (CET)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Thu, 12 Jan
+ 2023 16:18:56 +0100
+Message-ID: <d68f7917-a230-f5cf-baeb-05d0d716d845@foss.st.com>
+Date: Thu, 12 Jan 2023 16:18:55 +0100
 MIME-Version: 1.0
-In-Reply-To: <20221215101547.1.Ic4654626494193d6dd4788d14fda0aae447783a5@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Simon Glass <sjg@chromium.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] fastboot: remove #ifdef CONFIG when it is
-	possible
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Fabrice Gasnier
+ <fabrice.gasnier@foss.st.com>, <u-boot@lists.denx.de>
+References: <20221212103242.14137-1-fabrice.gasnier@foss.st.com>
+ <1daa0d96-7ea0-bd5a-2ba7-89cc00776f67@foss.st.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <1daa0d96-7ea0-bd5a-2ba7-89cc00776f67@foss.st.com>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2023-01-12_08,2023-01-12_01,2022-06-22_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: update vbus-supply of
+ usbphyc_port0 on stm32mp157c-ev1
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,67 +74,30 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1758331958109247445=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
---===============1758331958109247445==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="U5oZ2PziUXwhxgGJ"
-Content-Disposition: inline
-
-
---U5oZ2PziUXwhxgGJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Dec 15, 2022 at 10:15:50AM +0100, Patrick Delaunay wrote:
-
-> Much of the fastboot code predates the introduction of Kconfig and
-> has quite a few #ifdefs in it which is unnecessary now that we can use
-> IS_ENABLED() et al.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Reviewed-by: Sean Anderson <sean.anderson@seco.com>
-> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3l
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---U5oZ2PziUXwhxgGJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmPAJMgACgkQFHw5/5Y0
-tyynfAv/frb52EWvH6MqeFYCLVO0le/bwc1p/8wczc7TbGc4Sngh+vM7lLIxIqF/
-3WjqUJg0cbDGoOVgcvZteK/iijFSiNejIxoMYFe2QAmcc40luCR4Vg+iRhysx7SV
-/JojgkVgT59lyMQ4bhrgHqKivAt6PuaOBpAQWL1wOcrYOfuhkmA9b5cg/3EpZNsS
-HLQ2fx3pI/fctw5nM/Xv6mAAarWst0w9SY/hgAndVunz/P+Ad/NxwaFqrtmK5HIh
-QgkkYUiXjvtDtv/ddl6YwvrwdapD8FCAqq4fmhSpyb0usGboIT1HuHu0MWBSLZul
-fHklpwFFttVRsILXztLQVJ9eGn2Z1abS57FPvDiEK5Dy4T7PRwyJYT6fJVT+oo5o
-o1CqBkgGO0C+3hhK16U1nMuzXzczIVuLg+qSldcvbv4Eu5+WPjTIoVtpmv8O2d06
-Uhw7xptff26uYOP6k+o2XyL/o98v3cuwrFwy9YnEb8x7ry6TGzFzxTXjfvcQCZiw
-Te/BURsT
-=vxfB
------END PGP SIGNATURE-----
-
---U5oZ2PziUXwhxgGJ--
-
---===============1758331958109247445==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============1758331958109247445==--
+SGkgRmFicmljZQoKT24gMS8zLzIzIDE3OjI3LCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhp
+LAo+IAo+IE9uIDEyLzEyLzIyIDExOjMyLCBGYWJyaWNlIEdhc25pZXIgd3JvdGU6Cj4+IHBoeS1z
+dG0zMi11c2JwaHljIGJpbmRpbmdzIHVzZXMgYSBjb25uZWN0b3Igbm9kZSB3aXRoIHZidXMtc3Vw
+cGx5Cj4+IHByb3BlcnR5Lgo+Pgo+PiBbYmFja3BvcnQgZnJvbSBsaW51eCA0M2U1NWQ3NzhhNmJd
+Cj4+IFNpZ25lZC1vZmYtYnk6IEZhYnJpY2UgR2FzbmllciA8ZmFicmljZS5nYXNuaWVyQGZvc3Mu
+c3QuY29tPgo+PiAtLS0KPj4KPj4gwqAgYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMg
+fCA0ICsrKysKPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKQo+Pgo+PiBkaWZm
+IC0tZ2l0IGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMgYi9hcmNoL2FybS9kdHMv
+c3RtMzJtcDE1N2MtZXYxLmR0cwo+PiBpbmRleCAwN2JjZDdjNTA2NzIuLjJkNWRiNDFlZDY3YiAx
+MDA2NDQKPj4gLS0tIGEvYXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMKPj4gKysrIGIv
+YXJjaC9hcm0vZHRzL3N0bTMybXAxNTdjLWV2MS5kdHMKPj4gQEAgLTM5Myw2ICszOTMsMTAgQEAK
+Pj4gwqDCoMKgwqDCoCBzdCx0dW5lLXNxdWVsY2gtbGV2ZWwgPSA8Mz47Cj4+IMKgwqDCoMKgwqAg
+c3QsdHVuZS1ocy1yeC1vZmZzZXQgPSA8Mj47Cj4+IMKgwqDCoMKgwqAgc3Qsbm8tbHNmcy1zYzsK
+Pj4gK8KgwqDCoCBjb25uZWN0b3Igewo+PiArwqDCoMKgwqDCoMKgwqAgY29tcGF0aWJsZSA9ICJ1
+c2ItYS1jb25uZWN0b3IiOwo+PiArwqDCoMKgwqDCoMKgwqAgdmJ1cy1zdXBwbHkgPSA8JnZidXNf
+c3c+Owo+PiArwqDCoMKgIH07Cj4+IMKgIH07Cj4+IMKgIMKgICZ1c2JwaHljX3BvcnQxIHsKPiAK
+PiAKPiAKPiBSZXZpZXdlZC1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBm
+b3NzLnN0LmNvbT4KPiAKPiBUaGFua3MKPiBQYXRyaWNrCj4gCgpBcHBsaWVkIG9uIHUtYm9vdC1z
+dG0zMi9tYXN0ZXIKClRoYW5rcwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFp
+bG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20v
+bWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

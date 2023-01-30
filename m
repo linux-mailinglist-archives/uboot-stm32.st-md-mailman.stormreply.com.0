@@ -2,66 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 787F76794DA
-	for <lists+uboot-stm32@lfdr.de>; Tue, 24 Jan 2023 11:13:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A5E676813CD
+	for <lists+uboot-stm32@lfdr.de>; Mon, 30 Jan 2023 15:53:16 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24665C65E71;
-	Tue, 24 Jan 2023 10:13:10 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C24D1C640E6;
+	Mon, 30 Jan 2023 14:53:15 +0000 (UTC)
+Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
+ [209.85.166.170])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BA6DEC03FC1
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 44949C62EFE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 24 Jan 2023 10:13:08 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 30O4stc0005517; Tue, 24 Jan 2023 11:13:07 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=pClCtRTUQRW3c2LHzhjj1D1yNLbwICh6YxiXBbxm2PU=;
- b=Mq9MLrU9Azw9ZgF1+4OoORjTvbz+QSESr1m7s4SGXN7OSrUu2qG++tfvpeNnrjLjOvBZ
- 50agKJ/u8U22r8GZROAxQKjuJlAIc8slKzJW/K98eYxwz+fVondebstNJvALEe204evj
- 3gLMfjLMP0SGLKqclLAe5SRu4uX4mteQHvQMEkiDdUW74Tlv9+TT0Ub4KMAGQRvgCffH
- xa9RbwS76b48i9L3NktUmwB/UUUNgMha04zaJ39CP1SMAfluAsMjuGQDor7+4x7QLE/6
- Iy8QelpyOIYcoLY/GjPEJnEX555jk1ro0vVua+pO8wWud/51IMvycn8e9UFceTh0lK4L 0w== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3n89cgpwqc-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 24 Jan 2023 11:13:07 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 964D3100034;
- Tue, 24 Jan 2023 11:13:06 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8C0A1214D2B;
- Tue, 24 Jan 2023 11:13:06 +0100 (CET)
-Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 24 Jan
- 2023 11:13:06 +0100
-Message-ID: <a3bae6c1-c5ca-47b6-0e98-5ca76bf6ebce@foss.st.com>
-Date: Tue, 24 Jan 2023 11:13:05 +0100
+ Mon, 30 Jan 2023 14:53:14 +0000 (UTC)
+Received: by mail-il1-f170.google.com with SMTP id i17so5033530ils.11
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 30 Jan 2023 06:53:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=chromium.org; s=google;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gFCGnzLv42k2VQkXimdcerZbAjN5WMlMXm83YAXRL9Y=;
+ b=WdROdAkjMSByHnLcb01n7qcSCQF+ue8IBgrdizIReP7gpq/4P9q5N5P2wMcHd4QzCe
+ 9YPuxtfa0VuFlz/bXRGwdO5TtDM7ut1KtePZo8ScpN9miN1E0xxRHfKXKiNNANtsVeJY
+ SvWx/PgcZsO6LaQj3jrj+gT4d8wf7r/32MzM4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gFCGnzLv42k2VQkXimdcerZbAjN5WMlMXm83YAXRL9Y=;
+ b=mSIp1n52s1D+yDOUnSKxbYF+rYljy64uDHtA13c245Esd4VnSG60RZkhq/Pbjjb5PU
+ NSaNu0Bvx7+AGRwJw0lPPFlxYsvBL553qzmH/zZDHlmF8oz8rtwq7EBP9epAszodEmr7
+ cxhPotIi51vfdoy0ogLdM8paW7Lxii+nGi5CzabpvaqBsWQosQIDl8YM4ZK5rzWS2jnz
+ YdxijXtmxXXKDKupXLZU6y9O554Q05FKSj/fm/mLmXcd8OtPmJ0anlMlsgL67aICFRV0
+ XQrZgq+e5gJ+qAczXtulGPHSvZBGy+b4nuB8tCpNQ1gtWJPtQy/XxZIQKFdAt8MvC2Zd
+ m9dA==
+X-Gm-Message-State: AO0yUKW1H0VRPKMhyK5XNi95R3B51jHGaoCl7a1/GdYy+jnNSaMTKdvC
+ ZTduv//UK2NP5fBaYXUK3Z6e+Q==
+X-Google-Smtp-Source: AK7set8Qmr7X6ySAdNuX6DZEVAwLsPH+FKmhdZu6bRv7y0824BLrIOk1QF2vrnxPJc/g8QFKDpov5g==
+X-Received: by 2002:a05:6e02:1a09:b0:310:b57c:ab34 with SMTP id
+ s9-20020a056e021a0900b00310b57cab34mr12798834ild.30.1675090393054; 
+ Mon, 30 Jan 2023 06:53:13 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ g18-20020a926b12000000b0030bfdb6ef60sm4008830ilc.58.2023.01.30.06.53.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Jan 2023 06:53:12 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Mon, 30 Jan 2023 07:41:14 -0700
+Message-Id: <20230130144324.206208-42-sjg@chromium.org>
+X-Mailer: git-send-email 2.39.1.456.gfc5497dd1b-goog
+In-Reply-To: <20230130144324.206208-1-sjg@chromium.org>
+References: <20230130144324.206208-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20230124101552.1.I555d0afdd36cf310168699c9a8619720b69cee4a@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230124101552.1.I555d0afdd36cf310168699c9a8619720b69cee4a@changeid>
-X-Originating-IP: [10.201.21.26]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
- definitions=2023-01-23_12,2023-01-23_01,2022-06-22_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
- Dillon Min <dillon.minfei@gmail.com>, Vikas Manocha <vikas.manocha@st.com>,
- Kamil Lulko <kamil.lulko@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH] doc: add rst references to distro
- documentation in stm32mp1 board
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>,
+ Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 041/171] Correct SPL use of CMD_BOOTZ
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,37 +76,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick
+This converts 1 usage of this option to the non-SPL form, since there is
+no SPL_CMD_BOOTZ defined in Kconfig
 
-On 1/24/23 10:16, Patrick Delaunay wrote:
-> Use internal rst reference with :doc: to have a link to distro.rst page
-> in the generated U-Boot documentation.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
-> 
->  doc/board/st/stm32mp1.rst | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/doc/board/st/stm32mp1.rst b/doc/board/st/stm32mp1.rst
-> index 3f70634d2836..c0b1daa0418e 100644
-> --- a/doc/board/st/stm32mp1.rst
-> +++ b/doc/board/st/stm32mp1.rst
-> @@ -478,7 +478,8 @@ or:
->    +-------+--------+---------+------------------------+------------------------+
->  
->  And the 4th partition (Rootfs) is marked bootable with a file extlinux.conf
-> -following the Generic Distribution feature (doc/develop/distro.rst for use).
-> +following the Generic Distribution feature (see :doc:`../../develop/distro` for
-> +use).
->  
->  The size of fip or ssbl partition must be enough for the associated binary file,
->  4MB and 2MB are default values.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Thanks
-Patrice
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+index c9f99259054..61caf27bc58 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+@@ -150,7 +150,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		/* Try bootm for legacy and FIT format image */
+ 		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
+ 			do_bootm(cmdtp, 0, 4, bootm_argv);
+-		else if (CONFIG_IS_ENABLED(CMD_BOOTZ))
++		else if (IS_ENABLED(CONFIG_CMD_BOOTZ))
+ 			do_bootz(cmdtp, 0, 4, bootm_argv);
+ 	}
+ 	if (data->script)
+-- 
+2.39.1.456.gfc5497dd1b-goog
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

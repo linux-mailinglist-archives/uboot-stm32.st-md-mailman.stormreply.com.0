@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B820A682CE8
-	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Jan 2023 13:47:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D40682CF0
+	for <lists+uboot-stm32@lfdr.de>; Tue, 31 Jan 2023 13:48:22 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6EB75C640E6;
-	Tue, 31 Jan 2023 12:47:39 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82FD4C640E6;
+	Tue, 31 Jan 2023 12:48:22 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 01734C03FCB
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A8588C03FCB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 31 Jan 2023 12:47:37 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Tue, 31 Jan 2023 12:48:21 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 30VAS3TY002659; Tue, 31 Jan 2023 13:47:17 +0100
+ 30VAXGia025877; Tue, 31 Jan 2023 13:48:05 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=iOTLlutVJiul2ZLX1EbmQ4DY3QTYLZNOOaMdr/5RomU=;
- b=ot0PB9fmwUFfcmd95eELDJ6N6DiwZcfurOjrtM8fxJZ8Q54k6JC9NSk2dvqZYGJRpra+
- IS8/j3HzMb36cFEdEJNHw9MGDvaD1QGibloHHaDK3uuWIh+BPCDfxABshdqHku3Iw6ba
- tprE5fkMfjPS+TAPw9H9XyMraF3AWJKA6c3L8F/HY4TVl8Dz2bjMperH2jqgIBym3Xq/
- +yAgNoIfr2ZgKuT3ff5qUOM/kSRBUxjzAf8711tw7A2f+4hhTHhomjy3TwavTBfrjUEw
- 2Z5kJcmz8robz26veGc8/BBCsPlxDTuiTJ+UPwBLC/9ewswoG1t6J5018JdDpoAQmLgU Fw== 
+ bh=iRtj8Wz5PUdCNHkDrpQdOZlyg/ue0D14u9IiJONsOHU=;
+ b=s7/D/+UHdOMPcfKIHcXKVIWN0T1a3bni3WjxNUuWLnGbNreRKg/4qeGKTMWVVzomdbW8
+ KRiBlCgTylFbYb3iuoP7sC8sS2HbkF+rWKFJUese+2QHarcX3xDaUVo23AGomPrlAskS
+ L9r9FZ809/Vx87BzhN4X6aPCGucQ0GdOu2112Hcq/dKBh6Qu6OuWEyRb8ww3rGgXl/Yk
+ B6UTN78uCvl/g8K/cogPGOnXdmg5F1+SiB3Bw5JFL1xOG6jQ5AlKLz4y+77ErnPQ41ZQ
+ 2HCXasxV95BX9YajDR+VBrGfQY0hP+cFcHlxtDDJoMllKXAb2/hklWA/tntPtEADpnfy Sw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3nct0r2180-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ncux79kpv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 31 Jan 2023 13:47:17 +0100
+ Tue, 31 Jan 2023 13:48:05 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 61D0110002A;
- Tue, 31 Jan 2023 13:47:13 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8609810002A;
+ Tue, 31 Jan 2023 13:48:03 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 53EAE215BEC;
- Tue, 31 Jan 2023 13:47:13 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7712B215BED;
+ Tue, 31 Jan 2023 13:48:03 +0100 (CET)
 Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.13; Tue, 31 Jan
- 2023 13:47:12 +0100
-Message-ID: <9a4de518-9af1-e304-cd9e-5b3defa0b1f6@foss.st.com>
-Date: Tue, 31 Jan 2023 13:47:11 +0100
+ 2023 13:48:02 +0100
+Message-ID: <73b573ba-f75e-232d-d687-b97512d4900b@foss.st.com>
+Date: Tue, 31 Jan 2023 13:48:02 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.4.2
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>
 References: <20230123220031.3540724-1-sjg@chromium.org>
- <20230123220031.3540724-69-sjg@chromium.org>
+ <20230123220031.3540724-70-sjg@chromium.org>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230123220031.3540724-69-sjg@chromium.org>
+In-Reply-To: <20230123220031.3540724-70-sjg@chromium.org>
 X-Originating-IP: [10.201.21.26]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -64,16 +64,14 @@ Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  William Zhang <william.zhang@broadcom.com>,
  Samuel Holland <samuel@sholland.org>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Lukasz Majewski <lukma@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>, Lukasz Majewski <lukma@denx.de>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
  Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
- Etienne Carriere <etienne.carriere@linaro.org>,
  =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PATCH 68/88] arm: Rename STM32MP13x
+Subject: Re: [Uboot-stm32] [PATCH 69/88] arm: Rename STM32MP15x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,235 +97,605 @@ On 1/23/23 23:00, Simon Glass wrote:
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
->  arch/arm/dts/Makefile                      |  2 +-
->  arch/arm/mach-stm32mp/Kconfig              |  4 ++--
->  arch/arm/mach-stm32mp/Kconfig.13x          |  4 ++--
->  arch/arm/mach-stm32mp/Makefile             |  2 +-
->  arch/arm/mach-stm32mp/cmd_stm32key.c       | 10 +++++-----
->  arch/arm/mach-stm32mp/fdt.c                |  4 ++--
->  arch/arm/mach-stm32mp/include/mach/stm32.h |  6 +++---
->  board/st/common/Kconfig                    |  2 +-
->  board/st/stm32mp1/Kconfig                  |  2 +-
->  configs/stm32mp13_defconfig                |  4 ++--
->  drivers/clk/stm32/Kconfig                  |  2 +-
->  11 files changed, 21 insertions(+), 21 deletions(-)
+>  arch/arm/dts/Makefile                          |  2 +-
+>  arch/arm/dts/stm32mp15-u-boot.dtsi             |  2 +-
+>  arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi       |  4 ++--
+>  arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi       |  4 ++--
+>  arch/arm/mach-stm32mp/Kconfig                  |  6 +++---
+>  arch/arm/mach-stm32mp/Kconfig.15x              |  6 +++---
+>  arch/arm/mach-stm32mp/Makefile                 |  2 +-
+>  arch/arm/mach-stm32mp/cmd_stm32key.c           | 10 +++++-----
+>  .../mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c |  2 +-
+>  .../arm/mach-stm32mp/cmd_stm32prog/stm32prog.c |  4 ++--
+>  .../arm/mach-stm32mp/cmd_stm32prog/stm32prog.h |  6 +++---
+>  arch/arm/mach-stm32mp/fdt.c                    |  8 ++++----
+>  arch/arm/mach-stm32mp/include/mach/stm32.h     | 10 +++++-----
+>  arch/arm/mach-stm32mp/include/mach/stm32prog.h |  2 +-
+>  board/st/common/Kconfig                        | 14 +++++++-------
+>  board/st/common/stm32mp_mtdparts.c             | 18 +++++++++---------
+>  board/st/stm32mp1/Kconfig                      |  2 +-
+>  board/st/stm32mp1/stm32mp1.c                   |  6 +++---
+>  configs/stm32mp15_basic_defconfig              |  2 +-
+>  configs/stm32mp15_defconfig                    |  2 +-
+>  configs/stm32mp15_trusted_defconfig            |  4 ++--
+>  drivers/clk/stm32/Kconfig                      |  2 +-
+>  22 files changed, 59 insertions(+), 59 deletions(-)
 > 
 > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index c184c802b45..dc8dcdff218 100644
+> index dc8dcdff218..3c3efa6d6a3 100644
 > --- a/arch/arm/dts/Makefile
 > +++ b/arch/arm/dts/Makefile
-> @@ -1215,7 +1215,7 @@ dtb-$(CONFIG_ASPEED_AST2600) += ast2600-evb.dtb
->  
->  dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
->  
-> -dtb-$(CONFIG_STM32MP13x) += \
-> +dtb-$(CONFIG_STM32MP13X) += \
+> @@ -1218,7 +1218,7 @@ dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
+>  dtb-$(CONFIG_STM32MP13X) += \
 >  	stm32mp135f-dk.dtb
 >  
->  dtb-$(CONFIG_STM32MP15x) += \
+> -dtb-$(CONFIG_STM32MP15x) += \
+> +dtb-$(CONFIG_STM32MP15X) += \
+>  	stm32mp157a-dk1.dtb \
+>  	stm32mp157a-dk1-scmi.dtb \
+>  	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
+> diff --git a/arch/arm/dts/stm32mp15-u-boot.dtsi b/arch/arm/dts/stm32mp15-u-boot.dtsi
+> index d5c87d29d88..955598b1c0b 100644
+> --- a/arch/arm/dts/stm32mp15-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15-u-boot.dtsi
+> @@ -206,7 +206,7 @@
+>  	resets = <&rcc UART8_R>;
+>  };
+>  
+> -#if defined(CONFIG_STM32MP15x_STM32IMAGE)
+> +#if defined(CONFIG_STM32MP15X_STM32IMAGE)
+>  &binman {
+>  	u-boot-stm32 {
+>  		filename = "u-boot.stm32";
+> diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> index 15a04ae927e..11062951923 100644
+> --- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+> @@ -21,13 +21,13 @@
+>  		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+>  	};
+>  
+> -#if defined(CONFIG_STM32MP15x_STM32IMAGE) || defined(CONFIG_SPL)
+> +#if defined(CONFIG_STM32MP15X_STM32IMAGE) || defined(CONFIG_SPL)
+>  	config {
+>  		u-boot,mmc-env-partition = "ssbl";
+>  	};
+>  #endif
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	/* only needed for boot with TF-A, witout FIP support */
+>  	firmware {
+>  		optee {
+> diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> index 408abaf52fa..cea661bce68 100644
+> --- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
+> @@ -20,13 +20,13 @@
+>  		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+>  	};
+>  
+> -#if defined(CONFIG_STM32MP15x_STM32IMAGE) || defined(CONFIG_SPL)
+> +#if defined(CONFIG_STM32MP15X_STM32IMAGE) || defined(CONFIG_SPL)
+>  	config {
+>  		u-boot,mmc-env-partition = "ssbl";
+>  	};
+>  #endif
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	/* only needed for boot with TF-A, witout FIP support */
+>  	firmware {
+>  		optee {
 > diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index db47baba6d1..cf3196b3b3a 100644
+> index cf3196b3b3a..f88b7dbffbd 100644
 > --- a/arch/arm/mach-stm32mp/Kconfig
 > +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -37,7 +37,7 @@ choice
->  	prompt "Select STMicroelectronics STM32MPxxx Soc"
->  	default STM32MP15x
+> @@ -35,7 +35,7 @@ config ENV_SIZE
 >  
-> -config STM32MP13x
-> +config STM32MP13X
+>  choice
+>  	prompt "Select STMicroelectronics STM32MPxxx Soc"
+> -	default STM32MP15x
+> +	default STM32MP15X
+>  
+>  config STM32MP13X
 >  	bool "Support STMicroelectronics STM32MP13x Soc"
->  	select ARM_SMCCC
->  	select CPU_V7A
+> @@ -55,7 +55,7 @@ config STM32MP13X
+>  		support of STMicroelectronics SOC STM32MP13x family
+>  		STMicroelectronics MPU with core ARMv7
+>  
+> -config STM32MP15x
+> +config STM32MP15X
+>  	bool "Support STMicroelectronics STM32MP15x Soc"
+>  	select ARCH_SUPPORT_PSCI
+>  	select BINMAN
 > @@ -103,7 +103,7 @@ config SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION_MMC2
 >  
 >  config STM32_ETZPC
 >  	bool "STM32 Extended TrustZone Protection"
-> -	depends on STM32MP15x || STM32MP13x
-> +	depends on STM32MP15x || STM32MP13X
+> -	depends on STM32MP15x || STM32MP13X
+> +	depends on STM32MP15X || STM32MP13X
 >  	default y
 >  	imply BOOTP_SERVERIP
 >  	help
-> diff --git a/arch/arm/mach-stm32mp/Kconfig.13x b/arch/arm/mach-stm32mp/Kconfig.13x
-> index acc02a5a187..4d74b35055b 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig.13x
-> +++ b/arch/arm/mach-stm32mp/Kconfig.13x
-> @@ -1,10 +1,10 @@
-> -if STM32MP13x
-> +if STM32MP13X
+> diff --git a/arch/arm/mach-stm32mp/Kconfig.15x b/arch/arm/mach-stm32mp/Kconfig.15x
+> index 1d32f8bf339..71c14eb4955 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig.15x
+> +++ b/arch/arm/mach-stm32mp/Kconfig.15x
+> @@ -1,6 +1,6 @@
+> -if STM32MP15x
+> +if STM32MP15X
 >  
->  choice
->  	prompt "STM32MP13x board select"
+> -config STM32MP15x_STM32IMAGE
+> +config STM32MP15X_STM32IMAGE
+>  	bool "Support STM32 image for generated U-Boot image"
+>  	depends on TFABOOT
+>  	help
+> @@ -11,7 +11,7 @@ choice
+>  	prompt "STM32MP15x board select"
 >  	optional
 >  
-> -config TARGET_ST_STM32MP13x
-> +config TARGET_ST_STM32MP13X
->  	bool "STMicroelectronics STM32MP13x boards"
+> -config TARGET_ST_STM32MP15x
+> +config TARGET_ST_STM32MP15X
+>  	bool "STMicroelectronics STM32MP15x boards"
 >  	imply BOOTSTAGE
 >  	imply CMD_BOOTSTAGE
 > diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-> index a19b2797c8b..90c7c121ec4 100644
+> index 90c7c121ec4..a40f8dc25a8 100644
 > --- a/arch/arm/mach-stm32mp/Makefile
 > +++ b/arch/arm/mach-stm32mp/Makefile
-> @@ -8,7 +8,7 @@ obj-y += dram_init.o
->  obj-y += syscon.o
+> @@ -9,7 +9,7 @@ obj-y += syscon.o
 >  obj-y += bsec.o
 >  
-> -obj-$(CONFIG_STM32MP13x) += stm32mp13x.o
-> +obj-$(CONFIG_STM32MP13X) += stm32mp13x.o
->  obj-$(CONFIG_STM32MP15x) += stm32mp15x.o
+>  obj-$(CONFIG_STM32MP13X) += stm32mp13x.o
+> -obj-$(CONFIG_STM32MP15x) += stm32mp15x.o
+> +obj-$(CONFIG_STM32MP15X) += stm32mp15x.o
 >  
 >  obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
+>  ifdef CONFIG_SPL_BUILD
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32key.c b/arch/arm/mach-stm32mp/cmd_stm32key.c
-> index 85be8e23bdb..96407cd9b18 100644
+> index 96407cd9b18..b2e6421e9a2 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32key.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32key.c
-> @@ -18,7 +18,7 @@
->   * STM32MP13x: 0b111111 = 0x3F for OTP_SECURED closed device
+> @@ -19,7 +19,7 @@
 >   */
 >  #define STM32_OTP_CLOSE_ID		0
-> -#define STM32_OTP_STM32MP13x_CLOSE_MASK	0x3F
-> +#define STM32_OTP_STM32MP13X_CLOSE_MASK	0x3F
->  #define STM32_OTP_STM32MP15x_CLOSE_MASK	BIT(6)
+>  #define STM32_OTP_STM32MP13X_CLOSE_MASK	0x3F
+> -#define STM32_OTP_STM32MP15x_CLOSE_MASK	BIT(6)
+> +#define STM32_OTP_STM32MP15X_CLOSE_MASK	BIT(6)
 >  
 >  /* PKH is the first element of the key list */
-> @@ -60,7 +60,7 @@ static u8 stm32key_index;
->  
->  static u8 get_key_nb(void)
->  {
-> -	if (IS_ENABLED(CONFIG_STM32MP13x))
-> +	if (IS_ENABLED(CONFIG_STM32MP13X))
+>  #define STM32KEY_PKH 0
+> @@ -63,7 +63,7 @@ static u8 get_key_nb(void)
+>  	if (IS_ENABLED(CONFIG_STM32MP13X))
 >  		return ARRAY_SIZE(stm32mp13_list);
 >  
->  	if (IS_ENABLED(CONFIG_STM32MP15x))
-> @@ -69,7 +69,7 @@ static u8 get_key_nb(void)
+> -	if (IS_ENABLED(CONFIG_STM32MP15x))
+> +	if (IS_ENABLED(CONFIG_STM32MP15X))
+>  		return ARRAY_SIZE(stm32mp15_list);
+>  }
 >  
->  static const struct stm32key *get_key(u8 index)
->  {
-> -	if (IS_ENABLED(CONFIG_STM32MP13x))
-> +	if (IS_ENABLED(CONFIG_STM32MP13X))
+> @@ -72,7 +72,7 @@ static const struct stm32key *get_key(u8 index)
+>  	if (IS_ENABLED(CONFIG_STM32MP13X))
 >  		return &stm32mp13_list[index];
 >  
->  	if (IS_ENABLED(CONFIG_STM32MP15x))
-> @@ -78,8 +78,8 @@ static const struct stm32key *get_key(u8 index)
+> -	if (IS_ENABLED(CONFIG_STM32MP15x))
+> +	if (IS_ENABLED(CONFIG_STM32MP15X))
+>  		return &stm32mp15_list[index];
+>  }
 >  
->  static u32 get_otp_close_mask(void)
+> @@ -81,8 +81,8 @@ static u32 get_otp_close_mask(void)
+>  	if (IS_ENABLED(CONFIG_STM32MP13X))
+>  		return STM32_OTP_STM32MP13X_CLOSE_MASK;
+>  
+> -	if (IS_ENABLED(CONFIG_STM32MP15x))
+> -		return STM32_OTP_STM32MP15x_CLOSE_MASK;
+> +	if (IS_ENABLED(CONFIG_STM32MP15X))
+> +		return STM32_OTP_STM32MP15X_CLOSE_MASK;
+>  }
+>  
+>  static int get_misc_dev(struct udevice **dev)
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> index a8372356b0e..c9f99259054 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
+> @@ -180,7 +180,7 @@ U_BOOT_CMD(stm32prog, 5, 0, do_stm32prog,
+>  	   "  <size> = size of flashlayout (optional for image with STM32 header)\n"
+>  );
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  bool stm32prog_get_tee_partitions(void)
 >  {
-> -	if (IS_ENABLED(CONFIG_STM32MP13x))
-> -		return STM32_OTP_STM32MP13x_CLOSE_MASK;
-> +	if (IS_ENABLED(CONFIG_STM32MP13X))
-> +		return STM32_OTP_STM32MP13X_CLOSE_MASK;
+>  	if (stm32prog_data)
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> index 89552d2ad10..4b75397b1cc 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+> @@ -999,7 +999,7 @@ static int treat_partition_list(struct stm32prog_data *data)
+>  		INIT_LIST_HEAD(&data->dev[j].part_list);
+>  	}
 >  
->  	if (IS_ENABLED(CONFIG_STM32MP15x))
->  		return STM32_OTP_STM32MP15x_CLOSE_MASK;
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	data->tee_detected = false;
+>  #endif
+>  	data->fsbl_nor_detected = false;
+> @@ -1055,7 +1055,7 @@ static int treat_partition_list(struct stm32prog_data *data)
+>  			/* fallthrough */
+>  		case STM32PROG_NAND:
+>  		case STM32PROG_SPI_NAND:
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  			if (!data->tee_detected &&
+>  			    !strncmp(part->name, "tee", 3))
+>  				data->tee_detected = true;
+> diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> index 58f4b96fa75..bcbbc2d5a35 100644
+> --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
+> @@ -20,8 +20,8 @@
+>  #define DEFAULT_ADDRESS		0xFFFFFFFF
+>  
+>  #define CMD_SIZE		512
+> -/* SMC is only supported in SPMIN for STM32MP15x */
+> -#ifdef CONFIG_STM32MP15x
+> +/* SMC is only supported in SPMIN for STM32MP15X */
+> +#ifdef CONFIG_STM32MP15X
+>  #define OTP_SIZE_SMC		1024
+>  #else
+>  #define OTP_SIZE_SMC		0
+> @@ -149,7 +149,7 @@ struct stm32prog_data {
+>  	struct stm32prog_dev_t	dev[STM32PROG_MAX_DEV];	/* array of device */
+>  	int			part_nb;	/* nb of partition */
+>  	struct stm32prog_part_t	*part_array;	/* array of partition */
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	bool			tee_detected;
+>  #endif
+>  	bool			fsbl_nor_detected;
 > diff --git a/arch/arm/mach-stm32mp/fdt.c b/arch/arm/mach-stm32mp/fdt.c
-> index 3b4c05d7451..6b69542ecfc 100644
+> index 6b69542ecfc..218d9ef282a 100644
 > --- a/arch/arm/mach-stm32mp/fdt.c
 > +++ b/arch/arm/mach-stm32mp/fdt.c
-> @@ -270,7 +270,7 @@ static int stm32_fdt_fixup_etzpc(void *fdt, int soc_node)
->  	int offset, shift;
->  	u32 addr, status, decprot[ETZPC_DECPROT_NB];
->  
-> -	if (IS_ENABLED(CONFIG_STM32MP13x)) {
-> +	if (IS_ENABLED(CONFIG_STM32MP13X)) {
->  		array = stm32mp13_ip_addr;
+> @@ -275,7 +275,7 @@ static int stm32_fdt_fixup_etzpc(void *fdt, int soc_node)
 >  		array_size = ARRAY_SIZE(stm32mp13_ip_addr);
 >  	}
-> @@ -491,7 +491,7 @@ int ft_system_setup(void *blob, struct bd_info *bd)
->  	cpu = get_cpu_type();
->  	get_soc_name(name);
 >  
-> -	if (IS_ENABLED(CONFIG_STM32MP13x))
-> +	if (IS_ENABLED(CONFIG_STM32MP13X))
+> -	if (IS_ENABLED(CONFIG_STM32MP15x)) {
+> +	if (IS_ENABLED(CONFIG_STM32MP15X)) {
+>  		array = stm32mp15_ip_addr;
+>  		array_size = ARRAY_SIZE(stm32mp15_ip_addr);
+>  	}
+> @@ -494,7 +494,7 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>  	if (IS_ENABLED(CONFIG_STM32MP13X))
 >  		stm32mp13_fdt_fixup(blob, soc, cpu, name);
 >  
->  	if (IS_ENABLED(CONFIG_STM32MP15x)) {
+> -	if (IS_ENABLED(CONFIG_STM32MP15x)) {
+> +	if (IS_ENABLED(CONFIG_STM32MP15X)) {
+>  		stm32mp15_fdt_fixup(blob, soc, cpu, name);
+>  
+>  		/*
+> @@ -502,10 +502,10 @@ int ft_system_setup(void *blob, struct bd_info *bd)
+>  		 *       copied from U-Boot device tree by optee_copy_fdt_nodes
+>  		 *       when OP-TEE is not detected (probe failed)
+>  		 * these OP-TEE nodes are present in <board>-u-boot.dtsi
+> -		 * under CONFIG_STM32MP15x_STM32IMAGE only for compatibility
+> +		 * under CONFIG_STM32MP15X_STM32IMAGE only for compatibility
+>  		 * when FIP is not used by TF-A
+>  		 */
+> -		if (CONFIG_IS_ENABLED(STM32MP15x_STM32IMAGE) &&
+> +		if (CONFIG_IS_ENABLED(STM32MP15X_STM32IMAGE) &&
+>  		    !tee_find_device(NULL, NULL, NULL, NULL))
+>  			stm32_fdt_disable_optee(blob);
+>  	}
 > diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index c85ae6a34ee..1e1f694cb62 100644
+> index 1e1f694cb62..8f54b8ca94f 100644
 > --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
 > +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -32,7 +32,7 @@
+> @@ -17,7 +17,7 @@
+>  #define STM32_RCC_BASE			0x50000000
+>  #define STM32_PWR_BASE			0x50001000
+>  #define STM32_SYSCFG_BASE		0x50020000
+> -#ifdef CONFIG_STM32MP15x
+> +#ifdef CONFIG_STM32MP15X
+>  #define STM32_DBGMCU_BASE		0x50081000
+>  #endif
+>  #define STM32_FMC2_BASE			0x58002000
+> @@ -28,7 +28,7 @@
+>  #define STM32_STGEN_BASE		0x5C008000
+>  #define STM32_TAMP_BASE			0x5C00A000
+>  
+> -#ifdef CONFIG_STM32MP15x
+> +#ifdef CONFIG_STM32MP15X
 >  #define STM32_USART1_BASE		0x5C000000
 >  #define STM32_USART2_BASE		0x4000E000
 >  #endif
-> -#ifdef CONFIG_STM32MP13x
-> +#ifdef CONFIG_STM32MP13X
->  #define STM32_USART1_BASE		0x4c000000
->  #define STM32_USART2_BASE		0x4c001000
->  #endif
-> @@ -130,7 +130,7 @@ enum boot_device {
->  #define TAMP_COPRO_STATE_CRASH		5
->  #endif
+> @@ -47,7 +47,7 @@
+>  #define STM32_SDMMC2_BASE		0x58007000
+>  #define STM32_SDMMC3_BASE		0x48004000
 >  
-> -#ifdef CONFIG_STM32MP13x
-> +#ifdef CONFIG_STM32MP13X
->  #define TAMP_BOOTCOUNT			TAMP_BACKUP_REGISTER(31)
->  #define TAMP_BOOT_CONTEXT		TAMP_BACKUP_REGISTER(30)
+> -#ifdef CONFIG_STM32MP15x
+> +#ifdef CONFIG_STM32MP15X
+>  #define STM32_SYSRAM_BASE		0x2FFC0000
+>  #define STM32_SYSRAM_SIZE		SZ_256K
 >  #endif
-> @@ -167,7 +167,7 @@ enum forced_boot_mode {
->  #define BSEC_OTP_MAC	57
->  #define BSEC_OTP_BOARD	59
->  #endif
-> -#ifdef CONFIG_STM32MP13x
-> +#ifdef CONFIG_STM32MP13X
+> @@ -109,7 +109,7 @@ enum boot_device {
+>  /* TAMP registers */
+>  #define TAMP_BACKUP_REGISTER(x)		(STM32_TAMP_BASE + 0x100 + 4 * x)
+>  
+> -#ifdef CONFIG_STM32MP15x
+> +#ifdef CONFIG_STM32MP15X
+>  #define TAMP_BACKUP_MAGIC_NUMBER	TAMP_BACKUP_REGISTER(4)
+>  #define TAMP_BACKUP_BRANCH_ADDRESS	TAMP_BACKUP_REGISTER(5)
+>  #define TAMP_FWU_BOOT_INFO_REG		TAMP_BACKUP_REGISTER(10)
+> @@ -160,7 +160,7 @@ enum forced_boot_mode {
+>  #define STM32_BSEC_LOCK(id)		(STM32_BSEC_LOCK_OFFSET + (id) * 4)
+>  
+>  /* BSEC OTP index */
+> -#ifdef CONFIG_STM32MP15x
+> +#ifdef CONFIG_STM32MP15X
 >  #define BSEC_OTP_RPN	1
 >  #define BSEC_OTP_SERIAL	13
->  #define BSEC_OTP_MAC	57
+>  #define BSEC_OTP_PKG	16
+> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32prog.h b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
+> index 99be4e1d656..573dffe6dd6 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/stm32prog.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/stm32prog.h
+> @@ -11,7 +11,7 @@ int stm32prog_read_medium_virt(struct dfu_entity *dfu, u64 offset,
+>  			       void *buf, long *len);
+>  int stm32prog_get_medium_size_virt(struct dfu_entity *dfu, u64 *size);
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  bool stm32prog_get_tee_partitions(void);
+>  #endif
+>  
 > diff --git a/board/st/common/Kconfig b/board/st/common/Kconfig
-> index aba3590866e..ba17d3158d1 100644
+> index ba17d3158d1..20e28f9af82 100644
 > --- a/board/st/common/Kconfig
 > +++ b/board/st/common/Kconfig
-> @@ -1,7 +1,7 @@
+> @@ -1,14 +1,14 @@
 >  config CMD_STBOARD
 >  	bool "stboard - command for OTP board information"
 >  	depends on ARCH_STM32MP
-> -	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13x
-> +	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13X
+> -	default y if TARGET_ST_STM32MP15x || TARGET_ST_STM32MP13X
+> +	default y if TARGET_ST_STM32MP15X || TARGET_ST_STM32MP13X
 >  	help
 >  	  This compile the stboard command to
 >  	  read and write the board in the OTP.
+>  
+>  config MTDPARTS_NAND0_BOOT
+>  	string "mtd boot partitions for nand0"
+> -	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15x_STM32IMAGE || \
+> +	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15X_STM32IMAGE || \
+>  						  !TFABOOT
+>  	default "2m(fsbl),4m(fip1),4m(fip2)"
+>  	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
+> @@ -23,7 +23,7 @@ config MTDPARTS_NAND0_BOOT
+>  config MTDPARTS_NAND0_TEE
+>  	string "mtd tee partitions for nand0"
+>  	default "512k(teeh),512k(teed),512k(teex)"
+> -	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
+> +	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15X_STM32IMAGE
+>  	help
+>  	  This define the tee partitions added in mtparts dynamically
+>  	  when tee is supported with boot from nand0.
+> @@ -32,7 +32,7 @@ config MTDPARTS_NAND0_TEE
+>  
+>  config MTDPARTS_NOR0_BOOT
+>  	string "mtd boot partitions for nor0"
+> -	default "256k(fsbl1),256k(fsbl2),2m(ssbl),512k(u-boot-env)" if STM32MP15x_STM32IMAGE || \
+> +	default "256k(fsbl1),256k(fsbl2),2m(ssbl),512k(u-boot-env)" if STM32MP15X_STM32IMAGE || \
+>  								       !TFABOOT
+>  	default "256k(fsbl1),256k(fsbl2),4m(fip),512k(u-boot-env)"
+>  	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
+> @@ -46,14 +46,14 @@ config MTDPARTS_NOR0_BOOT
+>  config MTDPARTS_NOR0_TEE
+>  	string "mtd tee partitions for nor0"
+>  	default "256k(teeh),512k(teed),256k(teex)"
+> -	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
+> +	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15X_STM32IMAGE
+>  	help
+>  	  This define the tee partitions added in mtparts dynamically
+>  	  when tee is supported with boot from nor0.
+>  
+>  config MTDPARTS_SPINAND0_BOOT
+>  	string "mtd boot partitions for spi-nand0"
+> -	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15x_STM32IMAGE || !TFABOOT
+> +	default "2m(fsbl),2m(ssbl1),2m(ssbl2)" if STM32MP15X_STM32IMAGE || !TFABOOT
+>  	default "2m(fsbl),4m(fip1),4m(fip2)"
+>  	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP
+>  	help
+> @@ -66,7 +66,7 @@ config MTDPARTS_SPINAND0_BOOT
+>  config MTDPARTS_SPINAND0_TEE
+>  	string "mtd tee partitions for spi-nand0"
+>  	default "512k(teeh),512k(teed),512k(teex)"
+> -	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15x_STM32IMAGE
+> +	depends on SYS_MTDPARTS_RUNTIME && ARCH_STM32MP && STM32MP15X_STM32IMAGE
+>  	help
+>  	  This define the tee partitions added in mtparts dynamically
+>  	  when tee is supported with boot from spi-nand0,
+> diff --git a/board/st/common/stm32mp_mtdparts.c b/board/st/common/stm32mp_mtdparts.c
+> index 18878424c7a..bc2ce600287 100644
+> --- a/board/st/common/stm32mp_mtdparts.c
+> +++ b/board/st/common/stm32mp_mtdparts.c
+> @@ -11,7 +11,7 @@
+>  #include <log.h>
+>  #include <mtd.h>
+>  #include <mtd_node.h>
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  #include <tee.h>
+>  #endif
+>  #include <asm/arch/stm32prog.h>
+> @@ -33,7 +33,7 @@ static void board_set_mtdparts(const char *dev,
+>  			       char *mtdids,
+>  			       char *mtdparts,
+>  			       const char *boot,
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  			       const char *tee,
+>  #endif
+>  			       const char *user)
+> @@ -59,7 +59,7 @@ static void board_set_mtdparts(const char *dev,
+>  		strncat(mtdparts, ",", MTDPARTS_LEN);
+>  	}
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	if (tee) {
+>  		strncat(mtdparts, tee, MTDPARTS_LEN);
+>  		strncat(mtdparts, ",", MTDPARTS_LEN);
+> @@ -77,7 +77,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  	static char ids[MTDIDS_LEN + 1];
+>  	static bool mtd_initialized;
+>  	bool nor, nand, spinand, serial;
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	bool tee = false;
+>  #endif
+>  
+> @@ -97,7 +97,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  	case BOOT_SERIAL_USB:
+>  		serial = true;
+>  		if (CONFIG_IS_ENABLED(CMD_STM32PROG)) {
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  			tee = stm32prog_get_tee_partitions();
+>  #endif
+>  			nor = stm32prog_get_fsbl_nor();
+> @@ -118,7 +118,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  		break;
+>  	}
+>  
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  	if (!serial && tee_find_device(NULL, NULL, NULL, NULL))
+>  		tee = true;
+>  #endif
+> @@ -138,7 +138,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  		if (!IS_ERR_OR_NULL(mtd)) {
+>  			board_set_mtdparts("nand0", ids, parts,
+>  					   CONFIG_MTDPARTS_NAND0_BOOT,
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  					   !nor && tee ? CONFIG_MTDPARTS_NAND0_TEE : NULL,
+>  #endif
+>  					   "-(UBI)");
+> @@ -151,7 +151,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  		if (!IS_ERR_OR_NULL(mtd)) {
+>  			board_set_mtdparts("spi-nand0", ids, parts,
+>  					   CONFIG_MTDPARTS_SPINAND0_BOOT,
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  					   !nor && tee ? CONFIG_MTDPARTS_SPINAND0_TEE : NULL,
+>  #endif
+>  					   "-(UBI)");
+> @@ -163,7 +163,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>  		if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
+>  			board_set_mtdparts("nor0", ids, parts,
+>  					   CONFIG_MTDPARTS_NOR0_BOOT,
+> -#ifdef CONFIG_STM32MP15x_STM32IMAGE
+> +#ifdef CONFIG_STM32MP15X_STM32IMAGE
+>  					   tee ? CONFIG_MTDPARTS_NOR0_TEE : NULL,
+>  #endif
+>  					   "-(nor_user)");
 > diff --git a/board/st/stm32mp1/Kconfig b/board/st/stm32mp1/Kconfig
-> index 6ab8f80fa45..7d0d41bfea0 100644
+> index 7d0d41bfea0..96de41546f1 100644
 > --- a/board/st/stm32mp1/Kconfig
 > +++ b/board/st/stm32mp1/Kconfig
-> @@ -12,7 +12,7 @@ config SYS_CONFIG_NAME
->  source "board/st/common/Kconfig"
->  endif
->  
-> -if TARGET_ST_STM32MP13x
-> +if TARGET_ST_STM32MP13X
+> @@ -1,4 +1,4 @@
+> -if TARGET_ST_STM32MP15x
+> +if TARGET_ST_STM32MP15X
 >  
 >  config SYS_BOARD
 >  	default "stm32mp1"
-> diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
-> index ab824808f9d..7b9718400e8 100644
-> --- a/configs/stm32mp13_defconfig
-> +++ b/configs/stm32mp13_defconfig
-> @@ -5,10 +5,10 @@ CONFIG_SYS_MALLOC_F_LEN=0x180000
->  CONFIG_ENV_OFFSET=0x900000
->  CONFIG_DEFAULT_DEVICE_TREE="stm32mp135f-dk"
->  CONFIG_SYS_PROMPT="STM32MP> "
-> -CONFIG_STM32MP13x=y
-> +CONFIG_STM32MP13X=y
+> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+> index 47b3d1bf4c5..4536c1c673c 100644
+> --- a/board/st/stm32mp1/stm32mp1.c
+> +++ b/board/st/stm32mp1/stm32mp1.c
+> @@ -114,7 +114,7 @@ int checkboard(void)
+>  	int fdt_compat_len;
+>  
+>  	if (IS_ENABLED(CONFIG_TFABOOT)) {
+> -		if (IS_ENABLED(CONFIG_STM32MP15x_STM32IMAGE))
+> +		if (IS_ENABLED(CONFIG_STM32MP15X_STM32IMAGE))
+>  			mode = "trusted - stm32image";
+>  		else
+>  			mode = "trusted";
+> @@ -616,7 +616,7 @@ error:
+>  
+>  static bool board_is_stm32mp15x_dk2(void)
+>  {
+> -	if (CONFIG_IS_ENABLED(TARGET_ST_STM32MP15x) &&
+> +	if (CONFIG_IS_ENABLED(TARGET_ST_STM32MP15X) &&
+>  	    of_machine_is_compatible("st,stm32mp157c-dk2"))
+>  		return true;
+>  
+> @@ -625,7 +625,7 @@ static bool board_is_stm32mp15x_dk2(void)
+>  
+>  static bool board_is_stm32mp15x_ev1(void)
+>  {
+> -	if (CONFIG_IS_ENABLED(TARGET_ST_STM32MP15x) &&
+> +	if (CONFIG_IS_ENABLED(TARGET_ST_STM32MP15X) &&
+>  	    (of_machine_is_compatible("st,stm32mp157a-ev1") ||
+>  	     of_machine_is_compatible("st,stm32mp157c-ev1") ||
+>  	     of_machine_is_compatible("st,stm32mp157d-ev1") ||
+> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+> index 87e3b496048..ea03751c781 100644
+> --- a/configs/stm32mp15_basic_defconfig
+> +++ b/configs/stm32mp15_basic_defconfig
+> @@ -11,7 +11,7 @@ CONFIG_SPL_MMC=y
+>  CONFIG_SPL=y
+>  CONFIG_CMD_STM32KEY=y
+>  CONFIG_TYPEC_STUSB160X=y
+> -CONFIG_TARGET_ST_STM32MP15x=y
+> +CONFIG_TARGET_ST_STM32MP15X=y
+>  CONFIG_ENV_OFFSET_REDUND=0x2C0000
+>  CONFIG_CMD_STM32PROG=y
+>  CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+> index 5dc00213a8f..54b80688c66 100644
+> --- a/configs/stm32mp15_defconfig
+> +++ b/configs/stm32mp15_defconfig
+> @@ -9,7 +9,7 @@ CONFIG_SYS_PROMPT="STM32MP> "
 >  CONFIG_DDR_CACHEABLE_SIZE=0x10000000
 >  CONFIG_CMD_STM32KEY=y
-> -CONFIG_TARGET_ST_STM32MP13x=y
-> +CONFIG_TARGET_ST_STM32MP13X=y
->  CONFIG_ENV_OFFSET_REDUND=0x940000
+>  CONFIG_TYPEC_STUSB160X=y
+> -CONFIG_TARGET_ST_STM32MP15x=y
+> +CONFIG_TARGET_ST_STM32MP15X=y
+>  CONFIG_ENV_OFFSET_REDUND=0x4C0000
+>  CONFIG_CMD_STM32PROG=y
 >  # CONFIG_ARMV7_NONSEC is not set
->  CONFIG_SYS_LOAD_ADDR=0xc2000000
+> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+> index c1ad4dd5213..3d80f410507 100644
+> --- a/configs/stm32mp15_trusted_defconfig
+> +++ b/configs/stm32mp15_trusted_defconfig
+> @@ -9,8 +9,8 @@ CONFIG_SYS_PROMPT="STM32MP> "
+>  CONFIG_DDR_CACHEABLE_SIZE=0x10000000
+>  CONFIG_CMD_STM32KEY=y
+>  CONFIG_TYPEC_STUSB160X=y
+> -CONFIG_STM32MP15x_STM32IMAGE=y
+> -CONFIG_TARGET_ST_STM32MP15x=y
+> +CONFIG_STM32MP15X_STM32IMAGE=y
+> +CONFIG_TARGET_ST_STM32MP15X=y
+>  CONFIG_ENV_OFFSET_REDUND=0x2C0000
+>  CONFIG_CMD_STM32PROG=y
+>  # CONFIG_ARMV7_NONSEC is not set
 > diff --git a/drivers/clk/stm32/Kconfig b/drivers/clk/stm32/Kconfig
-> index 7a34ea23c38..7dbddd032b8 100644
+> index 7dbddd032b8..c05015efe8b 100644
 > --- a/drivers/clk/stm32/Kconfig
 > +++ b/drivers/clk/stm32/Kconfig
-> @@ -31,7 +31,7 @@ config CLK_STM32MP1
->  config CLK_STM32MP13
->  	bool "Enable RCC clock driver for STM32MP13"
+> @@ -23,7 +23,7 @@ config CLK_STM32_CORE
+>  config CLK_STM32MP1
+>  	bool "Enable RCC clock driver for STM32MP15"
 >  	depends on ARCH_STM32MP && CLK
-> -	default y if STM32MP13x
-> +	default y if STM32MP13X
->  	select CLK_STM32_CORE
+> -	default y if STM32MP15x
+> +	default y if STM32MP15X
 >  	help
 >  	  Enable the STM32 clock (RCC) driver. Enable support for
+>  	  manipulating STM32MP15's on-SoC clocks.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 

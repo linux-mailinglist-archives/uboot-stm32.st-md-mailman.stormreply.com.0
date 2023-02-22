@@ -2,63 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11F8E697802
-	for <lists+uboot-stm32@lfdr.de>; Wed, 15 Feb 2023 09:19:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D3869FBB3
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Feb 2023 20:07:39 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CA442C6B445;
-	Wed, 15 Feb 2023 08:18:59 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com
- [209.85.208.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6A9B4C65E58;
+	Wed, 22 Feb 2023 19:07:39 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8CA13C6A5F3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D1823C65E42
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Feb 2023 10:52:46 +0000 (UTC)
-Received: by mail-ed1-f52.google.com with SMTP id c1so12922433edt.4
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 14 Feb 2023 02:52:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xQFWFq0uRbdimHuyFn4A1V532ugP0k/S0ZTSejwM9s8=;
- b=gDt7CivNbfrnifW2MQCtew0l4nXyIXXTmGNDDaXOZJw6BHD/mOhUZKPtdRa1Uyz24r
- vt44HjWQ3LYbisb20zKg3Blc13UpontUntWaYaWTdUOx8axEmkGg5e9v4+mLFq+dKyVL
- XPxgBVhJVKWjUgYV+mt2aGI9DLhgIfwDsfRcQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xQFWFq0uRbdimHuyFn4A1V532ugP0k/S0ZTSejwM9s8=;
- b=R0KgOZ8Pw9rNGfhJLTVqsqSe99x8zv2q+WH2pNv+8kE/Q6bNhm13N9WlRu3ZxURHv7
- 0wofk1wC7EvxeJ6GUECZXwK1Ex/3OM+ps+aDI8lEuNqYfEg7axb33Bne6GfwVz5alFor
- bEZxrF2JlKdYlfND/0U3ESv9RNT4tlMs9uOXrGwpjlZZbG0tXrvPs/zCU8/gNA1qF/ee
- 7jorvl6im5etd1ikhNMK8CBI4Ge4VRluFuaLweUPgk1gd4j9m5bhcaeEuff3Uq4X8Kga
- qYhALXtogLetZjIC72M/iRFkjiaLtsp10Fi3eOQQ+F/NzvgvXaPbd+jUE9O/NWTIuC+R
- VBeg==
-X-Gm-Message-State: AO0yUKXaXW2s+Y9zEHbHyspCrBhlUduEWDjyqYbcnsA3lM2hjgSOLaJs
- Nt+CSmzGEO8yhC5vDfTlEgwIHBsyOsL7wP9NrEsYrw==
-X-Google-Smtp-Source: AK7set/hXIDlzYSJgQmXrmx+ysv26PnaqDfoM3qVeDerGvNHTPJ4rIcFI2ap850BI1WxQI6Ql96LdOKF+zNiPKyOiFg=
-X-Received: by 2002:a50:8a9b:0:b0:4ac:bb37:a501 with SMTP id
- j27-20020a508a9b000000b004acbb37a501mr696802edj.1.1676371966013; Tue, 14 Feb
- 2023 02:52:46 -0800 (PST)
+ Wed, 22 Feb 2023 19:07:37 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 31MFoFv3006471; Wed, 22 Feb 2023 20:07:17 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=Xr3EHAw3AFGXWFPn056Yyqa8Bz14ES2yycBhcwOvAjA=;
+ b=1GFVbr1Xu3KUTBfBTH/Wbpz+cJ5r6Q5TP+4otp5Be+WuUOoqQkVN2zLru2rU6jwLTYMq
+ y0hXkb0r5JU6jk8NiAcUcCjgP14ekq73jz1T7cwBqx1a/Au6nBDpISAmT5bL8TFRSgo+
+ 9RSQWXiTV/qrOql24WntivbxJdjydgNoXhSiKndICpieo+mINYb/wrxBfDdV03UAOxK5
+ DX6p8Lvr+ga5WTpSMXr0PraaC2tKJNZ9T21ib4uhXutK/+zd97ciZ0HEWRSf3caCRCLm
+ 4YVfm0tBh2fKgbuItvHTKfILLpByQW2ZsJNHrVD/t7GG38gMlL2RpCb01y+oBMdEni7I 8Q== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3nwhq2jnjf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 22 Feb 2023 20:07:16 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C27DB10002A;
+ Wed, 22 Feb 2023 20:07:14 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B48AE22A6C5;
+ Wed, 22 Feb 2023 20:07:14 +0100 (CET)
+Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Wed, 22 Feb
+ 2023 20:07:07 +0100
+Message-ID: <7719bf0c-4280-351b-3e4f-cf1629f7e993@foss.st.com>
+Date: Wed, 22 Feb 2023 20:07:06 +0100
 MIME-Version: 1.0
-References: <20230213173005.913823-1-patrice.chotard@foss.st.com>
- <0dba65d9-6415-569f-b4fb-34b10b1c710d@kontron.de>
-In-Reply-To: <0dba65d9-6415-569f-b4fb-34b10b1c710d@kontron.de>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 14 Feb 2023 11:52:34 +0100
-Message-ID: <CAOf5uw=a0op1ZCe0wGUXnJbMq64=LfqvX3N4zE5pOq5Y6o1Z-Q@mail.gmail.com>
-To: Frieder Schrempf <frieder.schrempf@kontron.de>
-X-Mailman-Approved-At: Wed, 15 Feb 2023 08:18:58 +0000
-Cc: Boris Brezillon <bbrezillon@kernel.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>,
- Jagan Teki <jagan@openedev.com>, Peter Pan <peterpandong@micron.com>
-Subject: Re: [Uboot-stm32] [PATCH] mtd: spinand: Fix display of unknown raw
-	ID
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>
+References: <20230123220031.3540724-1-sjg@chromium.org>
+ <20230123220031.3540724-69-sjg@chromium.org>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230123220031.3540724-69-sjg@chromium.org>
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
+ definitions=2023-02-22_08,2023-02-22_02,2023-02-09_01
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Fabio Estevam <festevam@denx.de>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
+ Etienne Carriere <etienne.carriere@linaro.org>,
+ =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>
+Subject: Re: [Uboot-stm32] [PATCH 68/88] arm: Rename STM32MP13x
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,49 +84,39 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi
+Hi,
 
-On Tue, Feb 14, 2023 at 9:14 AM Frieder Schrempf
-<frieder.schrempf@kontron.de> wrote:
+On 1/23/23 23:00, Simon Glass wrote:
+> CONFIG options must not use lower-case letter. Convert this and related
+> ones to upper case.
 >
-> On 13.02.23 18:30, Patrice Chotard wrote:
-> > In case ID is not found in manufacturer table, the raw ID is
-> > printed using %*phN format which is not supported by lib/vsprintf.c.
-> > The information displayed doesn't reflect the raw ID return by the
-> > unknown spi-nand.
-> >
-> > Use %02x format instead, as done in spi-nor-core.c.
-> >
-> > For example, before this patch:
-> >   ERROR: spi-nand: spi_nand flash@0: unknown raw ID f74ec040
-> > after
-> >   ERROR: spi-nand: spi_nand flash@0: unknown raw ID 00 c2 26 03
-> >
-> > Fixes: 0a6d6bae0386 ("mtd: nand: Add core infrastructure to support SPI NANDs")
-> >
-> > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+>   arch/arm/dts/Makefile                      |  2 +-
+>   arch/arm/mach-stm32mp/Kconfig              |  4 ++--
+>   arch/arm/mach-stm32mp/Kconfig.13x          |  4 ++--
+>   arch/arm/mach-stm32mp/Makefile             |  2 +-
+>   arch/arm/mach-stm32mp/cmd_stm32key.c       | 10 +++++-----
+>   arch/arm/mach-stm32mp/fdt.c                |  4 ++--
+>   arch/arm/mach-stm32mp/include/mach/stm32.h |  6 +++---
+>   board/st/common/Kconfig                    |  2 +-
+>   board/st/stm32mp1/Kconfig                  |  2 +-
+>   configs/stm32mp13_defconfig                |  4 ++--
+>   drivers/clk/stm32/Kconfig                  |  2 +-
+>   11 files changed, 21 insertions(+), 21 deletions(-)
+>
 
-Acked-by: Michael Trimarchi <michael@amarulasolutions.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
--- 
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Thanks
+Patrick
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

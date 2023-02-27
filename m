@@ -2,63 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E6F169FBE8
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Feb 2023 20:20:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3B896A493B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 27 Feb 2023 19:07:26 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 35AF8C65E58;
-	Wed, 22 Feb 2023 19:20:20 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 73A12C6A5E7;
+	Mon, 27 Feb 2023 18:07:26 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
+ [209.85.208.50])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0C869C65E42
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F36A9C69067
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Feb 2023 19:20:19 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 31MFjGnd006481; Wed, 22 Feb 2023 20:20:12 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding : content-type; s=selector1;
- bh=6TbJbmvEB+ba3lmvxEgkOTlw6qQ+dhu/3GtH1aA1Efk=;
- b=0ZRllHeifHKkurnFZTxT5NIXzZnfrYJzX/whpo39raSst7WJgVkoXPBACQ3PtosZHB27
- ignn+taMkxhsMhd8Va+fgQcPdsBOFJyPGbH/0t19RZkfEGANqElw6CNPb8guJ5cxZITv
- 6eb93ByhEOYArXRGsHHcyKjCNL5IibW4ypf3hOkLiYISTDikglfIMvcUT13gYS7ChtTC
- wkEHXF+gIZ5GE0b/cl1rCsdxsqStA40ZTJY3yg5r8ucVQD7h9e/7Q43V4OEC4EgCfySg
- 9k2eimw4FmDeg+t1YRYBYc6q/qvf0cbmLj07yLJlPazSFxcuufth6wDqzDsqts4bYYyT BQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3nwhq2jqw5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 22 Feb 2023 20:20:12 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CA8CA100034;
- Wed, 22 Feb 2023 20:20:11 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C2E4C22A6F8;
- Wed, 22 Feb 2023 20:20:11 +0100 (CET)
-Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Wed, 22 Feb
- 2023 20:20:10 +0100
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 22 Feb 2023 20:19:59 +0100
-Message-ID: <20230222201943.2.I26822655244f3aba21fc3a62832a901a9445a8be@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230222201943.1.I901beb8819b481b6a9b55b2c00768225e5e12649@changeid>
-References: <20230222201943.1.I901beb8819b481b6a9b55b2c00768225e5e12649@changeid>
+ Mon, 27 Feb 2023 18:07:24 +0000 (UTC)
+Received: by mail-ed1-f50.google.com with SMTP id o12so29314947edb.9
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 27 Feb 2023 10:07:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6i6cB4qV8gthPbrDCJMTfDZQ6ecrn4DV1T1/EnEO7QI=;
+ b=j4uiaAfM+6FPiwOoo97hbY81G4FxN0lvK0xmN4smtZnsI7k1vdKINFTm4UPtup0Xhk
+ Yjq0fpocWciavo3A6UFrH+UH8du7jYqhvxMyOEZTUANmjONfaNbVQcEBWLmnKh2kjUNk
+ ctgyR6fQPYVZ9AsCqvQsLUfWVIOe49VWRENts=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6i6cB4qV8gthPbrDCJMTfDZQ6ecrn4DV1T1/EnEO7QI=;
+ b=5hJEBhlmIhEmAjOzg4L3cZ9KBsIlzil9y0k9rFT+01dd9LGHZzh04JT8bywXhKzodk
+ F7FFtMMe/YJpTI9YQuSjcVihhGgdKig7V4m/5/28qaDtW4BtNgvnE57f5/dyct+DavPa
+ 5RBDYxu6jh5cDiqvNiYCbodxAVsx8eL5Uq8ILdfaWxhZcJ2go+GCuCQj96NzuGnH2S0U
+ 9Fbz+xceIq0W9NXrK8/tBYXVgK8HVS280Lrbp+dKeWNbi8H7EKP0Wx7tNBhsCmQKz7cx
+ drLaNOQXKxjIIbvjdFdZCY927fv8zzdTlIHuBLutRZGAm3xYY43Gii8ctLRQHnhkwobk
+ M+hg==
+X-Gm-Message-State: AO0yUKXalVKqGh3sJ9rgrfkUQFuDgObF4D/j/frDI8v5dXvw/zLQW0qM
+ 23DtlBoVK9rrvwGsr5Lz74LQsS9snsZ2Kl0ARr0wPg==
+X-Google-Smtp-Source: AK7set81obp4N6qzlOggSp+TmeMTurJwffzHGQ4VZ1fhYM64b7vpAIN2As2t/hcSOz73TGYv0YM4C0/qnfgM+lCJw54=
+X-Received: by 2002:a17:906:858f:b0:8b2:23fb:dfd8 with SMTP id
+ v15-20020a170906858f00b008b223fbdfd8mr16471292ejx.12.1677521244313; Mon, 27
+ Feb 2023 10:07:24 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.170.22
- definitions=2023-02-22_08,2023-02-22_02,2023-02-09_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 2/2] mmc: remove SDHCI SPEAR
+References: <20230213173005.913823-1-patrice.chotard@foss.st.com>
+ <0dba65d9-6415-569f-b4fb-34b10b1c710d@kontron.de>
+ <CAOf5uw=a0op1ZCe0wGUXnJbMq64=LfqvX3N4zE5pOq5Y6o1Z-Q@mail.gmail.com>
+In-Reply-To: <CAOf5uw=a0op1ZCe0wGUXnJbMq64=LfqvX3N4zE5pOq5Y6o1Z-Q@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 27 Feb 2023 19:07:13 +0100
+Message-ID: <CAOf5uwnPjYFJ+WM0fm3j90OxsDGi2Dpbk8jRnSfMGtEz6hFjNw@mail.gmail.com>
+To: Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: Boris Brezillon <bbrezillon@kernel.org>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>,
+ Jagan Teki <jagan@openedev.com>, Peter Pan <peterpandong@micron.com>
+Subject: Re: [Uboot-stm32] [PATCH] mtd: spinand: Fix display of unknown raw
+	ID
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,61 +72,30 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-As the file spear_sdhci.c file is already removed, delete the associated
-configuration CONFIG_MMC_SDHCI_SPEAR.
-
-Fixes: c942fc925e7dab ("mmc: spear: remove the entire spear_sdhci.c file")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
-
- drivers/mmc/Kconfig  | 12 ------------
- drivers/mmc/Makefile |  1 -
- 2 files changed, 13 deletions(-)
-
-diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-index 878f867c627b..80641e139305 100644
---- a/drivers/mmc/Kconfig
-+++ b/drivers/mmc/Kconfig
-@@ -667,18 +667,6 @@ config MMC_SDHCI_S5P
- 
- 	  If unsure, say N.
- 
--config MMC_SDHCI_SPEAR
--	bool "SDHCI support on ST SPEAr platform"
--	depends on MMC_SDHCI
--	help
--	  This selects the Secure Digital Host Controller Interface (SDHCI)
--	  often referrered to as the HSMMC block in some of the ST SPEAR range
--	  of SoC
--
--	  If you have a controller with this interface, say Y here.
--
--	  If unsure, say N.
--
- config MMC_SDHCI_STI
- 	bool "SDHCI support for STMicroelectronics SoC"
- 	depends on MMC_SDHCI && OF_CONTROL
-diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
-index 3dc757108d5a..2c65c4765ab2 100644
---- a/drivers/mmc/Makefile
-+++ b/drivers/mmc/Makefile
-@@ -70,7 +70,6 @@ obj-$(CONFIG_MMC_SDHCI_NPCM)            += npcm_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_PIC32)		+= pic32_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_ROCKCHIP)	+= rockchip_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_S5P)		+= s5p_sdhci.o
--obj-$(CONFIG_MMC_SDHCI_SPEAR)		+= spear_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_STI)		+= sti_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_TANGIER)		+= tangier_sdhci.o
- obj-$(CONFIG_MMC_SDHCI_TEGRA)		+= tegra_mmc.o
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkKCk9uIFR1ZSwgRmViIDE0LCAyMDIzIGF0IDExOjUy4oCvQU0gTWljaGFlbCBOYXp6YXJlbm8g
+VHJpbWFyY2hpCjxtaWNoYWVsQGFtYXJ1bGFzb2x1dGlvbnMuY29tPiB3cm90ZToKPgo+IEhpCj4K
+PiBPbiBUdWUsIEZlYiAxNCwgMjAyMyBhdCA5OjE0IEFNIEZyaWVkZXIgU2NocmVtcGYKPiA8ZnJp
+ZWRlci5zY2hyZW1wZkBrb250cm9uLmRlPiB3cm90ZToKPiA+Cj4gPiBPbiAxMy4wMi4yMyAxODoz
+MCwgUGF0cmljZSBDaG90YXJkIHdyb3RlOgo+ID4gPiBJbiBjYXNlIElEIGlzIG5vdCBmb3VuZCBp
+biBtYW51ZmFjdHVyZXIgdGFibGUsIHRoZSByYXcgSUQgaXMKPiA+ID4gcHJpbnRlZCB1c2luZyAl
+KnBoTiBmb3JtYXQgd2hpY2ggaXMgbm90IHN1cHBvcnRlZCBieSBsaWIvdnNwcmludGYuYy4KPiA+
+ID4gVGhlIGluZm9ybWF0aW9uIGRpc3BsYXllZCBkb2Vzbid0IHJlZmxlY3QgdGhlIHJhdyBJRCBy
+ZXR1cm4gYnkgdGhlCj4gPiA+IHVua25vd24gc3BpLW5hbmQuCj4gPiA+Cj4gPiA+IFVzZSAlMDJ4
+IGZvcm1hdCBpbnN0ZWFkLCBhcyBkb25lIGluIHNwaS1ub3ItY29yZS5jLgo+ID4gPgo+ID4gPiBG
+b3IgZXhhbXBsZSwgYmVmb3JlIHRoaXMgcGF0Y2g6Cj4gPiA+ICAgRVJST1I6IHNwaS1uYW5kOiBz
+cGlfbmFuZCBmbGFzaEAwOiB1bmtub3duIHJhdyBJRCBmNzRlYzA0MAo+ID4gPiBhZnRlcgo+ID4g
+PiAgIEVSUk9SOiBzcGktbmFuZDogc3BpX25hbmQgZmxhc2hAMDogdW5rbm93biByYXcgSUQgMDAg
+YzIgMjYgMDMKPiA+ID4KPiA+ID4gRml4ZXM6IDBhNmQ2YmFlMDM4NiAoIm10ZDogbmFuZDogQWRk
+IGNvcmUgaW5mcmFzdHJ1Y3R1cmUgdG8gc3VwcG9ydCBTUEkgTkFORHMiKQo+ID4gPgo+ID4gPiBT
+aWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNv
+bT4KPiA+Cj4gPiBSZXZpZXdlZC1ieTogRnJpZWRlciBTY2hyZW1wZiA8ZnJpZWRlci5zY2hyZW1w
+ZkBrb250cm9uLmRlPgo+Cj4gQWNrZWQtYnk6IE1pY2hhZWwgVHJpbWFyY2hpIDxtaWNoYWVsQGFt
+YXJ1bGFzb2x1dGlvbnMuY29tPgo+CgpBcHBsaWVkIHRoYW5rcwoKTWljaGFlbApfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5n
+IGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0
+LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

@@ -2,50 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E85656B08A5
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Mar 2023 14:28:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3E446B089A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Mar 2023 14:26:59 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B2E08C6907C;
-	Wed,  8 Mar 2023 13:28:38 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 95E23C6907B;
+	Wed,  8 Mar 2023 13:26:59 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 54CFFC6907B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CDAAFC69067
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  8 Mar 2023 13:28:37 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Wed,  8 Mar 2023 13:26:57 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 328AdNVJ004500; Wed, 8 Mar 2023 14:28:35 +0100
+ 328AFgcg019709; Wed, 8 Mar 2023 14:26:55 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=DaC2AyU8eTDRsNnd8dGJAzL4La1oBET4qQlQd6pJnFA=;
- b=zYMq2s8fNy0xHlHhTgrXaZ122SOZyaWc4/rkJeesZhfOEn8TGrD4T2SudYn4heoJJAzU
- PWQbSV7YSOtzxi1IgYbkiFU0IpS4jd7Gp322XhBaSbi+6xu0CHyst15tusIpBchr0Qx6
- Y+I7WuiNGez78GPiaxQdklE53K4u/cf/BJ8SpEqHNxsmFX5cO9BXMTEkfEORhNJm1RKF
- vW+FldWAQF3Oq6q8bJO9dvCc1AXuHP1Uo/A/+NQd/8FEUZ4c3jauG8NEKh1t7zh/s2zX
- jfOK0iOKdsPuKmmrTXjNm7Rpv7zGMKYjAU4OELwnY7MsfMWYxf8foaB7vV4bZBKvEVqz fw== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=MatEM9MsoTwvppA7huUnlE93Q1P4ewB5PhwoO6cEb+g=;
+ b=gxnYFZLjUNzUsp9xXcf+Vh35vvG58Gp1oBeCCuiKTZsgxncOG1C8+8H+mj5XqL35zovQ
+ 0N8WMGd80GUrRaThOpX71oVQqzxXoEc/WuvA+ZI/p5hsBfI01vO0afLQ5sMM0eHjFQlQ
+ BZRKPjciFlQfYiF6djPoLhkQYsmBOQYVyenb1op8WAkZTVnQRdrKvZKuQ4x/C6a4cFSA
+ vpQ6zyObbXANhcy1/c0UOZclM2G1/fX2Xk2eSIwOa0VuJ/hUbq1RgTKVUpFeZK0UnF7o
+ lGS0/spySQ3+TqEB535FS0Q4N7e9HSF8qt4tT1Bu8S1FBJrgfHtq3ueUe0w8nHFrut/7 Ng== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3p6fg14c47-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3p6fdrmdqf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Mar 2023 14:28:35 +0100
+ Wed, 08 Mar 2023 14:26:55 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B4D1A100038;
- Wed,  8 Mar 2023 14:26:53 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D079510002A;
+ Wed,  8 Mar 2023 14:26:52 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A3D7B2171C3;
- Wed,  8 Mar 2023 14:26:53 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8291E2138EC;
+ Wed,  8 Mar 2023 14:26:52 +0100 (CET)
 Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Wed, 8 Mar
- 2023 14:26:50 +0100
+ 2023 14:26:51 +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 8 Mar 2023 14:26:46 +0100
-Message-ID: <20230308132649.355398-1-patrick.delaunay@foss.st.com>
+Date: Wed, 8 Mar 2023 14:26:47 +0100
+Message-ID: <20230308142555.1.I43130d8c0b1b4b863e2cbd9bcb26e07e44e5e235@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230308132649.355398-1-patrick.delaunay@foss.st.com>
+References: <20230308132649.355398-1-patrick.delaunay@foss.st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.48.0.157]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
@@ -57,8 +59,7 @@ Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [Uboot-stm32] [PATCH 0/2] efi: remove error in
-	efi_disk_probe/efi_disk_remove
+Subject: [Uboot-stm32] [PATCH 1/2] efi: remove error in efi_disk_probe
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,124 +76,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+EFI has no reason to block the dm core device_probe() in the callback
+efi_disk_probe() registered with EVT_DM_POST_PROBE.
 
-Proposed serie after investigate crash:
-- board stm32mp157c-dk2, including a USB HUB 4 ports
-- 2 USB key on the USB HUB (same PID/VID)
-- multiple command usb start/usb stop
+This patch avoids to have error in DM core on device_probe()
 
-Without these patches, U-Boot failed to probe / failed to unbind the 2nd
-key and crash in USB stack, usb_find_usb2_hub_address_port()
+  ret = device_notify(dev, EVT_DM_POST_PROBE);
 
-When the probe for USB child failed, the unbind failed also.
-For example when PSCI stack can't handle 2 devices with the same EFI
-handle based on PIDVID for USB device.
+only because EFI is not able to create its instance/handle.
 
-On the "usb stop" command, the USB tree becomes invalid as the EFI
-stack forbids to remove the USB devices, the USB are still present
-(checked with "dm tree" command).
+For example on usb start, when the SAME KEY (PID/VID) is present on
+2 ports of the USB HUB, the 2nd key have the same EFI device path
+with the call stack:
 
-On the next USB start, on USB scan, when the USB devices children of
-USB HUB are added dynamically, the USB stack crashes...
+efi_disk_probe()
+	efi_disk_create_raw()
+		efi_disk_add_dev()
+			efi_install_multiple_protocol_interfaces()
+				EFI_ALREADY_STARTED
 
-I propose to remove the return error in efi_disk_probe/efi_disk_remove
-and to replace them by log_error
-=> even if EFI can't export the devices, the device should be
-   available for U-Boot proper and the probe should be complete properly
-   (the 2nd USB keys are see in dm tree in the example)
+In case of error in probe, the 2nd key is unbound and deactivated for
+the next usb commands even if the limitation is only for EFI.
 
-Sequence to reproduce the issue with 2 identical USB key
+This patch removes any return error in probe event callback;
+if something occurs in EFI registration, the device is still probed.
 
-STM32MP> usb start && usb tree && usb stop && usb start && usb tree
-         && usb stop && usb start && usb tree && usb stop
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-starting USB...
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800d000 for devices...
-Adding disk for usb_mass_storage.lun0 failed (err=-2147483628/0x80000014)
-device 'usb_mass_storage.lun0' failed to unbind
-3 USB Device(s) found
-device 'usb_mass_storage.lun0' failed to unbind
-       scanning usb for storage devices... 2 Storage Device(s) found
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Hub (480 Mb/s, 2mA)
-    |
-    +-3  Mass Storage (480 Mb/s, 200mA)
-    |    Generic Mass Storage 81ED9AA7
-    |
-stopping USB..
-device 'usb_mass_storage.lun0' failed to unbind
-device 'usb_mass_storage' failed to unbind
-device 'usb_hub' failed to unbind
-starting USB...
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800d000 for devices...
-Adding disk for usb_mass_storage.lun0 failed (err=-2147483628/0x80000014)
-device 'usb_mass_storage.lun0' failed to unbind
-3 USB Device(s) found
-device 'usb_mass_storage.lun0' failed to unbind
-       scanning usb for storage devices... 2 Storage Device(s) found
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Hub (480 Mb/s, 2mA)
-    |
-    +-3  Mass Storage (480 Mb/s, 200mA)
-    |    Generic Mass Storage 81ED9AA7
-    |
-stopping USB..
-starting USB...
-Bus usb@5800d000: scanning bus usb@5800d000 for devices... data abort
-pc : [<ddb3e7b6>]	   lr : [<ddb3e7b7>]
-reloc pc : [<c01227b6>]	   lr : [<c01227b7>]
-sp : dbafa708  ip : dbb54cc0	 fp : dbafa780
-r10: dbafac40  r9 : dbb19e80	 r8 : 00000000
-r7 : dbafa727  r6 : dbafa726	 r5 : dbb40fc0  r4 : dbafac40
-r3 : 00000001  r2 : dbafa726	 r1 : dbafa727  r0 : 00000000
-Flags: nZCv  IRQs off  FIQs off  Mode SVC_32 (T)
-Code: 592c 4628 f008 ff1d (6843) 2b03
-Resetting CPU ...
+ lib/efi_loader/efi_disk.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-After the 2 patches, with the 2 SAME keys on the USB HUB
-the EFI handle is not created, with error in trace,
-BUT the USB key is available in U-Boot proper.
-
-STM32MP> usb start && usb tree && usb stop
-starting USB...
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800d000 for devices...
-Adding disk for usb_mass_storage.lun0 failed (err=-2147483628/0x80000014)
-efi_disk_create_raw usb_mass_storage.lun0 failed (-2)
-4 USB Device(s) found
-       scanning usb for storage devices... 2 Storage Device(s) found
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Hub (480 Mb/s, 2mA)
-    |
-    +-3  Mass Storage (480 Mb/s, 200mA)
-    |    Generic Mass Storage 81ED9AA7
-    |
-    +-4  Mass Storage (480 Mb/s, 200mA)
-         Generic Mass Storage C3EAEAD2
-
-stopping USB..
-efi_disk_remove failed for usb_mass_storage.lun0 uclass 22 (-1)
-efi_disk_remove failed for usb_mass_storage.lun0:1 uclass 73 (-1)
-
-
-Patrick Delaunay (2):
-  efi: remove error in efi_disk_probe
-  efi: remove error in efi_disk_remove
-
- lib/efi_loader/efi_disk.c | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
-
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index d2256713a8e7..8d53ba3bd27e 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -677,14 +677,18 @@ int efi_disk_probe(void *ctx, struct event *event)
+ 	desc = dev_get_uclass_plat(dev);
+ 	if (desc->uclass_id != UCLASS_EFI_LOADER) {
+ 		ret = efi_disk_create_raw(dev, agent_handle);
+-		if (ret)
+-			return -1;
++		if (ret) {
++			log_err("efi_disk_create_raw %s failed (%d)\n",
++				dev->name, ret);
++			return 0;
++		}
+ 	}
+ 
+ 	device_foreach_child(child, dev) {
+ 		ret = efi_disk_create_part(child, agent_handle);
+ 		if (ret)
+-			return -1;
++			log_err("efi_disk_create_part %s failed (%d)\n",
++				dev->name, ret);
+ 	}
+ 
+ 	return 0;
 -- 
 2.25.1
 

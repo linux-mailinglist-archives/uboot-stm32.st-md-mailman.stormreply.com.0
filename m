@@ -2,62 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB5A16B1F04
-	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Mar 2023 09:57:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C40F66B2207
+	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Mar 2023 11:58:45 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90753C6A609;
-	Thu,  9 Mar 2023 08:57:25 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8746DC6A609;
+	Thu,  9 Mar 2023 10:58:45 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 196E8C6A5FD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EE68EC6A5FD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  9 Mar 2023 08:57:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1678352238; i=xypron.glpk@gmx.de;
- bh=iK1hnL0yWT8zr6tcSP9QWJgbAx+SrAI1MCBsT8o7cq4=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=qE3o4l1A4FGpnRGLHCpfwArlTKTJLwlN0LvBDh2Q7gg7xlCAtK2ZssA5a3FmeYn2j
- FP4yllTWiyFbdmckV54r42B/kwvxMTHshQcF+8pnz0sig1NPhOeUHVHW7n2pM9DTz1
- EXkIeHCjIg+tqGbykQLzHhMtduYcJ63NCmAJIfdP0icEBNrMhdTHcyiSPvutcn9iOW
- nXrihfFje0sY6frhST/dpnLwXQEk8wcl/HQHeYVWJI803rIKkB4P/S8i+PDTAx4YPz
- 7IXoPeBEjl/P8bZf6V1org+cmKyb4OyvOsV1O1AlrAZLf8ItBGFKnGC4K1ApiHOjVn
- ycp/FA5ix5wOA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([88.152.145.137]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTAFb-1pzr0510d5-00Ubxb; Thu, 09
- Mar 2023 09:57:18 +0100
-Message-ID: <b5c22f81-4312-9d0b-d87d-19ddb4f95833@gmx.de>
-Date: Thu, 9 Mar 2023 09:57:17 +0100
+ Thu,  9 Mar 2023 10:58:43 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3299hKtZ031558; Thu, 9 Mar 2023 11:58:41 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=ItdAAodqIhVaLs6Crefo2w59ab5qDYuZU9YAvywRBmg=;
+ b=xfStmHNZM989s0Fic/DxgEzAjv2wLCD+UcFK+V7mrYdQ0BGRK7L64fVTN0oM7/THSOiF
+ RN7YdvQplYq74jOgyLUFeuMzRnuVMlgXyKPH4XCL+4kvx+n7u6Dpci9qUOCn/nisUN0e
+ ho1wsZVf1nBIWqNKVIYYfRz5nUopOx+vFaCSIYN6MnOodihuD9HyzVTP9CTq+1FYpg5G
+ 8jXYccxc1tN7mc4Nzmd1ebyWtW3jXoZOUVV4ymBsHYaKMyAVY813AzxxuG+G63A2PTAM
+ ybDI9kLOeM3LMzPybzeDC6Hk79HJYS8MaZuz/Y1gqEbzn+4gO/dk1YFVv931bJTWxBO5 oA== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3p6fdru87y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Mar 2023 11:58:41 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AA7D910002A;
+ Thu,  9 Mar 2023 11:58:38 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A35982132C8;
+ Thu,  9 Mar 2023 11:58:38 +0100 (CET)
+Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Thu, 9 Mar
+ 2023 11:58:35 +0100
+Message-ID: <b69d5da5-42a3-aeb9-31b0-89d1ac1eeda4@foss.st.com>
+Date: Thu, 9 Mar 2023 11:58:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+ Thunderbird/102.7.1
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 References: <20230308132649.355398-1-patrick.delaunay@foss.st.com>
  <20230308142555.1.I43130d8c0b1b4b863e2cbd9bcb26e07e44e5e235@changeid>
+ <b5c22f81-4312-9d0b-d87d-19ddb4f95833@gmx.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230308142555.1.I43130d8c0b1b4b863e2cbd9bcb26e07e44e5e235@changeid>
-X-Provags-ID: V03:K1:V7TIGPJ/DOfAXh1CkkA10mJ4P6ItcsSaUCpzYS0Rf4qnvGdElCI
- OZ+3tkEa0/w0st/Ld9Jv20veLaC7g1VnjxWNp3HYG46+9sD91la47xnohFjMoZoWSMVEp2h
- tihnesj9HM5SUjcJjnalwsPszgzYfsA+rMVo1VZGzhwCUrOwAUgOmn3DghVLfoyf9s6qE/n
- lQr5981Kv51xLRYA808BA==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:afqyr/zrD0M=;crndkYLQwXQsqM77o8FtRdhPUZ2
- HqbFRsIA9+tCx8UX1UJ1D/TGOhklqXQD+tH/vYVzzxDVWjyRWy5elEHztqQX4660aVLn79vM4
- uE9cx9UUcQE9o1oJBe+bS5GrzwHdyfINING01PiEkrYiYBRvjG9XDCEoS3RxRPAUXvJNH6IG6
- Ji+ZuSjD4+Nzg5p3wZv2vdR4CTbsaOPcykyfZMiLxq46b2SYU4dCzhfz6yajXEfhpBhZ4ftwi
- yNY8RXT2iex/y07ZZCY+zw80QvOxlMJoJ7zpbnqoTUADFUfc4+WvF7sZZmBhF6Y4oWfTEHhsm
- 9KM71+V8HJD86cM+cyx2zlpB3Kl/QNNA7QRLcay6BH0JRQjEcUTYVVRrIA2dJUBZ5TiSkU49q
- zeRjUsV5o/sE42mu3E9WmEUW2+vhtyKTu+yEncUV8moRp44/J/VcmqFEJYWAYEXykZvhk1A5z
- WOIJeF8SspGdoI4x6AjYbX5N370pnzEo9SFTjCl9iobwxSUUPKVd5a4Q2e2Mm6+TjUWXpTnlY
- gDxmplW0dQl/GyWh196x35YW1s96oZ/JPDDsDAVJIXiE99O2BApA/Vr1W7HyYtH8e7l/7F5fL
- 6OQ8I0fY0149kzJkKt5S5IrWrN9KdBjCR6fK2j5G6GY2mkLxex10gLR9y9uLupjRYQkdPmr5Q
- +Uh6SeTLke24N5zjxTfvifSNTRaMGe5yJyZxElBihd33F/8ltP35hLNPBE2nW4Bpe0NJj19Cd
- VTnCytZbTHnwUyBcjXbJu27cm94H0c5Y0rq0jxBfLxk41j4pUwu4dqVEZrBc2ZjeANv9+YjXL
- lkHxFassvYLvPsRvq2pf0UUyXzWso5jJdXhV0wAWBQpRAvovRGenwwB/48IEsENoikYuv1KQc
- C5oO4CWcSL1u8DyPoSEiM7LbHuOBxd37R7Bn/dgJFnL+fTbe3PPBWJrwWhXEBuQsMjiM1p8VG
- fQXzfiyNHtv9lwPVW4kDkjvygh4=
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <b5c22f81-4312-9d0b-d87d-19ddb4f95833@gmx.de>
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-09_06,2023-03-08_03,2023-02-09_01
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -73,99 +74,81 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 3/8/23 14:26, Patrick Delaunay wrote:
-> EFI has no reason to block the dm core device_probe() in the callback
-> efi_disk_probe() registered with EVT_DM_POST_PROBE.
->
-> This patch avoids to have error in DM core on device_probe()
->
->    ret = device_notify(dev, EVT_DM_POST_PROBE);
->
-> only because EFI is not able to create its instance/handle.
-
-This should only occur if we are out of memory or if you call
-efi_disk_probe() twice for the same device.
-
-
->
-> For example on usb start, when the SAME KEY (PID/VID) is present on
-> 2 ports of the USB HUB, the 2nd key have the same EFI device path
-> with the call stack:
-
-We need the HUB device with its USB port in the device path.
-
-The way we currently create device paths is not good. We should traverse
-the dm tree to the root and create a node for each dm device. The code
-code for creating the individual nodes should be moved to uclasses.
-
-@Simon: is that ok for you?
-
->
-> efi_disk_probe()
-> 	efi_disk_create_raw()
-> 		efi_disk_add_dev()
-> 			efi_install_multiple_protocol_interfaces()
-> 				EFI_ALREADY_STARTED
-
-If we create the same device path for two USB devices, this is a bug we
-must fix.
-
->
-> In case of error in probe, the 2nd key is unbound and deactivated for
-> the next usb commands even if the limitation is only for EFI.
->
-> This patch removes any return error in probe event callback;
-> if something occurs in EFI registration, the device is still probed.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->   lib/efi_loader/efi_disk.c | 10 +++++++---
->   1 file changed, 7 insertions(+), 3 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index d2256713a8e7..8d53ba3bd27e 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -677,14 +677,18 @@ int efi_disk_probe(void *ctx, struct event *event)
->   	desc = dev_get_uclass_plat(dev);
->   	if (desc->uclass_id != UCLASS_EFI_LOADER) {
->   		ret = efi_disk_create_raw(dev, agent_handle);
-> -		if (ret)
-> -			return -1;
-> +		if (ret) {
-> +			log_err("efi_disk_create_raw %s failed (%d)\n",
-> +				dev->name, ret);
-
-This isn't a message a non-developer can easily understand.
-
-> +			return 0;
-> +		}
->   	}
->
->   	device_foreach_child(child, dev) {
->   		ret = efi_disk_create_part(child, agent_handle);
->   		if (ret)
-> -			return -1;
-> +			log_err("efi_disk_create_part %s failed (%d)\n",
-
-ditto.
-
-Best regards
-
-Heinrich
-
-> +				dev->name, ret);
->   	}
->
->   	return 0;
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGksCgpPbiAzLzkvMjMgMDk6NTcsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6Cj4gT24gMy84
+LzIzIDE0OjI2LCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+PiBFRkkgaGFzIG5vIHJlYXNvbiB0
+byBibG9jayB0aGUgZG0gY29yZSBkZXZpY2VfcHJvYmUoKSBpbiB0aGUgY2FsbGJhY2sKPj4gZWZp
+X2Rpc2tfcHJvYmUoKSByZWdpc3RlcmVkIHdpdGggRVZUX0RNX1BPU1RfUFJPQkUuCj4+Cj4+IFRo
+aXMgcGF0Y2ggYXZvaWRzIHRvIGhhdmUgZXJyb3IgaW4gRE0gY29yZSBvbiBkZXZpY2VfcHJvYmUo
+KQo+Pgo+PiDCoMKgIHJldCA9IGRldmljZV9ub3RpZnkoZGV2LCBFVlRfRE1fUE9TVF9QUk9CRSk7
+Cj4+Cj4+IG9ubHkgYmVjYXVzZSBFRkkgaXMgbm90IGFibGUgdG8gY3JlYXRlIGl0cyBpbnN0YW5j
+ZS9oYW5kbGUuCj4KPiBUaGlzIHNob3VsZCBvbmx5IG9jY3VyIGlmIHdlIGFyZSBvdXQgb2YgbWVt
+b3J5IG9yIGlmIHlvdSBjYWxsCj4gZWZpX2Rpc2tfcHJvYmUoKSB0d2ljZSBmb3IgdGhlIHNhbWUg
+ZGV2aWNlLgoKCk9LCgoKPgo+Cj4+Cj4+IEZvciBleGFtcGxlIG9uIHVzYiBzdGFydCwgd2hlbiB0
+aGUgU0FNRSBLRVkgKFBJRC9WSUQpIGlzIHByZXNlbnQgb24KPj4gMiBwb3J0cyBvZiB0aGUgVVNC
+IEhVQiwgdGhlIDJuZCBrZXkgaGF2ZSB0aGUgc2FtZSBFRkkgZGV2aWNlIHBhdGgKPj4gd2l0aCB0
+aGUgY2FsbCBzdGFjazoKPgo+IFdlIG5lZWQgdGhlIEhVQiBkZXZpY2Ugd2l0aCBpdHMgVVNCIHBv
+cnQgaW4gdGhlIGRldmljZSBwYXRoLgoKCm9rCgoKc3RydWN0IGVmaV9kZXZpY2VfcGF0aF91c2Jf
+Y2xhc3MgewogwqDCoCDCoHN0cnVjdCBlZmlfZGV2aWNlX3BhdGggZHA7CiDCoMKgIMKgdTE2IHZl
+bmRvcl9pZDsKIMKgwqAgwqB1MTYgcHJvZHVjdF9pZDsKIMKgwqAgwqB1OCBkZXZpY2VfY2xhc3M7
+CiDCoMKgIMKgdTggZGV2aWNlX3N1YmNsYXNzOwogwqDCoCDCoHU4IGRldmljZV9wcm90b2NvbDsK
+fSBfX3BhY2tlZDsKCgpTbyBhIGNvcnJlY3Rpb24gbmVlZCB0byBiZSBkb25lIGluIAouL2xpYi9l
+ZmlfbG9hZGVyL2VmaV9kZXZpY2VfcGF0aC5jOmRwX2ZpbGwoKQoKIMKgwqDCoCBjYXNlIFVDTEFT
+U19NQVNTX1NUT1JBR0U6CiDCoMKgIMKgY2FzZSBVQ0xBU1NfVVNCX0hVQjoKCmFuZCAuL2xpYi9l
+ZmlfbG9hZGVyL2VmaV9kZXZpY2VfcGF0aF90b190ZXh0LmM6OmRwX21zZ2luZygpCgogwqDCoMKg
+IGNhc2UgREVWSUNFX1BBVEhfU1VCX1RZUEVfTVNHX1VTQl9DTEFTUwoKCnRvIGFkZCBVU0IgcG9y
+dCBvciBvdGhlciBpZGVudGlmaWVyICh1c2IgZGV2IG51bWJlciBmb3IgZXhhbXBsZSkgdG8gCmlk
+ZW50aWZ5IGVhY2ggZGV2aWNlCgphbmQgbm90IG9ubHkgdXNlIFBJRC9WSUQgYXMgdG9kYXkuCgoK
+Zm9yIGV4YW1wbGUgdXNlIGRldmljZSBJRCBhcyBpdCBpcyBkb25lCgpVQ0xBU1NfTlZNRSA9PiBk
+cC0+aGJhX3BvcnQgPSBkZXNjLT5kZXZudW07CgpVQ0xBU1NfSURFID0+IGRwLT5sb2dpY2FsX3Vu
+aXRfbnVtYmVyID0gZGVzYy0+ZGV2bnVtOwoKCj4KPiBUaGUgd2F5IHdlIGN1cnJlbnRseSBjcmVh
+dGUgZGV2aWNlIHBhdGhzIGlzIG5vdCBnb29kLiBXZSBzaG91bGQgdHJhdmVyc2UKPiB0aGUgZG0g
+dHJlZSB0byB0aGUgcm9vdCBhbmQgY3JlYXRlIGEgbm9kZSBmb3IgZWFjaCBkbSBkZXZpY2UuIFRo
+ZSBjb2RlCj4gY29kZSBmb3IgY3JlYXRpbmcgdGhlIGluZGl2aWR1YWwgbm9kZXMgc2hvdWxkIGJl
+IG1vdmVkIHRvIHVjbGFzc2VzLgoKCkkgdGhpbmsgdGhhdCB0aGUgVVNCIHBvcnQgbnVtYmVyIGNh
+biBiZSBmb3VuZCBpbiBVU0IgRE0gaW4gdXNiX2RldmljZTogCnVkZXYtPnBvcnRucgoKClBTOiBo
+dWJfYWRkcmVzcyBjYW4gYmUgYWxzbyBmb3VuZCB3aXRoIHVkZXYtPnBhcmVudC0+ZGV2bnVtOwoK
+Cj4KPiBAU2ltb246IGlzIHRoYXQgb2sgZm9yIHlvdT8KPgo+Pgo+PiBlZmlfZGlza19wcm9iZSgp
+Cj4+IMKgwqDCoMKgZWZpX2Rpc2tfY3JlYXRlX3JhdygpCj4+IMKgwqDCoMKgwqDCoMKgIGVmaV9k
+aXNrX2FkZF9kZXYoKQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVmaV9pbnN0YWxsX211bHRp
+cGxlX3Byb3RvY29sX2ludGVyZmFjZXMoKQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgRUZJX0FMUkVBRFlfU1RBUlRFRAo+Cj4gSWYgd2UgY3JlYXRlIHRoZSBzYW1lIGRldmljZSBw
+YXRoIGZvciB0d28gVVNCIGRldmljZXMsIHRoaXMgaXMgYSBidWcgd2UKPiBtdXN0IGZpeC4KCgpP
+SywKCgpzbyB5b3UgY2FuIGZvcmdldCBteSBzZXJpZQoKCj4KPj4KPj4gSW4gY2FzZSBvZiBlcnJv
+ciBpbiBwcm9iZSwgdGhlIDJuZCBrZXkgaXMgdW5ib3VuZCBhbmQgZGVhY3RpdmF0ZWQgZm9yCj4+
+IHRoZSBuZXh0IHVzYiBjb21tYW5kcyBldmVuIGlmIHRoZSBsaW1pdGF0aW9uIGlzIG9ubHkgZm9y
+IEVGSS4KPj4KPj4gVGhpcyBwYXRjaCByZW1vdmVzIGFueSByZXR1cm4gZXJyb3IgaW4gcHJvYmUg
+ZXZlbnQgY2FsbGJhY2s7Cj4+IGlmIHNvbWV0aGluZyBvY2N1cnMgaW4gRUZJIHJlZ2lzdHJhdGlv
+biwgdGhlIGRldmljZSBpcyBzdGlsbCBwcm9iZWQuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJp
+Y2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+IC0tLQo+Pgo+PiDC
+oCBsaWIvZWZpX2xvYWRlci9lZmlfZGlzay5jIHwgMTAgKysrKysrKy0tLQo+PiDCoCAxIGZpbGUg
+Y2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0
+IGEvbGliL2VmaV9sb2FkZXIvZWZpX2Rpc2suYyBiL2xpYi9lZmlfbG9hZGVyL2VmaV9kaXNrLmMK
+Pj4gaW5kZXggZDIyNTY3MTNhOGU3Li44ZDUzYmEzYmQyN2UgMTAwNjQ0Cj4+IC0tLSBhL2xpYi9l
+ZmlfbG9hZGVyL2VmaV9kaXNrLmMKPj4gKysrIGIvbGliL2VmaV9sb2FkZXIvZWZpX2Rpc2suYwo+
+PiBAQCAtNjc3LDE0ICs2NzcsMTggQEAgaW50IGVmaV9kaXNrX3Byb2JlKHZvaWQgKmN0eCwgc3Ry
+dWN0IGV2ZW50ICpldmVudCkKPj4gwqDCoMKgwqDCoCBkZXNjID0gZGV2X2dldF91Y2xhc3NfcGxh
+dChkZXYpOwo+PiDCoMKgwqDCoMKgIGlmIChkZXNjLT51Y2xhc3NfaWQgIT0gVUNMQVNTX0VGSV9M
+T0FERVIpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldCA9IGVmaV9kaXNrX2NyZWF0ZV9yYXco
+ZGV2LCBhZ2VudF9oYW5kbGUpOwo+PiAtwqDCoMKgwqDCoMKgwqAgaWYgKHJldCkKPj4gLcKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC0xOwo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKHJldCkg
+ewo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2dfZXJyKCJlZmlfZGlza19jcmVhdGVfcmF3
+ICVzIGZhaWxlZCAoJWQpXG4iLAo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRl
+di0+bmFtZSwgcmV0KTsKPgo+IFRoaXMgaXNuJ3QgYSBtZXNzYWdlIGEgbm9uLWRldmVsb3BlciBj
+YW4gZWFzaWx5IHVuZGVyc3RhbmQuCj4KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJu
+IDA7Cj4+ICvCoMKgwqDCoMKgwqDCoCB9Cj4+IMKgwqDCoMKgwqAgfQo+Pgo+PiDCoMKgwqDCoMKg
+IGRldmljZV9mb3JlYWNoX2NoaWxkKGNoaWxkLCBkZXYpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+IHJldCA9IGVmaV9kaXNrX2NyZWF0ZV9wYXJ0KGNoaWxkLCBhZ2VudF9oYW5kbGUpOwo+PiDCoMKg
+wqDCoMKgwqDCoMKgwqAgaWYgKHJldCkKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJu
+IC0xOwo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsb2dfZXJyKCJlZmlfZGlza19jcmVhdGVf
+cGFydCAlcyBmYWlsZWQgKCVkKVxuIiwKPgo+IGRpdHRvLgo+Cj4gQmVzdCByZWdhcmRzCj4KPiBI
+ZWlucmljaAo+Cj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZGV2LT5uYW1lLCBy
+ZXQpOwo+PiDCoMKgwqDCoMKgIH0KPj4KPj4gwqDCoMKgwqDCoCByZXR1cm4gMDsKCgpQYXRyaWNr
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
+dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
+Ym9vdC1zdG0zMgo=

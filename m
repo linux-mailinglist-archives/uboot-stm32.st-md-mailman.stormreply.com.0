@@ -2,65 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9064B6B1EF9
-	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Mar 2023 09:54:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CB5A16B1F04
+	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Mar 2023 09:57:25 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 44A4EC6A609;
-	Thu,  9 Mar 2023 08:54:38 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90753C6A609;
+	Thu,  9 Mar 2023 08:57:25 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 30DD0C6A5FD
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 196E8C6A5FD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  9 Mar 2023 08:54:36 +0000 (UTC)
+ Thu,  9 Mar 2023 08:57:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1678352073; i=xypron.glpk@gmx.de;
- bh=66YSM2e/gF7sTziVYynOO4XtbRMgBLoTVS11BCVPoyk=;
+ t=1678352238; i=xypron.glpk@gmx.de;
+ bh=iK1hnL0yWT8zr6tcSP9QWJgbAx+SrAI1MCBsT8o7cq4=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=dPlWPiWmjvxA+wWBZxeZzRyOgKhvlehZDiMcH1ys4xHhVPhelXASPoT1PFJOYPNLR
- zZByRNFw9iaHhdk4LmYEr/zSpOfbXXAk6GjI4yPjeCwx0zCQsylZvb+F4mnHcc1K8X
- IhCdAtEK7dxEHFdBHeLz9UOQ73HMyVwBZ7t8crY0s1kcc/5qD1f/EetLMorct1FqRM
- Q/bM9u8xTtW6BFuZvgpcHWUSUAi+o2vjAhroNfxlz4lIz2NQnBkUripDvTyt77U7e+
- SzF62Ke5XzJFYND1BHKS7l7L4g40t2H23OAeiwKQNCU8jGQ4yKP6GMjdpd0TSGbmmk
- k2ekuD1xjL9jw==
+ b=qE3o4l1A4FGpnRGLHCpfwArlTKTJLwlN0LvBDh2Q7gg7xlCAtK2ZssA5a3FmeYn2j
+ FP4yllTWiyFbdmckV54r42B/kwvxMTHshQcF+8pnz0sig1NPhOeUHVHW7n2pM9DTz1
+ EXkIeHCjIg+tqGbykQLzHhMtduYcJ63NCmAJIfdP0icEBNrMhdTHcyiSPvutcn9iOW
+ nXrihfFje0sY6frhST/dpnLwXQEk8wcl/HQHeYVWJI803rIKkB4P/S8i+PDTAx4YPz
+ 7IXoPeBEjl/P8bZf6V1org+cmKyb4OyvOsV1O1AlrAZLf8ItBGFKnGC4K1ApiHOjVn
+ ycp/FA5ix5wOA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([88.152.145.137]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7iCg-1qegVm3sLS-014hP8; Thu, 09
- Mar 2023 09:54:33 +0100
-Message-ID: <26d224e8-ef95-1380-4909-2585e0a5295a@gmx.de>
-Date: Thu, 9 Mar 2023 09:54:32 +0100
+Received: from [192.168.123.67] ([88.152.145.137]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTAFb-1pzr0510d5-00Ubxb; Thu, 09
+ Mar 2023 09:57:18 +0100
+Message-ID: <b5c22f81-4312-9d0b-d87d-19ddb4f95833@gmx.de>
+Date: Thu, 9 Mar 2023 09:57:17 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>
 References: <20230308132649.355398-1-patrick.delaunay@foss.st.com>
- <20230308142555.2.Ie4c0c26b9f9564443ab4eb36059d16195af15fe5@changeid>
+ <20230308142555.1.I43130d8c0b1b4b863e2cbd9bcb26e07e44e5e235@changeid>
+Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20230308142555.2.Ie4c0c26b9f9564443ab4eb36059d16195af15fe5@changeid>
-X-Provags-ID: V03:K1:W+yajC0gbzspkMqYeHKsxsKASo6ztWKQiMHgdYBpH0SakltQv55
- VvrGIo7dVhpIwPysrJvv3pRqcbQWahJeTgeZMTt5auFPLBF43Sf3tbVE7L2VwFYezg9Tdi7
- DvuM23NM7kyQDG2RLWWnMxjRS/sGvTkgp4x9T2XUDgPbX5ckqg2dIw6baceP364YqHjRW2t
- IuY39pIYtPOX4c+WUo2cA==
+In-Reply-To: <20230308142555.1.I43130d8c0b1b4b863e2cbd9bcb26e07e44e5e235@changeid>
+X-Provags-ID: V03:K1:V7TIGPJ/DOfAXh1CkkA10mJ4P6ItcsSaUCpzYS0Rf4qnvGdElCI
+ OZ+3tkEa0/w0st/Ld9Jv20veLaC7g1VnjxWNp3HYG46+9sD91la47xnohFjMoZoWSMVEp2h
+ tihnesj9HM5SUjcJjnalwsPszgzYfsA+rMVo1VZGzhwCUrOwAUgOmn3DghVLfoyf9s6qE/n
+ lQr5981Kv51xLRYA808BA==
 X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:HpDjL5lycNc=;OJl9iOuF+C9ZYuBQeM+f5PsIzEe
- PISLyszwtbjZXN6kvwPR/KjIHw5DCp9XDIEWfaItyuaefMMsuoAEZ0iH8e5ttfte7GgwLaMx9
- lKF4xLP6vjLr3eUkpu6Skk8gDHmQDnMGSpKaM/Af7FoFNmigNjP//ToW0LDzmVpON8sjHscgD
- RzkNyUrSjXmQZKJxUNI+PeiV1vP4dzPLDlY4i+3w4zLORTWNehwP9bIFL58FsFBIirhxwmFwM
- vHLf2BKL42VDbRZKZ+D39r0QLWVQ4jXBp4zQXXfjFYhl0OTAyz4xlcRHOvUExkSnYjnZ2bcqv
- AqW2mjBskm+HBT0LDViOviHeVd62mCT5ul+VKNTrafx/IMFj2up2qlER4Un8ayjSnxuyLiS4u
- UtPeIxUYiQzx9iyl5aMo4AoC1vLrSX3ubtnwSCL2Uh3weiX977R8SwLpezKZlRisGNQpiC+t0
- S6Mi4cBP+COjH+co3HlfGZPcMh+U6bD6kIky9WQKe9jOu6knEKH0cnITIsVoceK59w2a8AuqC
- gMT4eHkRcs2KouLN98eiDtly6qfVkqjPBRIGOXN4f38xXPn6HTRLhDhGYNgsCFsD4qI5z3IcQ
- r6+rIGi7uf0qrIsNWNiIQZI3UryJ4iqbjxdfpnDjZRzS2eSCzi39DnJ05mKKCGjSBd89pk1qm
- A3eTQLLALdCtAtlf8N577GpcRI6x6jTAV3mqWS5t2kfiw9el4nsUUjz0P6wfQUkrKS1LT8dvg
- Okrnu3a71yq0Spam54YSJw0mcB21sT4QxdgvgpPP5yNkFIwYKZOSi8xCxCwrZYMF7iGjQ+o4u
- K5dwZdwQi3QWCoELfXVrdUp6nRejGs+GdGLUUXvyndJFvfqSWK6Bt7BlnXjU6ACsAK7ob+avB
- tjicecCLeL1E2B13MTR/J6JMMf3DHWfBnup3849JrIhqsBwvNX69qgQvuTHgR24sZpWZW7uAX
- 1h/SF418M4rPK1K1WUpSOtftOWE=
+UI-OutboundReport: notjunk:1;M01:P0:afqyr/zrD0M=;crndkYLQwXQsqM77o8FtRdhPUZ2
+ HqbFRsIA9+tCx8UX1UJ1D/TGOhklqXQD+tH/vYVzzxDVWjyRWy5elEHztqQX4660aVLn79vM4
+ uE9cx9UUcQE9o1oJBe+bS5GrzwHdyfINING01PiEkrYiYBRvjG9XDCEoS3RxRPAUXvJNH6IG6
+ Ji+ZuSjD4+Nzg5p3wZv2vdR4CTbsaOPcykyfZMiLxq46b2SYU4dCzhfz6yajXEfhpBhZ4ftwi
+ yNY8RXT2iex/y07ZZCY+zw80QvOxlMJoJ7zpbnqoTUADFUfc4+WvF7sZZmBhF6Y4oWfTEHhsm
+ 9KM71+V8HJD86cM+cyx2zlpB3Kl/QNNA7QRLcay6BH0JRQjEcUTYVVRrIA2dJUBZ5TiSkU49q
+ zeRjUsV5o/sE42mu3E9WmEUW2+vhtyKTu+yEncUV8moRp44/J/VcmqFEJYWAYEXykZvhk1A5z
+ WOIJeF8SspGdoI4x6AjYbX5N370pnzEo9SFTjCl9iobwxSUUPKVd5a4Q2e2Mm6+TjUWXpTnlY
+ gDxmplW0dQl/GyWh196x35YW1s96oZ/JPDDsDAVJIXiE99O2BApA/Vr1W7HyYtH8e7l/7F5fL
+ 6OQ8I0fY0149kzJkKt5S5IrWrN9KdBjCR6fK2j5G6GY2mkLxex10gLR9y9uLupjRYQkdPmr5Q
+ +Uh6SeTLke24N5zjxTfvifSNTRaMGe5yJyZxElBihd33F/8ltP35hLNPBE2nW4Bpe0NJj19Cd
+ VTnCytZbTHnwUyBcjXbJu27cm94H0c5Y0rq0jxBfLxk41j4pUwu4dqVEZrBc2ZjeANv9+YjXL
+ lkHxFassvYLvPsRvq2pf0UUyXzWso5jJdXhV0wAWBQpRAvovRGenwwB/48IEsENoikYuv1KQc
+ C5oO4CWcSL1u8DyPoSEiM7LbHuOBxd37R7Bn/dgJFnL+fTbe3PPBWJrwWhXEBuQsMjiM1p8VG
+ fQXzfiyNHtv9lwPVW4kDkjvygh4=
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] efi: remove error in efi_disk_remove
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] efi: remove error in efi_disk_probe
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,66 +79,91 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 3/8/23 14:26, Patrick Delaunay wrote:
-> EFI has no reason to block the driver remove when the associated EFI
-> resources failed to be released.
+> EFI has no reason to block the dm core device_probe() in the callback
+> efi_disk_probe() registered with EVT_DM_POST_PROBE.
 >
-> This patch avoids DM issue when an EFI resource can't be released,
-> for example if this resource wasn't created, for duplicated device name
-> (error EFI_ALREADY_STARTED).
+> This patch avoids to have error in DM core on device_probe()
 >
-> Without this patch, the U-Boot device tree is not updated for "usb stop"
-> command because EFI stack can't free a resource; in usb_stop(), the
-> remove operation is stopped on first device_remove() error, including a
-> device_notify() error on any chil
-The typical reason to return an error here is that the EFI device is
-still in use, i.e. a protocol installed on the EFI handle is opened by a
-child controller or driver. As long as the EFI handle cannot be removed
-we must not remove the linked DM device or we corrupt our data model.
+>    ret = device_notify(dev, EVT_DM_POST_PROBE);
+>
+> only because EFI is not able to create its instance/handle.
+
+This should only occur if we are out of memory or if you call
+efi_disk_probe() twice for the same device.
+
+
+>
+> For example on usb start, when the SAME KEY (PID/VID) is present on
+> 2 ports of the USB HUB, the 2nd key have the same EFI device path
+> with the call stack:
+
+We need the HUB device with its USB port in the device path.
+
+The way we currently create device paths is not good. We should traverse
+the dm tree to the root and create a node for each dm device. The code
+code for creating the individual nodes should be moved to uclasses.
+
+@Simon: is that ok for you?
+
+>
+> efi_disk_probe()
+> 	efi_disk_create_raw()
+> 		efi_disk_add_dev()
+> 			efi_install_multiple_protocol_interfaces()
+> 				EFI_ALREADY_STARTED
+
+If we create the same device path for two USB devices, this is a bug we
+must fix.
+
+>
+> In case of error in probe, the 2nd key is unbound and deactivated for
+> the next usb commands even if the limitation is only for EFI.
+>
+> This patch removes any return error in probe event callback;
+> if something occurs in EFI registration, the device is still probed.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+>   lib/efi_loader/efi_disk.c | 10 +++++++---
+>   1 file changed, 7 insertions(+), 3 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index d2256713a8e7..8d53ba3bd27e 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -677,14 +677,18 @@ int efi_disk_probe(void *ctx, struct event *event)
+>   	desc = dev_get_uclass_plat(dev);
+>   	if (desc->uclass_id != UCLASS_EFI_LOADER) {
+>   		ret = efi_disk_create_raw(dev, agent_handle);
+> -		if (ret)
+> -			return -1;
+> +		if (ret) {
+> +			log_err("efi_disk_create_raw %s failed (%d)\n",
+> +				dev->name, ret);
+
+This isn't a message a non-developer can easily understand.
+
+> +			return 0;
+> +		}
+>   	}
+>
+>   	device_foreach_child(child, dev) {
+>   		ret = efi_disk_create_part(child, agent_handle);
+>   		if (ret)
+> -			return -1;
+> +			log_err("efi_disk_create_part %s failed (%d)\n",
+
+ditto.
 
 Best regards
 
 Heinrich
 
+> +				dev->name, ret);
+>   	}
 >
-> And this remove error, returned by usb_stop(), is not managed in cmd/usb.c
-> and the next "usb start" command cause a crash because all the USB devices
-> need to be released before the next USB scan.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->   lib/efi_loader/efi_disk.c | 12 ++++++++----
->   1 file changed, 8 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index 8d53ba3bd27e..22a0035dcde2 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -767,16 +767,20 @@ int efi_disk_remove(void *ctx, struct event *event)
->   {
->   	enum uclass_id id;
->   	struct udevice *dev;
-> +	int ret = 0;
->
->   	dev = event->data.dm.dev;
->   	id = device_get_uclass_id(dev);
->
->   	if (id == UCLASS_BLK)
-> -		return efi_disk_delete_raw(dev);
-> +		ret = efi_disk_delete_raw(dev);
->   	else if (id == UCLASS_PARTITION)
-> -		return efi_disk_delete_part(dev);
-> -	else
-> -		return 0;
-> +		ret = efi_disk_delete_part(dev);
-> +
-> +	if (ret)
-> +		log_err("%s failed for %s uclass %u (%d)\n", __func__, dev->name, id, ret);
-> +
-> +	return 0;
->   }
->
->   /**
+>   	return 0;
 
 _______________________________________________
 Uboot-stm32 mailing list

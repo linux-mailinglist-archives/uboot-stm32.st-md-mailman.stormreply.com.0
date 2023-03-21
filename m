@@ -2,67 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C658A6BF043
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Mar 2023 18:59:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D766A6C3219
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Mar 2023 13:58:22 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 72CCEC69067;
-	Fri, 17 Mar 2023 17:59:09 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 88793C6A5EF;
+	Tue, 21 Mar 2023 12:58:22 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D0B50C0356E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7EEBDC65049
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Mar 2023 17:59:07 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue, 21 Mar 2023 12:58:21 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 32HF1hT2032362; Fri, 17 Mar 2023 18:58:59 +0100
+ 32LA8hht012836; Tue, 21 Mar 2023 13:58:15 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=uERbMDazf5RJJ6uJDq+DGREOfNa509Am4jGGi0Oz7wI=;
- b=R/1CcDe6EQPcCt6BsjnHmzb3nkjIi+GVxaLqbjZAHUaMMBkOP9rgw7oYhWmGIo4RPc6G
- SXuNKoxgW3caIFtI+ERsW+Uuq0w9+iQVY2zJPQOTmWAn3phxDdpEmf9++uuvA+JQPWoY
- lwaDUPfDHmv314DGGUr2XViN9/80QqHZWLi20rVPGbnJHeVLzlhs8If5Sn3Wxr0RxlLi
- 44lyl4iMWS7YLnbY42ZhP0l/9YaJniIJ2hFM3oMc86ExprKv47urOe/FO2c0+AFwvyr8
- cWywVHQiEHVpU/MDIue/6qzQU8uYVuEzIcADEl4orfODJIGCGma/Foz8IdVaswsGbczg 4A== 
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=aBUTiA9WcTqgrlNqRJlVBzIcbre8LkWzGKIt88mC2Tw=;
+ b=c1F1LHWYYxSe5MTFu7N6qfmJ3d+qHH01+uQ3/saYFDjpQEWTkQufzlu9muDOKX2BRNW9
+ iViUcxTnofk/VxBf1+iaenQ4KOxU0uPVMP1T4CBQTUTQ+Y39a3UjTTbAFGH0nQmvKhJT
+ 6cbgAB8VsqeCTl3pSgtuajLIdJPaDVrCVsFGBmpufHvNrOC/i9qv0tUVeEEHqIaOu2Ey
+ YLviFfar+M4Kb8ZN3hsD55SOoK06YmhcNz1IabZh2eAuuX5ZVUS42he3wA/QckC9QNiL
+ yaSdrl0EcMw1zfw11fQQGpFb8ntQKc9xhJz9S9i5vfOidFEEDDvvrRferScBGbBPPHF+ HQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pcn2taxfk-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pfajs955w-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Mar 2023 18:58:59 +0100
+ Tue, 21 Mar 2023 13:58:15 +0100
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 91BEF100034;
- Fri, 17 Mar 2023 18:58:57 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5C1EB10002A;
+ Tue, 21 Mar 2023 13:58:13 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7D84B22D18D;
- Fri, 17 Mar 2023 18:58:57 +0100 (CET)
-Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Fri, 17 Mar
- 2023 18:58:57 +0100
-Message-ID: <90eea0aa-a715-99e2-4c55-72f0017e3882@foss.st.com>
-Date: Fri, 17 Mar 2023 18:58:56 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 55031208D6C;
+ Tue, 21 Mar 2023 13:58:13 +0100 (CET)
+Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Tue, 21 Mar
+ 2023 13:58:13 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-References: <20221128102154.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20221128102154.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
+Date: Tue, 21 Mar 2023 13:58:08 +0100
+Message-ID: <20230321135805.1.I2a3a1c4e853d66857091cbef8d3a2ec87d65daba@changeid>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-17_14,2023-03-16_02,2023-02-09_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Boris Brezillon <bbrezillon@kernel.org>, Lukasz Majewski <lukma@denx.de>,
- Christophe KERELLO <christophe.kerello@foss.st.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: Re: [Uboot-stm32] [PATCH] dfu: mtd: mark bad the MTD block on erase
-	error
+ definitions=2023-03-21_08,2023-03-21_01,2023-02-09_01
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Mark Millard <marklmi@yahoo.com>, Sjoerd Simons <sjoerd@collabora.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [Uboot-stm32] [PATCH 1/2] lmb: Fix LMB_MEMORY_REGIONS flag usage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,93 +72,92 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
+Remove test on CONFIG_LMB_MEMORY_REGIONS introduced by commit
+7c1860fce4e3 ("lmb: Fix lmb property's defination under struct lmb").
 
-On 11/28/22 10:22, Patrick Delaunay wrote:
-> In the MTD DFU backend, it is needed to mark the NAND block bad when the
-> erase failed with the -EIO error, as it is done in UBI and JFFS2 code.
->
-> This operation is not done in the MTD framework, but the bad block
-> tag (in BBM or in BBT) is required to avoid to write data on this block
-> in the next DFU_OP_WRITE loop in mtd_block_op(): the code skip the bad
-> blocks, tested by mtd_block_isbad().
->
-> Without this patch, when the NAND block become bad on DFU write operation
-> - low probability on new NAND - the DFU write operation will always failed
-> because the failing block is never marked bad.
->
-> This patch also adds a test to avoid to request an erase operation on a
-> block already marked bad; this test is not performed in MTD framework
-> in mtd_erase().
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->   drivers/dfu/dfu_mtd.c | 26 ++++++++++++++++++--------
->   1 file changed, 18 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
-> index c7075f12eca9..4fb02c4c806c 100644
-> --- a/drivers/dfu/dfu_mtd.c
-> +++ b/drivers/dfu/dfu_mtd.c
-> @@ -91,22 +91,32 @@ static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
->   				return -EIO;
->   			}
->   
-> +			/* Skip the block if it is bad, don't erase it again */
-> +			if (mtd_block_isbad(mtd, off)) {
+This code in lmb_init() is strange, because if CONFIG_LMB_USE_MAX_REGIONS
+and CONFIG_LMB_MEMORY_REGIONS are not defined, the implicit #else is empty
+and the required initialization are not done:
+lmb->memory.max = ?
+lmb->reserved.max = ?
 
+But this setting is not possible:
+- CONFIG_LMB_USE_MAX_REGIONS not defined
+- CONFIG_LMB_MEMORY_REGIONS not defined
+because CONFIG_LMB_MEMORY_REGIONS and CONFIG_LMB_RESERVED_REGIONS are
+defined as soon as the CONFIG_LMB_USE_MAX_REGIONS is not defined.
 
-"off" is the not correct offset here
+This patch removes this impossible case #elif and I add some
+explanation in lmb.h to explain why in the struct lmb {} the lmb
+property's should is defined if CONFIG_LMB_MEMORY_REGIONS is NOT defined.
 
-=> need to be replace to "erase_op.addr"
+Fixes: 5e2548c1d6e03 ("lmb: Fix LMB_MEMORY_REGIONS flag usage")
+Reported-by: Mark Millard <marklmi@yahoo.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
+ include/lmb.h | 20 +++++++++++++++++++-
+ lib/lmb.c     |  2 +-
+ 2 files changed, 20 insertions(+), 2 deletions(-)
 
-> +				erase_op.addr += mtd->erasesize;
-> +				continue;
-> +			}
-> +
->   			ret = mtd_erase(mtd, &erase_op);
->   
->   			if (ret) {
-> -				/* Abort if its not a bad block error */
-> -				if (ret != -EIO) {
-> -					printf("Failure while erasing at offset 0x%llx\n",
-> -					       erase_op.fail_addr);
-> -					return 0;
-> +				/* If this is not -EIO, we have no idea what to do. */
-> +				if (ret == -EIO) {
-> +					printf("Marking bad block at 0x%08llx (%d)\n",
-> +					       erase_op.fail_addr, ret);
-> +					ret = mtd_block_markbad(mtd, erase_op.addr);
-> +				}
-> +				/* Abort if it is not -EIO or can't mark bad */
-> +				if (ret) {
-> +					printf("Failure while erasing at offset 0x%llx (%d)\n",
-> +					       erase_op.fail_addr, ret);
-> +					return ret;
->   				}
-> -				printf("Skipping bad block at 0x%08llx\n",
-> -				       erase_op.addr);
->   			} else {
->   				remaining -= mtd->erasesize;
->   			}
->   
-> -			/* Continue erase behind bad block */
-> +			/* Continue erase behind the current block */
->   			erase_op.addr += mtd->erasesize;
->   		}
->   	}
-
-
-Regards
-
-Patrick
+diff --git a/include/lmb.h b/include/lmb.h
+index 7298c2ccc403..f70463ac5440 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -35,6 +35,24 @@ struct lmb_property {
+ 	enum lmb_flags flags;
+ };
+ 
++/*
++ * For regions size management, see LMB configuration in KConfig
++ * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
++ *
++ * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
++ *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
++ *         direclty in the array lmb_region.region[], with the same
++ *         configuration for memory reion and reseserved region.
++ *
++ * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
++ *         region is configurated *independently* with
++ *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
++ *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
++ *         lmb_region.region is only a pointer to the correct buffer,
++ *         initialized in lmb_init(). This configuration is useful to manage
++ *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
++ */
++
+ /**
+  * struct lmb_region - Description of a set of region.
+  *
+@@ -68,7 +86,7 @@ struct lmb_region {
+ struct lmb {
+ 	struct lmb_region memory;
+ 	struct lmb_region reserved;
+-#ifdef CONFIG_LMB_MEMORY_REGIONS
++#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+ 	struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
+ 	struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
+ #endif
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 2444b2a62121..8fbe453dfa9d 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -110,7 +110,7 @@ void lmb_init(struct lmb *lmb)
+ #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+ 	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
+-#elif defined(CONFIG_LMB_MEMORY_REGIONS)
++#else
+ 	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
+ 	lmb->memory.region = lmb->memory_regions;
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

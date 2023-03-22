@@ -2,67 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FD696C5338
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Mar 2023 19:03:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D774F6C535E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Mar 2023 19:13:13 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F361BC6A5E7;
-	Wed, 22 Mar 2023 18:03:37 +0000 (UTC)
-Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
- [209.85.160.181])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D98EC6A5E7;
+	Wed, 22 Mar 2023 18:13:13 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C57AEC01E98
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 64F3EC01E98
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Mar 2023 18:03:36 +0000 (UTC)
-Received: by mail-qt1-f181.google.com with SMTP id c19so23726371qtn.13
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Mar 2023 11:03:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1679508215;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nQLe9c6RsBI849sVhGdGaO1rHS4YeytGxXgFM+8vonY=;
- b=nTSK5nYjOlE9iNf78TLcoF9SEiPNvuih3gbLYs5xieuXAc5lDr8wuetgZJk+Ue0J0j
- L6hcHxAHtn0XdUhq8E6m2M7nYQQ106itOo4s8zzBL4ICOUpLb2sTq6rTU1S+7BKtrDK9
- cX3Yt2We/L8M5MVYyNwM/0XsbRDg5vAC4+nTg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1679508215;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nQLe9c6RsBI849sVhGdGaO1rHS4YeytGxXgFM+8vonY=;
- b=6r7E19ILF0bggCQbnuL9OBNtOyjxo0PwpBMJHF/kJ4QcL4l9OlUbfmaWvCyt7WPnik
- dtNXAUKuX4v7bYNcKeOA7Q37RZ33JEb9nyGe9jqNwhU2Sz292c9qmRn2lZrzIU7vEOew
- ZpiDSO+sKdyqM/tEgmIwbzdyLtws7qiupmtcIfWDnR9yP09C7R5If+QGyesUmdYBKxaX
- OCJORzfuyLdjT2OzvpzFlF4Ys6FB/FbN2WbCVKKSq2OIHfi1E4lf7Ytmc+lNRcq5Nqnr
- Ze8MlgxyANEkuGVD9JFnyFMqEnYxdUfIZyJUWw8YhDH7MHJjGHKE0BSN/nTQ9BLYMvzm
- N7/w==
-X-Gm-Message-State: AO0yUKUepslyfIcFrzd1u88OvDvsSbhaMHvuRi4F7/dFfNhw/RIR26wL
- 93EutLVElgIy0H+s1ChJ39AypA==
-X-Google-Smtp-Source: AK7set8FTOjE8nkBxQPqCAOXPezimI/O2Y/OS+aests1RLYGbZ5/3sRsykcyPP3MWQgVPGlOr+x3bA==
-X-Received: by 2002:ac8:5a13:0:b0:3e3:8661:c6f9 with SMTP id
- n19-20020ac85a13000000b003e38661c6f9mr8322820qta.19.1679508215686; 
- Wed, 22 Mar 2023 11:03:35 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-8fb4-da0c-fb38-955c.res6.spectrum.com.
- [2603:6081:7b00:6400:8fb4:da0c:fb38:955c])
- by smtp.gmail.com with ESMTPSA id
- p16-20020a05620a057000b00746476405bbsm11685527qkp.122.2023.03.22.11.03.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Mar 2023 11:03:34 -0700 (PDT)
-Date: Wed, 22 Mar 2023 14:03:32 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20230322180332.GQ8135@bill-the-cat>
-References: <20230308094912.1.I852b2b0fb85539e986a45dcfaf765f92e0924536@changeid>
+ Wed, 22 Mar 2023 18:13:12 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 32MGLRbC012820; Wed, 22 Mar 2023 19:12:53 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=bYy7qCRweXaVj+GqK5KyyhvBd1/52KzrW9vXm+jGO5A=;
+ b=UQZl43S/LIYk25/a+fDTCcnq2DF40LdHm8jUbACRQSljS+4AfjZRxa//F1W8eCxjrtAn
+ mfcqkB62tLAe0zE0wcwJKl3cu4YQr2YJtgnP/OAuSKDa+u28T5X/g7j4JpJ2caDsjCnK
+ x8NlMGM/rJR1m00IWxj5Lqvq+haeOd959Fy5YWjlJH3xclJ86LDY8xdNHXviDcUTkEFr
+ DlXTRq5VbmELjERmawlh87Ygga1Ob24S1sUQfw6xcOMmLSL6/xk5WTlkqcbDQpEfFZ+D
+ aJ4PaNpFhieAc76O8B0b35vZkGNF7yNWw1Ox5kqHJYHy2OgMXCcryHrnXS4xhH3zM6Qd Sg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pfajsk02q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 22 Mar 2023 19:12:53 +0100
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 69D78100042;
+ Wed, 22 Mar 2023 19:12:50 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 76F3621BF77;
+ Wed, 22 Mar 2023 19:12:33 +0100 (CET)
+Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Wed, 22 Mar
+ 2023 19:12:33 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 22 Mar 2023 19:12:25 +0100
+Message-ID: <20230322191223.v2.1.I2a3a1c4e853d66857091cbef8d3a2ec87d65daba@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20230308094912.1.I852b2b0fb85539e986a45dcfaf765f92e0924536@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Mikhail Ilin <ilin.mikhail.ol@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Stefan Roese <sr@denx.de>, Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>
-Subject: Re: [Uboot-stm32] [PATCH] fs: ext4: check the minimal partition
-	size to mount
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-22_15,2023-03-22_01,2023-02-09_01
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Mark Millard <marklmi@yahoo.com>, Brandon Maier <brandon.maier@collins.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Michal Simek <michal.simek@amd.com>, Sjoerd Simons <sjoerd@collabora.com>
+Subject: [Uboot-stm32] [PATCH v2 1/2] lmb: Fix LMB_MEMORY_REGIONS flag usage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,65 +78,144 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2088232512119022561=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Remove test on CONFIG_LMB_MEMORY_REGIONS introduced by commit
+7c1860fce4e3 ("lmb: Fix lmb property's defination under struct lmb").
 
---===============2088232512119022561==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="AYTSo9svf775g5QU"
-Content-Disposition: inline
+This code in lmb_init() is strange, because if CONFIG_LMB_USE_MAX_REGIONS
+and CONFIG_LMB_MEMORY_REGIONS are not defined, the implicit #else is empty
+and the required initialization is not done:
+lmb->memory.max = ?
+lmb->reserved.max = ?
 
+But this setting is not possible:
+- CONFIG_LMB_USE_MAX_REGIONS not defined
+- CONFIG_LMB_MEMORY_REGIONS not defined
+because CONFIG_LMB_MEMORY_REGIONS and CONFIG_LMB_RESERVED_REGIONS are
+defined as soon as the CONFIG_LMB_USE_MAX_REGIONS is not defined.
 
---AYTSo9svf775g5QU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This patch removes this impossible case #elif and I add some
+explanation in lmb.h to explain why in the struct lmb {} the lmb
+property is defined if CONFIG_LMB_MEMORY_REGIONS is NOT defined.
 
-On Wed, Mar 08, 2023 at 09:49:54AM +0100, Patrick Delaunay wrote:
+This patch also removes CONFIG_LMB_XXX dependency on CONFIG_LMB as these
+defines are used in API file lmb.h and not only in library file.
 
-> No need to mount a too small partition to handle a EXT4 file system.
->=20
-> This patch add a test on partition size before to read the
-> SUPERBLOCK_SIZE buffer and avoid error latter in fs_devread() function.
->=20
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Fixes: 5e2548c1d6e03 ("lmb: Fix LMB_MEMORY_REGIONS flag usage")
+Reported-by: Mark Millard <marklmi@yahoo.com>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
-Applied to u-boot/master, thanks!
+Changes in v2:
+- Remove CONFIG_LMB_XXX dependency on CONFIG_LMB as these defines are
+  used in lmb.h file, include by default to export the LMB API
+  and not only in LMB libary code. This modification is required to
+  avoid issue in API definition when CONFIG_LMB is not set.
+- Fix some typo in commit message and in comment
 
---=20
-Tom
+ include/lmb.h | 20 +++++++++++++++++++-
+ lib/Kconfig   |  7 +++----
+ lib/lmb.c     |  2 +-
+ 3 files changed, 23 insertions(+), 6 deletions(-)
 
---AYTSo9svf775g5QU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmQbQvQACgkQFHw5/5Y0
-tyw43gv+L0KeC8wK4Ida8gwIl2IIkQKe2MCome9HasToxDjKNE+6ajp6irWfpkHB
-+qCWfxooU/23oZC5nidTdcUO0D6JBxT6j5K7TW+XEhaZ/Z3SqGjX/9HRgWrE+HG7
-y1XgcY/zfne3TDtgUtL+GBc6gtEvK5r5IbYR+jukyIbptqUq+wRcRpvQKBOsYLV5
-FWZ6onlQXeV6vd6hbY2/WoQN1ROXmFuQasDt3bGCpcK/Yyryt0AxA8O/yI/my9jo
-Dl//St4D0uGzNzzt0BtFoTncKGatoc0+VqLsvXoo4opoD/L1yAnvs+Dvf9AwLF9v
-J+TybJZXOkh/UVzmLZRx33+k0YFZRhbC1wvXMMnWyrHr8NxI/VE/i69w5PnbSTW6
-Y1s+XiM12MTb0D0e/GPcbZoECF5gBjsYEoAs7iIOT8vtXFK8caklxiNalhVOVLWK
-EiJIiJVrMDIcmVm4M8ck5LihIchpg31xdQZ69F1E07X+ezTEm61tba9vNj0mtT+O
-L4i/KT2Y
-=Lv5q
------END PGP SIGNATURE-----
-
---AYTSo9svf775g5QU--
-
---===============2088232512119022561==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/include/lmb.h b/include/lmb.h
+index 7298c2ccc403..07bf22144eac 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -35,6 +35,24 @@ struct lmb_property {
+ 	enum lmb_flags flags;
+ };
+ 
++/*
++ * For regions size management, see LMB configuration in KConfig
++ * all the #if test are done with CONFIG_LMB_USE_MAX_REGIONS (boolean)
++ *
++ * case 1. CONFIG_LMB_USE_MAX_REGIONS is defined (legacy mode)
++ *         => CONFIG_LMB_MAX_REGIONS is used to configure the region size,
++ *         directly in the array lmb_region.region[], with the same
++ *         configuration for memory and reserved regions.
++ *
++ * case 2. CONFIG_LMB_USE_MAX_REGIONS is not defined, the size of each
++ *         region is configurated *independently* with
++ *         => CONFIG_LMB_MEMORY_REGIONS: struct lmb.memory_regions
++ *         => CONFIG_LMB_RESERVED_REGIONS: struct lmb.reserved_regions
++ *         lmb_region.region is only a pointer to the correct buffer,
++ *         initialized in lmb_init(). This configuration is useful to manage
++ *         more reserved memory regions with CONFIG_LMB_RESERVED_REGIONS.
++ */
++
+ /**
+  * struct lmb_region - Description of a set of region.
+  *
+@@ -68,7 +86,7 @@ struct lmb_region {
+ struct lmb {
+ 	struct lmb_region memory;
+ 	struct lmb_region reserved;
+-#ifdef CONFIG_LMB_MEMORY_REGIONS
++#if !IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+ 	struct lmb_property memory_regions[CONFIG_LMB_MEMORY_REGIONS];
+ 	struct lmb_property reserved_regions[CONFIG_LMB_RESERVED_REGIONS];
+ #endif
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 83e5edd73b0e..da6c7cd5f628 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1027,7 +1027,6 @@ config LMB
+ 
+ config LMB_USE_MAX_REGIONS
+ 	bool "Use a common number of memory and reserved regions in lmb lib"
+-	depends on LMB
+ 	default y
+ 	help
+ 	  Define the number of supported memory regions in the library logical
+@@ -1037,7 +1036,7 @@ config LMB_USE_MAX_REGIONS
+ 
+ config LMB_MAX_REGIONS
+ 	int "Number of memory and reserved regions in lmb lib"
+-	depends on LMB && LMB_USE_MAX_REGIONS
++	depends on LMB_USE_MAX_REGIONS
+ 	default 16
+ 	help
+ 	  Define the number of supported regions, memory and reserved, in the
+@@ -1045,7 +1044,7 @@ config LMB_MAX_REGIONS
+ 
+ config LMB_MEMORY_REGIONS
+ 	int "Number of memory regions in lmb lib"
+-	depends on LMB && !LMB_USE_MAX_REGIONS
++	depends on !LMB_USE_MAX_REGIONS
+ 	default 8
+ 	help
+ 	  Define the number of supported memory regions in the library logical
+@@ -1054,7 +1053,7 @@ config LMB_MEMORY_REGIONS
+ 
+ config LMB_RESERVED_REGIONS
+ 	int "Number of reserved regions in lmb lib"
+-	depends on LMB && !LMB_USE_MAX_REGIONS
++	depends on !LMB_USE_MAX_REGIONS
+ 	default 8
+ 	help
+ 	  Define the number of supported reserved regions in the library logical
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 2444b2a62121..8fbe453dfa9d 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -110,7 +110,7 @@ void lmb_init(struct lmb *lmb)
+ #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+ 	lmb->memory.max = CONFIG_LMB_MAX_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_MAX_REGIONS;
+-#elif defined(CONFIG_LMB_MEMORY_REGIONS)
++#else
+ 	lmb->memory.max = CONFIG_LMB_MEMORY_REGIONS;
+ 	lmb->reserved.max = CONFIG_LMB_RESERVED_REGIONS;
+ 	lmb->memory.region = lmb->memory_regions;
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============2088232512119022561==--

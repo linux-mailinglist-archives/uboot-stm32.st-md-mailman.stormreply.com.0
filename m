@@ -2,63 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 118406CFFC4
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Mar 2023 11:26:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 277E36D0327
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Mar 2023 13:29:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B855BC6A5EF;
-	Thu, 30 Mar 2023 09:26:39 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D0295C69069;
+	Thu, 30 Mar 2023 11:29:22 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 215E2C6A5E7
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E78FDC01E98
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Mar 2023 09:26:38 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Thu, 30 Mar 2023 11:29:21 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 32U9ENTV016228; Thu, 30 Mar 2023 11:26:36 +0200
+ 32UAJagq022072; Thu, 30 Mar 2023 13:29:20 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=QVQ7VKv7x3IXzJYOvbeWscLQ9Iuggp5xTBX95NprWa4=;
- b=P7leKWka1EiGyaBETjPuN1hZOpVcUHEaUvf9686uc+AHgjhz/zFnFctd2Nc/IjcisNoa
- oSA0YvhR9iAH0QYgHKLa4tCSZNzJeel7epd1w21+g8jN61ZElBaM39CLTnA03Z7fIEuc
- pfc2vry60Cjwzf7rmL5yXpuAi7wvhDJsLqEaykkznZnzPBxUYcmpax+30cj6+j2lLXXK
- fZBNNm9R+R9IVHPMJCYQ0QTyeAiLbaEchuNoIUyr4Os794hHysWycoOC96DzC4NjrG6w
- w92Syb6B1IGHvWSUJkW0Pv3qAeRvMFMkbrYT7ibDtJVFNjwmytdgqqiFrXgDqcqRqq4v XQ== 
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=2AqqDXYR75TkiFoU+UhJRGvqdoLHnp2gjzYfZ+RaZ2c=;
+ b=b1M6ky7ne3Sv9neJsEDNgbQ2QcvUzNZx0f5aRuiGgWl7zKIc8zBguY5dcYw0KeXb7v/q
+ ABRgl+EyEY2GN9me//EySLC3mTcPltaeD/BvP0eaJdQ2aPjfO1yn5QJ8mN5Bp8hfbjTq
+ ui3Tr4nU1WjGCMqgwKxl7vtqieF7sKWj+rB9ed+NYAT7yT3TAdZoGx7I7Z9lxSvC8ilB
+ 7EupzN4fhdmcCxRCtoqj4H+yiDnnGnIx6JhaSdfaYRTYo7eyfPlLPfsKVj6l1/cAlPMf
+ QdNqJe0x19SAtsDKJi2mmUw485Sebk7hzwN+O+XH7pboVPi1OUNBIS+2kuAxQK1doTRz Zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pkwvspr8p-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pn8jw8hqp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Mar 2023 11:26:36 +0200
+ Thu, 30 Mar 2023 13:29:20 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 69D1F10002A;
- Thu, 30 Mar 2023 11:26:35 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0B9EC100034;
+ Thu, 30 Mar 2023 13:29:20 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 54ED820E1CB;
- Thu, 30 Mar 2023 11:26:35 +0200 (CEST)
-Received: from localhost (10.48.0.175) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 012D62194CA;
+ Thu, 30 Mar 2023 13:29:20 +0200 (CEST)
+Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Thu, 30 Mar
- 2023 11:26:35 +0200
-From: Christophe Kerello <christophe.kerello@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 30 Mar 2023 11:26:17 +0200
-Message-ID: <20230330092618.351308-1-christophe.kerello@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ 2023 13:29:19 +0200
+Message-ID: <c4ee6ff3-fbbe-d01c-93be-dbb04282b760@foss.st.com>
+Date: Thu, 30 Mar 2023 13:29:18 +0200
 MIME-Version: 1.0
-X-Originating-IP: [10.48.0.175]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE3.st.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+References: <20230327074641.44900-1-patrice.chotard@foss.st.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230327074641.44900-1-patrice.chotard@foss.st.com>
+X-Originating-IP: [10.48.0.157]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-30_04,2023-03-30_01,2023-02-09_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Christophe Kerello <christophe.kerello@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32: add FMC support on
-	STM32MP13x SoC family
+ definitions=2023-03-30_07,2023-03-30_02,2023-02-09_01
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] pinctrl: pinctrl_stm32: Add slew rate
+ support for stm32_pinctrl_get_pin_muxing()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,65 +71,86 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add FMC support on STM32MP13x SoC family.
+Hi,
 
-Signed-off-by: Christophe Kerello <christophe.kerello@foss.st.com>
----
+On 3/27/23 09:46, Patrice Chotard wrote:
+> For debug purpose, it should be useful to indicate the slew rate for
+> each pins.
+> Add ospeed register information for pins which are configured in
+> either alternate function or gpio output.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   drivers/pinctrl/pinctrl_stm32.c | 19 +++++++++++++++----
+>   1 file changed, 15 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/pinctrl/pinctrl_stm32.c b/drivers/pinctrl/pinctrl_stm32.c
+> index b755fa42b4f..b06da50b2cd 100644
+> --- a/drivers/pinctrl/pinctrl_stm32.c
+> +++ b/drivers/pinctrl/pinctrl_stm32.c
+> @@ -61,6 +61,13 @@ static const char * const pinmux_otype[] = {
+>   	[STM32_GPIO_OTYPE_OD] = "open-drain",
+>   };
+>   
+> +static const char * const pinmux_speed[] = {
+> +	[STM32_GPIO_SPEED_2M] = "Low speed",
+> +	[STM32_GPIO_SPEED_25M] = "Medium speed",
+> +	[STM32_GPIO_SPEED_50M] = "High speed",
+> +	[STM32_GPIO_SPEED_100M] = "Very-high speed",
+> +};
+> +
+>   static int stm32_pinctrl_get_af(struct udevice *dev, unsigned int offset)
+>   {
+>   	struct stm32_gpio_priv *priv = dev_get_priv(dev);
+> @@ -201,6 +208,7 @@ static int stm32_pinctrl_get_pin_muxing(struct udevice *dev,
+>   	int af_num;
+>   	unsigned int gpio_idx;
+>   	u32 pupd, otype;
+> +	u8 speed;
+>   
+>   	/* look up for the bank which owns the requested pin */
+>   	gpio_dev = stm32_pinctrl_get_gpio_dev(dev, selector, &gpio_idx);
+> @@ -214,6 +222,7 @@ static int stm32_pinctrl_get_pin_muxing(struct udevice *dev,
+>   	priv = dev_get_priv(gpio_dev);
+>   	pupd = (readl(&priv->regs->pupdr) >> (gpio_idx * 2)) & PUPD_MASK;
+>   	otype = (readl(&priv->regs->otyper) >> gpio_idx) & OTYPE_MSK;
+> +	speed = (readl(&priv->regs->ospeedr) >> gpio_idx * 2) & OSPEED_MASK;
+>   
+>   	switch (mode) {
+>   	case GPIOF_UNKNOWN:
+> @@ -222,13 +231,15 @@ static int stm32_pinctrl_get_pin_muxing(struct udevice *dev,
+>   		break;
+>   	case GPIOF_FUNC:
+>   		af_num = stm32_pinctrl_get_af(gpio_dev, gpio_idx);
+> -		snprintf(buf, size, "%s %d %s %s", pinmux_mode[mode], af_num,
+> -			 pinmux_otype[otype], pinmux_bias[pupd]);
+> +		snprintf(buf, size, "%s %d %s %s %s", pinmux_mode[mode], af_num,
+> +			 pinmux_otype[otype], pinmux_bias[pupd],
+> +			 pinmux_speed[speed]);
+>   		break;
+>   	case GPIOF_OUTPUT:
+> -		snprintf(buf, size, "%s %s %s %s",
+> +		snprintf(buf, size, "%s %s %s %s %s",
+>   			 pinmux_mode[mode], pinmux_otype[otype],
+> -			 pinmux_bias[pupd], label ? label : "");
+> +			 pinmux_bias[pupd], label ? label : "",
+> +			 pinmux_speed[speed]);
+>   		break;
+>   	case GPIOF_INPUT:
+>   		snprintf(buf, size, "%s %s %s", pinmux_mode[mode],
 
- arch/arm/dts/stm32mp131.dtsi | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
 
-diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
-index 3cf51f09bcb..cf1171bc9bb 100644
---- a/arch/arm/dts/stm32mp131.dtsi
-+++ b/arch/arm/dts/stm32mp131.dtsi
-@@ -191,6 +191,39 @@
- 			dma-requests = <48>;
- 		};
- 
-+		fmc: memory-controller@58002000 {
-+			compatible = "st,stm32mp1-fmc2-ebi";
-+			reg = <0x58002000 0x1000>;
-+			ranges = <0 0 0x60000000 0x04000000>, /* EBI CS 1 */
-+				 <1 0 0x64000000 0x04000000>, /* EBI CS 2 */
-+				 <2 0 0x68000000 0x04000000>, /* EBI CS 3 */
-+				 <3 0 0x6c000000 0x04000000>, /* EBI CS 4 */
-+				 <4 0 0x80000000 0x10000000>; /* NAND */
-+			#address-cells = <2>;
-+			#size-cells = <1>;
-+			clocks = <&rcc FMC_K>;
-+			resets = <&rcc FMC_R>;
-+			status = "disabled";
-+
-+			nand-controller@4,0 {
-+				compatible = "st,stm32mp1-fmc2-nfc";
-+				reg = <4 0x00000000 0x1000>,
-+				      <4 0x08010000 0x1000>,
-+				      <4 0x08020000 0x1000>,
-+				      <4 0x01000000 0x1000>,
-+				      <4 0x09010000 0x1000>,
-+				      <4 0x09020000 0x1000>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
-+				dmas = <&mdma 24 0x2 0x12000a02 0x0 0x0>,
-+				       <&mdma 24 0x2 0x12000a08 0x0 0x0>,
-+				       <&mdma 25 0x2 0x12000a0a 0x0 0x0>;
-+				dma-names = "tx", "rx", "ecc";
-+				status = "disabled";
-+			};
-+		};
-+
- 		sdmmc1: mmc@58005000 {
- 			compatible = "st,stm32-sdmmc2", "arm,pl18x", "arm,primecell";
- 			arm,primecell-periphid = <0x20253180>;
--- 
-2.25.1
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

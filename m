@@ -2,62 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94BD06D1969
-	for <lists+uboot-stm32@lfdr.de>; Fri, 31 Mar 2023 10:08:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6A816D1924
+	for <lists+uboot-stm32@lfdr.de>; Fri, 31 Mar 2023 09:59:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 39E27C64107;
-	Fri, 31 Mar 2023 08:08:20 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F1748C0356E
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8272CC64107;
+	Fri, 31 Mar 2023 07:59:52 +0000 (UTC)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF2FAC62EFE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 31 Mar 2023 07:14:39 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 32V6oIN6022275; Fri, 31 Mar 2023 09:14:38 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=42xkKl2msGM0NcS3BjXCfwXB6MqRCQ/CY+jPp+fEw7w=;
- b=ESQzOxz+flws2bhsd9UYhrYGuflnDzGJuDf0lygrzIBQ6CK/h6wnpZLMlL9Cz5T273BE
- f4k0jK35sn3x/zTPber/9VkIl/Wysqu8D24I02EOm8bLnunjTgZCmyNNMcznaoe5tBkX
- rcTwRxBY4uEDRY9GGXseQyxVcP9WlYhvf4uS8cuJpWBVV8ARXGh7qI17xkUh9FF4e2n5
- Qf9Nq/4ACLfDqbQMnoolws8cRfpxGlMAwxd/pPuIk3sw3mXkK1okIDqfCr2vD0QPP42G
- kOiXw4eCuSm1lNstC6YX9P97pejbFeC9HSgPWn0tPnC8VJexZGcc1iJw5TqTHOQjfuF4 XQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pn8jwe3v0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 31 Mar 2023 09:14:38 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A88A810004A;
- Fri, 31 Mar 2023 09:14:37 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9D3F22115E3;
- Fri, 31 Mar 2023 09:14:37 +0200 (CEST)
-Received: from localhost (10.201.22.153) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Fri, 31 Mar
- 2023 09:14:37 +0200
-From: Lionel Debieve <lionel.debieve@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 31 Mar 2023 09:14:26 +0200
-Message-ID: <20230331091422.1.Ifbd51cee403b79546111ea80e1f9c3a0290c01dc@changeid>
-X-Mailer: git-send-email 2.25.1
+ Fri, 31 Mar 2023 07:59:51 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Pnt454sxNz9sQm;
+ Fri, 31 Mar 2023 09:59:49 +0200 (CEST)
+Message-ID: <537d68ca-6efd-bbdd-8ada-07784dd0bfb9@denx.de>
+Date: Fri, 31 Mar 2023 09:59:48 +0200
 MIME-Version: 1.0
-X-Originating-IP: [10.201.22.153]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-03-31_02,2023-03-30_04,2023-02-09_01
-X-Mailman-Approved-At: Fri, 31 Mar 2023 08:08:19 +0000
+To: Lionel Debieve <lionel.debieve@foss.st.com>, u-boot@lists.denx.de
+References: <20230331091422.1.Ifbd51cee403b79546111ea80e1f9c3a0290c01dc@changeid>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20230331091422.1.Ifbd51cee403b79546111ea80e1f9c3a0290c01dc@changeid>
+X-Rspamd-Queue-Id: 4Pnt454sxNz9sQm
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lionel Debieve <lionel.debieve@foss.st.com>, Stefan Roese <sr@denx.de>
-Subject: [Uboot-stm32] [PATCH] watchdog: arm_smc_wdt: add watchdog support
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] watchdog: arm_smc_wdt: add watchdog
+	support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,180 +44,105 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Implement a ARM SMCCC based driver that allow to use
-a secure watchdog on the platform.
-
-Signed-off-by: Lionel Debieve <lionel.debieve@foss.st.com>
----
-
- drivers/watchdog/Kconfig       |   8 +++
- drivers/watchdog/Makefile      |   1 +
- drivers/watchdog/arm_smc_wdt.c | 116 +++++++++++++++++++++++++++++++++
- 3 files changed, 125 insertions(+)
- create mode 100644 drivers/watchdog/arm_smc_wdt.c
-
-diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-index b5ac8f7f50d..3a0341f609d 100644
---- a/drivers/watchdog/Kconfig
-+++ b/drivers/watchdog/Kconfig
-@@ -352,6 +352,14 @@ config WDT_TANGIER
- 	  Intel Tangier SoC. If you're using a board with Intel Tangier
- 	  SoC, say Y here.
- 
-+config WDT_ARM_SMC
-+	bool "ARM SMC watchdog timer support"
-+	depends on WDT && ARM_SMCCC
-+	imply WATCHDOG
-+	help
-+	  Select this to enable Arm SMC watchdog timer. This watchdog will manage
-+	  a watchdog based on ARM SMCCC communication.
-+
- config SPL_WDT
- 	bool "Enable driver model for watchdog timer drivers in SPL"
- 	depends on SPL_DM
-diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-index 446d961d7d2..a4633c0d2fa 100644
---- a/drivers/watchdog/Makefile
-+++ b/drivers/watchdog/Makefile
-@@ -18,6 +18,7 @@ obj-$(CONFIG_$(SPL_TPL_)WDT) += wdt-uclass.o
- obj-$(CONFIG_WDT_SANDBOX) += sandbox_wdt.o
- obj-$(CONFIG_WDT_ALARM_SANDBOX) += sandbox_alarm-wdt.o
- obj-$(CONFIG_WDT_APPLE) += apple_wdt.o
-+obj-$(CONFIG_WDT_ARM_SMC) += arm_smc_wdt.o
- obj-$(CONFIG_WDT_ARMADA_37XX) += armada-37xx-wdt.o
- obj-$(CONFIG_WDT_ASPEED) += ast_wdt.o
- obj-$(CONFIG_WDT_AST2600) += ast2600_wdt.o
-diff --git a/drivers/watchdog/arm_smc_wdt.c b/drivers/watchdog/arm_smc_wdt.c
-new file mode 100644
-index 00000000000..e2e3c455082
---- /dev/null
-+++ b/drivers/watchdog/arm_smc_wdt.c
-@@ -0,0 +1,116 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * ARM Secure Monitor Call watchdog driver
-+ * Copyright (C) 2022, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <dm/of_access.h>
-+#include <linux/arm-smccc.h>
-+#include <linux/psci.h>
-+#include <wdt.h>
-+
-+#define DRV_NAME		"arm_smc_wdt"
-+#define DRV_VERSION		"1.0"
-+
-+#define WDT_TIMEOUT_SECS(TIMEOUT)	((TIMEOUT) / 1000)
-+
-+enum smcwd_call {
-+	SMCWD_INIT		= 0,
-+	SMCWD_SET_TIMEOUT	= 1,
-+	SMCWD_ENABLE		= 2,
-+	SMCWD_PET		= 3,
-+	SMCWD_GET_TIMELEFT	= 4,
-+};
-+
-+struct smcwd_priv_data {
-+	u32 smc_id;
-+	unsigned int min_timeout;
-+	unsigned int max_timeout;
-+};
-+
-+static int smcwd_call(struct udevice *dev, enum smcwd_call call,
-+		      unsigned long arg, struct arm_smccc_res *res)
-+{
-+	struct arm_smccc_res local_res;
-+	struct smcwd_priv_data *priv = dev_get_priv(dev);
-+
-+	if (!res)
-+		res = &local_res;
-+
-+	arm_smccc_smc(priv->smc_id, call, arg, 0, 0, 0, 0, 0, res);
-+
-+	if (res->a0 == PSCI_RET_NOT_SUPPORTED)
-+		return -ENODEV;
-+	if (res->a0 == PSCI_RET_INVALID_PARAMS)
-+		return -EINVAL;
-+	if (res->a0 != PSCI_RET_SUCCESS)
-+		return -EIO;
-+
-+	return 0;
-+}
-+
-+static int smcwd_reset(struct udevice *dev)
-+{
-+	return smcwd_call(dev, SMCWD_PET, 0, NULL);
-+}
-+
-+static int smcwd_stop(struct udevice *dev)
-+{
-+	return smcwd_call(dev, SMCWD_ENABLE, 0, NULL);
-+}
-+
-+static int smcwd_start(struct udevice *dev, u64 timeout_ms, ulong flags)
-+{
-+	int err;
-+	u64 timeout_sec = WDT_TIMEOUT_SECS(timeout_ms);
-+	struct smcwd_priv_data *priv = dev_get_priv(dev);
-+
-+	if (timeout_sec < priv->min_timeout || timeout_sec > priv->max_timeout)
-+		return -EINVAL;
-+
-+	err = smcwd_call(dev, SMCWD_SET_TIMEOUT, timeout_sec, NULL);
-+	if (err)
-+		return err;
-+
-+	return smcwd_call(dev, SMCWD_ENABLE, 1, NULL);
-+}
-+
-+static int smcwd_probe(struct udevice *dev)
-+{
-+	int err;
-+	struct arm_smccc_res res;
-+	struct smcwd_priv_data *priv = dev_get_priv(dev);
-+
-+	priv->smc_id = dev_read_u32_default(dev, "arm,smc-id", 0x82003D06);
-+
-+	err = smcwd_call(dev, SMCWD_INIT, 0, &res);
-+	if (err < 0)
-+		return err;
-+
-+	priv->min_timeout = res.a1;
-+	priv->max_timeout = res.a2;
-+
-+	return 0;
-+}
-+
-+static const struct wdt_ops smcwd_ops = {
-+	.start		= smcwd_start,
-+	.stop		= smcwd_stop,
-+	.reset		= smcwd_reset,
-+};
-+
-+static const struct udevice_id smcwd_dt_ids[] = {
-+	{ .compatible = "arm,smc-wdt" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(wdt_sandbox) = {
-+	.name = "smcwd",
-+	.id = UCLASS_WDT,
-+	.of_match = smcwd_dt_ids,
-+	.priv_auto = sizeof(struct smcwd_priv_data),
-+	.probe = smcwd_probe,
-+	.ops = &smcwd_ops,
-+};
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgTGlvbmVsLAoKT24gMy8zMS8yMyAwOToxNCwgTGlvbmVsIERlYmlldmUgd3JvdGU6Cj4gSW1w
+bGVtZW50IGEgQVJNIFNNQ0NDIGJhc2VkIGRyaXZlciB0aGF0IGFsbG93IHRvIHVzZQo+IGEgc2Vj
+dXJlIHdhdGNoZG9nIG9uIHRoZSBwbGF0Zm9ybS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBMaW9uZWwg
+RGViaWV2ZSA8bGlvbmVsLmRlYmlldmVAZm9zcy5zdC5jb20+Cj4gLS0tCj4gCj4gICBkcml2ZXJz
+L3dhdGNoZG9nL0tjb25maWcgICAgICAgfCAgIDggKysrCj4gICBkcml2ZXJzL3dhdGNoZG9nL01h
+a2VmaWxlICAgICAgfCAgIDEgKwo+ICAgZHJpdmVycy93YXRjaGRvZy9hcm1fc21jX3dkdC5jIHwg
+MTE2ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICAgMyBmaWxlcyBjaGFuZ2Vk
+LCAxMjUgaW5zZXJ0aW9ucygrKQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvd2F0Y2hk
+b2cvYXJtX3NtY193ZHQuYwo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3dhdGNoZG9nL0tjb25m
+aWcgYi9kcml2ZXJzL3dhdGNoZG9nL0tjb25maWcKPiBpbmRleCBiNWFjOGY3ZjUwZC4uM2EwMzQx
+ZjYwOWQgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy93YXRjaGRvZy9LY29uZmlnCj4gKysrIGIvZHJp
+dmVycy93YXRjaGRvZy9LY29uZmlnCj4gQEAgLTM1Miw2ICszNTIsMTQgQEAgY29uZmlnIFdEVF9U
+QU5HSUVSCj4gICAJICBJbnRlbCBUYW5naWVyIFNvQy4gSWYgeW91J3JlIHVzaW5nIGEgYm9hcmQg
+d2l0aCBJbnRlbCBUYW5naWVyCj4gICAJICBTb0MsIHNheSBZIGhlcmUuCj4gICAKPiArY29uZmln
+IFdEVF9BUk1fU01DCj4gKwlib29sICJBUk0gU01DIHdhdGNoZG9nIHRpbWVyIHN1cHBvcnQiCj4g
+KwlkZXBlbmRzIG9uIFdEVCAmJiBBUk1fU01DQ0MKPiArCWltcGx5IFdBVENIRE9HCj4gKwloZWxw
+Cj4gKwkgIFNlbGVjdCB0aGlzIHRvIGVuYWJsZSBBcm0gU01DIHdhdGNoZG9nIHRpbWVyLiBUaGlz
+IHdhdGNoZG9nIHdpbGwgbWFuYWdlCj4gKwkgIGEgd2F0Y2hkb2cgYmFzZWQgb24gQVJNIFNNQ0ND
+IGNvbW11bmljYXRpb24uCj4gKwo+ICAgY29uZmlnIFNQTF9XRFQKPiAgIAlib29sICJFbmFibGUg
+ZHJpdmVyIG1vZGVsIGZvciB3YXRjaGRvZyB0aW1lciBkcml2ZXJzIGluIFNQTCIKPiAgIAlkZXBl
+bmRzIG9uIFNQTF9ETQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3dhdGNoZG9nL01ha2VmaWxlIGIv
+ZHJpdmVycy93YXRjaGRvZy9NYWtlZmlsZQo+IGluZGV4IDQ0NmQ5NjFkN2QyLi5hNDYzM2MwZDJm
+YSAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3dhdGNoZG9nL01ha2VmaWxlCj4gKysrIGIvZHJpdmVy
+cy93YXRjaGRvZy9NYWtlZmlsZQo+IEBAIC0xOCw2ICsxOCw3IEBAIG9iai0kKENPTkZJR18kKFNQ
+TF9UUExfKVdEVCkgKz0gd2R0LXVjbGFzcy5vCj4gICBvYmotJChDT05GSUdfV0RUX1NBTkRCT1gp
+ICs9IHNhbmRib3hfd2R0Lm8KPiAgIG9iai0kKENPTkZJR19XRFRfQUxBUk1fU0FOREJPWCkgKz0g
+c2FuZGJveF9hbGFybS13ZHQubwo+ICAgb2JqLSQoQ09ORklHX1dEVF9BUFBMRSkgKz0gYXBwbGVf
+d2R0Lm8KPiArb2JqLSQoQ09ORklHX1dEVF9BUk1fU01DKSArPSBhcm1fc21jX3dkdC5vCj4gICBv
+YmotJChDT05GSUdfV0RUX0FSTUFEQV8zN1hYKSArPSBhcm1hZGEtMzd4eC13ZHQubwo+ICAgb2Jq
+LSQoQ09ORklHX1dEVF9BU1BFRUQpICs9IGFzdF93ZHQubwo+ICAgb2JqLSQoQ09ORklHX1dEVF9B
+U1QyNjAwKSArPSBhc3QyNjAwX3dkdC5vCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvd2F0Y2hkb2cv
+YXJtX3NtY193ZHQuYyBiL2RyaXZlcnMvd2F0Y2hkb2cvYXJtX3NtY193ZHQuYwo+IG5ldyBmaWxl
+IG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMDAwMDAuLmUyZTNjNDU1MDgyCj4gLS0tIC9kZXYv
+bnVsbAo+ICsrKyBiL2RyaXZlcnMvd2F0Y2hkb2cvYXJtX3NtY193ZHQuYwo+IEBAIC0wLDAgKzEs
+MTE2IEBACj4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKwo+ICsvKgo+ICsg
+KiBBUk0gU2VjdXJlIE1vbml0b3IgQ2FsbCB3YXRjaGRvZyBkcml2ZXIKPiArICogQ29weXJpZ2h0
+IChDKSAyMDIyLCBTVE1pY3JvZWxlY3Ryb25pY3MgLSBBbGwgUmlnaHRzIFJlc2VydmVkCj4gKyAq
+Lwo+ICsKPiArI2luY2x1ZGUgPGRtLmg+Cj4gKyNpbmNsdWRlIDxkbS9kZXZpY2VfY29tcGF0Lmg+
+Cj4gKyNpbmNsdWRlIDxkbS9vZl9hY2Nlc3MuaD4KPiArI2luY2x1ZGUgPGxpbnV4L2FybS1zbWNj
+Yy5oPgo+ICsjaW5jbHVkZSA8bGludXgvcHNjaS5oPgo+ICsjaW5jbHVkZSA8d2R0Lmg+Cj4gKwo+
+ICsjZGVmaW5lIERSVl9OQU1FCQkiYXJtX3NtY193ZHQiCj4gKyNkZWZpbmUgRFJWX1ZFUlNJT04J
+CSIxLjAiCj4gKwo+ICsjZGVmaW5lIFdEVF9USU1FT1VUX1NFQ1MoVElNRU9VVCkJKChUSU1FT1VU
+KSAvIDEwMDApCj4gKwo+ICtlbnVtIHNtY3dkX2NhbGwgewo+ICsJU01DV0RfSU5JVAkJPSAwLAo+
+ICsJU01DV0RfU0VUX1RJTUVPVVQJPSAxLAo+ICsJU01DV0RfRU5BQkxFCQk9IDIsCj4gKwlTTUNX
+RF9QRVQJCT0gMywKPiArCVNNQ1dEX0dFVF9USU1FTEVGVAk9IDQsCj4gK307Cj4gKwo+ICtzdHJ1
+Y3Qgc21jd2RfcHJpdl9kYXRhIHsKPiArCXUzMiBzbWNfaWQ7Cj4gKwl1bnNpZ25lZCBpbnQgbWlu
+X3RpbWVvdXQ7Cj4gKwl1bnNpZ25lZCBpbnQgbWF4X3RpbWVvdXQ7Cj4gK307Cj4gKwo+ICtzdGF0
+aWMgaW50IHNtY3dkX2NhbGwoc3RydWN0IHVkZXZpY2UgKmRldiwgZW51bSBzbWN3ZF9jYWxsIGNh
+bGwsCj4gKwkJICAgICAgdW5zaWduZWQgbG9uZyBhcmcsIHN0cnVjdCBhcm1fc21jY2NfcmVzICpy
+ZXMpCj4gK3sKPiArCXN0cnVjdCBhcm1fc21jY2NfcmVzIGxvY2FsX3JlczsKPiArCXN0cnVjdCBz
+bWN3ZF9wcml2X2RhdGEgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKPiArCj4gKwlpZiAoIXJl
+cykKPiArCQlyZXMgPSAmbG9jYWxfcmVzOwo+ICsKPiArCWFybV9zbWNjY19zbWMocHJpdi0+c21j
+X2lkLCBjYWxsLCBhcmcsIDAsIDAsIDAsIDAsIDAsIHJlcyk7Cj4gKwo+ICsJaWYgKHJlcy0+YTAg
+PT0gUFNDSV9SRVRfTk9UX1NVUFBPUlRFRCkKPiArCQlyZXR1cm4gLUVOT0RFVjsKPiArCWlmIChy
+ZXMtPmEwID09IFBTQ0lfUkVUX0lOVkFMSURfUEFSQU1TKQo+ICsJCXJldHVybiAtRUlOVkFMOwo+
+ICsJaWYgKHJlcy0+YTAgIT0gUFNDSV9SRVRfU1VDQ0VTUykKPiArCQlyZXR1cm4gLUVJTzsKPiAr
+Cj4gKwlyZXR1cm4gMDsKPiArfQo+ICsKPiArc3RhdGljIGludCBzbWN3ZF9yZXNldChzdHJ1Y3Qg
+dWRldmljZSAqZGV2KQo+ICt7Cj4gKwlyZXR1cm4gc21jd2RfY2FsbChkZXYsIFNNQ1dEX1BFVCwg
+MCwgTlVMTCk7Cj4gK30KPiArCj4gK3N0YXRpYyBpbnQgc21jd2Rfc3RvcChzdHJ1Y3QgdWRldmlj
+ZSAqZGV2KQo+ICt7Cj4gKwlyZXR1cm4gc21jd2RfY2FsbChkZXYsIFNNQ1dEX0VOQUJMRSwgMCwg
+TlVMTCk7Cj4gK30KPiArCj4gK3N0YXRpYyBpbnQgc21jd2Rfc3RhcnQoc3RydWN0IHVkZXZpY2Ug
+KmRldiwgdTY0IHRpbWVvdXRfbXMsIHVsb25nIGZsYWdzKQo+ICt7Cj4gKwlpbnQgZXJyOwo+ICsJ
+dTY0IHRpbWVvdXRfc2VjID0gV0RUX1RJTUVPVVRfU0VDUyh0aW1lb3V0X21zKTsKPiArCXN0cnVj
+dCBzbWN3ZF9wcml2X2RhdGEgKnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKCk5pdHBpY2tpbmc6
+IEl0J3MgZ2VuZXJhbGx5IG1vcmUgY29tbW9uIHRvIHVzZSB0aGUgcmV2ZXJzZSB4bWFzIHRyZWUK
+c3R5bGUgZm9yIHZhcmlhYmxlIGRlY2xhcmF0aW9uIG9yZGVyaW5nLiBPbiBvdGhlciBwbGFjZXMg
+aW4gdGhpcyBjb2RlCmFzIHdlbGwuCgo+ICsKPiArCWlmICh0aW1lb3V0X3NlYyA8IHByaXYtPm1p
+bl90aW1lb3V0IHx8IHRpbWVvdXRfc2VjID4gcHJpdi0+bWF4X3RpbWVvdXQpCj4gKwkJcmV0dXJu
+IC1FSU5WQUw7CgpBbiBlcnJvciBtZXNzYWdlIHdvdWxkIGJlIGdvb2QgaGVyZS4gT3IgYXQgbGVh
+c3Qgc29tZSBkZWJ1ZyBsZXZlbAptZXNzYWdlLgoKPiArCj4gKwllcnIgPSBzbWN3ZF9jYWxsKGRl
+diwgU01DV0RfU0VUX1RJTUVPVVQsIHRpbWVvdXRfc2VjLCBOVUxMKTsKPiArCWlmIChlcnIpCj4g
+KwkJcmV0dXJuIGVycjsKCkFnYWluLCBwbGVhc2UgZW5oYW5jZSB0aGUgZHJpdmVyIHdpdGggc29t
+ZSBlcnJvciBvciBhdCBsZWFzdCBkZWJ1ZwpsZXZlbCBsb2dnaW5nLgoKVGhhbmtzLApTdGVmYW4K
+Cj4gKwo+ICsJcmV0dXJuIHNtY3dkX2NhbGwoZGV2LCBTTUNXRF9FTkFCTEUsIDEsIE5VTEwpOwo+
+ICt9Cj4gKwo+ICtzdGF0aWMgaW50IHNtY3dkX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYpCj4g
+K3sKPiArCWludCBlcnI7Cj4gKwlzdHJ1Y3QgYXJtX3NtY2NjX3JlcyByZXM7Cj4gKwlzdHJ1Y3Qg
+c21jd2RfcHJpdl9kYXRhICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7Cj4gKwo+ICsJcHJpdi0+
+c21jX2lkID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAiYXJtLHNtYy1pZCIsIDB4ODIwMDNE
+MDYpOwo+ICsKPiArCWVyciA9IHNtY3dkX2NhbGwoZGV2LCBTTUNXRF9JTklULCAwLCAmcmVzKTsK
+PiArCWlmIChlcnIgPCAwKQo+ICsJCXJldHVybiBlcnI7Cj4gKwo+ICsJcHJpdi0+bWluX3RpbWVv
+dXQgPSByZXMuYTE7Cj4gKwlwcml2LT5tYXhfdGltZW91dCA9IHJlcy5hMjsKPiArCj4gKwlyZXR1
+cm4gMDsKPiArfQo+ICsKPiArc3RhdGljIGNvbnN0IHN0cnVjdCB3ZHRfb3BzIHNtY3dkX29wcyA9
+IHsKPiArCS5zdGFydAkJPSBzbWN3ZF9zdGFydCwKPiArCS5zdG9wCQk9IHNtY3dkX3N0b3AsCj4g
+KwkucmVzZXQJCT0gc21jd2RfcmVzZXQsCj4gK307Cj4gKwo+ICtzdGF0aWMgY29uc3Qgc3RydWN0
+IHVkZXZpY2VfaWQgc21jd2RfZHRfaWRzW10gPSB7Cj4gKwl7IC5jb21wYXRpYmxlID0gImFybSxz
+bWMtd2R0IiB9LAo+ICsJe30KPiArfTsKPiArCj4gK1VfQk9PVF9EUklWRVIod2R0X3NhbmRib3gp
+ID0gewo+ICsJLm5hbWUgPSAic21jd2QiLAo+ICsJLmlkID0gVUNMQVNTX1dEVCwKPiArCS5vZl9t
+YXRjaCA9IHNtY3dkX2R0X2lkcywKPiArCS5wcml2X2F1dG8gPSBzaXplb2Yoc3RydWN0IHNtY3dk
+X3ByaXZfZGF0YSksCj4gKwkucHJvYmUgPSBzbWN3ZF9wcm9iZSwKPiArCS5vcHMgPSAmc21jd2Rf
+b3BzLAo+ICt9OwoKVmllbGUgR3LDvMOfZSwKU3RlZmFuIFJvZXNlCgotLSAKREVOWCBTb2Z0d2Fy
+ZSBFbmdpbmVlcmluZyBHbWJILCAgICAgIE1hbmFnaW5nIERpcmVjdG9yOiBFcmlrYSBVbnRlcgpI
+UkIgMTY1MjM1IE11bmljaCwgT2ZmaWNlOiBLaXJjaGVuc3RyLjUsIEQtODIxOTQgR3JvZWJlbnpl
+bGwsIEdlcm1hbnkKUGhvbmU6ICgrNDkpLTgxNDItNjY5ODktNTEgRmF4OiAoKzQ5KS04MTQyLTY2
+OTg5LTgwIEVtYWlsOiBzckBkZW54LmRlCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1t
+ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5
+LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

@@ -2,66 +2,44 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EBBD6D3F93
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Apr 2023 10:56:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 771C26D6899
+	for <lists+uboot-stm32@lfdr.de>; Tue,  4 Apr 2023 18:18:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EE28AC65E70;
-	Mon,  3 Apr 2023 08:56:06 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2E5F7C6A602;
+	Tue,  4 Apr 2023 16:18:10 +0000 (UTC)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3F2C0C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2337CC0D2C0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Apr 2023 08:56:06 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3338pUv8019682; Mon, 3 Apr 2023 10:56:03 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=01oWuE3BA1AfD2Z/tcI/5/gW5LAKoPuL9daKCzkLK8U=;
- b=TJ/1rsslkHufy4Ylq4Bh1yZbkF6ALWfLtgxsF8jBq38eYkHKT38U+91uqekNXiWpQsAn
- yaUlzpJOt1zHBovYqk+hWBZAiWn8eT13w3E9JHycfw9fPqp8/YAdrVGe2AP1TrPPCzRx
- nAEYA1zPiozh/5jVD9I53mitNp6tMWq/0oGlx/PQuttuw/8c3sNkJTIZZgdJuNCVX2ZI
- GDcg/URdfrqGZgZ6B6hwZmCpivl8DeznyUB4cBIorx5T6ZFSIyGOm/AxuijeKfu2uRF7
- u7b5NJmUMkqNvkN7g72xcN7gzW0eqwPZXDslj8s6ftN2hBxOPWZ0w2ssQVApz8yO3gqD kg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3pqunhg1rw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Apr 2023 10:56:03 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E8D8C100034;
- Mon,  3 Apr 2023 10:56:02 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB1B02132FC;
- Mon,  3 Apr 2023 10:56:02 +0200 (CEST)
-Received: from [10.48.0.157] (10.48.0.157) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Mon, 3 Apr
- 2023 10:56:01 +0200
-Message-ID: <d02d4f9f-f96f-487a-ec76-271b105fbbad@foss.st.com>
-Date: Mon, 3 Apr 2023 10:56:00 +0200
+ Tue,  4 Apr 2023 16:18:09 +0000 (UTC)
+Received: from francesco-nb.int.toradex.com (31-10-206-125.static.upc.ch
+ [31.10.206.125])
+ by mail11.truemail.it (Postfix) with ESMTPA id A5F1020779;
+ Tue,  4 Apr 2023 18:18:07 +0200 (CEST)
+Date: Tue, 4 Apr 2023 18:18:03 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Tom Rini <trini@konsulko.com>
+Message-ID: <ZCxNuw72/CrWSn6z@francesco-nb.int.toradex.com>
+References: <20230206224838.75963-1-francesco@dolcini.it>
+ <20230206224838.75963-2-francesco@dolcini.it>
+ <Y+GKi9MlruCvNZLZ@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Content-Language: en-US
-To: Stefan Roese <sr@denx.de>, Lionel Debieve <lionel.debieve@foss.st.com>,
- <u-boot@lists.denx.de>
-References: <20230331091422.1.Ifbd51cee403b79546111ea80e1f9c3a0290c01dc@changeid>
- <537d68ca-6efd-bbdd-8ada-07784dd0bfb9@denx.de>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <537d68ca-6efd-bbdd-8ada-07784dd0bfb9@denx.de>
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-03_06,2023-03-31_01,2023-02-09_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] watchdog: arm_smc_wdt: add watchdog
-	support
+Content-Disposition: inline
+In-Reply-To: <Y+GKi9MlruCvNZLZ@bill-the-cat>
+Cc: Marek Vasut <marex@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
+ Francesco Dolcini <francesco@dolcini.it>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>,
+ Niel Fourie <lusus@denx.de>, Enric Balletbo i Serra <eballetbo@gmail.com>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Javier =?iso-8859-1?Q?Mart=EDnez?= Canillas <javier@dowhile0.org>,
+ Tim Harvey <tharvey@gateworks.com>, sbabic@denx.de,
+ Nikita Kiryanov <nikita@compulab.co.il>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] fdt: validate/fix cells count on
+	mtdpart fixup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,130 +51,72 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiAzLzMxLzIzIDA5OjU5LCBTdGVmYW4gUm9lc2Ugd3JvdGU6Cj4gSGkgTGlvbmVsLAo+
-Cj4gT24gMy8zMS8yMyAwOToxNCwgTGlvbmVsIERlYmlldmUgd3JvdGU6Cj4+IEltcGxlbWVudCBh
-IEFSTSBTTUNDQyBiYXNlZCBkcml2ZXIgdGhhdCBhbGxvdyB0byB1c2UKPj4gYSBzZWN1cmUgd2F0
-Y2hkb2cgb24gdGhlIHBsYXRmb3JtLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBMaW9uZWwgRGViaWV2
-ZSA8bGlvbmVsLmRlYmlldmVAZm9zcy5zdC5jb20+Cj4+IC0tLQo+Pgo+PiDCoCBkcml2ZXJzL3dh
-dGNoZG9nL0tjb25maWfCoMKgwqDCoMKgwqAgfMKgwqAgOCArKysKPj4gwqAgZHJpdmVycy93YXRj
-aGRvZy9NYWtlZmlsZcKgwqDCoMKgwqAgfMKgwqAgMSArCj4+IMKgIGRyaXZlcnMvd2F0Y2hkb2cv
-YXJtX3NtY193ZHQuYyB8IDExNiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPj4g
-wqAgMyBmaWxlcyBjaGFuZ2VkLCAxMjUgaW5zZXJ0aW9ucygrKQo+PiDCoCBjcmVhdGUgbW9kZSAx
-MDA2NDQgZHJpdmVycy93YXRjaGRvZy9hcm1fc21jX3dkdC5jCj4+Cj4+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL3dhdGNoZG9nL0tjb25maWcgYi9kcml2ZXJzL3dhdGNoZG9nL0tjb25maWcKPj4gaW5k
-ZXggYjVhYzhmN2Y1MGQuLjNhMDM0MWY2MDlkIDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL3dhdGNo
-ZG9nL0tjb25maWcKPj4gKysrIGIvZHJpdmVycy93YXRjaGRvZy9LY29uZmlnCj4+IEBAIC0zNTIs
-NiArMzUyLDE0IEBAIGNvbmZpZyBXRFRfVEFOR0lFUgo+PiDCoMKgwqDCoMKgwqDCoCBJbnRlbCBU
-YW5naWVyIFNvQy4gSWYgeW91J3JlIHVzaW5nIGEgYm9hcmQgd2l0aCBJbnRlbCBUYW5naWVyCj4+
-IMKgwqDCoMKgwqDCoMKgIFNvQywgc2F5IFkgaGVyZS4KPj4gwqAgK2NvbmZpZyBXRFRfQVJNX1NN
-Qwo+PiArwqDCoMKgIGJvb2wgIkFSTSBTTUMgd2F0Y2hkb2cgdGltZXIgc3VwcG9ydCIKPj4gK8Kg
-wqDCoCBkZXBlbmRzIG9uIFdEVCAmJiBBUk1fU01DQ0MKPj4gK8KgwqDCoCBpbXBseSBXQVRDSERP
-Rwo+PiArwqDCoMKgIGhlbHAKPj4gK8KgwqDCoMKgwqAgU2VsZWN0IHRoaXMgdG8gZW5hYmxlIEFy
-bSBTTUMgd2F0Y2hkb2cgdGltZXIuIFRoaXMgd2F0Y2hkb2cgCj4+IHdpbGwgbWFuYWdlCj4+ICvC
-oMKgwqDCoMKgIGEgd2F0Y2hkb2cgYmFzZWQgb24gQVJNIFNNQ0NDIGNvbW11bmljYXRpb24uCj4+
-ICsKPj4gwqAgY29uZmlnIFNQTF9XRFQKPj4gwqDCoMKgwqDCoCBib29sICJFbmFibGUgZHJpdmVy
-IG1vZGVsIGZvciB3YXRjaGRvZyB0aW1lciBkcml2ZXJzIGluIFNQTCIKPj4gwqDCoMKgwqDCoCBk
-ZXBlbmRzIG9uIFNQTF9ETQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy93YXRjaGRvZy9NYWtlZmls
-ZSBiL2RyaXZlcnMvd2F0Y2hkb2cvTWFrZWZpbGUKPj4gaW5kZXggNDQ2ZDk2MWQ3ZDIuLmE0NjMz
-YzBkMmZhIDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL3dhdGNoZG9nL01ha2VmaWxlCj4+ICsrKyBi
-L2RyaXZlcnMvd2F0Y2hkb2cvTWFrZWZpbGUKPj4gQEAgLTE4LDYgKzE4LDcgQEAgb2JqLSQoQ09O
-RklHXyQoU1BMX1RQTF8pV0RUKSArPSB3ZHQtdWNsYXNzLm8KPj4gwqAgb2JqLSQoQ09ORklHX1dE
-VF9TQU5EQk9YKSArPSBzYW5kYm94X3dkdC5vCj4+IMKgIG9iai0kKENPTkZJR19XRFRfQUxBUk1f
-U0FOREJPWCkgKz0gc2FuZGJveF9hbGFybS13ZHQubwo+PiDCoCBvYmotJChDT05GSUdfV0RUX0FQ
-UExFKSArPSBhcHBsZV93ZHQubwo+PiArb2JqLSQoQ09ORklHX1dEVF9BUk1fU01DKSArPSBhcm1f
-c21jX3dkdC5vCj4+IMKgIG9iai0kKENPTkZJR19XRFRfQVJNQURBXzM3WFgpICs9IGFybWFkYS0z
-N3h4LXdkdC5vCj4+IMKgIG9iai0kKENPTkZJR19XRFRfQVNQRUVEKSArPSBhc3Rfd2R0Lm8KPj4g
-wqAgb2JqLSQoQ09ORklHX1dEVF9BU1QyNjAwKSArPSBhc3QyNjAwX3dkdC5vCj4+IGRpZmYgLS1n
-aXQgYS9kcml2ZXJzL3dhdGNoZG9nL2FybV9zbWNfd2R0LmMgCj4+IGIvZHJpdmVycy93YXRjaGRv
-Zy9hcm1fc21jX3dkdC5jCj4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4+IGluZGV4IDAwMDAwMDAw
-MDAwLi5lMmUzYzQ1NTA4Mgo+PiAtLS0gL2Rldi9udWxsCj4+ICsrKyBiL2RyaXZlcnMvd2F0Y2hk
-b2cvYXJtX3NtY193ZHQuYwo+PiBAQCAtMCwwICsxLDExNiBAQAo+PiArLy8gU1BEWC1MaWNlbnNl
-LUlkZW50aWZpZXI6IEdQTC0yLjArCgoKUGxlYXNlIHJlcGxhY2Ugd2l0aCBjb3JyZWN0IFNQRFgg
-aWRlbnRpZmllciBmb3IgbmV3IGZpbGUgPT4gR1BMLTIuMC1vci1sYXRlcgoKR1BMLTIuMCsgaWRl
-bnRpZmllciBpcyBkZXByZWNhdGVkIGFzIGluZGljYXRlZCBpbiBodHRwczovL3NwZHgub3JnL2xp
-Y2Vuc2VzLwoKCj4+ICsvKgo+PiArICogQVJNIFNlY3VyZSBNb25pdG9yIENhbGwgd2F0Y2hkb2cg
-ZHJpdmVyCj4+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjIsIFNUTWljcm9lbGVjdHJvbmljcyAtIEFs
-bCBSaWdodHMgUmVzZXJ2ZWQKCgorICogVGhpcyBmaWxlIGlzIGJhc2VkIG9uIExpbnV4IGRyaXZl
-ciBkcml2ZXJzL3dhdGNoZG9nL2FybV9zbWNfd2R0LmMKCj8KCgo+PiArICovCj4+ICsKCnBsZWFz
-ZSBhZGQgdGhlIExPRyBkZWZpbmUgZm9yIHRoaXMgbmV3IGRyaXZlcjoKCgojZGVmaW5lIExPR19D
-QVRFR09SWSBVQ0xBU1NfV0RUCgoKPj4gKyNpbmNsdWRlIDxkbS5oPgo+PiArI2luY2x1ZGUgPGRt
-L2RldmljZV9jb21wYXQuaD4KCiDCoGRtL2RldmljZV9jb21wYXQuaCBpcyBuZWVkZWQgPwoKCm5v
-IGNhbGwgZm9yIGRldiBkZWJ1ZyBmdW5jdGlvbiAocHJpbnRrIC8gZGV2X2VycigpIC8uLi4pCgoK
-Pj4gKyNpbmNsdWRlIDxkbS9vZl9hY2Nlc3MuaD4KCgpvZl9hY2Nlc3MuaCBpcyByZWFsbHkgbmVl
-ZGVkID8KCm5vIG9mX1hYWCgpIGZ1bmN0aW9uIGNhbGwuLi4KCgo+PiArI2luY2x1ZGUgPGxpbnV4
-L2FybS1zbWNjYy5oPgo+PiArI2luY2x1ZGUgPGxpbnV4L3BzY2kuaD4KPj4gKyNpbmNsdWRlIDx3
-ZHQuaD4KPj4gKwo+PiArI2RlZmluZSBEUlZfTkFNRcKgwqDCoMKgwqDCoMKgICJhcm1fc21jX3dk
-dCIKPj4gKyNkZWZpbmUgRFJWX1ZFUlNJT07CoMKgwqDCoMKgwqDCoCAiMS4wIgoKCk5JVFM6IERS
-Vl9WRVJTSU9OIGlzIG5vdCB1c2VkLAoKIMKgwqDCoMKgwqDCoMKgwqAgaXRzIGlzIG9ubHkgZm9y
-IGFsaWdubWVudCB3aXRoIGtlcm5lbCBkcml2ZXIgPwoKCj4+ICsKPj4gKyNkZWZpbmUgV0RUX1RJ
-TUVPVVRfU0VDUyhUSU1FT1VUKcKgwqDCoCAoKFRJTUVPVVQpIC8gMTAwMCkKPj4gKwo+PiArZW51
-bSBzbWN3ZF9jYWxsIHsKPj4gK8KgwqDCoCBTTUNXRF9JTklUwqDCoMKgwqDCoMKgwqAgPSAwLAo+
-PiArwqDCoMKgIFNNQ1dEX1NFVF9USU1FT1VUwqDCoMKgID0gMSwKPj4gK8KgwqDCoCBTTUNXRF9F
-TkFCTEXCoMKgwqDCoMKgwqDCoCA9IDIsCj4+ICvCoMKgwqAgU01DV0RfUEVUwqDCoMKgwqDCoMKg
-wqAgPSAzLAo+PiArwqDCoMKgIFNNQ1dEX0dFVF9USU1FTEVGVMKgwqDCoCA9IDQsCj4+ICt9Owo+
-PiArCj4+ICtzdHJ1Y3Qgc21jd2RfcHJpdl9kYXRhIHsKPj4gK8KgwqDCoCB1MzIgc21jX2lkOwo+
-PiArwqDCoMKgIHVuc2lnbmVkIGludCBtaW5fdGltZW91dDsKPj4gK8KgwqDCoCB1bnNpZ25lZCBp
-bnQgbWF4X3RpbWVvdXQ7Cj4+ICt9Owo+PiArCj4+ICtzdGF0aWMgaW50IHNtY3dkX2NhbGwoc3Ry
-dWN0IHVkZXZpY2UgKmRldiwgZW51bSBzbWN3ZF9jYWxsIGNhbGwsCj4+ICvCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCB1bnNpZ25lZCBsb25nIGFyZywgc3RydWN0IGFybV9zbWNjY19yZXMgKnJl
-cykKPj4gK3sKPj4gK8KgwqDCoCBzdHJ1Y3QgYXJtX3NtY2NjX3JlcyBsb2NhbF9yZXM7Cj4+ICvC
-oMKgwqAgc3RydWN0IHNtY3dkX3ByaXZfZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+
-PiArCj4+ICvCoMKgwqAgaWYgKCFyZXMpCj4+ICvCoMKgwqDCoMKgwqDCoCByZXMgPSAmbG9jYWxf
-cmVzOwo+PiArCj4+ICvCoMKgwqAgYXJtX3NtY2NjX3NtYyhwcml2LT5zbWNfaWQsIGNhbGwsIGFy
-ZywgMCwgMCwgMCwgMCwgMCwgcmVzKTsKPj4gKwo+PiArwqDCoMKgIGlmIChyZXMtPmEwID09IFBT
-Q0lfUkVUX05PVF9TVVBQT1JURUQpCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVOT0RFVjsK
-Pj4gK8KgwqDCoCBpZiAocmVzLT5hMCA9PSBQU0NJX1JFVF9JTlZBTElEX1BBUkFNUykKPj4gK8Kg
-wqDCoMKgwqDCoMKgIHJldHVybiAtRUlOVkFMOwo+PiArwqDCoMKgIGlmIChyZXMtPmEwICE9IFBT
-Q0lfUkVUX1NVQ0NFU1MpCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTzsKPj4gKwo+PiAr
-wqDCoMKgIHJldHVybiAwOwo+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHNtY3dkX3Jlc2V0KHN0
-cnVjdCB1ZGV2aWNlICpkZXYpCj4+ICt7Cj4+ICvCoMKgwqAgcmV0dXJuIHNtY3dkX2NhbGwoZGV2
-LCBTTUNXRF9QRVQsIDAsIE5VTEwpOwo+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHNtY3dkX3N0
-b3Aoc3RydWN0IHVkZXZpY2UgKmRldikKPj4gK3sKPj4gK8KgwqDCoCByZXR1cm4gc21jd2RfY2Fs
-bChkZXYsIFNNQ1dEX0VOQUJMRSwgMCwgTlVMTCk7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBpbnQg
-c21jd2Rfc3RhcnQoc3RydWN0IHVkZXZpY2UgKmRldiwgdTY0IHRpbWVvdXRfbXMsIHVsb25nIAo+
-PiBmbGFncykKPj4gK3sKPj4gK8KgwqDCoCBpbnQgZXJyOwo+PiArwqDCoMKgIHU2NCB0aW1lb3V0
-X3NlYyA9IFdEVF9USU1FT1VUX1NFQ1ModGltZW91dF9tcyk7Cj4+ICvCoMKgwqAgc3RydWN0IHNt
-Y3dkX3ByaXZfZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+Cj4gTml0cGlja2luZzog
-SXQncyBnZW5lcmFsbHkgbW9yZSBjb21tb24gdG8gdXNlIHRoZSByZXZlcnNlIHhtYXMgdHJlZQo+
-IHN0eWxlIGZvciB2YXJpYWJsZSBkZWNsYXJhdGlvbiBvcmRlcmluZy4gT24gb3RoZXIgcGxhY2Vz
-IGluIHRoaXMgY29kZQo+IGFzIHdlbGwuCj4KPj4gKwo+PiArwqDCoMKgIGlmICh0aW1lb3V0X3Nl
-YyA8IHByaXYtPm1pbl90aW1lb3V0IHx8IHRpbWVvdXRfc2VjID4gCj4+IHByaXYtPm1heF90aW1l
-b3V0KQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC1FSU5WQUw7Cj4KPiBBbiBlcnJvciBtZXNz
-YWdlIHdvdWxkIGJlIGdvb2QgaGVyZS4gT3IgYXQgbGVhc3Qgc29tZSBkZWJ1ZyBsZXZlbAo+IG1l
-c3NhZ2UuCj4KPj4gKwo+PiArwqDCoMKgIGVyciA9IHNtY3dkX2NhbGwoZGV2LCBTTUNXRF9TRVRf
-VElNRU9VVCwgdGltZW91dF9zZWMsIE5VTEwpOwo+PiArwqDCoMKgIGlmIChlcnIpCj4+ICvCoMKg
-wqDCoMKgwqDCoCByZXR1cm4gZXJyOwo+Cj4gQWdhaW4sIHBsZWFzZSBlbmhhbmNlIHRoZSBkcml2
-ZXIgd2l0aCBzb21lIGVycm9yIG9yIGF0IGxlYXN0IGRlYnVnCj4gbGV2ZWwgbG9nZ2luZy4KPgo+
-IFRoYW5rcywKPiBTdGVmYW4KPgo+PiArCj4+ICvCoMKgwqAgcmV0dXJuIHNtY3dkX2NhbGwoZGV2
-LCBTTUNXRF9FTkFCTEUsIDEsIE5VTEwpOwo+PiArfQo+PiArCj4+ICtzdGF0aWMgaW50IHNtY3dk
-X3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYpCj4+ICt7Cj4+ICvCoMKgwqAgaW50IGVycjsKPj4g
-K8KgwqDCoCBzdHJ1Y3QgYXJtX3NtY2NjX3JlcyByZXM7Cj4+ICvCoMKgwqAgc3RydWN0IHNtY3dk
-X3ByaXZfZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+PiArCj4+ICvCoMKgwqAgcHJp
-di0+c21jX2lkID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAiYXJtLHNtYy1pZCIsIDB4ODIw
-MDNEMDYpOwo+PiArCj4+ICvCoMKgwqAgZXJyID0gc21jd2RfY2FsbChkZXYsIFNNQ1dEX0lOSVQs
-IDAsICZyZXMpOwo+PiArwqDCoMKgIGlmIChlcnIgPCAwKQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0
-dXJuIGVycjsKPj4gKwo+PiArwqDCoMKgIHByaXYtPm1pbl90aW1lb3V0ID0gcmVzLmExOwo+PiAr
-wqDCoMKgIHByaXYtPm1heF90aW1lb3V0ID0gcmVzLmEyOwo+PiArCj4+ICvCoMKgwqAgcmV0dXJu
-IDA7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3Qgd2R0X29wcyBzbWN3ZF9vcHMg
-PSB7Cj4+ICvCoMKgwqAgLnN0YXJ0wqDCoMKgwqDCoMKgwqAgPSBzbWN3ZF9zdGFydCwKPj4gK8Kg
-wqDCoCAuc3RvcMKgwqDCoMKgwqDCoMKgID0gc21jd2Rfc3RvcCwKPj4gK8KgwqDCoCAucmVzZXTC
-oMKgwqDCoMKgwqDCoCA9IHNtY3dkX3Jlc2V0LAo+PiArfTsKPj4gKwo+PiArc3RhdGljIGNvbnN0
-IHN0cnVjdCB1ZGV2aWNlX2lkIHNtY3dkX2R0X2lkc1tdID0gewo+PiArwqDCoMKgIHsgLmNvbXBh
-dGlibGUgPSAiYXJtLHNtYy13ZHQiIH0sCj4+ICvCoMKgwqAge30KPj4gK307Cj4+ICsKPj4gK1Vf
-Qk9PVF9EUklWRVIod2R0X3NhbmRib3gpID0gewo+PiArwqDCoMKgIC5uYW1lID0gInNtY3dkIiwK
-Pj4gK8KgwqDCoCAuaWQgPSBVQ0xBU1NfV0RULAo+PiArwqDCoMKgIC5vZl9tYXRjaCA9IHNtY3dk
-X2R0X2lkcywKPj4gK8KgwqDCoCAucHJpdl9hdXRvID0gc2l6ZW9mKHN0cnVjdCBzbWN3ZF9wcml2
-X2RhdGEpLAo+PiArwqDCoMKgIC5wcm9iZSA9IHNtY3dkX3Byb2JlLAo+PiArwqDCoMKgIC5vcHMg
-PSAmc21jd2Rfb3BzLAo+PiArfTsKPgo+IFZpZWxlIEdyw7zDn2UsCj4gU3RlZmFuIFJvZXNlCj4K
-CmV2ZW4gd2l0aCBmZXcgTklUCgoKUmV2aWV3ZWQtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJp
-Y2suZGVsYXVuYXlAZm9zcy5zdC5jb20+CgpUZXN0ZWQtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBh
-dHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+CgoKT24gU1RNMzJNUDEzeCBwbGF0Zm9ybSB3aXRo
-IHdhdGNoZG9nIG1hbmFnZWQgaW4gT1AtVEVFLgoKClRoYW5rcwpQYXRyaWNrCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGlu
-ZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9z
-dC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
++Stefano
+
+On Mon, Feb 06, 2023 at 06:17:31PM -0500, Tom Rini wrote:
+> On Mon, Feb 06, 2023 at 11:48:36PM +0100, Francesco Dolcini wrote:
+> 
+> > From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > 
+> > Fixup #size-cells value when updating the MTD partitions, this is
+> > required to prevent issues in case the MTD parent set #size-cells to
+> > zero.
+> > This could happen for example in the legacy case in which the partitions
+> > are created as direct child of the mtd node and that specific node has
+> > no children. Recent clean-up on Linux device tree files created a boot
+> > regression on colibri-imx7 [0].
+> > 
+> > This fixup has the limitation to assume 32-bit (#size-cells=1)
+> > addressing, therefore it will not work with device bigger than 4GiB.
+> > 
+> > This change also enforce #address-cells to be the same as #size-cells,
+> > this was already silently enforced by fdt_node_set_part_info(), now this
+> > is checked explicitly and partition fixup will just fail in such case.
+> > 
+> > When the partition list is static the preferred way to pass the mtd
+> > partition list to the kernel is to either define those in the source DTS
+> > file or use mtdparts= in the command line.
+> > Tweaking the DT from U-Boot should be avoided, unless some dynamic
+> > changes are required, since it proved to be problematic when not
+> > following the evolution of the "standard".
+> > 
+> > Link: https://lore.kernel.org/all/Y4dgBTGNWpM6SQXI@francesco-nb.int.toradex.com/
+> > Link: https://lore.kernel.org/all/20221202071900.1143950-1-francesco@dolcini.it/
+> > Cc: Marek Vasut <marex@denx.de>
+> > Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> > Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > ---
+> > v2: improved commit message
+> > ---
+> >  common/fdt_support.c | 45 ++++++++++++++++++++++++++++++++++----------
+> >  1 file changed, 35 insertions(+), 10 deletions(-)
+> 
+> I'm dropping the linux-mtd list here and adding a bunch more platform
+> maintainers. In general, calling fdt_fixup_mtdparts is the wrong choice.
+> I see we do have a few cases in U-Boot where we're clearly doing
+> something dynamic to the partition table, but it looks like at first
+> glance most callers are using this hook when they should either be
+> having the partition map in the device tree properly (and using one of
+> the appropriate bindings) or passing the map in via the kernel command
+> line. I would like to ask everyone I've added to the list here to
+> please audit your platform and update it as needed. Thanks!
+
+Hello Tom,
+what should we do with this patch? No feedback so far, apart this email
+from you.
+
+Stefano: maybe you can pick patches 2 and 3 ?
+
+Francesco
+
+
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

@@ -2,61 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7D366DAB00
-	for <lists+uboot-stm32@lfdr.de>; Fri,  7 Apr 2023 11:37:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F22766DAEF3
+	for <lists+uboot-stm32@lfdr.de>; Fri,  7 Apr 2023 16:50:59 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5AD53C6B444;
-	Fri,  7 Apr 2023 09:37:13 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A605BC6B44A;
+	Fri,  7 Apr 2023 14:50:59 +0000 (UTC)
+Received: from mail-qv1-f54.google.com (mail-qv1-f54.google.com
+ [209.85.219.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 96564C6B443
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0219DC6B448
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  7 Apr 2023 09:37:12 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3377cJ1J015383; Fri, 7 Apr 2023 11:37:11 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=Slz/2is4GR1ojDvfG+pABllv/rDVqoiA6E5yeWwZgaI=;
- b=IamQKM9KG1LjFrnpdI10leKkxW2cUGEYmTclXNvUgbXoham8CvOdPitpUgTWZOIRaX1y
- NYkbtfJF2sPHGdJoN8bfOgh9ZNY/mOZ8eXfXrx1RuAfFengWnu5VtwBL12uxDOR0BZZx
- IIYTt/aL9oQdPyr4Fb1mvGv3jknpZQR1AjtpuLFTuHdxctV/FWzYhU205h2+zRVvOFlZ
- AVj+7TPY1CnlwFaTnL981sbEsep4HGSDO7aI+do49W6vnX1Xi/xxaoH+q6coqNlKGqwn
- y04Ju6HPD/XudCZoZaWuilpPkluq9lgZRqrvY2gGiy/hkhXS25tJspMY0U2wvN6lhw7L Rw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ptey58r41-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 07 Apr 2023 11:37:11 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D867810002A;
- Fri,  7 Apr 2023 11:37:10 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BBE75216EC3;
- Fri,  7 Apr 2023 11:37:10 +0200 (CEST)
-Received: from localhost (10.48.0.157) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.17; Fri, 7 Apr
- 2023 11:37:10 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 7 Apr 2023 11:37:08 +0200
-Message-ID: <20230407113657.1.I298af67004d61e65f93e38284ab3895dd7d5dc66@changeid>
-X-Mailer: git-send-email 2.25.1
+ Fri,  7 Apr 2023 14:50:57 +0000 (UTC)
+Received: by mail-qv1-f54.google.com with SMTP id oe8so30340183qvb.6
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 07 Apr 2023 07:50:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1680879057;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zhy35ZKmSacK7270PrUM+wZF/kYXpIZXeREL1mgDLDk=;
+ b=G6NAcKmJ52uIfCD6jKgWVNd3wFnOvXvinYDfoj4rvGQHESuxtoUY9U6r4pWvGc9S8c
+ /G4gSQALHQWiABhFrNxxz79hfbiQK3+VQVdP8/MZnZTrFrl1W1KiqhrLtQ9521pXwiHH
+ d0llMmEoUCtPHN9zVoyA80Y+QBUyTyP2/rL9c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680879057;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zhy35ZKmSacK7270PrUM+wZF/kYXpIZXeREL1mgDLDk=;
+ b=FHUOMUUjMaZDSresHkzUq1Noxit2kKtT5VXCY2grkILcL4xkqg7l3Bn8IGnP1VBjGc
+ hrFT6WKOxizsYygVuFCZWNDa8j6NiiExBlnEMZj34VJZhIHd6tQsxoRcKsCy8qxds/RG
+ +arLerxpGE1H9+ss+ic8pLB0C2POpRr8EMTI1IePE8lSV8GMITZnM0ahj9xMakLob8PF
+ 0FXpffk6AK7w0cgPwOqLYlB46K4tntwjDKQuBICg4sHgwJ+JLl89pqXTV/eXHbT8A55W
+ kAyj1Kc0Vt4ZRsgSBIB2jnxLJjs3lUaSRvFvuBttSH3EqnT4J9nKMNcc8AwZ2zFOmklz
+ /OlA==
+X-Gm-Message-State: AAQBX9eqpwjxNFjyGTEPCI+6MBa7uQT9YYxtYcKbzuw/nUwCedP0qfcZ
+ +7duN9sC2kZptWGmMKI6m1I9wg==
+X-Google-Smtp-Source: AKy350bYFUJMocXkfBR1F3RYNH+htsCn7zDIISxsJNDedWLPpm+2UPYVLfaQ5/lAAgpValDhcbWSug==
+X-Received: by 2002:a05:6214:501d:b0:5e0:30cc:830b with SMTP id
+ jo29-20020a056214501d00b005e030cc830bmr5957871qvb.0.1680879056874; 
+ Fri, 07 Apr 2023 07:50:56 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-4d7a-a40c-ed12-3a35.res6.spectrum.com.
+ [2603:6081:7b00:6400:4d7a:a40c:ed12:3a35])
+ by smtp.gmail.com with ESMTPSA id
+ my7-20020a0562142e4700b005dd8b9345adsm1371294qvb.69.2023.04.07.07.50.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Apr 2023 07:50:56 -0700 (PDT)
+Date: Fri, 7 Apr 2023 10:50:54 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Message-ID: <20230407145054.GV1134230@bill-the-cat>
+References: <20230322191223.v2.1.I2a3a1c4e853d66857091cbef8d3a2ec87d65daba@changeid>
 MIME-Version: 1.0
-X-Originating-IP: [10.48.0.157]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-07_06,2023-04-06_03,2023-02-09_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [Uboot-stm32] [PATCH] configs: stm32mp15: increase malloc size for
-	pre-reloc
+In-Reply-To: <20230322191223.v2.1.I2a3a1c4e853d66857091cbef8d3a2ec87d65daba@changeid>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@xilinx.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>,
+ Kautuk Consul <kconsul@ventanamicro.com>, u-boot@lists.denx.de,
+ Mark Millard <marklmi@yahoo.com>, Brandon Maier <brandon.maier@collins.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Michal Simek <michal.simek@amd.com>, Sjoerd Simons <sjoerd@collabora.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/2] lmb: Fix LMB_MEMORY_REGIONS flag
+	usage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -68,42 +83,85 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============0288470625599495831=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The early malloc usage increased so the associated defined
-CONFIG_SYS_MALLOC_F_LEN need to be increased.
 
-For example, for stm32mp15_defconfig and
-stm32mp157c-dk2-scmi.dtsi, we have:
+--===============0288470625599495831==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="UmAGBitAy50yMDrU"
+Content-Disposition: inline
 
-Early malloc usage: 280b8 / 80000
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
+--UmAGBitAy50yMDrU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- configs/stm32mp15_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Mar 22, 2023 at 07:12:25PM +0100, Patrick Delaunay wrote:
 
-diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
-index 0005e4266441..2676ff381d85 100644
---- a/configs/stm32mp15_defconfig
-+++ b/configs/stm32mp15_defconfig
-@@ -1,7 +1,7 @@
- CONFIG_ARM=y
- CONFIG_ARCH_STM32MP=y
- CONFIG_TFABOOT=y
--CONFIG_SYS_MALLOC_F_LEN=0x20000
-+CONFIG_SYS_MALLOC_F_LEN=0x80000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_ENV_OFFSET=0x480000
- CONFIG_ENV_SECT_SIZE=0x40000
--- 
-2.25.1
+> Remove test on CONFIG_LMB_MEMORY_REGIONS introduced by commit
+> 7c1860fce4e3 ("lmb: Fix lmb property's defination under struct lmb").
+>=20
+> This code in lmb_init() is strange, because if CONFIG_LMB_USE_MAX_REGIONS
+> and CONFIG_LMB_MEMORY_REGIONS are not defined, the implicit #else is empty
+> and the required initialization is not done:
+> lmb->memory.max =3D ?
+> lmb->reserved.max =3D ?
+>=20
+> But this setting is not possible:
+> - CONFIG_LMB_USE_MAX_REGIONS not defined
+> - CONFIG_LMB_MEMORY_REGIONS not defined
+> because CONFIG_LMB_MEMORY_REGIONS and CONFIG_LMB_RESERVED_REGIONS are
+> defined as soon as the CONFIG_LMB_USE_MAX_REGIONS is not defined.
+>=20
+> This patch removes this impossible case #elif and I add some
+> explanation in lmb.h to explain why in the struct lmb {} the lmb
+> property is defined if CONFIG_LMB_MEMORY_REGIONS is NOT defined.
+>=20
+> This patch also removes CONFIG_LMB_XXX dependency on CONFIG_LMB as these
+> defines are used in API file lmb.h and not only in library file.
+>=20
+> Fixes: 5e2548c1d6e03 ("lmb: Fix LMB_MEMORY_REGIONS flag usage")
+> Reported-by: Mark Millard <marklmi@yahoo.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Acked-by: Michal Simek <michal.simek@amd.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--UmAGBitAy50yMDrU
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmQwLc4ACgkQFHw5/5Y0
+tyzjPQwAg/ssXjTAxuFwSo5eJYeAhLEsbu/e5OiMji8be19fNxcvNZiMozwL/N3D
+HMaZCTcYYr+lbjc8F/REdfG0jakBn5M7cl4gOiywSDavSAvpmvdJu5W79jUE89Tt
+ehXwofH3grKCShOxgMCBw9bgabEVrjkk6Uas95u+28Cjv3H5x4IgCrvUSUuuAfEl
+Tt/+tpMs+smYABG3DgaYIcRNx/LmaYqYjJGb5W557wGP1T6Gbvt0cJPxjPTcqHMR
+icXc8a7va6UKOWWZotzwkyd/4Sl09cpI8vx/+7n8dGmL734QrlhUnSk+mFrMRlId
+xgTPSs9SdNq9zuQv0BO8l6QRtVe57ij8faTMI4/U/KOSaNWRyi5c3Fh5GMuIP/JK
+5gh6/xwVyhu9AR/oyUGTK2nplBXz/ebiIuhBf1uL+z8AueTGrlhk4HskHe7F0Auz
+tcoDUjX0OxPvJU4vKIX8xksLxsSWJy4k2eXuJHg/mxFNoZ/UJrciGUYEYzopHgTw
+RFk3cwUF
+=FCFF
+-----END PGP SIGNATURE-----
+
+--UmAGBitAy50yMDrU--
+
+--===============0288470625599495831==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0288470625599495831==--

@@ -2,71 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB73F6DAEF4
-	for <lists+uboot-stm32@lfdr.de>; Fri,  7 Apr 2023 16:51:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3CD656DD30D
+	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Apr 2023 08:41:34 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B4716C6B44A;
-	Fri,  7 Apr 2023 14:51:06 +0000 (UTC)
-Received: from mail-qv1-f42.google.com (mail-qv1-f42.google.com
- [209.85.219.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DC21BC03FC3;
+	Tue, 11 Apr 2023 06:41:33 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1A91FC6B448
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EA57C03FC1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  7 Apr 2023 14:51:05 +0000 (UTC)
-Received: by mail-qv1-f42.google.com with SMTP id g9so30336287qvt.8
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 07 Apr 2023 07:51:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1680879064;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vp/QgDyfNvTWRbud3E4PPf3LBE5r8bliKu8vcWQHFkg=;
- b=GlNnojzShPUtvX19j/6w62p8xoTuPzUJ2UJKf44C1w8cY4nVgcsfV/VzJ/F2kT0AXe
- Doqb2LWBzYdrYNiQXacmn9GrAYVnGpQ++ULg7Vz92aiBEPx/Gmg+Olz6V/gp1z11KNdI
- oouJnNMDqhCA+b21fnzK0SfOIwUqJW76oRtao=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680879064;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vp/QgDyfNvTWRbud3E4PPf3LBE5r8bliKu8vcWQHFkg=;
- b=F8D4JLa5pr4x5xbnBA3bzozEStIFzLCbcS7TfOhDxUsYW20/LDRqu14s4KVCy+IDYg
- CZ7iv2UdU/znj5N452C+a41eDUniTgnQjaseGBr4M94P/8dwwW8Nt5lgEA1aNo1BSZ7X
- fnGJyoDdr9qCSNn2sblMNVvslra2Cv1DrvMuAmwgm9fA1KMOlsNrs4/pZy4PyAczSgKl
- xAdj3kM1xgCr3LGt0r7NGLApQxjDzc507yXjbGY2i7S16RH2SbfNgBxgdJa+GME0en6b
- os0vgPSLe7Rzh4bcenG30YYlEYMbW0lY7cBsj+ouIb/ldXuF+Vp40jku3LnZPWXgtV1M
- ZtzA==
-X-Gm-Message-State: AAQBX9eQ+fMHapNgkXP7vkPDL4K19vt1piaPQKRjXUtXb6qtrsFdoqT2
- uLdZisflD8HSbX+MMs7eDHnbgQ==
-X-Google-Smtp-Source: AKy350bR8TCdnLQBPt7kntay+BjtiqVVBFcwPaEtpd0Ghy6eb8bhZT8kVwzw1UIymJGWkPBjbmbrnQ==
-X-Received: by 2002:a05:6214:5192:b0:5ac:f751:e07d with SMTP id
- kl18-20020a056214519200b005acf751e07dmr4436044qvb.1.1680879064157; 
- Fri, 07 Apr 2023 07:51:04 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-4d7a-a40c-ed12-3a35.res6.spectrum.com.
- [2603:6081:7b00:6400:4d7a:a40c:ed12:3a35])
- by smtp.gmail.com with ESMTPSA id
- ez16-20020ad45910000000b005dd8b934587sm154870qvb.31.2023.04.07.07.51.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Apr 2023 07:51:03 -0700 (PDT)
-Date: Fri, 7 Apr 2023 10:51:01 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Message-ID: <20230407145101.GW1134230@bill-the-cat>
-References: <20230322191223.v2.1.I2a3a1c4e853d66857091cbef8d3a2ec87d65daba@changeid>
- <20230322191223.v2.2.I79b07546f01e96623c310b0a68382edadfacec31@changeid>
+ Tue, 11 Apr 2023 06:41:33 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 33B2AlMB024723; Tue, 11 Apr 2023 08:41:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=L3mRiuzNyslD6Nr0u21//pyEh1vZjqyVfWrwDF4jeoQ=;
+ b=QGh5rt4JeRK7ffJPuvicz5xF/eq8DeBvsru/fLSekxod/YALbS72zgwnERuz2z8+Z2Qb
+ NEknawh0xveT+vfnI5uw5iIElS+Y4mmo5Ww6ctKzWvEVk2s8B0GVgyzV79sIPKzyZbbz
+ 58yWQ0FoEIYRS2facyHl1bQo1tgkM8d0qsUFqBqswYytgwlSkJnL5NXmlXhU6XcIbHzd
+ ecxcn4Nx4abqbRh6sBMAl3Ei2g4wvMAatrkup/4x5uB4HY3LRfRMnC1IbcPjYIQ6hnT/
+ Y51os6qVUoy7KxfitmIc3C/3Ug7k1ziZn9EQ1C8QytPYLX7lyFfXPSsa105iVH2n75xE Fw== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ptym3k2g1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 11 Apr 2023 08:41:32 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F20FE10003D;
+ Tue, 11 Apr 2023 08:41:30 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C6B3420C8E6;
+ Tue, 11 Apr 2023 08:41:30 +0200 (CEST)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 11 Apr
+ 2023 08:41:30 +0200
+Message-ID: <e0dac76e-bd9f-0c9c-168b-47e81206f86c@foss.st.com>
+Date: Tue, 11 Apr 2023 08:41:30 +0200
 MIME-Version: 1.0
-In-Reply-To: <20230322191223.v2.2.I79b07546f01e96623c310b0a68382edadfacec31@changeid>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@xilinx.com>,
- Ashok Reddy Soma <ashok.reddy.soma@xilinx.com>, u-boot@lists.denx.de,
- Mark Millard <marklmi@yahoo.com>, Sjoerd Simons <sjoerd@collabora.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/2] lmb: add max number of region in
- lmb_dump_region() output
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20230407113657.1.I298af67004d61e65f93e38284ab3895dd7d5dc66@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230407113657.1.I298af67004d61e65f93e38284ab3895dd7d5dc66@changeid>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-04-11_03,2023-04-06_03,2023-02-09_01
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] configs: stm32mp15: increase malloc size
+	for pre-reloc
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,80 +71,47 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0184432838780310922=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick
 
---===============0184432838780310922==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="Vo8k4nKfQfzF3OwY"
-Content-Disposition: inline
-
-
---Vo8k4nKfQfzF3OwY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Mar 22, 2023 at 07:12:26PM +0100, Patrick Delaunay wrote:
-
-> Add the max number of region in lmb dump; this patch allows to
-> check the limit for usage of the LMB regions, memory or reserved.
->=20
-> Result on STM32MP157C-DK2:
->=20
-> STM32MP> bdinfo
-> .....
-> lmb_dump_all:
->  memory.cnt =3D 0x1 / max =3D 0x2
->  memory[0]	[0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
->  reserved.cnt =3D 0x6 / max =3D 0x10
->  reserved[0]	[0x10000000-0x10045fff], 0x00046000 bytes flags: 4
->  reserved[1]	[0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
->  reserved[2]	[0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
->  reserved[3]	[0xd4000000-0xd7ffffff], 0x04000000 bytes flags: 4
->  reserved[4]	[0xdcae5000-0xdfffffff], 0x0351b000 bytes flags: 0
->  reserved[5]	[0xddafb5b8-0xdfffffff], 0x02504a48 bytes flags: 0
-> ....
->=20
-> Reported-by: Mark Millard <marklmi@yahoo.com>
+On 4/7/23 11:37, Patrick Delaunay wrote:
+> The early malloc usage increased so the associated defined
+> CONFIG_SYS_MALLOC_F_LEN need to be increased.
+> 
+> For example, for stm32mp15_defconfig and
+> stm32mp157c-dk2-scmi.dtsi, we have:
+> 
+> Early malloc usage: 280b8 / 80000
+> 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  configs/stm32mp15_defconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+> index 0005e4266441..2676ff381d85 100644
+> --- a/configs/stm32mp15_defconfig
+> +++ b/configs/stm32mp15_defconfig
+> @@ -1,7 +1,7 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_STM32MP=y
+>  CONFIG_TFABOOT=y
+> -CONFIG_SYS_MALLOC_F_LEN=0x20000
+> +CONFIG_SYS_MALLOC_F_LEN=0x80000
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+>  CONFIG_ENV_OFFSET=0x480000
+>  CONFIG_ENV_SECT_SIZE=0x40000
 
-Applied to u-boot/master, thanks!
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
---=20
-Tom
-
---Vo8k4nKfQfzF3OwY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmQwLdUACgkQFHw5/5Y0
-tyw3DgwAsBTnJrESYPl5YGGG7mBG002f8GaG1EUoWspH0CR8xeHqBp2o2aisA+0x
-s93GnjJjhvg798w9TF4i7EFu/Skopbrxz5yvqaj+YSvVDldR0nUYS9njY9S6E+MD
-/ORzt/JRJ6HYN83kxBy5XSRctTx/JRTjTkYo8nsMp9+cKV3fINA+Cua2mAZuQRGz
-iouTmBFTX6e1fRGojO7QxM+p1W4qD2LA7ldMES4ph/4Jo3Cnexbj6ZgAQ9FRGO7d
-jpqCMPTas5r7HudHWGzvcQASpdnjw5ZYqBTTaCZzKWTIFfsS9dUGARlzfxmFMSG+
-twS9dyaSsHXWMuji6xgjgHeexIGbzP5+RBYmSF8X+zF4YkWCwmQ8NnKENwHNSnJI
-xZRJErj/dhYHsVatGP8C0O5AfTg8pxHgYkjp1Bf5GYv7RlUg9grdt85JaPiVwD6j
-KIzJQY5L9wdnYwC1gDHvqD2sXFLBasuZrgxNHgaXtWm71TSTpoMIjg9bewtl5t8d
-v6V4zqz8
-=I3hL
------END PGP SIGNATURE-----
-
---Vo8k4nKfQfzF3OwY--
-
---===============0184432838780310922==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0184432838780310922==--

@@ -2,66 +2,46 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D554C6DD6B6
-	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Apr 2023 11:32:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E942D6E1CAA
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Apr 2023 08:29:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 94843C62EFE;
-	Tue, 11 Apr 2023 09:32:14 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BB5BC69065;
+	Fri, 14 Apr 2023 06:29:35 +0000 (UTC)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 73267C57B6A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 55242C69063
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 11 Apr 2023 09:32:13 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 33B7fB2Z030096; Tue, 11 Apr 2023 11:32:09 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=ViM9t7eeOuZwWMWnnQO2LPYNmcKVbATnbPmCulNZwGU=;
- b=Z8iaJo4vwveB+E3jPRFiAz1mBHTjm+bAeG3PcX3/cjGtbPm1O/rDpkXlQ1/PkkFh8CE0
- LnyOQ/MzYRXrZetRnxDYrIrPItCVZ4muXQp85NPCWYV5usz2pBGkigFRzm2RK80zCy/Y
- fbfR6LfTQ/br44R7WnArtQXdBTQdvyEwEILHbUmMMBW6GGo4LKJrSQ8LeOG8TPxZ/LCY
- 9njNeWeXWNTlyQAww+2De4pKMdGR85hEHAdC3kHEpuoI/nakxoOh+LmCc160SoCGbHBh
- Njuz7S9oMnctYHObSg+BfwDOgauyoqrnJVwU3LIIvKRrAQYAXbW4EmU6EgS3tlxj/E6+ mw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ptym3m801-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 11 Apr 2023 11:32:09 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 42109100034;
- Tue, 11 Apr 2023 11:32:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3058E215BC6;
- Tue, 11 Apr 2023 11:32:08 +0200 (CEST)
-Received: from [10.201.22.153] (10.201.22.153) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 11 Apr
- 2023 11:32:07 +0200
-Message-ID: <f322083d-103c-b339-44a8-38456f73c0b9@foss.st.com>
-Date: Tue, 11 Apr 2023 11:32:07 +0200
+ Fri, 14 Apr 2023 06:29:34 +0000 (UTC)
+Received: from francesco-nb.int.toradex.com (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 0C8351F8C9;
+ Fri, 14 Apr 2023 08:29:30 +0200 (CEST)
+Date: Fri, 14 Apr 2023 08:29:25 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Message-ID: <ZDjyxZetaTQEjJxy@francesco-nb.int.toradex.com>
+References: <20230206224838.75963-1-francesco@dolcini.it>
+ <20230206224838.75963-2-francesco@dolcini.it>
+ <Y+GKi9MlruCvNZLZ@bill-the-cat>
+ <ZCxNuw72/CrWSn6z@francesco-nb.int.toradex.com>
+ <20230406152527.GE1134230@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Content-Language: en-US
-To: Stefan Roese <sr@denx.de>, <u-boot@lists.denx.de>
-References: <20230405115313.v2.1.Ifbd51cee403b79546111ea80e1f9c3a0290c01dc@changeid>
- <be4b47c1-a6c5-badb-1f08-2a0d9f2f049a@denx.de>
-From: Lionel DEBIEVE <lionel.debieve@foss.st.com>
-In-Reply-To: <be4b47c1-a6c5-badb-1f08-2a0d9f2f049a@denx.de>
-X-Originating-IP: [10.201.22.153]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-11_06,2023-04-06_03,2023-02-09_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] watchdog: arm_smc_wdt: add watchdog
-	support
+Content-Disposition: inline
+In-Reply-To: <20230406152527.GE1134230@bill-the-cat>
+Cc: Marek Vasut <marex@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
+ Francesco Dolcini <francesco@dolcini.it>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tim Harvey <tharvey@gateworks.com>, Niel Fourie <lusus@denx.de>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Javier =?iso-8859-1?Q?Mart=EDnez?= Canillas <javier@dowhile0.org>,
+ sbabic@denx.de, Nikita Kiryanov <nikita@compulab.co.il>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] fdt: validate/fix cells count on
+	mtdpart fixup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,124 +53,78 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgU3RlcGhhbiwKCgpPbiA0LzExLzIzIDExOjI5LCBTdGVmYW4gUm9lc2Ugd3JvdGU6Cj4gSGkg
-TGlvbmVsLAo+Cj4gT24gNC81LzIzIDExOjUzLCBMaW9uZWwgRGViaWV2ZSB3cm90ZToKPj4gSW1w
-bGVtZW50IGEgQVJNIFNNQ0NDIGJhc2VkIGRyaXZlciB0aGF0IGFsbG93IHRvIHVzZQo+PiBhIHNl
-Y3VyZSB3YXRjaGRvZyBvbiB0aGUgcGxhdGZvcm0uCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IExpb25l
-bCBEZWJpZXZlIDxsaW9uZWwuZGViaWV2ZUBmb3NzLnN0LmNvbT4KPj4gUmV2aWV3ZWQtYnk6IFBh
-dHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+IFRlc3RlZC1i
-eTogUGF0cmljayBEZWxhdW5heSA8cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPj4gLS0t
-Cj4+Cj4+IChubyBjaGFuZ2VzIHNpbmNlIHYxKQo+Cj4gSG1tLCB0aGlzIGRvZXMgbm90IHNlZW0g
-dG8gYmUgY29ycmVjdC4gQ291bGQgeW91IHBsZWFzZSBpbmNsdWRlIHRoZSBsaXN0Cj4gb2YgY2hh
-bmdlZCBzdHVmZiBoZXJlIHRvIG1ha2UgcmV2aWV3aW5nIGVhc2llcj8KClRoYW5rcywgc29ycnkg
-ZmlyIHRoZSBjaGFuZ2UgbGlzdCwgaXNzdWUgb24gbXkgc2lkZSB3aXRoIHRoZSBwYXRtYW4gCm9w
-dGlvbnMgOykKCkknbGwganVzdCBhZGQgYSBtaW5vciBjaGFuZ2UgcmVnYXJkaW5nIGxvZ19lcnIg
-aW4gdGhlIHByb2JlIGFuZCBzZW5kIGEgdjMuCgpUaGFua3MsCgpCciwKCkxpb25lbAoKPgo+IE90
-aGVyIHRoYW4gdGhpczoKPgo+IFJldmlld2VkLWJ5OiBTdGVmYW4gUm9lc2UgPHNyQGRlbnguZGU+
-Cj4KPiBUaGFua3MsCj4gU3RlZmFuCj4KPj4gwqAgZHJpdmVycy93YXRjaGRvZy9LY29uZmlnwqDC
-oMKgwqDCoMKgIHzCoMKgIDggKysrCj4+IMKgIGRyaXZlcnMvd2F0Y2hkb2cvTWFrZWZpbGXCoMKg
-wqDCoMKgIHzCoMKgIDEgKwo+PiDCoCBkcml2ZXJzL3dhdGNoZG9nL2FybV9zbWNfd2R0LmMgfCAx
-MjEgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4+IMKgIDMgZmlsZXMgY2hhbmdl
-ZCwgMTMwIGluc2VydGlvbnMoKykKPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvd2F0
-Y2hkb2cvYXJtX3NtY193ZHQuYwo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy93YXRjaGRvZy9L
-Y29uZmlnIGIvZHJpdmVycy93YXRjaGRvZy9LY29uZmlnCj4+IGluZGV4IGI1YWM4ZjdmNTBkLi4z
-YTAzNDFmNjA5ZCAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy93YXRjaGRvZy9LY29uZmlnCj4+ICsr
-KyBiL2RyaXZlcnMvd2F0Y2hkb2cvS2NvbmZpZwo+PiBAQCAtMzUyLDYgKzM1MiwxNCBAQCBjb25m
-aWcgV0RUX1RBTkdJRVIKPj4gwqDCoMKgwqDCoMKgwqAgSW50ZWwgVGFuZ2llciBTb0MuIElmIHlv
-dSdyZSB1c2luZyBhIGJvYXJkIHdpdGggSW50ZWwgVGFuZ2llcgo+PiDCoMKgwqDCoMKgwqDCoCBT
-b0MsIHNheSBZIGhlcmUuCj4+IMKgICtjb25maWcgV0RUX0FSTV9TTUMKPj4gK8KgwqDCoCBib29s
-ICJBUk0gU01DIHdhdGNoZG9nIHRpbWVyIHN1cHBvcnQiCj4+ICvCoMKgwqAgZGVwZW5kcyBvbiBX
-RFQgJiYgQVJNX1NNQ0NDCj4+ICvCoMKgwqAgaW1wbHkgV0FUQ0hET0cKPj4gK8KgwqDCoCBoZWxw
-Cj4+ICvCoMKgwqDCoMKgIFNlbGVjdCB0aGlzIHRvIGVuYWJsZSBBcm0gU01DIHdhdGNoZG9nIHRp
-bWVyLiBUaGlzIHdhdGNoZG9nIAo+PiB3aWxsIG1hbmFnZQo+PiArwqDCoMKgwqDCoCBhIHdhdGNo
-ZG9nIGJhc2VkIG9uIEFSTSBTTUNDQyBjb21tdW5pY2F0aW9uLgo+PiArCj4+IMKgIGNvbmZpZyBT
-UExfV0RUCj4+IMKgwqDCoMKgwqAgYm9vbCAiRW5hYmxlIGRyaXZlciBtb2RlbCBmb3Igd2F0Y2hk
-b2cgdGltZXIgZHJpdmVycyBpbiBTUEwiCj4+IMKgwqDCoMKgwqAgZGVwZW5kcyBvbiBTUExfRE0K
-Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvd2F0Y2hkb2cvTWFrZWZpbGUgYi9kcml2ZXJzL3dhdGNo
-ZG9nL01ha2VmaWxlCj4+IGluZGV4IDQ0NmQ5NjFkN2QyLi5hNDYzM2MwZDJmYSAxMDA2NDQKPj4g
-LS0tIGEvZHJpdmVycy93YXRjaGRvZy9NYWtlZmlsZQo+PiArKysgYi9kcml2ZXJzL3dhdGNoZG9n
-L01ha2VmaWxlCj4+IEBAIC0xOCw2ICsxOCw3IEBAIG9iai0kKENPTkZJR18kKFNQTF9UUExfKVdE
-VCkgKz0gd2R0LXVjbGFzcy5vCj4+IMKgIG9iai0kKENPTkZJR19XRFRfU0FOREJPWCkgKz0gc2Fu
-ZGJveF93ZHQubwo+PiDCoCBvYmotJChDT05GSUdfV0RUX0FMQVJNX1NBTkRCT1gpICs9IHNhbmRi
-b3hfYWxhcm0td2R0Lm8KPj4gwqAgb2JqLSQoQ09ORklHX1dEVF9BUFBMRSkgKz0gYXBwbGVfd2R0
-Lm8KPj4gK29iai0kKENPTkZJR19XRFRfQVJNX1NNQykgKz0gYXJtX3NtY193ZHQubwo+PiDCoCBv
-YmotJChDT05GSUdfV0RUX0FSTUFEQV8zN1hYKSArPSBhcm1hZGEtMzd4eC13ZHQubwo+PiDCoCBv
-YmotJChDT05GSUdfV0RUX0FTUEVFRCkgKz0gYXN0X3dkdC5vCj4+IMKgIG9iai0kKENPTkZJR19X
-RFRfQVNUMjYwMCkgKz0gYXN0MjYwMF93ZHQubwo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy93YXRj
-aGRvZy9hcm1fc21jX3dkdC5jIAo+PiBiL2RyaXZlcnMvd2F0Y2hkb2cvYXJtX3NtY193ZHQuYwo+
-PiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+PiBpbmRleCAwMDAwMDAwMDAwMC4uNzBhYjk5YmRiZmIK
-Pj4gLS0tIC9kZXYvbnVsbAo+PiArKysgYi9kcml2ZXJzL3dhdGNoZG9nL2FybV9zbWNfd2R0LmMK
-Pj4gQEAgLTAsMCArMSwxMjEgQEAKPj4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwt
-Mi4wLW9yLWxhdGVyCj4+ICsvKgo+PiArICogQVJNIFNlY3VyZSBNb25pdG9yIENhbGwgd2F0Y2hk
-b2cgZHJpdmVyCj4+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjIsIFNUTWljcm9lbGVjdHJvbmljcyAt
-IEFsbCBSaWdodHMgUmVzZXJ2ZWQKPj4gKyAqIFRoaXMgZmlsZSBpcyBiYXNlZCBvbiBMaW51eCBk
-cml2ZXIgZHJpdmVycy93YXRjaGRvZy9hcm1fc21jX3dkdC5jCj4+ICsgKi8KPj4gKwo+PiArI2Rl
-ZmluZSBMT0dfQ0FURUdPUlkgVUNMQVNTX1dEVAo+PiArCj4+ICsjaW5jbHVkZSA8ZG0uaD4KPj4g
-KyNpbmNsdWRlIDxkbS9kZXZpY2VfY29tcGF0Lmg+Cj4+ICsjaW5jbHVkZSA8bGludXgvYXJtLXNt
-Y2NjLmg+Cj4+ICsjaW5jbHVkZSA8bGludXgvcHNjaS5oPgo+PiArI2luY2x1ZGUgPHdkdC5oPgo+
-PiArCj4+ICsjZGVmaW5lIERSVl9OQU1FwqDCoMKgwqDCoMKgwqAgImFybV9zbWNfd2R0Igo+PiAr
-Cj4+ICsjZGVmaW5lIFdEVF9USU1FT1VUX1NFQ1MoVElNRU9VVCnCoMKgwqAgKChUSU1FT1VUKSAv
-IDEwMDApCj4+ICsKPj4gK2VudW0gc21jd2RfY2FsbCB7Cj4+ICvCoMKgwqAgU01DV0RfSU5JVMKg
-wqDCoMKgwqDCoMKgID0gMCwKPj4gK8KgwqDCoCBTTUNXRF9TRVRfVElNRU9VVMKgwqDCoCA9IDEs
-Cj4+ICvCoMKgwqAgU01DV0RfRU5BQkxFwqDCoMKgwqDCoMKgwqAgPSAyLAo+PiArwqDCoMKgIFNN
-Q1dEX1BFVMKgwqDCoMKgwqDCoMKgID0gMywKPj4gK8KgwqDCoCBTTUNXRF9HRVRfVElNRUxFRlTC
-oMKgwqAgPSA0LAo+PiArfTsKPj4gKwo+PiArc3RydWN0IHNtY3dkX3ByaXZfZGF0YSB7Cj4+ICvC
-oMKgwqAgdTMyIHNtY19pZDsKPj4gK8KgwqDCoCB1bnNpZ25lZCBpbnQgbWluX3RpbWVvdXQ7Cj4+
-ICvCoMKgwqAgdW5zaWduZWQgaW50IG1heF90aW1lb3V0Owo+PiArfTsKPj4gKwo+PiArc3RhdGlj
-IGludCBzbWN3ZF9jYWxsKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGVudW0gc21jd2RfY2FsbCBjYWxs
-LAo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdW5zaWduZWQgbG9uZyBhcmcsIHN0cnVj
-dCBhcm1fc21jY2NfcmVzICpyZXMpCj4+ICt7Cj4+ICvCoMKgwqAgc3RydWN0IHNtY3dkX3ByaXZf
-ZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+PiArwqDCoMKgIHN0cnVjdCBhcm1fc21j
-Y2NfcmVzIGxvY2FsX3JlczsKPj4gKwo+PiArwqDCoMKgIGlmICghcmVzKQo+PiArwqDCoMKgwqDC
-oMKgwqAgcmVzID0gJmxvY2FsX3JlczsKPj4gKwo+PiArwqDCoMKgIGFybV9zbWNjY19zbWMocHJp
-di0+c21jX2lkLCBjYWxsLCBhcmcsIDAsIDAsIDAsIDAsIDAsIHJlcyk7Cj4+ICsKPj4gK8KgwqDC
-oCBpZiAocmVzLT5hMCA9PSBQU0NJX1JFVF9OT1RfU1VQUE9SVEVEKQo+PiArwqDCoMKgwqDCoMKg
-wqAgcmV0dXJuIC1FTk9ERVY7Cj4+ICvCoMKgwqAgaWYgKHJlcy0+YTAgPT0gUFNDSV9SRVRfSU5W
-QUxJRF9QQVJBTVMpCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPj4gK8KgwqDC
-oCBpZiAocmVzLT5hMCAhPSBQU0NJX1JFVF9TVUNDRVNTKQo+PiArwqDCoMKgwqDCoMKgwqAgcmV0
-dXJuIC1FSU87Cj4+ICsKPj4gK8KgwqDCoCByZXR1cm4gMDsKPj4gK30KPj4gKwo+PiArc3RhdGlj
-IGludCBzbWN3ZF9yZXNldChzdHJ1Y3QgdWRldmljZSAqZGV2KQo+PiArewo+PiArwqDCoMKgIHJl
-dHVybiBzbWN3ZF9jYWxsKGRldiwgU01DV0RfUEVULCAwLCBOVUxMKTsKPj4gK30KPj4gKwo+PiAr
-c3RhdGljIGludCBzbWN3ZF9zdG9wKHN0cnVjdCB1ZGV2aWNlICpkZXYpCj4+ICt7Cj4+ICvCoMKg
-wqAgcmV0dXJuIHNtY3dkX2NhbGwoZGV2LCBTTUNXRF9FTkFCTEUsIDAsIE5VTEwpOwo+PiArfQo+
-PiArCj4+ICtzdGF0aWMgaW50IHNtY3dkX3N0YXJ0KHN0cnVjdCB1ZGV2aWNlICpkZXYsIHU2NCB0
-aW1lb3V0X21zLCB1bG9uZyAKPj4gZmxhZ3MpCj4+ICt7Cj4+ICvCoMKgwqAgc3RydWN0IHNtY3dk
-X3ByaXZfZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+PiArwqDCoMKgIHU2NCB0aW1l
-b3V0X3NlYyA9IFdEVF9USU1FT1VUX1NFQ1ModGltZW91dF9tcyk7Cj4+ICvCoMKgwqAgaW50IGVy
-cjsKPj4gKwo+PiArwqDCoMKgIGlmICh0aW1lb3V0X3NlYyA8IHByaXYtPm1pbl90aW1lb3V0IHx8
-IHRpbWVvdXRfc2VjID4gCj4+IHByaXYtPm1heF90aW1lb3V0KcKgwqDCoCB7Cj4+ICvCoMKgwqDC
-oMKgwqDCoCBkZXZfZXJyKGRldiwgIlRpbWVvdXQgdmFsdWUgbm90IHN1cHBvcnRlZFxuIik7Cj4+
-ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsKPj4gK8KgwqDCoCB9Cj4+ICsKPj4gK8Kg
-wqDCoCBlcnIgPSBzbWN3ZF9jYWxsKGRldiwgU01DV0RfU0VUX1RJTUVPVVQsIHRpbWVvdXRfc2Vj
-LCBOVUxMKTsKPj4gK8KgwqDCoCBpZiAoZXJyKSB7Cj4+ICvCoMKgwqDCoMKgwqDCoCBkZXZfZXJy
-KGRldiwgIlRpbWVvdXQgb3V0IGNvbmZpZ3VyYXRpb24gZmFpbGVkXG4iKTsKPj4gK8KgwqDCoMKg
-wqDCoMKgIHJldHVybiBlcnI7Cj4+ICvCoMKgwqAgfQo+PiArCj4+ICvCoMKgwqAgcmV0dXJuIHNt
-Y3dkX2NhbGwoZGV2LCBTTUNXRF9FTkFCTEUsIDEsIE5VTEwpOwo+PiArfQo+PiArCj4+ICtzdGF0
-aWMgaW50IHNtY3dkX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYpCj4+ICt7Cj4+ICvCoMKgwqAg
-c3RydWN0IHNtY3dkX3ByaXZfZGF0YSAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOwo+PiArwqDC
-oMKgIHN0cnVjdCBhcm1fc21jY2NfcmVzIHJlczsKPj4gK8KgwqDCoCBpbnQgZXJyOwo+PiArCj4+
-ICvCoMKgwqAgcHJpdi0+c21jX2lkID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAiYXJtLHNt
-Yy1pZCIsIDB4ODIwMDNEMDYpOwo+PiArCj4+ICvCoMKgwqAgZXJyID0gc21jd2RfY2FsbChkZXYs
-IFNNQ1dEX0lOSVQsIDAsICZyZXMpOwo+PiArwqDCoMKgIGlmIChlcnIgPCAwKQo+PiArwqDCoMKg
-wqDCoMKgwqAgcmV0dXJuIGVycjsKPj4gKwo+PiArwqDCoMKgIHByaXYtPm1pbl90aW1lb3V0ID0g
-cmVzLmExOwo+PiArwqDCoMKgIHByaXYtPm1heF90aW1lb3V0ID0gcmVzLmEyOwo+PiArCj4+ICvC
-oMKgwqAgcmV0dXJuIDA7Cj4+ICt9Cj4+ICsKPj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3Qgd2R0X29w
-cyBzbWN3ZF9vcHMgPSB7Cj4+ICvCoMKgwqAgLnN0YXJ0wqDCoMKgwqDCoMKgwqAgPSBzbWN3ZF9z
-dGFydCwKPj4gK8KgwqDCoCAuc3RvcMKgwqDCoMKgwqDCoMKgID0gc21jd2Rfc3RvcCwKPj4gK8Kg
-wqDCoCAucmVzZXTCoMKgwqDCoMKgwqDCoCA9IHNtY3dkX3Jlc2V0LAo+PiArfTsKPj4gKwo+PiAr
-c3RhdGljIGNvbnN0IHN0cnVjdCB1ZGV2aWNlX2lkIHNtY3dkX2R0X2lkc1tdID0gewo+PiArwqDC
-oMKgIHsgLmNvbXBhdGlibGUgPSAiYXJtLHNtYy13ZHQiIH0sCj4+ICvCoMKgwqAge30KPj4gK307
-Cj4+ICsKPj4gK1VfQk9PVF9EUklWRVIod2R0X3NhbmRib3gpID0gewo+PiArwqDCoMKgIC5uYW1l
-ID0gInNtY3dkIiwKPj4gK8KgwqDCoCAuaWQgPSBVQ0xBU1NfV0RULAo+PiArwqDCoMKgIC5vZl9t
-YXRjaCA9IHNtY3dkX2R0X2lkcywKPj4gK8KgwqDCoCAucHJpdl9hdXRvID0gc2l6ZW9mKHN0cnVj
-dCBzbWN3ZF9wcml2X2RhdGEpLAo+PiArwqDCoMKgIC5wcm9iZSA9IHNtY3dkX3Byb2JlLAo+PiAr
-wqDCoMKgIC5vcHMgPSAmc21jd2Rfb3BzLAo+PiArfTsKPgo+IFZpZWxlIEdyw7zDn2UsCj4gU3Rl
-ZmFuIFJvZXNlCj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rv
-cm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4v
-bGlzdGluZm8vdWJvb3Qtc3RtMzIK
+On Thu, Apr 06, 2023 at 11:25:27AM -0400, Tom Rini wrote:
+> On Tue, Apr 04, 2023 at 06:18:03PM +0200, Francesco Dolcini wrote:
+> > +Stefano
+> > 
+> > On Mon, Feb 06, 2023 at 06:17:31PM -0500, Tom Rini wrote:
+> > > On Mon, Feb 06, 2023 at 11:48:36PM +0100, Francesco Dolcini wrote:
+> > > 
+> > > > From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > > > 
+> > > > Fixup #size-cells value when updating the MTD partitions, this is
+> > > > required to prevent issues in case the MTD parent set #size-cells to
+> > > > zero.
+> > > > This could happen for example in the legacy case in which the partitions
+> > > > are created as direct child of the mtd node and that specific node has
+> > > > no children. Recent clean-up on Linux device tree files created a boot
+> > > > regression on colibri-imx7 [0].
+> > > > 
+> > > > This fixup has the limitation to assume 32-bit (#size-cells=1)
+> > > > addressing, therefore it will not work with device bigger than 4GiB.
+> > > > 
+> > > > This change also enforce #address-cells to be the same as #size-cells,
+> > > > this was already silently enforced by fdt_node_set_part_info(), now this
+> > > > is checked explicitly and partition fixup will just fail in such case.
+> > > > 
+> > > > When the partition list is static the preferred way to pass the mtd
+> > > > partition list to the kernel is to either define those in the source DTS
+> > > > file or use mtdparts= in the command line.
+> > > > Tweaking the DT from U-Boot should be avoided, unless some dynamic
+> > > > changes are required, since it proved to be problematic when not
+> > > > following the evolution of the "standard".
+> > > > 
+> > > > Link: https://lore.kernel.org/all/Y4dgBTGNWpM6SQXI@francesco-nb.int.toradex.com/
+> > > > Link: https://lore.kernel.org/all/20221202071900.1143950-1-francesco@dolcini.it/
+> > > > Cc: Marek Vasut <marex@denx.de>
+> > > > Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> > > > Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > > > ---
+> > > > v2: improved commit message
+> > > > ---
+> > > >  common/fdt_support.c | 45 ++++++++++++++++++++++++++++++++++----------
+> > > >  1 file changed, 35 insertions(+), 10 deletions(-)
+> > > 
+> > > I'm dropping the linux-mtd list here and adding a bunch more platform
+> > > maintainers. In general, calling fdt_fixup_mtdparts is the wrong choice.
+> > > I see we do have a few cases in U-Boot where we're clearly doing
+> > > something dynamic to the partition table, but it looks like at first
+> > > glance most callers are using this hook when they should either be
+> > > having the partition map in the device tree properly (and using one of
+> > > the appropriate bindings) or passing the map in via the kernel command
+> > > line. I would like to ask everyone I've added to the list here to
+> > > please audit your platform and update it as needed. Thanks!
+> > 
+> > Hello Tom,
+> > what should we do with this patch? No feedback so far, apart this email
+> > from you.
+> > 
+> > Stefano: maybe you can pick patches 2 and 3 ?
+> 
+> I thought someone chimed in for the STM32 side?
+Whoops, yes, I remember the same.
+
+However, what about this patch, do we want to merge it? It solves a
+potential issue and from what I can tell it does not introduce new one.
+
+Francesco
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

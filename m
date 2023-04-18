@@ -2,70 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91A316E67BC
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Apr 2023 17:05:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 720596E6CC6
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Apr 2023 21:14:30 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 273BEC03FC3;
-	Tue, 18 Apr 2023 15:05:25 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 23622C6A5FA;
+	Tue, 18 Apr 2023 19:14:30 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7DB26C01E98
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 30957C69065
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Apr 2023 15:05:23 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 33IAp2Xr025300; Tue, 18 Apr 2023 17:05:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=C0J9AM++AkYs0V/hS2psUN6YsBdskuUxwRUx9QqOUsY=;
- b=d5A0drOIQ8SmllvTy+u3nyzuDlSaUfCsXCKqbdzvPHmrUpzdIt7jls1+AwKZeRexbrP/
- zM1B9uqD0JwvezYRvSgepKF9aID1P4k3qOOpxPlFMLfbqEvyel45wkbpuZP+wR2JUcOz
- R0yZJNbui7DMmzBgDLUUcdZVQ9gHSuzxSRm9gLjtT+T17axe+e+Vrp+krUgU5zDlBDHs
- xoRxsL0pdaL+fsHXlZxPFcqEAOYsb2tClImsxjRfHcP7eEX61RpetTHFouWkPMSabAZw
- BnUs2zLxc5mg3+JeRGZVn/nODPs1ZHAfo6U/g3mnP4G+kmuOkiKEY5I3/5rPzIq3ZNde Yw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3q1qf7axgy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Apr 2023 17:05:21 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EE70E10002A;
- Tue, 18 Apr 2023 17:05:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E1AFD22D179;
- Tue, 18 Apr 2023 17:05:20 +0200 (CEST)
-Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 18 Apr
- 2023 17:05:20 +0200
-Message-ID: <3f6f27fe-1248-9e03-e341-7dc43753066c@foss.st.com>
-Date: Tue, 18 Apr 2023 17:05:19 +0200
+ Tue, 18 Apr 2023 19:14:29 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 33BF685F71;
+ Tue, 18 Apr 2023 21:14:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1681845268;
+ bh=qQp/n4uajIqOgO7/R6HPD999DFIq2OtAbKllJ7OQAEw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=QVQBx6m94a6XFM+5HLYqffXqbsDAQpN5gIZY11REzByX8iKYi2FkElvOChC1ZTOBM
+ wiAmiT88wwSibG5EQ6kY5SraAPFNYSEIzgkygUmI+MgTIg+AFMdakLAvv0UYg1Is0n
+ GqC7YYCUmBfTAlVOCYDdsrbbH3GNXEAB5sa/w25BT/7RKzexcjkyTy6vQDVvQdvzLI
+ s/IpdDBM32Ta6Wn/KUJ2N5ugLLjZ00rDEaG8Nh9ZWxBQ2bN1ggI/f4I5qbyqChVVT/
+ mPcx+pnaKf5v/bJ2cOxshpQu1asWdbmIysGfMQJITS+9BIaAon1c6M8WrEoia3ZOHX
+ 2tOdD4AEPbxRg==
+Message-ID: <eb7556d1-8283-70dd-790c-925c10ba02a0@denx.de>
+Date: Tue, 18 Apr 2023 21:14:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
+ Thunderbird/102.9.0
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>
-References: <20230417185558.1.If7ed2ccb5a1c1a84637d29d763cc1935d9b8815e@changeid>
- <d3e391f5-ce85-e5f9-41e4-81e271db8deb@denx.de>
- <f1de64e5-a99c-1eb2-edf5-3f6bd492692e@foss.st.com>
- <CAOMZO5DywMdsqdVc_0gF7ADtgT7R2OCfVqW2nTjDMabFqy-SmA@mail.gmail.com>
- <208da22c-5cc6-d449-e691-18805ad734e2@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <208da22c-5cc6-d449-e691-18805ad734e2@denx.de>
-X-Originating-IP: [10.201.21.26]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-18_11,2023-04-18_01,2023-02-09_01
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] usb: onboard-hub: Don't disable regulator
- in remove() callback
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20230418135941.774340-1-patrick.delaunay@foss.st.com>
+ <20230418155937.2.Id975ebfa1953ef54fc7558442f64a693fa74bc3a@changeid>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20230418155937.2.Id975ebfa1953ef54fc7558442f64a693fa74bc3a@changeid>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH 2/2] ARM: dts: stm32mp: alignment with
+	v6.3-rc3
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,23 +57,58 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGkgCgpPbiA0LzE4LzIzIDEzOjUzLCBNYXJlayBWYXN1dCB3cm90ZToKPiBPbiA0LzE4LzIzIDEz
-OjQ5LCBGYWJpbyBFc3RldmFtIHdyb3RlOgo+PiBIaSBQYXRyaWNlIGFuZCBNYXJlaywKPj4KPj4g
-T24gVHVlLCBBcHIgMTgsIDIwMjMgYXQgNDoyMuKAr0FNIFBhdHJpY2UgQ0hPVEFSRAo+PiA8cGF0
-cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPiB3cm90ZToKPj4KPj4+PiBJc24ndCB0aGUgcmVndWxh
-dG9yIGVuYWJsZS9kaXNhYmxlIHJlZmNvdW50ZWQgPwo+Pj4KPj4+IFRoZXJlIGlzIG5vIHJlZmNv
-dW50IG9uIHJlZ3VsYXRvciB0aGF0J3Mgd2h5IHdlIGxldCByZWd1bGF0b3IgZW5hYmxlLgo+Pgo+
-PiBUaGVyZSBpcyBhIHJlY2VudCBwYXRjaCBmcm9tIEV1Z2VuIHRoYXQgYWRkcyByZWd1bGF0b3Ig
-cmVmY291bnQgc3VwcG9ydDoKPj4KPj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290LzIw
-MjMwMzMxMDkxNTQ5LjE0OTA5NS0xLWV1Z2VuLmhyaXN0ZXZAY29sbGFib3JhLmNvbS8KPiAKPiBU
-aGF0J3MgbmljZSAhCgpQbGFuZXRzIGFyZSBwZXJmZWN0bHkgYWxpZ25lZCA7LSkKCkkgY2FuY2Vs
-IHRoaXMgcGF0Y2gsIGFuZCB3aWxsIHRlc3QgdGhlIHBvaW50ZWQgc2VyaWVzIHdoZW4gaXQgd2ls
-bCBiZSBtZXJnZWQuCgpUaGFua3MKUGF0cmljZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMy
-QHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3Jt
-cmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK
+On 4/18/23 15:59, Patrick Delaunay wrote:
+> Device tree alignment with Linux kernel v6.3-rc3:
+> - ARM: dts: stm32: add i2c nodes into stm32mp131.dtsi
+> - ARM: dts: stm32: enable i2c1 and i2c5 on stm32mp135f-dk.dts
+> - ARM: dts: stm32: add spi nodes into stm32mp131.dtsi
+> - ARM: dts: stm32: add pinctrl and disabled spi5 node in stm32mp135f-dk
+> - ARM: dts: stm32: Create separate pinmux for qspi cs pin in
+>    stm32mp15-pinctrl.dtsi
+> - ARM: dts: stm32: Rename mdio0 to mdio
+> - ARM: dts: stm32: Replace SAI format with dai-format DT property
+> - ARM: dts: stm32: add adc support to stm32mp13
+> - ARM: dts: stm32: add adc pins muxing on stm32mp135f-dk
+> - ARM: dts: stm32: add dummy vdd_adc regulator on stm32mp135f-dk
+> - ARM: dts: stm32: add adc support on stm32mp135f-dk
+> - ARM: dts: stm32: add PWR fixed regulators on stm32mp131
+> - ARM: dts: stm32: add USBPHYC and dual USB HS PHY support on stm32mp131
+> - ARM: dts: stm32: add UBSH EHCI and OHCI support on stm32mp131
+> - ARM: dts: stm32: add USB OTG HS support on stm32mp131
+> - ARM: dts: stm32: add fixed regulators to support usb on stm32mp135f-dk
+> - ARM: dts: stm32: enable USB HS phys on stm32mp135f-dk
+> - ARM: dts: stm32: enable USB Host EHCI on stm32mp135f-dk
+> - ARM: dts: stm32: add pins for stm32g0 typec controller on stm32mp13
+> - ARM: dts: stm32: enable USB OTG in dual role mode on stm32mp135f-dk
+> - ARM: dts: stm32: add mcp23017 pinctrl entry for stm32mp13
+> - ARM: dts: stm32: add mcp23017 IO expander on I2C1 on stm32mp135f-dk
+> - ARM: dts: stm32: Fix qspi pinctrl phandle for stm32mp15xx-dhcor-som
+> - ARM: dts: stm32: Fix qspi pinctrl phandle for stm32mp15xx-dhcom-som
+> - ARM: dts: stm32: Fix qspi pinctrl phandle for stm32mp151a-prtt1l
+> - ARM: dts: stm32: remove sai kernel clock on stm32mp15xx-dkx
+> - ARM: dts: stm32: rename sound card on stm32mp15xx-dkx
+> - ARM: dts: stm32: Remove the pins-are-numbered property
+> - ARM: dts: stm32: add i2s nodes on stm32mp131
+> - ARM: dts: stm32: add sai nodes on stm32mp131
+> - ARM: dts: stm32: add spdifrx node on stm32mp131
+> - ARM: dts: stm32: add dfsdm node on stm32mp131
+> - ARM: dts: stm32: add timers support on stm32mp131
+> - ARM: dts: stm32: add timer pins muxing for stm32mp135f-dk
+> - ARM: dts: stm32: add timers support on stm32mp135f-dk
+> - ARM: dts: stm32: Fix User button on stm32mp135f-dk
+> - ARM: dts: stm32: Use new media bus type macros
+> - ARM: dts: stm32: Update part number NVMEM description on stm32mp131
+
+Please either include commit IDs for all those commits too, or just 
+include commit ID of the kernel version to which these DTs are synced 
+to. I would prefer the later. Also note, Linux 6.3-rc6 is out, so why 
+sync to 6.3-rc3 ?
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

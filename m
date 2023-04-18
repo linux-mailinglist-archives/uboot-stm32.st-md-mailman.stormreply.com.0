@@ -2,62 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07F526E5A52
-	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Apr 2023 09:21:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 702466E5BF6
+	for <lists+uboot-stm32@lfdr.de>; Tue, 18 Apr 2023 10:25:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9EF04C69065;
-	Tue, 18 Apr 2023 07:21:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1AA49C03FC3;
+	Tue, 18 Apr 2023 08:25:31 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 441D3C65E70
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 475CFC0356E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Apr 2023 07:21:47 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 33I7LHUG023007; Tue, 18 Apr 2023 09:21:45 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=4i815EhHHEyxXRXq6dXcRuVc1X01v4qo0cOmXyS+rIM=;
- b=0bmwbRhQ6i+csUttWhyF2CPbR4MpadZgofgtKa2oDrYLSq52s2GmoVGwDlsPk8UXBW8X
- fyrqhBbipB8XsGjh1pY7qa3XjM4boGfcAPT8FcEKaOxzn0sIpV0QBtpFsUi+CDC4RtRH
- 5yXd7aj/LbWN0xzpB3V7sm6NYmQuF2Nc+AnjWFtCTteg1jA/gYk55sTpkYQuQyi+1dW3
- oH324Uqq+rfcjuz9iNEJ7tz9+V04o1vWUNjtUPKAqxHuazYSC4/VWc8RGK8a6qKVIFrY
- gEuyk2wHpQ/PMPptr6rkNcEBPiy1lTbVC0scWM33zA26mH4qJtRPkXF2EvtAb85hSklP Tw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3q1236xsu6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 18 Apr 2023 09:21:45 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F3C61100034;
- Tue, 18 Apr 2023 09:21:24 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E882B211F31;
- Tue, 18 Apr 2023 09:21:24 +0200 (CEST)
-Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 18 Apr
- 2023 09:21:24 +0200
-Message-ID: <f1de64e5-a99c-1eb2-edf5-3f6bd492692e@foss.st.com>
-Date: Tue, 18 Apr 2023 09:21:23 +0200
+ Tue, 18 Apr 2023 08:25:30 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 71FFE85732;
+ Tue, 18 Apr 2023 10:25:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1681806329;
+ bh=INyTiWDulfZSAMvsc+zufS1nQvmy+e/qhJrn63MfJ3A=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Pv9EQIFJCmX+o/Uw/qfzAVKIAKinG0kJw6XcI4Wbl+bXGwIlGnowNO6LRS5jGt8uP
+ SoHhKwbSHb9IBJkTyV115wceu8/F5lxtqnvSRGvN177KTWbfr8w19oIQnwVgvQbk3W
+ b69bj5JtiIQ6Br4AbLo5BauIohxaDbgYYhubBeLq8VIMht77dCfRvhDFSgkbDg8WDS
+ 2cJkTtynLRarsC14MWDzZoDrDnxZPWcCwbLdq125ieWcDwzmB6wA39JTSJVaiWFJMc
+ 6uv70b7sfaUxOR53qhyYsedfObFbkcsSgOH17STYfHsjQkuNxGt5+FQGJ8Io10ZIJl
+ P1dlhxPqCxkew==
+Message-ID: <a0754b42-9ea4-5b38-1bae-2dd91ceb7f28@denx.de>
+Date: Tue, 18 Apr 2023 10:25:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
 References: <20230417185558.1.If7ed2ccb5a1c1a84637d29d763cc1935d9b8815e@changeid>
  <d3e391f5-ce85-e5f9-41e4-81e271db8deb@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <d3e391f5-ce85-e5f9-41e4-81e271db8deb@denx.de>
-X-Originating-IP: [10.201.21.26]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-04-18_03,2023-04-17_01,2023-02-09_01
+ <f1de64e5-a99c-1eb2-edf5-3f6bd492692e@foss.st.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <f1de64e5-a99c-1eb2-edf5-3f6bd492692e@foss.st.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Fabrice Gasnier <fabrice.gasnier@foss.st.com>
@@ -74,32 +59,33 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Marek
+On 4/18/23 09:21, Patrice CHOTARD wrote:
+> Hi Marek
 
-On 4/17/23 19:00, Marek Vasut wrote:
-> On 4/17/23 18:56, Patrice Chotard wrote:
->> In case USB hub regulator is shared, unexpected behavior occurs.
->> On stm32mp135f-dk, stm32mp157c-ev1 and stm32mp157x-dkx, regulator
->> v3v3 is shared between several IP/devices (USB, panel, ethernet phy,
->> camera, ...).
->> Running command "usb stop", v3v3 regulator is switched off and
->> the splashscreen content disappear.
+Hello Patrice,
+
+> On 4/17/23 19:00, Marek Vasut wrote:
+>> On 4/17/23 18:56, Patrice Chotard wrote:
+>>> In case USB hub regulator is shared, unexpected behavior occurs.
+>>> On stm32mp135f-dk, stm32mp157c-ev1 and stm32mp157x-dkx, regulator
+>>> v3v3 is shared between several IP/devices (USB, panel, ethernet phy,
+>>> camera, ...).
+>>> Running command "usb stop", v3v3 regulator is switched off and
+>>> the splashscreen content disappear.
+>>>
+>>> v3v3 shouldn't be disabled on usb_onboard_hub_remove() callback.
 >>
->> v3v3 shouldn't be disabled on usb_onboard_hub_remove() callback.
+>> Isn't the regulator enable/disable refcounted ?
 > 
-> Isn't the regulator enable/disable refcounted ?
+> There is no refcount on regulator that's why we let regulator enable.
 
-There is no refcount on regulator that's why we let regulator enable.
-
-> If not, it should be, that would be the correct fix.
-
-Thanks
-Patrice
+Can we add that, instead of hacking around the missing refcount in every 
+driver ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

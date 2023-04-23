@@ -2,66 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E93186EB985
-	for <lists+uboot-stm32@lfdr.de>; Sat, 22 Apr 2023 16:02:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A967E6EC0FD
+	for <lists+uboot-stm32@lfdr.de>; Sun, 23 Apr 2023 18:15:18 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AC36CC65048;
-	Sat, 22 Apr 2023 14:02:43 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
- [209.85.208.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 51CF1C65E60;
+	Sun, 23 Apr 2023 16:15:18 +0000 (UTC)
+Received: from mail-yb1-f170.google.com (mail-yb1-f170.google.com
+ [209.85.219.170])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B7926C0356E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7FAA6C035BB
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 22 Apr 2023 14:02:41 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id
- 4fb4d7f45d1cf-506c04dd879so4554032a12.3
+ Sun, 23 Apr 2023 16:15:16 +0000 (UTC)
+Received: by mail-yb1-f170.google.com with SMTP id
+ 3f1490d57ef6-b992ed878ebso9074948276.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 22 Apr 2023 07:02:41 -0700 (PDT)
+ Sun, 23 Apr 2023 09:15:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1682172161; x=1684764161;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CuGmcrV8zvOoX0beJnYUe2t7Fw/qc0NrO9YKi+mp+Hg=;
- b=Msm3jpGwbMvDV9NAqphCIPu1hheMqE93RrG6UPz0IutfGqChYRto7XgrZOaVruktJP
- 9BLmI2FzRxPyk+EcMU0abNeIKcv+DLRf8/GuFtgxUBfwF9R1nYrm+qRsdwel8p653Ko0
- qXIevNsI/u2Tp9pRT7rPIiYIDi45ekG8ynRWU=
+ d=konsulko.com; s=google; t=1682266515; x=1684858515;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g9/Vq1FEj71G3nwxolMXsI68XwO/8+HhsdX5l2bx1WA=;
+ b=OuNTmgDQljqZeaGS9YiUCGYWpAxAiRbArF0AJHG8IaFDyhmTX96E7OaBauMaIn+05R
+ bFg+0Fe3nrVyZ48qUfAPtQenCNJjtMibuoQwWIKY5hexf9bKjIzRWOsdF6hhth3G3Tvh
+ k5j2EwpMdLzt7wDy4R7EGuOHfvwKD/YT091hM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682172161; x=1684764161;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CuGmcrV8zvOoX0beJnYUe2t7Fw/qc0NrO9YKi+mp+Hg=;
- b=CQI1iKOszF+6aJ/xpQNYvCOQRPkucQGLmBW3D2OLzNqOUipnFJkRkEni1+U+W/HJEf
- xxl2EIp7lovY3nRW3atiUpqE7nhGNzc9qhM7vX+YJbf2SW8lEc1P+UvzNPzRsMIHQOkn
- 8o6fZOYIqM+/dLsXLNwTy89QqCxbkVemoTLhj0GssYhMURqg6rUBA3klRjANl92Wsx7t
- GoANsOjzYGTTv332uOM4O1x1dS9DxadQrU00v34phnA6Tlb4gi0M+dGqXB9BGxwTESUt
- xH9lymyGz8mlnw/IBvUkJ2wDMO0+eN+UvVVbbqFPE0XtFTXIqj0tPc8HDUenJv/H2z7I
- 99DA==
-X-Gm-Message-State: AAQBX9f9AhXX9SH7bQdJgkB+WJLfU6F6AWR51YrG9fKMzlwrwz3N06UO
- DcPlKQgwvnG3we7fmYf/hjpzZA==
-X-Google-Smtp-Source: AKy350bJl5yWrNGXxRv6AHXxgc+HNd3HdtGnLFoqB3ZSKVCILm2Ws4mEdPanihvrxJnx1ENlkPHaCg==
-X-Received: by 2002:a17:906:63d1:b0:94f:cee:56f2 with SMTP id
- u17-20020a17090663d100b0094f0cee56f2mr5015182ejk.4.1682172161270; 
- Sat, 22 Apr 2023 07:02:41 -0700 (PDT)
-Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
- (host-87-5-99-194.retail.telecomitalia.it. [87.5.99.194])
+ d=1e100.net; s=20221208; t=1682266515; x=1684858515;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g9/Vq1FEj71G3nwxolMXsI68XwO/8+HhsdX5l2bx1WA=;
+ b=SUE09zvECI3Vg0bMDisd1+QPmeBf6HzrYktE7Q92pYKwi7PXtBwXunIO50evUGdQUm
+ 3u//8b62pCUsweoFN0ew1YvFXQNgRmW+WP5MbB0bFah9v7uMs57ydVwP4iszm5Gkkyww
+ wBIi15IJnZ0cVRb3mAX7mUGaZq/xJOOfHjLmxTaiZDqQP6yD+GGjMdoHy6G+L5jr4MfU
+ 1n6d4out79jBhGFzvIhl6wCPpFzxkz3iPLN5hKjtzmZL94FR4MBwZh+ASVZF+jB7dibP
+ aiiIsyblSSEKNc34Csx4t98SO9GzrKGlHwm5LE08Y/N1xcszpmOfc5KCORikR0mKtrpK
+ zzcg==
+X-Gm-Message-State: AAQBX9dXn3jabrgYFzsJeFI4QJzQPnND9MBzp8E+UvmsL7/La20qHHf+
+ 8S1ujmgHfSgzWWBY0rhm4EhiqqV0skB8KBlq/pL9+w==
+X-Google-Smtp-Source: AKy350ZLCLAgD4PJ2i7WgxUNFMROz8EgPQKhrFjRXfzgJpL+lrkzOvd5POCvFG6CeMJz9Q/3wG+j2Q==
+X-Received: by 2002:a25:2494:0:b0:b8f:67d5:474d with SMTP id
+ k142-20020a252494000000b00b8f67d5474dmr6793178ybk.23.1682266515409; 
+ Sun, 23 Apr 2023 09:15:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-06a6-3da9-fff0-2a31.res6.spectrum.com.
+ [2603:6081:7b00:6400:6a6:3da9:fff0:2a31])
  by smtp.gmail.com with ESMTPSA id
- sd14-20020a170906ce2e00b0094f5d1bbb21sm3294928ejb.102.2023.04.22.07.02.39
+ x129-20020a254a87000000b00b8f558022bbsm2353496yba.2.2023.04.23.09.15.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 22 Apr 2023 07:02:40 -0700 (PDT)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Date: Sat, 22 Apr 2023 16:02:36 +0200
-Message-Id: <20230422140236.616419-1-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.32.0
+ Sun, 23 Apr 2023 09:15:14 -0700 (PDT)
+Date: Sun, 23 Apr 2023 12:15:13 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Message-ID: <20230423161513.GL1134230@bill-the-cat>
+References: <e77f91bd-5743-7509-a9ba-0dafe29ed999@foss.st.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32f769-disco: remove the
-	dsi_host node
+In-Reply-To: <e77f91bd-5743-7509-a9ba-0dafe29ed999@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Christophe KERELLO <christophe.kerello@foss.st.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [Uboot-stm32]
+ =?utf-8?q?=5BPULL=5D_Pull_request_for_u-boot_master?=
+ =?utf-8?q?_/_v2023=2E07_=3D_u-boot-stm32=5F20230409=E2=80=8B?=
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,40 +78,83 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4003787472156219829=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The node has become useless, as described in the
-commit 754815b854258 ("video: stm32: remove the compatible "synopsys, dw-mipi-dsi" support")
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
----
+--===============4003787472156219829==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="BlBlYDIDEx6Isiya"
+Content-Disposition: inline
 
- arch/arm/dts/stm32f769-disco-u-boot.dtsi | 5 -----
- 1 file changed, 5 deletions(-)
 
-diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-index b5198fddff7c..2c823cce98b4 100644
---- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-+++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-@@ -28,11 +28,6 @@
- 		button-gpio = <&gpioa 0 0>;
- 	};
- 
--	dsi_host: dsi_host {
--		compatible = "synopsys,dw-mipi-dsi";
--		status = "okay";
--	};
--
- 	led1 {
- 		compatible = "st,led1";
- 		led-gpio = <&gpioj 5 0>;
--- 
-2.32.0
+--BlBlYDIDEx6Isiya
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Apr 19, 2023 at 11:35:58AM +0200, Patrice CHOTARD wrote:
+
+> Hi Tom
+>=20
+> Please pull the STM32 related fixes for u-boot/master, v2023.07: u-boot-s=
+tm32-20230419
+>=20
+> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipeline=
+s/16033
+>=20
+> The following changes since commit 5db4972a5bbdbf9e3af48ffc9bc4fec73b7b6a=
+79:
+>=20
+>   Merge tag 'u-boot-nand-20230417' of https://source.denx.de/u-boot/custo=
+dians/u-boot-nand-flash (2023-04-17 10:47:33 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-stm.git tags/u-boot-stm=
+32-20230419
+>=20
+> for you to fetch changes up to 0d5bd362f61dd3dc54f9a32fd38541b8d5c5d869:
+>=20
+>   configs: stm32mp15: set CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=3D2s (2023-04-1=
+9 10:10:17 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--BlBlYDIDEx6Isiya
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmRFWZEACgkQFHw5/5Y0
+tyxG0QwAof+j/HNX9zUtmIvjyyneODrm3xK+dqmKGzvMiUgxfhEaoE+mbRXeZTr1
+ZxjeERswkbjaTcbzM2dTjtO8PxEskxj2m1VgM377EilpWxRh4KyTsoVBrnUkBQKe
+ZPQwujPMrv0H2qUN4ymFntE8o2spliQ3QgNqduI9aDHNeLQYqM5wnnkOWuHiY2+D
+vx/MSw7Y+rexui2NEptxNJsKUGIDcQSPgZrA8FSW3HPdWXdpT7dcXkFicOSdbocr
+uxh8IE4dhkQ/i+KzvwqW3aEh0k0Gks3qB97GHJSontdxyl4uXV+mu+BUSg32kg4m
+qkMb0kbppoiC3LME1rjGRqrlKNsfdFS3hh2vn/uDhiEze52bSOaa7Cj38VeKJmED
+RQC9uIfWmor97OS1iEV9HE9ICjsTx3mGH1gwbzHYb1vCNKv0yNY4MOOrdUbfjrxI
+o543Erv/99Umz7JFVcv1zqCm5+TXqe7xeomhBTN4Jqlq1J69efSE9nkRKFG6Jmet
+l1wH8M7M
+=J9+B
+-----END PGP SIGNATURE-----
+
+--BlBlYDIDEx6Isiya--
+
+--===============4003787472156219829==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============4003787472156219829==--

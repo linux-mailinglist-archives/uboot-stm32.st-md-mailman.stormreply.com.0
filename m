@@ -2,67 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 781256F5016
-	for <lists+uboot-stm32@lfdr.de>; Wed,  3 May 2023 08:28:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9693F6F501A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  3 May 2023 08:29:19 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 43291C6A60F;
-	Wed,  3 May 2023 06:28:18 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6097AC6A60C;
+	Wed,  3 May 2023 06:29:19 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E4925C6A60D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 06161C6A5FD
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  3 May 2023 06:28:16 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Wed,  3 May 2023 06:29:17 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34356X4p017169; Wed, 3 May 2023 08:28:14 +0200
+ 3435npkA004640; Wed, 3 May 2023 08:29:17 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=qJlKzQoBxZo7fKsY854OGXZF9+4qjupUk9qNyA450YE=;
- b=vBhIf1998rBex/kHBFrJqaPzJ8zMuQM2rLs8RJqwuAxu1/o2O1OvU2wNtfxVPfBOH4xK
- 9ehw2+NGGbtr/dxdQD8SH6BNOPI/5vg5vaOPGJcHScsKvGInr6QknBA5iBOHWGyBsRuv
- 6b1wEiF8shG84+7cW6MNjr06OMnnVXtG0zzJORBN6yseFvSiNZvJWfxAl/n3yJyii/aW
- dPZTrBBkptngq3q3iomfv3rzsWui86Eyz16WfQE4qosDNDKnNJ3I5BfGK2jx0dGvZFAc
- /YdSscizfJIXNOGGU53+9EXBWfPLrn6/6QyAkQpHH7q4ZjW8EIhkO7vxFQtMv8S2YN8k pQ== 
+ bh=TD70o7s0kyrb1K6nehvjEJzkAGVzs6kM9oo0+Fa+X6c=;
+ b=HZCtToUjNx9TUADWayyqvwx9CerbVSSPk4AQc+q7pdJaygIpWNf9XCQX57OeAQkwXOUe
+ gVu4/2bH28/F6rW4NZBz8Ei9BA6yxwZOI2D5xetD7jlaRWMD3xu9hLUMAIdgDQM4wACD
+ d+eqKyu7gE5k9RoKWIzSEhP0a6hhRK7at6Dx4bcppsSPYNllOMmXHGZ2KJSJi0uxgYin
+ zaBpOK2SdMS1Q8onnVFZdBKdSIBpuE/tVZj4WiO5F9+sBVbeeABnCa0tOeW39RRtTRcM
+ SlfPtEG6Ij9NUAZDnmkc3Bm/v88nC6vOcc4q47MDShcpUxyScqwiAdfHVnly0i+Yylh4 Zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qatkufmff-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qayunnmq4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 03 May 2023 08:28:14 +0200
+ Wed, 03 May 2023 08:29:17 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id DAF8310002A;
- Wed,  3 May 2023 08:28:13 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1BC8E10002A;
+ Wed,  3 May 2023 08:29:16 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D3035211F3F;
- Wed,  3 May 2023 08:28:13 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1508C2122E1;
+ Wed,  3 May 2023 08:29:16 +0200 (CEST)
 Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 3 May
- 2023 08:28:13 +0200
-Message-ID: <087992a7-a8cb-ab0e-63a4-30d286c24714@foss.st.com>
-Date: Wed, 3 May 2023 08:28:12 +0200
+ 2023 08:29:15 +0200
+Message-ID: <a6491b36-b63a-3a9e-f9bc-11aba5843369@foss.st.com>
+Date: Wed, 3 May 2023 08:29:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20230427133638.1477556-1-patrick.delaunay@foss.st.com>
- <20230427153632.4.I8515a57201b19ed2af357f96106ede4b4cf078b7@changeid>
+ <20230427153632.5.Icec632d485db8fb4f25d878dd3b90253a7b2c706@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230427153632.4.I8515a57201b19ed2af357f96106ede4b4cf078b7@changeid>
+In-Reply-To: <20230427153632.5.Icec632d485db8fb4f25d878dd3b90253a7b2c706@changeid>
 X-Originating-IP: [10.201.21.26]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-05-03_03,2023-04-27_01,2023-02-09_01
-Cc: CITOOLS <MDG-smet-aci-reviews@list.st.com>,
- Mickael GARDET <m.gardet@overkiz.com>, Simon Glass <sjg@chromium.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 4/6] stm32mp: stm32prog: fix OTP
- read/write error management
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 5/6] stm32mp: stm32prog: use the decimal
+ format by default for offset parsing
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,55 +81,38 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 4/27/23 15:36, Patrick Delaunay wrote:
-> Avoid to ignore the OTP read/write error and transmits the error
-> to STM32CubeProgrammer.
+> Change the default base for offset parsing with simple_strtoull(),
+> so offset in flashlayout is coded in base 10 by default, even if string
+> start with '0'. The Octal encoding is not supported. The base 16
+> is still supported when the '0x' header is detected.
 > 
-> Today the error is only displayed in log error:
-> so the user on HOST thinks the OTP operation is performed.
+> This patch solves an unexpected parsing result when the address,
+> provided by decimal value is starting by 0, for example 0x4400 = 00017408
+> is a invalid with current code.
 > 
-> Reported-by: Mickael GARDET <m.gardet@overkiz.com>
+> ...
+> P	0x04	fsbl1	Binary	mmc0	00017408	        tf-a.stm32
+> ....
+> 
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Fixes: 75ea9e75931c ("stm32mp: stm32prog: add TEE support in stm32prog command")
 > ---
 > 
->  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+>  arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> index 6f3641ccf57b..c85217f6d61e 100644
+> index c85217f6d61e..90cf6c39b4a2 100644
 > --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 > +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-> @@ -1439,8 +1439,11 @@ int stm32prog_otp_write(struct stm32prog_data *data, u32 offset, u8 *buffer,
->  
->  	if (!data->otp_part) {
->  		data->otp_part = memalign(CONFIG_SYS_CACHELINE_SIZE, otp_size);
-> -		if (!data->otp_part)
-> +		if (!data->otp_part) {
-> +			stm32prog_err("OTP write issue %d", -ENOMEM);
-> +
->  			return -ENOMEM;
-> +		}
->  	}
->  
->  	if (!offset)
-> @@ -1503,6 +1506,8 @@ int stm32prog_otp_read(struct stm32prog_data *data, u32 offset, u8 *buffer,
->  	memcpy(buffer, (void *)((uintptr_t)data->otp_part + offset), *size);
->  
->  end_otp_read:
-> +	if (result)
-> +		stm32prog_err("OTP read issue %d", result);
->  	log_debug("%s: result %i\n", __func__, result);
->  
->  	return result;
-> @@ -1556,6 +1561,8 @@ int stm32prog_otp_start(struct stm32prog_data *data)
->  
->  	free(data->otp_part);
->  	data->otp_part = NULL;
-> +	if (result)
-> +		stm32prog_err("OTP write issue %d", result);
->  	log_debug("%s: result %i\n", __func__, result);
->  
->  	return result;
+> @@ -514,7 +514,7 @@ static int parse_offset(struct stm32prog_data *data,
+>  			stm32prog_err("Layout line %d: invalid part '%s'",
+>  				      i, p);
+>  	} else {
+> -		part->addr = simple_strtoull(p, &tail, 0);
+> +		part->addr = simple_strtoull(p, &tail, 10);
+>  		if (tail == p || *tail != '\0') {
+>  			stm32prog_err("Layout line %d: invalid offset '%s'",
+>  				      i, p);
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks

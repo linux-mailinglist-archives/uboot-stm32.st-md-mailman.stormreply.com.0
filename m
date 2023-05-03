@@ -2,78 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A03326F53AA
-	for <lists+uboot-stm32@lfdr.de>; Wed,  3 May 2023 10:50:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AAF56F5013
+	for <lists+uboot-stm32@lfdr.de>; Wed,  3 May 2023 08:27:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3C76DC6A5FD;
-	Wed,  3 May 2023 08:50:27 +0000 (UTC)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
- [209.85.167.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 19021C6A5FD;
+	Wed,  3 May 2023 06:27:26 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 29359C69049
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 61264C0356E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  2 May 2023 18:41:00 +0000 (UTC)
-Received: by mail-lf1-f46.google.com with SMTP id
- 2adb3069b0e04-4ec9c7c6986so4896117e87.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 02 May 2023 11:41:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1683052859; x=1685644859;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=188Dznl0ifUtV3we9ngqxolwbM8m32x80p7aogDia14=;
- b=PEnWx9kf8aVom35qISYV1RCfqUaqaxLArRSvB192CnsMgM6c+GzMoSHBWlMC6nRvRd
- BUstsmkIcwQ61BxusHL59NTYrfORXjKM0IZOpBXvncPhDrnO30Tw7XTtJKKEAUTUFLVe
- ZHYNWiswaUwqvL8tCuxWM42nyry3FqFToCbZ5aSmoNW6KCE9mttQP3pGjbYEI7lfU/fV
- u9aU0ZvxcsILQdMuCFUFlRg78FjUyA4D7xogK8sVOaCsX3sugYKbnff+c1jmh4JthBub
- fr67aVtaRZE15oxkQEwTSc9x/+AhHgCzgr5N0U2412m7Ca8DoF/r9YIZCJ/T63a5dHoe
- 07tA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683052859; x=1685644859;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=188Dznl0ifUtV3we9ngqxolwbM8m32x80p7aogDia14=;
- b=VBx5+5XaUGD6nHIfr91zOuHtYU66BDkyGF2fOBxsTF0ndTo9tcxaCVnrYvOCY78Yam
- Yya+mIEa9i7dr7j+PfxDrthcdB8WcU2S2Psfu3wVtVX8YWk17e+uAhf28JnOBp86vkwr
- vCK7pastr5lWdthHoIB5kqkRyXtJ4+JGFMwieLgg0I2Hs2czErYMqD9fodH4Zl8E7Dwf
- 21WjtrArJuDWNptabaY7MVJiJ+Gm3OltXMwNLts5fZZxWgUr6pTTDM8MOlo+zvokFMh+
- 5lCupe3/6fJVKJGar5G8F94uMlNRI8FCmLxPlJ67aK8yBufb2BVbTYCGt10bOpgPKSfR
- 3aMA==
-X-Gm-Message-State: AC+VfDxZy1IwPidyofUtOq/sDv+//AYWFY7hVnOmR8VCVZc27is3DkwM
- zAezwv7loJk9dSV2bloXou0=
-X-Google-Smtp-Source: ACHHUZ7RBjxFVrO7r54DMhtIG+HZtcPRkB7w/I9pg9gG270lBn/oc1mZXAx3hxJ3J0N9oUW1yJB6AQ==
-X-Received: by 2002:ac2:5199:0:b0:4eb:2643:c6c6 with SMTP id
- u25-20020ac25199000000b004eb2643c6c6mr220009lfi.53.1683052859148; 
- Tue, 02 May 2023 11:40:59 -0700 (PDT)
-Received: from DESKTOP-G0QQV4M. ([83.217.200.249])
- by smtp.gmail.com with ESMTPSA id
- l14-20020ac2554e000000b004dda76fad5asm5493722lfk.218.2023.05.02.11.40.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 May 2023 11:40:58 -0700 (PDT)
-Message-ID: <6451593a.c20a0220.2fb7d.0870@mx.google.com>
-X-Google-Original-Message-ID: <20230502184056.xjjo3m5mytllq224@DESKTOP-G0QQV4M.>
-Date: Tue, 2 May 2023 21:40:56 +0300
-From: Igor Prusov <prusovigor@gmail.com>
-To: Michal Simek <michal.simek@amd.com>
-References: <20230427203726.11835-1-ivprusov@sberdevices.ru>
- <20230427203726.11835-7-ivprusov@sberdevices.ru>
- <6b4101b8-c047-b8aa-e54b-e8eee03fa2fc@amd.com>
+ Wed,  3 May 2023 06:27:25 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3434w0Ok017340; Wed, 3 May 2023 08:27:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=30wyotBELBo4ijPx0hzefRfptkeSXbd8itlk1cW7c7g=;
+ b=BPFo8V8FdFpgA3+uEtvl4OuLeRf0zBhMqLijJxhoTVsXyIu+fmMI2fxP+75q3+Rw8uRB
+ r3QAwNtbX+rppcgMIga1WaES+48EKsJ86NdZ+8jxHwwubg30O79O8SbYEnTbhxt0h9WS
+ q6RyHnLdJIJPEPJ6QEmJ9FjHf/EeX76ySfEkushQz5r5p696G8jvQ12mJSMt+LakN64z
+ Cph3sSzBxHCYdIxRzBK1w8LJE+7pasfdvkCsq00xnHpeL0xnSHyxnSRPQrSS54OyMtAg
+ Rn8t7eqoAz19awr2QTWwCrgVV1hO4xGhMmVOOFIlIlaCM4ijVze+IS9m8RlvYARkSF1P gQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qatkufmac-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 03 May 2023 08:27:23 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 41E23100038;
+ Wed,  3 May 2023 08:27:23 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 322F9211F36;
+ Wed,  3 May 2023 08:27:23 +0200 (CEST)
+Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 3 May
+ 2023 08:27:22 +0200
+Message-ID: <20d8269c-62da-a74f-bb0a-37391366c855@foss.st.com>
+Date: Wed, 3 May 2023 08:27:22 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <6b4101b8-c047-b8aa-e54b-e8eee03fa2fc@amd.com>
-X-Mailman-Approved-At: Wed, 03 May 2023 08:50:25 +0000
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Stefan Roese <sr@denx.de>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, u-boot@lists.denx.de,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, kernel@sberdevices.ru,
- uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Igor Prusov <ivprusov@sberdevices.ru>
-Subject: Re: [Uboot-stm32] [RFC PATCH v1 6/7] clk: treewide: switch to clock
- dump from clk_ops
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: en-US
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20230427133638.1477556-1-patrick.delaunay@foss.st.com>
+ <20230427153632.1.I6aa05833267d4f481cd4b93967b34341002e2566@changeid>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230427153632.1.I6aa05833267d4f481cd4b93967b34341002e2566@changeid>
+X-Originating-IP: [10.201.21.26]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-05-03_03,2023-04-27_01,2023-02-09_01
+Cc: Marek Vasut <marex@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/6] stm32mp: add support of STM32MP15x
+	Rev.Y
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,87 +78,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello Michal,
 
-On Tue, May 02, 2023 at 04:02:00PM +0200, Michal Simek wrote:
-> 
-> 
-> On 4/27/23 22:37, Igor Prusov wrote:
-> > Switch to using new dump operation in clock provider drivers instead of
-> > overriding soc_clk_dump.
-> > 
-> > Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-> > ---
-> >   arch/mips/mach-pic32/cpu.c             | 23 ---------------
-> >   drivers/clk/aspeed/clk_ast2600.c       | 13 ++++-----
-> >   drivers/clk/clk_k210.c                 | 11 +++-----
-> >   drivers/clk/clk_pic32.c                | 39 ++++++++++++++++++++++++++
-> >   drivers/clk/clk_versal.c               |  7 ++++-
-> >   drivers/clk/clk_zynq.c                 | 19 ++++---------
-> >   drivers/clk/clk_zynqmp.c               | 13 ++++-----
-> >   drivers/clk/imx/clk-imx8.c             | 11 +++-----
-> >   drivers/clk/mvebu/armada-37xx-periph.c |  5 +++-
-> >   drivers/clk/stm32/clk-stm32mp1.c       | 29 ++++++-------------
-> >   10 files changed, 83 insertions(+), 87 deletions(-)
-> > 
-> > diff --git a/arch/mips/mach-pic32/cpu.c b/arch/mips/mach-pic32/cpu.c
-> > index de449e3c6a..2875a1ec7c 100644
-> > --- a/arch/mips/mach-pic32/cpu.c
-> > +++ b/arch/mips/mach-pic32/cpu.c
-> > @@ -148,26 +148,3 @@ const char *get_core_name(void)
-> >   	return str;
-> >   }
-> >   #endif
-> > -#ifdef CONFIG_CMD_CLK
-> > -
-> > -int soc_clk_dump(void)
-> > -{
-> > -	int i;
-> > -
-> > -	printf("PLL Speed: %lu MHz\n",
-> > -	       CLK_MHZ(rate(PLLCLK)));
-> > -
-> > -	printf("CPU Speed: %lu MHz\n", CLK_MHZ(rate(PB7CLK)));
-> > -
-> > -	printf("MPLL Speed: %lu MHz\n", CLK_MHZ(rate(MPLL)));
-> > -
-> > -	for (i = PB1CLK; i <= PB7CLK; i++)
-> > -		printf("PB%d Clock Speed: %lu MHz\n", i - PB1CLK + 1,
-> > -		       CLK_MHZ(rate(i)));
-> > -
-> > -	for (i = REF1CLK; i <= REF5CLK; i++)
-> > -		printf("REFO%d Clock Speed: %lu MHz\n", i - REF1CLK + 1,
-> > -		       CLK_MHZ(rate(i)));
-> > -	return 0;
-> > -}
-> > -#endif
-> > diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
-> > index b3cc8392fa..08db21d394 100644
-> > --- a/drivers/clk/aspeed/clk_ast2600.c
-> > +++ b/drivers/clk/aspeed/clk_ast2600.c
-> > @@ -1109,6 +1109,7 @@ struct aspeed_clks {
-> >   	const char *name;
-> >   };
-> > +#if IS_ENABLED(CONFIG_CMD_CLK)
-> >   static struct aspeed_clks aspeed_clk_names[] = {
-> >   	{ ASPEED_CLK_HPLL, "hpll" },
-> >   	{ ASPEED_CLK_MPLL, "mpll" },
-> > @@ -1123,18 +1124,12 @@ static struct aspeed_clks aspeed_clk_names[] = {
-> >   	{ ASPEED_CLK_HUARTX, "huxclk" },
-> >   };
-> > -int soc_clk_dump(void)
-> > +int ast2600_clk_dump(struct udevice *dev)
-> 
-> static? apply for all below too.
 
-Indeed, will fix in v2, thanks!
-
+On 4/27/23 15:36, Patrick Delaunay wrote:
+> Add support of STM32MP15x Rev.Y for the Silicon revision REV_ID = 0x2003.
 > 
-> M
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+>  arch/arm/mach-stm32mp/include/mach/sys_proto.h | 1 +
+>  arch/arm/mach-stm32mp/stm32mp15x.c             | 5 ++++-
+>  2 files changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> index 0d39b67178e4..83fb32a45fcc 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> @@ -44,6 +44,7 @@ u32 get_cpu_dev(void);
+>  #define CPU_REV1_2	0x1003
+>  #define CPU_REV2	0x2000
+>  #define CPU_REV2_1	0x2001
+> +#define CPU_REV2_2	0x2003
+>  
+>  /* return Silicon revision = REV_ID[15:0] of Device Version */
+>  u32 get_cpu_rev(void);
+> diff --git a/arch/arm/mach-stm32mp/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp15x.c
+> index 660c907a6ba3..afc56b02eea4 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp15x.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp15x.c
+> @@ -266,7 +266,7 @@ static const char * const soc_type[] = {
+>  };
+>  
+>  static const char * const soc_pkg[] = { "??", "AD", "AC", "AB", "AA" };
+> -static const char * const soc_rev[] = { "?", "A", "B", "Z" };
+> +static const char * const soc_rev[] = { "?", "A", "B", "Z", "Y"};
+>  
+>  static void get_cpu_string_offsets(unsigned int *type, unsigned int *pkg,
+>  				   unsigned int *rev)
+> @@ -307,6 +307,9 @@ static void get_cpu_string_offsets(unsigned int *type, unsigned int *pkg,
+>  	case CPU_REV2_1:
+>  		*rev = 3;
+>  		break;
+> +	case CPU_REV2_2:
+> +		*rev = 4;
+> +		break;
+>  	default:
+>  		*rev = 0;
+>  		break;
 
--- 
-Best Regards,
-Igor Prusov
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

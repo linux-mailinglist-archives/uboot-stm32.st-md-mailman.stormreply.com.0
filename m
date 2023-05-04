@@ -2,63 +2,46 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 503556F6035
-	for <lists+uboot-stm32@lfdr.de>; Wed,  3 May 2023 22:38:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF1056F74A6
+	for <lists+uboot-stm32@lfdr.de>; Thu,  4 May 2023 21:52:21 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0582FC6B443;
-	Wed,  3 May 2023 20:38:09 +0000 (UTC)
-Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6C968C6A5ED;
+	Thu,  4 May 2023 19:52:21 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CC2A2C64110
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4E6A4C69073
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  3 May 2023 20:38:07 +0000 (UTC)
-Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
- by mx.sberdevices.ru (Postfix) with ESMTP id 475975FD70;
- Wed,  3 May 2023 23:38:07 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1683146287;
- bh=/f9VLX1yqJlyrR5I5jboTvaWRi2Di2HM61GCoOTo9b4=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
- b=dWo6pt9+iAfqwT4lo7Vih5FpIxBA3Da0WCN8za7o+S8DMRfJIT3C1aI9R8TuPSDTv
- tohQV6ale4iwrSVPFnepdl16UUn/7rmoRzd9NzgTEKi/FmenxCLi8I6z17Icqgrb8/
- jD2pXyHBnX/k4yK6Ygg1SyvQ+z1N416v6Rhf2ugKVNJaqKhzt2X1h9LM7/FrEUMgwI
- YM2kcKel6SNqhcgwbBMy+fVQ1Z56+gRjrfc/yPNsMmLSFT4hx6OZQvHzHE1+Osh9Z7
- PKKI7RrYFbDs8isU+hpLxkQF1KOTgL5uDjhpJQej9b5jMEySFDo8lphqOx+QzNFQr4
- BPv/UyNGp8gSw==
-Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru
- [172.16.1.4]) by mx.sberdevices.ru (Postfix) with ESMTP;
- Wed,  3 May 2023 23:38:07 +0300 (MSK)
-From: Igor Prusov <ivprusov@sberdevices.ru>
-To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, Chia-Wei
- Wang <chiawei_wang@aspeedtech.com>, Aspeed BMC SW team
- <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Stefan Roese
- <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>
-Date: Wed, 3 May 2023 23:37:20 +0300
-Message-ID: <20230503203720.4128156-8-ivprusov@sberdevices.ru>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230503203720.4128156-1-ivprusov@sberdevices.ru>
-References: <20230503203720.4128156-1-ivprusov@sberdevices.ru>
+ Thu,  4 May 2023 19:52:20 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 78050857CF;
+ Thu,  4 May 2023 21:52:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1683229939;
+ bh=271LocXAqsTmVTiJ79kn3+PDX4w7W+C/TAzoBo7SJvw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=TBKONT3XbG1cxjp9XmiHTGfPP8oPtq5MBFlBEu1SVC1pdS8SX8XG8XWoZjNy1/ARt
+ j3/dg+sX8RerOX5XvZGnEeemY6Y9e8gGvms+OYtYuwkd7626rny7GxLjm3ooV2US8Y
+ xedwNCFFIaKh5xPHnnaEvgWsK9f+aHYXQOsTWwcOVbYUIrRsNwZtwyKCvXHlSThLsH
+ 5GaN3SCXnzUQ/3TI1f88JQMmZjrSP/6nOMIJOW9fUQHD8sSUniiICEdmYsdYR+12V3
+ cMhns08l0enM9zN1YvtcBzlPtpU4tclpOcQtMJdk3jmwqW/7XLLYGP2pAEdPhcSd+C
+ q6faP1n6UkBPQ==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Thu,  4 May 2023 21:52:08 +0200
+Message-Id: <20230504195208.4941-1-marex@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-X-Originating-IP: [172.16.1.6]
-X-ClientProxiedBy: S-MS-EXCH01.sberdevices.ru (172.16.1.4) To
- S-MS-EXCH01.sberdevices.ru (172.16.1.4)
-X-KSMG-Rule-ID: 4
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Status: not scanned, disabled by settings
-X-KSMG-AntiSpam-Interceptor-Info: not scanned
-X-KSMG-AntiPhishing: not scanned, disabled by settings
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30,
- bases: 2023/05/03 17:34:00 #21213138
-X-KSMG-AntiVirus-Status: Clean, skipped
-Cc: kernel@sberdevices.ru, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, prusovigor@gmail.com,
- Igor Prusov <ivprusov@sberdevices.ru>
-Subject: [Uboot-stm32] [RFC PATCH v2 7/7] cmd: clk: Remove __weak from
-	soc_clk_dump
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: Use __section(".data") with dot
+	in the section name on DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,38 +58,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-After introducing dump to clk_ops there is no need to override this
-symbol anymore.
+The correct specifier of the section is ".data" and not "data",
+use the former to place the variables in ".data" section.
 
-Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+Fixes: 731fd50e27f ("ARM: stm32: Implement board coding on AV96")
+Fixes: 92ca0f7446c ("ARM: dts: stm32: Synchronize DDR setttings on DH SoMs")
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
- cmd/clk.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ board/dhelectronics/dh_stm32mp1/board.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/clk.c b/cmd/clk.c
-index 55fb96e631..54491ac577 100644
---- a/cmd/clk.c
-+++ b/cmd/clk.c
-@@ -59,7 +59,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
- 	}
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index a9a2965a386..a0cdf83ea71 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -185,9 +185,9 @@ int checkboard(void)
  }
  
--int __weak soc_clk_dump(void)
-+int soc_clk_dump(void)
- {
- 	struct udevice *dev;
- 	const struct clk_ops *ops;
-@@ -81,7 +81,7 @@ int __weak soc_clk_dump(void)
- 	return 0;
- }
- #else
--int __weak soc_clk_dump(void)
-+int soc_clk_dump(void)
- {
- 	puts("Not implemented\n");
- 	return 1;
+ #ifdef CONFIG_BOARD_EARLY_INIT_F
+-static u8 brdcode __section("data");
+-static u8 ddr3code __section("data");
+-static u8 somcode __section("data");
++static u8 brdcode __section(".data");
++static u8 ddr3code __section(".data");
++static u8 somcode __section(".data");
+ static u32 opp_voltage_mv __section(".data");
+ 
+ static void board_get_coding_straps(void)
 -- 
-2.34.1
+2.39.2
 
 _______________________________________________
 Uboot-stm32 mailing list

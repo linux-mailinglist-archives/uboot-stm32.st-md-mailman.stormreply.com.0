@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A89F6FBF21
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 May 2023 08:16:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41D336FC605
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 May 2023 14:13:14 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 41D43C6A602;
-	Tue,  9 May 2023 06:16:57 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D02B3C6A602;
+	Tue,  9 May 2023 12:13:13 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 383B1C65042
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0A4B7C6A5F7
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 May 2023 06:16:56 +0000 (UTC)
+ Tue,  9 May 2023 12:13:11 +0000 (UTC)
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3495B6li024462; Tue, 9 May 2023 08:16:55 +0200
+ 3498hDet000931
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 9 May 2023 14:13:11 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
+ mime-version : subject : to : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=dgUYqRAqdC7hAyhjDcPo3H6Rzyh39Ke9O3NpRmtuRPE=;
- b=bfrgI61bJfuxZvfpR06rTp+oNrZS8b/nAKHOwKVusR6j3cqNrKZtcP3sdPmVCdajPnSS
- b9RPOEAhx9q6c62jS049Tb60xqTPURBNyliyMt2vMknsl0VE5DpZkYI1Tu0ETGZA3gcf
- n/eWOxIdQ6bRgnYnwbHbiTWEUriPdHKtwpy2G+Y68hn+VBw2wFWQXwoHQVPbXh3GVCE3
- +fdybdzviO/D145hzVJet6UiwB7Em4dJZP8ggaWK2++paOui6oLgDSuCl7QEkJUPkop/
- ocPj21SOhar1GEf0cDn3PvPbUAs2qaElP9c97iCmHiwaV8SJw1WMCY0RYCWllPSH9nnQ RA== 
+ bh=blFWou+OPE30GF+PMQ4y3w8p5E2gywgdz0cQOuwopR4=;
+ b=bHewerka0WWLRjdyK7qwAsd+yilyv2TyysYXEwkMxwOkoxLNYCHEj4tFSEkqKzNGmbjK
+ rWY708o3UcDcoYcvQQ+f8xDl9jnK0gYjIooJBLN+UlMEUJIAFlvCjAt0vNGDbnboh82K
+ GG4TB5z42YOD+s4YtoF8FQUPJYnkd0YpDQarRTQSogSydpP+lvenua2CYmC9RUnU55Og
+ Tx0nBmJXh+giWzMh9PvtYF2xn/RtLht6Gu1gBNOyzAqPxUWU+X6A41FRGZFlCoBoEDV2
+ +HvNYO758qDnTtbTq740tjVXKpB6Pa6rYHWaI3HnFFnKAJ95O/a+z7pIkIP2hMbmVndE zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qf787ad81-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 May 2023 08:16:55 +0200
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qf787csvr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 09 May 2023 14:13:11 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B0C4610002A;
- Tue,  9 May 2023 08:16:54 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0455110002A
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue,  9 May 2023 14:13:11 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A9649210F6F;
- Tue,  9 May 2023 08:16:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EFD4B21B539
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue,  9 May 2023 14:13:10 +0200 (CEST)
 Received: from [10.201.21.26] (10.201.21.26) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 9 May
- 2023 08:16:54 +0200
-Message-ID: <266c59ea-3f93-f2c0-0e85-e101f4359087@foss.st.com>
-Date: Tue, 9 May 2023 08:16:54 +0200
+ 2023 14:13:10 +0200
+Message-ID: <b504c78e-de3a-b1a4-0fe4-8e041fc492b4@foss.st.com>
+Date: Tue, 9 May 2023 14:13:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20230504195230.4973-1-marex@denx.de>
+To: <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230424142110.788029-1-patrick.delaunay@foss.st.com>
+ <20230424162102.v2.1.I7a9b5c8f2d337c2f3c11bc6c5f0320a9474bcb49@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230504195230.4973-1-marex@denx.de>
+In-Reply-To: <20230424162102.v2.1.I7a9b5c8f2d337c2f3c11bc6c5f0320a9474bcb49@changeid>
 X-Originating-IP: [10.201.21.26]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-09_03,2023-05-05_01,2023-02-09_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add missing header for
-	save_boot_params
+ definitions=2023-05-09_08,2023-05-05_01,2023-02-09_01
+Subject: Re: [Uboot-stm32] [PATCH v2 1/2] media: dt-bindings: media: Add
+ macros for video interface bus types
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,34 +79,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Marek
+Hi Patrick
 
-On 5/4/23 21:52, Marek Vasut wrote:
-> The get_stm32mp_rom_api_table() function is defined in sys_params.h ,
-> add the missing header to avoid compiler warning.
+On 4/24/23 16:21, Patrick Delaunay wrote:
+> Add a new dt-bindings/media/video-interfaces.h header that defines
+> macros corresponding to the bus types from media/video-interfaces.yaml.
+> This allows avoiding hardcoded constants in device tree sources.
 > 
-> Fixes: dbeaca79b79 ("ARM: stm32: Factor out save_boot_params")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/ecdsa_romapi.c | 1 +
->  1 file changed, 1 insertion(+)
+> Based on linux commit f7eeb0084593 ("media: dt-bindings: media: Add macros
+> for video interface bus types")
 > 
-> diff --git a/arch/arm/mach-stm32mp/ecdsa_romapi.c b/arch/arm/mach-stm32mp/ecdsa_romapi.c
-> index 12b42b9d59c..93c561c69b1 100644
-> --- a/arch/arm/mach-stm32mp/ecdsa_romapi.c
-> +++ b/arch/arm/mach-stm32mp/ecdsa_romapi.c
-> @@ -5,6 +5,7 @@
->   * Implements ECDSA signature verification via the STM32MP ROM.
->   */
->  #include <asm/system.h>
-> +#include <asm/arch/sys_proto.h>
->  #include <dm/device.h>
->  #include <linux/types.h>
->  #include <u-boot/ecdsa.h>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+> (no changes since v1)
+> 
+>  include/dt-bindings/media/video-interfaces.h | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 include/dt-bindings/media/video-interfaces.h
+> 
+> diff --git a/include/dt-bindings/media/video-interfaces.h b/include/dt-bindings/media/video-interfaces.h
+> new file mode 100644
+> index 000000000000..68ac4e05e37f
+> --- /dev/null
+> +++ b/include/dt-bindings/media/video-interfaces.h
+> @@ -0,0 +1,16 @@
+> +/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+> +/*
+> + * Copyright (C) 2022 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> + */
+> +
+> +#ifndef __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
+> +#define __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__
+> +
+> +#define MEDIA_BUS_TYPE_CSI2_CPHY		1
+> +#define MEDIA_BUS_TYPE_CSI1			2
+> +#define MEDIA_BUS_TYPE_CCP2			3
+> +#define MEDIA_BUS_TYPE_CSI2_DPHY		4
+> +#define MEDIA_BUS_TYPE_PARALLEL			5
+> +#define MEDIA_BUS_TYPE_BT656			6
+> +
+> +#endif /* __DT_BINDINGS_MEDIA_VIDEO_INTERFACES_H__ */
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 

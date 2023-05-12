@@ -2,64 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95303700988
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 May 2023 15:53:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7599700997
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 May 2023 15:56:01 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F5F0C6904E;
-	Fri, 12 May 2023 13:53:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 836ACC6904E;
+	Fri, 12 May 2023 13:56:01 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 65629C65E60
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9C3DFC65E60
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 May 2023 13:53:48 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34CCWTCM022444; Fri, 12 May 2023 15:53:47 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=oWRWKJgyQJSjSblu5EFXqpyVlpWdDw7Th0x/petASnk=;
- b=NiG6aJ32gaS2+ePvfdIEqA4GaVp+g5IUeWRyBxIVvoc7T3VeWSsYEeA5ZL2F4RocTpQP
- sT940oy00TV3sgybPcyKCtFo5tpHUu3w9sxHDk1DOV7jX+kaIr7ZMCrRNp+gC00SJiIh
- zQa7003pY7dmX5JuO6o392rOu2jijGtGXe3xkwuKFhNRT3GK+w1dUfnF07nD26sOONy7
- 89aUiZqYFy+JD5dQ32U2gSHLZ7NNZpzuTIX8JExxTng0PYGH4vsbzn6oj4Etf3xt6bJ0
- a/BxgbJDXLY3jkZFKh9SJgMddeh13ap8qlZCB0OQkRcLMDXjwg2sJ8p3LlY2HKklkZFq KA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qhj73j0kx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 12 May 2023 15:53:47 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0941A10002A;
- Fri, 12 May 2023 15:53:47 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 03DFD24C428;
- Fri, 12 May 2023 15:53:47 +0200 (CEST)
-Received: from [10.48.1.0] (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 12 May
- 2023 15:53:46 +0200
-Message-ID: <234fe81b-e8a9-1e07-77c0-11c666a00531@foss.st.com>
-Date: Fri, 12 May 2023 15:53:45 +0200
+ Fri, 12 May 2023 13:56:00 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 77340809A5;
+ Fri, 12 May 2023 15:55:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1683899759;
+ bh=/RlOjakGE8OifjOty4x1JojjtszzdtpGORiO8yQ37S0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=XX5Inju3lgvpwiDiWAfNWeK3PxIv1ATMIPbwfLnXFz0BOQYQRlFuWarpMDOo3GfcT
+ MGOtpwHxn2UhShti9TMR0zfGk5sJ9qpB3h0DZq0OQRLt2SJJw1Tj5JYM1p5BXG+GBU
+ Oe1ueg0VhgROwc3peIwMW5AwdAaGl8ysV0mygSWIIYGTiGCMwwls0BEq+dP8Z6x6ok
+ P+haf66vok1bbYj5a0PDr/E6Avcq91q8k+KNLCl50ILASLVOM/ZoCwlVIayrCGgrs1
+ yGHCtOiFUEl6b95bWnQDTJyvovgsswRgjFZXlRpoFYSoSZG4EMzIsf9IjR6CwEVDjG
+ bGpg4iRJsNmUg==
+Message-ID: <0ee4f382-4c6e-0209-3db9-83d44219c710@denx.de>
+Date: Fri, 12 May 2023 15:55:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20230504195230.4973-1-marex@denx.de>
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20230504195230.4973-1-marex@denx.de>
-X-Originating-IP: [10.48.1.0]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
- definitions=2023-05-12_08,2023-05-05_01,2023-02-09_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add missing header for
-	save_boot_params
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20230511002206.180116-1-marex@denx.de>
+ <f30a7447-89e3-c3b3-3b8a-3ff048d0695b@foss.st.com>
+ <0a44a562-fe18-c8a5-393a-a526be3ca42d@denx.de>
+ <a850167d-bdb1-4b05-0d90-4bc6d5303d8f@foss.st.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <a850167d-bdb1-4b05-0d90-4bc6d5303d8f@foss.st.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add IWDG handling into PSCI
+	suspend code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,35 +61,46 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi,
-
-On 5/4/23 21:52, Marek Vasut wrote:
-> The get_stm32mp_rom_api_table() function is defined in sys_params.h ,
-> add the missing header to avoid compiler warning.
->
-> Fixes: dbeaca79b79 ("ARM: stm32: Factor out save_boot_params")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->   arch/arm/mach-stm32mp/ecdsa_romapi.c | 1 +
->   1 file changed, 1 insertion(+)
-
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-
-Thanks
-Patrick
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gNS8xMi8yMyAxNTo0MywgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiBIaSwKCkhpLAoKPj4+
+PiArwqDCoMKgwqDCoMKgwqAgLyogUGluZyBJV0RHMiBhbmQgQUNLIHByZXRpbWVyIElSUSAqLwo+
+Pj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoaXdkZzJfd2FrZSkgewo+Pj4+ICvCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIHdyaXRlbChJV0RHX0tSX1JFTE9BRF9LRVksIFNUTTMyX0lXREcyX0JBU0UgKyBJ
+V0RHX0tSKTsKPj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0ZWwoSVdER19FV0NSX0VX
+SUMsIFNUTTMyX0lXREcyX0JBU0UgKyBJV0RHX0VXQ1IpOwo+Pj4+ICvCoMKgwqDCoMKgwqDCoCB9
+Cj4+Pj4gK8KgwqDCoCB9Cj4+Pj4gwqAgwqDCoMKgwqDCoCB3cml0ZWwoMHgzLCBTVE0zMl9SQ0Nf
+QkFTRSArIFJDQ19NUF9TUkVRQ0xSUik7Cj4+Pj4gwqDCoMKgwqDCoCBkZHJfc3dfc2VsZl9yZWZy
+ZXNoX2V4aXQoKTsKPj4+Cj4+Pgo+Pj4gUmV2aWV3ZWQtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0
+cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+Pgo+PiBJIGZlZWwgbGlrZSBtYXliZSBJIG5lZWQg
+dG8gd2hhY2sgdGhlIElXREcgYWxzbyBCRUZPUkUgZW50ZXJpbmcgCj4+IHN1c3BlbmQsIGV4cGVj
+dCBhIFYyIHNob3J0bHkuCj4+Cj4+IERvIHlvdSB0aGluayB0aGlzIElXREcgYXBwcm9hY2ggaXMg
+ZmluZSB0byBrZWVwIHRoZSBzeXN0ZW0gZnJvbSAKPj4gcmVib290aW5nIGluIHN1c3BlbmQgPyBP
+ciBkbyB5b3Ugc2VlIGFueSBiZXR0ZXIgb3B0aW9uIGZvciB0aGUgTVAxID8KPiAKPiAKPiBJIHRo
+aW5rIGl0IGlzIGZpbmUgaWYgeW91IHdhbnQgdG8gaGF2ZSB3YXRjaGRvZyBydW5uaW5nIGluIFNU
+QU5EQlkgZXZlbiAKPiB0aGlzIHBhdGNoIGZvcmNlIGEgd2FrZXVwLgo+IAo+IGJ1dCBpZiBJV0RH
+IDEgb3IgMiBzaG91bGQgYmUgbm90IHJ1bm5pbmcgaW4gU1RBTkRCWSAoYnV0IGFsc28gZm9yIFNU
+T1ApIAo+IGZvciB5b3VyIHByb2R1Y3QsCgpXaHkgPwoKSSB3YW50IHRoZSB3YXRjaGRvZyB0byBt
+b25pdG9yIHRoYXQgdGhlIHBsYXRmb3JtIGlzIHN0aWxsIE9LLCBldmVuIGluIApzdXNwZW5kLiBB
+bHNvLCBhcyBmYXIgYXMgSSBjYW4gdGVsbCwgb25jZSB0aGUgSVdERyBpcyBzdGFydGVkLCBpdCBj
+YW5ub3QgCmJlIHN0b3BwZWQsIHJpZ2h0ID8KCj4gaXQgY2FuIGJlIG1hbmFnZWQgZGlyZWN0bHkg
+YnkgdGhlIGhhcmR3YXJlIHdpdGggT1RQLCB0byBmcmVlemUgd2F0Y2hkb2cuCj4gCj4gPT4gaXQg
+aXMgYSBkZWNpc2lvbiBmb3IgZWFjaCBwcm9kdWN0IG9mIHRoZSBkZXNpcmVkIGJlaGF2aW9yIG9m
+IHRoZSBJV0RHIAo+IGluIGxvdyBwb3dlciBtb2RlLgo+IAo+IAo+IFNlZSBSZWYgTWFudWFsOiA0
+OC4zIElXREcgaW1wbGVtZW50YXRpb24KPiAKPiBUYWJsZSAzMzIuIFNUTTMyTVAxNTd4IElXREcg
+ZmVhdHVyZXMKPiAKPiBPcHRpb24gYnl0ZXMgdG8gY29udHJvbCB0aGUgYWN0aXZpdHkgaW4gU3Rh
+bmRieSBtb2RlICg2KQo+IAo+IDYuIENvbnRyb2xsZWQgdmlhIG9wdGlvbiBieXRlcyBPVFBfSVdE
+RzFfRlpfU1RBTkRCWSBhbmQgCj4gT1RQX0lXREcyX0ZaX1NUQU5EQlksIHJlc3BlY3RpdmVseSwg
+Zm9yIElXREcxIGFuZCBJV0RHMi4KPiAKPiBhbmQgaW7CoFRhYmxlMTcgPT4gT1RQIDE4ID0gSFcy
+IGJpdCA1IHRvIDgKCkkgc2F3IHRoZSBPVFAgZnVzZXMsIGJ1dCBJIGRvbid0IHdhbnQgdG8gYmxv
+dyB0aGVtLiBPciBpcyB0aGF0IHJlYWxseSAKdGhlIHN1Z2dlc3Rpb24gU1Qgd291bGQgcHJvdmlk
+ZSBmb3Igc3VzcGVuZC9yZXN1bWUsIGJsb3cgdGhlIGZ1c2VzID8KCihJIHdvbmRlciwgd2h5IGlz
+bid0IHRoZSBsb2dpYyBvZiB0aG9zZSBmdXNlcyBpbnZlcnRlZCB0aGVuLCBpLmUuIGJ5IApkZWZh
+dWx0IHN0b3AgdGhlIHdhdGNoZG9nIGluIHN1c3BlbmQgQU5EIGJsb3cgZnVzZXMgdG8ga2VlcCBp
+dCBydW5uaW5nIAppbiBzdXNwZW5kPykKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1k
+LW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHku
+Y29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

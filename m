@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88D1F700987
-	for <lists+uboot-stm32@lfdr.de>; Fri, 12 May 2023 15:53:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95303700988
+	for <lists+uboot-stm32@lfdr.de>; Fri, 12 May 2023 15:53:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4DEAFC6904E;
-	Fri, 12 May 2023 13:53:08 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5F5F0C6904E;
+	Fri, 12 May 2023 13:53:49 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4EA75C65E60
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 65629C65E60
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 12 May 2023 13:53:07 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ Fri, 12 May 2023 13:53:48 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34CBH16W015101; Fri, 12 May 2023 15:52:58 +0200
+ 34CCWTCM022444; Fri, 12 May 2023 15:53:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=message-id : date :
  mime-version : subject : to : cc : references : from : in-reply-to :
  content-type : content-transfer-encoding; s=selector1;
- bh=SteNMeUzc8qfrOAMr6SmTbfZSA7ICAFH/3QpPjtspF8=;
- b=v2zRvjkMdpPX/lkSU87KbLIwImvBAMAu5FScrgJpU/iDpNC2k/MWMQecKmdyUaK2ziLT
- 7Mb3Q5K8l1tKp1jQZPfUSdx0l8ZdH1vP21gAZgcJk5oiihlhXDZqqHzGMmYbjbzzdBON
- E9exsj+/a5V93ybUeezUSAwOPWwYxEKUn+S9xDDwkUMkqNX2fjHg9JXvAXtd214uFPBW
- CvjM0u8IOnPnjlH3h016qqvargFoXvHM0KcoLqHy2WgY7c3P56yG4nt3G19nAFi3nLab
- u+01MZ/ddKaVVMgKEKmxIwfiauwkfjkr+6lxQfWLEIQQ7rePpo+7V+9KIHkBfXHPSTzF pw== 
+ bh=oWRWKJgyQJSjSblu5EFXqpyVlpWdDw7Th0x/petASnk=;
+ b=NiG6aJ32gaS2+ePvfdIEqA4GaVp+g5IUeWRyBxIVvoc7T3VeWSsYEeA5ZL2F4RocTpQP
+ sT940oy00TV3sgybPcyKCtFo5tpHUu3w9sxHDk1DOV7jX+kaIr7ZMCrRNp+gC00SJiIh
+ zQa7003pY7dmX5JuO6o392rOu2jijGtGXe3xkwuKFhNRT3GK+w1dUfnF07nD26sOONy7
+ 89aUiZqYFy+JD5dQ32U2gSHLZ7NNZpzuTIX8JExxTng0PYGH4vsbzn6oj4Etf3xt6bJ0
+ a/BxgbJDXLY3jkZFKh9SJgMddeh13ap8qlZCB0OQkRcLMDXjwg2sJ8p3LlY2HKklkZFq KA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qg90pymqn-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qhj73j0kx-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 12 May 2023 15:52:58 +0200
+ Fri, 12 May 2023 15:53:47 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1FFFE100034;
- Fri, 12 May 2023 15:52:58 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0941A10002A;
+ Fri, 12 May 2023 15:53:47 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 19D0524C428;
- Fri, 12 May 2023 15:52:58 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 03DFD24C428;
+ Fri, 12 May 2023 15:53:47 +0200 (CEST)
 Received: from [10.48.1.0] (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 12 May
- 2023 15:52:57 +0200
-Message-ID: <28037b53-9d80-4e4c-1be6-34d4908578de@foss.st.com>
-Date: Fri, 12 May 2023 15:52:57 +0200
+ 2023 15:53:46 +0200
+Message-ID: <234fe81b-e8a9-1e07-77c0-11c666a00531@foss.st.com>
+Date: Fri, 12 May 2023 15:53:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.0
 Content-Language: en-US
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20230504195208.4941-1-marex@denx.de>
+References: <20230504195230.4973-1-marex@denx.de>
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20230504195208.4941-1-marex@denx.de>
+In-Reply-To: <20230504195230.4973-1-marex@denx.de>
 X-Originating-IP: [10.48.1.0]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
  definitions=2023-05-12_08,2023-05-05_01,2023-02-09_01
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Use __section(".data") with
- dot in the section name on DHSOM
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add missing header for
+	save_boot_params
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,23 +79,22 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 On 5/4/23 21:52, Marek Vasut wrote:
-> The correct specifier of the section is ".data" and not "data",
-> use the former to place the variables in ".data" section.
+> The get_stm32mp_rom_api_table() function is defined in sys_params.h ,
+> add the missing header to avoid compiler warning.
 >
-> Fixes: 731fd50e27f ("ARM: stm32: Implement board coding on AV96")
-> Fixes: 92ca0f7446c ("ARM: dts: stm32: Synchronize DDR setttings on DH SoMs")
+> Fixes: dbeaca79b79 ("ARM: stm32: Factor out save_boot_params")
 > Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: u-boot@dh-electronics.com
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->   board/dhelectronics/dh_stm32mp1/board.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->
+>   arch/arm/mach-stm32mp/ecdsa_romapi.c | 1 +
+>   1 file changed, 1 insertion(+)
+
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
 
 Thanks
 Patrick

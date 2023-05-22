@@ -2,161 +2,81 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1E6870BF71
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 May 2023 15:14:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A734470CB65
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 May 2023 22:42:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5884FC6A614;
-	Mon, 22 May 2023 13:14:36 +0000 (UTC)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on2062.outbound.protection.outlook.com [40.107.6.62])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4EFE6C6A61A;
+	Mon, 22 May 2023 20:42:23 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5892AC6A60C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E3B9CC6A617
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 May 2023 09:42:18 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JpJxc16z8n6umgepMUmeLtQ8La+S5TPRdwksRno0/xrvBm9qUcLwVYPAuYOXClGhzREdaJSHqjoEY3rpuG6NzaOhHnZceB9SFZL80ChgxECgyv6AowWHjRrWy2MwE2BB6Pg2NUus+BqE4ekLnZg/oHTD3aQ4+EjgCYFTIL0ZpPOt8dElNNwT11vgoqkXu/UgbCg4B8vY9WJyi26hBwyW6XnQesE2xM1qf1a7shXBNIBBRVG9D6L90/UNRxEBwsq45C2M6ZRcpFhcMlX0nEkMsZxD53/YXIu9SRF0Pv+GJz81tAoUZkhuxOcBXhEnZTqkYDjMb/m1B+Yo9XNEL31cBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2+MytarVo0hUTuutU70ld4csFnCfy8S9gyDCA7HTPRg=;
- b=j0ge4vEquXWF6bLNn/2KUgKh2puoR3MmCbKNsX58Ti8MKc1yVRJQw3gOp9HTBx3xQ5K/UTVv2i5fBlsS0YEzoXmwz9oi8/+9RuPVE87nwhl9VPv8oCIy70vlq8fhc/QrV/DE5zRoj+jfOfaJJeMUZAuf3RFx/Onq2RXRpcRAJQjYnMdCLQrNIxvFkiJy6btl83K9/bK+d5lgLkBl+mhCsBf0mFe0hb7Z2/aCWf3c/ukdmcK7fVF1c7DA2g6i/nokroiYioyEfnvsf/XDn5AeRh1U1RMEfr2UhRLDGSP1xpcD/O8ckVW+5YO9Txec3aLpl4MHSCWm3gxMYEPHMrv6Qw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2+MytarVo0hUTuutU70ld4csFnCfy8S9gyDCA7HTPRg=;
- b=EO2TdDGNA0GVpr4rcl+yOXqiDqzClL5yuH/FoPdDCkq8hGq5I23UoSrl+qk0XPt9c7N3G9aJSAZojU7wrDl75g2sxVK+Tyo4x+lMysDxrXyt8is3KmH1b4jjbbxs72p/js0O/0uv1OSJjwJh/RR4k9aMI7QUlSxE0ZVpVBowB5s4h8yFGswwDTwpAM8JHw8liFDGNm7pK1axon3D2s5YHR6fd+KZ3HTAY/1/X7hzIQRSQj3haX4nfsT8onC/bYBq8H5DddnuCrHYFp2VaEYR6NH6O+QDpAHzyj+n19tuKjKfNEif5l+OiNqraLc7XBj8JT8tFjgnfbdI/njSQledOA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Received: from AS8PR04MB8465.eurprd04.prod.outlook.com (2603:10a6:20b:348::19)
- by PAXPR04MB8783.eurprd04.prod.outlook.com (2603:10a6:102:20e::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6411.28; Mon, 22 May
- 2023 09:42:15 +0000
-Received: from AS8PR04MB8465.eurprd04.prod.outlook.com
- ([fe80::79ff:9640:3ffc:75f2]) by AS8PR04MB8465.eurprd04.prod.outlook.com
- ([fe80::79ff:9640:3ffc:75f2%5]) with mapi id 15.20.6411.028; Mon, 22 May 2023
- 09:42:15 +0000
-Message-ID: <77a11ab2-f5ef-0476-2836-82a52db88f27@suse.com>
-Date: Mon, 22 May 2023 17:41:48 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.1
-Content-Language: en-US
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- git@xilinx.com, Tom Rini <trini@konsulko.com>
-References: <0dbdf0432405c1c38ffca55703b6737a48219e79.1684307818.git.michal.simek@amd.com>
-From: Qu Wenruo <wqu@suse.com>
-In-Reply-To: <0dbdf0432405c1c38ffca55703b6737a48219e79.1684307818.git.michal.simek@amd.com>
-X-ClientProxiedBy: MN2PR16CA0005.namprd16.prod.outlook.com
- (2603:10b6:208:134::18) To AS8PR04MB8465.eurprd04.prod.outlook.com
- (2603:10a6:20b:348::19)
+ Mon, 22 May 2023 20:42:21 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-3f41d087b3bso66611055e9.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 22 May 2023 13:42:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1684788141; x=1687380141;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=c8K0aGy6FWiqoJ2qJaHY6ZAFWerhJ0FxZvuYWP0M64I=;
+ b=BTyIuVMqXDlzBteYG9NR4xnvQChUkvSRsioxGtECbT15mbZFj4GJRGy1NTstgY9u+G
+ ZVAwKDfQetRAhjx4mdliCHItcnAzLMjglC4v+kjC4YrmxT4v1EsnPk0Gi/+9+QYD3oRQ
+ zLYR8riCkYuh8JfdW2t4lG6KtmbMw4W3Rq/G3vvEi8ICrZfLwkqV/QxI8d3e9LPcY6C6
+ fLCX9q9FZlHehkQPr77wPvVyB8aOoCFwSD8bCI1FUEweX0TkGrmygwLRwKeZGr0nT8Ix
+ P44NbvQTf/aRWJipw7u8K+5vJ6WKlVnKmiUyr305gZHac5axmzC2kRaIdjgZDf1KN27Q
+ lC8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1684788141; x=1687380141;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=c8K0aGy6FWiqoJ2qJaHY6ZAFWerhJ0FxZvuYWP0M64I=;
+ b=fIn456flqk9b669SUT7OES5czTesCIHfX7WZ7cEgJyfnLIgOEgIr8m/p2OW+y2AfhF
+ H1Mu785si6HmjJ+6IyXLUPvSe7EsfHvUFWaNYSF8NbCqY1kRwQ9eP2VcZIYOiNDuRhmR
+ lQtkWBXiviPvAbEwQH5Nok0KLDaKGhqvbwwzJ8UwlW/yyAdRjZ1veFrOhc4OwMVjHYOY
+ 0+U6cP9h1p9feoa3OjD8TYHVr7i1L6P4iAjDelBmPMZGGdnjROqCz+Qsl/XUTTvJmVh3
+ 7q9wSYkKQROYtu1k3rDHkOuzl3TynIxWCwagsy4FwxidzcA3JFVwtocwmXxMM+S5mo5g
+ ZG4g==
+X-Gm-Message-State: AC+VfDycU0DoDbYoqOUDi6Panf83vnyyWZGk7bcijiXvZK9WLI4iBvmX
+ lvE2ps0M11U3GwDZX9kCo7JR4A==
+X-Google-Smtp-Source: ACHHUZ5aaOuzjRzQArwOWz2cMhsiPii+E8RrVRdHx0jr7eu6fL8EH0G7P0MdDhhrM2L9YRfNXLZKQQ==
+X-Received: by 2002:a1c:7415:0:b0:3f6:244:55df with SMTP id
+ p21-20020a1c7415000000b003f6024455dfmr4337607wmc.29.1684788141282; 
+ Mon, 22 May 2023 13:42:21 -0700 (PDT)
+Received: from hera (ppp176092130041.access.hol.gr. [176.92.130.41])
+ by smtp.gmail.com with ESMTPSA id
+ n10-20020a5d660a000000b003063a92bbf5sm8816365wru.70.2023.05.22.13.42.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 May 2023 13:42:20 -0700 (PDT)
+Date: Mon, 22 May 2023 23:42:17 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Message-ID: <ZGvTqVPg/UqX+vtr@hera>
+References: <20230519103214.1239656-1-masahisa.kojima@linaro.org>
+ <20230519103214.1239656-2-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8465:EE_|PAXPR04MB8783:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2fda68d-d071-4968-5102-08db5aa8d34f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: +GHxFOUtQcUunuYtu+bDiwIvS+2QYPgJ0I3Z9VTkwoFiGGv6KUjFYgHT16HydhNVBib8dejhworKfPleGUNFK6dPwIcfYAZRUTW+0YygORJ2sYW76LHWExfE3J1IOKjMqfxeLUGSkKPQvv1Pvm7P7q3+48p5YICTYni+o02k9+fJ/fqWLaHNzbJtUAMMO8eTozoLlJ0OSlZijLagddNhYj0UgFIXxljubPjIPsCHsKlTK05NZfK5qbqi3+N5wsD3oEXjTnBLfoBPo0cAPvDobcIUCbhsze7vwtZSvV3PRq/Cn+HswRK42pQT/xKQBeztNG2LeQh1mskX2EJz1WCYAgfU2ekZAwwheHpdP8UOscPk67a0GTakZNQ3CX5cHynVpT0PJP6Dkm1mCsMr8lgQRZh+apBqB1LE4PDR5wJpzMIfEQdJuix6jHpUiMv1MLDuXeam+fz5IWW5d7B9aPJV5CoY4K2CL50VXwFJ5GNMoJkQiBBet0WQkw8Iwkr2mxni5hitxLt6eY9nl3y1/moRZLZ+vyNY/LQ/4PZH80dXUgIUYmPp90Wk3mAaYMJ+lkFGwUq6zu0lEjJrCQbmtOArdGtPg3f5WH2X3SuLIsfkbHPB9GHd+Jivz36pzhZb7qKSXdS8sWOL2MIWQoZUuNDfZQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8465.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(39860400002)(396003)(346002)(136003)(376002)(366004)(451199021)(478600001)(31686004)(54906003)(110136005)(66476007)(5660300002)(41300700001)(6666004)(6486002)(186003)(316002)(4326008)(6512007)(6506007)(7366002)(7406005)(7416002)(8936002)(8676002)(53546011)(2906002)(2616005)(66946007)(66556008)(38100700002)(36756003)(31696002)(86362001)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a3NsdDAxVWY1elZlU0RCbEgyYkF3dHZtTm11UzVhOUJFRStvQWhTalNZdTNy?=
- =?utf-8?B?RGdJcTVrc0cydUVkYnZySFpFd0JaZWxidU5WVDZHQWl4M01iVW5ZT2p4b21R?=
- =?utf-8?B?V2lmaUdGeU44ZS9VOStEeis4bk5maStOdWxkMjV5cXBCayt3aU1oQkpqUmlE?=
- =?utf-8?B?TW9ya0d2dkw3UW5QaEg3NEM0M21xNnhIM2tVbGJBbUgvWklwTDRxclNFNndM?=
- =?utf-8?B?VFJkOGhwTGR5UmpPYlF2NU85V3lxZUpaTlpHMzUyamt4cnVodE1iajBHTWp0?=
- =?utf-8?B?bDRwam5FQjI4Z095UWVzcFhDVkd0MThOQ2g0SXJQc0Q2RVpLWnU0ZFRhQ1Jv?=
- =?utf-8?B?akplbkExeEJxNGZuQ2xTZHcyVStKTVRka24rZzFXNVJGdXkxRVp5Q1F5NVJv?=
- =?utf-8?B?aHVPRDFsc3poWUJoOWVMbU1OcjNQNVBqUlcxNWRvVzBMOStpOE5aNHN2RzdR?=
- =?utf-8?B?WG5tYmx2aW02dE9rY3VhMEJhcTc0Unl1aExDSzZPdmE1b1NKRU1pZ0l0Q2s3?=
- =?utf-8?B?SlZjbGJWaEp2clVsYU53OUs0TlBXaFR5V2JyQVVjVmlwSmxsOG03MWtoSkpL?=
- =?utf-8?B?VitoQTRYbWF2bDNvKzBuNk9hdDgvckJ5SEp6VmFzb1RuNDIwT0hrN0F2WWt4?=
- =?utf-8?B?eDR4YXYvYjFKamxQMzY2TEo5c3UyYlZXL0J2UHZ1WndBVmkrbU9FQzNzWXpS?=
- =?utf-8?B?a08vZkdPL3AxaEZoS3VvVGo2ZG9GNm5Yd2JWTEp0U0xQMnJ3c3ZOR1l0dmNK?=
- =?utf-8?B?MlBBczBsUG9wL0pNdWxaSVA1RzhDd2grZXNWV0tRUnhGYWtHZFlEZkZZMU56?=
- =?utf-8?B?NytVbGtwNG9PWDkxUkxYNDFnenNpZm04bFpDeWo5R3JkbFc3blVJeVU1aW1a?=
- =?utf-8?B?VzdXV28waHcrdnU1d25weC93UnpBb01nZUZtRXRQNHN6RlJSWXprT3dVSmtL?=
- =?utf-8?B?RE5yeDhXOTAzZUF3alFJVnMxVVlydUY0K2pzczRtZ3U0amtieldiamJzQnUz?=
- =?utf-8?B?dEJCQW94d2xPWFNlYUJseTFjZkVwUVJxM3JhN0VYamZQdEJMczVPdGpoeXdB?=
- =?utf-8?B?RFU3ZWtOQW5meGd3eEdTYW0yUjNjWFJDZ1o5UEtzTHpNR3Z5T1ZkYWpTbTZN?=
- =?utf-8?B?WGxLRFRBQ3VjTkFCME5ZZGYvb0xFcXphVXhWZlg3TjhNUzhqQXhnc1pVN2tl?=
- =?utf-8?B?bVR5L1d0VmRNb2hFVDcrMWMwNXI3c3VMbzRWRnE5dzBwWE1HeEpJbmh1WVo1?=
- =?utf-8?B?UmU3VncydklYa1NFa2JycmpEL1BNMG9TQUFWdUF5SVJrZDNwbEZvMUxUS2Rk?=
- =?utf-8?B?OWNjWDExMGtkMnVKT3ZKWnVxYVltVTA3MSttbVNEYlZidUFwWE14UGZmOWF0?=
- =?utf-8?B?WEo0V1gyZUtrTHRFT0JuaS9NQmFPNGxRUkV0K01Rc0lQWXp3bDh6OEVEK1Vt?=
- =?utf-8?B?S3c4NnA2QnBTekd4TGdoWGMya3BoUiswY2wxNWp6Rmwyd1hSN2J4MlQ5R3JF?=
- =?utf-8?B?VkxrcHp5SlVXUnp1eHVjSVBGd3NoQ2NvSktDdDFaT3lnVW1KTUhwUTBxVkZ4?=
- =?utf-8?B?RlcwdmZnVDZXVDNydm1yV1ZtWHFpekVCaWs3ZitJSU1EdmNiazRrbmpidnhD?=
- =?utf-8?B?S3I4QjR4bXNiUnF6SkVHTkxSOGRMMlRFaDJuNHludi9RWlpxNWczeTVOVGp3?=
- =?utf-8?B?T3dxb0Q3V2dkWFpMWjU5a2FaUWtGbEJ1MFN4Q3Q2OXVGS0VURDBuZXJZQmdX?=
- =?utf-8?B?Yi9MWnBrOUJLZWhZL01nNXBzeEMzVTlyL3dUTG9ERm1QYUxwUnhNMVEyRlFG?=
- =?utf-8?B?bkJ0MDdlaUw1cXFxSEM4c1RHcHRJU3E4WDJXL1dEak9HUjkwZm9KZWx5NDMy?=
- =?utf-8?B?S0pHUEpTWk1GekhrK1BXR2JyK0MxbktxOE1WdEhXWVhGbzkwWFZLWWFucGZD?=
- =?utf-8?B?clZ1TTVHN1E3RlY0Q0J2YUd3cm1NUzdCS1Zrby9hWDlMUFRZWVBlb3lEd2sx?=
- =?utf-8?B?TGNIM0lhMFkrdUNMaTZ4RGhIM3JCbjdkb2ZBb1lhcWIzZzl1VmZDTzcweWEv?=
- =?utf-8?B?alRBWlVtRlJaVlRTR2JLd1JxZElmUk1UTkZpS1FyNDE5aEZneWZzL3hnVENX?=
- =?utf-8?B?UzMwME9aRllNTW05enU2Mk1ObmZ4NUhRVjBGVDVRbTl5ak8xaUR6ZVdoYzhW?=
- =?utf-8?Q?iripcEqY54464l0+7eQUcbA=3D?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2fda68d-d071-4968-5102-08db5aa8d34f
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8465.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 May 2023 09:42:15.3197 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QnF5U6XAeLg9AH+q+myvJuFcMzxqA2GhBz2SCNfkQTycY1CxYBqNPCslaBczNOyc
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8783
-X-Mailman-Approved-At: Mon, 22 May 2023 13:14:35 +0000
-Cc: uboot-snps-arc@synopsys.com, Fabio Estevam <festevam@denx.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Kever Yang <kever.yang@rock-chips.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Bosch <stefan_b@posteo.net>, Joe Hershberger <joe.hershberger@ni.com>,
- Michael Walle <michael@walle.cc>, Will Deacon <willdeacon@google.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- =?UTF-8?Q?Marek_Beh=c3=ban?= <kabel@kernel.org>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Luka Perkov <luka.perkov@sartura.hr>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Matthias Winker <matthias.winker@de.bosch.com>, Niel Fourie <lusus@denx.de>,
- Lukasz Majewski <lukma@denx.de>,
+Content-Disposition: inline
+In-Reply-To: <20230519103214.1239656-2-masahisa.kojima@linaro.org>
+Cc: Etienne Carriere <etienne.carriere@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ Michael Walle <michael@walle.cc>, Mario Six <mario.six@gdsys.cc>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Uri Mashiach <uri.mashiach@compulab.co.il>, Ramon Fried <rfried.dev@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Roger Knecht <rknecht@pm.me>,
- Stefan Roese <sr@denx.de>,
- =?UTF-8?Q?Javier_Mart=c3=adnez_Canillas?= <javier@dowhile0.org>,
- Harald Seiler <hws@denx.de>, Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Holger Brunck <holger.brunck@hitachienergy.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Jonas Karlman <jonas@kwiboo.se>,
- Enric Balletbo i Serra <eballetbo@gmail.com>,
- Rajesh Bhagat <rajesh.bhagat@nxp.com>, Philip Oberfichtner <pro@denx.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Loic Poulain <loic.poulain@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
- Chris Morgan <macromorgan@hotmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Johan Jonker <jbx6244@gmail.com>, Robert Marko <robert.marko@sartura.hr>,
- Dillon Min <dillon.minfei@gmail.com>, Mingkai Hu <mingkai.hu@nxp.com>,
- Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Heiko Schocher <hs@denx.de>,
- Vikas Manocha <vikas.manocha@st.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Shawn Guo <shawn.guo@linaro.org>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot-amlogic@groups.io,
- Kamil Lulko <kamil.lulko@gmail.com>, Luka Kovacic <luka.kovacic@sartura.hr>,
- FUKAUMI Naoki <naoki@radxa.com>, Marc Zyngier <maz@kernel.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Jassi Brar <jaswinder.singh@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- =?UTF-8?Q?Pierre-Cl=c3=a9ment_Tosi?= <ptosi@google.com>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, linux-btrfs@vger.kernel.org
-Subject: Re: [Uboot-stm32] [PATCH] global: Use proper project name U-Boot
+ "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Michal Simek <michal.simek@amd.com>, Heiko Thiery <heiko.thiery@gmail.com>,
+ "moderated list:STM32MP1 BOARD" <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v6 1/8] efi_loader: add the number of
+ image entries in efi_capsule_update_info
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -168,51 +88,310 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On Fri, May 19, 2023 at 07:32:07PM +0900, Masahisa Kojima wrote:
+> The number of image array entries global variable is required
+> to support EFI capsule update. This information is exposed as a
+> num_image_type_guids variable, but this information
+> should be included in the efi_capsule_update_info structure.
+>
+> This commit adds the num_images member in the
+> efi_capsule_update_info structure. All board files supporting
+> EFI capsule update are updated.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+> Newly created in v6
+>
+>  arch/arm/mach-rockchip/board.c                         | 4 ++--
+>  board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c    | 2 +-
+>  board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c | 2 +-
+>  board/emulation/qemu-arm/qemu-arm.c                    | 2 +-
+>  board/kontron/pitx_imx8m/pitx_imx8m.c                  | 2 +-
+>  board/kontron/sl-mx8mm/sl-mx8mm.c                      | 2 +-
+>  board/kontron/sl28/sl28.c                              | 2 +-
+>  board/rockchip/evb_rk3399/evb-rk3399.c                 | 2 +-
+>  board/sandbox/sandbox.c                                | 2 +-
+>  board/socionext/developerbox/developerbox.c            | 2 +-
+>  board/st/stm32mp1/stm32mp1.c                           | 2 +-
+>  board/xilinx/common/board.c                            | 2 +-
+>  include/efi_loader.h                                   | 3 ++-
+>  lib/efi_loader/efi_firmware.c                          | 6 +++---
+>  lib/fwu_updates/fwu.c                                  | 2 +-
+>  15 files changed, 19 insertions(+), 18 deletions(-)
+>
+> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
+> index f1f70c81d0..8daa74b3eb 100644
+> --- a/arch/arm/mach-rockchip/board.c
+> +++ b/arch/arm/mach-rockchip/board.c
+> @@ -41,7 +41,7 @@ static bool updatable_image(struct disk_partition *info)
+>  	uuid_str_to_bin(info->type_guid, image_type_guid.b,
+>  			UUID_STR_FORMAT_GUID);
+>
+> -	for (i = 0; i < num_image_type_guids; i++) {
+> +	for (i = 0; i < update_info.num_images; i++) {
+>  		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
+>  			ret = true;
+>  			break;
+> @@ -59,7 +59,7 @@ static void set_image_index(struct disk_partition *info, int index)
+>  	uuid_str_to_bin(info->type_guid, image_type_guid.b,
+>  			UUID_STR_FORMAT_GUID);
+>
+> -	for (i = 0; i < num_image_type_guids; i++) {
+> +	for (i = 0; i < update_info.num_images; i++) {
+>  		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
+>  			fw_images[i].image_index = index;
+>  			break;
+> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> index 466174679e..b79a2380aa 100644
+> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> @@ -54,10 +54,10 @@ struct efi_fw_image fw_images[] = {
+>
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "mmc 2=flash-bin raw 0 0x1B00 mmcpart 1",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>
+> diff --git a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+> index b373e45df9..af070ec315 100644
+> --- a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+> +++ b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+> @@ -50,10 +50,10 @@ struct efi_fw_image fw_images[] = {
+>
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "mmc 2=flash-bin raw 0x42 0x1D00 mmcpart 1",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  int board_phys_sdram_size(phys_size_t *size)
+> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
+> index 34ed3e8ae6..dfea0d92a3 100644
+> --- a/board/emulation/qemu-arm/qemu-arm.c
+> +++ b/board/emulation/qemu-arm/qemu-arm.c
+> @@ -47,10 +47,10 @@ struct efi_fw_image fw_images[] = {
+>  };
+>
+>  struct efi_capsule_update_info update_info = {
+> +	.num_images = ARRAY_SIZE(fw_images)
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  static struct mm_region qemu_arm64_mem_map[] = {
+> diff --git a/board/kontron/pitx_imx8m/pitx_imx8m.c b/board/kontron/pitx_imx8m/pitx_imx8m.c
+> index fcda86bc1b..4548e7c1df 100644
+> --- a/board/kontron/pitx_imx8m/pitx_imx8m.c
+> +++ b/board/kontron/pitx_imx8m/pitx_imx8m.c
+> @@ -43,10 +43,10 @@ struct efi_fw_image fw_images[] = {
+>
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "mmc 0=flash-bin raw 0x42 0x1000 mmcpart 1",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  int board_early_init_f(void)
+> diff --git a/board/kontron/sl-mx8mm/sl-mx8mm.c b/board/kontron/sl-mx8mm/sl-mx8mm.c
+> index 250195694b..ddb509eb66 100644
+> --- a/board/kontron/sl-mx8mm/sl-mx8mm.c
+> +++ b/board/kontron/sl-mx8mm/sl-mx8mm.c
+> @@ -29,10 +29,10 @@ struct efi_fw_image fw_images[] = {
+>
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "sf 0:0=flash-bin raw 0x400 0x1f0000",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  int board_phys_sdram_size(phys_size_t *size)
+> diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
+> index 89948e087f..4ab221c12b 100644
+> --- a/board/kontron/sl28/sl28.c
+> +++ b/board/kontron/sl28/sl28.c
+> @@ -40,10 +40,10 @@ struct efi_fw_image fw_images[] = {
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "sf 0:0=u-boot-bin raw 0x210000 0x1d0000;"
+>  			"u-boot-env raw 0x3e0000 0x20000",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  int board_early_init_f(void)
+> diff --git a/board/rockchip/evb_rk3399/evb-rk3399.c b/board/rockchip/evb_rk3399/evb-rk3399.c
+> index c99ffdd75e..3c773d0930 100644
+> --- a/board/rockchip/evb_rk3399/evb-rk3399.c
+> +++ b/board/rockchip/evb_rk3399/evb-rk3399.c
+> @@ -18,10 +18,10 @@
+>  static struct efi_fw_image fw_images[ROCKPI4_UPDATABLE_IMAGES] = {0};
+>
+>  struct efi_capsule_update_info update_info = {
+> +	.num_images = ROCKPI4_UPDATABLE_IMAGES,
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ROCKPI4_UPDATABLE_IMAGES;
+>  #endif
+>
+>  #ifndef CONFIG_SPL_BUILD
+> diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+> index 2e44bdf0df..c7b6cb78ff 100644
+> --- a/board/sandbox/sandbox.c
+> +++ b/board/sandbox/sandbox.c
+> @@ -67,10 +67,10 @@ struct efi_fw_image fw_images[] = {
+>  struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "sf 0:0=u-boot-bin raw 0x100000 0x50000;"
+>  		"u-boot-env raw 0x150000 0x200000",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  #if !CONFIG_IS_ENABLED(OF_PLATDATA)
+> diff --git a/board/socionext/developerbox/developerbox.c b/board/socionext/developerbox/developerbox.c
+> index 16e14d4f7f..d92e1d0962 100644
+> --- a/board/socionext/developerbox/developerbox.c
+> +++ b/board/socionext/developerbox/developerbox.c
+> @@ -41,10 +41,10 @@ struct efi_capsule_update_info update_info = {
+>  	.dfu_string = "mtd nor1=u-boot.bin raw 200000 100000;"
+>  			"fip.bin raw 180000 78000;"
+>  			"optee.bin raw 500000 100000",
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  static struct mm_region sc2a11_mem_map[] = {
+> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+> index 1a1b1844c8..5b28ccd32e 100644
+> --- a/board/st/stm32mp1/stm32mp1.c
+> +++ b/board/st/stm32mp1/stm32mp1.c
+> @@ -92,10 +92,10 @@
+>  struct efi_fw_image fw_images[1];
+>
+>  struct efi_capsule_update_info update_info = {
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  int board_early_init_f(void)
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index d071ebfb9c..0328d68e75 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -52,10 +52,10 @@ struct efi_fw_image fw_images[] = {
+>  };
+>
+>  struct efi_capsule_update_info update_info = {
+> +	.num_images = ARRAY_SIZE(fw_images),
+>  	.images = fw_images,
+>  };
+>
+> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
+>  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
+>
+>  #define EEPROM_HEADER_MAGIC		0xdaaddeed
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index b395eef9e7..941d63467c 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -1078,15 +1078,16 @@ struct efi_fw_image {
+>   * platforms which enable capsule updates
+>   *
+>   * @dfu_string:		String used to populate dfu_alt_info
+> + * @num_images:		The number of images array entries
+>   * @images:		Pointer to an array of updatable images
+>   */
+>  struct efi_capsule_update_info {
+>  	const char *dfu_string;
+> +	int num_images;
+>  	struct efi_fw_image *images;
+>  };
+>
+>  extern struct efi_capsule_update_info update_info;
+> -extern u8 num_image_type_guids;
+>
+>  /**
+>   * Install the ESRT system table.
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index 93e2b01c07..cc650e1443 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -131,7 +131,7 @@ static efi_status_t efi_fill_image_desc_array(
+>  	struct efi_fw_image *fw_array;
+>  	int i;
+>
+> -	total_size = sizeof(*image_info) * num_image_type_guids;
+> +	total_size = sizeof(*image_info) * update_info.num_images;
+>
+>  	if (*image_info_size < total_size) {
+>  		*image_info_size = total_size;
+> @@ -141,13 +141,13 @@ static efi_status_t efi_fill_image_desc_array(
+>  	*image_info_size = total_size;
+>
+>  	fw_array = update_info.images;
+> -	*descriptor_count = num_image_type_guids;
+> +	*descriptor_count = update_info.num_images;
+>  	*descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
+>  	*descriptor_size = sizeof(*image_info);
+>  	*package_version = 0xffffffff; /* not supported */
+>  	*package_version_name = NULL; /* not supported */
+>
+> -	for (i = 0; i < num_image_type_guids; i++) {
+> +	for (i = 0; i < update_info.num_images; i++) {
+>  		image_info[i].image_index = fw_array[i].image_index;
+>  		image_info[i].image_type_id = fw_array[i].image_type_id;
+>  		image_info[i].image_id = fw_array[i].image_index;
+> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+> index 5313d07302..3b1785e7b1 100644
+> --- a/lib/fwu_updates/fwu.c
+> +++ b/lib/fwu_updates/fwu.c
+> @@ -151,7 +151,7 @@ static int fwu_get_image_type_id(u8 *image_index, efi_guid_t *image_type_id)
+>
+>  	index = *image_index;
+>  	image = update_info.images;
+> -	for (i = 0; i < num_image_type_guids; i++) {
+> +	for (i = 0; i < update_info.num_images; i++) {
+>  		if (index == image[i].image_index) {
+>  			guidcpy(image_type_id, &image[i].image_type_id);
+>  			return 0;
+> --
+> 2.17.1
+>
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On 2023/5/17 15:17, Michal Simek wrote:
-> Use proper project name in comments, Kconfig, readmes.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-[...]
-> diff --git a/fs/btrfs/compat.h b/fs/btrfs/compat.h
-> index 9cf8a10c76c5..02173dea5f48 100644
-> --- a/fs/btrfs/compat.h
-> +++ b/fs/btrfs/compat.h
-> @@ -46,7 +46,7 @@
->   /*
->    * Read data from device specified by @desc and @part
->    *
-> - * U-boot equivalent of pread().
-> + * U-Boot equivalent of pread().
->    *
->    * Return the bytes of data read.
->    * Return <0 for error.
-> diff --git a/fs/btrfs/extent-io.h b/fs/btrfs/extent-io.h
-> index 6b0c87da969d..5c5c579d1eaf 100644
-> --- a/fs/btrfs/extent-io.h
-> +++ b/fs/btrfs/extent-io.h
-> @@ -8,7 +8,7 @@
->    *   Use pointer to provide better alignment.
->    * - Remove max_cache_size related interfaces
->    *   Includes free_extent_buffer_nocache()
-> - *   As we don't cache eb in U-boot.
-> + *   As we don't cache eb in U-Boot.
->    * - Include headers
->    *
->    * Write related functions are kept as we still need to modify dummy extent
-
-For the btrfs part:
-
-Reviewed-by: Qu Wenruo <wqu@suse.com>
-
-Thanks,
-Qu
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

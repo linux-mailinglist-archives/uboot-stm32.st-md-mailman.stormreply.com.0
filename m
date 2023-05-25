@@ -2,81 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A734470CB65
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 May 2023 22:42:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E97757106DF
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 May 2023 10:09:02 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4EFE6C6A61A;
-	Mon, 22 May 2023 20:42:23 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8BA96C6A611;
+	Thu, 25 May 2023 08:09:02 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E3B9CC6A617
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 477A7C0356E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 May 2023 20:42:21 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-3f41d087b3bso66611055e9.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 May 2023 13:42:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1684788141; x=1687380141;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=c8K0aGy6FWiqoJ2qJaHY6ZAFWerhJ0FxZvuYWP0M64I=;
- b=BTyIuVMqXDlzBteYG9NR4xnvQChUkvSRsioxGtECbT15mbZFj4GJRGy1NTstgY9u+G
- ZVAwKDfQetRAhjx4mdliCHItcnAzLMjglC4v+kjC4YrmxT4v1EsnPk0Gi/+9+QYD3oRQ
- zLYR8riCkYuh8JfdW2t4lG6KtmbMw4W3Rq/G3vvEi8ICrZfLwkqV/QxI8d3e9LPcY6C6
- fLCX9q9FZlHehkQPr77wPvVyB8aOoCFwSD8bCI1FUEweX0TkGrmygwLRwKeZGr0nT8Ix
- P44NbvQTf/aRWJipw7u8K+5vJ6WKlVnKmiUyr305gZHac5axmzC2kRaIdjgZDf1KN27Q
- lC8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684788141; x=1687380141;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=c8K0aGy6FWiqoJ2qJaHY6ZAFWerhJ0FxZvuYWP0M64I=;
- b=fIn456flqk9b669SUT7OES5czTesCIHfX7WZ7cEgJyfnLIgOEgIr8m/p2OW+y2AfhF
- H1Mu785si6HmjJ+6IyXLUPvSe7EsfHvUFWaNYSF8NbCqY1kRwQ9eP2VcZIYOiNDuRhmR
- lQtkWBXiviPvAbEwQH5Nok0KLDaKGhqvbwwzJ8UwlW/yyAdRjZ1veFrOhc4OwMVjHYOY
- 0+U6cP9h1p9feoa3OjD8TYHVr7i1L6P4iAjDelBmPMZGGdnjROqCz+Qsl/XUTTvJmVh3
- 7q9wSYkKQROYtu1k3rDHkOuzl3TynIxWCwagsy4FwxidzcA3JFVwtocwmXxMM+S5mo5g
- ZG4g==
-X-Gm-Message-State: AC+VfDycU0DoDbYoqOUDi6Panf83vnyyWZGk7bcijiXvZK9WLI4iBvmX
- lvE2ps0M11U3GwDZX9kCo7JR4A==
-X-Google-Smtp-Source: ACHHUZ5aaOuzjRzQArwOWz2cMhsiPii+E8RrVRdHx0jr7eu6fL8EH0G7P0MdDhhrM2L9YRfNXLZKQQ==
-X-Received: by 2002:a1c:7415:0:b0:3f6:244:55df with SMTP id
- p21-20020a1c7415000000b003f6024455dfmr4337607wmc.29.1684788141282; 
- Mon, 22 May 2023 13:42:21 -0700 (PDT)
-Received: from hera (ppp176092130041.access.hol.gr. [176.92.130.41])
- by smtp.gmail.com with ESMTPSA id
- n10-20020a5d660a000000b003063a92bbf5sm8816365wru.70.2023.05.22.13.42.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 May 2023 13:42:20 -0700 (PDT)
-Date: Mon, 22 May 2023 23:42:17 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Message-ID: <ZGvTqVPg/UqX+vtr@hera>
-References: <20230519103214.1239656-1-masahisa.kojima@linaro.org>
- <20230519103214.1239656-2-masahisa.kojima@linaro.org>
+ Thu, 25 May 2023 08:09:01 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 34P7QcdL013040; Thu, 25 May 2023 10:08:59 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=QDiifkfnmFRyg9kGwjNP5Iw4c3TLmxL3/ytGiULT9eA=;
+ b=2beQGobnWLYXQIkHv25y2CR8P/4lt9qVHEDVmFDRz/FI3NcfNnAglIro4DcqlCrZJma8
+ rMslLelT9jNR35EO+xdLuTmlwgt+JwMRmFkhKY6VxlAI2A9fGJubRdHVkULkYSODEgnl
+ ygPle1P/16cORVCAvy0JCg10C4/6avk6/1xW3VflcRgh4jAfSNpCZsQQ8hLishsE0Rap
+ GLYnzXqM5KdVYXAz+tkUCTUeccwtsTmJl/lJ9YTiK6QdfIS6Fhs/2WMl+ozmdb0Nkhk0
+ INgcdsgbiLGdsyPlCQbrcHF6LH9BkJO98Lqzc4yacOUjtAzG6H7GQRD3QeamL6Jz7gBk eQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qt39trafd-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 25 May 2023 10:08:59 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A5C1910002A;
+ Thu, 25 May 2023 10:08:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 99EF3212FC4;
+ Thu, 25 May 2023 10:08:58 +0200 (CEST)
+Received: from [10.48.1.0] (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Thu, 25 May
+ 2023 10:08:57 +0200
+Message-ID: <e171b09d-0e7d-1815-6133-0946212a08d9@foss.st.com>
+Date: Thu, 25 May 2023 10:08:56 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230519103214.1239656-2-masahisa.kojima@linaro.org>
-Cc: Etienne Carriere <etienne.carriere@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
- Michael Walle <michael@walle.cc>, Mario Six <mario.six@gdsys.cc>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Michal Simek <michal.simek@amd.com>, Heiko Thiery <heiko.thiery@gmail.com>,
- "moderated list:STM32MP1 BOARD" <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v6 1/8] efi_loader: add the number of
- image entries in efi_capsule_update_info
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+References: <20230517220239.329807-1-marex@denx.de>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230517220239.329807-1-marex@denx.de>
+X-Originating-IP: [10.48.1.0]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
+ definitions=2023-05-25_04,2023-05-24_01,2023-05-22_02
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Power cycle Buck3 in reset on
+	DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,311 +71,92 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, May 19, 2023 at 07:32:07PM +0900, Masahisa Kojima wrote:
-> The number of image array entries global variable is required
-> to support EFI capsule update. This information is exposed as a
-> num_image_type_guids variable, but this information
-> should be included in the efi_capsule_update_info structure.
->
-> This commit adds the num_images member in the
-> efi_capsule_update_info structure. All board files supporting
-> EFI capsule update are updated.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> ---
-> Newly created in v6
->
->  arch/arm/mach-rockchip/board.c                         | 4 ++--
->  board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c    | 2 +-
->  board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c | 2 +-
->  board/emulation/qemu-arm/qemu-arm.c                    | 2 +-
->  board/kontron/pitx_imx8m/pitx_imx8m.c                  | 2 +-
->  board/kontron/sl-mx8mm/sl-mx8mm.c                      | 2 +-
->  board/kontron/sl28/sl28.c                              | 2 +-
->  board/rockchip/evb_rk3399/evb-rk3399.c                 | 2 +-
->  board/sandbox/sandbox.c                                | 2 +-
->  board/socionext/developerbox/developerbox.c            | 2 +-
->  board/st/stm32mp1/stm32mp1.c                           | 2 +-
->  board/xilinx/common/board.c                            | 2 +-
->  include/efi_loader.h                                   | 3 ++-
->  lib/efi_loader/efi_firmware.c                          | 6 +++---
->  lib/fwu_updates/fwu.c                                  | 2 +-
->  15 files changed, 19 insertions(+), 18 deletions(-)
->
-> diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-> index f1f70c81d0..8daa74b3eb 100644
-> --- a/arch/arm/mach-rockchip/board.c
-> +++ b/arch/arm/mach-rockchip/board.c
-> @@ -41,7 +41,7 @@ static bool updatable_image(struct disk_partition *info)
->  	uuid_str_to_bin(info->type_guid, image_type_guid.b,
->  			UUID_STR_FORMAT_GUID);
->
-> -	for (i = 0; i < num_image_type_guids; i++) {
-> +	for (i = 0; i < update_info.num_images; i++) {
->  		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
->  			ret = true;
->  			break;
-> @@ -59,7 +59,7 @@ static void set_image_index(struct disk_partition *info, int index)
->  	uuid_str_to_bin(info->type_guid, image_type_guid.b,
->  			UUID_STR_FORMAT_GUID);
->
-> -	for (i = 0; i < num_image_type_guids; i++) {
-> +	for (i = 0; i < update_info.num_images; i++) {
->  		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
->  			fw_images[i].image_index = index;
->  			break;
-> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> index 466174679e..b79a2380aa 100644
-> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-> @@ -54,10 +54,10 @@ struct efi_fw_image fw_images[] = {
->
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "mmc 2=flash-bin raw 0 0x1B00 mmcpart 1",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->
-> diff --git a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-> index b373e45df9..af070ec315 100644
-> --- a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-> +++ b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
-> @@ -50,10 +50,10 @@ struct efi_fw_image fw_images[] = {
->
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "mmc 2=flash-bin raw 0x42 0x1D00 mmcpart 1",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  int board_phys_sdram_size(phys_size_t *size)
-> diff --git a/board/emulation/qemu-arm/qemu-arm.c b/board/emulation/qemu-arm/qemu-arm.c
-> index 34ed3e8ae6..dfea0d92a3 100644
-> --- a/board/emulation/qemu-arm/qemu-arm.c
-> +++ b/board/emulation/qemu-arm/qemu-arm.c
-> @@ -47,10 +47,10 @@ struct efi_fw_image fw_images[] = {
->  };
->
->  struct efi_capsule_update_info update_info = {
-> +	.num_images = ARRAY_SIZE(fw_images)
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  static struct mm_region qemu_arm64_mem_map[] = {
-> diff --git a/board/kontron/pitx_imx8m/pitx_imx8m.c b/board/kontron/pitx_imx8m/pitx_imx8m.c
-> index fcda86bc1b..4548e7c1df 100644
-> --- a/board/kontron/pitx_imx8m/pitx_imx8m.c
-> +++ b/board/kontron/pitx_imx8m/pitx_imx8m.c
-> @@ -43,10 +43,10 @@ struct efi_fw_image fw_images[] = {
->
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "mmc 0=flash-bin raw 0x42 0x1000 mmcpart 1",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  int board_early_init_f(void)
-> diff --git a/board/kontron/sl-mx8mm/sl-mx8mm.c b/board/kontron/sl-mx8mm/sl-mx8mm.c
-> index 250195694b..ddb509eb66 100644
-> --- a/board/kontron/sl-mx8mm/sl-mx8mm.c
-> +++ b/board/kontron/sl-mx8mm/sl-mx8mm.c
-> @@ -29,10 +29,10 @@ struct efi_fw_image fw_images[] = {
->
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "sf 0:0=flash-bin raw 0x400 0x1f0000",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  int board_phys_sdram_size(phys_size_t *size)
-> diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
-> index 89948e087f..4ab221c12b 100644
-> --- a/board/kontron/sl28/sl28.c
-> +++ b/board/kontron/sl28/sl28.c
-> @@ -40,10 +40,10 @@ struct efi_fw_image fw_images[] = {
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "sf 0:0=u-boot-bin raw 0x210000 0x1d0000;"
->  			"u-boot-env raw 0x3e0000 0x20000",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  int board_early_init_f(void)
-> diff --git a/board/rockchip/evb_rk3399/evb-rk3399.c b/board/rockchip/evb_rk3399/evb-rk3399.c
-> index c99ffdd75e..3c773d0930 100644
-> --- a/board/rockchip/evb_rk3399/evb-rk3399.c
-> +++ b/board/rockchip/evb_rk3399/evb-rk3399.c
-> @@ -18,10 +18,10 @@
->  static struct efi_fw_image fw_images[ROCKPI4_UPDATABLE_IMAGES] = {0};
->
->  struct efi_capsule_update_info update_info = {
-> +	.num_images = ROCKPI4_UPDATABLE_IMAGES,
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ROCKPI4_UPDATABLE_IMAGES;
->  #endif
->
->  #ifndef CONFIG_SPL_BUILD
-> diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
-> index 2e44bdf0df..c7b6cb78ff 100644
-> --- a/board/sandbox/sandbox.c
-> +++ b/board/sandbox/sandbox.c
-> @@ -67,10 +67,10 @@ struct efi_fw_image fw_images[] = {
->  struct efi_capsule_update_info update_info = {
->  	.dfu_string = "sf 0:0=u-boot-bin raw 0x100000 0x50000;"
->  		"u-boot-env raw 0x150000 0x200000",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  #if !CONFIG_IS_ENABLED(OF_PLATDATA)
-> diff --git a/board/socionext/developerbox/developerbox.c b/board/socionext/developerbox/developerbox.c
-> index 16e14d4f7f..d92e1d0962 100644
-> --- a/board/socionext/developerbox/developerbox.c
-> +++ b/board/socionext/developerbox/developerbox.c
-> @@ -41,10 +41,10 @@ struct efi_capsule_update_info update_info = {
->  	.dfu_string = "mtd nor1=u-boot.bin raw 200000 100000;"
->  			"fip.bin raw 180000 78000;"
->  			"optee.bin raw 500000 100000",
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  static struct mm_region sc2a11_mem_map[] = {
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index 1a1b1844c8..5b28ccd32e 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -92,10 +92,10 @@
->  struct efi_fw_image fw_images[1];
->
->  struct efi_capsule_update_info update_info = {
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  int board_early_init_f(void)
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index d071ebfb9c..0328d68e75 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -52,10 +52,10 @@ struct efi_fw_image fw_images[] = {
->  };
->
->  struct efi_capsule_update_info update_info = {
-> +	.num_images = ARRAY_SIZE(fw_images),
->  	.images = fw_images,
->  };
->
-> -u8 num_image_type_guids = ARRAY_SIZE(fw_images);
->  #endif /* EFI_HAVE_CAPSULE_SUPPORT */
->
->  #define EEPROM_HEADER_MAGIC		0xdaaddeed
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index b395eef9e7..941d63467c 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -1078,15 +1078,16 @@ struct efi_fw_image {
->   * platforms which enable capsule updates
->   *
->   * @dfu_string:		String used to populate dfu_alt_info
-> + * @num_images:		The number of images array entries
->   * @images:		Pointer to an array of updatable images
->   */
->  struct efi_capsule_update_info {
->  	const char *dfu_string;
-> +	int num_images;
->  	struct efi_fw_image *images;
->  };
->
->  extern struct efi_capsule_update_info update_info;
-> -extern u8 num_image_type_guids;
->
->  /**
->   * Install the ESRT system table.
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> index 93e2b01c07..cc650e1443 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -131,7 +131,7 @@ static efi_status_t efi_fill_image_desc_array(
->  	struct efi_fw_image *fw_array;
->  	int i;
->
-> -	total_size = sizeof(*image_info) * num_image_type_guids;
-> +	total_size = sizeof(*image_info) * update_info.num_images;
->
->  	if (*image_info_size < total_size) {
->  		*image_info_size = total_size;
-> @@ -141,13 +141,13 @@ static efi_status_t efi_fill_image_desc_array(
->  	*image_info_size = total_size;
->
->  	fw_array = update_info.images;
-> -	*descriptor_count = num_image_type_guids;
-> +	*descriptor_count = update_info.num_images;
->  	*descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
->  	*descriptor_size = sizeof(*image_info);
->  	*package_version = 0xffffffff; /* not supported */
->  	*package_version_name = NULL; /* not supported */
->
-> -	for (i = 0; i < num_image_type_guids; i++) {
-> +	for (i = 0; i < update_info.num_images; i++) {
->  		image_info[i].image_index = fw_array[i].image_index;
->  		image_info[i].image_type_id = fw_array[i].image_type_id;
->  		image_info[i].image_id = fw_array[i].image_index;
-> diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-> index 5313d07302..3b1785e7b1 100644
-> --- a/lib/fwu_updates/fwu.c
-> +++ b/lib/fwu_updates/fwu.c
-> @@ -151,7 +151,7 @@ static int fwu_get_image_type_id(u8 *image_index, efi_guid_t *image_type_id)
->
->  	index = *image_index;
->  	image = update_info.images;
-> -	for (i = 0; i < num_image_type_guids; i++) {
-> +	for (i = 0; i < update_info.num_images; i++) {
->  		if (index == image[i].image_index) {
->  			guidcpy(image_type_id, &image[i].image_type_id);
->  			return 0;
-> --
-> 2.17.1
->
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgTWFyZWssCgpPbiA1LzE4LzIzIDAwOjAyLCBNYXJlayBWYXN1dCB3cm90ZToKPiBJbiBjYXNl
+IHRoZSBESFNPTSBpcyBpbiBzdXNwZW5kIHN0YXRlIGFuZCBlaXRoZXIgcmVzZXQgYnV0dG9uIGlz
+IHB1c2hlZAo+IG9yIElXREcyIHRyaWdnZXJzIGEgd2F0Y2hkb2cgcmVzZXQsIHRoZW4gRFJBTSBp
+bml0aWFsaXphdGlvbiBjb3VsZCBmYWlsCj4gYXMgZm9sbG93czoKPgo+ICAgICIKPiAgICBSQU06
+IEREUjNMIDMyYml0cyAyeDRHYiA1MzNNSHoKPiAgICBERFIgaW52YWxpZCBzaXplIDogMHg0LCBl
+eHBlY3RlZCAweDQwMDAwMDAwCj4gICAgRFJBTSBpbml0IGZhaWxlZDogLTIyCj4gICAgIyMjIEVS
+Uk9SICMjIyBQbGVhc2UgUkVTRVQgdGhlIGJvYXJkICMjIwo+ICAgICIKPgo+IEF2b2lkIHRoaXMg
+ZmFpbHVyZSBieSBub3Qga2VlcGluZyBhbnkgQnVjayByZWd1bGF0b3JzIGVuYWJsZWQgZHVyaW5n
+IHJlc2V0LAo+IGxldCB0aGUgU29DIGFuZCBEUkFNcyBwb3dlciBjeWNsZSBmdWxseS4gU2luY2Ug
+dGhlIGNoYW5nZSB3aGljaCBrZWVwcyBCdWNrMwo+IFZERCBlbmFibGVkIGR1cmluZyByZXNldCBp
+cyBTVCBzcGVjaWZpYywgbW92ZSB0aGlzIGFkZGl0aW9uIHRvIFNUIHNwZWNpZmljCj4gU1BMIGJv
+YXJkIGluaXRpYWxpemF0aW9uIHNvIHRoYXQgaXQgd291bGRuJ3QgYWZmZWN0IHRoZSBESFNPTSAu
+Cgo+IFNpZ25lZC1vZmYtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+IC0tLQo+IE5P
+VEU6IFRoaXMgaXMgMjAyMy4wNyBtYXRlcmlhbAo+IE5PVEU6IGQxYTRiMDlkZTY0ICgiYm9hcmQ6
+IHN0OiBzdHBtaWMxOiBhZGQgZnVuY3Rpb24gc3RwbWljMV9pbml0IikKPiAgICAgICAgbWVudGlv
+bnMgJ2tlZXAgdmRkIG9uIGR1cmluZyB0aGUgcmVzZXQgY3ljbGUgKHRvIGF2b2lkIGlzc3VlCj4g
+ICAgICAgIHdoZW4gYmFja3VwIGJhdHRlcnkgaXMgYWJzZW50KScsIGJ1dCB0aGVyZSBpcyBubyBm
+dXJ0aGVyCj4gICAgICAgIGRlc2NyaXB0aW9uIG9mIHRoZSAnaXNzdWUnLiBDYW4geW91IHBsZWFz
+ZSBlbGFib3JhdGUgPwoKCgpJbiB0aGUgY29tbWl0IG1lc3NhZ2Ugb2YgZDFhNGIwOWRlNjQzICgi
+Ym9hcmQ6IHN0OiBzdHBtaWMxOgoKYWRkIGZ1bmN0aW9uIHN0cG1pYzFfaW5pdCIpLCBJIGluZGlj
+YXRlZAoKIMKgIC0ga2VlcCB2ZGQgb24gZHVyaW5nIHRoZSByZXNldCBjeWNsZSAodG8gYXZvaWQg
+aXNzdWUgd2hlbiBiYWNrdXAgYmF0dGVyeQogwqDCoMKgwqDCoCBpcyBhYnNlbnQpCgoKT24gU1Qg
+Ym9hcmRzIHdlIGhhdmUgc3VwcG9ydCBvZiBjZWxsIGNvaW4gdG8gYWxsb3cgc3VwcG9ydCBvZiBi
+YWNrdXAgZG9tYWluLAoKYnV0IGJ5IGRlZmF1bHQgdGhpcyBjZWxsIGFyZSBhYnNlbnQgYW5kIHRo
+ZSBiYWNrdXAgZG9tYWluIGlzIGRpcmVjdGx5IApwb3dlcmVkCgpieSBWREQgKGRpcmVjdGx5IGNv
+bm5lY3RlZCBieSByZXNpc3RvcikuCgoKV2Uga2VlcCBwb3dlcmVkIHRoaXMgZG9tYWluIHRvIGRv
+bid0IGxvc3MgdGhlIGJhY2t1cCBkb21haW4gc3VwcG9ydCwKCnRvIGF2b2lkIHRvIGxvc3MgdGhl
+IGluZm9ybWF0aW9uIHNhdmVkIGluIGJhY2t1cCBSQU0gLyByZWdpc3RlcnMsCgphbmQgdG8gYmUg
+YWJibGUgdG8ga2VlcCBERUJVRyBwYXJ0IHBvd2VyZWQgYWxzby4KCgpPbiB0aGlzIFNUIGJvYXJk
+LCBpZiB0aGUgVkREIGlzIHNodXQgZG93biB3aXRoIHJlc2V0LCB0aGUgYmFja3VwIGRvbWFpbiAK
+Y2FuJ3QgYmUKCmNvcnJlY3RseSBtYW5hZ2VkIGZvciByZWJvb3QuCgoKQW5kIHRvIGhhbmRsZSBj
+b3JyZWN0bHkgcG93ZXIgT0ZGIG9uIFNUIGJvYXJkcyB3aXRoIFBNSUMsIHdlIHdpbGwgZG9uJ3Qg
+CnNodXQgZG93bgoKdGhlIFZERCAoZnVsbCBQTUlDIHNodXQgZG93bikgYnV0IHdlIGtlZXAgaXQu
+CgoKU28gdGhlIGJhY2t1cCBkb21haW4gaXMgbG9vc2VkIG9uIFNUIGJvYXJkIHdpdGggU1RQTUlD
+MSBvbmx5IHdoZW4gdGhlIHBvd2VyCgppcyByZW1vdmVkIGFuZCBub3QgZm9yIHJlc2V0IG9yIGZv
+ciBwb3dlciBvZmYuCgoKPiAtLS0KPiBDYzogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3Rh
+cmRAZm9zcy5zdC5jb20+Cj4gQ2M6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlA
+Zm9zcy5zdC5jb20+Cj4gQ2M6IHVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
+b20KPiAtLS0KPiAgIGJvYXJkL3N0L2NvbW1vbi9zdHBtaWMxLmMgfCAxMCArKystLS0tLS0tCj4g
+ICBib2FyZC9zdC9jb21tb24vc3RwbWljMS5oIHwgIDIgKy0KPiAgIGJvYXJkL3N0L3N0bTMybXAx
+L3NwbC5jICAgfCAxMyArKysrKysrKysrKy0tCj4gICAzIGZpbGVzIGNoYW5nZWQsIDE1IGluc2Vy
+dGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQo+Cj4gZGlmZiAtLWdpdCBhL2JvYXJkL3N0L2NvbW1v
+bi9zdHBtaWMxLmMgYi9ib2FyZC9zdC9jb21tb24vc3RwbWljMS5jCj4gaW5kZXggZDUyZGNlNGY2
+NTcuLjk2OWFkNDg0ODY0IDEwMDY0NAo+IC0tLSBhL2JvYXJkL3N0L2NvbW1vbi9zdHBtaWMxLmMK
+PiArKysgYi9ib2FyZC9zdC9jb21tb24vc3RwbWljMS5jCj4gQEAgLTE4NSwyMSArMTg1LDE3IEBA
+IHN0YXRpYyBpbnQgc3RtcGljX2J1Y2sxX3NldChzdHJ1Y3QgdWRldmljZSAqZGV2LCB1MzIgdm9s
+dGFnZV9tdikKPiAgIH0KPiAgIAo+ICAgLyogZWFybHkgaW5pdCBvZiBQTUlDICovCj4gLXZvaWQg
+c3RwbWljMV9pbml0KHUzMiB2b2x0YWdlX212KQo+ICtzdHJ1Y3QgdWRldmljZSAqc3RwbWljMV9p
+bml0KHUzMiB2b2x0YWdlX212KQo+ICAgewo+ICAgCXN0cnVjdCB1ZGV2aWNlICpkZXY7Cj4gICAK
+PiAgIAlpZiAodWNsYXNzX2dldF9kZXZpY2VfYnlfZHJpdmVyKFVDTEFTU19QTUlDLAo+ICAgCQkJ
+CQlETV9EUklWRVJfR0VUKHBtaWNfc3RwbWljMSksICZkZXYpKQo+IC0JCXJldHVybjsKPiArCQly
+ZXR1cm4gTlVMTDsKPiAgIAo+ICAgCS8qIHVwZGF0ZSBWRERDT1JFID0gQlVDSzEgKi8KPiAgIAlp
+ZiAodm9sdGFnZV9tdikKPiAgIAkJc3RtcGljX2J1Y2sxX3NldChkZXYsIHZvbHRhZ2VfbXYpOwo+
+ICAgCj4gLQkvKiBLZWVwIHZkZCBvbiBkdXJpbmcgdGhlIHJlc2V0IGN5Y2xlICovCj4gLQlwbWlj
+X2NscnNldGJpdHMoZGV2LAo+IC0JCQlTVFBNSUMxX0JVQ0tTX01SU1RfQ1IsCj4gLQkJCVNUUE1J
+QzFfTVJTVF9CVUNLKFNUUE1JQzFfQlVDSzMpLAo+IC0JCQlTVFBNSUMxX01SU1RfQlVDSyhTVFBN
+SUMxX0JVQ0szKSk7Cj4gKwlyZXR1cm4gZGV2Owo+ICAgfQo+IGRpZmYgLS1naXQgYS9ib2FyZC9z
+dC9jb21tb24vc3RwbWljMS5oIGIvYm9hcmQvc3QvY29tbW9uL3N0cG1pYzEuaAo+IGluZGV4IGIx
+N2Q2ZjE2MzM4Li43YTcxNjlkN2NlYSAxMDA2NDQKPiAtLS0gYS9ib2FyZC9zdC9jb21tb24vc3Rw
+bWljMS5oCj4gKysrIGIvYm9hcmQvc3QvY29tbW9uL3N0cG1pYzEuaAo+IEBAIC0zLDQgKzMsNCBA
+QAo+ICAgICogQ29weXJpZ2h0IChDKSAyMDIwLCBTVE1pY3JvZWxlY3Ryb25pY3MgLSBBbGwgUmln
+aHRzIFJlc2VydmVkCj4gICAgKi8KPiAgIAo+IC12b2lkIHN0cG1pYzFfaW5pdCh1MzIgdm9sdGFn
+ZV9tdik7Cj4gK3N0cnVjdCB1ZGV2aWNlICpzdHBtaWMxX2luaXQodTMyIHZvbHRhZ2VfbXYpOwo+
+IGRpZmYgLS1naXQgYS9ib2FyZC9zdC9zdG0zMm1wMS9zcGwuYyBiL2JvYXJkL3N0L3N0bTMybXAx
+L3NwbC5jCj4gaW5kZXggNzQ3ZWM3ZTQ0NWEuLjhiNGE1MjlmNzU5IDEwMDY0NAo+IC0tLSBhL2Jv
+YXJkL3N0L3N0bTMybXAxL3NwbC5jCj4gKysrIGIvYm9hcmQvc3Qvc3RtMzJtcDEvc3BsLmMKPiBA
+QCAtNSw2ICs1LDggQEAKPiAgIAo+ICAgI2luY2x1ZGUgPGNvbmZpZy5oPgo+ICAgI2luY2x1ZGUg
+PGNvbW1vbi5oPgo+ICsjaW5jbHVkZSA8cG93ZXIvcG1pYy5oPgo+ICsjaW5jbHVkZSA8cG93ZXIv
+c3RwbWljMS5oPgo+ICAgI2luY2x1ZGUgPGFzbS9hcmNoL3N5c19wcm90by5oPgo+ICAgI2luY2x1
+ZGUgIi4uL2NvbW1vbi9zdHBtaWMxLmgiCj4gICAKPiBAQCAtMTksOCArMjEsMTUgQEAgdm9pZCBi
+b2FyZF92ZGRjb3JlX2luaXQodTMyIHZvbHRhZ2VfbXYpCj4gICAKPiAgIGludCBib2FyZF9lYXJs
+eV9pbml0X2Yodm9pZCkKPiAgIHsKPiAtCWlmIChJU19FTkFCTEVEKENPTkZJR19QTUlDX1NUUE1J
+QzEpICYmIENPTkZJR19JU19FTkFCTEVEKFBPV0VSKSkKPiAtCQlzdHBtaWMxX2luaXQob3BwX3Zv
+bHRhZ2VfbXYpOwo+ICsJaWYgKElTX0VOQUJMRUQoQ09ORklHX1BNSUNfU1RQTUlDMSkgJiYgQ09O
+RklHX0lTX0VOQUJMRUQoUE9XRVIpKSB7Cj4gKwkJc3RydWN0IHVkZXZpY2UgKmRldiA9IHN0cG1p
+YzFfaW5pdChvcHBfdm9sdGFnZV9tdik7Cj4gKwo+ICsJCS8qIEtlZXAgdmRkIG9uIGR1cmluZyB0
+aGUgcmVzZXQgY3ljbGUgKi8KPiArCQlwbWljX2NscnNldGJpdHMoZGV2LAo+ICsJCQkJU1RQTUlD
+MV9CVUNLU19NUlNUX0NSLAo+ICsJCQkJU1RQTUlDMV9NUlNUX0JVQ0soU1RQTUlDMV9CVUNLMyks
+Cj4gKwkJCQlTVFBNSUMxX01SU1RfQlVDSyhTVFBNSUMxX0JVQ0szKSk7Cj4gKwl9Cj4gICAKPiAg
+IAlyZXR1cm4gMDsKPiAgIH0KClJldmlld2VkLWJ5OiBQYXRyaWNrIERlbGF1bmF5IDxwYXRyaWNr
+LmRlbGF1bmF5QGZvc3Muc3QuY29tPgoKVGhhbmtzClBhdHJpY2sKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVi
+b290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWls
+bWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

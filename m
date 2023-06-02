@@ -2,63 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 869EF71FF51
-	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Jun 2023 12:29:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B74B8720328
+	for <lists+uboot-stm32@lfdr.de>; Fri,  2 Jun 2023 15:23:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 343CDC6B443;
-	Fri,  2 Jun 2023 10:29:29 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6A764C6A617;
+	Fri,  2 Jun 2023 13:23:39 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1F207C6B442
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 825B2C6A613
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  2 Jun 2023 10:29:28 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id
- af79cd13be357-75afa109e60so179205285a.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 02 Jun 2023 03:29:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1685701767; x=1688293767;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Cb0XrtugQYkaE0Rw63ku0QdQRYrXbO4KaZPcCYHc7i4=;
- b=akfUL0GbIFOHX0yaLI52UBDm1QaDLCQIDOaj76JjL3GpXiW0gWioQodpyFGKYl9NRc
- xFwzhGnoeyBqA0BAnyqk130o5N4iI4bEvMnUlHXukLXPm2ISTfbLwiGE+7f3K8qFilMF
- skiZFyYSsZOLGEumpxIQFiGRrsZfZVeBrxzJI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1685701767; x=1688293767;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Cb0XrtugQYkaE0Rw63ku0QdQRYrXbO4KaZPcCYHc7i4=;
- b=b5nFrXKtzsFe6D9hFPgif7jy55zQG6+7pJct5I0o3PGkcJxUgakmAjTa80VErLPCKD
- dw2NvY9K4IzMeJj0GsFfvLtX8fNiRsnwl7iZ+qbLF1gvi/vQ4C6dh2ziaH0sUWBSTb2S
- fYhUPmKJeCc2ADiwv2NxN0hHwPQg7m4pxIKEs4rK202Fw7VpwR8knq4KdwfADJSTcpg4
- brTw5sVkixG3ItdaleKYslZ7Z6YjXVRDPzeym1JyUH1tiD4mGlHmVzR8DHc0fFZNU8J0
- F/MkLwc/oHxz5AUokjb1NIyZ+0iVOUx+xpBEjepE68fKbivODlO5QKJesnRiUG4owqCd
- fBHA==
-X-Gm-Message-State: AC+VfDwonyvTidl/0QlruLBq+s029Pr9Drjb8Q2KX95I95elRpyhMRkW
- pnpq2Cta15NHdBp8YNh9re7iLvh28coeGumoYWbUYQ==
-X-Google-Smtp-Source: ACHHUZ7pbE2340KgbmorkVIgxXGig/hY1wpJZMHQL56TGkAhTtnyNDycCIqk4vJU24DTd8TWbu2gEE4sqXGzsfayl5E=
-X-Received: by 2002:a05:620a:8a8b:b0:75b:23a1:8e3f with SMTP id
- qu11-20020a05620a8a8b00b0075b23a18e3fmr9119470qkn.16.1685701767039; Fri, 02
- Jun 2023 03:29:27 -0700 (PDT)
+ Fri,  2 Jun 2023 13:23:37 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 352BZ8mc001363; Fri, 2 Jun 2023 15:23:30 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=Qg0fo5nf4N4Jrgt/oKk/AYaFk+JjHjs7IbA4guRXGhs=;
+ b=2QP5GfZ4HXm+I7MX4Ruib52eDQzC4mSV5XgPufJv/msIDHLWjbMoydljkQfmjL+KApgB
+ CpQ20UmSqxMQ6ktXLjt7lLS7jVrVw6HsWHUY7Xu2+ciD6gs4okuy/apKWDS91K+oNgKa
+ xJSLI78rJ98qSsXGPo0kYuFHqmxKLr5P9pU7D2D6zpPaoPw6MmEaEZzjb0wD2KOZ0RLH
+ +2K7twlTCf+2z1nv1I9awpS9+uCMFMmqh0eH5Wm4DOhCLNbUq9cj5r5UstK/Il9Iil9n
+ EjYYOjakUMz3BM1Ln55x3TFfZ32xvKAiOOM6zOKFfX+YPtFuqt4NBZlsrpPKBtVzbY98 QQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3qweqepg2c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 02 Jun 2023 15:23:30 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2F15C10002A;
+ Fri,  2 Jun 2023 15:23:29 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1238A231538;
+ Fri,  2 Jun 2023 15:23:29 +0200 (CEST)
+Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 2 Jun
+ 2023 15:23:28 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 2 Jun 2023 15:23:23 +0200
+Message-ID: <20230602152232.v2.1.I20e8d74ea2ff0a99c6c741846b46af89c4ee136a@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20230601170602.2845768-1-dario.binacchi@amarulasolutions.com>
- <20230601171137.GY3755309@bill-the-cat>
-In-Reply-To: <20230601171137.GY3755309@bill-the-cat>
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Date: Fri, 2 Jun 2023 12:29:16 +0200
-Message-ID: <CABGWkvpXQkPgU1kaTZOG9uqQJ5tvbF2=W=O1j+yHBxJozAKGXA@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, michael@amarulasolutions.com,
- Amarula patchwork <linux-amarula@amarulasolutions.com>
-Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: fix display pinmux for
-	stm32f746-disco
+X-Originating-IP: [10.48.1.0]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
+ definitions=2023-06-02_10,2023-06-02_02,2023-05-22_02
+Cc: Christophe KERELLO <christophe.kerello@foss.st.com>,
+ Boris Brezillon <bbrezillon@kernel.org>, Lukasz Majewski <lukma@denx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH v2] dfu: mtd: mark bad the MTD block on erase
+	error
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -70,46 +71,96 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gVGh1LCBKdW4gMSwgMjAyMyBhdCA3OjEx4oCvUE0gVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtv
-LmNvbT4gd3JvdGU6Cj4KPiBPbiBUaHUsIEp1biAwMSwgMjAyMyBhdCAwNzowNjowMlBNICswMjAw
-LCBEYXJpbyBCaW5hY2NoaSB3cm90ZToKPiA+IEFzIHJlcG9ydGVkIGJ5IHRoZSBkYXRhc2hlZXQg
-KERvY0lEMDI3NTkwIFJldiA0KSBmb3IgUEcxMjoKPiA+IC0gQUY5ICAtPiBMQ0RfQjQKPiA+IC0g
-QUYxNCAtPiBMQ0RfQjEKPiA+Cj4gPiBTbyByZXBsYWNlIEFGMTQgd2l0aCBBRjkgZm9yIFBHMTIg
-aW4gdGhlIGR0cy4KPiA+Cj4gPiBGaXhlczogZmU2M2QzY2ZiNzdlZiAoIkFSTTogZHRzOiBzdG0z
-MjogU3luYyBEVCB3aXRoIHY0LjIwIGtlcm5lbCBmb3Igc3RtMzJmNyIpCj4gPiBTaWduZWQtb2Zm
-LWJ5OiBEYXJpbyBCaW5hY2NoaSA8ZGFyaW8uYmluYWNjaGlAYW1hcnVsYXNvbHV0aW9ucy5jb20+
-Cj4gPgo+ID4gLS0tCj4gPgo+ID4gIGFyY2gvYXJtL2R0cy9zdG0zMmY3NDYtZGlzY28tdS1ib290
-LmR0c2kgfCAyICstCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0
-aW9uKC0pCj4gPgo+ID4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9zdG0zMmY3NDYtZGlzY28t
-dS1ib290LmR0c2kgYi9hcmNoL2FybS9kdHMvc3RtMzJmNzQ2LWRpc2NvLXUtYm9vdC5kdHNpCj4g
-PiBpbmRleCAxOWI1NDUxZGI0NDEuLjUyMmNmZmIxYWM5ZiAxMDA2NDQKPiA+IC0tLSBhL2FyY2gv
-YXJtL2R0cy9zdG0zMmY3NDYtZGlzY28tdS1ib290LmR0c2kKPiA+ICsrKyBiL2FyY2gvYXJtL2R0
-cy9zdG0zMmY3NDYtZGlzY28tdS1ib290LmR0c2kKPiA+IEBAIC0xNjksNyArMTY5LDcgQEAKPiA+
-ICAgICAgIGx0ZGNfcGluczogbHRkY0AwIHsKPiA+ICAgICAgICAgICAgICAgcGlucyB7Cj4gPiAg
-ICAgICAgICAgICAgICAgICAgICAgcGlubXV4ID0gPFNUTTMyX1BJTk1VWCgnRScsIDQsIEFGMTQp
-PiwgLyogQjAgKi8KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8U1RNMzJfUElO
-TVVYKCdHJywxMiwgQUYxNCk+LCAvKiBCNCAqLwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIDxTVE0zMl9QSU5NVVgoJ0cnLDEyLCBBRjkpPiwgIC8qIEI0ICovCj4gPiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgPFNUTTMyX1BJTk1VWCgnSScsIDksIEFGMTQpPiwgLyog
-VlNZTkMgKi8KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8U1RNMzJfUElOTVVY
-KCdJJywxMCwgQUYxNCk+LCAvKiBIU1lOQyAqLwo+ID4gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIDxTVE0zMl9QSU5NVVgoJ0knLDE0LCBBRjE0KT4sIC8qIENMSyAqLwo+Cj4gV2h5IGlz
-IHRoaXMgd2hvbGUgc3RhbnphIGluIGEgLXUtYm9vdC5kdHNpIGZpbGUgYW5kIG5vdCBhbiB1cHN0
-cmVhbQo+IGZpbGU/CgpJIGp1c3Qgc3VibWl0dGVkIGEgc2VyaWVzIHRvIHRoZSBsaW51eCBrZXJu
-ZWwgdG8gYWRkIHN1cHBvcnQgZm9yCmRpc3BsYXkgb24gc3RtMzJmNzQ2LWRpc2NvLgpodHRwczov
-L2xvcmUua2VybmVsLm9yZy9saW51eC1hcm0ta2VybmVsLzIwMjMwNjAxMTcwMzIwLjI4NDUyMTgt
-MS1kYXJpby5iaW5hY2NoaUBhbWFydWxhc29sdXRpb25zLmNvbS9ULwoKVGhhbmtzIGFuZCByZWdh
-cmRzLApEYXJpbwo+Cj4gLS0KPiBUb20KCgoKLS0gCgpEYXJpbyBCaW5hY2NoaQoKU2VuaW9yIEVt
-YmVkZGVkIExpbnV4IERldmVsb3BlcgoKZGFyaW8uYmluYWNjaGlAYW1hcnVsYXNvbHV0aW9ucy5j
-b20KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KCgpBbWFydWxhIFNvbHV0aW9u
-cyBTUkwKClZpYSBMZSBDYW5ldmFyZSAzMCwgMzExMDAgVHJldmlzbywgVmVuZXRvLCBJVAoKVC4g
-KzM5IDA0MiAyNDMgNTMxMAppbmZvQGFtYXJ1bGFzb2x1dGlvbnMuY29tCgp3d3cuYW1hcnVsYXNv
-bHV0aW9ucy5jb20KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rv
-cm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4v
-bGlzdGluZm8vdWJvb3Qtc3RtMzIK
+In the MTD DFU backend, it is needed to mark the NAND block bad when the
+erase failed with the -EIO error, as it is done in UBI and JFFS2 code.
+
+This operation is not done in the MTD framework, but the bad block
+tag (in BBM or in BBT) is required to avoid to write data on this block
+in the next DFU_OP_WRITE loop in mtd_block_op(): the code skip the bad
+blocks, tested by mtd_block_isbad().
+
+Without this patch, when the NAND block become bad on DFU write operation
+- low probability on new NAND - the DFU write operation will always failed
+because the failing block is never marked bad.
+
+This patch also adds a test to avoid to request an erase operation on a
+block already marked bad; this test is not performed in MTD framework
+in mtd_erase().
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+Changes in v2:
+- fixe mtd_block_isbad offset parameter for erase check
+- Add trace when bad block are skipped in erase loop
+- Add remaining byte in trace "Limit reached"
+
+ drivers/dfu/dfu_mtd.c | 32 ++++++++++++++++++++++----------
+ 1 file changed, 22 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
+index c7075f12eca9..a4a3e91be23e 100644
+--- a/drivers/dfu/dfu_mtd.c
++++ b/drivers/dfu/dfu_mtd.c
+@@ -86,27 +86,39 @@ static int mtd_block_op(enum dfu_op op, struct dfu_entity *dfu,
+ 
+ 		while (remaining) {
+ 			if (erase_op.addr + remaining > lim) {
+-				printf("Limit reached 0x%llx while erasing at offset 0x%llx\n",
+-				       lim, off);
++				printf("Limit reached 0x%llx while erasing at offset 0x%llx, remaining 0x%llx\n",
++				       lim, erase_op.addr, remaining);
+ 				return -EIO;
+ 			}
+ 
++			/* Skip the block if it is bad, don't erase it again */
++			if (mtd_block_isbad(mtd, erase_op.addr)) {
++				printf("Skipping bad block at 0x%08llx\n",
++				       erase_op.addr);
++				erase_op.addr += mtd->erasesize;
++				continue;
++			}
++
+ 			ret = mtd_erase(mtd, &erase_op);
+ 
+ 			if (ret) {
+-				/* Abort if its not a bad block error */
+-				if (ret != -EIO) {
+-					printf("Failure while erasing at offset 0x%llx\n",
+-					       erase_op.fail_addr);
+-					return 0;
++				/* If this is not -EIO, we have no idea what to do. */
++				if (ret == -EIO) {
++					printf("Marking bad block at 0x%08llx (%d)\n",
++					       erase_op.fail_addr, ret);
++					ret = mtd_block_markbad(mtd, erase_op.addr);
++				}
++				/* Abort if it is not -EIO or can't mark bad */
++				if (ret) {
++					printf("Failure while erasing at offset 0x%llx (%d)\n",
++					       erase_op.fail_addr, ret);
++					return ret;
+ 				}
+-				printf("Skipping bad block at 0x%08llx\n",
+-				       erase_op.addr);
+ 			} else {
+ 				remaining -= mtd->erasesize;
+ 			}
+ 
+-			/* Continue erase behind bad block */
++			/* Continue erase behind the current block */
+ 			erase_op.addr += mtd->erasesize;
+ 		}
+ 	}
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

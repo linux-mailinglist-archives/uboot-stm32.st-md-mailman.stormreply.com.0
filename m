@@ -2,64 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 228FD723DFC
-	for <lists+uboot-stm32@lfdr.de>; Tue,  6 Jun 2023 11:41:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58C1A72539F
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Jun 2023 07:42:42 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CD887C65E58;
-	Tue,  6 Jun 2023 09:41:37 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
- [209.85.210.175])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04B1DC65E58;
+	Wed,  7 Jun 2023 05:42:42 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com
+ [209.85.210.54])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 68AADC65E4C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 22AA1C65068
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  6 Jun 2023 09:41:36 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id
- d2e1a72fcca58-64d44b198baso4275684b3a.0
+ Wed,  7 Jun 2023 05:42:40 +0000 (UTC)
+Received: by mail-ot1-f54.google.com with SMTP id
+ 46e09a7af769-6b2a8e0306eso54748a34.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 06 Jun 2023 02:41:36 -0700 (PDT)
+ Tue, 06 Jun 2023 22:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1686044495; x=1688636495;
+ d=linaro.org; s=google; t=1686116559; x=1688708559;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
  bh=1fEHsJ2BPYepLe9lhrzjjRxecXuGuQemDM5Dv68+Bck=;
- b=kAQZjXnO0GVFv/KmURaJE+VwtbE+8XQivEiqCWnPRML76jfHslwOXFtkBac9NUV5Cj
- WSLQrHgNATER0t4la2hwYrl1+Qe+p96CONByreJviLHcb8Cl+ppzCegCO/Wop4jmb4s/
- rte1BxPWV9FMAD83HeKarUPbaO6ldZHr3SeJtWkR2Gi6dN9tJDbXm8wCVaJ3YZO/3kaQ
- YpuzKbj6lJ2c1uFlJeoI1PNfnUfLaT6jm9pT5C3xQhTWIZRoIAYlmmxBX++CVo+ffnyA
- mlZbAbrLl4SUUjSMerxV3msqIvObtvtpwsjkD7PvHagu2h3qXlYYovROLWgUr7bPdw59
- yNxw==
+ b=ofo5deYZ4kVZg7JDJE0KrDsci+7+8zB1o4H1aWIj8mJBw0xhz0dshSi6hoAL/76rfn
+ UHwz6ywfSlU5yWVfPCWztwX5FPBypH7WJicnwn3xa+kqgTgNKHtxm+ctB2qQbP+P63ll
+ eRhyjVhGndTdFHxQTzlX6hUChURyn1VwoMHid2BIgkVmTWEb2b1CdVLCkR3yyPOvnwkx
+ 1hTyVcFac7Prwfz1IukAq3L+AshC76czB+PKi/ytegCDgKb7Z5oweyOHbQh+FbCKKr/W
+ m93b0w/i+r2HkL+l1AEEmlMzQSOBxfl3+gKsXnRrj1CflxYlEci6ykhtElzhw144NqUj
+ I67A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686044495; x=1688636495;
+ d=1e100.net; s=20221208; t=1686116559; x=1688708559;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
  bh=1fEHsJ2BPYepLe9lhrzjjRxecXuGuQemDM5Dv68+Bck=;
- b=P7JyX1fzDVh59duZD6ffNCXKxSs071ELTvXSSH5dzvOAgFicW3INmlZ9phXnnA39Z5
- SrpqPKD8mfNPvJj4AiRUzU2MCKSK1u0H7E9xUNSkHueiMpsi5TZKjbKmFd5Ul9omHX+l
- YGBc2cnU2BJsYxCxxBZ5IfE6F2zyDfDuoBQpItCILH5EHZG9sXO5TWwXa1lmBAcwDynu
- uU66xj9j6rjnvmo65rZcBR4YS99U36Ug6FI0fkJ3M6T6TaDYd8MzHnM3BWf7FZQuEMVD
- dW/qX8GgNCTzWGXto3WmzLmW4/Mm6uHImi5MuB0sgHzEkNHVlqANvhWuUsoGjsGVY+EY
- AmCw==
-X-Gm-Message-State: AC+VfDx/y79sKMnEfVpuDk8RP2TLfm/+/wrfW8hHuqN3p4Ueo+R9ZVkg
- QRCuGx1J2eCA7IhLtuuhOO8y2A==
-X-Google-Smtp-Source: ACHHUZ64mk/Pq1XEcI/ZQf3SVrSRXbUZDCQp9pDFvKohz4FKoShrSZLGZH/7wGVYb9l9AmJHqCNWgg==
-X-Received: by 2002:a05:6a00:189a:b0:652:a559:b2c5 with SMTP id
- x26-20020a056a00189a00b00652a559b2c5mr2204423pfh.13.1686044494716; 
- Tue, 06 Jun 2023 02:41:34 -0700 (PDT)
+ b=OtV3egZzQhiy8n6ny+BjO3fFmoDnmu1eDBAoaAzyaP/LkbtjQviFKFfGc8f7TlyW+v
+ wFAgirEJBZkf3c5Gm9+jZOFGpVVQFDIi/rkRzx5TmqAWIKTpkM8wXUpSONN0WYZyXRAT
+ osQCuXUCx/4i2bMYdwlUIt2DDL0bMxMso2c5Z/J82rw4qtgbgSUZZUzUSzuq2yM9SrYv
+ euB/gau4lmXtQToX3uE2qfzCF/s2Zk/xbvNGZ4OZe7Rwe0qHMxrnIkQdrAHPFFJbsD5X
+ GjFoJxJrtw9H+MIKqtBhPK4c8wfi5pqJC4P8K3m7m5GbChf/4JX/BOYrjgqTjMCSfCHN
+ qYFA==
+X-Gm-Message-State: AC+VfDyrzsY4Sn+/QxnjAXTdg0fYHz8BvmjYNxhGwkTXwlIwLKSwRAry
+ x36vyl4G9EfJGEsZzGTRq7u4ig==
+X-Google-Smtp-Source: ACHHUZ6GHF0sFI56no8PdiqEQlUZJSTCElDDjKLyXTaH+2F4GoFycUq9YOvYQG7gDSZrAJoPqvtekQ==
+X-Received: by 2002:aca:1a16:0:b0:399:6025:e285 with SMTP id
+ a22-20020aca1a16000000b003996025e285mr4253995oia.15.1686116558833; 
+ Tue, 06 Jun 2023 22:42:38 -0700 (PDT)
 Received: from ubuntu-SVE15129CJS.. ([240d:1a:cf7:5800:d3c2:bf07:d08b:b72d])
  by smtp.gmail.com with ESMTPSA id
- u25-20020aa78399000000b00627ed4e23e0sm6542809pfm.101.2023.06.06.02.41.30
+ fh2-20020a17090b034200b0024df2b712a7sm469033pjb.52.2023.06.06.22.42.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jun 2023 02:41:34 -0700 (PDT)
+ Tue, 06 Jun 2023 22:42:38 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
-Date: Tue,  6 Jun 2023 18:40:25 +0900
-Message-Id: <20230606094035.28990-2-masahisa.kojima@linaro.org>
+Date: Wed,  7 Jun 2023 14:41:51 +0900
+Message-Id: <20230607054201.42702-2-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230606094035.28990-1-masahisa.kojima@linaro.org>
-References: <20230606094035.28990-1-masahisa.kojima@linaro.org>
+In-Reply-To: <20230607054201.42702-1-masahisa.kojima@linaro.org>
+References: <20230607054201.42702-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Cc: "moderated list:STM32MP1 BOARD" <uboot-stm32@st-md-mailman.stormreply.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -76,7 +76,7 @@ Cc: "moderated list:STM32MP1 BOARD" <uboot-stm32@st-md-mailman.stormreply.com>,
  "Ying-Chun Liu \(PaulLiu\)" <paul.liu@linaro.org>,
  Etienne Carriere <etienne.carriere@linaro.org>,
  Michal Simek <michal.simek@amd.com>, Heiko Thiery <heiko.thiery@gmail.com>
-Subject: [Uboot-stm32] [PATCH v8 01/10] efi_loader: add the number of image
+Subject: [Uboot-stm32] [PATCH v9 01/10] efi_loader: add the number of image
 	entries in efi_capsule_update_info
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15

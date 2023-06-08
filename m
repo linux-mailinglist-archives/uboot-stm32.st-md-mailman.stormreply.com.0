@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D4CD728376
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Jun 2023 17:16:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82C3A728379
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Jun 2023 17:17:09 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 21938C65E58;
-	Thu,  8 Jun 2023 15:16:59 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4445AC65E58;
+	Thu,  8 Jun 2023 15:17:09 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 88E2FC65E70
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B81C5C65E42
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Jun 2023 15:16:57 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Thu,  8 Jun 2023 15:17:07 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 358BIteA013526; Thu, 8 Jun 2023 17:16:56 +0200
+ 358EAHFa029938; Thu, 8 Jun 2023 17:17:04 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=Al7KWB2Ba8wm9Np5nS+4Cxx1tUNrvHcc0/0AE1r8e+E=;
- b=6HkY993C5+GxvJyWtkivYn3+fviZfJqpwmWnOeMzdTMLRhyntbYwKS8/SDq5LCPqol61
- KshEuZy+VAOf1NejKXsomF8mmPi+OGPkIox61zvaCdA9aY4wnG0sDl8DzOLmc1WN/ZCc
- xjHLyigDuc53opNRI00Oisbzbr2qKn1+4u5Nt2Wiv3ziZMVpUZ64xn5M2zBfD7Ex82lH
- jx4/iODx6ngSa8RtSQ5Tb+2XqbA++f6qz1LkLS8DWO/2hGzOO6l+qc+Pgg6tcvd1v4yb
- 2oyd9pfh7y+SX5y5qJqdwdj5j1al8Fj9veQLKGLgKD+Avq+uiLq6SIWlDSRCUkC3QUy5 VQ== 
+ bh=JC81Y2lFLyn8BI+0MMnNj9VGU9TQGH4vnW2OKUK33Z4=;
+ b=dcIKOWJXH8YFHH7Kw3G+5cYoBmPYQ80H97RMbulPzCV0lXpHjoOsFRX5XmbmK5UB5aNV
+ Ph3xPbDkvrKDszPI6fDN6mJnIkAx/i1323BD5bFTXoS7g8RrEs+AAPLERqnqQussxbqE
+ 4p0BBJ6NnenoRypuRUvtouJvejM7/S7YGjqUU8gGgHJfkDzGe/QpAhKqFlwPjsJl54sI
+ 6BU7/r+V+tsEHY7oIpwnGNioe5sSA5y1xCWPGfJvBh0XPTiYkwDMAEreriuV6/FQWaV0
+ tdB2/REacjDqD/c5leyyhpU/Eu44wOmuwhvUwtJ57B7XVs2StaTvWOOpVlPNrpYwLZQ6 UQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r3atmb3j3-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r3ggygdw6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 08 Jun 2023 17:16:56 +0200
+ Thu, 08 Jun 2023 17:17:04 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C680010003B;
- Thu,  8 Jun 2023 17:16:55 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EB5DB10003A;
+ Thu,  8 Jun 2023 17:16:56 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C09F221A231;
- Thu,  8 Jun 2023 17:16:55 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E59DB21A231;
+ Thu,  8 Jun 2023 17:16:56 +0200 (CEST)
 Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Thu, 8 Jun
- 2023 17:16:55 +0200
+ 2023 17:16:56 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 8 Jun 2023 17:16:39 +0200
-Message-ID: <20230608171614.3.I620daeba9c6dbeed0f0164229d65403d36291bb1@changeid>
+Date: Thu, 8 Jun 2023 17:16:40 +0200
+Message-ID: <20230608171614.4.Ib033df552a0517a23e3fa74a4468ec5126775e93@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
 References: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
@@ -57,10 +57,10 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2023-06-08_11,2023-06-08_01,2023-05-22_02
 Cc: Marek Vasut <marex@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: [Uboot-stm32] [PATCH 03/12] dfu: mtd: remove direct call of
-	mtdparts_init function
+ Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH 04/12] stm32mp: stm32prog: Remove usage of
+	"mtdparts" function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,104 +77,110 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-With MTD support in driver model, the direct call of mtdparts_init
-should be avoided and replaced by mtd_probe_devices.
+From: Patrice Chotard <patrice.chotard@foss.st.com>
 
-With the modificaton when MTDIDS/MTDPARTS are empty the OF fallback
-with partition describe in device tree is correctly performed,
-introduced by commit dc339bf784f0 ("mtd: add support for parsing
-partitions defined in OF").
-With this patch the dependency with CONFIG_CMD_MTDPARTS is removed.
+Motivation for this patch is to remove usage of function define
+in cmd/mtdparts.c interface, based on env variables mtdids and mtdparts:
+mtdparts_init() and find_dev_and_part().
+See commit 938db6fe5da3 ("cmd: mtdparts: describe as legacy")
 
+Now, all MTD devices are populated with their partition's information
+found in DT, accessible in MTD devices. Use these information to find
+the wanted partitions, no more need of find_dev_and_part() usage.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- drivers/dfu/Kconfig   |  1 -
- drivers/dfu/dfu_mtd.c | 34 +++++++++++++++++++---------------
- 2 files changed, 19 insertions(+), 16 deletions(-)
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.c    | 42 +++++++++----------
+ 1 file changed, 19 insertions(+), 23 deletions(-)
 
-diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
-index 8d7f13dcb0b5..c3a0b93b25e0 100644
---- a/drivers/dfu/Kconfig
-+++ b/drivers/dfu/Kconfig
-@@ -41,7 +41,6 @@ config DFU_MMC
- config DFU_MTD
- 	bool "MTD back end for DFU"
- 	depends on DM_MTD
--	depends on CMD_MTDPARTS
- 	help
- 	  This option enables using DFU to read and write to on any MTD device.
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+index 6f3641ccf57b..241ad40abb7c 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
+@@ -208,11 +208,6 @@ static int optee_ta_invoke(struct stm32prog_data *data, int cmd, int type,
+ 	return rc;
+ }
  
-diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
-index c7075f12eca9..75e2f6a42151 100644
---- a/drivers/dfu/dfu_mtd.c
-+++ b/drivers/dfu/dfu_mtd.c
-@@ -10,7 +10,6 @@
- #include <common.h>
- #include <dfu.h>
- #include <mtd.h>
--#include <jffs2/load_kernel.h>
- #include <linux/err.h>
- #include <linux/ctype.h>
- 
-@@ -275,7 +274,7 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char **argv, int a
+-/* partition handling routines : CONFIG_CMD_MTDPARTS */
+-int mtdparts_init(void);
+-int find_dev_and_part(const char *id, struct mtd_device **dev,
+-		      u8 *part_num, struct part_info **part);
+-
+ char *stm32prog_get_error(struct stm32prog_data *data)
  {
- 	char *s;
- 	struct mtd_info *mtd;
--	int ret, part;
-+	int part;
+ 	static const char error_msg[] = "Unspecified";
+@@ -741,6 +736,7 @@ static int init_device(struct stm32prog_data *data,
+ 	struct mmc *mmc = NULL;
+ 	struct blk_desc *block_dev = NULL;
+ 	struct mtd_info *mtd = NULL;
++	struct mtd_info *partition;
+ 	char mtd_id[16];
+ 	int part_id;
+ 	int ret;
+@@ -749,6 +745,7 @@ static int init_device(struct stm32prog_data *data,
+ 	u64 part_addr, part_size;
+ 	bool part_found;
+ 	const char *part_name;
++	u8 i;
  
- 	mtd = get_mtd_device_nm(devstr);
- 	if (IS_ERR_OR_NULL(mtd))
-@@ -299,10 +298,9 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char **argv, int a
- 		if (*s)
- 			return -EINVAL;
- 	} else if ((!strcmp(argv[0], "part")) || (!strcmp(argv[0], "partubi"))) {
--		char mtd_id[32];
--		struct mtd_device *mtd_dev;
--		u8 part_num;
--		struct part_info *pi;
-+		struct mtd_info *partition;
-+		int partnum = 0;
-+		bool part_found = false;
- 
- 		if (argc != 2)
- 			return -EINVAL;
-@@ -313,19 +311,25 @@ int dfu_fill_entity_mtd(struct dfu_entity *dfu, char *devstr, char **argv, int a
- 		if (*s)
- 			return -EINVAL;
- 
--		sprintf(mtd_id, "%s,%d", devstr, part - 1);
--		printf("using id '%s'\n", mtd_id);
+ 	switch (dev->target) {
+ 	case STM32PROG_MMC:
+@@ -793,10 +790,11 @@ static int init_device(struct stm32prog_data *data,
+ 			stm32prog_err("unknown device type = %d", dev->target);
+ 			return -ENODEV;
+ 		}
 +		/* register partitions with MTDIDS/MTDPARTS or OF fallback */
 +		mtd_probe_devices();
+ 		get_mtd_by_target(mtd_id, dev->target, dev->dev_id);
+ 		log_debug("%s\n", mtd_id);
  
 -		mtdparts_init();
--
--		ret = find_dev_and_part(mtd_id, &mtd_dev, &part_num, &pi);
--		if (ret != 0) {
--			printf("Could not locate '%s'\n", mtd_id);
-+		partnum = 0;
-+		list_for_each_entry(partition, &mtd->partitions, node) {
-+			partnum++;
-+			if (partnum == part) {
-+				part_found = true;
-+				break;
-+			}
-+		}
-+		if (!part_found) {
-+			printf("No partition %d in %s\n", part, mtd->name);
- 			return -1;
+ 		mtd = get_mtd_device_nm(mtd_id);
+ 		if (IS_ERR(mtd)) {
+ 			stm32prog_err("MTD device %s not found", mtd_id);
+@@ -943,25 +941,23 @@ static int init_device(struct stm32prog_data *data,
  		}
-+		log_debug("partition %d:%s in %s\n", partnum, partition->name, mtd->name);
  
--		dfu->data.mtd.start = pi->offset;
--		dfu->data.mtd.size = pi->size;
-+		dfu->data.mtd.start = partition->offset;
-+		dfu->data.mtd.size = partition->size;
- 		if (!strcmp(argv[0], "partubi"))
- 			dfu->data.mtd.ubi = 1;
- 	} else {
+ 		if (IS_ENABLED(CONFIG_MTD) && mtd) {
+-			char mtd_part_id[32];
+-			struct part_info *mtd_part;
+-			struct mtd_device *mtd_dev;
+-			u8 part_num;
+-
+-			sprintf(mtd_part_id, "%s,%d", mtd_id,
+-				part->part_id - 1);
+-			ret = find_dev_and_part(mtd_part_id, &mtd_dev,
+-						&part_num, &mtd_part);
+-			if (ret != 0) {
+-				stm32prog_err("%s (0x%x): Invalid MTD partition %s",
+-					      part->name, part->id,
+-					      mtd_part_id);
++			i = 0;
++			list_for_each_entry(partition, &mtd->partitions, node) {
++				if ((part->part_id - 1) == i) {
++					part_found = true;
++					break;
++				}
++				i++;
++			}
++			if (part_found) {
++				part_addr = partition->offset;
++				part_size = partition->size;
++				part_name = partition->name;
++			} else {
++				stm32prog_err("%s (0x%x):Couldn't find part %d on device mtd %s",
++					      part->name, part->id, part->part_id, mtd_id);
+ 				return -ENODEV;
+ 			}
+-			part_addr = mtd_part->offset;
+-			part_size = mtd_part->size;
+-			part_name = mtd_part->name;
+-			part_found = true;
+ 		}
+ 
+ 		/* no partition for this device */
 -- 
 2.25.1
 

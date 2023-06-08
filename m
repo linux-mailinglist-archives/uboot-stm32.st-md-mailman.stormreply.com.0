@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7739728342
-	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Jun 2023 17:10:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E3BBD728344
+	for <lists+uboot-stm32@lfdr.de>; Thu,  8 Jun 2023 17:10:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9AB3AC6905A;
-	Thu,  8 Jun 2023 15:10:07 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A3FF7C6A5FA;
+	Thu,  8 Jun 2023 15:10:08 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8B10FC65E58
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 61DE6C65E42
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  8 Jun 2023 15:10:06 +0000 (UTC)
+ Thu,  8 Jun 2023 15:10:07 +0000 (UTC)
 Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 358EA8HK029843; Thu, 8 Jun 2023 17:10:05 +0200
+ 358EAHET029938; Thu, 8 Jun 2023 17:10:06 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding : content-type; s=selector1;
- bh=sOQYQtWJ9rJ23nJoypDStzOgywqmzuwMEYxfRgP6jz4=;
- b=wJCFfrLL4jmDfbLlmOqpW97V/Ylrzb1KyAxUUqMEcAqZ9lqwKsvzWwbm4Dw5Kr29poQk
- aQvtlYPHTweQpGzkKzPopcw8RRTOJ8VzwJDU0YVYC1hYh4bOd/i8SpnztTv6EgtMIpGa
- suYKvUrQl591fO+hf8hQYxOcZkO9sdMIiYjItTc7lGEoNJ/AC0weuXKj1l9OuwVC94Z6
- qjxIPx/i6wK7dmibG1ZClBZoK2G4KKPFeLiGhcX/x/xIs9qB4Bl63nr0WY7amobEABVd
- Wd8HXQWyB9FmR0K7pUdTG9No7wMIYceoJweI2zXL+4x1ar9vwwK5W2G0ZkuKmOGuZcr7 GQ== 
+ bh=U0ten2sCPaJbuVNmQywyltYr4TZxelxOF+tCM3IhHRg=;
+ b=WZSGJksiCUSGRmz6gC2wXcV08ELonoR0R8qxhR+BuNfaGsGj+LSaGZ7p2bGXLG22a/2S
+ hexwJ8ZW1v7MCJjDNz2/nH3WI9OrYyeH4MthX1QXw/Z43xLWjs5r5nq/lI9mY68pBSON
+ kawHZzLTjbjR0FPyiSQQOflOk3Vv3VNu68/tE6JQyf4NASTfB3HZlyENryaZ1uDbisou
+ GVMF/y0xYHMJsLNLxUbBpBOP9GxALsFGMsZg8ySJHR4iingoLz8jREdanheRQr7PR2Fi
+ H3MBZemgXcg6EX/dLm21icGNACuiRjUa3pRN+UkRcjzqEuou2V1z+d+bhI02eZZA3h5z AA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r3ggygcp1-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r3ggygcp4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 08 Jun 2023 17:10:05 +0200
+ Thu, 08 Jun 2023 17:10:06 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 7BED810003A;
- Thu,  8 Jun 2023 17:10:04 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9C3EC10002A;
+ Thu,  8 Jun 2023 17:10:05 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 757DC237D90;
- Thu,  8 Jun 2023 17:10:04 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95713237D91;
+ Thu,  8 Jun 2023 17:10:05 +0200 (CEST)
 Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Thu, 8 Jun
- 2023 17:10:04 +0200
+ 2023 17:10:05 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 8 Jun 2023 17:09:55 +0200
-Message-ID: <20230608170941.2.I046fa722833caf4e9c5b0d0b95fb591b1cfb8ab1@changeid>
+Date: Thu, 8 Jun 2023 17:09:56 +0200
+Message-ID: <20230608170941.3.I2c67e801f791e9b397c7a39c6f9ac503930f1203@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230608170941.1.I0c3b7963b669b6c03e5a3bdf7e9e736e767aafd1@changeid>
 References: <20230608170941.1.I0c3b7963b669b6c03e5a3bdf7e9e736e767aafd1@changeid>
@@ -58,8 +58,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH 2/3] stm32mp: stm32prog: Add support of ESP
-	partition type
+Subject: [Uboot-stm32] [PATCH 3/3] stm32mp: stm32prog: Add support of
+	FWU_MDATA partition type
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,71 +76,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add support of "ESP" partition type in flashlayout to select
-the "EFI System Partition", associated to U-Boot "system"
-partition type  guid, PARTITION_SYSTEM_GUID =
-C12A7328-F81F-11d2-BA4B-00A0C93EC93B.
+Add support of "FWU_MDATA" partition type in flashlayout to select
+the TF-A firmware update metadata partition type guid, associated to
+U-Boot "system" partition type guid, FWU_MDATA_GUID introduced by
+commit 2eaedc95164f ("FWU: Add FWU metadata structure and driver for
+accessing metadata") and used in gpt_get_mdata_partitions() for
+commit 554b38f7a532 ("FWU: Add FWU metadata access driver for GPT
+partitioned block devices")
 
-This partition is the bootable partition for efi boot.
+See also recommendation in FWU-PSA-A_DEN0118_1.0ALP3.pdf
+  4.1.2 Metadata integration with GPT
+  When embedded in a GPT, each metadata replica occupies a single
+  partition with PartitionTypeGUID = metadata_uuid.
+  UUID = 8a7a84a0-8387-40f6-ab41-a8b9a5a60d23
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 8 +++++++-
- arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h | 8 +++++++-
- 2 files changed, 14 insertions(+), 2 deletions(-)
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c | 11 +++++++++++
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h |  1 +
+ 2 files changed, 12 insertions(+)
 
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-index 1bd86b5187da..07369919620e 100644
+index 07369919620e..a2ff5558a519 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c
-@@ -434,6 +434,8 @@ static int parse_type(struct stm32prog_data *data,
+@@ -63,6 +63,12 @@ static const efi_guid_t uuid_mmc[3] = {
+ 	ROOTFS_MMC2_UUID
+ };
+ 
++/*
++ * GUID value defined in the FWU specification for identification
++ * of the FWU metadata partition.
++ */
++#define FWU_MDATA_UUID "8a7a84a0-8387-40f6-ab41-a8b9a5a60d23"
++
+ /* FIP type partition UUID used by TF-A*/
+ #define FIP_TYPE_UUID "19D5DF83-11B0-457B-BE2C-7559C13142A5"
+ 
+@@ -430,6 +436,8 @@ static int parse_type(struct stm32prog_data *data,
+ 		}
+ 	} else if (!strcmp(p, "FIP")) {
+ 		part->part_type = PART_FIP;
++	} else if (!strcmp(p, "FWU_MDATA")) {
++		part->part_type = PART_FWU_MDATA;
+ 	} else if (!strcmp(p, "ENV")) {
  		part->part_type = PART_ENV;
  	} else if (!strcmp(p, "System")) {
- 		part->part_type = PART_SYSTEM;
-+	} else if (!strcmp(p, "ESP")) {
-+		part->part_type = PART_ESP;
- 	} else if (!strcmp(p, "FileSystem")) {
- 		part->part_type = PART_FILESYSTEM;
- 	} else if (!strcmp(p, "RawImage")) {
-@@ -1138,7 +1140,11 @@ static int create_gpt_partitions(struct stm32prog_data *data)
+@@ -1140,6 +1148,9 @@ static int create_gpt_partitions(struct stm32prog_data *data)
  			case PART_FIP:
  				type_str = FIP_TYPE_UUID;
  				break;
--			default:
-+			case PART_ESP:
-+				/* EFI System Partition */
-+				type_str = "system";
++			case PART_FWU_MDATA:
++				type_str = FWU_MDATA_UUID;
 +				break;
-+			default: /* PART_FILESYSTEM or PART_SYSTEM for distro */
- 				type_str = "linux";
- 				break;
- 			}
+ 			case PART_ESP:
+ 				/* EFI System Partition */
+ 				type_str = "system";
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-index 4c2c1314d990..a6fb9d5e9cc5 100644
+index a6fb9d5e9cc5..02b286be8182 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.h
-@@ -96,13 +96,19 @@ struct stm32_header_v2 {
- 	u8 extension_padding[376];
- };
- 
--/* partition type in flashlayout file */
-+/*
-+ * partition type in flashlayout file
-+ * SYSTEM = linux partition, bootable
-+ * FILESYSTEM = linux partition
-+ * ESP = EFI system partition
-+ */
+@@ -105,6 +105,7 @@ struct stm32_header_v2 {
  enum stm32prog_part_type {
  	PART_BINARY,
  	PART_FIP,
++	PART_FWU_MDATA,
  	PART_ENV,
  	PART_SYSTEM,
  	PART_FILESYSTEM,
-+	PART_ESP,
- 	RAW_IMAGE,
- };
- 
 -- 
 2.25.1
 

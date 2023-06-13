@@ -2,65 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D1FC72D9E9
-	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Jun 2023 08:27:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 776F572E664
+	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Jun 2023 16:58:38 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 13EB3C6A615;
-	Tue, 13 Jun 2023 06:27:01 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 225BBC6A615;
+	Tue, 13 Jun 2023 14:58:38 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1A85C6A60F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90B74C5E2C2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Jun 2023 06:26:59 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 35D0H0qE031072; Tue, 13 Jun 2023 08:26:58 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=+pBIypkNv/TtfsXtwQJaS9uSg1XSfqCoejOQT3Gkkeg=;
- b=L8JwNxUvJRrJI4C0rguPgg29/mVID4Rc9xi1VMaFlsw5nwiAOEV8Wyj831RETn/yCnWg
- 7Msl8KHmrkWEEWq/vhO2DeFbfBHn+CyeATAyaakZdNDWjM6eCqkFB0V5f2V5zqNRRztp
- CRjtbVXVIrqdmOkJQHd/gR7l+OFcyH7++mDiGXc2vEE4Yz0wUPzHS5sYh7C+oVjl56ua
- OF5TzHR7624rM3a7T/2+DAJagMeeLa1Nf42HQcxi2GYBElNZb7RMhGkLRELScYrhFed0
- Ypg3BGgS9zMV3YTOXDbEXF0d+c9f+SdAETwQQRxMB7Byj8LfxgCLE+a0lrChe/cpYWhf OQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r652tuq9q-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 13 Jun 2023 08:26:58 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5CF5010002A;
- Tue, 13 Jun 2023 08:26:57 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 37733211F34;
- Tue, 13 Jun 2023 08:26:55 +0200 (CEST)
-Received: from [10.201.20.56] (10.201.20.56) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 13 Jun
- 2023 08:26:54 +0200
-Message-ID: <498c6bbd-a952-6ea6-9cc7-980470fed2f2@foss.st.com>
-Date: Tue, 13 Jun 2023 08:26:54 +0200
+ Tue, 13 Jun 2023 14:58:36 +0000 (UTC)
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-977c88c9021so926381566b.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 13 Jun 2023 07:58:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1686668316; x=1689260316;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mXnHNT6pRTgOncJ37SvI/slgdmvYPOW0YKorLWHIvHk=;
+ b=hNF9Tcn7k2wti8Hs9gSEmSYDlmuKFEhj5HfC/AFYifdipz9OgFA4lWS2+b4+veXMT3
+ 5kzhCDceMqo7kXj/8Q/ajOMiPln5pTe/jB84+hh4UEHEMQv5YQ/+/ymJaa/rdLtHxABZ
+ GMukZxcDWBqagrhdcCsEmBDW65YqfRofl2IRw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686668316; x=1689260316;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mXnHNT6pRTgOncJ37SvI/slgdmvYPOW0YKorLWHIvHk=;
+ b=Hc76XLcXsNE8w72PAaxYRWtxCL5xqa725g9MyB8rP3y46uEAtuJAFx98jUpocWNA6o
+ oxqrteXn9EKyWkBmcCkCF4UpfgqeNJDsQRrX1IxSxZqcRTmESt5sinqawtpZj/Be/f5C
+ oeRdEqFKuAlARs9p3XwFjwWI4QtpPqQgz+E/2yATgeDY5X2a4HutlPJJfx25UFVcZW/f
+ iHxR0julefeHbhVFBcRVsGagtNHjIg9EOkqsN8RkXufH8kV3jDgXYfX+t8gifTn+17mL
+ DA1qRPcLWKPExdzoN7nydbeqkCorRfw2N4hMM7vYjRlUM6wCgOscq5B1FU3w8IOFc/Ah
+ YoVA==
+X-Gm-Message-State: AC+VfDwotESdv4zCCzUhsDKp9N5aKHPsih3M1KejJ7V32zS7/xt8Geen
+ evx2nG+ahuLnjFeHZfdL6AIB4FxHpyRnejpKIf9SEA==
+X-Google-Smtp-Source: ACHHUZ6iSZpDqLG+4XAka4G7+QwjHyojB4eqaykToIO0/Lfod1fBFsRzv9jzA2lnG9+VnfCP54j/L2JKR1kNlvaS3v0=
+X-Received: by 2002:a17:907:6d0d:b0:97a:13cc:558 with SMTP id
+ sa13-20020a1709076d0d00b0097a13cc0558mr13098546ejc.56.1686668315836; Tue, 13
+ Jun 2023 07:58:35 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
  <20230608171614.1.I21f10cd5db605f5c0fbdfd04328958518fa508aa@changeid>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
 In-Reply-To: <20230608171614.1.I21f10cd5db605f5c0fbdfd04328958518fa508aa@changeid>
-X-Originating-IP: [10.201.20.56]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-06-13_03,2023-06-12_02,2023-05-22_02
-Cc: Marek Vasut <marex@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 13 Jun 2023 15:58:23 +0100
+Message-ID: <CAPnjgZ1ngjK-LrvHgp6dKjLQTcU0E2dGqfdGWELDZ=Zu7vV3Zw@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
 Subject: Re: [Uboot-stm32] [PATCH 01/12] fdt_support: include dm/ofnode.h
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -78,19 +71,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Patrick,
 
-
-On 6/8/23 17:16, Patrick Delaunay wrote:
+On Thu, 8 Jun 2023 at 16:16, Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
 > This patch is a preliminary patch to use ofnode function
 > is fdt_support to read the U-Boot device tree with livetree
 > compatible functions.
-> 
+
+When will the real patch come?
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+Regards,
+Simon
+
+
+>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
-> 
+>
 >  common/fdt_support.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
+>
 > diff --git a/common/fdt_support.c b/common/fdt_support.c
 > index 2053fe3bad83..ffc59fd8b36a 100644
 > --- a/common/fdt_support.c
@@ -104,17 +108,16 @@ On 6/8/23 17:16, Patrick Delaunay wrote:
 >  #include <linux/types.h>
 >  #include <asm/global_data.h>
 > @@ -1065,7 +1066,6 @@ void fdt_del_node_and_alias(void *blob, const char *alias)
->  
+>
 >  /* Max address size we deal with */
->  #define OF_MAX_ADDR_CELLS	4
-> -#define OF_BAD_ADDR	FDT_ADDR_T_NONE
->  #define OF_CHECK_COUNTS(na, ns)	((na) > 0 && (na) <= OF_MAX_ADDR_CELLS && \
->  			(ns) > 0)
->  
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+>  #define OF_MAX_ADDR_CELLS      4
+> -#define OF_BAD_ADDR    FDT_ADDR_T_NONE
+>  #define OF_CHECK_COUNTS(na, ns)        ((na) > 0 && (na) <= OF_MAX_ADDR_CELLS && \
+>                         (ns) > 0)
+>
+> --
+> 2.25.1
+>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

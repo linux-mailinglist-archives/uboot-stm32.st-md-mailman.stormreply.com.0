@@ -2,59 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 776F572E664
-	for <lists+uboot-stm32@lfdr.de>; Tue, 13 Jun 2023 16:58:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A568730F98
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jun 2023 08:44:38 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 225BBC6A615;
-	Tue, 13 Jun 2023 14:58:38 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
- [209.85.218.47])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C81FDC6A610;
+	Thu, 15 Jun 2023 06:44:37 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90B74C5E2C2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6A87BC6A60E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Jun 2023 14:58:36 +0000 (UTC)
-Received: by mail-ej1-f47.google.com with SMTP id
- a640c23a62f3a-977c88c9021so926381566b.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 13 Jun 2023 07:58:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1686668316; x=1689260316;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mXnHNT6pRTgOncJ37SvI/slgdmvYPOW0YKorLWHIvHk=;
- b=hNF9Tcn7k2wti8Hs9gSEmSYDlmuKFEhj5HfC/AFYifdipz9OgFA4lWS2+b4+veXMT3
- 5kzhCDceMqo7kXj/8Q/ajOMiPln5pTe/jB84+hh4UEHEMQv5YQ/+/ymJaa/rdLtHxABZ
- GMukZxcDWBqagrhdcCsEmBDW65YqfRofl2IRw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686668316; x=1689260316;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mXnHNT6pRTgOncJ37SvI/slgdmvYPOW0YKorLWHIvHk=;
- b=Hc76XLcXsNE8w72PAaxYRWtxCL5xqa725g9MyB8rP3y46uEAtuJAFx98jUpocWNA6o
- oxqrteXn9EKyWkBmcCkCF4UpfgqeNJDsQRrX1IxSxZqcRTmESt5sinqawtpZj/Be/f5C
- oeRdEqFKuAlARs9p3XwFjwWI4QtpPqQgz+E/2yATgeDY5X2a4HutlPJJfx25UFVcZW/f
- iHxR0julefeHbhVFBcRVsGagtNHjIg9EOkqsN8RkXufH8kV3jDgXYfX+t8gifTn+17mL
- DA1qRPcLWKPExdzoN7nydbeqkCorRfw2N4hMM7vYjRlUM6wCgOscq5B1FU3w8IOFc/Ah
- YoVA==
-X-Gm-Message-State: AC+VfDwotESdv4zCCzUhsDKp9N5aKHPsih3M1KejJ7V32zS7/xt8Geen
- evx2nG+ahuLnjFeHZfdL6AIB4FxHpyRnejpKIf9SEA==
-X-Google-Smtp-Source: ACHHUZ6iSZpDqLG+4XAka4G7+QwjHyojB4eqaykToIO0/Lfod1fBFsRzv9jzA2lnG9+VnfCP54j/L2JKR1kNlvaS3v0=
-X-Received: by 2002:a17:907:6d0d:b0:97a:13cc:558 with SMTP id
- sa13-20020a1709076d0d00b0097a13cc0558mr13098546ejc.56.1686668315836; Tue, 13
- Jun 2023 07:58:35 -0700 (PDT)
+ Thu, 15 Jun 2023 06:44:36 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 84D8F861F3;
+ Thu, 15 Jun 2023 08:44:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1686811475;
+ bh=Ip5PLUi0YldqLMFPjSWYg+XaywVhzC+xqFc2EmZt4ZE=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=JsxG3hH6XmomxP73/eoOm9ZApBqMqv2pAzeM0U5L7B6DbD2dWvJZBv1hBH7vuZpLe
+ UX4HrT9wt4q0S62b+gJcKb3eRMz4PboOVupzFtKeS4piq0tBKJyR5XvKmirCYN8+S5
+ DOeSksRlfmqIOOSbB2ZoJ2AhUVi7db+IMtmlQm4+PbCp2zgsqNufzQpHialDCpHaKE
+ m70hzJySSEwWUkT0Z9eIZTzNIOHdXwoPkSprJEiGH1RshHhU8Nc42ANhoGm+j/fDRa
+ 9FTWk27Nd0MfHd2cb/0xCCfyAQ5dVZHFouq1T4QAoNzxuAlw26E1f0nfsPzzjDdY1C
+ Rxcv9zcSuUYUA==
+Message-ID: <cb59086b-3212-3b46-990f-c8223a6122a4@denx.de>
+Date: Thu, 15 Jun 2023 08:44:34 +0200
 MIME-Version: 1.0
-References: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
- <20230608171614.1.I21f10cd5db605f5c0fbdfd04328958518fa508aa@changeid>
-In-Reply-To: <20230608171614.1.I21f10cd5db605f5c0fbdfd04328958518fa508aa@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Jun 2023 15:58:23 +0100
-Message-ID: <CAPnjgZ1ngjK-LrvHgp6dKjLQTcU0E2dGqfdGWELDZ=Zu7vV3Zw@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 01/12] fdt_support: include dm/ofnode.h
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.12.0
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20230517220239.329807-1-marex@denx.de>
+ <e171b09d-0e7d-1815-6133-0946212a08d9@foss.st.com>
+ <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
+In-Reply-To: <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Power cycle Buck3 in reset on
+	DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,58 +57,82 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
+On 5/29/23 03:57, Marek Vasut wrote:
 
-On Thu, 8 Jun 2023 at 16:16, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> This patch is a preliminary patch to use ofnode function
-> is fdt_support to read the U-Boot device tree with livetree
-> compatible functions.
+Hello again,
 
-When will the real patch come?
+[...]
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+>> So the backup domain is loosed on ST board with STPMIC1 only when the 
+>> power
+>>
+>> is removed and not for reset or for power off.
+> 
+> Thank you for the clarification.
+> 
+> I should check suspend/resume on EV1 soon ...
 
-Regards,
-Simon
+We do have this problem on EV1 too I'm afraid:
+
+# U-Boot 2f4664f5c3e ("Merge branch '2023-06-14-assorted-fixes'")
+$ git clean -fqdx ; make stm32mp15_basic_defconfig && make -j$(nproc)
+$ dd if=u-boot-spl.stm32 of=/dev/sdX1 && dd if=u-boot-spl.stm32 
+of=/dev/sdX2 && dd if=u-boot.img of=/dev/sdX3
+
+# Linux next 925294c9aa184 ("Add linux-next specific files for 20230615")
+
+U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+RAM: DDR3-DDR3L 32bits 533000kHz
+WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s timeout)
+image entry point: 0xc0100000
 
 
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> ---
->
->  common/fdt_support.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/common/fdt_support.c b/common/fdt_support.c
-> index 2053fe3bad83..ffc59fd8b36a 100644
-> --- a/common/fdt_support.c
-> +++ b/common/fdt_support.c
-> @@ -13,6 +13,7 @@
->  #include <mapmem.h>
->  #include <net.h>
->  #include <stdio_dev.h>
-> +#include <dm/ofnode.h>
->  #include <linux/ctype.h>
->  #include <linux/types.h>
->  #include <asm/global_data.h>
-> @@ -1065,7 +1066,6 @@ void fdt_del_node_and_alias(void *blob, const char *alias)
->
->  /* Max address size we deal with */
->  #define OF_MAX_ADDR_CELLS      4
-> -#define OF_BAD_ADDR    FDT_ADDR_T_NONE
->  #define OF_CHECK_COUNTS(na, ns)        ((na) > 0 && (na) <= OF_MAX_ADDR_CELLS && \
->                         (ns) > 0)
->
-> --
-> 2.25.1
->
+U-Boot 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+
+CPU: STM32MP157FAA Rev.Z
+Model: STMicroelectronics STM32MP157C eval daughter on eval mother
+Board: stm32mp1 in basic mode (st,stm32mp157c-ev1)
+Board: MB1263 Var4.0 Rev.C-03
+...
+boot as usual into Linux with initramfs for simplicity sake
+...
+$ cat /proc/cmdline
+console=ttySTM0,115200 no_console_suspend
+
+# Suspend the system repeatedly (failure happens after 2-3 wake up cycles)
+$ while true ; do rtcwake -s 100 -m mem ; done
+wakeup from "mem" at Sat Jan  1 00:03:11 2000
+[   39.316598] PM: suspend entry (deep)
+[   39.318905] Filesystems sync: 0.000 seconds
+[   39.324327] Freezing user space processes
+[   39.328194] Freezing user space processes completed (elapsed 0.001 
+seconds)
+[   39.334006] OOM killer disabled.
+[   39.337158] Freezing remaining freezable tasks
+[   39.342777] Freezing remaining freezable tasks completed (elapsed 
+0.001 seconds)
+[   39.426015] Disabling non-boot CPUs ...
+[   39.448635] Retrying again to check for CPU kill
+[   39.451909] CPU1 killed.
+U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+RAM: DDR3-DDR3L 32bits 533000kHz
+DDR invalid size : 0x4, expected 0x40000000
+DRAM init failed: -22
+### ERROR ### Please RESET the board ###
+
+Press RESET button
+
+U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
+RAM: DDR3-DDR3L 32bits 533000kHz
+DDR invalid size : 0x4, expected 0x40000000
+DRAM init failed: -22
+### ERROR ### Please RESET the board ###
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,50 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A568730F98
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jun 2023 08:44:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4562731351
+	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jun 2023 11:14:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C81FDC6A610;
-	Thu, 15 Jun 2023 06:44:37 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E714C65E4F;
+	Thu, 15 Jun 2023 09:14:46 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
+ [209.85.218.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6A87BC6A60E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D889C65E42
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Jun 2023 06:44:36 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 84D8F861F3;
- Thu, 15 Jun 2023 08:44:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1686811475;
- bh=Ip5PLUi0YldqLMFPjSWYg+XaywVhzC+xqFc2EmZt4ZE=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=JsxG3hH6XmomxP73/eoOm9ZApBqMqv2pAzeM0U5L7B6DbD2dWvJZBv1hBH7vuZpLe
- UX4HrT9wt4q0S62b+gJcKb3eRMz4PboOVupzFtKeS4piq0tBKJyR5XvKmirCYN8+S5
- DOeSksRlfmqIOOSbB2ZoJ2AhUVi7db+IMtmlQm4+PbCp2zgsqNufzQpHialDCpHaKE
- m70hzJySSEwWUkT0Z9eIZTzNIOHdXwoPkSprJEiGH1RshHhU8Nc42ANhoGm+j/fDRa
- 9FTWk27Nd0MfHd2cb/0xCCfyAQ5dVZHFouq1T4QAoNzxuAlw26E1f0nfsPzzjDdY1C
- Rxcv9zcSuUYUA==
-Message-ID: <cb59086b-3212-3b46-990f-c8223a6122a4@denx.de>
-Date: Thu, 15 Jun 2023 08:44:34 +0200
+ Thu, 15 Jun 2023 09:14:45 +0000 (UTC)
+Received: by mail-ej1-f46.google.com with SMTP id
+ a640c23a62f3a-982a0232bdcso78243466b.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 15 Jun 2023 02:14:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1686820485; x=1689412485;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FpyPbZ6D+nP6wwL07PsezWZ7m+AcoLYBOfdSRkiogkI=;
+ b=Mz6ak6b6y/R78RuKC0zl+vWMKHslParpFrNEVLH6e0LR/WTcIaOXQtGE316Z4e5ICN
+ GKjX8NGoSmWYdgtxJaBRgjLlSoEqs5Grqj3U/jU4AB0PoBO06TfjfcLyk3TjLslGWgjO
+ DtHLYfD6+th60dDcyD0xEqZ3YNswsgY6+bdj0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1686820485; x=1689412485;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FpyPbZ6D+nP6wwL07PsezWZ7m+AcoLYBOfdSRkiogkI=;
+ b=R8tnfHE/oeYYXiUuU6PZ8fUPPj4uXO2ga82E+UEkWioiyV4bl+vDI8oZpM0qRx/oz+
+ cbIexnHcb9pTerU7gyL1QxQ/bThbuHqrPTAkzw2CSnLs4aCnBo6FKHveOCHqNbUoJSdF
+ U5A0/CoETfHpWnBxuQwq48SMU12m16bzCQLUeIBTZIuw1Tlz3GGtAk1HsH3vtTYqhHYT
+ erfCAuFgJ6haf0iT3ATjFpkrMVBfWJnftgRtyVohT6xwAmlRziNvo/0Qwf4VmjGe/U/Y
+ TZx7EZV8+UZp2IX5nnMSm8VkDKawlBJ01k0nyxFOZFk4j/7Jg5Y3bqXXHbpBQgoKO4i5
+ Eh6Q==
+X-Gm-Message-State: AC+VfDy3x7kK2AKzrCWvo/4IPk/usTsUXNnHaOzLPMY2r8szCUppRS3E
+ x98QH/A+EUZ0cuBYSDTrJUNtIJXMBGp5UPAXnLgzqw==
+X-Google-Smtp-Source: ACHHUZ4Kna8Hjp7FF9GUVvplEXKAZq1ER9ScrQCRVKEuN7EDyUokRVVsTxMRpJHnEAhkvRGkwSslZPXQPu6hNlJrx4E=
+X-Received: by 2002:a17:906:dc90:b0:969:faf3:7dba with SMTP id
+ cs16-20020a170906dc9000b00969faf37dbamr19254380ejc.52.1686820484794; Thu, 15
+ Jun 2023 02:14:44 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20230517220239.329807-1-marex@denx.de>
- <e171b09d-0e7d-1815-6133-0946212a08d9@foss.st.com>
- <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
-In-Reply-To: <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Power cycle Buck3 in reset on
-	DHSOM
+References: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
+ <20230608171614.2.Idd521a274f1b0524963a501324a1702a5a8b52c1@changeid>
+In-Reply-To: <20230608171614.2.Idd521a274f1b0524963a501324a1702a5a8b52c1@changeid>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 15 Jun 2023 10:14:31 +0100
+Message-ID: <CAPnjgZ1vm3ftxwHihksrxR78+8x=-tKBsLbVAZ0riPgEWLESSw@mail.gmail.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 02/12] fdt_support: add
+	fdt_copy_fixed_partitions function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -57,82 +67,149 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 5/29/23 03:57, Marek Vasut wrote:
+Hi Patrick,
 
-Hello again,
+On Thu, 8 Jun 2023 at 16:16, Patrick Delaunay
+<patrick.delaunay@foss.st.com> wrote:
+>
+> Add a new function fdt_copy_fixed_partitions to copy the fixed
+> partition nodes from U-Boot device tree to Linux kernel
+> device tree and to dynamically configure the MTD partitions.
+>
+> This function fdt_copy_fixed_partitions is only based on device tree
+> with livetree compatible function and replace the function
+> fdt_fixup_mtdparts based on mtdparts variable.
+>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+>
+>  common/fdt_support.c  | 73 +++++++++++++++++++++++++++++++++++++++++++
+>  include/fdt_support.h |  8 +++++
+>  2 files changed, 81 insertions(+)
+>
+> diff --git a/common/fdt_support.c b/common/fdt_support.c
+> index ffc59fd8b36a..5e49078f8c35 100644
+> --- a/common/fdt_support.c
+> +++ b/common/fdt_support.c
+> @@ -1051,6 +1051,79 @@ void fdt_fixup_mtdparts(void *blob, const struct node_info *node_info,
+>  }
+>  #endif
+>
+> +int fdt_copy_fixed_partitions(void *blob)
+> +{
+> +       ofnode node, subnode;
+> +       int off, suboff, res;
+> +       char path[256];
+> +       int address_cells, size_cells;
+> +       u8 i, j, child_count;
+> +
+> +       node = ofnode_by_compatible(ofnode_null(), "fixed-partitions");
+> +       while (ofnode_valid(node)) {
+> +               /* copy the U-Boot fixed partition */
+> +               address_cells = ofnode_read_simple_addr_cells(node);
+> +               size_cells = ofnode_read_simple_size_cells(node);
+> +
+> +               res = ofnode_get_path(ofnode_get_parent(node), path, sizeof(path));
+> +               if (res)
+> +                       return res;
+> +
+> +               off = fdt_path_offset(blob, path);
+> +               if (off < 0)
+> +                       return -ENODEV;
 
-[...]
+It should be possible to use livetree to write to the blob. E.g.:
 
->> So the backup domain is loosed on ST board with STPMIC1 only when the 
->> power
->>
->> is removed and not for reset or for power off.
-> 
-> Thank you for the clarification.
-> 
-> I should check suspend/resume on EV1 soon ...
+oftree tree = oftree_from_fdt(blob);
+ofnode node = oftree_path(tree, "/...");
 
-We do have this problem on EV1 too I'm afraid:
+That would be more future-proof than using this API. I'd like to move
+DT fixup to the ofnode API eventually.
 
-# U-Boot 2f4664f5c3e ("Merge branch '2023-06-14-assorted-fixes'")
-$ git clean -fqdx ; make stm32mp15_basic_defconfig && make -j$(nproc)
-$ dd if=u-boot-spl.stm32 of=/dev/sdX1 && dd if=u-boot-spl.stm32 
-of=/dev/sdX2 && dd if=u-boot.img of=/dev/sdX3
+> +
+> +               off = fdt_find_or_add_subnode(blob, off, "partitions");
+> +               res = fdt_setprop_string(blob, off, "compatible", "fixed-partitions");
+> +               if (res)
+> +                       return res;
+> +
+> +               res = fdt_setprop_u32(blob, off, "#address-cells", address_cells);
+> +               if (res)
+> +                       return res;
+> +
+> +               res = fdt_setprop_u32(blob, off, "#size-cells", size_cells);
+> +               if (res)
+> +                       return res;
+> +
+> +               /*
+> +                * parse partition in reverse order as fdt_find_or_add_subnode() only
+> +                * insert the new node after the parent's properties
+> +                */
+> +               child_count = ofnode_get_child_count(node);
+> +               for (i = child_count; i > 0 ; i--) {
+> +                       subnode = ofnode_first_subnode(node);
+> +                       if (!ofnode_valid(subnode))
+> +                               break;
+> +
+> +                       for (j = 0; (j < i - 1); j++)
+> +                               subnode = ofnode_next_subnode(subnode);
+> +
+> +                       if (!ofnode_valid(subnode))
+> +                               break;
+> +
+> +                       const u32 *reg;
+> +                       int len;
+> +
+> +                       suboff = fdt_find_or_add_subnode(blob, off, ofnode_get_name(subnode));
+> +                       res = fdt_setprop_string(blob, suboff, "label",
+> +                                                ofnode_read_string(subnode, "label"));
+> +                       if (res)
+> +                               return res;
+> +
+> +                       reg = ofnode_get_property(subnode, "reg", &len);
+> +                       res = fdt_setprop(blob, suboff, "reg", reg, len);
+> +                       if (res)
+> +                               return res;
+> +               }
+> +
+> +               /* go to next fixed-partitions node */
+> +               node = ofnode_by_compatible(node, "fixed-partitions");
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+>  void fdt_del_node_and_alias(void *blob, const char *alias)
+>  {
+>         int off = fdt_path_offset(blob, alias);
+> diff --git a/include/fdt_support.h b/include/fdt_support.h
+> index eeb83e6251d3..2cd836689821 100644
+> --- a/include/fdt_support.h
+> +++ b/include/fdt_support.h
+> @@ -256,6 +256,14 @@ static inline void fdt_fixup_mtdparts(void *fdt,
+>  }
+>  #endif
+>
+> +/**
+> + * copy the fixed-partition nodes from U-Boot device tree to external blob
+> + *
+> + * @param blob         FDT blob to update
+> + * Return: 0 if ok, or non-zero on error
+> + */
+> +int fdt_copy_fixed_partitions(void *blob);
+> +
+>  void fdt_del_node_and_alias(void *blob, const char *alias);
+>
+>  /**
+> --
+> 2.25.1
+>
 
-# Linux next 925294c9aa184 ("Add linux-next specific files for 20230615")
-
-U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
-RAM: DDR3-DDR3L 32bits 533000kHz
-WDT:   Started watchdog@5a002000 with servicing every 1000ms (32s timeout)
-image entry point: 0xc0100000
-
-
-U-Boot 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
-
-CPU: STM32MP157FAA Rev.Z
-Model: STMicroelectronics STM32MP157C eval daughter on eval mother
-Board: stm32mp1 in basic mode (st,stm32mp157c-ev1)
-Board: MB1263 Var4.0 Rev.C-03
-...
-boot as usual into Linux with initramfs for simplicity sake
-...
-$ cat /proc/cmdline
-console=ttySTM0,115200 no_console_suspend
-
-# Suspend the system repeatedly (failure happens after 2-3 wake up cycles)
-$ while true ; do rtcwake -s 100 -m mem ; done
-wakeup from "mem" at Sat Jan  1 00:03:11 2000
-[   39.316598] PM: suspend entry (deep)
-[   39.318905] Filesystems sync: 0.000 seconds
-[   39.324327] Freezing user space processes
-[   39.328194] Freezing user space processes completed (elapsed 0.001 
-seconds)
-[   39.334006] OOM killer disabled.
-[   39.337158] Freezing remaining freezable tasks
-[   39.342777] Freezing remaining freezable tasks completed (elapsed 
-0.001 seconds)
-[   39.426015] Disabling non-boot CPUs ...
-[   39.448635] Retrying again to check for CPU kill
-[   39.451909] CPU1 killed.
-U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
-RAM: DDR3-DDR3L 32bits 533000kHz
-DDR invalid size : 0x4, expected 0x40000000
-DRAM init failed: -22
-### ERROR ### Please RESET the board ###
-
-Press RESET button
-
-U-Boot SPL 2023.07-rc4-00008-g2f4664f5c3e (Jun 15 2023 - 08:36:52 +0200)
-RAM: DDR3-DDR3L 32bits 533000kHz
-DDR invalid size : 0x4, expected 0x40000000
-DRAM init failed: -22
-### ERROR ### Please RESET the board ###
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

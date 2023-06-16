@@ -2,60 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4562731351
-	for <lists+uboot-stm32@lfdr.de>; Thu, 15 Jun 2023 11:14:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 430AF732AE8
+	for <lists+uboot-stm32@lfdr.de>; Fri, 16 Jun 2023 11:02:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E714C65E4F;
-	Thu, 15 Jun 2023 09:14:46 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com
- [209.85.218.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E8B1DC6A5EA;
+	Fri, 16 Jun 2023 09:02:52 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8D889C65E42
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C15FFC64110
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Jun 2023 09:14:45 +0000 (UTC)
-Received: by mail-ej1-f46.google.com with SMTP id
- a640c23a62f3a-982a0232bdcso78243466b.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 15 Jun 2023 02:14:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1686820485; x=1689412485;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FpyPbZ6D+nP6wwL07PsezWZ7m+AcoLYBOfdSRkiogkI=;
- b=Mz6ak6b6y/R78RuKC0zl+vWMKHslParpFrNEVLH6e0LR/WTcIaOXQtGE316Z4e5ICN
- GKjX8NGoSmWYdgtxJaBRgjLlSoEqs5Grqj3U/jU4AB0PoBO06TfjfcLyk3TjLslGWgjO
- DtHLYfD6+th60dDcyD0xEqZ3YNswsgY6+bdj0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686820485; x=1689412485;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FpyPbZ6D+nP6wwL07PsezWZ7m+AcoLYBOfdSRkiogkI=;
- b=R8tnfHE/oeYYXiUuU6PZ8fUPPj4uXO2ga82E+UEkWioiyV4bl+vDI8oZpM0qRx/oz+
- cbIexnHcb9pTerU7gyL1QxQ/bThbuHqrPTAkzw2CSnLs4aCnBo6FKHveOCHqNbUoJSdF
- U5A0/CoETfHpWnBxuQwq48SMU12m16bzCQLUeIBTZIuw1Tlz3GGtAk1HsH3vtTYqhHYT
- erfCAuFgJ6haf0iT3ATjFpkrMVBfWJnftgRtyVohT6xwAmlRziNvo/0Qwf4VmjGe/U/Y
- TZx7EZV8+UZp2IX5nnMSm8VkDKawlBJ01k0nyxFOZFk4j/7Jg5Y3bqXXHbpBQgoKO4i5
- Eh6Q==
-X-Gm-Message-State: AC+VfDy3x7kK2AKzrCWvo/4IPk/usTsUXNnHaOzLPMY2r8szCUppRS3E
- x98QH/A+EUZ0cuBYSDTrJUNtIJXMBGp5UPAXnLgzqw==
-X-Google-Smtp-Source: ACHHUZ4Kna8Hjp7FF9GUVvplEXKAZq1ER9ScrQCRVKEuN7EDyUokRVVsTxMRpJHnEAhkvRGkwSslZPXQPu6hNlJrx4E=
-X-Received: by 2002:a17:906:dc90:b0:969:faf3:7dba with SMTP id
- cs16-20020a170906dc9000b00969faf37dbamr19254380ejc.52.1686820484794; Thu, 15
- Jun 2023 02:14:44 -0700 (PDT)
+ Fri, 16 Jun 2023 09:02:50 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 35G6CY3x029409; Fri, 16 Jun 2023 11:02:49 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=selector1;
+ bh=loOLPkf4MBJVpOl4uAHhqakXz9T8/mAYU9/i1oWMfTA=;
+ b=rjaWPUs0seIraCIoAsJv0EGzNwTuXkD+kLp4qKVxFfbU6lNCcSiJxd1q0y+v4sfr+I4f
+ StZLzG79XFrkrX09V19OcAVhU5mpDEez0gw028eAWeYda9NlGWKEXUVUupujhSH7mpIT
+ iiUFsoQviFbwrXdT0yrX96hv5ncSPWWGyE/owMPR+NKHKZAArdLucCqOYokAFVw4TWUS
+ C2Z9CA3zSJyezI05gU9yJmCxbuSZGQDDUBs0zvuNtsrAt6uMI/JMPrLhLMxsuzSH1pdK
+ 3HtlyExLgBdJNLBTm8ckXa8Ezss+r62jlCn8WGkNXB9vdLhEDQtxPHxZ7qP2jMJc2Sgy Qg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3r8j92h3ec-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 16 Jun 2023 11:02:47 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 27903100051;
+ Fri, 16 Jun 2023 11:02:37 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0E8D921ED4C;
+ Fri, 16 Jun 2023 11:02:37 +0200 (CEST)
+Received: from [10.48.1.0] (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 16 Jun
+ 2023 11:02:36 +0200
+Message-ID: <ab788274-f9c7-6452-cf65-64921bebc7d9@foss.st.com>
+Date: Fri, 16 Jun 2023 11:02:36 +0200
 MIME-Version: 1.0
-References: <20230608151648.992505-1-patrick.delaunay@foss.st.com>
- <20230608171614.2.Idd521a274f1b0524963a501324a1702a5a8b52c1@changeid>
-In-Reply-To: <20230608171614.2.Idd521a274f1b0524963a501324a1702a5a8b52c1@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Jun 2023 10:14:31 +0100
-Message-ID: <CAPnjgZ1vm3ftxwHihksrxR78+8x=-tKBsLbVAZ0riPgEWLESSw@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 02/12] fdt_support: add
-	fdt_copy_fixed_partitions function
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Content-Language: en-US
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+References: <20230531060131.2045931-1-patrice.chotard@foss.st.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230531060131.2045931-1-patrice.chotard@foss.st.com>
+X-Originating-IP: [10.48.1.0]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-16_05,2023-06-15_01,2023-05-22_02
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] serial: stm32: Wait TC bit before
+ performing initialization
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -67,149 +71,33 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Patrick,
+Hi,
 
-On Thu, 8 Jun 2023 at 16:16, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
+On 5/31/23 08:01, Patrice Chotard wrote:
+> In case there is still chars from previous bootstage to transmit, wait
+> for TC (Transmission Complete) bit to be set which ensure that the last
+> data written in the USART_TDR has been transmitted out of the shift
+> register.
 >
-> Add a new function fdt_copy_fixed_partitions to copy the fixed
-> partition nodes from U-Boot device tree to Linux kernel
-> device tree and to dynamically configure the MTD partitions.
->
-> This function fdt_copy_fixed_partitions is only based on device tree
-> with livetree compatible function and replace the function
-> fdt_fixup_mtdparts based on mtdparts variable.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->  common/fdt_support.c  | 73 +++++++++++++++++++++++++++++++++++++++++++
->  include/fdt_support.h |  8 +++++
->  2 files changed, 81 insertions(+)
->
-> diff --git a/common/fdt_support.c b/common/fdt_support.c
-> index ffc59fd8b36a..5e49078f8c35 100644
-> --- a/common/fdt_support.c
-> +++ b/common/fdt_support.c
-> @@ -1051,6 +1051,79 @@ void fdt_fixup_mtdparts(void *blob, const struct node_info *node_info,
->  }
->  #endif
->
-> +int fdt_copy_fixed_partitions(void *blob)
-> +{
-> +       ofnode node, subnode;
-> +       int off, suboff, res;
-> +       char path[256];
-> +       int address_cells, size_cells;
-> +       u8 i, j, child_count;
-> +
-> +       node = ofnode_by_compatible(ofnode_null(), "fixed-partitions");
-> +       while (ofnode_valid(node)) {
-> +               /* copy the U-Boot fixed partition */
-> +               address_cells = ofnode_read_simple_addr_cells(node);
-> +               size_cells = ofnode_read_simple_size_cells(node);
-> +
-> +               res = ofnode_get_path(ofnode_get_parent(node), path, sizeof(path));
-> +               if (res)
-> +                       return res;
-> +
-> +               off = fdt_path_offset(blob, path);
-> +               if (off < 0)
-> +                       return -ENODEV;
-
-It should be possible to use livetree to write to the blob. E.g.:
-
-oftree tree = oftree_from_fdt(blob);
-ofnode node = oftree_path(tree, "/...");
-
-That would be more future-proof than using this API. I'd like to move
-DT fixup to the ofnode API eventually.
-
-> +
-> +               off = fdt_find_or_add_subnode(blob, off, "partitions");
-> +               res = fdt_setprop_string(blob, off, "compatible", "fixed-partitions");
-> +               if (res)
-> +                       return res;
-> +
-> +               res = fdt_setprop_u32(blob, off, "#address-cells", address_cells);
-> +               if (res)
-> +                       return res;
-> +
-> +               res = fdt_setprop_u32(blob, off, "#size-cells", size_cells);
-> +               if (res)
-> +                       return res;
-> +
-> +               /*
-> +                * parse partition in reverse order as fdt_find_or_add_subnode() only
-> +                * insert the new node after the parent's properties
-> +                */
-> +               child_count = ofnode_get_child_count(node);
-> +               for (i = child_count; i > 0 ; i--) {
-> +                       subnode = ofnode_first_subnode(node);
-> +                       if (!ofnode_valid(subnode))
-> +                               break;
-> +
-> +                       for (j = 0; (j < i - 1); j++)
-> +                               subnode = ofnode_next_subnode(subnode);
-> +
-> +                       if (!ofnode_valid(subnode))
-> +                               break;
-> +
-> +                       const u32 *reg;
-> +                       int len;
-> +
-> +                       suboff = fdt_find_or_add_subnode(blob, off, ofnode_get_name(subnode));
-> +                       res = fdt_setprop_string(blob, suboff, "label",
-> +                                                ofnode_read_string(subnode, "label"));
-> +                       if (res)
-> +                               return res;
-> +
-> +                       reg = ofnode_get_property(subnode, "reg", &len);
-> +                       res = fdt_setprop(blob, suboff, "reg", reg, len);
-> +                       if (res)
-> +                               return res;
-> +               }
-> +
-> +               /* go to next fixed-partitions node */
-> +               node = ofnode_by_compatible(node, "fixed-partitions");
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  void fdt_del_node_and_alias(void *blob, const char *alias)
->  {
->         int off = fdt_path_offset(blob, alias);
-> diff --git a/include/fdt_support.h b/include/fdt_support.h
-> index eeb83e6251d3..2cd836689821 100644
-> --- a/include/fdt_support.h
-> +++ b/include/fdt_support.h
-> @@ -256,6 +256,14 @@ static inline void fdt_fixup_mtdparts(void *fdt,
->  }
->  #endif
->
-> +/**
-> + * copy the fixed-partition nodes from U-Boot device tree to external blob
-> + *
-> + * @param blob         FDT blob to update
-> + * Return: 0 if ok, or non-zero on error
-> + */
-> +int fdt_copy_fixed_partitions(void *blob);
-> +
->  void fdt_del_node_and_alias(void *blob, const char *alias);
->
->  /**
-> --
-> 2.25.1
+>   drivers/serial/serial_stm32.c | 15 +++++++++++++++
+>   drivers/serial/serial_stm32.h |  1 +
+>   2 files changed, 16 insertions(+)
 >
 
-Regards,
-Simon
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

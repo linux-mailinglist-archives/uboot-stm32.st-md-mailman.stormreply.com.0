@@ -2,52 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00FD1733D4C
-	for <lists+uboot-stm32@lfdr.de>; Sat, 17 Jun 2023 02:46:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2296873B85F
+	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Jun 2023 15:05:29 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B5CD7C6A61A;
-	Sat, 17 Jun 2023 00:46:03 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CD1ABC65E42;
+	Fri, 23 Jun 2023 13:05:28 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 64FBDC6A5EA
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A8087C65048
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 17 Jun 2023 00:46:01 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A32E2862D6;
- Sat, 17 Jun 2023 02:46:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1686962761;
- bh=MfsUOnVmvQz7/xRZJE0Cc67aGj4k0Po1v5shHQQRJBw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KMGfiPlMyMdIonyzr1uY8zmb3dAnXKVhQIaPcXoOX2YYbJuqdu81oMk/pfalX0OB2
- /1IhtTl10B+zpQ/sL84Y2nG3FMOX0u+X4Q4anxcixFpNGOthZGFO2e/VTTZQhCKB1l
- GosyBFFGubXI/aVHJurLdtpe+NXqKIM0Jf+XNNj2lnh/HAKtlPRrUimI+sNhj9p7te
- v6nX0jldiICMaVz3ZjZFq/zYsscsCwI8KHXcP8E+V1WRrS32nP8AgaqVcY3Ua2+6u3
- fOQQvSra4KVe5bntKjEplaZb/UKa5NnzM9iKzSD0fZ0yxsTvrjLbJt0dzq2KCs9Pya
- 2W76swYD/GrEw==
-Message-ID: <392d5490-1f06-e264-7e0d-cdf77f7301c2@denx.de>
-Date: Sat, 17 Jun 2023 02:37:29 +0200
+ Fri, 23 Jun 2023 13:05:27 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 35NCAmCh024484; Fri, 23 Jun 2023 15:05:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding :
+ content-type; s=selector1;
+ bh=qPkoGlMychrZD7X/3j9VtwZDTa3Y+rB2RkUvOHA7iao=;
+ b=QM8vNXq45lTb8vdHK2AWnYMCEVpjsViPvVbpFcRtBphx1PkKVo07BbmsW42Dq0P0cpWU
+ ZSWJTuJiRo7YdWGOaH1rBDZVuch4fUkMyyHH33Kcx+Yr+UBwuLGDTVyI2mlLUGOET/Kt
+ eeftlrJb1CHnACIV/blNcpp5XSoSkLVkW74ru4yOZC3Xrx/fUxx3X28QjZ20RpP8NBAx
+ VXvXFCgKO6YZGDYdyPxMuL3efM70I61wX0JYqYJ/vpliFx5C21nWLOz4iLbelHpvGjB+
+ qsXzcy6//iBSOzaVGmsx4Cru2fSuLoEPkJIO7khD7BtjMMo33RDHe+t5urqdl3eaDBYj wg== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3rd8bp1r7y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 23 Jun 2023 15:05:25 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 99ADA100078;
+ Fri, 23 Jun 2023 15:05:24 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 80645227EE3;
+ Fri, 23 Jun 2023 15:05:24 +0200 (CEST)
+Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 23 Jun
+ 2023 15:05:24 +0200
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 23 Jun 2023 15:05:16 +0200
+Message-ID: <20230623150449.1.I2f1f79c3a6283502490ee63fc158237bd43efa2f@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-References: <20230504195208.4941-1-marex@denx.de>
- <6fa1fdfc-d983-dcb9-7a4c-60055505bc79@foss.st.com>
- <2d510067-6725-0c84-b672-a0a701ac0fcf@denx.de>
- <129fa8f9-d828-eef0-2530-e716a0fc4280@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <129fa8f9-d828-eef0-2530-e716a0fc4280@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+X-Originating-IP: [10.48.1.0]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-06-23_06,2023-06-22_02,2023-05-22_02
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Use __section(".data") with
- dot in the section name on DHSOM
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
+Subject: [Uboot-stm32] [PATCH] clk: stm32mp1: remove error for disabled
+	clock in stm32mp1_clk_get_parent
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -59,43 +69,46 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gNi8xNi8yMyAxNDoyMywgUGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+IAo+IAo+IE9uIDYvMTYv
-MjMgMTQ6MTgsIE1hcmVrIFZhc3V0IHdyb3RlOgo+PiBPbiA2LzE2LzIzIDEzOjQ2LCBQYXRyaWNl
-IENIT1RBUkQgd3JvdGU6Cj4+Pgo+Pj4KPj4+IE9uIDUvNC8yMyAyMTo1MiwgTWFyZWsgVmFzdXQg
-d3JvdGU6Cj4+Pj4gVGhlIGNvcnJlY3Qgc3BlY2lmaWVyIG9mIHRoZSBzZWN0aW9uIGlzICIuZGF0
-YSIgYW5kIG5vdCAiZGF0YSIsCj4+Pj4gdXNlIHRoZSBmb3JtZXIgdG8gcGxhY2UgdGhlIHZhcmlh
-YmxlcyBpbiAiLmRhdGEiIHNlY3Rpb24uCj4+Pj4KPj4+PiBGaXhlczogNzMxZmQ1MGUyN2YgKCJB
-Uk06IHN0bTMyOiBJbXBsZW1lbnQgYm9hcmQgY29kaW5nIG9uIEFWOTYiKQo+Pj4+IEZpeGVzOiA5
-MmNhMGY3NDQ2YyAoIkFSTTogZHRzOiBzdG0zMjogU3luY2hyb25pemUgRERSIHNldHR0aW5ncyBv
-biBESCBTb01zIikKPj4+PiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5k
-ZT4KPj4+PiAtLS0KPj4+PiBDYzogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9z
-cy5zdC5jb20+Cj4+Pj4gQ2M6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9z
-cy5zdC5jb20+Cj4+Pj4gQ2M6IHUtYm9vdEBkaC1lbGVjdHJvbmljcy5jb20KPj4+PiBDYzogdWJv
-b3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQo+Pj4+IC0tLQo+Pj4+ICDCoCBi
-b2FyZC9kaGVsZWN0cm9uaWNzL2RoX3N0bTMybXAxL2JvYXJkLmMgfCA2ICsrKy0tLQo+Pj4+ICDC
-oCAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Pj4+Cj4+
-Pj4gZGlmZiAtLWdpdCBhL2JvYXJkL2RoZWxlY3Ryb25pY3MvZGhfc3RtMzJtcDEvYm9hcmQuYyBi
-L2JvYXJkL2RoZWxlY3Ryb25pY3MvZGhfc3RtMzJtcDEvYm9hcmQuYwo+Pj4+IGluZGV4IGE5YTI5
-NjVhMzg2Li5hMGNkZjgzZWE3MSAxMDA2NDQKPj4+PiAtLS0gYS9ib2FyZC9kaGVsZWN0cm9uaWNz
-L2RoX3N0bTMybXAxL2JvYXJkLmMKPj4+PiArKysgYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2RoX3N0
-bTMybXAxL2JvYXJkLmMKPj4+PiBAQCAtMTg1LDkgKzE4NSw5IEBAIGludCBjaGVja2JvYXJkKHZv
-aWQpCj4+Pj4gIMKgIH0KPj4+PiAgwqAgwqAgI2lmZGVmIENPTkZJR19CT0FSRF9FQVJMWV9JTklU
-X0YKPj4+PiAtc3RhdGljIHU4IGJyZGNvZGUgX19zZWN0aW9uKCJkYXRhIik7Cj4+Pj4gLXN0YXRp
-YyB1OCBkZHIzY29kZSBfX3NlY3Rpb24oImRhdGEiKTsKPj4+PiAtc3RhdGljIHU4IHNvbWNvZGUg
-X19zZWN0aW9uKCJkYXRhIik7Cj4+Pj4gK3N0YXRpYyB1OCBicmRjb2RlIF9fc2VjdGlvbigiLmRh
-dGEiKTsKPj4+PiArc3RhdGljIHU4IGRkcjNjb2RlIF9fc2VjdGlvbigiLmRhdGEiKTsKPj4+PiAr
-c3RhdGljIHU4IHNvbWNvZGUgX19zZWN0aW9uKCIuZGF0YSIpOwo+Pj4+ICDCoCBzdGF0aWMgdTMy
-IG9wcF92b2x0YWdlX212IF9fc2VjdGlvbigiLmRhdGEiKTsKPj4+PiAgwqAgwqAgc3RhdGljIHZv
-aWQgYm9hcmRfZ2V0X2NvZGluZ19zdHJhcHModm9pZCkKPj4+Cj4+PiBBcHBsaWVkIHRvIHUtYm9v
-dC1zdG0vbmV4dAo+Pgo+PiBTaW5jZSB0aGlzIGlzIGEgYnVnZml4LCBzaG91bGQgYmUgZm9yIGN1
-cnJlbnQuCj4gCj4gSGkgTWFyZWsKPiAKPiBVbmZvcnR1bmF0ZWx5IHRoZSBwdWxsIHJlcXVlc3Qg
-aGFzIGFscmVhZHkgc2VudCB0byB0aGUgbWFpbGluZyBsaXN0IDotKAo+IEkgd2lsbCB0YWtlIGNh
-cmUgbmV4dCB0aW1lLgoKQ2FuIHlvdSBzZW5kIGFub3RoZXIgTVIgPwpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QK
-VWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1h
-aWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+To disabled a clock in clock tree initialization for a mux of STM32MP15,
+the selected clock source index is set with the latest possible index for
+the number of bit used. Today this valid configuration cause a error
+in U-Boot messages, for example with CLK_ETH_DISABLED, when this clock
+is not needed for the used ETH PHY without crystal:
+
+   no parents defined for clk id 123
+
+This patch change the level of this message to avoid this trace for
+valid clock tree.
+
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
+
+ drivers/clk/stm32/clk-stm32mp1.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
+index 4f4524fcb2c6..615028769495 100644
+--- a/drivers/clk/stm32/clk-stm32mp1.c
++++ b/drivers/clk/stm32/clk-stm32mp1.c
+@@ -881,7 +881,8 @@ static int stm32mp1_clk_get_parent(struct stm32mp1_clk_priv *priv,
+ 		return sel[s].parent[p];
+ 	}
+ 
+-	log_err("no parents defined for clk id %d\n", (u32)id);
++	/* clock is DISABLED when the clock src is not in clk_parent[] range */
++	log_debug("no parents defined for clk id %d\n", (u32)id);
+ 
+ 	return -EINVAL;
+ }
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

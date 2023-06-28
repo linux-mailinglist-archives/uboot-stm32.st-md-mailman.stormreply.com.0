@@ -2,62 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2296873B85F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 23 Jun 2023 15:05:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A76A741036
+	for <lists+uboot-stm32@lfdr.de>; Wed, 28 Jun 2023 13:41:56 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CD1ABC65E42;
-	Fri, 23 Jun 2023 13:05:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B5516C6B443;
+	Wed, 28 Jun 2023 11:41:55 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+ [209.85.208.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A8087C65048
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C97BBC03FC1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 23 Jun 2023 13:05:27 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 35NCAmCh024484; Fri, 23 Jun 2023 15:05:25 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=qPkoGlMychrZD7X/3j9VtwZDTa3Y+rB2RkUvOHA7iao=;
- b=QM8vNXq45lTb8vdHK2AWnYMCEVpjsViPvVbpFcRtBphx1PkKVo07BbmsW42Dq0P0cpWU
- ZSWJTuJiRo7YdWGOaH1rBDZVuch4fUkMyyHH33Kcx+Yr+UBwuLGDTVyI2mlLUGOET/Kt
- eeftlrJb1CHnACIV/blNcpp5XSoSkLVkW74ru4yOZC3Xrx/fUxx3X28QjZ20RpP8NBAx
- VXvXFCgKO6YZGDYdyPxMuL3efM70I61wX0JYqYJ/vpliFx5C21nWLOz4iLbelHpvGjB+
- qsXzcy6//iBSOzaVGmsx4Cru2fSuLoEPkJIO7khD7BtjMMo33RDHe+t5urqdl3eaDBYj wg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3rd8bp1r7y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 23 Jun 2023 15:05:25 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 99ADA100078;
- Fri, 23 Jun 2023 15:05:24 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 80645227EE3;
- Fri, 23 Jun 2023 15:05:24 +0200 (CEST)
-Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 23 Jun
- 2023 15:05:24 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 23 Jun 2023 15:05:16 +0200
-Message-ID: <20230623150449.1.I2f1f79c3a6283502490ee63fc158237bd43efa2f@changeid>
-X-Mailer: git-send-email 2.25.1
+ Wed, 28 Jun 2023 11:41:53 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-51d97ba7c01so4066794a12.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 28 Jun 2023 04:41:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1687952513; x=1690544513;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=J3fCXuZxswcmQDhhHXP0B2fP2u2I6MAR6fPt8D4fAFk=;
+ b=R3tIWpYUjM7IbcynYydSaP3Y2AAPJLoCS+CqJWUe+An7GY47ZhLkcUGyOxe8NhPirx
+ VwcLvlaJlUhzcZLUg9NdBeeJFQTVetF8Ryno6ZuNzT1HWsllb+e96NQEMv1tjU7LWLcA
+ 44ySlOGWq1kV1XuF2JieLmdp9ct6xPcGm/zWo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1687952513; x=1690544513;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=J3fCXuZxswcmQDhhHXP0B2fP2u2I6MAR6fPt8D4fAFk=;
+ b=PwQrtZDI1A3TrHqJF8QdaCRqStmiN/rQ3FCdsako9bPKXazCbJj4OTcZ1qKqxecf+B
+ UJ7At/sSvHysJlrY6cfI0daXT9m0T6dIIdTZIqy2cZpWlU8+OvGIG7zW8z7mXHgLw7kv
+ NaO6HjboaBtHYVYNo/DXkFuNg0/UoMl21F3cf6qjoQSbl5AhnYlPwE+D7+4228x3trSC
+ jEOBqjlZIkmSdNuP8kK858woEIixceknySME5CIRPWTGB7OUUhcCfJScLvFQSJSr9Yqs
+ Mw1UhI5mRh4+UNnUUMa6l7BQkksjZQS+gkiEfxMTW+E6UttQ637I3yZ9loUec6jetglK
+ B+yA==
+X-Gm-Message-State: AC+VfDwEyjV0sceUL4gw8shl6UsF0sdNIZl/6mIM2u9wd4dqRXmu5z3m
+ UFfVvhsSXcg1f2CTBjxtt6yOLg==
+X-Google-Smtp-Source: ACHHUZ7LYFB9+usECirmh5WHYUn8lCNMwpBOb5PZ991g9ElFXWkbjXQ+n21dSwetl1gbB/PX1nXdAw==
+X-Received: by 2002:aa7:c685:0:b0:51d:d2c7:70e3 with SMTP id
+ n5-20020aa7c685000000b0051dd2c770e3mr569073edq.42.1687952513092; 
+ Wed, 28 Jun 2023 04:41:53 -0700 (PDT)
+Received: from sjg1.praguecc.cz ([193.85.242.128])
+ by smtp.gmail.com with ESMTPSA id
+ r18-20020aa7cb92000000b0051bec856cb4sm4676423edt.50.2023.06.28.04.41.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Jun 2023 04:41:52 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 28 Jun 2023 12:41:33 +0100
+Message-ID: <20230628114149.439723-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.41.0.162.gfafddb0af9-goog
 MIME-Version: 1.0
-X-Originating-IP: [10.48.1.0]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-06-23_06,2023-06-22_02,2023-05-22_02
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sean Anderson <seanga2@gmail.com>, Lukasz Majewski <lukma@denx.de>
-Subject: [Uboot-stm32] [PATCH] clk: stm32mp1: remove error for disabled
-	clock in stm32mp1_clk_get_parent
+Cc: Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jan Kiszka <jan.kiszka@siemens.com>,
+ Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 00/12] binman: Simple templating feature and
+	mkimage conversion
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,39 +84,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-To disabled a clock in clock tree initialization for a mux of STM32MP15,
-the selected clock source index is set with the latest possible index for
-the number of bit used. Today this valid configuration cause a error
-in U-Boot messages, for example with CLK_ETH_DISABLED, when this clock
-is not needed for the used ETH PHY without crystal:
+This series converts the mkimage entry type to be a section, i.e. based on
+the entry_Section class. This makes it more consistent in its behaviour,
+e.g. allowing symbol writing and expanded entries.
 
-   no parents defined for clk id 123
+A simple templating feature is also introduced, to reduce duplication
+when a set of entries must be used in multiple images.
 
-This patch change the level of this message to avoid this trace for
-valid clock tree.
+The templating implementation works by appending the template nodes to
+the target node. It is probably better to insert the template nodes
+before any subnodes in the target, so that the ordering of nodes in the
+template is preserved. But that involves rewriting the Fdt classs, since
+it can currently only add a subnode after the existing ones. This is left
+for later.
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- drivers/clk/stm32/clk-stm32mp1.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Marek Vasut (1):
+  binman: Convert mkimage to Entry_section
 
-diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
-index 4f4524fcb2c6..615028769495 100644
---- a/drivers/clk/stm32/clk-stm32mp1.c
-+++ b/drivers/clk/stm32/clk-stm32mp1.c
-@@ -881,7 +881,8 @@ static int stm32mp1_clk_get_parent(struct stm32mp1_clk_priv *priv,
- 		return sel[s].parent[p];
- 	}
- 
--	log_err("no parents defined for clk id %d\n", (u32)id);
-+	/* clock is DISABLED when the clock src is not in clk_parent[] range */
-+	log_debug("no parents defined for clk id %d\n", (u32)id);
- 
- 	return -EINVAL;
- }
+Simon Glass (11):
+  binman: Init align_default in entry_Section
+  binman: Use GetEntries() to obtain section contents
+  binman: Read _multiple_data_files in the correct place
+  binman: Allow disabling symbol writing
+  stm32mp15: Avoid writing symbols in SPL
+  binman: Provide a way to specific the fdt-list directly
+  binman: Drop __bss_size variable in bss_data.c
+  binman: Correct handling of zero bss size
+  dtoc: Support copying the contents of a node into another
+  dtoc: Allow inserting a list of nodes into another
+  binman: Support simple templates
+
+ arch/arm/dts/stm32mp15-u-boot.dtsi        |   1 +
+ tools/binman/binman.rst                   |  87 ++++++++++++++++++
+ tools/binman/control.py                   |   9 ++
+ tools/binman/elf_test.py                  |   5 ++
+ tools/binman/entries.rst                  |   6 ++
+ tools/binman/entry.py                     |  10 +--
+ tools/binman/etype/blob_phase.py          |   5 ++
+ tools/binman/etype/fit.py                 |   9 ++
+ tools/binman/etype/mkimage.py             |  79 ++++++++++-------
+ tools/binman/etype/section.py             |  22 ++---
+ tools/binman/etype/u_boot_spl_bss_pad.py  |   2 +-
+ tools/binman/etype/u_boot_tpl_bss_pad.py  |   2 +-
+ tools/binman/etype/u_boot_vpl_bss_pad.py  |   2 +-
+ tools/binman/ftest.py                     | 103 +++++++++++++++++++++-
+ tools/binman/test/282_symbols_disable.dts |  25 ++++++
+ tools/binman/test/283_mkimage_special.dts |  24 +++++
+ tools/binman/test/284_fit_fdt_list.dts    |  58 ++++++++++++
+ tools/binman/test/285_spl_expand.dts      |  13 +++
+ tools/binman/test/286_entry_template.dts  |  42 +++++++++
+ tools/binman/test/Makefile                |   5 +-
+ tools/binman/test/bss_data.c              |   3 +-
+ tools/binman/test/bss_data_zero.c         |  16 ++++
+ tools/binman/test/bss_data_zero.lds       |  15 ++++
+ tools/binman/test/embed_data.lds          |   1 +
+ tools/dtoc/fdt.py                         |  38 ++++++++
+ tools/dtoc/test/dtoc_test_simple.dts      |  13 ++-
+ tools/dtoc/test_fdt.py                    |  61 +++++++++++++
+ 27 files changed, 599 insertions(+), 57 deletions(-)
+ create mode 100644 tools/binman/test/282_symbols_disable.dts
+ create mode 100644 tools/binman/test/283_mkimage_special.dts
+ create mode 100644 tools/binman/test/284_fit_fdt_list.dts
+ create mode 100644 tools/binman/test/285_spl_expand.dts
+ create mode 100644 tools/binman/test/286_entry_template.dts
+ create mode 100644 tools/binman/test/bss_data_zero.c
+ create mode 100644 tools/binman/test/bss_data_zero.lds
+
 -- 
-2.25.1
+2.41.0.162.gfafddb0af9-goog
 
 _______________________________________________
 Uboot-stm32 mailing list

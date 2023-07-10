@@ -2,50 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BFC874D079
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Jul 2023 10:44:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0136C74D07A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Jul 2023 10:44:19 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B5503C6B44C;
-	Mon, 10 Jul 2023 08:44:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF80FC6B44C;
+	Mon, 10 Jul 2023 08:44:18 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3BC84C6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 38D26C6B44C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Jul 2023 08:44:15 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Mon, 10 Jul 2023 08:44:18 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 36A8R9P8024071; Mon, 10 Jul 2023 10:44:14 +0200
+ 36A58nR3014276; Mon, 10 Jul 2023 10:44:15 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-transfer-encoding :
- content-type; s=selector1;
- bh=TIIiWalts8Yyw6mUQPrUD88+z2c0xsEpC+5LfjBEK8c=;
- b=wrhtwaP/uhjLewdfKEQJGv2ZavaaRjFvm1DldTt1Iij/hcXHURBXo1g9XQSP6KFQDl4A
- 7hMPY2TpeGN7yoOazhRTbM8iXNBorr90TUuufSghnmtlaH/3bduFGm8/oJRdQrqW6VyO
- 65vFflrNF6WpUBFOHERrJ0Z+CCh5bLdcpVht4LPcidcInPyPoRGJDvldMHA6xaNs1XRi
- 848GCeY2dosKOCt1DcEqKOA6u+SJiXOpyIs4aLSLWWnafeLPMxtjS3hbHBDmPA4nu8gA
- Idu1drhqEeFk1v8+wBFmKLPCQQ+tirKMcbgmU56Ec28M9QbzcKbVyq4MewAKFS6OZX2H /Q== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding : content-type; s=selector1;
+ bh=65gXNZG60bhrB/PHRUm1TEX1TfktEa0TgSUYn4R1yo4=;
+ b=J10opmz9PV0oCuwgy9MGDIjlB5lmTMD9Ii2uTxL99dK8b/n+2k1AtaL3HBnAgt+h9LxJ
+ lLiF+L3d7KpHqMrPF+Pp4XMjBenDdW9Bw57YjK4aW8MFXtKSGSR4ZpvGiSOLQbj1VmcO
+ NSXIaBJilp5ez5/8QewXkYjJ6YVdfHpLKyfBkbvxHTw2Ix06510RPkNUrtoeOQ6NwZUJ
+ LRjlcToDbJWwLabgF1CH8vMfrTZUC4VxCGV9JHUb5eBnpY+SPZmCEcKRkxq7BzeFG2/f
+ gAODv/I/sU2AdVBo9Hfx9L6cXWZELJfpfjZ0uAjNfKdW2OAUe67spLbPZ9a1Y9BKcE7A zw== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3rrcekhhsf-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3rpw7hev90-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 10 Jul 2023 10:44:14 +0200
+ Mon, 10 Jul 2023 10:44:15 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 149C910005A;
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CF0D610005D;
  Mon, 10 Jul 2023 10:44:13 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0B45F21ED5A;
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C8DFF21ED5A;
  Mon, 10 Jul 2023 10:44:13 +0200 (CEST)
 Received: from localhost (10.48.1.0) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Mon, 10 Jul
- 2023 10:44:12 +0200
+ 2023 10:44:13 +0200
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 10 Jul 2023 10:44:09 +0200
-Message-ID: <20230710104406.1.Icd397b21b510ba9fc2de7cd4b69835afb131dda7@changeid>
+Date: Mon, 10 Jul 2023 10:44:10 +0200
+Message-ID: <20230710104406.2.Ia58005c96c892d76d149dbad1aa51eb06f60f673@changeid>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230710104406.1.Icd397b21b510ba9fc2de7cd4b69835afb131dda7@changeid>
+References: <20230710104406.1.Icd397b21b510ba9fc2de7cd4b69835afb131dda7@changeid>
 MIME-Version: 1.0
 X-Originating-IP: [10.48.1.0]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
@@ -56,7 +58,7 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  Etienne CARRIERE <etienne.carriere@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 1/2] ARM: dts: sm32mp15: remove shmem for
+Subject: [Uboot-stm32] [PATCH 2/2] ARM: dts: sm32mp13: remove shmem for
 	scmi-optee
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -74,28 +76,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Since OP-TEE commit 89ba3422ee80 ("plat-stm32mp1: scmi_server: default
-use OP-TEE shared memory"), integrated in OP-TEE 3.22.0-rc1
-the default configuration for STM32MP15x SoCs changes,
-CFG_STM32MP1_SCMI_SHM_SYSRAM is disabled by default and the OP-TEE SMCI
-server uses ithe OP-TEE native shared memory registered by clients.
+CFG_STM32MP1_SCMI_SHM_SYSRAM will be disabled by default for STM32MP13x
+SoCs in next OP-TEE version and the OP-TEE SMCI server uses the OP-TEE
+native shared memory registered by clients.
 
-To be compatible by default with this configuration and the next OP-TEE
-version, this patch removes the SHMEM in the SCMI configuration and the
-associated reserved memory in the last 4KByte page of SRAM,
-in the STM32MP15 device tree.
+To be compatible by default with this configuration this patch removes
+the shared memory in the SCMI configuration and the associated reserved
+memory in SRAM.
 
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/dts/stm32mp15-scmi.dtsi | 16 ----------------
- 1 file changed, 16 deletions(-)
+ arch/arm/dts/stm32mp13-u-boot.dtsi |  8 --------
+ arch/arm/dts/stm32mp131.dtsi       | 14 --------------
+ 2 files changed, 22 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp15-scmi.dtsi b/arch/arm/dts/stm32mp15-scmi.dtsi
-index 543f24c2f4f6..ad2584213d99 100644
---- a/arch/arm/dts/stm32mp15-scmi.dtsi
-+++ b/arch/arm/dts/stm32mp15-scmi.dtsi
-@@ -16,7 +16,6 @@
+diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+index 726cd1a7e479..aa5cfc6e41d5 100644
+--- a/arch/arm/dts/stm32mp13-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+@@ -108,14 +108,6 @@
+ 	bootph-all;
+ };
+ 
+-&scmi_shm {
+-	bootph-all;
+-};
+-
+-&scmi_sram {
+-	bootph-all;
+-};
+-
+ &syscfg {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
+index d94ba2547267..f1810c9eb704 100644
+--- a/arch/arm/dts/stm32mp131.dtsi
++++ b/arch/arm/dts/stm32mp131.dtsi
+@@ -40,7 +40,6 @@
  			#address-cells = <1>;
  			#size-cells = <0>;
  			linaro,optee-channel-id = <0>;
@@ -103,12 +122,10 @@ index 543f24c2f4f6..ad2584213d99 100644
  
  			scmi_clk: protocol@14 {
  				reg = <0x14>;
-@@ -60,21 +59,6 @@
- 			};
- 		};
- 	};
--
--	soc {
+@@ -106,19 +105,6 @@
+ 		interrupt-parent = <&intc>;
+ 		ranges;
+ 
 -		scmi_sram: sram@2ffff000 {
 -			compatible = "mmio-sram";
 -			reg = <0x2ffff000 0x1000>;
@@ -121,10 +138,10 @@ index 543f24c2f4f6..ad2584213d99 100644
 -				reg = <0 0x80>;
 -			};
 -		};
--	};
- };
- 
- &reg11 {
+-
+ 		timers2: timer@40000000 {
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
 -- 
 2.25.1
 

@@ -2,51 +2,84 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7EB074E06F
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Jul 2023 23:50:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5116B753EC0
+	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jul 2023 17:25:04 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AFC6C6B459;
-	Mon, 10 Jul 2023 21:50:09 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4A93C6B452;
+	Fri, 14 Jul 2023 15:25:03 +0000 (UTC)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AF3E4C6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D2DDDC6B44C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Jul 2023 21:50:07 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ Fri, 14 Jul 2023 15:25:02 +0000 (UTC)
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id CCB4E10000D;
+ Fri, 14 Jul 2023 18:25:01 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CCB4E10000D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+ s=mail; t=1689348301;
+ bh=7Boj5ot2jlMfSigNogS64kIZimaHIUmFZ008sTIzy2U=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=IEKpECDTnkB52y3AEiKDnOinWffwoFFCq6WlZfIROHpCwMHGV2kAwQmXY4RfgtLGP
+ fvMwWzUOeCBeaKp3JETWFlAUyM4sEyVNehF9Nc11FPG66lxqXAjfE9KKJfeki1XKsd
+ xESdq9FcR8hysE6WoUTBYaGkagaL+d13biL9PMS6SxybzxNgjKwdNbT/uYzA4owYsU
+ qRYFTkCDwDtYQF6R157cmkcsj3Z1XZmewpfzN9KwLN6HziwFKNeEwgCK8J921J4xE6
+ k6eoUpltuLRZKSeWXdwgHBbaw0rOJ3UNU80IhHhL5UAgFpbE34410lmgVIP/spK9ZJ
+ xK8KdhjFEzPxA==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E73E7867A0;
- Mon, 10 Jul 2023 23:50:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1689025807;
- bh=LCex50n1niiC2Wsr52CNFnHSuprq2WgDMPQWty010rc=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=ZAAVHxH2vadbT0bpK8RitolkPdx3bHBei3DA4OvVzd0XN0e/GzNq3TNLciFoiwSWd
- etWqfXi4PosSbC4TLMXTz4yFPchY46OWEbDFkQvemMi9wmsKICHw9ZbH89epVjUCGh
- dJWiJUMqXzUYn+78Q0QHYsqi0RihvBxXuERlWsMZxticsQWSB19sQmAU8llF4RMAfI
- smWtYnL2u94eEIqk+uaTxPqp9zvk6jTO0xD2w+NmOBUUUqOh/VzSTrWEWcM9ise5EG
- HlyumNupQLouDyiRcoxKSoYKX1klXpJNrjbGrpojkXzEmo3ElJSbLl9bw4x0/lRH13
- qL23XFzD068Aw==
-Message-ID: <80feeb5a-0bbb-86ab-bb73-eb322b90f527@denx.de>
-Date: Mon, 10 Jul 2023 23:45:54 +0200
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 14 Jul 2023 18:25:01 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.30; Fri, 14 Jul 2023 18:24:28 +0300
+From: Igor Prusov <ivprusov@sberdevices.ru>
+To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
+ <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, Chia-Wei
+ Wang <chiawei_wang@aspeedtech.com>, Aspeed BMC SW team
+ <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Stefan Roese
+ <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
+ Chotard <patrice.chotard@foss.st.com>
+Date: Fri, 14 Jul 2023 18:24:37 +0300
+Message-ID: <20230714152444.24395-1-ivprusov@sberdevices.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-References: <20230517220239.329807-1-marex@denx.de>
- <586cdbf2-e994-70f5-43a9-1af8214c9118@denx.de>
-In-Reply-To: <586cdbf2-e994-70f5-43a9-1af8214c9118@denx.de>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Power cycle Buck3 in reset on
-	DHSOM
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 178633 [Jul 14 2023]
+X-KSMG-AntiSpam-Version: 5.9.59.0
+X-KSMG-AntiSpam-Envelope-From: IVPrusov@sberdevices.ru
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 523 523
+ 523027ce26ed1d9067f7a52a4756a876e54db27c,
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 127.0.0.199:7.1.2, FromAlignment: s, {Tracking_white_helo}, ApMailHostAddress:
+ 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/07/14 10:15:00 #21613471
+X-KSMG-AntiVirus-Status: Clean, skipped
+Cc: kernel@sberdevices.ru, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, prusovigor@gmail.com,
+ Igor Prusov <ivprusov@sberdevices.ru>
+Subject: [Uboot-stm32] [PATCH v3 0/7] clk: Switch from soc_clk_dump to
+	clk_ops function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -58,30 +91,53 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gNy80LzIzIDIzOjU1LCBNYXJlayBWYXN1dCB3cm90ZToKPiBPbiA1LzE4LzIzIDAwOjAyLCBN
-YXJlayBWYXN1dCB3cm90ZToKPj4gSW4gY2FzZSB0aGUgREhTT00gaXMgaW4gc3VzcGVuZCBzdGF0
-ZSBhbmQgZWl0aGVyIHJlc2V0IGJ1dHRvbiBpcyBwdXNoZWQKPj4gb3IgSVdERzIgdHJpZ2dlcnMg
-YSB3YXRjaGRvZyByZXNldCwgdGhlbiBEUkFNIGluaXRpYWxpemF0aW9uIGNvdWxkIGZhaWwKPj4g
-YXMgZm9sbG93czoKPj4KPj4gwqDCoCAiCj4+IMKgwqAgUkFNOiBERFIzTCAzMmJpdHMgMng0R2Ig
-NTMzTUh6Cj4+IMKgwqAgRERSIGludmFsaWQgc2l6ZSA6IDB4NCwgZXhwZWN0ZWQgMHg0MDAwMDAw
-MAo+PiDCoMKgIERSQU0gaW5pdCBmYWlsZWQ6IC0yMgo+PiDCoMKgICMjIyBFUlJPUiAjIyMgUGxl
-YXNlIFJFU0VUIHRoZSBib2FyZCAjIyMKPj4gwqDCoCAiCj4+Cj4+IEF2b2lkIHRoaXMgZmFpbHVy
-ZSBieSBub3Qga2VlcGluZyBhbnkgQnVjayByZWd1bGF0b3JzIGVuYWJsZWQgZHVyaW5nIAo+PiBy
-ZXNldCwKPj4gbGV0IHRoZSBTb0MgYW5kIERSQU1zIHBvd2VyIGN5Y2xlIGZ1bGx5LiBTaW5jZSB0
-aGUgY2hhbmdlIHdoaWNoIGtlZXBzIAo+PiBCdWNrMwo+PiBWREQgZW5hYmxlZCBkdXJpbmcgcmVz
-ZXQgaXMgU1Qgc3BlY2lmaWMsIG1vdmUgdGhpcyBhZGRpdGlvbiB0byBTVCAKPj4gc3BlY2lmaWMK
-Pj4gU1BMIGJvYXJkIGluaXRpYWxpemF0aW9uIHNvIHRoYXQgaXQgd291bGRuJ3QgYWZmZWN0IHRo
-ZSBESFNPTSAuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRl
-Pgo+PiAtLS0KPj4gTk9URTogVGhpcyBpcyAyMDIzLjA3IG1hdGVyaWFsCj4gCj4gSSBkb24ndCBz
-ZWUgdGhpcyBvbmUgaW4gMjAyMy4wNyB5ZXQsIGNhbiB5b3UgcGxlYXNlIHBpY2sgaXQgYW5kIHNl
-bmQgUFI/CgpTYWRseSwgdGhpcyBidWdmaXggaGFzIG5vdCBtYWRlIGl0IGludG8gMjAyMy4wNywg
-ZXZlbiB0aG91Z2ggdGhlIGZpeCB3YXMgCnBvc3RlZCBhIG1vbnRoIGFuZCBoYWxmIGJlZm9yZSB0
-aGUgYWN0dWFsIHJlbGVhc2UuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWls
-bWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9t
-YWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+Currently clock providers may override default implementation of
+soc_clk_dump function to replace clk dump command output. This causes
+confusing behaviour when u-boot is built with one of such drivers
+enabled but still has clocks defined using CCF. For example, enabling
+CMD_CLK and using clk dump on sandbox target will not show CCF clocks
+because k210 driver overrides common soc_clk_dump.
+
+Changelog:
+ v1 -> v2:
+ - Add missing static to dump functions
+ v2 -> v3:
+ - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
+
+Igor Prusov (7):
+  clk: zynq: Move soc_clk_dump to Zynq clock driver
+  clk: ast2600: Move soc_clk_dump function
+  clk: k210: Move soc_clk_dump function
+  clk: Add dump operation to clk_ops
+  cmd: clk: Use dump function from clk_ops
+  clk: treewide: switch to clock dump from clk_ops
+  cmd: clk: Make soc_clk_dump static
+
+ arch/arm/mach-zynq/clk.c               |  57 --------------
+ arch/mips/mach-pic32/cpu.c             |  23 ------
+ cmd/clk.c                              |  13 +++-
+ drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
+ drivers/clk/clk_k210.c                 | 103 ++++++++++++-------------
+ drivers/clk/clk_pic32.c                |  39 ++++++++++
+ drivers/clk/clk_versal.c               |   7 +-
+ drivers/clk/clk_zynq.c                 |  51 ++++++++++++
+ drivers/clk/clk_zynqmp.c               |  13 ++--
+ drivers/clk/imx/clk-imx8.c             |  11 +--
+ drivers/clk/mvebu/armada-37xx-periph.c |   5 +-
+ drivers/clk/stm32/clk-stm32mp1.c       |  29 ++-----
+ include/clk-uclass.h                   |   3 +
+ include/clk.h                          |   2 -
+ 14 files changed, 223 insertions(+), 216 deletions(-)
+
+-- 
+2.34.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

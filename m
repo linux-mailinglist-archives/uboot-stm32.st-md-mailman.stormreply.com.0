@@ -2,31 +2,31 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AE66753EC1
+	by mail.lfdr.de (Postfix) with ESMTPS id 81CB2753EC2
 	for <lists+uboot-stm32@lfdr.de>; Fri, 14 Jul 2023 17:25:04 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0B02AC6B459;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 181B1C6B45B;
 	Fri, 14 Jul 2023 15:25:04 +0000 (UTC)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2F60EC6B44F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3F5FCC6B452
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Fri, 14 Jul 2023 15:25:03 +0000 (UTC)
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 791EB120006;
+ by mx1.sberdevices.ru (Postfix) with ESMTP id A1F3612000E;
  Fri, 14 Jul 2023 18:25:02 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 791EB120006
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A1F3612000E
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
  s=mail; t=1689348302;
- bh=jGTxk10GVXwoChZo8gLhEquVJTx2A3YO3B3jyjhpAwI=;
+ bh=ZHtDJNhvfijQXbWls33yL7dh/dJM/+t9Re8NULhwrKc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=nYdo7lOaP8/eqSVPvxc1IVbce1AzfjfTzcE3kZvdjng8TTuUMtVUd8S1TbhFUO48p
- OMNEUcSRjf759J7mW7yQWjizKIAp/Lx2xE7tHAsH9JPNCoLDyyfQaeUi+SElNKpPCK
- 1oz9dZQavbSeTGsuIwpBYGPoEUs+axEhVlv8IV2MoNtKW+KUfhp+JKspq1CLZT+Kyp
- IJtE2tqe5sfNqVFxVP28fqjUu6qIUjp5OGL41U5wIPI7gdqc8yU41EQZpXZ5ZpjFfn
- fhw3tZ6CVS/sxZdj1NJSyjCutuM5HQJBl8rw8ZRpH+HceNFFl+fjAySf1YYoFpN+Fc
- aBIwDRq0+6MJA==
+ b=Kee6YSaadF8QbXDnddCYP7dzKy4dA0fwda512GPXuchDHQ6YVwLKPaMgCKkU7FDpg
+ LQg8aAljkga3U2YNntumESVH10lGfbXzgfZinQFVWIYsbVBn7WDNtHX0C3W6LCgrD7
+ QJ7U6w1TZsMhlaZaHqANWrWm23vlLrnL5BpUW67GVz9T29dJMiBvEaRBXiwjLPLPNp
+ VgjlJN0bNQUIW0+sPoqP4ISbmKmhcrn98s4pXBfFzIlMYsjjEmRNHJkdKHzqnOZx0P
+ doSej69DBc/Lj6A4CFRVKyf2wSXr0WfzGwkD70N1QcW3PDzKe+1nM5fEhlxwS00WBu
+ wUhuFApgcoVPw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
@@ -36,7 +36,7 @@ Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Fri, 14 Jul 2023 18:24:28 +0300
+ 15.2.1118.30; Fri, 14 Jul 2023 18:24:29 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
  <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
@@ -45,8 +45,8 @@ To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
  <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Stefan Roese
  <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
  Chotard <patrice.chotard@foss.st.com>
-Date: Fri, 14 Jul 2023 18:24:39 +0300
-Message-ID: <20230714152444.24395-3-ivprusov@sberdevices.ru>
+Date: Fri, 14 Jul 2023 18:24:40 +0300
+Message-ID: <20230714152444.24395-4-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230714152444.24395-1-ivprusov@sberdevices.ru>
 References: <20230714152444.24395-1-ivprusov@sberdevices.ru>
@@ -80,8 +80,7 @@ X-KSMG-AntiVirus-Status: Clean, skipped
 Cc: kernel@sberdevices.ru, u-boot@lists.denx.de,
  uboot-stm32@st-md-mailman.stormreply.com, prusovigor@gmail.com,
  Igor Prusov <ivprusov@sberdevices.ru>
-Subject: [Uboot-stm32] [PATCH v3 2/7] clk: ast2600: Move soc_clk_dump
-	function
+Subject: [Uboot-stm32] [PATCH v3 3/7] clk: k210: Move soc_clk_dump function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,97 +102,116 @@ dump in clk_ops.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
 ---
- drivers/clk/aspeed/clk_ast2600.c | 70 ++++++++++++++++----------------
- 1 file changed, 35 insertions(+), 35 deletions(-)
+ drivers/clk/clk_k210.c | 92 +++++++++++++++++++++---------------------
+ 1 file changed, 46 insertions(+), 46 deletions(-)
 
-diff --git a/drivers/clk/aspeed/clk_ast2600.c b/drivers/clk/aspeed/clk_ast2600.c
-index e5ada5b6d4..b3cc8392fa 100644
---- a/drivers/clk/aspeed/clk_ast2600.c
-+++ b/drivers/clk/aspeed/clk_ast2600.c
-@@ -1104,41 +1104,6 @@ static int ast2600_clk_enable(struct clk *clk)
+diff --git a/drivers/clk/clk_k210.c b/drivers/clk/clk_k210.c
+index c534cc07e0..2f17152021 100644
+--- a/drivers/clk/clk_k210.c
++++ b/drivers/clk/clk_k210.c
+@@ -1238,52 +1238,6 @@ static int k210_clk_request(struct clk *clk)
  	return 0;
  }
  
--struct clk_ops ast2600_clk_ops = {
--	.get_rate = ast2600_clk_get_rate,
--	.set_rate = ast2600_clk_set_rate,
--	.enable = ast2600_clk_enable,
+-static const struct clk_ops k210_clk_ops = {
+-	.request = k210_clk_request,
+-	.set_rate = k210_clk_set_rate,
+-	.get_rate = k210_clk_get_rate,
+-	.set_parent = k210_clk_set_parent,
+-	.enable = k210_clk_enable,
+-	.disable = k210_clk_disable,
 -};
 -
--static int ast2600_clk_probe(struct udevice *dev)
--{
--	struct ast2600_clk_priv *priv = dev_get_priv(dev);
--
--	priv->scu = devfdt_get_addr_ptr(dev);
--	if (IS_ERR(priv->scu))
--		return PTR_ERR(priv->scu);
--
--	ast2600_init_rgmii_clk(priv->scu, &rgmii_clk_defconfig);
--	ast2600_init_rmii_clk(priv->scu, &rmii_clk_defconfig);
--	ast2600_configure_mac12_clk(priv->scu);
--	ast2600_configure_mac34_clk(priv->scu);
--	ast2600_configure_rsa_ecc_clk(priv->scu);
--
--	return 0;
--}
--
--static int ast2600_clk_bind(struct udevice *dev)
+-static int k210_clk_probe(struct udevice *dev)
 -{
 -	int ret;
+-	struct k210_clk_priv *priv = dev_get_priv(dev);
 -
--	/* The reset driver does not have a device node, so bind it here */
--	ret = device_bind_driver(gd->dm_root, "ast_sysreset", "reset", &dev);
+-	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
+-	if (!priv->base)
+-		return -EINVAL;
+-
+-	ret = clk_get_by_index(dev, 0, &priv->in0);
 -	if (ret)
--		debug("Warning: No reset driver: ret=%d\n", ret);
+-		return ret;
+-
+-	/*
+-	 * Force setting defaults, even before relocation. This is so we can
+-	 * set the clock rate for PLL1 before we relocate into aisram.
+-	 */
+-	if (!(gd->flags & GD_FLG_RELOC))
+-		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
 -
 -	return 0;
 -}
 -
- struct aspeed_clks {
- 	ulong id;
- 	const char *name;
-@@ -1203,6 +1168,41 @@ int soc_clk_dump(void)
+-static const struct udevice_id k210_clk_ids[] = {
+-	{ .compatible = "canaan,k210-clk" },
+-	{ },
+-};
+-
+-U_BOOT_DRIVER(k210_clk) = {
+-	.name = "k210_clk",
+-	.id = UCLASS_CLK,
+-	.of_match = k210_clk_ids,
+-	.ops = &k210_clk_ops,
+-	.probe = k210_clk_probe,
+-	.priv_auto = sizeof(struct k210_clk_priv),
+-};
+-
+ #if IS_ENABLED(CONFIG_CMD_CLK)
+ static char show_enabled(struct k210_clk_priv *priv, int id)
+ {
+@@ -1342,3 +1296,49 @@ int soc_clk_dump(void)
  	return 0;
  }
- 
-+struct clk_ops ast2600_clk_ops = {
-+	.get_rate = ast2600_clk_get_rate,
-+	.set_rate = ast2600_clk_set_rate,
-+	.enable = ast2600_clk_enable,
+ #endif
++
++static const struct clk_ops k210_clk_ops = {
++	.request = k210_clk_request,
++	.set_rate = k210_clk_set_rate,
++	.get_rate = k210_clk_get_rate,
++	.set_parent = k210_clk_set_parent,
++	.enable = k210_clk_enable,
++	.disable = k210_clk_disable,
 +};
 +
-+static int ast2600_clk_probe(struct udevice *dev)
-+{
-+	struct ast2600_clk_priv *priv = dev_get_priv(dev);
-+
-+	priv->scu = devfdt_get_addr_ptr(dev);
-+	if (IS_ERR(priv->scu))
-+		return PTR_ERR(priv->scu);
-+
-+	ast2600_init_rgmii_clk(priv->scu, &rgmii_clk_defconfig);
-+	ast2600_init_rmii_clk(priv->scu, &rmii_clk_defconfig);
-+	ast2600_configure_mac12_clk(priv->scu);
-+	ast2600_configure_mac34_clk(priv->scu);
-+	ast2600_configure_rsa_ecc_clk(priv->scu);
-+
-+	return 0;
-+}
-+
-+static int ast2600_clk_bind(struct udevice *dev)
++static int k210_clk_probe(struct udevice *dev)
 +{
 +	int ret;
++	struct k210_clk_priv *priv = dev_get_priv(dev);
 +
-+	/* The reset driver does not have a device node, so bind it here */
-+	ret = device_bind_driver(gd->dm_root, "ast_sysreset", "reset", &dev);
++	priv->base = dev_read_addr_ptr(dev_get_parent(dev));
++	if (!priv->base)
++		return -EINVAL;
++
++	ret = clk_get_by_index(dev, 0, &priv->in0);
 +	if (ret)
-+		debug("Warning: No reset driver: ret=%d\n", ret);
++		return ret;
++
++	/*
++	 * Force setting defaults, even before relocation. This is so we can
++	 * set the clock rate for PLL1 before we relocate into aisram.
++	 */
++	if (!(gd->flags & GD_FLG_RELOC))
++		clk_set_defaults(dev, CLK_DEFAULTS_POST_FORCE);
 +
 +	return 0;
 +}
 +
- static const struct udevice_id ast2600_clk_ids[] = {
- 	{ .compatible = "aspeed,ast2600-scu", },
- 	{ },
++static const struct udevice_id k210_clk_ids[] = {
++	{ .compatible = "canaan,k210-clk" },
++	{ },
++};
++
++U_BOOT_DRIVER(k210_clk) = {
++	.name = "k210_clk",
++	.id = UCLASS_CLK,
++	.of_match = k210_clk_ids,
++	.ops = &k210_clk_ops,
++	.probe = k210_clk_probe,
++	.priv_auto = sizeof(struct k210_clk_priv),
++};
 -- 
 2.34.1
 

@@ -2,58 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D36EE768DE2
+	by mail.lfdr.de (Postfix) with ESMTPS id E1626768DE3
 	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 09:18:22 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 95D6BC7128C;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A281EC7128E;
 	Mon, 31 Jul 2023 07:18:22 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
+ [209.85.218.41])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7A739C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C570CC65E56
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jul 2023 07:36:44 +0000 (UTC)
-Received: from [192.168.0.125] (unknown [82.76.24.202])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 58C426607023;
- Tue, 18 Jul 2023 08:36:42 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1689665803;
- bh=nKEvyCsjjCzCClUKO0fehli+u/RkFJyabRy/TQZdXHo=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ak2pIZXxu7LLOzmQiSslHcW3joT5IYZXop6hh1+GZSThkBDEaN1feum/FtFU5ZXHt
- YMmpA1SEoo8NQRmU5a5q9nz94lFqACg0zsvuuCGGhNWGmFisqVuFqc+X33OLgJNikl
- w3NvEDzTBgYsTOK7dBZxfmt//rudUglrKmButApj/pfxR8XPkOdNdnVXcTzceDzT0+
- tEbYL7zvzPvKtfkHi/Hazf/tJpE3CyKchYMFb5yjaUtRzuCf/7mC3AtQfZ19+zneld
- zP034+zZX2a1kKJFzMSS2ily2jLHDM3Gltvu6yJ5m01GtkoZQfOGSSLknKsnpn3ysT
- ipZtKA47e75lw==
-Message-ID: <f796704a-900e-2794-89fb-26dde4512ad1@collabora.com>
-Date: Tue, 18 Jul 2023 10:36:39 +0300
+ Tue, 18 Jul 2023 07:39:02 +0000 (UTC)
+Received: by mail-ej1-f41.google.com with SMTP id
+ a640c23a62f3a-9924ac01f98so745567166b.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 18 Jul 2023 00:39:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1689665942; x=1692257942;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=veri0XpH5XjPjkGvLfRhprRveQnHHPSDeeeNbViMpTs=;
+ b=dTgUz3DqKfa4naoKgi686DmKdkirnK3eEoygBkVaiGuP/ZwOwICZGJcZGGNYcMLNEr
+ pKmx/NF6NPwZ+pG7CC8Xa6Mjnl+rU/I1D9TTAI7P7jNBmOvfHa3fw3UomRdmNqcPhP2s
+ Fixz154J+NUcVyDvC9tmsPIrDS6YkSW7wIxnjM03lW8zg8EsJVOAtRkHwRRNaNKEwi5Q
+ Ks8f9JpKkkBEM8iUVVVp4gTIOmmGn0hCiP+oMzOf5YhKl0jKcTgN/J2E56yt6Gtk+PH3
+ iilavKjb2noifAGFawAHMMpsJmEdW58gkivoo0jgr0wUrLQ0Q5oqrvSetArep4ciJplZ
+ QqqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689665942; x=1692257942;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=veri0XpH5XjPjkGvLfRhprRveQnHHPSDeeeNbViMpTs=;
+ b=b2ORap7OHXBnfU0UOkd8aM8e86/HiL9waCIJzsc10JA2VwZXmMPGph01rg25i/GMw9
+ UTDUd1XwjcCEEUxDHqn/QW+DhWUDKqsQYXOGez2Fza0kVpRIuyDCjHyiICmw9Wvg3Oo1
+ f5Ltkw0FWtAwpsC4l7FsBP5wgkoz1hU77QroWxdpMAQTDD70xVH3h+yPElK2+KepyAXw
+ JOUMJM3LI+U5PNfB/MBvnWMBzKx4FzInvB0B0xXYssMmzsxc9Cg30M2M2h4gQRv+8dcw
+ 5smYpVZSEkVKZ2H1Chcn64GlYPW5xGfYxyXXORMH8yUYdYo2T7ynQUDSjp58rwS8Pc7P
+ Cu3g==
+X-Gm-Message-State: ABy/qLbJUCpTbzA5gZqNqpfFaIgY1s7jhO7kxmYPVlJlHQT7Bkf4vIqo
+ OzR7mWtECjOud12NcgD9496U/Z9P70P0IlAOMIc=
+X-Google-Smtp-Source: APBJJlHq9FZU3QNni+SmibPtu7Z9rrGBvWtBgjQWRJ2l12eKMDMtrKDk3YaqCYfAN0MjS0Xzff4asmSVBCXRcij451U=
+X-Received: by 2002:a17:907:39b:b0:989:450:e567 with SMTP id
+ ss27-20020a170907039b00b009890450e567mr13199815ejb.65.1689665942086; Tue, 18
+ Jul 2023 00:39:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kostya Porotchkin <kostap@marvell.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Marek Vasut <marex@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
- Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
 References: <20230718070504.19810-1-clamor95@gmail.com>
  <20230718070504.19810-2-clamor95@gmail.com>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20230718070504.19810-2-clamor95@gmail.com>
+ <f796704a-900e-2794-89fb-26dde4512ad1@collabora.com>
+In-Reply-To: <f796704a-900e-2794-89fb-26dde4512ad1@collabora.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 18 Jul 2023 10:38:51 +0300
+Message-ID: <CAPVz0n3FDTs7LKCXe0DEc7bN3uS7xvJ8+SvURYV6CfcO2MayWQ@mail.gmail.com>
+To: Eugen Hristev <eugen.hristev@collabora.com>
 X-Mailman-Approved-At: Mon, 31 Jul 2023 07:18:21 +0000
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- u-boot@dh-electronics.com, u-boot-amlogic@groups.io
+Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot@dh-electronics.com, Matteo Lisi <matteo.lisi@engicam.com>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot-amlogic@groups.io,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kostya Porotchkin <kostap@marvell.com>, Anatolij Gustschin <agust@denx.de>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Subject: Re: [Uboot-stm32] [PATCH v1 1/4] power: regulator: expand basic
  reference counter onto all uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -67,172 +82,127 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Svyatoslav,
-
-
-On 7/18/23 10:05, Svyatoslav Ryhel wrote:
-> Commit is based on 4fcba5d ("regulator: implement basic reference
-> counter") but expands the idea to all regulators instead of just
-> fixed/gpio regulators.
-> 
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->   drivers/power/regulator/regulator-uclass.c | 22 ++++++++++++++++++++++
->   drivers/power/regulator/regulator_common.c | 22 ----------------------
->   drivers/power/regulator/regulator_common.h | 21 ---------------------
->   include/power/regulator.h                  |  2 ++
->   4 files changed, 24 insertions(+), 43 deletions(-)
-> 
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 3a6ba69f6d..c9194fe95c 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -172,6 +172,23 @@ int regulator_set_enable(struct udevice *dev, bool enable)
->   	if (!enable && uc_pdata->always_on)
->   		return -EACCES;
->   
-> +	/* If previously enabled, increase count */
-> +	if (enable && uc_pdata->enable_count > 0) {
-> +		uc_pdata->enable_count++;
-> +		return -EALREADY;
-> +	}
-> +
-> +	if (!enable) {
-> +		if (uc_pdata->enable_count > 1) {
-> +			/* If enabled multiple times, decrease count */
-> +			uc_pdata->enable_count--;
-> +			return -EBUSY;
-> +		} else if (!uc_pdata->enable_count) {
-> +			/* If already disabled, do nothing */
-> +			return -EALREADY;
-> +		}
-> +	}
-> +
->   	if (uc_pdata->ramp_delay)
->   		old_enable = regulator_get_enable(dev);
->   
-> @@ -187,6 +204,11 @@ int regulator_set_enable(struct udevice *dev, bool enable)
->   		}
->   	}
->   
-> +	if (enable)
-> +		uc_pdata->enable_count++;
-> +	else
-> +		uc_pdata->enable_count--;
-> +
->   	return ret;
->   }
->   
-> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-> index e26f5ebec3..d88bc6f6de 100644
-> --- a/drivers/power/regulator/regulator_common.c
-> +++ b/drivers/power/regulator/regulator_common.c
-> @@ -72,23 +72,6 @@ int regulator_common_set_enable(const struct udevice *dev,
->   		return 0;
->   	}
->   
-> -	/* If previously enabled, increase count */
-> -	if (enable && plat->enable_count > 0) {
-> -		plat->enable_count++;
-> -		return -EALREADY;
-> -	}
-> -
-> -	if (!enable) {
-> -		if (plat->enable_count > 1) {
-> -			/* If enabled multiple times, decrease count */
-> -			plat->enable_count--;
-> -			return -EBUSY;
-> -		} else if (!plat->enable_count) {
-> -			/* If already disabled, do nothing */
-> -			return -EALREADY;
-> -		}
-> -	}
-> -
->   	ret = dm_gpio_set_value(&plat->gpio, enable);
->   	if (ret) {
->   		pr_err("Can't set regulator : %s gpio to: %d\n", dev->name,
-> @@ -103,10 +86,5 @@ int regulator_common_set_enable(const struct udevice *dev,
->   	if (!enable && plat->off_on_delay_us)
->   		udelay(plat->off_on_delay_us);
->   
-> -	if (enable)
-> -		plat->enable_count++;
-> -	else
-> -		plat->enable_count--;
-> -
->   	return 0;
->   }
-> diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
-> index d4962899d8..15f1fa4c93 100644
-> --- a/drivers/power/regulator/regulator_common.h
-> +++ b/drivers/power/regulator/regulator_common.h
-> @@ -13,7 +13,6 @@ struct regulator_common_plat {
->   	struct gpio_desc gpio; /* GPIO for regulator enable control */
->   	unsigned int startup_delay_us;
->   	unsigned int off_on_delay_us;
-> -	unsigned int enable_count;
->   };
->   
->   int regulator_common_of_to_plat(struct udevice *dev,
-> @@ -21,26 +20,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
->   				char *enable_gpio_name);
->   int regulator_common_get_enable(const struct udevice *dev,
->   	struct regulator_common_plat *plat);
-> -/*
-> - * Enable or Disable a regulator
-> - *
-> - * This is a reentrant function and subsequent calls that enable will
-> - * increase an internal counter, and disable calls will decrease the counter.
-> - * The actual resource will be enabled when the counter gets to 1 coming from 0,
-> - * and disabled when it reaches 0 coming from 1.
-> - *
-> - * @dev: regulator device
-> - * @plat: Platform data
-> - * @enable: bool indicating whether to enable or disable the regulator
-> - * @return:
-> - * 0 on Success
-> - * -EBUSY if the regulator cannot be disabled because it's requested by
-> - *        another device
-> - * -EALREADY if the regulator has already been enabled or has already been
-> - *        disabled
-> - * -EACCES if there is no possibility to enable/disable the regulator
-> - * -ve on different error situation
-> - */
-
-Can't this whole documentation that you are removing be in fact 
-integrated into the documentation for the function you moved the 
-reference counter housekeeping to ?
-
->   int regulator_common_set_enable(const struct udevice *dev,
->   	struct regulator_common_plat *plat, bool enable);
->   
-> diff --git a/include/power/regulator.h b/include/power/regulator.h
-> index ff1bfc2435..727776a8cf 100644
-> --- a/include/power/regulator.h
-> +++ b/include/power/regulator.h
-> @@ -158,6 +158,7 @@ enum regulator_flag {
->    * @name**     - fdt regulator name - should be taken from the device tree
->    * ctrl_reg:   - Control register offset used to enable/disable regulator
->    * volt_reg:   - register offset for writing voltage vsel values
-> + * enable_count - counter of enable calls for this regulator
->    *
->    * Note:
->    * *  - set automatically on device probe by the uclass's '.pre_probe' method.
-> @@ -184,6 +185,7 @@ struct dm_regulator_uclass_plat {
->   	u8 volt_reg;
->   	bool suspend_on;
->   	u32 suspend_uV;
-> +	u32 enable_count;
->   };
->   
->   /* Regulator device operations */
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+0LLRgiwgMTgg0LvQuNC/LiAyMDIz4oCv0YAuINC+IDEwOjM2IEV1Z2VuIEhyaXN0ZXYgPGV1Z2Vu
+LmhyaXN0ZXZAY29sbGFib3JhLmNvbT4g0L/QuNGI0LU6Cj4KPiBIaSBTdnlhdG9zbGF2LAo+Cj4K
+PiBPbiA3LzE4LzIzIDEwOjA1LCBTdnlhdG9zbGF2IFJ5aGVsIHdyb3RlOgo+ID4gQ29tbWl0IGlz
+IGJhc2VkIG9uIDRmY2JhNWQgKCJyZWd1bGF0b3I6IGltcGxlbWVudCBiYXNpYyByZWZlcmVuY2UK
+PiA+IGNvdW50ZXIiKSBidXQgZXhwYW5kcyB0aGUgaWRlYSB0byBhbGwgcmVndWxhdG9ycyBpbnN0
+ZWFkIG9mIGp1c3QKPiA+IGZpeGVkL2dwaW8gcmVndWxhdG9ycy4KPiA+Cj4gPiBTaWduZWQtb2Zm
+LWJ5OiBTdnlhdG9zbGF2IFJ5aGVsIDxjbGFtb3I5NUBnbWFpbC5jb20+Cj4gPiAtLS0KPiA+ICAg
+ZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yLXVjbGFzcy5jIHwgMjIgKysrKysrKysr
+KysrKysrKysrKysrKwo+ID4gICBkcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3JfY29t
+bW9uLmMgfCAyMiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gPiAgIGRyaXZlcnMvcG93ZXIvcmVn
+dWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uaCB8IDIxIC0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ID4g
+ICBpbmNsdWRlL3Bvd2VyL3JlZ3VsYXRvci5oICAgICAgICAgICAgICAgICAgfCAgMiArKwo+ID4g
+ICA0IGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKyksIDQzIGRlbGV0aW9ucygtKQo+ID4K
+PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNz
+LmMgYi9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMKPiA+IGluZGV4
+IDNhNmJhNjlmNmQuLmM5MTk0ZmU5NWMgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3Bvd2VyL3Jl
+Z3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMKPiA+ICsrKyBiL2RyaXZlcnMvcG93ZXIvcmVndWxh
+dG9yL3JlZ3VsYXRvci11Y2xhc3MuYwo+ID4gQEAgLTE3Miw2ICsxNzIsMjMgQEAgaW50IHJlZ3Vs
+YXRvcl9zZXRfZW5hYmxlKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGJvb2wgZW5hYmxlKQo+ID4gICAg
+ICAgaWYgKCFlbmFibGUgJiYgdWNfcGRhdGEtPmFsd2F5c19vbikKPiA+ICAgICAgICAgICAgICAg
+cmV0dXJuIC1FQUNDRVM7Cj4gPgo+ID4gKyAgICAgLyogSWYgcHJldmlvdXNseSBlbmFibGVkLCBp
+bmNyZWFzZSBjb3VudCAqLwo+ID4gKyAgICAgaWYgKGVuYWJsZSAmJiB1Y19wZGF0YS0+ZW5hYmxl
+X2NvdW50ID4gMCkgewo+ID4gKyAgICAgICAgICAgICB1Y19wZGF0YS0+ZW5hYmxlX2NvdW50Kys7
+Cj4gPiArICAgICAgICAgICAgIHJldHVybiAtRUFMUkVBRFk7Cj4gPiArICAgICB9Cj4gPiArCj4g
+PiArICAgICBpZiAoIWVuYWJsZSkgewo+ID4gKyAgICAgICAgICAgICBpZiAodWNfcGRhdGEtPmVu
+YWJsZV9jb3VudCA+IDEpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAvKiBJZiBlbmFibGVk
+IG11bHRpcGxlIHRpbWVzLCBkZWNyZWFzZSBjb3VudCAqLwo+ID4gKyAgICAgICAgICAgICAgICAg
+ICAgIHVjX3BkYXRhLT5lbmFibGVfY291bnQtLTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICBy
+ZXR1cm4gLUVCVVNZOwo+ID4gKyAgICAgICAgICAgICB9IGVsc2UgaWYgKCF1Y19wZGF0YS0+ZW5h
+YmxlX2NvdW50KSB7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgLyogSWYgYWxyZWFkeSBkaXNh
+YmxlZCwgZG8gbm90aGluZyAqLwo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRUFM
+UkVBRFk7Cj4gPiArICAgICAgICAgICAgIH0KPiA+ICsgICAgIH0KPiA+ICsKPiA+ICAgICAgIGlm
+ICh1Y19wZGF0YS0+cmFtcF9kZWxheSkKPiA+ICAgICAgICAgICAgICAgb2xkX2VuYWJsZSA9IHJl
+Z3VsYXRvcl9nZXRfZW5hYmxlKGRldik7Cj4gPgo+ID4gQEAgLTE4Nyw2ICsyMDQsMTEgQEAgaW50
+IHJlZ3VsYXRvcl9zZXRfZW5hYmxlKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGJvb2wgZW5hYmxlKQo+
+ID4gICAgICAgICAgICAgICB9Cj4gPiAgICAgICB9Cj4gPgo+ID4gKyAgICAgaWYgKGVuYWJsZSkK
+PiA+ICsgICAgICAgICAgICAgdWNfcGRhdGEtPmVuYWJsZV9jb3VudCsrOwo+ID4gKyAgICAgZWxz
+ZQo+ID4gKyAgICAgICAgICAgICB1Y19wZGF0YS0+ZW5hYmxlX2NvdW50LS07Cj4gPiArCj4gPiAg
+ICAgICByZXR1cm4gcmV0Owo+ID4gICB9Cj4gPgo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcG93
+ZXIvcmVndWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uYyBiL2RyaXZlcnMvcG93ZXIvcmVndWxhdG9y
+L3JlZ3VsYXRvcl9jb21tb24uYwo+ID4gaW5kZXggZTI2ZjVlYmVjMy4uZDg4YmM2ZjZkZSAxMDA2
+NDQKPiA+IC0tLSBhL2RyaXZlcnMvcG93ZXIvcmVndWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uYwo+
+ID4gKysrIGIvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5jCj4gPiBA
+QCAtNzIsMjMgKzcyLDYgQEAgaW50IHJlZ3VsYXRvcl9jb21tb25fc2V0X2VuYWJsZShjb25zdCBz
+dHJ1Y3QgdWRldmljZSAqZGV2LAo+ID4gICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICAgICAg
+IH0KPiA+Cj4gPiAtICAgICAvKiBJZiBwcmV2aW91c2x5IGVuYWJsZWQsIGluY3JlYXNlIGNvdW50
+ICovCj4gPiAtICAgICBpZiAoZW5hYmxlICYmIHBsYXQtPmVuYWJsZV9jb3VudCA+IDApIHsKPiA+
+IC0gICAgICAgICAgICAgcGxhdC0+ZW5hYmxlX2NvdW50Kys7Cj4gPiAtICAgICAgICAgICAgIHJl
+dHVybiAtRUFMUkVBRFk7Cj4gPiAtICAgICB9Cj4gPiAtCj4gPiAtICAgICBpZiAoIWVuYWJsZSkg
+ewo+ID4gLSAgICAgICAgICAgICBpZiAocGxhdC0+ZW5hYmxlX2NvdW50ID4gMSkgewo+ID4gLSAg
+ICAgICAgICAgICAgICAgICAgIC8qIElmIGVuYWJsZWQgbXVsdGlwbGUgdGltZXMsIGRlY3JlYXNl
+IGNvdW50ICovCj4gPiAtICAgICAgICAgICAgICAgICAgICAgcGxhdC0+ZW5hYmxlX2NvdW50LS07
+Cj4gPiAtICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FQlVTWTsKPiA+IC0gICAgICAgICAg
+ICAgfSBlbHNlIGlmICghcGxhdC0+ZW5hYmxlX2NvdW50KSB7Cj4gPiAtICAgICAgICAgICAgICAg
+ICAgICAgLyogSWYgYWxyZWFkeSBkaXNhYmxlZCwgZG8gbm90aGluZyAqLwo+ID4gLSAgICAgICAg
+ICAgICAgICAgICAgIHJldHVybiAtRUFMUkVBRFk7Cj4gPiAtICAgICAgICAgICAgIH0KPiA+IC0g
+ICAgIH0KPiA+IC0KPiA+ICAgICAgIHJldCA9IGRtX2dwaW9fc2V0X3ZhbHVlKCZwbGF0LT5ncGlv
+LCBlbmFibGUpOwo+ID4gICAgICAgaWYgKHJldCkgewo+ID4gICAgICAgICAgICAgICBwcl9lcnIo
+IkNhbid0IHNldCByZWd1bGF0b3IgOiAlcyBncGlvIHRvOiAlZFxuIiwgZGV2LT5uYW1lLAo+ID4g
+QEAgLTEwMywxMCArODYsNSBAQCBpbnQgcmVndWxhdG9yX2NvbW1vbl9zZXRfZW5hYmxlKGNvbnN0
+IHN0cnVjdCB1ZGV2aWNlICpkZXYsCj4gPiAgICAgICBpZiAoIWVuYWJsZSAmJiBwbGF0LT5vZmZf
+b25fZGVsYXlfdXMpCj4gPiAgICAgICAgICAgICAgIHVkZWxheShwbGF0LT5vZmZfb25fZGVsYXlf
+dXMpOwo+ID4KPiA+IC0gICAgIGlmIChlbmFibGUpCj4gPiAtICAgICAgICAgICAgIHBsYXQtPmVu
+YWJsZV9jb3VudCsrOwo+ID4gLSAgICAgZWxzZQo+ID4gLSAgICAgICAgICAgICBwbGF0LT5lbmFi
+bGVfY291bnQtLTsKPiA+IC0KPiA+ICAgICAgIHJldHVybiAwOwo+ID4gICB9Cj4gPiBkaWZmIC0t
+Z2l0IGEvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5oIGIvZHJpdmVy
+cy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5oCj4gPiBpbmRleCBkNDk2Mjg5OWQ4
+Li4xNWYxZmE0YzkzIDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVn
+dWxhdG9yX2NvbW1vbi5oCj4gPiArKysgYi9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0
+b3JfY29tbW9uLmgKPiA+IEBAIC0xMyw3ICsxMyw2IEBAIHN0cnVjdCByZWd1bGF0b3JfY29tbW9u
+X3BsYXQgewo+ID4gICAgICAgc3RydWN0IGdwaW9fZGVzYyBncGlvOyAvKiBHUElPIGZvciByZWd1
+bGF0b3IgZW5hYmxlIGNvbnRyb2wgKi8KPiA+ICAgICAgIHVuc2lnbmVkIGludCBzdGFydHVwX2Rl
+bGF5X3VzOwo+ID4gICAgICAgdW5zaWduZWQgaW50IG9mZl9vbl9kZWxheV91czsKPiA+IC0gICAg
+IHVuc2lnbmVkIGludCBlbmFibGVfY291bnQ7Cj4gPiAgIH07Cj4gPgo+ID4gICBpbnQgcmVndWxh
+dG9yX2NvbW1vbl9vZl90b19wbGF0KHN0cnVjdCB1ZGV2aWNlICpkZXYsCj4gPiBAQCAtMjEsMjYg
+KzIwLDYgQEAgaW50IHJlZ3VsYXRvcl9jb21tb25fb2ZfdG9fcGxhdChzdHJ1Y3QgdWRldmljZSAq
+ZGV2LAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhciAqZW5hYmxlX2dwaW9f
+bmFtZSk7Cj4gPiAgIGludCByZWd1bGF0b3JfY29tbW9uX2dldF9lbmFibGUoY29uc3Qgc3RydWN0
+IHVkZXZpY2UgKmRldiwKPiA+ICAgICAgIHN0cnVjdCByZWd1bGF0b3JfY29tbW9uX3BsYXQgKnBs
+YXQpOwo+ID4gLS8qCj4gPiAtICogRW5hYmxlIG9yIERpc2FibGUgYSByZWd1bGF0b3IKPiA+IC0g
+Kgo+ID4gLSAqIFRoaXMgaXMgYSByZWVudHJhbnQgZnVuY3Rpb24gYW5kIHN1YnNlcXVlbnQgY2Fs
+bHMgdGhhdCBlbmFibGUgd2lsbAo+ID4gLSAqIGluY3JlYXNlIGFuIGludGVybmFsIGNvdW50ZXIs
+IGFuZCBkaXNhYmxlIGNhbGxzIHdpbGwgZGVjcmVhc2UgdGhlIGNvdW50ZXIuCj4gPiAtICogVGhl
+IGFjdHVhbCByZXNvdXJjZSB3aWxsIGJlIGVuYWJsZWQgd2hlbiB0aGUgY291bnRlciBnZXRzIHRv
+IDEgY29taW5nIGZyb20gMCwKPiA+IC0gKiBhbmQgZGlzYWJsZWQgd2hlbiBpdCByZWFjaGVzIDAg
+Y29taW5nIGZyb20gMS4KPiA+IC0gKgo+ID4gLSAqIEBkZXY6IHJlZ3VsYXRvciBkZXZpY2UKPiA+
+IC0gKiBAcGxhdDogUGxhdGZvcm0gZGF0YQo+ID4gLSAqIEBlbmFibGU6IGJvb2wgaW5kaWNhdGlu
+ZyB3aGV0aGVyIHRvIGVuYWJsZSBvciBkaXNhYmxlIHRoZSByZWd1bGF0b3IKPiA+IC0gKiBAcmV0
+dXJuOgo+ID4gLSAqIDAgb24gU3VjY2Vzcwo+ID4gLSAqIC1FQlVTWSBpZiB0aGUgcmVndWxhdG9y
+IGNhbm5vdCBiZSBkaXNhYmxlZCBiZWNhdXNlIGl0J3MgcmVxdWVzdGVkIGJ5Cj4gPiAtICogICAg
+ICAgIGFub3RoZXIgZGV2aWNlCj4gPiAtICogLUVBTFJFQURZIGlmIHRoZSByZWd1bGF0b3IgaGFz
+IGFscmVhZHkgYmVlbiBlbmFibGVkIG9yIGhhcyBhbHJlYWR5IGJlZW4KPiA+IC0gKiAgICAgICAg
+ZGlzYWJsZWQKPiA+IC0gKiAtRUFDQ0VTIGlmIHRoZXJlIGlzIG5vIHBvc3NpYmlsaXR5IHRvIGVu
+YWJsZS9kaXNhYmxlIHRoZSByZWd1bGF0b3IKPiA+IC0gKiAtdmUgb24gZGlmZmVyZW50IGVycm9y
+IHNpdHVhdGlvbgo+ID4gLSAqLwo+Cj4gQ2FuJ3QgdGhpcyB3aG9sZSBkb2N1bWVudGF0aW9uIHRo
+YXQgeW91IGFyZSByZW1vdmluZyBiZSBpbiBmYWN0Cj4gaW50ZWdyYXRlZCBpbnRvIHRoZSBkb2N1
+bWVudGF0aW9uIGZvciB0aGUgZnVuY3Rpb24geW91IG1vdmVkIHRoZQo+IHJlZmVyZW5jZSBjb3Vu
+dGVyIGhvdXNla2VlcGluZyB0byA/CgpZZXMgc3VyZSwgSSB3YXMgbm90IHF1aXRlIHN1cmUgd2hl
+cmUgdG8gaW5zZXJ0IGl0LgoKPiA+ICAgaW50IHJlZ3VsYXRvcl9jb21tb25fc2V0X2VuYWJsZShj
+b25zdCBzdHJ1Y3QgdWRldmljZSAqZGV2LAo+ID4gICAgICAgc3RydWN0IHJlZ3VsYXRvcl9jb21t
+b25fcGxhdCAqcGxhdCwgYm9vbCBlbmFibGUpOwo+ID4KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRl
+L3Bvd2VyL3JlZ3VsYXRvci5oIGIvaW5jbHVkZS9wb3dlci9yZWd1bGF0b3IuaAo+ID4gaW5kZXgg
+ZmYxYmZjMjQzNS4uNzI3Nzc2YThjZiAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUvcG93ZXIvcmVn
+dWxhdG9yLmgKPiA+ICsrKyBiL2luY2x1ZGUvcG93ZXIvcmVndWxhdG9yLmgKPiA+IEBAIC0xNTgs
+NiArMTU4LDcgQEAgZW51bSByZWd1bGF0b3JfZmxhZyB7Cj4gPiAgICAqIEBuYW1lKiogICAgIC0g
+ZmR0IHJlZ3VsYXRvciBuYW1lIC0gc2hvdWxkIGJlIHRha2VuIGZyb20gdGhlIGRldmljZSB0cmVl
+Cj4gPiAgICAqIGN0cmxfcmVnOiAgIC0gQ29udHJvbCByZWdpc3RlciBvZmZzZXQgdXNlZCB0byBl
+bmFibGUvZGlzYWJsZSByZWd1bGF0b3IKPiA+ICAgICogdm9sdF9yZWc6ICAgLSByZWdpc3RlciBv
+ZmZzZXQgZm9yIHdyaXRpbmcgdm9sdGFnZSB2c2VsIHZhbHVlcwo+ID4gKyAqIGVuYWJsZV9jb3Vu
+dCAtIGNvdW50ZXIgb2YgZW5hYmxlIGNhbGxzIGZvciB0aGlzIHJlZ3VsYXRvcgo+ID4gICAgKgo+
+ID4gICAgKiBOb3RlOgo+ID4gICAgKiAqICAtIHNldCBhdXRvbWF0aWNhbGx5IG9uIGRldmljZSBw
+cm9iZSBieSB0aGUgdWNsYXNzJ3MgJy5wcmVfcHJvYmUnIG1ldGhvZC4KPiA+IEBAIC0xODQsNiAr
+MTg1LDcgQEAgc3RydWN0IGRtX3JlZ3VsYXRvcl91Y2xhc3NfcGxhdCB7Cj4gPiAgICAgICB1OCB2
+b2x0X3JlZzsKPiA+ICAgICAgIGJvb2wgc3VzcGVuZF9vbjsKPiA+ICAgICAgIHUzMiBzdXNwZW5k
+X3VWOwo+ID4gKyAgICAgdTMyIGVuYWJsZV9jb3VudDsKPiA+ICAgfTsKPiA+Cj4gPiAgIC8qIFJl
+Z3VsYXRvciBkZXZpY2Ugb3BlcmF0aW9ucyAqLwo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0z
+MkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9y
+bXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

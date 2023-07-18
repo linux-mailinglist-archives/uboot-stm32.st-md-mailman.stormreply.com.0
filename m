@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B6A4768DDE
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E74768DDF
 	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 09:18:22 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5DC8BC71284;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68A68C71286;
 	Mon, 31 Jul 2023 07:18:22 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
+ [209.85.208.169])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BBCEBC6905A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 956CFC6905A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jul 2023 07:05:13 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-3fb4146e8deso55475385e9.0
+ Tue, 18 Jul 2023 07:05:16 +0000 (UTC)
+Received: by mail-lj1-f169.google.com with SMTP id
+ 38308e7fff4ca-2b701e41cd3so81802271fa.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jul 2023 00:05:13 -0700 (PDT)
+ Tue, 18 Jul 2023 00:05:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689663913; x=1692255913;
+ d=gmail.com; s=20221208; t=1689663916; x=1692255916;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IKqUzXTzYjYAE8sUPlOBQdG6Q7E1DH2PAP55cGMJcaM=;
- b=CUpO2UeeoFjFSwb2fMlCpvJ6CFfZCHgQVeIRF5LUW4a9mdizYhCf6KCc7+BlfL+hJV
- z1QCN9NMkCMN3M4UwzPYcdwoZlk8f81jSOUFZID/ZEjB5foShwm6Os4v8OKuIdG8XNd5
- xaJn3pGVgrGSV4jvpzhufnOTa4gdqDtj7Cjuzjzu/xhQbZDjtv1JMLKtKEP6HdQ2wEiM
- djH36oMnsGusL9AI0CRtcRFuSu127TQKmFM8+wYh6Vdf9bZQZTrES2VQnKi5hTaBNF8Q
- S41bt5JH/Dbn5YZpAa1JFMYeirMh1fBZd6qJ4nusHqjIpFbnFqlNDR5Jjr9vzdyZqFbQ
- dHaQ==
+ bh=A6G7E5ipCrosvGQQkn4jfmgHERivNKh0KXtbT0v6bdI=;
+ b=lhi5H7PTSGoByXRKWlMP+MqB+8SUeCKvSERpCvXKUL8pv6Ceg2Sn4UQXW3esRJGqHc
+ s31QollA+nCvrS+81U6WL5hYtecgp3qZ99xnTivQJ4BdWVomOjg4KykOS8qcoj1AAtHf
+ rQTy7FR4o7+uk+2m5m9rBgczUpsfAjIVVOSjL9jIhaIWemtebAQV1fo9kPAjCYqBlQSf
+ 66PK50ueTkHFn0wduzFGUxlSIh7W2rXrvfPnhhwPD7HXTlKeipTOZ6pwdpTa5rtVdrWh
+ H4Juz9zi1+gXiB0fVREzQyia+mKETWfRCDKeJxmwrqp+fk/90f2K1ay/pjKmOc/VA3nA
+ koZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689663913; x=1692255913;
+ d=1e100.net; s=20221208; t=1689663916; x=1692255916;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IKqUzXTzYjYAE8sUPlOBQdG6Q7E1DH2PAP55cGMJcaM=;
- b=gY9Cwbq1DWGPfPFCbfhtqdD28YdK4MlJfQmmxd8BNzUOWeVdA1E2T2YAhD17Jgha3T
- dJ80wnx7q/rSIXH09DIr+A34XiFls7xFmz3Mp0XnQrbr99vFnq9RftKLxaI52552lVDq
- 3E7Leb/Ckwg1qBMt2QjtyJwBu+p8uQL22NgeUtGR2571oYImFe4DLndopt7CTQrkciwd
- aTVEBx980nzQQMS3ql3ikRHORgIasOkyjjXdEq7jkLJMzUf+5rPm3N3UwFUWK2aXzehz
- nEn0BZrEV4BgwNyiWybFbTwCMxJbRozGCBwePGUp2sqehV9CNEoIwZ6vrgXB06B6DXrC
- 8JVA==
-X-Gm-Message-State: ABy/qLbAJVRHNS/xL7KVvUqLzQc6YSxLIY394E2lJHfm7+S7bJMeGxYk
- v6C9BFUpTGCNuJFB2vAHCLc=
-X-Google-Smtp-Source: APBJJlHFRcjZbLadG5DmpE39Y3cv3MQjHA+a7zncgqiAypZRVtCqNtsR/suByc1bhT29/sUHJjBD1Q==
-X-Received: by 2002:a05:600c:11c8:b0:3fb:fa26:45a8 with SMTP id
- b8-20020a05600c11c800b003fbfa2645a8mr1303292wmi.28.1689663912982; 
- Tue, 18 Jul 2023 00:05:12 -0700 (PDT)
+ bh=A6G7E5ipCrosvGQQkn4jfmgHERivNKh0KXtbT0v6bdI=;
+ b=GtHQopz2WK/aykBzX3wARMcCa3UFAnBAn9PNf0U19Lg2pzzYhtIVXQ0myUYzAKgxxT
+ Y08zN22HIye77nY2SyT9vezy4QeWU6JTbiDkgZUoy1wHaQDIZcVC6H5sRzHYHzPV7b1p
+ dV9RCNsxf8Ymf9f0ll4iaqTkAUimSX1ScLCqvHlzOiK5/ZuyEYFW3sK48mEJNaDy5wUS
+ 3K+9mjfbp5u9E2UCnKZIFIfDiOg6lNYoTgXgaMhQzlLQd0BXyCgBDubC+E8GIyVSbBAs
+ ywgXikIv9sqMyfwtTvcDwO+fbIgBHqqHvHZaEI4rwUYaJAIDNGiBCs29xfWy1sFito1z
+ GmoQ==
+X-Gm-Message-State: ABy/qLbzMQ7FVOdAS+28VmX20D/m02HS4qMtEYAgjJ8V/JOWejum+XS5
+ 19l51w04VJM7QC/HtnlYrFg=
+X-Google-Smtp-Source: APBJJlG2j75yRD6AyGnEhb0NOPh5333sAHBsN8LRDXrdsvEe6kC2qqNPbHTqK1WhW3HLE01+E3o9HQ==
+X-Received: by 2002:a2e:888a:0:b0:2b8:39e4:2e2c with SMTP id
+ k10-20020a2e888a000000b002b839e42e2cmr7964182lji.1.1689663915601; 
+ Tue, 18 Jul 2023 00:05:15 -0700 (PDT)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- z10-20020a05600c220a00b003fbfea1afffsm1343644wml.27.2023.07.18.00.05.11
+ z10-20020a05600c220a00b003fbfea1afffsm1343644wml.27.2023.07.18.00.05.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Jul 2023 00:05:12 -0700 (PDT)
+ Tue, 18 Jul 2023 00:05:14 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>,
@@ -66,8 +66,8 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  Eugen Hristev <eugen.hristev@collabora.com>
-Date: Tue, 18 Jul 2023 10:05:01 +0300
-Message-Id: <20230718070504.19810-2-clamor95@gmail.com>
+Date: Tue, 18 Jul 2023 10:05:02 +0300
+Message-Id: <20230718070504.19810-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230718070504.19810-1-clamor95@gmail.com>
 References: <20230718070504.19810-1-clamor95@gmail.com>
@@ -75,8 +75,8 @@ MIME-Version: 1.0
 X-Mailman-Approved-At: Mon, 31 Jul 2023 07:18:21 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  u-boot@dh-electronics.com, u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v1 1/4] power: regulator: expand basic
-	reference counter onto all uclass
+Subject: [Uboot-stm32] [PATCH v1 2/4] power: regulator-uclass: perform
+	regulator setup inside uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,156 +93,418 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Commit is based on 4fcba5d ("regulator: implement basic reference
-counter") but expands the idea to all regulators instead of just
-fixed/gpio regulators.
+Regulators initial setup was previously dependent on board call.
+To move from this behaviour were introduced two steps. First is
+that all individual regulators will be probed just after binding
+which ensures that regulator pdata is filled and second is setting
+up regulator in post probe which enseres that correct regulator
+state according to pdata is reached.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/power/regulator/regulator-uclass.c | 22 ++++++++++++++++++++++
- drivers/power/regulator/regulator_common.c | 22 ----------------------
- drivers/power/regulator/regulator_common.h | 21 ---------------------
- include/power/regulator.h                  |  2 ++
- 4 files changed, 24 insertions(+), 43 deletions(-)
+ drivers/power/regulator/regulator-uclass.c | 212 ++++++---------------
+ include/power/regulator.h                  | 119 ------------
+ 2 files changed, 62 insertions(+), 269 deletions(-)
 
 diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 3a6ba69f6d..c9194fe95c 100644
+index c9194fe95c..8edc983eae 100644
 --- a/drivers/power/regulator/regulator-uclass.c
 +++ b/drivers/power/regulator/regulator-uclass.c
-@@ -172,6 +172,23 @@ int regulator_set_enable(struct udevice *dev, bool enable)
- 	if (!enable && uc_pdata->always_on)
- 		return -EACCES;
+@@ -308,112 +308,6 @@ int device_get_supply_regulator(struct udevice *dev, const char *supply_name,
+ 					    supply_name, devp);
+ }
  
-+	/* If previously enabled, increase count */
-+	if (enable && uc_pdata->enable_count > 0) {
-+		uc_pdata->enable_count++;
-+		return -EALREADY;
-+	}
-+
-+	if (!enable) {
-+		if (uc_pdata->enable_count > 1) {
-+			/* If enabled multiple times, decrease count */
-+			uc_pdata->enable_count--;
-+			return -EBUSY;
-+		} else if (!uc_pdata->enable_count) {
-+			/* If already disabled, do nothing */
-+			return -EALREADY;
-+		}
-+	}
-+
- 	if (uc_pdata->ramp_delay)
- 		old_enable = regulator_get_enable(dev);
+-int regulator_autoset(struct udevice *dev)
+-{
+-	struct dm_regulator_uclass_plat *uc_pdata;
+-	int ret = 0;
+-
+-	uc_pdata = dev_get_uclass_plat(dev);
+-
+-	ret = regulator_set_suspend_enable(dev, uc_pdata->suspend_on);
+-	if (ret == -ENOSYS)
+-		ret = 0;
+-
+-	if (!ret && uc_pdata->suspend_on) {
+-		ret = regulator_set_suspend_value(dev, uc_pdata->suspend_uV);
+-		if (ret == -ENOSYS)
+-			ret = 0;
+-
+-		if (ret)
+-			return ret;
+-	}
+-
+-	if (!uc_pdata->always_on && !uc_pdata->boot_on)
+-		return -EMEDIUMTYPE;
+-
+-	if (uc_pdata->type == REGULATOR_TYPE_FIXED)
+-		return regulator_set_enable(dev, true);
+-
+-	if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UV)
+-		ret = regulator_set_value(dev, uc_pdata->min_uV);
+-	if (uc_pdata->init_uV > 0)
+-		ret = regulator_set_value(dev, uc_pdata->init_uV);
+-	if (!ret && (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UA))
+-		ret = regulator_set_current(dev, uc_pdata->min_uA);
+-
+-	if (!ret)
+-		ret = regulator_set_enable(dev, true);
+-
+-	return ret;
+-}
+-
+-int regulator_unset(struct udevice *dev)
+-{
+-	struct dm_regulator_uclass_plat *uc_pdata;
+-
+-	uc_pdata = dev_get_uclass_plat(dev);
+-	if (uc_pdata && uc_pdata->force_off)
+-		return regulator_set_enable(dev, false);
+-
+-	return -EMEDIUMTYPE;
+-}
+-
+-static void regulator_show(struct udevice *dev, int ret)
+-{
+-	struct dm_regulator_uclass_plat *uc_pdata;
+-
+-	uc_pdata = dev_get_uclass_plat(dev);
+-
+-	printf("%s@%s: ", dev->name, uc_pdata->name);
+-	if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UV)
+-		printf("set %d uV", uc_pdata->min_uV);
+-	if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UA)
+-		printf("; set %d uA", uc_pdata->min_uA);
+-	printf("; enabling");
+-	if (ret)
+-		printf(" (ret: %d)", ret);
+-	printf("\n");
+-}
+-
+-int regulator_autoset_by_name(const char *platname, struct udevice **devp)
+-{
+-	struct udevice *dev;
+-	int ret;
+-
+-	ret = regulator_get_by_platname(platname, &dev);
+-	if (devp)
+-		*devp = dev;
+-	if (ret) {
+-		debug("Can get the regulator: %s (err=%d)\n", platname, ret);
+-		return ret;
+-	}
+-
+-	return regulator_autoset(dev);
+-}
+-
+-int regulator_list_autoset(const char *list_platname[],
+-			   struct udevice *list_devp[],
+-			   bool verbose)
+-{
+-	struct udevice *dev;
+-	int error = 0, i = 0, ret;
+-
+-	while (list_platname[i]) {
+-		ret = regulator_autoset_by_name(list_platname[i], &dev);
+-		if (ret != -EMEDIUMTYPE && verbose)
+-			regulator_show(dev, ret);
+-		if (ret & !error)
+-			error = ret;
+-
+-		if (list_devp)
+-			list_devp[i] = dev;
+-
+-		i++;
+-	}
+-
+-	return error;
+-}
+-
+ static bool regulator_name_is_unique(struct udevice *check_dev,
+ 				     const char *check_name)
+ {
+@@ -444,6 +338,7 @@ static int regulator_post_bind(struct udevice *dev)
+ {
+ 	struct dm_regulator_uclass_plat *uc_pdata;
+ 	const char *property = "regulator-name";
++	int ret;
  
-@@ -187,6 +204,11 @@ int regulator_set_enable(struct udevice *dev, bool enable)
- 		}
+ 	uc_pdata = dev_get_uclass_plat(dev);
+ 
+@@ -457,13 +352,28 @@ static int regulator_post_bind(struct udevice *dev)
+ 			return -EINVAL;
  	}
  
-+	if (enable)
-+		uc_pdata->enable_count++;
-+	else
-+		uc_pdata->enable_count--;
+-	if (regulator_name_is_unique(dev, uc_pdata->name))
+-		return 0;
++	ret = regulator_name_is_unique(dev, uc_pdata->name);
++	if (!ret) {
++		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
++		      property, dev->name, uc_pdata->name);
++		return -EINVAL;
++	}
+ 
+-	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+-	      property, dev->name, uc_pdata->name);
++	switch (device_get_uclass_id(dev->parent)) {
++	/* In case class can have regulator child add it here */
++	case UCLASS_PMIC:
++		break;
++
++	default:
++		/*
++		 * Trigger probe() to configure default
++		 * regulators state during startup.
++		 */
++		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
++		break;
++	}
+ 
+-	return -EINVAL;
++	return 0;
+ }
+ 
+ static int regulator_pre_probe(struct udevice *dev)
+@@ -517,55 +427,56 @@ static int regulator_pre_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-int regulators_enable_boot_on(bool verbose)
++static int regulator_post_probe(struct udevice *dev)
+ {
+-	struct udevice *dev;
+-	struct uclass *uc;
++	struct dm_regulator_uclass_plat *uc_pdata =
++					 dev_get_uclass_plat(dev);
+ 	int ret;
+ 
+-	ret = uclass_get(UCLASS_REGULATOR, &uc);
+-	if (ret)
+-		return ret;
+-	for (uclass_first_device(UCLASS_REGULATOR, &dev);
+-	     dev;
+-	     uclass_next_device(&dev)) {
+-		ret = regulator_autoset(dev);
+-		if (ret == -EMEDIUMTYPE) {
+-			ret = 0;
+-			continue;
+-		}
+-		if (verbose)
+-			regulator_show(dev, ret);
+-		if (ret == -ENOSYS)
+-			ret = 0;
+-	}
++	/*
++	 * Disable is performed in case regulator was somehow
++	 * active, for example it is active by PMIC design etc.
++	 */
++	uc_pdata->enable_count = 1;
++	regulator_set_enable_if_allowed(dev, false);
+ 
+-	return ret;
+-}
++	/*
++	 * Always-on regulator can not be disabled so zero out
++	 * enable_count in case regulator has this property.
++	 */
++	uc_pdata->enable_count = 0;
+ 
+-int regulators_enable_boot_off(bool verbose)
+-{
+-	struct udevice *dev;
+-	struct uclass *uc;
+-	int ret;
++	if (uc_pdata->force_off && uc_pdata->enable_count)
++		return 0;
+ 
+-	ret = uclass_get(UCLASS_REGULATOR, &uc);
+-	if (ret)
+-		return ret;
+-	for (uclass_first_device(UCLASS_REGULATOR, &dev);
+-	     dev;
+-	     uclass_next_device(&dev)) {
+-		ret = regulator_unset(dev);
+-		if (ret == -EMEDIUMTYPE) {
+-			ret = 0;
+-			continue;
+-		}
+-		if (verbose)
+-			regulator_show(dev, ret);
++	ret = regulator_set_suspend_enable(dev, uc_pdata->suspend_on);
++	if (ret == -ENOSYS)
++		ret = 0;
++
++	if (!ret && uc_pdata->suspend_on) {
++		ret = regulator_set_suspend_value(dev, uc_pdata->suspend_uV);
+ 		if (ret == -ENOSYS)
+ 			ret = 0;
++
++		if (ret)
++			return ret;
++	}
++
++	if (uc_pdata->type != REGULATOR_TYPE_FIXED) {
++		if (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UV)
++			ret = regulator_set_value(dev, uc_pdata->min_uV);
++		if (uc_pdata->init_uV > 0)
++			ret = regulator_set_value(dev, uc_pdata->init_uV);
++		if (!ret && (uc_pdata->flags & REGULATOR_FLAG_AUTOSET_UA))
++			ret = regulator_set_current(dev, uc_pdata->min_uA);
+ 	}
+ 
++	if (!uc_pdata->always_on && !uc_pdata->boot_on)
++		return 0;
++
++	if (!ret)
++		ret = regulator_set_enable_if_allowed(dev, true);
 +
  	return ret;
  }
  
-diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-index e26f5ebec3..d88bc6f6de 100644
---- a/drivers/power/regulator/regulator_common.c
-+++ b/drivers/power/regulator/regulator_common.c
-@@ -72,23 +72,6 @@ int regulator_common_set_enable(const struct udevice *dev,
- 		return 0;
- 	}
- 
--	/* If previously enabled, increase count */
--	if (enable && plat->enable_count > 0) {
--		plat->enable_count++;
--		return -EALREADY;
--	}
--
--	if (!enable) {
--		if (plat->enable_count > 1) {
--			/* If enabled multiple times, decrease count */
--			plat->enable_count--;
--			return -EBUSY;
--		} else if (!plat->enable_count) {
--			/* If already disabled, do nothing */
--			return -EALREADY;
--		}
--	}
--
- 	ret = dm_gpio_set_value(&plat->gpio, enable);
- 	if (ret) {
- 		pr_err("Can't set regulator : %s gpio to: %d\n", dev->name,
-@@ -103,10 +86,5 @@ int regulator_common_set_enable(const struct udevice *dev,
- 	if (!enable && plat->off_on_delay_us)
- 		udelay(plat->off_on_delay_us);
- 
--	if (enable)
--		plat->enable_count++;
--	else
--		plat->enable_count--;
--
- 	return 0;
- }
-diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
-index d4962899d8..15f1fa4c93 100644
---- a/drivers/power/regulator/regulator_common.h
-+++ b/drivers/power/regulator/regulator_common.h
-@@ -13,7 +13,6 @@ struct regulator_common_plat {
- 	struct gpio_desc gpio; /* GPIO for regulator enable control */
- 	unsigned int startup_delay_us;
- 	unsigned int off_on_delay_us;
--	unsigned int enable_count;
+@@ -574,5 +485,6 @@ UCLASS_DRIVER(regulator) = {
+ 	.name		= "regulator",
+ 	.post_bind	= regulator_post_bind,
+ 	.pre_probe	= regulator_pre_probe,
++	.post_probe	= regulator_post_probe,
+ 	.per_device_plat_auto	= sizeof(struct dm_regulator_uclass_plat),
  };
- 
- int regulator_common_of_to_plat(struct udevice *dev,
-@@ -21,26 +20,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
- 				char *enable_gpio_name);
- int regulator_common_get_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat);
--/*
-- * Enable or Disable a regulator
-- *
-- * This is a reentrant function and subsequent calls that enable will
-- * increase an internal counter, and disable calls will decrease the counter.
-- * The actual resource will be enabled when the counter gets to 1 coming from 0,
-- * and disabled when it reaches 0 coming from 1.
-- *
-- * @dev: regulator device
-- * @plat: Platform data
-- * @enable: bool indicating whether to enable or disable the regulator
-- * @return:
-- * 0 on Success
-- * -EBUSY if the regulator cannot be disabled because it's requested by
-- *        another device
-- * -EALREADY if the regulator has already been enabled or has already been
-- *        disabled
-- * -EACCES if there is no possibility to enable/disable the regulator
-- * -ve on different error situation
-- */
- int regulator_common_set_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat, bool enable);
- 
 diff --git a/include/power/regulator.h b/include/power/regulator.h
-index ff1bfc2435..727776a8cf 100644
+index 727776a8cf..e58e2dee16 100644
 --- a/include/power/regulator.h
 +++ b/include/power/regulator.h
-@@ -158,6 +158,7 @@ enum regulator_flag {
-  * @name**     - fdt regulator name - should be taken from the device tree
-  * ctrl_reg:   - Control register offset used to enable/disable regulator
-  * volt_reg:   - register offset for writing voltage vsel values
-+ * enable_count - counter of enable calls for this regulator
-  *
-  * Note:
-  * *  - set automatically on device probe by the uclass's '.pre_probe' method.
-@@ -184,6 +185,7 @@ struct dm_regulator_uclass_plat {
- 	u8 volt_reg;
- 	bool suspend_on;
- 	u32 suspend_uV;
-+	u32 enable_count;
- };
+@@ -413,104 +413,6 @@ int regulator_get_mode(struct udevice *dev);
+  */
+ int regulator_set_mode(struct udevice *dev, int mode_id);
  
- /* Regulator device operations */
+-/**
+- * regulators_enable_boot_on() - enable regulators needed for boot
+- *
+- * This enables all regulators which are marked to be on at boot time. This
+- * only works for regulators which don't have a range for voltage/current,
+- * since in that case it is not possible to know which value to use.
+- *
+- * This effectively calls regulator_autoset() for every regulator.
+- */
+-int regulators_enable_boot_on(bool verbose);
+-
+-/**
+- * regulators_enable_boot_off() - disable regulators needed for boot
+- *
+- * This disables all regulators which are marked to be off at boot time.
+- *
+- * This effectively calls regulator_unset() for every regulator.
+- */
+-int regulators_enable_boot_off(bool verbose);
+-
+-/**
+- * regulator_autoset: setup the voltage/current on a regulator
+- *
+- * The setup depends on constraints found in device's uclass's platform data
+- * (struct dm_regulator_uclass_plat):
+- *
+- * - Enable - will set - if any of: 'always_on' or 'boot_on' is set to true,
+- *   or if both are unset, then the function returns
+- * - Voltage value - will set - if '.min_uV' and '.max_uV' values are equal
+- * - Current limit - will set - if '.min_uA' and '.max_uA' values are equal
+- *
+- * The function returns on the first-encountered error.
+- *
+- * @platname - expected string for dm_regulator_uclass_plat .name field
+- * @devp     - returned pointer to the regulator device - if non-NULL passed
+- * @return: 0 on success or negative value of errno.
+- */
+-int regulator_autoset(struct udevice *dev);
+-
+-/**
+- * regulator_unset: turn off a regulator
+- *
+- * The setup depends on constraints found in device's uclass's platform data
+- * (struct dm_regulator_uclass_platdata):
+- *
+- * - Disable - will set - if  'force_off' is set to true,
+- *
+- * The function returns on the first-encountered error.
+- */
+-int regulator_unset(struct udevice *dev);
+-
+-/**
+- * regulator_autoset_by_name: setup the regulator given by its uclass's
+- * platform data name field. The setup depends on constraints found in device's
+- * uclass's platform data (struct dm_regulator_uclass_plat):
+- * - Enable - will set - if any of: 'always_on' or 'boot_on' is set to true,
+- *   or if both are unset, then the function returns
+- * - Voltage value - will set - if '.min_uV' and '.max_uV' values are equal
+- * - Current limit - will set - if '.min_uA' and '.max_uA' values are equal
+- *
+- * The function returns on first encountered error.
+- *
+- * @platname - expected string for dm_regulator_uclass_plat .name field
+- * @devp     - returned pointer to the regulator device - if non-NULL passed
+- * @return: 0 on success or negative value of errno.
+- *
+- * The returned 'regulator' device can be used with:
+- * - regulator_get/set_*
+- */
+-int regulator_autoset_by_name(const char *platname, struct udevice **devp);
+-
+-/**
+- * regulator_list_autoset: setup the regulators given by list of their uclass's
+- * platform data name field. The setup depends on constraints found in device's
+- * uclass's platform data. The function loops with calls to:
+- * regulator_autoset_by_name() for each name from the list.
+- *
+- * @list_platname - an array of expected strings for .name field of each
+- *                  regulator's uclass plat
+- * @list_devp     - an array of returned pointers to the successfully setup
+- *                  regulator devices if non-NULL passed
+- * @verbose       - (true/false) print each regulator setup info, or be quiet
+- * Return: 0 on successfully setup of all list entries, otherwise first error.
+- *
+- * The returned 'regulator' devices can be used with:
+- * - regulator_get/set_*
+- *
+- * Note: The list must ends with NULL entry, like in the "platname" list below:
+- * char *my_regulators[] = {
+- *     "VCC_3.3V",
+- *     "VCC_1.8V",
+- *     NULL,
+- * };
+- */
+-int regulator_list_autoset(const char *list_platname[],
+-			   struct udevice *list_devp[],
+-			   bool verbose);
+-
+ /**
+  * regulator_get_by_devname: returns the pointer to the pmic regulator device.
+  * Search by name, found in regulator device's name.
+@@ -628,27 +530,6 @@ static inline int regulator_set_mode(struct udevice *dev, int mode_id)
+ 	return -ENOSYS;
+ }
+ 
+-static inline int regulators_enable_boot_on(bool verbose)
+-{
+-	return -ENOSYS;
+-}
+-
+-static inline int regulator_autoset(struct udevice *dev)
+-{
+-	return -ENOSYS;
+-}
+-
+-static inline int regulator_autoset_by_name(const char *platname, struct udevice **devp)
+-{
+-	return -ENOSYS;
+-}
+-
+-static inline int regulator_list_autoset(const char *list_platname[], struct udevice *list_devp[],
+-					 bool verbose)
+-{
+-	return -ENOSYS;
+-}
+-
+ static inline int regulator_get_by_devname(const char *devname, struct udevice **devp)
+ {
+ 	return -ENOSYS;
 -- 
 2.39.2
 

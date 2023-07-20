@@ -2,55 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4693B768DE4
+	by mail.lfdr.de (Postfix) with ESMTPS id 53083768DE5
 	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 09:18:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09D73C71290;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 17A51C71292;
 	Mon, 31 Jul 2023 07:18:23 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
- [209.85.167.49])
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com
+ [209.85.167.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 57E3CC6A5E6
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7D64BC6A5E6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 20 Jul 2023 12:38:11 +0000 (UTC)
-Received: by mail-lf1-f49.google.com with SMTP id
- 2adb3069b0e04-4fcd615d7d6so1149381e87.3
+ Thu, 20 Jul 2023 12:38:12 +0000 (UTC)
+Received: by mail-lf1-f44.google.com with SMTP id
+ 2adb3069b0e04-4fb8574a3a1so1186624e87.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 20 Jul 2023 05:38:11 -0700 (PDT)
+ Thu, 20 Jul 2023 05:38:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689856690; x=1690461490;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lrrz0d5RxzUIsxuaCwltwlvw/gjUD5Ldtj+D9gKLfFw=;
- b=YttmLnQr6VwkDXoJsQGbyj35USbVqUTmFLWEAGt8yhzIe8nCpymadQsstPxpAfbrsd
- ZVqOz8r2RAMCt92lQOirLZsGKeHjGy4gbc1vH3puPR/o3rK5Xkt6ypeNPI9KTzUp72fr
- Yz+/Xltd86YgE0A+E36CmSfcGE4JX/FYXscAtzKb3z13sPbfwAStBThtsnrccqoSukTF
- 9dAESc6tLU/zdkQQZYF3geKAmRHxW/xXKIwuJo4vqjAkHLYxWf65eDuHwp1yIgsp2A8U
- Mzfq0JoZEpZ+8GsqKSeZtlbXgtDGoqL77c9tSVv+p0GSEtd1CpUXasY6/iFTrFbeEnvD
- K2+Q==
+ d=gmail.com; s=20221208; t=1689856692; x=1690461492;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/KZrhZrqiVdn5n8gz0ReZJzeLX7eg9+htgLnIhkF1Gg=;
+ b=SyDpWHPnx6xNEgVzOqTcAxDTIErZ6ZY0FRF8VFQ0nc26LAb5SyTWyHBRZsnq8s4PtD
+ UP14VjYcmslAhTaqRiM24uCWr5tLrOcJhqb/B8gVJi4G6LETanY2tYcn3X53FO4LeyHI
+ JChtDG1QeZYT6MlsaBIt2HbKqWeu9TuuU9XyKLTxnqoQiB2ANP8JXE7L2IBP0lz4Qyjv
+ Fs8KTtQ+J5LSLRM5zp19bSd02ya5MregA7zqnztD2GwFC1qXX4RnSVb12uzMcKMk/T7m
+ UmaU3yKC4ttWCqlL3Qkrv/kzkcVOZbcoSXwjHPeQwcq6K04vZpqZl4EBQbrIzTX+M3VZ
+ J6vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689856690; x=1690461490;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lrrz0d5RxzUIsxuaCwltwlvw/gjUD5Ldtj+D9gKLfFw=;
- b=F+bMhVUvrEP37u4sVzm2elNaXkVxDNycTgrlHJOCCpHWuLuVS3AyeG4bpeySj70qQC
- jMJPQD/NK50CoJ+qiOMObjh9oty3UZbGD/saz2LIRSBWVv8irgCcpeO3ININrnj2p4y7
- y4XX3ZSB+Gqt76LNidf7iZtf/YswjqfquA5esAMpRlgIz+4K1ttyHdzasA7qRGvZnI/y
- FWMcba/6K6RX0fDpCmczeAyuIb30e1YwUpArX2Fi/B8dyAStIPEpoT3wg7d/inuzf0EK
- XSMYWtAuaqk0CQUKtmtBDR2TD4kDc0SdQlpEsfzJ+I196Vm3YSY6/tgYmY3kDJcdDAlY
- pVTg==
-X-Gm-Message-State: ABy/qLaVgZEPKkMmoARf11iipAnPkmCrIjRr8QLUZBsmUZwPjfzv8iD3
- ln/7eA9nVJVUF/zOYohRkwU=
-X-Google-Smtp-Source: APBJJlGaPxZtjACjzezA5zprsZbVZFjzxshZ/WIBA6QPtp2cZuN6MW/mCHypaZiLg5U+patD2sVvpw==
-X-Received: by 2002:a05:6512:e85:b0:4fb:8f79:631 with SMTP id
- bi5-20020a0565120e8500b004fb8f790631mr2261103lfb.46.1689856690095; 
- Thu, 20 Jul 2023 05:38:10 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1689856692; x=1690461492;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/KZrhZrqiVdn5n8gz0ReZJzeLX7eg9+htgLnIhkF1Gg=;
+ b=Fg1mYk8ln0LSd9eXH74N1FaD0MlsOJPltaQ6XV+SsEkovq1PfQVF6yYNIFrsbljsBI
+ RQvOmY+L56QxanG99BBKZzUSm5Wiaw7erkxJG2v18gEuE4bo5hGDvDaJ0P9AiCTTWdF6
+ wlk39/PyYuMvrXt9YY2qf9UgCZ5PQO3j6Q5gpqh9OiPCvheinwH2mm2fx6mzVf31DKSb
+ /d1nuMUnmqrubjC/VHphXy3H+Z9aVgqLFfn6av+YIp0EjFZJZ95v7ZsTASlYbf3IZ71A
+ 1EEiVDRPQv4EZC2Pz2uCccXFPlrbToqKyr/PhiWjOqGmikgyS0ba8DszL+7xBYlX0//y
+ q9Qw==
+X-Gm-Message-State: ABy/qLYeijeu4CvgiLHWt6n+QUcvThpKLORD4PnnE6zHr+MrnwQd92+o
+ hiUhXH1x+HLk4D9mtr85NvY=
+X-Google-Smtp-Source: APBJJlF+PvMB2Ra4mxZlxIAaetgofG2NcFZEj4qUz/WOhd56CYKBtVPwPfiVkJwzaaik4XpvJSF8OQ==
+X-Received: by 2002:ac2:442d:0:b0:4f3:b588:48d0 with SMTP id
+ w13-20020ac2442d000000b004f3b58848d0mr1911883lfl.14.1689856691555; 
+ Thu, 20 Jul 2023 05:38:11 -0700 (PDT)
 Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
- m25-20020ac24ad9000000b004fb9c625b4asm184401lfp.210.2023.07.20.05.38.08
+ m25-20020ac24ad9000000b004fb9c625b4asm184401lfp.210.2023.07.20.05.38.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Jul 2023 05:38:09 -0700 (PDT)
+ Thu, 20 Jul 2023 05:38:11 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>,
@@ -64,15 +65,17 @@ To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  Eugen Hristev <eugen.hristev@collabora.com>
-Date: Thu, 20 Jul 2023 15:37:37 +0300
-Message-Id: <20230720123744.26854-1-clamor95@gmail.com>
+Date: Thu, 20 Jul 2023 15:37:38 +0300
+Message-Id: <20230720123744.26854-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20230720123744.26854-1-clamor95@gmail.com>
+References: <20230720123744.26854-1-clamor95@gmail.com>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Mon, 31 Jul 2023 07:18:21 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  u-boot@dh-electronics.com, u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v2 0/7] General regulator and pmic uclass
-	improvements
+Subject: [Uboot-stm32] [PATCH v2 1/7] power: regulator: expand basic
+	reference counter onto all uclass
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,82 +92,182 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This patchset derives from discussion of TPS65913 bringup and aims to
-cycle all regulator management inside uclass removing need of any board
-calls for regulators.
+Commit is based on 4fcba5d ("regulator: implement basic reference
+counter") but expands the idea to all regulators instead of just
+fixed/gpio regulators.
 
-My hw setup is Tegra 3 LG Optimus Vu P895 (PMIC is MAX77663) with native
-spl u-boot build.
-
-power: regulator: expand basic reference counter onto all uclass
-Commit is basically expansion of 4fcba5d ("regulator: implement basic
-reference counter") onto all regulators.
- - my testing on hw has shown no issues so far with both pmic regulators
- and fixed regulators. Counting works as expected, dm test is set in
- test of regulator_set_enable_if_allowed.
-
-power: regulator-uclass: perform regulator setup inside uclass
-All self-sufficient regulators are set to probe after bind to perform
-initial setup later in post-probe with pdata from device tree.
- - self-sufficient regulator is one that is not dependent on any other
- device (this category does not include pmic regulators for example).
- I have tested fixed regulators and got correct probing and setup
- according to device tree. DM test is set by checking regulators data
- without pre-configuring them manually
-
-power: pmic-uclass: probe every child on pmic_post_probe
-All non self-sufficient regulators must be probed after main device is
-probed (in this case it is pmic_post_probe). In all other aspects pmic
-regulators behave same.
- - tested with MAX77663 ldo and sd regulators, no errors or inconsistencies
- were tracked, regulator props (boot-on, always-on etc) and consumer calls
- work as expected. DM test is set by checking regulators data without pre-
- configuring them manually just after pmic probe.
-
-power: regulator-uclass: remove all deprecated API use
-This is where everything gets tricky. All board dedicated API of regulators
-has to be removed. System presented above should cover all regulators setup
-but non the less this should be disscussed with maintainers and tested on
-affected boards. This commit removes and cleans most of those API traces.
-
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes from v1:
- - adapted description of regulator_set_enable
- - remove uc_pdata->enable_count from post_probe
- - added tests from counter and regulators post_probe
----
+ drivers/power/regulator/regulator-uclass.c | 41 ++++++++++++++++++++++
+ drivers/power/regulator/regulator_common.c | 22 ------------
+ drivers/power/regulator/regulator_common.h | 21 -----------
+ include/power/regulator.h                  |  2 ++
+ 4 files changed, 43 insertions(+), 43 deletions(-)
 
-Svyatoslav Ryhel (7):
-  power: regulator: expand basic reference counter onto all uclass
-  test: dm: regulator: test counter in set_enable_if_allowed test
-  power: regulator-uclass: perform regulator setup inside uclass
-  test: dm: regulator: provide test of auto setup
-  power: pmic-uclass: probe every child on pmic_post_probe
-  test: dm: pmic: provide test of child autosetup
-  power: regulator-uclass: remove all deprecated API use
-
- arch/arm/mach-rockchip/board.c                |   8 -
- arch/arm/mach-rockchip/rk3399/rk3399.c        |  10 -
- board/Marvell/octeontx2_cn913x/board.c        |   5 -
- .../amlogic/odroid-go-ultra/odroid-go-ultra.c |   2 -
- board/dhelectronics/dh_stm32mp1/board.c       |   2 -
- board/engicam/stm32mp1/stm32mp1.c             |   3 -
- board/google/veyron/veyron.c                  |   6 -
- board/samsung/common/exynos5-dt.c             |   4 -
- board/samsung/odroid/odroid.c                 |  10 -
- board/st/stm32mp1/stm32mp1.c                  |   9 -
- drivers/power/pmic/pmic-uclass.c              |  10 +
- drivers/power/regulator/regulator-uclass.c    | 253 +++++++-----------
- drivers/power/regulator/regulator_common.c    |  22 --
- drivers/power/regulator/regulator_common.h    |  21 --
- drivers/video/bridge/ps862x.c                 |  12 +-
- drivers/video/rockchip/rk_vop.c               |   6 +-
- include/power/regulator.h                     | 121 +--------
- include/power/sandbox_pmic.h                  |   2 +-
- test/dm/pmic.c                                |  34 +++
- test/dm/regulator.c                           | 148 +++-------
- 20 files changed, 204 insertions(+), 484 deletions(-)
-
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 3a6ba69f6d..fc7a4631b4 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -159,6 +159,25 @@ int regulator_get_enable(struct udevice *dev)
+ 	return ops->get_enable(dev);
+ }
+ 
++/*
++ * Enable or Disable a regulator
++ *
++ * This is a reentrant function and subsequent calls that enable will
++ * increase an internal counter, and disable calls will decrease the counter.
++ * The actual resource will be enabled when the counter gets to 1 coming from 0,
++ * and disabled when it reaches 0 coming from 1.
++ *
++ * @dev: regulator device
++ * @enable: bool indicating whether to enable or disable the regulator
++ * @return:
++ * 0 on Success
++ * -EBUSY if the regulator cannot be disabled because it's requested by
++ *        another device
++ * -EALREADY if the regulator has already been enabled or has already been
++ *        disabled
++ * -EACCES if there is no possibility to enable/disable the regulator
++ * -ve on different error situation
++ */
+ int regulator_set_enable(struct udevice *dev, bool enable)
+ {
+ 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+@@ -172,6 +191,23 @@ int regulator_set_enable(struct udevice *dev, bool enable)
+ 	if (!enable && uc_pdata->always_on)
+ 		return -EACCES;
+ 
++	/* If previously enabled, increase count */
++	if (enable && uc_pdata->enable_count > 0) {
++		uc_pdata->enable_count++;
++		return -EALREADY;
++	}
++
++	if (!enable) {
++		if (uc_pdata->enable_count > 1) {
++			/* If enabled multiple times, decrease count */
++			uc_pdata->enable_count--;
++			return -EBUSY;
++		} else if (!uc_pdata->enable_count) {
++			/* If already disabled, do nothing */
++			return -EALREADY;
++		}
++	}
++
+ 	if (uc_pdata->ramp_delay)
+ 		old_enable = regulator_get_enable(dev);
+ 
+@@ -187,6 +223,11 @@ int regulator_set_enable(struct udevice *dev, bool enable)
+ 		}
+ 	}
+ 
++	if (enable)
++		uc_pdata->enable_count++;
++	else
++		uc_pdata->enable_count--;
++
+ 	return ret;
+ }
+ 
+diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+index e26f5ebec3..d88bc6f6de 100644
+--- a/drivers/power/regulator/regulator_common.c
++++ b/drivers/power/regulator/regulator_common.c
+@@ -72,23 +72,6 @@ int regulator_common_set_enable(const struct udevice *dev,
+ 		return 0;
+ 	}
+ 
+-	/* If previously enabled, increase count */
+-	if (enable && plat->enable_count > 0) {
+-		plat->enable_count++;
+-		return -EALREADY;
+-	}
+-
+-	if (!enable) {
+-		if (plat->enable_count > 1) {
+-			/* If enabled multiple times, decrease count */
+-			plat->enable_count--;
+-			return -EBUSY;
+-		} else if (!plat->enable_count) {
+-			/* If already disabled, do nothing */
+-			return -EALREADY;
+-		}
+-	}
+-
+ 	ret = dm_gpio_set_value(&plat->gpio, enable);
+ 	if (ret) {
+ 		pr_err("Can't set regulator : %s gpio to: %d\n", dev->name,
+@@ -103,10 +86,5 @@ int regulator_common_set_enable(const struct udevice *dev,
+ 	if (!enable && plat->off_on_delay_us)
+ 		udelay(plat->off_on_delay_us);
+ 
+-	if (enable)
+-		plat->enable_count++;
+-	else
+-		plat->enable_count--;
+-
+ 	return 0;
+ }
+diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
+index d4962899d8..15f1fa4c93 100644
+--- a/drivers/power/regulator/regulator_common.h
++++ b/drivers/power/regulator/regulator_common.h
+@@ -13,7 +13,6 @@ struct regulator_common_plat {
+ 	struct gpio_desc gpio; /* GPIO for regulator enable control */
+ 	unsigned int startup_delay_us;
+ 	unsigned int off_on_delay_us;
+-	unsigned int enable_count;
+ };
+ 
+ int regulator_common_of_to_plat(struct udevice *dev,
+@@ -21,26 +20,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
+ 				char *enable_gpio_name);
+ int regulator_common_get_enable(const struct udevice *dev,
+ 	struct regulator_common_plat *plat);
+-/*
+- * Enable or Disable a regulator
+- *
+- * This is a reentrant function and subsequent calls that enable will
+- * increase an internal counter, and disable calls will decrease the counter.
+- * The actual resource will be enabled when the counter gets to 1 coming from 0,
+- * and disabled when it reaches 0 coming from 1.
+- *
+- * @dev: regulator device
+- * @plat: Platform data
+- * @enable: bool indicating whether to enable or disable the regulator
+- * @return:
+- * 0 on Success
+- * -EBUSY if the regulator cannot be disabled because it's requested by
+- *        another device
+- * -EALREADY if the regulator has already been enabled or has already been
+- *        disabled
+- * -EACCES if there is no possibility to enable/disable the regulator
+- * -ve on different error situation
+- */
+ int regulator_common_set_enable(const struct udevice *dev,
+ 	struct regulator_common_plat *plat, bool enable);
+ 
+diff --git a/include/power/regulator.h b/include/power/regulator.h
+index ff1bfc2435..727776a8cf 100644
+--- a/include/power/regulator.h
++++ b/include/power/regulator.h
+@@ -158,6 +158,7 @@ enum regulator_flag {
+  * @name**     - fdt regulator name - should be taken from the device tree
+  * ctrl_reg:   - Control register offset used to enable/disable regulator
+  * volt_reg:   - register offset for writing voltage vsel values
++ * enable_count - counter of enable calls for this regulator
+  *
+  * Note:
+  * *  - set automatically on device probe by the uclass's '.pre_probe' method.
+@@ -184,6 +185,7 @@ struct dm_regulator_uclass_plat {
+ 	u8 volt_reg;
+ 	bool suspend_on;
+ 	u32 suspend_uV;
++	u32 enable_count;
+ };
+ 
+ /* Regulator device operations */
 -- 
 2.39.2
 

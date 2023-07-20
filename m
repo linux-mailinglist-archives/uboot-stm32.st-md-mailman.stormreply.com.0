@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A599C75B839
-	for <lists+uboot-stm32@lfdr.de>; Thu, 20 Jul 2023 21:43:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF66675B83A
+	for <lists+uboot-stm32@lfdr.de>; Thu, 20 Jul 2023 21:43:12 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68C91C6B452;
-	Thu, 20 Jul 2023 19:43:08 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 726F8C6B44D;
+	Thu, 20 Jul 2023 19:43:12 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D8E10C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8F10CC65E56
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 20 Jul 2023 19:43:06 +0000 (UTC)
-Received: by mail-ed1-f54.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so4840758a12.1
+ Thu, 20 Jul 2023 19:43:11 +0000 (UTC)
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-4fa48b5dc2eso1870727e87.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 20 Jul 2023 12:43:06 -0700 (PDT)
+ Thu, 20 Jul 2023 12:43:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1689882186; x=1690486986;
+ d=chromium.org; s=google; t=1689882191; x=1690486991;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7mpyqKwSFYbBfWJNrPp/GOY5aI10cBe5LKAvKyGZ5Xo=;
- b=GAHsvxNYZzxt2Kazq3grz1cy+JE0P6riKbwaGxluhbQ1Q5HSPTtOuJa1muDX4776XP
- B8ZjMvJ4WJFPm2qQHZixmzE/rxVPzmf5RdmaoUYmCAMZr2RPmUE/Uvm3wXEK+Z1TpNxN
- qOYdUOS3bEurtfnPhUGoIlFQ6hSjrbTMrw4SM=
+ bh=YXwYW+sI1xgNrbLU85yF2PZ9URlyQ2EXZ7p0XdBENMo=;
+ b=hUwy387hJTx2JG9D/EnAFR3v0AozlAdxod2zZm6kvDGFvSUkSXUzMzqvjCTqBnr8V2
+ NrM25hIqIkjhFVTKqB1GuzMRD9miRcFzQjGR/WaDtIOCkNSCpf4pJeCT+oW2J6pCKLe9
+ rMLCX9dLorSKPQfDDYdYdgJ5aOk4oyICkXJTg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689882186; x=1690486986;
+ d=1e100.net; s=20221208; t=1689882191; x=1690486991;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7mpyqKwSFYbBfWJNrPp/GOY5aI10cBe5LKAvKyGZ5Xo=;
- b=DtNHtAnb0yxfpjNqH4iuombYjVpSH7sY/L2/T23kv1WyIl1yWbF4oiZl7rEmj0qP3Q
- MIlji+zPkLm7vh6TKudxfRFfJbsd3bFCGf5+4B0+nM+cqI2tjYFf07LpSxA/YXbT9+ai
- ic1skbv5nrAaScqlS5cq82ObSEK8vAg1o9kklqIUX2A4XktSsNbkbumFFo+oNAOTAFUZ
- 11basavvZ5bgzxYyOkfGVOpMkWV73LZuRk5IbjeztEBIBUG3iUw7JXqSJuzxBJlLK4Nt
- NX6zGvutY56Z4pEtpR2SZp9GOwcg6r1rFbGiXEyrXQTsxqnHVxqwmNTIiQz85V4/jkZB
- apwg==
-X-Gm-Message-State: ABy/qLY5GW2K2ERw+HaGgWYOPgREW+XZw9XFvUUYpAL1LFhjE75+xQ1V
- rvu10xepD6Hz75IF2jHRCPNgp3QuCCdvpxEHV3dzhw==
-X-Google-Smtp-Source: APBJJlGd0PfTXu1vheiHHr8w+UpatqqPLu3fl/SEuyQT9pnrJIfT5/Khc5MfR2/fXdMN0hFE6BpMRy+fErFEAD6zYZo=
-X-Received: by 2002:a05:6402:896:b0:521:d368:1628 with SMTP id
- e22-20020a056402089600b00521d3681628mr3700693edy.16.1689882186387; Thu, 20
- Jul 2023 12:43:06 -0700 (PDT)
+ bh=YXwYW+sI1xgNrbLU85yF2PZ9URlyQ2EXZ7p0XdBENMo=;
+ b=bBl4KJCS1jv47V9pK8jv4+/RJ5VOA+QSyaeANIgfErQU+o/4t67um0IC7iPv1U4hdZ
+ wS+FFFc5E+y1khLuHbotce+IpXANb2NljCZShzzWEx596h5ZSRJnjNbfjNybR+oJQsEq
+ 27VETFp1EoCqUBlX7gSGz1LJlocCeJMZ1o30Dva+JYqc1oOljy0jPsr8Ds+gGOVRVuRs
+ gx8/nFM8lH6e0beSldQyP8xqddt+VCuNFYAJovQ8/q49Vv8DKEJ+zPDJkVFTekeI3zF2
+ PxgRwhcPCqMptYib5vEd+5KqDbG9csVo4HWR6ZmN4o5tPOkwyYNUXdCYlaXntHI6TIcU
+ 17qw==
+X-Gm-Message-State: ABy/qLaTVw3vke18VHyrfXOFIvqtD6RUPmHZQka+GT5vw/IHJ8pqWrD1
+ ENM2v73b31O2NgPw5e3V74BQcJu964djYCP8BrSVjQ==
+X-Google-Smtp-Source: APBJJlF7CzcL6F8/g7FejUfNrFqv/ME/od7OjBn+yfIOolrxui/kZV6j+k1IJxwToc0zqtz2khG8rbS53OlDahhsqsM=
+X-Received: by 2002:a19:5f1e:0:b0:4fb:77d6:89c3 with SMTP id
+ t30-20020a195f1e000000b004fb77d689c3mr2753753lfb.12.1689882190528; Thu, 20
+ Jul 2023 12:43:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230720123744.26854-1-clamor95@gmail.com>
- <20230720123744.26854-4-clamor95@gmail.com>
-In-Reply-To: <20230720123744.26854-4-clamor95@gmail.com>
+ <20230720123744.26854-6-clamor95@gmail.com>
+In-Reply-To: <20230720123744.26854-6-clamor95@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Jul 2023 13:42:53 -0600
-Message-ID: <CAPnjgZ3jXmqtB=MTv7-SvEaKGyHHgO=zh5m8yPP=hbobh=B=pg@mail.gmail.com>
+Date: Thu, 20 Jul 2023 13:42:56 -0600
+Message-ID: <CAPnjgZ1XXXmi2CaM6WbaoyZRzsXE1o--PTcYZhN3C5FNVBwTiw@mail.gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
  u-boot@dh-electronics.com, Matteo Lisi <matteo.lisi@engicam.com>,
@@ -64,8 +64,8 @@ Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>
-Subject: Re: [Uboot-stm32] [PATCH v2 3/7] power: regulator-uclass: perform
- regulator setup inside uclass
+Subject: Re: [Uboot-stm32] [PATCH v2 5/7] power: pmic-uclass: probe every
+	child on pmic_post_probe
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,27 +86,59 @@ Hi Svyatoslav,
 
 On Thu, 20 Jul 2023 at 06:38, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
 >
-> Regulators initial setup was previously dependent on board call.
-> To move from this behaviour were introduced two steps. First is
-> that all individual regulators will be probed just after binding
-
-We must not probe devices automatically when bound. The i2c interface
-may not be available, etc. Do a probe afterwards.
-
-Perhaps I am misunderstanding this, iwc please reword this commit message.
-
-> which ensures that regulator pdata is filled and second is setting
-> up regulator in post probe which enseres that correct regulator
-> state according to pdata is reached.
+> Main goal is to probe all regulator childrens for their
+> proper setup but if pmic has non regulator children they
+> should not suffer from this either.
 >
 > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 > ---
->  drivers/power/regulator/regulator-uclass.c | 212 ++++++---------------
->  include/power/regulator.h                  | 119 ------------
->  2 files changed, 62 insertions(+), 269 deletions(-)
+>  drivers/power/pmic/pmic-uclass.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+>
+> diff --git a/drivers/power/pmic/pmic-uclass.c b/drivers/power/pmic/pmic-uclass.c
+> index 0e2f5e1f41..8ca717bd5e 100644
+> --- a/drivers/power/pmic/pmic-uclass.c
+> +++ b/drivers/power/pmic/pmic-uclass.c
+> @@ -16,6 +16,7 @@
+>  #include <dm/device-internal.h>
+>  #include <dm/uclass-internal.h>
+>  #include <power/pmic.h>
+> +#include <power/regulator.h>
+>  #include <linux/ctype.h>
+
+I'm not sure about this.
+
+The idea is that power is handling automatically, e.g. a device is
+probed and so its power is enabled. If you do everything at the start,
+doesn't that violate the 'lazy' init side of U-Boot?
+
+>
+>  #if CONFIG_IS_ENABLED(PMIC_CHILDREN)
+> @@ -198,9 +199,18 @@ static int pmic_pre_probe(struct udevice *dev)
+>         return 0;
+>  }
+>
+> +static int pmic_post_probe(struct udevice *dev)
+> +{
+> +       struct udevice *child;
+> +
+> +       device_foreach_child_probe(child, dev);
+> +       return 0;
+> +}
+> +
+>  UCLASS_DRIVER(pmic) = {
+>         .id             = UCLASS_PMIC,
+>         .name           = "pmic",
+>         .pre_probe      = pmic_pre_probe,
+> +       .post_probe     = pmic_post_probe,
+>         .per_device_auto        = sizeof(struct uc_pmic_priv),
+>  };
+> --
+> 2.39.2
+>
 
 Regards,
-SImon
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,75 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1626768DE3
-	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 09:18:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4693B768DE4
+	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 09:18:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A281EC7128E;
-	Mon, 31 Jul 2023 07:18:22 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
- [209.85.218.41])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09D73C71290;
+	Mon, 31 Jul 2023 07:18:23 +0000 (UTC)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
+ [209.85.167.49])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C570CC65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 57E3CC6A5E6
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jul 2023 07:39:02 +0000 (UTC)
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-9924ac01f98so745567166b.1
+ Thu, 20 Jul 2023 12:38:11 +0000 (UTC)
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-4fcd615d7d6so1149381e87.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 18 Jul 2023 00:39:02 -0700 (PDT)
+ Thu, 20 Jul 2023 05:38:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1689665942; x=1692257942;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=veri0XpH5XjPjkGvLfRhprRveQnHHPSDeeeNbViMpTs=;
- b=dTgUz3DqKfa4naoKgi686DmKdkirnK3eEoygBkVaiGuP/ZwOwICZGJcZGGNYcMLNEr
- pKmx/NF6NPwZ+pG7CC8Xa6Mjnl+rU/I1D9TTAI7P7jNBmOvfHa3fw3UomRdmNqcPhP2s
- Fixz154J+NUcVyDvC9tmsPIrDS6YkSW7wIxnjM03lW8zg8EsJVOAtRkHwRRNaNKEwi5Q
- Ks8f9JpKkkBEM8iUVVVp4gTIOmmGn0hCiP+oMzOf5YhKl0jKcTgN/J2E56yt6Gtk+PH3
- iilavKjb2noifAGFawAHMMpsJmEdW58gkivoo0jgr0wUrLQ0Q5oqrvSetArep4ciJplZ
- QqqA==
+ d=gmail.com; s=20221208; t=1689856690; x=1690461490;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lrrz0d5RxzUIsxuaCwltwlvw/gjUD5Ldtj+D9gKLfFw=;
+ b=YttmLnQr6VwkDXoJsQGbyj35USbVqUTmFLWEAGt8yhzIe8nCpymadQsstPxpAfbrsd
+ ZVqOz8r2RAMCt92lQOirLZsGKeHjGy4gbc1vH3puPR/o3rK5Xkt6ypeNPI9KTzUp72fr
+ Yz+/Xltd86YgE0A+E36CmSfcGE4JX/FYXscAtzKb3z13sPbfwAStBThtsnrccqoSukTF
+ 9dAESc6tLU/zdkQQZYF3geKAmRHxW/xXKIwuJo4vqjAkHLYxWf65eDuHwp1yIgsp2A8U
+ Mzfq0JoZEpZ+8GsqKSeZtlbXgtDGoqL77c9tSVv+p0GSEtd1CpUXasY6/iFTrFbeEnvD
+ K2+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689665942; x=1692257942;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=veri0XpH5XjPjkGvLfRhprRveQnHHPSDeeeNbViMpTs=;
- b=b2ORap7OHXBnfU0UOkd8aM8e86/HiL9waCIJzsc10JA2VwZXmMPGph01rg25i/GMw9
- UTDUd1XwjcCEEUxDHqn/QW+DhWUDKqsQYXOGez2Fza0kVpRIuyDCjHyiICmw9Wvg3Oo1
- f5Ltkw0FWtAwpsC4l7FsBP5wgkoz1hU77QroWxdpMAQTDD70xVH3h+yPElK2+KepyAXw
- JOUMJM3LI+U5PNfB/MBvnWMBzKx4FzInvB0B0xXYssMmzsxc9Cg30M2M2h4gQRv+8dcw
- 5smYpVZSEkVKZ2H1Chcn64GlYPW5xGfYxyXXORMH8yUYdYo2T7ynQUDSjp58rwS8Pc7P
- Cu3g==
-X-Gm-Message-State: ABy/qLbJUCpTbzA5gZqNqpfFaIgY1s7jhO7kxmYPVlJlHQT7Bkf4vIqo
- OzR7mWtECjOud12NcgD9496U/Z9P70P0IlAOMIc=
-X-Google-Smtp-Source: APBJJlHq9FZU3QNni+SmibPtu7Z9rrGBvWtBgjQWRJ2l12eKMDMtrKDk3YaqCYfAN0MjS0Xzff4asmSVBCXRcij451U=
-X-Received: by 2002:a17:907:39b:b0:989:450:e567 with SMTP id
- ss27-20020a170907039b00b009890450e567mr13199815ejb.65.1689665942086; Tue, 18
- Jul 2023 00:39:02 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230718070504.19810-1-clamor95@gmail.com>
- <20230718070504.19810-2-clamor95@gmail.com>
- <f796704a-900e-2794-89fb-26dde4512ad1@collabora.com>
-In-Reply-To: <f796704a-900e-2794-89fb-26dde4512ad1@collabora.com>
+ d=1e100.net; s=20221208; t=1689856690; x=1690461490;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lrrz0d5RxzUIsxuaCwltwlvw/gjUD5Ldtj+D9gKLfFw=;
+ b=F+bMhVUvrEP37u4sVzm2elNaXkVxDNycTgrlHJOCCpHWuLuVS3AyeG4bpeySj70qQC
+ jMJPQD/NK50CoJ+qiOMObjh9oty3UZbGD/saz2LIRSBWVv8irgCcpeO3ININrnj2p4y7
+ y4XX3ZSB+Gqt76LNidf7iZtf/YswjqfquA5esAMpRlgIz+4K1ttyHdzasA7qRGvZnI/y
+ FWMcba/6K6RX0fDpCmczeAyuIb30e1YwUpArX2Fi/B8dyAStIPEpoT3wg7d/inuzf0EK
+ XSMYWtAuaqk0CQUKtmtBDR2TD4kDc0SdQlpEsfzJ+I196Vm3YSY6/tgYmY3kDJcdDAlY
+ pVTg==
+X-Gm-Message-State: ABy/qLaVgZEPKkMmoARf11iipAnPkmCrIjRr8QLUZBsmUZwPjfzv8iD3
+ ln/7eA9nVJVUF/zOYohRkwU=
+X-Google-Smtp-Source: APBJJlGaPxZtjACjzezA5zprsZbVZFjzxshZ/WIBA6QPtp2cZuN6MW/mCHypaZiLg5U+patD2sVvpw==
+X-Received: by 2002:a05:6512:e85:b0:4fb:8f79:631 with SMTP id
+ bi5-20020a0565120e8500b004fb8f790631mr2261103lfb.46.1689856690095; 
+ Thu, 20 Jul 2023 05:38:10 -0700 (PDT)
+Received: from xeon.. ([188.163.112.64]) by smtp.gmail.com with ESMTPSA id
+ m25-20020ac24ad9000000b004fb9c625b4asm184401lfp.210.2023.07.20.05.38.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Jul 2023 05:38:09 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Tue, 18 Jul 2023 10:38:51 +0300
-Message-ID: <CAPVz0n3FDTs7LKCXe0DEc7bN3uS7xvJ8+SvURYV6CfcO2MayWQ@mail.gmail.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-X-Mailman-Approved-At: Mon, 31 Jul 2023 07:18:21 +0000
-Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- u-boot@dh-electronics.com, Matteo Lisi <matteo.lisi@engicam.com>,
- Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot-amlogic@groups.io,
- Jaehoon Chung <jh80.chung@samsung.com>,
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Marek Vasut <marex@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Kostya Porotchkin <kostap@marvell.com>, Anatolij Gustschin <agust@denx.de>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: Re: [Uboot-stm32] [PATCH v1 1/4] power: regulator: expand basic
- reference counter onto all uclass
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Anatolij Gustschin <agust@denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>
+Date: Thu, 20 Jul 2023 15:37:37 +0300
+Message-Id: <20230720123744.26854-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+X-Mailman-Approved-At: Mon, 31 Jul 2023 07:18:21 +0000
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ u-boot@dh-electronics.com, u-boot-amlogic@groups.io
+Subject: [Uboot-stm32] [PATCH v2 0/7] General regulator and pmic uclass
+	improvements
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,127 +84,91 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-0LLRgiwgMTgg0LvQuNC/LiAyMDIz4oCv0YAuINC+IDEwOjM2IEV1Z2VuIEhyaXN0ZXYgPGV1Z2Vu
-LmhyaXN0ZXZAY29sbGFib3JhLmNvbT4g0L/QuNGI0LU6Cj4KPiBIaSBTdnlhdG9zbGF2LAo+Cj4K
-PiBPbiA3LzE4LzIzIDEwOjA1LCBTdnlhdG9zbGF2IFJ5aGVsIHdyb3RlOgo+ID4gQ29tbWl0IGlz
-IGJhc2VkIG9uIDRmY2JhNWQgKCJyZWd1bGF0b3I6IGltcGxlbWVudCBiYXNpYyByZWZlcmVuY2UK
-PiA+IGNvdW50ZXIiKSBidXQgZXhwYW5kcyB0aGUgaWRlYSB0byBhbGwgcmVndWxhdG9ycyBpbnN0
-ZWFkIG9mIGp1c3QKPiA+IGZpeGVkL2dwaW8gcmVndWxhdG9ycy4KPiA+Cj4gPiBTaWduZWQtb2Zm
-LWJ5OiBTdnlhdG9zbGF2IFJ5aGVsIDxjbGFtb3I5NUBnbWFpbC5jb20+Cj4gPiAtLS0KPiA+ICAg
-ZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yLXVjbGFzcy5jIHwgMjIgKysrKysrKysr
-KysrKysrKysrKysrKwo+ID4gICBkcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3JfY29t
-bW9uLmMgfCAyMiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gPiAgIGRyaXZlcnMvcG93ZXIvcmVn
-dWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uaCB8IDIxIC0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ID4g
-ICBpbmNsdWRlL3Bvd2VyL3JlZ3VsYXRvci5oICAgICAgICAgICAgICAgICAgfCAgMiArKwo+ID4g
-ICA0IGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKyksIDQzIGRlbGV0aW9ucygtKQo+ID4K
-PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNz
-LmMgYi9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMKPiA+IGluZGV4
-IDNhNmJhNjlmNmQuLmM5MTk0ZmU5NWMgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3Bvd2VyL3Jl
-Z3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMKPiA+ICsrKyBiL2RyaXZlcnMvcG93ZXIvcmVndWxh
-dG9yL3JlZ3VsYXRvci11Y2xhc3MuYwo+ID4gQEAgLTE3Miw2ICsxNzIsMjMgQEAgaW50IHJlZ3Vs
-YXRvcl9zZXRfZW5hYmxlKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGJvb2wgZW5hYmxlKQo+ID4gICAg
-ICAgaWYgKCFlbmFibGUgJiYgdWNfcGRhdGEtPmFsd2F5c19vbikKPiA+ICAgICAgICAgICAgICAg
-cmV0dXJuIC1FQUNDRVM7Cj4gPgo+ID4gKyAgICAgLyogSWYgcHJldmlvdXNseSBlbmFibGVkLCBp
-bmNyZWFzZSBjb3VudCAqLwo+ID4gKyAgICAgaWYgKGVuYWJsZSAmJiB1Y19wZGF0YS0+ZW5hYmxl
-X2NvdW50ID4gMCkgewo+ID4gKyAgICAgICAgICAgICB1Y19wZGF0YS0+ZW5hYmxlX2NvdW50Kys7
-Cj4gPiArICAgICAgICAgICAgIHJldHVybiAtRUFMUkVBRFk7Cj4gPiArICAgICB9Cj4gPiArCj4g
-PiArICAgICBpZiAoIWVuYWJsZSkgewo+ID4gKyAgICAgICAgICAgICBpZiAodWNfcGRhdGEtPmVu
-YWJsZV9jb3VudCA+IDEpIHsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAvKiBJZiBlbmFibGVk
-IG11bHRpcGxlIHRpbWVzLCBkZWNyZWFzZSBjb3VudCAqLwo+ID4gKyAgICAgICAgICAgICAgICAg
-ICAgIHVjX3BkYXRhLT5lbmFibGVfY291bnQtLTsKPiA+ICsgICAgICAgICAgICAgICAgICAgICBy
-ZXR1cm4gLUVCVVNZOwo+ID4gKyAgICAgICAgICAgICB9IGVsc2UgaWYgKCF1Y19wZGF0YS0+ZW5h
-YmxlX2NvdW50KSB7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgLyogSWYgYWxyZWFkeSBkaXNh
-YmxlZCwgZG8gbm90aGluZyAqLwo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHJldHVybiAtRUFM
-UkVBRFk7Cj4gPiArICAgICAgICAgICAgIH0KPiA+ICsgICAgIH0KPiA+ICsKPiA+ICAgICAgIGlm
-ICh1Y19wZGF0YS0+cmFtcF9kZWxheSkKPiA+ICAgICAgICAgICAgICAgb2xkX2VuYWJsZSA9IHJl
-Z3VsYXRvcl9nZXRfZW5hYmxlKGRldik7Cj4gPgo+ID4gQEAgLTE4Nyw2ICsyMDQsMTEgQEAgaW50
-IHJlZ3VsYXRvcl9zZXRfZW5hYmxlKHN0cnVjdCB1ZGV2aWNlICpkZXYsIGJvb2wgZW5hYmxlKQo+
-ID4gICAgICAgICAgICAgICB9Cj4gPiAgICAgICB9Cj4gPgo+ID4gKyAgICAgaWYgKGVuYWJsZSkK
-PiA+ICsgICAgICAgICAgICAgdWNfcGRhdGEtPmVuYWJsZV9jb3VudCsrOwo+ID4gKyAgICAgZWxz
-ZQo+ID4gKyAgICAgICAgICAgICB1Y19wZGF0YS0+ZW5hYmxlX2NvdW50LS07Cj4gPiArCj4gPiAg
-ICAgICByZXR1cm4gcmV0Owo+ID4gICB9Cj4gPgo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvcG93
-ZXIvcmVndWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uYyBiL2RyaXZlcnMvcG93ZXIvcmVndWxhdG9y
-L3JlZ3VsYXRvcl9jb21tb24uYwo+ID4gaW5kZXggZTI2ZjVlYmVjMy4uZDg4YmM2ZjZkZSAxMDA2
-NDQKPiA+IC0tLSBhL2RyaXZlcnMvcG93ZXIvcmVndWxhdG9yL3JlZ3VsYXRvcl9jb21tb24uYwo+
-ID4gKysrIGIvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5jCj4gPiBA
-QCAtNzIsMjMgKzcyLDYgQEAgaW50IHJlZ3VsYXRvcl9jb21tb25fc2V0X2VuYWJsZShjb25zdCBz
-dHJ1Y3QgdWRldmljZSAqZGV2LAo+ID4gICAgICAgICAgICAgICByZXR1cm4gMDsKPiA+ICAgICAg
-IH0KPiA+Cj4gPiAtICAgICAvKiBJZiBwcmV2aW91c2x5IGVuYWJsZWQsIGluY3JlYXNlIGNvdW50
-ICovCj4gPiAtICAgICBpZiAoZW5hYmxlICYmIHBsYXQtPmVuYWJsZV9jb3VudCA+IDApIHsKPiA+
-IC0gICAgICAgICAgICAgcGxhdC0+ZW5hYmxlX2NvdW50Kys7Cj4gPiAtICAgICAgICAgICAgIHJl
-dHVybiAtRUFMUkVBRFk7Cj4gPiAtICAgICB9Cj4gPiAtCj4gPiAtICAgICBpZiAoIWVuYWJsZSkg
-ewo+ID4gLSAgICAgICAgICAgICBpZiAocGxhdC0+ZW5hYmxlX2NvdW50ID4gMSkgewo+ID4gLSAg
-ICAgICAgICAgICAgICAgICAgIC8qIElmIGVuYWJsZWQgbXVsdGlwbGUgdGltZXMsIGRlY3JlYXNl
-IGNvdW50ICovCj4gPiAtICAgICAgICAgICAgICAgICAgICAgcGxhdC0+ZW5hYmxlX2NvdW50LS07
-Cj4gPiAtICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FQlVTWTsKPiA+IC0gICAgICAgICAg
-ICAgfSBlbHNlIGlmICghcGxhdC0+ZW5hYmxlX2NvdW50KSB7Cj4gPiAtICAgICAgICAgICAgICAg
-ICAgICAgLyogSWYgYWxyZWFkeSBkaXNhYmxlZCwgZG8gbm90aGluZyAqLwo+ID4gLSAgICAgICAg
-ICAgICAgICAgICAgIHJldHVybiAtRUFMUkVBRFk7Cj4gPiAtICAgICAgICAgICAgIH0KPiA+IC0g
-ICAgIH0KPiA+IC0KPiA+ICAgICAgIHJldCA9IGRtX2dwaW9fc2V0X3ZhbHVlKCZwbGF0LT5ncGlv
-LCBlbmFibGUpOwo+ID4gICAgICAgaWYgKHJldCkgewo+ID4gICAgICAgICAgICAgICBwcl9lcnIo
-IkNhbid0IHNldCByZWd1bGF0b3IgOiAlcyBncGlvIHRvOiAlZFxuIiwgZGV2LT5uYW1lLAo+ID4g
-QEAgLTEwMywxMCArODYsNSBAQCBpbnQgcmVndWxhdG9yX2NvbW1vbl9zZXRfZW5hYmxlKGNvbnN0
-IHN0cnVjdCB1ZGV2aWNlICpkZXYsCj4gPiAgICAgICBpZiAoIWVuYWJsZSAmJiBwbGF0LT5vZmZf
-b25fZGVsYXlfdXMpCj4gPiAgICAgICAgICAgICAgIHVkZWxheShwbGF0LT5vZmZfb25fZGVsYXlf
-dXMpOwo+ID4KPiA+IC0gICAgIGlmIChlbmFibGUpCj4gPiAtICAgICAgICAgICAgIHBsYXQtPmVu
-YWJsZV9jb3VudCsrOwo+ID4gLSAgICAgZWxzZQo+ID4gLSAgICAgICAgICAgICBwbGF0LT5lbmFi
-bGVfY291bnQtLTsKPiA+IC0KPiA+ICAgICAgIHJldHVybiAwOwo+ID4gICB9Cj4gPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5oIGIvZHJpdmVy
-cy9wb3dlci9yZWd1bGF0b3IvcmVndWxhdG9yX2NvbW1vbi5oCj4gPiBpbmRleCBkNDk2Mjg5OWQ4
-Li4xNWYxZmE0YzkzIDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy9wb3dlci9yZWd1bGF0b3IvcmVn
-dWxhdG9yX2NvbW1vbi5oCj4gPiArKysgYi9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0
-b3JfY29tbW9uLmgKPiA+IEBAIC0xMyw3ICsxMyw2IEBAIHN0cnVjdCByZWd1bGF0b3JfY29tbW9u
-X3BsYXQgewo+ID4gICAgICAgc3RydWN0IGdwaW9fZGVzYyBncGlvOyAvKiBHUElPIGZvciByZWd1
-bGF0b3IgZW5hYmxlIGNvbnRyb2wgKi8KPiA+ICAgICAgIHVuc2lnbmVkIGludCBzdGFydHVwX2Rl
-bGF5X3VzOwo+ID4gICAgICAgdW5zaWduZWQgaW50IG9mZl9vbl9kZWxheV91czsKPiA+IC0gICAg
-IHVuc2lnbmVkIGludCBlbmFibGVfY291bnQ7Cj4gPiAgIH07Cj4gPgo+ID4gICBpbnQgcmVndWxh
-dG9yX2NvbW1vbl9vZl90b19wbGF0KHN0cnVjdCB1ZGV2aWNlICpkZXYsCj4gPiBAQCAtMjEsMjYg
-KzIwLDYgQEAgaW50IHJlZ3VsYXRvcl9jb21tb25fb2ZfdG9fcGxhdChzdHJ1Y3QgdWRldmljZSAq
-ZGV2LAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhciAqZW5hYmxlX2dwaW9f
-bmFtZSk7Cj4gPiAgIGludCByZWd1bGF0b3JfY29tbW9uX2dldF9lbmFibGUoY29uc3Qgc3RydWN0
-IHVkZXZpY2UgKmRldiwKPiA+ICAgICAgIHN0cnVjdCByZWd1bGF0b3JfY29tbW9uX3BsYXQgKnBs
-YXQpOwo+ID4gLS8qCj4gPiAtICogRW5hYmxlIG9yIERpc2FibGUgYSByZWd1bGF0b3IKPiA+IC0g
-Kgo+ID4gLSAqIFRoaXMgaXMgYSByZWVudHJhbnQgZnVuY3Rpb24gYW5kIHN1YnNlcXVlbnQgY2Fs
-bHMgdGhhdCBlbmFibGUgd2lsbAo+ID4gLSAqIGluY3JlYXNlIGFuIGludGVybmFsIGNvdW50ZXIs
-IGFuZCBkaXNhYmxlIGNhbGxzIHdpbGwgZGVjcmVhc2UgdGhlIGNvdW50ZXIuCj4gPiAtICogVGhl
-IGFjdHVhbCByZXNvdXJjZSB3aWxsIGJlIGVuYWJsZWQgd2hlbiB0aGUgY291bnRlciBnZXRzIHRv
-IDEgY29taW5nIGZyb20gMCwKPiA+IC0gKiBhbmQgZGlzYWJsZWQgd2hlbiBpdCByZWFjaGVzIDAg
-Y29taW5nIGZyb20gMS4KPiA+IC0gKgo+ID4gLSAqIEBkZXY6IHJlZ3VsYXRvciBkZXZpY2UKPiA+
-IC0gKiBAcGxhdDogUGxhdGZvcm0gZGF0YQo+ID4gLSAqIEBlbmFibGU6IGJvb2wgaW5kaWNhdGlu
-ZyB3aGV0aGVyIHRvIGVuYWJsZSBvciBkaXNhYmxlIHRoZSByZWd1bGF0b3IKPiA+IC0gKiBAcmV0
-dXJuOgo+ID4gLSAqIDAgb24gU3VjY2Vzcwo+ID4gLSAqIC1FQlVTWSBpZiB0aGUgcmVndWxhdG9y
-IGNhbm5vdCBiZSBkaXNhYmxlZCBiZWNhdXNlIGl0J3MgcmVxdWVzdGVkIGJ5Cj4gPiAtICogICAg
-ICAgIGFub3RoZXIgZGV2aWNlCj4gPiAtICogLUVBTFJFQURZIGlmIHRoZSByZWd1bGF0b3IgaGFz
-IGFscmVhZHkgYmVlbiBlbmFibGVkIG9yIGhhcyBhbHJlYWR5IGJlZW4KPiA+IC0gKiAgICAgICAg
-ZGlzYWJsZWQKPiA+IC0gKiAtRUFDQ0VTIGlmIHRoZXJlIGlzIG5vIHBvc3NpYmlsaXR5IHRvIGVu
-YWJsZS9kaXNhYmxlIHRoZSByZWd1bGF0b3IKPiA+IC0gKiAtdmUgb24gZGlmZmVyZW50IGVycm9y
-IHNpdHVhdGlvbgo+ID4gLSAqLwo+Cj4gQ2FuJ3QgdGhpcyB3aG9sZSBkb2N1bWVudGF0aW9uIHRo
-YXQgeW91IGFyZSByZW1vdmluZyBiZSBpbiBmYWN0Cj4gaW50ZWdyYXRlZCBpbnRvIHRoZSBkb2N1
-bWVudGF0aW9uIGZvciB0aGUgZnVuY3Rpb24geW91IG1vdmVkIHRoZQo+IHJlZmVyZW5jZSBjb3Vu
-dGVyIGhvdXNla2VlcGluZyB0byA/CgpZZXMgc3VyZSwgSSB3YXMgbm90IHF1aXRlIHN1cmUgd2hl
-cmUgdG8gaW5zZXJ0IGl0LgoKPiA+ICAgaW50IHJlZ3VsYXRvcl9jb21tb25fc2V0X2VuYWJsZShj
-b25zdCBzdHJ1Y3QgdWRldmljZSAqZGV2LAo+ID4gICAgICAgc3RydWN0IHJlZ3VsYXRvcl9jb21t
-b25fcGxhdCAqcGxhdCwgYm9vbCBlbmFibGUpOwo+ID4KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRl
-L3Bvd2VyL3JlZ3VsYXRvci5oIGIvaW5jbHVkZS9wb3dlci9yZWd1bGF0b3IuaAo+ID4gaW5kZXgg
-ZmYxYmZjMjQzNS4uNzI3Nzc2YThjZiAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUvcG93ZXIvcmVn
-dWxhdG9yLmgKPiA+ICsrKyBiL2luY2x1ZGUvcG93ZXIvcmVndWxhdG9yLmgKPiA+IEBAIC0xNTgs
-NiArMTU4LDcgQEAgZW51bSByZWd1bGF0b3JfZmxhZyB7Cj4gPiAgICAqIEBuYW1lKiogICAgIC0g
-ZmR0IHJlZ3VsYXRvciBuYW1lIC0gc2hvdWxkIGJlIHRha2VuIGZyb20gdGhlIGRldmljZSB0cmVl
-Cj4gPiAgICAqIGN0cmxfcmVnOiAgIC0gQ29udHJvbCByZWdpc3RlciBvZmZzZXQgdXNlZCB0byBl
-bmFibGUvZGlzYWJsZSByZWd1bGF0b3IKPiA+ICAgICogdm9sdF9yZWc6ICAgLSByZWdpc3RlciBv
-ZmZzZXQgZm9yIHdyaXRpbmcgdm9sdGFnZSB2c2VsIHZhbHVlcwo+ID4gKyAqIGVuYWJsZV9jb3Vu
-dCAtIGNvdW50ZXIgb2YgZW5hYmxlIGNhbGxzIGZvciB0aGlzIHJlZ3VsYXRvcgo+ID4gICAgKgo+
-ID4gICAgKiBOb3RlOgo+ID4gICAgKiAqICAtIHNldCBhdXRvbWF0aWNhbGx5IG9uIGRldmljZSBw
-cm9iZSBieSB0aGUgdWNsYXNzJ3MgJy5wcmVfcHJvYmUnIG1ldGhvZC4KPiA+IEBAIC0xODQsNiAr
-MTg1LDcgQEAgc3RydWN0IGRtX3JlZ3VsYXRvcl91Y2xhc3NfcGxhdCB7Cj4gPiAgICAgICB1OCB2
-b2x0X3JlZzsKPiA+ICAgICAgIGJvb2wgc3VzcGVuZF9vbjsKPiA+ICAgICAgIHUzMiBzdXNwZW5k
-X3VWOwo+ID4gKyAgICAgdTMyIGVuYWJsZV9jb3VudDsKPiA+ICAgfTsKPiA+Cj4gPiAgIC8qIFJl
-Z3VsYXRvciBkZXZpY2Ugb3BlcmF0aW9ucyAqLwo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0z
-MkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9y
-bXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+This patchset derives from discussion of TPS65913 bringup and aims to
+cycle all regulator management inside uclass removing need of any board
+calls for regulators.
+
+My hw setup is Tegra 3 LG Optimus Vu P895 (PMIC is MAX77663) with native
+spl u-boot build.
+
+power: regulator: expand basic reference counter onto all uclass
+Commit is basically expansion of 4fcba5d ("regulator: implement basic
+reference counter") onto all regulators.
+ - my testing on hw has shown no issues so far with both pmic regulators
+ and fixed regulators. Counting works as expected, dm test is set in
+ test of regulator_set_enable_if_allowed.
+
+power: regulator-uclass: perform regulator setup inside uclass
+All self-sufficient regulators are set to probe after bind to perform
+initial setup later in post-probe with pdata from device tree.
+ - self-sufficient regulator is one that is not dependent on any other
+ device (this category does not include pmic regulators for example).
+ I have tested fixed regulators and got correct probing and setup
+ according to device tree. DM test is set by checking regulators data
+ without pre-configuring them manually
+
+power: pmic-uclass: probe every child on pmic_post_probe
+All non self-sufficient regulators must be probed after main device is
+probed (in this case it is pmic_post_probe). In all other aspects pmic
+regulators behave same.
+ - tested with MAX77663 ldo and sd regulators, no errors or inconsistencies
+ were tracked, regulator props (boot-on, always-on etc) and consumer calls
+ work as expected. DM test is set by checking regulators data without pre-
+ configuring them manually just after pmic probe.
+
+power: regulator-uclass: remove all deprecated API use
+This is where everything gets tricky. All board dedicated API of regulators
+has to be removed. System presented above should cover all regulators setup
+but non the less this should be disscussed with maintainers and tested on
+affected boards. This commit removes and cleans most of those API traces.
+
+---
+Changes from v1:
+ - adapted description of regulator_set_enable
+ - remove uc_pdata->enable_count from post_probe
+ - added tests from counter and regulators post_probe
+---
+
+Svyatoslav Ryhel (7):
+  power: regulator: expand basic reference counter onto all uclass
+  test: dm: regulator: test counter in set_enable_if_allowed test
+  power: regulator-uclass: perform regulator setup inside uclass
+  test: dm: regulator: provide test of auto setup
+  power: pmic-uclass: probe every child on pmic_post_probe
+  test: dm: pmic: provide test of child autosetup
+  power: regulator-uclass: remove all deprecated API use
+
+ arch/arm/mach-rockchip/board.c                |   8 -
+ arch/arm/mach-rockchip/rk3399/rk3399.c        |  10 -
+ board/Marvell/octeontx2_cn913x/board.c        |   5 -
+ .../amlogic/odroid-go-ultra/odroid-go-ultra.c |   2 -
+ board/dhelectronics/dh_stm32mp1/board.c       |   2 -
+ board/engicam/stm32mp1/stm32mp1.c             |   3 -
+ board/google/veyron/veyron.c                  |   6 -
+ board/samsung/common/exynos5-dt.c             |   4 -
+ board/samsung/odroid/odroid.c                 |  10 -
+ board/st/stm32mp1/stm32mp1.c                  |   9 -
+ drivers/power/pmic/pmic-uclass.c              |  10 +
+ drivers/power/regulator/regulator-uclass.c    | 253 +++++++-----------
+ drivers/power/regulator/regulator_common.c    |  22 --
+ drivers/power/regulator/regulator_common.h    |  21 --
+ drivers/video/bridge/ps862x.c                 |  12 +-
+ drivers/video/rockchip/rk_vop.c               |   6 +-
+ include/power/regulator.h                     | 121 +--------
+ include/power/sandbox_pmic.h                  |   2 +-
+ test/dm/pmic.c                                |  34 +++
+ test/dm/regulator.c                           | 148 +++-------
+ 20 files changed, 204 insertions(+), 484 deletions(-)
+
+-- 
+2.39.2
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

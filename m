@@ -2,37 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48EC0764241
-	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Jul 2023 00:45:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CF0E7642C1
+	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Jul 2023 01:58:40 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F2107C6B45B;
-	Wed, 26 Jul 2023 22:45:55 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3C57DC6B45B;
+	Wed, 26 Jul 2023 23:58:40 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 21F65C6B45A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B784C6B459
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 26 Jul 2023 22:45:55 +0000 (UTC)
+ Wed, 26 Jul 2023 23:58:39 +0000 (UTC)
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5655386768;
- Thu, 27 Jul 2023 00:45:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id DE58F86373;
+ Thu, 27 Jul 2023 01:58:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1690411554;
- bh=AdnUEnQ0F1VFoiqkUkI9crOgM8z7gdXNgQFhskce9SM=;
+ s=phobos-20191101; t=1690415919;
+ bh=bQHY23R9eoya2vVwK2wRW4wGNmTih4kXb8yFQiTOKbE=;
  h=From:To:Cc:Subject:Date:From;
- b=KopHuhxpBJ5s+mKIPajWwAZCeiN4iLhdwDTEMkcnBMyh2AWcWebizy/LOI5s7tcj/
- m05TL72/7H860gDrfW48nW823ldbB0PexNadRu0qairH82wAXkHdOzDEQWzpBbE+zw
- pD4vmSxbvFmmj8Gnuxxilp21Ydxth10/E5UntsPPYPvP5duEpSC7/uuNFL4t3VQky6
- btxFQq/HK2DqtX+JRmzjAwW77U3fw0j30jMfqjV3sBN7bCPDBFktobLodLFqAh++Sd
- QFu0KstfSMPp9TItwFvmxSsmQiKBl5cERMchsDRKW6ndKdzoXpYzWPaGDL1Nh2T29J
- apF776X3S8ToA==
+ b=Oz2dMOSQK15zDcFskmZi4m3P55wev2vvazgoPxgi91JZRt9AskMZe+gOg5CO3rvUG
+ yioJGjvN+QErSELskHCD/AunWGN1rMfMB10mq9qkHlr43B9C6zgIDP6xj5cU/Jx670
+ mPYSATb011yfPvYiosFikMXXw9dzA+ag7EjTncRV+fdxulqVpqL0L5Mvb46VA9lsL7
+ h30E8mMBnjHFDqhUqwHj5MHu8wEiTj4oGML03U9tVq1USrL9b4WZSz5TAN70qP294z
+ Px4j3k6w3kBsAzYJB14sBtY4CuH6jKHBDUvqSUElcmljwlEY+S1RoSBvm2fxuNJ2/b
+ jIOiIzat9PXzA==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Date: Thu, 27 Jul 2023 00:45:37 +0200
-Message-Id: <20230726224537.360161-1-marex@denx.de>
+Date: Thu, 27 Jul 2023 01:58:07 +0200
+Message-Id: <20230726235807.497657-1-marex@denx.de>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -40,8 +40,8 @@ X-Virus-Status: Clean
 Cc: Marek Vasut <marex@denx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
-Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32: Switch DWMAC RMII clock to
-	MCO2 on DHCOM
+Subject: [Uboot-stm32] [PATCH v2] ARM: dts: stm32: Switch DWMAC RMII clock
+	to MCO2 on DHCOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,8 +88,11 @@ Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: u-boot@dh-electronics.com
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/dts/stm32mp15xx-dhcom-som.dtsi | 22 ++++++++++++++++++----
- 1 file changed, 18 insertions(+), 4 deletions(-)
+V2: Add U-Boot specifics to cater also for clock and clock-names in stm32mp151.dtsi
+---
+ arch/arm/dts/stm32mp15xx-dhcom-som.dtsi    | 22 ++++++++++++++++++----
+ arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi | 14 ++++++++++++++
+ 2 files changed, 32 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-som.dtsi
 index 83e2c87713f..238a611192e 100644
@@ -142,6 +145,31 @@ index 83e2c87713f..238a611192e 100644
  &rng1 {
  	status = "okay";
  };
+diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+index bc0730cf2bd..ff5e9034951 100644
+--- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+@@ -126,6 +126,20 @@
+ };
+ 
+ &rcc {
++	/*
++	 * Reinstate clock names from stm32mp151.dtsi, the MCO2 trick
++	 * used in stm32mp15xx-dhcom-som.dtsi is not supported by the
++	 * U-Boot clock framework.
++	 */
++	clock-names = "hse", "hsi", "csi", "lse", "lsi";
++	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>,
++		 <&clk_lse>, <&clk_lsi>;
++
++	/* The MCO2 is already configured correctly, remove those. */
++	/delete-property/ assigned-clocks;
++	/delete-property/ assigned-clock-parents;
++	/delete-property/ assigned-clock-rates;
++
+ 	st,clksrc = <
+ 		CLK_MPU_PLL1P
+ 		CLK_AXI_PLL2P
 -- 
 2.40.1
 

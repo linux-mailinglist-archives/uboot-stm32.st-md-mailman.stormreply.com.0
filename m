@@ -2,82 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id A931B769760
-	for <lists+uboot-stm32@lfdr.de>; Mon, 31 Jul 2023 15:20:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82B56770292
+	for <lists+uboot-stm32@lfdr.de>; Fri,  4 Aug 2023 16:09:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 543D8C6B44B;
-	Mon, 31 Jul 2023 13:20:15 +0000 (UTC)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D51E9C6B443
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 31 Jul 2023 13:20:13 +0000 (UTC)
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id E169F120004;
- Mon, 31 Jul 2023 16:20:12 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E169F120004
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1690809612;
- bh=7uHvfmS4GJCbPhVSCPf3ZYv5v1AecHi4WNDwEMJkpJI=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=dhQdoyYkeAfF1q8hShEpDoEbwKe8492limv+6oaJ1r4zz1glG7JJWPKWy+KOr21/b
- 6h0Sa2m8qEUejx5jQ+/xJ4SKMDVfCuw05tJXIY9MyAmGt6aMZvT8TfKHi5zwHUwfkv
- GqOy6ETulNb5FqIsf4+9Yx5VFxMLqrm/XAGo8WFpXL5FawBnHwrVpxaaGn8EL3DGFf
- MCXo6JsAgE03fdP7IkTV1Q2XlMASRMVnfAXmcbeNIycEepsx0iemq05+vGX0zZpJs+
- curVauguM8uCpUMRojud4dekQwYGeQPCdgiiMcgM/LCc2YcMqQsZ8XP5woNoXi+jWA
- q+NZ/9fsXWLaw==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2FDFCC6B463;
+	Fri,  4 Aug 2023 14:09:10 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 31 Jul 2023 16:20:12 +0300 (MSK)
-Received: from pc (100.64.160.123) by p-i-exch-sc-m01.sberdevices.ru
- (172.16.192.107) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Mon, 31 Jul
- 2023 16:19:23 +0300
-Date: Mon, 31 Jul 2023 16:20:05 +0300
-From: Igor Prusov <ivprusov@sberdevices.ru>
-To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, Chia-Wei
- Wang <chiawei_wang@aspeedtech.com>, Aspeed BMC SW team
- <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>, Stefan Roese
- <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>, <sjg@chromium.org>
-Message-ID: <20230731132005.57n24arwh6bcxpco@pc>
-References: <20230714152444.24395-1-ivprusov@sberdevices.ru>
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 468C9C65E4F
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri,  4 Aug 2023 14:09:09 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 374BtkJa018565; Fri, 4 Aug 2023 16:09:07 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=zaU+oDk
+ LYQNKbUslqEmHZt9MNyz83kKj1x1LnWCa7jA=; b=b0SZtBo0163cBS/m3klv/6U
+ ekSoHw9POJ5YbQG5rxj7spySpOqbWwc5PAJdo9S8O4hXL8p7Ip//XRobYjYLFCDt
+ F15s2IKKruqEKQULuJNmysOBIXNV34eoTc/rqyua8cDqr4OGc+V+ASYr/G6dV5Dj
+ z06DCUZRsPLfqzB18sPYEumCXwtPhGYLgPcgPuuS5dWydnxk58HNLRwhPYETLOIw
+ ayJm6+H4rbU83TGfCKmqSWbcRXDwbTH89+DE/LDCbaFL6DuHR0LYS13AXPOL9PKO
+ NXLrheDPFfdGpjUIYnFOGr6p4lK1htnBodu3n46kNriEa/DA+xFb3crUBLhep+w=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3s8wuk9yu3-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 04 Aug 2023 16:09:07 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BFF9410004F;
+ Fri,  4 Aug 2023 16:09:06 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A155421F0D1;
+ Fri,  4 Aug 2023 16:09:06 +0200 (CEST)
+Received: from localhost (10.201.20.38) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 4 Aug
+ 2023 16:09:06 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 4 Aug 2023 16:09:04 +0200
+Message-ID: <20230804140904.176552-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230714152444.24395-1-ivprusov@sberdevices.ru>
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 178796 [Jul 22 2023]
-X-KSMG-AntiSpam-Version: 5.9.59.0
-X-KSMG-AntiSpam-Envelope-From: IVPrusov@sberdevices.ru
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 525 525
- 723604743bfbdb7e16728748c3fa45e9eba05f7d, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/07/23 08:49:00 #21663637
-X-KSMG-AntiVirus-Status: Clean, skipped
-Cc: kernel@sberdevices.ru, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com, prusovigor@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v3 0/7] clk: Switch from soc_clk_dump to
-	clk_ops function
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
+ definitions=2023-08-04_13,2023-08-03_01,2023-05-22_02
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Valentin Caron <valentin.caron@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] serial: stm32: extend TC timeout
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,60 +73,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-+Simon Glass
+From: Valentin Caron <valentin.caron@foss.st.com>
 
-Hi Simon,
+Waiting 150us TC bit couldn't be enough.
 
-Apologies for the ping, but could you please take a look at this series?
-There was not much feedback after a while, so I'd like to understand
-whether proposed fix is viable or not.         
+If TFA lets 16 bits in USART fifo, we has to wait 16 times 87 us (time
+of 10 bits (1 byte in most use cases) at a baud rate of 115200).
 
-On Fri, Jul 14, 2023 at 06:24:37PM +0300, Igor Prusov wrote:
-> Currently clock providers may override default implementation of
-> soc_clk_dump function to replace clk dump command output. This causes
-> confusing behaviour when u-boot is built with one of such drivers
-> enabled but still has clocks defined using CCF. For example, enabling
-> CMD_CLK and using clk dump on sandbox target will not show CCF clocks
-> because k210 driver overrides common soc_clk_dump.
-> 
-> Changelog:
->  v1 -> v2:
->  - Add missing static to dump functions
->  v2 -> v3:
->  - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
-> 
-> Igor Prusov (7):
->   clk: zynq: Move soc_clk_dump to Zynq clock driver
->   clk: ast2600: Move soc_clk_dump function
->   clk: k210: Move soc_clk_dump function
->   clk: Add dump operation to clk_ops
->   cmd: clk: Use dump function from clk_ops
->   clk: treewide: switch to clock dump from clk_ops
->   cmd: clk: Make soc_clk_dump static
-> 
->  arch/arm/mach-zynq/clk.c               |  57 --------------
->  arch/mips/mach-pic32/cpu.c             |  23 ------
->  cmd/clk.c                              |  13 +++-
->  drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
->  drivers/clk/clk_k210.c                 | 103 ++++++++++++-------------
->  drivers/clk/clk_pic32.c                |  39 ++++++++++
->  drivers/clk/clk_versal.c               |   7 +-
->  drivers/clk/clk_zynq.c                 |  51 ++++++++++++
->  drivers/clk/clk_zynqmp.c               |  13 ++--
->  drivers/clk/imx/clk-imx8.c             |  11 +--
->  drivers/clk/mvebu/armada-37xx-periph.c |   5 +-
->  drivers/clk/stm32/clk-stm32mp1.c       |  29 ++-----
->  include/clk-uclass.h                   |   3 +
->  include/clk.h                          |   2 -
->  14 files changed, 223 insertions(+), 216 deletions(-)
-> 
-> -- 
-> 2.34.1
-> 
+Fixes: b4dbc5d65a67 ("serial: stm32: Wait TC bit before performing initialization")
 
+Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
+
+ drivers/serial/serial_stm32.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/serial/serial_stm32.c b/drivers/serial/serial_stm32.c
+index 0085113f674..23d476fba28 100644
+--- a/drivers/serial/serial_stm32.c
++++ b/drivers/serial/serial_stm32.c
+@@ -22,6 +22,14 @@
+ #include "serial_stm32.h"
+ #include <dm/device_compat.h>
+ 
++/*
++ * At 115200 bits/s
++ * 1 bit = 1 / 115200 = 8,68 us
++ * 8 bits = 69,444 us
++ * 10 bits are needed for worst case (8 bits + 1 start + 1 stop) = 86.806 us
++ */
++#define ONE_BYTE_B115200_US		87
++
+ static void _stm32_serial_setbrg(fdt_addr_t base,
+ 				 struct stm32_uart_info *uart_info,
+ 				 u32 clock_rate,
+@@ -209,12 +217,10 @@ static int stm32_serial_probe(struct udevice *dev)
+ 	 * before uart initialization, wait for TC bit (Transmission Complete)
+ 	 * in case there is still chars from previous bootstage to transmit
+ 	 */
+-	ret = read_poll_timeout(readl, isr, isr & USART_ISR_TC, 10, 150,
+-				plat->base + ISR_OFFSET(stm32f4));
+-	if (ret) {
+-		clk_disable(&clk);
+-		return ret;
+-	}
++	ret = read_poll_timeout(readl, isr, isr & USART_ISR_TC, 50,
++				16 * ONE_BYTE_B115200_US, plat->base + ISR_OFFSET(stm32f4));
++	if (ret)
++		dev_dbg(dev, "FIFO not empty, some character can be lost (%d)\n", ret);
+ 
+ 	ret = reset_get_by_index(dev, 0, &reset);
+ 	if (!ret) {
 -- 
-Best Regards,
-Igor Prusov
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

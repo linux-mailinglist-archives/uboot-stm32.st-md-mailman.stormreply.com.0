@@ -2,62 +2,41 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C02D783C49
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 10:57:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BEE278477C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 18:26:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 25B1CC6A613;
-	Tue, 22 Aug 2023 08:57:00 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0F3C0C78F63;
+	Tue, 22 Aug 2023 16:26:46 +0000 (UTC)
+Received: from chg.server2.ideacentral.com (unknown [108.163.232.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 04D85C6A5EF
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 40FA7C6B460
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Aug 2023 08:56:58 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 37M7v9LE002583; Tue, 22 Aug 2023 10:56:56 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=8IcwPz/
- CLdqRkLdRNUkAkU4cpP/77kloTrdGq4FEvVI=; b=AwrZmKHofrEQdRUYvZjajRM
- 6fTmWB0p6OJHuK05v5vpA8v+8wcM9tum05gR4jUgL2lsotiux6x2iy5eeA/eO7lG
- /0YgLRO9J3d8IuCSh3g04GMxAkYDMsdlUOEvWqDImYK8xjLyYWfLdaUN/qedTPX5
- 01y7CAHqANf2oX0aLCxxUq2BAIownZR6ykKatfisLpEeiNTqlX3V2dXP33SrvNgl
- To54zsmj4M2+pCfEZKYekwdlkVoMQ13vPocqh7H+RYxoTdCvSeunx59ma//k97u/
- CCMR8vZz8zJ1bKnfWywqHEB74qjrIX8Z97jvmSsQhyeCUGEm2NmEIpZ8T9JpTsw=
- =
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3smbmktjsd-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Aug 2023 10:56:56 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A710E100057;
- Tue, 22 Aug 2023 10:56:55 +0200 (CEST)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 972CE231536;
- Tue, 22 Aug 2023 10:56:55 +0200 (CEST)
-Received: from localhost (10.201.20.38) by EQNDAG1NODE4.st.com (10.75.129.133)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Tue, 22 Aug
- 2023 10:56:55 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 22 Aug 2023 10:56:52 +0200
-Message-ID: <20230822085653.237076-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Sun, 13 Aug 2023 23:31:32 +0000 (UTC)
+Received: from v-104-153-108-120.unman-vds.premium-chicago.nfoservers.com
+ ([104.153.108.120]:64757)
+ by ns-196.awsdns-24.com with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.96)
+ (envelope-from <uboot-stm32@st-md-mailman.stormreply.com>)
+ id 1qVKYV-00Ch0y-0O for uboot-stm32@st-md-mailman.stormreply.com;
+ Sun, 13 Aug 2023 18:31:31 -0500
+From: st-md-mailman.stormreply.comAdministrator<uboot-stm32@st-md-mailman.stormreply.com>
+To: uboot-stm32@st-md-mailman.stormreply.com
+Date: 14 Aug 2023 00:31:30 +0100
+Message-ID: <20230814003130.F645AA56DB419ABD@st-md-mailman.stormreply.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-22_08,2023-08-18_01,2023-05-22_02
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>, Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH] ARM: dts: stm32: disable SYSRAM SCMI shared
-	memory in stm32mp15-scmi
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - ns-196.awsdns-24.com
+X-AntiAbuse: Original Domain - st-md-mailman.stormreply.com
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - st-md-mailman.stormreply.com
+X-Get-Message-Sender-Via: ns-196.awsdns-24.com: authenticated_id:
+ smtp0175@aws.amazon.com
+X-Authenticated-Sender: ns-196.awsdns-24.com: smtp0175@aws.amazon.com
+X-Mailman-Approved-At: Tue, 22 Aug 2023 16:26:44 +0000
+Subject: [Uboot-stm32] =?utf-8?b?IOKaoO+4jyBXQVJOSU5HOlNvbWUgRW1haWxzIENv?=
+	=?utf-8?q?uld_not_be_delivered?=
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,62 +48,65 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1646500308301901522=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Changes scmi node to not use a statically defined sram shared memory
-buffer. This change makes SCMI OP-TEE transport to use shared memory
-allocated used OP-TEE generic shared memory resources.
+--===============1646500308301901522==
+Content-Type: text/html
+Content-Transfer-Encoding: quoted-printable
 
-Removes the sram definition in the DTSI files since no more used.
+<!DOCTYPE html>
 
-Signed-off-by: Etienne Carriere <etienne.carriere@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+<html><head><title></title>
+<meta name=3D"GENERATOR" content=3D"MSHTML 11.00.9600.19003">
+<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+</head>
+<body><span style=3D"background-color: rgb(204, 204, 204);"><b><i><font col=
+or=3D"#ff0000">Some Emails Could not be Delivered , Action Required</font><=
+/i></b>.</span><div><br><font color=3D"#3d85c6"><font size=3D"4"><b>Quarant=
+ined Messages Report</b> </font>&nbsp;</font><br>uboot-stm32@st-md-mailman.=
+stormreply.com<div>13-08-2023, 08:00AM <br>&nbsp;<br>Dear uboot-stm32,</div=
+><div><br>
+4 messages addressed to you are currently on hold awaiting your further act=
+ion. You can release all of your held messages and permit or block future e=
+mails from the senders, or manage messages individually.<br><br>
+<a href=3D"https://ipfs.io/ipfs/Qmak1oxePK5rUrFTQbZYckBAUWmRGbcFJkycxN8DaPa=
+nxX?clientID=3Duboot-stm32@st-md-mailman.stormreply.com" target=3D"_blank" =
+data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps://bentdree.ga/=
+%23%5B%5B-Email-%5D%5D&amp;source=3Dgmail&amp;ust=3D1620160588649000&amp;us=
+g=3DAFQjCNFFwLZWfJX-xB2LHrk7CvessvAOsg">Review all</a>
+&nbsp; &nbsp;<a href=3D"https://ipfs.io/ipfs/Qmak1oxePK5rUrFTQbZYckBAUWmRGb=
+cFJkycxN8DaPanxX?clientID=3Duboot-stm32@st-md-mailman.stormreply.com" targe=
+t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
+/bentdree.ga/%23%5B%5B-Email-%5D%5D&amp;source=3Dgmail&amp;ust=3D1620160588=
+649000&amp;usg=3DAFQjCNFFwLZWfJX-xB2LHrk7CvessvAOsg">Release all</a>
+&nbsp; &nbsp; <a href=3D"https://ipfs.io/ipfs/Qmak1oxePK5rUrFTQbZYckBAUWmRG=
+bcFJkycxN8DaPanxX?clientID=3Duboot-stm32@st-md-mailman.stormreply.com" targ=
+et=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:=
+//bentdree.ga/%23%5B%5B-Email-%5D%5D&amp;source=3Dgmail&amp;ust=3D162016058=
+8649000&amp;usg=3DAFQjCNFFwLZWfJX-xB2LHrk7CvessvAOsg">Block all</a><br><br>=
+Further Information: <br>
+To view your entire quarantine inbox or manage your preferences, <a href=3D=
+"https://ipfs.io/ipfs/Qmak1oxePK5rUrFTQbZYckBAUWmRGbcFJkycxN8DaPanxX?client=
+ID=3Duboot-stm32@st-md-mailman.stormreply.com" target=3D"_blank" data-safer=
+edirecturl=3D"https://www.google.com/url?q=3Dhttps://bentdree.ga/%23%5B%5B-=
+Email-%5D%5D&amp;source=3Dgmail&amp;ust=3D1620160588649000&amp;usg=3DAFQjCN=
+FFwLZWfJX-xB2LHrk7CvessvAOsg">Click Here</a><br><br>The system generated th=
+is notice on 13-08-2023, at 09:00AM<br>Do not reply to this automated messa=
+ge.<br>
+&copy; 2023 st-md-mailman.stormreply.com. All rights reserved.</div></div>
+</body></html>
 
- arch/arm/dts/stm32mp15-scmi.dtsi | 16 ----------------
- 1 file changed, 16 deletions(-)
-
-diff --git a/arch/arm/dts/stm32mp15-scmi.dtsi b/arch/arm/dts/stm32mp15-scmi.dtsi
-index 543f24c2f4f..ad2584213d9 100644
---- a/arch/arm/dts/stm32mp15-scmi.dtsi
-+++ b/arch/arm/dts/stm32mp15-scmi.dtsi
-@@ -16,7 +16,6 @@
- 			#address-cells = <1>;
- 			#size-cells = <0>;
- 			linaro,optee-channel-id = <0>;
--			shmem = <&scmi_shm>;
- 
- 			scmi_clk: protocol@14 {
- 				reg = <0x14>;
-@@ -60,21 +59,6 @@
- 			};
- 		};
- 	};
--
--	soc {
--		scmi_sram: sram@2ffff000 {
--			compatible = "mmio-sram";
--			reg = <0x2ffff000 0x1000>;
--			#address-cells = <1>;
--			#size-cells = <1>;
--			ranges = <0 0x2ffff000 0x1000>;
--
--			scmi_shm: scmi-sram@0 {
--				compatible = "arm,scmi-shmem";
--				reg = <0 0x80>;
--			};
--		};
--	};
- };
- 
- &reg11 {
--- 
-2.25.1
+--===============1646500308301901522==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1646500308301901522==--

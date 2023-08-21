@@ -2,60 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F75A784787
+	by mail.lfdr.de (Postfix) with ESMTPS id 95F6F784788
 	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 18:27:09 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 57279C78F6D;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5E591C78F6F;
 	Tue, 22 Aug 2023 16:27:09 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CFE2EC6B44C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2DBF9C6B44B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 13:51:37 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-3fee769fcc3so16777065e9.2
+ Mon, 21 Aug 2023 13:51:40 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-3fe4a89e8c4so32334085e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 06:51:37 -0700 (PDT)
+ Mon, 21 Aug 2023 06:51:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692625897; x=1693230697;
+ d=gmail.com; s=20221208; t=1692625900; x=1693230700;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7yrfRyMChh1ygDQtR1jl9BYhd6F+V0coaR3saA65Ao8=;
- b=oaK1+upyGYfwOr4/nZR8RIRT+Yn2PZ+2dy2+GMSjffIkOUvAA4SwUrsuBUHVmQ+cIg
- Q0F+D60Mp5/MzkFm9rwAnrQpO2uJb9esI/U8crcERtM+p1p5iKU9VNHrwRjlzB4VfG3E
- 1rFRNOOhGpyPBS6RY+cJD557cLeGMoVUsQbv3xfnShrQg142CAOgzdQ4AtJ3FYRDngOc
- QiczfO53zpeOnZjhBAa5aw7TDgIqHuR1bYCYIRraWJdIl9Cxa6ZDN1IozoPg6hutV+SE
- 77oOM9VfIYyC8B3q6wdaduzcH0Qgeq3IEzfE54DLVtS/yT5z2vJiPtnfnV2pXzjU01Iq
- l7Fg==
+ bh=du9K8HAMfjDBv9t9zq9p8Zs+vCZHJ6g2zmB7iSzSF7o=;
+ b=i+1wSJUCYpv3D2Y4WhFT+a+eXACMjCfu9K5FQkWQdC2smyIukzPLOT9TKll1BIlZ+S
+ 0BSrF+Vp8/DGT40HSh+wXWV4jYRbGaai6uC9HETzas7pJ6Qhy+ffz2UKdEYLi1VLHsaq
+ X75Z5dWmXphu9f83rAKezE9CYHm+PJtfCCmN6nzYmKby9xzdvEmPjC4JmCjqvh+sqORE
+ Bzxq55zbOUyTxIzqT01tuFNOw/v8W0H5dQ6fFOCzvxrMmYV1xWY68YL/0QqfqG2DG5q1
+ XPDS0Sgg6L+yzBD2e/I0iNDZaFfXRDq4jvWBkELBWMrWm1880C9/qHFlPwFRRUlHYf+M
+ 4DSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692625897; x=1693230697;
+ d=1e100.net; s=20221208; t=1692625900; x=1693230700;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7yrfRyMChh1ygDQtR1jl9BYhd6F+V0coaR3saA65Ao8=;
- b=Ba2bxS+eAKCMXp4l+NCP+jYeJTr40PBNQ6LLX26pSRpiKSXsrhaf8uMf2haKQ6Qf5i
- IE4/YLlgXXBXvn+Tc3e1gCuZJAnyca9iDKpNcDatPcURNWGi4l49RrAZj9gxMVK+XDQl
- Luh+uONOJaJQDj8y8Rw04KM/FP3W+37ATgpc/FA0+Rr8GcieRuBxrx2PdHFFuB6bcE7H
- rrrkuSsPH6nD5Ytq8JejjqLA4eekcAV039/2VCGEfY0vStwxiQLRGwF0hjbc0TokKC9J
- Icj6UM3hWBkCfdT/vuucM6B2BjC8HOwqKAC3OeYz2wBT0lSycJh98nx3GJOMh2Tul5h8
- Kp6w==
-X-Gm-Message-State: AOJu0YwRWkIjuf8Oqp8UpAWLmC1rCiZWcyrWJbjV63EWnAp/OQCFCUnn
- +ubhYZ9ixAnu6XrOSjRZMFA=
-X-Google-Smtp-Source: AGHT+IHO/arCmWeM8GYL18CXATu4Sh++TdyEswajL5QnvTaImLdSHvMUo+xc/gBkyHdBnNYS/qgvaQ==
-X-Received: by 2002:adf:cd0b:0:b0:31c:3013:9fa5 with SMTP id
- w11-20020adfcd0b000000b0031c30139fa5mr3560706wrm.59.1692625897248; 
- Mon, 21 Aug 2023 06:51:37 -0700 (PDT)
+ bh=du9K8HAMfjDBv9t9zq9p8Zs+vCZHJ6g2zmB7iSzSF7o=;
+ b=MR+6glP/iuMUrDL0gC//F5WN6eLXff4TV7gJ6/QBBbPuxsaWQm28cNKM4aEwFS4rHF
+ vZ4hVYWK8QnTj80+HURwBPqj/+hPMLvFgPkmCun9zoKw/yOonrGalm67OmAIjIyxdVjY
+ z/qtbbKl769myqfE+H4ktXAzSLR0UaetvI/NQmp1MVx2Ii/3YASdB7aXMA3iLDMxfP62
+ F7zWFdmubRbS6m7jotBbi8PHEFU9bI3bu1MhDt/Vke49HiFaEs7GV378OdSsu826N37w
+ Zz2evleXjdTiKhFmuRf4ziVTW0CAIc9KU10SpKAm8PX44Tl06wb0VFjt5zz+YipOa3Ni
+ jHUA==
+X-Gm-Message-State: AOJu0Yxyi0b1DNep/QbkGERJJktihSOBficrpA+NoR3CtwDv6CAnKb3+
+ CaAHBUvL6HPpz2jB0k7S5Hg=
+X-Google-Smtp-Source: AGHT+IE0aHC9IeAZ9om6v+CX5lhGhaikzyvs7K+JjasiPPxFotFPaEOG+0SHfy/L4wW7iRlvWFh0mw==
+X-Received: by 2002:a5d:568f:0:b0:317:e5ec:8767 with SMTP id
+ f15-20020a5d568f000000b00317e5ec8767mr4615501wrv.21.1692625899711; 
+ Mon, 21 Aug 2023 06:51:39 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.35
+ r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 06:51:36 -0700 (PDT)
+ Mon, 21 Aug 2023 06:51:39 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
-Date: Mon, 21 Aug 2023 16:51:03 +0300
-Message-Id: <20230821135111.3558478-7-alpernebiyasak@gmail.com>
+Date: Mon, 21 Aug 2023 16:51:04 +0300
+Message-Id: <20230821135111.3558478-8-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
@@ -73,8 +73,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v5 06/13] vidconsole: Add damage notifications
-	to all vidconsole drivers
+Subject: [Uboot-stm32] [PATCH v5 07/13] video: test: Test video damage
+	tracking via vidconsole
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,272 +91,99 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Alexander Graf <agraf@csgraf.de>
+With VIDEO_DAMAGE, the video uclass tracks updated regions of the frame
+buffer in order to avoid unnecessary work during a video sync. Enable
+the config in sandbox and add a test for it, by printing strings at a
+few locations and checking the tracked region.
 
-Now that we have a damage tracking API, let's populate damage done by
-vidconsole drivers. We try to declare as little memory as damaged as
-possible.
-
-Signed-off-by: Alexander Graf <agraf@csgraf.de>
-Reported-by: Da Xue <da@libre.computer>
-[Alper: Rebase for met->baseline, fontdata->height/width, make rotated
-        console_putc_xy() damages pass tests, edit patch message]
-Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 ---
+This is hard to test because most things issue video syncs that process
+and reset the damaged region.
 
 Changes in v5:
-- Use met->baseline instead of priv->baseline
-- Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-- Update console_rotate.c video_damage() calls to pass video tests
-- Remove mention about not having minimal damage for console_rotate.c
+- Add patch "video: test: Test video damage tracking via vidconsole"
 
-Changes in v2:
-- Fix ranges in truetype target
-- Limit rotate to necessary damage
+ configs/sandbox_defconfig |  1 +
+ test/dm/video.c           | 56 +++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 57 insertions(+)
 
- drivers/video/console_normal.c   | 18 +++++++++++
- drivers/video/console_rotate.c   | 54 ++++++++++++++++++++++++++++++++
- drivers/video/console_truetype.c | 21 +++++++++++++
- drivers/video/video-uclass.c     |  1 +
- 4 files changed, 94 insertions(+)
-
-diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
-index 413c7abee9e1..a19ce6a2bc11 100644
---- a/drivers/video/console_normal.c
-+++ b/drivers/video/console_normal.c
-@@ -39,6 +39,12 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     fontdata->height * row,
-+		     vid_priv->xsize,
-+		     fontdata->height);
-+
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 259f31f26cee..51b820f13121 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -307,6 +307,7 @@ CONFIG_USB_ETH_CDC=y
+ CONFIG_VIDEO=y
+ CONFIG_VIDEO_FONT_SUN12X22=y
+ CONFIG_VIDEO_COPY=y
++CONFIG_VIDEO_DAMAGE=y
+ CONFIG_CONSOLE_ROTATION=y
+ CONFIG_CONSOLE_TRUETYPE=y
+ CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+diff --git a/test/dm/video.c b/test/dm/video.c
+index e4bd27a6b76f..8c7d9800a42e 100644
+--- a/test/dm/video.c
++++ b/test/dm/video.c
+@@ -711,3 +711,59 @@ static int dm_test_video_copy(struct unit_test_state *uts)
  	return 0;
  }
- 
-@@ -60,6 +66,12 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     fontdata->height * rowdst,
-+		     vid_priv->xsize,
-+		     fontdata->height * count);
+ DM_TEST(dm_test_video_copy, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
 +
- 	return 0;
- }
- 
-@@ -90,6 +102,12 @@ static int console_putc_xy(struct udevice *dev, uint x_frac, uint y, char ch)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     x,
-+		     y,
-+		     fontdata->width,
-+		     fontdata->height);
++/* Test video damage tracking */
++static int dm_test_video_damage(struct unit_test_state *uts)
++{
++	struct sandbox_sdl_plat *plat;
++	struct udevice *dev, *con;
++	struct video_priv *priv;
++	const char *test_string_1 = "Criticism may not be agreeable, ";
++	const char *test_string_2 = "but it is necessary.";
++	const char *test_string_3 = "It fulfils the same function as pain in the human body.";
 +
- 	ret = vidconsole_sync_copy(dev, start, line);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/video/console_rotate.c b/drivers/video/console_rotate.c
-index 65358a1c6e74..6c3e7c1bb8dc 100644
---- a/drivers/video/console_rotate.c
-+++ b/drivers/video/console_rotate.c
-@@ -36,6 +36,12 @@ static int console_set_row_1(struct udevice *dev, uint row, int clr)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     vid_priv->xsize - ((row + 1) * fontdata->height),
-+		     0,
-+		     fontdata->height,
-+		     vid_priv->ysize);
++	if (!IS_ENABLED(CONFIG_VIDEO_DAMAGE))
++		return -EAGAIN;
 +
- 	return 0;
- }
- 
-@@ -64,6 +70,12 @@ static int console_move_rows_1(struct udevice *dev, uint rowdst, uint rowsrc,
- 		dst += vid_priv->line_length;
- 	}
- 
-+	video_damage(dev->parent,
-+		     vid_priv->xsize - ((rowdst + count) * fontdata->height),
-+		     0,
-+		     count * fontdata->height,
-+		     vid_priv->ysize);
++	ut_assertok(uclass_find_device(UCLASS_VIDEO, 0, &dev));
++	ut_assert(!device_active(dev));
++	plat = dev_get_plat(dev);
++	plat->font_size = 32;
 +
- 	return 0;
- }
- 
-@@ -96,6 +108,12 @@ static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, char ch)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     vid_priv->xsize - y - fontdata->height,
-+		     linenum - 1,
-+		     fontdata->height,
-+		     fontdata->width);
++	ut_assertok(video_get_nologo(uts, &dev));
++	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
++	priv = dev_get_uclass_priv(dev);
 +
- 	return VID_TO_POS(fontdata->width);
- }
- 
-@@ -121,6 +139,12 @@ static int console_set_row_2(struct udevice *dev, uint row, int clr)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     vid_priv->ysize - (row + 1) * fontdata->height,
-+		     vid_priv->xsize,
-+		     fontdata->height);
++	vidconsole_position_cursor(con, 14, 10);
++	vidconsole_put_string(con, test_string_2);
++	ut_asserteq(449, priv->damage.xstart);
++	ut_asserteq(325, priv->damage.ystart);
++	ut_asserteq(661, priv->damage.xend);
++	ut_asserteq(350, priv->damage.yend);
 +
- 	return 0;
- }
- 
-@@ -142,6 +166,12 @@ static int console_move_rows_2(struct udevice *dev, uint rowdst, uint rowsrc,
- 	vidconsole_memmove(dev, dst, src,
- 			   fontdata->height * vid_priv->line_length * count);
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     vid_priv->ysize - (rowdst + count) * fontdata->height,
-+		     vid_priv->xsize,
-+		     count * fontdata->height);
++	vidconsole_position_cursor(con, 7, 5);
++	vidconsole_put_string(con, test_string_1);
++	ut_asserteq(225, priv->damage.xstart);
++	ut_asserteq(164, priv->damage.ystart);
++	ut_asserteq(661, priv->damage.xend);
++	ut_asserteq(350, priv->damage.yend);
 +
- 	return 0;
- }
- 
-@@ -174,6 +204,12 @@ static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, char ch)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     x - fontdata->width + 1,
-+		     linenum - fontdata->height + 1,
-+		     fontdata->width,
-+		     fontdata->height);
++	vidconsole_position_cursor(con, 21, 15);
++	vidconsole_put_string(con, test_string_3);
++	ut_asserteq(225, priv->damage.xstart);
++	ut_asserteq(164, priv->damage.ystart);
++	ut_asserteq(1280, priv->damage.xend);
++	ut_asserteq(510, priv->damage.yend);
 +
- 	return VID_TO_POS(fontdata->width);
- }
- 
-@@ -198,6 +234,12 @@ static int console_set_row_3(struct udevice *dev, uint row, int clr)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     row * fontdata->height,
-+		     0,
-+		     fontdata->height,
-+		     vid_priv->ysize);
++	video_sync(dev, false);
++	ut_asserteq(priv->xsize, priv->damage.xstart);
++	ut_asserteq(priv->ysize, priv->damage.ystart);
++	ut_asserteq(0, priv->damage.xend);
++	ut_asserteq(0, priv->damage.yend);
 +
- 	return 0;
- }
- 
-@@ -224,6 +266,12 @@ static int console_move_rows_3(struct udevice *dev, uint rowdst, uint rowsrc,
- 		dst += vid_priv->line_length;
- 	}
- 
-+	video_damage(dev->parent,
-+		     rowdst * fontdata->height,
-+		     0,
-+		     count * fontdata->height,
-+		     vid_priv->ysize);
++	ut_asserteq(7339, compress_frame_buffer(uts, dev, false));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
 +
- 	return 0;
- }
- 
-@@ -255,6 +303,12 @@ static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, char ch)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     y,
-+		     linenum - fontdata->width + 1,
-+		     fontdata->height,
-+		     fontdata->width);
-+
- 	return VID_TO_POS(fontdata->width);
- }
- 
-diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 0f9bb49e44f7..0adbf9cc3d67 100644
---- a/drivers/video/console_truetype.c
-+++ b/drivers/video/console_truetype.c
-@@ -178,6 +178,7 @@ struct console_tt_priv {
- static int console_truetype_set_row(struct udevice *dev, uint row, int clr)
- {
- 	struct video_priv *vid_priv = dev_get_uclass_priv(dev->parent);
-+	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
- 	struct console_tt_priv *priv = dev_get_priv(dev);
- 	struct console_tt_metrics *met = priv->cur_met;
- 	void *end, *line;
-@@ -221,6 +222,12 @@ static int console_truetype_set_row(struct udevice *dev, uint row, int clr)
- 	if (ret)
- 		return ret;
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     vc_priv->y_charsize * row,
-+		     vid_priv->xsize,
-+		     vc_priv->y_charsize);
-+
- 	return 0;
- }
- 
-@@ -228,6 +235,7 @@ static int console_truetype_move_rows(struct udevice *dev, uint rowdst,
- 				     uint rowsrc, uint count)
- {
- 	struct video_priv *vid_priv = dev_get_uclass_priv(dev->parent);
-+	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
- 	struct console_tt_priv *priv = dev_get_priv(dev);
- 	struct console_tt_metrics *met = priv->cur_met;
- 	void *dst;
-@@ -246,6 +254,12 @@ static int console_truetype_move_rows(struct udevice *dev, uint rowdst,
- 	for (i = 0; i < priv->pos_ptr; i++)
- 		priv->pos[i].ypos -= diff;
- 
-+	video_damage(dev->parent,
-+		     0,
-+		     vc_priv->y_charsize * rowdst,
-+		     vid_priv->xsize,
-+		     vc_priv->y_charsize * count);
-+
- 	return 0;
- }
- 
-@@ -403,6 +417,13 @@ static int console_truetype_putc_xy(struct udevice *dev, uint x, uint y,
- 
- 		line += vid_priv->line_length;
- 	}
-+
-+	video_damage(dev->parent,
-+		     VID_TO_PIXEL(x) + xoff,
-+		     y + met->baseline + yoff,
-+		     width,
-+		     height);
-+
- 	ret = vidconsole_sync_copy(dev, start, line);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index ebf409d839f0..8bfcbc88dda7 100644
---- a/drivers/video/video-uclass.c
-+++ b/drivers/video/video-uclass.c
-@@ -199,6 +199,7 @@ int video_fill_part(struct udevice *dev, int xstart, int ystart, int xend,
- 		}
- 		line += priv->line_length;
- 	}
-+
- 	ret = video_sync_copy(dev, start, line);
- 	if (ret)
- 		return ret;
++	return 0;
++}
++DM_TEST(dm_test_video_damage, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
 -- 
 2.40.1
 

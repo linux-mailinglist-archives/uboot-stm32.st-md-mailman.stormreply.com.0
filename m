@@ -2,42 +2,43 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE0807831B5
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 22:06:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A58687831BE
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 22:20:09 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8426BC6A5EF;
-	Mon, 21 Aug 2023 20:06:56 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 532D8C6A5EF;
+	Mon, 21 Aug 2023 20:20:09 +0000 (UTC)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 071B7C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 63773C65E56
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 20:06:55 +0000 (UTC)
+ Mon, 21 Aug 2023 20:20:08 +0000 (UTC)
 Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 94F4160807C7;
- Mon, 21 Aug 2023 22:06:53 +0200 (CEST)
-Message-ID: <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
-Date: Mon, 21 Aug 2023 22:06:52 +0200
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 1582660807C7;
+ Mon, 21 Aug 2023 22:20:06 +0200 (CEST)
+Message-ID: <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+Date: Mon, 21 Aug 2023 22:20:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-GB
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
+To: Simon Glass <sjg@chromium.org>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-12-alpernebiyasak@gmail.com>
- <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
 From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
  Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v5 11/13] video: Use VIDEO_DAMAGE for
-	VIDEO_COPY
+ uboot-stm32@st-md-mailman.stormreply.com, Anatolij Gustschin <agust@denx.de>,
+ Da Xue <da@libre.computer>
+Subject: Re: [Uboot-stm32] [PATCH v5 00/13] Add video damage tracking
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -55,178 +56,211 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 21.08.23 21:11, Simon Glass wrote:
-> Hi Alper,
+On 21.08.23 21:57, Simon Glass wrote:
+> Hi Alex,
 >
-> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->> From: Alexander Graf <agraf@csgraf.de>
+> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
 >>
->> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
->> print a single character, it will always copy the full range of bytes
->> from the top left corner of the character to the lower right onto the
->> uncached frame buffer. This includes pretty much the full line contents
->> of the printed character.
+>> On 21.08.23 21:11, Simon Glass wrote:
+>>> Hi Alper,
+>>>
+>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+>>>> some tests and other changes. The original cover letter is as follows:
+>>>>
+>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+>>>>>
+>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+>>>>> but need it accessible by the display controller which reads directly
+>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+>>>>> DRAM on every change. The full frame buffer.
+>>> It should not, see below.
+>>>
+>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+>>>>> printed space triggers a cache flush.
+>>> That is a bug somewhere in EFI.
 >>
->> Since we now have proper damage tracking, let's make use of that to reduce
->> the amount of data we need to copy. With this patch applied, we will only
->> copy the tiny rectangle surrounding characters when we print them,
->> speeding up the video console.
-> I suppose for rotated consoles it copies whole lines, but otherwise it
-> does a lot of small copies?
+>> Unfortunately not :). You may call it a bug in grub: It literally prints
+>> over space characters for every character in its menu that it wants
+>> cleared. On every text screen draw.
+>>
+>> This wouldn't be a big issue if we only flush the reactangle that gets
+>> modified. But without this patch set, we're flushing the full DRAM
+>> buffer on every u-boot text console character write, which means for
+>> every character (as that's the only API UEFI has).
+>>
+>> As a nice side effect, we speed up the normal U-Boot text console as
+>> well with this patch set, because even "normal" text prints that write
+>> for example a single line of text on the screen today flush the full
+>> frame buffer to DRAM.
+> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+> after every character. It doesn't do that for normal character output
+> and I don't think it makes sense to do it for EFI either.
 
 
-I tried to keep the code as simple as possible and only track an "upper 
-left" and "lower right" corner of modifications. So sync will always 
-copy/flush a single rectangle.
+I see. Let's trace the calls:
+
+efi_cout_output_string()
+-> fputs()
+-> vidconsole_puts()
+-> video_sync()
+-> flush_dcache_range()
+
+Unfortunately grub abstracts character backends down to the "print 
+character" level, so it calls UEFI's sopisticated "output_string" 
+callback with single characters at a time, which means we do a full 
+dcache flush for every character that we print:
+
+https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
 
 
 >
->> After this, changes to the main frame buffer are not immediately copied
->> to the copy frame buffer, but postponed until the next video device
->> sync. So issue an explicit sync before inspecting the copy frame buffer
->> contents for the video tests.
-> So how does the sync get done in this case?
+>>
+>>>>> This patch set implements the easiest mitigation against this problem:
+>>>>> Damage tracking. We remember the lowest common denominator region that was
+>>>>> touched since the last video_sync() call and only flush that. The most
+>>>>> typical writer to the frame buffer is the video console, which always
+>>>>> writes rectangles of characters on the screen and syncs afterwards.
+>>>>>
+>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+>>>>> serial console attached for size information) on an RK3399-ROC system
+>>>>> at 1440p from 55 seconds to less than 1 second.
+>>>>>
+>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+>>>>> overhead compared to before as well. So even x86 systems should be faster
+>>>>> with this now :).
+>>>>>
+>>>>>
+>>>>> Alternatives considered:
+>>>>>
+>>>>>     1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+>>>>>        so often. We are missing timers to do this generically.
+>>>>>
+>>>>>     2) Double buffering - We could try to identify whether anything changed
+>>>>>        at all and only draw to the FB if it did. That would require
+>>>>>        maintaining a second buffer that we need to scan.
+>>>>>
+>>>>>     3) Text buffer - Maintain a buffer of all text printed on the screen with
+>>>>>        respective location. Don't write if the old and new character are
+>>>>>        identical. This would limit applicability to text only and is an
+>>>>>        optimization on top of this patch set.
+>>>>>
+>>>>>     4) Hash screen lines - Create a hash (sha256?) over every line when it
+>>>>>        changes. Only flush when it does. I'm not sure if this would waste
+>>>>>        more time, memory and cache than the current approach. It would make
+>>>>>        full screen updates much more expensive.
+>>> 5) Fix the bug mentioned above?
+>>>
+>>>> Changes in v5:
+>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+>>>> - Use xstart, ystart, xend, yend as names for damage region
+>>>> - Document damage struct and fields in struct video_priv comment
+>>>> - Return void from video_damage()
+>>>> - Fix undeclared priv error in video_sync()
+>>>> - Drop unused headers from video-uclass.c
+>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>>>> - Call video_damage() also in video_fill_part()
+>>>> - Use met->baseline instead of priv->baseline
+>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>>>> - Update console_rotate.c video_damage() calls to pass video tests
+>>>> - Remove mention about not having minimal damage for console_rotate.c
+>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+>>>> - Document new vdev field in struct efi_gop_obj comment
+>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>>>> - Fix memmove() calls by removing the extra dev argument
+>>>> - Call video_sync() before checking copy_fb in video tests
+>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+>>>>
+>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v4:
+>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+>>>> - Simplify first damage logic
+>>>> - Remove VIDEO_DAMAGE default for ARM
+>>>> - Skip damage on EfiBltVideoToBltBuffer
+>>>> - Add patch "video: Always compile cache flushing code"
+>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+>>>>
+>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v3:
+>>>> - Adapt to always assume DM is used
+>>>> - Adapt to always assume DM is used
+>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>>>
+>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+>>>>
+>>>> Changes in v2:
+>>>> - Remove ifdefs
+>>>> - Fix ranges in truetype target
+>>>> - Limit rotate to necessary damage
+>>>> - Remove ifdefs from gop
+>>>> - Fix dcache range; we were flushing too much before
+>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>>>
+>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+>>>>
+>>>> Alexander Graf (9):
+>>>>     dm: video: Add damage tracking API
+>>>>     dm: video: Add damage notification on display fills
+>>>>     vidconsole: Add damage notifications to all vidconsole drivers
+>>>>     video: Add damage notification on bmp display
+>>>>     efi_loader: GOP: Add damage notification on BLT
+>>>>     video: Only dcache flush damaged lines
+>>>>     video: Use VIDEO_DAMAGE for VIDEO_COPY
+>>>>     video: Always compile cache flushing code
+>>>>     video: Enable VIDEO_DAMAGE for drivers that need it
+>>>>
+>>>> Alper Nebi Yasak (4):
+>>>>     video: test: Split copy frame buffer check into a function
+>>>>     video: test: Support checking copy frame buffer contents
+>>>>     video: test: Test partial updates of hardware frame buffer
+>>>>     video: test: Test video damage tracking via vidconsole
+>>>>
+>>>>    arch/arm/mach-omap2/omap3/Kconfig |   1 +
+>>>>    arch/arm/mach-sunxi/Kconfig       |   1 +
+>>>>    drivers/video/Kconfig             |  26 +++
+>>>>    drivers/video/console_normal.c    |  27 ++--
+>>>>    drivers/video/console_rotate.c    |  94 +++++++----
+>>>>    drivers/video/console_truetype.c  |  37 +++--
+>>>>    drivers/video/exynos/Kconfig      |   1 +
+>>>>    drivers/video/imx/Kconfig         |   1 +
+>>>>    drivers/video/meson/Kconfig       |   1 +
+>>>>    drivers/video/rockchip/Kconfig    |   1 +
+>>>>    drivers/video/stm32/Kconfig       |   1 +
+>>>>    drivers/video/tegra20/Kconfig     |   1 +
+>>>>    drivers/video/tidss/Kconfig       |   1 +
+>>>>    drivers/video/vidconsole-uclass.c |  16 --
+>>>>    drivers/video/video-uclass.c      | 190 ++++++++++++----------
+>>>>    drivers/video/video_bmp.c         |   7 +-
+>>>>    include/video.h                   |  59 +++----
+>>>>    include/video_console.h           |  52 ------
+>>>>    lib/efi_loader/efi_gop.c          |   7 +
+>>>>    test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+>>>>    20 files changed, 483 insertions(+), 297 deletions(-)
+>>> It is good to see this tidied up into something that can be applied!
+>>>
+>>> I am unsure what is going on with the EFI performance, though. It
+>>> should not flush the cache after every character, only after a new
+>>> line. Is there something wrong in here? If so, we should fix that bug
+>>> first and it should be patch 1 of this series.
+>>
+>> Before I came up with this series, I was trying to identify the UEFI bug
+>> in question as well, because intuition told me surely this is a bug in
+>> UEFI :). Turns out it really isn't this time around.
+> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+> implementation. Where did you look for the bug?
 
 
-It gets called as part of video_sync():
-
-+static void video_flush_copy(struct udevice *vid)
-+{
-+	struct video_priv *priv = dev_get_uclass_priv(vid);
-+
-+	if (!priv->copy_fb)
-+		return;
-+
-+	if (priv->damage.xend && priv->damage.yend) {
-+		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
-+		int lend = priv->damage.xend * VNBYTES(priv->bpix);
-+		int y;
-+
-+		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
-+			ulong offset = (y * priv->line_length) + lstart;
-+			ulong len = lend - lstart;
-+
-+			memcpy(priv->copy_fb + offset, priv->fb + offset, len);
-+		}
-+	}
-+}
-
-
->
->> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
->>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
->>          call video_sync() before copy_fb check, update video_copy test]
->> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->> ---
->>
->> Changes in v5:
->> - Remove video_sync_copy() also from video_fill(), video_fill_part()
->> - Fix memmove() calls by removing the extra dev argument
->> - Call video_sync() before checking copy_fb in video tests
->> - Use xstart, ystart, xend, yend as names for damage region
->> - Use met->baseline instead of priv->baseline
->> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
->> - Use xstart, ystart, xend, yend as names for damage region
->> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
->> - Update dm_test_video_copy test added in a new patch
->>
->> Changes in v3:
->> - Make VIDEO_COPY always select VIDEO_DAMAGE
->>
->> Changes in v2:
->> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
->>
->>   configs/sandbox_defconfig         |  1 -
->>   drivers/video/Kconfig             |  5 ++
->>   drivers/video/console_normal.c    | 13 +----
->>   drivers/video/console_rotate.c    | 44 +++-----------
->>   drivers/video/console_truetype.c  | 16 +----
->>   drivers/video/vidconsole-uclass.c | 16 -----
->>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
->>   drivers/video/video_bmp.c         |  7 ---
->>   include/video.h                   | 37 ------------
->>   include/video_console.h           | 52 -----------------
->>   test/dm/video.c                   |  3 +-
->>   11 files changed, 43 insertions(+), 248 deletions(-)
->>
->> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
->> index 51b820f13121..259f31f26cee 100644
->> --- a/configs/sandbox_defconfig
->> +++ b/configs/sandbox_defconfig
->> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
->>   CONFIG_VIDEO=y
->>   CONFIG_VIDEO_FONT_SUN12X22=y
->>   CONFIG_VIDEO_COPY=y
->> -CONFIG_VIDEO_DAMAGE=y
->>   CONFIG_CONSOLE_ROTATION=y
->>   CONFIG_CONSOLE_TRUETYPE=y
->>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
->> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
->> index 97f494a1340b..b3fbd9d7d9ca 100644
->> --- a/drivers/video/Kconfig
->> +++ b/drivers/video/Kconfig
->> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
->>
->>   config VIDEO_COPY
->>          bool "Enable copying the frame buffer to a hardware copy"
->> +       select VIDEO_DAMAGE
->>          help
->>            On some machines (e.g. x86), reading from the frame buffer is very
->>            slow because it is uncached. To improve performance, this feature
->>            allows the frame buffer to be kept in cached memory (allocated by
->>            U-Boot) and then copied to the hardware frame-buffer as needed.
->> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
->> +         and will only copy actually touched regions.
->>
->>            To use this, your video driver must set @copy_base in
->>            struct video_uc_plat.
->> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
->>            regions of the frame buffer that were modified before, speeding up
->>            screen refreshes significantly.
->>
->> +         It is also used by VIDEO_COPY to identify which regions changed.
->> +
->>   config BACKLIGHT_PWM
->>          bool "Generic PWM based Backlight Driver"
->>          depends on BACKLIGHT && DM_PWM
->> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
->> index a19ce6a2bc11..c44aa09473a3 100644
->> --- a/drivers/video/console_normal.c
->> +++ b/drivers/video/console_normal.c
->> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
->>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
->>          end = dst;
->>
->> -       ret = vidconsole_sync_copy(dev, line, end);
->> -       if (ret)
->> -               return ret;
->> -
->>          video_damage(dev->parent,
->>                       0,
->>                       fontdata->height * row,
->> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
->>          void *dst;
->>          void *src;
->>          int size;
->> -       int ret;
->>
->>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
->>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
->>          size = fontdata->height * vid_priv->line_length * count;
->> -       ret = vidconsole_memmove(dev, dst, src, size);
->> -       if (ret)
->> -               return ret;
->> +       memmove(dst, src, size);
-> Why are you making that change?
-
-
-There is no point in keeping a special vidconsole_memmove() around 
-anymore, since we don't actually need to call vidconsole_sync_copy() 
-after the move. The damage call that we introduced to all call sites in 
-combination with a video_sync() call takes over the job of the sync copy.
+The "real" bug is in grub. But given that it's reasonably simple to work 
+around in U-Boot and even with it "fixed" in grub we would still see 
+performance benefits from flushing only parts of the screen, I think 
+it's worth living with the grub deficiency.
 
 
 Alex

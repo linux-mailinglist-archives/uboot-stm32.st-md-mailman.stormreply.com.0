@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A9A77830DD
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 21:13:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE2567830D6
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 21:13:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0DC11C6B47F;
-	Mon, 21 Aug 2023 19:13:42 +0000 (UTC)
-Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
- [209.85.219.177])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9601C6B44C;
+	Mon, 21 Aug 2023 19:13:35 +0000 (UTC)
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com
+ [209.85.219.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 050C1C6B44E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6DDCDC6A5EF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 19:13:40 +0000 (UTC)
-Received: by mail-yb1-f177.google.com with SMTP id
- 3f1490d57ef6-d665467e134so3866827276.2
+ Mon, 21 Aug 2023 19:13:34 +0000 (UTC)
+Received: by mail-yb1-f173.google.com with SMTP id
+ 3f1490d57ef6-d743a5fe05aso3367910276.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 12:13:39 -0700 (PDT)
+ Mon, 21 Aug 2023 12:13:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692645219; x=1693250019;
+ d=chromium.org; s=google; t=1692645213; x=1693250013;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
- b=BLfj27KMh7vIHMzzN7YsRK/jnkMXAb82ng9KBI/b8oyXibSiwtXvQDU1FIbVzDWeW5
- WO3+MBX0VADUM8FEDRgVSUDP0QBhHphHMOdV0eXBa05HD88WNKeF35fPB8TMwAYuLdoT
- GoM2RWg64dOUdpbs40Aet+etvQ39dr0d4gpwo=
+ bh=FH3eOxQscQ5CAcOn0+VC0pA6Dmlur/T4lBfA3IEN4wo=;
+ b=YOdkDu7ViaDsC5BZPnPn1WC/Ng+P/Fr8bvL3mLJ6CZDIKNlF+AWggY0MaZAp+NhKO/
+ q3Eoa7FhYyGHmq7mJfF2TAAIrOQMrap3gMd3iOMTH2kxS1nTdGO8eYjLWHJqA5r4cebD
+ w/+E0a2dUeNxIxoUht9qbdas6hnQyxgd3AOOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692645219; x=1693250019;
+ d=1e100.net; s=20221208; t=1692645213; x=1693250013;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+QxzdAGUkhRPKHpFg4eIRrv6KWKZvae7lBIKLUMW37E=;
- b=LxoDe8otPqa631OaPMfUu4Xei/r7B4lAzkfIwpyKvS8tLY8uMeqbhXf990Ox1JXkUT
- QF5z1RXfmSzPFtgdRIKW0CvJbw1EUIqUNu4R+hd8nuQ10UlDv7eufKsFO2X9q80pKGXQ
- lkkIIsdyd6cZ7Dt/Rpum6m8IkGBPbjSUR5kUlithtYWeD/nMinP6nd6aMDqihOQ5SwdE
- 8cnggLM2wl+DTRj9GymKm+TKdHIV6ITLXlwanOZ8U/BTotKh7AyVtZVNnZPBDYlshufm
- fCwibggfDi+movfkDf7mmJACfaVTGhutT02hiJjUnjPQqj1Nlc/SPVGQzThH/NfuMPBe
- r30Q==
-X-Gm-Message-State: AOJu0YzUW21GSficsWeJgN2hYOjDAqIR9b5R2BVKi0AzWr/LIZSUeP/G
- i6+oHCsRRi7+fUUORDvVsQi2cILnFmYB/0N3rfIMGw==
-X-Google-Smtp-Source: AGHT+IEKpUcrWeRlNWq23CqQKX95HNTYrG6zoQ+0vOxYYtXVY7N3MC0hq4zcxixhk0WFae5x+hJ88qQD5h4C5qVMpho=
-X-Received: by 2002:a5b:d45:0:b0:cb9:41ad:8938 with SMTP id
- f5-20020a5b0d45000000b00cb941ad8938mr7139743ybr.3.1692645218734; Mon, 21 Aug
- 2023 12:13:38 -0700 (PDT)
+ bh=FH3eOxQscQ5CAcOn0+VC0pA6Dmlur/T4lBfA3IEN4wo=;
+ b=Ndd8zD90WjYPAdrnA1AbdmEU5vMIb9718JavmbxgaWkFaYfa+tfhG5bGGxSxtcTGHC
+ zbbGZoQmjlA+5hZkOtpIdQ52HV7tQiLgIKqw3uHo0SHOWZN96l/V7lX45/2pD88EtxJh
+ Mt6byu/KYKbNE2C9nFSx1qOUYu8cjDPbNfdXGj3/BREXFDT6/bOT9a4mABFG7TbAlMwK
+ qcQlDWHnWif3QzxMaZyzqujqg0JRuV6zky1DyD7/BSBba8NIOXs1zR4xnAoOEaFR6bQg
+ buPpGra2nNx5FJj1B5hkcOuArj8CGXhxWEKwSnkZyfAhFJy0M5H+V72xcOxOdo/gjJeA
+ eMQQ==
+X-Gm-Message-State: AOJu0YzxdHB+yx8xKE6Vso1tG+c8zAFexRd/Ts70w5GJrVric1Fa9Y4g
+ JbYwXg1FzC7WPV+Nidt4YFTNIv3aDiOWRBkvCJjV1Q==
+X-Google-Smtp-Source: AGHT+IE7suHGnf0gmADvcf8XCIbakY8DW6RMnsLPMiGUm8Q8Uz3Olc8CbsWIlctiQlhOphLfBnREyw9QyMVEkJC8WXk=
+X-Received: by 2002:a5b:dc3:0:b0:d62:bc43:426e with SMTP id
+ t3-20020a5b0dc3000000b00d62bc43426emr7076775ybr.43.1692645213133; Mon, 21 Aug
+ 2023 12:13:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-6-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-6-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-5-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-5-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:49 -0600
-Message-ID: <CAPnjgZ3NpWp479MQk8edxH3eGnM50sJaS4+P46ZCpL+Ev_LcUg@mail.gmail.com>
+Date: Mon, 21 Aug 2023 13:11:50 -0600
+Message-ID: <CAPnjgZ20VRYsP=5S5HJWjR2sNvmOudseHiXUcjnZmDCA=0jfnw@mail.gmail.com>
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
@@ -63,8 +63,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v5 05/13] dm: video: Add damage
-	notification on display fills
+Subject: Re: [Uboot-stm32] [PATCH v5 04/13] dm: video: Add damage tracking
+	API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,24 +85,48 @@ On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
 > From: Alexander Graf <agraf@csgraf.de>
 >
-> Let's report the video damage when we fill parts of the screen. This
-> way we can later lazily flush only relevant regions to hardware.
+> We are going to introduce image damage tracking to fasten up screen
+> refresh on large displays. This patch adds damage tracking for up to
+> one rectangle of the screen which is typically enough to hold blt or
+> text print updates. Callers into this API and a reduced dcache flush
+> code path will follow in later patches.
 >
 > Signed-off-by: Alexander Graf <agraf@csgraf.de>
 > Reported-by: Da Xue <da@libre.computer>
-> [Alper: Call video_damage() in video_fill_part(), edit commit message]
+> [Alper: Use xstart/yend, document new fields, return void from
+>         video_damage(), declare priv, drop headers, use IS_ENABLED()]
+> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
-> Does video_fill_part() need a video_sync(dev, false) here?
 >
 > Changes in v5:
-> - Call video_damage() also in video_fill_part()
+> - Use xstart, ystart, xend, yend as names for damage region
+> - Document damage struct and fields in struct video_priv comment
+> - Return void from video_damage()
+> - Fix undeclared priv error in video_sync()
+> - Drop unused headers from video-uclass.c
+> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
 >
->  drivers/video/video-uclass.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Changes in v4:
+> - Move damage clear to patch "dm: video: Add damage tracking API"
+> - Simplify first damage logic
+> - Remove VIDEO_DAMAGE default for ARM
+>
+> Changes in v3:
+> - Adapt to always assume DM is used
+>
+> Changes in v2:
+> - Remove ifdefs
+>
+>  drivers/video/Kconfig        | 13 ++++++++++++
+>  drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++++---
+>  include/video.h              | 32 ++++++++++++++++++++++++++--
+>  3 files changed, 81 insertions(+), 5 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+But I suggest an empty static inline in the case where the feature is disabled?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

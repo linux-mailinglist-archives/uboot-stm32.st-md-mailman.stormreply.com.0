@@ -2,29 +2,29 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 559517831AD
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 21:59:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE0807831B5
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 22:06:56 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 18691C6A5EF;
-	Mon, 21 Aug 2023 19:59:55 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8426BC6A5EF;
+	Mon, 21 Aug 2023 20:06:56 +0000 (UTC)
 Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0B439C65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 071B7C65E56
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 19:59:53 +0000 (UTC)
+ Mon, 21 Aug 2023 20:06:55 +0000 (UTC)
 Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 9842A60807C7;
- Mon, 21 Aug 2023 21:59:51 +0200 (CEST)
-Message-ID: <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
-Date: Mon, 21 Aug 2023 21:59:50 +0200
+ [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 94F4160807C7;
+ Mon, 21 Aug 2023 22:06:53 +0200 (CEST)
+Message-ID: <c7579b16-e373-46ae-87d9-d2a1184d6b8d@csgraf.de>
+Date: Mon, 21 Aug 2023 22:06:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-GB
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-11-alpernebiyasak@gmail.com>
- <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+ <20230821135111.3558478-12-alpernebiyasak@gmail.com>
+ <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
 From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0Ho7h5T-7S1Mi23+1ez7hq2MCEEZJjjieM3oZNHY5uOQ@mail.gmail.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
  Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -36,8 +36,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v5 10/13] video: Only dcache flush damaged
-	lines
+Subject: Re: [Uboot-stm32] [PATCH v5 11/13] video: Use VIDEO_DAMAGE for
+	VIDEO_COPY
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -49,78 +49,190 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Ck9uIDIxLjA4LjIzIDIxOjExLCBTaW1vbiBHbGFzcyB3cm90ZToKPiBIaSBBbHBlciwKPgo+IE9u
-IE1vbiwgMjEgQXVnIDIwMjMgYXQgMDc6NTEsIEFscGVyIE5lYmkgWWFzYWsgPGFscGVybmViaXlh
-c2FrQGdtYWlsLmNvbT4gd3JvdGU6Cj4+IEZyb206IEFsZXhhbmRlciBHcmFmIDxhZ3JhZkBjc2dy
-YWYuZGU+Cj4+Cj4+IE5vdyB0aGF0IHdlIGhhdmUgYSBkYW1hZ2UgYXJlYSB0ZWxscyB1cyB3aGlj
-aCBwYXJ0cyBvZiB0aGUgZnJhbWUgYnVmZmVyCj4+IGFjdHVhbGx5IG5lZWQgdXBkYXRpbmcsIGxl
-dCdzIG9ubHkgZGNhY2hlIGZsdXNoIHRob3NlIG9uIHZpZGVvX3N5bmMoKQo+PiBjYWxscy4gV2l0
-aCB0aGlzIG9wdGltaXphdGlvbiBpbiBwbGFjZSwgZnJhbWUgYnVmZmVyIHVwZGF0ZXMgLSBlc3Bl
-Y2lhbGx5Cj4+IG9uIGxhcmdlIHNjcmVlbiBzdWNoIGFzIDRrIGRpc3BsYXlzIC0gc3BlZWQgdXAg
-c2lnbmlmaWNhbnRseS4KPj4KPj4gU2lnbmVkLW9mZi1ieTogQWxleGFuZGVyIEdyYWYgPGFncmFm
-QGNzZ3JhZi5kZT4KPj4gUmVwb3J0ZWQtYnk6IERhIFh1ZSA8ZGFAbGlicmUuY29tcHV0ZXI+Cj4+
-IFtBbHBlcjogVXNlIGRhbWFnZS54c3RhcnQveWVuZCwgSVNfRU5BQkxFRCgpXQo+PiBDby1kZXZl
-bG9wZWQtYnk6IEFscGVyIE5lYmkgWWFzYWsgPGFscGVybmViaXlhc2FrQGdtYWlsLmNvbT4KPj4g
-U2lnbmVkLW9mZi1ieTogQWxwZXIgTmViaSBZYXNhayA8YWxwZXJuZWJpeWFzYWtAZ21haWwuY29t
-Pgo+PiAtLS0KPj4KPj4gQ2hhbmdlcyBpbiB2NToKPj4gLSBVc2UgeHN0YXJ0LCB5c3RhcnQsIHhl
-bmQsIHllbmQgYXMgbmFtZXMgZm9yIGRhbWFnZSByZWdpb24KPj4gLSBVc2UgSVNfRU5BQkxFRCgp
-IGluc3RlYWQgb2YgQ09ORklHX0lTX0VOQUJMRUQoKQo+Pgo+PiBDaGFuZ2VzIGluIHYyOgo+PiAt
-IEZpeCBkY2FjaGUgcmFuZ2U7IHdlIHdlcmUgZmx1c2hpbmcgdG9vIG11Y2ggYmVmb3JlCj4+IC0g
-UmVtb3ZlIGlmZGVmcwo+Pgo+PiAgIGRyaXZlcnMvdmlkZW8vdmlkZW8tdWNsYXNzLmMgfCA0MSAr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0KPj4gICAxIGZpbGUgY2hhbmdlZCwg
-MzYgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkKPiBUaGlzIGlzIGEgbGl0dGxlIHN0cmFu
-Z2UsIHNpbmNlIGZsdXNoaW5nIHRoZSB3aG9sZSBjYWNoZSB3aWxsIG9ubHkKPiBhY3R1YWxseSB3
-cml0ZSBvdXQgZGF0YSB0aGF0IHdhcyBhY3R1YWxseSB3cml0dGVuICh0byB0aGUgZGlzcGxheSku
-IElzCj4gdGhlcmUgYSBiZW5lZml0IHRvIHRoaXMgcGF0Y2gsIGluIHRlcm1zIG9mIHBlcmZvcm1h
-bmNlPwoKCkknbSBoYXBweSB0byBzZWUgeW91IGdvIHRocm91Z2ggdGhlIHNhbWUgdGhvdWdodCBw
-cm9jZXNzIEkgd2VudCB0aHJvdWdoIAp3aGVuIHdyaXRpbmcgdGhlc2U6ICJUaGlzIHN1cmVseSBj
-YW4ndCBiZSB0aGUgcHJvYmxlbSwgY2FuIGl0PyIuIFRoZSAKYW5zd2VyIGlzICJzaW1wbGUiIGlu
-IGhpbmRzaWdodDoKCkhhdmUgYSBsb29rIGF0IHRoZSBBUk12OCBjYWNoZSBmbHVzaCBmdW5jdGlv
-bi4gSXQgZG9lcyB0aGUgb25seSAic2FmZSIgCnRoaW5nIHlvdSBjYW4gZXhwZWN0IGl0IHRvIGRv
-OiBDbGVhbitJbnZhbGlkYXRlIHRvIFBPQyBiZWNhdXNlIHdlIHVzZSBpdCAKZm9yIG11bHRpcGxl
-IHRoaW5ncywgY2xlYXJpbmcgbW9kaWZpZWQgY29kZSBhbW9uZyBvdGhlcnM6CgpFTlRSWShfX2Fz
-bV9mbHVzaF9kY2FjaGVfcmFuZ2UpCiDCoMKgwqDCoMKgwqDCoCBtcnPCoMKgwqDCoCB4MywgY3Ry
-X2VsMAogwqDCoMKgwqDCoMKgwqAgdWJmeMKgwqDCoCB4MywgeDMsICMxNiwgIzQKIMKgwqDCoMKg
-wqDCoMKgIG1vdsKgwqDCoMKgIHgyLCAjNAogwqDCoMKgwqDCoMKgwqAgbHNswqDCoMKgwqAgeDIs
-IHgyLCB4M8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8qIGNhY2hlIGxpbmUgc2l6ZSAqLwoK
-IMKgwqDCoMKgwqDCoMKgIC8qIHgyIDwtIG1pbmltYWwgY2FjaGUgbGluZSBzaXplIGluIGNhY2hl
-IHN5c3RlbSAqLwogwqDCoMKgwqDCoMKgwqAgc3ViwqDCoMKgwqAgeDMsIHgyLCAjMQogwqDCoMKg
-wqDCoMKgwqAgYmljwqDCoMKgwqAgeDAsIHgwLCB4MwoxOsKgwqDCoMKgwqAgZGPCoMKgwqDCoMKg
-IGNpdmFjLCB4MMKgwqDCoMKgwqDCoCAvKiBjbGVhbiAmIGludmFsaWRhdGUgZGF0YSBvciB1bmlm
-aWVkIApjYWNoZSAqLwogwqDCoMKgwqDCoMKgwqAgYWRkwqDCoMKgwqAgeDAsIHgwLCB4MgogwqDC
-oMKgwqDCoMKgwqAgY21wwqDCoMKgwqAgeDAsIHgxCiDCoMKgwqDCoMKgwqDCoCBiLmxvwqDCoMKg
-IDFiCiDCoMKgwqDCoMKgwqDCoCBkc2LCoMKgwqDCoCBzeQogwqDCoMKgwqDCoMKgwqAgcmV0CkVO
-RFBST0MoX19hc21fZmx1c2hfZGNhY2hlX3JhbmdlKQoKCkxvb2tpbmcgYXQgdGhlICJkYyBjaXZh
-YyIgY2FsbCwgd2UgZmluZCB0aGlzIGRvY3VtZW50YXRpb24gcGFnZSBmcm9tIApBUk06IApodHRw
-czovL2RldmVsb3Blci5hcm0uY29tL2RvY3VtZW50YXRpb24vZGRpMDYwMS8yMDIyLTAzL0FBcmNo
-NjQtSW5zdHJ1Y3Rpb25zL0RDLUNJVkFDLS1EYXRhLW9yLXVuaWZpZWQtQ2FjaGUtbGluZS1DbGVh
-bi1hbmQtSW52YWxpZGF0ZS1ieS1WQS10by1Qb0MKClRoaXMgc2F5cyB3ZSdyZSB3cml0aW5nIGFu
-eSBkaXJ0eW5lc3Mgb2YgdGhpcyBjYWNoZSBsaW5lIHVwIHRvIHRoZSBQT0MgCmFuZCB0aGVuIGlu
-dmFsaWRhdGUgKHJlbW92ZSB0aGUgY2FjaGUgbGluZSkgYWxzbyB1cCB0byBQT0MuIFRoYXQgbWVh
-bnMgCndoZW4geW91IGxvb2sgYXQgYSB0eXBpY2FsIFNCQywgdGhpcyB3aWxsIGVpdGhlciBiZSBM
-MiBvciBzeXN0ZW0gbGV2ZWwgCmNhY2hlLiBFdmVyeSByZWFkIGFmdGVyd2FyZHMgbmVlZHMgdG8g
-Z28gYW5kIHB1bGwgaXQgYWxsIHRoZSB3YXkgYmFjayB0byAKTDEgdG8gbW9kaWZ5IGl0IChvciBu
-b3QpIG9uIHRoZSBuZXh0IGNoYXJhY3RlciB3cml0ZSBhbmQgdGhlbiBmbHVzaCBpdCAKYWdhaW4u
-CgpFdmVuIHdvcnNlOiBCZWNhdXNlIG9mIHRoZSBpbnZhbGlkYXRlLCB3ZSBtYXkgZXZlbiBldmlj
-dCBpdCBmcm9tIGNhY2hlcyAKdGhhdCB0aGUgZGlzcGxheSBjb250cm9sbGVyIHVzZXMgdG8gcmVh
-ZCB0aGUgZnJhbWUgYnVmZmVyLiBTbyBkZXBlbmRpbmcgCm9uIHRoZSBTb0MncyBjYWNoZSB0b3Bv
-bG9neSBhbmQgaW1wbGVtZW50YXRpb24sIHdlIG1heSBmb3JjZSB0aGUgZGlzcGxheSAKY29udHJv
-bGxlciB0byByZWZldGNoIHRoZSBmdWxsIEZCIGNvbnRlbnQgb24gaXRzIG5leHQgc2NyZWVuIHJl
-ZnJlc2ggY3ljbGUuCgpJIGZhaW50bHkgcmVtZW1iZXIgdGhhdCBJIHRyaWVkIHRvIGV4cGVyaW1l
-bnQgd2l0aCBDVkFDIGluc3RlYWQgdG8gb25seSAKZmx1c2ggd2l0aG91dCBpbnZhbGlkYXRpbmcu
-IEkgZG9uJ3QgZnVsbHkgcmVtZW1iZXIgdGhlIHJlc3VsdHMgYW55bW9yZSAKdGhvdWdoLiBJIGJl
-bGlldmUgQ1ZBQyBqdXN0IGJlaGF2ZWQgaWRlbnRpY2FsIHRvIENJVkFDIG9uIHRoZSBBNTMgCnBs
-YXRmb3JtIEkgd2FzIHdvcmtpbmcgb24uIEFuZCB0aGVuIEkgbG9va2VkIGF0IENvcnRleC1BNTMg
-ZXJyYXRhIGxpa2UgClsxXSBhbmQganVzdCBhY2NlcHRlZCB0aGF0IGRvaW5nIGFueXRoaW5nIGJ1
-dCByZXN0cmljdGluZyB0aGUgZmx1c2hpbmcgCnJhbmdlIGlzIGEgd2FzdGUgb2YgdGltZSA6KQoK
-CkFsZXgKCgpbMV0gCmh0dHBzOi8vcGF0Y2h3b3JrLmtlcm5lbC5vcmcvcHJvamVjdC94ZW4tZGV2
-ZWwvcGF0Y2gvMTQ2MjQ2NjA2NS0zMDIxMi0xNC1naXQtc2VuZC1lbWFpbC1qdWxpZW4uZ3JhbGxA
-YXJtLmNvbS8KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9y
-bXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9s
-aXN0aW5mby91Ym9vdC1zdG0zMgo=
+
+On 21.08.23 21:11, Simon Glass wrote:
+> Hi Alper,
+>
+> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+>> From: Alexander Graf <agraf@csgraf.de>
+>>
+>> CONFIG_VIDEO_COPY implemented a range-based copying mechanism: If we
+>> print a single character, it will always copy the full range of bytes
+>> from the top left corner of the character to the lower right onto the
+>> uncached frame buffer. This includes pretty much the full line contents
+>> of the printed character.
+>>
+>> Since we now have proper damage tracking, let's make use of that to reduce
+>> the amount of data we need to copy. With this patch applied, we will only
+>> copy the tiny rectangle surrounding characters when we print them,
+>> speeding up the video console.
+> I suppose for rotated consoles it copies whole lines, but otherwise it
+> does a lot of small copies?
+
+
+I tried to keep the code as simple as possible and only track an "upper 
+left" and "lower right" corner of modifications. So sync will always 
+copy/flush a single rectangle.
+
+
+>
+>> After this, changes to the main frame buffer are not immediately copied
+>> to the copy frame buffer, but postponed until the next video device
+>> sync. So issue an explicit sync before inspecting the copy frame buffer
+>> contents for the video tests.
+> So how does the sync get done in this case?
+
+
+It gets called as part of video_sync():
+
++static void video_flush_copy(struct udevice *vid)
++{
++	struct video_priv *priv = dev_get_uclass_priv(vid);
++
++	if (!priv->copy_fb)
++		return;
++
++	if (priv->damage.xend && priv->damage.yend) {
++		int lstart = priv->damage.xstart * VNBYTES(priv->bpix);
++		int lend = priv->damage.xend * VNBYTES(priv->bpix);
++		int y;
++
++		for (y = priv->damage.ystart; y < priv->damage.yend; y++) {
++			ulong offset = (y * priv->line_length) + lstart;
++			ulong len = lend - lstart;
++
++			memcpy(priv->copy_fb + offset, priv->fb + offset, len);
++		}
++	}
++}
+
+
+>
+>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
+>> [Alper: Rebase for fontdata->height/w, fill_part(), fix memmove(dev),
+>>          drop from defconfig, use damage.xstart/yend, use IS_ENABLED(),
+>>          call video_sync() before copy_fb check, update video_copy test]
+>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> ---
+>>
+>> Changes in v5:
+>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+>> - Fix memmove() calls by removing the extra dev argument
+>> - Call video_sync() before checking copy_fb in video tests
+>> - Use xstart, ystart, xend, yend as names for damage region
+>> - Use met->baseline instead of priv->baseline
+>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+>> - Use xstart, ystart, xend, yend as names for damage region
+>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+>> - Drop VIDEO_DAMAGE from sandbox defconfig added in a new patch
+>> - Update dm_test_video_copy test added in a new patch
+>>
+>> Changes in v3:
+>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+>>
+>> Changes in v2:
+>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+>>
+>>   configs/sandbox_defconfig         |  1 -
+>>   drivers/video/Kconfig             |  5 ++
+>>   drivers/video/console_normal.c    | 13 +----
+>>   drivers/video/console_rotate.c    | 44 +++-----------
+>>   drivers/video/console_truetype.c  | 16 +----
+>>   drivers/video/vidconsole-uclass.c | 16 -----
+>>   drivers/video/video-uclass.c      | 97 ++++++++-----------------------
+>>   drivers/video/video_bmp.c         |  7 ---
+>>   include/video.h                   | 37 ------------
+>>   include/video_console.h           | 52 -----------------
+>>   test/dm/video.c                   |  3 +-
+>>   11 files changed, 43 insertions(+), 248 deletions(-)
+>>
+>> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+>> index 51b820f13121..259f31f26cee 100644
+>> --- a/configs/sandbox_defconfig
+>> +++ b/configs/sandbox_defconfig
+>> @@ -307,7 +307,6 @@ CONFIG_USB_ETH_CDC=y
+>>   CONFIG_VIDEO=y
+>>   CONFIG_VIDEO_FONT_SUN12X22=y
+>>   CONFIG_VIDEO_COPY=y
+>> -CONFIG_VIDEO_DAMAGE=y
+>>   CONFIG_CONSOLE_ROTATION=y
+>>   CONFIG_CONSOLE_TRUETYPE=y
+>>   CONFIG_CONSOLE_TRUETYPE_CANTORAONE=y
+>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+>> index 97f494a1340b..b3fbd9d7d9ca 100644
+>> --- a/drivers/video/Kconfig
+>> +++ b/drivers/video/Kconfig
+>> @@ -83,11 +83,14 @@ config VIDEO_PCI_DEFAULT_FB_SIZE
+>>
+>>   config VIDEO_COPY
+>>          bool "Enable copying the frame buffer to a hardware copy"
+>> +       select VIDEO_DAMAGE
+>>          help
+>>            On some machines (e.g. x86), reading from the frame buffer is very
+>>            slow because it is uncached. To improve performance, this feature
+>>            allows the frame buffer to be kept in cached memory (allocated by
+>>            U-Boot) and then copied to the hardware frame-buffer as needed.
+>> +         It uses the VIDEO_DAMAGE feature to keep track of regions to copy
+>> +         and will only copy actually touched regions.
+>>
+>>            To use this, your video driver must set @copy_base in
+>>            struct video_uc_plat.
+>> @@ -105,6 +108,8 @@ config VIDEO_DAMAGE
+>>            regions of the frame buffer that were modified before, speeding up
+>>            screen refreshes significantly.
+>>
+>> +         It is also used by VIDEO_COPY to identify which regions changed.
+>> +
+>>   config BACKLIGHT_PWM
+>>          bool "Generic PWM based Backlight Driver"
+>>          depends on BACKLIGHT && DM_PWM
+>> diff --git a/drivers/video/console_normal.c b/drivers/video/console_normal.c
+>> index a19ce6a2bc11..c44aa09473a3 100644
+>> --- a/drivers/video/console_normal.c
+>> +++ b/drivers/video/console_normal.c
+>> @@ -35,10 +35,6 @@ static int console_set_row(struct udevice *dev, uint row, int clr)
+>>                  fill_pixel_and_goto_next(&dst, clr, pbytes, pbytes);
+>>          end = dst;
+>>
+>> -       ret = vidconsole_sync_copy(dev, line, end);
+>> -       if (ret)
+>> -               return ret;
+>> -
+>>          video_damage(dev->parent,
+>>                       0,
+>>                       fontdata->height * row,
+>> @@ -57,14 +53,11 @@ static int console_move_rows(struct udevice *dev, uint rowdst,
+>>          void *dst;
+>>          void *src;
+>>          int size;
+>> -       int ret;
+>>
+>>          dst = vid_priv->fb + rowdst * fontdata->height * vid_priv->line_length;
+>>          src = vid_priv->fb + rowsrc * fontdata->height * vid_priv->line_length;
+>>          size = fontdata->height * vid_priv->line_length * count;
+>> -       ret = vidconsole_memmove(dev, dst, src, size);
+>> -       if (ret)
+>> -               return ret;
+>> +       memmove(dst, src, size);
+> Why are you making that change?
+
+
+There is no point in keeping a special vidconsole_memmove() around 
+anymore, since we don't actually need to call vidconsole_sync_copy() 
+after the move. The damage call that we introduced to all call sites in 
+combination with a video_sync() call takes over the job of the sync copy.
+
+
+Alex
+
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

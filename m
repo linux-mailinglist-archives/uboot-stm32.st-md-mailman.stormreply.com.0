@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EADF47830D5
-	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 21:13:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 083AD7830D8
+	for <lists+uboot-stm32@lfdr.de>; Mon, 21 Aug 2023 21:13:42 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D7ECC6A5EF;
-	Mon, 21 Aug 2023 19:13:35 +0000 (UTC)
-Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com
- [209.85.219.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF7A6C6B44E;
+	Mon, 21 Aug 2023 19:13:41 +0000 (UTC)
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com
+ [209.85.219.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6C242C62EFE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E63D5C6A5EF
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 19:13:34 +0000 (UTC)
-Received: by mail-yb1-f181.google.com with SMTP id
- 3f1490d57ef6-d650a22abd7so3865319276.3
+ Mon, 21 Aug 2023 19:13:39 +0000 (UTC)
+Received: by mail-yb1-f173.google.com with SMTP id
+ 3f1490d57ef6-d746d030a86so2708500276.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 12:13:34 -0700 (PDT)
+ Mon, 21 Aug 2023 12:13:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1692645213; x=1693250013;
+ d=chromium.org; s=google; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DUhATtX6fHYk8encCFexcIKwHerIuhM5nQ0BLgnNwow=;
- b=bCEhp/hbJsY+9h3/BIextNjImzjBvUy7u5oc7MniBZCO5lbcgD1x65ytact6PWkrrQ
- DIeaHa/tXM9g4NLbWyY7ioZZJGilQLEIs+3m94z6QrP/pJUYHqAQ6+PztbzWG9YDaIPq
- S9PqrfKH8khtkFwzkVMhkNdFOvZr8NH+1uQLg=
+ bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
+ b=RhXqEdoWW/phumjtMZ6oVIIfsHpnZY+nsmeAqb82rsJCcxlqai7RfH9TWpNInLO52M
+ gycx9U8pKYiJ+hc0Y6JBkuAkmw5Z5f3Lo/y3QzyDKcK8Fy2XMpp+rzCxsVVzUfjnsrBZ
+ QpxzRIDJkxWkAe/2AP3H18Pc94C3UUx30pBhQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692645213; x=1693250013;
+ d=1e100.net; s=20221208; t=1692645219; x=1693250019;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DUhATtX6fHYk8encCFexcIKwHerIuhM5nQ0BLgnNwow=;
- b=AxIl0cgFRVmZiWjhZteuabgNTgs4NWwXjTKRoh+BoS1zpDUhifaWmVV48NHA8e+kB6
- Xpn+sV6xb8DpyifhXjLt7tDs1zqAvHBl1HVBRo5xuePHBRYLMQii4OSZ03ra0krffxiA
- Xy/vti7XU03D51gGQc243FGZBUxI8bYXhfhIJGxCRWE1093EONxTReei+2LHgBczI6k/
- XjuZDzmVo0w8xJ2spPuFvDLCkcy3jeOYdyaoOEInWSnBOKa3y+IQqA2uDjFnRVN3V34o
- G1S+Dxlyi8GJDd0ePCLw9sp0fOx3pHOlf2WgQB2NoN/sBke8WO6/rJT2LKgLSYc1vc8I
- VR+Q==
-X-Gm-Message-State: AOJu0Yz5IGiJdN6CPeI+f60yHNOODl/ROM67bgqH7z9VyzEvL8WiRMCA
- EFTdP6hjQ7//+Q86N0VnIC5tO432wmivYuMphNUD1w==
-X-Google-Smtp-Source: AGHT+IElj+uFXu+WgOnlj4oCsS48lKoYyo3yhONc9rH/9NEhjitoHlHUYz8XzsirHLdw1XHcbA6rdzubM8N18apKlvY=
-X-Received: by 2002:a05:6902:50d:b0:d62:be1e:1622 with SMTP id
- x13-20020a056902050d00b00d62be1e1622mr8145282ybs.38.1692645213130; Mon, 21
- Aug 2023 12:13:33 -0700 (PDT)
+ bh=gMx4SAEmCOEjypXqFCdH/BNDX1/vIZARR/zYEociwpo=;
+ b=SqiDZ1HW9krbhcm3rGQZ8MwVAZfn7VfQH2AqjocDvfRVv0DbykN5h2tPIDLriz63F/
+ GEhEjJmTIpzjQL0+IJYzezLcYgo7u+qT/9bsAVW2Jb6bVyzOalVn3p+q7r1Y75ePKX34
+ DWwIwAlkOtvyR9uqDSx7TLphqEhtvDNs0AdwBR670mcO5JuaFsgMwPaHJarxObNJBipt
+ heCJztmBmIUAqcCLSm8uAvIoFpSa72J8cayR1q/w/2pZboD7ov7TxN81T9glqvT/mQCx
+ Fq47UHAhjK9vI81Zsj8siA/PuNROQvuDZP7XGKib6YmL6dQU72jtPDy1cgGEvJsVY7x6
+ 5vwQ==
+X-Gm-Message-State: AOJu0Yyzs2+/5Yxzgiyc06PhIUQTU3jJNan6+phPCltwcoXdCHBnMtNv
+ DJueKskIPUNWBMtNdsmTNL0xpPzaSGIoZTVEPMGFWw==
+X-Google-Smtp-Source: AGHT+IEVvHfYOacHVBGBIAhLYpfCDFP69Fhjan2SdnF/CmIsSiJQ0rgd3ECVipfuWc/GSYjqvjU5CjCCqDlxlIU2Ne0=
+X-Received: by 2002:a05:6902:18c6:b0:d53:f8e6:8447 with SMTP id
+ ck6-20020a05690218c600b00d53f8e68447mr11064045ybb.15.1692645218711; Mon, 21
+ Aug 2023 12:13:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-3-alpernebiyasak@gmail.com>
-In-Reply-To: <20230821135111.3558478-3-alpernebiyasak@gmail.com>
+ <20230821135111.3558478-4-alpernebiyasak@gmail.com>
+In-Reply-To: <20230821135111.3558478-4-alpernebiyasak@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 21 Aug 2023 13:11:47 -0600
-Message-ID: <CAPnjgZ2u9B78we3ta4YPSEsofO4GydG9HQRs-wTxFRXp0fRFOg@mail.gmail.com>
+Date: Mon, 21 Aug 2023 13:11:48 -0600
+Message-ID: <CAPnjgZ3Tpz+3EbxnS_qU=vHRyeCx4bT14J75ZP_B5+CiF_5v8w@mail.gmail.com>
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
@@ -63,8 +63,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v5 02/13] video: test: Support checking
-	copy frame buffer contents
+Subject: Re: [Uboot-stm32] [PATCH v5 03/13] video: test: Test partial
+ updates of hardware frame buffer
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,25 +83,20 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
 >
-> The video tests have a helper function to generate a pseudo-digest of
-> frame buffer contents, but it only does so for the main one. There is
-> another check that the copy frame buffer is the same as that. But
-> neither is enough to test if only the modified regions are copied to the
-> copy frame buffer, since we will want the two to be different in very
-> specific ways.
->
-> Add a boolean argument to the existing helper function to indicate which
-> frame buffer we want to inspect, and update the existing callers.
+> With VIDEO_COPY enabled, only the modified parts of the frame buffer are
+> intended to be copied to the hardware. Add a test that checks this, by
+> overwriting contents we prepared without telling the video uclass and
+> then checking if the overwritten contents have been redrawn on the next
+> sync.
 >
 > Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 > ---
 >
 > Changes in v5:
-> - Add patch "video: test: Support checking copy frame buffer contents"
+> - Add patch "video: test: Test partial updates of hardware frame buffer"
 >
->  test/dm/video.c | 76 ++++++++++++++++++++++++++-----------------------
->  1 file changed, 41 insertions(+), 35 deletions(-)
->
+>  test/dm/video.c | 54 +++++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 54 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

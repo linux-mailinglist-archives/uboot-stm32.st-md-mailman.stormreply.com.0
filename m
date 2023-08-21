@@ -2,60 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58BD4784781
+	by mail.lfdr.de (Postfix) with ESMTPS id 63C31784782
 	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 18:27:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1E7CFC78F61;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2BF19C78F63;
 	Tue, 22 Aug 2023 16:27:08 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B50DCC65E56
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 25080C65E56
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 13:51:22 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-31ad779e6b3so2889387f8f.2
+ Mon, 21 Aug 2023 13:51:25 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-3fe1a17f983so31791575e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 06:51:22 -0700 (PDT)
+ Mon, 21 Aug 2023 06:51:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692625882; x=1693230682;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZDiSFq+S2RNdXeWlbNrKZizuVDiaMn9dIeXshVPFa5w=;
- b=TgSNhv4g+Fq3egFiSDEcZlI2G2Y21RtebglVQNzqHltxNRjxZeN4Mi+BjMvJlnF9B3
- ioS7avz9WAhdSqaC4UM15mAZZMuNsCoaMa+nUO3HdqIarvWxJNgvNh2XKC7P6UhFcrUG
- 3iLtx4egZAJ+vr/1kX9OXbPmOaNd44PSpREmSlt/lN+Jjx+fcpxsdVKG+tTGkTkeMpgG
- +u27gvZZ+HdKx9lk06AK6yttHiDAV+9fuXQJe4b8LFU6/zTndM0ourSRawc+ZBx9cBpa
- J9XjGPYTr7IlWHeUXBqOxBP6QlDywEmPl/VZ9e4pZDZcy6IEFxMsZFSiSQig9CckizhQ
- cjAw==
+ d=gmail.com; s=20221208; t=1692625884; x=1693230684;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0KM0F1+WkNhDdn0zbbXHFFjqAdCr64hX7QvIzy6/iyI=;
+ b=jAFdt8C3owZgLvkS3GxcS5N+GiTxn30Z/xJkqzPDEYfC0PDH1kIsDI4pb6eHKAFVBt
+ PLqr4R9Sdmb05o76fez0U9nTmmv97QjcaeHGc0adZliwf33YdMgotCTaUiHc/nhkpLWw
+ c8rHP6jWgFPGn5Y45QEtPjQFEuV0nP0SkMONJorI+ci6NUadDN8X0tZNK5GoF1lvhF4o
+ mQZs5xJfJ6evaIBX7srcue8NUq4BtyhQ18vVYm0nCIPEltA23PBpkcejhCv6g5o/4puI
+ sgF/+jj8BhBQFKhPEIktVLWcqveScR/ngqiv1iDRHrCL6flPhtCsrpShY+rzilzpJdtC
+ fkJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692625882; x=1693230682;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZDiSFq+S2RNdXeWlbNrKZizuVDiaMn9dIeXshVPFa5w=;
- b=BO4U8QCJTcLvY4GKs7113ocAlSzN1SyFNW3QEgf6VVuqg222EyHtDwGdhdTxYZpRTc
- m3BEoevaGDJ71sRUD6Rx1gzvdaATcNZYuGJeJbX4Yxcd4x5aYloj/5ZGEr+XVxPjAr/U
- HQH2gD3Apjer6adoq9ZbiMu+gsrigiNRRRiujX6Us0CkyZEyzzQuaIzeK2kBN4J3wVPg
- uyWudN9dRAmkQhG+9oJMhxdZeO8xVIMiaNCvXljdJK0Vmr5a/OzwAa/ABSCvIqqfcA2y
- lqQm6rza7MGrkgZn4RSZUrl4c7qYiOYkwqs1WIhdzQ0W4mdHln2VeuT3T4vXzXbgbyys
- +4BQ==
-X-Gm-Message-State: AOJu0YzIzrxaFBlsO65dYkbbzsV8AE498ZEUSGJubia0K7qqjA8Mct+8
- G9JeQnOHeqmoYGOATS51UQc=
-X-Google-Smtp-Source: AGHT+IE4PpJH0PN93tF3XegdyOTFT0wqSZxoynM/IL52+oYasKjQN6qGqIKuAqd2jZ4/1E1qNE22Dw==
-X-Received: by 2002:a5d:60d0:0:b0:319:62ba:5d08 with SMTP id
- x16-20020a5d60d0000000b0031962ba5d08mr4289647wrt.33.1692625881782; 
- Mon, 21 Aug 2023 06:51:21 -0700 (PDT)
+ d=1e100.net; s=20221208; t=1692625884; x=1693230684;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0KM0F1+WkNhDdn0zbbXHFFjqAdCr64hX7QvIzy6/iyI=;
+ b=ftH9JiFZnzjpDMO2LWHWoEt7I/ON+Sep8JVj+r1V3my3pMUzKq4molFhgnNbjIdiOY
+ sKyszCoXL091dgxNME4ma4TF4IMISzJkwhNUxg2xmUhBIb9G3dU/MZ9qmcdmsVAIaNTh
+ JxrqwGpPSijAFbpAcx9SVI6EGVpOlmmZPjM+GjyovcvU+61Ho1vM/O9udfsmtjqsxuZU
+ Bho3TB3Cz6UKFZng4SR1yxacsURfOQ8YH6x2HJSIn5k22gVfRSW1eFwe05jFrLGEa3iy
+ d59lralMXzftRenjwH/gefYqX7Fk5SD2ILM1tQlpYNjwYdxipJaznOuqV+V5OAYqK0EC
+ zHHQ==
+X-Gm-Message-State: AOJu0Yz+lXtYhEGPrdmh3wJ+Sg+nqjCCVVirpdkZuf6kN3xiqxMlfxGR
+ aRC9dXCmetPogtZlAGfkc9o=
+X-Google-Smtp-Source: AGHT+IGiiJu3kdw60kWynu1HizRmCX0l3/hesikD0kGHzt9jbq6D24m4A0InLSpbaBLDcUVjniBVKA==
+X-Received: by 2002:a05:600c:3799:b0:3fe:2011:a7ce with SMTP id
+ o25-20020a05600c379900b003fe2011a7cemr5345546wmr.6.1692625884228; 
+ Mon, 21 Aug 2023 06:51:24 -0700 (PDT)
 Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.19
+ r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 06:51:21 -0700 (PDT)
+ Mon, 21 Aug 2023 06:51:23 -0700 (PDT)
 From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
 To: u-boot@lists.denx.de
-Date: Mon, 21 Aug 2023 16:50:57 +0300
-Message-Id: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+Date: Mon, 21 Aug 2023 16:50:58 +0300
+Message-Id: <20230821135111.3558478-2-alpernebiyasak@gmail.com>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Tue, 22 Aug 2023 16:27:06 +0000
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
@@ -70,7 +73,8 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v5 00/13] Add video damage tracking
+Subject: [Uboot-stm32] [PATCH v5 01/13] video: test: Split copy frame buffer
+	check into a function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,148 +91,304 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This is a rebase of Alexander Graf's video damage tracking series, with
-some tests and other changes. The original cover letter is as follows:
+While checking frame buffer contents, the video tests also check if the
+copy frame buffer contents match the main frame buffer. To test if only
+the modified regions are updated after a sync, we will need to create
+situations where the two are mismatched. Split this check into another
+function that we can skip calling, since we won't want it to error on
+those mismatched cases.
 
-> This patch set speeds up graphics output on ARM by a factor of 60x.
->
-> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
-> but need it accessible by the display controller which reads directly
-> from a later point of consistency. Hence, we flush the frame buffer to
-> DRAM on every change. The full frame buffer.
->
-> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
-> that can take a while to flush out. This was reported by Da Xue with grub,
-> which happily print 1000s of spaces on the screen to draw a menu. Every
-> printed space triggers a cache flush.
->
-> This patch set implements the easiest mitigation against this problem:
-> Damage tracking. We remember the lowest common denominator region that was
-> touched since the last video_sync() call and only flush that. The most
-> typical writer to the frame buffer is the video console, which always
-> writes rectangles of characters on the screen and syncs afterwards.
->
-> With this patch set applied, we reduce drawing a large grub menu (with
-> serial console attached for size information) on an RK3399-ROC system
-> at 1440p from 55 seconds to less than 1 second.
->
-> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
-> overhead compared to before as well. So even x86 systems should be faster
-> with this now :).
->
->
-> Alternatives considered:
->
->   1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
->      so often. We are missing timers to do this generically.
->
->   2) Double buffering - We could try to identify whether anything changed
->      at all and only draw to the FB if it did. That would require
->      maintaining a second buffer that we need to scan.
->
->   3) Text buffer - Maintain a buffer of all text printed on the screen with
->      respective location. Don't write if the old and new character are
->      identical. This would limit applicability to text only and is an
->      optimization on top of this patch set.
->
->   4) Hash screen lines - Create a hash (sha256?) over every line when it
->      changes. Only flush when it does. I'm not sure if this would waste
->      more time, memory and cache than the current approach. It would make
->      full screen updates much more expensive.
+Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+---
 
 Changes in v5:
 - Add patch "video: test: Split copy frame buffer check into a function"
-- Add patch "video: test: Support checking copy frame buffer contents"
-- Add patch "video: test: Test partial updates of hardware frame buffer"
-- Use xstart, ystart, xend, yend as names for damage region
-- Document damage struct and fields in struct video_priv comment
-- Return void from video_damage()
-- Fix undeclared priv error in video_sync()
-- Drop unused headers from video-uclass.c
-- Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
-- Call video_damage() also in video_fill_part()
-- Use met->baseline instead of priv->baseline
-- Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
-- Update console_rotate.c video_damage() calls to pass video tests
-- Remove mention about not having minimal damage for console_rotate.c
-- Add patch "video: test: Test video damage tracking via vidconsole"
-- Document new vdev field in struct efi_gop_obj comment
-- Remove video_sync_copy() also from video_fill(), video_fill_part()
-- Fix memmove() calls by removing the extra dev argument
-- Call video_sync() before checking copy_fb in video tests
-- Imply VIDEO_DAMAGE for video drivers instead of selecting it
-- Imply VIDEO_DAMAGE also for VIDEO_TIDSS
 
-v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+ test/dm/video.c | 69 +++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 58 insertions(+), 11 deletions(-)
 
-Changes in v4:
-- Move damage clear to patch "dm: video: Add damage tracking API"
-- Simplify first damage logic
-- Remove VIDEO_DAMAGE default for ARM
-- Skip damage on EfiBltVideoToBltBuffer
-- Add patch "video: Always compile cache flushing code"
-- Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
-
-v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
-
-Changes in v3:
-- Adapt to always assume DM is used
-- Adapt to always assume DM is used
-- Make VIDEO_COPY always select VIDEO_DAMAGE
-
-v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
-
-Changes in v2:
-- Remove ifdefs
-- Fix ranges in truetype target
-- Limit rotate to necessary damage
-- Remove ifdefs from gop
-- Fix dcache range; we were flushing too much before
-- Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
-
-v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
-
-Alexander Graf (9):
-  dm: video: Add damage tracking API
-  dm: video: Add damage notification on display fills
-  vidconsole: Add damage notifications to all vidconsole drivers
-  video: Add damage notification on bmp display
-  efi_loader: GOP: Add damage notification on BLT
-  video: Only dcache flush damaged lines
-  video: Use VIDEO_DAMAGE for VIDEO_COPY
-  video: Always compile cache flushing code
-  video: Enable VIDEO_DAMAGE for drivers that need it
-
-Alper Nebi Yasak (4):
-  video: test: Split copy frame buffer check into a function
-  video: test: Support checking copy frame buffer contents
-  video: test: Test partial updates of hardware frame buffer
-  video: test: Test video damage tracking via vidconsole
-
- arch/arm/mach-omap2/omap3/Kconfig |   1 +
- arch/arm/mach-sunxi/Kconfig       |   1 +
- drivers/video/Kconfig             |  26 +++
- drivers/video/console_normal.c    |  27 ++--
- drivers/video/console_rotate.c    |  94 +++++++----
- drivers/video/console_truetype.c  |  37 +++--
- drivers/video/exynos/Kconfig      |   1 +
- drivers/video/imx/Kconfig         |   1 +
- drivers/video/meson/Kconfig       |   1 +
- drivers/video/rockchip/Kconfig    |   1 +
- drivers/video/stm32/Kconfig       |   1 +
- drivers/video/tegra20/Kconfig     |   1 +
- drivers/video/tidss/Kconfig       |   1 +
- drivers/video/vidconsole-uclass.c |  16 --
- drivers/video/video-uclass.c      | 190 ++++++++++++----------
- drivers/video/video_bmp.c         |   7 +-
- include/video.h                   |  59 +++----
- include/video_console.h           |  52 ------
- lib/efi_loader/efi_gop.c          |   7 +
- test/dm/video.c                   | 256 ++++++++++++++++++++++++------
- 20 files changed, 483 insertions(+), 297 deletions(-)
-
-
-base-commit: 3881c9fbb7fdd98f6eae5cd33f7e9abe9455a585
+diff --git a/test/dm/video.c b/test/dm/video.c
+index d907f681600b..641a6250100a 100644
+--- a/test/dm/video.c
++++ b/test/dm/video.c
+@@ -55,9 +55,6 @@ DM_TEST(dm_test_video_base, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+  * size of the compressed data. This provides a pretty good level of
+  * certainty and the resulting tests need only check a single value.
+  *
+- * If the copy framebuffer is enabled, this compares it to the main framebuffer
+- * too.
+- *
+  * @uts:	Test state
+  * @dev:	Video device
+  * Return: compressed size of the frame buffer, or -ve on error
+@@ -66,7 +63,6 @@ static int compress_frame_buffer(struct unit_test_state *uts,
+ 				 struct udevice *dev)
+ {
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+-	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
+ 	uint destlen;
+ 	void *dest;
+ 	int ret;
+@@ -82,16 +78,34 @@ static int compress_frame_buffer(struct unit_test_state *uts,
+ 	if (ret)
+ 		return ret;
+ 
+-	/* Check here that the copy frame buffer is working correctly */
+-	if (IS_ENABLED(CONFIG_VIDEO_COPY)) {
+-		ut_assertf(!memcmp(uc_priv->fb, uc_priv->copy_fb,
+-				   uc_priv->fb_size),
+-				   "Copy framebuffer does not match fb");
+-	}
+-
+ 	return destlen;
+ }
+ 
++/**
++ * check_copy_frame_buffer() - Compare main frame buffer to copy
++ *
++ * If the copy frame buffer is enabled, this compares it to the main
++ * frame buffer. Normally they should have the same contents after a
++ * sync.
++ *
++ * @uts:	Test state
++ * @dev:	Video device
++ * Return: 0, or -ve on error
++ */
++static int check_copy_frame_buffer(struct unit_test_state *uts,
++				   struct udevice *dev)
++{
++	struct video_priv *priv = dev_get_uclass_priv(dev);
++
++	if (!IS_ENABLED(CONFIG_VIDEO_COPY))
++		return 0;
++
++	ut_assertf(!memcmp(priv->fb, priv->copy_fb, priv->fb_size),
++		   "Copy framebuffer does not match fb");
++
++	return 0;
++}
++
+ /*
+  * Call this function at any point to halt and show the current display. Be
+  * sure to run the test with the -l flag.
+@@ -155,24 +169,30 @@ static int dm_test_video_text(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_putc_xy(con, 0, 0, 'a');
+ 	ut_asserteq(79, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	vidconsole_putc_xy(con, 0, 0, ' ');
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+ 	ut_asserteq(273, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	vidconsole_set_row(con, 0, WHITE);
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+ 	ut_asserteq(273, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -191,24 +211,30 @@ static int dm_test_video_text_12x22(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "12x22", 0));
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_putc_xy(con, 0, 0, 'a');
+ 	ut_asserteq(89, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	vidconsole_putc_xy(con, 0, 0, ' ');
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+ 	ut_asserteq(363, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	vidconsole_set_row(con, 0, WHITE);
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	for (i = 0; i < 20; i++)
+ 		vidconsole_putc_xy(con, VID_TO_POS(i * 8), 0, ' ' + i);
+ 	ut_asserteq(363, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -226,6 +252,7 @@ static int dm_test_video_chars(struct unit_test_state *uts)
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+ 	vidconsole_put_string(con, test_string);
+ 	ut_asserteq(466, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -247,19 +274,23 @@ static int dm_test_video_ansi(struct unit_test_state *uts)
+ 	video_clear(con->parent);
+ 	video_sync(con->parent, false);
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* test clear escape sequence: [2J */
+ 	vidconsole_put_string(con, "A\tB\tC"ANSI_ESC"[2J");
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* test set-cursor: [%d;%df */
+ 	vidconsole_put_string(con, "abc"ANSI_ESC"[2;2fab"ANSI_ESC"[4;4fcd");
+ 	ut_asserteq(143, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* test colors (30-37 fg color, 40-47 bg color) */
+ 	vidconsole_put_string(con, ANSI_ESC"[30;41mfoo"); /* black on red */
+ 	vidconsole_put_string(con, ANSI_ESC"[33;44mbar"); /* yellow on blue */
+ 	ut_asserteq(272, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -292,11 +323,13 @@ static int check_vidconsole_output(struct unit_test_state *uts, int rot,
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	ut_assertok(vidconsole_select_font(con, "8x16", 0));
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* Check display wrap */
+ 	for (i = 0; i < 120; i++)
+ 		vidconsole_put_char(con, 'A' + i % 50);
+ 	ut_asserteq(wrap_size, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* Check display scrolling */
+ 	for (i = 0; i < SCROLL_LINES; i++) {
+@@ -304,11 +337,13 @@ static int check_vidconsole_output(struct unit_test_state *uts, int rot,
+ 		vidconsole_put_char(con, '\n');
+ 	}
+ 	ut_asserteq(scroll_size, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	/* If we scroll enough, the screen becomes blank again */
+ 	for (i = 0; i < SCROLL_LINES; i++)
+ 		vidconsole_put_char(con, '\n');
+ 	ut_asserteq(46, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -383,6 +418,7 @@ static int dm_test_video_bmp(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(1368, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -402,6 +438,7 @@ static int dm_test_video_bmp8(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(1247, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -425,6 +462,7 @@ static int dm_test_video_bmp16(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+ 	ut_asserteq(3700, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -448,6 +486,7 @@ static int dm_test_video_bmp24(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+ 	ut_asserteq(3656, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -471,6 +510,7 @@ static int dm_test_video_bmp24_32(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, dst, 0, 0, false));
+ 	ut_asserteq(6827, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -489,6 +529,7 @@ static int dm_test_video_bmp32(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(2024, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -505,6 +546,7 @@ static int dm_test_video_bmp_comp(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(1368, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -524,6 +566,7 @@ static int dm_test_video_comp_bmp32(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(2024, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -543,6 +586,7 @@ static int dm_test_video_comp_bmp8(struct unit_test_state *uts)
+ 
+ 	ut_assertok(video_bmp_display(dev, addr, 0, 0, false));
+ 	ut_asserteq(1247, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -558,6 +602,7 @@ static int dm_test_video_truetype(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+ 	ut_asserteq(12174, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -579,6 +624,7 @@ static int dm_test_video_truetype_scroll(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+ 	ut_asserteq(34287, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
+@@ -600,6 +646,7 @@ static int dm_test_video_truetype_bs(struct unit_test_state *uts)
+ 	ut_assertok(uclass_get_device(UCLASS_VIDEO_CONSOLE, 0, &con));
+ 	vidconsole_put_string(con, test_string);
+ 	ut_asserteq(29471, compress_frame_buffer(uts, dev));
++	ut_assertok(check_copy_frame_buffer(uts, dev));
+ 
+ 	return 0;
+ }
 -- 
 2.40.1
 

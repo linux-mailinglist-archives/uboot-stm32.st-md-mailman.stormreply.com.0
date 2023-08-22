@@ -2,79 +2,76 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24E8A78478E
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 18:27:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A67FC7849CA
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Aug 2023 20:57:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8F4D0C78F7B;
-	Tue, 22 Aug 2023 16:27:09 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B837C6B44B;
+	Tue, 22 Aug 2023 18:57:53 +0000 (UTC)
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
+ [209.85.167.181])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A637AC6B44C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 920B9C6B444
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 13:51:55 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-31965c94001so2890661f8f.3
+ Tue, 22 Aug 2023 18:57:52 +0000 (UTC)
+Received: by mail-oi1-f181.google.com with SMTP id
+ 5614622812f47-3a82db15081so2954585b6e.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 21 Aug 2023 06:51:55 -0700 (PDT)
+ Tue, 22 Aug 2023 11:57:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20221208; t=1692625915; x=1693230715;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q4KbQNgBgg/jRM/b8KJaE0YjvGZTzMRikT8MXE6mjwI=;
- b=LXQ9F9oF17Es3W44Ien7NWJ7ymwABfjmSOFUn1nlvsBdcyw9b3O/o8ulQCpUwqhXho
- Lsoff11Pmwlo87siidtGiRDX/BRiaZ8rBVWjS3jgK+U6RDPcwNCfR7otgNlLLaNyAd4w
- BCXHT1+90WvAX/9alOvPUYlvUkP1t/S15/C+bUJWxok5Nf6l5iGthuNMWvZFFiUdQ8yR
- 02AJastvoFpsYlAJI+JY69q6OhIhuxvdeDVc81dEOKzKkkEOdENJDmT6pJI4fiWlgwEE
- iSJz97xC4lCSs+y5RPJTJfxE97zWwduKphPAN75dLRw0vnBYyqeXIo4ERx4uO7ku2jHf
- 8feQ==
+ d=chromium.org; s=google; t=1692730671; x=1693335471;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DZVRGfmBOabu1wOEPPuYW3gyh2bZLY1wdIdhvnWyWK0=;
+ b=glII45v5dlryN8ldctkMdTJaqSnv+fZgqAfdkMRw8yiQKhoZSx7JHcKUU1Zk54xRZj
+ nb3OuOiKl1pnO+3Mj83QaKVcVeJouZZVh78NT/0YuzBYqYsQdLnKo0tyrVW25pCmhWw2
+ 7UpL876FncTMAjyfDJjo7NXsalHktthEhWyVE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692625915; x=1693230715;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q4KbQNgBgg/jRM/b8KJaE0YjvGZTzMRikT8MXE6mjwI=;
- b=F5a/LPQL8guEfnSW0OaJo9BJ21vbN8LA9+SwgfbGEmbMMOfxAmPAa3s3MRVGP97BAu
- rR+YC/PUJfG8ZM0CkLB2sQgg7LKEsjQ6dHZxFB5L0pVTq7KCxgMGpyfpRmWF2KuS9WEr
- nwMaEtCPwqW4KCtdCIF/Fh+uFkFMsFaV3vPxsjs9bSaOJUNSOZ8e1OOHFlL6V+TuF1Dg
- +FRh7X7yqEFA+6NGd+YLBfqcaWtU86+G4k/gP9jAQ+xowpiQLh88wmRq5A8Cjx/p3Sj/
- Bf0RzGg6lnfcILwpPGRFb8WleGHr7YMansmKGA+tO0Sjei7tYlSKXSkCm4IugqQq8jzP
- Kj8Q==
-X-Gm-Message-State: AOJu0YwEDDd4t3TnXNgi7XcWktLJmAMl3nY8Bbs0LRRzLOFG7Lhd/FMI
- P5FnT7GriFehADavKvw7gHk=
-X-Google-Smtp-Source: AGHT+IER2mHBuKBsYnQ3qf+DOtUzSQystkj8v17bWgFVK+zSLUhwLW9BOExvB2cO0RXSrx1vnjzR/w==
-X-Received: by 2002:adf:e711:0:b0:317:e542:80a8 with SMTP id
- c17-20020adfe711000000b00317e54280a8mr4968619wrm.15.1692625915025; 
- Mon, 21 Aug 2023 06:51:55 -0700 (PDT)
-Received: from ALPER-PC.. ([178.233.24.1]) by smtp.gmail.com with ESMTPSA id
- r11-20020a5d4e4b000000b00317b063590fsm12600049wrt.55.2023.08.21.06.51.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Aug 2023 06:51:54 -0700 (PDT)
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-To: u-boot@lists.denx.de
-Date: Mon, 21 Aug 2023 16:51:10 +0300
-Message-Id: <20230821135111.3558478-14-alpernebiyasak@gmail.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ d=1e100.net; s=20221208; t=1692730671; x=1693335471;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DZVRGfmBOabu1wOEPPuYW3gyh2bZLY1wdIdhvnWyWK0=;
+ b=gp7Mj3vp1prv3vLS01Ca95ccZab2eH9sD+BvabCKJXdVhLkT740WcS9LfbSG+XI0AP
+ c5hiS4BIiD7B7TTxM0eYTFlpBTF127LVTj0iI690dhesEJ/MMuoMSnwWyrzgehrnXm4q
+ rnZwunlZIPfMAM1UAzftNM5zKNEQQfGa0WP8tAeLFLLHv7qmR5qtXr8ERTRw+68eiUdx
+ hs5tHEpm4/2bZu0dO1PzIe49p/wgEPFxhOF2EPWDRWsUaE4pOiHqxc/taUdTI1lV+kTK
+ o+IZYc6L/XjgZcrBrk43Hef7Tqx5hRneFR8XPm8eygUU+tWil6jR8bwEfmJ3NRTzPDXT
+ fPpA==
+X-Gm-Message-State: AOJu0YzXMn8SirNWhATNBfHjbI6cVWMmjXdpj+zTfyEM4DwJSuJ3rHcH
+ njJhw6D3vUobbBAY9xVS32KtdM1H/6Cl2TAZImzzBg==
+X-Google-Smtp-Source: AGHT+IHLM6yan8hnPIGrS8HQD/qTIPzHnGKkUAcYUlcjLk5cal9wLxkLuIrYBF2JoPr0gFByaaoQWX2G/5I/JpLeffs=
+X-Received: by 2002:a05:6358:5284:b0:134:d030:e5da with SMTP id
+ g4-20020a056358528400b00134d030e5damr5276158rwa.21.1692730670856; Tue, 22 Aug
+ 2023 11:57:50 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailman-Approved-At: Tue, 22 Aug 2023 16:27:06 +0000
+References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
+ <CAPnjgZ0FrwViFv8xLFSkTtztZQw=hnNprCcHfp39s_jfMHRCgA@mail.gmail.com>
+ <eda9f0f0-fc4d-42b6-abbd-749f67ef6b10@csgraf.de>
+ <CAPnjgZ376PEfX75eGL6QvmehZ9Kp+5_orhcsKOpr=8rpRKutFA@mail.gmail.com>
+ <62403d10-946d-489a-b225-1b1c180b9349@csgraf.de>
+ <CAPnjgZ3WCmtw_Gdpf=E8Ed5faH4T7-=yPf6RwcktukQEG-7J8g@mail.gmail.com>
+ <c1ddb2af-8f3d-1e6c-cc67-76d16fe6aff5@csgraf.de>
+ <CAPnjgZ1Y6aahxRRnY5Tb8N6Uk2TuZViXyBXG_MgMSn7QKt8EXw@mail.gmail.com>
+ <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+In-Reply-To: <3edfc316-bdf4-4d11-b592-2e584f1aabb3@csgraf.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 22 Aug 2023 12:56:40 -0600
+Message-ID: <CAPnjgZ1jMhuw2iqkiy6uEWABSF_4fHiet=-=-9LOMKb7-RGziw@mail.gmail.com>
+To: Alexander Graf <agraf@csgraf.de>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
  Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
+ u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alexander Graf <agraf@csgraf.de>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: [Uboot-stm32] [PATCH v5 13/13] video: Enable VIDEO_DAMAGE for
-	drivers that need it
+ uboot-stm32@st-md-mailman.stormreply.com, Anatolij Gustschin <agust@denx.de>,
+ Da Xue <da@libre.computer>
+Subject: Re: [Uboot-stm32] [PATCH v5 00/13] Add video damage tracking
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,219 +88,257 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Alexander Graf <agraf@csgraf.de>
+Hi Alex,
 
-Some drivers call video_set_flush_dcache() to indicate that they want to
-have the dcache flushed for the frame buffer. These drivers benefit from
-our new video damage control, because we can reduce the amount of memory
-that gets flushed significantly.
+On Tue, 22 Aug 2023 at 01:47, Alexander Graf <agraf@csgraf.de> wrote:
+>
+>
+> On 22.08.23 01:03, Simon Glass wrote:
+> > Hi Alex,
+> >
+> > On Mon, 21 Aug 2023 at 16:40, Alexander Graf <agraf@csgraf.de> wrote:
+> >>
+> >> On 22.08.23 00:10, Simon Glass wrote:
+> >>> Hi Alex,
+> >>>
+> >>> On Mon, 21 Aug 2023 at 14:20, Alexander Graf <agraf@csgraf.de> wrote:
+> >>>> On 21.08.23 21:57, Simon Glass wrote:
+> >>>>> Hi Alex,
+> >>>>>
+> >>>>> On Mon, 21 Aug 2023 at 13:33, Alexander Graf <agraf@csgraf.de> wrote:
+> >>>>>> On 21.08.23 21:11, Simon Glass wrote:
+> >>>>>>> Hi Alper,
+> >>>>>>>
+> >>>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
+> >>>>>>>> This is a rebase of Alexander Graf's video damage tracking series, with
+> >>>>>>>> some tests and other changes. The original cover letter is as follows:
+> >>>>>>>>
+> >>>>>>>>> This patch set speeds up graphics output on ARM by a factor of 60x.
+> >>>>>>>>>
+> >>>>>>>>> On most ARM SBCs, we keep the frame buffer in DRAM and map it as cached,
+> >>>>>>>>> but need it accessible by the display controller which reads directly
+> >>>>>>>>> from a later point of consistency. Hence, we flush the frame buffer to
+> >>>>>>>>> DRAM on every change. The full frame buffer.
+> >>>>>>> It should not, see below.
+> >>>>>>>
+> >>>>>>>>> Unfortunately, with the advent of 4k displays, we are seeing frame buffers
+> >>>>>>>>> that can take a while to flush out. This was reported by Da Xue with grub,
+> >>>>>>>>> which happily print 1000s of spaces on the screen to draw a menu. Every
+> >>>>>>>>> printed space triggers a cache flush.
+> >>>>>>> That is a bug somewhere in EFI.
+> >>>>>> Unfortunately not :). You may call it a bug in grub: It literally prints
+> >>>>>> over space characters for every character in its menu that it wants
+> >>>>>> cleared. On every text screen draw.
+> >>>>>>
+> >>>>>> This wouldn't be a big issue if we only flush the reactangle that gets
+> >>>>>> modified. But without this patch set, we're flushing the full DRAM
+> >>>>>> buffer on every u-boot text console character write, which means for
+> >>>>>> every character (as that's the only API UEFI has).
+> >>>>>>
+> >>>>>> As a nice side effect, we speed up the normal U-Boot text console as
+> >>>>>> well with this patch set, because even "normal" text prints that write
+> >>>>>> for example a single line of text on the screen today flush the full
+> >>>>>> frame buffer to DRAM.
+> >>>>> No, I mean that it is a bug that U-Boot (apparently) flushes the cache
+> >>>>> after every character. It doesn't do that for normal character output
+> >>>>> and I don't think it makes sense to do it for EFI either.
+> >>>> I see. Let's trace the calls:
+> >>>>
+> >>>> efi_cout_output_string()
+> >>>> -> fputs()
+> >>>> -> vidconsole_puts()
+> >>>> -> video_sync()
+> >>>> -> flush_dcache_range()
+> >>>>
+> >>>> Unfortunately grub abstracts character backends down to the "print
+> >>>> character" level, so it calls UEFI's sopisticated "output_string"
+> >>>> callback with single characters at a time, which means we do a full
+> >>>> dcache flush for every character that we print:
+> >>>>
+> >>>> https://git.savannah.gnu.org/cgit/grub.git/tree/grub-core/term/efi/console.c#n165
+> >>>>
+> >>>>
+> >>>>>>>>> This patch set implements the easiest mitigation against this problem:
+> >>>>>>>>> Damage tracking. We remember the lowest common denominator region that was
+> >>>>>>>>> touched since the last video_sync() call and only flush that. The most
+> >>>>>>>>> typical writer to the frame buffer is the video console, which always
+> >>>>>>>>> writes rectangles of characters on the screen and syncs afterwards.
+> >>>>>>>>>
+> >>>>>>>>> With this patch set applied, we reduce drawing a large grub menu (with
+> >>>>>>>>> serial console attached for size information) on an RK3399-ROC system
+> >>>>>>>>> at 1440p from 55 seconds to less than 1 second.
+> >>>>>>>>>
+> >>>>>>>>> Version 2 also implements VIDEO_COPY using this mechanism, reducing its
+> >>>>>>>>> overhead compared to before as well. So even x86 systems should be faster
+> >>>>>>>>> with this now :).
+> >>>>>>>>>
+> >>>>>>>>>
+> >>>>>>>>> Alternatives considered:
+> >>>>>>>>>
+> >>>>>>>>>       1) Lazy sync - Sandbox does this. It only calls video_sync(true) ever
+> >>>>>>>>>          so often. We are missing timers to do this generically.
+> >>>>>>>>>
+> >>>>>>>>>       2) Double buffering - We could try to identify whether anything changed
+> >>>>>>>>>          at all and only draw to the FB if it did. That would require
+> >>>>>>>>>          maintaining a second buffer that we need to scan.
+> >>>>>>>>>
+> >>>>>>>>>       3) Text buffer - Maintain a buffer of all text printed on the screen with
+> >>>>>>>>>          respective location. Don't write if the old and new character are
+> >>>>>>>>>          identical. This would limit applicability to text only and is an
+> >>>>>>>>>          optimization on top of this patch set.
+> >>>>>>>>>
+> >>>>>>>>>       4) Hash screen lines - Create a hash (sha256?) over every line when it
+> >>>>>>>>>          changes. Only flush when it does. I'm not sure if this would waste
+> >>>>>>>>>          more time, memory and cache than the current approach. It would make
+> >>>>>>>>>          full screen updates much more expensive.
+> >>>>>>> 5) Fix the bug mentioned above?
+> >>>>>>>
+> >>>>>>>> Changes in v5:
+> >>>>>>>> - Add patch "video: test: Split copy frame buffer check into a function"
+> >>>>>>>> - Add patch "video: test: Support checking copy frame buffer contents"
+> >>>>>>>> - Add patch "video: test: Test partial updates of hardware frame buffer"
+> >>>>>>>> - Use xstart, ystart, xend, yend as names for damage region
+> >>>>>>>> - Document damage struct and fields in struct video_priv comment
+> >>>>>>>> - Return void from video_damage()
+> >>>>>>>> - Fix undeclared priv error in video_sync()
+> >>>>>>>> - Drop unused headers from video-uclass.c
+> >>>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
+> >>>>>>>> - Call video_damage() also in video_fill_part()
+> >>>>>>>> - Use met->baseline instead of priv->baseline
+> >>>>>>>> - Use fontdata->height/width instead of VIDEO_FONT_HEIGHT/WIDTH
+> >>>>>>>> - Update console_rotate.c video_damage() calls to pass video tests
+> >>>>>>>> - Remove mention about not having minimal damage for console_rotate.c
+> >>>>>>>> - Add patch "video: test: Test video damage tracking via vidconsole"
+> >>>>>>>> - Document new vdev field in struct efi_gop_obj comment
+> >>>>>>>> - Remove video_sync_copy() also from video_fill(), video_fill_part()
+> >>>>>>>> - Fix memmove() calls by removing the extra dev argument
+> >>>>>>>> - Call video_sync() before checking copy_fb in video tests
+> >>>>>>>> - Imply VIDEO_DAMAGE for video drivers instead of selecting it
+> >>>>>>>> - Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+> >>>>>>>>
+> >>>>>>>> v4: https://lore.kernel.org/all/20230103215004.22646-1-agraf@csgraf.de/
+> >>>>>>>>
+> >>>>>>>> Changes in v4:
+> >>>>>>>> - Move damage clear to patch "dm: video: Add damage tracking API"
+> >>>>>>>> - Simplify first damage logic
+> >>>>>>>> - Remove VIDEO_DAMAGE default for ARM
+> >>>>>>>> - Skip damage on EfiBltVideoToBltBuffer
+> >>>>>>>> - Add patch "video: Always compile cache flushing code"
+> >>>>>>>> - Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+> >>>>>>>>
+> >>>>>>>> v3: https://lore.kernel.org/all/20221230195828.88134-1-agraf@csgraf.de/
+> >>>>>>>>
+> >>>>>>>> Changes in v3:
+> >>>>>>>> - Adapt to always assume DM is used
+> >>>>>>>> - Adapt to always assume DM is used
+> >>>>>>>> - Make VIDEO_COPY always select VIDEO_DAMAGE
+> >>>>>>>>
+> >>>>>>>> v2: https://lore.kernel.org/all/20220609225921.62462-1-agraf@csgraf.de/
+> >>>>>>>>
+> >>>>>>>> Changes in v2:
+> >>>>>>>> - Remove ifdefs
+> >>>>>>>> - Fix ranges in truetype target
+> >>>>>>>> - Limit rotate to necessary damage
+> >>>>>>>> - Remove ifdefs from gop
+> >>>>>>>> - Fix dcache range; we were flushing too much before
+> >>>>>>>> - Add patch "video: Use VIDEO_DAMAGE for VIDEO_COPY"
+> >>>>>>>>
+> >>>>>>>> v1: https://lore.kernel.org/all/20220606234336.5021-1-agraf@csgraf.de/
+> >>>>>>>>
+> >>>>>>>> Alexander Graf (9):
+> >>>>>>>>       dm: video: Add damage tracking API
+> >>>>>>>>       dm: video: Add damage notification on display fills
+> >>>>>>>>       vidconsole: Add damage notifications to all vidconsole drivers
+> >>>>>>>>       video: Add damage notification on bmp display
+> >>>>>>>>       efi_loader: GOP: Add damage notification on BLT
+> >>>>>>>>       video: Only dcache flush damaged lines
+> >>>>>>>>       video: Use VIDEO_DAMAGE for VIDEO_COPY
+> >>>>>>>>       video: Always compile cache flushing code
+> >>>>>>>>       video: Enable VIDEO_DAMAGE for drivers that need it
+> >>>>>>>>
+> >>>>>>>> Alper Nebi Yasak (4):
+> >>>>>>>>       video: test: Split copy frame buffer check into a function
+> >>>>>>>>       video: test: Support checking copy frame buffer contents
+> >>>>>>>>       video: test: Test partial updates of hardware frame buffer
+> >>>>>>>>       video: test: Test video damage tracking via vidconsole
+> >>>>>>>>
+> >>>>>>>>      arch/arm/mach-omap2/omap3/Kconfig |   1 +
+> >>>>>>>>      arch/arm/mach-sunxi/Kconfig       |   1 +
+> >>>>>>>>      drivers/video/Kconfig             |  26 +++
+> >>>>>>>>      drivers/video/console_normal.c    |  27 ++--
+> >>>>>>>>      drivers/video/console_rotate.c    |  94 +++++++----
+> >>>>>>>>      drivers/video/console_truetype.c  |  37 +++--
+> >>>>>>>>      drivers/video/exynos/Kconfig      |   1 +
+> >>>>>>>>      drivers/video/imx/Kconfig         |   1 +
+> >>>>>>>>      drivers/video/meson/Kconfig       |   1 +
+> >>>>>>>>      drivers/video/rockchip/Kconfig    |   1 +
+> >>>>>>>>      drivers/video/stm32/Kconfig       |   1 +
+> >>>>>>>>      drivers/video/tegra20/Kconfig     |   1 +
+> >>>>>>>>      drivers/video/tidss/Kconfig       |   1 +
+> >>>>>>>>      drivers/video/vidconsole-uclass.c |  16 --
+> >>>>>>>>      drivers/video/video-uclass.c      | 190 ++++++++++++----------
+> >>>>>>>>      drivers/video/video_bmp.c         |   7 +-
+> >>>>>>>>      include/video.h                   |  59 +++----
+> >>>>>>>>      include/video_console.h           |  52 ------
+> >>>>>>>>      lib/efi_loader/efi_gop.c          |   7 +
+> >>>>>>>>      test/dm/video.c                   | 256 ++++++++++++++++++++++++------
+> >>>>>>>>      20 files changed, 483 insertions(+), 297 deletions(-)
+> >>>>>>> It is good to see this tidied up into something that can be applied!
+> >>>>>>>
+> >>>>>>> I am unsure what is going on with the EFI performance, though. It
+> >>>>>>> should not flush the cache after every character, only after a new
+> >>>>>>> line. Is there something wrong in here? If so, we should fix that bug
+> >>>>>>> first and it should be patch 1 of this series.
+> >>>>>> Before I came up with this series, I was trying to identify the UEFI bug
+> >>>>>> in question as well, because intuition told me surely this is a bug in
+> >>>>>> UEFI :). Turns out it really isn't this time around.
+> >>>>> I don't mean a bug in UEFI, I mean a bug in U-Boot's EFI
+> >>>>> implementation. Where did you look for the bug?
+> >>>> The "real" bug is in grub. But given that it's reasonably simple to work
+> >>>> around in U-Boot and even with it "fixed" in grub we would still see
+> >>>> performance benefits from flushing only parts of the screen, I think
+> >>>> it's worth living with the grub deficiency.
+> >>> OK thanks for digging into it. I suggest we add a param to
+> >>> vidconsole_puts() to tell it whether to sync or not, then the EFI code
+> >>> can indicate this and try to be a bit smarter about it.
+> >>
+> >> It doesn't know when to sync either. From its point of view, any
+> >> "console output" could be the last one. There is no API in UEFI that
+> >> says "please flush console output now".
+> > Yes, I understand. I was not suggesting we were missing an API. But
+> > some sort of heuristic would do, e.g. only flush on a newline, flush
+> > every 50 chars, etc.
+>
+> I can't think of any heuristic that would reliably work. Relevant for
+> this conversation, UEFI provides 2 calls:
+>
+>    * Write string to screen (efi_cout_output_string)
+>    * Set text cursor position to X, Y (efi_cout_set_cursor_position)
+>
+> It's perfectly legal for a UEFI application to do something like
+>
+> efi_cout_set_cursor_position(10, 10);
+> efi_cout_output_string("f");
+> efi_cout_output_string("o");
+> efi_cout_output_string("o") ;
+>
+> to update contents of a virtual text box on the screen. Where in this
+> chain of events would we call video_sync(), but on every call to
+> efi_cout_output_string()?
 
-This patch enables video damage control for all device drivers that call
-video_set_flush_dcache() to make sure they benefit from it.
+Actually U-Boot has the same problem, but we have managed to work out something.
 
-Signed-off-by: Alexander Graf <agraf@csgraf.de>
-[Alper: Add to VIDEO_TIDSS, imply instead of select]
-Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
----
+I do think it is still to flush the cache on every char. I suspect you
+will find that even a simple heuristic like I mentioned would be good
+enough.
 
-Changes in v5:
-- Imply VIDEO_DAMAGE for video drivers instead of selecting it
-- Imply VIDEO_DAMAGE also for VIDEO_TIDSS
+Also I notice that EFI calls notify? all the time, so U-Boot probably
+does have the ability to sync the video every 10ms if we wanted to.
 
-Changes in v4:
-- Add patch "video: Enable VIDEO_DAMAGE for drivers that need it"
+It seems from this discussion that we have made great the enemy of the good.
 
- arch/arm/mach-omap2/omap3/Kconfig | 1 +
- arch/arm/mach-sunxi/Kconfig       | 1 +
- drivers/video/Kconfig             | 8 ++++++++
- drivers/video/exynos/Kconfig      | 1 +
- drivers/video/imx/Kconfig         | 1 +
- drivers/video/meson/Kconfig       | 1 +
- drivers/video/rockchip/Kconfig    | 1 +
- drivers/video/stm32/Kconfig       | 1 +
- drivers/video/tegra20/Kconfig     | 1 +
- drivers/video/tidss/Kconfig       | 1 +
- 10 files changed, 17 insertions(+)
-
-diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
-index 671e4791c67f..fd858f7b50f2 100644
---- a/arch/arm/mach-omap2/omap3/Kconfig
-+++ b/arch/arm/mach-omap2/omap3/Kconfig
-@@ -113,6 +113,7 @@ config TARGET_NOKIA_RX51
- 	select CMDLINE_TAG
- 	select INITRD_TAG
- 	select REVISION_TAG
-+	imply VIDEO_DAMAGE
- 
- config TARGET_TAO3530
- 	bool "TAO3530"
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index 9d5df2c10273..fb4478ea32e8 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -813,6 +813,7 @@ config VIDEO_SUNXI
- 	depends on !SUN50I_GEN_H6
- 	select VIDEO
- 	select DISPLAY
-+	imply VIDEO_DAMAGE
- 	imply VIDEO_DT_SIMPLEFB
- 	default y
- 	---help---
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index b3fbd9d7d9ca..185dbb1f8390 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -499,6 +499,7 @@ config VIDEO_LCD_ANX9804
- 
- config ATMEL_LCD
- 	bool "Atmel LCD panel support"
-+	imply VIDEO_DAMAGE
- 	depends on ARCH_AT91
- 
- config ATMEL_LCD_BGR555
-@@ -508,6 +509,7 @@ config ATMEL_LCD_BGR555
- 
- config VIDEO_BCM2835
- 	bool "Display support for BCM2835"
-+	imply VIDEO_DAMAGE
- 	help
- 	  The graphics processor already sets up the display so this driver
- 	  simply checks the resolution and then sets up the frame buffer with
-@@ -654,6 +656,7 @@ source "drivers/video/meson/Kconfig"
- 
- config VIDEO_MVEBU
- 	bool "Armada XP LCD controller"
-+	imply VIDEO_DAMAGE
- 	---help---
- 	Support for the LCD controller integrated in the Marvell
- 	Armada XP SoC.
-@@ -688,6 +691,7 @@ config NXP_TDA19988
- 
- config ATMEL_HLCD
- 	bool "Enable ATMEL video support using HLCDC"
-+	imply VIDEO_DAMAGE
- 	help
- 	   HLCDC supports video output to an attached LCD panel.
- 
-@@ -764,6 +768,7 @@ source "drivers/video/tidss/Kconfig"
- 
- config VIDEO_TEGRA124
- 	bool "Enable video support on Tegra124"
-+	imply VIDEO_DAMAGE
- 	help
- 	   Tegra124 supports many video output options including eDP and
- 	   HDMI. At present only eDP is supported by U-Boot. This option
-@@ -778,6 +783,7 @@ source "drivers/video/imx/Kconfig"
- 
- config VIDEO_MXS
- 	bool "Enable video support on i.MX28/i.MX6UL/i.MX7 SoCs"
-+	imply VIDEO_DAMAGE
- 	help
- 	  Enable framebuffer driver for i.MX28/i.MX6UL/i.MX7 processors
- 
-@@ -840,6 +846,7 @@ config VIDEO_DW_MIPI_DSI
- 
- config VIDEO_SIMPLE
- 	bool "Simple display driver for preconfigured display"
-+	imply VIDEO_DAMAGE
- 	help
- 	  Enables a simple generic display driver which utilizes the
- 	  simple-framebuffer devicetree bindings.
-@@ -858,6 +865,7 @@ config VIDEO_DT_SIMPLEFB
- 
- config VIDEO_MCDE_SIMPLE
- 	bool "Simple driver for ST-Ericsson MCDE with preconfigured display"
-+	imply VIDEO_DAMAGE
- 	help
- 	  Enables a simple display driver for ST-Ericsson MCDE
- 	  (Multichannel Display Engine), which reads the configuration from
-diff --git a/drivers/video/exynos/Kconfig b/drivers/video/exynos/Kconfig
-index 599d19d5ecc2..a2cf752aac03 100644
---- a/drivers/video/exynos/Kconfig
-+++ b/drivers/video/exynos/Kconfig
-@@ -12,6 +12,7 @@ config EXYNOS_DP
- 
- config EXYNOS_FB
- 	bool "Exynos FIMD support"
-+	imply VIDEO_DAMAGE
- 
- config EXYNOS_MIPI_DSIM
- 	bool "Exynos MIPI DSI support"
-diff --git a/drivers/video/imx/Kconfig b/drivers/video/imx/Kconfig
-index 34e8b640595b..5db3e5c0499e 100644
---- a/drivers/video/imx/Kconfig
-+++ b/drivers/video/imx/Kconfig
-@@ -2,6 +2,7 @@
- config VIDEO_IPUV3
- 	bool "i.MX IPUv3 Core video support"
- 	depends on VIDEO && (MX5 || MX6)
-+	imply VIDEO_DAMAGE
- 	help
- 	  This enables framebuffer driver for i.MX processors working
- 	  on the IPUv3(Image Processing Unit) internal graphic processor.
-diff --git a/drivers/video/meson/Kconfig b/drivers/video/meson/Kconfig
-index 3c2d72d019b8..fcf486ca0a3a 100644
---- a/drivers/video/meson/Kconfig
-+++ b/drivers/video/meson/Kconfig
-@@ -8,5 +8,6 @@ config VIDEO_MESON
- 	bool "Enable Amlogic Meson video support"
- 	depends on VIDEO
- 	select DISPLAY
-+	imply VIDEO_DAMAGE
- 	help
- 	  Enable Amlogic Meson Video Processing Unit video support.
-diff --git a/drivers/video/rockchip/Kconfig b/drivers/video/rockchip/Kconfig
-index 01804dcb1cc8..0f4550a29e38 100644
---- a/drivers/video/rockchip/Kconfig
-+++ b/drivers/video/rockchip/Kconfig
-@@ -11,6 +11,7 @@
- menuconfig VIDEO_ROCKCHIP
- 	bool "Enable Rockchip Video Support"
- 	depends on VIDEO
-+	imply VIDEO_DAMAGE
- 	help
- 	  Rockchip SoCs provide video output capabilities for High-Definition
- 	  Multimedia Interface (HDMI), Low-voltage Differential Signalling
-diff --git a/drivers/video/stm32/Kconfig b/drivers/video/stm32/Kconfig
-index 48066063e4c5..c354c402c288 100644
---- a/drivers/video/stm32/Kconfig
-+++ b/drivers/video/stm32/Kconfig
-@@ -8,6 +8,7 @@
- menuconfig VIDEO_STM32
- 	bool "Enable STM32 video support"
- 	depends on VIDEO
-+	imply VIDEO_DAMAGE
- 	help
- 	  STM32 supports many video output options including RGB and
- 	  DSI. This option enables these supports which can be used on
-diff --git a/drivers/video/tegra20/Kconfig b/drivers/video/tegra20/Kconfig
-index f5c4843e1191..2232b0b3ff53 100644
---- a/drivers/video/tegra20/Kconfig
-+++ b/drivers/video/tegra20/Kconfig
-@@ -1,6 +1,7 @@
- config VIDEO_TEGRA20
- 	bool "Enable Display Controller support on Tegra20 and Tegra 30"
- 	depends on OF_CONTROL
-+	imply VIDEO_DAMAGE
- 	help
- 	   T20/T30 support video output to an attached LCD panel as well as
- 	   other options such as HDMI. Only the LCD is supported in U-Boot.
-diff --git a/drivers/video/tidss/Kconfig b/drivers/video/tidss/Kconfig
-index 95086f3a5d66..3291b3ceb8d5 100644
---- a/drivers/video/tidss/Kconfig
-+++ b/drivers/video/tidss/Kconfig
-@@ -11,6 +11,7 @@
- menuconfig VIDEO_TIDSS
- 	bool "Enable TIDSS video support"
- 	depends on VIDEO
-+	imply VIDEO_DAMAGE
- 	help
- 	  TIDSS supports  video output options LVDS and
- 	  DPI . This option enables these supports which can be used on
--- 
-2.40.1
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,73 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39C3778716D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Aug 2023 16:25:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3289A7871ED
+	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Aug 2023 16:41:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E80FDC6B44F;
-	Thu, 24 Aug 2023 14:25:10 +0000 (UTC)
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com
- [209.85.219.174])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DE052C6B44F;
+	Thu, 24 Aug 2023 14:41:34 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 79E9AC6B44E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60701C6A61A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Aug 2023 14:25:09 +0000 (UTC)
-Received: by mail-yb1-f174.google.com with SMTP id
- 3f1490d57ef6-d77c5414433so1682889276.0
+ Thu, 24 Aug 2023 14:41:33 +0000 (UTC)
+Received: by mail-ej1-f47.google.com with SMTP id
+ a640c23a62f3a-99bc9e3cbf1so207664566b.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Aug 2023 07:25:09 -0700 (PDT)
+ Thu, 24 Aug 2023 07:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1692887108; x=1693491908;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=M8+rjZwOLw+THvEEeXAa+2bhqugLobjzaY3J/ujWik4=;
- b=poQzDt4/YarvAMcZQU4ttILRQVRQMRT+5tVzUJaeO5KsfS955yRw3VGn15PaaiaKVc
- InolWPpekNoJhMfVU/fQfC9Yw1RV2yOY32osShpgH9UPIp1wqlJ1B7OAJXajwJviLRzI
- 3W2JIJOWF6taAmqfM09mdlJiCkXgN9pYBHRmc=
+ d=chromium.org; s=google; t=1692888093; x=1693492893;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
+ b=YDjDtIHmi4IGsrIFuYwwGfY8DweNuh9UPeUrn8gp8UyiODJiTnlUIkXj/E4N9Mjqgo
+ /iPqtHceyICMJ2SxTif7u1x8Hkilfq3GaLwMIVbRin+j1/ShNFdbZ2xYsRKhtlbWvw3E
+ 5NSLvElCO0h7XqwAoA9WxEfvH0qfYx2FQyfVc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1692887108; x=1693491908;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M8+rjZwOLw+THvEEeXAa+2bhqugLobjzaY3J/ujWik4=;
- b=DmsVlzSjy3W/R9dRLJRezuEgDbaUSaDomeulTFx4xsP/SBrPkpj7HBGFqZhr/9HbSz
- EpSbUz33wu9gNCnX0OXDmfOiLB6yzFndOwTJ1NgMoTmOXCvQap6UL+VZa6+3Jn9e2/do
- H2XeO/6BsidPB/17TFl8X9vWU4E1no6OkAEeXoXcYPQ7BseCvijApRKV2HSxV9tAgsaH
- pmWkZK5tkWPVs+HQOjC/yItliRzkINALEw/6uK163wBzr+92TCHF30RYY+4qfJ1g4ykg
- sNIAQYhA4KL3D2D713r0eWMLWO1DSn7ophIMtMQwDbUUJSqpDYepWo/wIVfP0dScwu+A
- 77zQ==
-X-Gm-Message-State: AOJu0YzT9LXX9fcvj+8Z3TnAyhH0Ho5RmOX1UriVbOZfwm8EMkNOHk89
- E14ZSL2FJv6PUK/d3mnJJf/6aQ==
-X-Google-Smtp-Source: AGHT+IH6pDKv3desLucj0CrnFSL0mbr9NWhqubCzqMK2O0Jhdcn60Qg0TXPF6e0PugsPeb22c+ymfQ==
-X-Received: by 2002:a0d:d145:0:b0:581:5cb9:6c2b with SMTP id
- t66-20020a0dd145000000b005815cb96c2bmr14364604ywd.45.1692887108259; 
- Thu, 24 Aug 2023 07:25:08 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-37ed-1199-bcc5-406f.res6.spectrum.com.
- [2603:6081:7b00:6400:37ed:1199:bcc5:406f])
- by smtp.gmail.com with ESMTPSA id
- w4-20020a817b04000000b00583b144fe51sm2585905ywc.118.2023.08.24.07.25.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Aug 2023 07:25:07 -0700 (PDT)
-Date: Thu, 24 Aug 2023 10:25:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Message-ID: <20230824142505.GM3953269@bill-the-cat>
-References: <20230824030304.1555547-1-sjg@chromium.org>
- <20230824030304.1555547-7-sjg@chromium.org>
- <3ab486b0-be22-48b9-7417-742ed8360f0f@denx.de>
+ d=1e100.net; s=20221208; t=1692888093; x=1693492893;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bAArZxilMdafYN0YYrcuIx+9R9cfa4JM+gLl2a5oPxI=;
+ b=KxVWbw3YNUN2AVEAKcBJ46UL3ZPXGRFvWBwcQu8+iuTQ55n4NDkC365YIfcWw5uclJ
+ XYtntdPj9jUGmAicRd76DqBc5uoTBf8XaE8YOdO3Kis59vnQMbkDqUhvZM2p1B1tnsdD
+ W1HuBiWh5q0OACEMclOwOs9SUZ5FzEkrd+frO1jZ9qubQ49zD793WPutgQlbX88A+J1L
+ HS1TogMiY2xRhaL7NLDU1dMFZUOCPPJGtlo/IPPJfnk6tpuHsOFGX3k7oIfSPoV0Sl1I
+ n2YFNQCe4Lxc7fw+/je1ZZdeVsIUixhPoWQKHGj5VB34J1KFz/Htm8UBEGMl5crICav1
+ ZSUg==
+X-Gm-Message-State: AOJu0YzERv7T4cAKJdqKSpyiQRhUJFE98Pn5QgY048Ew860S7KjLQh+9
+ XFz1BK1ht1TxT+MFkcPFA8N3nbe7Gyb5pni9p/oVyA==
+X-Google-Smtp-Source: AGHT+IGuUVu8B6RMBQO5SAHlZSO+rI3Prp0pji/F3INchAoUk+f8v7CkO3gSwAnfLQgjQIcdm0T3/N0dTswy0036m6E=
+X-Received: by 2002:a17:907:da1:b0:9a2:248f:aac with SMTP id
+ go33-20020a1709070da100b009a2248f0aacmr1059631ejc.16.1692888092555; Thu, 24
+ Aug 2023 07:41:32 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <3ab486b0-be22-48b9-7417-742ed8360f0f@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: u-boot@dh-electronics.com, Vikas Manocha <vikas.manocha@st.com>,
- Simon Glass <sjg@chromium.org>, Kamil Lulko <kamil.lulko@gmail.com>,
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
+In-Reply-To: <66f15744-0b0b-743f-8ad3-8448d78812f6@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Aug 2023 08:41:19 -0600
+Message-ID: <CAPnjgZ3MFkrR6qNTqgF1AMHun0DrMK2RfZ_6X824eczBXyEyNA@mail.gmail.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Nishanth Menon <nm@ti.com>,
+ Vikas Manocha <vikas.manocha@st.com>, Michael Walle <michael@walle.cc>,
+ Ivan Mikhaylov <fr0st61te@gmail.com>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 6/6] stm32mp15: Use u-boot-spl-stm32.bin
- instead of u-boot-spl.stm32
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com, Kamil Lulko <kamil.lulko@gmail.com>,
+ Dillon Min <dillon.minfei@gmail.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH 0/6] Attempt to enforce standard
+	extensions for build output
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,70 +76,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8229723444862077645=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Neha,
 
---===============8229723444862077645==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="l96QZSf5SqCc/NLj"
-Content-Disposition: inline
+On Thu, 24 Aug 2023 at 06:26, Neha Malcom Francis <n-francis@ti.com> wrote:
+>
+> Hi Simon
+>
+> + Vignesh, Nishanth to comment on this as well
+>
+> On 24/08/23 08:32, Simon Glass wrote:
+> > In this early stage of using binman to produce output files, we are mostly
+> > seeing people using common extensions such as '.bin' and '.rom'
+>
+> [...]
+>
+> > The fact that the .pem files are at the top level means that they are
+> > output images, which surely is not intended. They should be buried in the
+> > image description, at a lower level, as part of something else.
+> >
+> > So please take a loke at the above and see if the binman descriptions can
+> > be reworked slightly to follow these new rules.
+> >
+>
+> I think this can work... but few concerns.
+>
+> 1. Our output binaries also include <image>.bin_unsigned, would extensions that
+> aren't "standard" be added to the list if they are truly output binaries? If
+> not, changing names for them may be a long stretch (pinging Vignesh and Nishanth
+> to comment here).
 
+How about changing them to image-unsigned.bin ? That is a convention I
+am trying to follow...so we have the file type last.
 
---l96QZSf5SqCc/NLj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>
+> 2. Can it be an option to not enforce this, to support users that may make use
+> of the intermediate binaries?
 
-On Thu, Aug 24, 2023 at 05:12:45AM +0200, Marek Vasut wrote:
-> On 8/24/23 05:02, Simon Glass wrote:
-> > A '.stm32' extension is not allowed anymore, so change it.
->=20
-> Why?
->=20
-> This will likely break a huge amount of scripts, I'm tempted to NAK it
-> unless there is a very good reason.
+This does not apply to sections within an image, which can still
+produce files. But those files won't be preserved by buildman unless
+they have a supported extension.
 
-This is in the cover letter.  Today, buildman --keep-outputs doesn't
-actually keep the needed for booting outputs from a build for a number
-of platforms.  Simon's response is to stop having a free-form list of
-outputs. With I guess the caveat being ROM-defined names (for example,
-we still keep "MLO" because that is the literal filename TI ROM looks
-for on FAT partitions, on mos of their 32bit platforms).
+>
+> Also if we do move forward with this, we will need to sync to make sure that the
+> changes to the affected boards come through as well.
 
---=20
-Tom
+Yes.
 
---l96QZSf5SqCc/NLj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTnaEEACgkQFHw5/5Y0
-tyxrqQwAuIRlhEKZ+LZWqxqAgfuJ1DG05sf4crax7IdjGY12MHI5NYA9kRuRqiD/
-BrOVLPZ6cOxtNTszdOzldOwWYSwD0CEk2CdeARov5LrsBqBbts3W4kGneG4SekXA
-CzZgzRPz7IAvbA3o2nXIdvWLQxHPYo7zQuiF+PxZ0EllDBYt3ifuHLQn8O4pSiEb
-BRC0JSuCBT67W8AsiXW1fJJ0BhZ3hSuWBxnf/a8j+zMGdoOYyaX/eVf5D8CmX29e
-L1YGLmVLder6bH4FRnX7um2ciQmzvCSDCTXWCOCTlEEpbEPv9VhilTbgbSs0t8Zf
-vSyLjk8RIOdZ0UUoMXRhd8Bn5MUXcma8XLVoWXKVGJvLDI8xkdms61hqEaWugtsA
-sj9Ls+m5VZIFMZtyI169GaZIwHdCAUbif25XQNgKihm8FP9ADkbf/kFxyuzZVS75
-d8LU+gnK+aacXgrzAVhLvrsDAvTnKDcFfteHi4mU230Hwhhg7UtC8rYSd5iW3HQU
-uLgu3HnT
-=FGIO
------END PGP SIGNATURE-----
-
---l96QZSf5SqCc/NLj--
-
---===============8229723444862077645==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============8229723444862077645==--

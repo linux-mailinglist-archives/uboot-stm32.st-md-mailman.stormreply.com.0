@@ -2,62 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 785EA788D31
-	for <lists+uboot-stm32@lfdr.de>; Fri, 25 Aug 2023 18:24:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C17B178A122
+	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Aug 2023 21:17:48 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1FFB9C6B444;
-	Fri, 25 Aug 2023 16:24:52 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65327C6B44D;
+	Sun, 27 Aug 2023 19:17:48 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+ [209.85.221.53])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D4871C6B443
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 44414C6A613
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 25 Aug 2023 16:24:50 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37PENGCQ015519; Fri, 25 Aug 2023 18:24:49 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=cFs+FEU
- XwmjkxE5bYKQxojJPwpGwB/wErGO1qz30FUU=; b=0duGcCl00rqWW0W30taYbNK
- aDZZlJO+YzelbdiXp+joedQmPi2LMkLna8J1+/o3tLSGzs04J6de0UiqKMbk0W/z
- GHcUrPOTgRX2eubjrLKAOTlbCEbGoU2e87rJ/ZqjLyH3vMxwq+9TC2uHtwNCr6a6
- 1DvJNkhYwEb2ixyn4w8k4d1NFx+TgcKbVgbTDcIWLMsSQrt+VP5juSvDV4iGgzIX
- UPgbzbVmwTeg0sT6O+OkKs4cRJsWEzOoWmBKgsv3lkyVZ7ICE4gVcbH44+eJtKUn
- L4Cj8apW2KEL6znFYbLNZgz5jCMuOMldMwsVRyWETciKH12fbJwMH/mEGOUyjFg=
- =
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3spmmqtr7n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 25 Aug 2023 18:24:49 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8134B10004F;
- Fri, 25 Aug 2023 18:24:48 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6E74524B889;
- Fri, 25 Aug 2023 18:24:48 +0200 (CEST)
-Received: from localhost (10.201.20.38) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Fri, 25 Aug
- 2023 18:24:47 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 25 Aug 2023 18:24:39 +0200
-Message-ID: <20230825162439.776710-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Sun, 27 Aug 2023 19:17:47 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id
+ ffacd0b85a97d-31c8321c48fso1138714f8f.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 27 Aug 2023 12:17:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20221208; t=1693163866; x=1693768666;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
+ b=HYLdo78ge3awQTIyig0xztaP5yeDXRCf8CcPKI6yvXElSFSeX1dgJ61E2dZn8mNdLd
+ wvcPHLhR+RBWI1BPLnJpzle0ku02WBW5ldWPpLt/osEbB/eWuroQ0T01ufeXYBWjbyTV
+ OZO8kOf4Y+8IenEA3AsRH1IKDfXAorbPqyTbR1N96OSDNtwk8FiZae4yXPWFPlGDNyqf
+ 6tY0TdyY4mwuH9gYmZW0EOZgfoFJop37bM2JiH0iLYSrmRKd7wL7YqjS1irdB0+K2b8Y
+ GTRFJD7xQuO7kiGoJqe4frZIK6bXxpJeIgIlxeF/x0nJU1cIMAFbTESKYy2bC9m6kN6U
+ LgiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693163866; x=1693768666;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yKqOrErGq5Vduvi+6POZnt7MsebRO3ojKhurbDdcm/0=;
+ b=k0kIuVx4bRnf7Y65nyIFSWU/qz8Baqy61orS2YFm6WdVSwvtRZXx5dzLGO7dMDGq2F
+ j2Mrec3X3NXECsGOyuFkwSRbz7RhZXaNCZoowY02E8wE3VC2UwtiB3eg5PRd6gECJvLd
+ PII1EuiMCuHbWjZe9R2A5F4c2S7pNL/y8YzE/psGHgG5BFD9qWU6DggUSkwyzjRwcV6v
+ woWxyvupiMx5bEAJKQ8y6GAWsCidZu3DiZm2iW+bUPijT8yqt2x1rmfTF5Mm86ktVyDu
+ cwAu/Ycq5q1Hhnk27qwDhaeBClB8P+egbphS9XgImOUoVqJfZfVJmQ7KtjMMYezd/iQ/
+ iRkA==
+X-Gm-Message-State: AOJu0YzAekv8vPmTt35ePOtafRzgHjqn80MyPUnWNd2Uv18flnRA60Ps
+ UpZNflW+Ana2w/aonji1vNQ=
+X-Google-Smtp-Source: AGHT+IHrhehfPDhPcaSaZSk42BBjuHLj7Ceqgb74PIGCoU3COVJN9VszyfnmxODvboA3wQxK2wQieg==
+X-Received: by 2002:adf:e584:0:b0:319:7908:cf26 with SMTP id
+ l4-20020adfe584000000b003197908cf26mr21490274wrm.26.1693163866608; 
+ Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
+Received: from [192.168.0.84] ([178.233.24.1])
+ by smtp.gmail.com with ESMTPSA id
+ f17-20020adfdb51000000b0031912c0ffebsm8291758wrj.23.2023.08.27.12.17.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 27 Aug 2023 12:17:46 -0700 (PDT)
+Message-ID: <40d6d839-6eaf-4950-bf37-aaad0f2d5e03@gmail.com>
+Date: Sun, 27 Aug 2023 22:17:43 +0300
 MIME-Version: 1.0
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-08-25_14,2023-08-25_01,2023-05-22_02
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Vikas Manocha <vikas.manocha@st.com>
-Subject: [Uboot-stm32] [PATCH] configs: stm32f769-disco: Enable VIDEO_LOGO
-	flag
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US, tr, en-GB
+To: Simon Glass <sjg@chromium.org>
+References: <20230824030304.1555547-1-sjg@chromium.org>
+From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+In-Reply-To: <20230824030304.1555547-1-sjg@chromium.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Jonas Karlman <jonas@kwiboo.se>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Neha Malcom Francis <n-francis@ti.com>, Kamil Lulko <kamil.lulko@gmail.com>,
+ Vikas Manocha <vikas.manocha@st.com>, Michael Walle <michael@walle.cc>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com, Ivan Mikhaylov <fr0st61te@gmail.com>,
+ Dillon Min <dillon.minfei@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 0/6] Attempt to enforce standard
+ extensions for build output
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,60 +89,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The patch removes the legacy mode of displaying the ST logo and adopts
-the approach introduced by the commit 284b08fb51b6 ("board: stm32mp1: add
-splash screen with stmicroelectronics logo").
+On 2023-08-24 06:02 +03:00, Simon Glass wrote:
+> In this early stage of using binman to produce output files, we are mostly
+> seeing people using common extensions such as '.bin' and '.rom'
+> 
+> But unusual extensions appear in some places.
+> 
+> We would like 'buildman -k' to keep the build outputs, but this is hard if
+> there is no consistency as to the extension used.
+> 
+> This series adjusts binman to enforce just 4 extensions for output images:
+> 
+>    .bin
+>    .rom
+>    .itb
+>    .img
+> 
+> Other extensions will produce an error. With this rule observed, buildman
+> can keep the required files.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+I dislike this limitation. We know what files we will generate, they are
+listed in binman dtb, so we can add something like `binman build --ls`
+to print their names/paths for buildman to preserve them.
 
- configs/stm32f769-disco_defconfig     | 2 +-
- configs/stm32f769-disco_spl_defconfig | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
-index 72ef133fe4a..20dbb1af630 100644
---- a/configs/stm32f769-disco_defconfig
-+++ b/configs/stm32f769-disco_defconfig
-@@ -56,6 +56,7 @@ CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_STM32_QSPI=y
- CONFIG_VIDEO=y
-+CONFIG_VIDEO_LOGO=y
- CONFIG_BACKLIGHT_GPIO=y
- CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
- CONFIG_VIDEO_STM32=y
-@@ -64,7 +65,6 @@ CONFIG_VIDEO_STM32_MAX_XRES=480
- CONFIG_VIDEO_STM32_MAX_YRES=800
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
--CONFIG_VIDEO_BMP_RLE8=y
- CONFIG_BMP_16BPP=y
- CONFIG_BMP_24BPP=y
- CONFIG_BMP_32BPP=y
-diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
-index dd17cad7362..a5298e7cdc1 100644
---- a/configs/stm32f769-disco_spl_defconfig
-+++ b/configs/stm32f769-disco_spl_defconfig
-@@ -82,6 +82,7 @@ CONFIG_DM_SPI=y
- CONFIG_STM32_QSPI=y
- CONFIG_SPL_TIMER=y
- CONFIG_VIDEO=y
-+CONFIG_VIDEO_LOGO=y
- CONFIG_BACKLIGHT_GPIO=y
- CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
- CONFIG_VIDEO_STM32=y
-@@ -90,7 +91,6 @@ CONFIG_VIDEO_STM32_MAX_XRES=480
- CONFIG_VIDEO_STM32_MAX_YRES=800
- CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
--CONFIG_VIDEO_BMP_RLE8=y
- CONFIG_BMP_16BPP=y
- CONFIG_BMP_24BPP=y
- CONFIG_BMP_32BPP=y
--- 
-2.25.1
-
+Regarding the output directory suggestion, I think the binman outputs
+(not temporary/intermediate files) should be in the same directory as
+make outputs, and the Makefile should default to O=build to achieve the
+"output dir". I'm not sure if that's going to happen.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

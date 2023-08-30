@@ -2,47 +2,87 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A68278DEBC
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Aug 2023 21:57:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AADC78E185
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Aug 2023 23:37:41 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 059D0C6B442;
-	Wed, 30 Aug 2023 19:57:12 +0000 (UTC)
-Received: from zulu616.server4you.de (mail.csgraf.de [85.25.223.15])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A5DAAC6A61A
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E9F5DC6B442;
+	Wed, 30 Aug 2023 21:37:40 +0000 (UTC)
+Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com
+ [209.85.128.182])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2870CC6A61A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Aug 2023 19:57:11 +0000 (UTC)
-Received: from [0.0.0.0] (ec2-3-122-114-9.eu-central-1.compute.amazonaws.com
- [3.122.114.9]) by csgraf.de (Postfix) with ESMTPSA id 2CDFC6080255;
- Wed, 30 Aug 2023 21:57:09 +0200 (CEST)
-Message-ID: <17f7ca24-f961-41fd-a2e4-9f3dca7d75e4@csgraf.de>
-Date: Wed, 30 Aug 2023 21:57:08 +0200
+ Wed, 30 Aug 2023 21:37:40 +0000 (UTC)
+Received: by mail-yw1-f182.google.com with SMTP id
+ 00721157ae682-58ca499456dso3041137b3.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 30 Aug 2023 14:37:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1693431459; x=1694036259;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YVw0P8ZqrqnbI8f8qdkC7qnW0RChVOiS5Khb2nBhugg=;
+ b=aPt9kuIgdCkCu2oTHtmb8ygfBCV5GLlXeAcCvo0oF1BF2AXlKG/HhXeL6Fd2bK+YqX
+ 5mA5hlHIClCv4zHsMvUwXyVXojwJo/Meg6NeMJAJsrAbiJMJGAdS9rHVgvWRJ4oDQbyv
+ KTpMvotKCcNrbvn4lMG+b7VZCl5DvVpG57vtk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693431459; x=1694036259;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YVw0P8ZqrqnbI8f8qdkC7qnW0RChVOiS5Khb2nBhugg=;
+ b=UMCdbga8jyhA7gI3K0SmwjSzOzTa+71eHPOScRLKLbv8DpTOjRoA3rCkpcOQKlPA7S
+ AnfnEfSbU5dlmumKwblgLza9CbFWP/I9ZOWP+0O/XITkiIMCBnMunc3uL5hz2oOCvtqz
+ 2nHl3OUYSrkUn6yMFApnAXBDVwCBhbGoI/W+mMx8huD3HPpL6708DHArS2k/h5K5+GK2
+ 9yLjg6N+zjBeJvfCrfCzQOnFEViPxI/QKViutlS1lVNkEHGhCOYc1vaAHBVh8Zqa8kMF
+ blFS0obcsUWBelWmsPDKAayhKdVBwe7deWtmlNkH45fshCakAy+mIT0Nnl2yGH/73DyV
+ XZjw==
+X-Gm-Message-State: AOJu0Yy/IgwhYbYJ/Nu3DIiGBhk1kDgj5M5Ycp2D22IzN5LgJFJ/qbEI
+ rvqSx3u16k4GHReEnBWnQam8vQ==
+X-Google-Smtp-Source: AGHT+IGvs7TZ2tKoyoNPhNnoLqXTftv38R57kxOxhP9VilfjM0bGaql4bsewZQo7s5/kbLm0iJiRRg==
+X-Received: by 2002:a81:478b:0:b0:58c:d87b:b028 with SMTP id
+ u133-20020a81478b000000b0058cd87bb028mr3397138ywa.16.1693431458963; 
+ Wed, 30 Aug 2023 14:37:38 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-39b1-0d8a-4eb9-f110.res6.spectrum.com.
+ [2603:6081:7b00:6400:39b1:d8a:4eb9:f110])
+ by smtp.gmail.com with ESMTPSA id
+ m64-20020a0dca43000000b0057a57a9a932sm26474ywd.107.2023.08.30.14.37.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Aug 2023 14:37:38 -0700 (PDT)
+Date: Wed, 30 Aug 2023 17:37:35 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Message-ID: <20230830213735.GK3101304@bill-the-cat>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-4-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20230821135111.3558478-1-alpernebiyasak@gmail.com>
- <20230821135111.3558478-11-alpernebiyasak@gmail.com>
- <CAPnjgZ2_9s_n9RWO_t_UUJWK1uvjDQSHikpMg7VbpmCn9uuk5g@mail.gmail.com>
- <e24d94b4-d519-4491-a38b-488510059a2a@csgraf.de>
- <CAPnjgZ2HqmyOPixmec8v9g2V9mvCQ2mnG4+jUL4-4=qXPOvsOw@mail.gmail.com>
- <1b8f64c7-deab-ae3a-3d22-a69fd74bdae9@csgraf.de>
- <CAPnjgZ2wivMkM407VxYfgOsgrZnLY7UXVMgZt1OfzJzjiKgKjg@mail.gmail.com>
- <2f283c6b-bf2c-4893-b286-25a44ff37dd1@gmail.com>
-From: Alexander Graf <agraf@csgraf.de>
-In-Reply-To: <2f283c6b-bf2c-4893-b286-25a44ff37dd1@gmail.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- Matthias Brugger <mbrugger@suse.com>, Derald Woods <woods.technical@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Andrew Davis <afd@ti.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+In-Reply-To: <20230830180524.315916-4-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Mario Kicherer <dev@kicherer.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Eric =?iso-8859-1?Q?B=E9nard?= <eric@eukrea.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Marek Vasut <marex@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Lukasz Majewski <lukma@denx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Simone CIANNI <simone.cianni@bticino.it>,
+ Jagan Teki <jagan@amarulasolutions.com>, Thomas Weber <weber@corscience.de>,
+ Elena Popa <elena.popa@nxp.com>, Enric Balletbo i Serra <eballetbo@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, Da Xue <da@libre.computer>
-Subject: Re: [Uboot-stm32] [PATCH v5 10/13] video: Only dcache flush damaged
-	lines
+ Vikas Manocha <vikas.manocha@st.com>, Adam Ford <aford173@gmail.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Tom McLeod <tom.mcleod@opalkelly.com>
+Subject: Re: [Uboot-stm32] [PATCH 03/32] spl: Rename SYS_SPL_ARGS_ADDR to
+	SPL_SYS_ARGS_ADDR
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -54,134 +94,78 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============3543090453867807002=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
-On 30.08.23 21:12, Alper Nebi Yasak wrote:
-> On 2023-08-22 02:03 +03:00, Simon Glass wrote:
->> Hi Alex,
->>
->> On Mon, 21 Aug 2023 at 16:44, Alexander Graf <agraf@csgraf.de> wrote:
->>>
->>> On 22.08.23 00:10, Simon Glass wrote:
->>>> Hi Alex,
->>>>
->>>> On Mon, 21 Aug 2023 at 13:59, Alexander Graf <agraf@csgraf.de> wrote:
->>>>> On 21.08.23 21:11, Simon Glass wrote:
->>>>>> Hi Alper,
->>>>>>
->>>>>> On Mon, 21 Aug 2023 at 07:51, Alper Nebi Yasak <alpernebiyasak@gmail.com> wrote:
->>>>>>> From: Alexander Graf <agraf@csgraf.de>
->>>>>>>
->>>>>>> Now that we have a damage area tells us which parts of the frame buffer
->>>>>>> actually need updating, let's only dcache flush those on video_sync()
->>>>>>> calls. With this optimization in place, frame buffer updates - especially
->>>>>>> on large screen such as 4k displays - speed up significantly.
->>>>>>>
->>>>>>> Signed-off-by: Alexander Graf <agraf@csgraf.de>
->>>>>>> Reported-by: Da Xue <da@libre.computer>
->>>>>>> [Alper: Use damage.xstart/yend, IS_ENABLED()]
->>>>>>> Co-developed-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>>>>> Signed-off-by: Alper Nebi Yasak <alpernebiyasak@gmail.com>
->>>>>>> ---
->>>>>>>
->>>>>>> Changes in v5:
->>>>>>> - Use xstart, ystart, xend, yend as names for damage region
->>>>>>> - Use IS_ENABLED() instead of CONFIG_IS_ENABLED()
->>>>>>>
->>>>>>> Changes in v2:
->>>>>>> - Fix dcache range; we were flushing too much before
->>>>>>> - Remove ifdefs
->>>>>>>
->>>>>>>     drivers/video/video-uclass.c | 41 +++++++++++++++++++++++++++++++-----
->>>>>>>     1 file changed, 36 insertions(+), 5 deletions(-)
->>>>>> This is a little strange, since flushing the whole cache will only
->>>>>> actually write out data that was actually written (to the display). Is
->>>>>> there a benefit to this patch, in terms of performance?
->>>>> I'm happy to see you go through the same thought process I went through
->>>>> when writing these: "This surely can't be the problem, can it?". The
->>>>> answer is "simple" in hindsight:
->>>>>
->>>>> Have a look at the ARMv8 cache flush function. It does the only "safe"
->>>>> thing you can expect it to do: Clean+Invalidate to POC because we use it
->>>>> for multiple things, clearing modified code among others:
->>>>>
->>>>> ENTRY(__asm_flush_dcache_range)
->>>>>            mrs     x3, ctr_el0
->>>>>            ubfx    x3, x3, #16, #4
->>>>>            mov     x2, #4
->>>>>            lsl     x2, x2, x3              /* cache line size */
->>>>>
->>>>>            /* x2 <- minimal cache line size in cache system */
->>>>>            sub     x3, x2, #1
->>>>>            bic     x0, x0, x3
->>>>> 1:      dc      civac, x0       /* clean & invalidate data or unified
->>>>> cache */
->>>>>            add     x0, x0, x2
->>>>>            cmp     x0, x1
->>>>>            b.lo    1b
->>>>>            dsb     sy
->>>>>            ret
->>>>> ENDPROC(__asm_flush_dcache_range)
->>>>>
->>>>>
->>>>> Looking at the "dc civac" call, we find this documentation page from
->>>>> ARM:
->>>>> https://developer.arm.com/documentation/ddi0601/2022-03/AArch64-Instructions/DC-CIVAC--Data-or-unified-Cache-line-Clean-and-Invalidate-by-VA-to-PoC
->>>>>
->>>>> This says we're writing any dirtyness of this cache line up to the POC
->>>>> and then invalidate (remove the cache line) also up to POC. That means
->>>>> when you look at a typical SBC, this will either be L2 or system level
->>>>> cache. Every read afterwards needs to go and pull it all the way back to
->>>>> L1 to modify it (or not) on the next character write and then flush it
->>>>> again.
->>>>>
->>>>> Even worse: Because of the invalidate, we may even evict it from caches
->>>>> that the display controller uses to read the frame buffer. So depending
->>>>> on the SoC's cache topology and implementation, we may force the display
->>>>> controller to refetch the full FB content on its next screen refresh cycle.
->>>>>
->>>>> I faintly remember that I tried to experiment with CVAC instead to only
->>>>> flush without invalidating. I don't fully remember the results anymore
->>>>> though. I believe CVAC just behaved identical to CIVAC on the A53
->>>>> platform I was working on. And then I looked at Cortex-A53 errata like
->>>>> [1] and just accepted that doing anything but restricting the flushing
->>>>> range is a waste of time :)
->>>> Yuck I didn't know it was invalidating too. That is horrible. Is there
->>>> no way to fix it?
->>>
->>> Before building all of this damage logic, I tried, but failed. I'd
->>> welcome anyone else to try again :). I'm not even convinced yet that it
->>> is actually fixable: Depending on the SoC's internal cache logic, it may
->>> opt to always invalidate I think.
->> Wow, that is crazy! How is anyone supposed to make the system run well
->> with logic like that??!
->>
->>> That said, this patch set really also makes sense outside of the
->>> particular invalidate problem. It creates a generic abstraction between
->>> the copy and non-copy code path and allows us to reduce the amount of
->>> work spent for both, generically for any video sync operation.
->> Sure...my question was really why it helps so much, given what I
->> understood the caches to be doing. If they are invalidating, then it
->> is amazing anything gets done...
-> I don't really know cache mechanisms and terminology, but AFAIU there's
-> nothing actionable for this patch regarding this discussion, right?
->
-> Meanwhile I noticed this patch only flushes priv->fb, and think it also
-> needs to flush priv->copy_fb if VIDEO_COPY.
+--===============3543090453867807002==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="Xj3qLXjgI81c/IIY"
+Content-Disposition: inline
 
 
-The reason was mostly that copy_fb is really only used on x86 where we 
-don't have the cache flush problem/code :). So nobody bothered to add 
-flushing to that code path.
+--Xj3qLXjgI81c/IIY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Aug 30, 2023 at 12:04:34PM -0600, Simon Glass wrote:
 
-Alex
+> Rename this so that SPL is first, as per U-Boot convention.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+> index a569d1a2951..fbf8c10e47e 100644
+> --- a/doc/develop/falcon.rst
+> +++ b/doc/develop/falcon.rst
+> @@ -63,7 +63,7 @@ CONFIG_CMD_SPL
+>      Enable the "spl export" command.
+>      The command "spl export" is then available in U-Boot mode.
+> =20
+> -CONFIG_SYS_SPL_ARGS_ADDR
+> +CONFIG_SPL_SYS_ARGS_ADDR
+>      Address in RAM where the parameters must be copied by SPL.
+>      In most cases, it is <start_of_ram> + 0x100.
+
+This was intentionally "CONFIG_SYS_SPL_ARGS_ADDR" and not the other way
+around, for semi-dubious reasons.  We should instead try and give this
+perhaps a better name to describe that it is where in memory the
+parameters for our payload have been stored.
+
+--=20
+Tom
+
+--Xj3qLXjgI81c/IIY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmTvtp8ACgkQFHw5/5Y0
+tyymRQv8Ct72SE2Em8ev+YoC8icLcOKe4CJS7oYE7pW3LEoinBAY1W0YuzvcjgI6
+obwghSA2vZJJgX+8Af9NXecoq4Wn1g/yUfQKurtZCYWGKtktrwFYFKqabBgZ9Wsx
+hXnjfHtSYD4ycJ2Bj9zTLhaz5aopaHQpK12O4VRXhKsyMJS0H2aika1KXV84XWmd
+P4pUCf625kzVOlMV7fJc0ND5Hrnbk5nDc56/ufmSQMZxwLC3oSp+UsRN+FUslxmD
+GZIX3XaeQuYmmM2refaG6hAV7ZEqTMk2PNN7p+ASeNXWl66NEAo0bV7QPXoIo8QC
+hUmiD+N5ByOY3+icXSsDjZUO3Cl953s8Fs1doN9y9mx3iGFx2n7klyeX4Y7LEH6x
+OYgeX4VaQ1LBRdy7ZuWF2sK/l2VS2QarCPp/yW+4lEZ0vvoVFbjkKBByZ5lvdsIs
+cIqcnPwyx9KcybDOBBqtPklcF5h2zkWS4QLyxrspa449qzQZ0ZIpJioxQRFFrEMq
+eUMwcic8
+=oZKB
+-----END PGP SIGNATURE-----
+
+--Xj3qLXjgI81c/IIY--
+
+--===============3543090453867807002==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3543090453867807002==--

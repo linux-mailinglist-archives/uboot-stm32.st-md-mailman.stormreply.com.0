@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E2BE78D3CB
-	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Aug 2023 10:00:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A308578D3CC
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Aug 2023 10:02:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3EA69C6A613;
-	Wed, 30 Aug 2023 08:00:59 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 63AC5C6A613;
+	Wed, 30 Aug 2023 08:02:10 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 87E1EC65E58
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1384EC65E58
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 30 Aug 2023 08:00:58 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37U5udwi011513; Wed, 30 Aug 2023 10:00:57 +0200
+ Wed, 30 Aug 2023 08:02:09 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 37U5uWSK027463; Wed, 30 Aug 2023 10:02:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=nNJIeiM
- lAJhf8DrBAZQsl9HuEiC4z+Qi9B/wh5HdCg8=; b=qLEfnqHrbdRpg3JMFIboIyy
- BSRk73zrRNHbtr8ws4AOtgfWwy4A/eNCGkYBJ/12o6RKltXjgM3xuFVXnkms2uUC
- XveloKTHlaH+L4rwzMJJEFxSqPBr1ZsserrkBHRdeQtyQCmhK2OV0fQ5XGjonZBO
- p9XcxPVP9Ttyfxk+mZbTZBY8hsK/1QG4OOAQ9KmO22qAsAi3z2ot6PqEXef8D1GJ
- 61Z/uA+NTUXVI7EiTqTzyBx9kcpgeXaiBLT0v0o+FApBSVMorzmWsSBFiViYNCx4
- FMNYiWIkf9/YMbs52Ma3eIchw1TPzKbE5TNQqnMrRvfnxT3yFJxwLKwotXsoLBA=
+ :content-transfer-encoding:content-type; s=selector1; bh=xAm/CRg
+ TfS8CCHtY4NQK0B3Hgjx4h6Ea25ji4ZSkAHo=; b=d92s7/O48aP6OD+atgy7ABB
+ GQYj79JONHCIk3T5/yZOeIwnuPZOc0xAZGEsOfKZmoV0szUwzv9GFWQ8yzn6v5Lf
+ lGbL5fncHLPHGw6yxoTI9NNHxSKiCybriJ5YlyW77awOmFMlaZMDVjt2YMeEEnmZ
+ A/uWc769oULQk58O0fJ4lP1gwG3qVn1BTmDWxTjVzuYOQSs0dNBhIml0OW6xzM0F
+ eu1Dc1wOHkLLpPk3wQgDSJWZQBFdqhEVhcT5UBLuZuGJPwPduznr2JrUgPz1xMR8
+ +Gxwj3g85ptVxNZQC3cRnKL40CcXyzwW7AFqrHiiEVwnRyjQkhaF/Ec/qBicejQ=
  =
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq6h47w9r-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sq89bypdr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 30 Aug 2023 10:00:56 +0200 (MEST)
+ Wed, 30 Aug 2023 10:02:09 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 48C4910005D;
- Wed, 30 Aug 2023 10:00:56 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D63C9100057;
+ Wed, 30 Aug 2023 10:02:07 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 38A5F21BF4F;
- Wed, 30 Aug 2023 10:00:56 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CC0BF21BF50;
+ Wed, 30 Aug 2023 10:02:07 +0200 (CEST)
 Received: from localhost (10.201.22.39) by SHFDAG1NODE2.st.com (10.75.129.70)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Wed, 30 Aug
- 2023 10:00:55 +0200
+ 2023 10:02:05 +0200
 From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Wed, 30 Aug 2023 10:00:08 +0200
-Message-ID: <20230830080008.455157-1-fabrice.gasnier@foss.st.com>
+Date: Wed, 30 Aug 2023 10:01:49 +0200
+Message-ID: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Originating-IP: [10.201.22.39]
@@ -56,8 +56,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, Marek Vasut <marex@denx.de>,
  Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Subject: [Uboot-stm32] [PATCH] usb: host: ehci-generic: check for companion
-	controller
+Subject: [Uboot-stm32] [PATCH] usb: host: ohci-generic: Make usage of
+	clock/reset bulk() API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,114 +74,149 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-EHCI is usually used with companion controller (like OHCI) as companion
-controller. This information on the companion is missing currently in
-companion drivers.
-So, if the usb-uclass isn't aware, it may scan busses in any order: OHCI
-first, then EHCI.
-This is seen on STM32MP1 where DT probing makes the probe order to occur
-by increasing address (OHCI address < EHCI address).
-
-When a low speed or full-speed device is plugged in, it's not detected as
-EHCI should first detect it, and give ownership (handover) to OHCI.
-
-Current situation on STM32MP1 (with a low speed device plugged-in)
-STM32MP> usb start
-starting USB...
-Bus usb@5800c000: USB OHCI 1.0
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800c000 for devices... 1 USB Device(s) found
-scanning bus usb@5800d000 for devices... 1 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
-
-The "companion" property in the device tree allow to retrieve companion
-controller information, from the EHCI node. This allow marking the
-companion driver as such.
-
-With this patch (same low speed device plugged in):
-STM32MP> usb start
-starting USB...
-Bus usb@5800c000: USB OHCI 1.0
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800d000 for devices... 1 USB Device(s) found
-scanning bus usb@5800c000 for devices... 2 USB Device(s) found
-       scanning usb for storage devices... 0 Storage Device(s) found
-STM32MP> usb tree
-USB device tree:
-  1  Hub (12 Mb/s, 0mA)
-  |   U-Boot Root Hub
-  |
-  +-2  Human Interface (1.5 Mb/s, 100mA)
-       HP HP USB 1000dpi Laser Mouse
-
-  1  Hub (480 Mb/s, 0mA)
-     u-boot EHCI Host Controller
-
-This also optimize bus scan when a High speed device is plugged in, as
-the usb-uclass skips OHCI in this case:
-
-STM32MP> usb reset
-resetting USB...
-Bus usb@5800c000: USB OHCI 1.0
-Bus usb@5800d000: USB EHCI 1.00
-scanning bus usb@5800d000 for devices... 2 USB Device(s) found
-       scanning usb for storage devices... 1 Storage Device(s) found
-STM32MP> usb tree
-USB device tree:
-  1  Hub (480 Mb/s, 0mA)
-  |  u-boot EHCI Host Controller
-  |
-  +-2  Mass Storage (480 Mb/s, 200mA)
-       SanDisk Cruzer Blade 03003432021922011407
+Make usage of clock and reset bulk API in order to simplify the code
 
 Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
 ---
 
- drivers/usb/host/ehci-generic.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
+ 1 file changed, 29 insertions(+), 63 deletions(-)
 
-diff --git a/drivers/usb/host/ehci-generic.c b/drivers/usb/host/ehci-generic.c
-index a765a307a323..539c0d0e61bc 100644
---- a/drivers/usb/host/ehci-generic.c
-+++ b/drivers/usb/host/ehci-generic.c
-@@ -66,6 +66,7 @@ static int ehci_usb_probe(struct udevice *dev)
- 	struct ehci_hccr *hccr;
- 	struct ehci_hcor *hcor;
- 	int err, ret;
-+	struct udevice *companion_dev;
+diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+index 2d8d38ce9a40..95aa608d8c19 100644
+--- a/drivers/usb/host/ohci-generic.c
++++ b/drivers/usb/host/ohci-generic.c
+@@ -16,75 +16,41 @@
  
- 	err = 0;
- 	ret = clk_get_bulk(dev, &priv->clocks);
-@@ -104,6 +105,29 @@ static int ehci_usb_probe(struct udevice *dev)
- 	hcor = (struct ehci_hcor *)((uintptr_t)hccr +
- 				    HC_LENGTH(ehci_readl(&hccr->cr_capbase)));
+ struct generic_ohci {
+ 	ohci_t ohci;
+-	struct clk *clocks;	/* clock list */
+-	struct reset_ctl *resets; /* reset list */
++	struct clk_bulk clocks;	/* clock list */
++	struct reset_ctl_bulk resets; /* reset list */
+ 	struct phy phy;
+-	int clock_count;	/* number of clock in clock list */
+-	int reset_count;	/* number of reset in reset list */
+ };
  
-+	/*
-+	 * Enforce optional companion controller is marked as such. This allows
-+	 * the bus scan in usb-uclass to 1st scan the primary controller,
-+	 * before the companion controller (ownership is given to companion
-+	 * when low or full speed devices have been detected).
-+	 */
-+	err = uclass_get_device_by_phandle(UCLASS_USB, dev, "companion", &companion_dev);
-+	if (!err) {
-+		struct usb_bus_priv *companion_bus_priv;
+ static int ohci_usb_probe(struct udevice *dev)
+ {
+ 	struct ohci_regs *regs = dev_read_addr_ptr(dev);
+ 	struct generic_ohci *priv = dev_get_priv(dev);
+-	int i, err, ret, clock_nb, reset_nb;
+-
+-	err = 0;
+-	priv->clock_count = 0;
+-	clock_nb = dev_count_phandle_with_args(dev, "clocks", "#clock-cells",
+-					       0);
+-	if (clock_nb > 0) {
+-		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
+-					    GFP_KERNEL);
+-		if (!priv->clocks)
+-			return -ENOMEM;
+-
+-		for (i = 0; i < clock_nb; i++) {
+-			err = clk_get_by_index(dev, i, &priv->clocks[i]);
+-			if (err < 0)
+-				break;
+-
+-			err = clk_enable(&priv->clocks[i]);
+-			if (err && err != -ENOSYS) {
+-				dev_err(dev, "failed to enable clock %d\n", i);
+-				clk_free(&priv->clocks[i]);
+-				goto clk_err;
+-			}
+-			priv->clock_count++;
+-		}
+-	} else if (clock_nb != -ENOENT) {
+-		dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
+-		return clock_nb;
++	int err, ret;
 +
-+		dev_dbg(companion_dev, "companion of %s\n", dev->name);
-+		companion_bus_priv = dev_get_uclass_priv(companion_dev);
-+		companion_bus_priv->companion = true;
-+	} else if (err && err != -ENOENT && err != -ENODEV) {
-+		/*
-+		 * Treat everything else than no companion or disabled
-+		 * companion as an error. (It may not be enabled on boards
-+		 * that have a High-Speed HUB to handle FS and LS traffic).
-+		 */
-+		dev_err(dev, "Failed to get companion (err=%d)\n", err);
-+		goto phy_err;
++	ret = clk_get_bulk(dev, &priv->clocks);
++	if (ret && ret != -ENOENT) {
++		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
++		return ret;
 +	}
 +
- 	err = ehci_register(dev, hccr, hcor, NULL, 0, USB_INIT_HOST);
++	err = clk_enable_bulk(&priv->clocks);
++	if (err) {
++		dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
++		goto clk_err;
+ 	}
+ 
+-	priv->reset_count = 0;
+-	reset_nb = dev_count_phandle_with_args(dev, "resets", "#reset-cells",
+-					       0);
+-	if (reset_nb > 0) {
+-		priv->resets = devm_kcalloc(dev, reset_nb,
+-					    sizeof(struct reset_ctl),
+-					    GFP_KERNEL);
+-		if (!priv->resets)
+-			return -ENOMEM;
+-
+-		for (i = 0; i < reset_nb; i++) {
+-			err = reset_get_by_index(dev, i, &priv->resets[i]);
+-			if (err < 0)
+-				break;
+-
+-			err = reset_deassert(&priv->resets[i]);
+-			if (err) {
+-				dev_err(dev, "failed to deassert reset %d\n", i);
+-				reset_free(&priv->resets[i]);
+-				goto reset_err;
+-			}
+-			priv->reset_count++;
+-		}
+-	} else if (reset_nb != -ENOENT) {
+-		dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
++	err = reset_get_bulk(dev, &priv->resets);
++	if (err && err != -ENOENT) {
++		dev_err(dev, "failed to get resets (err=%d)\n", err);
+ 		goto clk_err;
+ 	}
+ 
++	err = reset_deassert_bulk(&priv->resets);
++	if (err) {
++		dev_err(dev, "failed to get deassert resets (err=%d)\n", err);
++		goto reset_err;
++	}
++
+ 	err = generic_setup_phy(dev, &priv->phy, 0);
  	if (err)
- 		goto phy_err;
+ 		goto reset_err;
+@@ -101,13 +67,13 @@ phy_err:
+ 		dev_err(dev, "failed to shutdown usb phy\n");
+ 
+ reset_err:
+-	ret = reset_release_all(priv->resets, priv->reset_count);
++	ret = reset_release_bulk(&priv->resets);
+ 	if (ret)
+-		dev_err(dev, "failed to assert all resets\n");
++		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
+ clk_err:
+-	ret = clk_release_all(priv->clocks, priv->clock_count);
++	ret = clk_release_bulk(&priv->clocks);
+ 	if (ret)
+-		dev_err(dev, "failed to disable all clocks\n");
++		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
+ 
+ 	return err;
+ }
+@@ -125,11 +91,11 @@ static int ohci_usb_remove(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = reset_release_all(priv->resets, priv->reset_count);
++	ret = reset_release_bulk(&priv->resets);
+ 	if (ret)
+ 		return ret;
+ 
+-	return clk_release_all(priv->clocks, priv->clock_count);
++	return clk_release_bulk(&priv->clocks);
+ }
+ 
+ static const struct udevice_id ohci_usb_ids[] = {
 -- 
 2.25.1
 

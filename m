@@ -2,52 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E208790055
-	for <lists+uboot-stm32@lfdr.de>; Fri,  1 Sep 2023 18:00:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B3F88790468
+	for <lists+uboot-stm32@lfdr.de>; Sat,  2 Sep 2023 02:09:36 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C3503C6A61D;
-	Fri,  1 Sep 2023 16:00:41 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 62DDBC6A61D;
+	Sat,  2 Sep 2023 00:09:36 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
+ [209.85.167.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B711FC6A615
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B67EBC6A615
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  1 Sep 2023 16:00:40 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 106AD8556F;
- Fri,  1 Sep 2023 18:00:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693584040;
- bh=C7TjGwUSc9AEh+0Q19Uuh4IrnFXSkpD28S2stKu3BeA=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ajh7GxRrozj2D8vYxRXfp2Ruhy/TLxPRcpE2Rlk66PvhiKaRYuYdcFA0eAl82wF7e
- ht4XwAUMUFcf++ltYnueAiZciy3jIfrr8PBxJ+2Zs2nYQVC13sr6YTZjstCeUXBWzB
- ltyORMGlcoHaYdGq+snfgCy7zHziqgjTchjduP6SDZqOkM5u2GTcEWNzb2hSKPWUHJ
- J1ZasB+msUnuX4g3d4gJyhEwUvE36P9ols31AGQfFSKUrEp0A3Olh6tkHaIKjCAYDz
- sCxICkzKx1yHug3jCzBi2rAo9V6r8SAAMYUnKxZKgdub1DfwFMtrCdh4r79mUy+Zo6
- 9Lo4Wx4gjVrXQ==
-Message-ID: <fef0778b-4850-fb73-9d8f-da48a6138e13@denx.de>
-Date: Fri, 1 Sep 2023 18:00:39 +0200
+ Sat,  2 Sep 2023 00:09:35 +0000 (UTC)
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-5008d16cc36so4455422e87.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 01 Sep 2023 17:09:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1693613375; x=1694218175;
+ darn=st-md-mailman.stormreply.com; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8W7gJ9i2zqTg0vCmIIcYq8wluPRSShl6DlKnvve2fT0=;
+ b=RE1eHnTVSqYXYZvulrqY0/jjtDApWiaEAdut9KGA0mhVPbzJTxBhEdCMK9HUrt9t8N
+ GUtnR467KBOpT9vNV/A+DOSUkF7lhcUJ/123K/z2JaxRSdtFlRdaUhXN94TriRjPiNje
+ fs5GY1dfXxFDR9FuLfblwR2ORfCXrXmv5SaIk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1693613375; x=1694218175;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8W7gJ9i2zqTg0vCmIIcYq8wluPRSShl6DlKnvve2fT0=;
+ b=QjNBNqZhzP9rh0Y55noJJieJaF5shQjyYCq0UR0J5wCy9K8RvjGEPbT+0gHse7NoZN
+ EnQh/9s+eGpMSol3y5nIO7TMqHFdA19CUT0vDSA3BKpwnMyCMjnYrXj1CZunwar6M9Z3
+ PlpDSpCh0MpMy12Qaa0UptBm9tyZ2C8+keyVRprhWzIo+dkLywIT/aRmbxB78NKqGYmO
+ XZVgQoxGXPr2mP818dCUnJKpycGw6jLzBcr3Exan919o8z/utqmHbHVsYzuQp1qB4d68
+ N3Y1WJMRK0Baxy18KS4u0ci0wqmdo29ScW5IOSA0Hgag8tPRkf1qtD3goFr4tx1l22yN
+ inWw==
+X-Gm-Message-State: AOJu0YxFF4HjkvpMjeCwU2974xNEMqFktJxaZBo0XIkqivCz/C/6ri1U
+ IfzCUVHNMbPqtaHfwqnJSF9QgzqAtpjSV4ChEza+mQ==
+X-Google-Smtp-Source: AGHT+IGZslH6xfZ1dELuWc5JyB0qXhfX3kepwSnPvHj9+3LOUyB0X/vYNER1pTBNK/1ZbiCDnOQnHgg2Icsk+BOPfeM=
+X-Received: by 2002:a05:6512:3a86:b0:4fe:2c6:1d76 with SMTP id
+ q6-20020a0565123a8600b004fe02c61d76mr3146575lfu.21.1693613374543; Fri, 01 Sep
+ 2023 17:09:34 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Content-Language: en-US
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
-References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
- <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
- <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2] usb: check for companion controller in
-	uclass
+References: <20230824030304.1555547-1-sjg@chromium.org>
+ <20230824030304.1555547-7-sjg@chromium.org>
+ <3ab486b0-be22-48b9-7417-742ed8360f0f@denx.de>
+ <20230824142505.GM3953269@bill-the-cat>
+ <4cbffed6-6a07-1a56-bf10-7303e2aff78b@denx.de>
+ <20230824151419.GU3953269@bill-the-cat>
+ <8091c4f9-a0ce-aa69-098f-2effdb68ffdb@foss.st.com>
+In-Reply-To: <8091c4f9-a0ce-aa69-098f-2effdb68ffdb@foss.st.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 1 Sep 2023 18:09:22 -0600
+Message-ID: <CAPnjgZ14AcYs4-kSRTBGfV=68SNHd3t6mN3qt79cteRyPoskMQ@mail.gmail.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, Vikas Manocha <vikas.manocha@st.com>,
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ uboot-stm32@st-md-mailman.stormreply.com, Dillon Min <dillon.minfei@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 6/6] stm32mp15: Use u-boot-spl-stm32.bin
+	instead of u-boot-spl.stm32
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -59,110 +76,95 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gOS8xLzIzIDE0OjEyLCBGYWJyaWNlIEdhc25pZXIgd3JvdGU6Cj4gT24gOS8xLzIzIDEyOjQ4
-LCBNYXJlayBWYXN1dCB3cm90ZToKPj4gT24gOS8xLzIzIDExOjUyLCBGYWJyaWNlIEdhc25pZXIg
-d3JvdGU6Cj4+PiBFSENJIGlzIHVzdWFsbHkgdXNlZCB3aXRoIGNvbXBhbmlvbiBjb250cm9sbGVy
-IChsaWtlIE9IQ0kpIGFzIGNvbXBhbmlvbgo+Pj4gY29udHJvbGxlci4gVGhpcyBpbmZvcm1hdGlv
-biBvbiB0aGUgY29tcGFuaW9uIGlzIG1pc3NpbmcgY3VycmVudGx5IGluCj4+PiBjb21wYW5pb24g
-ZHJpdmVycy4KPj4+IFNvLCBpZiB0aGUgdXNiLXVjbGFzcyBpc24ndCBhd2FyZSwgaXQgbWF5IHNj
-YW4gYnVzc2VzIGluIGFueSBvcmRlcjogT0hDSQo+Pj4gZmlyc3QsIHRoZW4gRUhDSS4KPj4+IFRo
-aXMgaXMgc2VlbiBvbiBTVE0zMk1QMSB3aGVyZSBEVCBwcm9iaW5nIG1ha2VzIHRoZSBwcm9iZSBv
-cmRlciB0byBvY2N1cgo+Pj4gYnkgaW5jcmVhc2luZyBhZGRyZXNzIChPSENJIGFkZHJlc3MgPCBF
-SENJIGFkZHJlc3MpLgo+Pj4KPj4+IFdoZW4gYSBsb3cgc3BlZWQgb3IgZnVsbC1zcGVlZCBkZXZp
-Y2UgaXMgcGx1Z2dlZCBpbiwgaXQncyBub3QgZGV0ZWN0ZWQgYXMKPj4+IEVIQ0kgc2hvdWxkIGZp
-cnN0IGRldGVjdCBpdCwgYW5kIGdpdmUgb3duZXJzaGlwIChoYW5kb3ZlcikgdG8gT0hDSS4KPj4+
-Cj4+PiBDdXJyZW50IHNpdHVhdGlvbiBvbiBTVE0zMk1QMSAod2l0aCBhIGxvdyBzcGVlZCBkZXZp
-Y2UgcGx1Z2dlZC1pbikKPj4+IFNUTTMyTVA+IHVzYiBzdGFydAo+Pj4gc3RhcnRpbmcgVVNCLi4u
-Cj4+PiBCdXMgdXNiQDU4MDBjMDAwOiBVU0IgT0hDSSAxLjAKPj4+IEJ1cyB1c2JANTgwMGQwMDA6
-IFVTQiBFSENJIDEuMDAKPj4+IHNjYW5uaW5nIGJ1cyB1c2JANTgwMGMwMDAgZm9yIGRldmljZXMu
-Li4gMSBVU0IgRGV2aWNlKHMpIGZvdW5kCj4+PiBzY2FubmluZyBidXMgdXNiQDU4MDBkMDAwIGZv
-ciBkZXZpY2VzLi4uIDEgVVNCIERldmljZShzKSBmb3VuZAo+Pj4gIMKgwqDCoCBzY2FubmluZyB1
-c2IgZm9yIHN0b3JhZ2UgZGV2aWNlcy4uLiAwIFN0b3JhZ2UgRGV2aWNlKHMpIGZvdW5kCj4+Pgo+
-Pj4gVGhlICJjb21wYW5pb24iIHByb3BlcnR5IGluIHRoZSBkZXZpY2UgdHJlZSBhbGxvdyB0byBy
-ZXRyaWV2ZSBjb21wYW5pb24KPj4+IGNvbnRyb2xsZXIgaW5mb3JtYXRpb24sIGZyb20gdGhlIEVI
-Q0kgbm9kZS4gVGhpcyBhbGxvdyBtYXJraW5nIHRoZQo+Pj4gY29tcGFuaW9uIGRyaXZlciBhcyBz
-dWNoLgo+Pj4KPj4+IFdpdGggdGhpcyBwYXRjaCAoc2FtZSBsb3cgc3BlZWQgZGV2aWNlIHBsdWdn
-ZWQgaW4pOgo+Pj4gU1RNMzJNUD4gdXNiIHN0YXJ0Cj4+PiBzdGFydGluZyBVU0IuLi4KPj4+IEJ1
-cyB1c2JANTgwMGMwMDA6IFVTQiBPSENJIDEuMAo+Pj4gQnVzIHVzYkA1ODAwZDAwMDogVVNCIEVI
-Q0kgMS4wMAo+Pj4gc2Nhbm5pbmcgYnVzIHVzYkA1ODAwZDAwMCBmb3IgZGV2aWNlcy4uLiAxIFVT
-QiBEZXZpY2UocykgZm91bmQKPj4+IHNjYW5uaW5nIGJ1cyB1c2JANTgwMGMwMDAgZm9yIGRldmlj
-ZXMuLi4gMiBVU0IgRGV2aWNlKHMpIGZvdW5kCj4+PiAgwqDCoMKgIHNjYW5uaW5nIHVzYiBmb3Ig
-c3RvcmFnZSBkZXZpY2VzLi4uIDAgU3RvcmFnZSBEZXZpY2UocykgZm91bmQKPj4+IFNUTTMyTVA+
-IHVzYiB0cmVlCj4+PiBVU0IgZGV2aWNlIHRyZWU6Cj4+PiAxwqAgSHViICgxMiBNYi9zLCAwbUEp
-Cj4+PiB8wqDCoCBVLUJvb3QgUm9vdCBIdWIKPj4+IHwKPj4+ICstMsKgIEh1bWFuIEludGVyZmFj
-ZSAoMS41IE1iL3MsIDEwMG1BKQo+Pj4gIMKgwqDCoCBIUCBIUCBVU0IgMTAwMGRwaSBMYXNlciBN
-b3VzZQo+Pj4KPj4+IDHCoCBIdWIgKDQ4MCBNYi9zLCAwbUEpCj4+PiAgwqAgdS1ib290IEVIQ0kg
-SG9zdCBDb250cm9sbGVyCj4+Pgo+Pj4gVGhpcyBhbHNvIG9wdGltaXplIGJ1cyBzY2FuIHdoZW4g
-YSBIaWdoIHNwZWVkIGRldmljZSBpcyBwbHVnZ2VkIGluLCBhcwo+Pj4gdGhlIHVzYi11Y2xhc3Mg
-c2tpcHMgT0hDSSBpbiB0aGlzIGNhc2U6Cj4+Pgo+Pj4gU1RNMzJNUD4gdXNiIHJlc2V0Cj4+PiBy
-ZXNldHRpbmcgVVNCLi4uCj4+PiBCdXMgdXNiQDU4MDBjMDAwOiBVU0IgT0hDSSAxLjAKPj4+IEJ1
-cyB1c2JANTgwMGQwMDA6IFVTQiBFSENJIDEuMDAKPj4+IHNjYW5uaW5nIGJ1cyB1c2JANTgwMGQw
-MDAgZm9yIGRldmljZXMuLi4gMiBVU0IgRGV2aWNlKHMpIGZvdW5kCj4+PiAgwqDCoMKgIHNjYW5u
-aW5nIHVzYiBmb3Igc3RvcmFnZSBkZXZpY2VzLi4uIDEgU3RvcmFnZSBEZXZpY2UocykgZm91bmQK
-Pj4+IFNUTTMyTVA+IHVzYiB0cmVlCj4+PiBVU0IgZGV2aWNlIHRyZWU6Cj4+PiAxwqAgSHViICg0
-ODAgTWIvcywgMG1BKQo+Pj4gfMKgIHUtYm9vdCBFSENJIEhvc3QgQ29udHJvbGxlcgo+Pj4gfAo+
-Pj4gKy0ywqAgTWFzcyBTdG9yYWdlICg0ODAgTWIvcywgMjAwbUEpCj4+PiAgwqDCoMKgIFNhbkRp
-c2sgQ3J1emVyIEJsYWRlIDAzMDAzNDMyMDIxOTIyMDExNDA3Cj4+Pgo+Pj4gU2lnbmVkLW9mZi1i
-eTogRmFicmljZSBHYXNuaWVyIDxmYWJyaWNlLmdhc25pZXJAZm9zcy5zdC5jb20+Cj4+PiAtLS0K
-Pj4+Cj4+PiBDaGFuZ2VzIGluIHYyOgo+Pj4gLSBtb3ZlIGNvbXBhbmlvbiBwcm9iaW5nIGZyb20g
-Z2VuZXJpYyBlaGNpIGRyaXZlciB0byB1c2ItdWNsYXNzLCBhZnRlcgo+Pj4gIMKgwqAgTWFyZWsn
-cyBxdWVzdGlvbnMgb24gZGVzaWduIGNob2ljZS4KPj4+IC0gcmVuYW1lIGNvbW1pdCB0aXRsZSB0
-byBmb2xsb3cgdGhpcyBjaGFuZ2UKPj4+Cj4+PiAtLS0KPj4+ICDCoCBkcml2ZXJzL3VzYi9ob3N0
-L3VzYi11Y2xhc3MuYyB8IDM2ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4+
-PiAgwqAgMSBmaWxlIGNoYW5nZWQsIDM2IGluc2VydGlvbnMoKykKPj4+Cj4+PiBkaWZmIC0tZ2l0
-IGEvZHJpdmVycy91c2IvaG9zdC91c2ItdWNsYXNzLmMKPj4+IGIvZHJpdmVycy91c2IvaG9zdC91
-c2ItdWNsYXNzLmMKPj4+IGluZGV4IDAyYzAxMzhhMjA2NS4uZTIzOGVlZThjODRkIDEwMDY0NAo+
-Pj4gLS0tIGEvZHJpdmVycy91c2IvaG9zdC91c2ItdWNsYXNzLmMKPj4+ICsrKyBiL2RyaXZlcnMv
-dXNiL2hvc3QvdXNiLXVjbGFzcy5jCj4+PiBAQCAtMjQ5LDYgKzI0OSwzNyBAQCBzdGF0aWMgdm9p
-ZCByZW1vdmVfaW5hY3RpdmVfY2hpbGRyZW4oc3RydWN0Cj4+PiB1Y2xhc3MgKnVjLCBzdHJ1Y3Qg
-dWRldmljZSAqYnVzKQo+Pj4gIMKgwqDCoMKgwqAgfQo+Pj4gIMKgIH0KPj4+ICDCoCArc3RhdGlj
-IGludCB1c2JfcHJvYmVfY29tcGFuaW9uKHN0cnVjdCB1ZGV2aWNlICpidXMpCj4+PiArewo+Pj4g
-K8KgwqDCoCBzdHJ1Y3QgdWRldmljZSAqY29tcGFuaW9uX2RldjsKPj4+ICvCoMKgwqAgaW50IHJl
-dDsKPj4+ICsKPj4+ICvCoMKgwqAgLyoKPj4+ICvCoMKgwqDCoCAqIEVuZm9yY2Ugb3B0aW9uYWwg
-Y29tcGFuaW9uIGNvbnRyb2xsZXIgaXMgbWFya2VkIGFzIHN1Y2ggaW4KPj4+IG9yZGVyIHRvCj4+
-PiArwqDCoMKgwqAgKiAxc3Qgc2NhbiB0aGUgcHJpbWFyeSBjb250cm9sbGVyLCBiZWZvcmUgdGhl
-IGNvbXBhbmlvbiBjb250cm9sbGVyCj4+PiArwqDCoMKgwqAgKiAob3duZXJzaGlwIGlzIGdpdmVu
-IHRvIGNvbXBhbmlvbiB3aGVuIGxvdyBvciBmdWxsIHNwZWVkIGRldmljZXMKPj4+ICvCoMKgwqDC
-oCAqIGhhdmUgYmVlbiBkZXRlY3RlZCkuCj4+PiArwqDCoMKgwqAgKi8KPj4+ICvCoMKgwqAgcmV0
-ID0gdWNsYXNzX2dldF9kZXZpY2VfYnlfcGhhbmRsZShVQ0xBU1NfVVNCLCBidXMsICJjb21wYW5p
-b24iLAo+Pj4gJmNvbXBhbmlvbl9kZXYpOwo+Pj4gK8KgwqDCoCBpZiAoIXJldCkgewo+Pj4gK8Kg
-wqDCoMKgwqDCoMKgIHN0cnVjdCB1c2JfYnVzX3ByaXYgKmNvbXBhbmlvbl9idXNfcHJpdjsKPj4+
-ICsKPj4+ICvCoMKgwqDCoMKgwqDCoCBkZWJ1ZygiJXMgaXMgdGhlIGNvbXBhbmlvbiBvZiAlc1xu
-IiwgY29tcGFuaW9uX2Rldi0+bmFtZSwKPj4+IGJ1cy0+bmFtZSk7Cj4+PiArwqDCoMKgwqDCoMKg
-wqAgY29tcGFuaW9uX2J1c19wcml2ID0gZGV2X2dldF91Y2xhc3NfcHJpdihjb21wYW5pb25fZGV2
-KTsKPj4+ICvCoMKgwqDCoMKgwqDCoCBjb21wYW5pb25fYnVzX3ByaXYtPmNvbXBhbmlvbiA9IHRy
-dWU7Cj4+PiArwqDCoMKgIH0gZWxzZSBpZiAocmV0ICYmIHJldCAhPSAtRU5PRU5UICYmIHJldCAh
-PSAtRU5PREVWKSB7Cj4+PiArwqDCoMKgwqDCoMKgwqAgLyoKPj4+ICvCoMKgwqDCoMKgwqDCoMKg
-ICogVHJlYXQgZXZlcnl0aGluZyBlbHNlIHRoYW4gbm8gY29tcGFuaW9uIG9yIGRpc2FibGVkCj4+
-PiArwqDCoMKgwqDCoMKgwqDCoCAqIGNvbXBhbmlvbiBhcyBhbiBlcnJvci4gKEl0IG1heSBub3Qg
-YmUgZW5hYmxlZCBvbiBib2FyZHMKPj4+ICvCoMKgwqDCoMKgwqDCoMKgICogdGhhdCBoYXZlIGEg
-SGlnaC1TcGVlZCBIVUIgdG8gaGFuZGxlIEZTIGFuZCBMUyB0cmFmZmljKS4KPj4+ICvCoMKgwqDC
-oMKgwqDCoMKgICovCj4+PiArwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJGYWlsZWQgdG8gZ2V0IGNv
-bXBhbmlvbiAocmV0PSVkKVxuIiwgcmV0KTsKPj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gcmV0
-Owo+Pj4gK8KgwqDCoCB9Cj4+PiArCj4+PiArwqDCoMKgIHJldHVybiAwOwo+Pj4gK30KPj4+ICsK
-Pj4+ICDCoCBpbnQgdXNiX2luaXQodm9pZCkKPj4+ICDCoCB7Cj4+PiAgwqDCoMKgwqDCoCBpbnQg
-Y29udHJvbGxlcnNfaW5pdGlhbGl6ZWQgPSAwOwo+Pj4gQEAgLTI5OSw2ICszMzAsMTEgQEAgaW50
-IHVzYl9pbml0KHZvaWQpCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJw
-cm9iZSBmYWlsZWQsIGVycm9yICVkXG4iLCByZXQpOwo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGNvbnRpbnVlOwo+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+PiArCj4+PiArwqDC
-oMKgwqDCoMKgwqAgcmV0ID0gdXNiX3Byb2JlX2NvbXBhbmlvbihidXMpOwo+Pgo+PiBTaG91bGRu
-J3QgdGhpcyBeIGJlIGluIHNlcGFyYXRlIHVjbGFzc19mb3JlYWNoX2RldihidXMsIHVjKSB7fSBs
-b29wCj4+IGJlZm9yZSB0aGlzIGRldmljZV9wcm9iZSgpIGxvb3AgLCBzbyB0aGF0IHdoZW4gdGhl
-IHByb2JlIG9mIHRoZQo+PiBjb250cm9sbGVyIGlzIGNhbGxlZCwgaXRzIC0+Y29tcGFuaW9uIGlz
-IGFscmVhZHkgc2V0ID8KPiAKPiBUaGUgcG9pbnQgaXMgdG8gaGF2ZSB0aGUgY29tcGFuaW9uIGZs
-YWcgc2V0IGJlZm9yZSBzY2FubmluZyB0aGUgYnVzLgo+IEdlbmVyaWMgT0hDSSBvciBFSENJIGRy
-aXZlcnMgZG9uJ3QgY2FyZSBhYm91dCB0aGlzIGZsYWcuCj4gCj4gU2Nhbm5pbmcgaXMgcGVyZm9y
-bWVkIHJpZ2h0IGFmdGVyIHRoaXMgZmlyc3QgbG9vcCAobG93LWxldmVsKSwgaW4gdHdvCj4gc3Vi
-c2VxdWVudCBzdGVwczogcHJpbWFyeSBjb250cm9sbGVycyAoMm5kIHN0ZXApLCB0aGVuIGNvbXBh
-bmlvbnMgaWYKPiBuZWNlc3NhcnkgKDNyZCBzdGVwKS4KClRoYW5rcyBmb3IgY2xhcmlmeWluZywg
-aW4gdGhhdCBjYXNlOgoKUmV2aWV3ZWQtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgoK
-SXMgdGhpcyBhIGZpeCBmb3IgdGhpcyByZWxlYXNlIChjdXJyZW50bHkgcmMzKSBvciBuZXh0IHJl
-bGVhc2UgPwpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpV
-Ym9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJl
-cGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0
-aW5mby91Ym9vdC1zdG0zMgo=
+Hi,
+
+On Tue, 29 Aug 2023 at 10:29, Patrick DELAUNAY
+<patrick.delaunay@foss.st.com> wrote:
+>
+> Hi Simon,
+>
+> On 8/24/23 17:14, Tom Rini wrote:
+> > On Thu, Aug 24, 2023 at 05:09:07PM +0200, Marek Vasut wrote:
+> >> On 8/24/23 16:25, Tom Rini wrote:
+> >>> On Thu, Aug 24, 2023 at 05:12:45AM +0200, Marek Vasut wrote:
+> >>>> On 8/24/23 05:02, Simon Glass wrote:
+> >>>>> A '.stm32' extension is not allowed anymore, so change it.
+> >>>> Why?
+> >>>>
+> >>>> This will likely break a huge amount of scripts, I'm tempted to NAK it
+> >>>> unless there is a very good reason.
+> >>> This is in the cover letter.  Today, buildman --keep-outputs doesn't
+> >>> actually keep the needed for booting outputs from a build for a number
+> >>> of platforms.  Simon's response is to stop having a free-form list of
+> >>> outputs. With I guess the caveat being ROM-defined names (for example,
+> >>> we still keep "MLO" because that is the literal filename TI ROM looks
+> >>> for on FAT partitions, on mos of their 32bit platforms).
+> >> Why not just place the free-form files into some output/ directory and be
+> >> done with it ? Then they can have whatever extension they want, as long as
+> >> the output/ directory name is stable.
+> > Yes, an alternative here is to just extend the list that's removed in
+> > patch 2/6.
+> >
+>
+> The ".stm32" was choosen on output on mkimage to be aligned with:
+>
+> - all STMicroelectonics documentation  (for example
+> https://wiki.st.com/stm32mpu/wiki/STM32_header_for_binary_files)
+>
+> - the proposed scripts or files, in particular in the YOCTO generated
+> flashlayout files.
+>
+> - this extension list expected by our tools: STM CubeProgrammer
+> (https://wiki.st.com/stm32mpu/wiki/STM32CubeProgrammer)
+>
+> and Signing tools (https://wiki.st.com/stm32mpu/wiki/Signing_tool)
+>
+>
+> So I prefer to kept the ".stm32" extension here:
+>
+>         filename = "u-boot-spl.stm32"
+>
+>
+> NB: the justification for buildman '-k' option seens not fully relevant here
+>
+>         because in patch 2/6 you kept not only the ALLOWED extension but
+> also some particular files
+>
+> +                to_copy = ['u-boot*', '*.map', 'MLO', 'SPL',
+> +                           'include/autoconf.mk', 'spl/u-boot-spl*']
+> +                to_copy += [f'*{ext}' for ext in ALLOWED_EXTS]
+>
+>
+> so all the files "u-boot*" are kept with buildman -k even if it is not a
+> allowed extension.
+>
+>
+> I propose to change the patch 1/6 if you are agree
+>
+> and allow binman to generate the file with same rules than buildman -k
+> option in patch 2/6
+>
+>
+> The filename is valid if
+>
+> - the file is named with the allowed prefix 'u-boot' => 'u-boot*' so
+> "u-boot-spl.stm32" is allowed
+>
+> - the file is with allowed extension =>.bin, .rom, .itb, .img
+
+Yes OK, it seems this won't affect you in any case.
+
+But as Tom says, we are going to try another path...basically just opt
+in those files we need.
+
+Regards,
+Simon
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

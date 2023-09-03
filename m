@@ -2,70 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46013790E01
-	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:57:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FD7C790E02
+	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:57:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 045CDC6B454;
-	Sun,  3 Sep 2023 20:57:09 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
- [209.85.208.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 15A19C6B455;
+	Sun,  3 Sep 2023 20:57:10 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
+ [209.85.167.54])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 929C4C6B44C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ED065C6B44F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  3 Sep 2023 20:57:07 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id
- 4fb4d7f45d1cf-52889bc61b6so1007365a12.0
+ Sun,  3 Sep 2023 20:57:08 +0000 (UTC)
+Received: by mail-lf1-f54.google.com with SMTP id
+ 2adb3069b0e04-500cefc3644so1375962e87.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 03 Sep 2023 13:57:07 -0700 (PDT)
+ Sun, 03 Sep 2023 13:57:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774627; x=1694379427;
+ d=amarulasolutions.com; s=google; t=1693774628; x=1694379428;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Er+cmfuY24AtPiDqGJnBw1eBcMXGQAsBK3WVqoQh17c=;
- b=NE6MXaINYuG5WWDNjvoz0wMuKpaBVF/Rsi39ERZ6klZZXTXBEd1uw712ZCu7JMbRql
- IE4tHGLZcLMdke0ExsiXIufTEcjqsOCWALwS1v24+v8giGe4t1dftDTAgbivficJQZLL
- jKJ6Iv2Rwt2syzhEG3bI2lYeSYEkIQ3Qk3bgA=
+ bh=8TYglP+cNP848xbNNC8t1ng0fe7mgor003HF4vz/ysA=;
+ b=ehqlEmYiWcqn6tZOtOZWzSbSLV2J3POo5CAM+mv59tjaGrs8dC2scYDayu2zu5DA+B
+ XFLMPtsEQxJTsuB1e+/uXk51DRRwYCvOoabwqIM12n24iQJCq2wLwRW+1Ysjc5qmGRNY
+ 2uv7xCFp8AmEhav3jSbCxPy5JbfQfPyHaFE+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774627; x=1694379427;
+ d=1e100.net; s=20221208; t=1693774628; x=1694379428;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Er+cmfuY24AtPiDqGJnBw1eBcMXGQAsBK3WVqoQh17c=;
- b=FPy6fK6B2UOK0FN9lp5mfI9qFHXNtXBUOJv5liREeNwSTr2od5HYbZCoeC8HRTqdPZ
- yjFVnk/WY0qXeDTYs3t9srg5mdfSbrRqCzLrdrwbHVY2dhsmQ6oPr8XOnvVa+b4/Wm31
- EZ44s176cM6vTBXF0UDb4lqbhACH6ux7hRb/mS94TdyUKcWNANmd4aciY0ghBr3tg6xJ
- eJwCPJpyUlqztUpPM6sCxwWJq81xLOOYAGUeNFOhyh2mjmEGG+WkKX4+NE4j9eOeb7nw
- V4m2ySZGp6v99bkrg9+UlkFI5qRRKVEMS3YdLTw7gY6XeMBOi3Rhp9+/9ZGWh7CAIKK5
- 1j/A==
-X-Gm-Message-State: AOJu0YxIGVyTtss57rLA8GOdWmhLvpKkeOzqQJiPuqyuuWB/ITenoWCZ
- CW/ovNUy28TLQl6y79OSKOrHeA==
-X-Google-Smtp-Source: AGHT+IFZokVpkIALkymREVl770Jn/Lhpe9ZTqtD74yuWoi4ctLwpq4Wpccj/woooJ+AJ9PLOB/31TQ==
-X-Received: by 2002:a05:6402:517c:b0:52a:38c3:1b49 with SMTP id
- d28-20020a056402517c00b0052a38c31b49mr5692154ede.40.1693774627148; 
- Sun, 03 Sep 2023 13:57:07 -0700 (PDT)
+ bh=8TYglP+cNP848xbNNC8t1ng0fe7mgor003HF4vz/ysA=;
+ b=Sa5k1H72kz4VPEYeIRmzVrIQASFicziVLwBTPHV6TBJMkDob2wE8RGblK/08Z58DH5
+ 3pETpL2jD/wkCZmrQSGv/4GJpnOAfDkSjUHXPoQ8WXXTnSClmRwOpCLbqWWQf0JRJSjZ
+ eoREOd7U0gzj4EWLWxYnKGwjwxvCrQYcfkU722koOXcMYXCk/N0GHK51L/3TnJ+2hH1Q
+ Rdluodcg2j2rbMQbzQONHw0xyQPEEhzznv+glFUXs1VRP3yAxu57p7+bt4+sqxTffCZ+
+ h0+J4HMv89YCZ3T15dlFvyY25/3ZGSE2EgtxopeLx4/G2u/BExdC03l8mlqGVbKWj+Kz
+ KOUA==
+X-Gm-Message-State: AOJu0YxjikfyOu0r+pkoyJ05GGlj8QIMrnRdMtjHd4r7k9PmyMyipV+p
+ LSWaXT+zRK/8DFazhEVyqInSNw==
+X-Google-Smtp-Source: AGHT+IERULHX1blFhlVfjwrLUxJH/Ugf4m6bQMl7Uvcza6EVO74BjT4aB4HHkDRxrbXTKWAMATHnlA==
+X-Received: by 2002:a05:6512:110a:b0:4fe:21f2:a04a with SMTP id
+ l10-20020a056512110a00b004fe21f2a04amr6193023lfg.8.1693774628229; 
+ Sun, 03 Sep 2023 13:57:08 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- v22-20020aa7d9d6000000b0052568bf9411sm4850232eds.68.2023.09.03.13.57.06
+ v22-20020aa7d9d6000000b0052568bf9411sm4850232eds.68.2023.09.03.13.57.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:57:06 -0700 (PDT)
+ Sun, 03 Sep 2023 13:57:07 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun,  3 Sep 2023 22:56:59 +0200
-Message-Id: <20230903205703.662080-2-dario.binacchi@amarulasolutions.com>
+Date: Sun,  3 Sep 2023 22:57:00 +0200
+Message-Id: <20230903205703.662080-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
 References: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [RFC PATCH 1/5] ARM: dts: stm32f469-disco: sync with
-	Linux 6.5
+Subject: [Uboot-stm32] [RFC PATCH 2/5] ARM: dts: stm32: make the LTDC clock
+	usable by the clock driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,36 +83,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Sync the devicetree with linux 6.5 for stm32f746-disco board.
+As described in [1], the "clocks" property contains "a phandle to the
+clock device node, an index selecting between gated clocks (0) and other
+clocks (1), and an index specifying the clock to use." The current version
+of the clock driver, unlike the kernel, is currently able to properly
+handle nodes with "clocks" properties with an index set to 0.
 
+This patch is preparatory for future developments that require the use
+of the LTDC clock.
+
+[1] Documentation/devicetree/bindings/clock/st,stm32-rcc.txt
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
- arch/arm/dts/stm32f469-disco.dts | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
-index 6e0ffc1903be..c9acabf0f530 100644
---- a/arch/arm/dts/stm32f469-disco.dts
-+++ b/arch/arm/dts/stm32f469-disco.dts
-@@ -119,7 +119,7 @@
- 		};
- 	};
+diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+index c07e2022e4a8..dcc70369cd0d 100644
+--- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+@@ -134,6 +134,10 @@
+ 	bootph-all;
+ };
  
--	panel-dsi@0 {
-+	panel@0 {
- 		compatible = "orisetech,otm8009a";
- 		reg = <0>; /* dsi virtual channel (0..3) */
- 		reset-gpios = <&gpioh 7 GPIO_ACTIVE_LOW>;
-@@ -138,7 +138,7 @@
- 	status = "okay";
++&ltdc {
++	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
++};
++
+ &pinctrl {
+ 	bootph-all;
  
- 	port {
--		ltdc_out_dsi: endpoint@0 {
-+		ltdc_out_dsi: endpoint {
- 			remote-endpoint = <&dsi_in>;
- 		};
- 	};
 -- 
 2.34.1
 

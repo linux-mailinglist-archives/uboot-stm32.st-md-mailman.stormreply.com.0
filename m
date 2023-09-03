@@ -2,60 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C344790DF5
-	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:48:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DD9E790DF6
+	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:49:01 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 327C5C6B457;
-	Sun,  3 Sep 2023 20:48:59 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
- [209.85.218.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3B60DC6B44F;
+	Sun,  3 Sep 2023 20:49:01 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
+ [209.85.218.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 03C53C6B44C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1E5E4C6B44C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  3 Sep 2023 20:48:58 +0000 (UTC)
-Received: by mail-ej1-f48.google.com with SMTP id
- a640c23a62f3a-9a2a4a5472dso365024566b.1
+ Sun,  3 Sep 2023 20:48:59 +0000 (UTC)
+Received: by mail-ej1-f45.google.com with SMTP id
+ a640c23a62f3a-99c3d3c3db9so124946366b.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 03 Sep 2023 13:48:58 -0700 (PDT)
+ Sun, 03 Sep 2023 13:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774137; x=1694378937;
+ d=amarulasolutions.com; s=google; t=1693774138; x=1694378938;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0tFSdaOfLgjvu5lT2Mze0e90IV6aw9wvzp074I8xHsk=;
- b=Iei8g3uSRLJBJlbwzUHpIcLNlapPSDuEAn+W+l/ygG7S/D/Qj+65vv9FYG7cGVnwNS
- AFItOp4RayxwFkCPNdxlSH6PpIEeQxQqurQ3j7Y5FLdlA1GztIVmK8ND/akyf95gf3Fh
- ia2/kd5VDWC73iMBiR6z8+XYqPFpddbX9PXHM=
+ bh=j7MgzMUgLOIoOxHVOIHBX1f8KoDdp05bomfoJMS2h+Q=;
+ b=YsNUcGMYhWOi24yVU5/sZaeTeoTEpPdPrcbAZtsV0J8qlkOE7TtOf0ZcgiN4DVEZaB
+ YC4UZEfi0AwncmuEBvilcnXOtG5Zyo4Vk4xnMs7GKb6DGB9iu6T9u+vgFqCshGuU4s1U
+ GQqWp+Ykf8x3rWAVV7i9lbeeMce6XedZv0vEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774137; x=1694378937;
+ d=1e100.net; s=20221208; t=1693774138; x=1694378938;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0tFSdaOfLgjvu5lT2Mze0e90IV6aw9wvzp074I8xHsk=;
- b=NVryNi+l11pyDCgTgeNby4u7z7L3tGXFbv6z12KuIFUJz6QBRW2u5gqI+u/SerE4UX
- 6MhiJZR7y0BegMwahhikDEBwzBvO0sBwuzb5B7v2Z4R0pJC+/5f10PtJAmV8CCUhSF7O
- DKPe8qeIdpvnZGAsGr3OwRBlJtwBV4nCRS//jAt66b8kJKS+oNsmTMrEeg0N8CuwPr0o
- 90bBbEn17ZsOWB5oM/am1+ddpInQ6Mv1pL3H9cXY/K62Ird5BO1d9zYfkqM8hPbWDINa
- aAhG9J3QgUe7Gmz4lMWqbusYu3r7gQYsNIgFQOESErCVI1iPBjtOQfr+FO7Z/SrL0gXH
- jnsw==
-X-Gm-Message-State: AOJu0Yw6I9Ng/hdAyXXEWdhXuVPBGIhMsx/XWG8shLiVb/v/lzCsVtvi
- bnj61OqoHzub3vwvlGi9xdL6IQ==
-X-Google-Smtp-Source: AGHT+IHohTEO5zEvbbTV4Uc5AoidRRR95vDt995kYR8twHTCoCq3KWUHb/hScez+nzBjwmiPcD72RA==
-X-Received: by 2002:a17:907:3e1f:b0:9a5:9b93:d60d with SMTP id
- hp31-20020a1709073e1f00b009a59b93d60dmr11300128ejc.36.1693774137676; 
- Sun, 03 Sep 2023 13:48:57 -0700 (PDT)
+ bh=j7MgzMUgLOIoOxHVOIHBX1f8KoDdp05bomfoJMS2h+Q=;
+ b=dEwxSSSK8lovj7nXJBj3nbX2A4phBKn3bd5X9+lTovdXe0wbDAPPIruAIV1j8wEJuU
+ GZ3gk6p7pwypZSm5Yo0VssuaKj2SK45n9PHBe8Ha6AARj/UnWPDtEiwjXMNSw20urC3T
+ eLcbdc4sq2nO/bFKauTF2dBqWyIgAFos1sb7K5KmWj9RLd52znXIIwgeCH3/1ZSpAGW/
+ L2fEuhOIrOVQ5zCRYb4Tm4VcpqJM2w7hMgbDaoDugRFQs7UyCQ/HtZZADiUizJIIRX08
+ hts+6yFj7lb9qAynxciuPaD2tml49hNp6uMNaS+UMsrLnjF3t2N64BMfmEzTrKxHt3/0
+ cl+w==
+X-Gm-Message-State: AOJu0Ywc5RMJVhHmJxizmcg0gY4WxWm8dyzc5d9VoPLHXaAb9q+MgJr4
+ hA0y49R9TERdk/A4QDkc8gHGhrc+DgBKZgM9K8TjaA==
+X-Google-Smtp-Source: AGHT+IFkPVaiHP4mgGp02Yh3rtCCcpTINMxvW8wPiTNv1OzzRWb3emrQJGcy3G7CrBp12ziHbWT0Pg==
+X-Received: by 2002:a17:907:7751:b0:9a2:28dc:4168 with SMTP id
+ kx17-20020a170907775100b009a228dc4168mr6119502ejc.61.1693774138798; 
+ Sun, 03 Sep 2023 13:48:58 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.56
+ w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:48:57 -0700 (PDT)
+ Sun, 03 Sep 2023 13:48:58 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun,  3 Sep 2023 22:48:43 +0200
-Message-Id: <20230903204849.660722-5-dario.binacchi@amarulasolutions.com>
+Date: Sun,  3 Sep 2023 22:48:44 +0200
+Message-Id: <20230903204849.660722-6-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
@@ -67,8 +67,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH 04/10] ARM: dts: stm32: use RCC macro for CRC
-	node on stm32f746
+Subject: [Uboot-stm32] [PATCH 05/10] ARM: dts: stm32: add pin map for i2c3
+	controller on stm32f7
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,31 +85,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-commit 7a5f349e592c254f3c1ac34665b6c3905576efc2 Linux upstream.
+commit 0637e66f8250c61f75042131fcb7f88ead2ad436 Linux upstream.
 
-The patch replaces the number 12 with the appropriate numerical constant
-already defined in the file stm32f7-rcc.h.
+Add pin configurations for using i2c3 controller on stm32f7.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 ---
 
- arch/arm/dts/stm32f746.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/dts/stm32f7-pinctrl.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/dts/stm32f746.dtsi b/arch/arm/dts/stm32f746.dtsi
-index dc5c257fb5fb..7b4bd805c998 100644
---- a/arch/arm/dts/stm32f746.dtsi
-+++ b/arch/arm/dts/stm32f746.dtsi
-@@ -526,7 +526,7 @@
- 		crc: crc@40023000 {
- 			compatible = "st,stm32f7-crc";
- 			reg = <0x40023000 0x400>;
--			clocks = <&rcc 0 12>;
-+			clocks = <&rcc 0 STM32F7_AHB1_CLOCK(CRC)>;
- 			status = "disabled";
- 		};
+diff --git a/arch/arm/dts/stm32f7-pinctrl.dtsi b/arch/arm/dts/stm32f7-pinctrl.dtsi
+index 000278ec2c58..607fe42f4f46 100644
+--- a/arch/arm/dts/stm32f7-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f7-pinctrl.dtsi
+@@ -172,6 +172,16 @@
+ 				};
+ 			};
  
++			i2c3_pins_a: i2c3-0 {
++				pins {
++					pinmux = <STM32_PINMUX('H', 8, AF4)>, /* I2C3_SDA */
++						 <STM32_PINMUX('H', 7, AF4)>; /* I2C3_SCL */
++					bias-disable;
++					drive-open-drain;
++					slew-rate = <0>;
++				};
++			};
++
+ 			usbotg_hs_pins_a: usbotg-hs-0 {
+ 				pins {
+ 					pinmux = <STM32_PINMUX('H', 4, AF10)>, /* OTG_HS_ULPI_NXT */
 -- 
 2.34.1
 

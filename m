@@ -2,70 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F82D790DF0
-	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:48:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55521790DF2
+	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:48:57 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C466C6B452;
-	Sun,  3 Sep 2023 20:48:56 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com
- [209.85.218.52])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1D98CC6B455;
+	Sun,  3 Sep 2023 20:48:57 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com
+ [209.85.167.41])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 805F9C6B44C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 495A0C6B455
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  3 Sep 2023 20:48:54 +0000 (UTC)
-Received: by mail-ej1-f52.google.com with SMTP id
- a640c23a62f3a-99bcc0adab4so124082866b.2
+ Sun,  3 Sep 2023 20:48:56 +0000 (UTC)
+Received: by mail-lf1-f41.google.com with SMTP id
+ 2adb3069b0e04-500a8b2b73eso1308787e87.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 03 Sep 2023 13:48:54 -0700 (PDT)
+ Sun, 03 Sep 2023 13:48:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774134; x=1694378934;
+ d=amarulasolutions.com; s=google; t=1693774135; x=1694378935;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7v/T47c4cyvP0ZBQxSABDrZzKs6stbyxJ2yX9+Ibn8w=;
- b=jWvRkP41T2TpmbN0r2nmvVuEpV4z3d4tf9/JD8/iDZDJEh+mdNrcjifZ9ktM1LJs9Q
- ZWmBVxEMFd+2ir8cYHBUEELMCAVfwTDIWlBJ9Q4ZWLmO1GAa8G8t27DkEIWVHNbV6Oxt
- ygBTRECj7etIUI0eS/8FYVDQDxyQIbWhxNXrQ=
+ bh=bSfjxtQCmq0VaRg1MRMvJGczP51v56zG9MGuctvIOOo=;
+ b=LiAopOeLVtcX9oTMaDNDnLjMlpvEepnpUv9XEWpnqiyZbMFuR3TRWQGPEosk+LIJGa
+ chyw2TL7fjyeHmEeB2vFQ61PwKC/RUv5jrtWgo/CCV3KfMeUcMMU3QbzWL8EnXwKGxWN
+ rIsG6tR6Snn23Bwn1DPc5Ciq+CmxoZA7nTpMA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774134; x=1694378934;
+ d=1e100.net; s=20221208; t=1693774135; x=1694378935;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7v/T47c4cyvP0ZBQxSABDrZzKs6stbyxJ2yX9+Ibn8w=;
- b=AyxANkTKe5n8cVw0viMoFF+HXkUwcBH6H+dX9eA6vKQF60NRhf30naxGji6atHLMhe
- ZiyD7g3QT2NH2V3RQPrtKxO6Ud7fzZrDdj+JxBUhLGIpEVK1fwoDEoiy/FZslilFhU1T
- b2WeMNa0/I+Guh/1SnABM1Gkl/9PIVv2Byut3rilGLK3sMmnLKtPW89AJ8nSW1gG35n6
- og6uU+b75eLs4qFG0eGpCbXqSTWJWY0p8do+6inI4gjrAmie3L/RIg2/9pkzkjsM3TZg
- mf0sWy4xQoxo6dI1Fr6TZWo2Oks7dTmh9LOJUI+lMhQpagZ8LW0+wvzFFTL0tSClsZSc
- Pm9g==
-X-Gm-Message-State: AOJu0YxAFgH9Fd4966AVX3/AopSzHzlzqNB6deqHEGBxTorwnU8nrnJn
- Z1Bgd1MrI9WQmf907f5mRclXAw==
-X-Google-Smtp-Source: AGHT+IEd+voLKr49j9NBJ2ZPx0YBVE/q6iq3Wj+HRes2K0jTK2A5HB0gttgtu5yF3yXaQBMeOm04ng==
-X-Received: by 2002:a17:906:1009:b0:9a5:db06:4264 with SMTP id
- 9-20020a170906100900b009a5db064264mr6718778ejm.72.1693774134022; 
- Sun, 03 Sep 2023 13:48:54 -0700 (PDT)
+ bh=bSfjxtQCmq0VaRg1MRMvJGczP51v56zG9MGuctvIOOo=;
+ b=bWcmuPtM7rUWFiJXxZy5WylFo1IWIGbXb/KitbrOlpOlWbRljs7INpWOoRnQkLLBCv
+ nFFofeN4cDyVyDLnrd/puzeiv1QhlPYwriSMgCceaolid3aXml5SxyDW2hp8mi0PItEI
+ cAe4sP5CfTJeezJHnbxwkcQH2XBvCTKYrSDpiHdiDhOXEaVMOriJgrHpp5vJxlMmK+os
+ aZahN/OufhxDNriRFO5sWxp/+MDaMU93TeQPem7jfkM30NQJZy/79Qjo0UjGLO0LIlmr
+ LYXlNDO95N0uyWcQKClnNkf2dJwcN0MdY9MvaER6Q3eABzfGL/xYO1YCxM/brW7bYAor
+ myyg==
+X-Gm-Message-State: AOJu0YzyQQyVoCxVL95K3tukbe2CRpPvHiIB+rpaq5WmCcPD1qDLTqiv
+ b/HvfiEOud0OdeqzfJ30bwWn5w==
+X-Google-Smtp-Source: AGHT+IFXx75DROO6rbQSVzTAyUg06Gn23A7nd/USAD48Vs/rGAuMferDo3ujJNd68UcRAAd/sUS1eQ==
+X-Received: by 2002:a05:6512:3a8f:b0:500:ba39:f0c1 with SMTP id
+ q15-20020a0565123a8f00b00500ba39f0c1mr6458180lfu.20.1693774135345; 
+ Sun, 03 Sep 2023 13:48:55 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.53
+ w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.48.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:48:53 -0700 (PDT)
+ Sun, 03 Sep 2023 13:48:54 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun,  3 Sep 2023 22:48:40 +0200
-Message-Id: <20230903204849.660722-2-dario.binacchi@amarulasolutions.com>
+Date: Sun,  3 Sep 2023 22:48:41 +0200
+Message-Id: <20230903204849.660722-3-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Lee Jones <lee@kernel.org>, uboot-stm32@st-md-mailman.stormreply.com,
+Cc: Tom Rini <trini@konsulko.com>,
+ Alexandre Torgue <alexandre.torgue@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Marc Kleine-Budde <mkl@pengutronix.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH 01/10] dt-bindings: mfd: stm32f7: Add binding
-	definition for CAN3
+Subject: [Uboot-stm32] [PATCH 02/10] ARM: dts: stm32: add pin map for CAN
+	controller on stm32f7
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,30 +85,111 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-commit 8f3ef556f8e1a670895f59ef3f01e4e26edd63e3 Linux upstream.
+commit 011644249686f2675e142519cd59e81e04cfc231 Linux upstream.
 
-Add binding definition for CAN3 peripheral.
+Add pin configurations for using CAN controller on stm32f7.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20230423172528.1398158-2-dario.binacchi@amarulasolutions.com
-Signed-off-by: Lee Jones <lee@kernel.org>
+Link: https://lore.kernel.org/all/20230427204540.3126234-4-dario.binacchi@amarulasolutions.com
+Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
 ---
 
- include/dt-bindings/mfd/stm32f7-rcc.h | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/stm32f7-pinctrl.dtsi | 82 +++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
 
-diff --git a/include/dt-bindings/mfd/stm32f7-rcc.h b/include/dt-bindings/mfd/stm32f7-rcc.h
-index ba5cb7456ee4..a4e4f9271395 100644
---- a/include/dt-bindings/mfd/stm32f7-rcc.h
-+++ b/include/dt-bindings/mfd/stm32f7-rcc.h
-@@ -64,6 +64,7 @@
- #define STM32F7_RCC_APB1_TIM14		8
- #define STM32F7_RCC_APB1_LPTIM1		9
- #define STM32F7_RCC_APB1_WWDG		11
-+#define STM32F7_RCC_APB1_CAN3		13
- #define STM32F7_RCC_APB1_SPI2		14
- #define STM32F7_RCC_APB1_SPI3		15
- #define STM32F7_RCC_APB1_SPDIFRX	16
+diff --git a/arch/arm/dts/stm32f7-pinctrl.dtsi b/arch/arm/dts/stm32f7-pinctrl.dtsi
+index 8f37aefa7315..000278ec2c58 100644
+--- a/arch/arm/dts/stm32f7-pinctrl.dtsi
++++ b/arch/arm/dts/stm32f7-pinctrl.dtsi
+@@ -284,6 +284,88 @@
+ 					slew-rate = <2>;
+ 				};
+ 			};
++
++			can1_pins_a: can1-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('A', 12, AF9)>; /* CAN1_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('A', 11, AF9)>; /* CAN1_RX */
++					bias-pull-up;
++				};
++			};
++
++			can1_pins_b: can1-1 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 9, AF9)>; /* CAN1_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 8, AF9)>; /* CAN1_RX */
++					bias-pull-up;
++				};
++			};
++
++			can1_pins_c: can1-2 {
++				pins1 {
++					pinmux = <STM32_PINMUX('D', 1, AF9)>; /* CAN1_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('D', 0, AF9)>; /* CAN1_RX */
++					bias-pull-up;
++
++				};
++			};
++
++			can1_pins_d: can1-3 {
++				pins1 {
++					pinmux = <STM32_PINMUX('H', 13, AF9)>; /* CAN1_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('H', 14, AF9)>; /* CAN1_RX */
++					bias-pull-up;
++
++				};
++			};
++
++			can2_pins_a: can2-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 6, AF9)>; /* CAN2_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 5, AF9)>; /* CAN2_RX */
++					bias-pull-up;
++				};
++			};
++
++			can2_pins_b: can2-1 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 13, AF9)>; /* CAN2_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 12, AF9)>; /* CAN2_RX */
++					bias-pull-up;
++				};
++			};
++
++			can3_pins_a: can3-0 {
++				pins1 {
++					pinmux = <STM32_PINMUX('A', 15, AF11)>; /* CAN3_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('A', 8, AF11)>; /* CAN3_RX */
++					bias-pull-up;
++				};
++			};
++
++			can3_pins_b: can3-1 {
++				pins1 {
++					pinmux = <STM32_PINMUX('B', 4, AF11)>;  /* CAN3_TX */
++				};
++				pins2 {
++					pinmux = <STM32_PINMUX('B', 3, AF11)>; /* CAN3_RX */
++					bias-pull-up;
++				};
++			};
+ 		};
+ 	};
+ };
 -- 
 2.34.1
 

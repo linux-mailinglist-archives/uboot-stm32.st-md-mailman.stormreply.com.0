@@ -2,72 +2,72 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B76F790DFA
-	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:49:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B17DD790DFB
+	for <lists+uboot-stm32@lfdr.de>; Sun,  3 Sep 2023 22:49:06 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 656A4C6B459;
-	Sun,  3 Sep 2023 20:49:05 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com
- [209.85.218.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6E6CFC6B45F;
+	Sun,  3 Sep 2023 20:49:06 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
+ [209.85.218.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C9AA1C6B455
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2FC95C6B459
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  3 Sep 2023 20:49:03 +0000 (UTC)
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-99c3d3c3db9so124950966b.3
+ Sun,  3 Sep 2023 20:49:05 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-9a64619d8fbso101741166b.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 03 Sep 2023 13:49:03 -0700 (PDT)
+ Sun, 03 Sep 2023 13:49:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1693774143; x=1694378943;
+ d=amarulasolutions.com; s=google; t=1693774145; x=1694378945;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4aQ/spxaSMEggXIYz8OYteRC3aFv4G+4nlQfhxgjoF8=;
- b=CAVkDevUU0ciw2bwTf0p7qcbhy+8HvSwSz/X8ZCXje9kJKeJDEnhXngxqOxtBT5436
- qFLnN4oM5X3Cinj1IxMYSAmL5dQO90rVoNTEYxm/gAVNOtnJjyEfioYtMIZUYSI18VsK
- HsyqJN94LO8o1h77o3zgQZrn0wXO8M2pxxbAU=
+ bh=oU/q22HAug8UzsnmuC0vhco1L9LOpbnUW7H8vuRFmVk=;
+ b=T8ujxCxv06DK0r22Pu86+kC0zx8OeSbz9EF/bJ8T2qiqPbwk5sKs++Nx+/SucfJaFE
+ U3rZ8zXYVRCDyHxWY8HB9xxe6a53+NwmBB7rQwgvgVew7UsbsUK47qduZm+E+UqYETY0
+ uMUWaJGJzY/5QdAj9T8iCejGV2HnyMiSaVu3I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1693774143; x=1694378943;
+ d=1e100.net; s=20221208; t=1693774145; x=1694378945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4aQ/spxaSMEggXIYz8OYteRC3aFv4G+4nlQfhxgjoF8=;
- b=BZWKw2oNf5+/ALb3HbyMC7JFqfZyzhDz/Q2lhU/cPn1Mn3/cT5t/wKQNEX/cDdV7BB
- 8mj03v7W+N6VVj2TJVZF29YhuVZB6PEec0I4PY7D6Xe8mUOcw1c1gcdBj4Y7EEIfzZRp
- lsEmqCYPUCzGuWWIXomKdvaL6JynV1/ehu77hzWuz2m5Z8PTKZi3z2hSPLuQKq02Mu7u
- 6ODS9W6PGd+XZPCj3Tn5R522lkNkaoV9wuVlgi8OCADcoAkhYDfTNn8pP3h5blxd+cGd
- Brn+C2C+jCKo9Uy991hPT75wuiX4ZlCzwoDmb2CjRUa5lhSN9aqGR5Hs/UDTzE8JYSxl
- 46NA==
-X-Gm-Message-State: AOJu0YwYP15e46LP220IUq/9WbOD3HvlKfJRyNs8ds2CoOvEZGO9SiRk
- gFiq+qwEHWhlaB042yoLb20uSg==
-X-Google-Smtp-Source: AGHT+IH1/+0FKlh06kDZ+9TResyYja01BpHYvmn6R2fuHTrTXBxxw8o+Hmm72gW6oTiMjjqgV9Ln6Q==
-X-Received: by 2002:a17:906:2201:b0:9a5:cf23:de5a with SMTP id
- s1-20020a170906220100b009a5cf23de5amr4969382ejs.45.1693774143432; 
- Sun, 03 Sep 2023 13:49:03 -0700 (PDT)
+ bh=oU/q22HAug8UzsnmuC0vhco1L9LOpbnUW7H8vuRFmVk=;
+ b=i3IMffddsRyS+y78AhFOWF/BukjAn1b6PmSL8AXHSjZJSY+Gij2rVxrFxNqHzLnE/4
+ 0ErdraczfFJUCHX4vdckCYuJswohYAxFyvvT2ka0m8GutTKVdZWVVK27p+im/rhjirSO
+ amoK51THdB9I9bkWfiJGsiSC4Ex5HgO2gk6PpStj7GoU08dzbuCqeyeTmMi25gQylK9n
+ 2SXSL8TcKE0hiGolDEeQsEu1f3xb5qAuJXJ8gq3jyUtGGTTKlEGuNQUuyBBqGTO/sKz+
+ NovoHeY58zyACIqbolY1tWLT9z/CaAroBfomZmRVTOmpk3sBtitu9JZALJ4o+SMoBcAW
+ fOoQ==
+X-Gm-Message-State: AOJu0YzVIO0fo7kVuajpWjdsnzlVNUcXibtI12nAG6sYJvv9Jpx3G/3F
+ vOu8jUjWBTNlXPQOXRYJXN/vTQ==
+X-Google-Smtp-Source: AGHT+IGlY+8nKiSRsyM1BgA1H4VgnlW6bGKVNGvAsqdRq4IfNuiv5Qb3NzW/kDlSMfdxvm1KuJCXNg==
+X-Received: by 2002:a17:906:2210:b0:994:1eb4:6898 with SMTP id
+ s16-20020a170906221000b009941eb46898mr6619562ejs.9.1693774144766; 
+ Sun, 03 Sep 2023 13:49:04 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-54-71-141.retail.telecomitalia.it. [79.54.71.141])
  by smtp.gmail.com with ESMTPSA id
- w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.49.02
+ w22-20020a170906131600b0099d9b50d786sm5182466ejb.199.2023.09.03.13.49.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 03 Sep 2023 13:49:03 -0700 (PDT)
+ Sun, 03 Sep 2023 13:49:04 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun,  3 Sep 2023 22:48:48 +0200
-Message-Id: <20230903204849.660722-10-dario.binacchi@amarulasolutions.com>
+Date: Sun,  3 Sep 2023 22:48:49 +0200
+Message-Id: <20230903204849.660722-11-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>,
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Alexandre Torgue <alexandre.torgue@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH 09/10] ARM: dts: stm32: rename mmc_vcard to
-	vcc-3v3 on stm32f746-disco
+Subject: [Uboot-stm32] [PATCH 10/10] ARM: dts: stm32: support display on
+	stm32f746-disco board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,48 +84,212 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-commit e4e724099f04072053cf411456e3e9aae48c4af1 Linux upstream.
-
-In the schematics of document UM1907, the power supply for the micro SD
-card is the same 3v3 voltage that is used to power other devices on the
-board. By generalizing the name of the voltage regulator, it can be
-referenced by other nodes in the device tree without creating
-misunderstandings.
-
-This patch is preparatory for future developments.
+The patch applies the changes from Linux commit 10a970bc3ebfa ("ARM: dts:
+stm32: support display on stm32f746-disco board") and removes the same
+settings from stm32f746-disco-u-boot.dtsi.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
+
 ---
 
- arch/arm/dts/stm32f746-disco.dts | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi | 89 ++++++------------------
+ arch/arm/dts/stm32f746-disco.dts         | 44 ++++++++++++
+ 2 files changed, 66 insertions(+), 67 deletions(-)
 
-diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
-index 9541f449fd0e..e1564d69f9f6 100644
---- a/arch/arm/dts/stm32f746-disco.dts
-+++ b/arch/arm/dts/stm32f746-disco.dts
-@@ -44,9 +44,9 @@
- 		regulator-always-on;
+diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+index 3c2b9fc59512..1b42d6cbbc19 100644
+--- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+@@ -23,12 +23,6 @@
+ 		spi0 = &qspi;
  	};
  
--	mmc_vcard: mmc_vcard {
-+	vcc_3v3: vcc-3v3 {
- 		compatible = "regulator-fixed";
--		regulator-name = "mmc_vcard";
-+		regulator-name = "vcc_3v3";
+-	backlight: backlight {
+-		compatible = "gpio-backlight";
+-		gpios = <&gpiok 3 0>;
+-		status = "okay";
+-	};
+-
+ 	button1 {
+ 		compatible = "st,button1";
+ 		button-gpio = <&gpioi 11 0>;
+@@ -38,37 +32,10 @@
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioi 1 0>;
+ 	};
+-
+-	panel-rgb@0 {
+-		compatible = "simple-panel";
+-		backlight = <&backlight>;
+-		enable-gpios = <&gpioi 12 0>;
+-		status = "okay";
+-
+-		display-timings {
+-			timing@0 {
+-				clock-frequency = <9000000>;
+-				hactive = <480>;
+-				vactive = <272>;
+-				hfront-porch = <2>;
+-				hback-porch = <2>;
+-				hsync-len = <41>;
+-				vfront-porch = <2>;
+-				vback-porch = <2>;
+-				vsync-len = <10>;
+-				hsync-active = <0>;
+-				vsync-active = <0>;
+-				de-active = <1>;
+-				pixelclk-active = <1>;
+-			};
+-		};
+-	};
+ };
+ 
+ &ltdc {
+ 	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
+-	pinctrl-0 = <&ltdc_pins>;
+-	status = "okay";
+ 	bootph-all;
+ };
+ 
+@@ -96,6 +63,28 @@
+ 	};
+ };
+ 
++&panel_rgb {
++	compatible = "simple-panel";
++
++	display-timings {
++		timing@0 {
++			clock-frequency = <9000000>;
++			hactive = <480>;
++			vactive = <272>;
++			hfront-porch = <2>;
++			hback-porch = <2>;
++			hsync-len = <41>;
++			vfront-porch = <2>;
++			vback-porch = <2>;
++			vsync-len = <10>;
++			hsync-active = <0>;
++			vsync-active = <0>;
++			de-active = <1>;
++			pixelclk-active = <1>;
++		};
++	};
++};
++
+ &pinctrl {
+ 	ethernet_mii: mii@0 {
+ 		pins {
+@@ -160,40 +149,6 @@
+ 		};
+ 	};
+ 
+-	ltdc_pins: ltdc@0 {
+-		pins {
+-			pinmux = <STM32_PINMUX('E', 4, AF14)>, /* B0 */
+-				 <STM32_PINMUX('G',12, AF9)>,  /* B4 */
+-				 <STM32_PINMUX('I', 9, AF14)>, /* VSYNC */
+-				 <STM32_PINMUX('I',10, AF14)>, /* HSYNC */
+-				 <STM32_PINMUX('I',14, AF14)>, /* CLK */
+-				 <STM32_PINMUX('I',15, AF14)>, /* R0 */
+-				 <STM32_PINMUX('J', 0, AF14)>, /* R1 */
+-				 <STM32_PINMUX('J', 1, AF14)>, /* R2 */
+-				 <STM32_PINMUX('J', 2, AF14)>, /* R3 */
+-				 <STM32_PINMUX('J', 3, AF14)>, /* R4 */
+-				 <STM32_PINMUX('J', 4, AF14)>, /* R5 */
+-				 <STM32_PINMUX('J', 5, AF14)>, /* R6 */
+-				 <STM32_PINMUX('J', 6, AF14)>, /* R7 */
+-				 <STM32_PINMUX('J', 7, AF14)>, /* G0 */
+-				 <STM32_PINMUX('J', 8, AF14)>, /* G1 */
+-				 <STM32_PINMUX('J', 9, AF14)>, /* G2 */
+-				 <STM32_PINMUX('J',10, AF14)>, /* G3 */
+-				 <STM32_PINMUX('J',11, AF14)>, /* G4 */
+-				 <STM32_PINMUX('J',13, AF14)>, /* B1 */
+-				 <STM32_PINMUX('J',14, AF14)>, /* B2 */
+-				 <STM32_PINMUX('J',15, AF14)>, /* B3 */
+-				 <STM32_PINMUX('K', 0, AF14)>, /* G5 */
+-				 <STM32_PINMUX('K', 1, AF14)>, /* G6 */
+-				 <STM32_PINMUX('K', 2, AF14)>, /* G7 */
+-				 <STM32_PINMUX('K', 4, AF14)>, /* B5 */
+-				 <STM32_PINMUX('K', 5, AF14)>, /* B6 */
+-				 <STM32_PINMUX('K', 6, AF14)>, /* B7 */
+-				 <STM32_PINMUX('K', 7, AF14)>; /* DE */
+-			slew-rate = <2>;
+-		};
+-	};
+-
+ 	qspi_pins: qspi@0 {
+ 		pins {
+ 			pinmux = <STM32_PINMUX('B', 2, AF9)>, /* CLK */
+diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
+index e1564d69f9f6..431275134033 100644
+--- a/arch/arm/dts/stm32f746-disco.dts
++++ b/arch/arm/dts/stm32f746-disco.dts
+@@ -25,6 +25,19 @@
+ 		reg = <0xC0000000 0x800000>;
+ 	};
+ 
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		linux,cma {
++			compatible = "shared-dma-pool";
++			no-map;
++			size = <0x80000>;
++			linux,dma-default;
++		};
++	};
++
+ 	aliases {
+ 		serial0 = &usart1;
+ 	};
+@@ -50,6 +63,25 @@
  		regulator-min-microvolt = <3300000>;
  		regulator-max-microvolt = <3300000>;
  	};
-@@ -82,7 +82,7 @@
++
++	backlight: backlight {
++		compatible = "gpio-backlight";
++		gpios = <&gpiok 3 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++
++	panel_rgb: panel-rgb {
++		compatible = "rocktech,rk043fn48h";
++		power-supply = <&vcc_3v3>;
++		backlight = <&backlight>;
++		enable-gpios = <&gpioi 12 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++		port {
++			panel_in_rgb: endpoint {
++				remote-endpoint = <&ltdc_out_rgb>;
++			};
++		};
++	};
+ };
  
+ &clk_hse {
+@@ -80,6 +112,18 @@
+ 	};
+ };
+ 
++&ltdc {
++	pinctrl-0 = <&ltdc_pins_a>;
++	pinctrl-names = "default";
++	status = "okay";
++
++	port {
++		ltdc_out_rgb: endpoint {
++			remote-endpoint = <&panel_in_rgb>;
++		};
++	};
++};
++
  &sdio1 {
  	status = "okay";
--	vmmc-supply = <&mmc_vcard>;
-+	vmmc-supply = <&vcc_3v3>;
- 	cd-gpios = <&gpioc 13 GPIO_ACTIVE_LOW>;
- 	pinctrl-names = "default", "opendrain";
- 	pinctrl-0 = <&sdio_pins_a>;
+ 	vmmc-supply = <&vcc_3v3>;
 -- 
 2.34.1
 

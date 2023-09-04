@@ -2,56 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D92B791B68
-	for <lists+uboot-stm32@lfdr.de>; Mon,  4 Sep 2023 18:24:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C6B579221F
+	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Sep 2023 13:29:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3AFAAC6B454;
-	Mon,  4 Sep 2023 16:24:37 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33C31C6B454;
+	Tue,  5 Sep 2023 11:29:49 +0000 (UTC)
+Received: from mx1.tinet.cat (mx1.tinet.org [195.77.216.146])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3285CC6A615
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4BE92C6A615
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  4 Sep 2023 16:24:36 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 345568692D;
- Mon,  4 Sep 2023 18:24:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1693844675;
- bh=xAfkAU5hAqEOfe4PCJiXX8M39R+UqKM76SpAbjVwOHw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=cBRixEP+Z/YWBs+zSibmQQAjSaEGWB4udM1kyqxFj6kAlEBPj13ts7re/pHb2dnVg
- Bvaz6QVhzkJtZT84/ozd7UCBt2aRnR4xflwB708cblKVaNOah1mayZjCHRc3Cqa3Fx
- xbTEPRzyEzzRXrj3sXLGywjXZ5Ud1uXGlHaqUGtjpKz13YpZxsii3FqVtirxdtHu4J
- Ibe38mjGcHcJ6z+sb+5A9LuW7HTwLuyfJ9iEL4e+oXxLw73OXdVrB0GROsRhXN9/fq
- W94FHwRI5zSThEXVBoSR6+scq9bPHLbd3IwThmoDhu/ZESIfQXS8m3FEp4qTy25JTs
- gbS6qsPVG/kJw==
-Message-ID: <7f0ba663-1e4d-4c14-b2a3-534be2505e3f@denx.de>
-Date: Mon, 4 Sep 2023 18:24:34 +0200
+ Mon,  4 Sep 2023 12:48:39 +0000 (UTC)
+X-ASG-Debug-ID: 1693831717-163e7b47e046ee50001-idqh3N
+Received: from smtp01.tinet.cat (smtp01.tinet.org [195.77.216.131]) by
+ mx1.tinet.cat with ESMTP id Kv5cbQ4KDN97gTlc;
+ Mon, 04 Sep 2023 14:48:37 +0200 (CEST)
+X-Barracuda-Envelope-From: xdrudis@tinet.cat
+X-Barracuda-Effective-Source-IP: smtp01.tinet.org[195.77.216.131]
+X-Barracuda-Apparent-Source-IP: 195.77.216.131
+Received: from xdrudis.tinet.cat (42.red-79-152-186.dynamicip.rima-tde.net
+ [79.152.186.42])
+ by smtp01.tinet.cat (Postfix) with ESMTPSA id 948FD605D080;
+ Mon,  4 Sep 2023 14:48:37 +0200 (CEST)
+Date: Mon, 4 Sep 2023 14:48:26 +0200
+From: Xavier Drudis Ferran <xdrudis@tinet.cat>
+To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+Message-ID: <ZPXSGkf+vdXlIbVq@xdrudis.tinet.cat>
+X-ASG-Orig-Subj: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset
+ bulk() API
+References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
+ <ZPL7DAQfE3WxCFa+@xdrudis.tinet.cat>
+ <428ea549-1092-fb39-15e1-10f2284691e8@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, u-boot@lists.denx.de
-References: <20230901095201.3874129-1-fabrice.gasnier@foss.st.com>
- <29d44f7f-ffca-d8cd-ce88-5e2fb6103ff4@denx.de>
- <9c06f5ec-c278-e00d-873f-99ef54098816@foss.st.com>
- <fef0778b-4850-fb73-9d8f-da48a6138e13@denx.de>
- <7b2d0448-d7f0-e5f8-a6eb-beb1746921f1@foss.st.com>
- <cb4278ea-1cf9-a2c5-1310-7e6419315d38@denx.de>
- <0ad3304f-c0cf-3c8b-890d-8824b9987afe@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <0ad3304f-c0cf-3c8b-890d-8824b9987afe@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+Content-Disposition: inline
+In-Reply-To: <428ea549-1092-fb39-15e1-10f2284691e8@foss.st.com>
+X-Barracuda-Connect: smtp01.tinet.org[195.77.216.131]
+X-Barracuda-Start-Time: 1693831717
+X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
+X-Virus-Scanned: by bsmtpd at tinet.cat
+X-Barracuda-Scan-Msg-Size: 4602
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Bayes: INNOCENT GLOBAL 0.8822 1.0000 3.0378
+X-Barracuda-Spam-Score: 3.64
+X-Barracuda-Spam-Status: No, SCORE=3.64 using global scores of TAG_LEVEL=1000.0
+ QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=MARKETING_SUBJECT
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.113652
+ Rule breakdown below
+ pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ 0.60 MARKETING_SUBJECT      Subject contains popular marketing words
+X-Mailman-Approved-At: Tue, 05 Sep 2023 11:29:47 +0000
+Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Xavier Drudis Ferran <xdrudis@tinet.cat>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2] usb: check for companion controller in
-	uclass
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH] usb: host: ohci-generic: Make usage of
+ clock/reset bulk() API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,121 +70,121 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gOS80LzIzIDE4OjIxLCBGYWJyaWNlIEdhc25pZXIgd3JvdGU6Cj4gT24gOS80LzIzIDE1OjU0
-LCBNYXJlayBWYXN1dCB3cm90ZToKPj4gT24gOS80LzIzIDE0OjM0LCBGYWJyaWNlIEdhc25pZXIg
-d3JvdGU6Cj4+PiBPbiA5LzEvMjMgMTg6MDAsIE1hcmVrIFZhc3V0IHdyb3RlOgo+Pj4+IE9uIDkv
-MS8yMyAxNDoxMiwgRmFicmljZSBHYXNuaWVyIHdyb3RlOgo+Pj4+PiBPbiA5LzEvMjMgMTI6NDgs
-IE1hcmVrIFZhc3V0IHdyb3RlOgo+Pj4+Pj4gT24gOS8xLzIzIDExOjUyLCBGYWJyaWNlIEdhc25p
-ZXIgd3JvdGU6Cj4+Pj4+Pj4gRUhDSSBpcyB1c3VhbGx5IHVzZWQgd2l0aCBjb21wYW5pb24gY29u
-dHJvbGxlciAobGlrZSBPSENJKSBhcwo+Pj4+Pj4+IGNvbXBhbmlvbgo+Pj4+Pj4+IGNvbnRyb2xs
-ZXIuIFRoaXMgaW5mb3JtYXRpb24gb24gdGhlIGNvbXBhbmlvbiBpcyBtaXNzaW5nIGN1cnJlbnRs
-eSBpbgo+Pj4+Pj4+IGNvbXBhbmlvbiBkcml2ZXJzLgo+Pj4+Pj4+IFNvLCBpZiB0aGUgdXNiLXVj
-bGFzcyBpc24ndCBhd2FyZSwgaXQgbWF5IHNjYW4gYnVzc2VzIGluIGFueSBvcmRlcjoKPj4+Pj4+
-PiBPSENJCj4+Pj4+Pj4gZmlyc3QsIHRoZW4gRUhDSS4KPj4+Pj4+PiBUaGlzIGlzIHNlZW4gb24g
-U1RNMzJNUDEgd2hlcmUgRFQgcHJvYmluZyBtYWtlcyB0aGUgcHJvYmUgb3JkZXIgdG8KPj4+Pj4+
-PiBvY2N1cgo+Pj4+Pj4+IGJ5IGluY3JlYXNpbmcgYWRkcmVzcyAoT0hDSSBhZGRyZXNzIDwgRUhD
-SSBhZGRyZXNzKS4KPj4+Pj4+Pgo+Pj4+Pj4+IFdoZW4gYSBsb3cgc3BlZWQgb3IgZnVsbC1zcGVl
-ZCBkZXZpY2UgaXMgcGx1Z2dlZCBpbiwgaXQncyBub3QKPj4+Pj4+PiBkZXRlY3RlZCBhcwo+Pj4+
-Pj4+IEVIQ0kgc2hvdWxkIGZpcnN0IGRldGVjdCBpdCwgYW5kIGdpdmUgb3duZXJzaGlwIChoYW5k
-b3ZlcikgdG8gT0hDSS4KPj4+Pj4+Pgo+Pj4+Pj4+IEN1cnJlbnQgc2l0dWF0aW9uIG9uIFNUTTMy
-TVAxICh3aXRoIGEgbG93IHNwZWVkIGRldmljZSBwbHVnZ2VkLWluKQo+Pj4+Pj4+IFNUTTMyTVA+
-IHVzYiBzdGFydAo+Pj4+Pj4+IHN0YXJ0aW5nIFVTQi4uLgo+Pj4+Pj4+IEJ1cyB1c2JANTgwMGMw
-MDA6IFVTQiBPSENJIDEuMAo+Pj4+Pj4+IEJ1cyB1c2JANTgwMGQwMDA6IFVTQiBFSENJIDEuMDAK
-Pj4+Pj4+PiBzY2FubmluZyBidXMgdXNiQDU4MDBjMDAwIGZvciBkZXZpY2VzLi4uIDEgVVNCIERl
-dmljZShzKSBmb3VuZAo+Pj4+Pj4+IHNjYW5uaW5nIGJ1cyB1c2JANTgwMGQwMDAgZm9yIGRldmlj
-ZXMuLi4gMSBVU0IgRGV2aWNlKHMpIGZvdW5kCj4+Pj4+Pj4gIMKgwqDCoMKgwqAgc2Nhbm5pbmcg
-dXNiIGZvciBzdG9yYWdlIGRldmljZXMuLi4gMCBTdG9yYWdlIERldmljZShzKSBmb3VuZAo+Pj4+
-Pj4+Cj4+Pj4+Pj4gVGhlICJjb21wYW5pb24iIHByb3BlcnR5IGluIHRoZSBkZXZpY2UgdHJlZSBh
-bGxvdyB0byByZXRyaWV2ZQo+Pj4+Pj4+IGNvbXBhbmlvbgo+Pj4+Pj4+IGNvbnRyb2xsZXIgaW5m
-b3JtYXRpb24sIGZyb20gdGhlIEVIQ0kgbm9kZS4gVGhpcyBhbGxvdyBtYXJraW5nIHRoZQo+Pj4+
-Pj4+IGNvbXBhbmlvbiBkcml2ZXIgYXMgc3VjaC4KPj4+Pj4+Pgo+Pj4+Pj4+IFdpdGggdGhpcyBw
-YXRjaCAoc2FtZSBsb3cgc3BlZWQgZGV2aWNlIHBsdWdnZWQgaW4pOgo+Pj4+Pj4+IFNUTTMyTVA+
-IHVzYiBzdGFydAo+Pj4+Pj4+IHN0YXJ0aW5nIFVTQi4uLgo+Pj4+Pj4+IEJ1cyB1c2JANTgwMGMw
-MDA6IFVTQiBPSENJIDEuMAo+Pj4+Pj4+IEJ1cyB1c2JANTgwMGQwMDA6IFVTQiBFSENJIDEuMDAK
-Pj4+Pj4+PiBzY2FubmluZyBidXMgdXNiQDU4MDBkMDAwIGZvciBkZXZpY2VzLi4uIDEgVVNCIERl
-dmljZShzKSBmb3VuZAo+Pj4+Pj4+IHNjYW5uaW5nIGJ1cyB1c2JANTgwMGMwMDAgZm9yIGRldmlj
-ZXMuLi4gMiBVU0IgRGV2aWNlKHMpIGZvdW5kCj4+Pj4+Pj4gIMKgwqDCoMKgwqAgc2Nhbm5pbmcg
-dXNiIGZvciBzdG9yYWdlIGRldmljZXMuLi4gMCBTdG9yYWdlIERldmljZShzKSBmb3VuZAo+Pj4+
-Pj4+IFNUTTMyTVA+IHVzYiB0cmVlCj4+Pj4+Pj4gVVNCIGRldmljZSB0cmVlOgo+Pj4+Pj4+IDHC
-oCBIdWIgKDEyIE1iL3MsIDBtQSkKPj4+Pj4+PiB8wqDCoCBVLUJvb3QgUm9vdCBIdWIKPj4+Pj4+
-PiB8Cj4+Pj4+Pj4gKy0ywqAgSHVtYW4gSW50ZXJmYWNlICgxLjUgTWIvcywgMTAwbUEpCj4+Pj4+
-Pj4gIMKgwqDCoMKgwqAgSFAgSFAgVVNCIDEwMDBkcGkgTGFzZXIgTW91c2UKPj4+Pj4+Pgo+Pj4+
-Pj4+IDHCoCBIdWIgKDQ4MCBNYi9zLCAwbUEpCj4+Pj4+Pj4gIMKgwqDCoCB1LWJvb3QgRUhDSSBI
-b3N0IENvbnRyb2xsZXIKPj4+Pj4+Pgo+Pj4+Pj4+IFRoaXMgYWxzbyBvcHRpbWl6ZSBidXMgc2Nh
-biB3aGVuIGEgSGlnaCBzcGVlZCBkZXZpY2UgaXMgcGx1Z2dlZAo+Pj4+Pj4+IGluLCBhcwo+Pj4+
-Pj4+IHRoZSB1c2ItdWNsYXNzIHNraXBzIE9IQ0kgaW4gdGhpcyBjYXNlOgo+Pj4+Pj4+Cj4+Pj4+
-Pj4gU1RNMzJNUD4gdXNiIHJlc2V0Cj4+Pj4+Pj4gcmVzZXR0aW5nIFVTQi4uLgo+Pj4+Pj4+IEJ1
-cyB1c2JANTgwMGMwMDA6IFVTQiBPSENJIDEuMAo+Pj4+Pj4+IEJ1cyB1c2JANTgwMGQwMDA6IFVT
-QiBFSENJIDEuMDAKPj4+Pj4+PiBzY2FubmluZyBidXMgdXNiQDU4MDBkMDAwIGZvciBkZXZpY2Vz
-Li4uIDIgVVNCIERldmljZShzKSBmb3VuZAo+Pj4+Pj4+ICDCoMKgwqDCoMKgIHNjYW5uaW5nIHVz
-YiBmb3Igc3RvcmFnZSBkZXZpY2VzLi4uIDEgU3RvcmFnZSBEZXZpY2UocykgZm91bmQKPj4+Pj4+
-PiBTVE0zMk1QPiB1c2IgdHJlZQo+Pj4+Pj4+IFVTQiBkZXZpY2UgdHJlZToKPj4+Pj4+PiAxwqAg
-SHViICg0ODAgTWIvcywgMG1BKQo+Pj4+Pj4+IHzCoCB1LWJvb3QgRUhDSSBIb3N0IENvbnRyb2xs
-ZXIKPj4+Pj4+PiB8Cj4+Pj4+Pj4gKy0ywqAgTWFzcyBTdG9yYWdlICg0ODAgTWIvcywgMjAwbUEp
-Cj4+Pj4+Pj4gIMKgwqDCoMKgwqAgU2FuRGlzayBDcnV6ZXIgQmxhZGUgMDMwMDM0MzIwMjE5MjIw
-MTE0MDcKPj4+Pj4+Pgo+Pj4+Pj4+IFNpZ25lZC1vZmYtYnk6IEZhYnJpY2UgR2FzbmllciA8ZmFi
-cmljZS5nYXNuaWVyQGZvc3Muc3QuY29tPgo+Pj4+Pj4+IC0tLQo+Pj4+Pj4+Cj4+Pj4+Pj4gQ2hh
-bmdlcyBpbiB2MjoKPj4+Pj4+PiAtIG1vdmUgY29tcGFuaW9uIHByb2JpbmcgZnJvbSBnZW5lcmlj
-IGVoY2kgZHJpdmVyIHRvIHVzYi11Y2xhc3MsCj4+Pj4+Pj4gYWZ0ZXIKPj4+Pj4+PiAgwqDCoMKg
-wqAgTWFyZWsncyBxdWVzdGlvbnMgb24gZGVzaWduIGNob2ljZS4KPj4+Pj4+PiAtIHJlbmFtZSBj
-b21taXQgdGl0bGUgdG8gZm9sbG93IHRoaXMgY2hhbmdlCj4+Pj4+Pj4KPj4+Pj4+PiAtLS0KPj4+
-Pj4+PiAgwqDCoMKgIGRyaXZlcnMvdXNiL2hvc3QvdXNiLXVjbGFzcy5jIHwgMzYKPj4+Pj4+PiAr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+Pj4+Pj4+ICDCoMKgwqAgMSBmaWxl
-IGNoYW5nZWQsIDM2IGluc2VydGlvbnMoKykKPj4+Pj4+Pgo+Pj4+Pj4+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL3VzYi9ob3N0L3VzYi11Y2xhc3MuYwo+Pj4+Pj4+IGIvZHJpdmVycy91c2IvaG9zdC91
-c2ItdWNsYXNzLmMKPj4+Pj4+PiBpbmRleCAwMmMwMTM4YTIwNjUuLmUyMzhlZWU4Yzg0ZCAxMDA2
-NDQKPj4+Pj4+PiAtLS0gYS9kcml2ZXJzL3VzYi9ob3N0L3VzYi11Y2xhc3MuYwo+Pj4+Pj4+ICsr
-KyBiL2RyaXZlcnMvdXNiL2hvc3QvdXNiLXVjbGFzcy5jCj4+Pj4+Pj4gQEAgLTI0OSw2ICsyNDks
-MzcgQEAgc3RhdGljIHZvaWQgcmVtb3ZlX2luYWN0aXZlX2NoaWxkcmVuKHN0cnVjdAo+Pj4+Pj4+
-IHVjbGFzcyAqdWMsIHN0cnVjdCB1ZGV2aWNlICpidXMpCj4+Pj4+Pj4gIMKgwqDCoMKgwqDCoMKg
-IH0KPj4+Pj4+PiAgwqDCoMKgIH0KPj4+Pj4+PiAgwqDCoMKgICtzdGF0aWMgaW50IHVzYl9wcm9i
-ZV9jb21wYW5pb24oc3RydWN0IHVkZXZpY2UgKmJ1cykKPj4+Pj4+PiArewo+Pj4+Pj4+ICvCoMKg
-wqAgc3RydWN0IHVkZXZpY2UgKmNvbXBhbmlvbl9kZXY7Cj4+Pj4+Pj4gK8KgwqDCoCBpbnQgcmV0
-Owo+Pj4+Pj4+ICsKPj4+Pj4+PiArwqDCoMKgIC8qCj4+Pj4+Pj4gK8KgwqDCoMKgICogRW5mb3Jj
-ZSBvcHRpb25hbCBjb21wYW5pb24gY29udHJvbGxlciBpcyBtYXJrZWQgYXMgc3VjaCBpbgo+Pj4+
-Pj4+IG9yZGVyIHRvCj4+Pj4+Pj4gK8KgwqDCoMKgICogMXN0IHNjYW4gdGhlIHByaW1hcnkgY29u
-dHJvbGxlciwgYmVmb3JlIHRoZSBjb21wYW5pb24KPj4+Pj4+PiBjb250cm9sbGVyCj4+Pj4+Pj4g
-K8KgwqDCoMKgICogKG93bmVyc2hpcCBpcyBnaXZlbiB0byBjb21wYW5pb24gd2hlbiBsb3cgb3Ig
-ZnVsbCBzcGVlZAo+Pj4+Pj4+IGRldmljZXMKPj4+Pj4+PiArwqDCoMKgwqAgKiBoYXZlIGJlZW4g
-ZGV0ZWN0ZWQpLgo+Pj4+Pj4+ICvCoMKgwqDCoCAqLwo+Pj4+Pj4+ICvCoMKgwqAgcmV0ID0gdWNs
-YXNzX2dldF9kZXZpY2VfYnlfcGhhbmRsZShVQ0xBU1NfVVNCLCBidXMsICJjb21wYW5pb24iLAo+
-Pj4+Pj4+ICZjb21wYW5pb25fZGV2KTsKPj4+Pj4+PiArwqDCoMKgIGlmICghcmV0KSB7Cj4+Pj4+
-Pj4gK8KgwqDCoMKgwqDCoMKgIHN0cnVjdCB1c2JfYnVzX3ByaXYgKmNvbXBhbmlvbl9idXNfcHJp
-djsKPj4+Pj4+PiArCj4+Pj4+Pj4gK8KgwqDCoMKgwqDCoMKgIGRlYnVnKCIlcyBpcyB0aGUgY29t
-cGFuaW9uIG9mICVzXG4iLCBjb21wYW5pb25fZGV2LT5uYW1lLAo+Pj4+Pj4+IGJ1cy0+bmFtZSk7
-Cj4+Pj4+Pj4gK8KgwqDCoMKgwqDCoMKgIGNvbXBhbmlvbl9idXNfcHJpdiA9IGRldl9nZXRfdWNs
-YXNzX3ByaXYoY29tcGFuaW9uX2Rldik7Cj4+Pj4+Pj4gK8KgwqDCoMKgwqDCoMKgIGNvbXBhbmlv
-bl9idXNfcHJpdi0+Y29tcGFuaW9uID0gdHJ1ZTsKPj4+Pj4+PiArwqDCoMKgIH0gZWxzZSBpZiAo
-cmV0ICYmIHJldCAhPSAtRU5PRU5UICYmIHJldCAhPSAtRU5PREVWKSB7Cj4+Pj4+Pj4gK8KgwqDC
-oMKgwqDCoMKgIC8qCj4+Pj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgKiBUcmVhdCBldmVyeXRoaW5n
-IGVsc2UgdGhhbiBubyBjb21wYW5pb24gb3IgZGlzYWJsZWQKPj4+Pj4+PiArwqDCoMKgwqDCoMKg
-wqDCoCAqIGNvbXBhbmlvbiBhcyBhbiBlcnJvci4gKEl0IG1heSBub3QgYmUgZW5hYmxlZCBvbiBi
-b2FyZHMKPj4+Pj4+PiArwqDCoMKgwqDCoMKgwqDCoCAqIHRoYXQgaGF2ZSBhIEhpZ2gtU3BlZWQg
-SFVCIHRvIGhhbmRsZSBGUyBhbmQgTFMgdHJhZmZpYykuCj4+Pj4+Pj4gK8KgwqDCoMKgwqDCoMKg
-wqAgKi8KPj4+Pj4+PiArwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJGYWlsZWQgdG8gZ2V0IGNvbXBh
-bmlvbiAocmV0PSVkKVxuIiwgcmV0KTsKPj4+Pj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHJl
-dDsKPj4+Pj4+PiArwqDCoMKgIH0KPj4+Pj4+PiArCj4+Pj4+Pj4gK8KgwqDCoCByZXR1cm4gMDsK
-Pj4+Pj4+PiArfQo+Pj4+Pj4+ICsKPj4+Pj4+PiAgwqDCoMKgIGludCB1c2JfaW5pdCh2b2lkKQo+
-Pj4+Pj4+ICDCoMKgwqAgewo+Pj4+Pj4+ICDCoMKgwqDCoMKgwqDCoCBpbnQgY29udHJvbGxlcnNf
-aW5pdGlhbGl6ZWQgPSAwOwo+Pj4+Pj4+IEBAIC0yOTksNiArMzMwLDExIEBAIGludCB1c2JfaW5p
-dCh2b2lkKQo+Pj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcHJpbnRmKCJw
-cm9iZSBmYWlsZWQsIGVycm9yICVkXG4iLCByZXQpOwo+Pj4+Pj4+ICDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgY29udGludWU7Cj4+Pj4+Pj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-fQo+Pj4+Pj4+ICsKPj4+Pj4+PiArwqDCoMKgwqDCoMKgwqAgcmV0ID0gdXNiX3Byb2JlX2NvbXBh
-bmlvbihidXMpOwo+Pgo+PiBPbmUgbW9yZSB0aGluZywgc2hvdWxkbid0IHRoaXMgZG8KPj4KPj4g
-aWYgKHJldCkKPj4gIMKgIGNvbnRpbnVlOwo+Pgo+PiBmb3IgbWF4aW11bSBjb21wYXRpYmlsaXR5
-ID8KPiAKPiBJIHRoaW5rIGl0IGRvZXMgOi0pIE9yIEkgbWlzcyB5b3VyIHF1ZXN0aW9uIGhlcmUs
-IGNvdWxkIHlvdSBjbGFyaWZ5ID8KPiAKPiBJbiB0aGUgb3JpZ2luYWwgUEFUQ0ggdGhlcmUgaXM6
-Cj4gKwo+ICsJCXJldCA9IHVzYl9wcm9iZV9jb21wYW5pb24oYnVzKTsKPiArCQlpZiAocmV0KQo+
-ICsJCQljb250aW51ZTsKPiArCgpUaGVuIGFsbCBpcyBPSywgdGhhbmtzLiBUaGUgbWlzc2luZyBj
-b250ZXh0IGNvbmZ1c2VkIG1lLgoKQnV0IHNpbmNlIHJjNCB3YXMganVzdCB0YWdnZWQsIEknbGwg
-YmUgcHV0dGluZyB0aGlzIGludG8gbmV4dCwgd2UncmUgdG9vIApjbG9zZSB0byB0aGUgcmVsZWFz
-ZS4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qt
-c3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8v
-dWJvb3Qtc3RtMzIK
+El Mon, Sep 04, 2023 at 11:25:06AM +0200, Fabrice Gasnier deia:
+> 
+> IMHO, the OHCI should have failed too in this example, instead of
+> silently ignoring the error. Hopefully it has probed.
+>
+> The clk_get_bulk() code does a similar job compared to ohci current
+> code. It counts all clock entries. So, when trying to get them, these
+> should be found.
+> 
+> Having a clock listed, but it can't be found or taken rather looks like
+> a real error, that needs to be fixed.
+> (e.g. missing config for a clk/reset controller ? Or could it be a bug
+> in such a driver ? Or a miss-configured device-tree ? something else?)
+> Ignoring such error may be miss-leading (as you pointed out, one was
+> working).
+> 
+> I hope I don't miss your point. If this is the case, could you point
+> more precise example, or how it used to fail ?
+>
+
+No, you don't miss my point. I'll give you pointers to the case I
+meant, but I'm afraid it might mislead, because it's already solved,
+and for current U-Boot it should pose no problem with or without your
+patch.
+
+The general problem might be that dts come from linux, and the drivers
+come from U-Boot, so U-Boot might ignore some hardware described in
+the linux dts that it doesn't need. Now this is more typical for, say,
+a VPU than a clock or reset. But it once was a missing clock driver in
+U-Boot that linux used for suspend/resume and happened to be at the
+end of the clock list. So it worked when ohci probe ignored the missing
+clock, because U-Boot doesn't need suspend, but it didn't work for ehci
+that called clk_get_bulk().
+
+There might be other cases like that example somewhere, but I'm not
+saying it's likely. I guess we'll know if some board breaks.
+
+
+If you really want the gory details...
+
+https://patchwork.ozlabs.org/project/uboot/patch/20220701185959.GC1700@begut/
+https://patchwork.ozlabs.org/project/uboot/patch/Y44+ayJfUlI08ptM@localhost/
+https://patchwork.ozlabs.org/project/uboot/patch/Y5IWpjYLB4aXMy9o@localhost/
+https://lists.denx.de/pipermail/u-boot/2022-December/501811.html
+https://lists.denx.de/pipermail/u-boot/2023-February/510676.html
+https://lists.denx.de/pipermail/u-boot/2023-February/510678.html
+https://patchwork.ozlabs.org/project/uboot/patch/202013db5a47ecbac4a53c360ed1ca91ca663996.1685974993.git.xdrudis@tinet.cat/
+https://patchwork.ozlabs.org/project/uboot/patch/464111fca83008503022e8ada5305e69ffd1afbd.1685974993.git.xdrudis@tinet.cat/
+
+
+> > In that case, a fix by ignoring the missing clock
+> > in ehci was rejected, so maybe that criteria applies here as well and
+> > your patch is deemed correct. I don't know. That case won't break now,
+> > I think, either with or without your patch, because after another fix,
+> > that clock will be found.
+> 
+> If I understand correctly, this used to fixed elsewhere (e.g. there used
+> to be a real bug fixed) ?
+>
+
+Yes. See above. Or don't, it's not that important.
+A clock driver was missing, only needed for suspend/resume.
+ohci ignored it and worked (U-Boot doesn't suspend)
+ehci failed probing and dind't work.
+Current situation is this particular clock driver is no longer missing.
+
+> > But I don't know if there might be similar
+> > cases.
+> > 
+> > I just wanted to point out the change in behaviour. If the change is
+> > intended, then all is fine.
+> 
+> IMHO, this should be fine. I hope you agree with this change and the
+> rationale.
+>
+
+I do.
+
+I just wanted to point it out in case anyone knew why ohci wasn't
+calling clk_get_bulk(). It might have been on purpose.
+
+In fact Kever Yang once proposed to change ehci to be tolerant to a
+missing clock like ohci was (but with an explicit warning). But Marek
+Vasut proposed adding a clock driver and Kever didn't complain, so I
+don't think this is his very strong opinion, he may just be happy when
+things work and others are happy, I can't read minds.
+
+https://lists.denx.de/pipermail/u-boot/2022-December/501811.html
+
+FWIW
+
+ohci_probe introduced:
+fee331f66c9 (Alexey Brodkin   2015-12-14 17:18:50 +0300 
+
+loop for clocks introduced in ohci_probe:
+155d9f65d3b (Patrice Chotard  2017-07-18 11:57:12 +0200 
+
+clk_get_bulk introduced:
+a855be87da4 (Neil Armstrong      2018-04-03 11:44:18 +0200 156)
+
+So ochi_probe() didn't call clk_get_bulk() most likely because it
+din't exist back then.
+
+So, unless someone else has a failing case, I agree to your change.
+
+I'd welcome if the commit message would say that the new policy is any
+missing clocks or resets cause the probe to fail. But since you
+already sent v2, it doesn't matter.
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

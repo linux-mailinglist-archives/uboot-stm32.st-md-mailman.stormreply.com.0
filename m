@@ -2,62 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C6B579221F
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CF0A792220
 	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Sep 2023 13:29:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33C31C6B454;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E395C6B458;
 	Tue,  5 Sep 2023 11:29:49 +0000 (UTC)
-Received: from mx1.tinet.cat (mx1.tinet.org [195.77.216.146])
+Received: from mx1.tinet.cat (smtp.altanet.org [195.76.233.59])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4BE92C6A615
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 71AE4C6B454
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  4 Sep 2023 12:48:39 +0000 (UTC)
-X-ASG-Debug-ID: 1693831717-163e7b47e046ee50001-idqh3N
+ Mon,  4 Sep 2023 14:43:06 +0000 (UTC)
+X-ASG-Debug-ID: 1693838585-12aaf213d6514bd0001-idqh3N
 Received: from smtp01.tinet.cat (smtp01.tinet.org [195.77.216.131]) by
- mx1.tinet.cat with ESMTP id Kv5cbQ4KDN97gTlc;
- Mon, 04 Sep 2023 14:48:37 +0200 (CEST)
+ mx1.tinet.cat with ESMTP id tqZEIM5bXMlUm0dD;
+ Mon, 04 Sep 2023 16:43:05 +0200 (CEST)
 X-Barracuda-Envelope-From: xdrudis@tinet.cat
 X-Barracuda-Effective-Source-IP: smtp01.tinet.org[195.77.216.131]
 X-Barracuda-Apparent-Source-IP: 195.77.216.131
 Received: from xdrudis.tinet.cat (42.red-79-152-186.dynamicip.rima-tde.net
  [79.152.186.42])
- by smtp01.tinet.cat (Postfix) with ESMTPSA id 948FD605D080;
- Mon,  4 Sep 2023 14:48:37 +0200 (CEST)
-Date: Mon, 4 Sep 2023 14:48:26 +0200
+ by smtp01.tinet.cat (Postfix) with ESMTPSA id 0A581605D080;
+ Mon,  4 Sep 2023 16:43:05 +0200 (CEST)
+Date: Mon, 4 Sep 2023 16:42:54 +0200
 From: Xavier Drudis Ferran <xdrudis@tinet.cat>
 To: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-Message-ID: <ZPXSGkf+vdXlIbVq@xdrudis.tinet.cat>
-X-ASG-Orig-Subj: Re: [PATCH] usb: host: ohci-generic: Make usage of clock/reset
- bulk() API
-References: <20230830080150.473374-1-fabrice.gasnier@foss.st.com>
- <ZPL7DAQfE3WxCFa+@xdrudis.tinet.cat>
- <428ea549-1092-fb39-15e1-10f2284691e8@foss.st.com>
+Message-ID: <ZPXs3v7NVClBt3ey@xdrudis.tinet.cat>
+X-ASG-Orig-Subj: Re: [PATCH v2] usb: host: ohci-generic: Make usage of
+ clock/reset bulk() API
+References: <20230904122021.2088429-1-fabrice.gasnier@foss.st.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <428ea549-1092-fb39-15e1-10f2284691e8@foss.st.com>
+In-Reply-To: <20230904122021.2088429-1-fabrice.gasnier@foss.st.com>
 X-Barracuda-Connect: smtp01.tinet.org[195.77.216.131]
-X-Barracuda-Start-Time: 1693831717
+X-Barracuda-Start-Time: 1693838585
 X-Barracuda-URL: https://webmail.tinet.cat:443/cgi-mod/mark.cgi
 X-Virus-Scanned: by bsmtpd at tinet.cat
-X-Barracuda-Scan-Msg-Size: 4602
+X-Barracuda-Scan-Msg-Size: 4904
 X-Barracuda-BRTS-Status: 1
-X-Barracuda-Bayes: INNOCENT GLOBAL 0.8822 1.0000 3.0378
-X-Barracuda-Spam-Score: 3.64
-X-Barracuda-Spam-Status: No, SCORE=3.64 using global scores of TAG_LEVEL=1000.0
+X-Barracuda-Bayes: INNOCENT GLOBAL 0.2540 1.0000 -0.5561
+X-Barracuda-Spam-Score: 0.04
+X-Barracuda-Spam-Status: No, SCORE=0.04 using global scores of TAG_LEVEL=1000.0
  QUARANTINE_LEVEL=6.0 KILL_LEVEL=8.0 tests=MARKETING_SUBJECT
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.113652
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.113655
  Rule breakdown below
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.60 MARKETING_SUBJECT      Subject contains popular marketing words
 X-Mailman-Approved-At: Tue, 05 Sep 2023 11:29:47 +0000
-Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Xavier Drudis Ferran <xdrudis@tinet.cat>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH] usb: host: ohci-generic: Make usage of
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH v2] usb: host: ohci-generic: Make usage of
  clock/reset bulk() API
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -75,115 +71,164 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-El Mon, Sep 04, 2023 at 11:25:06AM +0200, Fabrice Gasnier deia:
+El Mon, Sep 04, 2023 at 02:20:21PM +0200, Fabrice Gasnier deia:
+> Make usage of clock and reset bulk API in order to simplify the code
 > 
-> IMHO, the OHCI should have failed too in this example, instead of
-> silently ignoring the error. Hopefully it has probed.
->
-> The clk_get_bulk() code does a similar job compared to ohci current
-> code. It counts all clock entries. So, when trying to get them, these
-> should be found.
+> Reviewed-by: Marek Vasut <marex@denx.de>
+
+Reviewed-by: Xavier Drudis Ferran <xdrudis@tinet.cat>
+
+Sorry. I don't know why I used the wrong address before.
+
+> Signed-off-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+> ---
 > 
-> Having a clock listed, but it can't be found or taken rather looks like
-> a real error, that needs to be fixed.
-> (e.g. missing config for a clk/reset controller ? Or could it be a bug
-> in such a driver ? Or a miss-configured device-tree ? something else?)
-> Ignoring such error may be miss-leading (as you pointed out, one was
-> working).
+> Changes in v2:
+> - fix copy/paste on dev_err message since Marek's review comment
+> - add Marek's review tag
 > 
-> I hope I don't miss your point. If this is the case, could you point
-> more precise example, or how it used to fail ?
->
-
-No, you don't miss my point. I'll give you pointers to the case I
-meant, but I'm afraid it might mislead, because it's already solved,
-and for current U-Boot it should pose no problem with or without your
-patch.
-
-The general problem might be that dts come from linux, and the drivers
-come from U-Boot, so U-Boot might ignore some hardware described in
-the linux dts that it doesn't need. Now this is more typical for, say,
-a VPU than a clock or reset. But it once was a missing clock driver in
-U-Boot that linux used for suspend/resume and happened to be at the
-end of the clock list. So it worked when ohci probe ignored the missing
-clock, because U-Boot doesn't need suspend, but it didn't work for ehci
-that called clk_get_bulk().
-
-There might be other cases like that example somewhere, but I'm not
-saying it's likely. I guess we'll know if some board breaks.
-
-
-If you really want the gory details...
-
-https://patchwork.ozlabs.org/project/uboot/patch/20220701185959.GC1700@begut/
-https://patchwork.ozlabs.org/project/uboot/patch/Y44+ayJfUlI08ptM@localhost/
-https://patchwork.ozlabs.org/project/uboot/patch/Y5IWpjYLB4aXMy9o@localhost/
-https://lists.denx.de/pipermail/u-boot/2022-December/501811.html
-https://lists.denx.de/pipermail/u-boot/2023-February/510676.html
-https://lists.denx.de/pipermail/u-boot/2023-February/510678.html
-https://patchwork.ozlabs.org/project/uboot/patch/202013db5a47ecbac4a53c360ed1ca91ca663996.1685974993.git.xdrudis@tinet.cat/
-https://patchwork.ozlabs.org/project/uboot/patch/464111fca83008503022e8ada5305e69ffd1afbd.1685974993.git.xdrudis@tinet.cat/
-
-
-> > In that case, a fix by ignoring the missing clock
-> > in ehci was rejected, so maybe that criteria applies here as well and
-> > your patch is deemed correct. I don't know. That case won't break now,
-> > I think, either with or without your patch, because after another fix,
-> > that clock will be found.
+> ---
+>  drivers/usb/host/ohci-generic.c | 92 +++++++++++----------------------
+>  1 file changed, 29 insertions(+), 63 deletions(-)
 > 
-> If I understand correctly, this used to fixed elsewhere (e.g. there used
-> to be a real bug fixed) ?
->
-
-Yes. See above. Or don't, it's not that important.
-A clock driver was missing, only needed for suspend/resume.
-ohci ignored it and worked (U-Boot doesn't suspend)
-ehci failed probing and dind't work.
-Current situation is this particular clock driver is no longer missing.
-
-> > But I don't know if there might be similar
-> > cases.
-> > 
-> > I just wanted to point out the change in behaviour. If the change is
-> > intended, then all is fine.
+> diff --git a/drivers/usb/host/ohci-generic.c b/drivers/usb/host/ohci-generic.c
+> index 2d8d38ce9a40..ceed1911a95a 100644
+> --- a/drivers/usb/host/ohci-generic.c
+> +++ b/drivers/usb/host/ohci-generic.c
+> @@ -16,75 +16,41 @@
+>  
+>  struct generic_ohci {
+>  	ohci_t ohci;
+> -	struct clk *clocks;	/* clock list */
+> -	struct reset_ctl *resets; /* reset list */
+> +	struct clk_bulk clocks;	/* clock list */
+> +	struct reset_ctl_bulk resets; /* reset list */
+>  	struct phy phy;
+> -	int clock_count;	/* number of clock in clock list */
+> -	int reset_count;	/* number of reset in reset list */
+>  };
+>  
+>  static int ohci_usb_probe(struct udevice *dev)
+>  {
+>  	struct ohci_regs *regs = dev_read_addr_ptr(dev);
+>  	struct generic_ohci *priv = dev_get_priv(dev);
+> -	int i, err, ret, clock_nb, reset_nb;
+> -
+> -	err = 0;
+> -	priv->clock_count = 0;
+> -	clock_nb = dev_count_phandle_with_args(dev, "clocks", "#clock-cells",
+> -					       0);
+> -	if (clock_nb > 0) {
+> -		priv->clocks = devm_kcalloc(dev, clock_nb, sizeof(struct clk),
+> -					    GFP_KERNEL);
+> -		if (!priv->clocks)
+> -			return -ENOMEM;
+> -
+> -		for (i = 0; i < clock_nb; i++) {
+> -			err = clk_get_by_index(dev, i, &priv->clocks[i]);
+> -			if (err < 0)
+> -				break;
+> -
+> -			err = clk_enable(&priv->clocks[i]);
+> -			if (err && err != -ENOSYS) {
+> -				dev_err(dev, "failed to enable clock %d\n", i);
+> -				clk_free(&priv->clocks[i]);
+> -				goto clk_err;
+> -			}
+> -			priv->clock_count++;
+> -		}
+> -	} else if (clock_nb != -ENOENT) {
+> -		dev_err(dev, "failed to get clock phandle(%d)\n", clock_nb);
+> -		return clock_nb;
+> +	int err, ret;
+> +
+> +	ret = clk_get_bulk(dev, &priv->clocks);
+> +	if (ret && ret != -ENOENT) {
+> +		dev_err(dev, "Failed to get clocks (ret=%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	err = clk_enable_bulk(&priv->clocks);
+> +	if (err) {
+> +		dev_err(dev, "Failed to enable clocks (err=%d)\n", err);
+> +		goto clk_err;
+>  	}
+>  
+> -	priv->reset_count = 0;
+> -	reset_nb = dev_count_phandle_with_args(dev, "resets", "#reset-cells",
+> -					       0);
+> -	if (reset_nb > 0) {
+> -		priv->resets = devm_kcalloc(dev, reset_nb,
+> -					    sizeof(struct reset_ctl),
+> -					    GFP_KERNEL);
+> -		if (!priv->resets)
+> -			return -ENOMEM;
+> -
+> -		for (i = 0; i < reset_nb; i++) {
+> -			err = reset_get_by_index(dev, i, &priv->resets[i]);
+> -			if (err < 0)
+> -				break;
+> -
+> -			err = reset_deassert(&priv->resets[i]);
+> -			if (err) {
+> -				dev_err(dev, "failed to deassert reset %d\n", i);
+> -				reset_free(&priv->resets[i]);
+> -				goto reset_err;
+> -			}
+> -			priv->reset_count++;
+> -		}
+> -	} else if (reset_nb != -ENOENT) {
+> -		dev_err(dev, "failed to get reset phandle(%d)\n", reset_nb);
+> +	err = reset_get_bulk(dev, &priv->resets);
+> +	if (err && err != -ENOENT) {
+> +		dev_err(dev, "failed to get resets (err=%d)\n", err);
+>  		goto clk_err;
+>  	}
+>  
+> +	err = reset_deassert_bulk(&priv->resets);
+> +	if (err) {
+> +		dev_err(dev, "failed to deassert resets (err=%d)\n", err);
+> +		goto reset_err;
+> +	}
+> +
+>  	err = generic_setup_phy(dev, &priv->phy, 0);
+>  	if (err)
+>  		goto reset_err;
+> @@ -101,13 +67,13 @@ phy_err:
+>  		dev_err(dev, "failed to shutdown usb phy\n");
+>  
+>  reset_err:
+> -	ret = reset_release_all(priv->resets, priv->reset_count);
+> +	ret = reset_release_bulk(&priv->resets);
+>  	if (ret)
+> -		dev_err(dev, "failed to assert all resets\n");
+> +		dev_err(dev, "failed to release resets (ret=%d)\n", ret);
+>  clk_err:
+> -	ret = clk_release_all(priv->clocks, priv->clock_count);
+> +	ret = clk_release_bulk(&priv->clocks);
+>  	if (ret)
+> -		dev_err(dev, "failed to disable all clocks\n");
+> +		dev_err(dev, "failed to release clocks (ret=%d)\n", ret);
+>  
+>  	return err;
+>  }
+> @@ -125,11 +91,11 @@ static int ohci_usb_remove(struct udevice *dev)
+>  	if (ret)
+>  		return ret;
+>  
+> -	ret = reset_release_all(priv->resets, priv->reset_count);
+> +	ret = reset_release_bulk(&priv->resets);
+>  	if (ret)
+>  		return ret;
+>  
+> -	return clk_release_all(priv->clocks, priv->clock_count);
+> +	return clk_release_bulk(&priv->clocks);
+>  }
+>  
+>  static const struct udevice_id ohci_usb_ids[] = {
+> -- 
+> 2.25.1
 > 
-> IMHO, this should be fine. I hope you agree with this change and the
-> rationale.
->
-
-I do.
-
-I just wanted to point it out in case anyone knew why ohci wasn't
-calling clk_get_bulk(). It might have been on purpose.
-
-In fact Kever Yang once proposed to change ehci to be tolerant to a
-missing clock like ohci was (but with an explicit warning). But Marek
-Vasut proposed adding a clock driver and Kever didn't complain, so I
-don't think this is his very strong opinion, he may just be happy when
-things work and others are happy, I can't read minds.
-
-https://lists.denx.de/pipermail/u-boot/2022-December/501811.html
-
-FWIW
-
-ohci_probe introduced:
-fee331f66c9 (Alexey Brodkin   2015-12-14 17:18:50 +0300 
-
-loop for clocks introduced in ohci_probe:
-155d9f65d3b (Patrice Chotard  2017-07-18 11:57:12 +0200 
-
-clk_get_bulk introduced:
-a855be87da4 (Neil Armstrong      2018-04-03 11:44:18 +0200 156)
-
-So ochi_probe() didn't call clk_get_bulk() most likely because it
-din't exist back then.
-
-So, unless someone else has a failing case, I agree to your change.
-
-I'd welcome if the commit message would say that the new policy is any
-missing clocks or resets cause the probe to fail. But since you
-already sent v2, it doesn't matter.
-
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

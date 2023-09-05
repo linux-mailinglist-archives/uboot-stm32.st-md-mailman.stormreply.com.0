@@ -2,19 +2,19 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11EC7793557
+	by mail.lfdr.de (Postfix) with ESMTPS id 16720793558
 	for <lists+uboot-stm32@lfdr.de>; Wed,  6 Sep 2023 08:31:18 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B8D10C6C82C;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C71CAC6C82E;
 	Wed,  6 Sep 2023 06:31:17 +0000 (UTC)
 Received: from st-md-mailman.stormreply.com (unknown [62.232.119.198])
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 69CBAC6B44E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5048CC6B44E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  5 Sep 2023 20:26:32 +0000 (UTC)
+ Tue,  5 Sep 2023 21:39:20 +0000 (UTC)
 From: Mail Server <uboot-stm32@st-md-mailman.stormreply.com>
 To: uboot-stm32@st-md-mailman.stormreply.com
-Date: 5 Sep 2023 21:26:32 +0100
-Message-ID: <20230905212632.33D3179CA9CC8ECB@st-md-mailman.stormreply.com>
+Date: 5 Sep 2023 22:39:20 +0100
+Message-ID: <20230905223920.835205F95BD802E3@st-md-mailman.stormreply.com>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 06 Sep 2023 06:31:13 +0000
 Subject: [Uboot-stm32] uboot-stm32@st-md-mailman.stormreply.com Account
@@ -30,11 +30,11 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============5840898959692404076=="
+Content-Type: multipart/mixed; boundary="===============8799811212584715190=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============5840898959692404076==
+--===============8799811212584715190==
 Content-Type: text/html;
 	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -186,7 +186,7 @@ le></td></tr></tbody></table><p>
 
 </body></html>
 
---===============5840898959692404076==
+--===============8799811212584715190==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -197,4 +197,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============5840898959692404076==--
+--===============8799811212584715190==--

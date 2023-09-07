@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3AE6579A4B1
+	by mail.lfdr.de (Postfix) with ESMTPS id 4248A79A4B2
 	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Sep 2023 09:42:35 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BBC3BC6B47E;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4A7AC6C820;
 	Mon, 11 Sep 2023 07:42:34 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2ECC6C6B45F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0372DC6B45F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
  Thu,  7 Sep 2023 16:23:48 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 387D6MRg016966; Thu, 7 Sep 2023 18:23:46 +0200
+ 387DvlZ5026354; Thu, 7 Sep 2023 18:23:47 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-type:content-transfer-encoding; s=
- selector1; bh=T8573c3HBH92ibmJ2izs7LETxnDG3vPNIRKGvKErz9g=; b=ip
- MAK68eWp8z/f9Eze4/1DJ6LC4zMEX37vsXzQLvavSlPrXdRp8vbJ4E9y4+t6ovAp
- YdqBsMWWHK897vIyx1VXDqGijNhf/blyAmt8fi7lZGIkcGfzJ2Y0So57FQeyhplN
- kV7w7q28a0tdKjpK+JwE2GJPVhHKF3uO5Ba2PcuQyhw/MQ8lL/acim3CfG8u8WFY
- P/5TuqnYYxMcmJZlYokKWzLvj93a3pn6kqeQ9ZKfKztGpe3KBRbkXwNfqqXyDFum
- ++EkKGChMlNrk7Wcvim5seDa9Bg/0ji0XvgSDCdRCZlZjdhJ8yHp576Z74xBTvT1
- hcWjoSa6po1fdcbWhLYA==
+ :mime-version:content-transfer-encoding:content-type; s=
+ selector1; bh=MUgfO4R7uZEvA1UaGA3j3fwInsg2jwmCp7b0UNTLUGM=; b=xj
+ z0XYzNowIN4YQkGND0MHSkDAyFxfbqXja/Q+i6mWIif2omAb50KM5rgBb5pDJrhP
+ G9hPImr1X7dSKumiXdGLTy3GWXuk3nI8P7huEvmkuIM0xrPOhxOEoIB1RlmLdRHa
+ iN4uiwxDMVkphWHk3TqzhbT0LNW6C6hdtUecQoJxcd9KXwwsgpv/Pb5r8nb0FX+Y
+ U7qKwyT+RNwPaXS3uRqnV80j1FV4Lpa9ftfok8fcoYSyyqQmHTF+r6iDjrJM3Kix
+ o/DysFopg+qb71OiIWQ2K63umbukHUl2QdY2a1xJ9skliZgZUHqxZyF7kBS57fZP
+ sTBPufg6FzhgEyKnEbSg==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sutffq2bq-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3svem0vrrs-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 07 Sep 2023 18:23:46 +0200 (MEST)
+ Thu, 07 Sep 2023 18:23:47 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 75F5F100056;
- Thu,  7 Sep 2023 18:23:46 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2A3A810005D;
+ Thu,  7 Sep 2023 18:23:47 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6AC9D21161D;
- Thu,  7 Sep 2023 18:23:46 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1E9D921161E;
+ Thu,  7 Sep 2023 18:23:47 +0200 (CEST)
 Received: from localhost (10.201.20.32) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Thu, 7 Sep
  2023 18:23:46 +0200
 From: Gatien Chevallier <gatien.chevallier@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Thu, 7 Sep 2023 18:21:58 +0200
-Message-ID: <20230907162200.205602-5-gatien.chevallier@foss.st.com>
+Date: Thu, 7 Sep 2023 18:21:59 +0200
+Message-ID: <20230907162200.205602-6-gatien.chevallier@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
 References: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
@@ -60,7 +60,8 @@ Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [Uboot-stm32] [PATCH 5/7] rng: stm32: add error concealment sequence
+Subject: [Uboot-stm32] [PATCH 6/7] rng: stm32: Implement custom RNG
+	configuration support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,123 +73,160 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-U2VlZCBlcnJvcnMgY2FuIG9jY3VyIHdoZW4gdXNpbmcgdGhlIGhhcmR3YXJlIFJORy4gSW1wbGVt
-ZW50IHRoZQpzZXF1ZW5jZXMgdG8gaGFuZGxlIHRoZW0uIFRoaXMgYXZvaWRzIGlycmVjb3ZlcmFi
-bGUgUk5HIHN0YXRlLgoKVHJ5IHRvIGNvbmNlYWwgc2VlZCBlcnJvcnMgd2hlbiBwb3NzaWJsZS4g
-SWYsIGRlc3BpdGUgdGhlIGVycm9yCmNvbmNlYWxpbmcgdHJpZXMsIGEgc2VlZCBlcnJvciBpcyBz
-dGlsbCBwcmVzZW50LCB0aGVuIHJldHVybiBhbiBlcnJvci4KCkEgY2xvY2sgZXJyb3IgZG9lcyBu
-b3QgY29tcHJvbWlzZSB0aGUgaGFyZHdhcmUgYmxvY2sgYW5kIGRhdGEgY2FuCnN0aWxsIGJlIHJl
-YWQgZnJvbSBSTkdfRFIuIEp1c3Qgd2FybiB0aGF0IHRoZSBSTkcgY2xvY2sgaXMgdG9vIHNsb3cK
-YW5kIGNsZWFyIFJOR19TUi4KClNpZ25lZC1vZmYtYnk6IEdhdGllbiBDaGV2YWxsaWVyIDxnYXRp
-ZW4uY2hldmFsbGllckBmb3NzLnN0LmNvbT4KLS0tCiBkcml2ZXJzL3JuZy9zdG0zMl9ybmcuYyB8
-IDE2MyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tCiAxIGZpbGUgY2hh
-bmdlZCwgMTQwIGluc2VydGlvbnMoKyksIDIzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvcm5nL3N0bTMyX3JuZy5jIGIvZHJpdmVycy9ybmcvc3RtMzJfcm5nLmMKaW5kZXggZjk0
-M2FjZDdkMi4uYjFhNzkwYjIxNyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ybmcvc3RtMzJfcm5nLmMK
-KysrIGIvZHJpdmVycy9ybmcvc3RtMzJfcm5nLmMKQEAgLTMyLDYgKzMyLDggQEAKIAogI2RlZmlu
-ZSBSTkdfRFIJCTB4MDgKIAorI2RlZmluZSBSTkdfTkJfUkVDT1ZFUl9UUklFUwkzCisKIC8qCiAg
-KiBzdHJ1Y3Qgc3RtMzJfcm5nX2RhdGEgLSBSTkcgY29tcGF0IGRhdGEKICAqCkBAIC01Miw0NSAr
-NTQsMTYwIEBAIHN0cnVjdCBzdG0zMl9ybmdfcGxhdCB7CiAJYm9vbCBjZWQ7CiB9OwogCisvKgor
-ICogRXh0cmFjdHMgZnJvbSB0aGUgU1RNMzIgUk5HIHNwZWNpZmljYXRpb24gd2hlbiBSTkcgc3Vw
-cG9ydHMgQ09ORFJTVC4KKyAqCisgKiBXaGVuIGEgbm9pc2Ugc291cmNlIChvciBzZWVkKSBlcnJv
-ciBvY2N1cnMsIHRoZSBSTkcgc3RvcHMgZ2VuZXJhdGluZworICogcmFuZG9tIG51bWJlcnMgYW5k
-IHNldHMgdG8g4oCcMeKAnSBib3RoIFNFSVMgYW5kIFNFQ1MgYml0cyB0byBpbmRpY2F0ZQorICog
-dGhhdCBhIHNlZWQgZXJyb3Igb2NjdXJyZWQuICguLi4pCisgKgorICogMS4gU29mdHdhcmUgcmVz
-ZXQgYnkgd3JpdGluZyBDT05EUlNUIGF0IDEgYW5kIGF0IDAgKHNlZSBiaXRmaWVsZAorICogZGVz
-Y3JpcHRpb24gZm9yIGRldGFpbHMpLiBUaGlzIHN0ZXAgaXMgbmVlZGVkIG9ubHkgaWYgU0VDUyBp
-cyBzZXQuCisgKiBJbmRlZWQsIHdoZW4gU0VJUyBpcyBzZXQgYW5kIFNFQ1MgaXMgY2xlYXJlZCBp
-dCBtZWFucyBSTkcgcGVyZm9ybWVkCisgKiB0aGUgcmVzZXQgYXV0b21hdGljYWxseSAoYXV0by1y
-ZXNldCkuCisgKiAyLiBJZiBTRUNTIHdhcyBzZXQgaW4gc3RlcCAxIChubyBhdXRvLXJlc2V0KSB3
-YWl0IGZvciBDT05EUlNUCisgKiB0byBiZSBjbGVhcmVkIGluIHRoZSBSTkdfQ1IgcmVnaXN0ZXIs
-IHRoZW4gY29uZmlybSB0aGF0IFNFSVMgaXMKKyAqIGNsZWFyZWQgaW4gdGhlIFJOR19TUiByZWdp
-c3Rlci4gT3RoZXJ3aXNlIGp1c3QgY2xlYXIgU0VJUyBiaXQgaW4KKyAqIHRoZSBSTkdfU1IgcmVn
-aXN0ZXIuCisgKiAzLiBJZiBTRUNTIHdhcyBzZXQgaW4gc3RlcCAxIChubyBhdXRvLXJlc2V0KSB3
-YWl0IGZvciBTRUNTIHRvIGJlCisgKiBjbGVhcmVkIGJ5IFJORy4gVGhlIHJhbmRvbSBudW1iZXIg
-Z2VuZXJhdGlvbiBpcyBub3cgYmFjayB0byBub3JtYWwuCisgKi8KK3N0YXRpYyBpbnQgc3RtMzJf
-cm5nX2NvbmNlYWxfc2VlZF9lcnJvcl9jb25kX3Jlc2V0KHN0cnVjdCBzdG0zMl9ybmdfcGxhdCAq
-cGRhdGEpCit7CisJdTMyIHNyID0gcmVhZGxfcmVsYXhlZChwZGF0YS0+YmFzZSArIFJOR19TUik7
-CisJdTMyIGNyID0gcmVhZGxfcmVsYXhlZChwZGF0YS0+YmFzZSArIFJOR19DUik7CisJaW50IGVy
-cjsKKworCWlmIChzciAmIFJOR19TUl9TRUNTKSB7CisJCS8qIENvbmNlYWwgYnkgcmVzZXR0aW5n
-IHRoZSBzdWJzeXN0ZW0gKHN0ZXAgMS4pICovCisJCXdyaXRlbF9yZWxheGVkKGNyIHwgUk5HX0NS
-X0NPTkRSU1QsIHBkYXRhLT5iYXNlICsgUk5HX0NSKTsKKwkJd3JpdGVsX3JlbGF4ZWQoY3IgJiB+
-Uk5HX0NSX0NPTkRSU1QsIHBkYXRhLT5iYXNlICsgUk5HX0NSKTsKKwl9IGVsc2UgeworCQkvKiBS
-TkcgYXV0by1yZXNldCAoc3RlcCAyLikgKi8KKwkJd3JpdGVsX3JlbGF4ZWQoc3IgJiB+Uk5HX1NS
-X1NFSVMsIHBkYXRhLT5iYXNlICsgUk5HX1NSKTsKKwkJcmV0dXJuIDA7CisJfQorCisJZXJyID0g
-cmVhZGxfcmVsYXhlZF9wb2xsX3RpbWVvdXQocGRhdGEtPmJhc2UgKyBSTkdfU1IsIHNyLCAhKHNy
-ICYgUk5HX0NSX0NPTkRSU1QpLCAxMDAwMDApOworCWlmIChlcnIpIHsKKwkJbG9nX2VycigiJXM6
-IHRpbWVvdXQgJXhcbiIsIF9fZnVuY19fLCBzcik7CisJCXJldHVybiBlcnI7CisJfQorCisJLyog
-Q2hlY2sgU0VJUyBpcyBjbGVhcmVkIChzdGVwIDIuKSAqLworCWlmIChyZWFkbF9yZWxheGVkKHBk
-YXRhLT5iYXNlICsgUk5HX1NSKSAmIFJOR19TUl9TRUlTKQorCQlyZXR1cm4gLUVJTlZBTDsKKwor
-CWVyciA9IHJlYWRsX3JlbGF4ZWRfcG9sbF90aW1lb3V0KHBkYXRhLT5iYXNlICsgUk5HX1NSLCBz
-ciwgIShzciAmIFJOR19TUl9TRUNTKSwgMTAwMDAwKTsKKwlpZiAoZXJyKSB7CisJCWxvZ19lcnIo
-IiVzOiB0aW1lb3V0ICV4XG4iLCBfX2Z1bmNfXywgc3IpOworCQlyZXR1cm4gZXJyOworCX0KKwor
-CXJldHVybiAwOworfQorCisvKgorICogRXh0cmFjdHMgZnJvbSB0aGUgU1RNMzIgUk5HIHNwZWNp
-ZmljYXRpb24sIHdoZW4gQ09ORFJTVCBpcyBub3Qgc3VwcG9ydGVkCisgKgorICogV2hlbiBhIG5v
-aXNlIHNvdXJjZSAob3Igc2VlZCkgZXJyb3Igb2NjdXJzLCB0aGUgUk5HIHN0b3BzIGdlbmVyYXRp
-bmcKKyAqIHJhbmRvbSBudW1iZXJzIGFuZCBzZXRzIHRvIOKAnDHigJ0gYm90aCBTRUlTIGFuZCBT
-RUNTIGJpdHMgdG8gaW5kaWNhdGUKKyAqIHRoYXQgYSBzZWVkIGVycm9yIG9jY3VycmVkLiAoLi4u
-KQorICoKKyAqIFRoZSBmb2xsb3dpbmcgc2VxdWVuY2Ugc2hhbGwgYmUgdXNlZCB0byBmdWxseSBy
-ZWNvdmVyIGZyb20gYSBzZWVkCisgKiBlcnJvciBhZnRlciB0aGUgUk5HIGluaXRpYWxpemF0aW9u
-OgorICogMS4gQ2xlYXIgdGhlIFNFSVMgYml0IGJ5IHdyaXRpbmcgaXQgdG8g4oCcMOKAnS4KKyAq
-IDIuIFJlYWQgb3V0IDEyIHdvcmRzIGZyb20gdGhlIFJOR19EUiByZWdpc3RlciwgYW5kIGRpc2Nh
-cmQgZWFjaCBvZgorICogdGhlbSBpbiBvcmRlciB0byBjbGVhbiB0aGUgcGlwZWxpbmUuCisgKiAz
-LiBDb25maXJtIHRoYXQgU0VJUyBpcyBzdGlsbCBjbGVhcmVkLiBSYW5kb20gbnVtYmVyIGdlbmVy
-YXRpb24gaXMKKyAqIGJhY2sgdG8gbm9ybWFsLgorICovCitzdGF0aWMgaW50IHN0bTMyX3JuZ19j
-b25jZWFsX3NlZWRfZXJyb3Jfc3dfcmVzZXQoc3RydWN0IHN0bTMyX3JuZ19wbGF0ICpwZGF0YSkK
-K3sKKwl1aW50IGkgPSAwOworCXUzMiBzciA9IHJlYWRsX3JlbGF4ZWQocGRhdGEtPmJhc2UgKyBS
-TkdfU1IpOworCisJd3JpdGVsX3JlbGF4ZWQoc3IgJiB+Uk5HX1NSX1NFSVMsIHBkYXRhLT5iYXNl
-ICsgUk5HX1NSKTsKKworCWZvciAoaSA9IDEyOyBpICE9IDA7IGktLSkKKwkJKHZvaWQpcmVhZGxf
-cmVsYXhlZChwZGF0YS0+YmFzZSArIFJOR19EUik7CisKKwlpZiAocmVhZGxfcmVsYXhlZChwZGF0
-YS0+YmFzZSArIFJOR19TUikgJiBSTkdfU1JfU0VJUykKKwkJcmV0dXJuIC1FSU5WQUw7CisKKwly
-ZXR1cm4gMDsKK30KKworc3RhdGljIGludCBzdG0zMl9ybmdfY29uY2VhbF9zZWVkX2Vycm9yKHN0
-cnVjdCBzdG0zMl9ybmdfcGxhdCAqcGRhdGEpCit7CisJbG9nX2RlYnVnKCJDb25jZWFsaW5nIFJO
-RyBzZWVkIGVycm9yXG4iKTsKKworCWlmIChwZGF0YS0+ZGF0YS0+aGFzX2NvbmRfcmVzZXQpCisJ
-CXJldHVybiBzdG0zMl9ybmdfY29uY2VhbF9zZWVkX2Vycm9yX2NvbmRfcmVzZXQocGRhdGEpOwor
-CWVsc2UKKwkJcmV0dXJuIHN0bTMyX3JuZ19jb25jZWFsX3NlZWRfZXJyb3Jfc3dfcmVzZXQocGRh
-dGEpOworfTsKKwogc3RhdGljIGludCBzdG0zMl9ybmdfcmVhZChzdHJ1Y3QgdWRldmljZSAqZGV2
-LCB2b2lkICpkYXRhLCBzaXplX3QgbGVuKQogewotCWludCByZXR2YWwsIGk7Ci0JdTMyIHNyLCBj
-b3VudCwgcmVnOworCWludCByZXR2YWw7CisJdTMyIHNyLCByZWc7CiAJc2l6ZV90IGluY3JlbWVu
-dDsKIAlzdHJ1Y3Qgc3RtMzJfcm5nX3BsYXQgKnBkYXRhID0gZGV2X2dldF9wbGF0KGRldik7CisJ
-dWludCB0cmllcyA9IDA7CiAKIAl3aGlsZSAobGVuID4gMCkgewogCQlyZXR2YWwgPSByZWFkbF9w
-b2xsX3RpbWVvdXQocGRhdGEtPmJhc2UgKyBSTkdfU1IsIHNyLAotCQkJCQkgICAgc3IgJiBSTkdf
-U1JfRFJEWSwgMTAwMDApOwotCQlpZiAocmV0dmFsKQorCQkJCQkgICAgc3IsIDEwMDAwKTsKKwkJ
-aWYgKHJldHZhbCkgeworCQkJbG9nX2VycigiJXM6IFRpbWVvdXQgUk5HIG5vIGRhdGEiLCAgX19m
-dW5jX18pOwogCQkJcmV0dXJuIHJldHZhbDsKKwkJfQogCi0JCWlmIChzciAmIChSTkdfU1JfU0VJ
-UyB8IFJOR19TUl9TRUNTKSkgewotCQkJLyogQXMgcGVyIFNvQyBUUk0gKi8KLQkJCWNscmJpdHNf
-bGUzMihwZGF0YS0+YmFzZSArIFJOR19TUiwgUk5HX1NSX1NFSVMpOwotCQkJZm9yIChpID0gMDsg
-aSA8IDEyOyBpKyspCi0JCQkJcmVhZGwocGRhdGEtPmJhc2UgKyBSTkdfRFIpOwotCQkJaWYgKHJl
-YWRsKHBkYXRhLT5iYXNlICsgUk5HX1NSKSAmIFJOR19TUl9TRUlTKSB7Ci0JCQkJbG9nX2Vycigi
-Uk5HIE5vaXNlIik7Ci0JCQkJcmV0dXJuIC1FSU87CisJCWlmIChzciAhPSBSTkdfU1JfRFJEWSkg
-eworCQkJaWYgKHNyICYgUk5HX1NSX1NFSVMpIHsKKwkJCQlyZXR2YWwgPSBzdG0zMl9ybmdfY29u
-Y2VhbF9zZWVkX2Vycm9yKHBkYXRhKTsKKwkJCQl0cmllcysrOworCQkJCWlmIChyZXR2YWwgfHwg
-dHJpZXMgPiBSTkdfTkJfUkVDT1ZFUl9UUklFUykgeworCQkJCQlsb2dfZXJyKCIlczogQ291bGRu
-J3QgcmVjb3ZlciBmcm9tIHNlZWQgZXJyb3IiLCAgX19mdW5jX18pOworCQkJCQlyZXR1cm4gLUVO
-T1RSRUNPVkVSQUJMRTsKKwkJCQl9CisKKwkJCQkvKiBTdGFydCBhZ2FpbiAqLworCQkJCWNvbnRp
-bnVlOworCQkJfQorCisJCQlpZiAoc3IgJiBSTkdfU1JfQ0VJUykgeworCQkJCWxvZ19pbmZvKCJS
-TkcgY2xvY2sgdG9vIHNsb3ciKTsKKwkJCQl3cml0ZWxfcmVsYXhlZCgwLCBwZGF0YS0+YmFzZSAr
-IFJOR19TUik7CiAJCQl9Ci0JCQkvKiBzdGFydCBhZ2FpbiAqLwotCQkJY29udGludWU7CiAJCX0K
-IAogCQkvKgogCQkgKiBPbmNlIHRoZSBEUkRZIGJpdCBpcyBzZXQsIHRoZSBSTkdfRFIgcmVnaXN0
-ZXIgY2FuCi0JCSAqIGJlIHJlYWQgZm91ciBjb25zZWN1dGl2ZSB0aW1lcy4KKwkJICogYmUgcmVh
-ZCB1cCB0byBmb3VyIGNvbnNlY3V0aXZlIHRpbWVzLgogCQkgKi8KLQkJY291bnQgPSA0OwotCQl3
-aGlsZSAobGVuICYmIGNvdW50KSB7Ci0JCQlyZWcgPSByZWFkbChwZGF0YS0+YmFzZSArIFJOR19E
-Uik7Ci0JCQltZW1jcHkoZGF0YSwgJnJlZywgbWluKGxlbiwgc2l6ZW9mKHUzMikpKTsKLQkJCWlu
-Y3JlbWVudCA9IG1pbihsZW4sIHNpemVvZih1MzIpKTsKLQkJCWRhdGEgKz0gaW5jcmVtZW50Owot
-CQkJbGVuIC09IGluY3JlbWVudDsKLQkJCWNvdW50LS07CisJCXJlZyA9IHJlYWRsKHBkYXRhLT5i
-YXNlICsgUk5HX0RSKTsKKwkJLyogTGF0ZSBzZWVkIGVycm9yIGNhc2U6IERSIGJlaW5nIDAgaXMg
-YW4gZXJyb3Igc3RhdHVzICovCisJCWlmICghcmVnKSB7CisJCQlyZXR2YWwgPSBzdG0zMl9ybmdf
-Y29uY2VhbF9zZWVkX2Vycm9yKHBkYXRhKTsKKwkJCXRyaWVzKys7CisKKwkJCWlmIChyZXR2YWwg
-fHwgdHJpZXMgPiBSTkdfTkJfUkVDT1ZFUl9UUklFUykgeworCQkJCWxvZ19lcnIoIiVzOiBDb3Vs
-ZG4ndCByZWNvdmVyIGZyb20gc2VlZCBlcnJvciIsICBfX2Z1bmNfXyk7CisJCQkJcmV0dXJuIC1F
-Tk9UUkVDT1ZFUkFCTEU7CisJCQl9CisKKwkJCS8qIFN0YXJ0IGFnYWluICovCisJCQljb250aW51
-ZTsKIAkJfQorCisJCWluY3JlbWVudCA9IG1pbihsZW4sIHNpemVvZih1MzIpKTsKKwkJbWVtY3B5
-KGRhdGEsICZyZWcsIGluY3JlbWVudCk7CisJCWRhdGEgKz0gaW5jcmVtZW50OworCQlsZW4gLT0g
-aW5jcmVtZW50OworCisJCXRyaWVzID0gMDsKIAl9CiAKIAlyZXR1cm4gMDsKLS0gCjIuMjUuMQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3Rt
-MzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20K
-aHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJv
-b3Qtc3RtMzIK
+STM32 RNG configuration should best fit the requirements of the
+platform. Therefore, put a platform-specific RNG configuration
+field in the platform data. Default RNG configuration for STM32MP13
+is the NIST certified configuration [1].
+
+While there, fix and the RNG init sequence to support all RNG
+versions.
+
+[1] https://csrc.nist.gov/projects/cryptographic-module-validation-program/entropy-validations/certificate/53
+
+Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
+---
+ drivers/rng/stm32_rng.c | 54 ++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 51 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/rng/stm32_rng.c b/drivers/rng/stm32_rng.c
+index b1a790b217..c397b4d95c 100644
+--- a/drivers/rng/stm32_rng.c
++++ b/drivers/rng/stm32_rng.c
+@@ -21,8 +21,15 @@
+ #define RNG_CR			0x00
+ #define RNG_CR_RNGEN		BIT(2)
+ #define RNG_CR_CED		BIT(5)
++#define RNG_CR_CONFIG1		GENMASK(11, 8)
++#define RNG_CR_NISTC		BIT(12)
++#define RNG_CR_CONFIG2		GENMASK(15, 13)
+ #define RNG_CR_CLKDIV_SHIFT	16
++#define RNG_CR_CLKDIV		GENMASK(19, 16)
++#define RNG_CR_CONFIG3		GENMASK(25, 20)
+ #define RNG_CR_CONDRST		BIT(30)
++#define RNG_CR_ENTROPY_SRC_MASK	(RNG_CR_CONFIG1 | RNG_CR_NISTC | RNG_CR_CONFIG2 | RNG_CR_CONFIG3)
++#define RNG_CR_CONFIG_MASK	(RNG_CR_ENTROPY_SRC_MASK | RNG_CR_CED | RNG_CR_CLKDIV)
+ 
+ #define RNG_SR		0x04
+ #define RNG_SR_SEIS	BIT(6)
+@@ -32,17 +39,28 @@
+ 
+ #define RNG_DR		0x08
+ 
++#define RNG_NSCR		0x0C
++#define RNG_NSCR_MASK		GENMASK(17, 0)
++
++#define RNG_HTCR	0x10
++
+ #define RNG_NB_RECOVER_TRIES	3
+ 
+ /*
+  * struct stm32_rng_data - RNG compat data
+  *
+  * @max_clock_rate:	Max RNG clock frequency, in Hertz
++ * @cr:			Entropy source configuration
++ * @nscr:		Noice sources control configuration
++ * @htcr:		Health tests configuration
+  * @has_cond_reset:	True if conditionnal reset is supported
+  *
+  */
+ struct stm32_rng_data {
+ 	uint max_clock_rate;
++	u32 cr;
++	u32 nscr;
++	u32 htcr;
+ 	bool has_cond_reset;
+ };
+ 
+@@ -244,28 +262,48 @@ static int stm32_rng_init(struct stm32_rng_plat *pdata)
+ 
+ 	cr = readl(pdata->base + RNG_CR);
+ 
+-	if (pdata->data->has_cond_reset) {
++	/*
++	 * Keep default RNG configuration if none was specified, that is when conf.cr is set to 0.
++	 */
++	if (pdata->data->has_cond_reset && pdata->data->cr) {
+ 		uint clock_div = stm32_rng_clock_freq_restrain(pdata);
+ 
+-		cr |= RNG_CR_CONDRST | (clock_div << RNG_CR_CLKDIV_SHIFT);
++		cr &= ~RNG_CR_CONFIG_MASK;
++		cr |= RNG_CR_CONDRST | (pdata->data->cr & RNG_CR_ENTROPY_SRC_MASK) |
++		      (clock_div << RNG_CR_CLKDIV_SHIFT);
+ 		if (pdata->ced)
+ 			cr &= ~RNG_CR_CED;
+ 		else
+ 			cr |= RNG_CR_CED;
+ 		writel(cr, pdata->base + RNG_CR);
++
++		/* Health tests and noise control registers */
++		writel_relaxed(pdata->data->htcr, pdata->base + RNG_HTCR);
++		writel_relaxed(pdata->data->nscr & RNG_NSCR_MASK, pdata->base + RNG_NSCR);
++
+ 		cr &= ~RNG_CR_CONDRST;
+ 		cr |= RNG_CR_RNGEN;
+ 		writel(cr, pdata->base + RNG_CR);
+ 		err = readl_poll_timeout(pdata->base + RNG_CR, cr,
+ 					 (!(cr & RNG_CR_CONDRST)), 10000);
+-		if (err)
++		if (err) {
++			log_err("%s: Timeout!",  __func__);
+ 			return err;
++		}
+ 	} else {
++		if (pdata->data->has_cond_reset)
++			cr |= RNG_CR_CONDRST;
++
+ 		if (pdata->ced)
+ 			cr &= ~RNG_CR_CED;
+ 		else
+ 			cr |= RNG_CR_CED;
+ 
++		writel(cr, pdata->base + RNG_CR);
++
++		if (pdata->data->has_cond_reset)
++			cr &= ~RNG_CR_CONDRST;
++
+ 		cr |= RNG_CR_RNGEN;
+ 
+ 		writel(cr, pdata->base + RNG_CR);
+@@ -276,6 +314,9 @@ static int stm32_rng_init(struct stm32_rng_plat *pdata)
+ 
+ 	err = readl_poll_timeout(pdata->base + RNG_SR, sr,
+ 				 sr & RNG_SR_DRDY, 10000);
++	if (err)
++		log_err("%s: Timeout!",  __func__);
++
+ 	return err;
+ }
+ 
+@@ -335,11 +376,18 @@ static const struct dm_rng_ops stm32_rng_ops = {
+ static const struct stm32_rng_data stm32mp13_rng_data = {
+ 	.has_cond_reset = true,
+ 	.max_clock_rate = 48000000,
++	.htcr = 0x969D,
++	.nscr = 0x2B5BB,
++	.cr = 0xF00D00,
+ };
+ 
+ static const struct stm32_rng_data stm32_rng_data = {
+ 	.has_cond_reset = false,
+ 	.max_clock_rate = 3000000,
++	/* Not supported */
++	.htcr = 0,
++	.nscr = 0,
++	.cr = 0,
+ };
+ 
+ static const struct udevice_id stm32_rng_match[] = {
+-- 
+2.25.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

@@ -2,66 +2,38 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49D0379A4B3
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Sep 2023 09:42:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC6F679A602
+	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Sep 2023 10:27:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CEECCC6C822;
-	Mon, 11 Sep 2023 07:42:34 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6EE40C6B46E;
+	Mon, 11 Sep 2023 08:27:46 +0000 (UTC)
+Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 36CDAC6B45F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 33461C65E4F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  7 Sep 2023 16:23:49 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 387DjMIV016950; Thu, 7 Sep 2023 18:23:48 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=5chGm3+SNBv0K2MVSn2uTblLakJ8YvE57OCnA+8Gutk=; b=O7
- WL3YlQLd6SGm3tT4xIYmroclkUTpmRZRxO4kBI2MSM2qkcibpAwe9SRpZ7k2EUuN
- 7RT4tt52vJMGO9Nx5DnLc9yQQ+yy0QkP8SMCNlW/ooLZtbXLMXvBNXlUB1T0m+cQ
- vNEJFq7yMP2bVffwxj9+mERpYeZwVYa956kwF6zK6vBvPnGGKefQIVe8M/lMI/h/
- PqLgVIGm31oHQRyi/YZ1NVVYdSk4D4OuozY9mNJLF173xpmA3OOa8SlONjA6/MTB
- L6mGKVHcl5GB35xqAkqgL+KWaeogloZN0XfRYuWvk7wExIT4NJ5H0tWupXEwuFda
- r5ZMQ617X4DWmn5xzWAw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3sutffq2bt-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 07 Sep 2023 18:23:48 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CD484100056;
- Thu,  7 Sep 2023 18:23:47 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BC66D21161E;
- Thu,  7 Sep 2023 18:23:47 +0200 (CEST)
-Received: from localhost (10.201.20.32) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.21; Thu, 7 Sep
- 2023 18:23:47 +0200
-From: Gatien Chevallier <gatien.chevallier@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Thu, 7 Sep 2023 18:22:00 +0200
-Message-ID: <20230907162200.205602-7-gatien.chevallier@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
+ Mon, 11 Sep 2023 08:27:45 +0000 (UTC)
+Received: from [192.168.192.146] (port=40768 helo=nx64de-df6d00)
+ by mx01.ayax.eu with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.92) (envelope-from <gszymaszek@short.pl>)
+ id 1qfcGf-0001ov-Vu; Mon, 11 Sep 2023 10:27:38 +0200
+Date: Mon, 11 Sep 2023 10:27:36 +0200
+From: Grzegorz Szymaszek <gszymaszek@short.pl>
+To: Gatien Chevallier <gatien.chevallier@foss.st.com>
+Message-ID: <ZP7PeFpJzneU2h9k@nx64de-df6d00>
+Mail-Followup-To: Gatien Chevallier <gatien.chevallier@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com
 References: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.201.20.32]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-07_08,2023-09-05_01,2023-05-22_02
-X-Mailman-Approved-At: Mon, 11 Sep 2023 07:42:34 +0000
+In-Reply-To: <20230907162200.205602-1-gatien.chevallier@foss.st.com>
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  uboot-stm32@st-md-mailman.stormreply.com,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [Uboot-stm32] [PATCH 7/7] ARM: dts: stm32: add RNG node for
-	STM32MP13x platforms
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [Uboot-stm32] [PATCH 1/7] rng: stm32: rename STM32 RNG driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,41 +45,73 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1024843899930129718=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add RNG node for STM32MP13x platforms.
 
-Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
----
- arch/arm/dts/stm32mp131.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+--===============1024843899930129718==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="U+/2MNMhGgq+YarA"
+Content-Disposition: inline
 
-diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
-index d23bbc3639..bd7285053d 100644
---- a/arch/arm/dts/stm32mp131.dtsi
-+++ b/arch/arm/dts/stm32mp131.dtsi
-@@ -1208,6 +1208,14 @@
- 			};
- 		};
- 
-+		rng: rng@54004000 {
-+			compatible = "st,stm32mp13-rng";
-+			reg = <0x54004000 0x400>;
-+			clocks = <&rcc RNG1_K>;
-+			resets = <&rcc RNG1_R>;
-+			status = "disabled";
-+		};
-+
- 		mdma: dma-controller@58000000 {
- 			compatible = "st,stm32h7-mdma";
- 			reg = <0x58000000 0x1000>;
--- 
-2.25.1
+
+--U+/2MNMhGgq+YarA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Thu, Sep 07, 2023 at 06:21:54PM +0200, Gatien Chevallier wrote:
+> diff --git a/drivers/rng/Kconfig b/drivers/rng/Kconfig
+> -%<-
+> -config RNG_STM32MP1
+> -	bool "Enable random number generator for STM32MP1"
+> +config RNG_STM32
+> +	bool "Enable random number generator for STM32"
+>  	depends on ARCH_STM32MP
+
+Shouldn't the "depends on" be updated as well?
+("depends on ARCH_STM32 || ARCH_STM32MP", like in STM32_RESET.)
+
+
+All the best
+
+--=20
+Grzegorz Szymaszek
+
+--U+/2MNMhGgq+YarA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmT+z3cACgkQeE9lGUIc
+pz68SQ//VFui3En7zRyXmQrUSY9PDk3nwEPAZwCAy3hmAfDmnCVOSXAgQ1o1pHz1
+g596Jmn+k0kOeDd4lAv9WWWy7NBtmCwNTORQ+iHIz/xesA+dBslmewzqNX9dZeAL
+NVUySeRm0Sqijv7vpw5aWlDnWJMUcaiREDK7ZLwayg6HMjcOoGWAKwlIIUqYBjS+
+DlTvrlCTJpr5I976vyvbAVdNItW0YFc9uYRbJ31IMnhQec+7fDfepifZHQgVa4i7
+5KK3zHn/KgaAzHxmdibcm013FhaiNw6V4Q0bV3N2lXdqk3NQHn7Y/EF6pNkTkorr
+ze4zANwDWQRaIMXoWzmRP4f+ON8ikrw/8Z8ui29sh7h63e8DJ1xFu0G9GlYOwVu4
+pZpbEPSZtb8bOv18i2NahizT6j3msGZk9Cy01wO13nZxfz/bTccnASOiKCEPY7VI
+E+R95PuTEU6X5+Hbz4ktKRtGY14ztuTBmQFg6n7ctcaf/kDy6405sd6BFSUVJIwk
+sL5lbZ6M1dcUn8D6NYlEIKMPGGYuV71+Ro1nnK+T5p70Fojg+Dj6UwNTEAmOJIXr
+hDCfx9b0u98FQU1v+rLEAr6kI9OVeryfDK1b/qaAb39egmx/Mx0yEG00buL0XNgx
+DeCj8snz7rWLs6bQbdFL9efU9Jp+o7jaE/L8YiacFbTTRTWkNWE=
+=9V0N
+-----END PGP SIGNATURE-----
+
+--U+/2MNMhGgq+YarA--
+
+--===============1024843899930129718==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============1024843899930129718==--

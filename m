@@ -2,69 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50B8F7A90BC
-	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Sep 2023 03:57:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F0897ACB94
+	for <lists+uboot-stm32@lfdr.de>; Sun, 24 Sep 2023 21:25:54 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DC91DC6B47D;
-	Thu, 21 Sep 2023 01:57:45 +0000 (UTC)
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com
- [209.85.166.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0D8C1C6A5EA;
+	Sun, 24 Sep 2023 19:25:54 +0000 (UTC)
+Received: from mail-io1-f43.google.com (mail-io1-f43.google.com
+ [209.85.166.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0934BC6B46F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EE8DC65068
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Sep 2023 01:57:44 +0000 (UTC)
-Received: by mail-io1-f42.google.com with SMTP id
- ca18e2360f4ac-7926de0478eso41853939f.0
+ Sun, 24 Sep 2023 19:25:52 +0000 (UTC)
+Received: by mail-io1-f43.google.com with SMTP id
+ ca18e2360f4ac-79fa7e33573so108467939f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 20 Sep 2023 18:57:44 -0700 (PDT)
+ Sun, 24 Sep 2023 12:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261464; x=1695866264;
+ d=chromium.org; s=google; t=1695583551; x=1696188351;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O2nJm9PTO/caN1ajeqdMeJOj+YRkBj1GSo9NgalCZCI=;
- b=BDITD4xL4ZfkSFU+QqvnO/eEneqzQ8Cm2YAL7IMW/kk/XziX6AteFG0UkAszWv5+yg
- gLV6sqsjEkhXsyqbuhSZHl0/oa4zq1LDYqPYJi6nD4qAt3lpqoE1Ih+U8qpnYR3pqkeZ
- PoRASnDtRhVZabsfzqVuEWyzZ8wu+J9gF2W2E=
+ bh=f+TAHwcsi0qX9MZ+NV+vu/GDrrXJHnb/MD+UU5uj634=;
+ b=br4vgNrX5Bb8g0sskxo/WeOt8xLHcR4JXNpMQjEGk+owqwwIBBwLFaPm1ThjyJgDcB
+ Iq/PNKM5gVa3AJv6/8yzO8sch1LGvrlul8Px9JcaCWjs2bKK4Tq0iSeMcV3sSBterQF0
+ 2Iwk27j39yVGIUc3JmGmqWzqPC6TauL3XK8kg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261464; x=1695866264;
+ d=1e100.net; s=20230601; t=1695583551; x=1696188351;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O2nJm9PTO/caN1ajeqdMeJOj+YRkBj1GSo9NgalCZCI=;
- b=ekwQeWLvjvHharJHLY3dI2de+FDmL9zC5CJDPdebdDNUXMxvwXk7Hmc7LO9oWuM3zn
- dKGJrOnwphg1GlxAmQvNV3Ly+o/l7TN74UvelfjEh0goEk6NNgwUd6BqyHhAuiTeTmhU
- s3LP17ni4XXmcO/goWOC7/62xSTMyOfpcXLXCMtAMTVJCN8l2cMVfB7wYHA32LCV+6hC
- mQGbrfO73+Jrxjm4PfeBC6gscAcMKq5MDnE+exziE7Aw+4s94KHJS8vNxC9QUb6yRNJL
- 10y2TWKISlIgVTT6VGAgjOAg/NsA11rSfnKswmfXE/51Qow6/hQPipUciTdQDijhvYqx
- XgGg==
-X-Gm-Message-State: AOJu0YzbUWFrEBjozTRcCqMjUZZVfDlSf4ErRk4/urkwNZW0X8IA5lZX
- rILk1QC706rTScYmQsR5lotD7Q==
-X-Google-Smtp-Source: AGHT+IEjKVtw6mQXsse8NYkTEQ2jAVGa2Dq3XIDwu50uvgCjZS7MuL5713tdzbm/Z3M3fX62MpUyRQ==
-X-Received: by 2002:a05:6602:1608:b0:792:8c29:7b with SMTP id
- x8-20020a056602160800b007928c29007bmr6483355iow.10.1695261463730; 
- Wed, 20 Sep 2023 18:57:43 -0700 (PDT)
+ bh=f+TAHwcsi0qX9MZ+NV+vu/GDrrXJHnb/MD+UU5uj634=;
+ b=W1huIMQhIkgEg5dVNpwtaTTU5a1fw5b67L5RTEZkYaSIm2Jvu6uG/iYfjH9JbtZl/Q
+ aDd8t5s02H10skUfsxe2AcbgtswB5XpSCoBnqxcVV+4NaNYBZKQw3dlljA8th14w+6kX
+ sbZ482x9oIMVvlCK8A+Y2suHn2aKkbzPlZm+mlmn+AicA4hGBob+I8nXFfiEqW5p7tOE
+ yLePa938t0GNZXt75se4C0g48pA7l5dc+Wj6V59J5YgcAti4HQZr4JaVo+dpxLMjB5fc
+ LD4V5uwa2qWNv4Prm5ftz8yFrn7DBbL2JBskXXdeK5Jwh0PMElgzoN9nlYq6DIg6qSGH
+ Wexw==
+X-Gm-Message-State: AOJu0YxJDaHbUJ2n6DQKzQYoKclVSIbQqLUHCaRv+QD0S74rfLvg2d4d
+ z4q7n3fTj5JBHvuOdxbdrGdEsg==
+X-Google-Smtp-Source: AGHT+IHgP4VwKP+HOY6mBMDkoowV7OlArxKbMhrO+j+Dh/JfJRWN44lR3DrG/1ETETof1LNHkk8saQ==
+X-Received: by 2002:a6b:6402:0:b0:794:eddf:daae with SMTP id
+ t2-20020a6b6402000000b00794eddfdaaemr5444079iog.12.1695583550969; 
+ Sun, 24 Sep 2023 12:25:50 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.42
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.25.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:43 -0700 (PDT)
+ Sun, 24 Sep 2023 12:25:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Wed, 20 Sep 2023 19:56:52 -0600
-Message-ID: <20230921015730.1511373-4-sjg@chromium.org>
+Date: Sun, 24 Sep 2023 13:24:47 -0600
+Message-ID: <20230924192536.1812799-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
-In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
-References: <20230921015730.1511373-1-sjg@chromium.org>
+In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
+References: <20230924192536.1812799-1-sjg@chromium.org>
 MIME-Version: 1.0
 Cc: Mario Kicherer <dev@kicherer.org>, Elena Popa <elena.popa@nxp.com>,
  =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Adam Ford <aford173@gmail.com>,
  Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Lukasz Majewski <lukma@denx.de>,
- Simone CIANNI <simone.cianni@bticino.it>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>,
+ Lukasz Majewski <lukma@denx.de>, Simone CIANNI <simone.cianni@bticino.it>,
  Jagan Teki <jagan@amarulasolutions.com>, Thomas Weber <weber@corscience.de>,
  Enric Balletbo i Serra <eballetbo@gmail.com>,
  Andre Przywara <andre.przywara@arm.com>, Tim Harvey <tharvey@gateworks.com>,
@@ -74,12 +74,11 @@ Cc: Mario Kicherer <dev@kicherer.org>, Elena Popa <elena.popa@nxp.com>,
  Michal Simek <michal.simek@amd.com>, Mingkai Hu <mingkai.hu@nxp.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Vikas Manocha <vikas.manocha@st.com>,
+ Vikas Manocha <vikas.manocha@st.com>, Qu Wenruo <wqu@suse.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
  Tom McLeod <tom.mcleod@opalkelly.com>
-Subject: [Uboot-stm32] [PATCH v2 03/32] spl: Rename SYS_SPL_ARGS_ADDR to
+Subject: [Uboot-stm32] [PATCH v3 02/38] spl: Rename SYS_SPL_ARGS_ADDR to
 	SPL_PAYLOAD_ARGS_ADDR
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -103,6 +102,8 @@ have been stored.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
+
+(no changes since v2)
 
 Changes in v2:
 - Rename based on Tom's feedback
@@ -175,7 +176,7 @@ index b9d96fbe1355..463235979427 100644
  	depends on SPL_OS_BOOT
  	default 0x88000000 if ARCH_OMAP2PLUS
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 1e50043cf77b..acd154986e15 100644
+index 171dfbcf703c..657886dfe5b0 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
 @@ -818,8 +818,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
@@ -383,7 +384,7 @@ index 9c4334af15c5..00b6f692e3d9 100644
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
  CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
 diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
-index 67ba7658861a..911b75a317a6 100644
+index 7622035a588a..6e6143cb2e0f 100644
 --- a/configs/display5_factory_defconfig
 +++ b/configs/display5_factory_defconfig
 @@ -41,7 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
@@ -396,10 +397,10 @@ index 67ba7658861a..911b75a317a6 100644
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
  CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
 diff --git a/configs/gwventana_emmc_defconfig b/configs/gwventana_emmc_defconfig
-index eb29268c6fa7..1970c2290db7 100644
+index 021c87a9ce18..300eb3cc75a4 100644
 --- a/configs/gwventana_emmc_defconfig
 +++ b/configs/gwventana_emmc_defconfig
-@@ -49,7 +49,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
+@@ -50,7 +50,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
  CONFIG_SPL_DMA=y
  CONFIG_SPL_I2C=y
  CONFIG_SPL_OS_BOOT=y
@@ -409,10 +410,10 @@ index eb29268c6fa7..1970c2290db7 100644
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
  CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
 diff --git a/configs/gwventana_nand_defconfig b/configs/gwventana_nand_defconfig
-index 17a86d6447d0..1bc943341514 100644
+index 28893d843851..83aa1ae2cb83 100644
 --- a/configs/gwventana_nand_defconfig
 +++ b/configs/gwventana_nand_defconfig
-@@ -50,7 +50,7 @@ CONFIG_SPL_DMA=y
+@@ -51,7 +51,7 @@ CONFIG_SPL_DMA=y
  CONFIG_SPL_I2C=y
  CONFIG_SPL_NAND_SUPPORT=y
  CONFIG_SPL_OS_BOOT=y
@@ -422,10 +423,10 @@ index 17a86d6447d0..1bc943341514 100644
  CONFIG_SPL_FALCON_BOOT_MMCSD=y
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
 diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
-index e0cc39959669..5e2a8e04c660 100644
+index a6dce15c3a08..993bbe29c6b8 100644
 --- a/configs/igep00x0_defconfig
 +++ b/configs/igep00x0_defconfig
-@@ -42,7 +42,7 @@ CONFIG_SPL_UBI_LOAD_KERNEL_ID=3
+@@ -43,7 +43,7 @@ CONFIG_SPL_UBI_LOAD_KERNEL_ID=3
  CONFIG_SPL_UBI_LOAD_ARGS_ID=4
  CONFIG_SPL_ONENAND_SUPPORT=y
  CONFIG_SPL_OS_BOOT=y
@@ -435,7 +436,7 @@ index e0cc39959669..5e2a8e04c660 100644
  CONFIG_SPL_FALCON_BOOT_MMCSD=y
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
 diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 96d15e89af80..4035f798d15d 100644
+index cef7352ad88f..c1b0487f7ea7 100644
 --- a/configs/imx28_xea_defconfig
 +++ b/configs/imx28_xea_defconfig
 @@ -51,7 +51,7 @@ CONFIG_SPL_DMA=y
@@ -513,7 +514,7 @@ index 2ab42979fa60..aa44cdc52d9e 100644
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
  CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
 diff --git a/configs/ls1046ardb_qspi_spl_defconfig b/configs/ls1046ardb_qspi_spl_defconfig
-index e11a90f09b20..d8beb3c053a1 100644
+index 78f1185ec68b..84bd1b1d0f49 100644
 --- a/configs/ls1046ardb_qspi_spl_defconfig
 +++ b/configs/ls1046ardb_qspi_spl_defconfig
 @@ -61,7 +61,7 @@ CONFIG_SPL_I2C=y
@@ -552,7 +553,7 @@ index 3534753dd3e1..990f05c72e50 100644
  CONFIG_SPL_FALCON_BOOT_MMCSD=y
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
 diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
-index 835252acc9bd..c768d398523e 100644
+index a88fd5550287..bf139e7fde4e 100644
 --- a/configs/omap35_logic_somlv_defconfig
 +++ b/configs/omap35_logic_somlv_defconfig
 @@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
@@ -578,7 +579,7 @@ index e747a0c1e932..48a87722d5ea 100644
  CONFIG_SPL_FALCON_BOOT_MMCSD=y
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
 diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
-index b9d6284faad6..ac684a907820 100644
+index aaac431615ce..12bfe5b1c1da 100644
 --- a/configs/omap3_logic_somlv_defconfig
 +++ b/configs/omap3_logic_somlv_defconfig
 @@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
@@ -669,7 +670,7 @@ index 9bca6fe2eeaa..0ae901a72391 100644
  CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x8800
  CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x8000
 diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-index 4ea5caff547f..9589848e8e1c 100644
+index 16c127b7400b..817fb4142d18 100644
 --- a/configs/xilinx_zynq_virt_defconfig
 +++ b/configs/xilinx_zynq_virt_defconfig
 @@ -43,7 +43,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
@@ -682,10 +683,10 @@ index 4ea5caff547f..9589848e8e1c 100644
  CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
  CONFIG_SYS_MAXARGS=32
 diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 59be5f42493a..7f79167db716 100644
+index 51e0d254f4ac..b284494092ac 100644
 --- a/configs/xilinx_zynqmp_virt_defconfig
 +++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -44,7 +44,7 @@ CONFIG_SPL_FS_LOAD_KERNEL_NAME="atf-uboot.ub"
+@@ -43,7 +43,7 @@ CONFIG_SPL_FS_LOAD_KERNEL_NAME="atf-uboot.ub"
  CONFIG_SPL_FS_LOAD_ARGS_NAME="u-boot.bin"
  CONFIG_SPL_FPGA=y
  CONFIG_SPL_OS_BOOT=y

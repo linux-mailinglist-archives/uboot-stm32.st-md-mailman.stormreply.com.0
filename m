@@ -2,74 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id DACA47BC9BA
-	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Oct 2023 22:19:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9FBC7BCF1D
+	for <lists+uboot-stm32@lfdr.de>; Sun,  8 Oct 2023 17:42:02 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8A1C7C6C838;
-	Sat,  7 Oct 2023 20:19:08 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
- [209.85.218.47])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 48889C6B442;
+	Sun,  8 Oct 2023 15:42:02 +0000 (UTC)
+Received: from mail-yb1-f173.google.com (mail-yb1-f173.google.com
+ [209.85.219.173])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A3768C6C82E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78395C6A61D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  7 Oct 2023 20:19:07 +0000 (UTC)
-Received: by mail-ej1-f47.google.com with SMTP id
- a640c23a62f3a-9b29186e20aso568923566b.2
+ Sun,  8 Oct 2023 15:42:00 +0000 (UTC)
+Received: by mail-yb1-f173.google.com with SMTP id
+ 3f1490d57ef6-d77ad095f13so3857759276.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 07 Oct 2023 13:19:07 -0700 (PDT)
+ Sun, 08 Oct 2023 08:42:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696709947; x=1697314747;
+ d=amarulasolutions.com; s=google; t=1696779719; x=1697384519;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MbmD3960l1ka3duexs4RTWfAdGW+YFr9iJGyPR8N+r8=;
- b=EqRAUPTF4fTyNPFTqhjZrjV5kkBmBAlfoE6fzdF86nPSSl1rzMhn6q2CFlNqhnG3u1
- x/+QUPbH2uRlxmV6JufSVybH8Orj6e5OeJBhSc88Fc5ztSE9Q/E8o7QV4SpbYOPvPC5k
- nefg2X7IPo8arW7jl/ndUPvcBTARH1sRuX1AE=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=um0z4aYYn/St/9hHHxPsgsiVssFxIynRFNS+DJIpGxc=;
+ b=UvEXVPTu0Yi6Ksfv3DgnQXEAIPD8DTfm2YPwaf1Vtj0ifXL6YEQzVzUHVWU97z0SSR
+ 2wkMFlysifEN/V2W6KoqWGsORY5m816bzcVTvnou2JlnuGX5EJaYwa4QsHMiAeKWS9vG
+ WCLfFd2fyTx4+2ARfiBmWgRhs0YrZT96ELnxA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696709947; x=1697314747;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MbmD3960l1ka3duexs4RTWfAdGW+YFr9iJGyPR8N+r8=;
- b=DHFawofYOWuJor6QW7aBGlRRcwl2yPT4zU9Gnm5KJaakIoJmqoz8Df6OazElLuvBU0
- JajI0flSI0vH5hSKPw6ilUWHNCyZEvRGUapJS8FAoK/aey7bxSIRX79cSwumD7ZcWd/7
- rBhyC0TR5itc0rD6yeaTykJbBjhMUc8ASKO5Gk8EUYgjft7UpPE3I28lxXT4T7bsoCkd
- oflztI0I+rztgdsdaSjKj8vSLTBBcueU9ikSVwB27YlY08ptiqHJ4241GRiTyXTn7OWz
- n3OygipoZxaLf2jnCtFWvPKpcIr8IO2f6J+6PVZwhULGSYJ2o58G2OjPfSlbFgVX0S8D
- oe7Q==
-X-Gm-Message-State: AOJu0YwxF450MfwVM6YaYGWNqtBoKdsXSLugBdSwKmjgyDmkB/f6irse
- IJdWd9jETON6le1XjrqMUQMyPrKqgtIkPXQscCQ1QA==
-X-Google-Smtp-Source: AGHT+IEWFKmT9ydxasJJm4ji0wAUpQsx9H4pEVB05ru+LZjg99lbHZnqAQOCA/rXdQcONzd22miKMhIiLh6tUfsnz3w=
-X-Received: by 2002:a17:907:7897:b0:9ae:3c6c:6ecd with SMTP id
- ku23-20020a170907789700b009ae3c6c6ecdmr10975657ejc.19.1696709946843; Sat, 07
- Oct 2023 13:19:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696779719; x=1697384519;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=um0z4aYYn/St/9hHHxPsgsiVssFxIynRFNS+DJIpGxc=;
+ b=Op5AwqEsbeqWBGmHvghQzs1jaacE/8/J4mUK9oHHWsL3Q1d2juSqZRszlCL4af8olB
+ xaXAmOWIZcc7ZLVdXhLr8a3eCumo7wSDvirhq5rTPhiE9/OTqCAuQ7NjHfrgq0ZBdm94
+ eW5sSKPqpuLn2dshNWgv+PXjHV//o2b/CAH9oysLagc0ZHgi2zj1YGm9fV/YXf5GCoPD
+ GisqjEqouQZP7gqzA0dNOvevVuUe9hEQ02Pc3XWR23+PuZh9uoIsai/rUdpnyZKLhBUp
+ xgmGM69pN2+r2jjnPn5fTfHYMQceHEeAw6P7l5bCrmlh5lAahxs19Afug2V70QvR2oj/
+ X1ew==
+X-Gm-Message-State: AOJu0Yx+Ny7YzYpQanaYnSjjvTPIUfYA1fgZbBD5/aiIFZn8YU0DP2uD
+ l8+D61CtXeKKyYz6mgyCRpay0HLvHDiUim3/gHFtIg==
+X-Google-Smtp-Source: AGHT+IF3TF0X0D4MA+65rLxXoeE+TtLSFgJzKpue+BF0hSPXK8b3wIb40DJQtp+EmTiaHIgykTU8jVr/SdODkt0rxXY=
+X-Received: by 2002:a5b:4d2:0:b0:d81:504f:f879 with SMTP id
+ u18-20020a5b04d2000000b00d81504ff879mr11191882ybp.28.1696779719284; Sun, 08
+ Oct 2023 08:41:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230924232658.GM305624@bill-the-cat>
- <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
- <20231005145350.GQ8465@bill-the-cat>
- <CAPnjgZ2Mbx9H_ve_F_gq_eqt2hvwmYF455-0PHB31fV5m9HN2A@mail.gmail.com>
- <20231006021616.GB2227687@bill-the-cat>
- <CAPnjgZ3sTQNQJCpuZ4doJJH=t=mLxXaAYQR8kVXorOfqn2t5CA@mail.gmail.com>
- <20231006165504.GC2227687@bill-the-cat>
- <CAPnjgZ1GZ+Ryt2=_Sf0Z+XM+V58Ty4UmdrAo2bW-Ubs9s19=Ww@mail.gmail.com>
- <20231007010053.GE2227687@bill-the-cat>
- <CAPnjgZ3Pss6uOhnopo4Yn0digdNs1niNqqrJHRmnrbDvehT1hg@mail.gmail.com>
- <20231007172516.GH2227687@bill-the-cat>
-In-Reply-To: <20231007172516.GH2227687@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 14:18:53 -0600
-Message-ID: <CAPnjgZ1GLqA_Zk7jZQn+d72TU=X8FBzr9nDHOZx4h4-cUdX6Jg@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Michal Suchanek <msuchanek@suse.de>,
- Leo <ycliang@andestech.com>, Stefan Roese <sr@denx.de>,
- Rick Chen <rick@andestech.com>, uboot-stm32@st-md-mailman.stormreply.com,
- U-Boot Mailing List <u-boot@lists.denx.de>, Michael Walle <michael@walle.cc>,
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Bin Meng <bmeng.cn@gmail.com>,
- Fabio Estevam <festevam@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>
-Subject: Re: [Uboot-stm32] [PATCH 05/25] treewide: Correct use of long help
+References: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
+ <20230903205703.662080-5-dario.binacchi@amarulasolutions.com>
+ <cc943366-406a-463d-cc77-b67e9d258799@foss.st.com>
+In-Reply-To: <cc943366-406a-463d-cc77-b67e9d258799@foss.st.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Sun, 8 Oct 2023 17:41:48 +0200
+Message-ID: <CABGWkvpbv5=eHxyjuZ4Kf9-xggunM--AJJ3NvAwhzpXJQ0cL3Q@mail.gmail.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Anatolij Gustschin <agust@denx.de>, linux-amarula@amarulasolutions.com
+Subject: Re: [Uboot-stm32] [RFC PATCH 4/5] ARM: dts: stm32: support display
+ on stm32f469-disco board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,208 +72,118 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Tom,
-
-On Sat, 7 Oct 2023 at 11:25, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 07, 2023 at 09:37:07AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 6 Oct 2023 at 19:01, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Oct 06, 2023 at 04:42:44PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 6 Oct 2023 at 10:55, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Oct 06, 2023 at 07:03:17AM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 5 Oct 2023 at 20:16, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Oct 05, 2023 at 07:41:49PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Thu, 5 Oct 2023 at 08:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Wed, Oct 04, 2023 at 07:23:47PM -0600, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Sun, 24 Sept 2023 at 17:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass wrote:
-> > > > > > > > > > > > Some commands assume that CONFIG_SYS_LONGHELP is always defined.
-> > > > > > > > > > > > Declaration of long help should be bracketed by an #ifdef to avoid an
-> > > > > > > > > > > > 'unused variable' warning.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Fix this treewide.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > [snip]
-> > > > > > > > > > > > diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > > > index 6fa5b41fcd38..25ea7d3b37da 100644
-> > > > > > > > > > > > --- a/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > > > +++ b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > > > @@ -393,11 +393,12 @@ static int do_dek_blob(struct cmd_tbl *cmdtp, int flag, int argc,
-> > > > > > > > > > > >       return blob_encap_dek(src_addr, dst_addr, len);
-> > > > > > > > > > > >  }
-> > > > > > > > > > > >
-> > > > > > > > > > > > -/***************************************************/
-> > > > > > > > > > > > +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-> > > > > > > > > > > >  static char dek_blob_help_text[] =
-> > > > > > > > > > > >       "src dst len            - Encapsulate and create blob of data\n"
-> > > > > > > > > > > >       "                         $len bits long at address $src and\n"
-> > > > > > > > > > > >       "                         store the result at address $dst.\n";
-> > > > > > > > > > > > +#endif
-> > > > > > > > > > > >
-> > > > > > > > > > > >  U_BOOT_CMD(
-> > > > > > > > > > > >       dek_blob, 4, 1, do_dek_blob,
-> > > > > > > > > > >
-> > > > > > > > > > > This really doesn't read nicely.  I would rather (globally and fix
-> > > > > > > > > > > existing users) __maybe_unused this instead.  I think there's just one
-> > > > > > > > > > > example today that isn't "foo_help_text".
-> > > > > > > > > >
-> > > > > > > > > > Hmm, what do you think about adding a __longhelp symbol to cause the
-> > > > > > > > > > linker to discard it when not needed?
-> > > > > > > > >
-> > > > > > > > > Well, I don't think we need linker list magic when __maybe_unused will
-> > > > > > > > > just have them be discarded normally.
-> > > > > > > >
-> > > > > > > > Yes, perhaps things are in a better state than they used to be, but
-> > > > > > > > there is a linker discard for commands at present.
-> > > > > > >
-> > > > > > > Yes, but __maybe_unused means we don't get a warning about it, and it's
-> > > > > > > literally discarded as part of --gc-sections as it done everywhere with
-> > > > > > > maybe 3 exceptions?
-> > > > > >
-> > > > > > Actually with this series we get a lot closer to that. The problem
-> > > > > > with the status quo is that disabling CMDLINE doesn't disable most
-> > > > > > commands, relying instead on discarding them at link time.
-> > > > >
-> > > > > I don't follow you here.  We're talking only about the long help.
-> > > >
-> > > > I was actually talking about how the command code is removed. This
-> > > > series allows that to happen via Kconfig rather than needing a
-> > > > linker-script discard rule, something I only just fully appreciated.
-> > >
-> > > OK.  But this series as-is has a lot of problems and I don't see it as
-> > > more than a proof of concept.
-> >
-> > Probably I need to send a few version as this discussion is becoming a
-> > bit theoretical.
-> >
-> > >
-> > > > > There's already an option to enable/disable it.  When disabled all of
-> > > > > the long help text should be discarded, because we reference it via
-> > > > > U_BOOT_CMD macro which in turn cares about it, or not.  What's missing
-> > > > > is a U_BOOT_LONGHELP macro so that instead of:
-> > > > > #ifdef CONFIG_SYS_LONGHELP
-> > > > > static char cat_help_text[] =
-> > > > >         "<interface> <dev[:part]> <file>\n"
-> > > > >         "  - Print file from 'dev' on 'interface' to standard output\n";
-> > > > > #endif
-> > > > >
-> > > > > We do:
-> > > > > U_BOOT_LONGHELP(cat,
-> > > > >         "<interface> <dev[:part]> <file>\n"
-> > > > >         "  - Print file from 'dev' on 'interface' to standard output\n"
-> > > > > );
-> > > > >
-> > > > > Which then does:
-> > > > > static __maybe_unused char cat_help_text[] =
-> > > > > ...
-> > > > > ;
-> > > > >
-> > > > > And we discard the text automatically due to --gc-sections.  We possibly
-> > > > > haven't already been doing this since back when we first started using
-> > > > > --gc-sections there was a bug in binutils that caused text like the
-> > > > > above to still get combined in to other objects and not discarded.
-> > > > > That's been fixed for ages.
-> > > > >
-> > > > > And the above macro would also let us clean up U_BOOT_CMD macro slightly
-> > > > > to just omit the longhelp option and instead always do _CMD_HELP(_name)
-> > > > > inside the macros.  It'll also make it harder to add new commands
-> > > > > without a long help by accident.
-> > > >
-> > > > Gosh this is complicated.
-> > > >
-> > > > At present the U_BOOT_CMD() macro just drops the strings...the problem
-> > > > with the unused var only happens in a small number of cases where an
-> > > > explicit var is used. I don't see why creating a var (when none is
-> > > > there today) helps anything? It doesn't detect missing longhelp, since
-> > > > this is already an error (missing argument). Sure,  "" can be
-> > > > provided, but your macro doesn't stop that either.
-> > >
-> > > The problem today is that 95% of the cases surround the help text with
-> > > #ifdef CONFIG_SYS_LONGHELP ... #endif.  That's why the rest of the
-> > > macros are the way they are today.  And that in turn is due to (in part
-> > > at least) old compiler bugs.
-> >
-> > I see about 46 #idefs for that and nearly 300 commands that don't have one.
-> >
-> > >
-> > > > If you are suggesting a new U_BOOT_LONGHELP() macro, bear in mind that
-> > > > we already have quite a lot...each new 'top-level' macro results in
-> > > > more combinations.
-> > >
-> > > It really should just be a single macro.  I think I'll make an attempt
-> > > at this, to show what I'm talking about.
-> >
-> > OK thanks.
-> >
-> > >
-> > > > > > With this series, it looks like we can in fact do that, so I should
-> > > > > > remove the discards as well.
-> > > > > >
-> > > > > > The one proviso is that this does drop a lot of things we want...e.g.
-> > > > > > BOOTSTD_DEFAULTS cannot be enabled due to its use of 'select', meaning
-> > > > > > that common filesystems are dropped. So we'll need more effort after
-> > > > > > this, to allow (for example) bootmeths that don't need commands to
-> > > > > > work correctly. But I think this series at least provides a better
-> > > > > > starting point for teasing things apart.
-> > > > > >
-> > > > > > So OK I'll go with __maybe_unused for the ones that need it, which
-> > > > > > isn't too many given that many of the strings are just included
-> > > > > > directly in the macro. It is considerably easier than trying to be to
-> > > > > > clever about things.
-> > > > >
-> > > > > Yes, this series itself has a lot of problems that need to be addressed
-> > > > > before reposting because I don't like "hiding" that network stuff no
-> > > > > longer works, and I also saw that DFU also silently failing.
-> > > >
-> > > > Yes I saw your other comments. But I think this patch is the big area
-> > > > of confusion.
-> > >
-> > > This isn't the tricky part of the series that I'm saying has problems,
-> > > that part is all of the functionality that's not being untangled and I
-> > > think leads to the question of what exactly is the use case where we do
-> > > remove the command line but don't need some of that functionality still.
-> >
-> > For security and code-size reasons it is useful to disable commands,
-> > perhaps all of them. Quite a few features don't need it, but it
-> > certainly would take more effort to get a usable version. The goal of
-> > this series is to avoid people adding Kconfig mistakes which need to
-> > be cleaned up later.
->
-> Maybe the biggest take away should be to do things smaller.  DFU
-> intentionally and fundamentally constructs something for the CLI parser
-> to use.  Rework that.  Same for the network stack.  Do some slight
-> re-org / fixing of more intentional dependencies on their own.
-
-I think it is better to do it the other way around, to avoid further
-Kconfig regressions. At the moment we can't actually turn off CMDLINE,
-so none of the work can actually be used.
-
-The particular thing I am interested in is booting an OS without CONFIG_CMDLINE
-
-Regards,
-Simon
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGVsbG8gUGF0cmljZSwKCk9uIFdlZCwgU2VwIDI3LCAyMDIzIGF0IDg6MTnigK9BTSBQYXRyaWNl
+IENIT1RBUkQKPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4gd3JvdGU6Cj4KPgo+Cj4gT24g
+OS8zLzIzIDIyOjU3LCBEYXJpbyBCaW5hY2NoaSB3cm90ZToKPiA+IEFkZCBzdXBwb3J0IHRvIE9y
+aXNlIFRlY2ggT1RNODAwOUEgZGlzcGxheSBvbiBzdG0zMmY0NjktZGlzY28gYm9hcmQuCj4gPgo+
+ID4gSXQgd2FzIG5lY2Vzc2FyeSB0byByZXRyaWV2ZSB0aGUgZnJhbWVidWZmZXIgYWRkcmVzcyBm
+cm9tIHRoZSBkZXZpY2UgdHJlZQo+ID4gYmVjYXVzZSB0aGUgYWRkcmVzcyByZXR1cm5lZCBieSB0
+aGUgdmlkZW8tdWNsYXNzIGRyaXZlciBwb2ludGVkIHRvIGEgbWVtb3J5Cj4gPiBhcmVhIHRoYXQg
+d2FzIG5vdCB1c2FibGUuCj4gPgo+ID4gRnVydGhlcm1vcmUsIHVubGlrZSBMaW51eCwgdGhlIERT
+SSBkcml2ZXIgcmVxdWlyZXMgdGhlIExUREMgY2xvY2sgdG8gYmUKPiA+IHByb3Blcmx5IHByb2Jl
+ZC4gSGVuY2UsIHRoZSBjaGFuZ2VzIG1hZGUgdG8gdGhlIERTSSBub2RlIGluCj4gPiBzdG0zMmY0
+NjktZGlzY28tdS1ib290LmR0c2kuCj4gPgo+ID4gU2lnbmVkLW9mZi1ieTogRGFyaW8gQmluYWNj
+aGkgPGRhcmlvLmJpbmFjY2hpQGFtYXJ1bGFzb2x1dGlvbnMuY29tPgo+ID4gLS0tCj4gPgo+ID4g
+IGFyY2gvYXJtL2R0cy9zdG0zMmY0NjktZGlzY28tdS1ib290LmR0c2kgfCAgNCArKysKPiA+ICBj
+b25maWdzL3N0bTMyZjQ2OS1kaXNjb3ZlcnlfZGVmY29uZmlnICAgIHwgMTMgKysrKysrKysrCj4g
+PiAgZHJpdmVycy92aWRlby9zdG0zMi9zdG0zMl9sdGRjLmMgICAgICAgICB8IDM3ICsrKysrKysr
+KysrKysrKysrKysrKysrLQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgNTMgaW5zZXJ0aW9ucygrKSwg
+MSBkZWxldGlvbigtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9kdHMvc3RtMzJmNDY5
+LWRpc2NvLXUtYm9vdC5kdHNpIGIvYXJjaC9hcm0vZHRzL3N0bTMyZjQ2OS1kaXNjby11LWJvb3Qu
+ZHRzaQo+ID4gaW5kZXggOGU3ODFjNWE3YjIzLi40N2JhOWZhNGE3ODMgMTAwNjQ0Cj4gPiAtLS0g
+YS9hcmNoL2FybS9kdHMvc3RtMzJmNDY5LWRpc2NvLXUtYm9vdC5kdHNpCj4gPiArKysgYi9hcmNo
+L2FybS9kdHMvc3RtMzJmNDY5LWRpc2NvLXUtYm9vdC5kdHNpCj4gPiBAQCAtOTIsNyArOTIsOSBA
+QAo+ID4KPiA+ICAmZHNpIHsKPiA+ICAgICAgIGNsb2NrcyA9IDwmcmNjIDAgU1RNMzJGNF9BUEIy
+X0NMT0NLKERTSSk+LAo+ID4gKyAgICAgICAgICAgICAgPCZyY2MgMCBTVE0zMkY0X0FQQjJfQ0xP
+Q0soTFREQyk+LAo+ID4gICAgICAgICAgICAgICAgPCZjbGtfaHNlPjsKPiA+ICsgICAgIGNsb2Nr
+LW5hbWVzID0gInBjbGsiLCAicHhfY2xrIiwgInJlZiI7Cj4gPiAgfTsKPiA+Cj4gPiAgJmdwaW9h
+IHsKPiA+IEBAIC0xNDAsNiArMTQyLDggQEAKPiA+ICB9Owo+ID4KPiA+ICAmbHRkYyB7Cj4gPiAr
+ICAgICBib290cGgtYWxsOwo+ID4gKwo+ID4gICAgICAgY2xvY2tzID0gPCZyY2MgMCBTVE0zMkY0
+X0FQQjJfQ0xPQ0soTFREQyk+Owo+ID4gIH07Cj4gPgo+ID4gZGlmZiAtLWdpdCBhL2NvbmZpZ3Mv
+c3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWcgYi9jb25maWdzL3N0bTMyZjQ2OS1kaXNjb3Zl
+cnlfZGVmY29uZmlnCj4gPiBpbmRleCAzNWQxOGQ1OGJlNmYuLjk3OTZiOGYyZDlhNSAxMDA2NDQK
+PiA+IC0tLSBhL2NvbmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWcKPiA+ICsrKyBi
+L2NvbmZpZ3Mvc3RtMzJmNDY5LWRpc2NvdmVyeV9kZWZjb25maWcKPiA+IEBAIC0yMSw2ICsyMSw3
+IEBAIENPTkZJR19DTURfR1BUPXkKPiA+ICAjIENPTkZJR19SQU5ET01fVVVJRCBpcyBub3Qgc2V0
+Cj4gPiAgQ09ORklHX0NNRF9NTUM9eQo+ID4gICMgQ09ORklHX0NNRF9TRVRFWFBSIGlzIG5vdCBz
+ZXQKPiA+ICtDT05GSUdfQ01EX0JNUD15Cj4gPiAgQ09ORklHX0NNRF9DQUNIRT15Cj4gPiAgQ09O
+RklHX0NNRF9USU1FUj15Cj4gPiAgIyBDT05GSUdfSVNPX1BBUlRJVElPTiBpcyBub3Qgc2V0Cj4g
+PiBAQCAtNDAsMyArNDEsMTUgQEAgQ09ORklHX1NQSV9GTEFTSF9TVE1JQ1JPPXkKPiA+ICBDT05G
+SUdfU1BJPXkKPiA+ICBDT05GSUdfRE1fU1BJPXkKPiA+ICBDT05GSUdfU1RNMzJfUVNQST15Cj4g
+PiArQ09ORklHX1ZJREVPPXkKPiA+ICtDT05GSUdfQkFDS0xJR0hUX0dQSU89eQo+ID4gK0NPTkZJ
+R19WSURFT19MQ0RfT1JJU0VURUNIX09UTTgwMDlBPXkKPiA+ICtDT05GSUdfVklERU9fU1RNMzI9
+eQo+ID4gK0NPTkZJR19WSURFT19TVE0zMl9EU0k9eQo+ID4gK0NPTkZJR19WSURFT19TVE0zMl9N
+QVhfWFJFUz00ODAKPiA+ICtDT05GSUdfVklERU9fU1RNMzJfTUFYX1lSRVM9ODAwCj4gPiArQ09O
+RklHX0JNUF8xNkJQUD15Cj4gPiArQ09ORklHX0JNUF8yNEJQUD15Cj4gPiArQ09ORklHX0JNUF8z
+MkJQUD15Cj4gPiArQ09ORklHX0RNX1JFR1VMQVRPUj15Cj4gPiArQ09ORklHX0RNX1JFR1VMQVRP
+Ul9GSVhFRD15Cj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aWRlby9zdG0zMi9zdG0zMl9sdGRj
+LmMgYi9kcml2ZXJzL3ZpZGVvL3N0bTMyL3N0bTMyX2x0ZGMuYwo+ID4gaW5kZXggZjQ4YmFkYzUx
+N2E4Li40MjhiMGFkZGM0M2MgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL3ZpZGVvL3N0bTMyL3N0
+bTMyX2x0ZGMuYwo+ID4gKysrIGIvZHJpdmVycy92aWRlby9zdG0zMi9zdG0zMl9sdGRjLmMKPiA+
+IEBAIC00OTQsNiArNDk0LDM0IEBAIHN0YXRpYyB2b2lkIHN0bTMyX2x0ZGNfc2V0X2xheWVyMShz
+dHJ1Y3Qgc3RtMzJfbHRkY19wcml2ICpwcml2LCB1bG9uZyBmYl9hZGRyKQo+ID4gICAgICAgc2V0
+Yml0c19sZTMyKHByaXYtPnJlZ3MgKyBMVERDX0wxQ1IsIExYQ1JfTEVOKTsKPiA+ICB9Cj4gPgo+
+ID4gKyNpZiBJU19FTkFCTEVEKENPTkZJR19UQVJHRVRfU1RNMzJGNDY5X0RJU0NPVkVSWSkKPgo+
+IFdlIHdhbnQgdG8gYXZvaWQgdGhpcyBraW5kIG9mICNkZWZpbmUgc3BlY2lmaWMgdG8gYSBwYXJ0
+aWN1bGFyIHRhcmdldAoKSWYgdGhlIGZyYW1lYnVmZmVyIGlzIGFsbG9jYXRlZCBieSB0aGUgdmlk
+ZW8tdWNsYXNzIG1vZHVsZSwgaXQgaXMKbWFwcGVkIHRvIHRoZSBhZGRyZXNzIDB4ZTAwMDAwLCB3
+aGljaCBkb2VzCm5vdCBhcHBlYXIgdG8gYmUgYSBjb3JyZWN0IG1lbW9yeSB6b25lLiBUaGVyZWZv
+cmUsIGZvciB0aGUKc3RtMzJmNDY5LWRpc2NvIGJvYXJkLCBhIGRpZmZlcmVudCBtZXRob2QgZm9y
+CmZyYW1lYnVmZmVyIGFsbG9jYXRpb24gaXMgcmVxdWlyZWQsIGFuZCB0aGlzIHNlZW1lZCB0byBt
+ZSB0aGUgbW9zdApzdWl0YWJsZSB3YXkuIEkgaGF2ZSBzdWJtaXR0ZWQgdGhlIHNlcmllcwphcyBh
+biBSRkMsIGFuZCB0aGlzIGlzIG9uZSBvZiB0aGUgcG9pbnRzIGZvciB3aGljaCBJIGRpZCBpdC4g
+U28sIEkgYW0Kb3BlbiB0byBjb25zaWRlcmluZyBhbnkgc3VnZ2VzdGlvbnMgeW91Cm1heSBoYXZl
+LgoKT3V0cHV0IGluIGNhc2Ugb2YgYXBwbGllZCBwYXRjaDoKc3RtMzJfZGlzcGxheSBkaXNwbGF5
+LWNvbnRyb2xsZXJANDAwMTY4MDA6IDQ4MHg4MDAgMTZicHAgZnJhbWUgYnVmZmVyCmF0IDB4YzBl
+MDAwMDAKCk90aGVyd2lzZToKc3RtMzJfZGlzcGxheSBkaXNwbGF5LWNvbnRyb2xsZXJANDAwMTY4
+MDA6IDQ4MHg4MDAgMTZicHAgZnJhbWUgYnVmZmVyCmF0IDB4ZTAwMDAwCgo+Cj4gPiArc3RhdGlj
+IGludCBzdG0zMl9sdGRjX2dldF9mYl9hZGRyKHN0cnVjdCB1ZGV2aWNlICpkZXYsIHVsb25nICpi
+YXNlLCB1aW50IHNpemUsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQg
+YWxpZ24pCj4gPiArewo+ID4gKyAgICAgcGh5c19hZGRyX3QgY3B1Owo+ID4gKyAgICAgZG1hX2Fk
+ZHJfdCBidXM7Cj4gPiArICAgICB1NjQgZG1hX3NpemU7Cj4gPiArICAgICBpbnQgcmV0Owo+ID4g
+Kwo+ID4gKyAgICAgcmV0ID0gZGV2X2dldF9kbWFfcmFuZ2UoZGV2LCAmY3B1LCAmYnVzLCAmZG1h
+X3NpemUpOwo+ID4gKyAgICAgaWYgKHJldCkgewo+ID4gKyAgICAgICAgICAgICBkZXZfZXJyKGRl
+diwgImZhaWxlZCB0byBnZXQgZG1hIGFkZHJlc3NcbiIpOwo+ID4gKyAgICAgICAgICAgICByZXR1
+cm4gcmV0Owo+ID4gKyAgICAgfQo+ID4gKwo+ID4gKyAgICAgKmJhc2UgPSBidXMgKyAweDEwMDAw
+MDAgLSBBTElHTihzaXplLCBhbGlnbik7Cj4KPiBXaHkgYWRkaW5nIDB4MTAwMDAwMCA/IGF2b2lk
+IHRvIGluc2VydCBjb25zdCB3aGl0aG91dCBhbnkgZGVzY3JpcHRpb24gYW5kIHVzZSBhICNkZWZp
+bmUgaW5zdGVhZC4KClJpZ2h0LCBJIHdpbGwgYWRkIGl0IGluIHZlcnNpb24gMi4KCj4KPiA+ICsg
+ICAgIHJldHVybiAwOwo+ID4gK30KPiA+ICsjZWxzZQo+ID4gK3N0YXRpYyBpbnQgc3RtMzJfbHRk
+Y19nZXRfZmJfYWRkcihzdHJ1Y3QgdWRldmljZSAqZGV2LCB1bG9uZyAqYmFzZSwgdWludCBzaXpl
+LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50IGFsaWduKQo+ID4gK3sK
+PiA+ICsgICAgIC8qIERlbGVnYXRlIGZyYW1lYnVmZmVyIGFsbG9jYXRpb24gdG8gdmlkZW8tdWNs
+YXNzICovCj4gPiArICAgICAqYmFzZSA9IDA7Cj4gPiArICAgICByZXR1cm4gMDsKPiA+ICt9Cj4g
+PiArI2VuZGlmCj4gPiArCj4gPiAgc3RhdGljIGludCBzdG0zMl9sdGRjX3Byb2JlKHN0cnVjdCB1
+ZGV2aWNlICpkZXYpCj4gPiAgewo+ID4gICAgICAgc3RydWN0IHZpZGVvX3VjX3BsYXQgKnVjX3Bs
+YXQgPSBkZXZfZ2V0X3VjbGFzc19wbGF0KGRldik7Cj4gPiBAQCAtNTA0LDcgKzUzMiw3IEBAIHN0
+YXRpYyBpbnQgc3RtMzJfbHRkY19wcm9iZShzdHJ1Y3QgdWRldmljZSAqZGV2KQo+ID4gICAgICAg
+c3RydWN0IGRpc3BsYXlfdGltaW5nIHRpbWluZ3M7Cj4gPiAgICAgICBzdHJ1Y3QgY2xrIHBjbGs7
+Cj4gPiAgICAgICBzdHJ1Y3QgcmVzZXRfY3RsIHJzdDsKPiA+IC0gICAgIHVsb25nIHJhdGU7Cj4g
+PiArICAgICB1bG9uZyByYXRlLCBmYl9iYXNlOwo+ID4gICAgICAgaW50IHJldDsKPiA+Cj4gPiAg
+ICAgICBwcml2LT5yZWdzID0gZGV2X3JlYWRfYWRkcl9wdHIoZGV2KTsKPiA+IEBAIC02MDQsNiAr
+NjMyLDEzIEBAIHN0YXRpYyBpbnQgc3RtMzJfbHRkY19wcm9iZShzdHJ1Y3QgdWRldmljZSAqZGV2
+KQo+ID4gICAgICAgcHJpdi0+Y3JvcF9oID0gdGltaW5ncy52YWN0aXZlLnR5cDsKPiA+ICAgICAg
+IHByaXYtPmFscGhhID0gMHhGRjsKPiA+Cj4gPiArICAgICByZXQgPSBzdG0zMl9sdGRjX2dldF9m
+Yl9hZGRyKGRldiwgJmZiX2Jhc2UsIHVjX3BsYXQtPnNpemUsCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHVjX3BsYXQtPmFsaWduKTsKPiA+ICsgICAgIGlmIChyZXQpCj4g
+PiArICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gPiArCj4gPiArICAgICB1Y19wbGF0LT5iYXNl
+ID0gZmJfYmFzZTsKPiA+ICsKPgo+IEl0IGJyZWFrcyBkaXNwbGF5IG9uIHN0bTMyZjc0Ni1kaXNj
+byBhbmQgYWxzbyBvbiBzdG0zMmY3NjktZGlzY28uCgpZb3UgYXJlIHJpZ2h0LCBJIHdpbGwgZml4
+IGl0IGluIHZlcnNpb24gMi4KClRoYW5rcyBhbmQgcmVnYXJkcywKCkRhcmlvCgo+Cj4gVGhhbmtz
+Cj4gUGF0cmljZQo+Cj4gPiAgICAgICBkZXZfZGJnKGRldiwgIiVkeCVkICVkYnBwIGZyYW1lIGJ1
+ZmZlciBhdCAweCVseFxuIiwKPiA+ICAgICAgICAgICAgICAgdGltaW5ncy5oYWN0aXZlLnR5cCwg
+dGltaW5ncy52YWN0aXZlLnR5cCwKPiA+ICAgICAgICAgICAgICAgVk5CSVRTKHByaXYtPmwyYnBw
+KSwgdWNfcGxhdC0+YmFzZSk7CgoKCi0tIAoKRGFyaW8gQmluYWNjaGkKClNlbmlvciBFbWJlZGRl
+ZCBMaW51eCBEZXZlbG9wZXIKCmRhcmlvLmJpbmFjY2hpQGFtYXJ1bGFzb2x1dGlvbnMuY29tCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCgoKQW1hcnVsYSBTb2x1dGlvbnMgU1JM
+CgpWaWEgTGUgQ2FuZXZhcmUgMzAsIDMxMTAwIFRyZXZpc28sIFZlbmV0bywgSVQKClQuICszOSAw
+NDIgMjQzIDUzMTAKaW5mb0BhbWFydWxhc29sdXRpb25zLmNvbQoKd3d3LmFtYXJ1bGFzb2x1dGlv
+bnMuY29tCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
+b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
+bmZvL3Vib290LXN0bTMyCg==

@@ -2,68 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAF1B7BCF21
-	for <lists+uboot-stm32@lfdr.de>; Sun,  8 Oct 2023 17:45:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D35427BCF22
+	for <lists+uboot-stm32@lfdr.de>; Sun,  8 Oct 2023 17:46:00 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8C619C6B442;
-	Sun,  8 Oct 2023 15:45:59 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 97DD3C6B44B;
+	Sun,  8 Oct 2023 15:46:00 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com
+ [209.85.218.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B18A3C6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EA775C6A61D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  8 Oct 2023 15:45:57 +0000 (UTC)
-Received: by mail-ed1-f54.google.com with SMTP id
- 4fb4d7f45d1cf-533e7d127d4so6414208a12.3
+ Sun,  8 Oct 2023 15:45:58 +0000 (UTC)
+Received: by mail-ej1-f48.google.com with SMTP id
+ a640c23a62f3a-9ba1eb73c27so51967166b.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 08 Oct 2023 08:45:57 -0700 (PDT)
+ Sun, 08 Oct 2023 08:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1696779957; x=1697384757;
+ d=amarulasolutions.com; s=google; t=1696779958; x=1697384758;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FGKAgaWaq8j4SufF5PEWZku7JsXLcsXNqOhBcLo5wW0=;
- b=TjOIdPOi2xJecaOkTVghlDwfPtOnnMMHCxGDUZ5NLYMAhwci7DZvBN91dz5f4RTtCb
- R+92qIiMCB/kyiOSqSCZaEAaySLLlr2GXr6OXTooq5fFxmwDHD1Hzy+SEANnzneLwCQp
- Xu330BqvLj/wmzRfJqppEjhu2vpGBpGaOaFz8=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V5eR9bRRHywOAXEL1MIXLGvA1aY2uYlOIkNO9+SPfqo=;
+ b=KKejHF/yN22on8o1vp84hXSEYOsiMU7q6nM5G4flRuJX+23mMAOHoPXWNrtGZYe76J
+ w3dTIK+/OG0EUwFY3+O/uNCy/ZuNjWYE41XOz7HeA/jlwwwpubQQX+3U8ZC4MBF9fAFS
+ Uy2eFgCT8YgPeTVDpJMgxkK8XPpVcQMZEqQMo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696779957; x=1697384757;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FGKAgaWaq8j4SufF5PEWZku7JsXLcsXNqOhBcLo5wW0=;
- b=xUuPjOf8RiluwR1c1pyc3NVSBHT7z2IOhkPrHZMfKLOUqgGZAvH/p4/VhhSe/46C7q
- ZQlODGVzhAYxMzNdaSF/EaU69WHCTq5RVp5LunEsXE6qG+yOak5H86xQvNa+lawZ5NEa
- iKlzvk7Q4wG0Q+7K6uKIS5cvv0xejHzTqzKafTlnO3UqjtV9l8I4pbrMyuV5he8oei8O
- d7o5Sipxe93/LhGpMcaM/ATg4KuKxA62kQPdam/wEiLdVKb9SWWR4BUnIK7f0r1LUX3I
- 1SThlgCwOo+sCgKMo/UbqodKZEkDKexoIzEZqf2+tMSZfWlLw0tRDrjAiFxGjVAI/WPr
- GXqg==
-X-Gm-Message-State: AOJu0Yx8aH7X7bkV9Dqs75HVGmFf4s3U5+h6v4uwI6vC46APP6HekXEP
- CCemr8/KzIX/EeLYeuk+4Hk7qA==
-X-Google-Smtp-Source: AGHT+IHVQsHY5UZ+YToecke/lMgaJB2OLbZsFe4sWhakDfKiPfxqVniWLEBX0FPw3riUAHkn3UDKvw==
-X-Received: by 2002:a17:907:b1c:b0:9b2:787d:b326 with SMTP id
- h28-20020a1709070b1c00b009b2787db326mr11910573ejl.16.1696779957041; 
- Sun, 08 Oct 2023 08:45:57 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696779958; x=1697384758;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=V5eR9bRRHywOAXEL1MIXLGvA1aY2uYlOIkNO9+SPfqo=;
+ b=REYgHQ0NzRVnxxwHjgkYoqPJPDXO025X9AEvFjzZyniteKj7uCLuwH+JVJTo0uHDeB
+ UTOnx2/BFA6PREdiZOr6MO+hc7KLpsC02bnRpnkfGT8h5SRLPlNaDDBPivmrm1Q56fsr
+ RfmDHEMm2ENXtsFeJ/Ns61i5sh1JSq8QfUPzX7dTd9UF+r6cRjA0/bY2oyJL6v6lDhma
+ k2nggpKa9cr7zTtnpiHwaPCodsvEd9tix5qtbAeEIcCjP/NQkXJrE2giZ9Mo6AO58Gvf
+ 3yqR+sDtMVkkI4DSo28Wb4XHY6BB3aFLHpe4w+rJpG7B5ru6k0FS/gOS15vb33tdhxGU
+ f5qw==
+X-Gm-Message-State: AOJu0Yy4expT+QN5NrctvGLmJ0tvId6G2JMn+6CeCAZ5hOycNmVaaCJ5
+ uk9rAoQWB62EVITs6w1jKfIExA==
+X-Google-Smtp-Source: AGHT+IHnf8QADa4o3KbV/r04CNVqzif7AjhOewt7ufnOEzPplovXFTQzANdkT40WauVECRRbMGWkmg==
+X-Received: by 2002:a17:906:7696:b0:9a2:24f9:fabe with SMTP id
+ o22-20020a170906769600b009a224f9fabemr11907644ejm.66.1696779958558; 
+ Sun, 08 Oct 2023 08:45:58 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-50-102-159.retail.telecomitalia.it. [79.50.102.159])
  by smtp.gmail.com with ESMTPSA id
- lc11-20020a170906f90b00b009b9aa8fffdasm5623981ejb.131.2023.10.08.08.45.55
+ lc11-20020a170906f90b00b009b9aa8fffdasm5623981ejb.131.2023.10.08.08.45.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Oct 2023 08:45:56 -0700 (PDT)
+ Sun, 08 Oct 2023 08:45:57 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sun,  8 Oct 2023 17:44:52 +0200
-Message-ID: <20231008154538.1622772-1-dario.binacchi@amarulasolutions.com>
+Date: Sun,  8 Oct 2023 17:44:53 +0200
+Message-ID: <20231008154538.1622772-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231008154538.1622772-1-dario.binacchi@amarulasolutions.com>
+References: <20231008154538.1622772-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
+Cc: Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [RFC PATCH v2 0/5] Support display on stm32f469-disco
-	board
+Subject: [Uboot-stm32] [RFC PATCH v2 1/5] ARM: dts: stm32f469-disco: sync
+	with Linux 6.5
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,35 +82,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The series adds support for the Orise Tech OTM8009A display on the
-stm32f469-disco board. Substantial differences in the drivers for clock
-management, LTDC and DSI compared to Linux, made it necessary to modify
-the device tree. These changes were made in stm32f469-disco-uboot.dtsi to
-avoid altering the Linux device tree. It is therefore desirable, as soon
-as possible, to add these drivers the functionalities so that they do not
-require device tree properties that deviate from those present in the Linux
-version.
+Sync the devicetree with linux 6.5 for stm32f746-disco board.
+
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+---
 
 Changes in v2:
-- Add Patrice Chotard's Reviewed-by tag to patches 1, 2 and 3 of the series.
-- Fix frame buffer allocation for stm32f469 discovery board.
+- Add Patrice Chotard's Reviewed-by tag.
 
-Dario Binacchi (5):
-  ARM: dts: stm32f469-disco: sync with Linux 6.5
-  ARM: dts: stm32: make the LTDC clock usable by the clock driver
-  ARM: dts: stm32: make the DSI clock usable by the clock driver
-  ARM: dts: stm32: support display on stm32f469-disco board
-  board: stm32f469-disco: add splash screen with stmicroelectronics logo
+ arch/arm/dts/stm32f469-disco.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 ++++++++++
- arch/arm/dts/stm32f469-disco.dts         |   4 +--
- configs/stm32f469-discovery_defconfig    |  16 ++++++++++++
- drivers/video/stm32/stm32_ltdc.c         |  31 +++++++++++++++++++++++
- include/configs/stm32f469-discovery.h    |   2 ++
- tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
- 6 files changed, 64 insertions(+), 2 deletions(-)
- create mode 100644 tools/logos/stm32f469-discovery.bmp
-
+diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
+index 6e0ffc1903be..c9acabf0f530 100644
+--- a/arch/arm/dts/stm32f469-disco.dts
++++ b/arch/arm/dts/stm32f469-disco.dts
+@@ -119,7 +119,7 @@
+ 		};
+ 	};
+ 
+-	panel-dsi@0 {
++	panel@0 {
+ 		compatible = "orisetech,otm8009a";
+ 		reg = <0>; /* dsi virtual channel (0..3) */
+ 		reset-gpios = <&gpioh 7 GPIO_ACTIVE_LOW>;
+@@ -138,7 +138,7 @@
+ 	status = "okay";
+ 
+ 	port {
+-		ltdc_out_dsi: endpoint@0 {
++		ltdc_out_dsi: endpoint {
+ 			remote-endpoint = <&dsi_in>;
+ 		};
+ 	};
 -- 
 2.42.0
 

@@ -2,57 +2,84 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21C597C62BC
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Oct 2023 04:28:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 263977CC93A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 17 Oct 2023 18:57:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A9474C6B45E;
-	Thu, 12 Oct 2023 02:28:51 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C6471C6C837;
+	Tue, 17 Oct 2023 16:57:07 +0000 (UTC)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4EE71C6B44B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DC7D5C6C831
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Oct 2023 02:28:50 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ Tue, 17 Oct 2023 16:57:05 +0000 (UTC)
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id CBEB1100005;
+ Tue, 17 Oct 2023 19:57:04 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CBEB1100005
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+ s=mail; t=1697561824;
+ bh=H9vgNEIQKKRwgCv/vanqO91ndyd1olHRBgPQWnAJGRA=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=WUfc9JUGbWMRQvdDejpUlnmTIOPv8KbpWacTRfl77PBGMMnbItb0deyjy63rIrRR1
+ 343fVrm5GBozgrAIIrLKAKp5dDm0QyGuoBej9NbDPvUlSn0erVYRi0PvX8D0Lo7/iW
+ 9o9RNi6vbpMqEHvq4n/49w2Z95lqY1buEwNG68B6nwIz4ieGRSzhI9ueRK4ti19vSr
+ wqUMeUKwEIH4lDWHMWfvlGukhlQihMk4cYndhZwMzRFcIzsLHjPpT8aAnPTTje0wk7
+ jDk4sHYM3fOzr4Iw/YDPKoyEOo1eO6eb2MvfZIpafocHZrX5UqgD10yl5jGqYYnVjH
+ pSTe17UZnXd9Q==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4D14386B36;
- Thu, 12 Oct 2023 04:28:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697077729;
- bh=CTYrLo/Tab4P/z3iSlwnJgvCZb5gn41sja33LOKnZKw=;
- h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
- b=Qnztq23X8bJPlC78kZ+aVnzwsWWZC8/jizW1eHswnUl2MKbOKYm3467ewNEUIZNDT
- Pj7BXhCCKmwfim5emNV/r6ptNQIUmzbpNs0w0CJ+UfT0W6TQMUMb4BoE6+CRIyYpm+
- 7weVpdE5u5zf0v3q0MIK9nr6GhXXrUipAwI5SH+OnlPeJmBbc1a/uTm5ioIZ4fKyjx
- szuxf7pdOQA+yn3oAG0OIXHtekfyIacdxe8CjVlMP8OVUpz30ToAaCxwVHfR4eyQKT
- KEQjvBQ9qOoMBcCo3Yf00wAAGHyg/DYz+7C1tL/WsrgCxWsavcX+1ndWZOGkBywnBZ
- OJwOz75YLHLyQ==
-Message-ID: <aa9347dc-9d2e-48af-b8be-5b0db4d398db@denx.de>
-Date: Thu, 12 Oct 2023 04:28:41 +0200
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 17 Oct 2023 19:57:03 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Tue, 17 Oct 2023 19:57:02 +0300
+From: Igor Prusov <ivprusov@sberdevices.ru>
+To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
+ <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, Chia-Wei
+ Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Tue, 17 Oct 2023 19:56:41 +0300
+Message-ID: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20230517220239.329807-1-marex@denx.de>
- <e171b09d-0e7d-1815-6133-0946212a08d9@foss.st.com>
- <607a112c-4320-5a5f-b988-98e5ea8e3267@denx.de>
- <cb59086b-3212-3b46-990f-c8223a6122a4@denx.de>
- <f418e766-9063-496d-dd5c-05758cbabd38@foss.st.com>
- <bba7dcb0-285a-f3ed-1dcb-d631466c1ee2@denx.de>
- <40efc460-899d-f4d6-e79f-5c0e635f4387@denx.de>
- <fe65f376-a188-3f72-b6f8-58bd2a65542c@foss.st.com>
- <532a3a0c-389f-6945-9a20-0a523caebeae@denx.de>
-In-Reply-To: <532a3a0c-389f-6945-9a20-0a523caebeae@denx.de>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: uboot-stm32@st-md-mailman.stormreply.com, christophe.priouzeau@foss.st.com,
- u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Power cycle Buck3 in reset on
-	DHSOM
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180684 [Oct 17 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 540 540
+ 2509a3fe0f7fdc802e7154a32be7c2dd394ab987, {Tracking_smtp_not_equal_from},
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 100.64.160.123:7.1.2; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ sberdevices.ru:7.1.1,5.0.1, FromAlignment: n, {Tracking_smtp_domain_mismatch},
+ {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/17 15:08:00 #22212325
+X-KSMG-AntiVirus-Status: Clean, skipped
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
+ Igor Prusov <ivprusov@sberdevices.ru>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
+ kernel@sberdevices.ru, u-boot-amlogic@groups.io, prusovigor@gmail.com
+Subject: [Uboot-stm32] [PATCH v4 0/8] clk: Switch from soc_clk_dump to
+	clk_ops function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -64,93 +91,59 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gOC8xNi8yMyAxNToyOCwgTWFyZWsgVmFzdXQgd3JvdGU6Cj4gT24gOC8xNi8yMyAxNToyMiwg
-UGF0cmljZSBDSE9UQVJEIHdyb3RlOgo+Pgo+Pgo+PiBPbiA3LzEwLzIzIDIzOjQzLCBNYXJlayBW
-YXN1dCB3cm90ZToKPj4+IE9uIDYvMTcvMjMgMDI6MzYsIE1hcmVrIFZhc3V0IHdyb3RlOgo+Pj4+
-IE9uIDYvMTYvMjMgMTU6MDQsIFBhdHJpY2sgREVMQVVOQVkgd3JvdGU6Cj4+Pj4+IEhpLAo+Pj4+
-Cj4+Pj4gSGksCj4+Pj4KPj4+Pj4+IFvCoMKgIDM5LjQyNjAxNV0gRGlzYWJsaW5nIG5vbi1ib290
-IENQVXMgLi4uCj4+Pj4+PiBbwqDCoCAzOS40NDg2MzVdIFJldHJ5aW5nIGFnYWluIHRvIGNoZWNr
-IGZvciBDUFUga2lsbAo+Pj4+Pj4gW8KgwqAgMzkuNDUxOTA5XSBDUFUxIGtpbGxlZC4KPj4+Pj4+
-IFUtQm9vdCBTUEwgMjAyMy4wNy1yYzQtMDAwMDgtZzJmNDY2NGY1YzNlIChKdW4gMTUgMjAyMyAt
-IDA4OjM2OjUyIAo+Pj4+Pj4gKzAyMDApCj4+Pj4+PiBSQU06IEREUjMtRERSM0wgMzJiaXRzIDUz
-MzAwMGtIego+Pj4+Pj4gRERSIGludmFsaWQgc2l6ZSA6IDB4NCwgZXhwZWN0ZWQgMHg0MDAwMDAw
-MAo+Pj4+Pj4gRFJBTSBpbml0IGZhaWxlZDogLTIyCj4+Pj4+PiAjIyMgRVJST1IgIyMjIFBsZWFz
-ZSBSRVNFVCB0aGUgYm9hcmQgIyMjCj4+Pj4+Pgo+Pj4+Pj4gUHJlc3MgUkVTRVQgYnV0dG9uCj4+
-Pj4+Pgo+Pj4+Pj4gVS1Cb290IFNQTCAyMDIzLjA3LXJjNC0wMDAwOC1nMmY0NjY0ZjVjM2UgKEp1
-biAxNSAyMDIzIC0gMDg6MzY6NTIgCj4+Pj4+PiArMDIwMCkKPj4+Pj4+IFJBTTogRERSMy1ERFIz
-TCAzMmJpdHMgNTMzMDAwa0h6Cj4+Pj4+PiBERFIgaW52YWxpZCBzaXplIDogMHg0LCBleHBlY3Rl
-ZCAweDQwMDAwMDAwCj4+Pj4+PiBEUkFNIGluaXQgZmFpbGVkOiAtMjIKPj4+Pj4+ICMjIyBFUlJP
-UiAjIyMgUGxlYXNlIFJFU0VUIHRoZSBib2FyZCAjIyMKPj4+Pj4+Cj4+Pj4+Pgo+Pj4+PiBJIHRy
-eSBpdCB3aXRoIHRoZSBsYXRlc3QgU1RNaWNyb2VsZWN0cm9uaWNzIE9TUyBpbWFnZS4KPj4+Pj4K
-Pj4+Pj4gSSBqdXN0IGNoYW5nZSBpbiBVLUJvb3QgY29uZmlnIHRvIGJlIGFsaWduZWQgdGhlIGV4
-cGVjdGVkIFNELUNhcmQgCj4+Pj4+IHBhcnRpb25uaW5nCj4+Pj4+Cj4+Pj4+IGNvbmZpZ3Mvc3Rt
-MzJtcDE1X2Jhc2ljX2RlZmNvbmZpZzoKPj4+Pj4KPj4+Pj4gLUNPTkZJR19TWVNfTU1DU0RfUkFX
-X01PREVfVV9CT09UX1BBUlRJVElPTj0zCj4+Pj4+ICtDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RF
-X1VfQk9PVF9QQVJUSVRJT049NQo+Pj4+Pgo+Pj4+PiBCdXQgbG93IHBvd2VyIGlzIG5vdCBzdXBw
-b3J0ZWQgaW4gdGhpcyBkb3duc3RyZWFtIGNvbmZpZyA6LTwKPj4+Pgo+Pj4+IFVzZSBtdWx0aV92
-N19kZWZjb25maWcgb3Igc29tZSBzdWNoID8KPj4+Pgo+Pj4+PiBJIGdvdCB0aGUgZXJyb3I6Cj4+
-Pj4+Cj4+Pj4+Cj4+Pj4+IC4uLi4uLi4KPj4+Pj4gVS1Cb290IFNQTCAyMDIzLjA3LXJjNC0wMDAw
-OC1nMmY0NjY0ZjVjM2VkLWRpcnR5IChKdW4gMTYgMjAyMyAtIAo+Pj4+PiAxMTozNzo1MiArMDIw
-MCkKPj4+Pj4gUkFNOiBERFIzLUREUjNMIDMyYml0cyA1MzMwMDBrSHoKPj4+Pj4gV0RUOsKgwqAg
-U3RhcnRlZCB3YXRjaGRvZ0A1YTAwMjAwMCB3aXRoIHNlcnZpY2luZyBldmVyeSAxMDAwbXMgKDMy
-cyAKPj4+Pj4gdGltZW91dCkKPj4+Pj4gaW1hZ2UgZW50cnkgcG9pbnQ6IDB4YzAxMDAwMDAKPj4+
-Pj4KPj4+Pj4KPj4+Pj4gVS1Cb290IDIwMjMuMDctcmM0LTAwMDA4LWcyZjQ2NjRmNWMzZWQtZGly
-dHkgKEp1biAxNiAyMDIzIC0gCj4+Pj4+IDExOjM3OjUyICswMjAwKQo+Pj4+Pgo+Pj4+PiBDUFU6
-IFNUTTMyTVAxNTdGQUEgUmV2LloKPj4+Pj4gTW9kZWw6IFNUTWljcm9lbGVjdHJvbmljcyBTVE0z
-Mk1QMTU3QyBldmFsIGRhdWdodGVyIG9uIGV2YWwgbW90aGVyCj4+Pj4+IEJvYXJkOiBzdG0zMm1w
-MSBpbiBiYXNpYyBtb2RlIChzdCxzdG0zMm1wMTU3Yy1ldjEpCj4+Pj4+IEJvYXJkOiBNQjEyNjMg
-VmFyNC4wIFJldi5DLTAzCj4+Pj4+IERSQU06wqAgMSBHaUIKPj4+Pj4gQ2xvY2tzOgo+Pj4+PiAt
-IE1QVSA6IDgwMCBNSHoKPj4+Pj4gLSBNQ1UgOiAyMDguODc4IE1Iego+Pj4+PiAtIEFYSSA6IDI2
-Ni41MDAgTUh6Cj4+Pj4+IC0gUEVSIDogMjQgTUh6Cj4+Pj4+IC0gRERSIDogNTMzIE1Iego+Pj4+
-PiBDb3JlOsKgIDI4OCBkZXZpY2VzLCA0MiB1Y2xhc3NlcywgZGV2aWNldHJlZTogc2VwYXJhdGUK
-Pj4+Pj4gV0RUOsKgwqAgU3RhcnRlZCB3YXRjaGRvZ0A1YTAwMjAwMCB3aXRoIHNlcnZpY2luZyBl
-dmVyeSAxMDAwbXMgKDMycyAKPj4+Pj4gdGltZW91dCkKPj4+Pj4gTkFORDrCoCAxMDI0IE1pQgo+
-Pj4+PiBNTUM6wqDCoCBTVE0zMiBTRC9NTUM6IDAsIFNUTTMyIFNEL01NQzogMQo+Pj4+PiBMb2Fk
-aW5nIEVudmlyb25tZW50IGZyb20gTU1DLi4uIEludmFsaWQgRU5WIG9mZnNldCBpbiBNTUMsIGNv
-cHk9MAo+Pj4+PiBJbjrCoMKgwqAgc2VyaWFsCj4+Pj4+IE91dDrCoMKgIHNlcmlhbAo+Pj4+PiBF
-cnI6wqDCoCBzZXJpYWwKPj4+Pj4gTmV0OsKgwqAgZXRoMDogZXRoZXJuZXRANTgwMGEwMDAKPj4+
-Pj4gSGl0IGFueSBrZXkgdG8gc3RvcCBhdXRvYm9vdDrCoCAwCj4+Pj4+Cj4+Pj4+IC4uLi4KPj4+
-Pj4gW8KgwqDCoCAwLjAwMDAwMF0gQm9vdGluZyBMaW51eCBvbiBwaHlzaWNhbCBDUFUgMHgwCj4+
-Pj4+IFvCoMKgwqAgMC4wMDAwMDBdIExpbnV4IHZlcnNpb24gNi40LjAtcmM2IChvZS11c2VyQG9l
-LWhvc3QpIAo+Pj4+PiAoYXJtLW9zdGwtbGludXgtZ251ZWFiaS1nY2MgKEdDQykgMTIuMi4wLCBH
-TlUgbGQgKEdOVSBCaW51dGlscykgCj4+Pj4+IDIuNDAuMjAyMzAxMTkpICMxIFNNUCBQUkVFTVBU
-IFN1biBKdW4gMTEgMjE6MzU6MzAgVVRDIDIwMjMKPj4+Pj4gLi4uLgo+Pj4+PiByb290QHN0bTMy
-bXAxLWRpc2NvLW9zczp+IyB3aGlsZSB0cnVlIDsgZG8gcnRjd2FrZSAtcyAxMDAgLW0gbWVtIDsg
-Cj4+Pj4+IGRvbmUKPj4+Pj4gcnRjd2FrZTogdW5yZWNvZ25pemVkIHN1c3BlbmQgc3RhdGUgJ21l
-bScKPj4+Pgo+Pj4+IFBsZWFzZSBmaXggeW91ciBrZXJuZWwgY29uZmlnIGFuZCBlbmFibGUgc3Vz
-cGVuZCB0byBtZW0sIEkgYW0gc3VyZSAKPj4+PiB0aGF0IGlzIG5vdCBkaWZmaWN1bHQuCj4+Pj4K
-Pj4+Pj4gSSBjaGVjayBhbHNvIHdpdGggZG93bnN0cmVhbSAoT3BlblNUTGludXggVjQuMCksCj4+
-Pj4KPj4+PiBUaGlzIGlzIG5vdCByZWxldmFudCB0byB0aGlzIGRpc2N1c3Npb24uCj4+Pj4KPj4+
-Pj4gYW5kIEkgY2FuJ3QgcmVwcm9kdWNlZCB0aGUgaXNzdWUgYnV0IHdlIGFyZSB1c2luZyBURi1B
-wqAgLyBPUC1URUUgLyAKPj4+Pj4gU0NNSSB0byBzdXBwb3J0IGFsbCB0aGUgbG93IHBvd2VyIG1v
-ZGVzLgo+Pj4+Pgo+Pj4+Pgo+Pj4+PiBBbmQgdGhpcyBsb3cgcG93ZXIgc3VwcG9ydCAoaW4gVEYt
-QS8gT1AtVEVFIC8gTGludXggd2l0aCBTQ01JKSBpcyAKPj4+Pj4gbm90IHlldCB1cCBzdHJlYW1l
-ZC4KPj4+Pj4KPj4+Pj4KPj4+Pj4gUFM6IGlmIHlvdSBhcmUgbm90IGFibGUgdG8gcmVzdGFydCBl
-dmVuIGFmdGVyIGEgUkVTRVQsCj4+Pj4+IMKgwqDCoMKgwqDCoMKgIEkgYXNzdW1lIHNvbWV0aGlu
-ZyBpcyB3cm9uZyBpbiB0aGUgUE1JQyBjb25maWd1cmF0aW9uCj4+Pj4+Cj4+Pj4+IMKgwqDCoMKg
-wqDCoMKgIChmb3IgZXhhbXBsZSBpbiBOVk0gb3IgaW4gaW5pdGlhbCByZWd1bGF0b3IgY29uZmln
-dXJhdGlvbikKPj4+Pj4KPj4+Pj4gwqDCoMKgwqDCoMKgwqAgc28geW91IGhhdmUgbm8gcG93ZXIg
-Y3ljbGUgb24gRERSIGR1cmluZyByZXNldC4uLgo+Pj4+Pgo+Pj4+PiDCoMKgwqAgwqAgwqDCoCA9
-PiBzb21ldGhpbmcgaXMgd3JvbmcgaW4gUE1JQyBjb25maWd1cmF0aW9uIGluIGxpbnV4ID8KPj4+
-Pgo+Pj4+IFBvc3NpYmx5LCBidXQgdGhlbiBpdCBpcyBhbHNvIHNvbWV0aGluZyB3cm9uZyBvbiBT
-VE0zMk1QMTU3QyBFVjEsIAo+Pj4+IGJlY2F1c2UgSSBjYW4gcmVwcm9kdWNlIHRoZSBmYWlsdXJl
-IG9uIEVWMSB0b28uIEkgc3BlY2lmaWNhbGx5IGRpZCAKPj4+PiBjaGVjayB0aGlzIG9uIHRoZSBF
-VjEuIFBsZWFzZSBmaXggeW91ciBrZXJuZWwgY29uZmlnIGFuZCB0cnkgYWdhaW4sIAo+Pj4+IHRo
-ZW4geW91IHNob3VsZCBiZSBhYmxlIHRvIHNlZSBpdCB5b3Vyc2VsZi4KPj4+Cj4+PiBIYXMgdGhl
-cmUgYmVlbiBhbnkgbmV3cyBvbiB0aGlzIGRlZmVjdCBvZiBFVjEgb3IgaGFzIHRoaXMgYmVlbiAK
-Pj4+IGlnbm9yZWQgYnkgU1QgPwo+Pgo+PiBIaSBNYXJlawo+IAo+IEhpLAo+IAo+PiBTb3JyeSBm
-b3IgdGhlIGRlbGF5LAo+IAo+IE5vIHdvcnJpZXMuCj4gCj4gV2hhdCBJIGFtIG1vcmUgY29uY2Vy
-bmVkIGFib3V0IGlzIC0tIHdoeSBpcyB0aGlzIHByb2JsZW0gcHJlc2VudCBvbiBFVjEgCj4gdG9v
-IGFuZCBob3cgdG8gc29sdmUgaXQgdGhlcmUgPyAoYW5kIG5vLCAiYWRkIG1vcmUgdW5uZWNlc3Nh
-cnkgc29mdHdhcmUgCj4gdG8gdGhlIHN0YWNrIHRvIGNvdmVyIHRoaXMgdXAiIGlzIG5vdCB0aGUg
-YW5zd2VyKQoKSSByYW4gaW50byB0aGlzIGRlZmVjdCBhZ2FpbiwgaXQgc2VlbXMgdGhlIEVWMSBw
-cm9ibGVtIGlzIGlnbm9yZWQgYnkgU1QsIApvciBhcmUgdGhlcmUgYW55IG5ld3MgPwpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWls
-aW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczov
-L3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0z
-Mgo=
+Currently clock providers may override default implementation of
+soc_clk_dump function to replace clk dump command output. This causes
+confusing behaviour when u-boot is built with one of such drivers
+enabled but still has clocks defined using CCF. For example, enabling
+CMD_CLK and using clk dump on sandbox target will not show CCF clocks
+because k210 driver overrides common soc_clk_dump.
+
+Changelog:
+ v1 -> v2:
+ - Add missing static to dump functions
+
+ v2 -> v3:
+ - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
+
+ v3 -> v4:
+ - Rebase and refactor dump for new Amlogic A1 clock controller driver
+
+Igor Prusov (8):
+  clk: zynq: Move soc_clk_dump to Zynq clock driver
+  clk: ast2600: Move soc_clk_dump function
+  clk: k210: Move soc_clk_dump function
+  clk: amlogic: Move driver and ops structs
+  clk: Add dump operation to clk_ops
+  cmd: clk: Use dump function from clk_ops
+  clk: treewide: switch to clock dump from clk_ops
+  cmd: clk: Make soc_clk_dump static
+
+ arch/arm/mach-zynq/clk.c               |  57 --------------
+ arch/mips/mach-pic32/cpu.c             |  23 ------
+ cmd/clk.c                              |  13 +++-
+ drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
+ drivers/clk/clk_k210.c                 | 103 ++++++++++++-------------
+ drivers/clk/clk_pic32.c                |  39 ++++++++++
+ drivers/clk/clk_versal.c               |   7 +-
+ drivers/clk/clk_zynq.c                 |  51 ++++++++++++
+ drivers/clk/clk_zynqmp.c               |  13 ++--
+ drivers/clk/imx/clk-imx8.c             |  11 +--
+ drivers/clk/meson/a1.c                 |  54 +++++--------
+ drivers/clk/mvebu/armada-37xx-periph.c |   5 +-
+ drivers/clk/stm32/clk-stm32mp1.c       |  29 ++-----
+ include/clk-uclass.h                   |   3 +
+ include/clk.h                          |   2 -
+ 15 files changed, 244 insertions(+), 249 deletions(-)
+
+-- 
+2.34.1
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

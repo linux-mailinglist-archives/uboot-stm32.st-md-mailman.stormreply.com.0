@@ -2,106 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C95B7CD597
-	for <lists+uboot-stm32@lfdr.de>; Wed, 18 Oct 2023 09:42:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B6C37D9BAF
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Oct 2023 16:40:58 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 514D4C6C838;
-	Wed, 18 Oct 2023 07:42:43 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C98CBC6C841;
+	Fri, 27 Oct 2023 14:40:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C063AC6C831
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D9D37C6B44F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Oct 2023 07:42:40 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-32d9cb5e0fcso4275176f8f.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697614960; x=1698219760;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
- b=ouzpymWS79BXPD9GFwIqJ3cUMO+Kvm0bi+pIxUHbIC7BxnxpvuBk+myLSe5lcFVrt8
- J/5PSpxxLwlyhrGxn8EniG4R7erw81vt22fqXXTga1E+TF2FIfWVv00r2TV40oyBoo4d
- RtrEN3kpY/afb2l1i8rWuLjzwaPWqKF1a1gm5Tl9UPKx5r4JOeLbBl8cso8vIYIQqWSm
- mX7E9GM6Ai9jII1JAuY+c4mU8LrzadDinMuh2wyNdw6Fs7Aqal1oX6GRpmLXI9Oqa8WG
- qG3XLq4n3uJPi/XmNEgUtC1UwlWh412NK5DO2nQRGK7m1hqad/qiG0iFGaPxSE/2F6G8
- MDjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697614960; x=1698219760;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
- b=ofcNPIJ2g/eM/kCubdRHTUFIftX6zYUDNbp1e400XcAkDQhVvOpKENxpy0645bS+ZA
- dk/fLmoB/frfzGMBqSNOq8S8/2uzIYIk1x6hntMF0Rk6ymr+tpazKDAEJjfhf2KI7igi
- X0FgiZ70BfuVoTK5KJcCb0m3fW6C1zrzJdWI2RHR6nUjYBmxCfiiUTh4P8wIW/QZ4pFi
- 5C2g3yGZc2V05Ds+3lVPBRXGW2iB2Dyf2jlRjHUo5LqKjNsSfjvZqwg4ZRFcfgNm7XZQ
- GRCBlJSDHsUuKQ7YoN7yr5qRCG+snHMPupOGRQm/n3YTX74TZBaUdWQsrzou3U5tfkAc
- jYVw==
-X-Gm-Message-State: AOJu0Yyd1apailJY1/QB1+7T8M5yv4guFjCUqc8VjGq+pqDRmX4sdAdh
- Zx7zvHGKxPcBmbhOhX2sxM/Smg==
-X-Google-Smtp-Source: AGHT+IFiMpUuxGLmnXBwvD/drZlOEpAchJMyhKaL9bfQNVx829Dm25kk6dI8KZmZfEjwb96fX66SSg==
-X-Received: by 2002:adf:ec0f:0:b0:317:67bf:3376 with SMTP id
- x15-20020adfec0f000000b0031767bf3376mr3658884wrn.57.1697614960106; 
- Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:5d8f:701:423:3d05?
- ([2a01:e0a:982:cbb0:5d8f:701:423:3d05])
- by smtp.gmail.com with ESMTPSA id
- f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.42.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 00:42:39 -0700 (PDT)
-Message-ID: <d4fa0c3a-a6a1-4c06-8f9e-f59086201069@linaro.org>
-Date: Wed, 18 Oct 2023 09:42:37 +0200
+ Fri, 27 Oct 2023 14:40:56 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 39RCPIj6010092; Fri, 27 Oct 2023 16:40:32 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version:content-type
+ :content-transfer-encoding; s=selector1; bh=OhraUJN0ELUIERLkVjMV
+ X6CnKJzBJsW8cfBKwm8ysXk=; b=64Rz1w44sHbULUZh172R+LB3flnPMZjf5tCi
+ 58Y/1sDjKUklvZTEHSfbYV1g6EhZcofcoFiiuQ+JrFpKh14nyELJ9bGyTzGFEa0q
+ jJOyRN0JBdl49KruEK0dHFt+YIgVahsViIAiRgnn8kHnA9v0d4DdYAgTEEHHf1OI
+ ZlzKRA5ks6zG7VpJd6eaBPFqrYm6JLyOpbTskxRAt2/UySrRnWBr2UsA9LxZAeHf
+ YP5EhvMbA7mVM5GtFXUJterSDXMz5+KMjZKlJLc7Pqtvu04adnjZcdGuRtvTlrsW
+ wfSO+9fn6V6zDVUXKcmlQB4fD8CIf5POlyfbnJvIsof5pDCHvw==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3tywqq48xh-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 27 Oct 2023 16:40:32 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EB97E100062;
+ Fri, 27 Oct 2023 16:40:28 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B951623D41E;
+ Fri, 27 Oct 2023 16:40:28 +0200 (CEST)
+Received: from localhost (10.201.20.38) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 27 Oct
+ 2023 16:40:28 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 27 Oct 2023 16:39:53 +0200
+Message-ID: <20231027144002.1001881-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
- <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
- <20231017165649.1492-5-ivprusov@sberdevices.ru>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231017165649.1492-5-ivprusov@sberdevices.ru>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
- Joel Stanley <joel@jms.id.au>, kernel@sberdevices.ru, prusovigor@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v4 4/8] clk: amlogic: Move driver and ops
-	structs
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-27_13,2023-10-27_01,2023-05-22_02
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bharat Gooty <bharat.gooty@broadcom.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Etienne Carriere <etienne.carriere@linaro.org>
+Subject: [Uboot-stm32] [PATCH v1 0/9] Add STM32MP2 SoCs and STM32MP257F-EV
+	board support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,79 +76,119 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 17/10/2023 18:56, Igor Prusov wrote:
-> Move driver and ops structs to avoid forward declaration after switching
-> to dump in clk_ops.
-> 
-> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-> ---
->   drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
->   1 file changed, 17 insertions(+), 17 deletions(-)
-> 
-> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-> index 1075ba7333..e3fa9db7d0 100644
-> --- a/drivers/clk/meson/a1.c
-> +++ b/drivers/clk/meson/a1.c
-> @@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
->   	return meson_mux_set_parent_by_id(clk, parent_clk->id);
->   }
->   
-> -static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> -	.get_rate	= meson_clk_get_rate,
-> -	.set_rate	= meson_clk_set_rate,
-> -	.set_parent	= meson_clk_set_parent,
-> -};
-> -
->   static int meson_clk_probe(struct udevice *dev)
->   {
->   	struct meson_clk *priv = dev_get_priv(dev);
-> @@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
->   	{ }
->   };
->   
-> -U_BOOT_DRIVER(meson_clk) = {
-> -	.name		= "meson-clk-a1",
-> -	.id		= UCLASS_CLK,
-> -	.of_match	= meson_clk_ids,
-> -	.priv_auto	= sizeof(struct meson_clk),
-> -	.ops		= &meson_clk_ops,
-> -	.probe		= meson_clk_probe,
-> -};
-> -
->   static const char *meson_clk_get_name(struct clk *clk, int id)
->   {
->   	const struct meson_clk_info *info;
-> @@ -727,3 +710,20 @@ int soc_clk_dump(void)
->   
->   	return 0;
->   }
-> +
-> +static struct clk_ops meson_clk_ops = {
-> +	.disable	= meson_clk_disable,
-> +	.enable		= meson_clk_enable,
-> +	.get_rate	= meson_clk_get_rate,
-> +	.set_rate	= meson_clk_set_rate,
-> +	.set_parent	= meson_clk_set_parent,
-> +};
-> +
-> +U_BOOT_DRIVER(meson_clk) = {
-> +	.name		= "meson-clk-a1",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= meson_clk_ids,
-> +	.priv_auto	= sizeof(struct meson_clk),
-> +	.ops		= &meson_clk_ops,
-> +	.probe		= meson_clk_probe,
-> +};
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Add STM32MP257F Evaluation board support, it embeds a
+STM32MP257FAI SoC, with 4GB of DDR4, TSN switch (2+1 ports),
+2*USB typeA, 1*USB2 typeC, SNOR OctoSPI, mini PCIe, STPMIC2
+for power distribution ...
+
+
+
+Patrice Chotard (8):
+  arm: caches: Make DCACHE_DEFAULT_OPTION accessible for ARM64 arch
+  stm32mp: dram_init: Get RAM size from DT if no RAM driver found
+  stm32mp: dram_init: Limit DDR usage under 4GB boundary for STM32MP
+  stm32mp: bsec: Fix AARCH64 compilation warnings
+  serial: stm32: Fix AARCH64 compilation warnings
+  pinctrl: pinctrl_stm32: Add stm32mp2 support
+  ARM: dts: stm32: Add STM32MP257F Evaluation board support
+  stm32mp2: initial support
+
+Patrick Delaunay (1):
+  stm32mp: dram_init: Fix AARCH64 compilation warnings
+
+ arch/arm/Kconfig                              |   2 +-
+ arch/arm/dts/Makefile                         |   3 +
+ arch/arm/dts/stm32mp25-pinctrl.dtsi           |  38 +++
+ arch/arm/dts/stm32mp25-u-boot.dtsi            | 102 +++++++
+ arch/arm/dts/stm32mp251.dtsi                  | 285 ++++++++++++++++++
+ arch/arm/dts/stm32mp253.dtsi                  |  23 ++
+ arch/arm/dts/stm32mp255.dtsi                  |   9 +
+ arch/arm/dts/stm32mp257.dtsi                  |   9 +
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi      |  20 ++
+ arch/arm/dts/stm32mp257f-ev1.dts              |  55 ++++
+ arch/arm/dts/stm32mp25xc.dtsi                 |   8 +
+ arch/arm/dts/stm32mp25xf.dtsi                 |   8 +
+ arch/arm/dts/stm32mp25xxai-pinctrl.dtsi       |  83 +++++
+ arch/arm/dts/stm32mp25xxak-pinctrl.dtsi       |  71 +++++
+ arch/arm/dts/stm32mp25xxal-pinctrl.dtsi       |  71 +++++
+ arch/arm/include/asm/system.h                 |  16 +-
+ arch/arm/mach-stm32mp/Kconfig                 |  26 +-
+ arch/arm/mach-stm32mp/Kconfig.25x             |  43 +++
+ arch/arm/mach-stm32mp/Makefile                |  15 +-
+ arch/arm/mach-stm32mp/bsec.c                  |  29 +-
+ arch/arm/mach-stm32mp/dram_init.c             |  17 +-
+ arch/arm/mach-stm32mp/include/mach/stm32.h    | 141 +++++----
+ .../arm/mach-stm32mp/include/mach/sys_proto.h |  26 ++
+ arch/arm/mach-stm32mp/stm32mp1/Makefile       |  20 ++
+ arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c    |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c    |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c   |   0
+ .../{ => stm32mp1}/pwr_regulator.c            |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c    |   0
+ .../mach-stm32mp/{ => stm32mp1}/stm32mp13x.c  |   0
+ .../mach-stm32mp/{ => stm32mp1}/stm32mp15x.c  |   0
+ arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c |   0
+ arch/arm/mach-stm32mp/stm32mp2/Makefile       |   9 +
+ arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c    |  68 +++++
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c          | 108 +++++++
+ arch/arm/mach-stm32mp/stm32mp2/fdt.c          |  16 +
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c   | 194 ++++++++++++
+ arch/arm/mach-stm32mp/syscon.c                |   4 +-
+ board/st/stm32mp2/Kconfig                     |  13 +
+ board/st/stm32mp2/MAINTAINERS                 |   9 +
+ board/st/stm32mp2/Makefile                    |   6 +
+ board/st/stm32mp2/stm32mp2.c                  |  52 ++++
+ configs/stm32mp25_defconfig                   |  52 ++++
+ drivers/pinctrl/pinctrl_stm32.c               |   2 +
+ drivers/serial/serial_stm32.c                 |  23 +-
+ drivers/serial/serial_stm32.h                 |   2 +-
+ include/configs/stm32mp25_common.h            |  24 ++
+ include/dt-bindings/pinctrl/stm32-pinfunc.h   |   3 +
+ 48 files changed, 1597 insertions(+), 108 deletions(-)
+ create mode 100644 arch/arm/dts/stm32mp25-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp251.dtsi
+ create mode 100644 arch/arm/dts/stm32mp253.dtsi
+ create mode 100644 arch/arm/dts/stm32mp255.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32mp257f-ev1.dts
+ create mode 100644 arch/arm/dts/stm32mp25xc.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xf.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxai-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxak-pinctrl.dtsi
+ create mode 100644 arch/arm/dts/stm32mp25xxal-pinctrl.dtsi
+ create mode 100644 arch/arm/mach-stm32mp/Kconfig.25x
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp1/Makefile
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/cpu.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/fdt.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/psci.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/pwr_regulator.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/spl.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp13x.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/stm32mp15x.c (100%)
+ rename arch/arm/mach-stm32mp/{ => stm32mp1}/tzc400.c (100%)
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/Makefile
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/arm64-mmu.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/cpu.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/fdt.c
+ create mode 100644 arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+ create mode 100644 board/st/stm32mp2/Kconfig
+ create mode 100644 board/st/stm32mp2/MAINTAINERS
+ create mode 100644 board/st/stm32mp2/Makefile
+ create mode 100644 board/st/stm32mp2/stm32mp2.c
+ create mode 100644 configs/stm32mp25_defconfig
+ create mode 100644 include/configs/stm32mp25_common.h
+
+-- 
+2.25.1
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

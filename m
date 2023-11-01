@@ -2,60 +2,60 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 790ED7DE512
-	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Nov 2023 18:11:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7372D7DE513
+	for <lists+uboot-stm32@lfdr.de>; Wed,  1 Nov 2023 18:11:35 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 26325C6B44D;
-	Wed,  1 Nov 2023 17:11:01 +0000 (UTC)
-Received: from mail-ua1-f42.google.com (mail-ua1-f42.google.com
- [209.85.222.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3B57DC6B44D;
+	Wed,  1 Nov 2023 17:11:35 +0000 (UTC)
+Received: from mail-qk1-f178.google.com (mail-qk1-f178.google.com
+ [209.85.222.178])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7DC88C6A5F2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5D510C6B44C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  1 Nov 2023 17:10:59 +0000 (UTC)
-Received: by mail-ua1-f42.google.com with SMTP id
- a1e0cc1a2514c-7b9d894be6fso2137547241.2
+ Wed,  1 Nov 2023 17:11:34 +0000 (UTC)
+Received: by mail-qk1-f178.google.com with SMTP id
+ af79cd13be357-778a108ae49so94474785a.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 01 Nov 2023 10:10:59 -0700 (PDT)
+ Wed, 01 Nov 2023 10:11:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1698858658; x=1699463458;
+ d=gmail.com; s=20230601; t=1698858693; x=1699463493;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=b/DVyx7HV1QtHnJQKbe6LRy4VncbddBPWfDdtcBheIM=;
- b=ZbQ1a4THyTU8FAPHn368bRpt066WNXNhzmCn0ltLS+0GyjzvV1LRO/1d0UjkCOZpqG
- c0/oG0X5CYYrS4SKFTw6fkbd3pXNqXD44XjvPiraoyq8zNkEUtDHLduFl9RAFw7f5LC9
- 19XgnJ+bZolV5L1vKlYibCrSD1WNz+NX68kyE8+/F7ddePFYGAeyqcSR5eQ16+2cbMdp
- pJlWyUd84OCeH1g7FoMau9HS168Wp0QzysdCOypqL5uO8rsaIJGdGPitG1j0Tty/cSyj
- yFrp52a4N9y1dM1wZXLI2+AjXMgJQGZIGfec95Ptsq8w2lD946GGn4KR4y7Ct+uDv0p1
- e0og==
+ bh=46h/KhN/7RdInOJ3BBu0welC5pqJf6vbaHJ5AuuWfxc=;
+ b=FXBVf3PQdf2Nf23KEzk+30PE6IZZS/z7X5zD6tSbnJ0vbxJnFyasZ0SRsXVQPZ33/W
+ nuC8LNMo9e5VvDfq9klAuQXbAJ8G+kzEO7KDRygJG1JCNc7Fi4UnZm5K/XUfAHx3eMwT
+ Lp0FMeogvoakimrcQeoOPET89EoDYh+hO+wfQvy7FWk9HLsx3xDhDQU+/Xz78Jc2Kn7x
+ lPzifMtjn5XUkfl/KyGpV0wnJOhPWYzZPb7t7gRmfkCKlU50jDWhMbckXempwB7/j6K8
+ 935AAe2LUgzitAnyAWLJFru0bsxDFyxSDWlR6pPteWmoABMsaaehltxC4QTVhG6TTY5I
+ SV2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698858658; x=1699463458;
+ d=1e100.net; s=20230601; t=1698858693; x=1699463493;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b/DVyx7HV1QtHnJQKbe6LRy4VncbddBPWfDdtcBheIM=;
- b=go1kCNAX7ZGC5wf+vbB12dJtpkOwneEXybtJcZdBDexa5pTc3dPZbeppS3ItvrCX3s
- Fxs7fWTi8ZdoWpSELn/hMR/G8Bzyax2byYKEO++YKlllWm9hsttbqeYAPDXelZW86Ne6
- C8zW8buYr/9GsU+GpYD6dej/FxQ/IQ3T4GujX2fmtNA/aUHt0gLIr1fdZ6C+g3KsYCzN
- ypj6gp4eKTT37bkkeOBxAJG68NSto3NcAdrUV7afGjjIZRQOJyDWkRx+gb8C7P48HU1c
- VqbusrvWXrAaMttuiZuQBUQZkdSzZZSEvKRDmPUIyolvBu/W8I1jE+UaxoFOAvrO2kpj
- s53g==
-X-Gm-Message-State: AOJu0YxHHzt1UjFYb8DFdDMYeQfbK5kp2Yewvrn6Zf3zBy7RVGS4+wdF
- /9aH2q0XtYF5Lx0Gx/mdBKg=
-X-Google-Smtp-Source: AGHT+IFlvUnuSsp0RjozNueg7ItSkpx0jpzbbVQ2lc6wIYn+7vbHuSRFiC1NogWAWIAxfT7fDQYCEg==
-X-Received: by 2002:a67:c896:0:b0:458:3bc1:c816 with SMTP id
- v22-20020a67c896000000b004583bc1c816mr11460758vsk.16.1698858658174; 
- Wed, 01 Nov 2023 10:10:58 -0700 (PDT)
+ bh=46h/KhN/7RdInOJ3BBu0welC5pqJf6vbaHJ5AuuWfxc=;
+ b=RQ+VD7rnQ6uJ0Wjx/aHjg1g9kDeu2+2qKW8AI64xPXHT7RVZxTrkymceQ47261D2eA
+ 9KhzqxEjEbCOsSTdcr1ORkxX4VaNry/9OpJcm5J7IVC5O+dMlL/8oz53py71e3iH0RGV
+ lFUE0f8XKy6X5IAmCV5sv2jRiWVJ0jwp6hxwoVp7tpXBoDd5FEWbQkn49kWNHFKNPl0c
+ EkxUBhq9e0R9PiGGVSAjvx/OVtS4WXgTe24MinfcYIf+PwezBgnM1WMd7EAhhXyFHBmV
+ vAatW4mEi8obZPHQbTYdTMJubz8Vw9RUqh2hHm7s05/E7IvPeImxzfCBNeH/htBtVyJ2
+ 5RTw==
+X-Gm-Message-State: AOJu0YwceEvKAPYfUNBhqTDHrxEJYjuaNGyM0Cgz7SCA9ftqQPSfUSz8
+ SGsT9H9/YUgtxGSIuEC69xc=
+X-Google-Smtp-Source: AGHT+IEcwjX/wTuzVtFvF9fyx6gqKP6h8lXShoRRIbfXGmfv9FK3wjgzUwWau5AEn1kE3m2qRG5YpA==
+X-Received: by 2002:a05:620a:1488:b0:778:8ebc:129e with SMTP id
+ w8-20020a05620a148800b007788ebc129emr8351667qkj.15.1698858693336; 
+ Wed, 01 Nov 2023 10:11:33 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- de43-20020a05620a372b00b007788d2f3d4asm1592402qkb.39.2023.11.01.10.10.57
+ a14-20020a05620a02ee00b0076f21383b6csm1582561qko.112.2023.11.01.10.11.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Nov 2023 10:10:57 -0700 (PDT)
-Message-ID: <c1c4205c-edb0-7dd2-3ff0-3be1c6a79104@gmail.com>
-Date: Wed, 1 Nov 2023 13:10:56 -0400
+ Wed, 01 Nov 2023 10:11:33 -0700 (PDT)
+Message-ID: <df88e98f-99de-abca-de7c-6d755c6283ff@gmail.com>
+Date: Wed, 1 Nov 2023 13:11:31 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
@@ -68,14 +68,13 @@ To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>
 References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
- <20231017165649.1492-7-ivprusov@sberdevices.ru>
+ <20231017165649.1492-6-ivprusov@sberdevices.ru>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231017165649.1492-7-ivprusov@sberdevices.ru>
+In-Reply-To: <20231017165649.1492-6-ivprusov@sberdevices.ru>
 Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
  u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
  Joel Stanley <joel@jms.id.au>, kernel@sberdevices.ru, prusovigor@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v4 6/8] cmd: clk: Use dump function from
-	clk_ops
+Subject: Re: [Uboot-stm32] [PATCH v4 5/8] clk: Add dump operation to clk_ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,138 +92,33 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 10/17/23 12:56, Igor Prusov wrote:
-> Add another loop to dump additional info from clock providers that
-> implement dump operation.
+> This adds dump function to struct clk_ops which should replace
+> soc_clk_dump. It allows clock drivers to provide custom dump
+> implementation without overriding generic CCF dump function.
 > 
 > Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
->   cmd/clk.c | 9 +++++++++
->   1 file changed, 9 insertions(+)
+>   include/clk-uclass.h | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/cmd/clk.c b/cmd/clk.c
-> index c7c379d7a6..90cc6fa906 100644
-> --- a/cmd/clk.c
-> +++ b/cmd/clk.c
-> @@ -62,6 +62,7 @@ static void show_clks(struct udevice *dev, int depth, int last_flag)
->   int __weak soc_clk_dump(void)
->   {
->   	struct udevice *dev;
-> +	const struct clk_ops *ops;
+> diff --git a/include/clk-uclass.h b/include/clk-uclass.h
+> index a22f1a5d84..30621e4823 100644
+> --- a/include/clk-uclass.h
+> +++ b/include/clk-uclass.h
+> @@ -39,6 +39,9 @@ struct clk_ops {
+>   	int (*set_parent)(struct clk *clk, struct clk *parent);
+>   	int (*enable)(struct clk *clk);
+>   	int (*disable)(struct clk *clk);
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	int (*dump)(struct udevice *dev);
+> +#endif
+>   };
 >   
->   	printf(" Rate               Usecnt      Name\n");
->   	printf("------------------------------------------\n");
-> @@ -69,6 +70,14 @@ int __weak soc_clk_dump(void)
->   	uclass_foreach_dev_probe(UCLASS_CLK, dev)
->   		show_clks(dev, -1, 0);
->   
-> +	uclass_foreach_dev_probe(UCLASS_CLK, dev) {
-> +		ops = dev_get_driver_ops(dev);
-> +		if (ops && ops->dump) {
-> +			printf("--------------------------\n");
-> +			ops->dump(dev);
-> +		}
-> +	}
-> +
->   	return 0;
->   }
->   #else
+>   #if 0 /* For documentation only */
 
-So this produces output like
-
-=> clk dump
-  Rate               Usecnt      Name
-------------------------------------------
-  26000000             0        |-- osc
---------------------------
-  Rate      Enabled Name
-------------------------
-  26000000  y       osc
-  780000000 y           pll0
-  390000000 -               aclk
-  390000000 y                   cpu
-  390000000 y                   sram0
-  390000000 y                   sram1
-  7800000   -                   clint
-  195000000 y                   apb0
-  195000000 y                       gpio
-  195000000 y                       uart1
-  195000000 y                       uart2
-  195000000 y                       uart3
-  195000000 y                       fpioa
-  195000000 y                       sha
-  195000000 y                   apb1
-  195000000 y                       aes
-  195000000 y                       otp
-  195000000 y                   apb2
-  195000000 y                   rom
-  390000000 y                   dma
-  390000000 y                   dvp
-  390000000 y                   fft
-  390000000 y               spi0
-  390000000 y               spi1
-  390000000 y               spi2
-  97500000  y               spi3
-  390000000 y               i2c0
-  390000000 y               i2c1
-  390000000 y               i2c2
-  390000000 y               timer0
-  390000000 y               timer1
-  390000000 y               timer2
-  390000000 y           pll1
-  390000000 y               ai
-  0         n           pll2
-  0         y               i2s0
-  0         y               i2s1
-  0         y               i2s2
-  0         -               i2s0_m
-  0         -               i2s1_m
-  0         -               i2s2_m
-  13000000  y           wdt0
-  13000000  n           wdt1
-  26000000  n           rtc
-
-And TBH I don't think it's particularly clear (at least at a glance) where
-one clock ends and another begins. I think something like
-
-diff --git i/cmd/clk.c w/cmd/clk.c
-index f55911db7a3..7bbcbfeda33 100644
---- i/cmd/clk.c
-+++ w/cmd/clk.c
-@@ -73,7 +73,7 @@ static int soc_clk_dump(void)
-         uclass_foreach_dev_probe(UCLASS_CLK, dev) {
-                 ops = dev_get_driver_ops(dev);
-                 if (ops && ops->dump) {
--                       printf("--------------------------\n");
-+                       printf("\n%s %s:\n", dev->driver->name, dev->name);
-                         ops->dump(dev);
-                 }
-         }
-
-would work a lot better. This produces an output like
-
-=> clk dump
-  Rate               Usecnt      Name
-------------------------------------------
-  26000000             0        |-- osc
-
-k210_clk clock-controller:
-  Rate      Enabled Name
-------------------------
-  26000000  y       osc
-  780000000 y           pll0
-  390000000 -               aclk
-  390000000 y                   cpu
-  390000000 y                   sram0
-  390000000 y                   sram1
-</snip>
-
-which I think makes it clearer that we have a new clock tree getting dumped.
-
-This also doesn't really address multiple interacting clock trees (such as
-e.g. if I had another clock derived from a k210_clk in the above example)
-but at least it's a start.
+Please add documentation.
 
 --Sean
 _______________________________________________

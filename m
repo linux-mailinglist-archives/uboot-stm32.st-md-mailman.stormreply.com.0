@@ -2,79 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DC987E100F
-	for <lists+uboot-stm32@lfdr.de>; Sat,  4 Nov 2023 16:24:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EA0D7E105A
+	for <lists+uboot-stm32@lfdr.de>; Sat,  4 Nov 2023 17:32:17 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 00DB9C6B457;
-	Sat,  4 Nov 2023 15:24:36 +0000 (UTC)
-Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
- [209.85.222.181])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 01094C6B457;
+	Sat,  4 Nov 2023 16:32:17 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B8D15C6B444
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 65CC3C6B44D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  4 Nov 2023 15:24:34 +0000 (UTC)
-Received: by mail-qk1-f181.google.com with SMTP id
- af79cd13be357-77896da2118so181031885a.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 04 Nov 2023 08:24:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1699111473; x=1699716273;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dL2RkhTpXekTF8Ai6P/vNUxWJG4LIEK0Z2pmSz4RQmw=;
- b=aospBrFoDFd3H4fET2PslVguBlIKv/aDa7Ib89mZzV0HrWYbQj96re8/WWnNzBaLwd
- 6214XpXqNdIc0pJL36ACNHw+CwD42kv4JqDsz/comxgcBsQEAGU4mWH5mOjmXHPLEnL0
- pBR7EIjDNvaCtqFxYRawkpi+6Xem5MxWAoYovWew2TKaoar9MokCW+aqAmul4uBXhTe5
- FFekUSAUhi+E5zDW+IF39MMuEjPmT19Em0mJtkghBzkVgn3r2MjOEwHl0EJcQQ5SUs3I
- 3pNr7iEvtq5zMtM4Pczu5TsEx7qhJ7p0L10bvId25D1TmJXUizcHonPAcZKvIFay4okR
- k5Rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699111473; x=1699716273;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dL2RkhTpXekTF8Ai6P/vNUxWJG4LIEK0Z2pmSz4RQmw=;
- b=ROxYvD6gc5OFP4ShsJCCW48r+Sld8EdAy4rewE+jnDCcj4l1DEKkBODRNvSCgnLDDr
- +qZWQFhT22xmnQpygvYbSpONQFhYRfIkDC6Nox0S0DZKBOshlDrYZtbjZz9zPiwYhbYN
- aqVIrw5fk3ryinKf3vTdVl7cZcyrfcXa2Srx4Pv+VYmv45xcgvCRdoE7s8qmLa1ikVGk
- xe/SCDAlypVh1EbPYKfkzLwxdI0aS/wym/ctoTXOiILlorPPhdHc90dCR42DfZEhyC1p
- 0TiqK16LUEsDPle06rt5T/Rn0SxkPSh9cMSj230DjciNXsRI1sgEtmd9OOSlkJh06MmJ
- p9hg==
-X-Gm-Message-State: AOJu0Yzg17U0aoVrhKKEgxXx8oHvMhSkwf+XnrxqNE6ZE3np4LJ3Z1Nj
- Xi2RfJFb6gkAKIfC/AtTLYk=
-X-Google-Smtp-Source: AGHT+IE04H40wfAcCOloCWAQXdg+ekQlqAHdCNu7UL7HnxPjA6DF48eJgvCUGRHaYCI5YXknuhYV4w==
-X-Received: by 2002:a05:6214:c88:b0:671:2c2f:4fe6 with SMTP id
- r8-20020a0562140c8800b006712c2f4fe6mr22660073qvr.46.1699111473641; 
- Sat, 04 Nov 2023 08:24:33 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- u14-20020a0cf88e000000b006585069e894sm1692509qvn.109.2023.11.04.08.24.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 04 Nov 2023 08:24:33 -0700 (PDT)
-Message-ID: <712d1810-93ad-8fd5-8989-1274b5ce49ce@gmail.com>
-Date: Sat, 4 Nov 2023 11:24:32 -0400
+ Sat,  4 Nov 2023 16:32:15 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 744A886E05;
+ Sat,  4 Nov 2023 17:32:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1699115532;
+ bh=ykUOhPw2aO5lzp8CyuAMwB/93aRw3tHDkW4fmeRj9CA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=KzKgQlRTYkDQZwdVon6pPWiOY6LkUJtuiBMCSZk7MmETFfJM6Cx8rt7iWE1ovyOuM
+ FG/v82fkhl7yHu77bPCGRbq1IKM8Fpi0bmX+7UNTJDVIZib1AcMg1gB6MyKVFDD2sG
+ 8SA/+a5wkBJ1is0mOtvuzqEPhqblciiX/QJLct+d3i+ltntwQdIvJRtlK6vd+jqJfC
+ AgWwbDoClXlNIwvJ0UZK6eeh7qDRQAx9XwbaFZEKUEQ7CU0x1AwHW+mGxhDq+G9TM3
+ Vx5rA1kXgTeAGRVZLa5dqezLUatDhyRsLFOVrPSSDGz+PNgbzPSrANPG4hvM7S12oQ
+ uWFSmQVoXeTow==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Sat,  4 Nov 2023 17:31:56 +0100
+Message-ID: <20231104163203.117382-1-marex@denx.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
- <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20231102122017.56995-1-ivprusov@sberdevices.ru>
- <20231102122017.56995-6-ivprusov@sberdevices.ru>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231102122017.56995-6-ivprusov@sberdevices.ru>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
- Joel Stanley <joel@jms.id.au>, kernel@sberdevices.ru, prusovigor@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v5 5/8] clk: Add dump operation to clk_ops
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com
+Subject: [Uboot-stm32] [PATCH 1/2] arm: stm32: Enable TCP, IPv6,
+	wget on DH STM32MP15 DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,68 +55,80 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 11/2/23 08:20, Igor Prusov wrote:
-> This adds dump function to struct clk_ops which should replace
-> soc_clk_dump. It allows clock drivers to provide custom dump
-> implementation without overriding generic CCF dump function.
-> 
-> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->   include/clk-uclass.h | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
-> 
-> diff --git a/include/clk-uclass.h b/include/clk-uclass.h
-> index a22f1a5d84..793bf14160 100644
-> --- a/include/clk-uclass.h
-> +++ b/include/clk-uclass.h
-> @@ -25,6 +25,7 @@ struct ofnode_phandle_args;
->    * @set_parent: Set current clock parent
->    * @enable: Enable a clock.
->    * @disable: Disable a clock.
-> + * @dump: Print clock information.
->    *
->    * The individual methods are described more fully below.
->    */
-> @@ -39,6 +40,9 @@ struct clk_ops {
->   	int (*set_parent)(struct clk *clk, struct clk *parent);
->   	int (*enable)(struct clk *clk);
->   	int (*disable)(struct clk *clk);
-> +#if IS_ENABLED(CONFIG_CMD_CLK)
-> +	int (*dump)(struct udevice *dev);
-> +#endif
->   };
->   
->   #if 0 /* For documentation only */
-> @@ -135,6 +139,17 @@ int enable(struct clk *clk);
->    * Return: zero on success, or -ve error code.
->    */
->   int disable(struct clk *clk);
-> +
-> +/**
-> + * dump() - Print clock information.
-> + * @clk:	The clock device to dump.
-> + *
-> + * If present, this function is called by "clk dump" command for each
-> + * bound device.
-> + *
-> + * Return: zero on success, or -ve error code.
-> + */
-> +int dump(struct udevice *dev);
+Enable support for TCP protocol, wget, and IPv6 on this platform.
+The former two allow users download payload into the U-Boot from
+a web server, which may be more convenient or easier to set up
+than TFTP server. The later is enabled to future proof the IP
+stack on this platform.
 
-Actually, this should return void, since we don't do anything with the return code.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ configs/stm32mp15_dhcom_basic_defconfig | 5 +++++
+ configs/stm32mp15_dhcor_basic_defconfig | 5 +++++
+ 2 files changed, 10 insertions(+)
 
---Sean
-
->   #endif
->   
->   #endif
+diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+index b6cd0a47fa7..08aac878f8e 100644
+--- a/configs/stm32mp15_dhcom_basic_defconfig
++++ b/configs/stm32mp15_dhcom_basic_defconfig
+@@ -76,7 +76,10 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
+ CONFIG_SYS_DISABLE_AUTOLOAD=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_BOOTCOUNT=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+@@ -101,6 +104,8 @@ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_USE_SERVERIP=y
+ CONFIG_SERVERIP="192.168.1.1"
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_STM32_ADC=y
+ CONFIG_SPL_BLOCK_CACHE=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+index d1acf9c657e..8cd6924b580 100644
+--- a/configs/stm32mp15_dhcor_basic_defconfig
++++ b/configs/stm32mp15_dhcor_basic_defconfig
+@@ -74,7 +74,10 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_TFTPPUT=y
+ CONFIG_SYS_DISABLE_AUTOLOAD=y
++CONFIG_CMD_WGET=y
+ CONFIG_CMD_BOOTCOUNT=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+@@ -99,6 +102,8 @@ CONFIG_IP_DEFRAG=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_USE_SERVERIP=y
+ CONFIG_SERVERIP="192.168.1.1"
++CONFIG_PROT_TCP_SACK=y
++CONFIG_IPV6=y
+ CONFIG_STM32_ADC=y
+ CONFIG_SPL_BLOCK_CACHE=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+-- 
+2.42.0
 
 _______________________________________________
 Uboot-stm32 mailing list

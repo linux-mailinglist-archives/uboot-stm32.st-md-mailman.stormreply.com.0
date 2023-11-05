@@ -2,41 +2,41 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E33987E129B
-	for <lists+uboot-stm32@lfdr.de>; Sun,  5 Nov 2023 09:38:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D863E7E129C
+	for <lists+uboot-stm32@lfdr.de>; Sun,  5 Nov 2023 09:38:28 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 851C3C6B461;
-	Sun,  5 Nov 2023 08:38:27 +0000 (UTC)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 92B7AC6B474;
+	Sun,  5 Nov 2023 08:38:28 +0000 (UTC)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E24EBC62EFE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0ADE0C62EFE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  5 Nov 2023 08:38:25 +0000 (UTC)
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id ACB33120005;
- Sun,  5 Nov 2023 11:38:24 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru ACB33120005
+ Sun,  5 Nov 2023 08:38:27 +0000 (UTC)
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 54595100002;
+ Sun,  5 Nov 2023 11:38:26 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 54595100002
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173504;
- bh=Gf+9ILRdcjQZa/qqsNmr6Pl2IwgznkfVrPs1JGFpifM=;
+ s=mail; t=1699173506;
+ bh=IqKNktyVLhcA8Aw87Pu2NltAWnBVQN+KKg5tD/A4MOM=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=qFvlXnBSSdsfxScCqV2MwjuoQgUgcywjMjNly4w89ePwY5uQsxKmPnAcZOgtGYfXv
- TaOHYMBSfRMJMc1J2eYPo3oCffZcfatOlcfRV4idqaivACfmK0SGkdnSNsW6hyqpET
- saMbUoi+XLTSHezeUDsepMVJQEqkQuLexUG1GFwZF+Vm1BZGp0VP9U+tPImD6aMFxT
- IqgDdiQ08MXNI2rGAdmVp9nTVEu7SYFXiGv7uq77iKN1/tu0Wse4wkrkwlmOQSSUno
- OIokSs+ZXWXCfYRhxfIR7Ceu3zMUHddVkFTGnFp/cderjUMRbQTSAaodow1gu4X9Yx
- DrraDFZ44R7iw==
+ b=b0V3S8Xt1QvHr8zh6TWvByJ4tkC2Fi1qy0cut1H7IxVwTfMjwPe4CKDPtQQ0Pjrzz
+ Lky4jtB6EhDt9ah5w4KUk6qP0+spbTjvyLIIYAdCi+YP88gw7tnDCiFeTzjik+deYu
+ FEQYbP+1XUo2ptA5HRVIsjJj93BkNHC5hSul8Acv33Y2m+ZKKuZesdcH/ZBwuX4dpx
+ UrOQ+tsJdHmEdcdVCM3AknJYa7AFM/vMm4ePtaFAe0tVMi8TfrkiE1wo/v6kJxsprF
+ lOx7OFSzOI9QcvWyY8nMVftwgwgvAaiTqR6qPeN8CQZuDgJBPIxBfctGJvYogJfw1j
+ lXlcOPdMZYSIQ==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:24 +0300 (MSK)
+ Sun,  5 Nov 2023 11:38:26 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Sun, 5 Nov 2023 11:38:24 +0300
+ 15.2.1118.37; Sun, 5 Nov 2023 11:38:25 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
@@ -44,9 +44,11 @@ To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
  <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Sun, 5 Nov 2023 11:38:01 +0300
-Message-ID: <20231105083809.3293-1-ivprusov@sberdevices.ru>
+Date: Sun, 5 Nov 2023 11:38:02 +0300
+Message-ID: <20231105083809.3293-2-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
+References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
 MIME-Version: 1.0
 X-Originating-IP: [100.64.160.123]
 X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
@@ -62,9 +64,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to}, sberdevices.ru:7.1.1,5.0.1;
- p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ {Tracking_from_domain_doesnt_match_to},
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1;
  127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
  {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
@@ -78,8 +81,8 @@ Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
  kernel@sberdevices.ru, Igor Prusov <ivprusov@sberdevices.ru>,
  prusovigor@gmail.com
-Subject: [Uboot-stm32] [PATCH v6 0/8] clk: Switch from soc_clk_dump to
-	clk_ops function
+Subject: [Uboot-stm32] [PATCH v6 1/8] clk: zynq: Move soc_clk_dump to Zynq
+	clock driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,59 +99,157 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Currently clock providers may override default implementation of
-soc_clk_dump function to replace clk dump command output. This causes
-confusing behaviour when u-boot is built with one of such drivers
-enabled but still has clocks defined using CCF. For example, enabling
-CMD_CLK and using clk dump on sandbox target will not show CCF clocks
-because k210 driver overrides common soc_clk_dump.
+Move clock dump function in preparation for switching to dump function
+in clk_ops.
 
-Changelog:
- v1 -> v2:
- - Add missing static to dump functions
+Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+Acked-by: Michal Simek <michal.simek@amd.com>
+---
+ arch/arm/mach-zynq/clk.c | 57 ---------------------------------------
+ drivers/clk/clk_zynq.c   | 58 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+), 57 deletions(-)
 
- v2 -> v3:
- - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
-
- v3 -> v4:
- - Rebase and refactor dump for new Amlogic A1 clock controller driver
-
- v4 -> v5:
- - Add docs for dump() function in clk_ops
- - Print driver and device names before calling corresponding dump()
-
- v5 -> v6:
- - dump() return type changed to void
- - meson_clk_dump() and helper functions moved under CONFIG_CMD_CLK to
-   fix unused-function diagnostic
-
-Igor Prusov (8):
-  clk: zynq: Move soc_clk_dump to Zynq clock driver
-  clk: ast2600: Move soc_clk_dump function
-  clk: k210: Move soc_clk_dump function
-  clk: amlogic: Move driver and ops structs
-  clk: Add dump operation to clk_ops
-  cmd: clk: Use dump function from clk_ops
-  clk: treewide: switch to clock dump from clk_ops
-  cmd: clk: Make soc_clk_dump static
-
- arch/arm/mach-zynq/clk.c               |  57 --------------
- arch/mips/mach-pic32/cpu.c             |  23 ------
- cmd/clk.c                              |  13 +++-
- drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
- drivers/clk/clk_k210.c                 | 104 ++++++++++++-------------
- drivers/clk/clk_pic32.c                |  37 +++++++++
- drivers/clk/clk_versal.c               |   9 ++-
- drivers/clk/clk_zynq.c                 |  52 +++++++++++++
- drivers/clk/clk_zynqmp.c               |  22 +++---
- drivers/clk/imx/clk-imx8.c             |  13 +---
- drivers/clk/meson/a1.c                 |  58 ++++++--------
- drivers/clk/mvebu/armada-37xx-periph.c |  20 +++--
- drivers/clk/stm32/clk-stm32mp1.c       |  31 ++------
- include/clk-uclass.h                   |  15 ++++
- include/clk.h                          |   2 -
- 15 files changed, 271 insertions(+), 268 deletions(-)
-
+diff --git a/arch/arm/mach-zynq/clk.c b/arch/arm/mach-zynq/clk.c
+index 1945f60e08..e6a67326dd 100644
+--- a/arch/arm/mach-zynq/clk.c
++++ b/arch/arm/mach-zynq/clk.c
+@@ -13,20 +13,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static const char * const clk_names[clk_max] = {
+-	"armpll", "ddrpll", "iopll",
+-	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
+-	"ddr2x", "ddr3x", "dci",
+-	"lqspi", "smc", "pcap", "gem0", "gem1",
+-	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
+-	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
+-	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
+-	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
+-	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
+-	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
+-	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
+-};
+-
+ /**
+  * set_cpu_clk_info() - Setup clock information
+  *
+@@ -65,46 +51,3 @@ int set_cpu_clk_info(void)
+ 
+ 	return 0;
+ }
+-
+-/**
+- * soc_clk_dump() - Print clock frequencies
+- * Returns zero on success
+- *
+- * Implementation for the clk dump command.
+- */
+-int soc_clk_dump(void)
+-{
+-	struct udevice *dev;
+-	int i, ret;
+-
+-	ret = uclass_get_device_by_driver(UCLASS_CLK,
+-		DM_DRIVER_GET(zynq_clk), &dev);
+-	if (ret)
+-		return ret;
+-
+-	printf("clk\t\tfrequency\n");
+-	for (i = 0; i < clk_max; i++) {
+-		const char *name = clk_names[i];
+-		if (name) {
+-			struct clk clk;
+-			unsigned long rate;
+-
+-			clk.id = i;
+-			ret = clk_request(dev, &clk);
+-			if (ret < 0)
+-				return ret;
+-
+-			rate = clk_get_rate(&clk);
+-
+-			clk_free(&clk);
+-
+-			if ((rate == (unsigned long)-ENOSYS) ||
+-			    (rate == (unsigned long)-ENXIO))
+-				printf("%10s%20s\n", name, "unknown");
+-			else
+-				printf("%10s%20lu\n", name, rate);
+-		}
+-	}
+-
+-	return 0;
+-}
+diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
+index e80500e382..be5226175f 100644
+--- a/drivers/clk/clk_zynq.c
++++ b/drivers/clk/clk_zynq.c
+@@ -454,6 +454,64 @@ static int dummy_enable(struct clk *clk)
+ 	return 0;
+ }
+ 
++static const char * const clk_names[clk_max] = {
++	"armpll", "ddrpll", "iopll",
++	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
++	"ddr2x", "ddr3x", "dci",
++	"lqspi", "smc", "pcap", "gem0", "gem1",
++	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
++	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
++	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
++	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
++	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
++	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
++	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
++};
++
++/**
++ * soc_clk_dump() - Print clock frequencies
++ * Returns zero on success
++ *
++ * Implementation for the clk dump command.
++ */
++int soc_clk_dump(void)
++{
++	struct udevice *dev;
++	int i, ret;
++
++	ret = uclass_get_device_by_driver(UCLASS_CLK,
++					  DM_DRIVER_GET(zynq_clk), &dev);
++	if (ret)
++		return ret;
++
++	printf("clk\t\tfrequency\n");
++	for (i = 0; i < clk_max; i++) {
++		const char *name = clk_names[i];
++
++		if (name) {
++			struct clk clk;
++			unsigned long rate;
++
++			clk.id = i;
++			ret = clk_request(dev, &clk);
++			if (ret < 0)
++				return ret;
++
++			rate = clk_get_rate(&clk);
++
++			clk_free(&clk);
++
++			if ((rate == (unsigned long)-ENOSYS) ||
++			    (rate == (unsigned long)-ENXIO))
++				printf("%10s%20s\n", name, "unknown");
++			else
++				printf("%10s%20lu\n", name, rate);
++		}
++	}
++
++	return 0;
++}
++
+ static struct clk_ops zynq_clk_ops = {
+ 	.get_rate = zynq_clk_get_rate,
+ #ifndef CONFIG_SPL_BUILD
 -- 
 2.34.1
 

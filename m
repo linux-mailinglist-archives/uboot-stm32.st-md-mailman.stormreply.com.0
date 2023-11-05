@@ -2,41 +2,41 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 068D57E129F
+	by mail.lfdr.de (Postfix) with ESMTPS id 0EFCF7E12A0
 	for <lists+uboot-stm32@lfdr.de>; Sun,  5 Nov 2023 09:38:31 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC7BDC6B463;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C4D74C6B479;
 	Sun,  5 Nov 2023 08:38:30 +0000 (UTC)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 577FBC6B47A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 07D6BC62EFE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun,  5 Nov 2023 08:38:29 +0000 (UTC)
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C796312000A;
- Sun,  5 Nov 2023 11:38:28 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C796312000A
+ Sun,  5 Nov 2023 08:38:30 +0000 (UTC)
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 8125810000B;
+ Sun,  5 Nov 2023 11:38:29 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 8125810000B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1699173508;
- bh=WuXesCnXs2xO9MoUr7ZLz5YFmmv9/oihs9pF04dBe90=;
+ s=mail; t=1699173509;
+ bh=jiQKm6hpxHvMg6mOxxv+8AgTvhcQHv3PABbxmduXppg=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=Lig31LceXa7MgFTAN3d8309dmBSN2CIVTR7R5Kg12+Gfm7z2vE5pp6PpzzBV8S1U7
- CydmadEk/jiB71jGu17tdXZ6tsxgf0AoRTu/57cN0+tXF7HKXUSBQ8OWn4OHhQxgB2
- k+TlE0S6eY8LSG6G1aYVyv5KPBfhDQgfofIHNC/b7uV9kcByXzWh6g3jqDuthRjIMI
- h81fOoNqAFUp+p8oar1iMVofiC/F9sa56uNHilXOiVJ0SYc59XvfsojbIK/XQMpVXl
- kLUVSOzGo0cs/8BcFkzn6LIHH0PPwatzQ1NmTQRanTf2Y5CZ8gWkKt/nJpydVN2aX+
- eZqnh+HaS5uHg==
+ b=kUa5ChlaQjQiqzH5GEf/x/Krz9n0yH0Sc9gTQfCX48u6Jh6lG6yeWbqnoixd3nQ3o
+ ICfkQjzoGM1p7vafJ5hm8Y23AuzOROAIvtVP8pWejbH966kTID6ZVaKOplxDZlzD6x
+ m3s//GPLWQaQLbQ/pgmJQ+unFpPcnMnpiIWMcSIKuJB8dRfJMD9E82AtHCfJ/RouXN
+ ZhZU9FxP6TtJ9v1sj8EPjJ9D54s0H5g93UmPvr1iFrIhkqZnCaz9kG0C7bi7S0W7fj
+ Y0xJ4Pl9i4z6d+vruR5FQ1INq98FF94c9d23sGRTJRtH3C2hhWjxzrt1RJdqIafVj8
+ eP+6scjkEE5vA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Sun,  5 Nov 2023 11:38:28 +0300 (MSK)
+ Sun,  5 Nov 2023 11:38:29 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Sun, 5 Nov 2023 11:38:28 +0300
+ 15.2.1118.37; Sun, 5 Nov 2023 11:38:29 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Schwierzeck <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>,
@@ -44,8 +44,8 @@ To: <u-boot@lists.denx.de>, Michal Simek <michal.simek@amd.com>, Daniel
  Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
  <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
-Date: Sun, 5 Nov 2023 11:38:05 +0300
-Message-ID: <20231105083809.3293-5-ivprusov@sberdevices.ru>
+Date: Sun, 5 Nov 2023 11:38:06 +0300
+Message-ID: <20231105083809.3293-6-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231105083809.3293-1-ivprusov@sberdevices.ru>
 References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
@@ -64,9 +64,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 543 543
  1e3516af5cdd92079dfeb0e292c8747a62cb1ee4, {Tracking_smtp_not_equal_from},
- {Tracking_from_domain_doesnt_match_to}, sberdevices.ru:7.1.1,5.0.1;
- p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ {Tracking_from_domain_doesnt_match_to},
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; sberdevices.ru:5.0.1,7.1.1;
+ salutedevices.com:7.1.1;
  127.0.0.199:7.1.2, FromAlignment: n, {Tracking_smtp_domain_mismatch},
  {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
@@ -80,8 +81,7 @@ Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
  kernel@sberdevices.ru, Igor Prusov <ivprusov@sberdevices.ru>,
  prusovigor@gmail.com
-Subject: [Uboot-stm32] [PATCH v6 4/8] clk: amlogic: Move driver and ops
-	structs
+Subject: [Uboot-stm32] [PATCH v6 5/8] clk: Add dump operation to clk_ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,71 +98,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Move driver and ops structs to avoid forward declaration after switching
-to dump in clk_ops.
+This adds dump function to struct clk_ops which should replace
+soc_clk_dump. It allows clock drivers to provide custom dump
+implementation without overriding generic CCF dump function.
 
 Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
- 1 file changed, 17 insertions(+), 17 deletions(-)
+ include/clk-uclass.h | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index 1075ba7333..e3fa9db7d0 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
- 	return meson_mux_set_parent_by_id(clk, parent_clk->id);
- }
- 
--static struct clk_ops meson_clk_ops = {
--	.disable	= meson_clk_disable,
--	.enable		= meson_clk_enable,
--	.get_rate	= meson_clk_get_rate,
--	.set_rate	= meson_clk_set_rate,
--	.set_parent	= meson_clk_set_parent,
--};
--
- static int meson_clk_probe(struct udevice *dev)
- {
- 	struct meson_clk *priv = dev_get_priv(dev);
-@@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
- 	{ }
+diff --git a/include/clk-uclass.h b/include/clk-uclass.h
+index a22f1a5d84..3419daab34 100644
+--- a/include/clk-uclass.h
++++ b/include/clk-uclass.h
+@@ -25,6 +25,7 @@ struct ofnode_phandle_args;
+  * @set_parent: Set current clock parent
+  * @enable: Enable a clock.
+  * @disable: Disable a clock.
++ * @dump: Print clock information.
+  *
+  * The individual methods are described more fully below.
+  */
+@@ -39,6 +40,9 @@ struct clk_ops {
+ 	int (*set_parent)(struct clk *clk, struct clk *parent);
+ 	int (*enable)(struct clk *clk);
+ 	int (*disable)(struct clk *clk);
++#if IS_ENABLED(CONFIG_CMD_CLK)
++	void (*dump)(struct udevice *dev);
++#endif
  };
  
--U_BOOT_DRIVER(meson_clk) = {
--	.name		= "meson-clk-a1",
--	.id		= UCLASS_CLK,
--	.of_match	= meson_clk_ids,
--	.priv_auto	= sizeof(struct meson_clk),
--	.ops		= &meson_clk_ops,
--	.probe		= meson_clk_probe,
--};
--
- static const char *meson_clk_get_name(struct clk *clk, int id)
- {
- 	const struct meson_clk_info *info;
-@@ -727,3 +710,20 @@ int soc_clk_dump(void)
+ #if 0 /* For documentation only */
+@@ -135,6 +139,17 @@ int enable(struct clk *clk);
+  * Return: zero on success, or -ve error code.
+  */
+ int disable(struct clk *clk);
++
++/**
++ * dump() - Print clock information.
++ * @clk:	The clock device to dump.
++ *
++ * If present, this function is called by "clk dump" command for each
++ * bound device.
++ *
++ * Return: zero on success, or -ve error code.
++ */
++void dump(struct udevice *dev);
+ #endif
  
- 	return 0;
- }
-+
-+static struct clk_ops meson_clk_ops = {
-+	.disable	= meson_clk_disable,
-+	.enable		= meson_clk_enable,
-+	.get_rate	= meson_clk_get_rate,
-+	.set_rate	= meson_clk_set_rate,
-+	.set_parent	= meson_clk_set_parent,
-+};
-+
-+U_BOOT_DRIVER(meson_clk) = {
-+	.name		= "meson-clk-a1",
-+	.id		= UCLASS_CLK,
-+	.of_match	= meson_clk_ids,
-+	.priv_auto	= sizeof(struct meson_clk),
-+	.ops		= &meson_clk_ops,
-+	.probe		= meson_clk_probe,
-+};
+ #endif
 -- 
 2.34.1
 

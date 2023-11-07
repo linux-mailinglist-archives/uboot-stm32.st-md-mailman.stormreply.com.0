@@ -2,70 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BECB07E210E
-	for <lists+uboot-stm32@lfdr.de>; Mon,  6 Nov 2023 13:14:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B5D87E3756
+	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Nov 2023 10:18:11 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 58DC8C6B460;
-	Mon,  6 Nov 2023 12:14:13 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
- [209.85.208.50])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E9EEC6B463;
+	Tue,  7 Nov 2023 09:18:11 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6F868C6A61A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 92DEAC6B461
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  6 Nov 2023 10:42:22 +0000 (UTC)
-Received: by mail-ed1-f50.google.com with SMTP id
- 4fb4d7f45d1cf-53de8fc1ad8so7210400a12.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 06 Nov 2023 02:42:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=foundries.io; s=google; t=1699267342; x=1699872142;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=thMslcgBqaUAT1bAZ9aqrb+AnShN38KGLArHdPBpeXU=;
- b=B2QUvg52TeJqmUnhg1CZHT5zq1t2KFGTUO4TugdEGzxLMwcfbK4yb5ypRtQjgPeU9E
- hEEFO5ZFjOgt5mLl0MJpHR2PRFkPqwTQrOMaTGZVUABoLvlj0xmlEL2kdfRzgUjPdVYi
- ialvWMXeOzAAJgKdmqYoRgyGtIrxCwUQKsPTK/QKbsLVxkvcYqpfedIPHd7q165rUjn5
- f9wR0Hkd1uxgeq2A56+zpx1aIS/TT0s4rTIaO6+C8J+W9ITJcwNkVvIYcwH2i21IaUYy
- goeDMzuxnfYrDgj33YCvom7PjGgLkzz5a0PV5mc96zKHSXAyUpdzeY48Jjdbx0rT1aeO
- 6Z9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699267342; x=1699872142;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=thMslcgBqaUAT1bAZ9aqrb+AnShN38KGLArHdPBpeXU=;
- b=viYk4RhGH2UzVZ3yyRKt+3DsMKvDy2N6mAywRX4BmO5bl2CtGaBy89NaTxDpHJK2T9
- tTnehefuSGH2DVwlopzixkdi4Z+v9OFbRZNPp1QxFsn8NTOl0KADzp3yx6pophPWw7/j
- 29UtMm3hats+8SZHHssQPKfwslj0cFzeb7qZBrCSVozr7+EGgSmxaT50bmYP9URpxQmH
- zCvUNwBUW3XE9T0k7djhO8EGI12/+CubpsKTKb8pjKsVdAkh7RTlLeD8+nOspLLCjKfP
- d8CdtJ5Xyxvqevl3sBP+kgVOusohLZaHrLXIuGPVk+Hk9GbQ4NAnL588sYeUQs1hUIqj
- fh/Q==
-X-Gm-Message-State: AOJu0YxhzgcqM4wFyjZfkCZkk6A4zy3bTRvoZ71wVAdGAlg7MjCmH9uz
- kBpCbJPel1ed0BVRejhiLd7QLQ==
-X-Google-Smtp-Source: AGHT+IHhrDa3IrfZxFrd2TjhcCKtPyum48rZp9aWtFQ64mCZ43TACBGg6dTABHXFyfdB5s1vOe5z6Q==
-X-Received: by 2002:a17:907:7208:b0:9e1:21d:fdaa with SMTP id
- dr8-20020a170907720800b009e1021dfdaamr733875ejc.57.1699267341781; 
- Mon, 06 Nov 2023 02:42:21 -0800 (PST)
-Received: from igor-thinkpad.local ([109.108.76.111])
- by smtp.gmail.com with ESMTPSA id
- qw23-20020a1709066a1700b009dd949b75c7sm3304181ejc.151.2023.11.06.02.42.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 02:42:20 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@foundries.io>
-To: u-boot@lists.denx.de,
-	uboot-stm32@st-md-mailman.stormreply.com
-Date: Mon,  6 Nov 2023 11:41:52 +0100
-Message-Id: <20231106104152.140495-1-igor.opaniuk@foundries.io>
-X-Mailer: git-send-email 2.34.1
+ Tue,  7 Nov 2023 09:18:09 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3A76Trwm015372; Tue, 7 Nov 2023 10:18:00 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=AJzC+RB
+ O44UsP5TDwImSqbDVdacR0OJ+YEgVNDrOfeg=; b=1WV/D5LANZMWYlf/FY82Voh
+ 3CnPsazWRqVv/KLdH6cbsoSwyHG1Ap3L83yOtZm4dSg4+E8QkCPANneAUyYoIiEs
+ P6sao7g/aCMupx8apyZx0yGGLhCWhM0VMc5ctkOE3X8riHnhcPeueHd5tqpagn1L
+ NX4Zafm0HSTvkyRQ9yAdIzpDt3ccrHqEfnK/fO+s2g/VGD2JzyafdfRWL/+eReju
+ uEXpcDY7obHKWLY3JtEyd4LivdSMSKm9smUKux6ual8q0ngP33+SOjV8HsUMJ/IW
+ BodgxdASmIAcYP1XITuc3uZa+RNLmqH1DdneQemwEdGWbmlrvtS3gBAq5obH5gA=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3u5eq2jxhf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 07 Nov 2023 10:18:00 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AAE1E10002A;
+ Tue,  7 Nov 2023 10:17:58 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 18D53216821;
+ Tue,  7 Nov 2023 10:17:58 +0100 (CET)
+Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 7 Nov
+ 2023 10:17:57 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 7 Nov 2023 10:17:40 +0100
+Message-ID: <20231107101729.1.I843fdbc83d3f8522e4c43d47c72825b388643ac6@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 06 Nov 2023 12:14:12 +0000
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-11-06_15,2023-11-02_03,2023-05-22_02
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>
-Subject: [Uboot-stm32] [PATCH v1] stm32mp1: read auth stats and
-	boot_partition from tamp
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, deffo@gmx.de
+Subject: [Uboot-stm32] [PATCH] bootstage: Correct exhasuted typo
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,112 +73,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Obtain from TAMP backup register information about image authorization
-status and partition id used for booting. Store this info in
-environmental variables ("boot_auth" and "boot_part" correspondingly).
+From: Simon Glass <sjg@chromium.org>
 
-Image authorization supported values:
-0x0 - No authentication done
-0x1 - Authentication done and failed
-0x2 - Authentication done and succeeded
+Correct this typo in the warning message shown when no more bootstage
+records can be added.
 
-These values are stored to TAMP backup register by Trusted Firmware-A [1].
-
-Testing:
-STM32MP> print boot_part
-boot_part=1
-STM32MP> print boot_auth
-boot_auth=2
-
-[1] https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/?h=refs/heads/integration&id=ab2b325c1ab895e626d4e11a9f26b9e7c968f8d8
-
-Signed-off-by: Igor Opaniuk <igor.opaniuk@foundries.io>
-Co-developed-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Signed-off-by: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
+I just cherry-pick the Simon's patch in the branch fix-bs-working
+of the dm custodian git but it is not yet present in patchwork.
 
- arch/arm/mach-stm32mp/cpu.c                   | 23 +++++++++++++++++++
- arch/arm/mach-stm32mp/include/mach/stm32.h    |  4 ++++
- .../arm/mach-stm32mp/include/mach/sys_proto.h |  3 +++
- 3 files changed, 30 insertions(+)
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/8810b8dd3d233978c15203b23420fa819ab1e791
 
-diff --git a/arch/arm/mach-stm32mp/cpu.c b/arch/arm/mach-stm32mp/cpu.c
-index e07abbe21c1..ba5942848bd 100644
---- a/arch/arm/mach-stm32mp/cpu.c
-+++ b/arch/arm/mach-stm32mp/cpu.c
-@@ -40,6 +40,13 @@ u32 get_bootmode(void)
- 		    TAMP_BOOT_MODE_SHIFT;
- }
- 
-+u32 get_bootauth(void)
-+{
-+	/* read boot auth status and partition from TAMP backup register */
-+	return (readl(TAMP_BOOT_CONTEXT) & TAMP_BOOT_AUTH_MASK) >>
-+		    TAMP_BOOT_AUTH_SHIFT;
-+}
-+
- /*
-  * weak function overidde: set the DDR/SYSRAM executable before to enable the
-  * MMU and configure DACR, for early early_enable_caches (SPL or pre-reloc)
-@@ -371,8 +378,24 @@ __weak void stm32mp_misc_init(void)
- {
- }
- 
-+static int setup_boot_auth_info(void)
-+{
-+	char buf[10];
-+	u32 bootauth = get_bootauth();
-+
-+	snprintf(buf, sizeof(buf), "%d", bootauth >> 4);
-+	env_set("boot_auth", buf);
-+
-+	snprintf(buf, sizeof(buf), "%d", bootauth &
-+		 (u32)TAMP_BOOT_PARTITION_MASK);
-+	env_set("boot_part", buf);
-+
-+	return 0;
-+}
-+
- int arch_misc_init(void)
- {
-+	setup_boot_auth_info();
- 	setup_boot_mode();
- 	setup_mac_address();
- 	setup_serial_number();
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 1cdc5e3b186..ac0deced67e 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -139,8 +139,12 @@ enum boot_device {
- 
- #define TAMP_BOOT_MODE_MASK		GENMASK(15, 8)
- #define TAMP_BOOT_MODE_SHIFT		8
-+#define TAMP_BOOT_AUTH_MASK		GENMASK(23, 16)
-+#define TAMP_BOOT_AUTH_SHIFT		16
- #define TAMP_BOOT_DEVICE_MASK		GENMASK(7, 4)
- #define TAMP_BOOT_INSTANCE_MASK		GENMASK(3, 0)
-+#define TAMP_BOOT_AUTH_ST_MASK		GENMASK(7, 4)
-+#define TAMP_BOOT_PARTITION_MASK	GENMASK(3, 0)
- #define TAMP_BOOT_FORCED_MASK		GENMASK(7, 0)
- 
- enum forced_boot_mode {
-diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-index 83fb32a45fc..52aca1e23e1 100644
---- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-+++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-@@ -66,6 +66,9 @@ void get_soc_name(char name[SOC_NAME_SIZE]);
- /* return boot mode */
- u32 get_bootmode(void);
- 
-+/* return auth status and partition */
-+u32 get_bootauth(void);
-+
- int get_eth_nb(void);
- int setup_mac_address(void);
+Regards
+
+Patrick
+
+ common/bootstage.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/bootstage.c b/common/bootstage.c
+index a68d883c684c..0e6d80718fd5 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -137,7 +137,7 @@ ulong bootstage_add_record(enum bootstage_id id, const char *name,
+ 			rec->flags = flags;
+ 			rec->id = id;
+ 		} else {
+-			log_warning("Bootstage space exhasuted\n");
++			log_warning("Bootstage space exhausted\n");
+ 		}
+ 	}
  
 -- 
-2.34.1
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list

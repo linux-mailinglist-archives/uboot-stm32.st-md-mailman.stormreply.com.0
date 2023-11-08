@@ -2,59 +2,80 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 809FA7E3CEA
-	for <lists+uboot-stm32@lfdr.de>; Tue,  7 Nov 2023 13:23:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D96A67E5BD2
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Nov 2023 17:59:16 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2092DC6B44B;
-	Tue,  7 Nov 2023 12:23:21 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8D937C6B44D;
+	Wed,  8 Nov 2023 16:59:16 +0000 (UTC)
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com
+ [209.85.210.49])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A4906C6A615
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E0418C6B444
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  7 Nov 2023 12:23:19 +0000 (UTC)
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-53e3b8f906fso9364811a12.2
+ Wed,  8 Nov 2023 16:59:14 +0000 (UTC)
+Received: by mail-ot1-f49.google.com with SMTP id
+ 46e09a7af769-6d33298f8fdso3391396a34.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 07 Nov 2023 04:23:19 -0800 (PST)
+ Wed, 08 Nov 2023 08:59:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1699359799; x=1699964599;
+ d=gmail.com; s=20230601; t=1699462753; x=1700067553;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dK80Glwohnq7XjDiihSkUXIccI4jX9qMvgljNOHnpaE=;
- b=SHzULQxzgjq2gG7rd+sTXL5qJTpVggaFnjd6/dSXwP0pO7WcGt0OuSXvOWXfGWldEK
- lJxTkUmTZw52R8vJ5fhG16SDRbskAggbmfqsf8RvawxuNhlbPcsGYpjHxe+tdTCeaie2
- KaFP/kW2nB/Wla/Oiz69Td5UKLrqVlfr9hOB0=
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZnOdKUWWE4zFAKJWidQzEqP0t/m6lENpHeoIBjpMExk=;
+ b=SAa00tbAlx4mD9vdhXT5rvuUayUwrQ4/dYhn3qoDP1Gh4B8n9pn8KGHRiRgQPAJb0C
+ ci5mO6VHowgHlFxQgCXFUkk2VOTYyLuIFJ693lJs6XSGJm9GxgHC2rR70L0vmwQ2wTvf
+ FSBxpb5y6djXb8widL4B+vEEBHhfG3iU9Xm3FknFlKD9nLsFL9y02MkgvBwdEEwvClSm
+ jXLOFmM8rD32FUQx4/XgUJlybvGiHVUYbPcNqig12tK+zKIljorAYcMxKYc3gYmr7hAf
+ 5ctbpzgMfs64gmicITY2Fb2nDhTg22xk9PCKku9HPcmyMfbKUZZ8ynGBzyOXAkQejPM6
+ Gu2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699359799; x=1699964599;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dK80Glwohnq7XjDiihSkUXIccI4jX9qMvgljNOHnpaE=;
- b=KI3G5uu9rehU0HB7e6vsgT8PKcvaigO8cA/RMxFvvBFDc1XptmrCOjVzj0isELQKaT
- b8USytG22SK7t7xXtnTevUGx9xHf8D6h48ek1EiyMUKoE+adn9q4MjayrEopRQ1lTCL1
- aIq9p/P5DmwFO3JXdubqypuQ2pTG2blduVi1O1D8g+SluqENgVW1D8rpxht0GqYwFoLp
- ayjZghXGe3W1NTzHlEHt0/Hb3VMDRdiA2QZGdn708DdrC3xhFdGShssyWY5BTsokKPmm
- CrIv8Jg3Odnh96fmt3vvoc/uxDqjENCyCB8Sl1ed+dD/zCnXar3jCVhFZKuBJ+T1wB0v
- 9N2Q==
-X-Gm-Message-State: AOJu0YwV+7/wImReNZz0rJnqMOm9NnL5eb2zGNy7lbGWoc/q/mqpowWN
- s8N2+cpLQoLjMLxfSr1W3BxP/D2TdASeses/LsPRKQ==
-X-Google-Smtp-Source: AGHT+IF6ox/uDfMubPyairfdO25ziLh0RPGUGY5Ck6zsDcqvYf1KMlbdHNq90DlBx4Gr2pE5P+/mxK/5SF2I/AN4IoE=
-X-Received: by 2002:aa7:d804:0:b0:514:9ab4:3524 with SMTP id
- v4-20020aa7d804000000b005149ab43524mr26873761edq.7.1699359798942; Tue, 07 Nov
- 2023 04:23:18 -0800 (PST)
+ d=1e100.net; s=20230601; t=1699462753; x=1700067553;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZnOdKUWWE4zFAKJWidQzEqP0t/m6lENpHeoIBjpMExk=;
+ b=asJlhib8m162T77yJT/vPq0LdjOftsPjrsQgbcKWLgvILXgq1xLrIdXHnarAd1FY61
+ it5iz1Pmn4tfKg09ESQ5axGkdiiBHN4drAIwyB4pI4xMj6wjPLnogMkpfxQhpWwd7n41
+ dv6NQhxsHaumfRHPEW48iTThl8v6hgxHEQrgTz/KveESmfw+jOK7KwYTQDAR/KhqBm/n
+ ikZjLrYN87Q6iam3U3dkbN7ZJOLT35i9udFhHmRIl+30Xy8n2S69Rzdd4OCL8kBILAqL
+ d1nBM+O3FA+EM7vy6TzE+uu9TCkP7vsibAYSpnmd83lx0WWlgNkRNo6QCEM88GDz/U0e
+ XpKw==
+X-Gm-Message-State: AOJu0YwL0HJ9CILGjHp9iyO8trvlljH2QOeSNqNb9R/sxq5ufH2jsen4
+ rKXZQ07gSvPEK3Vdjjq1LWk=
+X-Google-Smtp-Source: AGHT+IETEvYweDNabSPYit/y8g1EtPfbXj0e+2RBrbqRDfj8gbZFR7JQQFtUnjhk4bU0jRWqQU4fSw==
+X-Received: by 2002:a05:6830:2b21:b0:6be:c1b:ded4 with SMTP id
+ l33-20020a0568302b2100b006be0c1bded4mr2768421otv.3.1699462753555; 
+ Wed, 08 Nov 2023 08:59:13 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ kg16-20020a05622a761000b0040331a24f16sm1073339qtb.3.2023.11.08.08.59.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Nov 2023 08:59:13 -0800 (PST)
+Message-ID: <976548be-3bdd-0655-8bbb-31c7acdbe4be@gmail.com>
+Date: Wed, 8 Nov 2023 11:59:11 -0500
 MIME-Version: 1.0
-References: <20231107101729.1.I843fdbc83d3f8522e4c43d47c72825b388643ac6@changeid>
-In-Reply-To: <20231107101729.1.I843fdbc83d3f8522e4c43d47c72825b388643ac6@changeid>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Nov 2023 05:23:06 -0700
-Message-ID: <CAPnjgZ2YgwAzsG2kHZZWgy8p126hBH_r0r55nParwOt5wjuW+g@mail.gmail.com>
-To: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, deffo@gmx.de
-Subject: Re: [Uboot-stm32] [PATCH] bootstage: Correct exhasuted typo
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Igor Prusov <ivprusov@sberdevices.ru>, u-boot@lists.denx.de,
+ Michal Simek <michal.simek@amd.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20231105083809.3293-1-ivprusov@sberdevices.ru>
+ <20231105083809.3293-6-ivprusov@sberdevices.ru>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231105083809.3293-6-ivprusov@sberdevices.ru>
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
+ kernel@sberdevices.ru, prusovigor@gmail.com
+Subject: Re: [Uboot-stm32] [PATCH v6 5/8] clk: Add dump operation to clk_ops
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,56 +87,68 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 7 Nov 2023 at 02:18, Patrick Delaunay
-<patrick.delaunay@foss.st.com> wrote:
->
-> From: Simon Glass <sjg@chromium.org>
->
-> Correct this typo in the warning message shown when no more bootstage
-> records can be added.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+On 11/5/23 03:38, Igor Prusov wrote:
+> This adds dump function to struct clk_ops which should replace
+> soc_clk_dump. It allows clock drivers to provide custom dump
+> implementation without overriding generic CCF dump function.
+> 
+> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
-> I just cherry-pick the Simon's patch in the branch fix-bs-working
-> of the dm custodian git but it is not yet present in patchwork.
->
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/commit/8810b8dd3d233978c15203b23420fa819ab1e791
+>   include/clk-uclass.h | 15 +++++++++++++++
+>   1 file changed, 15 insertions(+)
+> 
+> diff --git a/include/clk-uclass.h b/include/clk-uclass.h
+> index a22f1a5d84..3419daab34 100644
+> --- a/include/clk-uclass.h
+> +++ b/include/clk-uclass.h
+> @@ -25,6 +25,7 @@ struct ofnode_phandle_args;
+>    * @set_parent: Set current clock parent
+>    * @enable: Enable a clock.
+>    * @disable: Disable a clock.
+> + * @dump: Print clock information.
+>    *
+>    * The individual methods are described more fully below.
+>    */
+> @@ -39,6 +40,9 @@ struct clk_ops {
+>   	int (*set_parent)(struct clk *clk, struct clk *parent);
+>   	int (*enable)(struct clk *clk);
+>   	int (*disable)(struct clk *clk);
+> +#if IS_ENABLED(CONFIG_CMD_CLK)
+> +	void (*dump)(struct udevice *dev);
+> +#endif
+>   };
+>   
+>   #if 0 /* For documentation only */
+> @@ -135,6 +139,17 @@ int enable(struct clk *clk);
+>    * Return: zero on success, or -ve error code.
+>    */
+>   int disable(struct clk *clk);
+> +
+> +/**
+> + * dump() - Print clock information.
+> + * @clk:	The clock device to dump.
+> + *
+> + * If present, this function is called by "clk dump" command for each
+> + * bound device.
+> + *
+> + * Return: zero on success, or -ve error code.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This is no longer correct, but I can remove it when applying.
 
-Thank you
+> + */
+> +void dump(struct udevice *dev);
+>   #endif
+>   
+>   #endif
 
-
->
-> Regards
->
-> Patrick
->
->  common/bootstage.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/common/bootstage.c b/common/bootstage.c
-> index a68d883c684c..0e6d80718fd5 100644
-> --- a/common/bootstage.c
-> +++ b/common/bootstage.c
-> @@ -137,7 +137,7 @@ ulong bootstage_add_record(enum bootstage_id id, const char *name,
->                         rec->flags = flags;
->                         rec->id = id;
->                 } else {
-> -                       log_warning("Bootstage space exhasuted\n");
-> +                       log_warning("Bootstage space exhausted\n");
->                 }
->         }
->
-> --
-> 2.25.1
->
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

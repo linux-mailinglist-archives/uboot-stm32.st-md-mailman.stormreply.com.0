@@ -2,63 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72A6F7EF6AE
-	for <lists+uboot-stm32@lfdr.de>; Fri, 17 Nov 2023 18:01:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27EEF7FF293
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Nov 2023 15:40:41 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 134CDC6C85E;
-	Fri, 17 Nov 2023 17:01:15 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CACA8C6B479;
+	Thu, 30 Nov 2023 14:40:40 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
+ [209.85.167.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 00A30C62EFE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D7719C6A61A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 17 Nov 2023 17:01:12 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3AHBUQ4s003521; Fri, 17 Nov 2023 18:01:11 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=8YNOvJcA3+H7HcOoLsQS+BL6qJ8QfXWrONNMR9j5dUw=; b=vm
- QiN6cDAFLTtZBVVmWZqmks8lMyEuGQfqoQvsTS5AJrvP6mHhA8F2vkVPnVZuE7Jj
- 50PX8AHP66tLwwLDqyx+FTumOzMrzCVWJa/UZTC9Ko+OiOHYj8xKwxp63FfQ1BuH
- ItiU73xsUNLN7uRDrXGTt4c/Ucx4QU0k5rRz2nxQ3NEGqXFxFwgVT2uYIiCmtg4G
- YN0NeHvFKBMJFNM3kF38jLt5FJwAVDtuvuuk0g4cRpnZjHTRq1UAdU3dPeI6RB4a
- 5W2Kls3eoRN25Hy6f3N/raoVuDOzpXVbyLzyRVAddXz8HSOgs+WuQCH0UCPEKY2j
- RlAagcCs1R1t1ojKwoAw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3ua1chmedb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Nov 2023 18:01:11 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BADD0100034;
- Fri, 17 Nov 2023 18:01:10 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B44B0257AA2;
- Fri, 17 Nov 2023 18:01:10 +0100 (CET)
-Received: from localhost (10.252.0.168) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 17 Nov
- 2023 18:01:10 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 17 Nov 2023 18:01:07 +0100
-Message-ID: <20231117170107.1147598-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
-References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
+ Thu, 30 Nov 2023 14:40:39 +0000 (UTC)
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-50abbb23122so1466574e87.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 30 Nov 2023 06:40:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1701355239; x=1701960039;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nl7qKs0xMYqVNDHH9WM4FezV7LHdF3ESnzYoyQ/wiNc=;
+ b=KQzLkhUAcwNJILpsJSfhB+oVsFBCRfRhNWgisSsjiwRE5jfYsKy0q0svdAPW0oYnba
+ KxlYM5yGNzMv+ON49o5IJilrGgDrwnHjYc+XqXgxYi7EizsVdtt70mWIXeh5KFEz5qG/
+ DUQqD/EN2n4POFVZUnScZRtrEFOlQ4CCHJYAg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1701355239; x=1701960039;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nl7qKs0xMYqVNDHH9WM4FezV7LHdF3ESnzYoyQ/wiNc=;
+ b=lhk349YOrjA9NOl+Wg8f49KRKBzBxV99adukfq7zxuApKv/1qbuvOa8XFm2LGtdWaP
+ LWSscs7zqFeaUABxe08AAhuXyLeSzTv1//raV4wV8fzDSNfcObRXu+rk/VWkfSL3n/hM
+ ylvbxnTvvCr734KtjSXdI/Xy9t0WvG22nz0rrLvgpdoMv9RRhhLgbLpVlFsRXeUWHVyW
+ lxD2CMlUqSnmD7s4yME44hHU3IZQbNJBd+B98tCJd6YF3eLJRKD7hvakQer6hek8iPK/
+ myhzwl++EDBzHlhTt5mcdU4vG3gAMtkg8McjI1UfTtFvUVtkr6wi6AXJCtjSV2XgSKyW
+ kfcg==
+X-Gm-Message-State: AOJu0YxeWVA+kek2dWqcFhgSQ3Z0XyK0C5gATosouwkRhYIuoHy61A5o
+ dQnaHjWTChQKR2TR9Do90DOnVg==
+X-Google-Smtp-Source: AGHT+IFPLJIZ00kzHbdg1p5ZlWgoE+kuhys/QRV3xPtAJLJdTEjAvMQjDoGy8cth2tfgswu4IlzDJQ==
+X-Received: by 2002:ac2:510a:0:b0:50b:d177:d9d9 with SMTP id
+ q10-20020ac2510a000000b0050bd177d9d9mr1035944lfb.46.1701355238985; 
+ Thu, 30 Nov 2023 06:40:38 -0800 (PST)
+Received: from localhost.localdomain ([2001:b07:6474:ebbf:d1eb:b106:516d:db0a])
+ by smtp.gmail.com with ESMTPSA id
+ x21-20020a1709064a9500b00a18399ff790sm733470eju.215.2023.11.30.06.40.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 30 Nov 2023 06:40:38 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Date: Thu, 30 Nov 2023 15:40:01 +0100
+Message-ID: <20231130144033.1850298-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Originating-IP: [10.252.0.168]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.987,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-11-17_16,2023-11-17_01,2023-05-22_02
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [PATCH 2/2] board: st: common: simplify MTD device
-	parsing
+Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ linux-amarula@amarulasolutions.com
+Subject: [Uboot-stm32] [RESEND RFC PATCH v2 0/5] Support display on
+	stm32f469-disco board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,47 +79,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Simplify the way all MTD devices are parsed.
+The series adds support for the Orise Tech OTM8009A display on the
+stm32f469-disco board. Substantial differences in the drivers for clock
+management, LTDC and DSI compared to Linux, made it necessary to modify
+the device tree. These changes were made in stm32f469-disco-uboot.dtsi to
+avoid altering the Linux device tree. It is therefore desirable, as soon
+as possible, to add these drivers the functionalities so that they do not
+require device tree properties that deviate from those present in the Linux
+version.
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+Changes in v2:
+- Add Patrice Chotard's Reviewed-by tag to patches 1, 2 and 3 of the series.
+- Fix frame buffer allocation for stm32f469 discovery board.
 
- board/st/common/stm32mp_dfu.c | 19 ++-----------------
- 1 file changed, 2 insertions(+), 17 deletions(-)
+Dario Binacchi (5):
+  ARM: dts: stm32f469-disco: sync with Linux 6.5
+  ARM: dts: stm32: make the LTDC clock usable by the clock driver
+  ARM: dts: stm32: make the DSI clock usable by the clock driver
+  ARM: dts: stm32: support display on stm32f469-disco board
+  board: stm32f469-disco: add splash screen with stmicroelectronics logo
 
-diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
-index ded3bf81961..77edb86e78c 100644
---- a/board/st/common/stm32mp_dfu.c
-+++ b/board/st/common/stm32mp_dfu.c
-@@ -123,24 +123,9 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		/* probe all MTD devices */
- 		mtd_probe_devices();
- 
--		/* probe SPI flash device on a bus */
--		if (!uclass_get_device(UCLASS_SPI_FLASH, 0, &dev)) {
--			mtd = get_mtd_device_nm("nor0");
--			if (!IS_ERR_OR_NULL(mtd))
-+		mtd_for_each_device(mtd)
-+			if (!mtd_is_partition(mtd))
- 				board_get_alt_info_mtd(mtd, buf);
--
--			mtd = get_mtd_device_nm("nor1");
--			if (!IS_ERR_OR_NULL(mtd))
--				board_get_alt_info_mtd(mtd, buf);
--		}
--
--		mtd = get_mtd_device_nm("nand0");
--		if (!IS_ERR_OR_NULL(mtd))
--			board_get_alt_info_mtd(mtd, buf);
--
--		mtd = get_mtd_device_nm("spi-nand0");
--		if (!IS_ERR_OR_NULL(mtd))
--			board_get_alt_info_mtd(mtd, buf);
- 	}
- 
- 	if (IS_ENABLED(CONFIG_DFU_VIRT)) {
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  13 ++++++++++
+ arch/arm/dts/stm32f469-disco.dts         |   4 +--
+ configs/stm32f469-discovery_defconfig    |  16 ++++++++++++
+ drivers/video/stm32/stm32_ltdc.c         |  31 +++++++++++++++++++++++
+ include/configs/stm32f469-discovery.h    |   2 ++
+ tools/logos/stm32f469-discovery.bmp      | Bin 0 -> 18532 bytes
+ 6 files changed, 64 insertions(+), 2 deletions(-)
+ create mode 100644 tools/logos/stm32f469-discovery.bmp
+
 -- 
-2.25.1
+2.43.0
 
 _______________________________________________
 Uboot-stm32 mailing list

@@ -2,68 +2,82 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61F0F80C34D
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Dec 2023 09:33:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42BB380D4A6
+	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Dec 2023 18:53:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 11F08C6B475;
-	Mon, 11 Dec 2023 08:33:59 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E0F2BC6B458;
+	Mon, 11 Dec 2023 17:53:06 +0000 (UTC)
+Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com
+ [209.85.219.174])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D56C7C6B46B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3587DC65E4F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Dec 2023 08:33:57 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BB7MqYP006545; Mon, 11 Dec 2023 09:33:54 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=7Cl0vu+Y7WisQ8XSbrec3rRw5dlp8dknqEVxojueRMg=; b=zo
- nFetnUV8KsDpCOK5vERWPxA18j9m0Teik2H5hgXnTSlDyVuzdZLWk3pyWJUzuDmt
- kxJL2NUR5pJsE5VYF0yhX2Wqijwlo/sW+DK2O4GuYxNrkDu2xTAbo4DD/V2bLl70
- JUZA//vkntImNHeyXgoFEs36SoCr7PdsrXOX+/WpdaEYv7RmBPMKhr3PleH5oMaE
- seDZSKpGxqCQ2qu4OXpuXtVwtEaaHvDnDjb25YhjG2s0LOBx1wRm1nnPGIs5iAFn
- DczMZuI8OxmmrICVKhwmIz50Tuu8R0TZHTKPT1hAOLZfd6N5wVS6/uqm13u3/Sbb
- 9+EQd1gPEFXqeG4OwqDw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uw2p4knvw-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 11 Dec 2023 09:33:54 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id CD46A10005C;
- Mon, 11 Dec 2023 09:33:53 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BEB2D21B51A;
- Mon, 11 Dec 2023 09:33:53 +0100 (CET)
-Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 11 Dec
- 2023 09:33:53 +0100
-Message-ID: <e2e7a5fa-01a6-49ce-a061-725479dd43c3@foss.st.com>
-Date: Mon, 11 Dec 2023 09:33:52 +0100
+ Mon, 11 Dec 2023 17:53:06 +0000 (UTC)
+Received: by mail-yb1-f174.google.com with SMTP id
+ 3f1490d57ef6-dbc662854adso2007678276.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 11 Dec 2023 09:53:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1702317185; x=1702921985;
+ darn=st-md-mailman.stormreply.com; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=petkZ4p0QHcTWt9NS/GnWE9K1OqBj6pxmd7IMetzKRY=;
+ b=EYN4PPuNc7SXzVziP5gQQSoFTuXrtMRKhn2xqP5YEW/4ITr1BPSPX/PLnS7uEEbzNO
+ FSwj3nEAlYy8Pi/UYTlIQWHye5P9J9RXmgXmYBp9Ascb4p5GWraBxCieSYVa4ENwtxa7
+ rJHAFUBAJFpNMFNNXnsBNOW1UP9/zDdgWPyn4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702317185; x=1702921985;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=petkZ4p0QHcTWt9NS/GnWE9K1OqBj6pxmd7IMetzKRY=;
+ b=ldzhIIHdsLxGKAB7eJnDjJZyd4pltuClBWuPH3UT7/nY5uiF087YDP6tBhv0Rv1XpG
+ nrTyv34TL7Qlx4mUIEwBM57LzHCd1nW67HJLBVHC+koumCTya/wIlOr2/nj4FaAUOjrV
+ TxaCg88PgwCBvHxYaA8fqgGg8qIKSzVbJd4/IEJiz4Vw2TEZISu/ZWDrd5kS+UIPq7M+
+ eoC/aW6+IC+TLxRBVbLnIcYz7iiA/dxGNLFqoVNN0u3A7yc8hyJDXH+CqoMX0CRdy105
+ kwpppvZ+yurDMHERVe2cJ14RzEvqXZje9gecjEBAYKCLx0XUStpR8PJgvZDtk2wap62T
+ UwZw==
+X-Gm-Message-State: AOJu0YwHq1qz/qtCIINixg/vEDilPdQEZVp028PQxiMxH3gCslNNyQDs
+ q/nrUe2LXXM28Zt+Apz2igGxQBLH+9AQecNcrmIIwg==
+X-Google-Smtp-Source: AGHT+IE5C6SV8FY1TgUWxLBQnkwywB/6/VPxotRdso8ZB5NnNiYcnbjXXGnuc399jw/mqJCO9pzE0vsrc5K0tQv9AEI=
+X-Received: by 2002:a5b:50b:0:b0:dbc:b0f2:94f8 with SMTP id
+ o11-20020a5b050b000000b00dbcb0f294f8mr525564ybp.108.1702317184845; Mon, 11
+ Dec 2023 09:53:04 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-References: <20231130144033.1850298-1-dario.binacchi@amarulasolutions.com>
- <20231130144033.1850298-5-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231130144033.1850298-5-dario.binacchi@amarulasolutions.com>
-X-Originating-IP: [10.201.20.54]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-11_02,2023-12-07_01,2023-05-22_02
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
+References: <20231204002642.895926-1-sjg@chromium.org>
+ <20231209190932.GZ2513409@bill-the-cat>
+In-Reply-To: <20231209190932.GZ2513409@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 11 Dec 2023 10:52:07 -0700
+Message-ID: <CAPnjgZ2qtrJZQ=x32Z9ESsYkhRv+1aseHSpoJo9_VW8_uN+guA@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eddie James <eajames@linux.ibm.com>, Rick Chen <rick@andestech.com>,
+ uboot-snps-arc@synopsys.com, Max Filippov <jcmvbkbc@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Andy Fleming <afleming@gmail.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Sean Anderson <sean.anderson@seco.com>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Scott McNutt <smcnutt@psyent.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Denk <wd@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Alison Wang <alison.wang@nxp.com>,
+ Safae Ouajih <souajih@baylibre.com>, Michal Simek <michal.simek@amd.com>,
+ Leo <ycliang@andestech.com>, Nikita Shubin <n.shubin@yadro.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>,
+ Mario Six <mario.six@gdsys.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Anatolij Gustschin <agust@denx.de>, linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [RESEND RFC PATCH v2 4/5] ARM: dts: stm32:
- support display on stm32f469-disco board
+ Chanho Park <chanho61.park@samsung.com>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 00/18] Complete decoupling of bootm logic
+	from commands
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,152 +94,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Tom,
 
+On Sat, 9 Dec 2023 at 12:09, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Dec 03, 2023 at 05:26:16PM -0700, Simon Glass wrote:
+>
+> > This series continues refactoring the bootm code to allow it to be used
+> > with CONFIG_COMMAND disabled. The OS-handling code is refactored and
+> > a new bootm_run() function is created to run through the bootm stages.
+> > This completes the work.
+> >
+> > A booti_go() function is created also, in case it proves useful, but at
+> > last for now standard boot does not use this.
+> >
+> > This is cmdd (part d of CMDLINE refactoring)
+> > It depends on dm/bootstda-working
+> > which depends on dm/cmdc-working
+>
+> Since I would ask "what's the size impact of all of this?", I went and
+> checked. I rebased your current cmdd-working branch on top of current
+> next, and compared. While I'm sure this will change a little given
+> feedback so far, generally platforms shrink a little (probably due to
+> the bootm args stuff you dropped, but may need to keep). The only big
+> growth I saw was branch specific and your "rpi" patch, oh yes, that
+> grows rpi_4 given that you change a bunch of stuff there. So that
+> doesn't count.
+>
+> So generally speaking, I'm OK with this series up to cmdd-working, and
+> will continue catching up and providing specific feedback.
+>
 
-On 11/30/23 15:40, Dario Binacchi wrote:
-> Add support to Orise Tech OTM8009A display on stm32f469-disco board.
-> 
-> It was necessary to retrieve the framebuffer address from the device tree
-> because the address returned by the video-uclass driver pointed to a memory
-> area that was not usable.
-> 
-> Furthermore, unlike Linux, the DSI driver requires the LTDC clock to be
-> properly probed. Hence, the changes made to the DSI node in
-> stm32f469-disco-u-boot.dtsi.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Add DRAM_SIZE macro.
-> - Fix frame buffer allocation function so that it is backward compatible
->   with boards other than the one it was introduced for (i. e. stm32f469-disco).
->   Tested on stm32f469-disco and stm32mp157f-dk2 boards.
-> 
->  arch/arm/dts/stm32f469-disco-u-boot.dtsi |  4 +++
->  configs/stm32f469-discovery_defconfig    | 13 ++++++++++
->  drivers/video/stm32/stm32_ltdc.c         | 31 ++++++++++++++++++++++++
->  3 files changed, 48 insertions(+)
-> 
-> diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> index 8e781c5a7b23..47ba9fa4a783 100644
-> --- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-> @@ -92,7 +92,9 @@
->  
->  &dsi {
->  	clocks = <&rcc 0 STM32F4_APB2_CLOCK(DSI)>,
-> +		 <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>,
->  		 <&clk_hse>;
-> +	clock-names = "pclk", "px_clk", "ref";
->  };
->  
->  &gpioa {
-> @@ -140,6 +142,8 @@
->  };
->  
->  &ltdc {
-> +	bootph-all;
-> +
->  	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
->  };
->  
-> diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
-> index 21c5498466cd..85e795e83e7d 100644
-> --- a/configs/stm32f469-discovery_defconfig
-> +++ b/configs/stm32f469-discovery_defconfig
-> @@ -21,6 +21,7 @@ CONFIG_CMD_GPT=y
->  # CONFIG_RANDOM_UUID is not set
->  CONFIG_CMD_MMC=y
->  # CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_BMP=y
->  CONFIG_CMD_CACHE=y
->  CONFIG_CMD_TIMER=y
->  # CONFIG_ISO_PARTITION is not set
-> @@ -40,3 +41,15 @@ CONFIG_SPI_FLASH_STMICRO=y
->  CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
-> +CONFIG_VIDEO=y
-> +CONFIG_BACKLIGHT_GPIO=y
-> +CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
-> +CONFIG_VIDEO_STM32=y
-> +CONFIG_VIDEO_STM32_DSI=y
-> +CONFIG_VIDEO_STM32_MAX_XRES=480
-> +CONFIG_VIDEO_STM32_MAX_YRES=800
-> +CONFIG_BMP_16BPP=y
-> +CONFIG_BMP_24BPP=y
-> +CONFIG_BMP_32BPP=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
-> index 6fd90e33919d..9054db1d78b3 100644
-> --- a/drivers/video/stm32/stm32_ltdc.c
-> +++ b/drivers/video/stm32/stm32_ltdc.c
-> @@ -495,6 +495,33 @@ static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
->  	setbits_le32(priv->regs + LTDC_L1CR, LXCR_LEN);
->  }
->  
-> +#if IS_ENABLED(CONFIG_TARGET_STM32F469_DISCOVERY)
-> +static int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +#define SDRAM_SIZE 0x1000000 /* 128Mbit = 16 Mbyte = 0x1000000 */
+OK, great. I have had a busy week but may be able to catch up a bit on
+the plane.
 
-Hi Dario,
-
-Sorry for the delay
-
-The SDRAM_SIZE can be retrieve using gd->ram_size, i propose to replace by this :
-	u32 sdram_size = gd->ram_size;
-
-
-> +	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +	phys_addr_t cpu;
-> +	dma_addr_t bus;
-> +	u64 dma_size;
-> +	int ret;
-> +
-> +	ret = dev_get_dma_range(dev, &cpu, &bus, &dma_size);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get dma address\n");
-> +		return ret;
-> +	}
-> +
-> +	uc_plat->base = bus + SDRAM_SIZE - ALIGN(uc_plat->size, uc_plat->align);
-> +	return 0;
-> +}
-> +#else
-> +static inline int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +	/* Delegate framebuffer allocation to video-uclass */
-> +	return 0;
-> +}
-> +#endif
-> +
->  static int stm32_ltdc_probe(struct udevice *dev)
->  {
->  	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> @@ -605,6 +632,10 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  	priv->crop_h = timings.vactive.typ;
->  	priv->alpha = 0xFF;
->  
-> +	ret = stm32_ltdc_alloc_fb(dev);
-> +	if (ret)
-> +		return ret;
-> +
->  	dev_dbg(dev, "%dx%d %dbpp frame buffer at 0x%lx\n",
->  		timings.hactive.typ, timings.vactive.typ,
->  		VNBITS(priv->l2bpp), uc_plat->base);
-
-Can you split this patch in 2 parts:
-  _ DTS
-  _ LTDC driver update
-
-Thanks
-Patrice
-
-
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,67 +2,106 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 878A980E4D3
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Dec 2023 08:29:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 240E480EE49
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Dec 2023 15:03:20 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4DB25C6B458;
-	Tue, 12 Dec 2023 07:29:22 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CB7ADC6C856;
+	Tue, 12 Dec 2023 14:03:19 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D5D2CC6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F393DC6B47F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Dec 2023 07:29:20 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BC539Ji028096; Tue, 12 Dec 2023 08:29:18 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=VWAhYx93piWpFzwF1i3IqUUxdLZmwByHC6gLKF39hEU=; b=2C
- bLpUo6tx05t6nGO2cBevqxcQQTOXQJ9LkHoVLL2HJPu4aayM+718vVog7UI39Vbh
- hkw7qty11VjdJ0aZFw4/jN5wu/9S21TvLA5oIyTFsPIVoJCsH/C/d87zYwqRo4gQ
- LQraO05xz/9gu2kGPjsqZde6k81xKn84mxrVWRzGxr/mJLnUEx3id4Yc8EsHMNMb
- G+e5zBUOa60it12C7AeIVd0fbVnGwdVavISMcS7GqVZTzfTUMhXrWoHc3l+D7Ool
- DVZYtU2PjDc9NxYNQGZSVoPnY3GDio60AU5ovUhLUKVG6gCf1tNow2jWYA1XnQbM
- xO3/caWXukjf38CJoxDA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvg0gssaj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Dec 2023 08:29:18 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id C858210005A;
- Tue, 12 Dec 2023 08:29:17 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BED1020F540;
- Tue, 12 Dec 2023 08:29:17 +0100 (CET)
-Received: from [10.201.20.54] (10.201.20.54) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Dec
- 2023 08:29:17 +0100
-Message-ID: <1158658d-ab5a-4da8-82da-e4dba5a0191b@foss.st.com>
-Date: Tue, 12 Dec 2023 08:29:17 +0100
+ Tue, 12 Dec 2023 14:03:18 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-3333224c7b9so5011759f8f.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 12 Dec 2023 06:03:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1702389798; x=1702994598;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=i5XvVGdA0q6db+uTpkKx1sq8IbJLw/bQh8rsthK+eMU=;
+ b=fceL3J6whiwCnVdL+cHIEbPwW27wkYAswBNo83oW0/fMXe65xoii2NduoKbGi0EW/5
+ 18n6Jq6luZ24WdBzdED+ZbPs5XI0QGUcXNkd1MSuF3dFnsjUh3wPzOONpwUBrdWfGIMi
+ Dj1Sb7fhr/r/rfjeAZ7O99Ta+JlhxLPf+GTIau0wGvR3I5R8WwT+oI/DAN6D9Ev/ihc+
+ D86Grlk+CfsD2rEbcnXJ2ixfpb3unK3zlfPQFnxzgvKp6nBDjKS8Wg8nWwj9yougCvTZ
+ jNmqhWnEygY0B+FRia2cUn/7YlWlRSMmLW4A7df9USU5jluCmGXTyImKXYDOd3NSbbi1
+ 25XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1702389798; x=1702994598;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=i5XvVGdA0q6db+uTpkKx1sq8IbJLw/bQh8rsthK+eMU=;
+ b=fbeWGsM7wQfZSOJb9J5QnAZWxG5AW3NfEFo4VwhzXbfIf09Pwp+BAzrldNgTzalVhS
+ L8sY424+fi/xf2hNr7djTHbqu0AUDx4mnZAwTdGKXkEUhCwEi9VN5D8ZjaO95YtV4Jhw
+ DZRqz4mMsYPXyn/eGvwtn1Q8oqOOujWbfZCZxWU1xA+sUsh6IaCcRhf3ZAa+mD/x3O1j
+ cwXarcITi0p17Ve/K6nijMTRJzCf4yo6JmrtHBJNGlmaaj0917AVetCu/fEtWbtGreTe
+ 9ORaBCTPVC7e8Ho7lmtJQqCEffc76RRyTfQhGlOav9abHbjsu4j5RUBXBnYqMcFEH5Q4
+ YKUg==
+X-Gm-Message-State: AOJu0YxwHB/piPxamJB04f9SMtetitS702261IW8o+PuB1dfjMc5euCH
+ JU/sCEix1UZJcLxs8MURO1ehFQ==
+X-Google-Smtp-Source: AGHT+IHzUgR6f94Smv0KuL8FdQ43huuJ10eLUCcdRTZMQTNffs24LEPyFVQT1ZndLotECok39JHa9Q==
+X-Received: by 2002:a05:600c:4509:b0:40c:2518:687c with SMTP id
+ t9-20020a05600c450900b0040c2518687cmr3178063wmo.61.1702389798335; 
+ Tue, 12 Dec 2023 06:03:18 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:5894:fa62:26b4:bf82?
+ ([2a01:e0a:982:cbb0:5894:fa62:26b4:bf82])
+ by smtp.gmail.com with ESMTPSA id
+ q12-20020a5d574c000000b003363654301esm193942wrw.98.2023.12.12.06.03.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 12 Dec 2023 06:03:17 -0800 (PST)
+Message-ID: <88960dfc-441f-49fb-bd36-ee32e754b003@linaro.org>
+Date: Tue, 12 Dec 2023 15:03:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-References: <20231211220643.1073606-1-dario.binacchi@amarulasolutions.com>
- <20231211220643.1073606-6-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20231211220643.1073606-6-dario.binacchi@amarulasolutions.com>
-X-Originating-IP: [10.201.20.54]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-12-12_02,2023-12-07_01,2023-05-22_02
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Anatolij Gustschin <agust@denx.de>,
- linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH v3 5/6] board: stm32f469-disco: add
-	support to display
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Content-Language: en-US, fr
+To: Igor Prusov <ivprusov@sberdevices.ru>, u-boot@lists.denx.de,
+ Michal Simek <michal.simek@amd.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231109105516.24892-1-ivprusov@sberdevices.ru>
+Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
+ kernel@sberdevices.ru, prusovigor@gmail.com
+Subject: Re: [Uboot-stm32] [PATCH v7 0/8] clk: Switch from soc_clk_dump to
+	clk_ops function
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,118 +113,79 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
+Reply-To: neil.armstrong@linaro.org
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Igor, Sean,
 
+On 09/11/2023 11:55, Igor Prusov wrote:
+> Currently clock providers may override default implementation of
+> soc_clk_dump function to replace clk dump command output. This causes
+> confusing behaviour when u-boot is built with one of such drivers
+> enabled but still has clocks defined using CCF. For example, enabling
+> CMD_CLK and using clk dump on sandbox target will not show CCF clocks
+> because k210 driver overrides common soc_clk_dump.
 
-On 12/11/23 23:05, Dario Binacchi wrote:
-> Add support to Orise Tech OTM8009A display on stm32f469-disco board.
-> 
-> It was necessary to retrieve the framebuffer address from the device tree
-> because the address returned by the video-uclass driver pointed to a memory
-> area that was not usable.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> ---
-> 
-> Changes in v3:
-> - Replace SDRAM_SIZE constant with global data gd->ram_size.
-> 
-> Changes in v2:
-> - Add DRAM_SIZE macro.
-> - Fix frame buffer allocation function so that it is backward compatible
->   with boards other than the one it was introduced for (i. e. stm32f469-disco).
->   Tested on stm32f469-disco and stm32mp157f-dk2 boards.
-> 
->  configs/stm32f469-discovery_defconfig | 13 +++++++++++
->  drivers/video/stm32/stm32_ltdc.c      | 31 +++++++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
-> 
-> diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
-> index 21c5498466cd..85e795e83e7d 100644
-> --- a/configs/stm32f469-discovery_defconfig
-> +++ b/configs/stm32f469-discovery_defconfig
-> @@ -21,6 +21,7 @@ CONFIG_CMD_GPT=y
->  # CONFIG_RANDOM_UUID is not set
->  CONFIG_CMD_MMC=y
->  # CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_BMP=y
->  CONFIG_CMD_CACHE=y
->  CONFIG_CMD_TIMER=y
->  # CONFIG_ISO_PARTITION is not set
-> @@ -40,3 +41,15 @@ CONFIG_SPI_FLASH_STMICRO=y
->  CONFIG_SPI=y
->  CONFIG_DM_SPI=y
->  CONFIG_STM32_QSPI=y
-> +CONFIG_VIDEO=y
-> +CONFIG_BACKLIGHT_GPIO=y
-> +CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
-> +CONFIG_VIDEO_STM32=y
-> +CONFIG_VIDEO_STM32_DSI=y
-> +CONFIG_VIDEO_STM32_MAX_XRES=480
-> +CONFIG_VIDEO_STM32_MAX_YRES=800
-> +CONFIG_BMP_16BPP=y
-> +CONFIG_BMP_24BPP=y
-> +CONFIG_BMP_32BPP=y
-> +CONFIG_DM_REGULATOR=y
-> +CONFIG_DM_REGULATOR_FIXED=y
-> diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
-> index 6fd90e33919d..4f60ba8ebeeb 100644
-> --- a/drivers/video/stm32/stm32_ltdc.c
-> +++ b/drivers/video/stm32/stm32_ltdc.c
-> @@ -495,6 +495,33 @@ static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
->  	setbits_le32(priv->regs + LTDC_L1CR, LXCR_LEN);
->  }
->  
-> +#if IS_ENABLED(CONFIG_TARGET_STM32F469_DISCOVERY)
-> +static int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +	u32 sdram_size = gd->ram_size;
-> +	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> +	phys_addr_t cpu;
-> +	dma_addr_t bus;
-> +	u64 dma_size;
-> +	int ret;
-> +
-> +	ret = dev_get_dma_range(dev, &cpu, &bus, &dma_size);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get dma address\n");
-> +		return ret;
-> +	}
-> +
-> +	uc_plat->base = bus + sdram_size - ALIGN(uc_plat->size, uc_plat->align);
-> +	return 0;
-> +}
-> +#else
-> +static inline int stm32_ltdc_alloc_fb(struct udevice *dev)
-> +{
-> +	/* Delegate framebuffer allocation to video-uclass */
-> +	return 0;
-> +}
-> +#endif
-> +
->  static int stm32_ltdc_probe(struct udevice *dev)
->  {
->  	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
-> @@ -605,6 +632,10 @@ static int stm32_ltdc_probe(struct udevice *dev)
->  	priv->crop_h = timings.vactive.typ;
->  	priv->alpha = 0xFF;
->  
-> +	ret = stm32_ltdc_alloc_fb(dev);
-> +	if (ret)
-> +		return ret;
-> +
->  	dev_dbg(dev, "%dx%d %dbpp frame buffer at 0x%lx\n",
->  		timings.hactive.typ, timings.vactive.typ,
->  		VNBITS(priv->l2bpp), uc_plat->base);
+What's the state of this serie ?
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks,
+Neil
 
-Thanks
-Patrice
+> 
+> Changelog:
+>   v1 -> v2:
+>   - Add missing static to dump functions
+> 
+>   v2 -> v3:
+>   - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
+> 
+>   v3 -> v4:
+>   - Rebase and refactor dump for new Amlogic A1 clock controller driver
+> 
+>   v4 -> v5:
+>   - Add docs for dump() function in clk_ops
+>   - Print driver and device names before calling corresponding dump()
+> 
+>   v5 -> v6:
+>   - dump() return type changed to void
+>   - meson_clk_dump() and helper functions moved under CONFIG_CMD_CLK to
+>     fix unused-function diagnostic
+> 
+> v6 -> v7:
+>   - fix return type of k210_clk_dump()
+>   - fix clk_ops dump() docs since it returns void now
+> 
+> Igor Prusov (8):
+>    clk: zynq: Move soc_clk_dump to Zynq clock driver
+>    clk: ast2600: Move soc_clk_dump function
+>    clk: k210: Move soc_clk_dump function
+>    clk: amlogic: Move driver and ops structs
+>    clk: Add dump operation to clk_ops
+>    cmd: clk: Use dump function from clk_ops
+>    clk: treewide: switch to clock dump from clk_ops
+>    cmd: clk: Make soc_clk_dump static
+> 
+>   arch/arm/mach-zynq/clk.c               |  57 --------------
+>   arch/mips/mach-pic32/cpu.c             |  23 ------
+>   cmd/clk.c                              |  13 +++-
+>   drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
+>   drivers/clk/clk_k210.c                 | 104 ++++++++++++-------------
+>   drivers/clk/clk_pic32.c                |  37 +++++++++
+>   drivers/clk/clk_versal.c               |   9 ++-
+>   drivers/clk/clk_zynq.c                 |  52 +++++++++++++
+>   drivers/clk/clk_zynqmp.c               |  22 +++---
+>   drivers/clk/imx/clk-imx8.c             |  13 +---
+>   drivers/clk/meson/a1.c                 |  58 ++++++--------
+>   drivers/clk/mvebu/armada-37xx-periph.c |  20 +++--
+>   drivers/clk/stm32/clk-stm32mp1.c       |  31 ++------
+>   include/clk-uclass.h                   |  13 ++++
+>   include/clk.h                          |   2 -
+>   15 files changed, 269 insertions(+), 268 deletions(-)
+> 
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

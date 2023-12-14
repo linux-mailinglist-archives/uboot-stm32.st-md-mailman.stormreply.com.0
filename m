@@ -2,80 +2,87 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8D8380EE73
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Dec 2023 15:12:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 251F48136E9
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Dec 2023 17:51:44 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6B615C6C856;
-	Tue, 12 Dec 2023 14:12:01 +0000 (UTC)
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
- [209.85.222.173])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C7FDCC6B45B;
+	Thu, 14 Dec 2023 16:51:43 +0000 (UTC)
+Received: from mail-io1-f41.google.com (mail-io1-f41.google.com
+ [209.85.166.41])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA020C6B47F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 36E66C6A61D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Dec 2023 14:11:59 +0000 (UTC)
-Received: by mail-qk1-f173.google.com with SMTP id
- af79cd13be357-77f552d4179so242578185a.1
+ Thu, 14 Dec 2023 16:51:42 +0000 (UTC)
+Received: by mail-io1-f41.google.com with SMTP id
+ ca18e2360f4ac-7b3a8366e13so347108539f.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Dec 2023 06:11:59 -0800 (PST)
+ Thu, 14 Dec 2023 08:51:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1702390319; x=1702995119;
+ d=chromium.org; s=google; t=1702572701; x=1703177501;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4j0nCBkGGJQwj35jWIGakQMHyUzXzmTlOIHOC/CgU08=;
- b=ECD0nnxlEX0oVAsSdocsjoGMzqiUHje9isGb6ebK4ECg6qL1DwW3GaShppgdr/vsaW
- knf0RimeyEndjkFYHeELHna7IwHoi55nMbvSNpNf9O+GNtMSQTnfMFBKnTtph8fZVRLs
- if+fErrXnrGNep+ZuCY+eZzRArWa8nusYUgxU5Gq480hsbg3X1RTkcbNXZn9V6HeTo2T
- 8mIrvhBeyiS2wc4GeuHTRLpVRYDOYWtHJBSB+4TkC9bzuItJ0FGMvD798V6rR4EQngfg
- ih4QahTy+pTv35KMyBv2jsXpT94fdwIcEOgl8rIbuE3e99JHJJwfuyLC3s8l3ZFulNch
- cobA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=s+dxsgUPBLoTcoQWhp34wtg56IrCFS8NnHBImkU+8po=;
+ b=glvKOtyqjhF5YtljvVkYy0smDoK+/pRnzKIS8WS7EsrtTfocfUTs0iEl7CUQ47LbtQ
+ Ui9rfzM8tIPHVwiWyr4I/XKo29ciq502kVW2qmx+Lml5EH+yTw8rdarFttvW1YPCuJtj
+ 8IeuSB3pPZSEQKcjKSIasDoOdQIpZiCn7APGg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702390319; x=1702995119;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4j0nCBkGGJQwj35jWIGakQMHyUzXzmTlOIHOC/CgU08=;
- b=vRufEgPvRiQRI3BPxaLEqxZM7qzErdFIqUL6KIR0A6OEz18MHi59XCSw0qHLi1lnsr
- 67INn5siujtAEXrtrmOaAzTh3xax816vKZmr17QIKS2NuhAbP30axD68gSL8x0Z1CT8X
- bvLgCKABjZPhCjq64InXKTDCQSTgsEab5/yYStEm80Ge4vNrlm2b6MWOrOC07rPe71bI
- lZ3F9n87xl20msEOerv5W7+OcG/jDXei26Ofw+UZzJLpFb+SoQRNFGGZ4ZX9TlhYrBM6
- cj7DrpQWjj1oKPbYyTztkG200Ky79h4vrvrHbOnKQ7IpKLU6gOO+gfTnZ1Y5hOZ2cnh1
- Q+1A==
-X-Gm-Message-State: AOJu0YwIH9a0+PI7244IxYDzn89M32bNFjLc8uBWxDAt9rn7bf/WJuq1
- upOUtlyrn3sdfufIEs2GA3A=
-X-Google-Smtp-Source: AGHT+IHrvGfKuhcNbnpEDNsa84QYxiXGbwiVGYrR+zxObhr3UMxVE8PMAbDlnmbghhdrnCqTSEOKGA==
-X-Received: by 2002:a05:620a:42:b0:77e:fba3:936e with SMTP id
- t2-20020a05620a004200b0077efba3936emr6219816qkt.80.1702390318677; 
- Tue, 12 Dec 2023 06:11:58 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- po6-20020a05620a384600b0077d9fdde1dcsm3737299qkn.42.2023.12.12.06.11.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Dec 2023 06:11:58 -0800 (PST)
-Message-ID: <9760cfbe-ad54-8a38-a9a7-9308b0b7ca25@gmail.com>
-Date: Tue, 12 Dec 2023 09:11:57 -0500
+ d=1e100.net; s=20230601; t=1702572701; x=1703177501;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=s+dxsgUPBLoTcoQWhp34wtg56IrCFS8NnHBImkU+8po=;
+ b=bGN33M1pLxc5oW9yYbz3B7VS+aXS84/w2yeRGcmnRjB3mN5Ibkwy5F4VnihREA2gc9
+ XjzPa/RlmaJlUcNcHodTYl17vMqJeoLeNke5TOG5+i9O83dBzV3z2x6/bacUv8Mvs1XS
+ uamDecvj5pyYKmc2+b8rUXQPWotLRhI4OQ94sGDTwWNh8ExNR1XmxCeEDM8Mg+DQvqCz
+ YLouJyx//UuJIXvHZygJv6jtTcPNNSmFaP+NPICiYPc3YZ/YiPqbIOcQClj2YoPz3Hsx
+ 2glQWdStclwtIO3KfxMKY6qJwbxXIdh08JsM7GIM8irTrlAo6AdhmnPAb+7s9vd1+7in
+ 635A==
+X-Gm-Message-State: AOJu0Yyp+Zux9ahLREs/vdD8iafcPsIrDoyETRKT/ACRfepEm+jYo32Y
+ fn4ccFgO25qT0Y0ehFLiunwzJQ==
+X-Google-Smtp-Source: AGHT+IHS2iJlKsxPLqFzkMQCoWrul5SQ4wQK2/jFrYNWbggtR5tiixU+SyrMXiXWgPxymrcyV6WDRw==
+X-Received: by 2002:a05:6e02:1b85:b0:35e:6b86:3c1e with SMTP id
+ h5-20020a056e021b8500b0035e6b863c1emr14352739ili.34.1702572700998; 
+ Thu, 14 Dec 2023 08:51:40 -0800 (PST)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Dec 2023 08:51:40 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 14 Dec 2023 09:50:09 -0700
+Message-ID: <20231214165112.2182274-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: neil.armstrong@linaro.org, Igor Prusov <ivprusov@sberdevices.ru>,
- u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eddie James <eajames@linux.ibm.com>, Rick Chen <rick@andestech.com>,
+ uboot-snps-arc@synopsys.com, Max Filippov <jcmvbkbc@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Andy Fleming <afleming@gmail.com>,
+ Stefan Roese <sr@denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
+ Angelo Dureghello <angelo@sysam.it>, Sean Anderson <sean.anderson@seco.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Scott McNutt <smcnutt@psyent.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Denk <wd@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alison Wang <alison.wang@nxp.com>, Safae Ouajih <souajih@baylibre.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Leo <ycliang@andestech.com>,
+ Nikita Shubin <n.shubin@yadro.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mario Six <mario.six@gdsys.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-References: <20231109105516.24892-1-ivprusov@sberdevices.ru>
- <88960dfc-441f-49fb-bd36-ee32e754b003@linaro.org>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <88960dfc-441f-49fb-bd36-ee32e754b003@linaro.org>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com, Joel Stanley <joel@jms.id.au>,
- kernel@sberdevices.ru, prusovigor@gmail.com
-Subject: Re: [Uboot-stm32] [PATCH v7 0/8] clk: Switch from soc_clk_dump to
-	clk_ops function
+ Chanho Park <chanho61.park@samsung.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [Uboot-stm32] [PATCH v2 00/21] Complete decoupling of bootm logic
+	from commands
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,65 +94,91 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTIvMTIvMjMgMDk6MDMsIE5laWwgQXJtc3Ryb25nIHdyb3RlOg0KPiBIaSBJZ29yLCBTZWFu
-LA0KPiANCj4gT24gMDkvMTEvMjAyMyAxMTo1NSwgSWdvciBQcnVzb3Ygd3JvdGU6DQo+PiBDdXJy
-ZW50bHkgY2xvY2sgcHJvdmlkZXJzIG1heSBvdmVycmlkZSBkZWZhdWx0IGltcGxlbWVudGF0aW9u
-IG9mDQo+PiBzb2NfY2xrX2R1bXAgZnVuY3Rpb24gdG8gcmVwbGFjZSBjbGsgZHVtcCBjb21tYW5k
-IG91dHB1dC4gVGhpcyBjYXVzZXMNCj4+IGNvbmZ1c2luZyBiZWhhdmlvdXIgd2hlbiB1LWJvb3Qg
-aXMgYnVpbHQgd2l0aCBvbmUgb2Ygc3VjaCBkcml2ZXJzDQo+PiBlbmFibGVkIGJ1dCBzdGlsbCBo
-YXMgY2xvY2tzIGRlZmluZWQgdXNpbmcgQ0NGLiBGb3IgZXhhbXBsZSwgZW5hYmxpbmcNCj4+IENN
-RF9DTEsgYW5kIHVzaW5nIGNsayBkdW1wIG9uIHNhbmRib3ggdGFyZ2V0IHdpbGwgbm90IHNob3cg
-Q0NGIGNsb2Nrcw0KPj4gYmVjYXVzZSBrMjEwIGRyaXZlciBvdmVycmlkZXMgY29tbW9uIHNvY19j
-bGtfZHVtcC4NCj4gDQo+IFdoYXQncyB0aGUgc3RhdGUgb2YgdGhpcyBzZXJpZSA/DQoNCkF3YWl0
-aW5nIHVwc3RyZWFtLiBJIHdpbGwgbWFrZSBhIFBSIHdpdGggaXQgZm9yIG5leHQuDQoNCi0tU2Vh
-bg0KDQo+IFRoYW5rcywNCj4gTmVpbA0KPiANCj4+DQo+PiBDaGFuZ2Vsb2c6DQo+PiDCoCB2MSAt
-PiB2MjoNCj4+IMKgIC0gQWRkIG1pc3Npbmcgc3RhdGljIHRvIGR1bXAgZnVuY3Rpb25zDQo+Pg0K
-Pj4gwqAgdjIgLT4gdjM6DQo+PiDCoCAtIE1ha2Ugc29jX2Nsa19kdW1wIGluIGNtZC9jbGsuYyBz
-dGF0aWMgaW5zdGVhZCBvZiByZW1vdmluZyBfX3dlYWsNCj4+DQo+PiDCoCB2MyAtPiB2NDoNCj4+
-IMKgIC0gUmViYXNlIGFuZCByZWZhY3RvciBkdW1wIGZvciBuZXcgQW1sb2dpYyBBMSBjbG9jayBj
-b250cm9sbGVyIGRyaXZlcg0KPj4NCj4+IMKgIHY0IC0+IHY1Og0KPj4gwqAgLSBBZGQgZG9jcyBm
-b3IgZHVtcCgpIGZ1bmN0aW9uIGluIGNsa19vcHMNCj4+IMKgIC0gUHJpbnQgZHJpdmVyIGFuZCBk
-ZXZpY2UgbmFtZXMgYmVmb3JlIGNhbGxpbmcgY29ycmVzcG9uZGluZyBkdW1wKCkNCj4+DQo+PiDC
-oCB2NSAtPiB2NjoNCj4+IMKgIC0gZHVtcCgpIHJldHVybiB0eXBlIGNoYW5nZWQgdG8gdm9pZA0K
-Pj4gwqAgLSBtZXNvbl9jbGtfZHVtcCgpIGFuZCBoZWxwZXIgZnVuY3Rpb25zIG1vdmVkIHVuZGVy
-IENPTkZJR19DTURfQ0xLIHRvDQo+PiDCoMKgwqAgZml4IHVudXNlZC1mdW5jdGlvbiBkaWFnbm9z
-dGljDQo+Pg0KPj4gdjYgLT4gdjc6DQo+PiDCoCAtIGZpeCByZXR1cm4gdHlwZSBvZiBrMjEwX2Ns
-a19kdW1wKCkNCj4+IMKgIC0gZml4IGNsa19vcHMgZHVtcCgpIGRvY3Mgc2luY2UgaXQgcmV0dXJu
-cyB2b2lkIG5vdw0KPj4NCj4+IElnb3IgUHJ1c292ICg4KToNCj4+IMKgwqAgY2xrOiB6eW5xOiBN
-b3ZlIHNvY19jbGtfZHVtcCB0byBaeW5xIGNsb2NrIGRyaXZlcg0KPj4gwqDCoCBjbGs6IGFzdDI2
-MDA6IE1vdmUgc29jX2Nsa19kdW1wIGZ1bmN0aW9uDQo+PiDCoMKgIGNsazogazIxMDogTW92ZSBz
-b2NfY2xrX2R1bXAgZnVuY3Rpb24NCj4+IMKgwqAgY2xrOiBhbWxvZ2ljOiBNb3ZlIGRyaXZlciBh
-bmQgb3BzIHN0cnVjdHMNCj4+IMKgwqAgY2xrOiBBZGQgZHVtcCBvcGVyYXRpb24gdG8gY2xrX29w
-cw0KPj4gwqDCoCBjbWQ6IGNsazogVXNlIGR1bXAgZnVuY3Rpb24gZnJvbSBjbGtfb3BzDQo+PiDC
-oMKgIGNsazogdHJlZXdpZGU6IHN3aXRjaCB0byBjbG9jayBkdW1wIGZyb20gY2xrX29wcw0KPj4g
-wqDCoCBjbWQ6IGNsazogTWFrZSBzb2NfY2xrX2R1bXAgc3RhdGljDQo+Pg0KPj4gwqAgYXJjaC9h
-cm0vbWFjaC16eW5xL2Nsay5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNTcgLS0t
-LS0tLS0tLS0tLS0NCj4+IMKgIGFyY2gvbWlwcy9tYWNoLXBpYzMyL2NwdS5jwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHzCoCAyMyAtLS0tLS0NCj4+IMKgIGNtZC9jbGsuY8KgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEzICsrKy0N
-Cj4+IMKgIGRyaXZlcnMvY2xrL2FzcGVlZC9jbGtfYXN0MjYwMC5jwqDCoMKgwqDCoMKgIHzCoCA4
-MyArKysrKysrKysrLS0tLS0tLS0tLQ0KPj4gwqAgZHJpdmVycy9jbGsvY2xrX2syMTAuY8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTA0ICsrKysrKysrKysrKy0tLS0tLS0tLS0t
-LS0NCj4+IMKgIGRyaXZlcnMvY2xrL2Nsa19waWMzMi5jwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIHzCoCAzNyArKysrKysrKysNCj4+IMKgIGRyaXZlcnMvY2xrL2Nsa192ZXJzYWwuY8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqAgOSArKy0NCj4+IMKgIGRyaXZlcnMvY2xr
-L2Nsa196eW5xLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNTIgKysrKysr
-KysrKysrKw0KPj4gwqAgZHJpdmVycy9jbGsvY2xrX3p5bnFtcC5jwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCB8wqAgMjIgKysrLS0tDQo+PiDCoCBkcml2ZXJzL2Nsay9pbXgvY2xrLWlteDgu
-Y8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgMTMgKy0tLQ0KPj4gwqAgZHJpdmVycy9jbGsv
-bWVzb24vYTEuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCA1OCArKysrKyst
-LS0tLS0tLQ0KPj4gwqAgZHJpdmVycy9jbGsvbXZlYnUvYXJtYWRhLTM3eHgtcGVyaXBoLmMgfMKg
-IDIwICsrKy0tDQo+PiDCoCBkcml2ZXJzL2Nsay9zdG0zMi9jbGstc3RtMzJtcDEuY8KgwqDCoMKg
-wqDCoCB8wqAgMzEgKystLS0tLS0NCj4+IMKgIGluY2x1ZGUvY2xrLXVjbGFzcy5owqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAxMyArKysrDQo+PiDCoCBpbmNsdWRlL2Ns
-ay5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKg
-wqAgMiAtDQo+PiDCoCAxNSBmaWxlcyBjaGFuZ2VkLCAyNjkgaW5zZXJ0aW9ucygrKSwgMjY4IGRl
-bGV0aW9ucygtKQ0KPj4NCj4gDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1t
-YWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
-bS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+This series continues refactoring the bootm code to allow it to be used
+with CONFIG_COMMAND disabled. The OS-handling code is refactored and
+a new bootm_run() function is created to run through the bootm stages.
+This completes the work.
+
+A booti_go() function is created also, in case it proves useful, but at
+last for now standard boot does not use this.
+
+This is cmdd (part d of CMDLINE refactoring)
+It depends on dm/bootstda-working
+which depends on dm/cmdc-working
+
+Changes in v2:
+- Add new patch to enable more bootm OS methods in sandbox
+- Split addition of struct bootm_info to its own patch
+- Split changing of boot_os_fn parameters to a separate patch
+- Split out adding the rest of struct bootm_info fields to separate patch
+- Split out patch to move do_bootm_states() comment to header
+- Split out booti removal of #ifdef
+- Split out bootz removal of #ifdef
+- Adjust patch to focus just on dropping the do_bootm_states() arguments
+- Split do_bootm_states() rename to a separate patch
+- Rework series to allow OS access to cmdline arguments for bootm
+
+Simon Glass (21):
+  mips: Add a reset_cpu() function
+  m68k: Add a reset_cpu() function
+  ppc: Add a reset_cpu() function
+  nios2: Add a reset_cpu() function
+  riscv: Add a reset_cpu() function
+  bootm: Adjust how the board is reset
+  sandbox: bootm: Enable more bootm OS methods
+  bootm: Create a struct for argument information
+  bootm: Adjust arguments of boot_os_fn
+  bootm: Add more fields to bootm_info
+  bootm: Move do_bootm_states() comment to header file
+  booti: Avoid use of #ifdef
+  bootz: Avoid use of #ifdef
+  bootm: Drop arguments from do_bootm_states()
+  bootm: Rename do_bootm_states() to bootm_run_states()
+  bootm: Tidy up boot_selected_os()
+  bootm: Create a function to run through the bootm states
+  stm32: Use local vars in stm32prog for initrd and fdt
+  bootm: Create a function to run through the bootz states
+  stm32: Use bootm_run() and bootz_run()
+  bootm: Create a function to run through the booti states
+
+ arch/arc/lib/bootm.c                          |   5 +-
+ arch/arm/lib/bootm.c                          |   6 +-
+ .../cmd_stm32prog/cmd_stm32prog.c             |  33 +++--
+ arch/m68k/lib/bootm.c                         |   5 +-
+ arch/m68k/lib/traps.c                         |   7 +
+ arch/microblaze/lib/bootm.c                   |   6 +-
+ arch/mips/cpu/cpu.c                           |   8 +-
+ arch/mips/lib/bootm.c                         |   8 +-
+ arch/nios2/cpu/cpu.c                          |   8 +-
+ arch/nios2/lib/bootm.c                        |  10 +-
+ arch/powerpc/lib/bootm.c                      |   5 +-
+ arch/powerpc/lib/traps.c                      |  10 ++
+ arch/riscv/cpu/cpu.c                          |  13 ++
+ arch/riscv/lib/bootm.c                        |  11 +-
+ arch/riscv/lib/reset.c                        |   7 +-
+ arch/sandbox/cpu/cpu.c                        |   8 ++
+ arch/sandbox/lib/bootm.c                      |   5 +-
+ arch/sh/lib/bootm.c                           |   6 +-
+ arch/x86/lib/bootm.c                          |   6 +-
+ arch/xtensa/lib/bootm.c                       |   4 +-
+ boot/bootm.c                                  | 133 ++++++++++--------
+ boot/bootm_os.c                               |  78 +++++-----
+ cmd/booti.c                                   |  55 +++++---
+ cmd/bootm.c                                   |  43 ++++--
+ cmd/bootz.c                                   |  35 +++--
+ configs/sandbox_defconfig                     |   3 +-
+ include/bootm.h                               | 124 ++++++++++++++--
+ 27 files changed, 440 insertions(+), 202 deletions(-)
+
+-- 
+2.43.0.472.g3155946c3a-goog
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

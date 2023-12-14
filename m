@@ -2,59 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EF9B8136ED
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Dec 2023 17:52:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 286F48136EE
+	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Dec 2023 17:52:04 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D90ACC6DD6A;
-	Thu, 14 Dec 2023 16:52:01 +0000 (UTC)
-Received: from mail-il1-f175.google.com (mail-il1-f175.google.com
- [209.85.166.175])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E30FBC6B45B;
+	Thu, 14 Dec 2023 16:52:03 +0000 (UTC)
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
+ [209.85.166.174])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 503CBC6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9026C6A61D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 Dec 2023 16:52:00 +0000 (UTC)
-Received: by mail-il1-f175.google.com with SMTP id
- e9e14a558f8ab-35d82fb7e86so25047895ab.2
+ Thu, 14 Dec 2023 16:52:01 +0000 (UTC)
+Received: by mail-il1-f174.google.com with SMTP id
+ e9e14a558f8ab-35f72db10f7so8484295ab.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 Dec 2023 08:52:00 -0800 (PST)
+ Thu, 14 Dec 2023 08:52:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572719; x=1703177519;
+ d=chromium.org; s=google; t=1702572720; x=1703177520;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xM637a7/+74UxIJkS29Afb2Qul2T5Es438+DTSq1oH4=;
- b=jq7ebTaC5VIrGx1RwNszBd2EwbGpMdBKugTv41TEemVynxaQLAKFG8G3C8yFckI7Ju
- DJK8plJFvvwT4yjy9XVl4KV68WmWswj+yQBMbNUNWmnQdaZT2a+0qsU0zTfgFriOihEM
- /NlU6cE8ZNZqHNFs995QOxGvNVx9J3/wbcwnw=
+ bh=/uX2ryKAEZBjHGs+wGhtzHYEyOmV4i0u0CTu3FfRPJE=;
+ b=nraG2diTTc00mo6l6p6cQgKEL1h4zUXQM/95h1cheWLWpsqqPqG335GLsmvxuiHqp7
+ hojstG5yGbVy+x9h43QID0d+8ovpFh80pPsHaQz9ct/OjS7C4zBlyubq6ZfjM11v7Igh
+ 59pP9O4ZocizeEGbdNCqQjuoZpGk1RQqs6pYQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572719; x=1703177519;
+ d=1e100.net; s=20230601; t=1702572720; x=1703177520;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xM637a7/+74UxIJkS29Afb2Qul2T5Es438+DTSq1oH4=;
- b=U+ogQ0L1zkQz4dvQ0LwXQMR+6yQDjau+xQ+QCVtOQCs5VmQfaeUYBz4EFxwABR6O1a
- 47Kk2NqeI5m8QWsozdUMaqWyxGsV7QCad3mo5l6yw93WkIjBGRHZvB9nLjNi/H+U9ULc
- 8ELx2mNnI06P681AhHeCSwmTXaCXaAz6IgrjIMR4eMVclUCpBPCIhBZZ4olrjROXdRNH
- jXoc8o8IaNM0z61BQCh4vnlMvAiEZASr5GJuwFcnf/gGvJ77vs9N3FUYu6szpN7fBGcd
- wajx/L8Tq3A1no3LqWDAVCAVwWwddc2r8r5XY7pNu4DYWCU4ZP75PYfaybNPXMCM1UbH
- UbLA==
-X-Gm-Message-State: AOJu0Yx01wuYw5je2io76Kktp00x5aZ/amLg10Jh944SV7pO3Rylnqej
- Uod0JwwmrmhDIWHSZsSsa7pwjQ==
-X-Google-Smtp-Source: AGHT+IFzNmHrq+4O6kqvxUp9Ec1fPtvE0fquphffCtdNDGWIeFR1D4jiAz1o6jRu8Hi3zqaghnBpXg==
-X-Received: by 2002:a92:ca89:0:b0:35f:772b:b89d with SMTP id
- t9-20020a92ca89000000b0035f772bb89dmr2448179ilo.62.1702572719268; 
- Thu, 14 Dec 2023 08:51:59 -0800 (PST)
+ bh=/uX2ryKAEZBjHGs+wGhtzHYEyOmV4i0u0CTu3FfRPJE=;
+ b=tH3gg5U+WMBN5Ggm4pbrPSvfIDiCGNmFioWA9gvgZuBYRdO6LRu1e5N3i6KErn85Bp
+ pXUkD2JupYvqDtgX3LeJCeOVhCsuej1kGDX9w7hWU4QTNJlZAzsYbXw1AdHJ+1x9p9vO
+ GIegmOHHt5MZixe1CL49YR3d13AIjyBB7I83dvaAk7NIifrDVI/MUfXHWgB3KAV7jTpA
+ puYgsp9Y6GkShfGIzEkcrpbAvYDIKcmlPpEASfnS2b6pVynn0L3mN/FLaSvNICzzSd3g
+ JVFvaw4z1EVRfHaMOBYLpRBiNh6b3tCkbGTohDPMCKeKCV4GJfZ5yn+SgBvgNJhLesZB
+ tmLA==
+X-Gm-Message-State: AOJu0YxQSIrcTUa+b/uPPBtBRoV54giQgf4XjAmIpxFzmtl8H0vsIlRS
+ EF9UZvY4fKP6vd3EFWDAeJ+Eng==
+X-Google-Smtp-Source: AGHT+IHzb/7bmjPNYEYVVxtjXMngl3krPz1PJlxxNS5QKE+nNBlMhhc7Hpg81VfsrMPNt1u1Un4n3Q==
+X-Received: by 2002:a92:c565:0:b0:35d:6997:9cb3 with SMTP id
+ b5-20020a92c565000000b0035d69979cb3mr13537239ilj.52.1702572720766; 
+ Thu, 14 Dec 2023 08:52:00 -0800 (PST)
 Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
  by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.51.58
+ bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.52.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:51:58 -0800 (PST)
+ Thu, 14 Dec 2023 08:52:00 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Thu, 14 Dec 2023 09:50:27 -0700
-Message-ID: <20231214165112.2182274-14-sjg@chromium.org>
+Date: Thu, 14 Dec 2023 09:50:29 -0700
+Message-ID: <20231214165112.2182274-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
 In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
 References: <20231214165112.2182274-1-sjg@chromium.org>
@@ -62,8 +62,8 @@ MIME-Version: 1.0
 Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>,
  Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 18/21] stm32: Use local vars in stm32prog
-	for initrd and fdt
+Subject: [Uboot-stm32] [PATCH v2 20/21] stm32: Use bootm_run() and
+	bootz_run()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,71 +80,76 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Rather than assigning to the bootm_argv[] array multiple times, use
-local variables for the two things that can change and assign them at
-the end.
-
-This makes it easier to drop the array eventually.
-
-Tidu up an overly short line while we are here.
+Use the new bootm/z_run() functions to avoid having to create an
+argument list for the stm32prog code.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- .../cmd_stm32prog/cmd_stm32prog.c             | 23 +++++++++++--------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+ .../cmd_stm32prog/cmd_stm32prog.c             | 20 ++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
 
 diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index 2411bcf06d8f..8670535844d3 100644
+index 8670535844d3..3ed393b7199f 100644
 --- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
 +++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -124,30 +124,35 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		char boot_addr_start[20];
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <common.h>
++#include <bootm.h>
+ #include <command.h>
+ #include <dfu.h>
+ #include <image.h>
+@@ -125,12 +126,10 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
  		char dtb_addr[20];
  		char initrd_addr[40];
-+		char *fdt_arg, *initrd_arg;
- 		char *bootm_argv[5] = {
--			"bootm", boot_addr_start, "-", dtb_addr, NULL
-+			"bootm", boot_addr_start,
- 		};
+ 		char *fdt_arg, *initrd_arg;
+-		char *bootm_argv[5] = {
+-			"bootm", boot_addr_start,
+-		};
  		const void *uimage = (void *)data->uimage;
  		const void *dtb = (void *)data->dtb;
  		const void *initrd = (void *)data->initrd;
++		struct bootm_info bmi;
  
-+		fdt_arg = dtb_addr;
+ 		fdt_arg = dtb_addr;
  		if (!dtb)
--			bootm_argv[3] = env_get("fdtcontroladdr");
-+			fdt_arg = env_get("fdtcontroladdr");
- 		else
--			snprintf(dtb_addr, sizeof(dtb_addr) - 1,
--				 "0x%p", dtb);
-+			snprintf(dtb_addr, sizeof(dtb_addr) - 1, "0x%p", dtb);
- 
+@@ -141,7 +140,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
  		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
  			 "0x%p", uimage);
  
-+		initrd_arg = "-";
+-		initrd_arg = "-";
++		initrd_arg = NULL;
  		if (initrd) {
--			snprintf(initrd_addr, sizeof(initrd_addr) - 1, "0x%p:0x%zx",
--				 initrd, data->initrd_size);
--			bootm_argv[2] = initrd_addr;
-+			snprintf(initrd_addr, sizeof(initrd_addr) - 1,
-+				 "0x%p:0x%zx", initrd, data->initrd_size);
-+			initrd_arg = initrd_addr;
+ 			snprintf(initrd_addr, sizeof(initrd_addr) - 1,
+ 				 "0x%p:0x%zx", initrd, data->initrd_size);
+@@ -149,15 +148,18 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
  		}
  
--		printf("Booting kernel at %s %s %s...\n\n\n",
--		       boot_addr_start, bootm_argv[2], bootm_argv[3]);
-+		printf("Booting kernel at %s %s %s...\n\n\n", boot_addr_start,
-+		       initrd_arg, fdt_arg);
-+		bootm_argv[2] = initrd_arg;
-+		bootm_argv[3] = fdt_arg;
+ 		printf("Booting kernel at %s %s %s...\n\n\n", boot_addr_start,
+-		       initrd_arg, fdt_arg);
+-		bootm_argv[2] = initrd_arg;
+-		bootm_argv[3] = fdt_arg;
++		       initrd_arg ?: "-", fdt_arg);
 +
++		bootm_init(&bmi);
++		bmi.addr_fit = boot_addr_start;
++		bmi.conf_ramdisk = initrd_arg;
++		bmi.conf_fdt = fdt_arg;
+ 
  		/* Try bootm for legacy and FIT format image */
  		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
- 			do_bootm(cmdtp, 0, 4, bootm_argv);
+-			do_bootm(cmdtp, 0, 4, bootm_argv);
++			bootm_run(&bmi);
+ 		else if (IS_ENABLED(CONFIG_CMD_BOOTZ))
+-			do_bootz(cmdtp, 0, 4, bootm_argv);
++			bootz_run(&bmi);
+ 	}
+ 	if (data->script)
+ 		cmd_source_script(data->script, NULL, NULL);
 -- 
 2.43.0.472.g3155946c3a-goog
 

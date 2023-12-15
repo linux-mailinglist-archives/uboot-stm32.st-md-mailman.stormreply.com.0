@@ -2,64 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F70C814A27
-	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Dec 2023 15:13:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1138C814AC3
+	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Dec 2023 15:42:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E572FC6DD6D;
-	Fri, 15 Dec 2023 14:13:02 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B2910C6DD6D;
+	Fri, 15 Dec 2023 14:42:31 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 16082C6DD6C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C5172C6A5EA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 15 Dec 2023 14:13:02 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Fri, 15 Dec 2023 14:42:30 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 3BF9dlJF028436; Fri, 15 Dec 2023 15:13:01 +0100
+ 3BF9TrKW006665; Fri, 15 Dec 2023 15:42:27 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=6xCcXQyn99iRhLZ8grv5OFshDt5uJrWpGPlmJk9r4Zg=; b=2W
- IOo0roxy6f2LRe2LM7n7GPnLwY7VCf3oqEi+nozEXGVK4RoAprOtxYeiVAiDfONE
- PrsPB08tQosMvbVk6vpv11BgdsBn4aPcizlyYCHUZfN3AAayO+STggHXYA8CpDfe
- ESnCKpFBSkrRgVJieYchbyl7vUxZRKgerkzVeHwaNG9f9Du+QSX03Fv49HgNQjvA
- L0Mdo9eZ0cr4DoTjoag3iFZeIypNLwVvZjaXavDr1NiL6lW2Xk6JfUQITNv37+OS
- U0xTxHouc6h53CBKpdzQz9Ae6cdLvVmfn495yXAAnKiZJlKvh9gAmiLgjgzAGjz5
- zPfsG22SuMroZ4y7O8eQ==
+ selector1; bh=cepyr1K+SZomwnQrKIK7ucVYeK1okcGDtLp7lzkclqA=; b=uZ
+ rK8ikFiXewGydAI7ntIPlF+sIXtPgTCdRax4jfBbXi2yR8PZjm3Ti3pihfSwW3ql
+ cGf2ovbHv2y3dqrvkIXCjNcgibX27y3KlP0Nm8gI1TN94J5s4o48JTYFqx15LCKc
+ 9pXWJ2PFdL3xwQHlsi+NPwK8OmNjudv349QSrKCEuZONeghmz0GljVuMNfod+DWK
+ CGOftNZVK0mOdm1z+v+WhpyM1mcnQ2x/CiU8fwDpihtz901AkIqR5YGO+NuHpzZn
+ JsDxnkaLyxAmFP6PzBE8hYIso8HDtBcEa6Zoh9mRaFAsvgYMI7lktjhUhKDqwFGJ
+ Bhwoak+xjWkjOU0JTLIQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvehmtn0p-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3uvg0ha0xj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 15 Dec 2023 15:13:01 +0100 (CET)
+ Fri, 15 Dec 2023 15:42:27 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0857E100058;
- Fri, 15 Dec 2023 15:13:01 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B2159100052;
+ Fri, 15 Dec 2023 15:42:26 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F31E42278B6;
- Fri, 15 Dec 2023 15:13:00 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A828F228A22;
+ Fri, 15 Dec 2023 15:42:26 +0100 (CET)
 Received: from [10.252.23.141] (10.252.23.141) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
- 2023 15:13:00 +0100
-Message-ID: <593de0a9-9c11-445e-8254-372d485b011a@foss.st.com>
-Date: Fri, 15 Dec 2023 15:13:00 +0100
+ 2023 15:42:26 +0100
+Message-ID: <ea021247-ce01-40bd-a162-4f938b10603d@foss.st.com>
+Date: Fri, 15 Dec 2023 15:42:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
- <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+References: <20231211220643.1073606-1-dario.binacchi@amarulasolutions.com>
+ <20231211220643.1073606-2-dario.binacchi@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
+In-Reply-To: <20231211220643.1073606-2-dario.binacchi@amarulasolutions.com>
 X-Originating-IP: [10.252.23.141]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-12-15_08,2023-12-14_01,2023-05-22_02
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/2] board: st: common: Fix
-	board_get_alt_info_mtd()
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ linux-amarula@amarulasolutions.com
+Subject: Re: [Uboot-stm32] [PATCH v3 1/6] ARM: dts: stm32f469-disco: sync
+	with Linux 6.5
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,49 +74,56 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAxMi8xNS8yMyAxMjo1MiwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiBIaSwKPiAKPiBP
-biAxMS8xNy8yMyAxODowMSwgUGF0cmljZSBDaG90YXJkIHdyb3RlOgo+PiBTaW5jZSBNVEQgZGV2
-aWNlcyBhcmUgcGFydGlvbmVkLCB3ZSBnb3QgdGhlIGZvbGxvd2luZwo+PiBlcnJvciB3aGVuIGNv
-bW1hbmQgImRmdSAwIiBpcyBleGVjdXRlZDoKPj4KPj4gREZVIGFsdCBpbmZvIHNldHRpbmc6IGRv
-bmUKPj4gRVJST1I6IFRvbyBtYW55IGFyZ3VtZW50cyBmb3Igbm9yMAo+PiBFUlJPUjogREZVIGVu
-dGl0aWVzIGNvbmZpZ3VyYXRpb24gZmFpbGVkIQo+PiBFUlJPUjogKHBhcnRpdGlvbiB0YWJsZSBk
-b2VzIG5vdCBtYXRjaCBkZnVfYWx0X2luZm8/KQo+Pgo+PiBGaXhlczogMzEzMjVlMWI4YjljICgi
-c3RtMzJtcDE6IGR5bmFtaWNhbGx5IGJ1aWxkIERGVV9BTFRfSU5GTyIpCj4+Cj4+IFNpZ25lZC1v
-ZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+PiAt
-LS0KPj4KPj4gwqAgYm9hcmQvc3QvY29tbW9uL3N0bTMybXBfZGZ1LmMgfCA5ICsrLS0tLS0tLQo+
-PiDCoCAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQo+Pgo+
-PiBkaWZmIC0tZ2l0IGEvYm9hcmQvc3QvY29tbW9uL3N0bTMybXBfZGZ1LmMgYi9ib2FyZC9zdC9j
-b21tb24vc3RtMzJtcF9kZnUuYwo+PiBpbmRleCBhOGViOGQ1Y2FlMi4uZGVkM2JmODE5NjEgMTAw
-NjQ0Cj4+IC0tLSBhL2JvYXJkL3N0L2NvbW1vbi9zdG0zMm1wX2RmdS5jCj4+ICsrKyBiL2JvYXJk
-L3N0L2NvbW1vbi9zdG0zMm1wX2RmdS5jCj4+IEBAIC03Myw3ICs3Myw2IEBAIHN0YXRpYyB2b2lk
-IGJvYXJkX2dldF9hbHRfaW5mb19tbWMoc3RydWN0IHVkZXZpY2UgKmRldiwgY2hhciAqYnVmKQo+
-PiDCoCBzdGF0aWMgdm9pZCBib2FyZF9nZXRfYWx0X2luZm9fbXRkKHN0cnVjdCBtdGRfaW5mbyAq
-bXRkLCBjaGFyICpidWYpCj4+IMKgIHsKPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgbXRkX2luZm8gKnBh
-cnQ7Cj4+IC3CoMKgwqAgYm9vbCBmaXJzdCA9IHRydWU7Cj4+IMKgwqDCoMKgwqAgY29uc3QgY2hh
-ciAqbmFtZTsKPj4gwqDCoMKgwqDCoCBpbnQgbGVuLCBwYXJ0bnVtID0gMDsKPj4gwqAgQEAgLTg2
-LDE3ICs4NSwxMyBAQCBzdGF0aWMgdm9pZCBib2FyZF9nZXRfYWx0X2luZm9fbXRkKHN0cnVjdCBt
-dGRfaW5mbyAqbXRkLCBjaGFyICpidWYpCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICJt
-dGQgJXM9IiwgbmFtZSk7Cj4+IMKgIMKgwqDCoMKgwqAgbGVuICs9IHNucHJpbnRmKGJ1ZiArIGxl
-biwgREZVX0FMVF9CVUZfTEVOIC0gbGVuLAo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAiJXMg
-cmF3IDB4MCAweCVsbHggIiwKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgIiVzIHJhdyAweDAg
-MHglbGx4IiwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbmFtZSwgbXRkLT5zaXplKTsK
-Pj4gwqAgwqDCoMKgwqDCoCBsaXN0X2Zvcl9lYWNoX2VudHJ5KHBhcnQsICZtdGQtPnBhcnRpdGlv
-bnMsIG5vZGUpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHBhcnRudW0rKzsKPj4gLcKgwqDCoMKg
-wqDCoMKgIGlmICghZmlyc3QpCj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGxlbiArPSBzbnBy
-aW50ZihidWYgKyBsZW4sIERGVV9BTFRfQlVGX0xFTiAtIGxlbiwgIjsiKTsKPj4gLcKgwqDCoMKg
-wqDCoMKgIGZpcnN0ID0gZmFsc2U7Cj4+IC0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGxlbiArPSBz
-bnByaW50ZihidWYgKyBsZW4sIERGVV9BTFRfQlVGX0xFTiAtIGxlbiwKPj4gLcKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoCAiJXNfJXMgcGFydCAlZCIsCj4+ICvCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgIjslc18lcyBwYXJ0ICVkIiwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBuYW1lLCBwYXJ0LT5uYW1lLCBwYXJ0bnVtKTsKPj4gwqDCoMKgwqDCoCB9
-Cj4+IMKgIH0KPiAKPiAKPiAKPiBSZXZpZXdlZC1ieTogUGF0cmljayBEZWxhdW5heSA8cGF0cmlj
-ay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPiAKPiBUaGFua3MKPiBQYXRyaWNrCj4gCkFwcGxpZWQg
-dG8gdS1ib290LXN0bTMyL25leHQKClRoYW5rcwpQYXRyaWNlCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9v
-dC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1h
-bi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==
+
+
+On 12/11/23 23:05, Dario Binacchi wrote:
+> Sync the devicetree with linux 6.5 for stm32f746-disco board.
+> 
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> ---
+> 
+> (no changes since v2)
+> 
+> Changes in v2:
+> - Add Patrice Chotard's Reviewed-by tag.
+> 
+>  arch/arm/dts/stm32f469-disco.dts | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32f469-disco.dts b/arch/arm/dts/stm32f469-disco.dts
+> index 6e0ffc1903be..c9acabf0f530 100644
+> --- a/arch/arm/dts/stm32f469-disco.dts
+> +++ b/arch/arm/dts/stm32f469-disco.dts
+> @@ -119,7 +119,7 @@
+>  		};
+>  	};
+>  
+> -	panel-dsi@0 {
+> +	panel@0 {
+>  		compatible = "orisetech,otm8009a";
+>  		reg = <0>; /* dsi virtual channel (0..3) */
+>  		reset-gpios = <&gpioh 7 GPIO_ACTIVE_LOW>;
+> @@ -138,7 +138,7 @@
+>  	status = "okay";
+>  
+>  	port {
+> -		ltdc_out_dsi: endpoint@0 {
+> +		ltdc_out_dsi: endpoint {
+>  			remote-endpoint = <&dsi_in>;
+>  		};
+>  	};
+Applied to u-boot-stm32/next
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

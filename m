@@ -2,68 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 286F48136EE
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Dec 2023 17:52:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD90E814754
+	for <lists+uboot-stm32@lfdr.de>; Fri, 15 Dec 2023 12:52:31 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E30FBC6B45B;
-	Thu, 14 Dec 2023 16:52:03 +0000 (UTC)
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
- [209.85.166.174])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 56B8EC6B45B;
+	Fri, 15 Dec 2023 11:52:31 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9026C6A61D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0450AC65E42
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 Dec 2023 16:52:01 +0000 (UTC)
-Received: by mail-il1-f174.google.com with SMTP id
- e9e14a558f8ab-35f72db10f7so8484295ab.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 14 Dec 2023 08:52:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1702572720; x=1703177520;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/uX2ryKAEZBjHGs+wGhtzHYEyOmV4i0u0CTu3FfRPJE=;
- b=nraG2diTTc00mo6l6p6cQgKEL1h4zUXQM/95h1cheWLWpsqqPqG335GLsmvxuiHqp7
- hojstG5yGbVy+x9h43QID0d+8ovpFh80pPsHaQz9ct/OjS7C4zBlyubq6ZfjM11v7Igh
- 59pP9O4ZocizeEGbdNCqQjuoZpGk1RQqs6pYQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1702572720; x=1703177520;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/uX2ryKAEZBjHGs+wGhtzHYEyOmV4i0u0CTu3FfRPJE=;
- b=tH3gg5U+WMBN5Ggm4pbrPSvfIDiCGNmFioWA9gvgZuBYRdO6LRu1e5N3i6KErn85Bp
- pXUkD2JupYvqDtgX3LeJCeOVhCsuej1kGDX9w7hWU4QTNJlZAzsYbXw1AdHJ+1x9p9vO
- GIegmOHHt5MZixe1CL49YR3d13AIjyBB7I83dvaAk7NIifrDVI/MUfXHWgB3KAV7jTpA
- puYgsp9Y6GkShfGIzEkcrpbAvYDIKcmlPpEASfnS2b6pVynn0L3mN/FLaSvNICzzSd3g
- JVFvaw4z1EVRfHaMOBYLpRBiNh6b3tCkbGTohDPMCKeKCV4GJfZ5yn+SgBvgNJhLesZB
- tmLA==
-X-Gm-Message-State: AOJu0YxQSIrcTUa+b/uPPBtBRoV54giQgf4XjAmIpxFzmtl8H0vsIlRS
- EF9UZvY4fKP6vd3EFWDAeJ+Eng==
-X-Google-Smtp-Source: AGHT+IHzb/7bmjPNYEYVVxtjXMngl3krPz1PJlxxNS5QKE+nNBlMhhc7Hpg81VfsrMPNt1u1Un4n3Q==
-X-Received: by 2002:a92:c565:0:b0:35d:6997:9cb3 with SMTP id
- b5-20020a92c565000000b0035d69979cb3mr13537239ilj.52.1702572720766; 
- Thu, 14 Dec 2023 08:52:00 -0800 (PST)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- bn14-20020a056e02338e00b00357ca1ed25esm1228347ilb.80.2023.12.14.08.52.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Dec 2023 08:52:00 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Thu, 14 Dec 2023 09:50:29 -0700
-Message-ID: <20231214165112.2182274-16-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0.472.g3155946c3a-goog
-In-Reply-To: <20231214165112.2182274-1-sjg@chromium.org>
-References: <20231214165112.2182274-1-sjg@chromium.org>
+ Fri, 15 Dec 2023 11:52:29 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 3BF8bpPK017461; Fri, 15 Dec 2023 12:52:29 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=H7K5KaMBK2vp/9emBcC9NMXrBEzkiihcDRoevXivbhQ=; b=Lt
+ aqguOlZYE7XhoFBOUlkF65yjGoiZPByxOg55LE39BJY7829F39SFW26pt2auAa2H
+ m8MGAUzy445KQqNlv5hKTpXFTeSYZT+IvY9RtSUeQbueCJzgUSF8Anuj6rXTrHD7
+ 9zrihx9PstICo8ECx/H9ROFgIFKmVH3qv/JpbnhZagtFw0/204MwJL2yD8HlnuG/
+ BD/cChds0puyw9LIZejhQngp/rbhnZrFENPznPTjrv4dl2qHVTy8BxJPSnhBUjqi
+ ySJPOTcjP6pIFne6Pc0dvGYUFN/d+13l1FA8cBmXpiciXPuCxkJJ7ogBVV/3O6CZ
+ 0QAvAijeDc4xEP3A7pkw==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3v0cbttdfr-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 15 Dec 2023 12:52:28 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 86C9C100052;
+ Fri, 15 Dec 2023 12:52:28 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7D717215BDD;
+ Fri, 15 Dec 2023 12:52:28 +0100 (CET)
+Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Dec
+ 2023 12:52:28 +0100
+Message-ID: <7e2b0b40-1193-4a4f-8397-0ccc99d9122a@foss.st.com>
+Date: Fri, 15 Dec 2023 12:52:27 +0100
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>,
- Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 20/21] stm32: Use bootm_run() and
-	bootz_run()
+User-Agent: Mozilla Thunderbird
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+References: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20231117170107.1147598-1-patrice.chotard@foss.st.com>
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-12-15_06,2023-12-14_01,2023-05-22_02
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] board: st: common: Fix
+	board_get_alt_info_mtd()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,83 +70,69 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Use the new bootm/z_run() functions to avoid having to create an
-argument list for the stm32prog code.
+Hi,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On 11/17/23 18:01, Patrice Chotard wrote:
+> Since MTD devices are partioned, we got the following
+> error when command "dfu 0" is executed:
+>
+> DFU alt info setting: done
+> ERROR: Too many arguments for nor0
+> ERROR: DFU entities configuration failed!
+> ERROR: (partition table does not match dfu_alt_info?)
+>
+> Fixes: 31325e1b8b9c ("stm32mp1: dynamically build DFU_ALT_INFO")
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   board/st/common/stm32mp_dfu.c | 9 ++-------
+>   1 file changed, 2 insertions(+), 7 deletions(-)
+>
+> diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
+> index a8eb8d5cae2..ded3bf81961 100644
+> --- a/board/st/common/stm32mp_dfu.c
+> +++ b/board/st/common/stm32mp_dfu.c
+> @@ -73,7 +73,6 @@ static void board_get_alt_info_mmc(struct udevice *dev, char *buf)
+>   static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+>   {
+>   	struct mtd_info *part;
+> -	bool first = true;
+>   	const char *name;
+>   	int len, partnum = 0;
+>   
+> @@ -86,17 +85,13 @@ static void board_get_alt_info_mtd(struct mtd_info *mtd, char *buf)
+>   			"mtd %s=", name);
+>   
+>   	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+> -			"%s raw 0x0 0x%llx ",
+> +			"%s raw 0x0 0x%llx",
+>   			name, mtd->size);
+>   
+>   	list_for_each_entry(part, &mtd->partitions, node) {
+>   		partnum++;
+> -		if (!first)
+> -			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len, ";");
+> -		first = false;
+> -
+>   		len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
+> -				"%s_%s part %d",
+> +				";%s_%s part %d",
+>   				name, part->name, partnum);
+>   	}
+>   }
 
-(no changes since v1)
 
- .../cmd_stm32prog/cmd_stm32prog.c             | 20 ++++++++++---------
- 1 file changed, 11 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-index 8670535844d3..3ed393b7199f 100644
---- a/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-+++ b/arch/arm/mach-stm32mp/cmd_stm32prog/cmd_stm32prog.c
-@@ -4,6 +4,7 @@
-  */
- 
- #include <common.h>
-+#include <bootm.h>
- #include <command.h>
- #include <dfu.h>
- #include <image.h>
-@@ -125,12 +126,10 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		char dtb_addr[20];
- 		char initrd_addr[40];
- 		char *fdt_arg, *initrd_arg;
--		char *bootm_argv[5] = {
--			"bootm", boot_addr_start,
--		};
- 		const void *uimage = (void *)data->uimage;
- 		const void *dtb = (void *)data->dtb;
- 		const void *initrd = (void *)data->initrd;
-+		struct bootm_info bmi;
- 
- 		fdt_arg = dtb_addr;
- 		if (!dtb)
-@@ -141,7 +140,7 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		snprintf(boot_addr_start, sizeof(boot_addr_start) - 1,
- 			 "0x%p", uimage);
- 
--		initrd_arg = "-";
-+		initrd_arg = NULL;
- 		if (initrd) {
- 			snprintf(initrd_addr, sizeof(initrd_addr) - 1,
- 				 "0x%p:0x%zx", initrd, data->initrd_size);
-@@ -149,15 +148,18 @@ static int do_stm32prog(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 
- 		printf("Booting kernel at %s %s %s...\n\n\n", boot_addr_start,
--		       initrd_arg, fdt_arg);
--		bootm_argv[2] = initrd_arg;
--		bootm_argv[3] = fdt_arg;
-+		       initrd_arg ?: "-", fdt_arg);
-+
-+		bootm_init(&bmi);
-+		bmi.addr_fit = boot_addr_start;
-+		bmi.conf_ramdisk = initrd_arg;
-+		bmi.conf_fdt = fdt_arg;
- 
- 		/* Try bootm for legacy and FIT format image */
- 		if (genimg_get_format(uimage) != IMAGE_FORMAT_INVALID)
--			do_bootm(cmdtp, 0, 4, bootm_argv);
-+			bootm_run(&bmi);
- 		else if (IS_ENABLED(CONFIG_CMD_BOOTZ))
--			do_bootz(cmdtp, 0, 4, bootm_argv);
-+			bootz_run(&bmi);
- 	}
- 	if (data->script)
- 		cmd_source_script(data->script, NULL, NULL);
--- 
-2.43.0.472.g3155946c3a-goog
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

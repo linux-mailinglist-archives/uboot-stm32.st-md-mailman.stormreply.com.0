@@ -2,62 +2,46 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3ECEA828784
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Jan 2024 15:00:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BA8982CE0C
+	for <lists+uboot-stm32@lfdr.de>; Sat, 13 Jan 2024 18:58:33 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E65AAC6DD74;
-	Tue,  9 Jan 2024 14:00:26 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E11BAC6B460;
+	Sat, 13 Jan 2024 17:58:27 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E2E3DC6DD73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF720C6B457
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Jan 2024 14:00:24 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4099FJP2014975; Tue, 9 Jan 2024 15:00:22 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=ze7yZBG
- 3+0mLL3viz6bj3xaP1nlBrlm56zMeKLIjgdc=; b=KyojuvK84hocKKWkK6e+P/l
- hur4+nNyy2JUNd0iRICNPexlb8mCDxShfGS6vA7CUFvCiOWsn1FSUWOUKgXD6ZvJ
- 5Wz8JWbsX1E4Y/Sutqdjrn1Oxrr9DihHLMQf0k4bgYxszivEYL6c3e2mo6OxIo8y
- 28ajOaxl9qNXIsaU8GMM8bfAcgzPT0nqH/cxTl7FpMDzf8VKbV+kNPo7UzwbgXu2
- lKqJO3/WjrtRKEqATjpfbt1Wkq1fKNSU2rrZpSYB37jQrWFsYr5VCOhRWZTGJKpK
- IU9A/zToKE/waDZWJp5Fh5IWZY0IUAetAmexRQS4yy4WaPuiomqBJBxFIkS2xng=
- =
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vey30m39n-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Jan 2024 15:00:22 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 6925710002A;
- Tue,  9 Jan 2024 15:00:22 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 569D6210F7E;
- Tue,  9 Jan 2024 15:00:22 +0100 (CET)
-Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 9 Jan
- 2024 15:00:22 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 9 Jan 2024 15:00:17 +0100
-Message-ID: <20240109140018.2015396-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Sat, 13 Jan 2024 17:58:26 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EF42C87134;
+ Sat, 13 Jan 2024 18:58:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1705168706;
+ bh=OzQD8RTLlgGkKaYlxGEhy6j8cS4l6OmbZOuN4wdlSe0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=I0/c6qMI5H4ALupYQukQokWHR6h0LgevL5SlzcqDY4kZHVHdfRRY4Yo4T74+pOYRk
+ 4GZewKiXp9Jkr1+jbYTtCwLB/XFr9m7YU1XuuL3SvdusuOeSC8sQHUVC7J17RvtR6O
+ YIq47nPkAkodctG41xlUOE68JcrlY9EWijnJ8K8nHEVyrPgYz0xb92eM412bnpb/e5
+ q1HCb02QYa7j99hb340XM16YZWxJzvDC2CXjyjBd2FUKpoQVq0Zpq3hbTqVSF4ADD+
+ E0G+auHJwBGgxH3HulY2pOoLUMhVGANLO8bDvCFe8Am5C5bbLgkeEOChHBB/HkO3WU
+ KsE0PIKlsulRw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Sat, 13 Jan 2024 18:57:27 +0100
+Message-ID: <20240113175811.157221-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Originating-IP: [10.201.20.205]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
-Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH] stm32mp2: Fix CONFIG_STM32MP25X flag usage
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: Set stdio to serial on DH
+	STM32MP15xx DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,30 +58,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-"#if" was used instead of "#ifdef"
+In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are enabled, the console
+stdin, stdout, stderr must be defined in environment. Define the default
+settings to fix the following warning on boot:
 
-Fixes: 01a701994b05 ("stm32mp2: initial support")
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+"
+In:    No input devices available!
+Out:   No output devices available!
+Err:   No error devices available!
+"
+
+Sort the default environment as well.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ include/configs/stm32mp15_dh_dhsom.h | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
- arch/arm/mach-stm32mp/include/mach/stm32.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index 46d469881b3..175f2a88490 100644
---- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -157,7 +157,7 @@ enum forced_boot_mode {
- #endif /* __ASSEMBLY__ */
- #endif /* CONFIG_STM32MP15X || CONFIG_STM32MP13X */
+diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
+index 8ff882264f4..de39b19219d 100644
+--- a/include/configs/stm32mp15_dh_dhsom.h
++++ b/include/configs/stm32mp15_dh_dhsom.h
+@@ -12,14 +12,13 @@
+ #define PHY_ANEG_TIMEOUT		20000
  
--#if CONFIG_STM32MP25X
-+#ifdef CONFIG_STM32MP25X
- #define STM32_RCC_BASE			0x44200000
- #define STM32_TAMP_BASE			0x46010000
+ #ifdef CONFIG_SPL_BUILD
+-#define CFG_EXTRA_ENV_SETTINGS					\
++#define CFG_EXTRA_ENV_SETTINGS						\
+ 	"dfu_alt_info_ram=u-boot.itb ram "				\
+ 			__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS)	\
+ 			" 0x800000\0"
+ #endif
  
+-#define STM32MP_BOARD_EXTRA_ENV \
+-	"usb_pgood_delay=1000\0" \
++#define STM32MP_BOARD_EXTRA_ENV						\
+ 	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
+ 		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
+ 		"load mmc 0:4 ${loadaddr1} boot/u-boot-spl.stm32 && "	\
+@@ -49,7 +48,11 @@
+ 		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
+ 		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
+ 		"env set filesize1 && env set loadaddr1\0"		\
+-	"update_sf=run dh_update_sd_to_sf\0"
++	"stdin=serial\0"						\
++	"stdout=serial\0"						\
++	"stderr=serial\0"						\
++	"update_sf=run dh_update_sd_to_sf\0"				\
++	"usb_pgood_delay=1000\0"
+ 
+ 
+ #include <configs/stm32mp15_common.h>
 -- 
-2.25.1
+2.43.0
 
 _______________________________________________
 Uboot-stm32 mailing list

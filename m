@@ -2,66 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE02582D96E
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 14:06:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C451A82D96F
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 14:07:24 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74C53C6B457;
-	Mon, 15 Jan 2024 13:06:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 85517C6B476;
+	Mon, 15 Jan 2024 13:07:19 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D12E1C6A613
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A567AC6B457
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jan 2024 13:06:48 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Mon, 15 Jan 2024 13:07:18 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40F8ZDX9007800; Mon, 15 Jan 2024 14:06:43 +0100
+ 40F8tekj001615; Mon, 15 Jan 2024 14:07:14 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=tsREFTR4XKk56aqvbvl7P+XpSrzONyPUAOREk4oSFRQ=; b=Dv
- BMu5fkd8BxPxJjLe5Nn/JyEnDraykcw8Lp9UzFTtRqrFTUnxaDou7Ua6QpoLKGnd
- qzW1Ty5pGwwkdmDJj6hguR87XGw04W6MHU6khLIaewOeW4rkNnliVFlmSTv7PxpH
- LG68z/YSb3qTL12pP8V3lYQaixtXPcCfCXPa5U+es+XC9EBIA1cwn13gfwpQL9Fo
- WN0ankIpSYpbn/l7USmCs+bBYLoGIk5VZty90ZMg7ZVcKz+31Q0nWqjCfU9Ze1Zu
- 2bF7e+dLWtmRT0L7pyy/lihIHB96C6lF6BOCkqWjUOFiQ/9TZmDqAv8fuzEjA8ws
- /Rw2BsdOBCzgmB8fMnYQ==
+ selector1; bh=4MyK74+m4WH6pxjrxHNnsWzYmKovMvmICuJ8Qqv66Y8=; b=eV
+ oDeJwzDu5BApRCR+OGUEG+NpJcMxAQp3BkQca0MeqkZch92Xsc2fOiqm/U1XgSLs
+ gUFMXlvrz29SZCE/6dPb0g+jTkxmmneRGf5qZWLCyEku1eJbtcAm+/3AaZrtBJrW
+ Ru1UPKIUOi8FM5yXVCo3NpkojTLB6zY57h4cU9uh6Jk2OXUntABBdX+bSle8IcY/
+ UE6707M0R8NnFqarXVJBFFs9a9ULcj/IwMAUPWwNZADMn3N0pWZRUx2euX1+q0B0
+ dC/zuNxnLRdsgzeOO7P/0+rYUbTPny/cnIdRiQDE+rwmlg7k1y5d1YzWoobZH5Ki
+ ajUdsxjTRNZyz153ISrw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmddrj25-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm4y4pcg3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 14:06:43 +0100 (CET)
+ Mon, 15 Jan 2024 14:07:14 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 399CB10002A;
- Mon, 15 Jan 2024 14:06:43 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F2DA510002A;
+ Mon, 15 Jan 2024 14:07:13 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 316462815E1;
- Mon, 15 Jan 2024 14:06:43 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E7A302815E7;
+ Mon, 15 Jan 2024 14:07:13 +0100 (CET)
 Received: from [10.201.20.205] (10.201.20.205) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 14:06:42 +0100
-Message-ID: <52a185d8-5ea6-49d7-bf86-d4868e29bb06@foss.st.com>
-Date: Mon, 15 Jan 2024 14:06:42 +0100
+ 2024 14:07:13 +0100
+Message-ID: <e9751242-623c-444a-88fe-e5d697d65813@foss.st.com>
+Date: Mon, 15 Jan 2024 14:07:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
- <20240115134642.6.I175b5b047ccdb4198f1ae11bac19411617623518@changeid>
+ <20240115134642.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240115134642.6.I175b5b047ccdb4198f1ae11bac19411617623518@changeid>
+In-Reply-To: <20240115134642.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
 X-Originating-IP: [10.201.20.205]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Bhupesh Sharma <bhupesh.sharma@linaro.org>,
+Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>,
  Igor Opaniuk <igor.opaniuk@foundries.io>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [Uboot-stm32] [PATCH 06/12] stm32mp: add soc.c file
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [Uboot-stm32] [PATCH 07/12] stm32mp: add setup_serial_number
+	for stm32mp25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,98 +83,130 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 1/15/24 13:46, Patrick Delaunay wrote:
-> Add a new file soc.c for common functions between stm32mp1 and stm32mp2
-> family and move print_cpuinfo() in this new file.
+> From: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
+> Add support of serial number for stm32mp25, gets from OTP with BSEC driver.
+> 
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/Makefile       |  1 +
->  arch/arm/mach-stm32mp/soc.c          | 17 +++++++++++++++++
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 11 -----------
->  arch/arm/mach-stm32mp/stm32mp2/cpu.c | 11 -----------
->  4 files changed, 18 insertions(+), 22 deletions(-)
->  create mode 100644 arch/arm/mach-stm32mp/soc.c
+>  .../arm/mach-stm32mp/include/mach/sys_proto.h |  1 +
+>  arch/arm/mach-stm32mp/soc.c                   | 31 +++++++++++++++++++
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c          | 27 ----------------
+>  arch/arm/mach-stm32mp/stm32mp2/cpu.c          |  2 ++
+>  4 files changed, 34 insertions(+), 27 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-> index 00dc25bb275c..fdcbbf91dfd5 100644
-> --- a/arch/arm/mach-stm32mp/Makefile
-> +++ b/arch/arm/mach-stm32mp/Makefile
-> @@ -6,6 +6,7 @@
->  obj-y += dram_init.o
->  obj-y += syscon.o
->  obj-y += bsec.o
-> +obj-y += soc.o
+> diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> index 83388fdb7371..2a65efc0a50a 100644
+> --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+> @@ -97,6 +97,7 @@ u32 get_bootauth(void);
 >  
->  obj-$(CONFIG_STM32MP15x) += stm32mp1/
->  obj-$(CONFIG_STM32MP13x) += stm32mp1/
+>  int get_eth_nb(void);
+>  int setup_mac_address(void);
+> +int setup_serial_number(void);
+>  
+>  /* board power management : configure vddcore according OPP */
+>  void board_vddcore_init(u32 voltage_mv);
 > diff --git a/arch/arm/mach-stm32mp/soc.c b/arch/arm/mach-stm32mp/soc.c
-> new file mode 100644
-> index 000000000000..8d5fa474ccaf
-> --- /dev/null
+> index 8d5fa474ccaf..ff70ebe97464 100644
+> --- a/arch/arm/mach-stm32mp/soc.c
 > +++ b/arch/arm/mach-stm32mp/soc.c
-> @@ -0,0 +1,17 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-> +/*
-> + * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-> + */
+> @@ -3,7 +3,11 @@
+>   * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
+>   */
+>  
+> +#include <env.h>
+> +#include <misc.h>
+>  #include <asm/arch/sys_proto.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+>  
+>  /* used when CONFIG_DISPLAY_CPUINFO is activated */
+>  int print_cpuinfo(void)
+> @@ -15,3 +19,30 @@ int print_cpuinfo(void)
+>  
+>  	return 0;
+>  }
 > +
-> +#include <asm/arch/sys_proto.h>
-> +
-> +/* used when CONFIG_DISPLAY_CPUINFO is activated */
-> +int print_cpuinfo(void)
+> +int setup_serial_number(void)
 > +{
-> +	char name[SOC_NAME_SIZE];
+> +	char serial_string[25];
+> +	u32 otp[3] = {0, 0, 0 };
+> +	struct udevice *dev;
+> +	int ret;
 > +
-> +	get_soc_name(name);
-> +	printf("CPU: %s\n", name);
+> +	if (env_get("serial#"))
+> +		return 0;
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(stm32mp_bsec),
+> +					  &dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
+> +			otp, sizeof(otp));
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
+> +	env_set("serial#", serial_string);
 > +
 > +	return 0;
 > +}
 > diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> index 55574fd4bebf..00fea7929b2f 100644
+> index 00fea7929b2f..f84cb26fa565 100644
 > --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
 > +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -158,17 +158,6 @@ void enable_caches(void)
->  	dcache_enable();
+> @@ -336,33 +336,6 @@ __weak int setup_mac_address(void)
+>  	return 0;
 >  }
 >  
-> -/* used when CONFIG_DISPLAY_CPUINFO is activated */
-> -int print_cpuinfo(void)
+> -static int setup_serial_number(void)
 > -{
-> -	char name[SOC_NAME_SIZE];
+> -	char serial_string[25];
+> -	u32 otp[3] = {0, 0, 0 };
+> -	struct udevice *dev;
+> -	int ret;
 > -
-> -	get_soc_name(name);
-> -	printf("CPU: %s\n", name);
+> -	if (env_get("serial#"))
+> -		return 0;
+> -
+> -	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> -					  DM_DRIVER_GET(stm32mp_bsec),
+> -					  &dev);
+> -	if (ret)
+> -		return ret;
+> -
+> -	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
+> -			otp, sizeof(otp));
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
+> -	env_set("serial#", serial_string);
 > -
 > -	return 0;
 > -}
 > -
->  static void setup_boot_mode(void)
+>  __weak void stm32mp_misc_init(void)
 >  {
->  	const u32 serial_addr[] = {
+>  }
 > diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-> index f43d1aaf72cc..c0f6519e8d7c 100644
+> index c0f6519e8d7c..301e365cf4f4 100644
 > --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
 > +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-> @@ -67,17 +67,6 @@ void enable_caches(void)
->  	dcache_enable();
->  }
+> @@ -69,6 +69,8 @@ void enable_caches(void)
 >  
-> -/* used when CONFIG_DISPLAY_CPUINFO is activated */
-> -int print_cpuinfo(void)
-> -{
-> -	char name[SOC_NAME_SIZE];
-> -
-> -	get_soc_name(name);
-> -	printf("CPU: %s\n", name);
-> -
-> -	return 0;
-> -}
-> -
 >  int arch_misc_init(void)
 >  {
+> +	setup_serial_number();
+> +
 >  	return 0;
+>  }
+>  
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks

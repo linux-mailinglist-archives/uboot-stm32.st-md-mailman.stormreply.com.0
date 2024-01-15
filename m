@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5CF882D907
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 13:48:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 08C1C82D909
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 13:48:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AACD5C6DD74;
-	Mon, 15 Jan 2024 12:48:27 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BF6A5C6DD74;
+	Mon, 15 Jan 2024 12:48:31 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5240CC6DD74
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9F5AC6DD75
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jan 2024 12:48:26 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ Mon, 15 Jan 2024 12:48:30 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40FB5Ld6002614; Mon, 15 Jan 2024 13:48:23 +0100
+ 40F8xl6C024780; Mon, 15 Jan 2024 13:48:24 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=X8zmwWisTWQngybC8+qsR8Ly0dzk8iXVbYXeuDkklMM=; b=b4
- 5BcrbDIXU9+mjx6ohCQxV5uNJoUSseJB+xthoi5+DRFwVqHZs3Slbz1PWTLS+QBJ
- YrXN8/QmxSMbe5rQUX4MZmYrPAow+5J1Rd2QgUaDWN+cE93NltWqnS4X5hxgDUuE
- bLn7gaNGS7UJTGLZqy7hPXw0shf2IrCdhYWfB5nMKBO2zkUF6/vICG5lz+jni5Cv
- 26OW6ZoD7T3Zq0ro77jYq4414HFucY845EFsVqNyp7XFB2FepukkSQ7Ee5iJJ/GQ
- +DlsWwq1EHATiCPXsuXKIzNj5AdaHBDrbk4j6Os8Z8qpRaoi9F3ky18q8eHiO24q
- CbLLl9AQNO9Pkk9Cv9og==
+ selector1; bh=PHrNeut4DmnuOysF5IDc97RREvHmfJAz6P+h+VCqmJI=; b=Y4
+ R54/ASenqYEs/Ydk9ENYLpb/jZBfG13Z0qs5itEi8HW2O8OdFcM8Ky51yDdMHOVM
+ lrQ9hN7ksJpQW6ButLTBtyClkyT2OwIL48PWaC9ZaayJQ3cwVD0m7c4//kODvs2W
+ ZIUdXKPegmI794XVmJTIyaCutoWT0b67iaaaH6phplqK6uitLucwtXJy0jaUxH1d
+ MEdBGV9vLLi2ydRUciB9+fzRGWX3YlIZl0Dw+RSswVrzueSZJFARJB0GE0ffNig+
+ GTa2p0CtB5uoToA5A8gKOZBlosAL3yotC2FlMmY1Tzbt36+BfrNq/sCMWChUqIpJ
+ qqBjE+lKszwxooi8xmZw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmfy8mfg-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm6bnwy26-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 13:48:23 +0100 (CET)
+ Mon, 15 Jan 2024 13:48:24 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 65BCF10002A;
- Mon, 15 Jan 2024 13:48:23 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 528D310002A;
+ Mon, 15 Jan 2024 13:48:24 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5D9AA2721D5;
- Mon, 15 Jan 2024 13:48:23 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 499822721D7;
+ Mon, 15 Jan 2024 13:48:24 +0100 (CET)
 Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 13:48:23 +0100
+ 2024 13:48:24 +0100
 From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Mon, 15 Jan 2024 13:46:51 +0100
-Message-ID: <20240115134642.6.I175b5b047ccdb4198f1ae11bac19411617623518@changeid>
+Date: Mon, 15 Jan 2024 13:46:52 +0100
+Message-ID: <20240115134642.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
 References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
@@ -57,10 +57,12 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>,
  Igor Opaniuk <igor.opaniuk@foundries.io>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 06/12] stm32mp: add soc.c file
+Subject: [Uboot-stm32] [PATCH 07/12] stm32mp: add setup_serial_number for
+	stm32mp25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,98 +79,130 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add a new file soc.c for common functions between stm32mp1 and stm32mp2
-family and move print_cpuinfo() in this new file.
+From: Patrice Chotard <patrice.chotard@foss.st.com>
 
+Add support of serial number for stm32mp25, gets from OTP with BSEC driver.
+
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 ---
 
- arch/arm/mach-stm32mp/Makefile       |  1 +
- arch/arm/mach-stm32mp/soc.c          | 17 +++++++++++++++++
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 11 -----------
- arch/arm/mach-stm32mp/stm32mp2/cpu.c | 11 -----------
- 4 files changed, 18 insertions(+), 22 deletions(-)
- create mode 100644 arch/arm/mach-stm32mp/soc.c
+ .../arm/mach-stm32mp/include/mach/sys_proto.h |  1 +
+ arch/arm/mach-stm32mp/soc.c                   | 31 +++++++++++++++++++
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c          | 27 ----------------
+ arch/arm/mach-stm32mp/stm32mp2/cpu.c          |  2 ++
+ 4 files changed, 34 insertions(+), 27 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-index 00dc25bb275c..fdcbbf91dfd5 100644
---- a/arch/arm/mach-stm32mp/Makefile
-+++ b/arch/arm/mach-stm32mp/Makefile
-@@ -6,6 +6,7 @@
- obj-y += dram_init.o
- obj-y += syscon.o
- obj-y += bsec.o
-+obj-y += soc.o
+diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+index 83388fdb7371..2a65efc0a50a 100644
+--- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
++++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
+@@ -97,6 +97,7 @@ u32 get_bootauth(void);
  
- obj-$(CONFIG_STM32MP15x) += stm32mp1/
- obj-$(CONFIG_STM32MP13x) += stm32mp1/
+ int get_eth_nb(void);
+ int setup_mac_address(void);
++int setup_serial_number(void);
+ 
+ /* board power management : configure vddcore according OPP */
+ void board_vddcore_init(u32 voltage_mv);
 diff --git a/arch/arm/mach-stm32mp/soc.c b/arch/arm/mach-stm32mp/soc.c
-new file mode 100644
-index 000000000000..8d5fa474ccaf
---- /dev/null
+index 8d5fa474ccaf..ff70ebe97464 100644
+--- a/arch/arm/mach-stm32mp/soc.c
 +++ b/arch/arm/mach-stm32mp/soc.c
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-+ */
+@@ -3,7 +3,11 @@
+  * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
+  */
+ 
++#include <env.h>
++#include <misc.h>
+ #include <asm/arch/sys_proto.h>
++#include <dm/device.h>
++#include <dm/uclass.h>
+ 
+ /* used when CONFIG_DISPLAY_CPUINFO is activated */
+ int print_cpuinfo(void)
+@@ -15,3 +19,30 @@ int print_cpuinfo(void)
+ 
+ 	return 0;
+ }
 +
-+#include <asm/arch/sys_proto.h>
-+
-+/* used when CONFIG_DISPLAY_CPUINFO is activated */
-+int print_cpuinfo(void)
++int setup_serial_number(void)
 +{
-+	char name[SOC_NAME_SIZE];
++	char serial_string[25];
++	u32 otp[3] = {0, 0, 0 };
++	struct udevice *dev;
++	int ret;
 +
-+	get_soc_name(name);
-+	printf("CPU: %s\n", name);
++	if (env_get("serial#"))
++		return 0;
++
++	ret = uclass_get_device_by_driver(UCLASS_MISC,
++					  DM_DRIVER_GET(stm32mp_bsec),
++					  &dev);
++	if (ret)
++		return ret;
++
++	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
++			otp, sizeof(otp));
++	if (ret < 0)
++		return ret;
++
++	sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
++	env_set("serial#", serial_string);
 +
 +	return 0;
 +}
 diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index 55574fd4bebf..00fea7929b2f 100644
+index 00fea7929b2f..f84cb26fa565 100644
 --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
 +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -158,17 +158,6 @@ void enable_caches(void)
- 	dcache_enable();
+@@ -336,33 +336,6 @@ __weak int setup_mac_address(void)
+ 	return 0;
  }
  
--/* used when CONFIG_DISPLAY_CPUINFO is activated */
--int print_cpuinfo(void)
+-static int setup_serial_number(void)
 -{
--	char name[SOC_NAME_SIZE];
+-	char serial_string[25];
+-	u32 otp[3] = {0, 0, 0 };
+-	struct udevice *dev;
+-	int ret;
 -
--	get_soc_name(name);
--	printf("CPU: %s\n", name);
+-	if (env_get("serial#"))
+-		return 0;
+-
+-	ret = uclass_get_device_by_driver(UCLASS_MISC,
+-					  DM_DRIVER_GET(stm32mp_bsec),
+-					  &dev);
+-	if (ret)
+-		return ret;
+-
+-	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_SERIAL),
+-			otp, sizeof(otp));
+-	if (ret < 0)
+-		return ret;
+-
+-	sprintf(serial_string, "%08X%08X%08X", otp[0], otp[1], otp[2]);
+-	env_set("serial#", serial_string);
 -
 -	return 0;
 -}
 -
- static void setup_boot_mode(void)
+ __weak void stm32mp_misc_init(void)
  {
- 	const u32 serial_addr[] = {
+ }
 diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-index f43d1aaf72cc..c0f6519e8d7c 100644
+index c0f6519e8d7c..301e365cf4f4 100644
 --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
 +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
-@@ -67,17 +67,6 @@ void enable_caches(void)
- 	dcache_enable();
- }
+@@ -69,6 +69,8 @@ void enable_caches(void)
  
--/* used when CONFIG_DISPLAY_CPUINFO is activated */
--int print_cpuinfo(void)
--{
--	char name[SOC_NAME_SIZE];
--
--	get_soc_name(name);
--	printf("CPU: %s\n", name);
--
--	return 0;
--}
--
  int arch_misc_init(void)
  {
++	setup_serial_number();
++
  	return 0;
+ }
+ 
 -- 
 2.25.1
 

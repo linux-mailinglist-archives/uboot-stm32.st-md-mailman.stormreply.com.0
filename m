@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D3D282D969
-	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 14:04:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BA7582D96A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 15 Jan 2024 14:05:05 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24DA0C6B457;
-	Mon, 15 Jan 2024 13:04:51 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 31BFDC6B457;
+	Mon, 15 Jan 2024 13:05:00 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 821A7C6DD7F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 68451C6A613
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 15 Jan 2024 13:04:49 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ Mon, 15 Jan 2024 13:04:58 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40F84fCt025756; Mon, 15 Jan 2024 14:04:36 +0100
+ 40FCY0tu010889; Mon, 15 Jan 2024 14:04:55 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=yGZotX914F63+uy7DGAcCoih4E4Z7sInSDGF+X73H58=; b=B9
- FhEFAEy4SGMwTZtSE3be1AjzSmz1wMIjnAoMP/dAomXYD7o8p8uKmu9d5FYp+cUm
- VBTcIPFAiB1oMhgSxyafqIwRJi7tq3vopSs7C8ZOPARDLiuTxLnRu4NQyThCeadT
- GJUYGxjl1sISu5G0zFgFQ9ap2lyJoC8cLrhJInGmb0JIaeVqszAmui+VWZ4invJo
- rwsF7hOjnkDtQ6/g/Z6vdetSEBb3gP9QuDt5PiGriGn0yAKGb8xCwKQcDpnJDL/f
- dNgKF7OiOZGYbqnLGOJ4qDS6gfbkTy2UrfH5d14JB37vBsuNcZItVeB/BY/2kvLm
- 6V8MM7EUlQGPTn+sxkRA==
+ selector1; bh=BjZRGZlfa06+15LCVaHTv6UQmlJwT1uf8HFoWNKuiaI=; b=FP
+ txeZkZIk1vfzqIi3dyhYsDun7wkYBdbZLpTi98uWcYQ7SVkMY1gwGhayxv3SV+sl
+ QzDSPt1x1Qk56P5ucECLqfPGy3x0Lpj7Kd9L9UjOWVN8SbbgzKH/EAMGlM+l6Axz
+ VgfpUiivhsuibtodOMhiGKdGn04QZSyXkKl59sHAmw0TzbWvvcaUwtgI7KQUybqy
+ +VFo/Pm+9WW54+negO/2HD2d4t8+nZt8eBUHgLiPLwl4zrKYWVvgM1fYqFkv7lAh
+ dSp5iMNPrUWo5+ietvZzFJ9K0izp1nV729Hnm32ieaLKjzTPpDIyTpE1IRFWCabE
+ rnkJtO6hJcSuKxRwNkGg==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm6bnx1pw-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbh0jgs-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Jan 2024 14:04:36 +0100 (CET)
+ Mon, 15 Jan 2024 14:04:55 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0A91D10002A;
- Mon, 15 Jan 2024 14:04:36 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 14F8510002A;
+ Mon, 15 Jan 2024 14:04:54 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 030F52815D3;
- Mon, 15 Jan 2024 14:04:36 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0E11B25E512;
+ Mon, 15 Jan 2024 14:04:54 +0100 (CET)
 Received: from [10.201.20.205] (10.201.20.205) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Jan
- 2024 14:04:35 +0100
-Message-ID: <60ebacd8-e0b0-4336-bfbc-79c26b2a228f@foss.st.com>
-Date: Mon, 15 Jan 2024 14:04:35 +0100
+ 2024 14:04:53 +0100
+Message-ID: <5aa50ba9-accf-4103-ac88-695804040b02@foss.st.com>
+Date: Mon, 15 Jan 2024 14:04:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20240115124657.39109-1-patrick.delaunay@foss.st.com>
- <20240115134642.2.I98f906c5860d42cc6f0c38219ff8391e7f537efb@changeid>
+ <20240115134642.3.I65ac10c33e81b2ade646f185883504c9ab106397@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240115134642.2.I98f906c5860d42cc6f0c38219ff8391e7f537efb@changeid>
+In-Reply-To: <20240115134642.3.I65ac10c33e81b2ade646f185883504c9ab106397@changeid>
 X-Originating-IP: [10.201.20.205]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -58,9 +58,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH 02/12] arm: stm32mp: add Rev.B support for
-	STM32MP25
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 03/12] stm32mp: bsec: add driver data
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,33 +79,129 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 1/15/24 13:46, Patrick Delaunay wrote:
-> From: Yann Gautier <yann.gautier@foss.st.com>
+> Add driver data in  BSEC driver to test presence of OP-TEE TA,
+> mandatory for STM32MP13 family and prepare the support of new device
+> with more OTP than 95.
 > 
-> Add chip revision B support for STM32MP25, for displaying it in trace.
-> 
-> Signed-off-by: Yann Gautier <yann.gautier@foss.st.com>
 > Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > ---
 > 
->  arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  arch/arm/mach-stm32mp/bsec.c | 38 ++++++++++++++++++++++++++++--------
+>  1 file changed, 30 insertions(+), 8 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-> index 4b2f70af9cc6..7f896a0d65d2 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-> @@ -167,6 +167,9 @@ void get_soc_name(char name[SOC_NAME_SIZE])
->  		case CPU_REV1:
->  			cpu_r = "A";
->  			break;
-> +		case CPU_REV2:
-> +			cpu_r = "B";
-> +			break;
->  		default:
->  			break;
->  		}
-
-
+> diff --git a/arch/arm/mach-stm32mp/bsec.c b/arch/arm/mach-stm32mp/bsec.c
+> index 28a8280b2804..705c994d9307 100644
+> --- a/arch/arm/mach-stm32mp/bsec.c
+> +++ b/arch/arm/mach-stm32mp/bsec.c
+> @@ -20,7 +20,6 @@
+>  #include <linux/iopoll.h>
+>  #include <linux/printk.h>
+>  
+> -#define BSEC_OTP_MAX_VALUE		95
+>  #define BSEC_OTP_UPPER_START		32
+>  #define BSEC_TIMEOUT_US			10000
+>  
+> @@ -400,6 +399,11 @@ struct stm32mp_bsec_priv {
+>  	struct udevice *tee;
+>  };
+>  
+> +struct stm32mp_bsec_drvdata {
+> +	int size;
+> +	bool ta;
+> +};
+> +
+>  static int stm32mp_bsec_read_otp(struct udevice *dev, u32 *val, u32 otp)
+>  {
+>  	struct stm32mp_bsec_plat *plat;
+> @@ -609,6 +613,7 @@ static int stm32mp_bsec_read(struct udevice *dev, int offset,
+>  			     void *buf, int size)
+>  {
+>  	struct stm32mp_bsec_priv *priv = dev_get_priv(dev);
+> +	struct stm32mp_bsec_drvdata *data = (struct stm32mp_bsec_drvdata *)dev_get_driver_data(dev);
+>  	int ret;
+>  	int i;
+>  	bool shadow = true, lock = false;
+> @@ -642,7 +647,7 @@ static int stm32mp_bsec_read(struct udevice *dev, int offset,
+>  
+>  	otp = offs / sizeof(u32);
+>  
+> -	for (i = otp; i < (otp + nb_otp) && i <= BSEC_OTP_MAX_VALUE; i++) {
+> +	for (i = otp; i < (otp + nb_otp) && i < data->size; i++) {
+>  		u32 *addr = &((u32 *)buf)[i - otp];
+>  
+>  		if (lock)
+> @@ -665,6 +670,7 @@ static int stm32mp_bsec_write(struct udevice *dev, int offset,
+>  			      const void *buf, int size)
+>  {
+>  	struct stm32mp_bsec_priv *priv = dev_get_priv(dev);
+> +	struct stm32mp_bsec_drvdata *data = (struct stm32mp_bsec_drvdata *)dev_get_driver_data(dev);
+>  	int ret = 0;
+>  	int i;
+>  	bool shadow = true, lock = false;
+> @@ -698,7 +704,7 @@ static int stm32mp_bsec_write(struct udevice *dev, int offset,
+>  
+>  	otp = offs / sizeof(u32);
+>  
+> -	for (i = otp; i < otp + nb_otp && i <= BSEC_OTP_MAX_VALUE; i++) {
+> +	for (i = otp; i < otp + nb_otp && i < data->size; i++) {
+>  		u32 *val = &((u32 *)buf)[i - otp];
+>  
+>  		if (lock)
+> @@ -732,6 +738,7 @@ static int stm32mp_bsec_of_to_plat(struct udevice *dev)
+>  
+>  static int stm32mp_bsec_probe(struct udevice *dev)
+>  {
+> +	struct stm32mp_bsec_drvdata *data = (struct stm32mp_bsec_drvdata *)dev_get_driver_data(dev);
+>  	int otp;
+>  	struct stm32mp_bsec_plat *plat;
+>  	struct clk_bulk clk_bulk;
+> @@ -745,16 +752,22 @@ static int stm32mp_bsec_probe(struct udevice *dev)
+>  	}
+>  
+>  	if (IS_ENABLED(CONFIG_OPTEE))
+> -		bsec_optee_open(dev);
+> +		ret = bsec_optee_open(dev);
+> +	else
+> +		ret = -ENOTSUPP;
+> +	/* failed if OP-TEE TA is required */
+> +	if (data->ta && !ret)
+> +		return ret;
+>  
+>  	/*
+>  	 * update unlocked shadow for OTP cleared by the rom code
+>  	 * only executed in SPL, it is done in TF-A for TFABOOT
+>  	 */
+> -	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
+> +	if (IS_ENABLED(CONFIG_SPL_BUILD) && !data->ta) {
+>  		plat = dev_get_plat(dev);
+>  
+> -		for (otp = 57; otp <= BSEC_OTP_MAX_VALUE; otp++)
+> +		/* here 57 is the value for STM32MP15x ROM code, only MPU with SPL support*/
+> +		for (otp = 57; otp < data->size; otp++)
+>  			if (!bsec_read_SR_lock(plat->base, otp))
+>  				bsec_shadow_register(dev, plat->base, otp);
+>  	}
+> @@ -762,9 +775,18 @@ static int stm32mp_bsec_probe(struct udevice *dev)
+>  	return 0;
+>  }
+>  
+> +static const struct stm32mp_bsec_drvdata stm32mp13_data = {
+> +	.size = 96,
+> +	.ta = true,
+> +};
+> +
+> +static const struct stm32mp_bsec_drvdata stm32mp15_data = {
+> +	.size = 96,
+> +	.ta = false,
+> +};
+>  static const struct udevice_id stm32mp_bsec_ids[] = {
+> -	{ .compatible = "st,stm32mp13-bsec" },
+> -	{ .compatible = "st,stm32mp15-bsec" },
+> +	{ .compatible = "st,stm32mp13-bsec", .data = (ulong)&stm32mp13_data},
+> +	{ .compatible = "st,stm32mp15-bsec", .data = (ulong)&stm32mp15_data},
+>  	{}
+>  };
+>  
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks

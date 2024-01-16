@@ -2,53 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2C2582F220
-	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Jan 2024 17:06:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6265582F22B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Jan 2024 17:13:15 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1B13C6B476;
-	Tue, 16 Jan 2024 16:06:45 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1A08EC6B476;
+	Tue, 16 Jan 2024 16:13:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AEC23C6A61A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8B659C6A61A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 16:06:44 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ Tue, 16 Jan 2024 16:13:13 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40GBoUY7010889
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 16 Jan 2024 17:06:44 +0100
+ 40GAsV6d019271; Tue, 16 Jan 2024 17:12:38 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding:content-type; s=selector1; bh=tloMFgA
- HPyYfitINC+LYlVu+a88XsqAMtS2i0WaKVbA=; b=GVSSeSGGgUb6PdDfuQjbiyE
- 0ZrgYgbygukosIVz4QJyWNNGnxbniDwO9rYvlQ1bAnsRo9pUuaeCix/6WpVz799L
- 0rmaJlLP7bcanX57ExakrUKSGTfuKSoRhdHT0S8x+/vXMbmyIQtaxIf0HtTEO9LE
- q/dLUyHvEGjFOD9gdx4T+Cvtu/lYj+9m6gxXDktyEnNV1qyFLjQr+Gvqo9ERsWam
- P508uRqurOmGHS4UuA8EjLiyfVS+NngYJF6gD3IeSNOEujrn64CXUb0gWnp7ZBKK
- zbXfuFg9EmyFqMMNWg248ry1WxA+dAVo1l9o1cY3dFpWTITtlfIsEwi2nvyou0A=
+ HPyYfitINC+LYlVu+a88XsqAMtS2i0WaKVbA=; b=IqppP8tD7WbUtlzh7RR39Q6
+ sAhT1mBMy2cud8EbTx8p9pYbsISoPN2yXQZeugiaHKTn/y3O8k4I5T6AwEHrJxtw
+ gpGepvua4DnezZgF1BEfSfxk6wtonlcEOHA+srdDYNu8Hc86ih/vGJekSHqpUdqB
+ 5THRJ66pquJy7j0uq63jngg12Mifzyauo1S/PEAHDW8DHUOoCesZLnulmjXrlN7k
+ r8TcY5qarazKVVxJXC4ovVQ1Khqtz4VBtRzkbq39GcHXmfCWytSAJMcdDvi/amAU
+ DPgkmJhnXMRs05ox2kRY94abu/BKmOsr2rW5PbXAleSAQePc4g0gqxqbDsXsGMQ=
  =
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbh73dy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 17:06:44 +0100 (CET)
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmfyfewf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Jan 2024 17:12:38 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D292910002A
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 17:06:43 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2E9AF10002A;
+ Tue, 16 Jan 2024 17:12:36 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C788A2831AA
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 17:06:43 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 21EB52896ED;
+ Tue, 16 Jan 2024 17:12:36 +0100 (CET)
 Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 16 Jan
- 2024 17:06:43 +0100
+ 2024 17:12:35 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Date: Tue, 16 Jan 2024 17:06:41 +0100
-Message-ID: <20240116160641.741039-1-patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Tue, 16 Jan 2024 17:12:31 +0100
+Message-ID: <20240116161231.741794-1-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Originating-IP: [10.201.20.205]
@@ -57,9 +53,14 @@ X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-01-05_08,2024-01-05_01,2023-05-22_02
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [Uboot-stm32] [U-BOOT internal][PATCH] common: console: Fix print
-	complete stdio device list
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Bin Meng <bmeng@tinylab.org>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ion Agorria <ion@agorria.com>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH] common: console: Fix print complete stdio
+	device list
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list

@@ -2,53 +2,53 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DFB082F208
-	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Jan 2024 16:59:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2C2582F220
+	for <lists+uboot-stm32@lfdr.de>; Tue, 16 Jan 2024 17:06:45 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 38E41C6B476;
-	Tue, 16 Jan 2024 15:59:55 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1B13C6B476;
+	Tue, 16 Jan 2024 16:06:45 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 81FB2C6A61A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AEC23C6A61A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 15:59:54 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ Tue, 16 Jan 2024 16:06:44 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40GBQWFR027685
- for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 16 Jan 2024 16:59:53 +0100
+ 40GBoUY7010889
+ for <uboot-stm32@st-md-mailman.stormreply.com>; Tue, 16 Jan 2024 17:06:44 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=WfIgy9u
- GT3218cTFQtUs2UmViIejqsFqE+CAFcqENPs=; b=nNPyyrPvaRiXHKPRc9Lny5h
- MQTI93XfX6pCZKy6S9FbxxeYD0d9TgzMVkmWrFnCV4dvoQ9vtG7YweY5NCNWXzUH
- qxm+++ta541z/HlVfLUVn3Xkblw0G88GbzMMczroVa90ItVjCr7cQh2keOv3eyf9
- biXKgrPjviB4mAX0MHyYOSM7BhJL5dTNE5e0z4xxmtlVPCpev9JSXVds8pSFvQZ0
- CARpspPK6q6IA+R3YG2j1dt8S0EjggupA/DV1eNoXzObD15GkaFaqIyBS63pA6rr
- C7HQGsaZH2E8g7JrrOElHZZb516/mgCZyweMwqKmlelCOW8B5lmLSssJHbMFPyQ=
+ :content-transfer-encoding:content-type; s=selector1; bh=tloMFgA
+ HPyYfitINC+LYlVu+a88XsqAMtS2i0WaKVbA=; b=GVSSeSGGgUb6PdDfuQjbiyE
+ 0ZrgYgbygukosIVz4QJyWNNGnxbniDwO9rYvlQ1bAnsRo9pUuaeCix/6WpVz799L
+ 0rmaJlLP7bcanX57ExakrUKSGTfuKSoRhdHT0S8x+/vXMbmyIQtaxIf0HtTEO9LE
+ q/dLUyHvEGjFOD9gdx4T+Cvtu/lYj+9m6gxXDktyEnNV1qyFLjQr+Gvqo9ERsWam
+ P508uRqurOmGHS4UuA8EjLiyfVS+NngYJF6gD3IeSNOEujrn64CXUb0gWnp7ZBKK
+ zbXfuFg9EmyFqMMNWg248ry1WxA+dAVo1l9o1cY3dFpWTITtlfIsEwi2nvyou0A=
  =
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmddy4u9-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbh73dy-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 16:59:53 +0100 (CET)
+ Tue, 16 Jan 2024 17:06:44 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B050410002A
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D292910002A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 16:59:52 +0100 (CET)
+ Tue, 16 Jan 2024 17:06:43 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 219AD2747B9
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C788A2831AA
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 16 Jan 2024 16:59:52 +0100 (CET)
+ Tue, 16 Jan 2024 17:06:43 +0100 (CET)
 Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 16 Jan
- 2024 16:59:51 +0100
+ 2024 17:06:43 +0100
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Date: Tue, 16 Jan 2024 16:59:49 +0100
-Message-ID: <20240116155949.735390-1-patrice.chotard@foss.st.com>
+Date: Tue, 16 Jan 2024 17:06:41 +0100
+Message-ID: <20240116160641.741039-1-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Originating-IP: [10.201.20.205]
@@ -89,7 +89,7 @@ Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
  1 file changed, 11 insertions(+), 12 deletions(-)
 
 diff --git a/common/console.c b/common/console.c
-index cad65891fc9..a5406124c98 100644
+index cad65891fc9..8bfcfce5643 100644
 --- a/common/console.c
 +++ b/common/console.c
 @@ -1049,6 +1049,11 @@ int console_clear(void)
@@ -124,9 +124,9 @@ index cad65891fc9..a5406124c98 100644
 -		stderrname = stdio_devices[stderr] ?
 -			stdio_devices[stderr]->name :
 -			"No error devices available!";
-+		stdinname = get_stdio(buf, stdin);
-+		stdoutname = get_stdio(buf, stdout);
-+		stderrname = get_stdio(buf, stderr);
++		stdinname = get_stdio(stdin);
++		stdoutname = get_stdio(stdout);
++		stderrname = get_stdio(stderr);
  	}
  
  	/* Print information */

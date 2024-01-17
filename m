@@ -2,65 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D6B583057A
-	for <lists+uboot-stm32@lfdr.de>; Wed, 17 Jan 2024 13:37:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DBB083058F
+	for <lists+uboot-stm32@lfdr.de>; Wed, 17 Jan 2024 13:39:32 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C28E1C6DD74;
-	Wed, 17 Jan 2024 12:37:46 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E26C7C6DD74;
+	Wed, 17 Jan 2024 12:39:31 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
+ [209.85.167.54])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7D91DC6DD6E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BE20BC6DD6E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 17 Jan 2024 12:37:45 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40HCJk5H009098; Wed, 17 Jan 2024 13:37:28 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=QWoTzZx
- Ig7OouVtkzB8lJy+CRxZrBJTFbX0oONBZ8xo=; b=s3VhXLC6BFwf/tp78YVTnsI
- gQXzMnIsaETw7Qa0MkpFMGojrTtLZFWmV2sSkOzS3iZL45Q0Jz51+FsPYskaiRbM
- Q2WLUTFnKj1BcX6RQ3uuye4arVZvDGliKJzMTi222sZKqj4NyxNEkC9y5MWptUny
- cn0EKEdQgpVBa0ShiV0AcBPoCoLp0QVMNMZZi6bYipR9+3QzdPrP0FCbH727KogI
- Zvg485MvgABndibLeBHPNOy4Wsv7EYIgJWSWIPRIesxFC0LrWHqpvYIVi1bL0jSX
- fdD83PdM/Gt0fRwSyLFiwA8Cb5FO0qgmpIHIvxChtyUHCPtGuttxlhXsSgU+2jQ=
- =
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbhbfcb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Jan 2024 13:37:28 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id BE460100079;
- Wed, 17 Jan 2024 13:37:16 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B676823695D;
- Wed, 17 Jan 2024 13:37:16 +0100 (CET)
-Received: from localhost (10.201.20.205) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 17 Jan
- 2024 13:37:16 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 17 Jan 2024 13:37:13 +0100
-Message-ID: <20240117123714.50380-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Wed, 17 Jan 2024 12:39:30 +0000 (UTC)
+Received: by mail-lf1-f54.google.com with SMTP id
+ 2adb3069b0e04-50e741123acso13507490e87.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 17 Jan 2024 04:39:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1705495170; x=1706099970;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FSz/1sJNsR8v/7aa7YHZEWyDdRaLeW1vD03f/0mKWk0=;
+ b=a963IJfpXcT9HCW+r6X128mR+/r+IsevczYwkD4Rj/2UcU9n7iwxr28xKdoqH4ou6o
+ mn3tcr/PlBf8EaWFBj2hiqfk7UE8KxvA9skTBK2yp2mDUOJEcYxORvqZeC8wKWZCmJWC
+ agXBYk//OMwg1ZU4VHEzAvu/t6VZ6oSs4iP8ILsV9qX041TySxIL95cBcuvqC8MtrNWh
+ g1aqBEWxEiCgzTpElQtfbkVlrLYmyqEs/n3YhcAMz015oaS/Tu+YjNwazSsoIvofhhtA
+ sTZtwO0G1ublUTRkh2iUlAyPtuQC3AFgOjshI4Wo/zTvymUiuKYfKagLJBNLycRDt5FY
+ z9Ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1705495170; x=1706099970;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FSz/1sJNsR8v/7aa7YHZEWyDdRaLeW1vD03f/0mKWk0=;
+ b=GiDytZbSG3u7HjUElckd98bezAgUtrQBCisoIp+bIShvhVMbbYzUULb5eYF50zIGrf
+ onFAGR+crdzJFqPmuqOAR3ictGHZA8yixrxTecDyOtW1CzKx7eGdqwvx1dVCqZP+u48C
+ PDc6UhemfNd1Vwv/B108H5Gc8BTaZ+WDB1RSGHbOi3TWfxwmaLRZbVtj1kluLw2VZkp7
+ YmSXuQSVdeiE+2y0VI7btHoBePQH8GT5N+zNQ+HcgceDpCuZFuqpZ95vL9pkdR/yeX/e
+ jcLo2HFZ1RwQ5GN32DiZVRr6Be4kLXiOIRP2KKfdSEjZBZQrPgvD4KAJ2aVSz3lbWOSB
+ Jm7w==
+X-Gm-Message-State: AOJu0Yy+RqcEdKaxsGXXmhXAgpqtdISFk9YIdbP/VWrqV0tkiTEe3eW8
+ BhSOo/by9xNaBlYo+lvmeN0cKCN1oYhdMzj3viM=
+X-Google-Smtp-Source: AGHT+IHpjk6qWyhy5gbaJwXxZZREI7/76JaD1y2ZqkZmJ5z+w26S/uZJNwq0NJ9xKEHbI7c8V7B5mjoZkkIzIcuw8Jk=
+X-Received: by 2002:ac2:4d1a:0:b0:50e:e420:65eb with SMTP id
+ r26-20020ac24d1a000000b0050ee42065ebmr3559240lfi.128.1705495169658; Wed, 17
+ Jan 2024 04:39:29 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.201.20.205]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-17_07,2024-01-17_01,2023-05-22_02
+References: <20240117123714.50380-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20240117123714.50380-1-patrice.chotard@foss.st.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 17 Jan 2024 20:39:17 +0800
+Message-ID: <CAEUhbmXCaduJq174B5OPRcM=rEHq23CqXEMnU-hTmPNGKiwyyQ@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Bin Meng <bmeng@tinylab.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Ion Agorria <ion@agorria.com>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [Uboot-stm32] [PATCH v2] common: console: Fix print complete stdio
-	device list
+Subject: Re: [Uboot-stm32] [PATCH v2] common: console: Fix print complete
+	stdio device list
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,80 +75,23 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
-stdin or stdout or stderr are missing in environment, as fallback, get
-these either from stdio_devices[std] or stdio_devices[std]->name.
-
-Fixes: 6b343ab38d ("console: Print out complete stdio device list")
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
----
-
-Changes in v2:
-  - simplify code suggested by Bin Meng
-
- common/console.c | 27 ++++++++++++---------------
- 1 file changed, 12 insertions(+), 15 deletions(-)
-
-diff --git a/common/console.c b/common/console.c
-index cad65891fc9..aa3053bc441 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -1049,9 +1049,16 @@ int console_clear(void)
- 	return 0;
- }
- 
-+static char *get_stdio(const u8 std)
-+{
-+	return stdio_devices[std] ? stdio_devices[std]->name : "No devices available!";
-+}
-+
- static void stdio_print_current_devices(void)
- {
--	char *stdinname, *stdoutname, *stderrname;
-+	char *stdinname = NULL;
-+	char *stdoutname = NULL;
-+	char *stderrname = NULL;
- 
- 	if (CONFIG_IS_ENABLED(CONSOLE_MUX) &&
- 	    CONFIG_IS_ENABLED(SYS_CONSOLE_IS_IN_ENV)) {
-@@ -1059,22 +1066,12 @@ static void stdio_print_current_devices(void)
- 		stdinname  = env_get("stdin");
- 		stdoutname = env_get("stdout");
- 		stderrname = env_get("stderr");
--
--		stdinname = stdinname ? : "No input devices available!";
--		stdoutname = stdoutname ? : "No output devices available!";
--		stderrname = stderrname ? : "No error devices available!";
--	} else {
--		stdinname = stdio_devices[stdin] ?
--			stdio_devices[stdin]->name :
--			"No input devices available!";
--		stdoutname = stdio_devices[stdout] ?
--			stdio_devices[stdout]->name :
--			"No output devices available!";
--		stderrname = stdio_devices[stderr] ?
--			stdio_devices[stderr]->name :
--			"No error devices available!";
- 	}
- 
-+	stdinname = stdinname ? : get_stdio(stdin);
-+	stdoutname = stdoutname ? : get_stdio(stdout);
-+	stderrname = stderrname ? : get_stdio(stderr);
-+
- 	/* Print information */
- 	puts("In:    ");
- 	printf("%s\n", stdinname);
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gV2VkLCBKYW4gMTcsIDIwMjQgYXQgODozN+KAr1BNIFBhdHJpY2UgQ2hvdGFyZAo8cGF0cmlj
+ZS5jaG90YXJkQGZvc3Muc3QuY29tPiB3cm90ZToKPgo+IEluIGNhc2UgQ09OU09MRV9NVVggYW5k
+IFNZU19DT05TT0xFX0lTX0lOX0VOViBhcmUgb24gYW5kCj4gc3RkaW4gb3Igc3Rkb3V0IG9yIHN0
+ZGVyciBhcmUgbWlzc2luZyBpbiBlbnZpcm9ubWVudCwgYXMgZmFsbGJhY2ssIGdldAo+IHRoZXNl
+IGVpdGhlciBmcm9tIHN0ZGlvX2RldmljZXNbc3RkXSBvciBzdGRpb19kZXZpY2VzW3N0ZF0tPm5h
+bWUuCj4KPiBGaXhlczogNmIzNDNhYjM4ZCAoImNvbnNvbGU6IFByaW50IG91dCBjb21wbGV0ZSBz
+dGRpbyBkZXZpY2UgbGlzdCIpCj4KPiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBh
+dHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPgo+IC0tLQo+Cj4gQ2hhbmdlcyBpbiB2MjoKPiAg
+IC0gc2ltcGxpZnkgY29kZSBzdWdnZXN0ZWQgYnkgQmluIE1lbmcKPgo+ICBjb21tb24vY29uc29s
+ZS5jIHwgMjcgKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAx
+MiBpbnNlcnRpb25zKCspLCAxNSBkZWxldGlvbnMoLSkKPgoKUmV2aWV3ZWQtYnk6IEJpbiBNZW5n
+IDxibWVuZy5jbkBnbWFpbC5jb20+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1t
+YWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
+bS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

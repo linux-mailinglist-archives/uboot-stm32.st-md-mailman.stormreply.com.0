@@ -2,68 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9159832A53
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jan 2024 14:25:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C64A6832A5B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jan 2024 14:26:10 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7D6D1C6DD74;
-	Fri, 19 Jan 2024 13:25:56 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8AAE1C6DD74;
+	Fri, 19 Jan 2024 13:26:10 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F17CDC6DD73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B531C6DD73
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Jan 2024 13:25:54 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ Fri, 19 Jan 2024 13:26:09 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40J9b5wc020013; Fri, 19 Jan 2024 14:25:48 +0100
+ 40JBGaqJ022593; Fri, 19 Jan 2024 14:26:02 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=ZGXU45uES7rzrKnTQMBkjyhgi/MgJ4O3QlrDA0/5C/E=; b=JU
- 529w0ytv1bkV5ZpnahKZF7teG3+4NRLX3cQhILenHN7KV8CHQKnP5fGbEXhOO/2c
- zDq5X7K4R5fFujFltH1uq3iIvdFE49YsVe4zj6x/M6G4gJkHy/gsMRJlpxzNf3fQ
- c70DB3yD5P4xqv2JqLgQzX4uWDfWVDKICKxAq7dez3e75KN7GrYnJGxEaEqr8lLV
- VAIM8o54QzYndNj2JaS6pIsaGNtAbtccaXQuRboLd8KuFEZGc95Z9mnQYhBnh7Fm
- wyhy4/vVsjHcxtHTpYW2tG5j0fIpk62ISeEYXbYnE5tBicIIqkH+d/7BICub6UXu
- xtDadDWntKCmPa1GBTfQ==
+ selector1; bh=/xWpZRct3F7B7u3oQ8FRCujIirsZ2Dpz2Vl6RVGhc2M=; b=SO
+ V9ZFoLRisQFLnW9bmm9Wxn+K+HOoWHgniYb1Xo1d67AANsjms36Fr7sG9u2M7Vih
+ kHB6XK/RaN7Zt9IHpjIiVrSPdM3O0KLrwmtJ/AHU1cp6edxMrpS9Ym1Mp166ZV8j
+ TdAt7wlcTftfJ+okMRVqZET9Ni9fQWcHdEy+l9ukjJIXiteKQzubdvr6g+UxH2ff
+ swNd8OkGv7owJ3bu6calbIehqgmGeVd91nrncHIKYB4IYB8evgMXhY1f704zBTCH
+ h9WbzZVg8kk9scf0b2tKckkqkBcJj6dxehBdniY5EOAgsUpd4mF8OyEBA6vHWSPf
+ WkzO7Z275tZa/KXqtcpg==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vm4y5budg-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmbhnu86-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Jan 2024 14:25:48 +0100 (CET)
+ Fri, 19 Jan 2024 14:26:02 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D6DF2100081;
- Fri, 19 Jan 2024 14:25:47 +0100 (CET)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1EB79100081;
+ Fri, 19 Jan 2024 14:26:01 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CFD4823D41E;
- Fri, 19 Jan 2024 14:25:47 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 15F8523D41E;
+ Fri, 19 Jan 2024 14:26:01 +0100 (CET)
 Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
- 2024 14:25:47 +0100
-Message-ID: <bd33b14f-e356-471b-b817-bda60a94f11e@foss.st.com>
-Date: Fri, 19 Jan 2024 14:25:46 +0100
+ 2024 14:26:00 +0100
+Message-ID: <bb625285-71a7-49f3-ad68-c596a6900ea9@foss.st.com>
+Date: Fri, 19 Jan 2024 14:26:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20240115140557.57448-1-patrick.delaunay@foss.st.com>
- <20240115150451.v2.7.I122ede30eb83184b996b7d3e1c480418b29ffbe1@changeid>
- <CAByghJaABf37PeVgEPWaQAtpZK4O=brECrLLAWnhWc5mrpW92g@mail.gmail.com>
+ <20240115150451.v2.8.Ifc2389c624c7de76bda3fa91484d4be8fc71ba1f@changeid>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <CAByghJaABf37PeVgEPWaQAtpZK4O=brECrLLAWnhWc5mrpW92g@mail.gmail.com>
+In-Reply-To: <20240115150451.v2.8.Ifc2389c624c7de76bda3fa91484d4be8fc71ba1f@changeid>
 X-Originating-IP: [10.252.4.250]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-01-19_08,2024-01-19_02,2023-05-22_02
-Cc: Bhupesh Sharma <bhupesh.sharma@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [Uboot-stm32] [PATCH v2 07/14] stm32mp: add setup_serial_number
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ uboot-stm32@st-md-mailman.stormreply.com, Simon Glass <sjg@chromium.org>,
+ Bhupesh Sharma <bhupesh.sharma@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [Uboot-stm32] [PATCH v2 08/14] smt32mp: add setup_mac_address
 	for stm32mp25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -76,90 +74,220 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAxLzE1LzI0IDE3OjIzLCBJZ29yIE9wYW5pdWsgd3JvdGU6Cj4gSGVsbG8gUGF0cmljaywK
-PiAKPiBPbiBNb24sIEphbiAxNSwgMjAyNCBhdCA1OjAz4oCvUE0gUGF0cmljayBEZWxhdW5heQo+
-IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPiB3cm90ZToKPj4KPj4gRnJvbTogUGF0cmlj
-ZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4+Cj4+IEFkZCBzdXBwb3J0
-IG9mIHNlcmlhbCBudW1iZXIgZm9yIHN0bTMybXAyNSwgZ2V0cyBmcm9tIE9UUCB3aXRoIEJTRUMg
-ZHJpdmVyLgo+Pgo+PiBSZXZpZXdlZC1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3Rh
-cmRAZm9zcy5zdC5jb20+Cj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmlj
-ZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+PiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNrIERlbGF1bmF5
-IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPgo+PiAtLS0KPj4KPj4gKG5vIGNoYW5nZXMg
-c2luY2UgdjEpCj4+Cj4+ICAuLi4vYXJtL21hY2gtc3RtMzJtcC9pbmNsdWRlL21hY2gvc3lzX3By
-b3RvLmggfCAgMSArCj4+ICBhcmNoL2FybS9tYWNoLXN0bTMybXAvc29jLmMgICAgICAgICAgICAg
-ICAgICAgfCAzMSArKysrKysrKysrKysrKysrKysrCj4+ICBhcmNoL2FybS9tYWNoLXN0bTMybXAv
-c3RtMzJtcDEvY3B1LmMgICAgICAgICAgfCAyNyAtLS0tLS0tLS0tLS0tLS0tCj4+ICBhcmNoL2Fy
-bS9tYWNoLXN0bTMybXAvc3RtMzJtcDIvY3B1LmMgICAgICAgICAgfCAgMiArKwo+PiAgNCBmaWxl
-cyBjaGFuZ2VkLCAzNCBpbnNlcnRpb25zKCspLCAyNyBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAt
-LWdpdCBhL2FyY2gvYXJtL21hY2gtc3RtMzJtcC9pbmNsdWRlL21hY2gvc3lzX3Byb3RvLmggYi9h
-cmNoL2FybS9tYWNoLXN0bTMybXAvaW5jbHVkZS9tYWNoL3N5c19wcm90by5oCj4+IGluZGV4IDgz
-Mzg4ZmRiNzM3MS4uMmE2NWVmYzBhNTBhIDEwMDY0NAo+PiAtLS0gYS9hcmNoL2FybS9tYWNoLXN0
-bTMybXAvaW5jbHVkZS9tYWNoL3N5c19wcm90by5oCj4+ICsrKyBiL2FyY2gvYXJtL21hY2gtc3Rt
-MzJtcC9pbmNsdWRlL21hY2gvc3lzX3Byb3RvLmgKPj4gQEAgLTk3LDYgKzk3LDcgQEAgdTMyIGdl
-dF9ib290YXV0aCh2b2lkKTsKPj4KPj4gIGludCBnZXRfZXRoX25iKHZvaWQpOwo+PiAgaW50IHNl
-dHVwX21hY19hZGRyZXNzKHZvaWQpOwo+PiAraW50IHNldHVwX3NlcmlhbF9udW1iZXIodm9pZCk7
-Cj4+Cj4+ICAvKiBib2FyZCBwb3dlciBtYW5hZ2VtZW50IDogY29uZmlndXJlIHZkZGNvcmUgYWNj
-b3JkaW5nIE9QUCAqLwo+PiAgdm9pZCBib2FyZF92ZGRjb3JlX2luaXQodTMyIHZvbHRhZ2VfbXYp
-Owo+PiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL3NvYy5jIGIvYXJjaC9hcm0v
-bWFjaC1zdG0zMm1wL3NvYy5jCj4+IGluZGV4IDhkNWZhNDc0Y2NhZi4uZmY3MGViZTk3NDY0IDEw
-MDY0NAo+PiAtLS0gYS9hcmNoL2FybS9tYWNoLXN0bTMybXAvc29jLmMKPj4gKysrIGIvYXJjaC9h
-cm0vbWFjaC1zdG0zMm1wL3NvYy5jCj4+IEBAIC0zLDcgKzMsMTEgQEAKPj4gICAqIENvcHlyaWdo
-dCAoQykgMjAyNCwgU1RNaWNyb2VsZWN0cm9uaWNzIC0gQWxsIFJpZ2h0cyBSZXNlcnZlZAo+PiAg
-ICovCj4+Cj4+ICsjaW5jbHVkZSA8ZW52Lmg+Cj4+ICsjaW5jbHVkZSA8bWlzYy5oPgo+PiAgI2lu
-Y2x1ZGUgPGFzbS9hcmNoL3N5c19wcm90by5oPgo+PiArI2luY2x1ZGUgPGRtL2RldmljZS5oPgo+
-PiArI2luY2x1ZGUgPGRtL3VjbGFzcy5oPgo+Pgo+PiAgLyogdXNlZCB3aGVuIENPTkZJR19ESVNQ
-TEFZX0NQVUlORk8gaXMgYWN0aXZhdGVkICovCj4+ICBpbnQgcHJpbnRfY3B1aW5mbyh2b2lkKQo+
-PiBAQCAtMTUsMyArMTksMzAgQEAgaW50IHByaW50X2NwdWluZm8odm9pZCkKPj4KPj4gICAgICAg
-ICByZXR1cm4gMDsKPj4gIH0KPj4gKwo+PiAraW50IHNldHVwX3NlcmlhbF9udW1iZXIodm9pZCkK
-Pj4gK3sKPj4gKyAgICAgICBjaGFyIHNlcmlhbF9zdHJpbmdbMjVdOwo+PiArICAgICAgIHUzMiBv
-dHBbM10gPSB7MCwgMCwgMCB9Owo+PiArICAgICAgIHN0cnVjdCB1ZGV2aWNlICpkZXY7Cj4+ICsg
-ICAgICAgaW50IHJldDsKPj4gKwo+PiArICAgICAgIGlmIChlbnZfZ2V0KCJzZXJpYWwjIikpCj4+
-ICsgICAgICAgICAgICAgICByZXR1cm4gMDsKPj4gKwo+PiArICAgICAgIHJldCA9IHVjbGFzc19n
-ZXRfZGV2aWNlX2J5X2RyaXZlcihVQ0xBU1NfTUlTQywKPj4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgRE1fRFJJVkVSX0dFVChzdG0zMm1wX2JzZWMpLAo+PiArICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmZGV2KTsKPj4gKyAgICAgICBp
-ZiAocmV0KQo+PiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPj4gKwo+PiArICAgICAgIHJl
-dCA9IG1pc2NfcmVhZChkZXYsIFNUTTMyX0JTRUNfU0hBRE9XKEJTRUNfT1RQX1NFUklBTCksCj4+
-ICsgICAgICAgICAgICAgICAgICAgICAgIG90cCwgc2l6ZW9mKG90cCkpOwo+PiArICAgICAgIGlm
-IChyZXQgPCAwKQo+PiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPj4gKwo+PiArICAgICAg
-IHNwcmludGYoc2VyaWFsX3N0cmluZywgIiUwOFglMDhYJTA4WCIsIG90cFswXSwgb3RwWzFdLCBv
-dHBbMl0pOwo+PiArICAgICAgIGVudl9zZXQoInNlcmlhbCMiLCBzZXJpYWxfc3RyaW5nKTsKPj4g
-Kwo+PiArICAgICAgIHJldHVybiAwOwo+PiArfQo+PiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vbWFj
-aC1zdG0zMm1wL3N0bTMybXAxL2NwdS5jIGIvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL3N0bTMybXAx
-L2NwdS5jCj4+IGluZGV4IDAwZmVhNzkyOWIyZi4uZjg0Y2IyNmZhNTY1IDEwMDY0NAo+PiAtLS0g
-YS9hcmNoL2FybS9tYWNoLXN0bTMybXAvc3RtMzJtcDEvY3B1LmMKPj4gKysrIGIvYXJjaC9hcm0v
-bWFjaC1zdG0zMm1wL3N0bTMybXAxL2NwdS5jCj4+IEBAIC0zMzYsMzMgKzMzNiw2IEBAIF9fd2Vh
-ayBpbnQgc2V0dXBfbWFjX2FkZHJlc3Modm9pZCkKPj4gICAgICAgICByZXR1cm4gMDsKPj4gIH0K
-Pj4KPj4gLXN0YXRpYyBpbnQgc2V0dXBfc2VyaWFsX251bWJlcih2b2lkKQo+PiAtewo+PiAtICAg
-ICAgIGNoYXIgc2VyaWFsX3N0cmluZ1syNV07Cj4+IC0gICAgICAgdTMyIG90cFszXSA9IHswLCAw
-LCAwIH07Cj4+IC0gICAgICAgc3RydWN0IHVkZXZpY2UgKmRldjsKPj4gLSAgICAgICBpbnQgcmV0
-Owo+PiAtCj4+IC0gICAgICAgaWYgKGVudl9nZXQoInNlcmlhbCMiKSkKPj4gLSAgICAgICAgICAg
-ICAgIHJldHVybiAwOwo+PiAtCj4+IC0gICAgICAgcmV0ID0gdWNsYXNzX2dldF9kZXZpY2VfYnlf
-ZHJpdmVyKFVDTEFTU19NSVNDLAo+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBETV9EUklWRVJfR0VUKHN0bTMybXBfYnNlYyksCj4+IC0gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICZkZXYpOwo+PiAtICAgICAgIGlmIChyZXQpCj4+IC0g
-ICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+PiAtCj4+IC0gICAgICAgcmV0ID0gbWlzY19yZWFk
-KGRldiwgU1RNMzJfQlNFQ19TSEFET1coQlNFQ19PVFBfU0VSSUFMKSwKPj4gLSAgICAgICAgICAg
-ICAgICAgICAgICAgb3RwLCBzaXplb2Yob3RwKSk7Cj4+IC0gICAgICAgaWYgKHJldCA8IDApCj4+
-IC0gICAgICAgICAgICAgICByZXR1cm4gcmV0Owo+PiAtCj4+IC0gICAgICAgc3ByaW50ZihzZXJp
-YWxfc3RyaW5nLCAiJTA4WCUwOFglMDhYIiwgb3RwWzBdLCBvdHBbMV0sIG90cFsyXSk7Cj4+IC0g
-ICAgICAgZW52X3NldCgic2VyaWFsIyIsIHNlcmlhbF9zdHJpbmcpOwo+PiAtCj4+IC0gICAgICAg
-cmV0dXJuIDA7Cj4+IC19Cj4+IC0KPj4gIF9fd2VhayB2b2lkIHN0bTMybXBfbWlzY19pbml0KHZv
-aWQpCj4+ICB7Cj4+ICB9Cj4+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9tYWNoLXN0bTMybXAvc3Rt
-MzJtcDIvY3B1LmMgYi9hcmNoL2FybS9tYWNoLXN0bTMybXAvc3RtMzJtcDIvY3B1LmMKPj4gaW5k
-ZXggYzBmNjUxOWU4ZDdjLi4zMDFlMzY1Y2Y0ZjQgMTAwNjQ0Cj4+IC0tLSBhL2FyY2gvYXJtL21h
-Y2gtc3RtMzJtcC9zdG0zMm1wMi9jcHUuYwo+PiArKysgYi9hcmNoL2FybS9tYWNoLXN0bTMybXAv
-c3RtMzJtcDIvY3B1LmMKPj4gQEAgLTY5LDYgKzY5LDggQEAgdm9pZCBlbmFibGVfY2FjaGVzKHZv
-aWQpCj4+Cj4+ICBpbnQgYXJjaF9taXNjX2luaXQodm9pZCkKPj4gIHsKPj4gKyAgICAgICBzZXR1
-cF9zZXJpYWxfbnVtYmVyKCk7Cj4+ICsKPj4gICAgICAgICByZXR1cm4gMDsKPj4gIH0KPj4KPj4g
-LS0KPj4gMi4yNS4xCj4+Cj4gCj4gUmV2aWV3ZWQtYnk6IElnb3IgT3Bhbml1ayA8aWdvci5vcGFu
-aXVrQGZvdW5kcmllcy5pbz4KPiAKQXBwbGllZCB0byB1LWJvb3Qtc3RtMzIvbWFzdGVyCgpUaGFu
-a3MKUGF0cmljZQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9y
-bXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9s
-aXN0aW5mby91Ym9vdC1zdG0zMgo=
+
+
+On 1/15/24 15:05, Patrick Delaunay wrote:
+> Add a function setup_mac_address() to update the MAC address from the
+> default location in OTP for stm32mp2 platform.
+> 
+> The max number of OTP for MAC address is increased to 8 for STM32MP25,
+> defined with get_eth_nb() and checked in setup_mac_address.
+> 
+> The MAC address FF:FF:FF:FF:FF:FF, the broadcast ethaddr, is a invalid
+> value used for unused MAC address slot in OTP, for example for board
+> with STM32MP25x part number allows up to 5 ethernet ports but it is not
+> supported by the hardware, without switch; the associated variable
+> "enetaddr%d" is not created.
+> 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+> (no changes since v1)
+> 
+>  arch/arm/mach-stm32mp/soc.c          | 70 ++++++++++++++++++++++++++++
+>  arch/arm/mach-stm32mp/stm32mp1/cpu.c | 58 +----------------------
+>  arch/arm/mach-stm32mp/stm32mp2/cpu.c |  1 +
+>  3 files changed, 72 insertions(+), 57 deletions(-)
+> 
+> diff --git a/arch/arm/mach-stm32mp/soc.c b/arch/arm/mach-stm32mp/soc.c
+> index ff70ebe97464..fa56b0d2e0f1 100644
+> --- a/arch/arm/mach-stm32mp/soc.c
+> +++ b/arch/arm/mach-stm32mp/soc.c
+> @@ -5,10 +5,14 @@
+>  
+>  #include <env.h>
+>  #include <misc.h>
+> +#include <net.h>
+>  #include <asm/arch/sys_proto.h>
+>  #include <dm/device.h>
+>  #include <dm/uclass.h>
+>  
+> +/* max: 8 OTP for 5 mac address on stm32mp2*/
+> +#define MAX_NB_OTP	8
+> +
+>  /* used when CONFIG_DISPLAY_CPUINFO is activated */
+>  int print_cpuinfo(void)
+>  {
+> @@ -46,3 +50,69 @@ int setup_serial_number(void)
+>  
+>  	return 0;
+>  }
+> +
+> +/*
+> + * If there is no MAC address in the environment, then it will be initialized
+> + * (silently) from the value in the OTP.
+> + */
+> +__weak int setup_mac_address(void)
+> +{
+> +	int ret;
+> +	int i;
+> +	u32 otp[MAX_NB_OTP];
+> +	uchar enetaddr[ARP_HLEN];
+> +	struct udevice *dev;
+> +	int nb_eth, nb_otp, index;
+> +
+> +	if (!IS_ENABLED(CONFIG_NET))
+> +		return 0;
+> +
+> +	nb_eth = get_eth_nb();
+> +	if (!nb_eth)
+> +		return 0;
+> +
+> +	/* 6 bytes for each MAC addr and 4 bytes for each OTP */
+> +	nb_otp = DIV_ROUND_UP(ARP_HLEN * nb_eth, 4);
+> +	if (nb_otp > MAX_NB_OTP) {
+> +		log_err("invalid number of OTP = %d, max = %d\n", nb_otp, MAX_NB_OTP);
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(stm32mp_bsec),
+> +					  &dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC), otp, 4 * nb_otp);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	for (index = 0; index < nb_eth; index++) {
+> +		/* MAC already in environment */
+> +		if (eth_env_get_enetaddr_by_index("eth", index, enetaddr))
+> +			continue;
+> +
+> +		for (i = 0; i < ARP_HLEN; i++)
+> +			enetaddr[i] = ((uint8_t *)&otp)[i + ARP_HLEN * index];
+> +
+> +		/* skip FF:FF:FF:FF:FF:FF */
+> +		if (is_broadcast_ethaddr(enetaddr))
+> +			continue;
+> +
+> +		if (!is_valid_ethaddr(enetaddr)) {
+> +			log_err("invalid MAC address %d in OTP %pM\n",
+> +				index, enetaddr);
+> +			return -EINVAL;
+> +		}
+> +		log_debug("OTP MAC address %d = %pM\n", index, enetaddr);
+> +		ret = eth_env_set_enetaddr_by_index("eth", index, enetaddr);
+> +		if (ret) {
+> +			log_err("Failed to set mac address %pM from OTP: %d\n",
+> +				enetaddr, ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	return 0;
+> +}
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> index f84cb26fa565..524778f00c67 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+> @@ -14,8 +14,8 @@
+>  #include <log.h>
+>  #include <lmb.h>
+>  #include <misc.h>
+> -#include <net.h>
+>  #include <spl.h>
+> +#include <asm/cache.h>
+>  #include <asm/io.h>
+>  #include <asm/arch/stm32.h>
+>  #include <asm/arch/sys_proto.h>
+> @@ -280,62 +280,6 @@ static void setup_boot_mode(void)
+>  	clrsetbits_le32(TAMP_BOOT_CONTEXT, TAMP_BOOT_FORCED_MASK, BOOT_NORMAL);
+>  }
+>  
+> -/*
+> - * If there is no MAC address in the environment, then it will be initialized
+> - * (silently) from the value in the OTP.
+> - */
+> -__weak int setup_mac_address(void)
+> -{
+> -	int ret;
+> -	int i;
+> -	u32 otp[3];
+> -	uchar enetaddr[6];
+> -	struct udevice *dev;
+> -	int nb_eth, nb_otp, index;
+> -
+> -	if (!IS_ENABLED(CONFIG_NET))
+> -		return 0;
+> -
+> -	nb_eth = get_eth_nb();
+> -
+> -	/* 6 bytes for each MAC addr and 4 bytes for each OTP */
+> -	nb_otp = DIV_ROUND_UP(6 * nb_eth, 4);
+> -
+> -	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> -					  DM_DRIVER_GET(stm32mp_bsec),
+> -					  &dev);
+> -	if (ret)
+> -		return ret;
+> -
+> -	ret = misc_read(dev, STM32_BSEC_SHADOW(BSEC_OTP_MAC), otp, 4 * nb_otp);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	for (index = 0; index < nb_eth; index++) {
+> -		/* MAC already in environment */
+> -		if (eth_env_get_enetaddr_by_index("eth", index, enetaddr))
+> -			continue;
+> -
+> -		for (i = 0; i < 6; i++)
+> -			enetaddr[i] = ((uint8_t *)&otp)[i + 6 * index];
+> -
+> -		if (!is_valid_ethaddr(enetaddr)) {
+> -			log_err("invalid MAC address %d in OTP %pM\n",
+> -				index, enetaddr);
+> -			return -EINVAL;
+> -		}
+> -		log_debug("OTP MAC address %d = %pM\n", index, enetaddr);
+> -		ret = eth_env_set_enetaddr_by_index("eth", index, enetaddr);
+> -		if (ret) {
+> -			log_err("Failed to set mac address %pM from OTP: %d\n",
+> -				enetaddr, ret);
+> -			return ret;
+> -		}
+> -	}
+> -
+> -	return 0;
+> -}
+> -
+>  __weak void stm32mp_misc_init(void)
+>  {
+>  }
+> diff --git a/arch/arm/mach-stm32mp/stm32mp2/cpu.c b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> index 301e365cf4f4..9530aa8534b7 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp2/cpu.c
+> @@ -70,6 +70,7 @@ void enable_caches(void)
+>  int arch_misc_init(void)
+>  {
+>  	setup_serial_number();
+> +	setup_mac_address();
+>  
+>  	return 0;
+>  }
+Applied to u-boot-stm32/master
+
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

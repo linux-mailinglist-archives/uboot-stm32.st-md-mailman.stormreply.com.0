@@ -2,66 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EAC8C832BA2
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Jan 2024 15:50:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE75F83C7A6
+	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jan 2024 17:14:48 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A7296C6DD73;
-	Fri, 19 Jan 2024 14:50:16 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82A0FC6B477;
+	Thu, 25 Jan 2024 16:14:48 +0000 (UTC)
+Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com
+ [209.85.128.174])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BDC93C6A61A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 21BDBC65E4F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Jan 2024 14:50:14 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 40JDZa1j028640; Fri, 19 Jan 2024 15:50:13 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=oiCTDR5NjZt3M37SDqZelyP+cjxXkHjSjojP+oIAv/c=; b=3w
- uMJaQtU44wfsQgqI59B4Q6NpTKEBmAjSXbvqni9Lj90a7hiqELy22TI7gvsk7FQT
- c3PHndzB+Ha0aWXMC95nHzY0ZEyflrAv6iIN9wRxOROUk+zobw8FxLvaDjh2ZwG4
- geKga1C/bQE8+Jn/TttMR7VCTmyCkDiw0TnCj9tF401kW2KA4tDj4mVyplxn7+YD
- 5v9tdaP83h4HhCXsLq0bDNPXF6DsIAtGQ/V8zxrjwWYNLPCRVvDkZxE3KfQKmwyl
- E0TFQ1juHMtfwtzoJHjFgi6d9QdxYjbbVDZxfvxPuckT/0ZrcJF2+dTlUMNPDC4J
- iHeLA22EyxjZHF0D+ftw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3vkmfyxpdk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Jan 2024 15:50:13 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 83683100081;
- Fri, 19 Jan 2024 15:50:12 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 78F3825E53B;
- Fri, 19 Jan 2024 15:50:12 +0100 (CET)
-Received: from [10.252.4.250] (10.252.4.250) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Jan
- 2024 15:50:12 +0100
-Message-ID: <ee90da1b-0b59-47a7-9aa7-6dd1f0231f29@foss.st.com>
-Date: Fri, 19 Jan 2024 15:50:11 +0100
+ Thu, 25 Jan 2024 16:14:47 +0000 (UTC)
+Received: by mail-yw1-f174.google.com with SMTP id
+ 00721157ae682-602ab446cd8so13001127b3.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Thu, 25 Jan 2024 08:14:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1706199286; x=1706804086;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
+ b=MWhVCjXSZXws+1hd+HMehF1DNoKfqtQOTa/FeVo2lSIjGSAgAFtYgO6lmaXJ+Eg7Dj
+ 0FFjr7NqouSXKcvTJPSFjGfCfXHbx+WNOAuz/MfjfssTmhn5nuW0IucjfR57U8Yswk6R
+ 9eMFyIWncSWQgIyKcmw1wW+9heYzPy7ODUa9Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1706199286; x=1706804086;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
+ b=GtiR9xRGjCEV47A7ZTndO1TxnQlA7/D/u90oZ3X+3JUWLJcdW3kbrM38yoDItdTVFl
+ Qct9TALvSCYUOwmav+hXLU6tUxzrwwsX/qht4lI7lQQCZubzSc6aE6qmnnOG0E7YicaO
+ UlWyzU9doNr4nLcD32BDfiRBhA0hcP9BddyXt3u4JRqTKltG5718WkBse9agYhqlcBy3
+ CAJudyFPGO2BJDeUtFvJX5oeZiVI85JdqgnsA9V+bQ9li3knePwmXYQ33TTucFWgwfaU
+ S5l3NU8kX/CJ1ows5Uual1Kj5ZqF33BVwqkLWusnWqCr6eA4EmqBq0YtM9uzC63Ga3Bt
+ pnUQ==
+X-Gm-Message-State: AOJu0YyWvj8w6d2WTLvZHfBo4eY+rUA1QnDoZaJqfu09KpvV8VYzYdQE
+ 1zr6EZpplW8iOUDt7ynbhvuJ+0kdEhJqjUv1bsJVT++hGnRPkuvMl1GPNxTxZhY=
+X-Google-Smtp-Source: AGHT+IEZCALIGKFSfR+YJ67oflusiEaI3kLRsCWKXAuuQNpg55UlEXSbSBSagUaMwuGgtsu9YsK2Wg==
+X-Received: by 2002:a81:9b17:0:b0:5e8:61ec:4d7f with SMTP id
+ s23-20020a819b17000000b005e861ec4d7fmr35213ywg.38.1706199286000; 
+ Thu, 25 Jan 2024 08:14:46 -0800 (PST)
+Received: from bill-the-cat
+ (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
+ [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
+ bg10-20020a05690c030a00b005e703079702sm737046ywb.87.2024.01.25.08.14.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Jan 2024 08:14:45 -0800 (PST)
+Date: Thu, 25 Jan 2024 11:14:43 -0500
+From: Tom Rini <trini@konsulko.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Message-ID: <20240125161443.GT3652023@bill-the-cat>
+References: <20240117123714.50380-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-References: <20240109140018.2015396-1-patrice.chotard@foss.st.com>
- <ea333297-abc4-4807-bd52-506b44703aa8@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <ea333297-abc4-4807-bd52-506b44703aa8@foss.st.com>
-X-Originating-IP: [10.252.4.250]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.997,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-01-19_08,2024-01-19_02,2023-05-22_02
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Igor Opaniuk <igor.opaniuk@foundries.io>
-Subject: Re: [Uboot-stm32] [PATCH] stm32mp2: Fix CONFIG_STM32MP25X flag usage
+In-Reply-To: <20240117123714.50380-1-patrice.chotard@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Bin Meng <bmeng@tinylab.org>,
+ u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ion Agorria <ion@agorria.com>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v2] common: console: Fix print complete
+	stdio device list
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,31 +78,68 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0238897628347650029=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAxLzE5LzI0IDE1OjQ1LCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhpCj4gCj4gT24g
-MS85LzI0IDE1OjAwLCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4+ICIjaWYiIHdhcyB1c2VkIGlu
-c3RlYWQgb2YgIiNpZmRlZiIKPj4KPj4gRml4ZXM6IDAxYTcwMTk5NGIwNSAoInN0bTMybXAyOiBp
-bml0aWFsIHN1cHBvcnQiKQo+PiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJp
-Y2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4gLS0tCj4+Cj4+IMKgIGFyY2gvYXJtL21hY2gtc3Rt
-MzJtcC9pbmNsdWRlL21hY2gvc3RtMzIuaCB8IDIgKy0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDEg
-aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9hcmNoL2FybS9t
-YWNoLXN0bTMybXAvaW5jbHVkZS9tYWNoL3N0bTMyLmggYi9hcmNoL2FybS9tYWNoLXN0bTMybXAv
-aW5jbHVkZS9tYWNoL3N0bTMyLmgKPj4gaW5kZXggNDZkNDY5ODgxYjMuLjE3NWYyYTg4NDkwIDEw
-MDY0NAo+PiAtLS0gYS9hcmNoL2FybS9tYWNoLXN0bTMybXAvaW5jbHVkZS9tYWNoL3N0bTMyLmgK
-Pj4gKysrIGIvYXJjaC9hcm0vbWFjaC1zdG0zMm1wL2luY2x1ZGUvbWFjaC9zdG0zMi5oCj4+IEBA
-IC0xNTcsNyArMTU3LDcgQEAgZW51bSBmb3JjZWRfYm9vdF9tb2RlIHsKPj4gwqAgI2VuZGlmIC8q
-IF9fQVNTRU1CTFlfXyAqLwo+PiDCoCAjZW5kaWYgLyogQ09ORklHX1NUTTMyTVAxNVggfHwgQ09O
-RklHX1NUTTMyTVAxM1ggKi8KPj4gwqAgLSNpZiBDT05GSUdfU1RNMzJNUDI1WAo+PiArI2lmZGVm
-IENPTkZJR19TVE0zMk1QMjVYCj4+IMKgICNkZWZpbmUgU1RNMzJfUkNDX0JBU0XCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIDB4NDQyMDAwMDAKPj4gwqAgI2RlZmluZSBTVE0zMl9UQU1QX0JBU0XCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgIDB4NDYwMTAwMDAKPj4gwqAgCj4gCj4gCj4gUmV2aWV3ZWQtYnk6
-IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4gCj4gVGhh
-bmtzCj4gUGF0cmljawo+IApBcHBsaWVkIHRvIHUtYm9vdC1zdG0zMi9tYXN0ZXIKClRoYW5rcwpQ
-YXRyaWNlCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
-b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
-bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
-bmZvL3Vib290LXN0bTMyCg==
+
+--===============0238897628347650029==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="lDoYZQjGBiCxMcjv"
+Content-Disposition: inline
+
+
+--lDoYZQjGBiCxMcjv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jan 17, 2024 at 01:37:13PM +0100, Patrice Chotard wrote:
+
+> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
+> stdin or stdout or stderr are missing in environment, as fallback, get
+> these either from stdio_devices[std] or stdio_devices[std]->name.
+>=20
+> Fixes: 6b343ab38d ("console: Print out complete stdio device list")
+>=20
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--lDoYZQjGBiCxMcjv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiPMACgkQFHw5/5Y0
+tyxbHQwAsXS+tNUymfVqnuB3gPO5CfvWRKPjdpAPdibWLyD4E4T6G5JSlKVzoOsq
+p8jqa5WEw3BJjtm956fRH+ghpNvX5pIZGv7THO78QVjMvtCwt55/XEdYNHOR3L3m
+IMjj3/RBKftq9agl9X2wMFFXtr1p63DYy8bPdxWZ7UWJpXmesFz7DkAKL2Jl/xNb
+KWHgA0Ar7XavMkFU1THqe2wdzFco40Oz0M9jbgY2VFFMZc7f2MvATffPj4SooL2I
+WRoubSvCDIhhPiBv9CQAxJYE+O0YnZmyFk5nKY95v4w7ebGxATVlvywlInrcN1w4
+YDe58P+GjrdpSLgVTil17siSRWyKTMD6Kznxqx0pJWqo9KCQDNKZ8N16iVaEJYhH
+l0gLDi5TO727+SQHH5F7p3wvbw5oCU3m/DEmsqN7CTvGaeU8d4dQWbW1Ba8D5B3h
+7eW0E9Po73ES9NZnLd5EvM8qkKyJQOjkonGDI4i9PaTwwDysf4u7nN/wJd1AwGHe
+i8FUGxlr
+=YKtV
+-----END PGP SIGNATURE-----
+
+--lDoYZQjGBiCxMcjv--
+
+--===============0238897628347650029==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============0238897628347650029==--

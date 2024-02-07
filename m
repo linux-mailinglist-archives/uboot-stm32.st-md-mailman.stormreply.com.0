@@ -2,71 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE75F83C7A6
-	for <lists+uboot-stm32@lfdr.de>; Thu, 25 Jan 2024 17:14:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BDF984CB38
+	for <lists+uboot-stm32@lfdr.de>; Wed,  7 Feb 2024 14:12:11 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82A0FC6B477;
-	Thu, 25 Jan 2024 16:14:48 +0000 (UTC)
-Received: from mail-yw1-f174.google.com (mail-yw1-f174.google.com
- [209.85.128.174])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AE5F7C6DD9F;
+	Wed,  7 Feb 2024 13:12:10 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 21BDBC65E4F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4DC27C03FC1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Jan 2024 16:14:47 +0000 (UTC)
-Received: by mail-yw1-f174.google.com with SMTP id
- 00721157ae682-602ab446cd8so13001127b3.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Jan 2024 08:14:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1706199286; x=1706804086;
- darn=st-md-mailman.stormreply.com; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
- b=MWhVCjXSZXws+1hd+HMehF1DNoKfqtQOTa/FeVo2lSIjGSAgAFtYgO6lmaXJ+Eg7Dj
- 0FFjr7NqouSXKcvTJPSFjGfCfXHbx+WNOAuz/MfjfssTmhn5nuW0IucjfR57U8Yswk6R
- 9eMFyIWncSWQgIyKcmw1wW+9heYzPy7ODUa9Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1706199286; x=1706804086;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xEJ9KYA+vQtgAGhHVjiW8lWboE4jHkh4LJ8KcrWFaBU=;
- b=GtiR9xRGjCEV47A7ZTndO1TxnQlA7/D/u90oZ3X+3JUWLJcdW3kbrM38yoDItdTVFl
- Qct9TALvSCYUOwmav+hXLU6tUxzrwwsX/qht4lI7lQQCZubzSc6aE6qmnnOG0E7YicaO
- UlWyzU9doNr4nLcD32BDfiRBhA0hcP9BddyXt3u4JRqTKltG5718WkBse9agYhqlcBy3
- CAJudyFPGO2BJDeUtFvJX5oeZiVI85JdqgnsA9V+bQ9li3knePwmXYQ33TTucFWgwfaU
- S5l3NU8kX/CJ1ows5Uual1Kj5ZqF33BVwqkLWusnWqCr6eA4EmqBq0YtM9uzC63Ga3Bt
- pnUQ==
-X-Gm-Message-State: AOJu0YyWvj8w6d2WTLvZHfBo4eY+rUA1QnDoZaJqfu09KpvV8VYzYdQE
- 1zr6EZpplW8iOUDt7ynbhvuJ+0kdEhJqjUv1bsJVT++hGnRPkuvMl1GPNxTxZhY=
-X-Google-Smtp-Source: AGHT+IEZCALIGKFSfR+YJ67oflusiEaI3kLRsCWKXAuuQNpg55UlEXSbSBSagUaMwuGgtsu9YsK2Wg==
-X-Received: by 2002:a81:9b17:0:b0:5e8:61ec:4d7f with SMTP id
- s23-20020a819b17000000b005e861ec4d7fmr35213ywg.38.1706199286000; 
- Thu, 25 Jan 2024 08:14:46 -0800 (PST)
-Received: from bill-the-cat
- (2603-6081-7b00-3119-0000-0000-0000-1001.res6.spectrum.com.
- [2603:6081:7b00:3119::1001]) by smtp.gmail.com with ESMTPSA id
- bg10-20020a05690c030a00b005e703079702sm737046ywb.87.2024.01.25.08.14.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Jan 2024 08:14:45 -0800 (PST)
-Date: Thu, 25 Jan 2024 11:14:43 -0500
-From: Tom Rini <trini@konsulko.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20240125161443.GT3652023@bill-the-cat>
-References: <20240117123714.50380-1-patrice.chotard@foss.st.com>
+ Wed,  7 Feb 2024 13:12:09 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 417BEKeI002836; Wed, 7 Feb 2024 14:12:07 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=Aq1J7L9
+ DSppoDJjHI2LFS8ZtQgG1yTMyfYz1H4TO8eg=; b=A992Ygn2JFcemmGa9ZPLczs
+ 68eXDU89rE5bwJA1CnezmzoXc59I+3y2uzXSvENs2fOWUas2otmyjTe5OcmYKxqE
+ X4OB94tognUq0x1TH0l8nbr5DlWaCVcgEUVlVS7eke9xSI6t7xka9z+WWdXrrIsK
+ VDG3yXFyVlD4H03nuzj1WFbYsrRIbONEcYiXluD8WSKMwzdg7n8k+mrIQIhKiyr4
+ b1xd5ApxLvAlJC8Y1hYhFyv/6xrc4Nak3LR7yiKvFJhUuBy1qEHtlhM6uiI1agBb
+ ygKyVQtS7LYAGS30BLXNrOPBqULglCXCO6//6Ih0MSPjPtZTqNnH8yMC2gE+Cpw=
+ =
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3w21ap5nxu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 07 Feb 2024 14:12:07 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B9A04100056;
+ Wed,  7 Feb 2024 14:12:05 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD530247040;
+ Wed,  7 Feb 2024 14:12:05 +0100 (CET)
+Received: from localhost (10.201.22.165) by SHFDAG1NODE3.st.com (10.75.129.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 7 Feb
+ 2024 14:12:05 +0100
+From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Wed, 7 Feb 2024 14:12:01 +0100
+Message-ID: <20240207141154.1.If0aa2d32c2ffde32ed1d87ab8a088db67bc2d25c@changeid>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20240117123714.50380-1-patrice.chotard@foss.st.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Bin Meng <bmeng@tinylab.org>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ion Agorria <ion@agorria.com>, Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2] common: console: Fix print complete
-	stdio device list
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-02-07_04,2024-01-31_01,2023-05-22_02
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [Uboot-stm32] [PATCH] stm32mp: cmd_stm32prog: add dependencies with
+	USB_GADGET_DOWNLOAD
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,68 +69,37 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0238897628347650029=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+This patch avoids compilation issue when CONFIG_USB_GADGET is deactivated
+in defconfig, with undefined reference to run_usb_dnl_gadget and to
+g_dnl_set_product.
 
---===============0238897628347650029==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="lDoYZQjGBiCxMcjv"
-Content-Disposition: inline
+Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+---
 
+ arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
---lDoYZQjGBiCxMcjv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jan 17, 2024 at 01:37:13PM +0100, Patrice Chotard wrote:
-
-> In case CONSOLE_MUX and SYS_CONSOLE_IS_IN_ENV are on and
-> stdin or stdout or stderr are missing in environment, as fallback, get
-> these either from stdio_devices[std] or stdio_devices[std]->name.
->=20
-> Fixes: 6b343ab38d ("console: Print out complete stdio device list")
->=20
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---lDoYZQjGBiCxMcjv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmWyiPMACgkQFHw5/5Y0
-tyxbHQwAsXS+tNUymfVqnuB3gPO5CfvWRKPjdpAPdibWLyD4E4T6G5JSlKVzoOsq
-p8jqa5WEw3BJjtm956fRH+ghpNvX5pIZGv7THO78QVjMvtCwt55/XEdYNHOR3L3m
-IMjj3/RBKftq9agl9X2wMFFXtr1p63DYy8bPdxWZ7UWJpXmesFz7DkAKL2Jl/xNb
-KWHgA0Ar7XavMkFU1THqe2wdzFco40Oz0M9jbgY2VFFMZc7f2MvATffPj4SooL2I
-WRoubSvCDIhhPiBv9CQAxJYE+O0YnZmyFk5nKY95v4w7ebGxATVlvywlInrcN1w4
-YDe58P+GjrdpSLgVTil17siSRWyKTMD6Kznxqx0pJWqo9KCQDNKZ8N16iVaEJYhH
-l0gLDi5TO727+SQHH5F7p3wvbw5oCU3m/DEmsqN7CTvGaeU8d4dQWbW1Ba8D5B3h
-7eW0E9Po73ES9NZnLd5EvM8qkKyJQOjkonGDI4i9PaTwwDysf4u7nN/wJd1AwGHe
-i8FUGxlr
-=YKtV
------END PGP SIGNATURE-----
-
---lDoYZQjGBiCxMcjv--
-
---===============0238897628347650029==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+index 8f91db4b46b9..589276282e44 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/Kconfig
+@@ -17,6 +17,7 @@ config CMD_STM32PROG
+ config CMD_STM32PROG_USB
+ 	bool "support stm32prog over USB"
+ 	depends on CMD_STM32PROG
++	depends on USB_GADGET_DOWNLOAD
+ 	default y
+ 	help
+ 		activate the command "stm32prog usb" for STM32MP soc family
+-- 
+2.25.1
 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0238897628347650029==--

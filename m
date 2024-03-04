@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31EF787189B
-	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Mar 2024 09:51:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02CE2870796
+	for <lists+uboot-stm32@lfdr.de>; Mon,  4 Mar 2024 17:51:41 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DBDB7C6DD95;
-	Tue,  5 Mar 2024 08:51:46 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
- [209.85.128.45])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B9BD9C6DD6E;
+	Mon,  4 Mar 2024 16:51:40 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AC84CC6DD6B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BDFC8C6DD75
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  4 Mar 2024 16:51:38 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-412e90ef887so3426125e9.2
+ Mon,  4 Mar 2024 16:51:39 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-412e84e87e6so4233995e9.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 04 Mar 2024 08:51:38 -0800 (PST)
+ Mon, 04 Mar 2024 08:51:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709571098; x=1710175898;
+ d=linaro.org; s=google; t=1709571099; x=1710175899;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cnA9QnbGooLsERsTK0KwpT9juVWS/tOqR9mOWLkMCl4=;
- b=A9MzoRbuB1To/sF7Ge7hPYIc6BY5cMBWIj8tLf2OIKqX9jHUwPl+w4MgeYQm3KxKHI
- Hv7oni7tctxOLWlFgU9bupd8jNNXPTiVBeDj4g/oIQynXd6tl5yyjy9Sd7BvIds0LyOX
- ZoN6AuCktHOc+Xew45m+0ZLWFskn2qM3IgUaZVkWQ6mPM6zC4akxrcud7oCk40TsUA5S
- Jlhq3V4iQLGiY2XWmCDzLkDir5RH2hXHrFv1QPeBFs+6H1sJKotp1Op2RtoBhbQhICVW
- UEtWyeEcNj5dm7/Y5JfS992ILQq8lWYSYAafSC0ZYxBFbRWAV+2CD3S/qk158HNUPZP5
- hSiA==
+ :reply-to; bh=FdYU3I6aO53xlP7kaqKlhah/nKKW7LW6cbfvvrEdx7A=;
+ b=R4nTHqA064A6APTjPwt4EqY/aU48uURneTiceWBscIcUK5VyY3sDT8HndXJyM28hrP
+ XscVECuA//h+6IabLPiHUxNig//+GtBgGNZW0UgnGV1BpPV9I8RQn33TmJnXENlRHmf8
+ Zrh4JMPecCAyLRfX+K/ypixkOOit3lhZ9whAC6Z3hkevGUBRMEe1Vj7GsJmGTt0eleZf
+ HSpVY1mnpHN5MmiDZWdxYd/DsnoJEMl47BG8Sg22mRTl1x5TYXOd1Gh8nv8K2RB1zSdD
+ 6AEoeKqs4dxTLC6ZHthN+ay0dkqSANMmzCIqnT0KplN4jnfai7OK6pWtwzkiFzx3k52O
+ dRXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709571098; x=1710175898;
+ d=1e100.net; s=20230601; t=1709571099; x=1710175899;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cnA9QnbGooLsERsTK0KwpT9juVWS/tOqR9mOWLkMCl4=;
- b=PfTCxkAcchPuOp1mPZpt684DoLhOeryLTnzss1RcOYbtRmeWyv6MtpoFS6cvR4r320
- bhQcNfjD1UicXd7qmXyO3G06bJMkINbo6ka+LCFs/MS9aXQ29SKEyiXiGOXRvpM1n/sP
- Utguen6tQEp0RRwOb6HHQ6rjx6Y0rlogq+wRbdJv7flMnLZZhlc+9hDinffd10GyfdVR
- YXqP0yBhuSPlKm1IEnRRjZN+mtSYyHC60g6QPNr7J07klvdJ/ObFUamNBbb2z8lXAqC7
- BrJhcYJudON3LnWz6kqdgBmd1IjWck2si71ri5wRDehm2tu0XbttbiILynvso4z0cJxj
- EkSA==
+ bh=FdYU3I6aO53xlP7kaqKlhah/nKKW7LW6cbfvvrEdx7A=;
+ b=OYEe5pMIf3hhB2U7GuyTNY4d3zn+BQdSuJd+AQgzKI8FO/vKeQJLlShQAuUogsyOD7
+ LUcrRJ3KWheumTGeY8GSxrVOvGidLA80vVYNzxKY08nS4+IHkRDfs8PDRkHkJ/wGayaC
+ rREE3KUNpyFjLucXdsoYjwfaHHTu4/mDSr1O7CC8mSLLTgm802CDdEb31FRzSC9vdQR2
+ TlguX4USxa72qlXJyyY7IeEyyQv2tBELJLpdqrc5FXBtTfVwPM0mN/hrn5qbgDmySsnR
+ Trx+CfgZme+Y/8yEZGJ7eGIFLsLlQxbq10snbbwQktJPsBDUfcRP0gq4tHyA2grizu4y
+ aN4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZ2QlgIHfOaL5OPGM975+EgRPDtw0B6Ot9O4oHv/cUPmV5P7JFLqTKcO4jHGXNsawP+293N9n17d97B0nMjhEjxa7CJKBbJmCyrNsX4EKZr3pHdNd6dFEz
-X-Gm-Message-State: AOJu0Yw70rU4rCy5iuMlE7SloAbG/hdbsrmtQIwKSsl4aRWl6kSey4hP
- sccAx/prLodGqKXp1K+c8LRBHvSSoY8PKDtIrLWeAGuS1KH+0P0DVOsxH9TkXlc=
-X-Google-Smtp-Source: AGHT+IHw/+M5/S1869ufQ7PZITtu1ipuKhAQz1xumEGhbra8g99vof99oB8Hf/R9oRUOkNoP1cPpoA==
-X-Received: by 2002:a05:600c:1e1c:b0:412:e8c6:45e2 with SMTP id
- ay28-20020a05600c1e1c00b00412e8c645e2mr744601wmb.40.1709571097722; 
- Mon, 04 Mar 2024 08:51:37 -0800 (PST)
+ AJvYcCWDo6EIQf14UbXhekdTIUa2HCGienrr1BBwQL7kb863mthu0LpM4T+9Q3MjG1e/ie82NHAO3unky+HVFobk+GKapEgzVAIJuZsqqwG/Gm/bI8ry2QE9hjRe
+X-Gm-Message-State: AOJu0YzX4ZmfAGEJBCREBO6m3HtoSvZKqMA1o7lfMZ4sFyFn4QszCwYv
+ bZ3x4OQ+obrOeGuc0IhC3gfDmi0Rgevfg+4QzD7FzWwMFBSDUUzpRoBMqfqcoqM=
+X-Google-Smtp-Source: AGHT+IHg2ePdWo6ln6QOKwd/7MkUCLuot/arcaGo5tBtYVzULytIzBIbhGutMZpWQgGsfkVtr+Afvw==
+X-Received: by 2002:a05:600c:1d87:b0:412:e7d6:4464 with SMTP id
+ p7-20020a05600c1d8700b00412e7d64464mr1119159wms.32.1709571099196; 
+ Mon, 04 Mar 2024 08:51:39 -0800 (PST)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.51.36
+ c21-20020a05600c0a5500b00412cb0961fasm10598517wmq.6.2024.03.04.08.51.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Mar 2024 08:51:36 -0800 (PST)
+ Mon, 04 Mar 2024 08:51:38 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 04 Mar 2024 16:51:17 +0000
+Date: Mon, 04 Mar 2024 16:51:18 +0000
 MIME-Version: 1.0
-Message-Id: <20240304-b4-upstream-dt-headers-v1-9-b7ff41925f92@linaro.org>
+Message-Id: <20240304-b4-upstream-dt-headers-v1-10-b7ff41925f92@linaro.org>
 References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 In-Reply-To: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,20 +88,19 @@ To: Tom Rini <trini@konsulko.com>,
  Dai Okamura <okamura.dai@socionext.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=168989;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=37484;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=qViTBsIX+93d2koSFUGx/yaxKCHrpQxc/bDnZ1gg1TA=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnf9gfPP7NfEoqWnqZiYkOy+nJr1esnJsvfdVZ/GbLi
- zzFnUJrO0pZGAQ5GGTFFFnETyyzbFp72V5j+4ILMHNYmUCGMHBxCsBEVu1iZGicukfQ7Mnso+KJ
- onUyK6Zu1D+9vW2zcvQbni9sJ7psZHcz/NMU57CwXHI9udDu2tt/PXbF7nuuslY2Z0UlJZ04VlQ
- +6SwA
+ bh=/zN5JHDnNCnlNMgrceeC/PnkKzNjQqD8fiQdso0NdZY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtSnf9j1fxRxtb/o7Jr+WOzxB/vVT1YWOeX51Qr/2ilh6
+ jrVRm1zRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhIiz7Df9fkJ/kffi2fkzf5
+ dG3R1Qsvar3mmj55/lxnTcElBe7ui68Y/qmdEjj1zDa7KbLVOUt/URM7Z5NIW/bV+ENP5dQD1kf
+ +bgYA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
-X-Mailman-Approved-At: Tue, 05 Mar 2024 08:51:45 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, Caleb Connolly <caleb.connolly@linaro.org>,
  u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH RFC 09/26] rockchip: drop clock dt-binding
+Subject: [Uboot-stm32] [PATCH RFC 10/26] rockchip: drop remaining dt-binding
 	headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
@@ -121,4834 +120,521 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Drop in favour of dts/upstream.
 
-Small driver/dts adjustments to fix compatibility.
+Small driver adjustment to fix compatibility.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/rk3399-u-boot.dtsi                 |   2 +-
- drivers/clk/rockchip/clk_rk3399.c               |   2 +-
- include/dt-bindings/clock/px30-cru.h            | 389 ----------
- include/dt-bindings/clock/rk3036-cru.h          | 185 -----
- include/dt-bindings/clock/rk3066a-cru.h         |  31 -
- include/dt-bindings/clock/rk3128-cru.h          | 273 -------
- include/dt-bindings/clock/rk3188-cru-common.h   | 261 -------
- include/dt-bindings/clock/rk3188-cru.h          |  47 --
- include/dt-bindings/clock/rk3228-cru.h          | 287 --------
- include/dt-bindings/clock/rk3288-cru.h          | 381 ----------
- include/dt-bindings/clock/rk3308-cru.h          | 387 ----------
- include/dt-bindings/clock/rk3328-cru.h          | 393 ----------
- include/dt-bindings/clock/rk3368-cru.h          | 381 ----------
- include/dt-bindings/clock/rk3399-cru.h          | 749 -------------------
- include/dt-bindings/clock/rk3568-cru.h          | 926 ------------------------
- include/dt-bindings/clock/rockchip,rk3588-cru.h | 766 --------------------
- include/dt-bindings/clock/rockchip,rk808.h      |  11 -
- include/dt-bindings/clock/rockchip,rv1126-cru.h | 632 ----------------
- 18 files changed, 2 insertions(+), 6101 deletions(-)
+ drivers/pinctrl/rockchip/pinctrl-rk3568.c         |  15 +
+ include/dt-bindings/pinctrl/rockchip.h            |  60 --
+ include/dt-bindings/power/px30-power.h            |  27 -
+ include/dt-bindings/power/rk3066-power.h          |  22 -
+ include/dt-bindings/power/rk3188-power.h          |  24 -
+ include/dt-bindings/power/rk3228-power.h          |  21 -
+ include/dt-bindings/power/rk3288-power.h          |  32 -
+ include/dt-bindings/power/rk3328-power.h          |  19 -
+ include/dt-bindings/power/rk3399-power.h          |  53 --
+ include/dt-bindings/power/rk3568-power.h          |  32 -
+ include/dt-bindings/power/rk3588-power.h          |  69 --
+ include/dt-bindings/power/rockchip,rv1126-power.h |  35 -
+ include/dt-bindings/reset/rockchip,rk3588-cru.h   | 754 ----------------------
+ include/dt-bindings/soc/rockchip,boot-mode.h      |  16 -
+ include/dt-bindings/soc/rockchip,vop2.h           |  18 -
+ 15 files changed, 15 insertions(+), 1182 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index 3423b882c437..42a480b8fa37 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -39,9 +39,9 @@
- 		bootph-all;
- 		compatible = "rockchip,rk3399-dmc";
- 		devfreq-events = <&dfi>;
- 		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH 0>;
--		clocks = <&cru SCLK_DDRCLK>;
-+		clocks = <&cru SCLK_DDRC>;
- 		clock-names = "dmc_clk";
- 		reg = <0x0 0xffa80000 0x0 0x0800
- 		       0x0 0xffa80800 0x0 0x1800
- 		       0x0 0xffa82000 0x0 0x2000
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index c37e8a53a268..4c9df0b5b46b 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -1049,9 +1049,9 @@ static ulong rk3399_clk_set_rate(struct clk *clk, ulong rate)
- 		 * assigned-clocks handling won't require for vopl, so
- 		 * return 0 to satisfy clk_set_defaults during device probe.
- 		 */
- 		return 0;
--	case SCLK_DDRCLK:
-+	case SCLK_DDRC:
- 		ret = rk3399_ddr_set_clk(priv->cru, rate);
- 		break;
- 	case PCLK_EFUSE1024NS:
- 		break;
-diff --git a/include/dt-bindings/clock/px30-cru.h b/include/dt-bindings/clock/px30-cru.h
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rk3568.c b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+index 1d4391982605..35a69c2a1a28 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rk3568.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rk3568.c
+@@ -11,8 +11,23 @@
+ #include <dt-bindings/pinctrl/rockchip.h>
+ 
+ #include "pinctrl-rockchip.h"
+ 
++#define RK_GPIO0	0
++#define RK_GPIO1	1
++#define RK_GPIO2	2
++#define RK_GPIO3	3
++#define RK_GPIO4	4
++#define RK_GPIO6	6
++
++#define RK_FUNC_GPIO	0
++#define RK_FUNC_1	1
++#define RK_FUNC_2	2
++#define RK_FUNC_3	3
++#define RK_FUNC_4	4
++#define RK_FUNC_5	5
++#define RK_FUNC_6	6
++
+ static struct rockchip_mux_route_data rk3568_mux_route_data[] = {
+ 	MR_PMUGRF(RK_GPIO0, RK_PB7, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(1, 0, 0)), /* PWM0 IO mux selection M0 */
+ 	MR_PMUGRF(RK_GPIO0, RK_PC7, RK_FUNC_2, 0x0110, RK_GENMASK_VAL(1, 0, 1)), /* PWM0 IO mux selection M1 */
+ 	MR_PMUGRF(RK_GPIO0, RK_PC0, RK_FUNC_1, 0x0110, RK_GENMASK_VAL(3, 2, 0)), /* PWM1 IO mux selection M0 */
+diff --git a/include/dt-bindings/pinctrl/rockchip.h b/include/dt-bindings/pinctrl/rockchip.h
 deleted file mode 100644
-index e5e59690b5f5..000000000000
---- a/include/dt-bindings/clock/px30-cru.h
+index 1c28d6cb1fad..000000000000
+--- a/include/dt-bindings/pinctrl/rockchip.h
 +++ /dev/null
-@@ -1,389 +0,0 @@
+@@ -1,60 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Header providing constants for Rockchip pinctrl bindings.
+- *
+- * Copyright (c) 2013 MundoReader S.L.
+- * Author: Heiko Stuebner <heiko@sntech.de>
+- */
+-
+-#ifndef __DT_BINDINGS_ROCKCHIP_PINCTRL_H__
+-#define __DT_BINDINGS_ROCKCHIP_PINCTRL_H__
+-
+-#define RK_GPIO0	0
+-#define RK_GPIO1	1
+-#define RK_GPIO2	2
+-#define RK_GPIO3	3
+-#define RK_GPIO4	4
+-#define RK_GPIO6	6
+-
+-#define RK_PA0		0
+-#define RK_PA1		1
+-#define RK_PA2		2
+-#define RK_PA3		3
+-#define RK_PA4		4
+-#define RK_PA5		5
+-#define RK_PA6		6
+-#define RK_PA7		7
+-#define RK_PB0		8
+-#define RK_PB1		9
+-#define RK_PB2		10
+-#define RK_PB3		11
+-#define RK_PB4		12
+-#define RK_PB5		13
+-#define RK_PB6		14
+-#define RK_PB7		15
+-#define RK_PC0		16
+-#define RK_PC1		17
+-#define RK_PC2		18
+-#define RK_PC3		19
+-#define RK_PC4		20
+-#define RK_PC5		21
+-#define RK_PC6		22
+-#define RK_PC7		23
+-#define RK_PD0		24
+-#define RK_PD1		25
+-#define RK_PD2		26
+-#define RK_PD3		27
+-#define RK_PD4		28
+-#define RK_PD5		29
+-#define RK_PD6		30
+-#define RK_PD7		31
+-
+-#define RK_FUNC_GPIO	0
+-#define RK_FUNC_1	1
+-#define RK_FUNC_2	2
+-#define RK_FUNC_3	3
+-#define RK_FUNC_4	4
+-#define RK_FUNC_5	5
+-#define RK_FUNC_6	6
+-
+-#endif
+diff --git a/include/dt-bindings/power/px30-power.h b/include/dt-bindings/power/px30-power.h
+deleted file mode 100644
+index 30917a99ad20..000000000000
+--- a/include/dt-bindings/power/px30-power.h
++++ /dev/null
+@@ -1,27 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-- * Author: Elaine <zhangqing@rock-chips.com>
-- */
+-#ifndef __DT_BINDINGS_POWER_PX30_POWER_H__
+-#define __DT_BINDINGS_POWER_PX30_POWER_H__
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_PX30_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_PX30_H
+-/* VD_CORE */
+-#define PX30_PD_A35_0		0
+-#define PX30_PD_A35_1		1
+-#define PX30_PD_A35_2		2
+-#define PX30_PD_A35_3		3
+-#define PX30_PD_SCU		4
 -
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_NPLL		4
--#define APLL_BOOST_H		5
--#define APLL_BOOST_L		6
--#define ARMCLK			7
+-/* VD_LOGIC */
+-#define PX30_PD_USB		5
+-#define PX30_PD_DDR		6
+-#define PX30_PD_SDCARD		7
+-#define PX30_PD_CRYPTO		8
+-#define PX30_PD_GMAC		9
+-#define PX30_PD_MMC_NAND	10
+-#define PX30_PD_VPU		11
+-#define PX30_PD_VO		12
+-#define PX30_PD_VI		13
+-#define PX30_PD_GPU		14
 -
--/* sclk gates (special clocks) */
--#define USB480M			14
--#define SCLK_PDM		15
--#define SCLK_I2S0_TX		16
--#define SCLK_I2S0_TX_OUT	17
--#define SCLK_I2S0_RX		18
--#define SCLK_I2S0_RX_OUT	19
--#define SCLK_I2S1		20
--#define SCLK_I2S1_OUT		21
--#define SCLK_I2S2		22
--#define SCLK_I2S2_OUT		23
--#define SCLK_UART1		24
--#define SCLK_UART2		25
--#define SCLK_UART3		26
--#define SCLK_UART4		27
--#define SCLK_UART5		28
--#define SCLK_I2C0		29
--#define SCLK_I2C1		30
--#define SCLK_I2C2		31
--#define SCLK_I2C3		32
--#define SCLK_I2C4		33
--#define SCLK_PWM0		34
--#define SCLK_PWM1		35
--#define SCLK_SPI0		36
--#define SCLK_SPI1		37
--#define SCLK_TIMER0		38
--#define SCLK_TIMER1		39
--#define SCLK_TIMER2		40
--#define SCLK_TIMER3		41
--#define SCLK_TIMER4		42
--#define SCLK_TIMER5		43
--#define SCLK_TSADC		44
--#define SCLK_SARADC		45
--#define SCLK_OTP		46
--#define SCLK_OTP_USR		47
--#define SCLK_CRYPTO		48
--#define SCLK_CRYPTO_APK		49
--#define SCLK_DDRC		50
--#define SCLK_ISP		51
--#define SCLK_CIF_OUT		52
--#define SCLK_RGA_CORE		53
--#define SCLK_VOPB_PWM		54
--#define SCLK_NANDC		55
--#define SCLK_SDIO		56
--#define SCLK_EMMC		57
--#define SCLK_SFC		58
--#define SCLK_SDMMC		59
--#define SCLK_OTG_ADP		60
--#define SCLK_GMAC_SRC		61
--#define SCLK_GMAC		62
--#define SCLK_GMAC_RX_TX		63
--#define SCLK_MAC_REF		64
--#define SCLK_MAC_REFOUT		65
--#define SCLK_MAC_OUT		66
--#define SCLK_SDMMC_DRV		67
--#define SCLK_SDMMC_SAMPLE	68
--#define SCLK_SDIO_DRV		69
--#define SCLK_SDIO_SAMPLE	70
--#define SCLK_EMMC_DRV		71
--#define SCLK_EMMC_SAMPLE	72
--#define SCLK_GPU		73
--#define SCLK_PVTM		74
--#define SCLK_CORE_VPU		75
--#define SCLK_GMAC_RMII		76
--#define SCLK_UART2_SRC		77
--#define SCLK_NANDC_DIV		78
--#define SCLK_NANDC_DIV50	79
--#define SCLK_SDIO_DIV		80
--#define SCLK_SDIO_DIV50		81
--#define SCLK_EMMC_DIV		82
--#define SCLK_EMMC_DIV50		83
--
--/* dclk gates */
--#define DCLK_VOPB		150
--#define DCLK_VOPL		151
--
--/* aclk gates */
--#define ACLK_GPU		170
--#define ACLK_BUS_PRE		171
--#define ACLK_CRYPTO		172
--#define ACLK_VI_PRE		173
--#define ACLK_VO_PRE		174
--#define ACLK_VPU		175
--#define ACLK_PERI_PRE		176
--#define ACLK_GMAC		178
--#define ACLK_CIF		179
--#define ACLK_ISP		180
--#define ACLK_VOPB		181
--#define ACLK_VOPL		182
--#define ACLK_RGA		183
--#define ACLK_GIC		184
--#define ACLK_DCF		186
--#define ACLK_DMAC		187
--
--/* hclk gates */
--#define HCLK_BUS_PRE		240
--#define HCLK_CRYPTO		241
--#define HCLK_VI_PRE		242
--#define HCLK_VO_PRE		243
--#define HCLK_VPU		244
--#define HCLK_PERI_PRE		245
--#define HCLK_MMC_NAND		246
--#define HCLK_SDMMC		247
--#define HCLK_USB		248
--#define HCLK_CIF		249
--#define HCLK_ISP		250
--#define HCLK_VOPB		251
--#define HCLK_VOPL		252
--#define HCLK_RGA		253
--#define HCLK_NANDC		254
--#define HCLK_SDIO		255
--#define HCLK_EMMC		256
--#define HCLK_SFC		257
--#define HCLK_OTG		258
--#define HCLK_HOST		259
--#define HCLK_HOST_ARB		260
--#define HCLK_PDM		261
--#define HCLK_I2S0		262
--#define HCLK_I2S1		263
--#define HCLK_I2S2		264
--
--/* pclk gates */
--#define PCLK_BUS_PRE		320
--#define PCLK_DDR		321
--#define PCLK_VO_PRE		322
--#define PCLK_GMAC		323
--#define PCLK_MIPI_DSI		324
--#define PCLK_MIPIDSIPHY		325
--#define PCLK_MIPICSIPHY		326
--#define PCLK_USB_GRF		327
--#define PCLK_DCF		328
--#define PCLK_UART1		329
--#define PCLK_UART2		330
--#define PCLK_UART3		331
--#define PCLK_UART4		332
--#define PCLK_UART5		333
--#define PCLK_I2C0		334
--#define PCLK_I2C1		335
--#define PCLK_I2C2		336
--#define PCLK_I2C3		337
--#define PCLK_I2C4		338
--#define PCLK_PWM0		339
--#define PCLK_PWM1		340
--#define PCLK_SPI0		341
--#define PCLK_SPI1		342
--#define PCLK_SARADC		343
--#define PCLK_TSADC		344
--#define PCLK_TIMER		345
--#define PCLK_OTP_NS		346
--#define PCLK_WDT_NS		347
--#define PCLK_GPIO1		348
--#define PCLK_GPIO2		349
--#define PCLK_GPIO3		350
--#define PCLK_ISP		351
--#define PCLK_CIF		352
--#define PCLK_OTP_PHY		353
--
--#define CLK_NR_CLKS		(PCLK_OTP_PHY + 1)
--
--/* pmu-clocks indices */
--
--#define PLL_GPLL		1
--
--#define SCLK_RTC32K_PMU		4
--#define SCLK_WIFI_PMU		5
--#define SCLK_UART0_PMU		6
--#define SCLK_PVTM_PMU		7
--#define PCLK_PMU_PRE		8
--#define SCLK_REF24M_PMU		9
--#define SCLK_USBPHY_REF		10
--#define SCLK_MIPIDSIPHY_REF	11
--
--#define XIN24M_DIV		12
--
--#define PCLK_GPIO0_PMU		20
--#define PCLK_UART0_PMU		21
--
--#define CLKPMU_NR_CLKS		(PCLK_UART0_PMU + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_CORE_NOC		13
--#define SRST_STRC_A		14
--#define SRST_L2C		15
--
--#define SRST_DAP		16
--#define SRST_CORE_PVTM		17
--#define SRST_GPU		18
--#define SRST_GPU_NIU		19
--#define SRST_UPCTL2		20
--#define SRST_UPCTL2_A		21
--#define SRST_UPCTL2_P		22
--#define SRST_MSCH		23
--#define SRST_MSCH_P		24
--#define SRST_DDRMON_P		25
--#define SRST_DDRSTDBY_P		26
--#define SRST_DDRSTDBY		27
--#define SRST_DDRGRF_p		28
--#define SRST_AXI_SPLIT_A	29
--#define SRST_AXI_CMD_A		30
--#define SRST_AXI_CMD_P		31
--
--#define SRST_DDRPHY		32
--#define SRST_DDRPHYDIV		33
--#define SRST_DDRPHY_P		34
--#define SRST_VPU_A		36
--#define SRST_VPU_NIU_A		37
--#define SRST_VPU_H		38
--#define SRST_VPU_NIU_H		39
--#define SRST_VI_NIU_A		40
--#define SRST_VI_NIU_H		41
--#define SRST_ISP_H		42
--#define SRST_ISP		43
--#define SRST_CIF_A		44
--#define SRST_CIF_H		45
--#define SRST_CIF_PCLKIN		46
--#define SRST_MIPICSIPHY_P	47
--
--#define SRST_VO_NIU_A		48
--#define SRST_VO_NIU_H		49
--#define SRST_VO_NIU_P		50
--#define SRST_VOPB_A		51
--#define SRST_VOPB_H		52
--#define SRST_VOPB		53
--#define SRST_PWM_VOPB		54
--#define SRST_VOPL_A		55
--#define SRST_VOPL_H		56
--#define SRST_VOPL		57
--#define SRST_RGA_A		58
--#define SRST_RGA_H		59
--#define SRST_RGA		60
--#define SRST_MIPIDSI_HOST_P	61
--#define SRST_MIPIDSIPHY_P	62
--#define SRST_VPU_CORE		63
--
--#define SRST_PERI_NIU_A		64
--#define SRST_USB_NIU_H		65
--#define SRST_USB2OTG_H		66
--#define SRST_USB2OTG		67
--#define SRST_USB2OTG_ADP	68
--#define SRST_USB2HOST_H		69
--#define SRST_USB2HOST_ARB_H	70
--#define SRST_USB2HOST_AUX_H	71
--#define SRST_USB2HOST_EHCI	72
--#define SRST_USB2HOST		73
--#define SRST_USBPHYPOR		74
--#define SRST_USBPHY_OTG_PORT	75
--#define SRST_USBPHY_HOST_PORT	76
--#define SRST_USBPHY_GRF		77
--#define SRST_CPU_BOOST_P	78
--#define SRST_CPU_BOOST		79
--
--#define SRST_MMC_NAND_NIU_H	80
--#define SRST_SDIO_H		81
--#define SRST_EMMC_H		82
--#define SRST_SFC_H		83
--#define SRST_SFC		84
--#define SRST_SDCARD_NIU_H	85
--#define SRST_SDMMC_H		86
--#define SRST_NANDC_H		89
--#define SRST_NANDC		90
--#define SRST_GMAC_NIU_A		92
--#define SRST_GMAC_NIU_P		93
--#define SRST_GMAC_A		94
--
--#define SRST_PMU_NIU_P		96
--#define SRST_PMU_SGRF_P		97
--#define SRST_PMU_GRF_P		98
--#define SRST_PMU		99
--#define SRST_PMU_MEM_P		100
--#define SRST_PMU_GPIO0_P	101
--#define SRST_PMU_UART0_P	102
--#define SRST_PMU_CRU_P		103
--#define SRST_PMU_PVTM		104
--#define SRST_PMU_UART		105
--#define SRST_PMU_NIU_H		106
--#define SRST_PMU_DDR_FAIL_SAVE	107
--#define SRST_PMU_CORE_PERF_A	108
--#define SRST_PMU_CORE_GRF_P	109
--#define SRST_PMU_GPU_PERF_A	110
--#define SRST_PMU_GPU_GRF_P	111
--
--#define SRST_CRYPTO_NIU_A	112
--#define SRST_CRYPTO_NIU_H	113
--#define SRST_CRYPTO_A		114
--#define SRST_CRYPTO_H		115
--#define SRST_CRYPTO		116
--#define SRST_CRYPTO_APK		117
--#define SRST_BUS_NIU_H		120
--#define SRST_USB_NIU_P		121
--#define SRST_BUS_TOP_NIU_P	122
--#define SRST_INTMEM_A		123
--#define SRST_GIC_A		124
--#define SRST_ROM_H		126
--#define SRST_DCF_A		127
--
--#define SRST_DCF_P		128
--#define SRST_PDM_H		129
--#define SRST_PDM		130
--#define SRST_I2S0_H		131
--#define SRST_I2S0_TX		132
--#define SRST_I2S1_H		133
--#define SRST_I2S1		134
--#define SRST_I2S2_H		135
--#define SRST_I2S2		136
--#define SRST_UART1_P		137
--#define SRST_UART1		138
--#define SRST_UART2_P		139
--#define SRST_UART2		140
--#define SRST_UART3_P		141
--#define SRST_UART3		142
--#define SRST_UART4_P		143
--
--#define SRST_UART4		144
--#define SRST_UART5_P		145
--#define SRST_UART5		146
--#define SRST_I2C0_P		147
--#define SRST_I2C0		148
--#define SRST_I2C1_P		149
--#define SRST_I2C1		150
--#define SRST_I2C2_P		151
--#define SRST_I2C2		152
--#define SRST_I2C3_P		153
--#define SRST_I2C3		154
--#define SRST_PWM0_P		157
--#define SRST_PWM0		158
--#define SRST_PWM1_P		159
--
--#define SRST_PWM1		160
--#define SRST_SPI0_P		161
--#define SRST_SPI0		162
--#define SRST_SPI1_P		163
--#define SRST_SPI1		164
--#define SRST_SARADC_P		165
--#define SRST_SARADC		166
--#define SRST_TSADC_P		167
--#define SRST_TSADC		168
--#define SRST_TIMER_P		169
--#define SRST_TIMER0		170
--#define SRST_TIMER1		171
--#define SRST_TIMER2		172
--#define SRST_TIMER3		173
--#define SRST_TIMER4		174
--#define SRST_TIMER5		175
--
--#define SRST_OTP_NS_P		176
--#define SRST_OTP_NS_SBPI	177
--#define SRST_OTP_NS_USR		178
--#define SRST_OTP_PHY_P		179
--#define SRST_OTP_PHY		180
--#define SRST_WDT_NS_P		181
--#define SRST_GPIO1_P		182
--#define SRST_GPIO2_P		183
--#define SRST_GPIO3_P		184
--#define SRST_SGRF_P		185
--#define SRST_GRF_P		186
--#define SRST_I2S0_RX		191
+-/* VD_PMU */
+-#define PX30_PD_PMU		15
 -
 -#endif
-diff --git a/include/dt-bindings/clock/rk3036-cru.h b/include/dt-bindings/clock/rk3036-cru.h
+diff --git a/include/dt-bindings/power/rk3066-power.h b/include/dt-bindings/power/rk3066-power.h
 deleted file mode 100644
-index 2c0552d1a936..000000000000
---- a/include/dt-bindings/clock/rk3036-cru.h
+index acf9f310ac53..000000000000
+--- a/include/dt-bindings/power/rk3066-power.h
 +++ /dev/null
-@@ -1,185 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (c) 2014 MundoReader S.L.
-- * Author: Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3036_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3036_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_GPLL		3
--#define ARMCLK			4
--
--/* sclk gates (special clocks) */
--#define SCLK_GPU		64
--#define SCLK_SPI		65
--#define SCLK_SDMMC		68
--#define SCLK_SDIO		69
--#define SCLK_EMMC		71
--#define SCLK_NANDC		76
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_I2S		82
--#define SCLK_SPDIF		83
--#define SCLK_TIMER0		85
--#define SCLK_TIMER1		86
--#define SCLK_TIMER2		87
--#define SCLK_TIMER3		88
--#define SCLK_OTGPHY0		93
--#define SCLK_LCDC		100
--#define SCLK_HDMI		109
--#define SCLK_HEVC		111
--#define SCLK_I2S_OUT		113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO_DRV		115
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO_SAMPLE	119
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_PVTM_CORE          123
--#define SCLK_PVTM_GPU           124
--#define SCLK_PVTM_VIDEO         125
--#define SCLK_MAC		151
--#define SCLK_MACREF		152
--#define SCLK_SFC		160
--
--#define DCLK_LCDC		190
--
--/* aclk gates */
--#define ACLK_DMAC2		194
--#define ACLK_LCDC		197
--#define ACLK_VIO		203
--#define ACLK_VCODEC		208
--#define ACLK_CPU		209
--#define ACLK_PERI		210
--
--/* pclk gates */
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GRF		329
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_SPI		338
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_PWM		350
--#define PCLK_TIMER		353
--#define PCLK_HDMI		360
--#define PCLK_CPU		362
--#define PCLK_PERI		363
--#define PCLK_DDRUPCTL		364
--#define PCLK_WDT		368
--
--/* hclk gates */
--#define HCLK_OTG0		449
--#define HCLK_OTG1		450
--#define HCLK_NANDC		453
--#define HCLK_SDMMC		456
--#define HCLK_SDIO		457
--#define HCLK_EMMC		459
--#define HCLK_I2S		462
--#define HCLK_LCDC		465
--#define HCLK_ROM		467
--#define HCLK_VIO_BUS		472
--#define HCLK_VCODEC		476
--#define HCLK_CPU		477
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0		0
--#define SRST_CORE1		1
--#define SRST_CORE0_DBG		4
--#define SRST_CORE1_DBG		5
--#define SRST_CORE0_POR		8
--#define SRST_CORE1_POR		9
--#define SRST_L2C		12
--#define SRST_TOPDBG		13
--#define SRST_STRC_SYS_A		14
--#define SRST_PD_CORE_NIU	15
--
--#define SRST_TIMER2		16
--#define SRST_CPUSYS_H		17
--#define SRST_AHB2APB_H		19
--#define SRST_TIMER3		20
--#define SRST_INTMEM		21
--#define SRST_ROM		22
--#define SRST_PERI_NIU		23
--#define SRST_I2S		24
--#define SRST_DDR_PLL		25
--#define SRST_GPU_DLL		26
--#define SRST_TIMER0		27
--#define SRST_TIMER1		28
--#define SRST_CORE_DLL		29
--#define SRST_EFUSE_P		30
--#define SRST_ACODEC_P		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_UART0		39
--#define SRST_UART1		40
--#define SRST_UART2		41
--#define SRST_I2C0		43
--#define SRST_I2C1		44
--#define SRST_I2C2		45
--#define SRST_SFC		47
--
--#define SRST_PWM0		48
--#define SRST_DAP		51
--#define SRST_DAP_SYS		52
--#define SRST_GRF		55
--#define SRST_PERIPHSYS_A	57
--#define SRST_PERIPHSYS_H	58
--#define SRST_PERIPHSYS_P	59
--#define SRST_CPU_PERI		61
--#define SRST_EMEM_PERI		62
--#define SRST_USB_PERI		63
--
--#define SRST_DMA2		64
--#define SRST_MAC		66
--#define SRST_NANDC		68
--#define SRST_USBOTG0		69
--#define SRST_OTGC0		71
--#define SRST_USBOTG1		72
--#define SRST_OTGC1		74
--#define SRST_DDRMSCH		79
--
--#define SRST_MMC0		81
--#define SRST_SDIO		82
--#define SRST_EMMC		83
--#define SRST_SPI0		84
--#define SRST_WDT		86
--#define SRST_DDRPHY		88
--#define SRST_DDRPHY_P		89
--#define SRST_DDRCTRL		90
--#define SRST_DDRCTRL_P		91
--
--#define SRST_HDMI_P		96
--#define SRST_VIO_BUS_H		99
--#define SRST_UTMI0		103
--#define SRST_UTMI1		104
--#define SRST_USBPOR		105
--
--#define SRST_VCODEC_A		112
--#define SRST_VCODEC_H		113
--#define SRST_VIO1_A		114
--#define SRST_HEVC		115
--#define SRST_VCODEC_NIU_A	116
--#define SRST_LCDC1_A		117
--#define SRST_LCDC1_H		118
--#define SRST_LCDC1_D		119
--#define SRST_GPU		120
--#define SRST_GPU_NIU_A		122
--
--#define SRST_DBG_P		131
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3066a-cru.h b/include/dt-bindings/clock/rk3066a-cru.h
-deleted file mode 100644
-index 014eec586689..000000000000
---- a/include/dt-bindings/clock/rk3066a-cru.h
-+++ /dev/null
-@@ -1,31 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (c) 2014 MundoReader S.L.
-- * Author: Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3066A_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3066A_H
--
--#include <dt-bindings/clock/rk3188-cru-common.h>
--
--/* soft-reset indices */
--#define SRST_SRST1		0
--#define SRST_SRST2		1
--
--#define SRST_L2MEM		18
--#define SRST_I2S0		23
--#define SRST_I2S1		24
--#define SRST_I2S2		25
--#define SRST_TIMER2		29
--
--#define SRST_GPIO4		36
--#define SRST_GPIO6		38
--
--#define SRST_TSADC		92
--
--#define SRST_HDMI		96
--#define SRST_HDMI_APB		97
--#define SRST_CIF1		111
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3128-cru.h b/include/dt-bindings/clock/rk3128-cru.h
-deleted file mode 100644
-index 6a47825dac5d..000000000000
---- a/include/dt-bindings/clock/rk3128-cru.h
-+++ /dev/null
-@@ -1,273 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2017 Rockchip Electronics Co. Ltd.
-- * Author: Elaine <zhangqing@rock-chips.com>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3128_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3128_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define ARMCLK			5
--#define PLL_GPLL_DIV2		6
--#define PLL_GPLL_DIV3		7
--
--/* sclk gates (special clocks) */
--#define SCLK_SPI0		65
--#define SCLK_NANDC		67
--#define SCLK_SDMMC		68
--#define SCLK_SDIO		69
--#define SCLK_EMMC		71
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_I2S0		80
--#define SCLK_I2S1		81
--#define SCLK_SPDIF		83
--#define SCLK_TIMER0		85
--#define SCLK_TIMER1		86
--#define SCLK_TIMER2		87
--#define SCLK_TIMER3		88
--#define SCLK_TIMER4		89
--#define SCLK_TIMER5		90
--#define SCLK_SARADC		91
--#define SCLK_I2S_OUT		113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO_DRV		115
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO_SAMPLE	119
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_VOP		122
--#define SCLK_MAC_SRC		124
--#define SCLK_MAC		126
--#define SCLK_MAC_REFOUT		127
--#define SCLK_MAC_REF		128
--#define SCLK_MAC_RX		129
--#define SCLK_MAC_TX		130
--#define SCLK_HEVC_CORE		134
--#define SCLK_RGA		135
--#define SCLK_CRYPTO		138
--#define SCLK_TSP		139
--#define SCLK_OTGPHY0		142
--#define SCLK_OTGPHY1		143
--#define SCLK_DDRC		144
--#define SCLK_PVTM_FUNC		145
--#define SCLK_PVTM_CORE		146
--#define SCLK_PVTM_GPU		147
--#define SCLK_MIPI_24M		148
--#define SCLK_PVTM		149
--#define SCLK_CIF_SRC		150
--#define SCLK_CIF_OUT_SRC	151
--#define SCLK_CIF_OUT		152
--#define SCLK_SFC		153
--#define SCLK_USB480M		154
--
--/* dclk gates */
--#define DCLK_VOP		190
--#define DCLK_EBC		191
--
--/* aclk gates */
--#define ACLK_VIO0		192
--#define ACLK_VIO1		193
--#define ACLK_DMAC		194
--#define ACLK_CPU		195
--#define ACLK_VEPU		196
--#define ACLK_VDPU		197
--#define ACLK_CIF		198
--#define ACLK_IEP		199
--#define ACLK_LCDC0		204
--#define ACLK_RGA		205
--#define ACLK_PERI		210
--#define ACLK_VOP		211
--#define ACLK_GMAC		212
--#define ACLK_GPU		213
--
--/* pclk gates */
--#define PCLK_SARADC		318
--#define PCLK_WDT		319
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GPIO3		323
--#define PCLK_VIO_H2P		324
--#define PCLK_MIPI		325
--#define PCLK_EFUSE		326
--#define PCLK_HDMI		327
--#define PCLK_ACODEC		328
--#define PCLK_GRF		329
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_I2C3		335
--#define PCLK_SPI0		338
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_TSADC		344
--#define PCLK_PWM		350
--#define PCLK_TIMER		353
--#define PCLK_CPU		354
--#define PCLK_PERI		363
--#define PCLK_GMAC		367
--#define PCLK_PMU_PRE		368
--#define PCLK_SIM_CARD		369
--
--/* hclk gates */
--#define HCLK_SPDIF		440
--#define HCLK_GPS		441
--#define HCLK_USBHOST		442
--#define HCLK_I2S_8CH		443
--#define HCLK_I2S_2CH		444
--#define HCLK_VOP		452
--#define HCLK_NANDC		453
--#define HCLK_SDMMC		456
--#define HCLK_SDIO		457
--#define HCLK_EMMC		459
--#define HCLK_CPU		460
--#define HCLK_VEPU		461
--#define HCLK_VDPU		462
--#define HCLK_LCDC0		463
--#define HCLK_EBC		465
--#define HCLK_VIO		466
--#define HCLK_RGA		467
--#define HCLK_IEP		468
--#define HCLK_VIO_H2P		469
--#define HCLK_CIF		470
--#define HCLK_HOST2		473
--#define HCLK_OTG		474
--#define HCLK_TSP		475
--#define HCLK_CRYPTO		476
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_ACLK_CORE		13
--#define SRST_STRC_SYS_A		14
--#define SRST_L2C		15
--
--#define SRST_CPUSYS_H		18
--#define SRST_AHB2APBSYS_H	19
--#define SRST_SPDIF		20
--#define SRST_INTMEM		21
--#define SRST_ROM		22
--#define SRST_PERI_NIU		23
--#define SRST_I2S_2CH		24
--#define SRST_I2S_8CH		25
--#define SRST_GPU_PVTM		26
--#define SRST_FUNC_PVTM		27
--#define SRST_CORE_PVTM		29
--#define SRST_EFUSE_P		30
--#define SRST_ACODEC_P		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--#define SRST_MIPIPHY_P		36
--#define SRST_UART0		39
--#define SRST_UART1		40
--#define SRST_UART2		41
--#define SRST_I2C0		43
--#define SRST_I2C1		44
--#define SRST_I2C2		45
--#define SRST_I2C3		46
--#define SRST_SFC		47
--
--#define SRST_PWM		48
--#define SRST_DAP_PO		50
--#define SRST_DAP		51
--#define SRST_DAP_SYS		52
--#define SRST_CRYPTO		53
--#define SRST_GRF		55
--#define SRST_GMAC		56
--#define SRST_PERIPH_SYS_A	57
--#define SRST_PERIPH_SYS_H	58
--#define SRST_PERIPH_SYS_P       59
--#define SRST_SMART_CARD		60
--#define SRST_CPU_PERI		61
--#define SRST_EMEM_PERI		62
--#define SRST_USB_PERI		63
--
--#define SRST_DMA		64
--#define SRST_GPS		67
--#define SRST_NANDC		68
--#define SRST_USBOTG0		69
--#define SRST_OTGC0		71
--#define SRST_USBOTG1		72
--#define SRST_OTGC1		74
--#define SRST_DDRMSCH		79
--
--#define SRST_SDMMC		81
--#define SRST_SDIO		82
--#define SRST_EMMC		83
--#define SRST_SPI		84
--#define SRST_WDT		86
--#define SRST_SARADC		87
--#define SRST_DDRPHY		88
--#define SRST_DDRPHY_P		89
--#define SRST_DDRCTRL		90
--#define SRST_DDRCTRL_P		91
--#define SRST_TSP		92
--#define SRST_TSP_CLKIN		93
--#define SRST_HOST0_ECHI		94
--
--#define SRST_HDMI_P		96
--#define SRST_VIO_ARBI_H		97
--#define SRST_VIO0_A		98
--#define SRST_VIO_BUS_H		99
--#define SRST_VOP_A		100
--#define SRST_VOP_H		101
--#define SRST_VOP_D		102
--#define SRST_UTMI0		103
--#define SRST_UTMI1		104
--#define SRST_USBPOR		105
--#define SRST_IEP_A		106
--#define SRST_IEP_H		107
--#define SRST_RGA_A		108
--#define SRST_RGA_H		109
--#define SRST_CIF0		110
--#define SRST_PMU		111
--
--#define SRST_VCODEC_A		112
--#define SRST_VCODEC_H		113
--#define SRST_VIO1_A		114
--#define SRST_HEVC_CORE		115
--#define SRST_VCODEC_NIU_A	116
--#define SRST_PMU_NIU_P		117
--#define SRST_LCDC0_S		119
--#define SRST_GPU		120
--#define SRST_GPU_NIU_A		122
--#define SRST_EBC_A		123
--#define SRST_EBC_H		124
--
--#define SRST_CORE_DBG		128
--#define SRST_DBG_P		129
--#define SRST_TIMER0		130
--#define SRST_TIMER1		131
--#define SRST_TIMER2		132
--#define SRST_TIMER3		133
--#define SRST_TIMER4		134
--#define SRST_TIMER5		135
--#define SRST_VIO_H2P		136
--#define SRST_VIO_MIPI_DSI	137
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3188-cru-common.h b/include/dt-bindings/clock/rk3188-cru-common.h
-deleted file mode 100644
-index afad90680fce..000000000000
---- a/include/dt-bindings/clock/rk3188-cru-common.h
-+++ /dev/null
-@@ -1,261 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2014 MundoReader S.L.
-- * Author: Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
--
--/* core clocks from */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define CORE_PERI		5
--#define CORE_L2C		6
--#define ARMCLK			7
--
--/* sclk gates (special clocks) */
--#define SCLK_UART0		64
--#define SCLK_UART1		65
--#define SCLK_UART2		66
--#define SCLK_UART3		67
--#define SCLK_MAC		68
--#define SCLK_SPI0		69
--#define SCLK_SPI1		70
--#define SCLK_SARADC		71
--#define SCLK_SDMMC		72
--#define SCLK_SDIO		73
--#define SCLK_EMMC		74
--#define SCLK_I2S0		75
--#define SCLK_I2S1		76
--#define SCLK_I2S2		77
--#define SCLK_SPDIF		78
--#define SCLK_CIF0		79
--#define SCLK_CIF1		80
--#define SCLK_OTGPHY0		81
--#define SCLK_OTGPHY1		82
--#define SCLK_HSADC		83
--#define SCLK_TIMER0		84
--#define SCLK_TIMER1		85
--#define SCLK_TIMER2		86
--#define SCLK_TIMER3		87
--#define SCLK_TIMER4		88
--#define SCLK_TIMER5		89
--#define SCLK_TIMER6		90
--#define SCLK_JTAG		91
--#define SCLK_SMC		92
--#define SCLK_TSADC		93
--
--#define DCLK_LCDC0		190
--#define DCLK_LCDC1		191
--
--/* aclk gates */
--#define ACLK_DMA1		192
--#define ACLK_DMA2		193
--#define ACLK_GPS		194
--#define ACLK_LCDC0		195
--#define ACLK_LCDC1		196
--#define ACLK_GPU		197
--#define ACLK_SMC		198
--#define ACLK_CIF1		199
--#define ACLK_IPP		200
--#define ACLK_RGA		201
--#define ACLK_CIF0		202
--#define ACLK_CPU		203
--#define ACLK_PERI		204
--#define ACLK_VEPU		205
--#define ACLK_VDPU		206
--
--/* pclk gates */
--#define PCLK_GRF		320
--#define PCLK_PMU		321
--#define PCLK_TIMER0		322
--#define PCLK_TIMER1		323
--#define PCLK_TIMER2		324
--#define PCLK_TIMER3		325
--#define PCLK_PWM01		326
--#define PCLK_PWM23		327
--#define PCLK_SPI0		328
--#define PCLK_SPI1		329
--#define PCLK_SARADC		330
--#define PCLK_WDT		331
--#define PCLK_UART0		332
--#define PCLK_UART1		333
--#define PCLK_UART2		334
--#define PCLK_UART3		335
--#define PCLK_I2C0		336
--#define PCLK_I2C1		337
--#define PCLK_I2C2		338
--#define PCLK_I2C3		339
--#define PCLK_I2C4		340
--#define PCLK_GPIO0		341
--#define PCLK_GPIO1		342
--#define PCLK_GPIO2		343
--#define PCLK_GPIO3		344
--#define PCLK_GPIO4		345
--#define PCLK_GPIO6		346
--#define PCLK_EFUSE		347
--#define PCLK_TZPC		348
--#define PCLK_TSADC		349
--#define PCLK_CPU		350
--#define PCLK_PERI		351
--#define PCLK_DDRUPCTL		352
--#define PCLK_PUBL		353
--
--/* hclk gates */
--#define HCLK_SDMMC		448
--#define HCLK_SDIO		449
--#define HCLK_EMMC		450
--#define HCLK_OTG0		451
--#define HCLK_EMAC		452
--#define HCLK_SPDIF		453
--#define HCLK_I2S0		454
--#define HCLK_I2S1		455
--#define HCLK_I2S2		456
--#define HCLK_OTG1		457
--#define HCLK_HSIC		458
--#define HCLK_HSADC		459
--#define HCLK_PIDF		460
--#define HCLK_LCDC0		461
--#define HCLK_LCDC1		462
--#define HCLK_ROM		463
--#define HCLK_CIF0		464
--#define HCLK_IPP		465
--#define HCLK_RGA		466
--#define HCLK_NANDC0		467
--#define HCLK_CPU		468
--#define HCLK_PERI		469
--#define HCLK_CIF1		470
--#define HCLK_VEPU		471
--#define HCLK_VDPU		472
--#define HCLK_HDMI		473
--
--#define CLK_NR_CLKS		(HCLK_HDMI + 1)
--
--/* soft-reset indices */
--#define SRST_MCORE		2
--#define SRST_CORE0		3
--#define SRST_CORE1		4
--#define SRST_MCORE_DBG		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE0_WDT		12
--#define SRST_CORE1_WDT		13
--#define SRST_STRC_SYS		14
--#define SRST_L2C		15
--
--#define SRST_CPU_AHB		17
--#define SRST_AHB2APB		19
--#define SRST_DMA1		20
--#define SRST_INTMEM		21
--#define SRST_ROM		22
--#define SRST_SPDIF		26
--#define SRST_TIMER0		27
--#define SRST_TIMER1		28
--#define SRST_EFUSE		30
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--
--#define SRST_UART0		39
--#define SRST_UART1		40
--#define SRST_UART2		41
--#define SRST_UART3		42
--#define SRST_I2C0		43
--#define SRST_I2C1		44
--#define SRST_I2C2		45
--#define SRST_I2C3		46
--#define SRST_I2C4		47
--
--#define SRST_PWM0		48
--#define SRST_PWM1		49
--#define SRST_DAP_PO		50
--#define SRST_DAP		51
--#define SRST_DAP_SYS		52
--#define SRST_TPIU_ATB		53
--#define SRST_PMU_APB		54
--#define SRST_GRF		55
--#define SRST_PMU		56
--#define SRST_PERI_AXI		57
--#define SRST_PERI_AHB		58
--#define SRST_PERI_APB		59
--#define SRST_PERI_NIU		60
--#define SRST_CPU_PERI		61
--#define SRST_EMEM_PERI		62
--#define SRST_USB_PERI		63
--
--#define SRST_DMA2		64
--#define SRST_SMC		65
--#define SRST_MAC		66
--#define SRST_NANC0		68
--#define SRST_USBOTG0		69
--#define SRST_USBPHY0		70
--#define SRST_OTGC0		71
--#define SRST_USBOTG1		72
--#define SRST_USBPHY1		73
--#define SRST_OTGC1		74
--#define SRST_HSADC		76
--#define SRST_PIDFILTER		77
--#define SRST_DDR_MSCH		79
--
--#define SRST_TZPC		80
--#define SRST_SDMMC		81
--#define SRST_SDIO		82
--#define SRST_EMMC		83
--#define SRST_SPI0		84
--#define SRST_SPI1		85
--#define SRST_WDT		86
--#define SRST_SARADC		87
--#define SRST_DDRPHY		88
--#define SRST_DDRPHY_APB		89
--#define SRST_DDRCTL		90
--#define SRST_DDRCTL_APB		91
--#define SRST_DDRPUB		93
--
--#define SRST_VIO0_AXI		98
--#define SRST_VIO0_AHB		99
--#define SRST_LCDC0_AXI		100
--#define SRST_LCDC0_AHB		101
--#define SRST_LCDC0_DCLK		102
--#define SRST_LCDC1_AXI		103
--#define SRST_LCDC1_AHB		104
--#define SRST_LCDC1_DCLK		105
--#define SRST_IPP_AXI		106
--#define SRST_IPP_AHB		107
--#define SRST_RGA_AXI		108
--#define SRST_RGA_AHB		109
--#define SRST_CIF0		110
--
--#define SRST_VCODEC_AXI		112
--#define SRST_VCODEC_AHB		113
--#define SRST_VIO1_AXI		114
--#define SRST_VCODEC_CPU		115
--#define SRST_VCODEC_NIU		116
--#define SRST_GPU		120
--#define SRST_GPU_NIU		122
--#define SRST_TFUN_ATB		125
--#define SRST_TFUN_APB		126
--#define SRST_CTI4_APB		127
--
--#define SRST_TPIU_APB		128
--#define SRST_TRACE		129
--#define SRST_CORE_DBG		130
--#define SRST_DBG_APB		131
--#define SRST_CTI0		132
--#define SRST_CTI0_APB		133
--#define SRST_CTI1		134
--#define SRST_CTI1_APB		135
--#define SRST_PTM_CORE0		136
--#define SRST_PTM_CORE1		137
--#define SRST_PTM0		138
--#define SRST_PTM0_ATB		139
--#define SRST_PTM1		140
--#define SRST_PTM1_ATB		141
--#define SRST_CTM		142
--#define SRST_TS			143
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3188-cru.h b/include/dt-bindings/clock/rk3188-cru.h
-deleted file mode 100644
-index 1da306e1788c..000000000000
---- a/include/dt-bindings/clock/rk3188-cru.h
-+++ /dev/null
-@@ -1,47 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (c) 2014 MundoReader S.L.
-- * Author: Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3188_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3188_H
--
--#include <dt-bindings/clock/rk3188-cru-common.h>
--
--/* soft-reset indices */
--#define SRST_PTM_CORE2		0
--#define SRST_PTM_CORE3		1
--#define SRST_CORE2		5
--#define SRST_CORE3		6
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--
--#define SRST_TIMER2		16
--#define SRST_TIMER4		23
--#define SRST_I2S0		24
--#define SRST_TIMER5		25
--#define SRST_TIMER3		29
--#define SRST_TIMER6		31
--
--#define SRST_PTM3		36
--#define SRST_PTM3_ATB		37
--
--#define SRST_GPS		67
--#define SRST_HSICPHY		75
--#define SRST_TIMER		78
--
--#define SRST_PTM2		92
--#define SRST_CORE2_WDT		94
--#define SRST_CORE3_WDT		95
--
--#define SRST_PTM2_ATB		111
--
--#define SRST_HSIC		117
--#define SRST_CTI2		118
--#define SRST_CTI2_APB		119
--#define SRST_GPU_BRIDGE		121
--#define SRST_CTI3		123
--#define SRST_CTI3_APB		124
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3228-cru.h b/include/dt-bindings/clock/rk3228-cru.h
-deleted file mode 100644
-index de550ea56eeb..000000000000
---- a/include/dt-bindings/clock/rk3228-cru.h
-+++ /dev/null
-@@ -1,287 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2015 Rockchip Electronics Co. Ltd.
-- * Author: Jeffy Chen <jeffy.chen@rock-chips.com>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3228_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3228_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define ARMCLK			5
--
--/* sclk gates (special clocks) */
--#define SCLK_SPI0		65
--#define SCLK_NANDC		67
--#define SCLK_SDMMC		68
--#define SCLK_SDIO		69
--#define SCLK_EMMC		71
--#define SCLK_TSADC		72
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_I2S0		80
--#define SCLK_I2S1		81
--#define SCLK_I2S2		82
--#define SCLK_SPDIF		83
--#define SCLK_TIMER0		85
--#define SCLK_TIMER1		86
--#define SCLK_TIMER2		87
--#define SCLK_TIMER3		88
--#define SCLK_TIMER4		89
--#define SCLK_TIMER5		90
--#define SCLK_I2S_OUT		113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO_DRV		115
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO_SAMPLE	119
--#define SCLK_SDIO_SRC		120
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_VOP		122
--#define SCLK_HDMI_HDCP		123
--#define SCLK_MAC_SRC		124
--#define SCLK_MAC_EXTCLK		125
--#define SCLK_MAC		126
--#define SCLK_MAC_REFOUT		127
--#define SCLK_MAC_REF		128
--#define SCLK_MAC_RX		129
--#define SCLK_MAC_TX		130
--#define SCLK_MAC_PHY		131
--#define SCLK_MAC_OUT		132
--#define SCLK_VDEC_CABAC		133
--#define SCLK_VDEC_CORE		134
--#define SCLK_RGA		135
--#define SCLK_HDCP		136
--#define SCLK_HDMI_CEC		137
--#define SCLK_CRYPTO		138
--#define SCLK_TSP		139
--#define SCLK_HSADC		140
--#define SCLK_WIFI		141
--#define SCLK_OTGPHY0		142
--#define SCLK_OTGPHY1		143
--#define SCLK_HDMI_PHY		144
--
--/* dclk gates */
--#define DCLK_VOP		190
--#define DCLK_HDMI_PHY		191
--
--/* aclk gates */
--#define ACLK_DMAC		194
--#define ACLK_CPU		195
--#define ACLK_VPU_PRE		196
--#define ACLK_RKVDEC_PRE		197
--#define ACLK_RGA_PRE		198
--#define ACLK_IEP_PRE		199
--#define ACLK_HDCP_PRE		200
--#define ACLK_VOP_PRE		201
--#define ACLK_VPU		202
--#define ACLK_RKVDEC		203
--#define ACLK_IEP		204
--#define ACLK_RGA		205
--#define ACLK_HDCP		206
--#define ACLK_PERI		210
--#define ACLK_VOP		211
--#define ACLK_GMAC		212
--#define ACLK_GPU		213
--
--/* pclk gates */
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GPIO3		323
--#define PCLK_VIO_H2P		324
--#define PCLK_HDCP		325
--#define PCLK_EFUSE_1024		326
--#define PCLK_EFUSE_256		327
--#define PCLK_GRF		329
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_I2C3		335
--#define PCLK_SPI0		338
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_TSADC		344
--#define PCLK_PWM		350
--#define PCLK_TIMER		353
--#define PCLK_CPU		354
--#define PCLK_PERI		363
--#define PCLK_HDMI_CTRL		364
--#define PCLK_HDMI_PHY		365
--#define PCLK_GMAC		367
--
--/* hclk gates */
--#define HCLK_I2S0_8CH		442
--#define HCLK_I2S1_8CH		443
--#define HCLK_I2S2_2CH		444
--#define HCLK_SPDIF_8CH		445
--#define HCLK_VOP		452
--#define HCLK_NANDC		453
--#define HCLK_SDMMC		456
--#define HCLK_SDIO		457
--#define HCLK_EMMC		459
--#define HCLK_CPU		460
--#define HCLK_VPU_PRE		461
--#define HCLK_RKVDEC_PRE		462
--#define HCLK_VIO_PRE		463
--#define HCLK_VPU		464
--#define HCLK_RKVDEC		465
--#define HCLK_VIO		466
--#define HCLK_RGA		467
--#define HCLK_IEP		468
--#define HCLK_VIO_H2P		469
--#define HCLK_HDCP_MMU		470
--#define HCLK_HOST0		471
--#define HCLK_HOST1		472
--#define HCLK_HOST2		473
--#define HCLK_OTG		474
--#define HCLK_TSP		475
--#define HCLK_M_CRYPTO		476
--#define HCLK_S_CRYPTO		477
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_ACLK_CORE		13
--#define SRST_NOC		14
--#define SRST_L2C		15
--
--#define SRST_CPUSYS_H		18
--#define SRST_BUSSYS_H		19
--#define SRST_SPDIF		20
--#define SRST_INTMEM		21
--#define SRST_ROM		22
--#define SRST_OTG_ADP		23
--#define SRST_I2S0		24
--#define SRST_I2S1		25
--#define SRST_I2S2		26
--#define SRST_ACODEC_P		27
--#define SRST_DFIMON		28
--#define SRST_MSCH		29
--#define SRST_EFUSE1024		30
--#define SRST_EFUSE256		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--#define SRST_PERIPH_NOC_A	36
--#define SRST_PERIPH_NOC_BUS_H	37
--#define SRST_PERIPH_NOC_P	38
--#define SRST_UART0		39
--#define SRST_UART1		40
--#define SRST_UART2		41
--#define SRST_PHYNOC		42
--#define SRST_I2C0		43
--#define SRST_I2C1		44
--#define SRST_I2C2		45
--#define SRST_I2C3		46
--
--#define SRST_PWM		48
--#define SRST_A53_GIC		49
--#define SRST_DAP		51
--#define SRST_DAP_NOC		52
--#define SRST_CRYPTO		53
--#define SRST_SGRF		54
--#define SRST_GRF		55
--#define SRST_GMAC		56
--#define SRST_PERIPH_NOC_H	58
--#define SRST_MACPHY		63
--
--#define SRST_DMA		64
--#define SRST_NANDC		68
--#define SRST_USBOTG		69
--#define SRST_OTGC		70
--#define SRST_USBHOST0		71
--#define SRST_HOST_CTRL0		72
--#define SRST_USBHOST1		73
--#define SRST_HOST_CTRL1		74
--#define SRST_USBHOST2		75
--#define SRST_HOST_CTRL2		76
--#define SRST_USBPOR0		77
--#define SRST_USBPOR1		78
--#define SRST_DDRMSCH		79
--
--#define SRST_SMART_CARD		80
--#define SRST_SDMMC		81
--#define SRST_SDIO		82
--#define SRST_EMMC		83
--#define SRST_SPI		84
--#define SRST_TSP_H		85
--#define SRST_TSP		86
--#define SRST_TSADC		87
--#define SRST_DDRPHY		88
--#define SRST_DDRPHY_P		89
--#define SRST_DDRCTRL		90
--#define SRST_DDRCTRL_P		91
--#define SRST_HOST0_ECHI		92
--#define SRST_HOST1_ECHI		93
--#define SRST_HOST2_ECHI		94
--#define SRST_VOP_NOC_A		95
--
--#define SRST_HDMI_P		96
--#define SRST_VIO_ARBI_H		97
--#define SRST_IEP_NOC_A		98
--#define SRST_VIO_NOC_H		99
--#define SRST_VOP_A		100
--#define SRST_VOP_H		101
--#define SRST_VOP_D		102
--#define SRST_UTMI0		103
--#define SRST_UTMI1		104
--#define SRST_UTMI2		105
--#define SRST_UTMI3		106
--#define SRST_RGA		107
--#define SRST_RGA_NOC_A		108
--#define SRST_RGA_A		109
--#define SRST_RGA_H		110
--#define SRST_HDCP_A		111
--
--#define SRST_VPU_A		112
--#define SRST_VPU_H		113
--#define SRST_VPU_NOC_A		116
--#define SRST_VPU_NOC_H		117
--#define SRST_RKVDEC_A		118
--#define SRST_RKVDEC_NOC_A	119
--#define SRST_RKVDEC_H		120
--#define SRST_RKVDEC_NOC_H	121
--#define SRST_RKVDEC_CORE	122
--#define SRST_RKVDEC_CABAC	123
--#define SRST_IEP_A		124
--#define SRST_IEP_H		125
--#define SRST_GPU_A		126
--#define SRST_GPU_NOC_A		127
--
--#define SRST_CORE_DBG		128
--#define SRST_DBG_P		129
--#define SRST_TIMER0		130
--#define SRST_TIMER1		131
--#define SRST_TIMER2		132
--#define SRST_TIMER3		133
--#define SRST_TIMER4		134
--#define SRST_TIMER5		135
--#define SRST_VIO_H2P		136
--#define SRST_HDMIPHY		139
--#define SRST_VDAC		140
--#define SRST_TIMER_6CH_P	141
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3288-cru.h b/include/dt-bindings/clock/rk3288-cru.h
-deleted file mode 100644
-index 453f66718c6b..000000000000
---- a/include/dt-bindings/clock/rk3288-cru.h
-+++ /dev/null
-@@ -1,381 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2014 MundoReader S.L.
-- * Author: Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3288_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3288_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define PLL_NPLL		5
--#define ARMCLK			6
--
--/* sclk gates (special clocks) */
--#define SCLK_GPU		64
--#define SCLK_SPI0		65
--#define SCLK_SPI1		66
--#define SCLK_SPI2		67
--#define SCLK_SDMMC		68
--#define SCLK_SDIO0		69
--#define SCLK_SDIO1		70
--#define SCLK_EMMC		71
--#define SCLK_TSADC		72
--#define SCLK_SARADC		73
--#define SCLK_PS2C		74
--#define SCLK_NANDC0		75
--#define SCLK_NANDC1		76
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_UART3		80
--#define SCLK_UART4		81
--#define SCLK_I2S0		82
--#define SCLK_SPDIF		83
--#define SCLK_SPDIF8CH		84
--#define SCLK_TIMER0		85
--#define SCLK_TIMER1		86
--#define SCLK_TIMER2		87
--#define SCLK_TIMER3		88
--#define SCLK_TIMER4		89
--#define SCLK_TIMER5		90
--#define SCLK_TIMER6		91
--#define SCLK_HSADC		92
--#define SCLK_OTGPHY0		93
--#define SCLK_OTGPHY1		94
--#define SCLK_OTGPHY2		95
--#define SCLK_OTG_ADP		96
--#define SCLK_HSICPHY480M	97
--#define SCLK_HSICPHY12M		98
--#define SCLK_MACREF		99
--#define SCLK_LCDC_PWM0		100
--#define SCLK_LCDC_PWM1		101
--#define SCLK_MAC_RX		102
--#define SCLK_MAC_TX		103
--#define SCLK_EDP_24M		104
--#define SCLK_EDP		105
--#define SCLK_RGA		106
--#define SCLK_ISP		107
--#define SCLK_ISP_JPE		108
--#define SCLK_HDMI_HDCP		109
--#define SCLK_HDMI_CEC		110
--#define SCLK_HEVC_CABAC		111
--#define SCLK_HEVC_CORE		112
--#define SCLK_I2S0_OUT		113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO0_DRV		115
--#define SCLK_SDIO1_DRV		116
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO0_SAMPLE	119
--#define SCLK_SDIO1_SAMPLE	120
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_USBPHY480M_SRC	122
--#define SCLK_PVTM_CORE		123
--#define SCLK_PVTM_GPU		124
--#define SCLK_CRYPTO		125
--#define SCLK_MIPIDSI_24M	126
--#define SCLK_VIP_OUT		127
--
--#define SCLK_MAC_PLL		150
--#define SCLK_MAC		151
--#define SCLK_MACREF_OUT		152
--
--#define DCLK_VOP0		190
--#define DCLK_VOP1		191
--
--/* aclk gates */
--#define ACLK_GPU		192
--#define ACLK_DMAC1		193
--#define ACLK_DMAC2		194
--#define ACLK_MMU		195
--#define ACLK_GMAC		196
--#define ACLK_VOP0		197
--#define ACLK_VOP1		198
--#define ACLK_CRYPTO		199
--#define ACLK_RGA		200
--#define ACLK_RGA_NIU		201
--#define ACLK_IEP		202
--#define ACLK_VIO0_NIU		203
--#define ACLK_VIP		204
--#define ACLK_ISP		205
--#define ACLK_VIO1_NIU		206
--#define ACLK_HEVC		207
--#define ACLK_VCODEC		208
--#define ACLK_CPU		209
--#define ACLK_PERI		210
--
--/* pclk gates */
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GPIO3		323
--#define PCLK_GPIO4		324
--#define PCLK_GPIO5		325
--#define PCLK_GPIO6		326
--#define PCLK_GPIO7		327
--#define PCLK_GPIO8		328
--#define PCLK_GRF		329
--#define PCLK_SGRF		330
--#define PCLK_PMU		331
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_I2C3		335
--#define PCLK_I2C4		336
--#define PCLK_I2C5		337
--#define PCLK_SPI0		338
--#define PCLK_SPI1		339
--#define PCLK_SPI2		340
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_UART3		344
--#define PCLK_UART4		345
--#define PCLK_TSADC		346
--#define PCLK_SARADC		347
--#define PCLK_SIM		348
--#define PCLK_GMAC		349
--#define PCLK_PWM		350
--#define PCLK_RKPWM		351
--#define PCLK_PS2C		352
--#define PCLK_TIMER		353
--#define PCLK_TZPC		354
--#define PCLK_EDP_CTRL		355
--#define PCLK_MIPI_DSI0		356
--#define PCLK_MIPI_DSI1		357
--#define PCLK_MIPI_CSI		358
--#define PCLK_LVDS_PHY		359
--#define PCLK_HDMI_CTRL		360
--#define PCLK_VIO2_H2P		361
--#define PCLK_CPU		362
--#define PCLK_PERI		363
--#define PCLK_DDRUPCTL0		364
--#define PCLK_PUBL0		365
--#define PCLK_DDRUPCTL1		366
--#define PCLK_PUBL1		367
--#define PCLK_WDT		368
--#define PCLK_EFUSE256		369
--#define PCLK_EFUSE1024		370
--#define PCLK_ISP_IN		371
--
--/* hclk gates */
--#define HCLK_GPS		448
--#define HCLK_OTG0		449
--#define HCLK_USBHOST0		450
--#define HCLK_USBHOST1		451
--#define HCLK_HSIC		452
--#define HCLK_NANDC0		453
--#define HCLK_NANDC1		454
--#define HCLK_TSP		455
--#define HCLK_SDMMC		456
--#define HCLK_SDIO0		457
--#define HCLK_SDIO1		458
--#define HCLK_EMMC		459
--#define HCLK_HSADC		460
--#define HCLK_CRYPTO		461
--#define HCLK_I2S0		462
--#define HCLK_SPDIF		463
--#define HCLK_SPDIF8CH		464
--#define HCLK_VOP0		465
--#define HCLK_VOP1		466
--#define HCLK_ROM		467
--#define HCLK_IEP		468
--#define HCLK_ISP		469
--#define HCLK_RGA		470
--#define HCLK_VIO_AHB_ARBI	471
--#define HCLK_VIO_NIU		472
--#define HCLK_VIP		473
--#define HCLK_VIO2_H2P		474
--#define HCLK_HEVC		475
--#define HCLK_VCODEC		476
--#define HCLK_CPU		477
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0		0
--#define SRST_CORE1		1
--#define SRST_CORE2		2
--#define SRST_CORE3		3
--#define SRST_CORE0_PO		4
--#define SRST_CORE1_PO		5
--#define SRST_CORE2_PO		6
--#define SRST_CORE3_PO		7
--#define SRST_PDCORE_STRSYS	8
--#define SRST_PDBUS_STRSYS	9
--#define SRST_L2C		10
--#define SRST_TOPDBG		11
--#define SRST_CORE0_DBG		12
--#define SRST_CORE1_DBG		13
--#define SRST_CORE2_DBG		14
--#define SRST_CORE3_DBG		15
--
--#define SRST_PDBUG_AHB_ARBITOR	16
--#define SRST_EFUSE256		17
--#define SRST_DMAC1		18
--#define SRST_INTMEM		19
--#define SRST_ROM		20
--#define SRST_SPDIF8CH		21
--#define SRST_TIMER		22
--#define SRST_I2S0		23
--#define SRST_SPDIF		24
--#define SRST_TIMER0		25
--#define SRST_TIMER1		26
--#define SRST_TIMER2		27
--#define SRST_TIMER3		28
--#define SRST_TIMER4		29
--#define SRST_TIMER5		30
--#define SRST_EFUSE		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--#define SRST_GPIO4		36
--#define SRST_GPIO5		37
--#define SRST_GPIO6		38
--#define SRST_GPIO7		39
--#define SRST_GPIO8		40
--#define SRST_I2C0		42
--#define SRST_I2C1		43
--#define SRST_I2C2		44
--#define SRST_I2C3		45
--#define SRST_I2C4		46
--#define SRST_I2C5		47
--
--#define SRST_DWPWM		48
--#define SRST_MMC_PERI		49
--#define SRST_PERIPH_MMU		50
--#define SRST_DAP		51
--#define SRST_DAP_SYS		52
--#define SRST_TPIU		53
--#define SRST_PMU_APB		54
--#define SRST_GRF		55
--#define SRST_PMU		56
--#define SRST_PERIPH_AXI		57
--#define SRST_PERIPH_AHB		58
--#define SRST_PERIPH_APB		59
--#define SRST_PERIPH_NIU		60
--#define SRST_PDPERI_AHB_ARBI	61
--#define SRST_EMEM		62
--#define SRST_USB_PERI		63
--
--#define SRST_DMAC2		64
--#define SRST_MAC		66
--#define SRST_GPS		67
--#define SRST_RKPWM		69
--#define SRST_CCP		71
--#define SRST_USBHOST0		72
--#define SRST_HSIC		73
--#define SRST_HSIC_AUX		74
--#define SRST_HSIC_PHY		75
--#define SRST_HSADC		76
--#define SRST_NANDC0		77
--#define SRST_NANDC1		78
--
--#define SRST_TZPC		80
--#define SRST_SPI0		83
--#define SRST_SPI1		84
--#define SRST_SPI2		85
--#define SRST_SARADC		87
--#define SRST_PDALIVE_NIU	88
--#define SRST_PDPMU_INTMEM	89
--#define SRST_PDPMU_NIU		90
--#define SRST_SGRF		91
--
--#define SRST_VIO_ARBI		96
--#define SRST_RGA_NIU		97
--#define SRST_VIO0_NIU_AXI	98
--#define SRST_VIO_NIU_AHB	99
--#define SRST_LCDC0_AXI		100
--#define SRST_LCDC0_AHB		101
--#define SRST_LCDC0_DCLK		102
--#define SRST_VIO1_NIU_AXI	103
--#define SRST_VIP		104
--#define SRST_RGA_CORE		105
--#define SRST_IEP_AXI		106
--#define SRST_IEP_AHB		107
--#define SRST_RGA_AXI		108
--#define SRST_RGA_AHB		109
--#define SRST_ISP		110
--#define SRST_EDP		111
--
--#define SRST_VCODEC_AXI		112
--#define SRST_VCODEC_AHB		113
--#define SRST_VIO_H2P		114
--#define SRST_MIPIDSI0		115
--#define SRST_MIPIDSI1		116
--#define SRST_MIPICSI		117
--#define SRST_LVDS_PHY		118
--#define SRST_LVDS_CON		119
--#define SRST_GPU		120
--#define SRST_HDMI		121
--#define SRST_CORE_PVTM		124
--#define SRST_GPU_PVTM		125
--
--#define SRST_MMC0		128
--#define SRST_SDIO0		129
--#define SRST_SDIO1		130
--#define SRST_EMMC		131
--#define SRST_USBOTG_AHB		132
--#define SRST_USBOTG_PHY		133
--#define SRST_USBOTG_CON		134
--#define SRST_USBHOST0_AHB	135
--#define SRST_USBHOST0_PHY	136
--#define SRST_USBHOST0_CON	137
--#define SRST_USBHOST1_AHB	138
--#define SRST_USBHOST1_PHY	139
--#define SRST_USBHOST1_CON	140
--#define SRST_USB_ADP		141
--#define SRST_ACC_EFUSE		142
--
--#define SRST_CORESIGHT		144
--#define SRST_PD_CORE_AHB_NOC	145
--#define SRST_PD_CORE_APB_NOC	146
--#define SRST_PD_CORE_MP_AXI	147
--#define SRST_GIC		148
--#define SRST_LCDC_PWM0		149
--#define SRST_LCDC_PWM1		150
--#define SRST_VIO0_H2P_BRG	151
--#define SRST_VIO1_H2P_BRG	152
--#define SRST_RGA_H2P_BRG	153
--#define SRST_HEVC		154
--#define SRST_TSADC		159
--
--#define SRST_DDRPHY0		160
--#define SRST_DDRPHY0_APB	161
--#define SRST_DDRCTRL0		162
--#define SRST_DDRCTRL0_APB	163
--#define SRST_DDRPHY0_CTRL	164
--#define SRST_DDRPHY1		165
--#define SRST_DDRPHY1_APB	166
--#define SRST_DDRCTRL1		167
--#define SRST_DDRCTRL1_APB	168
--#define SRST_DDRPHY1_CTRL	169
--#define SRST_DDRMSCH0		170
--#define SRST_DDRMSCH1		171
--#define SRST_CRYPTO		174
--#define SRST_C2C_HOST		175
--
--#define SRST_LCDC1_AXI		176
--#define SRST_LCDC1_AHB		177
--#define SRST_LCDC1_DCLK		178
--#define SRST_UART0		179
--#define SRST_UART1		180
--#define SRST_UART2		181
--#define SRST_UART3		182
--#define SRST_UART4		183
--#define SRST_SIMC		186
--#define SRST_PS2C		187
--#define SRST_TSP		188
--#define SRST_TSP_CLKIN0		189
--#define SRST_TSP_CLKIN1		190
--#define SRST_TSP_27M		191
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3308-cru.h b/include/dt-bindings/clock/rk3308-cru.h
-deleted file mode 100644
-index d97840f9ee2e..000000000000
---- a/include/dt-bindings/clock/rk3308-cru.h
-+++ /dev/null
-@@ -1,387 +0,0 @@
+@@ -1,22 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (c) 2019 Rockchip Electronics Co. Ltd.
-- * Author: Finley Xiao <finley.xiao@rock-chips.com>
-- */
+-#ifndef __DT_BINDINGS_POWER_RK3066_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3066_POWER_H__
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3308_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3308_H
+-/* VD_CORE */
+-#define RK3066_PD_A9_0		0
+-#define RK3066_PD_A9_1		1
+-#define RK3066_PD_DBG		4
+-#define RK3066_PD_SCU		5
 -
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_VPLL0		3
--#define PLL_VPLL1		4
--#define ARMCLK			5
+-/* VD_LOGIC */
+-#define RK3066_PD_VIDEO		6
+-#define RK3066_PD_VIO		7
+-#define RK3066_PD_GPU		8
+-#define RK3066_PD_PERI		9
+-#define RK3066_PD_CPU		10
+-#define RK3066_PD_ALIVE		11
 -
--/* sclk (special clocks) */
--#define USB480M			14
--#define SCLK_RTC32K		15
--#define SCLK_PVTM_CORE		16
--#define SCLK_UART0		17
--#define SCLK_UART1		18
--#define SCLK_UART2		19
--#define SCLK_UART3		20
--#define SCLK_UART4		21
--#define SCLK_I2C0		22
--#define SCLK_I2C1		23
--#define SCLK_I2C2		24
--#define SCLK_I2C3		25
--#define SCLK_PWM0		26
--#define SCLK_SPI0		27
--#define SCLK_SPI1		28
--#define SCLK_SPI2		29
--#define SCLK_TIMER0		30
--#define SCLK_TIMER1		31
--#define SCLK_TIMER2		32
--#define SCLK_TIMER3		33
--#define SCLK_TIMER4		34
--#define SCLK_TIMER5		35
--#define SCLK_TSADC		36
--#define SCLK_SARADC		37
--#define SCLK_OTP		38
--#define SCLK_OTP_USR		39
--#define SCLK_CPU_BOOST		40
--#define SCLK_CRYPTO		41
--#define SCLK_CRYPTO_APK		42
--#define SCLK_NANDC_DIV		43
--#define SCLK_NANDC_DIV50	44
--#define SCLK_NANDC		45
--#define SCLK_SDMMC_DIV		46
--#define SCLK_SDMMC_DIV50	47
--#define SCLK_SDMMC		48
--#define SCLK_SDMMC_DRV		49
--#define SCLK_SDMMC_SAMPLE	50
--#define SCLK_SDIO_DIV		51
--#define SCLK_SDIO_DIV50		52
--#define SCLK_SDIO		53
--#define SCLK_SDIO_DRV		54
--#define SCLK_SDIO_SAMPLE	55
--#define SCLK_EMMC_DIV		56
--#define SCLK_EMMC_DIV50		57
--#define SCLK_EMMC		58
--#define SCLK_EMMC_DRV		59
--#define SCLK_EMMC_SAMPLE	60
--#define SCLK_SFC		61
--#define SCLK_OTG_ADP		62
--#define SCLK_MAC_SRC		63
--#define SCLK_MAC		64
--#define SCLK_MAC_REF		65
--#define SCLK_MAC_RX_TX		66
--#define SCLK_MAC_RMII		67
--#define SCLK_DDR_MON_TIMER	68
--#define SCLK_DDR_MON		69
--#define SCLK_DDRCLK		70
--#define SCLK_PMU		71
--#define SCLK_USBPHY_REF		72
--#define SCLK_WIFI		73
--#define SCLK_PVTM_PMU		74
--#define SCLK_PDM		75
--#define SCLK_I2S0_8CH_TX	76
--#define SCLK_I2S0_8CH_TX_OUT	77
--#define SCLK_I2S0_8CH_RX	78
--#define SCLK_I2S0_8CH_RX_OUT	79
--#define SCLK_I2S1_8CH_TX	80
--#define SCLK_I2S1_8CH_TX_OUT	81
--#define SCLK_I2S1_8CH_RX	82
--#define SCLK_I2S1_8CH_RX_OUT	83
--#define SCLK_I2S2_8CH_TX	84
--#define SCLK_I2S2_8CH_TX_OUT	85
--#define SCLK_I2S2_8CH_RX	86
--#define SCLK_I2S2_8CH_RX_OUT	87
--#define SCLK_I2S3_8CH_TX	88
--#define SCLK_I2S3_8CH_TX_OUT	89
--#define SCLK_I2S3_8CH_RX	90
--#define SCLK_I2S3_8CH_RX_OUT	91
--#define SCLK_I2S0_2CH		92
--#define SCLK_I2S0_2CH_OUT	93
--#define SCLK_I2S1_2CH		94
--#define SCLK_I2S1_2CH_OUT	95
--#define SCLK_SPDIF_TX_DIV	96
--#define SCLK_SPDIF_TX_DIV50	97
--#define SCLK_SPDIF_TX		98
--#define SCLK_SPDIF_RX_DIV	99
--#define SCLK_SPDIF_RX_DIV50	100
--#define SCLK_SPDIF_RX		101
--#define SCLK_I2S0_8CH_TX_MUX	102
--#define SCLK_I2S0_8CH_RX_MUX	103
--#define SCLK_I2S1_8CH_TX_MUX	104
--#define SCLK_I2S1_8CH_RX_MUX	105
--#define SCLK_I2S2_8CH_TX_MUX	106
--#define SCLK_I2S2_8CH_RX_MUX	107
--#define SCLK_I2S3_8CH_TX_MUX	108
--#define SCLK_I2S3_8CH_RX_MUX	109
--#define SCLK_I2S0_8CH_TX_SRC	110
--#define SCLK_I2S0_8CH_RX_SRC	111
--#define SCLK_I2S1_8CH_TX_SRC	112
--#define SCLK_I2S1_8CH_RX_SRC	113
--#define SCLK_I2S2_8CH_TX_SRC	114
--#define SCLK_I2S2_8CH_RX_SRC	115
--#define SCLK_I2S3_8CH_TX_SRC	116
--#define SCLK_I2S3_8CH_RX_SRC	117
--#define SCLK_I2S0_2CH_SRC	118
--#define SCLK_I2S1_2CH_SRC	119
--#define SCLK_PWM1		120
--#define SCLK_PWM2		121
--#define SCLK_OWIRE		122
--
--/* dclk */
--#define DCLK_VOP		125
--
--/* aclk */
--#define ACLK_BUS_SRC		130
--#define ACLK_BUS		131
--#define ACLK_PERI_SRC		132
--#define ACLK_PERI		133
--#define ACLK_MAC		134
--#define ACLK_CRYPTO		135
--#define ACLK_VOP		136
--#define ACLK_GIC		137
--#define ACLK_DMAC0		138
--#define ACLK_DMAC1		139
--
--/* hclk */
--#define HCLK_BUS		150
--#define HCLK_PERI		151
--#define HCLK_AUDIO		152
--#define HCLK_NANDC		153
--#define HCLK_SDMMC		154
--#define HCLK_SDIO		155
--#define HCLK_EMMC		156
--#define HCLK_SFC		157
--#define HCLK_OTG		158
--#define HCLK_HOST		159
--#define HCLK_HOST_ARB		160
--#define HCLK_PDM		161
--#define HCLK_SPDIFTX		162
--#define HCLK_SPDIFRX		163
--#define HCLK_I2S0_8CH		164
--#define HCLK_I2S1_8CH		165
--#define HCLK_I2S2_8CH		166
--#define HCLK_I2S3_8CH		167
--#define HCLK_I2S0_2CH		168
--#define HCLK_I2S1_2CH		169
--#define HCLK_VAD		170
--#define HCLK_CRYPTO		171
--#define HCLK_VOP		172
--
--/* pclk */
--#define PCLK_BUS		190
--#define PCLK_DDR		191
--#define PCLK_PERI		192
--#define PCLK_PMU		193
--#define PCLK_AUDIO		194
--#define PCLK_MAC		195
--#define PCLK_ACODEC		196
--#define PCLK_UART0		197
--#define PCLK_UART1		198
--#define PCLK_UART2		199
--#define PCLK_UART3		200
--#define PCLK_UART4		201
--#define PCLK_I2C0		202
--#define PCLK_I2C1		203
--#define PCLK_I2C2		204
--#define PCLK_I2C3		205
--#define PCLK_PWM0		206
--#define PCLK_SPI0		207
--#define PCLK_SPI1		208
--#define PCLK_SPI2		209
--#define PCLK_SARADC		210
--#define PCLK_TSADC		211
--#define PCLK_TIMER		212
--#define PCLK_OTP_NS		213
--#define PCLK_WDT		214
--#define PCLK_GPIO0		215
--#define PCLK_GPIO1		216
--#define PCLK_GPIO2		217
--#define PCLK_GPIO3		218
--#define PCLK_GPIO4		219
--#define PCLK_SGRF		220
--#define PCLK_GRF		221
--#define PCLK_USBSD_DET		222
--#define PCLK_DDR_UPCTL		223
--#define PCLK_DDR_MON		224
--#define PCLK_DDRPHY		225
--#define PCLK_DDR_STDBY		226
--#define PCLK_USB_GRF		227
--#define PCLK_CRU		228
--#define PCLK_OTP_PHY		229
--#define PCLK_CPU_BOOST		230
--#define PCLK_PWM1		231
--#define PCLK_PWM2		232
--#define PCLK_CAN		233
--#define PCLK_OWIRE		234
--
--#define CLK_NR_CLKS		(PCLK_OWIRE + 1)
--
--/* soft-reset indices */
--
--/* cru_softrst_con0 */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_CORE_NOC		13
--#define SRST_STRC_A		14
--#define SRST_L2C		15
--
--/* cru_softrst_con1 */
--#define SRST_DAP		16
--#define SRST_CORE_PVTM		17
--#define SRST_CORE_PRF		18
--#define SRST_CORE_GRF		19
--#define SRST_DDRUPCTL		20
--#define SRST_DDRUPCTL_P		22
--#define SRST_MSCH		23
--#define SRST_DDRMON_P		25
--#define SRST_DDRSTDBY_P		26
--#define SRST_DDRSTDBY		27
--#define SRST_DDRPHY		28
--#define SRST_DDRPHY_DIV		29
--#define SRST_DDRPHY_P		30
--
--/* cru_softrst_con2 */
--#define SRST_BUS_NIU_H		32
--#define SRST_USB_NIU_P		33
--#define SRST_CRYPTO_A		34
--#define SRST_CRYPTO_H		35
--#define SRST_CRYPTO		36
--#define SRST_CRYPTO_APK		37
--#define SRST_VOP_A		38
--#define SRST_VOP_H		39
--#define SRST_VOP_D		40
--#define SRST_INTMEM_A		41
--#define SRST_ROM_H		42
--#define SRST_GIC_A		43
--#define SRST_UART0_P		44
--#define SRST_UART0		45
--#define SRST_UART1_P		46
--#define SRST_UART1		47
--
--/* cru_softrst_con3 */
--#define SRST_UART2_P		48
--#define SRST_UART2		49
--#define SRST_UART3_P		50
--#define SRST_UART3		51
--#define SRST_UART4_P		52
--#define SRST_UART4		53
--#define SRST_I2C0_P		54
--#define SRST_I2C0		55
--#define SRST_I2C1_P		56
--#define SRST_I2C1		57
--#define SRST_I2C2_P		58
--#define SRST_I2C2		59
--#define SRST_I2C3_P		60
--#define SRST_I2C3		61
--#define SRST_PWM0_P		62
--#define SRST_PWM0		63
--
--/* cru_softrst_con4 */
--#define SRST_SPI0_P		64
--#define SRST_SPI0		65
--#define SRST_SPI1_P		66
--#define SRST_SPI1		67
--#define SRST_SPI2_P		68
--#define SRST_SPI2		69
--#define SRST_SARADC_P		70
--#define SRST_TSADC_P		71
--#define SRST_TSADC		72
--#define SRST_TIMER0_P		73
--#define SRST_TIMER0		74
--#define SRST_TIMER1		75
--#define SRST_TIMER2		76
--#define SRST_TIMER3		77
--#define SRST_TIMER4		78
--#define SRST_TIMER5		79
--
--/* cru_softrst_con5 */
--#define SRST_OTP_NS_P		80
--#define SRST_OTP_NS_SBPI	81
--#define SRST_OTP_NS_USR		82
--#define SRST_OTP_PHY_P		83
--#define SRST_OTP_PHY		84
--#define SRST_GPIO0_P		86
--#define SRST_GPIO1_P		87
--#define SRST_GPIO2_P		88
--#define SRST_GPIO3_P		89
--#define SRST_GPIO4_P		90
--#define SRST_GRF_P		91
--#define SRST_USBSD_DET_P	92
--#define SRST_PMU		93
--#define SRST_PMU_PVTM		94
--#define SRST_USB_GRF_P		95
--
--/* cru_softrst_con6 */
--#define SRST_CPU_BOOST		96
--#define SRST_CPU_BOOST_P	97
--#define SRST_PWM1_P		98
--#define SRST_PWM1		99
--#define SRST_PWM2_P		100
--#define SRST_PWM2		101
--#define SRST_PERI_NIU_A		104
--#define SRST_PERI_NIU_H		105
--#define SRST_PERI_NIU_p		106
--#define SRST_USB2OTG_H		107
--#define SRST_USB2OTG		108
--#define SRST_USB2OTG_ADP	109
--#define SRST_USB2HOST_H		110
--#define SRST_USB2HOST_ARB_H	111
--
--/* cru_softrst_con7 */
--#define SRST_USB2HOST_AUX_H	112
--#define SRST_USB2HOST_EHCI	113
--#define SRST_USB2HOST		114
--#define SRST_USBPHYPOR		115
--#define SRST_UTMI0		116
--#define SRST_UTMI1		117
--#define SRST_SDIO_H		118
--#define SRST_EMMC_H		119
--#define SRST_SFC_H		120
--#define SRST_SFC		121
--#define SRST_SD_H		122
--#define SRST_NANDC_H		123
--#define SRST_NANDC_N		124
--#define SRST_MAC_A		125
--#define SRST_CAN_P		126
--#define SRST_OWIRE_P		127
--
--/* cru_softrst_con8 */
--#define SRST_AUDIO_NIU_H	128
--#define SRST_AUDIO_NIU_P	129
--#define SRST_PDM_H		130
--#define SRST_PDM_M		131
--#define SRST_SPDIFTX_H		132
--#define SRST_SPDIFTX_M		133
--#define SRST_SPDIFRX_H		134
--#define SRST_SPDIFRX_M		135
--#define SRST_I2S0_8CH_H		136
--#define SRST_I2S0_8CH_TX_M	137
--#define SRST_I2S0_8CH_RX_M	138
--#define SRST_I2S1_8CH_H		139
--#define SRST_I2S1_8CH_TX_M	140
--#define SRST_I2S1_8CH_RX_M	141
--#define SRST_I2S2_8CH_H		142
--#define SRST_I2S2_8CH_TX_M	143
--
--/* cru_softrst_con9 */
--#define SRST_I2S2_8CH_RX_M	144
--#define SRST_I2S3_8CH_H		145
--#define SRST_I2S3_8CH_TX_M	146
--#define SRST_I2S3_8CH_RX_M	147
--#define SRST_I2S0_2CH_H		148
--#define SRST_I2S0_2CH_M		149
--#define SRST_I2S1_2CH_H		150
--#define SRST_I2S1_2CH_M		151
--#define SRST_VAD_H		152
--#define SRST_ACODEC_P		153
+-/* VD_PMU */
+-#define RK3066_PD_RTC		12
 -
 -#endif
-diff --git a/include/dt-bindings/clock/rk3328-cru.h b/include/dt-bindings/clock/rk3328-cru.h
+diff --git a/include/dt-bindings/power/rk3188-power.h b/include/dt-bindings/power/rk3188-power.h
 deleted file mode 100644
-index 555b4ff660ae..000000000000
---- a/include/dt-bindings/clock/rk3328-cru.h
+index 93d23dfba33f..000000000000
+--- a/include/dt-bindings/power/rk3188-power.h
 +++ /dev/null
-@@ -1,393 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2016 Rockchip Electronics Co. Ltd.
-- * Author: Elaine <zhangqing@rock-chips.com>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3328_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3328_H
--
--/* core clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define PLL_NPLL		5
--#define ARMCLK			6
--
--/* sclk gates (special clocks) */
--#define SCLK_RTC32K		30
--#define SCLK_SDMMC_EXT		31
--#define SCLK_SPI		32
--#define SCLK_SDMMC		33
--#define SCLK_SDIO		34
--#define SCLK_EMMC		35
--#define SCLK_TSADC		36
--#define SCLK_SARADC		37
--#define SCLK_UART0		38
--#define SCLK_UART1		39
--#define SCLK_UART2		40
--#define SCLK_I2S0		41
--#define SCLK_I2S1		42
--#define SCLK_I2S2		43
--#define SCLK_I2S1_OUT		44
--#define SCLK_I2S2_OUT		45
--#define SCLK_SPDIF		46
--#define SCLK_TIMER0		47
--#define SCLK_TIMER1		48
--#define SCLK_TIMER2		49
--#define SCLK_TIMER3		50
--#define SCLK_TIMER4		51
--#define SCLK_TIMER5		52
--#define SCLK_WIFI		53
--#define SCLK_CIF_OUT		54
--#define SCLK_I2C0		55
--#define SCLK_I2C1		56
--#define SCLK_I2C2		57
--#define SCLK_I2C3		58
--#define SCLK_CRYPTO		59
--#define SCLK_PWM		60
--#define SCLK_PDM		61
--#define SCLK_EFUSE		62
--#define SCLK_OTP		63
--#define SCLK_DDRCLK		64
--#define SCLK_VDEC_CABAC		65
--#define SCLK_VDEC_CORE		66
--#define SCLK_VENC_DSP		67
--#define SCLK_VENC_CORE		68
--#define SCLK_RGA		69
--#define SCLK_HDMI_SFC		70
--#define SCLK_HDMI_CEC		71
--#define SCLK_USB3_REF		72
--#define SCLK_USB3_SUSPEND	73
--#define SCLK_SDMMC_DRV		74
--#define SCLK_SDIO_DRV		75
--#define SCLK_EMMC_DRV		76
--#define SCLK_SDMMC_EXT_DRV	77
--#define SCLK_SDMMC_SAMPLE	78
--#define SCLK_SDIO_SAMPLE	79
--#define SCLK_EMMC_SAMPLE	80
--#define SCLK_SDMMC_EXT_SAMPLE	81
--#define SCLK_VOP		82
--#define SCLK_MAC2PHY_RXTX	83
--#define SCLK_MAC2PHY_SRC	84
--#define SCLK_MAC2PHY_REF	85
--#define SCLK_MAC2PHY_OUT	86
--#define SCLK_MAC2IO_RX		87
--#define SCLK_MAC2IO_TX		88
--#define SCLK_MAC2IO_REFOUT	89
--#define SCLK_MAC2IO_REF		90
--#define SCLK_MAC2IO_OUT		91
--#define SCLK_TSP		92
--#define SCLK_HSADC_TSP		93
--#define SCLK_USB3PHY_REF	94
--#define SCLK_REF_USB3OTG	95
--#define SCLK_USB3OTG_REF	96
--#define SCLK_USB3OTG_SUSPEND	97
--#define SCLK_REF_USB3OTG_SRC	98
--#define SCLK_MAC2IO_SRC		99
--#define SCLK_MAC2IO		100
--#define SCLK_MAC2PHY		101
--#define SCLK_MAC2IO_EXT		102
--
--/* dclk gates */
--#define DCLK_LCDC		120
--#define DCLK_HDMIPHY		121
--#define HDMIPHY			122
--#define USB480M			123
--#define DCLK_LCDC_SRC		124
--
--/* aclk gates */
--#define ACLK_AXISRAM		130
--#define ACLK_VOP_PRE		131
--#define ACLK_USB3OTG		132
--#define ACLK_RGA_PRE		133
--#define ACLK_DMAC		134
--#define ACLK_GPU		135
--#define ACLK_BUS_PRE		136
--#define ACLK_PERI_PRE		137
--#define ACLK_RKVDEC_PRE		138
--#define ACLK_RKVDEC		139
--#define ACLK_RKVENC		140
--#define ACLK_VPU_PRE		141
--#define ACLK_VIO_PRE		142
--#define ACLK_VPU		143
--#define ACLK_VIO		144
--#define ACLK_VOP		145
--#define ACLK_GMAC		146
--#define ACLK_H265		147
--#define ACLK_H264		148
--#define ACLK_MAC2PHY		149
--#define ACLK_MAC2IO		150
--#define ACLK_DCF		151
--#define ACLK_TSP		152
--#define ACLK_PERI		153
--#define ACLK_RGA		154
--#define ACLK_IEP		155
--#define ACLK_CIF		156
--#define ACLK_HDCP		157
--
--/* pclk gates */
--#define PCLK_GPIO0		200
--#define PCLK_GPIO1		201
--#define PCLK_GPIO2		202
--#define PCLK_GPIO3		203
--#define PCLK_GRF		204
--#define PCLK_I2C0		205
--#define PCLK_I2C1		206
--#define PCLK_I2C2		207
--#define PCLK_I2C3		208
--#define PCLK_SPI		209
--#define PCLK_UART0		210
--#define PCLK_UART1		211
--#define PCLK_UART2		212
--#define PCLK_TSADC		213
--#define PCLK_PWM		214
--#define PCLK_TIMER		215
--#define PCLK_BUS_PRE		216
--#define PCLK_PERI_PRE		217
--#define PCLK_HDMI_CTRL		218
--#define PCLK_HDMI_PHY		219
--#define PCLK_GMAC		220
--#define PCLK_H265		221
--#define PCLK_MAC2PHY		222
--#define PCLK_MAC2IO		223
--#define PCLK_USB3PHY_OTG	224
--#define PCLK_USB3PHY_PIPE	225
--#define PCLK_USB3_GRF		226
--#define PCLK_USB2_GRF		227
--#define PCLK_HDMIPHY		228
--#define PCLK_DDR		229
--#define PCLK_PERI		230
--#define PCLK_HDMI		231
--#define PCLK_HDCP		232
--#define PCLK_DCF		233
--#define PCLK_SARADC		234
--#define PCLK_ACODECPHY		235
--#define PCLK_WDT		236
--
--/* hclk gates */
--#define HCLK_PERI		308
--#define HCLK_TSP		309
--#define HCLK_GMAC		310
--#define HCLK_I2S0_8CH		311
--#define HCLK_I2S1_8CH		312
--#define HCLK_I2S2_2CH		313
--#define HCLK_SPDIF_8CH		314
--#define HCLK_VOP		315
--#define HCLK_NANDC		316
--#define HCLK_SDMMC		317
--#define HCLK_SDIO		318
--#define HCLK_EMMC		319
--#define HCLK_SDMMC_EXT		320
--#define HCLK_RKVDEC_PRE		321
--#define HCLK_RKVDEC		322
--#define HCLK_RKVENC		323
--#define HCLK_VPU_PRE		324
--#define HCLK_VIO_PRE		325
--#define HCLK_VPU		326
--#define HCLK_BUS_PRE		328
--#define HCLK_PERI_PRE		329
--#define HCLK_H264		330
--#define HCLK_CIF		331
--#define HCLK_OTG_PMU		332
--#define HCLK_OTG		333
--#define HCLK_HOST0		334
--#define HCLK_HOST0_ARB		335
--#define HCLK_CRYPTO_MST		336
--#define HCLK_CRYPTO_SLV		337
--#define HCLK_PDM		338
--#define HCLK_IEP		339
--#define HCLK_RGA		340
--#define HCLK_HDCP		341
--
--#define CLK_NR_CLKS		(HCLK_HDCP + 1)
--
--/* soft-reset indices */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_TOPDBG		12
--#define SRST_CORE_NIU		13
--#define SRST_STRC_A		14
--#define SRST_L2C		15
--
--#define SRST_A53_GIC		18
--#define SRST_DAP		19
--#define SRST_PMU_P		21
--#define SRST_EFUSE		22
--#define SRST_BUSSYS_H		23
--#define SRST_BUSSYS_P		24
--#define SRST_SPDIF		25
--#define SRST_INTMEM		26
--#define SRST_ROM		27
--#define SRST_GPIO0		28
--#define SRST_GPIO1		29
--#define SRST_GPIO2		30
--#define SRST_GPIO3		31
--
--#define SRST_I2S0		32
--#define SRST_I2S1		33
--#define SRST_I2S2		34
--#define SRST_I2S0_H		35
--#define SRST_I2S1_H		36
--#define SRST_I2S2_H		37
--#define SRST_UART0		38
--#define SRST_UART1		39
--#define SRST_UART2		40
--#define SRST_UART0_P		41
--#define SRST_UART1_P		42
--#define SRST_UART2_P		43
--#define SRST_I2C0		44
--#define SRST_I2C1		45
--#define SRST_I2C2		46
--#define SRST_I2C3		47
--
--#define SRST_I2C0_P		48
--#define SRST_I2C1_P		49
--#define SRST_I2C2_P		50
--#define SRST_I2C3_P		51
--#define SRST_EFUSE_SE_P		52
--#define SRST_EFUSE_NS_P		53
--#define SRST_PWM0		54
--#define SRST_PWM0_P		55
--#define SRST_DMA		56
--#define SRST_TSP_A		57
--#define SRST_TSP_H		58
--#define SRST_TSP		59
--#define SRST_TSP_HSADC		60
--#define SRST_DCF_A		61
--#define SRST_DCF_P		62
--
--#define SRST_SCR		64
--#define SRST_SPI		65
--#define SRST_TSADC		66
--#define SRST_TSADC_P		67
--#define SRST_CRYPTO		68
--#define SRST_SGRF		69
--#define SRST_GRF		70
--#define SRST_USB_GRF		71
--#define SRST_TIMER_6CH_P	72
--#define SRST_TIMER0		73
--#define SRST_TIMER1		74
--#define SRST_TIMER2		75
--#define SRST_TIMER3		76
--#define SRST_TIMER4		77
--#define SRST_TIMER5		78
--#define SRST_USB3GRF		79
--
--#define SRST_PHYNIU		80
--#define SRST_HDMIPHY		81
--#define SRST_VDAC		82
--#define SRST_ACODEC_p		83
--#define SRST_SARADC		85
--#define SRST_SARADC_P		86
--#define SRST_GRF_DDR		87
--#define SRST_DFIMON		88
--#define SRST_MSCH		89
--#define SRST_DDRMSCH		91
--#define SRST_DDRCTRL		92
--#define SRST_DDRCTRL_P		93
--#define SRST_DDRPHY		94
--#define SRST_DDRPHY_P		95
--
--#define SRST_GMAC_NIU_A		96
--#define SRST_GMAC_NIU_P		97
--#define SRST_GMAC2PHY_A		98
--#define SRST_GMAC2IO_A		99
--#define SRST_MACPHY		100
--#define SRST_OTP_PHY		101
--#define SRST_GPU_A		102
--#define SRST_GPU_NIU_A		103
--#define SRST_SDMMCEXT		104
--#define SRST_PERIPH_NIU_A	105
--#define SRST_PERIHP_NIU_H	106
--#define SRST_PERIHP_P		107
--#define SRST_PERIPHSYS_H	108
--#define SRST_MMC0		109
--#define SRST_SDIO		110
--#define SRST_EMMC		111
--
--#define SRST_USB2OTG_H		112
--#define SRST_USB2OTG		113
--#define SRST_USB2OTG_ADP	114
--#define SRST_USB2HOST_H		115
--#define SRST_USB2HOST_ARB	116
--#define SRST_USB2HOST_AUX	117
--#define SRST_USB2HOST_EHCIPHY	118
--#define SRST_USB2HOST_UTMI	119
--#define SRST_USB3OTG		120
--#define SRST_USBPOR		121
--#define SRST_USB2OTG_UTMI	122
--#define SRST_USB2HOST_PHY_UTMI	123
--#define SRST_USB3OTG_UTMI	124
--#define SRST_USB3PHY_U2		125
--#define SRST_USB3PHY_U3		126
--#define SRST_USB3PHY_PIPE	127
--
--#define SRST_VIO_A		128
--#define SRST_VIO_BUS_H		129
--#define SRST_VIO_H2P_H		130
--#define SRST_VIO_ARBI_H		131
--#define SRST_VOP_NIU_A		132
--#define SRST_VOP_A		133
--#define SRST_VOP_H		134
--#define SRST_VOP_D		135
--#define SRST_RGA		136
--#define SRST_RGA_NIU_A		137
--#define SRST_RGA_A		138
--#define SRST_RGA_H		139
--#define SRST_IEP_A		140
--#define SRST_IEP_H		141
--#define SRST_HDMI		142
--#define SRST_HDMI_P		143
--
--#define SRST_HDCP_A		144
--#define SRST_HDCP		145
--#define SRST_HDCP_H		146
--#define SRST_CIF_A		147
--#define SRST_CIF_H		148
--#define SRST_CIF_P		149
--#define SRST_OTP_P		150
--#define SRST_OTP_SBPI		151
--#define SRST_OTP_USER		152
--#define SRST_DDRCTRL_A		153
--#define SRST_DDRSTDY_P		154
--#define SRST_DDRSTDY		155
--#define SRST_PDM_H		156
--#define SRST_PDM		157
--#define SRST_USB3PHY_OTG_P	158
--#define SRST_USB3PHY_PIPE_P	159
--
--#define SRST_VCODEC_A		160
--#define SRST_VCODEC_NIU_A	161
--#define SRST_VCODEC_H		162
--#define SRST_VCODEC_NIU_H	163
--#define SRST_VDEC_A		164
--#define SRST_VDEC_NIU_A		165
--#define SRST_VDEC_H		166
--#define SRST_VDEC_NIU_H		167
--#define SRST_VDEC_CORE		168
--#define SRST_VDEC_CABAC		169
--#define SRST_DDRPHYDIV		175
--
--#define SRST_RKVENC_NIU_A	176
--#define SRST_RKVENC_NIU_H	177
--#define SRST_RKVENC_H265_A	178
--#define SRST_RKVENC_H265_P	179
--#define SRST_RKVENC_H265_CORE	180
--#define SRST_RKVENC_H265_DSP	181
--#define SRST_RKVENC_H264_A	182
--#define SRST_RKVENC_H264_H	183
--#define SRST_RKVENC_INTMEM	184
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3368-cru.h b/include/dt-bindings/clock/rk3368-cru.h
-deleted file mode 100644
-index 0a06c5f514d7..000000000000
---- a/include/dt-bindings/clock/rk3368-cru.h
-+++ /dev/null
-@@ -1,381 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright (c) 2015 Heiko Stuebner <heiko@sntech.de>
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3368_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3368_H
--
--/* core clocks */
--#define PLL_APLLB		1
--#define PLL_APLLL		2
--#define PLL_DPLL		3
--#define PLL_CPLL		4
--#define PLL_GPLL		5
--#define PLL_NPLL		6
--#define ARMCLKB			7
--#define ARMCLKL			8
--
--/* sclk gates (special clocks) */
--#define SCLK_GPU_CORE		64
--#define SCLK_SPI0		65
--#define SCLK_SPI1		66
--#define SCLK_SPI2		67
--#define SCLK_SDMMC		68
--#define SCLK_SDIO0		69
--#define SCLK_EMMC		71
--#define SCLK_TSADC		72
--#define SCLK_SARADC		73
--#define SCLK_NANDC0		75
--#define SCLK_UART0		77
--#define SCLK_UART1		78
--#define SCLK_UART2		79
--#define SCLK_UART3		80
--#define SCLK_UART4		81
--#define SCLK_I2S_8CH		82
--#define SCLK_SPDIF_8CH		83
--#define SCLK_I2S_2CH		84
--#define SCLK_TIMER00		85
--#define SCLK_TIMER01		86
--#define SCLK_TIMER02		87
--#define SCLK_TIMER03		88
--#define SCLK_TIMER04		89
--#define SCLK_TIMER05		90
--#define SCLK_OTGPHY0		93
--#define SCLK_OTG_ADP		96
--#define SCLK_HSICPHY480M	97
--#define SCLK_HSICPHY12M		98
--#define SCLK_MACREF		99
--#define SCLK_VOP0_PWM		100
--#define SCLK_MAC_RX		102
--#define SCLK_MAC_TX		103
--#define SCLK_EDP_24M		104
--#define SCLK_EDP		105
--#define SCLK_RGA		106
--#define SCLK_ISP		107
--#define SCLK_HDCP		108
--#define SCLK_HDMI_HDCP		109
--#define SCLK_HDMI_CEC		110
--#define SCLK_HEVC_CABAC		111
--#define SCLK_HEVC_CORE		112
--#define SCLK_I2S_8CH_OUT	113
--#define SCLK_SDMMC_DRV		114
--#define SCLK_SDIO0_DRV		115
--#define SCLK_EMMC_DRV		117
--#define SCLK_SDMMC_SAMPLE	118
--#define SCLK_SDIO0_SAMPLE	119
--#define SCLK_EMMC_SAMPLE	121
--#define SCLK_USBPHY480M		122
--#define SCLK_PVTM_CORE		123
--#define SCLK_PVTM_GPU		124
--#define SCLK_PVTM_PMU		125
--#define SCLK_SFC		126
--#define SCLK_MAC		127
--#define SCLK_MACREF_OUT		128
--#define SCLK_TIMER10		133
--#define SCLK_TIMER11		134
--#define SCLK_TIMER12		135
--#define SCLK_TIMER13		136
--#define SCLK_TIMER14		137
--#define SCLK_TIMER15		138
--
--#define DCLK_VOP		190
--#define MCLK_CRYPTO		191
--
--/* aclk gates */
--#define ACLK_GPU_MEM		192
--#define ACLK_GPU_CFG		193
--#define ACLK_DMAC_BUS		194
--#define ACLK_DMAC_PERI		195
--#define ACLK_PERI_MMU		196
--#define ACLK_GMAC		197
--#define ACLK_VOP		198
--#define ACLK_VOP_IEP		199
--#define ACLK_RGA		200
--#define ACLK_HDCP		201
--#define ACLK_IEP		202
--#define ACLK_VIO0_NOC		203
--#define ACLK_VIP		204
--#define ACLK_ISP		205
--#define ACLK_VIO1_NOC		206
--#define ACLK_VIDEO		208
--#define ACLK_BUS		209
--#define ACLK_PERI		210
--
--/* pclk gates */
--#define PCLK_GPIO0		320
--#define PCLK_GPIO1		321
--#define PCLK_GPIO2		322
--#define PCLK_GPIO3		323
--#define PCLK_PMUGRF		324
--#define PCLK_MAILBOX		325
--#define PCLK_GRF		329
--#define PCLK_SGRF		330
--#define PCLK_PMU		331
--#define PCLK_I2C0		332
--#define PCLK_I2C1		333
--#define PCLK_I2C2		334
--#define PCLK_I2C3		335
--#define PCLK_I2C4		336
--#define PCLK_I2C5		337
--#define PCLK_SPI0		338
--#define PCLK_SPI1		339
--#define PCLK_SPI2		340
--#define PCLK_UART0		341
--#define PCLK_UART1		342
--#define PCLK_UART2		343
--#define PCLK_UART3		344
--#define PCLK_UART4		345
--#define PCLK_TSADC		346
--#define PCLK_SARADC		347
--#define PCLK_SIM		348
--#define PCLK_GMAC		349
--#define PCLK_PWM0		350
--#define PCLK_PWM1		351
--#define PCLK_TIMER0		353
--#define PCLK_TIMER1		354
--#define PCLK_EDP_CTRL		355
--#define PCLK_MIPI_DSI0		356
--#define PCLK_MIPI_CSI		358
--#define PCLK_HDCP		359
--#define PCLK_HDMI_CTRL		360
--#define PCLK_VIO_H2P		361
--#define PCLK_BUS		362
--#define PCLK_PERI		363
--#define PCLK_DDRUPCTL		364
--#define PCLK_DDRPHY		365
--#define PCLK_ISP		366
--#define PCLK_VIP		367
--#define PCLK_WDT		368
--#define PCLK_EFUSE256		369
--
--/* hclk gates */
--#define HCLK_SFC		448
--#define HCLK_OTG0		449
--#define HCLK_HOST0		450
--#define HCLK_HOST1		451
--#define HCLK_HSIC		452
--#define HCLK_NANDC0		453
--#define HCLK_TSP		455
--#define HCLK_SDMMC		456
--#define HCLK_SDIO0		457
--#define HCLK_EMMC		459
--#define HCLK_HSADC		460
--#define HCLK_CRYPTO		461
--#define HCLK_I2S_2CH		462
--#define HCLK_I2S_8CH		463
--#define HCLK_SPDIF		464
--#define HCLK_VOP		465
--#define HCLK_ROM		467
--#define HCLK_IEP		468
--#define HCLK_ISP		469
--#define HCLK_RGA		470
--#define HCLK_VIO_AHB_ARBI	471
--#define HCLK_VIO_NOC		472
--#define HCLK_VIP		473
--#define HCLK_VIO_H2P		474
--#define HCLK_VIO_HDCPMMU	475
--#define HCLK_VIDEO		476
--#define HCLK_BUS		477
--#define HCLK_PERI		478
--
--#define CLK_NR_CLKS		(HCLK_PERI + 1)
--
--/* soft-reset indices */
--#define SRST_CORE_B0		0
--#define SRST_CORE_B1		1
--#define SRST_CORE_B2		2
--#define SRST_CORE_B3		3
--#define SRST_CORE_B0_PO		4
--#define SRST_CORE_B1_PO		5
--#define SRST_CORE_B2_PO		6
--#define SRST_CORE_B3_PO		7
--#define SRST_L2_B		8
--#define SRST_ADB_B		9
--#define SRST_PD_CORE_B_NIU	10
--#define SRST_PDBUS_STRSYS	11
--#define SRST_SOCDBG_B		14
--#define SRST_CORE_B_DBG		15
--
--#define SRST_DMAC1		18
--#define SRST_INTMEM		19
--#define SRST_ROM		20
--#define SRST_SPDIF8CH		21
--#define SRST_I2S8CH		23
--#define SRST_MAILBOX		24
--#define SRST_I2S2CH		25
--#define SRST_EFUSE_256		26
--#define SRST_MCU_SYS		28
--#define SRST_MCU_PO		29
--#define SRST_MCU_NOC		30
--#define SRST_EFUSE		31
--
--#define SRST_GPIO0		32
--#define SRST_GPIO1		33
--#define SRST_GPIO2		34
--#define SRST_GPIO3		35
--#define SRST_GPIO4		36
--#define SRST_PMUGRF		41
--#define SRST_I2C0		42
--#define SRST_I2C1		43
--#define SRST_I2C2		44
--#define SRST_I2C3		45
--#define SRST_I2C4		46
--#define SRST_I2C5		47
--
--#define SRST_DWPWM		48
--#define SRST_MMC_PERI		49
--#define SRST_PERIPH_MMU		50
--#define SRST_GRF		55
--#define SRST_PMU		56
--#define SRST_PERIPH_AXI		57
--#define SRST_PERIPH_AHB		58
--#define SRST_PERIPH_APB		59
--#define SRST_PERIPH_NIU		60
--#define SRST_PDPERI_AHB_ARBI	61
--#define SRST_EMEM		62
--#define SRST_USB_PERI		63
--
--#define SRST_DMAC2		64
--#define SRST_MAC		66
--#define SRST_GPS		67
--#define SRST_RKPWM		69
--#define SRST_USBHOST0		72
--#define SRST_HSIC		73
--#define SRST_HSIC_AUX		74
--#define SRST_HSIC_PHY		75
--#define SRST_HSADC		76
--#define SRST_NANDC0		77
--#define SRST_SFC		79
--
--#define SRST_SPI0		83
--#define SRST_SPI1		84
--#define SRST_SPI2		85
--#define SRST_SARADC		87
--#define SRST_PDALIVE_NIU	88
--#define SRST_PDPMU_INTMEM	89
--#define SRST_PDPMU_NIU		90
--#define SRST_SGRF		91
--
--#define SRST_VIO_ARBI		96
--#define SRST_RGA_NIU		97
--#define SRST_VIO0_NIU_AXI	98
--#define SRST_VIO_NIU_AHB	99
--#define SRST_LCDC0_AXI		100
--#define SRST_LCDC0_AHB		101
--#define SRST_LCDC0_DCLK		102
--#define SRST_VIP		104
--#define SRST_RGA_CORE		105
--#define SRST_IEP_AXI		106
--#define SRST_IEP_AHB		107
--#define SRST_RGA_AXI		108
--#define SRST_RGA_AHB		109
--#define SRST_ISP		110
--#define SRST_EDP_24M		111
--
--#define SRST_VIDEO_AXI		112
--#define SRST_VIDEO_AHB		113
--#define SRST_MIPIDPHYTX		114
--#define SRST_MIPIDSI0		115
--#define SRST_MIPIDPHYRX		116
--#define SRST_MIPICSI		117
--#define SRST_GPU		120
--#define SRST_HDMI		121
--#define SRST_EDP		122
--#define SRST_PMU_PVTM		123
--#define SRST_CORE_PVTM		124
--#define SRST_GPU_PVTM		125
--#define SRST_GPU_SYS		126
--#define SRST_GPU_MEM_NIU	127
--
--#define SRST_MMC0		128
--#define SRST_SDIO0		129
--#define SRST_EMMC		131
--#define SRST_USBOTG_AHB		132
--#define SRST_USBOTG_PHY		133
--#define SRST_USBOTG_CON		134
--#define SRST_USBHOST0_AHB	135
--#define SRST_USBHOST0_PHY	136
--#define SRST_USBHOST0_CON	137
--#define SRST_USBOTG_UTMI	138
--#define SRST_USBHOST1_UTMI	139
--#define SRST_USB_ADP		141
--
--#define SRST_CORESIGHT		144
--#define SRST_PD_CORE_AHB_NOC	145
--#define SRST_PD_CORE_APB_NOC	146
--#define SRST_GIC		148
--#define SRST_LCDC_PWM0		149
--#define SRST_RGA_H2P_BRG	153
--#define SRST_VIDEO		154
--#define SRST_GPU_CFG_NIU	157
--#define SRST_TSADC		159
--
--#define SRST_DDRPHY0		160
--#define SRST_DDRPHY0_APB	161
--#define SRST_DDRCTRL0		162
--#define SRST_DDRCTRL0_APB	163
--#define SRST_VIDEO_NIU		165
--#define SRST_VIDEO_NIU_AHB	167
--#define SRST_DDRMSCH0		170
--#define SRST_PDBUS_AHB		173
--#define SRST_CRYPTO		174
--
--#define SRST_UART0		179
--#define SRST_UART1		180
--#define SRST_UART2		181
--#define SRST_UART3		182
--#define SRST_UART4		183
--#define SRST_SIMC		186
--#define SRST_TSP		188
--#define SRST_TSP_CLKIN0		189
--
--#define SRST_CORE_L0		192
--#define SRST_CORE_L1		193
--#define SRST_CORE_L2		194
--#define SRST_CORE_L3		195
--#define SRST_CORE_L0_PO		195
--#define SRST_CORE_L1_PO		197
--#define SRST_CORE_L2_PO		198
--#define SRST_CORE_L3_PO		199
--#define SRST_L2_L		200
--#define SRST_ADB_L		201
--#define SRST_PD_CORE_L_NIU	202
--#define SRST_CCI_SYS		203
--#define SRST_CCI_DDR		204
--#define SRST_CCI		205
--#define SRST_SOCDBG_L		206
--#define SRST_CORE_L_DBG		207
--
--#define SRST_CORE_B0_NC		208
--#define SRST_CORE_B0_PO_NC	209
--#define SRST_L2_B_NC		210
--#define SRST_ADB_B_NC		211
--#define SRST_PD_CORE_B_NIU_NC	212
--#define SRST_PDBUS_STRSYS_NC	213
--#define SRST_CORE_L0_NC		214
--#define SRST_CORE_L0_PO_NC	215
--#define SRST_L2_L_NC		216
--#define SRST_ADB_L_NC		217
--#define SRST_PD_CORE_L_NIU_NC	218
--#define SRST_CCI_SYS_NC		219
--#define SRST_CCI_DDR_NC		220
--#define SRST_CCI_NC		221
--#define SRST_TRACE_NC		222
--
--#define SRST_TIMER00		224
--#define SRST_TIMER01		225
--#define SRST_TIMER02		226
--#define SRST_TIMER03		227
--#define SRST_TIMER04		228
--#define SRST_TIMER05		229
--#define SRST_TIMER10		230
--#define SRST_TIMER11		231
--#define SRST_TIMER12		232
--#define SRST_TIMER13		233
--#define SRST_TIMER14		234
--#define SRST_TIMER15		235
--#define SRST_TIMER0_APB		236
--#define SRST_TIMER1_APB		237
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3399-cru.h b/include/dt-bindings/clock/rk3399-cru.h
-deleted file mode 100644
-index 211faf8fa891..000000000000
---- a/include/dt-bindings/clock/rk3399-cru.h
-+++ /dev/null
-@@ -1,749 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- * Copyright (c) 2016 Rockchip Electronics Co. Ltd.
-- */
--
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3399_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3399_H
--
--/* core clocks */
--#define PLL_APLLL			1
--#define PLL_APLLB			2
--#define PLL_DPLL			3
--#define PLL_CPLL			4
--#define PLL_GPLL			5
--#define PLL_NPLL			6
--#define PLL_VPLL			7
--#define ARMCLKL				8
--#define ARMCLKB				9
--
--/* sclk gates (special clocks) */
--#define SCLK_I2C1			65
--#define SCLK_I2C2			66
--#define SCLK_I2C3			67
--#define SCLK_I2C5			68
--#define SCLK_I2C6			69
--#define SCLK_I2C7			70
--#define SCLK_SPI0			71
--#define SCLK_SPI1			72
--#define SCLK_SPI2			73
--#define SCLK_SPI4			74
--#define SCLK_SPI5			75
--#define SCLK_SDMMC			76
--#define SCLK_SDIO			77
--#define SCLK_EMMC			78
--#define SCLK_TSADC			79
--#define SCLK_SARADC			80
--#define SCLK_UART0			81
--#define SCLK_UART1			82
--#define SCLK_UART2			83
--#define SCLK_UART3			84
--#define SCLK_SPDIF_8CH			85
--#define SCLK_I2S0_8CH			86
--#define SCLK_I2S1_8CH			87
--#define SCLK_I2S2_8CH			88
--#define SCLK_I2S_8CH_OUT		89
--#define SCLK_TIMER00			90
--#define SCLK_TIMER01			91
--#define SCLK_TIMER02			92
--#define SCLK_TIMER03			93
--#define SCLK_TIMER04			94
--#define SCLK_TIMER05			95
--#define SCLK_TIMER06			96
--#define SCLK_TIMER07			97
--#define SCLK_TIMER08			98
--#define SCLK_TIMER09			99
--#define SCLK_TIMER10			100
--#define SCLK_TIMER11			101
--#define SCLK_MACREF			102
--#define SCLK_MAC_RX			103
--#define SCLK_MAC_TX			104
--#define SCLK_MAC			105
--#define SCLK_MACREF_OUT			106
--#define SCLK_VOP0_PWM			107
--#define SCLK_VOP1_PWM			108
--#define SCLK_RGA_CORE			109
--#define SCLK_ISP0			110
--#define SCLK_ISP1			111
--#define SCLK_HDMI_CEC			112
--#define SCLK_HDMI_SFR			113
--#define SCLK_DP_CORE			114
--#define SCLK_PVTM_CORE_L		115
--#define SCLK_PVTM_CORE_B		116
--#define SCLK_PVTM_GPU			117
--#define SCLK_PVTM_DDR			118
--#define SCLK_MIPIDPHY_REF		119
--#define SCLK_MIPIDPHY_CFG		120
--#define SCLK_HSICPHY			121
--#define SCLK_USBPHY480M			122
--#define SCLK_USB2PHY0_REF		123
--#define SCLK_USB2PHY1_REF		124
--#define SCLK_UPHY0_TCPDPHY_REF		125
--#define SCLK_UPHY0_TCPDCORE		126
--#define SCLK_UPHY1_TCPDPHY_REF		127
--#define SCLK_UPHY1_TCPDCORE		128
--#define SCLK_USB3OTG0_REF		129
--#define SCLK_USB3OTG1_REF		130
--#define SCLK_USB3OTG0_SUSPEND		131
--#define SCLK_USB3OTG1_SUSPEND		132
--#define SCLK_CRYPTO0			133
--#define SCLK_CRYPTO1			134
--#define SCLK_CCI_TRACE			135
--#define SCLK_CS				136
--#define SCLK_CIF_OUT			137
--#define SCLK_PCIEPHY_REF		138
--#define SCLK_PCIE_CORE			139
--#define SCLK_M0_PERILP			140
--#define SCLK_M0_PERILP_DEC		141
--#define SCLK_CM0S			142
--#define SCLK_DBG_NOC			143
--#define SCLK_DBG_PD_CORE_B		144
--#define SCLK_DBG_PD_CORE_L		145
--#define SCLK_DFIMON0_TIMER		146
--#define SCLK_DFIMON1_TIMER		147
--#define SCLK_INTMEM0			148
--#define SCLK_INTMEM1			149
--#define SCLK_INTMEM2			150
--#define SCLK_INTMEM3			151
--#define SCLK_INTMEM4			152
--#define SCLK_INTMEM5			153
--#define SCLK_SDMMC_DRV			154
--#define SCLK_SDMMC_SAMPLE		155
--#define SCLK_SDIO_DRV			156
--#define SCLK_SDIO_SAMPLE		157
--#define SCLK_VDU_CORE			158
--#define SCLK_VDU_CA			159
--#define SCLK_PCIE_PM			160
--#define SCLK_SPDIF_REC_DPTX		161
--#define SCLK_DPHY_PLL			162
--#define SCLK_DPHY_TX0_CFG		163
--#define SCLK_DPHY_TX1RX1_CFG		164
--#define SCLK_DPHY_RX0_CFG		165
--#define SCLK_RMII_SRC			166
--#define SCLK_PCIEPHY_REF100M		167
--#define SCLK_USBPHY0_480M_SRC		168
--#define SCLK_USBPHY1_480M_SRC		169
--#define SCLK_DDRCLK			170
--#define SCLK_TESTOUT2			171
--
--#define DCLK_VOP0			180
--#define DCLK_VOP1			181
--#define DCLK_VOP0_DIV			182
--#define DCLK_VOP1_DIV			183
--#define DCLK_M0_PERILP			184
--
--#define FCLK_CM0S			190
--
--/* aclk gates */
--#define ACLK_PERIHP			192
--#define ACLK_PERIHP_NOC			193
--#define ACLK_PERILP0			194
--#define ACLK_PERILP0_NOC		195
--#define ACLK_PERF_PCIE			196
--#define ACLK_PCIE			197
--#define ACLK_INTMEM			198
--#define ACLK_TZMA			199
--#define ACLK_DCF			200
--#define ACLK_CCI			201
--#define ACLK_CCI_NOC0			202
--#define ACLK_CCI_NOC1			203
--#define ACLK_CCI_GRF			204
--#define ACLK_CENTER			205
--#define ACLK_CENTER_MAIN_NOC		206
--#define ACLK_CENTER_PERI_NOC		207
--#define ACLK_GPU			208
--#define ACLK_PERF_GPU			209
--#define ACLK_GPU_GRF			210
--#define ACLK_DMAC0_PERILP		211
--#define ACLK_DMAC1_PERILP		212
--#define ACLK_GMAC			213
--#define ACLK_GMAC_NOC			214
--#define ACLK_PERF_GMAC			215
--#define ACLK_VOP0_NOC			216
--#define ACLK_VOP0			217
--#define ACLK_VOP1_NOC			218
--#define ACLK_VOP1			219
--#define ACLK_RGA			220
--#define ACLK_RGA_NOC			221
--#define ACLK_HDCP			222
--#define ACLK_HDCP_NOC			223
--#define ACLK_HDCP22			224
--#define ACLK_IEP			225
--#define ACLK_IEP_NOC			226
--#define ACLK_VIO			227
--#define ACLK_VIO_NOC			228
--#define ACLK_ISP0			229
--#define ACLK_ISP1			230
--#define ACLK_ISP0_NOC			231
--#define ACLK_ISP1_NOC			232
--#define ACLK_ISP0_WRAPPER		233
--#define ACLK_ISP1_WRAPPER		234
--#define ACLK_VCODEC			235
--#define ACLK_VCODEC_NOC			236
--#define ACLK_VDU			237
--#define ACLK_VDU_NOC			238
--#define ACLK_PERI			239
--#define ACLK_EMMC			240
--#define ACLK_EMMC_CORE			241
--#define ACLK_EMMC_NOC			242
--#define ACLK_EMMC_GRF			243
--#define ACLK_USB3			244
--#define ACLK_USB3_NOC			245
--#define ACLK_USB3OTG0			246
--#define ACLK_USB3OTG1			247
--#define ACLK_USB3_RKSOC_AXI_PERF	248
--#define ACLK_USB3_GRF			249
--#define ACLK_GIC			250
--#define ACLK_GIC_NOC			251
--#define ACLK_GIC_ADB400_CORE_L_2_GIC	252
--#define ACLK_GIC_ADB400_CORE_B_2_GIC	253
--#define ACLK_GIC_ADB400_GIC_2_CORE_L	254
--#define ACLK_GIC_ADB400_GIC_2_CORE_B	255
--#define ACLK_CORE_ADB400_CORE_L_2_CCI500 256
--#define ACLK_CORE_ADB400_CORE_B_2_CCI500 257
--#define ACLK_ADB400M_PD_CORE_L		258
--#define ACLK_ADB400M_PD_CORE_B		259
--#define ACLK_PERF_CORE_L		260
--#define ACLK_PERF_CORE_B		261
--#define ACLK_GIC_PRE			262
--#define ACLK_VOP0_PRE			263
--#define ACLK_VOP1_PRE			264
--
--/* pclk gates */
--#define PCLK_PERIHP			320
--#define PCLK_PERIHP_NOC			321
--#define PCLK_PERILP0			322
--#define PCLK_PERILP1			323
--#define PCLK_PERILP1_NOC		324
--#define PCLK_PERILP_SGRF		325
--#define PCLK_PERIHP_GRF			326
--#define PCLK_PCIE			327
--#define PCLK_SGRF			328
--#define PCLK_INTR_ARB			329
--#define PCLK_CENTER_MAIN_NOC		330
--#define PCLK_CIC			331
--#define PCLK_COREDBG_B			332
--#define PCLK_COREDBG_L			333
--#define PCLK_DBG_CXCS_PD_CORE_B		334
--#define PCLK_DCF			335
--#define PCLK_GPIO2			336
--#define PCLK_GPIO3			337
--#define PCLK_GPIO4			338
--#define PCLK_GRF			339
--#define PCLK_HSICPHY			340
--#define PCLK_I2C1			341
--#define PCLK_I2C2			342
--#define PCLK_I2C3			343
--#define PCLK_I2C5			344
--#define PCLK_I2C6			345
--#define PCLK_I2C7			346
--#define PCLK_SPI0			347
--#define PCLK_SPI1			348
--#define PCLK_SPI2			349
--#define PCLK_SPI4			350
--#define PCLK_SPI5			351
--#define PCLK_UART0			352
--#define PCLK_UART1			353
--#define PCLK_UART2			354
--#define PCLK_UART3			355
--#define PCLK_TSADC			356
--#define PCLK_SARADC			357
--#define PCLK_GMAC			358
--#define PCLK_GMAC_NOC			359
--#define PCLK_TIMER0			360
--#define PCLK_TIMER1			361
--#define PCLK_EDP			362
--#define PCLK_EDP_NOC			363
--#define PCLK_EDP_CTRL			364
--#define PCLK_VIO			365
--#define PCLK_VIO_NOC			366
--#define PCLK_VIO_GRF			367
--#define PCLK_MIPI_DSI0			368
--#define PCLK_MIPI_DSI1			369
--#define PCLK_HDCP			370
--#define PCLK_HDCP_NOC			371
--#define PCLK_HDMI_CTRL			372
--#define PCLK_DP_CTRL			373
--#define PCLK_HDCP22			374
--#define PCLK_GASKET			375
--#define PCLK_DDR			376
--#define PCLK_DDR_MON			377
--#define PCLK_DDR_SGRF			378
--#define PCLK_ISP1_WRAPPER		379
--#define PCLK_WDT			380
--#define PCLK_EFUSE1024NS		381
--#define PCLK_EFUSE1024S			382
--#define PCLK_PMU_INTR_ARB		383
--#define PCLK_MAILBOX0			384
--#define PCLK_USBPHY_MUX_G		385
--#define PCLK_UPHY0_TCPHY_G		386
--#define PCLK_UPHY0_TCPD_G		387
--#define PCLK_UPHY1_TCPHY_G		388
--#define PCLK_UPHY1_TCPD_G		389
--#define PCLK_ALIVE			390
--
--/* hclk gates */
--#define HCLK_PERIHP			448
--#define HCLK_PERILP0			449
--#define HCLK_PERILP1			450
--#define HCLK_PERILP0_NOC		451
--#define HCLK_PERILP1_NOC		452
--#define HCLK_M0_PERILP			453
--#define HCLK_M0_PERILP_NOC		454
--#define HCLK_AHB1TOM			455
--#define HCLK_HOST0			456
--#define HCLK_HOST0_ARB			457
--#define HCLK_HOST1			458
--#define HCLK_HOST1_ARB			459
--#define HCLK_HSIC			460
--#define HCLK_SD				461
--#define HCLK_SDMMC			462
--#define HCLK_SDMMC_NOC			463
--#define HCLK_M_CRYPTO0			464
--#define HCLK_M_CRYPTO1			465
--#define HCLK_S_CRYPTO0			466
--#define HCLK_S_CRYPTO1			467
--#define HCLK_I2S0_8CH			468
--#define HCLK_I2S1_8CH			469
--#define HCLK_I2S2_8CH			470
--#define HCLK_SPDIF			471
--#define HCLK_VOP0_NOC			472
--#define HCLK_VOP0			473
--#define HCLK_VOP1_NOC			474
--#define HCLK_VOP1			475
--#define HCLK_ROM			476
--#define HCLK_IEP			477
--#define HCLK_IEP_NOC			478
--#define HCLK_ISP0			479
--#define HCLK_ISP1			480
--#define HCLK_ISP0_NOC			481
--#define HCLK_ISP1_NOC			482
--#define HCLK_ISP0_WRAPPER		483
--#define HCLK_ISP1_WRAPPER		484
--#define HCLK_RGA			485
--#define HCLK_RGA_NOC			486
--#define HCLK_HDCP			487
--#define HCLK_HDCP_NOC			488
--#define HCLK_HDCP22			489
--#define HCLK_VCODEC			490
--#define HCLK_VCODEC_NOC			491
--#define HCLK_VDU			492
--#define HCLK_VDU_NOC			493
--#define HCLK_SDIO			494
--#define HCLK_SDIO_NOC			495
--#define HCLK_SDIOAUDIO_NOC		496
--
--#define CLK_NR_CLKS			(HCLK_SDIOAUDIO_NOC + 1)
--
--/* pmu-clocks indices */
--
--#define PLL_PPLL			1
--
--#define SCLK_32K_SUSPEND_PMU		2
--#define SCLK_SPI3_PMU			3
--#define SCLK_TIMER12_PMU		4
--#define SCLK_TIMER13_PMU		5
--#define SCLK_UART4_PMU			6
--#define SCLK_PVTM_PMU			7
--#define SCLK_WIFI_PMU			8
--#define SCLK_I2C0_PMU			9
--#define SCLK_I2C4_PMU			10
--#define SCLK_I2C8_PMU			11
--
--#define PCLK_SRC_PMU			19
--#define PCLK_PMU			20
--#define PCLK_PMUGRF_PMU			21
--#define PCLK_INTMEM1_PMU		22
--#define PCLK_GPIO0_PMU			23
--#define PCLK_GPIO1_PMU			24
--#define PCLK_SGRF_PMU			25
--#define PCLK_NOC_PMU			26
--#define PCLK_I2C0_PMU			27
--#define PCLK_I2C4_PMU			28
--#define PCLK_I2C8_PMU			29
--#define PCLK_RKPWM_PMU			30
--#define PCLK_SPI3_PMU			31
--#define PCLK_TIMER_PMU			32
--#define PCLK_MAILBOX_PMU		33
--#define PCLK_UART4_PMU			34
--#define PCLK_WDT_M0_PMU			35
--
--#define FCLK_CM0S_SRC_PMU		44
--#define FCLK_CM0S_PMU			45
--#define SCLK_CM0S_PMU			46
--#define HCLK_CM0S_PMU			47
--#define DCLK_CM0S_PMU			48
--#define PCLK_INTR_ARB_PMU		49
--#define HCLK_NOC_PMU			50
--
--#define CLKPMU_NR_CLKS			(HCLK_NOC_PMU + 1)
--
--/* soft-reset indices */
--
--/* cru_softrst_con0 */
--#define SRST_CORE_L0			0
--#define SRST_CORE_B0			1
--#define SRST_CORE_PO_L0			2
--#define SRST_CORE_PO_B0			3
--#define SRST_L2_L			4
--#define SRST_L2_B			5
--#define SRST_ADB_L			6
--#define SRST_ADB_B			7
--#define SRST_A_CCI			8
--#define SRST_A_CCIM0_NOC		9
--#define SRST_A_CCIM1_NOC		10
--#define SRST_DBG_NOC			11
--
--/* cru_softrst_con1 */
--#define SRST_CORE_L0_T			16
--#define SRST_CORE_L1			17
--#define SRST_CORE_L2			18
--#define SRST_CORE_L3			19
--#define SRST_CORE_PO_L0_T		20
--#define SRST_CORE_PO_L1			21
--#define SRST_CORE_PO_L2			22
--#define SRST_CORE_PO_L3			23
--#define SRST_A_ADB400_GIC2COREL		24
--#define SRST_A_ADB400_COREL2GIC		25
--#define SRST_P_DBG_L			26
--#define SRST_L2_L_T			28
--#define SRST_ADB_L_T			29
--#define SRST_A_RKPERF_L			30
--#define SRST_PVTM_CORE_L		31
--
--/* cru_softrst_con2 */
--#define SRST_CORE_B0_T			32
--#define SRST_CORE_B1			33
--#define SRST_CORE_PO_B0_T		36
--#define SRST_CORE_PO_B1			37
--#define SRST_A_ADB400_GIC2COREB		40
--#define SRST_A_ADB400_COREB2GIC		41
--#define SRST_P_DBG_B			42
--#define SRST_L2_B_T			43
--#define SRST_ADB_B_T			45
--#define SRST_A_RKPERF_B			46
--#define SRST_PVTM_CORE_B		47
--
--/* cru_softrst_con3 */
--#define SRST_A_CCI_T			50
--#define SRST_A_CCIM0_NOC_T		51
--#define SRST_A_CCIM1_NOC_T		52
--#define SRST_A_ADB400M_PD_CORE_B_T	53
--#define SRST_A_ADB400M_PD_CORE_L_T	54
--#define SRST_DBG_NOC_T			55
--#define SRST_DBG_CXCS			56
--#define SRST_CCI_TRACE			57
--#define SRST_P_CCI_GRF			58
--
--/* cru_softrst_con4 */
--#define SRST_A_CENTER_MAIN_NOC		64
--#define SRST_A_CENTER_PERI_NOC		65
--#define SRST_P_CENTER_MAIN		66
--#define SRST_P_DDRMON			67
--#define SRST_P_CIC			68
--#define SRST_P_CENTER_SGRF		69
--#define SRST_DDR0_MSCH			70
--#define SRST_DDRCFG0_MSCH		71
--#define SRST_DDR0			72
--#define SRST_DDRPHY0			73
--#define SRST_DDR1_MSCH			74
--#define SRST_DDRCFG1_MSCH		75
--#define SRST_DDR1			76
--#define SRST_DDRPHY1			77
--#define SRST_DDR_CIC			78
--#define SRST_PVTM_DDR			79
--
--/* cru_softrst_con5 */
--#define SRST_A_VCODEC_NOC		80
--#define SRST_A_VCODEC			81
--#define SRST_H_VCODEC_NOC		82
--#define SRST_H_VCODEC			83
--#define SRST_A_VDU_NOC			88
--#define SRST_A_VDU			89
--#define SRST_H_VDU_NOC			90
--#define SRST_H_VDU			91
--#define SRST_VDU_CORE			92
--#define SRST_VDU_CA			93
--
--/* cru_softrst_con6 */
--#define SRST_A_IEP_NOC			96
--#define SRST_A_VOP_IEP			97
--#define SRST_A_IEP			98
--#define SRST_H_IEP_NOC			99
--#define SRST_H_IEP			100
--#define SRST_A_RGA_NOC			102
--#define SRST_A_RGA			103
--#define SRST_H_RGA_NOC			104
--#define SRST_H_RGA			105
--#define SRST_RGA_CORE			106
--#define SRST_EMMC_NOC			108
--#define SRST_EMMC			109
--#define SRST_EMMC_GRF			110
--
--/* cru_softrst_con7 */
--#define SRST_A_PERIHP_NOC		112
--#define SRST_P_PERIHP_GRF		113
--#define SRST_H_PERIHP_NOC		114
--#define SRST_USBHOST0			115
--#define SRST_HOSTC0_AUX			116
--#define SRST_HOST0_ARB			117
--#define SRST_USBHOST1			118
--#define SRST_HOSTC1_AUX			119
--#define SRST_HOST1_ARB			120
--#define SRST_SDIO0			121
--#define SRST_SDMMC			122
--#define SRST_HSIC			123
--#define SRST_HSIC_AUX			124
--#define SRST_AHB1TOM			125
--#define SRST_P_PERIHP_NOC		126
--#define SRST_HSICPHY			127
--
--/* cru_softrst_con8 */
--#define SRST_A_PCIE			128
--#define SRST_P_PCIE			129
--#define SRST_PCIE_CORE			130
--#define SRST_PCIE_MGMT			131
--#define SRST_PCIE_MGMT_STICKY		132
--#define SRST_PCIE_PIPE			133
--#define SRST_PCIE_PM			134
--#define SRST_PCIEPHY			135
--#define SRST_A_GMAC_NOC			136
--#define SRST_A_GMAC			137
--#define SRST_P_GMAC_NOC			138
--#define SRST_P_GMAC_GRF			140
--#define SRST_HSICPHY_POR		142
--#define SRST_HSICPHY_UTMI		143
--
--/* cru_softrst_con9 */
--#define SRST_USB2PHY0_POR		144
--#define SRST_USB2PHY0_UTMI_PORT0	145
--#define SRST_USB2PHY0_UTMI_PORT1	146
--#define SRST_USB2PHY0_EHCIPHY		147
--#define SRST_UPHY0_PIPE_L00		148
--#define SRST_UPHY0			149
--#define SRST_UPHY0_TCPDPWRUP		150
--#define SRST_USB2PHY1_POR		152
--#define SRST_USB2PHY1_UTMI_PORT0	153
--#define SRST_USB2PHY1_UTMI_PORT1	154
--#define SRST_USB2PHY1_EHCIPHY		155
--#define SRST_UPHY1_PIPE_L00		156
--#define SRST_UPHY1			157
--#define SRST_UPHY1_TCPDPWRUP		158
--
--/* cru_softrst_con10 */
--#define SRST_A_PERILP0_NOC		160
--#define SRST_A_DCF			161
--#define SRST_GIC500			162
--#define SRST_DMAC0_PERILP0		163
--#define SRST_DMAC1_PERILP0		164
--#define SRST_TZMA			165
--#define SRST_INTMEM			166
--#define SRST_ADB400_MST0		167
--#define SRST_ADB400_MST1		168
--#define SRST_ADB400_SLV0		169
--#define SRST_ADB400_SLV1		170
--#define SRST_H_PERILP0			171
--#define SRST_H_PERILP0_NOC		172
--#define SRST_ROM			173
--#define SRST_CRYPTO_S			174
--#define SRST_CRYPTO_M			175
--
--/* cru_softrst_con11 */
--#define SRST_P_DCF			176
--#define SRST_CM0S_NOC			177
--#define SRST_CM0S			178
--#define SRST_CM0S_DBG			179
--#define SRST_CM0S_PO			180
--#define SRST_CRYPTO			181
--#define SRST_P_PERILP1_SGRF		182
--#define SRST_P_PERILP1_GRF		183
--#define SRST_CRYPTO1_S			184
--#define SRST_CRYPTO1_M			185
--#define SRST_CRYPTO1			186
--#define SRST_GIC_NOC			188
--#define SRST_SD_NOC			189
--#define SRST_SDIOAUDIO_BRG		190
--
--/* cru_softrst_con12 */
--#define SRST_H_PERILP1			192
--#define SRST_H_PERILP1_NOC		193
--#define SRST_H_I2S0_8CH			194
--#define SRST_H_I2S1_8CH			195
--#define SRST_H_I2S2_8CH			196
--#define SRST_H_SPDIF_8CH		197
--#define SRST_P_PERILP1_NOC		198
--#define SRST_P_EFUSE_1024		199
--#define SRST_P_EFUSE_1024S		200
--#define SRST_P_I2C0			201
--#define SRST_P_I2C1			202
--#define SRST_P_I2C2			203
--#define SRST_P_I2C3			204
--#define SRST_P_I2C4			205
--#define SRST_P_I2C5			206
--#define SRST_P_MAILBOX0			207
--
--/* cru_softrst_con13 */
--#define SRST_P_UART0			208
--#define SRST_P_UART1			209
--#define SRST_P_UART2			210
--#define SRST_P_UART3			211
--#define SRST_P_SARADC			212
--#define SRST_P_TSADC			213
--#define SRST_P_SPI0			214
--#define SRST_P_SPI1			215
--#define SRST_P_SPI2			216
--#define SRST_P_SPI4			217
--#define SRST_P_SPI5			218
--#define SRST_SPI0			219
--#define SRST_SPI1			220
--#define SRST_SPI2			221
--#define SRST_SPI4			222
--#define SRST_SPI5			223
--
--/* cru_softrst_con14 */
--#define SRST_I2S0_8CH			224
--#define SRST_I2S1_8CH			225
--#define SRST_I2S2_8CH			226
--#define SRST_SPDIF_8CH			227
--#define SRST_UART0			228
--#define SRST_UART1			229
--#define SRST_UART2			230
--#define SRST_UART3			231
--#define SRST_TSADC			232
--#define SRST_I2C0			233
--#define SRST_I2C1			234
--#define SRST_I2C2			235
--#define SRST_I2C3			236
--#define SRST_I2C4			237
--#define SRST_I2C5			238
--#define SRST_SDIOAUDIO_NOC		239
--
--/* cru_softrst_con15 */
--#define SRST_A_VIO_NOC			240
--#define SRST_A_HDCP_NOC			241
--#define SRST_A_HDCP			242
--#define SRST_H_HDCP_NOC			243
--#define SRST_H_HDCP			244
--#define SRST_P_HDCP_NOC			245
--#define SRST_P_HDCP			246
--#define SRST_P_HDMI_CTRL		247
--#define SRST_P_DP_CTRL			248
--#define SRST_S_DP_CTRL			249
--#define SRST_C_DP_CTRL			250
--#define SRST_P_MIPI_DSI0		251
--#define SRST_P_MIPI_DSI1		252
--#define SRST_DP_CORE			253
--#define SRST_DP_I2S			254
--
--/* cru_softrst_con16 */
--#define SRST_GASKET			256
--#define SRST_VIO_GRF			258
--#define SRST_DPTX_SPDIF_REC		259
--#define SRST_HDMI_CTRL			260
--#define SRST_HDCP_CTRL			261
--#define SRST_A_ISP0_NOC			262
--#define SRST_A_ISP1_NOC			263
--#define SRST_H_ISP0_NOC			266
--#define SRST_H_ISP1_NOC			267
--#define SRST_H_ISP0			268
--#define SRST_H_ISP1			269
--#define SRST_ISP0			270
--#define SRST_ISP1			271
--
--/* cru_softrst_con17 */
--#define SRST_A_VOP0_NOC			272
--#define SRST_A_VOP1_NOC			273
--#define SRST_A_VOP0			274
--#define SRST_A_VOP1			275
--#define SRST_H_VOP0_NOC			276
--#define SRST_H_VOP1_NOC			277
--#define SRST_H_VOP0			278
--#define SRST_H_VOP1			279
--#define SRST_D_VOP0			280
--#define SRST_D_VOP1			281
--#define SRST_VOP0_PWM			282
--#define SRST_VOP1_PWM			283
--#define SRST_P_EDP_NOC			284
--#define SRST_P_EDP_CTRL			285
--
--/* cru_softrst_con18 */
--#define SRST_A_GPU			288
--#define SRST_A_GPU_NOC			289
--#define SRST_A_GPU_GRF			290
--#define SRST_PVTM_GPU			291
--#define SRST_A_USB3_NOC			292
--#define SRST_A_USB3_OTG0		293
--#define SRST_A_USB3_OTG1		294
--#define SRST_A_USB3_GRF			295
--#define SRST_PMU			296
--
--/* cru_softrst_con19 */
--#define SRST_P_TIMER0_5			304
--#define SRST_TIMER0			305
--#define SRST_TIMER1			306
--#define SRST_TIMER2			307
--#define SRST_TIMER3			308
--#define SRST_TIMER4			309
--#define SRST_TIMER5			310
--#define SRST_P_TIMER6_11		311
--#define SRST_TIMER6			312
--#define SRST_TIMER7			313
--#define SRST_TIMER8			314
--#define SRST_TIMER9			315
--#define SRST_TIMER10			316
--#define SRST_TIMER11			317
--#define SRST_P_INTR_ARB_PMU		318
--#define SRST_P_ALIVE_SGRF		319
--
--/* cru_softrst_con20 */
--#define SRST_P_GPIO2			320
--#define SRST_P_GPIO3			321
--#define SRST_P_GPIO4			322
--#define SRST_P_GRF			323
--#define SRST_P_ALIVE_NOC		324
--#define SRST_P_WDT0			325
--#define SRST_P_WDT1			326
--#define SRST_P_INTR_ARB			327
--#define SRST_P_UPHY0_DPTX		328
--#define SRST_P_UPHY0_APB		330
--#define SRST_P_UPHY0_TCPHY		332
--#define SRST_P_UPHY1_TCPHY		333
--#define SRST_P_UPHY0_TCPDCTRL		334
--#define SRST_P_UPHY1_TCPDCTRL		335
--
--/* pmu soft-reset indices */
--
--/* pmu_cru_softrst_con0 */
--#define SRST_P_NOC			0
--#define SRST_P_INTMEM			1
--#define SRST_H_CM0S			2
--#define SRST_H_CM0S_NOC			3
--#define SRST_DBG_CM0S			4
--#define SRST_PO_CM0S			5
--#define SRST_P_SPI3			6
--#define SRST_SPI3			7
--#define SRST_P_TIMER_0_1		8
--#define SRST_P_TIMER_0			9
--#define SRST_P_TIMER_1			10
--#define SRST_P_UART4			11
--#define SRST_UART4			12
--#define SRST_P_WDT			13
--
--/* pmu_cru_softrst_con1 */
--#define SRST_P_I2C6			16
--#define SRST_P_I2C7			17
--#define SRST_P_I2C8			18
--#define SRST_P_MAILBOX			19
--#define SRST_P_RKPWM			20
--#define SRST_P_PMUGRF			21
--#define SRST_P_SGRF			22
--#define SRST_P_GPIO0			23
--#define SRST_P_GPIO1			24
--#define SRST_P_CRU			25
--#define SRST_P_INTR			26
--#define SRST_PVTM			27
--#define SRST_I2C6			28
--#define SRST_I2C7			29
--#define SRST_I2C8			30
--
--#endif
-diff --git a/include/dt-bindings/clock/rk3568-cru.h b/include/dt-bindings/clock/rk3568-cru.h
-deleted file mode 100644
-index d29890865150..000000000000
---- a/include/dt-bindings/clock/rk3568-cru.h
-+++ /dev/null
-@@ -1,926 +0,0 @@
+@@ -1,24 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * Copyright (c) 2021 Rockchip Electronics Co. Ltd.
-- * Author: Elaine Zhang <zhangqing@rock-chips.com>
-- */
+-#ifndef __DT_BINDINGS_POWER_RK3188_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3188_POWER_H__
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3568_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3568_H
+-/* VD_CORE */
+-#define RK3188_PD_A9_0		0
+-#define RK3188_PD_A9_1		1
+-#define RK3188_PD_A9_2		2
+-#define RK3188_PD_A9_3		3
+-#define RK3188_PD_DBG		4
+-#define RK3188_PD_SCU		5
 -
--/* pmucru-clocks indices */
+-/* VD_LOGIC */
+-#define RK3188_PD_VIDEO		6
+-#define RK3188_PD_VIO		7
+-#define RK3188_PD_GPU		8
+-#define RK3188_PD_PERI		9
+-#define RK3188_PD_CPU		10
+-#define RK3188_PD_ALIVE		11
 -
--/* pmucru plls */
--#define PLL_PPLL		1
--#define PLL_HPLL		2
--
--/* pmucru clocks */
--#define XIN_OSC0_DIV		4
--#define CLK_RTC_32K		5
--#define CLK_PMU			6
--#define CLK_I2C0		7
--#define CLK_RTC32K_FRAC		8
--#define CLK_UART0_DIV		9
--#define CLK_UART0_FRAC		10
--#define SCLK_UART0		11
--#define DBCLK_GPIO0		12
--#define CLK_PWM0		13
--#define CLK_CAPTURE_PWM0_NDFT	14
--#define CLK_PMUPVTM		15
--#define CLK_CORE_PMUPVTM	16
--#define CLK_REF24M		17
--#define XIN_OSC0_USBPHY0_G	18
--#define CLK_USBPHY0_REF		19
--#define XIN_OSC0_USBPHY1_G	20
--#define CLK_USBPHY1_REF		21
--#define XIN_OSC0_MIPIDSIPHY0_G	22
--#define CLK_MIPIDSIPHY0_REF	23
--#define XIN_OSC0_MIPIDSIPHY1_G	24
--#define CLK_MIPIDSIPHY1_REF	25
--#define CLK_WIFI_DIV		26
--#define CLK_WIFI_OSC0		27
--#define CLK_WIFI		28
--#define CLK_PCIEPHY0_DIV	29
--#define CLK_PCIEPHY0_OSC0	30
--#define CLK_PCIEPHY0_REF	31
--#define CLK_PCIEPHY1_DIV	32
--#define CLK_PCIEPHY1_OSC0	33
--#define CLK_PCIEPHY1_REF	34
--#define CLK_PCIEPHY2_DIV	35
--#define CLK_PCIEPHY2_OSC0	36
--#define CLK_PCIEPHY2_REF	37
--#define CLK_PCIE30PHY_REF_M	38
--#define CLK_PCIE30PHY_REF_N	39
--#define CLK_HDMI_REF		40
--#define XIN_OSC0_EDPPHY_G	41
--#define PCLK_PDPMU		42
--#define PCLK_PMU		43
--#define PCLK_UART0		44
--#define PCLK_I2C0		45
--#define PCLK_GPIO0		46
--#define PCLK_PMUPVTM		47
--#define PCLK_PWM0		48
--#define CLK_PDPMU		49
--#define SCLK_32K_IOE		50
--
--#define CLKPMU_NR_CLKS		(SCLK_32K_IOE + 1)
--
--/* cru-clocks indices */
--
--/* cru plls */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_GPLL		4
--#define PLL_VPLL		5
--#define PLL_NPLL		6
--
--/* cru clocks */
--#define CPLL_333M		9
--#define ARMCLK			10
--#define USB480M			11
--#define ACLK_CORE_NIU2BUS	18
--#define CLK_CORE_PVTM		19
--#define CLK_CORE_PVTM_CORE	20
--#define CLK_CORE_PVTPLL		21
--#define CLK_GPU_SRC		22
--#define CLK_GPU_PRE_NDFT	23
--#define CLK_GPU_PRE_MUX		24
--#define ACLK_GPU_PRE		25
--#define PCLK_GPU_PRE		26
--#define CLK_GPU			27
--#define CLK_GPU_NP5		28
--#define PCLK_GPU_PVTM		29
--#define CLK_GPU_PVTM		30
--#define CLK_GPU_PVTM_CORE	31
--#define CLK_GPU_PVTPLL		32
--#define CLK_NPU_SRC		33
--#define CLK_NPU_PRE_NDFT	34
--#define CLK_NPU			35
--#define CLK_NPU_NP5		36
--#define HCLK_NPU_PRE		37
--#define PCLK_NPU_PRE		38
--#define ACLK_NPU_PRE		39
--#define ACLK_NPU		40
--#define HCLK_NPU		41
--#define PCLK_NPU_PVTM		42
--#define CLK_NPU_PVTM		43
--#define CLK_NPU_PVTM_CORE	44
--#define CLK_NPU_PVTPLL		45
--#define CLK_DDRPHY1X_SRC	46
--#define CLK_DDRPHY1X_HWFFC_SRC	47
--#define CLK_DDR1X		48
--#define CLK_MSCH		49
--#define CLK24_DDRMON		50
--#define ACLK_GIC_AUDIO		51
--#define HCLK_GIC_AUDIO		52
--#define HCLK_SDMMC_BUFFER	53
--#define DCLK_SDMMC_BUFFER	54
--#define ACLK_GIC600		55
--#define ACLK_SPINLOCK		56
--#define HCLK_I2S0_8CH		57
--#define HCLK_I2S1_8CH		58
--#define HCLK_I2S2_2CH		59
--#define HCLK_I2S3_2CH		60
--#define CLK_I2S0_8CH_TX_SRC	61
--#define CLK_I2S0_8CH_TX_FRAC	62
--#define MCLK_I2S0_8CH_TX	63
--#define I2S0_MCLKOUT_TX		64
--#define CLK_I2S0_8CH_RX_SRC	65
--#define CLK_I2S0_8CH_RX_FRAC	66
--#define MCLK_I2S0_8CH_RX	67
--#define I2S0_MCLKOUT_RX		68
--#define CLK_I2S1_8CH_TX_SRC	69
--#define CLK_I2S1_8CH_TX_FRAC	70
--#define MCLK_I2S1_8CH_TX	71
--#define I2S1_MCLKOUT_TX		72
--#define CLK_I2S1_8CH_RX_SRC	73
--#define CLK_I2S1_8CH_RX_FRAC	74
--#define MCLK_I2S1_8CH_RX	75
--#define I2S1_MCLKOUT_RX		76
--#define CLK_I2S2_2CH_SRC	77
--#define CLK_I2S2_2CH_FRAC	78
--#define MCLK_I2S2_2CH		79
--#define I2S2_MCLKOUT		80
--#define CLK_I2S3_2CH_TX_SRC	81
--#define CLK_I2S3_2CH_TX_FRAC	82
--#define MCLK_I2S3_2CH_TX	83
--#define I2S3_MCLKOUT_TX		84
--#define CLK_I2S3_2CH_RX_SRC	85
--#define CLK_I2S3_2CH_RX_FRAC	86
--#define MCLK_I2S3_2CH_RX	87
--#define I2S3_MCLKOUT_RX		88
--#define HCLK_PDM		89
--#define MCLK_PDM		90
--#define HCLK_VAD		91
--#define HCLK_SPDIF_8CH		92
--#define MCLK_SPDIF_8CH_SRC	93
--#define MCLK_SPDIF_8CH_FRAC	94
--#define MCLK_SPDIF_8CH		95
--#define HCLK_AUDPWM		96
--#define SCLK_AUDPWM_SRC		97
--#define SCLK_AUDPWM_FRAC	98
--#define SCLK_AUDPWM		99
--#define HCLK_ACDCDIG		100
--#define CLK_ACDCDIG_I2C		101
--#define CLK_ACDCDIG_DAC		102
--#define CLK_ACDCDIG_ADC		103
--#define ACLK_SECURE_FLASH	104
--#define HCLK_SECURE_FLASH	105
--#define ACLK_CRYPTO_NS		106
--#define HCLK_CRYPTO_NS		107
--#define CLK_CRYPTO_NS_CORE	108
--#define CLK_CRYPTO_NS_PKA	109
--#define CLK_CRYPTO_NS_RNG	110
--#define HCLK_TRNG_NS		111
--#define CLK_TRNG_NS		112
--#define PCLK_OTPC_NS		113
--#define CLK_OTPC_NS_SBPI	114
--#define CLK_OTPC_NS_USR		115
--#define HCLK_NANDC		116
--#define NCLK_NANDC		117
--#define HCLK_SFC		118
--#define HCLK_SFC_XIP		119
--#define SCLK_SFC		120
--#define ACLK_EMMC		121
--#define HCLK_EMMC		122
--#define BCLK_EMMC		123
--#define CCLK_EMMC		124
--#define TCLK_EMMC		125
--#define ACLK_PIPE		126
--#define PCLK_PIPE		127
--#define PCLK_PIPE_GRF		128
--#define ACLK_PCIE20_MST		129
--#define ACLK_PCIE20_SLV		130
--#define ACLK_PCIE20_DBI		131
--#define PCLK_PCIE20		132
--#define CLK_PCIE20_AUX_NDFT	133
--#define CLK_PCIE20_AUX_DFT	134
--#define CLK_PCIE20_PIPE_DFT	135
--#define ACLK_PCIE30X1_MST	136
--#define ACLK_PCIE30X1_SLV	137
--#define ACLK_PCIE30X1_DBI	138
--#define PCLK_PCIE30X1		139
--#define CLK_PCIE30X1_AUX_NDFT	140
--#define CLK_PCIE30X1_AUX_DFT	141
--#define CLK_PCIE30X1_PIPE_DFT	142
--#define ACLK_PCIE30X2_MST	143
--#define ACLK_PCIE30X2_SLV	144
--#define ACLK_PCIE30X2_DBI	145
--#define PCLK_PCIE30X2		146
--#define CLK_PCIE30X2_AUX_NDFT	147
--#define CLK_PCIE30X2_AUX_DFT	148
--#define CLK_PCIE30X2_PIPE_DFT	149
--#define ACLK_SATA0		150
--#define CLK_SATA0_PMALIVE	151
--#define CLK_SATA0_RXOOB		152
--#define CLK_SATA0_PIPE_NDFT	153
--#define CLK_SATA0_PIPE_DFT	154
--#define ACLK_SATA1		155
--#define CLK_SATA1_PMALIVE	156
--#define CLK_SATA1_RXOOB		157
--#define CLK_SATA1_PIPE_NDFT	158
--#define CLK_SATA1_PIPE_DFT	159
--#define ACLK_SATA2		160
--#define CLK_SATA2_PMALIVE	161
--#define CLK_SATA2_RXOOB		162
--#define CLK_SATA2_PIPE_NDFT	163
--#define CLK_SATA2_PIPE_DFT	164
--#define ACLK_USB3OTG0		165
--#define CLK_USB3OTG0_REF	166
--#define CLK_USB3OTG0_SUSPEND	167
--#define ACLK_USB3OTG1		168
--#define CLK_USB3OTG1_REF	169
--#define CLK_USB3OTG1_SUSPEND	170
--#define CLK_XPCS_EEE		171
--#define PCLK_XPCS		172
--#define ACLK_PHP		173
--#define HCLK_PHP		174
--#define PCLK_PHP		175
--#define HCLK_SDMMC0		176
--#define CLK_SDMMC0		177
--#define HCLK_SDMMC1		178
--#define CLK_SDMMC1		179
--#define ACLK_GMAC0		180
--#define PCLK_GMAC0		181
--#define CLK_MAC0_2TOP		182
--#define CLK_MAC0_OUT		183
--#define CLK_MAC0_REFOUT		184
--#define CLK_GMAC0_PTP_REF	185
--#define ACLK_USB		186
--#define HCLK_USB		187
--#define PCLK_USB		188
--#define HCLK_USB2HOST0		189
--#define HCLK_USB2HOST0_ARB	190
--#define HCLK_USB2HOST1		191
--#define HCLK_USB2HOST1_ARB	192
--#define HCLK_SDMMC2		193
--#define CLK_SDMMC2		194
--#define ACLK_GMAC1		195
--#define PCLK_GMAC1		196
--#define CLK_MAC1_2TOP		197
--#define CLK_MAC1_OUT		198
--#define CLK_MAC1_REFOUT		199
--#define CLK_GMAC1_PTP_REF	200
--#define ACLK_PERIMID		201
--#define HCLK_PERIMID		202
--#define ACLK_VI			203
--#define HCLK_VI			204
--#define PCLK_VI			205
--#define ACLK_VICAP		206
--#define HCLK_VICAP		207
--#define DCLK_VICAP		208
--#define ICLK_VICAP_G		209
--#define ACLK_ISP		210
--#define HCLK_ISP		211
--#define CLK_ISP			212
--#define PCLK_CSI2HOST1		213
--#define CLK_CIF_OUT		214
--#define CLK_CAM0_OUT		215
--#define CLK_CAM1_OUT		216
--#define ACLK_VO			217
--#define HCLK_VO			218
--#define PCLK_VO			219
--#define ACLK_VOP_PRE		220
--#define ACLK_VOP		221
--#define HCLK_VOP		222
--#define DCLK_VOP0		223
--#define DCLK_VOP1		224
--#define DCLK_VOP2		225
--#define CLK_VOP_PWM		226
--#define ACLK_HDCP		227
--#define HCLK_HDCP		228
--#define PCLK_HDCP		229
--#define PCLK_HDMI_HOST		230
--#define CLK_HDMI_SFR		231
--#define PCLK_DSITX_0		232
--#define PCLK_DSITX_1		233
--#define PCLK_EDP_CTRL		234
--#define CLK_EDP_200M		235
--#define ACLK_VPU_PRE		236
--#define HCLK_VPU_PRE		237
--#define ACLK_VPU		238
--#define HCLK_VPU		239
--#define ACLK_RGA_PRE		240
--#define HCLK_RGA_PRE		241
--#define PCLK_RGA_PRE		242
--#define ACLK_RGA		243
--#define HCLK_RGA		244
--#define CLK_RGA_CORE		245
--#define ACLK_IEP		246
--#define HCLK_IEP		247
--#define CLK_IEP_CORE		248
--#define HCLK_EBC		249
--#define DCLK_EBC		250
--#define ACLK_JDEC		251
--#define HCLK_JDEC		252
--#define ACLK_JENC		253
--#define HCLK_JENC		254
--#define PCLK_EINK		255
--#define HCLK_EINK		256
--#define ACLK_RKVENC_PRE		257
--#define HCLK_RKVENC_PRE		258
--#define ACLK_RKVENC		259
--#define HCLK_RKVENC		260
--#define CLK_RKVENC_CORE		261
--#define ACLK_RKVDEC_PRE		262
--#define HCLK_RKVDEC_PRE		263
--#define ACLK_RKVDEC		264
--#define HCLK_RKVDEC		265
--#define CLK_RKVDEC_CA		266
--#define CLK_RKVDEC_CORE		267
--#define CLK_RKVDEC_HEVC_CA	268
--#define ACLK_BUS		269
--#define PCLK_BUS		270
--#define PCLK_TSADC		271
--#define CLK_TSADC_TSEN		272
--#define CLK_TSADC		273
--#define PCLK_SARADC		274
--#define CLK_SARADC		275
--#define PCLK_SCR		276
--#define PCLK_WDT_NS		277
--#define TCLK_WDT_NS		278
--#define ACLK_DMAC0		279
--#define ACLK_DMAC1		280
--#define ACLK_MCU		281
--#define PCLK_INTMUX		282
--#define PCLK_MAILBOX		283
--#define PCLK_UART1		284
--#define CLK_UART1_SRC		285
--#define CLK_UART1_FRAC		286
--#define SCLK_UART1		287
--#define PCLK_UART2		288
--#define CLK_UART2_SRC		289
--#define CLK_UART2_FRAC		290
--#define SCLK_UART2		291
--#define PCLK_UART3		292
--#define CLK_UART3_SRC		293
--#define CLK_UART3_FRAC		294
--#define SCLK_UART3		295
--#define PCLK_UART4		296
--#define CLK_UART4_SRC		297
--#define CLK_UART4_FRAC		298
--#define SCLK_UART4		299
--#define PCLK_UART5		300
--#define CLK_UART5_SRC		301
--#define CLK_UART5_FRAC		302
--#define SCLK_UART5		303
--#define PCLK_UART6		304
--#define CLK_UART6_SRC		305
--#define CLK_UART6_FRAC		306
--#define SCLK_UART6		307
--#define PCLK_UART7		308
--#define CLK_UART7_SRC		309
--#define CLK_UART7_FRAC		310
--#define SCLK_UART7		311
--#define PCLK_UART8		312
--#define CLK_UART8_SRC		313
--#define CLK_UART8_FRAC		314
--#define SCLK_UART8		315
--#define PCLK_UART9		316
--#define CLK_UART9_SRC		317
--#define CLK_UART9_FRAC		318
--#define SCLK_UART9		319
--#define PCLK_CAN0		320
--#define CLK_CAN0		321
--#define PCLK_CAN1		322
--#define CLK_CAN1		323
--#define PCLK_CAN2		324
--#define CLK_CAN2		325
--#define CLK_I2C			326
--#define PCLK_I2C1		327
--#define CLK_I2C1		328
--#define PCLK_I2C2		329
--#define CLK_I2C2		330
--#define PCLK_I2C3		331
--#define CLK_I2C3		332
--#define PCLK_I2C4		333
--#define CLK_I2C4		334
--#define PCLK_I2C5		335
--#define CLK_I2C5		336
--#define PCLK_SPI0		337
--#define CLK_SPI0		338
--#define PCLK_SPI1		339
--#define CLK_SPI1		340
--#define PCLK_SPI2		341
--#define CLK_SPI2		342
--#define PCLK_SPI3		343
--#define CLK_SPI3		344
--#define PCLK_PWM1		345
--#define CLK_PWM1		346
--#define CLK_PWM1_CAPTURE	347
--#define PCLK_PWM2		348
--#define CLK_PWM2		349
--#define CLK_PWM2_CAPTURE	350
--#define PCLK_PWM3		351
--#define CLK_PWM3		352
--#define CLK_PWM3_CAPTURE	353
--#define DBCLK_GPIO		354
--#define PCLK_GPIO1		355
--#define DBCLK_GPIO1		356
--#define PCLK_GPIO2		357
--#define DBCLK_GPIO2		358
--#define PCLK_GPIO3		359
--#define DBCLK_GPIO3		360
--#define PCLK_GPIO4		361
--#define DBCLK_GPIO4		362
--#define OCC_SCAN_CLK_GPIO	363
--#define PCLK_TIMER		364
--#define CLK_TIMER0		365
--#define CLK_TIMER1		366
--#define CLK_TIMER2		367
--#define CLK_TIMER3		368
--#define CLK_TIMER4		369
--#define CLK_TIMER5		370
--#define ACLK_TOP_HIGH		371
--#define ACLK_TOP_LOW		372
--#define HCLK_TOP		373
--#define PCLK_TOP		374
--#define PCLK_PCIE30PHY		375
--#define CLK_OPTC_ARB		376
--#define PCLK_MIPICSIPHY		377
--#define PCLK_MIPIDSIPHY0	378
--#define PCLK_MIPIDSIPHY1	379
--#define PCLK_PIPEPHY0		380
--#define PCLK_PIPEPHY1		381
--#define PCLK_PIPEPHY2		382
--#define PCLK_CPU_BOOST		383
--#define CLK_CPU_BOOST		384
--#define PCLK_OTPPHY		385
--#define SCLK_GMAC0		386
--#define SCLK_GMAC0_RGMII_SPEED	387
--#define SCLK_GMAC0_RMII_SPEED	388
--#define SCLK_GMAC0_RX_TX	389
--#define SCLK_GMAC1		390
--#define SCLK_GMAC1_RGMII_SPEED	391
--#define SCLK_GMAC1_RMII_SPEED	392
--#define SCLK_GMAC1_RX_TX	393
--#define SCLK_SDMMC0_DRV		394
--#define SCLK_SDMMC0_SAMPLE	395
--#define SCLK_SDMMC1_DRV		396
--#define SCLK_SDMMC1_SAMPLE	397
--#define SCLK_SDMMC2_DRV		398
--#define SCLK_SDMMC2_SAMPLE	399
--#define SCLK_EMMC_DRV		400
--#define SCLK_EMMC_SAMPLE	401
--#define PCLK_EDPPHY_GRF		402
--#define CLK_HDMI_CEC            403
--#define CLK_I2S0_8CH_TX		404
--#define CLK_I2S0_8CH_RX		405
--#define CLK_I2S1_8CH_TX		406
--#define CLK_I2S1_8CH_RX		407
--#define CLK_I2S2_2CH		408
--#define CLK_I2S3_2CH_TX		409
--#define CLK_I2S3_2CH_RX		410
--#define CPLL_500M		411
--#define CPLL_250M		412
--#define CPLL_125M		413
--#define CPLL_62P5M		414
--#define CPLL_50M		415
--#define CPLL_25M		416
--#define CPLL_100M		417
--#define SCLK_DDRCLK		418
--
--#define PCLK_CORE_PVTM		450
--
--#define CLK_NR_CLKS		(PCLK_CORE_PVTM + 1)
--
--/* pmu soft-reset indices */
--/* pmucru_softrst_con0 */
--#define SRST_P_PDPMU_NIU	0
--#define SRST_P_PMUCRU		1
--#define SRST_P_PMUGRF		2
--#define SRST_P_I2C0		3
--#define SRST_I2C0		4
--#define SRST_P_UART0		5
--#define SRST_S_UART0		6
--#define SRST_P_PWM0		7
--#define SRST_PWM0		8
--#define SRST_P_GPIO0		9
--#define SRST_GPIO0		10
--#define SRST_P_PMUPVTM		11
--#define SRST_PMUPVTM		12
--
--/* soft-reset indices */
--
--/* cru_softrst_con0 */
--#define SRST_NCORERESET0	0
--#define SRST_NCORERESET1	1
--#define SRST_NCORERESET2	2
--#define SRST_NCORERESET3	3
--#define SRST_NCPUPORESET0	4
--#define SRST_NCPUPORESET1	5
--#define SRST_NCPUPORESET2	6
--#define SRST_NCPUPORESET3	7
--#define SRST_NSRESET		8
--#define SRST_NSPORESET		9
--#define SRST_NATRESET		10
--#define SRST_NGICRESET		11
--#define SRST_NPRESET		12
--#define SRST_NPERIPHRESET	13
--
--/* cru_softrst_con1 */
--#define SRST_A_CORE_NIU2DDR	16
--#define SRST_A_CORE_NIU2BUS	17
--#define SRST_P_DBG_NIU		18
--#define SRST_P_DBG		19
--#define SRST_P_DBG_DAPLITE	20
--#define SRST_DAP		21
--#define SRST_A_ADB400_CORE2GIC	22
--#define SRST_A_ADB400_GIC2CORE	23
--#define SRST_P_CORE_GRF		24
--#define SRST_P_CORE_PVTM	25
--#define SRST_CORE_PVTM		26
--#define SRST_CORE_PVTPLL	27
--
--/* cru_softrst_con2 */
--#define SRST_GPU		32
--#define SRST_A_GPU_NIU		33
--#define SRST_P_GPU_NIU		34
--#define SRST_P_GPU_PVTM		35
--#define SRST_GPU_PVTM		36
--#define SRST_GPU_PVTPLL		37
--#define SRST_A_NPU_NIU		40
--#define SRST_H_NPU_NIU		41
--#define SRST_P_NPU_NIU		42
--#define SRST_A_NPU		43
--#define SRST_H_NPU		44
--#define SRST_P_NPU_PVTM		45
--#define SRST_NPU_PVTM		46
--#define SRST_NPU_PVTPLL		47
--
--/* cru_softrst_con3 */
--#define SRST_A_MSCH		51
--#define SRST_HWFFC_CTRL		52
--#define SRST_DDR_ALWAYSON	53
--#define SRST_A_DDRSPLIT		54
--#define SRST_DDRDFI_CTL		55
--#define SRST_A_DMA2DDR		57
--
--/* cru_softrst_con4 */
--#define SRST_A_PERIMID_NIU	64
--#define SRST_H_PERIMID_NIU	65
--#define SRST_A_GIC_AUDIO_NIU	66
--#define SRST_H_GIC_AUDIO_NIU	67
--#define SRST_A_GIC600		68
--#define SRST_A_GIC600_DEBUG	69
--#define SRST_A_GICADB_CORE2GIC	70
--#define SRST_A_GICADB_GIC2CORE	71
--#define SRST_A_SPINLOCK		72
--#define SRST_H_SDMMC_BUFFER	73
--#define SRST_D_SDMMC_BUFFER	74
--#define SRST_H_I2S0_8CH		75
--#define SRST_H_I2S1_8CH		76
--#define SRST_H_I2S2_2CH		77
--#define SRST_H_I2S3_2CH		78
--
--/* cru_softrst_con5 */
--#define SRST_M_I2S0_8CH_TX	80
--#define SRST_M_I2S0_8CH_RX	81
--#define SRST_M_I2S1_8CH_TX	82
--#define SRST_M_I2S1_8CH_RX	83
--#define SRST_M_I2S2_2CH		84
--#define SRST_M_I2S3_2CH_TX	85
--#define SRST_M_I2S3_2CH_RX	86
--#define SRST_H_PDM		87
--#define SRST_M_PDM		88
--#define SRST_H_VAD		89
--#define SRST_H_SPDIF_8CH	90
--#define SRST_M_SPDIF_8CH	91
--#define SRST_H_AUDPWM		92
--#define SRST_S_AUDPWM		93
--#define SRST_H_ACDCDIG		94
--#define SRST_ACDCDIG		95
--
--/* cru_softrst_con6 */
--#define SRST_A_SECURE_FLASH_NIU	96
--#define SRST_H_SECURE_FLASH_NIU	97
--#define SRST_A_CRYPTO_NS	103
--#define SRST_H_CRYPTO_NS	104
--#define SRST_CRYPTO_NS_CORE	105
--#define SRST_CRYPTO_NS_PKA	106
--#define SRST_CRYPTO_NS_RNG	107
--#define SRST_H_TRNG_NS		108
--#define SRST_TRNG_NS		109
--
--/* cru_softrst_con7 */
--#define SRST_H_NANDC		112
--#define SRST_N_NANDC		113
--#define SRST_H_SFC		114
--#define SRST_H_SFC_XIP		115
--#define SRST_S_SFC		116
--#define SRST_A_EMMC		117
--#define SRST_H_EMMC		118
--#define SRST_B_EMMC		119
--#define SRST_C_EMMC		120
--#define SRST_T_EMMC		121
--
--/* cru_softrst_con8 */
--#define SRST_A_PIPE_NIU		128
--#define SRST_P_PIPE_NIU		130
--#define SRST_P_PIPE_GRF		133
--#define SRST_A_SATA0		134
--#define SRST_SATA0_PIPE		135
--#define SRST_SATA0_PMALIVE	136
--#define SRST_SATA0_RXOOB	137
--#define SRST_A_SATA1		138
--#define SRST_SATA1_PIPE		139
--#define SRST_SATA1_PMALIVE	140
--#define SRST_SATA1_RXOOB	141
--
--/* cru_softrst_con9 */
--#define SRST_A_SATA2		144
--#define SRST_SATA2_PIPE		145
--#define SRST_SATA2_PMALIVE	146
--#define SRST_SATA2_RXOOB	147
--#define SRST_USB3OTG0		148
--#define SRST_USB3OTG1		149
--#define SRST_XPCS		150
--#define SRST_XPCS_TX_DIV10	151
--#define SRST_XPCS_RX_DIV10	152
--#define SRST_XPCS_XGXS_RX	153
--
--/* cru_softrst_con10 */
--#define SRST_P_PCIE20		160
--#define SRST_PCIE20_POWERUP	161
--#define SRST_MSTR_ARESET_PCIE20	162
--#define SRST_SLV_ARESET_PCIE20	163
--#define SRST_DBI_ARESET_PCIE20	164
--#define SRST_BRESET_PCIE20	165
--#define SRST_PERST_PCIE20	166
--#define SRST_CORE_RST_PCIE20	167
--#define SRST_NSTICKY_RST_PCIE20	168
--#define SRST_STICKY_RST_PCIE20	169
--#define SRST_PWR_RST_PCIE20	170
--
--/* cru_softrst_con11 */
--#define SRST_P_PCIE30X1		176
--#define SRST_PCIE30X1_POWERUP	177
--#define SRST_M_ARESET_PCIE30X1	178
--#define SRST_S_ARESET_PCIE30X1	179
--#define SRST_D_ARESET_PCIE30X1	180
--#define SRST_BRESET_PCIE30X1	181
--#define SRST_PERST_PCIE30X1	182
--#define SRST_CORE_RST_PCIE30X1	183
--#define SRST_NSTC_RST_PCIE30X1	184
--#define SRST_STC_RST_PCIE30X1	185
--#define SRST_PWR_RST_PCIE30X1	186
--
--/* cru_softrst_con12 */
--#define SRST_P_PCIE30X2		192
--#define SRST_PCIE30X2_POWERUP	193
--#define SRST_M_ARESET_PCIE30X2	194
--#define SRST_S_ARESET_PCIE30X2	195
--#define SRST_D_ARESET_PCIE30X2	196
--#define SRST_BRESET_PCIE30X2	197
--#define SRST_PERST_PCIE30X2	198
--#define SRST_CORE_RST_PCIE30X2	199
--#define SRST_NSTC_RST_PCIE30X2	200
--#define SRST_STC_RST_PCIE30X2	201
--#define SRST_PWR_RST_PCIE30X2	202
--
--/* cru_softrst_con13 */
--#define SRST_A_PHP_NIU		208
--#define SRST_H_PHP_NIU		209
--#define SRST_P_PHP_NIU		210
--#define SRST_H_SDMMC0		211
--#define SRST_SDMMC0		212
--#define SRST_H_SDMMC1		213
--#define SRST_SDMMC1		214
--#define SRST_A_GMAC0		215
--#define SRST_GMAC0_TIMESTAMP	216
--
--/* cru_softrst_con14 */
--#define SRST_A_USB_NIU		224
--#define SRST_H_USB_NIU		225
--#define SRST_P_USB_NIU		226
--#define SRST_P_USB_GRF		227
--#define SRST_H_USB2HOST0	228
--#define SRST_H_USB2HOST0_ARB	229
--#define SRST_USB2HOST0_UTMI	230
--#define SRST_H_USB2HOST1	231
--#define SRST_H_USB2HOST1_ARB	232
--#define SRST_USB2HOST1_UTMI	233
--#define SRST_H_SDMMC2		234
--#define SRST_SDMMC2		235
--#define SRST_A_GMAC1		236
--#define SRST_GMAC1_TIMESTAMP	237
--
--/* cru_softrst_con15 */
--#define SRST_A_VI_NIU		240
--#define SRST_H_VI_NIU		241
--#define SRST_P_VI_NIU		242
--#define SRST_A_VICAP		247
--#define SRST_H_VICAP		248
--#define SRST_D_VICAP		249
--#define SRST_I_VICAP		250
--#define SRST_P_VICAP		251
--#define SRST_H_ISP		252
--#define SRST_ISP		253
--#define SRST_P_CSI2HOST1	255
--
--/* cru_softrst_con16 */
--#define SRST_A_VO_NIU		256
--#define SRST_H_VO_NIU		257
--#define SRST_P_VO_NIU		258
--#define SRST_A_VOP_NIU		259
--#define SRST_A_VOP		260
--#define SRST_H_VOP		261
--#define SRST_VOP0		262
--#define SRST_VOP1		263
--#define SRST_VOP2		264
--#define SRST_VOP_PWM		265
--#define SRST_A_HDCP		266
--#define SRST_H_HDCP		267
--#define SRST_P_HDCP		268
--#define SRST_P_HDMI_HOST	270
--#define SRST_HDMI_HOST		271
--
--/* cru_softrst_con17 */
--#define SRST_P_DSITX_0		272
--#define SRST_P_DSITX_1		273
--#define SRST_P_EDP_CTRL		274
--#define SRST_EDP_24M		275
--#define SRST_A_VPU_NIU		280
--#define SRST_H_VPU_NIU		281
--#define SRST_A_VPU		282
--#define SRST_H_VPU		283
--#define SRST_H_EINK		286
--#define SRST_P_EINK		287
--
--/* cru_softrst_con18 */
--#define SRST_A_RGA_NIU		288
--#define SRST_H_RGA_NIU		289
--#define SRST_P_RGA_NIU		290
--#define SRST_A_RGA		292
--#define SRST_H_RGA		293
--#define SRST_RGA_CORE		294
--#define SRST_A_IEP		295
--#define SRST_H_IEP		296
--#define SRST_IEP_CORE		297
--#define SRST_H_EBC		298
--#define SRST_D_EBC		299
--#define SRST_A_JDEC		300
--#define SRST_H_JDEC		301
--#define SRST_A_JENC		302
--#define SRST_H_JENC		303
--
--/* cru_softrst_con19 */
--#define SRST_A_VENC_NIU		304
--#define SRST_H_VENC_NIU		305
--#define SRST_A_RKVENC		307
--#define SRST_H_RKVENC		308
--#define SRST_RKVENC_CORE	309
--
--/* cru_softrst_con20 */
--#define SRST_A_RKVDEC_NIU	320
--#define SRST_H_RKVDEC_NIU	321
--#define SRST_A_RKVDEC		322
--#define SRST_H_RKVDEC		323
--#define SRST_RKVDEC_CA		324
--#define SRST_RKVDEC_CORE	325
--#define SRST_RKVDEC_HEVC_CA	326
--
--/* cru_softrst_con21 */
--#define SRST_A_BUS_NIU		336
--#define SRST_P_BUS_NIU		338
--#define SRST_P_CAN0		340
--#define SRST_CAN0		341
--#define SRST_P_CAN1		342
--#define SRST_CAN1		343
--#define SRST_P_CAN2		344
--#define SRST_CAN2		345
--#define SRST_P_GPIO1		346
--#define SRST_GPIO1		347
--#define SRST_P_GPIO2		348
--#define SRST_GPIO2		349
--#define SRST_P_GPIO3		350
--#define SRST_GPIO3		351
--
--/* cru_softrst_con22 */
--#define SRST_P_GPIO4		352
--#define SRST_GPIO4		353
--#define SRST_P_I2C1		354
--#define SRST_I2C1		355
--#define SRST_P_I2C2		356
--#define SRST_I2C2		357
--#define SRST_P_I2C3		358
--#define SRST_I2C3		359
--#define SRST_P_I2C4		360
--#define SRST_I2C4		361
--#define SRST_P_I2C5		362
--#define SRST_I2C5		363
--#define SRST_P_OTPC_NS		364
--#define SRST_OTPC_NS_SBPI	365
--#define SRST_OTPC_NS_USR	366
--
--/* cru_softrst_con23 */
--#define SRST_P_PWM1		368
--#define SRST_PWM1		369
--#define SRST_P_PWM2		370
--#define SRST_PWM2		371
--#define SRST_P_PWM3		372
--#define SRST_PWM3		373
--#define SRST_P_SPI0		374
--#define SRST_SPI0		375
--#define SRST_P_SPI1		376
--#define SRST_SPI1		377
--#define SRST_P_SPI2		378
--#define SRST_SPI2		379
--#define SRST_P_SPI3		380
--#define SRST_SPI3		381
--
--/* cru_softrst_con24 */
--#define SRST_P_SARADC		384
--#define SRST_P_TSADC		385
--#define SRST_TSADC		386
--#define SRST_P_TIMER		387
--#define SRST_TIMER0		388
--#define SRST_TIMER1		389
--#define SRST_TIMER2		390
--#define SRST_TIMER3		391
--#define SRST_TIMER4		392
--#define SRST_TIMER5		393
--#define SRST_P_UART1		394
--#define SRST_S_UART1		395
--
--/* cru_softrst_con25 */
--#define SRST_P_UART2		400
--#define SRST_S_UART2		401
--#define SRST_P_UART3		402
--#define SRST_S_UART3		403
--#define SRST_P_UART4		404
--#define SRST_S_UART4		405
--#define SRST_P_UART5		406
--#define SRST_S_UART5		407
--#define SRST_P_UART6		408
--#define SRST_S_UART6		409
--#define SRST_P_UART7		410
--#define SRST_S_UART7		411
--#define SRST_P_UART8		412
--#define SRST_S_UART8		413
--#define SRST_P_UART9		414
--#define SRST_S_UART9		415
--
--/* cru_softrst_con26 */
--#define SRST_P_GRF 416
--#define SRST_P_GRF_VCCIO12	417
--#define SRST_P_GRF_VCCIO34	418
--#define SRST_P_GRF_VCCIO567	419
--#define SRST_P_SCR		420
--#define SRST_P_WDT_NS		421
--#define SRST_T_WDT_NS		422
--#define SRST_P_DFT2APB		423
--#define SRST_A_MCU		426
--#define SRST_P_INTMUX		427
--#define SRST_P_MAILBOX		428
--
--/* cru_softrst_con27 */
--#define SRST_A_TOP_HIGH_NIU	432
--#define SRST_A_TOP_LOW_NIU	433
--#define SRST_H_TOP_NIU		434
--#define SRST_P_TOP_NIU		435
--#define SRST_P_TOP_CRU		438
--#define SRST_P_DDRPHY		439
--#define SRST_DDRPHY		440
--#define SRST_P_MIPICSIPHY	442
--#define SRST_P_MIPIDSIPHY0	443
--#define SRST_P_MIPIDSIPHY1	444
--#define SRST_P_PCIE30PHY	445
--#define SRST_PCIE30PHY		446
--#define SRST_P_PCIE30PHY_GRF	447
--
--/* cru_softrst_con28 */
--#define SRST_P_APB2ASB_LEFT	448
--#define SRST_P_APB2ASB_BOTTOM	449
--#define SRST_P_ASB2APB_LEFT	450
--#define SRST_P_ASB2APB_BOTTOM	451
--#define SRST_P_PIPEPHY0		452
--#define SRST_PIPEPHY0		453
--#define SRST_P_PIPEPHY1		454
--#define SRST_PIPEPHY1		455
--#define SRST_P_PIPEPHY2		456
--#define SRST_PIPEPHY2		457
--#define SRST_P_USB2PHY0_GRF	458
--#define SRST_P_USB2PHY1_GRF	459
--#define SRST_P_CPU_BOOST	460
--#define SRST_CPU_BOOST		461
--#define SRST_P_OTPPHY		462
--#define SRST_OTPPHY		463
--
--/* cru_softrst_con29 */
--#define SRST_USB2PHY0_POR	464
--#define SRST_USB2PHY0_USB3OTG0	465
--#define SRST_USB2PHY0_USB3OTG1	466
--#define SRST_USB2PHY1_POR	467
--#define SRST_USB2PHY1_USB2HOST0	468
--#define SRST_USB2PHY1_USB2HOST1	469
--#define SRST_P_EDPPHY_GRF	470
--#define SRST_TSADCPHY		471
--#define SRST_GMAC0_DELAYLINE	472
--#define SRST_GMAC1_DELAYLINE	473
--#define SRST_OTPC_ARB		474
--#define SRST_P_PIPEPHY0_GRF	475
--#define SRST_P_PIPEPHY1_GRF	476
--#define SRST_P_PIPEPHY2_GRF	477
+-/* VD_PMU */
+-#define RK3188_PD_RTC		12
 -
 -#endif
-diff --git a/include/dt-bindings/clock/rockchip,rk3588-cru.h b/include/dt-bindings/clock/rockchip,rk3588-cru.h
+diff --git a/include/dt-bindings/power/rk3228-power.h b/include/dt-bindings/power/rk3228-power.h
 deleted file mode 100644
-index b5616bca7b44..000000000000
---- a/include/dt-bindings/clock/rockchip,rk3588-cru.h
+index 6a8dc1bf76ce..000000000000
+--- a/include/dt-bindings/power/rk3228-power.h
 +++ /dev/null
-@@ -1,766 +0,0 @@
+@@ -1,21 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_BINDINGS_POWER_RK3228_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3228_POWER_H__
+-
+-/**
+- * RK3228 idle id Summary.
+- */
+-
+-#define RK3228_PD_CORE		0
+-#define RK3228_PD_MSCH		1
+-#define RK3228_PD_BUS		2
+-#define RK3228_PD_SYS		3
+-#define RK3228_PD_VIO		4
+-#define RK3228_PD_VOP		5
+-#define RK3228_PD_VPU		6
+-#define RK3228_PD_RKVDEC	7
+-#define RK3228_PD_GPU		8
+-#define RK3228_PD_PERI		9
+-#define RK3228_PD_GMAC		10
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3288-power.h b/include/dt-bindings/power/rk3288-power.h
+deleted file mode 100644
+index f710b56ccd81..000000000000
+--- a/include/dt-bindings/power/rk3288-power.h
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_BINDINGS_POWER_RK3288_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3288_POWER_H__
+-
+-/**
+- * RK3288 Power Domain and Voltage Domain Summary.
+- */
+-
+-/* VD_CORE */
+-#define RK3288_PD_A17_0		0
+-#define RK3288_PD_A17_1		1
+-#define RK3288_PD_A17_2		2
+-#define RK3288_PD_A17_3		3
+-#define RK3288_PD_SCU		4
+-#define RK3288_PD_DEBUG		5
+-#define RK3288_PD_MEM		6
+-
+-/* VD_LOGIC */
+-#define RK3288_PD_BUS		7
+-#define RK3288_PD_PERI		8
+-#define RK3288_PD_VIO		9
+-#define RK3288_PD_ALIVE		10
+-#define RK3288_PD_HEVC		11
+-#define RK3288_PD_VIDEO		12
+-
+-/* VD_GPU */
+-#define RK3288_PD_GPU		13
+-
+-/* VD_PMU */
+-#define RK3288_PD_PMU		14
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3328-power.h b/include/dt-bindings/power/rk3328-power.h
+deleted file mode 100644
+index 02e3d7fc1cce..000000000000
+--- a/include/dt-bindings/power/rk3328-power.h
++++ /dev/null
+@@ -1,19 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_BINDINGS_POWER_RK3328_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3328_POWER_H__
+-
+-/**
+- * RK3328 idle id Summary.
+- */
+-#define RK3328_PD_CORE		0
+-#define RK3328_PD_GPU		1
+-#define RK3328_PD_BUS		2
+-#define RK3328_PD_MSCH		3
+-#define RK3328_PD_PERI		4
+-#define RK3328_PD_VIDEO		5
+-#define RK3328_PD_HEVC		6
+-#define RK3328_PD_SYS		7
+-#define RK3328_PD_VPU		8
+-#define RK3328_PD_VIO		9
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3399-power.h b/include/dt-bindings/power/rk3399-power.h
+deleted file mode 100644
+index 168b3bfbd6f5..000000000000
+--- a/include/dt-bindings/power/rk3399-power.h
++++ /dev/null
+@@ -1,53 +0,0 @@
+-#ifndef __DT_BINDINGS_POWER_RK3399_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3399_POWER_H__
+-
+-/* VD_CORE_L */
+-#define RK3399_PD_A53_L0	0
+-#define RK3399_PD_A53_L1	1
+-#define RK3399_PD_A53_L2	2
+-#define RK3399_PD_A53_L3	3
+-#define RK3399_PD_SCU_L		4
+-
+-/* VD_CORE_B */
+-#define RK3399_PD_A72_B0	5
+-#define RK3399_PD_A72_B1	6
+-#define RK3399_PD_SCU_B		7
+-
+-/* VD_LOGIC */
+-#define RK3399_PD_TCPD0		8
+-#define RK3399_PD_TCPD1		9
+-#define RK3399_PD_CCI		10
+-#define RK3399_PD_CCI0		11
+-#define RK3399_PD_CCI1		12
+-#define RK3399_PD_PERILP	13
+-#define RK3399_PD_PERIHP	14
+-#define RK3399_PD_VIO		15
+-#define RK3399_PD_VO		16
+-#define RK3399_PD_VOPB		17
+-#define RK3399_PD_VOPL		18
+-#define RK3399_PD_ISP0		19
+-#define RK3399_PD_ISP1		20
+-#define RK3399_PD_HDCP		21
+-#define RK3399_PD_GMAC		22
+-#define RK3399_PD_EMMC		23
+-#define RK3399_PD_USB3		24
+-#define RK3399_PD_EDP		25
+-#define RK3399_PD_GIC		26
+-#define RK3399_PD_SD		27
+-#define RK3399_PD_SDIOAUDIO	28
+-#define RK3399_PD_ALIVE		29
+-
+-/* VD_CENTER */
+-#define RK3399_PD_CENTER	30
+-#define RK3399_PD_VCODEC	31
+-#define RK3399_PD_VDU		32
+-#define RK3399_PD_RGA		33
+-#define RK3399_PD_IEP		34
+-
+-/* VD_GPU */
+-#define RK3399_PD_GPU		35
+-
+-/* VD_PMU */
+-#define RK3399_PD_PMU		36
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3568-power.h b/include/dt-bindings/power/rk3568-power.h
+deleted file mode 100644
+index 6cc1af1a9d26..000000000000
+--- a/include/dt-bindings/power/rk3568-power.h
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __DT_BINDINGS_POWER_RK3568_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3568_POWER_H__
+-
+-/* VD_CORE */
+-#define RK3568_PD_CPU_0		0
+-#define RK3568_PD_CPU_1		1
+-#define RK3568_PD_CPU_2		2
+-#define RK3568_PD_CPU_3		3
+-#define RK3568_PD_CORE_ALIVE	4
+-
+-/* VD_PMU */
+-#define RK3568_PD_PMU		5
+-
+-/* VD_NPU */
+-#define RK3568_PD_NPU		6
+-
+-/* VD_GPU */
+-#define RK3568_PD_GPU		7
+-
+-/* VD_LOGIC */
+-#define RK3568_PD_VI		8
+-#define RK3568_PD_VO		9
+-#define RK3568_PD_RGA		10
+-#define RK3568_PD_VPU		11
+-#define RK3568_PD_CENTER	12
+-#define RK3568_PD_RKVDEC	13
+-#define RK3568_PD_RKVENC	14
+-#define RK3568_PD_PIPE		15
+-#define RK3568_PD_LOGIC_ALIVE	16
+-
+-#endif
+diff --git a/include/dt-bindings/power/rk3588-power.h b/include/dt-bindings/power/rk3588-power.h
+deleted file mode 100644
+index 1b92fec013cb..000000000000
+--- a/include/dt-bindings/power/rk3588-power.h
++++ /dev/null
+@@ -1,69 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0 or MIT) */
+-#ifndef __DT_BINDINGS_POWER_RK3588_POWER_H__
+-#define __DT_BINDINGS_POWER_RK3588_POWER_H__
+-
+-/* VD_LITDSU */
+-#define RK3588_PD_CPU_0		0
+-#define RK3588_PD_CPU_1		1
+-#define RK3588_PD_CPU_2		2
+-#define RK3588_PD_CPU_3		3
+-
+-/* VD_BIGCORE0 */
+-#define RK3588_PD_CPU_4		4
+-#define RK3588_PD_CPU_5		5
+-
+-/* VD_BIGCORE1 */
+-#define RK3588_PD_CPU_6		6
+-#define RK3588_PD_CPU_7		7
+-
+-/* VD_NPU */
+-#define RK3588_PD_NPU		8
+-#define RK3588_PD_NPUTOP	9
+-#define RK3588_PD_NPU1		10
+-#define RK3588_PD_NPU2		11
+-
+-/* VD_GPU */
+-#define RK3588_PD_GPU		12
+-
+-/* VD_VCODEC */
+-#define RK3588_PD_VCODEC	13
+-#define RK3588_PD_RKVDEC0	14
+-#define RK3588_PD_RKVDEC1	15
+-#define RK3588_PD_VENC0		16
+-#define RK3588_PD_VENC1		17
+-
+-/* VD_DD01 */
+-#define RK3588_PD_DDR01		18
+-
+-/* VD_DD23 */
+-#define RK3588_PD_DDR23		19
+-
+-/* VD_LOGIC */
+-#define RK3588_PD_CENTER	20
+-#define RK3588_PD_VDPU		21
+-#define RK3588_PD_RGA30		22
+-#define RK3588_PD_AV1		23
+-#define RK3588_PD_VOP		24
+-#define RK3588_PD_VO0		25
+-#define RK3588_PD_VO1		26
+-#define RK3588_PD_VI		27
+-#define RK3588_PD_ISP1		28
+-#define RK3588_PD_FEC		29
+-#define RK3588_PD_RGA31		30
+-#define RK3588_PD_USB		31
+-#define RK3588_PD_PHP		32
+-#define RK3588_PD_GMAC		33
+-#define RK3588_PD_PCIE		34
+-#define RK3588_PD_NVM		35
+-#define RK3588_PD_NVM0		36
+-#define RK3588_PD_SDIO		37
+-#define RK3588_PD_AUDIO		38
+-#define RK3588_PD_SECURE	39
+-#define RK3588_PD_SDMMC		40
+-#define RK3588_PD_CRYPTO	41
+-#define RK3588_PD_BUS		42
+-
+-/* VD_PMU */
+-#define RK3588_PD_PMU1		43
+-
+-#endif
+diff --git a/include/dt-bindings/power/rockchip,rv1126-power.h b/include/dt-bindings/power/rockchip,rv1126-power.h
+deleted file mode 100644
+index 38a68e000d38..000000000000
+--- a/include/dt-bindings/power/rockchip,rv1126-power.h
++++ /dev/null
+@@ -1,35 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-
+-#ifndef __DT_BINDINGS_POWER_RV1126_POWER_H__
+-#define __DT_BINDINGS_POWER_RV1126_POWER_H__
+-
+-/* VD_CORE */
+-#define RV1126_PD_CPU_0		0
+-#define RV1126_PD_CPU_1		1
+-#define RV1126_PD_CPU_2		2
+-#define RV1126_PD_CPU_3		3
+-#define RV1126_PD_CORE_ALIVE	4
+-
+-/* VD_PMU */
+-#define RV1126_PD_PMU		5
+-#define RV1126_PD_PMU_ALIVE	6
+-
+-/* VD_NPU */
+-#define RV1126_PD_NPU		7
+-
+-/* VD_VEPU */
+-#define RV1126_PD_VEPU		8
+-
+-/* VD_LOGIC */
+-#define RV1126_PD_VI		9
+-#define RV1126_PD_VO		10
+-#define RV1126_PD_ISPP		11
+-#define RV1126_PD_VDPU		12
+-#define RV1126_PD_CRYPTO	13
+-#define RV1126_PD_DDR		14
+-#define RV1126_PD_NVM		15
+-#define RV1126_PD_SDIO		16
+-#define RV1126_PD_USB		17
+-#define RV1126_PD_LOGIC_ALIVE	18
+-
+-#endif
+diff --git a/include/dt-bindings/reset/rockchip,rk3588-cru.h b/include/dt-bindings/reset/rockchip,rk3588-cru.h
+deleted file mode 100644
+index 738e56aead93..000000000000
+--- a/include/dt-bindings/reset/rockchip,rk3588-cru.h
++++ /dev/null
+@@ -1,754 +0,0 @@
 -/* SPDX-License-Identifier: (GPL-2.0 or MIT) */
 -/*
 - * Copyright (c) 2021 Rockchip Electronics Co. Ltd.
@@ -4958,1418 +644,797 @@ index b5616bca7b44..000000000000
 - * Author: Sebastian Reichel <sebastian.reichel@collabora.com>
 - */
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3588_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RK3588_H
+-#ifndef _DT_BINDINGS_RESET_ROCKCHIP_RK3588_H
+-#define _DT_BINDINGS_RESET_ROCKCHIP_RK3588_H
 -
--/* cru-clocks indices */
+-#define SRST_A_TOP_BIU			0
+-#define SRST_P_TOP_BIU			1
+-#define SRST_P_CSIPHY0			2
+-#define SRST_CSIPHY0			3
+-#define SRST_P_CSIPHY1			4
+-#define SRST_CSIPHY1			5
+-#define SRST_A_TOP_M500_BIU		6
 -
--#define PLL_B0PLL			0
--#define PLL_B1PLL			1
--#define PLL_LPLL			2
--#define PLL_V0PLL			3
--#define PLL_AUPLL			4
--#define PLL_CPLL			5
--#define PLL_GPLL			6
--#define PLL_NPLL			7
--#define PLL_PPLL			8
--#define ARMCLK_L			9
--#define ARMCLK_B01			10
--#define ARMCLK_B23			11
--#define PCLK_BIGCORE0_ROOT		12
--#define PCLK_BIGCORE0_PVTM		13
--#define PCLK_BIGCORE1_ROOT		14
--#define PCLK_BIGCORE1_PVTM		15
--#define PCLK_DSU_S_ROOT			16
--#define PCLK_DSU_ROOT			17
--#define PCLK_DSU_NS_ROOT		18
--#define PCLK_LITCORE_PVTM		19
--#define PCLK_DBG			20
--#define PCLK_DSU			21
--#define PCLK_S_DAPLITE			22
--#define PCLK_M_DAPLITE			23
--#define MBIST_MCLK_PDM1			24
--#define MBIST_CLK_ACDCDIG		25
--#define HCLK_I2S2_2CH			26
--#define HCLK_I2S3_2CH			27
--#define CLK_I2S2_2CH_SRC		28
--#define CLK_I2S2_2CH_FRAC		29
--#define CLK_I2S2_2CH			30
--#define MCLK_I2S2_2CH			31
--#define I2S2_2CH_MCLKOUT		32
--#define CLK_DAC_ACDCDIG			33
--#define CLK_I2S3_2CH_SRC		34
--#define CLK_I2S3_2CH_FRAC		35
--#define CLK_I2S3_2CH			36
--#define MCLK_I2S3_2CH			37
--#define I2S3_2CH_MCLKOUT		38
--#define PCLK_ACDCDIG			39
--#define HCLK_I2S0_8CH			40
--#define CLK_I2S0_8CH_TX_SRC		41
--#define CLK_I2S0_8CH_TX_FRAC		42
--#define MCLK_I2S0_8CH_TX		43
--#define CLK_I2S0_8CH_TX			44
--#define CLK_I2S0_8CH_RX_SRC		45
--#define CLK_I2S0_8CH_RX_FRAC		46
--#define MCLK_I2S0_8CH_RX		47
--#define CLK_I2S0_8CH_RX			48
--#define I2S0_8CH_MCLKOUT		49
--#define HCLK_PDM1			50
--#define MCLK_PDM1			51
--#define HCLK_AUDIO_ROOT			52
--#define PCLK_AUDIO_ROOT			53
--#define HCLK_SPDIF0			54
--#define CLK_SPDIF0_SRC			55
--#define CLK_SPDIF0_FRAC			56
--#define MCLK_SPDIF0			57
--#define CLK_SPDIF0			58
--#define CLK_SPDIF1			59
--#define HCLK_SPDIF1			60
--#define CLK_SPDIF1_SRC			61
--#define CLK_SPDIF1_FRAC			62
--#define MCLK_SPDIF1			63
--#define ACLK_AV1_ROOT			64
--#define ACLK_AV1			65
--#define PCLK_AV1_ROOT			66
--#define PCLK_AV1			67
--#define PCLK_MAILBOX0			68
--#define PCLK_MAILBOX1			69
--#define PCLK_MAILBOX2			70
--#define PCLK_PMU2			71
--#define PCLK_PMUCM0_INTMUX		72
--#define PCLK_DDRCM0_INTMUX		73
--#define PCLK_TOP			74
--#define PCLK_PWM1			75
--#define CLK_PWM1			76
--#define CLK_PWM1_CAPTURE		77
--#define PCLK_PWM2			78
--#define CLK_PWM2			79
--#define CLK_PWM2_CAPTURE		80
--#define PCLK_PWM3			81
--#define CLK_PWM3			82
--#define CLK_PWM3_CAPTURE		83
--#define PCLK_BUSTIMER0			84
--#define PCLK_BUSTIMER1			85
--#define CLK_BUS_TIMER_ROOT		86
--#define CLK_BUSTIMER0			87
--#define CLK_BUSTIMER1			88
--#define CLK_BUSTIMER2			89
--#define CLK_BUSTIMER3			90
--#define CLK_BUSTIMER4			91
--#define CLK_BUSTIMER5			92
--#define CLK_BUSTIMER6			93
--#define CLK_BUSTIMER7			94
--#define CLK_BUSTIMER8			95
--#define CLK_BUSTIMER9			96
--#define CLK_BUSTIMER10			97
--#define CLK_BUSTIMER11			98
--#define PCLK_WDT0			99
--#define TCLK_WDT0			100
--#define PCLK_CAN0			101
--#define CLK_CAN0			102
--#define PCLK_CAN1			103
--#define CLK_CAN1			104
--#define PCLK_CAN2			105
--#define CLK_CAN2			106
--#define ACLK_DECOM			107
--#define PCLK_DECOM			108
--#define DCLK_DECOM			109
--#define ACLK_DMAC0			110
--#define ACLK_DMAC1			111
--#define ACLK_DMAC2			112
--#define ACLK_BUS_ROOT			113
--#define ACLK_GIC			114
--#define PCLK_GPIO1			115
--#define DBCLK_GPIO1			116
--#define PCLK_GPIO2			117
--#define DBCLK_GPIO2			118
--#define PCLK_GPIO3			119
--#define DBCLK_GPIO3			120
--#define PCLK_GPIO4			121
--#define DBCLK_GPIO4			122
--#define PCLK_I2C1			123
--#define PCLK_I2C2			124
--#define PCLK_I2C3			125
--#define PCLK_I2C4			126
--#define PCLK_I2C5			127
--#define PCLK_I2C6			128
--#define PCLK_I2C7			129
--#define PCLK_I2C8			130
--#define CLK_I2C1			131
--#define CLK_I2C2			132
--#define CLK_I2C3			133
--#define CLK_I2C4			134
--#define CLK_I2C5			135
--#define CLK_I2C6			136
--#define CLK_I2C7			137
--#define CLK_I2C8			138
--#define PCLK_OTPC_NS			139
--#define CLK_OTPC_NS			140
--#define CLK_OTPC_ARB			141
--#define CLK_OTPC_AUTO_RD_G		142
--#define CLK_OTP_PHY_G			143
--#define PCLK_SARADC			144
--#define CLK_SARADC			145
--#define PCLK_SPI0			146
--#define PCLK_SPI1			147
--#define PCLK_SPI2			148
--#define PCLK_SPI3			149
--#define PCLK_SPI4			150
--#define CLK_SPI0			151
--#define CLK_SPI1			152
--#define CLK_SPI2			153
--#define CLK_SPI3			154
--#define CLK_SPI4			155
--#define ACLK_SPINLOCK			156
--#define PCLK_TSADC			157
--#define CLK_TSADC			158
--#define PCLK_UART1			159
--#define PCLK_UART2			160
--#define PCLK_UART3			161
--#define PCLK_UART4			162
--#define PCLK_UART5			163
--#define PCLK_UART6			164
--#define PCLK_UART7			165
--#define PCLK_UART8			166
--#define PCLK_UART9			167
--#define CLK_UART1_SRC			168
--#define CLK_UART1_FRAC			169
--#define CLK_UART1			170
--#define SCLK_UART1			171
--#define CLK_UART2_SRC			172
--#define CLK_UART2_FRAC			173
--#define CLK_UART2			174
--#define SCLK_UART2			175
--#define CLK_UART3_SRC			176
--#define CLK_UART3_FRAC			177
--#define CLK_UART3			178
--#define SCLK_UART3			179
--#define CLK_UART4_SRC			180
--#define CLK_UART4_FRAC			181
--#define CLK_UART4			182
--#define SCLK_UART4			183
--#define CLK_UART5_SRC			184
--#define CLK_UART5_FRAC			185
--#define CLK_UART5			186
--#define SCLK_UART5			187
--#define CLK_UART6_SRC			188
--#define CLK_UART6_FRAC			189
--#define CLK_UART6			190
--#define SCLK_UART6			191
--#define CLK_UART7_SRC			192
--#define CLK_UART7_FRAC			193
--#define CLK_UART7			194
--#define SCLK_UART7			195
--#define CLK_UART8_SRC			196
--#define CLK_UART8_FRAC			197
--#define CLK_UART8			198
--#define SCLK_UART8			199
--#define CLK_UART9_SRC			200
--#define CLK_UART9_FRAC			201
--#define CLK_UART9			202
--#define SCLK_UART9			203
--#define ACLK_CENTER_ROOT		204
--#define ACLK_CENTER_LOW_ROOT		205
--#define HCLK_CENTER_ROOT		206
--#define PCLK_CENTER_ROOT		207
--#define ACLK_DMA2DDR			208
--#define ACLK_DDR_SHAREMEM		209
--#define ACLK_CENTER_S200_ROOT		210
--#define ACLK_CENTER_S400_ROOT		211
--#define FCLK_DDR_CM0_CORE		212
--#define CLK_DDR_TIMER_ROOT		213
--#define CLK_DDR_TIMER0			214
--#define CLK_DDR_TIMER1			215
--#define TCLK_WDT_DDR			216
--#define CLK_DDR_CM0_RTC			217
--#define PCLK_WDT			218
--#define PCLK_TIMER			219
--#define PCLK_DMA2DDR			220
--#define PCLK_SHAREMEM			221
--#define CLK_50M_SRC			222
--#define CLK_100M_SRC			223
--#define CLK_150M_SRC			224
--#define CLK_200M_SRC			225
--#define CLK_250M_SRC			226
--#define CLK_300M_SRC			227
--#define CLK_350M_SRC			228
--#define CLK_400M_SRC			229
--#define CLK_450M_SRC			230
--#define CLK_500M_SRC			231
--#define CLK_600M_SRC			232
--#define CLK_650M_SRC			233
--#define CLK_700M_SRC			234
--#define CLK_800M_SRC			235
--#define CLK_1000M_SRC			236
--#define CLK_1200M_SRC			237
--#define ACLK_TOP_M300_ROOT		238
--#define ACLK_TOP_M500_ROOT		239
--#define ACLK_TOP_M400_ROOT		240
--#define ACLK_TOP_S200_ROOT		241
--#define ACLK_TOP_S400_ROOT		242
--#define CLK_MIPI_CAMARAOUT_M0		243
--#define CLK_MIPI_CAMARAOUT_M1		244
--#define CLK_MIPI_CAMARAOUT_M2		245
--#define CLK_MIPI_CAMARAOUT_M3		246
--#define CLK_MIPI_CAMARAOUT_M4		247
--#define MCLK_GMAC0_OUT			248
--#define REFCLKO25M_ETH0_OUT		249
--#define REFCLKO25M_ETH1_OUT		250
--#define CLK_CIFOUT_OUT			251
--#define PCLK_MIPI_DCPHY0		252
--#define PCLK_MIPI_DCPHY1		253
--#define PCLK_CSIPHY0			254
--#define PCLK_CSIPHY1			255
--#define ACLK_TOP_ROOT			256
--#define PCLK_TOP_ROOT			257
--#define ACLK_LOW_TOP_ROOT		258
--#define PCLK_CRU			259
--#define PCLK_GPU_ROOT			260
--#define CLK_GPU_SRC			261
--#define CLK_GPU				262
--#define CLK_GPU_COREGROUP		263
--#define CLK_GPU_STACKS			264
--#define PCLK_GPU_PVTM			265
--#define CLK_GPU_PVTM			266
--#define CLK_CORE_GPU_PVTM		267
--#define PCLK_GPU_GRF			268
--#define ACLK_ISP1_ROOT			269
--#define HCLK_ISP1_ROOT			270
--#define CLK_ISP1_CORE			271
--#define CLK_ISP1_CORE_MARVIN		272
--#define CLK_ISP1_CORE_VICAP		273
--#define ACLK_ISP1			274
--#define HCLK_ISP1			275
--#define ACLK_NPU1			276
--#define HCLK_NPU1			277
--#define ACLK_NPU2			278
--#define HCLK_NPU2			279
--#define HCLK_NPU_CM0_ROOT		280
--#define FCLK_NPU_CM0_CORE		281
--#define CLK_NPU_CM0_RTC			282
--#define PCLK_NPU_PVTM			283
--#define PCLK_NPU_GRF			284
--#define CLK_NPU_PVTM			285
--#define CLK_CORE_NPU_PVTM		286
--#define ACLK_NPU0			287
--#define HCLK_NPU0			288
--#define HCLK_NPU_ROOT			289
--#define CLK_NPU_DSU0			290
--#define PCLK_NPU_ROOT			291
--#define PCLK_NPU_TIMER			292
--#define CLK_NPUTIMER_ROOT		293
--#define CLK_NPUTIMER0			294
--#define CLK_NPUTIMER1			295
--#define PCLK_NPU_WDT			296
--#define TCLK_NPU_WDT			297
--#define HCLK_EMMC			298
--#define ACLK_EMMC			299
--#define CCLK_EMMC			300
--#define BCLK_EMMC			301
--#define TMCLK_EMMC			302
--#define SCLK_SFC			303
--#define HCLK_SFC			304
--#define HCLK_SFC_XIP			305
--#define HCLK_NVM_ROOT			306
--#define ACLK_NVM_ROOT			307
--#define CLK_GMAC0_PTP_REF		308
--#define CLK_GMAC1_PTP_REF		309
--#define CLK_GMAC_125M			310
--#define CLK_GMAC_50M			311
--#define ACLK_PHP_GIC_ITS		312
--#define ACLK_MMU_PCIE			313
--#define ACLK_MMU_PHP			314
--#define ACLK_PCIE_4L_DBI		315
--#define ACLK_PCIE_2L_DBI		316
--#define ACLK_PCIE_1L0_DBI		317
--#define ACLK_PCIE_1L1_DBI		318
--#define ACLK_PCIE_1L2_DBI		319
--#define ACLK_PCIE_4L_MSTR		320
--#define ACLK_PCIE_2L_MSTR		321
--#define ACLK_PCIE_1L0_MSTR		322
--#define ACLK_PCIE_1L1_MSTR		323
--#define ACLK_PCIE_1L2_MSTR		324
--#define ACLK_PCIE_4L_SLV		325
--#define ACLK_PCIE_2L_SLV		326
--#define ACLK_PCIE_1L0_SLV		327
--#define ACLK_PCIE_1L1_SLV		328
--#define ACLK_PCIE_1L2_SLV		329
--#define PCLK_PCIE_4L			330
--#define PCLK_PCIE_2L			331
--#define PCLK_PCIE_1L0			332
--#define PCLK_PCIE_1L1			333
--#define PCLK_PCIE_1L2			334
--#define CLK_PCIE_AUX0			335
--#define CLK_PCIE_AUX1			336
--#define CLK_PCIE_AUX2			337
--#define CLK_PCIE_AUX3			338
--#define CLK_PCIE_AUX4			339
--#define CLK_PIPEPHY0_REF		340
--#define CLK_PIPEPHY1_REF		341
--#define CLK_PIPEPHY2_REF		342
--#define PCLK_PHP_ROOT			343
--#define PCLK_GMAC0			344
--#define PCLK_GMAC1			345
--#define ACLK_PCIE_ROOT			346
--#define ACLK_PHP_ROOT			347
--#define ACLK_PCIE_BRIDGE		348
--#define ACLK_GMAC0			349
--#define ACLK_GMAC1			350
--#define CLK_PMALIVE0			351
--#define CLK_PMALIVE1			352
--#define CLK_PMALIVE2			353
--#define ACLK_SATA0			354
--#define ACLK_SATA1			355
--#define ACLK_SATA2			356
--#define CLK_RXOOB0			357
--#define CLK_RXOOB1			358
--#define CLK_RXOOB2			359
--#define ACLK_USB3OTG2			360
--#define SUSPEND_CLK_USB3OTG2		361
--#define REF_CLK_USB3OTG2		362
--#define CLK_UTMI_OTG2			363
--#define CLK_PIPEPHY0_PIPE_G		364
--#define CLK_PIPEPHY1_PIPE_G		365
--#define CLK_PIPEPHY2_PIPE_G		366
--#define CLK_PIPEPHY0_PIPE_ASIC_G	367
--#define CLK_PIPEPHY1_PIPE_ASIC_G	368
--#define CLK_PIPEPHY2_PIPE_ASIC_G	369
--#define CLK_PIPEPHY2_PIPE_U3_G		370
--#define CLK_PCIE1L2_PIPE		371
--#define CLK_PCIE4L_PIPE			372
--#define CLK_PCIE2L_PIPE			373
--#define PCLK_PCIE_COMBO_PIPE_PHY0	374
--#define PCLK_PCIE_COMBO_PIPE_PHY1	375
--#define PCLK_PCIE_COMBO_PIPE_PHY2	376
--#define PCLK_PCIE_COMBO_PIPE_PHY	377
--#define HCLK_RGA3_1			378
--#define ACLK_RGA3_1			379
--#define CLK_RGA3_1_CORE			380
--#define ACLK_RGA3_ROOT			381
--#define HCLK_RGA3_ROOT			382
--#define ACLK_RKVDEC_CCU			383
--#define HCLK_RKVDEC0			384
--#define ACLK_RKVDEC0			385
--#define CLK_RKVDEC0_CA			386
--#define CLK_RKVDEC0_HEVC_CA		387
--#define CLK_RKVDEC0_CORE		388
--#define HCLK_RKVDEC1			389
--#define ACLK_RKVDEC1			390
--#define CLK_RKVDEC1_CA			391
--#define CLK_RKVDEC1_HEVC_CA		392
--#define CLK_RKVDEC1_CORE		393
--#define HCLK_SDIO			394
--#define CCLK_SRC_SDIO			395
--#define ACLK_USB_ROOT			396
--#define HCLK_USB_ROOT			397
--#define HCLK_HOST0			398
--#define HCLK_HOST_ARB0			399
--#define HCLK_HOST1			400
--#define HCLK_HOST_ARB1			401
--#define ACLK_USB3OTG0			402
--#define SUSPEND_CLK_USB3OTG0		403
--#define REF_CLK_USB3OTG0		404
--#define ACLK_USB3OTG1			405
--#define SUSPEND_CLK_USB3OTG1		406
--#define REF_CLK_USB3OTG1		407
--#define UTMI_OHCI_CLK48_HOST0		408
--#define UTMI_OHCI_CLK48_HOST1		409
--#define HCLK_IEP2P0			410
--#define ACLK_IEP2P0			411
--#define CLK_IEP2P0_CORE			412
--#define ACLK_JPEG_ENCODER0		413
--#define HCLK_JPEG_ENCODER0		414
--#define ACLK_JPEG_ENCODER1		415
--#define HCLK_JPEG_ENCODER1		416
--#define ACLK_JPEG_ENCODER2		417
--#define HCLK_JPEG_ENCODER2		418
--#define ACLK_JPEG_ENCODER3		419
--#define HCLK_JPEG_ENCODER3		420
--#define ACLK_JPEG_DECODER		421
--#define HCLK_JPEG_DECODER		422
--#define HCLK_RGA2			423
--#define ACLK_RGA2			424
--#define CLK_RGA2_CORE			425
--#define HCLK_RGA3_0			426
--#define ACLK_RGA3_0			427
--#define CLK_RGA3_0_CORE			428
--#define ACLK_VDPU_ROOT			429
--#define ACLK_VDPU_LOW_ROOT		430
--#define HCLK_VDPU_ROOT			431
--#define ACLK_JPEG_DECODER_ROOT		432
--#define ACLK_VPU			433
--#define HCLK_VPU			434
--#define HCLK_RKVENC0_ROOT		435
--#define ACLK_RKVENC0_ROOT		436
--#define HCLK_RKVENC0			437
--#define ACLK_RKVENC0			438
--#define CLK_RKVENC0_CORE		439
--#define HCLK_RKVENC1_ROOT		440
--#define ACLK_RKVENC1_ROOT		441
--#define HCLK_RKVENC1			442
--#define ACLK_RKVENC1			443
--#define CLK_RKVENC1_CORE		444
--#define ICLK_CSIHOST01			445
--#define ICLK_CSIHOST0			446
--#define ICLK_CSIHOST1			447
--#define PCLK_CSI_HOST_0			448
--#define PCLK_CSI_HOST_1			449
--#define PCLK_CSI_HOST_2			450
--#define PCLK_CSI_HOST_3			451
--#define PCLK_CSI_HOST_4			452
--#define PCLK_CSI_HOST_5			453
--#define ACLK_FISHEYE0			454
--#define HCLK_FISHEYE0			455
--#define CLK_FISHEYE0_CORE		456
--#define ACLK_FISHEYE1			457
--#define HCLK_FISHEYE1			458
--#define CLK_FISHEYE1_CORE		459
--#define CLK_ISP0_CORE			460
--#define CLK_ISP0_CORE_MARVIN		461
--#define CLK_ISP0_CORE_VICAP		462
--#define ACLK_ISP0			463
--#define HCLK_ISP0			464
--#define ACLK_VI_ROOT			465
--#define HCLK_VI_ROOT			466
--#define PCLK_VI_ROOT			467
--#define DCLK_VICAP			468
--#define ACLK_VICAP			469
--#define HCLK_VICAP			470
--#define PCLK_DP0			471
--#define PCLK_DP1			472
--#define PCLK_S_DP0			473
--#define PCLK_S_DP1			474
--#define CLK_DP0				475
--#define CLK_DP1				476
--#define HCLK_HDCP_KEY0			477
--#define ACLK_HDCP0			478
--#define HCLK_HDCP0			479
--#define PCLK_HDCP0			480
--#define HCLK_I2S4_8CH			481
--#define ACLK_TRNG0			482
--#define PCLK_TRNG0			483
--#define ACLK_VO0_ROOT			484
--#define HCLK_VO0_ROOT			485
--#define HCLK_VO0_S_ROOT			486
--#define PCLK_VO0_ROOT			487
--#define PCLK_VO0_S_ROOT			488
--#define PCLK_VO0GRF			489
--#define CLK_I2S4_8CH_TX_SRC		490
--#define CLK_I2S4_8CH_TX_FRAC		491
--#define MCLK_I2S4_8CH_TX		492
--#define CLK_I2S4_8CH_TX			493
--#define HCLK_I2S8_8CH			494
--#define CLK_I2S8_8CH_TX_SRC		495
--#define CLK_I2S8_8CH_TX_FRAC		496
--#define MCLK_I2S8_8CH_TX		497
--#define CLK_I2S8_8CH_TX			498
--#define HCLK_SPDIF2_DP0			499
--#define CLK_SPDIF2_DP0_SRC		500
--#define CLK_SPDIF2_DP0_FRAC		501
--#define MCLK_SPDIF2_DP0			502
--#define CLK_SPDIF2_DP0			503
--#define MCLK_SPDIF2			504
--#define HCLK_SPDIF5_DP1			505
--#define CLK_SPDIF5_DP1_SRC		506
--#define CLK_SPDIF5_DP1_FRAC		507
--#define MCLK_SPDIF5_DP1			508
--#define CLK_SPDIF5_DP1			509
--#define MCLK_SPDIF5			510
--#define PCLK_EDP0			511
--#define CLK_EDP0_24M			512
--#define CLK_EDP0_200M			513
--#define PCLK_EDP1			514
--#define CLK_EDP1_24M			515
--#define CLK_EDP1_200M			516
--#define HCLK_HDCP_KEY1			517
--#define ACLK_HDCP1			518
--#define HCLK_HDCP1			519
--#define PCLK_HDCP1			520
--#define ACLK_HDMIRX			521
--#define PCLK_HDMIRX			522
--#define CLK_HDMIRX_REF			523
--#define CLK_HDMIRX_AUD_SRC		524
--#define CLK_HDMIRX_AUD_FRAC		525
--#define CLK_HDMIRX_AUD			526
--#define CLK_HDMIRX_AUD_P_MUX		527
--#define PCLK_HDMITX0			528
--#define CLK_HDMITX0_EARC		529
--#define CLK_HDMITX0_REF			530
--#define PCLK_HDMITX1			531
--#define CLK_HDMITX1_EARC		532
--#define CLK_HDMITX1_REF			533
--#define CLK_HDMITRX_REFSRC		534
--#define ACLK_TRNG1			535
--#define PCLK_TRNG1			536
--#define ACLK_HDCP1_ROOT			537
--#define ACLK_HDMIRX_ROOT		538
--#define HCLK_VO1_ROOT			539
--#define HCLK_VO1_S_ROOT			540
--#define PCLK_VO1_ROOT			541
--#define PCLK_VO1_S_ROOT			542
--#define PCLK_S_EDP0			543
--#define PCLK_S_EDP1			544
--#define PCLK_S_HDMIRX			545
--#define HCLK_I2S10_8CH			546
--#define CLK_I2S10_8CH_RX_SRC		547
--#define CLK_I2S10_8CH_RX_FRAC		548
--#define CLK_I2S10_8CH_RX		549
--#define MCLK_I2S10_8CH_RX		550
--#define HCLK_I2S7_8CH			551
--#define CLK_I2S7_8CH_RX_SRC		552
--#define CLK_I2S7_8CH_RX_FRAC		553
--#define CLK_I2S7_8CH_RX			554
--#define MCLK_I2S7_8CH_RX		555
--#define HCLK_I2S9_8CH			556
--#define CLK_I2S9_8CH_RX_SRC		557
--#define CLK_I2S9_8CH_RX_FRAC		558
--#define CLK_I2S9_8CH_RX			559
--#define MCLK_I2S9_8CH_RX		560
--#define CLK_I2S5_8CH_TX_SRC		561
--#define CLK_I2S5_8CH_TX_FRAC		562
--#define CLK_I2S5_8CH_TX			563
--#define MCLK_I2S5_8CH_TX		564
--#define HCLK_I2S5_8CH			565
--#define CLK_I2S6_8CH_TX_SRC		566
--#define CLK_I2S6_8CH_TX_FRAC		567
--#define CLK_I2S6_8CH_TX			568
--#define MCLK_I2S6_8CH_TX		569
--#define CLK_I2S6_8CH_RX_SRC		570
--#define CLK_I2S6_8CH_RX_FRAC		571
--#define CLK_I2S6_8CH_RX			572
--#define MCLK_I2S6_8CH_RX		573
--#define I2S6_8CH_MCLKOUT		574
--#define HCLK_I2S6_8CH			575
--#define HCLK_SPDIF3			576
--#define CLK_SPDIF3_SRC			577
--#define CLK_SPDIF3_FRAC			578
--#define CLK_SPDIF3			579
--#define MCLK_SPDIF3			580
--#define HCLK_SPDIF4			581
--#define CLK_SPDIF4_SRC			582
--#define CLK_SPDIF4_FRAC			583
--#define CLK_SPDIF4			584
--#define MCLK_SPDIF4			585
--#define HCLK_SPDIFRX0			586
--#define MCLK_SPDIFRX0			587
--#define HCLK_SPDIFRX1			588
--#define MCLK_SPDIFRX1			589
--#define HCLK_SPDIFRX2			590
--#define MCLK_SPDIFRX2			591
--#define ACLK_VO1USB_TOP_ROOT		592
--#define HCLK_VO1USB_TOP_ROOT		593
--#define CLK_HDMIHDP0			594
--#define CLK_HDMIHDP1			595
--#define PCLK_HDPTX0			596
--#define PCLK_HDPTX1			597
--#define PCLK_USBDPPHY0			598
--#define PCLK_USBDPPHY1			599
--#define ACLK_VOP_ROOT			600
--#define ACLK_VOP_LOW_ROOT		601
--#define HCLK_VOP_ROOT			602
--#define PCLK_VOP_ROOT			603
--#define HCLK_VOP			604
--#define ACLK_VOP			605
--#define DCLK_VOP0_SRC			606
--#define DCLK_VOP1_SRC			607
--#define DCLK_VOP2_SRC			608
--#define DCLK_VOP0			609
--#define DCLK_VOP1			610
--#define DCLK_VOP2			611
--#define DCLK_VOP3			612
--#define PCLK_DSIHOST0			613
--#define PCLK_DSIHOST1			614
--#define CLK_DSIHOST0			615
--#define CLK_DSIHOST1			616
--#define CLK_VOP_PMU			617
--#define ACLK_VOP_DOBY			618
--#define ACLK_VOP_SUB_SRC		619
--#define CLK_USBDP_PHY0_IMMORTAL		620
--#define CLK_USBDP_PHY1_IMMORTAL		621
--#define CLK_PMU0			622
--#define PCLK_PMU0			623
--#define PCLK_PMU0IOC			624
--#define PCLK_GPIO0			625
--#define DBCLK_GPIO0			626
--#define PCLK_I2C0			627
--#define CLK_I2C0			628
--#define HCLK_I2S1_8CH			629
--#define CLK_I2S1_8CH_TX_SRC		630
--#define CLK_I2S1_8CH_TX_FRAC		631
--#define CLK_I2S1_8CH_TX			632
--#define MCLK_I2S1_8CH_TX		633
--#define CLK_I2S1_8CH_RX_SRC		634
--#define CLK_I2S1_8CH_RX_FRAC		635
--#define CLK_I2S1_8CH_RX			636
--#define MCLK_I2S1_8CH_RX		637
--#define I2S1_8CH_MCLKOUT		638
--#define CLK_PMU1_50M_SRC		639
--#define CLK_PMU1_100M_SRC		640
--#define CLK_PMU1_200M_SRC		641
--#define CLK_PMU1_300M_SRC		642
--#define CLK_PMU1_400M_SRC		643
--#define HCLK_PMU1_ROOT			644
--#define PCLK_PMU1_ROOT			645
--#define PCLK_PMU0_ROOT			646
--#define HCLK_PMU_CM0_ROOT		647
--#define PCLK_PMU1			648
--#define CLK_DDR_FAIL_SAFE		649
--#define CLK_PMU1			650
--#define HCLK_PDM0			651
--#define MCLK_PDM0			652
--#define HCLK_VAD			653
--#define FCLK_PMU_CM0_CORE		654
--#define CLK_PMU_CM0_RTC			655
--#define PCLK_PMU1_IOC			656
--#define PCLK_PMU1PWM			657
--#define CLK_PMU1PWM			658
--#define CLK_PMU1PWM_CAPTURE		659
--#define PCLK_PMU1TIMER			660
--#define CLK_PMU1TIMER_ROOT		661
--#define CLK_PMU1TIMER0			662
--#define CLK_PMU1TIMER1			663
--#define CLK_UART0_SRC			664
--#define CLK_UART0_FRAC			665
--#define CLK_UART0			666
--#define SCLK_UART0			667
--#define PCLK_UART0			668
--#define PCLK_PMU1WDT			669
--#define TCLK_PMU1WDT			670
--#define CLK_CR_PARA			671
--#define CLK_USB2PHY_HDPTXRXPHY_REF	672
--#define CLK_USBDPPHY_MIPIDCPPHY_REF	673
--#define CLK_REF_PIPE_PHY0_OSC_SRC	674
--#define CLK_REF_PIPE_PHY1_OSC_SRC	675
--#define CLK_REF_PIPE_PHY2_OSC_SRC	676
--#define CLK_REF_PIPE_PHY0_PLL_SRC	677
--#define CLK_REF_PIPE_PHY1_PLL_SRC	678
--#define CLK_REF_PIPE_PHY2_PLL_SRC	679
--#define CLK_REF_PIPE_PHY0		680
--#define CLK_REF_PIPE_PHY1		681
--#define CLK_REF_PIPE_PHY2		682
--#define SCLK_SDIO_DRV			683
--#define SCLK_SDIO_SAMPLE		684
--#define SCLK_SDMMC_DRV			685
--#define SCLK_SDMMC_SAMPLE		686
--#define CLK_PCIE1L0_PIPE		687
--#define CLK_PCIE1L1_PIPE		688
--#define CLK_BIGCORE0_PVTM		689
--#define CLK_CORE_BIGCORE0_PVTM		690
--#define CLK_BIGCORE1_PVTM		691
--#define CLK_CORE_BIGCORE1_PVTM		692
--#define CLK_LITCORE_PVTM		693
--#define CLK_CORE_LITCORE_PVTM		694
--#define CLK_AUX16M_0			695
--#define CLK_AUX16M_1			696
--#define CLK_PHY0_REF_ALT_P		697
--#define CLK_PHY0_REF_ALT_M		698
--#define CLK_PHY1_REF_ALT_P		699
--#define CLK_PHY1_REF_ALT_M		700
--#define ACLK_ISP1_PRE			701
--#define HCLK_ISP1_PRE			702
--#define HCLK_NVM			703
--#define ACLK_USB			704
--#define HCLK_USB			705
--#define ACLK_JPEG_DECODER_PRE		706
--#define ACLK_VDPU_LOW_PRE		707
--#define ACLK_RKVENC1_PRE		708
--#define HCLK_RKVENC1_PRE		709
--#define HCLK_RKVDEC0_PRE		710
--#define ACLK_RKVDEC0_PRE		711
--#define HCLK_RKVDEC1_PRE		712
--#define ACLK_RKVDEC1_PRE		713
--#define ACLK_HDCP0_PRE			714
--#define HCLK_VO0			715
--#define ACLK_HDCP1_PRE			716
--#define HCLK_VO1			717
--#define ACLK_AV1_PRE			718
--#define PCLK_AV1_PRE			719
--#define HCLK_SDIO_PRE			720
+-#define SRST_A_TOP_M400_BIU		7
+-#define SRST_A_TOP_S200_BIU		8
+-#define SRST_A_TOP_S400_BIU		9
+-#define SRST_A_TOP_M300_BIU		10
+-#define SRST_USBDP_COMBO_PHY0_INIT	11
+-#define SRST_USBDP_COMBO_PHY0_CMN	12
+-#define SRST_USBDP_COMBO_PHY0_LANE	13
+-#define SRST_USBDP_COMBO_PHY0_PCS	14
+-#define SRST_USBDP_COMBO_PHY1_INIT	15
 -
--#define CLK_NR_CLKS			(HCLK_SDIO_PRE + 1)
+-#define SRST_USBDP_COMBO_PHY1_CMN	16
+-#define SRST_USBDP_COMBO_PHY1_LANE	17
+-#define SRST_USBDP_COMBO_PHY1_PCS	18
+-#define SRST_DCPHY0			19
+-#define SRST_P_MIPI_DCPHY0		20
+-#define SRST_P_MIPI_DCPHY0_GRF		21
 -
--/* scmi-clocks indices */
+-#define SRST_DCPHY1			22
+-#define SRST_P_MIPI_DCPHY1		23
+-#define SRST_P_MIPI_DCPHY1_GRF		24
+-#define SRST_P_APB2ASB_SLV_CDPHY	25
+-#define SRST_P_APB2ASB_SLV_CSIPHY	26
+-#define SRST_P_APB2ASB_SLV_VCCIO3_5	27
+-#define SRST_P_APB2ASB_SLV_VCCIO6	28
+-#define SRST_P_APB2ASB_SLV_EMMCIO	29
+-#define SRST_P_APB2ASB_SLV_IOC_TOP	30
+-#define SRST_P_APB2ASB_SLV_IOC_RIGHT	31
 -
--#define SCMI_CLK_CPUL			0
--#define SCMI_CLK_DSU			1
--#define SCMI_CLK_CPUB01			2
--#define SCMI_CLK_CPUB23			3
--#define SCMI_CLK_DDR			4
--#define SCMI_CLK_GPU			5
--#define SCMI_CLK_NPU			6
--#define SCMI_CLK_SBUS			7
--#define SCMI_PCLK_SBUS			8
--#define SCMI_CCLK_SD			9
--#define SCMI_DCLK_SD			10
--#define SCMI_ACLK_SECURE_NS		11
--#define SCMI_HCLK_SECURE_NS		12
--#define SCMI_TCLK_WDT			13
--#define SCMI_KEYLADDER_CORE		14
--#define SCMI_KEYLADDER_RNG		15
--#define SCMI_ACLK_SECURE_S		16
--#define SCMI_HCLK_SECURE_S		17
--#define SCMI_PCLK_SECURE_S		18
--#define SCMI_CRYPTO_RNG			19
--#define SCMI_CRYPTO_CORE		20
--#define SCMI_CRYPTO_PKA			21
--#define SCMI_SPLL			22
--#define SCMI_HCLK_SD			23
+-#define SRST_P_CRU			32
+-#define SRST_A_CHANNEL_SECURE2VO1USB	33
+-#define SRST_A_CHANNEL_SECURE2CENTER	34
+-#define SRST_H_CHANNEL_SECURE2VO1USB	35
+-#define SRST_H_CHANNEL_SECURE2CENTER	36
+-
+-#define SRST_P_CHANNEL_SECURE2VO1USB	37
+-#define SRST_P_CHANNEL_SECURE2CENTER	38
+-
+-#define SRST_H_AUDIO_BIU		39
+-#define SRST_P_AUDIO_BIU		40
+-#define SRST_H_I2S0_8CH			41
+-#define SRST_M_I2S0_8CH_TX		42
+-#define SRST_M_I2S0_8CH_RX		43
+-#define SRST_P_ACDCDIG			44
+-#define SRST_H_I2S2_2CH			45
+-#define SRST_H_I2S3_2CH			46
+-
+-#define SRST_M_I2S2_2CH			47
+-#define SRST_M_I2S3_2CH			48
+-#define SRST_DAC_ACDCDIG		49
+-#define SRST_H_SPDIF0			50
+-
+-#define SRST_M_SPDIF0			51
+-#define SRST_H_SPDIF1			52
+-#define SRST_M_SPDIF1			53
+-#define SRST_H_PDM1			54
+-#define SRST_PDM1			55
+-
+-#define SRST_A_BUS_BIU			56
+-#define SRST_P_BUS_BIU			57
+-#define SRST_A_GIC			58
+-#define SRST_A_GIC_DBG			59
+-#define SRST_A_DMAC0			60
+-#define SRST_A_DMAC1			61
+-#define SRST_A_DMAC2			62
+-#define SRST_P_I2C1			63
+-#define SRST_P_I2C2			64
+-#define SRST_P_I2C3			65
+-#define SRST_P_I2C4			66
+-#define SRST_P_I2C5			67
+-#define SRST_P_I2C6			68
+-#define SRST_P_I2C7			69
+-#define SRST_P_I2C8			70
+-
+-#define SRST_I2C1			71
+-#define SRST_I2C2			72
+-#define SRST_I2C3			73
+-#define SRST_I2C4			74
+-#define SRST_I2C5			75
+-#define SRST_I2C6			76
+-#define SRST_I2C7			77
+-#define SRST_I2C8			78
+-#define SRST_P_CAN0			79
+-#define SRST_CAN0			80
+-#define SRST_P_CAN1			81
+-#define SRST_CAN1			82
+-#define SRST_P_CAN2			83
+-#define SRST_CAN2			84
+-#define SRST_P_SARADC			85
+-
+-#define SRST_P_TSADC			86
+-#define SRST_TSADC			87
+-#define SRST_P_UART1			88
+-#define SRST_P_UART2			89
+-#define SRST_P_UART3			90
+-#define SRST_P_UART4			91
+-#define SRST_P_UART5			92
+-#define SRST_P_UART6			93
+-#define SRST_P_UART7			94
+-#define SRST_P_UART8			95
+-#define SRST_P_UART9			96
+-#define SRST_S_UART1			97
+-
+-#define SRST_S_UART2			98
+-#define SRST_S_UART3			99
+-#define SRST_S_UART4			100
+-#define SRST_S_UART5			101
+-#define SRST_S_UART6			102
+-#define SRST_S_UART7			103
+-
+-#define SRST_S_UART8			104
+-#define SRST_S_UART9			105
+-#define SRST_P_SPI0			106
+-#define SRST_P_SPI1			107
+-#define SRST_P_SPI2			108
+-#define SRST_P_SPI3			109
+-#define SRST_P_SPI4			110
+-#define SRST_SPI0			111
+-#define SRST_SPI1			112
+-#define SRST_SPI2			113
+-#define SRST_SPI3			114
+-#define SRST_SPI4			115
+-
+-#define SRST_P_WDT0			116
+-#define SRST_T_WDT0			117
+-#define SRST_P_SYS_GRF			118
+-#define SRST_P_PWM1			119
+-#define SRST_PWM1			120
+-#define SRST_P_PWM2			121
+-#define SRST_PWM2			122
+-#define SRST_P_PWM3			123
+-#define SRST_PWM3			124
+-#define SRST_P_BUSTIMER0		125
+-#define SRST_P_BUSTIMER1		126
+-#define SRST_BUSTIMER0			127
+-
+-#define SRST_BUSTIMER1			128
+-#define SRST_BUSTIMER2			129
+-#define SRST_BUSTIMER3			130
+-#define SRST_BUSTIMER4			131
+-#define SRST_BUSTIMER5			132
+-#define SRST_BUSTIMER6			133
+-#define SRST_BUSTIMER7			134
+-#define SRST_BUSTIMER8			135
+-#define SRST_BUSTIMER9			136
+-#define SRST_BUSTIMER10			137
+-#define SRST_BUSTIMER11			138
+-#define SRST_P_MAILBOX0			139
+-#define SRST_P_MAILBOX1			140
+-#define SRST_P_MAILBOX2			141
+-#define SRST_P_GPIO1			142
+-#define SRST_GPIO1			143
+-
+-#define SRST_P_GPIO2			144
+-#define SRST_GPIO2			145
+-#define SRST_P_GPIO3			146
+-#define SRST_GPIO3			147
+-#define SRST_P_GPIO4			148
+-#define SRST_GPIO4			149
+-#define SRST_A_DECOM			150
+-#define SRST_P_DECOM			151
+-#define SRST_D_DECOM			152
+-#define SRST_P_TOP			153
+-#define SRST_A_GICADB_GIC2CORE_BUS	154
+-#define SRST_P_DFT2APB			155
+-#define SRST_P_APB2ASB_MST_TOP		156
+-#define SRST_P_APB2ASB_MST_CDPHY	157
+-#define SRST_P_APB2ASB_MST_BOT_RIGHT	158
+-
+-#define SRST_P_APB2ASB_MST_IOC_TOP	159
+-#define SRST_P_APB2ASB_MST_IOC_RIGHT	160
+-#define SRST_P_APB2ASB_MST_CSIPHY	161
+-#define SRST_P_APB2ASB_MST_VCCIO3_5	162
+-#define SRST_P_APB2ASB_MST_VCCIO6	163
+-#define SRST_P_APB2ASB_MST_EMMCIO	164
+-#define SRST_A_SPINLOCK			165
+-#define SRST_P_OTPC_NS			166
+-#define SRST_OTPC_NS			167
+-#define SRST_OTPC_ARB			168
+-
+-#define SRST_P_BUSIOC			169
+-#define SRST_P_PMUCM0_INTMUX		170
+-#define SRST_P_DDRCM0_INTMUX		171
+-
+-#define SRST_P_DDR_DFICTL_CH0		172
+-#define SRST_P_DDR_MON_CH0		173
+-#define SRST_P_DDR_STANDBY_CH0		174
+-#define SRST_P_DDR_UPCTL_CH0		175
+-#define SRST_TM_DDR_MON_CH0		176
+-#define SRST_P_DDR_GRF_CH01		177
+-#define SRST_DFI_CH0			178
+-#define SRST_SBR_CH0			179
+-#define SRST_DDR_UPCTL_CH0		180
+-#define SRST_DDR_DFICTL_CH0		181
+-#define SRST_DDR_MON_CH0		182
+-#define SRST_DDR_STANDBY_CH0		183
+-#define SRST_A_DDR_UPCTL_CH0		184
+-#define SRST_P_DDR_DFICTL_CH1		185
+-#define SRST_P_DDR_MON_CH1		186
+-#define SRST_P_DDR_STANDBY_CH1		187
+-
+-#define SRST_P_DDR_UPCTL_CH1		188
+-#define SRST_TM_DDR_MON_CH1		189
+-#define SRST_DFI_CH1			190
+-#define SRST_SBR_CH1			191
+-#define SRST_DDR_UPCTL_CH1		192
+-#define SRST_DDR_DFICTL_CH1		193
+-#define SRST_DDR_MON_CH1		194
+-#define SRST_DDR_STANDBY_CH1		195
+-#define SRST_A_DDR_UPCTL_CH1		196
+-#define SRST_A_DDR01_MSCH0		197
+-#define SRST_A_DDR01_RS_MSCH0		198
+-#define SRST_A_DDR01_FRS_MSCH0		199
+-
+-#define SRST_A_DDR01_SCRAMBLE0		200
+-#define SRST_A_DDR01_FRS_SCRAMBLE0	201
+-#define SRST_A_DDR01_MSCH1		202
+-#define SRST_A_DDR01_RS_MSCH1		203
+-#define SRST_A_DDR01_FRS_MSCH1		204
+-#define SRST_A_DDR01_SCRAMBLE1		205
+-#define SRST_A_DDR01_FRS_SCRAMBLE1	206
+-#define SRST_P_DDR01_MSCH0		207
+-#define SRST_P_DDR01_MSCH1		208
+-
+-#define SRST_P_DDR_DFICTL_CH2		209
+-#define SRST_P_DDR_MON_CH2		210
+-#define SRST_P_DDR_STANDBY_CH2		211
+-#define SRST_P_DDR_UPCTL_CH2		212
+-#define SRST_TM_DDR_MON_CH2		213
+-#define SRST_P_DDR_GRF_CH23		214
+-#define SRST_DFI_CH2			215
+-#define SRST_SBR_CH2			216
+-#define SRST_DDR_UPCTL_CH2		217
+-#define SRST_DDR_DFICTL_CH2		218
+-#define SRST_DDR_MON_CH2		219
+-#define SRST_DDR_STANDBY_CH2		220
+-#define SRST_A_DDR_UPCTL_CH2		221
+-#define SRST_P_DDR_DFICTL_CH3		222
+-#define SRST_P_DDR_MON_CH3		223
+-#define SRST_P_DDR_STANDBY_CH3		224
+-
+-#define SRST_P_DDR_UPCTL_CH3		225
+-#define SRST_TM_DDR_MON_CH3		226
+-#define SRST_DFI_CH3			227
+-#define SRST_SBR_CH3			228
+-#define SRST_DDR_UPCTL_CH3		229
+-#define SRST_DDR_DFICTL_CH3		230
+-#define SRST_DDR_MON_CH3		231
+-#define SRST_DDR_STANDBY_CH3		232
+-#define SRST_A_DDR_UPCTL_CH3		233
+-#define SRST_A_DDR23_MSCH2		234
+-#define SRST_A_DDR23_RS_MSCH2		235
+-#define SRST_A_DDR23_FRS_MSCH2		236
+-
+-#define SRST_A_DDR23_SCRAMBLE2		237
+-#define SRST_A_DDR23_FRS_SCRAMBLE2	238
+-#define SRST_A_DDR23_MSCH3		239
+-#define SRST_A_DDR23_RS_MSCH3		240
+-#define SRST_A_DDR23_FRS_MSCH3		241
+-#define SRST_A_DDR23_SCRAMBLE3		242
+-#define SRST_A_DDR23_FRS_SCRAMBLE3	243
+-#define SRST_P_DDR23_MSCH2		244
+-#define SRST_P_DDR23_MSCH3		245
+-
+-#define SRST_ISP1			246
+-#define SRST_ISP1_VICAP			247
+-#define SRST_A_ISP1_BIU			248
+-#define SRST_H_ISP1_BIU			249
+-
+-#define SRST_A_RKNN1			250
+-#define SRST_A_RKNN1_BIU		251
+-#define SRST_H_RKNN1			252
+-#define SRST_H_RKNN1_BIU		253
+-
+-#define SRST_A_RKNN2			254
+-#define SRST_A_RKNN2_BIU		255
+-#define SRST_H_RKNN2			256
+-#define SRST_H_RKNN2_BIU		257
+-
+-#define SRST_A_RKNN_DSU0		258
+-#define SRST_P_NPUTOP_BIU		259
+-#define SRST_P_NPU_TIMER		260
+-#define SRST_NPUTIMER0			261
+-#define SRST_NPUTIMER1			262
+-#define SRST_P_NPU_WDT			263
+-#define SRST_T_NPU_WDT			264
+-#define SRST_P_NPU_PVTM			265
+-#define SRST_P_NPU_GRF			266
+-#define SRST_NPU_PVTM			267
+-
+-#define SRST_NPU_PVTPLL			268
+-#define SRST_H_NPU_CM0_BIU		269
+-#define SRST_F_NPU_CM0_CORE		270
+-#define SRST_T_NPU_CM0_JTAG		271
+-#define SRST_A_RKNN0			272
+-#define SRST_A_RKNN0_BIU		273
+-#define SRST_H_RKNN0			274
+-#define SRST_H_RKNN0_BIU		275
+-
+-#define SRST_H_NVM_BIU			276
+-#define SRST_A_NVM_BIU			277
+-#define SRST_H_EMMC			278
+-#define SRST_A_EMMC			279
+-#define SRST_C_EMMC			280
+-#define SRST_B_EMMC			281
+-#define SRST_T_EMMC			282
+-#define SRST_S_SFC			283
+-#define SRST_H_SFC			284
+-#define SRST_H_SFC_XIP			285
+-
+-#define SRST_P_GRF			286
+-#define SRST_P_DEC_BIU			287
+-#define SRST_P_PHP_BIU			288
+-#define SRST_A_PCIE_GRIDGE		289
+-#define SRST_A_PHP_BIU			290
+-#define SRST_A_GMAC0			291
+-#define SRST_A_GMAC1			292
+-#define SRST_A_PCIE_BIU			293
+-#define SRST_PCIE0_POWER_UP		294
+-#define SRST_PCIE1_POWER_UP		295
+-#define SRST_PCIE2_POWER_UP		296
+-
+-#define SRST_PCIE3_POWER_UP		297
+-#define SRST_PCIE4_POWER_UP		298
+-#define SRST_P_PCIE0			299
+-#define SRST_P_PCIE1			300
+-#define SRST_P_PCIE2			301
+-#define SRST_P_PCIE3			302
+-
+-#define SRST_P_PCIE4			303
+-#define SRST_A_PHP_GIC_ITS		304
+-#define SRST_A_MMU_PCIE			305
+-#define SRST_A_MMU_PHP			306
+-#define SRST_A_MMU_BIU			307
+-
+-#define SRST_A_USB3OTG2			308
+-
+-#define SRST_PMALIVE0			309
+-#define SRST_PMALIVE1			310
+-#define SRST_PMALIVE2			311
+-#define SRST_A_SATA0			312
+-#define SRST_A_SATA1			313
+-#define SRST_A_SATA2			314
+-#define SRST_RXOOB0			315
+-#define SRST_RXOOB1			316
+-#define SRST_RXOOB2			317
+-#define SRST_ASIC0			318
+-#define SRST_ASIC1			319
+-#define SRST_ASIC2			320
+-
+-#define SRST_A_RKVDEC_CCU		321
+-#define SRST_H_RKVDEC0			322
+-#define SRST_A_RKVDEC0			323
+-#define SRST_H_RKVDEC0_BIU		324
+-#define SRST_A_RKVDEC0_BIU		325
+-#define SRST_RKVDEC0_CA			326
+-#define SRST_RKVDEC0_HEVC_CA		327
+-#define SRST_RKVDEC0_CORE		328
+-
+-#define SRST_H_RKVDEC1			329
+-#define SRST_A_RKVDEC1			330
+-#define SRST_H_RKVDEC1_BIU		331
+-#define SRST_A_RKVDEC1_BIU		332
+-#define SRST_RKVDEC1_CA			333
+-#define SRST_RKVDEC1_HEVC_CA		334
+-#define SRST_RKVDEC1_CORE		335
+-
+-#define SRST_A_USB_BIU			336
+-#define SRST_H_USB_BIU			337
+-#define SRST_A_USB3OTG0			338
+-#define SRST_A_USB3OTG1			339
+-#define SRST_H_HOST0			340
+-#define SRST_H_HOST_ARB0		341
+-#define SRST_H_HOST1			342
+-#define SRST_H_HOST_ARB1		343
+-#define SRST_A_USB_GRF			344
+-#define SRST_C_USB2P0_HOST0		345
+-
+-#define SRST_C_USB2P0_HOST1		346
+-#define SRST_HOST_UTMI0			347
+-#define SRST_HOST_UTMI1			348
+-
+-#define SRST_A_VDPU_BIU			349
+-#define SRST_A_VDPU_LOW_BIU		350
+-#define SRST_H_VDPU_BIU			351
+-#define SRST_A_JPEG_DECODER_BIU		352
+-#define SRST_A_VPU			353
+-#define SRST_H_VPU			354
+-#define SRST_A_JPEG_ENCODER0		355
+-#define SRST_H_JPEG_ENCODER0		356
+-#define SRST_A_JPEG_ENCODER1		357
+-#define SRST_H_JPEG_ENCODER1		358
+-#define SRST_A_JPEG_ENCODER2		359
+-#define SRST_H_JPEG_ENCODER2		360
+-
+-#define SRST_A_JPEG_ENCODER3		361
+-#define SRST_H_JPEG_ENCODER3		362
+-#define SRST_A_JPEG_DECODER		363
+-#define SRST_H_JPEG_DECODER		364
+-#define SRST_H_IEP2P0			365
+-#define SRST_A_IEP2P0			366
+-#define SRST_IEP2P0_CORE		367
+-#define SRST_H_RGA2			368
+-#define SRST_A_RGA2			369
+-#define SRST_RGA2_CORE			370
+-#define SRST_H_RGA3_0			371
+-#define SRST_A_RGA3_0			372
+-#define SRST_RGA3_0_CORE		373
+-
+-#define SRST_H_RKVENC0_BIU		374
+-#define SRST_A_RKVENC0_BIU		375
+-#define SRST_H_RKVENC0			376
+-#define SRST_A_RKVENC0			377
+-#define SRST_RKVENC0_CORE		378
+-
+-#define SRST_H_RKVENC1_BIU		379
+-#define SRST_A_RKVENC1_BIU		380
+-#define SRST_H_RKVENC1			381
+-#define SRST_A_RKVENC1			382
+-#define SRST_RKVENC1_CORE		383
+-
+-#define SRST_A_VI_BIU			384
+-#define SRST_H_VI_BIU			385
+-#define SRST_P_VI_BIU			386
+-#define SRST_D_VICAP			387
+-#define SRST_A_VICAP			388
+-#define SRST_H_VICAP			389
+-#define SRST_ISP0			390
+-#define SRST_ISP0_VICAP			391
+-
+-#define SRST_FISHEYE0			392
+-#define SRST_FISHEYE1			393
+-#define SRST_P_CSI_HOST_0		394
+-#define SRST_P_CSI_HOST_1		395
+-#define SRST_P_CSI_HOST_2		396
+-#define SRST_P_CSI_HOST_3		397
+-#define SRST_P_CSI_HOST_4		398
+-#define SRST_P_CSI_HOST_5		399
+-
+-#define SRST_CSIHOST0_VICAP		400
+-#define SRST_CSIHOST1_VICAP		401
+-#define SRST_CSIHOST2_VICAP		402
+-#define SRST_CSIHOST3_VICAP		403
+-#define SRST_CSIHOST4_VICAP		404
+-#define SRST_CSIHOST5_VICAP		405
+-#define SRST_CIFIN			406
+-
+-#define SRST_A_VOP_BIU			407
+-#define SRST_A_VOP_LOW_BIU		408
+-#define SRST_H_VOP_BIU			409
+-#define SRST_P_VOP_BIU			410
+-#define SRST_H_VOP			411
+-#define SRST_A_VOP			412
+-#define SRST_D_VOP0			413
+-#define SRST_D_VOP2HDMI_BRIDGE0		414
+-#define SRST_D_VOP2HDMI_BRIDGE1		415
+-
+-#define SRST_D_VOP1			416
+-#define SRST_D_VOP2			417
+-#define SRST_D_VOP3			418
+-#define SRST_P_VOPGRF			419
+-#define SRST_P_DSIHOST0			420
+-#define SRST_P_DSIHOST1			421
+-#define SRST_DSIHOST0			422
+-#define SRST_DSIHOST1			423
+-#define SRST_VOP_PMU			424
+-#define SRST_P_VOP_CHANNEL_BIU		425
+-
+-#define SRST_H_VO0_BIU			426
+-#define SRST_H_VO0_S_BIU		427
+-#define SRST_P_VO0_BIU			428
+-#define SRST_P_VO0_S_BIU		429
+-#define SRST_A_HDCP0_BIU		430
+-#define SRST_P_VO0GRF			431
+-#define SRST_H_HDCP_KEY0		432
+-#define SRST_A_HDCP0			433
+-#define SRST_H_HDCP0			434
+-#define SRST_HDCP0			435
+-
+-#define SRST_P_TRNG0			436
+-#define SRST_DP0			437
+-#define SRST_DP1			438
+-#define SRST_H_I2S4_8CH			439
+-#define SRST_M_I2S4_8CH_TX		440
+-#define SRST_H_I2S8_8CH			441
+-
+-#define SRST_M_I2S8_8CH_TX		442
+-#define SRST_H_SPDIF2_DP0		443
+-#define SRST_M_SPDIF2_DP0		444
+-#define SRST_H_SPDIF5_DP1		445
+-#define SRST_M_SPDIF5_DP1		446
+-
+-#define SRST_A_HDCP1_BIU		447
+-#define SRST_A_VO1_BIU			448
+-#define SRST_H_VOP1_BIU			449
+-#define SRST_H_VOP1_S_BIU		450
+-#define SRST_P_VOP1_BIU			451
+-#define SRST_P_VO1GRF			452
+-#define SRST_P_VO1_S_BIU		453
+-
+-#define SRST_H_I2S7_8CH			454
+-#define SRST_M_I2S7_8CH_RX		455
+-#define SRST_H_HDCP_KEY1		456
+-#define SRST_A_HDCP1			457
+-#define SRST_H_HDCP1			458
+-#define SRST_HDCP1			459
+-#define SRST_P_TRNG1			460
+-#define SRST_P_HDMITX0			461
+-
+-#define SRST_HDMITX0_REF		462
+-#define SRST_P_HDMITX1			463
+-#define SRST_HDMITX1_REF		464
+-#define SRST_A_HDMIRX			465
+-#define SRST_P_HDMIRX			466
+-#define SRST_HDMIRX_REF			467
+-
+-#define SRST_P_EDP0			468
+-#define SRST_EDP0_24M			469
+-#define SRST_P_EDP1			470
+-#define SRST_EDP1_24M			471
+-#define SRST_M_I2S5_8CH_TX		472
+-#define SRST_H_I2S5_8CH			473
+-#define SRST_M_I2S6_8CH_TX		474
+-
+-#define SRST_M_I2S6_8CH_RX		475
+-#define SRST_H_I2S6_8CH			476
+-#define SRST_H_SPDIF3			477
+-#define SRST_M_SPDIF3			478
+-#define SRST_H_SPDIF4			479
+-#define SRST_M_SPDIF4			480
+-#define SRST_H_SPDIFRX0			481
+-#define SRST_M_SPDIFRX0			482
+-#define SRST_H_SPDIFRX1			483
+-#define SRST_M_SPDIFRX1			484
+-
+-#define SRST_H_SPDIFRX2			485
+-#define SRST_M_SPDIFRX2			486
+-#define SRST_LINKSYM_HDMITXPHY0		487
+-#define SRST_LINKSYM_HDMITXPHY1		488
+-#define SRST_VO1_BRIDGE0		489
+-#define SRST_VO1_BRIDGE1		490
+-
+-#define SRST_H_I2S9_8CH			491
+-#define SRST_M_I2S9_8CH_RX		492
+-#define SRST_H_I2S10_8CH		493
+-#define SRST_M_I2S10_8CH_RX		494
+-#define SRST_P_S_HDMIRX			495
+-
+-#define SRST_GPU			496
+-#define SRST_SYS_GPU			497
+-#define SRST_A_S_GPU_BIU		498
+-#define SRST_A_M0_GPU_BIU		499
+-#define SRST_A_M1_GPU_BIU		500
+-#define SRST_A_M2_GPU_BIU		501
+-#define SRST_A_M3_GPU_BIU		502
+-#define SRST_P_GPU_BIU			503
+-#define SRST_P_GPU_PVTM			504
+-
+-#define SRST_GPU_PVTM			505
+-#define SRST_P_GPU_GRF			506
+-#define SRST_GPU_PVTPLL			507
+-#define SRST_GPU_JTAG			508
+-
+-#define SRST_A_AV1_BIU			509
+-#define SRST_A_AV1			510
+-#define SRST_P_AV1_BIU			511
+-#define SRST_P_AV1			512
+-
+-#define SRST_A_DDR_BIU			513
+-#define SRST_A_DMA2DDR			514
+-#define SRST_A_DDR_SHAREMEM		515
+-#define SRST_A_DDR_SHAREMEM_BIU		516
+-#define SRST_A_CENTER_S200_BIU		517
+-#define SRST_A_CENTER_S400_BIU		518
+-#define SRST_H_AHB2APB			519
+-#define SRST_H_CENTER_BIU		520
+-#define SRST_F_DDR_CM0_CORE		521
+-
+-#define SRST_DDR_TIMER0			522
+-#define SRST_DDR_TIMER1			523
+-#define SRST_T_WDT_DDR			524
+-#define SRST_T_DDR_CM0_JTAG		525
+-#define SRST_P_CENTER_GRF		526
+-#define SRST_P_AHB2APB			527
+-#define SRST_P_WDT			528
+-#define SRST_P_TIMER			529
+-#define SRST_P_DMA2DDR			530
+-#define SRST_P_SHAREMEM			531
+-#define SRST_P_CENTER_BIU		532
+-#define SRST_P_CENTER_CHANNEL_BIU	533
+-
+-#define SRST_P_USBDPGRF0		534
+-#define SRST_P_USBDPPHY0		535
+-#define SRST_P_USBDPGRF1		536
+-#define SRST_P_USBDPPHY1		537
+-#define SRST_P_HDPTX0			538
+-#define SRST_P_HDPTX1			539
+-#define SRST_P_APB2ASB_SLV_BOT_RIGHT	540
+-#define SRST_P_USB2PHY_U3_0_GRF0	541
+-#define SRST_P_USB2PHY_U3_1_GRF0	542
+-#define SRST_P_USB2PHY_U2_0_GRF0	543
+-#define SRST_P_USB2PHY_U2_1_GRF0	544
+-#define SRST_HDPTX0_ROPLL		545
+-#define SRST_HDPTX0_LCPLL		546
+-#define SRST_HDPTX0			547
+-#define SRST_HDPTX1_ROPLL		548
+-
+-#define SRST_HDPTX1_LCPLL		549
+-#define SRST_HDPTX1			550
+-#define SRST_HDPTX0_HDMIRXPHY_SET	551
+-#define SRST_USBDP_COMBO_PHY0		552
+-#define SRST_USBDP_COMBO_PHY0_LCPLL	553
+-#define SRST_USBDP_COMBO_PHY0_ROPLL	554
+-#define SRST_USBDP_COMBO_PHY0_PCS_HS	555
+-#define SRST_USBDP_COMBO_PHY1		556
+-#define SRST_USBDP_COMBO_PHY1_LCPLL	557
+-#define SRST_USBDP_COMBO_PHY1_ROPLL	558
+-#define SRST_USBDP_COMBO_PHY1_PCS_HS	559
+-#define SRST_HDMIHDP0			560
+-#define SRST_HDMIHDP1			561
+-
+-#define SRST_A_VO1USB_TOP_BIU		562
+-#define SRST_H_VO1USB_TOP_BIU		563
+-
+-#define SRST_H_SDIO_BIU			564
+-#define SRST_H_SDIO			565
+-#define SRST_SDIO			566
+-
+-#define SRST_H_RGA3_BIU			567
+-#define SRST_A_RGA3_BIU			568
+-#define SRST_H_RGA3_1			569
+-#define SRST_A_RGA3_1			570
+-#define SRST_RGA3_1_CORE		571
+-
+-#define SRST_REF_PIPE_PHY0		572
+-#define SRST_REF_PIPE_PHY1		573
+-#define SRST_REF_PIPE_PHY2		574
+-
+-#define SRST_P_PHPTOP_CRU		575
+-#define SRST_P_PCIE2_GRF0		576
+-#define SRST_P_PCIE2_GRF1		577
+-#define SRST_P_PCIE2_GRF2		578
+-#define SRST_P_PCIE2_PHY0		579
+-#define SRST_P_PCIE2_PHY1		580
+-#define SRST_P_PCIE2_PHY2		581
+-#define SRST_P_PCIE3_PHY		582
+-#define SRST_P_APB2ASB_SLV_CHIP_TOP	583
+-#define SRST_PCIE30_PHY			584
+-
+-#define SRST_H_PMU1_BIU			585
+-#define SRST_P_PMU1_BIU			586
+-#define SRST_H_PMU_CM0_BIU		587
+-#define SRST_F_PMU_CM0_CORE		588
+-#define SRST_T_PMU1_CM0_JTAG		589
+-
+-#define SRST_DDR_FAIL_SAFE		590
+-#define SRST_P_CRU_PMU1			591
+-#define SRST_P_PMU1_GRF			592
+-#define SRST_P_PMU1_IOC			593
+-#define SRST_P_PMU1WDT			594
+-#define SRST_T_PMU1WDT			595
+-#define SRST_P_PMU1TIMER		596
+-#define SRST_PMU1TIMER0			597
+-#define SRST_PMU1TIMER1			598
+-#define SRST_P_PMU1PWM			599
+-#define SRST_PMU1PWM			600
+-
+-#define SRST_P_I2C0			601
+-#define SRST_I2C0			602
+-#define SRST_S_UART0			603
+-#define SRST_P_UART0			604
+-#define SRST_H_I2S1_8CH			605
+-#define SRST_M_I2S1_8CH_TX		606
+-#define SRST_M_I2S1_8CH_RX		607
+-#define SRST_H_PDM0			608
+-#define SRST_PDM0			609
+-
+-#define SRST_H_VAD			610
+-#define SRST_HDPTX0_INIT		611
+-#define SRST_HDPTX0_CMN			612
+-#define SRST_HDPTX0_LANE		613
+-#define SRST_HDPTX1_INIT		614
+-
+-#define SRST_HDPTX1_CMN			615
+-#define SRST_HDPTX1_LANE		616
+-#define SRST_M_MIPI_DCPHY0		617
+-#define SRST_S_MIPI_DCPHY0		618
+-#define SRST_M_MIPI_DCPHY1		619
+-#define SRST_S_MIPI_DCPHY1		620
+-#define SRST_OTGPHY_U3_0		621
+-#define SRST_OTGPHY_U3_1		622
+-#define SRST_OTGPHY_U2_0		623
+-#define SRST_OTGPHY_U2_1		624
+-
+-#define SRST_P_PMU0GRF			625
+-#define SRST_P_PMU0IOC			626
+-#define SRST_P_GPIO0			627
+-#define SRST_GPIO0			628
+-
+-#define SRST_A_SECURE_NS_BIU		629
+-#define SRST_H_SECURE_NS_BIU		630
+-#define SRST_A_SECURE_S_BIU		631
+-#define SRST_H_SECURE_S_BIU		632
+-#define SRST_P_SECURE_S_BIU		633
+-#define SRST_CRYPTO_CORE		634
+-
+-#define SRST_CRYPTO_PKA			635
+-#define SRST_CRYPTO_RNG			636
+-#define SRST_A_CRYPTO			637
+-#define SRST_H_CRYPTO			638
+-#define SRST_KEYLADDER_CORE		639
+-#define SRST_KEYLADDER_RNG		640
+-#define SRST_A_KEYLADDER		641
+-#define SRST_H_KEYLADDER		642
+-#define SRST_P_OTPC_S			643
+-#define SRST_OTPC_S			644
+-#define SRST_WDT_S			645
+-
+-#define SRST_T_WDT_S			646
+-#define SRST_H_BOOTROM			647
+-#define SRST_A_DCF			648
+-#define SRST_P_DCF			649
+-#define SRST_H_BOOTROM_NS		650
+-#define SRST_P_KEYLADDER		651
+-#define SRST_H_TRNG_S			652
+-
+-#define SRST_H_TRNG_NS			653
+-#define SRST_D_SDMMC_BUFFER		654
+-#define SRST_H_SDMMC			655
+-#define SRST_H_SDMMC_BUFFER		656
+-#define SRST_SDMMC			657
+-#define SRST_P_TRNG_CHK			658
+-#define SRST_TRNG_S			659
 -
 -#endif
-diff --git a/include/dt-bindings/clock/rockchip,rk808.h b/include/dt-bindings/clock/rockchip,rk808.h
+diff --git a/include/dt-bindings/soc/rockchip,boot-mode.h b/include/dt-bindings/soc/rockchip,boot-mode.h
 deleted file mode 100644
-index 1a873432f965..000000000000
---- a/include/dt-bindings/clock/rockchip,rk808.h
+index 4b0914c0989d..000000000000
+--- a/include/dt-bindings/soc/rockchip,boot-mode.h
 +++ /dev/null
-@@ -1,11 +0,0 @@
--/*
-- * This header provides constants clk index RK808 pmic clkout
-- */
--#ifndef _CLK_ROCKCHIP_RK808
--#define _CLK_ROCKCHIP_RK808
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef __ROCKCHIP_BOOT_MODE_H
+-#define __ROCKCHIP_BOOT_MODE_H
 -
--/* CLOCKOUT index */
--#define RK808_CLKOUT0		0
--#define RK808_CLKOUT1		1
+-/*high 24 bits is tag, low 8 bits is type*/
+-#define REBOOT_FLAG		0x5242C300
+-/* normal boot */
+-#define BOOT_NORMAL		(REBOOT_FLAG + 0)
+-/* enter bootloader rockusb mode */
+-#define BOOT_BL_DOWNLOAD	(REBOOT_FLAG + 1)
+-/* enter recovery */
+-#define BOOT_RECOVERY		(REBOOT_FLAG + 3)
+- /* enter fastboot mode */
+-#define BOOT_FASTBOOT		(REBOOT_FLAG + 9)
 -
 -#endif
-diff --git a/include/dt-bindings/clock/rockchip,rv1126-cru.h b/include/dt-bindings/clock/rockchip,rv1126-cru.h
+diff --git a/include/dt-bindings/soc/rockchip,vop2.h b/include/dt-bindings/soc/rockchip,vop2.h
 deleted file mode 100644
-index e89a3a5a4a34..000000000000
---- a/include/dt-bindings/clock/rockchip,rv1126-cru.h
+index 668f199df9f0..000000000000
+--- a/include/dt-bindings/soc/rockchip,vop2.h
 +++ /dev/null
-@@ -1,632 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Copyright (c) 2019 Rockchip Electronics Co. Ltd.
-- * Author: Finley Xiao <finley.xiao@rock-chips.com>
-- */
+@@ -1,18 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause */
 -
--#ifndef _DT_BINDINGS_CLK_ROCKCHIP_RV1126_H
--#define _DT_BINDINGS_CLK_ROCKCHIP_RV1126_H
+-#ifndef __DT_BINDINGS_ROCKCHIP_VOP2_H
+-#define __DT_BINDINGS_ROCKCHIP_VOP2_H
 -
--/* pmucru-clocks indices */
+-#define ROCKCHIP_VOP2_EP_RGB0	1
+-#define ROCKCHIP_VOP2_EP_HDMI0	2
+-#define ROCKCHIP_VOP2_EP_EDP0	3
+-#define ROCKCHIP_VOP2_EP_MIPI0	4
+-#define ROCKCHIP_VOP2_EP_LVDS0	5
+-#define ROCKCHIP_VOP2_EP_MIPI1	6
+-#define ROCKCHIP_VOP2_EP_LVDS1	7
+-#define ROCKCHIP_VOP2_EP_HDMI1	8
+-#define ROCKCHIP_VOP2_EP_EDP1	9
+-#define ROCKCHIP_VOP2_EP_DP0	10
+-#define ROCKCHIP_VOP2_EP_DP1	11
 -
--/* pll clocks */
--#define PLL_GPLL		1
--
--/* sclk (special clocks) */
--#define CLK_OSC0_DIV32K		2
--#define CLK_RTC32K		3
--#define CLK_WIFI_DIV		4
--#define CLK_WIFI_OSC0		5
--#define CLK_WIFI		6
--#define CLK_PMU			7
--#define SCLK_UART1_DIV		8
--#define SCLK_UART1_FRACDIV	9
--#define SCLK_UART1_MUX		10
--#define SCLK_UART1		11
--#define CLK_I2C0		12
--#define CLK_I2C2		13
--#define CLK_CAPTURE_PWM0	14
--#define CLK_PWM0		15
--#define CLK_CAPTURE_PWM1	16
--#define CLK_PWM1		17
--#define CLK_SPI0		18
--#define DBCLK_GPIO0		19
--#define CLK_PMUPVTM		20
--#define CLK_CORE_PMUPVTM	21
--#define CLK_REF12M		22
--#define CLK_USBPHY_OTG_REF	23
--#define CLK_USBPHY_HOST_REF	24
--#define CLK_REF24M		25
--#define CLK_MIPIDSIPHY_REF	26
--
--/* pclk */
--#define PCLK_PDPMU		30
--#define PCLK_PMU		31
--#define PCLK_UART1		32
--#define PCLK_I2C0		33
--#define PCLK_I2C2		34
--#define PCLK_PWM0		35
--#define PCLK_PWM1		36
--#define PCLK_SPI0		37
--#define PCLK_GPIO0		38
--#define PCLK_PMUSGRF		39
--#define PCLK_PMUGRF		40
--#define PCLK_PMUCRU		41
--#define PCLK_CHIPVEROTP		42
--#define PCLK_PDPMU_NIU		43
--#define PCLK_PMUPVTM		44
--#define PCLK_SCRKEYGEN		45
--
--#define CLKPMU_NR_CLKS		(PCLK_SCRKEYGEN + 1)
--
--/* cru-clocks indices */
--
--/* pll clocks */
--#define PLL_APLL		1
--#define PLL_DPLL		2
--#define PLL_CPLL		3
--#define PLL_HPLL		4
--
--/* sclk (special clocks) */
--#define ARMCLK			5
--#define USB480M			6
--#define CLK_CORE_CPUPVTM	7
--#define CLK_CPUPVTM		8
--#define CLK_SCR1		9
--#define CLK_SCR1_CORE		10
--#define CLK_SCR1_RTC		11
--#define CLK_SCR1_JTAG		12
--#define SCLK_UART0_DIV		13
--#define SCLK_UART0_FRAC		14
--#define SCLK_UART0_MUX		15
--#define SCLK_UART0		16
--#define SCLK_UART2_DIV		17
--#define SCLK_UART2_FRAC		18
--#define SCLK_UART2_MUX		19
--#define SCLK_UART2		20
--#define SCLK_UART3_DIV		21
--#define SCLK_UART3_FRAC		22
--#define SCLK_UART3_MUX		23
--#define SCLK_UART3		24
--#define SCLK_UART4_DIV		25
--#define SCLK_UART4_FRAC		26
--#define SCLK_UART4_MUX		27
--#define SCLK_UART4		28
--#define SCLK_UART5_DIV		29
--#define SCLK_UART5_FRAC		30
--#define SCLK_UART5_MUX		31
--#define SCLK_UART5		32
--#define CLK_I2C1		33
--#define CLK_I2C3		34
--#define CLK_I2C4		35
--#define CLK_I2C5		36
--#define CLK_SPI1		37
--#define CLK_CAPTURE_PWM2	38
--#define CLK_PWM2		39
--#define DBCLK_GPIO1		40
--#define DBCLK_GPIO2		41
--#define DBCLK_GPIO3		42
--#define DBCLK_GPIO4		43
--#define CLK_SARADC		44
--#define CLK_TIMER0		45
--#define CLK_TIMER1		46
--#define CLK_TIMER2		47
--#define CLK_TIMER3		48
--#define CLK_TIMER4		49
--#define CLK_TIMER5		50
--#define CLK_CAN			51
--#define CLK_NPU_TSADC		52
--#define CLK_NPU_TSADCPHY	53
--#define CLK_CPU_TSADC		54
--#define CLK_CPU_TSADCPHY	55
--#define CLK_CRYPTO_CORE		56
--#define CLK_CRYPTO_PKA		57
--#define MCLK_I2S0_TX_DIV	58
--#define MCLK_I2S0_TX_FRACDIV	59
--#define MCLK_I2S0_TX_MUX	60
--#define MCLK_I2S0_TX		61
--#define MCLK_I2S0_RX_DIV	62
--#define MCLK_I2S0_RX_FRACDIV	63
--#define MCLK_I2S0_RX_MUX	64
--#define MCLK_I2S0_RX		65
--#define MCLK_I2S0_TX_OUT2IO	66
--#define MCLK_I2S0_RX_OUT2IO	67
--#define MCLK_I2S1_DIV		68
--#define MCLK_I2S1_FRACDIV	69
--#define MCLK_I2S1_MUX		70
--#define MCLK_I2S1		71
--#define MCLK_I2S1_OUT2IO	72
--#define MCLK_I2S2_DIV		73
--#define MCLK_I2S2_FRACDIV	74
--#define MCLK_I2S2_MUX		75
--#define MCLK_I2S2		76
--#define MCLK_I2S2_OUT2IO	77
--#define MCLK_PDM		78
--#define SCLK_ADUPWM_DIV		79
--#define SCLK_AUDPWM_FRACDIV	80
--#define SCLK_AUDPWM_MUX		81
--#define	SCLK_AUDPWM		82
--#define CLK_ACDCDIG_ADC		83
--#define CLK_ACDCDIG_DAC		84
--#define CLK_ACDCDIG_I2C		85
--#define CLK_VENC_CORE		86
--#define CLK_VDEC_CORE		87
--#define CLK_VDEC_CA		88
--#define CLK_VDEC_HEVC_CA	89
--#define CLK_RGA_CORE		90
--#define CLK_IEP_CORE		91
--#define CLK_ISP_DIV		92
--#define CLK_ISP_NP5		93
--#define CLK_ISP_NUX		94
--#define CLK_ISP			95
--#define CLK_CIF_OUT_DIV		96
--#define CLK_CIF_OUT_FRACDIV	97
--#define CLK_CIF_OUT_MUX		98
--#define CLK_CIF_OUT		99
--#define CLK_MIPICSI_OUT_DIV	100
--#define CLK_MIPICSI_OUT_FRACDIV	101
--#define CLK_MIPICSI_OUT_MUX	102
--#define CLK_MIPICSI_OUT		103
--#define CLK_ISPP_DIV		104
--#define CLK_ISPP_NP5		105
--#define CLK_ISPP_NUX		106
--#define CLK_ISPP		107
--#define CLK_SDMMC		108
--#define SCLK_SDMMC_DRV		109
--#define SCLK_SDMMC_SAMPLE	110
--#define CLK_SDIO		111
--#define SCLK_SDIO_DRV		112
--#define SCLK_SDIO_SAMPLE	113
--#define CLK_EMMC		114
--#define SCLK_EMMC_DRV		115
--#define SCLK_EMMC_SAMPLE	116
--#define CLK_NANDC		117
--#define SCLK_SFC		118
--#define CLK_USBHOST_UTMI_OHCI	119
--#define CLK_USBOTG_REF		120
--#define CLK_GMAC_DIV		121
--#define CLK_GMAC_RGMII_M0	122
--#define CLK_GMAC_SRC_M0		123
--#define CLK_GMAC_RGMII_M1	124
--#define CLK_GMAC_SRC_M1		125
--#define CLK_GMAC_SRC		126
--#define CLK_GMAC_REF		127
--#define CLK_GMAC_TX_SRC		128
--#define CLK_GMAC_TX_DIV5	129
--#define CLK_GMAC_TX_DIV50	130
--#define RGMII_MODE_CLK		131
--#define CLK_GMAC_RX_SRC		132
--#define CLK_GMAC_RX_DIV2	133
--#define CLK_GMAC_RX_DIV20	134
--#define RMII_MODE_CLK		135
--#define CLK_GMAC_TX_RX		136
--#define CLK_GMAC_PTPREF		137
--#define CLK_GMAC_ETHERNET_OUT	138
--#define CLK_DDRPHY		139
--#define CLK_DDR_MON		140
--#define TMCLK_DDR_MON		141
--#define CLK_NPU_DIV		142
--#define CLK_NPU_NP5		143
--#define CLK_CORE_NPU		144
--#define CLK_CORE_NPUPVTM	145
--#define CLK_NPUPVTM		146
--#define SCLK_DDRCLK		147
--#define CLK_OTP			148
--
--/* dclk */
--#define DCLK_DECOM		150
--#define DCLK_VOP_DIV		151
--#define DCLK_VOP_FRACDIV	152
--#define DCLK_VOP_MUX		153
--#define DCLK_VOP		154
--#define DCLK_CIF		155
--#define DCLK_CIFLITE		156
--
--/* aclk */
--#define ACLK_PDBUS		160
--#define ACLK_DMAC		161
--#define ACLK_DCF		162
--#define ACLK_SPINLOCK		163
--#define ACLK_DECOM		164
--#define ACLK_PDCRYPTO		165
--#define ACLK_CRYPTO		166
--#define ACLK_PDVEPU		167
--#define ACLK_VENC		168
--#define ACLK_PDVDEC		169
--#define ACLK_PDJPEG		170
--#define ACLK_VDEC		171
--#define ACLK_JPEG		172
--#define ACLK_PDVO		173
--#define ACLK_RGA		174
--#define ACLK_VOP		175
--#define ACLK_IEP		176
--#define ACLK_PDVI_DIV		177
--#define ACLK_PDVI_NP5		178
--#define ACLK_PDVI		179
--#define ACLK_ISP		180
--#define ACLK_CIF		181
--#define ACLK_CIFLITE		182
--#define ACLK_PDISPP_DIV		183
--#define ACLK_PDISPP_NP5		184
--#define ACLK_PDISPP		185
--#define ACLK_ISPP		186
--#define ACLK_PDPHP		187
--#define ACLK_PDUSB		188
--#define ACLK_USBOTG		189
--#define ACLK_PDGMAC		190
--#define ACLK_GMAC		191
--#define ACLK_PDNPU_DIV		192
--#define ACLK_PDNPU_NP5		193
--#define ACLK_PDNPU		194
--#define ACLK_NPU		195
--
--/* hclk */
--#define HCLK_PDCORE_NIU		200
--#define HCLK_PDUSB		201
--#define HCLK_PDCRYPTO		202
--#define HCLK_CRYPTO		203
--#define HCLK_PDAUDIO		204
--#define HCLK_I2S0		205
--#define HCLK_I2S1		206
--#define HCLK_I2S2		207
--#define HCLK_PDM		208
--#define HCLK_AUDPWM		209
--#define HCLK_PDVEPU		210
--#define HCLK_VENC		211
--#define HCLK_PDVDEC		212
--#define HCLK_PDJPEG		213
--#define HCLK_VDEC		214
--#define HCLK_JPEG		215
--#define HCLK_PDVO		216
--#define HCLK_RGA		217
--#define HCLK_VOP		218
--#define HCLK_IEP		219
--#define HCLK_PDVI		220
--#define HCLK_ISP		221
--#define HCLK_CIF		222
--#define HCLK_CIFLITE		223
--#define HCLK_PDISPP		224
--#define HCLK_ISPP		225
--#define HCLK_PDPHP		226
--#define HCLK_PDSDMMC		227
--#define HCLK_SDMMC		228
--#define HCLK_PDSDIO		229
--#define HCLK_SDIO		230
--#define HCLK_PDNVM		231
--#define HCLK_EMMC		232
--#define HCLK_NANDC		233
--#define HCLK_SFC		234
--#define HCLK_SFCXIP		235
--#define HCLK_PDBUS		236
--#define HCLK_USBHOST		237
--#define HCLK_USBHOST_ARB	238
--#define HCLK_PDNPU		239
--#define HCLK_NPU		240
--
--/* pclk */
--#define PCLK_CPUPVTM		245
--#define PCLK_PDBUS		246
--#define PCLK_DCF		247
--#define PCLK_WDT		248
--#define PCLK_MAILBOX		249
--#define PCLK_UART0		250
--#define PCLK_UART2		251
--#define PCLK_UART3		252
--#define PCLK_UART4		253
--#define PCLK_UART5		254
--#define PCLK_I2C1		255
--#define PCLK_I2C3		256
--#define PCLK_I2C4		257
--#define PCLK_I2C5		258
--#define PCLK_SPI1		259
--#define PCLK_PWM2		261
--#define PCLK_GPIO1		262
--#define PCLK_GPIO2		263
--#define PCLK_GPIO3		264
--#define PCLK_GPIO4		265
--#define PCLK_SARADC		266
--#define PCLK_TIMER		267
--#define PCLK_DECOM		268
--#define PCLK_CAN		269
--#define PCLK_NPU_TSADC		270
--#define PCLK_CPU_TSADC		271
--#define PCLK_ACDCDIG		272
--#define PCLK_PDVO		273
--#define PCLK_DSIHOST		274
--#define PCLK_PDVI		275
--#define PCLK_CSIHOST		276
--#define PCLK_PDGMAC		277
--#define PCLK_GMAC		278
--#define PCLK_PDDDR		279
--#define PCLK_DDR_MON		280
--#define PCLK_PDNPU		281
--#define PCLK_NPUPVTM		282
--#define PCLK_PDTOP		283
--#define PCLK_TOPCRU		284
--#define PCLK_TOPGRF		285
--#define PCLK_CPUEMADET		286
--#define PCLK_DDRPHY		287
--#define PCLK_DSIPHY		289
--#define PCLK_CSIPHY0		290
--#define PCLK_CSIPHY1		291
--#define PCLK_USBPHY_HOST	292
--#define PCLK_USBPHY_OTG		293
--#define PCLK_OTP		294
--
--#define CLK_NR_CLKS		(PCLK_OTP + 1)
--
--/* pmu soft-reset indices */
--
--/* pmu_cru_softrst_con0 */
--#define SRST_PDPMU_NIU_P	0
--#define SRST_PMU_SGRF_P		1
--#define SRST_PMU_SGRF_REMAP_P	2
--#define SRST_I2C0_P		3
--#define SRST_I2C0		4
--#define SRST_I2C2_P		7
--#define SRST_I2C2		8
--#define SRST_UART1_P		9
--#define SRST_UART1		10
--#define SRST_PWM0_P		11
--#define SRST_PWM0		12
--#define SRST_PWM1_P		13
--#define SRST_PWM1		14
--#define SRST_DDR_FAIL_SAFE	15
--
--/* pmu_cru_softrst_con1 */
--#define SRST_GPIO0_P		17
--#define SRST_GPIO0_DB		18
--#define SRST_SPI0_P		19
--#define SRST_SPI0		20
--#define SRST_PMUGRF_P		21
--#define SRST_CHIPVEROTP_P	22
--#define SRST_PMUPVTM		24
--#define SRST_PMUPVTM_P		25
--#define SRST_PMUCRU_P		30
--
--/* soft-reset indices */
--
--/* cru_softrst_con0 */
--#define SRST_CORE0_PO		0
--#define SRST_CORE1_PO		1
--#define SRST_CORE2_PO		2
--#define SRST_CORE3_PO		3
--#define SRST_CORE0		4
--#define SRST_CORE1		5
--#define SRST_CORE2		6
--#define SRST_CORE3		7
--#define SRST_CORE0_DBG		8
--#define SRST_CORE1_DBG		9
--#define SRST_CORE2_DBG		10
--#define SRST_CORE3_DBG		11
--#define SRST_NL2		12
--#define SRST_CORE_NIU_A		13
--#define SRST_DBG_DAPLITE_P	14
--#define SRST_DAPLITE_P		15
--
--/* cru_softrst_con1 */
--#define SRST_PDBUS_NIU1_A	16
--#define SRST_PDBUS_NIU1_H	17
--#define SRST_PDBUS_NIU1_P	18
--#define SRST_PDBUS_NIU2_A	19
--#define SRST_PDBUS_NIU2_H	20
--#define SRST_PDBUS_NIU3_A	21
--#define SRST_PDBUS_NIU3_H	22
--#define SRST_PDBUS_HOLD_NIU1_A	23
--#define SRST_DBG_NIU_P		24
--#define SRST_PDCORE_NIIU_H	25
--#define SRST_MUC_NIU		26
--#define SRST_DCF_A		29
--#define SRST_DCF_P		30
--#define SRST_SYSTEM_SRAM_A	31
--
--/* cru_softrst_con2 */
--#define SRST_I2C1_P		32
--#define SRST_I2C1		33
--#define SRST_I2C3_P		34
--#define SRST_I2C3		35
--#define SRST_I2C4_P		36
--#define SRST_I2C4		37
--#define SRST_I2C5_P		38
--#define SRST_I2C5		39
--#define SRST_SPI1_P		40
--#define SRST_SPI1		41
--#define SRST_MCU_CORE		42
--#define SRST_PWM2_P		44
--#define SRST_PWM2		45
--#define SRST_SPINLOCK_A		46
--
--/* cru_softrst_con3 */
--#define SRST_UART0_P		48
--#define SRST_UART0		49
--#define SRST_UART2_P		50
--#define SRST_UART2		51
--#define SRST_UART3_P		52
--#define SRST_UART3		53
--#define SRST_UART4_P		54
--#define SRST_UART4		55
--#define SRST_UART5_P		56
--#define SRST_UART5		57
--#define SRST_WDT_P		58
--#define SRST_SARADC_P		59
--#define SRST_GRF_P		61
--#define SRST_TIMER_P		62
--#define SRST_MAILBOX_P		63
--
--/* cru_softrst_con4 */
--#define SRST_TIMER0		64
--#define SRST_TIMER1		65
--#define SRST_TIMER2		66
--#define SRST_TIMER3		67
--#define SRST_TIMER4		68
--#define SRST_TIMER5		69
--#define SRST_INTMUX_P		70
--#define SRST_GPIO1_P		72
--#define SRST_GPIO1_DB		73
--#define SRST_GPIO2_P		74
--#define SRST_GPIO2_DB		75
--#define SRST_GPIO3_P		76
--#define SRST_GPIO3_DB		77
--#define SRST_GPIO4_P		78
--#define SRST_GPIO4_DB		79
--
--/* cru_softrst_con5 */
--#define SRST_CAN_P		80
--#define SRST_CAN		81
--#define SRST_DECOM_A		85
--#define SRST_DECOM_P		86
--#define SRST_DECOM_D		87
--#define SRST_PDCRYPTO_NIU_A	88
--#define SRST_PDCRYPTO_NIU_H	89
--#define SRST_CRYPTO_A		90
--#define SRST_CRYPTO_H		91
--#define SRST_CRYPTO_CORE	92
--#define SRST_CRYPTO_PKA		93
--#define SRST_SGRF_P		95
--
--/* cru_softrst_con6 */
--#define SRST_PDAUDIO_NIU_H	96
--#define SRST_PDAUDIO_NIU_P	97
--#define SRST_I2S0_H		98
--#define SRST_I2S0_TX_M		99
--#define SRST_I2S0_RX_M		100
--#define SRST_I2S1_H		101
--#define SRST_I2S1_M		102
--#define SRST_I2S2_H		103
--#define SRST_I2S2_M		104
--#define SRST_PDM_H		105
--#define SRST_PDM_M		106
--#define SRST_AUDPWM_H		107
--#define SRST_AUDPWM		108
--#define SRST_ACDCDIG_P		109
--#define SRST_ACDCDIG		110
--
--/* cru_softrst_con7 */
--#define SRST_PDVEPU_NIU_A	112
--#define SRST_PDVEPU_NIU_H	113
--#define SRST_VENC_A		114
--#define SRST_VENC_H		115
--#define SRST_VENC_CORE		116
--#define SRST_PDVDEC_NIU_A	117
--#define SRST_PDVDEC_NIU_H	118
--#define SRST_VDEC_A		119
--#define SRST_VDEC_H		120
--#define SRST_VDEC_CORE		121
--#define SRST_VDEC_CA		122
--#define SRST_VDEC_HEVC_CA	123
--#define SRST_PDJPEG_NIU_A	124
--#define SRST_PDJPEG_NIU_H	125
--#define SRST_JPEG_A		126
--#define SRST_JPEG_H		127
--
--/* cru_softrst_con8 */
--#define SRST_PDVO_NIU_A		128
--#define SRST_PDVO_NIU_H		129
--#define SRST_PDVO_NIU_P		130
--#define SRST_RGA_A		131
--#define SRST_RGA_H		132
--#define SRST_RGA_CORE		133
--#define SRST_VOP_A		134
--#define SRST_VOP_H		135
--#define SRST_VOP_D		136
--#define SRST_TXBYTEHS_DSIHOST	137
--#define SRST_DSIHOST_P		138
--#define SRST_IEP_A		139
--#define SRST_IEP_H		140
--#define SRST_IEP_CORE		141
--#define SRST_ISP_RX_P		142
--
--/* cru_softrst_con9 */
--#define SRST_PDVI_NIU_A		144
--#define SRST_PDVI_NIU_H		145
--#define SRST_PDVI_NIU_P		146
--#define SRST_ISP		147
--#define SRST_CIF_A		148
--#define SRST_CIF_H		149
--#define SRST_CIF_D		150
--#define SRST_CIF_P		151
--#define SRST_CIF_I		152
--#define SRST_CIF_RX_P		153
--#define SRST_PDISPP_NIU_A	154
--#define SRST_PDISPP_NIU_H	155
--#define SRST_ISPP_A		156
--#define SRST_ISPP_H		157
--#define SRST_ISPP		158
--#define SRST_CSIHOST_P		159
--
--/* cru_softrst_con10 */
--#define SRST_PDPHPMID_NIU_A	160
--#define SRST_PDPHPMID_NIU_H	161
--#define SRST_PDNVM_NIU_H	163
--#define SRST_SDMMC_H		164
--#define SRST_SDIO_H		165
--#define SRST_EMMC_H		166
--#define SRST_SFC_H		167
--#define SRST_SFCXIP_H		168
--#define SRST_SFC		169
--#define SRST_NANDC_H		170
--#define SRST_NANDC		171
--#define SRST_PDSDMMC_H		173
--#define SRST_PDSDIO_H		174
--
--/* cru_softrst_con11 */
--#define SRST_PDUSB_NIU_A	176
--#define SRST_PDUSB_NIU_H	177
--#define SRST_USBHOST_H		178
--#define SRST_USBHOST_ARB_H	179
--#define SRST_USBHOST_UTMI	180
--#define SRST_USBOTG_A		181
--#define SRST_USBPHY_OTG_P	182
--#define SRST_USBPHY_HOST_P	183
--#define SRST_USBPHYPOR_OTG	184
--#define SRST_USBPHYPOR_HOST	185
--#define SRST_PDGMAC_NIU_A	188
--#define SRST_PDGMAC_NIU_P	189
--#define SRST_GMAC_A		190
--
--/* cru_softrst_con12 */
--#define SRST_DDR_DFICTL_P	193
--#define SRST_DDR_MON_P		194
--#define SRST_DDR_STANDBY_P	195
--#define SRST_DDR_GRF_P		196
--#define SRST_DDR_MSCH_P		197
--#define SRST_DDR_SPLIT_A	198
--#define SRST_DDR_MSCH		199
--#define SRST_DDR_DFICTL		202
--#define SRST_DDR_STANDBY	203
--#define SRST_NPUMCU_NIU		205
--#define SRST_DDRPHY_P		206
--#define SRST_DDRPHY		207
--
--/* cru_softrst_con13 */
--#define SRST_PDNPU_NIU_A	208
--#define SRST_PDNPU_NIU_H	209
--#define SRST_PDNPU_NIU_P	210
--#define SRST_NPU_A		211
--#define SRST_NPU_H		212
--#define SRST_NPU		213
--#define SRST_NPUPVTM_P		214
--#define SRST_NPUPVTM		215
--#define SRST_NPU_TSADC_P	216
--#define SRST_NPU_TSADC		217
--#define SRST_NPU_TSADCPHY	218
--#define SRST_CIFLITE_A		220
--#define SRST_CIFLITE_H		221
--#define SRST_CIFLITE_D		222
--#define SRST_CIFLITE_RX_P	223
--
--/* cru_softrst_con14 */
--#define SRST_TOPNIU_P		224
--#define SRST_TOPCRU_P		225
--#define SRST_TOPGRF_P		226
--#define SRST_CPUEMADET_P	227
--#define SRST_CSIPHY0_P		228
--#define SRST_CSIPHY1_P		229
--#define SRST_DSIPHY_P		230
--#define SRST_CPU_TSADC_P	232
--#define SRST_CPU_TSADC		233
--#define SRST_CPU_TSADCPHY	234
--#define SRST_CPUPVTM_P		235
--#define SRST_CPUPVTM		236
--
--#endif
+-#endif /* __DT_BINDINGS_ROCKCHIP_VOP2_H */
 
 -- 
 2.44.0

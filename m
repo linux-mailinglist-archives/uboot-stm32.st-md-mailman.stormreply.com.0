@@ -2,71 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1BB76871F7E
-	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Mar 2024 13:51:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C9B3871FD3
+	for <lists+uboot-stm32@lfdr.de>; Tue,  5 Mar 2024 14:15:13 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C6310C6DD69;
-	Tue,  5 Mar 2024 12:51:42 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 40278C6DD69;
+	Tue,  5 Mar 2024 13:15:13 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com
+ [209.85.219.181])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DF5FBC62EFE
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8FA7FC62EFE
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  5 Mar 2024 12:51:41 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-33e4d36f288so270748f8f.1
+ Tue,  5 Mar 2024 13:15:11 +0000 (UTC)
+Received: by mail-yb1-f181.google.com with SMTP id
+ 3f1490d57ef6-dd045349d42so693178276.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 05 Mar 2024 04:51:41 -0800 (PST)
+ Tue, 05 Mar 2024 05:15:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1709643101; x=1710247901;
+ d=linaro.org; s=google; t=1709644510; x=1710249310;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=x91VJBZqjXRLt3HCTujHvFpj+vG9EQ3dOOSIkLwi6Rw=;
- b=XffswFah8ebWiP022j/XECI4yPYjNI4/GLKcYfd9NcSSM67rgFoxdCUSxKjXlBY/tp
- dYERD1nWMjm1bSYq6NA8hwJvvBI5BJvZognoqM/JoSxF0JRb50BlqP1yS9DXWmS7RA8Z
- dSbRgu32LnDpaNToQ/baItRYtuoDTylz7SkKSZRhwg3ZoyAtQxnVm0iqt+xsK4U1EP1Z
- h46XW9oR8EOwfUKlaTN2NMJnzasRaZNBVM0TFIsBBPDAf+7hvhb2tOVZjIJjdokMMC0U
- dkoWcXGWQKUojqOmWNyTbonz3kMQ/unxMoi8WfvB6u7NdFiFM0k/vdkZe05ZJe3TyV6q
- h7tA==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8eq13me9D0mT3pdn+HJ78Y033XhwtevLa9pKlcKglx0=;
+ b=gjwY1ikMaAvVLzk+2YbbEw15QqJeo4zaZkt7O0nkQg4bgD9BI6oZlqoqiljOBy+uxA
+ mJVzWVe3Oz/RAi4Ysuv+5ibAtvCkkjnDypOidCJ+UO7iiY7MPr2p6fYDACar7AICsX7W
+ BHPVPTz4Q5+S5p9I/0rvd4X+ge6W5h2fiXruJKRQbQW3NsrEPy3BTSTYx4X2AGK+pRQg
+ IjFgoYhnH6jUr3pAZK/zRzuQv4bSlHfVqwq2TGJKGf3ris2gUmWlOtV1n1JpYciA2AgF
+ dGcxFB4wZlNlsD0azaFjBGs2WLtTSzJwhcnJ4gj5yhi0pgDec0J8U9NC+xXuF4iVa8Kq
+ hNxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1709643101; x=1710247901;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=x91VJBZqjXRLt3HCTujHvFpj+vG9EQ3dOOSIkLwi6Rw=;
- b=keOaJ5yrxQKPd/AhozS//aRZqkrQu0SjXpbMk4K/YKCRq7VuynGkUzXGPW73AvKR4r
- A5sfhZG7n3Im3VS/nXU3ik/nvRF0wh/KR/eBGfUnLgZB21snUVp4VHZlDar0Or8+smEV
- NP/NvS/DICU5Fc/yLrAs3Sqx2/aE0/jSCUvthBuKTLAfaOb0XGv/2zWCb3YFKO92bvRt
- lHRDWZy7LpSaiGf0WbAgxQGKjis9QOrNge+e6VkRiev3drvQxBh1EktNJ/HXfms81zpE
- 47gGAWutbEWM/Xy7+KdpYS9nO4gkkfxR0+meMVQ/+NGBfBtvsV40/MjOV971qvkFxuXN
- T8mg==
+ d=1e100.net; s=20230601; t=1709644510; x=1710249310;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8eq13me9D0mT3pdn+HJ78Y033XhwtevLa9pKlcKglx0=;
+ b=DM2sUL+x0URg6mQuJmSQvfWAOv7VN/bvmlkai8bHUEFC2FsEOPi8AT5crqfIcGZkzJ
+ HcUMmtHDeMh1HEiHJdyulsaqCpMXjukj0xVgyJPxZswQ4MPCJeKQtNurNnKYGGvAtKE6
+ isbJSxE/zceU9dYimSzpJzGbJ8ZvmSssKwHpBZEXIBGlFj24pau0soWa82AzzC2EhOjf
+ HVfl3cUgDyECg66r60ocA0qaJbz/kORUS5d5MjH58NRcRAWe3sqMWvf1kV9jlmShDkjA
+ nRHSYLbdAMqz4MUaEaPFQxDhHjU5tjc/5wtbArigjdlHega3SeR0vDHjHzSyksw+IG6g
+ kN8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWr844lBWvb3YkmqzjkJx9Zuk2eWmj7mg5OfILz8u97o6TeM9iprxxWXOjT4d/SdZ1rGpfArOZFG+JKyKmvEqevjbG07UJ6xR2XCEHr5tj8FwMLfR7pCGBR
-X-Gm-Message-State: AOJu0YxPUmFbLqUTox1LzYSj00jGxB8Kcau1C4qRSM+CcjjT4l59TekI
- CaObbb6cCTGqiJXTEvAcjDYFZz+7qgXBDVqwar8JGxrIQg+1W3RJwXGEcYmc+50=
-X-Google-Smtp-Source: AGHT+IHnT6DPSQterrn8gdAzpmDRRKm3ffEfvNCc0pY3+OmjAlf4/PwRTEQcSOEXen96G54bD8IYvA==
-X-Received: by 2002:a05:6000:22e:b0:33d:8ebf:4f6 with SMTP id
- l14-20020a056000022e00b0033d8ebf04f6mr1957148wrz.20.1709643101208; 
- Tue, 05 Mar 2024 04:51:41 -0800 (PST)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- ck4-20020a5d5e84000000b0033e2b9f647asm9147469wrb.31.2024.03.05.04.51.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Mar 2024 04:51:40 -0800 (PST)
-Message-ID: <3e17d3e4-e2e1-45ff-9d62-44bf5a8991df@linaro.org>
-Date: Tue, 5 Mar 2024 12:51:39 +0000
+ AJvYcCUAK1SF8Eg07TTWdSX8kZjThk8YEOD+PbakpK6o/h7qJU7k4IesoK6DNwrRLUQgrMQ27zN2f8IQcR2losNbFMXiNZ0/0L3X1IyXqXoqSlzzUNA4iV03lpUe
+X-Gm-Message-State: AOJu0YxljArvl52LArIi4uyS7gzb3u00+lgU4a2v/v0ks2rDGh3tIm6C
+ /qNbZ91OdJadbR0xCG5hkyqAm+OXFOOibEm8tKY9cqIHpG1CO1KZDqkp+stx5owK2jm6Ts8f3JM
+ +CVyPSA1iS5AuqPabBnS34Hym7RqyMGR/p4kLqQ==
+X-Google-Smtp-Source: AGHT+IGpmcRKLyaEcw5hNNT7SJqVPPNVAYEJT86r3u7snoLb0aAl1p2KObnxrsncTIS2uy0D9ZVg3t2hpA/sh0Bkh+Q=
+X-Received: by 2002:a5b:34a:0:b0:dcc:8e02:a6b6 with SMTP id
+ q10-20020a5b034a000000b00dcc8e02a6b6mr9884996ybp.2.1709644510384; Tue, 05 Mar
+ 2024 05:15:10 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
 References: <20240304-b4-upstream-dt-headers-v1-0-b7ff41925f92@linaro.org>
  <20240304-b4-upstream-dt-headers-v1-26-b7ff41925f92@linaro.org>
  <CAFA6WYM6sTEdw+VphKidUqjQW61eW8ZVq+oO35CJVM=5wPoniA@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYM6sTEdw+VphKidUqjQW61eW8ZVq+oO35CJVM=5wPoniA@mail.gmail.com>
+ <3e17d3e4-e2e1-45ff-9d62-44bf5a8991df@linaro.org>
+In-Reply-To: <3e17d3e4-e2e1-45ff-9d62-44bf5a8991df@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 5 Mar 2024 18:44:59 +0530
+Message-ID: <CAFA6WYNHkU2xp+6_+K0JoOpVrAP3ryS2zs+Q2L6Wb+TTVL+mWg@mail.gmail.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
  Kever Yang <kever.yang@rock-chips.com>, Sean Anderson <seanga2@gmail.com>,
  Joe Hershberger <joe.hershberger@ni.com>,
@@ -109,116 +103,91 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On Tue, 5 Mar 2024 at 18:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>
+>
+>
+> On 05/03/2024 12:35, Sumit Garg wrote:
+> > Hi Caleb,
+> >
+> > On Mon, 4 Mar 2024 at 22:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+> >> all the devicetree files for a given vendor to be compiled. This is
+> >> useful for Qualcomm in particular as most boards are supported by a
+> >> single U-Boot build just provided with a different DT.
+> >>
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>  dts/Kconfig          | 24 ++++++++++++++++++++++++
+> >>  scripts/Makefile.dts | 17 ++++++++++++++++-
+> >>  2 files changed, 40 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/dts/Kconfig b/dts/Kconfig
+> >> index b9b6367154ef..67d9dc489856 100644
+> >> --- a/dts/Kconfig
+> >> +++ b/dts/Kconfig
+> >> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+> >>           However, newer boards whose devicetree source files haven't landed in
+> >>           the dts/upstream subtree, they can override this option to have the
+> >>           DT build from existing U-Boot tree location instead.
+> >>
+> >> +config OF_UPSTREAM_BUILD_VENDOR
+> >> +       bool "Build all devicetree files for a particular vendor"
+> >> +       depends on OF_UPSTREAM
+> >> +       help
+> >> +         Enable building all devicetree files for a particular vendor. This
+> >
+> > Do we really want to build all the DTBs even if many of those aren't
+> > supported by U-Boot at all? I would have rather added Makefile targets
+> > for boards which really supports a single defconfig eg.
+> > qcom_defconfig.
+>
+> Yes, for the 4 Qualcomm SoCs currently supported there are 51 dts
+> targets that ought to be able to run U-Boot to some extent
 
+Have you tested U-Boot on all of them? IMO, it would be good to make
+people aware about supported boards via listing their DTs at least.
 
-On 05/03/2024 12:35, Sumit Garg wrote:
-> Hi Caleb,
-> 
-> On Mon, 4 Mar 2024 at 22:22, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
->> all the devicetree files for a given vendor to be compiled. This is
->> useful for Qualcomm in particular as most boards are supported by a
->> single U-Boot build just provided with a different DT.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>  dts/Kconfig          | 24 ++++++++++++++++++++++++
->>  scripts/Makefile.dts | 17 ++++++++++++++++-
->>  2 files changed, 40 insertions(+), 1 deletion(-)
->>
->> diff --git a/dts/Kconfig b/dts/Kconfig
->> index b9b6367154ef..67d9dc489856 100644
->> --- a/dts/Kconfig
->> +++ b/dts/Kconfig
->> @@ -100,8 +100,32 @@ config OF_UPSTREAM
->>           However, newer boards whose devicetree source files haven't landed in
->>           the dts/upstream subtree, they can override this option to have the
->>           DT build from existing U-Boot tree location instead.
->>
->> +config OF_UPSTREAM_BUILD_VENDOR
->> +       bool "Build all devicetree files for a particular vendor"
->> +       depends on OF_UPSTREAM
->> +       help
->> +         Enable building all devicetree files for a particular vendor. This
-> 
-> Do we really want to build all the DTBs even if many of those aren't
-> supported by U-Boot at all? I would have rather added Makefile targets
-> for boards which really supports a single defconfig eg.
-> qcom_defconfig.
+>
+> $ ls -l dts/upstream/src/arm6/qcom/{msm8916,sdm845,msm8996,qcs404}*.dts\
+>         | wc -l
+> 51
+>
 
-Yes, for the 4 Qualcomm SoCs currently supported there are 51 dts
-targets that ought to be able to run U-Boot to some extent
+qcom_defconfig currently only supports sdm845 and qcs404.
 
-$ ls -l dts/upstream/src/arm6/qcom/{msm8916,sdm845,msm8996,qcs404}*.dts\
-	| wc -l
-51
+> What do you mean by a "makefile target"? Like copying
+> arch/arm64/boot/dts/qcom/Makefile from Linux? I guess my concern here
+> would be keeping it in sync, and introducing additional busywork when
+> porting.
 
-What do you mean by a "makefile target"? Like copying
-arch/arm64/boot/dts/qcom/Makefile from Linux? I guess my concern here
-would be keeping it in sync, and introducing additional busywork when
-porting.
+See following diff:
 
-We do have a lot of Qualcomm DTS files, it takes maybe 10 seconds to
-compile them all on my machine, but that's only once. With incremental
-builds this becomes largely irrelevant.
-> 
-> -Sumit
-> 
->> +         is useful for generic U-Boot configurations where many boards can
->> +         be supported with a single binary.
->> +
->> +         This is only available for platforms using upstream devicetree.
->> +
->> +config OF_UPSTREAM_VENDOR
->> +       string "Vendor to build all upstream devicetree files for"
->> +       depends on OF_UPSTREAM_BUILD_VENDOR
->> +       default "qcom" if ARCH_SNAPDRAGON
->> +       default "rockchip" if ARCH_ROCKCHIP
->> +       default "amlogic" if ARCH_MESON
->> +       default "allwinner" if ARCH_SUNXI
->> +       default "mediatek" if ARCH_MEDIATEK
->> +       default "marvell" if ARCH_MVEBU
->> +       default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
->> +       default "nvidia" if ARCH_TEGRA
->> +       help
->> +         Select the vendor to build all devicetree files for.
->> +
->>  choice
->>         prompt "Provider of DTB for DT control"
->>         depends on OF_CONTROL
->>
->> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
->> index 5e2429c6170c..8005527f3df7 100644
->> --- a/scripts/Makefile.dts
->> +++ b/scripts/Makefile.dts
->> @@ -1,3 +1,18 @@
->>  # SPDX-License-Identifier: GPL-2.0+
->>
->> -dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
->> +dtb-y += $(patsubst %,%.dtb,\
->> +       $(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
->> +
->> +ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
->> +ifeq ($(CONFIG_ARM64),y)
->> +dt_dir := $(srctree)/dts/upstream/src/arm64
->> +else
->> +dt_dir := $(srctree)/dts/upstream/src/$(ARCH)
->> +endif
->> +
->> +dtb-vendor_dts := $(patsubst %.dts,%.dtb, \
->> +       $(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.dts))
->> +
->> +dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
->> +
->> +endif
->>
->> --
->> 2.44.0
->>
+diff --git a/dts/upstream/src/arm64/Makefile b/dts/upstream/src/arm64/Makefile
+index 9a8f6aa35846..ecc15021cb08 100644
+--- a/dts/upstream/src/arm64/Makefile
++++ b/dts/upstream/src/arm64/Makefile
+@@ -2,6 +2,10 @@
 
--- 
-// Caleb (they/them)
+ include $(srctree)/scripts/Makefile.dts
+
++dtb-$(CONFIG_ARCH_SNAPDRAGON) += qcom/sdm845-db845c.dtb \
++       qcom/sdm845-samsung-starqltechn.dtb \
++       qcom/qcs404-evb-4000.dtb
++
+ targets += $(dtb-y)
+
+>
+> We do have a lot of Qualcomm DTS files, it takes maybe 10 seconds to
+> compile them all on my machine, but that's only once. With incremental
+> builds this becomes largely irrelevant.
+
+Maybe someone cares about build time too but that's not my primary
+concern. We shouldn't be giving the false impression that all the DTs
+present in the vendor directory are supported by U-Boot.
+
+-Sumit
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

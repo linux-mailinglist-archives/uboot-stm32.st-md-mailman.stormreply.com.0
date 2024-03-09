@@ -2,46 +2,48 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B4113877BBE
-	for <lists+uboot-stm32@lfdr.de>; Mon, 11 Mar 2024 09:36:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F6D7876EBF
+	for <lists+uboot-stm32@lfdr.de>; Sat,  9 Mar 2024 03:18:56 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6DAB9C6DD9C;
-	Mon, 11 Mar 2024 08:36:58 +0000 (UTC)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C903AC6DD72;
+	Sat,  9 Mar 2024 02:18:55 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 81EF8C6B46B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A93BCC6A613
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  8 Mar 2024 14:41:25 +0000 (UTC)
+ Sat,  9 Mar 2024 02:18:54 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9EC3B876D3;
+ Sat,  9 Mar 2024 03:18:53 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1709950734;
+ bh=YPrBwSwZp8Dzq6yKLJeoZ87hDvGpKNUFfWTtzmE+EW8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=jyLdAo8Nu93IukzIEnxlWrUI88jxsAxp8+gXWJqgh4NV65ddIFy55oIdunYT12TOr
+ Z7+TvBj74CIcXvNsI7ryAWLnMmCDC3gCcl+Ep4jgXlNAqtCe6rf230peGNsXne0l1T
+ LAjTHzIAlV2iWhTF0+KfF7bVa1qKNMioohr1gJt5IfkzynsoW1g8IwoXMzM+L4o6pe
+ 3+PAAwiDn0mjnuK4J9MUy4PNoBm+hiyk77kNZQtUHJCjAyTqBivXySQdUTqZ5LrnAj
+ meSf1iGxOtR6UNWjJI5SS3Z1Qdqj14yFU/dOkuVLAPFMc7lVPNqfwmSpAxLf0O09Ho
+ BTVH1wJ9iuprw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Sat,  9 Mar 2024 03:11:21 +0100
+Message-ID: <20240309021831.264018-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1709908884;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QRtsBIbmv5Mxv+A+uZmrKN29hx1T4vLOx4w7sxO0VRs=;
- b=XjQH55T6rRhOTSUrWbKfQN+H+x1q1qxVJEj/LqyR4HwmN8iASvwWwwekdcbHJvTxlSJ97Y
- Qm0+VX3doTy0LgeCFFipRZPyRU97C6u0dO0HXiiFKo52XOSbfDSOVdVha/EPFmSQjAWYT9
- 97/p93sF5fha3zAFYD8jqk0yU6XeVuMxFBqFAx4eJqIDJYJpIn2kDfoTjQa6ptnqEK++yP
- 0T8jKxM92p9Bi8322/aH3YQGx+Yso0xPraJJEhvlFkwCCLaE+VhWFdJiUad5ql+uBQamo8
- C+hQVwIz152xXZK3znI9Bw+ky+FtU3zuCu7IniTngvM4T6alIIqX3br2LaC7ag==
-Date: Fri, 08 Mar 2024 15:41:23 +0100
-From: Dragan Simic <dsimic@manjaro.org>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-In-Reply-To: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
-References: <20240308133404.2619848-1-patrice.chotard@foss.st.com>
-Message-ID: <edbc4869d0244a81e92336e0b5f6b0e0@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
-X-Mailman-Approved-At: Mon, 11 Mar 2024 08:36:57 +0000
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>, u-boot@lists.denx.de,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] fdt_support: fix
-	fdt_copy_fixed_partitions function()
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>, u-boot@dh-electronics.com,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Ramon Fried <rfried.dev@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Christophe Roullier <christophe.roullier@st.com>
+Subject: [Uboot-stm32] [PATCH 00/11] net: dwc_eth_qos: Clean up STM32 glue
+	code and add STM32MP13xx support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -53,60 +55,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello Patrice,
+Split off STM32 glue code from the DWMAC driver into separate
+file, similar to what other SoCs already do, to avoid mixing
+the ST specifics with generic DWMAC core code.
 
-Please, see my comment below.
+Clean the STM32 DWMAC board code which is currently duplicated
+in multiple board files, move it into the newly separated glue
+code, since the code is not board specific, it is only generic
+DT parsing and generic register programming.
 
-On 2024-03-08 14:34, Patrice Chotard wrote:
-> Move variable declaration at the beginning of the function.
-> 
-> Fixes: 163c5f60ebb4 ("fdt_support: add fdt_copy_fixed_partitions 
-> function")
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
->  boot/fdt_support.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
-> 
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 090d82ee80a..f948cf8cd42 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -1053,9 +1053,10 @@ void fdt_fixup_mtdparts(void *blob, const
-> struct node_info *node_info,
->  int fdt_copy_fixed_partitions(void *blob)
->  {
->  	ofnode node, subnode;
-> +	const u32 *reg;
->  	int off, suboff, res;
->  	char path[256];
-> -	int address_cells, size_cells;
-> +	int address_cells, size_cells, len;
->  	u8 i, j, child_count;
-> 
->  	node = ofnode_by_compatible(ofnode_null(), "fixed-partitions");
-> @@ -1101,9 +1102,6 @@ int fdt_copy_fixed_partitions(void *blob)
->  			if (!ofnode_valid(subnode))
->  				break;
-> 
-> -			const u32 *reg;
-> -			int len;
-> -
+Add STM32MP13xx support based on ST downstream patches on top,
+although that part is mostly rewritten from scratch.
 
-Perhaps it would be better to keep these two variables local
-to the block they're used in.  I mean, in this case it isn't
-a big deal anyway, but results in a bit cleaner code.
+Christophe Roullier (2):
+  net: dwc_eth_qos: Add DT parsing for STM32MP13xx platform
+  net: dwc_eth_qos: Add support of STM32MP13xx platform
 
->  			suboff = fdt_find_or_add_subnode(blob, off, 
-> ofnode_get_name(subnode));
->  			res = fdt_setprop_string(blob, suboff, "label",
->  						 ofnode_read_string(subnode, "label"));
+Marek Vasut (8):
+  net: dwc_eth_qos: Split STM32 glue into separate file
+  net: dwc_eth_qos: Rename eqos_stm32_config to eqos_stm32mp15_config
+  net: dwc_eth_qos: Fold board_interface_eth_init into STM32 glue code
+  net: dwc_eth_qos: Scrub ifdeffery
+  net: dwc_eth_qos: Use FIELD_PREP for ETH_SEL bitfield
+  net: dwc_eth_qos: Move log_debug statements on top of case block
+  net: dwc_eth_qos: Use consistent logging prints
+  net: dwc_eth_qos: Constify st,eth-* values parsed out of DT
+
+Patrick Delaunay (1):
+  net: dwc_eth_qos: Request clk-ck earlier in probe on STM32
+
+ board/dhelectronics/dh_stm32mp1/board.c |  82 ------
+ board/st/stm32mp1/stm32mp1.c            |  82 ------
+ drivers/net/Makefile                    |   1 +
+ drivers/net/dwc_eth_qos.c               | 171 +-----------
+ drivers/net/dwc_eth_qos.h               |   2 +
+ drivers/net/dwc_eth_qos_stm32.c         | 337 ++++++++++++++++++++++++
+ 6 files changed, 345 insertions(+), 330 deletions(-)
+ create mode 100644 drivers/net/dwc_eth_qos_stm32.c
+
+Cc: Christophe Roullier <christophe.roullier@st.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+
+-- 
+2.43.0
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

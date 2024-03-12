@@ -2,67 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84201879475
-	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Mar 2024 13:48:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C7C8F879D5F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 12 Mar 2024 22:16:44 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4320DC6C855;
-	Tue, 12 Mar 2024 12:48:48 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 68186C6C83C;
+	Tue, 12 Mar 2024 21:16:44 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4ED02C03FC3
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB4D1C03FC3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 12 Mar 2024 12:48:47 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 42CAuvj6019301; Tue, 12 Mar 2024 13:48:35 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=8UUbrkR+fECmt0unl99bV5asJsoHBPY5QTWP5Mz9/aM=; b=IQ
- e4b+qWQfT+LpTPtajt8GzcCYczmAXIG4r9HN0Nd9e1vGGQPlPWpqSX4/ZECJplSS
- WyTZP+XtNEtDs8dL9FWli1juVFIrLqwERp5TXhjUN5iK3mZaGGPLe/vxpJwbu90N
- Q4xZ8RA49eojuuWhP1xHP4q59DuHdv2TnNb0wT/AP026RyK9qScxXYC6ro8Vc9M3
- 6QqzlfTLjMyvAgeroESJhzsNKXT0PUwYsCGWD5iy7FNPsgAYm4Qk6TdM5ff7bOhi
- gcBfZ8pO0sqxJPgLs9V8k5tIyQgPE4bhLfU/XBoMolMBkw1CN6dJSgPyDjqJJRDm
- ZBBoTaq2M4VAzwtdxkCw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3wrds8n91y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 12 Mar 2024 13:48:35 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 26CE540046;
- Tue, 12 Mar 2024 13:48:32 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D1AF125F7D7;
- Tue, 12 Mar 2024 13:48:07 +0100 (CET)
-Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 12 Mar
- 2024 13:48:06 +0100
-Message-ID: <515d659f-8096-41aa-8749-553fcb8021fe@foss.st.com>
-Date: Tue, 12 Mar 2024 13:48:06 +0100
+ Tue, 12 Mar 2024 21:16:43 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 85D5B8785F;
+ Tue, 12 Mar 2024 22:16:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1710278203;
+ bh=BtmOfXCddIV994DP4RejMEjxtNen5Qq/ce5w6fWAOng=;
+ h=From:To:Cc:Subject:Date:From;
+ b=ywdF+X1d5/NRjKJXYTAfvZURtCoHZIi6skQtOUmt2VBYbNx3P1W4npZ1RDbGEFhKw
+ lyVjQMNMVVW0y5c4fgF3WDaeAc/4I3rZPuybpzDpVXw7BNWShGqU3cQjoWc3tttPBK
+ jLLBA6WNcPwY8O6xMQd5khyy0YpW+46i+IfsWYL01XpCWKcB6/a7ADXTlTh9ouA9Dg
+ 7F1EzzBs+ALxN+vzDuiQX6yQEzvTD9o40FP0Y1JY29pX6QgglWUGtNPtDdI5jF3esp
+ XzDT2nvU3GEh9djIvhP7VEhFKQhjnVTzEkaKwrRbDguUGlnSLz0od2eX+0D/xuTU1g
+ 6W3ZeXwG+BOaQ==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Tue, 12 Mar 2024 22:15:58 +0100
+Message-ID: <20240312211628.32842-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20240309021831.264018-1-marex@denx.de>
- <20240309021831.264018-12-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240309021831.264018-12-marex@denx.de>
-X-Originating-IP: [10.201.20.71]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-12_08,2024-03-12_01,2023-05-22_02
-Cc: u-boot@dh-electronics.com, Joe Hershberger <joe.hershberger@ni.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Ramon Fried <rfried.dev@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Christophe Roullier <christophe.roullier@st.com>
-Subject: Re: [Uboot-stm32] [PATCH 11/11] net: dwc_eth_qos: Add support of
- STM32MP13xx platform
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@denx.de>
+Subject: [Uboot-stm32] [PATCH] ARM: imx: stm32: Test whether ethernet node
+	is enabled before reading MAC EEPROM on DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,81 +62,152 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Check whether the ethernet interface is enabled at all before reading
+MAC EEPROM. As a cost saving measure, it can happen that the MAC EEPROM
+is not populated on SoMs which do not use ethernet.
 
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+NOTE: It is probably best if this goes in via either imx or stm32 tree,
+      I can break the patch up, but that would introduce dependency
+      between two PRs in different trees. Let me know what you prefer.
+---
+ board/dhelectronics/common/dh_common.c           | 16 ++++++++++++++++
+ board/dhelectronics/common/dh_common.h           |  8 ++++++++
+ board/dhelectronics/dh_imx6/dh_imx6.c            |  3 +++
+ .../dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |  6 ++++++
+ board/dhelectronics/dh_stm32mp1/board.c          |  6 ++++++
+ 5 files changed, 39 insertions(+)
 
-On 3/9/24 03:11, Marek Vasut wrote:
-> From: Christophe Roullier <christophe.roullier@st.com>
-> 
-> Add compatible "st,stm32mp13-dwmac" to manage STM32MP13 boards.
-> 
-> Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
-> Signed-off-by: Marek Vasut <marex@denx.de> # Rebase, reshuffle, squash code
-> ---
-> Cc: Christophe Roullier <christophe.roullier@st.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  drivers/net/dwc_eth_qos.c       |  4 ++++
->  drivers/net/dwc_eth_qos.h       |  1 +
->  drivers/net/dwc_eth_qos_stm32.c | 11 +++++++++++
->  3 files changed, 16 insertions(+)
-> 
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index 203bfc0848c..e02317905e5 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -1505,6 +1505,10 @@ static const struct udevice_id eqos_ids[] = {
->  	},
->  #endif
->  #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STM32)
-> +	{
-> +		.compatible = "st,stm32mp13-dwmac",
-> +		.data = (ulong)&eqos_stm32mp13_config
-> +	},
->  	{
->  		.compatible = "st,stm32mp1-dwmac",
->  		.data = (ulong)&eqos_stm32mp15_config
-> diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
-> index bafd0d339fb..8b3d0d464d3 100644
-> --- a/drivers/net/dwc_eth_qos.h
-> +++ b/drivers/net/dwc_eth_qos.h
-> @@ -290,5 +290,6 @@ int eqos_null_ops(struct udevice *dev);
->  extern struct eqos_config eqos_imx_config;
->  extern struct eqos_config eqos_rockchip_config;
->  extern struct eqos_config eqos_qcom_config;
-> +extern struct eqos_config eqos_stm32mp13_config;
->  extern struct eqos_config eqos_stm32mp15_config;
->  extern struct eqos_config eqos_jh7110_config;
-> diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-> index 00bf6d45568..e167a7ba901 100644
-> --- a/drivers/net/dwc_eth_qos_stm32.c
-> +++ b/drivers/net/dwc_eth_qos_stm32.c
-> @@ -314,6 +314,17 @@ static struct eqos_ops eqos_stm32_ops = {
->  	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32
->  };
->  
-> +struct eqos_config __maybe_unused eqos_stm32mp13_config = {
-> +	.reg_access_always_ok = false,
-> +	.mdio_wait = 10000,
-> +	.swr_wait = 50,
-> +	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
-> +	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
-> +	.axi_bus_width = EQOS_AXI_WIDTH_32,
-> +	.interface = dev_read_phy_mode,
-> +	.ops = &eqos_stm32_ops
-> +};
-> +
->  struct eqos_config __maybe_unused eqos_stm32mp15_config = {
->  	.reg_access_always_ok = false,
->  	.mdio_wait = 10000,
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
+index 67e3d59b1f3..34094a020b0 100644
+--- a/board/dhelectronics/common/dh_common.c
++++ b/board/dhelectronics/common/dh_common.c
+@@ -18,6 +18,19 @@ bool dh_mac_is_in_env(const char *env)
+ 	return eth_env_get_enetaddr(env, enetaddr);
+ }
+ 
++int dh_get_mac_is_enabled(const char *alias)
++{
++	ofnode node = ofnode_path(alias);
++
++	if (!ofnode_valid(node))
++		return -EINVAL;
++
++	if (!ofnode_is_enabled(node))
++		return -ENODEV;
++
++	return 0;
++}
++
+ int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
+ {
+ 	struct udevice *dev;
+@@ -57,6 +70,9 @@ __weak int dh_setup_mac_address(void)
+ 	if (dh_mac_is_in_env("ethaddr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet0"))
++		return 0;
++
+ 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+ 		return eth_env_set_enetaddr("ethaddr", enetaddr);
+ 
+diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
+index 2b24637d96d..a2de5b1553e 100644
+--- a/board/dhelectronics/common/dh_common.h
++++ b/board/dhelectronics/common/dh_common.h
+@@ -11,6 +11,14 @@
+  */
+ bool dh_mac_is_in_env(const char *env);
+ 
++/*
++ * dh_get_mac_is_enabled - Test if ethernet MAC is enabled in DT
++ *
++ * @alias: alias for ethernet MAC device tree node
++ * Return: 0 if OK, other value on error
++ */
++int dh_get_mac_is_enabled(const char *alias);
++
+ /*
+  * dh_get_mac_from_eeprom - Get MAC address from eeprom and write it to enetaddr
+  *
+diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
+index 07fc9b1fe6d..0676587c38a 100644
+--- a/board/dhelectronics/dh_imx6/dh_imx6.c
++++ b/board/dhelectronics/dh_imx6/dh_imx6.c
+@@ -92,6 +92,9 @@ int dh_setup_mac_address(void)
+ 	if (dh_mac_is_in_env("ethaddr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet0"))
++		return 0;
++
+ 	if (!dh_imx_get_mac_from_fuse(enetaddr))
+ 		goto out;
+ 
+diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+index 5f12d787d38..ff2c0e87215 100644
+--- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
++++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
+@@ -47,6 +47,9 @@ static int dh_imx8_setup_ethaddr(void)
+ 	if (dh_mac_is_in_env("ethaddr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet0"))
++		return 0;
++
+ 	if (!dh_imx_get_mac_from_fuse(enetaddr))
+ 		goto out;
+ 
+@@ -66,6 +69,9 @@ static int dh_imx8_setup_eth1addr(void)
+ 	if (dh_mac_is_in_env("eth1addr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet1"))
++		return 0;
++
+ 	if (!dh_imx_get_mac_from_fuse(enetaddr))
+ 		goto increment_out;
+ 
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index 88eb7d1b8d4..b3309c9d330 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -129,6 +129,9 @@ static int dh_stm32_setup_ethaddr(void)
+ 	if (dh_mac_is_in_env("ethaddr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet0"))
++		return 0;
++
+ 	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
+ 		return eth_env_set_enetaddr("ethaddr", enetaddr);
+ 
+@@ -142,6 +145,9 @@ static int dh_stm32_setup_eth1addr(void)
+ 	if (dh_mac_is_in_env("eth1addr"))
+ 		return 0;
+ 
++	if (dh_get_mac_is_enabled("ethernet1"))
++		return 0;
++
+ 	if (dh_stm32_mac_is_in_ks8851())
+ 		return 0;
+ 
+-- 
+2.43.0
 
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

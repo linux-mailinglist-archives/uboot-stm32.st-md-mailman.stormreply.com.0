@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B44888622B
-	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B9C0886976
+	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Mar 2024 10:43:03 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5C4D3C6DD69;
-	Thu, 21 Mar 2024 21:04:10 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 06DD8C6DD9D;
+	Fri, 22 Mar 2024 09:43:03 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+ [209.85.128.50])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF134C6C85A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E6659C6DD73
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 21:04:08 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4146f2bd5f1so11643845e9.3
+ Thu, 21 Mar 2024 21:04:10 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-41462295004so10530075e9.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 14:04:08 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055048; x=1711659848;
+ d=linaro.org; s=google; t=1711055050; x=1711659850;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3x38FyIlnQn8kLwkXTXsLKvDYpxFNbraf5Lu6CNveUM=;
- b=vCL1hEFq+EJWAtD2VZe9sMQKJZbdTjgbwVWsRjdGfOyZaN7dPBdWiJcdEXCnAgbJsT
- TysLT8oHum5z1EQak0ea7ar2H885CrQoSE0+HXWy99zlnhcoUac5mlmykPUtd79g6QYX
- qj10NAI6b5jOU57vR9ObNrqi4ba3fzn7XhiXi0lisiUm/RljU9nNJejvumrH3WIxtOsu
- aDFbMsCkSiUkSNOeIj7koKsiAqafvV3RER+juNOM7bZceYATSj+pzSy21FfI7ZYxUDUi
- TDMElAKIQmlgHiQzNvF9ki6CoBxRogtvrEALByFsHRrghDSMunqzPuK8XgLLCvF3e092
- RRkg==
+ :reply-to; bh=iQ0broSbDf0RLUWIBiGKQcnMNyCgMNdayEpysHsXlPM=;
+ b=EdskE8cwnVqKPkwwuuZ3ls+QxtXq73DHbvCn8B2i5DZVwVR8LlOHdWP8I7AL6gQuB5
+ 05XhjVS0saE2Rs03y6aW6G7i3+Rt+dDZa5iYxag0oibmRC1JFf3XN5ezgiUbEH51CFo1
+ iWNbQ8ovD3TPLOuRwtDh+9jn0g5atw6QLbVj1N4/r9HTw+knkpN3Qd70oloqYnHXjZOL
+ 2lS0TfyajG5gZGQXrEVAfRgJhrwWT0Pl5RMF0qSvAWJAsH0Ouy2XD2yBhHBGd1m6Fk0F
+ hNz+So/hiBLG2TBfWCZ7xYeHvIM8BN5C26iPwhWLpwMdRK4gZ/0AOfYtgJEufPw5quVW
+ hmaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055048; x=1711659848;
+ d=1e100.net; s=20230601; t=1711055050; x=1711659850;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3x38FyIlnQn8kLwkXTXsLKvDYpxFNbraf5Lu6CNveUM=;
- b=fUgS0ixb1SlCrjXH0msDUZnIhCz56Vzw6OPwm3Hkcdi+zENYsUA548CgJ21R0ZxgEI
- /t9hwgdxxDNZXDl8XVFYHQw0icNMbzVtwozGuoFQYtK8W/OxJSJeXqie0dtmQew2hozV
- kHmSHyCCgNxyevQLzXUwlTfaN01RvUd9Xhp/dGEAkdYapU9E2KmYfhJczDMeRVPMvPxY
- 99bYnC5ZRlCSjPuJIOGfzlXGCJHGyQ0hlFVi42NzucAwvcfkk3KLTm9xs/l3X/xuM+mx
- PRpoIskaar6mDmaKATFhdqEX6kP24ue4GTDZ2f+AFUs+1VKqZKQQeAgS1++KbmKG4Qyg
- Jqmw==
+ bh=iQ0broSbDf0RLUWIBiGKQcnMNyCgMNdayEpysHsXlPM=;
+ b=UdAUmTGDOF1WnVYJd7WtHYzrsYbGGMY8fgpTmItrQKixq2V7DITrMsGfw/6Jm2KtFY
+ 51RFuCRhiK7RJ7RQOyXHA5CHiJJBQIp6KpNCLOgbDJer3Mx3LybWHz80fN+6Xsgeio1f
+ nD7Cs1QJIPWHoHGgH+Al10CIa9dFQQjS4XWPzXcd+JzBYptYBr1xBPNy2C2pRdM7+crn
+ vPbPXHYbsBzaXvR6ZyjhggD0O2GZXibkSGZU3qoQyUpuUAu0yys9TDdAvd/7Z0qwxpxJ
+ r0z2pu8C+uIc89H2T4NNT8u0w1E3EmWlhmE4A7v87tpV2j8w2zWnNfjD6pmzfcxubqkF
+ mE8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWAyuxj4vn81dKIwlhZAjB0JZAW3EpOWcgmXhuw5lFy4Z/rVAgEOyz3UCXlcF8qmiAw8eZ64+xks8B+kyoIW39Rky12TsPcqIj690SlZOk4EfTQAzVQAki
-X-Gm-Message-State: AOJu0YwRkfugvzEVb4x38c9uYq6o5O88tIVbpuWa0bPJaGOpv+1PEUoU
- UP7Ds2JZcLRVeq8O3C+QlFTRSnPWkkETueLt2Ng+Rp9Yul/tIyuMYhyE8JAVFZc=
-X-Google-Smtp-Source: AGHT+IE33sLTzTP7gAj/3ESi9kl1XaUyYNEDrtaFYq5uEdbPDA4OvUZaLVEAKGqRaw044T44QztCYA==
-X-Received: by 2002:a05:600c:4ba1:b0:414:101a:fa67 with SMTP id
- e33-20020a05600c4ba100b00414101afa67mr218712wmp.18.1711055047978; 
- Thu, 21 Mar 2024 14:04:07 -0700 (PDT)
+ AJvYcCV8IBDHSzijx7+d3msYxW2ZbVZ2htw8vSSKM+e/1+JfLHzpL/9o675a6gbRxW3P/4WZ2CTg+1Pd8QptSuGr3dm6kYuio7K03zHD3HNMHPJyELwVXA6gwMJ3
+X-Gm-Message-State: AOJu0YxFVZx8XM2D2UUFAyqqgw+izhY3JsP+cTr+ZMH6uhUtxlDv7vE7
+ /TM5QwbYvtWf5zJ7IZ23Og1GYNnFIOC8Avu61K3YzVM/DtIqgeFBrSnQtyjHqfk=
+X-Google-Smtp-Source: AGHT+IHOpwUJJtpV2sQU6/kALr7LGWrH1yqL3dZTOw8njNGIvg25WK7t97mVCH4Ux0KQ3/H1WgW1bQ==
+X-Received: by 2002:a05:600c:350b:b0:414:273:67d4 with SMTP id
+ h11-20020a05600c350b00b00414027367d4mr187323wmq.30.1711055049981; 
+ Thu, 21 Mar 2024 14:04:09 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.06
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:07 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:09 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:03:47 +0000
+Date: Thu, 21 Mar 2024 21:03:48 +0000
 MIME-Version: 1.0
-Message-Id: <20240321-b4-upstream-dt-headers-v2-4-1eac0df875fe@linaro.org>
+Message-Id: <20240321-b4-upstream-dt-headers-v2-5-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,20 +88,20 @@ To: Tom Rini <trini@konsulko.com>,
  Dai Okamura <okamura.dai@socionext.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=60107;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=139073;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=bizfKN3Y5eCOUWeElRKqffMXK0rqfJbBO79LfenU0js=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C3Z/W/BaSNPf6OMKp21my3TP/53heF34qcWf37Ncz
- y/bvMRgS0cpC4MgB4OsmCKL+Illlk1rL9trbF9wAWYOKxPIEAYuTgGYSMI8hn82/6/tn7Pr8g1p
- /1+CQcfO/F+1KuWtyZO3vT+++Z6T9eLazciw5UD+x7DUg29/XJKsf/H4qnF6zcN4m/2mEUsV1yd
- 1zeZjBAA=
+ bh=yBz3C63gedCuCvMYvnsL4pxVqBc+bIITXVwZ0GRxZMY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C3YfZoqcuX45s6drqt28oKZbyi//ZL+cXe6wxbuwO
+ YR187qEjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR3XwM//1Mrt0Pjl51ZY1h
+ dsFhl7n2WkferYvqW+/BE7SZpSBLIYqRYekpj2dhBx6GVnYf5stoWSDqcm6+T8M3hxOrk15suJU
+ aJAsA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+X-Mailman-Approved-At: Fri, 22 Mar 2024 09:43:01 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, Caleb Connolly <caleb.connolly@linaro.org>,
  u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v2 04/24] sunxi: drop remaining dt-binding
-	headers
+Subject: [Uboot-stm32] [PATCH v2 05/24] imx: drop clock dt-binding headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -122,1656 +122,4034 @@ Drop in favour of dts/upstream.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/dt-bindings/dma/sun4i-a10.h           |  56 -----------
- include/dt-bindings/pinctrl/sun4i-a10.h       |  62 ------------
- include/dt-bindings/reset/sun20i-d1-ccu.h     |  79 ----------------
- include/dt-bindings/reset/sun20i-d1-r-ccu.h   |  16 ----
- include/dt-bindings/reset/sun4i-a10-ccu.h     |  69 --------------
- include/dt-bindings/reset/sun50i-a64-ccu.h    |  98 -------------------
- include/dt-bindings/reset/sun50i-h6-ccu.h     |  73 ---------------
- include/dt-bindings/reset/sun50i-h6-r-ccu.h   |  18 ----
- include/dt-bindings/reset/sun50i-h616-ccu.h   |  70 --------------
- include/dt-bindings/reset/sun5i-ccu.h         |  23 -----
- include/dt-bindings/reset/sun6i-a31-ccu.h     | 106 ---------------------
- include/dt-bindings/reset/sun8i-a23-a33-ccu.h |  87 -----------------
- include/dt-bindings/reset/sun8i-a83t-ccu.h    |  98 -------------------
- include/dt-bindings/reset/sun8i-de2.h         |  15 ---
- include/dt-bindings/reset/sun8i-h3-ccu.h      | 106 ---------------------
- include/dt-bindings/reset/sun8i-r-ccu.h       |  53 -----------
- include/dt-bindings/reset/sun8i-r40-ccu.h     | 130 --------------------------
- include/dt-bindings/reset/sun8i-v3s-ccu.h     |  81 ----------------
- include/dt-bindings/reset/sun9i-a80-ccu.h     | 102 --------------------
- include/dt-bindings/reset/sun9i-a80-de.h      |  58 ------------
- include/dt-bindings/reset/sun9i-a80-usb.h     |  56 -----------
- include/dt-bindings/reset/suniv-ccu-f1c100s.h |  38 --------
- 22 files changed, 1494 deletions(-)
+ include/dt-bindings/clock/imx5-clock.h      | 219 -------------
+ include/dt-bindings/clock/imx6qdl-clock.h   | 278 -----------------
+ include/dt-bindings/clock/imx6sl-clock.h    | 178 -----------
+ include/dt-bindings/clock/imx6sll-clock.h   | 210 -------------
+ include/dt-bindings/clock/imx6sx-clock.h    | 281 -----------------
+ include/dt-bindings/clock/imx6ul-clock.h    | 262 ----------------
+ include/dt-bindings/clock/imx7d-clock.h     | 456 ----------------------------
+ include/dt-bindings/clock/imx7ulp-clock.h   | 119 --------
+ include/dt-bindings/clock/imx8mm-clock.h    | 286 -----------------
+ include/dt-bindings/clock/imx8mn-clock.h    | 262 ----------------
+ include/dt-bindings/clock/imx8mp-clock.h    | 401 ------------------------
+ include/dt-bindings/clock/imx8mq-clock.h    | 431 --------------------------
+ include/dt-bindings/clock/imx8ulp-clock.h   | 258 ----------------
+ include/dt-bindings/clock/imx93-clock.h     | 208 -------------
+ include/dt-bindings/clock/imxrt1050-clock.h |  72 -----
+ 15 files changed, 3921 deletions(-)
 
-diff --git a/include/dt-bindings/dma/sun4i-a10.h b/include/dt-bindings/dma/sun4i-a10.h
+diff --git a/include/dt-bindings/clock/imx5-clock.h b/include/dt-bindings/clock/imx5-clock.h
 deleted file mode 100644
-index 8caba9ef7e9d..000000000000
---- a/include/dt-bindings/dma/sun4i-a10.h
+index d382fc71aa83..000000000000
+--- a/include/dt-bindings/clock/imx5-clock.h
 +++ /dev/null
-@@ -1,56 +0,0 @@
+@@ -1,219 +0,0 @@
 -/*
-- * Copyright 2014 Maxime Ripard
+- * Copyright 2013 Lucas Stach, Pengutronix <l.stach@pengutronix.de>
 - *
-- * Maxime Ripard <maxime.ripard@free-electrons.com>
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
 - *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- *     You should have received a copy of the GNU General Public
-- *     License along with this file; if not, write to the Free
-- *     Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
-- *     MA 02110-1301 USA
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
 - */
 -
--#ifndef __DT_BINDINGS_DMA_SUN4I_A10_H_
--#define __DT_BINDINGS_DMA_SUN4I_A10_H_
+-#ifndef __DT_BINDINGS_CLOCK_IMX5_H
+-#define __DT_BINDINGS_CLOCK_IMX5_H
 -
--#define SUN4I_DMA_NORMAL	0
--#define SUN4I_DMA_DEDICATED	1
+-#define IMX5_CLK_DUMMY			0
+-#define IMX5_CLK_CKIL			1
+-#define IMX5_CLK_OSC			2
+-#define IMX5_CLK_CKIH1			3
+-#define IMX5_CLK_CKIH2			4
+-#define IMX5_CLK_AHB			5
+-#define IMX5_CLK_IPG			6
+-#define IMX5_CLK_AXI_A			7
+-#define IMX5_CLK_AXI_B			8
+-#define IMX5_CLK_UART_PRED		9
+-#define IMX5_CLK_UART_ROOT		10
+-#define IMX5_CLK_ESDHC_A_PRED		11
+-#define IMX5_CLK_ESDHC_B_PRED		12
+-#define IMX5_CLK_ESDHC_C_SEL		13
+-#define IMX5_CLK_ESDHC_D_SEL		14
+-#define IMX5_CLK_EMI_SEL		15
+-#define IMX5_CLK_EMI_SLOW_PODF		16
+-#define IMX5_CLK_NFC_PODF		17
+-#define IMX5_CLK_ECSPI_PRED		18
+-#define IMX5_CLK_ECSPI_PODF		19
+-#define IMX5_CLK_USBOH3_PRED		20
+-#define IMX5_CLK_USBOH3_PODF		21
+-#define IMX5_CLK_USB_PHY_PRED		22
+-#define IMX5_CLK_USB_PHY_PODF		23
+-#define IMX5_CLK_CPU_PODF		24
+-#define IMX5_CLK_DI_PRED		25
+-#define IMX5_CLK_TVE_SEL		27
+-#define IMX5_CLK_UART1_IPG_GATE		28
+-#define IMX5_CLK_UART1_PER_GATE		29
+-#define IMX5_CLK_UART2_IPG_GATE		30
+-#define IMX5_CLK_UART2_PER_GATE		31
+-#define IMX5_CLK_UART3_IPG_GATE		32
+-#define IMX5_CLK_UART3_PER_GATE		33
+-#define IMX5_CLK_I2C1_GATE		34
+-#define IMX5_CLK_I2C2_GATE		35
+-#define IMX5_CLK_GPT_IPG_GATE		36
+-#define IMX5_CLK_PWM1_IPG_GATE		37
+-#define IMX5_CLK_PWM1_HF_GATE		38
+-#define IMX5_CLK_PWM2_IPG_GATE		39
+-#define IMX5_CLK_PWM2_HF_GATE		40
+-#define IMX5_CLK_GPT_HF_GATE		41
+-#define IMX5_CLK_FEC_GATE		42
+-#define IMX5_CLK_USBOH3_PER_GATE	43
+-#define IMX5_CLK_ESDHC1_IPG_GATE	44
+-#define IMX5_CLK_ESDHC2_IPG_GATE	45
+-#define IMX5_CLK_ESDHC3_IPG_GATE	46
+-#define IMX5_CLK_ESDHC4_IPG_GATE	47
+-#define IMX5_CLK_SSI1_IPG_GATE		48
+-#define IMX5_CLK_SSI2_IPG_GATE		49
+-#define IMX5_CLK_SSI3_IPG_GATE		50
+-#define IMX5_CLK_ECSPI1_IPG_GATE	51
+-#define IMX5_CLK_ECSPI1_PER_GATE	52
+-#define IMX5_CLK_ECSPI2_IPG_GATE	53
+-#define IMX5_CLK_ECSPI2_PER_GATE	54
+-#define IMX5_CLK_CSPI_IPG_GATE		55
+-#define IMX5_CLK_SDMA_GATE		56
+-#define IMX5_CLK_EMI_SLOW_GATE		57
+-#define IMX5_CLK_IPU_SEL		58
+-#define IMX5_CLK_IPU_GATE		59
+-#define IMX5_CLK_NFC_GATE		60
+-#define IMX5_CLK_IPU_DI1_GATE		61
+-#define IMX5_CLK_VPU_SEL		62
+-#define IMX5_CLK_VPU_GATE		63
+-#define IMX5_CLK_VPU_REFERENCE_GATE	64
+-#define IMX5_CLK_UART4_IPG_GATE		65
+-#define IMX5_CLK_UART4_PER_GATE		66
+-#define IMX5_CLK_UART5_IPG_GATE		67
+-#define IMX5_CLK_UART5_PER_GATE		68
+-#define IMX5_CLK_TVE_GATE		69
+-#define IMX5_CLK_TVE_PRED		70
+-#define IMX5_CLK_ESDHC1_PER_GATE	71
+-#define IMX5_CLK_ESDHC2_PER_GATE	72
+-#define IMX5_CLK_ESDHC3_PER_GATE	73
+-#define IMX5_CLK_ESDHC4_PER_GATE	74
+-#define IMX5_CLK_USB_PHY_GATE		75
+-#define IMX5_CLK_HSI2C_GATE		76
+-#define IMX5_CLK_MIPI_HSC1_GATE		77
+-#define IMX5_CLK_MIPI_HSC2_GATE		78
+-#define IMX5_CLK_MIPI_ESC_GATE		79
+-#define IMX5_CLK_MIPI_HSP_GATE		80
+-#define IMX5_CLK_LDB_DI1_DIV_3_5	81
+-#define IMX5_CLK_LDB_DI1_DIV		82
+-#define IMX5_CLK_LDB_DI0_DIV_3_5	83
+-#define IMX5_CLK_LDB_DI0_DIV		84
+-#define IMX5_CLK_LDB_DI1_GATE		85
+-#define IMX5_CLK_CAN2_SERIAL_GATE	86
+-#define IMX5_CLK_CAN2_IPG_GATE		87
+-#define IMX5_CLK_I2C3_GATE		88
+-#define IMX5_CLK_LP_APM			89
+-#define IMX5_CLK_PERIPH_APM		90
+-#define IMX5_CLK_MAIN_BUS		91
+-#define IMX5_CLK_AHB_MAX		92
+-#define IMX5_CLK_AIPS_TZ1		93
+-#define IMX5_CLK_AIPS_TZ2		94
+-#define IMX5_CLK_TMAX1			95
+-#define IMX5_CLK_TMAX2			96
+-#define IMX5_CLK_TMAX3			97
+-#define IMX5_CLK_SPBA			98
+-#define IMX5_CLK_UART_SEL		99
+-#define IMX5_CLK_ESDHC_A_SEL		100
+-#define IMX5_CLK_ESDHC_B_SEL		101
+-#define IMX5_CLK_ESDHC_A_PODF		102
+-#define IMX5_CLK_ESDHC_B_PODF		103
+-#define IMX5_CLK_ECSPI_SEL		104
+-#define IMX5_CLK_USBOH3_SEL		105
+-#define IMX5_CLK_USB_PHY_SEL		106
+-#define IMX5_CLK_IIM_GATE		107
+-#define IMX5_CLK_USBOH3_GATE		108
+-#define IMX5_CLK_EMI_FAST_GATE		109
+-#define IMX5_CLK_IPU_DI0_GATE		110
+-#define IMX5_CLK_GPC_DVFS		111
+-#define IMX5_CLK_PLL1_SW		112
+-#define IMX5_CLK_PLL2_SW		113
+-#define IMX5_CLK_PLL3_SW		114
+-#define IMX5_CLK_IPU_DI0_SEL		115
+-#define IMX5_CLK_IPU_DI1_SEL		116
+-#define IMX5_CLK_TVE_EXT_SEL		117
+-#define IMX5_CLK_MX51_MIPI		118
+-#define IMX5_CLK_PLL4_SW		119
+-#define IMX5_CLK_LDB_DI1_SEL		120
+-#define IMX5_CLK_DI_PLL4_PODF		121
+-#define IMX5_CLK_LDB_DI0_SEL		122
+-#define IMX5_CLK_LDB_DI0_GATE		123
+-#define IMX5_CLK_USB_PHY1_GATE		124
+-#define IMX5_CLK_USB_PHY2_GATE		125
+-#define IMX5_CLK_PER_LP_APM		126
+-#define IMX5_CLK_PER_PRED1		127
+-#define IMX5_CLK_PER_PRED2		128
+-#define IMX5_CLK_PER_PODF		129
+-#define IMX5_CLK_PER_ROOT		130
+-#define IMX5_CLK_SSI_APM		131
+-#define IMX5_CLK_SSI1_ROOT_SEL		132
+-#define IMX5_CLK_SSI2_ROOT_SEL		133
+-#define IMX5_CLK_SSI3_ROOT_SEL		134
+-#define IMX5_CLK_SSI_EXT1_SEL		135
+-#define IMX5_CLK_SSI_EXT2_SEL		136
+-#define IMX5_CLK_SSI_EXT1_COM_SEL	137
+-#define IMX5_CLK_SSI_EXT2_COM_SEL	138
+-#define IMX5_CLK_SSI1_ROOT_PRED		139
+-#define IMX5_CLK_SSI1_ROOT_PODF		140
+-#define IMX5_CLK_SSI2_ROOT_PRED		141
+-#define IMX5_CLK_SSI2_ROOT_PODF		142
+-#define IMX5_CLK_SSI_EXT1_PRED		143
+-#define IMX5_CLK_SSI_EXT1_PODF		144
+-#define IMX5_CLK_SSI_EXT2_PRED		145
+-#define IMX5_CLK_SSI_EXT2_PODF		146
+-#define IMX5_CLK_SSI1_ROOT_GATE		147
+-#define IMX5_CLK_SSI2_ROOT_GATE		148
+-#define IMX5_CLK_SSI3_ROOT_GATE		149
+-#define IMX5_CLK_SSI_EXT1_GATE		150
+-#define IMX5_CLK_SSI_EXT2_GATE		151
+-#define IMX5_CLK_EPIT1_IPG_GATE		152
+-#define IMX5_CLK_EPIT1_HF_GATE		153
+-#define IMX5_CLK_EPIT2_IPG_GATE		154
+-#define IMX5_CLK_EPIT2_HF_GATE		155
+-#define IMX5_CLK_CAN_SEL		156
+-#define IMX5_CLK_CAN1_SERIAL_GATE	157
+-#define IMX5_CLK_CAN1_IPG_GATE		158
+-#define IMX5_CLK_OWIRE_GATE		159
+-#define IMX5_CLK_GPU3D_SEL		160
+-#define IMX5_CLK_GPU2D_SEL		161
+-#define IMX5_CLK_GPU3D_GATE		162
+-#define IMX5_CLK_GPU2D_GATE		163
+-#define IMX5_CLK_GARB_GATE		164
+-#define IMX5_CLK_CKO1_SEL		165
+-#define IMX5_CLK_CKO1_PODF		166
+-#define IMX5_CLK_CKO1			167
+-#define IMX5_CLK_CKO2_SEL		168
+-#define IMX5_CLK_CKO2_PODF		169
+-#define IMX5_CLK_CKO2			170
+-#define IMX5_CLK_SRTC_GATE		171
+-#define IMX5_CLK_PATA_GATE		172
+-#define IMX5_CLK_SATA_GATE		173
+-#define IMX5_CLK_SPDIF_XTAL_SEL		174
+-#define IMX5_CLK_SPDIF0_SEL		175
+-#define IMX5_CLK_SPDIF1_SEL		176
+-#define IMX5_CLK_SPDIF0_PRED		177
+-#define IMX5_CLK_SPDIF0_PODF		178
+-#define IMX5_CLK_SPDIF1_PRED		179
+-#define IMX5_CLK_SPDIF1_PODF		180
+-#define IMX5_CLK_SPDIF0_COM_SEL		181
+-#define IMX5_CLK_SPDIF1_COM_SEL		182
+-#define IMX5_CLK_SPDIF0_GATE		183
+-#define IMX5_CLK_SPDIF1_GATE		184
+-#define IMX5_CLK_SPDIF_IPG_GATE		185
+-#define IMX5_CLK_OCRAM			186
+-#define IMX5_CLK_SAHARA_IPG_GATE	187
+-#define IMX5_CLK_SATA_REF		188
+-#define IMX5_CLK_STEP_SEL		189
+-#define IMX5_CLK_CPU_PODF_SEL		190
+-#define IMX5_CLK_ARM			191
+-#define IMX5_CLK_FIRI_PRED		192
+-#define IMX5_CLK_FIRI_SEL		193
+-#define IMX5_CLK_FIRI_PODF		194
+-#define IMX5_CLK_FIRI_SERIAL_GATE	195
+-#define IMX5_CLK_FIRI_IPG_GATE		196
+-#define IMX5_CLK_CSI0_MCLK1_PRED	197
+-#define IMX5_CLK_CSI0_MCLK1_SEL		198
+-#define IMX5_CLK_CSI0_MCLK1_PODF	199
+-#define IMX5_CLK_CSI0_MCLK1_GATE	200
+-#define IMX5_CLK_IEEE1588_PRED		201
+-#define IMX5_CLK_IEEE1588_SEL		202
+-#define IMX5_CLK_IEEE1588_PODF		203
+-#define IMX5_CLK_IEEE1588_GATE		204
+-#define IMX5_CLK_END			205
 -
--#endif /* __DT_BINDINGS_DMA_SUN4I_A10_H_ */
-diff --git a/include/dt-bindings/pinctrl/sun4i-a10.h b/include/dt-bindings/pinctrl/sun4i-a10.h
+-#endif /* __DT_BINDINGS_CLOCK_IMX5_H */
+diff --git a/include/dt-bindings/clock/imx6qdl-clock.h b/include/dt-bindings/clock/imx6qdl-clock.h
 deleted file mode 100644
-index f7553c143b40..000000000000
---- a/include/dt-bindings/pinctrl/sun4i-a10.h
+index e20c43cc36f6..000000000000
+--- a/include/dt-bindings/clock/imx6qdl-clock.h
 +++ /dev/null
-@@ -1,62 +0,0 @@
+@@ -1,278 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
 -/*
-- * Copyright 2014 Maxime Ripard
-- *
-- * Maxime Ripard <maxime.ripard@free-electrons.com>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- *     You should have received a copy of the GNU General Public
-- *     License along with this file; if not, write to the Free
-- *     Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
-- *     MA 02110-1301 USA
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
+- * Copyright 2014 Freescale Semiconductor, Inc.
 - */
 -
--#ifndef __DT_BINDINGS_PINCTRL_SUN4I_A10_H_
--#define __DT_BINDINGS_PINCTRL_SUN4I_A10_H_
+-#ifndef __DT_BINDINGS_CLOCK_IMX6QDL_H
+-#define __DT_BINDINGS_CLOCK_IMX6QDL_H
 -
--#define SUN4I_PINCTRL_10_MA	0
--#define SUN4I_PINCTRL_20_MA	1
--#define SUN4I_PINCTRL_30_MA	2
--#define SUN4I_PINCTRL_40_MA	3
+-#define IMX6QDL_CLK_DUMMY			0
+-#define IMX6QDL_CLK_CKIL			1
+-#define IMX6QDL_CLK_CKIH			2
+-#define IMX6QDL_CLK_OSC				3
+-#define IMX6QDL_CLK_PLL2_PFD0_352M		4
+-#define IMX6QDL_CLK_PLL2_PFD1_594M		5
+-#define IMX6QDL_CLK_PLL2_PFD2_396M		6
+-#define IMX6QDL_CLK_PLL3_PFD0_720M		7
+-#define IMX6QDL_CLK_PLL3_PFD1_540M		8
+-#define IMX6QDL_CLK_PLL3_PFD2_508M		9
+-#define IMX6QDL_CLK_PLL3_PFD3_454M		10
+-#define IMX6QDL_CLK_PLL2_198M			11
+-#define IMX6QDL_CLK_PLL3_120M			12
+-#define IMX6QDL_CLK_PLL3_80M			13
+-#define IMX6QDL_CLK_PLL3_60M			14
+-#define IMX6QDL_CLK_TWD				15
+-#define IMX6QDL_CLK_STEP			16
+-#define IMX6QDL_CLK_PLL1_SW			17
+-#define IMX6QDL_CLK_PERIPH_PRE			18
+-#define IMX6QDL_CLK_PERIPH2_PRE			19
+-#define IMX6QDL_CLK_PERIPH_CLK2_SEL		20
+-#define IMX6QDL_CLK_PERIPH2_CLK2_SEL		21
+-#define IMX6QDL_CLK_AXI_SEL			22
+-#define IMX6QDL_CLK_ESAI_SEL			23
+-#define IMX6QDL_CLK_ASRC_SEL			24
+-#define IMX6QDL_CLK_SPDIF_SEL			25
+-#define IMX6QDL_CLK_GPU2D_AXI			26
+-#define IMX6QDL_CLK_GPU3D_AXI			27
+-#define IMX6QDL_CLK_GPU2D_CORE_SEL		28
+-#define IMX6QDL_CLK_GPU3D_CORE_SEL		29
+-#define IMX6QDL_CLK_GPU3D_SHADER_SEL		30
+-#define IMX6QDL_CLK_IPU1_SEL			31
+-#define IMX6QDL_CLK_IPU2_SEL			32
+-#define IMX6QDL_CLK_LDB_DI0_SEL			33
+-#define IMX6QDL_CLK_LDB_DI1_SEL			34
+-#define IMX6QDL_CLK_IPU1_DI0_PRE_SEL		35
+-#define IMX6QDL_CLK_IPU1_DI1_PRE_SEL		36
+-#define IMX6QDL_CLK_IPU2_DI0_PRE_SEL		37
+-#define IMX6QDL_CLK_IPU2_DI1_PRE_SEL		38
+-#define IMX6QDL_CLK_IPU1_DI0_SEL		39
+-#define IMX6QDL_CLK_IPU1_DI1_SEL		40
+-#define IMX6QDL_CLK_IPU2_DI0_SEL		41
+-#define IMX6QDL_CLK_IPU2_DI1_SEL		42
+-#define IMX6QDL_CLK_HSI_TX_SEL			43
+-#define IMX6QDL_CLK_PCIE_AXI_SEL		44
+-#define IMX6QDL_CLK_SSI1_SEL			45
+-#define IMX6QDL_CLK_SSI2_SEL			46
+-#define IMX6QDL_CLK_SSI3_SEL			47
+-#define IMX6QDL_CLK_USDHC1_SEL			48
+-#define IMX6QDL_CLK_USDHC2_SEL			49
+-#define IMX6QDL_CLK_USDHC3_SEL			50
+-#define IMX6QDL_CLK_USDHC4_SEL			51
+-#define IMX6QDL_CLK_ENFC_SEL			52
+-#define IMX6QDL_CLK_EIM_SEL			53
+-#define IMX6QDL_CLK_EIM_SLOW_SEL		54
+-#define IMX6QDL_CLK_VDO_AXI_SEL			55
+-#define IMX6QDL_CLK_VPU_AXI_SEL			56
+-#define IMX6QDL_CLK_CKO1_SEL			57
+-#define IMX6QDL_CLK_PERIPH			58
+-#define IMX6QDL_CLK_PERIPH2			59
+-#define IMX6QDL_CLK_PERIPH_CLK2			60
+-#define IMX6QDL_CLK_PERIPH2_CLK2		61
+-#define IMX6QDL_CLK_IPG				62
+-#define IMX6QDL_CLK_IPG_PER			63
+-#define IMX6QDL_CLK_ESAI_PRED			64
+-#define IMX6QDL_CLK_ESAI_PODF			65
+-#define IMX6QDL_CLK_ASRC_PRED			66
+-#define IMX6QDL_CLK_ASRC_PODF			67
+-#define IMX6QDL_CLK_SPDIF_PRED			68
+-#define IMX6QDL_CLK_SPDIF_PODF			69
+-#define IMX6QDL_CLK_CAN_ROOT			70
+-#define IMX6QDL_CLK_ECSPI_ROOT			71
+-#define IMX6QDL_CLK_GPU2D_CORE_PODF		72
+-#define IMX6QDL_CLK_GPU3D_CORE_PODF		73
+-#define IMX6QDL_CLK_GPU3D_SHADER		74
+-#define IMX6QDL_CLK_IPU1_PODF			75
+-#define IMX6QDL_CLK_IPU2_PODF			76
+-#define IMX6QDL_CLK_LDB_DI0_PODF		77
+-#define IMX6QDL_CLK_LDB_DI1_PODF		78
+-#define IMX6QDL_CLK_IPU1_DI0_PRE		79
+-#define IMX6QDL_CLK_IPU1_DI1_PRE		80
+-#define IMX6QDL_CLK_IPU2_DI0_PRE		81
+-#define IMX6QDL_CLK_IPU2_DI1_PRE		82
+-#define IMX6QDL_CLK_HSI_TX_PODF			83
+-#define IMX6QDL_CLK_SSI1_PRED			84
+-#define IMX6QDL_CLK_SSI1_PODF			85
+-#define IMX6QDL_CLK_SSI2_PRED			86
+-#define IMX6QDL_CLK_SSI2_PODF			87
+-#define IMX6QDL_CLK_SSI3_PRED			88
+-#define IMX6QDL_CLK_SSI3_PODF			89
+-#define IMX6QDL_CLK_UART_SERIAL_PODF		90
+-#define IMX6QDL_CLK_USDHC1_PODF			91
+-#define IMX6QDL_CLK_USDHC2_PODF			92
+-#define IMX6QDL_CLK_USDHC3_PODF			93
+-#define IMX6QDL_CLK_USDHC4_PODF			94
+-#define IMX6QDL_CLK_ENFC_PRED			95
+-#define IMX6QDL_CLK_ENFC_PODF			96
+-#define IMX6QDL_CLK_EIM_PODF			97
+-#define IMX6QDL_CLK_EIM_SLOW_PODF		98
+-#define IMX6QDL_CLK_VPU_AXI_PODF		99
+-#define IMX6QDL_CLK_CKO1_PODF			100
+-#define IMX6QDL_CLK_AXI				101
+-#define IMX6QDL_CLK_MMDC_CH0_AXI_PODF		102
+-#define IMX6QDL_CLK_MMDC_CH1_AXI_PODF		103
+-#define IMX6QDL_CLK_ARM				104
+-#define IMX6QDL_CLK_AHB				105
+-#define IMX6QDL_CLK_APBH_DMA			106
+-#define IMX6QDL_CLK_ASRC			107
+-#define IMX6QDL_CLK_CAN1_IPG			108
+-#define IMX6QDL_CLK_CAN1_SERIAL			109
+-#define IMX6QDL_CLK_CAN2_IPG			110
+-#define IMX6QDL_CLK_CAN2_SERIAL			111
+-#define IMX6QDL_CLK_ECSPI1			112
+-#define IMX6QDL_CLK_ECSPI2			113
+-#define IMX6QDL_CLK_ECSPI3			114
+-#define IMX6QDL_CLK_ECSPI4			115
+-#define IMX6Q_CLK_ECSPI5			116
+-#define IMX6DL_CLK_I2C4				116
+-#define IMX6QDL_CLK_ENET			117
+-#define IMX6QDL_CLK_ESAI_EXTAL			118
+-#define IMX6QDL_CLK_GPT_IPG			119
+-#define IMX6QDL_CLK_GPT_IPG_PER			120
+-#define IMX6QDL_CLK_GPU2D_CORE			121
+-#define IMX6QDL_CLK_GPU3D_CORE			122
+-#define IMX6QDL_CLK_HDMI_IAHB			123
+-#define IMX6QDL_CLK_HDMI_ISFR			124
+-#define IMX6QDL_CLK_I2C1			125
+-#define IMX6QDL_CLK_I2C2			126
+-#define IMX6QDL_CLK_I2C3			127
+-#define IMX6QDL_CLK_IIM				128
+-#define IMX6QDL_CLK_ENFC			129
+-#define IMX6QDL_CLK_IPU1			130
+-#define IMX6QDL_CLK_IPU1_DI0			131
+-#define IMX6QDL_CLK_IPU1_DI1			132
+-#define IMX6QDL_CLK_IPU2			133
+-#define IMX6QDL_CLK_IPU2_DI0			134
+-#define IMX6QDL_CLK_LDB_DI0			135
+-#define IMX6QDL_CLK_LDB_DI1			136
+-#define IMX6QDL_CLK_IPU2_DI1			137
+-#define IMX6QDL_CLK_HSI_TX			138
+-#define IMX6QDL_CLK_MLB				139
+-#define IMX6QDL_CLK_MMDC_CH0_AXI		140
+-#define IMX6QDL_CLK_MMDC_CH1_AXI		141
+-#define IMX6QDL_CLK_OCRAM			142
+-#define IMX6QDL_CLK_OPENVG_AXI			143
+-#define IMX6QDL_CLK_PCIE_AXI			144
+-#define IMX6QDL_CLK_PWM1			145
+-#define IMX6QDL_CLK_PWM2			146
+-#define IMX6QDL_CLK_PWM3			147
+-#define IMX6QDL_CLK_PWM4			148
+-#define IMX6QDL_CLK_PER1_BCH			149
+-#define IMX6QDL_CLK_GPMI_BCH_APB		150
+-#define IMX6QDL_CLK_GPMI_BCH			151
+-#define IMX6QDL_CLK_GPMI_IO			152
+-#define IMX6QDL_CLK_GPMI_APB			153
+-#define IMX6QDL_CLK_SATA			154
+-#define IMX6QDL_CLK_SDMA			155
+-#define IMX6QDL_CLK_SPBA			156
+-#define IMX6QDL_CLK_SSI1			157
+-#define IMX6QDL_CLK_SSI2			158
+-#define IMX6QDL_CLK_SSI3			159
+-#define IMX6QDL_CLK_UART_IPG			160
+-#define IMX6QDL_CLK_UART_SERIAL			161
+-#define IMX6QDL_CLK_USBOH3			162
+-#define IMX6QDL_CLK_USDHC1			163
+-#define IMX6QDL_CLK_USDHC2			164
+-#define IMX6QDL_CLK_USDHC3			165
+-#define IMX6QDL_CLK_USDHC4			166
+-#define IMX6QDL_CLK_VDO_AXI			167
+-#define IMX6QDL_CLK_VPU_AXI			168
+-#define IMX6QDL_CLK_CKO1			169
+-#define IMX6QDL_CLK_PLL1_SYS			170
+-#define IMX6QDL_CLK_PLL2_BUS			171
+-#define IMX6QDL_CLK_PLL3_USB_OTG		172
+-#define IMX6QDL_CLK_PLL4_AUDIO			173
+-#define IMX6QDL_CLK_PLL5_VIDEO			174
+-#define IMX6QDL_CLK_PLL8_MLB			175
+-#define IMX6QDL_CLK_PLL7_USB_HOST		176
+-#define IMX6QDL_CLK_PLL6_ENET			177
+-#define IMX6QDL_CLK_SSI1_IPG			178
+-#define IMX6QDL_CLK_SSI2_IPG			179
+-#define IMX6QDL_CLK_SSI3_IPG			180
+-#define IMX6QDL_CLK_ROM				181
+-#define IMX6QDL_CLK_USBPHY1			182
+-#define IMX6QDL_CLK_USBPHY2			183
+-#define IMX6QDL_CLK_LDB_DI0_DIV_3_5		184
+-#define IMX6QDL_CLK_LDB_DI1_DIV_3_5		185
+-#define IMX6QDL_CLK_SATA_REF			186
+-#define IMX6QDL_CLK_SATA_REF_100M		187
+-#define IMX6QDL_CLK_PCIE_REF			188
+-#define IMX6QDL_CLK_PCIE_REF_125M		189
+-#define IMX6QDL_CLK_ENET_REF			190
+-#define IMX6QDL_CLK_USBPHY1_GATE		191
+-#define IMX6QDL_CLK_USBPHY2_GATE		192
+-#define IMX6QDL_CLK_PLL4_POST_DIV		193
+-#define IMX6QDL_CLK_PLL5_POST_DIV		194
+-#define IMX6QDL_CLK_PLL5_VIDEO_DIV		195
+-#define IMX6QDL_CLK_EIM_SLOW			196
+-#define IMX6QDL_CLK_SPDIF			197
+-#define IMX6QDL_CLK_CKO2_SEL			198
+-#define IMX6QDL_CLK_CKO2_PODF			199
+-#define IMX6QDL_CLK_CKO2			200
+-#define IMX6QDL_CLK_CKO				201
+-#define IMX6QDL_CLK_VDOA			202
+-#define IMX6QDL_CLK_PLL4_AUDIO_DIV		203
+-#define IMX6QDL_CLK_LVDS1_SEL			204
+-#define IMX6QDL_CLK_LVDS2_SEL			205
+-#define IMX6QDL_CLK_LVDS1_GATE			206
+-#define IMX6QDL_CLK_LVDS2_GATE			207
+-#define IMX6QDL_CLK_ESAI_IPG			208
+-#define IMX6QDL_CLK_ESAI_MEM			209
+-#define IMX6QDL_CLK_ASRC_IPG			210
+-#define IMX6QDL_CLK_ASRC_MEM			211
+-#define IMX6QDL_CLK_LVDS1_IN			212
+-#define IMX6QDL_CLK_LVDS2_IN			213
+-#define IMX6QDL_CLK_ANACLK1			214
+-#define IMX6QDL_CLK_ANACLK2			215
+-#define IMX6QDL_PLL1_BYPASS_SRC			216
+-#define IMX6QDL_PLL2_BYPASS_SRC			217
+-#define IMX6QDL_PLL3_BYPASS_SRC			218
+-#define IMX6QDL_PLL4_BYPASS_SRC			219
+-#define IMX6QDL_PLL5_BYPASS_SRC			220
+-#define IMX6QDL_PLL6_BYPASS_SRC			221
+-#define IMX6QDL_PLL7_BYPASS_SRC			222
+-#define IMX6QDL_CLK_PLL1			223
+-#define IMX6QDL_CLK_PLL2			224
+-#define IMX6QDL_CLK_PLL3			225
+-#define IMX6QDL_CLK_PLL4			226
+-#define IMX6QDL_CLK_PLL5			227
+-#define IMX6QDL_CLK_PLL6			228
+-#define IMX6QDL_CLK_PLL7			229
+-#define IMX6QDL_PLL1_BYPASS			230
+-#define IMX6QDL_PLL2_BYPASS			231
+-#define IMX6QDL_PLL3_BYPASS			232
+-#define IMX6QDL_PLL4_BYPASS			233
+-#define IMX6QDL_PLL5_BYPASS			234
+-#define IMX6QDL_PLL6_BYPASS			235
+-#define IMX6QDL_PLL7_BYPASS			236
+-#define IMX6QDL_CLK_GPT_3M			237
+-#define IMX6QDL_CLK_VIDEO_27M			238
+-#define IMX6QDL_CLK_MIPI_CORE_CFG		239
+-#define IMX6QDL_CLK_MIPI_IPG			240
+-#define IMX6QDL_CLK_CAAM_MEM			241
+-#define IMX6QDL_CLK_CAAM_ACLK			242
+-#define IMX6QDL_CLK_CAAM_IPG			243
+-#define IMX6QDL_CLK_SPDIF_GCLK			244
+-#define IMX6QDL_CLK_UART_SEL			245
+-#define IMX6QDL_CLK_IPG_PER_SEL			246
+-#define IMX6QDL_CLK_ECSPI_SEL			247
+-#define IMX6QDL_CLK_CAN_SEL			248
+-#define IMX6QDL_CLK_MMDC_CH1_AXI_CG		249
+-#define IMX6QDL_CLK_PRE0			250
+-#define IMX6QDL_CLK_PRE1			251
+-#define IMX6QDL_CLK_PRE2			252
+-#define IMX6QDL_CLK_PRE3			253
+-#define IMX6QDL_CLK_PRG0_AXI			254
+-#define IMX6QDL_CLK_PRG1_AXI			255
+-#define IMX6QDL_CLK_PRG0_APB			256
+-#define IMX6QDL_CLK_PRG1_APB			257
+-#define IMX6QDL_CLK_PRE_AXI			258
+-#define IMX6QDL_CLK_MLB_SEL			259
+-#define IMX6QDL_CLK_MLB_PODF			260
+-#define IMX6QDL_CLK_EPIT1			261
+-#define IMX6QDL_CLK_EPIT2			262
+-#define IMX6QDL_CLK_MMDC_P0_IPG			263
+-#define IMX6QDL_CLK_DCIC1			264
+-#define IMX6QDL_CLK_DCIC2			265
+-#define IMX6QDL_CLK_END				266
 -
--#define SUN4I_PINCTRL_NO_PULL	0
--#define SUN4I_PINCTRL_PULL_UP	1
--#define SUN4I_PINCTRL_PULL_DOWN	2
--
--#endif /* __DT_BINDINGS_PINCTRL_SUN4I_A10_H_ */
-diff --git a/include/dt-bindings/reset/sun20i-d1-ccu.h b/include/dt-bindings/reset/sun20i-d1-ccu.h
+-#endif /* __DT_BINDINGS_CLOCK_IMX6QDL_H */
+diff --git a/include/dt-bindings/clock/imx6sl-clock.h b/include/dt-bindings/clock/imx6sl-clock.h
 deleted file mode 100644
-index 79e52aca5912..000000000000
---- a/include/dt-bindings/reset/sun20i-d1-ccu.h
+index 31364d2caae6..000000000000
+--- a/include/dt-bindings/clock/imx6sl-clock.h
 +++ /dev/null
-@@ -1,79 +0,0 @@
+@@ -1,178 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright 2013 Freescale Semiconductor, Inc.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX6SL_H
+-#define __DT_BINDINGS_CLOCK_IMX6SL_H
+-
+-#define IMX6SL_CLK_DUMMY		0
+-#define IMX6SL_CLK_CKIL			1
+-#define IMX6SL_CLK_OSC			2
+-#define IMX6SL_CLK_PLL1_SYS		3
+-#define IMX6SL_CLK_PLL2_BUS		4
+-#define IMX6SL_CLK_PLL3_USB_OTG		5
+-#define IMX6SL_CLK_PLL4_AUDIO		6
+-#define IMX6SL_CLK_PLL5_VIDEO		7
+-#define IMX6SL_CLK_PLL6_ENET		8
+-#define IMX6SL_CLK_PLL7_USB_HOST	9
+-#define IMX6SL_CLK_USBPHY1		10
+-#define IMX6SL_CLK_USBPHY2		11
+-#define IMX6SL_CLK_USBPHY1_GATE		12
+-#define IMX6SL_CLK_USBPHY2_GATE		13
+-#define IMX6SL_CLK_PLL4_POST_DIV	14
+-#define IMX6SL_CLK_PLL5_POST_DIV	15
+-#define IMX6SL_CLK_PLL5_VIDEO_DIV	16
+-#define IMX6SL_CLK_ENET_REF		17
+-#define IMX6SL_CLK_PLL2_PFD0		18
+-#define IMX6SL_CLK_PLL2_PFD1		19
+-#define IMX6SL_CLK_PLL2_PFD2		20
+-#define IMX6SL_CLK_PLL3_PFD0		21
+-#define IMX6SL_CLK_PLL3_PFD1		22
+-#define IMX6SL_CLK_PLL3_PFD2		23
+-#define IMX6SL_CLK_PLL3_PFD3		24
+-#define IMX6SL_CLK_PLL2_198M		25
+-#define IMX6SL_CLK_PLL3_120M		26
+-#define IMX6SL_CLK_PLL3_80M		27
+-#define IMX6SL_CLK_PLL3_60M		28
+-#define IMX6SL_CLK_STEP			29
+-#define IMX6SL_CLK_PLL1_SW		30
+-#define IMX6SL_CLK_OCRAM_ALT_SEL	31
+-#define IMX6SL_CLK_OCRAM_SEL		32
+-#define IMX6SL_CLK_PRE_PERIPH2_SEL	33
+-#define IMX6SL_CLK_PRE_PERIPH_SEL	34
+-#define IMX6SL_CLK_PERIPH2_CLK2_SEL	35
+-#define IMX6SL_CLK_PERIPH_CLK2_SEL	36
+-#define IMX6SL_CLK_CSI_SEL		37
+-#define IMX6SL_CLK_LCDIF_AXI_SEL	38
+-#define IMX6SL_CLK_USDHC1_SEL		39
+-#define IMX6SL_CLK_USDHC2_SEL		40
+-#define IMX6SL_CLK_USDHC3_SEL		41
+-#define IMX6SL_CLK_USDHC4_SEL		42
+-#define IMX6SL_CLK_SSI1_SEL		43
+-#define IMX6SL_CLK_SSI2_SEL		44
+-#define IMX6SL_CLK_SSI3_SEL		45
+-#define IMX6SL_CLK_PERCLK_SEL		46
+-#define IMX6SL_CLK_PXP_AXI_SEL		47
+-#define IMX6SL_CLK_EPDC_AXI_SEL		48
+-#define IMX6SL_CLK_GPU2D_OVG_SEL	49
+-#define IMX6SL_CLK_GPU2D_SEL		50
+-#define IMX6SL_CLK_LCDIF_PIX_SEL	51
+-#define IMX6SL_CLK_EPDC_PIX_SEL		52
+-#define IMX6SL_CLK_SPDIF0_SEL		53
+-#define IMX6SL_CLK_SPDIF1_SEL		54
+-#define IMX6SL_CLK_EXTERN_AUDIO_SEL	55
+-#define IMX6SL_CLK_ECSPI_SEL		56
+-#define IMX6SL_CLK_UART_SEL		57
+-#define IMX6SL_CLK_PERIPH		58
+-#define IMX6SL_CLK_PERIPH2		59
+-#define IMX6SL_CLK_OCRAM_PODF		60
+-#define IMX6SL_CLK_PERIPH_CLK2_PODF	61
+-#define IMX6SL_CLK_PERIPH2_CLK2_PODF	62
+-#define IMX6SL_CLK_IPG			63
+-#define IMX6SL_CLK_CSI_PODF		64
+-#define IMX6SL_CLK_LCDIF_AXI_PODF	65
+-#define IMX6SL_CLK_USDHC1_PODF		66
+-#define IMX6SL_CLK_USDHC2_PODF		67
+-#define IMX6SL_CLK_USDHC3_PODF		68
+-#define IMX6SL_CLK_USDHC4_PODF		69
+-#define IMX6SL_CLK_SSI1_PRED		70
+-#define IMX6SL_CLK_SSI1_PODF		71
+-#define IMX6SL_CLK_SSI2_PRED		72
+-#define IMX6SL_CLK_SSI2_PODF		73
+-#define IMX6SL_CLK_SSI3_PRED		74
+-#define IMX6SL_CLK_SSI3_PODF		75
+-#define IMX6SL_CLK_PERCLK		76
+-#define IMX6SL_CLK_PXP_AXI_PODF		77
+-#define IMX6SL_CLK_EPDC_AXI_PODF	78
+-#define IMX6SL_CLK_GPU2D_OVG_PODF	79
+-#define IMX6SL_CLK_GPU2D_PODF		80
+-#define IMX6SL_CLK_LCDIF_PIX_PRED	81
+-#define IMX6SL_CLK_EPDC_PIX_PRED	82
+-#define IMX6SL_CLK_LCDIF_PIX_PODF	83
+-#define IMX6SL_CLK_EPDC_PIX_PODF	84
+-#define IMX6SL_CLK_SPDIF0_PRED		85
+-#define IMX6SL_CLK_SPDIF0_PODF		86
+-#define IMX6SL_CLK_SPDIF1_PRED		87
+-#define IMX6SL_CLK_SPDIF1_PODF		88
+-#define IMX6SL_CLK_EXTERN_AUDIO_PRED	89
+-#define IMX6SL_CLK_EXTERN_AUDIO_PODF	90
+-#define IMX6SL_CLK_ECSPI_ROOT		91
+-#define IMX6SL_CLK_UART_ROOT		92
+-#define IMX6SL_CLK_AHB			93
+-#define IMX6SL_CLK_MMDC_ROOT		94
+-#define IMX6SL_CLK_ARM			95
+-#define IMX6SL_CLK_ECSPI1		96
+-#define IMX6SL_CLK_ECSPI2		97
+-#define IMX6SL_CLK_ECSPI3		98
+-#define IMX6SL_CLK_ECSPI4		99
+-#define IMX6SL_CLK_EPIT1		100
+-#define IMX6SL_CLK_EPIT2		101
+-#define IMX6SL_CLK_EXTERN_AUDIO		102
+-#define IMX6SL_CLK_GPT			103
+-#define IMX6SL_CLK_GPT_SERIAL		104
+-#define IMX6SL_CLK_GPU2D_OVG		105
+-#define IMX6SL_CLK_I2C1			106
+-#define IMX6SL_CLK_I2C2			107
+-#define IMX6SL_CLK_I2C3			108
+-#define IMX6SL_CLK_OCOTP		109
+-#define IMX6SL_CLK_CSI			110
+-#define IMX6SL_CLK_PXP_AXI		111
+-#define IMX6SL_CLK_EPDC_AXI		112
+-#define IMX6SL_CLK_LCDIF_AXI		113
+-#define IMX6SL_CLK_LCDIF_PIX		114
+-#define IMX6SL_CLK_EPDC_PIX		115
+-#define IMX6SL_CLK_OCRAM		116
+-#define IMX6SL_CLK_PWM1			117
+-#define IMX6SL_CLK_PWM2			118
+-#define IMX6SL_CLK_PWM3			119
+-#define IMX6SL_CLK_PWM4			120
+-#define IMX6SL_CLK_SDMA			121
+-#define IMX6SL_CLK_SPDIF		122
+-#define IMX6SL_CLK_SSI1			123
+-#define IMX6SL_CLK_SSI2			124
+-#define IMX6SL_CLK_SSI3			125
+-#define IMX6SL_CLK_UART			126
+-#define IMX6SL_CLK_UART_SERIAL		127
+-#define IMX6SL_CLK_USBOH3		128
+-#define IMX6SL_CLK_USDHC1		129
+-#define IMX6SL_CLK_USDHC2		130
+-#define IMX6SL_CLK_USDHC3		131
+-#define IMX6SL_CLK_USDHC4		132
+-#define IMX6SL_CLK_PLL4_AUDIO_DIV	133
+-#define IMX6SL_CLK_SPBA			134
+-#define IMX6SL_CLK_ENET			135
+-#define IMX6SL_CLK_LVDS1_SEL		136
+-#define IMX6SL_CLK_LVDS1_OUT		137
+-#define IMX6SL_CLK_LVDS1_IN		138
+-#define IMX6SL_CLK_ANACLK1		139
+-#define IMX6SL_PLL1_BYPASS_SRC		140
+-#define IMX6SL_PLL2_BYPASS_SRC		141
+-#define IMX6SL_PLL3_BYPASS_SRC		142
+-#define IMX6SL_PLL4_BYPASS_SRC		143
+-#define IMX6SL_PLL5_BYPASS_SRC		144
+-#define IMX6SL_PLL6_BYPASS_SRC		145
+-#define IMX6SL_PLL7_BYPASS_SRC		146
+-#define IMX6SL_CLK_PLL1			147
+-#define IMX6SL_CLK_PLL2			148
+-#define IMX6SL_CLK_PLL3			149
+-#define IMX6SL_CLK_PLL4			150
+-#define IMX6SL_CLK_PLL5			151
+-#define IMX6SL_CLK_PLL6			152
+-#define IMX6SL_CLK_PLL7			153
+-#define IMX6SL_PLL1_BYPASS		154
+-#define IMX6SL_PLL2_BYPASS		155
+-#define IMX6SL_PLL3_BYPASS		156
+-#define IMX6SL_PLL4_BYPASS		157
+-#define IMX6SL_PLL5_BYPASS		158
+-#define IMX6SL_PLL6_BYPASS		159
+-#define IMX6SL_PLL7_BYPASS		160
+-#define IMX6SL_CLK_SSI1_IPG		161
+-#define IMX6SL_CLK_SSI2_IPG		162
+-#define IMX6SL_CLK_SSI3_IPG		163
+-#define IMX6SL_CLK_SPDIF_GCLK		164
+-#define IMX6SL_CLK_MMDC_P0_IPG		165
+-#define IMX6SL_CLK_MMDC_P1_IPG		166
+-#define IMX6SL_CLK_END			167
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX6SL_H */
+diff --git a/include/dt-bindings/clock/imx6sll-clock.h b/include/dt-bindings/clock/imx6sll-clock.h
+deleted file mode 100644
+index 494fd0c37fb5..000000000000
+--- a/include/dt-bindings/clock/imx6sll-clock.h
++++ /dev/null
+@@ -1,210 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2016 Freescale Semiconductor, Inc.
+- * Copyright 2017-2018 NXP.
+- *
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX6SLL_H
+-#define __DT_BINDINGS_CLOCK_IMX6SLL_H
+-
+-#define IMX6SLL_CLK_DUMMY		0
+-#define IMX6SLL_CLK_CKIL		1
+-#define IMX6SLL_CLK_OSC			2
+-#define IMX6SLL_PLL1_BYPASS_SRC		3
+-#define IMX6SLL_PLL2_BYPASS_SRC		4
+-#define IMX6SLL_PLL3_BYPASS_SRC		5
+-#define IMX6SLL_PLL4_BYPASS_SRC		6
+-#define IMX6SLL_PLL5_BYPASS_SRC		7
+-#define IMX6SLL_PLL6_BYPASS_SRC		8
+-#define IMX6SLL_PLL7_BYPASS_SRC		9
+-#define IMX6SLL_CLK_PLL1		10
+-#define IMX6SLL_CLK_PLL2		11
+-#define IMX6SLL_CLK_PLL3		12
+-#define IMX6SLL_CLK_PLL4		13
+-#define IMX6SLL_CLK_PLL5		14
+-#define IMX6SLL_CLK_PLL6		15
+-#define IMX6SLL_CLK_PLL7		16
+-#define IMX6SLL_PLL1_BYPASS		17
+-#define IMX6SLL_PLL2_BYPASS		18
+-#define IMX6SLL_PLL3_BYPASS		19
+-#define IMX6SLL_PLL4_BYPASS		20
+-#define IMX6SLL_PLL5_BYPASS		21
+-#define IMX6SLL_PLL6_BYPASS		22
+-#define IMX6SLL_PLL7_BYPASS		23
+-#define IMX6SLL_CLK_PLL1_SYS		24
+-#define IMX6SLL_CLK_PLL2_BUS		25
+-#define IMX6SLL_CLK_PLL3_USB_OTG	26
+-#define IMX6SLL_CLK_PLL4_AUDIO		27
+-#define IMX6SLL_CLK_PLL5_VIDEO		28
+-#define IMX6SLL_CLK_PLL6_ENET		29
+-#define IMX6SLL_CLK_PLL7_USB_HOST	30
+-#define IMX6SLL_CLK_USBPHY1		31
+-#define IMX6SLL_CLK_USBPHY2		32
+-#define IMX6SLL_CLK_USBPHY1_GATE	33
+-#define IMX6SLL_CLK_USBPHY2_GATE	34
+-#define IMX6SLL_CLK_PLL2_PFD0		35
+-#define IMX6SLL_CLK_PLL2_PFD1		36
+-#define IMX6SLL_CLK_PLL2_PFD2		37
+-#define IMX6SLL_CLK_PLL2_PFD3		38
+-#define IMX6SLL_CLK_PLL3_PFD0		39
+-#define IMX6SLL_CLK_PLL3_PFD1		40
+-#define IMX6SLL_CLK_PLL3_PFD2		41
+-#define IMX6SLL_CLK_PLL3_PFD3		42
+-#define IMX6SLL_CLK_PLL4_POST_DIV	43
+-#define IMX6SLL_CLK_PLL4_AUDIO_DIV	44
+-#define IMX6SLL_CLK_PLL5_POST_DIV	45
+-#define IMX6SLL_CLK_PLL5_VIDEO_DIV	46
+-#define IMX6SLL_CLK_PLL2_198M		47
+-#define IMX6SLL_CLK_PLL3_120M		48
+-#define IMX6SLL_CLK_PLL3_80M		49
+-#define IMX6SLL_CLK_PLL3_60M		50
+-#define IMX6SLL_CLK_STEP		51
+-#define IMX6SLL_CLK_PLL1_SW		52
+-#define IMX6SLL_CLK_AXI_ALT_SEL		53
+-#define IMX6SLL_CLK_AXI_SEL		54
+-#define IMX6SLL_CLK_PERIPH_PRE		55
+-#define IMX6SLL_CLK_PERIPH2_PRE		56
+-#define IMX6SLL_CLK_PERIPH_CLK2_SEL	57
+-#define IMX6SLL_CLK_PERIPH2_CLK2_SEL	58
+-#define IMX6SLL_CLK_PERCLK_SEL		59
+-#define IMX6SLL_CLK_USDHC1_SEL		60
+-#define IMX6SLL_CLK_USDHC2_SEL		61
+-#define IMX6SLL_CLK_USDHC3_SEL		62
+-#define IMX6SLL_CLK_SSI1_SEL		63
+-#define IMX6SLL_CLK_SSI2_SEL		64
+-#define IMX6SLL_CLK_SSI3_SEL		65
+-#define IMX6SLL_CLK_PXP_SEL		66
+-#define IMX6SLL_CLK_LCDIF_PRE_SEL	67
+-#define IMX6SLL_CLK_LCDIF_SEL		68
+-#define IMX6SLL_CLK_EPDC_PRE_SEL	69
+-#define IMX6SLL_CLK_SPDIF_SEL		70
+-#define IMX6SLL_CLK_ECSPI_SEL		71
+-#define IMX6SLL_CLK_UART_SEL		72
+-#define IMX6SLL_CLK_ARM			73
+-#define IMX6SLL_CLK_PERIPH		74
+-#define IMX6SLL_CLK_PERIPH2		75
+-#define IMX6SLL_CLK_PERIPH2_CLK2	76
+-#define IMX6SLL_CLK_PERIPH_CLK2		77
+-#define IMX6SLL_CLK_MMDC_PODF		78
+-#define IMX6SLL_CLK_AXI_PODF		79
+-#define IMX6SLL_CLK_AHB			80
+-#define IMX6SLL_CLK_IPG			81
+-#define IMX6SLL_CLK_PERCLK		82
+-#define IMX6SLL_CLK_USDHC1_PODF		83
+-#define IMX6SLL_CLK_USDHC2_PODF		84
+-#define IMX6SLL_CLK_USDHC3_PODF		85
+-#define IMX6SLL_CLK_SSI1_PRED		86
+-#define IMX6SLL_CLK_SSI2_PRED		87
+-#define IMX6SLL_CLK_SSI3_PRED		88
+-#define IMX6SLL_CLK_SSI1_PODF		89
+-#define IMX6SLL_CLK_SSI2_PODF		90
+-#define IMX6SLL_CLK_SSI3_PODF		91
+-#define IMX6SLL_CLK_PXP_PODF		92
+-#define IMX6SLL_CLK_LCDIF_PRED		93
+-#define IMX6SLL_CLK_LCDIF_PODF		94
+-#define IMX6SLL_CLK_EPDC_SEL		95
+-#define IMX6SLL_CLK_EPDC_PODF		96
+-#define IMX6SLL_CLK_SPDIF_PRED		97
+-#define IMX6SLL_CLK_SPDIF_PODF		98
+-#define IMX6SLL_CLK_ECSPI_PODF		99
+-#define IMX6SLL_CLK_UART_PODF		100
+-
+-/* CCGR 0 */
+-#define IMX6SLL_CLK_AIPSTZ1		101
+-#define IMX6SLL_CLK_AIPSTZ2		102
+-#define IMX6SLL_CLK_DCP			103
+-#define IMX6SLL_CLK_UART2_IPG		104
+-#define IMX6SLL_CLK_UART2_SERIAL	105
+-
+-/* CCGR 1 */
+-#define IMX6SLL_CLK_ECSPI1		106
+-#define IMX6SLL_CLK_ECSPI2		107
+-#define IMX6SLL_CLK_ECSPI3		108
+-#define IMX6SLL_CLK_ECSPI4		109
+-#define IMX6SLL_CLK_UART3_IPG		110
+-#define IMX6SLL_CLK_UART3_SERIAL	111
+-#define IMX6SLL_CLK_UART4_IPG		112
+-#define IMX6SLL_CLK_UART4_SERIAL	113
+-#define IMX6SLL_CLK_EPIT1		114
+-#define IMX6SLL_CLK_EPIT2		115
+-#define IMX6SLL_CLK_GPT_BUS		116
+-#define IMX6SLL_CLK_GPT_SERIAL		117
+-
+-/* CCGR2 */
+-#define IMX6SLL_CLK_CSI			118
+-#define IMX6SLL_CLK_I2C1		119
+-#define IMX6SLL_CLK_I2C2		120
+-#define IMX6SLL_CLK_I2C3		121
+-#define IMX6SLL_CLK_OCOTP		122
+-#define IMX6SLL_CLK_LCDIF_APB		123
+-#define IMX6SLL_CLK_PXP			124
+-
+-/* CCGR3 */
+-#define IMX6SLL_CLK_UART5_IPG		125
+-#define IMX6SLL_CLK_UART5_SERIAL	126
+-#define IMX6SLL_CLK_EPDC_AXI		127
+-#define IMX6SLL_CLK_EPDC_PIX		128
+-#define IMX6SLL_CLK_LCDIF_PIX		129
+-#define IMX6SLL_CLK_WDOG1		130
+-#define IMX6SLL_CLK_MMDC_P0_FAST	131
+-#define IMX6SLL_CLK_MMDC_P0_IPG		132
+-#define IMX6SLL_CLK_OCRAM		133
+-
+-/* CCGR4 */
+-#define IMX6SLL_CLK_PWM1		134
+-#define IMX6SLL_CLK_PWM2		135
+-#define IMX6SLL_CLK_PWM3		136
+-#define IMX6SLL_CLK_PWM4		137
+-
+-/* CCGR 5 */
+-#define IMX6SLL_CLK_ROM			138
+-#define IMX6SLL_CLK_SDMA		139
+-#define IMX6SLL_CLK_KPP			140
+-#define IMX6SLL_CLK_WDOG2		141
+-#define IMX6SLL_CLK_SPBA		142
+-#define IMX6SLL_CLK_SPDIF		143
+-#define IMX6SLL_CLK_SPDIF_GCLK		144
+-#define IMX6SLL_CLK_SSI1		145
+-#define IMX6SLL_CLK_SSI1_IPG		146
+-#define IMX6SLL_CLK_SSI2		147
+-#define IMX6SLL_CLK_SSI2_IPG		148
+-#define IMX6SLL_CLK_SSI3		149
+-#define IMX6SLL_CLK_SSI3_IPG		150
+-#define IMX6SLL_CLK_UART1_IPG		151
+-#define IMX6SLL_CLK_UART1_SERIAL	152
+-
+-/* CCGR 6 */
+-#define IMX6SLL_CLK_USBOH3		153
+-#define IMX6SLL_CLK_USDHC1		154
+-#define IMX6SLL_CLK_USDHC2		155
+-#define IMX6SLL_CLK_USDHC3		156
+-
+-#define IMX6SLL_CLK_IPP_DI0		157
+-#define IMX6SLL_CLK_IPP_DI1		158
+-#define IMX6SLL_CLK_LDB_DI0_SEL		159
+-#define IMX6SLL_CLK_LDB_DI0_DIV_3_5	160
+-#define IMX6SLL_CLK_LDB_DI0_DIV_7	161
+-#define IMX6SLL_CLK_LDB_DI0_DIV_SEL	162
+-#define IMX6SLL_CLK_LDB_DI0		163
+-#define IMX6SLL_CLK_LDB_DI1_SEL		164
+-#define IMX6SLL_CLK_LDB_DI1_DIV_3_5	165
+-#define IMX6SLL_CLK_LDB_DI1_DIV_7	166
+-#define IMX6SLL_CLK_LDB_DI1_DIV_SEL	167
+-#define IMX6SLL_CLK_LDB_DI1		168
+-#define IMX6SLL_CLK_EXTERN_AUDIO_SEL    169
+-#define IMX6SLL_CLK_EXTERN_AUDIO_PRED   170
+-#define IMX6SLL_CLK_EXTERN_AUDIO_PODF   171
+-#define IMX6SLL_CLK_EXTERN_AUDIO        172
+-
+-#define IMX6SLL_CLK_GPIO1               173
+-#define IMX6SLL_CLK_GPIO2               174
+-#define IMX6SLL_CLK_GPIO3               175
+-#define IMX6SLL_CLK_GPIO4               176
+-#define IMX6SLL_CLK_GPIO5               177
+-#define IMX6SLL_CLK_GPIO6               178
+-#define IMX6SLL_CLK_MMDC_P1_IPG		179
+-
+-#define IMX6SLL_CLK_END			180
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX6SLL_H */
+diff --git a/include/dt-bindings/clock/imx6sx-clock.h b/include/dt-bindings/clock/imx6sx-clock.h
+deleted file mode 100644
+index 1c64997d6196..000000000000
+--- a/include/dt-bindings/clock/imx6sx-clock.h
++++ /dev/null
+@@ -1,281 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright (C) 2014 Freescale Semiconductor, Inc.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX6SX_H
+-#define __DT_BINDINGS_CLOCK_IMX6SX_H
+-
+-#define IMX6SX_CLK_DUMMY		0
+-#define IMX6SX_CLK_CKIL			1
+-#define IMX6SX_CLK_CKIH			2
+-#define IMX6SX_CLK_OSC			3
+-#define IMX6SX_CLK_PLL1_SYS		4
+-#define IMX6SX_CLK_PLL2_BUS		5
+-#define IMX6SX_CLK_PLL3_USB_OTG		6
+-#define IMX6SX_CLK_PLL4_AUDIO		7
+-#define IMX6SX_CLK_PLL5_VIDEO		8
+-#define IMX6SX_CLK_PLL6_ENET		9
+-#define IMX6SX_CLK_PLL7_USB_HOST	10
+-#define IMX6SX_CLK_USBPHY1		11
+-#define IMX6SX_CLK_USBPHY2		12
+-#define IMX6SX_CLK_USBPHY1_GATE		13
+-#define IMX6SX_CLK_USBPHY2_GATE		14
+-#define IMX6SX_CLK_PCIE_REF		15
+-#define IMX6SX_CLK_PCIE_REF_125M	16
+-#define IMX6SX_CLK_ENET_REF		17
+-#define IMX6SX_CLK_PLL2_PFD0		18
+-#define IMX6SX_CLK_PLL2_PFD1		19
+-#define IMX6SX_CLK_PLL2_PFD2		20
+-#define IMX6SX_CLK_PLL2_PFD3		21
+-#define IMX6SX_CLK_PLL3_PFD0		22
+-#define IMX6SX_CLK_PLL3_PFD1		23
+-#define IMX6SX_CLK_PLL3_PFD2		24
+-#define IMX6SX_CLK_PLL3_PFD3		25
+-#define IMX6SX_CLK_PLL2_198M		26
+-#define IMX6SX_CLK_PLL3_120M		27
+-#define IMX6SX_CLK_PLL3_80M		28
+-#define IMX6SX_CLK_PLL3_60M		29
+-#define IMX6SX_CLK_TWD			30
+-#define IMX6SX_CLK_PLL4_POST_DIV	31
+-#define IMX6SX_CLK_PLL4_AUDIO_DIV	32
+-#define IMX6SX_CLK_PLL5_POST_DIV	33
+-#define IMX6SX_CLK_PLL5_VIDEO_DIV	34
+-#define IMX6SX_CLK_STEP			35
+-#define IMX6SX_CLK_PLL1_SW		36
+-#define IMX6SX_CLK_OCRAM_SEL		37
+-#define IMX6SX_CLK_PERIPH_PRE		38
+-#define IMX6SX_CLK_PERIPH2_PRE		39
+-#define IMX6SX_CLK_PERIPH_CLK2_SEL	40
+-#define IMX6SX_CLK_PERIPH2_CLK2_SEL	41
+-#define IMX6SX_CLK_PCIE_AXI_SEL		42
+-#define IMX6SX_CLK_GPU_AXI_SEL		43
+-#define IMX6SX_CLK_GPU_CORE_SEL		44
+-#define IMX6SX_CLK_EIM_SLOW_SEL		45
+-#define IMX6SX_CLK_USDHC1_SEL		46
+-#define IMX6SX_CLK_USDHC2_SEL		47
+-#define IMX6SX_CLK_USDHC3_SEL		48
+-#define IMX6SX_CLK_USDHC4_SEL		49
+-#define IMX6SX_CLK_SSI1_SEL		50
+-#define IMX6SX_CLK_SSI2_SEL		51
+-#define IMX6SX_CLK_SSI3_SEL		52
+-#define IMX6SX_CLK_QSPI1_SEL		53
+-#define IMX6SX_CLK_PERCLK_SEL		54
+-#define IMX6SX_CLK_VID_SEL		55
+-#define IMX6SX_CLK_ESAI_SEL		56
+-#define IMX6SX_CLK_LDB_DI0_DIV_SEL	57
+-#define IMX6SX_CLK_LDB_DI1_DIV_SEL	58
+-#define IMX6SX_CLK_CAN_SEL		59
+-#define IMX6SX_CLK_UART_SEL		60
+-#define IMX6SX_CLK_QSPI2_SEL		61
+-#define IMX6SX_CLK_LDB_DI1_SEL		62
+-#define IMX6SX_CLK_LDB_DI0_SEL		63
+-#define IMX6SX_CLK_SPDIF_SEL		64
+-#define IMX6SX_CLK_AUDIO_SEL		65
+-#define IMX6SX_CLK_ENET_PRE_SEL		66
+-#define IMX6SX_CLK_ENET_SEL		67
+-#define IMX6SX_CLK_M4_PRE_SEL		68
+-#define IMX6SX_CLK_M4_SEL		69
+-#define IMX6SX_CLK_ECSPI_SEL		70
+-#define IMX6SX_CLK_LCDIF1_PRE_SEL	71
+-#define IMX6SX_CLK_LCDIF2_PRE_SEL	72
+-#define IMX6SX_CLK_LCDIF1_SEL		73
+-#define IMX6SX_CLK_LCDIF2_SEL		74
+-#define IMX6SX_CLK_DISPLAY_SEL		75
+-#define IMX6SX_CLK_CSI_SEL		76
+-#define IMX6SX_CLK_CKO1_SEL		77
+-#define IMX6SX_CLK_CKO2_SEL		78
+-#define IMX6SX_CLK_CKO			79
+-#define IMX6SX_CLK_PERIPH_CLK2		80
+-#define IMX6SX_CLK_PERIPH2_CLK2		81
+-#define IMX6SX_CLK_IPG			82
+-#define IMX6SX_CLK_GPU_CORE_PODF	83
+-#define IMX6SX_CLK_GPU_AXI_PODF		84
+-#define IMX6SX_CLK_LCDIF1_PODF		85
+-#define IMX6SX_CLK_QSPI1_PODF		86
+-#define IMX6SX_CLK_EIM_SLOW_PODF	87
+-#define IMX6SX_CLK_LCDIF2_PODF		88
+-#define IMX6SX_CLK_PERCLK		89
+-#define IMX6SX_CLK_VID_PODF		90
+-#define IMX6SX_CLK_CAN_PODF		91
+-#define IMX6SX_CLK_USDHC1_PODF		92
+-#define IMX6SX_CLK_USDHC2_PODF		93
+-#define IMX6SX_CLK_USDHC3_PODF		94
+-#define IMX6SX_CLK_USDHC4_PODF		95
+-#define IMX6SX_CLK_UART_PODF		96
+-#define IMX6SX_CLK_ESAI_PRED		97
+-#define IMX6SX_CLK_ESAI_PODF		98
+-#define IMX6SX_CLK_SSI3_PRED		99
+-#define IMX6SX_CLK_SSI3_PODF		100
+-#define IMX6SX_CLK_SSI1_PRED		101
+-#define IMX6SX_CLK_SSI1_PODF		102
+-#define IMX6SX_CLK_QSPI2_PRED		103
+-#define IMX6SX_CLK_QSPI2_PODF		104
+-#define IMX6SX_CLK_SSI2_PRED		105
+-#define IMX6SX_CLK_SSI2_PODF		106
+-#define IMX6SX_CLK_SPDIF_PRED		107
+-#define IMX6SX_CLK_SPDIF_PODF		108
+-#define IMX6SX_CLK_AUDIO_PRED		109
+-#define IMX6SX_CLK_AUDIO_PODF		110
+-#define IMX6SX_CLK_ENET_PODF		111
+-#define IMX6SX_CLK_M4_PODF		112
+-#define IMX6SX_CLK_ECSPI_PODF		113
+-#define IMX6SX_CLK_LCDIF1_PRED		114
+-#define IMX6SX_CLK_LCDIF2_PRED		115
+-#define IMX6SX_CLK_DISPLAY_PODF		116
+-#define IMX6SX_CLK_CSI_PODF		117
+-#define IMX6SX_CLK_LDB_DI0_DIV_3_5	118
+-#define IMX6SX_CLK_LDB_DI0_DIV_7	119
+-#define IMX6SX_CLK_LDB_DI1_DIV_3_5	120
+-#define IMX6SX_CLK_LDB_DI1_DIV_7	121
+-#define IMX6SX_CLK_CKO1_PODF		122
+-#define IMX6SX_CLK_CKO2_PODF		123
+-#define IMX6SX_CLK_PERIPH		124
+-#define IMX6SX_CLK_PERIPH2		125
+-#define IMX6SX_CLK_OCRAM		126
+-#define IMX6SX_CLK_AHB			127
+-#define IMX6SX_CLK_MMDC_PODF		128
+-#define IMX6SX_CLK_ARM			129
+-#define IMX6SX_CLK_AIPS_TZ1		130
+-#define IMX6SX_CLK_AIPS_TZ2		131
+-#define IMX6SX_CLK_APBH_DMA		132
+-#define IMX6SX_CLK_ASRC_GATE		133
+-#define IMX6SX_CLK_CAAM_MEM		134
+-#define IMX6SX_CLK_CAAM_ACLK		135
+-#define IMX6SX_CLK_CAAM_IPG		136
+-#define IMX6SX_CLK_CAN1_IPG		137
+-#define IMX6SX_CLK_CAN1_SERIAL		138
+-#define IMX6SX_CLK_CAN2_IPG		139
+-#define IMX6SX_CLK_CAN2_SERIAL		140
+-#define IMX6SX_CLK_CPU_DEBUG		141
+-#define IMX6SX_CLK_DCIC1		142
+-#define IMX6SX_CLK_DCIC2		143
+-#define IMX6SX_CLK_AIPS_TZ3		144
+-#define IMX6SX_CLK_ECSPI1		145
+-#define IMX6SX_CLK_ECSPI2		146
+-#define IMX6SX_CLK_ECSPI3		147
+-#define IMX6SX_CLK_ECSPI4		148
+-#define IMX6SX_CLK_ECSPI5		149
+-#define IMX6SX_CLK_EPIT1		150
+-#define IMX6SX_CLK_EPIT2		151
+-#define IMX6SX_CLK_ESAI_EXTAL		152
+-#define IMX6SX_CLK_WAKEUP		153
+-#define IMX6SX_CLK_GPT_BUS		154
+-#define IMX6SX_CLK_GPT_SERIAL		155
+-#define IMX6SX_CLK_GPU			156
+-#define IMX6SX_CLK_OCRAM_S		157
+-#define IMX6SX_CLK_CANFD		158
+-#define IMX6SX_CLK_CSI			159
+-#define IMX6SX_CLK_I2C1			160
+-#define IMX6SX_CLK_I2C2			161
+-#define IMX6SX_CLK_I2C3			162
+-#define IMX6SX_CLK_OCOTP		163
+-#define IMX6SX_CLK_IOMUXC		164
+-#define IMX6SX_CLK_IPMUX1		165
+-#define IMX6SX_CLK_IPMUX2		166
+-#define IMX6SX_CLK_IPMUX3		167
+-#define IMX6SX_CLK_TZASC1		168
+-#define IMX6SX_CLK_LCDIF_APB		169
+-#define IMX6SX_CLK_PXP_AXI		170
+-#define IMX6SX_CLK_M4			171
+-#define IMX6SX_CLK_ENET			172
+-#define IMX6SX_CLK_DISPLAY_AXI		173
+-#define IMX6SX_CLK_LCDIF2_PIX		174
+-#define IMX6SX_CLK_LCDIF1_PIX		175
+-#define IMX6SX_CLK_LDB_DI0		176
+-#define IMX6SX_CLK_QSPI1		177
+-#define IMX6SX_CLK_MLB			178
+-#define IMX6SX_CLK_MMDC_P0_FAST		179
+-#define IMX6SX_CLK_MMDC_P0_IPG		180
+-#define IMX6SX_CLK_AXI			181
+-#define IMX6SX_CLK_PCIE_AXI		182
+-#define IMX6SX_CLK_QSPI2		183
+-#define IMX6SX_CLK_PER1_BCH		184
+-#define IMX6SX_CLK_PER2_MAIN		185
+-#define IMX6SX_CLK_PWM1			186
+-#define IMX6SX_CLK_PWM2			187
+-#define IMX6SX_CLK_PWM3			188
+-#define IMX6SX_CLK_PWM4			189
+-#define IMX6SX_CLK_GPMI_BCH_APB		190
+-#define IMX6SX_CLK_GPMI_BCH		191
+-#define IMX6SX_CLK_GPMI_IO		192
+-#define IMX6SX_CLK_GPMI_APB		193
+-#define IMX6SX_CLK_ROM			194
+-#define IMX6SX_CLK_SDMA			195
+-#define IMX6SX_CLK_SPBA			196
+-#define IMX6SX_CLK_SPDIF		197
+-#define IMX6SX_CLK_SSI1_IPG		198
+-#define IMX6SX_CLK_SSI2_IPG		199
+-#define IMX6SX_CLK_SSI3_IPG		200
+-#define IMX6SX_CLK_SSI1			201
+-#define IMX6SX_CLK_SSI2			202
+-#define IMX6SX_CLK_SSI3			203
+-#define IMX6SX_CLK_UART_IPG		204
+-#define IMX6SX_CLK_UART_SERIAL		205
+-#define IMX6SX_CLK_SAI1			206
+-#define IMX6SX_CLK_SAI2			207
+-#define IMX6SX_CLK_USBOH3		208
+-#define IMX6SX_CLK_USDHC1		209
+-#define IMX6SX_CLK_USDHC2		210
+-#define IMX6SX_CLK_USDHC3		211
+-#define IMX6SX_CLK_USDHC4		212
+-#define IMX6SX_CLK_EIM_SLOW		213
+-#define IMX6SX_CLK_PWM8			214
+-#define IMX6SX_CLK_VADC			215
+-#define IMX6SX_CLK_GIS			216
+-#define IMX6SX_CLK_I2C4			217
+-#define IMX6SX_CLK_PWM5			218
+-#define IMX6SX_CLK_PWM6			219
+-#define IMX6SX_CLK_PWM7			220
+-#define IMX6SX_CLK_CKO1			221
+-#define IMX6SX_CLK_CKO2			222
+-#define IMX6SX_CLK_IPP_DI0		223
+-#define IMX6SX_CLK_IPP_DI1		224
+-#define IMX6SX_CLK_ENET_AHB		225
+-#define IMX6SX_CLK_OCRAM_PODF		226
+-#define IMX6SX_CLK_GPT_3M		227
+-#define IMX6SX_CLK_ENET_PTP		228
+-#define IMX6SX_CLK_ENET_PTP_REF		229
+-#define IMX6SX_CLK_ENET2_REF		230
+-#define IMX6SX_CLK_ENET2_REF_125M	231
+-#define IMX6SX_CLK_AUDIO		232
+-#define IMX6SX_CLK_LVDS1_SEL		233
+-#define IMX6SX_CLK_LVDS1_OUT		234
+-#define IMX6SX_CLK_ASRC_IPG		235
+-#define IMX6SX_CLK_ASRC_MEM		236
+-#define IMX6SX_CLK_SAI1_IPG		237
+-#define IMX6SX_CLK_SAI2_IPG		238
+-#define IMX6SX_CLK_ESAI_IPG		239
+-#define IMX6SX_CLK_ESAI_MEM		240
+-#define IMX6SX_CLK_LVDS1_IN		241
+-#define IMX6SX_CLK_ANACLK1		242
+-#define IMX6SX_PLL1_BYPASS_SRC		243
+-#define IMX6SX_PLL2_BYPASS_SRC		244
+-#define IMX6SX_PLL3_BYPASS_SRC		245
+-#define IMX6SX_PLL4_BYPASS_SRC		246
+-#define IMX6SX_PLL5_BYPASS_SRC		247
+-#define IMX6SX_PLL6_BYPASS_SRC		248
+-#define IMX6SX_PLL7_BYPASS_SRC		249
+-#define IMX6SX_CLK_PLL1			250
+-#define IMX6SX_CLK_PLL2			251
+-#define IMX6SX_CLK_PLL3			252
+-#define IMX6SX_CLK_PLL4			253
+-#define IMX6SX_CLK_PLL5			254
+-#define IMX6SX_CLK_PLL6			255
+-#define IMX6SX_CLK_PLL7			256
+-#define IMX6SX_PLL1_BYPASS		257
+-#define IMX6SX_PLL2_BYPASS		258
+-#define IMX6SX_PLL3_BYPASS		259
+-#define IMX6SX_PLL4_BYPASS		260
+-#define IMX6SX_PLL5_BYPASS		261
+-#define IMX6SX_PLL6_BYPASS		262
+-#define IMX6SX_PLL7_BYPASS		263
+-#define IMX6SX_CLK_SPDIF_GCLK		264
+-#define IMX6SX_CLK_LVDS2_SEL		265
+-#define IMX6SX_CLK_LVDS2_OUT		266
+-#define IMX6SX_CLK_LVDS2_IN		267
+-#define IMX6SX_CLK_ANACLK2		268
+-#define IMX6SX_CLK_MMDC_P1_IPG		269
+-#define IMX6SX_CLK_CLK_END		270
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX6SX_H */
+diff --git a/include/dt-bindings/clock/imx6ul-clock.h b/include/dt-bindings/clock/imx6ul-clock.h
+deleted file mode 100644
+index 79094338e6f1..000000000000
+--- a/include/dt-bindings/clock/imx6ul-clock.h
++++ /dev/null
+@@ -1,262 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright (C) 2015 Freescale Semiconductor, Inc.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX6UL_H
+-#define __DT_BINDINGS_CLOCK_IMX6UL_H
+-
+-#define IMX6UL_CLK_DUMMY		0
+-#define IMX6UL_CLK_CKIL			1
+-#define IMX6UL_CLK_CKIH			2
+-#define IMX6UL_CLK_OSC			3
+-#define IMX6UL_PLL1_BYPASS_SRC		4
+-#define IMX6UL_PLL2_BYPASS_SRC		5
+-#define IMX6UL_PLL3_BYPASS_SRC		6
+-#define IMX6UL_PLL4_BYPASS_SRC		7
+-#define IMX6UL_PLL5_BYPASS_SRC		8
+-#define IMX6UL_PLL6_BYPASS_SRC		9
+-#define IMX6UL_PLL7_BYPASS_SRC		10
+-#define IMX6UL_CLK_PLL1			11
+-#define IMX6UL_CLK_PLL2			12
+-#define IMX6UL_CLK_PLL3			13
+-#define IMX6UL_CLK_PLL4			14
+-#define IMX6UL_CLK_PLL5			15
+-#define IMX6UL_CLK_PLL6			16
+-#define IMX6UL_CLK_PLL7			17
+-#define IMX6UL_PLL1_BYPASS		18
+-#define IMX6UL_PLL2_BYPASS		19
+-#define IMX6UL_PLL3_BYPASS		20
+-#define IMX6UL_PLL4_BYPASS		21
+-#define IMX6UL_PLL5_BYPASS		22
+-#define IMX6UL_PLL6_BYPASS		23
+-#define IMX6UL_PLL7_BYPASS		24
+-#define IMX6UL_CLK_PLL1_SYS		25
+-#define IMX6UL_CLK_PLL2_BUS		26
+-#define IMX6UL_CLK_PLL3_USB_OTG		27
+-#define IMX6UL_CLK_PLL4_AUDIO		28
+-#define IMX6UL_CLK_PLL5_VIDEO		29
+-#define IMX6UL_CLK_PLL6_ENET		30
+-#define IMX6UL_CLK_PLL7_USB_HOST	31
+-#define IMX6UL_CLK_USBPHY1		32
+-#define IMX6UL_CLK_USBPHY2		33
+-#define IMX6UL_CLK_USBPHY1_GATE		34
+-#define IMX6UL_CLK_USBPHY2_GATE		35
+-#define IMX6UL_CLK_PLL2_PFD0		36
+-#define IMX6UL_CLK_PLL2_PFD1		37
+-#define IMX6UL_CLK_PLL2_PFD2		38
+-#define IMX6UL_CLK_PLL2_PFD3		39
+-#define IMX6UL_CLK_PLL3_PFD0		40
+-#define IMX6UL_CLK_PLL3_PFD1		41
+-#define IMX6UL_CLK_PLL3_PFD2		42
+-#define IMX6UL_CLK_PLL3_PFD3		43
+-#define IMX6UL_CLK_ENET_REF		44
+-#define IMX6UL_CLK_ENET2_REF		45
+-#define IMX6UL_CLK_ENET2_REF_125M	46
+-#define IMX6UL_CLK_ENET_PTP_REF		47
+-#define IMX6UL_CLK_ENET_PTP		48
+-#define IMX6UL_CLK_PLL4_POST_DIV	49
+-#define IMX6UL_CLK_PLL4_AUDIO_DIV	50
+-#define IMX6UL_CLK_PLL5_POST_DIV	51
+-#define IMX6UL_CLK_PLL5_VIDEO_DIV	52
+-#define IMX6UL_CLK_PLL2_198M		53
+-#define IMX6UL_CLK_PLL3_80M		54
+-#define IMX6UL_CLK_PLL3_60M		55
+-#define IMX6UL_CLK_STEP			56
+-#define IMX6UL_CLK_PLL1_SW		57
+-#define IMX6UL_CLK_AXI_ALT_SEL		58
+-#define IMX6UL_CLK_AXI_SEL		59
+-#define IMX6UL_CLK_PERIPH_PRE		60
+-#define IMX6UL_CLK_PERIPH2_PRE		61
+-#define IMX6UL_CLK_PERIPH_CLK2_SEL	62
+-#define IMX6UL_CLK_PERIPH2_CLK2_SEL	63
+-#define IMX6UL_CLK_USDHC1_SEL		64
+-#define IMX6UL_CLK_USDHC2_SEL		65
+-#define IMX6UL_CLK_BCH_SEL		66
+-#define IMX6UL_CLK_GPMI_SEL		67
+-#define IMX6UL_CLK_EIM_SLOW_SEL		68
+-#define IMX6UL_CLK_SPDIF_SEL		69
+-#define IMX6UL_CLK_SAI1_SEL		70
+-#define IMX6UL_CLK_SAI2_SEL		71
+-#define IMX6UL_CLK_SAI3_SEL		72
+-#define IMX6UL_CLK_LCDIF_PRE_SEL	73
+-#define IMX6UL_CLK_SIM_PRE_SEL		74
+-#define IMX6UL_CLK_LDB_DI0_SEL		75
+-#define IMX6UL_CLK_LDB_DI1_SEL		76
+-#define IMX6UL_CLK_ENFC_SEL		77
+-#define IMX6UL_CLK_CAN_SEL		78
+-#define IMX6UL_CLK_ECSPI_SEL		79
+-#define IMX6UL_CLK_UART_SEL		80
+-#define IMX6UL_CLK_QSPI1_SEL		81
+-#define IMX6UL_CLK_PERCLK_SEL		82
+-#define IMX6UL_CLK_LCDIF_SEL		83
+-#define IMX6UL_CLK_SIM_SEL		84
+-#define IMX6UL_CLK_PERIPH		85
+-#define IMX6UL_CLK_PERIPH2		86
+-#define IMX6UL_CLK_LDB_DI0_DIV_3_5	87
+-#define IMX6UL_CLK_LDB_DI0_DIV_7	88
+-#define IMX6UL_CLK_LDB_DI1_DIV_3_5	89
+-#define IMX6UL_CLK_LDB_DI1_DIV_7	90
+-#define IMX6UL_CLK_LDB_DI0_DIV_SEL	91
+-#define IMX6UL_CLK_LDB_DI1_DIV_SEL	92
+-#define IMX6UL_CLK_ARM			93
+-#define IMX6UL_CLK_PERIPH_CLK2		94
+-#define IMX6UL_CLK_PERIPH2_CLK2		95
+-#define IMX6UL_CLK_AHB			96
+-#define IMX6UL_CLK_MMDC_PODF		97
+-#define IMX6UL_CLK_AXI_PODF		98
+-#define IMX6UL_CLK_PERCLK		99
+-#define IMX6UL_CLK_IPG			100
+-#define IMX6UL_CLK_USDHC1_PODF		101
+-#define IMX6UL_CLK_USDHC2_PODF		102
+-#define IMX6UL_CLK_BCH_PODF		103
+-#define IMX6UL_CLK_GPMI_PODF		104
+-#define IMX6UL_CLK_EIM_SLOW_PODF	105
+-#define IMX6UL_CLK_SPDIF_PRED		106
+-#define IMX6UL_CLK_SPDIF_PODF		107
+-#define IMX6UL_CLK_SAI1_PRED		108
+-#define IMX6UL_CLK_SAI1_PODF		109
+-#define IMX6UL_CLK_SAI2_PRED		110
+-#define IMX6UL_CLK_SAI2_PODF		111
+-#define IMX6UL_CLK_SAI3_PRED		112
+-#define IMX6UL_CLK_SAI3_PODF		113
+-#define IMX6UL_CLK_LCDIF_PRED		114
+-#define IMX6UL_CLK_LCDIF_PODF		115
+-#define IMX6UL_CLK_SIM_PODF		116
+-#define IMX6UL_CLK_QSPI1_PDOF		117
+-#define IMX6UL_CLK_ENFC_PRED		118
+-#define IMX6UL_CLK_ENFC_PODF		119
+-#define IMX6UL_CLK_CAN_PODF		120
+-#define IMX6UL_CLK_ECSPI_PODF		121
+-#define IMX6UL_CLK_UART_PODF		122
+-#define IMX6UL_CLK_ADC1			123
+-#define IMX6UL_CLK_ADC2			124
+-#define IMX6UL_CLK_AIPSTZ1		125
+-#define IMX6UL_CLK_AIPSTZ2		126
+-#define IMX6UL_CLK_AIPSTZ3		127
+-#define IMX6UL_CLK_APBHDMA		128
+-#define IMX6UL_CLK_ASRC_IPG		129
+-#define IMX6UL_CLK_ASRC_MEM		130
+-#define IMX6UL_CLK_GPMI_BCH_APB		131
+-#define IMX6UL_CLK_GPMI_BCH		132
+-#define IMX6UL_CLK_GPMI_IO		133
+-#define IMX6UL_CLK_GPMI_APB		134
+-#define IMX6UL_CLK_CAAM_MEM		135
+-#define IMX6UL_CLK_CAAM_ACLK		136
+-#define IMX6UL_CLK_CAAM_IPG		137
+-#define IMX6UL_CLK_CSI			138
+-#define IMX6UL_CLK_ECSPI1		139
+-#define IMX6UL_CLK_ECSPI2		140
+-#define IMX6UL_CLK_ECSPI3		141
+-#define IMX6UL_CLK_ECSPI4		142
+-#define IMX6UL_CLK_EIM			143
+-#define IMX6UL_CLK_ENET			144
+-#define IMX6UL_CLK_ENET_AHB		145
+-#define IMX6UL_CLK_EPIT1		146
+-#define IMX6UL_CLK_EPIT2		147
+-#define IMX6UL_CLK_CAN1_IPG		148
+-#define IMX6UL_CLK_CAN1_SERIAL		149
+-#define IMX6UL_CLK_CAN2_IPG		150
+-#define IMX6UL_CLK_CAN2_SERIAL		151
+-#define IMX6UL_CLK_GPT1_BUS		152
+-#define IMX6UL_CLK_GPT1_SERIAL		153
+-#define IMX6UL_CLK_GPT2_BUS		154
+-#define IMX6UL_CLK_GPT2_SERIAL		155
+-#define IMX6UL_CLK_I2C1			156
+-#define IMX6UL_CLK_I2C2			157
+-#define IMX6UL_CLK_I2C3			158
+-#define IMX6UL_CLK_I2C4			159
+-#define IMX6UL_CLK_IOMUXC		160
+-#define IMX6UL_CLK_LCDIF_APB		161
+-#define IMX6UL_CLK_LCDIF_PIX		162
+-#define IMX6UL_CLK_MMDC_P0_FAST		163
+-#define IMX6UL_CLK_MMDC_P0_IPG		164
+-#define IMX6UL_CLK_OCOTP		165
+-#define IMX6UL_CLK_OCRAM		166
+-#define IMX6UL_CLK_PWM1			167
+-#define IMX6UL_CLK_PWM2			168
+-#define IMX6UL_CLK_PWM3			169
+-#define IMX6UL_CLK_PWM4			170
+-#define IMX6UL_CLK_PWM5			171
+-#define IMX6UL_CLK_PWM6			172
+-#define IMX6UL_CLK_PWM7			173
+-#define IMX6UL_CLK_PWM8			174
+-#define IMX6UL_CLK_PXP			175
+-#define IMX6UL_CLK_QSPI			176
+-#define IMX6UL_CLK_ROM			177
+-#define IMX6UL_CLK_SAI1			178
+-#define IMX6UL_CLK_SAI1_IPG		179
+-#define IMX6UL_CLK_SAI2			180
+-#define IMX6UL_CLK_SAI2_IPG		181
+-#define IMX6UL_CLK_SAI3			182
+-#define IMX6UL_CLK_SAI3_IPG		183
+-#define IMX6UL_CLK_SDMA			184
+-#define IMX6UL_CLK_SIM			185
+-#define IMX6UL_CLK_SIM_S		186
+-#define IMX6UL_CLK_SPBA			187
+-#define IMX6UL_CLK_SPDIF		188
+-#define IMX6UL_CLK_UART1_IPG		189
+-#define IMX6UL_CLK_UART1_SERIAL		190
+-#define IMX6UL_CLK_UART2_IPG		191
+-#define IMX6UL_CLK_UART2_SERIAL		192
+-#define IMX6UL_CLK_UART3_IPG		193
+-#define IMX6UL_CLK_UART3_SERIAL		194
+-#define IMX6UL_CLK_UART4_IPG		195
+-#define IMX6UL_CLK_UART4_SERIAL		196
+-#define IMX6UL_CLK_UART5_IPG		197
+-#define IMX6UL_CLK_UART5_SERIAL		198
+-#define IMX6UL_CLK_UART6_IPG		199
+-#define IMX6UL_CLK_UART6_SERIAL		200
+-#define IMX6UL_CLK_UART7_IPG		201
+-#define IMX6UL_CLK_UART7_SERIAL		202
+-#define IMX6UL_CLK_UART8_IPG		203
+-#define IMX6UL_CLK_UART8_SERIAL		204
+-#define IMX6UL_CLK_USBOH3		205
+-#define IMX6UL_CLK_USDHC1		206
+-#define IMX6UL_CLK_USDHC2		207
+-#define IMX6UL_CLK_WDOG1		208
+-#define IMX6UL_CLK_WDOG2		209
+-#define IMX6UL_CLK_WDOG3		210
+-#define IMX6UL_CLK_LDB_DI0		211
+-#define IMX6UL_CLK_AXI			212
+-#define IMX6UL_CLK_SPDIF_GCLK		213
+-#define IMX6UL_CLK_GPT_3M		214
+-#define IMX6UL_CLK_SIM2			215
+-#define IMX6UL_CLK_SIM1			216
+-#define IMX6UL_CLK_IPP_DI0		217
+-#define IMX6UL_CLK_IPP_DI1		218
+-#define IMX6UL_CA7_SECONDARY_SEL	219
+-#define IMX6UL_CLK_PER_BCH		220
+-#define IMX6UL_CLK_CSI_SEL		221
+-#define IMX6UL_CLK_CSI_PODF		222
+-#define IMX6UL_CLK_PLL3_120M		223
+-#define IMX6UL_CLK_KPP			224
+-#define IMX6ULL_CLK_ESAI_PRED		225
+-#define IMX6ULL_CLK_ESAI_PODF		226
+-#define IMX6ULL_CLK_ESAI_EXTAL		227
+-#define IMX6ULL_CLK_ESAI_MEM		228
+-#define IMX6ULL_CLK_ESAI_IPG		229
+-#define IMX6ULL_CLK_DCP_CLK		230
+-#define IMX6ULL_CLK_EPDC_PRE_SEL	231
+-#define IMX6ULL_CLK_EPDC_SEL		232
+-#define IMX6ULL_CLK_EPDC_PODF		233
+-#define IMX6ULL_CLK_EPDC_ACLK		234
+-#define IMX6ULL_CLK_EPDC_PIX		235
+-#define IMX6ULL_CLK_ESAI_SEL		236
+-#define IMX6UL_CLK_CKO1_SEL		237
+-#define IMX6UL_CLK_CKO1_PODF		238
+-#define IMX6UL_CLK_CKO1			239
+-#define IMX6UL_CLK_CKO2_SEL		240
+-#define IMX6UL_CLK_CKO2_PODF		241
+-#define IMX6UL_CLK_CKO2			242
+-#define IMX6UL_CLK_CKO			243
+-#define IMX6UL_CLK_GPIO1		244
+-#define IMX6UL_CLK_GPIO2		245
+-#define IMX6UL_CLK_GPIO3		246
+-#define IMX6UL_CLK_GPIO4		247
+-#define IMX6UL_CLK_GPIO5		248
+-#define IMX6UL_CLK_MMDC_P1_IPG		249
+-
+-#define IMX6UL_CLK_END			250
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX6UL_H */
+diff --git a/include/dt-bindings/clock/imx7d-clock.h b/include/dt-bindings/clock/imx7d-clock.h
+deleted file mode 100644
+index 1d4c0dfe0202..000000000000
+--- a/include/dt-bindings/clock/imx7d-clock.h
++++ /dev/null
+@@ -1,456 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-only */
+-/*
+- * Copyright (C) 2014-2015 Freescale Semiconductor, Inc.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX7D_H
+-#define __DT_BINDINGS_CLOCK_IMX7D_H
+-
+-#define IMX7D_OSC_24M_CLK		0
+-#define IMX7D_PLL_ARM_MAIN		1
+-#define IMX7D_PLL_ARM_MAIN_CLK		2
+-#define IMX7D_PLL_ARM_MAIN_SRC		3
+-#define IMX7D_PLL_ARM_MAIN_BYPASS	4
+-#define IMX7D_PLL_SYS_MAIN		5
+-#define IMX7D_PLL_SYS_MAIN_CLK		6
+-#define IMX7D_PLL_SYS_MAIN_SRC		7
+-#define IMX7D_PLL_SYS_MAIN_BYPASS	8
+-#define IMX7D_PLL_SYS_MAIN_480M		9
+-#define IMX7D_PLL_SYS_MAIN_240M		10
+-#define IMX7D_PLL_SYS_MAIN_120M		11
+-#define IMX7D_PLL_SYS_MAIN_480M_CLK	12
+-#define IMX7D_PLL_SYS_MAIN_240M_CLK	13
+-#define IMX7D_PLL_SYS_MAIN_120M_CLK	14
+-#define IMX7D_PLL_SYS_PFD0_392M_CLK	15
+-#define IMX7D_PLL_SYS_PFD0_196M		16
+-#define IMX7D_PLL_SYS_PFD0_196M_CLK	17
+-#define IMX7D_PLL_SYS_PFD1_332M_CLK	18
+-#define IMX7D_PLL_SYS_PFD1_166M		19
+-#define IMX7D_PLL_SYS_PFD1_166M_CLK	20
+-#define IMX7D_PLL_SYS_PFD2_270M_CLK	21
+-#define IMX7D_PLL_SYS_PFD2_135M		22
+-#define IMX7D_PLL_SYS_PFD2_135M_CLK	23
+-#define IMX7D_PLL_SYS_PFD3_CLK		24
+-#define IMX7D_PLL_SYS_PFD4_CLK		25
+-#define IMX7D_PLL_SYS_PFD5_CLK		26
+-#define IMX7D_PLL_SYS_PFD6_CLK		27
+-#define IMX7D_PLL_SYS_PFD7_CLK		28
+-#define IMX7D_PLL_ENET_MAIN		29
+-#define IMX7D_PLL_ENET_MAIN_CLK		30
+-#define IMX7D_PLL_ENET_MAIN_SRC		31
+-#define IMX7D_PLL_ENET_MAIN_BYPASS	32
+-#define IMX7D_PLL_ENET_MAIN_500M	33
+-#define IMX7D_PLL_ENET_MAIN_250M	34
+-#define IMX7D_PLL_ENET_MAIN_125M	35
+-#define IMX7D_PLL_ENET_MAIN_100M	36
+-#define IMX7D_PLL_ENET_MAIN_50M		37
+-#define IMX7D_PLL_ENET_MAIN_40M		38
+-#define IMX7D_PLL_ENET_MAIN_25M		39
+-#define IMX7D_PLL_ENET_MAIN_500M_CLK	40
+-#define IMX7D_PLL_ENET_MAIN_250M_CLK	41
+-#define IMX7D_PLL_ENET_MAIN_125M_CLK	42
+-#define IMX7D_PLL_ENET_MAIN_100M_CLK	43
+-#define IMX7D_PLL_ENET_MAIN_50M_CLK	44
+-#define IMX7D_PLL_ENET_MAIN_40M_CLK	45
+-#define IMX7D_PLL_ENET_MAIN_25M_CLK	46
+-#define IMX7D_PLL_DRAM_MAIN		47
+-#define IMX7D_PLL_DRAM_MAIN_CLK		48
+-#define IMX7D_PLL_DRAM_MAIN_SRC		49
+-#define IMX7D_PLL_DRAM_MAIN_BYPASS	50
+-#define IMX7D_PLL_DRAM_MAIN_533M	51
+-#define IMX7D_PLL_DRAM_MAIN_533M_CLK	52
+-#define IMX7D_PLL_AUDIO_MAIN		53
+-#define IMX7D_PLL_AUDIO_MAIN_CLK	54
+-#define IMX7D_PLL_AUDIO_MAIN_SRC	55
+-#define IMX7D_PLL_AUDIO_MAIN_BYPASS	56
+-#define IMX7D_PLL_VIDEO_MAIN_CLK	57
+-#define IMX7D_PLL_VIDEO_MAIN		58
+-#define IMX7D_PLL_VIDEO_MAIN_SRC	59
+-#define IMX7D_PLL_VIDEO_MAIN_BYPASS	60
+-#define IMX7D_USB_MAIN_480M_CLK		61
+-#define IMX7D_ARM_A7_ROOT_CLK		62
+-#define IMX7D_ARM_A7_ROOT_SRC		63
+-#define IMX7D_ARM_A7_ROOT_CG		64
+-#define IMX7D_ARM_A7_ROOT_DIV		65
+-#define IMX7D_ARM_M4_ROOT_CLK		66
+-#define IMX7D_ARM_M4_ROOT_SRC		67
+-#define IMX7D_ARM_M4_ROOT_CG		68
+-#define IMX7D_ARM_M4_ROOT_DIV		69
+-#define IMX7D_ARM_M0_ROOT_CLK		70	/* unused */
+-#define IMX7D_ARM_M0_ROOT_SRC		71	/* unused */
+-#define IMX7D_ARM_M0_ROOT_CG		72	/* unused */
+-#define IMX7D_ARM_M0_ROOT_DIV		73	/* unused */
+-#define IMX7D_MAIN_AXI_ROOT_CLK		74
+-#define IMX7D_MAIN_AXI_ROOT_SRC		75
+-#define IMX7D_MAIN_AXI_ROOT_CG		76
+-#define IMX7D_MAIN_AXI_ROOT_DIV		77
+-#define IMX7D_DISP_AXI_ROOT_CLK		78
+-#define IMX7D_DISP_AXI_ROOT_SRC		79
+-#define IMX7D_DISP_AXI_ROOT_CG		80
+-#define IMX7D_DISP_AXI_ROOT_DIV		81
+-#define IMX7D_ENET_AXI_ROOT_CLK		82
+-#define IMX7D_ENET_AXI_ROOT_SRC		83
+-#define IMX7D_ENET_AXI_ROOT_CG		84
+-#define IMX7D_ENET_AXI_ROOT_DIV		85
+-#define IMX7D_NAND_USDHC_BUS_ROOT_CLK	86
+-#define IMX7D_NAND_USDHC_BUS_ROOT_SRC	87
+-#define IMX7D_NAND_USDHC_BUS_ROOT_CG	88
+-#define IMX7D_NAND_USDHC_BUS_ROOT_DIV	89
+-#define IMX7D_AHB_CHANNEL_ROOT_CLK	90
+-#define IMX7D_AHB_CHANNEL_ROOT_SRC	91
+-#define IMX7D_AHB_CHANNEL_ROOT_CG	92
+-#define IMX7D_AHB_CHANNEL_ROOT_DIV	93
+-#define IMX7D_DRAM_PHYM_ROOT_CLK	94
+-#define IMX7D_DRAM_PHYM_ROOT_SRC	95
+-#define IMX7D_DRAM_PHYM_ROOT_CG		96
+-#define IMX7D_DRAM_PHYM_ROOT_DIV	97
+-#define IMX7D_DRAM_ROOT_CLK		98
+-#define IMX7D_DRAM_ROOT_SRC		99
+-#define IMX7D_DRAM_ROOT_CG		100
+-#define IMX7D_DRAM_ROOT_DIV		101
+-#define IMX7D_DRAM_PHYM_ALT_ROOT_CLK	102
+-#define IMX7D_DRAM_PHYM_ALT_ROOT_SRC	103
+-#define IMX7D_DRAM_PHYM_ALT_ROOT_CG	104
+-#define IMX7D_DRAM_PHYM_ALT_ROOT_DIV	105
+-#define IMX7D_DRAM_ALT_ROOT_CLK		106
+-#define IMX7D_DRAM_ALT_ROOT_SRC		107
+-#define IMX7D_DRAM_ALT_ROOT_CG		108
+-#define IMX7D_DRAM_ALT_ROOT_DIV		109
+-#define IMX7D_USB_HSIC_ROOT_CLK		110
+-#define IMX7D_USB_HSIC_ROOT_SRC		111
+-#define IMX7D_USB_HSIC_ROOT_CG		112
+-#define IMX7D_USB_HSIC_ROOT_DIV		113
+-#define IMX7D_PCIE_CTRL_ROOT_CLK	114
+-#define IMX7D_PCIE_CTRL_ROOT_SRC	115
+-#define IMX7D_PCIE_CTRL_ROOT_CG		116
+-#define IMX7D_PCIE_CTRL_ROOT_DIV	117
+-#define IMX7D_PCIE_PHY_ROOT_CLK		118
+-#define IMX7D_PCIE_PHY_ROOT_SRC		119
+-#define IMX7D_PCIE_PHY_ROOT_CG		120
+-#define IMX7D_PCIE_PHY_ROOT_DIV		121
+-#define IMX7D_EPDC_PIXEL_ROOT_CLK	122
+-#define IMX7D_EPDC_PIXEL_ROOT_SRC	123
+-#define IMX7D_EPDC_PIXEL_ROOT_CG	124
+-#define IMX7D_EPDC_PIXEL_ROOT_DIV	125
+-#define IMX7D_LCDIF_PIXEL_ROOT_CLK	126
+-#define IMX7D_LCDIF_PIXEL_ROOT_SRC	127
+-#define IMX7D_LCDIF_PIXEL_ROOT_CG	128
+-#define IMX7D_LCDIF_PIXEL_ROOT_DIV	129
+-#define IMX7D_MIPI_DSI_ROOT_CLK		130
+-#define IMX7D_MIPI_DSI_ROOT_SRC		131
+-#define IMX7D_MIPI_DSI_ROOT_CG		132
+-#define IMX7D_MIPI_DSI_ROOT_DIV		133
+-#define IMX7D_MIPI_CSI_ROOT_CLK		134
+-#define IMX7D_MIPI_CSI_ROOT_SRC		135
+-#define IMX7D_MIPI_CSI_ROOT_CG		136
+-#define IMX7D_MIPI_CSI_ROOT_DIV		137
+-#define IMX7D_MIPI_DPHY_ROOT_CLK	138
+-#define IMX7D_MIPI_DPHY_ROOT_SRC	139
+-#define IMX7D_MIPI_DPHY_ROOT_CG		140
+-#define IMX7D_MIPI_DPHY_ROOT_DIV	141
+-#define IMX7D_SAI1_ROOT_CLK		142
+-#define IMX7D_SAI1_ROOT_SRC		143
+-#define IMX7D_SAI1_ROOT_CG		144
+-#define IMX7D_SAI1_ROOT_DIV		145
+-#define IMX7D_SAI2_ROOT_CLK		146
+-#define IMX7D_SAI2_ROOT_SRC		147
+-#define IMX7D_SAI2_ROOT_CG		148
+-#define IMX7D_SAI2_ROOT_DIV		149
+-#define IMX7D_SAI3_ROOT_CLK		150
+-#define IMX7D_SAI3_ROOT_SRC		151
+-#define IMX7D_SAI3_ROOT_CG		152
+-#define IMX7D_SAI3_ROOT_DIV		153
+-#define IMX7D_SPDIF_ROOT_CLK		154
+-#define IMX7D_SPDIF_ROOT_SRC		155
+-#define IMX7D_SPDIF_ROOT_CG		156
+-#define IMX7D_SPDIF_ROOT_DIV		157
+-#define IMX7D_ENET1_IPG_ROOT_CLK        158
+-#define IMX7D_ENET1_REF_ROOT_SRC	159
+-#define IMX7D_ENET1_REF_ROOT_CG		160
+-#define IMX7D_ENET1_REF_ROOT_DIV	161
+-#define IMX7D_ENET1_TIME_ROOT_CLK	162
+-#define IMX7D_ENET1_TIME_ROOT_SRC	163
+-#define IMX7D_ENET1_TIME_ROOT_CG	164
+-#define IMX7D_ENET1_TIME_ROOT_DIV	165
+-#define IMX7D_ENET2_IPG_ROOT_CLK        166
+-#define IMX7D_ENET2_REF_ROOT_SRC	167
+-#define IMX7D_ENET2_REF_ROOT_CG		168
+-#define IMX7D_ENET2_REF_ROOT_DIV	169
+-#define IMX7D_ENET2_TIME_ROOT_CLK	170
+-#define IMX7D_ENET2_TIME_ROOT_SRC	171
+-#define IMX7D_ENET2_TIME_ROOT_CG	172
+-#define IMX7D_ENET2_TIME_ROOT_DIV	173
+-#define IMX7D_ENET_PHY_REF_ROOT_CLK	174
+-#define IMX7D_ENET_PHY_REF_ROOT_SRC	175
+-#define IMX7D_ENET_PHY_REF_ROOT_CG	176
+-#define IMX7D_ENET_PHY_REF_ROOT_DIV	177
+-#define IMX7D_EIM_ROOT_CLK		178
+-#define IMX7D_EIM_ROOT_SRC		179
+-#define IMX7D_EIM_ROOT_CG		180
+-#define IMX7D_EIM_ROOT_DIV		181
+-#define IMX7D_NAND_ROOT_CLK		182
+-#define IMX7D_NAND_ROOT_SRC		183
+-#define IMX7D_NAND_ROOT_CG		184
+-#define IMX7D_NAND_ROOT_DIV		185
+-#define IMX7D_QSPI_ROOT_CLK		186
+-#define IMX7D_QSPI_ROOT_SRC		187
+-#define IMX7D_QSPI_ROOT_CG		188
+-#define IMX7D_QSPI_ROOT_DIV		189
+-#define IMX7D_USDHC1_ROOT_CLK		190
+-#define IMX7D_USDHC1_ROOT_SRC		191
+-#define IMX7D_USDHC1_ROOT_CG		192
+-#define IMX7D_USDHC1_ROOT_DIV		193
+-#define IMX7D_USDHC2_ROOT_CLK		194
+-#define IMX7D_USDHC2_ROOT_SRC		195
+-#define IMX7D_USDHC2_ROOT_CG		196
+-#define IMX7D_USDHC2_ROOT_DIV		197
+-#define IMX7D_USDHC3_ROOT_CLK		198
+-#define IMX7D_USDHC3_ROOT_SRC		199
+-#define IMX7D_USDHC3_ROOT_CG		200
+-#define IMX7D_USDHC3_ROOT_DIV		201
+-#define IMX7D_CAN1_ROOT_CLK		202
+-#define IMX7D_CAN1_ROOT_SRC		203
+-#define IMX7D_CAN1_ROOT_CG		204
+-#define IMX7D_CAN1_ROOT_DIV		205
+-#define IMX7D_CAN2_ROOT_CLK		206
+-#define IMX7D_CAN2_ROOT_SRC		207
+-#define IMX7D_CAN2_ROOT_CG		208
+-#define IMX7D_CAN2_ROOT_DIV		209
+-#define IMX7D_I2C1_ROOT_CLK		210
+-#define IMX7D_I2C1_ROOT_SRC		211
+-#define IMX7D_I2C1_ROOT_CG		212
+-#define IMX7D_I2C1_ROOT_DIV		213
+-#define IMX7D_I2C2_ROOT_CLK		214
+-#define IMX7D_I2C2_ROOT_SRC		215
+-#define IMX7D_I2C2_ROOT_CG		216
+-#define IMX7D_I2C2_ROOT_DIV		217
+-#define IMX7D_I2C3_ROOT_CLK		218
+-#define IMX7D_I2C3_ROOT_SRC		219
+-#define IMX7D_I2C3_ROOT_CG		220
+-#define IMX7D_I2C3_ROOT_DIV		221
+-#define IMX7D_I2C4_ROOT_CLK		222
+-#define IMX7D_I2C4_ROOT_SRC		223
+-#define IMX7D_I2C4_ROOT_CG		224
+-#define IMX7D_I2C4_ROOT_DIV		225
+-#define IMX7D_UART1_ROOT_CLK		226
+-#define IMX7D_UART1_ROOT_SRC		227
+-#define IMX7D_UART1_ROOT_CG		228
+-#define IMX7D_UART1_ROOT_DIV		229
+-#define IMX7D_UART2_ROOT_CLK		230
+-#define IMX7D_UART2_ROOT_SRC		231
+-#define IMX7D_UART2_ROOT_CG		232
+-#define IMX7D_UART2_ROOT_DIV		233
+-#define IMX7D_UART3_ROOT_CLK		234
+-#define IMX7D_UART3_ROOT_SRC		235
+-#define IMX7D_UART3_ROOT_CG		236
+-#define IMX7D_UART3_ROOT_DIV		237
+-#define IMX7D_UART4_ROOT_CLK		238
+-#define IMX7D_UART4_ROOT_SRC		239
+-#define IMX7D_UART4_ROOT_CG		240
+-#define IMX7D_UART4_ROOT_DIV		241
+-#define IMX7D_UART5_ROOT_CLK		242
+-#define IMX7D_UART5_ROOT_SRC		243
+-#define IMX7D_UART5_ROOT_CG		244
+-#define IMX7D_UART5_ROOT_DIV		245
+-#define IMX7D_UART6_ROOT_CLK		246
+-#define IMX7D_UART6_ROOT_SRC		247
+-#define IMX7D_UART6_ROOT_CG		248
+-#define IMX7D_UART6_ROOT_DIV		249
+-#define IMX7D_UART7_ROOT_CLK		250
+-#define IMX7D_UART7_ROOT_SRC		251
+-#define IMX7D_UART7_ROOT_CG		252
+-#define IMX7D_UART7_ROOT_DIV		253
+-#define IMX7D_ECSPI1_ROOT_CLK		254
+-#define IMX7D_ECSPI1_ROOT_SRC		255
+-#define IMX7D_ECSPI1_ROOT_CG		256
+-#define IMX7D_ECSPI1_ROOT_DIV		257
+-#define IMX7D_ECSPI2_ROOT_CLK		258
+-#define IMX7D_ECSPI2_ROOT_SRC		259
+-#define IMX7D_ECSPI2_ROOT_CG		260
+-#define IMX7D_ECSPI2_ROOT_DIV		261
+-#define IMX7D_ECSPI3_ROOT_CLK		262
+-#define IMX7D_ECSPI3_ROOT_SRC		263
+-#define IMX7D_ECSPI3_ROOT_CG		264
+-#define IMX7D_ECSPI3_ROOT_DIV		265
+-#define IMX7D_ECSPI4_ROOT_CLK		266
+-#define IMX7D_ECSPI4_ROOT_SRC		267
+-#define IMX7D_ECSPI4_ROOT_CG		268
+-#define IMX7D_ECSPI4_ROOT_DIV		269
+-#define IMX7D_PWM1_ROOT_CLK		270
+-#define IMX7D_PWM1_ROOT_SRC		271
+-#define IMX7D_PWM1_ROOT_CG		272
+-#define IMX7D_PWM1_ROOT_DIV		273
+-#define IMX7D_PWM2_ROOT_CLK		274
+-#define IMX7D_PWM2_ROOT_SRC		275
+-#define IMX7D_PWM2_ROOT_CG		276
+-#define IMX7D_PWM2_ROOT_DIV		277
+-#define IMX7D_PWM3_ROOT_CLK		278
+-#define IMX7D_PWM3_ROOT_SRC		279
+-#define IMX7D_PWM3_ROOT_CG		280
+-#define IMX7D_PWM3_ROOT_DIV		281
+-#define IMX7D_PWM4_ROOT_CLK		282
+-#define IMX7D_PWM4_ROOT_SRC		283
+-#define IMX7D_PWM4_ROOT_CG		284
+-#define IMX7D_PWM4_ROOT_DIV		285
+-#define IMX7D_FLEXTIMER1_ROOT_CLK	286
+-#define IMX7D_FLEXTIMER1_ROOT_SRC	287
+-#define IMX7D_FLEXTIMER1_ROOT_CG	288
+-#define IMX7D_FLEXTIMER1_ROOT_DIV	289
+-#define IMX7D_FLEXTIMER2_ROOT_CLK	290
+-#define IMX7D_FLEXTIMER2_ROOT_SRC	291
+-#define IMX7D_FLEXTIMER2_ROOT_CG	292
+-#define IMX7D_FLEXTIMER2_ROOT_DIV	293
+-#define IMX7D_SIM1_ROOT_CLK		294
+-#define IMX7D_SIM1_ROOT_SRC		295
+-#define IMX7D_SIM1_ROOT_CG		296
+-#define IMX7D_SIM1_ROOT_DIV		297
+-#define IMX7D_SIM2_ROOT_CLK		298
+-#define IMX7D_SIM2_ROOT_SRC		299
+-#define IMX7D_SIM2_ROOT_CG		300
+-#define IMX7D_SIM2_ROOT_DIV		301
+-#define IMX7D_GPT1_ROOT_CLK		302
+-#define IMX7D_GPT1_ROOT_SRC		303
+-#define IMX7D_GPT1_ROOT_CG		304
+-#define IMX7D_GPT1_ROOT_DIV		305
+-#define IMX7D_GPT2_ROOT_CLK		306
+-#define IMX7D_GPT2_ROOT_SRC		307
+-#define IMX7D_GPT2_ROOT_CG		308
+-#define IMX7D_GPT2_ROOT_DIV		309
+-#define IMX7D_GPT3_ROOT_CLK		310
+-#define IMX7D_GPT3_ROOT_SRC		311
+-#define IMX7D_GPT3_ROOT_CG		312
+-#define IMX7D_GPT3_ROOT_DIV		313
+-#define IMX7D_GPT4_ROOT_CLK		314
+-#define IMX7D_GPT4_ROOT_SRC		315
+-#define IMX7D_GPT4_ROOT_CG		316
+-#define IMX7D_GPT4_ROOT_DIV		317
+-#define IMX7D_TRACE_ROOT_CLK		318
+-#define IMX7D_TRACE_ROOT_SRC		319
+-#define IMX7D_TRACE_ROOT_CG		320
+-#define IMX7D_TRACE_ROOT_DIV		321
+-#define IMX7D_WDOG1_ROOT_CLK		322
+-#define IMX7D_WDOG_ROOT_SRC		323
+-#define IMX7D_WDOG_ROOT_CG		324
+-#define IMX7D_WDOG_ROOT_DIV		325
+-#define IMX7D_CSI_MCLK_ROOT_CLK		326
+-#define IMX7D_CSI_MCLK_ROOT_SRC		327
+-#define IMX7D_CSI_MCLK_ROOT_CG		328
+-#define IMX7D_CSI_MCLK_ROOT_DIV		329
+-#define IMX7D_AUDIO_MCLK_ROOT_CLK	330
+-#define IMX7D_AUDIO_MCLK_ROOT_SRC	331
+-#define IMX7D_AUDIO_MCLK_ROOT_CG	332
+-#define IMX7D_AUDIO_MCLK_ROOT_DIV	333
+-#define IMX7D_WRCLK_ROOT_CLK		334
+-#define IMX7D_WRCLK_ROOT_SRC		335
+-#define IMX7D_WRCLK_ROOT_CG		336
+-#define IMX7D_WRCLK_ROOT_DIV		337
+-#define IMX7D_CLKO1_ROOT_SRC		338
+-#define IMX7D_CLKO1_ROOT_CG		339
+-#define IMX7D_CLKO1_ROOT_DIV		340
+-#define IMX7D_CLKO2_ROOT_SRC		341
+-#define IMX7D_CLKO2_ROOT_CG		342
+-#define IMX7D_CLKO2_ROOT_DIV		343
+-#define IMX7D_MAIN_AXI_ROOT_PRE_DIV	344
+-#define IMX7D_DISP_AXI_ROOT_PRE_DIV	345
+-#define IMX7D_ENET_AXI_ROOT_PRE_DIV	346
+-#define IMX7D_NAND_USDHC_BUS_ROOT_PRE_DIV 347
+-#define IMX7D_AHB_CHANNEL_ROOT_PRE_DIV	348
+-#define IMX7D_USB_HSIC_ROOT_PRE_DIV	349
+-#define IMX7D_PCIE_CTRL_ROOT_PRE_DIV	350
+-#define IMX7D_PCIE_PHY_ROOT_PRE_DIV	351
+-#define IMX7D_EPDC_PIXEL_ROOT_PRE_DIV	352
+-#define IMX7D_LCDIF_PIXEL_ROOT_PRE_DIV	353
+-#define IMX7D_MIPI_DSI_ROOT_PRE_DIV	354
+-#define IMX7D_MIPI_CSI_ROOT_PRE_DIV	355
+-#define IMX7D_MIPI_DPHY_ROOT_PRE_DIV	356
+-#define IMX7D_SAI1_ROOT_PRE_DIV		357
+-#define IMX7D_SAI2_ROOT_PRE_DIV		358
+-#define IMX7D_SAI3_ROOT_PRE_DIV		359
+-#define IMX7D_SPDIF_ROOT_PRE_DIV	360
+-#define IMX7D_ENET1_REF_ROOT_PRE_DIV	361
+-#define IMX7D_ENET1_TIME_ROOT_PRE_DIV	362
+-#define IMX7D_ENET2_REF_ROOT_PRE_DIV	363
+-#define IMX7D_ENET2_TIME_ROOT_PRE_DIV	364
+-#define IMX7D_ENET_PHY_REF_ROOT_PRE_DIV 365
+-#define IMX7D_EIM_ROOT_PRE_DIV		366
+-#define IMX7D_NAND_ROOT_PRE_DIV		367
+-#define IMX7D_QSPI_ROOT_PRE_DIV		368
+-#define IMX7D_USDHC1_ROOT_PRE_DIV	369
+-#define IMX7D_USDHC2_ROOT_PRE_DIV	370
+-#define IMX7D_USDHC3_ROOT_PRE_DIV	371
+-#define IMX7D_CAN1_ROOT_PRE_DIV		372
+-#define IMX7D_CAN2_ROOT_PRE_DIV		373
+-#define IMX7D_I2C1_ROOT_PRE_DIV		374
+-#define IMX7D_I2C2_ROOT_PRE_DIV		375
+-#define IMX7D_I2C3_ROOT_PRE_DIV		376
+-#define IMX7D_I2C4_ROOT_PRE_DIV		377
+-#define IMX7D_UART1_ROOT_PRE_DIV	378
+-#define IMX7D_UART2_ROOT_PRE_DIV	379
+-#define IMX7D_UART3_ROOT_PRE_DIV	380
+-#define IMX7D_UART4_ROOT_PRE_DIV	381
+-#define IMX7D_UART5_ROOT_PRE_DIV	382
+-#define IMX7D_UART6_ROOT_PRE_DIV	383
+-#define IMX7D_UART7_ROOT_PRE_DIV	384
+-#define IMX7D_ECSPI1_ROOT_PRE_DIV	385
+-#define IMX7D_ECSPI2_ROOT_PRE_DIV	386
+-#define IMX7D_ECSPI3_ROOT_PRE_DIV	387
+-#define IMX7D_ECSPI4_ROOT_PRE_DIV	388
+-#define IMX7D_PWM1_ROOT_PRE_DIV		389
+-#define IMX7D_PWM2_ROOT_PRE_DIV		390
+-#define IMX7D_PWM3_ROOT_PRE_DIV		391
+-#define IMX7D_PWM4_ROOT_PRE_DIV		392
+-#define IMX7D_FLEXTIMER1_ROOT_PRE_DIV	393
+-#define IMX7D_FLEXTIMER2_ROOT_PRE_DIV	394
+-#define IMX7D_SIM1_ROOT_PRE_DIV		395
+-#define IMX7D_SIM2_ROOT_PRE_DIV		396
+-#define IMX7D_GPT1_ROOT_PRE_DIV		397
+-#define IMX7D_GPT2_ROOT_PRE_DIV		398
+-#define IMX7D_GPT3_ROOT_PRE_DIV		399
+-#define IMX7D_GPT4_ROOT_PRE_DIV		400
+-#define IMX7D_TRACE_ROOT_PRE_DIV	401
+-#define IMX7D_WDOG_ROOT_PRE_DIV		402
+-#define IMX7D_CSI_MCLK_ROOT_PRE_DIV	403
+-#define IMX7D_AUDIO_MCLK_ROOT_PRE_DIV	404
+-#define IMX7D_WRCLK_ROOT_PRE_DIV	405
+-#define IMX7D_CLKO1_ROOT_PRE_DIV	406
+-#define IMX7D_CLKO2_ROOT_PRE_DIV	407
+-#define IMX7D_DRAM_PHYM_ALT_ROOT_PRE_DIV 408
+-#define IMX7D_DRAM_ALT_ROOT_PRE_DIV	409
+-#define IMX7D_LVDS1_IN_CLK		410
+-#define IMX7D_LVDS1_OUT_SEL		411
+-#define IMX7D_LVDS1_OUT_CLK		412
+-#define IMX7D_CLK_DUMMY			413
+-#define IMX7D_GPT_3M_CLK		414
+-#define IMX7D_OCRAM_CLK			415
+-#define IMX7D_OCRAM_S_CLK		416
+-#define IMX7D_WDOG2_ROOT_CLK		417
+-#define IMX7D_WDOG3_ROOT_CLK		418
+-#define IMX7D_WDOG4_ROOT_CLK		419
+-#define IMX7D_SDMA_CORE_CLK		420
+-#define IMX7D_USB1_MAIN_480M_CLK	421
+-#define IMX7D_USB_CTRL_CLK		422
+-#define IMX7D_USB_PHY1_CLK		423
+-#define IMX7D_USB_PHY2_CLK		424
+-#define IMX7D_IPG_ROOT_CLK		425
+-#define IMX7D_SAI1_IPG_CLK		426
+-#define IMX7D_SAI2_IPG_CLK		427
+-#define IMX7D_SAI3_IPG_CLK		428
+-#define IMX7D_PLL_AUDIO_TEST_DIV	429
+-#define IMX7D_PLL_AUDIO_POST_DIV	430
+-#define IMX7D_PLL_VIDEO_TEST_DIV	431
+-#define IMX7D_PLL_VIDEO_POST_DIV	432
+-#define IMX7D_MU_ROOT_CLK		433
+-#define IMX7D_SEMA4_HS_ROOT_CLK		434
+-#define IMX7D_PLL_DRAM_TEST_DIV		435
+-#define IMX7D_ADC_ROOT_CLK		436
+-#define IMX7D_CLK_ARM			437
+-#define IMX7D_CKIL			438
+-#define IMX7D_OCOTP_CLK			439
+-#define IMX7D_NAND_RAWNAND_CLK		440
+-#define IMX7D_NAND_USDHC_BUS_RAWNAND_CLK 441
+-#define IMX7D_SNVS_CLK			442
+-#define IMX7D_CAAM_CLK			443
+-#define IMX7D_KPP_ROOT_CLK		444
+-#define IMX7D_PXP_CLK			445
+-#define IMX7D_CLK_END			446
+-#endif /* __DT_BINDINGS_CLOCK_IMX7D_H */
+diff --git a/include/dt-bindings/clock/imx7ulp-clock.h b/include/dt-bindings/clock/imx7ulp-clock.h
+deleted file mode 100644
+index b58370d146e2..000000000000
+--- a/include/dt-bindings/clock/imx7ulp-clock.h
++++ /dev/null
+@@ -1,119 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2016 Freescale Semiconductor, Inc.
+- * Copyright 2017~2018 NXP
+- *
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX7ULP_H
+-#define __DT_BINDINGS_CLOCK_IMX7ULP_H
+-
+-/* SCG1 */
+-
+-#define IMX7ULP_CLK_DUMMY		0
+-#define IMX7ULP_CLK_ROSC		1
+-#define IMX7ULP_CLK_SOSC		2
+-#define IMX7ULP_CLK_FIRC		3
+-#define IMX7ULP_CLK_SPLL_PRE_SEL	4
+-#define IMX7ULP_CLK_SPLL_PRE_DIV	5
+-#define IMX7ULP_CLK_SPLL		6
+-#define IMX7ULP_CLK_SPLL_POST_DIV1	7
+-#define IMX7ULP_CLK_SPLL_POST_DIV2	8
+-#define IMX7ULP_CLK_SPLL_PFD0		9
+-#define IMX7ULP_CLK_SPLL_PFD1		10
+-#define IMX7ULP_CLK_SPLL_PFD2		11
+-#define IMX7ULP_CLK_SPLL_PFD3		12
+-#define IMX7ULP_CLK_SPLL_PFD_SEL	13
+-#define IMX7ULP_CLK_SPLL_SEL		14
+-#define IMX7ULP_CLK_APLL_PRE_SEL	15
+-#define IMX7ULP_CLK_APLL_PRE_DIV	16
+-#define IMX7ULP_CLK_APLL		17
+-#define IMX7ULP_CLK_APLL_POST_DIV1	18
+-#define IMX7ULP_CLK_APLL_POST_DIV2	19
+-#define IMX7ULP_CLK_APLL_PFD0		20
+-#define IMX7ULP_CLK_APLL_PFD1		21
+-#define IMX7ULP_CLK_APLL_PFD2		22
+-#define IMX7ULP_CLK_APLL_PFD3		23
+-#define IMX7ULP_CLK_APLL_PFD_SEL	24
+-#define IMX7ULP_CLK_APLL_SEL		25
+-#define IMX7ULP_CLK_UPLL		26
+-#define IMX7ULP_CLK_SYS_SEL		27
+-#define IMX7ULP_CLK_CORE_DIV		28
+-#define IMX7ULP_CLK_BUS_DIV		29
+-#define IMX7ULP_CLK_PLAT_DIV		30
+-#define IMX7ULP_CLK_DDR_SEL		31
+-#define IMX7ULP_CLK_DDR_DIV		32
+-#define IMX7ULP_CLK_NIC_SEL		33
+-#define IMX7ULP_CLK_NIC0_DIV		34
+-#define IMX7ULP_CLK_GPU_DIV		35
+-#define IMX7ULP_CLK_NIC1_DIV		36
+-#define IMX7ULP_CLK_NIC1_BUS_DIV	37
+-#define IMX7ULP_CLK_NIC1_EXT_DIV	38
+-/* IMX7ULP_CLK_MIPI_PLL is unsupported and shouldn't be used in DT */
+-#define IMX7ULP_CLK_MIPI_PLL		39
+-#define IMX7ULP_CLK_SIRC		40
+-#define IMX7ULP_CLK_SOSC_BUS_CLK	41
+-#define IMX7ULP_CLK_FIRC_BUS_CLK	42
+-#define IMX7ULP_CLK_SPLL_BUS_CLK	43
+-#define IMX7ULP_CLK_HSRUN_SYS_SEL	44
+-#define IMX7ULP_CLK_HSRUN_CORE_DIV	45
+-
+-#define IMX7ULP_CLK_CORE		46
+-#define IMX7ULP_CLK_HSRUN_CORE		47
+-
+-#define IMX7ULP_CLK_SCG1_END		48
+-
+-/* PCC2 */
+-#define IMX7ULP_CLK_DMA1		0
+-#define IMX7ULP_CLK_RGPIO2P1		1
+-#define IMX7ULP_CLK_FLEXBUS		2
+-#define IMX7ULP_CLK_SEMA42_1		3
+-#define IMX7ULP_CLK_DMA_MUX1		4
+-#define IMX7ULP_CLK_CAAM		6
+-#define IMX7ULP_CLK_LPTPM4		7
+-#define IMX7ULP_CLK_LPTPM5		8
+-#define IMX7ULP_CLK_LPIT1		9
+-#define IMX7ULP_CLK_LPSPI2		10
+-#define IMX7ULP_CLK_LPSPI3		11
+-#define IMX7ULP_CLK_LPI2C4		12
+-#define IMX7ULP_CLK_LPI2C5		13
+-#define IMX7ULP_CLK_LPUART4		14
+-#define IMX7ULP_CLK_LPUART5		15
+-#define IMX7ULP_CLK_FLEXIO1		16
+-#define IMX7ULP_CLK_USB0		17
+-#define IMX7ULP_CLK_USB1		18
+-#define IMX7ULP_CLK_USB_PHY		19
+-#define IMX7ULP_CLK_USB_PL301		20
+-#define IMX7ULP_CLK_USDHC0		21
+-#define IMX7ULP_CLK_USDHC1		22
+-#define IMX7ULP_CLK_WDG1		23
+-#define IMX7ULP_CLK_WDG2		24
+-
+-#define IMX7ULP_CLK_PCC2_END		25
+-
+-/* PCC3 */
+-#define IMX7ULP_CLK_LPTPM6		0
+-#define IMX7ULP_CLK_LPTPM7		1
+-#define IMX7ULP_CLK_LPI2C6		2
+-#define IMX7ULP_CLK_LPI2C7		3
+-#define IMX7ULP_CLK_LPUART6		4
+-#define IMX7ULP_CLK_LPUART7		5
+-#define IMX7ULP_CLK_VIU			6
+-#define IMX7ULP_CLK_DSI			7
+-#define IMX7ULP_CLK_LCDIF		8
+-#define IMX7ULP_CLK_MMDC		9
+-#define IMX7ULP_CLK_PCTLC		10
+-#define IMX7ULP_CLK_PCTLD		11
+-#define IMX7ULP_CLK_PCTLE		12
+-#define IMX7ULP_CLK_PCTLF		13
+-#define IMX7ULP_CLK_GPU3D		14
+-#define IMX7ULP_CLK_GPU2D		15
+-
+-#define IMX7ULP_CLK_PCC3_END		16
+-
+-/* SMC1 */
+-#define IMX7ULP_CLK_ARM			0
+-
+-#define IMX7ULP_CLK_SMC1_END		1
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX7ULP_H */
+diff --git a/include/dt-bindings/clock/imx8mm-clock.h b/include/dt-bindings/clock/imx8mm-clock.h
+deleted file mode 100644
+index 1f768b2eeb1a..000000000000
+--- a/include/dt-bindings/clock/imx8mm-clock.h
++++ /dev/null
+@@ -1,286 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright 2017-2018 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX8MM_H
+-#define __DT_BINDINGS_CLOCK_IMX8MM_H
+-
+-#define IMX8MM_CLK_DUMMY			0
+-#define IMX8MM_CLK_32K				1
+-#define IMX8MM_CLK_24M				2
+-#define IMX8MM_OSC_HDMI_CLK			3
+-#define IMX8MM_CLK_EXT1				4
+-#define IMX8MM_CLK_EXT2				5
+-#define IMX8MM_CLK_EXT3				6
+-#define IMX8MM_CLK_EXT4				7
+-#define IMX8MM_AUDIO_PLL1_REF_SEL		8
+-#define IMX8MM_AUDIO_PLL2_REF_SEL		9
+-#define IMX8MM_VIDEO_PLL1_REF_SEL		10
+-#define IMX8MM_DRAM_PLL_REF_SEL			11
+-#define IMX8MM_GPU_PLL_REF_SEL			12
+-#define IMX8MM_VPU_PLL_REF_SEL			13
+-#define IMX8MM_ARM_PLL_REF_SEL			14
+-#define IMX8MM_SYS_PLL1_REF_SEL			15
+-#define IMX8MM_SYS_PLL2_REF_SEL			16
+-#define IMX8MM_SYS_PLL3_REF_SEL			17
+-#define IMX8MM_AUDIO_PLL1			18
+-#define IMX8MM_AUDIO_PLL2			19
+-#define IMX8MM_VIDEO_PLL1			20
+-#define IMX8MM_DRAM_PLL				21
+-#define IMX8MM_GPU_PLL				22
+-#define IMX8MM_VPU_PLL				23
+-#define IMX8MM_ARM_PLL				24
+-#define IMX8MM_SYS_PLL1				25
+-#define IMX8MM_SYS_PLL2				26
+-#define IMX8MM_SYS_PLL3				27
+-#define IMX8MM_AUDIO_PLL1_BYPASS		28
+-#define IMX8MM_AUDIO_PLL2_BYPASS		29
+-#define IMX8MM_VIDEO_PLL1_BYPASS		30
+-#define IMX8MM_DRAM_PLL_BYPASS			31
+-#define IMX8MM_GPU_PLL_BYPASS			32
+-#define IMX8MM_VPU_PLL_BYPASS			33
+-#define IMX8MM_ARM_PLL_BYPASS			34
+-#define IMX8MM_SYS_PLL1_BYPASS			35
+-#define IMX8MM_SYS_PLL2_BYPASS			36
+-#define IMX8MM_SYS_PLL3_BYPASS			37
+-#define IMX8MM_AUDIO_PLL1_OUT			38
+-#define IMX8MM_AUDIO_PLL2_OUT			39
+-#define IMX8MM_VIDEO_PLL1_OUT			40
+-#define IMX8MM_DRAM_PLL_OUT			41
+-#define IMX8MM_GPU_PLL_OUT			42
+-#define IMX8MM_VPU_PLL_OUT			43
+-#define IMX8MM_ARM_PLL_OUT			44
+-#define IMX8MM_SYS_PLL1_OUT			45
+-#define IMX8MM_SYS_PLL2_OUT			46
+-#define IMX8MM_SYS_PLL3_OUT			47
+-#define IMX8MM_SYS_PLL1_40M			48
+-#define IMX8MM_SYS_PLL1_80M			49
+-#define IMX8MM_SYS_PLL1_100M			50
+-#define IMX8MM_SYS_PLL1_133M			51
+-#define IMX8MM_SYS_PLL1_160M			52
+-#define IMX8MM_SYS_PLL1_200M			53
+-#define IMX8MM_SYS_PLL1_266M			54
+-#define IMX8MM_SYS_PLL1_400M			55
+-#define IMX8MM_SYS_PLL1_800M			56
+-#define IMX8MM_SYS_PLL2_50M			57
+-#define IMX8MM_SYS_PLL2_100M			58
+-#define IMX8MM_SYS_PLL2_125M			59
+-#define IMX8MM_SYS_PLL2_166M			60
+-#define IMX8MM_SYS_PLL2_200M			61
+-#define IMX8MM_SYS_PLL2_250M			62
+-#define IMX8MM_SYS_PLL2_333M			63
+-#define IMX8MM_SYS_PLL2_500M			64
+-#define IMX8MM_SYS_PLL2_1000M			65
+-
+-/* core */
+-#define IMX8MM_CLK_A53_SRC			66
+-#define IMX8MM_CLK_M4_SRC			67
+-#define IMX8MM_CLK_VPU_SRC			68
+-#define IMX8MM_CLK_GPU3D_SRC			69
+-#define IMX8MM_CLK_GPU2D_SRC			70
+-#define IMX8MM_CLK_A53_CG			71
+-#define IMX8MM_CLK_M4_CG			72
+-#define IMX8MM_CLK_VPU_CG			73
+-#define IMX8MM_CLK_GPU3D_CG			74
+-#define IMX8MM_CLK_GPU2D_CG			75
+-#define IMX8MM_CLK_A53_DIV			76
+-#define IMX8MM_CLK_M4_DIV			77
+-#define IMX8MM_CLK_VPU_DIV			78
+-#define IMX8MM_CLK_GPU3D_DIV			79
+-#define IMX8MM_CLK_GPU2D_DIV			80
+-
+-/* bus */
+-#define IMX8MM_CLK_MAIN_AXI			81
+-#define IMX8MM_CLK_ENET_AXI			82
+-#define IMX8MM_CLK_NAND_USDHC_BUS		83
+-#define IMX8MM_CLK_VPU_BUS			84
+-#define IMX8MM_CLK_DISP_AXI			85
+-#define IMX8MM_CLK_DISP_APB			86
+-#define IMX8MM_CLK_DISP_RTRM			87
+-#define IMX8MM_CLK_USB_BUS			88
+-#define IMX8MM_CLK_GPU_AXI			89
+-#define IMX8MM_CLK_GPU_AHB			90
+-#define IMX8MM_CLK_NOC				91
+-#define IMX8MM_CLK_NOC_APB			92
+-
+-#define IMX8MM_CLK_AHB				93
+-#define IMX8MM_CLK_AUDIO_AHB			94
+-#define IMX8MM_CLK_IPG_ROOT			95
+-#define IMX8MM_CLK_IPG_AUDIO_ROOT		96
+-
+-#define IMX8MM_CLK_DRAM_ALT			97
+-#define IMX8MM_CLK_DRAM_APB			98
+-#define IMX8MM_CLK_VPU_G1			99
+-#define IMX8MM_CLK_VPU_G2			100
+-#define IMX8MM_CLK_DISP_DTRC			101
+-#define IMX8MM_CLK_DISP_DC8000			102
+-#define IMX8MM_CLK_PCIE1_CTRL			103
+-#define IMX8MM_CLK_PCIE1_PHY			104
+-#define IMX8MM_CLK_PCIE1_AUX			105
+-#define IMX8MM_CLK_DC_PIXEL			106
+-#define IMX8MM_CLK_LCDIF_PIXEL			107
+-#define IMX8MM_CLK_SAI1				108
+-#define IMX8MM_CLK_SAI2				109
+-#define IMX8MM_CLK_SAI3				110
+-#define IMX8MM_CLK_SAI4				111
+-#define IMX8MM_CLK_SAI5				112
+-#define IMX8MM_CLK_SAI6				113
+-#define IMX8MM_CLK_SPDIF1			114
+-#define IMX8MM_CLK_SPDIF2			115
+-#define IMX8MM_CLK_ENET_REF			116
+-#define IMX8MM_CLK_ENET_TIMER			117
+-#define IMX8MM_CLK_ENET_PHY_REF			118
+-#define IMX8MM_CLK_NAND				119
+-#define IMX8MM_CLK_QSPI				120
+-#define IMX8MM_CLK_USDHC1			121
+-#define IMX8MM_CLK_USDHC2			122
+-#define IMX8MM_CLK_I2C1				123
+-#define IMX8MM_CLK_I2C2				124
+-#define IMX8MM_CLK_I2C3				125
+-#define IMX8MM_CLK_I2C4				126
+-#define IMX8MM_CLK_UART1			127
+-#define IMX8MM_CLK_UART2			128
+-#define IMX8MM_CLK_UART3			129
+-#define IMX8MM_CLK_UART4			130
+-#define IMX8MM_CLK_USB_CORE_REF			131
+-#define IMX8MM_CLK_USB_PHY_REF			132
+-#define IMX8MM_CLK_ECSPI1			133
+-#define IMX8MM_CLK_ECSPI2			134
+-#define IMX8MM_CLK_PWM1				135
+-#define IMX8MM_CLK_PWM2				136
+-#define IMX8MM_CLK_PWM3				137
+-#define IMX8MM_CLK_PWM4				138
+-#define IMX8MM_CLK_GPT1				139
+-#define IMX8MM_CLK_WDOG				140
+-#define IMX8MM_CLK_WRCLK			141
+-#define IMX8MM_CLK_DSI_CORE			142
+-#define IMX8MM_CLK_DSI_PHY_REF			143
+-#define IMX8MM_CLK_DSI_DBI			144
+-#define IMX8MM_CLK_USDHC3			145
+-#define IMX8MM_CLK_CSI1_CORE			146
+-#define IMX8MM_CLK_CSI1_PHY_REF			147
+-#define IMX8MM_CLK_CSI1_ESC			148
+-#define IMX8MM_CLK_CSI2_CORE			149
+-#define IMX8MM_CLK_CSI2_PHY_REF			150
+-#define IMX8MM_CLK_CSI2_ESC			151
+-#define IMX8MM_CLK_PCIE2_CTRL			152
+-#define IMX8MM_CLK_PCIE2_PHY			153
+-#define IMX8MM_CLK_PCIE2_AUX			154
+-#define IMX8MM_CLK_ECSPI3			155
+-#define IMX8MM_CLK_PDM				156
+-#define IMX8MM_CLK_VPU_H1			157
+-#define IMX8MM_CLK_CLKO1			158
+-
+-#define IMX8MM_CLK_ECSPI1_ROOT			159
+-#define IMX8MM_CLK_ECSPI2_ROOT			160
+-#define IMX8MM_CLK_ECSPI3_ROOT			161
+-#define IMX8MM_CLK_ENET1_ROOT			162
+-#define IMX8MM_CLK_GPT1_ROOT			163
+-#define IMX8MM_CLK_I2C1_ROOT			164
+-#define IMX8MM_CLK_I2C2_ROOT			165
+-#define IMX8MM_CLK_I2C3_ROOT			166
+-#define IMX8MM_CLK_I2C4_ROOT			167
+-#define IMX8MM_CLK_OCOTP_ROOT			168
+-#define IMX8MM_CLK_PCIE1_ROOT			169
+-#define IMX8MM_CLK_PWM1_ROOT			170
+-#define IMX8MM_CLK_PWM2_ROOT			171
+-#define IMX8MM_CLK_PWM3_ROOT			172
+-#define IMX8MM_CLK_PWM4_ROOT			173
+-#define IMX8MM_CLK_QSPI_ROOT			174
+-#define IMX8MM_CLK_NAND_ROOT			175
+-#define IMX8MM_CLK_SAI1_ROOT			176
+-#define IMX8MM_CLK_SAI1_IPG			177
+-#define IMX8MM_CLK_SAI2_ROOT			178
+-#define IMX8MM_CLK_SAI2_IPG			179
+-#define IMX8MM_CLK_SAI3_ROOT			180
+-#define IMX8MM_CLK_SAI3_IPG			181
+-#define IMX8MM_CLK_SAI4_ROOT			182
+-#define IMX8MM_CLK_SAI4_IPG			183
+-#define IMX8MM_CLK_SAI5_ROOT			184
+-#define IMX8MM_CLK_SAI5_IPG			185
+-#define IMX8MM_CLK_SAI6_ROOT			186
+-#define IMX8MM_CLK_SAI6_IPG			187
+-#define IMX8MM_CLK_UART1_ROOT			188
+-#define IMX8MM_CLK_UART2_ROOT			189
+-#define IMX8MM_CLK_UART3_ROOT			190
+-#define IMX8MM_CLK_UART4_ROOT			191
+-#define IMX8MM_CLK_USB1_CTRL_ROOT		192
+-#define IMX8MM_CLK_GPU3D_ROOT			193
+-#define IMX8MM_CLK_USDHC1_ROOT			194
+-#define IMX8MM_CLK_USDHC2_ROOT			195
+-#define IMX8MM_CLK_WDOG1_ROOT			196
+-#define IMX8MM_CLK_WDOG2_ROOT			197
+-#define IMX8MM_CLK_WDOG3_ROOT			198
+-#define IMX8MM_CLK_VPU_G1_ROOT			199
+-#define IMX8MM_CLK_GPU_BUS_ROOT			200
+-#define IMX8MM_CLK_VPU_H1_ROOT			201
+-#define IMX8MM_CLK_VPU_G2_ROOT			202
+-#define IMX8MM_CLK_PDM_ROOT			203
+-#define IMX8MM_CLK_DISP_ROOT			204
+-#define IMX8MM_CLK_DISP_AXI_ROOT		205
+-#define IMX8MM_CLK_DISP_APB_ROOT		206
+-#define IMX8MM_CLK_DISP_RTRM_ROOT		207
+-#define IMX8MM_CLK_USDHC3_ROOT			208
+-#define IMX8MM_CLK_TMU_ROOT			209
+-#define IMX8MM_CLK_VPU_DEC_ROOT			210
+-#define IMX8MM_CLK_SDMA1_ROOT			211
+-#define IMX8MM_CLK_SDMA2_ROOT			212
+-#define IMX8MM_CLK_SDMA3_ROOT			213
+-#define IMX8MM_CLK_GPT_3M			214
+-#define IMX8MM_CLK_ARM				215
+-#define IMX8MM_CLK_PDM_IPG			216
+-#define IMX8MM_CLK_GPU2D_ROOT			217
+-#define IMX8MM_CLK_MU_ROOT			218
+-#define IMX8MM_CLK_CSI1_ROOT			219
+-
+-#define IMX8MM_CLK_DRAM_CORE			220
+-#define IMX8MM_CLK_DRAM_ALT_ROOT		221
+-
+-#define IMX8MM_CLK_NAND_USDHC_BUS_RAWNAND_CLK	222
+-
+-#define IMX8MM_CLK_GPIO1_ROOT			223
+-#define IMX8MM_CLK_GPIO2_ROOT			224
+-#define IMX8MM_CLK_GPIO3_ROOT			225
+-#define IMX8MM_CLK_GPIO4_ROOT			226
+-#define IMX8MM_CLK_GPIO5_ROOT			227
+-
+-#define IMX8MM_CLK_SNVS_ROOT			228
+-#define IMX8MM_CLK_GIC				229
+-
+-#define IMX8MM_SYS_PLL1_40M_CG			230
+-#define IMX8MM_SYS_PLL1_80M_CG			231
+-#define IMX8MM_SYS_PLL1_100M_CG			232
+-#define IMX8MM_SYS_PLL1_133M_CG			233
+-#define IMX8MM_SYS_PLL1_160M_CG			234
+-#define IMX8MM_SYS_PLL1_200M_CG			235
+-#define IMX8MM_SYS_PLL1_266M_CG			236
+-#define IMX8MM_SYS_PLL1_400M_CG			237
+-#define IMX8MM_SYS_PLL2_50M_CG			238
+-#define IMX8MM_SYS_PLL2_100M_CG			239
+-#define IMX8MM_SYS_PLL2_125M_CG			240
+-#define IMX8MM_SYS_PLL2_166M_CG			241
+-#define IMX8MM_SYS_PLL2_200M_CG			242
+-#define IMX8MM_SYS_PLL2_250M_CG			243
+-#define IMX8MM_SYS_PLL2_333M_CG			244
+-#define IMX8MM_SYS_PLL2_500M_CG			245
+-
+-#define IMX8MM_CLK_M4_CORE			246
+-#define IMX8MM_CLK_VPU_CORE			247
+-#define IMX8MM_CLK_GPU3D_CORE			248
+-#define IMX8MM_CLK_GPU2D_CORE			249
+-
+-#define IMX8MM_CLK_CLKO2			250
+-
+-#define IMX8MM_CLK_A53_CORE			251
+-
+-#define IMX8MM_CLK_CLKOUT1_SEL			252
+-#define IMX8MM_CLK_CLKOUT1_DIV			253
+-#define IMX8MM_CLK_CLKOUT1			254
+-#define IMX8MM_CLK_CLKOUT2_SEL			255
+-#define IMX8MM_CLK_CLKOUT2_DIV			256
+-#define IMX8MM_CLK_CLKOUT2			257
+-
+-#define IMX8MM_CLK_END				258
+-
+-#endif
+diff --git a/include/dt-bindings/clock/imx8mn-clock.h b/include/dt-bindings/clock/imx8mn-clock.h
+deleted file mode 100644
+index 07b8a282c268..000000000000
+--- a/include/dt-bindings/clock/imx8mn-clock.h
++++ /dev/null
+@@ -1,262 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright 2018-2019 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX8MN_H
+-#define __DT_BINDINGS_CLOCK_IMX8MN_H
+-
+-#define IMX8MN_CLK_DUMMY			0
+-#define IMX8MN_CLK_32K				1
+-#define IMX8MN_CLK_24M				2
+-#define IMX8MN_OSC_HDMI_CLK			3
+-#define IMX8MN_CLK_EXT1				4
+-#define IMX8MN_CLK_EXT2				5
+-#define IMX8MN_CLK_EXT3				6
+-#define IMX8MN_CLK_EXT4				7
+-#define IMX8MN_AUDIO_PLL1_REF_SEL		8
+-#define IMX8MN_AUDIO_PLL2_REF_SEL		9
+-#define IMX8MN_VIDEO_PLL1_REF_SEL		10
+-#define IMX8MN_DRAM_PLL_REF_SEL			11
+-#define IMX8MN_GPU_PLL_REF_SEL			12
+-#define IMX8MN_VPU_PLL_REF_SEL			13
+-#define IMX8MN_ARM_PLL_REF_SEL			14
+-#define IMX8MN_SYS_PLL1_REF_SEL			15
+-#define IMX8MN_SYS_PLL2_REF_SEL			16
+-#define IMX8MN_SYS_PLL3_REF_SEL			17
+-#define IMX8MN_AUDIO_PLL1			18
+-#define IMX8MN_AUDIO_PLL2			19
+-#define IMX8MN_VIDEO_PLL1			20
+-#define IMX8MN_DRAM_PLL				21
+-#define IMX8MN_GPU_PLL				22
+-#define IMX8MN_VPU_PLL				23
+-#define IMX8MN_ARM_PLL				24
+-#define IMX8MN_SYS_PLL1				25
+-#define IMX8MN_SYS_PLL2				26
+-#define IMX8MN_SYS_PLL3				27
+-#define IMX8MN_AUDIO_PLL1_BYPASS		28
+-#define IMX8MN_AUDIO_PLL2_BYPASS		29
+-#define IMX8MN_VIDEO_PLL1_BYPASS		30
+-#define IMX8MN_DRAM_PLL_BYPASS			31
+-#define IMX8MN_GPU_PLL_BYPASS			32
+-#define IMX8MN_VPU_PLL_BYPASS			33
+-#define IMX8MN_ARM_PLL_BYPASS			34
+-#define IMX8MN_SYS_PLL1_BYPASS			35
+-#define IMX8MN_SYS_PLL2_BYPASS			36
+-#define IMX8MN_SYS_PLL3_BYPASS			37
+-#define IMX8MN_AUDIO_PLL1_OUT			38
+-#define IMX8MN_AUDIO_PLL2_OUT			39
+-#define IMX8MN_VIDEO_PLL1_OUT			40
+-#define IMX8MN_DRAM_PLL_OUT			41
+-#define IMX8MN_GPU_PLL_OUT			42
+-#define IMX8MN_VPU_PLL_OUT			43
+-#define IMX8MN_ARM_PLL_OUT			44
+-#define IMX8MN_SYS_PLL1_OUT			45
+-#define IMX8MN_SYS_PLL2_OUT			46
+-#define IMX8MN_SYS_PLL3_OUT			47
+-#define IMX8MN_SYS_PLL1_40M			48
+-#define IMX8MN_SYS_PLL1_80M			49
+-#define IMX8MN_SYS_PLL1_100M			50
+-#define IMX8MN_SYS_PLL1_133M			51
+-#define IMX8MN_SYS_PLL1_160M			52
+-#define IMX8MN_SYS_PLL1_200M			53
+-#define IMX8MN_SYS_PLL1_266M			54
+-#define IMX8MN_SYS_PLL1_400M			55
+-#define IMX8MN_SYS_PLL1_800M			56
+-#define IMX8MN_SYS_PLL2_50M			57
+-#define IMX8MN_SYS_PLL2_100M			58
+-#define IMX8MN_SYS_PLL2_125M			59
+-#define IMX8MN_SYS_PLL2_166M			60
+-#define IMX8MN_SYS_PLL2_200M			61
+-#define IMX8MN_SYS_PLL2_250M			62
+-#define IMX8MN_SYS_PLL2_333M			63
+-#define IMX8MN_SYS_PLL2_500M			64
+-#define IMX8MN_SYS_PLL2_1000M			65
+-
+-/* CORE CLOCK ROOT */
+-#define IMX8MN_CLK_A53_SRC			66
+-#define IMX8MN_CLK_GPU_CORE_SRC			67
+-#define IMX8MN_CLK_GPU_SHADER_SRC		68
+-#define IMX8MN_CLK_A53_CG			69
+-#define IMX8MN_CLK_GPU_CORE_CG			70
+-#define IMX8MN_CLK_GPU_SHADER_CG		71
+-#define IMX8MN_CLK_A53_DIV			72
+-#define IMX8MN_CLK_GPU_CORE_DIV			73
+-#define IMX8MN_CLK_GPU_SHADER_DIV		74
+-
+-/* BUS CLOCK ROOT */
+-#define IMX8MN_CLK_MAIN_AXI			75
+-#define IMX8MN_CLK_ENET_AXI			76
+-#define IMX8MN_CLK_NAND_USDHC_BUS		77
+-#define IMX8MN_CLK_DISP_AXI			78
+-#define IMX8MN_CLK_DISP_APB			79
+-#define IMX8MN_CLK_USB_BUS			80
+-#define IMX8MN_CLK_GPU_AXI			81
+-#define IMX8MN_CLK_GPU_AHB			82
+-#define IMX8MN_CLK_NOC				83
+-#define IMX8MN_CLK_AHB				84
+-#define IMX8MN_CLK_AUDIO_AHB			85
+-
+-/* IPG CLOCK ROOT */
+-#define IMX8MN_CLK_IPG_ROOT			86
+-#define IMX8MN_CLK_IPG_AUDIO_ROOT		87
+-
+-/* IP */
+-#define IMX8MN_CLK_DRAM_CORE			88
+-#define IMX8MN_CLK_DRAM_ALT			89
+-#define IMX8MN_CLK_DRAM_APB			90
+-#define IMX8MN_CLK_DRAM_ALT_ROOT		91
+-#define IMX8MN_CLK_DISP_PIXEL			92
+-#define IMX8MN_CLK_SAI2				93
+-#define IMX8MN_CLK_SAI3				94
+-#define IMX8MN_CLK_SAI5				95
+-#define IMX8MN_CLK_SAI6				96
+-#define IMX8MN_CLK_SPDIF1			97
+-#define IMX8MN_CLK_ENET_REF			98
+-#define IMX8MN_CLK_ENET_TIMER			99
+-#define IMX8MN_CLK_ENET_PHY_REF			100
+-#define IMX8MN_CLK_NAND				101
+-#define IMX8MN_CLK_QSPI				102
+-#define IMX8MN_CLK_USDHC1			103
+-#define IMX8MN_CLK_USDHC2			104
+-#define IMX8MN_CLK_I2C1				105
+-#define IMX8MN_CLK_I2C2				106
+-#define IMX8MN_CLK_I2C3				107
+-#define IMX8MN_CLK_I2C4				108
+-#define IMX8MN_CLK_UART1			109
+-#define IMX8MN_CLK_UART2			110
+-#define IMX8MN_CLK_UART3			111
+-#define IMX8MN_CLK_UART4			112
+-#define IMX8MN_CLK_USB_CORE_REF			113
+-#define IMX8MN_CLK_USB_PHY_REF			114
+-#define IMX8MN_CLK_ECSPI1			115
+-#define IMX8MN_CLK_ECSPI2			116
+-#define IMX8MN_CLK_PWM1				117
+-#define IMX8MN_CLK_PWM2				118
+-#define IMX8MN_CLK_PWM3				119
+-#define IMX8MN_CLK_PWM4				120
+-#define IMX8MN_CLK_WDOG				121
+-#define IMX8MN_CLK_WRCLK			122
+-#define IMX8MN_CLK_CLKO1			123
+-#define IMX8MN_CLK_CLKO2			124
+-#define IMX8MN_CLK_DSI_CORE			125
+-#define IMX8MN_CLK_DSI_PHY_REF			126
+-#define IMX8MN_CLK_DSI_DBI			127
+-#define IMX8MN_CLK_USDHC3			128
+-#define IMX8MN_CLK_CAMERA_PIXEL			129
+-#define IMX8MN_CLK_CSI1_PHY_REF			130
+-#define IMX8MN_CLK_CSI2_PHY_REF			131
+-#define IMX8MN_CLK_CSI2_ESC			132
+-#define IMX8MN_CLK_ECSPI3			133
+-#define IMX8MN_CLK_PDM				134
+-#define IMX8MN_CLK_SAI7				135
+-
+-#define IMX8MN_CLK_ECSPI1_ROOT			136
+-#define IMX8MN_CLK_ECSPI2_ROOT			137
+-#define IMX8MN_CLK_ECSPI3_ROOT			138
+-#define IMX8MN_CLK_ENET1_ROOT			139
+-#define IMX8MN_CLK_GPIO1_ROOT			140
+-#define IMX8MN_CLK_GPIO2_ROOT			141
+-#define IMX8MN_CLK_GPIO3_ROOT			142
+-#define IMX8MN_CLK_GPIO4_ROOT			143
+-#define IMX8MN_CLK_GPIO5_ROOT			144
+-#define IMX8MN_CLK_I2C1_ROOT			145
+-#define IMX8MN_CLK_I2C2_ROOT			146
+-#define IMX8MN_CLK_I2C3_ROOT			147
+-#define IMX8MN_CLK_I2C4_ROOT			148
+-#define IMX8MN_CLK_MU_ROOT			149
+-#define IMX8MN_CLK_OCOTP_ROOT			150
+-#define IMX8MN_CLK_PWM1_ROOT			151
+-#define IMX8MN_CLK_PWM2_ROOT			152
+-#define IMX8MN_CLK_PWM3_ROOT			153
+-#define IMX8MN_CLK_PWM4_ROOT			154
+-#define IMX8MN_CLK_QSPI_ROOT			155
+-#define IMX8MN_CLK_NAND_ROOT			156
+-#define IMX8MN_CLK_SAI2_ROOT			157
+-#define IMX8MN_CLK_SAI2_IPG			158
+-#define IMX8MN_CLK_SAI3_ROOT			159
+-#define IMX8MN_CLK_SAI3_IPG			160
+-#define IMX8MN_CLK_SAI5_ROOT			161
+-#define IMX8MN_CLK_SAI5_IPG			162
+-#define IMX8MN_CLK_SAI6_ROOT			163
+-#define IMX8MN_CLK_SAI6_IPG			164
+-#define IMX8MN_CLK_SAI7_ROOT			165
+-#define IMX8MN_CLK_SAI7_IPG			166
+-#define IMX8MN_CLK_SDMA1_ROOT			167
+-#define IMX8MN_CLK_SDMA2_ROOT			168
+-#define IMX8MN_CLK_UART1_ROOT			169
+-#define IMX8MN_CLK_UART2_ROOT			170
+-#define IMX8MN_CLK_UART3_ROOT			171
+-#define IMX8MN_CLK_UART4_ROOT			172
+-#define IMX8MN_CLK_USB1_CTRL_ROOT		173
+-#define IMX8MN_CLK_USDHC1_ROOT			174
+-#define IMX8MN_CLK_USDHC2_ROOT			175
+-#define IMX8MN_CLK_WDOG1_ROOT			176
+-#define IMX8MN_CLK_WDOG2_ROOT			177
+-#define IMX8MN_CLK_WDOG3_ROOT			178
+-#define IMX8MN_CLK_GPU_BUS_ROOT			179
+-#define IMX8MN_CLK_ASRC_ROOT			180
+-#define IMX8MN_CLK_GPU3D_ROOT			181
+-#define IMX8MN_CLK_PDM_ROOT			182
+-#define IMX8MN_CLK_PDM_IPG			183
+-#define IMX8MN_CLK_DISP_AXI_ROOT		184
+-#define IMX8MN_CLK_DISP_APB_ROOT		185
+-#define IMX8MN_CLK_DISP_PIXEL_ROOT		186
+-#define IMX8MN_CLK_CAMERA_PIXEL_ROOT		187
+-#define IMX8MN_CLK_USDHC3_ROOT			188
+-#define IMX8MN_CLK_SDMA3_ROOT			189
+-#define IMX8MN_CLK_TMU_ROOT			190
+-#define IMX8MN_CLK_ARM				191
+-#define IMX8MN_CLK_NAND_USDHC_BUS_RAWNAND_CLK	192
+-#define IMX8MN_CLK_GPU_CORE_ROOT		193
+-#define IMX8MN_CLK_GIC				194
+-
+-#define IMX8MN_SYS_PLL1_40M_CG			195
+-#define IMX8MN_SYS_PLL1_80M_CG			196
+-#define IMX8MN_SYS_PLL1_100M_CG			197
+-#define IMX8MN_SYS_PLL1_133M_CG			198
+-#define IMX8MN_SYS_PLL1_160M_CG			199
+-#define IMX8MN_SYS_PLL1_200M_CG			200
+-#define IMX8MN_SYS_PLL1_266M_CG			201
+-#define IMX8MN_SYS_PLL1_400M_CG			202
+-#define IMX8MN_SYS_PLL2_50M_CG			203
+-#define IMX8MN_SYS_PLL2_100M_CG			204
+-#define IMX8MN_SYS_PLL2_125M_CG			205
+-#define IMX8MN_SYS_PLL2_166M_CG			206
+-#define IMX8MN_SYS_PLL2_200M_CG			207
+-#define IMX8MN_SYS_PLL2_250M_CG			208
+-#define IMX8MN_SYS_PLL2_333M_CG			209
+-#define IMX8MN_SYS_PLL2_500M_CG			210
+-
+-#define IMX8MN_CLK_SNVS_ROOT			211
+-#define IMX8MN_CLK_GPU_CORE			212
+-#define IMX8MN_CLK_GPU_SHADER			213
+-
+-#define IMX8MN_CLK_A53_CORE			214
+-
+-#define IMX8MN_CLK_CLKOUT1_SEL			215
+-#define IMX8MN_CLK_CLKOUT1_DIV			216
+-#define IMX8MN_CLK_CLKOUT1			217
+-#define IMX8MN_CLK_CLKOUT2_SEL			218
+-#define IMX8MN_CLK_CLKOUT2_DIV			219
+-#define IMX8MN_CLK_CLKOUT2			220
+-
+-#define IMX8MN_CLK_M7_CORE			221
+-
+-#define IMX8MN_CLK_GPT_3M			222
+-#define IMX8MN_CLK_GPT1				223
+-#define IMX8MN_CLK_GPT1_ROOT			224
+-#define IMX8MN_CLK_GPT2				225
+-#define IMX8MN_CLK_GPT2_ROOT			226
+-#define IMX8MN_CLK_GPT3				227
+-#define IMX8MN_CLK_GPT3_ROOT			228
+-#define IMX8MN_CLK_GPT4				229
+-#define IMX8MN_CLK_GPT4_ROOT			230
+-#define IMX8MN_CLK_GPT5				231
+-#define IMX8MN_CLK_GPT5_ROOT			232
+-#define IMX8MN_CLK_GPT6				233
+-#define IMX8MN_CLK_GPT6_ROOT			234
+-
+-#define IMX8MN_CLK_END				235
+-
+-#endif
+diff --git a/include/dt-bindings/clock/imx8mp-clock.h b/include/dt-bindings/clock/imx8mp-clock.h
+deleted file mode 100644
+index 7da4243984b2..000000000000
+--- a/include/dt-bindings/clock/imx8mp-clock.h
++++ /dev/null
+@@ -1,401 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright 2019 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX8MP_H
+-#define __DT_BINDINGS_CLOCK_IMX8MP_H
+-
+-#define IMX8MP_CLK_DUMMY			0
+-#define IMX8MP_CLK_32K				1
+-#define IMX8MP_CLK_24M				2
+-#define IMX8MP_OSC_HDMI_CLK			3
+-#define IMX8MP_CLK_EXT1				4
+-#define IMX8MP_CLK_EXT2				5
+-#define IMX8MP_CLK_EXT3				6
+-#define IMX8MP_CLK_EXT4				7
+-#define IMX8MP_AUDIO_PLL1_REF_SEL		8
+-#define IMX8MP_AUDIO_PLL2_REF_SEL		9
+-#define IMX8MP_VIDEO_PLL1_REF_SEL		10
+-#define IMX8MP_DRAM_PLL_REF_SEL			11
+-#define IMX8MP_GPU_PLL_REF_SEL			12
+-#define IMX8MP_VPU_PLL_REF_SEL			13
+-#define IMX8MP_ARM_PLL_REF_SEL			14
+-#define IMX8MP_SYS_PLL1_REF_SEL			15
+-#define IMX8MP_SYS_PLL2_REF_SEL			16
+-#define IMX8MP_SYS_PLL3_REF_SEL			17
+-#define IMX8MP_AUDIO_PLL1			18
+-#define IMX8MP_AUDIO_PLL2			19
+-#define IMX8MP_VIDEO_PLL1			20
+-#define IMX8MP_DRAM_PLL				21
+-#define IMX8MP_GPU_PLL				22
+-#define IMX8MP_VPU_PLL				23
+-#define IMX8MP_ARM_PLL				24
+-#define IMX8MP_SYS_PLL1				25
+-#define IMX8MP_SYS_PLL2				26
+-#define IMX8MP_SYS_PLL3				27
+-#define IMX8MP_AUDIO_PLL1_BYPASS		28
+-#define IMX8MP_AUDIO_PLL2_BYPASS		29
+-#define IMX8MP_VIDEO_PLL1_BYPASS		30
+-#define IMX8MP_DRAM_PLL_BYPASS			31
+-#define IMX8MP_GPU_PLL_BYPASS			32
+-#define IMX8MP_VPU_PLL_BYPASS			33
+-#define IMX8MP_ARM_PLL_BYPASS			34
+-#define IMX8MP_SYS_PLL1_BYPASS			35
+-#define IMX8MP_SYS_PLL2_BYPASS			36
+-#define IMX8MP_SYS_PLL3_BYPASS			37
+-#define IMX8MP_AUDIO_PLL1_OUT			38
+-#define IMX8MP_AUDIO_PLL2_OUT			39
+-#define IMX8MP_VIDEO_PLL1_OUT			40
+-#define IMX8MP_DRAM_PLL_OUT			41
+-#define IMX8MP_GPU_PLL_OUT			42
+-#define IMX8MP_VPU_PLL_OUT			43
+-#define IMX8MP_ARM_PLL_OUT			44
+-#define IMX8MP_SYS_PLL1_OUT			45
+-#define IMX8MP_SYS_PLL2_OUT			46
+-#define IMX8MP_SYS_PLL3_OUT			47
+-#define IMX8MP_SYS_PLL1_40M			48
+-#define IMX8MP_SYS_PLL1_80M			49
+-#define IMX8MP_SYS_PLL1_100M			50
+-#define IMX8MP_SYS_PLL1_133M			51
+-#define IMX8MP_SYS_PLL1_160M			52
+-#define IMX8MP_SYS_PLL1_200M			53
+-#define IMX8MP_SYS_PLL1_266M			54
+-#define IMX8MP_SYS_PLL1_400M			55
+-#define IMX8MP_SYS_PLL1_800M			56
+-#define IMX8MP_SYS_PLL2_50M			57
+-#define IMX8MP_SYS_PLL2_100M			58
+-#define IMX8MP_SYS_PLL2_125M			59
+-#define IMX8MP_SYS_PLL2_166M			60
+-#define IMX8MP_SYS_PLL2_200M			61
+-#define IMX8MP_SYS_PLL2_250M			62
+-#define IMX8MP_SYS_PLL2_333M			63
+-#define IMX8MP_SYS_PLL2_500M			64
+-#define IMX8MP_SYS_PLL2_1000M			65
+-#define IMX8MP_CLK_A53_SRC			66
+-#define IMX8MP_CLK_M7_SRC			67
+-#define IMX8MP_CLK_ML_SRC			68
+-#define IMX8MP_CLK_GPU3D_CORE_SRC		69
+-#define IMX8MP_CLK_GPU3D_SHADER_SRC		70
+-#define IMX8MP_CLK_GPU2D_SRC			71
+-#define IMX8MP_CLK_AUDIO_AXI_SRC		72
+-#define IMX8MP_CLK_HSIO_AXI_SRC			73
+-#define IMX8MP_CLK_MEDIA_ISP_SRC		74
+-#define IMX8MP_CLK_A53_CG			75
+-#define IMX8MP_CLK_M4_CG			76
+-#define IMX8MP_CLK_ML_CG			77
+-#define IMX8MP_CLK_GPU3D_CORE_CG		78
+-#define IMX8MP_CLK_GPU3D_SHADER_CG		79
+-#define IMX8MP_CLK_GPU2D_CG			80
+-#define IMX8MP_CLK_AUDIO_AXI_CG			81
+-#define IMX8MP_CLK_HSIO_AXI_CG			82
+-#define IMX8MP_CLK_MEDIA_ISP_CG			83
+-#define IMX8MP_CLK_A53_DIV			84
+-#define IMX8MP_CLK_M7_DIV			85
+-#define IMX8MP_CLK_ML_DIV			86
+-#define IMX8MP_CLK_GPU3D_CORE_DIV		87
+-#define IMX8MP_CLK_GPU3D_SHADER_DIV		88
+-#define IMX8MP_CLK_GPU2D_DIV			89
+-#define IMX8MP_CLK_AUDIO_AXI_DIV		90
+-#define IMX8MP_CLK_HSIO_AXI_DIV			91
+-#define IMX8MP_CLK_MEDIA_ISP_DIV		92
+-#define IMX8MP_CLK_MAIN_AXI			93
+-#define IMX8MP_CLK_ENET_AXI			94
+-#define IMX8MP_CLK_NAND_USDHC_BUS		95
+-#define IMX8MP_CLK_VPU_BUS			96
+-#define IMX8MP_CLK_MEDIA_AXI			97
+-#define IMX8MP_CLK_MEDIA_APB			98
+-#define IMX8MP_CLK_HDMI_APB			99
+-#define IMX8MP_CLK_HDMI_AXI			100
+-#define IMX8MP_CLK_GPU_AXI			101
+-#define IMX8MP_CLK_GPU_AHB			102
+-#define IMX8MP_CLK_NOC				103
+-#define IMX8MP_CLK_NOC_IO			104
+-#define IMX8MP_CLK_ML_AXI			105
+-#define IMX8MP_CLK_ML_AHB			106
+-#define IMX8MP_CLK_AHB				107
+-#define IMX8MP_CLK_AUDIO_AHB			108
+-#define IMX8MP_CLK_MIPI_DSI_ESC_RX		109
+-#define IMX8MP_CLK_IPG_ROOT			110
+-#define IMX8MP_CLK_DRAM_ALT			112
+-#define IMX8MP_CLK_DRAM_APB			113
+-#define IMX8MP_CLK_VPU_G1			114
+-#define IMX8MP_CLK_VPU_G2			115
+-#define IMX8MP_CLK_CAN1				116
+-#define IMX8MP_CLK_CAN2				117
+-#define IMX8MP_CLK_MEMREPAIR			118
+-#define IMX8MP_CLK_PCIE_AUX			120
+-#define IMX8MP_CLK_I2C5				121
+-#define IMX8MP_CLK_I2C6				122
+-#define IMX8MP_CLK_SAI1				123
+-#define IMX8MP_CLK_SAI2				124
+-#define IMX8MP_CLK_SAI3				125
+-/* #define IMX8MP_CLK_SAI4				126 */
+-#define IMX8MP_CLK_SAI5				127
+-#define IMX8MP_CLK_SAI6				128
+-#define IMX8MP_CLK_ENET_QOS			129
+-#define IMX8MP_CLK_ENET_QOS_TIMER		130
+-#define IMX8MP_CLK_ENET_REF			131
+-#define IMX8MP_CLK_ENET_TIMER			132
+-#define IMX8MP_CLK_ENET_PHY_REF			133
+-#define IMX8MP_CLK_NAND				134
+-#define IMX8MP_CLK_QSPI				135
+-#define IMX8MP_CLK_USDHC1			136
+-#define IMX8MP_CLK_USDHC2			137
+-#define IMX8MP_CLK_I2C1				138
+-#define IMX8MP_CLK_I2C2				139
+-#define IMX8MP_CLK_I2C3				140
+-#define IMX8MP_CLK_I2C4				141
+-#define IMX8MP_CLK_UART1			142
+-#define IMX8MP_CLK_UART2			143
+-#define IMX8MP_CLK_UART3			144
+-#define IMX8MP_CLK_UART4			145
+-#define IMX8MP_CLK_USB_CORE_REF			146
+-#define IMX8MP_CLK_USB_PHY_REF			147
+-#define IMX8MP_CLK_GIC				148
+-#define IMX8MP_CLK_ECSPI1			149
+-#define IMX8MP_CLK_ECSPI2			150
+-#define IMX8MP_CLK_PWM1				151
+-#define IMX8MP_CLK_PWM2				152
+-#define IMX8MP_CLK_PWM3				153
+-#define IMX8MP_CLK_PWM4				154
+-#define IMX8MP_CLK_GPT1				155
+-#define IMX8MP_CLK_GPT2				156
+-#define IMX8MP_CLK_GPT3				157
+-#define IMX8MP_CLK_GPT4				158
+-#define IMX8MP_CLK_GPT5				159
+-#define IMX8MP_CLK_GPT6				160
+-#define IMX8MP_CLK_TRACE			161
+-#define IMX8MP_CLK_WDOG				162
+-#define IMX8MP_CLK_WRCLK			163
+-#define IMX8MP_CLK_IPP_DO_CLKO1			164
+-#define IMX8MP_CLK_IPP_DO_CLKO2			165
+-#define IMX8MP_CLK_HDMI_FDCC_TST		166
+-#define IMX8MP_CLK_HDMI_24M			167
+-#define IMX8MP_CLK_HDMI_REF_266M		168
+-#define IMX8MP_CLK_USDHC3			169
+-#define IMX8MP_CLK_MEDIA_CAM1_PIX		170
+-#define IMX8MP_CLK_MEDIA_MIPI_PHY1_REF		171
+-#define IMX8MP_CLK_MEDIA_DISP1_PIX		172
+-#define IMX8MP_CLK_MEDIA_CAM2_PIX		173
+-#define IMX8MP_CLK_MEDIA_LDB			174
+-#define IMX8MP_CLK_MEDIA_MIPI_CSI2_ESC		175
+-#define IMX8MP_CLK_MEDIA_MIPI_TEST_BYTE		178
+-#define IMX8MP_CLK_ECSPI3			179
+-#define IMX8MP_CLK_PDM				180
+-#define IMX8MP_CLK_VPU_VC8000E			181
+-#define IMX8MP_CLK_SAI7				182
+-#define IMX8MP_CLK_GPC_ROOT			183
+-#define IMX8MP_CLK_ANAMIX_ROOT			184
+-#define IMX8MP_CLK_CPU_ROOT			185
+-#define IMX8MP_CLK_CSU_ROOT			186
+-#define IMX8MP_CLK_DEBUG_ROOT			187
+-#define IMX8MP_CLK_DRAM1_ROOT			188
+-#define IMX8MP_CLK_ECSPI1_ROOT			189
+-#define IMX8MP_CLK_ECSPI2_ROOT			190
+-#define IMX8MP_CLK_ECSPI3_ROOT			191
+-#define IMX8MP_CLK_ENET1_ROOT			192
+-#define IMX8MP_CLK_GPIO1_ROOT			193
+-#define IMX8MP_CLK_GPIO2_ROOT			194
+-#define IMX8MP_CLK_GPIO3_ROOT			195
+-#define IMX8MP_CLK_GPIO4_ROOT			196
+-#define IMX8MP_CLK_GPIO5_ROOT			197
+-#define IMX8MP_CLK_GPT1_ROOT			198
+-#define IMX8MP_CLK_GPT2_ROOT			199
+-#define IMX8MP_CLK_GPT3_ROOT			200
+-#define IMX8MP_CLK_GPT4_ROOT			201
+-#define IMX8MP_CLK_GPT5_ROOT			202
+-#define IMX8MP_CLK_GPT6_ROOT			203
+-#define IMX8MP_CLK_HS_ROOT			204
+-#define IMX8MP_CLK_I2C1_ROOT			205
+-#define IMX8MP_CLK_I2C2_ROOT			206
+-#define IMX8MP_CLK_I2C3_ROOT			207
+-#define IMX8MP_CLK_I2C4_ROOT			208
+-#define IMX8MP_CLK_IOMUX_ROOT			209
+-#define IMX8MP_CLK_IPMUX1_ROOT			210
+-#define IMX8MP_CLK_IPMUX2_ROOT			211
+-#define IMX8MP_CLK_IPMUX3_ROOT			212
+-#define IMX8MP_CLK_MU_ROOT			213
+-#define IMX8MP_CLK_OCOTP_ROOT			214
+-#define IMX8MP_CLK_OCRAM_ROOT			215
+-#define IMX8MP_CLK_OCRAM_S_ROOT			216
+-#define IMX8MP_CLK_PCIE_ROOT			217
+-#define IMX8MP_CLK_PERFMON1_ROOT		218
+-#define IMX8MP_CLK_PERFMON2_ROOT		219
+-#define IMX8MP_CLK_PWM1_ROOT			220
+-#define IMX8MP_CLK_PWM2_ROOT			221
+-#define IMX8MP_CLK_PWM3_ROOT			222
+-#define IMX8MP_CLK_PWM4_ROOT			223
+-#define IMX8MP_CLK_QOS_ROOT			224
+-#define IMX8MP_CLK_QOS_ENET_ROOT		225
+-#define IMX8MP_CLK_QSPI_ROOT			226
+-#define IMX8MP_CLK_NAND_ROOT			227
+-#define IMX8MP_CLK_NAND_USDHC_BUS_RAWNAND_CLK	228
+-#define IMX8MP_CLK_RDC_ROOT			229
+-#define IMX8MP_CLK_ROM_ROOT			230
+-#define IMX8MP_CLK_I2C5_ROOT			231
+-#define IMX8MP_CLK_I2C6_ROOT			232
+-#define IMX8MP_CLK_CAN1_ROOT			233
+-#define IMX8MP_CLK_CAN2_ROOT			234
+-#define IMX8MP_CLK_SCTR_ROOT			235
+-#define IMX8MP_CLK_SDMA1_ROOT			236
+-#define IMX8MP_CLK_ENET_QOS_ROOT		237
+-#define IMX8MP_CLK_SEC_DEBUG_ROOT		238
+-#define IMX8MP_CLK_SEMA1_ROOT			239
+-#define IMX8MP_CLK_SEMA2_ROOT			240
+-#define IMX8MP_CLK_IRQ_STEER_ROOT		241
+-#define IMX8MP_CLK_SIM_ENET_ROOT		242
+-#define IMX8MP_CLK_SIM_M_ROOT			243
+-#define IMX8MP_CLK_SIM_MAIN_ROOT		244
+-#define IMX8MP_CLK_SIM_S_ROOT			245
+-#define IMX8MP_CLK_SIM_WAKEUP_ROOT		246
+-#define IMX8MP_CLK_GPU2D_ROOT			247
+-#define IMX8MP_CLK_GPU3D_ROOT			248
+-#define IMX8MP_CLK_SNVS_ROOT			249
+-#define IMX8MP_CLK_TRACE_ROOT			250
+-#define IMX8MP_CLK_UART1_ROOT			251
+-#define IMX8MP_CLK_UART2_ROOT			252
+-#define IMX8MP_CLK_UART3_ROOT			253
+-#define IMX8MP_CLK_UART4_ROOT			254
+-#define IMX8MP_CLK_USB_ROOT			255
+-#define IMX8MP_CLK_USB_PHY_ROOT			256
+-#define IMX8MP_CLK_USDHC1_ROOT			257
+-#define IMX8MP_CLK_USDHC2_ROOT			258
+-#define IMX8MP_CLK_WDOG1_ROOT			259
+-#define IMX8MP_CLK_WDOG2_ROOT			260
+-#define IMX8MP_CLK_WDOG3_ROOT			261
+-#define IMX8MP_CLK_VPU_G1_ROOT			262
+-#define IMX8MP_CLK_GPU_ROOT			263
+-#define IMX8MP_CLK_NOC_WRAPPER_ROOT		264
+-#define IMX8MP_CLK_VPU_VC8KE_ROOT		265
+-#define IMX8MP_CLK_VPU_G2_ROOT			266
+-#define IMX8MP_CLK_NPU_ROOT			267
+-#define IMX8MP_CLK_HSIO_ROOT			268
+-#define IMX8MP_CLK_MEDIA_APB_ROOT		269
+-#define IMX8MP_CLK_MEDIA_AXI_ROOT		270
+-#define IMX8MP_CLK_MEDIA_CAM1_PIX_ROOT		271
+-#define IMX8MP_CLK_MEDIA_CAM2_PIX_ROOT		272
+-#define IMX8MP_CLK_MEDIA_DISP1_PIX_ROOT		273
+-#define IMX8MP_CLK_MEDIA_DISP2_PIX_ROOT		274
+-#define IMX8MP_CLK_MEDIA_MIPI_PHY1_REF_ROOT	275
+-#define IMX8MP_CLK_MEDIA_ISP_ROOT		276
+-#define IMX8MP_CLK_USDHC3_ROOT			277
+-#define IMX8MP_CLK_HDMI_ROOT			278
+-#define IMX8MP_CLK_XTAL_ROOT			279
+-#define IMX8MP_CLK_PLL_ROOT			280
+-#define IMX8MP_CLK_TSENSOR_ROOT			281
+-#define IMX8MP_CLK_VPU_ROOT			282
+-#define IMX8MP_CLK_MRPR_ROOT			283
+-#define IMX8MP_CLK_AUDIO_ROOT			284
+-#define IMX8MP_CLK_DRAM_ALT_ROOT		285
+-#define IMX8MP_CLK_DRAM_CORE			286
+-#define IMX8MP_CLK_ARM				287
+-#define IMX8MP_CLK_A53_CORE			288
+-
+-#define IMX8MP_SYS_PLL1_40M_CG			289
+-#define IMX8MP_SYS_PLL1_80M_CG			290
+-#define IMX8MP_SYS_PLL1_100M_CG			291
+-#define IMX8MP_SYS_PLL1_133M_CG			292
+-#define IMX8MP_SYS_PLL1_160M_CG			293
+-#define IMX8MP_SYS_PLL1_200M_CG			294
+-#define IMX8MP_SYS_PLL1_266M_CG			295
+-#define IMX8MP_SYS_PLL1_400M_CG			296
+-#define IMX8MP_SYS_PLL2_50M_CG			297
+-#define IMX8MP_SYS_PLL2_100M_CG			298
+-#define IMX8MP_SYS_PLL2_125M_CG			299
+-#define IMX8MP_SYS_PLL2_166M_CG			300
+-#define IMX8MP_SYS_PLL2_200M_CG			301
+-#define IMX8MP_SYS_PLL2_250M_CG			302
+-#define IMX8MP_SYS_PLL2_333M_CG			303
+-#define IMX8MP_SYS_PLL2_500M_CG			304
+-
+-#define IMX8MP_CLK_M7_CORE			305
+-#define IMX8MP_CLK_ML_CORE			306
+-#define IMX8MP_CLK_GPU3D_CORE			307
+-#define IMX8MP_CLK_GPU3D_SHADER_CORE		308
+-#define IMX8MP_CLK_GPU2D_CORE			309
+-#define IMX8MP_CLK_AUDIO_AXI			310
+-#define IMX8MP_CLK_HSIO_AXI			311
+-#define IMX8MP_CLK_MEDIA_ISP			312
+-#define IMX8MP_CLK_MEDIA_DISP2_PIX		313
+-#define IMX8MP_CLK_CLKOUT1_SEL			314
+-#define IMX8MP_CLK_CLKOUT1_DIV			315
+-#define IMX8MP_CLK_CLKOUT1			316
+-#define IMX8MP_CLK_CLKOUT2_SEL			317
+-#define IMX8MP_CLK_CLKOUT2_DIV			318
+-#define IMX8MP_CLK_CLKOUT2			319
+-#define IMX8MP_CLK_USB_SUSP			320
+-#define IMX8MP_CLK_AUDIO_AHB_ROOT		IMX8MP_CLK_AUDIO_ROOT
+-#define IMX8MP_CLK_AUDIO_AXI_ROOT		321
+-#define IMX8MP_CLK_SAI1_ROOT			322
+-#define IMX8MP_CLK_SAI2_ROOT			323
+-#define IMX8MP_CLK_SAI3_ROOT			324
+-#define IMX8MP_CLK_SAI5_ROOT			325
+-#define IMX8MP_CLK_SAI6_ROOT			326
+-#define IMX8MP_CLK_SAI7_ROOT			327
+-#define IMX8MP_CLK_PDM_ROOT			328
+-#define IMX8MP_CLK_MEDIA_LDB_ROOT		329
+-#define IMX8MP_CLK_END				330
+-
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_IPG		0
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_MCLK1		1
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_MCLK2		2
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_MCLK3		3
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_IPG		4
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_MCLK1		5
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_MCLK2		6
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_MCLK3		7
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_IPG		8
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_MCLK1		9
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_MCLK2		10
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_MCLK3		11
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_IPG		12
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_MCLK1		13
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_MCLK2		14
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_MCLK3		15
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_IPG		16
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_MCLK1		17
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_MCLK2		18
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_MCLK3		19
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_IPG		20
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_MCLK1		21
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_MCLK2		22
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_MCLK3		23
+-#define IMX8MP_CLK_AUDIOMIX_ASRC_IPG		24
+-#define IMX8MP_CLK_AUDIOMIX_PDM_IPG		25
+-#define IMX8MP_CLK_AUDIOMIX_SDMA2_ROOT		26
+-#define IMX8MP_CLK_AUDIOMIX_SDMA3_ROOT		27
+-#define IMX8MP_CLK_AUDIOMIX_SPBA2_ROOT		28
+-#define IMX8MP_CLK_AUDIOMIX_DSP_ROOT		29
+-#define IMX8MP_CLK_AUDIOMIX_DSPDBG_ROOT		30
+-#define IMX8MP_CLK_AUDIOMIX_EARC_IPG		31
+-#define IMX8MP_CLK_AUDIOMIX_OCRAMA_IPG		32
+-#define IMX8MP_CLK_AUDIOMIX_AUD2HTX_IPG		33
+-#define IMX8MP_CLK_AUDIOMIX_EDMA_ROOT		34
+-#define IMX8MP_CLK_AUDIOMIX_AUDPLL_ROOT		35
+-#define IMX8MP_CLK_AUDIOMIX_MU2_ROOT		36
+-#define IMX8MP_CLK_AUDIOMIX_MU3_ROOT		37
+-#define IMX8MP_CLK_AUDIOMIX_EARC_PHY		38
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_MCLK1_SEL	40
+-#define IMX8MP_CLK_AUDIOMIX_SAI1_MCLK2_SEL	41
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_MCLK1_SEL	42
+-#define IMX8MP_CLK_AUDIOMIX_SAI2_MCLK2_SEL	43
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_MCLK1_SEL	44
+-#define IMX8MP_CLK_AUDIOMIX_SAI3_MCLK2_SEL	45
+-#define IMX8MP_CLK_AUDIOMIX_SAI4_MCLK1_SEL	46
+-#define IMX8MP_CLK_AUDIOMIX_SAI4_MCLK2_SEL	47
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_MCLK1_SEL	48
+-#define IMX8MP_CLK_AUDIOMIX_SAI5_MCLK2_SEL	49
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_MCLK1_SEL	50
+-#define IMX8MP_CLK_AUDIOMIX_SAI6_MCLK2_SEL	51
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_MCLK1_SEL	52
+-#define IMX8MP_CLK_AUDIOMIX_SAI7_MCLK2_SEL	53
+-#define IMX8MP_CLK_AUDIOMIX_PDM_SEL		54
+-#define IMX8MP_CLK_AUDIOMIX_SAI_PLL_REF_SEL	55
+-#define IMX8MP_CLK_AUDIOMIX_SAI_PLL		56
+-#define IMX8MP_CLK_AUDIOMIX_SAI_PLL_BYPASS	57
+-#define IMX8MP_CLK_AUDIOMIX_SAI_PLL_OUT		58
+-
+-#define IMX8MP_CLK_AUDIOMIX_END			59
+-
+-#endif
+diff --git a/include/dt-bindings/clock/imx8mq-clock.h b/include/dt-bindings/clock/imx8mq-clock.h
+deleted file mode 100644
+index afa74d7ba100..000000000000
+--- a/include/dt-bindings/clock/imx8mq-clock.h
++++ /dev/null
+@@ -1,431 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright 2016 Freescale Semiconductor, Inc.
+- * Copyright 2017 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX8MQ_H
+-#define __DT_BINDINGS_CLOCK_IMX8MQ_H
+-
+-#define IMX8MQ_CLK_DUMMY		0
+-#define IMX8MQ_CLK_32K			1
+-#define IMX8MQ_CLK_25M			2
+-#define IMX8MQ_CLK_27M			3
+-#define IMX8MQ_CLK_EXT1			4
+-#define IMX8MQ_CLK_EXT2			5
+-#define IMX8MQ_CLK_EXT3			6
+-#define IMX8MQ_CLK_EXT4			7
+-
+-/* ANAMIX PLL clocks */
+-/* FRAC PLLs */
+-/* ARM PLL */
+-#define IMX8MQ_ARM_PLL_REF_SEL		8
+-#define IMX8MQ_ARM_PLL_REF_DIV		9
+-#define IMX8MQ_ARM_PLL			10
+-#define IMX8MQ_ARM_PLL_BYPASS		11
+-#define IMX8MQ_ARM_PLL_OUT		12
+-
+-/* GPU PLL */
+-#define IMX8MQ_GPU_PLL_REF_SEL		13
+-#define IMX8MQ_GPU_PLL_REF_DIV		14
+-#define IMX8MQ_GPU_PLL			15
+-#define IMX8MQ_GPU_PLL_BYPASS		16
+-#define IMX8MQ_GPU_PLL_OUT		17
+-
+-/* VPU PLL */
+-#define IMX8MQ_VPU_PLL_REF_SEL		18
+-#define IMX8MQ_VPU_PLL_REF_DIV		19
+-#define IMX8MQ_VPU_PLL			20
+-#define IMX8MQ_VPU_PLL_BYPASS		21
+-#define IMX8MQ_VPU_PLL_OUT		22
+-
+-/* AUDIO PLL1 */
+-#define IMX8MQ_AUDIO_PLL1_REF_SEL	23
+-#define IMX8MQ_AUDIO_PLL1_REF_DIV	24
+-#define IMX8MQ_AUDIO_PLL1		25
+-#define IMX8MQ_AUDIO_PLL1_BYPASS	26
+-#define IMX8MQ_AUDIO_PLL1_OUT		27
+-
+-/* AUDIO PLL2 */
+-#define IMX8MQ_AUDIO_PLL2_REF_SEL	28
+-#define IMX8MQ_AUDIO_PLL2_REF_DIV	29
+-#define IMX8MQ_AUDIO_PLL2		30
+-#define IMX8MQ_AUDIO_PLL2_BYPASS	31
+-#define IMX8MQ_AUDIO_PLL2_OUT		32
+-
+-/* VIDEO PLL1 */
+-#define IMX8MQ_VIDEO_PLL1_REF_SEL	33
+-#define IMX8MQ_VIDEO_PLL1_REF_DIV	34
+-#define IMX8MQ_VIDEO_PLL1		35
+-#define IMX8MQ_VIDEO_PLL1_BYPASS	36
+-#define IMX8MQ_VIDEO_PLL1_OUT		37
+-
+-/* SYS1 PLL */
+-#define IMX8MQ_SYS1_PLL1_REF_SEL	38
+-#define IMX8MQ_SYS1_PLL1_REF_DIV	39
+-#define IMX8MQ_SYS1_PLL1		40
+-#define IMX8MQ_SYS1_PLL1_OUT		41
+-#define IMX8MQ_SYS1_PLL1_OUT_DIV	42
+-#define IMX8MQ_SYS1_PLL2		43
+-#define IMX8MQ_SYS1_PLL2_DIV		44
+-#define IMX8MQ_SYS1_PLL2_OUT		45
+-
+-/* SYS2 PLL */
+-#define IMX8MQ_SYS2_PLL1_REF_SEL	46
+-#define IMX8MQ_SYS2_PLL1_REF_DIV	47
+-#define IMX8MQ_SYS2_PLL1		48
+-#define IMX8MQ_SYS2_PLL1_OUT		49
+-#define IMX8MQ_SYS2_PLL1_OUT_DIV	50
+-#define IMX8MQ_SYS2_PLL2		51
+-#define IMX8MQ_SYS2_PLL2_DIV		52
+-#define IMX8MQ_SYS2_PLL2_OUT		53
+-
+-/* SYS3 PLL */
+-#define IMX8MQ_SYS3_PLL1_REF_SEL	54
+-#define IMX8MQ_SYS3_PLL1_REF_DIV	55
+-#define IMX8MQ_SYS3_PLL1		56
+-#define IMX8MQ_SYS3_PLL1_OUT		57
+-#define IMX8MQ_SYS3_PLL1_OUT_DIV	58
+-#define IMX8MQ_SYS3_PLL2		59
+-#define IMX8MQ_SYS3_PLL2_DIV		60
+-#define IMX8MQ_SYS3_PLL2_OUT		61
+-
+-/* DRAM PLL */
+-#define IMX8MQ_DRAM_PLL1_REF_SEL	62
+-#define IMX8MQ_DRAM_PLL1_REF_DIV	63
+-#define IMX8MQ_DRAM_PLL1		64
+-#define IMX8MQ_DRAM_PLL1_OUT		65
+-#define IMX8MQ_DRAM_PLL1_OUT_DIV	66
+-#define IMX8MQ_DRAM_PLL2		67
+-#define IMX8MQ_DRAM_PLL2_DIV		68
+-#define IMX8MQ_DRAM_PLL2_OUT		69
+-
+-/* SYS PLL DIV */
+-#define IMX8MQ_SYS1_PLL_40M		70
+-#define IMX8MQ_SYS1_PLL_80M		71
+-#define IMX8MQ_SYS1_PLL_100M		72
+-#define IMX8MQ_SYS1_PLL_133M		73
+-#define IMX8MQ_SYS1_PLL_160M		74
+-#define IMX8MQ_SYS1_PLL_200M		75
+-#define IMX8MQ_SYS1_PLL_266M		76
+-#define IMX8MQ_SYS1_PLL_400M		77
+-#define IMX8MQ_SYS1_PLL_800M		78
+-
+-#define IMX8MQ_SYS2_PLL_50M		79
+-#define IMX8MQ_SYS2_PLL_100M		80
+-#define IMX8MQ_SYS2_PLL_125M		81
+-#define IMX8MQ_SYS2_PLL_166M		82
+-#define IMX8MQ_SYS2_PLL_200M		83
+-#define IMX8MQ_SYS2_PLL_250M		84
+-#define IMX8MQ_SYS2_PLL_333M		85
+-#define IMX8MQ_SYS2_PLL_500M		86
+-#define IMX8MQ_SYS2_PLL_1000M		87
+-
+-/* CCM ROOT clocks */
+-/* A53 */
+-#define IMX8MQ_CLK_A53_SRC		88
+-#define IMX8MQ_CLK_A53_CG		89
+-#define IMX8MQ_CLK_A53_DIV		90
+-/* M4 */
+-#define IMX8MQ_CLK_M4_SRC		91
+-#define IMX8MQ_CLK_M4_CG		92
+-#define IMX8MQ_CLK_M4_DIV		93
+-/* VPU */
+-#define IMX8MQ_CLK_VPU_SRC		94
+-#define IMX8MQ_CLK_VPU_CG		95
+-#define IMX8MQ_CLK_VPU_DIV		96
+-/* GPU CORE */
+-#define IMX8MQ_CLK_GPU_CORE_SRC		97
+-#define IMX8MQ_CLK_GPU_CORE_CG		98
+-#define IMX8MQ_CLK_GPU_CORE_DIV		99
+-/* GPU SHADER */
+-#define IMX8MQ_CLK_GPU_SHADER_SRC	100
+-#define IMX8MQ_CLK_GPU_SHADER_CG	101
+-#define IMX8MQ_CLK_GPU_SHADER_DIV	102
+-
+-/* BUS TYPE */
+-/* MAIN AXI */
+-#define IMX8MQ_CLK_MAIN_AXI		103
+-/* ENET AXI */
+-#define IMX8MQ_CLK_ENET_AXI		104
+-/* NAND_USDHC_BUS */
+-#define IMX8MQ_CLK_NAND_USDHC_BUS	105
+-/* VPU BUS */
+-#define IMX8MQ_CLK_VPU_BUS		106
+-/* DISP_AXI */
+-#define IMX8MQ_CLK_DISP_AXI		107
+-/* DISP APB */
+-#define IMX8MQ_CLK_DISP_APB		108
+-/* DISP RTRM */
+-#define IMX8MQ_CLK_DISP_RTRM		109
+-/* USB_BUS */
+-#define IMX8MQ_CLK_USB_BUS		110
+-/* GPU_AXI */
+-#define IMX8MQ_CLK_GPU_AXI		111
+-/* GPU_AHB */
+-#define IMX8MQ_CLK_GPU_AHB		112
+-/* NOC */
+-#define IMX8MQ_CLK_NOC			113
+-/* NOC_APB */
+-#define IMX8MQ_CLK_NOC_APB		115
+-
+-/* AHB */
+-#define IMX8MQ_CLK_AHB			116
+-/* AUDIO AHB */
+-#define IMX8MQ_CLK_AUDIO_AHB		117
+-
+-/* DRAM_ALT */
+-#define IMX8MQ_CLK_DRAM_ALT		118
+-/* DRAM APB */
+-#define IMX8MQ_CLK_DRAM_APB		119
+-/* VPU_G1 */
+-#define IMX8MQ_CLK_VPU_G1		120
+-/* VPU_G2 */
+-#define IMX8MQ_CLK_VPU_G2		121
+-/* DISP_DTRC */
+-#define IMX8MQ_CLK_DISP_DTRC		122
+-/* DISP_DC8000 */
+-#define IMX8MQ_CLK_DISP_DC8000		123
+-/* PCIE_CTRL */
+-#define IMX8MQ_CLK_PCIE1_CTRL		124
+-/* PCIE_PHY */
+-#define IMX8MQ_CLK_PCIE1_PHY		125
+-/* PCIE_AUX */
+-#define IMX8MQ_CLK_PCIE1_AUX		126
+-/* DC_PIXEL */
+-#define IMX8MQ_CLK_DC_PIXEL		127
+-/* LCDIF_PIXEL */
+-#define IMX8MQ_CLK_LCDIF_PIXEL		128
+-/* SAI1~6 */
+-#define IMX8MQ_CLK_SAI1			129
+-
+-#define IMX8MQ_CLK_SAI2			130
+-
+-#define IMX8MQ_CLK_SAI3			131
+-
+-#define IMX8MQ_CLK_SAI4			132
+-
+-#define IMX8MQ_CLK_SAI5			133
+-
+-#define IMX8MQ_CLK_SAI6			134
+-/* SPDIF1 */
+-#define IMX8MQ_CLK_SPDIF1		135
+-/* SPDIF2 */
+-#define IMX8MQ_CLK_SPDIF2		136
+-/* ENET_REF */
+-#define IMX8MQ_CLK_ENET_REF		137
+-/* ENET_TIMER */
+-#define IMX8MQ_CLK_ENET_TIMER		138
+-/* ENET_PHY */
+-#define IMX8MQ_CLK_ENET_PHY_REF		139
+-/* NAND */
+-#define IMX8MQ_CLK_NAND			140
+-/* QSPI */
+-#define IMX8MQ_CLK_QSPI			141
+-/* USDHC1 */
+-#define IMX8MQ_CLK_USDHC1		142
+-/* USDHC2 */
+-#define IMX8MQ_CLK_USDHC2		143
+-/* I2C1 */
+-#define IMX8MQ_CLK_I2C1			144
+-/* I2C2 */
+-#define IMX8MQ_CLK_I2C2			145
+-/* I2C3 */
+-#define IMX8MQ_CLK_I2C3			146
+-/* I2C4 */
+-#define IMX8MQ_CLK_I2C4			147
+-/* UART1 */
+-#define IMX8MQ_CLK_UART1		148
+-/* UART2 */
+-#define IMX8MQ_CLK_UART2		149
+-/* UART3 */
+-#define IMX8MQ_CLK_UART3		150
+-/* UART4 */
+-#define IMX8MQ_CLK_UART4		151
+-/* USB_CORE_REF */
+-#define IMX8MQ_CLK_USB_CORE_REF		152
+-/* USB_PHY_REF */
+-#define IMX8MQ_CLK_USB_PHY_REF		153
+-/* ECSPI1 */
+-#define IMX8MQ_CLK_ECSPI1		154
+-/* ECSPI2 */
+-#define IMX8MQ_CLK_ECSPI2		155
+-/* PWM1 */
+-#define IMX8MQ_CLK_PWM1			156
+-/* PWM2 */
+-#define IMX8MQ_CLK_PWM2			157
+-/* PWM3 */
+-#define IMX8MQ_CLK_PWM3			158
+-/* PWM4 */
+-#define IMX8MQ_CLK_PWM4			159
+-/* GPT1 */
+-#define IMX8MQ_CLK_GPT1			160
+-/* WDOG */
+-#define IMX8MQ_CLK_WDOG			161
+-/* WRCLK */
+-#define IMX8MQ_CLK_WRCLK		162
+-/* DSI_CORE */
+-#define IMX8MQ_CLK_DSI_CORE		163
+-/* DSI_PHY */
+-#define IMX8MQ_CLK_DSI_PHY_REF		164
+-/* DSI_DBI */
+-#define IMX8MQ_CLK_DSI_DBI		165
+-/*DSI_ESC */
+-#define IMX8MQ_CLK_DSI_ESC		166
+-/* CSI1_CORE */
+-#define IMX8MQ_CLK_CSI1_CORE		167
+-/* CSI1_PHY */
+-#define IMX8MQ_CLK_CSI1_PHY_REF		168
+-/* CSI_ESC */
+-#define IMX8MQ_CLK_CSI1_ESC		169
+-/* CSI2_CORE */
+-#define IMX8MQ_CLK_CSI2_CORE		170
+-/* CSI2_PHY */
+-#define IMX8MQ_CLK_CSI2_PHY_REF		171
+-/* CSI2_ESC */
+-#define IMX8MQ_CLK_CSI2_ESC		172
+-/* PCIE2_CTRL */
+-#define IMX8MQ_CLK_PCIE2_CTRL		173
+-/* PCIE2_PHY */
+-#define IMX8MQ_CLK_PCIE2_PHY		174
+-/* PCIE2_AUX */
+-#define IMX8MQ_CLK_PCIE2_AUX		175
+-/* ECSPI3 */
+-#define IMX8MQ_CLK_ECSPI3		176
+-
+-/* CCGR clocks */
+-#define IMX8MQ_CLK_A53_ROOT			177
+-#define IMX8MQ_CLK_DRAM_ROOT			178
+-#define IMX8MQ_CLK_ECSPI1_ROOT			179
+-#define IMX8MQ_CLK_ECSPI2_ROOT			180
+-#define IMX8MQ_CLK_ECSPI3_ROOT			181
+-#define IMX8MQ_CLK_ENET1_ROOT			182
+-#define IMX8MQ_CLK_GPT1_ROOT			183
+-#define IMX8MQ_CLK_I2C1_ROOT			184
+-#define IMX8MQ_CLK_I2C2_ROOT			185
+-#define IMX8MQ_CLK_I2C3_ROOT			186
+-#define IMX8MQ_CLK_I2C4_ROOT			187
+-#define IMX8MQ_CLK_M4_ROOT			188
+-#define IMX8MQ_CLK_PCIE1_ROOT			189
+-#define IMX8MQ_CLK_PCIE2_ROOT			190
+-#define IMX8MQ_CLK_PWM1_ROOT			191
+-#define IMX8MQ_CLK_PWM2_ROOT			192
+-#define IMX8MQ_CLK_PWM3_ROOT			193
+-#define IMX8MQ_CLK_PWM4_ROOT			194
+-#define IMX8MQ_CLK_QSPI_ROOT			195
+-#define IMX8MQ_CLK_SAI1_ROOT			196
+-#define IMX8MQ_CLK_SAI2_ROOT			197
+-#define IMX8MQ_CLK_SAI3_ROOT			198
+-#define IMX8MQ_CLK_SAI4_ROOT			199
+-#define IMX8MQ_CLK_SAI5_ROOT			200
+-#define IMX8MQ_CLK_SAI6_ROOT			201
+-#define IMX8MQ_CLK_UART1_ROOT			202
+-#define IMX8MQ_CLK_UART2_ROOT			203
+-#define IMX8MQ_CLK_UART3_ROOT			204
+-#define IMX8MQ_CLK_UART4_ROOT			205
+-#define IMX8MQ_CLK_USB1_CTRL_ROOT		206
+-#define IMX8MQ_CLK_USB2_CTRL_ROOT		207
+-#define IMX8MQ_CLK_USB1_PHY_ROOT		208
+-#define IMX8MQ_CLK_USB2_PHY_ROOT		209
+-#define IMX8MQ_CLK_USDHC1_ROOT			210
+-#define IMX8MQ_CLK_USDHC2_ROOT			211
+-#define IMX8MQ_CLK_WDOG1_ROOT			212
+-#define IMX8MQ_CLK_WDOG2_ROOT			213
+-#define IMX8MQ_CLK_WDOG3_ROOT			214
+-#define IMX8MQ_CLK_GPU_ROOT			215
+-#define IMX8MQ_CLK_HEVC_ROOT			216
+-#define IMX8MQ_CLK_AVC_ROOT			217
+-#define IMX8MQ_CLK_VP9_ROOT			218
+-#define IMX8MQ_CLK_HEVC_INTER_ROOT		219
+-#define IMX8MQ_CLK_DISP_ROOT			220
+-#define IMX8MQ_CLK_HDMI_ROOT			221
+-#define IMX8MQ_CLK_HDMI_PHY_ROOT		222
+-#define IMX8MQ_CLK_VPU_DEC_ROOT			223
+-#define IMX8MQ_CLK_CSI1_ROOT			224
+-#define IMX8MQ_CLK_CSI2_ROOT			225
+-#define IMX8MQ_CLK_RAWNAND_ROOT			226
+-#define IMX8MQ_CLK_SDMA1_ROOT			227
+-#define IMX8MQ_CLK_SDMA2_ROOT			228
+-#define IMX8MQ_CLK_VPU_G1_ROOT			229
+-#define IMX8MQ_CLK_VPU_G2_ROOT			230
+-
+-/* SCCG PLL GATE */
+-#define IMX8MQ_SYS1_PLL_OUT			231
+-#define IMX8MQ_SYS2_PLL_OUT			232
+-#define IMX8MQ_SYS3_PLL_OUT			233
+-#define IMX8MQ_DRAM_PLL_OUT			234
+-
+-#define IMX8MQ_GPT_3M_CLK			235
+-
+-#define IMX8MQ_CLK_IPG_ROOT			236
+-#define IMX8MQ_CLK_IPG_AUDIO_ROOT		237
+-#define IMX8MQ_CLK_SAI1_IPG			238
+-#define IMX8MQ_CLK_SAI2_IPG			239
+-#define IMX8MQ_CLK_SAI3_IPG			240
+-#define IMX8MQ_CLK_SAI4_IPG			241
+-#define IMX8MQ_CLK_SAI5_IPG			242
+-#define IMX8MQ_CLK_SAI6_IPG			243
+-
+-/* DSI AHB/IPG clocks */
+-/* rxesc clock */
+-#define IMX8MQ_CLK_DSI_AHB			244
+-/* txesc clock */
+-#define IMX8MQ_CLK_DSI_IPG_DIV                  245
+-
+-#define IMX8MQ_CLK_TMU_ROOT			246
+-
+-/* Display root clocks */
+-#define IMX8MQ_CLK_DISP_AXI_ROOT		247
+-#define IMX8MQ_CLK_DISP_APB_ROOT		248
+-#define IMX8MQ_CLK_DISP_RTRM_ROOT		249
+-
+-#define IMX8MQ_CLK_OCOTP_ROOT			250
+-
+-#define IMX8MQ_CLK_DRAM_ALT_ROOT		251
+-#define IMX8MQ_CLK_DRAM_CORE			252
+-
+-#define IMX8MQ_CLK_MU_ROOT			253
+-#define IMX8MQ_VIDEO2_PLL_OUT			254
+-
+-#define IMX8MQ_CLK_CLKO2			255
+-
+-#define IMX8MQ_CLK_NAND_USDHC_BUS_RAWNAND_CLK	256
+-
+-#define IMX8MQ_CLK_CLKO1			257
+-#define IMX8MQ_CLK_ARM				258
+-
+-#define IMX8MQ_CLK_GPIO1_ROOT			259
+-#define IMX8MQ_CLK_GPIO2_ROOT			260
+-#define IMX8MQ_CLK_GPIO3_ROOT			261
+-#define IMX8MQ_CLK_GPIO4_ROOT			262
+-#define IMX8MQ_CLK_GPIO5_ROOT			263
+-
+-#define IMX8MQ_CLK_SNVS_ROOT			264
+-#define IMX8MQ_CLK_GIC				265
+-
+-#define IMX8MQ_VIDEO2_PLL1_REF_SEL		266
+-
+-#define IMX8MQ_CLK_GPU_CORE			285
+-#define IMX8MQ_CLK_GPU_SHADER			286
+-#define IMX8MQ_CLK_M4_CORE			287
+-#define IMX8MQ_CLK_VPU_CORE			288
+-
+-#define IMX8MQ_CLK_A53_CORE			289
+-
+-#define IMX8MQ_CLK_MON_AUDIO_PLL1_DIV		290
+-#define IMX8MQ_CLK_MON_AUDIO_PLL2_DIV		291
+-#define IMX8MQ_CLK_MON_VIDEO_PLL1_DIV		292
+-#define IMX8MQ_CLK_MON_GPU_PLL_DIV		293
+-#define IMX8MQ_CLK_MON_VPU_PLL_DIV		294
+-#define IMX8MQ_CLK_MON_ARM_PLL_DIV		295
+-#define IMX8MQ_CLK_MON_SYS_PLL1_DIV		296
+-#define IMX8MQ_CLK_MON_SYS_PLL2_DIV		297
+-#define IMX8MQ_CLK_MON_SYS_PLL3_DIV		298
+-#define IMX8MQ_CLK_MON_DRAM_PLL_DIV		299
+-#define IMX8MQ_CLK_MON_VIDEO_PLL2_DIV		300
+-#define IMX8MQ_CLK_MON_SEL			301
+-#define IMX8MQ_CLK_MON_CLK2_OUT			302
+-
+-#define IMX8MQ_CLK_END				303
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMX8MQ_H */
+diff --git a/include/dt-bindings/clock/imx8ulp-clock.h b/include/dt-bindings/clock/imx8ulp-clock.h
+deleted file mode 100644
+index 953ecfe8ebcc..000000000000
+--- a/include/dt-bindings/clock/imx8ulp-clock.h
++++ /dev/null
+@@ -1,258 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
+-/*
+- * Copyright 2021 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX8ULP_H
+-#define __DT_BINDINGS_CLOCK_IMX8ULP_H
+-
+-#define IMX8ULP_CLK_DUMMY			0
+-
+-/* CGC1 */
+-#define IMX8ULP_CLK_SPLL2			5
+-#define IMX8ULP_CLK_SPLL3			6
+-#define IMX8ULP_CLK_A35_SEL			7
+-#define IMX8ULP_CLK_A35_DIV			8
+-#define IMX8ULP_CLK_SPLL2_PRE_SEL		9
+-#define IMX8ULP_CLK_SPLL3_PRE_SEL		10
+-#define IMX8ULP_CLK_SPLL3_PFD0			11
+-#define IMX8ULP_CLK_SPLL3_PFD1			12
+-#define IMX8ULP_CLK_SPLL3_PFD2			13
+-#define IMX8ULP_CLK_SPLL3_PFD3			14
+-#define IMX8ULP_CLK_SPLL3_PFD0_DIV1		15
+-#define IMX8ULP_CLK_SPLL3_PFD0_DIV2		16
+-#define IMX8ULP_CLK_SPLL3_PFD1_DIV1		17
+-#define IMX8ULP_CLK_SPLL3_PFD1_DIV2		18
+-#define IMX8ULP_CLK_SPLL3_PFD2_DIV1		19
+-#define IMX8ULP_CLK_SPLL3_PFD2_DIV2		20
+-#define IMX8ULP_CLK_SPLL3_PFD3_DIV1		21
+-#define IMX8ULP_CLK_SPLL3_PFD3_DIV2		22
+-#define IMX8ULP_CLK_NIC_SEL			23
+-#define IMX8ULP_CLK_NIC_AD_DIVPLAT		24
+-#define IMX8ULP_CLK_NIC_PER_DIVPLAT		25
+-#define IMX8ULP_CLK_XBAR_SEL			26
+-#define IMX8ULP_CLK_XBAR_AD_DIVPLAT		27
+-#define IMX8ULP_CLK_XBAR_DIVBUS			28
+-#define IMX8ULP_CLK_XBAR_AD_SLOW		29
+-#define IMX8ULP_CLK_SOSC_DIV1			30
+-#define IMX8ULP_CLK_SOSC_DIV2			31
+-#define IMX8ULP_CLK_SOSC_DIV3			32
+-#define IMX8ULP_CLK_FROSC_DIV1			33
+-#define IMX8ULP_CLK_FROSC_DIV2			34
+-#define IMX8ULP_CLK_FROSC_DIV3			35
+-#define IMX8ULP_CLK_SPLL3_VCODIV		36
+-#define IMX8ULP_CLK_SPLL3_PFD0_DIV1_GATE	37
+-#define IMX8ULP_CLK_SPLL3_PFD0_DIV2_GATE	38
+-#define IMX8ULP_CLK_SPLL3_PFD1_DIV1_GATE	39
+-#define IMX8ULP_CLK_SPLL3_PFD1_DIV2_GATE	40
+-#define IMX8ULP_CLK_SPLL3_PFD2_DIV1_GATE	41
+-#define IMX8ULP_CLK_SPLL3_PFD2_DIV2_GATE	42
+-#define IMX8ULP_CLK_SPLL3_PFD3_DIV1_GATE	43
+-#define IMX8ULP_CLK_SPLL3_PFD3_DIV2_GATE	44
+-#define IMX8ULP_CLK_SOSC_DIV1_GATE		45
+-#define IMX8ULP_CLK_SOSC_DIV2_GATE		46
+-#define IMX8ULP_CLK_SOSC_DIV3_GATE		47
+-#define IMX8ULP_CLK_FROSC_DIV1_GATE		48
+-#define IMX8ULP_CLK_FROSC_DIV2_GATE		49
+-#define IMX8ULP_CLK_FROSC_DIV3_GATE		50
+-#define IMX8ULP_CLK_SAI4_SEL			51
+-#define IMX8ULP_CLK_SAI5_SEL			52
+-#define IMX8ULP_CLK_AUD_CLK1			53
+-#define IMX8ULP_CLK_ARM				54
+-#define IMX8ULP_CLK_ENET_TS_SEL			55
+-
+-#define IMX8ULP_CLK_CGC1_END			56
+-
+-/* CGC2 */
+-#define IMX8ULP_CLK_PLL4_PRE_SEL	0
+-#define IMX8ULP_CLK_PLL4		1
+-#define IMX8ULP_CLK_PLL4_VCODIV		2
+-#define IMX8ULP_CLK_DDR_SEL		3
+-#define IMX8ULP_CLK_DDR_DIV		4
+-#define IMX8ULP_CLK_LPAV_AXI_SEL	5
+-#define IMX8ULP_CLK_LPAV_AXI_DIV	6
+-#define IMX8ULP_CLK_LPAV_AHB_DIV	7
+-#define IMX8ULP_CLK_LPAV_BUS_DIV	8
+-#define IMX8ULP_CLK_PLL4_PFD0		9
+-#define IMX8ULP_CLK_PLL4_PFD1		10
+-#define IMX8ULP_CLK_PLL4_PFD2		11
+-#define IMX8ULP_CLK_PLL4_PFD3		12
+-#define IMX8ULP_CLK_PLL4_PFD0_DIV1_GATE	13
+-#define IMX8ULP_CLK_PLL4_PFD0_DIV2_GATE	14
+-#define IMX8ULP_CLK_PLL4_PFD1_DIV1_GATE	15
+-#define IMX8ULP_CLK_PLL4_PFD1_DIV2_GATE	16
+-#define IMX8ULP_CLK_PLL4_PFD2_DIV1_GATE	17
+-#define IMX8ULP_CLK_PLL4_PFD2_DIV2_GATE	18
+-#define IMX8ULP_CLK_PLL4_PFD3_DIV1_GATE	19
+-#define IMX8ULP_CLK_PLL4_PFD3_DIV2_GATE	20
+-#define IMX8ULP_CLK_PLL4_PFD0_DIV1	21
+-#define IMX8ULP_CLK_PLL4_PFD0_DIV2	22
+-#define IMX8ULP_CLK_PLL4_PFD1_DIV1	23
+-#define IMX8ULP_CLK_PLL4_PFD1_DIV2	24
+-#define IMX8ULP_CLK_PLL4_PFD2_DIV1	25
+-#define IMX8ULP_CLK_PLL4_PFD2_DIV2	26
+-#define IMX8ULP_CLK_PLL4_PFD3_DIV1	27
+-#define IMX8ULP_CLK_PLL4_PFD3_DIV2	28
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV1_GATE	29
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV2_GATE	30
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV3_GATE	31
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV1	32
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV2	33
+-#define IMX8ULP_CLK_CGC2_SOSC_DIV3	34
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV1_GATE	35
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV2_GATE	36
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV3_GATE	37
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV1	38
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV2	39
+-#define IMX8ULP_CLK_CGC2_FROSC_DIV3	40
+-#define IMX8ULP_CLK_AUD_CLK2		41
+-#define IMX8ULP_CLK_SAI6_SEL		42
+-#define IMX8ULP_CLK_SAI7_SEL		43
+-#define IMX8ULP_CLK_SPDIF_SEL		44
+-#define IMX8ULP_CLK_HIFI_SEL		45
+-#define IMX8ULP_CLK_HIFI_DIVCORE	46
+-#define IMX8ULP_CLK_HIFI_DIVPLAT	47
+-#define IMX8ULP_CLK_DSI_PHY_REF		48
+-
+-#define IMX8ULP_CLK_CGC2_END		49
+-
+-/* PCC3 */
+-#define IMX8ULP_CLK_WDOG3		0
+-#define IMX8ULP_CLK_WDOG4		1
+-#define IMX8ULP_CLK_LPIT1		2
+-#define IMX8ULP_CLK_TPM4		3
+-#define IMX8ULP_CLK_TPM5		4
+-#define IMX8ULP_CLK_FLEXIO1		5
+-#define IMX8ULP_CLK_I3C2		6
+-#define IMX8ULP_CLK_LPI2C4		7
+-#define IMX8ULP_CLK_LPI2C5		8
+-#define IMX8ULP_CLK_LPUART4		9
+-#define IMX8ULP_CLK_LPUART5		10
+-#define IMX8ULP_CLK_LPSPI4		11
+-#define IMX8ULP_CLK_LPSPI5		12
+-#define IMX8ULP_CLK_DMA1_MP		13
+-#define IMX8ULP_CLK_DMA1_CH0		14
+-#define IMX8ULP_CLK_DMA1_CH1		15
+-#define IMX8ULP_CLK_DMA1_CH2		16
+-#define IMX8ULP_CLK_DMA1_CH3		17
+-#define IMX8ULP_CLK_DMA1_CH4		18
+-#define IMX8ULP_CLK_DMA1_CH5		19
+-#define IMX8ULP_CLK_DMA1_CH6		20
+-#define IMX8ULP_CLK_DMA1_CH7		21
+-#define IMX8ULP_CLK_DMA1_CH8		22
+-#define IMX8ULP_CLK_DMA1_CH9		23
+-#define IMX8ULP_CLK_DMA1_CH10		24
+-#define IMX8ULP_CLK_DMA1_CH11		25
+-#define IMX8ULP_CLK_DMA1_CH12		26
+-#define IMX8ULP_CLK_DMA1_CH13		27
+-#define IMX8ULP_CLK_DMA1_CH14		28
+-#define IMX8ULP_CLK_DMA1_CH15		29
+-#define IMX8ULP_CLK_DMA1_CH16		30
+-#define IMX8ULP_CLK_DMA1_CH17		31
+-#define IMX8ULP_CLK_DMA1_CH18		32
+-#define IMX8ULP_CLK_DMA1_CH19		33
+-#define IMX8ULP_CLK_DMA1_CH20		34
+-#define IMX8ULP_CLK_DMA1_CH21		35
+-#define IMX8ULP_CLK_DMA1_CH22		36
+-#define IMX8ULP_CLK_DMA1_CH23		37
+-#define IMX8ULP_CLK_DMA1_CH24		38
+-#define IMX8ULP_CLK_DMA1_CH25		39
+-#define IMX8ULP_CLK_DMA1_CH26		40
+-#define IMX8ULP_CLK_DMA1_CH27		41
+-#define IMX8ULP_CLK_DMA1_CH28		42
+-#define IMX8ULP_CLK_DMA1_CH29		43
+-#define IMX8ULP_CLK_DMA1_CH30		44
+-#define IMX8ULP_CLK_DMA1_CH31		45
+-#define IMX8ULP_CLK_MU3_A		46
+-#define IMX8ULP_CLK_MU0_B		47
+-
+-#define IMX8ULP_CLK_PCC3_END		48
+-
+-/* PCC4 */
+-#define IMX8ULP_CLK_FLEXSPI2		0
+-#define IMX8ULP_CLK_TPM6		1
+-#define IMX8ULP_CLK_TPM7		2
+-#define IMX8ULP_CLK_LPI2C6		3
+-#define IMX8ULP_CLK_LPI2C7		4
+-#define IMX8ULP_CLK_LPUART6		5
+-#define IMX8ULP_CLK_LPUART7		6
+-#define IMX8ULP_CLK_SAI4		7
+-#define IMX8ULP_CLK_SAI5		8
+-#define IMX8ULP_CLK_PCTLE		9
+-#define IMX8ULP_CLK_PCTLF		10
+-#define IMX8ULP_CLK_USDHC0		11
+-#define IMX8ULP_CLK_USDHC1		12
+-#define IMX8ULP_CLK_USDHC2		13
+-#define IMX8ULP_CLK_USB0		14
+-#define IMX8ULP_CLK_USB0_PHY		15
+-#define IMX8ULP_CLK_USB1		16
+-#define IMX8ULP_CLK_USB1_PHY		17
+-#define IMX8ULP_CLK_USB_XBAR		18
+-#define IMX8ULP_CLK_ENET		19
+-#define IMX8ULP_CLK_SFA1		20
+-#define IMX8ULP_CLK_RGPIOE		21
+-#define IMX8ULP_CLK_RGPIOF		22
+-
+-#define IMX8ULP_CLK_PCC4_END		23
+-
+-/* PCC5 */
+-#define IMX8ULP_CLK_TPM8		0
+-#define IMX8ULP_CLK_SAI6		1
+-#define IMX8ULP_CLK_SAI7		2
+-#define IMX8ULP_CLK_SPDIF		3
+-#define IMX8ULP_CLK_ISI			4
+-#define IMX8ULP_CLK_CSI_REGS 		5
+-#define IMX8ULP_CLK_PCTLD		6
+-#define IMX8ULP_CLK_CSI			7
+-#define IMX8ULP_CLK_DSI			8
+-#define IMX8ULP_CLK_WDOG5		9
+-#define IMX8ULP_CLK_EPDC		10
+-#define IMX8ULP_CLK_PXP			11
+-#define IMX8ULP_CLK_SFA2		12
+-#define IMX8ULP_CLK_GPU2D		13
+-#define IMX8ULP_CLK_GPU3D		14
+-#define IMX8ULP_CLK_DC_NANO		15
+-#define IMX8ULP_CLK_CSI_CLK_UI 		16
+-#define IMX8ULP_CLK_CSI_CLK_ESC		17
+-#define IMX8ULP_CLK_RGPIOD		18
+-#define IMX8ULP_CLK_DMA2_MP		19
+-#define IMX8ULP_CLK_DMA2_CH0		20
+-#define IMX8ULP_CLK_DMA2_CH1		21
+-#define IMX8ULP_CLK_DMA2_CH2		22
+-#define IMX8ULP_CLK_DMA2_CH3		23
+-#define IMX8ULP_CLK_DMA2_CH4		24
+-#define IMX8ULP_CLK_DMA2_CH5		25
+-#define IMX8ULP_CLK_DMA2_CH6		26
+-#define IMX8ULP_CLK_DMA2_CH7		27
+-#define IMX8ULP_CLK_DMA2_CH8		28
+-#define IMX8ULP_CLK_DMA2_CH9		29
+-#define IMX8ULP_CLK_DMA2_CH10		30
+-#define IMX8ULP_CLK_DMA2_CH11		31
+-#define IMX8ULP_CLK_DMA2_CH12		32
+-#define IMX8ULP_CLK_DMA2_CH13		33
+-#define IMX8ULP_CLK_DMA2_CH14		34
+-#define IMX8ULP_CLK_DMA2_CH15		35
+-#define IMX8ULP_CLK_DMA2_CH16		36
+-#define IMX8ULP_CLK_DMA2_CH17		37
+-#define IMX8ULP_CLK_DMA2_CH18		38
+-#define IMX8ULP_CLK_DMA2_CH19		39
+-#define IMX8ULP_CLK_DMA2_CH20		40
+-#define IMX8ULP_CLK_DMA2_CH21		41
+-#define IMX8ULP_CLK_DMA2_CH22		42
+-#define IMX8ULP_CLK_DMA2_CH23		43
+-#define IMX8ULP_CLK_DMA2_CH24		44
+-#define IMX8ULP_CLK_DMA2_CH25		45
+-#define IMX8ULP_CLK_DMA2_CH26		46
+-#define IMX8ULP_CLK_DMA2_CH27		47
+-#define IMX8ULP_CLK_DMA2_CH28		48
+-#define IMX8ULP_CLK_DMA2_CH29		49
+-#define IMX8ULP_CLK_DMA2_CH30		50
+-#define IMX8ULP_CLK_DMA2_CH31		51
+-#define IMX8ULP_CLK_MU2_B		52
+-#define IMX8ULP_CLK_MU3_B		53
+-#define IMX8ULP_CLK_AVD_SIM		54
+-#define IMX8ULP_CLK_DSI_TX_ESC		55
+-
+-#define IMX8ULP_CLK_PCC5_END		56
+-
+-#endif
+diff --git a/include/dt-bindings/clock/imx93-clock.h b/include/dt-bindings/clock/imx93-clock.h
+deleted file mode 100644
+index 35a1f62053a5..000000000000
+--- a/include/dt-bindings/clock/imx93-clock.h
++++ /dev/null
+@@ -1,208 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
+-/*
+- * Copyright 2022 NXP
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_IMX93_CLK_H
+-#define __DT_BINDINGS_CLOCK_IMX93_CLK_H
+-
+-#define IMX93_CLK_DUMMY			0
+-#define IMX93_CLK_24M			1
+-#define IMX93_CLK_EXT1			2
+-#define IMX93_CLK_SYS_PLL_PFD0		3
+-#define IMX93_CLK_SYS_PLL_PFD0_DIV2	4
+-#define IMX93_CLK_SYS_PLL_PFD1		5
+-#define IMX93_CLK_SYS_PLL_PFD1_DIV2	6
+-#define IMX93_CLK_SYS_PLL_PFD2		7
+-#define IMX93_CLK_SYS_PLL_PFD2_DIV2	8
+-#define IMX93_CLK_AUDIO_PLL		9
+-#define IMX93_CLK_VIDEO_PLL		10
+-#define IMX93_CLK_A55_PERIPH		11
+-#define IMX93_CLK_A55_MTR_BUS		12
+-#define IMX93_CLK_A55			13
+-#define IMX93_CLK_M33			14
+-#define IMX93_CLK_BUS_WAKEUP		15
+-#define IMX93_CLK_BUS_AON		16
+-#define IMX93_CLK_WAKEUP_AXI		17
+-#define IMX93_CLK_SWO_TRACE		18
+-#define IMX93_CLK_M33_SYSTICK		19
+-#define IMX93_CLK_FLEXIO1		20
+-#define IMX93_CLK_FLEXIO2		21
+-#define IMX93_CLK_LPTMR1		24
+-#define IMX93_CLK_LPTMR2		25
+-#define IMX93_CLK_TPM2			27
+-#define IMX93_CLK_TPM4			29
+-#define IMX93_CLK_TPM5			30
+-#define IMX93_CLK_TPM6			31
+-#define IMX93_CLK_FLEXSPI1		32
+-#define IMX93_CLK_CAN1			33
+-#define IMX93_CLK_CAN2			34
+-#define IMX93_CLK_LPUART1		35
+-#define IMX93_CLK_LPUART2		36
+-#define IMX93_CLK_LPUART3		37
+-#define IMX93_CLK_LPUART4		38
+-#define IMX93_CLK_LPUART5		39
+-#define IMX93_CLK_LPUART6		40
+-#define IMX93_CLK_LPUART7		41
+-#define IMX93_CLK_LPUART8		42
+-#define IMX93_CLK_LPI2C1		43
+-#define IMX93_CLK_LPI2C2		44
+-#define IMX93_CLK_LPI2C3		45
+-#define IMX93_CLK_LPI2C4		46
+-#define IMX93_CLK_LPI2C5		47
+-#define IMX93_CLK_LPI2C6		48
+-#define IMX93_CLK_LPI2C7		49
+-#define IMX93_CLK_LPI2C8		50
+-#define IMX93_CLK_LPSPI1		51
+-#define IMX93_CLK_LPSPI2		52
+-#define IMX93_CLK_LPSPI3		53
+-#define IMX93_CLK_LPSPI4		54
+-#define IMX93_CLK_LPSPI5		55
+-#define IMX93_CLK_LPSPI6		56
+-#define IMX93_CLK_LPSPI7		57
+-#define IMX93_CLK_LPSPI8		58
+-#define IMX93_CLK_I3C1			59
+-#define IMX93_CLK_I3C2			60
+-#define IMX93_CLK_USDHC1		61
+-#define IMX93_CLK_USDHC2		62
+-#define IMX93_CLK_USDHC3		63
+-#define IMX93_CLK_SAI1			64
+-#define IMX93_CLK_SAI2			65
+-#define IMX93_CLK_SAI3			66
+-#define IMX93_CLK_CCM_CKO1		67
+-#define IMX93_CLK_CCM_CKO2		68
+-#define IMX93_CLK_CCM_CKO3		69
+-#define IMX93_CLK_CCM_CKO4		70
+-#define IMX93_CLK_HSIO			71
+-#define IMX93_CLK_HSIO_USB_TEST_60M	72
+-#define IMX93_CLK_HSIO_ACSCAN_80M	73
+-#define IMX93_CLK_HSIO_ACSCAN_480M	74
+-#define IMX93_CLK_ML_APB		75
+-#define IMX93_CLK_ML			76
+-#define IMX93_CLK_MEDIA_AXI		77
+-#define IMX93_CLK_MEDIA_APB		78
+-#define IMX93_CLK_MEDIA_LDB		79
+-#define IMX93_CLK_MEDIA_DISP_PIX	80
+-#define IMX93_CLK_CAM_PIX		81
+-#define IMX93_CLK_MIPI_TEST_BYTE	82
+-#define IMX93_CLK_MIPI_PHY_CFG		83
+-#define IMX93_CLK_ADC			84
+-#define IMX93_CLK_PDM			85
+-#define IMX93_CLK_TSTMR1		86
+-#define IMX93_CLK_TSTMR2		87
+-#define IMX93_CLK_MQS1			88
+-#define IMX93_CLK_MQS2			89
+-#define IMX93_CLK_AUDIO_XCVR		90
+-#define IMX93_CLK_SPDIF			91
+-#define IMX93_CLK_ENET			92
+-#define IMX93_CLK_ENET_TIMER1		93
+-#define IMX93_CLK_ENET_TIMER2		94
+-#define IMX93_CLK_ENET_REF		95
+-#define IMX93_CLK_ENET_REF_PHY		96
+-#define IMX93_CLK_I3C1_SLOW		97
+-#define IMX93_CLK_I3C2_SLOW		98
+-#define IMX93_CLK_USB_PHY_BURUNIN	99
+-#define IMX93_CLK_PAL_CAME_SCAN		100
+-#define IMX93_CLK_A55_GATE		101
+-#define IMX93_CLK_CM33_GATE		102
+-#define IMX93_CLK_ADC1_GATE		103
+-#define IMX93_CLK_WDOG1_GATE		104
+-#define IMX93_CLK_WDOG2_GATE		105
+-#define IMX93_CLK_WDOG3_GATE		106
+-#define IMX93_CLK_WDOG4_GATE		107
+-#define IMX93_CLK_WDOG5_GATE		108
+-#define IMX93_CLK_SEMA1_GATE		109
+-#define IMX93_CLK_SEMA2_GATE		110
+-#define IMX93_CLK_MU_A_GATE		111
+-#define IMX93_CLK_MU_B_GATE		112
+-#define IMX93_CLK_EDMA1_GATE		113
+-#define IMX93_CLK_EDMA2_GATE		114
+-#define IMX93_CLK_FLEXSPI1_GATE		115
+-#define IMX93_CLK_GPIO1_GATE		116
+-#define IMX93_CLK_GPIO2_GATE		117
+-#define IMX93_CLK_GPIO3_GATE		118
+-#define IMX93_CLK_GPIO4_GATE		119
+-#define IMX93_CLK_FLEXIO1_GATE		120
+-#define IMX93_CLK_FLEXIO2_GATE		121
+-#define IMX93_CLK_LPIT1_GATE		122
+-#define IMX93_CLK_LPIT2_GATE		123
+-#define IMX93_CLK_LPTMR1_GATE		124
+-#define IMX93_CLK_LPTMR2_GATE		125
+-#define IMX93_CLK_TPM1_GATE		126
+-#define IMX93_CLK_TPM2_GATE		127
+-#define IMX93_CLK_TPM3_GATE		128
+-#define IMX93_CLK_TPM4_GATE		129
+-#define IMX93_CLK_TPM5_GATE		130
+-#define IMX93_CLK_TPM6_GATE		131
+-#define IMX93_CLK_CAN1_GATE		132
+-#define IMX93_CLK_CAN2_GATE		133
+-#define IMX93_CLK_LPUART1_GATE		134
+-#define IMX93_CLK_LPUART2_GATE		135
+-#define IMX93_CLK_LPUART3_GATE		136
+-#define IMX93_CLK_LPUART4_GATE		137
+-#define IMX93_CLK_LPUART5_GATE		138
+-#define IMX93_CLK_LPUART6_GATE		139
+-#define IMX93_CLK_LPUART7_GATE		140
+-#define IMX93_CLK_LPUART8_GATE		141
+-#define IMX93_CLK_LPI2C1_GATE		142
+-#define IMX93_CLK_LPI2C2_GATE		143
+-#define IMX93_CLK_LPI2C3_GATE		144
+-#define IMX93_CLK_LPI2C4_GATE		145
+-#define IMX93_CLK_LPI2C5_GATE		146
+-#define IMX93_CLK_LPI2C6_GATE		147
+-#define IMX93_CLK_LPI2C7_GATE		148
+-#define IMX93_CLK_LPI2C8_GATE		149
+-#define IMX93_CLK_LPSPI1_GATE		150
+-#define IMX93_CLK_LPSPI2_GATE		151
+-#define IMX93_CLK_LPSPI3_GATE		152
+-#define IMX93_CLK_LPSPI4_GATE		153
+-#define IMX93_CLK_LPSPI5_GATE		154
+-#define IMX93_CLK_LPSPI6_GATE		155
+-#define IMX93_CLK_LPSPI7_GATE		156
+-#define IMX93_CLK_LPSPI8_GATE		157
+-#define IMX93_CLK_I3C1_GATE		158
+-#define IMX93_CLK_I3C2_GATE		159
+-#define IMX93_CLK_USDHC1_GATE		160
+-#define IMX93_CLK_USDHC2_GATE		161
+-#define IMX93_CLK_USDHC3_GATE		162
+-#define IMX93_CLK_SAI1_GATE		163
+-#define IMX93_CLK_SAI2_GATE		164
+-#define IMX93_CLK_SAI3_GATE		165
+-#define IMX93_CLK_MIPI_CSI_GATE		166
+-#define IMX93_CLK_MIPI_DSI_GATE		167
+-#define IMX93_CLK_LVDS_GATE		168
+-#define IMX93_CLK_LCDIF_GATE		169
+-#define IMX93_CLK_PXP_GATE		170
+-#define IMX93_CLK_ISI_GATE		171
+-#define IMX93_CLK_NIC_MEDIA_GATE	172
+-#define IMX93_CLK_USB_CONTROLLER_GATE	173
+-#define IMX93_CLK_USB_TEST_60M_GATE	174
+-#define IMX93_CLK_HSIO_TROUT_24M_GATE	175
+-#define IMX93_CLK_PDM_GATE		176
+-#define IMX93_CLK_MQS1_GATE		177
+-#define IMX93_CLK_MQS2_GATE		178
+-#define IMX93_CLK_AUD_XCVR_GATE		179
+-#define IMX93_CLK_SPDIF_GATE		180
+-#define IMX93_CLK_HSIO_32K_GATE		181
+-#define IMX93_CLK_ENET1_GATE		182
+-#define IMX93_CLK_ENET_QOS_GATE		183
+-#define IMX93_CLK_SYS_CNT_GATE		184
+-#define IMX93_CLK_TSTMR1_GATE		185
+-#define IMX93_CLK_TSTMR2_GATE		186
+-#define IMX93_CLK_TMC_GATE		187
+-#define IMX93_CLK_PMRO_GATE		188
+-#define IMX93_CLK_32K			189
+-#define IMX93_CLK_SAI1_IPG		190
+-#define IMX93_CLK_SAI2_IPG		191
+-#define IMX93_CLK_SAI3_IPG		192
+-#define IMX93_CLK_MU1_A_GATE		193
+-#define IMX93_CLK_MU1_B_GATE		194
+-#define IMX93_CLK_MU2_A_GATE		195
+-#define IMX93_CLK_MU2_B_GATE		196
+-#define IMX93_CLK_NIC_AXI		197
+-#define IMX93_CLK_ARM_PLL		198
+-#define IMX93_CLK_A55_SEL		199
+-#define IMX93_CLK_A55_CORE		200
+-#define IMX93_CLK_END			201
+-
+-#endif
+diff --git a/include/dt-bindings/clock/imxrt1050-clock.h b/include/dt-bindings/clock/imxrt1050-clock.h
+deleted file mode 100644
+index 93bef0832d16..000000000000
+--- a/include/dt-bindings/clock/imxrt1050-clock.h
++++ /dev/null
+@@ -1,72 +0,0 @@
 -/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
 -/*
-- * Copyright (c) 2020 huangzhenwei@allwinnertech.com
-- * Copyright (C) 2021 Samuel Holland <samuel@sholland.org>
+- * Copyright(C) 2019
+- * Author(s): Giulio Benetti <giulio.benetti@benettiengineering.com>
 - */
 -
--#ifndef _DT_BINDINGS_RST_SUN20I_D1_CCU_H_
--#define _DT_BINDINGS_RST_SUN20I_D1_CCU_H_
--
--#define RST_MBUS		0
--#define RST_BUS_DE		1
--#define RST_BUS_DI		2
--#define RST_BUS_G2D		3
--#define RST_BUS_CE		4
--#define RST_BUS_VE		5
--#define RST_BUS_DMA		6
--#define RST_BUS_MSGBOX0		7
--#define RST_BUS_MSGBOX1		8
--#define RST_BUS_MSGBOX2		9
--#define RST_BUS_SPINLOCK	10
--#define RST_BUS_HSTIMER		11
--#define RST_BUS_DBG		12
--#define RST_BUS_PWM		13
--#define RST_BUS_DRAM		14
--#define RST_BUS_MMC0		15
--#define RST_BUS_MMC1		16
--#define RST_BUS_MMC2		17
--#define RST_BUS_UART0		18
--#define RST_BUS_UART1		19
--#define RST_BUS_UART2		20
--#define RST_BUS_UART3		21
--#define RST_BUS_UART4		22
--#define RST_BUS_UART5		23
--#define RST_BUS_I2C0		24
--#define RST_BUS_I2C1		25
--#define RST_BUS_I2C2		26
--#define RST_BUS_I2C3		27
--#define RST_BUS_SPI0		28
--#define RST_BUS_SPI1		29
--#define RST_BUS_EMAC		30
--#define RST_BUS_IR_TX		31
--#define RST_BUS_GPADC		32
--#define RST_BUS_THS		33
--#define RST_BUS_I2S0		34
--#define RST_BUS_I2S1		35
--#define RST_BUS_I2S2		36
--#define RST_BUS_SPDIF		37
--#define RST_BUS_DMIC		38
--#define RST_BUS_AUDIO		39
--#define RST_USB_PHY0		40
--#define RST_USB_PHY1		41
--#define RST_BUS_OHCI0		42
--#define RST_BUS_OHCI1		43
--#define RST_BUS_EHCI0		44
--#define RST_BUS_EHCI1		45
--#define RST_BUS_OTG		46
--#define RST_BUS_LRADC		47
--#define RST_BUS_DPSS_TOP	48
--#define RST_BUS_HDMI_SUB	49
--#define RST_BUS_HDMI_MAIN	50
--#define RST_BUS_MIPI_DSI	51
--#define RST_BUS_TCON_LCD0	52
--#define RST_BUS_TCON_TV		53
--#define RST_BUS_LVDS0		54
--#define RST_BUS_TVE		55
--#define RST_BUS_TVE_TOP		56
--#define RST_BUS_TVD		57
--#define RST_BUS_TVD_TOP		58
--#define RST_BUS_LEDC		59
--#define RST_BUS_CSI		60
--#define RST_BUS_TPADC		61
--#define RST_DSP			62
--#define RST_BUS_DSP_CFG		63
--#define RST_BUS_DSP_DBG		64
--#define RST_BUS_RISCV_CFG	65
--#define RST_BUS_CAN0		66
--#define RST_BUS_CAN1		67
--
--#endif /* _DT_BINDINGS_RST_SUN20I_D1_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun20i-d1-r-ccu.h b/include/dt-bindings/reset/sun20i-d1-r-ccu.h
-deleted file mode 100644
-index e20babc990af..000000000000
---- a/include/dt-bindings/reset/sun20i-d1-r-ccu.h
-+++ /dev/null
-@@ -1,16 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Copyright (C) 2021 Samuel Holland <samuel@sholland.org>
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN20I_D1_R_CCU_H_
--#define _DT_BINDINGS_RST_SUN20I_D1_R_CCU_H_
--
--#define RST_BUS_R_TIMER		0
--#define RST_BUS_R_TWD		1
--#define RST_BUS_R_PPU		2
--#define RST_BUS_R_IR_RX		3
--#define RST_BUS_R_RTC		4
--#define RST_BUS_R_CPUCFG	5
--
--#endif /* _DT_BINDINGS_RST_SUN20I_D1_R_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun4i-a10-ccu.h b/include/dt-bindings/reset/sun4i-a10-ccu.h
-deleted file mode 100644
-index 5f4480bedc8a..000000000000
---- a/include/dt-bindings/reset/sun4i-a10-ccu.h
-+++ /dev/null
-@@ -1,69 +0,0 @@
--/*
-- * Copyright (C) 2017 Priit Laes <plaes@plaes.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN4I_A10_H
--#define _DT_BINDINGS_RST_SUN4I_A10_H
--
--#define	RST_USB_PHY0		1
--#define	RST_USB_PHY1		2
--#define	RST_USB_PHY2		3
--#define	RST_GPS			4
--#define	RST_DE_BE0		5
--#define	RST_DE_BE1		6
--#define	RST_DE_FE0		7
--#define	RST_DE_FE1		8
--#define	RST_DE_MP		9
--#define	RST_TVE0		10
--#define	RST_TCON0		11
--#define	RST_TVE1		12
--#define	RST_TCON1		13
--#define	RST_CSI0		14
--#define	RST_CSI1		15
--#define	RST_VE			16
--#define	RST_ACE			17
--#define	RST_LVDS		18
--#define	RST_GPU			19
--#define	RST_HDMI_H		20
--#define	RST_HDMI_SYS		21
--#define	RST_HDMI_AUDIO_DMA	22
--
--#endif /* DT_BINDINGS_RST_SUN4I_A10_H */
-diff --git a/include/dt-bindings/reset/sun50i-a64-ccu.h b/include/dt-bindings/reset/sun50i-a64-ccu.h
-deleted file mode 100644
-index db60b29ddb11..000000000000
---- a/include/dt-bindings/reset/sun50i-a64-ccu.h
-+++ /dev/null
-@@ -1,98 +0,0 @@
--/*
-- * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN50I_A64_H_
--#define _DT_BINDINGS_RST_SUN50I_A64_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_HSIC		2
--#define RST_DRAM		3
--#define RST_MBUS		4
--#define RST_BUS_MIPI_DSI	5
--#define RST_BUS_CE		6
--#define RST_BUS_DMA		7
--#define RST_BUS_MMC0		8
--#define RST_BUS_MMC1		9
--#define RST_BUS_MMC2		10
--#define RST_BUS_NAND		11
--#define RST_BUS_DRAM		12
--#define RST_BUS_EMAC		13
--#define RST_BUS_TS		14
--#define RST_BUS_HSTIMER		15
--#define RST_BUS_SPI0		16
--#define RST_BUS_SPI1		17
--#define RST_BUS_OTG		18
--#define RST_BUS_EHCI0		19
--#define RST_BUS_EHCI1		20
--#define RST_BUS_OHCI0		21
--#define RST_BUS_OHCI1		22
--#define RST_BUS_VE		23
--#define RST_BUS_TCON0		24
--#define RST_BUS_TCON1		25
--#define RST_BUS_DEINTERLACE	26
--#define RST_BUS_CSI		27
--#define RST_BUS_HDMI0		28
--#define RST_BUS_HDMI1		29
--#define RST_BUS_DE		30
--#define RST_BUS_GPU		31
--#define RST_BUS_MSGBOX		32
--#define RST_BUS_SPINLOCK	33
--#define RST_BUS_DBG		34
--#define RST_BUS_LVDS		35
--#define RST_BUS_CODEC		36
--#define RST_BUS_SPDIF		37
--#define RST_BUS_THS		38
--#define RST_BUS_I2S0		39
--#define RST_BUS_I2S1		40
--#define RST_BUS_I2S2		41
--#define RST_BUS_I2C0		42
--#define RST_BUS_I2C1		43
--#define RST_BUS_I2C2		44
--#define RST_BUS_SCR		45
--#define RST_BUS_UART0		46
--#define RST_BUS_UART1		47
--#define RST_BUS_UART2		48
--#define RST_BUS_UART3		49
--#define RST_BUS_UART4		50
--
--#endif /* _DT_BINDINGS_RST_SUN50I_A64_H_ */
-diff --git a/include/dt-bindings/reset/sun50i-h6-ccu.h b/include/dt-bindings/reset/sun50i-h6-ccu.h
-deleted file mode 100644
-index d038ddfa4818..000000000000
---- a/include/dt-bindings/reset/sun50i-h6-ccu.h
-+++ /dev/null
-@@ -1,73 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN50I_H6_H_
--#define _DT_BINDINGS_RESET_SUN50I_H6_H_
--
--#define RST_MBUS		0
--#define RST_BUS_DE		1
--#define RST_BUS_DEINTERLACE	2
--#define RST_BUS_GPU		3
--#define RST_BUS_CE		4
--#define RST_BUS_VE		5
--#define RST_BUS_EMCE		6
--#define RST_BUS_VP9		7
--#define RST_BUS_DMA		8
--#define RST_BUS_MSGBOX		9
--#define RST_BUS_SPINLOCK	10
--#define RST_BUS_HSTIMER		11
--#define RST_BUS_DBG		12
--#define RST_BUS_PSI		13
--#define RST_BUS_PWM		14
--#define RST_BUS_IOMMU		15
--#define RST_BUS_DRAM		16
--#define RST_BUS_NAND		17
--#define RST_BUS_MMC0		18
--#define RST_BUS_MMC1		19
--#define RST_BUS_MMC2		20
--#define RST_BUS_UART0		21
--#define RST_BUS_UART1		22
--#define RST_BUS_UART2		23
--#define RST_BUS_UART3		24
--#define RST_BUS_I2C0		25
--#define RST_BUS_I2C1		26
--#define RST_BUS_I2C2		27
--#define RST_BUS_I2C3		28
--#define RST_BUS_SCR0		29
--#define RST_BUS_SCR1		30
--#define RST_BUS_SPI0		31
--#define RST_BUS_SPI1		32
--#define RST_BUS_EMAC		33
--#define RST_BUS_TS		34
--#define RST_BUS_IR_TX		35
--#define RST_BUS_THS		36
--#define RST_BUS_I2S0		37
--#define RST_BUS_I2S1		38
--#define RST_BUS_I2S2		39
--#define RST_BUS_I2S3		40
--#define RST_BUS_SPDIF		41
--#define RST_BUS_DMIC		42
--#define RST_BUS_AUDIO_HUB	43
--#define RST_USB_PHY0		44
--#define RST_USB_PHY1		45
--#define RST_USB_PHY3		46
--#define RST_USB_HSIC		47
--#define RST_BUS_OHCI0		48
--#define RST_BUS_OHCI3		49
--#define RST_BUS_EHCI0		50
--#define RST_BUS_XHCI		51
--#define RST_BUS_EHCI3		52
--#define RST_BUS_OTG		53
--#define RST_BUS_PCIE		54
--#define RST_PCIE_POWERUP	55
--#define RST_BUS_HDMI		56
--#define RST_BUS_HDMI_SUB	57
--#define RST_BUS_TCON_TOP	58
--#define RST_BUS_TCON_LCD0	59
--#define RST_BUS_TCON_TV0	60
--#define RST_BUS_CSI		61
--#define RST_BUS_HDCP		62
--
--#endif /* _DT_BINDINGS_RESET_SUN50I_H6_H_ */
-diff --git a/include/dt-bindings/reset/sun50i-h6-r-ccu.h b/include/dt-bindings/reset/sun50i-h6-r-ccu.h
-deleted file mode 100644
-index d541ade884fc..000000000000
---- a/include/dt-bindings/reset/sun50i-h6-r-ccu.h
-+++ /dev/null
-@@ -1,18 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN50I_H6_R_CCU_H_
--#define _DT_BINDINGS_RST_SUN50I_H6_R_CCU_H_
--
--#define RST_R_APB1_TIMER	0
--#define RST_R_APB1_TWD		1
--#define RST_R_APB1_PWM		2
--#define RST_R_APB2_UART		3
--#define RST_R_APB2_I2C		4
--#define RST_R_APB1_IR		5
--#define RST_R_APB1_W1		6
--#define RST_R_APB2_RSB		7
--
--#endif /* _DT_BINDINGS_RST_SUN50I_H6_R_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun50i-h616-ccu.h b/include/dt-bindings/reset/sun50i-h616-ccu.h
-deleted file mode 100644
-index 1bd8bb0a11be..000000000000
---- a/include/dt-bindings/reset/sun50i-h616-ccu.h
-+++ /dev/null
-@@ -1,70 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
--/*
-- * Copyright (C) 2020 Arm Ltd.
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN50I_H616_H_
--#define _DT_BINDINGS_RESET_SUN50I_H616_H_
--
--#define RST_MBUS		0
--#define RST_BUS_DE		1
--#define RST_BUS_DEINTERLACE	2
--#define RST_BUS_GPU		3
--#define RST_BUS_CE		4
--#define RST_BUS_VE		5
--#define RST_BUS_DMA		6
--#define RST_BUS_HSTIMER		7
--#define RST_BUS_DBG		8
--#define RST_BUS_PSI		9
--#define RST_BUS_PWM		10
--#define RST_BUS_IOMMU		11
--#define RST_BUS_DRAM		12
--#define RST_BUS_NAND		13
--#define RST_BUS_MMC0		14
--#define RST_BUS_MMC1		15
--#define RST_BUS_MMC2		16
--#define RST_BUS_UART0		17
--#define RST_BUS_UART1		18
--#define RST_BUS_UART2		19
--#define RST_BUS_UART3		20
--#define RST_BUS_UART4		21
--#define RST_BUS_UART5		22
--#define RST_BUS_I2C0		23
--#define RST_BUS_I2C1		24
--#define RST_BUS_I2C2		25
--#define RST_BUS_I2C3		26
--#define RST_BUS_I2C4		27
--#define RST_BUS_SPI0		28
--#define RST_BUS_SPI1		29
--#define RST_BUS_EMAC0		30
--#define RST_BUS_EMAC1		31
--#define RST_BUS_TS		32
--#define RST_BUS_THS		33
--#define RST_BUS_SPDIF		34
--#define RST_BUS_DMIC		35
--#define RST_BUS_AUDIO_CODEC	36
--#define RST_BUS_AUDIO_HUB	37
--#define RST_USB_PHY0		38
--#define RST_USB_PHY1		39
--#define RST_USB_PHY2		40
--#define RST_USB_PHY3		41
--#define RST_BUS_OHCI0		42
--#define RST_BUS_OHCI1		43
--#define RST_BUS_OHCI2		44
--#define RST_BUS_OHCI3		45
--#define RST_BUS_EHCI0		46
--#define RST_BUS_EHCI1		47
--#define RST_BUS_EHCI2		48
--#define RST_BUS_EHCI3		49
--#define RST_BUS_OTG		50
--#define RST_BUS_HDMI		51
--#define RST_BUS_HDMI_SUB	52
--#define RST_BUS_TCON_TOP	53
--#define RST_BUS_TCON_TV0	54
--#define RST_BUS_TCON_TV1	55
--#define RST_BUS_TVE_TOP		56
--#define RST_BUS_TVE0		57
--#define RST_BUS_HDCP		58
--#define RST_BUS_KEYADC		59
--
--#endif /* _DT_BINDINGS_RESET_SUN50I_H616_H_ */
-diff --git a/include/dt-bindings/reset/sun5i-ccu.h b/include/dt-bindings/reset/sun5i-ccu.h
-deleted file mode 100644
-index 40cc22ae7630..000000000000
---- a/include/dt-bindings/reset/sun5i-ccu.h
-+++ /dev/null
-@@ -1,23 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-or-later */
--/*
-- * Copyright 2016 Maxime Ripard
-- *
-- * Maxime Ripard <maxime.ripard@free-electrons.com>
-- */
--
--#ifndef _RST_SUN5I_H_
--#define _RST_SUN5I_H_
--
--#define RST_USB_PHY0	0
--#define RST_USB_PHY1	1
--#define RST_GPS		2
--#define RST_DE_BE	3
--#define RST_DE_FE	4
--#define RST_TVE		5
--#define RST_LCD		6
--#define RST_CSI		7
--#define RST_VE		8
--#define RST_GPU		9
--#define RST_IEP		10
--
--#endif /* _RST_SUN5I_H_ */
-diff --git a/include/dt-bindings/reset/sun6i-a31-ccu.h b/include/dt-bindings/reset/sun6i-a31-ccu.h
-deleted file mode 100644
-index fbff365ed6e1..000000000000
---- a/include/dt-bindings/reset/sun6i-a31-ccu.h
-+++ /dev/null
-@@ -1,106 +0,0 @@
--/*
-- * Copyright (C) 2016 Chen-Yu Tsai <wens@csie.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN6I_A31_H_
--#define _DT_BINDINGS_RST_SUN6I_A31_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_PHY2		2
--
--#define RST_AHB1_MIPI_DSI	3
--#define RST_AHB1_SS		4
--#define RST_AHB1_DMA		5
--#define RST_AHB1_MMC0		6
--#define RST_AHB1_MMC1		7
--#define RST_AHB1_MMC2		8
--#define RST_AHB1_MMC3		9
--#define RST_AHB1_NAND1		10
--#define RST_AHB1_NAND0		11
--#define RST_AHB1_SDRAM		12
--#define RST_AHB1_EMAC		13
--#define RST_AHB1_TS		14
--#define RST_AHB1_HSTIMER	15
--#define RST_AHB1_SPI0		16
--#define RST_AHB1_SPI1		17
--#define RST_AHB1_SPI2		18
--#define RST_AHB1_SPI3		19
--#define RST_AHB1_OTG		20
--#define RST_AHB1_EHCI0		21
--#define RST_AHB1_EHCI1		22
--#define RST_AHB1_OHCI0		23
--#define RST_AHB1_OHCI1		24
--#define RST_AHB1_OHCI2		25
--#define RST_AHB1_VE		26
--#define RST_AHB1_LCD0		27
--#define RST_AHB1_LCD1		28
--#define RST_AHB1_CSI		29
--#define RST_AHB1_HDMI		30
--#define RST_AHB1_BE0		31
--#define RST_AHB1_BE1		32
--#define RST_AHB1_FE0		33
--#define RST_AHB1_FE1		34
--#define RST_AHB1_MP		35
--#define RST_AHB1_GPU		36
--#define RST_AHB1_DEU0		37
--#define RST_AHB1_DEU1		38
--#define RST_AHB1_DRC0		39
--#define RST_AHB1_DRC1		40
--#define RST_AHB1_LVDS		41
--
--#define RST_APB1_CODEC		42
--#define RST_APB1_SPDIF		43
--#define RST_APB1_DIGITAL_MIC	44
--#define RST_APB1_DAUDIO0	45
--#define RST_APB1_DAUDIO1	46
--#define RST_APB2_I2C0		47
--#define RST_APB2_I2C1		48
--#define RST_APB2_I2C2		49
--#define RST_APB2_I2C3		50
--#define RST_APB2_UART0		51
--#define RST_APB2_UART1		52
--#define RST_APB2_UART2		53
--#define RST_APB2_UART3		54
--#define RST_APB2_UART4		55
--#define RST_APB2_UART5		56
--
--#endif /* _DT_BINDINGS_RST_SUN6I_A31_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-a23-a33-ccu.h b/include/dt-bindings/reset/sun8i-a23-a33-ccu.h
-deleted file mode 100644
-index 6121f2b0cd0a..000000000000
---- a/include/dt-bindings/reset/sun8i-a23-a33-ccu.h
-+++ /dev/null
-@@ -1,87 +0,0 @@
--/*
-- * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN8I_A23_A33_H_
--#define _DT_BINDINGS_RST_SUN8I_A23_A33_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_HSIC		2
--#define RST_MBUS		3
--#define RST_BUS_MIPI_DSI	4
--#define RST_BUS_SS		5
--#define RST_BUS_DMA		6
--#define RST_BUS_MMC0		7
--#define RST_BUS_MMC1		8
--#define RST_BUS_MMC2		9
--#define RST_BUS_NAND		10
--#define RST_BUS_DRAM		11
--#define RST_BUS_HSTIMER		12
--#define RST_BUS_SPI0		13
--#define RST_BUS_SPI1		14
--#define RST_BUS_OTG		15
--#define RST_BUS_EHCI		16
--#define RST_BUS_OHCI		17
--#define RST_BUS_VE		18
--#define RST_BUS_LCD		19
--#define RST_BUS_CSI		20
--#define RST_BUS_DE_BE		21
--#define RST_BUS_DE_FE		22
--#define RST_BUS_GPU		23
--#define RST_BUS_MSGBOX		24
--#define RST_BUS_SPINLOCK	25
--#define RST_BUS_DRC		26
--#define RST_BUS_SAT		27
--#define RST_BUS_LVDS		28
--#define RST_BUS_CODEC		29
--#define RST_BUS_I2S0		30
--#define RST_BUS_I2S1		31
--#define RST_BUS_I2C0		32
--#define RST_BUS_I2C1		33
--#define RST_BUS_I2C2		34
--#define RST_BUS_UART0		35
--#define RST_BUS_UART1		36
--#define RST_BUS_UART2		37
--#define RST_BUS_UART3		38
--#define RST_BUS_UART4		39
--
--#endif /* _DT_BINDINGS_RST_SUN8I_A23_A33_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-a83t-ccu.h b/include/dt-bindings/reset/sun8i-a83t-ccu.h
-deleted file mode 100644
-index 784f6e11664e..000000000000
---- a/include/dt-bindings/reset/sun8i-a83t-ccu.h
-+++ /dev/null
-@@ -1,98 +0,0 @@
--/*
-- * Copyright (C) 2017 Chen-Yu Tsai <wens@csie.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN8I_A83T_CCU_H_
--#define _DT_BINDINGS_RESET_SUN8I_A83T_CCU_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_HSIC		2
--
--#define RST_DRAM		3
--#define RST_MBUS		4
--
--#define RST_BUS_MIPI_DSI	5
--#define RST_BUS_SS		6
--#define RST_BUS_DMA		7
--#define RST_BUS_MMC0		8
--#define RST_BUS_MMC1		9
--#define RST_BUS_MMC2		10
--#define RST_BUS_NAND		11
--#define RST_BUS_DRAM		12
--#define RST_BUS_EMAC		13
--#define RST_BUS_HSTIMER		14
--#define RST_BUS_SPI0		15
--#define RST_BUS_SPI1		16
--#define RST_BUS_OTG		17
--#define RST_BUS_EHCI0		18
--#define RST_BUS_EHCI1		19
--#define RST_BUS_OHCI0		20
--
--#define RST_BUS_VE		21
--#define RST_BUS_TCON0		22
--#define RST_BUS_TCON1		23
--#define RST_BUS_CSI		24
--#define RST_BUS_HDMI0		25
--#define RST_BUS_HDMI1		26
--#define RST_BUS_DE		27
--#define RST_BUS_GPU		28
--#define RST_BUS_MSGBOX		29
--#define RST_BUS_SPINLOCK	30
--
--#define RST_BUS_LVDS		31
--
--#define RST_BUS_SPDIF		32
--#define RST_BUS_I2S0		33
--#define RST_BUS_I2S1		34
--#define RST_BUS_I2S2		35
--#define RST_BUS_TDM		36
--
--#define RST_BUS_I2C0		37
--#define RST_BUS_I2C1		38
--#define RST_BUS_I2C2		39
--#define RST_BUS_UART0		40
--#define RST_BUS_UART1		41
--#define RST_BUS_UART2		42
--#define RST_BUS_UART3		43
--#define RST_BUS_UART4		44
--
--#endif /* _DT_BINDINGS_RESET_SUN8I_A83T_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-de2.h b/include/dt-bindings/reset/sun8i-de2.h
-deleted file mode 100644
-index 1c36a6ac86d6..000000000000
---- a/include/dt-bindings/reset/sun8i-de2.h
-+++ /dev/null
-@@ -1,15 +0,0 @@
--/*
-- * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.io>
-- *
-- * SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN8I_DE2_H_
--#define _DT_BINDINGS_RESET_SUN8I_DE2_H_
--
--#define RST_MIXER0	0
--#define RST_MIXER1	1
--#define RST_WB		2
--#define RST_ROT		3
--
--#endif /* _DT_BINDINGS_RESET_SUN8I_DE2_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-h3-ccu.h b/include/dt-bindings/reset/sun8i-h3-ccu.h
-deleted file mode 100644
-index 484c2a22919d..000000000000
---- a/include/dt-bindings/reset/sun8i-h3-ccu.h
-+++ /dev/null
-@@ -1,106 +0,0 @@
--/*
-- * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN8I_H3_H_
--#define _DT_BINDINGS_RST_SUN8I_H3_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_PHY2		2
--#define RST_USB_PHY3		3
--
--#define RST_MBUS		4
--
--#define RST_BUS_CE		5
--#define RST_BUS_DMA		6
--#define RST_BUS_MMC0		7
--#define RST_BUS_MMC1		8
--#define RST_BUS_MMC2		9
--#define RST_BUS_NAND		10
--#define RST_BUS_DRAM		11
--#define RST_BUS_EMAC		12
--#define RST_BUS_TS		13
--#define RST_BUS_HSTIMER		14
--#define RST_BUS_SPI0		15
--#define RST_BUS_SPI1		16
--#define RST_BUS_OTG		17
--#define RST_BUS_EHCI0		18
--#define RST_BUS_EHCI1		19
--#define RST_BUS_EHCI2		20
--#define RST_BUS_EHCI3		21
--#define RST_BUS_OHCI0		22
--#define RST_BUS_OHCI1		23
--#define RST_BUS_OHCI2		24
--#define RST_BUS_OHCI3		25
--#define RST_BUS_VE		26
--#define RST_BUS_TCON0		27
--#define RST_BUS_TCON1		28
--#define RST_BUS_DEINTERLACE	29
--#define RST_BUS_CSI		30
--#define RST_BUS_TVE		31
--#define RST_BUS_HDMI0		32
--#define RST_BUS_HDMI1		33
--#define RST_BUS_DE		34
--#define RST_BUS_GPU		35
--#define RST_BUS_MSGBOX		36
--#define RST_BUS_SPINLOCK	37
--#define RST_BUS_DBG		38
--#define RST_BUS_EPHY		39
--#define RST_BUS_CODEC		40
--#define RST_BUS_SPDIF		41
--#define RST_BUS_THS		42
--#define RST_BUS_I2S0		43
--#define RST_BUS_I2S1		44
--#define RST_BUS_I2S2		45
--#define RST_BUS_I2C0		46
--#define RST_BUS_I2C1		47
--#define RST_BUS_I2C2		48
--#define RST_BUS_UART0		49
--#define RST_BUS_UART1		50
--#define RST_BUS_UART2		51
--#define RST_BUS_UART3		52
--#define RST_BUS_SCR0		53
--
--/* New resets imported in H5 */
--#define RST_BUS_SCR1		54
--
--#endif /* _DT_BINDINGS_RST_SUN8I_H3_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-r-ccu.h b/include/dt-bindings/reset/sun8i-r-ccu.h
-deleted file mode 100644
-index 4ba64f3d6fc9..000000000000
---- a/include/dt-bindings/reset/sun8i-r-ccu.h
-+++ /dev/null
-@@ -1,53 +0,0 @@
--/*
-- * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN8I_R_CCU_H_
--#define _DT_BINDINGS_RST_SUN8I_R_CCU_H_
--
--#define RST_APB0_IR		0
--#define RST_APB0_TIMER		1
--#define RST_APB0_RSB		2
--#define RST_APB0_UART		3
--/* 4 is reserved for RST_APB0_W1 on A31 */
--#define RST_APB0_I2C		5
--
--#endif /* _DT_BINDINGS_RST_SUN8I_R_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-r40-ccu.h b/include/dt-bindings/reset/sun8i-r40-ccu.h
-deleted file mode 100644
-index c5ebcf6672e4..000000000000
---- a/include/dt-bindings/reset/sun8i-r40-ccu.h
-+++ /dev/null
-@@ -1,130 +0,0 @@
--/*
-- * Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN8I_R40_H_
--#define _DT_BINDINGS_RST_SUN8I_R40_H_
--
--#define RST_USB_PHY0		0
--#define RST_USB_PHY1		1
--#define RST_USB_PHY2		2
--
--#define RST_DRAM		3
--#define RST_MBUS		4
--
--#define RST_BUS_MIPI_DSI	5
--#define RST_BUS_CE		6
--#define RST_BUS_DMA		7
--#define RST_BUS_MMC0		8
--#define RST_BUS_MMC1		9
--#define RST_BUS_MMC2		10
--#define RST_BUS_MMC3		11
--#define RST_BUS_NAND		12
--#define RST_BUS_DRAM		13
--#define RST_BUS_EMAC		14
--#define RST_BUS_TS		15
--#define RST_BUS_HSTIMER		16
--#define RST_BUS_SPI0		17
--#define RST_BUS_SPI1		18
--#define RST_BUS_SPI2		19
--#define RST_BUS_SPI3		20
--#define RST_BUS_SATA		21
--#define RST_BUS_OTG		22
--#define RST_BUS_EHCI0		23
--#define RST_BUS_EHCI1		24
--#define RST_BUS_EHCI2		25
--#define RST_BUS_OHCI0		26
--#define RST_BUS_OHCI1		27
--#define RST_BUS_OHCI2		28
--#define RST_BUS_VE		29
--#define RST_BUS_MP		30
--#define RST_BUS_DEINTERLACE	31
--#define RST_BUS_CSI0		32
--#define RST_BUS_CSI1		33
--#define RST_BUS_HDMI0		34
--#define RST_BUS_HDMI1		35
--#define RST_BUS_DE		36
--#define RST_BUS_TVE0		37
--#define RST_BUS_TVE1		38
--#define RST_BUS_TVE_TOP		39
--#define RST_BUS_GMAC		40
--#define RST_BUS_GPU		41
--#define RST_BUS_TVD0		42
--#define RST_BUS_TVD1		43
--#define RST_BUS_TVD2		44
--#define RST_BUS_TVD3		45
--#define RST_BUS_TVD_TOP		46
--#define RST_BUS_TCON_LCD0	47
--#define RST_BUS_TCON_LCD1	48
--#define RST_BUS_TCON_TV0	49
--#define RST_BUS_TCON_TV1	50
--#define RST_BUS_TCON_TOP	51
--#define RST_BUS_DBG		52
--#define RST_BUS_LVDS		53
--#define RST_BUS_CODEC		54
--#define RST_BUS_SPDIF		55
--#define RST_BUS_AC97		56
--#define RST_BUS_IR0		57
--#define RST_BUS_IR1		58
--#define RST_BUS_THS		59
--#define RST_BUS_KEYPAD		60
--#define RST_BUS_I2S0		61
--#define RST_BUS_I2S1		62
--#define RST_BUS_I2S2		63
--#define RST_BUS_I2C0		64
--#define RST_BUS_I2C1		65
--#define RST_BUS_I2C2		66
--#define RST_BUS_I2C3		67
--#define RST_BUS_CAN		68
--#define RST_BUS_SCR		69
--#define RST_BUS_PS20		70
--#define RST_BUS_PS21		71
--#define RST_BUS_I2C4		72
--#define RST_BUS_UART0		73
--#define RST_BUS_UART1		74
--#define RST_BUS_UART2		75
--#define RST_BUS_UART3		76
--#define RST_BUS_UART4		77
--#define RST_BUS_UART5		78
--#define RST_BUS_UART6		79
--#define RST_BUS_UART7		80
--
--#endif /* _DT_BINDINGS_RST_SUN8I_R40_H_ */
-diff --git a/include/dt-bindings/reset/sun8i-v3s-ccu.h b/include/dt-bindings/reset/sun8i-v3s-ccu.h
-deleted file mode 100644
-index b6790173afd6..000000000000
---- a/include/dt-bindings/reset/sun8i-v3s-ccu.h
-+++ /dev/null
-@@ -1,81 +0,0 @@
--/*
-- * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
-- *
-- * Based on sun8i-v3s-ccu.h, which is
-- * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RST_SUN8I_V3S_H_
--#define _DT_BINDINGS_RST_SUN8I_V3S_H_
--
--#define RST_USB_PHY0		0
--
--#define RST_MBUS		1
--
--#define RST_BUS_CE		5
--#define RST_BUS_DMA		6
--#define RST_BUS_MMC0		7
--#define RST_BUS_MMC1		8
--#define RST_BUS_MMC2		9
--#define RST_BUS_DRAM		11
--#define RST_BUS_EMAC		12
--#define RST_BUS_HSTIMER		14
--#define RST_BUS_SPI0		15
--#define RST_BUS_OTG		17
--#define RST_BUS_EHCI0		18
--#define RST_BUS_OHCI0		22
--#define RST_BUS_VE		26
--#define RST_BUS_TCON0		27
--#define RST_BUS_CSI		30
--#define RST_BUS_DE		34
--#define RST_BUS_DBG		38
--#define RST_BUS_EPHY		39
--#define RST_BUS_CODEC		40
--#define RST_BUS_I2C0		46
--#define RST_BUS_I2C1		47
--#define RST_BUS_UART0		49
--#define RST_BUS_UART1		50
--#define RST_BUS_UART2		51
--
--/* Reset lines not available on V3s */
--#define RST_BUS_I2S0		52
--
--#endif /* _DT_BINDINGS_RST_SUN8I_H3_H_ */
-diff --git a/include/dt-bindings/reset/sun9i-a80-ccu.h b/include/dt-bindings/reset/sun9i-a80-ccu.h
-deleted file mode 100644
-index 4b8df4b36788..000000000000
---- a/include/dt-bindings/reset/sun9i-a80-ccu.h
-+++ /dev/null
-@@ -1,102 +0,0 @@
--/*
-- * Copyright (C) 2016 Chen-Yu Tsai <wens@csie.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN9I_A80_CCU_H_
--#define _DT_BINDINGS_RESET_SUN9I_A80_CCU_H_
--
--#define RST_BUS_FD		0
--#define RST_BUS_VE		1
--#define RST_BUS_GPU_CTRL	2
--#define RST_BUS_SS		3
--#define RST_BUS_MMC		4
--#define RST_BUS_NAND0		5
--#define RST_BUS_NAND1		6
--#define RST_BUS_SDRAM		7
--#define RST_BUS_SATA		8
--#define RST_BUS_TS		9
--#define RST_BUS_SPI0		10
--#define RST_BUS_SPI1		11
--#define RST_BUS_SPI2		12
--#define RST_BUS_SPI3		13
--
--#define RST_BUS_OTG		14
--#define RST_BUS_OTG_PHY		15
--#define RST_BUS_MIPI_HSI	16
--#define RST_BUS_GMAC		17
--#define RST_BUS_MSGBOX		18
--#define RST_BUS_SPINLOCK	19
--#define RST_BUS_HSTIMER		20
--#define RST_BUS_DMA		21
--
--#define RST_BUS_LCD0		22
--#define RST_BUS_LCD1		23
--#define RST_BUS_EDP		24
--#define RST_BUS_LVDS		25
--#define RST_BUS_CSI		26
--#define RST_BUS_HDMI0		27
--#define RST_BUS_HDMI1		28
--#define RST_BUS_DE		29
--#define RST_BUS_MP		30
--#define RST_BUS_GPU		31
--#define RST_BUS_MIPI_DSI	32
--
--#define RST_BUS_SPDIF		33
--#define RST_BUS_AC97		34
--#define RST_BUS_I2S0		35
--#define RST_BUS_I2S1		36
--#define RST_BUS_LRADC		37
--#define RST_BUS_GPADC		38
--#define RST_BUS_CIR_TX		39
--
--#define RST_BUS_I2C0		40
--#define RST_BUS_I2C1		41
--#define RST_BUS_I2C2		42
--#define RST_BUS_I2C3		43
--#define RST_BUS_I2C4		44
--#define RST_BUS_UART0		45
--#define RST_BUS_UART1		46
--#define RST_BUS_UART2		47
--#define RST_BUS_UART3		48
--#define RST_BUS_UART4		49
--#define RST_BUS_UART5		50
--
--#endif /* _DT_BINDINGS_RESET_SUN9I_A80_CCU_H_ */
-diff --git a/include/dt-bindings/reset/sun9i-a80-de.h b/include/dt-bindings/reset/sun9i-a80-de.h
-deleted file mode 100644
-index 205072770171..000000000000
---- a/include/dt-bindings/reset/sun9i-a80-de.h
-+++ /dev/null
-@@ -1,58 +0,0 @@
--/*
-- * Copyright (C) 2016 Chen-Yu Tsai <wens@csie.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN9I_A80_DE_H_
--#define _DT_BINDINGS_RESET_SUN9I_A80_DE_H_
--
--#define RST_FE0		0
--#define RST_FE1		1
--#define RST_FE2		2
--#define RST_DEU0	3
--#define RST_DEU1	4
--#define RST_BE0		5
--#define RST_BE1		6
--#define RST_BE2		7
--#define RST_DRC0	8
--#define RST_DRC1	9
--#define RST_MERGE	10
--
--#endif /* _DT_BINDINGS_RESET_SUN9I_A80_DE_H_ */
-diff --git a/include/dt-bindings/reset/sun9i-a80-usb.h b/include/dt-bindings/reset/sun9i-a80-usb.h
-deleted file mode 100644
-index ee492864c2aa..000000000000
---- a/include/dt-bindings/reset/sun9i-a80-usb.h
-+++ /dev/null
-@@ -1,56 +0,0 @@
--/*
-- * Copyright (C) 2016 Chen-Yu Tsai <wens@csie.org>
-- *
-- * This file is dual-licensed: you can use it either under the terms
-- * of the GPL or the X11 license, at your option. Note that this dual
-- * licensing only applies to this file, and not this project as a
-- * whole.
-- *
-- *  a) This file is free software; you can redistribute it and/or
-- *     modify it under the terms of the GNU General Public License as
-- *     published by the Free Software Foundation; either version 2 of the
-- *     License, or (at your option) any later version.
-- *
-- *     This file is distributed in the hope that it will be useful,
-- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
-- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-- *     GNU General Public License for more details.
-- *
-- * Or, alternatively,
-- *
-- *  b) Permission is hereby granted, free of charge, to any person
-- *     obtaining a copy of this software and associated documentation
-- *     files (the "Software"), to deal in the Software without
-- *     restriction, including without limitation the rights to use,
-- *     copy, modify, merge, publish, distribute, sublicense, and/or
-- *     sell copies of the Software, and to permit persons to whom the
-- *     Software is furnished to do so, subject to the following
-- *     conditions:
-- *
-- *     The above copyright notice and this permission notice shall be
-- *     included in all copies or substantial portions of the Software.
-- *
-- *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-- *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-- *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-- *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-- *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-- *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-- *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-- *     OTHER DEALINGS IN THE SOFTWARE.
-- */
--
--#ifndef _DT_BINDINGS_RESET_SUN9I_A80_USB_H_
--#define _DT_BINDINGS_RESET_SUN9I_A80_USB_H_
--
--#define RST_USB0_HCI	0
--#define RST_USB1_HCI	1
--#define RST_USB2_HCI	2
--
--#define RST_USB0_PHY	3
--#define RST_USB1_HSIC	4
--#define RST_USB1_PHY	5
--#define RST_USB2_HSIC	6
--#define RST_USB2_PHY	7
--
--#endif /* _DT_BINDINGS_RESET_SUN9I_A80_USB_H_ */
-diff --git a/include/dt-bindings/reset/suniv-ccu-f1c100s.h b/include/dt-bindings/reset/suniv-ccu-f1c100s.h
-deleted file mode 100644
-index 6a4b4385fe5a..000000000000
---- a/include/dt-bindings/reset/suniv-ccu-f1c100s.h
-+++ /dev/null
-@@ -1,38 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-- *
-- * Copyright (C) 2018 Icenowy Zheng <icenowy@aosc.xyz>
-- *
-- */
--
--#ifndef _DT_BINDINGS_RST_SUNIV_F1C100S_H_
--#define _DT_BINDINGS_RST_SUNIV_F1C100S_H_
--
--#define RST_USB_PHY0		0
--#define RST_BUS_DMA		1
--#define RST_BUS_MMC0		2
--#define RST_BUS_MMC1		3
--#define RST_BUS_DRAM		4
--#define RST_BUS_SPI0		5
--#define RST_BUS_SPI1		6
--#define RST_BUS_OTG		7
--#define RST_BUS_VE		8
--#define RST_BUS_LCD		9
--#define RST_BUS_DEINTERLACE	10
--#define RST_BUS_CSI		11
--#define RST_BUS_TVD		12
--#define RST_BUS_TVE		13
--#define RST_BUS_DE_BE		14
--#define RST_BUS_DE_FE		15
--#define RST_BUS_CODEC		16
--#define RST_BUS_SPDIF		17
--#define RST_BUS_IR		18
--#define RST_BUS_RSB		19
--#define RST_BUS_I2S0		20
--#define RST_BUS_I2C0		21
--#define RST_BUS_I2C1		22
--#define RST_BUS_I2C2		23
--#define RST_BUS_UART0		24
--#define RST_BUS_UART1		25
--#define RST_BUS_UART2		26
--
--#endif /* _DT_BINDINGS_RST_SUNIV_F1C100S_H_ */
+-#ifndef __DT_BINDINGS_CLOCK_IMXRT1050_H
+-#define __DT_BINDINGS_CLOCK_IMXRT1050_H
+-
+-#define IMXRT1050_CLK_DUMMY			0
+-#define IMXRT1050_CLK_CKIL			1
+-#define IMXRT1050_CLK_CKIH			2
+-#define IMXRT1050_CLK_OSC			3
+-#define IMXRT1050_CLK_PLL2_PFD0_352M		4
+-#define IMXRT1050_CLK_PLL2_PFD1_594M		5
+-#define IMXRT1050_CLK_PLL2_PFD2_396M		6
+-#define IMXRT1050_CLK_PLL3_PFD0_720M		7
+-#define IMXRT1050_CLK_PLL3_PFD1_664_62M		8
+-#define IMXRT1050_CLK_PLL3_PFD2_508_24M		9
+-#define IMXRT1050_CLK_PLL3_PFD3_454_74M		10
+-#define IMXRT1050_CLK_PLL2_198M			11
+-#define IMXRT1050_CLK_PLL3_120M			12
+-#define IMXRT1050_CLK_PLL3_80M			13
+-#define IMXRT1050_CLK_PLL3_60M			14
+-#define IMXRT1050_CLK_PLL1_BYPASS		15
+-#define IMXRT1050_CLK_PLL2_BYPASS		16
+-#define IMXRT1050_CLK_PLL3_BYPASS		17
+-#define IMXRT1050_CLK_PLL5_BYPASS		19
+-#define IMXRT1050_CLK_PLL1_REF_SEL		20
+-#define IMXRT1050_CLK_PLL2_REF_SEL		21
+-#define IMXRT1050_CLK_PLL3_REF_SEL		22
+-#define IMXRT1050_CLK_PLL5_REF_SEL		23
+-#define IMXRT1050_CLK_PRE_PERIPH_SEL		24
+-#define IMXRT1050_CLK_PERIPH_SEL		25
+-#define IMXRT1050_CLK_SEMC_ALT_SEL		26
+-#define IMXRT1050_CLK_SEMC_SEL			27
+-#define IMXRT1050_CLK_USDHC1_SEL		28
+-#define IMXRT1050_CLK_USDHC2_SEL		29
+-#define IMXRT1050_CLK_LPUART_SEL		30
+-#define IMXRT1050_CLK_LCDIF_SEL			31
+-#define IMXRT1050_CLK_VIDEO_POST_DIV_SEL	32
+-#define IMXRT1050_CLK_VIDEO_DIV			33
+-#define IMXRT1050_CLK_ARM_PODF			34
+-#define IMXRT1050_CLK_LPUART_PODF		35
+-#define IMXRT1050_CLK_USDHC1_PODF		36
+-#define IMXRT1050_CLK_USDHC2_PODF		37
+-#define IMXRT1050_CLK_SEMC_PODF			38
+-#define IMXRT1050_CLK_AHB_PODF			39
+-#define IMXRT1050_CLK_LCDIF_PRED		40
+-#define IMXRT1050_CLK_LCDIF_PODF		41
+-#define IMXRT1050_CLK_USDHC1			42
+-#define IMXRT1050_CLK_USDHC2			43
+-#define IMXRT1050_CLK_LPUART1			44
+-#define IMXRT1050_CLK_SEMC			45
+-#define IMXRT1050_CLK_LCDIF_APB			46
+-#define IMXRT1050_CLK_PLL1_ARM			47
+-#define IMXRT1050_CLK_PLL2_SYS			48
+-#define IMXRT1050_CLK_PLL3_USB_OTG		49
+-#define IMXRT1050_CLK_PLL4_AUDIO		50
+-#define IMXRT1050_CLK_PLL5_VIDEO		51
+-#define IMXRT1050_CLK_PLL6_ENET			52
+-#define IMXRT1050_CLK_PLL7_USB_HOST		53
+-#define IMXRT1050_CLK_LCDIF_PIX			54
+-#define IMXRT1050_CLK_USBOH3			55
+-#define IMXRT1050_CLK_IPG_PDOF			56
+-#define IMXRT1050_CLK_PER_CLK_SEL		57
+-#define IMXRT1050_CLK_PER_PDOF			58
+-#define IMXRT1050_CLK_DMA			59
+-#define IMXRT1050_CLK_DMA_MUX			60
+-#define IMXRT1050_CLK_END			61
+-
+-#endif /* __DT_BINDINGS_CLOCK_IMXRT1050_H */
 
 -- 
 2.44.0

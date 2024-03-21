@@ -2,64 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E973886235
-	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F97C886236
+	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:36 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24371C6DD69;
-	Thu, 21 Mar 2024 21:04:35 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
- [209.85.128.47])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3812AC6DD79;
+	Thu, 21 Mar 2024 21:04:36 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5E6CDC6DD68
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C71BCC6DD68
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 21:04:33 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4146d750dcdso8898365e9.1
+ Thu, 21 Mar 2024 21:04:34 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-414776775d3so4895055e9.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 14:04:33 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055073; x=1711659873;
+ d=linaro.org; s=google; t=1711055074; x=1711659874;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3I2vaGPZZ3gjBTSC5fLRBtWa2TW127+ZHLJWBufbarI=;
- b=V1Cjm+1FkB1JHmBa7sOaecNdIMEv63d6dcL9KsePi8X77YIcfXsuqgUvQxqsKcD2sn
- cSlKjSNqxDc7SLHX8lZ3s3XJhY0jD99GEm7M8u9oAQ+wu/rgyFEUaDe77bSKGOqGwqR2
- hQSEpipal0GAkx2sClS0P5akeaT/dz3BmXIF02iRGnyCkKdqwZiIE1fspLCg3rKC77nq
- nAi34A06+gFITGE/6xncrUuIImhzPIpEuLc7bcfiesgmou4IAubNWLJH5jEzmyxqq/Lk
- GImNisgCebsY8OrjbisQognnvrYT2eymBXcXYxn1MDS9BR0pGSZJrGgdizILKOIPWAuT
- Rx5g==
+ :reply-to; bh=q1ASbhJ8pDNxOQKza4SvWtSWDi9xDgSqdUryll9us+Q=;
+ b=Lkf6z/aS+Oo/r1kqXz1cRe3LGtfhQYxhNmNIIpWjiQYVx+gQBudqrcxa0Kvq01FWnn
+ dCXXJpDu4Sh376U/2BE0vwDrhhqS3jw9VaFLxTd0zo7fWmnjoTERGTjmelJA/eNKqdgt
+ BtRYEhoc3FrryK7ySTT+Rutx1DRKwvyqY0bPw4pZOE0LMvHxUgI/G6B9W+4GewwDt36k
+ //IjvyH/2eEgYxZ2I37oIiSGK6TdnunhIQByRxOZ0VYvbHdrBggV1YN27sNF9b0KtJxt
+ 1v/RTVqH9wZz6SufGF5ErW935KJ4yN3EHj8KBV8DioEMv4XsE+S6JGr1Gn6tablG2c/u
+ YaHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055073; x=1711659873;
+ d=1e100.net; s=20230601; t=1711055074; x=1711659874;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3I2vaGPZZ3gjBTSC5fLRBtWa2TW127+ZHLJWBufbarI=;
- b=wfEh9FauENb+9Sd8PC5CtyzdayPzwB6WHDpeiTHKDAP59Aw2uBtijzpA2xL8JCL9rS
- ZVQB6d/sleGHtJFTQUnBCK+HeH9eRaJ7b1RAnCxCtHDdyvDftg9CtWvO+soEeuqJsZMk
- Oz+U388RiTerVo1RES4hdNY0bXKqGFK77qTP+0/0LwbsFS85oHCHVAbBsqVd6WV9PROx
- 6RgcgSb7Q98vnuP1LAWE4zRMSBG5XIiLjpZfaLSERf/ziQji+dYSP5scSSR8Q9JuEgX2
- YGkX/nl5E4HR0z0ZbywNsLB7+87NiPDhXOM3qZeKA9lnb6b0tBgkTMFNyuYGpKxdTJ6x
- R5ng==
+ bh=q1ASbhJ8pDNxOQKza4SvWtSWDi9xDgSqdUryll9us+Q=;
+ b=bJ1bt+z5h+0DdERO6qE3r4sv24nkh2tjzFFbGtPB4RDDEgXG/xpbxp/+KR+DuzlwZr
+ +905Si2nEndb25BS2rHpu0K+J4e2CrMNG/KyeoIa20kqKzLOVGDq54KB7GI3ad93KBLp
+ qKv0cBy6b+2hg6RSexplpYJZ6tZQ1yHKSqoSedPIqjmHxcIP6bo4pTGkF+c97fHaKpPv
+ ngTkmajVS7seQ7Zll4VGgpSf8sBl9AOptXkQ2jEqo9fufPfKQ3jzUV7SebShQoQnKv5G
+ xYAYe6+7uPv3bUA3/mPqhwHihzVGOsK53ab5DsNYDopWvG8oVbaNGiaXhTS1R6xX7JlG
+ 6jhg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQqbF1N0poa7VGCCkqtcr0hwtzeOSqY+LBtD4Hl9Ckdw790rydw4V0ugY73cG31rGzxFjezh4krp04S3gE/SlsDpXQzclkBRj6ciKAr6vvdn+1WCyeuVP7
-X-Gm-Message-State: AOJu0YwJgpwcVRLtHZ+SyM2Wy4uGuYIn1pkAi3vXo5/6FAYCh2ppwnNY
- qPCgM1pLrT0QNfqWQCrpr2/uyTjFaPd+n9Ww3GGcvGy+n5EhdTtfsKeV+w7RdgVY+O5Wvr74AQY
- O
-X-Google-Smtp-Source: AGHT+IG1D0KirhwTixx0OE1NWwwM56ZABLDMneg9vVTboOBpaNCz6I5lkSUwzSReEJDiVk+hXg7CnQ==
-X-Received: by 2002:a05:600c:4ecf:b0:414:61d9:d1f5 with SMTP id
- g15-20020a05600c4ecf00b0041461d9d1f5mr120513wmq.10.1711055072939; 
- Thu, 21 Mar 2024 14:04:32 -0700 (PDT)
+ AJvYcCWWjYQfPJSqw1PvCOe5sfMFhUIJBGode1z7KEbuNUqNVjboM8npOpccvUq1KT4Yrzkja5pz9uXbS5b1x38KQ00fb/t93wkCvdq4LH+X83JcQkpBgYgOccQC
+X-Gm-Message-State: AOJu0Yx9+LL5P7UO82fzg98wFdrxCQIPw/oxan3qNE9QJiRA35oNwUMF
+ xtwyCoMZd9o/e5PXK1VTk0WeakBEVw67dw6V0vAderc4R+15wxG/snzSF6FjUUM=
+X-Google-Smtp-Source: AGHT+IFOUuk3cOI6RQWEIfgFFUGW/esMA1Sfa4RQxSLXjS0d7Trvs9K2GY/aVWC08zuStBqlKF50Jw==
+X-Received: by 2002:a05:600c:6b17:b0:414:392:3abc with SMTP id
+ jn23-20020a05600c6b1700b0041403923abcmr211985wmb.11.1711055074285; 
+ Thu, 21 Mar 2024 14:04:34 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.31
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:32 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:33 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:04:01 +0000
+Date: Thu, 21 Mar 2024 21:04:02 +0000
 MIME-Version: 1.0
-Message-Id: <20240321-b4-upstream-dt-headers-v2-18-1eac0df875fe@linaro.org>
+Message-Id: <20240321-b4-upstream-dt-headers-v2-19-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -89,19 +88,19 @@ To: Tom Rini <trini@konsulko.com>,
  Dai Okamura <okamura.dai@socionext.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12736;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=15260;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HkbSGabfPtjJGIe4yorv0zsrHjzqb6ecFAWLshl7GSU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZWhCz52bThiL9B2swm8Xelv97Y/hA87v/p1xTtr
- HIzy+VeHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAibOIM/xTqtm2Yq1G658MN
- V9UKoUKVar06ifLANRKHIub1rV5a5cnwP/QMg5GcoYuFSJL0Zv41d2JXXJ7Te4b3jLZG+bOj7ae
- 8VgEA
+ bh=S6l2X68dLtPLBye6TdWUWbFGD8YCUQmcKehHGXIg088=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/aK8UsvNzPdqbxhZVHH8T96r1ZfUeZONzvn9bLRU
+ aFZp/t+RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjIJnGG/zXPRAvslj6unWZ/
+ +diR7l1Klrznd5ZLXPhe9zO6x0S3dQnD/8prqxfK7Xj+O/Dsypmell+f7pVxFXLc9Wi9yrucbRz
+ e5jsB
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, Caleb Connolly <caleb.connolly@linaro.org>,
  u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v2 18/24] microchip: drop dt-binding headers
+Subject: [Uboot-stm32] [PATCH v2 19/24] hisi: drop dt-binding headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,386 +119,492 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Drop in favour of dts/upstream
 
-Adjust header include path naming for mpfs clock.
-
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/riscv/dts/mpfs.dtsi                         |  2 +-
- drivers/clk/microchip/mpfs_clk.c                 |  2 +-
- drivers/clk/microchip/mpfs_clk_cfg.c             |  2 +-
- drivers/clk/microchip/mpfs_clk_msspll.c          |  2 +-
- drivers/clk/microchip/mpfs_clk_periph.c          |  2 +-
- include/dt-bindings/clock/at91.h                 | 23 --------
- include/dt-bindings/clock/microchip-mpfs-clock.h | 71 ------------------------
- include/dt-bindings/dma/at91.h                   | 52 -----------------
- include/dt-bindings/mfd/at91-usart.h             | 17 ------
- include/dt-bindings/net/microchip-lan78xx.h      | 21 -------
- include/dt-bindings/pinctrl/at91.h               | 49 ----------------
- include/dt-bindings/sound/microchip,pdmc.h       | 13 -----
- 12 files changed, 5 insertions(+), 251 deletions(-)
+ include/dt-bindings/clock/hi3660-clock.h | 214 -------------------------------
+ include/dt-bindings/clock/hi6220-clock.h | 173 -------------------------
+ include/dt-bindings/pinctrl/hisi.h       |  74 -----------
+ 3 files changed, 461 deletions(-)
 
-diff --git a/arch/riscv/dts/mpfs.dtsi b/arch/riscv/dts/mpfs.dtsi
-index 6012a2850703..5827d5c5d19b 100644
---- a/arch/riscv/dts/mpfs.dtsi
-+++ b/arch/riscv/dts/mpfs.dtsi
-@@ -1,8 +1,8 @@
- // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
- /* Copyright (c) 2020-2021 Microchip Technology Inc */
- 
--#include "dt-bindings/clock/microchip-mpfs-clock.h"
-+#include <dt-bindings/clock/microchip,mpfs-clock.h>
- 
- / {
- 	#address-cells = <2>;
- 	#size-cells = <2>;
-diff --git a/drivers/clk/microchip/mpfs_clk.c b/drivers/clk/microchip/mpfs_clk.c
-index 08f8bfcecbed..44ac4306eace 100644
---- a/drivers/clk/microchip/mpfs_clk.c
-+++ b/drivers/clk/microchip/mpfs_clk.c
-@@ -10,9 +10,9 @@
- #include <log.h>
- #include <dm/device.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
--#include <dt-bindings/clock/microchip-mpfs-clock.h>
-+#include <dt-bindings/clock/microchip,mpfs-clock.h>
- #include <linux/err.h>
- 
- #include "mpfs_clk.h"
- 
-diff --git a/drivers/clk/microchip/mpfs_clk_cfg.c b/drivers/clk/microchip/mpfs_clk_cfg.c
-index 5739fd66e8df..953e88e283ed 100644
---- a/drivers/clk/microchip/mpfs_clk_cfg.c
-+++ b/drivers/clk/microchip/mpfs_clk_cfg.c
-@@ -9,9 +9,9 @@
- #include <asm/io.h>
- #include <dm/device.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
--#include <dt-bindings/clock/microchip-mpfs-clock.h>
-+#include <dt-bindings/clock/microchip,mpfs-clock.h>
- #include <linux/err.h>
- 
- #include "mpfs_clk.h"
- 
-diff --git a/drivers/clk/microchip/mpfs_clk_msspll.c b/drivers/clk/microchip/mpfs_clk_msspll.c
-index f37c0d86047c..7b5020404549 100644
---- a/drivers/clk/microchip/mpfs_clk_msspll.c
-+++ b/drivers/clk/microchip/mpfs_clk_msspll.c
-@@ -8,9 +8,9 @@
- #include <asm/io.h>
- #include <dm/device.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
--#include <dt-bindings/clock/microchip-mpfs-clock.h>
-+#include <dt-bindings/clock/microchip,mpfs-clock.h>
- #include <linux/err.h>
- 
- #include "mpfs_clk.h"
- 
-diff --git a/drivers/clk/microchip/mpfs_clk_periph.c b/drivers/clk/microchip/mpfs_clk_periph.c
-index ddeccb914575..16823402def3 100644
---- a/drivers/clk/microchip/mpfs_clk_periph.c
-+++ b/drivers/clk/microchip/mpfs_clk_periph.c
-@@ -9,9 +9,9 @@
- #include <asm/io.h>
- #include <dm/device.h>
- #include <dm/devres.h>
- #include <dm/uclass.h>
--#include <dt-bindings/clock/microchip-mpfs-clock.h>
-+#include <dt-bindings/clock/microchip,mpfs-clock.h>
- #include <linux/err.h>
- 
- #include "mpfs_clk.h"
- 
-diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
+diff --git a/include/dt-bindings/clock/hi3660-clock.h b/include/dt-bindings/clock/hi3660-clock.h
 deleted file mode 100644
-index ab3ee241d10c..000000000000
---- a/include/dt-bindings/clock/at91.h
+index e1374e180943..000000000000
+--- a/include/dt-bindings/clock/hi3660-clock.h
 +++ /dev/null
-@@ -1,23 +0,0 @@
+@@ -1,214 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0-or-later */
 -/*
-- * This header provides constants for AT91 pmc status.
-- *
-- * The constants defined in this header are being used in dts.
-- *
-- * Licensed under GPLv2 or later.
+- * Copyright (c) 2016-2017 Linaro Ltd.
+- * Copyright (c) 2016-2017 HiSilicon Technologies Co., Ltd.
 - */
 -
--#ifndef _DT_BINDINGS_CLK_AT91_H
--#define _DT_BINDINGS_CLK_AT91_H
+-#ifndef __DTS_HI3660_CLOCK_H
+-#define __DTS_HI3660_CLOCK_H
 -
--#define AT91_PMC_MOSCS		0		/* MOSCS Flag */
--#define AT91_PMC_LOCKA		1		/* PLLA Lock */
--#define AT91_PMC_LOCKB		2		/* PLLB Lock */
--#define AT91_PMC_MCKRDY		3		/* Master Clock */
--#define AT91_PMC_LOCKU		6		/* UPLL Lock */
--#define AT91_PMC_PCKRDY(id)	(8 + (id))	/* Programmable Clock */
--#define AT91_PMC_MOSCSELS	16		/* Main Oscillator Selection */
--#define AT91_PMC_MOSCRCS	17		/* Main On-Chip RC */
--#define AT91_PMC_CFDEV		18		/* Clock Failure Detector Event */
--#define AT91_PMC_GCKRDY		24		/* Generated Clocks */
+-/* fixed rate clocks */
+-#define HI3660_CLKIN_SYS		0
+-#define HI3660_CLKIN_REF		1
+-#define HI3660_CLK_FLL_SRC		2
+-#define HI3660_CLK_PPLL0		3
+-#define HI3660_CLK_PPLL1		4
+-#define HI3660_CLK_PPLL2		5
+-#define HI3660_CLK_PPLL3		6
+-#define HI3660_CLK_SCPLL		7
+-#define HI3660_PCLK			8
+-#define HI3660_CLK_UART0_DBG		9
+-#define HI3660_CLK_UART6		10
+-#define HI3660_OSC32K			11
+-#define HI3660_OSC19M			12
+-#define HI3660_CLK_480M			13
+-#define HI3660_CLK_INV			14
 -
+-/* clk in crgctrl */
+-#define HI3660_FACTOR_UART3		15
+-#define HI3660_CLK_FACTOR_MMC		16
+-#define HI3660_CLK_GATE_I2C0		17
+-#define HI3660_CLK_GATE_I2C1		18
+-#define HI3660_CLK_GATE_I2C2		19
+-#define HI3660_CLK_GATE_I2C6		20
+-#define HI3660_CLK_DIV_SYSBUS		21
+-#define HI3660_CLK_DIV_320M		22
+-#define HI3660_CLK_DIV_A53		23
+-#define HI3660_CLK_GATE_SPI0		24
+-#define HI3660_CLK_GATE_SPI2		25
+-#define HI3660_PCIEPHY_REF		26
+-#define HI3660_CLK_ABB_USB		27
+-#define HI3660_HCLK_GATE_SDIO0		28
+-#define HI3660_HCLK_GATE_SD		29
+-#define HI3660_CLK_GATE_AOMM		30
+-#define HI3660_PCLK_GPIO0		31
+-#define HI3660_PCLK_GPIO1		32
+-#define HI3660_PCLK_GPIO2		33
+-#define HI3660_PCLK_GPIO3		34
+-#define HI3660_PCLK_GPIO4		35
+-#define HI3660_PCLK_GPIO5		36
+-#define HI3660_PCLK_GPIO6		37
+-#define HI3660_PCLK_GPIO7		38
+-#define HI3660_PCLK_GPIO8		39
+-#define HI3660_PCLK_GPIO9		40
+-#define HI3660_PCLK_GPIO10		41
+-#define HI3660_PCLK_GPIO11		42
+-#define HI3660_PCLK_GPIO12		43
+-#define HI3660_PCLK_GPIO13		44
+-#define HI3660_PCLK_GPIO14		45
+-#define HI3660_PCLK_GPIO15		46
+-#define HI3660_PCLK_GPIO16		47
+-#define HI3660_PCLK_GPIO17		48
+-#define HI3660_PCLK_GPIO18		49
+-#define HI3660_PCLK_GPIO19		50
+-#define HI3660_PCLK_GPIO20		51
+-#define HI3660_PCLK_GPIO21		52
+-#define HI3660_CLK_GATE_SPI3		53
+-#define HI3660_CLK_GATE_I2C7		54
+-#define HI3660_CLK_GATE_I2C3		55
+-#define HI3660_CLK_GATE_SPI1		56
+-#define HI3660_CLK_GATE_UART1		57
+-#define HI3660_CLK_GATE_UART2		58
+-#define HI3660_CLK_GATE_UART4		59
+-#define HI3660_CLK_GATE_UART5		60
+-#define HI3660_CLK_GATE_I2C4		61
+-#define HI3660_CLK_GATE_DMAC		62
+-#define HI3660_PCLK_GATE_DSS		63
+-#define HI3660_ACLK_GATE_DSS		64
+-#define HI3660_CLK_GATE_LDI1		65
+-#define HI3660_CLK_GATE_LDI0		66
+-#define HI3660_CLK_GATE_VIVOBUS		67
+-#define HI3660_CLK_GATE_EDC0		68
+-#define HI3660_CLK_GATE_TXDPHY0_CFG	69
+-#define HI3660_CLK_GATE_TXDPHY0_REF	70
+-#define HI3660_CLK_GATE_TXDPHY1_CFG	71
+-#define HI3660_CLK_GATE_TXDPHY1_REF	72
+-#define HI3660_ACLK_GATE_USB3OTG	73
+-#define HI3660_CLK_GATE_SPI4		74
+-#define HI3660_CLK_GATE_SD		75
+-#define HI3660_CLK_GATE_SDIO0		76
+-#define HI3660_CLK_GATE_UFS_SUBSYS	77
+-#define HI3660_PCLK_GATE_DSI0		78
+-#define HI3660_PCLK_GATE_DSI1		79
+-#define HI3660_ACLK_GATE_PCIE		80
+-#define HI3660_PCLK_GATE_PCIE_SYS       81
+-#define HI3660_CLK_GATE_PCIEAUX		82
+-#define HI3660_PCLK_GATE_PCIE_PHY	83
+-#define HI3660_CLK_ANDGT_LDI0		84
+-#define HI3660_CLK_ANDGT_LDI1		85
+-#define HI3660_CLK_ANDGT_EDC0		86
+-#define HI3660_CLK_GATE_UFSPHY_GT	87
+-#define HI3660_CLK_ANDGT_MMC		88
+-#define HI3660_CLK_ANDGT_SD		89
+-#define HI3660_CLK_A53HPM_ANDGT		90
+-#define HI3660_CLK_ANDGT_SDIO		91
+-#define HI3660_CLK_ANDGT_UART0		92
+-#define HI3660_CLK_ANDGT_UART1		93
+-#define HI3660_CLK_ANDGT_UARTH		94
+-#define HI3660_CLK_ANDGT_SPI		95
+-#define HI3660_CLK_VIVOBUS_ANDGT	96
+-#define HI3660_CLK_AOMM_ANDGT		97
+-#define HI3660_CLK_320M_PLL_GT		98
+-#define HI3660_AUTODIV_EMMC0BUS		99
+-#define HI3660_AUTODIV_SYSBUS		100
+-#define HI3660_CLK_GATE_UFSPHY_CFG	101
+-#define HI3660_CLK_GATE_UFSIO_REF	102
+-#define HI3660_CLK_MUX_SYSBUS		103
+-#define HI3660_CLK_MUX_UART0		104
+-#define HI3660_CLK_MUX_UART1		105
+-#define HI3660_CLK_MUX_UARTH		106
+-#define HI3660_CLK_MUX_SPI		107
+-#define HI3660_CLK_MUX_I2C		108
+-#define HI3660_CLK_MUX_MMC_PLL		109
+-#define HI3660_CLK_MUX_LDI1		110
+-#define HI3660_CLK_MUX_LDI0		111
+-#define HI3660_CLK_MUX_SD_PLL		112
+-#define HI3660_CLK_MUX_SD_SYS		113
+-#define HI3660_CLK_MUX_EDC0		114
+-#define HI3660_CLK_MUX_SDIO_SYS		115
+-#define HI3660_CLK_MUX_SDIO_PLL		116
+-#define HI3660_CLK_MUX_VIVOBUS		117
+-#define HI3660_CLK_MUX_A53HPM		118
+-#define HI3660_CLK_MUX_320M		119
+-#define HI3660_CLK_MUX_IOPERI		120
+-#define HI3660_CLK_DIV_UART0		121
+-#define HI3660_CLK_DIV_UART1		122
+-#define HI3660_CLK_DIV_UARTH		123
+-#define HI3660_CLK_DIV_MMC		124
+-#define HI3660_CLK_DIV_SD		125
+-#define HI3660_CLK_DIV_EDC0		126
+-#define HI3660_CLK_DIV_LDI0		127
+-#define HI3660_CLK_DIV_SDIO		128
+-#define HI3660_CLK_DIV_LDI1		129
+-#define HI3660_CLK_DIV_SPI		130
+-#define HI3660_CLK_DIV_VIVOBUS		131
+-#define HI3660_CLK_DIV_I2C		132
+-#define HI3660_CLK_DIV_UFSPHY		133
+-#define HI3660_CLK_DIV_CFGBUS		134
+-#define HI3660_CLK_DIV_MMC0BUS		135
+-#define HI3660_CLK_DIV_MMC1BUS		136
+-#define HI3660_CLK_DIV_UFSPERI		137
+-#define HI3660_CLK_DIV_AOMM		138
+-#define HI3660_CLK_DIV_IOPERI		139
+-#define HI3660_VENC_VOLT_HOLD		140
+-#define HI3660_PERI_VOLT_HOLD		141
+-#define HI3660_CLK_GATE_VENC		142
+-#define HI3660_CLK_GATE_VDEC		143
+-#define HI3660_CLK_ANDGT_VENC		144
+-#define HI3660_CLK_ANDGT_VDEC		145
+-#define HI3660_CLK_MUX_VENC		146
+-#define HI3660_CLK_MUX_VDEC		147
+-#define HI3660_CLK_DIV_VENC		148
+-#define HI3660_CLK_DIV_VDEC		149
+-#define HI3660_CLK_FAC_ISP_SNCLK	150
+-#define HI3660_CLK_GATE_ISP_SNCLK0	151
+-#define HI3660_CLK_GATE_ISP_SNCLK1	152
+-#define HI3660_CLK_GATE_ISP_SNCLK2	153
+-#define HI3660_CLK_ANGT_ISP_SNCLK	154
+-#define HI3660_CLK_MUX_ISP_SNCLK	155
+-#define HI3660_CLK_DIV_ISP_SNCLK	156
+-
+-/* clk in pmuctrl */
+-#define HI3660_GATE_ABB_192		0
+-
+-/* clk in pctrl */
+-#define HI3660_GATE_UFS_TCXO_EN		0
+-#define HI3660_GATE_USB_TCXO_EN		1
+-
+-/* clk in sctrl */
+-#define HI3660_PCLK_AO_GPIO0		0
+-#define HI3660_PCLK_AO_GPIO1		1
+-#define HI3660_PCLK_AO_GPIO2		2
+-#define HI3660_PCLK_AO_GPIO3		3
+-#define HI3660_PCLK_AO_GPIO4		4
+-#define HI3660_PCLK_AO_GPIO5		5
+-#define HI3660_PCLK_AO_GPIO6		6
+-#define HI3660_PCLK_GATE_MMBUF		7
+-#define HI3660_CLK_GATE_DSS_AXI_MM	8
+-#define HI3660_PCLK_MMBUF_ANDGT		9
+-#define HI3660_CLK_MMBUF_PLL_ANDGT	10
+-#define HI3660_CLK_FLL_MMBUF_ANDGT	11
+-#define HI3660_CLK_SYS_MMBUF_ANDGT	12
+-#define HI3660_CLK_GATE_PCIEPHY_GT	13
+-#define HI3660_ACLK_MUX_MMBUF		14
+-#define HI3660_CLK_SW_MMBUF		15
+-#define HI3660_CLK_DIV_AOBUS		16
+-#define HI3660_PCLK_DIV_MMBUF		17
+-#define HI3660_ACLK_DIV_MMBUF		18
+-#define HI3660_CLK_DIV_PCIEPHY		19
+-
+-/* clk in iomcu */
+-#define HI3660_CLK_I2C0_IOMCU		0
+-#define HI3660_CLK_I2C1_IOMCU		1
+-#define HI3660_CLK_I2C2_IOMCU		2
+-#define HI3660_CLK_I2C6_IOMCU		3
+-#define HI3660_CLK_IOMCU_PERI0		4
+-
+-/* clk in stub clock */
+-#define HI3660_CLK_STUB_CLUSTER0	0
+-#define HI3660_CLK_STUB_CLUSTER1	1
+-#define HI3660_CLK_STUB_GPU		2
+-#define HI3660_CLK_STUB_DDR		3
+-#define HI3660_CLK_STUB_NUM		4
+-
+-#endif	/* __DTS_HI3660_CLOCK_H */
+diff --git a/include/dt-bindings/clock/hi6220-clock.h b/include/dt-bindings/clock/hi6220-clock.h
+deleted file mode 100644
+index 70ee3833a7a0..000000000000
+--- a/include/dt-bindings/clock/hi6220-clock.h
++++ /dev/null
+@@ -1,173 +0,0 @@
+-/*
+- * Copyright (c) 2015 Hisilicon Limited.
+- *
+- * Author: Bintian Wang <bintian.wang@huawei.com>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_HI6220_H
+-#define __DT_BINDINGS_CLOCK_HI6220_H
+-
+-/* clk in Hi6220 AO (always on) controller */
+-#define HI6220_NONE_CLOCK	0
+-
+-/* fixed rate clocks */
+-#define HI6220_REF32K		1
+-#define HI6220_CLK_TCXO		2
+-#define HI6220_MMC1_PAD		3
+-#define HI6220_MMC2_PAD		4
+-#define HI6220_MMC0_PAD		5
+-#define HI6220_PLL_BBP		6
+-#define HI6220_PLL_GPU		7
+-#define HI6220_PLL1_DDR		8
+-#define HI6220_PLL_SYS		9
+-#define HI6220_PLL_SYS_MEDIA	10
+-#define HI6220_DDR_SRC		11
+-#define HI6220_PLL_MEDIA	12
+-#define HI6220_PLL_DDR		13
+-
+-/* fixed factor clocks */
+-#define HI6220_300M		14
+-#define HI6220_150M		15
+-#define HI6220_PICOPHY_SRC	16
+-#define HI6220_MMC0_SRC_SEL	17
+-#define HI6220_MMC1_SRC_SEL	18
+-#define HI6220_MMC2_SRC_SEL	19
+-#define HI6220_VPU_CODEC	20
+-#define HI6220_MMC0_SMP		21
+-#define HI6220_MMC1_SMP		22
+-#define HI6220_MMC2_SMP		23
+-
+-/* gate clocks */
+-#define HI6220_WDT0_PCLK	24
+-#define HI6220_WDT1_PCLK	25
+-#define HI6220_WDT2_PCLK	26
+-#define HI6220_TIMER0_PCLK	27
+-#define HI6220_TIMER1_PCLK	28
+-#define HI6220_TIMER2_PCLK	29
+-#define HI6220_TIMER3_PCLK	30
+-#define HI6220_TIMER4_PCLK	31
+-#define HI6220_TIMER5_PCLK	32
+-#define HI6220_TIMER6_PCLK	33
+-#define HI6220_TIMER7_PCLK	34
+-#define HI6220_TIMER8_PCLK	35
+-#define HI6220_UART0_PCLK	36
+-
+-#define HI6220_AO_NR_CLKS	37
+-
+-/* clk in Hi6220 systrl */
+-/* gate clock */
+-#define HI6220_MMC0_CLK		1
+-#define HI6220_MMC0_CIUCLK	2
+-#define HI6220_MMC1_CLK		3
+-#define HI6220_MMC1_CIUCLK	4
+-#define HI6220_MMC2_CLK		5
+-#define HI6220_MMC2_CIUCLK	6
+-#define HI6220_USBOTG_HCLK	7
+-#define HI6220_CLK_PICOPHY	8
+-#define HI6220_HIFI		9
+-#define HI6220_DACODEC_PCLK	10
+-#define HI6220_EDMAC_ACLK	11
+-#define HI6220_CS_ATB		12
+-#define HI6220_I2C0_CLK		13
+-#define HI6220_I2C1_CLK		14
+-#define HI6220_I2C2_CLK		15
+-#define HI6220_I2C3_CLK		16
+-#define HI6220_UART1_PCLK	17
+-#define HI6220_UART2_PCLK	18
+-#define HI6220_UART3_PCLK	19
+-#define HI6220_UART4_PCLK	20
+-#define HI6220_SPI_CLK		21
+-#define HI6220_TSENSOR_CLK	22
+-#define HI6220_MMU_CLK		23
+-#define HI6220_HIFI_SEL		24
+-#define HI6220_MMC0_SYSPLL	25
+-#define HI6220_MMC1_SYSPLL	26
+-#define HI6220_MMC2_SYSPLL	27
+-#define HI6220_MMC0_SEL		28
+-#define HI6220_MMC1_SEL		29
+-#define HI6220_BBPPLL_SEL	30
+-#define HI6220_MEDIA_PLL_SRC	31
+-#define HI6220_MMC2_SEL		32
+-#define HI6220_CS_ATB_SYSPLL	33
+-
+-/* mux clocks */
+-#define HI6220_MMC0_SRC		34
+-#define HI6220_MMC0_SMP_IN	35
+-#define HI6220_MMC1_SRC		36
+-#define HI6220_MMC1_SMP_IN	37
+-#define HI6220_MMC2_SRC		38
+-#define HI6220_MMC2_SMP_IN	39
+-#define HI6220_HIFI_SRC		40
+-#define HI6220_UART1_SRC	41
+-#define HI6220_UART2_SRC	42
+-#define HI6220_UART3_SRC	43
+-#define HI6220_UART4_SRC	44
+-#define HI6220_MMC0_MUX0	45
+-#define HI6220_MMC1_MUX0	46
+-#define HI6220_MMC2_MUX0	47
+-#define HI6220_MMC0_MUX1	48
+-#define HI6220_MMC1_MUX1	49
+-#define HI6220_MMC2_MUX1	50
+-
+-/* divider clocks */
+-#define HI6220_CLK_BUS		51
+-#define HI6220_MMC0_DIV		52
+-#define HI6220_MMC1_DIV		53
+-#define HI6220_MMC2_DIV		54
+-#define HI6220_HIFI_DIV		55
+-#define HI6220_BBPPLL0_DIV	56
+-#define HI6220_CS_DAPB		57
+-#define HI6220_CS_ATB_DIV	58
+-
+-#define HI6220_SYS_NR_CLKS	59
+-
+-/* clk in Hi6220 media controller */
+-/* gate clocks */
+-#define HI6220_DSI_PCLK		1
+-#define HI6220_G3D_PCLK		2
+-#define HI6220_ACLK_CODEC_VPU	3
+-#define HI6220_ISP_SCLK		4
+-#define HI6220_ADE_CORE		5
+-#define HI6220_MED_MMU		6
+-#define HI6220_CFG_CSI4PHY	7
+-#define HI6220_CFG_CSI2PHY	8
+-#define HI6220_ISP_SCLK_GATE	9
+-#define HI6220_ISP_SCLK_GATE1	10
+-#define HI6220_ADE_CORE_GATE	11
+-#define HI6220_CODEC_VPU_GATE	12
+-#define HI6220_MED_SYSPLL	13
+-
+-/* mux clocks */
+-#define HI6220_1440_1200	14
+-#define HI6220_1000_1200	15
+-#define HI6220_1000_1440	16
+-
+-/* divider clocks */
+-#define HI6220_CODEC_JPEG	17
+-#define HI6220_ISP_SCLK_SRC	18
+-#define HI6220_ISP_SCLK1	19
+-#define HI6220_ADE_CORE_SRC	20
+-#define HI6220_ADE_PIX_SRC	21
+-#define HI6220_G3D_CLK		22
+-#define HI6220_CODEC_VPU_SRC	23
+-
+-#define HI6220_MEDIA_NR_CLKS	24
+-
+-/* clk in Hi6220 power controller */
+-/* gate clocks */
+-#define HI6220_PLL_GPU_GATE	1
+-#define HI6220_PLL1_DDR_GATE	2
+-#define HI6220_PLL_DDR_GATE	3
+-#define HI6220_PLL_MEDIA_GATE	4
+-#define HI6220_PLL0_BBP_GATE	5
+-
+-/* divider clocks */
+-#define HI6220_DDRC_SRC		6
+-#define HI6220_DDRC_AXI1	7
+-
+-#define HI6220_POWER_NR_CLKS	8
 -#endif
-diff --git a/include/dt-bindings/clock/microchip-mpfs-clock.h b/include/dt-bindings/clock/microchip-mpfs-clock.h
+diff --git a/include/dt-bindings/pinctrl/hisi.h b/include/dt-bindings/pinctrl/hisi.h
 deleted file mode 100644
-index 79775a5134ca..000000000000
---- a/include/dt-bindings/clock/microchip-mpfs-clock.h
+index 0359bfdc9119..000000000000
+--- a/include/dt-bindings/pinctrl/hisi.h
 +++ /dev/null
-@@ -1,71 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+@@ -1,74 +0,0 @@
 -/*
-- * Daire McNamara,<daire.mcnamara@microchip.com>
-- * Copyright (C) 2020-2022 Microchip Technology Inc.  All rights reserved.
+- * This header provides constants for hisilicon pinctrl bindings.
+- *
+- * Copyright (c) 2015 Hisilicon Limited.
+- * Copyright (c) 2015 Linaro Limited.
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License version 2 as
+- * published by the Free Software Foundation.
+- *
+- * This program is distributed "as is" WITHOUT ANY WARRANTY of any
+- * kind, whether express or implied; without even the implied warranty
+- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
 - */
 -
--#ifndef _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_
--#define _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_
+-#ifndef _DT_BINDINGS_PINCTRL_HISI_H
+-#define _DT_BINDINGS_PINCTRL_HISI_H
 -
--#define CLK_CPU		0
--#define CLK_AXI		1
--#define CLK_AHB		2
+-/* iomg bit definition */
+-#define MUX_M0		0
+-#define MUX_M1		1
+-#define MUX_M2		2
+-#define MUX_M3		3
+-#define MUX_M4		4
+-#define MUX_M5		5
+-#define MUX_M6		6
+-#define MUX_M7		7
 -
--#define CLK_ENVM	3
--#define CLK_MAC0	4
--#define CLK_MAC1	5
--#define CLK_MMC		6
--#define CLK_TIMER	7
--#define CLK_MMUART0	8
--#define CLK_MMUART1	9
--#define CLK_MMUART2	10
--#define CLK_MMUART3	11
--#define CLK_MMUART4	12
--#define CLK_SPI0	13
--#define CLK_SPI1	14
--#define CLK_I2C0	15
--#define CLK_I2C1	16
--#define CLK_CAN0	17
--#define CLK_CAN1	18
--#define CLK_USB		19
--#define CLK_RESERVED	20
--#define CLK_RTC		21
--#define CLK_QSPI	22
--#define CLK_GPIO0	23
--#define CLK_GPIO1	24
--#define CLK_GPIO2	25
--#define CLK_DDRC	26
--#define CLK_FIC0	27
--#define CLK_FIC1	28
--#define CLK_FIC2	29
--#define CLK_FIC3	30
--#define CLK_ATHENA	31
--#define CLK_CFM		32
+-/* iocg bit definition */
+-#define PULL_MASK	(3)
+-#define PULL_DIS	(0)
+-#define PULL_UP		(1 << 0)
+-#define PULL_DOWN	(1 << 1)
 -
--#define CLK_RTCREF	33
--#define CLK_MSSPLL	34
+-/* drive strength definition */
+-#define DRIVE_MASK	(7 << 4)
+-#define DRIVE1_02MA	(0 << 4)
+-#define DRIVE1_04MA	(1 << 4)
+-#define DRIVE1_08MA	(2 << 4)
+-#define DRIVE1_10MA	(3 << 4)
+-#define DRIVE2_02MA	(0 << 4)
+-#define DRIVE2_04MA	(1 << 4)
+-#define DRIVE2_08MA	(2 << 4)
+-#define DRIVE2_10MA	(3 << 4)
+-#define DRIVE3_04MA	(0 << 4)
+-#define DRIVE3_08MA	(1 << 4)
+-#define DRIVE3_12MA	(2 << 4)
+-#define DRIVE3_16MA	(3 << 4)
+-#define DRIVE3_20MA	(4 << 4)
+-#define DRIVE3_24MA	(5 << 4)
+-#define DRIVE3_32MA	(6 << 4)
+-#define DRIVE3_40MA	(7 << 4)
+-#define DRIVE4_02MA	(0 << 4)
+-#define DRIVE4_04MA	(2 << 4)
+-#define DRIVE4_08MA	(4 << 4)
+-#define DRIVE4_10MA	(6 << 4)
 -
--/* Clock Conditioning Circuitry Clock IDs */
--
--#define CLK_CCC_PLL0		0
--#define CLK_CCC_PLL1		1
--#define CLK_CCC_DLL0		2
--#define CLK_CCC_DLL1		3
--
--#define CLK_CCC_PLL0_OUT0	4
--#define CLK_CCC_PLL0_OUT1	5
--#define CLK_CCC_PLL0_OUT2	6
--#define CLK_CCC_PLL0_OUT3	7
--
--#define CLK_CCC_PLL1_OUT0	8
--#define CLK_CCC_PLL1_OUT1	9
--#define CLK_CCC_PLL1_OUT2	10
--#define CLK_CCC_PLL1_OUT3	11
--
--#define CLK_CCC_DLL0_OUT0	12
--#define CLK_CCC_DLL0_OUT1	13
--
--#define CLK_CCC_DLL1_OUT0	14
--#define CLK_CCC_DLL1_OUT1	15
--
--#endif	/* _DT_BINDINGS_CLK_MICROCHIP_MPFS_H_ */
-diff --git a/include/dt-bindings/dma/at91.h b/include/dt-bindings/dma/at91.h
-deleted file mode 100644
-index ab6cbba45401..000000000000
---- a/include/dt-bindings/dma/at91.h
-+++ /dev/null
-@@ -1,52 +0,0 @@
--/*
-- * This header provides macros for at91 dma bindings.
-- *
-- * Copyright (C) 2013 Ludovic Desroches <ludovic.desroches@atmel.com>
-- *
-- * GPLv2 only
-- */
--
--#ifndef __DT_BINDINGS_AT91_DMA_H__
--#define __DT_BINDINGS_AT91_DMA_H__
--
--/* ---------- HDMAC ---------- */
--
--/*
-- * Source and/or destination peripheral ID
-- */
--#define AT91_DMA_CFG_PER_ID_MASK	(0xff)
--#define AT91_DMA_CFG_PER_ID(id)		(id & AT91_DMA_CFG_PER_ID_MASK)
--
--/*
-- * FIFO configuration: it defines when a request is serviced.
-- */
--#define AT91_DMA_CFG_FIFOCFG_OFFSET	(8)
--#define AT91_DMA_CFG_FIFOCFG_MASK	(0xf << AT91_DMA_CFG_FIFOCFG_OFFSET)
--#define AT91_DMA_CFG_FIFOCFG_HALF	(0x0 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* half FIFO (default behavior) */
--#define AT91_DMA_CFG_FIFOCFG_ALAP	(0x1 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* largest defined AHB burst */
--#define AT91_DMA_CFG_FIFOCFG_ASAP	(0x2 << AT91_DMA_CFG_FIFOCFG_OFFSET)	/* single AHB access */
--
--
--/* ---------- XDMAC ---------- */
--#define AT91_XDMAC_DT_MEM_IF_MASK	(0x1)
--#define AT91_XDMAC_DT_MEM_IF_OFFSET	(13)
--#define AT91_XDMAC_DT_MEM_IF(mem_if)	(((mem_if) & AT91_XDMAC_DT_MEM_IF_MASK) \
--					<< AT91_XDMAC_DT_MEM_IF_OFFSET)
--#define AT91_XDMAC_DT_GET_MEM_IF(cfg)	(((cfg) >> AT91_XDMAC_DT_MEM_IF_OFFSET) \
--					& AT91_XDMAC_DT_MEM_IF_MASK)
--
--#define AT91_XDMAC_DT_PER_IF_MASK	(0x1)
--#define AT91_XDMAC_DT_PER_IF_OFFSET	(14)
--#define AT91_XDMAC_DT_PER_IF(per_if)	(((per_if) & AT91_XDMAC_DT_PER_IF_MASK) \
--					<< AT91_XDMAC_DT_PER_IF_OFFSET)
--#define AT91_XDMAC_DT_GET_PER_IF(cfg)	(((cfg) >> AT91_XDMAC_DT_PER_IF_OFFSET) \
--					& AT91_XDMAC_DT_PER_IF_MASK)
--
--#define AT91_XDMAC_DT_PERID_MASK	(0x7f)
--#define AT91_XDMAC_DT_PERID_OFFSET	(24)
--#define AT91_XDMAC_DT_PERID(perid)	(((perid) & AT91_XDMAC_DT_PERID_MASK) \
--					<< AT91_XDMAC_DT_PERID_OFFSET)
--#define AT91_XDMAC_DT_GET_PERID(cfg)	(((cfg) >> AT91_XDMAC_DT_PERID_OFFSET) \
--					& AT91_XDMAC_DT_PERID_MASK)
--
--#endif /* __DT_BINDINGS_AT91_DMA_H__ */
-diff --git a/include/dt-bindings/mfd/at91-usart.h b/include/dt-bindings/mfd/at91-usart.h
-deleted file mode 100644
-index 2de5bc312e1e..000000000000
---- a/include/dt-bindings/mfd/at91-usart.h
-+++ /dev/null
-@@ -1,17 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--/*
-- * This header provides macros for AT91 USART DT bindings.
-- *
-- * Copyright (C) 2018 Microchip Technology
-- *
-- * Author: Radu Pirea <radu.pirea@microchip.com>
-- *
-- */
--
--#ifndef __DT_BINDINGS_AT91_USART_H__
--#define __DT_BINDINGS_AT91_USART_H__
--
--#define AT91_USART_MODE_SERIAL	0
--#define AT91_USART_MODE_SPI	1
--
--#endif /* __DT_BINDINGS_AT91_USART_H__ */
-diff --git a/include/dt-bindings/net/microchip-lan78xx.h b/include/dt-bindings/net/microchip-lan78xx.h
-deleted file mode 100644
-index 0742ff075307..000000000000
---- a/include/dt-bindings/net/microchip-lan78xx.h
-+++ /dev/null
-@@ -1,21 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef _DT_BINDINGS_MICROCHIP_LAN78XX_H
--#define _DT_BINDINGS_MICROCHIP_LAN78XX_H
--
--/* LED modes for LAN7800/LAN7850 embedded PHY */
--
--#define LAN78XX_LINK_ACTIVITY           0
--#define LAN78XX_LINK_1000_ACTIVITY      1
--#define LAN78XX_LINK_100_ACTIVITY       2
--#define LAN78XX_LINK_10_ACTIVITY        3
--#define LAN78XX_LINK_100_1000_ACTIVITY  4
--#define LAN78XX_LINK_10_1000_ACTIVITY   5
--#define LAN78XX_LINK_10_100_ACTIVITY    6
--#define LAN78XX_DUPLEX_COLLISION        8
--#define LAN78XX_COLLISION               9
--#define LAN78XX_ACTIVITY                10
--#define LAN78XX_AUTONEG_FAULT           12
--#define LAN78XX_FORCE_LED_OFF           14
--#define LAN78XX_FORCE_LED_ON            15
--
+-/* drive strength definition for hi3660 */
+-#define DRIVE6_MASK	(15 << 4)
+-#define DRIVE6_04MA	(0 << 4)
+-#define DRIVE6_12MA	(4 << 4)
+-#define DRIVE6_19MA	(8 << 4)
+-#define DRIVE6_27MA	(10 << 4)
+-#define DRIVE6_32MA	(15 << 4)
+-#define DRIVE7_02MA	(0 << 4)
+-#define DRIVE7_04MA	(1 << 4)
+-#define DRIVE7_06MA	(2 << 4)
+-#define DRIVE7_08MA	(3 << 4)
+-#define DRIVE7_10MA	(4 << 4)
+-#define DRIVE7_12MA	(5 << 4)
+-#define DRIVE7_14MA	(6 << 4)
+-#define DRIVE7_16MA	(7 << 4)
 -#endif
-diff --git a/include/dt-bindings/pinctrl/at91.h b/include/dt-bindings/pinctrl/at91.h
-deleted file mode 100644
-index 3831f91fb3ba..000000000000
---- a/include/dt-bindings/pinctrl/at91.h
-+++ /dev/null
-@@ -1,49 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0-only */
--/*
-- * This header provides constants for most at91 pinctrl bindings.
-- *
-- * Copyright (C) 2013 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
-- */
--
--#ifndef __DT_BINDINGS_AT91_PINCTRL_H__
--#define __DT_BINDINGS_AT91_PINCTRL_H__
--
--#define AT91_PINCTRL_NONE		(0 << 0)
--#define AT91_PINCTRL_PULL_UP		(1 << 0)
--#define AT91_PINCTRL_MULTI_DRIVE	(1 << 1)
--#define AT91_PINCTRL_DEGLITCH		(1 << 2)
--#define AT91_PINCTRL_PULL_DOWN		(1 << 3)
--#define AT91_PINCTRL_DIS_SCHMIT		(1 << 4)
--#define AT91_PINCTRL_OUTPUT		(1 << 7)
--#define AT91_PINCTRL_OUTPUT_VAL(x)	((x & 0x1) << 8)
--#define AT91_PINCTRL_SLEWRATE		(1 << 9)
--#define AT91_PINCTRL_DEBOUNCE		(1 << 16)
--#define AT91_PINCTRL_DEBOUNCE_VAL(x)	(x << 17)
--
--#define AT91_PINCTRL_PULL_UP_DEGLITCH	(AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DEGLITCH)
--
--#define AT91_PINCTRL_DRIVE_STRENGTH_DEFAULT		(0x0 << 5)
--#define AT91_PINCTRL_DRIVE_STRENGTH_LOW			(0x1 << 5)
--#define AT91_PINCTRL_DRIVE_STRENGTH_MED			(0x2 << 5)
--#define AT91_PINCTRL_DRIVE_STRENGTH_HI			(0x3 << 5)
--
--#define AT91_PINCTRL_SLEWRATE_DIS	(0x0 << 9)
--#define AT91_PINCTRL_SLEWRATE_ENA	(0x1 << 9)
--
--#define AT91_PIOA	0
--#define AT91_PIOB	1
--#define AT91_PIOC	2
--#define AT91_PIOD	3
--#define AT91_PIOE	4
--
--#define AT91_PERIPH_GPIO	0
--#define AT91_PERIPH_A		1
--#define AT91_PERIPH_B		2
--#define AT91_PERIPH_C		3
--#define AT91_PERIPH_D		4
--
--#define ATMEL_PIO_DRVSTR_LO	1
--#define ATMEL_PIO_DRVSTR_ME	2
--#define ATMEL_PIO_DRVSTR_HI	3
--
--#endif /* __DT_BINDINGS_AT91_PINCTRL_H__ */
-diff --git a/include/dt-bindings/sound/microchip,pdmc.h b/include/dt-bindings/sound/microchip,pdmc.h
-deleted file mode 100644
-index 96cde94ce74f..000000000000
---- a/include/dt-bindings/sound/microchip,pdmc.h
-+++ /dev/null
-@@ -1,13 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0 */
--#ifndef __DT_BINDINGS_MICROCHIP_PDMC_H__
--#define __DT_BINDINGS_MICROCHIP_PDMC_H__
--
--/* PDM microphone's pin placement */
--#define MCHP_PDMC_DS0 0
--#define MCHP_PDMC_DS1 1
--
--/* PDM microphone clock edge sampling */
--#define MCHP_PDMC_CLK_POSITIVE 0
--#define MCHP_PDMC_CLK_NEGATIVE 1
--
--#endif /* __DT_BINDINGS_MICROCHIP_PDMC_H__ */
 
 -- 
 2.44.0

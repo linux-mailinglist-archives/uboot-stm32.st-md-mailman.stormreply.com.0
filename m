@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68365886978
-	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Mar 2024 10:43:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D57D886233
+	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:30 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 23FD5C71281;
-	Fri, 22 Mar 2024 09:43:03 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
- [209.85.128.42])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F1E2BC6DD69;
+	Thu, 21 Mar 2024 21:04:29 +0000 (UTC)
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+ [209.85.208.177])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4817CC6DD75
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB2ECC6DD73
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 21:04:27 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4141156f245so10171495e9.2
+ Thu, 21 Mar 2024 21:04:28 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id
+ 38308e7fff4ca-2d094bc2244so20488131fa.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 14:04:27 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055067; x=1711659867;
+ d=linaro.org; s=google; t=1711055068; x=1711659868;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=+Em3+j7ywll/fgWZY20yhUOH0vwWlZY5rRtl2yOW9d4=;
- b=P4cGyN4eXR9+8mp/M4PYNVshrE1TuEW5Db8BeRciUOnO+ZsQU9fk3zHcuwX4Fe5HlZ
- 6I73N7VO5paJBfzmIDKad1GwLBnkUMIi3VB2VmrQ/0y6OyJOLJwHIliOfQZjujpu/5T7
- 6kI+wEmdHZ10fPIah6Y3sNulMkIENz9BLtHFaWECdH0gVB3d27YQ41uGnycWyKIG2+IV
- Om6blm9tLIYoDc5zXn5a7UBx2MmjfYG3hoyyWMoMAakXPjMBBzg8z5b2FU3Mb5cxrpLz
- TqCZ1gN+WbFRCd37TF2WYy4XNM4BSpDBu7YkQJ/z0Dh/WYFUOyWFBO8JZT11kmy70vku
- QtZA==
+ :reply-to; bh=ak/ZQ98S2ABEr4WIk6RvxQYt7MJPloGnSTsOs5d5fXA=;
+ b=w0OVuP7piSGtepalUYVELvtxiXZY2IwB18Ucpdy+b52Ah6Bw07eSdvu+/8QiFa7C/9
+ 8J1a/OLEMuY4Lwu9j4oBPst+bZWx2PZ2G/3iIgd8odttg1KMFI8VeiQ80tg6cB4KO8d3
+ 0geM5fOQzRAGj21U31IqAREUJ6tEYQYnsc656L+Qn399duNjgJDmCO/fpwuLbyLqxZbJ
+ fVV1xX00BRa+b8tIam0edDj+ykg3ZD9fzzcXZyuqvimRtQFqg+MPERMMadZD4bLwJWty
+ RlFrUky3orxihE26lLzzuBCCFC+jO5e7+JI/bSYKmxdEL5Nc7vsxMsZqzav2bB+D4/Ey
+ 5Iag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055067; x=1711659867;
+ d=1e100.net; s=20230601; t=1711055068; x=1711659868;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+Em3+j7ywll/fgWZY20yhUOH0vwWlZY5rRtl2yOW9d4=;
- b=EmeTeAzp3CJCLOpnQfWl+9H9wrVoPGN6veeV6/HKHmvEc9KyFgi40F7rs4K50a//kq
- +tOSjJQgXOIFc+hXv43IkB2zZONAf8l8WUhd9gtZvL3DT90obUnNQ+hESqNrqZ17+DbR
- zACXHQL8Bx0acoLdmFubfrSGjsKyjMKU7AIlkC5ELP3gB7HoeuMTnOTAMFLCNHQ6rPPW
- 0FzEVZ0Dwn33uVEgzMR15YYWEOzn2jLX4ta2RwPXwLqNfULFsmNyiQRHlA9MWb6Wlk1k
- AtWyiuOyDqpjtzP9HBMyHiN7hO05ruQumrzmjmRYNBcvHVzRNtGI2J8sdohkrh/LjR8I
- YL6w==
+ bh=ak/ZQ98S2ABEr4WIk6RvxQYt7MJPloGnSTsOs5d5fXA=;
+ b=wBMcg1ucxt3vytKxS3fhM8yPXfQrG1DVo44x224FLBH34fxNihDhlzUJpgfMCE5jeM
+ 6k1cG/gAO4+syVg8l1KIFcGWTt6ekn8kBzOfJRtv5elaTdZFoADfQ8sCfKiDDQIBK/v1
+ j1BP7hPmT7mx5pWmvwaULaLorHkCquH9zaxsW8SGhVgG0LO7AZjzd3CirYpfXV0bmItt
+ 8htBvhYpqvlLfORc7+l78HC2v2AAxLu+1rAdLXYyFc16SnEWeBgOU3LQ6z0k15L4hLIZ
+ I01jfZfE8uyf4x0Oc7+BHvxvX8ULBqYuW73pekSXXlxJMRwq8Xfl+LswRQWRZNmnTF2B
+ dxMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3QglMxoQ4eNfXg/ZfeVIIV+98BrIzid+8fqx+hkhfVfcOULhyUosx/4wjPCfxJ2r4oiDnv/zD0dw2tCm1uOKd/6JQ+NG+1SRW2pnj03jFhRY0Ure8f1c8
-X-Gm-Message-State: AOJu0Yy6OTZn9QVtGmfGHmhAjBVPSxYb9NUtFavtzd01ElaT8HHVnP+z
- n0L+ajGiRKkhKGISk+UAgopNxukePygDUk8/diMAYONn01pi90czcTRDDjcDoFU=
-X-Google-Smtp-Source: AGHT+IFRFZtzv40MZuPDV5OiKKtlbqQQ9Xliqo3KRgAYa/Tv0Y1PNYtNTN42oBEc96QN0BM1rtGqXA==
-X-Received: by 2002:a05:600c:5819:b0:414:71e2:a249 with SMTP id
- jz25-20020a05600c581900b0041471e2a249mr213619wmb.41.1711055066461; 
- Thu, 21 Mar 2024 14:04:26 -0700 (PDT)
+ AJvYcCVOwIZ6P7a3/uS/aH5VSjA4AjtSugmtorkLhL/XvhNxMbJMLSsIkas2T/AJus8HoqujUE12zifbr7p5hqFGLeGKQrPPKFxPTqPYzYAWjqwyEdt9Zn9+qc8b
+X-Gm-Message-State: AOJu0YwXErozF6o2xW69DVuNnod/tz3WLuVPk2iSIek+AgfGbDNgU1G2
+ Qx0a7wkulDcZL8N9zL9NYDUdguljpxXfVm+fxKdyWE1M9YcmInaEvuiP+fIAO34=
+X-Google-Smtp-Source: AGHT+IFcj4WZo/k0Cr0dg0PZ91y6FF85f/4SZV1WGqNwXcbresQZ79QrsyE9cgIHCpgizOZl021ayQ==
+X-Received: by 2002:a2e:a1c7:0:b0:2d4:22d1:d96c with SMTP id
+ c7-20020a2ea1c7000000b002d422d1d96cmr413176ljm.25.1711055068032; 
+ Thu, 21 Mar 2024 14:04:28 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.24
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:25 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:27 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:03:57 +0000
+Date: Thu, 21 Mar 2024 21:03:58 +0000
 MIME-Version: 1.0
-Message-Id: <20240321-b4-upstream-dt-headers-v2-14-1eac0df875fe@linaro.org>
+Message-Id: <20240321-b4-upstream-dt-headers-v2-15-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,20 +88,19 @@ To: Tom Rini <trini@konsulko.com>,
  Dai Okamura <okamura.dai@socionext.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=86500;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=21499;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=Guh6+Kd9HMFpNacXc4EppNtMdWo1WoAh+/R3MIy6ZSw=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZIlr0wfLrHdPk7s5n5hRac1Rr8RrWVrudFphswX
- Jx379vDjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRfB2Gv3KN+hKnxHfeijmf
- vJdXSeVj4xLPmzNr7z9Xfi/dFNjOrsvIsCD8t0/K/Py1Pb/evLHffzO2sVrL/FlYxb//gpP695y
- zPA0A
+ bh=mQ2O2EyLgWmNk7HU9Pv1IDhVFZQ7gkRM9CVO2LHEmgU=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZIs+jGBEZETvhbrD7jxuqc7B2iNlMedb69debT6
+ WtvH0h97ShlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQATsf3A8D/+NcubR+tSy769
+ ++nuwnZve+zOuG8XE26bXp+1+12D2vcGhj/872x6iopLV1b/N1p94UoFn1eI47w5IjPyFog4tOh
+ fbN4PAA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
-X-Mailman-Approved-At: Fri, 22 Mar 2024 09:43:01 +0000
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, Caleb Connolly <caleb.connolly@linaro.org>,
  u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v2 14/24] tegra: drop clock dt-binding headers
+Subject: [Uboot-stm32] [PATCH v2 15/24] tegra: drop dt-binding headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,2538 +119,617 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Drop in favour of dts/upstream.
 
+Small driver adjustment to fix compatibility.
+
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/dt-bindings/clock/tegra114-car.h        | 343 ---------
- include/dt-bindings/clock/tegra124-car-common.h | 345 ---------
- include/dt-bindings/clock/tegra124-car.h        |  19 -
- include/dt-bindings/clock/tegra186-clock.h      | 940 ------------------------
- include/dt-bindings/clock/tegra20-car.h         | 158 ----
- include/dt-bindings/clock/tegra210-car.h        | 401 ----------
- include/dt-bindings/clock/tegra30-car.h         | 273 -------
- 7 files changed, 2479 deletions(-)
+ arch/arm/dts/tegra186.dtsi                       |   2 +-
+ drivers/mailbox/tegra-hsp.c                      |   2 +-
+ include/dt-bindings/gpio/tegra-gpio.h            |  51 ------
+ include/dt-bindings/mailbox/tegra186-hsp.h       |  19 ---
+ include/dt-bindings/memory/tegra114-mc.h         |  25 ---
+ include/dt-bindings/memory/tegra124-mc.h         |  31 ----
+ include/dt-bindings/memory/tegra210-mc.h         |  36 ----
+ include/dt-bindings/memory/tegra30-mc.h          |  24 ---
+ include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h |   7 -
+ include/dt-bindings/pinctrl/pinctrl-tegra.h      |  37 ----
+ include/dt-bindings/power/tegra186-powergate.h   |  28 ----
+ include/dt-bindings/reset/tegra124-car.h         |  12 --
+ include/dt-bindings/reset/tegra186-reset.h       | 205 -----------------------
+ include/dt-bindings/thermal/tegra124-soctherm.h  |  14 --
+ 14 files changed, 2 insertions(+), 491 deletions(-)
 
-diff --git a/include/dt-bindings/clock/tegra114-car.h b/include/dt-bindings/clock/tegra114-car.h
+diff --git a/arch/arm/dts/tegra186.dtsi b/arch/arm/dts/tegra186.dtsi
+index edcb7aacb8ee..58dadc944888 100644
+--- a/arch/arm/dts/tegra186.dtsi
++++ b/arch/arm/dts/tegra186.dtsi
+@@ -313,9 +313,9 @@
+ 	};
+ 
+ 	bpmp: bpmp {
+ 		compatible = "nvidia,tegra186-bpmp";
+-		mboxes = <&hsp HSP_MBOX_TYPE_DB HSP_DB_MASTER_BPMP>;
++		mboxes = <&hsp TEGRA_HSP_MBOX_TYPE_DB TEGRA_HSP_DB_MASTER_BPMP>;
+ 		/*
+ 		 * In theory, these references, and the configuration in the
+ 		 * node these reference point at, are board-specific, since
+ 		 * they depend on the BCT's memory carve-out setup, the
+diff --git a/drivers/mailbox/tegra-hsp.c b/drivers/mailbox/tegra-hsp.c
+index 08c51c40f141..e5a3d8243780 100644
+--- a/drivers/mailbox/tegra-hsp.c
++++ b/drivers/mailbox/tegra-hsp.c
+@@ -62,9 +62,9 @@ static void tegra_hsp_writel(struct tegra_hsp *thsp, uint32_t val,
+ 
+ static int tegra_hsp_db_id(ulong chan_id)
+ {
+ 	switch (chan_id) {
+-	case (HSP_MBOX_TYPE_DB << 16) | HSP_DB_MASTER_BPMP:
++	case (TEGRA_HSP_MBOX_TYPE_DB << 16) | TEGRA_HSP_DB_MASTER_BPMP:
+ 		return TEGRA_HSP_DB_ID_BPMP;
+ 	default:
+ 		debug("Invalid channel ID\n");
+ 		return -EINVAL;
+diff --git a/include/dt-bindings/gpio/tegra-gpio.h b/include/dt-bindings/gpio/tegra-gpio.h
 deleted file mode 100644
-index 534c03f8ad72..000000000000
---- a/include/dt-bindings/clock/tegra114-car.h
+index a1c09e88e80b..000000000000
+--- a/include/dt-bindings/gpio/tegra-gpio.h
 +++ /dev/null
-@@ -1,343 +0,0 @@
+@@ -1,51 +0,0 @@
 -/*
-- * This header provides constants for binding nvidia,tegra114-car.
+- * This header provides constants for binding nvidia,tegra*-gpio.
 - *
-- * The first 160 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
-- * registers. These IDs often match those in the CAR's RST_DEVICES registers,
-- * but not in all cases. Some bits in CLK_OUT_ENB affect multiple clocks. In
-- * this case, those clocks are assigned IDs above 160 in order to highlight
-- * this issue. Implementations that interpret these clock IDs as bit values
-- * within the CLK_OUT_ENB or RST_DEVICES registers should be careful to
-- * explicitly handle these special cases.
+- * The first cell in Tegra's GPIO specifier is the GPIO ID. The macros below
+- * provide names for this.
 - *
-- * The balance of the clocks controlled by the CAR are assigned IDs of 160 and
-- * above.
+- * The second cell contains standard flag values specified in gpio.h.
 - */
 -
--#ifndef _DT_BINDINGS_CLOCK_TEGRA114_CAR_H
--#define _DT_BINDINGS_CLOCK_TEGRA114_CAR_H
+-#ifndef _DT_BINDINGS_GPIO_TEGRA_GPIO_H
+-#define _DT_BINDINGS_GPIO_TEGRA_GPIO_H
 -
--/* 0 */
--/* 1 */
--/* 2 */
--/* 3 */
--#define TEGRA114_CLK_RTC 4
--#define TEGRA114_CLK_TIMER 5
--#define TEGRA114_CLK_UARTA 6
--/* 7 (register bit affects uartb and vfir) */
--/* 8 */
--#define TEGRA114_CLK_SDMMC2 9
--/* 10 (register bit affects spdif_in and spdif_out) */
--#define TEGRA114_CLK_I2S1 11
--#define TEGRA114_CLK_I2C1 12
--#define TEGRA114_CLK_NDFLASH 13
--#define TEGRA114_CLK_SDMMC1 14
--#define TEGRA114_CLK_SDMMC4 15
--/* 16 */
--#define TEGRA114_CLK_PWM 17
--#define TEGRA114_CLK_I2S2 18
--#define TEGRA114_CLK_EPP 19
--/* 20 (register bit affects vi and vi_sensor) */
--#define TEGRA114_CLK_GR2D 21
--#define TEGRA114_CLK_USBD 22
--#define TEGRA114_CLK_ISP 23
--#define TEGRA114_CLK_GR3D 24
--/* 25 */
--#define TEGRA114_CLK_DISP2 26
--#define TEGRA114_CLK_DISP1 27
--#define TEGRA114_CLK_HOST1X 28
--#define TEGRA114_CLK_VCP 29
--#define TEGRA114_CLK_I2S0 30
--/* 31 */
+-#include <dt-bindings/gpio/gpio.h>
 -
--#define TEGRA114_CLK_MC 32
--/* 33 */
--#define TEGRA114_CLK_APBDMA 34
--/* 35 */
--#define TEGRA114_CLK_KBC 36
--/* 37 */
--/* 38 */
--/* 39 (register bit affects fuse and fuse_burn) */
--#define TEGRA114_CLK_KFUSE 40
--#define TEGRA114_CLK_SBC1 41
--#define TEGRA114_CLK_NOR 42
--/* 43 */
--#define TEGRA114_CLK_SBC2 44
--/* 45 */
--#define TEGRA114_CLK_SBC3 46
--#define TEGRA114_CLK_I2C5 47
--#define TEGRA114_CLK_DSIA 48
--/* 49 */
--#define TEGRA114_CLK_MIPI 50
--#define TEGRA114_CLK_HDMI 51
--#define TEGRA114_CLK_CSI 52
--/* 53 */
--#define TEGRA114_CLK_I2C2 54
--#define TEGRA114_CLK_UARTC 55
--#define TEGRA114_CLK_MIPI_CAL 56
--#define TEGRA114_CLK_EMC 57
--#define TEGRA114_CLK_USB2 58
--#define TEGRA114_CLK_USB3 59
--/* 60 */
--#define TEGRA114_CLK_VDE 61
--#define TEGRA114_CLK_BSEA 62
--#define TEGRA114_CLK_BSEV 63
+-#define TEGRA_GPIO_PORT_A 0
+-#define TEGRA_GPIO_PORT_B 1
+-#define TEGRA_GPIO_PORT_C 2
+-#define TEGRA_GPIO_PORT_D 3
+-#define TEGRA_GPIO_PORT_E 4
+-#define TEGRA_GPIO_PORT_F 5
+-#define TEGRA_GPIO_PORT_G 6
+-#define TEGRA_GPIO_PORT_H 7
+-#define TEGRA_GPIO_PORT_I 8
+-#define TEGRA_GPIO_PORT_J 9
+-#define TEGRA_GPIO_PORT_K 10
+-#define TEGRA_GPIO_PORT_L 11
+-#define TEGRA_GPIO_PORT_M 12
+-#define TEGRA_GPIO_PORT_N 13
+-#define TEGRA_GPIO_PORT_O 14
+-#define TEGRA_GPIO_PORT_P 15
+-#define TEGRA_GPIO_PORT_Q 16
+-#define TEGRA_GPIO_PORT_R 17
+-#define TEGRA_GPIO_PORT_S 18
+-#define TEGRA_GPIO_PORT_T 19
+-#define TEGRA_GPIO_PORT_U 20
+-#define TEGRA_GPIO_PORT_V 21
+-#define TEGRA_GPIO_PORT_W 22
+-#define TEGRA_GPIO_PORT_X 23
+-#define TEGRA_GPIO_PORT_Y 24
+-#define TEGRA_GPIO_PORT_Z 25
+-#define TEGRA_GPIO_PORT_AA 26
+-#define TEGRA_GPIO_PORT_BB 27
+-#define TEGRA_GPIO_PORT_CC 28
+-#define TEGRA_GPIO_PORT_DD 29
+-#define TEGRA_GPIO_PORT_EE 30
+-#define TEGRA_GPIO_PORT_FF 31
 -
--/* 64 */
--#define TEGRA114_CLK_UARTD 65
--/* 66 */
--#define TEGRA114_CLK_I2C3 67
--#define TEGRA114_CLK_SBC4 68
--#define TEGRA114_CLK_SDMMC3 69
--/* 70 */
--#define TEGRA114_CLK_OWR 71
--/* 72 */
--#define TEGRA114_CLK_CSITE 73
--/* 74 */
--/* 75 */
--#define TEGRA114_CLK_LA 76
--#define TEGRA114_CLK_TRACE 77
--#define TEGRA114_CLK_SOC_THERM 78
--#define TEGRA114_CLK_DTV 79
--#define TEGRA114_CLK_NDSPEED 80
--#define TEGRA114_CLK_I2CSLOW 81
--#define TEGRA114_CLK_DSIB 82
--#define TEGRA114_CLK_TSEC 83
--/* 84 */
--/* 85 */
--/* 86 */
--/* 87 */
--/* 88 */
--#define TEGRA114_CLK_XUSB_HOST 89
--/* 90 */
--#define TEGRA114_CLK_MSENC 91
--#define TEGRA114_CLK_CSUS 92
--/* 93 */
--/* 94 */
--/* 95 (bit affects xusb_dev and xusb_dev_src) */
+-#define TEGRA_GPIO(port, offset) \
+-	((TEGRA_GPIO_PORT_##port * 8) + offset)
 -
--/* 96 */
--/* 97 */
--/* 98 */
--#define TEGRA114_CLK_MSELECT 99
--#define TEGRA114_CLK_TSENSOR 100
--#define TEGRA114_CLK_I2S3 101
--#define TEGRA114_CLK_I2S4 102
--#define TEGRA114_CLK_I2C4 103
--#define TEGRA114_CLK_SBC5 104
--#define TEGRA114_CLK_SBC6 105
--#define TEGRA114_CLK_D_AUDIO 106
--#define TEGRA114_CLK_APBIF 107
--#define TEGRA114_CLK_DAM0 108
--#define TEGRA114_CLK_DAM1 109
--#define TEGRA114_CLK_DAM2 110
--#define TEGRA114_CLK_HDA2CODEC_2X 111
--/* 112 */
--#define TEGRA114_CLK_AUDIO0_2X 113
--#define TEGRA114_CLK_AUDIO1_2X 114
--#define TEGRA114_CLK_AUDIO2_2X 115
--#define TEGRA114_CLK_AUDIO3_2X 116
--#define TEGRA114_CLK_AUDIO4_2X 117
--#define TEGRA114_CLK_SPDIF_2X 118
--#define TEGRA114_CLK_ACTMON 119
--#define TEGRA114_CLK_EXTERN1 120
--#define TEGRA114_CLK_EXTERN2 121
--#define TEGRA114_CLK_EXTERN3 122
--/* 123 */
--/* 124 */
--#define TEGRA114_CLK_HDA 125
--/* 126 */
--#define TEGRA114_CLK_SE 127
--
--#define TEGRA114_CLK_HDA2HDMI 128
--/* 129 */
--/* 130 */
--/* 131 */
--/* 132 */
--/* 133 */
--/* 134 */
--/* 135 */
--/* 136 */
--/* 137 */
--/* 138 */
--/* 139 */
--/* 140 */
--/* 141 */
--/* 142 */
--/* 143 (bit affects xusb_falcon_src, xusb_fs_src, */
--/*      xusb_host_src and xusb_ss_src) */
--#define TEGRA114_CLK_CILAB 144
--#define TEGRA114_CLK_CILCD 145
--#define TEGRA114_CLK_CILE 146
--#define TEGRA114_CLK_DSIALP 147
--#define TEGRA114_CLK_DSIBLP 148
--/* 149 */
--#define TEGRA114_CLK_DDS 150
--/* 151 */
--#define TEGRA114_CLK_DP2 152
--#define TEGRA114_CLK_AMX 153
--#define TEGRA114_CLK_ADX 154
--/* 155 (bit affects dfll_ref and dfll_soc) */
--#define TEGRA114_CLK_XUSB_SS 156
--/* 157 */
--/* 158 */
--/* 159 */
--
--/* 160 */
--/* 161 */
--/* 162 */
--/* 163 */
--/* 164 */
--/* 165 */
--/* 166 */
--/* 167 */
--/* 168 */
--/* 169 */
--/* 170 */
--/* 171 */
--/* 172 */
--/* 173 */
--/* 174 */
--/* 175 */
--/* 176 */
--/* 177 */
--/* 178 */
--/* 179 */
--/* 180 */
--/* 181 */
--/* 182 */
--/* 183 */
--/* 184 */
--/* 185 */
--/* 186 */
--/* 187 */
--/* 188 */
--/* 189 */
--/* 190 */
--/* 191 */
--
--#define TEGRA114_CLK_UARTB 192
--#define TEGRA114_CLK_VFIR 193
--#define TEGRA114_CLK_SPDIF_IN 194
--#define TEGRA114_CLK_SPDIF_OUT 195
--#define TEGRA114_CLK_VI 196
--#define TEGRA114_CLK_VI_SENSOR 197
--#define TEGRA114_CLK_FUSE 198
--#define TEGRA114_CLK_FUSE_BURN 199
--#define TEGRA114_CLK_CLK_32K 200
--#define TEGRA114_CLK_CLK_M 201
--#define TEGRA114_CLK_CLK_M_DIV2 202
--#define TEGRA114_CLK_CLK_M_DIV4 203
--#define TEGRA114_CLK_PLL_REF 204
--#define TEGRA114_CLK_PLL_C 205
--#define TEGRA114_CLK_PLL_C_OUT1 206
--#define TEGRA114_CLK_PLL_C2 207
--#define TEGRA114_CLK_PLL_C3 208
--#define TEGRA114_CLK_PLL_M 209
--#define TEGRA114_CLK_PLL_M_OUT1 210
--#define TEGRA114_CLK_PLL_P 211
--#define TEGRA114_CLK_PLL_P_OUT1 212
--#define TEGRA114_CLK_PLL_P_OUT2 213
--#define TEGRA114_CLK_PLL_P_OUT3 214
--#define TEGRA114_CLK_PLL_P_OUT4 215
--#define TEGRA114_CLK_PLL_A 216
--#define TEGRA114_CLK_PLL_A_OUT0 217
--#define TEGRA114_CLK_PLL_D 218
--#define TEGRA114_CLK_PLL_D_OUT0 219
--#define TEGRA114_CLK_PLL_D2 220
--#define TEGRA114_CLK_PLL_D2_OUT0 221
--#define TEGRA114_CLK_PLL_U 222
--#define TEGRA114_CLK_PLL_U_480M 223
--
--#define TEGRA114_CLK_PLL_U_60M 224
--#define TEGRA114_CLK_PLL_U_48M 225
--#define TEGRA114_CLK_PLL_U_12M 226
--#define TEGRA114_CLK_PLL_X 227
--#define TEGRA114_CLK_PLL_X_OUT0 228
--#define TEGRA114_CLK_PLL_RE_VCO 229
--#define TEGRA114_CLK_PLL_RE_OUT 230
--#define TEGRA114_CLK_PLL_E_OUT0 231
--#define TEGRA114_CLK_SPDIF_IN_SYNC 232
--#define TEGRA114_CLK_I2S0_SYNC 233
--#define TEGRA114_CLK_I2S1_SYNC 234
--#define TEGRA114_CLK_I2S2_SYNC 235
--#define TEGRA114_CLK_I2S3_SYNC 236
--#define TEGRA114_CLK_I2S4_SYNC 237
--#define TEGRA114_CLK_VIMCLK_SYNC 238
--#define TEGRA114_CLK_AUDIO0 239
--#define TEGRA114_CLK_AUDIO1 240
--#define TEGRA114_CLK_AUDIO2 241
--#define TEGRA114_CLK_AUDIO3 242
--#define TEGRA114_CLK_AUDIO4 243
--#define TEGRA114_CLK_SPDIF 244
--#define TEGRA114_CLK_CLK_OUT_1 245
--#define TEGRA114_CLK_CLK_OUT_2 246
--#define TEGRA114_CLK_CLK_OUT_3 247
--#define TEGRA114_CLK_BLINK 248
--/* 249 */
--/* 250 */
--/* 251 */
--#define TEGRA114_CLK_XUSB_HOST_SRC 252
--#define TEGRA114_CLK_XUSB_FALCON_SRC 253
--#define TEGRA114_CLK_XUSB_FS_SRC 254
--#define TEGRA114_CLK_XUSB_SS_SRC 255
--
--#define TEGRA114_CLK_XUSB_DEV_SRC 256
--#define TEGRA114_CLK_XUSB_DEV 257
--#define TEGRA114_CLK_XUSB_HS_SRC 258
--#define TEGRA114_CLK_SCLK 259
--#define TEGRA114_CLK_HCLK 260
--#define TEGRA114_CLK_PCLK 261
--#define TEGRA114_CLK_CCLK_G 262
--#define TEGRA114_CLK_CCLK_LP 263
--#define TEGRA114_CLK_DFLL_REF 264
--#define TEGRA114_CLK_DFLL_SOC 265
--/* 266 */
--/* 267 */
--/* 268 */
--/* 269 */
--/* 270 */
--/* 271 */
--/* 272 */
--/* 273 */
--/* 274 */
--/* 275 */
--/* 276 */
--/* 277 */
--/* 278 */
--/* 279 */
--/* 280 */
--/* 281 */
--/* 282 */
--/* 283 */
--/* 284 */
--/* 285 */
--/* 286 */
--/* 287 */
--
--/* 288 */
--/* 289 */
--/* 290 */
--/* 291 */
--/* 292 */
--/* 293 */
--/* 294 */
--/* 295 */
--/* 296 */
--/* 297 */
--/* 298 */
--/* 299 */
--#define TEGRA114_CLK_AUDIO0_MUX 300
--#define TEGRA114_CLK_AUDIO1_MUX 301
--#define TEGRA114_CLK_AUDIO2_MUX 302
--#define TEGRA114_CLK_AUDIO3_MUX 303
--#define TEGRA114_CLK_AUDIO4_MUX 304
--#define TEGRA114_CLK_SPDIF_MUX 305
--#define TEGRA114_CLK_CLK_OUT_1_MUX 306
--#define TEGRA114_CLK_CLK_OUT_2_MUX 307
--#define TEGRA114_CLK_CLK_OUT_3_MUX 308
--#define TEGRA114_CLK_DSIA_MUX 309
--#define TEGRA114_CLK_DSIB_MUX 310
--#define TEGRA114_CLK_XUSB_SS_DIV2 311
--#define TEGRA114_CLK_CLK_MAX 312
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA114_CAR_H */
-diff --git a/include/dt-bindings/clock/tegra124-car-common.h b/include/dt-bindings/clock/tegra124-car-common.h
+-#endif
+diff --git a/include/dt-bindings/mailbox/tegra186-hsp.h b/include/dt-bindings/mailbox/tegra186-hsp.h
 deleted file mode 100644
-index a2156090563f..000000000000
---- a/include/dt-bindings/clock/tegra124-car-common.h
-+++ /dev/null
-@@ -1,345 +0,0 @@
--/*
-- * This header provides constants for binding nvidia,tegra124-car or
-- * nvidia,tegra132-car.
-- *
-- * The first 192 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
-- * registers. These IDs often match those in the CAR's RST_DEVICES registers,
-- * but not in all cases. Some bits in CLK_OUT_ENB affect multiple clocks. In
-- * this case, those clocks are assigned IDs above 185 in order to highlight
-- * this issue. Implementations that interpret these clock IDs as bit values
-- * within the CLK_OUT_ENB or RST_DEVICES registers should be careful to
-- * explicitly handle these special cases.
-- *
-- * The balance of the clocks controlled by the CAR are assigned IDs of 185 and
-- * above.
-- */
--
--#ifndef _DT_BINDINGS_CLOCK_TEGRA124_CAR_COMMON_H
--#define _DT_BINDINGS_CLOCK_TEGRA124_CAR_COMMON_H
--
--/* 0 */
--/* 1 */
--/* 2 */
--#define TEGRA124_CLK_ISPB 3
--#define TEGRA124_CLK_RTC 4
--#define TEGRA124_CLK_TIMER 5
--#define TEGRA124_CLK_UARTA 6
--/* 7 (register bit affects uartb and vfir) */
--/* 8 */
--#define TEGRA124_CLK_SDMMC2 9
--/* 10 (register bit affects spdif_in and spdif_out) */
--#define TEGRA124_CLK_I2S1 11
--#define TEGRA124_CLK_I2C1 12
--/* 13 */
--#define TEGRA124_CLK_SDMMC1 14
--#define TEGRA124_CLK_SDMMC4 15
--/* 16 */
--#define TEGRA124_CLK_PWM 17
--#define TEGRA124_CLK_I2S2 18
--/* 20 (register bit affects vi and vi_sensor) */
--/* 21 */
--#define TEGRA124_CLK_USBD 22
--#define TEGRA124_CLK_ISP 23
--/* 26 */
--/* 25 */
--#define TEGRA124_CLK_DISP2 26
--#define TEGRA124_CLK_DISP1 27
--#define TEGRA124_CLK_HOST1X 28
--#define TEGRA124_CLK_VCP 29
--#define TEGRA124_CLK_I2S0 30
--/* 31 */
--
--#define TEGRA124_CLK_MC 32
--/* 33 */
--#define TEGRA124_CLK_APBDMA 34
--/* 35 */
--#define TEGRA124_CLK_KBC 36
--/* 37 */
--/* 38 */
--/* 39 (register bit affects fuse and fuse_burn) */
--#define TEGRA124_CLK_KFUSE 40
--#define TEGRA124_CLK_SBC1 41
--#define TEGRA124_CLK_NOR 42
--/* 43 */
--#define TEGRA124_CLK_SBC2 44
--/* 45 */
--#define TEGRA124_CLK_SBC3 46
--#define TEGRA124_CLK_I2C5 47
--#define TEGRA124_CLK_DSIA 48
--/* 49 */
--#define TEGRA124_CLK_MIPI 50
--#define TEGRA124_CLK_HDMI 51
--#define TEGRA124_CLK_CSI 52
--/* 53 */
--#define TEGRA124_CLK_I2C2 54
--#define TEGRA124_CLK_UARTC 55
--#define TEGRA124_CLK_MIPI_CAL 56
--#define TEGRA124_CLK_EMC 57
--#define TEGRA124_CLK_USB2 58
--#define TEGRA124_CLK_USB3 59
--/* 60 */
--#define TEGRA124_CLK_VDE 61
--#define TEGRA124_CLK_BSEA 62
--#define TEGRA124_CLK_BSEV 63
--
--/* 64 */
--#define TEGRA124_CLK_UARTD 65
--/* 66 */
--#define TEGRA124_CLK_I2C3 67
--#define TEGRA124_CLK_SBC4 68
--#define TEGRA124_CLK_SDMMC3 69
--#define TEGRA124_CLK_PCIE 70
--#define TEGRA124_CLK_OWR 71
--#define TEGRA124_CLK_AFI 72
--#define TEGRA124_CLK_CSITE 73
--/* 74 */
--/* 75 */
--#define TEGRA124_CLK_LA 76
--#define TEGRA124_CLK_TRACE 77
--#define TEGRA124_CLK_SOC_THERM 78
--#define TEGRA124_CLK_DTV 79
--/* 80 */
--#define TEGRA124_CLK_I2CSLOW 81
--#define TEGRA124_CLK_DSIB 82
--#define TEGRA124_CLK_TSEC 83
--/* 84 */
--/* 85 */
--/* 86 */
--/* 87 */
--/* 88 */
--#define TEGRA124_CLK_XUSB_HOST 89
--/* 90 */
--#define TEGRA124_CLK_MSENC 91
--#define TEGRA124_CLK_CSUS 92
--/* 93 */
--/* 94 */
--/* 95 (bit affects xusb_dev and xusb_dev_src) */
--
--/* 96 */
--/* 97 */
--/* 98 */
--#define TEGRA124_CLK_MSELECT 99
--#define TEGRA124_CLK_TSENSOR 100
--#define TEGRA124_CLK_I2S3 101
--#define TEGRA124_CLK_I2S4 102
--#define TEGRA124_CLK_I2C4 103
--#define TEGRA124_CLK_SBC5 104
--#define TEGRA124_CLK_SBC6 105
--#define TEGRA124_CLK_D_AUDIO 106
--#define TEGRA124_CLK_APBIF 107
--#define TEGRA124_CLK_DAM0 108
--#define TEGRA124_CLK_DAM1 109
--#define TEGRA124_CLK_DAM2 110
--#define TEGRA124_CLK_HDA2CODEC_2X 111
--/* 112 */
--#define TEGRA124_CLK_AUDIO0_2X 113
--#define TEGRA124_CLK_AUDIO1_2X 114
--#define TEGRA124_CLK_AUDIO2_2X 115
--#define TEGRA124_CLK_AUDIO3_2X 116
--#define TEGRA124_CLK_AUDIO4_2X 117
--#define TEGRA124_CLK_SPDIF_2X 118
--#define TEGRA124_CLK_ACTMON 119
--#define TEGRA124_CLK_EXTERN1 120
--#define TEGRA124_CLK_EXTERN2 121
--#define TEGRA124_CLK_EXTERN3 122
--#define TEGRA124_CLK_SATA_OOB 123
--#define TEGRA124_CLK_SATA 124
--#define TEGRA124_CLK_HDA 125
--/* 126 */
--#define TEGRA124_CLK_SE 127
--
--#define TEGRA124_CLK_HDA2HDMI 128
--#define TEGRA124_CLK_SATA_COLD 129
--/* 130 */
--/* 131 */
--/* 132 */
--/* 133 */
--/* 134 */
--/* 135 */
--/* 136 */
--/* 137 */
--/* 138 */
--/* 139 */
--/* 140 */
--/* 141 */
--/* 142 */
--/* 143 (bit affects xusb_falcon_src, xusb_fs_src, */
--/*      xusb_host_src and xusb_ss_src) */
--#define TEGRA124_CLK_CILAB 144
--#define TEGRA124_CLK_CILCD 145
--#define TEGRA124_CLK_CILE 146
--#define TEGRA124_CLK_DSIALP 147
--#define TEGRA124_CLK_DSIBLP 148
--#define TEGRA124_CLK_ENTROPY 149
--#define TEGRA124_CLK_DDS 150
--/* 151 */
--#define TEGRA124_CLK_DP2 152
--#define TEGRA124_CLK_AMX 153
--#define TEGRA124_CLK_ADX 154
--/* 155 (bit affects dfll_ref and dfll_soc) */
--#define TEGRA124_CLK_XUSB_SS 156
--/* 157 */
--/* 158 */
--/* 159 */
--
--/* 160 */
--/* 161 */
--/* 162 */
--/* 163 */
--/* 164 */
--/* 165 */
--#define TEGRA124_CLK_I2C6 166
--/* 167 */
--/* 168 */
--/* 169 */
--/* 170 */
--#define TEGRA124_CLK_VIM2_CLK 171
--/* 172 */
--/* 173 */
--/* 174 */
--/* 175 */
--#define TEGRA124_CLK_HDMI_AUDIO 176
--#define TEGRA124_CLK_CLK72MHZ 177
--#define TEGRA124_CLK_VIC03 178
--/* 179 */
--#define TEGRA124_CLK_ADX1 180
--#define TEGRA124_CLK_DPAUX 181
--#define TEGRA124_CLK_SOR0 182
--/* 183 */
--#define TEGRA124_CLK_GPU 184
--#define TEGRA124_CLK_AMX1 185
--/* 186 */
--/* 187 */
--/* 188 */
--/* 189 */
--/* 190 */
--/* 191 */
--#define TEGRA124_CLK_UARTB 192
--#define TEGRA124_CLK_VFIR 193
--#define TEGRA124_CLK_SPDIF_IN 194
--#define TEGRA124_CLK_SPDIF_OUT 195
--#define TEGRA124_CLK_VI 196
--#define TEGRA124_CLK_VI_SENSOR 197
--#define TEGRA124_CLK_FUSE 198
--#define TEGRA124_CLK_FUSE_BURN 199
--#define TEGRA124_CLK_CLK_32K 200
--#define TEGRA124_CLK_CLK_M 201
--#define TEGRA124_CLK_CLK_M_DIV2 202
--#define TEGRA124_CLK_CLK_M_DIV4 203
--#define TEGRA124_CLK_PLL_REF 204
--#define TEGRA124_CLK_PLL_C 205
--#define TEGRA124_CLK_PLL_C_OUT1 206
--#define TEGRA124_CLK_PLL_C2 207
--#define TEGRA124_CLK_PLL_C3 208
--#define TEGRA124_CLK_PLL_M 209
--#define TEGRA124_CLK_PLL_M_OUT1 210
--#define TEGRA124_CLK_PLL_P 211
--#define TEGRA124_CLK_PLL_P_OUT1 212
--#define TEGRA124_CLK_PLL_P_OUT2 213
--#define TEGRA124_CLK_PLL_P_OUT3 214
--#define TEGRA124_CLK_PLL_P_OUT4 215
--#define TEGRA124_CLK_PLL_A 216
--#define TEGRA124_CLK_PLL_A_OUT0 217
--#define TEGRA124_CLK_PLL_D 218
--#define TEGRA124_CLK_PLL_D_OUT0 219
--#define TEGRA124_CLK_PLL_D2 220
--#define TEGRA124_CLK_PLL_D2_OUT0 221
--#define TEGRA124_CLK_PLL_U 222
--#define TEGRA124_CLK_PLL_U_480M 223
--
--#define TEGRA124_CLK_PLL_U_60M 224
--#define TEGRA124_CLK_PLL_U_48M 225
--#define TEGRA124_CLK_PLL_U_12M 226
--/* 227 */
--/* 228 */
--#define TEGRA124_CLK_PLL_RE_VCO 229
--#define TEGRA124_CLK_PLL_RE_OUT 230
--#define TEGRA124_CLK_PLL_E 231
--#define TEGRA124_CLK_SPDIF_IN_SYNC 232
--#define TEGRA124_CLK_I2S0_SYNC 233
--#define TEGRA124_CLK_I2S1_SYNC 234
--#define TEGRA124_CLK_I2S2_SYNC 235
--#define TEGRA124_CLK_I2S3_SYNC 236
--#define TEGRA124_CLK_I2S4_SYNC 237
--#define TEGRA124_CLK_VIMCLK_SYNC 238
--#define TEGRA124_CLK_AUDIO0 239
--#define TEGRA124_CLK_AUDIO1 240
--#define TEGRA124_CLK_AUDIO2 241
--#define TEGRA124_CLK_AUDIO3 242
--#define TEGRA124_CLK_AUDIO4 243
--#define TEGRA124_CLK_SPDIF 244
--#define TEGRA124_CLK_CLK_OUT_1 245
--#define TEGRA124_CLK_CLK_OUT_2 246
--#define TEGRA124_CLK_CLK_OUT_3 247
--#define TEGRA124_CLK_BLINK 248
--/* 249 */
--/* 250 */
--/* 251 */
--#define TEGRA124_CLK_XUSB_HOST_SRC 252
--#define TEGRA124_CLK_XUSB_FALCON_SRC 253
--#define TEGRA124_CLK_XUSB_FS_SRC 254
--#define TEGRA124_CLK_XUSB_SS_SRC 255
--
--#define TEGRA124_CLK_XUSB_DEV_SRC 256
--#define TEGRA124_CLK_XUSB_DEV 257
--#define TEGRA124_CLK_XUSB_HS_SRC 258
--#define TEGRA124_CLK_SCLK 259
--#define TEGRA124_CLK_HCLK 260
--#define TEGRA124_CLK_PCLK 261
--/* 262 */
--/* 263 */
--#define TEGRA124_CLK_DFLL_REF 264
--#define TEGRA124_CLK_DFLL_SOC 265
--#define TEGRA124_CLK_VI_SENSOR2 266
--#define TEGRA124_CLK_PLL_P_OUT5 267
--#define TEGRA124_CLK_CML0 268
--#define TEGRA124_CLK_CML1 269
--#define TEGRA124_CLK_PLL_C4 270
--#define TEGRA124_CLK_PLL_DP 271
--#define TEGRA124_CLK_PLL_E_MUX 272
--#define TEGRA124_CLK_PLL_D_DSI_OUT 273
--/* 274 */
--/* 275 */
--/* 276 */
--/* 277 */
--/* 278 */
--/* 279 */
--/* 280 */
--/* 281 */
--/* 282 */
--/* 283 */
--/* 284 */
--/* 285 */
--/* 286 */
--/* 287 */
--
--/* 288 */
--/* 289 */
--/* 290 */
--/* 291 */
--/* 292 */
--/* 293 */
--/* 294 */
--/* 295 */
--/* 296 */
--/* 297 */
--/* 298 */
--/* 299 */
--#define TEGRA124_CLK_AUDIO0_MUX 300
--#define TEGRA124_CLK_AUDIO1_MUX 301
--#define TEGRA124_CLK_AUDIO2_MUX 302
--#define TEGRA124_CLK_AUDIO3_MUX 303
--#define TEGRA124_CLK_AUDIO4_MUX 304
--#define TEGRA124_CLK_SPDIF_MUX 305
--#define TEGRA124_CLK_CLK_OUT_1_MUX 306
--#define TEGRA124_CLK_CLK_OUT_2_MUX 307
--#define TEGRA124_CLK_CLK_OUT_3_MUX 308
--/* 309 */
--/* 310 */
--#define TEGRA124_CLK_SOR0_LVDS 311
--#define TEGRA124_CLK_XUSB_SS_DIV2 312
--
--#define TEGRA124_CLK_PLL_M_UD 313
--#define TEGRA124_CLK_PLL_C_UD 314
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA124_CAR_COMMON_H */
-diff --git a/include/dt-bindings/clock/tegra124-car.h b/include/dt-bindings/clock/tegra124-car.h
-deleted file mode 100644
-index 2860737f0443..000000000000
---- a/include/dt-bindings/clock/tegra124-car.h
+index b4864325d74b..000000000000
+--- a/include/dt-bindings/mailbox/tegra186-hsp.h
 +++ /dev/null
 @@ -1,19 +0,0 @@
+-/*
+- * This header provides constants for binding nvidia,tegra186-hsp.
+- *
+- * The number with HSP_DB_MASTER prefix indicates the bit that is
+- * associated with a master ID in the doorbell registers.
+- */
+-
+-#ifndef _DT_BINDINGS_MAILBOX_TEGRA186_HSP_H
+-#define _DT_BINDINGS_MAILBOX_TEGRA186_HSP_H
+-
+-#define HSP_MBOX_TYPE_DB 0x0
+-#define HSP_MBOX_TYPE_SM 0x1
+-#define HSP_MBOX_TYPE_SS 0x2
+-#define HSP_MBOX_TYPE_AS 0x3
+-
+-#define HSP_DB_MASTER_CCPLEX 17
+-#define HSP_DB_MASTER_BPMP 19
+-
+-#endif
+diff --git a/include/dt-bindings/memory/tegra114-mc.h b/include/dt-bindings/memory/tegra114-mc.h
+deleted file mode 100644
+index 8f48985a3139..000000000000
+--- a/include/dt-bindings/memory/tegra114-mc.h
++++ /dev/null
+@@ -1,25 +0,0 @@
+-#ifndef DT_BINDINGS_MEMORY_TEGRA114_MC_H
+-#define DT_BINDINGS_MEMORY_TEGRA114_MC_H
+-
+-#define TEGRA_SWGROUP_PTC	0
+-#define TEGRA_SWGROUP_DC	1
+-#define TEGRA_SWGROUP_DCB	2
+-#define TEGRA_SWGROUP_EPP	3
+-#define TEGRA_SWGROUP_G2	4
+-#define TEGRA_SWGROUP_AVPC	5
+-#define TEGRA_SWGROUP_NV	6
+-#define TEGRA_SWGROUP_HDA	7
+-#define TEGRA_SWGROUP_HC	8
+-#define TEGRA_SWGROUP_MSENC	9
+-#define TEGRA_SWGROUP_PPCS	10
+-#define TEGRA_SWGROUP_VDE	11
+-#define TEGRA_SWGROUP_MPCORELP	12
+-#define TEGRA_SWGROUP_MPCORE	13
+-#define TEGRA_SWGROUP_VI	14
+-#define TEGRA_SWGROUP_ISP	15
+-#define TEGRA_SWGROUP_XUSB_HOST	16
+-#define TEGRA_SWGROUP_XUSB_DEV	17
+-#define TEGRA_SWGROUP_EMUCIF	18
+-#define TEGRA_SWGROUP_TSEC	19
+-
+-#endif
+diff --git a/include/dt-bindings/memory/tegra124-mc.h b/include/dt-bindings/memory/tegra124-mc.h
+deleted file mode 100644
+index 7d8ee798f34e..000000000000
+--- a/include/dt-bindings/memory/tegra124-mc.h
++++ /dev/null
+@@ -1,31 +0,0 @@
+-#ifndef DT_BINDINGS_MEMORY_TEGRA124_MC_H
+-#define DT_BINDINGS_MEMORY_TEGRA124_MC_H
+-
+-#define TEGRA_SWGROUP_PTC	0
+-#define TEGRA_SWGROUP_DC	1
+-#define TEGRA_SWGROUP_DCB	2
+-#define TEGRA_SWGROUP_AFI	3
+-#define TEGRA_SWGROUP_AVPC	4
+-#define TEGRA_SWGROUP_HDA	5
+-#define TEGRA_SWGROUP_HC	6
+-#define TEGRA_SWGROUP_MSENC	7
+-#define TEGRA_SWGROUP_PPCS	8
+-#define TEGRA_SWGROUP_SATA	9
+-#define TEGRA_SWGROUP_VDE	10
+-#define TEGRA_SWGROUP_MPCORELP	11
+-#define TEGRA_SWGROUP_MPCORE	12
+-#define TEGRA_SWGROUP_ISP2	13
+-#define TEGRA_SWGROUP_XUSB_HOST	14
+-#define TEGRA_SWGROUP_XUSB_DEV	15
+-#define TEGRA_SWGROUP_ISP2B	16
+-#define TEGRA_SWGROUP_TSEC	17
+-#define TEGRA_SWGROUP_A9AVP	18
+-#define TEGRA_SWGROUP_GPU	19
+-#define TEGRA_SWGROUP_SDMMC1A	20
+-#define TEGRA_SWGROUP_SDMMC2A	21
+-#define TEGRA_SWGROUP_SDMMC3A	22
+-#define TEGRA_SWGROUP_SDMMC4A	23
+-#define TEGRA_SWGROUP_VIC	24
+-#define TEGRA_SWGROUP_VI	25
+-
+-#endif
+diff --git a/include/dt-bindings/memory/tegra210-mc.h b/include/dt-bindings/memory/tegra210-mc.h
+deleted file mode 100644
+index d1731bc14dbc..000000000000
+--- a/include/dt-bindings/memory/tegra210-mc.h
++++ /dev/null
+@@ -1,36 +0,0 @@
+-#ifndef DT_BINDINGS_MEMORY_TEGRA210_MC_H
+-#define DT_BINDINGS_MEMORY_TEGRA210_MC_H
+-
+-#define TEGRA_SWGROUP_PTC	0
+-#define TEGRA_SWGROUP_DC	1
+-#define TEGRA_SWGROUP_DCB	2
+-#define TEGRA_SWGROUP_AFI	3
+-#define TEGRA_SWGROUP_AVPC	4
+-#define TEGRA_SWGROUP_HDA	5
+-#define TEGRA_SWGROUP_HC	6
+-#define TEGRA_SWGROUP_NVENC	7
+-#define TEGRA_SWGROUP_PPCS	8
+-#define TEGRA_SWGROUP_SATA	9
+-#define TEGRA_SWGROUP_MPCORE	10
+-#define TEGRA_SWGROUP_ISP2	11
+-#define TEGRA_SWGROUP_XUSB_HOST	12
+-#define TEGRA_SWGROUP_XUSB_DEV	13
+-#define TEGRA_SWGROUP_ISP2B	14
+-#define TEGRA_SWGROUP_TSEC	15
+-#define TEGRA_SWGROUP_A9AVP	16
+-#define TEGRA_SWGROUP_GPU	17
+-#define TEGRA_SWGROUP_SDMMC1A	18
+-#define TEGRA_SWGROUP_SDMMC2A	19
+-#define TEGRA_SWGROUP_SDMMC3A	20
+-#define TEGRA_SWGROUP_SDMMC4A	21
+-#define TEGRA_SWGROUP_VIC	22
+-#define TEGRA_SWGROUP_VI	23
+-#define TEGRA_SWGROUP_NVDEC	24
+-#define TEGRA_SWGROUP_APE	25
+-#define TEGRA_SWGROUP_NVJPG	26
+-#define TEGRA_SWGROUP_SE	27
+-#define TEGRA_SWGROUP_AXIAP	28
+-#define TEGRA_SWGROUP_ETR	29
+-#define TEGRA_SWGROUP_TSECB	30
+-
+-#endif
+diff --git a/include/dt-bindings/memory/tegra30-mc.h b/include/dt-bindings/memory/tegra30-mc.h
+deleted file mode 100644
+index 502beb03d777..000000000000
+--- a/include/dt-bindings/memory/tegra30-mc.h
++++ /dev/null
+@@ -1,24 +0,0 @@
+-#ifndef DT_BINDINGS_MEMORY_TEGRA30_MC_H
+-#define DT_BINDINGS_MEMORY_TEGRA30_MC_H
+-
+-#define TEGRA_SWGROUP_PTC	0
+-#define TEGRA_SWGROUP_DC	1
+-#define TEGRA_SWGROUP_DCB	2
+-#define TEGRA_SWGROUP_EPP	3
+-#define TEGRA_SWGROUP_G2	4
+-#define TEGRA_SWGROUP_MPE	5
+-#define TEGRA_SWGROUP_VI	6
+-#define TEGRA_SWGROUP_AFI	7
+-#define TEGRA_SWGROUP_AVPC	8
+-#define TEGRA_SWGROUP_NV	9
+-#define TEGRA_SWGROUP_NV2	10
+-#define TEGRA_SWGROUP_HDA	11
+-#define TEGRA_SWGROUP_HC	12
+-#define TEGRA_SWGROUP_PPCS	13
+-#define TEGRA_SWGROUP_SATA	14
+-#define TEGRA_SWGROUP_VDE	15
+-#define TEGRA_SWGROUP_MPCORELP	16
+-#define TEGRA_SWGROUP_MPCORE	17
+-#define TEGRA_SWGROUP_ISP	18
+-
+-#endif
+diff --git a/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h b/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h
+deleted file mode 100644
+index 914d56da9324..000000000000
+--- a/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#ifndef _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H
+-#define _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H 1
+-
+-#define TEGRA_XUSB_PADCTL_PCIE 0
+-#define TEGRA_XUSB_PADCTL_SATA 1
+-
+-#endif /* _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H */
+diff --git a/include/dt-bindings/pinctrl/pinctrl-tegra.h b/include/dt-bindings/pinctrl/pinctrl-tegra.h
+deleted file mode 100644
+index c9b57408de68..000000000000
+--- a/include/dt-bindings/pinctrl/pinctrl-tegra.h
++++ /dev/null
+@@ -1,37 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * This header provides constants for Tegra pinctrl bindings.
+- *
+- * Copyright (c) 2013, NVIDIA CORPORATION.  All rights reserved.
+- *
+- * Author: Laxman Dewangan <ldewangan@nvidia.com>
+- */
+-
+-#ifndef _DT_BINDINGS_PINCTRL_TEGRA_H
+-#define _DT_BINDINGS_PINCTRL_TEGRA_H
+-
+-/*
+- * Enable/disable for diffeent dt properties. This is applicable for
+- * properties nvidia,enable-input, nvidia,tristate, nvidia,open-drain,
+- * nvidia,lock, nvidia,rcv-sel, nvidia,high-speed-mode, nvidia,schmitt.
+- */
+-#define TEGRA_PIN_DISABLE				0
+-#define TEGRA_PIN_ENABLE				1
+-
+-#define TEGRA_PIN_PULL_NONE				0
+-#define TEGRA_PIN_PULL_DOWN				1
+-#define TEGRA_PIN_PULL_UP				2
+-
+-/* Low power mode driver */
+-#define TEGRA_PIN_LP_DRIVE_DIV_8			0
+-#define TEGRA_PIN_LP_DRIVE_DIV_4			1
+-#define TEGRA_PIN_LP_DRIVE_DIV_2			2
+-#define TEGRA_PIN_LP_DRIVE_DIV_1			3
+-
+-/* Rising/Falling slew rate */
+-#define TEGRA_PIN_SLEW_RATE_FASTEST			0
+-#define TEGRA_PIN_SLEW_RATE_FAST			1
+-#define TEGRA_PIN_SLEW_RATE_SLOW			2
+-#define TEGRA_PIN_SLEW_RATE_SLOWEST			3
+-
+-#endif
+diff --git a/include/dt-bindings/power/tegra186-powergate.h b/include/dt-bindings/power/tegra186-powergate.h
+deleted file mode 100644
+index 17e75498563c..000000000000
+--- a/include/dt-bindings/power/tegra186-powergate.h
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2015-2016, NVIDIA CORPORATION.
+- */
+-
+-#ifndef _DT_BINDINGS_POWER_TEGRA186_POWERGATE_H
+-#define _DT_BINDINGS_POWER_TEGRA186_POWERGATE_H
+-
+-#define TEGRA186_POWER_DOMAIN_AUD	0
+-#define TEGRA186_POWER_DOMAIN_DFD	1
+-#define TEGRA186_POWER_DOMAIN_DISP	2
+-#define TEGRA186_POWER_DOMAIN_DISPB	3
+-#define TEGRA186_POWER_DOMAIN_DISPC	4
+-#define TEGRA186_POWER_DOMAIN_ISPA	5
+-#define TEGRA186_POWER_DOMAIN_NVDEC	6
+-#define TEGRA186_POWER_DOMAIN_NVJPG	7
+-#define TEGRA186_POWER_DOMAIN_MPE	8
+-#define TEGRA186_POWER_DOMAIN_PCX	9
+-#define TEGRA186_POWER_DOMAIN_SAX	10
+-#define TEGRA186_POWER_DOMAIN_VE	11
+-#define TEGRA186_POWER_DOMAIN_VIC	12
+-#define TEGRA186_POWER_DOMAIN_XUSBA	13
+-#define TEGRA186_POWER_DOMAIN_XUSBB	14
+-#define TEGRA186_POWER_DOMAIN_XUSBC	15
+-#define TEGRA186_POWER_DOMAIN_GPU	43
+-#define TEGRA186_POWER_DOMAIN_MAX	44
+-
+-#endif
+diff --git a/include/dt-bindings/reset/tegra124-car.h b/include/dt-bindings/reset/tegra124-car.h
+deleted file mode 100644
+index 070e4f6e7486..000000000000
+--- a/include/dt-bindings/reset/tegra124-car.h
++++ /dev/null
+@@ -1,12 +0,0 @@
 -/*
 - * This header provides Tegra124-specific constants for binding
 - * nvidia,tegra124-car.
 - */
 -
--#include <dt-bindings/clock/tegra124-car-common.h>
+-#ifndef _DT_BINDINGS_RESET_TEGRA124_CAR_H
+-#define _DT_BINDINGS_RESET_TEGRA124_CAR_H
 -
--#ifndef _DT_BINDINGS_CLOCK_TEGRA124_CAR_H
--#define _DT_BINDINGS_CLOCK_TEGRA124_CAR_H
+-#define TEGRA124_RESET(x)		(6 * 32 + (x))
+-#define TEGRA124_RST_DFLL_DVCO		TEGRA124_RESET(0)
 -
--#define TEGRA124_CLK_PLL_X		227
--#define TEGRA124_CLK_PLL_X_OUT0		228
--
--#define TEGRA124_CLK_CCLK_G		262
--#define TEGRA124_CLK_CCLK_LP		263
--
--#define TEGRA124_CLK_CLK_MAX		315
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA124_CAR_H */
-diff --git a/include/dt-bindings/clock/tegra186-clock.h b/include/dt-bindings/clock/tegra186-clock.h
+-#endif	/* _DT_BINDINGS_RESET_TEGRA124_CAR_H */
+diff --git a/include/dt-bindings/reset/tegra186-reset.h b/include/dt-bindings/reset/tegra186-reset.h
 deleted file mode 100644
-index f73d32098f99..000000000000
---- a/include/dt-bindings/clock/tegra186-clock.h
+index 7efec9200532..000000000000
+--- a/include/dt-bindings/reset/tegra186-reset.h
 +++ /dev/null
-@@ -1,940 +0,0 @@
--/** @file */
--
--#ifndef _MACH_T186_CLK_T186_H
--#define _MACH_T186_CLK_T186_H
--
--/**
-- * @defgroup clock_ids Clock Identifiers
-- * @{
-- *   @defgroup extern_input external input clocks
-- *   @{
-- *     @def TEGRA186_CLK_OSC
-- *     @def TEGRA186_CLK_CLK_32K
-- *     @def TEGRA186_CLK_DTV_INPUT
-- *     @def TEGRA186_CLK_SOR0_PAD_CLKOUT
-- *     @def TEGRA186_CLK_SOR1_PAD_CLKOUT
-- *     @def TEGRA186_CLK_I2S1_SYNC_INPUT
-- *     @def TEGRA186_CLK_I2S2_SYNC_INPUT
-- *     @def TEGRA186_CLK_I2S3_SYNC_INPUT
-- *     @def TEGRA186_CLK_I2S4_SYNC_INPUT
-- *     @def TEGRA186_CLK_I2S5_SYNC_INPUT
-- *     @def TEGRA186_CLK_I2S6_SYNC_INPUT
-- *     @def TEGRA186_CLK_SPDIFIN_SYNC_INPUT
-- *   @}
-- *
-- *   @defgroup extern_output external output clocks
-- *   @{
-- *     @def TEGRA186_CLK_EXTPERIPH1
-- *     @def TEGRA186_CLK_EXTPERIPH2
-- *     @def TEGRA186_CLK_EXTPERIPH3
-- *     @def TEGRA186_CLK_EXTPERIPH4
-- *   @}
-- *
-- *   @defgroup display_clks display related clocks
-- *   @{
-- *     @def TEGRA186_CLK_CEC
-- *     @def TEGRA186_CLK_DSIC
-- *     @def TEGRA186_CLK_DSIC_LP
-- *     @def TEGRA186_CLK_DSID
-- *     @def TEGRA186_CLK_DSID_LP
-- *     @def TEGRA186_CLK_DPAUX1
-- *     @def TEGRA186_CLK_DPAUX
-- *     @def TEGRA186_CLK_HDA2HDMICODEC
-- *     @def TEGRA186_CLK_NVDISPLAY_DISP
-- *     @def TEGRA186_CLK_NVDISPLAY_DSC
-- *     @def TEGRA186_CLK_NVDISPLAY_P0
-- *     @def TEGRA186_CLK_NVDISPLAY_P1
-- *     @def TEGRA186_CLK_NVDISPLAY_P2
-- *     @def TEGRA186_CLK_NVDISPLAYHUB
-- *     @def TEGRA186_CLK_SOR_SAFE
-- *     @def TEGRA186_CLK_SOR0
-- *     @def TEGRA186_CLK_SOR0_OUT
-- *     @def TEGRA186_CLK_SOR1
-- *     @def TEGRA186_CLK_SOR1_OUT
-- *     @def TEGRA186_CLK_DSI
-- *     @def TEGRA186_CLK_MIPI_CAL
-- *     @def TEGRA186_CLK_DSIA_LP
-- *     @def TEGRA186_CLK_DSIB
-- *     @def TEGRA186_CLK_DSIB_LP
-- *   @}
-- *
-- *   @defgroup camera_clks camera related clocks
-- *   @{
-- *     @def TEGRA186_CLK_NVCSI
-- *     @def TEGRA186_CLK_NVCSILP
-- *     @def TEGRA186_CLK_VI
-- *   @}
-- *
-- *   @defgroup audio_clks audio related clocks
-- *   @{
-- *     @def TEGRA186_CLK_ACLK
-- *     @def TEGRA186_CLK_ADSP
-- *     @def TEGRA186_CLK_ADSPNEON
-- *     @def TEGRA186_CLK_AHUB
-- *     @def TEGRA186_CLK_APE
-- *     @def TEGRA186_CLK_APB2APE
-- *     @def TEGRA186_CLK_AUD_MCLK
-- *     @def TEGRA186_CLK_DMIC1
-- *     @def TEGRA186_CLK_DMIC2
-- *     @def TEGRA186_CLK_DMIC3
-- *     @def TEGRA186_CLK_DMIC4
-- *     @def TEGRA186_CLK_DSPK1
-- *     @def TEGRA186_CLK_DSPK2
-- *     @def TEGRA186_CLK_HDA
-- *     @def TEGRA186_CLK_HDA2CODEC_2X
-- *     @def TEGRA186_CLK_I2S1
-- *     @def TEGRA186_CLK_I2S2
-- *     @def TEGRA186_CLK_I2S3
-- *     @def TEGRA186_CLK_I2S4
-- *     @def TEGRA186_CLK_I2S5
-- *     @def TEGRA186_CLK_I2S6
-- *     @def TEGRA186_CLK_MAUD
-- *     @def TEGRA186_CLK_PLL_A_OUT0
-- *     @def TEGRA186_CLK_SPDIF_DOUBLER
-- *     @def TEGRA186_CLK_SPDIF_IN
-- *     @def TEGRA186_CLK_SPDIF_OUT
-- *     @def TEGRA186_CLK_SYNC_DMIC1
-- *     @def TEGRA186_CLK_SYNC_DMIC2
-- *     @def TEGRA186_CLK_SYNC_DMIC3
-- *     @def TEGRA186_CLK_SYNC_DMIC4
-- *     @def TEGRA186_CLK_SYNC_DMIC5
-- *     @def TEGRA186_CLK_SYNC_DSPK1
-- *     @def TEGRA186_CLK_SYNC_DSPK2
-- *     @def TEGRA186_CLK_SYNC_I2S1
-- *     @def TEGRA186_CLK_SYNC_I2S2
-- *     @def TEGRA186_CLK_SYNC_I2S3
-- *     @def TEGRA186_CLK_SYNC_I2S4
-- *     @def TEGRA186_CLK_SYNC_I2S5
-- *     @def TEGRA186_CLK_SYNC_I2S6
-- *     @def TEGRA186_CLK_SYNC_SPDIF
-- *   @}
-- *
-- *   @defgroup uart_clks UART clocks
-- *   @{
-- *     @def TEGRA186_CLK_AON_UART_FST_MIPI_CAL
-- *     @def TEGRA186_CLK_UARTA
-- *     @def TEGRA186_CLK_UARTB
-- *     @def TEGRA186_CLK_UARTC
-- *     @def TEGRA186_CLK_UARTD
-- *     @def TEGRA186_CLK_UARTE
-- *     @def TEGRA186_CLK_UARTF
-- *     @def TEGRA186_CLK_UARTG
-- *     @def TEGRA186_CLK_UART_FST_MIPI_CAL
-- *   @}
-- *
-- *   @defgroup i2c_clks I2C clocks
-- *   @{
-- *     @def TEGRA186_CLK_AON_I2C_SLOW
-- *     @def TEGRA186_CLK_I2C1
-- *     @def TEGRA186_CLK_I2C2
-- *     @def TEGRA186_CLK_I2C3
-- *     @def TEGRA186_CLK_I2C4
-- *     @def TEGRA186_CLK_I2C5
-- *     @def TEGRA186_CLK_I2C6
-- *     @def TEGRA186_CLK_I2C8
-- *     @def TEGRA186_CLK_I2C9
-- *     @def TEGRA186_CLK_I2C1
-- *     @def TEGRA186_CLK_I2C12
-- *     @def TEGRA186_CLK_I2C13
-- *     @def TEGRA186_CLK_I2C14
-- *     @def TEGRA186_CLK_I2C_SLOW
-- *     @def TEGRA186_CLK_VI_I2C
-- *   @}
-- *
-- *   @defgroup spi_clks SPI clocks
-- *   @{
-- *     @def TEGRA186_CLK_SPI1
-- *     @def TEGRA186_CLK_SPI2
-- *     @def TEGRA186_CLK_SPI3
-- *     @def TEGRA186_CLK_SPI4
-- *   @}
-- *
-- *   @defgroup storage storage related clocks
-- *   @{
-- *     @def TEGRA186_CLK_SATA
-- *     @def TEGRA186_CLK_SATA_OOB
-- *     @def TEGRA186_CLK_SATA_IOBIST
-- *     @def TEGRA186_CLK_SDMMC_LEGACY_TM
-- *     @def TEGRA186_CLK_SDMMC1
-- *     @def TEGRA186_CLK_SDMMC2
-- *     @def TEGRA186_CLK_SDMMC3
-- *     @def TEGRA186_CLK_SDMMC4
-- *     @def TEGRA186_CLK_QSPI
-- *     @def TEGRA186_CLK_QSPI_OUT
-- *     @def TEGRA186_CLK_UFSDEV_REF
-- *     @def TEGRA186_CLK_UFSHC
-- *   @}
-- *
-- *   @defgroup pwm_clks PWM clocks
-- *   @{
-- *     @def TEGRA186_CLK_PWM1
-- *     @def TEGRA186_CLK_PWM2
-- *     @def TEGRA186_CLK_PWM3
-- *     @def TEGRA186_CLK_PWM4
-- *     @def TEGRA186_CLK_PWM5
-- *     @def TEGRA186_CLK_PWM6
-- *     @def TEGRA186_CLK_PWM7
-- *     @def TEGRA186_CLK_PWM8
-- *   @}
-- *
-- *   @defgroup plls PLLs and related clocks
-- *   @{
-- *     @def TEGRA186_CLK_PLLREFE_OUT_GATED
-- *     @def TEGRA186_CLK_PLLREFE_OUT1
-- *     @def TEGRA186_CLK_PLLD_OUT1
-- *     @def TEGRA186_CLK_PLLP_OUT0
-- *     @def TEGRA186_CLK_PLLP_OUT5
-- *     @def TEGRA186_CLK_PLLA
-- *     @def TEGRA186_CLK_PLLE_PWRSEQ
-- *     @def TEGRA186_CLK_PLLA_OUT1
-- *     @def TEGRA186_CLK_PLLREFE_REF
-- *     @def TEGRA186_CLK_UPHY_PLL0_PWRSEQ
-- *     @def TEGRA186_CLK_UPHY_PLL1_PWRSEQ
-- *     @def TEGRA186_CLK_PLLREFE_PLLE_PASSTHROUGH
-- *     @def TEGRA186_CLK_PLLREFE_PEX
-- *     @def TEGRA186_CLK_PLLREFE_IDDQ
-- *     @def TEGRA186_CLK_PLLC_OUT_AON
-- *     @def TEGRA186_CLK_PLLC_OUT_ISP
-- *     @def TEGRA186_CLK_PLLC_OUT_VE
-- *     @def TEGRA186_CLK_PLLC4_OUT
-- *     @def TEGRA186_CLK_PLLREFE_OUT
-- *     @def TEGRA186_CLK_PLLREFE_PLL_REF
-- *     @def TEGRA186_CLK_PLLE
-- *     @def TEGRA186_CLK_PLLC
-- *     @def TEGRA186_CLK_PLLP
-- *     @def TEGRA186_CLK_PLLD
-- *     @def TEGRA186_CLK_PLLD2
-- *     @def TEGRA186_CLK_PLLREFE_VCO
-- *     @def TEGRA186_CLK_PLLC2
-- *     @def TEGRA186_CLK_PLLC3
-- *     @def TEGRA186_CLK_PLLDP
-- *     @def TEGRA186_CLK_PLLC4_VCO
-- *     @def TEGRA186_CLK_PLLA1
-- *     @def TEGRA186_CLK_PLLNVCSI
-- *     @def TEGRA186_CLK_PLLDISPHUB
-- *     @def TEGRA186_CLK_PLLD3
-- *     @def TEGRA186_CLK_PLLBPMPCAM
-- *     @def TEGRA186_CLK_PLLAON
-- *     @def TEGRA186_CLK_PLLU
-- *     @def TEGRA186_CLK_PLLC4_VCO_DIV2
-- *     @def TEGRA186_CLK_PLL_REF
-- *     @def TEGRA186_CLK_PLLREFE_OUT1_DIV5
-- *     @def TEGRA186_CLK_UTMIP_PLL_PWRSEQ
-- *     @def TEGRA186_CLK_PLL_U_48M
-- *     @def TEGRA186_CLK_PLL_U_480M
-- *     @def TEGRA186_CLK_PLLC4_OUT0
-- *     @def TEGRA186_CLK_PLLC4_OUT1
-- *     @def TEGRA186_CLK_PLLC4_OUT2
-- *     @def TEGRA186_CLK_PLLC4_OUT_MUX
-- *     @def TEGRA186_CLK_DFLLDISP_DIV
-- *     @def TEGRA186_CLK_PLLDISPHUB_DIV
-- *     @def TEGRA186_CLK_PLLP_DIV8
-- *   @}
-- *
-- *   @defgroup nafll_clks NAFLL clock sources
-- *   @{
-- *     @def TEGRA186_CLK_NAFLL_AXI_CBB
-- *     @def TEGRA186_CLK_NAFLL_BCPU
-- *     @def TEGRA186_CLK_NAFLL_BPMP
-- *     @def TEGRA186_CLK_NAFLL_DISP
-- *     @def TEGRA186_CLK_NAFLL_GPU
-- *     @def TEGRA186_CLK_NAFLL_ISP
-- *     @def TEGRA186_CLK_NAFLL_MCPU
-- *     @def TEGRA186_CLK_NAFLL_NVDEC
-- *     @def TEGRA186_CLK_NAFLL_NVENC
-- *     @def TEGRA186_CLK_NAFLL_NVJPG
-- *     @def TEGRA186_CLK_NAFLL_SCE
-- *     @def TEGRA186_CLK_NAFLL_SE
-- *     @def TEGRA186_CLK_NAFLL_TSEC
-- *     @def TEGRA186_CLK_NAFLL_TSECB
-- *     @def TEGRA186_CLK_NAFLL_VI
-- *     @def TEGRA186_CLK_NAFLL_VIC
-- *   @}
-- *
-- *   @defgroup mphy MPHY related clocks
-- *   @{
-- *     @def TEGRA186_CLK_MPHY_L0_RX_SYMB
-- *     @def TEGRA186_CLK_MPHY_L0_RX_LS_BIT
-- *     @def TEGRA186_CLK_MPHY_L0_TX_SYMB
-- *     @def TEGRA186_CLK_MPHY_L0_TX_LS_3XBIT
-- *     @def TEGRA186_CLK_MPHY_L0_RX_ANA
-- *     @def TEGRA186_CLK_MPHY_L1_RX_ANA
-- *     @def TEGRA186_CLK_MPHY_IOBIST
-- *     @def TEGRA186_CLK_MPHY_TX_1MHZ_REF
-- *     @def TEGRA186_CLK_MPHY_CORE_PLL_FIXED
-- *   @}
-- *
-- *   @defgroup eavb EAVB related clocks
-- *   @{
-- *     @def TEGRA186_CLK_EQOS_AXI
-- *     @def TEGRA186_CLK_EQOS_PTP_REF
-- *     @def TEGRA186_CLK_EQOS_RX
-- *     @def TEGRA186_CLK_EQOS_RX_INPUT
-- *     @def TEGRA186_CLK_EQOS_TX
-- *   @}
-- *
-- *   @defgroup usb USB related clocks
-- *   @{
-- *     @def TEGRA186_CLK_PEX_USB_PAD0_MGMT
-- *     @def TEGRA186_CLK_PEX_USB_PAD1_MGMT
-- *     @def TEGRA186_CLK_HSIC_TRK
-- *     @def TEGRA186_CLK_USB2_TRK
-- *     @def TEGRA186_CLK_USB2_HSIC_TRK
-- *     @def TEGRA186_CLK_XUSB_CORE_SS
-- *     @def TEGRA186_CLK_XUSB_CORE_DEV
-- *     @def TEGRA186_CLK_XUSB_FALCON
-- *     @def TEGRA186_CLK_XUSB_FS
-- *     @def TEGRA186_CLK_XUSB
-- *     @def TEGRA186_CLK_XUSB_DEV
-- *     @def TEGRA186_CLK_XUSB_HOST
-- *     @def TEGRA186_CLK_XUSB_SS
-- *   @}
-- *
-- *   @defgroup bigblock compute block related clocks
-- *   @{
-- *     @def TEGRA186_CLK_GPCCLK
-- *     @def TEGRA186_CLK_GPC2CLK
-- *     @def TEGRA186_CLK_GPU
-- *     @def TEGRA186_CLK_HOST1X
-- *     @def TEGRA186_CLK_ISP
-- *     @def TEGRA186_CLK_NVDEC
-- *     @def TEGRA186_CLK_NVENC
-- *     @def TEGRA186_CLK_NVJPG
-- *     @def TEGRA186_CLK_SE
-- *     @def TEGRA186_CLK_TSEC
-- *     @def TEGRA186_CLK_TSECB
-- *     @def TEGRA186_CLK_VIC
-- *   @}
-- *
-- *   @defgroup can CAN bus related clocks
-- *   @{
-- *     @def TEGRA186_CLK_CAN1
-- *     @def TEGRA186_CLK_CAN1_HOST
-- *     @def TEGRA186_CLK_CAN2
-- *     @def TEGRA186_CLK_CAN2_HOST
-- *   @}
-- *
-- *   @defgroup system basic system clocks
-- *   @{
-- *     @def TEGRA186_CLK_ACTMON
-- *     @def TEGRA186_CLK_AON_APB
-- *     @def TEGRA186_CLK_AON_CPU_NIC
-- *     @def TEGRA186_CLK_AON_NIC
-- *     @def TEGRA186_CLK_AXI_CBB
-- *     @def TEGRA186_CLK_BPMP_APB
-- *     @def TEGRA186_CLK_BPMP_CPU_NIC
-- *     @def TEGRA186_CLK_BPMP_NIC_RATE
-- *     @def TEGRA186_CLK_CLK_M
-- *     @def TEGRA186_CLK_EMC
-- *     @def TEGRA186_CLK_MSS_ENCRYPT
-- *     @def TEGRA186_CLK_SCE_APB
-- *     @def TEGRA186_CLK_SCE_CPU_NIC
-- *     @def TEGRA186_CLK_SCE_NIC
-- *     @def TEGRA186_CLK_TSC
-- *   @}
-- *
-- *   @defgroup pcie_clks PCIe related clocks
-- *   @{
-- *     @def TEGRA186_CLK_AFI
-- *     @def TEGRA186_CLK_PCIE
-- *     @def TEGRA186_CLK_PCIE2_IOBIST
-- *     @def TEGRA186_CLK_PCIERX0
-- *     @def TEGRA186_CLK_PCIERX1
-- *     @def TEGRA186_CLK_PCIERX2
-- *     @def TEGRA186_CLK_PCIERX3
-- *     @def TEGRA186_CLK_PCIERX4
-- *   @}
+@@ -1,205 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (c) 2015, NVIDIA CORPORATION.
 - */
 -
--/** @brief output of gate CLK_ENB_FUSE */
--#define TEGRA186_CLK_FUSE 0
--/**
-- * @brief It's not what you think
-- * @details output of gate CLK_ENB_GPU. This output connects to the GPU
-- * pwrclk. @warning: This is almost certainly not the clock you think
-- * it is. If you're looking for the clock of the graphics engine, see
-- * TEGRA186_GPCCLK
-- */
--#define TEGRA186_CLK_GPU 1
--/** @brief output of gate CLK_ENB_PCIE */
--#define TEGRA186_CLK_PCIE 3
--/** @brief output of the divider IPFS_CLK_DIVISOR */
--#define TEGRA186_CLK_AFI 4
--/** @brief output of gate CLK_ENB_PCIE2_IOBIST */
--#define TEGRA186_CLK_PCIE2_IOBIST 5
--/** @brief output of gate CLK_ENB_PCIERX0*/
--#define TEGRA186_CLK_PCIERX0 6
--/** @brief output of gate CLK_ENB_PCIERX1*/
--#define TEGRA186_CLK_PCIERX1 7
--/** @brief output of gate CLK_ENB_PCIERX2*/
--#define TEGRA186_CLK_PCIERX2 8
--/** @brief output of gate CLK_ENB_PCIERX3*/
--#define TEGRA186_CLK_PCIERX3 9
--/** @brief output of gate CLK_ENB_PCIERX4*/
--#define TEGRA186_CLK_PCIERX4 10
--/** @brief output branch of PLL_C for ISP, controlled by gate CLK_ENB_PLLC_OUT_ISP */
--#define TEGRA186_CLK_PLLC_OUT_ISP 11
--/** @brief output branch of PLL_C for VI, controlled by gate CLK_ENB_PLLC_OUT_VE */
--#define TEGRA186_CLK_PLLC_OUT_VE 12
--/** @brief output branch of PLL_C for AON domain, controlled by gate CLK_ENB_PLLC_OUT_AON */
--#define TEGRA186_CLK_PLLC_OUT_AON 13
--/** @brief output of gate CLK_ENB_SOR_SAFE */
--#define TEGRA186_CLK_SOR_SAFE 39
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2S2 */
--#define TEGRA186_CLK_I2S2 42
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2S3 */
--#define TEGRA186_CLK_I2S3 43
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SPDF_IN */
--#define TEGRA186_CLK_SPDIF_IN 44
--/** @brief output of gate CLK_ENB_SPDIF_DOUBLER */
--#define TEGRA186_CLK_SPDIF_DOUBLER 45
--/**  @clkdesc{spi_clks, out, mux, CLK_RST_CONTROLLER_CLK_SOURCE_SPI3} */
--#define TEGRA186_CLK_SPI3 46
--/** @clkdesc{i2c_clks, out, mux, CLK_RST_CONTROLLER_CLK_SOURCE_I2C1} */
--#define TEGRA186_CLK_I2C1 47
--/** @clkdesc{i2c_clks, out, mux, CLK_RST_CONTROLLER_CLK_SOURCE_I2C5} */
--#define TEGRA186_CLK_I2C5 48
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SPI1 */
--#define TEGRA186_CLK_SPI1 49
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_ISP */
--#define TEGRA186_CLK_ISP 50
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_VI */
--#define TEGRA186_CLK_VI 51
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SDMMC1 */
--#define TEGRA186_CLK_SDMMC1 52
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SDMMC2 */
--#define TEGRA186_CLK_SDMMC2 53
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SDMMC4 */
--#define TEGRA186_CLK_SDMMC4 54
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTA */
--#define TEGRA186_CLK_UARTA 55
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTB */
--#define TEGRA186_CLK_UARTB 56
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_HOST1X */
--#define TEGRA186_CLK_HOST1X 57
--/**
-- * @brief controls the EMC clock frequency.
-- * @details Doing a clk_set_rate on this clock will select the
-- * appropriate clock source, program the source rate and execute a
-- * specific sequence to switch to the new clock source for both memory
-- * controllers. This can be used to control the balance between memory
-- * throughput and memory controller power.
-- */
--#define TEGRA186_CLK_EMC 58
--/* @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_EXTPERIPH4 */
--#define TEGRA186_CLK_EXTPERIPH4 73
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SPI4 */
--#define TEGRA186_CLK_SPI4 74
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C3 */
--#define TEGRA186_CLK_I2C3 75
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SDMMC3 */
--#define TEGRA186_CLK_SDMMC3 76
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTD */
--#define TEGRA186_CLK_UARTD 77
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2S1 */
--#define TEGRA186_CLK_I2S1 79
--/** output of gate CLK_ENB_DTV */
--#define TEGRA186_CLK_DTV 80
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_TSEC */
--#define TEGRA186_CLK_TSEC 81
--/** @brief output of gate CLK_ENB_DP2 */
--#define TEGRA186_CLK_DP2 82
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2S4 */
--#define TEGRA186_CLK_I2S4 84
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2S5 */
--#define TEGRA186_CLK_I2S5 85
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C4 */
--#define TEGRA186_CLK_I2C4 86
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AHUB */
--#define TEGRA186_CLK_AHUB 87
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_HDA2CODEC_2X */
--#define TEGRA186_CLK_HDA2CODEC_2X 88
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_EXTPERIPH1 */
--#define TEGRA186_CLK_EXTPERIPH1 89
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_EXTPERIPH2 */
--#define TEGRA186_CLK_EXTPERIPH2 90
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_EXTPERIPH3 */
--#define TEGRA186_CLK_EXTPERIPH3 91
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C_SLOW */
--#define TEGRA186_CLK_I2C_SLOW 92
--/** @brief output of the SOR1_CLK_SRC mux in CLK_RST_CONTROLLER_CLK_SOURCE_SOR1 */
--#define TEGRA186_CLK_SOR1 93
--/** @brief output of gate CLK_ENB_CEC */
--#define TEGRA186_CLK_CEC 94
--/** @brief output of gate CLK_ENB_DPAUX1 */
--#define TEGRA186_CLK_DPAUX1 95
--/** @brief output of gate CLK_ENB_DPAUX */
--#define TEGRA186_CLK_DPAUX 96
--/** @brief output of the SOR0_CLK_SRC mux in CLK_RST_CONTROLLER_CLK_SOURCE_SOR0 */
--#define TEGRA186_CLK_SOR0 97
--/** @brief output of gate CLK_ENB_HDA2HDMICODEC */
--#define TEGRA186_CLK_HDA2HDMICODEC 98
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SATA */
--#define TEGRA186_CLK_SATA 99
--/** @brief output of gate CLK_ENB_SATA_OOB */
--#define TEGRA186_CLK_SATA_OOB 100
--/** @brief output of gate CLK_ENB_SATA_IOBIST */
--#define TEGRA186_CLK_SATA_IOBIST 101
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_HDA */
--#define TEGRA186_CLK_HDA 102
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SE */
--#define TEGRA186_CLK_SE 103
--/** @brief output of gate CLK_ENB_APB2APE */
--#define TEGRA186_CLK_APB2APE 104
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_APE */
--#define TEGRA186_CLK_APE 105
--/** @brief output of gate CLK_ENB_IQC1 */
--#define TEGRA186_CLK_IQC1 106
--/** @brief output of gate CLK_ENB_IQC2 */
--#define TEGRA186_CLK_IQC2 107
--/** divide by 2 version of TEGRA186_CLK_PLLREFE_VCO */
--#define TEGRA186_CLK_PLLREFE_OUT 108
--/** @brief output of gate CLK_ENB_PLLREFE_PLL_REF */
--#define TEGRA186_CLK_PLLREFE_PLL_REF 109
--/** @brief output of gate CLK_ENB_PLLC4_OUT */
--#define TEGRA186_CLK_PLLC4_OUT 110
--/** @brief output of mux xusb_core_clk_switch on page 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB 111
--/** controls xusb_dev_ce signal on page 66 and 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_DEV 112
--/** controls xusb_host_ce signal on page 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_HOST 113
--/** controls xusb_ss_ce signal on page 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_SS 114
--/** @brief output of gate CLK_ENB_DSI */
--#define TEGRA186_CLK_DSI 115
--/** @brief output of gate CLK_ENB_MIPI_CAL */
--#define TEGRA186_CLK_MIPI_CAL 116
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSIA_LP */
--#define TEGRA186_CLK_DSIA_LP 117
--/** @brief output of gate CLK_ENB_DSIB */
--#define TEGRA186_CLK_DSIB 118
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSIB_LP */
--#define TEGRA186_CLK_DSIB_LP 119
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DMIC1 */
--#define TEGRA186_CLK_DMIC1 122
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DMIC2 */
--#define TEGRA186_CLK_DMIC2 123
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AUD_MCLK */
--#define TEGRA186_CLK_AUD_MCLK 124
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C6 */
--#define TEGRA186_CLK_I2C6 125
--/**output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UART_FST_MIPI_CAL */
--#define TEGRA186_CLK_UART_FST_MIPI_CAL 126
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_VIC */
--#define TEGRA186_CLK_VIC 127
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SDMMC_LEGACY_TM */
--#define TEGRA186_CLK_SDMMC_LEGACY_TM 128
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVDEC */
--#define TEGRA186_CLK_NVDEC 129
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVJPG */
--#define TEGRA186_CLK_NVJPG 130
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVENC */
--#define TEGRA186_CLK_NVENC 131
--/** @brief output of the QSPI_CLK_SRC mux in CLK_RST_CONTROLLER_CLK_SOURCE_QSPI */
--#define TEGRA186_CLK_QSPI 132
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_VI_I2C */
--#define TEGRA186_CLK_VI_I2C 133
--/** @brief output of gate CLK_ENB_HSIC_TRK */
--#define TEGRA186_CLK_HSIC_TRK 134
--/** @brief output of gate CLK_ENB_USB2_TRK */
--#define TEGRA186_CLK_USB2_TRK 135
--/** output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_MAUD */
--#define TEGRA186_CLK_MAUD 136
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_TSECB */
--#define TEGRA186_CLK_TSECB 137
--/** @brief output of gate CLK_ENB_ADSP */
--#define TEGRA186_CLK_ADSP 138
--/** @brief output of gate CLK_ENB_ADSPNEON */
--#define TEGRA186_CLK_ADSPNEON 139
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_MPHY_L0_RX_LS_SYMB */
--#define TEGRA186_CLK_MPHY_L0_RX_SYMB 140
--/** @brief output of gate CLK_ENB_MPHY_L0_RX_LS_BIT */
--#define TEGRA186_CLK_MPHY_L0_RX_LS_BIT 141
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_MPHY_L0_TX_LS_SYMB */
--#define TEGRA186_CLK_MPHY_L0_TX_SYMB 142
--/** @brief output of gate CLK_ENB_MPHY_L0_TX_LS_3XBIT */
--#define TEGRA186_CLK_MPHY_L0_TX_LS_3XBIT 143
--/** @brief output of gate CLK_ENB_MPHY_L0_RX_ANA */
--#define TEGRA186_CLK_MPHY_L0_RX_ANA 144
--/** @brief output of gate CLK_ENB_MPHY_L1_RX_ANA */
--#define TEGRA186_CLK_MPHY_L1_RX_ANA 145
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_MPHY_IOBIST */
--#define TEGRA186_CLK_MPHY_IOBIST 146
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_MPHY_TX_1MHZ_REF */
--#define TEGRA186_CLK_MPHY_TX_1MHZ_REF 147
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_MPHY_CORE_PLL_FIXED */
--#define TEGRA186_CLK_MPHY_CORE_PLL_FIXED 148
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AXI_CBB */
--#define TEGRA186_CLK_AXI_CBB 149
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DMIC3 */
--#define TEGRA186_CLK_DMIC3 150
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DMIC4 */
--#define TEGRA186_CLK_DMIC4 151
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSPK1 */
--#define TEGRA186_CLK_DSPK1 152
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSPK2 */
--#define TEGRA186_CLK_DSPK2 153
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C6 */
--#define TEGRA186_CLK_I2S6 154
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_P0 */
--#define TEGRA186_CLK_NVDISPLAY_P0 155
--/** @brief output of the NVDISPLAY_DISP_CLK_SRC mux in CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_DISP */
--#define TEGRA186_CLK_NVDISPLAY_DISP 156
--/** @brief output of gate CLK_ENB_NVDISPLAY_DSC */
--#define TEGRA186_CLK_NVDISPLAY_DSC 157
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAYHUB */
--#define TEGRA186_CLK_NVDISPLAYHUB 158
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_P1 */
--#define TEGRA186_CLK_NVDISPLAY_P1 159
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_P2 */
--#define TEGRA186_CLK_NVDISPLAY_P2 160
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_TACH */
--#define TEGRA186_CLK_TACH 166
--/** @brief output of gate CLK_ENB_EQOS */
--#define TEGRA186_CLK_EQOS_AXI 167
--/** @brief output of gate CLK_ENB_EQOS_RX */
--#define TEGRA186_CLK_EQOS_RX 168
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UFSHC_CG_SYS */
--#define TEGRA186_CLK_UFSHC 178
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UFSDEV_REF */
--#define TEGRA186_CLK_UFSDEV_REF 179
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVCSI */
--#define TEGRA186_CLK_NVCSI 180
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_NVCSILP */
--#define TEGRA186_CLK_NVCSILP 181
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C7 */
--#define TEGRA186_CLK_I2C7 182
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C9 */
--#define TEGRA186_CLK_I2C9 183
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C12 */
--#define TEGRA186_CLK_I2C12 184
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C13 */
--#define TEGRA186_CLK_I2C13 185
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C14 */
--#define TEGRA186_CLK_I2C14 186
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM1 */
--#define TEGRA186_CLK_PWM1 187
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM2 */
--#define TEGRA186_CLK_PWM2 188
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM3 */
--#define TEGRA186_CLK_PWM3 189
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM5 */
--#define TEGRA186_CLK_PWM5 190
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM6 */
--#define TEGRA186_CLK_PWM6 191
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM7 */
--#define TEGRA186_CLK_PWM7 192
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM8 */
--#define TEGRA186_CLK_PWM8 193
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTE */
--#define TEGRA186_CLK_UARTE 194
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTF */
--#define TEGRA186_CLK_UARTF 195
--/** @deprecated */
--#define TEGRA186_CLK_DBGAPB 196
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_BPMP_CPU_NIC */
--#define TEGRA186_CLK_BPMP_CPU_NIC 197
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_BPMP_APB */
--#define TEGRA186_CLK_BPMP_APB 199
--/** @brief output of mux controlled by TEGRA186_CLK_SOC_ACTMON */
--#define TEGRA186_CLK_ACTMON 201
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AON_CPU_NIC */
--#define TEGRA186_CLK_AON_CPU_NIC 208
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_CAN1 */
--#define TEGRA186_CLK_CAN1 210
--/** @brief output of gate CLK_ENB_CAN1_HOST */
--#define TEGRA186_CLK_CAN1_HOST 211
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_CAN2 */
--#define TEGRA186_CLK_CAN2 212
--/** @brief output of gate CLK_ENB_CAN2_HOST */
--#define TEGRA186_CLK_CAN2_HOST 213
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AON_APB */
--#define TEGRA186_CLK_AON_APB 214
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTC */
--#define TEGRA186_CLK_UARTC 215
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_UARTG */
--#define TEGRA186_CLK_UARTG 216
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AON_UART_FST_MIPI_CAL */
--#define TEGRA186_CLK_AON_UART_FST_MIPI_CAL 217
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C2 */
--#define TEGRA186_CLK_I2C2 218
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C8 */
--#define TEGRA186_CLK_I2C8 219
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_I2C10 */
--#define TEGRA186_CLK_I2C10 220
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AON_I2C_SLOW */
--#define TEGRA186_CLK_AON_I2C_SLOW 221
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SPI2 */
--#define TEGRA186_CLK_SPI2 222
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DMIC5 */
--#define TEGRA186_CLK_DMIC5 223
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_AON_TOUCH */
--#define TEGRA186_CLK_AON_TOUCH 224
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_PWM4 */
--#define TEGRA186_CLK_PWM4 225
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_TSC. This clock object is read only and is used for all timers in the system. */
--#define TEGRA186_CLK_TSC 226
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_MSS_ENCRYPT */
--#define TEGRA186_CLK_MSS_ENCRYPT 227
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SCE_CPU_NIC */
--#define TEGRA186_CLK_SCE_CPU_NIC 228
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SCE_APB */
--#define TEGRA186_CLK_SCE_APB 230
--/** @brief output of gate CLK_ENB_DSIC */
--#define TEGRA186_CLK_DSIC 231
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSIC_LP */
--#define TEGRA186_CLK_DSIC_LP 232
--/** @brief output of gate CLK_ENB_DSID */
--#define TEGRA186_CLK_DSID 233
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_DSID_LP */
--#define TEGRA186_CLK_DSID_LP 234
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_PEX_SATA_USB_RX_BYP */
--#define TEGRA186_CLK_PEX_SATA_USB_RX_BYP 236
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_CLK_SOURCE_SPDIF_OUT */
--#define TEGRA186_CLK_SPDIF_OUT 238
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_EQOS_PTP_REF_CLK_0 */
--#define TEGRA186_CLK_EQOS_PTP_REF 239
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_EQOS_TX_CLK */
--#define TEGRA186_CLK_EQOS_TX 240
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_USB2_HSIC_TRK */
--#define TEGRA186_CLK_USB2_HSIC_TRK 241
--/** @brief output of mux xusb_ss_clk_switch on page 66 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_CORE_SS 242
--/** @brief output of mux xusb_core_dev_clk_switch on page 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_CORE_DEV 243
--/** @brief output of mux xusb_core_falcon_clk_switch on page 67 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_FALCON 244
--/** @brief output of mux xusb_fs_clk_switch on page 66 of T186_Clocks_IAS.doc */
--#define TEGRA186_CLK_XUSB_FS 245
--/** @brief output of the divider CLK_RST_CONTROLLER_PLLA_OUT */
--#define TEGRA186_CLK_PLL_A_OUT0 246
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S1 */
--#define TEGRA186_CLK_SYNC_I2S1 247
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S2 */
--#define TEGRA186_CLK_SYNC_I2S2 248
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S3 */
--#define TEGRA186_CLK_SYNC_I2S3 249
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S4 */
--#define TEGRA186_CLK_SYNC_I2S4 250
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S5 */
--#define TEGRA186_CLK_SYNC_I2S5 251
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_I2S6 */
--#define TEGRA186_CLK_SYNC_I2S6 252
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DSPK1 */
--#define TEGRA186_CLK_SYNC_DSPK1 253
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DSPK2 */
--#define TEGRA186_CLK_SYNC_DSPK2 254
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DMIC1 */
--#define TEGRA186_CLK_SYNC_DMIC1 255
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DMIC2 */
--#define TEGRA186_CLK_SYNC_DMIC2 256
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DMIC3 */
--#define TEGRA186_CLK_SYNC_DMIC3 257
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_DMIC4 */
--#define TEGRA186_CLK_SYNC_DMIC4 259
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_AUDIO_SYNC_CLK_SPDIF */
--#define TEGRA186_CLK_SYNC_SPDIF 260
--/** @brief output of gate CLK_ENB_PLLREFE_OUT */
--#define TEGRA186_CLK_PLLREFE_OUT_GATED 261
--/** @brief output of the divider PLLREFE_DIVP in CLK_RST_CONTROLLER_PLLREFE_BASE. PLLREFE has 2 outputs:
--  *      * VCO/pdiv defined by this clock object
--  *      * VCO/2 defined by TEGRA186_CLK_PLLREFE_OUT
--  */
--#define TEGRA186_CLK_PLLREFE_OUT1 262
--#define TEGRA186_CLK_PLLD_OUT1 267
--/** @brief output of the divider PLLP_DIVP in CLK_RST_CONTROLLER_PLLP_BASE */
--#define TEGRA186_CLK_PLLP_OUT0 269
--/** @brief output of the divider CLK_RST_CONTROLLER_PLLP_OUTC */
--#define TEGRA186_CLK_PLLP_OUT5 270
--/** PLL controlled by CLK_RST_CONTROLLER_PLLA_BASE for use by audio clocks */
--#define TEGRA186_CLK_PLLA 271
--/** @brief output of mux controlled by CLK_RST_CONTROLLER_ACLK_BURST_POLICY divided by the divider controlled by ACLK_CLK_DIVISOR in CLK_RST_CONTROLLER_SUPER_ACLK_DIVIDER */
--#define TEGRA186_CLK_ACLK 273
--/** fixed 48MHz clock divided down from TEGRA186_CLK_PLL_U */
--#define TEGRA186_CLK_PLL_U_48M 274
--/** fixed 480MHz clock divided down from TEGRA186_CLK_PLL_U */
--#define TEGRA186_CLK_PLL_U_480M 275
--/** @brief output of the divider PLLC4_DIVP in CLK_RST_CONTROLLER_PLLC4_BASE. Output frequency is TEGRA186_CLK_PLLC4_VCO/PLLC4_DIVP */
--#define TEGRA186_CLK_PLLC4_OUT0 276
--/** fixed /3 divider. Output frequency of this clock is TEGRA186_CLK_PLLC4_VCO/3 */
--#define TEGRA186_CLK_PLLC4_OUT1 277
--/** fixed /5 divider. Output frequency of this clock is TEGRA186_CLK_PLLC4_VCO/5 */
--#define TEGRA186_CLK_PLLC4_OUT2 278
--/** @brief output of mux controlled by PLLC4_CLK_SEL in CLK_RST_CONTROLLER_PLLC4_MISC1 */
--#define TEGRA186_CLK_PLLC4_OUT_MUX 279
--/** @brief output of divider NVDISPLAY_DISP_CLK_DIVISOR in CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_DISP when DFLLDISP_DIV is selected in NVDISPLAY_DISP_CLK_SRC */
--#define TEGRA186_CLK_DFLLDISP_DIV 284
--/** @brief output of divider NVDISPLAY_DISP_CLK_DIVISOR in CLK_RST_CONTROLLER_CLK_SOURCE_NVDISPLAY_DISP when PLLDISPHUB_DIV is selected in NVDISPLAY_DISP_CLK_SRC */
--#define TEGRA186_CLK_PLLDISPHUB_DIV 285
--/** fixed /8 divider which is used as the input for TEGRA186_CLK_SOR_SAFE */
--#define TEGRA186_CLK_PLLP_DIV8 286
--/** @brief output of divider CLK_RST_CONTROLLER_BPMP_NIC_RATE */
--#define TEGRA186_CLK_BPMP_NIC 287
--/** @brief output of the divider CLK_RST_CONTROLLER_PLLA1_OUT1 */
--#define TEGRA186_CLK_PLL_A_OUT1 288
--/** @deprecated */
--#define TEGRA186_CLK_GPC2CLK 289
--/** A fake clock which must be enabled during KFUSE read operations to ensure adequate VDD_CORE voltage. */
--#define TEGRA186_CLK_KFUSE 293
--/**
-- * @brief controls the PLLE hardware sequencer.
-- * @details This clock only has enable and disable methods. When the
-- * PLLE hw sequencer is enabled, PLLE, will be enabled or disabled by
-- * hw based on the control signals from the PCIe, SATA and XUSB
-- * clocks. When the PLLE hw sequencer is disabled, the state of PLLE
-- * is controlled by sw using clk_enable/clk_disable on
-- * TEGRA186_CLK_PLLE.
-- */
--#define TEGRA186_CLK_PLLE_PWRSEQ 294
--/** fixed 60MHz clock divided down from, TEGRA186_CLK_PLL_U */
--#define TEGRA186_CLK_PLLREFE_REF 295
--/** @brief output of mux controlled by SOR0_CLK_SEL0 and SOR0_CLK_SEL1 in CLK_RST_CONTROLLER_CLK_SOURCE_SOR0 */
--#define TEGRA186_CLK_SOR0_OUT 296
--/** @brief output of mux controlled by SOR1_CLK_SEL0 and SOR1_CLK_SEL1 in CLK_RST_CONTROLLER_CLK_SOURCE_SOR1 */
--#define TEGRA186_CLK_SOR1_OUT 297
--/** @brief fixed /5 divider.  Output frequency of this clock is TEGRA186_CLK_PLLREFE_OUT1/5. Used as input for TEGRA186_CLK_EQOS_AXI */
--#define TEGRA186_CLK_PLLREFE_OUT1_DIV5 298
--/** @brief controls the UTMIP_PLL (aka PLLU) hardware sqeuencer */
--#define TEGRA186_CLK_UTMIP_PLL_PWRSEQ 301
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_PEX_USB_PAD_PLL0_MGMT */
--#define TEGRA186_CLK_PEX_USB_PAD0_MGMT 302
--/** @brief output of the divider CLK_RST_CONTROLLER_CLK_SOURCE_PEX_USB_PAD_PLL1_MGMT */
--#define TEGRA186_CLK_PEX_USB_PAD1_MGMT 303
--/** @brief controls the UPHY_PLL0 hardware sqeuencer */
--#define TEGRA186_CLK_UPHY_PLL0_PWRSEQ 304
--/** @brief controls the UPHY_PLL1 hardware sqeuencer */
--#define TEGRA186_CLK_UPHY_PLL1_PWRSEQ 305
--/** @brief control for PLLREFE_IDDQ in CLK_RST_CONTROLLER_PLLREFE_MISC so the bypass output even be used when the PLL is disabled */
--#define TEGRA186_CLK_PLLREFE_PLLE_PASSTHROUGH 306
--/** @brief output of the mux controlled by PLLREFE_SEL_CLKIN_PEX in CLK_RST_CONTROLLER_PLLREFE_MISC */
--#define TEGRA186_CLK_PLLREFE_PEX 307
--/** @brief control for PLLREFE_IDDQ in CLK_RST_CONTROLLER_PLLREFE_MISC to turn on the PLL when enabled */
--#define TEGRA186_CLK_PLLREFE_IDDQ 308
--/** @brief output of the divider QSPI_CLK_DIV2_SEL in CLK_RST_CONTROLLER_CLK_SOURCE_QSPI */
--#define TEGRA186_CLK_QSPI_OUT 309
--/**
-- * @brief GPC2CLK-div-2
-- * @details fixed /2 divider. Output frequency is
-- * TEGRA186_CLK_GPC2CLK/2. The frequency of this clock is the
-- * frequency at which the GPU graphics engine runs. */
--#define TEGRA186_CLK_GPCCLK 310
--/** @brief output of divider CLK_RST_CONTROLLER_AON_NIC_RATE */
--#define TEGRA186_CLK_AON_NIC 450
--/** @brief output of divider CLK_RST_CONTROLLER_SCE_NIC_RATE */
--#define TEGRA186_CLK_SCE_NIC 451
--/** Fixed 100MHz PLL for PCIe, SATA and superspeed USB */
--#define TEGRA186_CLK_PLLE 512
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLC_BASE */
--#define TEGRA186_CLK_PLLC 513
--/** Fixed 408MHz PLL for use by peripheral clocks */
--#define TEGRA186_CLK_PLLP 516
--/** @deprecated */
--#define TEGRA186_CLK_PLL_P TEGRA186_CLK_PLLP
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLD_BASE for use by DSI */
--#define TEGRA186_CLK_PLLD 518
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLD2_BASE for use by HDMI or DP */
--#define TEGRA186_CLK_PLLD2 519
--/**
-- * @brief PLL controlled by CLK_RST_CONTROLLER_PLLREFE_BASE.
-- * @details Note that this clock only controls the VCO output, before
-- * the post-divider. See TEGRA186_CLK_PLLREFE_OUT1 for more
-- * information.
-- */
--#define TEGRA186_CLK_PLLREFE_VCO 520
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLC2_BASE */
--#define TEGRA186_CLK_PLLC2 521
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLC3_BASE */
--#define TEGRA186_CLK_PLLC3 522
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLDP_BASE for use as the DP link clock */
--#define TEGRA186_CLK_PLLDP 523
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLC4_BASE */
--#define TEGRA186_CLK_PLLC4_VCO 524
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLA1_BASE for use by audio clocks */
--#define TEGRA186_CLK_PLLA1 525
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLNVCSI_BASE */
--#define TEGRA186_CLK_PLLNVCSI 526
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLDISPHUB_BASE */
--#define TEGRA186_CLK_PLLDISPHUB 527
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLD3_BASE for use by HDMI or DP */
--#define TEGRA186_CLK_PLLD3 528
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLBPMPCAM_BASE */
--#define TEGRA186_CLK_PLLBPMPCAM 531
--/** @brief PLL controlled by CLK_RST_CONTROLLER_PLLAON_BASE for use by IP blocks in the AON domain */
--#define TEGRA186_CLK_PLLAON 532
--/** Fixed frequency 960MHz PLL for USB and EAVB */
--#define TEGRA186_CLK_PLLU 533
--/** fixed /2 divider. Output frequency is TEGRA186_CLK_PLLC4_VCO/2 */
--#define TEGRA186_CLK_PLLC4_VCO_DIV2 535
--/** @brief NAFLL clock source for AXI_CBB */
--#define TEGRA186_CLK_NAFLL_AXI_CBB 564
--/** @brief NAFLL clock source for BPMP */
--#define TEGRA186_CLK_NAFLL_BPMP 565
--/** @brief NAFLL clock source for ISP */
--#define TEGRA186_CLK_NAFLL_ISP 566
--/** @brief NAFLL clock source for NVDEC */
--#define TEGRA186_CLK_NAFLL_NVDEC 567
--/** @brief NAFLL clock source for NVENC */
--#define TEGRA186_CLK_NAFLL_NVENC 568
--/** @brief NAFLL clock source for NVJPG */
--#define TEGRA186_CLK_NAFLL_NVJPG 569
--/** @brief NAFLL clock source for SCE */
--#define TEGRA186_CLK_NAFLL_SCE 570
--/** @brief NAFLL clock source for SE */
--#define TEGRA186_CLK_NAFLL_SE 571
--/** @brief NAFLL clock source for TSEC */
--#define TEGRA186_CLK_NAFLL_TSEC 572
--/** @brief NAFLL clock source for TSECB */
--#define TEGRA186_CLK_NAFLL_TSECB 573
--/** @brief NAFLL clock source for VI */
--#define TEGRA186_CLK_NAFLL_VI 574
--/** @brief NAFLL clock source for VIC */
--#define TEGRA186_CLK_NAFLL_VIC 575
--/** @brief NAFLL clock source for DISP */
--#define TEGRA186_CLK_NAFLL_DISP 576
--/** @brief NAFLL clock source for GPU */
--#define TEGRA186_CLK_NAFLL_GPU 577
--/** @brief NAFLL clock source for M-CPU cluster */
--#define TEGRA186_CLK_NAFLL_MCPU 578
--/** @brief NAFLL clock source for B-CPU cluster */
--#define TEGRA186_CLK_NAFLL_BCPU 579
--/** @brief input from Tegra's CLK_32K_IN pad */
--#define TEGRA186_CLK_CLK_32K 608
--/** @brief output of divider CLK_RST_CONTROLLER_CLK_M_DIVIDE */
--#define TEGRA186_CLK_CLK_M 609
--/** @brief output of divider PLL_REF_DIV in CLK_RST_CONTROLLER_OSC_CTRL */
--#define TEGRA186_CLK_PLL_REF 610
--/** @brief input from Tegra's XTAL_IN */
--#define TEGRA186_CLK_OSC 612
--/** @brief clock recovered from EAVB input */
--#define TEGRA186_CLK_EQOS_RX_INPUT 613
--/** @brief clock recovered from DTV input */
--#define TEGRA186_CLK_DTV_INPUT 614
--/** @brief SOR0 brick output which feeds into SOR0_CLK_SEL mux in CLK_RST_CONTROLLER_CLK_SOURCE_SOR0*/
--#define TEGRA186_CLK_SOR0_PAD_CLKOUT 615
--/** @brief SOR1 brick output which feeds into SOR1_CLK_SEL mux in CLK_RST_CONTROLLER_CLK_SOURCE_SOR1*/
--#define TEGRA186_CLK_SOR1_PAD_CLKOUT 616
--/** @brief clock recovered from I2S1 input */
--#define TEGRA186_CLK_I2S1_SYNC_INPUT 617
--/** @brief clock recovered from I2S2 input */
--#define TEGRA186_CLK_I2S2_SYNC_INPUT 618
--/** @brief clock recovered from I2S3 input */
--#define TEGRA186_CLK_I2S3_SYNC_INPUT 619
--/** @brief clock recovered from I2S4 input */
--#define TEGRA186_CLK_I2S4_SYNC_INPUT 620
--/** @brief clock recovered from I2S5 input */
--#define TEGRA186_CLK_I2S5_SYNC_INPUT 621
--/** @brief clock recovered from I2S6 input */
--#define TEGRA186_CLK_I2S6_SYNC_INPUT 622
--/** @brief clock recovered from SPDIFIN input */
--#define TEGRA186_CLK_SPDIFIN_SYNC_INPUT 623
+-#ifndef _ABI_MACH_T186_RESET_T186_H_
+-#define _ABI_MACH_T186_RESET_T186_H_
 -
--/**
-- * @brief subject to change
-- * @details maximum clock identifier value plus one.
-- */
--#define TEGRA186_CLK_CLK_MAX 624
--
--/** @} */
+-#define TEGRA186_RESET_ACTMON			0
+-#define TEGRA186_RESET_AFI			1
+-#define TEGRA186_RESET_CEC			2
+-#define TEGRA186_RESET_CSITE			3
+-#define TEGRA186_RESET_DP2			4
+-#define TEGRA186_RESET_DPAUX			5
+-#define TEGRA186_RESET_DSI			6
+-#define TEGRA186_RESET_DSIB			7
+-#define TEGRA186_RESET_DTV			8
+-#define TEGRA186_RESET_DVFS			9
+-#define TEGRA186_RESET_ENTROPY			10
+-#define TEGRA186_RESET_EXTPERIPH1		11
+-#define TEGRA186_RESET_EXTPERIPH2		12
+-#define TEGRA186_RESET_EXTPERIPH3		13
+-#define TEGRA186_RESET_GPU			14
+-#define TEGRA186_RESET_HDA			15
+-#define TEGRA186_RESET_HDA2CODEC_2X		16
+-#define TEGRA186_RESET_HDA2HDMICODEC		17
+-#define TEGRA186_RESET_HOST1X			18
+-#define TEGRA186_RESET_I2C1			19
+-#define TEGRA186_RESET_I2C2			20
+-#define TEGRA186_RESET_I2C3			21
+-#define TEGRA186_RESET_I2C4			22
+-#define TEGRA186_RESET_I2C5			23
+-#define TEGRA186_RESET_I2C6			24
+-#define TEGRA186_RESET_ISP			25
+-#define TEGRA186_RESET_KFUSE			26
+-#define TEGRA186_RESET_LA			27
+-#define TEGRA186_RESET_MIPI_CAL			28
+-#define TEGRA186_RESET_PCIE			29
+-#define TEGRA186_RESET_PCIEXCLK			30
+-#define TEGRA186_RESET_SATA			31
+-#define TEGRA186_RESET_SATACOLD			32
+-#define TEGRA186_RESET_SDMMC1			33
+-#define TEGRA186_RESET_SDMMC2			34
+-#define TEGRA186_RESET_SDMMC3			35
+-#define TEGRA186_RESET_SDMMC4			36
+-#define TEGRA186_RESET_SE			37
+-#define TEGRA186_RESET_SOC_THERM		38
+-#define TEGRA186_RESET_SOR0			39
+-#define TEGRA186_RESET_SPI1			40
+-#define TEGRA186_RESET_SPI2			41
+-#define TEGRA186_RESET_SPI3			42
+-#define TEGRA186_RESET_SPI4			43
+-#define TEGRA186_RESET_TMR			44
+-#define TEGRA186_RESET_TRIG_SYS			45
+-#define TEGRA186_RESET_TSEC			46
+-#define TEGRA186_RESET_UARTA			47
+-#define TEGRA186_RESET_UARTB			48
+-#define TEGRA186_RESET_UARTC			49
+-#define TEGRA186_RESET_UARTD			50
+-#define TEGRA186_RESET_VI			51
+-#define TEGRA186_RESET_VIC			52
+-#define TEGRA186_RESET_XUSB_DEV			53
+-#define TEGRA186_RESET_XUSB_HOST		54
+-#define TEGRA186_RESET_XUSB_PADCTL		55
+-#define TEGRA186_RESET_XUSB_SS			56
+-#define TEGRA186_RESET_AON_APB			57
+-#define TEGRA186_RESET_AXI_CBB			58
+-#define TEGRA186_RESET_BPMP_APB			59
+-#define TEGRA186_RESET_CAN1			60
+-#define TEGRA186_RESET_CAN2			61
+-#define TEGRA186_RESET_DMIC5			62
+-#define TEGRA186_RESET_DSIC			63
+-#define TEGRA186_RESET_DSID			64
+-#define TEGRA186_RESET_EMC_EMC			65
+-#define TEGRA186_RESET_EMC_MEM			66
+-#define TEGRA186_RESET_EMCSB_EMC		67
+-#define TEGRA186_RESET_EMCSB_MEM		68
+-#define TEGRA186_RESET_EQOS			69
+-#define TEGRA186_RESET_GPCDMA			70
+-#define TEGRA186_RESET_GPIO_CTL0		71
+-#define TEGRA186_RESET_GPIO_CTL1		72
+-#define TEGRA186_RESET_GPIO_CTL2		73
+-#define TEGRA186_RESET_GPIO_CTL3		74
+-#define TEGRA186_RESET_GPIO_CTL4		75
+-#define TEGRA186_RESET_GPIO_CTL5		76
+-#define TEGRA186_RESET_I2C10			77
+-#define TEGRA186_RESET_I2C12			78
+-#define TEGRA186_RESET_I2C13			79
+-#define TEGRA186_RESET_I2C14			80
+-#define TEGRA186_RESET_I2C7			81
+-#define TEGRA186_RESET_I2C8			82
+-#define TEGRA186_RESET_I2C9			83
+-#define TEGRA186_RESET_JTAG2AXI			84
+-#define TEGRA186_RESET_MPHY_IOBIST		85
+-#define TEGRA186_RESET_MPHY_L0_RX		86
+-#define TEGRA186_RESET_MPHY_L0_TX		87
+-#define TEGRA186_RESET_NVCSI			88
+-#define TEGRA186_RESET_NVDISPLAY0_HEAD0		89
+-#define TEGRA186_RESET_NVDISPLAY0_HEAD1		90
+-#define TEGRA186_RESET_NVDISPLAY0_HEAD2		91
+-#define TEGRA186_RESET_NVDISPLAY0_MISC		92
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP0		93
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP1		94
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP2		95
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP3		96
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP4		97
+-#define TEGRA186_RESET_NVDISPLAY0_WGRP5		98
+-#define TEGRA186_RESET_PWM1			99
+-#define TEGRA186_RESET_PWM2			100
+-#define TEGRA186_RESET_PWM3			101
+-#define TEGRA186_RESET_PWM4			102
+-#define TEGRA186_RESET_PWM5			103
+-#define TEGRA186_RESET_PWM6			104
+-#define TEGRA186_RESET_PWM7			105
+-#define TEGRA186_RESET_PWM8			106
+-#define TEGRA186_RESET_SCE_APB			107
+-#define TEGRA186_RESET_SOR1			108
+-#define TEGRA186_RESET_TACH			109
+-#define TEGRA186_RESET_TSC			110
+-#define TEGRA186_RESET_UARTF			111
+-#define TEGRA186_RESET_UARTG			112
+-#define TEGRA186_RESET_UFSHC			113
+-#define TEGRA186_RESET_UFSHC_AXI_M		114
+-#define TEGRA186_RESET_UPHY			115
+-#define TEGRA186_RESET_ADSP			116
+-#define TEGRA186_RESET_ADSPDBG			117
+-#define TEGRA186_RESET_ADSPINTF			118
+-#define TEGRA186_RESET_ADSPNEON			119
+-#define TEGRA186_RESET_ADSPPERIPH		120
+-#define TEGRA186_RESET_ADSPSCU			121
+-#define TEGRA186_RESET_ADSPWDT			122
+-#define TEGRA186_RESET_APE			123
+-#define TEGRA186_RESET_DPAUX1			124
+-#define TEGRA186_RESET_NVDEC			125
+-#define TEGRA186_RESET_NVENC			126
+-#define TEGRA186_RESET_NVJPG			127
+-#define TEGRA186_RESET_PEX_USB_UPHY		128
+-#define TEGRA186_RESET_QSPI			129
+-#define TEGRA186_RESET_TSECB			130
+-#define TEGRA186_RESET_VI_I2C			131
+-#define TEGRA186_RESET_UARTE			132
+-#define TEGRA186_RESET_TOP_GTE			133
+-#define TEGRA186_RESET_SHSP			134
+-#define TEGRA186_RESET_PEX_USB_UPHY_L5		135
+-#define TEGRA186_RESET_PEX_USB_UPHY_L4		136
+-#define TEGRA186_RESET_PEX_USB_UPHY_L3		137
+-#define TEGRA186_RESET_PEX_USB_UPHY_L2		138
+-#define TEGRA186_RESET_PEX_USB_UPHY_L1		139
+-#define TEGRA186_RESET_PEX_USB_UPHY_L0		140
+-#define TEGRA186_RESET_PEX_USB_UPHY_PLL1	141
+-#define TEGRA186_RESET_PEX_USB_UPHY_PLL0	142
+-#define TEGRA186_RESET_TSCTNVI			143
+-#define TEGRA186_RESET_EXTPERIPH4		144
+-#define TEGRA186_RESET_DSIPADCTL		145
+-#define TEGRA186_RESET_AUD_MCLK			146
+-#define TEGRA186_RESET_MPHY_CLK_CTL		147
+-#define TEGRA186_RESET_MPHY_L1_RX		148
+-#define TEGRA186_RESET_MPHY_L1_TX		149
+-#define TEGRA186_RESET_UFSHC_LP			150
+-#define TEGRA186_RESET_BPMP_NIC			151
+-#define TEGRA186_RESET_BPMP_NSYSPORESET		152
+-#define TEGRA186_RESET_BPMP_NRESET		153
+-#define TEGRA186_RESET_BPMP_DBGRESETN		154
+-#define TEGRA186_RESET_BPMP_PRESETDBGN		155
+-#define TEGRA186_RESET_BPMP_PM			156
+-#define TEGRA186_RESET_BPMP_CVC			157
+-#define TEGRA186_RESET_BPMP_DMA			158
+-#define TEGRA186_RESET_BPMP_HSP			159
+-#define TEGRA186_RESET_TSCTNBPMP		160
+-#define TEGRA186_RESET_BPMP_TKE			161
+-#define TEGRA186_RESET_BPMP_GTE			162
+-#define TEGRA186_RESET_BPMP_PM_ACTMON		163
+-#define TEGRA186_RESET_AON_NIC			164
+-#define TEGRA186_RESET_AON_NSYSPORESET		165
+-#define TEGRA186_RESET_AON_NRESET		166
+-#define TEGRA186_RESET_AON_DBGRESETN		167
+-#define TEGRA186_RESET_AON_PRESETDBGN		168
+-#define TEGRA186_RESET_AON_ACTMON		169
+-#define TEGRA186_RESET_AOPM			170
+-#define TEGRA186_RESET_AOVC			171
+-#define TEGRA186_RESET_AON_DMA			172
+-#define TEGRA186_RESET_AON_GPIO			173
+-#define TEGRA186_RESET_AON_HSP			174
+-#define TEGRA186_RESET_TSCTNAON			175
+-#define TEGRA186_RESET_AON_TKE			176
+-#define TEGRA186_RESET_AON_GTE			177
+-#define TEGRA186_RESET_SCE_NIC			178
+-#define TEGRA186_RESET_SCE_NSYSPORESET		179
+-#define TEGRA186_RESET_SCE_NRESET		180
+-#define TEGRA186_RESET_SCE_DBGRESETN		181
+-#define TEGRA186_RESET_SCE_PRESETDBGN		182
+-#define TEGRA186_RESET_SCE_ACTMON		183
+-#define TEGRA186_RESET_SCE_PM			184
+-#define TEGRA186_RESET_SCE_DMA			185
+-#define TEGRA186_RESET_SCE_HSP			186
+-#define TEGRA186_RESET_TSCTNSCE			187
+-#define TEGRA186_RESET_SCE_TKE			188
+-#define TEGRA186_RESET_SCE_GTE			189
+-#define TEGRA186_RESET_SCE_CFG			190
+-#define TEGRA186_RESET_ADSP_ALL			191
+-/** @brief controls the power up/down sequence of UFSHC PSW partition. Controls LP_PWR_READY, LP_ISOL_EN, and LP_RESET_N signals */
+-#define TEGRA186_RESET_UFSHC_LP_SEQ		192
+-#define TEGRA186_RESET_SIZE			193
 -
 -#endif
-diff --git a/include/dt-bindings/clock/tegra20-car.h b/include/dt-bindings/clock/tegra20-car.h
+diff --git a/include/dt-bindings/thermal/tegra124-soctherm.h b/include/dt-bindings/thermal/tegra124-soctherm.h
 deleted file mode 100644
-index 04500b243a4d..000000000000
---- a/include/dt-bindings/clock/tegra20-car.h
+index 729ab9fc325e..000000000000
+--- a/include/dt-bindings/thermal/tegra124-soctherm.h
 +++ /dev/null
-@@ -1,158 +0,0 @@
+@@ -1,14 +0,0 @@
 -/*
-- * This header provides constants for binding nvidia,tegra20-car.
-- *
-- * The first 96 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
-- * registers. These IDs often match those in the CAR's RST_DEVICES registers,
-- * but not in all cases. Some bits in CLK_OUT_ENB affect multiple clocks. In
-- * this case, those clocks are assigned IDs above 95 in order to highlight
-- * this issue. Implementations that interpret these clock IDs as bit values
-- * within the CLK_OUT_ENB or RST_DEVICES registers should be careful to
-- * explicitly handle these special cases.
-- *
-- * The balance of the clocks controlled by the CAR are assigned IDs of 96 and
-- * above.
+- * This header provides constants for binding nvidia,tegra124-soctherm.
 - */
 -
--#ifndef _DT_BINDINGS_CLOCK_TEGRA20_CAR_H
--#define _DT_BINDINGS_CLOCK_TEGRA20_CAR_H
+-#ifndef _DT_BINDINGS_THERMAL_TEGRA124_SOCTHERM_H
+-#define _DT_BINDINGS_THERMAL_TEGRA124_SOCTHERM_H
 -
--#define TEGRA20_CLK_CPU 0
--/* 1 */
--/* 2 */
--#define TEGRA20_CLK_AC97 3
--#define TEGRA20_CLK_RTC 4
--#define TEGRA20_CLK_TIMER 5
--#define TEGRA20_CLK_UARTA 6
--/* 7 (register bit affects uart2 and vfir) */
--#define TEGRA20_CLK_GPIO 8
--#define TEGRA20_CLK_SDMMC2 9
--/* 10 (register bit affects spdif_in and spdif_out) */
--#define TEGRA20_CLK_I2S1 11
--#define TEGRA20_CLK_I2C1 12
--#define TEGRA20_CLK_NDFLASH 13
--#define TEGRA20_CLK_SDMMC1 14
--#define TEGRA20_CLK_SDMMC4 15
--#define TEGRA20_CLK_TWC 16
--#define TEGRA20_CLK_PWM 17
--#define TEGRA20_CLK_I2S2 18
--#define TEGRA20_CLK_EPP 19
--/* 20 (register bit affects vi and vi_sensor) */
--#define TEGRA20_CLK_GR2D 21
--#define TEGRA20_CLK_USBD 22
--#define TEGRA20_CLK_ISP 23
--#define TEGRA20_CLK_GR3D 24
--#define TEGRA20_CLK_IDE 25
--#define TEGRA20_CLK_DISP2 26
--#define TEGRA20_CLK_DISP1 27
--#define TEGRA20_CLK_HOST1X 28
--#define TEGRA20_CLK_VCP 29
--/* 30 */
--#define TEGRA20_CLK_CACHE2 31
+-#define TEGRA124_SOCTHERM_SENSOR_CPU 0
+-#define TEGRA124_SOCTHERM_SENSOR_MEM 1
+-#define TEGRA124_SOCTHERM_SENSOR_GPU 2
+-#define TEGRA124_SOCTHERM_SENSOR_PLLX 3
+-#define TEGRA124_SOCTHERM_SENSOR_NUM 4
 -
--#define TEGRA20_CLK_MC 32
--#define TEGRA20_CLK_AHBDMA 33
--#define TEGRA20_CLK_APBDMA 34
--/* 35 */
--#define TEGRA20_CLK_KBC 36
--#define TEGRA20_CLK_STAT_MON 37
--#define TEGRA20_CLK_PMC 38
--#define TEGRA20_CLK_FUSE 39
--#define TEGRA20_CLK_KFUSE 40
--#define TEGRA20_CLK_SBC1 41
--#define TEGRA20_CLK_NOR 42
--#define TEGRA20_CLK_SPI 43
--#define TEGRA20_CLK_SBC2 44
--#define TEGRA20_CLK_XIO 45
--#define TEGRA20_CLK_SBC3 46
--#define TEGRA20_CLK_DVC 47
--#define TEGRA20_CLK_DSI 48
--/* 49 (register bit affects tvo and cve) */
--#define TEGRA20_CLK_MIPI 50
--#define TEGRA20_CLK_HDMI 51
--#define TEGRA20_CLK_CSI 52
--#define TEGRA20_CLK_TVDAC 53
--#define TEGRA20_CLK_I2C2 54
--#define TEGRA20_CLK_UARTC 55
--/* 56 */
--#define TEGRA20_CLK_EMC 57
--#define TEGRA20_CLK_USB2 58
--#define TEGRA20_CLK_USB3 59
--#define TEGRA20_CLK_MPE 60
--#define TEGRA20_CLK_VDE 61
--#define TEGRA20_CLK_BSEA 62
--#define TEGRA20_CLK_BSEV 63
--
--#define TEGRA20_CLK_SPEEDO 64
--#define TEGRA20_CLK_UARTD 65
--#define TEGRA20_CLK_UARTE 66
--#define TEGRA20_CLK_I2C3 67
--#define TEGRA20_CLK_SBC4 68
--#define TEGRA20_CLK_SDMMC3 69
--#define TEGRA20_CLK_PEX 70
--#define TEGRA20_CLK_OWR 71
--#define TEGRA20_CLK_AFI 72
--#define TEGRA20_CLK_CSITE 73
--/* 74 */
--#define TEGRA20_CLK_AVPUCQ 75
--#define TEGRA20_CLK_LA 76
--/* 77 */
--/* 78 */
--/* 79 */
--/* 80 */
--/* 81 */
--/* 82 */
--/* 83 */
--#define TEGRA20_CLK_IRAMA 84
--#define TEGRA20_CLK_IRAMB 85
--#define TEGRA20_CLK_IRAMC 86
--#define TEGRA20_CLK_IRAMD 87
--#define TEGRA20_CLK_CRAM2 88
--#define TEGRA20_CLK_AUDIO_2X 89 /* a/k/a audio_2x_sync_clk */
--#define TEGRA20_CLK_CLK_D 90
--/* 91 */
--#define TEGRA20_CLK_CSUS 92
--#define TEGRA20_CLK_CDEV2 93
--#define TEGRA20_CLK_CDEV1 94
--/* 95 */
--
--#define TEGRA20_CLK_UARTB 96
--#define TEGRA20_CLK_VFIR 97
--#define TEGRA20_CLK_SPDIF_IN 98
--#define TEGRA20_CLK_SPDIF_OUT 99
--#define TEGRA20_CLK_VI 100
--#define TEGRA20_CLK_VI_SENSOR 101
--#define TEGRA20_CLK_TVO 102
--#define TEGRA20_CLK_CVE 103
--#define TEGRA20_CLK_OSC 104
--#define TEGRA20_CLK_CLK_32K 105 /* a/k/a clk_s */
--#define TEGRA20_CLK_CLK_M 106
--#define TEGRA20_CLK_SCLK 107
--#define TEGRA20_CLK_CCLK 108
--#define TEGRA20_CLK_HCLK 109
--#define TEGRA20_CLK_PCLK 110
--#define TEGRA20_CLK_BLINK 111
--#define TEGRA20_CLK_PLL_A 112
--#define TEGRA20_CLK_PLL_A_OUT0 113
--#define TEGRA20_CLK_PLL_C 114
--#define TEGRA20_CLK_PLL_C_OUT1 115
--#define TEGRA20_CLK_PLL_D 116
--#define TEGRA20_CLK_PLL_D_OUT0 117
--#define TEGRA20_CLK_PLL_E 118
--#define TEGRA20_CLK_PLL_M 119
--#define TEGRA20_CLK_PLL_M_OUT1 120
--#define TEGRA20_CLK_PLL_P 121
--#define TEGRA20_CLK_PLL_P_OUT1 122
--#define TEGRA20_CLK_PLL_P_OUT2 123
--#define TEGRA20_CLK_PLL_P_OUT3 124
--#define TEGRA20_CLK_PLL_P_OUT4 125
--#define TEGRA20_CLK_PLL_S 126
--#define TEGRA20_CLK_PLL_U 127
--
--#define TEGRA20_CLK_PLL_X 128
--#define TEGRA20_CLK_COP 129 /* a/k/a avp */
--#define TEGRA20_CLK_AUDIO 130 /* a/k/a audio_sync_clk */
--#define TEGRA20_CLK_PLL_REF 131
--#define TEGRA20_CLK_TWD 132
--#define TEGRA20_CLK_CLK_MAX 133
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA20_CAR_H */
-diff --git a/include/dt-bindings/clock/tegra210-car.h b/include/dt-bindings/clock/tegra210-car.h
-deleted file mode 100644
-index bd3530e56d46..000000000000
---- a/include/dt-bindings/clock/tegra210-car.h
-+++ /dev/null
-@@ -1,401 +0,0 @@
--/*
-- * This header provides constants for binding nvidia,tegra210-car.
-- *
-- * The first 224 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
-- * registers. These IDs often match those in the CAR's RST_DEVICES registers,
-- * but not in all cases. Some bits in CLK_OUT_ENB affect multiple clocks. In
-- * this case, those clocks are assigned IDs above 224 in order to highlight
-- * this issue. Implementations that interpret these clock IDs as bit values
-- * within the CLK_OUT_ENB or RST_DEVICES registers should be careful to
-- * explicitly handle these special cases.
-- *
-- * The balance of the clocks controlled by the CAR are assigned IDs of 224 and
-- * above.
-- */
--
--#ifndef _DT_BINDINGS_CLOCK_TEGRA210_CAR_H
--#define _DT_BINDINGS_CLOCK_TEGRA210_CAR_H
--
--/* 0 */
--/* 1 */
--/* 2 */
--#define TEGRA210_CLK_ISPB 3
--#define TEGRA210_CLK_RTC 4
--#define TEGRA210_CLK_TIMER 5
--#define TEGRA210_CLK_UARTA 6
--/* 7 (register bit affects uartb and vfir) */
--#define TEGRA210_CLK_GPIO 8
--#define TEGRA210_CLK_SDMMC2 9
--/* 10 (register bit affects spdif_in and spdif_out) */
--#define TEGRA210_CLK_I2S1 11
--#define TEGRA210_CLK_I2C1 12
--/* 13 */
--#define TEGRA210_CLK_SDMMC1 14
--#define TEGRA210_CLK_SDMMC4 15
--/* 16 */
--#define TEGRA210_CLK_PWM 17
--#define TEGRA210_CLK_I2S2 18
--/* 19 */
--/* 20 (register bit affects vi and vi_sensor) */
--/* 21 */
--#define TEGRA210_CLK_USBD 22
--#define TEGRA210_CLK_ISP 23
--/* 24 */
--/* 25 */
--#define TEGRA210_CLK_DISP2 26
--#define TEGRA210_CLK_DISP1 27
--#define TEGRA210_CLK_HOST1X 28
--/* 29 */
--#define TEGRA210_CLK_I2S0 30
--/* 31 */
--
--#define TEGRA210_CLK_MC 32
--#define TEGRA210_CLK_AHBDMA 33
--#define TEGRA210_CLK_APBDMA 34
--/* 35 */
--/* 36 */
--/* 37 */
--#define TEGRA210_CLK_PMC 38
--/* 39 (register bit affects fuse and fuse_burn) */
--#define TEGRA210_CLK_KFUSE 40
--#define TEGRA210_CLK_SBC1 41
--/* 42 */
--/* 43 */
--#define TEGRA210_CLK_SBC2 44
--/* 45 */
--#define TEGRA210_CLK_SBC3 46
--#define TEGRA210_CLK_I2C5 47
--#define TEGRA210_CLK_DSIA 48
--/* 49 */
--/* 50 */
--/* 51 */
--#define TEGRA210_CLK_CSI 52
--/* 53 */
--#define TEGRA210_CLK_I2C2 54
--#define TEGRA210_CLK_UARTC 55
--#define TEGRA210_CLK_MIPI_CAL 56
--#define TEGRA210_CLK_EMC 57
--#define TEGRA210_CLK_USB2 58
--/* 59 */
--/* 60 */
--/* 61 */
--/* 62 */
--#define TEGRA210_CLK_BSEV 63
--
--/* 64 */
--#define TEGRA210_CLK_UARTD 65
--/* 66 */
--#define TEGRA210_CLK_I2C3 67
--#define TEGRA210_CLK_SBC4 68
--#define TEGRA210_CLK_SDMMC3 69
--#define TEGRA210_CLK_PCIE 70
--#define TEGRA210_CLK_OWR 71
--#define TEGRA210_CLK_AFI 72
--#define TEGRA210_CLK_CSITE 73
--/* 74 */
--/* 75 */
--/* 76 */
--/* 77 */
--#define TEGRA210_CLK_SOC_THERM 78
--#define TEGRA210_CLK_DTV 79
--/* 80 */
--#define TEGRA210_CLK_I2CSLOW 81
--#define TEGRA210_CLK_DSIB 82
--#define TEGRA210_CLK_TSEC 83
--/* 84 */
--/* 85 */
--/* 86 */
--/* 87 */
--/* 88 */
--#define TEGRA210_CLK_XUSB_HOST 89
--/* 90 */
--/* 91 */
--#define TEGRA210_CLK_CSUS 92
--/* 93 */
--/* 94 */
--/* 95 (bit affects xusb_dev and xusb_dev_src) */
--
--/* 96 */
--/* 97 */
--/* 98 */
--#define TEGRA210_CLK_MSELECT 99
--#define TEGRA210_CLK_TSENSOR 100
--#define TEGRA210_CLK_I2S3 101
--#define TEGRA210_CLK_I2S4 102
--#define TEGRA210_CLK_I2C4 103
--/* 104 */
--/* 105 */
--#define TEGRA210_CLK_D_AUDIO 106
--#define TEGRA210_CLK_APB2APE 107
--/* 108 */
--/* 109 */
--/* 110 */
--#define TEGRA210_CLK_HDA2CODEC_2X 111
--/* 112 */
--/* 113 */
--/* 114 */
--/* 115 */
--/* 116 */
--/* 117 */
--#define TEGRA210_CLK_SPDIF_2X 118
--#define TEGRA210_CLK_ACTMON 119
--#define TEGRA210_CLK_EXTERN1 120
--#define TEGRA210_CLK_EXTERN2 121
--#define TEGRA210_CLK_EXTERN3 122
--#define TEGRA210_CLK_SATA_OOB 123
--#define TEGRA210_CLK_SATA 124
--#define TEGRA210_CLK_HDA 125
--/* 126 */
--/* 127 */
--
--#define TEGRA210_CLK_HDA2HDMI 128
--/* 129 */
--/* 130 */
--/* 131 */
--/* 132 */
--/* 133 */
--/* 134 */
--/* 135 */
--/* 136 */
--/* 137 */
--/* 138 */
--/* 139 */
--/* 140 */
--/* 141 */
--/* 142 */
--/* (bit affects xusb_falcon_src, xusb_fs_src, xusb_host_src and xusb_ss_src) */
--#define TEGRA210_CLK_XUSB_GATE 143
--#define TEGRA210_CLK_CILAB 144
--#define TEGRA210_CLK_CILCD 145
--#define TEGRA210_CLK_CILE 146
--#define TEGRA210_CLK_DSIALP 147
--#define TEGRA210_CLK_DSIBLP 148
--#define TEGRA210_CLK_ENTROPY 149
--/* 150 */
--/* 151 */
--/* 152 */
--/* 153 */
--/* 154 */
--/* 155 (bit affects dfll_ref and dfll_soc) */
--#define TEGRA210_CLK_XUSB_SS 156
--/* 157 */
--/* 158 */
--/* 159 */
--
--/* 160 */
--#define TEGRA210_CLK_DMIC1 161
--#define TEGRA210_CLK_DMIC2 162
--/* 163 */
--/* 164 */
--/* 165 */
--#define TEGRA210_CLK_I2C6 166
--/* 167 */
--/* 168 */
--/* 169 */
--/* 170 */
--#define TEGRA210_CLK_VIM2_CLK 171
--/* 172 */
--#define TEGRA210_CLK_MIPIBIF 173
--/* 174 */
--/* 175 */
--/* 176 */
--#define TEGRA210_CLK_CLK72MHZ 177
--#define TEGRA210_CLK_VIC03 178
--/* 179 */
--/* 180 */
--#define TEGRA210_CLK_DPAUX 181
--#define TEGRA210_CLK_SOR0 182
--#define TEGRA210_CLK_SOR1 183
--#define TEGRA210_CLK_GPU 184
--#define TEGRA210_CLK_DBGAPB 185
--/* 186 */
--#define TEGRA210_CLK_PLL_P_OUT_ADSP 187
--/* 188 */
--#define TEGRA210_CLK_PLL_G_REF 189
--/* 190 */
--/* 191 */
--
--/* 192 */
--#define TEGRA210_CLK_SDMMC_LEGACY 193
--#define TEGRA210_CLK_NVDEC 194
--#define TEGRA210_CLK_NVJPG 195
--/* 196 */
--#define TEGRA210_CLK_DMIC3 197
--#define TEGRA210_CLK_APE 198
--/* 199 */
--/* 200 */
--/* 201 */
--#define TEGRA210_CLK_MAUD 202
--/* 203 */
--/* 204 */
--/* 205 */
--#define TEGRA210_CLK_TSECB 206
--#define TEGRA210_CLK_DPAUX1 207
--#define TEGRA210_CLK_VI_I2C 208
--#define TEGRA210_CLK_HSIC_TRK 209
--#define TEGRA210_CLK_USB2_TRK 210
--#define TEGRA210_CLK_QSPI 211
--#define TEGRA210_CLK_UARTAPE 212
--/* 213 */
--/* 214 */
--/* 215 */
--/* 216 */
--/* 217 */
--/* 218 */
--#define TEGRA210_CLK_NVENC 219
--/* 220 */
--/* 221 */
--#define TEGRA210_CLK_SOR_SAFE 222
--#define TEGRA210_CLK_PLL_P_OUT_CPU 223
--
--
--#define TEGRA210_CLK_UARTB 224
--#define TEGRA210_CLK_VFIR 225
--#define TEGRA210_CLK_SPDIF_IN 226
--#define TEGRA210_CLK_SPDIF_OUT 227
--#define TEGRA210_CLK_VI 228
--#define TEGRA210_CLK_VI_SENSOR 229
--#define TEGRA210_CLK_FUSE 230
--#define TEGRA210_CLK_FUSE_BURN 231
--#define TEGRA210_CLK_CLK_32K 232
--#define TEGRA210_CLK_CLK_M 233
--#define TEGRA210_CLK_CLK_M_DIV2 234
--#define TEGRA210_CLK_CLK_M_DIV4 235
--#define TEGRA210_CLK_PLL_REF 236
--#define TEGRA210_CLK_PLL_C 237
--#define TEGRA210_CLK_PLL_C_OUT1 238
--#define TEGRA210_CLK_PLL_C2 239
--#define TEGRA210_CLK_PLL_C3 240
--#define TEGRA210_CLK_PLL_M 241
--#define TEGRA210_CLK_PLL_M_OUT1 242
--#define TEGRA210_CLK_PLL_P 243
--#define TEGRA210_CLK_PLL_P_OUT1 244
--#define TEGRA210_CLK_PLL_P_OUT2 245
--#define TEGRA210_CLK_PLL_P_OUT3 246
--#define TEGRA210_CLK_PLL_P_OUT4 247
--#define TEGRA210_CLK_PLL_A 248
--#define TEGRA210_CLK_PLL_A_OUT0 249
--#define TEGRA210_CLK_PLL_D 250
--#define TEGRA210_CLK_PLL_D_OUT0 251
--#define TEGRA210_CLK_PLL_D2 252
--#define TEGRA210_CLK_PLL_D2_OUT0 253
--#define TEGRA210_CLK_PLL_U 254
--#define TEGRA210_CLK_PLL_U_480M 255
--
--#define TEGRA210_CLK_PLL_U_60M 256
--#define TEGRA210_CLK_PLL_U_48M 257
--/* 258 */
--#define TEGRA210_CLK_PLL_X 259
--#define TEGRA210_CLK_PLL_X_OUT0 260
--#define TEGRA210_CLK_PLL_RE_VCO 261
--#define TEGRA210_CLK_PLL_RE_OUT 262
--#define TEGRA210_CLK_PLL_E 263
--#define TEGRA210_CLK_SPDIF_IN_SYNC 264
--#define TEGRA210_CLK_I2S0_SYNC 265
--#define TEGRA210_CLK_I2S1_SYNC 266
--#define TEGRA210_CLK_I2S2_SYNC 267
--#define TEGRA210_CLK_I2S3_SYNC 268
--#define TEGRA210_CLK_I2S4_SYNC 269
--#define TEGRA210_CLK_VIMCLK_SYNC 270
--#define TEGRA210_CLK_AUDIO0 271
--#define TEGRA210_CLK_AUDIO1 272
--#define TEGRA210_CLK_AUDIO2 273
--#define TEGRA210_CLK_AUDIO3 274
--#define TEGRA210_CLK_AUDIO4 275
--#define TEGRA210_CLK_SPDIF 276
--#define TEGRA210_CLK_CLK_OUT_1 277
--#define TEGRA210_CLK_CLK_OUT_2 278
--#define TEGRA210_CLK_CLK_OUT_3 279
--#define TEGRA210_CLK_BLINK 280
--/* 281 */
--/* 282 */
--/* 283 */
--#define TEGRA210_CLK_XUSB_HOST_SRC 284
--#define TEGRA210_CLK_XUSB_FALCON_SRC 285
--#define TEGRA210_CLK_XUSB_FS_SRC 286
--#define TEGRA210_CLK_XUSB_SS_SRC 287
--
--#define TEGRA210_CLK_XUSB_DEV_SRC 288
--#define TEGRA210_CLK_XUSB_DEV 289
--#define TEGRA210_CLK_XUSB_HS_SRC 290
--#define TEGRA210_CLK_SCLK 291
--#define TEGRA210_CLK_HCLK 292
--#define TEGRA210_CLK_PCLK 293
--#define TEGRA210_CLK_CCLK_G 294
--#define TEGRA210_CLK_CCLK_LP 295
--#define TEGRA210_CLK_DFLL_REF 296
--#define TEGRA210_CLK_DFLL_SOC 297
--#define TEGRA210_CLK_VI_SENSOR2 298
--#define TEGRA210_CLK_PLL_P_OUT5 299
--#define TEGRA210_CLK_CML0 300
--#define TEGRA210_CLK_CML1 301
--#define TEGRA210_CLK_PLL_C4 302
--#define TEGRA210_CLK_PLL_DP 303
--#define TEGRA210_CLK_PLL_E_MUX 304
--#define TEGRA210_CLK_PLL_MB 305
--#define TEGRA210_CLK_PLL_A1 306
--#define TEGRA210_CLK_PLL_D_DSI_OUT 307
--#define TEGRA210_CLK_PLL_C4_OUT0 308
--#define TEGRA210_CLK_PLL_C4_OUT1 309
--#define TEGRA210_CLK_PLL_C4_OUT2 310
--#define TEGRA210_CLK_PLL_C4_OUT3 311
--#define TEGRA210_CLK_PLL_U_OUT 312
--#define TEGRA210_CLK_PLL_U_OUT1 313
--#define TEGRA210_CLK_PLL_U_OUT2 314
--#define TEGRA210_CLK_USB2_HSIC_TRK 315
--#define TEGRA210_CLK_PLL_P_OUT_HSIO 316
--#define TEGRA210_CLK_PLL_P_OUT_XUSB 317
--#define TEGRA210_CLK_XUSB_SSP_SRC 318
--#define TEGRA210_CLK_PLL_RE_OUT1 319
--/* 320 */
--/* 321 */
--/* 322 */
--/* 323 */
--/* 324 */
--/* 325 */
--/* 326 */
--/* 327 */
--/* 328 */
--/* 329 */
--/* 330 */
--/* 331 */
--/* 332 */
--/* 333 */
--/* 334 */
--/* 335 */
--/* 336 */
--/* 337 */
--/* 338 */
--/* 339 */
--/* 340 */
--/* 341 */
--/* 342 */
--/* 343 */
--/* 344 */
--/* 345 */
--/* 346 */
--/* 347 */
--/* 348 */
--/* 349 */
--
--#define TEGRA210_CLK_AUDIO0_MUX 350
--#define TEGRA210_CLK_AUDIO1_MUX 351
--#define TEGRA210_CLK_AUDIO2_MUX 352
--#define TEGRA210_CLK_AUDIO3_MUX 353
--#define TEGRA210_CLK_AUDIO4_MUX 354
--#define TEGRA210_CLK_SPDIF_MUX 355
--#define TEGRA210_CLK_CLK_OUT_1_MUX 356
--#define TEGRA210_CLK_CLK_OUT_2_MUX 357
--#define TEGRA210_CLK_CLK_OUT_3_MUX 358
--#define TEGRA210_CLK_DSIA_MUX 359
--#define TEGRA210_CLK_DSIB_MUX 360
--#define TEGRA210_CLK_SOR0_LVDS 361
--#define TEGRA210_CLK_XUSB_SS_DIV2 362
--
--#define TEGRA210_CLK_PLL_M_UD 363
--#define TEGRA210_CLK_PLL_C_UD 364
--#define TEGRA210_CLK_SCLK_MUX 365
--
--#define TEGRA210_CLK_CLK_MAX 366
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA210_CAR_H */
-diff --git a/include/dt-bindings/clock/tegra30-car.h b/include/dt-bindings/clock/tegra30-car.h
-deleted file mode 100644
-index 889e49ba0aa3..000000000000
---- a/include/dt-bindings/clock/tegra30-car.h
-+++ /dev/null
-@@ -1,273 +0,0 @@
--/*
-- * This header provides constants for binding nvidia,tegra30-car.
-- *
-- * The first 130 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
-- * registers. These IDs often match those in the CAR's RST_DEVICES registers,
-- * but not in all cases. Some bits in CLK_OUT_ENB affect multiple clocks. In
-- * this case, those clocks are assigned IDs above 160 in order to highlight
-- * this issue. Implementations that interpret these clock IDs as bit values
-- * within the CLK_OUT_ENB or RST_DEVICES registers should be careful to
-- * explicitly handle these special cases.
-- *
-- * The balance of the clocks controlled by the CAR are assigned IDs of 160 and
-- * above.
-- */
--
--#ifndef _DT_BINDINGS_CLOCK_TEGRA30_CAR_H
--#define _DT_BINDINGS_CLOCK_TEGRA30_CAR_H
--
--#define TEGRA30_CLK_CPU 0
--/* 1 */
--/* 2 */
--/* 3 */
--#define TEGRA30_CLK_RTC 4
--#define TEGRA30_CLK_TIMER 5
--#define TEGRA30_CLK_UARTA 6
--/* 7 (register bit affects uartb and vfir) */
--#define TEGRA30_CLK_GPIO 8
--#define TEGRA30_CLK_SDMMC2 9
--/* 10 (register bit affects spdif_in and spdif_out) */
--#define TEGRA30_CLK_I2S1 11
--#define TEGRA30_CLK_I2C1 12
--#define TEGRA30_CLK_NDFLASH 13
--#define TEGRA30_CLK_SDMMC1 14
--#define TEGRA30_CLK_SDMMC4 15
--/* 16 */
--#define TEGRA30_CLK_PWM 17
--#define TEGRA30_CLK_I2S2 18
--#define TEGRA30_CLK_EPP 19
--/* 20 (register bit affects vi and vi_sensor) */
--#define TEGRA30_CLK_GR2D 21
--#define TEGRA30_CLK_USBD 22
--#define TEGRA30_CLK_ISP 23
--#define TEGRA30_CLK_GR3D 24
--/* 25 */
--#define TEGRA30_CLK_DISP2 26
--#define TEGRA30_CLK_DISP1 27
--#define TEGRA30_CLK_HOST1X 28
--#define TEGRA30_CLK_VCP 29
--#define TEGRA30_CLK_I2S0 30
--#define TEGRA30_CLK_COP_CACHE 31
--
--#define TEGRA30_CLK_MC 32
--#define TEGRA30_CLK_AHBDMA 33
--#define TEGRA30_CLK_APBDMA 34
--/* 35 */
--#define TEGRA30_CLK_KBC 36
--#define TEGRA30_CLK_STATMON 37
--#define TEGRA30_CLK_PMC 38
--/* 39 (register bit affects fuse and fuse_burn) */
--#define TEGRA30_CLK_KFUSE 40
--#define TEGRA30_CLK_SBC1 41
--#define TEGRA30_CLK_NOR 42
--/* 43 */
--#define TEGRA30_CLK_SBC2 44
--/* 45 */
--#define TEGRA30_CLK_SBC3 46
--#define TEGRA30_CLK_I2C5 47
--#define TEGRA30_CLK_DSIA 48
--/* 49 (register bit affects cve and tvo) */
--#define TEGRA30_CLK_MIPI 50
--#define TEGRA30_CLK_HDMI 51
--#define TEGRA30_CLK_CSI 52
--#define TEGRA30_CLK_TVDAC 53
--#define TEGRA30_CLK_I2C2 54
--#define TEGRA30_CLK_UARTC 55
--/* 56 */
--#define TEGRA30_CLK_EMC 57
--#define TEGRA30_CLK_USB2 58
--#define TEGRA30_CLK_USB3 59
--#define TEGRA30_CLK_MPE 60
--#define TEGRA30_CLK_VDE 61
--#define TEGRA30_CLK_BSEA 62
--#define TEGRA30_CLK_BSEV 63
--
--#define TEGRA30_CLK_SPEEDO 64
--#define TEGRA30_CLK_UARTD 65
--#define TEGRA30_CLK_UARTE 66
--#define TEGRA30_CLK_I2C3 67
--#define TEGRA30_CLK_SBC4 68
--#define TEGRA30_CLK_SDMMC3 69
--#define TEGRA30_CLK_PCIE 70
--#define TEGRA30_CLK_OWR 71
--#define TEGRA30_CLK_AFI 72
--#define TEGRA30_CLK_CSITE 73
--/* 74 */
--#define TEGRA30_CLK_AVPUCQ 75
--#define TEGRA30_CLK_LA 76
--/* 77 */
--/* 78 */
--#define TEGRA30_CLK_DTV 79
--#define TEGRA30_CLK_NDSPEED 80
--#define TEGRA30_CLK_I2CSLOW 81
--#define TEGRA30_CLK_DSIB 82
--/* 83 */
--#define TEGRA30_CLK_IRAMA 84
--#define TEGRA30_CLK_IRAMB 85
--#define TEGRA30_CLK_IRAMC 86
--#define TEGRA30_CLK_IRAMD 87
--#define TEGRA30_CLK_CRAM2 88
--/* 89 */
--#define TEGRA30_CLK_AUDIO_2X 90 /* a/k/a audio_2x_sync_clk */
--/* 91 */
--#define TEGRA30_CLK_CSUS 92
--#define TEGRA30_CLK_CDEV2 93
--#define TEGRA30_CLK_CDEV1 94
--/* 95 */
--
--#define TEGRA30_CLK_CPU_G 96
--#define TEGRA30_CLK_CPU_LP 97
--#define TEGRA30_CLK_GR3D2 98
--#define TEGRA30_CLK_MSELECT 99
--#define TEGRA30_CLK_TSENSOR 100
--#define TEGRA30_CLK_I2S3 101
--#define TEGRA30_CLK_I2S4 102
--#define TEGRA30_CLK_I2C4 103
--#define TEGRA30_CLK_SBC5 104
--#define TEGRA30_CLK_SBC6 105
--#define TEGRA30_CLK_D_AUDIO 106
--#define TEGRA30_CLK_APBIF 107
--#define TEGRA30_CLK_DAM0 108
--#define TEGRA30_CLK_DAM1 109
--#define TEGRA30_CLK_DAM2 110
--#define TEGRA30_CLK_HDA2CODEC_2X 111
--#define TEGRA30_CLK_ATOMICS 112
--#define TEGRA30_CLK_AUDIO0_2X 113
--#define TEGRA30_CLK_AUDIO1_2X 114
--#define TEGRA30_CLK_AUDIO2_2X 115
--#define TEGRA30_CLK_AUDIO3_2X 116
--#define TEGRA30_CLK_AUDIO4_2X 117
--#define TEGRA30_CLK_SPDIF_2X 118
--#define TEGRA30_CLK_ACTMON 119
--#define TEGRA30_CLK_EXTERN1 120
--#define TEGRA30_CLK_EXTERN2 121
--#define TEGRA30_CLK_EXTERN3 122
--#define TEGRA30_CLK_SATA_OOB 123
--#define TEGRA30_CLK_SATA 124
--#define TEGRA30_CLK_HDA 125
--/* 126 */
--#define TEGRA30_CLK_SE 127
--
--#define TEGRA30_CLK_HDA2HDMI 128
--#define TEGRA30_CLK_SATA_COLD 129
--/* 130 */
--/* 131 */
--/* 132 */
--/* 133 */
--/* 134 */
--/* 135 */
--/* 136 */
--/* 137 */
--/* 138 */
--/* 139 */
--/* 140 */
--/* 141 */
--/* 142 */
--/* 143 */
--/* 144 */
--/* 145 */
--/* 146 */
--/* 147 */
--/* 148 */
--/* 149 */
--/* 150 */
--/* 151 */
--/* 152 */
--/* 153 */
--/* 154 */
--/* 155 */
--/* 156 */
--/* 157 */
--/* 158 */
--/* 159 */
--
--#define TEGRA30_CLK_UARTB 160
--#define TEGRA30_CLK_VFIR 161
--#define TEGRA30_CLK_SPDIF_IN 162
--#define TEGRA30_CLK_SPDIF_OUT 163
--#define TEGRA30_CLK_VI 164
--#define TEGRA30_CLK_VI_SENSOR 165
--#define TEGRA30_CLK_FUSE 166
--#define TEGRA30_CLK_FUSE_BURN 167
--#define TEGRA30_CLK_CVE 168
--#define TEGRA30_CLK_TVO 169
--#define TEGRA30_CLK_CLK_32K 170
--#define TEGRA30_CLK_CLK_M 171
--#define TEGRA30_CLK_CLK_M_DIV2 172
--#define TEGRA30_CLK_CLK_M_DIV4 173
--#define TEGRA30_CLK_PLL_REF 174
--#define TEGRA30_CLK_PLL_C 175
--#define TEGRA30_CLK_PLL_C_OUT1 176
--#define TEGRA30_CLK_PLL_M 177
--#define TEGRA30_CLK_PLL_M_OUT1 178
--#define TEGRA30_CLK_PLL_P 179
--#define TEGRA30_CLK_PLL_P_OUT1 180
--#define TEGRA30_CLK_PLL_P_OUT2 181
--#define TEGRA30_CLK_PLL_P_OUT3 182
--#define TEGRA30_CLK_PLL_P_OUT4 183
--#define TEGRA30_CLK_PLL_A 184
--#define TEGRA30_CLK_PLL_A_OUT0 185
--#define TEGRA30_CLK_PLL_D 186
--#define TEGRA30_CLK_PLL_D_OUT0 187
--#define TEGRA30_CLK_PLL_D2 188
--#define TEGRA30_CLK_PLL_D2_OUT0 189
--#define TEGRA30_CLK_PLL_U 190
--#define TEGRA30_CLK_PLL_X 191
--
--#define TEGRA30_CLK_PLL_X_OUT0 192
--#define TEGRA30_CLK_PLL_E 193
--#define TEGRA30_CLK_SPDIF_IN_SYNC 194
--#define TEGRA30_CLK_I2S0_SYNC 195
--#define TEGRA30_CLK_I2S1_SYNC 196
--#define TEGRA30_CLK_I2S2_SYNC 197
--#define TEGRA30_CLK_I2S3_SYNC 198
--#define TEGRA30_CLK_I2S4_SYNC 199
--#define TEGRA30_CLK_VIMCLK_SYNC 200
--#define TEGRA30_CLK_AUDIO0 201
--#define TEGRA30_CLK_AUDIO1 202
--#define TEGRA30_CLK_AUDIO2 203
--#define TEGRA30_CLK_AUDIO3 204
--#define TEGRA30_CLK_AUDIO4 205
--#define TEGRA30_CLK_SPDIF 206
--#define TEGRA30_CLK_CLK_OUT_1 207 /* (extern1) */
--#define TEGRA30_CLK_CLK_OUT_2 208 /* (extern2) */
--#define TEGRA30_CLK_CLK_OUT_3 209 /* (extern3) */
--#define TEGRA30_CLK_SCLK 210
--#define TEGRA30_CLK_BLINK 211
--#define TEGRA30_CLK_CCLK_G 212
--#define TEGRA30_CLK_CCLK_LP 213
--#define TEGRA30_CLK_TWD 214
--#define TEGRA30_CLK_CML0 215
--#define TEGRA30_CLK_CML1 216
--#define TEGRA30_CLK_HCLK 217
--#define TEGRA30_CLK_PCLK 218
--/* 219 */
--/* 220 */
--/* 221 */
--/* 222 */
--/* 223 */
--
--/* 288 */
--/* 289 */
--/* 290 */
--/* 291 */
--/* 292 */
--/* 293 */
--/* 294 */
--/* 295 */
--/* 296 */
--/* 297 */
--/* 298 */
--/* 299 */
--#define TEGRA30_CLK_CLK_OUT_1_MUX 300
--#define TEGRA30_CLK_CLK_OUT_2_MUX 301
--#define TEGRA30_CLK_CLK_OUT_3_MUX 302
--#define TEGRA30_CLK_AUDIO0_MUX 303
--#define TEGRA30_CLK_AUDIO1_MUX 304
--#define TEGRA30_CLK_AUDIO2_MUX 305
--#define TEGRA30_CLK_AUDIO3_MUX 306
--#define TEGRA30_CLK_AUDIO4_MUX 307
--#define TEGRA30_CLK_SPDIF_MUX 308
--#define TEGRA30_CLK_CLK_MAX 309
--
--#endif	/* _DT_BINDINGS_CLOCK_TEGRA30_CAR_H */
+-#endif
 
 -- 
 2.44.0

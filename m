@@ -2,63 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D57D886233
-	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41F65886234
+	for <lists+uboot-stm32@lfdr.de>; Thu, 21 Mar 2024 22:04:31 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F1E2BC6DD69;
-	Thu, 21 Mar 2024 21:04:29 +0000 (UTC)
-Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
- [209.85.208.177])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09AABC6DD79;
+	Thu, 21 Mar 2024 21:04:31 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AB2ECC6DD73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 141ABC6DD75
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 21:04:28 +0000 (UTC)
-Received: by mail-lj1-f177.google.com with SMTP id
- 38308e7fff4ca-2d094bc2244so20488131fa.1
+ Thu, 21 Mar 2024 21:04:30 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-41400a9844aso15014915e9.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 21 Mar 2024 14:04:28 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055068; x=1711659868;
+ d=linaro.org; s=google; t=1711055069; x=1711659869;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ak/ZQ98S2ABEr4WIk6RvxQYt7MJPloGnSTsOs5d5fXA=;
- b=w0OVuP7piSGtepalUYVELvtxiXZY2IwB18Ucpdy+b52Ah6Bw07eSdvu+/8QiFa7C/9
- 8J1a/OLEMuY4Lwu9j4oBPst+bZWx2PZ2G/3iIgd8odttg1KMFI8VeiQ80tg6cB4KO8d3
- 0geM5fOQzRAGj21U31IqAREUJ6tEYQYnsc656L+Qn399duNjgJDmCO/fpwuLbyLqxZbJ
- fVV1xX00BRa+b8tIam0edDj+ykg3ZD9fzzcXZyuqvimRtQFqg+MPERMMadZD4bLwJWty
- RlFrUky3orxihE26lLzzuBCCFC+jO5e7+JI/bSYKmxdEL5Nc7vsxMsZqzav2bB+D4/Ey
- 5Iag==
+ :reply-to; bh=7ClZ/U2dCNnx0hFWsWke0QLt+QMuIoc1IIP33XWHwdg=;
+ b=f6Tdi4hIg5LggyhMYflOKUDryA1+0zNlFEZS3H4khizbCpJ2/8MObBOElver2HAJ/m
+ WUxrzkEWt8oRNU44pQZCKrt4vHhxgpGzlMtpowFRdsWWOZUuRMh80S5ZaBAakzOC9a6W
+ 4fGY83nZlmZURTWCePZDvdy0rVJ7By5CrM9V9IHd/egtF6ojrNKIXvkdj3grdSimWIB0
+ HLumMiNKvly0wUQouIQO3veizmFOe2nMhDfQl3f9tLpsqFy2xaoVKglBisQIrO9FWcgs
+ IarJq2nmqMdTgBsTydmQs9uHztw1pV81V/G8ZgyEGXgLYEvKPDcT+IrnUx4c3NmE5Nv6
+ PcDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055068; x=1711659868;
+ d=1e100.net; s=20230601; t=1711055069; x=1711659869;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ak/ZQ98S2ABEr4WIk6RvxQYt7MJPloGnSTsOs5d5fXA=;
- b=wBMcg1ucxt3vytKxS3fhM8yPXfQrG1DVo44x224FLBH34fxNihDhlzUJpgfMCE5jeM
- 6k1cG/gAO4+syVg8l1KIFcGWTt6ekn8kBzOfJRtv5elaTdZFoADfQ8sCfKiDDQIBK/v1
- j1BP7hPmT7mx5pWmvwaULaLorHkCquH9zaxsW8SGhVgG0LO7AZjzd3CirYpfXV0bmItt
- 8htBvhYpqvlLfORc7+l78HC2v2AAxLu+1rAdLXYyFc16SnEWeBgOU3LQ6z0k15L4hLIZ
- I01jfZfE8uyf4x0Oc7+BHvxvX8ULBqYuW73pekSXXlxJMRwq8Xfl+LswRQWRZNmnTF2B
- dxMQ==
+ bh=7ClZ/U2dCNnx0hFWsWke0QLt+QMuIoc1IIP33XWHwdg=;
+ b=xO/dULd0sziU4KqtCGAxtUG/Ob9LTJLkyzVInFvgv8fsvh1H5nxIrOPfYFcSDvVZS9
+ SBAkKFNsuEzPDnFQuA8/3/EQRPJTeYVtYYvoVY1Y4PwMr5oWm17KHkmEnmvgJTXtOm6y
+ xtrXnJiwT7DCLcPC3yw5DEU1dTClm6FKhgKNnWVMaA+qfljOLOXvhwkYs0S4y+yqnsDL
+ 8FJorOoPeWuIqkpvBNyXp8wT/vuJlaOWto8HuaGhyfoeG94CmueZPcDfkcBSeuePa+f8
+ 31pJDf54jezeNu/8Vcf904ESIQ9ub8o7tC5X1OAgaUUmuaX/iFCP4vwjKOfot8Sv8eFg
+ cueg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOwIZ6P7a3/uS/aH5VSjA4AjtSugmtorkLhL/XvhNxMbJMLSsIkas2T/AJus8HoqujUE12zifbr7p5hqFGLeGKQrPPKFxPTqPYzYAWjqwyEdt9Zn9+qc8b
-X-Gm-Message-State: AOJu0YwXErozF6o2xW69DVuNnod/tz3WLuVPk2iSIek+AgfGbDNgU1G2
- Qx0a7wkulDcZL8N9zL9NYDUdguljpxXfVm+fxKdyWE1M9YcmInaEvuiP+fIAO34=
-X-Google-Smtp-Source: AGHT+IFcj4WZo/k0Cr0dg0PZ91y6FF85f/4SZV1WGqNwXcbresQZ79QrsyE9cgIHCpgizOZl021ayQ==
-X-Received: by 2002:a2e:a1c7:0:b0:2d4:22d1:d96c with SMTP id
- c7-20020a2ea1c7000000b002d422d1d96cmr413176ljm.25.1711055068032; 
- Thu, 21 Mar 2024 14:04:28 -0700 (PDT)
+ AJvYcCUxkhbEmy4l9IWLrNlV0hdPOkrfuhVBh4lDBkjvUTxAPYX8NnMVzW8VTlhkHyBlAsM+RKI+yCWau9gk0yFhUwaPVKu0RCi4GKGDXV86baZHXIGzYce3uASJ
+X-Gm-Message-State: AOJu0YxP4CY3XpephL+UdzNt9H40Wx96v5lecAgxLrQxSgiBOr8URcnv
+ Cc43cshGzv4xoI3+PGUEc2Vh20SDHyVneD9gtF4dnDMmOfjyk+kGxEB+h9qAcaI=
+X-Google-Smtp-Source: AGHT+IGwCmMCRJFLeGp20KJgulv1DwtJ3zhUUj6pBshRPal0+kIud99pxGBOdsW///dmKfvUGFKrDQ==
+X-Received: by 2002:a05:600c:3111:b0:413:4299:ec9f with SMTP id
+ g17-20020a05600c311100b004134299ec9fmr135499wmo.5.1711055069640; 
+ Thu, 21 Mar 2024 14:04:29 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.26
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:27 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:29 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:03:58 +0000
+Date: Thu, 21 Mar 2024 21:03:59 +0000
 MIME-Version: 1.0
-Message-Id: <20240321-b4-upstream-dt-headers-v2-15-1eac0df875fe@linaro.org>
+Message-Id: <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -88,19 +88,19 @@ To: Tom Rini <trini@konsulko.com>,
  Dai Okamura <okamura.dai@socionext.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=21499;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=19533;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=mQ2O2EyLgWmNk7HU9Pv1IDhVFZQ7gkRM9CVO2LHEmgU=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZIs+jGBEZETvhbrD7jxuqc7B2iNlMedb69debT6
- WtvH0h97ShlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQATsf3A8D/+NcubR+tSy769
- ++nuwnZve+zOuG8XE26bXp+1+12D2vcGhj/872x6iopLV1b/N1p94UoFn1eI47w5IjPyFog4tOh
- fbN4PAA==
+ bh=TAkzYvr9nwbaAz1rFsd4FKI0tB6ez1V6FDMiqYuN7VI=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/aUr7ZbsPen56Vwm9d3TOWXvV1UHff+64TEiuwN8
+ ky7b4WVdZSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJePxm+J9REvV7Fast89N1
+ iR47XjqVP2pk2rpYVSvDImx64/RNEWcZ/gpcuny9uOhLnLTO22/f0hTlrk482nzjx73Uvtykeok
+ 9pVkA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, Caleb Connolly <caleb.connolly@linaro.org>,
  u-boot-amlogic@groups.io
-Subject: [Uboot-stm32] [PATCH v2 15/24] tegra: drop dt-binding headers
+Subject: [Uboot-stm32] [PATCH v2 16/24] xlnx: drop dt-binding headers
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,617 +117,628 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Drop in favour of dts/upstream.
-
-Small driver adjustment to fix compatibility.
+Drop in favour of dts/upstream
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/tegra186.dtsi                       |   2 +-
- drivers/mailbox/tegra-hsp.c                      |   2 +-
- include/dt-bindings/gpio/tegra-gpio.h            |  51 ------
- include/dt-bindings/mailbox/tegra186-hsp.h       |  19 ---
- include/dt-bindings/memory/tegra114-mc.h         |  25 ---
- include/dt-bindings/memory/tegra124-mc.h         |  31 ----
- include/dt-bindings/memory/tegra210-mc.h         |  36 ----
- include/dt-bindings/memory/tegra30-mc.h          |  24 ---
- include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h |   7 -
- include/dt-bindings/pinctrl/pinctrl-tegra.h      |  37 ----
- include/dt-bindings/power/tegra186-powergate.h   |  28 ----
- include/dt-bindings/reset/tegra124-car.h         |  12 --
- include/dt-bindings/reset/tegra186-reset.h       | 205 -----------------------
- include/dt-bindings/thermal/tegra124-soctherm.h  |  14 --
- 14 files changed, 2 insertions(+), 491 deletions(-)
+ include/dt-bindings/clock/xlnx-versal-clk.h    | 123 -----------------------
+ include/dt-bindings/clock/xlnx-zynqmp-clk.h    | 126 ------------------------
+ include/dt-bindings/dma/xlnx-zynqmp-dpdma.h    |  16 ---
+ include/dt-bindings/pinctrl/pinctrl-zynqmp.h   |  19 ----
+ include/dt-bindings/power/xlnx-zynqmp-power.h  |  50 ----------
+ include/dt-bindings/reset/xlnx-versal-resets.h | 105 --------------------
+ include/dt-bindings/reset/xlnx-zynqmp-resets.h | 130 -------------------------
+ 7 files changed, 569 deletions(-)
 
-diff --git a/arch/arm/dts/tegra186.dtsi b/arch/arm/dts/tegra186.dtsi
-index edcb7aacb8ee..58dadc944888 100644
---- a/arch/arm/dts/tegra186.dtsi
-+++ b/arch/arm/dts/tegra186.dtsi
-@@ -313,9 +313,9 @@
- 	};
- 
- 	bpmp: bpmp {
- 		compatible = "nvidia,tegra186-bpmp";
--		mboxes = <&hsp HSP_MBOX_TYPE_DB HSP_DB_MASTER_BPMP>;
-+		mboxes = <&hsp TEGRA_HSP_MBOX_TYPE_DB TEGRA_HSP_DB_MASTER_BPMP>;
- 		/*
- 		 * In theory, these references, and the configuration in the
- 		 * node these reference point at, are board-specific, since
- 		 * they depend on the BCT's memory carve-out setup, the
-diff --git a/drivers/mailbox/tegra-hsp.c b/drivers/mailbox/tegra-hsp.c
-index 08c51c40f141..e5a3d8243780 100644
---- a/drivers/mailbox/tegra-hsp.c
-+++ b/drivers/mailbox/tegra-hsp.c
-@@ -62,9 +62,9 @@ static void tegra_hsp_writel(struct tegra_hsp *thsp, uint32_t val,
- 
- static int tegra_hsp_db_id(ulong chan_id)
- {
- 	switch (chan_id) {
--	case (HSP_MBOX_TYPE_DB << 16) | HSP_DB_MASTER_BPMP:
-+	case (TEGRA_HSP_MBOX_TYPE_DB << 16) | TEGRA_HSP_DB_MASTER_BPMP:
- 		return TEGRA_HSP_DB_ID_BPMP;
- 	default:
- 		debug("Invalid channel ID\n");
- 		return -EINVAL;
-diff --git a/include/dt-bindings/gpio/tegra-gpio.h b/include/dt-bindings/gpio/tegra-gpio.h
+diff --git a/include/dt-bindings/clock/xlnx-versal-clk.h b/include/dt-bindings/clock/xlnx-versal-clk.h
 deleted file mode 100644
-index a1c09e88e80b..000000000000
---- a/include/dt-bindings/gpio/tegra-gpio.h
+index 264d634d226e..000000000000
+--- a/include/dt-bindings/clock/xlnx-versal-clk.h
 +++ /dev/null
-@@ -1,51 +0,0 @@
+@@ -1,123 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * This header provides constants for binding nvidia,tegra*-gpio.
+- *  Copyright (C) 2019 Xilinx Inc.
 - *
-- * The first cell in Tegra's GPIO specifier is the GPIO ID. The macros below
-- * provide names for this.
-- *
-- * The second cell contains standard flag values specified in gpio.h.
 - */
 -
--#ifndef _DT_BINDINGS_GPIO_TEGRA_GPIO_H
--#define _DT_BINDINGS_GPIO_TEGRA_GPIO_H
+-#ifndef _DT_BINDINGS_CLK_VERSAL_H
+-#define _DT_BINDINGS_CLK_VERSAL_H
 -
--#include <dt-bindings/gpio/gpio.h>
--
--#define TEGRA_GPIO_PORT_A 0
--#define TEGRA_GPIO_PORT_B 1
--#define TEGRA_GPIO_PORT_C 2
--#define TEGRA_GPIO_PORT_D 3
--#define TEGRA_GPIO_PORT_E 4
--#define TEGRA_GPIO_PORT_F 5
--#define TEGRA_GPIO_PORT_G 6
--#define TEGRA_GPIO_PORT_H 7
--#define TEGRA_GPIO_PORT_I 8
--#define TEGRA_GPIO_PORT_J 9
--#define TEGRA_GPIO_PORT_K 10
--#define TEGRA_GPIO_PORT_L 11
--#define TEGRA_GPIO_PORT_M 12
--#define TEGRA_GPIO_PORT_N 13
--#define TEGRA_GPIO_PORT_O 14
--#define TEGRA_GPIO_PORT_P 15
--#define TEGRA_GPIO_PORT_Q 16
--#define TEGRA_GPIO_PORT_R 17
--#define TEGRA_GPIO_PORT_S 18
--#define TEGRA_GPIO_PORT_T 19
--#define TEGRA_GPIO_PORT_U 20
--#define TEGRA_GPIO_PORT_V 21
--#define TEGRA_GPIO_PORT_W 22
--#define TEGRA_GPIO_PORT_X 23
--#define TEGRA_GPIO_PORT_Y 24
--#define TEGRA_GPIO_PORT_Z 25
--#define TEGRA_GPIO_PORT_AA 26
--#define TEGRA_GPIO_PORT_BB 27
--#define TEGRA_GPIO_PORT_CC 28
--#define TEGRA_GPIO_PORT_DD 29
--#define TEGRA_GPIO_PORT_EE 30
--#define TEGRA_GPIO_PORT_FF 31
--
--#define TEGRA_GPIO(port, offset) \
--	((TEGRA_GPIO_PORT_##port * 8) + offset)
+-#define PMC_PLL					1
+-#define APU_PLL					2
+-#define RPU_PLL					3
+-#define CPM_PLL					4
+-#define NOC_PLL					5
+-#define PLL_MAX					6
+-#define PMC_PRESRC				7
+-#define PMC_POSTCLK				8
+-#define PMC_PLL_OUT				9
+-#define PPLL					10
+-#define NOC_PRESRC				11
+-#define NOC_POSTCLK				12
+-#define NOC_PLL_OUT				13
+-#define NPLL					14
+-#define APU_PRESRC				15
+-#define APU_POSTCLK				16
+-#define APU_PLL_OUT				17
+-#define APLL					18
+-#define RPU_PRESRC				19
+-#define RPU_POSTCLK				20
+-#define RPU_PLL_OUT				21
+-#define RPLL					22
+-#define CPM_PRESRC				23
+-#define CPM_POSTCLK				24
+-#define CPM_PLL_OUT				25
+-#define CPLL					26
+-#define PPLL_TO_XPD				27
+-#define NPLL_TO_XPD				28
+-#define APLL_TO_XPD				29
+-#define RPLL_TO_XPD				30
+-#define EFUSE_REF				31
+-#define SYSMON_REF				32
+-#define IRO_SUSPEND_REF				33
+-#define USB_SUSPEND				34
+-#define SWITCH_TIMEOUT				35
+-#define RCLK_PMC				36
+-#define RCLK_LPD				37
+-#define WDT					38
+-#define TTC0					39
+-#define TTC1					40
+-#define TTC2					41
+-#define TTC3					42
+-#define GEM_TSU					43
+-#define GEM_TSU_LB				44
+-#define MUXED_IRO_DIV2				45
+-#define MUXED_IRO_DIV4				46
+-#define PSM_REF					47
+-#define GEM0_RX					48
+-#define GEM0_TX					49
+-#define GEM1_RX					50
+-#define GEM1_TX					51
+-#define CPM_CORE_REF				52
+-#define CPM_LSBUS_REF				53
+-#define CPM_DBG_REF				54
+-#define CPM_AUX0_REF				55
+-#define CPM_AUX1_REF				56
+-#define QSPI_REF				57
+-#define OSPI_REF				58
+-#define SDIO0_REF				59
+-#define SDIO1_REF				60
+-#define PMC_LSBUS_REF				61
+-#define I2C_REF					62
+-#define TEST_PATTERN_REF			63
+-#define DFT_OSC_REF				64
+-#define PMC_PL0_REF				65
+-#define PMC_PL1_REF				66
+-#define PMC_PL2_REF				67
+-#define PMC_PL3_REF				68
+-#define CFU_REF					69
+-#define SPARE_REF				70
+-#define NPI_REF					71
+-#define HSM0_REF				72
+-#define HSM1_REF				73
+-#define SD_DLL_REF				74
+-#define FPD_TOP_SWITCH				75
+-#define FPD_LSBUS				76
+-#define ACPU					77
+-#define DBG_TRACE				78
+-#define DBG_FPD					79
+-#define LPD_TOP_SWITCH				80
+-#define ADMA					81
+-#define LPD_LSBUS				82
+-#define CPU_R5					83
+-#define CPU_R5_CORE				84
+-#define CPU_R5_OCM				85
+-#define CPU_R5_OCM2				86
+-#define IOU_SWITCH				87
+-#define GEM0_REF				88
+-#define GEM1_REF				89
+-#define GEM_TSU_REF				90
+-#define USB0_BUS_REF				91
+-#define UART0_REF				92
+-#define UART1_REF				93
+-#define SPI0_REF				94
+-#define SPI1_REF				95
+-#define CAN0_REF				96
+-#define CAN1_REF				97
+-#define I2C0_REF				98
+-#define I2C1_REF				99
+-#define DBG_LPD					100
+-#define TIMESTAMP_REF				101
+-#define DBG_TSTMP				102
+-#define CPM_TOPSW_REF				103
+-#define USB3_DUAL_REF				104
+-#define OUTCLK_MAX				105
+-#define REF_CLK					106
+-#define PL_ALT_REF_CLK				107
+-#define MUXED_IRO				108
+-#define PL_EXT					109
+-#define PL_LB					110
+-#define MIO_50_OR_51				111
+-#define MIO_24_OR_25				112
 -
 -#endif
-diff --git a/include/dt-bindings/mailbox/tegra186-hsp.h b/include/dt-bindings/mailbox/tegra186-hsp.h
+diff --git a/include/dt-bindings/clock/xlnx-zynqmp-clk.h b/include/dt-bindings/clock/xlnx-zynqmp-clk.h
 deleted file mode 100644
-index b4864325d74b..000000000000
---- a/include/dt-bindings/mailbox/tegra186-hsp.h
+index cdc4c0b9a374..000000000000
+--- a/include/dt-bindings/clock/xlnx-zynqmp-clk.h
++++ /dev/null
+@@ -1,126 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Xilinx Zynq MPSoC Firmware layer
+- *
+- *  Copyright (C) 2014-2018 Xilinx, Inc.
+- *
+- */
+-
+-#ifndef _DT_BINDINGS_CLK_ZYNQMP_H
+-#define _DT_BINDINGS_CLK_ZYNQMP_H
+-
+-#define IOPLL			0
+-#define RPLL			1
+-#define APLL			2
+-#define DPLL			3
+-#define VPLL			4
+-#define IOPLL_TO_FPD		5
+-#define RPLL_TO_FPD		6
+-#define APLL_TO_LPD		7
+-#define DPLL_TO_LPD		8
+-#define VPLL_TO_LPD		9
+-#define ACPU			10
+-#define ACPU_HALF		11
+-#define DBF_FPD			12
+-#define DBF_LPD			13
+-#define DBG_TRACE		14
+-#define DBG_TSTMP		15
+-#define DP_VIDEO_REF		16
+-#define DP_AUDIO_REF		17
+-#define DP_STC_REF		18
+-#define GDMA_REF		19
+-#define DPDMA_REF		20
+-#define DDR_REF			21
+-#define SATA_REF		22
+-#define PCIE_REF		23
+-#define GPU_REF			24
+-#define GPU_PP0_REF		25
+-#define GPU_PP1_REF		26
+-#define TOPSW_MAIN		27
+-#define TOPSW_LSBUS		28
+-#define GTGREF0_REF		29
+-#define LPD_SWITCH		30
+-#define LPD_LSBUS		31
+-#define USB0_BUS_REF		32
+-#define USB1_BUS_REF		33
+-#define USB3_DUAL_REF		34
+-#define USB0			35
+-#define USB1			36
+-#define CPU_R5			37
+-#define CPU_R5_CORE		38
+-#define CSU_SPB			39
+-#define CSU_PLL			40
+-#define PCAP			41
+-#define IOU_SWITCH		42
+-#define GEM_TSU_REF		43
+-#define GEM_TSU			44
+-#define GEM0_TX			45
+-#define GEM1_TX			46
+-#define GEM2_TX			47
+-#define GEM3_TX			48
+-#define GEM0_RX			49
+-#define GEM1_RX			50
+-#define GEM2_RX			51
+-#define GEM3_RX			52
+-#define QSPI_REF		53
+-#define SDIO0_REF		54
+-#define SDIO1_REF		55
+-#define UART0_REF		56
+-#define UART1_REF		57
+-#define SPI0_REF		58
+-#define SPI1_REF		59
+-#define NAND_REF		60
+-#define I2C0_REF		61
+-#define I2C1_REF		62
+-#define CAN0_REF		63
+-#define CAN1_REF		64
+-#define CAN0			65
+-#define CAN1			66
+-#define DLL_REF			67
+-#define ADMA_REF		68
+-#define TIMESTAMP_REF		69
+-#define AMS_REF			70
+-#define PL0_REF			71
+-#define PL1_REF			72
+-#define PL2_REF			73
+-#define PL3_REF			74
+-#define WDT			75
+-#define IOPLL_INT		76
+-#define IOPLL_PRE_SRC		77
+-#define IOPLL_HALF		78
+-#define IOPLL_INT_MUX		79
+-#define IOPLL_POST_SRC		80
+-#define RPLL_INT		81
+-#define RPLL_PRE_SRC		82
+-#define RPLL_HALF		83
+-#define RPLL_INT_MUX		84
+-#define RPLL_POST_SRC		85
+-#define APLL_INT		86
+-#define APLL_PRE_SRC		87
+-#define APLL_HALF		88
+-#define APLL_INT_MUX		89
+-#define APLL_POST_SRC		90
+-#define DPLL_INT		91
+-#define DPLL_PRE_SRC		92
+-#define DPLL_HALF		93
+-#define DPLL_INT_MUX		94
+-#define DPLL_POST_SRC		95
+-#define VPLL_INT		96
+-#define VPLL_PRE_SRC		97
+-#define VPLL_HALF		98
+-#define VPLL_INT_MUX		99
+-#define VPLL_POST_SRC		100
+-#define CAN0_MIO		101
+-#define CAN1_MIO		102
+-#define ACPU_FULL		103
+-#define GEM0_REF		104
+-#define GEM1_REF		105
+-#define GEM2_REF		106
+-#define GEM3_REF		107
+-#define GEM0_REF_UNG		108
+-#define GEM1_REF_UNG		109
+-#define GEM2_REF_UNG		110
+-#define GEM3_REF_UNG		111
+-#define LPD_WDT			112
+-
+-#endif
+diff --git a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h b/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
+deleted file mode 100644
+index 3719cda5679d..000000000000
+--- a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
++++ /dev/null
+@@ -1,16 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+-/*
+- * Copyright 2019 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+- */
+-
+-#ifndef __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
+-#define __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
+-
+-#define ZYNQMP_DPDMA_VIDEO0		0
+-#define ZYNQMP_DPDMA_VIDEO1		1
+-#define ZYNQMP_DPDMA_VIDEO2		2
+-#define ZYNQMP_DPDMA_GRAPHICS		3
+-#define ZYNQMP_DPDMA_AUDIO0		4
+-#define ZYNQMP_DPDMA_AUDIO1		5
+-
+-#endif /* __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__ */
+diff --git a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h b/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
+deleted file mode 100644
+index cdb215734bdf..000000000000
+--- a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
 +++ /dev/null
 @@ -1,19 +0,0 @@
--/*
-- * This header provides constants for binding nvidia,tegra186-hsp.
-- *
-- * The number with HSP_DB_MASTER prefix indicates the bit that is
-- * associated with a master ID in the doorbell registers.
-- */
--
--#ifndef _DT_BINDINGS_MAILBOX_TEGRA186_HSP_H
--#define _DT_BINDINGS_MAILBOX_TEGRA186_HSP_H
--
--#define HSP_MBOX_TYPE_DB 0x0
--#define HSP_MBOX_TYPE_SM 0x1
--#define HSP_MBOX_TYPE_SS 0x2
--#define HSP_MBOX_TYPE_AS 0x3
--
--#define HSP_DB_MASTER_CCPLEX 17
--#define HSP_DB_MASTER_BPMP 19
--
--#endif
-diff --git a/include/dt-bindings/memory/tegra114-mc.h b/include/dt-bindings/memory/tegra114-mc.h
-deleted file mode 100644
-index 8f48985a3139..000000000000
---- a/include/dt-bindings/memory/tegra114-mc.h
-+++ /dev/null
-@@ -1,25 +0,0 @@
--#ifndef DT_BINDINGS_MEMORY_TEGRA114_MC_H
--#define DT_BINDINGS_MEMORY_TEGRA114_MC_H
--
--#define TEGRA_SWGROUP_PTC	0
--#define TEGRA_SWGROUP_DC	1
--#define TEGRA_SWGROUP_DCB	2
--#define TEGRA_SWGROUP_EPP	3
--#define TEGRA_SWGROUP_G2	4
--#define TEGRA_SWGROUP_AVPC	5
--#define TEGRA_SWGROUP_NV	6
--#define TEGRA_SWGROUP_HDA	7
--#define TEGRA_SWGROUP_HC	8
--#define TEGRA_SWGROUP_MSENC	9
--#define TEGRA_SWGROUP_PPCS	10
--#define TEGRA_SWGROUP_VDE	11
--#define TEGRA_SWGROUP_MPCORELP	12
--#define TEGRA_SWGROUP_MPCORE	13
--#define TEGRA_SWGROUP_VI	14
--#define TEGRA_SWGROUP_ISP	15
--#define TEGRA_SWGROUP_XUSB_HOST	16
--#define TEGRA_SWGROUP_XUSB_DEV	17
--#define TEGRA_SWGROUP_EMUCIF	18
--#define TEGRA_SWGROUP_TSEC	19
--
--#endif
-diff --git a/include/dt-bindings/memory/tegra124-mc.h b/include/dt-bindings/memory/tegra124-mc.h
-deleted file mode 100644
-index 7d8ee798f34e..000000000000
---- a/include/dt-bindings/memory/tegra124-mc.h
-+++ /dev/null
-@@ -1,31 +0,0 @@
--#ifndef DT_BINDINGS_MEMORY_TEGRA124_MC_H
--#define DT_BINDINGS_MEMORY_TEGRA124_MC_H
--
--#define TEGRA_SWGROUP_PTC	0
--#define TEGRA_SWGROUP_DC	1
--#define TEGRA_SWGROUP_DCB	2
--#define TEGRA_SWGROUP_AFI	3
--#define TEGRA_SWGROUP_AVPC	4
--#define TEGRA_SWGROUP_HDA	5
--#define TEGRA_SWGROUP_HC	6
--#define TEGRA_SWGROUP_MSENC	7
--#define TEGRA_SWGROUP_PPCS	8
--#define TEGRA_SWGROUP_SATA	9
--#define TEGRA_SWGROUP_VDE	10
--#define TEGRA_SWGROUP_MPCORELP	11
--#define TEGRA_SWGROUP_MPCORE	12
--#define TEGRA_SWGROUP_ISP2	13
--#define TEGRA_SWGROUP_XUSB_HOST	14
--#define TEGRA_SWGROUP_XUSB_DEV	15
--#define TEGRA_SWGROUP_ISP2B	16
--#define TEGRA_SWGROUP_TSEC	17
--#define TEGRA_SWGROUP_A9AVP	18
--#define TEGRA_SWGROUP_GPU	19
--#define TEGRA_SWGROUP_SDMMC1A	20
--#define TEGRA_SWGROUP_SDMMC2A	21
--#define TEGRA_SWGROUP_SDMMC3A	22
--#define TEGRA_SWGROUP_SDMMC4A	23
--#define TEGRA_SWGROUP_VIC	24
--#define TEGRA_SWGROUP_VI	25
--
--#endif
-diff --git a/include/dt-bindings/memory/tegra210-mc.h b/include/dt-bindings/memory/tegra210-mc.h
-deleted file mode 100644
-index d1731bc14dbc..000000000000
---- a/include/dt-bindings/memory/tegra210-mc.h
-+++ /dev/null
-@@ -1,36 +0,0 @@
--#ifndef DT_BINDINGS_MEMORY_TEGRA210_MC_H
--#define DT_BINDINGS_MEMORY_TEGRA210_MC_H
--
--#define TEGRA_SWGROUP_PTC	0
--#define TEGRA_SWGROUP_DC	1
--#define TEGRA_SWGROUP_DCB	2
--#define TEGRA_SWGROUP_AFI	3
--#define TEGRA_SWGROUP_AVPC	4
--#define TEGRA_SWGROUP_HDA	5
--#define TEGRA_SWGROUP_HC	6
--#define TEGRA_SWGROUP_NVENC	7
--#define TEGRA_SWGROUP_PPCS	8
--#define TEGRA_SWGROUP_SATA	9
--#define TEGRA_SWGROUP_MPCORE	10
--#define TEGRA_SWGROUP_ISP2	11
--#define TEGRA_SWGROUP_XUSB_HOST	12
--#define TEGRA_SWGROUP_XUSB_DEV	13
--#define TEGRA_SWGROUP_ISP2B	14
--#define TEGRA_SWGROUP_TSEC	15
--#define TEGRA_SWGROUP_A9AVP	16
--#define TEGRA_SWGROUP_GPU	17
--#define TEGRA_SWGROUP_SDMMC1A	18
--#define TEGRA_SWGROUP_SDMMC2A	19
--#define TEGRA_SWGROUP_SDMMC3A	20
--#define TEGRA_SWGROUP_SDMMC4A	21
--#define TEGRA_SWGROUP_VIC	22
--#define TEGRA_SWGROUP_VI	23
--#define TEGRA_SWGROUP_NVDEC	24
--#define TEGRA_SWGROUP_APE	25
--#define TEGRA_SWGROUP_NVJPG	26
--#define TEGRA_SWGROUP_SE	27
--#define TEGRA_SWGROUP_AXIAP	28
--#define TEGRA_SWGROUP_ETR	29
--#define TEGRA_SWGROUP_TSECB	30
--
--#endif
-diff --git a/include/dt-bindings/memory/tegra30-mc.h b/include/dt-bindings/memory/tegra30-mc.h
-deleted file mode 100644
-index 502beb03d777..000000000000
---- a/include/dt-bindings/memory/tegra30-mc.h
-+++ /dev/null
-@@ -1,24 +0,0 @@
--#ifndef DT_BINDINGS_MEMORY_TEGRA30_MC_H
--#define DT_BINDINGS_MEMORY_TEGRA30_MC_H
--
--#define TEGRA_SWGROUP_PTC	0
--#define TEGRA_SWGROUP_DC	1
--#define TEGRA_SWGROUP_DCB	2
--#define TEGRA_SWGROUP_EPP	3
--#define TEGRA_SWGROUP_G2	4
--#define TEGRA_SWGROUP_MPE	5
--#define TEGRA_SWGROUP_VI	6
--#define TEGRA_SWGROUP_AFI	7
--#define TEGRA_SWGROUP_AVPC	8
--#define TEGRA_SWGROUP_NV	9
--#define TEGRA_SWGROUP_NV2	10
--#define TEGRA_SWGROUP_HDA	11
--#define TEGRA_SWGROUP_HC	12
--#define TEGRA_SWGROUP_PPCS	13
--#define TEGRA_SWGROUP_SATA	14
--#define TEGRA_SWGROUP_VDE	15
--#define TEGRA_SWGROUP_MPCORELP	16
--#define TEGRA_SWGROUP_MPCORE	17
--#define TEGRA_SWGROUP_ISP	18
--
--#endif
-diff --git a/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h b/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h
-deleted file mode 100644
-index 914d56da9324..000000000000
---- a/include/dt-bindings/pinctrl/pinctrl-tegra-xusb.h
-+++ /dev/null
-@@ -1,7 +0,0 @@
--#ifndef _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H
--#define _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H 1
--
--#define TEGRA_XUSB_PADCTL_PCIE 0
--#define TEGRA_XUSB_PADCTL_SATA 1
--
--#endif /* _DT_BINDINGS_PINCTRL_TEGRA_XUSB_H */
-diff --git a/include/dt-bindings/pinctrl/pinctrl-tegra.h b/include/dt-bindings/pinctrl/pinctrl-tegra.h
-deleted file mode 100644
-index c9b57408de68..000000000000
---- a/include/dt-bindings/pinctrl/pinctrl-tegra.h
-+++ /dev/null
-@@ -1,37 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * This header provides constants for Tegra pinctrl bindings.
+- * MIO pin configuration defines for Xilinx ZynqMP
 - *
-- * Copyright (c) 2013, NVIDIA CORPORATION.  All rights reserved.
-- *
-- * Author: Laxman Dewangan <ldewangan@nvidia.com>
+- * Copyright (C) 2020 Xilinx, Inc.
 - */
 -
--#ifndef _DT_BINDINGS_PINCTRL_TEGRA_H
--#define _DT_BINDINGS_PINCTRL_TEGRA_H
+-#ifndef _DT_BINDINGS_PINCTRL_ZYNQMP_H
+-#define _DT_BINDINGS_PINCTRL_ZYNQMP_H
 -
--/*
-- * Enable/disable for diffeent dt properties. This is applicable for
-- * properties nvidia,enable-input, nvidia,tristate, nvidia,open-drain,
-- * nvidia,lock, nvidia,rcv-sel, nvidia,high-speed-mode, nvidia,schmitt.
-- */
--#define TEGRA_PIN_DISABLE				0
--#define TEGRA_PIN_ENABLE				1
+-/* Bit value for different voltage levels */
+-#define IO_STANDARD_LVCMOS33	0
+-#define IO_STANDARD_LVCMOS18	1
 -
--#define TEGRA_PIN_PULL_NONE				0
--#define TEGRA_PIN_PULL_DOWN				1
--#define TEGRA_PIN_PULL_UP				2
+-/* Bit values for Slew Rates */
+-#define SLEW_RATE_FAST		0
+-#define SLEW_RATE_SLOW		1
 -
--/* Low power mode driver */
--#define TEGRA_PIN_LP_DRIVE_DIV_8			0
--#define TEGRA_PIN_LP_DRIVE_DIV_4			1
--#define TEGRA_PIN_LP_DRIVE_DIV_2			2
--#define TEGRA_PIN_LP_DRIVE_DIV_1			3
--
--/* Rising/Falling slew rate */
--#define TEGRA_PIN_SLEW_RATE_FASTEST			0
--#define TEGRA_PIN_SLEW_RATE_FAST			1
--#define TEGRA_PIN_SLEW_RATE_SLOW			2
--#define TEGRA_PIN_SLEW_RATE_SLOWEST			3
--
--#endif
-diff --git a/include/dt-bindings/power/tegra186-powergate.h b/include/dt-bindings/power/tegra186-powergate.h
+-#endif /* _DT_BINDINGS_PINCTRL_ZYNQMP_H */
+diff --git a/include/dt-bindings/power/xlnx-zynqmp-power.h b/include/dt-bindings/power/xlnx-zynqmp-power.h
 deleted file mode 100644
-index 17e75498563c..000000000000
---- a/include/dt-bindings/power/tegra186-powergate.h
+index e7eb0960480a..000000000000
+--- a/include/dt-bindings/power/xlnx-zynqmp-power.h
 +++ /dev/null
-@@ -1,28 +0,0 @@
+@@ -1,50 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (c) 2015-2016, NVIDIA CORPORATION.
+- *  Copyright (C) 2018 Xilinx, Inc.
 - */
 -
--#ifndef _DT_BINDINGS_POWER_TEGRA186_POWERGATE_H
--#define _DT_BINDINGS_POWER_TEGRA186_POWERGATE_H
+-#ifndef _DT_BINDINGS_ZYNQMP_POWER_H
+-#define _DT_BINDINGS_ZYNQMP_POWER_H
 -
--#define TEGRA186_POWER_DOMAIN_AUD	0
--#define TEGRA186_POWER_DOMAIN_DFD	1
--#define TEGRA186_POWER_DOMAIN_DISP	2
--#define TEGRA186_POWER_DOMAIN_DISPB	3
--#define TEGRA186_POWER_DOMAIN_DISPC	4
--#define TEGRA186_POWER_DOMAIN_ISPA	5
--#define TEGRA186_POWER_DOMAIN_NVDEC	6
--#define TEGRA186_POWER_DOMAIN_NVJPG	7
--#define TEGRA186_POWER_DOMAIN_MPE	8
--#define TEGRA186_POWER_DOMAIN_PCX	9
--#define TEGRA186_POWER_DOMAIN_SAX	10
--#define TEGRA186_POWER_DOMAIN_VE	11
--#define TEGRA186_POWER_DOMAIN_VIC	12
--#define TEGRA186_POWER_DOMAIN_XUSBA	13
--#define TEGRA186_POWER_DOMAIN_XUSBB	14
--#define TEGRA186_POWER_DOMAIN_XUSBC	15
--#define TEGRA186_POWER_DOMAIN_GPU	43
--#define TEGRA186_POWER_DOMAIN_MAX	44
+-#define		PD_RPU_0	6
+-#define		PD_RPU_1	7
+-#define		PD_OCM_BANK_0	11
+-#define		PD_OCM_BANK_1	12
+-#define		PD_OCM_BANK_2	13
+-#define		PD_OCM_BANK_3	14
+-#define		PD_TCM_BANK_0	15
+-#define		PD_TCM_BANK_1	16
+-#define		PD_TCM_BANK_2	17
+-#define		PD_TCM_BANK_3	18
+-#define		PD_USB_0	22
+-#define		PD_USB_1	23
+-#define		PD_TTC_0	24
+-#define		PD_TTC_1	25
+-#define		PD_TTC_2	26
+-#define		PD_TTC_3	27
+-#define		PD_SATA		28
+-#define		PD_ETH_0	29
+-#define		PD_ETH_1	30
+-#define		PD_ETH_2	31
+-#define		PD_ETH_3	32
+-#define		PD_UART_0	33
+-#define		PD_UART_1	34
+-#define		PD_SPI_0	35
+-#define		PD_SPI_1	36
+-#define		PD_I2C_0	37
+-#define		PD_I2C_1	38
+-#define		PD_SD_0		39
+-#define		PD_SD_1		40
+-#define		PD_DP		41
+-#define		PD_GDMA		42
+-#define		PD_ADMA		43
+-#define		PD_NAND		44
+-#define		PD_QSPI		45
+-#define		PD_GPIO		46
+-#define		PD_CAN_0	47
+-#define		PD_CAN_1	48
+-#define		PD_GPU		58
+-#define		PD_PCIE		59
+-#define		PD_PL		69
 -
 -#endif
-diff --git a/include/dt-bindings/reset/tegra124-car.h b/include/dt-bindings/reset/tegra124-car.h
+diff --git a/include/dt-bindings/reset/xlnx-versal-resets.h b/include/dt-bindings/reset/xlnx-versal-resets.h
 deleted file mode 100644
-index 070e4f6e7486..000000000000
---- a/include/dt-bindings/reset/tegra124-car.h
+index 895424e9b0e5..000000000000
+--- a/include/dt-bindings/reset/xlnx-versal-resets.h
 +++ /dev/null
-@@ -1,12 +0,0 @@
--/*
-- * This header provides Tegra124-specific constants for binding
-- * nvidia,tegra124-car.
-- */
--
--#ifndef _DT_BINDINGS_RESET_TEGRA124_CAR_H
--#define _DT_BINDINGS_RESET_TEGRA124_CAR_H
--
--#define TEGRA124_RESET(x)		(6 * 32 + (x))
--#define TEGRA124_RST_DFLL_DVCO		TEGRA124_RESET(0)
--
--#endif	/* _DT_BINDINGS_RESET_TEGRA124_CAR_H */
-diff --git a/include/dt-bindings/reset/tegra186-reset.h b/include/dt-bindings/reset/tegra186-reset.h
-deleted file mode 100644
-index 7efec9200532..000000000000
---- a/include/dt-bindings/reset/tegra186-reset.h
-+++ /dev/null
-@@ -1,205 +0,0 @@
+@@ -1,105 +0,0 @@
 -/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (c) 2015, NVIDIA CORPORATION.
+- *  Copyright (C) 2020 Xilinx, Inc.
 - */
 -
--#ifndef _ABI_MACH_T186_RESET_T186_H_
--#define _ABI_MACH_T186_RESET_T186_H_
+-#ifndef _DT_BINDINGS_VERSAL_RESETS_H
+-#define _DT_BINDINGS_VERSAL_RESETS_H
 -
--#define TEGRA186_RESET_ACTMON			0
--#define TEGRA186_RESET_AFI			1
--#define TEGRA186_RESET_CEC			2
--#define TEGRA186_RESET_CSITE			3
--#define TEGRA186_RESET_DP2			4
--#define TEGRA186_RESET_DPAUX			5
--#define TEGRA186_RESET_DSI			6
--#define TEGRA186_RESET_DSIB			7
--#define TEGRA186_RESET_DTV			8
--#define TEGRA186_RESET_DVFS			9
--#define TEGRA186_RESET_ENTROPY			10
--#define TEGRA186_RESET_EXTPERIPH1		11
--#define TEGRA186_RESET_EXTPERIPH2		12
--#define TEGRA186_RESET_EXTPERIPH3		13
--#define TEGRA186_RESET_GPU			14
--#define TEGRA186_RESET_HDA			15
--#define TEGRA186_RESET_HDA2CODEC_2X		16
--#define TEGRA186_RESET_HDA2HDMICODEC		17
--#define TEGRA186_RESET_HOST1X			18
--#define TEGRA186_RESET_I2C1			19
--#define TEGRA186_RESET_I2C2			20
--#define TEGRA186_RESET_I2C3			21
--#define TEGRA186_RESET_I2C4			22
--#define TEGRA186_RESET_I2C5			23
--#define TEGRA186_RESET_I2C6			24
--#define TEGRA186_RESET_ISP			25
--#define TEGRA186_RESET_KFUSE			26
--#define TEGRA186_RESET_LA			27
--#define TEGRA186_RESET_MIPI_CAL			28
--#define TEGRA186_RESET_PCIE			29
--#define TEGRA186_RESET_PCIEXCLK			30
--#define TEGRA186_RESET_SATA			31
--#define TEGRA186_RESET_SATACOLD			32
--#define TEGRA186_RESET_SDMMC1			33
--#define TEGRA186_RESET_SDMMC2			34
--#define TEGRA186_RESET_SDMMC3			35
--#define TEGRA186_RESET_SDMMC4			36
--#define TEGRA186_RESET_SE			37
--#define TEGRA186_RESET_SOC_THERM		38
--#define TEGRA186_RESET_SOR0			39
--#define TEGRA186_RESET_SPI1			40
--#define TEGRA186_RESET_SPI2			41
--#define TEGRA186_RESET_SPI3			42
--#define TEGRA186_RESET_SPI4			43
--#define TEGRA186_RESET_TMR			44
--#define TEGRA186_RESET_TRIG_SYS			45
--#define TEGRA186_RESET_TSEC			46
--#define TEGRA186_RESET_UARTA			47
--#define TEGRA186_RESET_UARTB			48
--#define TEGRA186_RESET_UARTC			49
--#define TEGRA186_RESET_UARTD			50
--#define TEGRA186_RESET_VI			51
--#define TEGRA186_RESET_VIC			52
--#define TEGRA186_RESET_XUSB_DEV			53
--#define TEGRA186_RESET_XUSB_HOST		54
--#define TEGRA186_RESET_XUSB_PADCTL		55
--#define TEGRA186_RESET_XUSB_SS			56
--#define TEGRA186_RESET_AON_APB			57
--#define TEGRA186_RESET_AXI_CBB			58
--#define TEGRA186_RESET_BPMP_APB			59
--#define TEGRA186_RESET_CAN1			60
--#define TEGRA186_RESET_CAN2			61
--#define TEGRA186_RESET_DMIC5			62
--#define TEGRA186_RESET_DSIC			63
--#define TEGRA186_RESET_DSID			64
--#define TEGRA186_RESET_EMC_EMC			65
--#define TEGRA186_RESET_EMC_MEM			66
--#define TEGRA186_RESET_EMCSB_EMC		67
--#define TEGRA186_RESET_EMCSB_MEM		68
--#define TEGRA186_RESET_EQOS			69
--#define TEGRA186_RESET_GPCDMA			70
--#define TEGRA186_RESET_GPIO_CTL0		71
--#define TEGRA186_RESET_GPIO_CTL1		72
--#define TEGRA186_RESET_GPIO_CTL2		73
--#define TEGRA186_RESET_GPIO_CTL3		74
--#define TEGRA186_RESET_GPIO_CTL4		75
--#define TEGRA186_RESET_GPIO_CTL5		76
--#define TEGRA186_RESET_I2C10			77
--#define TEGRA186_RESET_I2C12			78
--#define TEGRA186_RESET_I2C13			79
--#define TEGRA186_RESET_I2C14			80
--#define TEGRA186_RESET_I2C7			81
--#define TEGRA186_RESET_I2C8			82
--#define TEGRA186_RESET_I2C9			83
--#define TEGRA186_RESET_JTAG2AXI			84
--#define TEGRA186_RESET_MPHY_IOBIST		85
--#define TEGRA186_RESET_MPHY_L0_RX		86
--#define TEGRA186_RESET_MPHY_L0_TX		87
--#define TEGRA186_RESET_NVCSI			88
--#define TEGRA186_RESET_NVDISPLAY0_HEAD0		89
--#define TEGRA186_RESET_NVDISPLAY0_HEAD1		90
--#define TEGRA186_RESET_NVDISPLAY0_HEAD2		91
--#define TEGRA186_RESET_NVDISPLAY0_MISC		92
--#define TEGRA186_RESET_NVDISPLAY0_WGRP0		93
--#define TEGRA186_RESET_NVDISPLAY0_WGRP1		94
--#define TEGRA186_RESET_NVDISPLAY0_WGRP2		95
--#define TEGRA186_RESET_NVDISPLAY0_WGRP3		96
--#define TEGRA186_RESET_NVDISPLAY0_WGRP4		97
--#define TEGRA186_RESET_NVDISPLAY0_WGRP5		98
--#define TEGRA186_RESET_PWM1			99
--#define TEGRA186_RESET_PWM2			100
--#define TEGRA186_RESET_PWM3			101
--#define TEGRA186_RESET_PWM4			102
--#define TEGRA186_RESET_PWM5			103
--#define TEGRA186_RESET_PWM6			104
--#define TEGRA186_RESET_PWM7			105
--#define TEGRA186_RESET_PWM8			106
--#define TEGRA186_RESET_SCE_APB			107
--#define TEGRA186_RESET_SOR1			108
--#define TEGRA186_RESET_TACH			109
--#define TEGRA186_RESET_TSC			110
--#define TEGRA186_RESET_UARTF			111
--#define TEGRA186_RESET_UARTG			112
--#define TEGRA186_RESET_UFSHC			113
--#define TEGRA186_RESET_UFSHC_AXI_M		114
--#define TEGRA186_RESET_UPHY			115
--#define TEGRA186_RESET_ADSP			116
--#define TEGRA186_RESET_ADSPDBG			117
--#define TEGRA186_RESET_ADSPINTF			118
--#define TEGRA186_RESET_ADSPNEON			119
--#define TEGRA186_RESET_ADSPPERIPH		120
--#define TEGRA186_RESET_ADSPSCU			121
--#define TEGRA186_RESET_ADSPWDT			122
--#define TEGRA186_RESET_APE			123
--#define TEGRA186_RESET_DPAUX1			124
--#define TEGRA186_RESET_NVDEC			125
--#define TEGRA186_RESET_NVENC			126
--#define TEGRA186_RESET_NVJPG			127
--#define TEGRA186_RESET_PEX_USB_UPHY		128
--#define TEGRA186_RESET_QSPI			129
--#define TEGRA186_RESET_TSECB			130
--#define TEGRA186_RESET_VI_I2C			131
--#define TEGRA186_RESET_UARTE			132
--#define TEGRA186_RESET_TOP_GTE			133
--#define TEGRA186_RESET_SHSP			134
--#define TEGRA186_RESET_PEX_USB_UPHY_L5		135
--#define TEGRA186_RESET_PEX_USB_UPHY_L4		136
--#define TEGRA186_RESET_PEX_USB_UPHY_L3		137
--#define TEGRA186_RESET_PEX_USB_UPHY_L2		138
--#define TEGRA186_RESET_PEX_USB_UPHY_L1		139
--#define TEGRA186_RESET_PEX_USB_UPHY_L0		140
--#define TEGRA186_RESET_PEX_USB_UPHY_PLL1	141
--#define TEGRA186_RESET_PEX_USB_UPHY_PLL0	142
--#define TEGRA186_RESET_TSCTNVI			143
--#define TEGRA186_RESET_EXTPERIPH4		144
--#define TEGRA186_RESET_DSIPADCTL		145
--#define TEGRA186_RESET_AUD_MCLK			146
--#define TEGRA186_RESET_MPHY_CLK_CTL		147
--#define TEGRA186_RESET_MPHY_L1_RX		148
--#define TEGRA186_RESET_MPHY_L1_TX		149
--#define TEGRA186_RESET_UFSHC_LP			150
--#define TEGRA186_RESET_BPMP_NIC			151
--#define TEGRA186_RESET_BPMP_NSYSPORESET		152
--#define TEGRA186_RESET_BPMP_NRESET		153
--#define TEGRA186_RESET_BPMP_DBGRESETN		154
--#define TEGRA186_RESET_BPMP_PRESETDBGN		155
--#define TEGRA186_RESET_BPMP_PM			156
--#define TEGRA186_RESET_BPMP_CVC			157
--#define TEGRA186_RESET_BPMP_DMA			158
--#define TEGRA186_RESET_BPMP_HSP			159
--#define TEGRA186_RESET_TSCTNBPMP		160
--#define TEGRA186_RESET_BPMP_TKE			161
--#define TEGRA186_RESET_BPMP_GTE			162
--#define TEGRA186_RESET_BPMP_PM_ACTMON		163
--#define TEGRA186_RESET_AON_NIC			164
--#define TEGRA186_RESET_AON_NSYSPORESET		165
--#define TEGRA186_RESET_AON_NRESET		166
--#define TEGRA186_RESET_AON_DBGRESETN		167
--#define TEGRA186_RESET_AON_PRESETDBGN		168
--#define TEGRA186_RESET_AON_ACTMON		169
--#define TEGRA186_RESET_AOPM			170
--#define TEGRA186_RESET_AOVC			171
--#define TEGRA186_RESET_AON_DMA			172
--#define TEGRA186_RESET_AON_GPIO			173
--#define TEGRA186_RESET_AON_HSP			174
--#define TEGRA186_RESET_TSCTNAON			175
--#define TEGRA186_RESET_AON_TKE			176
--#define TEGRA186_RESET_AON_GTE			177
--#define TEGRA186_RESET_SCE_NIC			178
--#define TEGRA186_RESET_SCE_NSYSPORESET		179
--#define TEGRA186_RESET_SCE_NRESET		180
--#define TEGRA186_RESET_SCE_DBGRESETN		181
--#define TEGRA186_RESET_SCE_PRESETDBGN		182
--#define TEGRA186_RESET_SCE_ACTMON		183
--#define TEGRA186_RESET_SCE_PM			184
--#define TEGRA186_RESET_SCE_DMA			185
--#define TEGRA186_RESET_SCE_HSP			186
--#define TEGRA186_RESET_TSCTNSCE			187
--#define TEGRA186_RESET_SCE_TKE			188
--#define TEGRA186_RESET_SCE_GTE			189
--#define TEGRA186_RESET_SCE_CFG			190
--#define TEGRA186_RESET_ADSP_ALL			191
--/** @brief controls the power up/down sequence of UFSHC PSW partition. Controls LP_PWR_READY, LP_ISOL_EN, and LP_RESET_N signals */
--#define TEGRA186_RESET_UFSHC_LP_SEQ		192
--#define TEGRA186_RESET_SIZE			193
+-#define VERSAL_RST_PMC_POR			(0xc30c001U)
+-#define VERSAL_RST_PMC				(0xc410002U)
+-#define VERSAL_RST_PS_POR			(0xc30c003U)
+-#define VERSAL_RST_PL_POR			(0xc30c004U)
+-#define VERSAL_RST_NOC_POR			(0xc30c005U)
+-#define VERSAL_RST_FPD_POR			(0xc30c006U)
+-#define VERSAL_RST_ACPU_0_POR			(0xc30c007U)
+-#define VERSAL_RST_ACPU_1_POR			(0xc30c008U)
+-#define VERSAL_RST_OCM2_POR			(0xc30c009U)
+-#define VERSAL_RST_PS_SRST			(0xc41000aU)
+-#define VERSAL_RST_PL_SRST			(0xc41000bU)
+-#define VERSAL_RST_NOC				(0xc41000cU)
+-#define VERSAL_RST_NPI				(0xc41000dU)
+-#define VERSAL_RST_SYS_RST_1			(0xc41000eU)
+-#define VERSAL_RST_SYS_RST_2			(0xc41000fU)
+-#define VERSAL_RST_SYS_RST_3			(0xc410010U)
+-#define VERSAL_RST_FPD				(0xc410011U)
+-#define VERSAL_RST_PL0				(0xc410012U)
+-#define VERSAL_RST_PL1				(0xc410013U)
+-#define VERSAL_RST_PL2				(0xc410014U)
+-#define VERSAL_RST_PL3				(0xc410015U)
+-#define VERSAL_RST_APU				(0xc410016U)
+-#define VERSAL_RST_ACPU_0			(0xc410017U)
+-#define VERSAL_RST_ACPU_1			(0xc410018U)
+-#define VERSAL_RST_ACPU_L2			(0xc410019U)
+-#define VERSAL_RST_ACPU_GIC			(0xc41001aU)
+-#define VERSAL_RST_RPU_ISLAND			(0xc41001bU)
+-#define VERSAL_RST_RPU_AMBA			(0xc41001cU)
+-#define VERSAL_RST_R5_0				(0xc41001dU)
+-#define VERSAL_RST_R5_1				(0xc41001eU)
+-#define VERSAL_RST_SYSMON_PMC_SEQ_RST		(0xc41001fU)
+-#define VERSAL_RST_SYSMON_PMC_CFG_RST		(0xc410020U)
+-#define VERSAL_RST_SYSMON_FPD_CFG_RST		(0xc410021U)
+-#define VERSAL_RST_SYSMON_FPD_SEQ_RST		(0xc410022U)
+-#define VERSAL_RST_SYSMON_LPD			(0xc410023U)
+-#define VERSAL_RST_PDMA_RST1			(0xc410024U)
+-#define VERSAL_RST_PDMA_RST0			(0xc410025U)
+-#define VERSAL_RST_ADMA				(0xc410026U)
+-#define VERSAL_RST_TIMESTAMP			(0xc410027U)
+-#define VERSAL_RST_OCM				(0xc410028U)
+-#define VERSAL_RST_OCM2_RST			(0xc410029U)
+-#define VERSAL_RST_IPI				(0xc41002aU)
+-#define VERSAL_RST_SBI				(0xc41002bU)
+-#define VERSAL_RST_LPD				(0xc41002cU)
+-#define VERSAL_RST_QSPI				(0xc10402dU)
+-#define VERSAL_RST_OSPI				(0xc10402eU)
+-#define VERSAL_RST_SDIO_0			(0xc10402fU)
+-#define VERSAL_RST_SDIO_1			(0xc104030U)
+-#define VERSAL_RST_I2C_PMC			(0xc104031U)
+-#define VERSAL_RST_GPIO_PMC			(0xc104032U)
+-#define VERSAL_RST_GEM_0			(0xc104033U)
+-#define VERSAL_RST_GEM_1			(0xc104034U)
+-#define VERSAL_RST_SPARE			(0xc104035U)
+-#define VERSAL_RST_USB_0			(0xc104036U)
+-#define VERSAL_RST_UART_0			(0xc104037U)
+-#define VERSAL_RST_UART_1			(0xc104038U)
+-#define VERSAL_RST_SPI_0			(0xc104039U)
+-#define VERSAL_RST_SPI_1			(0xc10403aU)
+-#define VERSAL_RST_CAN_FD_0			(0xc10403bU)
+-#define VERSAL_RST_CAN_FD_1			(0xc10403cU)
+-#define VERSAL_RST_I2C_0			(0xc10403dU)
+-#define VERSAL_RST_I2C_1			(0xc10403eU)
+-#define VERSAL_RST_GPIO_LPD			(0xc10403fU)
+-#define VERSAL_RST_TTC_0			(0xc104040U)
+-#define VERSAL_RST_TTC_1			(0xc104041U)
+-#define VERSAL_RST_TTC_2			(0xc104042U)
+-#define VERSAL_RST_TTC_3			(0xc104043U)
+-#define VERSAL_RST_SWDT_FPD			(0xc104044U)
+-#define VERSAL_RST_SWDT_LPD			(0xc104045U)
+-#define VERSAL_RST_USB				(0xc104046U)
+-#define VERSAL_RST_DPC				(0xc208047U)
+-#define VERSAL_RST_PMCDBG			(0xc208048U)
+-#define VERSAL_RST_DBG_TRACE			(0xc208049U)
+-#define VERSAL_RST_DBG_FPD			(0xc20804aU)
+-#define VERSAL_RST_DBG_TSTMP			(0xc20804bU)
+-#define VERSAL_RST_RPU0_DBG			(0xc20804cU)
+-#define VERSAL_RST_RPU1_DBG			(0xc20804dU)
+-#define VERSAL_RST_HSDP				(0xc20804eU)
+-#define VERSAL_RST_DBG_LPD			(0xc20804fU)
+-#define VERSAL_RST_CPM_POR			(0xc30c050U)
+-#define VERSAL_RST_CPM				(0xc410051U)
+-#define VERSAL_RST_CPMDBG			(0xc208052U)
+-#define VERSAL_RST_PCIE_CFG			(0xc410053U)
+-#define VERSAL_RST_PCIE_CORE0			(0xc410054U)
+-#define VERSAL_RST_PCIE_CORE1			(0xc410055U)
+-#define VERSAL_RST_PCIE_DMA			(0xc410056U)
+-#define VERSAL_RST_CMN				(0xc410057U)
+-#define VERSAL_RST_L2_0				(0xc410058U)
+-#define VERSAL_RST_L2_1				(0xc410059U)
+-#define VERSAL_RST_ADDR_REMAP			(0xc41005aU)
+-#define VERSAL_RST_CPI0				(0xc41005bU)
+-#define VERSAL_RST_CPI1				(0xc41005cU)
+-#define VERSAL_RST_XRAM				(0xc30c05dU)
+-#define VERSAL_RST_AIE_ARRAY			(0xc10405eU)
+-#define VERSAL_RST_AIE_SHIM			(0xc10405fU)
 -
 -#endif
-diff --git a/include/dt-bindings/thermal/tegra124-soctherm.h b/include/dt-bindings/thermal/tegra124-soctherm.h
+diff --git a/include/dt-bindings/reset/xlnx-zynqmp-resets.h b/include/dt-bindings/reset/xlnx-zynqmp-resets.h
 deleted file mode 100644
-index 729ab9fc325e..000000000000
---- a/include/dt-bindings/thermal/tegra124-soctherm.h
+index d44525b9f8db..000000000000
+--- a/include/dt-bindings/reset/xlnx-zynqmp-resets.h
 +++ /dev/null
-@@ -1,14 +0,0 @@
+@@ -1,130 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * This header provides constants for binding nvidia,tegra124-soctherm.
+- *  Copyright (C) 2018 Xilinx, Inc.
 - */
 -
--#ifndef _DT_BINDINGS_THERMAL_TEGRA124_SOCTHERM_H
--#define _DT_BINDINGS_THERMAL_TEGRA124_SOCTHERM_H
+-#ifndef _DT_BINDINGS_ZYNQMP_RESETS_H
+-#define _DT_BINDINGS_ZYNQMP_RESETS_H
 -
--#define TEGRA124_SOCTHERM_SENSOR_CPU 0
--#define TEGRA124_SOCTHERM_SENSOR_MEM 1
--#define TEGRA124_SOCTHERM_SENSOR_GPU 2
--#define TEGRA124_SOCTHERM_SENSOR_PLLX 3
--#define TEGRA124_SOCTHERM_SENSOR_NUM 4
+-#define		ZYNQMP_RESET_PCIE_CFG		0
+-#define		ZYNQMP_RESET_PCIE_BRIDGE	1
+-#define		ZYNQMP_RESET_PCIE_CTRL		2
+-#define		ZYNQMP_RESET_DP			3
+-#define		ZYNQMP_RESET_SWDT_CRF		4
+-#define		ZYNQMP_RESET_AFI_FM5		5
+-#define		ZYNQMP_RESET_AFI_FM4		6
+-#define		ZYNQMP_RESET_AFI_FM3		7
+-#define		ZYNQMP_RESET_AFI_FM2		8
+-#define		ZYNQMP_RESET_AFI_FM1		9
+-#define		ZYNQMP_RESET_AFI_FM0		10
+-#define		ZYNQMP_RESET_GDMA		11
+-#define		ZYNQMP_RESET_GPU_PP1		12
+-#define		ZYNQMP_RESET_GPU_PP0		13
+-#define		ZYNQMP_RESET_GPU		14
+-#define		ZYNQMP_RESET_GT			15
+-#define		ZYNQMP_RESET_SATA		16
+-#define		ZYNQMP_RESET_ACPU3_PWRON	17
+-#define		ZYNQMP_RESET_ACPU2_PWRON	18
+-#define		ZYNQMP_RESET_ACPU1_PWRON	19
+-#define		ZYNQMP_RESET_ACPU0_PWRON	20
+-#define		ZYNQMP_RESET_APU_L2		21
+-#define		ZYNQMP_RESET_ACPU3		22
+-#define		ZYNQMP_RESET_ACPU2		23
+-#define		ZYNQMP_RESET_ACPU1		24
+-#define		ZYNQMP_RESET_ACPU0		25
+-#define		ZYNQMP_RESET_DDR		26
+-#define		ZYNQMP_RESET_APM_FPD		27
+-#define		ZYNQMP_RESET_SOFT		28
+-#define		ZYNQMP_RESET_GEM0		29
+-#define		ZYNQMP_RESET_GEM1		30
+-#define		ZYNQMP_RESET_GEM2		31
+-#define		ZYNQMP_RESET_GEM3		32
+-#define		ZYNQMP_RESET_QSPI		33
+-#define		ZYNQMP_RESET_UART0		34
+-#define		ZYNQMP_RESET_UART1		35
+-#define		ZYNQMP_RESET_SPI0		36
+-#define		ZYNQMP_RESET_SPI1		37
+-#define		ZYNQMP_RESET_SDIO0		38
+-#define		ZYNQMP_RESET_SDIO1		39
+-#define		ZYNQMP_RESET_CAN0		40
+-#define		ZYNQMP_RESET_CAN1		41
+-#define		ZYNQMP_RESET_I2C0		42
+-#define		ZYNQMP_RESET_I2C1		43
+-#define		ZYNQMP_RESET_TTC0		44
+-#define		ZYNQMP_RESET_TTC1		45
+-#define		ZYNQMP_RESET_TTC2		46
+-#define		ZYNQMP_RESET_TTC3		47
+-#define		ZYNQMP_RESET_SWDT_CRL		48
+-#define		ZYNQMP_RESET_NAND		49
+-#define		ZYNQMP_RESET_ADMA		50
+-#define		ZYNQMP_RESET_GPIO		51
+-#define		ZYNQMP_RESET_IOU_CC		52
+-#define		ZYNQMP_RESET_TIMESTAMP		53
+-#define		ZYNQMP_RESET_RPU_R50		54
+-#define		ZYNQMP_RESET_RPU_R51		55
+-#define		ZYNQMP_RESET_RPU_AMBA		56
+-#define		ZYNQMP_RESET_OCM		57
+-#define		ZYNQMP_RESET_RPU_PGE		58
+-#define		ZYNQMP_RESET_USB0_CORERESET	59
+-#define		ZYNQMP_RESET_USB1_CORERESET	60
+-#define		ZYNQMP_RESET_USB0_HIBERRESET	61
+-#define		ZYNQMP_RESET_USB1_HIBERRESET	62
+-#define		ZYNQMP_RESET_USB0_APB		63
+-#define		ZYNQMP_RESET_USB1_APB		64
+-#define		ZYNQMP_RESET_IPI		65
+-#define		ZYNQMP_RESET_APM_LPD		66
+-#define		ZYNQMP_RESET_RTC		67
+-#define		ZYNQMP_RESET_SYSMON		68
+-#define		ZYNQMP_RESET_AFI_FM6		69
+-#define		ZYNQMP_RESET_LPD_SWDT		70
+-#define		ZYNQMP_RESET_FPD		71
+-#define		ZYNQMP_RESET_RPU_DBG1		72
+-#define		ZYNQMP_RESET_RPU_DBG0		73
+-#define		ZYNQMP_RESET_DBG_LPD		74
+-#define		ZYNQMP_RESET_DBG_FPD		75
+-#define		ZYNQMP_RESET_APLL		76
+-#define		ZYNQMP_RESET_DPLL		77
+-#define		ZYNQMP_RESET_VPLL		78
+-#define		ZYNQMP_RESET_IOPLL		79
+-#define		ZYNQMP_RESET_RPLL		80
+-#define		ZYNQMP_RESET_GPO3_PL_0		81
+-#define		ZYNQMP_RESET_GPO3_PL_1		82
+-#define		ZYNQMP_RESET_GPO3_PL_2		83
+-#define		ZYNQMP_RESET_GPO3_PL_3		84
+-#define		ZYNQMP_RESET_GPO3_PL_4		85
+-#define		ZYNQMP_RESET_GPO3_PL_5		86
+-#define		ZYNQMP_RESET_GPO3_PL_6		87
+-#define		ZYNQMP_RESET_GPO3_PL_7		88
+-#define		ZYNQMP_RESET_GPO3_PL_8		89
+-#define		ZYNQMP_RESET_GPO3_PL_9		90
+-#define		ZYNQMP_RESET_GPO3_PL_10		91
+-#define		ZYNQMP_RESET_GPO3_PL_11		92
+-#define		ZYNQMP_RESET_GPO3_PL_12		93
+-#define		ZYNQMP_RESET_GPO3_PL_13		94
+-#define		ZYNQMP_RESET_GPO3_PL_14		95
+-#define		ZYNQMP_RESET_GPO3_PL_15		96
+-#define		ZYNQMP_RESET_GPO3_PL_16		97
+-#define		ZYNQMP_RESET_GPO3_PL_17		98
+-#define		ZYNQMP_RESET_GPO3_PL_18		99
+-#define		ZYNQMP_RESET_GPO3_PL_19		100
+-#define		ZYNQMP_RESET_GPO3_PL_20		101
+-#define		ZYNQMP_RESET_GPO3_PL_21		102
+-#define		ZYNQMP_RESET_GPO3_PL_22		103
+-#define		ZYNQMP_RESET_GPO3_PL_23		104
+-#define		ZYNQMP_RESET_GPO3_PL_24		105
+-#define		ZYNQMP_RESET_GPO3_PL_25		106
+-#define		ZYNQMP_RESET_GPO3_PL_26		107
+-#define		ZYNQMP_RESET_GPO3_PL_27		108
+-#define		ZYNQMP_RESET_GPO3_PL_28		109
+-#define		ZYNQMP_RESET_GPO3_PL_29		110
+-#define		ZYNQMP_RESET_GPO3_PL_30		111
+-#define		ZYNQMP_RESET_GPO3_PL_31		112
+-#define		ZYNQMP_RESET_RPU_LS		113
+-#define		ZYNQMP_RESET_PS_ONLY		114
+-#define		ZYNQMP_RESET_PL			115
+-#define		ZYNQMP_RESET_PS_PL0		116
+-#define		ZYNQMP_RESET_PS_PL1		117
+-#define		ZYNQMP_RESET_PS_PL2		118
+-#define		ZYNQMP_RESET_PS_PL3		119
 -
 -#endif
 

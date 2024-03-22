@@ -2,46 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD520886762
-	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Mar 2024 08:17:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0151886763
+	for <lists+uboot-stm32@lfdr.de>; Fri, 22 Mar 2024 08:18:08 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6AE31C6DD68;
-	Fri, 22 Mar 2024 07:17:03 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 853DCC6DD68;
+	Fri, 22 Mar 2024 07:18:08 +0000 (UTC)
 Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2062.outbound.protection.outlook.com [40.107.212.62])
+ (mail-bn1nam02on2074.outbound.protection.outlook.com [40.107.212.74])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CA3C4C6C85A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ADF24C6C85A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 22 Mar 2024 07:17:02 +0000 (UTC)
+ Fri, 22 Mar 2024 07:18:07 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kINQrk8VVNqQHEJ9stlU6VjSvll1BCI0t2+3EH91wBPrZo+3ztVltiDHLQiqDc2X8PldxNyQJudnvC9lU9mYQ9D66INJ5j+QHtn0NWd4V0jWd0L97rz3yfLwS8orYHeBLuE/ZqZEM4/GJZ1j9K5XDMpRKJJU19Tqkveu1H8mdIq11temwWZ8+WQNMjMNlV4xJmfXOY6/IxOsJVoNtEc+ia8uONeA9yIqJxkgXwuKAltb3NEkYHg91rlzd8P1ePPQ/Xcw2/G9NK3zpnpgUuUtx2KBJdIhoLTkCytqliyYir3PyxlJVtH3xHFGsmpGd50I4Ki+fbV3KYWmGOYu9fyHhA==
+ b=O0Lw89hSwV3RzhIoXSYHEY+iDUrWzRbOlIXLRIGSLIBgQODZUhX01UpxxC+M0MCd5pHdsNBKU7/rEjc3d+K73wb4UXxEjt/uglQ66XYw8c/qprWJlnOniOhE1PjmIuTjAsJ4uDbO3AgGT/E0YmzHX3xTIEmYZ6PwnFFU1qfE2vpvnIIPtMWELvf7zbJmUh/CZOrbHbXNKin45ELyHkIc1DhCkWhVVCBX/vP/f37xvPJ+JLDWVf7bDElTj0LGuCjxvI5rT86JH6r+I5NWPr1UZXdcaUDUn9r2rXIq3bsN5enyoAJC4n5aUig32XdcQoYW/0kAsLa+R68qxl1ubGFAVQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Vji2rtyI0I08Z5bFLFEU6Ly4AZKqyZebqKMwZTkY/qc=;
- b=GoOM6ixkFIj4JJM3HRmbJxJNkx5O1SnIDpzmtdosiFitrFSQSU+Mj7d2BZmIA8VqTLdGHnd9W1LTcREge/a2gCJeiyEAl3lMkA61ZiJveCOv3Fq+rJ72fdd0e8mOGSIQj6kkOcLj7EOSXqgwOwvtr6E2/VkKfUPNUOz1+YMtrmOO/7fpQlJc5IR59Yl2vz6M/0JaPX39ENx3WIsWjrPPYGyBWDDnLsbj2jSBgZNjQISDv7LNz4gwb9K3yc8hX4s/3EwSDkUBHkf9ME3lCwY+aicVVJfDIY0aFlbIaB+unN/KjysrETfxr4e3dPVq/eVukA9c7GIjk1p1D/1rBtJ3CQ==
+ bh=FgAiAOC2+R6RWfZWIr+qNbDSBFKYHXRFcLG0SqgN+UA=;
+ b=Xc7HYe0wn7Uefii15V9VZFVNXIVUNIp8wt3lOE6R9LD8I3fy3M9lTLq2+0o3P3xBBoPW4ekbeq9bVkJn7wsdN/9T/wEhcd/m0Y4xlcuK+L0wwaGTfpi1glzRB/FESKhSSxfTlBGMsrN07TJfwUZi6WLPydwaBMybIVZ7AvAzsj0A4k6MALg9ug9MC4msqhs0QSU1p+1Hc13whtYWeZRglNu6xPTMbHkH8iXWxJpUX94E/zt33eYDAQnYnr0HfhbQ2oRfeeVGqoNH+8wh3yDbeRVReB4AneUj2LzHIiHLdPN2WJ+aevXdQd5MVgnoxIHEvP9GpR20V1yoafsfIqT74w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Vji2rtyI0I08Z5bFLFEU6Ly4AZKqyZebqKMwZTkY/qc=;
- b=JvvlFQX0oSMtXFZA5aRiuHO2noeaEDLoXT17SRcKxeaZQYZd6K4BV3UN50igug7CGlH6vHQrh2xSgHuPtsVjIneQA7RRE62Otfq9Zgh7YvMlkmPzTGvgHhMXg4PCAUAHe3ZBsTVdj2mHGfgevumxPyk9JN5Zsvpz+p5h8MCc2ao=
+ bh=FgAiAOC2+R6RWfZWIr+qNbDSBFKYHXRFcLG0SqgN+UA=;
+ b=dgDzKVOsg1o539L/4JnSpwhXtYnh0SduPMPjjL6fCYfLWdlXjXP4sC04cbKoxsUZ8EK7VFWoZacmp5/ndo4ParbaWFsTuLc3OreFrZ2TfutdOSGV5WUaE+8s3gRc9iilW/BwYuKUBOOruIilJ6J65EEECoUABGyEUn8LsHGhxBg=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by CH3PR12MB9430.namprd12.prod.outlook.com (2603:10b6:610:1cd::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.34; Fri, 22 Mar
- 2024 07:16:59 +0000
+ 2024 07:18:05 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7386.025; Fri, 22 Mar 2024
- 07:16:59 +0000
-Message-ID: <1ad397c3-6732-4e8c-8326-a3443288355c@amd.com>
-Date: Fri, 22 Mar 2024 08:16:30 +0100
+ 07:18:05 +0000
+Message-ID: <db1febc0-508a-4a1f-a373-c76d38a8f4d7@amd.com>
+Date: Fri, 22 Mar 2024 08:17:40 +0100
 User-Agent: Mozilla Thunderbird
+Content-Language: en-US
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>,
@@ -69,8 +70,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  Dai Okamura <okamura.dai@socionext.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
- <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
-Content-Language: en-US
+ <20240321-b4-upstream-dt-headers-v2-24-1eac0df875fe@linaro.org>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -116,71 +116,72 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
+In-Reply-To: <20240321-b4-upstream-dt-headers-v2-24-1eac0df875fe@linaro.org>
 X-ClientProxiedBy: VI1PR0202CA0005.eurprd02.prod.outlook.com
  (2603:10a6:803:14::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB9430:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3c832478-c866-4278-a196-08dc4a401037
+X-MS-Office365-Filtering-Correlation-Id: 39f2d72b-d871-48f9-3431-08dc4a403799
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3HTsLT5Ayr775S7YAew2Kxxl1vHaOIT3B1vY4P5S9rGXmVNYbdxbKNpu/iert8+JTEspGB3LDXn+wfClY4Ks0vmZkPq4xt0DUw2wR6l1DnhZFUpcTTyS2WjIcU91/QuTh7fWHUSaUs0A6LEWd7QkZwufgcShRB/MDeKnkACJ1wm1Bkdbg+5NHkl6LkntyrHZTI4m3vyrHU5yO205gT0bBOIA7qLqgi2IUwHLzsW7jkrTNvdyZJUgg9ha2xeXa27EHcQglDVYEgqId3hw5tJq6pAyNb8HQluk1b2XuHJcRTCVwVhfDsSMPADQpe68RHN4cs7GrjV38z3SKF5XzjKtiz6FDR9VaeJNR9botwzunpAmld9s9SEdObbGlnfCNSH+fO+6j9SR8oxxi04UIo5K/uBM3jTLWrUn88ELJzCbvXQOElSN71UhMUkMPJ50XJHcVuZX42b/1WYrW4oeGyHsmznor6SZwZpaTNezjPpB4tPzikBLGPHLR3DjFZ6gbaOaSUJVCDfvWAAItrhORgQQBl9OPRbQQ01rvzxDW6oKLmUiUKHW7ek8qWjGhin/kVbPz8ofrAtlHertpYR0DEAgaD14elAm/HLqnOGNx5cgxIx5dv4ARpK3/Ze8GCbGwnYpQUXOmsitrRlO2uTiC39KChDB4Ik2Ojbpbve/mdOScGSI7QWoIlefMySXBtcYaQKO1HzCPOPbXwX9aqJX1sIQ3w==
+X-Microsoft-Antispam-Message-Info: KkxlB09KdmiJP0qJGyYSReHrosTN3wy6ObpMTqCf/kKmo1BCZFeIdmjGOi2sRTYCzQiECKY/RC8kXdMpitE4IhYlPYMhju33plm1AZceLdJr2cMIeoNbcPwxYSOCei7rdvTmTfTtPHCMiFFMcHA/M4gwkm+3G9eZ3NcfLuTNnXp3wqIKG/dqeVtCkYobks+X+NF2U35d402/Ibb7+HprFn7NOIY2Z2hqVpc1fWyXK6NfTPyORlCOd7/vnbhs/wVemxx4TM/yH7flGd7aklL8qtnIfL40fwTQ4x5otYgi/BuOYxoQrM9/gCG7HTaCROI/8NJCP4Ot7mVtl2qoxVnsQK/GZkXdZG99qXQU+SL5IUZnx8dCt0/BEURWtXRWxdYrx37tpcIKjfSx9+oxn3ZUmOMISjtJ8agAQUs0W/2MtDrLTc9PE4ep2sHx3uuGULDG92b0J8qDbX6XUrrBHvTjoBxQXmbHJ57UPCVecGNXMocHLSgjp+bDAlLiaBx0Z3gb10Mr46wTpb75VIZxnR2c4lK+Gr+Mq1310k/pccVmpXeS78X+iF2+nqx+HpcVblR7572ShFd8td0UCUrTssS4y5R5eSMWjH3gjYLirX3PbBeD0gCgbyApd/rK1V2Qg6ZAh1gZHIJUTupvXIqhAOvbvLL/n0vfDQ3n0Keq7DrSGOL2hrsBWoC9SLzzIl9eMlX8zC7UYkbGy0unLXhBsB9AEw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(7416005)(1800799015)(366007)(376005)(921011); DIR:OUT; SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eW10RkhlNmgwRTcydUpjSDR5K3U2dXNXNy8rOTh2UDBFTSthS3NPYXY0QXZP?=
- =?utf-8?B?dEtLdyt4STJQM0lEMktXVzZGODFwS3p5NTlhcUpVWTZrMXJQQzhUUTBqRWdq?=
- =?utf-8?B?YXVMRXd3LzdNZTVSSDBRQ3ZER0pUQmtpWGoyQnc2Q2NaYzhiaFZCRElJOUx4?=
- =?utf-8?B?WUJjSnhrSm5LbDJkNDFQbWlyZjJLcjFvVVhxSm9JRG1kT3MrMzBmekpqY2Q3?=
- =?utf-8?B?Y214djloTDBHM0diRVNHQXhHcHhtSXhXMXZCSVJIYk9SK21JZVplZkNDUG9w?=
- =?utf-8?B?aGJYUjlIdzJzTjJ5YUNBUDVLS3VYcmM1Y1dqYWF3YitYeUhKZE0zY1BnVTFq?=
- =?utf-8?B?bERlNU5qSW05dnNuNHZkWnFBb0ZRUVdINUVpeC9LdjZaUGVUcXljVTFYYitv?=
- =?utf-8?B?NFpDNnNCRW1vWThldkhHMGloZUg5T2Z0QmtwNWRJMUx2RDh4SEY4MEUyQmky?=
- =?utf-8?B?cFBhQVA3UThyQWFvUEZCVmpVR2xGcEl1TG9nRGxocjJadUhWQ1VDcm9QUmts?=
- =?utf-8?B?YVJQUFhLRklOZzdoeFhJVURSK2Z0bFIwdWhPVkp3MmdkeG1lOUJ5RUhuTE5C?=
- =?utf-8?B?REVXbmk2NmlJZEJFZ2lGQ1BYbWJyWEN0VHV0V1dmdTNmYjR2WTNBSFZaZThz?=
- =?utf-8?B?ZXh0TUFzUkxOaXdWTmhtQmV5a0RtQ09rSTR0WTNzTzdJbEFMcno0VG1CQjZ2?=
- =?utf-8?B?MC9TVlVaaDJHVE9SMUJxZVZGODdtRytyUzk2UEhUUjk4MGRONC9YdEVUL2tx?=
- =?utf-8?B?djBUVUxObnpXRkRZUnJYM3VxR3ZHa1l3SXZ3MHVtSmszRGprVUVvREprOUI5?=
- =?utf-8?B?MmxsampWQkZwSnZKRytqcm93R3JPTi9VTlNTRnJrQmhrbFR6Ykt0VG51clNh?=
- =?utf-8?B?SXVsVzFGT1JOanpUZkJRYnBvN2lsZHJzeFVWKzRlaHFFdDFidGp5WW5HekYx?=
- =?utf-8?B?dmR1WDFnUzJrZmxIMnBncUlPL0hEYmIzQk1QUG4ycmhoR3FsM2txd1pDRDlN?=
- =?utf-8?B?LzRKUk03Zmw1eUk4YXdpbnFsK1pqak5ybVN0S0lkVUhoS2FBMVRaYkZVdnZP?=
- =?utf-8?B?eWpHcWRUWldjZmsvUkxubDdCS0gzcko3SVJ1YjBxMGdVM1c2TG9DU1cvUllS?=
- =?utf-8?B?aUgvSjd6L2FSSU5IaG15V2hYTGcrVFMwamRCbG5uSjNURXluMkI2MXlvQ2dR?=
- =?utf-8?B?WUdxbks3MjN4Z2lYaEcxSmEvaGtPUCtwa0dYMXkzVFBuRndaOWNmK1BZSXNm?=
- =?utf-8?B?ZWthZHI0U2hUV3pBT0owcys1MXVnVVpIMFFNV0lVc3Z6WGdnSUJWN05wL2sw?=
- =?utf-8?B?Q09rMmZQMXBuRTRwSUZwdUVSVHRySFBRcHNaTzlXWXFFOFBoUXRjZEUxajlx?=
- =?utf-8?B?TE4rOWUrVXJhbXFVbHIwZEdVNGxtU1Y2QlRGTTVjK1hUdlJhNXlCK3NDM2sv?=
- =?utf-8?B?OG14R1A1cTF1dU5sNFRGTGdKWWIza09aK1FadzhJV0IzM1RJdTNzTzZVMmFJ?=
- =?utf-8?B?NjBuZzQvTWZVYTRPa0dSZFJSb3pvMDBaYTc4TU1xSHRLS0xZUGViNE1uQm1l?=
- =?utf-8?B?ajBkRThzTW51NWhHZXV5VTVEZ0JYd1EvMHkyREdhbVZYaTl6Y0RlV2lNUEV0?=
- =?utf-8?B?eDJMWDJPM1F6Y3BneWxzaGtqTkFpYndVWTVBSlpaVGhNVkY0RS9ZNDY2L2xU?=
- =?utf-8?B?NVB4TkxjaE5JNUlNTTVZQkdLUWFOSzJDb2dsK0hKeHlweTFMZko0RnlmcHNO?=
- =?utf-8?B?SHB2bkJEUi9FaVE4QUxYZDZqQ3F6Q1RyZktobWo5cjlUM1hhZzd5VlFrYW1R?=
- =?utf-8?B?SFBBTC9Fb0NhcWdIRGo5OFUrMTN1MCs4TFg1OHlOWGlCTmpsSVc3cXdxelFW?=
- =?utf-8?B?RTZJNEhubmdCSU13ZEt1bmR6UWRTd2FkN1ZnVzZka2VuWld0MlduaS9FV3Ey?=
- =?utf-8?B?OGxjVzJlUWpqVU51RThmT0pOMkVFZXFPNUpVOGliaENaVnhoQlU3eit5LzBZ?=
- =?utf-8?B?Y2NMMjVNYlNGaUdXV1dyZXBEdjFFTnNib210elNwT2loT1Q0U3RPaDRUelly?=
- =?utf-8?B?Y25sWjNEQXVtcjNwMkFlMFdGSFFicldWb3FwUGhOMTNUakozbDF3SGx1YWpH?=
- =?utf-8?Q?CUX441Y/AXAc+zJ3EuqPSo1qf?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z1RlWkR6a0FOUEVTckZJRVJRSjg1ZmVTY2xQeEd3K1hxc1Y1RVhFOEx6SlZE?=
+ =?utf-8?B?dnBnbE1nL3JKUXFZZlk2eDdhSm1VbStyOFhDcmx0VklPbHhiV05ISFhkeU9w?=
+ =?utf-8?B?YWZGbU9VcGZqb091cEpnUTBONFdoNU1vc2hYTE9vV0g4NVFvVGRjazRlTVJG?=
+ =?utf-8?B?eW5nZlJEZGVPZDNZMDJFS3o3eXRnb1VrUS9VRW9rNjdvcWZkYXlrd0RoREVs?=
+ =?utf-8?B?MzZLNURodWtZTEZlcWZUQmRjczF6VVYrMnF6VTRZdDg1aFhKcDk3dWR2bDB6?=
+ =?utf-8?B?cXlZN3RYcDRUcEhiVFZLSmtsSjdXZUlrQ3JKLy8yRTVUK0xLZzBTY1NpWUd1?=
+ =?utf-8?B?WHdWWFBOU0w3NXY4bmlsa090S1FPUUsrUUxXaG02TjZhNTJBRDN2K0Joenkz?=
+ =?utf-8?B?NjhSVjRINzFySm1WSVYzeUwyYStjYkJuc3RYcEdrZ3Y2VjJPWWZML1lYMW5n?=
+ =?utf-8?B?R3lacFFCc2wrZjBob1ZreUtGVXJTTmxsMVZJQ0tGQU55TzBoUURmZzhjVTEr?=
+ =?utf-8?B?VXhmTjQ2NUtLdUwwbmZiNzdqdUNyOWZabFdOSzVLWlA0QTE3R1pVZkJjenRL?=
+ =?utf-8?B?N3RnUG04UEg2dWQ4ODhZa2tiY0hwTlUzSjk1Q1JQWCtyQ1FXQzJ6bzBNdjdF?=
+ =?utf-8?B?VnhJM3REUFBlNTBpTXoxWUN0c1VMUjBJQ25HYWh5S01TQ213clI3SGJMM3pR?=
+ =?utf-8?B?RjBvSE9kMXZHTkJXdVgxTkpTTUZGaTdaOVR4VWF2VG1PRWw2Zkhib0tvRDc1?=
+ =?utf-8?B?c2llUXNta0hCdXQ0Z1JUZlhDdmJudlo4dGJ3d2g3T0hUSWFqc3JpUlFOVTR0?=
+ =?utf-8?B?cjc3RHhGUzdsVW1ndzgzazNxUllXQ0JIMmlsR2FmVE1pT3J4K0NIMENHdTZz?=
+ =?utf-8?B?QkhyQUFVUU5QdGUwQjFSK29ZQkxwTEF3enhBUFdJWnh4Ym9UUUpTQjkyVUE1?=
+ =?utf-8?B?cTAyNHJnYzVTbUZ5Z0pUNWVpbjdHQ1Q4dGQ2Mkx4MkdqajFHdmIrV1VpMkxS?=
+ =?utf-8?B?QURyQkhMVGd4dFBIWVZUL21YR0FHVmpWUG0yL255SzE4UkZqTkJocGxWcFZP?=
+ =?utf-8?B?UWMyVGF4ckFzNTF5VlFUZU93OHI2dFZFQVJBSnovSWdwMFNuUm9Pam1TcVc5?=
+ =?utf-8?B?dEdTaFlQV1BvWWhYNFFxTS9VSW9rUUwvSDNhdVg4SjRZekhLbU1UblZ5TUJ5?=
+ =?utf-8?B?MndwMHJId3FwN2k4bnZBQmpoYUFERXpOQlZFNU1NWXFrTkJCU1dmWm5QOGx2?=
+ =?utf-8?B?VFd6SUphbENLZWxVQnl2bkQvcFNmbjlFUVp6YVluOUZDSjM5amFwOHplakNa?=
+ =?utf-8?B?R3g2RWVHQkpJN2c2bUdOQkZGSFlFLzJCeUhlMytXemxzQnpMd1dlRXBkb3BP?=
+ =?utf-8?B?OVVmQ0d6UkZVcUVJWGNiZ2U5STVNempDaHYvekg1Q1FQM2xlZWdaUTVHMlpH?=
+ =?utf-8?B?WUlOL1F4OXI0VGM5TUZZR0gzaXR1WnlUOHZhNWVTeXVrOU5sbFRGbXFURmVG?=
+ =?utf-8?B?a2RJRk9nMThKQ3NQWXhGT0YwbkdWVXNvcGlsRjltNXRwRW9PWVA2MWJ3V1Za?=
+ =?utf-8?B?K3VvbURBRWUxd1E1bzIzNnY5U3Jkd1F4Snl5bThZUkZENHNFaHM5NXc5QzJ4?=
+ =?utf-8?B?LzdzdkZRc2lia0V6STVzdWg4YnA3NWZ2dlhlUFFKRUdsRHFKdWZJWldYTCtG?=
+ =?utf-8?B?amRORHVDMXY0ZDNwVGRocGZmSU9VMWM0R3B1cWtHbnErOVZxckVVeXNrMTdp?=
+ =?utf-8?B?TGJYd21Kbjg2YjBLeld3YitYalhzM3pnaXdBbUhWWFNaZDllUEJqUUM2Z2Ir?=
+ =?utf-8?B?TnpMcDdOdUdtYUtXWjZXL253V0pVV1A5UC8rUWVVYlovRWtYdFJIT1hWYVJz?=
+ =?utf-8?B?SEIycWU2SEZXTFA3ZllldkxtQ3dOYzFjMXdGL2xkZVVRR3AyK09lOFFybTBK?=
+ =?utf-8?B?Z0JoMWUyQWhQV2pmT2xObWg0cWZIS3lnVGFHSlRJNUlkTWd4U0x6YXB6dE5i?=
+ =?utf-8?B?cEtlV2FmYWpTMWNLazhkOGRzWXQ1MXArU2tLUnZBVzVuNEhwOHRNRVRzMmdi?=
+ =?utf-8?B?a0taSi9NZ0Y2WnlLTXZRN3ZrbS84ZHorRE5ENDNDaXh5a3M3SkxoUFI2ZGY0?=
+ =?utf-8?Q?cgw5OLHW/LXCSCfmvCq9ORwt7?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c832478-c866-4278-a196-08dc4a401037
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39f2d72b-d871-48f9-3431-08dc4a403799
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 07:16:59.3225 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 07:18:05.3589 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Y2H1PRRl28258zK/kQ+q9bDV0pQxBBehamq/v7G1qmgetlddFMBDpPRBdah0TQwZ
+X-MS-Exchange-CrossTenant-UserPrincipalName: Qsj7+4ihYF0W93zsSuQjveb2zMmu7VgoLGJAySNNXbhIjbVyb/OqNsTu3aFbj2ob
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9430
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com, u-boot-amlogic@groups.io
-Subject: Re: [Uboot-stm32] [PATCH v2 16/24] xlnx: drop dt-binding headers
+Subject: Re: [Uboot-stm32] [PATCH v2 24/24] dts: support building all dtb
+ files for a specific vendor
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -199,634 +200,51 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 3/21/24 22:03, Caleb Connolly wrote:
-> Drop in favour of dts/upstream
+On 3/21/24 22:04, Caleb Connolly wrote:
+> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+> all the devicetree files for a given vendor to be compiled. This is
+> useful for Qualcomm in particular as most boards are supported by a
+> single U-Boot build just provided with a different DT.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   include/dt-bindings/clock/xlnx-versal-clk.h    | 123 -----------------------
->   include/dt-bindings/clock/xlnx-zynqmp-clk.h    | 126 ------------------------
->   include/dt-bindings/dma/xlnx-zynqmp-dpdma.h    |  16 ---
->   include/dt-bindings/pinctrl/pinctrl-zynqmp.h   |  19 ----
->   include/dt-bindings/power/xlnx-zynqmp-power.h  |  50 ----------
->   include/dt-bindings/reset/xlnx-versal-resets.h | 105 --------------------
->   include/dt-bindings/reset/xlnx-zynqmp-resets.h | 130 -------------------------
->   7 files changed, 569 deletions(-)
+>   dts/Kconfig          | 24 ++++++++++++++++++++++++
+>   scripts/Makefile.dts | 13 +++++++++++++
+>   2 files changed, 37 insertions(+)
 > 
-> diff --git a/include/dt-bindings/clock/xlnx-versal-clk.h b/include/dt-bindings/clock/xlnx-versal-clk.h
-> deleted file mode 100644
-> index 264d634d226e..000000000000
-> --- a/include/dt-bindings/clock/xlnx-versal-clk.h
-> +++ /dev/null
-> @@ -1,123 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - *  Copyright (C) 2019 Xilinx Inc.
-> - *
-> - */
-> -
-> -#ifndef _DT_BINDINGS_CLK_VERSAL_H
-> -#define _DT_BINDINGS_CLK_VERSAL_H
-> -
-> -#define PMC_PLL					1
-> -#define APU_PLL					2
-> -#define RPU_PLL					3
-> -#define CPM_PLL					4
-> -#define NOC_PLL					5
-> -#define PLL_MAX					6
-> -#define PMC_PRESRC				7
-> -#define PMC_POSTCLK				8
-> -#define PMC_PLL_OUT				9
-> -#define PPLL					10
-> -#define NOC_PRESRC				11
-> -#define NOC_POSTCLK				12
-> -#define NOC_PLL_OUT				13
-> -#define NPLL					14
-> -#define APU_PRESRC				15
-> -#define APU_POSTCLK				16
-> -#define APU_PLL_OUT				17
-> -#define APLL					18
-> -#define RPU_PRESRC				19
-> -#define RPU_POSTCLK				20
-> -#define RPU_PLL_OUT				21
-> -#define RPLL					22
-> -#define CPM_PRESRC				23
-> -#define CPM_POSTCLK				24
-> -#define CPM_PLL_OUT				25
-> -#define CPLL					26
-> -#define PPLL_TO_XPD				27
-> -#define NPLL_TO_XPD				28
-> -#define APLL_TO_XPD				29
-> -#define RPLL_TO_XPD				30
-> -#define EFUSE_REF				31
-> -#define SYSMON_REF				32
-> -#define IRO_SUSPEND_REF				33
-> -#define USB_SUSPEND				34
-> -#define SWITCH_TIMEOUT				35
-> -#define RCLK_PMC				36
-> -#define RCLK_LPD				37
-> -#define WDT					38
-> -#define TTC0					39
-> -#define TTC1					40
-> -#define TTC2					41
-> -#define TTC3					42
-> -#define GEM_TSU					43
-> -#define GEM_TSU_LB				44
-> -#define MUXED_IRO_DIV2				45
-> -#define MUXED_IRO_DIV4				46
-> -#define PSM_REF					47
-> -#define GEM0_RX					48
-> -#define GEM0_TX					49
-> -#define GEM1_RX					50
-> -#define GEM1_TX					51
-> -#define CPM_CORE_REF				52
-> -#define CPM_LSBUS_REF				53
-> -#define CPM_DBG_REF				54
-> -#define CPM_AUX0_REF				55
-> -#define CPM_AUX1_REF				56
-> -#define QSPI_REF				57
-> -#define OSPI_REF				58
-> -#define SDIO0_REF				59
-> -#define SDIO1_REF				60
-> -#define PMC_LSBUS_REF				61
-> -#define I2C_REF					62
-> -#define TEST_PATTERN_REF			63
-> -#define DFT_OSC_REF				64
-> -#define PMC_PL0_REF				65
-> -#define PMC_PL1_REF				66
-> -#define PMC_PL2_REF				67
-> -#define PMC_PL3_REF				68
-> -#define CFU_REF					69
-> -#define SPARE_REF				70
-> -#define NPI_REF					71
-> -#define HSM0_REF				72
-> -#define HSM1_REF				73
-> -#define SD_DLL_REF				74
-> -#define FPD_TOP_SWITCH				75
-> -#define FPD_LSBUS				76
-> -#define ACPU					77
-> -#define DBG_TRACE				78
-> -#define DBG_FPD					79
-> -#define LPD_TOP_SWITCH				80
-> -#define ADMA					81
-> -#define LPD_LSBUS				82
-> -#define CPU_R5					83
-> -#define CPU_R5_CORE				84
-> -#define CPU_R5_OCM				85
-> -#define CPU_R5_OCM2				86
-> -#define IOU_SWITCH				87
-> -#define GEM0_REF				88
-> -#define GEM1_REF				89
-> -#define GEM_TSU_REF				90
-> -#define USB0_BUS_REF				91
-> -#define UART0_REF				92
-> -#define UART1_REF				93
-> -#define SPI0_REF				94
-> -#define SPI1_REF				95
-> -#define CAN0_REF				96
-> -#define CAN1_REF				97
-> -#define I2C0_REF				98
-> -#define I2C1_REF				99
-> -#define DBG_LPD					100
-> -#define TIMESTAMP_REF				101
-> -#define DBG_TSTMP				102
-> -#define CPM_TOPSW_REF				103
-> -#define USB3_DUAL_REF				104
-> -#define OUTCLK_MAX				105
-> -#define REF_CLK					106
-> -#define PL_ALT_REF_CLK				107
-> -#define MUXED_IRO				108
-> -#define PL_EXT					109
-> -#define PL_LB					110
-> -#define MIO_50_OR_51				111
-> -#define MIO_24_OR_25				112
-> -
-> -#endif
-> diff --git a/include/dt-bindings/clock/xlnx-zynqmp-clk.h b/include/dt-bindings/clock/xlnx-zynqmp-clk.h
-> deleted file mode 100644
-> index cdc4c0b9a374..000000000000
-> --- a/include/dt-bindings/clock/xlnx-zynqmp-clk.h
-> +++ /dev/null
-> @@ -1,126 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - * Xilinx Zynq MPSoC Firmware layer
-> - *
-> - *  Copyright (C) 2014-2018 Xilinx, Inc.
-> - *
-> - */
-> -
-> -#ifndef _DT_BINDINGS_CLK_ZYNQMP_H
-> -#define _DT_BINDINGS_CLK_ZYNQMP_H
-> -
-> -#define IOPLL			0
-> -#define RPLL			1
-> -#define APLL			2
-> -#define DPLL			3
-> -#define VPLL			4
-> -#define IOPLL_TO_FPD		5
-> -#define RPLL_TO_FPD		6
-> -#define APLL_TO_LPD		7
-> -#define DPLL_TO_LPD		8
-> -#define VPLL_TO_LPD		9
-> -#define ACPU			10
-> -#define ACPU_HALF		11
-> -#define DBF_FPD			12
-> -#define DBF_LPD			13
-> -#define DBG_TRACE		14
-> -#define DBG_TSTMP		15
-> -#define DP_VIDEO_REF		16
-> -#define DP_AUDIO_REF		17
-> -#define DP_STC_REF		18
-> -#define GDMA_REF		19
-> -#define DPDMA_REF		20
-> -#define DDR_REF			21
-> -#define SATA_REF		22
-> -#define PCIE_REF		23
-> -#define GPU_REF			24
-> -#define GPU_PP0_REF		25
-> -#define GPU_PP1_REF		26
-> -#define TOPSW_MAIN		27
-> -#define TOPSW_LSBUS		28
-> -#define GTGREF0_REF		29
-> -#define LPD_SWITCH		30
-> -#define LPD_LSBUS		31
-> -#define USB0_BUS_REF		32
-> -#define USB1_BUS_REF		33
-> -#define USB3_DUAL_REF		34
-> -#define USB0			35
-> -#define USB1			36
-> -#define CPU_R5			37
-> -#define CPU_R5_CORE		38
-> -#define CSU_SPB			39
-> -#define CSU_PLL			40
-> -#define PCAP			41
-> -#define IOU_SWITCH		42
-> -#define GEM_TSU_REF		43
-> -#define GEM_TSU			44
-> -#define GEM0_TX			45
-> -#define GEM1_TX			46
-> -#define GEM2_TX			47
-> -#define GEM3_TX			48
-> -#define GEM0_RX			49
-> -#define GEM1_RX			50
-> -#define GEM2_RX			51
-> -#define GEM3_RX			52
-> -#define QSPI_REF		53
-> -#define SDIO0_REF		54
-> -#define SDIO1_REF		55
-> -#define UART0_REF		56
-> -#define UART1_REF		57
-> -#define SPI0_REF		58
-> -#define SPI1_REF		59
-> -#define NAND_REF		60
-> -#define I2C0_REF		61
-> -#define I2C1_REF		62
-> -#define CAN0_REF		63
-> -#define CAN1_REF		64
-> -#define CAN0			65
-> -#define CAN1			66
-> -#define DLL_REF			67
-> -#define ADMA_REF		68
-> -#define TIMESTAMP_REF		69
-> -#define AMS_REF			70
-> -#define PL0_REF			71
-> -#define PL1_REF			72
-> -#define PL2_REF			73
-> -#define PL3_REF			74
-> -#define WDT			75
-> -#define IOPLL_INT		76
-> -#define IOPLL_PRE_SRC		77
-> -#define IOPLL_HALF		78
-> -#define IOPLL_INT_MUX		79
-> -#define IOPLL_POST_SRC		80
-> -#define RPLL_INT		81
-> -#define RPLL_PRE_SRC		82
-> -#define RPLL_HALF		83
-> -#define RPLL_INT_MUX		84
-> -#define RPLL_POST_SRC		85
-> -#define APLL_INT		86
-> -#define APLL_PRE_SRC		87
-> -#define APLL_HALF		88
-> -#define APLL_INT_MUX		89
-> -#define APLL_POST_SRC		90
-> -#define DPLL_INT		91
-> -#define DPLL_PRE_SRC		92
-> -#define DPLL_HALF		93
-> -#define DPLL_INT_MUX		94
-> -#define DPLL_POST_SRC		95
-> -#define VPLL_INT		96
-> -#define VPLL_PRE_SRC		97
-> -#define VPLL_HALF		98
-> -#define VPLL_INT_MUX		99
-> -#define VPLL_POST_SRC		100
-> -#define CAN0_MIO		101
-> -#define CAN1_MIO		102
-> -#define ACPU_FULL		103
-> -#define GEM0_REF		104
-> -#define GEM1_REF		105
-> -#define GEM2_REF		106
-> -#define GEM3_REF		107
-> -#define GEM0_REF_UNG		108
-> -#define GEM1_REF_UNG		109
-> -#define GEM2_REF_UNG		110
-> -#define GEM3_REF_UNG		111
-> -#define LPD_WDT			112
-> -
-> -#endif
-> diff --git a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h b/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
-> deleted file mode 100644
-> index 3719cda5679d..000000000000
-> --- a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-> -/*
-> - * Copyright 2019 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> - */
-> -
-> -#ifndef __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
-> -#define __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
-> -
-> -#define ZYNQMP_DPDMA_VIDEO0		0
-> -#define ZYNQMP_DPDMA_VIDEO1		1
-> -#define ZYNQMP_DPDMA_VIDEO2		2
-> -#define ZYNQMP_DPDMA_GRAPHICS		3
-> -#define ZYNQMP_DPDMA_AUDIO0		4
-> -#define ZYNQMP_DPDMA_AUDIO1		5
-> -
-> -#endif /* __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__ */
-> diff --git a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h b/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
-> deleted file mode 100644
-> index cdb215734bdf..000000000000
-> --- a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - * MIO pin configuration defines for Xilinx ZynqMP
-> - *
-> - * Copyright (C) 2020 Xilinx, Inc.
-> - */
-> -
-> -#ifndef _DT_BINDINGS_PINCTRL_ZYNQMP_H
-> -#define _DT_BINDINGS_PINCTRL_ZYNQMP_H
-> -
-> -/* Bit value for different voltage levels */
-> -#define IO_STANDARD_LVCMOS33	0
-> -#define IO_STANDARD_LVCMOS18	1
-> -
-> -/* Bit values for Slew Rates */
-> -#define SLEW_RATE_FAST		0
-> -#define SLEW_RATE_SLOW		1
-> -
-> -#endif /* _DT_BINDINGS_PINCTRL_ZYNQMP_H */
-> diff --git a/include/dt-bindings/power/xlnx-zynqmp-power.h b/include/dt-bindings/power/xlnx-zynqmp-power.h
-> deleted file mode 100644
-> index e7eb0960480a..000000000000
-> --- a/include/dt-bindings/power/xlnx-zynqmp-power.h
-> +++ /dev/null
-> @@ -1,50 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - *  Copyright (C) 2018 Xilinx, Inc.
-> - */
-> -
-> -#ifndef _DT_BINDINGS_ZYNQMP_POWER_H
-> -#define _DT_BINDINGS_ZYNQMP_POWER_H
-> -
-> -#define		PD_RPU_0	6
-> -#define		PD_RPU_1	7
-> -#define		PD_OCM_BANK_0	11
-> -#define		PD_OCM_BANK_1	12
-> -#define		PD_OCM_BANK_2	13
-> -#define		PD_OCM_BANK_3	14
-> -#define		PD_TCM_BANK_0	15
-> -#define		PD_TCM_BANK_1	16
-> -#define		PD_TCM_BANK_2	17
-> -#define		PD_TCM_BANK_3	18
-> -#define		PD_USB_0	22
-> -#define		PD_USB_1	23
-> -#define		PD_TTC_0	24
-> -#define		PD_TTC_1	25
-> -#define		PD_TTC_2	26
-> -#define		PD_TTC_3	27
-> -#define		PD_SATA		28
-> -#define		PD_ETH_0	29
-> -#define		PD_ETH_1	30
-> -#define		PD_ETH_2	31
-> -#define		PD_ETH_3	32
-> -#define		PD_UART_0	33
-> -#define		PD_UART_1	34
-> -#define		PD_SPI_0	35
-> -#define		PD_SPI_1	36
-> -#define		PD_I2C_0	37
-> -#define		PD_I2C_1	38
-> -#define		PD_SD_0		39
-> -#define		PD_SD_1		40
-> -#define		PD_DP		41
-> -#define		PD_GDMA		42
-> -#define		PD_ADMA		43
-> -#define		PD_NAND		44
-> -#define		PD_QSPI		45
-> -#define		PD_GPIO		46
-> -#define		PD_CAN_0	47
-> -#define		PD_CAN_1	48
-> -#define		PD_GPU		58
-> -#define		PD_PCIE		59
-> -#define		PD_PL		69
-> -
-> -#endif
-> diff --git a/include/dt-bindings/reset/xlnx-versal-resets.h b/include/dt-bindings/reset/xlnx-versal-resets.h
-> deleted file mode 100644
-> index 895424e9b0e5..000000000000
-> --- a/include/dt-bindings/reset/xlnx-versal-resets.h
-> +++ /dev/null
-> @@ -1,105 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - *  Copyright (C) 2020 Xilinx, Inc.
-> - */
-> -
-> -#ifndef _DT_BINDINGS_VERSAL_RESETS_H
-> -#define _DT_BINDINGS_VERSAL_RESETS_H
-> -
-> -#define VERSAL_RST_PMC_POR			(0xc30c001U)
-> -#define VERSAL_RST_PMC				(0xc410002U)
-> -#define VERSAL_RST_PS_POR			(0xc30c003U)
-> -#define VERSAL_RST_PL_POR			(0xc30c004U)
-> -#define VERSAL_RST_NOC_POR			(0xc30c005U)
-> -#define VERSAL_RST_FPD_POR			(0xc30c006U)
-> -#define VERSAL_RST_ACPU_0_POR			(0xc30c007U)
-> -#define VERSAL_RST_ACPU_1_POR			(0xc30c008U)
-> -#define VERSAL_RST_OCM2_POR			(0xc30c009U)
-> -#define VERSAL_RST_PS_SRST			(0xc41000aU)
-> -#define VERSAL_RST_PL_SRST			(0xc41000bU)
-> -#define VERSAL_RST_NOC				(0xc41000cU)
-> -#define VERSAL_RST_NPI				(0xc41000dU)
-> -#define VERSAL_RST_SYS_RST_1			(0xc41000eU)
-> -#define VERSAL_RST_SYS_RST_2			(0xc41000fU)
-> -#define VERSAL_RST_SYS_RST_3			(0xc410010U)
-> -#define VERSAL_RST_FPD				(0xc410011U)
-> -#define VERSAL_RST_PL0				(0xc410012U)
-> -#define VERSAL_RST_PL1				(0xc410013U)
-> -#define VERSAL_RST_PL2				(0xc410014U)
-> -#define VERSAL_RST_PL3				(0xc410015U)
-> -#define VERSAL_RST_APU				(0xc410016U)
-> -#define VERSAL_RST_ACPU_0			(0xc410017U)
-> -#define VERSAL_RST_ACPU_1			(0xc410018U)
-> -#define VERSAL_RST_ACPU_L2			(0xc410019U)
-> -#define VERSAL_RST_ACPU_GIC			(0xc41001aU)
-> -#define VERSAL_RST_RPU_ISLAND			(0xc41001bU)
-> -#define VERSAL_RST_RPU_AMBA			(0xc41001cU)
-> -#define VERSAL_RST_R5_0				(0xc41001dU)
-> -#define VERSAL_RST_R5_1				(0xc41001eU)
-> -#define VERSAL_RST_SYSMON_PMC_SEQ_RST		(0xc41001fU)
-> -#define VERSAL_RST_SYSMON_PMC_CFG_RST		(0xc410020U)
-> -#define VERSAL_RST_SYSMON_FPD_CFG_RST		(0xc410021U)
-> -#define VERSAL_RST_SYSMON_FPD_SEQ_RST		(0xc410022U)
-> -#define VERSAL_RST_SYSMON_LPD			(0xc410023U)
-> -#define VERSAL_RST_PDMA_RST1			(0xc410024U)
-> -#define VERSAL_RST_PDMA_RST0			(0xc410025U)
-> -#define VERSAL_RST_ADMA				(0xc410026U)
-> -#define VERSAL_RST_TIMESTAMP			(0xc410027U)
-> -#define VERSAL_RST_OCM				(0xc410028U)
-> -#define VERSAL_RST_OCM2_RST			(0xc410029U)
-> -#define VERSAL_RST_IPI				(0xc41002aU)
-> -#define VERSAL_RST_SBI				(0xc41002bU)
-> -#define VERSAL_RST_LPD				(0xc41002cU)
-> -#define VERSAL_RST_QSPI				(0xc10402dU)
-> -#define VERSAL_RST_OSPI				(0xc10402eU)
-> -#define VERSAL_RST_SDIO_0			(0xc10402fU)
-> -#define VERSAL_RST_SDIO_1			(0xc104030U)
-> -#define VERSAL_RST_I2C_PMC			(0xc104031U)
-> -#define VERSAL_RST_GPIO_PMC			(0xc104032U)
-> -#define VERSAL_RST_GEM_0			(0xc104033U)
-> -#define VERSAL_RST_GEM_1			(0xc104034U)
-> -#define VERSAL_RST_SPARE			(0xc104035U)
-> -#define VERSAL_RST_USB_0			(0xc104036U)
-> -#define VERSAL_RST_UART_0			(0xc104037U)
-> -#define VERSAL_RST_UART_1			(0xc104038U)
-> -#define VERSAL_RST_SPI_0			(0xc104039U)
-> -#define VERSAL_RST_SPI_1			(0xc10403aU)
-> -#define VERSAL_RST_CAN_FD_0			(0xc10403bU)
-> -#define VERSAL_RST_CAN_FD_1			(0xc10403cU)
-> -#define VERSAL_RST_I2C_0			(0xc10403dU)
-> -#define VERSAL_RST_I2C_1			(0xc10403eU)
-> -#define VERSAL_RST_GPIO_LPD			(0xc10403fU)
-> -#define VERSAL_RST_TTC_0			(0xc104040U)
-> -#define VERSAL_RST_TTC_1			(0xc104041U)
-> -#define VERSAL_RST_TTC_2			(0xc104042U)
-> -#define VERSAL_RST_TTC_3			(0xc104043U)
-> -#define VERSAL_RST_SWDT_FPD			(0xc104044U)
-> -#define VERSAL_RST_SWDT_LPD			(0xc104045U)
-> -#define VERSAL_RST_USB				(0xc104046U)
-> -#define VERSAL_RST_DPC				(0xc208047U)
-> -#define VERSAL_RST_PMCDBG			(0xc208048U)
-> -#define VERSAL_RST_DBG_TRACE			(0xc208049U)
-> -#define VERSAL_RST_DBG_FPD			(0xc20804aU)
-> -#define VERSAL_RST_DBG_TSTMP			(0xc20804bU)
-> -#define VERSAL_RST_RPU0_DBG			(0xc20804cU)
-> -#define VERSAL_RST_RPU1_DBG			(0xc20804dU)
-> -#define VERSAL_RST_HSDP				(0xc20804eU)
-> -#define VERSAL_RST_DBG_LPD			(0xc20804fU)
-> -#define VERSAL_RST_CPM_POR			(0xc30c050U)
-> -#define VERSAL_RST_CPM				(0xc410051U)
-> -#define VERSAL_RST_CPMDBG			(0xc208052U)
-> -#define VERSAL_RST_PCIE_CFG			(0xc410053U)
-> -#define VERSAL_RST_PCIE_CORE0			(0xc410054U)
-> -#define VERSAL_RST_PCIE_CORE1			(0xc410055U)
-> -#define VERSAL_RST_PCIE_DMA			(0xc410056U)
-> -#define VERSAL_RST_CMN				(0xc410057U)
-> -#define VERSAL_RST_L2_0				(0xc410058U)
-> -#define VERSAL_RST_L2_1				(0xc410059U)
-> -#define VERSAL_RST_ADDR_REMAP			(0xc41005aU)
-> -#define VERSAL_RST_CPI0				(0xc41005bU)
-> -#define VERSAL_RST_CPI1				(0xc41005cU)
-> -#define VERSAL_RST_XRAM				(0xc30c05dU)
-> -#define VERSAL_RST_AIE_ARRAY			(0xc10405eU)
-> -#define VERSAL_RST_AIE_SHIM			(0xc10405fU)
-> -
-> -#endif
-> diff --git a/include/dt-bindings/reset/xlnx-zynqmp-resets.h b/include/dt-bindings/reset/xlnx-zynqmp-resets.h
-> deleted file mode 100644
-> index d44525b9f8db..000000000000
-> --- a/include/dt-bindings/reset/xlnx-zynqmp-resets.h
-> +++ /dev/null
-> @@ -1,130 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - *  Copyright (C) 2018 Xilinx, Inc.
-> - */
-> -
-> -#ifndef _DT_BINDINGS_ZYNQMP_RESETS_H
-> -#define _DT_BINDINGS_ZYNQMP_RESETS_H
-> -
-> -#define		ZYNQMP_RESET_PCIE_CFG		0
-> -#define		ZYNQMP_RESET_PCIE_BRIDGE	1
-> -#define		ZYNQMP_RESET_PCIE_CTRL		2
-> -#define		ZYNQMP_RESET_DP			3
-> -#define		ZYNQMP_RESET_SWDT_CRF		4
-> -#define		ZYNQMP_RESET_AFI_FM5		5
-> -#define		ZYNQMP_RESET_AFI_FM4		6
-> -#define		ZYNQMP_RESET_AFI_FM3		7
-> -#define		ZYNQMP_RESET_AFI_FM2		8
-> -#define		ZYNQMP_RESET_AFI_FM1		9
-> -#define		ZYNQMP_RESET_AFI_FM0		10
-> -#define		ZYNQMP_RESET_GDMA		11
-> -#define		ZYNQMP_RESET_GPU_PP1		12
-> -#define		ZYNQMP_RESET_GPU_PP0		13
-> -#define		ZYNQMP_RESET_GPU		14
-> -#define		ZYNQMP_RESET_GT			15
-> -#define		ZYNQMP_RESET_SATA		16
-> -#define		ZYNQMP_RESET_ACPU3_PWRON	17
-> -#define		ZYNQMP_RESET_ACPU2_PWRON	18
-> -#define		ZYNQMP_RESET_ACPU1_PWRON	19
-> -#define		ZYNQMP_RESET_ACPU0_PWRON	20
-> -#define		ZYNQMP_RESET_APU_L2		21
-> -#define		ZYNQMP_RESET_ACPU3		22
-> -#define		ZYNQMP_RESET_ACPU2		23
-> -#define		ZYNQMP_RESET_ACPU1		24
-> -#define		ZYNQMP_RESET_ACPU0		25
-> -#define		ZYNQMP_RESET_DDR		26
-> -#define		ZYNQMP_RESET_APM_FPD		27
-> -#define		ZYNQMP_RESET_SOFT		28
-> -#define		ZYNQMP_RESET_GEM0		29
-> -#define		ZYNQMP_RESET_GEM1		30
-> -#define		ZYNQMP_RESET_GEM2		31
-> -#define		ZYNQMP_RESET_GEM3		32
-> -#define		ZYNQMP_RESET_QSPI		33
-> -#define		ZYNQMP_RESET_UART0		34
-> -#define		ZYNQMP_RESET_UART1		35
-> -#define		ZYNQMP_RESET_SPI0		36
-> -#define		ZYNQMP_RESET_SPI1		37
-> -#define		ZYNQMP_RESET_SDIO0		38
-> -#define		ZYNQMP_RESET_SDIO1		39
-> -#define		ZYNQMP_RESET_CAN0		40
-> -#define		ZYNQMP_RESET_CAN1		41
-> -#define		ZYNQMP_RESET_I2C0		42
-> -#define		ZYNQMP_RESET_I2C1		43
-> -#define		ZYNQMP_RESET_TTC0		44
-> -#define		ZYNQMP_RESET_TTC1		45
-> -#define		ZYNQMP_RESET_TTC2		46
-> -#define		ZYNQMP_RESET_TTC3		47
-> -#define		ZYNQMP_RESET_SWDT_CRL		48
-> -#define		ZYNQMP_RESET_NAND		49
-> -#define		ZYNQMP_RESET_ADMA		50
-> -#define		ZYNQMP_RESET_GPIO		51
-> -#define		ZYNQMP_RESET_IOU_CC		52
-> -#define		ZYNQMP_RESET_TIMESTAMP		53
-> -#define		ZYNQMP_RESET_RPU_R50		54
-> -#define		ZYNQMP_RESET_RPU_R51		55
-> -#define		ZYNQMP_RESET_RPU_AMBA		56
-> -#define		ZYNQMP_RESET_OCM		57
-> -#define		ZYNQMP_RESET_RPU_PGE		58
-> -#define		ZYNQMP_RESET_USB0_CORERESET	59
-> -#define		ZYNQMP_RESET_USB1_CORERESET	60
-> -#define		ZYNQMP_RESET_USB0_HIBERRESET	61
-> -#define		ZYNQMP_RESET_USB1_HIBERRESET	62
-> -#define		ZYNQMP_RESET_USB0_APB		63
-> -#define		ZYNQMP_RESET_USB1_APB		64
-> -#define		ZYNQMP_RESET_IPI		65
-> -#define		ZYNQMP_RESET_APM_LPD		66
-> -#define		ZYNQMP_RESET_RTC		67
-> -#define		ZYNQMP_RESET_SYSMON		68
-> -#define		ZYNQMP_RESET_AFI_FM6		69
-> -#define		ZYNQMP_RESET_LPD_SWDT		70
-> -#define		ZYNQMP_RESET_FPD		71
-> -#define		ZYNQMP_RESET_RPU_DBG1		72
-> -#define		ZYNQMP_RESET_RPU_DBG0		73
-> -#define		ZYNQMP_RESET_DBG_LPD		74
-> -#define		ZYNQMP_RESET_DBG_FPD		75
-> -#define		ZYNQMP_RESET_APLL		76
-> -#define		ZYNQMP_RESET_DPLL		77
-> -#define		ZYNQMP_RESET_VPLL		78
-> -#define		ZYNQMP_RESET_IOPLL		79
-> -#define		ZYNQMP_RESET_RPLL		80
-> -#define		ZYNQMP_RESET_GPO3_PL_0		81
-> -#define		ZYNQMP_RESET_GPO3_PL_1		82
-> -#define		ZYNQMP_RESET_GPO3_PL_2		83
-> -#define		ZYNQMP_RESET_GPO3_PL_3		84
-> -#define		ZYNQMP_RESET_GPO3_PL_4		85
-> -#define		ZYNQMP_RESET_GPO3_PL_5		86
-> -#define		ZYNQMP_RESET_GPO3_PL_6		87
-> -#define		ZYNQMP_RESET_GPO3_PL_7		88
-> -#define		ZYNQMP_RESET_GPO3_PL_8		89
-> -#define		ZYNQMP_RESET_GPO3_PL_9		90
-> -#define		ZYNQMP_RESET_GPO3_PL_10		91
-> -#define		ZYNQMP_RESET_GPO3_PL_11		92
-> -#define		ZYNQMP_RESET_GPO3_PL_12		93
-> -#define		ZYNQMP_RESET_GPO3_PL_13		94
-> -#define		ZYNQMP_RESET_GPO3_PL_14		95
-> -#define		ZYNQMP_RESET_GPO3_PL_15		96
-> -#define		ZYNQMP_RESET_GPO3_PL_16		97
-> -#define		ZYNQMP_RESET_GPO3_PL_17		98
-> -#define		ZYNQMP_RESET_GPO3_PL_18		99
-> -#define		ZYNQMP_RESET_GPO3_PL_19		100
-> -#define		ZYNQMP_RESET_GPO3_PL_20		101
-> -#define		ZYNQMP_RESET_GPO3_PL_21		102
-> -#define		ZYNQMP_RESET_GPO3_PL_22		103
-> -#define		ZYNQMP_RESET_GPO3_PL_23		104
-> -#define		ZYNQMP_RESET_GPO3_PL_24		105
-> -#define		ZYNQMP_RESET_GPO3_PL_25		106
-> -#define		ZYNQMP_RESET_GPO3_PL_26		107
-> -#define		ZYNQMP_RESET_GPO3_PL_27		108
-> -#define		ZYNQMP_RESET_GPO3_PL_28		109
-> -#define		ZYNQMP_RESET_GPO3_PL_29		110
-> -#define		ZYNQMP_RESET_GPO3_PL_30		111
-> -#define		ZYNQMP_RESET_GPO3_PL_31		112
-> -#define		ZYNQMP_RESET_RPU_LS		113
-> -#define		ZYNQMP_RESET_PS_ONLY		114
-> -#define		ZYNQMP_RESET_PL			115
-> -#define		ZYNQMP_RESET_PS_PL0		116
-> -#define		ZYNQMP_RESET_PS_PL1		117
-> -#define		ZYNQMP_RESET_PS_PL2		118
-> -#define		ZYNQMP_RESET_PS_PL3		119
-> -
-> -#endif
-> 
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> index b9b6367154ef..6883a000a052 100644
+> --- a/dts/Kconfig
+> +++ b/dts/Kconfig
+> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+>   	  However, newer boards whose devicetree source files haven't landed in
+>   	  the dts/upstream subtree, they can override this option to have the
+>   	  DT build from existing U-Boot tree location instead.
+>   
+> +config OF_UPSTREAM_BUILD_VENDOR
+> +	bool "Build all devicetree files for a particular vendor"
+> +	depends on OF_UPSTREAM
+> +	help
+> +	  Enable building all devicetree files for a particular vendor. This
+> +	  is useful for generic U-Boot configurations where many boards can
+> +	  be supported with a single binary.
+> +
+> +	  This is only available for platforms using upstream devicetree.
+> +
+> +config OF_UPSTREAM_VENDOR
+> +	string "Vendor to build all upstream devicetree files for"
+> +	depends on OF_UPSTREAM_BUILD_VENDOR
+> +	default "qcom" if ARCH_SNAPDRAGON
+> +	default "rockchip" if ARCH_ROCKCHIP
+> +	default "amlogic" if ARCH_MESON
+> +	default "allwinner" if ARCH_SUNXI
+> +	default "mediatek" if ARCH_MEDIATEK
+> +	default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
+> +	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
 
-Acked-by: Michal Simek <michal.simek@amd.com>
+This is not enough it should be
+
+ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET
 
 Thanks,
 Michal

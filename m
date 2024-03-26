@@ -2,37 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C842488C199
-	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Mar 2024 13:08:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C67A088C19A
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Mar 2024 13:08:10 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82270C71288;
-	Tue, 26 Mar 2024 12:08:08 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8CF92C6DD93;
+	Tue, 26 Mar 2024 12:08:10 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 91B8BC6DD96
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EF7E0CFAC50
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 26 Mar 2024 12:08:07 +0000 (UTC)
+ Tue, 26 Mar 2024 12:08:09 +0000 (UTC)
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DADE487ED1;
- Tue, 26 Mar 2024 13:08:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5281988019;
+ Tue, 26 Mar 2024 13:08:07 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1711454887;
- bh=6tcEhc8vB3oxyLb2yVFdluRWCZ5tZpbdBd6deHiPnUU=;
+ bh=GOiMcfrTOGy49266VE/APBaSYaCTkHtaS7lh0vKFXaA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=CVduHTzbphbzYvVa2Ex0X+pXSgkEGev7OKLEVIouYrRSx4xw6CLS0RGUQqr5mCx/w
- Nax3lP71SYtQ9bZjroHctYNfTyZz0Y/UZhf0elYj6GdpS4iIV6gJAEW1zqGpab8A0A
- BR4k2Q0rNApamXn1n2UsfCF3ShHCWYfy54wvF2CxjFPRDndzGthwmAENF//aXRpnxf
- 8ofgW8HnOcaMb2p9IZxpqDsZlpr+L05vjGBse/mQPMCEeuILvHWSeUH+VYuTXE8uIa
- 2x+kSUquiWoPsGq80tWlQS55Pnt2humOvb0XiYNJeHrF25EqluVXMXVmoPGezKTYr8
- Q5qLvUjwQr24g==
+ b=vF5thNvUvP1fK1HXq6xCTcrCqzX4g6qrgO+ly2wiZyQrIWiRBn2R+usbhKt+S48qP
+ IcE00WT5Xg+pELbTkbpPfahiamPEGDIIWLEtFnOLq91+l0771pWVdkKuVuplEJEQJB
+ xcFTyVnMkOzY2YXyx9nqU4mjVfLObCZHZllaTfMgAZfZCKISYrIwFqvqIS8kRdXPWQ
+ YBpMvndu7PKxvYNgFWZVPRrnuQx9yxyI/tHxQlFc3RrUMtcdFFp1n3crQiTZE5d80n
+ 1p5XOJunlJrwZVjgnjhOF36uEy5ihS7SqteZklh7VHzOooY2lmDptewl348ulyHS85
+ xk/t8NU9SYogw==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Date: Tue, 26 Mar 2024 13:07:24 +0100
-Message-ID: <20240326120745.27581-4-marex@denx.de>
+Date: Tue, 26 Mar 2024 13:07:25 +0100
+Message-ID: <20240326120745.27581-5-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240326120745.27581-1-marex@denx.de>
 References: <20240326120745.27581-1-marex@denx.de>
@@ -44,8 +44,7 @@ Cc: Marek Vasut <marex@denx.de>, u-boot@dh-electronics.com,
  Joe Hershberger <joe.hershberger@ni.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Ramon Fried <rfried.dev@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2 03/11] net: dwc_eth_qos: Fold
-	board_interface_eth_init into STM32 glue code
+Subject: [Uboot-stm32] [PATCH v2 04/11] net: dwc_eth_qos: Scrub ifdeffery
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -62,11 +61,10 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Move board_interface_eth_init() into eqos_probe_syscfg_stm32() in STM32
-driver glue code. The eqos_probe_syscfg_stm32() parses STM32 specific DT
-properties of this MAC and configures SYSCFG registers accordingly, there
-is nothing board specific happening in this function, move it into generic
-driver code instead. Drop the now unused duplicates from board files.
+Replace ifdef CONFIG_CLK with if (CONFIG_IS_ENABLED(CLK)) to improve code
+build coverage. Some of the functions printed debug("%s: OK\n", __func__);
+on exit with and without CLK enabled, some did not, make it consistent and
+print nothing if CLK is disabled.
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 Signed-off-by: Marek Vasut <marex@denx.de>
@@ -81,353 +79,81 @@ Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
 V2: Add RB from Patrice
 ---
- board/dhelectronics/dh_stm32mp1/board.c | 82 -----------------------
- board/st/stm32mp1/stm32mp1.c            | 82 -----------------------
- drivers/net/dwc_eth_qos_stm32.c         | 86 ++++++++++++++++++++++++-
- 3 files changed, 84 insertions(+), 166 deletions(-)
+ drivers/net/dwc_eth_qos_stm32.c | 25 ++++++++++++-------------
+ 1 file changed, 12 insertions(+), 13 deletions(-)
 
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index d1f662d9701..f179c857116 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -48,12 +48,10 @@
- 
- /* SYSCFG registers */
- #define SYSCFG_BOOTR		0x00
--#define SYSCFG_PMCSETR		0x04
- #define SYSCFG_IOCTRLSETR	0x18
- #define SYSCFG_ICNR		0x1C
- #define SYSCFG_CMPCR		0x20
- #define SYSCFG_CMPENSETR	0x24
--#define SYSCFG_PMCCLRR		0x44
- 
- #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
- #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-@@ -69,16 +67,6 @@
- 
- #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
- 
--#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
--#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
--
--#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
--
--#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
--#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
--#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
--#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
--
- #define KS_CCR		0x08
- #define KS_CCR_EEPROM	BIT(9)
- #define KS_BE0		BIT(12)
-@@ -679,76 +667,6 @@ void board_quiesce_devices(void)
- #endif
- }
- 
--/* eth init function : weak called in eqos driver */
--int board_interface_eth_init(struct udevice *dev,
--			     phy_interface_t interface_type)
--{
--	u8 *syscfg;
--	u32 value;
--	bool eth_clk_sel_reg = false;
--	bool eth_ref_clk_sel_reg = false;
--
--	/* Gigabit Ethernet 125MHz clock selection. */
--	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
--
--	/* Ethernet 50Mhz RMII clock selection */
--	eth_ref_clk_sel_reg =
--		dev_read_bool(dev, "st,eth-ref-clk-sel");
--
--	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--
--	if (!syscfg)
--		return -ENODEV;
--
--	switch (interface_type) {
--	case PHY_INTERFACE_MODE_MII:
--		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
--			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
--		debug("%s: PHY_INTERFACE_MODE_MII\n", __func__);
--		break;
--	case PHY_INTERFACE_MODE_GMII:
--		if (eth_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
--				SYSCFG_PMCSETR_ETH_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
--		debug("%s: PHY_INTERFACE_MODE_GMII\n", __func__);
--		break;
--	case PHY_INTERFACE_MODE_RMII:
--		if (eth_ref_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
--				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
--		debug("%s: PHY_INTERFACE_MODE_RMII\n", __func__);
--		break;
--	case PHY_INTERFACE_MODE_RGMII:
--	case PHY_INTERFACE_MODE_RGMII_ID:
--	case PHY_INTERFACE_MODE_RGMII_RXID:
--	case PHY_INTERFACE_MODE_RGMII_TXID:
--		if (eth_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
--				SYSCFG_PMCSETR_ETH_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
--		debug("%s: PHY_INTERFACE_MODE_RGMII\n", __func__);
--		break;
--	default:
--		debug("%s: Do not manage %d interface\n",
--		      __func__, interface_type);
--		/* Do not manage others interfaces */
--		return -EINVAL;
--	}
--
--	/* clear and set ETH configuration bits */
--	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
--	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
--	       syscfg + SYSCFG_PMCCLRR);
--	writel(value, syscfg + SYSCFG_PMCSETR);
--
--	return 0;
--}
--
- #if defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index a17c314daeb..f284b0dfd28 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -52,12 +52,10 @@
- 
- /* SYSCFG registers */
- #define SYSCFG_BOOTR		0x00
--#define SYSCFG_PMCSETR		0x04
- #define SYSCFG_IOCTRLSETR	0x18
- #define SYSCFG_ICNR		0x1C
- #define SYSCFG_CMPCR		0x20
- #define SYSCFG_CMPENSETR	0x24
--#define SYSCFG_PMCCLRR		0x44
- 
- #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
- #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-@@ -73,16 +71,6 @@
- 
- #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
- 
--#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
--#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
--
--#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
--
--#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
--#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
--#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
--#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
--
- #define USB_LOW_THRESHOLD_UV		200000
- #define USB_WARNING_LOW_THRESHOLD_UV	660000
- #define USB_START_LOW_THRESHOLD_UV	1230000
-@@ -742,76 +730,6 @@ void board_quiesce_devices(void)
- 	setup_led(LEDST_OFF);
- }
- 
--/* eth init function : weak called in eqos driver */
--int board_interface_eth_init(struct udevice *dev,
--			     phy_interface_t interface_type)
--{
--	u8 *syscfg;
--	u32 value;
--	bool eth_clk_sel_reg = false;
--	bool eth_ref_clk_sel_reg = false;
--
--	/* Gigabit Ethernet 125MHz clock selection. */
--	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
--
--	/* Ethernet 50Mhz RMII clock selection */
--	eth_ref_clk_sel_reg =
--		dev_read_bool(dev, "st,eth-ref-clk-sel");
--
--	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
--
--	if (!syscfg)
--		return -ENODEV;
--
--	switch (interface_type) {
--	case PHY_INTERFACE_MODE_MII:
--		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
--			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
--		log_debug("PHY_INTERFACE_MODE_MII\n");
--		break;
--	case PHY_INTERFACE_MODE_GMII:
--		if (eth_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
--				SYSCFG_PMCSETR_ETH_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
--		log_debug("PHY_INTERFACE_MODE_GMII\n");
--		break;
--	case PHY_INTERFACE_MODE_RMII:
--		if (eth_ref_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
--				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
--		log_debug("PHY_INTERFACE_MODE_RMII\n");
--		break;
--	case PHY_INTERFACE_MODE_RGMII:
--	case PHY_INTERFACE_MODE_RGMII_ID:
--	case PHY_INTERFACE_MODE_RGMII_RXID:
--	case PHY_INTERFACE_MODE_RGMII_TXID:
--		if (eth_clk_sel_reg)
--			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
--				SYSCFG_PMCSETR_ETH_CLK_SEL;
--		else
--			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
--		log_debug("PHY_INTERFACE_MODE_RGMII\n");
--		break;
--	default:
--		log_debug("Do not manage %d interface\n",
--			  interface_type);
--		/* Do not manage others interfaces */
--		return -EINVAL;
--	}
--
--	/* clear and set ETH configuration bits */
--	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
--	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
--	       syscfg + SYSCFG_PMCCLRR);
--	writel(value, syscfg + SYSCFG_PMCSETR);
--
--	return 0;
--}
--
- enum env_location env_get_location(enum env_operation op, int prio)
- {
- 	u32 bootmode = get_bootmode();
 diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-index fd29a604987..7520a136ed0 100644
+index 7520a136ed0..d7ec0c9be36 100644
 --- a/drivers/net/dwc_eth_qos_stm32.c
 +++ b/drivers/net/dwc_eth_qos_stm32.c
-@@ -24,11 +24,26 @@
- #include <netdev.h>
- #include <phy.h>
- #include <reset.h>
-+#include <syscon.h>
- #include <wait_bit.h>
- #include <linux/delay.h>
+@@ -46,21 +46,22 @@
  
- #include "dwc_eth_qos.h"
- 
-+/* SYSCFG registers */
-+#define SYSCFG_PMCSETR		0x04
-+#define SYSCFG_PMCCLRR		0x44
-+
-+#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-+#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-+
-+#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-+
-+#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-+#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-+#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-+#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-+
  static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev)
  {
- #ifdef CONFIG_CLK
-@@ -108,11 +123,78 @@ static int eqos_stop_clks_stm32(struct udevice *dev)
- 	return 0;
+-#ifdef CONFIG_CLK
+-	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eqos_priv __maybe_unused *eqos = dev_get_priv(dev);
++
++	if (!CONFIG_IS_ENABLED(CLK))
++		return 0;
+ 
+ 	return clk_get_rate(&eqos->clk_master_bus);
+-#else
+-	return 0;
+-#endif
  }
  
-+static int eqos_probe_syscfg_stm32(struct udevice *dev,
-+				   phy_interface_t interface_type)
-+{
-+	bool eth_ref_clk_sel_reg = false;
-+	bool eth_clk_sel_reg = false;
-+	u8 *syscfg;
-+	u32 value;
-+
-+	/* Gigabit Ethernet 125MHz clock selection. */
-+	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-+
-+	/* Ethernet 50Mhz RMII clock selection */
-+	eth_ref_clk_sel_reg = dev_read_bool(dev, "st,eth-ref-clk-sel");
-+
-+	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-+	if (!syscfg)
-+		return -ENODEV;
-+
-+	switch (interface_type) {
-+	case PHY_INTERFACE_MODE_MII:
-+		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-+			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-+		log_debug("PHY_INTERFACE_MODE_MII\n");
-+		break;
-+	case PHY_INTERFACE_MODE_GMII:
-+		if (eth_clk_sel_reg)
-+			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-+				SYSCFG_PMCSETR_ETH_CLK_SEL;
-+		else
-+			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-+		log_debug("PHY_INTERFACE_MODE_GMII\n");
-+		break;
-+	case PHY_INTERFACE_MODE_RMII:
-+		if (eth_ref_clk_sel_reg)
-+			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-+				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-+		else
-+			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-+		log_debug("PHY_INTERFACE_MODE_RMII\n");
-+		break;
-+	case PHY_INTERFACE_MODE_RGMII:
-+	case PHY_INTERFACE_MODE_RGMII_ID:
-+	case PHY_INTERFACE_MODE_RGMII_RXID:
-+	case PHY_INTERFACE_MODE_RGMII_TXID:
-+		if (eth_clk_sel_reg)
-+			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-+				SYSCFG_PMCSETR_ETH_CLK_SEL;
-+		else
-+			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-+		log_debug("PHY_INTERFACE_MODE_RGMII\n");
-+		break;
-+	default:
-+		log_debug("Do not manage %d interface\n",
-+			  interface_type);
-+		/* Do not manage others interfaces */
-+		return -EINVAL;
-+	}
-+
-+	/* clear and set ETH configuration bits */
-+	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-+	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-+	       syscfg + SYSCFG_PMCCLRR);
-+	writel(value, syscfg + SYSCFG_PMCSETR);
-+
-+	return 0;
-+}
-+
- static int eqos_probe_resources_stm32(struct udevice *dev)
+ static int eqos_start_clks_stm32(struct udevice *dev)
  {
- 	struct eqos_priv *eqos = dev_get_priv(dev);
--	int ret;
- 	phy_interface_t interface;
-+	int ret;
+-#ifdef CONFIG_CLK
+-	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eqos_priv __maybe_unused *eqos = dev_get_priv(dev);
+ 	int ret;
+ 
++	if (!CONFIG_IS_ENABLED(CLK))
++		return 0;
++
+ 	debug("%s(dev=%p):\n", __func__, dev);
+ 
+ 	ret = clk_enable(&eqos->clk_master_bus);
+@@ -89,12 +90,10 @@ static int eqos_start_clks_stm32(struct udevice *dev)
+ 		}
+ 		eqos->clk_ck_enabled = true;
+ 	}
+-#endif
+ 
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
+ 
+-#ifdef CONFIG_CLK
+ err_disable_clk_tx:
+ 	clk_disable(&eqos->clk_tx);
+ err_disable_clk_rx:
+@@ -104,20 +103,20 @@ err_disable_clk_master_bus:
+ err:
+ 	debug("%s: FAILED: %d\n", __func__, ret);
+ 	return ret;
+-#endif
+ }
+ 
+ static int eqos_stop_clks_stm32(struct udevice *dev)
+ {
+-#ifdef CONFIG_CLK
+-	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eqos_priv __maybe_unused *eqos = dev_get_priv(dev);
++
++	if (!CONFIG_IS_ENABLED(CLK))
++		return 0;
  
  	debug("%s(dev=%p):\n", __func__, dev);
  
-@@ -123,7 +205,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
- 		return -EINVAL;
- 	}
+ 	clk_disable(&eqos->clk_tx);
+ 	clk_disable(&eqos->clk_rx);
+ 	clk_disable(&eqos->clk_master_bus);
+-#endif
  
--	ret = board_interface_eth_init(dev, interface);
-+	ret = eqos_probe_syscfg_stm32(dev, interface);
- 	if (ret)
- 		return -EINVAL;
- 
+ 	debug("%s: OK\n", __func__);
+ 	return 0;
 -- 
 2.43.0
 

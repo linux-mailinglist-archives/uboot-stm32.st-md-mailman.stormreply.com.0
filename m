@@ -2,67 +2,46 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C948188D75B
-	for <lists+uboot-stm32@lfdr.de>; Wed, 27 Mar 2024 08:37:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAC0989355E
+	for <lists+uboot-stm32@lfdr.de>; Sun, 31 Mar 2024 20:22:16 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7AFD3C6B45B;
-	Wed, 27 Mar 2024 07:37:02 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6311DC6C820;
+	Sun, 31 Mar 2024 18:22:16 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DE525C69066
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 559D3C6B476
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 27 Mar 2024 07:37:01 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 42R3h4qd016250; Wed, 27 Mar 2024 08:36:51 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=anYEZaI7cauvymeNjcAhUEDssn6FOs1OH2tD7xgAlII=; b=bv
- GbOLymmOSvC3mSDk/F/DsHvdcraHCCX021EYgSjtg0RYc1OILrAOp++D1zPr3dH4
- btDn4g4jvXzJYX6RS+/XY+EqvpruaTUJvlRdoeoP+aEJP1y4OP1E50LhlGP3HkEw
- azs1fQHVbO/3vy7c8lZ+bH7K0NJhAeRpW3bnH7TXuNLuFoQyGE+vDm54L4obgpy3
- +fxmHzwThhSexn4LS8hbtYCBtGI6L7JdK0F8mf3K05SIIXeKqoMYUMlZLzfRJqGb
- qajyL/bGwCytEsatobQzGnIjXUD4xUC28NG4hQCfqMGh79L54a5Fq3rUb+Az9S96
- ivHdeOfJlmok/fGxNLaQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x1pugh61y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Mar 2024 08:36:51 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 185164002D;
- Wed, 27 Mar 2024 08:36:47 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1AB4F20D402;
- Wed, 27 Mar 2024 08:36:26 +0100 (CET)
-Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Mar
- 2024 08:36:25 +0100
-Message-ID: <abb5338e-205a-46d3-ae11-cdb6aca5cec8@foss.st.com>
-Date: Wed, 27 Mar 2024 08:36:25 +0100
+ Sun, 31 Mar 2024 18:22:14 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 725468780A;
+ Sun, 31 Mar 2024 20:22:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1711909333;
+ bh=DpScHbl4tuYg7q6NIUnvud+jkVbKAW3Egvpwp4B1zdw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=EvkVkNphTa4vIDNLUma+iRD/YIjerp0Ou//VYK/GQWV5kAlmihrhqXEFtKm/GJqlc
+ zWStM1ioY+znmjHUr/cYOOSWCRPUYiESP3Ex1INeUPije3fERmp15se2m/FIeNXgfX
+ wHDwCejBWa/SdodRPwQuxb4u413M5xAVhHa8Id/4eAglSylB5VmIr0plkRdgw2rXla
+ ciiPoOAqi4nvagqXCtpEhpoXWhY65awhrBJrfwMR7gefh4eDg2xFRIkWMPqn8e5myV
+ N6YmYmlR3ukkAsROinAKv7zMWXFhd6OKG7Pr/R+dwlkVZkMJxi6kmSJdXIMvjIt3Z7
+ oMT5B9KxfiTcA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Sun, 31 Mar 2024 20:21:47 +0200
+Message-ID: <20240331182202.335923-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20240319024430.103196-1-marex@denx.de>
- <f2ab30e8-e65a-4025-a203-639d7ff1b01e@foss.st.com>
- <7ed56763-f494-4d19-82a0-05f0cc557241@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <7ed56763-f494-4d19-82a0-05f0cc557241@denx.de>
-X-Originating-IP: [10.201.20.71]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-27_04,2024-03-21_02,2023-05-22_02
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
- u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Default dfu_alt_info for
-	STM32MP13xx SPI NOR
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: Jump to ep on successful resume
+	in PSCI suspend code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,45 +53,68 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAzLzI2LzI0IDE4OjA4LCBNYXJlayBWYXN1dCB3cm90ZToKPiBPbiAzLzE5LzI0IDExOjIy
-IEFNLCBQYXRyaWNlIENIT1RBUkQgd3JvdGU6Cj4+Cj4+Cj4+IE9uIDMvMTkvMjQgMDM6NDQsIE1h
-cmVrIFZhc3V0IHdyb3RlOgo+Pj4gRGVmaW5lIGRmdV9hbHRfaW5mbyB3aXRoIFNQSSBOT1IgbGF5
-b3V0IHRvIG1ha2UgaXQgZWFzeSB0bwo+Pj4gaW5zdGFsbCBvciB1cGRhdGUgYm9vdGxvYWRlciBp
-biB0aGUgU1BJIE5PUiB1c2luZyBkZnUtdXRpbC4KPj4+Cj4+PiBVc2UgdGhlIGZvbGxvd2luZyBV
-LUJvb3QgY29tbWFuZHMgdG8gc3RhcnQgREZVIG1vZGU6Cj4+PiAiCj4+PiA9PiBzZiBwcm9iZSAm
-JiBkZnUgMCBtdGQKPj4+ICIKPj4+Cj4+PiBVc2UgdGhlIGZvbGxvd2luZyBkZnUtdXRpbCBpbnZv
-Y2F0aW9uIG9uIEhvc3QgUEMgdG8gaW5zdGFsbCBiaW5hcmllczoKPj4+ICIKPj4+ICQgZGZ1LXV0
-aWwgLXcgLWEgMCAtRCBidWlsZC9zdG0zMm1wMS9yZWxlYXNlL3RmLWEtc3RtMzJtcDEzNWYtZGhj
-b3ItZGhzYmMuc3RtMzIKPj4+ICQgZGZ1LXV0aWwgLXcgLWEgMSAtRCBidWlsZC9zdG0zMm1wMS9y
-ZWxlYXNlL3RmLWEtc3RtMzJtcDEzNWYtZGhjb3ItZGhzYmMuc3RtMzIKPj4+ICQgZGZ1LXV0aWwg
-LXcgLWEgMiAtRCBidWlsZC9zdG0zMm1wMS9yZWxlYXNlL2ZpcC5iaW4KPj4+ICIKPj4+Cj4+PiBT
-aWduZWQtb2ZmLWJ5OiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KPj4+IC0tLQo+Pj4gQ2M6
-IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+Pj4gQ2M6IFBh
-dHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+PiBDYzogVG9t
-IFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4KPj4+IENjOiB1LWJvb3RAZGgtZWxlY3Ryb25pY3Mu
-Y29tCj4+PiBDYzogdS1ib290QGxpc3RzLmRlbnguZGUKPj4+IENjOiB1Ym9vdC1zdG0zMkBzdC1t
-ZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCj4+PiAtLS0KPj4+IMKgIGluY2x1ZGUvY29uZmlncy9z
-dG0zMm1wMTNfY29tbW9uLmggfCAxICsKPj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKQo+Pj4KPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDEzX2NvbW1v
-bi5oIGIvaW5jbHVkZS9jb25maWdzL3N0bTMybXAxM19jb21tb24uaAo+Pj4gaW5kZXggNWIwNjU4
-Y2VkOTIuLmQ2ZTRmOGZkOTE1IDEwMDY0NAo+Pj4gLS0tIGEvaW5jbHVkZS9jb25maWdzL3N0bTMy
-bXAxM19jb21tb24uaAo+Pj4gKysrIGIvaW5jbHVkZS9jb25maWdzL3N0bTMybXAxM19jb21tb24u
-aAo+Pj4gQEAgLTYzLDYgKzYzLDcgQEAKPj4+IMKgwqDCoMKgwqAgImZpO1wwIgo+Pj4gwqAgwqAg
-I2RlZmluZSBTVE0zMk1QX0VYVFJBIFwKPj4+ICvCoMKgwqAgImRmdV9hbHRfaW5mbz1tdGQgbm9y
-MD1mc2JsMSByYXcgMHgwIDB4NDAwMDA7ZnNibDIgcmF3IDB4NDAwMDAgMHg0MDAwMDt1Ym9vdCBy
-YXcgMHg4MDAwMCAweDE2MDAwMFwwIiBcCj4+PiDCoMKgwqDCoMKgICJlbnZfY2hlY2s9aWYgZW52
-IGluZm8gLXAgLWQgLXE7IHRoZW4gZW52IHNhdmU7IGZpXDAiIFwKPj4+IMKgwqDCoMKgwqAgImJv
-b3RfbmV0X3VzYl9zdGFydD10cnVlXDAiCj4+PiDCoCAKPj4KPj4KPj4gSGkgTWFyZWsKPj4KPj4g
-T24gb3VyIFNUTTMyIGJvYXJkLCB0aGUgZGZ1X2FsdF9pbmZvIGlzIGJ1aWxkIGR5bmFtaWNhbGx5
-LCB3ZSBoYXZlIENPTkZJR19TRVRfREZVX0FMVF9JTkZPIGVuYWJsZQo+PiBDYW4geW91IGFkZCB0
-aGUgZGZ1X2FsdF9pbmZvIGluIGEgc3BlY2lmaWMgc3RtMzJtcDEzX2RoeHguY29tbW9uLmggaW5z
-dGVhZCA/Cj4gCj4gWW91IGNhbiBkcm9wIHRoaXMgcGF0Y2guCgoKT2sgdGhhbmtzCgpQYXRyaWNl
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVib290LXN0
-bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29t
-Cmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vi
-b290LXN0bTMyCg==
+In case the system has resumed successfully, the PSCI suspend resume
+code has to jump to the 'ep' successful resume entry point code path,
+otherwise the code has to jump to content of the LR register, which
+points to failed resume code path.
+
+To implement this distinction, rewrite LR register stored on stack
+with 'ep' value in case of a successful resume, which is really in
+every case unless some catastrophic failure occurred during suspend.
+
+Without this change, Linux counts every resume as failed in
+/sys/power/suspend_stats/fail
+
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/mach-stm32mp/psci.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/arch/arm/mach-stm32mp/psci.c b/arch/arm/mach-stm32mp/psci.c
+index 8cdeb0ab3f2..4f2379df45f 100644
+--- a/arch/arm/mach-stm32mp/psci.c
++++ b/arch/arm/mach-stm32mp/psci.c
+@@ -703,6 +703,8 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+ {
+ 	u32 saved_mcudivr, saved_pll3cr, saved_pll4cr, saved_mssckselr;
+ 	u32 gicd_addr = stm32mp_get_gicd_base_address();
++	u32 cpu = psci_get_cpu_id();
++	u32 sp = (u32)__secure_stack_end - (cpu << ARM_PSCI_STACK_SHIFT);
+ 	bool iwdg1_wake = false;
+ 	bool iwdg2_wake = false;
+ 	bool other_wake = false;
+@@ -805,4 +807,16 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+ 
+ 	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
+ 	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
++
++	/*
++	 * The system has resumed successfully. Rewrite LR register stored
++	 * on stack with 'ep' value, so that on return from this PSCI call,
++	 * the code would jump to that 'ep' resume entry point code path
++	 * instead of the previous 'lr' register content which (e.g. with
++	 * Linux) points to resume failure code path.
++	 *
++	 * See arch/arm/cpu/armv7/psci.S _smc_psci: for the stack layout
++	 * used here, SP-4 is PC, SP-8 is LR, SP-12 is R7, and so on.
++	 */
++	writel(ep, sp - 8);
+ }
+-- 
+2.43.0
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

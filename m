@@ -2,68 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB29389A244
-	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Apr 2024 18:16:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9145C89A2D8
+	for <lists+uboot-stm32@lfdr.de>; Fri,  5 Apr 2024 18:47:12 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 74726C6DD93;
-	Fri,  5 Apr 2024 16:16:51 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3F6E6C6DD93;
+	Fri,  5 Apr 2024 16:47:12 +0000 (UTC)
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+ [209.85.215.179])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 512ACC6DD6D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A65D1C6C83C
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  5 Apr 2024 16:16:50 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 435EZbx0030619; Fri, 5 Apr 2024 18:16:36 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=ld332YC
- OaCBFkcO37QfO0KXWTfHnAU9fFlo7oW1yIgA=; b=YULnrLc5P2C2eaCUY8XjSnS
- I6oMHOUrkZPNQ0Qs2eoXRv7Ryo0inmWsAi5paRJIR0UnJOsW6BxcR9sOCLveOUuR
- vVt8h1GHSEpnh1XYeFglVmmQBuU5PvSlFigcctSZ/d+UgeemuwtXvM0by/wURf91
- IMY8Oub7gVg+kzfWZ0mPX+ALAn2Gd13KMdSDnabsTY+dpSbe/GGFm43V5Za3OyKV
- JFn/jtWI8k+OHqbSYHI8sqAMz0XSJgrArVadxYyFV6CaHsE4tnLd3l7sxh/8fWvD
- tBsJoOgMnbHP0Iu44ojG03a7l2EVhkEXokakn9uyUIXCIf9mzuoiRloKVvVv7ug=
- =
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9emv8jty-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 05 Apr 2024 18:16:36 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 164A84002D;
- Fri,  5 Apr 2024 18:16:31 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C1CE821684D;
- Fri,  5 Apr 2024 18:15:32 +0200 (CEST)
-Received: from localhost (10.252.29.225) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 5 Apr
- 2024 18:15:32 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 5 Apr 2024 18:15:29 +0200
-Message-ID: <20240405161529.1419902-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Fri,  5 Apr 2024 16:47:10 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id
+ 41be03b00d2f7-5f0a485dab9so244343a12.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 05 Apr 2024 09:47:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712335629; x=1712940429;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0BMoFFnC+TpaoltojlNDSFtVDhjHmB+MnxD/8vTc/QA=;
+ b=QQWgpJ8LjIY1q9F3oGBHQpqtR6MxvIZw2OlB0AcavtnDR5bvIBsngcTlgzjsFtLHwz
+ 5U5pd+47j1Kfk/f0CoCCHaNsjqXDbZ57/FxTAS7kH8K7yCOkVrCqO+GGrfrcSuea+7N7
+ BO+OLgbNj4g1a5i/BSkKRCxSibxQgW1mARweZaKAP8GDDZhoY21ePJvz9e9jQLGqf1Yw
+ /Z+sNK0O+38wsF9w8l8+PIoKyaOQgzg6wMlsNvW7cKCGMvRtqfSQgin1fwMEW6Yex1S+
+ QLLZRxYdB+wLbq70uo5aOiU5OkWRjzD7K1dmGidFQLSNRT30Bli4ONh7RDWuqchUIoYq
+ kXLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712335629; x=1712940429;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0BMoFFnC+TpaoltojlNDSFtVDhjHmB+MnxD/8vTc/QA=;
+ b=r+xfAvkZTy1h0WRlxojThYxDd48KH5146SEsDeHRjYkB9R3rY3X8NjnajHJMKIBBnf
+ CAmaE5I/nMUCkBruGYG+g/YEND5YkxT3oMUTvHW9pNqdncdxmkaWttd2bNCIUXXS9yeo
+ X8gPpaGmsJdH3hu/LCCzFpPysUAV2eT7aJr7f0qnC5OPFbT+v6CVhvrWm4vvDKZIE5s1
+ R+mXwKBJY7eHwZe+rKV7b04puFXRwDWKVdEgmMPFH7rOUPLxNc/W75GYWw0G7UijryNF
+ VVI/v9XwC0fSKT5eIVmFxMADhcknHzroDrogVhaCFZXfsIgMmT0XjnTW2+DIZWlTsgt5
+ VUlg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUiLSefbD2HxttyCb7lTmBnWX6sbJSyGMqssL8IQItSmgMHo3z6TO7kKjkZDDf4YN28HY/T5j5M6oWrVfIG2R7l0p1WY0IsEgo37n/Y4MSc/WOkz4iBnCKW
+X-Gm-Message-State: AOJu0YyYNMWG3A00zwdsWsoeOuN8HKiQwG5OrN90qzMxi+4Kxbcj0eHf
+ WSko+iwV5QnIJ6sbDQ5WTXHlXsCRNLhBbgUwfVdGIGK21XOLSLh7PxfsCgz8ReDxJ1dlL65TG2O
+ ADFCOy4oiv8Tzhm6MtiPRESvby8o=
+X-Google-Smtp-Source: AGHT+IEpw+tMVTbfOeRnqqMytdbNLZCPhvdug29tEIAw6YNBRwbfRoXwD8SOTYOmFto/GYX5PNH0Gwr5tukw5iw5EcU=
+X-Received: by 2002:a17:90b:244:b0:2a2:666f:966d with SMTP id
+ fz4-20020a17090b024400b002a2666f966dmr1911082pjb.1.1712335629093; Fri, 05 Apr
+ 2024 09:47:09 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.252.29.225]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-05_17,2024-04-05_01,2023-05-22_02
-Cc: Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joe Hershberger <joe.hershberger@ni.com>,
- Simon Glass <sjg@chromium.org>, Ley Foon Tan <leyfoon.tan@starfivetech.com>,
- Elmar Psilog <epsi@gmx.de>, Kever Yang <kever.yang@rock-chips.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [Uboot-stm32] [PATCH] net: dwc_eth_qos: Fix compilation warning in
-	eqos_free_pkt()
+References: <20240312211628.32842-1-marex@denx.de>
+In-Reply-To: <20240312211628.32842-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 5 Apr 2024 13:46:56 -0300
+Message-ID: <CAOMZO5CBpkCiFRvO-1Ome5BqQhyyxJPDx_uCmUJPpyguB2R6KQ@mail.gmail.com>
+To: Marek Vasut <marex@denx.de>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ Stefano Babic <sbabic@denx.de>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: imx: stm32: Test whether ethernet
+ node is enabled before reading MAC EEPROM on DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,44 +78,18 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Fix compilation warning:
-
-../arch/arm/include/asm/io.h: In function 'eqos_free_pkt':
-../arch/arm/include/asm/io.h:103:32: warning: 'rx_desc' may be used uninitialized [-Wmaybe-uninitialized]
-  103 | #define writel(v,c)     ({ u32 __v = v; __iowmb(); __arch_putl(__v,c); __v; })
-      |                                ^~~
-../drivers/net/dwc_eth_qos.c:1220:27: note: 'rx_desc' was declared here
- 1220 |         struct eqos_desc *rx_desc;
-      |                           ^~~~~~~
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
-
- drivers/net/dwc_eth_qos.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 9b3bce1dc87..9df3dde14f1 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -1217,7 +1217,7 @@ static int eqos_free_pkt(struct udevice *dev, uchar *packet, int length)
- 	struct eqos_priv *eqos = dev_get_priv(dev);
- 	u32 idx, idx_mask = eqos->desc_per_cacheline - 1;
- 	uchar *packet_expected;
--	struct eqos_desc *rx_desc;
-+	struct eqos_desc *rx_desc = NULL;
- 
- 	debug("%s(packet=%p, length=%d)\n", __func__, packet, length);
- 
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gVHVlLCBNYXIgMTIsIDIwMjQgYXQgNjoxNuKAr1BNIE1hcmVrIFZhc3V0IDxtYXJleEBkZW54
+LmRlPiB3cm90ZToKPgo+IENoZWNrIHdoZXRoZXIgdGhlIGV0aGVybmV0IGludGVyZmFjZSBpcyBl
+bmFibGVkIGF0IGFsbCBiZWZvcmUgcmVhZGluZwo+IE1BQyBFRVBST00uIEFzIGEgY29zdCBzYXZp
+bmcgbWVhc3VyZSwgaXQgY2FuIGhhcHBlbiB0aGF0IHRoZSBNQUMgRUVQUk9NCj4gaXMgbm90IHBv
+cHVsYXRlZCBvbiBTb01zIHdoaWNoIGRvIG5vdCB1c2UgZXRoZXJuZXQuCj4KPiBTaWduZWQtb2Zm
+LWJ5OiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KCkFwcGxpZWQsIHRoYW5rcy4KX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFp
+bGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6
+Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3Rt
+MzIK

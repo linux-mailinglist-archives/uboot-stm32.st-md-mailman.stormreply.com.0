@@ -2,49 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8A1989DDB9
-	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Apr 2024 17:04:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4E2289DDC0
+	for <lists+uboot-stm32@lfdr.de>; Tue,  9 Apr 2024 17:04:59 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 82AB7C7128B;
-	Tue,  9 Apr 2024 15:04:50 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9DD6EC7128B;
+	Tue,  9 Apr 2024 15:04:59 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C17DFC7128A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B0EB0C7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  9 Apr 2024 15:04:48 +0000 (UTC)
+ Tue,  9 Apr 2024 15:04:57 +0000 (UTC)
 Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 439BXJJk004570; Tue, 9 Apr 2024 17:04:47 +0200
+ 439B8jGO016590; Tue, 9 Apr 2024 17:04:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=Bhgs6uPbIuSQndb94PoXoCxZxHPW2dfR8mkuLh4tpAU=; b=N/
- l5HTR128y2E3hMhNdTiUU2gVLq8Kn0tsqffnubbeBmKPpe7sSmnjMKyq7DMfMRTN
- UDjWRKTcM1jR7pV5udrxvxAaZbFniu662PuLxiQKuc9A3O+0/XDz1IYqDS7IT+w6
- 47yS4pFIoGgkk6XNDbRcXDbgKfY8k3A9NR68xW7/cEjW2FKtpelyTPP3LGKwNuR4
- OuAwOmyOGRH7nT2C226BR4SrifbCCwM9CUmIb2ZeYe9ybO6hNrY9aWrl9QxlhT9U
- fnZT1R9NkU5BdV63fUh6Q2cELDROOE/5ruoB1gbX7sDeXi5GiE0w4/e1gjfXYF/e
- 76A98iZVx7AeLQJrcSQg==
+ selector1; bh=hDI2Ke1tGHmRZNjpHS1qGFKqp5K8fR8JaLvZXT1S/aQ=; b=pk
+ O+E8at+ryaRXiJ/bOMLUfXzcjbiD5ou/tnDEhCKLRBi0Nxv92gY02FTzeV9S075N
+ UoAPC5Eb12YQ8NTTxzOjan38wJcawovAsZmJF8cqbIucnuq3aW5bYCLl9o3o6tLn
+ eWT7pB+qiFcExd8oRfV2ytHUqQec+m8V7mcvLIsNm17UY2WtNtZnOIbRsJQ/TKh7
+ gOg+LgYx0kzwpt5bAiLsua5k9VRoE9MNmRRAfmeA+Qe/CK4Bl5YmP8QdWtu65Gaw
+ lpBhSuWlp3QBUZ6jq4CuKcTy5m6UFPhenuruwBrsvujkrdBha9Ii5gi92vrV5dai
+ RI9eRrDZwWriNcRZIr/A==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xautfv640-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xautfv64h-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Apr 2024 17:04:47 +0200 (MEST)
+ Tue, 09 Apr 2024 17:04:56 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1CFC840045;
- Tue,  9 Apr 2024 17:04:44 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D4DE44002D;
+ Tue,  9 Apr 2024 17:04:51 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7E0872207C2;
- Tue,  9 Apr 2024 17:04:31 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 615FB2207C4;
+ Tue,  9 Apr 2024 17:04:32 +0200 (CEST)
 Received: from localhost (10.48.86.98) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 9 Apr
- 2024 17:04:31 +0200
+ 2024 17:04:32 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 9 Apr 2024 17:02:03 +0200
-Message-ID: <20240409150215.2497778-14-patrice.chotard@foss.st.com>
+Date: Tue, 9 Apr 2024 17:02:04 +0200
+Message-ID: <20240409150215.2497778-15-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
 References: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
@@ -57,9 +57,9 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2024-04-09_10,2024-04-09_01,2023-05-22_02
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH v1 13/25] ARM: dts: stm32: Add led-blue for
-	stm32mp157a-dk1-scmi-u-boot
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [Uboot-stm32] [PATCH v1 14/25] ARM: dts: stm32: Add gpio-keys for
+	stm32mp157a-dk1-u-boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,40 +76,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-As indicated in kernel led dt-bindings, label is a deprecated
-property, so remove it and use blue led node's name instead
-for u-boot,boot-led property.
+Instead of using "st,fastboot-gpios" and "st,stm32prog-gpios", declare
+2 gpio-keys.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi
-index e61814fd66e..a5158fec7ef 100644
---- a/arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157a-dk1-scmi-u-boot.dtsi
-@@ -13,7 +13,7 @@
- 	};
+diff --git a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+index a16358266a2..6bf6136c5fd 100644
+--- a/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157a-dk1-u-boot.dtsi
+@@ -4,6 +4,7 @@
+  */
  
- 	config {
--		u-boot,boot-led = "heartbeat";
-+		u-boot,boot-led = "led-blue";
- 		u-boot,error-led = "led-red";
- 		u-boot,mmc-env-partition = "u-boot-env";
+ #include <dt-bindings/clock/stm32mp1-clksrc.h>
++#include <dt-bindings/input/linux-event-codes.h>
+ #include "stm32mp15-u-boot.dtsi"
+ #include "stm32mp15-ddr3-1x4Gb-1066-binG.dtsi"
+ 
+@@ -18,8 +19,6 @@
+ 		u-boot,error-led = "error";
+ 		u-boot,mmc-env-partition = "fip";
  		st,adc_usb_pd = <&adc1 18>, <&adc1 19>;
-@@ -36,6 +36,10 @@
+-		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+-		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
  	};
  
- 	led {
-+		led-blue {
-+			/delete-property/label;
+ #if defined(CONFIG_STM32MP15X_STM32IMAGE) || defined(CONFIG_SPL)
+@@ -48,6 +47,22 @@
+ 	};
+ #endif
+ 
++	gpio-keys {
++		compatible = "gpio-keys";
++
++		button-user-1 {
++			label = "User-1";
++			linux,code = <BTN_1>;
++			gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 +		};
 +
- 		led-red {
- 			gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
- 		};
++		button-user-2 {
++			label = "User-2";
++			linux,code = <BTN_2>;
++			gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
++		};
++	};
++
+ 	led {
+ 		red {
+ 			label = "error";
 -- 
 2.25.1
 

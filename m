@@ -2,66 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6003C8A3B9E
-	for <lists+uboot-stm32@lfdr.de>; Sat, 13 Apr 2024 10:25:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EAE38A4201
+	for <lists+uboot-stm32@lfdr.de>; Sun, 14 Apr 2024 13:10:28 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 107ECC6DD67;
-	Sat, 13 Apr 2024 08:25:21 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1482DC6B444;
+	Sun, 14 Apr 2024 11:10:28 +0000 (UTC)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 303AEC6C859
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6114FC69063
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 13 Apr 2024 08:25:20 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43D4sZrk022743; Sat, 13 Apr 2024 10:25:13 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=8cvxoaRTX3Vtk62kpoWoTFV9AIXTZWepCM8v3rKRAK8=; b=27
- hoRQS0XG+w6ShGAvXxZjprogoshFNm02JDgkCBwlpjyp/rg/aaQvdZvpl6MpCPSY
- jQGwj6AsMtZwjnfKxBxcrZ6DwX4+GGl7BL5Gupjh21K7T4hFrjmEOWO2+Qx+NwnO
- Ij8mwX9kWjJEVIpSKZt73ZtstJkhIfciZxlYvqwAcjKiCHvVLIwc0bDdZ092O/HL
- GXW4/VYFkZ2sKaOGbQ8OQMqNnWy4xvdkmx/HPq5o0GBhcLy/7dGqn2o21hF0wav5
- w7PIuLtzxF9aegz0FNV3dy4hdaqWiRjzGm+iRNvMD30DoPes3j7yc5uw+vRl3HR6
- fjGD91C8vHxAr61Cnu8w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff640q05-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sat, 13 Apr 2024 10:25:13 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 52BF44002D;
- Sat, 13 Apr 2024 10:25:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0BCF320FA58;
- Sat, 13 Apr 2024 10:24:42 +0200 (CEST)
-Received: from [10.252.5.56] (10.252.5.56) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Sat, 13 Apr
- 2024 10:24:41 +0200
-Message-ID: <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
-Date: Sat, 13 Apr 2024 10:24:40 +0200
+ Sun, 14 Apr 2024 11:10:26 +0000 (UTC)
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43EBAEoo075474;
+ Sun, 14 Apr 2024 06:10:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713093014;
+ bh=zFnGkalkfKCzoN+QaM6zTv/mP9hne0nYR7cW7EYaMdE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ZuzgZGkuaEFjbeohZwcfAiVBvDbWC2IcgQLyGMerr1hnuJs06sCmcT4Gn46Xp0Dul
+ /Xbyk9Yp9LjWJks/OdjToL3dvyTg2r1uEWPVLyq1laFZU5e96xNkkC0VZK3iLj4BsA
+ 7swX2aHplI1WlFI2WIubb5f0XsXCA8OWMC9SCTqo=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43EBAEPB022691
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sun, 14 Apr 2024 06:10:14 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 14
+ Apr 2024 06:10:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 14 Apr 2024 06:10:14 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43EBABxV059006;
+ Sun, 14 Apr 2024 06:10:11 -0500
+Message-ID: <8c825b9d-7bb6-47e4-915d-a852df60bbc5@ti.com>
+Date: Sun, 14 Apr 2024 16:40:10 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: <u-boot@lists.denx.de>, tom Rini <trini@konsulko.com>, "Kumar, Udit"
- <u-kumar1@ti.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>, tom
+ Rini <trini@konsulko.com>
 References: <20240412155307.735631-1-patrice.chotard@foss.st.com>
  <20240412155307.735631-2-patrice.chotard@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240412155307.735631-2-patrice.chotard@foss.st.com>
-X-Originating-IP: [10.252.5.56]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-12_18,2024-04-09_01,2023-05-22_02
-Cc: Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>,
- Simon Glass <sjg@chromium.org>, Kumar Gala <galak@kernel.crashing.org>,
+ <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+ Simon Glass <sjg@chromium.org>, Kumar Gala <galak@kernel.crashing.org>,
+ u-kumar1@ti.com
 Subject: Re: [Uboot-stm32] [PATCH v2 2/2] lmb: Fix adjacent region merge in
  lmb_add_region_flags()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -75,186 +68,48 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-
-On 4/12/24 17:53, Patrice Chotard wrote:
-> In case a new region is adjacent to a previous region with
-> similar flag, this region is merged with its predecessor, but no
-> check are done if this new added region is overlapping another region
-> present in lmb (see reserved[3] which overlaps reserved[4]).
-> 
-> This occurs when the LMB [0xdaafd000-0xddb18000] is added and overlaps
-> the LMB [0xdbaf4380-0xddffffff].
-> 
-> Call lmb_overlaps_region() before merging the new region with the
-> adjacent region already present in lmb.
-> 
-> In case of adjacent region found, code is 90% similar in case
-> adjacent region is located before/after the new region.
-> Factorize adjacent region management in lmb_add_region_flags().
-> 
-> Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
-> shows:
-> 
-> before this patch:
-> ...
-> lmb_dump_all:
->  memory.cnt = 0x1 / max = 0x2
->  memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
->  reserved.cnt = 0x5 / max = 0x10
->  reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
->  reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
->  reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
->  reserved[3]    [0xdaae1000-0xdfffffff], 0x0551f000 bytes flags: 0
->  reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-> ...
-> 
-> after this patch:
-> 
-> ...
-> lmb_dump_all:
->  memory.cnt = 0x1 / max = 0x2
->  memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
->  reserved.cnt = 0x5 / max = 0x10
->  reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
->  reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
->  reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
->  reserved[3]    [0xdaae1000-0xddffffff], 0x0351f000 bytes flags: 0
->  reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-> ...
-> 
-> Fixes: 4ed6552f7159 ("[new uImage] Introduce lmb from linux kernel for memory mgmt of boot images")
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
-> 
-> Changes in v2:
->   _ Fix lmb_add_region_flags() by updating test which leads to
->     extend an existing region
-> 
->  lib/lmb.c | 57 +++++++++++++++++++++++++++++--------------------------
->  1 file changed, 30 insertions(+), 27 deletions(-)
-> 
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index b6afb731440..4ed60f4a843 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -130,6 +130,22 @@ static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
->  	lmb_remove_region(rgn, r2);
->  }
->  
-> +static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
-> +				phys_size_t size)
-> +{
-> +	unsigned long i;
-> +
-> +	for (i = 0; i < rgn->cnt; i++) {
-> +		phys_addr_t rgnbase = rgn->region[i].base;
-> +		phys_size_t rgnsize = rgn->region[i].size;
-> +
-> +		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-> +			break;
-> +	}
-> +
-> +	return (i < rgn->cnt) ? i : -1;
-> +}
-> +
->  void lmb_init(struct lmb *lmb)
->  {
->  #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> @@ -257,7 +273,7 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
->  				 phys_size_t size, enum lmb_flags flags)
->  {
->  	unsigned long coalesced = 0;
-> -	long adjacent, i;
-> +	long adjacent, i, overlap;
->  
->  	if (rgn->cnt == 0) {
->  		rgn->region[0].base = base;
-> @@ -283,19 +299,21 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
->  		}
->  
->  		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-> -		if (adjacent > 0) {
-> -			if (flags != rgnflags)
-> -				continue;
-> -			rgn->region[i].base -= size;
-> -			rgn->region[i].size += size;
-> -			coalesced++;
-> -			break;
-> -		} else if (adjacent < 0) {
-> +		if (adjacent != 0) {
->  			if (flags != rgnflags)
->  				continue;
-> -			rgn->region[i].size += size;
-> -			coalesced++;
-> -			break;
-> +			overlap = lmb_overlaps_region(rgn, base, size);
-> +			if (overlap < 0 || flags == rgn->region[overlap].flags) {
-> +				/*
-> +				 * no overlap detected or overlap with same flags detected,
-> +				 * extend region
-> +				 */
-> +				if  (adjacent > 0)
-> +					rgn->region[i].base -= size;
-> +				rgn->region[i].size += size;
-> +				coalesced++;
-> +				break;
-> +			}
->  		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
->  			/* regions overlap */
->  			return -1;
-> @@ -420,21 +438,6 @@ long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size)
->  	return lmb_reserve_flags(lmb, base, size, LMB_NONE);
->  }
->  
-> -static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
-> -				phys_size_t size)
-> -{
-> -	unsigned long i;
-> -
-> -	for (i = 0; i < rgn->cnt; i++) {
-> -		phys_addr_t rgnbase = rgn->region[i].base;
-> -		phys_size_t rgnsize = rgn->region[i].size;
-> -		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-> -			break;
-> -	}
-> -
-> -	return (i < rgn->cnt) ? i : -1;
-> -}
-> -
->  phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
->  {
->  	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
-
-
-I think this series (v2) is not correct even if now the CI tests are OK.
-After re-reading carefully the lib_test_lmb_overlapping_reserve() test 
-it appears to me there is a contradiction.
-
-It's indicating that "check that calling lmb_reserve with overlapping regions fails" 
-
-but the very last test of lib_test_lmb_overlapping_reserve() has this comment :
-/* allocate 3rd region, coalesce with first and overlap with second */
-and this test allows this overlap case.
-
-It's not clear if LMB region can overlap each other or not ?
-
-Udit, your patch edb5824be17f ("lmb: remove overlapping region with next range")
-is authorizing LMB overlapping right ? 
-
-Patrice
-
-
-
-
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGVsbG8gUGF0cmljZSwKCk9uIDQvMTMvMjAyNCAxOjU0IFBNLCBQYXRyaWNlIENIT1RBUkQgd3Jv
+dGU6Cj4KPiBPbiA0LzEyLzI0IDE3OjUzLCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4+IEluIGNh
+c2UgYSBuZXcgcmVnaW9uIGlzIGFkamFjZW50IHRvIGEgcHJldmlvdXMgcmVnaW9uIHdpdGgKPj4g
+c2ltaWxhciBmbGFnLCB0aGlzIHJlZ2lvbiBpcyBtZXJnZWQgd2l0aCBpdHMgcHJlZGVjZXNzb3Is
+IGJ1dCBubwo+PiBjaGVjayBhcmUgZG9uZSBpZiB0aGlzIG5ldyBhZGRlZCByZWdpb24gaXMgb3Zl
+cmxhcHBpbmcgYW5vdGhlciByZWdpb24KPj4gcHJlc2VudCBpbiBsbWIgKHNlZSByZXNlcnZlZFsz
+XSB3aGljaCBvdmVybGFwcyByZXNlcnZlZFs0XSkuCj4+Cj4+IFsuLl0KPj4gcGh5c19hZGRyX3Qg
+bG1iX2FsbG9jKHN0cnVjdCBsbWIgKmxtYiwgcGh5c19zaXplX3Qgc2l6ZSwgdWxvbmcgYWxpZ24p
+Cj4+ICAgewo+PiAgIAlyZXR1cm4gbG1iX2FsbG9jX2Jhc2UobG1iLCBzaXplLCBhbGlnbiwgTE1C
+X0FMTE9DX0FOWVdIRVJFKTsKPgo+IEkgdGhpbmsgdGhpcyBzZXJpZXMgKHYyKSBpcyBub3QgY29y
+cmVjdCBldmVuIGlmIG5vdyB0aGUgQ0kgdGVzdHMgYXJlIE9LLgo+IEFmdGVyIHJlLXJlYWRpbmcg
+Y2FyZWZ1bGx5IHRoZSBsaWJfdGVzdF9sbWJfb3ZlcmxhcHBpbmdfcmVzZXJ2ZSgpIHRlc3QKPiBp
+dCBhcHBlYXJzIHRvIG1lIHRoZXJlIGlzIGEgY29udHJhZGljdGlvbi4KPgo+IEl0J3MgaW5kaWNh
+dGluZyB0aGF0ICJjaGVjayB0aGF0IGNhbGxpbmcgbG1iX3Jlc2VydmUgd2l0aCBvdmVybGFwcGlu
+ZyByZWdpb25zIGZhaWxzIgo+Cj4gYnV0IHRoZSB2ZXJ5IGxhc3QgdGVzdCBvZiBsaWJfdGVzdF9s
+bWJfb3ZlcmxhcHBpbmdfcmVzZXJ2ZSgpIGhhcyB0aGlzIGNvbW1lbnQgOgo+IC8qIGFsbG9jYXRl
+IDNyZCByZWdpb24sIGNvYWxlc2NlIHdpdGggZmlyc3QgYW5kIG92ZXJsYXAgd2l0aCBzZWNvbmQg
+Ki8KPiBhbmQgdGhpcyB0ZXN0IGFsbG93cyB0aGlzIG92ZXJsYXAgY2FzZS4KPgo+IEl0J3Mgbm90
+IGNsZWFyIGlmIExNQiByZWdpb24gY2FuIG92ZXJsYXAgZWFjaCBvdGhlciBvciBub3QgPwoKCkkg
+d291bGQgc2F5IHBhcnRpYWwgb3ZlcmxhcCBhbmQgY29hbGVzY2luZyB3aXRoIGJlZm9yZSBvbmUK
+Ck1heSBiZSBCZWxvdyBjYW4gaGVscAoKLyogYWxsb2NhdGUgMm5kIHJlZ2lvbiAsIFRoaXMgc2hv
+dWxkIGNvYWxlc2NlZCBhbGwgcmVnaW9uIGludG8gb25lCgp5b3Ugd2lsbCBnZXQgb25lIHJlZ2lv
+biBhcwoKQWRkcmVzcyAtLS0gU2l6ZQoKMHg0MDAxMDAwMCAtLS0gMHgzMDAwMAoKTmV4dCBhZnRl
+ciB0aGlzIMKgLyogYWxsb2NhdGUgMm5kIHJlZ2lvbiwgd2hpY2ggc2hvdWxkIGJlIGFkZGVkIGFz
+IGZpcnN0IApyZWdpb24gKi8KCndlIHdpbGwgaGF2ZSB0d28gcmVnaW9uIGxpa2UKCkFkZHJlc3Mg
+LS0tIFNpemUKCigweDQwMDAwMDAwIC0tIDB4ODAwMCkKCigweDQwMDEwMDAwIC0tLSAweDMwMDAw
+KQoKTm93IHRoaXJkIHJlcXVlc3QgY29tZXMgaW4KCi8qIGFsbG9jYXRlIDNyZCByZWdpb24sIGNv
+YWxlc2NlIHdpdGggZmlyc3QgYW5kIG92ZXJsYXAgd2l0aCBzZWNvbmQgKi8KCndoaWNoIGlzIGFk
+ZHJlc3Mgb2YgwqAweDQwMDA4MDAwIGFuZCBzaXplIG9mIMKgMHgxMDAwMCwgTm93IHRoaXMgcmVn
+aW9uIHRvIApiZSBhZGRlZAoKaXMgY29hbGVzY2luZyB3aXRoIGZpcnN0ICgweDQwMDAwMDAwIC0t
+IDB4ODAwMCkgYW5kIHBhcnQgb2YgdGhpcyBvdmVybGFwIAp3aXRoICgweDQwMDEwMDAwIC0tLSAw
+eDMwMDAwKS4KClNvLCB3aGF0IHRoaXMgcGF0Y2ggZG9lcyAsIG1lcmdlIGFsbCB0aGVzZSBpbnRv
+IG9uZSByZWdpb24KCmFzICgweDQwMDAwMDAwIC0tIDB4NDAwMDApCgo+IFVkaXQsIHlvdXIgcGF0
+Y2ggZWRiNTgyNGJlMTdmICgibG1iOiByZW1vdmUgb3ZlcmxhcHBpbmcgcmVnaW9uIHdpdGggbmV4
+dCByYW5nZSIpCj4gaXMgYXV0aG9yaXppbmcgTE1CIG92ZXJsYXBwaW5nIHJpZ2h0ID8KCkFzIHNh
+aWQgYmVmb3JlIHRoaXMgaXMgY2hlY2tpbmcgb3ZlcmxhcCBhbmQgY29hbGVzY2luZyBhbmQgYWN0
+aW5nIAphY2NvcmRpbmdseS4KCj4gUGF0cmljZQo+Cj4KPgo+Cj4KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVi
+b290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWls
+bWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

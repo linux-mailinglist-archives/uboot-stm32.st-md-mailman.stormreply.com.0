@@ -2,59 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E115C8AAE84
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 14:33:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E50D18AAE8A
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 14:33:36 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A1CEBC6DD9A;
-	Fri, 19 Apr 2024 12:33:24 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AA500C6DD9A;
+	Fri, 19 Apr 2024 12:33:36 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90FBAC6DD72
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90C76C6DD72
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Apr 2024 12:33:23 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ Fri, 19 Apr 2024 12:33:35 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J9asir005484; Fri, 19 Apr 2024 14:33:14 +0200
+ 43J9dcoN007704; Fri, 19 Apr 2024 14:33:26 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=mIu9SLEERNsX6QPu1TydiNjCmIc82l/sLVvztoPYPSw=; b=6f
- Le5IIMo66SeBftr7m4zGLSbh7vOZkIdcgi2m560gTywdPpbeFqDXOIf7DI1qut1o
- FVsmSn3o3vJlCMy5VQ5ZQtsY8urNVX3SmI9E0MbZd0tMxpe3LLSY6VhJoo4fVXv/
- khVQnUIM3Nc3j9vjA6om5+3sZPRo8eHCosbk6ynRcwzmNxdhJtgdZAKf035J7oYI
- jKHgu6aCT/0s74Ajz9XXFCypRHPyGAYP51nzdmlzCgK39nxX3W3i90gmbU2+6MHv
- Gho0uG1xYsOR8teWhuDf2y4CPcz2n6n8Tm9Xo4IiieE63PAW/YBrzlUrCIqZ7EPX
- NnIGIV2h9p/RDKlwirmQ==
+ selector1; bh=NQxjS3m+nKuMEvukuuCDZNQGhjufh5bqF3FnA/KHVv8=; b=Ze
+ qUGoilDVCv/85aznnh6LauQRwUhXofunfptsnCcVYvdi6Fp6uFsm9jkdvcRuTg1A
+ +JkoXEEFtB/gj5gsPEdj/fZsAVCpe8KISYbwZrHPZIqg+t8ssjMDSXJ4XtMdFaww
+ cGxD+Gc0pQHyzqKw2N+3QrjZUM3mGu0BSAM9AVAYqtfvPQ1L8KIHygzVRt58g3ux
+ ECFRKQntIXPwX8Y2zT9wsHomJkqlIXZt+Xvo9CE/KmKMIDy5Yyx/dcHLZfM6tqnM
+ 9gfPR9BIO1NyOfwDqwCmUPUcj8ySpNttb90YH46O/AcQynE4W58duAdPcwTqD+bU
+ RCjGuRAYteCJWHUWJJ6g==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg50j9g3j-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64uvh1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:33:14 +0200 (MEST)
+ Fri, 19 Apr 2024 14:33:25 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 317C840046;
- Fri, 19 Apr 2024 14:33:10 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 360AC40045;
+ Fri, 19 Apr 2024 14:33:22 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BA33A2194EF;
- Fri, 19 Apr 2024 14:32:40 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7C9AE21ADBC;
+ Fri, 19 Apr 2024 14:32:54 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:32:40 +0200
-Message-ID: <5a1b8a2a-d1f0-44bd-83d6-c581b293c442@foss.st.com>
-Date: Fri, 19 Apr 2024 14:32:40 +0200
+ 2024 14:32:53 +0200
+Message-ID: <513a7e71-1326-4aa8-84bd-37c26f82b7bd@foss.st.com>
+Date: Fri, 19 Apr 2024 14:32:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Jaehoon Chung <jh80.chung@samsung.com>, 'Patrick DELAUNAY'
  <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 References: <20240308142614.2700185-1-patrice.chotard@foss.st.com>
- <20240308142614.2700185-2-patrice.chotard@foss.st.com>
- <CGME20240417090254epcas1p2141358dc9427f77a9bb8102d88bbff6c@epcas1p2.samsung.com>
- <8602799a-7c52-4308-a58e-4986de57210b@foss.st.com>
- <01e101da90b7$fe546690$fafd33b0$@samsung.com>
+ <CGME20240417090230epcas1p2688df3c6263283a23019c72b5553570a@epcas1p2.samsung.com>
+ <79062d65-359c-4e1a-ae04-da5e9bea1ed6@foss.st.com>
+ <01e001da90b7$ec103130$c4309390$@samsung.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <01e101da90b7$fe546690$fafd33b0$@samsung.com>
+In-Reply-To: <01e001da90b7$ec103130$c4309390$@samsung.com>
 X-Originating-IP: [10.252.13.94]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -64,8 +63,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: 'U-Boot STM32' <uboot-stm32@st-md-mailman.stormreply.com>,
  'Tom Rini' <trini@konsulko.com>, 'Peng Fan' <peng.fan@nxp.com>,
  'Simon Glass' <sjg@chromium.org>, 'Sean Anderson' <seanga2@gmail.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] mmc: stm32_sdmmc2: Fix AARCH64
-	compilation warnings
+Subject: Re: [Uboot-stm32] [PATCH 1/2] mmc: stm32_sdmmc2: Add "st,
+ stm32mp25-sdmmc2" compatible
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,8 +83,8 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 4/17/24 13:11, Jaehoon Chung wrote:
-> 
+On 4/17/24 13:10, Jaehoon Chung wrote:
+> Hi
 > 
 >> -----Original Message-----
 >> From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
@@ -94,47 +93,34 @@ On 4/17/24 13:11, Jaehoon Chung wrote:
 >> Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>;
 >> Peng Fan <peng.fan@nxp.com>; Sean Anderson <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Tom
 >> Rini <trini@konsulko.com>
->> Subject: Re: [PATCH 2/2] mmc: stm32_sdmmc2: Fix AARCH64 compilation warnings
+>> Subject: Re: [PATCH 1/2] mmc: stm32_sdmmc2: Add "st,stm32mp25-sdmmc2" compatible
 >>
 >> Hi,
 >>
 >> On 3/8/24 15:26, Patrice Chotard wrote:
->>> When building with AARCH64 defconfig, we got warnings, fix them.
+>>> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >>>
+>>> Add compatible used for STM32MP25 family.
+>>>
+>>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >>> ---
 >>>
->>>   drivers/mmc/stm32_sdmmc2.c | 8 ++++----
->>>   1 file changed, 4 insertions(+), 4 deletions(-)
+>>>   drivers/mmc/stm32_sdmmc2.c | 1 +
+>>>   1 file changed, 1 insertion(+)
 >>>
 >>> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
->>> index d4982a14281..39ae79ba129 100644
+>>> index a2b111a8435..d4982a14281 100644
 >>> --- a/drivers/mmc/stm32_sdmmc2.c
 >>> +++ b/drivers/mmc/stm32_sdmmc2.c
->>> @@ -220,9 +220,9 @@ static void stm32_sdmmc2_start_data(struct udevice *dev,
+>>> @@ -789,6 +789,7 @@ static int stm32_sdmmc2_bind(struct udevice *dev)
 >>>
->>>   	if (data->flags & MMC_DATA_READ) {
->>>   		data_ctrl |= SDMMC_DCTRL_DTDIR;
->>> -		idmabase0 = (u32)data->dest;
->>> +		idmabase0 = (u32)(long)data->dest;
->>>   	} else {
->>> -		idmabase0 = (u32)data->src;
->>> +		idmabase0 = (u32)(long)data->src;
->>>   	}
+>>>   static const struct udevice_id stm32_sdmmc2_ids[] = {
+>>>   	{ .compatible = "st,stm32-sdmmc2" },
+>>> +	{ .compatible = "st,stm32mp25-sdmmc2" },
+>>>   	{ }
+>>>   };
 >>>
->>>   	/* Set the SDMMC DataLength value */
->>> @@ -463,8 +463,8 @@ retry_cmd:
->>>
->>>   	stm32_sdmmc2_start_cmd(dev, cmd, cmdat, &ctx);
->>>
->>> -	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%x\n",
->>> -		cmd->cmdidx, data ? ctx.data_length : 0, (unsigned int)data);
->>> +	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%p\n",
->>> +		cmd->cmdidx, data ? ctx.data_length : 0, data);
->>>
->>>   	ret = stm32_sdmmc2_end_cmd(dev, cmd, &ctx);
->>>
->>
 >>
 >>
 >> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -147,6 +133,7 @@ On 4/17/24 13:11, Jaehoon Chung wrote:
 >>
 >> Thanks
 >> Patrick
+>>
 > 
 > 
 

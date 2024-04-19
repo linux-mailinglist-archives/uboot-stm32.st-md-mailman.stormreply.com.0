@@ -2,47 +2,50 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51D458AA78A
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 05:59:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFA148AA7F2
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 07:31:49 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07E61C6DD67;
-	Fri, 19 Apr 2024 03:59:53 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6808DC6DD67;
+	Fri, 19 Apr 2024 05:31:49 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7EAD1C6C859
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3C157C6C859
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Apr 2024 03:59:51 +0000 (UTC)
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ Fri, 19 Apr 2024 05:31:48 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E5C888837D;
- Fri, 19 Apr 2024 05:59:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 11A9A88629;
+ Fri, 19 Apr 2024 07:31:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713499190;
- bh=AFQVp/crksix6jv0cPvhRnA0FzSOunsA2Y2Fhs1IAbo=;
- h=From:To:Cc:Subject:Date:From;
- b=QbWf/6//6DoM1FXLLEh6kee2mqJs1BGBb9FTGYM3nKseun8Zzb65pKQ8NWv7VEVqO
- iTUYIeuBHB6kaeBGTHMLnuNNfKTDj0tJJhwfrKIlcvJj9NrsxMgqpKQduzLRUEN208
- cN+uuMWVwzybK2g07ChOEWIkb0Tdaiifr5CI40+5tUaQ/f++uVUXNRaRDFeusEybag
- VAF3ncC30i9VrFUVHFVa1ElTrEJP6+mJc5rHegEvKKGDKtjfBfnupeWcS6VO9NsnM0
- LI186NjbdsqarEpoyucDkszuDeIlOh77kV9ux8q+UtLNm4jji5guM3S5MOvGBTcaZD
- lNBQNibkfQyPA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Date: Fri, 19 Apr 2024 05:59:05 +0200
-Message-ID: <20240419035931.178840-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ s=phobos-20191101; t=1713504707;
+ bh=7XlJY68jpa59R3R/wT/DAbab8y/apudOHN8U4ZyLTBY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=K/CJcV/NuJXqDr9eCfSQaJ11IccI8AqNmFVmwxWISCR1NbsL6U7uR8q91++2222DQ
+ PQrRTi/XhaTrbWTLp0svh9n8Hy0Pw6mSSPnYMrs6ZwV9SjkZG/3FkElZk1339YHGWw
+ ISd/L8m6iRC+yvTEM/dPdT5y+q3HOPwtDYjmiDTuqoT+akPsAb7u7377RzfOVn21sd
+ nlbgCptGOK3BNdIbTYWBjdjbDLtudVFoxJGbLEvfTwW0VD/OnKXqKsycWNrLvlzxG/
+ az8UJlvjBf4VqtiCP2bir/y93zbAyNCURYRK1tRK0S1YH0W7Z/uQp39nNlSqZQrc2q
+ UPZnKlaMNB3rg==
+Message-ID: <de1e8291-23cd-49d8-8070-d41b429f7cd3@denx.de>
+Date: Fri, 19 Apr 2024 05:58:43 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20240415125541.6547-1-marex@denx.de>
+ <f4d25293-e9c6-45de-a0d9-643252e2a0b6@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <f4d25293-e9c6-45de-a0d9-643252e2a0b6@foss.st.com>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v3] ARM: stm32: Initialize TAMP_SMCR BKP..PROT
-	fields on STM32MP15xx
+Cc: Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ Igor Opaniuk <igor.opaniuk@foundries.io>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH v2] ARM: stm32: Initialize TAMP_SMCR
+ BKP..PROT fields on STM32MP15xx
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -54,96 +57,60 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
-released from endless loop in BootROM only by populating TAMP BKPxR 4
-and 5 with magic and branch address and sending SGI0 interrupt from
-core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
-as well to release the core 1 from endless loop during the second SGI0
-handling on core 1. Initialize TAMP_SMCR to protect the first 32 backup
-registers, the ones which contain the core 1 magic, branch address and
-boot information.
-
-This requirement seems to be undocumented, therefore it was necessary
-to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
-Ultimately, it turns out that a certain BootROM function reads out the
-TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
-If they are zero, the BootROM code again waits for SGI0 using WFI, else
-the execution moves forward until it reaches handoff to the TAMP BKPxR 5
-branch address.
-
-This fixes CPU core 1 release using U-Boot PSCI implementation on an
-OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
-
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
-V2: Fix up the BKPRWD/BKPWD mask typo
-V3: - Update the allocation to 0x20/0x20
-    - Update commit message
-    - Add RB from Patrick
----
- arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-index dd99150fbc2..d75ec99d6a1 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-@@ -14,6 +14,7 @@
- #include <asm/arch/sys_proto.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
-+#include <linux/bitfield.h>
- 
- /* RCC register */
- #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
-@@ -41,6 +42,9 @@
- #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
- 
- #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
-+#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
-+#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
-+#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
- 
- #define PWR_CR1			(STM32_PWR_BASE + 0x00)
- #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
-@@ -136,6 +140,18 @@ static void security_init(void)
- 	 */
- 	writel(0x0, TAMP_CR1);
- 
-+	/*
-+	 * TAMP: Configure non-zero secure protection settings. This is
-+	 * checked by BootROM function 35ac on OTP-CLOSED device during
-+	 * CPU core 1 release from endless loop. If secure protection
-+	 * fields are zero, the core 1 is not released from endless
-+	 * loop on second SGI0.
-+	 */
-+	clrsetbits_le32(TAMP_SMCR,
-+			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
-+			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
-+			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
-+
- 	/* GPIOZ: deactivate the security */
- 	writel(BIT(0), RCC_MP_AHB5ENSETR);
- 	writel(0x0, GPIOZ_SECCFGR);
--- 
-2.43.0
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gNC8xOC8yNCA4OjI0IFBNLCBQYXRyaWNrIERFTEFVTkFZIHdyb3RlOgo+IEhpLAoKSGksCgpb
+Li4uXQoKPj4gQEAgLTEzNiw2ICsxNDAsMTggQEAgc3RhdGljIHZvaWQgc2VjdXJpdHlfaW5pdCh2
+b2lkKQo+PiDCoMKgwqDCoMKgwqAgKi8KPj4gwqDCoMKgwqDCoCB3cml0ZWwoMHgwLCBUQU1QX0NS
+MSk7Cj4+ICvCoMKgwqAgLyoKPj4gK8KgwqDCoMKgICogVEFNUDogQ29uZmlndXJlIG5vbi16ZXJv
+IHNlY3VyZSBwcm90ZWN0aW9uIHNldHRpbmdzLiBUaGlzIGlzCj4+ICvCoMKgwqDCoCAqIGNoZWNr
+ZWQgYnkgQm9vdFJPTSBmdW5jdGlvbiAzNWFjIG9uIE9UUC1DTE9TRUQgZGV2aWNlIGR1cmluZwo+
+PiArwqDCoMKgwqAgKiBDUFUgY29yZSAxIHJlbGVhc2UgZnJvbSBlbmRsZXNzIGxvb3AuIElmIHNl
+Y3VyZSBwcm90ZWN0aW9uCj4+ICvCoMKgwqDCoCAqIGZpZWxkcyBhcmUgemVybywgdGhlIGNvcmUg
+MSBpcyBub3QgcmVsZWFzZWQgZnJvbSBlbmRsZXNzCj4+ICvCoMKgwqDCoCAqIGxvb3Agb24gc2Vj
+b25kIFNHSTAuCj4+ICvCoMKgwqDCoCAqLwo+PiArwqDCoMKgIGNscnNldGJpdHNfbGUzMihUQU1Q
+X1NNQ1IsCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFRBTVBfU01DUl9CS1BSV0RQUk9UIHwg
+VEFNUF9TTUNSX0JLUFdEUFJPVCwKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgRklFTERfUFJF
+UChUQU1QX1NNQ1JfQktQUldEUFJPVCwgMHgxMCkgfAo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBGSUVMRF9QUkVQKFRBTVBfU01DUl9CS1BXRFBST1QsIDB4MTApKTsKPj4gKwo+PiDCoMKgwqDC
+oMKgIC8qIEdQSU9aOiBkZWFjdGl2YXRlIHRoZSBzZWN1cml0eSAqLwo+PiDCoMKgwqDCoMKgIHdy
+aXRlbChCSVQoMCksIFJDQ19NUF9BSEI1RU5TRVRSKTsKPj4gwqDCoMKgwqDCoCB3cml0ZWwoMHgw
+LCBHUElPWl9TRUNDRkdSKTsKPiAKPiAKPiBUaGUgcmVjb21tZW5kZWQgbWFwcGluZyAodGhlIG1h
+cHBpbmcgZG9uZSBpbiBPUC1URUUgZm9yIE9wZW5TVExpbnV4KSBpcyAKPiBkZXNjcmliZWQgaW4g
+V2lraSBwYWdlCj4gCj4gLSAxMCBiYWNrdXAgcmVnaXN0ZXIgc2VjdXJlCj4gCj4gLSA0wqAgYmFj
+a3VwIHJlZ2lzdGVyIHNlY3VyZSB3cml0ZSAvIG5vbiBzZWN1cmUgcmVhZAo+IAo+IC0gMTcgYmFj
+a3VwIHJlZ2lzdGVyIE5vbi1zZWN1cmUKPiAKPiBJdCBpcyBkb25lIGluCj4gCj4gaHR0cHM6Ly9n
+aXRodWIuY29tL1NUTWljcm9lbGVjdHJvbmljcy9vcHRlZV9vcy9ibG9iLzMuMTkuMC1zdG0zMm1w
+L2NvcmUvYXJjaC9hcm0vcGxhdC1zdG0zMm1wMS9tYWluLmMKPiAKPiB3aXRoCj4gCj4gCj4gc3Rh
+dGljIFRFRV9SZXN1bHQgc3RtMzJfY29uZmlndXJlX3RhbXAodm9pZCkKPiB7Cj4gIMKgwqAgwqBU
+RUVfUmVzdWx0IHJlcyBfX21heWJlX3VudXNlZCA9IFRFRV9TVUNDRVNTOwo+ICDCoMKgIMKgc3Ry
+dWN0IHN0bTMyX2JrcHJlZ3NfY29uZiBia3ByZWdzX2NvbmYgPSB7Cj4gIMKgwqAgwqDCoMKgwqAg
+Lm5iX3pvbmUxX3JlZ3MgPSAxMCwgLyogMTAgcmVnaXN0ZXJzIGluIHpvbmUgMSAqLwo+ICDCoMKg
+IMKgwqDCoMKgIC5uYl96b25lMl9yZWdzID0gNcKgwqAgLyogNSByZWdpc3RlcnMgaW4gem9uZSAy
+ICovCj4gIMKgwqAgwqDCoMKgwqAgwqDCoMKgIMKgwqDCoCDCoMKgwqDCoCAvKiBab25lMyBhbGwg
+cmVtYWluaW5nICovCj4gIMKgwqAgwqB9Owo+IAo+ICDCoMKgIMKgLyogRW5hYmxlIEJLUCBSZWdp
+c3RlciBwcm90ZWN0aW9uICovCj4gIMKgwqAgwqBpZiAoc3RtMzJfdGFtcF9zZXRfc2VjdXJlX2Jr
+cHJlZ3MoJmJrcHJlZ3NfY29uZikpCj4gIMKgwqAgwqDCoMKgwqAgcGFuaWMoKTsKPiAKPiAKPiBC
+dXQgd2hlbiB5b3UgYXJlIGJvb3Rpbmcgd2l0aCBTUEwgVS1ib290LCBhbGwgdGhlIGJvb3QgY2hh
+aW4gYW5kIHRoZSAKPiBMaW51eCBrZXJuZWwKPiAKPiBpcyBydW5uaW5nIGluIHNlY3VyZSB3b3Js
+ZAo+IAo+IAo+IFNvIHlvdSBoYXZlIG5vIHJlYXNvbiB0byBtYW5hZ2UgYW55IGxpbWl0IGZvciB0
+aGUgYWNjZXNzIHRvIGJhY2t1cCAKPiByZWdpc3RlciwKPiAKPiB5b3UgY2FuIGFsbG9jYXRlIGFs
+bCB0aGUgYmFja3VwIHJlZ2lzdGVycyAodGhlIDMyIG9uZSkgdG8gc2VjdXJlIHdvcmxkCj4gCj4g
+U2VlICJGaWd1cmUgNTUyLiBCYWNrdXAgcmVnaXN0ZXJzIHNlY3VyZSBwcm90ZWN0aW9ucyIgaW4g
+cmVmZXJlbmNlIG1uYXVlbAo+IAo+IFByb3RlY3Rpb24gem9uZSAxID0+IHggPSAzMSB3aXRowqAg
+QktQUldEUFJPVCA9IDMxCj4gCj4gUHJvdGVjdGlvbiB6b25lIDIgJiAzID0+IGVtcHR5Cj4gCj4g
+K8KgwqDCoCBjbHJzZXRiaXRzX2xlMzIoVEFNUF9TTUNSLAo+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIFRBTVBfU01DUl9CS1BSV0RQUk9UIHwgVEFNUF9TTUNSX0JLUFdEUFJPVCwKPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBGSUVMRF9QUkVQKFRBTVBfU01DUl9CS1BSV0RQUk9ULCAweDIwKSB8
+Cj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgRklFTERfUFJFUChUQU1QX1NNQ1JfQktQV0RQUk9U
+LCAweDIwKSk7Cj4gCj4gCj4gU29ycnkgZm9yIHRoZSBkZWxheSwgSSBuZWVkIGFsc28gdG8gY2hl
+Y2sgb24gbXkgc2lkZQo+IAo+IAo+IEJ1dCBhbnl3YXkgeW91ciBwcm9wb3NhbCBpcyBmdW5jdGlv
+bmFsLAo+IAo+IFNvIHdpdGggb3Igd2l0aG91dCB0aGUgcHJldmlvdXMgcmVtYXJrCgpUaGFuayB5
+b3UgZm9yIHRoZSBkZXRhaWxlZCBleHBsYW5hdGlvbiBhbmQgZm9yIGNoZWNraW5nIHRoaXMuClYz
+IGlzIGNvbWluZyBub3cuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFu
+LnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWls
+bWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

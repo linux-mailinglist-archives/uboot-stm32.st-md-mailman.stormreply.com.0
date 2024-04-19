@@ -2,67 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A59C8AAE0F
-	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 14:06:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B4128AAE13
+	for <lists+uboot-stm32@lfdr.de>; Fri, 19 Apr 2024 14:06:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 03CDBC6DD72;
-	Fri, 19 Apr 2024 12:06:13 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0CC51C6DD9A;
+	Fri, 19 Apr 2024 12:06:26 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A07B3C69066
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6AA23C6DD72
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 19 Apr 2024 12:06:11 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ Fri, 19 Apr 2024 12:06:25 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43JAnT8d006062; Fri, 19 Apr 2024 14:06:01 +0200
+ 43J9JctI005625; Fri, 19 Apr 2024 14:06:13 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=XOZQ9/Z0b7QF1BRvNYCYM20vsp6qthUJ2/4vYF2FX/k=; b=hC
- pqDkrlnowdXMY1kHwng4Z6yql0qdvhNUAsPWeE/oBCXQlpq6Z9NixyTdmk8nt2DJ
- 9MUOUqteIF4MViWYbBgRpyUv5xTZWZA2GG8VdJZJ+6Grs6HdS7Vllq+ty+Zk7Z+4
- z48FjVLBL35hMc4IhJc2LklOyxzlTjmvBPmjENQPdaJ0YldVlzml6NA67QvdVfib
- XIT40Z95Wnz5lOCtT90uReAORoRKR8DrQtKKPnF5RGpiMnj+EzM9Fl7xb5opJjyH
- 8jdrjsrg5BeABYXCWzSrZkYluOQiNIvAuVapESrCpikash8dQ341qMzNTmBxWtPS
- F6Yt4m1+hKoKulieH7jg==
+ selector1; bh=y+yAo/fVt2WjM2ffzSMlKRCiWZbHxrcEWX1Lat/6bVY=; b=6U
+ Z6uIisgm7N7tsvrsLtB3jxT1cFQxm7K9+gnp4Kidhzu3gYWBROQSsHN+UabVCTzq
+ ETbs+KkNaJWfZomsgZyB1zqQE8gnp49CbQXBYdfUgjhX1cUMwkiukUvpvMICDRuh
+ fwbm3aV0hGS15JndRhKQvyukbpwi+fsqVdg2cikWZvTY0bTK+nO2xJ8FTpmVV1+f
+ 5Etn+ONoBI341auefjd8e8lfptQNrfNXzN3BmTbnKHEhYeQh6JJv78oeCltF3tRx
+ ln3g/pGaHWqg5Y/Wp79Qu5d2F1GssPeWHHpCEhWzWWHO0Hu+OM7XkUxyeO+bLep6
+ eK0tjFkRwtz5khGYkO6Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg3m127pn-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg50j9cpk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:06:00 +0200 (MEST)
+ Fri, 19 Apr 2024 14:06:12 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 17CFB4002D;
- Fri, 19 Apr 2024 14:05:57 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C485440046;
+ Fri, 19 Apr 2024 14:06:08 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 57163218622;
- Fri, 19 Apr 2024 14:05:32 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2BCEF218626;
+ Fri, 19 Apr 2024 14:05:42 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:05:31 +0200
-Message-ID: <db3ffa2d-065d-4239-8b40-9a61366ca728@foss.st.com>
-Date: Fri, 19 Apr 2024 14:05:31 +0200
+ 2024 14:05:41 +0200
+Message-ID: <c392f789-5e04-4f4c-beb7-2af8078c945f@foss.st.com>
+Date: Fri, 19 Apr 2024 14:05:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+To: Christophe ROULLIER <christophe.roullier@foss.st.com>, Marek Vasut
+ <marex@denx.de>, <u-boot@lists.denx.de>
 References: <20240326120745.27581-1-marex@denx.de>
- <20240326120745.27581-4-marex@denx.de>
+ <20240326120745.27581-5-marex@denx.de>
+ <DU2PR10MB7787AAE9F658F688BE5E94F58F002@DU2PR10MB7787.EURPRD10.PROD.OUTLOOK.COM>
+ <86655f6c-00b0-4cc3-a7ef-c0c971fa3d15@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240326120745.27581-4-marex@denx.de>
+In-Reply-To: <86655f6c-00b0-4cc3-a7ef-c0c971fa3d15@foss.st.com>
 X-Originating-IP: [10.252.13.94]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-04-19_08,2024-04-19_01,2023-05-22_02
-Cc: u-boot@dh-electronics.com, Joe Hershberger <joe.hershberger@ni.com>,
+Cc: Patrick DELAUNAY - foss <patrick.delaunay@foss.st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Ramon Fried <rfried.dev@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Christophe Roullier <christophe.roullier@st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 03/11] net: dwc_eth_qos: Fold
- board_interface_eth_init into STM32 glue code
+ u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH v2 04/11] net: dwc_eth_qos: Scrub ifdeffery
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,382 +76,81 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-
-On 3/26/24 13:07, Marek Vasut wrote:
-> Move board_interface_eth_init() into eqos_probe_syscfg_stm32() in STM32
-> driver glue code. The eqos_probe_syscfg_stm32() parses STM32 specific DT
-> properties of this MAC and configures SYSCFG registers accordingly, there
-> is nothing board specific happening in this function, move it into generic
-> driver code instead. Drop the now unused duplicates from board files.
-> 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Christophe Roullier <christophe.roullier@st.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> V2: Add RB from Patrice
-> ---
->  board/dhelectronics/dh_stm32mp1/board.c | 82 -----------------------
->  board/st/stm32mp1/stm32mp1.c            | 82 -----------------------
->  drivers/net/dwc_eth_qos_stm32.c         | 86 ++++++++++++++++++++++++-
->  3 files changed, 84 insertions(+), 166 deletions(-)
-> 
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index d1f662d9701..f179c857116 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -48,12 +48,10 @@
->  
->  /* SYSCFG registers */
->  #define SYSCFG_BOOTR		0x00
-> -#define SYSCFG_PMCSETR		0x04
->  #define SYSCFG_IOCTRLSETR	0x18
->  #define SYSCFG_ICNR		0x1C
->  #define SYSCFG_CMPCR		0x20
->  #define SYSCFG_CMPENSETR	0x24
-> -#define SYSCFG_PMCCLRR		0x44
->  
->  #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
->  #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-> @@ -69,16 +67,6 @@
->  
->  #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
->  
-> -#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> -#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> -#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> -
->  #define KS_CCR		0x08
->  #define KS_CCR_EEPROM	BIT(9)
->  #define KS_BE0		BIT(12)
-> @@ -679,76 +667,6 @@ void board_quiesce_devices(void)
->  #endif
->  }
->  
-> -/* eth init function : weak called in eqos driver */
-> -int board_interface_eth_init(struct udevice *dev,
-> -			     phy_interface_t interface_type)
-> -{
-> -	u8 *syscfg;
-> -	u32 value;
-> -	bool eth_clk_sel_reg = false;
-> -	bool eth_ref_clk_sel_reg = false;
-> -
-> -	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> -
-> -	/* Ethernet 50Mhz RMII clock selection */
-> -	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth-ref-clk-sel");
-> -
-> -	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> -
-> -	if (!syscfg)
-> -		return -ENODEV;
-> -
-> -	switch (interface_type) {
-> -	case PHY_INTERFACE_MODE_MII:
-> -		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		debug("%s: PHY_INTERFACE_MODE_MII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_GMII:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> -		debug("%s: PHY_INTERFACE_MODE_GMII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_RMII:
-> -		if (eth_ref_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> -				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> -		debug("%s: PHY_INTERFACE_MODE_RMII\n", __func__);
-> -		break;
-> -	case PHY_INTERFACE_MODE_RGMII:
-> -	case PHY_INTERFACE_MODE_RGMII_ID:
-> -	case PHY_INTERFACE_MODE_RGMII_RXID:
-> -	case PHY_INTERFACE_MODE_RGMII_TXID:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> -		debug("%s: PHY_INTERFACE_MODE_RGMII\n", __func__);
-> -		break;
-> -	default:
-> -		debug("%s: Do not manage %d interface\n",
-> -		      __func__, interface_type);
-> -		/* Do not manage others interfaces */
-> -		return -EINVAL;
-> -	}
-> -
-> -	/* clear and set ETH configuration bits */
-> -	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> -	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> -	       syscfg + SYSCFG_PMCCLRR);
-> -	writel(value, syscfg + SYSCFG_PMCSETR);
-> -
-> -	return 0;
-> -}
-> -
->  #if defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-> index a17c314daeb..f284b0dfd28 100644
-> --- a/board/st/stm32mp1/stm32mp1.c
-> +++ b/board/st/stm32mp1/stm32mp1.c
-> @@ -52,12 +52,10 @@
->  
->  /* SYSCFG registers */
->  #define SYSCFG_BOOTR		0x00
-> -#define SYSCFG_PMCSETR		0x04
->  #define SYSCFG_IOCTRLSETR	0x18
->  #define SYSCFG_ICNR		0x1C
->  #define SYSCFG_CMPCR		0x20
->  #define SYSCFG_CMPENSETR	0x24
-> -#define SYSCFG_PMCCLRR		0x44
->  
->  #define SYSCFG_BOOTR_BOOT_MASK		GENMASK(2, 0)
->  #define SYSCFG_BOOTR_BOOTPD_SHIFT	4
-> @@ -73,16 +71,6 @@
->  
->  #define SYSCFG_CMPENSETR_MPU_EN		BIT(0)
->  
-> -#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> -#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> -
-> -#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> -#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> -#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> -
->  #define USB_LOW_THRESHOLD_UV		200000
->  #define USB_WARNING_LOW_THRESHOLD_UV	660000
->  #define USB_START_LOW_THRESHOLD_UV	1230000
-> @@ -742,76 +730,6 @@ void board_quiesce_devices(void)
->  	setup_led(LEDST_OFF);
->  }
->  
-> -/* eth init function : weak called in eqos driver */
-> -int board_interface_eth_init(struct udevice *dev,
-> -			     phy_interface_t interface_type)
-> -{
-> -	u8 *syscfg;
-> -	u32 value;
-> -	bool eth_clk_sel_reg = false;
-> -	bool eth_ref_clk_sel_reg = false;
-> -
-> -	/* Gigabit Ethernet 125MHz clock selection. */
-> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> -
-> -	/* Ethernet 50Mhz RMII clock selection */
-> -	eth_ref_clk_sel_reg =
-> -		dev_read_bool(dev, "st,eth-ref-clk-sel");
-> -
-> -	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> -
-> -	if (!syscfg)
-> -		return -ENODEV;
-> -
-> -	switch (interface_type) {
-> -	case PHY_INTERFACE_MODE_MII:
-> -		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		log_debug("PHY_INTERFACE_MODE_MII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_GMII:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> -		log_debug("PHY_INTERFACE_MODE_GMII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_RMII:
-> -		if (eth_ref_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> -				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> -		log_debug("PHY_INTERFACE_MODE_RMII\n");
-> -		break;
-> -	case PHY_INTERFACE_MODE_RGMII:
-> -	case PHY_INTERFACE_MODE_RGMII_ID:
-> -	case PHY_INTERFACE_MODE_RGMII_RXID:
-> -	case PHY_INTERFACE_MODE_RGMII_TXID:
-> -		if (eth_clk_sel_reg)
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> -				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> -		else
-> -			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> -		log_debug("PHY_INTERFACE_MODE_RGMII\n");
-> -		break;
-> -	default:
-> -		log_debug("Do not manage %d interface\n",
-> -			  interface_type);
-> -		/* Do not manage others interfaces */
-> -		return -EINVAL;
-> -	}
-> -
-> -	/* clear and set ETH configuration bits */
-> -	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> -	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> -	       syscfg + SYSCFG_PMCCLRR);
-> -	writel(value, syscfg + SYSCFG_PMCSETR);
-> -
-> -	return 0;
-> -}
-> -
->  enum env_location env_get_location(enum env_operation op, int prio)
->  {
->  	u32 bootmode = get_bootmode();
-> diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-> index fd29a604987..7520a136ed0 100644
-> --- a/drivers/net/dwc_eth_qos_stm32.c
-> +++ b/drivers/net/dwc_eth_qos_stm32.c
-> @@ -24,11 +24,26 @@
->  #include <netdev.h>
->  #include <phy.h>
->  #include <reset.h>
-> +#include <syscon.h>
->  #include <wait_bit.h>
->  #include <linux/delay.h>
->  
->  #include "dwc_eth_qos.h"
->  
-> +/* SYSCFG registers */
-> +#define SYSCFG_PMCSETR		0x04
-> +#define SYSCFG_PMCCLRR		0x44
-> +
-> +#define SYSCFG_PMCSETR_ETH_CLK_SEL	BIT(16)
-> +#define SYSCFG_PMCSETR_ETH_REF_CLK_SEL	BIT(17)
-> +
-> +#define SYSCFG_PMCSETR_ETH_SELMII	BIT(20)
-> +
-> +#define SYSCFG_PMCSETR_ETH_SEL_MASK	GENMASK(23, 21)
-> +#define SYSCFG_PMCSETR_ETH_SEL_GMII_MII	0
-> +#define SYSCFG_PMCSETR_ETH_SEL_RGMII	BIT(21)
-> +#define SYSCFG_PMCSETR_ETH_SEL_RMII	BIT(23)
-> +
->  static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev)
->  {
->  #ifdef CONFIG_CLK
-> @@ -108,11 +123,78 @@ static int eqos_stop_clks_stm32(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static int eqos_probe_syscfg_stm32(struct udevice *dev,
-> +				   phy_interface_t interface_type)
-> +{
-> +	bool eth_ref_clk_sel_reg = false;
-> +	bool eth_clk_sel_reg = false;
-> +	u8 *syscfg;
-> +	u32 value;
-> +
-> +	/* Gigabit Ethernet 125MHz clock selection. */
-> +	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
-> +
-> +	/* Ethernet 50Mhz RMII clock selection */
-> +	eth_ref_clk_sel_reg = dev_read_bool(dev, "st,eth-ref-clk-sel");
-> +
-> +	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
-> +	if (!syscfg)
-> +		return -ENODEV;
-> +
-> +	switch (interface_type) {
-> +	case PHY_INTERFACE_MODE_MII:
-> +		value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> +			SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> +		log_debug("PHY_INTERFACE_MODE_MII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_GMII:
-> +		if (eth_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII |
-> +				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_GMII_MII;
-> +		log_debug("PHY_INTERFACE_MODE_GMII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_RMII:
-> +		if (eth_ref_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RMII |
-> +				SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RMII;
-> +		log_debug("PHY_INTERFACE_MODE_RMII\n");
-> +		break;
-> +	case PHY_INTERFACE_MODE_RGMII:
-> +	case PHY_INTERFACE_MODE_RGMII_ID:
-> +	case PHY_INTERFACE_MODE_RGMII_RXID:
-> +	case PHY_INTERFACE_MODE_RGMII_TXID:
-> +		if (eth_clk_sel_reg)
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RGMII |
-> +				SYSCFG_PMCSETR_ETH_CLK_SEL;
-> +		else
-> +			value = SYSCFG_PMCSETR_ETH_SEL_RGMII;
-> +		log_debug("PHY_INTERFACE_MODE_RGMII\n");
-> +		break;
-> +	default:
-> +		log_debug("Do not manage %d interface\n",
-> +			  interface_type);
-> +		/* Do not manage others interfaces */
-> +		return -EINVAL;
-> +	}
-> +
-> +	/* clear and set ETH configuration bits */
-> +	writel(SYSCFG_PMCSETR_ETH_SEL_MASK | SYSCFG_PMCSETR_ETH_SELMII |
-> +	       SYSCFG_PMCSETR_ETH_REF_CLK_SEL | SYSCFG_PMCSETR_ETH_CLK_SEL,
-> +	       syscfg + SYSCFG_PMCCLRR);
-> +	writel(value, syscfg + SYSCFG_PMCSETR);
-> +
-> +	return 0;
-> +}
-> +
->  static int eqos_probe_resources_stm32(struct udevice *dev)
->  {
->  	struct eqos_priv *eqos = dev_get_priv(dev);
-> -	int ret;
->  	phy_interface_t interface;
-> +	int ret;
->  
->  	debug("%s(dev=%p):\n", __func__, dev);
->  
-> @@ -123,7 +205,7 @@ static int eqos_probe_resources_stm32(struct udevice *dev)
->  		return -EINVAL;
->  	}
->  
-> -	ret = board_interface_eth_init(dev, interface);
-> +	ret = eqos_probe_syscfg_stm32(dev, interface);
->  	if (ret)
->  		return -EINVAL;
->  
-Applied on u-boot-stm32/master 
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+CgpPbiA0LzgvMjQgMDk6MjcsIENocmlzdG9waGUgUk9VTExJRVIgd3JvdGU6Cj4+IC0tLS0tT3Jp
+Z2luYWwgTWVzc2FnZS0tLS0tCj4+IEZyb206IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+
+PiBTZW50OiBUdWVzZGF5LCBNYXJjaCAyNiwgMjAyNCAxOjA3IFBNCj4+IFRvOiB1LWJvb3RAbGlz
+dHMuZGVueC5kZQo+PiBDYzogTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+OyBQYXRyaWNlIENI
+T1RBUkQgLSBmb3NzIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+OyBDaHJpc3RvcGhlIFJP
+VUxMSUVSIDxjaHJpc3RvcGhlLnJvdWxsaWVyQHN0LmNvbT47IEpvZSBIZXJzaGJlcmdlciA8am9l
+LmhlcnNoYmVyZ2VyQG5pLmNvbT47IFBhdHJpY2sgREVMQVVOQVkgLSBmb3NzIDxwYXRyaWNrLmRl
+bGF1bmF5QGZvc3Muc3QuY29tPjsgUmFtb24gRnJpZWQgPHJmcmllZC5kZXZAZ21haWwuY29tPjsg
+dS1ib290QGRoLWVsZWN0cm9uaWNzLmNvbTsgdWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9y
+bXJlcGx5LmNvbQo+PiBTdWJqZWN0OiBbUEFUQ0ggdjIgMDQvMTFdIG5ldDogZHdjX2V0aF9xb3M6
+IFNjcnViIGlmZGVmZmVyeQo+Pgo+PiBSZXBsYWNlIGlmZGVmIENPTkZJR19DTEsgd2l0aCBpZiAo
+Q09ORklHX0lTX0VOQUJMRUQoQ0xLKSkgdG8gaW1wcm92ZSBjb2RlIGJ1aWxkIGNvdmVyYWdlLiBT
+b21lIG9mIHRoZSBmdW5jdGlvbnMgcHJpbnRlZCBkZWJ1ZygiJXM6IE9LXG4iLCBfX2Z1bmNfXyk7
+IG9uIGV4aXQgd2l0aCBhbmQgd2l0aG91dCBDTEsgZW5hYmxlZCwgc29tZSBkaWQgbm90LCBtYWtl
+IGl0IGNvbnNpc3RlbnQgYW5kIHByaW50IG5vdGhpbmcgaWYgQ0xLIGlzIGRpc2FibGVkLgo+Pgo+
+PiBSZXZpZXdlZC1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5j
+b20+Cj4+IFNpZ25lZC1vZmYtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+PiAtLS0K
+Pj4gQ2M6IENocmlzdG9waGUgUm91bGxpZXIgPGNocmlzdG9waGUucm91bGxpZXJAc3QuY29tPgo+
+PiBDYzogSm9lIEhlcnNoYmVyZ2VyIDxqb2UuaGVyc2hiZXJnZXJAbmkuY29tPgo+PiBDYzogUGF0
+cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4+IENjOiBQYXRyaWNr
+IERlbGF1bmF5IDxwYXRyaWNrLmRlbGF1bmF5QGZvc3Muc3QuY29tPgo+PiBDYzogUmFtb24gRnJp
+ZWQgPHJmcmllZC5kZXZAZ21haWwuY29tPgo+PiBDYzogdS1ib290QGRoLWVsZWN0cm9uaWNzLmNv
+bQo+PiBDYzogdWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQo+PiAtLS0K
+Pj4gVjI6IEFkZCBSQiBmcm9tIFBhdHJpY2UKPj4gLS0tCj4+IMKgIGRyaXZlcnMvbmV0L2R3Y19l
+dGhfcW9zX3N0bTMyLmMgfCAyNSArKysrKysrKysrKystLS0tLS0tLS0tLS0tCj4+IMKgIDEgZmls
+ZSBjaGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspLCAxMyBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAt
+LWdpdCBhL2RyaXZlcnMvbmV0L2R3Y19ldGhfcW9zX3N0bTMyLmMgYi9kcml2ZXJzL25ldC9kd2Nf
+ZXRoX3Fvc19zdG0zMi5jIGluZGV4IDc1MjBhMTM2ZWQwLi5kN2VjMGM5YmUzNiAxMDA2NDQKPj4g
+LS0tIGEvZHJpdmVycy9uZXQvZHdjX2V0aF9xb3Nfc3RtMzIuYwo+PiArKysgYi9kcml2ZXJzL25l
+dC9kd2NfZXRoX3Fvc19zdG0zMi5jCj4+IEBAIC00NiwyMSArNDYsMjIgQEAKPj4KPj4gwqAgc3Rh
+dGljIHVsb25nIGVxb3NfZ2V0X3RpY2tfY2xrX3JhdGVfc3RtMzIoc3RydWN0IHVkZXZpY2UgKmRl
+dinCoCB7IC0jaWZkZWYgQ09ORklHX0NMSwo+PiAtwqDCoMKgwqDCoMKgIHN0cnVjdCBlcW9zX3By
+aXYgKmVxb3MgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKPj4gK8KgwqDCoMKgwqDCoCBzdHJ1Y3QgZXFv
+c19wcml2IF9fbWF5YmVfdW51c2VkICplcW9zID0gZGV2X2dldF9wcml2KGRldik7Cj4+ICsKPj4g
+K8KgwqDCoMKgwqDCoCBpZiAoIUNPTkZJR19JU19FTkFCTEVEKENMSykpCj4+ICvCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAwOwo+Pgo+PiDCoMKgwqDCoMKgwqDCoMKgIHJldHVy
+biBjbGtfZ2V0X3JhdGUoJmVxb3MtPmNsa19tYXN0ZXJfYnVzKTsKPj4gLSNlbHNlCj4+IC3CoMKg
+wqDCoMKgwqAgcmV0dXJuIDA7Cj4+IC0jZW5kaWYKPj4gwqAgfQo+Pgo+PiDCoCBzdGF0aWMgaW50
+IGVxb3Nfc3RhcnRfY2xrc19zdG0zMihzdHJ1Y3QgdWRldmljZSAqZGV2KcKgIHsgLSNpZmRlZiBD
+T05GSUdfQ0xLCj4+IC3CoMKgwqDCoMKgwqAgc3RydWN0IGVxb3NfcHJpdiAqZXFvcyA9IGRldl9n
+ZXRfcHJpdihkZXYpOwo+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBlcW9zX3ByaXYgX19tYXliZV91
+bnVzZWQgKmVxb3MgPSBkZXZfZ2V0X3ByaXYoZGV2KTsKPj4gwqDCoMKgwqDCoMKgwqDCoCBpbnQg
+cmV0Owo+Pgo+PiArwqDCoMKgwqDCoMKgIGlmICghQ09ORklHX0lTX0VOQUJMRUQoQ0xLKSkKPj4g
+K8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIDA7Cj4+ICsKPj4gwqDCoMKgwqDC
+oMKgwqDCoCBkZWJ1ZygiJXMoZGV2PSVwKTpcbiIsIF9fZnVuY19fLCBkZXYpOwo+Pgo+PiDCoMKg
+wqDCoMKgwqDCoMKgIHJldCA9IGNsa19lbmFibGUoJmVxb3MtPmNsa19tYXN0ZXJfYnVzKTsKPj4g
+QEAgLTg5LDEyICs5MCwxMCBAQCBzdGF0aWMgaW50IGVxb3Nfc3RhcnRfY2xrc19zdG0zMihzdHJ1
+Y3QgdWRldmljZSAqZGV2KQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB9Cj4+
+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVxb3MtPmNsa19ja19lbmFibGVkID0g
+dHJ1ZTsKPj4gwqDCoMKgwqDCoMKgwqDCoCB9Cj4+IC0jZW5kaWYKPj4KPj4gwqDCoMKgwqDCoMKg
+wqDCoCBkZWJ1ZygiJXM6IE9LXG4iLCBfX2Z1bmNfXyk7Cj4+IMKgwqDCoMKgwqDCoMKgwqAgcmV0
+dXJuIDA7Cj4+Cj4+IC0jaWZkZWYgQ09ORklHX0NMSwo+PiDCoCBlcnJfZGlzYWJsZV9jbGtfdHg6
+Cj4+IMKgwqDCoMKgwqDCoMKgwqAgY2xrX2Rpc2FibGUoJmVxb3MtPmNsa190eCk7Cj4+IMKgIGVy
+cl9kaXNhYmxlX2Nsa19yeDoKPj4gQEAgLTEwNCwyMCArMTAzLDIwIEBAIGVycl9kaXNhYmxlX2Ns
+a19tYXN0ZXJfYnVzOgo+PiDCoCBlcnI6Cj4+IMKgwqDCoMKgwqDCoMKgwqAgZGVidWcoIiVzOiBG
+QUlMRUQ6ICVkXG4iLCBfX2Z1bmNfXywgcmV0KTsKPj4gwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4g
+cmV0Owo+PiAtI2VuZGlmCj4+IMKgIH0KPj4KPj4gwqAgc3RhdGljIGludCBlcW9zX3N0b3BfY2xr
+c19zdG0zMihzdHJ1Y3QgdWRldmljZSAqZGV2KcKgIHsgLSNpZmRlZiBDT05GSUdfQ0xLCj4+IC3C
+oMKgwqDCoMKgwqAgc3RydWN0IGVxb3NfcHJpdiAqZXFvcyA9IGRldl9nZXRfcHJpdihkZXYpOwo+
+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBlcW9zX3ByaXYgX19tYXliZV91bnVzZWQgKmVxb3MgPSBk
+ZXZfZ2V0X3ByaXYoZGV2KTsKPj4gKwo+PiArwqDCoMKgwqDCoMKgIGlmICghQ09ORklHX0lTX0VO
+QUJMRUQoQ0xLKSkKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIDA7Cj4+
+Cj4+IMKgwqDCoMKgwqDCoMKgwqAgZGVidWcoIiVzKGRldj0lcCk6XG4iLCBfX2Z1bmNfXywgZGV2
+KTsKPj4KPj4gwqDCoMKgwqDCoMKgwqDCoCBjbGtfZGlzYWJsZSgmZXFvcy0+Y2xrX3R4KTsKPj4g
+wqDCoMKgwqDCoMKgwqDCoCBjbGtfZGlzYWJsZSgmZXFvcy0+Y2xrX3J4KTsKPj4gwqDCoMKgwqDC
+oMKgwqDCoCBjbGtfZGlzYWJsZSgmZXFvcy0+Y2xrX21hc3Rlcl9idXMpOwo+PiAtI2VuZGlmCj4+
+Cj4+IMKgwqDCoMKgwqDCoMKgwqAgZGVidWcoIiVzOiBPS1xuIiwgX19mdW5jX18pOwo+PiDCoMKg
+wqDCoMKgwqDCoMKgIHJldHVybiAwOwo+PiAtLSAKPj4gMi40My4wCj4+Cj4gUmV2aWV3ZWQtYnk6
+IENocmlzdG9waGUgUk9VTExJRVIgPGNocmlzdG9waGUucm91bGxpZXJAZm9zcy5zdC5jb20+CgpB
+cHBsaWVkIG9uIHUtYm9vdC1zdG0zMi9tYXN0ZXIgCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0z
+MkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9y
+bXJlcGx5LmNvbS9tYWlsbWFuL2xpc3RpbmZvL3Vib290LXN0bTMyCg==

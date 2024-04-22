@@ -2,62 +2,128 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DA6F8AD038
-	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Apr 2024 17:07:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DBB138AD4F2
+	for <lists+uboot-stm32@lfdr.de>; Mon, 22 Apr 2024 21:36:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id F0D37C7128C;
-	Mon, 22 Apr 2024 15:07:16 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7E408C7128B;
+	Mon, 22 Apr 2024 19:36:10 +0000 (UTC)
+Received: from mail-qt1-f181.google.com (mail-qt1-f181.google.com
+ [209.85.160.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0D52FC7128B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id F38CCC6B444
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 22 Apr 2024 15:07:14 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43MD4nAW023287;
- Mon, 22 Apr 2024 17:07:11 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding:content-type; s=selector1; bh=uYsu2Qg
- ABhYEb4oQmllAURBySUh5eE5wEiJ4I+to6DY=; b=j87jHXVA9Ab5FzCeirJEkzv
- iqS3bKfTe1W98nmdQoO35ZTC9UdeU3+EeNxMZxeryOWHz0tpXkn26wBlomDql58o
- s4JNPcNTyj3lXrFEZF1KxbEMSMu3ndemfv+lLAB9J7p7h6zryqvXcLcsHu8oGM/4
- W/s3YRdAVD3EQuG/OxGtDvteOxGbGwuzmhh6Zvpb9Vy0QxVFZGyZDIypUrHCzRot
- G5rVd0/VwHxubrJTVYY9l4quae0tZ27ZMi+7AjdGpnX5mQL0OlB+mT9JrYQ+yec/
- teC3BJbA0NAZAC4LkQeg0xElV1i0ocFe4+a9qEgkcZpxczKXrFbq/ooKAlAWb0g=
- =
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xm4kaygby-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 22 Apr 2024 17:07:11 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7296B4002D;
- Mon, 22 Apr 2024 17:07:06 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4E9FF22194A;
- Mon, 22 Apr 2024 17:06:48 +0200 (CEST)
-Received: from localhost (10.48.86.98) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 22 Apr
- 2024 17:06:48 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 22 Apr 2024 17:06:45 +0200
-Message-ID: <20240422150645.1613198-1-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
+ Mon, 22 Apr 2024 19:36:09 +0000 (UTC)
+Received: by mail-qt1-f181.google.com with SMTP id
+ d75a77b69052e-4375ddb9eaeso28731261cf.3
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 22 Apr 2024 12:36:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713814569; x=1714419369;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L21Ma6lwh0kQWeK64WUAdv5y8b5n+0KVnewRokhfak8=;
+ b=YSXVfsyv0n/2NuizsUSHcqqWowHp9+6RdH+D4ebD68O+aFOYKt+7Ugj3pPDAzTObdc
+ 2FT2JRWbFNVtnSTyu6KDqcFJEZvqAvcan4ez775bgjgOztZiPOYh7OCUJHXgTYLA1R71
+ a7x+B0Rw02oePgpfsFQKLwGuEWizn+NywrMBc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713814569; x=1714419369;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L21Ma6lwh0kQWeK64WUAdv5y8b5n+0KVnewRokhfak8=;
+ b=cGKWackxsPyAfPWL+ThJ97IGhNTAYXMffuhOv+64C/alg2iFc9Exfy6I91PRGaOZ1N
+ ryHucfz14Ps8QJqGhcAmekuw8rP1vVH/nOnG6ut7ip78RSoYw0p7dqHmgwbfAbQuRkRy
+ vSlpQET1Yhn6MY6kBqWG3HL15MXY0ymR4omX7ZXJ/dQGf/M8J/uz4FWrdDnDwyFu3oIp
+ EChWKVF1nh1v5XI8vqILv93WdgUe2DMd/iTFUdstwUvDMTgdw6nDvJBmA9nmIgTgVZ9r
+ 16mr7WTnnIiliXB/76XbCGR3Xp9NJuRNLIuv1j6zsTjZ2SmfdEzzProJu26Uk5/9iCft
+ XJ4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVoP0E2ClvecnOBFtkPt91PVuvdS2G8CkErJSI4f1Gwn+d0tN1pgPEIp0LbTzLQYGpbrwH9Fz6U6B1jDHLmCMsd994gPw4PUU92qUic7Ejw8w9D7d1/kUgB
+X-Gm-Message-State: AOJu0YzVU23AV0XIfNWR8X2+knsrffMoDBt1AP9Hchgy6U+WPkU5MrN1
+ fyoyk8hSab8baVf2Lrkdtagmqu8464+muP5LhyHVFifojYvOV5IWpFoXm4cTtgo=
+X-Google-Smtp-Source: AGHT+IGjga4KZKogIyZM1p0irH2LmXlKumpkIhr3LkiiUBMFN9CN5JkF/ZXsUs9LfKSlBuFF6LNkCQ==
+X-Received: by 2002:ac8:7d05:0:b0:435:2351:75c6 with SMTP id
+ g5-20020ac87d05000000b00435235175c6mr14232949qtb.46.1713814568681; 
+ Mon, 22 Apr 2024 12:36:08 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
+ kk3-20020a05622a2c0300b00436b2135b51sm4492448qtb.64.2024.04.22.12.36.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 12:36:08 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
+In-Reply-To: <cover.1713250508.git.michal.simek@amd.com>
+References: <cover.1713250508.git.michal.simek@amd.com>
+Message-Id: <171381456119.1909236.8049238331801273262.b4-ty@konsulko.com>
+Date: Mon, 22 Apr 2024 13:36:01 -0600
 MIME-Version: 1.0
-X-Originating-IP: [10.48.86.98]
-X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-22_09,2024-04-22_01,2023-05-22_02
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [Uboot-stm32] [PATCH v2] stm32mp: Reserve OPTEE area in EFI memory
-	map
+X-Mailer: b4 0.13.0
+Cc: Nishanth Menon <nm@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Minda Chen <minda.chen@starfivetech.com>, Tim Lunn <tim@feathertop.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "moderated list:ST BOARDS" <uboot-stm32@st-md-mailman.stormreply.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Fabio Estevam <festevam@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Vignesh R <vigneshr@ti.com>, =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Aaron Williams <awilliams@marvell.com>, Viacheslav Bocharov <adeep@lexina.in>,
+ Stefan Roese <sr@denx.de>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Gregory CLEMENT <gregory.clement@bootlin.com>, Bin Meng <bmeng@tinylab.org>,
+ Lukasz Majewski <lukma@denx.de>, Eddie James <eajames@linux.ibm.com>,
+ Horatiu Vultur <horatiu.vultur@microchip.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Doug Zobel <douglas.zobel@climate.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>, Stefano Babic <sbabic@denx.de>,
+ Peter Robinson <pbrobinson@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, John Clark <inindev@gmail.com>,
+ =?utf-8?q?Pawe=C5=82_Jarosz?= <paweljarosz3691@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Enrico Leto <enrico.leto@siemens.com>, Andre Przywara <andre.przywara@arm.com>,
+ Oliver Graute <oliver.graute@kococonnector.com>,
+ Philip Oberfichtner <pro@denx.de>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki <jagan@edgeble.ai>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Matthias Winker <matthias.winker@de.bosch.com>, Heiko Schocher <hs@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Johan Jonker <jbx6244@gmail.com>,
+ Lars Povlsen <lars.povlsen@microchip.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Joshua Riek <jjriek@verizon.net>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Seung-Woo Kim <sw0312.kim@samsung.com>,
+ "open list:VIM3" <u-boot-amlogic@groups.io>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
+ Anastasiia Lukianenko <vicooodin@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Gatien Chevallier <gatien.chevallier@foss.st.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 0/5] Kconfig: some cleanups
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,73 +140,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
-memory region above ram_top is tagged in EFI memory map as
-EFI_BOOT_SERVICES_DATA.
-In case of STM32MP1/STM32MP13 platforms, above ram_top, there is one
-reserved-memory region tagged "no-map" dedicated to OP-TEE :
- _ addr=de000000 size=2000000 for stm32mp157x-dkx and stm32mp135f-dk
- _ addr=fe000000 size=2000000 for stm32mp157c-ev1
+On Tue, 16 Apr 2024 08:55:14 +0200, Michal Simek wrote:
 
-Before booting kernel, EFI memory map is first built, the OPTEE region is
-tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NONE
-is used.
+> I looked as cleaning up some dependencies and I found that qconfig is
+> reporting some issues. This series is fixing some of them. But there are
+> still some other pending. That's why please go and fix them if they are
+> related to your board.
+> 
+> UTF-8: I am using uni2ascii -B < file to do conversion. When you run it in
+> a loop you will find some other issue with copyright chars or some issues
+> in files taken from the Linux kernel like DTs. They should be likely fixed
+> in the kernel first.
+> Based on discussion I am ignoring names too.
+> 
+> [...]
 
-Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
-which try to add again the same OPTEE region (addr=de000000 size=2000000
-in case of stm32mp157x-dkx / stm32mp135f-dk or addr=fe000000 size=2000000
-in case for stm2mp157c-ev1)
-but now with LMB_NOMAP tag which produces the following error message :
+Applied to u-boot/master, thanks!
 
- _ for stm32mp157x-dkx / stm32mp135f-dk :
-  "ERROR: reserving fdt memory region failed (addr=de000000 size=2000000 flags=4)"
-
- _ for stm32mp157c-ev1 :
-  "ERROR: reserving fdt memory region failed (addr=fe000000 size=2000000 flags=4)"
-
-To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
-it as reserved.
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
----
-
-Changes in v2:
- _ update commit message by adding information about memory area
-   dedicated for OPTEE for various STM32MP1/STM32MP13 boards.
-
- arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index fb1208fc5d5..f67f54f2ae0 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -7,6 +7,7 @@
- 
- #include <common.h>
- #include <dm.h>
-+#include <efi_loader.h>
- #include <image.h>
- #include <init.h>
- #include <lmb.h>
-@@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 
- 	return reg + size;
- }
-+
-+void efi_add_known_memory(void)
-+{
-+	if (IS_ENABLED(CONFIG_EFI_LOADER))
-+		/*
-+		 * Memory over ram_top is reserved to OPTEE.
-+		 * Declare to EFI only memory area below ram_top
-+		 */
-+		efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
-+				   EFI_CONVENTIONAL_MEMORY);
-+}
 -- 
-2.25.1
+Tom
+
 
 _______________________________________________
 Uboot-stm32 mailing list

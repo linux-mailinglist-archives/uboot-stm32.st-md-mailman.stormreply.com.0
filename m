@@ -2,78 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B85E28B36C0
-	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Apr 2024 13:54:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2B708B3699
+	for <lists+uboot-stm32@lfdr.de>; Fri, 26 Apr 2024 13:40:34 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6F30BC71296;
-	Fri, 26 Apr 2024 11:54:18 +0000 (UTC)
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com
- [209.85.219.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 65B22C71292;
+	Fri, 26 Apr 2024 11:40:34 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9F514C71291
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7212EC71291
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Apr 2024 16:13:35 +0000 (UTC)
-Received: by mail-qv1-f51.google.com with SMTP id
- 6a1803df08f44-69b206d8c45so542046d6.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 25 Apr 2024 09:13:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714061614; x=1714666414;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U2PQX4SkDf/EzV28YNsTNC5RWWz59W783pHKrVePLfQ=;
- b=ZbQ/u6eDmdHSC9qDSw4muwVmZPVFfVSqgvuXlEEZk1oHNioLL9AzQekgns0/STDusl
- oIU8sSy6z8xXd2brnxhWI9nw65oh34YRtAvhf7+K13WL2MnjZtsy/nhH1Wi504eY4Uq7
- M8Jsk+we5guZTT/0SCJIzJn7F1NskvMiw0Ukl9cYdtL2WgT6WEb4bievEPuUmhknJrLe
- J4rSNcor5XoUeExBAj2/NPDiz/svAWNncE/WyN6F6BttvdR5Cj3TtCKA9pPXNxPKGozQ
- zeMSe9TlVJtVOlXUhdvApTy1ze19xll2pa2v73rKSGo5rg4zJCSrvThOpX6vBgSbHjs3
- 18FQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714061614; x=1714666414;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U2PQX4SkDf/EzV28YNsTNC5RWWz59W783pHKrVePLfQ=;
- b=S2+MbxrKq7TBYS5+ychUnOv07KgbQbhO1YBMU1sCtFN5sMh0AjVyc4JMGrLVqhobGe
- TLgIQu0MYwr4P41vvPr7eI8Rf00tQRtNOVzcUeTYs5gdNfMyQyF3hBst1z72EcmH8m6p
- c4Pb1IwtdQmzRz7OayJPgAARKf4BRdvwDNJfUovcfkMAnpWoQl0kSUp7/Em7wDIjwbQy
- +q9B3BDlU/KvAZSNaaLemDNf1u2xBshX1luNr55a3wybJ1FjRGIXPneTx8mMR2oG4zCJ
- uQmH1TpCm9hIqQ3qb5qQBlkkTFI3C79P3rBLEux3+bccZ/nyJXow4tnEVFg1OlXZR8Vk
- TEBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVPOZkgHZQ2SeQAmFhv4pEfx7hCBJtBAiTt5y2dzCeOTr1apnxBTku61Kuv58Vb2OEbI2RE1e3YMufMj2AwIJ4YW5UHeIpE00emxfybuGrSbFQFYouk0S8X
-X-Gm-Message-State: AOJu0Yy3RhFOFZdaEDExH6U5vVojMwk+GPLQXY+asl9TTevIn8UUHxWS
- eHwIn2nX7hPxlz7Fe0UQGA6oKpDD0J/0W0ujnvBWGBAxqwlKSkVmA0lRjaPLQYPa1SR0fv4PJAc
- N1DEB3pxoVda8IoUf11PHG1bkUWI=
-X-Google-Smtp-Source: AGHT+IEE2nxUGaw91/m4nNn5traNusLve8+k8ZVX8nHTnpyYcNJPocB8r8U0fIag9Z195L9s0nBds8IpQ2d8LTw/zNk=
-X-Received: by 2002:a05:6214:27c9:b0:6a0:a98a:481d with SMTP id
- ge9-20020a05621427c900b006a0a98a481dmr16775qvb.2.1714061614494; Thu, 25 Apr
- 2024 09:13:34 -0700 (PDT)
+ Fri, 26 Apr 2024 11:40:33 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 61CBE8903D;
+ Fri, 26 Apr 2024 13:40:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714131632;
+ bh=byDZNyoB/GdO/R1UThf9Je5FtYXjvibE7m00zoSM7jY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=jNacN8RMSI2HuNCjqWvk6oFau/1lsgIKeT8AcRyrP7plEIzWSneU4yiein5bi/bSn
+ ow/YY1brlskFgULjs1Ivh2Imie6w77YQuuDwAZc9sTlBoB2vOKny6rdmLQiVwUU/Vl
+ 6jVGHP1Wudu4FPJox2kvJAII9yZt8sKLT1egzS8aFt0F2IuWWA2lfulh1ADIfQMsWh
+ Ns3K31pIe2pf+DtLx3Sn7P3ITFUTDxXjOvuhDk22EkX8JmUUTfdJhFZx3MjI31KUsI
+ NoMqcXlz+zbUqdpgpBEj2FymP9d5gV4v4DeW0568xb7qatln95MjPzRB1aZFvneCAm
+ 2SlZWpR9DgIAA==
+Message-ID: <4f3e2fc7-5052-41cd-be7b-ffdb5f75f308@denx.de>
+Date: Fri, 26 Apr 2024 13:24:58 +0200
 MIME-Version: 1.0
-References: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
- <CAD2FfiGuFaC=r+TGfq9auzWJbyzVNbug8zR9RzSwM2+Uk52d+Q@mail.gmail.com>
- <CAC_iWj+BonsVbA5Bw3Kck2k4b8SXru0U_Y2kAmx5=_t6SozotA@mail.gmail.com>
- <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
-In-Reply-To: <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
-From: Richard Hughes <hughsient@gmail.com>
-Date: Thu, 25 Apr 2024 17:13:21 +0100
-Message-ID: <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailman-Approved-At: Fri, 26 Apr 2024 11:54:16 +0000
-Cc: Tom Rini <trini@konsulko.com>, Jonas Karlman <jonas@kwiboo.se>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Michael Walle <michael@walle.cc>,
- FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Paul Liu <paul.liu@linaro.org>, Michal Simek <michal.simek@amd.com>,
- chris.obbard@collabora.com, Heiko Thiery <heiko.thiery@gmail.com>
-Subject: Re: [Uboot-stm32] Capsule GUIDs and LVFS
+User-Agent: Mozilla Thunderbird
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20240421231849.194648-1-marex@denx.de>
+ <d0f4afdd-752d-4157-a6c0-2132a2fc9696@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <d0f4afdd-752d-4157-a6c0-2132a2fc9696@foss.st.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH 01/19] ARM: dts: stm32: Add alternate
+ pinmux for MP13 ADC pins
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,32 +56,48 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 25 Apr 2024 at 16:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> I discussed an idea with Ilias to generate GUIDs dynamically based on
-> the board compatible/model, which seem to essentially just an
-> abstraction on this..
+On 4/26/24 9:49 AM, Patrice CHOTARD wrote:
+> 
+> 
+> On 4/22/24 01:16, Marek Vasut wrote:
+>> Add another mux option for ADC pins, this is used on
+>> DH electronics STM32MP13xx DHCOR DHSBC board.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>   arch/arm/dts/stm32mp13-pinctrl.dtsi | 6 ++++++
+>>   1 file changed, 6 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/stm32mp13-pinctrl.dtsi b/arch/arm/dts/stm32mp13-pinctrl.dtsi
+>> index 27e0c382678..03ded415390 100644
+>> --- a/arch/arm/dts/stm32mp13-pinctrl.dtsi
+>> +++ b/arch/arm/dts/stm32mp13-pinctrl.dtsi
+>> @@ -6,6 +6,12 @@
+>>   #include <dt-bindings/pinctrl/stm32-pinfunc.h>
+>>   
+>>   &pinctrl {
+>> +	adc1_pins_a: adc1-pins-0 {
+>> +		pins {
+>> +			pinmux = <STM32_PINMUX('A', 3, ANALOG)>; /* ADC1 in12 */
+>> +		};
+>> +	};
+>> +
+>>   	adc1_usb_cc_pins_a: adc1-usb-cc-pins-0 {
+>>   		pins {
+>>   			pinmux = <STM32_PINMUX('F', 12, ANALOG)>, /* ADC1 in6 */
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Yup, that works too -- on the assumption the compatible string is unique enough.
-
-> >> Of course, it's much better if they have different GUIDs
-> >> in the ESRT to completely avoid the chance of the wrong firmware being
-> >> flashed on the wrong device.
->
-> So expanding on the above a bit, the idea Ilias and I brainstormed was
-> to use v5 GUIDs (which are deterministic based on a "salt" GUID and some
-> arbitrary data which is hashed together). We would use the board model
-> and compatible, as well as the firmware image name to generate these.
-
-So that's kinda like Microsoft CHID, and I'm wondering why you
-couldn't just use one of the GUIDs from `sudo fwupdtool hwids`
-actually *as* the capsule GUID.
-
-Richard.
+I'll be sending a V2 with all the pinmux patches squashed into single patch.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

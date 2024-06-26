@@ -2,64 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E1FA90E38C
-	for <lists+uboot-stm32@lfdr.de>; Wed, 19 Jun 2024 08:36:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5428C919B75
+	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Jun 2024 01:58:01 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D044CC71282;
-	Wed, 19 Jun 2024 06:36:04 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E4E78C71287;
+	Wed, 26 Jun 2024 23:58:00 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1711C6B460
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6E70FC6DD9F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 19 Jun 2024 06:35:57 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 45ILZtve002573;
- Wed, 19 Jun 2024 08:35:55 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- oxI/oHpnVoYsBVI53472R7ZraxX6l42TM8cRUojKihA=; b=7o2kJ9l98RkAEdoh
- Lz5y+tD0Zz823gz0/vGa4/bR9Dvuf3c/eqHyJhBjLyIaeo9XxG323e8vKnvYKcCa
- zmKk09cKgE+eproJcOtC3EZvoq4vfvEKmP0DvtlC36E2z3HvII3gFm7IIoHrHFZ3
- +g/JbtG38T6Xbo8KcsQDl6D5XV8AF0uFFTRk14Rb6VOyBQiREwRtjC4NFf7QiGXL
- wvNvQtVW98UCwryZje6UiXatqMUTd/dhNONCXQcGcHUyMXNknS7V/AqGE1omxU9P
- c5yylAhSc+bFgE0z3Ng8/SbViJFMVo716mbuaR4SyKj7ydkFz8jc6WQSDwzwqmY4
- dyBGUQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3yuj9n1gwn-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 19 Jun 2024 08:35:55 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E607640048;
- Wed, 19 Jun 2024 08:35:50 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95DA720FA3E;
- Wed, 19 Jun 2024 08:35:25 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 19 Jun
- 2024 08:35:25 +0200
-Message-ID: <2fd69224-c299-4b43-9078-07e06cc345f5@foss.st.com>
-Date: Wed, 19 Jun 2024 08:35:24 +0200
+ Wed, 26 Jun 2024 23:57:53 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 98CCA88495;
+ Thu, 27 Jun 2024 01:57:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1719446272;
+ bh=j9+gNS0RvBKJupbfHAroI1F5otxQD2cptbmul1pdCUM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=COSdsZQAdkVFtgDBSrlF5Gijkt24B+EwJUTAil4EgCGlSPK7tKKQNMBhS1LeEPzgB
+ FVedUPKHF/6hNGCHFTGVcDYW9CMWiWaxUTVPyNmXPoKI6XzBO9SfZcGLVDDQKGE5YL
+ cvveotTcSSuvFePkTqGuWWBwwsqKcopsyFCLUNz6eL8CIFsR31okrjZCoUKk/im+Zj
+ RZhSEdj/vWwbWFPkgdJ8Wow9SALESRiFy/AhGjqfA3VB3/vnE/4m1Sc+GIlCODkGGw
+ eY8mzKd06viDAMPdaT+WEr/Hk5zGCewjRHlgcbgcVrIaMq8oGUc3FUV0avjIhpgt/y
+ S7RNug7vFx9mA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Date: Thu, 27 Jun 2024 01:55:41 +0200
+Message-ID: <20240626235717.272219-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20240618225736.154959-1-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240618225736.154959-1-marex@denx.de>
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-06-19_02,2024-06-17_01,2024-05-17_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Fix TAMP_SMCR BKP..PROT
-	fields on STM32MP15xx
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Dragan Simic <dsimic@manjaro.org>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot-amlogic@groups.io, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kostya Porotchkin <kostap@marvell.com>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@dh-electronics.com,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [Uboot-stm32] [PATCH 1/4] power: regulator: Trigger probe of
+	regulators which are always-on or boot-on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,46 +77,107 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+In case a regulator DT node contains regulator-always-on or regulator-boot-on
+property, make sure the regulator gets correctly configured by U-Boot on start
+up. Unconditionally probe such regulator drivers. This is a preparatory patch
+for introduction of .regulator_post_probe() which would trigger the regulator
+configuration.
 
+Parsing of regulator-always-on and regulator-boot-on DT property has been
+moved to regulator_post_bind() as the information is required early, the
+rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+slowing down the boot process.
 
-On 6/19/24 00:57, Marek Vasut wrote:
-> Update the TAMP_SMCR BKP..PROT fields to put first 10 registers
-> into protection zone 1 and next 5 into zone 2. This fixes use of
-> boot counter which is often in zone 3 and has to be updated from
-> Linux, which runs in NS.
-> 
-> Fixes: 73f7fc944cf6 ("ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on STM32MP15xx")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> index f096fe538d8..ca202bec8ee 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> @@ -148,8 +148,8 @@ static void security_init(void)
->  	 */
->  	clrsetbits_le32(TAMP_SMCR,
->  			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
-> -			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
-> -			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
-> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x0A) |
-> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x0F));
->  
->  	/* GPIOZ: deactivate the security */
->  	writel(BIT(0), RCC_MP_AHB5ENSETR);
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Chris Morgan <macromorgan@hotmail.com>
+Cc: Dragan Simic <dsimic@manjaro.org>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Kostya Porotchkin <kostap@marvell.com>
+Cc: Matteo Lisi <matteo.lisi@engicam.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sam Day <me@samcday.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: u-boot-amlogic@groups.io
+Cc: u-boot-qcom@groups.io
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ drivers/power/regulator/regulator-uclass.c | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 66fd531da04..ccc4ef33d83 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -433,6 +433,8 @@ static int regulator_post_bind(struct udevice *dev)
+ 	const char *property = "regulator-name";
+ 
+ 	uc_pdata = dev_get_uclass_plat(dev);
++	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
++	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
+ 
+ 	/* Regulator's mandatory constraint */
+ 	uc_pdata->name = dev_read_string(dev, property);
+@@ -444,13 +446,21 @@ static int regulator_post_bind(struct udevice *dev)
+ 			return -EINVAL;
+ 	}
+ 
+-	if (regulator_name_is_unique(dev, uc_pdata->name))
+-		return 0;
++	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
++		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
++		      property, dev->name, uc_pdata->name);
++		return -EINVAL;
++	}
+ 
+-	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+-	      property, dev->name, uc_pdata->name);
++	/*
++	 * In case the regulator has regulator-always-on or
++	 * regulator-boot-on DT property, trigger probe() to
++	 * configure its default state during startup.
++	 */
++	if (uc_pdata->always_on && uc_pdata->boot_on)
++		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+ 
+-	return -EINVAL;
++	return 0;
+ }
+ 
+ static int regulator_pre_probe(struct udevice *dev)
+@@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice *dev)
+ 						-ENODATA);
+ 	uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
+ 						-ENODATA);
+-	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
+-	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
+ 	uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
+ 						    0);
+ 	uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
+-- 
+2.43.0
 
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

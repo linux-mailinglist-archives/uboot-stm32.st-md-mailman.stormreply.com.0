@@ -2,61 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8147391A2A1
-	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Jun 2024 11:26:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71FA091A3ED
+	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Jun 2024 12:34:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 46B77C71289;
-	Thu, 27 Jun 2024 09:26:41 +0000 (UTC)
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
- [209.85.222.176])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 33A3CC71282;
+	Thu, 27 Jun 2024 10:34:52 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E54F7C71287
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 86E1FC71280
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Jun 2024 09:26:39 +0000 (UTC)
-Received: by mail-qk1-f176.google.com with SMTP id
- af79cd13be357-79c04e6e1b9so244409885a.0
+ Thu, 27 Jun 2024 10:34:45 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-36703b0f914so1065472f8f.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Jun 2024 02:26:39 -0700 (PDT)
+ Thu, 27 Jun 2024 03:34:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1719480399; x=1720085199;
+ d=gmail.com; s=20230601; t=1719484485; x=1720089285;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9HCQkxbz7QGTuVs+o2YIyzQ/LTHw4GzWIaZg3+8jgw0=;
- b=EQB2PjvMorM59CnT7Swz2cWMD7TlElsEfCm+fEUvpVHjyFFuxzslPKNS0bTzX9vXXk
- UkeO1DlYC4He5ynWcXoesC5ykO2TV4HoPuHwPJB2BP+cuVQp8gtiaq45HwqceMQffltS
- GQ8rP5kdQN4weL+t2+wKbmQ0Uh82QiN/D4kXo=
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=exKZBDAzL2/IHylKbI/wFm52BBqsF7JL1d2PljSBYTo=;
+ b=IoSAzoOM9Qk074bymMK1kXxXlR2Evla5NmjwxihGmddgK8hNmtoeLG80OFIEibA/Ia
+ m2wKagVSdnv9huojpJ+iP55cHuDefDIEBZkyD0rKD+v81SXmGgOk+LiR7ErgZdDBLWxU
+ Ja3YGkcteH3dA55w6r3V+RETt9CfqQHPS+VQY+RkgkuYF2bMjPFCvXx4YXNcSMkGr6//
+ 3qe2HaHKpTOVIGWhHbQlmLW2NwhAxcZwbUrUc8UlqJdbepcWqNH5KvAc7wKi3WqOg6ba
+ XYvQkHY526JZdxd4efPtYHxWhJxJmlmsjcMSUibtXqi2wjDROSfiO32invO7ovyIty4e
+ UIxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1719480399; x=1720085199;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=9HCQkxbz7QGTuVs+o2YIyzQ/LTHw4GzWIaZg3+8jgw0=;
- b=Lr45ei9I6yGZxh8hC1KMGQVnPfHZu7OvLnhE9+3KU9V6kcf0aaG06QyVn3yxAsLlTo
- bBqFVGkRnMbwnl7Dny/OCvQzqNIsycW2fWizqQDJv+VPSW0JBb4ZX9GYnOjH7FKrQ4bT
- fYKhPL2qNlazsApphLeEf4dGb7KHZHruQ4ybM3rUC2lJwvaA9qkhTNVa0a0M3+6STJvN
- FPsktfWOFBoZVM8EAaMhQFiBe1VjAXXmIyRIpFL1r7gePZx/j9fYHF/gjFkiLcUCv4n3
- APqQ4zWCMCh462DQhl01WqS34fNCtMe9eMAr0PH3PxlElJumWxyKriEXv8ZFIptOcdw1
- XZRQ==
+ d=1e100.net; s=20230601; t=1719484485; x=1720089285;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=exKZBDAzL2/IHylKbI/wFm52BBqsF7JL1d2PljSBYTo=;
+ b=JN2I1FI8K85C1PWUUTId5zxbs4ORhAB8/qVPAGUf3aXUcN8+l9TeWMXGrJ2zOO7yhe
+ ZbR6eNukCNU9SAGl9fU4gww3wJV0cjWLn7RfULb398IwdfSCK61OLeBt8e3fqiWB0Clc
+ mAQa9+SiyfAk6hMIa1S57loWuYM3LtV5R9cLQH+krTJEAyup9TWFO7uvVZhAjlzwG1Jf
+ 7mMyeOTdEN29gDxzFicpolHMPwegUhZRL/oJsCgsKJ8Cl5ocrBnnc7Wd29xd+uSxo60Z
+ Bu/qf0pEj4cHmFfN4o5Y4l85k0hduVMVF/L2zonieQRly5XR6fqBUu5PWkstilAoWzgG
+ Vy9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUG82S024uzOtLPmq03Or0VKMqJoJcyPbBb+lHfnIjQo9WtrJDawKsBMFVqn/kT6dRqNRPDCxS/ggtxwhihbSeb4/zyvgOsjNNFqFEC4cf58/xSvBg4jNVA
-X-Gm-Message-State: AOJu0YzasFcR85zUqN0mrXbXTclUPtVRG3ElUtgR0XfnO77BvagQBx/3
- tjq05PB6+cwXN4WMh8avVlYPl9AkM7Qz+AYrIhx/Td8i9V2Mezr5z1k2wl9SjmFsSzN5Ri9VBfy
- 7d1iifnfg4yU+O3/hFkCN886mRZo6Z1xPOyhl
-X-Google-Smtp-Source: AGHT+IHjx8SlRRp5BuJIRV9LstlKWiXSSP60Vh8E7gab5ZtYSS89FtvFekbEHCF0KzVqKnCyoEl60+T6MbaZsk28Bfw=
-X-Received: by 2002:a05:6214:5ed4:b0:6b2:d51c:f5b3 with SMTP id
- 6a1803df08f44-6b58d36d1eamr23880166d6.18.1719480398847; Thu, 27 Jun 2024
- 02:26:38 -0700 (PDT)
+ AJvYcCXEqWa8mwe408o17WU6ab8RfdnLt0xNjslFxYwdoWBz0r8XdGeMx0gvkOWoPUn3PmJ4q3CEtsI5P8P4XDeEsC+yUbHBIOQJi/HFWoVUj21qYC/0gPA6oi2d
+X-Gm-Message-State: AOJu0YwWs3WqplGmx2AeiPK6JfNL5IYDHQn+uGw0qHuYKrE74mi+TlP2
+ uTWkQkUAi8xpkZR+UiFygFD0yVRFbVXfvrMvkp9I8GhM6HTSuH4fTmdyrfedNgQ/kfZ1R4HDO/P
+ ln42gXV/v+is/nn+/Rpa13mV3iaI=
+X-Google-Smtp-Source: AGHT+IFa71/vs9HXIetHiqdDWDIZVF0rzrXXEtQ7d1W/hMOHigi/3LR4FRoevGbXYNHTXRXYgfQjkoMUmIwAM1GI+O0=
+X-Received: by 2002:a5d:4e0f:0:b0:367:409b:1d1e with SMTP id
+ ffacd0b85a97d-36741789767mr1555664f8f.12.1719484484863; Thu, 27 Jun 2024
+ 03:34:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240626235717.272219-1-marex@denx.de>
  <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
  <b84e8b10-8698-41f2-9648-0b3f5c399b02@linaro.org>
-In-Reply-To: <b84e8b10-8698-41f2-9648-0b3f5c399b02@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Jun 2024 10:26:28 +0100
-Message-ID: <CAFLszTijRhB1dRraPBQSTU3ypJ_wJU7yghJ9c9Rk-XcbcfvkFg@mail.gmail.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
+ <96AEFD59-B8D3-4298-8867-E94D474E16BE@gmail.com>
+ <CAFLszTgvEkunWE8apORsK0+PU7wjrWCVCR0F1qij=yo8nDLUNg@mail.gmail.com>
+In-Reply-To: <CAFLszTgvEkunWE8apORsK0+PU7wjrWCVCR0F1qij=yo8nDLUNg@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Thu, 27 Jun 2024 13:34:34 +0300
+Message-ID: <CAPVz0n0ySK1YrE_Y_jSMm5WxG_b6Kc9PiXp2mMC0i7pwSWkFRQ@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
  Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
  Max Krummenacher <max.krummenacher@toradex.com>,
@@ -72,9 +78,9 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Chris Morgan <macromorgan@hotmail.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, u-boot@dh-electronics.com,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@dh-electronics.com,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Sumit Garg <sumit.garg@linaro.org>
@@ -91,158 +97,143 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Caleb,
-
-On Thu, 27 Jun 2024 at 09:48, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
->
-> On 27/06/2024 10:37, Simon Glass wrote:
-> > Hi Marek,
-> >
-> > On Thu, 27 Jun 2024 at 00:57, Marek Vasut <marex@denx.de> wrote:
-> >>
-> >> In case a regulator DT node contains regulator-always-on or regulator-boot-on
-> >> property, make sure the regulator gets correctly configured by U-Boot on start
-> >> up. Unconditionally probe such regulator drivers. This is a preparatory patch
-> >> for introduction of .regulator_post_probe() which would trigger the regulator
-> >> configuration.
-> >>
-> >> Parsing of regulator-always-on and regulator-boot-on DT property has been
-> >> moved to regulator_post_bind() as the information is required early, the
-> >> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
-> >> slowing down the boot process.
-> >>
-> >> Signed-off-by: Marek Vasut <marex@denx.de>
-> >> ---
-> >> Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
-> >> Cc: Caleb Connolly <caleb.connolly@linaro.org>
-> >> Cc: Chris Morgan <macromorgan@hotmail.com>
-> >> Cc: Dragan Simic <dsimic@manjaro.org>
-> >> Cc: Eugen Hristev <eugen.hristev@collabora.com>
-> >> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> >> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> >> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> >> Cc: Jonas Karlman <jonas@kwiboo.se>
-> >> Cc: Kever Yang <kever.yang@rock-chips.com>
-> >> Cc: Kostya Porotchkin <kostap@marvell.com>
-> >> Cc: Matteo Lisi <matteo.lisi@engicam.com>
-> >> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> >> Cc: Max Krummenacher <max.krummenacher@toradex.com>
-> >> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> >> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> >> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> >> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> >> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> >> Cc: Sam Day <me@samcday.com>
-> >> Cc: Simon Glass <sjg@chromium.org>
-> >> Cc: Sumit Garg <sumit.garg@linaro.org>
-> >> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> >> Cc: Thierry Reding <treding@nvidia.com>
-> >> Cc: Tom Rini <trini@konsulko.com>
-> >> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> >> Cc: u-boot-amlogic@groups.io
-> >> Cc: u-boot-qcom@groups.io
-> >> Cc: u-boot@dh-electronics.com
-> >> Cc: u-boot@lists.denx.de
-> >> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> >> ---
-> >>   drivers/power/regulator/regulator-uclass.c | 22 +++++++++++++++-------
-> >>   1 file changed, 15 insertions(+), 7 deletions(-)
-> >>
-> >> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> >> index 66fd531da04..ccc4ef33d83 100644
-> >> --- a/drivers/power/regulator/regulator-uclass.c
-> >> +++ b/drivers/power/regulator/regulator-uclass.c
-> >> @@ -433,6 +433,8 @@ static int regulator_post_bind(struct udevice *dev)
-> >>          const char *property = "regulator-name";
-> >>
-> >>          uc_pdata = dev_get_uclass_plat(dev);
-> >> +       uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
-> >> +       uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
-> >>
-> >>          /* Regulator's mandatory constraint */
-> >>          uc_pdata->name = dev_read_string(dev, property);
-> >> @@ -444,13 +446,21 @@ static int regulator_post_bind(struct udevice *dev)
-> >>                          return -EINVAL;
-> >>          }
-> >>
-> >> -       if (regulator_name_is_unique(dev, uc_pdata->name))
-> >> -               return 0;
-> >> +       if (!regulator_name_is_unique(dev, uc_pdata->name)) {
-> >> +               debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-> >> +                     property, dev->name, uc_pdata->name);
-> >> +               return -EINVAL;
-> >> +       }
-> >>
-> >> -       debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-> >> -             property, dev->name, uc_pdata->name);
-> >> +       /*
-> >> +        * In case the regulator has regulator-always-on or
-> >> +        * regulator-boot-on DT property, trigger probe() to
-> >> +        * configure its default state during startup.
-> >> +        */
-> >> +       if (uc_pdata->always_on && uc_pdata->boot_on)
-> >> +               dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-> >>
-> >> -       return -EINVAL;
-> >> +       return 0;
-> >>   }
-> >>
-> >>   static int regulator_pre_probe(struct udevice *dev)
-> >> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice *dev)
-> >>                                                  -ENODATA);
-> >>          uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
-> >>                                                  -ENODATA);
-> >> -       uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
-> >> -       uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
-> >>          uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
-> >>                                                      0);
-> >>          uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
-> >> --
-> >> 2.43.0
-> >>
-> >
-> > This is reading a lot of DT stuff very early, which may be slow. It is
-> > also reading from the DT in the bind() step which we sometimes have to
-> > do, but try to avoid.
->
-> Could we set up the livetree pre-bind? What about MMU? On armv8 at least
-> this would have a huge impact on performance. I've done some
-> measurements and there is at least 1 order of magnitude difference
-> between parsing FDT with no caches vs parsing livetree with, it's huge.
-
-That seems like a great idea to me, in general. The fact that SPL sets
-up the MMU on armv8 makes it more practical.
-
-But for this series I believe we are going to have to define what
-happens in what phase. We have power_init_board() which is the old way
-of doing this...but perhaps we could use that as a way to start up
-regulators which are needed.
-
-As to my question about whether this happens in SPL / pre-reloc /
-proper, I forgot that we have the bootph tags for that, so it should
-be fine. The main issue is that in U-Boot proper we will re-init the
-regulators even though that has already been done. Probably that can
-be handled by Kconfig or a flag in SPL handoff.
-
-
-> >
-> > Also this seems to happen in SPL and again pre-reloc and again in
-> > U-Boot post-reloc?
-> >
-> > Should we have a step in the init sequence where we set up the
-> > regulators, by calling regulators_enable_boot_on() ?
-
-Regards,
-Simon
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+0YfRgiwgMjcg0YfQtdGA0LIuIDIwMjTigK/RgC4g0L4gMTI6MjYgU2ltb24gR2xhc3MgPHNqZ0Bj
+aHJvbWl1bS5vcmc+INC/0LjRiNC1Ogo+Cj4gSGkgU3Z5YXRvc2xhdiwKPgo+IE9uIFRodSwgMjcg
+SnVuIDIwMjQgYXQgMTA6MDksIFN2eWF0b3NsYXYgPGNsYW1vcjk1QGdtYWlsLmNvbT4gd3JvdGU6
+Cj4gPgo+ID4KPiA+Cj4gPiAyNyDRh9C10YDQstC90Y8gMjAyNOKAr9GALiAxMTo0ODo0NiBHTVQr
+MDM6MDAsIENhbGViIENvbm5vbGx5IDxjYWxlYi5jb25ub2xseUBsaW5hcm8ub3JnPiDQvdCw0L/Q
+uNGB0LDQsigt0LvQsCk6Cj4gPiA+Cj4gPiA+Cj4gPiA+T24gMjcvMDYvMjAyNCAxMDozNywgU2lt
+b24gR2xhc3Mgd3JvdGU6Cj4gPiA+PiBIaSBNYXJlaywKPiA+ID4+Cj4gPiA+PiBPbiBUaHUsIDI3
+IEp1biAyMDI0IGF0IDAwOjU3LCBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4gd3JvdGU6Cj4g
+PiA+Pj4KPiA+ID4+PiBJbiBjYXNlIGEgcmVndWxhdG9yIERUIG5vZGUgY29udGFpbnMgcmVndWxh
+dG9yLWFsd2F5cy1vbiBvciByZWd1bGF0b3ItYm9vdC1vbgo+ID4gPj4+IHByb3BlcnR5LCBtYWtl
+IHN1cmUgdGhlIHJlZ3VsYXRvciBnZXRzIGNvcnJlY3RseSBjb25maWd1cmVkIGJ5IFUtQm9vdCBv
+biBzdGFydAo+ID4gPj4+IHVwLiBVbmNvbmRpdGlvbmFsbHkgcHJvYmUgc3VjaCByZWd1bGF0b3Ig
+ZHJpdmVycy4gVGhpcyBpcyBhIHByZXBhcmF0b3J5IHBhdGNoCj4gPiA+Pj4gZm9yIGludHJvZHVj
+dGlvbiBvZiAucmVndWxhdG9yX3Bvc3RfcHJvYmUoKSB3aGljaCB3b3VsZCB0cmlnZ2VyIHRoZSBy
+ZWd1bGF0b3IKPiA+ID4+PiBjb25maWd1cmF0aW9uLgo+ID4gPj4+Cj4gPiA+Pj4gUGFyc2luZyBv
+ZiByZWd1bGF0b3ItYWx3YXlzLW9uIGFuZCByZWd1bGF0b3ItYm9vdC1vbiBEVCBwcm9wZXJ0eSBo
+YXMgYmVlbgo+ID4gPj4+IG1vdmVkIHRvIHJlZ3VsYXRvcl9wb3N0X2JpbmQoKSBhcyB0aGUgaW5m
+b3JtYXRpb24gaXMgcmVxdWlyZWQgZWFybHksIHRoZQo+ID4gPj4+IHJlc3Qgb2YgdGhlIERUIHBh
+cnNpbmcgaGFzIGJlZW4ga2VwdCBpbiByZWd1bGF0b3JfcHJlX3Byb2JlKCkgdG8gYXZvaWQKPiA+
+ID4+PiBzbG93aW5nIGRvd24gdGhlIGJvb3QgcHJvY2Vzcy4KPiA+ID4+Pgo+ID4gPj4+IFNpZ25l
+ZC1vZmYtYnk6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+ID4gPj4+IC0tLQo+ID4gPj4+
+IENjOiBCZW4gV29sc2llZmZlciA8YmVud29sc2llZmZlckBnbWFpbC5jb20+Cj4gPiA+Pj4gQ2M6
+IENhbGViIENvbm5vbGx5IDxjYWxlYi5jb25ub2xseUBsaW5hcm8ub3JnPgo+ID4gPj4+IENjOiBD
+aHJpcyBNb3JnYW4gPG1hY3JvbW9yZ2FuQGhvdG1haWwuY29tPgo+ID4gPj4+IENjOiBEcmFnYW4g
+U2ltaWMgPGRzaW1pY0BtYW5qYXJvLm9yZz4KPiA+ID4+PiBDYzogRXVnZW4gSHJpc3RldiA8ZXVn
+ZW4uaHJpc3RldkBjb2xsYWJvcmEuY29tPgo+ID4gPj4+IENjOiBGcmFuY2VzY28gRG9sY2luaSA8
+ZnJhbmNlc2NvLmRvbGNpbmlAdG9yYWRleC5jb20+Cj4gPiA+Pj4gQ2M6IEhlaW5yaWNoIFNjaHVj
+aGFyZHQgPHh5cHJvbi5nbHBrQGdteC5kZT4KPiA+ID4+PiBDYzogSmFlaG9vbiBDaHVuZyA8amg4
+MC5jaHVuZ0BzYW1zdW5nLmNvbT4KPiA+ID4+PiBDYzogSmFnYW4gVGVraSA8amFnYW5AYW1hcnVs
+YXNvbHV0aW9ucy5jb20+Cj4gPiA+Pj4gQ2M6IEpvbmFzIEthcmxtYW4gPGpvbmFzQGt3aWJvby5z
+ZT4KPiA+ID4+PiBDYzogS2V2ZXIgWWFuZyA8a2V2ZXIueWFuZ0Byb2NrLWNoaXBzLmNvbT4KPiA+
+ID4+PiBDYzogS29zdHlhIFBvcm90Y2hraW4gPGtvc3RhcEBtYXJ2ZWxsLmNvbT4KPiA+ID4+PiBD
+YzogTWF0dGVvIExpc2kgPG1hdHRlby5saXNpQGVuZ2ljYW0uY29tPgo+ID4gPj4+IENjOiBNYXR0
+aWpzIEtvcnBlcnNob2VrIDxta29ycGVyc2hvZWtAYmF5bGlicmUuY29tPgo+ID4gPj4+IENjOiBN
+YXggS3J1bW1lbmFjaGVyIDxtYXgua3J1bW1lbmFjaGVyQHRvcmFkZXguY29tPgo+ID4gPj4+IENj
+OiBOZWlsIEFybXN0cm9uZyA8bmVpbC5hcm1zdHJvbmdAbGluYXJvLm9yZz4KPiA+ID4+PiBDYzog
+UGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4gPiA+Pj4gQ2M6
+IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4gPiA+Pj4g
+Q2M6IFBoaWxpcHAgVG9tc2ljaCA8cGhpbGlwcC50b21zaWNoQHZydWxsLmV1Pgo+ID4gPj4+IENj
+OiBRdWVudGluIFNjaHVseiA8cXVlbnRpbi5zY2h1bHpAY2hlcnJ5LmRlPgo+ID4gPj4+IENjOiBT
+YW0gRGF5IDxtZUBzYW1jZGF5LmNvbT4KPiA+ID4+PiBDYzogU2ltb24gR2xhc3MgPHNqZ0BjaHJv
+bWl1bS5vcmc+Cj4gPiA+Pj4gQ2M6IFN1bWl0IEdhcmcgPHN1bWl0LmdhcmdAbGluYXJvLm9yZz4K
+PiA+ID4+PiBDYzogU3Z5YXRvc2xhdiBSeWhlbCA8Y2xhbW9yOTVAZ21haWwuY29tPgo+ID4gPj4+
+IENjOiBUaGllcnJ5IFJlZGluZyA8dHJlZGluZ0BudmlkaWEuY29tPgo+ID4gPj4+IENjOiBUb20g
+UmluaSA8dHJpbmlAa29uc3Vsa28uY29tPgo+ID4gPj4+IENjOiBWb2xvZHlteXIgQmFiY2h1ayA8
+Vm9sb2R5bXlyX0JhYmNodWtAZXBhbS5jb20+Cj4gPiA+Pj4gQ2M6IHUtYm9vdC1hbWxvZ2ljQGdy
+b3Vwcy5pbwo+ID4gPj4+IENjOiB1LWJvb3QtcWNvbUBncm91cHMuaW8KPiA+ID4+PiBDYzogdS1i
+b290QGRoLWVsZWN0cm9uaWNzLmNvbQo+ID4gPj4+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZQo+
+ID4gPj4+IENjOiB1Ym9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tCj4gPiA+
+Pj4gLS0tCj4gPiA+Pj4gICBkcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNz
+LmMgfCAyMiArKysrKysrKysrKysrKystLS0tLS0tCj4gPiA+Pj4gICAxIGZpbGUgY2hhbmdlZCwg
+MTUgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKPiA+ID4+Pgo+ID4gPj4+IGRpZmYgLS1n
+aXQgYS9kcml2ZXJzL3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMgYi9kcml2ZXJz
+L3Bvd2VyL3JlZ3VsYXRvci9yZWd1bGF0b3ItdWNsYXNzLmMKPiA+ID4+PiBpbmRleCA2NmZkNTMx
+ZGEwNC4uY2NjNGVmMzNkODMgMTAwNjQ0Cj4gPiA+Pj4gLS0tIGEvZHJpdmVycy9wb3dlci9yZWd1
+bGF0b3IvcmVndWxhdG9yLXVjbGFzcy5jCj4gPiA+Pj4gKysrIGIvZHJpdmVycy9wb3dlci9yZWd1
+bGF0b3IvcmVndWxhdG9yLXVjbGFzcy5jCj4gPiA+Pj4gQEAgLTQzMyw2ICs0MzMsOCBAQCBzdGF0
+aWMgaW50IHJlZ3VsYXRvcl9wb3N0X2JpbmQoc3RydWN0IHVkZXZpY2UgKmRldikKPiA+ID4+PiAg
+ICAgICAgICBjb25zdCBjaGFyICpwcm9wZXJ0eSA9ICJyZWd1bGF0b3ItbmFtZSI7Cj4gPiA+Pj4K
+PiA+ID4+PiAgICAgICAgICB1Y19wZGF0YSA9IGRldl9nZXRfdWNsYXNzX3BsYXQoZGV2KTsKPiA+
+ID4+PiArICAgICAgIHVjX3BkYXRhLT5hbHdheXNfb24gPSBkZXZfcmVhZF9ib29sKGRldiwgInJl
+Z3VsYXRvci1hbHdheXMtb24iKTsKPiA+ID4+PiArICAgICAgIHVjX3BkYXRhLT5ib290X29uID0g
+ZGV2X3JlYWRfYm9vbChkZXYsICJyZWd1bGF0b3ItYm9vdC1vbiIpOwo+ID4gPj4+Cj4gPiA+Pj4g
+ICAgICAgICAgLyogUmVndWxhdG9yJ3MgbWFuZGF0b3J5IGNvbnN0cmFpbnQgKi8KPiA+ID4+PiAg
+ICAgICAgICB1Y19wZGF0YS0+bmFtZSA9IGRldl9yZWFkX3N0cmluZyhkZXYsIHByb3BlcnR5KTsK
+PiA+ID4+PiBAQCAtNDQ0LDEzICs0NDYsMjEgQEAgc3RhdGljIGludCByZWd1bGF0b3JfcG9zdF9i
+aW5kKHN0cnVjdCB1ZGV2aWNlICpkZXYpCj4gPiA+Pj4gICAgICAgICAgICAgICAgICAgICAgICAg
+IHJldHVybiAtRUlOVkFMOwo+ID4gPj4+ICAgICAgICAgIH0KPiA+ID4+Pgo+ID4gPj4+IC0gICAg
+ICAgaWYgKHJlZ3VsYXRvcl9uYW1lX2lzX3VuaXF1ZShkZXYsIHVjX3BkYXRhLT5uYW1lKSkKPiA+
+ID4+PiAtICAgICAgICAgICAgICAgcmV0dXJuIDA7Cj4gPiA+Pj4gKyAgICAgICBpZiAoIXJlZ3Vs
+YXRvcl9uYW1lX2lzX3VuaXF1ZShkZXYsIHVjX3BkYXRhLT5uYW1lKSkgewo+ID4gPj4+ICsgICAg
+ICAgICAgICAgICBkZWJ1ZygiJyVzJyBvZiBkZXY6ICclcycsIGhhcyBub251bmlxdWUgdmFsdWU6
+ICclc1xuIiwKPiA+ID4+PiArICAgICAgICAgICAgICAgICAgICAgcHJvcGVydHksIGRldi0+bmFt
+ZSwgdWNfcGRhdGEtPm5hbWUpOwo+ID4gPj4+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZB
+TDsKPiA+ID4+PiArICAgICAgIH0KPiA+ID4+Pgo+ID4gPj4+IC0gICAgICAgZGVidWcoIiclcycg
+b2YgZGV2OiAnJXMnLCBoYXMgbm9udW5pcXVlIHZhbHVlOiAnJXNcbiIsCj4gPiA+Pj4gLSAgICAg
+ICAgICAgICBwcm9wZXJ0eSwgZGV2LT5uYW1lLCB1Y19wZGF0YS0+bmFtZSk7Cj4gPiA+Pj4gKyAg
+ICAgICAvKgo+ID4gPj4+ICsgICAgICAgICogSW4gY2FzZSB0aGUgcmVndWxhdG9yIGhhcyByZWd1
+bGF0b3ItYWx3YXlzLW9uIG9yCj4gPiA+Pj4gKyAgICAgICAgKiByZWd1bGF0b3ItYm9vdC1vbiBE
+VCBwcm9wZXJ0eSwgdHJpZ2dlciBwcm9iZSgpIHRvCj4gPiA+Pj4gKyAgICAgICAgKiBjb25maWd1
+cmUgaXRzIGRlZmF1bHQgc3RhdGUgZHVyaW5nIHN0YXJ0dXAuCj4gPiA+Pj4gKyAgICAgICAgKi8K
+PiA+ID4+PiArICAgICAgIGlmICh1Y19wZGF0YS0+YWx3YXlzX29uICYmIHVjX3BkYXRhLT5ib290
+X29uKQo+ID4gPj4+ICsgICAgICAgICAgICAgICBkZXZfb3JfZmxhZ3MoZGV2LCBETV9GTEFHX1BS
+T0JFX0FGVEVSX0JJTkQpOwo+ID4gPj4+Cj4gPiA+Pj4gLSAgICAgICByZXR1cm4gLUVJTlZBTDsK
+PiA+ID4+PiArICAgICAgIHJldHVybiAwOwo+ID4gPj4+ICAgfQo+ID4gPj4+Cj4gPiA+Pj4gICBz
+dGF0aWMgaW50IHJlZ3VsYXRvcl9wcmVfcHJvYmUoc3RydWN0IHVkZXZpY2UgKmRldikKPiA+ID4+
+PiBAQCAtNDczLDggKzQ4Myw2IEBAIHN0YXRpYyBpbnQgcmVndWxhdG9yX3ByZV9wcm9iZShzdHJ1
+Y3QgdWRldmljZSAqZGV2KQo+ID4gPj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAtRU5PREFUQSk7Cj4gPiA+Pj4gICAgICAgICAgdWNfcGRhdGEtPm1h
+eF91QSA9IGRldl9yZWFkX3UzMl9kZWZhdWx0KGRldiwgInJlZ3VsYXRvci1tYXgtbWljcm9hbXAi
+LAo+ID4gPj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAtRU5PREFUQSk7Cj4gPiA+Pj4gLSAgICAgICB1Y19wZGF0YS0+YWx3YXlzX29uID0gZGV2X3Jl
+YWRfYm9vbChkZXYsICJyZWd1bGF0b3ItYWx3YXlzLW9uIik7Cj4gPiA+Pj4gLSAgICAgICB1Y19w
+ZGF0YS0+Ym9vdF9vbiA9IGRldl9yZWFkX2Jvb2woZGV2LCAicmVndWxhdG9yLWJvb3Qtb24iKTsK
+PiA+ID4+PiAgICAgICAgICB1Y19wZGF0YS0+cmFtcF9kZWxheSA9IGRldl9yZWFkX3UzMl9kZWZh
+dWx0KGRldiwgInJlZ3VsYXRvci1yYW1wLWRlbGF5IiwKPiA+ID4+PiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDApOwo+ID4gPj4+ICAgICAgICAg
+IHVjX3BkYXRhLT5mb3JjZV9vZmYgPSBkZXZfcmVhZF9ib29sKGRldiwgInJlZ3VsYXRvci1mb3Jj
+ZS1ib290LW9mZiIpOwo+ID4gPj4+IC0tCj4gPiA+Pj4gMi40My4wCj4gPiA+Pj4KPiA+ID4+Cj4g
+PiA+PiBUaGlzIGlzIHJlYWRpbmcgYSBsb3Qgb2YgRFQgc3R1ZmYgdmVyeSBlYXJseSwgd2hpY2gg
+bWF5IGJlIHNsb3cuIEl0IGlzCj4gPiA+PiBhbHNvIHJlYWRpbmcgZnJvbSB0aGUgRFQgaW4gdGhl
+IGJpbmQoKSBzdGVwIHdoaWNoIHdlIHNvbWV0aW1lcyBoYXZlIHRvCj4gPiA+PiBkbywgYnV0IHRy
+eSB0byBhdm9pZC4KPiA+ID4KPiA+ID5Db3VsZCB3ZSBzZXQgdXAgdGhlIGxpdmV0cmVlIHByZS1i
+aW5kPyBXaGF0IGFib3V0IE1NVT8gT24gYXJtdjggYXQgbGVhc3QgdGhpcyB3b3VsZCBoYXZlIGEg
+aHVnZSBpbXBhY3Qgb24gcGVyZm9ybWFuY2UuIEkndmUgZG9uZSBzb21lIG1lYXN1cmVtZW50cyBh
+bmQgdGhlcmUgaXMgYXQgbGVhc3QgMSBvcmRlciBvZiBtYWduaXR1ZGUgZGlmZmVyZW5jZSBiZXR3
+ZWVuIHBhcnNpbmcgRkRUIHdpdGggbm8gY2FjaGVzIHZzIHBhcnNpbmcgbGl2ZXRyZWUgd2l0aCwg
+aXQncyBodWdlLgo+ID4gPj4KPiA+ID4+IEFsc28gdGhpcyBzZWVtcyB0byBoYXBwZW4gaW4gU1BM
+IGFuZCBhZ2FpbiBwcmUtcmVsb2MgYW5kIGFnYWluIGluCj4gPiA+PiBVLUJvb3QgcG9zdC1yZWxv
+Yz8KPiA+Cj4gPiBOb3Qgc28gbG9uZyBhZ28gSSBwcm9wb3NlZCBhIHNpbWlsYXIgcGF0Y2hzZXQg
+d2l0aCB0aGUgc2FtZSBnb2FsCj4gPiBhbmQgSSBoYXZlIGRpc2NvdmVyZWQgbWFzc2l2ZSBpc3N1
+ZXMgd2l0aCBTUEwgYW5kIHJlbG9jYXRpb24KPiA+IGludGVyZmVyaW5nIHdpdGggZHJpdmVyIGxv
+YWRpbmcuCj4gPgo+ID4gVGhlIGlzc3VlIHdoaWNoIEkgaGF2ZSBwZXJzb25hbGx5IGVuY291bnRl
+cmVkIHdhcyBpMmMgZHJpdmVyIGZhaWx1cmUKPiA+IGR1ZSB0byBkb3VibGUgcHJvYmluZy4gVGhp
+cyBiZWhhdmlvciB3YXMgdHJpZ2dlcmVkIGJ5Cj4gPiBhbHdheXMtb24vYm9vdC1vbiByZWd1bGF0
+b3JzIHByb3ZpZGVkIGJ5IHBtaWMgd2hpY2ggaW4gbW9zdAo+ID4gY2FzZXMgaXMgYW4gaTJjIGRl
+dmljZS4KPiA+Cj4gPiBBdCB0aGF0IHRpbWUgZXZlcnlvbmUganVzdCBpZ25vcmVkIG1lLCBzbyBp
+ZGsgaWYgdGVncmEgaTJjIGlzIHRoZSBvbmx5Cj4gPiBkcml2ZXIgd2hpY2ggaGFzIHRoaXMgcmVz
+cG9uc2Ugb3IgdGhlcmUgYXJlIG1vcmUsIGJ1dCBiZSBhd2FyZSB0aGF0Cj4gPiB0aGlzIHBhdGNo
+IHNldCBtYXkgY2F1c2UgY2FzY2FkZSBmYWlsdXJlIG9uIG1hbnkgZGV2aWNlcy4KPgo+IEknbSBu
+b3Qgc3VyZSBpZiBJIHJlbWVtYmVyIHRoaXMsIGJ1dCBJIGNhbiBjZXJ0YWlubHkgc2VlIHNvbWUg
+cHJvYmxlbXMKPiB3aXRoIGl0LiBEaWQgd2UgaGF2ZSBkcml2ZXJzIHRoYXQgcHJvYmVkIGluIHRo
+ZSBiaW5kKCkgZnVuY3Rpb24sCj4gcGVyaGFwcz8KPgoKSXQgaXMgZXhwZWN0ZWQgbm90IHRvIHJl
+bWVtYmVyIGFsbCBwYXRjaHNldHMgc2VudCwgbm90IGFuIGlzc3VlLiBBcyBmb3IKZHJpdmVycyBw
+cm9iZWQgYWZ0ZXIgYmluZCB0aGVyZSBhcmUgc2V2ZXJhbCwgYnV0IHRoZXkgYXJlIHF1aXRlIGVz
+c2VudGlhbC4KQ29yZSBHUElPIGFuZCBwaW5tdXggZHJpdmVycyBhcmUgcHJvYmVkIGFzIGVhcmx5
+IGFzIHBvc3NpYmxlIGJ1dCBpbiBtb3N0CmNhc2VzIHRoZXkgaGF2ZSBubyBkZXBlbmRlbmNpZXMg
+YW1vbmcgY29tcGxleCBzdWJzeXN0ZW1zIChsaWtlIGkyYykuCgo+ID4KPiA+IEJlc3QgcmVnYXJk
+cywKPiA+IFN2eWF0b3NsYXYgUi4KPiA+Cj4gPiA+Pgo+ID4gPj4gU2hvdWxkIHdlIGhhdmUgYSBz
+dGVwIGluIHRoZSBpbml0IHNlcXVlbmNlIHdoZXJlIHdlIHNldCB1cCB0aGUKPiA+ID4+IHJlZ3Vs
+YXRvcnMsIGJ5IGNhbGxpbmcgcmVndWxhdG9yc19lbmFibGVfYm9vdF9vbigpID8KPiA+ID4+Cj4g
+PiA+PiBSZWdhcmRzLAo+ID4gPj4gU2ltb24KPiA+ID4KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0
+bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0
+b3JtcmVwbHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

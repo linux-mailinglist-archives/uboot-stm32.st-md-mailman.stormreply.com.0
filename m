@@ -2,80 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 790AF93F4A6
-	for <lists+uboot-stm32@lfdr.de>; Mon, 29 Jul 2024 13:56:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DEE369425A9
+	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Jul 2024 07:15:14 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2AC2BC6DD96;
-	Mon, 29 Jul 2024 11:56:11 +0000 (UTC)
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
- [209.85.221.42])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 920EEC6DD66;
+	Wed, 31 Jul 2024 05:15:14 +0000 (UTC)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 630FBC6B460
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id EA586C57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 29 Jul 2024 11:56:04 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-368440b073bso1070152f8f.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 29 Jul 2024 04:56:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722254164; x=1722858964;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aby4Ag03JF9p64tkUSZ0h+rfCqmOzhrnTyDqK5jbv2Y=;
- b=EEUcEEHOAYix9VQPE/KwrU3+dboKhS5tQLiWp99bZV2/iWT1bkZJpnDcR/+2MZszih
- 03zFG+P7TYyCxZ/hkcgEJH+9E3UIlOLqMLKgrIe6wVxQO/w8q3s3fT9MpA0m102DWHFX
- /dLZ8L7T730SdrnNchojF0xiy/3UQ9+3XDNRYjYNngegga9ndEwSFTKwRIWbNHCPhU3B
- dRXynP23MzOKxa8MMA0UYBP9cMAovyJfCZBnWwG3YekPTlmIhC3xtTCZ6pzMD6q8hqOB
- l33uHKPpqPhBvldT5AGdXIllgKTbSm7s0jtadQ5Zm2lywm4ghGqatj6dFh1yjtPu0NGe
- rKZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722254164; x=1722858964;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aby4Ag03JF9p64tkUSZ0h+rfCqmOzhrnTyDqK5jbv2Y=;
- b=d0nzyz6nnuKjbAGIgnlp+X8Tnw4N1oK+yR+O6/2kb7dYVsuHrG/UVrQDQEKtJpUZ+z
- 0PoHRajs37f5NHmDaI0pSyu1aP3nSCOMIywufSBfhydWkPVrnxEI8TwXktxj7k61p9yq
- frXCaLr0EZQAEhxJRxmCMsBvFVqD0H3gWcBDfkg7qjtY0sU3FsClFJ8jXwzWWxL+/55a
- dzCwojf7dWRR4mfU2ZN3hgI8ELF3GzgnKoVii3YOLEJp5DHp8Texka38IruroHwc8WeN
- 2+GVsGLxmgklHuk9tvpkoD8qQcTeZzKHUeh7OZXzgf+rZvsT3TWDX70kFbFHl2aUs7l6
- vGAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUC9PuBamq1HqXHhrQABGV7uaoMZgYVHftAlL0CU/VGTvTesYvlF1Iw4SEkay09thQHcx548v7wLlY6RpGuQg9BI52Nq82QahDMfHLc9zpwflxFjaqnrJ0s
-X-Gm-Message-State: AOJu0Yxh9lg4SWj0eg5WyLDgglNmQ/fVoNe81TM61sTS47um3CAygvov
- K2cK37e0+j8q89SQG9PARHoux6a4zgIPPBIz6gmEcpLZTcsecADoztDKlZTD/3i51Yy2MAyyo7u
- qj3omGREwk/79xJZkC7/11OGVLws=
-X-Google-Smtp-Source: AGHT+IHOJDMfOmgHiVQQwyhHcNRiYOrxQH2FrffrVH2TRxetrFber+bq70HzpD6UOh5B5D0HkR9IsK/WVnjyIMdz/1E=
-X-Received: by 2002:a5d:6b86:0:b0:366:e9f5:781b with SMTP id
- ffacd0b85a97d-36b5d7d335bmr4786622f8f.21.1722254163483; Mon, 29 Jul 2024
- 04:56:03 -0700 (PDT)
+ Wed, 31 Jul 2024 05:15:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1722402904; x=1723007704; i=xypron.glpk@gmx.de;
+ bh=1bk88DaHaNzXVa6PZz4vCUlA47Nxj3yIMrJvPabfB8c=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=iBnodjH6N3V1grqVUQmW9GONhWkkbHYbUrOV6sdJO1aKDNYT335QvFHwgEKKORD9
+ IQwNBw9aL/SHUS6qoVP79QQC0KwQTFBU0dQd5YrtOwrLc+DAEW8YqGwO7s/Z3uRvb
+ R45T/8YGw00pAEpAjJHWARkOr9ix3hDvxp/rxXx6C5rIuax4Ov38ipPqxh7KN3Eun
+ 2OnqGJc4voD0oBBLNI7bCoW5OVGqVUyW0ucAvsEc3q55MwvJ6kFDh5DsafRxqAr48
+ ktZrmUroBbgk874NwVUA/A5qrz2PfYCWeqfjOKXcy9bFIC42ltaSGDfavwyRrWfp+
+ AN9xnbzLiKPMywCbcw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7QxB-1sBUkX0Sy5-00zANi; Wed, 31
+ Jul 2024 07:15:04 +0200
+Message-ID: <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
+Date: Wed, 31 Jul 2024 07:15:10 +0200
 MIME-Version: 1.0
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
- <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
-In-Reply-To: <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 29 Jul 2024 14:55:52 +0300
-Message-ID: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Sumit Garg <sumit.garg@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/4] power: regulator: Trigger probe of
- regulators which are always-on or boot-on
+User-Agent: Mozilla Thunderbird
+To: Grzegorz Szymaszek <gszymaszek@short.pl>
+References: <41ae952bf3f45545e3c6579463df3d0408f6343a.1722014005.git.gszymaszek@short.pl>
+ <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
+X-Provags-ID: V03:K1:tvveUwYG9gvFnj3s33+hJkOVX7EC7HZ/dCLaN3Uh4SfUMZyHOMy
+ bEQRVQqZEW3qPx9NEWbqZJ/ANddKpT0el44ZaPKh1lLc7v6Rzw50h74tsLATvDRkEnuiw1n
+ 5ZdmaLo1Nhx6hMzM2JfECq0+1RgaqBGoh+yY0oeqvxm5kq90KnWP2u2Un9lfS6RNNEDfbfH
+ DuYVY8Yr7DzczUNBjUbxA==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:Ldk46YHMbdU=;1BiCQO7JYx/2u6TvDj6FmqejWua
+ Frgnq9ZMJgPQBMupcLZQ2Ls/x/dWj7CzAFc4b/D0L0C5rV1z1emVHR8Iiw72Btk3gV6GRujtU
+ Eu6wLDdX7uD26qpmsNKWUatNS1UWjjM8TOsjta3nSzozXMKG4DpPcxx+O/rySp0Cs0qnKlImE
+ qBUFTLqyXtf5GkXLlcO372dNg87Czp4dHNdzym0mM0A7DkoIgWTo9eiFBD7yDC6fArcWoJ6SM
+ KPt+zZxUrED8LlGXrAwnZ8ZCtMBoNmI8wM/q+yq7OIKHgBzrmM1GRuSwL9laPGgSwSFTH8HwS
+ GDHXBLOkwGOjlx8JZ4JSO8d4kNosqeKJU8PwgY2fHxE6Hm7HQ/30QYyhV0nVs29nKY1Cx20Gs
+ T1YLNb+DbxPMr4iT9RHhs56AzttjCbVLkufCyMTb4J83ECPc8qEUNoWGvDl2jSYpZwr/5d+mb
+ 6SMN4SNpF8BVDis+BSo5iwvwufEdV4RH0OV+j6q45epf4lMeVbGfUirMWMvmuSdpznU1lSlME
+ 1R87VVn3zjlCayfmOvI9AttqXKRkrU0x4owgqL4qYYshPVBm5SgU4IJoC1tPjqX/8c1cwPS6N
+ 4cvWSJtsX+4Lo+rgwsYIaSN3BY7EHCn8IbneW6RuD91TRIj9Iz6WUfa92xQlEusGu1qJasCUN
+ 69JsjFt8JdFZYwYfVWUMjjTzMGT/fqdgQ4ie43kESd/JXe/cJWIxOQCx410sS+SEa4awPMyCD
+ sd49xGh30vtzPfxxFlKBqHFpumxADKh0LbmwYTilNqyy+1sIfVC0DF1mJnB6j64JEKVaylyoJ
+ qj1Bm3j0FD+8/UkX5Mu+rNGg==
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH 2/3] doc: stm32mp1: fix literal block
+	markers (::)
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,49 +74,74 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-0L/QvSwgMjkg0LvQuNC/LiAyMDI04oCv0YAuINC+IDEzOjQyIE1hcmVrIFZhc3V0IDxtYXJleEBk
-ZW54LmRlPiDQv9C40YjQtToKPgo+IE9uIDcvMjkvMjQgNzozOCBBTSwgU3Z5YXRvc2xhdiBSeWhl
-bCB3cm90ZToKPgo+IFsuLi5dCj4KPiA+PiBUaGUgUE1JQyBpcyBvbiBJMkMsIERNX1BNSUMgZW5h
-YmxlZCBpbiBTUEwsIGJvdGggYnVjazQgYW5kIGJ1Y2s1Cj4gPj4gcmVndWxhdG9ycyBhcmUgZW5h
-YmxlZCBpbiBTUEwsIGhhdmUgcmVndWxhdG9yLWFsd2F5cy1vbiBhbmQKPiA+PiByZWd1bGF0b3It
-Ym9vdC1vbiBhbmQgYm9vdHBoLXByZS1yYW0gcHJvcGVydGllcy4KPiA+Pgo+ID4+IFRoaXMgc2Vl
-bXMgc2ltaWxhciBlbm91Z2gsIHJpZ2h0ID8KPiA+Pgo+ID4gWWVzLCB0aG91Z2ggU1BMIG11c3Qg
-cmVtYWluIGFzIHNtYWxsIGFzIHBvc3NpYmxlIGFuZCB5b3UgcHJvcG9zZSBhZGQKPiA+IHRoZXJl
-IGkyYyBkcml2ZXIsICBQTUlDIGRyaXZlciwgUE1JQyByZWd1bGF0b3IgZHJpdmVycywgUE1JQyBH
-UElPCj4gPiBkcml2ZXJzIGFsb25nIHdpdGggcmVsb2NhdGlvbiBvZiBhbGwgdGhpcyBzdHVmZi4g
-SXQgaXMgbm90IG9wdGltYWwgYXQKPiA+IGFsbC4KPgo+IFN1cmUsIGlmIHlvdSBkbyB1c2UgRE1f
-UE1JQyBmb3IgUE1JQyBvbiBJMkMgYnVzLCB0aGVuIHlvdSBhbHNvIG5lZWQKPiBETV9JMkMgLiBZ
-b3UgY2FuIGFsc28gZG8gbm9uLURNIFBNSUMgY29uZmlndXJhdGlvbiBpbiBTUEwsIG5vbi1ETSBp
-biBTUEwKPiBpcyBhbGxvd2VkLgo+ClRoYW5rcyBmb3IgZXhwbGFpbmluZyBhbiBvYnZpb3VzIHN0
-dWZmLCBpdCBzZWVtcyB0aGF0IHdlIGFyZSB0YWxraW5nCm9uIGRpZmZlcmVudCBsYW5ndWFnZXMu
-Cgo+ID4+IFdoYXQgaXMgdGhlIHByb2JsZW0geW91IG9ic2VydmUgb24gdGVncmEgMyA/Cj4gPiBp
-MmMgbGluZSBmYWlscyBzaW5jZSBpdCBwcm9iZXMgaW4gc3BsIHdpdGggeW91ciBwYXRjaCwgYnV0
-IGl0IGRvZXMgbm90Cj4gPiByZWxvY2F0ZSBhbmQgdGhlbiBwcm9iZXMgb25jZSBtb3JlIGFmdGVy
-IHJlbG9jYXRpb24uIFByb2JlIGZhaWxzIGFsb25nCj4gPiB3aXRoIGFsbCBkZXZpY2VzIG9uIHNh
-bWUgbGluZS4KPgo+IENvdWxkIGl0IGJlIHRoYXQgeW91IGVpdGhlciBoYXZlIHRvOgo+IC0gQWRk
-IERNX0kyQyB0byB0ZWdyYSAzIFNQTAo+IC0gUmVtb3ZlIGJvb3RwaC0qIGZyb20gRFQgdG8gcmVt
-b3ZlIHRoZSByZWd1bGF0b3Igbm9kZSBmcm9tIFNQTAo+IC0gL2RlbGV0ZS1wcm9wZXJ0eS8gcmVn
-dWxhdG9yLWFsd2F5cy1vbjsgYW5kIC9kZWxldGUtcHJvcGVydHkvCj4gcmVndWxhdG9yLWJvb3Qt
-b247IGluIC11LWJvb3QuZHRzaSB0byBwcmV2ZW50IHRoZSByZWd1bGF0b3IgZnJvbSBiZWluZwo+
-IGVuYWJsZWQgaW4gU1BMID8KPgpPYnZpb3VzbHkgTk8sIHlvdSBwcm9wb3NlIG5vbnNlbnNlLiBT
-YW1lIGR0cyBpcyB1c2VkIGZvciBib3RoIHN0YWdlcy4KQW5kIEkgaGF2ZSB0byBhZGQgaGFjay1p
-c2ggc3R1ZmYganVzdCBiZWNhdXNlIHlvdSB3YW5uYSBpbnRyb2R1Y2UgY29kZQp3aGljaCBjYXVz
-ZXMga25vd24gcmVncmVzc2lvbnMuCgo+IHJlZ3VsYXRvci1hbHdheXMtb24gbWVhbnMgdGhlIHJl
-Z3VsYXRvciBoYXMgdG8gYmUgZW5hYmxlZAo+IHVuY29uZGl0aW9uYWxseSwgYW5kIHRoZSBzeXN0
-ZW0gc29mdHdhcmUgaGFzIG5vIG90aGVyIHdheSB0byB0ZXN0Cj4gd2hldGhlciB0aGUgcmVndWxh
-dG9yIGlzIGVuYWJsZWQgYnV0IGFjY2VzcyB0aGUgUE1JQywgc28gdGhhdCBpcyB3aHkgdGhlCj4g
-cmVndWxhdG9yIGlzIHByb2JlZCwgZXZlbiBpZiBpdCBpcyBlYXJseS4KVGhhbmtzIGZvciBleHBs
-YWluaW5nIGFuIG9idmlvdXMgc3R1ZmYsIGl0IHNlZW1zIHRoYXQgd2UgYXJlIHRhbGtpbmcKb24g
-ZGlmZmVyZW50IGxhbmd1YWdlcy4KCkFueXdheSwKCiJXZSBtdXN0IG5vdCBwcm9iZSB0aGluZ3Mg
-YXMgd2UgZ28uIFRoZXJlIG1pZ2h0IGJlIG90aGVyCmRlcGVuZGVuY2llcyBub3QgeWV0IGJvdW5k
-LiBJdCBtYXkgYWxzbyB0YWtlIHNvbWUgdGltZS4gVGhpcyBpcyBub3QKZm9sbG93aW5nIGRyaXZl
-ciBtb2RlbCBkZXNpZ24sIHNvcnJ5LgoKU28gcGxlYXNlIHRoaW5rIG9mIGEgd2F5IHRvIGRvIHRo
-aXMgcHJvcGVybHkuIgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5z
-dG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1h
-bi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+On 7/26/24 19:18, Grzegorz Szymaszek wrote:
+
+Thanks for looking at improving this documentation.
+
+Please, provide a commit message.
+
+> Signed-off-by: Grzegorz Szymaszek <gszymaszek@short.pl>
+> ---
+>   doc/board/st/stm32mp1.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/doc/board/st/stm32mp1.rst b/doc/board/st/stm32mp1.rst
+> index 239e18b5e17..98167e80618 100644
+> --- a/doc/board/st/stm32mp1.rst
+> +++ b/doc/board/st/stm32mp1.rst
+> @@ -265,7 +265,7 @@ Build Procedure
+>        # make stm32mp15_defconfig
+>        # make DEVICE_TREE=stm32mp157c-ev1-scmi all
+>
+> -    or without SCMI support
+> +    or without SCMI support::
+
+Either use
+
+.. code-block:: bash
+
+or
+
+.. prompt:: bash $
+
+>
+>        # export KBUILD_OUTPUT=stm32mp15
+>        # make stm32mp15_defconfig
+
+# is the prompt for root. Please, do not suggest to build as root.
+
+Please, do not start lines with a prompt as this does not allow to copy
+multiple lines to a terminal. .. prompt:: allows you to display a prompt
+which will not be copied. .. code-block:: avoids showing the prompt
+which could be seen as distractive.
+
+> @@ -796,7 +796,7 @@ You can update the boot device:
+>   When the board is booting for nor0 or nand0,
+>   only the MTD partition on the boot devices are available, for example:
+>
+> -- NOR (nor0 = alt 20, nor1 = alt 26) & NAND (nand0 = alt 27) :
+> +- NOR (nor0 = alt 20, nor1 = alt 26) & NAND (nand0 = alt 27)::
+
+ditto
+
+>
+>     $> dfu-util -d 0483:5720 -a 21 -D tf-a-stm32mp157c-ev1.stm32
+>     $> dfu-util -d 0483:5720 -a 22 -D tf-a-stm32mp157c-ev1.stm32
+
+Why '$>' is used as prompt here? Shouldn't this be '$'?
+
+How about telling the user what dfu-util is and where to find it?
+Does it relate to http://dfu-util.sourceforge.net?
+
+Best regards
+
+Heinrich
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

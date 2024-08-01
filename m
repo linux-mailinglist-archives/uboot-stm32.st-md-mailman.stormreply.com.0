@@ -2,39 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B0539433E5
-	for <lists+uboot-stm32@lfdr.de>; Wed, 31 Jul 2024 18:11:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 15BCD943BBE
+	for <lists+uboot-stm32@lfdr.de>; Thu,  1 Aug 2024 02:30:10 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 204C2C6DD96;
-	Wed, 31 Jul 2024 16:11:58 +0000 (UTC)
-Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B787DC71290;
+	Thu,  1 Aug 2024 00:30:09 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 346EEC5E2D2
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DA40AC6C820
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 31 Jul 2024 16:11:51 +0000 (UTC)
-Received: from [192.168.192.146] (port=53536 helo=nx64de-b91e0e)
- by mx01.ayax.eu with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <gszymaszek@short.pl>)
- id 1sZBvV-002A2n-2O; Wed, 31 Jul 2024 18:11:45 +0200
-Date: Wed, 31 Jul 2024 18:11:43 +0200
-From: Grzegorz Szymaszek <gszymaszek@short.pl>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Message-ID: <ZqpiP594mbXqx7SI@nx64de-b91e0e>
-Mail-Followup-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
-References: <41ae952bf3f45545e3c6579463df3d0408f6343a.1722014005.git.gszymaszek@short.pl>
- <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
- <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
+ Thu,  1 Aug 2024 00:30:02 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 09D3E88A49;
+ Thu,  1 Aug 2024 02:30:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722472202;
+ bh=DGCh97dwzx+CgyCJ4GYjdQytENCFGXIngisPqPPH3Ag=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=HG1IoXNTMBGsGfEZOjWwwyajvXIk3CBa7Ob/tiM5NSj2AExguTsPHf3hwrJgKKHa2
+ 8taQIumEuUhr/F3k4q2uteuTy+Ex6jj8bpN224AcHK4N+D90rcLk0BYtrXjklJp4SO
+ s8py4Jb22UNy85uwl8y6lLfE2s+ep591L0mhTkbikR2OXsrCBR/YakK/cHlnc8b38v
+ SGnnFsocUaTlU9OpWfRh6AV6EBW5vw2IapHcCN4/CJThUrg3bF/CfRtTNYCoUEY5R+
+ UasbGL6AcXZrzBi6yV/fuCneaz7N3KXQzlBgmzCePNTIBmLYVSp9IbUvKUuKudVulp
+ rIE4mpkY/Q3gg==
+Message-ID: <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
+Date: Thu, 1 Aug 2024 02:28:48 +0200
 MIME-Version: 1.0
-In-Reply-To: <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH 2/3] doc: stm32mp1: fix literal block
-	markers (::)
+User-Agent: Mozilla Thunderbird
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+ <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
+ <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
+ <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+ <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
+ <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
+ <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
+ <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/4] power: regulator: Trigger probe of
+ regulators which are always-on or boot-on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -46,80 +69,53 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0422790215707118396=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
 
---===============0422790215707118396==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="s1gmahYwqwnp6XyG"
-Content-Disposition: inline
+[...]
 
+>>>> What is the problem you observe on tegra 3 ?
+>>> i2c line fails since it probes in spl with your patch, but it does not
+>>> relocate and then probes once more after relocation. Probe fails along
+>>> with all devices on same line.
+>>
+>> Could it be that you either have to:
+>> - Add DM_I2C to tegra 3 SPL
+>> - Remove bootph-* from DT to remove the regulator node from SPL
+>> - /delete-property/ regulator-always-on; and /delete-property/
+>> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being
+>> enabled in SPL ?
+>>
+> Obviously NO, you propose nonsense. Same dts is used for both stages.
 
---s1gmahYwqwnp6XyG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+DT source yes, DT blob likely no.
 
-Hi Heinrich,
+> And I have to add hack-ish stuff just because you wanna introduce code
+> which causes known regressions.
 
-thank you for comprehensive review. I'll respond to the specific points
-later, but there's one thing I feel I should explain. In this series I
-intended to only fix/improve the reStructuredText/HTML syntax and then,
-if the changes were approved, I would go with making the actual text
-easier to understand, I have some drafts already prepared. So I'm not
-sure if fixing, for example, unnecessary root prompts is really in scope
-of this changeset.
+I am trying to understand what problem there is on tegra 3, but it is 
+still not clear to me.
 
-On Wed, Jul 31, 2024 at 07:15:10AM +0200, Heinrich Schuchardt wrote:
-> Please, provide a commit message.
+Is the problem somehow related to PMICs (?) being probed in SPL (?) 
+because they have regulators (?) which are marked as regulator-always-on 
+? If so, then this is correct behavior, and if this is not desired in 
+SPL, then you can remove this property from SPL DT in -u-boot.dtsi using 
+/delete-property/ .
 
-(Two perhaps, not one.) Is it really necessary in case of such trivial
-changes? See sending_patches.rst:
+[...]
 
-> Put a detailed description after the summary and blank line. If the
-> summary line is sufficient to describe the change (e.g. it is a trivial
-> spelling correction or whitespace update), you can omit the blank line
-> and detailed description.
+> "We must not probe things as we go. There might be other
+> dependencies not yet bound. It may also take some time. This is not
+> following driver model design, sorry.
+> 
+> So please think of a way to do this properly."
 
-
-All the best
-
---=20
-Grzegorz
-
---s1gmahYwqwnp6XyG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmaqYj8ACgkQeE9lGUIc
-pz7vhA/+M/rGwvJr/QiBQt08JxMX9glbpaUywssa6RyRHc8z1R3JsgtIOhLzZ33w
-KDosKdSf1ERwFcBafudwKosvK92VB5DtZa5g9NiyPSXS5eVvkrKbc0/oZA4VajHR
-KMLFJQw6aL9wxsbL/5jcBYl8O9nyrgjDRk/l3zl+EKNXS6WDUK+9InTvoD3ChRtL
-o6KvFlowraym9m3Cla2Ifkvz9UnA1qeqw5S2ReFE/7dnFqXsBqLXV9HoqJKr6FG3
-oygf4OAJznv9D4Lwj3im1w27HuBlhvZFhw0W/gCy9SzwHlGdVHwqnzQUkpq/bAE2
-YR0BZRh9KKQYXRkEbwnmiqrjo08bduJueEr+7erzb0qZj80vFDQolZGgd4d7T895
-jo2GcJ/arKtWVXisVzj4ba42n1yqHwHuj+iRyvR+FnnzM/8hzzszutZ9PvGBfyer
-SgqVsy+nIoxeofbae/bUYymMLkriOtbHWVSgGZO5hMUZ3UkJREZt/Khx1qJWk0lN
-CbssXL+i2zynEGMM9Nn6fSLacb5WMRR+RdT5nTYlejIbaMMTC+9xNogt856Vf9qW
-zTw2ea5bm9AmJfFTSIAVNWqHzPFV7pvlHWNZy5D/FBkztANyGw1dnUx7H7bZgD0t
-Ggd8X1TY+pWPP/pCVSYdg+NPp8/pknkog0NoviI0dPucZZENvpY=
-=WQfw
------END PGP SIGNATURE-----
-
---s1gmahYwqwnp6XyG--
-
---===============0422790215707118396==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
+What is this quote about ? Where is this from ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
-
---===============0422790215707118396==--

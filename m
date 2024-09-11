@@ -2,66 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 08A7597508F
-	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Sep 2024 13:12:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B1A8975850
+	for <lists+uboot-stm32@lfdr.de>; Wed, 11 Sep 2024 18:25:17 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B23A1C78015;
-	Wed, 11 Sep 2024 11:12:31 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 165ABC6C841;
+	Wed, 11 Sep 2024 16:25:17 +0000 (UTC)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+ [209.85.222.177])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5D0D0C6C83A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 46C25C69063
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Sep 2024 11:12:24 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-42cb58d810eso4689955e9.0
+ Wed, 11 Sep 2024 16:25:09 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id
+ af79cd13be357-7a9aec89347so2135785a.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Sep 2024 04:12:24 -0700 (PDT)
+ Wed, 11 Sep 2024 09:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726053144; x=1726657944;
+ d=konsulko.com; s=google; t=1726071908; x=1726676708;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Y+BLboQbXhdCwMl/iWzMvCQHIcbC1vAot4nazbVtFUk=;
- b=IqMq4glu89wp2FNORqNrNYgLAah2sHwnPIlCBUbo2QyZKMxTQSE8i+Pkyb47EbiJo5
- XOm2gJc05/B8tQ4ZRf9w+U8NkymXWdnK6W/rloZ/8+EWBrorZfDj5qoZ7wjDyoz6MAnQ
- BQhz+LycwqohfDgUNjfAkQ648W3vc8E3atYh82VP34LfKh1PeMD5S5S65QMZqFJCfiT4
- OTIwjgNSsx+t8QavyIW7F/dVoiCAdGibmPcw70dUsJp+M8tZ9/fmt1RzLeer/yEH74JJ
- Y84mnRa9fpsgMehW6mGeJtbpJw/i8PzzrWJ77C+Vr+luj8RwLkBn4GjJc7t1EwfQw4u5
- gHHQ==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x9aeOgN8xMtMgMDmTT/h3ulinJsjS4y8oC1yyzYlb38=;
+ b=WG0XiYXWJKpTkYYlIJvV8mOWTdR6jQwqeAsTMI90UniPN+z5KMC4syPyAmwC6S4kIs
+ FklYBLeeCeh3Vga3K5v9wlAZxTOQS5q1mf+Jjn5+/a6v3vlJPNZJ5aKtR06jr0g5T10O
+ rwPmNyLk8Ldt3sC8Px3NYtrF2XgmZzb3qV8oA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726053144; x=1726657944;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Y+BLboQbXhdCwMl/iWzMvCQHIcbC1vAot4nazbVtFUk=;
- b=gZUmqNfdvsiIDdTQFCkBmumAaXiZ5ylE9DmLXFsAX5dDSqfDlcUKqAQoTNA3M/pxwW
- 5rU6CKJLaGEHU3j67XnGQrRIBBg36TtSgmyx3Z8VjWJGVE83CHzfS6jBQBAtPIyF7Ybb
- vVQRYn1julbv4Sb6vDW8JpxzjSp5HnpmckBR2DzrHwT7CqIuRMYBHWhgSnaS2Lnwl9+0
- ZmrcnP/h/LC1zWUQ1NEJG24Zq23w51b9nfAKo6pz6eG4ZDhcMhwnl2AUCmsKj77oKYT+
- d991tJ9RRo4xUdQ/U/jmEUouQe4dIFgIje0Kv733zKHwx2Yms79YIQVbLQl2eAcMEvo0
- U8HQ==
+ d=1e100.net; s=20230601; t=1726071908; x=1726676708;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x9aeOgN8xMtMgMDmTT/h3ulinJsjS4y8oC1yyzYlb38=;
+ b=w53LOvCZENdo1brCoJEUEVWhsWjzztikE0HAg6NKB4qQb0mO/CC7JwaiouDS9K4Tgc
+ Tp7VUO6rTskGQjuUozQx3rL7mz0YghwzJl1SPDW/HPewkMIGSjeRrFcDZWk6+ReilyRu
+ vMysb4cvZ84DpH7D+LPujpthHvXs3ybiC0p75pRBKuOBQmVWMLT0HX7YNqvP/DTmoiEu
+ x+IQfQMBuXKFyzW1cz3Tal2GCVHPsIuIgfCkvbemEE4vl6H2al2r+5E0CrvE0bADmBx9
+ /+VZhfxuSfr18wvDhcyd3WL1/t90WN/RUvtk4V4d5KncOpkwkXEMiRxvydBad6h7g6GN
+ R0tA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWytaUSb96J0YcfM4pWvmYNOXXoZ1H9ptoh8aTtU8B087LcupA6ociOtrAsMqXr1QWcSg6GbYeD7+X24Q==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Ywxueax0Xy20TlIgNszt/WFT8wdwFu5N4sC6Qc3DqlkaQ3IDJNx
- jdszOc6wAlJtj0xiIBW4+RG/cnNKLsnRT75RF3J3ll90DP1azcxT2lG9fOt95bdt7PAUCi8J0EZ
- jB8tRFlXAsgKJnk8I5HhXDlRyZytuLo4k
-X-Google-Smtp-Source: AGHT+IEx7XOYNRr/D4/84V9Zzu5PALu3PVctmPJDfr8baDh0VkpsqYYqezSJYG5M7VZnIqag7EzaPUl1z1cAyLQPwD8=
-X-Received: by 2002:adf:e8cd:0:b0:374:c33d:377d with SMTP id
- ffacd0b85a97d-378a8aae3ffmr3740551f8f.28.1726053143444; Wed, 11 Sep 2024
- 04:12:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
- <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
- <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+ AJvYcCUT0jLVyTDJERP5vasdIheVKhDVQlvo4tDBicTsF47gVUhM0dcZfiQjQ2Ehu+jPOdM1JzNWIAckCp/b4A==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyN504hwf7PWwH9oLVooPSK2/wXYiLD9g2tr6TcDGCYmJcR0QqA
+ DrBSJOnuBGdzqkkc+rM/vr/PkEVjBD3L+0IgVanyhxtG64F/VcFGUCgYUW+mxkc=
+X-Google-Smtp-Source: AGHT+IHgCATOhfD2w17tP2+icZgruUKYgHQ8g2cQhzGDqI5oAhF+y/wid/ws1zpD53j5nlOs9m9k2w==
+X-Received: by 2002:a05:620a:1a1e:b0:7a9:a3e3:7270 with SMTP id
+ af79cd13be357-7a9a3e3a396mr2482949485a.62.1726071907923; 
+ Wed, 11 Sep 2024 09:25:07 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-45822e7f569sm42725791cf.31.2024.09.11.09.25.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Sep 2024 09:25:07 -0700 (PDT)
+Date: Wed, 11 Sep 2024 10:25:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Message-ID: <20240911162503.GQ4252@bill-the-cat>
+References: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
  <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
  <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
  <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
@@ -70,15 +65,15 @@ References: <20240626235717.272219-1-marex@denx.de>
  <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
  <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
  <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
-In-Reply-To: <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 11 Sep 2024 14:12:12 +0300
-Message-ID: <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
+ <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>
@@ -95,47 +90,117 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3601104971886728680=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-0YHRgCwgMTEg0LLQtdGALiAyMDI04oCv0YAuINC+IDE0OjAxIE1hcmVrIFZhc3V0IDxtYXJleEBk
-ZW54LmRlPiDQv9C40YjQtToKPgo+IE9uIDkvMTEvMjQgNzo1NyBBTSwgU3Z5YXRvc2xhdiBSeWhl
-bCB3cm90ZToKPgo+IFsuLi5dCj4KPiA+Pj4+IFlvdSBkaWQgbWVudGlvbiBzb21ldGhpbmcgcmVn
-YXJkaW5nIEkyQy9QTUlDIGRyaXZlciBwcm9iZSB0aW1pbmcsIGJ1dCBpdAo+ID4+Pj4gc2VlbXMg
-dGhlIEkyQyBkcml2ZXIgYW5kIFBNSUMgZHJpdmVycyBwcm9iZSByb3VnaGx5IGFyb3VuZCB0aGUg
-c2FtZSB0aW1lCj4gPj4+PiBpbiBib3RoIHBhc3MgYW5kIGZhaWwgY2FzZXMgPwo+ID4+Pgo+ID4+
-PiBZZXMsIGhlcmUgSSBhZ3JlZSB0aGF0IHRoZXkgYm90aCBwcm9iZSBhbmQgcHJvYmUgcGFzc2Vz
-LCBidXQgSSBhc3N1bWUKPiA+Pj4gdGltaW5nIG9mIGkyYyBjYWxsIGlzIGNyaXRpY2FsIGFuZCB0
-aGVyZSBtYXkgYmUgc29tZSBkZXBlbmRlbmN5IHdoaWNoCj4gPj4+IGlzIG5vdCByZWFkeS4KPiA+
-Pgo+ID4+IE15IGd1ZXNzIHdvdWxkIGJlIHBpbm11eCBvciBjbG9jaywgbWF5YmUgdGhlIGkyYyBj
-b250cm9sbGVyIGlzIG1hcmtlZCBhcwo+ID4+IGJvb3RwaC0qIGluIERUIGFuZCBpdHMgcGlubXV4
-L2Nsb2NrIGlzIG5vdD8gTWF5YmUgdGhlIGkyYyBvbiB0ZWdyYSB3b3Jrcwo+ID4+IGJ5IHNoZWVy
-IGNvaW5jaWRlbmNlIHJpZ2h0IG5vdz8gQ2FuIHlvdSBoYXZlIGEgbG9vaz8KPiA+Cj4gPiBQb3dl
-ciBpMmMgbGluZSAob25lIHRoYXQgaG9zdHMgUE1JQykgaXMgY29uZmlndXJlZCBleHRyZW1lbHkg
-ZWFybHkgaW4KPiA+IFNQTCBzaW5jZSBpdCBpcyBuZWVkZWQgZm9yIGNwdSBhbmQgY29yZSB2b2x0
-YWdlIHNldHVwIHNvIGV2ZW4gaWYsIGFzCj4gPiB5b3Ugc2F5LCB0ZWdyYSB3b3JrcyBieSBzaGVl
-ciBjb2luY2lkZW5jZSwgc3BlY2lmaWNhbGx5IHRoaXMgaTJjIGxpbmUKPiA+IHNob3VsZCB3b3Jr
-IG5vbiB0aGUgbGVzcywgc2luY2UgaXQgaGFzIGFsbCBpdHMgcHJlLXJlcXVpc2l0ZXMgKGNsb2Nr
-Cj4gPiBhbmQgcGlubXV4KSBjb25maWd1cmVkIG9uIGVhcmx5IHN0YWdlLgo+Cj4gSXMgaXQgcG9z
-c2libGUgdGhhdCB0aGlzIGNvbmZpZ3VyYXRpb24gaXMgc29tZWhvdyByZXNldCBvciByZWNvbmZp
-Z3VyZWQKPiBmcm9tIERUIGVhcmx5IG9uIGluIFUtQm9vdCBwcm9wZXIgPwoKTm8KCj4gRG8geW91
-IGhhdmUgc2VyaWFsIGNvbnNvbGUgb3V0cHV0IGluIGJvYXJkX2YuYyB0aW1lIGluIFUtQm9vdCBw
-cm9wZXIgLAo+IHBvc3NpYmx5IHVzaW5nIERFVUJHX1VBUlQgLCB0byBjaGVjayBpZiB0aGVyZSBt
-aWdodCBiZSBzb21lIHByaW9yCj4gZmFpbGluZyBJMkMgdHJhbnNmZXIgYXQgdGhhdCBib2FyZF9m
-LmMgdGltZSA/CgpIYXZlbid0IHNwb3R0ZWQgYW55dGhpbmcgd2VpcmQgdGhlcmUuCgo+ID4gQXMg
-SSBoYXZlIHRvbGQsIEkgd2FzIG5vdCBhYmxlIHRvIGRldGVybWluZSBleGFjdCByZWFzb24gd2h5
-IHRoaXMKPiA+IGhhcHBlbnMsIGl0IHNob3VsZCBub3QgYW5kIHlldCBpdCBkb2VzLiBUaGlzIGlz
-IHdoeSBJIGhhdmUgYWJhbmRvbmVkCj4gPiBteSBhdHRlbXB0IHRvIGltcGxlbWVudCBzYW1lIGNo
-YW5nZXMgeW91IGFyZSBjdXJyZW50bHkgcHJvcG9zaW5nLgo+Cj4gSWYgdGVncmEgaGFzIGEgcHJv
-YmxlbSwgaXQgc2hvdWxkIGJlIGZpeGVkIG9uIHRlZ3JhIHNpZGUgYW5kIG5vdCBibG9jawo+IGNv
-cmUgcGx1bWJpbmcuIEkgYW0gbm90IHNlZWluZyB0aGUgcHJvYmxlbSBvbiBzdG0zMiBvciBpbXgg
-c3lzdGVtcywgc28gSQo+IGFtIGJhbmtpbmcgdG93YXJkIHRlZ3JhLXNwZWNpZmljIGlzc3VlLgo+
-CgpBbmQgeWV0IHlvdSBhcmUgcHVzaGluZyB0ZWdyYSBicmVha2luZyBzdHVmZi4gSSB3aWxsIGlu
-c2lzdCBvbgpyZXZlcnRpbmcgdGhpcyBpcyBpdCBwYXNzZXMuCgo+IEFyZSB5b3UgYWJsZSB0byBk
-ZWJ1ZyB0aGlzID8KCk5vLCBJIGFtIG5vdCBhYmxlIGZpbmQgZXhhY3QgY3VzZSBvZiB0aGlzIGJl
-aGF2aW9yLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpV
-Ym9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJl
-cGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0
-aW5mby91Ym9vdC1zdG0zMgo=
+
+--===============3601104971886728680==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="esSR2Cp/8Y/3KA2m"
+Content-Disposition: inline
+
+
+--esSR2Cp/8Y/3KA2m
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Sep 11, 2024 at 02:12:12PM +0300, Svyatoslav Ryhel wrote:
+> =D1=81=D1=80, 11 =D0=B2=D0=B5=D1=80. 2024=E2=80=AF=D1=80. =D0=BE 14:01 Ma=
+rek Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > On 9/11/24 7:57 AM, Svyatoslav Ryhel wrote:
+> >
+> > [...]
+> >
+> > >>>> You did mention something regarding I2C/PMIC driver probe timing, =
+but it
+> > >>>> seems the I2C driver and PMIC drivers probe roughly around the sam=
+e time
+> > >>>> in both pass and fail cases ?
+> > >>>
+> > >>> Yes, here I agree that they both probe and probe passes, but I assu=
+me
+> > >>> timing of i2c call is critical and there may be some dependency whi=
+ch
+> > >>> is not ready.
+> > >>
+> > >> My guess would be pinmux or clock, maybe the i2c controller is marke=
+d as
+> > >> bootph-* in DT and its pinmux/clock is not? Maybe the i2c on tegra w=
+orks
+> > >> by sheer coincidence right now? Can you have a look?
+> > >
+> > > Power i2c line (one that hosts PMIC) is configured extremely early in
+> > > SPL since it is needed for cpu and core voltage setup so even if, as
+> > > you say, tegra works by sheer coincidence, specifically this i2c line
+> > > should work non the less, since it has all its pre-requisites (clock
+> > > and pinmux) configured on early stage.
+> >
+> > Is it possible that this configuration is somehow reset or reconfigured
+> > from DT early on in U-Boot proper ?
+>=20
+> No
+>=20
+> > Do you have serial console output in board_f.c time in U-Boot proper ,
+> > possibly using DEUBG_UART , to check if there might be some prior
+> > failing I2C transfer at that board_f.c time ?
+>=20
+> Haven't spotted anything weird there.
+>=20
+> > > As I have told, I was not able to determine exact reason why this
+> > > happens, it should not and yet it does. This is why I have abandoned
+> > > my attempt to implement same changes you are currently proposing.
+> >
+> > If tegra has a problem, it should be fixed on tegra side and not block
+> > core plumbing. I am not seeing the problem on stm32 or imx systems, so I
+> > am banking toward tegra-specific issue.
+> >
+>=20
+> And yet you are pushing tegra breaking stuff. I will insist on
+> reverting this is it passes.
+>=20
+> > Are you able to debug this ?
+>=20
+> No, I am not able find exact cuse of this behavior.
+
+How do you propose we resolve this then, Svyatoslav? I threw this patch
+at some TI platforms as well and they're all fine. Are you unable to get
+some early debuging information out like Marek was asking? Thanks.
+
+--=20
+Tom
+
+--esSR2Cp/8Y/3KA2m
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbhxFsACgkQFHw5/5Y0
+tyw71wwAn/baxpBRJxptF4uekpATAo24mWw9w0JoKRSdXSBVgNui+btFcvkyQ1X/
+VtJHwJWtem9hhKeIqbbYyQNVjb5dN1brT7ORRtBDN5cXtzTSG6Ylj+pd1ORs73bu
+oHitL2pffneo+8ful/SkqOa8xTpaMZlNV/fb5hYf4gOrWNt++UOawM9NFG+BSK4r
+PdAXmkpnNBMHBA+a8E4JcijdY2SoNsZF4YQpC+fJ7ErKB8BFx5HOd/4Sc86kmL+0
+z964CJU0Rc8D/ZJT9qMvE8c2S7RImO8PXME6QiLIyfBAtG40whlQZrV5XrQqYYRU
+71euKRzHE8s7PEQ3hLYlmdKYUYf5y8smAkx8+HBru4rkJylYpSBEToSH9Y7iOmKY
+YGbtZgQ5rTHiegHftUXbAhMG97P9ThYUjG1XBg6VMKSVRsTBoRRkt5+DdoR1rxaY
+FJrRr82pW3GWJwi4KsEnEcy1J+P7o2aXfNrtq/E6YZzuD6lO0KT8Z3VaQnWcOwOg
+vzxf8SHc
+=9uk4
+-----END PGP SIGNATURE-----
+
+--esSR2Cp/8Y/3KA2m--
+
+--===============3601104971886728680==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============3601104971886728680==--

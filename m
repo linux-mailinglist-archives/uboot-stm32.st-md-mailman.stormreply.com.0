@@ -2,85 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FEFD975E4D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Sep 2024 03:01:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94E0F976470
+	for <lists+uboot-stm32@lfdr.de>; Thu, 12 Sep 2024 10:27:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 462D0C6C855;
-	Thu, 12 Sep 2024 01:01:10 +0000 (UTC)
-Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
- [209.85.210.172])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 41BA9C6DD9A;
+	Thu, 12 Sep 2024 08:27:23 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 12113C57194
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9B8ACC57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 12 Sep 2024 01:01:09 +0000 (UTC)
-Received: by mail-pf1-f172.google.com with SMTP id
- d2e1a72fcca58-718d91eef2eso229081b3a.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 11 Sep 2024 18:01:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1726102868; x=1726707668;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t5LnUs+3E25GlONNtCSTzMe04eZa+40fJGqgIpkNx7U=;
- b=JhA6uONi49J4uANmJ9mdweelAnBa5Xi+gaLLqF9atYd15oUfXlgXddfqLCsIOoB9zr
- b/KJeNKez1PBUM0ukvDw4/ID+ODysKI1wc/t6dDZvbXdS3fS1VBueCY0SdESmhAk1fS+
- BWMR1eXAxQc/GB1O3vuEV3pKwtPndxiIe5B/k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726102868; x=1726707668;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t5LnUs+3E25GlONNtCSTzMe04eZa+40fJGqgIpkNx7U=;
- b=JmkBEYqRlmhijwIuubogviHq6sEoFRUBrPttNDgU1F4cNAxy2SIMwltACmwZWriJHU
- WsElJy6sYXO0DdgRaDqkLNI7tax4DodUqHOa/V7JaheIGpQyJOv/PqgZTQFRz9xRfYJg
- /1qbLWiAp5rRmui9L7s+cqQ2bSL7ZDwyAne5NCaKwfo7jE9INk+ORIpOx4wdpxJV4ma1
- Zd2DkjlK28M7/hsj0jsDRDLDIgs/c0P8SHCl6cUf1Joyw2gGjwDibVz1aMxVyow0NDsI
- 35bT4+2FtqQF9afp1+ZBykHgniNmDYjCLXFRnW09w7KrrZqo4iMuF9Zmk2K5/5FKdJQN
- OG7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVnb7p7hSXR3lqHfelXCaWVCSTrOVaRGhOs3o6UH0TKBrhGJ0C41uhQEvnxFL/0mWR1/2P1Y53TD3OcMg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwZAeRyRc0I+AvXcNL6anvZpFGZ/ma1Mca9l7jwJjkFDQMXv+gd
- eSGxfqSKgGVMjmnGu6y4vCfgH4ejpZN3AsXtbQNat9MsIza3Mpv8CT7bmRyZakiomc/K+bgbYiF
- bpH6BzKnE0xvtnBTgIsyj9DaSGDW62saZwJHX
-X-Google-Smtp-Source: AGHT+IGayIgO2cDB67qAr/r9Qm3MVp5BQGGEHNZGej4dF4Fh8qVqB5M2/R/eJKiw84ELwE+iwxDn0k2KG+AheTH83/E=
-X-Received: by 2002:a05:6a00:8985:b0:718:dda3:d7fe with SMTP id
- d2e1a72fcca58-71907f718c9mr11800099b3a.12.1726102867602; Wed, 11 Sep 2024
- 18:01:07 -0700 (PDT)
+ Thu, 12 Sep 2024 08:27:16 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 36D4588936;
+ Thu, 12 Sep 2024 10:27:15 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1726129636;
+ bh=hUWAUdTVdvvGcefmU3M4OCcNLcN/Gsf0pLwA6nNmSpw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=qRnlVwY+4G3nLGkG1TLrrY+oGGcdjZw6k/VZzVZAQg3vIrEtRc/6xbIUYbbwNz5Bb
+ YpOeXUC9Zmy+hQDvhqOBbSjyqIXzyid69EuIeROLcnKn9Z2Us21js+HCykCyCkxB0S
+ IXlfAnR7X/74palpUP8nsAQsoGvCwnATjp6+6PVAruz9+UKBXlWUSb1uz6kJKuVCTZ
+ KqWXaDqdLDP6ZgOMScVEuDUY/6i5T9ePjibKxIVENlWidPVnlwwOYJGA6F3X7zW4Ed
+ +Wu+diAyWoxlLs4CgIQ7k7726QzbzURaO0UbPXxc72RnfDebtmXMGFyLW1slDXxMWc
+ A89tfVAkjW5YA==
+Message-ID: <72981923-1e46-4863-9277-3f094feec89c@denx.de>
+Date: Thu, 12 Sep 2024 10:05:26 +0200
 MIME-Version: 1.0
-References: <20240626235717.272219-1-marex@denx.de>
- <CAFLszTjwbWdKqs_UBqXvr2F2ahoGd0-BFE-XLNr3-uq73ZLFHg@mail.gmail.com>
- <6abad4ba-b29a-47a3-addb-91e8f46ee425@denx.de>
- <CAFLszTgAqOXbkcJxYKxM4gn6_oOg7+nyaBK-Y34r_zVaPBScvA@mail.gmail.com>
- <616b231b-0291-4bb3-93d9-85970419ed62@denx.de>
-In-Reply-To: <616b231b-0291-4bb3-93d9-85970419ed62@denx.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Sep 2024 19:00:56 -0600
-Message-ID: <CAFLszTiHy7yn0Z18GdkSLgykH0s=z8tJ=-QGf+knXPggKwyk9Q@mail.gmail.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
- Max Krummenacher <max.krummenacher@toradex.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Dragan Simic <dsimic@manjaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot-amlogic@groups.io,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Kostya Porotchkin <kostap@marvell.com>,
- Ben Wolsieffer <benwolsieffer@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Matteo Lisi <matteo.lisi@engicam.com>, Jonas Karlman <jonas@kwiboo.se>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Chris Morgan <macromorgan@hotmail.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@dh-electronics.com,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+User-Agent: Mozilla Thunderbird
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+ <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
+ <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
+ <CAPVz0n2-DCKDcVrAi00kF6yDcE2bN1mtUhzBcw7JDiZoXgzu0w@mail.gmail.com>
+ <e5837ce4-0a14-4822-960d-6ab667a9f4b1@denx.de>
+ <CAPVz0n323ktF6kb3WHR9JcE+xOzQr9-aWOR47+ZvwQr=ib18rg@mail.gmail.com>
+ <f778366b-bdaf-415d-a94e-c995f62e8c71@denx.de>
+ <CAPVz0n0ru1rPb9SNw515mkwfs4=nNSOPjZY74JVkqnGbEouSLQ@mail.gmail.com>
+ <cfc1a158-6c35-4288-aed0-fcc78a8db832@denx.de>
+ <CAPVz0n1Vh7Vgnt8_Lx6U8p42QvtVnHB9yvb=RmjYrS=w1G3u1A@mail.gmail.com>
+ <20240911162503.GQ4252@bill-the-cat>
+ <CAFLszTjsJFmdsTUEOC-uFKUMyQDJkLhzvcyrSTSFhLF4L=Cp6w@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTjsJFmdsTUEOC-uFKUMyQDJkLhzvcyrSTSFhLF4L=Cp6w@mail.gmail.com>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Sumit Garg <sumit.garg@linaro.org>
+ Francesco Dolcini <francesco.dolcini@toradex.com>
 Subject: Re: [Uboot-stm32] [PATCH 1/4] power: regulator: Trigger probe of
  regulators which are always-on or boot-on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -94,113 +73,50 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Marek,
+On 9/12/24 2:59 AM, Simon Glass wrote:
+> Hi Tom,
 
-On Fri, 28 Jun 2024 at 07:26, Marek Vasut <marex@denx.de> wrote:
->
-> On 6/28/24 9:32 AM, Simon Glass wrote:
-> > Hi Marek,
->
-> Hi,
->
-> [...]
->
-> >>>> @@ -473,8 +483,6 @@ static int regulator_pre_probe(struct udevice *dev)
-> >>>>                                                   -ENODATA);
-> >>>>           uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
-> >>>>                                                   -ENODATA);
-> >>>> -       uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
-> >>>> -       uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
-> >>>>           uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
-> >>>>                                                       0);
-> >>>>           uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
-> >>>> --
-> >>>> 2.43.0
-> >>>>
-> >>>
-> >>> This is reading a lot of DT stuff very early, which may be slow. It is
-> >>> also reading from the DT in the bind() step which we sometimes have to
-> >>> do, but try to avoid.
-> >>
-> >> Actually, it is reading only the bare minimum very early in bind, the
-> >> always-on and boot-on, the rest is in pre_probe, i.e. later.
-> >
-> > Yes, I see that. Also it is inevitable that these properties need to
-> > be read before probe(), since they control whether to probe().
-> >
-> >>
-> >>> Also this seems to happen in SPL and again pre-reloc and again in
-> >>> U-Boot post-reloc?
-> >>
-> >> What does, the uclass post_bind ?
-> >
-> > I mean that this code will be called in SPL (if the regulators are in
-> > the DT there), U-Boot pre-reloc and post-reloc, each time turning on
-> > the regulators. We need a way to control that, don't we?
->
-> I would assume that if those regulators are turned on once in the
-> earliest stage , turning them on again in the follow up stage would be a
-> noop ? This is the point of regulator-*-on, to keep the regulators on.
+Hello Simon,
 
-No, there is sometimes a particular sequence needed.
+>> How do you propose we resolve this then, Svyatoslav? I threw this patch
+>> at some TI platforms as well and they're all fine. Are you unable to get
+>> some early debuging information out like Marek was asking? Thanks.
+> 
+> At this point I would like to have an optional Kconfig to enable the
+> always-on regulators in the init sequence, perhaps as part of
+> initf_dm().
 
->
-> >>> Should we have a step in the init sequence where we set up the
-> >>> regulators, by calling regulators_enable_boot_on() ?
-> >>
-> >> Let's not do this , the entire point of this series is to get rid of
-> >> those functions and do the regulator configuration the same way LED
-> >> subsystem does it -- by probing always-on/boot-on regulators and
-> >> configuring them correctly on probe.
-> >>
-> >> To me regulators_enable_boot_on() and the like was always an
-> >> inconsistently applied workaround for missing DM_FLAG_PROBE_AFTER_BIND ,
-> >> which is now implemented, so such workarounds can be removed.
-> >
-> > That patch seemed to slip under the radar, sent and applied on the
-> > same day! We really need to add a test for it, BTW.
->
-> Which patch ? My recollection of DM_FLAG_PROBE_AFTER_BIND was that it
-> took a while to get in.
+That would only move the current regulators_enable_boot_on() elsewhere 
+without fixing the real issue which this series does address -- that the 
+regulators which are marked as always-on/boot-on should always be 
+enabled on boot, unconditionally. If there are regulators which should 
+not be enabled on boot, they should not be marked always-on/boot-on in 
+DT in the first place.
 
-[1]
+The regulators_enable_boot_on() is missing or forgotten in multiple 
+board files, which makes boards randomly misbehave due to disabled 
+always-on regulators. Adding a Kconfig option would convert this problem 
+to "new Kconfig option is missing in multiple configs" problem, which is 
+effectively identical problem, only moved elsewhere. It should be the 
+core code that handles this the same way for all boards and configs.
 
->
-> > My concern is that this might cause us ordering problems. We perhaps
-> > want the regulators to be done first. If drivers are probed which use
-> > regulators, then presumably they will enable them. Consider this:
-> >
-> > - LED driver auto-probes
-> >     - probes I2C bus 2
-> >     - probes LDO1 which is autoset so turns on
-> > - LDO1 probes, but is already running
-> > - LDO2 probes, which is autoset so turns on
-> >
-> > So long as it is OK to enable the regulators in any order, then this
-> > seems fine. But is it? How do we handle the case where are particular
-> > sequence is needed?
->
-> Did we finally arrive at the point where we need -EPROBE_DEFER alike
-> mechanism ?
+The core has the tools for it too, the DM_FLAG_PROBE_AFTER_BIND flag 
+which is already used for the same purpose for LEDs, pinctrl, PMICs, 
+etc., which makes regulators_enable_boot_on() unnecessary.
 
-Nope. But I am concerned that this patch is leading us there. bind()
-really needs to be as clean as possible. It is one of the design
-elements of driver model which Linux should adopt.
+The DM_FLAG_PROBE_AFTER_BIND should be used more instead of ad-hoc 
+callbacks in random places of the init sequence, those do not scale.
 
-There is always a race to be the first to init something, move the
-init earlier, etc... I don't see any general need to init the
-regulators right at the start. It should be done in a separate
-function and be optional. I am happy to send a patch if you like.
+> It should not be in DM core, sorry.
+This is in regulator uclass, not in DM core ?
 
-Regards,
-Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20220422131555.123598-1-marex@denx.de/
+This discussion thread is about debugging tegra i2c, how is your comment 
+related to the discussion here ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,69 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E547987A2D
-	for <lists+uboot-stm32@lfdr.de>; Thu, 26 Sep 2024 22:48:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90E48987B16
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2024 00:17:03 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DE998C6DD72;
-	Thu, 26 Sep 2024 20:48:28 +0000 (UTC)
-Received: from mail-qv1-f43.google.com (mail-qv1-f43.google.com
- [209.85.219.43])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A59AC6DD72;
+	Thu, 26 Sep 2024 22:17:03 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AA455C6B45B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 55E4AC6B47E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Sep 2024 20:48:21 +0000 (UTC)
-Received: by mail-qv1-f43.google.com with SMTP id
- 6a1803df08f44-6c3603292abso10251376d6.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Sep 2024 13:48:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1727383700; x=1727988500;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9CG6IbZBUWbZy/dZT3ria1L5MDEPanLUMQQV8PtW684=;
- b=V4QPDAHb0V8nMA74PNMdFsWcTctyngxl2FgbJMDd20o/MiijP3I3ZMs8QDb5gt/PGM
- hYwZV82Vv1tpjnlxhOKyjGK13Lk5nTUqp90L2FAQwnqoQt6EmhMWZsbFq3xOyuSlzixd
- ECzT3NMMo8wYDpRYu0l2ZcxME2pRQeg/qaVYU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727383700; x=1727988500;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=9CG6IbZBUWbZy/dZT3ria1L5MDEPanLUMQQV8PtW684=;
- b=T9ssUof4IJlNVVepmC3yEuALE3W3q8xfIqQLPQAoisr/Papz60J6PbdFeo9b6AzJnW
- M/1XxKkaxIc4iMBly+8KNnOpUceDTuYGz1n/VWWkbA1rE+0lSZLc7XOkTFkyuZ0o7T1p
- pn9zu2XUpXH50FiTf10XmHBvkZQtOsI9iLQ73dDpWlhwAmvhunAxDM/I7GnN8rGluaXy
- Fbkp+VBJtc8Jv6e8J0KvPV4QH9LvXesVbP47sZtd0RLnILBcD106K19pASZMfO5DDLs7
- 0HH3mlcr0UwLGRhOTtzbMSW1vwjNpY7hTNJLxdMwWmXn5igw37l9cSEJ6/rdxIyoZgLe
- YDDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIp6DmxBySqrxIVz8yVxbabBcTKF68OE89v6cnLbxI2+bDseEL4Cui0nQLE+8JFc2+5MqrTa1qZJ5vaA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yx2fQ5mYoDMFJ++J8G22cnJQ6pJAN7Rl4kvcS+f8RIsbTBFIKJe
- h9U1kUGUI22ByGfgbSPHI/qDKVcqwrZoRfURpOWQb9yG4VaiDAAkl0PHCfH5hg==
-X-Google-Smtp-Source: AGHT+IFh14V1nsVLi2QeigrH/ovkwEVnOLrEBiqxaNE6H3WhpLIpbyl9ZmR9JQzvJCT05+sY9HmeTw==
-X-Received: by 2002:a05:6214:4a8e:b0:6cb:2cfa:3b9e with SMTP id
- 6a1803df08f44-6cb3b5e5023mr16955176d6.11.1727383700645; 
- Thu, 26 Sep 2024 13:48:20 -0700 (PDT)
-Received: from chromium.org ([205.220.129.31])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6cb3b66cff5sm2538696d6.77.2024.09.26.13.48.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Sep 2024 13:48:20 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Date: Thu, 26 Sep 2024 22:44:24 +0200
-Message-ID: <20240926204455.963584-5-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240926204455.963584-1-sjg@chromium.org>
-References: <20240926204455.963584-1-sjg@chromium.org>
+ Thu, 26 Sep 2024 22:16:56 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 28D2788F08;
+ Fri, 27 Sep 2024 00:16:52 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1727389015;
+ bh=ChzMy5WYqc3uW8w8j0l/YJ76ufI3mEG1AJyTnWAHWvQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=DiXsIH+G6ZySjfUCfP5aKPpfnXl8I+vYWVWriBGcB3t9w31yebE3rXbXxbca9CkgY
+ fbucKsnL1LcldN3CfoMX0eWUNl6VePMlr/EGjolRDcqbLZG/sC+lkOUzdFa6GHmgDg
+ qz7roYNQmT4NjhE68/kRHiCZsysXPbVT5OuPaxW5VY6FZ79KVX12uxtE/H2mkO7Hbh
+ lSFNUjcZBwNJJC6spPPk5tdLYrUNXWLYmava2gf9lNqH9SudwnRAvsez4Q5WDAFtqw
+ l9eEjCyR04aBA+D669ArIuyD6Vvx27IxFlb7rLK0HBcnOQGKsc6Wl9fSeoRrwAWvAR
+ DDKhYGTEFPNSQ==
+Message-ID: <b769e5c6-7e19-4ce6-9c3d-9a262a1bad8e@denx.de>
+Date: Fri, 27 Sep 2024 00:16:51 +0200
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Kamil Lulko <kamil.lulko@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 04/27] st: stm32f429: Drop old LED code
+User-Agent: Mozilla Thunderbird
+To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
+References: <20240925022314.714285-1-marex@denx.de>
+ <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Dragan Simic <dsimic@manjaro.org>,
+ u-boot-qcom@groups.io, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot-amlogic@groups.io, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kostya Porotchkin <kostap@marvell.com>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Chris Morgan <macromorgan@hotmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, u-boot@dh-electronics.com,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/5] power: regulator: Trigger probe of
+ regulators which are always-on or boot-on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,78 +74,46 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This predates the LED framework, so drop it.
+On 9/26/24 5:05 PM, Jonas Karlman wrote:
+> Hi Marek,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Hi,
 
- board/st/stm32f429-discovery/Makefile |  1 -
- board/st/stm32f429-discovery/led.c    | 39 ---------------------------
- 2 files changed, 40 deletions(-)
- delete mode 100644 board/st/stm32f429-discovery/led.c
-
-diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
-index 6b02c0fddec..233eafdad3d 100644
---- a/board/st/stm32f429-discovery/Makefile
-+++ b/board/st/stm32f429-discovery/Makefile
-@@ -7,4 +7,3 @@
- # Kamil Lulko, <kamil.lulko@gmail.com>
- 
- obj-y	:= stm32f429-discovery.o
--obj-y	+= led.o
-diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
-deleted file mode 100644
-index 4b8038341b9..00000000000
---- a/board/st/stm32f429-discovery/led.c
-+++ /dev/null
-@@ -1,39 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2015
-- * Kamil Lulko, <kamil.lulko@gmail.com>
-- */
--
--#include <status_led.h>
--#include <asm-generic/gpio.h>
--
--#define RED_LED			110
--#define GREEN_LED		109
--
--void coloured_LED_init(void)
--{
--	gpio_request(RED_LED, "red led");
--	gpio_direction_output(RED_LED, 0);
--	gpio_request(GREEN_LED, "green led");
--	gpio_direction_output(GREEN_LED, 0);
--}
--
--void red_led_off(void)
--{
--	gpio_set_value(RED_LED, 0);
--}
--
--void green_led_off(void)
--{
--	gpio_set_value(GREEN_LED, 0);
--}
--
--void red_led_on(void)
--{
--	gpio_set_value(RED_LED, 1);
--}
--
--void green_led_on(void)
--{
--	gpio_set_value(GREEN_LED, 1);
--}
--- 
-2.43.0
-
+> On 2024-09-25 04:21, Marek Vasut wrote:
+>> In case a regulator DT node contains regulator-always-on or regulator-boot-on
+>> property, make sure the regulator gets correctly configured by U-Boot on start
+>> up. Unconditionally probe such regulator drivers. This is a preparatory patch
+>> for introduction of .regulator_post_probe() which would trigger the regulator
+>> configuration.
+>>
+>> Parsing of regulator-always-on and regulator-boot-on DT property has been
+>> moved to regulator_post_bind() as the information is required early, the
+>> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+>> slowing down the boot process.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+> 
+> [snip]
+> 
+>>   
+>> -	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+>> -	      property, dev->name, uc_pdata->name);
+>> +	/*
+>> +	 * In case the regulator has regulator-always-on or
+>> +	 * regulator-boot-on DT property, trigger probe() to
+>> +	 * configure its default state during startup.
+>> +	 */
+>> +	if (uc_pdata->always_on && uc_pdata->boot_on)
+> 
+> This check for always_on _and_ boot_on does not fully match the commit
+> message, comment or the old behavior of regulators_enable_boot_on()
+> where any always_on _or_ boot_on would trigger autoset().
+This should be ORR, thanks for spotting this, fixed in V3.
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,67 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90E48987B16
-	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2024 00:17:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AD7F987B8C
+	for <lists+uboot-stm32@lfdr.de>; Fri, 27 Sep 2024 01:15:34 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3A59AC6DD72;
-	Thu, 26 Sep 2024 22:17:03 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E1486C78020;
+	Thu, 26 Sep 2024 23:15:33 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 55E4AC6B47E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1EDFBC78006
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 26 Sep 2024 22:16:56 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ Thu, 26 Sep 2024 23:15:26 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 28D2788F08;
- Fri, 27 Sep 2024 00:16:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id BF6EC88F68;
+ Fri, 27 Sep 2024 01:15:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1727389015;
- bh=ChzMy5WYqc3uW8w8j0l/YJ76ufI3mEG1AJyTnWAHWvQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=DiXsIH+G6ZySjfUCfP5aKPpfnXl8I+vYWVWriBGcB3t9w31yebE3rXbXxbca9CkgY
- fbucKsnL1LcldN3CfoMX0eWUNl6VePMlr/EGjolRDcqbLZG/sC+lkOUzdFa6GHmgDg
- qz7roYNQmT4NjhE68/kRHiCZsysXPbVT5OuPaxW5VY6FZ79KVX12uxtE/H2mkO7Hbh
- lSFNUjcZBwNJJC6spPPk5tdLYrUNXWLYmava2gf9lNqH9SudwnRAvsez4Q5WDAFtqw
- l9eEjCyR04aBA+D669ArIuyD6Vvx27IxFlb7rLK0HBcnOQGKsc6Wl9fSeoRrwAWvAR
- DDKhYGTEFPNSQ==
-Message-ID: <b769e5c6-7e19-4ce6-9c3d-9a262a1bad8e@denx.de>
-Date: Fri, 27 Sep 2024 00:16:51 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-References: <20240925022314.714285-1-marex@denx.de>
- <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
-Content-Language: en-US
+ s=phobos-20191101; t=1727392525;
+ bh=3wtm7njRmLwWCm4X6Zs05QlG06fMPKalB8KzZsc2kME=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Eu3wXEDt7sc0LgoJftFOea78zAOBva3nlmsdOQP4bXL/gNDCqNInaoZ1QpM2jnI9/
+ f3nXtoUoSmqZ4nrLGsBwJP8B3SzSESDsEjL/jUnnP9prSsGiu+VyhiQhVFuhA3oPMh
+ H5PmT+fPqtaMSku9fN0JmLyMGpZreRFZtbsyZyXA3fzKJTthdHPZGyX8jJ+5MpY01M
+ stWG8CRITZP/Tc7vnFdMArPzL0USpyLHiwldN+c1YOy1YlUoxZIjn4lxnJBCQrpHrl
+ WQU5gbVbdzKlqYt4gWylmctw4+E7KBV+g3EMoOK+lqnZWvAAW1ZqwiKIDkvApq5HTb
+ ssK7t1DerP31g==
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <b8eb1c20-afdb-497e-9788-498550520d61@kwiboo.se>
+To: u-boot@lists.denx.de
+Date: Fri, 27 Sep 2024 01:14:12 +0200
+Message-ID: <20240926231457.2933914-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
+ Kever Yang <kever.yang@rock-chips.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Dragan Simic <dsimic@manjaro.org>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  u-boot-qcom@groups.io, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  u-boot-amlogic@groups.io, Jaehoon Chung <jh80.chung@samsung.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Kostya Porotchkin <kostap@marvell.com>,
  Ben Wolsieffer <benwolsieffer@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Matteo Lisi <matteo.lisi@engicam.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Matteo Lisi <matteo.lisi@engicam.com>, Jonas Karlman <jonas@kwiboo.se>,
  Eugen Hristev <eugen.hristev@collabora.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Chris Morgan <macromorgan@hotmail.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Neil Armstrong <neil.armstrong@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, u-boot@dh-electronics.com,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/5] power: regulator: Trigger probe of
- regulators which are always-on or boot-on
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: [Uboot-stm32] [PATCH v3 1/4] power: regulator: Trigger probe of
+	regulators which are always-on or boot-on
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,46 +72,153 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 9/26/24 5:05 PM, Jonas Karlman wrote:
-> Hi Marek,
+In case a regulator DT node contains regulator-always-on or regulator-boot-on
+property, make sure the regulator gets correctly configured by U-Boot on start
+up. Unconditionally probe such regulator drivers. This is a preparatory patch
+for introduction of .regulator_post_probe() which would trigger the regulator
+configuration.
 
-Hi,
+Parsing of regulator-always-on and regulator-boot-on DT property has been
+moved to regulator_post_bind() as the information is required early, the
+rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+slowing down the boot process.
 
-> On 2024-09-25 04:21, Marek Vasut wrote:
->> In case a regulator DT node contains regulator-always-on or regulator-boot-on
->> property, make sure the regulator gets correctly configured by U-Boot on start
->> up. Unconditionally probe such regulator drivers. This is a preparatory patch
->> for introduction of .regulator_post_probe() which would trigger the regulator
->> configuration.
->>
->> Parsing of regulator-always-on and regulator-boot-on DT property has been
->> moved to regulator_post_bind() as the information is required early, the
->> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
->> slowing down the boot process.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
-> 
-> [snip]
-> 
->>   
->> -	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
->> -	      property, dev->name, uc_pdata->name);
->> +	/*
->> +	 * In case the regulator has regulator-always-on or
->> +	 * regulator-boot-on DT property, trigger probe() to
->> +	 * configure its default state during startup.
->> +	 */
->> +	if (uc_pdata->always_on && uc_pdata->boot_on)
-> 
-> This check for always_on _and_ boot_on does not fully match the commit
-> message, comment or the old behavior of regulators_enable_boot_on()
-> where any always_on _or_ boot_on would trigger autoset().
-This should be ORR, thanks for spotting this, fixed in V3.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Ben Wolsieffer <benwolsieffer@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Chris Morgan <macromorgan@hotmail.com>
+Cc: Dragan Simic <dsimic@manjaro.org>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Kostya Porotchkin <kostap@marvell.com>
+Cc: Matteo Lisi <matteo.lisi@engicam.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sam Day <me@samcday.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: u-boot-amlogic@groups.io
+Cc: u-boot-qcom@groups.io
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+V2: - Rebase on current u-boot/next
+    - Update test cases to handle already started regulators correctly
+V3: - Fix conditional around DM_FLAG_PROBE_AFTER_BIND to ORR
+---
+ drivers/power/regulator/regulator-uclass.c | 22 +++++++++++++++-------
+ test/dm/panel.c                            |  2 +-
+ test/dm/regulator.c                        |  4 ++--
+ 3 files changed, 18 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+index 00922900292..1a970004540 100644
+--- a/drivers/power/regulator/regulator-uclass.c
++++ b/drivers/power/regulator/regulator-uclass.c
+@@ -439,6 +439,8 @@ static int regulator_post_bind(struct udevice *dev)
+ 	const char *property = "regulator-name";
+ 
+ 	uc_pdata = dev_get_uclass_plat(dev);
++	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
++	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
+ 
+ 	/* Regulator's mandatory constraint */
+ 	uc_pdata->name = dev_read_string(dev, property);
+@@ -450,13 +452,21 @@ static int regulator_post_bind(struct udevice *dev)
+ 			return -EINVAL;
+ 	}
+ 
+-	if (regulator_name_is_unique(dev, uc_pdata->name))
+-		return 0;
++	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
++		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
++		      property, dev->name, uc_pdata->name);
++		return -EINVAL;
++	}
+ 
+-	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
+-	      property, dev->name, uc_pdata->name);
++	/*
++	 * In case the regulator has regulator-always-on or
++	 * regulator-boot-on DT property, trigger probe() to
++	 * configure its default state during startup.
++	 */
++	if (uc_pdata->always_on || uc_pdata->boot_on)
++		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+ 
+-	return -EINVAL;
++	return 0;
+ }
+ 
+ static int regulator_pre_probe(struct udevice *dev)
+@@ -479,8 +489,6 @@ static int regulator_pre_probe(struct udevice *dev)
+ 						-ENODATA);
+ 	uc_pdata->max_uA = dev_read_u32_default(dev, "regulator-max-microamp",
+ 						-ENODATA);
+-	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
+-	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
+ 	uc_pdata->ramp_delay = dev_read_u32_default(dev, "regulator-ramp-delay",
+ 						    0);
+ 	uc_pdata->force_off = dev_read_bool(dev, "regulator-force-boot-off");
+diff --git a/test/dm/panel.c b/test/dm/panel.c
+index ce835c96ed0..ec85a9b1e6e 100644
+--- a/test/dm/panel.c
++++ b/test/dm/panel.c
+@@ -33,7 +33,7 @@ static int dm_test_panel(struct unit_test_state *uts)
+ 	ut_assertok(sandbox_pwm_get_config(pwm, 0, &period_ns, &duty_ns,
+ 					   &enable, &polarity));
+ 	ut_asserteq(false, enable);
+-	ut_asserteq(false, regulator_get_enable(reg));
++	ut_asserteq(true, regulator_get_enable(reg));
+ 
+ 	ut_assertok(panel_enable_backlight(dev));
+ 	ut_assertok(sandbox_pwm_get_config(pwm, 0, &period_ns, &duty_ns,
+diff --git a/test/dm/regulator.c b/test/dm/regulator.c
+index 532bbd82376..449748ad52f 100644
+--- a/test/dm/regulator.c
++++ b/test/dm/regulator.c
+@@ -186,7 +186,7 @@ int dm_test_power_regulator_set_enable_if_allowed(struct unit_test_state *uts)
+ 
+ 	/* Get BUCK1 - always on regulator */
+ 	platname = regulator_names[BUCK1][PLATNAME];
+-	ut_assertok(regulator_autoset_by_name(platname, &dev_autoset));
++	ut_asserteq(-EALREADY, regulator_autoset_by_name(platname, &dev_autoset));
+ 	ut_assertok(regulator_get_by_platname(platname, &dev));
+ 
+ 	/* Try disabling always-on regulator */
+@@ -288,7 +288,7 @@ static int dm_test_power_regulator_autoset(struct unit_test_state *uts)
+ 	 * Expected output state: uV=1200000; uA=200000; output enabled
+ 	 */
+ 	platname = regulator_names[BUCK1][PLATNAME];
+-	ut_assertok(regulator_autoset_by_name(platname, &dev_autoset));
++	ut_asserteq(-EALREADY, regulator_autoset_by_name(platname, &dev_autoset));
+ 
+ 	/* Check, that the returned device is proper */
+ 	ut_assertok(regulator_get_by_platname(platname, &dev));
+-- 
+2.45.2
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

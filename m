@@ -2,49 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81C5F991297
-	for <lists+uboot-stm32@lfdr.de>; Sat,  5 Oct 2024 00:59:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2A5939912CE
+	for <lists+uboot-stm32@lfdr.de>; Sat,  5 Oct 2024 01:08:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 16695C7802D;
-	Fri,  4 Oct 2024 22:59:47 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id AE647C7802D;
+	Fri,  4 Oct 2024 23:08:22 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 50F90C6C855
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3337AC7802B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  4 Oct 2024 22:59:41 +0000 (UTC)
+ Fri,  4 Oct 2024 23:08:15 +0000 (UTC)
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 590E788B16;
- Sat,  5 Oct 2024 00:59:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 26D1F88AC2;
+ Sat,  5 Oct 2024 01:08:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728082780;
- bh=nRg54KgsINwoPT3SxngXf86ql560YbvV+ik2gXaLHQM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=kFQ+6uOQoPjMt+6PwU7Y6gEKzyRLAjM+It+OADmofINUi4zvnSSxGWu7GibL6Prr0
- RQ/sr9OXZgreAx7YMHw2JYXOSlrHY7PqgRv3xDiitBZIqpVwaSoKTw32CkS23yx4w2
- VKpyWyOnC7GkB1yYELwLkiERE7VeEigYG1k08SMllpnFgbXWxxdLPRG08MwDVdaNJh
- 0h362Og0hkzWngfIhGHaiAagNI1o8pSxq60PK+n92q8XNj9j2CqYzdoy9HMA6C7C8i
- U/nMYDeMdFIIJjIlsQ06+Q0ttZVSnSB2Uqb9Z2CeKoWLf+9H0Jz4Qv02DoL8wKFUFi
- BLgQBCKK+ez+g==
+ s=phobos-20191101; t=1728083294;
+ bh=nAUmoJFGKj3sFv+V9hP4JUBotMBS86EE24cuRkQMa6o=;
+ h=From:To:Cc:Subject:Date:From;
+ b=LwxGJvXmC7KwoLQDZVyG8hg5Mp4VoFVXnW0QwvmBGbyHmDwfokvJll4kAlDoO32Mu
+ RZuHKhada/mN07QRBGMdxZqIdlJME/7qBKNKKyvDu3gB465UkLfSudgy7jE2GWiaow
+ wPziHk8qNQrCB5hxTSzj34g5SfmrQw3SfyCFvAgqKnRc2LefrPGp1dbW6ULUk7f4j8
+ McEz9bQXSR5kQMIqu1+B8JVJ7U7Wymna2J5Yto38jV8k9z64BFxQr4aC7keqEk1/6k
+ Mai5I807liPY8QjcVvr37V4L5oqZPsSXMmyPuWEwqFTiGX4N3+QgzelQVdeFhNHKs1
+ mwzYnDwcQPuVg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Date: Sat,  5 Oct 2024 00:57:54 +0200
-Message-ID: <20241004225916.361000-3-marex@denx.de>
+Date: Sat,  5 Oct 2024 01:07:13 +0200
+Message-ID: <20241004230756.371153-1-marex@denx.de>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241004225916.361000-1-marex@denx.de>
-References: <20241004225916.361000-1-marex@denx.de>
 MIME-Version: 1.0
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 3/3] ARM: dts: stm32: Generate u-boot.itb
-	using binman on DH STM32 DHSOM
+Cc: Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ u-boot@dh-electronics.com, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [Uboot-stm32] [PATCH 1/2] Makefile: Drop SPL_FIT_SOURCE support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -61,378 +66,101 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Describe the u-boot.its generation in stm32mp15xx-dhsom-u-boot.dtsi
-binman {} DT node as a replacement for current CONFIG_SPL_FIT_SOURCE
-use, dispose of both u-boot-dhcom.its and u-boot-dhcor.its.
-
-Use fdt-SEQ/config-SEQ to generate a list of fdt-N fitImage images {} and
-matching configuration {} node entries. The configuration node entry names
-no longer encode _somrevN_boardrevN suffix, which was never really used, so
-drop this functionality by default. Rework board_fit_config_name_match() to
-match on the new configuration node entry names.
-
-Users who do need the match on _somrevN_boardrevN can either replace the
-fdt-SEQ/config-SEQ with fixed fdt-N/config-N nodes which each encode the
-matching 'description = "NAME_somrevN_boardrevN"' to restore the old
-behavior verbatim, or better use SPL DT overlays for U-Boot control DT
-the same way e.g. i.MX8MP DHCOM does to support multiple SoM and board
-variants.
+The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
+is long superseded by binman, drop SPL_FIT_SOURCE support as there
+are no more users.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Cc: Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  1 +
- arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |  1 +
- arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi    | 53 +++++++++++
- board/dhelectronics/dh_stm32mp1/board.c       | 19 +++-
- .../dh_stm32mp1/u-boot-dhcom.its              | 91 -------------------
- .../dh_stm32mp1/u-boot-dhcor.its              | 70 --------------
- configs/stm32mp15_dhcom_basic_defconfig       |  2 -
- configs/stm32mp15_dhcor_basic_defconfig       |  2 -
- 8 files changed, 70 insertions(+), 169 deletions(-)
- create mode 100644 arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
- delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
- delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
+NOTE: Depends on https://lore.kernel.org/u-boot/20241004225916.361000-1-marex@denx.de/
+---
+ Makefile                |  6 ------
+ boot/Kconfig            |  8 --------
+ doc/usage/fit/howto.rst | 11 +++--------
+ 3 files changed, 3 insertions(+), 22 deletions(-)
 
-diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-index d7b78cdcfa9..dd67e960a64 100644
---- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
-@@ -8,6 +8,7 @@
- #include "stm32mp15-ddr3-dhsom-2x1Gb-1066-binG.dtsi"
- #include "stm32mp15-ddr3-dhsom-2x2Gb-1066-binG.dtsi"
- #include "stm32mp15-ddr3-dhsom-2x4Gb-1066-binG.dtsi"
-+#include "stm32mp15xx-dhsom-u-boot.dtsi"
+diff --git a/Makefile b/Makefile
+index af24de4165e..a70926ec2fa 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1417,18 +1417,12 @@ u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
+ # or a generator script
+ # NOTE: Please do not use this. We are migrating away from Makefile rules to use
+ # binman instead.
+-ifneq ($(CONFIG_SPL_FIT_SOURCE),"")
+-U_BOOT_ITS := u-boot.its
+-$(U_BOOT_ITS): $(subst ",,$(CONFIG_SPL_FIT_SOURCE))
+-	$(call if_changed,copy)
+-else
+ ifneq ($(CONFIG_USE_SPL_FIT_GENERATOR),)
+ U_BOOT_ITS := u-boot.its
+ $(U_BOOT_ITS): $(U_BOOT_ITS_DEPS) FORCE
+ 	$(srctree)/$(CONFIG_SPL_FIT_GENERATOR) \
+ 	$(patsubst %,$(dt_dir)/%.dtb,$(subst ",,$(CONFIG_OF_LIST))) > $@
+ endif
+-endif
  
- / {
- 	aliases {
-diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
-index ba84db679e1..08439342cb2 100644
---- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
-@@ -12,6 +12,7 @@
- #include "stm32mp15-ddr3-dhsom-2x1Gb-1066-binG.dtsi"
- #include "stm32mp15-ddr3-dhsom-2x2Gb-1066-binG.dtsi"
- #include "stm32mp15-ddr3-dhsom-2x4Gb-1066-binG.dtsi"
-+#include "stm32mp15xx-dhsom-u-boot.dtsi"
+ ifdef CONFIG_SPL_LOAD_FIT
+ MKIMAGEFLAGS_u-boot.img = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 925afe06a19..51e6cd6cb1d 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -282,14 +282,6 @@ config SPL_FIT_IMAGE_POST_PROCESS
+ 	  injected into the FIT creation (i.e. the blobs would have been pre-
+ 	  processed before being added to the FIT image).
  
- / {
- 	bootph-all;
-diff --git a/arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
-new file mode 100644
-index 00000000000..386c605c07f
---- /dev/null
-+++ b/arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
-@@ -0,0 +1,53 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2024 Marek Vasut <marex@denx.de>
-+ */
-+
-+&binman {
-+	 u-boot {
-+		filename = "u-boot.itb";
-+
-+		fit {
-+			description = "U-Boot mainline";
-+			fit,fdt-list = "of-list";
-+			#address-cells = <1>;
-+
-+			images {
-+				uboot {
-+					arch = "arm";
-+					compression = "none";
-+					description = "U-Boot (32-bit)";
-+					entry = <CONFIG_TEXT_BASE>;
-+					load = <CONFIG_TEXT_BASE>;
-+					type = "standalone";
-+
-+					uboot-blob {
-+						filename = "u-boot-nodtb.bin";
-+						type = "blob-ext";
-+					};
-+				};
-+
-+				@fdt-SEQ {
-+					compression = "none";
-+					description = "NAME";
-+					type = "flat_dt";
-+
-+					uboot-fdt-blob {
-+						filename = "u-boot.dtb";
-+						type = "blob-ext";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "@config-DEFAULT-SEQ";
-+
-+				@config-SEQ {
-+					description = "NAME";
-+					fdt = "fdt-SEQ";
-+					firmware = "uboot";
-+				};
-+			};
-+		};
-+	};
-+};
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index 24c5f37c12f..3e4b22505ff 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -276,15 +276,26 @@ int board_early_init_f(void)
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
-+	char *cdevice, *ndevice;
- 	const char *compat;
--	char test[128];
+-config SPL_FIT_SOURCE
+-	string ".its source file for U-Boot FIT image"
+-	depends on SPL_FIT
+-	help
+-	  Specifies a (platform specific) FIT source file to generate the
+-	  U-Boot FIT image. This could specify further image to load and/or
+-	  execute.
+-
+ config USE_SPL_FIT_GENERATOR
+ 	bool "Use a script to generate the .its script"
+ 	depends on SPL_FIT
+diff --git a/doc/usage/fit/howto.rst b/doc/usage/fit/howto.rst
+index b5097d4460b..280eff724f6 100644
+--- a/doc/usage/fit/howto.rst
++++ b/doc/usage/fit/howto.rst
+@@ -57,14 +57,9 @@ own subnode under the /images node, which should then be referenced from one or
+ multiple /configurations subnodes. The required images must be enumerated in
+ the "loadables" property as a list of strings.
  
- 	compat = ofnode_get_property(ofnode_root(), "compatible", NULL);
-+	if (!compat)
-+		return -EINVAL;
-+
-+	cdevice = strchr(compat, ',');
-+	if (!cdevice)
-+		return -ENODEV;
-+
-+	cdevice++;	/* Move past the comma right after vendor prefix. */
-+
-+	ndevice = strchr(name, '/');
-+	if (!ndevice)
-+		return -ENODEV;
+-If a platform specific image source file (.its) is shipped with the U-Boot
+-source, it can be specified using the CONFIG_SPL_FIT_SOURCE Kconfig symbol.
+-In this case it will be automatically used by U-Boot's Makefile to generate
+-the image.
+-If a static source file is not flexible enough, CONFIG_SPL_FIT_GENERATOR
+-can point to a script which generates this image source file during
+-the build process. It gets passed a list of device tree files (taken from the
+-CONFIG_OF_LIST symbol).
++CONFIG_SPL_FIT_GENERATOR can point to a script which generates this image source
++file during the build process. It gets passed a list of device tree files (taken
++from the CONFIG_OF_LIST symbol).
  
--	snprintf(test, sizeof(test), "%s_somrev%d_boardrev%d",
--		compat, somcode, brdcode);
-+	ndevice++;	/* Move past the last slash in DT path */
- 
--	if (!strcmp(name, test))
-+	if (!strcmp(cdevice, ndevice))
- 		return 0;
- 
- 	return -EINVAL;
-diff --git a/board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its b/board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
-deleted file mode 100644
-index 38ecb601190..00000000000
---- a/board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
-+++ /dev/null
-@@ -1,91 +0,0 @@
--/dts-v1/;
--
--/ {
--	description = "U-Boot mainline";
--	#address-cells = <1>;
--
--	images {
--		uboot {
--			description = "U-Boot (32-bit)";
--			data = /incbin/("u-boot-nodtb.bin");
--			type = "standalone";
--			os = "U-Boot";
--			arch = "arm";
--			compression = "none";
--			load = <0xc0100000>;
--			entry = <0xc0100000>;
--		};
--
--		fdt-1 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp157c-dhcom-pdk2.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--
--		fdt-2 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp153c-dhcom-drc02.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--
--		fdt-3 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--	};
--
--	configurations {
--		default = "config-1";
--
--		config-1 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp157c-dhcom-pdk2_somrev0_boardrev0";
--			firmware = "uboot";
--			fdt = "fdt-1";
--		};
--
--		config-2 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp157c-dhcom-pdk2_somrev1_boardrev0";
--			firmware = "uboot";
--			fdt = "fdt-1";
--		};
--
--		config-3 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp153c-dhcom-drc02_somrev0_boardrev0";
--			firmware = "uboot";
--			fdt = "fdt-2";
--		};
--
--		config-4 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp153c-dhcom-drc02_somrev1_boardrev0";
--			firmware = "uboot";
--			fdt = "fdt-2";
--		};
--
--		config-5 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp157c-dhcom-picoitx_somrev0_boardrev0";
--			loadables = "uboot";
--			fdt = "fdt-3";
--		};
--
--		config-6 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp157c-dhcom-picoitx_somrev1_boardrev0";
--			loadables = "uboot";
--			fdt = "fdt-3";
--		};
--
--		/* Add 587-100..587-400 with fdt-2..fdt-4 here */
--	};
--};
-diff --git a/board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its b/board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
-deleted file mode 100644
-index e17dac77804..00000000000
---- a/board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
-+++ /dev/null
-@@ -1,70 +0,0 @@
--/dts-v1/;
--
--/ {
--	description = "U-Boot mainline";
--	#address-cells = <1>;
--
--	images {
--		uboot {
--			description = "U-Boot (32-bit)";
--			data = /incbin/("u-boot-nodtb.bin");
--			type = "standalone";
--			os = "U-Boot";
--			arch = "arm";
--			compression = "none";
--			load = <0xc0100000>;
--			entry = <0xc0100000>;
--		};
--
--		fdt-1 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp151a-dhcor-testbench.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--
--		fdt-2 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--
--		fdt-3 {
--			description = ".dtb";
--			data = /incbin/("dts/upstream/src/arm/st/stm32mp153c-dhcor-drc-compact.dtb");
--			type = "flat_dt";
--			arch = "arm";
--			compression = "none";
--		};
--	};
--
--	configurations {
--		default = "config-1";
--
--		config-1 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp151a-dhcor-testbench_somrev0_boardrev1";
--			firmware = "uboot";
--			fdt = "fdt-1";
--		};
--
--		config-2 {
--			/* DT+SoM+board model */
--			description = "arrow,stm32mp157a-avenger96_somrev0_boardrev1";
--			firmware = "uboot";
--			fdt = "fdt-2";
--		};
--
--		config-3 {
--			/* DT+SoM+board model */
--			description = "dh,stm32mp153c-dhcor-drc-compact_somrev0_boardrev0";
--			firmware = "uboot";
--			fdt = "fdt-3";
--		};
--
--		/* Add 586-200..586-400 with fdt-2..fdt-4 here */
--	};
--};
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index e2a26e2b774..bb2866a6782 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -30,7 +30,6 @@ CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
--CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its"
- CONFIG_SYS_BOOTM_LEN=0x2000000
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
-@@ -59,7 +58,6 @@ CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI_FLASH_MTD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
--CONFIG_SPL_TARGET="u-boot.itb"
- CONFIG_SYS_PROMPT="STM32MP> "
- # CONFIG_CMD_ELF is not set
- # CONFIG_CMD_EXPORTENV is not set
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index f73bd2fa12c..8868d54c120 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -28,7 +28,6 @@ CONFIG_BOARD_SIZE_LIMIT=1441792
- CONFIG_FIT=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
--CONFIG_SPL_FIT_SOURCE="board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its"
- CONFIG_SYS_BOOTM_LEN=0x2000000
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
-@@ -57,7 +56,6 @@ CONFIG_SPL_RAM_SUPPORT=y
- CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI_FLASH_MTD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
--CONFIG_SPL_TARGET="u-boot.itb"
- CONFIG_SYS_PROMPT="STM32MP> "
- # CONFIG_CMD_ELF is not set
- # CONFIG_CMD_EXPORTENV is not set
+ The SPL also records to a DT all additional images (called loadables) which are
+ loaded. The information about loadables locations is passed via the DT node with
 -- 
 2.45.2
 

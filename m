@@ -2,73 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07A68993111
-	for <lists+uboot-stm32@lfdr.de>; Mon,  7 Oct 2024 17:24:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DA86995D7A
+	for <lists+uboot-stm32@lfdr.de>; Wed,  9 Oct 2024 03:55:55 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C70BBC6DD9F;
-	Mon,  7 Oct 2024 15:24:23 +0000 (UTC)
-Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
- [209.85.219.48])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C6088C7128A;
+	Wed,  9 Oct 2024 01:55:54 +0000 (UTC)
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
+ [209.85.215.174])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A00D5C6DD9F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E24CFC6C841
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  7 Oct 2024 15:24:21 +0000 (UTC)
-Received: by mail-qv1-f48.google.com with SMTP id
- 6a1803df08f44-6cb82317809so35857666d6.0
+ Wed,  9 Oct 2024 01:55:46 +0000 (UTC)
+Received: by mail-pg1-f174.google.com with SMTP id
+ 41be03b00d2f7-7cd8803fe0aso4309577a12.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 07 Oct 2024 08:24:21 -0700 (PDT)
+ Tue, 08 Oct 2024 18:55:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1728314660; x=1728919460;
+ d=chromium.org; s=google; t=1728438945; x=1729043745;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J3OJAtLtzmZ5rGDY3PnOo1eygelxfOnEod7KIbR9qQI=;
- b=IMaJNOGEui+43UEWiUc1jpTIcUnNOPsDahlwu8AD48iMC3ABsUMx0Dn0XGWXyMsGl9
- XvjKHbXbRzYV0Fmj9B7+wIB6asJ2aSw8XWoNxyiPOn3xJk3uKr/+KXugORpGmNi1xmVw
- Ru0x/L1Wt7Su/f3WwKqVrrS5IGd0qTe68w7VY=
+ bh=VLaTh7jOM3JKspE7a/n+hb/l5+aep67p/dSLDIsP70s=;
+ b=oRNfPtZq8yvMwG3eQ2GGgW/x/i7NcynMp933oWOawWldKleRtEW1NDJWYoRUteLrc8
+ lk++s+72juFCDkVVI+wIPnsc9cq4f24Ljt7QNSK5u9yqGH0v2uQH3K9eFkFfXh8V8Isa
+ FNeLoI0Tgo6vggLMZhABfr4JiwJrjkBzV5pvY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728314660; x=1728919460;
+ d=1e100.net; s=20230601; t=1728438945; x=1729043745;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J3OJAtLtzmZ5rGDY3PnOo1eygelxfOnEod7KIbR9qQI=;
- b=g+MrkGpEctfOhc7Az4q/zSyCOEiE2IGifcFJFNTDM28rhD+h1sP4W3GWP9RZglq2Q4
- xNoxh44COg3LyWzqwXMQBbQTjbWNrmNPJeJjMcK960V4boFfAO0iuvBB/JomuUDkchlf
- KNWVz7//ewuI/J0JrgLFjiKY7kpn1xlWDZMnrUM822+lxlIyz+BxnmCnS6Nqh/yRiAuE
- CRU88uNDbfNPUuWfeiDnC7Kt7LRg5N0w44aeX2QMchD7/rGyilGTIfbIf3VquuD50B6X
- +jWdqf+DBgJCCkv+I/C5+57RoOT+IxqiU7a/eavyh7LKQTuoKYHd++dOtj8nbm4q5h2O
- mqJQ==
+ bh=VLaTh7jOM3JKspE7a/n+hb/l5+aep67p/dSLDIsP70s=;
+ b=dwkJ9oncNCNpPnBt/zQn3ELXepAlBIZeLZ1pG4dONM+iJDl1setC9b1zPbTewIUzVr
+ S4TM8EXAmxBuPnhQ7AxFLVRQVcHehu4fCnmILFqgVvMRfKouk2aqIdPHp9SRgUMkX+r1
+ YCk8yHdGw2qzlEw+XoNk+aJv1VM7raOcuo+zG/HRXpmHPUvSvXdsAVifilob0Xog26mk
+ eg9QhD3tlS0LGdd0uDGZUKF54n8qZkb+rk7xrng+IKU8oo59cvsloR1sjo0O0jhKISnF
+ rWsyHzw9ve6xquHvrQWSP2JmeHmsMTn4qrlRCP34gG38NdZxUvgs+1ltF1HSvwp5vVCQ
+ ACsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVaHsHUHtXOL4KwXleR3qFTnhYqhubfXYKIPv990EqbFC8bNW9paMNnaFOJgzLzVA3YADqWDIiV+eIe6w==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yzj4+HvIewGHadDSQH3hNp0eYbO2d7UKr4993XCufc5hmD86SZ8
- ALAkzb2rbYTCYnuYS0yKvfpZajN7wA43gMxPCch5zGcp8lZWXCAdrhetogX4/ANiaxHzcC7iJUL
- 3SQ/Rh47iUUoTJ7ve+d8DRfFJkYqvuwh6okal
-X-Google-Smtp-Source: AGHT+IFfLvdcjqAW02MLleunyTHZHz6+OAfwS3RO5h5FamSwmdo+j9dbjinSFTXnk4AFioP7Y8cwYsyvfe9cYzGk/o4=
-X-Received: by 2002:a05:6214:488d:b0:6cb:7104:f115 with SMTP id
- 6a1803df08f44-6cb9a1f83fbmr186120376d6.11.1728314660608; Mon, 07 Oct 2024
- 08:24:20 -0700 (PDT)
+ AJvYcCX21O8QAh7FuXuVSRBrzwMBsBr9Bzm67A2tl6qFPyPRzLn30pP39E8Nqq7lom7dZ+5MPTRkMDzWVc7JIQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yx4toSgG8K5+Y6b++nolManSIkObP51TDqoqz6FXoGF47S+vjjd
+ UKioBodZ0+F5Qypa2s+pXxdHnTQ1qJvDmJwk4Pi3LsqnLhnZNMiJ0WHW0p48uf3TtJSVWQ+e/Ox
+ 8Nx/NKA8PiAiwz1ka63/xmWnzQtdTo3e85EeY
+X-Google-Smtp-Source: AGHT+IF9v4wyLC0oR8kHSj1/XkUmrRscuY0qsSDxacPez23tdgPqMdYT5BiVV4SyLIN2U0y3KCKLlzWSe69lMsGuWFQ=
+X-Received: by 2002:a05:6a20:d046:b0:1cf:e5e4:d225 with SMTP id
+ adf61e73a8af0-1d8a3c3b55bmr1156253637.37.1728438945554; Tue, 08 Oct 2024
+ 18:55:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241004230756.371153-1-marex@denx.de>
- <20241004230756.371153-2-marex@denx.de>
-In-Reply-To: <20241004230756.371153-2-marex@denx.de>
+References: <20241004225916.361000-1-marex@denx.de>
+ <20241004225916.361000-3-marex@denx.de>
+In-Reply-To: <20241004225916.361000-3-marex@denx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 7 Oct 2024 09:24:10 -0600
-Message-ID: <CAFLszTjiuQZc2S+uEppNLCboGVFPc=n-kRZH-Vxw85AUfawsgQ@mail.gmail.com>
+Date: Tue, 8 Oct 2024 19:55:29 -0600
+Message-ID: <CAFLszTgyKe1penWB-TYm8y73=OWw6BuZdxJ4maRobgz37EF=3g@mail.gmail.com>
 To: Marek Vasut <marex@denx.de>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
- Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
+Cc: Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH 2/2] Makefile: Drop SPL_FIT_GENERATOR
-	support
+Subject: Re: [Uboot-stm32] [PATCH 3/3] ARM: dts: stm32: Generate u-boot.itb
+ using binman on DH STM32 DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,39 +78,50 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Fri, 4 Oct 2024 at 17:08, Marek Vasut <marex@denx.de> wrote:
+On Fri, 4 Oct 2024 at 16:59, Marek Vasut <marex@denx.de> wrote:
 >
-> The SPL_FIT_GENERATOR is long superseded by binman, drop SPL_FIT_GENERATOR
-> support as there are no more users.
+> Describe the u-boot.its generation in stm32mp15xx-dhsom-u-boot.dtsi
+> binman {} DT node as a replacement for current CONFIG_SPL_FIT_SOURCE
+> use, dispose of both u-boot-dhcom.its and u-boot-dhcor.its.
+>
+> Use fdt-SEQ/config-SEQ to generate a list of fdt-N fitImage images {} and
+> matching configuration {} node entries. The configuration node entry names
+> no longer encode _somrevN_boardrevN suffix, which was never really used, so
+> drop this functionality by default. Rework board_fit_config_name_match() to
+> match on the new configuration node entry names.
+>
+> Users who do need the match on _somrevN_boardrevN can either replace the
+> fdt-SEQ/config-SEQ with fixed fdt-N/config-N nodes which each encode the
+> matching 'description = "NAME_somrevN_boardrevN"' to restore the old
+> behavior verbatim, or better use SPL DT overlays for U-Boot control DT
+> the same way e.g. i.MX8MP DHCOM does to support multiple SoM and board
+> variants.
 >
 > Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
-> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Peter Robinson <pbrobinson@gmail.com>
-> Cc: Quentin Schulz <quentin.schulz@cherry.de>
-> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > Cc: Sean Anderson <seanga2@gmail.com>
 > Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@dh-electronics.com
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
-> NOTE: Depends on https://lore.kernel.org/u-boot/20241004225916.361000-1-marex@denx.de/
-> ---
->  Makefile                | 18 ------------------
->  boot/Kconfig            | 15 ---------------
->  doc/usage/fit/howto.rst |  4 ----
->  3 files changed, 37 deletions(-)
+>  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi    |  1 +
+>  arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi    |  1 +
+>  arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi    | 53 +++++++++++
+>  board/dhelectronics/dh_stm32mp1/board.c       | 19 +++-
+>  .../dh_stm32mp1/u-boot-dhcom.its              | 91 -------------------
+>  .../dh_stm32mp1/u-boot-dhcor.its              | 70 --------------
+>  configs/stm32mp15_dhcom_basic_defconfig       |  2 -
+>  configs/stm32mp15_dhcor_basic_defconfig       |  2 -
+>  8 files changed, 70 insertions(+), 169 deletions(-)
+>  create mode 100644 arch/arm/dts/stm32mp15xx-dhsom-u-boot.dtsi
+>  delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcom.its
+>  delete mode 100644 board/dhelectronics/dh_stm32mp1/u-boot-dhcor.its
 
-Double yay. I didn't know that the last user was gone.
+For the use of Binman:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 _______________________________________________

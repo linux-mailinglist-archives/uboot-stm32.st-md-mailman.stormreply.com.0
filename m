@@ -2,66 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C48C899A7E7
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Oct 2024 17:36:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E18C99A8DD
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Oct 2024 18:26:21 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 81C91C7801E;
-	Fri, 11 Oct 2024 15:36:33 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E7CFBC71290;
+	Fri, 11 Oct 2024 16:26:20 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 564D3C71290
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 81D7EC7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Oct 2024 15:36:28 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49BBd8Xj004260;
- Fri, 11 Oct 2024 17:36:24 +0200
+ Fri, 11 Oct 2024 16:26:14 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 49BCJBEX014745;
+ Fri, 11 Oct 2024 18:26:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- SXe71tp0gTqoDf0AXg105FmgSSo+Jb3Uz7Ct8XCsLGY=; b=LvJHNRpf1jtqjnmp
- kXha8IGfeZyrm7HnchIlBCrhzEGEoEyavEuFVZ+KK7Uqs8U5DacJ0ImazYoV3kpL
- r/aDwn2iw+2AzuSxzqlAm/vXiYYltQrc4bQXxi6P6vGQx6WB3+D59/zY7x4gqJqH
- woloe/cocYVBdYfYBvXxVMVUJgoEIFLX84Lfl4Py+h+Fwe1BiPDWhDj2QRRgPt4t
- fxIgzdGgt/Gm5YWWm+OXlg0CIvJspMDSek6m3C61eZ8dqHvPKHzxOdK1KhncM32D
- IDXqS3MC9hijvYMEs4hCBz2Yt6SUFDR78mRZi21KjO/EQkNBNUA5uNdqlMrzQ6aL
- xYHBEw==
+ GbcC0zfRo48peS3mQZbZ1Ye6pPQolT2hmx+7a40FT4s=; b=d/lgNkatC+Wc/TI6
+ SOkoldmGjqjCN9L3vKGPMRC1Mitt+g3xINsmPLp1lE80HezzvvORJdIBS6oKyfBZ
+ BoJ6DMo7AeJcRSBBPzjCT8Dq9XN2iTSbeJx9KBaFq2mjBkXBa6zrMsJwGVHtwtKm
+ LsEGynPBQ/OaYeHa7lnk4jvTMvY7NTx305i5b4Hzo6vngl2NDfceRA88tXeqBMdy
+ yHB9EHd8W2PB+aV6kX2OnX6bQw1RVB6OeufXdulNFkQSDKIKwkJv7TuEETM3tg+s
+ hRlubKQEYhgdRSz1mYHB8VwVJV3txkFERVG+DzsrQa2gwwZpg8f069DXjP7cTRMY
+ jguJXA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 425w7xttrq-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 425w9xjs3v-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Oct 2024 17:36:24 +0200 (MEST)
+ Fri, 11 Oct 2024 18:26:02 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 846BC4004B;
- Fri, 11 Oct 2024 17:35:33 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 18BC3400C9;
+ Fri, 11 Oct 2024 18:24:52 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 348AF2538D4;
- Fri, 11 Oct 2024 17:32:30 +0200 (CEST)
-Received: from localhost (10.48.86.243) by SHFDAG1NODE3.st.com (10.75.129.71)
- with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3A19A2AC581;
+ Fri, 11 Oct 2024 18:23:34 +0200 (CEST)
+Received: from [10.48.86.243] (10.48.86.243) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Fri, 11 Oct
- 2024 17:32:29 +0200
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Fri, 11 Oct 2024 17:31:51 +0200
-Message-ID: <20241011173140.4.Ib921aacc11dafeb000f894c2a0deaaf7f5619f6b@changeid>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20241011153152.1637303-1-patrick.delaunay@foss.st.com>
-References: <20241011153152.1637303-1-patrick.delaunay@foss.st.com>
+ 2024 18:23:33 +0200
+Message-ID: <bdda6428-9f09-4038-82a7-62ff6bccef34@foss.st.com>
+Date: Fri, 11 Oct 2024 18:23:32 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+References: <20241004235641.395703-1-marex@denx.de>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20241004235641.395703-1-marex@denx.de>
 X-Originating-IP: [10.48.86.243]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
  definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Etienne CARRIERE <etienne.carriere@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 4/4] stm32mp: fix name of optee reserved
-	memory node
+Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH v2] ARM: stm32: Update MAINTAINERS file
+ globs for STM32MP DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,50 +71,50 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-In OP-TEE, the "optee_core@" node is reserved, appended in non secure
-device tree (see mark_tzdram_as_reserved() function under CFG_DT) so
-this name must be checked in optee_get_reserved_memory().
-We keep the check on /reserved-memory/optee@ node to have backward
-compatibility with STMT32Image booting, when the reserved node is
-already present in U-Boot or SPL device tree with name "optee@".
 
-This patch solves a boot issue on board with OP-TEE for U-Boot
-compiled with stm32mp15_defconfig and without secure configuration
-device tree (stm32mp157c-dk2.dts for example).
+On 10/5/24 01:56, Marek Vasut wrote:
+> Update the MAINTAINERS file glob to cover all of STM32MP DHSOM related files.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: Use multiple N: instead of multiple F:
+> ---
+>   board/dhelectronics/dh_stm32mp1/MAINTAINERS | 7 ++-----
+>   1 file changed, 2 insertions(+), 5 deletions(-)
+>
+> diff --git a/board/dhelectronics/dh_stm32mp1/MAINTAINERS b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
+> index 865588f5b8b..fdd579013a0 100644
+> --- a/board/dhelectronics/dh_stm32mp1/MAINTAINERS
+> +++ b/board/dhelectronics/dh_stm32mp1/MAINTAINERS
+> @@ -2,8 +2,5 @@ DH_STM32MP1_PDK2 BOARD
+>   M:	Marek Vasut <marex@denx.de>
+>   L:	u-boot@dh-electronics.com
+>   S:	Maintained
+> -F:	arch/arm/dts/stm32mp15xx-dhcom*
+> -F:	board/dhelectronics/dh_stm32mp1/
+> -F:	configs/stm32mp15_dhcom_basic_defconfig
+> -F:	configs/stm32mp15_dhcor_basic_defconfig
+> -F:	include/configs/stm32mp15_dh_dhsom.h
+> +N:	stm32mp.*dh[cs]o
+> +N:	dh_stm32
 
-Fixes: 5fe9e0deabb1 ("stm32mp: allow calling optee_get_reserved_memory()
-from U-Boot")
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
----
 
- arch/arm/mach-stm32mp/dram_init.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index 58290105d127..6a36aecf5cd3 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -25,8 +25,11 @@ int optee_get_reserved_memory(u32 *start, u32 *size)
- 	ofnode node;
- 
- 	node = ofnode_path("/reserved-memory/optee");
--	if (!ofnode_valid(node))
--		return -ENOENT;
-+	if (!ofnode_valid(node)) {
-+		node = ofnode_path("/reserved-memory/optee_core");
-+		if (!ofnode_valid(node))
-+			return -ENOENT;
-+	}
- 
- 	fdt_start = ofnode_get_addr_size(node, "reg", &fdt_mem_size);
- 	*start = fdt_start;
--- 
-2.25.1
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
 
 _______________________________________________
 Uboot-stm32 mailing list

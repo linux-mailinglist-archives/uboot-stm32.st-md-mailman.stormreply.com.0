@@ -2,46 +2,49 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C49E999B041
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2024 04:55:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 064BB99B06F
+	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2024 05:31:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 7342FC712A1;
-	Sat, 12 Oct 2024 02:55:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F630C712A1;
+	Sat, 12 Oct 2024 03:31:25 +0000 (UTC)
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78AE3C71290
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27791C7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Oct 2024 02:55:10 +0000 (UTC)
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ Sat, 12 Oct 2024 03:31:18 +0000 (UTC)
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B6D0388997;
- Sat, 12 Oct 2024 04:55:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 497DB88B4B;
+ Sat, 12 Oct 2024 05:31:17 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728701710;
- bh=VEBYmf0jrobNaNEPlq3kWfvWL2/J1xudQXzoH/Wcb5c=;
- h=From:To:Cc:Subject:Date:From;
- b=VLKfnduQn2XqkzNCeRY/DIJ3tesneeILh6+jg0WdR6NeRFARewkdrramGm/mXJuPy
- Pz3LWSGuv+cZr6pRf61jGAlyDWh1Ii+waVo9hcY3EBDOL6GA9/g69yQdbmEk3HRQQB
- Bsx2xR/O8l7EttOvjxrGIKKRTItM4+5jWerIp4Aa9awkrZbGHb/g3dOQwiPl6Zr7tO
- IEGJkii9JprzLJiiGTitEeMLidDPk2KFNwI9gE+CFpRoHWcXJ0B3gyckcNGo5wjQl9
- 5hpKjuLmX1SkBUHWmkin3p1xX6qNAttRsYYj5AsOACs2+9XOsFKLGJohGqeXxf7b7O
- PT1nzMC+1l6/A==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Date: Sat, 12 Oct 2024 04:54:17 +0200
-Message-ID: <20241012025451.224551-1-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
+ s=phobos-20191101; t=1728703877;
+ bh=34RukWzKzNdXJ0reXpzwSqvdcfkqcTf+FasjOxG7pm8=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=rCJ2NqDxV5ItjhuDGvpy+fMod5swoTeudYtyJr8CP5KBgtWkINO2s6ZKq6xxJ4gMH
+ bA9RLzeFu+uDf1DGpmoEUOTKQck+EhOEzhBUdRQZm/v8EXLIwmaBQhpiykuqddtbpS
+ zPaRnXioUEyyO3wR24t4BlkewfBqS5bZ0cWsfUYTG/GTYMGxKCVxT3iaWAUDDJrH+V
+ +iUyqhCXSfSFqYV8m5MQn2CeyF86homOMgIbFLY07JMWlxO9mJO5QQcKAyYCcIH4uy
+ 2hEaLI6t9S20UM/fq199uy0KlxiBnM4SQJ2ZwwAQq+87PEEsqtUjAv5AdwQrljHalK
+ NAlImK7kpnVRA==
+Message-ID: <92a9153c-c948-43bb-8542-163ec245c74d@denx.de>
+Date: Sat, 12 Oct 2024 05:01:54 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+References: <20240930192343.59359-1-marex@denx.de>
+ <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v2] ARM: stm32: Add script to install U-Boot
-	from SD/eMMC to SPI NOR on DH STM32MP15xx DHSOM
+Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add script to install U-Boot
+ from SD/eMMC to SPI NOR on DH STM32MP15xx DHSOM
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -53,67 +56,93 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Make the dh_update_sd_to_sf script generic, rename it to dh_update_block_to_sf
-and implement two specific dh_update_sd_to_sf and dh_update_emmc_to_sf scripts
-which load U-Boot from either SD or eMMC and install it into SPI NOR.
-
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
-V2: Rename dh_update_sdmmc_to_sf to dh_update_block_to_sf
----
- include/configs/stm32mp15_dh_dhsom.h | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
-
-diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
-index 0f466711cae..2797fc61d17 100644
---- a/include/configs/stm32mp15_dh_dhsom.h
-+++ b/include/configs/stm32mp15_dh_dhsom.h
-@@ -37,16 +37,26 @@
- 		"setenv loadaddr1 && "					\
- 		"setenv sblkcnt && "					\
- 		"setenv ublkcnt\0"					\
--	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
-+	"dh_update_block_to_sf=" /* Erase SPI NOR and install U-Boot from block device */ \
- 		"setexpr loadaddr1 ${loadaddr} + 0x1000000 && "		\
--		"load mmc 0:4 ${loadaddr1} /boot/u-boot-spl.stm32 && "	\
-+		"load ${dh_update_iface} ${dh_update_dev} "		\
-+			"${loadaddr1} /boot/u-boot-spl.stm32 && "	\
- 		"env set filesize1 ${filesize} && "			\
--		"load mmc 0:4 ${loadaddr} /boot/u-boot.itb && "		\
-+		"load ${dh_update_iface} ${dh_update_dev} "		\
-+			"${loadaddr} /boot/u-boot.itb && "		\
- 		"sf probe && sf erase 0 0x200000 && "			\
- 		"sf update ${loadaddr1} 0 ${filesize1} && "		\
- 		"sf update ${loadaddr1} 0x40000 ${filesize1} && "	\
- 		"sf update ${loadaddr} 0x80000 ${filesize} && "		\
- 		"env set filesize1 && env set loadaddr1\0"		\
-+	"dh_update_sd_to_sf=" /* Erase SPI NOR and install U-Boot from SD */ \
-+		"setenv dh_update_iface mmc && "			\
-+		"setenv dh_update_dev 0:4 && "				\
-+		"run dh_update_block_to_sf\0"				\
-+	"dh_update_emmc_to_sf=" /* Erase SPI NOR and install U-Boot from eMMC */ \
-+		"setenv dh_update_iface mmc && "			\
-+		"setenv dh_update_dev 1:4 && "				\
-+		"run dh_update_block_to_sf\0"				\
- 	"stdin=serial\0"						\
- 	"stdout=serial\0"						\
- 	"stderr=serial\0"						\
--- 
-2.45.2
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gMTAvMTEvMjQgNTozMCBQTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiBIaSwKCkhpLAoK
+PiBPbiA5LzMwLzI0IDIxOjIzLCBNYXJlayBWYXN1dCB3cm90ZToKPj4gTWFrZSB0aGUgZGhfdXBk
+YXRlX3NkX3RvX3NmIHNjcmlwdCBnZW5lcmljLCByZW5hbWUgaXQgdG8gCj4+IGRoX3VwZGF0ZV9z
+ZG1tY190b19zZgo+PiBhbmQgaW1wbGVtZW50IHR3byBzcGVjaWZpYyBkaF91cGRhdGVfc2RfdG9f
+c2YgYW5kIGRoX3VwZGF0ZV9lbW1jX3RvX3NmIAo+PiBzY3JpcHRzCj4+IHdoaWNoIGxvYWQgVS1C
+b290IGZyb20gZWl0aGVyIFNEIG9yIGVNTUMgYW5kIGluc3RhbGwgaXQgaW50byBTUEkgTk9SLgo+
+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KPj4gLS0tCj4+
+IENjOiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4gQ2M6
+IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+IENjOiBU
+b20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPgo+PiBDYzogdS1ib290QGRoLWVsZWN0cm9uaWNz
+LmNvbQo+PiBDYzogdS1ib290QGxpc3RzLmRlbnguZGUKPj4gQ2M6IHVib290LXN0bTMyQHN0LW1k
+LW1haWxtYW4uc3Rvcm1yZXBseS5jb20KPj4gLS0tCj4+IMKgIGluY2x1ZGUvY29uZmlncy9zdG0z
+Mm1wMTVfZGhfZGhzb20uaCB8IDE2ICsrKysrKysrKysrKystLS0KPj4gwqAgMSBmaWxlIGNoYW5n
+ZWQsIDEzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9p
+bmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDE1X2RoX2Roc29tLmggYi9pbmNsdWRlL2NvbmZpZ3MvIAo+
+PiBzdG0zMm1wMTVfZGhfZGhzb20uaAo+PiBpbmRleCBkZTM5YjE5MjE5ZC4uZmE3NTljOTM4YjMg
+MTAwNjQ0Cj4+IC0tLSBhL2luY2x1ZGUvY29uZmlncy9zdG0zMm1wMTVfZGhfZGhzb20uaAo+PiAr
+KysgYi9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDE1X2RoX2Roc29tLmgKPj4gQEAgLTM4LDE2ICsz
+OCwyNiBAQAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgInNldGVudiBsb2FkYWRkcjEgJiYgIsKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKg
+ICJzZXRlbnYgc2Jsa2NudCAmJiAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgXAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgInNldGVudiB1YmxrY250XDAiwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiAtwqDCoMKgICJkaF91cGRhdGVfc2RfdG9f
+c2Y9IiAvKiBFcmFzZSBTUEkgTk9SIGFuZCBpbnN0YWxsIFUtQm9vdCBmcm9tIFNEIAo+PiAqLyBc
+Cj4+ICvCoMKgwqAgImRoX3VwZGF0ZV9zZG1tY190b19zZj0iIC8qIEVyYXNlIFNQSSBOT1IgYW5k
+IGluc3RhbGwgVS1Cb290IGZyb20gCj4+IFNEL2VNTUMgKi8gXAo+PiDCoMKgwqDCoMKgwqDCoMKg
+wqAgInNldGV4cHIgbG9hZGFkZHIxICR7bG9hZGFkZHJ9ICsgMHgxMDAwMDAwICYmICLCoMKgwqDC
+oMKgwqDCoCBcCj4+IC3CoMKgwqDCoMKgwqDCoCAibG9hZCBtbWMgMDo0ICR7bG9hZGFkZHIxfSAv
+Ym9vdC91LWJvb3Qtc3BsLnN0bTMyICYmICLCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgImxv
+YWQgJHtkaF91cGRhdGVfaWZhY2V9ICR7ZGhfdXBkYXRlX2Rldn0gIsKgwqDCoMKgwqDCoMKgIFwK
+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgIiR7bG9hZGFkZHIxfSAvYm9vdC91LWJvb3Qtc3Bs
+LnN0bTMyICYmICLCoMKgwqAgXAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgImVudiBzZXQgZmlsZXNp
+emUxICR7ZmlsZXNpemV9ICYmICLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gLcKgwqDCoMKg
+wqDCoMKgICJsb2FkIG1tYyAwOjQgJHtsb2FkYWRkcn0gL2Jvb3QvdS1ib290Lml0YiAmJiAiwqDC
+oMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgImxvYWQgJHtkaF91cGRhdGVfaWZhY2V9
+ICR7ZGhfdXBkYXRlX2Rldn0gIsKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoMKgwqDCoMKgwqDC
+oMKgwqAgIiR7bG9hZGFkZHJ9IC9ib290L3UtYm9vdC5pdGIgJiYgIsKgwqDCoMKgwqDCoMKgIFwK
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiBwcm9iZSAmJiBzZiBlcmFzZSAwIDB4MjAwMDAwICYm
+ICLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiB1cGRh
+dGUgJHtsb2FkYWRkcjF9IDAgJHtmaWxlc2l6ZTF9ICYmICLCoMKgwqDCoMKgwqDCoCBcCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoCAic2YgdXBkYXRlICR7bG9hZGFkZHIxfSAweDQwMDAwICR7ZmlsZXNp
+emUxfSAmJiAiwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiB1cGRhdGUgJHtsb2Fk
+YWRkcn0gMHg4MDAwMCAke2ZpbGVzaXplfSAmJiAiwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDC
+oMKgwqDCoMKgwqAgImVudiBzZXQgZmlsZXNpemUxICYmIGVudiBzZXQgbG9hZGFkZHIxXDAiwqDC
+oMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgICJkaF91cGRhdGVfc2RfdG9fc2Y9IiAvKiBFcmFzZSBT
+UEkgTk9SIGFuZCBpbnN0YWxsIFUtQm9vdCBmcm9tIFNEIAo+PiAqLyBcCj4+ICvCoMKgwqDCoMKg
+wqDCoCAic2V0ZW52IGRoX3VwZGF0ZV9pZmFjZSBtbWMgJiYgIsKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgInNldGVudiBkaF91cGRhdGVfZGV2IDA6NCAmJiAiwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoMKgwqDCoMKgICJydW4gZGhf
+dXBkYXRlX3NkbW1jX3RvX3NmXDAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4g
+K8KgwqDCoCAiZGhfdXBkYXRlX2VtbWNfdG9fc2Y9IiAvKiBFcmFzZSBTUEkgTk9SIGFuZCBpbnN0
+YWxsIFUtQm9vdCBmcm9tIAo+PiBlTU1DICovIFwKPj4gK8KgwqDCoMKgwqDCoMKgICJzZXRlbnYg
+ZGhfdXBkYXRlX2lmYWNlIG1tYyAmJiAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+ICvCoMKg
+wqDCoMKgwqDCoCAic2V0ZW52IGRoX3VwZGF0ZV9kZXYgMTo0ICYmICLCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgInJ1biBkaF91cGRhdGVfc2RtbWNf
+dG9fc2ZcMCLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDCoMKgICJz
+dGRpbj1zZXJpYWxcMCLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIFwKPj4gwqDCoMKgwqDCoCAic3Rkb3V0PXNlcmlhbFwwIsKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDCoMKgICJzdGRlcnI9c2VyaWFs
+XDAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+Cj4g
+Cj4gb2sgSSB3aWxsIG1lcmdlIGl0IGFzIGl0Cj4gCj4gd2l0aCAyIG1pbm9yIHF1ZXN0aW9uCj4g
+Cj4gYSnCoCBpdCBpcyBzdHJhbmdlIHRvIGRlZmluZSBpbnRlcmZhY2UgdmFyaWFibGUgZm9yIG1h
+Y3JvCj4gIMKgwqDCoCBidXQgdXNlIG9ubHkgd2l0aCAibW1jIiBkZXZpY2Ugd2l0aAo+IAo+PiBz
+ZXRlbnYgZGhfdXBkYXRlX2lmYWNlIG1tYwo+IAo+IGl0IGNhbiBiZSBzaW1wbGlmaWVkIHdpdGgK
+PiAKPiAibG9hZCBtbWMgJHtkaF91cGRhdGVfZGV2fQo+IAo+IG9yIGl0IGlzIHRvIHByZXBhcmUg
+b3RoZXIgZGV2aWNlIHRoZW4gIm1tYyIgLi4uLi4KClRoZSBsYXRlciwgSSBub3cgYWxzbyByZW5h
+bWVkIHRoZSBzY3JpcHQgaW4gVjIgdG8gbWFrZSBpdCBtb3JlIG9idmlvdXMuCgo+IGIpIHlvdSBh
+cmUgdXNpbmcgInNmIiBjb21tYW5kIGFuZCBub3QgIm10ZCIgdG8gdWRwYXRlIFNQSSBOT1IgPwo+
+IAo+IAo+IHRoZSBNVEQgY29tbWFuZCBhbGxvd3MgdG8gdXNlIHRoZSBNVEQgcGFydGl0aW9uIG5h
+bWUsIGRlZmluZWQgaW4gRFQsCj4gc28gbm8gbmVlZCB0byBrbm93IG9mZnNldCBpbiBzY3JpcHQg
+KGFuZCBhdm9pZCAic2YgcHJvYmUiKQo+IAo+IG10ZCBlcmFzZSBmc2JsMTsgbXRkIHdyaXRlIGZz
+YmwxICR7bG9hZGFkZHIxfSAwICR7ZmlsZXNpemUxfSBcCj4gbXRkIGVyYXNlIGZzYmwyOyBtdGQg
+d3JpdGUgZnNibDIgJHtsb2FkYWRkcjF9IDAgJHtmaWxlc2l6ZTF9IFwKPiBtdGQgZXJhc2UgdWJv
+b3Q7IG10ZCB3cml0ZSB1Ym9vdCAke2xvYWRhZGRyfSAwICR7ZmlsZXNpemV9CkNhbiB5b3UgYWxz
+byBkbyAnc2YgdXBkYXRlJyBhbGlrZSBvcGVyYXRpb24gd2l0aCAnbXRkJyBjb21tYW5kPyBJIGRv
+bid0IAp0aGluayB5b3UgY2FuLiBUaGUgJ3NmIHVwZGF0ZScgb2Z0ZW4gZG9lcyBzaWduaWZpY2Fu
+dGx5IHNwZWVkIHVwIHRoZSBTUEkgCk5PUiB1cGRhdGUgcHJvY2VzcywgYmVjYXVzZSBTUEkgTk9S
+IGVyYXNlIG9wZXJhdGlvbiBpcyB2ZXJ5IHNsb3csIHdoaWxlIApTUEkgTk9SIHJlYWQgb3BlcmF0
+aW9uIGlzIGZhc3QsIHNvIGlmIHRoZSB1cGRhdGUgY2FuIHJlYWQgYW5kIHRoZW4gc2tpcCAKbWFu
+eSBibG9ja3Mgd2hpY2ggYXJlIGFscmVhZHkgaW4gdGhlIFNQSSBOT1IgYW5kIGVyYXNlIGFuZCB3
+cml0ZSBvbmx5IAp0aGUgY2hhbmdlZCBibG9ja3MsIHRoZSB1cGRhdGUgaXMgb2Z0ZW4gdmVyeSBm
+YXN0IHRvby4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+VWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1y
+ZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlz
+dGluZm8vdWJvb3Qtc3RtMzIK

@@ -2,64 +2,44 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 868CD99F76C
-	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2024 21:44:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73FB299F845
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2024 22:48:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BBEAC78030;
-	Tue, 15 Oct 2024 19:44:08 +0000 (UTC)
-Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com
- [209.85.160.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 17D1CC7801A
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 14131C78030;
+	Tue, 15 Oct 2024 20:48:46 +0000 (UTC)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 05DF6C6C841
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Oct 2024 19:44:01 +0000 (UTC)
-Received: by mail-oa1-f46.google.com with SMTP id
- 586e51a60fabf-287b8444ff3so2150603fac.1
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 15 Oct 2024 12:44:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1729021440; x=1729626240;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JJ+CAV0HwhCBxkGtzq0rF/65TDmyI6azyrWVeyvFyN8=;
- b=TCPkwM03p5Rbut3MiAr7a061P/2inQT+wC0SSKwxoyP5s7eVzWxohaR2tH33dg3347
- HfPM57ccVTE6EfTuvIi4KsJTLoJI5PSXkpadGqGv+/VAfKNrUc2ZVZq0SNuWCErEVnwd
- Mlqs1czNHX9hL74/DRAinXCZCGuxSr3jG0/1U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729021440; x=1729626240;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JJ+CAV0HwhCBxkGtzq0rF/65TDmyI6azyrWVeyvFyN8=;
- b=rlrpMO53oyMfA4YiZviKV57a//YfiSPUNdERxJMEYaO6dBOmk4ffMAbYuuP0oOswNh
- 4qTgGBYgibhidV+8yvn3Qw83BDMoVYoRPI6SFRBr10yg05DrS1GTAYeVpIbN9mWlnKa/
- IYTYd0HeBtOkMOd5NIQTQ81DlAYeQoLBmE+mW3h8pXciT/2tTEKLQnBzr0xa/1ZRrWpx
- UySFkmEZ7jxxjClVQMwpXytzJKzIMt4rY6JbUMeOYutEDJSTa9I3v1JknX6zkq9OUntt
- iV44flN+VCw5zbCNw424LqwEABVgVMwpw4jM68s59/UiBpO8xiamyxgGcgmlmWqJDINa
- xthA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXq7PrBqMOLfo63RvSlThCVucteR5VyNK0+yzO2ivNcXZux42uM0K9qO8STB/9mpUrDq03wuUYqRnAh2A==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxYIOZdNalqJsG5NPaeP1eF/toxE2ZXuJx2XTOnRR2D3UlI/cVE
- ZvrBjKTkU3KWlJ2xuVU6uDeNaA5KQV8QYqisJTprjLlT5UVF1MKwx7m218lggM0=
-X-Google-Smtp-Source: AGHT+IFC/3guCbGBr84UxDNuXTWsQeb0fYfG5hs20rGBfqaxau/ZdVRWM1SsuvwrI2CYDPFBHQ00jQ==
-X-Received: by 2002:a05:6871:70e:b0:277:e6fc:4a69 with SMTP id
- 586e51a60fabf-2886dd4b22bmr10619772fac.2.1729021439719; 
- Tue, 15 Oct 2024 12:43:59 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b13899c31esm94873385a.99.2024.10.15.12.43.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Oct 2024 12:43:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-In-Reply-To: <20241004230756.371153-1-marex@denx.de>
-References: <20241004230756.371153-1-marex@denx.de>
-Message-Id: <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
-Date: Tue, 15 Oct 2024 13:43:57 -0600
+ Tue, 15 Oct 2024 20:48:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1729025300;
+ bh=l8eyeAWt0DqkBdQyWBOGH9DNgV9DhnoOXMrxOokI/Cg=;
+ b=CSKmVTYCj5xfWBtbW06XtzGNAGmHtNpbbruLAjQHyhPL4npscW7gujAgE2hIkISNf3g9Sg9IQ
+ qHPrVfzGi5HrujhQsREFy0hzFhn4UIKNCe2a8dMYJ6+8b6+UuRheWBFUOqfmOZK34nx/5Rj0geD
+ dw4nLkk5+KNxi9j1kY4HhfXT+f58Iw7SENiB6AEKR4Tz2P/Uy+fHGYYRsH6gkGW7KOt+aOfV5lE
+ B+MWuWUY8zkq8LtsL2+pz1UnFqJOgjKKqNh/ybwhbW1U70vH1jsK/JLtSzFTNh4RP1FFQzA89tR
+ NpMg3ogwsP6d3ya/PiW0cte7JFmswsLYTEyY1xsEoh3A==
+Message-ID: <8cfc2a0f-dfef-4528-95fa-298bfc701ac7@kwiboo.se>
+Date: Tue, 15 Oct 2024 22:48:12 +0200
 MIME-Version: 1.0
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+To: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+References: <20241004230756.371153-1-marex@denx.de>
+ <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 670ed5137922294f1eb351c6
 Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
@@ -67,7 +47,7 @@ Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>, Sean Anderson <seanga2@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
  Peter Robinson <pbrobinson@gmail.com>,
  Quentin Schulz <quentin.schulz@cherry.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
@@ -89,20 +69,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Sat, 05 Oct 2024 01:07:13 +0200, Marek Vasut wrote:
-
-> The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
-> is long superseded by binman, drop SPL_FIT_SOURCE support as there
-> are no more users.
+On 2024-10-15 21:43, Tom Rini wrote:
+> On Sat, 05 Oct 2024 01:07:13 +0200, Marek Vasut wrote:
 > 
+>> The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
+>> is long superseded by binman, drop SPL_FIT_SOURCE support as there
+>> are no more users.
+>>
+>>
+> 
+> Applied to u-boot/master, thanks!
 > 
 
-Applied to u-boot/master, thanks!
+Look like 5b9261fb0b1e ("Makefile: Drop SPL_FIT_GENERATOR support") may
+have broken ARCH_ZYNQMP, it still seem to use a mkimage_fit_atf.sh and
+CI pipeline now fails:
 
--- 
-Tom
+https://source.denx.de/u-boot/u-boot/-/pipelines/22715
 
-
+Regards,
+Jonas
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

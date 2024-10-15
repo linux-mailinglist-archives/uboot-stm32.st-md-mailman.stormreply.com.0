@@ -2,49 +2,77 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 064BB99B06F
-	for <lists+uboot-stm32@lfdr.de>; Sat, 12 Oct 2024 05:31:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 868CD99F76C
+	for <lists+uboot-stm32@lfdr.de>; Tue, 15 Oct 2024 21:44:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F630C712A1;
-	Sat, 12 Oct 2024 03:31:25 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3BBEAC78030;
+	Tue, 15 Oct 2024 19:44:08 +0000 (UTC)
+Received: from mail-oa1-f46.google.com (mail-oa1-f46.google.com
+ [209.85.160.46])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 27791C7128A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 17D1CC7801A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 12 Oct 2024 03:31:18 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 497DB88B4B;
- Sat, 12 Oct 2024 05:31:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1728703877;
- bh=34RukWzKzNdXJ0reXpzwSqvdcfkqcTf+FasjOxG7pm8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=rCJ2NqDxV5ItjhuDGvpy+fMod5swoTeudYtyJr8CP5KBgtWkINO2s6ZKq6xxJ4gMH
- bA9RLzeFu+uDf1DGpmoEUOTKQck+EhOEzhBUdRQZm/v8EXLIwmaBQhpiykuqddtbpS
- zPaRnXioUEyyO3wR24t4BlkewfBqS5bZ0cWsfUYTG/GTYMGxKCVxT3iaWAUDDJrH+V
- +iUyqhCXSfSFqYV8m5MQn2CeyF86homOMgIbFLY07JMWlxO9mJO5QQcKAyYCcIH4uy
- 2hEaLI6t9S20UM/fq199uy0KlxiBnM4SQJ2ZwwAQq+87PEEsqtUjAv5AdwQrljHalK
- NAlImK7kpnVRA==
-Message-ID: <92a9153c-c948-43bb-8542-163ec245c74d@denx.de>
-Date: Sat, 12 Oct 2024 05:01:54 +0200
+ Tue, 15 Oct 2024 19:44:01 +0000 (UTC)
+Received: by mail-oa1-f46.google.com with SMTP id
+ 586e51a60fabf-287b8444ff3so2150603fac.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 15 Oct 2024 12:44:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1729021440; x=1729626240;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JJ+CAV0HwhCBxkGtzq0rF/65TDmyI6azyrWVeyvFyN8=;
+ b=TCPkwM03p5Rbut3MiAr7a061P/2inQT+wC0SSKwxoyP5s7eVzWxohaR2tH33dg3347
+ HfPM57ccVTE6EfTuvIi4KsJTLoJI5PSXkpadGqGv+/VAfKNrUc2ZVZq0SNuWCErEVnwd
+ Mlqs1czNHX9hL74/DRAinXCZCGuxSr3jG0/1U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729021440; x=1729626240;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JJ+CAV0HwhCBxkGtzq0rF/65TDmyI6azyrWVeyvFyN8=;
+ b=rlrpMO53oyMfA4YiZviKV57a//YfiSPUNdERxJMEYaO6dBOmk4ffMAbYuuP0oOswNh
+ 4qTgGBYgibhidV+8yvn3Qw83BDMoVYoRPI6SFRBr10yg05DrS1GTAYeVpIbN9mWlnKa/
+ IYTYd0HeBtOkMOd5NIQTQ81DlAYeQoLBmE+mW3h8pXciT/2tTEKLQnBzr0xa/1ZRrWpx
+ UySFkmEZ7jxxjClVQMwpXytzJKzIMt4rY6JbUMeOYutEDJSTa9I3v1JknX6zkq9OUntt
+ iV44flN+VCw5zbCNw424LqwEABVgVMwpw4jM68s59/UiBpO8xiamyxgGcgmlmWqJDINa
+ xthA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXq7PrBqMOLfo63RvSlThCVucteR5VyNK0+yzO2ivNcXZux42uM0K9qO8STB/9mpUrDq03wuUYqRnAh2A==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxYIOZdNalqJsG5NPaeP1eF/toxE2ZXuJx2XTOnRR2D3UlI/cVE
+ ZvrBjKTkU3KWlJ2xuVU6uDeNaA5KQV8QYqisJTprjLlT5UVF1MKwx7m218lggM0=
+X-Google-Smtp-Source: AGHT+IFC/3guCbGBr84UxDNuXTWsQeb0fYfG5hs20rGBfqaxau/ZdVRWM1SsuvwrI2CYDPFBHQ00jQ==
+X-Received: by 2002:a05:6871:70e:b0:277:e6fc:4a69 with SMTP id
+ 586e51a60fabf-2886dd4b22bmr10619772fac.2.1729021439719; 
+ Tue, 15 Oct 2024 12:43:59 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b13899c31esm94873385a.99.2024.10.15.12.43.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 15 Oct 2024 12:43:59 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+In-Reply-To: <20241004230756.371153-1-marex@denx.de>
+References: <20241004230756.371153-1-marex@denx.de>
+Message-Id: <172902143755.5381.3133865412226742988.b4-ty@konsulko.com>
+Date: Tue, 15 Oct 2024 13:43:57 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
-References: <20240930192343.59359-1-marex@denx.de>
- <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <dc0a0638-0724-46d1-99c7-ee8b84e5541b@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: uboot-stm32@st-md-mailman.stormreply.com, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Add script to install U-Boot
- from SD/eMMC to SPI NOR on DH STM32MP15xx DHSOM
+X-Mailer: b4 0.14.2
+Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@dh-electronics.com,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Sean Anderson <seanga2@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 1/2] Makefile: Drop SPL_FIT_SOURCE support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -56,93 +84,26 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTAvMTEvMjQgNTozMCBQTSwgUGF0cmljayBERUxBVU5BWSB3cm90ZToKPiBIaSwKCkhpLAoK
-PiBPbiA5LzMwLzI0IDIxOjIzLCBNYXJlayBWYXN1dCB3cm90ZToKPj4gTWFrZSB0aGUgZGhfdXBk
-YXRlX3NkX3RvX3NmIHNjcmlwdCBnZW5lcmljLCByZW5hbWUgaXQgdG8gCj4+IGRoX3VwZGF0ZV9z
-ZG1tY190b19zZgo+PiBhbmQgaW1wbGVtZW50IHR3byBzcGVjaWZpYyBkaF91cGRhdGVfc2RfdG9f
-c2YgYW5kIGRoX3VwZGF0ZV9lbW1jX3RvX3NmIAo+PiBzY3JpcHRzCj4+IHdoaWNoIGxvYWQgVS1C
-b290IGZyb20gZWl0aGVyIFNEIG9yIGVNTUMgYW5kIGluc3RhbGwgaXQgaW50byBTUEkgTk9SLgo+
-Pgo+PiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBWYXN1dCA8bWFyZXhAZGVueC5kZT4KPj4gLS0tCj4+
-IENjOiBQYXRyaWNlIENob3RhcmQgPHBhdHJpY2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPj4gQ2M6
-IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+IENjOiBU
-b20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPgo+PiBDYzogdS1ib290QGRoLWVsZWN0cm9uaWNz
-LmNvbQo+PiBDYzogdS1ib290QGxpc3RzLmRlbnguZGUKPj4gQ2M6IHVib290LXN0bTMyQHN0LW1k
-LW1haWxtYW4uc3Rvcm1yZXBseS5jb20KPj4gLS0tCj4+IMKgIGluY2x1ZGUvY29uZmlncy9zdG0z
-Mm1wMTVfZGhfZGhzb20uaCB8IDE2ICsrKysrKysrKysrKystLS0KPj4gwqAgMSBmaWxlIGNoYW5n
-ZWQsIDEzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9p
-bmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDE1X2RoX2Roc29tLmggYi9pbmNsdWRlL2NvbmZpZ3MvIAo+
-PiBzdG0zMm1wMTVfZGhfZGhzb20uaAo+PiBpbmRleCBkZTM5YjE5MjE5ZC4uZmE3NTljOTM4YjMg
-MTAwNjQ0Cj4+IC0tLSBhL2luY2x1ZGUvY29uZmlncy9zdG0zMm1wMTVfZGhfZGhzb20uaAo+PiAr
-KysgYi9pbmNsdWRlL2NvbmZpZ3Mvc3RtMzJtcDE1X2RoX2Roc29tLmgKPj4gQEAgLTM4LDE2ICsz
-OCwyNiBAQAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgInNldGVudiBsb2FkYWRkcjEgJiYgIsKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKg
-ICJzZXRlbnYgc2Jsa2NudCAmJiAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgXAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgInNldGVudiB1YmxrY250XDAiwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiAtwqDCoMKgICJkaF91cGRhdGVfc2RfdG9f
-c2Y9IiAvKiBFcmFzZSBTUEkgTk9SIGFuZCBpbnN0YWxsIFUtQm9vdCBmcm9tIFNEIAo+PiAqLyBc
-Cj4+ICvCoMKgwqAgImRoX3VwZGF0ZV9zZG1tY190b19zZj0iIC8qIEVyYXNlIFNQSSBOT1IgYW5k
-IGluc3RhbGwgVS1Cb290IGZyb20gCj4+IFNEL2VNTUMgKi8gXAo+PiDCoMKgwqDCoMKgwqDCoMKg
-wqAgInNldGV4cHIgbG9hZGFkZHIxICR7bG9hZGFkZHJ9ICsgMHgxMDAwMDAwICYmICLCoMKgwqDC
-oMKgwqDCoCBcCj4+IC3CoMKgwqDCoMKgwqDCoCAibG9hZCBtbWMgMDo0ICR7bG9hZGFkZHIxfSAv
-Ym9vdC91LWJvb3Qtc3BsLnN0bTMyICYmICLCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgImxv
-YWQgJHtkaF91cGRhdGVfaWZhY2V9ICR7ZGhfdXBkYXRlX2Rldn0gIsKgwqDCoMKgwqDCoMKgIFwK
-Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgIiR7bG9hZGFkZHIxfSAvYm9vdC91LWJvb3Qtc3Bs
-LnN0bTMyICYmICLCoMKgwqAgXAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgImVudiBzZXQgZmlsZXNp
-emUxICR7ZmlsZXNpemV9ICYmICLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gLcKgwqDCoMKg
-wqDCoMKgICJsb2FkIG1tYyAwOjQgJHtsb2FkYWRkcn0gL2Jvb3QvdS1ib290Lml0YiAmJiAiwqDC
-oMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgImxvYWQgJHtkaF91cGRhdGVfaWZhY2V9
-ICR7ZGhfdXBkYXRlX2Rldn0gIsKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgIiR7bG9hZGFkZHJ9IC9ib290L3UtYm9vdC5pdGIgJiYgIsKgwqDCoMKgwqDCoMKgIFwK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiBwcm9iZSAmJiBzZiBlcmFzZSAwIDB4MjAwMDAwICYm
-ICLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiB1cGRh
-dGUgJHtsb2FkYWRkcjF9IDAgJHtmaWxlc2l6ZTF9ICYmICLCoMKgwqDCoMKgwqDCoCBcCj4+IMKg
-wqDCoMKgwqDCoMKgwqDCoCAic2YgdXBkYXRlICR7bG9hZGFkZHIxfSAweDQwMDAwICR7ZmlsZXNp
-emUxfSAmJiAiwqDCoMKgIFwKPj4gwqDCoMKgwqDCoMKgwqDCoMKgICJzZiB1cGRhdGUgJHtsb2Fk
-YWRkcn0gMHg4MDAwMCAke2ZpbGVzaXplfSAmJiAiwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDC
-oMKgwqDCoMKgwqAgImVudiBzZXQgZmlsZXNpemUxICYmIGVudiBzZXQgbG9hZGFkZHIxXDAiwqDC
-oMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgICJkaF91cGRhdGVfc2RfdG9fc2Y9IiAvKiBFcmFzZSBT
-UEkgTk9SIGFuZCBpbnN0YWxsIFUtQm9vdCBmcm9tIFNEIAo+PiAqLyBcCj4+ICvCoMKgwqDCoMKg
-wqDCoCAic2V0ZW52IGRoX3VwZGF0ZV9pZmFjZSBtbWMgJiYgIsKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgInNldGVudiBkaF91cGRhdGVfZGV2IDA6NCAmJiAiwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4gK8KgwqDCoMKgwqDCoMKgICJydW4gZGhf
-dXBkYXRlX3NkbW1jX3RvX3NmXDAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwKPj4g
-K8KgwqDCoCAiZGhfdXBkYXRlX2VtbWNfdG9fc2Y9IiAvKiBFcmFzZSBTUEkgTk9SIGFuZCBpbnN0
-YWxsIFUtQm9vdCBmcm9tIAo+PiBlTU1DICovIFwKPj4gK8KgwqDCoMKgwqDCoMKgICJzZXRlbnYg
-ZGhfdXBkYXRlX2lmYWNlIG1tYyAmJiAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+ICvCoMKg
-wqDCoMKgwqDCoCAic2V0ZW52IGRoX3VwZGF0ZV9kZXYgMTo0ICYmICLCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgXAo+PiArwqDCoMKgwqDCoMKgwqAgInJ1biBkaF91cGRhdGVfc2RtbWNf
-dG9fc2ZcMCLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDCoMKgICJz
-dGRpbj1zZXJpYWxcMCLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIFwKPj4gwqDCoMKgwqDCoCAic3Rkb3V0PXNlcmlhbFwwIsKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXAo+PiDCoMKgwqDCoMKgICJzdGRlcnI9c2VyaWFs
-XDAiwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBcCj4+Cj4g
-Cj4gb2sgSSB3aWxsIG1lcmdlIGl0IGFzIGl0Cj4gCj4gd2l0aCAyIG1pbm9yIHF1ZXN0aW9uCj4g
-Cj4gYSnCoCBpdCBpcyBzdHJhbmdlIHRvIGRlZmluZSBpbnRlcmZhY2UgdmFyaWFibGUgZm9yIG1h
-Y3JvCj4gIMKgwqDCoCBidXQgdXNlIG9ubHkgd2l0aCAibW1jIiBkZXZpY2Ugd2l0aAo+IAo+PiBz
-ZXRlbnYgZGhfdXBkYXRlX2lmYWNlIG1tYwo+IAo+IGl0IGNhbiBiZSBzaW1wbGlmaWVkIHdpdGgK
-PiAKPiAibG9hZCBtbWMgJHtkaF91cGRhdGVfZGV2fQo+IAo+IG9yIGl0IGlzIHRvIHByZXBhcmUg
-b3RoZXIgZGV2aWNlIHRoZW4gIm1tYyIgLi4uLi4KClRoZSBsYXRlciwgSSBub3cgYWxzbyByZW5h
-bWVkIHRoZSBzY3JpcHQgaW4gVjIgdG8gbWFrZSBpdCBtb3JlIG9idmlvdXMuCgo+IGIpIHlvdSBh
-cmUgdXNpbmcgInNmIiBjb21tYW5kIGFuZCBub3QgIm10ZCIgdG8gdWRwYXRlIFNQSSBOT1IgPwo+
-IAo+IAo+IHRoZSBNVEQgY29tbWFuZCBhbGxvd3MgdG8gdXNlIHRoZSBNVEQgcGFydGl0aW9uIG5h
-bWUsIGRlZmluZWQgaW4gRFQsCj4gc28gbm8gbmVlZCB0byBrbm93IG9mZnNldCBpbiBzY3JpcHQg
-KGFuZCBhdm9pZCAic2YgcHJvYmUiKQo+IAo+IG10ZCBlcmFzZSBmc2JsMTsgbXRkIHdyaXRlIGZz
-YmwxICR7bG9hZGFkZHIxfSAwICR7ZmlsZXNpemUxfSBcCj4gbXRkIGVyYXNlIGZzYmwyOyBtdGQg
-d3JpdGUgZnNibDIgJHtsb2FkYWRkcjF9IDAgJHtmaWxlc2l6ZTF9IFwKPiBtdGQgZXJhc2UgdWJv
-b3Q7IG10ZCB3cml0ZSB1Ym9vdCAke2xvYWRhZGRyfSAwICR7ZmlsZXNpemV9CkNhbiB5b3UgYWxz
-byBkbyAnc2YgdXBkYXRlJyBhbGlrZSBvcGVyYXRpb24gd2l0aCAnbXRkJyBjb21tYW5kPyBJIGRv
-bid0IAp0aGluayB5b3UgY2FuLiBUaGUgJ3NmIHVwZGF0ZScgb2Z0ZW4gZG9lcyBzaWduaWZpY2Fu
-dGx5IHNwZWVkIHVwIHRoZSBTUEkgCk5PUiB1cGRhdGUgcHJvY2VzcywgYmVjYXVzZSBTUEkgTk9S
-IGVyYXNlIG9wZXJhdGlvbiBpcyB2ZXJ5IHNsb3csIHdoaWxlIApTUEkgTk9SIHJlYWQgb3BlcmF0
-aW9uIGlzIGZhc3QsIHNvIGlmIHRoZSB1cGRhdGUgY2FuIHJlYWQgYW5kIHRoZW4gc2tpcCAKbWFu
-eSBibG9ja3Mgd2hpY2ggYXJlIGFscmVhZHkgaW4gdGhlIFNQSSBOT1IgYW5kIGVyYXNlIGFuZCB3
-cml0ZSBvbmx5IAp0aGUgY2hhbmdlZCBibG9ja3MsIHRoZSB1cGRhdGUgaXMgb2Z0ZW4gdmVyeSBm
-YXN0IHRvby4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-VWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rvcm1y
-ZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4vbGlz
-dGluZm8vdWJvb3Qtc3RtMzIK
+On Sat, 05 Oct 2024 01:07:13 +0200, Marek Vasut wrote:
+
+> The SPL_FIT_SOURCE is long superseded by SPL_FIT_GENERATOR which
+> is long superseded by binman, drop SPL_FIT_SOURCE support as there
+> are no more users.
+> 
+> 
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

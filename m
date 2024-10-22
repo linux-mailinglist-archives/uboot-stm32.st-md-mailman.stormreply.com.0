@@ -2,62 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B82779A9D60
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2024 10:48:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D4C19AA1F7
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Oct 2024 14:15:53 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 62312C78027;
-	Tue, 22 Oct 2024 08:48:57 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
- [209.85.167.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 42A83C6DD66;
+	Tue, 22 Oct 2024 12:15:53 +0000 (UTC)
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
+ [209.85.167.43])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 20E20C78012
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3EFA1C57194
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2024 08:48:50 +0000 (UTC)
-Received: by mail-lf1-f51.google.com with SMTP id
- 2adb3069b0e04-539f6e1f756so6273031e87.0
+ Tue, 22 Oct 2024 12:15:46 +0000 (UTC)
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-539e3f35268so3997840e87.3
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2024 01:48:50 -0700 (PDT)
+ Tue, 22 Oct 2024 05:15:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729586929; x=1730191729;
+ d=chromium.org; s=google; t=1729599345; x=1730204145;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
- b=PEO+4vINIF6qf8IRzExZQMHeksywdHHEns+/e5v7X4dEcWJz2T2gdgPePOU/IUKcC5
- Kbp4j+yx6HN0IHHJN7QMjf3+E3LB1qJJ5HRDsnaJKvyjX5S28jyBK0q+jEr4jriNbOWm
- mJCs1BmU67GEsf77LTjBwiGXbVCgvUggtlfT5PhIDsVvLYQjME2pyhmHGToFbbB3XUFf
- llO8FNoDYPHTGyHAR0+g/78T2eYYPv9211c1Osj9kYY0LI/weqwsJqmfe5k5su6IURFT
- sg7kzCM8dqqqt0FRYB2pcQA1iq58fzmcEcpb8vb+PcHmmFkTVpShy9MIDOrbozkjqd/c
- wiuA==
+ bh=pNTFFiDhvjS02pYi2E36x2cwn0ld7G4zNAPfrwiz67k=;
+ b=c97JfsjCyD36n9zhM2CtqKKxTCokWDuViD0XETn8tELToZiXwg47G5roWbm8G+VCbr
+ DQRC+FuwsxmpmSLTYvtyONaYofqIDeLY+vumCMdrZpVir8V4kKQwBFS8C/a0eqiHyXFB
+ Z4Hb9f+krhVZ2dvKYxuBxAE0N2nQEM7pU9Bkg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729586929; x=1730191729;
+ d=1e100.net; s=20230601; t=1729599345; x=1730204145;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yXOG4bAnuNruA+w4vpSbSR1SmdXTLwDkoXzo1msrvxY=;
- b=K9fpeeSZD4lUav7t7dmYEvj3ohmC0zutPcCy6F/SD4xn7BoG/PKwv8TkdY5NSPl7dZ
- Y9+kRmcNnPOhbe/R6B+eNFUr1Lxm5otCej+6ijvWyB3LA2giXCQCbiotOZHKsgSqPrKc
- nbTHESXM0aHPHhoLN2Cp36FToiVO73VsACGCi2ST9BAZqY0rlF8ldK+samApeCe7fbUA
- tuSnelBeE3p654MSKdMChoKV3gEttYy3jOkcNx3VUBKZHHs2M0SA99StfyaUqLBhi1ln
- KimvCSiDzoWkXdGRtKL7hnIi0dXxFnrpvpLuCu/G+mE2exASQJ7Jy9CFCJOXYECuLw/V
- uUlg==
+ bh=pNTFFiDhvjS02pYi2E36x2cwn0ld7G4zNAPfrwiz67k=;
+ b=u2W2EZWCrw6P5em/loxY0L07XkGVEDFXgaptZUmxU+o2dkR76w1w7Gb7xF+zPoU1w1
+ vy7H3ZrZkh3lg1/65iOEtxL3z/asKfUhRbxfjkgjpTQMwSkjIoXjCQDfQs0s0nFaU/dc
+ ukkoBukOvKz+JsJuGkVAXctnA/CQ/lVL7w5oOyhOb2abiOKFYk1fyiUyTYZ/gt3lcNie
+ E1ya8qE2kQ+cZq9p7GwhGOEHleOkFr+CxzjOIZBj5EhSTR8JzVUQASgFf/wh/sxzzU5c
+ Td7+QTtniuUcXZtcDx21AD5s/yCrSuY9+V5jIZ7eaXbdt4S0xzoqJDls+0XNjZbu7ess
+ Yykg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP2ieqUIIIlfVEPFliHpxFaB6kaNtAMoCDETFMehvmyVyX0S6Qz6UXrG9TMhnzlhMqXEUwYTuNvjx0WA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzJwCKxM7ZE3yARDZbInjwrdelgSRiL9iCbCNdmA7D3B+tk0HuT
- muTTZO74L8uG9UNJK7plWx+pNg6/K7/VLTAJBh9z/kYdNRmFMIYmUOLy/h20QlaTEkk809+3HYv
- zB3EoIqeCD2h+T0oCF9FwFz2AJ7w=
-X-Google-Smtp-Source: AGHT+IESDJ30NOXZlrNVe3MHVFVKMJkdGbCKDDCyLk3bWq90A/sQPszJvQs3aN/4SDx3h9OLgyN10NY18y3fsS59Y2U=
-X-Received: by 2002:a05:6512:acc:b0:539:e9b4:7ff6 with SMTP id
- 2adb3069b0e04-53a15445f78mr7872135e87.45.1729586928951; Tue, 22 Oct 2024
- 01:48:48 -0700 (PDT)
+ AJvYcCVBJTxmg+8v/Aq0fYXnihwlZORv2TXX5ADV8YbVLgPHyZ+HS7Z/tInL4Z6WZYfX/FzecyyVfEC/L6XQPA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzvqxZ0f8zsxG8xPnt8mRaVKuoElfWZWyyhF7/OxBjmNWaGAiN5
+ ICjnlofceynaqp0O06Ix1y4N1wBDc+pjlmkM1ObukrWgk9mrM13eaAQ01tYdH/tG2iGcymJFZtm
+ JPuNLvLP9J+U0e107QryxgBSZxFvabZ7pBZkq
+X-Google-Smtp-Source: AGHT+IEQOf5Uth+EbYU6C8n0FmGmq35lcVLjqELZ6jNADa/5wekxFkyQcP1MpfN9icNtCardmm2IB4CXjRqc0Cai5c0=
+X-Received: by 2002:a05:6512:39cc:b0:539:e436:f1cc with SMTP id
+ 2adb3069b0e04-53a1546cc59mr8133444e87.52.1729599345254; Tue, 22 Oct 2024
+ 05:15:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241021113839.318572-1-sjg@chromium.org>
  <20241021172613.GN4959@bill-the-cat>
 In-Reply-To: <20241021172613.GN4959@bill-the-cat>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Tue, 22 Oct 2024 09:48:37 +0100
-Message-ID: <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 22 Oct 2024 14:15:34 +0200
+Message-ID: <CAFLszTguu7hRpsSLxADsBkMgTzA_-fAR0t8Axv+8=OvxJvSRCw@mail.gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
@@ -93,12 +90,12 @@ Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
  Samuel Holland <samuel@sholland.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Kamil Lulko <kamil.lulko@gmail.com>, Mario Six <mario.six@gdsys.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Richard Weinberger <richard@nod.at>, Artur Rojek <artur@conclusive.pl>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
 Subject: Re: [Uboot-stm32] [PATCH v2 00/25] led: Remove old status-LED code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -117,6 +114,10 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Hi Tom,
+
+On Mon, 21 Oct 2024 at 19:26, Tom Rini <trini@konsulko.com> wrote:
+>
 > On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
 > > There has been an LED framework in U-Boot which uses driver model for
 > > about 9 years now. Recent work is underway to improve it and provide
@@ -147,20 +148,11 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 > - Just start working on those platforms when they do move to
 >   OF_UPSTREAM.
 
-Also when the migration was first bought up I had a quick look at how
-to do it for the pinephone and I came up empty handed. Now I've seen
-the patch for the pinephone and grep for LED_BOOT the only form of
-docs I find is in the Kconfig and include/led.h, they refer to things
-that aren't in-tree and the out of tree reference to
-dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
-./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
-reference to boott leds at all.
+Perhaps I didn't understand what you were saying. I thought you meant
+to enable LED and LED_BOOT on these 5 boards?
 
-I feel the reason there's been a recent move to add users of the
-obsolete method is because the docs for that actually existed and
-there's nothing for the new method. Maybe the first patch in the
-series should be to add some actually useful doc rahter than go from
-docs for the old method to nothing.
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,54 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37F569AE51D
+	by mail.lfdr.de (Postfix) with ESMTPS id 40D639AE51E
 	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Oct 2024 14:40:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 01F2DC78F63;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 07F16C78F65;
 	Thu, 24 Oct 2024 12:40:31 +0000 (UTC)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D3D79C6DD6B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D57F5C6DD9F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Oct 2024 21:06:58 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+ Tue, 22 Oct 2024 21:07:01 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4XY4Vp1wczz9sW9;
- Tue, 22 Oct 2024 23:06:58 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4XY4Vr61CNz9sWN;
+ Tue, 22 Oct 2024 23:07:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729631220;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eqsoK/ur/TFIkTEpWyMTVL7qO3cOPC7WFXAmOzzn2Gs=;
+ b=ByeFQFsQZOO/TpxsUBH01R9Y8uqJfPR7bOWb5Xfz6X9iYGUCZz9rXb5c7P944zg3KaYq8p
+ keWmNYD0P2tKrS05tI9kNtwLaIYC9AHXfCpQx2JBaxeDEoFmxOUyVUa8Bpwaq4aeT0aObo
+ cwU1VWo6P7IS8VdPn0PT16CAYLFHWHQqpoQeXsq7H75r/qFYtMrua3FSLsYGAIvsveFmMV
+ VtL5GCt+oeX5XrhghTYj9tW6UROkhurJmLgfg4n26qjjqeReEMK/8bEVfgM7ynWm6G9YJl
+ t4G3sd3OJYqBmENKQqzQyNfDifv7MEbYdB+AVJUWrv8/5kYx9OWyulyd/NgPwQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1729631218;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=akpvMuqry4WLeDBINb41zGlnCaPOPYWZX6zAhIsKDQQ=;
- b=Ka+bjbs6fkuci8WLeWDWuMjNV1P0n20Z7KdXdAoCniY1NyNj+XKUbsYxy4qibQ66PtFvxD
- h8uRmX7YRIxg0DEHGGoHzdFg5sPLSxK+zugs3xB0F5pQERNd99w3pDus3jrwko2SUDjWHI
- 0PHir8FSTwLeXI9Z8pmst4vqnsO60/sc/zl/IRtOoZ+xThfjX2qKyK52ezML49tI1HAaDz
- 61FxZgXZhgfbsMeUe5cLZyzafrCBeGop6UyyCIV50VyCEnQBpztxWFMxAiNsDN6pDYt/OT
- UAOyVuz7k3ofWpuYMJorv6M6FRnPy49B5uWcEy3LB3DfZe/dII3c/b+AT+WjTQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729631216;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=akpvMuqry4WLeDBINb41zGlnCaPOPYWZX6zAhIsKDQQ=;
- b=WXjV8fVQFw+5OgG0X2EaCl6+UQ+gDNUc7rj6Nh6P2fEYBj+QbHciu+rJ2nw1QYk1imVoqN
- 8LfYneL8tiObUkrYcN8/TSmNipLqFDj9xH12SahUYAzVDnBR3ZKYzahGvrIg1bygVriish
- wxPb4RdkY9aWkhx6S+mSa4N12dTe9Ohc7niPSAgOay2Tf0yj2c8XW0H9JvkflzxBsuCaTm
- OFWA4Qe+LcIFeW/sQve89CAagXLr5YaVb0vUKOK24LbUs4Zv18JyDqdBCDyC9iHEY78JJY
- uWXkIc/UFxA68OXqdQw0ROGaGUHi8OuRIXuFFhZQUDm7JJ/xM15DQaiKY99aJw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eqsoK/ur/TFIkTEpWyMTVL7qO3cOPC7WFXAmOzzn2Gs=;
+ b=W9RbED1al9uqSflOFr79h3eLhRSzVduz0e1sVJTL2Gpn8GDd3kwx8tqPGYW/fa2QPLgwnf
+ pQ4FiHCZUKiGuF+KXrIo2masOoiGEVCORYQptIInEZpZV/Bql7+/xgXUffo9fxPUuHAcfS
+ XueNx3aUZ6dXWQF3sK/2+fthcDSgCX7wqny/QxnAjvcezUQSSKca0Qp7maofOS04LTica4
+ B7qsrKY0MJkI9/VzbFfkKkOsjfTzrC8s2OV8O5G2iQDcSFg0aTqiPzodB53vplXDtWeqB7
+ JA85HFtv5HuBbpulpGspeO6Vg6g3uQnefKmEGlhvSmmAiCiUDRZktnrankMNDg==
 To: u-boot@lists.denx.de
-Date: Tue, 22 Oct 2024 23:06:16 +0200
-Message-ID: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+Date: Tue, 22 Oct 2024 23:06:17 +0200
+Message-ID: <20241022210633.271534-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-ID: df97bf3ef6659eb083f
-X-MBO-RS-META: 58jg1y6o4w4936ogmu313hc71xpdt34n
-X-Rspamd-Queue-Id: 4XY4Vp1wczz9sW9
+X-MBO-RS-META: ekm38recsie8udtuax6nxewbe1nzrax9
+X-MBO-RS-ID: 9aeda6d35f3270971c6
 X-Mailman-Approved-At: Thu, 24 Oct 2024 12:40:30 +0000
 Cc: Tom Rini <trini@konsulko.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -63,8 +65,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>, Michal Simek <michal.simek@amd.com>,
  Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [Uboot-stm32] [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
-	memories support in QSPI driver"
+Subject: [Uboot-stm32] [PATCH 2/6] Revert "spi: zynqmp_gqspi: Add parallel
+	memories support in GQSPI driver"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,17 +83,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
-
-This parallel/stacked support breaks basic SPI NOR support,
-e.g. this no longer works:
-
-=> sf probe && sf update 0x50000000 0 0x160000
-SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-device 0 offset 0x0, size 0x160000
-SPI flash failed in read step
-
-Since none of this seems to be in Linux either, revert it all.
+This reverts commit 217b0a28b6db3d664300f82df8e4cf342de3b8a0.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -113,269 +105,288 @@ Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/spi/zynq_qspi.c | 115 ++++------------------------------------
- 1 file changed, 11 insertions(+), 104 deletions(-)
+ drivers/spi/zynqmp_gqspi.c | 141 +++++--------------------------------
+ include/spi.h              |   4 --
+ 2 files changed, 16 insertions(+), 129 deletions(-)
 
-diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
-index f5b3fb5c125..e8bc196ce9e 100644
---- a/drivers/spi/zynq_qspi.c
-+++ b/drivers/spi/zynq_qspi.c
-@@ -1,8 +1,7 @@
+diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
+index 1d19b2606c5..ae795e50b0a 100644
+--- a/drivers/spi/zynqmp_gqspi.c
++++ b/drivers/spi/zynqmp_gqspi.c
+@@ -1,7 +1,7 @@
  // SPDX-License-Identifier: GPL-2.0+
  /*
 - * (C) Copyright 2013 - 2022, Xilinx, Inc.
-+ * (C) Copyright 2013 Xilinx, Inc.
-  * (C) Copyright 2015 Jagan Teki <jteki@openedev.com>
 - * (C) Copyright 2023, Advanced Micro Devices, Inc.
-  *
-  * Xilinx Zynq Quad-SPI(QSPI) controller driver (master mode only)
++ * (C) Copyright 2018 Xilinx
++ *
+  * Xilinx ZynqMP Generic Quad-SPI(QSPI) controller driver(master mode only)
   */
-@@ -13,12 +12,10 @@
- #include <log.h>
- #include <malloc.h>
- #include <spi.h>
--#include <spi_flash.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
+ 
+@@ -24,8 +24,6 @@
  #include <linux/bitops.h>
- #include <spi-mem.h>
+ #include <linux/err.h>
+ #include <linux/sizes.h>
+-#include <linux/mtd/spi-nor.h>
 -#include "../mtd/spi/sf_internal.h"
+ #include <zynqmp_firmware.h>
  
- DECLARE_GLOBAL_DATA_PTR;
+ #define GQSPI_GFIFO_STRT_MODE_MASK	BIT(29)
+@@ -89,9 +87,6 @@
+ #define SPI_XFER_ON_LOWER		1
+ #define SPI_XFER_ON_UPPER		2
  
-@@ -44,21 +41,6 @@ DECLARE_GLOBAL_DATA_PTR;
- #define ZYNQ_QSPI_TXD_00_01_OFFSET	0x80	/* Transmit 1-byte inst */
- #define ZYNQ_QSPI_TXD_00_10_OFFSET	0x84	/* Transmit 2-byte inst */
- #define ZYNQ_QSPI_TXD_00_11_OFFSET	0x88	/* Transmit 3-byte inst */
--#define ZYNQ_QSPI_FR_QOUT_CODE		0x6B    /* read instruction code */
+-#define GQSPI_SELECT_LOWER_CS          BIT(0)
+-#define GQSPI_SELECT_UPPER_CS          BIT(1)
 -
--#define QSPI_SELECT_LOWER_CS            BIT(0)
--#define QSPI_SELECT_UPPER_CS            BIT(1)
--
--/*
-- * QSPI Linear Configuration Register
-- *
-- * It is named Linear Configuration but it controls other modes when not in
-- * linear mode also.
-- */
--#define ZYNQ_QSPI_LCFG_TWO_MEM_MASK     0x40000000 /* QSPI Enable Bit Mask */
--#define ZYNQ_QSPI_LCFG_SEP_BUS_MASK     0x20000000 /* QSPI Enable Bit Mask */
--#define ZYNQ_QSPI_LCFG_U_PAGE           0x10000000 /* QSPI Upper memory set */
--#define ZYNQ_QSPI_LCFG_DUMMY_SHIFT      8
- 
- #define ZYNQ_QSPI_TXFIFO_THRESHOLD	1	/* Tx FIFO threshold level*/
- #define ZYNQ_QSPI_RXFIFO_THRESHOLD	32	/* Rx FIFO threshold level */
-@@ -118,11 +100,7 @@ struct zynq_qspi_priv {
+ #define GQSPI_DMA_ALIGN			0x4
+ #define GQSPI_MAX_BAUD_RATE_VAL		7
+ #define GQSPI_DFLT_BAUD_RATE_VAL	2
+@@ -188,14 +183,13 @@ struct zynqmp_qspi_priv {
  	int bytes_to_transfer;
  	int bytes_to_receive;
- 	unsigned int is_inst;
+ 	const struct spi_mem_op *op;
 -	unsigned int is_parallel;
--	unsigned int is_stacked;
 -	unsigned int u_page;
- 	unsigned cs_change:1;
--	unsigned is_strip:1;
+-	unsigned int bus;
+-	unsigned int stripe;
+-	unsigned int flags;
+-	u32 max_hz;
  };
  
- static int zynq_qspi_of_to_plat(struct udevice *bus)
-@@ -133,6 +111,7 @@ static int zynq_qspi_of_to_plat(struct udevice *bus)
- 
- 	plat->regs = (struct zynq_qspi_regs *)fdtdec_get_addr(blob,
- 							      node, "reg");
++__weak int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value)
++{
++	return 0;
++}
 +
- 	return 0;
- }
- 
-@@ -167,9 +146,6 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	/* Disable Interrupts */
- 	writel(ZYNQ_QSPI_IXR_ALL_MASK, &regs->idr);
- 
--	/* Disable linear mode as the boot loader may have used it */
--	writel(0x0, &regs->lqspicfg);
--
- 	/* Clear the TX and RX threshold reg */
- 	writel(ZYNQ_QSPI_TXFIFO_THRESHOLD, &regs->txftr);
- 	writel(ZYNQ_QSPI_RXFIFO_THRESHOLD, &regs->rxftr);
-@@ -187,12 +163,13 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	confr |= ZYNQ_QSPI_CR_IFMODE_MASK | ZYNQ_QSPI_CR_MCS_MASK |
- 		ZYNQ_QSPI_CR_PCS_MASK | ZYNQ_QSPI_CR_FW_MASK |
- 		ZYNQ_QSPI_CR_MSTREN_MASK;
--
--	if (priv->is_stacked)
--		confr |= 0x10;
--
- 	writel(confr, &regs->cr);
- 
-+	/* Disable the LQSPI feature */
-+	confr = readl(&regs->lqspicfg);
-+	confr &= ~ZYNQ_QSPI_LQSPICFG_LQMODE_MASK;
-+	writel(confr, &regs->lqspicfg);
-+
- 	/* Enable SPI */
- 	writel(ZYNQ_QSPI_ENR_SPI_EN_MASK, &regs->enr);
- }
-@@ -203,7 +180,6 @@ static int zynq_qspi_child_pre_probe(struct udevice *bus)
- 	struct zynq_qspi_priv *priv = dev_get_priv(bus->parent);
- 
- 	priv->max_hz = slave->max_hz;
--	slave->multi_cs_cap = true;
- 
- 	return 0;
- }
-@@ -386,8 +362,8 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 	unsigned len, offset;
- 	struct zynq_qspi_regs *regs = priv->regs;
- 	static const unsigned offsets[4] = {
--		ZYNQ_QSPI_TXD_00_01_OFFSET, ZYNQ_QSPI_TXD_00_10_OFFSET,
--		ZYNQ_QSPI_TXD_00_11_OFFSET, ZYNQ_QSPI_TXD_00_00_OFFSET };
-+		ZYNQ_QSPI_TXD_00_00_OFFSET, ZYNQ_QSPI_TXD_00_01_OFFSET,
-+		ZYNQ_QSPI_TXD_00_10_OFFSET, ZYNQ_QSPI_TXD_00_11_OFFSET };
- 
- 	while ((fifocount < size) &&
- 			(priv->bytes_to_transfer > 0)) {
-@@ -409,11 +385,7 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 				return;
- 			len = priv->bytes_to_transfer;
- 			zynq_qspi_write_data(priv, &data, len);
--			if ((priv->is_parallel || priv->is_stacked) &&
--			    !priv->is_inst && (len % 2))
--				len++;
--			offset = (priv->rx_buf) ?
--				 offsets[3] : offsets[len - 1];
-+			offset = (priv->rx_buf) ? offsets[0] : offsets[len];
- 			writel(data, &regs->cr + (offset / 4));
- 		}
- 	}
-@@ -518,7 +490,6 @@ static int zynq_qspi_irq_poll(struct zynq_qspi_priv *priv)
-  */
- static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
+ static int zynqmp_qspi_of_to_plat(struct udevice *bus)
  {
--	static u8 current_u_page;
- 	u32 data = 0;
- 	struct zynq_qspi_regs *regs = priv->regs;
+ 	struct zynqmp_qspi_plat *plat = dev_get_plat(bus);
+@@ -240,30 +234,8 @@ static u32 zynqmp_qspi_bus_select(struct zynqmp_qspi_priv *priv)
+ {
+ 	u32 gqspi_fifo_reg = 0;
  
-@@ -528,34 +499,6 @@ static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
- 	priv->bytes_to_transfer = priv->len;
- 	priv->bytes_to_receive = priv->len;
- 
--	if (priv->is_parallel)
--		writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
--			ZYNQ_QSPI_LCFG_SEP_BUS_MASK |
--			(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
--			ZYNQ_QSPI_FR_QOUT_CODE), &regs->lqspicfg);
--
--	if (priv->is_inst && priv->is_stacked && current_u_page != priv->u_page) {
--		if (priv->u_page) {
--			/* Configure two memories on shared bus
--			 * by enabling upper mem
--			 */
--			writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
--				ZYNQ_QSPI_LCFG_U_PAGE |
--				(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
--				ZYNQ_QSPI_FR_QOUT_CODE),
--				&regs->lqspicfg);
--		} else {
--			/* Configure two memories on shared bus
--			 * by enabling lower mem
--			 */
--			writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
--				(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
--				ZYNQ_QSPI_FR_QOUT_CODE),
--				&regs->lqspicfg);
--		}
--		current_u_page = priv->u_page;
+-	if (priv->is_parallel) {
+-		if (priv->bus == SPI_XFER_ON_BOTH)
+-			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+-					 GQSPI_GFIFO_UP_BUS |
+-					 GQSPI_GFIFO_CS_UPPER |
+-					 GQSPI_GFIFO_CS_LOWER;
+-		else if (priv->bus == SPI_XFER_ON_LOWER)
+-			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+-					 GQSPI_GFIFO_CS_UPPER |
+-					 GQSPI_GFIFO_CS_LOWER;
+-		else if (priv->bus == SPI_XFER_ON_UPPER)
+-			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
+-					 GQSPI_GFIFO_CS_LOWER |
+-					 GQSPI_GFIFO_CS_UPPER;
+-		else
+-			debug("Wrong Bus selection:0x%x\n", priv->bus);
+-	} else {
+-		if (priv->u_page)
+-			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+-					 GQSPI_GFIFO_CS_UPPER;
+-		else
+-			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
+-					 GQSPI_GFIFO_CS_LOWER;
 -	}
--
- 	if (priv->len < 4)
- 		zynq_qspi_fill_tx_fifo(priv, priv->len);
- 	else
-@@ -655,8 +598,7 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	 * Assume that the beginning of a transfer with bits to
- 	 * transmit must contain a device command.
- 	 */
--	if ((dout && flags & SPI_XFER_BEGIN) ||
--	    (flags & SPI_XFER_END && !priv->is_strip))
-+	if (dout && flags & SPI_XFER_BEGIN)
- 		priv->is_inst = 1;
- 	else
- 		priv->is_inst = 0;
-@@ -666,11 +608,6 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	else
- 		priv->cs_change = 0;
++	gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS |
++			 GQSPI_GFIFO_CS_LOWER;
  
--	if (flags & SPI_XFER_U_PAGE)
+ 	return gqspi_fifo_reg;
+ }
+@@ -323,15 +295,8 @@ static void zynqmp_qspi_chipselect(struct zynqmp_qspi_priv *priv, int is_on)
+ 		gqspi_fifo_reg |= GQSPI_SPI_MODE_SPI |
+ 				  GQSPI_IMD_DATA_CS_ASSERT;
+ 	} else {
+-		if (priv->is_parallel) {
+-			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS |
+-					 GQSPI_GFIFO_LOW_BUS;
+-		} else if (priv->u_page) {
+-			gqspi_fifo_reg = GQSPI_GFIFO_UP_BUS;
+-		} else {
+-			gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
+-			gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
+-		}
++		gqspi_fifo_reg = GQSPI_GFIFO_LOW_BUS;
++		gqspi_fifo_reg |= GQSPI_IMD_DATA_CS_DEASSERT;
+ 	}
+ 
+ 	zynqmp_qspi_fill_gen_fifo(priv, gqspi_fifo_reg);
+@@ -402,13 +367,12 @@ static int zynqmp_qspi_set_speed(struct udevice *bus, uint speed)
+ 
+ 	log_debug("%s, Speed: %d, Max: %d\n", __func__, speed, plat->frequency);
+ 
+-	/*
+-	 * If speed == 0 or speed > max freq, then set speed to highest
+-	 */
+-	if (!speed || speed > priv->max_hz)
+-		speed = priv->max_hz;
++	if (speed > plat->frequency)
++		speed = plat->frequency;
+ 
+ 	if (plat->speed_hz != speed) {
++		/* Set the clock frequency */
++		/* If speed == 0, default to lowest speed */
+ 		while ((baud_rate_val < 8) &&
+ 		       ((plat->frequency /
+ 		       (2 << baud_rate_val)) > speed))
+@@ -430,18 +394,6 @@ static int zynqmp_qspi_set_speed(struct udevice *bus, uint speed)
+ 	return 0;
+ }
+ 
+-static int zynqmp_qspi_child_pre_probe(struct udevice *bus)
+-{
+-	struct spi_slave *slave = dev_get_parent_priv(bus);
+-	struct zynqmp_qspi_priv *priv = dev_get_priv(bus->parent);
+-
+-	slave->multi_cs_cap = true;
+-	slave->bytemode = SPI_4BYTE_MODE;
+-	priv->max_hz = slave->max_hz;
+-
+-	return 0;
+-}
+-
+ static int zynqmp_qspi_probe(struct udevice *bus)
+ {
+ 	struct zynqmp_qspi_plat *plat = dev_get_plat(bus);
+@@ -506,17 +458,12 @@ static int zynqmp_qspi_set_mode(struct udevice *bus, uint mode)
+ 
+ static int zynqmp_qspi_fill_tx_fifo(struct zynqmp_qspi_priv *priv, u32 size)
+ {
+-	u32 data, ier;
++	u32 data;
+ 	int ret = 0;
+ 	struct zynqmp_qspi_regs *regs = priv->regs;
+ 	u32 *buf = (u32 *)priv->tx_buf;
+ 	u32 len = size;
+ 
+-	/* Enable interrupts */
+-	ier = readl(&regs->ier);
+-	ier |= GQSPI_IXR_ALL_MASK | GQSPI_IXR_TXFIFOEMPTY_MASK;
+-	writel(ier, &regs->ier);
+-
+ 	while (size) {
+ 		ret = wait_for_bit_le32(&regs->isr, GQSPI_IXR_TXNFULL_MASK, 1,
+ 					GQSPI_TIMEOUT, 1);
+@@ -639,9 +586,6 @@ static int zynqmp_qspi_genfifo_fill_tx(struct zynqmp_qspi_priv *priv)
+ 	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(priv->op->data.buswidth);
+ 	gen_fifo_cmd |= GQSPI_GFIFO_TX | GQSPI_GFIFO_DATA_XFR_MASK;
+ 
+-	if (priv->stripe)
+-		gen_fifo_cmd |= GQSPI_GFIFO_STRIPE_MASK;
+-
+ 	while (priv->len) {
+ 		len = zynqmp_qspi_calc_exp(priv, &gen_fifo_cmd);
+ 		zynqmp_qspi_fill_gen_fifo(priv, gen_fifo_cmd);
+@@ -776,9 +720,6 @@ static int zynqmp_qspi_genfifo_fill_rx(struct zynqmp_qspi_priv *priv)
+ 	gen_fifo_cmd |= zynqmp_qspi_genfifo_mode(priv->op->data.buswidth);
+ 	gen_fifo_cmd |= GQSPI_GFIFO_RX | GQSPI_GFIFO_DATA_XFR_MASK;
+ 
+-	if (priv->stripe)
+-		gen_fifo_cmd |= GQSPI_GFIFO_STRIPE_MASK;
+-
+ 	/*
+ 	 * Check if receive buffer is aligned to 4 byte and length
+ 	 * is multiples of four byte as we are using dma to receive.
+@@ -819,33 +760,6 @@ static int zynqmp_qspi_release_bus(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static bool zynqmp_qspi_update_stripe(const struct spi_mem_op *op)
+-{
+-	/*
+-	 * This is a list of opcodes for which we must not use striped access
+-	 * even in dual parallel mode, but instead broadcast the same data to
+-	 * both chips. This is primarily erase commands and writing some
+-	 * registers.
+-	 */
+-	switch (op->cmd.opcode) {
+-	case SPINOR_OP_BE_4K:
+-	case SPINOR_OP_BE_32K:
+-	case SPINOR_OP_CHIP_ERASE:
+-	case SPINOR_OP_SE:
+-	case SPINOR_OP_BE_32K_4B:
+-	case SPINOR_OP_SE_4B:
+-	case SPINOR_OP_BE_4K_4B:
+-	case SPINOR_OP_WRSR:
+-	case SPINOR_OP_WREAR:
+-	case SPINOR_OP_BRWR:
+-		return false;
+-	case SPINOR_OP_WRSR2:
+-		return op->addr.nbytes != 0;
+-	default:
+-		return true;
+-	}
+-}
+-
+ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 			       const struct spi_mem_op *op)
+ {
+@@ -857,25 +771,6 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
+ 	priv->rx_buf = op->data.buf.in;
+ 	priv->len = op->data.nbytes;
+ 
+-	if (slave->flags & SPI_XFER_U_PAGE)
 -		priv->u_page = 1;
 -	else
 -		priv->u_page = 0;
 -
- 	zynq_qspi_transfer(priv);
- 
- 	return 0;
-@@ -734,35 +671,14 @@ static int zynq_qspi_set_mode(struct udevice *bus, uint mode)
- 	return 0;
- }
- 
--bool update_stripe(const struct spi_mem_op *op)
--{
--	if (op->cmd.opcode == SPINOR_OP_BE_4K ||
--	    op->cmd.opcode == SPINOR_OP_CHIP_ERASE ||
--	    op->cmd.opcode == SPINOR_OP_SE ||
--	    op->cmd.opcode == SPINOR_OP_WREAR ||
--	    op->cmd.opcode == SPINOR_OP_WRSR
--	)
--		return false;
--
--	return true;
--}
--
- static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			     const struct spi_mem_op *op)
- {
--	struct udevice *bus = slave->dev->parent;
--	struct zynq_qspi_priv *priv = dev_get_priv(bus);
- 	int op_len, pos = 0, ret, i;
- 	unsigned int flag = 0;
- 	const u8 *tx_buf = NULL;
- 	u8 *rx_buf = NULL;
- 
--	if ((slave->flags & QSPI_SELECT_LOWER_CS) &&
--	    (slave->flags & QSPI_SELECT_UPPER_CS))
+-	if ((slave->flags & GQSPI_SELECT_LOWER_CS) &&
+-	    (slave->flags & GQSPI_SELECT_UPPER_CS))
 -		priv->is_parallel = true;
--	if (slave->flags & SPI_XFER_STACKED)
--		priv->is_stacked = true;
 -
- 	if (op->data.nbytes) {
- 		if (op->data.dir == SPI_MEM_DATA_IN)
- 			rx_buf = op->data.buf.in;
-@@ -787,9 +703,6 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	if (op->dummy.nbytes)
- 		memset(op_buf + pos, 0xff, op->dummy.nbytes);
+-	priv->stripe = 0;
+-	priv->bus = 0;
+-
+-	if (priv->is_parallel) {
+-		if (slave->flags & SPI_XFER_MASK)
+-			priv->bus = (slave->flags & SPI_XFER_MASK) >> 8;
+-		if (zynqmp_qspi_update_stripe(op))
+-			priv->stripe = 1;
+-	}
+-
+ 	zynqmp_qspi_chipselect(priv, 1);
  
--	if (slave->flags & SPI_XFER_U_PAGE)
--		flag |= SPI_XFER_U_PAGE;
--
- 	/* 1st transfer: opcode + address + dummy cycles */
- 	/* Make sure to set END bit if no tx or rx data messages follow */
- 	if (!tx_buf && !rx_buf)
-@@ -800,9 +713,6 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	if (ret)
- 		return ret;
+ 	/* Send opcode, addr, dummy */
+@@ -889,9 +784,6 @@ static int zynqmp_qspi_exec_op(struct spi_slave *slave,
  
--	if (priv->is_parallel)
--		priv->is_strip = update_stripe(op);
--
- 	/* 2nd transfer: rx or tx data path */
- 	if (tx_buf || rx_buf) {
- 		ret = zynq_qspi_xfer(slave->dev, op->data.nbytes * 8, tx_buf,
-@@ -811,9 +721,6 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			return ret;
- 	}
+ 	zynqmp_qspi_chipselect(priv, 0);
  
 -	priv->is_parallel = false;
--	priv->is_stacked = false;
 -	slave->flags &= ~SPI_XFER_MASK;
- 	spi_release_bus(slave);
+-
+ 	return ret;
+ }
  
- 	return 0;
+@@ -922,5 +814,4 @@ U_BOOT_DRIVER(zynqmp_qspi) = {
+ 	.plat_auto	= sizeof(struct zynqmp_qspi_plat),
+ 	.priv_auto	= sizeof(struct zynqmp_qspi_priv),
+ 	.probe  = zynqmp_qspi_probe,
+-	.child_pre_probe = zynqmp_qspi_child_pre_probe,
+ };
+diff --git a/include/spi.h b/include/spi.h
+index 3a92d02f215..b7148864e78 100644
+--- a/include/spi.h
++++ b/include/spi.h
+@@ -38,9 +38,6 @@
+ 
+ #define SPI_DEFAULT_WORDLEN	8
+ 
+-#define SPI_3BYTE_MODE 0x0
+-#define SPI_4BYTE_MODE 0x1
+-
+ /* SPI transfer flags */
+ #define SPI_XFER_STRIPE	(1 << 6)
+ #define SPI_XFER_MASK	(3 << 8)
+@@ -175,7 +172,6 @@ struct spi_slave {
+ 	 * at once.
+ 	 */
+ 	bool multi_cs_cap;
+-	u32 bytemode;
+ };
+ 
+ /**
 -- 
 2.45.2
 

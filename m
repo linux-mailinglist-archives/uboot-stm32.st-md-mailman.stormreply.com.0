@@ -2,64 +2,62 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2B4B9AE49C
-	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Oct 2024 14:16:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 708749AEC4E
+	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Oct 2024 18:36:42 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8130EC78F63;
-	Thu, 24 Oct 2024 12:16:59 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com
- [209.85.208.51])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 128DDC78F6B;
+	Thu, 24 Oct 2024 16:36:42 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0AE68C78038
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5F376C78F69
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Oct 2024 12:16:52 +0000 (UTC)
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-5c937b5169cso1364662a12.1
+ Thu, 24 Oct 2024 16:36:34 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-43162cf1eaaso15459995e9.0
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Oct 2024 05:16:52 -0700 (PDT)
+ Thu, 24 Oct 2024 09:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729772211; x=1730377011;
+ d=chromium.org; s=google; t=1729787794; x=1730392594;
  darn=st-md-mailman.stormreply.com; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fZtkhbE0+ekr8pcO1wAyUtXKcxXDLZFcmy143byAU5E=;
- b=EFkhQ53MKyZVOxweI2yjghRqEQRrdLdPjfIrcy8TwyBofGoBIM1iK11JbwKp8M6trk
- ZbFbX2WgMzQy3JwGDZMKEDV+mVCxStnrztbtmCOi5FWXK8OiXKiTevrqUB1B+uCQbd5P
- JpFaMelXyYJI+9GjBFrYWFVNRfJ93a8dO+SwhQxTmhnz2y5rWuw7q1o4i5WgWSGiQPxL
- K+iSsNHGGyP58S9pi4Rry/m+MtKccQtpZ+j5thjLKFpPsXf0Me652xI7/E7Wckvbm41L
- IY9X5ZJNDIliS4FJCwXQvQ/RnSGWoMWJdZmw8UXcIEDkzv8FFnMB6fItGfkOCWuDu5EV
- 2UnQ==
+ bh=Y6mdZGc95iFCptp8R5uchmEEMpQZIf+cG9tUgVX4X6U=;
+ b=QfL5CuuC+Tl5OpT/QZAriq0/mC+ZqoAkvxOUdySOjIJTik0rxH5ZDRV3k0YG/e6lq3
+ RtXW72Bg9RQ9MTk+7LOp2YsS7ogYvZCMq2VoWkCoOdhjT9gt5HgTcrg32xsRPZK1676F
+ ukevb9yC91bVt1Da1ZIgqb+oHIdNTvMCjFUR4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729772211; x=1730377011;
+ d=1e100.net; s=20230601; t=1729787794; x=1730392594;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=fZtkhbE0+ekr8pcO1wAyUtXKcxXDLZFcmy143byAU5E=;
- b=RKxy5aulQnwxBqclZBZ3F/8LBFfV1jjxMwi9qOqVD7+/5iE6KomTS+1AiBWSYT+hJG
- UNphGhSw+HCg8W6ir6vwAq4DVTn1SxmXolzTPJi4GeZnemnicw1lQvvGO5kMivJNSeKd
- 4CEa+SNcA1Pi4lnVq2a6eIeYXVxxcM2MssrSuDiBK9HRBmQC+qVXL1vkb8Q7/6AQjwD5
- Lp6FKuD58LCXT3Gu4tUUxAAoCi1NYrWxkS58DVi3ZZlq0m5gbhhDHIgTkLqJnZW0eFH7
- sbtp+xDwEvmY9Z5oRoc4CYNQBY+HU6V26LplvMxArLc7kjSesVQC0mVkRclxk7tQQCD+
- NZyQ==
+ bh=Y6mdZGc95iFCptp8R5uchmEEMpQZIf+cG9tUgVX4X6U=;
+ b=u0X9SPCewiCyrJv+jGqzOaW53AsKLHNgpJG9GnL+dmEFFgvVSEUOuNghqlW8OYuWnp
+ +mbPvTcQZVOg1MbQ45HP24k3k3NtmSo54SwtkKP53MVk1Zvb/IPFYAigkVpgnD6huE/t
+ eio6db2a0xFmtgrKMq/QDGL8FX83/Tdsyb95zmc0EPZZ5IZJ3ol7x3YZSAtxjZTT7ENF
+ Bu7QsLJkE2XBFXxBEGmwdDllvZz1l0ACXUHpg3fO1XNyMG6ll3boaY/CqOf3APqG3uDQ
+ uTN5HRtR9rFi3y5++IeuSK8xAr1s46yokeTExw5NG49FhEcS+X70SHtdO831nOK81co8
+ EY7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/FonzMxoNvTpgUjFZzSRyr953nC/9FGAHoa2m5xFBAS7wpcvtRoUFXT9MqVLRyKEDivG6orpC2b8LIA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxpKMQc3yB1OW+1rDm7Esjz51lURUy6Vd37GC6lWJBcMjgUU6nI
- Y0w92c984AkTu1cdSh+U6pcLI5BaLVW5dGarCOeyOrAEssJXtlD2s9VrurC8einPzzbW0FXW++5
- z/iciJtJc/azB7CVkYjGT1FTi+XM=
-X-Google-Smtp-Source: AGHT+IE55BSJ67yR8/wyoCIKddlNUZQ3EKgYO20nkoG8YLABHy8krUluwsbXxadC7QTKHFxzwTBp+Nmffju3poPK324=
-X-Received: by 2002:a05:6402:5288:b0:5c9:7395:b9b6 with SMTP id
- 4fb4d7f45d1cf-5cba2110aa3mr2066904a12.16.1729772211170; Thu, 24 Oct 2024
- 05:16:51 -0700 (PDT)
+ AJvYcCXx0OYp2TktvjUrGPjRwRlPCKa4wBFSPznEwRYX7p2S7ol1LcSbtmT1TyvbNP22dQHyNEKSaGX80nJrrA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzBEx7soz7FckGkxcmoG2LipRrgwbgOY9ziZL8RAaYXD8ZlaW/c
+ 6zCVzdY3GLORSmiGHclK0VauGKnKBeLZa8UhaxzC5kvNsgX3GKL1m8R6sAx8TfTWRrd8V5MWTLr
+ oljuLa3d7dR/bdEFZUWSepZLTbjBbuSpl3Efe
+X-Google-Smtp-Source: AGHT+IHJqfwQ1ZstZ/zPG7pqAjdMMjWMp0GNUrAWNPD5YbVHYefSBeTJEoNI7dlb/LY/eLpC5GgIk+u0Ly0mkaeVoAw=
+X-Received: by 2002:adf:ea92:0:b0:37d:5130:b380 with SMTP id
+ ffacd0b85a97d-37efcf067bamr6243097f8f.23.1729787793669; Thu, 24 Oct 2024
+ 09:36:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241021113839.318572-1-sjg@chromium.org>
  <20241021172613.GN4959@bill-the-cat>
  <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
-In-Reply-To: <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 24 Oct 2024 13:16:39 +0100
-Message-ID: <CALeDE9OA1EfoddO8yxsjvePAOqy2dMupU2uZnuZMZNtAkgdYZA@mail.gmail.com>
-To: Tom Rini <trini@konsulko.com>
+ <CALeDE9OA1EfoddO8yxsjvePAOqy2dMupU2uZnuZMZNtAkgdYZA@mail.gmail.com>
+In-Reply-To: <CALeDE9OA1EfoddO8yxsjvePAOqy2dMupU2uZnuZMZNtAkgdYZA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 24 Oct 2024 18:36:21 +0200
+Message-ID: <CAFLszThzGGfPU9wWdxXLfmWpPB4LvGFALptHU_PJwn8BUs4Cqg@mail.gmail.com>
+To: Peter Robinson <pbrobinson@gmail.com>
 Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Devarsh Thakkar <devarsht@ti.com>, Sean Edmond <seanedmond@microsoft.com>,
@@ -68,7 +66,7 @@ Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
  This contributor prefers not to receive mails <noreply@example.com>,
  uboot-stm32@st-md-mailman.stormreply.com, Andy Fleming <afleming@gmail.com>,
  Stefan Roese <sr@denx.de>, Johan Jonker <jbx6244@gmail.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
  Tien Fong Chee <tien.fong.chee@intel.com>, Angelo Dureghello <angelo@sysam.it>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Javier Martinez Canillas <javierm@redhat.com>,
@@ -94,12 +92,12 @@ Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
  Samuel Holland <samuel@sholland.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Kamil Lulko <kamil.lulko@gmail.com>, Mario Six <mario.six@gdsys.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Richard Weinberger <richard@nod.at>, Artur Rojek <artur@conclusive.pl>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
 Subject: Re: [Uboot-stm32] [PATCH v2 00/25] led: Remove old status-LED code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -118,61 +116,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Tue, 22 Oct 2024 at 09:48, Peter Robinson <pbrobinson@gmail.com> wrote:
+Hi Peter,
+
+On Thu, 24 Oct 2024 at 14:16, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> > On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
-> > > There has been an LED framework in U-Boot which uses driver model for
-> > > about 9 years now. Recent work is underway to improve it and provide
-> > > more features. It is probably a good time to drop the old code, which
-> > > is only used by 5 boards:
-> > >
-> > >    ./tools/qconfig.py -f LED_STATUS
-> > >    5 matches
-> > >    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
-> > >    socfpga_vining_fpga
-> > >
-> > > This series attempts that.
-> > >
-> > > Changes in v2:
-> > > - Combine code-removal and defconfig changes
-> > > - Add a patch to enable LED and LED_BOOT for these boards
-> > > - Add a patch to enable LED and LED_BOOT for these boards
-> > > - Enable LED on the 5 affected platforms
-> > > - Reorder patches for bisectability
+> On Tue, 22 Oct 2024 at 09:48, Peter Robinson <pbrobinson@gmail.com> wrote:
 > >
-> > So I believe this means you missed the feedback of just doing the blind
-> > migration rather than disabling the feature, like we used to often do
-> > for cases where it's just a matter of changing CONFIG options. It
-> > should:
-> > - Not introduce a failure to build
-> > - Just work on platforms with either OF_UPSTREAM or semi-recent device
-> >   trees
-> > - Just start working on those platforms when they do move to
-> >   OF_UPSTREAM.
+> > > On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
+> > > > There has been an LED framework in U-Boot which uses driver model for
+> > > > about 9 years now. Recent work is underway to improve it and provide
+> > > > more features. It is probably a good time to drop the old code, which
+> > > > is only used by 5 boards:
+> > > >
+> > > >    ./tools/qconfig.py -f LED_STATUS
+> > > >    5 matches
+> > > >    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
+> > > >    socfpga_vining_fpga
+> > > >
+> > > > This series attempts that.
+> > > >
+> > > > Changes in v2:
+> > > > - Combine code-removal and defconfig changes
+> > > > - Add a patch to enable LED and LED_BOOT for these boards
+> > > > - Add a patch to enable LED and LED_BOOT for these boards
+> > > > - Enable LED on the 5 affected platforms
+> > > > - Reorder patches for bisectability
+> > >
+> > > So I believe this means you missed the feedback of just doing the blind
+> > > migration rather than disabling the feature, like we used to often do
+> > > for cases where it's just a matter of changing CONFIG options. It
+> > > should:
+> > > - Not introduce a failure to build
+> > > - Just work on platforms with either OF_UPSTREAM or semi-recent device
+> > >   trees
+> > > - Just start working on those platforms when they do move to
+> > >   OF_UPSTREAM.
+> >
+> > Also when the migration was first bought up I had a quick look at how
+> > to do it for the pinephone and I came up empty handed. Now I've seen
+> > the patch for the pinephone and grep for LED_BOOT the only form of
+> > docs I find is in the Kconfig and include/led.h, they refer to things
+> > that aren't in-tree and the out of tree reference to
+> > dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
+> > ./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
+> > reference to boott leds at all.
+> >
+> > I feel the reason there's been a recent move to add users of the
+> > obsolete method is because the docs for that actually existed and
+> > there's nothing for the new method. Maybe the first patch in the
+> > series should be to add some actually useful doc rahter than go from
+> > docs for the old method to nothing.
 >
-> Also when the migration was first bought up I had a quick look at how
-> to do it for the pinephone and I came up empty handed. Now I've seen
-> the patch for the pinephone and grep for LED_BOOT the only form of
-> docs I find is in the Kconfig and include/led.h, they refer to things
-> that aren't in-tree and the out of tree reference to
-> dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
-> ./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
-> reference to boott leds at all.
+> So I've tried the patch on the pinephone and it doesn't work.
 >
-> I feel the reason there's been a recent move to add users of the
-> obsolete method is because the docs for that actually existed and
-> there's nothing for the new method. Maybe the first patch in the
-> series should be to add some actually useful doc rahter than go from
-> docs for the old method to nothing.
+> I suspect you need to at least enable a led driver like LED_GPIO but
+> even when I do that, while I can make the led turn on/off manually, it
+> doesn't come on in early boot like it does with the old code. There's
+> definitely something else missing here.
 
-So I've tried the patch on the pinephone and it doesn't work.
+It's good that you have one of these boards. Would you be able to
+debug it and send a patch?
 
-I suspect you need to at least enable a led driver like LED_GPIO but
-even when I do that, while I can make the led turn on/off manually, it
-doesn't come on in early boot like it does with the old code. There's
-definitely something else missing here.
-
-Peter
+Regards,
+Simon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

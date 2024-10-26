@@ -2,108 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A9559AECAA
-	for <lists+uboot-stm32@lfdr.de>; Thu, 24 Oct 2024 18:52:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1645F9B1AB1
+	for <lists+uboot-stm32@lfdr.de>; Sat, 26 Oct 2024 22:18:30 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0F506C78F6B;
-	Thu, 24 Oct 2024 16:52:51 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B6CCEC78020;
+	Sat, 26 Oct 2024 20:18:29 +0000 (UTC)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1DB3AC78018
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sat, 26 Oct 2024 20:18:22 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 48478C78F69
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Oct 2024 16:52:43 +0000 (UTC)
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-5c94b0b466cso1398762a12.0
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 24 Oct 2024 09:52:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729788763; x=1730393563;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oenq2X7z2zaYul/29pngbzDgtCwAdsg+ZDSf6N5KXN0=;
- b=RlrNV9qogJ0OJL95IHMqT62vDCet7QS27UU3hPkD+dvlCB2PvGB6jeMhKmUeEP+XGD
- MI63f69795T2giyyGHCxrTkKfwq+yIbD8N2kVQlgl5CCQkfL8qRUME4GP3Bm0SwGkvwm
- +Rx8mBFX6h2Y1Hh7tBIZYOf4uA76dQDT5ZM3l5RSKkh2WlYrGZUh0ZsZ+9LsWyN2CYOh
- oZs8fDRtwg5A8V0bDakkjluwUeRtQkn93wCLcSm1YLqKY6b3olBOn2+8yj40vZyU3yOn
- loHF5Ku6e5lU+WQoYlVC2s6GX7iiFB1csiaWXiKayfbE0M3nZhMicBLRiipRSKqmJyZj
- m3XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729788763; x=1730393563;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=oenq2X7z2zaYul/29pngbzDgtCwAdsg+ZDSf6N5KXN0=;
- b=M0pKFrOuq3jJ81dPlLUArXELuYezYozXozVtQprT8xRy52cCv0cQJ8FJ56vrMXpEkd
- VCysaBRf3kA2G0YDMST3yReDDiXrT6eTBL3xcj6JCDsFPvl+tXcK0rNS9qr0nCRRqyrR
- LEFfbPTVTzZvE3URhoU7qN/UhmUHuPs4n8OHKNvG8fk1vThILx2dxcwe+oLnHvE6rGyj
- yZvPUQvJvaLgRqZo89SB5aJ+VrhK3T0UdTokXFSy8djehUf9hHAI8j1pO4/Iz4koi3g/
- xZH3qPjajFPhxtk64cSS/fdemEKE9A51jZHgc07HdfmiMYPo+6BcBJ63WLfgBg1FD6jK
- XjbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9vbYyNuhSznoyKwU4y+F2Z9MthIxjd4dylTnEXlU2Yl7BwT1NrRd6nJGSh4PvJmBOucUDjxMdFaYCMQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwqZc00VvVa39WOADURBMXbfCoxQK0ze3AZnoAmlLEM+ybJngak
- Ty5AhxqBa4X4se71jjq+6lthlAi1cR+EmmCxxHiRZdW9J/bPxZEMDs7vzPeKCarAMrcXZtLtciY
- IJ66iuLolqzWOi2GHA0qZt0d50m0=
-X-Google-Smtp-Source: AGHT+IG4NiAIcrET4kI6FLDfF9ZbxaqASRHQjAoF8Cc2tYzqbyfGoI9vFTK0RXcntPYtbPPCbeJH0cGJyXMTC1REStU=
-X-Received: by 2002:a05:6402:34ca:b0:5cb:6ca4:f4cd with SMTP id
- 4fb4d7f45d1cf-5cba2427f70mr2020156a12.7.1729788762277; Thu, 24 Oct 2024
- 09:52:42 -0700 (PDT)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4XbWDs3zxRz9sW6;
+ Sat, 26 Oct 2024 22:18:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729973901;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rfskVvXTb2z8wYUr/yAe+p/aATAX3rByMtrBTKL6EWo=;
+ b=DcCjLB9METbRLh34xI0tL3uhQGkeRLB0BYwERlA5S0pFpXHrRGM5gdrxgQJ75Fk4uek7hz
+ UZEfKI39wQ0ADksQPEbaPuaCxfozEomYZr5dfBY9GWxeR1crawzsiav0u7lioR2QYAsQ9i
+ 6E50wGo55U4N+DIuys6nXerxzJPk00LlQaoYp75h42fiBMbGaZ8Lhs0RwkAzlWyAKKthYB
+ 1iX3kUevukQs+6a/1rySe3EpXmOyGkUjzA+8YTYzLRErVNpJeU+GJ2kx0sBt0eqkfcOvTu
+ helxBBr7TrKDmfeXCWYby6b5/fuRaFbdXFdsOErZk7EnpxhZQaWWSN/Wd9GmSA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1729973899;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rfskVvXTb2z8wYUr/yAe+p/aATAX3rByMtrBTKL6EWo=;
+ b=uHuaQ4yzb1xP8qCgTgXIqCZhibkbUrcYyLyE9W+sIGmndQarcd60dVTXNAHo9C0ITWAL/D
+ hJRn51RHoOzaivqRFlS1IBCdBZ3HJGX/n1SB/yUapn+Pe466DAN8tGK0C3kA/N4MyaaMio
+ n4CpDgmLR6NYkQBTw/kakekTKcqKDRdQ5nIXn2P5dCoTUYGnXn5gwixwAh7tX8d5anTzZp
+ QRc/aJf3r+IH5EkHTVPV46vwWQkUA6/FUkKuAQ1wEgbopoGl65I51c9SolAt1dWdPiKRye
+ mlUuVj6mbMuEUiObrWCGOiTtPN2FRgh0Vnpx24IYTwFAobHDKB7AatXQTGGyxA==
+To: u-boot@lists.denx.de
+Date: Sat, 26 Oct 2024 22:16:18 +0200
+Message-ID: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20241021113839.318572-1-sjg@chromium.org>
- <20241021172613.GN4959@bill-the-cat>
- <CALeDE9OVd49GiW+M8ygEA5CCF7F8f+MD4okNtk0a8aM1oqsTDQ@mail.gmail.com>
- <CALeDE9OA1EfoddO8yxsjvePAOqy2dMupU2uZnuZMZNtAkgdYZA@mail.gmail.com>
- <CAFLszThzGGfPU9wWdxXLfmWpPB4LvGFALptHU_PJwn8BUs4Cqg@mail.gmail.com>
-In-Reply-To: <CAFLszThzGGfPU9wWdxXLfmWpPB4LvGFALptHU_PJwn8BUs4Cqg@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Thu, 24 Oct 2024 17:52:31 +0100
-Message-ID: <CALeDE9NjjmHUDBkQ39wWkBnP-xXS5OTLy+=-prSQS38WcjHDDA@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Wan Yee Lau <wan.yee.lau@intel.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Devarsh Thakkar <devarsht@ti.com>, Sean Edmond <seanedmond@microsoft.com>,
- Sam Edwards <CFSworks@gmail.com>, Sean Anderson <seanga2@gmail.com>,
- Charles Hardin <ckhardin@gmail.com>, Alexander Gendin <agendin@matrox.com>,
- This contributor prefers not to receive mails <noreply@example.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Andy Fleming <afleming@gmail.com>,
- Stefan Roese <sr@denx.de>, Johan Jonker <jbx6244@gmail.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Tom Rini <trini@konsulko.com>,
- Tien Fong Chee <tien.fong.chee@intel.com>, Angelo Dureghello <angelo@sysam.it>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Doug Zobel <douglas.zobel@climate.com>,
+X-MBO-RS-META: jp6yj9i9pzo4kj6nwzney16cogsj4zgz
+X-MBO-RS-ID: 18fd3263a0d686e8d98
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michael Walle <mwalle@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
+ Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Ramon Fried <rfried.dev@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, Marek Vasut <marex@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Denk <wd@denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Enric Balletbo i Serra <eballetbo@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Alison Wang <alison.wang@nxp.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Hans de Goede <hdegoede@redhat.com>,
- Okhunjon Sobirjonov <okhunjon72@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Jens Scharsig <esw@bus-elektronik.de>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michal Simek <michal.simek@amd.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kamil Lulko <kamil.lulko@gmail.com>, Mario Six <mario.six@gdsys.cc>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Richard Weinberger <richard@nod.at>, Artur Rojek <artur@conclusive.pl>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 00/25] led: Remove old status-LED code
+ Sean Anderson <seanga2@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [Uboot-stm32] [PATCH 1/9] mtd: spi-nor: Remove recently added
+	nor->addr_width == 3 test
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,82 +78,114 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On Thu, 24 Oct 2024 at 17:36, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Peter,
->
-> On Thu, 24 Oct 2024 at 14:16, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> > On Tue, 22 Oct 2024 at 09:48, Peter Robinson <pbrobinson@gmail.com> wrote:
-> > >
-> > > > On Mon, Oct 21, 2024 at 01:38:08PM +0200, Simon Glass wrote:
-> > > > > There has been an LED framework in U-Boot which uses driver model for
-> > > > > about 9 years now. Recent work is underway to improve it and provide
-> > > > > more features. It is probably a good time to drop the old code, which
-> > > > > is only used by 5 boards:
-> > > > >
-> > > > >    ./tools/qconfig.py -f LED_STATUS
-> > > > >    5 matches
-> > > > >    eb_cpu5282 eb_cpu5282_internal mx23_olinuxino pinephone
-> > > > >    socfpga_vining_fpga
-> > > > >
-> > > > > This series attempts that.
-> > > > >
-> > > > > Changes in v2:
-> > > > > - Combine code-removal and defconfig changes
-> > > > > - Add a patch to enable LED and LED_BOOT for these boards
-> > > > > - Add a patch to enable LED and LED_BOOT for these boards
-> > > > > - Enable LED on the 5 affected platforms
-> > > > > - Reorder patches for bisectability
-> > > >
-> > > > So I believe this means you missed the feedback of just doing the blind
-> > > > migration rather than disabling the feature, like we used to often do
-> > > > for cases where it's just a matter of changing CONFIG options. It
-> > > > should:
-> > > > - Not introduce a failure to build
-> > > > - Just work on platforms with either OF_UPSTREAM or semi-recent device
-> > > >   trees
-> > > > - Just start working on those platforms when they do move to
-> > > >   OF_UPSTREAM.
-> > >
-> > > Also when the migration was first bought up I had a quick look at how
-> > > to do it for the pinephone and I came up empty handed. Now I've seen
-> > > the patch for the pinephone and grep for LED_BOOT the only form of
-> > > docs I find is in the Kconfig and include/led.h, they refer to things
-> > > that aren't in-tree and the out of tree reference to
-> > > dtschema/schemas/options/u-boot.yaml, the only in-tree u-boot.yaml is
-> > > ./dts/upstream/Bindings/mtd/partitions/u-boot.yaml, that I find has no
-> > > reference to boott leds at all.
-> > >
-> > > I feel the reason there's been a recent move to add users of the
-> > > obsolete method is because the docs for that actually existed and
-> > > there's nothing for the new method. Maybe the first patch in the
-> > > series should be to add some actually useful doc rahter than go from
-> > > docs for the old method to nothing.
-> >
-> > So I've tried the patch on the pinephone and it doesn't work.
-> >
-> > I suspect you need to at least enable a led driver like LED_GPIO but
-> > even when I do that, while I can make the led turn on/off manually, it
-> > doesn't come on in early boot like it does with the old code. There's
-> > definitely something else missing here.
->
-> It's good that you have one of these boards. Would you be able to
-> debug it and send a patch?
+Remove undocumented nor->addr_width == 3 test. This was added in commit
+5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+without any explanation in the commit message. Remove it.
 
-Well I spent some time this morning and never got any further other
-wise I probably would have. When I first tested this against the
-2024.10 release I discovered the new boot led stuff has been only
-added in this cycle [1] yet you mention above the other code has been
-obsolete for 9 years, not sure how that's possible if there's been
-nothing to migrate to. Also looking at the patchset the docs are
-bbasically non existent! so without having to dig through the code to
-work out how to specify the led, like Is there DT requirements etc
-it's not something that I have many more cycles for ATM.
+This also has a bad side-effect which breaks READ operation of every SPI NOR
+which does not use addr_width == 3, e.g. s25fs512s does not work at all. This
+is because if addr_width != 3, rem_bank_len is always 0, and if rem_bank_len
+is 0, then read_len is 0 and if read_len is 0, then the spi_nor_read() returns
+-EIO.
 
-Peter
+Basic reproducer is as follows:
+"
+=> sf probe ; sf read 0x50000000 0 0x10000
+SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+device 0 offset 0x0, size 0x10000
+SF: 65536 bytes @ 0x0 Read: ERROR -5
+"
 
-[1]  https://lists.denx.de/pipermail/u-boot/2024-October/566459.html
+Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Michael Walle <mwalle@kernel.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Pratyush Yadav <p.yadav@ti.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ drivers/mtd/spi/spi-nor-core.c | 33 ++++++++++++++-------------------
+ 1 file changed, 14 insertions(+), 19 deletions(-)
+
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index f5c9868bbca..8dfdcda47fb 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -1595,16 +1595,14 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 	}
+ 
+ 	while (len) {
+-		if (nor->addr_width == 3) {
+-			if (nor->flags & SNOR_F_HAS_PARALLEL) {
+-				bank = (u32)from / (SZ_16M << 0x01);
+-				rem_bank_len = ((SZ_16M << 0x01) *
+-					(bank + 1)) - from;
+-			} else {
+-				bank = (u32)from / SZ_16M;
+-				rem_bank_len = (SZ_16M * (bank + 1)) - from;
+-			}
++		if (nor->flags & SNOR_F_HAS_PARALLEL) {
++			bank = (u32)from / (SZ_16M << 0x01);
++			rem_bank_len = ((SZ_16M << 0x01) * (bank + 1)) - from;
++		} else {
++			bank = (u32)from / SZ_16M;
++			rem_bank_len = (SZ_16M * (bank + 1)) - from;
+ 		}
++
+ 		offset = from;
+ 
+ 		if (nor->flags & SNOR_F_HAS_STACKED) {
+@@ -1619,13 +1617,11 @@ static int spi_nor_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 		if (nor->flags & SNOR_F_HAS_PARALLEL)
+ 			offset /= 2;
+ 
+-		if (nor->addr_width == 3) {
+ #ifdef CONFIG_SPI_FLASH_BAR
+-			ret = write_bar(nor, offset);
+-			if (ret < 0)
+-				return log_ret(ret);
++		ret = write_bar(nor, offset);
++		if (ret < 0)
++			return log_ret(ret);
+ #endif
+-		}
+ 
+ 		if (len < rem_bank_len)
+ 			read_len = len;
+@@ -2012,13 +2008,12 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
+ 			}
+ 		}
+ 
+-		if (nor->addr_width == 3) {
+ #ifdef CONFIG_SPI_FLASH_BAR
+-			ret = write_bar(nor, offset);
+-			if (ret < 0)
+-				return ret;
++		ret = write_bar(nor, offset);
++		if (ret < 0)
++			return ret;
+ #endif
+-		}
++
+ 		/* the size of data remaining on the first page */
+ 		page_remain = min_t(size_t,
+ 				    nor->page_size - page_offset, len - i);
+-- 
+2.45.2
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

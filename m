@@ -2,70 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EB6F9B1AB6
-	for <lists+uboot-stm32@lfdr.de>; Sat, 26 Oct 2024 22:18:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 591189B1B92
+	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2024 02:05:14 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E2018C78F60;
-	Sat, 26 Oct 2024 20:18:42 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6AD5BC78021
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 26 Oct 2024 20:18:41 +0000 (UTC)
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E412BC78018;
+	Sun, 27 Oct 2024 01:05:13 +0000 (UTC)
+Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4XbWFD6wgLz9scR;
- Sat, 26 Oct 2024 22:18:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729973921;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DeTUnZjxsy92MbdrUfxGZ9kKY0pquJGLJ5ZgTBm3gV8=;
- b=g7aCVHcwE7WWXan3sVnfQEK2eWItNawiFAgcYHIDrJ0WeB6WKxNr4A4Ig9gd9V2zWD4HVl
- ASJV8J7m0IsUcbi3rcrGEGKn7qcueEVYIXtGKY3vJpgzCxHHrILbV/vruJs8fQBq1/ZoMR
- /jWCUlL/mBoiUchwQtnFONOz+2DJ7D9rtRTvzPF5GMwcK94hBTGShdkBDelKFxOyRFUSEc
- K/8wfSv5T77HIqBsk5kCYY9EkUsd3aYVO6kZVQ5j4THQQW2BwWYxAgowRuVvhjohHg157S
- 94uPFSbQVv0vCU3v3PdkRZ+tONekq4tsfHaai+joNkStJ2a4P/IZl+06qwQAQA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1729973919;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DeTUnZjxsy92MbdrUfxGZ9kKY0pquJGLJ5ZgTBm3gV8=;
- b=tw01I7IC1InnTgV3Tx9mxWonYI+NjgErFVUaq4Dbag+H62mXT9eSEUFE5UqfeqZ38Hp2SQ
- 1h2Q25LBmzPflq0pvO+wTRPtAmniUUdl2wUqbOmXZbFrS60xL46pLUYJW1k1YL0ew1oZGU
- pN7fpItgN4YtGb9jcTDrzaBwIrd7yRWb3cnmaGCwSjnOJiQfV/uVS70NRurp3jbpjDg9hb
- cbwme7UU3ABFpRcQHGZ0OKqrDqv4nJbUsONQiNNllNPJ0tr5R6mmDjMWY2kg6lsjyvwU/e
- gh2bad+OJWDeWBRYmWqnmv3F3X/KJ0fOYwqfHYkOtargqGyQHgImGJCLo4Ha2A==
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3DD35C71292
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Sun, 27 Oct 2024 01:05:06 +0000 (UTC)
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 19422885F4;
+ Sun, 27 Oct 2024 02:05:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1729991105;
+ bh=B9B2kmzn/PbZXgA/GEsdzRi6AdG0P3f2vujUtNVDaR4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=qqOq+bJlSznwSO95mkjuFW+rGzyg0LiHfutvGntzI8gP/aOc5giHAXCdBE32mR2d1
+ ODoPtZcSM6cZ0J0BJu7mNBpWCR6kxzdkTZ6zRopepuAPOkBX4Cy2Y20vk+BKX0rNxO
+ BKMXGY6iKmp1ZIU2Lmur4/JLNElDa4N9e5SEIqsf81Dtxj1FZiSQEWACdt5tldoxKc
+ pck/A22SjYRmlXjJC99CwAq/zQA54IyduVE+2wIsxpQ6NXSW+VX1QRQbqAgWBCeySy
+ 3v+IPnEWRXVjk6gmo3BITJF1nN68wVeIGUgZEFR2onOnAGN8qhHVWei2SAaPclmLTb
+ p1clsaCdzzRdA==
+From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Date: Sat, 26 Oct 2024 22:16:26 +0200
-Message-ID: <20241026201741.171073-9-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
-References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
+Date: Sun, 27 Oct 2024 02:03:46 +0100
+Message-ID: <20241027010437.350243-1-marex@denx.de>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-X-MBO-RS-META: ac1f91wjqaz9p5qsm36dix44y7gs4eaj
-X-MBO-RS-ID: aabf7eadb44be0abc39
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michael Walle <mwalle@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
- Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [Uboot-stm32] [PATCH 9/9] mtd: spi-nor: Always build
-	SPI_STACKED_PARALLEL code
+X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
+X-Virus-Status: Clean
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 1/2] ARM: stm32: Deduplicate DH STM32MP15xx
+	DHSOM defconfigs
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,173 +59,586 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Prevent the code gated by SPI_STACKED_PARALLEL from bitrot
-by using if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) around
-it. That way, it is always at least compiled.
+Deduplicate defconfigs for all DH STM32MP15xx DHSOM systems by factoring
+out the common parts into generic stm32mp15_dhsom.config and including
+those using the #include <configs/...> preprocessor macro in the current
+set of board specific defconfigs. The preprocessor macro is applicable
+to defconfigs as well.
 
-Fixes: 5d40b3d384dc ("mtd: spi-nor: Add parallel and stacked memories support")
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+This introduces no functional change, the resulting .config is identical
+for all DH STM32MP15xx DHSOM systems.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Michael Walle <mwalle@kernel.org>
-Cc: Michal Simek <michal.simek@amd.com>
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Pratyush Yadav <p.yadav@ti.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Sean Anderson <seanga2@gmail.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/mtd/spi/spi-nor-core.c | 116 ++++++++++++++++-----------------
- 1 file changed, 58 insertions(+), 58 deletions(-)
+ configs/stm32mp15_dhcom_basic_defconfig | 174 +-----------------------
+ configs/stm32mp15_dhcor_basic_defconfig | 174 +-----------------------
+ configs/stm32mp15_dhsom.config          | 172 +++++++++++++++++++++++
+ 3 files changed, 176 insertions(+), 344 deletions(-)
+ create mode 100644 configs/stm32mp15_dhsom.config
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 74aec6b60c4..a3a62fff213 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3047,13 +3047,6 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 			       const struct flash_info *info,
- 			       struct spi_nor_flash_parameter *params)
- {
--#if CONFIG_IS_ENABLED(DM_SPI) && CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
--	struct udevice *dev = nor->spi->dev;
--	u64 flash_size[SNOR_FLASH_CNT_MAX] = {0};
--	u32 idx = 0, i = 0;
--	int rc;
--#endif
--
- 	/* Set legacy flash parameters as default. */
- 	memset(params, 0, sizeof(*params));
- 
-@@ -3172,62 +3165,69 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 
- 		spi_nor_post_sfdp_fixups(nor, params);
- 	}
--#if CONFIG_IS_ENABLED(DM_SPI) && CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
--	/*
--	 * The flashes that are connected in stacked mode should be of same make.
--	 * Except the flash size all other properties are identical for all the
--	 * flashes connected in stacked mode.
--	 * The flashes that are connected in parallel mode should be identical.
--	 */
--	while (i < SNOR_FLASH_CNT_MAX) {
--		rc = ofnode_read_u64_index(dev_ofnode(dev), "stacked-memories",
--					   idx, &flash_size[i]);
--		if (rc == -EINVAL) {
--			break;
--		} else if (rc == -EOVERFLOW) {
--			idx++;
--		} else {
--			idx++;
--			i++;
--			if (!(nor->flags & SNOR_F_HAS_STACKED))
--				nor->flags |= SNOR_F_HAS_STACKED;
--			if (!(nor->spi->flags & SPI_XFER_STACKED))
--				nor->spi->flags |= SPI_XFER_STACKED;
+diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+index a92c615d250..b730bf76dca 100644
+--- a/configs/stm32mp15_dhcom_basic_defconfig
++++ b/configs/stm32mp15_dhcom_basic_defconfig
+@@ -1,181 +1,11 @@
++#include <configs/stm32mp15_dhsom.config>
 +
-+	if (CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)) {
-+		u64 flash_size[SNOR_FLASH_CNT_MAX] = { 0 };
-+		struct udevice *dev = nor->spi->dev;
-+		u32 idx = 0, i = 0;
-+		int rc;
+ CONFIG_ARM=y
+ CONFIG_ARCH_STM32MP=y
+-CONFIG_SYS_MALLOC_F_LEN=0x3000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+-CONFIG_SF_DEFAULT_SPEED=50000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_SECT_SIZE=0x1000
+-CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
+-CONFIG_SPL_TEXT_BASE=0x2FFC2500
+-CONFIG_SPL_MMC=y
+-CONFIG_BOOTCOUNT_BOOTLIMIT=3
+-CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
+-CONFIG_SPL_STACK=0x30000000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0xc2000000
+-CONFIG_SPL=y
+-CONFIG_CMD_STM32KEY=y
+-CONFIG_CMD_STBOARD=y
+-CONFIG_TARGET_DH_STM32MP1_PDK2=y
+-CONFIG_CMD_STM32PROG=y
+-CONFIG_CMD_STM32PROG_OTP=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-# CONFIG_ARMV7_VIRT is not set
+ CONFIG_SYS_MEMTEST_START=0xc0000000
+ CONFIG_SYS_MEMTEST_END=0xc4000000
+-CONFIG_HAS_BOARD_SIZE_LIMIT=y
+-CONFIG_BOARD_SIZE_LIMIT=1441792
+-# CONFIG_EFI_LOADER is not set
+-CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=1
+-CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+-CONFIG_SYS_PBSIZE=1050
+-CONFIG_CONSOLE_MUX=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x3db00
+-CONFIG_SPL_BOOTCOUNT_LIMIT=y
+-CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MTD=y
+-CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_RAM_DEVICE=y
+-CONFIG_SPL_SPI_FLASH_MTD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+-CONFIG_SYS_PROMPT="STM32MP> "
+-# CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_EXPORTENV is not set
+-CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=3
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_UNZIP=y
+-CONFIG_CMD_ADC=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_REMOTEPROC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP6=y
+-CONFIG_CMD_TFTPPUT=y
+-CONFIG_SYS_DISABLE_AUTOLOAD=y
+-CONFIG_CMD_WGET=y
+-CONFIG_CMD_BOOTCOUNT=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_BTRFS=y
+-CONFIG_CMD_EXT4_WRITE=y
+-# CONFIG_SPL_DOS_PARTITION is not set
+-# CONFIG_ISO_PARTITION is not set
+-# CONFIG_SPL_PARTITION_UUIDS is not set
+-CONFIG_OF_LIVE=y
+-CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SPL_ENV_IS_NOWHERE=y
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_IP_DEFRAG=y
+-CONFIG_TFTP_TSIZE=y
+-CONFIG_USE_SERVERIP=y
+-CONFIG_SERVERIP="192.168.1.1"
+-CONFIG_PROT_TCP_SACK=y
+-CONFIG_IPV6=y
+-CONFIG_STM32_ADC=y
+-CONFIG_SPL_BLOCK_CACHE=y
+-CONFIG_BOOTCOUNT_LIMIT=y
+-CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
+-CONFIG_GPIO_HOG=y
+-CONFIG_DM_HWSPINLOCK=y
+-CONFIG_HWSPINLOCK_STM32=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_STM32F7=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-CONFIG_STM32_FMC2_EBI=y
+-CONFIG_I2C_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_STM32_SDMMC2=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+-CONFIG_SPI_FLASH_MACRONIX=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_KS8851_MLL=y
+-CONFIG_PHY=y
+-CONFIG_SPL_PHY=y
+-CONFIG_PHY_STM32_USBPHYC=y
+-CONFIG_PINCONF=y
+-# CONFIG_SPL_PINCTRL_FULL is not set
+-CONFIG_PINCTRL_STMFX=y
+-CONFIG_DM_PMIC=y
+-CONFIG_PMIC_STPMIC1=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_SPL_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+-CONFIG_DM_REGULATOR_STPMIC1=y
+-CONFIG_SPL_DM_REGULATOR_STPMIC1=y
+-CONFIG_REMOTEPROC_STM32_COPRO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_STM32=y
+-CONFIG_SERIAL_RX_BUFFER=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_STM32_QSPI=y
+-CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_SYSCON=y
+-CONFIG_USB=y
+-CONFIG_DM_USB_GADGET=y
+-CONFIG_SPL_DM_USB_GADGET=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_GENERIC=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="dh"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+-CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+-CONFIG_USB_GADGET_DWC2_OTG=y
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_DFU=y
+-CONFIG_WDT=y
+-CONFIG_WDT_STM32MP=y
+-CONFIG_FAT_WRITE=y
+-# CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+index 4162eda67a0..42a596505ca 100644
+--- a/configs/stm32mp15_dhcor_basic_defconfig
++++ b/configs/stm32mp15_dhcor_basic_defconfig
+@@ -1,181 +1,11 @@
++#include <configs/stm32mp15_dhsom.config>
 +
-+		/*
-+		 * The flashes that are connected in stacked mode should be of same make.
-+		 * Except the flash size all other properties are identical for all the
-+		 * flashes connected in stacked mode.
-+		 * The flashes that are connected in parallel mode should be identical.
-+		 */
-+		while (i < SNOR_FLASH_CNT_MAX) {
-+			rc = ofnode_read_u64_index(dev_ofnode(dev), "stacked-memories",
-+						   idx, &flash_size[i]);
-+			if (rc == -EINVAL) {
-+				break;
-+			} else if (rc == -EOVERFLOW) {
-+				idx++;
-+			} else {
-+				idx++;
-+				i++;
-+				if (!(nor->flags & SNOR_F_HAS_STACKED))
-+					nor->flags |= SNOR_F_HAS_STACKED;
-+				if (!(nor->spi->flags & SPI_XFER_STACKED))
-+					nor->spi->flags |= SPI_XFER_STACKED;
-+			}
- 		}
--	}
- 
--	i = 0;
--	idx = 0;
--	while (i < SNOR_FLASH_CNT_MAX) {
--		rc = ofnode_read_u64_index(dev_ofnode(dev), "parallel-memories",
--					   idx, &flash_size[i]);
--		if (rc == -EINVAL) {
--			break;
--		} else if (rc == -EOVERFLOW) {
--			idx++;
--		} else {
--			idx++;
--			i++;
--			if (!(nor->flags & SNOR_F_HAS_PARALLEL))
--				nor->flags |= SNOR_F_HAS_PARALLEL;
-+		i = 0;
-+		idx = 0;
-+		while (i < SNOR_FLASH_CNT_MAX) {
-+			rc = ofnode_read_u64_index(dev_ofnode(dev), "parallel-memories",
-+						   idx, &flash_size[i]);
-+			if (rc == -EINVAL) {
-+				break;
-+			} else if (rc == -EOVERFLOW) {
-+				idx++;
-+			} else {
-+				idx++;
-+				i++;
-+				if (!(nor->flags & SNOR_F_HAS_PARALLEL))
-+					nor->flags |= SNOR_F_HAS_PARALLEL;
-+			}
- 		}
--	}
- 
--	if (nor->flags & (SNOR_F_HAS_STACKED | SNOR_F_HAS_PARALLEL)) {
--		params->size = 0;
--		for (idx = 0; idx < SNOR_FLASH_CNT_MAX; idx++)
--			params->size += flash_size[idx];
--	}
--	/*
--	 * In parallel-memories the erase operation is
--	 * performed on both the flashes simultaneously
--	 * so, double the erasesize.
--	 */
--	if (nor->flags & SNOR_F_HAS_PARALLEL) {
--		nor->mtd.erasesize <<= 1;
--		params->page_size <<= 1;
-+		if (nor->flags & (SNOR_F_HAS_STACKED | SNOR_F_HAS_PARALLEL)) {
-+			params->size = 0;
-+			for (idx = 0; idx < SNOR_FLASH_CNT_MAX; idx++)
-+				params->size += flash_size[idx];
-+		}
-+		/*
-+		 * In parallel-memories the erase operation is
-+		 * performed on both the flashes simultaneously
-+		 * so, double the erasesize.
-+		 */
-+		if (nor->flags & SNOR_F_HAS_PARALLEL) {
-+			nor->mtd.erasesize <<= 1;
-+			params->page_size <<= 1;
-+		}
- 	}
--#endif
-+
- 	spi_nor_late_init_fixups(nor, params);
- 
- 	return 0;
+ CONFIG_ARM=y
+ CONFIG_ARCH_STM32MP=y
+-CONFIG_SYS_MALLOC_F_LEN=0x3000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
+-CONFIG_SF_DEFAULT_SPEED=50000000
+-CONFIG_ENV_SIZE=0x4000
+-CONFIG_ENV_SECT_SIZE=0x1000
+-CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
+-CONFIG_SPL_TEXT_BASE=0x2FFC2500
+-CONFIG_SPL_MMC=y
+-CONFIG_BOOTCOUNT_BOOTLIMIT=3
+-CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
+-CONFIG_SPL_STACK=0x30000000
+-CONFIG_SYS_BOOTM_LEN=0x2000000
+-CONFIG_SYS_LOAD_ADDR=0xc2000000
+-CONFIG_SPL=y
+-CONFIG_CMD_STM32KEY=y
+-CONFIG_CMD_STBOARD=y
+-CONFIG_TARGET_DH_STM32MP1_PDK2=y
+-CONFIG_CMD_STM32PROG=y
+-CONFIG_CMD_STM32PROG_OTP=y
+-CONFIG_SPL_SPI_FLASH_SUPPORT=y
+-CONFIG_SPL_SPI=y
+-# CONFIG_ARMV7_VIRT is not set
+-CONFIG_HAS_BOARD_SIZE_LIMIT=y
+-CONFIG_BOARD_SIZE_LIMIT=1441792
+-# CONFIG_EFI_LOADER is not set
+-CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
+-CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_BOOTDELAY=1
+-CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
+-CONFIG_SYS_PBSIZE=1050
+-CONFIG_CONSOLE_MUX=y
+-CONFIG_BOARD_EARLY_INIT_F=y
+-CONFIG_SPL_FOOTPRINT_LIMIT=y
+-CONFIG_SPL_MAX_FOOTPRINT=0x3db00
+-CONFIG_SPL_BOOTCOUNT_LIMIT=y
+-CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+-CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
+-CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
+-CONFIG_SPL_ENV_SUPPORT=y
+-CONFIG_SPL_I2C=y
+-CONFIG_SPL_MTD=y
+-CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_POWER=y
+-CONFIG_SPL_RAM_DEVICE=y
+-CONFIG_SPL_SPI_FLASH_MTD=y
+-CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+-CONFIG_SYS_PROMPT="STM32MP> "
+-# CONFIG_CMD_ELF is not set
+-# CONFIG_CMD_EXPORTENV is not set
+-CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=2
+-CONFIG_CMD_MEMINFO=y
+-CONFIG_CMD_MEMTEST=y
+-CONFIG_CMD_UNZIP=y
+-CONFIG_CMD_ADC=y
+-CONFIG_CMD_CLK=y
+-CONFIG_CMD_DFU=y
+-CONFIG_CMD_FUSE=y
+-CONFIG_CMD_GPIO=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_MMC=y
+-CONFIG_CMD_REMOTEPROC=y
+-CONFIG_CMD_SPI=y
+-CONFIG_CMD_USB=y
+-CONFIG_CMD_USB_MASS_STORAGE=y
+-CONFIG_CMD_DHCP6=y
+-CONFIG_CMD_TFTPPUT=y
+-CONFIG_SYS_DISABLE_AUTOLOAD=y
+-CONFIG_CMD_WGET=y
+-CONFIG_CMD_BOOTCOUNT=y
+-CONFIG_CMD_CACHE=y
+-CONFIG_CMD_TIME=y
+-CONFIG_CMD_TIMER=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+-CONFIG_CMD_BTRFS=y
+-CONFIG_CMD_EXT4_WRITE=y
+-# CONFIG_SPL_DOS_PARTITION is not set
+-# CONFIG_ISO_PARTITION is not set
+-# CONFIG_SPL_PARTITION_UUIDS is not set
+-CONFIG_OF_LIVE=y
+-CONFIG_OF_UPSTREAM=y
+ CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st/stm32mp153c-dhcor-drc-compact"
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
+-CONFIG_ENV_IS_IN_SPI_FLASH=y
+-CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+-CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SPL_ENV_IS_NOWHERE=y
+-CONFIG_VERSION_VARIABLE=y
+-CONFIG_NET_RANDOM_ETHADDR=y
+-CONFIG_IP_DEFRAG=y
+-CONFIG_TFTP_TSIZE=y
+-CONFIG_USE_SERVERIP=y
+-CONFIG_SERVERIP="192.168.1.1"
+-CONFIG_PROT_TCP_SACK=y
+-CONFIG_IPV6=y
+-CONFIG_STM32_ADC=y
+-CONFIG_SPL_BLOCK_CACHE=y
+-CONFIG_BOOTCOUNT_LIMIT=y
+-CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
+-CONFIG_GPIO_HOG=y
+-CONFIG_DM_HWSPINLOCK=y
+-CONFIG_HWSPINLOCK_STM32=y
+-CONFIG_DM_I2C=y
+-CONFIG_SYS_I2C_STM32F7=y
+-CONFIG_LED=y
+-CONFIG_LED_GPIO=y
+-CONFIG_STM32_FMC2_EBI=y
+-CONFIG_I2C_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+-CONFIG_SUPPORT_EMMC_BOOT=y
+-CONFIG_STM32_SDMMC2=y
+-CONFIG_MTD=y
+-CONFIG_DM_MTD=y
+-CONFIG_DM_SPI_FLASH=y
+-CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+-CONFIG_SPI_FLASH_MACRONIX=y
+-CONFIG_SPI_FLASH_SPANSION=y
+-CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_SPI_FLASH_WINBOND=y
+-CONFIG_SPI_FLASH_MTD=y
+-CONFIG_PHY_ANEG_TIMEOUT=20000
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_KS8851_MLL=y
+-CONFIG_PHY=y
+-CONFIG_SPL_PHY=y
+-CONFIG_PHY_STM32_USBPHYC=y
+-CONFIG_PINCONF=y
+-# CONFIG_SPL_PINCTRL_FULL is not set
+-CONFIG_PINCTRL_STMFX=y
+-CONFIG_DM_PMIC=y
+-CONFIG_PMIC_STPMIC1=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_SPL_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_REGULATOR_STM32_VREFBUF=y
+-CONFIG_DM_REGULATOR_STPMIC1=y
+-CONFIG_SPL_DM_REGULATOR_STPMIC1=y
+-CONFIG_REMOTEPROC_STM32_COPRO=y
+-CONFIG_DM_RTC=y
+-CONFIG_RTC_STM32=y
+-CONFIG_SERIAL_RX_BUFFER=y
+-CONFIG_SPI=y
+-CONFIG_DM_SPI=y
+-CONFIG_STM32_QSPI=y
+-CONFIG_STM32_SPI=y
+-CONFIG_SYSRESET_SYSCON=y
+-CONFIG_USB=y
+-CONFIG_DM_USB_GADGET=y
+-CONFIG_SPL_DM_USB_GADGET=y
+-CONFIG_USB_EHCI_HCD=y
+-CONFIG_USB_EHCI_GENERIC=y
+-CONFIG_USB_OHCI_HCD=y
+-CONFIG_USB_OHCI_GENERIC=y
+-CONFIG_USB_DWC2=y
+-CONFIG_USB_HOST_ETHER=y
+-CONFIG_USB_ETHER_ASIX=y
+-CONFIG_USB_GADGET=y
+-CONFIG_SPL_USB_GADGET=y
+-CONFIG_USB_GADGET_MANUFACTURER="dh"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+-CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+-CONFIG_USB_GADGET_DWC2_OTG=y
+-CONFIG_USB_GADGET_DOWNLOAD=y
+-CONFIG_SPL_DFU=y
+-CONFIG_WDT=y
+-CONFIG_WDT_STM32MP=y
+-CONFIG_FAT_WRITE=y
+-# CONFIG_BINMAN_FDT is not set
+diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
+new file mode 100644
+index 00000000000..9ea80c1b127
+--- /dev/null
++++ b/configs/stm32mp15_dhsom.config
+@@ -0,0 +1,172 @@
++# CONFIG_ARMV7_VIRT is not set
++# CONFIG_BINMAN_FDT is not set
++# CONFIG_CMD_ELF is not set
++# CONFIG_CMD_EXPORTENV is not set
++# CONFIG_EFI_LOADER is not set
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_SPL_DOS_PARTITION is not set
++# CONFIG_SPL_PARTITION_UUIDS is not set
++# CONFIG_SPL_PINCTRL_FULL is not set
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_SIZE_LIMIT=1441792
++CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
++CONFIG_BOOTCOUNT_BOOTLIMIT=3
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_BOOTDELAY=1
++CONFIG_CMD_ADC=y
++CONFIG_CMD_BOOTCOUNT=y
++CONFIG_CMD_BTRFS=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_DHCP6=y
++CONFIG_CMD_EEPROM=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_SPI=y
++CONFIG_CMD_STBOARD=y
++CONFIG_CMD_STM32KEY=y
++CONFIG_CMD_STM32PROG=y
++CONFIG_CMD_STM32PROG_OTP=y
++CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_UNZIP=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_WGET=y
++CONFIG_CONSOLE_MUX=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_DM_HWSPINLOCK=y
++CONFIG_DM_I2C=y
++CONFIG_DM_MTD=y
++CONFIG_DM_PMIC=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_REGULATOR_STM32_VREFBUF=y
++CONFIG_DM_REGULATOR_STPMIC1=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SPI=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_ENV_SIZE=0x4000
++CONFIG_FAT_WRITE=y
++CONFIG_FIT=y
++CONFIG_GPIO_HOG=y
++CONFIG_HAS_BOARD_SIZE_LIMIT=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_HWSPINLOCK_STM32=y
++CONFIG_I2C_EEPROM=y
++CONFIG_IPV6=y
++CONFIG_IP_DEFRAG=y
++CONFIG_KS8851_MLL=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MTD=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_UPSTREAM=y
++CONFIG_PHY=y
++CONFIG_PHY_ANEG_TIMEOUT=20000
++CONFIG_PHY_STM32_USBPHYC=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_STMFX=y
++CONFIG_PMIC_STPMIC1=y
++CONFIG_PROT_TCP_SACK=y
++CONFIG_REMOTEPROC_STM32_COPRO=y
++CONFIG_RTC_STM32=y
++CONFIG_SERIAL_RX_BUFFER=y
++CONFIG_SERVERIP="192.168.1.1"
++CONFIG_SF_DEFAULT_SPEED=50000000
++CONFIG_SPI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPL=y
++CONFIG_SPL_BLOCK_CACHE=y
++CONFIG_SPL_BOOTCOUNT_LIMIT=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
++CONFIG_SPL_DFU=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR_STPMIC1=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_SPL_ENV_IS_NOWHERE=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FOOTPRINT_LIMIT=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
++CONFIG_SPL_MAX_FOOTPRINT=0x3db00
++CONFIG_SPL_MMC=y
++CONFIG_SPL_MTD=y
++CONFIG_SPL_PHY=y
++CONFIG_SPL_POWER=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_SPI=y
++CONFIG_SPL_SPI_FLASH_MTD=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_STACK=0x30000000
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
++CONFIG_SPL_TEXT_BASE=0x2FFC2500
++CONFIG_SPL_USB_GADGET=y
++CONFIG_STM32_ADC=y
++CONFIG_STM32_FMC2_EBI=y
++CONFIG_STM32_QSPI=y
++CONFIG_STM32_SDMMC2=y
++CONFIG_STM32_SPI=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_SYSRESET_SYSCON=y
++CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
++CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
++CONFIG_SYS_BOOTM_LEN=0x2000000
++CONFIG_SYS_DISABLE_AUTOLOAD=y
++CONFIG_SYS_I2C_STM32F7=y
++CONFIG_SYS_LOAD_ADDR=0xc2000000
++CONFIG_SYS_MALLOC_F_LEN=0x3000
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_PROMPT="STM32MP> "
++CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_TARGET_DH_STM32MP1_PDK2=y
++CONFIG_TFTP_TSIZE=y
++CONFIG_USB=y
++CONFIG_USB_DWC2=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_GADGET_DWC2_OTG=y
++CONFIG_USB_GADGET_MANUFACTURER="dh"
++CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
++CONFIG_USB_GADGET_VENDOR_NUM=0x0483
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USE_SERVERIP=y
++CONFIG_VERSION_VARIABLE=y
++CONFIG_WDT=y
++CONFIG_WDT_STM32MP=y
 -- 
 2.45.2
 

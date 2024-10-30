@@ -2,49 +2,73 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BE019B1B93
-	for <lists+uboot-stm32@lfdr.de>; Sun, 27 Oct 2024 02:05:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D96249B6037
+	for <lists+uboot-stm32@lfdr.de>; Wed, 30 Oct 2024 11:33:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EC073C7801E;
-	Sun, 27 Oct 2024 01:05:13 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8B32AC78023;
+	Wed, 30 Oct 2024 10:33:53 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com
+ [209.85.128.175])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3F98CC78018
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C3E76C78020
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sun, 27 Oct 2024 01:05:06 +0000 (UTC)
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9A73B88C63;
- Sun, 27 Oct 2024 02:05:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1729991106;
- bh=axEMhPhvuFScMhdykirRXo4Wn/MoFRHgLra9VoUh6i0=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=dneFeO7xlDp6IqIqOz/xF6hAq68IQr/yN6jnZ2a1P3trE0AhG36mweWvUym9I+hDL
- le6oNLFUkb8DwJbLVIeLCGDuMPWlrPxDlDnr0aACfQ6MBsJPdxGxqPk2/k3vOaDuqU
- wjy411mzjpPWWRytfAjB7Rft1qzdSF6LAC5a2FuleQKB7HERhXvp+V4Cf8KPVkU1hL
- /oEatZleDRMSN4V9K3G7OcDGpfCuFmKRif4UAZ9xO9aDFyVMxwaBSQ+FAxRnf2SxtY
- iJs/HPxDHaND0408qgQk/musDUS67Pu7dk5XXt/sq0KwEZk/1gCmCRdioN1a9dcRnY
- YlgoU4LMrXE0Q==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Date: Sun, 27 Oct 2024 02:03:47 +0100
-Message-ID: <20241027010437.350243-2-marex@denx.de>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241027010437.350243-1-marex@denx.de>
-References: <20241027010437.350243-1-marex@denx.de>
+ Wed, 30 Oct 2024 10:33:45 +0000 (UTC)
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-6ea339a41f1so12942247b3.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 30 Oct 2024 03:33:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1730284424; x=1730889224;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0nHFHL+yh0ghY8Jnvo30o7uW2WpaN/45SGY7zNK1fSA=;
+ b=B/YHERwW97NdRl0sTb5I/OWN3bIfx8a+Is52RJNAHPv9JdQgyvQ7efII03gAIfavN6
+ shnNKoyzf4T+Bm4iR/wFlTeUdasTnJZ2f6QQTHgvAOgqrm5+qNoFDDaBTpownnKF5tA3
+ yW5jvdqsf28YzvHOuHkvSfouniFCsZ+2zWo20=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730284424; x=1730889224;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0nHFHL+yh0ghY8Jnvo30o7uW2WpaN/45SGY7zNK1fSA=;
+ b=MBvHeZdogwg8EcKtoMkR2MyUcPmDPdhGt5vWuL0Mp81dMIi9qi9KjjQe/TC9S9IpF5
+ XSCG324Y4JJGeUX/C+QspAmLaLFHQwK9RAsYN7h/mt3fgT8mQdlhStWhsqPs/22OtyhN
+ mpr7i/Rj/nOkdOon+kVdBdGJEllP5h7uZY9IRLysToYz1YpVq5FGxEC4v/hrX/MPgQN4
+ XkflklEWuEnlb5lgWmcXVtQ0vXdB5sI4fq9OgHH2vdB0gEqvWokeCuphQpBepN7eaK0N
+ RaEaCpdb6GCCWBGefZnYF6Lgdg9FuAu7tdfZpv/guQ6mgL1nR+RTEbWFlNtT12VZ7Caj
+ z4Pg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiyxqaoWaw8Afis/v6WJwr4hd/jjAbhrdCafXsmBwDpUJpOE1IYWGOavgeXpZJmBDrK36XlWb8P0Ublg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxoF+98RUceTPpjrot6dv72A7np7iQpDZ8WDhYFFFvMRH4ZdPx1
+ 7To2Ffjo1aI2Nwdzg9abieDbpd9U2qvIkjPLWspCMfcnbaQGt0TWqKA76uT7HeDpt65CeAP8yML
+ zWMiGoq690XYmGUy7IoxrEWPkuRrp66EScvvayA==
+X-Google-Smtp-Source: AGHT+IGoTHZE8RPPt1Yff40nueyu+POcqJ/m8R9pocAMfcKuKaRY82ev+KFHNWU3WjiAmA38kflryqvHLn+KuymdZN4=
+X-Received: by 2002:a05:690c:6a0a:b0:6e3:dc4a:34b0 with SMTP id
+ 00721157ae682-6e9d89947b6mr137174347b3.22.1730284424601; Wed, 30 Oct 2024
+ 03:33:44 -0700 (PDT)
 MIME-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH 2/2] ARM: stm32: Deduplicate DH STM32MP1xx
-	DHSOM defconfigs
+References: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20241026201741.171073-1-marek.vasut+renesas@mailbox.org>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Wed, 30 Oct 2024 16:03:33 +0530
+Message-ID: <CAMty3ZB3ngMezv9S2XrNjXL69q+z9x-=qnQGga51FgTfA4fanQ@mail.gmail.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>, Michael Walle <mwalle@kernel.org>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, u-boot@lists.denx.de,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Pratyush Yadav <p.yadav@ti.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/9] mtd: spi-nor: Remove recently added
+ nor->addr_width == 3 test
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -56,461 +80,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Deduplicate defconfigs for all DH STM32MP1xx DHSOM systems by factoring
-out the common parts into generic stm32mp_dhsom.config and including
-those using the #include <configs/...> preprocessor macro in the current
-set of board specific defconfigs. The preprocessor macro is applicable
-to defconfigs as well.
-
-This introduces no functional change, the resulting .config is identical
-for all DH STM32MP1xx DHSOM systems.
-
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- configs/stm32mp13_dhcor_defconfig | 107 +-----------------------------
- configs/stm32mp15_dhsom.config    | 107 +-----------------------------
- configs/stm32mp_dhsom.config      | 105 +++++++++++++++++++++++++++++
- 3 files changed, 109 insertions(+), 210 deletions(-)
- create mode 100644 configs/stm32mp_dhsom.config
-
-diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
-index 1ca057c7943..ff948b904be 100644
---- a/configs/stm32mp13_dhcor_defconfig
-+++ b/configs/stm32mp13_dhcor_defconfig
-@@ -1,149 +1,46 @@
-+#include <configs/stm32mp_dhsom.config>
-+
- CONFIG_ARM=y
- CONFIG_ARCH_STM32MP=y
- CONFIG_TFABOOT=y
- CONFIG_SYS_MALLOC_F_LEN=0x1c0000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0400000
--CONFIG_ENV_SIZE=0x4000
- CONFIG_ENV_OFFSET=0x3E0000
--CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp135f-dhcor-dhsbc"
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_SYS_LOAD_ADDR=0xc2000000
- CONFIG_STM32MP13X=y
- CONFIG_DDR_CACHEABLE_SIZE=0x8000000
--CONFIG_CMD_STM32KEY=y
- CONFIG_TARGET_ST_STM32MP13X=y
- CONFIG_ENV_OFFSET_REDUND=0x3F0000
--CONFIG_CMD_STM32PROG=y
- CONFIG_STM32MP15_PWR=y
- # CONFIG_ARMV7_NONSEC is not set
- CONFIG_SYS_MEMTEST_START=0xc0000000
- CONFIG_SYS_MEMTEST_END=0xc4000000
--# CONFIG_EFI_LOADER is not set
--CONFIG_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE_RECORD_COUNT=100
- CONFIG_BOOTDELAY=3
--CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_SYS_CONSOLE_IS_IN_ENV=y
--CONFIG_SYS_PROMPT="STM32MP> "
--# CONFIG_CMD_ELF is not set
- CONFIG_CMD_ASKENV=y
--# CONFIG_CMD_EXPORTENV is not set
- CONFIG_CMD_ERASEENV=y
--CONFIG_CMD_EEPROM=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_UNZIP=y
--CONFIG_CMD_CLK=y
--CONFIG_CMD_DFU=y
--CONFIG_CMD_FUSE=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
- CONFIG_CMD_LSBLK=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_SPI=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CAT=y
- CONFIG_CMD_SETEXPR_FMT=y
- CONFIG_CMD_XXD=y
--CONFIG_CMD_DHCP6=y
--CONFIG_CMD_TFTPPUT=y
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_CMD_WGET=y
--CONFIG_CMD_BOOTCOUNT=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_TIME=y
- CONFIG_CMD_RNG=y
--CONFIG_CMD_TIMER=y
--CONFIG_CMD_PMIC=y
--CONFIG_CMD_REGULATOR=y
--CONFIG_CMD_BTRFS=y
--CONFIG_CMD_EXT4_WRITE=y
- CONFIG_CMD_LOG=y
- CONFIG_CMD_UBI=y
--# CONFIG_ISO_PARTITION is not set
--CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
- CONFIG_ENV_IS_NOWHERE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_ENV_SPI_MAX_HZ=50000000
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_VERSION_VARIABLE=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_IP_DEFRAG=y
--CONFIG_TFTP_TSIZE=y
--CONFIG_PROT_TCP_SACK=y
--CONFIG_IPV6=y
--CONFIG_BOOTCOUNT_LIMIT=y
--CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
- CONFIG_CLK_SCMI=y
- CONFIG_SET_DFU_ALT_INFO=y
--CONFIG_GPIO_HOG=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_STM32F7=y
--CONFIG_LED=y
--CONFIG_LED_GPIO=y
--CONFIG_STM32_FMC2_EBI=y
--CONFIG_I2C_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_SUPPORT_EMMC_BOOT=y
--CONFIG_STM32_SDMMC2=y
--CONFIG_MTD=y
--CONFIG_DM_MTD=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_SFDP_SUPPORT=y
--CONFIG_SPI_FLASH_MACRONIX=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_WINBOND=y
--CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY_REALTEK=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_PHY=y
--CONFIG_PHY_STM32_USBPHYC=y
--CONFIG_PINCONF=y
--CONFIG_DM_PMIC=y
--CONFIG_PMIC_STPMIC1=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_DM_REGULATOR_STPMIC1=y
- CONFIG_DM_REGULATOR_SCMI=y
- CONFIG_RESET_SCMI=y
- CONFIG_DM_RNG=y
- CONFIG_RNG_STM32=y
--CONFIG_DM_RTC=y
--CONFIG_RTC_STM32=y
--CONFIG_SERIAL_RX_BUFFER=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_STM32_QSPI=y
--CONFIG_STM32_SPI=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_TEE=y
- CONFIG_OPTEE=y
- # CONFIG_OPTEE_TA_AVB is not set
--CONFIG_USB=y
--CONFIG_DM_USB_GADGET=y
--CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_EHCI_GENERIC=y
--CONFIG_USB_OHCI_HCD=y
--CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_DWC2=y
- CONFIG_USB_ONBOARD_HUB=y
- CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
--CONFIG_USB_HOST_ETHER=y
--CONFIG_USB_ETHER_ASIX=y
--CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_MANUFACTURER="dh"
--CONFIG_USB_GADGET_VENDOR_NUM=0x0483
--CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
--CONFIG_USB_GADGET_DWC2_OTG=y
--CONFIG_USB_GADGET_DOWNLOAD=y
--CONFIG_WDT=y
--CONFIG_WDT_STM32MP=y
--CONFIG_FAT_WRITE=y
- CONFIG_ERRNO_STR=y
-diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-index 9ea80c1b127..4f8e98beec6 100644
---- a/configs/stm32mp15_dhsom.config
-+++ b/configs/stm32mp15_dhsom.config
-@@ -1,104 +1,32 @@
-+#include <configs/stm32mp_dhsom.config>
-+
- # CONFIG_ARMV7_VIRT is not set
- # CONFIG_BINMAN_FDT is not set
--# CONFIG_CMD_ELF is not set
--# CONFIG_CMD_EXPORTENV is not set
--# CONFIG_EFI_LOADER is not set
--# CONFIG_ISO_PARTITION is not set
- # CONFIG_SPL_DOS_PARTITION is not set
- # CONFIG_SPL_PARTITION_UUIDS is not set
- # CONFIG_SPL_PINCTRL_FULL is not set
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_BOARD_SIZE_LIMIT=1441792
--CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
--CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_BOOTDELAY=1
- CONFIG_CMD_ADC=y
--CONFIG_CMD_BOOTCOUNT=y
--CONFIG_CMD_BTRFS=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_CLK=y
--CONFIG_CMD_DFU=y
--CONFIG_CMD_DHCP6=y
--CONFIG_CMD_EEPROM=y
--CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FUSE=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MEMINFO=y
--CONFIG_CMD_MEMTEST=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PMIC=y
--CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_REMOTEPROC=y
--CONFIG_CMD_SPI=y
- CONFIG_CMD_STBOARD=y
--CONFIG_CMD_STM32KEY=y
--CONFIG_CMD_STM32PROG=y
- CONFIG_CMD_STM32PROG_OTP=y
--CONFIG_CMD_TFTPPUT=y
--CONFIG_CMD_TIME=y
--CONFIG_CMD_TIMER=y
--CONFIG_CMD_UNZIP=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_USB_MASS_STORAGE=y
--CONFIG_CMD_WGET=y
- CONFIG_CONSOLE_MUX=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_DM_HWSPINLOCK=y
--CONFIG_DM_I2C=y
--CONFIG_DM_MTD=y
--CONFIG_DM_PMIC=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_REGULATOR_STM32_VREFBUF=y
--CONFIG_DM_REGULATOR_STPMIC1=y
--CONFIG_DM_RTC=y
--CONFIG_DM_SPI=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_DM_USB_GADGET=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_ENV_SECT_SIZE=0x1000
--CONFIG_ENV_SIZE=0x4000
--CONFIG_FAT_WRITE=y
--CONFIG_FIT=y
--CONFIG_GPIO_HOG=y
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_HWSPINLOCK_STM32=y
--CONFIG_I2C_EEPROM=y
--CONFIG_IPV6=y
--CONFIG_IP_DEFRAG=y
- CONFIG_KS8851_MLL=y
--CONFIG_LED=y
--CONFIG_LED_GPIO=y
--CONFIG_MTD=y
--CONFIG_NET_RANDOM_ETHADDR=y
--CONFIG_OF_LIVE=y
--CONFIG_OF_UPSTREAM=y
--CONFIG_PHY=y
- CONFIG_PHY_ANEG_TIMEOUT=20000
--CONFIG_PHY_STM32_USBPHYC=y
--CONFIG_PINCONF=y
- CONFIG_PINCTRL_STMFX=y
--CONFIG_PMIC_STPMIC1=y
--CONFIG_PROT_TCP_SACK=y
- CONFIG_REMOTEPROC_STM32_COPRO=y
--CONFIG_RTC_STM32=y
--CONFIG_SERIAL_RX_BUFFER=y
- CONFIG_SERVERIP="192.168.1.1"
- CONFIG_SF_DEFAULT_SPEED=50000000
--CONFIG_SPI=y
--CONFIG_SPI_FLASH_MACRONIX=y
--CONFIG_SPI_FLASH_MTD=y
--CONFIG_SPI_FLASH_SFDP_SUPPORT=y
--CONFIG_SPI_FLASH_SPANSION=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPL=y
- CONFIG_SPL_BLOCK_CACHE=y
- CONFIG_SPL_BOOTCOUNT_LIMIT=y
-@@ -132,41 +60,10 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SPL_USB_GADGET=y
- CONFIG_STM32_ADC=y
--CONFIG_STM32_FMC2_EBI=y
--CONFIG_STM32_QSPI=y
--CONFIG_STM32_SDMMC2=y
--CONFIG_STM32_SPI=y
--CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SYSRESET_SYSCON=y
- CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
--CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
--CONFIG_SYS_BOOTM_LEN=0x2000000
--CONFIG_SYS_DISABLE_AUTOLOAD=y
--CONFIG_SYS_I2C_STM32F7=y
--CONFIG_SYS_LOAD_ADDR=0xc2000000
- CONFIG_SYS_MALLOC_F_LEN=0x3000
- CONFIG_SYS_PBSIZE=1050
--CONFIG_SYS_PROMPT="STM32MP> "
--CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
- CONFIG_TARGET_DH_STM32MP1_PDK2=y
--CONFIG_TFTP_TSIZE=y
--CONFIG_USB=y
--CONFIG_USB_DWC2=y
--CONFIG_USB_EHCI_GENERIC=y
--CONFIG_USB_EHCI_HCD=y
--CONFIG_USB_ETHER_ASIX=y
--CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_DOWNLOAD=y
--CONFIG_USB_GADGET_DWC2_OTG=y
--CONFIG_USB_GADGET_MANUFACTURER="dh"
--CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
--CONFIG_USB_GADGET_VENDOR_NUM=0x0483
--CONFIG_USB_HOST_ETHER=y
--CONFIG_USB_OHCI_GENERIC=y
--CONFIG_USB_OHCI_HCD=y
- CONFIG_USE_SERVERIP=y
--CONFIG_VERSION_VARIABLE=y
--CONFIG_WDT=y
--CONFIG_WDT_STM32MP=y
-diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
-new file mode 100644
-index 00000000000..01d65cfd893
---- /dev/null
-+++ b/configs/stm32mp_dhsom.config
-@@ -0,0 +1,105 @@
-+# CONFIG_CMD_ELF is not set
-+# CONFIG_CMD_EXPORTENV is not set
-+# CONFIG_EFI_LOADER is not set
-+# CONFIG_ISO_PARTITION is not set
-+CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
-+CONFIG_BOOTCOUNT_LIMIT=y
-+CONFIG_CMD_BOOTCOUNT=y
-+CONFIG_CMD_BTRFS=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_DHCP6=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FUSE=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_STM32KEY=y
-+CONFIG_CMD_STM32PROG=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_TIMER=y
-+CONFIG_CMD_UNZIP=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_WGET=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_DM_I2C=y
-+CONFIG_DM_MTD=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_DM_REGULATOR_STPMIC1=y
-+CONFIG_DM_RTC=y
-+CONFIG_DM_SPI=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_FAT_WRITE=y
-+CONFIG_FIT=y
-+CONFIG_GPIO_HOG=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_IPV6=y
-+CONFIG_IP_DEFRAG=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MTD=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_PHY=y
-+CONFIG_PHY_STM32_USBPHYC=y
-+CONFIG_PINCONF=y
-+CONFIG_PMIC_STPMIC1=y
-+CONFIG_PROT_TCP_SACK=y
-+CONFIG_RTC_STM32=y
-+CONFIG_SERIAL_RX_BUFFER=y
-+CONFIG_SPI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_STMICRO=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_STM32_FMC2_EBI=y
-+CONFIG_STM32_QSPI=y
-+CONFIG_STM32_SDMMC2=y
-+CONFIG_STM32_SPI=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_SYS_DISABLE_AUTOLOAD=y
-+CONFIG_SYS_I2C_STM32F7=y
-+CONFIG_SYS_LOAD_ADDR=0xc2000000
-+CONFIG_SYS_PROMPT="STM32MP> "
-+CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_USB=y
-+CONFIG_USB_DWC2=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_ETHER_ASIX=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_GADGET_MANUFACTURER="dh"
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0483
-+CONFIG_USB_HOST_ETHER=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_WDT=y
-+CONFIG_WDT_STM32MP=y
--- 
-2.45.2
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+SGkgTWFyZWssCgpPbiBTdW4sIE9jdCAyNywgMjAyNCBhdCAxOjQ44oCvQU0gTWFyZWsgVmFzdXQK
+PG1hcmVrLnZhc3V0K3JlbmVzYXNAbWFpbGJveC5vcmc+IHdyb3RlOgo+Cj4gUmVtb3ZlIHVuZG9j
+dW1lbnRlZCBub3ItPmFkZHJfd2lkdGggPT0gMyB0ZXN0LiBUaGlzIHdhcyBhZGRlZCBpbiBjb21t
+aXQKPiA1ZDQwYjNkMzg0ZGMgKCJtdGQ6IHNwaS1ub3I6IEFkZCBwYXJhbGxlbCBhbmQgc3RhY2tl
+ZCBtZW1vcmllcyBzdXBwb3J0IikKPiB3aXRob3V0IGFueSBleHBsYW5hdGlvbiBpbiB0aGUgY29t
+bWl0IG1lc3NhZ2UuIFJlbW92ZSBpdC4KPgo+IFRoaXMgYWxzbyBoYXMgYSBiYWQgc2lkZS1lZmZl
+Y3Qgd2hpY2ggYnJlYWtzIFJFQUQgb3BlcmF0aW9uIG9mIGV2ZXJ5IFNQSSBOT1IKPiB3aGljaCBk
+b2VzIG5vdCB1c2UgYWRkcl93aWR0aCA9PSAzLCBlLmcuIHMyNWZzNTEycyBkb2VzIG5vdCB3b3Jr
+IGF0IGFsbC4gVGhpcwo+IGlzIGJlY2F1c2UgaWYgYWRkcl93aWR0aCAhPSAzLCByZW1fYmFua19s
+ZW4gaXMgYWx3YXlzIDAsIGFuZCBpZiByZW1fYmFua19sZW4KPiBpcyAwLCB0aGVuIHJlYWRfbGVu
+IGlzIDAgYW5kIGlmIHJlYWRfbGVuIGlzIDAsIHRoZW4gdGhlIHNwaV9ub3JfcmVhZCgpIHJldHVy
+bnMKPiAtRUlPLgo+Cj4gQmFzaWMgcmVwcm9kdWNlciBpcyBhcyBmb2xsb3dzOgo+ICIKPiA9PiBz
+ZiBwcm9iZSA7IHNmIHJlYWQgMHg1MDAwMDAwMCAwIDB4MTAwMDAKPiBTRjogRGV0ZWN0ZWQgczI1
+ZnM1MTJzIHdpdGggcGFnZSBzaXplIDI1NiBCeXRlcywgZXJhc2Ugc2l6ZSAyNTYgS2lCLCB0b3Rh
+bCA2NCBNaUIKPiBkZXZpY2UgMCBvZmZzZXQgMHgwLCBzaXplIDB4MTAwMDAKPiBTRjogNjU1MzYg
+Ynl0ZXMgQCAweDAgUmVhZDogRVJST1IgLTUKPiAiCj4KPiBGaXhlczogNWQ0MGIzZDM4NGRjICgi
+bXRkOiBzcGktbm9yOiBBZGQgcGFyYWxsZWwgYW5kIHN0YWNrZWQgbWVtb3JpZXMgc3VwcG9ydCIp
+Cj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0K3JlbmVzYXNAbWFpbGJv
+eC5vcmc+Cj4gLS0tCj4gQ2M6IEFuZHJlIFByenl3YXJhIDxhbmRyZS5wcnp5d2FyYUBhcm0uY29t
+Pgo+IENjOiBBc2hvayBSZWRkeSBTb21hIDxhc2hvay5yZWRkeS5zb21hQGFtZC5jb20+Cj4gQ2M6
+IEphZ2FuIFRla2kgPGphZ2FuQGFtYXJ1bGFzb2x1dGlvbnMuY29tPgo+IENjOiBNaWNoYWVsIFdh
+bGxlIDxtd2FsbGVAa2VybmVsLm9yZz4KPiBDYzogTWljaGFsIFNpbWVrIDxtaWNoYWwuc2ltZWtA
+YW1kLmNvbT4KPiBDYzogUGF0cmljZSBDaG90YXJkIDxwYXRyaWNlLmNob3RhcmRAZm9zcy5zdC5j
+b20+Cj4gQ2M6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2suZGVsYXVuYXlAZm9zcy5zdC5jb20+
+Cj4gQ2M6IFByYXR5dXNoIFlhZGF2IDxwLnlhZGF2QHRpLmNvbT4KPiBDYzogUXVlbnRpbiBTY2h1
+bHogPHF1ZW50aW4uc2NodWx6QGNoZXJyeS5kZT4KPiBDYzogU2VhbiBBbmRlcnNvbiA8c2Vhbmdh
+MkBnbWFpbC5jb20+Cj4gQ2M6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3JnPgo+IENjOiBU
+YWthaGlybyBLdXdhbm8gPFRha2FoaXJvLkt1d2Fub0BpbmZpbmVvbi5jb20+Cj4gQ2M6IFRvbSBS
+aW5pIDx0cmluaUBrb25zdWxrby5jb20+Cj4gQ2M6IFR1ZG9yIEFtYmFydXMgPHR1ZG9yLmFtYmFy
+dXNAbGluYXJvLm9yZz4KPiBDYzogVmVua2F0ZXNoIFlhZGF2IEFiYmFyYXB1IDx2ZW5rYXRlc2gu
+YWJiYXJhcHVAYW1kLmNvbT4KPiBDYzogdS1ib290QGxpc3RzLmRlbnguZGUKPiBDYzogdWJvb3Qt
+c3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQo+IC0tLQoKSXMgdGhpcyBwYXRjaC1z
+ZXQgbmV4dCB2ZXJzaW9uIGZvciAncHJldmlvdXMnIHJldmVydGVkIHNlcmllcz8KCkphZ2FuLgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0z
+MiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpo
+dHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9v
+dC1zdG0zMgo=

@@ -2,78 +2,103 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 292F99C85A7
-	for <lists+uboot-stm32@lfdr.de>; Thu, 14 Nov 2024 10:09:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A3D99D9C0F
+	for <lists+uboot-stm32@lfdr.de>; Tue, 26 Nov 2024 18:06:48 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9BDB0C7A823;
-	Thu, 14 Nov 2024 09:09:02 +0000 (UTC)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 952F1C78F65
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0A015C7803C;
+	Tue, 26 Nov 2024 17:06:48 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DB404C78023
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 11 Nov 2024 14:19:39 +0000 (UTC)
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4ABEIKaj2514395
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 11 Nov 2024 08:18:20 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1731334700;
- bh=mexHF/HfvnPJXZzDI+nyeRMjMYRV9SgopAZvmZYte+w=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=rc8tEcqTPSXrYN1nDcir7/+KmWLNk/asoH5Pd8uzPjOkyiMdK/HjbApFsAZ30q4sk
- ne5+zVSsihBf/nFgOrn0ykNGrtztaZGokuGyhvgvzcaUlCGgYnQUvoPTVp3vIyLghW
- 052GFWT2LvoptMygqer5/GiRyNY02q3DHCy8MNLI=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4ABEIKGt032660
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 11 Nov 2024 08:18:20 -0600
-Received: from lewvowa01.ent.ti.com (10.180.75.79) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 11
- Nov 2024 08:18:20 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by lewvowa01.ent.ti.com
- (10.180.75.79) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2507.34; Mon, 11 Nov
- 2024 08:18:20 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 11 Nov 2024 08:18:19 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4ABEIKLJ059860;
- Mon, 11 Nov 2024 08:18:20 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, Michal Simek
- <michal.simek@amd.com>, <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
-References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
- <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
- <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
- <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
- <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
- <86ses458k3.fsf@udb0321960.dhcp.ti.com>
- <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
- <86pln759j9.fsf@udb0321960.dhcp.ti.com>
- <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
-Date: Mon, 11 Nov 2024 08:18:20 -0600
-Message-ID: <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+ Tue, 26 Nov 2024 17:06:40 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4AQG2l13000944;
+ Tue, 26 Nov 2024 18:06:20 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 9AnQEsF3FhvrN5gEjxfqCqV24TPTVE3upLJsIOP8Sk4=; b=AalfFzZC2Dk69LIZ
+ mtSrqvhCVBqBk8acABr6zrf8YhIm1k0Gh9mmR/BPYvvk3PPGK9IwqAgpOjWj/SCM
+ iYDCxcmhXirjuexrJFRG0x5vWmUsnazwpaZLiZ0GShxeVLglIK8IgryJbqnSofFh
+ Sj3YAqq5KINaI+rUaws0R8kF7QSz2k3ZWqBpV1xBVYEx7mUqGNXrei5w/P7FGUlc
+ G0cKlBlOh6+AqTkDZ6mjnqj5WUtJW5ThnGAYKA/K5+PEF0VlfxFrsCsl9rzYYrOT
+ Qe9Y6OT+ZaGeSm6tVpRh4HroAD/7WdCN2R0a+diio3kLl5CUw7+A/E8MZTkyaC6T
+ HkcQsg==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 433sg4brv0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Nov 2024 18:06:19 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0BF3340047;
+ Tue, 26 Nov 2024 18:05:07 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E360429DE7A;
+ Tue, 26 Nov 2024 18:04:18 +0100 (CET)
+Received: from [10.252.30.7] (10.252.30.7) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Tue, 26 Nov
+ 2024 18:04:16 +0100
+Message-ID: <280e1d54-89ff-496f-93d3-0de7a9797bc9@foss.st.com>
+Date: Tue, 26 Nov 2024 18:04:14 +0100
 MIME-Version: 1.0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Thu, 14 Nov 2024 09:09:01 +0000
-Cc: Michael Walle <mwalle@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
- Simon Glass <sjg@chromium.org>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Tudor Ambarus <tudor.ambarus@linaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
+User-Agent: Mozilla Thunderbird
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241102174944.412088-1-sjg@chromium.org>
+ <20241102174944.412088-2-sjg@chromium.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20241102174944.412088-2-sjg@chromium.org>
+X-Originating-IP: [10.252.30.7]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+Cc: David Feng <fenghua@phytium.com.cn>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Rick Chen <rick@andestech.com>,
+ H Bell <dmoo_dv@protonmail.com>, Paul Walmsley <paul.walmsley@sifive.com>,
+ Peng Fan <peng.fan@nxp.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ uboot-stm32@st-md-mailman.stormreply.com, Stefan Roese <sr@denx.de>,
+ Janne Grunau <j@jannau.net>, Marek Vasut <marex@denx.de>,
+ Randolph <randolph@andestech.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Anup Patel <anup@brainfault.org>, E Shattow <lucent@gmail.com>,
+ Jerry Van Baren <vanbaren@cideas.com>, Peter Robinson <pbrobinson@gmail.com>,
+ "Ivan T. Ivanov" <iivanov@suse.de>, Andre Przywara <andre.przywara@arm.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Linus Walleij <linus.walleij@linaro.org>, Sam Day <me@samcday.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Matthias Brugger <mbrugger@suse.com>, Francois Berder <fberder@outlook.fr>,
+ Tim Harvey <tharvey@gateworks.com>, u-boot-qcom@groups.io,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Green Wan <green.wan@sifive.com>, Minda Chen <minda.chen@starfivetech.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, Pratyush Yadav <p.yadav@ti.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
- memories support in QSPI driver"
+ Alexander Graf <agraf@csgraf.de>,
+ =?UTF-8?Q?=C5=81ukasz_Stelmach?= <l.stelmach@samsung.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Atish Patra <atishp@atishpatra.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Michal Simek <michal.simek@amd.com>,
+ Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Eric Curtin <ecurtin@redhat.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Thomas Fitzsimmons <fitzsim@fitzsim.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Aaron Williams <awilliams@marvell.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ James Hilliard <james.hilliard1@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/2] fdt: Swap the signature for
+	board_fdt_blob_setup()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,107 +115,166 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Marek Vasut <marek.vasut@mailbox.org> writes:
 
-> On 11/7/24 4:49 PM, Jon Humphreys wrote:
->> Marek Vasut <marek.vasut@mailbox.org> writes:
->> 
->>> On 11/6/24 10:58 PM, Jon Humphreys wrote:
->>>> Marek Vasut <marek.vasut@mailbox.org> writes:
->>>>
->>>>> On 11/6/24 8:18 PM, Jon Humphreys wrote:
->>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
->>>>>>
->>>>>>> On 10/23/24 10:17 AM, Michal Simek wrote:
->>>>>>>>
->>>>>>>>
->>>>>>>> On 10/22/24 23:06, Marek Vasut wrote:
->>>>>>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
->>>>>>>>>
->>>>>>>>> This parallel/stacked support breaks basic SPI NOR support,
->>>>>>>>> e.g. this no longer works:
->>>>>>>>>
->>>>>>>>> => sf probe && sf update 0x50000000 0 0x160000
->>>>>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
->>>>>>>>> total 64 MiB
->>>>>>>>> device 0 offset 0x0, size 0x160000
->>>>>>>>> SPI flash failed in read step
->>>>>>>>
->>>>>>>> Reverting everything seems to me too much. Tom has tested it on his HW
->>>>>>>> and didn't see any issue. That's why better to look at code which is
->>>>>>>> causing this.
->>>>>>>> You are reverting everything but likely there is specific patch which is
->>>>>>>> causing this. Which one is it?
->>>>>>>> Which board was used for your testing? Likely we don't have access to it.
->>>>>>>> Is there any QEMU available which can be used for debugging?
->>>>>>>
->>>>>>> The testcase including the exact SPI NOR model is above.
->>>>>>>
->>>>>>> iMX6 with w25q16dw seems to be broken too.
->>>>>>>
->>>>>>> Basically every board I have access no longer has a working "sf probe ;
->>>>>>> sf update" combination ... so yeah, this means this patchset is
->>>>>>> fundamentally broken.
->>>>>>>
->>>>>>
->>>>>> I can also confirm that the patch series:
->>>>>>
->>>>>> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
->>>>>> support"
->>>>>>
->>>>>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
->>>>>>
->>>>>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
->>>>>>
->>>>>> SoC:   AM62X SR1.0 HS-FS
->>>>>> Model: Texas Instruments AM625 SK
->>>>>> ...
->>>>>> Hit any key to stop autoboot:  0
->>>>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
->>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>>>> device 0 offset 0x400000, size 0x10
->>>>>> SPI flash failed in read step
->>>>>> =>
->>>>> Sigh ... can you please test current u-boot/master and see if the error
->>>>> is fixed there ?
->>>>>
->>>>
->>>> Yes I had verified it also fails against master, although the behavior was
->>>> a bit different.  The .'s below are our DMA engine waiting indefinitely.
->>>>
->>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
->>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
->>>> device 0 offset 0x400000, size 0x10
->>>> .....................................................
->>>>
->>>> I have not investigated further.
->>>
->>> Can you try and run some 'git bisect' to find out exactly which commit
->>> broke your use case ? There is a bunch of fixes for the worst breakage
->>> that landed recently, but clearly there is more.
->>>
->>> Full revert seems increasingly appealing ...
->> 
->> commit 5d40b3d384d
-> So there is still something broken in that specific commit that I missed 
-> when removing the defects ? Sigh ... can you try to narrow it down ?
 
-Hi Marek, I tried to narrow the changes in commit
-5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 a bit by first applying all of the
-changes in the .h files, and then for spi-nor-core.c, only applying changes
-per function. The only function change that causes errors was
-spi_nor_read(). With the changes in spi_nor_read() in commit
-5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 applied to the prior commit
-fbe16bc2801, did I get:
+On 11/2/24 18:49, Simon Glass wrote:
+> This returns a devicetree and updates a parameter with an error code.
+> Swap it, since this fits better with the way U-Boot normally works. It
+> also (more easily) allows leaving the existing pointer unchanged.
+> 
+> No yaks were harmed in this change, but there is a very small code-size
+> reduction.
+> 
+> For sifive, the OF_BOARD option must be set for the function to be
+> called, so there is no point in checking it again. Also OF_SEPARATE is
+> defined always.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v2:
+> - Set up the existing FDT in case the board wants to check it
+> - Update snapdragon to return -EEXIST
+> - Set the existing FDT before calling board_fd_blob_setup()
+> - Update sandbox to return -EEXIST if an fdt comes from a bloblist
+> - Update do_go_uboot() to set the existing FDT
+> - Drop unnecessary setting of FDT in vexpress64
+> - Tidy up redundant RISC-V code
+> 
+>  arch/arm/mach-apple/board.c                   |  7 ++--
+>  arch/arm/mach-snapdragon/board.c              |  9 ++---
+>  arch/arm/mach-stm32mp/boot_params.c           | 19 ++++++-----
+>  arch/sandbox/cpu/cpu.c                        | 34 +++++++++----------
+>  board/Marvell/octeontx/board-fdt.c            | 12 +++----
+>  board/Marvell/octeontx2/board-fdt.c           | 12 +++----
+>  board/Marvell/octeontx2/board.c               |  3 +-
+>  board/andestech/ae350/ae350.c                 | 23 +++++++------
+>  board/armltd/vexpress64/vexpress64.c          | 33 ++++++++----------
+>  board/broadcom/bcmstb/bcmstb.c                |  7 ++--
+>  board/emulation/qemu-arm/qemu-arm.c           |  7 ++--
+>  board/emulation/qemu-ppce500/qemu-ppce500.c   | 12 +++----
+>  board/emulation/qemu-riscv/qemu-riscv.c       |  7 ++--
+>  board/highbank/highbank.c                     |  7 ++--
+>  board/raspberrypi/rpi/rpi.c                   | 13 ++++---
+>  board/sifive/unleashed/unleashed.c            | 12 +++----
+>  board/sifive/unmatched/unmatched.c            | 11 +++---
+>  .../visionfive2/starfive_visionfive2.c        | 11 +++---
+>  board/xen/xenguest_arm64/xenguest_arm64.c     | 14 ++++----
+>  board/xilinx/common/board.c                   | 26 ++++++++------
+>  include/fdtdec.h                              |  9 ++---
+>  lib/fdtdec.c                                  | 14 +++++---
+>  22 files changed, 152 insertions(+), 150 deletions(-)
+> 
+> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> index 0b6d290b8ac..2644a04a622 100644
+> --- a/arch/arm/mach-apple/board.c
+> +++ b/arch/arm/mach-apple/board.c
+> @@ -691,11 +691,12 @@ int dram_init_banksize(void)
+>  
+>  extern long fw_dtb_pointer;
+>  
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	/* Return DTB pointer passed by m1n1 */
+> -	*err = 0;
+> -	return (void *)fw_dtb_pointer;
+> +	*fdtp = (void *)fw_dtb_pointer;
+> +
+> +	return 0;
+>  }
+>  
+>  void build_mem_map(void)
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 2ab2ceb5138..cd49de540f0 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -147,12 +147,12 @@ static void show_psci_version(void)
+>   * or for supporting quirky devices where it's easier to leave the downstream DT in place
+>   * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
+>   */
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	struct fdt_header *fdt;
+>  	bool internal_valid, external_valid;
+> +	int ret = 0;
+>  
+> -	*err = 0;
+>  	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
+>  	external_valid = fdt && !fdt_check_header(fdt);
+>  	internal_valid = !fdt_check_header(gd->fdt_blob);
+> @@ -167,10 +167,11 @@ void *board_fdt_blob_setup(int *err)
+>  
+>  	if (internal_valid) {
+>  		debug("Using built in FDT\n");
+> +		ret = -EEXIST;
+>  	} else {
+>  		debug("Using external FDT\n");
+>  		/* So we can use it before returning */
+> -		gd->fdt_blob = fdt;
+> +		*fdtp = fdt;
+>  	}
+>  
+>  	/*
+> @@ -179,7 +180,7 @@ void *board_fdt_blob_setup(int *err)
+>  	 */
+>  	qcom_parse_memory();
+>  
+> -	return (void *)gd->fdt_blob;
+> +	return ret;
+>  }
+>  
+>  void reset_cpu(void)
+> diff --git a/arch/arm/mach-stm32mp/boot_params.c b/arch/arm/mach-stm32mp/boot_params.c
+> index ebddf6a7dbc..2d058edc419 100644
+> --- a/arch/arm/mach-stm32mp/boot_params.c
+> +++ b/arch/arm/mach-stm32mp/boot_params.c
+> @@ -6,6 +6,7 @@
+>  #define LOG_CATEGORY LOGC_ARCH
+>  
+>  #include <config.h>
+> +#include <errno.h>
+>  #include <log.h>
+>  #include <linux/libfdt.h>
+>  #include <asm/arch/sys_proto.h>
+> @@ -16,20 +17,22 @@
+>   * Use the saved FDT address provided by TF-A at boot time (NT_FW_CONFIG =
+>   * Non Trusted Firmware configuration file) when the pointer is valid
+>   */
+> -void *board_fdt_blob_setup(int *err)
+> +int board_fdt_blob_setup(void **fdtp)
+>  {
+>  	unsigned long nt_fw_dtb = get_stm32mp_bl2_dtb();
+>  
+>  	log_debug("%s: nt_fw_dtb=%lx\n", __func__, nt_fw_dtb);
+>  
+> -	*err = 0;
+>  	/* use external device tree only if address is valid */
+> -	if (nt_fw_dtb >= STM32_DDR_BASE) {
+> -		if (fdt_magic(nt_fw_dtb) == FDT_MAGIC)
+> -			return (void *)nt_fw_dtb;
+> -		log_debug("%s: DTB not found.\n", __func__);
+> +	if (nt_fw_dtb < STM32_DDR_BASE ||
+> +	    fdt_magic(nt_fw_dtb) != FDT_MAGIC) {
+> +		log_debug("DTB not found.\n");
+> +		log_debug("fall back to builtin DTB, %p\n", _end);
+> +
+> +		return -EEXIST;
+>  	}
+> -	log_debug("%s: fall back to builtin DTB, %p\n", __func__, _end);
+>  
+> -	return (void *)_end;
+> +	*fdtp = (void *)nt_fw_dtb;
+> +
+> +	return 0;
+>  }
 
-=> sf probe && sf update ${loadaddr} 0x400000 0x10
-SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
-device 0 offset 0x400000, size 0x10
-SPI flash failed in read step
+For mach-stm32mp:
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Let me know if this helps.  
+Thanks
 
-Jon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

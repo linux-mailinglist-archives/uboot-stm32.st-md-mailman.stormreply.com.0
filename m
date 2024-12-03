@@ -2,44 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E19249E1142
-	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Dec 2024 03:30:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 922329E165F
+	for <lists+uboot-stm32@lfdr.de>; Tue,  3 Dec 2024 09:55:26 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 88CD2C6C83D;
-	Tue,  3 Dec 2024 02:30:36 +0000 (UTC)
-Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 493DCC6C83D;
+	Tue,  3 Dec 2024 08:55:26 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7EC88C6B45B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 24CE7C6B47E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Dec 2024 02:30:29 +0000 (UTC)
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6E2C788815;
- Tue,  3 Dec 2024 03:30:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1733193029;
- bh=Whyv2yVNfVDKQyKFan7bgqcv7dfKFWt2DrYh+B+W0vw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=y/NfvyP8g4lF5W+wLWmsoTIQPvkffjLXzIL+ZqAqUDJVl1PY5zEiawAGukd0yvFtM
- Phqx+HTRBatoW2fJd9RUA9BrQDCCLHw+pxQGuKVl2x+e55BKOtQhyQa6d0WK+ngEtb
- FV8X0Kt7l0B/cs2gK1zFXzRjbFCSf7LSfIKnSYQLf3RWKbZQIfmMts5+IqMV//twL2
- U/O3roQeAvYaXhh6v7gXGCSOj03Rqd1ia05N5vuJkL/fbYgJEdGHcgifrgS8YTVm3n
- ipdfZhHW7qIpLyR58pi1DKxT3GSJMNxvzMpLieE3FRJwbn7g0qmsV8yrP0GZmJiLym
- isJe+6XHx37+A==
-Message-ID: <7e22db87-96bd-4046-b08b-070e8be00624@denx.de>
-Date: Tue, 3 Dec 2024 02:02:52 +0100
+ Tue,  3 Dec 2024 08:55:19 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B37eOSI001826;
+ Tue, 3 Dec 2024 09:55:14 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ 3dbxFJuBb/rEd8lOyAnTuwc63Q98rA7QH7SGSjAJo44=; b=uoblUOGx1V0Rna7a
+ T5Zo4y/C6xPhnPWnhCZjFA7j48zsTReU4i8G/iYmXjW69IxM3fxgM/Px3+59QY15
+ sVsBccb9U+gGX5LVQV8rDcjK2j9KWJkXbfBpo6eYb1Aqd2IX1+F+CCs15sLFyUsz
+ p+00NDyzBRCoUmqwqNcYozSS6CM4k+iHsntvh27pWwGDhbTbNtbuhO3ZewImcAE5
+ 0Qjfx0H7T6APA1rbwDuivCKhCI8ivACIRfdJNfxHqAByJbN4cdjQB4whNPk2ugXW
+ oLDa6HP88yuDJrZyZrBjmKWj4burUFUGaKC4VPWKw4ReZyOwRz0/TDPcLnyPvfBN
+ k4Gk3w==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 438ehns6cq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 03 Dec 2024 09:55:14 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 06BC340053;
+ Tue,  3 Dec 2024 09:54:09 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 48E0A267CB9;
+ Tue,  3 Dec 2024 09:53:36 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Tue, 3 Dec
+ 2024 09:53:35 +0100
+Message-ID: <0ea488b2-d76f-450e-84c1-d43fe8f08e33@foss.st.com>
+Date: Tue, 3 Dec 2024 09:53:35 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
 References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
+ <7e22db87-96bd-4046-b08b-070e8be00624@denx.de>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20241202074644.5380-1-patrice.chotard@foss.st.com>
-X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
-X-Virus-Status: Clean
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <7e22db87-96bd-4046-b08b-070e8be00624@denx.de>
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
 Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -59,22 +76,30 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 12/2/24 8:46 AM, Patrice Chotard wrote:
-> In case "ums" command is used on platforms which don't implement
-> g_dnl_board_usb_cable_connected() and USB cable is not connected,
-> we stay inside sleep_thread() forever and watchdog is triggered.
-> 
-> Add schedule() call to avoid this issue.
-> 
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Marek Vasut <marex@denx.de>
 
-Is this a bugfix for 2025.01 ?
+
+On 12/3/24 02:02, Marek Vasut wrote:
+> On 12/2/24 8:46 AM, Patrice Chotard wrote:
+>> In case "ums" command is used on platforms which don't implement
+>> g_dnl_board_usb_cable_connected() and USB cable is not connected,
+>> we stay inside sleep_thread() forever and watchdog is triggered.
+>>
+>> Add schedule() call to avoid this issue.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+> 
+> Is this a bugfix for 2025.01 ?
+
+No, it can wait next release v2025.04
+
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

@@ -2,112 +2,114 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C1C09E300A
-	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Dec 2024 00:44:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 619079E300E
+	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Dec 2024 00:47:39 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D9B0DC6DD72;
-	Tue,  3 Dec 2024 23:44:30 +0000 (UTC)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1DC9FC6DD72;
+	Tue,  3 Dec 2024 23:47:39 +0000 (UTC)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1CA78C6C841
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF6D7C6C841
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Dec 2024 23:44:23 +0000 (UTC)
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20241203234419epoutp03e30b62447568a6c180131fd1d6820a7d~Nz2P3sFAE1874518745epoutp03P
+ Tue,  3 Dec 2024 23:47:31 +0000 (UTC)
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234728epoutp01992da245f25452e64482c70cce2fd44d~Nz4-6JrIG2513925139epoutp01a
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Dec 2024 23:44:19 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20241203234419epoutp03e30b62447568a6c180131fd1d6820a7d~Nz2P3sFAE1874518745epoutp03P
+ Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20241203234728epoutp01992da245f25452e64482c70cce2fd44d~Nz4-6JrIG2513925139epoutp01a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733269459;
- bh=aSELNagoNvH9LFcWDuTutASp5C4ohhumneftxJzg5Ss=;
+ s=mail20170921; t=1733269648;
+ bh=BAYsOryYOnm8EOwjb/qKaFG34Y5ViExcdV1aJYC9z58=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=oZPMjy2CDFLDJlvWI6ikVO47BN4snHjzYgGFfuPvjJE2OKr6qYhyrtr51c7FaiT3j
- iCDSoRlgtKonfOzqaLNVwx+Bex3/kcbVn18QPE+k6GaQCiClD2MeKP97BRsvQyH8z6
- W5SWiYx6mWpAySjgWnx1OYoY0Yk4kebbjh6DcxP4=
-Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20241203234419epcas1p11839598b712abaed10f0c7dd5c76389a~Nz2PIUrvV3129931299epcas1p1o;
- Tue,  3 Dec 2024 23:44:19 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.132]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4Y2y0x6cyLz4x9Pw; Tue,  3 Dec
- 2024 23:44:17 +0000 (GMT)
-Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 17.F4.23869.1D79F476; Wed,  4 Dec 2024 08:44:17 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20241203234417epcas1p28b77a3c9077368c3b38690b20eeb0dd5~Nz2NoSIgt2977429774epcas1p2K;
- Tue,  3 Dec 2024 23:44:17 +0000 (GMT)
+ b=GVyZ+IPRiSs3c3nhVfeIH0hDQ2GKO1k3gdigxIQtwy0mJnd/Wye4Y/2l2A+FvZUOb
+ wVj7C5zFYrAmYcZ7I8Z4E4WuJdavkE5G20PzMR0SyZyEC9coMjE+3PElVVWnlHYnXw
+ eScoLvV6or7R86UNMx1vyagqn+QlOMaSQUNCOQs8=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234728epcas1p3a66bdf8f3f088281ed1f906c4ffbb94c~Nz4-YRy9E2556425564epcas1p3T;
+ Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
+Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.236]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4Y2y4b5FrWz4x9Pp; Tue,  3 Dec
+ 2024 23:47:27 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ FD.84.31735.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959~Nz4_Y77OE2779727797epcas1p3F;
+ Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
 Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20241203234417epsmtrp16a2affed7cf93c6e0db69a643c05bd3a~Nz2NndO_l1590215902epsmtrp1X;
- Tue,  3 Dec 2024 23:44:17 +0000 (GMT)
-X-AuditID: b6c32a36-6e9e870000005d3d-fb-674f97d1e0c0
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20241203234727epsmtrp29156ab8561db99fdc06f99f849ce0993~Nz4_YEvQD1788017880epsmtrp2n;
+ Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
+X-AuditID: b6c32a4c-ac3ff70000007bf7-55-674f988f8ab9
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 80.3A.18729.1D79F476; Wed,  4 Dec 2024 08:44:17 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ 28.7A.18729.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20241203234417epsmtip2ea49692f72ec617032a6a2d75fd1d61d~Nz2Nbu7Fs0960509605epsmtip2S;
- Tue,  3 Dec 2024 23:44:17 +0000 (GMT)
+ 20241203234726epsmtip163c81ad828f5931774e165aef28eb782~Nz4_GR1I11695216952epsmtip1v;
+ Tue,  3 Dec 2024 23:47:26 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Patrice Chotard'" <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-In-Reply-To: <20241203100611.354468-1-patrice.chotard@foss.st.com>
-Date: Wed, 4 Dec 2024 08:44:17 +0900
-Message-ID: <000001db45dd$443cdd10$ccb69730$@samsung.com>
+In-Reply-To: <20241203100611.354468-2-patrice.chotard@foss.st.com>
+Date: Wed, 4 Dec 2024 08:47:26 +0900
+Message-ID: <000101db45dd$b54ddef0$1fe99cd0$@samsung.com>
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQGqifrPAwC6UYr0+eC5Rcad0W/iDwHJXg/ssyhbazA=
+Thread-Index: AQHJXg/s3915w2qFAukO13E/llQlpwJ7XfgCA01hB8OyyrlHUA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjk+LIzCtJLcpLzFFi42LZdlhTV/fidP90g69TTCxOvrnKYvGmrZHR
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCJsWRmVeSWpSXmKPExsWy7bCmgW7/DP90g7+fVCxOvrnKYvGmrZHR
  4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
  WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEdUtk1GamJKapFCal5yfkpmXrqtkndwvHO8
  qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0H1KCmWJOaVAoYDE4mIlfTubovzSklSFjPziElul
- 1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMn6/PMxY8Eq/42byHpYFxq3AXIyeHhICJ
- xJ31u1i7GLk4hAR2MErMfnSFGcL5xCjx5OMvFpAqIYFvjBKPduXDdPRNfQFVtJdR4urBfUwQ
- zktGica9O5hAqtgE9CT+L1rIDGKLCPhLPJ88gxGkiFlgB5PEti8rwRKcAk4SKz+2sIHYwgKB
- EtMatgI1c3CwCKhITHsmAhLmFbCU6J27kRFis4LEz6fLWCFmWkm8+HYMzGYWEJGY3dkGdpGE
- wEQOiTsLHzBDNLhILPo4mw3CFpZ4dXwLO4QtJfGyv40doqGZUWLpkoOsEE4Po8S/hutQHcYS
- +5dOBruIWUBTYv0ufYhtfBLvvvawgoQlBHglOtqEIKpVJC69fskEM//uk/+sELaHxMv2KcyQ
- YJwKNH5S1QRG+VlI7p6FsGABI9MqRrHUguLc9NRiwwIjeFQm5+duYgQnTC2zHYyT3n7QO8TI
- xMF4iFGCg1lJhHf5eu90Id6UxMqq1KL8+KLSnNTiQ4ymwICcyCwlmpwPTNl5JfGGJpYGJmZG
- xiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwyW8XficveKGha9Nyw+MpR28y/5+x
- ZgKr1644VpvSrt/tVhbx8pMmLTqhKhL6+C/X06DJyl0JFpWxvww/7M9zU6kXenBY8JdhYZyL
- u6iLTZ7wHmHWndE+K3/O3pWf++Rgm+LJvR2/0jPsplZyc6g5PLfhnnNwzSUev9r/kbEmzdlJ
- 6Z/2/056WzBT66e81MF5y1vs+eUPb2T7cersuTvJgjcUme8oHPS9NWvltAPL5hVKGr8JjJiZ
- JHJWyWQ3e8HWmb+7w5N5Kxvf2f2Im/3rbpHs02rmD3fdXl82e+nN6nRTb+YL3x9HKv9c6s//
- eGWl+fxVLf9fzxTO+rgrq8Z1xkEF8VvVYedKXBQ/PvdZocRSnJFoqMVcVJwIALLMm1MhBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrCLMWRmVeSWpSXmKPExsWy7bCSvO7F6f7pBrNfilucfHOVxeJNWyOj
- xc+T79ktJq2/xm6x/vI2dotvW7YxWkydtJnd4u3eTnaLhVuXszhwerx9OoXRY3bDRRaPebNO
- sHg87d/K7vHqwCp2jxMTLjF5nL2zg9Hj4D7DAI4oLpuU1JzMstQifbsEroyfr88zFjwSr/jZ
- vIelgXGrcBcjJ4eEgIlE39QXzF2MXBxCArsZJc52L2OCSEhJfH46la2LkQPIFpY4fLgYouY5
- o8TxjnPsIDVsAnoS/xctZAaxRQT8JZ5PnsEIUsQssIdJ4nLTV3aIjsmMEp+uPmUBqeIUcJJY
- +bGFDcQWBupovfAGbAOLgIrEtGciIGFeAUuJ3rkbGSGOUJD4+XQZK8QCK4kX346B2cwCIhKz
- O9uYJzAKzELiLmBkXMUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJERzwWpo7GLev+qB3
+ 1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMO39OsBTs5a34fmc5YwPjGu4uRk4OCQET
+ iel72lm6GLk4hAT2MEqsOvkIyvnEKPG18y0rhPONUeLb32XsMC297zqgqvYySmxcsJkJwnnJ
+ KHG0cykLSBWbgJ7E/0ULmUFsEQF/ieeTZzCCFDEL7GCS2PZlJViCU8BJYtXXt2wgtrBAusTc
+ qQvBmlkEVCR2/L8HZvMKWEqs+L+YEWK1gsTPp8tYIYY6STT+/goWZxYQkZjd2cYMskBCoJdD
+ 4lhPMytEg4vEyTfXoJqFJV4d3wL1g5TE53d72SAamhklli45yArh9DBK/Gu4zgZRZSyxf+lk
+ oOc4gFZoSqzfpQ+xjU/i3dceVpCwhACvREebEES1isSl1y+ZYObfffIfqsRDYus0DkgInWWU
+ 6Dh/l2kCo/wsJHfPQliwgJFpFaNUakFxbnpqsmGBoW5eajk8QpPzczcxgpOnls8Oxu/r/+od
+ YmTiYDzEKMHBrCTCu3y9d7oQb0piZVVqUX58UWlOavEhRlNgaE5klhJNzgem77ySeEMTSwMT
+ MyNjEwtDM0Mlcd4zV8pShQTSE0tSs1NTC1KLYPqYODilGpikNk3IWzdP5PI/Y783vR/2HN52
+ 9Pan1iWiUluLWvq87vzvedoRXy7+7cJlqY7HUwTn+GzMZXu+5fD2Cd/X3p9p8b7sufTpwH/R
+ QnliDjMEdnYvlXwkWNizYhZbx+9zVhEtC++Wfc59cs7MfO6ybvMakb/b+LU/HXwZE2zVtD12
+ f8fCMuGX85ec57WIOym9uXtiDb+qcavsxkcTA9seG/AGTSvoNuKa+4rb8Mtvx8QPP7/n5Z6d
+ GhZftTmmPzJcTKb3di53pfff/2yzVThce77fu7Nzyv76ZK2vIsvO8N+0CN25pOWvp8DqROb3
+ bfoFimuN1/N938yVK9ZyOHR5teDjTl2hmbm/Ap7PXTBBOMdEiaU4I9FQi7moOBEABNnK3CcE
+ AAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKLMWRmVeSWpSXmKPExsWy7bCSnG7/DP90g4fLWS1OvrnKYvGmrZHR
+ 4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
+ WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEcUl01Kak5mWWqRvl0CV8adPydYCvbyVny/
+ s5yxgXENdxcjJ4eEgIlE77sOli5GLg4hgd2MEs1tH9kgElISn59OBbI5gGxhicOHiyFqnjNK
+ nJ0ziRmkhk1AT+L/ooVgtoiAv8TzyTMYQYqYBfYwSVxu+soO0XGSUeLuyWfsIFWcAk4Sq76+
+ BdsgLJAqcXbLXlYQm0VARWLH/3ssIDavgKXEiv+LGSGuUJD4+XQZK8QGJ4nG31/B4swCIhKz
+ O9uYJzAKzELiLmBkXMUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJERzyWpo7GLev+qB3
  iJGJg/EQowQHs5II7/L13ulCvCmJlVWpRfnxRaU5qcWHGKU5WJTEecVf9KYICaQnlqRmp6YW
- pBbBZJk4OKUamLYr+3NyGLfO8N3FHrpsw7l1MYYhd6Zc5KiUCguw3WLt/q/0hX5hrP6hXSct
- C0Tn/Xt8n3+lfsMlH5XCrws/aMx+7Dp5WodM9OkV+qVzvrbulLG+2Rd87dOUj2o2gld9E+ed
- 8vHJXXYvpdWk9dDreJYPFz7ctZ0617dnybf/Yl7mt5cqNE682/lma8Hv4PVXQmY6TS4Ptk1Z
- 152l1XYxKLricMiTstMPa2v+G9nb7Zp59UNBSkvXSSed+TVXr9b91pLykbgQ1LxMLlN7wRqj
- LdHfoh5OvbXvmnP7NfsfNovFUieFsCS4vHK4t2TyHnOpHJbaWU4HdmcK7tsXX/tUvnoV7424
- iXofBTe1NDr8W6XEUpyRaKjFXFScCAAti7Jo5wIAAA==
-X-CMS-MailID: 20241203234417epcas1p28b77a3c9077368c3b38690b20eeb0dd5
+ pBbBZJk4OKUamKxdujPCFPx+xxrdmrW91itzo37sE4/Lx93cNVeLCLTXcK++wjZHy8Uwm8Wj
+ cO4B0YhtnILWejX/d727OvlucOe553M3rJmwdU7Ei9gvan6/OYt/yArycqS0+/zZcVJ3RVFe
+ 6+wLr92P/shKKBPiOmuX4bFudwFTjXtI46GPu3t7HZfoNcgXm/4XCb7ZMK9cnZOtW/rIf+bt
+ Vj/td9r2VCpu/8gkKOL/5IvD34mH/2y6H1fOY2X6w8J1XuKeyMy8cibdopSkbyfPneaas3ct
+ xwmurmdXHGUrVfl3FcjcviH+5vChOvHPVdlhk6X5BP9tr/ynZr6PW/Hng+NG0bnf1stxWfXt
+ kVJvPrZ+mvQkJZbijERDLeai4kQANBSjrugCAAA=
+X-CMS-MailID: 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959
 X-Msg-Generator: CA
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241203101026epcas1p333452efbf04c91a651dc4de99877dbb8
-References: <CGME20241203101026epcas1p333452efbf04c91a651dc4de99877dbb8@epcas1p3.samsung.com>
- <20241203100611.354468-1-patrice.chotard@foss.st.com>
+X-CMS-RootMailID: 20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8
+References: <20241203100611.354468-1-patrice.chotard@foss.st.com>
+ <CGME20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8@epcas1p3.samsung.com>
+ <20241203100611.354468-2-patrice.chotard@foss.st.com>
 Cc: 'Marek Vasut' <marex@denx.de>, 'Tom Rini' <trini@konsulko.com>,
  'Jonas Karlman' <jonas@kwiboo.se>, 'Quentin Schulz' <quentin.schulz@cherry.de>,
  'Simon Glass' <sjg@chromium.org>,
  'U-Boot STM32' <uboot-stm32@st-md-mailman.stormreply.com>,
  'Patrick DELAUNAY' <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] power: regulator: replace some
- debug() by dev_dbg()
+Subject: Re: [Uboot-stm32] [PATCH v2 2/2] power: regulator: replace
+ dev_dbg() by dev_err() in regulator_post_bind()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -135,10 +137,10 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 > Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>; Jonas
 > Karlman <jonas@kwiboo.se>; Marek Vasut <marex@denx.de>; Quentin Schulz <quentin.schulz@cherry.de>;
 > Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>
-> Subject: [PATCH v2 1/2] power: regulator: replace some debug() by dev_dbg()
+> Subject: [PATCH v2 2/2] power: regulator: replace dev_dbg() by dev_err() in regulator_post_bind()
 >
-> Replace some debug() by dev_dbg() when dev variable
-> is available/valid.
+> To ease debugging, use dev_err() instead of dev_dbg() for
+> alerting when regulator has nonunique value.
 >
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
@@ -151,62 +153,25 @@ Jaehoon Chung
 > ---
 >
 > Changes in v2:
->       - rework dev_dbg() message to avoid printing twice dev->name.
+>   - split initial patch into 2 commits to separate dev_dbg() and
+>     dev_err() migration.
 >
->  drivers/power/regulator/regulator-uclass.c | 13 ++++++-------
->  1 file changed, 6 insertions(+), 7 deletions(-)
+>  drivers/power/regulator/regulator-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
 > diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index decd0802c84..80ea5e65d48 100644
+> index 80ea5e65d48..09567eb9dbb 100644
 > --- a/drivers/power/regulator/regulator-uclass.c
 > +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -9,6 +9,7 @@
->  #include <errno.h>
->  #include <dm.h>
->  #include <log.h>
-> +#include <dm/device_compat.h>
->  #include <dm/uclass-internal.h>
->  #include <linux/delay.h>
->  #include <power/pmic.h>
-> @@ -43,8 +44,7 @@ static void regulator_set_value_ramp_delay(struct udevice *dev, int old_uV,
->  {
->  	int delay = DIV_ROUND_UP(abs(new_uV - old_uV), ramp_delay);
->
-> -	debug("regulator %s: delay %u us (%d uV -> %d uV)\n", dev->name, delay,
-> -	      old_uV, new_uV);
-> +	dev_dbg(dev, "delay %u us (%d uV -> %d uV)\n", delay, old_uV, new_uV);
->
->  	udelay(delay);
->  }
-> @@ -263,7 +263,7 @@ int regulator_get_by_platname(const char *plat_name, struct udevice **devp)
->  	for (ret = uclass_find_first_device(UCLASS_REGULATOR, &dev); dev;
->  	     ret = uclass_find_next_device(&dev)) {
->  		if (ret) {
-> -			debug("regulator %s, ret=%d\n", dev->name, ret);
-> +			dev_dbg(dev, "ret=%d\n", ret);
->  			continue;
->  		}
->
-> @@ -439,16 +439,15 @@ static int regulator_post_bind(struct udevice *dev)
->  	/* Regulator's mandatory constraint */
->  	uc_pdata->name = dev_read_string(dev, property);
->  	if (!uc_pdata->name) {
-> -		debug("%s: dev '%s' has no property '%s'\n",
-> -		      __func__, dev->name, property);
-> +		dev_dbg(dev, "has no property '%s'\n", property);
->  		uc_pdata->name = dev_read_name(dev);
->  		if (!uc_pdata->name)
->  			return -EINVAL;
+> @@ -446,7 +446,7 @@ static int regulator_post_bind(struct udevice *dev)
 >  	}
 >
 >  	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
-> -		debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-> -		      property, dev->name, uc_pdata->name);
-> +		dev_dbg(dev, "'%s' has nonunique value: '%s\n",
-> +			property, uc_pdata->name);
+> -		dev_dbg(dev, "'%s' has nonunique value: '%s\n",
+> +		dev_err(dev, "'%s' has nonunique value: '%s\n",
+>  			property, uc_pdata->name);
 >  		return -EINVAL;
 >  	}
->
 > --
 > 2.25.1
 

@@ -2,114 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 619079E300E
-	for <lists+uboot-stm32@lfdr.de>; Wed,  4 Dec 2024 00:47:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3629A9E4CFF
+	for <lists+uboot-stm32@lfdr.de>; Thu,  5 Dec 2024 05:17:24 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1DC9FC6DD72;
-	Tue,  3 Dec 2024 23:47:39 +0000 (UTC)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CF6D7C6C841
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E2C2FC71292;
+	Thu,  5 Dec 2024 04:17:23 +0000 (UTC)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6325BC7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Dec 2024 23:47:31 +0000 (UTC)
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20241203234728epoutp01992da245f25452e64482c70cce2fd44d~Nz4-6JrIG2513925139epoutp01a
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20241203234728epoutp01992da245f25452e64482c70cce2fd44d~Nz4-6JrIG2513925139epoutp01a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1733269648;
- bh=BAYsOryYOnm8EOwjb/qKaFG34Y5ViExcdV1aJYC9z58=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=GVyZ+IPRiSs3c3nhVfeIH0hDQ2GKO1k3gdigxIQtwy0mJnd/Wye4Y/2l2A+FvZUOb
- wVj7C5zFYrAmYcZ7I8Z4E4WuJdavkE5G20PzMR0SyZyEC9coMjE+3PElVVWnlHYnXw
- eScoLvV6or7R86UNMx1vyagqn+QlOMaSQUNCOQs8=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20241203234728epcas1p3a66bdf8f3f088281ed1f906c4ffbb94c~Nz4-YRy9E2556425564epcas1p3T;
- Tue,  3 Dec 2024 23:47:28 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.236]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Y2y4b5FrWz4x9Pp; Tue,  3 Dec
- 2024 23:47:27 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- FD.84.31735.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959~Nz4_Y77OE2779727797epcas1p3F;
- Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20241203234727epsmtrp29156ab8561db99fdc06f99f849ce0993~Nz4_YEvQD1788017880epsmtrp2n;
- Tue,  3 Dec 2024 23:47:27 +0000 (GMT)
-X-AuditID: b6c32a4c-ac3ff70000007bf7-55-674f988f8ab9
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 28.7A.18729.F889F476; Wed,  4 Dec 2024 08:47:27 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20241203234726epsmtip163c81ad828f5931774e165aef28eb782~Nz4_GR1I11695216952epsmtip1v;
- Tue,  3 Dec 2024 23:47:26 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Patrice Chotard'" <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-In-Reply-To: <20241203100611.354468-2-patrice.chotard@foss.st.com>
-Date: Wed, 4 Dec 2024 08:47:26 +0900
-Message-ID: <000101db45dd$b54ddef0$1fe99cd0$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHJXg/s3915w2qFAukO13E/llQlpwJ7XfgCA01hB8OyyrlHUA==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCJsWRmVeSWpSXmKPExsWy7bCmgW7/DP90g7+fVCxOvrnKYvGmrZHR
- 4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
- WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEdUtk1GamJKapFCal5yfkpmXrqtkndwvHO8
- qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0H1KCmWJOaVAoYDE4mIlfTubovzSklSFjPziElul
- 1IKUnALTAr3ixNzi0rx0vbzUEitDAwMjU6DChOyMO39OsBTs5a34fmc5YwPjGu4uRk4OCQET
- iel72lm6GLk4hAT2MEqsOvkIyvnEKPG18y0rhPONUeLb32XsMC297zqgqvYySmxcsJkJwnnJ
- KHG0cykLSBWbgJ7E/0ULmUFsEQF/ieeTZzCCFDEL7GCS2PZlJViCU8BJYtXXt2wgtrBAusTc
- qQvBmlkEVCR2/L8HZvMKWEqs+L+YEWK1gsTPp8tYIYY6STT+/goWZxYQkZjd2cYMskBCoJdD
- 4lhPMytEg4vEyTfXoJqFJV4d3wL1g5TE53d72SAamhklli45yArh9DBK/Gu4zgZRZSyxf+lk
- oOc4gFZoSqzfpQ+xjU/i3dceVpCwhACvREebEES1isSl1y+ZYObfffIfqsRDYus0DkgInWWU
- 6Dh/l2kCo/wsJHfPQliwgJFpFaNUakFxbnpqsmGBoW5eajk8QpPzczcxgpOnls8Oxu/r/+od
- YmTiYDzEKMHBrCTCu3y9d7oQb0piZVVqUX58UWlOavEhRlNgaE5klhJNzgem77ySeEMTSwMT
- MyNjEwtDM0Mlcd4zV8pShQTSE0tSs1NTC1KLYPqYODilGpikNk3IWzdP5PI/Y783vR/2HN52
- 9Pan1iWiUluLWvq87vzvedoRXy7+7cJlqY7HUwTn+GzMZXu+5fD2Cd/X3p9p8b7sufTpwH/R
- QnliDjMEdnYvlXwkWNizYhZbx+9zVhEtC++Wfc59cs7MfO6ybvMakb/b+LU/HXwZE2zVtD12
- f8fCMuGX85ec57WIOym9uXtiDb+qcavsxkcTA9seG/AGTSvoNuKa+4rb8Mtvx8QPP7/n5Z6d
- GhZftTmmPzJcTKb3di53pfff/2yzVThce77fu7Nzyv76ZK2vIsvO8N+0CN25pOWvp8DqROb3
- bfoFimuN1/N938yVK9ZyOHR5teDjTl2hmbm/Ap7PXTBBOMdEiaU4I9FQi7moOBEABNnK3CcE
- AAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrKLMWRmVeSWpSXmKPExsWy7bCSnG7/DP90g4fLWS1OvrnKYvGmrZHR
- 4ufJ9+wWk9ZfY7dYf3kbu8W3LdsYLaZO2sxu8XZvJ7vFwq3LWRw4Pd4+ncLoMbvhIovHvFkn
- WDye9m9l93h1YBW7x4kJl5g8zt7ZwehxcJ9hAEcUl01Kak5mWWqRvl0CV8adPydYCvbyVny/
- s5yxgXENdxcjJ4eEgIlE77sOli5GLg4hgd2MEs1tH9kgElISn59OBbI5gGxhicOHiyFqnjNK
- nJ0ziRmkhk1AT+L/ooVgtoiAv8TzyTMYQYqYBfYwSVxu+soO0XGSUeLuyWfsIFWcAk4Sq76+
- BdsgLJAqcXbLXlYQm0VARWLH/3ssIDavgKXEiv+LGSGuUJD4+XQZK8QGJ4nG31/B4swCIhKz
- O9uYJzAKzELiLmBkXMUomVpQnJueW2xYYJiXWq5XnJhbXJqXrpecn7uJERzyWpo7GLev+qB3
- iJGJg/EQowQHs5II7/L13ulCvCmJlVWpRfnxRaU5qcWHGKU5WJTEecVf9KYICaQnlqRmp6YW
- pBbBZJk4OKUamKxdujPCFPx+xxrdmrW91itzo37sE4/Lx93cNVeLCLTXcK++wjZHy8Uwm8Wj
- cO4B0YhtnILWejX/d727OvlucOe553M3rJmwdU7Ei9gvan6/OYt/yArycqS0+/zZcVJ3RVFe
- 6+wLr92P/shKKBPiOmuX4bFudwFTjXtI46GPu3t7HZfoNcgXm/4XCb7ZMK9cnZOtW/rIf+bt
- Vj/td9r2VCpu/8gkKOL/5IvD34mH/2y6H1fOY2X6w8J1XuKeyMy8cibdopSkbyfPneaas3ct
- xwmurmdXHGUrVfl3FcjcviH+5vChOvHPVdlhk6X5BP9tr/ynZr6PW/Hng+NG0bnf1stxWfXt
- kVJvPrZ+mvQkJZbijERDLeai4kQANBSjrugCAAA=
-X-CMS-MailID: 20241203234727epcas1p376e3e4f1cc884fb1ce05b2777bb20959
-X-Msg-Generator: CA
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8
-References: <20241203100611.354468-1-patrice.chotard@foss.st.com>
- <CGME20241203101038epcas1p390bf81617407bbc930d250d73e97e3e8@epcas1p3.samsung.com>
- <20241203100611.354468-2-patrice.chotard@foss.st.com>
-Cc: 'Marek Vasut' <marex@denx.de>, 'Tom Rini' <trini@konsulko.com>,
- 'Jonas Karlman' <jonas@kwiboo.se>, 'Quentin Schulz' <quentin.schulz@cherry.de>,
- 'Simon Glass' <sjg@chromium.org>,
- 'U-Boot STM32' <uboot-stm32@st-md-mailman.stormreply.com>,
- 'Patrick DELAUNAY' <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/2] power: regulator: replace
- dev_dbg() by dev_err() in regulator_post_bind()
+ Thu,  5 Dec 2024 04:17:16 +0000 (UTC)
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 4B54GdBw1892735
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 4 Dec 2024 22:16:39 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1733372199;
+ bh=feWS9gOTOCZFLRlAHLyZL5+U0wTwZccyKn22LwFkUpo=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=jansHxxKSRHoiNgQzLW/IgVtYH7z6jrFFy6Lraw/lULGuqIb1vsC7nPOpcINOckFw
+ kZqQ8eBn3eP20Ess/gBDK+/efxO/3Gqi8E82WPgCHGY92boLMhu1mEOn9hH3d9eo5n
+ wvCNwIigWmPi4+863AP3Idbtp2LBokePggMwwvuI=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4B54Gd4Q097163
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 4 Dec 2024 22:16:39 -0600
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Dec 2024 22:16:38 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Dec 2024 22:16:38 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4B54Gcln014936;
+ Wed, 4 Dec 2024 22:16:38 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, Michal Simek
+ <michal.simek@amd.com>, <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>
+In-Reply-To: <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+References: <20241022210633.271534-1-marek.vasut+renesas@mailbox.org>
+ <b9cb3ec8-b6f2-4f38-8cda-d3d10278f503@amd.com>
+ <e9929e0c-aa43-428f-8bf7-7b4cdef0e9c3@mailbox.org>
+ <86v7x05fyd.fsf@udb0321960.dhcp.ti.com>
+ <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+ <86ses458k3.fsf@udb0321960.dhcp.ti.com>
+ <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
+ <86pln759j9.fsf@udb0321960.dhcp.ti.com>
+ <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
+ <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+Date: Wed, 4 Dec 2024 22:16:38 -0600
+Message-ID: <865xny69y1.fsf@udb0321960.dhcp.ti.com>
+MIME-Version: 1.0
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Cc: Michael Walle <mwalle@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
+ Simon Glass <sjg@chromium.org>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, Pratyush Yadav <p.yadav@ti.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
+ memories support in QSPI driver"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -121,62 +81,124 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+Jon Humphreys <j-humphreys@ti.com> writes:
 
-
-> -----Original Message-----
-> From: Patrice Chotard <patrice.chotard@foss.st.com>
-> Sent: Tuesday, December 3, 2024 7:06 PM
-> To: u-boot@lists.denx.de
-> Cc: Patrice CHOTARD <patrice.chotard@foss.st.com>; Patrick DELAUNAY <patrick.delaunay@foss.st.com>; U-
-> Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>; Jonas
-> Karlman <jonas@kwiboo.se>; Marek Vasut <marex@denx.de>; Quentin Schulz <quentin.schulz@cherry.de>;
-> Simon Glass <sjg@chromium.org>; Tom Rini <trini@konsulko.com>
-> Subject: [PATCH v2 2/2] power: regulator: replace dev_dbg() by dev_err() in regulator_post_bind()
+> Marek Vasut <marek.vasut@mailbox.org> writes:
 >
-> To ease debugging, use dev_err() instead of dev_dbg() for
-> alerting when regulator has nonunique value.
+>> On 11/7/24 4:49 PM, Jon Humphreys wrote:
+>>> Marek Vasut <marek.vasut@mailbox.org> writes:
+>>> 
+>>>> On 11/6/24 10:58 PM, Jon Humphreys wrote:
+>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
+>>>>>
+>>>>>> On 11/6/24 8:18 PM, Jon Humphreys wrote:
+>>>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
+>>>>>>>
+>>>>>>>> On 10/23/24 10:17 AM, Michal Simek wrote:
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> On 10/22/24 23:06, Marek Vasut wrote:
+>>>>>>>>>> This reverts commit 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
+>>>>>>>>>>
+>>>>>>>>>> This parallel/stacked support breaks basic SPI NOR support,
+>>>>>>>>>> e.g. this no longer works:
+>>>>>>>>>>
+>>>>>>>>>> => sf probe && sf update 0x50000000 0 0x160000
+>>>>>>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase size 256 KiB,
+>>>>>>>>>> total 64 MiB
+>>>>>>>>>> device 0 offset 0x0, size 0x160000
+>>>>>>>>>> SPI flash failed in read step
+>>>>>>>>>
+>>>>>>>>> Reverting everything seems to me too much. Tom has tested it on his HW
+>>>>>>>>> and didn't see any issue. That's why better to look at code which is
+>>>>>>>>> causing this.
+>>>>>>>>> You are reverting everything but likely there is specific patch which is
+>>>>>>>>> causing this. Which one is it?
+>>>>>>>>> Which board was used for your testing? Likely we don't have access to it.
+>>>>>>>>> Is there any QEMU available which can be used for debugging?
+>>>>>>>>
+>>>>>>>> The testcase including the exact SPI NOR model is above.
+>>>>>>>>
+>>>>>>>> iMX6 with w25q16dw seems to be broken too.
+>>>>>>>>
+>>>>>>>> Basically every board I have access no longer has a working "sf probe ;
+>>>>>>>> sf update" combination ... so yeah, this means this patchset is
+>>>>>>>> fundamentally broken.
+>>>>>>>>
+>>>>>>>
+>>>>>>> I can also confirm that the patch series:
+>>>>>>>
+>>>>>>> f8efc68b30e Merge patch series "spi-nor: Add parallel and stacked memories
+>>>>>>> support"
+>>>>>>>
+>>>>>>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-AM62P:
+>>>>>>>
+>>>>>>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13 -0600)
+>>>>>>>
+>>>>>>> SoC:   AM62X SR1.0 HS-FS
+>>>>>>> Model: Texas Instruments AM625 SK
+>>>>>>> ...
+>>>>>>> Hit any key to stop autoboot:  0
+>>>>>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
+>>>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+>>>>>>> device 0 offset 0x400000, size 0x10
+>>>>>>> SPI flash failed in read step
+>>>>>>> =>
+>>>>>> Sigh ... can you please test current u-boot/master and see if the error
+>>>>>> is fixed there ?
+>>>>>>
+>>>>>
+>>>>> Yes I had verified it also fails against master, although the behavior was
+>>>>> a bit different.  The .'s below are our DMA engine waiting indefinitely.
+>>>>>
+>>>>> => sf probe && sf update ${loadaddr} 0x400000 0x10
+>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+>>>>> device 0 offset 0x400000, size 0x10
+>>>>> .....................................................
+>>>>>
+>>>>> I have not investigated further.
+>>>>
+>>>> Can you try and run some 'git bisect' to find out exactly which commit
+>>>> broke your use case ? There is a bunch of fixes for the worst breakage
+>>>> that landed recently, but clearly there is more.
+>>>>
+>>>> Full revert seems increasingly appealing ...
+>>> 
+>>> commit 5d40b3d384d
+>> So there is still something broken in that specific commit that I missed 
+>> when removing the defects ? Sigh ... can you try to narrow it down ?
 >
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
+> Hi Marek, I tried to narrow the changes in commit
+> 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 a bit by first applying all of the
+> changes in the .h files, and then for spi-nor-core.c, only applying changes
+> per function. The only function change that causes errors was
+> spi_nor_read(). With the changes in spi_nor_read() in commit
+> 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 applied to the prior commit
+> fbe16bc2801, did I get:
 >
-> ---
+> => sf probe && sf update ${loadaddr} 0x400000 0x10
+> SF: Detected s28hs512t with page size 256 Bytes, erase size 256 KiB, total 64 MiB
+> device 0 offset 0x400000, size 0x10
+> SPI flash failed in read step
 >
-> Changes in v2:
->   - split initial patch into 2 commits to separate dev_dbg() and
->     dev_err() migration.
->
->  drivers/power/regulator/regulator-uclass.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 80ea5e65d48..09567eb9dbb 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -446,7 +446,7 @@ static int regulator_post_bind(struct udevice *dev)
->  	}
->
->  	if (!regulator_name_is_unique(dev, uc_pdata->name)) {
-> -		dev_dbg(dev, "'%s' has nonunique value: '%s\n",
-> +		dev_err(dev, "'%s' has nonunique value: '%s\n",
->  			property, uc_pdata->name);
->  		return -EINVAL;
->  	}
-> --
-> 2.25.1
 
+Hi all.  What is the status of addressing the failures introduced by this
+patchset?  I tried building from u-boot next and still see the failure.
 
+Marek, was the isolation of changes I performed above helpful in
+understanding the failure?
 
+Thanks
+Jon
+
+> Let me know if this helps.  
+>
+> Jon
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

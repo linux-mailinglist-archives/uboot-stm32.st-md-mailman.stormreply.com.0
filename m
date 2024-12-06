@@ -2,106 +2,91 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3C1D99E6BFC
-	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Dec 2024 11:23:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 094409E7648
+	for <lists+uboot-stm32@lfdr.de>; Fri,  6 Dec 2024 17:39:44 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E2F7AC6DD9A;
-	Fri,  6 Dec 2024 10:23:30 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com
- [209.85.208.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC01FC6DD9D;
+	Fri,  6 Dec 2024 16:39:43 +0000 (UTC)
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
+ [209.85.160.176])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id BE0D1C6C855
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D00F1C6C855
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri,  6 Dec 2024 10:23:22 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id
- 4fb4d7f45d1cf-5cece886771so3520471a12.0
+ Fri,  6 Dec 2024 16:39:36 +0000 (UTC)
+Received: by mail-qt1-f176.google.com with SMTP id
+ d75a77b69052e-46695dd02e8so22713791cf.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 06 Dec 2024 02:23:22 -0800 (PST)
+ Fri, 06 Dec 2024 08:39:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733480602; x=1734085402;
+ d=konsulko.com; s=google; t=1733503176; x=1734107976;
  darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pzkoXdzTAFB7OE/eqOBSKtd0968FePJFiEquSN7LfpQ=;
- b=JVAlWY3n5VLD6IXCD+SSQTabRQsWT0YxKSqF+6QIMS0Fo5Ke8r19ROO71PDeW1S2P5
- dnQBfXCoZA21B6e+/E+rD5Pq/8/8OV6rn7vV0XRWZg/rJJvtwIngwzXUJ7Mr4Bzr2x9r
- SBaVSztf/t7u17Yz8mXPYDPEZW25UtH1FYw5ONasmXmXE1wZgIB5JE/4BFKPdPcNwNEO
- lZ9N5aJbzdM44MOteaD3XuEi0UXLilsILSN5XbWmdfLUojRnyheKkF75HKf8khbcvocY
- I6qY/Ia4eXtcDlMQHNd++AcY39BUcTeamQ0BUWBd4sdzccDwyOfeit/kpJas1nBXGoKd
- Qp2g==
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6XwsIsYx+lCjIGoZ9wo3ImEreZ1W5Nu1OSK4u1mpYsQ=;
+ b=C4FdO7dM3BqrnWVVA2iyQgTpz0PAZ6iwD+WOBH5V9nIf9vFP88LST8UQ5rRXhSlQh9
+ IxWyvzkPzSNpN4NcrOL1lUof1TZNiizz8rdOs895xOuJ8/+15AZEhq16/VASg6Xx/0Hi
+ 4EFPYamFFKZwH+zNBfs6F4cETXqcWnek2kA4s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733480602; x=1734085402;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pzkoXdzTAFB7OE/eqOBSKtd0968FePJFiEquSN7LfpQ=;
- b=cY2J1Io2CoN9nlB0vKNXVGqxB60FF2HUFlEE2QeXxBWuaAHGT5sl98HBCYosjuxxCq
- 63EUCMKy+RiLtniMdY1yqdp7BCTahjLqUund3UdOoCF5wbnJrFvChm4gTFvlWYEjTaTk
- 3PuYmM+K5KwT/BuS6QggJBzofQ1+CgCqrupp7WcqpCmAvHeqPlGuq2a14eutEvz8cyEQ
- vTHcaknKp11T1fC59Nis4cL0UCbHgfUEAKmKc84yxyJJ7HYr4GO8V/4dbZS2JZCzLUE8
- mzvLO9su/fVbjipTYnqT6OYetE2JY3PT2TF9URX3lWQBKxwom+X8RjC9lzssKQObBYDD
- FlEQ==
+ d=1e100.net; s=20230601; t=1733503176; x=1734107976;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6XwsIsYx+lCjIGoZ9wo3ImEreZ1W5Nu1OSK4u1mpYsQ=;
+ b=DD01M8rX0LgmI3AwoO2Y4y5QqczmG6TH5DxcAa+cJcpnbROo79w20zM0EahJ2Jd1oF
+ gKrhErYRHWJOwPeMyJRiTQAQPvln4RIod8yluw+c2+f6o+iW3LyhdIU5PBMR9uVstyKr
+ 5/RNU/8xW5C+GCcOVKZTppVEZj47s3l1zfrDwZCprZcAuvqL9wxLy26jmvap5WAZ+bcv
+ u60GC+bkE8QBG5dRwmVKkll9OpPZUhTsY0kFw0LhhG0vsRGPfT65VfB1BKRTykvZYooj
+ hXc7BbImLOkULJAOQBPx5sKjyOsN/4C9TypdcguUHnpk0mq7VJSOYH2jl4ku5X3gTm+T
+ HuzQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZ5AXtztwyX36/DPCCmN+k5DnoezUlEdTAb0aM2VbWQP1faFiBNKy/dK7stIr/spUp1KFQvN4Fv+iNkA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YxuviBLOFoEEUdcAeRfPPSAnk67kC/SVe3qfqFLgOTuIcfCqCjy
- pLRxGVt0juoJwXc/phlp/CUu0HxwEDccCPYwXvBUnWV9QQ0N6v0uZ8e3fKRIgwb3u1GUn+cXou2
- w74Juz40rkusE4HfQT65HBJ0Y25I=
-X-Gm-Gg: ASbGnctR2jU344T6htAKD2BqmOP8l91nIGfNHcVLMpRRPiZUwvLtFV9DsgJjPOUNsvP
- zW9ILzT20jYJR781EqjXNYzU7e+1fO5cn3FA=
-X-Google-Smtp-Source: AGHT+IEICA6knxGjNE8s9hiZCrkw9zC8tRpq44D7LCiqQSJdrBAYe2sw01lb39PW5frgrbBWKL0bEZi2IPDoBlz+kEE=
-X-Received: by 2002:a05:6402:2708:b0:5d0:d0c5:f258 with SMTP id
- 4fb4d7f45d1cf-5d12469949amr6118918a12.0.1733480601831; Fri, 06 Dec 2024
- 02:23:21 -0800 (PST)
+ AJvYcCXxuW+eOVhLRYa70GSLiJIwut/cwNC1pH5f8kPOM6YuL0HbgjGfyDi1kIF6MW6fvOopMqJefgE4QDxHMg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yw6h27zvBIeSqu2fmhW1y+N1uNAneWEFLHAaFrMw4nQ6ZJDkQA8
+ dQ1F11p21u/ZqlKXBwFMSPqxEvzRqv2Ool57mAVaZwU8g4H535dqM3wnWcK5I34=
+X-Gm-Gg: ASbGncuMZDWlhPOc3lp47kGvuAtXiImNp1F3TEEVDNr//u3uU+mS3drepwnRGlABW8W
+ Ha1+wS7C/ZAQKSTJt9xoLWgKXtaSTp8XDyniMsebDh3fEPfUfYLjlBi8m4JOQropycfG34TxpbE
+ lFK2TRZztH/sQ6Z9r/lX5KHBokCVA05jRAKI9kjuOjP5fkCqoE2cdqp7cTN66T2LVJC9oEzslev
+ +G9Td7Mudkg19v3jh9aSq8SBXgrjnTf+rSzxeeODXOa5ONmXg==
+X-Google-Smtp-Source: AGHT+IERZi2SuY8EZV8fx6YRiqhe0xejjoXya9lXzqKgM64Tb2QeMK/E3xSazs/g9I9YdIfx/jx1aA==
+X-Received: by 2002:ac8:59d5:0:b0:466:aa1b:1cfd with SMTP id
+ d75a77b69052e-46734cb539bmr61486161cf.15.1733503175660; 
+ Fri, 06 Dec 2024 08:39:35 -0800 (PST)
+Received: from bill-the-cat ([187.144.30.219])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-467296ca681sm22555851cf.24.2024.12.06.08.39.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Dec 2024 08:39:34 -0800 (PST)
+Date: Fri, 6 Dec 2024 10:39:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>
+Message-ID: <20241206163931.GS2457179@bill-the-cat>
+References: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
+ <86ses458k3.fsf@udb0321960.dhcp.ti.com>
+ <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
+ <86pln759j9.fsf@udb0321960.dhcp.ti.com>
+ <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
+ <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
+ <865xny69y1.fsf@udb0321960.dhcp.ti.com>
+ <SA1PR12MB86974AC7EFCCBD7AE99FDD3E98302@SA1PR12MB8697.namprd12.prod.outlook.com>
+ <8634j15t1y.fsf@udb0321960.dhcp.ti.com>
+ <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-References: <20241103003322.626036-1-sjg@chromium.org>
- <CALeDE9MfWEAb91uzQPa6_jSo6beJv_GNHTY2TeKnSzFm6V97gw@mail.gmail.com>
- <CAFLszTito2+-qgOc=7bc3i9WmBZZCcAVWSY5hoH0neGjTg6zEQ@mail.gmail.com>
- <CALeDE9MORdUY440JAgHNXdoqWfJy5V9bC=TK5U242QG4Lc1Ptg@mail.gmail.com>
- <20241203194847.GA4022002@bill-the-cat>
- <CAFLszTgZiJuWMKZg6q--LEp+58Exgs8P+KaeCBgqmTd+B=SNSA@mail.gmail.com>
- <CALeDE9M1aZwVM40gbhMRWsvhKZXL=m1GOeLhDgzR5H2bTShFuw@mail.gmail.com>
- <CAFLszTja7=ku__b0+LUbjhVmhML9uPv2613VxSX1pBk1vt24OQ@mail.gmail.com>
-In-Reply-To: <CAFLszTja7=ku__b0+LUbjhVmhML9uPv2613VxSX1pBk1vt24OQ@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 6 Dec 2024 10:23:10 +0000
-Message-ID: <CALeDE9N_hN7MXiNDBF0NmSMitgw2ax=VePSavTJgzPZdTOY-uA@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Wan Yee Lau <wan.yee.lau@intel.com>, Devarsh Thakkar <devarsht@ti.com>,
- Sean Edmond <seanedmond@microsoft.com>, Sean Anderson <seanga2@gmail.com>,
- Charles Hardin <ckhardin@gmail.com>, Alexander Gendin <agendin@matrox.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Andy Fleming <afleming@gmail.com>,
- Stefan Roese <sr@denx.de>, =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>, Tien Fong Chee <tien.fong.chee@intel.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Doug Zobel <douglas.zobel@climate.com>,
+In-Reply-To: <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Cc: Jon Humphreys <j-humphreys@ti.com>, Michael Walle <mwalle@kernel.org>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, Andre Przywara <andre.przywara@arm.com>,
+ Simon Glass <sjg@chromium.org>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Tudor Ambarus <tudor.ambarus@linaro.org>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Ramon Fried <rfried.dev@gmail.com>, Christian Marangi <ansuelsmth@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, Marek Vasut <marex@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Wolfgang Denk <wd@denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Enric Balletbo i Serra <eballetbo@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Alison Wang <alison.wang@nxp.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Hans de Goede <hdegoede@redhat.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Samuel Holland <samuel@sholland.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Kamil Lulko <kamil.lulko@gmail.com>, Mario Six <mario.six@gdsys.cc>,
- Richard Weinberger <richard@nod.at>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v3 00/25] led: Remove old status-LED code
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Sean Anderson <seanga2@gmail.com>, "Simek, Michal" <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: Re: [Uboot-stm32] [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
+ memories support in QSPI driver"
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,256 +98,227 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7651311403487725321=="
+Content-Type: multipart/mixed; boundary="===============5032326745957009726=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
---===============7651311403487725321==
-Content-Type: multipart/alternative; boundary="0000000000007f4fff0628976707"
 
---0000000000007f4fff0628976707
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, 6 Dec 2024 at 00:01, Simon Glass <sjg@chromium.org> wrote:
-
-> Hi Peter,
->
-> On Thu, 5 Dec 2024 at 13:36, Peter Robinson <pbrobinson@gmail.com> wrote:
-> >
-> >
-> >
-> > On Tue, 3 Dec 2024 at 19:51, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi Tom,
-> >>
-> >> On Tue, 3 Dec 2024 at 12:48, Tom Rini <trini@konsulko.com> wrote:
-> >> >
-> >> > On Thu, Nov 07, 2024 at 07:33:51PM +0000, Peter Robinson wrote:
-> >> > > Hi Simon,
-> >> > >
-> >> > > > On Tue, 5 Nov 2024 at 07:18, Peter Robinson <pbrobinson@gmail.com>
-> wrote:
-> >> > > > >
-> >> > > > > On Sun, 3 Nov 2024 at 00:34, Simon Glass <sjg@chromium.org>
-> wrote:
-> >> > > > > >
-> >> > > > > > There has been an LED framework in U-Boot which uses driver
-> model for
-> >> > > > > > about 9 years now. Recent work is underway to improve it and
-> provide
-> >> > > > > > more features. It is probably a good time to drop the old
-> code, which
-> >> > > > > > is only used by 5 boards:
-> >> > > > >
-> >> > > > > I don't believe, from what I can tell, they are feature
-> comparable, at
-> >> > > > > the very least I have not been able to get the Pinephone
-> working with
-> >> > > > > this so as it stands I still don't think this patch set is
-> ready yet.
-> >> > > >
-> >> > > > I don't have that hardware, nor the other 4, so cannot do anything
-> >> > > > with this feedback.
-> >> > >
-> >> > > Don't you have any HW that has a LED on it that you can substitute
-> to
-> >> > > see what it does?
-> >> > >
-> >> > > > Can you please be clear what you are asking me to do?
-> >> > >
-> >> > > Either produce patches that work on the the pinephone, or docs I, or
-> >> > > other developers, can use to implement the functionality.
-> >> > >
-> >> > > Currently on the Pinephone the green LED lights up in the TPL/SPL
-> >> > > (very early before ATF) stage and is lit up right through the the
-> >> > > various FW stages, with your patch set I get no LED what so ever.
-> >> >
-> >> > Please note that needing to confirm that we have equivalent
-> >> > functionality between old and new frameworks (and
-> >> >
-> https://lore.kernel.org/all/20241110115054.2555-1-ansuelsmth@gmail.com/
-> >> > might cover that) is why this series isn't ready for -next at this
-> time.
-> >>
-> >> Yes, I'm not sure if Peter saw that, so I sent him the link.
-> >
-> >
-> > I have seen it, I have not had the chance to dig out my pinephone to
-> test it again because I was traveling and had competing priorities on my
-> time (and I do this as a hobby).
-> >
-> > But also I think we have a little time on this, the new functionality
-> only landed recently and we've had a LOT of deprecated functionality hang
-> around for a lot longer than that. I think we should get this right rather
-> than jam it through.
->
-> There's plenty of time for you to test. But we're really not losing
-> anything by applying these patches (and also [1]). It is more likely
-> to work for your board, but if it doesn't, we can focus efforts on
-> what is wrong rather than trying to keep the old code around.
->
-
-I'm sorry but I disagree, bulldozing patches in just because it's suitable
-for you but breaks actual usecases is not the right way to do thing, at the
-moment this works and it useful features for users. Actively breaking valid
-UX Is hostile and not the right way to do things!
+--===============5032326745957009726==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="alfT6XMccdNcK5wJ"
+Content-Disposition: inline
 
 
-> One of the challenges I have, as someone who also does this as a
-> hobby, is that few people are willing to take on deprecation efforts.
->
-
-I do this as a hobby too, you are not unique here.
-
-
-> This work is not very interesting, most of the time, and it is
-> extremely hard to get things to actually land, since anyone can raise
-> their hand and say that it doesn't solve a particular use case. I
-> suppose most people do U-Boot things in their spare time and few have
-> a lot of time to test or try things out. So there needs to be a
-> balance struck, to encourage more people to help.
->
-
-I'm sorry, I do feel for you, I have the same problem and I end up spending
-most of my spare of late reading emails due to the deluge.
-
-But actively breaking valid usecases by bulldozing things through, it NOT
-the way to handle things, I'm sorry here what role you perceive you play
-whether it be a full time employee, paid contractor or hobbyist isn't a
-valid reason for forcing through patches, please do not use that as a
-reason.
-
---0000000000007f4fff0628976707
-Content-Type: text/html; charset="UTF-8"
+--alfT6XMccdNcK5wJ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, 6 Dec 2=
-024 at 00:01, Simon Glass &lt;<a href=3D"mailto:sjg@chromium.org">sjg@chrom=
-ium.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"=
-margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-lef=
-t:1ex">Hi Peter,<br>
-<br>
-On Thu, 5 Dec 2024 at 13:36, Peter Robinson &lt;<a href=3D"mailto:pbrobinso=
-n@gmail.com" target=3D"_blank">pbrobinson@gmail.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt;<br>
-&gt;<br>
-&gt; On Tue, 3 Dec 2024 at 19:51, Simon Glass &lt;<a href=3D"mailto:sjg@chr=
-omium.org" target=3D"_blank">sjg@chromium.org</a>&gt; wrote:<br>
-&gt;&gt;<br>
-&gt;&gt; Hi Tom,<br>
-&gt;&gt;<br>
-&gt;&gt; On Tue, 3 Dec 2024 at 12:48, Tom Rini &lt;<a href=3D"mailto:trini@=
-konsulko.com" target=3D"_blank">trini@konsulko.com</a>&gt; wrote:<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; On Thu, Nov 07, 2024 at 07:33:51PM +0000, Peter Robinson wrot=
-e:<br>
-&gt;&gt; &gt; &gt; Hi Simon,<br>
-&gt;&gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; On Tue, 5 Nov 2024 at 07:18, Peter Robinson &lt;<a =
-href=3D"mailto:pbrobinson@gmail.com" target=3D"_blank">pbrobinson@gmail.com=
-</a>&gt; wrote:<br>
-&gt;&gt; &gt; &gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; &gt; On Sun, 3 Nov 2024 at 00:34, Simon Glass &lt;<=
-a href=3D"mailto:sjg@chromium.org" target=3D"_blank">sjg@chromium.org</a>&g=
-t; wrote:<br>
-&gt;&gt; &gt; &gt; &gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; &gt; &gt; There has been an LED framework in U-Boot=
- which uses driver model for<br>
-&gt;&gt; &gt; &gt; &gt; &gt; &gt; about 9 years now. Recent work is underwa=
-y to improve it and provide<br>
-&gt;&gt; &gt; &gt; &gt; &gt; &gt; more features. It is probably a good time=
- to drop the old code, which<br>
-&gt;&gt; &gt; &gt; &gt; &gt; &gt; is only used by 5 boards:<br>
-&gt;&gt; &gt; &gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; &gt; I don&#39;t believe, from what I can tell, the=
-y are feature comparable, at<br>
-&gt;&gt; &gt; &gt; &gt; &gt; the very least I have not been able to get the=
- Pinephone working with<br>
-&gt;&gt; &gt; &gt; &gt; &gt; this so as it stands I still don&#39;t think t=
-his patch set is ready yet.<br>
-&gt;&gt; &gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; I don&#39;t have that hardware, nor the other 4, so=
- cannot do anything<br>
-&gt;&gt; &gt; &gt; &gt; with this feedback.<br>
-&gt;&gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; Don&#39;t you have any HW that has a LED on it that you =
-can substitute to<br>
-&gt;&gt; &gt; &gt; see what it does?<br>
-&gt;&gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; &gt; Can you please be clear what you are asking me to d=
-o?<br>
-&gt;&gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; Either produce patches that work on the the pinephone, o=
-r docs I, or<br>
-&gt;&gt; &gt; &gt; other developers, can use to implement the functionality=
-.<br>
-&gt;&gt; &gt; &gt;<br>
-&gt;&gt; &gt; &gt; Currently on the Pinephone the green LED lights up in th=
-e TPL/SPL<br>
-&gt;&gt; &gt; &gt; (very early before ATF) stage and is lit up right throug=
-h the the<br>
-&gt;&gt; &gt; &gt; various FW stages, with your patch set I get no LED what=
- so ever.<br>
-&gt;&gt; &gt;<br>
-&gt;&gt; &gt; Please note that needing to confirm that we have equivalent<b=
-r>
-&gt;&gt; &gt; functionality between old and new frameworks (and<br>
-&gt;&gt; &gt; <a href=3D"https://lore.kernel.org/all/20241110115054.2555-1-=
-ansuelsmth@gmail.com/" rel=3D"noreferrer" target=3D"_blank">https://lore.ke=
-rnel.org/all/20241110115054.2555-1-ansuelsmth@gmail.com/</a><br>
-&gt;&gt; &gt; might cover that) is why this series isn&#39;t ready for -nex=
-t at this time.<br>
-&gt;&gt;<br>
-&gt;&gt; Yes, I&#39;m not sure if Peter saw that, so I sent him the link.<b=
-r>
-&gt;<br>
-&gt;<br>
-&gt; I have seen it, I have not had the chance to dig out my pinephone to t=
-est it again because I was traveling and had competing priorities on my tim=
-e (and I do this as a hobby).<br>
-&gt;<br>
-&gt; But also I think we have a little time on this, the new functionality =
-only landed recently and we&#39;ve had a LOT of deprecated functionality ha=
-ng around for a lot longer than that. I think we should get this right rath=
-er than jam it through.<br>
-<br>
-There&#39;s plenty of time for you to test. But we&#39;re really not losing=
-<br>
-anything by applying these patches (and also [1]). It is more likely<br>
-to work for your board, but if it doesn&#39;t, we can focus efforts on<br>
-what is wrong rather than trying to keep the old code around.<br></blockquo=
-te><div><br></div><div>I&#39;m sorry but I disagree, bulldozing patches in =
-just because it&#39;s suitable for you but breaks actual usecases is not th=
-e right way to do thing, at the moment this works and it useful features fo=
-r users. Actively breaking valid UX Is hostile and not the right way to do =
-things!<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">
-One of the challenges I have, as someone who also does this as a<br>
-hobby, is that few people are willing to take on deprecation efforts.<br></=
-blockquote><div><br></div><div>I do this as a hobby too, you are not unique=
- here.<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">
-This work is not very interesting, most of the time, and it is<br>
-extremely hard to get things to actually land, since anyone can raise<br>
-their hand and say that it doesn&#39;t solve a particular use case. I<br>
-suppose most people do U-Boot things in their spare time and few have<br>
-a lot of time to test or try things out. So there needs to be a<br>
-balance struck, to encourage more people to help.<br></blockquote><div><br>=
-</div><div>I&#39;m sorry, I do feel for you, I have the same problem and I =
-end up spending most of my spare of late reading emails due to the deluge. =
-<br></div><div><br></div><div>But actively breaking valid usecases by bulld=
-ozing things through, it NOT the way to handle things, I&#39;m sorry here w=
-hat role you perceive you play whether it be a full time employee, paid con=
-tractor or hobbyist isn&#39;t a valid reason for forcing through patches, p=
-lease do not use that as a reason.<br></div></div></div>
+On Fri, Dec 06, 2024 at 09:46:08AM +0000, Abbarapu, Venkatesh wrote:
+>=20
+>=20
+> > -----Original Message-----
+> > From: Jon Humphreys <j-humphreys@ti.com>
+> > Sent: Friday, December 6, 2024 10:04 AM
+> > To: Abbarapu, Venkatesh <venkatesh.abbarapu@amd.com>; Marek Vasut
+> > <marek.vasut@mailbox.org>; Simek, Michal <michal.simek@amd.com>; u-
+> > boot@lists.denx.de; Tom Rini <trini@konsulko.com>
+> > Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
+> > <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
+> > Michael Walle <mwalle@kernel.org>; Patrice Chotard
+> > <patrice.chotard@foss.st.com>; Patrick Delaunay <patrick.delaunay@foss.=
+st.com>;
+> > Pratyush Yadav <p.yadav@ti.com>; Quentin Schulz <quentin.schulz@cherry.=
+de>;
+> > Sean Anderson <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>;
+> > Takahiro Kuwano <Takahiro.Kuwano@infineon.com>; Tudor Ambarus
+> > <tudor.ambarus@linaro.org>; uboot-stm32@st-md-mailman.stormreply.com
+> > Subject: RE: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel memories =
+support in
+> > QSPI driver"
+> >=20
+> > "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com> writes:
+> >=20
+> > > Hi,
+> > >
+> > >> -----Original Message-----
+> > >> From: Jon Humphreys <j-humphreys@ti.com>
+> > >> Sent: Thursday, December 5, 2024 9:47 AM
+> > >> To: Marek Vasut <marek.vasut@mailbox.org>; Simek, Michal
+> > >> <michal.simek@amd.com>; u-boot@lists.denx.de; Tom Rini
+> > >> <trini@konsulko.com>
+> > >> Cc: Andre Przywara <andre.przywara@arm.com>; Ashok Reddy Soma
+> > >> <ashok.reddy.soma@amd.com>; Jagan Teki <jagan@amarulasolutions.com>;
+> > >> Michael Walle <mwalle@kernel.org>; Patrice Chotard
+> > >> <patrice.chotard@foss.st.com>; Patrick Delaunay
+> > >> <patrick.delaunay@foss.st.com>; Pratyush Yadav <p.yadav@ti.com>;
+> > >> Quentin Schulz <quentin.schulz@cherry.de>; Sean Anderson
+> > >> <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Takahiro Kuwano
+> > >> <Takahiro.Kuwano@infineon.com>; Tudor Ambarus
+> > >> <tudor.ambarus@linaro.org>; Abbarapu, Venkatesh
+> > >> <venkatesh.abbarapu@amd.com>;
+> > >> uboot-stm32@st-md-mailman.stormreply.com
+> > >> Subject: Re: [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
+> > >> memories support in QSPI driver"
+> > >>
+> > >> Jon Humphreys <j-humphreys@ti.com> writes:
+> > >>
+> > >> > Marek Vasut <marek.vasut@mailbox.org> writes:
+> > >> >
+> > >> >> On 11/7/24 4:49 PM, Jon Humphreys wrote:
+> > >> >>> Marek Vasut <marek.vasut@mailbox.org> writes:
+> > >> >>>
+> > >> >>>> On 11/6/24 10:58 PM, Jon Humphreys wrote:
+> > >> >>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
+> > >> >>>>>
+> > >> >>>>>> On 11/6/24 8:18 PM, Jon Humphreys wrote:
+> > >> >>>>>>> Marek Vasut <marek.vasut@mailbox.org> writes:
+> > >> >>>>>>>
+> > >> >>>>>>>> On 10/23/24 10:17 AM, Michal Simek wrote:
+> > >> >>>>>>>>>
+> > >> >>>>>>>>>
+> > >> >>>>>>>>> On 10/22/24 23:06, Marek Vasut wrote:
+> > >> >>>>>>>>>> This reverts commit
+> > 1e36d34b52e7a1ebe5a2a5339d6905540f4253aa.
+> > >> >>>>>>>>>>
+> > >> >>>>>>>>>> This parallel/stacked support breaks basic SPI NOR
+> > >> >>>>>>>>>> support, e.g. this no longer works:
+> > >> >>>>>>>>>>
+> > >> >>>>>>>>>> =3D> sf probe && sf update 0x50000000 0 0x160000
+> > >> >>>>>>>>>> SF: Detected s25fs512s with page size 256 Bytes, erase
+> > >> >>>>>>>>>> size
+> > >> >>>>>>>>>> 256 KiB, total 64 MiB device 0 offset 0x0, size 0x160000
+> > >> >>>>>>>>>> SPI flash failed in read step
+> > >> >>>>>>>>>
+> > >> >>>>>>>>> Reverting everything seems to me too much. Tom has tested
+> > >> >>>>>>>>> it on his HW and didn't see any issue. That's why better to
+> > >> >>>>>>>>> look at code which is causing this.
+> > >> >>>>>>>>> You are reverting everything but likely there is specific
+> > >> >>>>>>>>> patch which is causing this. Which one is it?
+> > >> >>>>>>>>> Which board was used for your testing? Likely we don't have
+> > >> >>>>>>>>> access to
+> > >> it.
+> > >> >>>>>>>>> Is there any QEMU available which can be used for debuggin=
+g?
+> > >> >>>>>>>>
+> > >> >>>>>>>> The testcase including the exact SPI NOR model is above.
+> > >> >>>>>>>>
+> > >> >>>>>>>> iMX6 with w25q16dw seems to be broken too.
+> > >> >>>>>>>>
+> > >> >>>>>>>> Basically every board I have access no longer has a working
+> > >> >>>>>>>> "sf probe ; sf update" combination ... so yeah, this means
+> > >> >>>>>>>> this patchset is fundamentally broken.
+> > >> >>>>>>>>
+> > >> >>>>>>>
+> > >> >>>>>>> I can also confirm that the patch series:
+> > >> >>>>>>>
+> > >> >>>>>>> f8efc68b30e Merge patch series "spi-nor: Add parallel and
+> > >> >>>>>>> stacked memories support"
+> > >> >>>>>>>
+> > >> >>>>>>> breaks SPI NOR on TI platforms, particularly SK-AM62 and SK-
+> > AM62P:
+> > >> >>>>>>>
+> > >> >>>>>>> U-Boot 2024.10-00752-gf8efc68b30e2 (Nov 06 2024 - 12:25:13
+> > >> >>>>>>> -0600)
+> > >> >>>>>>>
+> > >> >>>>>>> SoC:   AM62X SR1.0 HS-FS
+> > >> >>>>>>> Model: Texas Instruments AM625 SK ...
+> > >> >>>>>>> Hit any key to stop autoboot:  0 =3D> sf probe && sf update
+> > >> >>>>>>> ${loadaddr} 0x400000 0x10
+> > >> >>>>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size
+> > >> >>>>>>> 256 KiB, total 64 MiB device 0 offset 0x400000, size 0x10 SPI
+> > >> >>>>>>> flash failed in read step =3D>
+> > >> >>>>>> Sigh ... can you please test current u-boot/master and see if
+> > >> >>>>>> the error is fixed there ?
+> > >> >>>>>>
+> > >> >>>>>
+> > >> >>>>> Yes I had verified it also fails against master, although the
+> > >> >>>>> behavior was a bit different.  The .'s below are our DMA engine
+> > >> >>>>> waiting
+> > >> indefinitely.
+> > >> >>>>>
+> > >> >>>>> =3D> sf probe && sf update ${loadaddr} 0x400000 0x10
+> > >> >>>>> SF: Detected s28hs512t with page size 256 Bytes, erase size 256
+> > >> >>>>> KiB, total 64 MiB device 0 offset 0x400000, size 0x10
+> > >> >>>>> .....................................................
+> > >> >>>>>
+> > >> >>>>> I have not investigated further.
+> > >> >>>>
+> > >> >>>> Can you try and run some 'git bisect' to find out exactly which
+> > >> >>>> commit broke your use case ? There is a bunch of fixes for the
+> > >> >>>> worst breakage that landed recently, but clearly there is more.
+> > >> >>>>
+> > >> >>>> Full revert seems increasingly appealing ...
+> > >> >>>
+> > >> >>> commit 5d40b3d384d
+> > >> >> So there is still something broken in that specific commit that I
+> > >> >> missed when removing the defects ? Sigh ... can you try to narrow=
+ it down ?
+> > >> >
+> > >> > Hi Marek, I tried to narrow the changes in commit
+> > >> > 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 a bit by first applying
+> > >> > all of the changes in the .h files, and then for spi-nor-core.c,
+> > >> > only applying changes per function. The only function change that
+> > >> > causes errors was spi_nor_read(). With the changes in
+> > >> > spi_nor_read() in commit
+> > >> > 5d40b3d384dc536ec26ce9b76b20b0b84749d2d1 applied to the prior
+> > >> > commit fbe16bc2801, did I get:
+> > >> >
+> > >> > =3D> sf probe && sf update ${loadaddr} 0x400000 0x10
+> > >> > SF: Detected s28hs512t with page size 256 Bytes, erase size 256
+> > >> > KiB, total 64 MiB device 0 offset 0x400000, size 0x10 SPI flash
+> > >> > failed in read step
+> > >> >
+> > >>
+> > >> Hi all.  What is the status of addressing the failures introduced by
+> > >> this patchset?  I tried building from u-boot next and still see the =
+failure.
+> > >>
+> > >> Marek, was the isolation of changes I performed above helpful in
+> > >> understanding the failure?
+> > >>
+> > >
+> > > Can you try by applying this change
+> > > https://lore.kernel.org/u-boot/20241118090544.21956-1-venkatesh.abbara
+> > > pu@amd.com/
+> > >
+> >=20
+> > Hi Venkatesh, the patch seems to remove the issue I was seeing.
+> >=20
+> > Thanks
+> > Jon
+>=20
+> Hi Humphreys,
+> Thank you for confirming that the patch worked and resolved the issue.
 
---0000000000007f4fff0628976707--
+OK, but going back to the patch in question, Tudor has requested
+changes. When can we expect a v2 that addresses those, so that Jon and
+Marek can also confirm their platforms work? Thanks.
 
---===============7651311403487725321==
+--=20
+Tom
+
+--alfT6XMccdNcK5wJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmdTKL8ACgkQFHw5/5Y0
+tyy9Jwv+PcWpv69r+9w3rNbBnJBc/qlRHyvg6CHPr474Xl8V64V2WttFIBXfG+MP
+Nej6iAla3lA/ihp2ZuS9dAuXyY600sWGXKUEqrQpzKALse6knwvQjR5JBmR13J9A
+1yY385ajXfnYu28HsuPYGsckdLRdKpdpIlaQQqxK+B2wEAYvMtazcnmcFEbxCPAS
+3srlhtB4o8tO9yvGGo+6invXd4E9/gExDfWWT4d3r8KqIWys9+IRSZzXl35N2kg/
+5qMwPtpAmPdYO7kvbFyhXvnk3MibsLPTAN6IVWs46RJ4sj1AVet/ufOoRLb96uQE
+kUTA5e7tUPJSpVCX2qKFwrwsowtrSH3XaLX3WZbeBcuwH+DJIM13WVnDIBY2mae7
+JQ6EzuK/ai79MDjCrp3LRvLBewAwDJrdtc/mUn3aDb6ehcNPpP/vC5sIHNMFvDBo
+0TDHHl0rkuM30B1sQ+H53DCRQZLZ9MyHRA/ZNcWpmwUPBZKEFp84onRxqnar+nML
+MRA1OwvO
+=5V6T
+-----END PGP SIGNATURE-----
+
+--alfT6XMccdNcK5wJ--
+
+--===============5032326745957009726==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -373,4 +329,4 @@ Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 
---===============7651311403487725321==--
+--===============5032326745957009726==--

@@ -2,99 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 27E8F9EB001
-	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2024 12:37:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA7979EB745
+	for <lists+uboot-stm32@lfdr.de>; Tue, 10 Dec 2024 18:00:00 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E0826C78014;
-	Tue, 10 Dec 2024 11:37:08 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 63737C78006;
+	Tue, 10 Dec 2024 16:59:59 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D9F47C6DD6D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 222D6C7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Dec 2024 11:37:01 +0000 (UTC)
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-aa670ffe302so437068666b.2
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 10 Dec 2024 03:37:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733830621; x=1734435421;
- darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MbdIDjHFBo+Vmazs5XSWzAjMFBDPf1XrmWrYS3FnVZI=;
- b=U0LKwY+kLYVLNmRYKStHCFDojJP5nzi8qD1IG0tjU9Vxa8qEMNYpGX/7kayQBQlgNl
- GJvskB5jkDh4RknZIOq07stucxTpJRBDa+VqjUKUQmDY6AE30hvvnUmA3oimpMcIBKOt
- SqBhwR0ucj4XcN0Ul8YwdsKsBy+AC9OWPNEowJ5i09ketHzGd793BhwYCGkMTl5uJFdi
- dXqcBdWnEmGGPGgEr/VKcMkKWsvITHD4TqEuIKGHVbLa3RHQxrVBqbOyabxtZGGownKb
- PUuqJ5wqR9X5h5M3zAA3sLEqHAIKQ1D1iYsrTHMfaYY6xJQ5I84YuVqmfO7oHr0SfqKf
- +c+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733830621; x=1734435421;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MbdIDjHFBo+Vmazs5XSWzAjMFBDPf1XrmWrYS3FnVZI=;
- b=SlReofQOFAKfcpimPfmvKexj/vhPtVNzbhmh7mSXGAA+5NTyJY9xgCWK+k2E8Vjdzr
- wEr8Cer0UXNCaZeyZqf+J70shwv+TUI9plzf8uTzNH2/rKv/gFQU2Lf0Vf9RwHDQa4HL
- pb3Rr861UVzgNMNCglq12eDxfEEBl0YgWcYYxz4ykUvYE6v8r2eQCOa1GIKIkPOly83J
- JYzxmrNYmcQ1NpJ0yOVZ1P5GhreA2nnFdMDfRGeAOmlLUd4yu6nicmfxen5RIcjjZ2+U
- N5nNRw4aqEKSQui7MAGzovwho2xrCjVSjN1Dohs42r6SntxZau0VfegJVHYFOXazV10w
- P1TA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXaNFNDNUuQDtAAiOfY4wQA+JQ6AUP39G0rz6n8v44G2A84Mx5cN66+xMRpbsou3cPpMS743z8R5e0pIQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YznA7A7V0ZPtV7Cp38a8RIULCdVzM7A1c8IEHXT0Y6FXRqocOKm
- 3eH+hvyAw3JRkPyOGv9pPDmGo+JPtX6VvOkRE3XzPfNZL25IR+NqIa6q+lWbckM=
-X-Gm-Gg: ASbGncuPpkhWG3gBDdlqP6/eQsvq5c9vZ8Cf/L3BTLRMOI7ZsBRAYXx/A2zJ7LLlCNR
- L80UiWGxeKruCAsVDepxs/8P//3o7KDRwCG6qC9IJmYB71Diw39kxovqHW+qIOP/mrCXK+j6qI8
- sy7octla7tE+pgrVmmPXsffK6q5GqHJ8d8RQyDk6qGr7pIXbw84AowrkbMy7H3QikeSCIjNinh0
- RgtNOqmdhp+x0EUnIiPjiDM1YoM1SMNcGDMsy98rVe1GWKTSexEnQM8faajMw==
-X-Google-Smtp-Source: AGHT+IGSkGAsUGQ/UtYKIT08e22va7Xz08q5s8CuIr9IjJOOyO/DpcXLfcQHF+9+OGnG0I+ciZ6FVg==
-X-Received: by 2002:a17:906:2191:b0:aa5:43c4:da78 with SMTP id
- a640c23a62f3a-aa63a24bf41mr1446100766b.51.1733830621306; 
- Tue, 10 Dec 2024 03:37:01 -0800 (PST)
-Received: from [192.168.0.14] ([79.115.63.27])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa67770d264sm404065566b.64.2024.12.10.03.36.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Dec 2024 03:37:00 -0800 (PST)
-Message-ID: <ae4d6b8c-8a3d-4a9a-88a0-67c1727ff06f@linaro.org>
-Date: Tue, 10 Dec 2024 11:36:58 +0000
+ Tue, 10 Dec 2024 16:59:52 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4BADIIB9030060;
+ Tue, 10 Dec 2024 17:59:46 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ U7w6RTw92Tfb2+nKsXNCmOkJQDAAvbbARox8EL4e1gM=; b=R5plHman0vI3gRN3
+ 9MITxeBtadZ7YyC3Ey6mQMTZN1D+/lFVDMWuPLoI6vFSBwvcXSN6GsxivPGa7B+S
+ bRhJ5x+hqyjm9vAlF5DVs/dtsA2PgoGDK49q9fypGWJ5cdUek1kLx6duvwthsB0y
+ 76uAUY4IJ1h/g+tcswk1tu/MxKopCw5gWETZWZqBT5DXzbWbqSWVP3tWW4zohGF0
+ +CDbZHBM1XzN74xOlfzeMqBNy84hkMTcgF2jgSEOKV1J//9mfbX1R1qMr5ILTZoT
+ 7An9Vl/ADpZOGrJT9EuEDf+pfhequWazFg0uNoC7ylHA1nUQcNJ91dLjYrpF+fyp
+ ylIDhQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 43d26nb5u1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 10 Dec 2024 17:59:46 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A71B640044;
+ Tue, 10 Dec 2024 17:58:34 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C0F21270F05;
+ Tue, 10 Dec 2024 17:57:46 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Tue, 10 Dec
+ 2024 17:57:46 +0100
+Message-ID: <7a6b321e-fe47-4e05-8c67-0fda19c6e614@foss.st.com>
+Date: Tue, 10 Dec 2024 17:57:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
- Jagan Teki <jagan@amarulasolutions.com>
-References: <edcec18f-75a0-44d8-907a-f042779ca6ee@mailbox.org>
- <86ses458k3.fsf@udb0321960.dhcp.ti.com>
- <f7bb335d-681a-4b60-92f6-b605cc6f477f@mailbox.org>
- <86pln759j9.fsf@udb0321960.dhcp.ti.com>
- <33e99705-77e3-4acf-95f7-fad65f60ae62@mailbox.org>
- <86ldxp6ehf.fsf@udb0321960.dhcp.ti.com>
- <865xny69y1.fsf@udb0321960.dhcp.ti.com>
- <SA1PR12MB86974AC7EFCCBD7AE99FDD3E98302@SA1PR12MB8697.namprd12.prod.outlook.com>
- <8634j15t1y.fsf@udb0321960.dhcp.ti.com>
- <SA1PR12MB869743652A0B3EC3335A9F9F98312@SA1PR12MB8697.namprd12.prod.outlook.com>
- <20241206163931.GS2457179@bill-the-cat>
- <SA1PR12MB86977B7233CE821D113F369C983D2@SA1PR12MB8697.namprd12.prod.outlook.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20241103003322.626036-1-sjg@chromium.org>
+ <20241103003322.626036-9-sjg@chromium.org>
 Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <SA1PR12MB86977B7233CE821D113F369C983D2@SA1PR12MB8697.namprd12.prod.outlook.com>
-Cc: Jon Humphreys <j-humphreys@ti.com>, Michael Walle <mwalle@kernel.org>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Sean Anderson <seanga2@gmail.com>, "Simek, Michal" <michal.simek@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Pratyush Yadav <p.yadav@ti.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/6] Revert "spi: zynq_qspi: Add parallel
- memories support in QSPI driver"
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20241103003322.626036-9-sjg@chromium.org>
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
+ definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Kamil Lulko <kamil.lulko@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH v3 08/25] st: stm32f429: Drop old LED code
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,21 +79,77 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 12/10/24 3:20 AM, Abbarapu, Venkatesh wrote:
-> Tudor, Do you want me to implement separate 
-> spi_nor_erase()/spi_nor_read()/spi_nor_write() for the parallel/stacked 
-> configurations?
+On 11/3/24 01:33, Simon Glass wrote:
+> This predates the LED framework, so drop it.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>  board/st/stm32f429-discovery/Makefile |  1 -
+>  board/st/stm32f429-discovery/led.c    | 39 ---------------------------
+>  2 files changed, 40 deletions(-)
+>  delete mode 100644 board/st/stm32f429-discovery/led.c
+> 
+> diff --git a/board/st/stm32f429-discovery/Makefile b/board/st/stm32f429-discovery/Makefile
+> index 6b02c0fddec..233eafdad3d 100644
+> --- a/board/st/stm32f429-discovery/Makefile
+> +++ b/board/st/stm32f429-discovery/Makefile
+> @@ -7,4 +7,3 @@
+>  # Kamil Lulko, <kamil.lulko@gmail.com>
+>  
+>  obj-y	:= stm32f429-discovery.o
+> -obj-y	+= led.o
+> diff --git a/board/st/stm32f429-discovery/led.c b/board/st/stm32f429-discovery/led.c
+> deleted file mode 100644
+> index 4b8038341b9..00000000000
+> --- a/board/st/stm32f429-discovery/led.c
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * (C) Copyright 2015
+> - * Kamil Lulko, <kamil.lulko@gmail.com>
+> - */
+> -
+> -#include <status_led.h>
+> -#include <asm-generic/gpio.h>
+> -
+> -#define RED_LED			110
+> -#define GREEN_LED		109
+> -
+> -void coloured_LED_init(void)
+> -{
+> -	gpio_request(RED_LED, "red led");
+> -	gpio_direction_output(RED_LED, 0);
+> -	gpio_request(GREEN_LED, "green led");
+> -	gpio_direction_output(GREEN_LED, 0);
+> -}
+> -
+> -void red_led_off(void)
+> -{
+> -	gpio_set_value(RED_LED, 0);
+> -}
+> -
+> -void green_led_off(void)
+> -{
+> -	gpio_set_value(GREEN_LED, 0);
+> -}
+> -
+> -void red_led_on(void)
+> -{
+> -	gpio_set_value(RED_LED, 1);
+> -}
+> -
+> -void green_led_on(void)
+> -{
+> -	gpio_set_value(GREEN_LED, 1);
+> -}
 
-I lean towards it, it will spare maintainers and contributors of dealing
-with this temporary situation. The core will look like before the
-stacked/parallel support.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-You'll have to introduce nor->erase(), nor->read(), nor->write(), define
-your stacked/parallel methods in a dedicated file and set those function
-pointers with what you need.
-
-If Marek/Jagan finds the idea fine, go for it. I limit myself just to an
-advisory role here.
+Thanks
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

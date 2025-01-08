@@ -2,69 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05EEFA064E0
-	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jan 2025 19:51:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1CA23A064EA
+	for <lists+uboot-stm32@lfdr.de>; Wed,  8 Jan 2025 19:52:58 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BE581C78F67;
-	Wed,  8 Jan 2025 18:51:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D4F03C78F67;
+	Wed,  8 Jan 2025 18:52:57 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6E215C78F64
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 29857C78F64
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed,  8 Jan 2025 18:51:42 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508ED9X3027516;
- Wed, 8 Jan 2025 19:51:39 +0100
+ Wed,  8 Jan 2025 18:52:51 +0000 (UTC)
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 508DL6IQ031319;
+ Wed, 8 Jan 2025 19:52:49 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- ZHmoxKxJWCzzkVZxtjEX4e/MFofsq8tnqYedpCQmBK8=; b=6Th9cjQcZhYG2I1g
- vqwIJZ7McTdssc9bpo2ibrpGmyL3T/tKq9/ldKdccxDxaFsF58WkgpNexBeF5ydZ
- m5x6uxAgp2yJN/De7hsZYwUPE3F+BOCP/baRBkRHDKr+DmJ/dx9rdC30p4dxV6lu
- q87JZUsP9EZobtaE0Ik91BwrdBqIg9wS8Xqlitjz5Z0S924YZqZbTMA8liZAjhaY
- 2CE84Svs5k++JQ+cllFQWsy1AintDCUL5KoSEdVfvfhxHHkjeVsM0MkUv7cFVA9V
- 05ihYfMkkl0xlhuZgngtnZEwxhxm3lvWEQFLhGGQMszCoDwU+ILaEgzIxtVSpByW
- ODh24w==
+ W1uCHFIUspjrfkf2xgKCWcDKzf0p04aAODniQJkvD+0=; b=XNUGBawfUIdSUMj7
+ 9QMp7xVFHnfTfoxHNfAn14uB+oHBlAJ8hE1Z8LswXDqvvwGnCJnmpWsFffdR6W9L
+ J4otS3O7LyyljxZBbV3ZglmgTqTV4ivI76cSM/M7c52eu6c6fwp+hcvjYtwAXm7d
+ qdkKlPP99ZVyfLlI/TSkWptgvlJF3YETauzUOqRSeFH7qV88KZ/sHVxW3wLDuwLe
+ 72IgMlz3+ao/M40xpEbJA/YHCXKLy7EmgB3X2tDBjtfL6AxRGMxwvssWxmpq3AJY
+ c+DGvxRaO7Wc8oO9XKybHSMjkPLby6HntT2KfvriXsZDurRKNyv7SU8xG2WlTZPC
+ sfBFXQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 441txbs2w8-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 441pu4t7rd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 08 Jan 2025 19:51:38 +0100 (CET)
+ Wed, 08 Jan 2025 19:52:49 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 302894004F;
- Wed,  8 Jan 2025 19:50:39 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CB21F40053;
+ Wed,  8 Jan 2025 19:52:05 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 198782A0B29;
- Wed,  8 Jan 2025 19:50:10 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2434A2A1054;
+ Wed,  8 Jan 2025 19:51:53 +0100 (CET)
 Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Wed, 8 Jan
- 2025 19:50:09 +0100
-Message-ID: <f4b3ff28-5c7a-4ca2-9dfe-ab3c7d64f50c@foss.st.com>
-Date: Wed, 8 Jan 2025 19:50:07 +0100
+ 2025 19:51:52 +0100
+Message-ID: <773255e7-0df2-463d-b388-6dbb6bf5f61f@foss.st.com>
+Date: Wed, 8 Jan 2025 19:51:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-References: <20241129122711.411917-1-patrice.chotard@foss.st.com>
- <20241129122711.411917-7-patrice.chotard@foss.st.com>
+References: <20241129123325.426138-1-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20241129122711.411917-7-patrice.chotard@foss.st.com>
+In-Reply-To: <20241129123325.426138-1-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.126]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
  definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH v1 6/6] configs: stm32mp25: enable
-	CONFIG_SYS_64BIT_LBA
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32mp13: Add support of
+ ck_usbo_48m in pre-reloc stage
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,39 +78,37 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 Hi,
 
-On 11/29/24 13:27, Patrice Chotard wrote:
-> In arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog.c, in init_device(),
-> in case of RAW_IMAGE, part->size = block_dev->lba * block_dev->blksz.
+On 11/29/24 13:33, Patrice Chotard wrote:
+> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >
->    _ part->size is declared as u64.
->    _ block_dev->lba is declared as lbaint_t which is uint64_t
->      if CONFIG_SYS_64BIT_LBA is enable, otherwise ulong.
->    _ block_dev->blksz is declared as unsigned long.
+> The clock ck_usbo_48m is a clock source for RCC, so the ck_usbo_48m
+> clock provided by usbphyc need to be probed when RCC clock driver is
+> required, in pre-reloc stage.
 >
-> For example, in case block_dev->lba = 0x1dacc00, block_dev->blksz = 0x200
-> then part->size 0x5980000 which is incorrect as both are declared as ulong.
+> This patch allow to remove the following warning:
 >
-> To fix this overflow issue, enable CONFIG_SYS_64BIT_LBA, block_dev->lba is
-> then declared as uint64_t and part->size get the correct value 0x3b5980000.
+> clk_register: failed to get ck_usbo_48m device (parent of usbo_k)
 >
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->   configs/stm32mp25_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   arch/arm/dts/stm32mp13-u-boot.dtsi | 5 +++++
+>   1 file changed, 5 insertions(+)
 >
-> diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-> index d3f0c088157..073172c3804 100644
-> --- a/configs/stm32mp25_defconfig
-> +++ b/configs/stm32mp25_defconfig
-> @@ -33,6 +33,7 @@ CONFIG_CMD_REGULATOR=y
->   CONFIG_CMD_LOG=y
->   CONFIG_OF_LIVE=y
->   CONFIG_NO_NET=y
-> +CONFIG_SYS_64BIT_LBA=y
->   CONFIG_GPIO_HOG=y
->   CONFIG_DM_I2C=y
->   CONFIG_SYS_I2C_STM32F7=y
+> diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> index aa5cfc6e41d..af7edc7e2b2 100644
+> --- a/arch/arm/dts/stm32mp13-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+> @@ -111,3 +111,8 @@
+>   &syscfg {
+>   	bootph-all;
+>   };
+> +
+> +&usbphyc {
+> +	/* stm32-usbphyc-clk = ck_usbo_48m is a source clock of RCC CCF */
+> +	bootph-all;
+> +};
 
 
 
@@ -123,8 +116,6 @@ Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Thanks
 Patrick
-
-
 
 _______________________________________________
 Uboot-stm32 mailing list

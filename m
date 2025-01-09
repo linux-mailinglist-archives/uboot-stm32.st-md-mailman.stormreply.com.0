@@ -2,50 +2,37 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B3E7A06F8E
+	by mail.lfdr.de (Postfix) with ESMTPS id 8585BA06F8D
 	for <lists+uboot-stm32@lfdr.de>; Thu,  9 Jan 2025 08:56:40 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3D4D1C78F6C;
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3492CC78F67;
 	Thu,  9 Jan 2025 07:56:40 +0000 (UTC)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
- (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90907C78011
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 92976C78F67
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu,  9 Jan 2025 07:56:33 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9D8001484F01; Thu,  9 Jan 2025 08:56:28 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1736409392;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=yjAY5ckwgiYuCnX5/5kfkxDTV22zCr2TQRt88JRI/6g=;
- b=aFw+fxzTdfTk+hvsbXH25gsjV9sP6MleLhMGj5INFVdw2OzoGFWt2yQEfFi/dENm8JfBE5
- a0F+dDU6SOCtMBBSDBgtiBnAOYA+chZEf8mL7Nhi72FYKzYr+E62h/1lsI8h/kPtWsTdBT
- 2oW2GG5zhJKLXDhLRkX94m3pB/2hFTScwTo+2UL3R1QW1Rk+m4u87yYPa2l0gy8Q8ZdPfz
- qPlU2eElM6+GXLj9IEntijBJQqUz0KoW1F5qTJ50YjWlNXrsp/XkUlax/ZbwEqPSaYOOIf
- dhE1Ohy6pFOtug++upfMwOcy110f5JONLbTJ8Lqm0II2Fe4ADnSo96t1j36bdA==
-Date: Thu, 9 Jan 2025 08:56:27 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Patrice Chotard <patrice.chotard@foss.st.com>
-Message-ID: <20250109-aground-daughter-25e667cff177@thorsis.com>
-Mail-Followup-To: Patrice Chotard <patrice.chotard@foss.st.com>,
- u-boot@lists.denx.de,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Thu,  9 Jan 2025 07:56:38 +0000 (UTC)
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YTHDM5XSpz9sV6;
+ Thu,  9 Jan 2025 08:56:35 +0100 (CET)
+Message-ID: <ef52a3dd-3851-44e8-878e-09c10265ff7b@denx.de>
+Date: Thu, 9 Jan 2025 08:56:34 +0100
+MIME-Version: 1.0
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20250108150940.558671-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250108150940.558671-1-patrice.chotard@foss.st.com>
+X-Rspamd-Queue-Id: 4YTHDM5XSpz9sV6
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-References: <20250108150940.558671-1-patrice.chotard@foss.st.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250108150940.558671-1-patrice.chotard@foss.st.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
-Cc: Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
- u-boot@lists.denx.de, U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, Stefan Roese <sr@denx.de>,
- Simon Glass <sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
 Subject: Re: [Uboot-stm32] [PATCH 1/2] cyclic: Fix rollover every 72 min on
  32 bits platforms
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
@@ -59,14 +46,12 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hello Patrice,
-
-Am Wed, Jan 08, 2025 at 04:09:39PM +0100 schrieb Patrice Chotard:
+On 08.01.25 16:09, Patrice Chotard wrote:
 > On 32 bits platforms, timer_get_us() returns an unsigned long which
 > is a 32 bits. timer_get_us() wraps around every 72 minutes
 > (2 ^ 32 / 1000000 =~ 4295 sec =~ 72 min).
@@ -79,37 +64,32 @@ Am Wed, Jan 08, 2025 at 04:09:39PM +0100 schrieb Patrice Chotard:
 > 
 > Instead of using timer_get_us(), use get_timer_us() which returns a
 > uint64_t, this allows a rollover every 584942 years.
-
-This should be long enough. ;-)
 > 
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
->  common/cyclic.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>   common/cyclic.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/common/cyclic.c b/common/cyclic.c
 > index 196797fd61e..e3f03a19d55 100644
 > --- a/common/cyclic.c
 > +++ b/common/cyclic.c
 > @@ -61,7 +61,7 @@ static void cyclic_run(void)
->  		 * Check if this cyclic function needs to get called, e.g.
->  		 * do not call the cyclic func too often
->  		 */
+>   		 * Check if this cyclic function needs to get called, e.g.
+>   		 * do not call the cyclic func too often
+>   		 */
 > -		now = timer_get_us();
 > +		now = get_timer_us(0);
+>   		if (time_after_eq64(now, cyclic->next_call)) {
+>   			/* Call cyclic function and account it's cpu-time */
+>   			cyclic->next_call = now + cyclic->delay_us;
 
-Acked-by: Alexander Dahl <ada@thorsis.com>
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-Greets
-Alex
+Thanks,
+Stefan
 
->  		if (time_after_eq64(now, cyclic->next_call)) {
->  			/* Call cyclic function and account it's cpu-time */
->  			cyclic->next_call = now + cyclic->delay_us;
-> -- 
-> 2.25.1
-> 
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

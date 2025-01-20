@@ -2,64 +2,39 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3730FA167E2
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jan 2025 09:05:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D938A16945
+	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jan 2025 10:23:05 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C8362C78F76;
-	Mon, 20 Jan 2025 08:05:18 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 33168C7801E
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2A6D5C78002;
+	Mon, 20 Jan 2025 09:23:05 +0000 (UTC)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B9A42CFAC50
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jan 2025 08:05:14 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50K7mbDi001253;
- Mon, 20 Jan 2025 09:05:08 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- s2AXZ4/I1dyGZts/uETcRYg2mQgwa4fLLN9GCpEYaC8=; b=Nk++tpEtxTJv/0C2
- t8rFWz0bftqW2W914jBZuRj0bQdY0XmdL/HdVNr5lW8YMzPLwIcXKBPB9wknbH8u
- +kSLLqMdMW6HI8XgJH+MGUVj6S1vFWRbjaOV3ss08754/TcFC9V2jUHgo4/xsStB
- yW7VytXt/wIMKd6841cx6byzey8Hyqm4blkyhk5nrsMLnVG5oVssGIfBCOgpF877
- 3ZnSfVK39jApItuS69r7RRkAlikdCLIt5GaRijCbCmMkARRaYOFWNjoDN6XWwsRS
- zS9O5kXQZDx6bjeWnsSmHREyZF4ceKo/HIRR2RujdeAF5G+Y4wzXlatserr0HWjx
- v4/+Mg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44983x1nup-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 20 Jan 2025 09:05:08 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D0A224006B;
- Mon, 20 Jan 2025 09:04:00 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A8123271ED5;
- Mon, 20 Jan 2025 09:01:29 +0100 (CET)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.37; Mon, 20 Jan
- 2025 09:01:29 +0100
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Mon, 20 Jan 2025 09:01:20 +0100
-Message-ID: <20250120080120.51657-10-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250120080120.51657-1-patrice.chotard@foss.st.com>
-References: <20250120080120.51657-1-patrice.chotard@foss.st.com>
+ Mon, 20 Jan 2025 09:22:58 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Yc4cw1D3kz9tMB;
+ Mon, 20 Jan 2025 10:22:56 +0100 (CET)
+Message-ID: <c4ba2392-a910-4008-8c0d-b6e56a256ebd@denx.de>
+Date: Mon, 20 Jan 2025 10:22:54 +0100
 MIME-Version: 1.0
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-20_01,2025-01-20_02,2024-11-22_01
+To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
+X-Rspamd-Queue-Id: 4Yc4cw1D3kz9tMB
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH v3 9/9] configs: stih410-b2260: Enable
-	CMD_USB_MASS_STORAGE flag
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/2] cyclic: Fix rollover every 72 min
+ on 32 bits platforms
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,40 +46,51 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Enable CMD_USB_MASS_STORAGE flag.
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Cc: Marek Vasut <marex@denx.de>
-
----
-
-(no changes since v1)
-
- configs/stih410-b2260_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/stih410-b2260_defconfig b/configs/stih410-b2260_defconfig
-index 5641fd1d8d7..1e5190dc828 100644
---- a/configs/stih410-b2260_defconfig
-+++ b/configs/stih410-b2260_defconfig
-@@ -25,6 +25,7 @@ CONFIG_CMD_ASKENV=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_TIMER=y
- CONFIG_CMD_EXT4_WRITE=y
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gMTQuMDEuMjUgMTQ6MjgsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBPbiAzMiBiaXRzIHBs
+YXRmb3JtcywgdGltZXJfZ2V0X3VzKCkgcmV0dXJucyBhbiB1bnNpZ25lZCBsb25nIHdoaWNoCj4g
+aXMgYSAzMiBiaXRzLiB0aW1lcl9nZXRfdXMoKSB3cmFwcyBhcm91bmQgZXZlcnkgNzIgbWludXRl
+cwo+ICgyIF4gMzIgLyAxMDAwMDAwID1+IDQyOTUgc2VjID1+IDcyIG1pbikuCj4gCj4gU28gdGhl
+IHRlc3QgImlmIHRpbWVfYWZ0ZXJfZXE2NChub3csIGN5Y2xpYy0+bmV4dF9jYWxsKSIgaXMgbm8g
+bW9yZQo+IHRydWUgd2hlbiBjeWNsaWMtPm5leHRfY2FsbCBiZWNvbWVzIGFib3ZlIDMyIGJpdHMg
+bWF4IHZhbHVlICg0Mjk0OTY3Mjk1KS4KPiAKPiBBdCB0aGlzIHBvaW50IGFmdGVyIDcyIG1pbiwg
+bm8gbW9yZSBjeWNsaWMgZnVuY3Rpb24gYXJlCj4gZXhlY3V0ZWQgaW5jbHVkZWQgd2F0Y2hkb2cg
+b25lLgo+IAo+IEluc3RlYWQgb2YgdXNpbmcgdGltZXJfZ2V0X3VzKCksIHVzZSBnZXRfdGltZXJf
+dXMoKSB3aGljaCByZXR1cm5zIGEKPiB1aW50NjRfdCwgdGhpcyBhbGxvd3MgYSByb2xsb3ZlciBl
+dmVyeSA1ODQ5NDIgeWVhcnMuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJkIDxw
+YXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4gCj4gLS0tCj4gCj4gQ2hhbmdlcyBpbiB2MjoK
+PiAgICAgICAgXyBSZXBsYWNlIHJlbWFpbmluZyB0aW1lcl9nZXRfdXMoKSBieSBnZXRfdGltZXJf
+dXMoMCkKClJldmlld2VkLWJ5OiBTdGVmYW4gUm9lc2UgPHNyQGRlbnguZGU+CgpUaGFua3MsClN0
+ZWZhbgoKPiAKPiAgIGNvbW1vbi9jeWNsaWMuYyB8IDYgKysrLS0tCj4gICAxIGZpbGUgY2hhbmdl
+ZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9jb21t
+b24vY3ljbGljLmMgYi9jb21tb24vY3ljbGljLmMKPiBpbmRleCAxOTY3OTdmZDYxZS4uZmFkMDcx
+YTM5YzYgMTAwNjQ0Cj4gLS0tIGEvY29tbW9uL2N5Y2xpYy5jCj4gKysrIGIvY29tbW9uL2N5Y2xp
+Yy5jCj4gQEAgLTM2LDcgKzM2LDcgQEAgdm9pZCBjeWNsaWNfcmVnaXN0ZXIoc3RydWN0IGN5Y2xp
+Y19pbmZvICpjeWNsaWMsIGN5Y2xpY19mdW5jX3QgZnVuYywKPiAgIAljeWNsaWMtPmZ1bmMgPSBm
+dW5jOwo+ICAgCWN5Y2xpYy0+bmFtZSA9IG5hbWU7Cj4gICAJY3ljbGljLT5kZWxheV91cyA9IGRl
+bGF5X3VzOwo+IC0JY3ljbGljLT5zdGFydF90aW1lX3VzID0gdGltZXJfZ2V0X3VzKCk7Cj4gKwlj
+eWNsaWMtPnN0YXJ0X3RpbWVfdXMgPSBnZXRfdGltZXJfdXMoMCk7Cj4gICAJaGxpc3RfYWRkX2hl
+YWQoJmN5Y2xpYy0+bGlzdCwgY3ljbGljX2dldF9saXN0KCkpOwo+ICAgfQo+ICAgCj4gQEAgLTYx
+LDEzICs2MSwxMyBAQCBzdGF0aWMgdm9pZCBjeWNsaWNfcnVuKHZvaWQpCj4gICAJCSAqIENoZWNr
+IGlmIHRoaXMgY3ljbGljIGZ1bmN0aW9uIG5lZWRzIHRvIGdldCBjYWxsZWQsIGUuZy4KPiAgIAkJ
+ICogZG8gbm90IGNhbGwgdGhlIGN5Y2xpYyBmdW5jIHRvbyBvZnRlbgo+ICAgCQkgKi8KPiAtCQlu
+b3cgPSB0aW1lcl9nZXRfdXMoKTsKPiArCQlub3cgPSBnZXRfdGltZXJfdXMoMCk7Cj4gICAJCWlm
+ICh0aW1lX2FmdGVyX2VxNjQobm93LCBjeWNsaWMtPm5leHRfY2FsbCkpIHsKPiAgIAkJCS8qIENh
+bGwgY3ljbGljIGZ1bmN0aW9uIGFuZCBhY2NvdW50IGl0J3MgY3B1LXRpbWUgKi8KPiAgIAkJCWN5
+Y2xpYy0+bmV4dF9jYWxsID0gbm93ICsgY3ljbGljLT5kZWxheV91czsKPiAgIAkJCWN5Y2xpYy0+
+ZnVuYyhjeWNsaWMpOwo+ICAgCQkJY3ljbGljLT5ydW5fY250Kys7Cj4gLQkJCWNwdV90aW1lID0g
+dGltZXJfZ2V0X3VzKCkgLSBub3c7Cj4gKwkJCWNwdV90aW1lID0gZ2V0X3RpbWVyX3VzKDApIC0g
+bm93Owo+ICAgCQkJY3ljbGljLT5jcHVfdGltZV91cyArPSBjcHVfdGltZTsKPiAgIAo+ICAgCQkJ
+LyogQ2hlY2sgaWYgY3B1LXRpbWUgZXhjZWVkcyBtYXggYWxsb3dlZCB0aW1lICovCgpWaWVsZSBH
+csO8w59lLApTdGVmYW4gUm9lc2UKCi0tIApERU5YIFNvZnR3YXJlIEVuZ2luZWVyaW5nIEdtYkgs
+ICAgICAgTWFuYWdpbmcgRGlyZWN0b3I6IEVyaWthIFVudGVyCkhSQiAxNjUyMzUgTXVuaWNoLCBP
+ZmZpY2U6IEtpcmNoZW5zdHIuNSwgRC04MjE5NCBHcm9lYmVuemVsbCwgR2VybWFueQpQaG9uZTog
+KCs0OSktODE0Mi02Njk4OS01MSBGYXg6ICgrNDkpLTgxNDItNjY5ODktODAgRW1haWw6IHNyQGRl
+bnguZGUKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClVi
+b290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xpc3Rp
+bmZvL3Vib290LXN0bTMyCg==

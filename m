@@ -2,41 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CACFA16948
-	for <lists+uboot-stm32@lfdr.de>; Mon, 20 Jan 2025 10:23:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DAA3A18622
+	for <lists+uboot-stm32@lfdr.de>; Tue, 21 Jan 2025 21:31:54 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3637CC78002;
-	Mon, 20 Jan 2025 09:23:13 +0000 (UTC)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D66A6CFAC50
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 20 Jan 2025 09:23:12 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E1607C78F6E;
+	Tue, 21 Jan 2025 20:31:53 +0000 (UTC)
+Received: from mail-qk1-f181.google.com (mail-qk1-f181.google.com
+ [209.85.222.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Yc4dB44cjz9t1F;
- Mon, 20 Jan 2025 10:23:10 +0100 (CET)
-Message-ID: <4b8ff4a2-2ed1-4a72-9852-34d0f4b4eb36@denx.de>
-Date: Mon, 20 Jan 2025 10:23:09 +0100
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C11BFC7802D
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 21 Jan 2025 20:31:51 +0000 (UTC)
+Received: by mail-qk1-f181.google.com with SMTP id
+ af79cd13be357-7b6e5ee6ac7so517603485a.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 21 Jan 2025 12:31:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1737491511; x=1738096311;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9EJrnZv0LO1XhiS3uV1LvjuqLzOt5GH3cqGwHyrIXcw=;
+ b=AXk0QqeLLP8S0HyndFry/CU1w8yxH2/yr2oALsO2o7wm07yLrKK0P2dxNekUsvL5KF
+ LXuiSnefIwm4HUQEi0IzBEHqLsiJmwqIYsxzKU2IHY0dZZdXz2QACMFgck4KeS6U3kOD
+ ZajG3tc4aqmTH1Pm2B7FoNpBrhAXwc5irmv1o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737491511; x=1738096311;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9EJrnZv0LO1XhiS3uV1LvjuqLzOt5GH3cqGwHyrIXcw=;
+ b=lS5lgJlKMeE0nmCgjMjC+LSQKRTXJXZ62akoGIyfF1Cc2qglat3gf2b9iDm/lDbyxB
+ ba4j0ntdutNBgEx9/pf7exqKynrnNE2tY1MqIsfGwvehJJQ9TOKEclpCuXq5UT9aZCEV
+ LFD4co4ODWDcAyyf0YZvZc+8yCK5SRUeA2p4+c4itctlAQ8RSruLZMPElwo2JlBJhjOa
+ 2eC4yqvIHufAoj6CASKgoKGaq4VS4nGrwvaMI+Vx44Ichv4+fIQfBpGElzwVzRWS1OQm
+ aRdFhAnAHp4j5WC4FU8ERyo02ER/lprBg3AzfLL6hW6+dILn2CqEzxTw3/9a1pFTYXWm
+ Klkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVzgwOB4Zz5vEPm8Zv+Wmvjom8H3k94T5dDtwPyULQLwGc5t6n2/Vyhn1pAECOquJAuziZZHQUaclsczA==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzH+4NABXqqA+jV/IRWNLkkoNqIdhD5H3myyNKSeKeoGXVoWWGb
+ 0IVmIgii9hH4W0gTigiSQCqMuNscTRoPhVQmGI30Ejeb45/tGAlf+BIm4ogc+uo=
+X-Gm-Gg: ASbGncvCRhR9RrXqVsqwc6cT0HQIRiyzefyIUQSb3qNErwR+A8kCiDOBtVNTX2AYdel
+ TRvUj1hrzU8UM2Osh8RiIAjrjN7pHvwj/pY4mNrb/eYkv6HX7gSn3VeZwZJG42CCeo4eWL3JWQw
+ piO3XpI+CFtBmXT1PZdAt/UDY9pRFt0ib5rTBg7Vs05aqvaK4qqh9ogz5sMwUCgd5XUK01VEpWy
+ X8RrV21vp1ZC8YqtxIv41cyv8XAgONCc3AE74gM4rkhS7xQ+Iqw9D6u0UKUV1BRP/i0rpdP6lVY
+ ykZXN3p1ZHvoNA==
+X-Google-Smtp-Source: AGHT+IHd13/Mi+/FcRN2M4dGTYDp0xi1uorwTGoqrfIOy74dvhsx0xpyl1xfyCJornwMpFEY/1+TTg==
+X-Received: by 2002:a05:620a:2408:b0:7b7:106a:19b7 with SMTP id
+ af79cd13be357-7be6323b53emr3057191585a.18.1737491510738; 
+ Tue, 21 Jan 2025 12:31:50 -0800 (PST)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.16.9])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7be61473cf8sm589027385a.15.2025.01.21.12.31.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jan 2025 12:31:49 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Date: Tue, 21 Jan 2025 14:31:37 -0600
+Message-ID: <20250121203147.4133618-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-References: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
- <20250114132814.1250117-2-patrice.chotard@foss.st.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250114132814.1250117-2-patrice.chotard@foss.st.com>
-X-Rspamd-Queue-Id: 4Yc4dB44cjz9t1F
-Cc: Tom Rini <trini@konsulko.com>, Devarsh Thakkar <devarsht@ti.com>,
- Rasmus Villemoes <ravi@prevas.dk>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH v2 2/2] cyclic: Fix typo in struct
-	cyclic_info description
+Cc: u-boot-qcom@groups.io, uboot-stm32@st-md-mailman.stormreply.com,
+ u-boot@dh-electronics.com, u-boot-amlogic@groups.io
+Subject: [Uboot-stm32] [PATCH] Squashed 'dts/upstream/' changes from
+	9b6ba2666d63..8531b4b4988c
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -48,34 +78,25 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTQuMDEuMjUgMTQ6MjgsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBSZXBsYWNlIGRlbGF5
-X25zIGJ5IGRlbGF5X3VzIHdoaWNoIGlzIHRoZSBmaWVsZCBuYW1lIHVzZWQgaW50bwo+IHN0cnVj
-dCBjeWNsaWNfaW5mby4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJp
-Y2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPiAKPiAtLS0KPiAKPiBDaGFuZ2VzIGluIHYyOgo+ICAg
-IF8gVXBkYXRlIHRoZSBjb21tZW50IHdoaWNoIHN0aWxsIHJlZmVyZW5jZXMgIm5zIgoKUmV2aWV3
-ZWQtYnk6IFN0ZWZhbiBSb2VzZSA8c3JAZGVueC5kZT4KClRoYW5rcywKU3RlZmFuCgo+IAo+ICAg
-aW5jbHVkZS9jeWNsaWMuaCB8IDIgKy0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigr
-KSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2N5Y2xpYy5oIGIvaW5j
-bHVkZS9jeWNsaWMuaAo+IGluZGV4IGM2YzQ2M2Q2OGU5Li5kZjhiNzI1ZTNkMCAxMDA2NDQKPiAt
-LS0gYS9pbmNsdWRlL2N5Y2xpYy5oCj4gKysrIGIvaW5jbHVkZS9jeWNsaWMuaAo+IEBAIC0yMCw3
-ICsyMCw3IEBACj4gICAgKgo+ICAgICogQGZ1bmM6IEZ1bmN0aW9uIHRvIGNhbGwgcGVyaW9kaWNh
-bGx5Cj4gICAgKiBAbmFtZTogTmFtZSBvZiB0aGUgY3ljbGljIGZ1bmN0aW9uLCBlLmcuIHNob3du
-IGluIHRoZSBjb21tYW5kcwo+IC0gKiBAZGVsYXlfbnM6IERlbGF5IGlzIG5zIGFmdGVyIHdoaWNo
-IHRoaXMgZnVuY3Rpb24gc2hhbGwgZ2V0IGV4ZWN1dGVkCj4gKyAqIEBkZWxheV91czogRGVsYXkg
-aXMgdXMgYWZ0ZXIgd2hpY2ggdGhpcyBmdW5jdGlvbiBzaGFsbCBnZXQgZXhlY3V0ZWQKPiAgICAq
-IEBzdGFydF90aW1lX3VzOiBTdGFydCB0aW1lIGluIHVzLCB3aGVuIHRoaXMgZnVuY3Rpb24gc3Rh
-cnRlZCBpdHMgZXhlY3V0aW9uCj4gICAgKiBAY3B1X3RpbWVfdXM6IFRvdGFsIENQVSB0aW1lIG9m
-IHRoaXMgZnVuY3Rpb24KPiAgICAqIEBydW5fY250OiBDb3VudGVyIG9mIGV4ZWN1dGlvbnMgb2Nj
-dXJhbmNlcwoKVmllbGUgR3LDvMOfZSwKU3RlZmFuIFJvZXNlCgotLSAKREVOWCBTb2Z0d2FyZSBF
-bmdpbmVlcmluZyBHbWJILCAgICAgIE1hbmFnaW5nIERpcmVjdG9yOiBFcmlrYSBVbnRlcgpIUkIg
-MTY1MjM1IE11bmljaCwgT2ZmaWNlOiBLaXJjaGVuc3RyLjUsIEQtODIxOTQgR3JvZWJlbnplbGws
-IEdlcm1hbnkKUGhvbmU6ICgrNDkpLTgxNDItNjY5ODktNTEgRmF4OiAoKzQ5KS04MTQyLTY2OTg5
-LTgwIEVtYWlsOiBzckBkZW54LmRlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQt
-bWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5j
-b20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+8531b4b4988c Merge tag 'v6.13-rc7-dts-raw'
+[snip]
+git-subtree-dir: dts/upstream
+git-subtree-split: 8531b4b4988c2c9bddc90ea74f2d3e2dca9d5056
+---
+This will bring us to the v6.13-dts tag of the devicetree-rebasing tree
+and so match v6.13 release. Changes and changelog omitted due to size,
+and everyone who is listed as a maintainer of a platform with
+OF_UPSTREAM enabled has been bcc'd, while other lists were cc'd to avoid
+being marked as spam, hopefully.
+
+-- 
+Tom
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

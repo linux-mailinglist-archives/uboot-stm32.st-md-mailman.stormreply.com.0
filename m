@@ -2,39 +2,39 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75DB2A194DC
-	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Jan 2025 16:17:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71199A194DD
+	for <lists+uboot-stm32@lfdr.de>; Wed, 22 Jan 2025 16:17:20 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 29A50C78F7C;
-	Wed, 22 Jan 2025 15:17:08 +0000 (UTC)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 34FA5C78F7C;
+	Wed, 22 Jan 2025 15:17:20 +0000 (UTC)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 59ED7C78F7C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 473BAC78F77
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 22 Jan 2025 15:17:02 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ Wed, 22 Jan 2025 15:17:19 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4YdSNW5d7Xz9sch;
- Wed, 22 Jan 2025 16:16:59 +0100 (CET)
-Message-ID: <f161fd16-0251-4266-b007-3e7b9ed6431f@denx.de>
-Date: Wed, 22 Jan 2025 16:16:58 +0100
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4YdSNr5q6Dz9smk;
+ Wed, 22 Jan 2025 16:17:16 +0100 (CET)
+Message-ID: <cf0bbbe1-7a0c-4af0-8334-e4126c6c71a8@denx.de>
+Date: Wed, 22 Jan 2025 16:17:15 +0100
 MIME-Version: 1.0
 To: Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
 References: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
+ <20250114132814.1250117-2-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250114132814.1250117-1-patrice.chotard@foss.st.com>
-X-Rspamd-Queue-Id: 4YdSNW5d7Xz9sch
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+In-Reply-To: <20250114132814.1250117-2-patrice.chotard@foss.st.com>
+Cc: Tom Rini <trini@konsulko.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Rasmus Villemoes <ravi@prevas.dk>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/2] cyclic: Fix rollover every 72 min
- on 32 bits platforms
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v2 2/2] cyclic: Fix typo in struct
+	cyclic_info description
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -51,46 +51,29 @@ Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gMTQuMDEuMjUgMTQ6MjgsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBPbiAzMiBiaXRzIHBs
-YXRmb3JtcywgdGltZXJfZ2V0X3VzKCkgcmV0dXJucyBhbiB1bnNpZ25lZCBsb25nIHdoaWNoCj4g
-aXMgYSAzMiBiaXRzLiB0aW1lcl9nZXRfdXMoKSB3cmFwcyBhcm91bmQgZXZlcnkgNzIgbWludXRl
-cwo+ICgyIF4gMzIgLyAxMDAwMDAwID1+IDQyOTUgc2VjID1+IDcyIG1pbikuCj4gCj4gU28gdGhl
-IHRlc3QgImlmIHRpbWVfYWZ0ZXJfZXE2NChub3csIGN5Y2xpYy0+bmV4dF9jYWxsKSIgaXMgbm8g
-bW9yZQo+IHRydWUgd2hlbiBjeWNsaWMtPm5leHRfY2FsbCBiZWNvbWVzIGFib3ZlIDMyIGJpdHMg
-bWF4IHZhbHVlICg0Mjk0OTY3Mjk1KS4KPiAKPiBBdCB0aGlzIHBvaW50IGFmdGVyIDcyIG1pbiwg
-bm8gbW9yZSBjeWNsaWMgZnVuY3Rpb24gYXJlCj4gZXhlY3V0ZWQgaW5jbHVkZWQgd2F0Y2hkb2cg
-b25lLgo+IAo+IEluc3RlYWQgb2YgdXNpbmcgdGltZXJfZ2V0X3VzKCksIHVzZSBnZXRfdGltZXJf
-dXMoKSB3aGljaCByZXR1cm5zIGEKPiB1aW50NjRfdCwgdGhpcyBhbGxvd3MgYSByb2xsb3ZlciBl
-dmVyeSA1ODQ5NDIgeWVhcnMuCj4gCj4gU2lnbmVkLW9mZi1ieTogUGF0cmljZSBDaG90YXJkIDxw
-YXRyaWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4gCj4gLS0tCj4gCj4gQ2hhbmdlcyBpbiB2MjoK
-PiAgICAgICAgXyBSZXBsYWNlIHJlbWFpbmluZyB0aW1lcl9nZXRfdXMoKSBieSBnZXRfdGltZXJf
-dXMoMCkKCkFwcGxpZWQgdG8gdS1ib290LXdhdGNoZG9nL21hc3RlcgoKVGhhbmtzLApTdGVmYW4K
-Cj4gCj4gICBjb21tb24vY3ljbGljLmMgfCA2ICsrKy0tLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDMg
-aW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvY29tbW9uL2N5
-Y2xpYy5jIGIvY29tbW9uL2N5Y2xpYy5jCj4gaW5kZXggMTk2Nzk3ZmQ2MWUuLmZhZDA3MWEzOWM2
-IDEwMDY0NAo+IC0tLSBhL2NvbW1vbi9jeWNsaWMuYwo+ICsrKyBiL2NvbW1vbi9jeWNsaWMuYwo+
-IEBAIC0zNiw3ICszNiw3IEBAIHZvaWQgY3ljbGljX3JlZ2lzdGVyKHN0cnVjdCBjeWNsaWNfaW5m
-byAqY3ljbGljLCBjeWNsaWNfZnVuY190IGZ1bmMsCj4gICAJY3ljbGljLT5mdW5jID0gZnVuYzsK
-PiAgIAljeWNsaWMtPm5hbWUgPSBuYW1lOwo+ICAgCWN5Y2xpYy0+ZGVsYXlfdXMgPSBkZWxheV91
-czsKPiAtCWN5Y2xpYy0+c3RhcnRfdGltZV91cyA9IHRpbWVyX2dldF91cygpOwo+ICsJY3ljbGlj
-LT5zdGFydF90aW1lX3VzID0gZ2V0X3RpbWVyX3VzKDApOwo+ICAgCWhsaXN0X2FkZF9oZWFkKCZj
-eWNsaWMtPmxpc3QsIGN5Y2xpY19nZXRfbGlzdCgpKTsKPiAgIH0KPiAgIAo+IEBAIC02MSwxMyAr
-NjEsMTMgQEAgc3RhdGljIHZvaWQgY3ljbGljX3J1bih2b2lkKQo+ICAgCQkgKiBDaGVjayBpZiB0
-aGlzIGN5Y2xpYyBmdW5jdGlvbiBuZWVkcyB0byBnZXQgY2FsbGVkLCBlLmcuCj4gICAJCSAqIGRv
-IG5vdCBjYWxsIHRoZSBjeWNsaWMgZnVuYyB0b28gb2Z0ZW4KPiAgIAkJICovCj4gLQkJbm93ID0g
-dGltZXJfZ2V0X3VzKCk7Cj4gKwkJbm93ID0gZ2V0X3RpbWVyX3VzKDApOwo+ICAgCQlpZiAodGlt
-ZV9hZnRlcl9lcTY0KG5vdywgY3ljbGljLT5uZXh0X2NhbGwpKSB7Cj4gICAJCQkvKiBDYWxsIGN5
-Y2xpYyBmdW5jdGlvbiBhbmQgYWNjb3VudCBpdCdzIGNwdS10aW1lICovCj4gICAJCQljeWNsaWMt
-Pm5leHRfY2FsbCA9IG5vdyArIGN5Y2xpYy0+ZGVsYXlfdXM7Cj4gICAJCQljeWNsaWMtPmZ1bmMo
-Y3ljbGljKTsKPiAgIAkJCWN5Y2xpYy0+cnVuX2NudCsrOwo+IC0JCQljcHVfdGltZSA9IHRpbWVy
-X2dldF91cygpIC0gbm93Owo+ICsJCQljcHVfdGltZSA9IGdldF90aW1lcl91cygwKSAtIG5vdzsK
-PiAgIAkJCWN5Y2xpYy0+Y3B1X3RpbWVfdXMgKz0gY3B1X3RpbWU7Cj4gICAKPiAgIAkJCS8qIENo
-ZWNrIGlmIGNwdS10aW1lIGV4Y2VlZHMgbWF4IGFsbG93ZWQgdGltZSAqLwoKVmllbGUgR3LDvMOf
-ZSwKU3RlZmFuIFJvZXNlCgotLSAKREVOWCBTb2Z0d2FyZSBFbmdpbmVlcmluZyBHbWJILCAgICAg
-IE1hbmFnaW5nIERpcmVjdG9yOiBFcmlrYSBVbnRlcgpIUkIgMTY1MjM1IE11bmljaCwgT2ZmaWNl
-OiBLaXJjaGVuc3RyLjUsIEQtODIxOTQgR3JvZWJlbnplbGwsIEdlcm1hbnkKUGhvbmU6ICgrNDkp
-LTgxNDItNjY5ODktNTEgRmF4OiAoKzQ5KS04MTQyLTY2OTg5LTgwIEVtYWlsOiBzckBkZW54LmRl
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1z
-dG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNv
-bQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91
-Ym9vdC1zdG0zMgo=
+T24gMTQuMDEuMjUgMTQ6MjgsIFBhdHJpY2UgQ2hvdGFyZCB3cm90ZToKPiBSZXBsYWNlIGRlbGF5
+X25zIGJ5IGRlbGF5X3VzIHdoaWNoIGlzIHRoZSBmaWVsZCBuYW1lIHVzZWQgaW50bwo+IHN0cnVj
+dCBjeWNsaWNfaW5mby4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXRyaWNlIENob3RhcmQgPHBhdHJp
+Y2UuY2hvdGFyZEBmb3NzLnN0LmNvbT4KPiAKPiAtLS0KPiAKPiBDaGFuZ2VzIGluIHYyOgo+ICAg
+IF8gVXBkYXRlIHRoZSBjb21tZW50IHdoaWNoIHN0aWxsIHJlZmVyZW5jZXMgIm5zIgoKQXBwbGll
+ZCB0byB1LWJvb3Qtd2F0Y2hkb2cvbWFzdGVyCgpUaGFua3MsClN0ZWZhbgoKPiAKPiAgIGluY2x1
+ZGUvY3ljbGljLmggfCAyICstCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEg
+ZGVsZXRpb24oLSkKPiAKPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9jeWNsaWMuaCBiL2luY2x1ZGUv
+Y3ljbGljLmgKPiBpbmRleCBjNmM0NjNkNjhlOS4uZGY4YjcyNWUzZDAgMTAwNjQ0Cj4gLS0tIGEv
+aW5jbHVkZS9jeWNsaWMuaAo+ICsrKyBiL2luY2x1ZGUvY3ljbGljLmgKPiBAQCAtMjAsNyArMjAs
+NyBAQAo+ICAgICoKPiAgICAqIEBmdW5jOiBGdW5jdGlvbiB0byBjYWxsIHBlcmlvZGljYWxseQo+
+ICAgICogQG5hbWU6IE5hbWUgb2YgdGhlIGN5Y2xpYyBmdW5jdGlvbiwgZS5nLiBzaG93biBpbiB0
+aGUgY29tbWFuZHMKPiAtICogQGRlbGF5X25zOiBEZWxheSBpcyBucyBhZnRlciB3aGljaCB0aGlz
+IGZ1bmN0aW9uIHNoYWxsIGdldCBleGVjdXRlZAo+ICsgKiBAZGVsYXlfdXM6IERlbGF5IGlzIHVz
+IGFmdGVyIHdoaWNoIHRoaXMgZnVuY3Rpb24gc2hhbGwgZ2V0IGV4ZWN1dGVkCj4gICAgKiBAc3Rh
+cnRfdGltZV91czogU3RhcnQgdGltZSBpbiB1cywgd2hlbiB0aGlzIGZ1bmN0aW9uIHN0YXJ0ZWQg
+aXRzIGV4ZWN1dGlvbgo+ICAgICogQGNwdV90aW1lX3VzOiBUb3RhbCBDUFUgdGltZSBvZiB0aGlz
+IGZ1bmN0aW9uCj4gICAgKiBAcnVuX2NudDogQ291bnRlciBvZiBleGVjdXRpb25zIG9jY3VyYW5j
+ZXMKClZpZWxlIEdyw7zDn2UsClN0ZWZhbiBSb2VzZQoKLS0gCkRFTlggU29mdHdhcmUgRW5naW5l
+ZXJpbmcgR21iSCwgICAgICBNYW5hZ2luZyBEaXJlY3RvcjogRXJpa2EgVW50ZXIKSFJCIDE2NTIz
+NSBNdW5pY2gsIE9mZmljZTogS2lyY2hlbnN0ci41LCBELTgyMTk0IEdyb2ViZW56ZWxsLCBHZXJt
+YW55ClBob25lOiAoKzQ5KS04MTQyLTY2OTg5LTUxIEZheDogKCs0OSktODE0Mi02Njk4OS04MCBF
+bWFpbDogc3JAZGVueC5kZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxt
+YW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21h
+aWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

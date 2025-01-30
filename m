@@ -2,65 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46545A22D36
-	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2025 14:03:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5876DA22D3B
+	for <lists+uboot-stm32@lfdr.de>; Thu, 30 Jan 2025 14:04:50 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 04426C78F6D;
-	Thu, 30 Jan 2025 13:03:28 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 1983FC78F6D;
+	Thu, 30 Jan 2025 13:04:50 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A926EC78F67
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5BD4AC78F67
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 30 Jan 2025 13:03:20 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50UCewov032689;
- Thu, 30 Jan 2025 14:03:12 +0100
+ Thu, 30 Jan 2025 13:04:43 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50UCevak016263;
+ Thu, 30 Jan 2025 14:04:36 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- LcQfM/SZU3il/qmNdq9zJB0E45RV4L84jz3TNgpAPzk=; b=GX2LJbBPJpKlSviY
- 2Uxc4w2K75kEzufdNe712PKY3zR/UtPxfK1GbM4SDbxRqkxWKT8PCNUPhsP3MHWy
- /d20x3gpOUM/XHoy99kCy2wSICJKPNTHHAQmMbV9SZSAWk3VWMyncUIveyEnIXWt
- v1KQTa8p0sGThpWeN4lscbrydAQoDCRPZKLU0JDBpPaKL82t5txTGIE/GgndmtAD
- VDgzbzeK83p9pIntXOzar8MkE1W7HeLPlLnDsoVP/4vyYpz3Vb4GGI7KdVOhr7kn
- RxGlILjh52O8kw/RrR3dApw4u2fcx290Xr/mmkKW3X3oPbQonbz1mY1wOwTEbWzm
- 9afmlQ==
+ O2ibzUAgZz1/oJIrHD3Iq0kfKaNskhpf25ggHlGmaO4=; b=WJnKYCx0fUEPO5Oz
+ btkUd0ipKAGyv9I/S2ibL+1ZZj4g6UsrPWrTT/n5K0O75qDIeJOEsivQSAtdzBGg
+ ubdb4QyUmYs39tRvY9SMAIfjrYhPfM+AgOuNT2ClBUvGTiHzQDfyPw2+kXKtRU0J
+ gpMBcV50ERul8OJHoByu32NIQ9fprbtMkaQlu6GANzjIs9VCNB2ASLgU8XkyP8p3
+ BGqFC9l6ZF89VXm/Iq95Korgp5x39JRcNgjP2TAsYDHC9GhgEyho8pRqQWGHdyQ2
+ co+biqVztmOvZ7cV69rcT0o+V6A6Gd8ZVn3ZMGOHUmxMiv/HPI6ruAl5ro4tTnIy
+ xm8zhA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44ftteb147-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44g6v6h2e1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 30 Jan 2025 14:03:12 +0100 (CET)
+ Thu, 30 Jan 2025 14:04:36 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id B65E44004F;
- Thu, 30 Jan 2025 14:02:26 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C47C44002D;
+ Thu, 30 Jan 2025 14:03:05 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DB2532AB039;
- Thu, 30 Jan 2025 13:56:29 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9E9F82D7F40;
+ Thu, 30 Jan 2025 13:57:30 +0100 (CET)
 Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 30 Jan
- 2025 13:56:29 +0100
-Message-ID: <ea8211e5-df92-4e84-9140-0c2294ade6b4@foss.st.com>
-Date: Thu, 30 Jan 2025 13:56:28 +0100
+ 2025 13:57:30 +0100
+Message-ID: <28bf891c-8b01-4d3e-8812-1e2e8ad49f3a@foss.st.com>
+Date: Thu, 30 Jan 2025 13:57:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
 References: <20250123144718.1139824-1-patrice.chotard@foss.st.com>
- <20250123144718.1139824-3-patrice.chotard@foss.st.com>
+ <20250123144718.1139824-4-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250123144718.1139824-3-patrice.chotard@foss.st.com>
+In-Reply-To: <20250123144718.1139824-4-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.126]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-01-30_06,2025-01-30_01,2024-11-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v4 2/9] configs: stih410-b2260: Enable
-	DM_REGULATOR flag
+Cc: Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v4 3/9] usb: dwc3-generic: Reorder include
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,56 +82,68 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 Hi,
 
 On 1/23/25 15:47, Patrice Chotard wrote:
-> Since commit 6aa8bde8786d ("usb: host: ehci-generic: Remove DM_REGULATOR
-> flag") device_get_supply_regulator() returns -ENOSYS which is not handle
-> by ehci_enable_vbus_supply() and thus, ehci_usb_probe() return an error.
+> Reorder include following rules available here :
+> https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
 >
-> By enabling DM_REGULATOR flag, device_get_supply_regulator() return -ENOENT
-> which is handle and ehci_usb_probe() return 0.
->
-> This fixed the following issue:
-> stih410-b2260 =>usb start
-> starting USB...
-> Bus dwc3@9900000: Register 2000240 NbrPorts 2
-> Starting the controller
-> USB XHCI 1.00
-> Bus usb@9a03c00: USB OHCI 1.0
-> Bus usb@9a03e00: probe failed, error -38
-> Bus usb@9a83c00: USB OHCI 1.0
-> Bus usb@9a83e00: probe failed, error -38
-> scanning bus dwc3@9900000 for devices... 1 USB Device(s) found
-> scanning bus usb@9a03c00 for devices... data abort
-> pc : [<7df929b4>]          lr : [<7df92918>]
-> reloc pc : [<7d6409b4>]    lr : [<7d640918>]
-> sp : 7c73b848  ip : 9cf13c5c     fp : 7c879d08
-> r10: 7c85d040  r9 : 7c74ded0     r8 : 09a03c00
-> r7 : 00000002  r6 : 7c85d080     r5 : 7c86a040  r4 : 00000000
-> r3 : 00000000  r2 : 00000000     r1 : 7c85d080  r0 : 7c85d040
-> Flags: nzCv  IRQs off  FIQs off  Mode SVC_32
-> Code: 05853ae4 0affffe2 e59a2010 e59a300c (e5832010)
-> Resetting CPU ...
+> Remove useless include files.
 >
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Marek Vasut <marex@denx.de>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
 > ---
 >
-> (no changes since v1)
+> (no changes since v3)
 >
->   configs/stih410-b2260_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+> Changes in v3:
+>    - Update comment by adding "Remove useless include files"
 >
-> diff --git a/configs/stih410-b2260_defconfig b/configs/stih410-b2260_defconfig
-> index 815f7557d69..e312ca492d2 100644
-> --- a/configs/stih410-b2260_defconfig
-> +++ b/configs/stih410-b2260_defconfig
-> @@ -48,6 +48,7 @@ CONFIG_MMC_SDHCI_STI=y
->   CONFIG_PHY=y
->   CONFIG_STI_USB_PHY=y
->   CONFIG_PINCTRL=y
-> +CONFIG_DM_REGULATOR=y
->   CONFIG_STI_RESET=y
->   CONFIG_STI_ASC_SERIAL=y
->   CONFIG_SYSRESET=y
+> Changes in v2:
+>    - remove useless include files
+>
+>   drivers/usb/dwc3/dwc3-generic.c | 20 ++++----------------
+>   1 file changed, 4 insertions(+), 16 deletions(-)
+>
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index 2ab41cbae45..bc7d2d4234b 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -7,29 +7,17 @@
+>    * Based on dwc3-omap.c.
+>    */
+>   
+> -#include <cpu_func.h>
+> -#include <log.h>
+>   #include <dm.h>
+> -#include <dm/device-internal.h>
+> +#include <reset.h>
+> +#include <asm/gpio.h>
+>   #include <dm/lists.h>
+> -#include <dwc3-uboot.h>
+> -#include <generic-phy.h>
+> -#include <linux/bitops.h>
+>   #include <linux/delay.h>
+> -#include <linux/printk.h>
+> -#include <linux/usb/ch9.h>
+>   #include <linux/usb/gadget.h>
+> -#include <malloc.h>
+>   #include <power/regulator.h>
+> -#include <usb.h>
+> -#include "core.h"
+> -#include "gadget.h"
+> -#include <reset.h>
+> -#include <clk.h>
+>   #include <usb/xhci.h>
+> -#include <asm/gpio.h>
+> -
+> +#include "core.h"
+>   #include "dwc3-generic.h"
+> +#include "gadget.h"
+>   
+>   struct dwc3_generic_plat {
+>   	fdt_addr_t base;
+
+
 
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>

@@ -2,50 +2,59 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B32BA2EE9B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2025 14:45:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21002A2EE9C
+	for <lists+uboot-stm32@lfdr.de>; Mon, 10 Feb 2025 14:45:31 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D2B93C78F88;
-	Mon, 10 Feb 2025 13:45:28 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id DC69EC78F8F;
+	Mon, 10 Feb 2025 13:45:30 +0000 (UTC)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 8634AC78025
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0B11AC78F8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 10 Feb 2025 13:45:21 +0000 (UTC)
+ Mon, 10 Feb 2025 13:45:29 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EC59D10380105; Mon, 10 Feb 2025 14:45:17 +0100 (CET)
+ with ESMTPSA id 1C8E81038010A; Mon, 10 Feb 2025 14:45:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1739195120;
+ t=1739195127;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=kj2+0i0Cojl7wG299okIVbG6J89Wm+zgWmoE2EO5JT8=;
- b=iH3FX8vUOh2uYQr2whVajZSi9ADzGxvTLB/VDwmBi+I7N2sVxjQSHHGDG1DP9aPR6B1X5l
- fN81JTuSJYqWRah1P9KPKq1v31ttMNhdh+Pq6KEEHotF8UjkZcia5EwezoPQ6eLX9gzIJx
- uUjQX893QKJ1DqLQoaQjB2nTGtw1C/Kc3kO9S5xtCh/I+0U7iNeivtp/U4OjqdHeAp4ywE
- eEwFOKF7D5xK59LY9IljS+D00/veh6c6IvsDrJdg/WX5wlj8xvR2gQ/1Jt/xYdt6i7Cn+V
- FwgZkxEdYFt8YqIv3CguufL7lK4WL/9w29UNTD10i2bnztQcEGlrHna10MSzBA==
-Message-ID: <f1d2068c-b393-4b90-b923-aa51b0972dc3@denx.de>
-Date: Mon, 10 Feb 2025 14:42:28 +0100
+ bh=sWGbjvx+OO75I6IEP5m3eFjyF8Oca9QDjjw8cS57aec=;
+ b=eSjmbaV7SEbVf2mbAKNrXPLc8VE/vSsR8sEY9vofAf8KaSNhhb7d8MtPhqzVmDL6pAAm0L
+ V0jkFJroTEmYsu4htu0rBVFN2XQh5S9l/J9pKCUwZSRGKzBHa1xjIMYcQ3x6UD17bRiv06
+ WSQ6675gsg5UTWfFAsYt/2VJkifvYI+WUZPQdq0Wwr0tMHhF9txTwXwMA4VOJz4aOyfi25
+ as24YW7Hb23yysNS0pvANXlHrtpEqA9TTyPQezq1QLoVW+Pzy5SxHDztubmu21BxohZDik
+ hw/EgTktjYpopLbocibYwU6mCbLe+aK32nyWxzfrn7qf11bdty/ducm2MUkcHQ==
+Message-ID: <c8790ad9-0e81-4780-8da8-bbc06377c360@denx.de>
+Date: Mon, 10 Feb 2025 14:42:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
- <87zfldnlmw.fsf@baylibre.com>
- <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+References: <20250130163547.512990-1-patrice.chotard@foss.st.com>
+ <4492fe8a-1b60-44da-93b7-383eae3fa269@foss.st.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
+In-Reply-To: <4492fe8a-1b60-44da-93b7-383eae3fa269@foss.st.com>
 X-Last-TLS-Session-Version: TLSv1.3
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] usb: gadget: f_mass_storage: Add
- schedule() in sleep_thread()
+ Sjoerd Simons <sjoerd@collabora.com>, Mathieu Othacehe <othacehe@gnu.org>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: Re: [Uboot-stm32] [PATCH v5 0/9] Restore USB and add UMS support
+	for STiH407-B2260
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,11 +72,12 @@ Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 On 2/10/25 11:28 AM, Patrice CHOTARD wrote:
+> 
 > Hi Marek
 
 Hi,
 
-> Any chance to get this patch merged in next U-Boot tag 2025.04-rc2 ?
+> Any chance to get this series merged in next U-Boot tag 2025.04-rc2 ?
 Gadget stuff is on Mattijs desk, please ping me in a few days if he 
 doesn't pick it up, I'll do so then. Sorry for the delay.
 _______________________________________________

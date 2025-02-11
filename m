@@ -2,70 +2,78 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A4F1A305F6
-	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Feb 2025 09:40:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66CD3A306AF
+	for <lists+uboot-stm32@lfdr.de>; Tue, 11 Feb 2025 10:13:01 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E03DDC78F7B;
-	Tue, 11 Feb 2025 08:40:00 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0C2B8C78F9C;
+	Tue, 11 Feb 2025 09:13:01 +0000 (UTC)
+Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
+ [209.85.208.174])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C098BC78F7B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 87803C78F7B
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 11 Feb 2025 08:39:58 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51B4owCF019487;
- Tue, 11 Feb 2025 09:39:52 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- ZIeZqaGaPoC/kwEFknSvJEsaNhfq7zXw1TPEN6x77G4=; b=KbE8cyLFxZKqqqNb
- IIZQlsRhyfFSSBiSuplcBcbhzdJkwfSefTUklK0FlywaUP86WfeqgIyh9kNjKtS+
- XwHfV78MxKQZoWo/1M/HZ6Mlgob4L0qAlBPxTFWgDFoNgEI5p7n/9otMo44MCPLq
- jRq00q1S5Fq8PAixWN40V5OrSC4t4fAsfzs1j2GxJJ5/BGj2VyMWPXcvWjRLq9yI
- YyqdWoTA69zD+MogvWOT1HHY3TN76tzDzsDXghB6JHnT9bkzMUmo5SRCUjj+Dg9c
- LTrZXTeSOHcI6Odoh0YZxFkkogwYcNNqP6DQM62swPm5WrHu4DrGNRow15JoqusT
- L8D3dQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44p0wt22uh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 11 Feb 2025 09:39:52 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D5B3840059;
- Tue, 11 Feb 2025 09:38:42 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0D5B72CEF87;
- Tue, 11 Feb 2025 09:24:47 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Feb
- 2025 09:24:46 +0100
-Message-ID: <23ee53ac-fced-4110-829f-399346ed7376@foss.st.com>
-Date: Tue, 11 Feb 2025 09:24:45 +0100
+ Tue, 11 Feb 2025 09:12:54 +0000 (UTC)
+Received: by mail-lj1-f174.google.com with SMTP id
+ 38308e7fff4ca-30761be8fcfso54218781fa.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Tue, 11 Feb 2025 01:12:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739265174; x=1739869974;
+ darn=st-md-mailman.stormreply.com; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+APdhyFyvohnN2imFhR5NCJMXLtW1K7Rrfu9fwyJdck=;
+ b=h412D76/BAn0BHucF6kxwAnrYkp9UcySjGPTBaguNM8UoFrzMDFp6DzJBwmJijaXWe
+ hlf009r16xHPP42sZXwK3c7GSYQ6UUl5h5GkLz+W376dN29tsAgSmEBcHiLFfPPGymVp
+ zlaVrr9TV+oSe0AQv/xl3r5wMPZt6lISVjcTEvhIGxN66cRbAp399jnDCcJyOimV/sae
+ p3YAdCJsGua5i/2qthvDptSpNl7gzYXGpxFdI2wuSSa2mPo9/b1NVaq7neiC7iozXJ11
+ y3Zx5g4k2wIY8yz0r15SYCYeb0aAbBS2fLtxRKv0EL5jMuk/NYU57xRHK7XNcZ9FG34y
+ fwHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739265174; x=1739869974;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+APdhyFyvohnN2imFhR5NCJMXLtW1K7Rrfu9fwyJdck=;
+ b=NIlXJoIy/uPpcFP+GFyCbmtmI0oDDGl5UHDslEpuCHdMU+npL0h2esZ9e7JAtBPItt
+ u6lxrIh56QmDocVa4NgzsM2eQa92/NyZgasJ1RLc9IcNN4eE+EZbsohcUtK3vdt8CgB2
+ sdUs16CPDX7hKPaNpHmTtMupGtdWcd7PH3MoWL6DVUNQDTrh7B/LsQ22ryYXYQwAspOt
+ ohhUL5GA3hqkOnBPSG92r2ngH3HnnxLLT/oVzw57wXNYn32buB8OM4MIVmLpjuBiyNme
+ 1EO22tC/fAnxs5GBVl4Y8wOwiKu5ElTIA4sgJlQ9SxOeD02RAz4B+II70+mI2PSbFdoX
+ zhbg==
+X-Gm-Message-State: AOJu0YwikN07rD+u7HmcIt1qpv+tuZ52bB1JHARdv6Z/6VGS58vkvu0l
+ airzxJjwdUMV76CvRlclx6vEBGBKkSf1+T2qUXjkcpqLpuo06UkfXwLYbbz/s4Y=
+X-Gm-Gg: ASbGnctIhZm0xoTWLeIokXQRCrFimn+4hYOpCE/N9NpRHeVnEpDMHztI7kr0+9/zNEX
+ uOGs3zx6dNvJpmJYlYzvmXT8DnkvUB+RgBG0tzP3+qW7n9mXoLOnTeR6KRbhj4wSWwSzmjBDtYW
+ U0ahrnZigYZl2y9VZrAk4oG5bIUCwiz61OEsWJd+g5K5pjbyMPSXHv29yBp6TDYOwUc/rtqUwlf
+ Fa4YIBj1eU8NIlwFVa+zympVrphGXpncO+zfTQIm3Sc+PX7O7hUiUv9FnrjOR7hUZPZvVmv+1Uf
+ Ec0s9jbuEhjJmNYR7pGuWarC2uDnOvTqeCiz1p63N54Jv+qzGnsThjKEloM=
+X-Google-Smtp-Source: AGHT+IHKbKrYSYYXTYkqjfhXWT10DcnyGhf5fOXXFV2zijdUM/IBGIHBbxS4wU8l/vTEmSAYFp8wIw==
+X-Received: by 2002:a05:6512:45c:b0:545:4cb:b25d with SMTP id
+ 2adb3069b0e04-54504cbbb46mr2944260e87.13.1739265173615; 
+ Tue, 11 Feb 2025 01:12:53 -0800 (PST)
+Received: from [192.168.1.2] (c-92-34-202-163.bbcust.telenor.se.
+ [92.34.202.163]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-308f645fdb3sm3018691fa.30.2025.02.11.01.12.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 01:12:53 -0800 (PST)
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 11 Feb 2025 10:12:51 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut
- <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
- <87zfldnlmw.fsf@baylibre.com>
- <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
- <f1d2068c-b393-4b90-b923-aa51b0972dc3@denx.de> <87lduc6hnh.fsf@baylibre.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <87lduc6hnh.fsf@baylibre.com>
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-11_03,2025-02-10_01,2024-11-22_01
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2] usb: gadget: f_mass_storage: Add
- schedule() in sleep_thread()
+Message-Id: <20250211-stm32f769-uart-fix-v1-1-8d0eaf0b193a@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJIUq2cC/x2MywqAIBAAfyX23IIa2eNXooPoWnvIQiuC8N+Tj
+ jMw80KiyJRgrF6IdHPiPRSQdQV2NWEhZFcYlFCtUFJiOrdG+U4PeJl4oucHtdatcM4PthdQwiN
+ S0f90mnP+AMPqg2dkAAAA
+X-Change-ID: 20250211-stm32f769-uart-fix-66650ddf9c80
+To: Vikas Manocha <vikas.manocha@st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Tom Rini <trini@konsulko.com>
+X-Mailer: b4 0.14.2
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Linus Walleij <linus.walleij@linaro.org>
+Subject: [Uboot-stm32] [PATCH] configs: stm32f769-disco: Fix console cmdline
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,21 +85,42 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiAyLzExLzI1IDA4OjU0LCBNYXR0aWpzIEtvcnBlcnNob2VrIHdyb3RlOgo+IE9uIGx1bi4s
-IGbDqXZyLiAxMCwgMjAyNSBhdCAxNDo0MiwgTWFyZWsgVmFzdXQgPG1hcmV4QGRlbnguZGU+IHdy
-b3RlOgo+IAo+PiBPbiAyLzEwLzI1IDExOjI4IEFNLCBQYXRyaWNlIENIT1RBUkQgd3JvdGU6Cj4+
-PiBIaSBNYXJlawo+Pgo+PiBIaSwKPj4KPj4+IEFueSBjaGFuY2UgdG8gZ2V0IHRoaXMgcGF0Y2gg
-bWVyZ2VkIGluIG5leHQgVS1Cb290IHRhZyAyMDI1LjA0LXJjMiA/Cj4+IEdhZGdldCBzdHVmZiBp
-cyBvbiBNYXR0aWpzIGRlc2ssIHBsZWFzZSBwaW5nIG1lIGluIGEgZmV3IGRheXMgaWYgaGUgCj4+
-IGRvZXNuJ3QgcGljayBpdCB1cCwgSSdsbCBkbyBzbyB0aGVuLiBTb3JyeSBmb3IgdGhlIGRlbGF5
-Lgo+IAo+IFNvbWVob3csIHRoaXMgd2FzIG5vdCBhc3NpZ25lZCB0byBtZSBvbiBwYXRjaHdvcmss
-IHNvIEkgbWlzc2VkIHRoaXMuCj4gU29ycnkgYWJvdXQgdGhlIGRlbGF5LCB3aWxsIHBpY2sgdXAg
-dG9kYXkuCgpUaGFua3MgOy0pCgpQYXRyaWNlIApfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJA
-c3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1y
-ZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+The Linux cmdline encoded in the defconfig is wrong, the
+STM32 USART driver registers as ttySTM0 not ttyS0.
+
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+---
+ configs/stm32f769-disco_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
+index 5be221afd2facb0af4a3a3f8df0f24fb34eaf10d..9edda0e36b2e92c3dbe3298a3da04bd731dac452 100644
+--- a/configs/stm32f769-disco_defconfig
++++ b/configs/stm32f769-disco_defconfig
+@@ -18,7 +18,7 @@ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
+ CONFIG_AUTOBOOT_STOP_STR=" "
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
++CONFIG_BOOTARGS="console=ttySTM0,115200n8 earlyprintk consoleblank=0 ignore_loglevel"
+ CONFIG_SYS_PBSIZE=1050
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_CYCLIC_MAX_CPU_TIME_US=8000
+
+---
+base-commit: cb3612dfe3fd9a702dc3657aae15b07974f9aa0b
+change-id: 20250211-stm32f769-uart-fix-66650ddf9c80
+
+Best regards,
+-- 
+Linus Walleij <linus.walleij@linaro.org>
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

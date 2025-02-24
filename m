@@ -2,67 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63FD4A4271B
-	for <lists+uboot-stm32@lfdr.de>; Mon, 24 Feb 2025 16:59:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ABFCAA42BB6
+	for <lists+uboot-stm32@lfdr.de>; Mon, 24 Feb 2025 19:39:40 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 21D2DC78F95;
-	Mon, 24 Feb 2025 15:59:07 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3F252C7803B;
+	Mon, 24 Feb 2025 18:39:40 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+ [209.85.208.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A5E1FC78F60
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 93B51C6C83D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 24 Feb 2025 15:59:06 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OFtabN022560;
- Mon, 24 Feb 2025 16:59:03 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- zI+qPsNWBmCwXiWTFD9c3ILtdCSH+Xe456tgn/qWl4I=; b=aUFMJDHEuhTGkNFA
- fkMFTqPhJ0c6WfwTQar0LYTEP03oSow8ulHzcgeRfFBXA/Vc5P7QNYU7OOJFaUxZ
- 73HAjdWm8Zg0Ye9KIeLNpx/gdfnLp38bXIpnyNr+3ypDmPE7+M6BeIM+SpOHUf0z
- OHe8pS9zwxU/Ap1EkFXwLulvFm2ODst5pMkHj+unkQBTomkmP70z1D6XDZJV7PKl
- 9B0vnNPEhFxHadb4kkiTXxpuY77/cxhGa6VsTtg+HgkFzfe6PyWzMZfbz/RFK1vn
- sIseH7NXcTzDCueMw4n75oIxi3+5nuAQY03a/DpyQdXYJnTSnkxqK5Crym8xtm9N
- m77S+A==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44y6t208x9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 24 Feb 2025 16:59:03 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A402A40071;
- Mon, 24 Feb 2025 16:57:55 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7DAF151E306;
- Mon, 24 Feb 2025 16:53:29 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 24 Feb
- 2025 16:53:29 +0100
-Message-ID: <1275fa83-668f-4caf-9f69-06c0d789983a@foss.st.com>
-Date: Mon, 24 Feb 2025 16:53:28 +0100
+ Mon, 24 Feb 2025 18:39:38 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-5dedae49c63so8573760a12.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 24 Feb 2025 10:39:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1740422378; x=1741027178;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
+ b=qemPy9dp7roCiCN/RRkxGk0DHCXYNDwUzIKTLOlcwLJdAt6JNpfgQoBBTWc+PfDWXo
+ 4x2uxDdNwhYZrNDtwkROjlvLK0TLXZ9EXfInMjDtsot28Se8+5CUDGAENqINh5KH+Wot
+ g145mAjgyvE1m4Gk0pYJY5vlJCA4Q469xsMxo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740422378; x=1741027178;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
+ b=JWaZo5fCuF6cZGtRkslg7iKfuHW0imAHSKWw4N4WqW1qVpgaIL2Vy1NjQFXwlsWkIv
+ mBaWC/YUOdsZ0UpvanA0zoE6dcZi8bkWkvcIJ1lIuTWVSDBlFWsQT9/naauh/EW2RJ/5
+ nnyirRb5cVCEykF8f5i8QwdiLGk/ZuoX8JSgyo+m4/jZbf7sDi7fkY2sRwCQXIfLQsDj
+ PXZiVOdAef8y7iTDaUbKQ3/94d3QlkV+C7rhBKvd1NQYP9rBSxFLkQK7zGvLQKuT8iAB
+ 2VeY0WrDvKsCIsqVR6tSg/r0iY+26sq0sIidgXgPMUXJPQs86QNnhVKrim4V0f7Bdzj0
+ GpmA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWHM2kJcT0k20wWuYDwfcL6B72kZNH69AHbgsg7NQYmeF9yoPwLpM0JfWPjkd3MnXyCKoYXHHNqc9ZPIw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzhnbG1EZgBclHbuWB/F/VZnJn+dL97+W6os+RC+vCs36zsvtMk
+ HsOILZwkfA+ZyywPRUYJcQM7VrGRflXoK+ctH1IB1T1l9jwdfoJfrJeYGf9krbU=
+X-Gm-Gg: ASbGncvRIp8rsEU+7Nz7PHMzdKCcwEG8JboflGjbmOpFFVbqM0ppEO1bydtQAkMVgsp
+ b5gg3crsrt6KPsT1vAQ5hE0IWgf+qNRh5x56zRmyuRG734JjR6k+BURmxToqaD3PXIk71ExgwLh
+ +sSdsriZ/iOXmsmX1Sn4fut9SboTCHkivTLxAKrmosxyGpOMZaZ8NkPRlx+CHRmvNRFJkOCh8uw
+ leDlXpNZlNn/hXt3ueC7saVMhD026gUeBlk0du1On3foGtrLmDsnaNTwDwhiJV4FfjxQyL64or3
+ 594V0cL+xzpo1MHYVz8uLAeSA1HzIdvLe3ZKNGL/ETYDPLbu95Pu5rH+8C9B+89FDw1Hhm06drM
+ 9XnrBVK6rYjrGSi1Weg==
+X-Google-Smtp-Source: AGHT+IGPM9/RQyjgwVbbqyVO9yqLCpa4E5bf4wbpUE8PxTo0Mrnj9I70Gy8AhEUsAcu6iTTU3SO2gg==
+X-Received: by 2002:a05:6402:5214:b0:5e0:8c55:533 with SMTP id
+ 4fb4d7f45d1cf-5e0b70cb742mr15070162a12.6.1740422377911; 
+ Mon, 24 Feb 2025 10:39:37 -0800 (PST)
+Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com
+ ([2.196.124.195]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e0a2e25589sm8046911a12.42.2025.02.24.10.39.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Feb 2025 10:39:36 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Date: Mon, 24 Feb 2025 19:39:25 +0100
+Message-ID: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-References: <20250217181439.1157972-1-dario.binacchi@amarulasolutions.com>
- <20250217181439.1157972-3-dario.binacchi@amarulasolutions.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250217181439.1157972-3-dario.binacchi@amarulasolutions.com>
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-24_08,2025-02-24_02,2024-11-22_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Vikas Manocha <vikas.manocha@st.com>, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH 3/3] board: stm32f746-disco: drop
-	board_late_init()
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Vikas Manocha <vikas.manocha@st.com>, uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: [Uboot-stm32] [PATCH v2 1/3] ARM: dts: stm32: drop "st,
+	button1" compatible
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,92 +86,101 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+It is pointless to use the custom compatible "st,button1" when
+stm32746g-eval.dts and stm32f769-disco.dts already contain the
+"gpio-keys" compatible, which is specifically used for button
+management.
 
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-On 2/17/25 19:14, Dario Binacchi wrote:
-> The removal of the "st,button1" and "st,led1" compatibles has emptied
-> the board_late_init(), so let's remove it along with the configuration
-> that allows its invocation.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> ---
-> 
->  board/st/stm32f746-disco/stm32f746-disco.c | 5 -----
->  configs/stm32746g-eval_defconfig           | 1 -
->  configs/stm32746g-eval_spl_defconfig       | 1 -
->  configs/stm32f746-disco_defconfig          | 1 -
->  configs/stm32f746-disco_spl_defconfig      | 1 -
->  5 files changed, 9 deletions(-)
-> 
-> diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-> index 72f479cea66f..07bc8a5f0a27 100644
-> --- a/board/st/stm32f746-disco/stm32f746-disco.c
-> +++ b/board/st/stm32f746-disco/stm32f746-disco.c
-> @@ -76,11 +76,6 @@ u32 spl_boot_device(void)
->  }
->  #endif
->  
-> -int board_late_init(void)
-> -{
-> -	return 0;
-> -}
-> -
->  int board_init(void)
->  {
->  #ifdef CONFIG_ETH_DESIGNWARE
-> diff --git a/configs/stm32746g-eval_defconfig b/configs/stm32746g-eval_defconfig
-> index 4346ecd6e42b..bd3a48b20a2b 100644
-> --- a/configs/stm32746g-eval_defconfig
-> +++ b/configs/stm32746g-eval_defconfig
-> @@ -21,7 +21,6 @@ CONFIG_USE_BOOTARGS=y
->  CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->  CONFIG_SYS_PBSIZE=1050
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="U-Boot > "
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
-> diff --git a/configs/stm32746g-eval_spl_defconfig b/configs/stm32746g-eval_spl_defconfig
-> index 2756ad5508fc..d47d059d23b1 100644
-> --- a/configs/stm32746g-eval_spl_defconfig
-> +++ b/configs/stm32746g-eval_spl_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_USE_BOOTARGS=y
->  CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->  CONFIG_SYS_PBSIZE=1050
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SPL_PAD_TO=0x9000
->  CONFIG_SPL_NO_BSS_LIMIT=y
->  CONFIG_SPL_BOARD_INIT=y
-> diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
-> index 35a489c34e00..f6fbf83f68f1 100644
-> --- a/configs/stm32f746-disco_defconfig
-> +++ b/configs/stm32f746-disco_defconfig
-> @@ -21,7 +21,6 @@ CONFIG_USE_BOOTARGS=y
->  CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->  CONFIG_SYS_PBSIZE=1050
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="U-Boot > "
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
-> diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
-> index 6826b1cb7559..dcf077dbfeec 100644
-> --- a/configs/stm32f746-disco_spl_defconfig
-> +++ b/configs/stm32f746-disco_spl_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_USE_BOOTARGS=y
->  CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->  CONFIG_SYS_PBSIZE=1050
->  # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SPL_PAD_TO=0x9000
->  CONFIG_SPL_NO_BSS_LIMIT=y
->  CONFIG_SPL_BOARD_INIT=y
+---
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Changes in v2:
+- Drop gpio-keys node from stm32f746-disco-u-boot.dtsi
 
-Thanks
-Patrice
+ arch/arm/dts/stm32746g-eval-u-boot.dtsi    |  5 -----
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi   |  5 -----
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi   |  5 -----
+ board/st/stm32f746-disco/stm32f746-disco.c | 15 ---------------
+ 4 files changed, 30 deletions(-)
+
+diff --git a/arch/arm/dts/stm32746g-eval-u-boot.dtsi b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
+index 1c288acec992..f64329287357 100644
+--- a/arch/arm/dts/stm32746g-eval-u-boot.dtsi
++++ b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioc 13 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpiof 10 0>;
+diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+index 1b42d6cbbc19..a79fca261a2c 100644
+--- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioi 11 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioi 1 0>;
+diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+index add55c96e21f..a50fba64dcd2 100644
+--- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioa 0 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioj 5 0>;
+diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
+index 8966a09501ed..65a39d965c72 100644
+--- a/board/st/stm32f746-disco/stm32f746-disco.c
++++ b/board/st/stm32f746-disco/stm32f746-disco.c
+@@ -94,21 +94,6 @@ int board_late_init(void)
+ 		dm_gpio_set_value(&gpio, 1);
+ 	}
+ 
+-	/* read button 1*/
+-	node = fdt_node_offset_by_compatible(gd->fdt_blob, 0, "st,button1");
+-	if (node < 0)
+-		return -1;
+-
+-	gpio_request_by_name_nodev(offset_to_ofnode(node), "button-gpio", 0,
+-				   &gpio, GPIOD_IS_IN);
+-
+-	if (dm_gpio_is_valid(&gpio)) {
+-		if (dm_gpio_get_value(&gpio))
+-			puts("usr button is at HIGH LEVEL\n");
+-		else
+-			puts("usr button is at LOW LEVEL\n");
+-	}
+-
+ 	return 0;
+ }
+ 
+-- 
+2.43.0
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

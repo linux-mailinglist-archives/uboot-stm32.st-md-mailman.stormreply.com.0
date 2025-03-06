@@ -2,65 +2,65 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FDA8A4B989
-	for <lists+uboot-stm32@lfdr.de>; Mon,  3 Mar 2025 09:38:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82987A544E6
+	for <lists+uboot-stm32@lfdr.de>; Thu,  6 Mar 2025 09:31:13 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D33DAC78F61;
-	Mon,  3 Mar 2025 08:38:52 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 3E08AC78002;
+	Thu,  6 Mar 2025 08:31:13 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E96E5C7803A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C6199C71289
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  3 Mar 2025 08:38:51 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5237jljq000984;
- Mon, 3 Mar 2025 09:38:37 +0100
+ Thu,  6 Mar 2025 08:31:11 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5266EnDC004211;
+ Thu, 6 Mar 2025 09:30:59 +0100
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- p51/ayo6h8fjeVE12eniaJkqLVzDHfu54vaf4to9Pko=; b=HNUznflbYuKezI6R
- Nk1JHp/OwPthv5r86DepYw7lf0yDLexEHpnfRNhHVBbKrnknIyc9x9hlfdKrpmAn
- mMw/cIFnsCTgtrN4fUJL2aV20VXutZ/BnPiGcyZY4DgF12A/f2FdyUMDFDr5hH8A
- QgZPoRLAIlciofDON3qoH9thLgZ6CObqFoGJXkBbI6XzyebWRURUWFhOLva6mNHD
- FpmsKEsl5VVURH/gtEqrWCbm1Sbchan+G2QyOYtWEMHVc5+lr7InyClmpn2JLk80
- f1RLEeYZtREkKjfpI2MuAHnLRjvhY2rVC5HryA+8BMxyxAmK90GE4gS8QbGaZqka
- ylia3w==
+ uiRKSxYu0XpjEO1VAD9KfO6tM0o1Sss5qrUktWbXomk=; b=YPQDjJp4BajhoK+k
+ odhA1hUWBxgmELM84A4RkUpuFdImZuKaHb6DKSEROhIiej+pX9tJeaLR+PRVxLff
+ P+Ly/cA/f4hPaaoNvF7DhTi4aF7eVdGo5Tj3OrDGtrgU9UjsNyf6dzxR9Pumy47c
+ MXS9IqhP+Ta7LJj+FVZZxv08D1PJp2I4882Q9TbA8ydMRdT162XnFqf+wJABnsFf
+ SXkjR5fUbzwTwgXnY2KMnA1Oxvp+gRXzXYai+1BnYs8yey6BbAj9NDtFisgWj0YJ
+ ddKxdgju2MuvGgQFx6p2on4B4nhFaNtwQDsYlXbhi3r2RX0JRXLhJENqriPvd2+K
+ IS2UDA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 453t9mr6bx-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 454e2swjh3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Mar 2025 09:38:36 +0100 (CET)
+ Thu, 06 Mar 2025 09:30:58 +0100 (CET)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C81B140068;
- Mon,  3 Mar 2025 09:37:26 +0100 (CET)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 71B124005B;
+ Thu,  6 Mar 2025 09:30:02 +0100 (CET)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1271150D618;
- Mon,  3 Mar 2025 09:35:35 +0100 (CET)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6A2A839827E;
+ Thu,  6 Mar 2025 09:28:57 +0100 (CET)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 3 Mar
- 2025 09:35:34 +0100
-Message-ID: <8631f15e-2bba-4f0a-b4d4-eb5c540f7716@foss.st.com>
-Date: Mon, 3 Mar 2025 09:35:34 +0100
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
+ 2025 09:28:56 +0100
+Message-ID: <f3e5fa17-20fe-4041-b781-05e5c73300bf@foss.st.com>
+Date: Thu, 6 Mar 2025 09:28:56 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20250302154429.65581-1-marex@denx.de>
+References: <20250222171438.90953-1-marex@denx.de>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250302154429.65581-1-marex@denx.de>
+In-Reply-To: <20250222171438.90953-1-marex@denx.de>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-03_03,2025-03-03_01,2024-11-22_01
+ engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-06_03,2025-03-06_01,2024-11-22_01
 Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  u-boot@dh-electronics.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: dts: stm32: Add support for
- STM32MP13xx DHCOR SoM and DHSBC rev.200 board
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Introduce DH STM32MP15xx
+ DHSOM board specific defconfigs
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,19 +79,21 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 3/2/25 16:43, Marek Vasut wrote:
-> LDO2 is expansion connector supply on STM32MP13xx DHCOR DHSBC rev.200.
-> LDO5 is carrier board supply on STM32MP13xx DHCOR DHSBC rev.200. Keep
-> both regulators always enabled to make sure both the carrier board and
-> the expansion connector is always powered on and supplied with correct
-> voltage.
+On 2/22/25 18:13, Marek Vasut wrote:
+> Move stm32mp15_dhcom_basic_defconfig into stm32mp15_dhcom_basic.config.
+> Retain legacy stm32mp15_dhcom_basic_defconfig as multi-config for all
+> DH STM32MP15xx DHCOM based boards. Move stm32mp15_dhsor_basic_defconfig
+> into stm32mp15_dhsor_basic.config. Retain stm32mp15_dhsor_basic_defconfig
+> as multi-config for all DH STM32MP15xx DHCOR based boards.
 > 
-> Describe ST33TPHF2XSPI TPM 2.0 chip reset lines.
-> 
-> This is a port of Linux kernel patch posted at:
-> https://patchwork.kernel.org/project/linux-arm-kernel/patch/20250302152605.54792-1-marex@denx.de/
-> This change shall be removed when the Linux kernel DT change lands
-> and Linux kernel DTs get synchronized with U-Boot DTs.
+> Introduce separate stm32mp15_dhcom_drc02_basic_defconfig,
+> stm32mp15_dhcom_pdk2_basic_defconfig, stm32mp15_dhcom_picoitx_basic_defconfig
+> for each STM32MP15xx DHCOM based board and separate
+> stm32mp15_dhcor_avenger96_basic_defconfig,
+> stm32mp15_dhcor_drc_compact_basic_defconfig,
+> stm32mp15_dhcor_testbench_basic_defconfig for each
+> STM32MP15xx DHCOR based board, to make build for those boards easier.
+> No functional change.
 > 
 > Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
@@ -102,39 +104,146 @@ On 3/2/25 16:43, Marek Vasut wrote:
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->  .../dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi   | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
+>  configs/stm32mp15_dhcom_basic.config                | 8 ++++++++
+>  configs/stm32mp15_dhcom_basic_defconfig             | 8 +-------
+>  configs/stm32mp15_dhcom_drc02_basic_defconfig       | 4 ++++
+>  configs/stm32mp15_dhcom_pdk2_basic_defconfig        | 4 ++++
+>  configs/stm32mp15_dhcom_picoitx_basic_defconfig     | 4 ++++
+>  configs/stm32mp15_dhcor_avenger96_basic_defconfig   | 4 ++++
+>  configs/stm32mp15_dhcor_basic.config                | 8 ++++++++
+>  configs/stm32mp15_dhcor_basic_defconfig             | 8 +-------
+>  configs/stm32mp15_dhcor_drc_compact_basic_defconfig | 4 ++++
+>  configs/stm32mp15_dhcor_testbench_basic_defconfig   | 4 ++++
+>  10 files changed, 42 insertions(+), 14 deletions(-)
+>  create mode 100644 configs/stm32mp15_dhcom_basic.config
+>  create mode 100644 configs/stm32mp15_dhcom_drc02_basic_defconfig
+>  create mode 100644 configs/stm32mp15_dhcom_pdk2_basic_defconfig
+>  create mode 100644 configs/stm32mp15_dhcom_picoitx_basic_defconfig
+>  create mode 100644 configs/stm32mp15_dhcor_avenger96_basic_defconfig
+>  create mode 100644 configs/stm32mp15_dhcor_basic.config
+>  create mode 100644 configs/stm32mp15_dhcor_drc_compact_basic_defconfig
+>  create mode 100644 configs/stm32mp15_dhcor_testbench_basic_defconfig
 > 
-> diff --git a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> index d718aae16ca..eace94f5fa4 100644
-> --- a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> @@ -23,3 +23,25 @@
->  &usbphyc {
->  	bootph-all;
->  };
+> diff --git a/configs/stm32mp15_dhcom_basic.config b/configs/stm32mp15_dhcom_basic.config
+> new file mode 100644
+> index 00000000000..d78916bb5b2
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcom_basic.config
+> @@ -0,0 +1,8 @@
+> +#include <configs/stm32mp15_dhsom.config>
 > +
-> +&st33htph {
-> +	reset-gpios = <&gpioe 12 GPIO_ACTIVE_LOW>;
-> +};
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_STM32MP=y
+> +CONFIG_SYS_MEMTEST_START=0xc0000000
+> +CONFIG_SYS_MEMTEST_END=0xc4000000
+> +CONFIG_SYS_I2C_EEPROM_BUS=3
+> +CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+> diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+> index a28f2862048..297092bd746 100644
+> --- a/configs/stm32mp15_dhcom_basic_defconfig
+> +++ b/configs/stm32mp15_dhcom_basic_defconfig
+> @@ -1,10 +1,4 @@
+> -#include <configs/stm32mp15_dhsom.config>
+> +#include <configs/stm32mp15_dhcom_basic.config>
+>  
+> -CONFIG_ARM=y
+> -CONFIG_ARCH_STM32MP=y
+>  CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
+> -CONFIG_SYS_MEMTEST_START=0xc0000000
+> -CONFIG_SYS_MEMTEST_END=0xc4000000
+> -CONFIG_SYS_I2C_EEPROM_BUS=3
+>  CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
+> -CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+> diff --git a/configs/stm32mp15_dhcom_drc02_basic_defconfig b/configs/stm32mp15_dhcom_drc02_basic_defconfig
+> new file mode 100644
+> index 00000000000..838c3db253d
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcom_drc02_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcom_basic.config>
 > +
-> +/* LDO2 is expansion connector 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-> +&vdd_ldo2 {
-> +	bootph-all;
-> +	regulator-always-on;
-> +	regulator-boot-on;
-> +	regulator-min-microvolt = <3300000>;
-> +	regulator-max-microvolt = <3300000>;
-> +};
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp153c-dhcom-drc02"
+> +CONFIG_OF_LIST="st/stm32mp153c-dhcom-drc02"
+> diff --git a/configs/stm32mp15_dhcom_pdk2_basic_defconfig b/configs/stm32mp15_dhcom_pdk2_basic_defconfig
+> new file mode 100644
+> index 00000000000..c6996233c9f
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcom_pdk2_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcom_basic.config>
 > +
-> +/* LDO5 is carrier board 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-> +&vdd_sd {
-> +	bootph-all;
-> +	regulator-always-on;
-> +	regulator-boot-on;
-> +	regulator-min-microvolt = <3300000>;
-> +	regulator-max-microvolt = <3300000>;
-> +};
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
+> +CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2"
+> diff --git a/configs/stm32mp15_dhcom_picoitx_basic_defconfig b/configs/stm32mp15_dhcom_picoitx_basic_defconfig
+> new file mode 100644
+> index 00000000000..5682edbfcbf
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcom_picoitx_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcom_basic.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-picoitx"
+> +CONFIG_OF_LIST="st/stm32mp157c-dhcom-picoitx"
+> diff --git a/configs/stm32mp15_dhcor_avenger96_basic_defconfig b/configs/stm32mp15_dhcor_avenger96_basic_defconfig
+> new file mode 100644
+> index 00000000000..5d27cd5ed7e
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcor_avenger96_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcor_basic.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
+> +CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96"
+> diff --git a/configs/stm32mp15_dhcor_basic.config b/configs/stm32mp15_dhcor_basic.config
+> new file mode 100644
+> index 00000000000..e9c0cb9f95a
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcor_basic.config
+> @@ -0,0 +1,8 @@
+> +#include <configs/stm32mp15_dhsom.config>
+> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_STM32MP=y
+> +CONFIG_SYS_I2C_EEPROM_BUS=2
+> +CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+> +CONFIG_PHY_MICREL=y
+> +CONFIG_PHY_MICREL_KSZ90X1=y
+> diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+> index f6f2af6e7a2..beb6d1d5a9a 100644
+> --- a/configs/stm32mp15_dhcor_basic_defconfig
+> +++ b/configs/stm32mp15_dhcor_basic_defconfig
+> @@ -1,10 +1,4 @@
+> -#include <configs/stm32mp15_dhsom.config>
+> +#include <configs/stm32mp15_dhcor_basic.config>
+>  
+> -CONFIG_ARM=y
+> -CONFIG_ARCH_STM32MP=y
+>  CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
+> -CONFIG_SYS_I2C_EEPROM_BUS=2
+>  CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st/stm32mp153c-dhcor-drc-compact"
+> -CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+> -CONFIG_PHY_MICREL=y
+> -CONFIG_PHY_MICREL_KSZ90X1=y
+> diff --git a/configs/stm32mp15_dhcor_drc_compact_basic_defconfig b/configs/stm32mp15_dhcor_drc_compact_basic_defconfig
+> new file mode 100644
+> index 00000000000..7b1d73a33b5
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcor_drc_compact_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcor_basic.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp153c-dhcor-drc-compact"
+> +CONFIG_OF_LIST="st/stm32mp153c-dhcor-drc-compact"
+> diff --git a/configs/stm32mp15_dhcor_testbench_basic_defconfig b/configs/stm32mp15_dhcor_testbench_basic_defconfig
+> new file mode 100644
+> index 00000000000..7ba327cbd82
+> --- /dev/null
+> +++ b/configs/stm32mp15_dhcor_testbench_basic_defconfig
+> @@ -0,0 +1,4 @@
+> +#include <configs/stm32mp15_dhcor_basic.config>
+> +
+> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp151a-dhcor-testbench"
+> +CONFIG_OF_LIST="st/stm32mp151a-dhcor-testbench"
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 

@@ -2,97 +2,85 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B81BA6E184
-	for <lists+uboot-stm32@lfdr.de>; Mon, 24 Mar 2025 18:50:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EEED0A6E1EA
+	for <lists+uboot-stm32@lfdr.de>; Mon, 24 Mar 2025 19:00:53 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 0FF0BC7802F;
-	Mon, 24 Mar 2025 17:50:41 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A0400C7802F;
+	Mon, 24 Mar 2025 18:00:53 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id DCF9CC7801E
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 25029C7801E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 24 Mar 2025 17:50:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1742838630; x=1743443430; i=xypron.glpk@gmx.de;
- bh=Qx4B6wm4bfj0k9vOM1XsJ+RRp02TRWnyAaBUbcckkes=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=okSBouVuimHIfbJJvtuk89VCwSwSdvveRITKvh2YR1FK0lLDuLUf8Pmhlzt1PFam
- HzEsuOqlTcOarpX6co5NcBYQLvuNsXyFLhdmleV4vc9ncfDZhl9Bg9LR1ve3Gb0QE
- fpX0dHd2LVtRfnGYRaZAmKXmgEohfcrNH021agAQWEwwLZRejYrAG1r5dnZ/AmbrA
- XN6muZxCbHuXSJAyq5OI+zVV4+aLOzhk6imNoSVbmsVkoVb9+j/mJ5lih+dhAKuA/
- caw3mE7bIjnSLCeSkXBir7JnZhUSeNWrd7EfuNVHAMtvhS4eG25pbE5BYho7JXcNO
- 6pgd/zlUYtUkGYaSNw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1Obb-1szbZd1rfn-00sd3j; Mon, 24
- Mar 2025 18:50:30 +0100
-Message-ID: <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
-Date: Mon, 24 Mar 2025 18:50:26 +0100
+ Mon, 24 Mar 2025 18:00:52 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-399744f74e9so2893094f8f.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 24 Mar 2025 11:00:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1742839251; x=1743444051;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wvZkbdIVJrvV3lWjV8CcOLAFsC9LTMIZ/snWkKCGynU=;
+ b=oWl8nmF7P/VO8SUyq2AfnY5dTsxKjg2G8504Jo84RllL+LVICDjqtoaTE7HZifv+U2
+ nsbEHaVNePPRl1C7sUKLShjjyzvkQsomVdquR8ErntuqS7iB/OulESgBglI1mFM4PCIE
+ o+4w/Ca5P1Xv+zuyF1fGAHtWo6+qCEBUwvYQ4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742839251; x=1743444051;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wvZkbdIVJrvV3lWjV8CcOLAFsC9LTMIZ/snWkKCGynU=;
+ b=h/+lEPGzQnTtC3kBmXxrnZ1fdZxibuTXpyt6qJERFONqRLbYhD2/UbZ1yLYNHMY6kx
+ 9aJrHWqI7hjvucUwA8gtQNPs277FgYJeud9rFyKE5w4VDpvvZNjWkKtZmFQ6rRLVrb9K
+ nV7jkAqvyznaTWyMu2xpiCfU0eddzh7tjZRkKl3yhph2WFN+D4hF50DsIHTXyHMwGJ/z
+ 7H2yTgpHqA95JZ2L+wD0OQEHGovMnnpSD5gNg5/BfXxl7FYNsQYBkl/zwjFkY4LoUMPD
+ 8fWT7xe+mB9Y8oUK99cJhRXyN/QeQdlpU4KJ3F6q8Au3Hl5TXX3IAb5TmclWIugHJm5O
+ ckBA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCzhI3UrLhKYi0DbhdwQ0L6KtrnnZju1yuJrS+VUtnfM6nWbzon2mDnTcl7KFyn5f62pdsEu3uMFepWQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YxECmkOMVJ0zC4JTBgs8mb9Da7Ax0YgeXycxZFrN/GYDyWtJkf+
+ mf8kAnsY0RwMSMwOFUVvs3aBM3oMxDLnVX/iIJG6qar0n6a+Fh6E5xqMOJUx+OI=
+X-Gm-Gg: ASbGncsBwREACLDrqjjoffGNIaCpGQtIQvkA8bx1pDLM8zBJgVZwEybisM9OXXi49qs
+ LXGMQwaWAIHQ6oiMoDaea85gItP7vtfdnW18D0rgviUSWlHiNRvAXRgRjD4AN/116Y/Wz8qpSYH
+ XNVnBh+UK7TFcU3ZgX2KvD0yG2/RmWHWqAKg4RRPaTb6TdOgZH22pTIG6wkAe11BNXLVD8vLyWZ
+ HcuC9H+vKfcUo8fbjQlgEupVInVdc017Jxta2RzIXzHEpTKUCjd/cFtNkXlKsAuad+60cLKmLmK
+ Zn7KgZwJst30ptRVVC2CoJy/7I2aCrB9kMhfz3QoDIedvMRU/CQdYXmvr0KPCTbv3JiJvRdc/Mh
+ B4hmtwdroJwo7v/MpU/pF/cBJtNdL1oZXik0L2Ys6wfqt5w==
+X-Google-Smtp-Source: AGHT+IFE3sqzz3pMNpS8wslP0hPUlHnZYsoJH7+sxSVP27VDeaqlw1/+1/CPE862u8GRrWPxmIGTuw==
+X-Received: by 2002:a05:6000:1f8f:b0:391:43ff:8ca8 with SMTP id
+ ffacd0b85a97d-3997f91e0d1mr12339564f8f.26.1742839251080; 
+ Mon, 24 Mar 2025 11:00:51 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com ([2.196.41.220])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d43f556a4sm178289285e9.22.2025.03.24.11.00.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Mar 2025 11:00:50 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Date: Mon, 24 Mar 2025 19:00:24 +0100
+Message-ID: <20250324180047.1571378-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
-X-Provags-ID: V03:K1:k6U/0KwRV/2YDtVzRWbW42pyOb5J2Vqo6OgOs75Ix5Ij9BmHGHB
- pIigmgeRuk9+5Fk2cDmDtxrQ3GRrB9Tyi8n7LZp9Cm7dopLlaeEHu9f9wklHg2oAxW8P3VS
- 9ww1u/K0CenxUAtstn5vcOX+OxPT0aRaEWYpDzRrgRsH5iqCjiOR1z3bpjG1VuHormQ3qkB
- mQAVCFP9QUCyNSOU3v+PA==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:zNe0lvPJj8w=;//i+JWRhH7Ei5w/iSTxJdO7h/YJ
- vW/ZQBp5xEcNuztp26hmm7iemPDFjb366JqUeMstZcY1JS8cbtG81PXWm0EHhb8xNNr50yx0e
- wPQCkHEPi4eVk25/0lB4pcko1gOXL7eiwlF1Fk9zTzde2XaNi2mVQ76V8rKXzi4reENlW/MmY
- hW01Gq1NNTkWULV03OVx2w0p0Xqu33YoTf0zR1zzgMSGz0+xghiCmythI91hK3PvNJHt+3DAi
- Dtzwpgs7BOShj4Rfjldt8S4Q4CzQVtR2/o1tEDTvfptPZhIvv1W0DRquJ1h3sIObdnZXXOrQo
- HLYqxV0jK/PIexyawsDbYercVI0fEJPFo8/JXTcCXkeRP+IZOfT50dxR9nfaBbJxeGwPcJMjC
- gJYUdZVaWhJnSaS5ngSp9oOJWphf7hJVf/ptMhPe4Vh8cvFpKlY5JdJbSfq5SOoMbOxKE1ycR
- v82UZadoPfRvM2esxeUpaHosNcpTekjv3tb/qdULnTFgfSDcqQ3fPQ77cn8uhQosaSWlxdwCu
- BSNxwJ+VjGRSmEjpkMUWQIulfoBLkmnqMWG6TqwVHFPPPn94IL7Jbrkt8fpp9wZO+Lpw9Kmn3
- faYGjpeQrklZjWbI1FGyReevIkuVEAunNfTjWnB6qxb79od8ag0lx2W/VSufdvJlNvzBapyU2
- nmwjBha/WvWQ1IsuOTZtXO2eSTMu8xdByhZxYtuC7oHsAmRXW8+869lVlC0LOXnXMhbekZU9p
- wafQwWUKgTfiPrzpd5JUSnTwXDwQsmkcIZLDJTgbgmqnMtTnM3Q5wnhJTLPnl8yc0Heg5f2t7
- 9K/vZs4jKYrCn3h+mxEempiIF1VmePIRJfpXqIk/7yIDnyPOj/KiwcftoH2Bl6jypRrQ5mBix
- nKFePn+t9BqMFdRMJzuDknO6IyBDCDdMmcKoQt6ZXQXcS+aRoC0r+jL7NUVU4O59ro/derGOV
- NKPAlSrK/Bx86gIGP+bxnY4Efbsi1E/tvn5+ZXG2T88e5a4QnkKiNVKHXIxwZ4AUmgtW4gaSG
- GBVhFWq02f1DLu5OylcIVLtp7JcdpN81idV9mZb64QIRATmhmzXOP9t3LBkttYjBFfU7sv5Xo
- Rvpwwine+iNnw2/gw+TZeBqFgsmSmC+Y+HLBbHqJO1cgwNjC6eZAmBXgpSQ3a159u8B4QJNi0
- UhVxpPaPJxV1rWlEwHJWhSdG9YUcW9+vkSJ9xW4m2xxCSrXZK8P8W0jq7z1Xe2qKkk/TX2dY1
- IWwxeISSxsHM13bTDJZbh3tZYmQMPEZU/T0CS/R5i1MVS2+oDAAiHEwnNRn4GGwNWtAdKVM3z
- L6VreKBRRZLfyndn5uM37ouPhSJ/H2ZZKJOAcdNFYcrfxquBBWhEIinX7hcM/f4HAPXYg8pmf
- G9HpwvU9uO12cK5Gy8BG5HW+bfGFRiOWzeBHc7bpg1wRo3ZoPcoCyvF0bu59UIWixdT/DkjlO
- CGaDYcM30joSOv9P/5wpYVMsFNs0=
-Cc: Peng Fan <peng.fan@nxp.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, u-boot@lists.denx.de,
- Wei Ming Chen <jj251510319013@gmail.com>,
+Cc: Fabio Estevam <festevam@denx.de>, Kever Yang <kever.yang@rock-chips.com>,
+ Anton Bambura <jenneron@protonmail.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- Udit Agarwal <udit.agarwal@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Manish Tomar <Manish.Tomar@nxp.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Wasim Khan <wasim.khan@nxp.com>,
- Mathew McBride <matt@traverse.com.au>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Tien Fong Chee <tien.fong.chee@altera.com>, e@freeshell.de,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Adriano Cordova <adrianox@gmail.com>, Ashish Kumar <Ashish.Kumar@nxp.com>,
- Sumit Garg <sumit.garg@kernel.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Robert Marko <robert.marko@sartura.hr>, Michal Simek <michal.simek@amd.com>,
- Mingkai Hu <mingkai.hu@nxp.com>, Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Tang Yuantian <andy.tang@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Simon Glass <sjg@chromium.org>,
- Maks Mishin <maks.mishinfz@gmail.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, Vikas Manocha <vikas.manocha@st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Andre Przywara <andre.przywara@arm.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Prasad Kummari <prasad.kummari@amd.com>, Adam Ford <aford173@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ linux-amarula@amarulasolutions.com
+Subject: [Uboot-stm32] [PATCH 0/6] Support NT35510 panel controller on
+	stm32f769i-disco board
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,656 +92,45 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 17.03.25 14:38, Ilias Apalodimas wrote:
+The series, inspired by some of my patches already merged into Linux,
+adds support for the Novatek NT35510 panel on the stm32f769i-disco
+board. Indeed, the MB1166 board comes in different hardware revisions.
+The MB1166-A09 is utilizing a NT35510 panel controller while prior
+versions are utilizing an OTM8009a controller.
 
-%s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
 
-> The EFI subsystem defines its own bounce buffer for devices that
-> can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
-> which can be reused instead of defining another symbol.
-> The only limitation for EFI is that we don't know how big the file a user
-> chooses to transfer is and as a result we can't depend on allocating the
-> memory from the malloc area, which can prove too small.
->
-> So allocate an EFI buffer of the correct size and pass it to the DM,
-> which already supports bounce buffering via bounce_buffer_start_extalign()
+Dario Binacchi (6):
+  ARM: dts: stm32: add DSI support on stm32f769
+  ARM: dts: stm32: rename mmc_vcard to vcc-3v3 on stm32f769-disco
+  ARM: dts: stm32: add display support on stm32f769-disco
+  ARM: dts: add stm32f769-disco-mb1166-reva09
+  video: support FRIDA FRD400B25025-A-CTK
+  board: stm32f769-disco: support FRD400B25025-A-CTK display
 
-Looking at
+ arch/arm/dts/Makefile                         |    1 +
+ .../stm32f769-disco-mb1166-reva09-u-boot.dtsi |    6 +
+ .../arm/dts/stm32f769-disco-mb1166-reva09.dts |   13 +
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi      |   53 +-
+ arch/arm/dts/stm32f769-disco.dts              |   66 +-
+ arch/arm/dts/stm32f769.dtsi                   |   20 +
+ configs/stm32f769-disco_defconfig             |    2 +
+ configs/stm32f769-disco_spl_defconfig         |    2 +
+ drivers/video/Kconfig                         |    7 +
+ drivers/video/Makefile                        |    1 +
+ drivers/video/novatek-nt35510.c               | 1253 +++++++++++++++++
+ 11 files changed, 1374 insertions(+), 50 deletions(-)
+ create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
+ create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09.dts
+ create mode 100644 arch/arm/dts/stm32f769.dtsi
+ create mode 100644 drivers/video/novatek-nt35510.c
 
-     if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
-
-in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
-enabled by the device driver. Only the scsi drivers sets bb = true.
-
-Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
-to blk_desc")
-
-Which device-drivers of the boards mentioned below do actually need
-bounce buffering?
-
-Best regards
-
-Heinrich
-
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   arch/arm/Kconfig                              |  8 ++
->   configs/ls1028aqds_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls1028aqds_tfa_defconfig              |  1 -
->   configs/ls1028aqds_tfa_lpuart_defconfig       |  1 -
->   configs/ls1028ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls1028ardb_tfa_defconfig              |  1 -
->   configs/ls1043ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls1043ardb_tfa_defconfig              |  1 -
->   configs/ls1046ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls1046ardb_tfa_defconfig              |  1 -
->   configs/ls1088aqds_tfa_defconfig              |  1 -
->   configs/ls1088ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls1088ardb_tfa_defconfig              |  1 -
->   configs/ls2088aqds_tfa_defconfig              |  1 -
->   configs/ls2088ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/ls2088ardb_tfa_defconfig              |  1 -
->   configs/lx2160aqds_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/lx2160aqds_tfa_defconfig              |  1 -
->   configs/lx2160ardb_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/lx2160ardb_tfa_defconfig              |  1 -
->   configs/lx2160ardb_tfa_stmm_defconfig         |  1 -
->   configs/lx2162aqds_tfa_SECURE_BOOT_defconfig  |  1 -
->   configs/lx2162aqds_tfa_defconfig              |  1 -
->   .../lx2162aqds_tfa_verified_boot_defconfig    |  1 -
->   configs/ten64_tfa_defconfig                   |  1 -
->   include/efi_loader.h                          |  4 -
->   lib/efi_loader/Kconfig                        |  7 --
->   lib/efi_loader/efi_disk.c                     | 78 +++++++------------
->   lib/efi_loader/efi_memory.c                   | 16 ----
->   29 files changed, 36 insertions(+), 101 deletions(-)
->
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index cf08fe63f1e7..bb946e69254c 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1417,6 +1417,7 @@ config TARGET_LS2080A_EMU
->   	select ARCH_LS2080A
->   	select ARM64
->   	select ARMV8_MULTIENTRY
-> +	select BOUNCE_BUFFER
->   	select FSL_DDR_SYNC_REFRESH
->   	select GPIO_EXTRA_HEADER
->   	help
-> @@ -1432,6 +1433,7 @@ config TARGET_LS1088AQDS
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	select SUPPORT_SPL
->   	select FSL_DDR_INTERACTIVE if !SD_BOOT
-> @@ -1448,6 +1450,7 @@ config TARGET_LS2080AQDS
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	select SUPPORT_SPL
->   	imply SCSI
-> @@ -1467,6 +1470,7 @@ config TARGET_LS2080ARDB
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select SUPPORT_SPL
->   	select FSL_DDR_BIST
->   	select FSL_DDR_INTERACTIVE if !SPL
-> @@ -1485,6 +1489,7 @@ config TARGET_LS2081ARDB
->   	select ARM64
->   	select ARMV8_MULTIENTRY
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	select SUPPORT_SPL
->   	help
-> @@ -1500,6 +1505,7 @@ config TARGET_LX2160ARDB
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	help
->   	  Support for NXP LX2160ARDB platform.
-> @@ -1514,6 +1520,7 @@ config TARGET_LX2160AQDS
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	help
->   	  Support for NXP LX2160AQDS platform.
-> @@ -1529,6 +1536,7 @@ config TARGET_LX2162AQDS
->   	select ARMV8_MULTIENTRY
->   	select ARCH_SUPPORT_TFABOOT
->   	select BOARD_LATE_INIT
-> +	select BOUNCE_BUFFER
->   	select GPIO_EXTRA_HEADER
->   	help
->   	  Support for NXP LX2162AQDS platform.
-> diff --git a/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig b/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
-> index 97eb7d9dca4c..e3b1018f6f8e 100644
-> --- a/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls1028aqds_tfa_SECURE_BOOT_defconfig
-> @@ -23,7 +23,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1028aqds_tfa_defconfig b/configs/ls1028aqds_tfa_defconfig
-> index cc53c17f543b..5b7dd4bf7dd5 100644
-> --- a/configs/ls1028aqds_tfa_defconfig
-> +++ b/configs/ls1028aqds_tfa_defconfig
-> @@ -25,7 +25,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1028aqds_tfa_lpuart_defconfig b/configs/ls1028aqds_tfa_lpuart_defconfig
-> index 8da7271c7f85..a38c81e83199 100644
-> --- a/configs/ls1028aqds_tfa_lpuart_defconfig
-> +++ b/configs/ls1028aqds_tfa_lpuart_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-> index 3f71a37559be..da225e1dad8f 100644
-> --- a/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls1028ardb_tfa_SECURE_BOOT_defconfig
-> @@ -23,7 +23,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1028ardb_tfa_defconfig b/configs/ls1028ardb_tfa_defconfig
-> index 89e452bdb1a8..829cc5204d34 100644
-> --- a/configs/ls1028ardb_tfa_defconfig
-> +++ b/configs/ls1028ardb_tfa_defconfig
-> @@ -25,7 +25,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
-> index 1b41fe608dae..04ca2a3afd81 100644
-> --- a/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls1043ardb_tfa_SECURE_BOOT_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_PCIE2=y
->   CONFIG_PCIE3=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1043ardb_tfa_defconfig b/configs/ls1043ardb_tfa_defconfig
-> index ca100bd4bca9..a6ca63cd8f79 100644
-> --- a/configs/ls1043ardb_tfa_defconfig
-> +++ b/configs/ls1043ardb_tfa_defconfig
-> @@ -26,7 +26,6 @@ CONFIG_PCIE2=y
->   CONFIG_PCIE3=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
-> index 6b4e834ad4a0..9c22d542a6f8 100644
-> --- a/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls1046ardb_tfa_SECURE_BOOT_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_PCIE2=y
->   CONFIG_PCIE3=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1046ardb_tfa_defconfig b/configs/ls1046ardb_tfa_defconfig
-> index a8f20f9b87b7..4eab8ea19e8e 100644
-> --- a/configs/ls1046ardb_tfa_defconfig
-> +++ b/configs/ls1046ardb_tfa_defconfig
-> @@ -26,7 +26,6 @@ CONFIG_PCIE2=y
->   CONFIG_PCIE3=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ls1088aqds_tfa_defconfig b/configs/ls1088aqds_tfa_defconfig
-> index df86bf982ee4..31d56f587af8 100644
-> --- a/configs/ls1088aqds_tfa_defconfig
-> +++ b/configs/ls1088aqds_tfa_defconfig
-> @@ -29,7 +29,6 @@ CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig b/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
-> index df472eeb404d..c910b73634f9 100644
-> --- a/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
-> @@ -26,7 +26,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/ls1088ardb_tfa_defconfig b/configs/ls1088ardb_tfa_defconfig
-> index 8d640f6594b2..682007e803d1 100644
-> --- a/configs/ls1088ardb_tfa_defconfig
-> +++ b/configs/ls1088ardb_tfa_defconfig
-> @@ -28,7 +28,6 @@ CONFIG_SYS_MEMTEST_START=0x80000000
->   CONFIG_SYS_MEMTEST_END=0x9fffffff
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/ls2088aqds_tfa_defconfig b/configs/ls2088aqds_tfa_defconfig
-> index 8c86b8b11eb3..ea73a4cda971 100644
-> --- a/configs/ls2088aqds_tfa_defconfig
-> +++ b/configs/ls2088aqds_tfa_defconfig
-> @@ -23,7 +23,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig b/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
-> index 3fd1de967896..7f53397cdcb1 100644
-> --- a/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/ls2088ardb_tfa_SECURE_BOOT_defconfig
-> @@ -27,7 +27,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/ls2088ardb_tfa_defconfig b/configs/ls2088ardb_tfa_defconfig
-> index f053044fa56e..398dfe068015 100644
-> --- a/configs/ls2088ardb_tfa_defconfig
-> +++ b/configs/ls2088ardb_tfa_defconfig
-> @@ -29,7 +29,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig b/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
-> index 321ed71993b8..afb842978209 100644
-> --- a/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/lx2160aqds_tfa_SECURE_BOOT_defconfig
-> @@ -28,7 +28,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_STDOUT_VIA_ALIAS=y
-> diff --git a/configs/lx2160aqds_tfa_defconfig b/configs/lx2160aqds_tfa_defconfig
-> index 465f07ee7f82..ec23ed384c44 100644
-> --- a/configs/lx2160aqds_tfa_defconfig
-> +++ b/configs/lx2160aqds_tfa_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig b/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
-> index 478a01b566c6..71f4436eca06 100644
-> --- a/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/lx2160ardb_tfa_SECURE_BOOT_defconfig
-> @@ -29,7 +29,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_STDOUT_VIA_ALIAS=y
-> diff --git a/configs/lx2160ardb_tfa_defconfig b/configs/lx2160ardb_tfa_defconfig
-> index 8fd18825569c..6be3890de3ed 100644
-> --- a/configs/lx2160ardb_tfa_defconfig
-> +++ b/configs/lx2160ardb_tfa_defconfig
-> @@ -31,7 +31,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/lx2160ardb_tfa_stmm_defconfig b/configs/lx2160ardb_tfa_stmm_defconfig
-> index cf65897af898..ef89b0f34575 100644
-> --- a/configs/lx2160ardb_tfa_stmm_defconfig
-> +++ b/configs/lx2160ardb_tfa_stmm_defconfig
-> @@ -32,7 +32,6 @@ CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
->   CONFIG_EFI_MM_COMM_TEE=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig b/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
-> index 46b6085a52fe..2b31be10899b 100644
-> --- a/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
-> +++ b/configs/lx2162aqds_tfa_SECURE_BOOT_defconfig
-> @@ -28,7 +28,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_OF_BOARD_SETUP=y
->   CONFIG_OF_STDOUT_VIA_ALIAS=y
-> diff --git a/configs/lx2162aqds_tfa_defconfig b/configs/lx2162aqds_tfa_defconfig
-> index 41e0262f3ca5..43f8069cfde5 100644
-> --- a/configs/lx2162aqds_tfa_defconfig
-> +++ b/configs/lx2162aqds_tfa_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_OF_BOARD_SETUP=y
-> diff --git a/configs/lx2162aqds_tfa_verified_boot_defconfig b/configs/lx2162aqds_tfa_verified_boot_defconfig
-> index 7abfdbafbdf1..33b362c20b65 100644
-> --- a/configs/lx2162aqds_tfa_verified_boot_defconfig
-> +++ b/configs/lx2162aqds_tfa_verified_boot_defconfig
-> @@ -30,7 +30,6 @@ CONFIG_FSL_QIXIS=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_MP=y
->   CONFIG_DYNAMIC_SYS_CLK_FREQ=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_SIGNATURE=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTDELAY=10
-> diff --git a/configs/ten64_tfa_defconfig b/configs/ten64_tfa_defconfig
-> index a65209e8335b..f35de31718f7 100644
-> --- a/configs/ten64_tfa_defconfig
-> +++ b/configs/ten64_tfa_defconfig
-> @@ -16,7 +16,6 @@ CONFIG_PCI=y
->   CONFIG_AHCI=y
->   CONFIG_SYS_FSL_NUM_CC_PLLS=3
->   CONFIG_MP=y
-> -CONFIG_EFI_LOADER_BOUNCE_BUFFER=y
->   CONFIG_FIT_VERBOSE=y
->   CONFIG_BOOTSTD_FULL=y
->   CONFIG_BOOTSTD_BOOTCOMMAND=y
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index e9c10819ba26..3ed27e97a083 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -894,10 +894,6 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
->   				    struct efi_loaded_image_obj **handle_ptr,
->   				    struct efi_loaded_image **info_ptr);
->
-> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> -extern void *efi_bounce_buffer;
-> -#define EFI_LOADER_BOUNCE_BUFFER_SIZE (64 * 1024 * 1024)
-> -#endif
->
->   /* shorten device path */
->   struct efi_device_path *efi_dp_shorten(struct efi_device_path *dp);
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 6130af14337e..bc08776ef4a6 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -490,13 +490,6 @@ config EFI_HTTP_PROTOCOL
->   endmenu
->
->   menu "Misc options"
-> -config EFI_LOADER_BOUNCE_BUFFER
-> -	bool "EFI Applications use bounce buffers for DMA operations"
-> -	help
-> -	  Some hardware does not support DMA to full 64bit addresses. For this
-> -	  hardware we can create a bounce buffer so that payloads don't have to
-> -	  worry about platform details.
-> -
->   config EFI_GRUB_ARM32_WORKAROUND
->   	bool "Workaround for GRUB on 32bit ARM"
->   	default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index 5452640354e0..a0202032bb5a 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -105,6 +105,8 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
->   	int blksz;
->   	int blocks;
->   	unsigned long n;
-> +	u64 bb = 0xffffffff;
-> +	void *bb_ptr = buffer;
->
->   	diskobj = container_of(this, struct efi_disk_obj, ops);
->   	blksz = diskobj->media.block_size;
-> @@ -113,27 +115,35 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
->   	EFI_PRINT("blocks=%x lba=%llx blksz=%x dir=%d\n",
->   		  blocks, lba, blksz, direction);
->
-> +	if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && (uintptr_t)buffer >= SZ_4G + buffer_size - 1) {
-> +		if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
-> +				       buffer_size >> EFI_PAGE_SHIFT, &bb) != EFI_SUCCESS)
-> +			return EFI_OUT_OF_RESOURCES;
-> +
-> +		bb_ptr = (void *)(uintptr_t)bb;
-> +	}
->   	/* We only support full block access */
-> -	if (buffer_size & (blksz - 1))
-> +	if (buffer_size & (blksz - 1)) {
-> +		if (buffer != bb_ptr)
-> +			efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
->   		return EFI_BAD_BUFFER_SIZE;
-> +	}
->
->   	if (CONFIG_IS_ENABLED(PARTITIONS) &&
->   	    device_get_uclass_id(diskobj->header.dev) == UCLASS_PARTITION) {
->   		if (direction == EFI_DISK_READ)
-> -			n = disk_blk_read(diskobj->header.dev, lba, blocks,
-> -					  buffer);
-> +			n = disk_blk_read(diskobj->header.dev, lba, blocks, bb_ptr);
->   		else
-> -			n = disk_blk_write(diskobj->header.dev, lba, blocks,
-> -					   buffer);
-> +			n = disk_blk_write(diskobj->header.dev, lba, blocks, bb_ptr);
->   	} else {
->   		/* dev is a block device (UCLASS_BLK) */
->   		struct blk_desc *desc;
->
->   		desc = dev_get_uclass_plat(diskobj->header.dev);
->   		if (direction == EFI_DISK_READ)
-> -			n = blk_dread(desc, lba, blocks, buffer);
-> +			n = blk_dread(desc, lba, blocks, bb_ptr);
->   		else
-> -			n = blk_dwrite(desc, lba, blocks, buffer);
-> +			n = blk_dwrite(desc, lba, blocks, bb_ptr);
->   	}
->
->   	/* We don't do interrupts, so check for timers cooperatively */
-> @@ -141,8 +151,16 @@ static efi_status_t efi_disk_rw_blocks(struct efi_block_io *this,
->
->   	EFI_PRINT("n=%lx blocks=%x\n", n, blocks);
->
-> -	if (n != blocks)
-> +	if (n != blocks) {
-> +		if (buffer != bb_ptr)
-> +			efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
->   		return EFI_DEVICE_ERROR;
-> +	}
-> +
-> +	if (buffer != bb_ptr) {
-> +		memcpy(buffer, bb_ptr, buffer_size);
-> +		efi_free_pages(bb, buffer_size >> EFI_PAGE_SHIFT);
-> +	}
->
->   	return EFI_SUCCESS;
->   }
-> @@ -166,7 +184,6 @@ static efi_status_t EFIAPI efi_disk_read_blocks(struct efi_block_io *this,
->   			u32 media_id, u64 lba, efi_uintn_t buffer_size,
->   			void *buffer)
->   {
-> -	void *real_buffer = buffer;
->   	efi_status_t r;
->
->   	if (!this)
-> @@ -184,31 +201,12 @@ static efi_status_t EFIAPI efi_disk_read_blocks(struct efi_block_io *this,
->   	    (this->media->last_block + 1) * this->media->block_size)
->   		return EFI_INVALID_PARAMETER;
->
-> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> -	if (buffer_size > EFI_LOADER_BOUNCE_BUFFER_SIZE) {
-> -		r = efi_disk_read_blocks(this, media_id, lba,
-> -			EFI_LOADER_BOUNCE_BUFFER_SIZE, buffer);
-> -		if (r != EFI_SUCCESS)
-> -			return r;
-> -		return efi_disk_read_blocks(this, media_id, lba +
-> -			EFI_LOADER_BOUNCE_BUFFER_SIZE / this->media->block_size,
-> -			buffer_size - EFI_LOADER_BOUNCE_BUFFER_SIZE,
-> -			buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
-> -	}
-> -
-> -	real_buffer = efi_bounce_buffer;
-> -#endif
-> -
->   	EFI_ENTRY("%p, %x, %llx, %zx, %p", this, media_id, lba,
->   		  buffer_size, buffer);
->
-> -	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, real_buffer,
-> +	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, buffer,
->   			       EFI_DISK_READ);
->
-> -	/* Copy from bounce buffer to real buffer if necessary */
-> -	if ((r == EFI_SUCCESS) && (real_buffer != buffer))
-> -		memcpy(buffer, real_buffer, buffer_size);
-> -
->   	return EFI_EXIT(r);
->   }
->
-> @@ -232,7 +230,6 @@ static efi_status_t EFIAPI efi_disk_write_blocks(struct efi_block_io *this,
->   			u32 media_id, u64 lba, efi_uintn_t buffer_size,
->   			void *buffer)
->   {
-> -	void *real_buffer = buffer;
->   	efi_status_t r;
->
->   	if (!this)
-> @@ -252,29 +249,10 @@ static efi_status_t EFIAPI efi_disk_write_blocks(struct efi_block_io *this,
->   	    (this->media->last_block + 1) * this->media->block_size)
->   		return EFI_INVALID_PARAMETER;
->
-> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> -	if (buffer_size > EFI_LOADER_BOUNCE_BUFFER_SIZE) {
-> -		r = efi_disk_write_blocks(this, media_id, lba,
-> -			EFI_LOADER_BOUNCE_BUFFER_SIZE, buffer);
-> -		if (r != EFI_SUCCESS)
-> -			return r;
-> -		return efi_disk_write_blocks(this, media_id, lba +
-> -			EFI_LOADER_BOUNCE_BUFFER_SIZE / this->media->block_size,
-> -			buffer_size - EFI_LOADER_BOUNCE_BUFFER_SIZE,
-> -			buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
-> -	}
-> -
-> -	real_buffer = efi_bounce_buffer;
-> -#endif
-> -
->   	EFI_ENTRY("%p, %x, %llx, %zx, %p", this, media_id, lba,
->   		  buffer_size, buffer);
->
-> -	/* Populate bounce buffer if necessary */
-> -	if (real_buffer != buffer)
-> -		memcpy(real_buffer, buffer, buffer_size);
-> -
-> -	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, real_buffer,
-> +	r = efi_disk_rw_blocks(this, media_id, lba, buffer_size, buffer,
->   			       EFI_DISK_WRITE);
->
->   	return EFI_EXIT(r);
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 6d00b1862505..d7a8cb89e5b5 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -40,10 +40,6 @@ struct efi_mem_list {
->   /* This list contains all memory map items */
->   static LIST_HEAD(efi_mem);
->
-> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> -void *efi_bounce_buffer;
-> -#endif
-> -
->   /**
->    * struct efi_pool_allocation - memory block allocated from pool
->    *
-> @@ -852,18 +848,6 @@ int efi_memory_init(void)
->
->   	add_u_boot_and_runtime();
->
-> -#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> -	/* Request a 32bit 64MB bounce buffer region */
-> -	uint64_t efi_bounce_buffer_addr = 0xffffffff;
-> -
-> -	if (efi_allocate_pages(EFI_ALLOCATE_MAX_ADDRESS, EFI_BOOT_SERVICES_DATA,
-> -			       (64 * 1024 * 1024) >> EFI_PAGE_SHIFT,
-> -			       &efi_bounce_buffer_addr) != EFI_SUCCESS)
-> -		return -1;
-> -
-> -	efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
-> -#endif
-> -
->   	return 0;
->   }
->
-> --
-> 2.47.2
->
+-- 
+2.43.0
 
 _______________________________________________
 Uboot-stm32 mailing list

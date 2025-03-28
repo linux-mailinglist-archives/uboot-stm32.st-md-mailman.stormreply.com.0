@@ -2,94 +2,74 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5521A7402A
-	for <lists+uboot-stm32@lfdr.de>; Thu, 27 Mar 2025 22:19:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7D25A74573
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Mar 2025 09:32:07 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 6768FC78F74;
-	Thu, 27 Mar 2025 21:19:49 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com
- [209.85.219.175])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8F35C78F77;
+	Fri, 28 Mar 2025 08:32:07 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C63F5C78F73
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5AE59C78F74
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Mar 2025 21:19:47 +0000 (UTC)
-Received: by mail-yb1-f175.google.com with SMTP id
- 3f1490d57ef6-e53ef7462b6so1515529276.3
- for <uboot-stm32@st-md-mailman.stormreply.com>;
- Thu, 27 Mar 2025 14:19:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743110386; x=1743715186;
- darn=st-md-mailman.stormreply.com; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XCtrrkQ2+tSdAd5jdeMocl1pOeBn3vHfDqajDWw6+Q4=;
- b=S0O17XQ3pVuXE+nLGgxs0njLUvheah05meNMw7fE4O9wZPNdmI2XUa5dc3V8wApTqe
- J+rtdjHw1Eyz/SNf4M4uwbV6meefZkgCHofnSYSbrZ2fXjhhq/Jp0O4IZ6l8FDlr//kf
- 92VZzSQjEYYXEUJV0w5L55HkPanAHqhSmVLm72q8zY1/ZbgIyysGE4wK4mJaIzfMiEqs
- yXBfh1MPjTaJeWsczsAiZ+B8aEea78OLUJ+dZ8VHM0r3zKMRj4NmRoPFY5pnJhM/RG0a
- If5JKITOsmDmxgaWIrgg5rIqAV8/m6fF1HPjzG7pxKN+PmLDbp5sGxUeNy//cvbg9oy6
- pKvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743110386; x=1743715186;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XCtrrkQ2+tSdAd5jdeMocl1pOeBn3vHfDqajDWw6+Q4=;
- b=c/qzpTSnFQzsy4Dxh7Qf53TBQpn5x6M1MLQRS9YASaGpRYKK85F1V/XFoMPi/oOzcF
- QHGn9LOyavrNyyjlDiDDMu5fE0kqZrb+Xowyv9ZAdPJ/lkskGCgQETLjY80dnzGb4tgF
- z4+dWDz/qa8cxWolM9q0iQJI/2BWFTY1e7jHwvpUOXz7JJ3abCWTpnI5nhBP9vD5DNOM
- eJ7+B0iobuCMqO28lB6CO3TbrJcORs8rVBNiKVXbzWfn2UtyRnNU816ErZBC40UmSm0R
- PYdiX4KTgeZ0mGvC5Rp9wGd5ve+zw51OvoldZslv3Gml4VHECVMSnXzlOL1QooxrRPsz
- Rgaw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUqiqHdcBg4teiOH8VHVD5B7zXyoMSqzfoelrrX8/3mq5J9HqH0cKzGguocHzEj/hfnpYTRDjQI1SKrpg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0Yx6lofWXtdOt6i6RCjP09tfAM0lXPxN0ocMyan4ShozAGMJZ+9u
- PHTmm5hsfsniam9r87cErO3e7iJKRgiplGauaHKLnxp8KIfXFtDd056bpNujPvOZoxqJ6cYPfz0
- Anxd1U8NZc2XzpBqGfPXJ8DnyhrftRqwNEE8EUw==
-X-Gm-Gg: ASbGncsvok2bS3NWzAT6b9EOQgQ+4RK6vUjPEo7Lfn3BShEDIZB84XlUV+tSNjY0lH/
- DYRHt6MQo/XKq07eDO1/Zf2uI3xqyEDrzH4nk4Y5/vlhgpouk5ULgO6VEZmL2yUxw2rt5Em5VQu
- e7m+c586kgh5Dh2biV+be/SYvj
-X-Google-Smtp-Source: AGHT+IEzKjqpBs4pv2Zhe5nFV+IMR2KHYrZlEXsCYxUvbivCFDkk78CVi2yJM5aS48knodZfzkUjlOpzl0BOn1aZNfg=
-X-Received: by 2002:a05:6902:1085:b0:e5b:1b55:1325 with SMTP id
- 3f1490d57ef6-e6943656293mr6785695276.25.1743110386316; Thu, 27 Mar 2025
- 14:19:46 -0700 (PDT)
+ Fri, 28 Mar 2025 08:32:06 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52S212rS015598;
+ Fri, 28 Mar 2025 09:30:22 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ NRvqyYO9Rhw7Ah58c/sdh1jlciJj0k34YBNvg4B62RQ=; b=OSqFLMgddzgizkJP
+ 0tTvU5irPGIStGnOSLoPS0TV1vXOoihoVZavmYcDNIIvdex6ztmUJNifr5rP/6Ae
+ Se4y8oWlE4BYAGlezyC68UgkfUZANxFsc9Lwzdbg8+pP0IjviBFivLXsi63uDyVt
+ HRXxFazvbRVGQZcRlBVu4wgmRtEbrUVHOu6Mg+IPdaTo9JdU19HUfTSQRZvf/VKM
+ NpoNG0fIk8Zhxv4iKkSXf9x1yhQ+CIZKE+/yu4ydOqd0TCElxvs6pCKuI6tnbWrE
+ CQDh09TMalkrYTzd6Opz7GJlSAURjIXli6kkRQR3EqXs/hmF3oYhE2s3lGxGo9i2
+ Pqic8Q==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45me34rbhu-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 28 Mar 2025 09:30:21 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CD8A140087;
+ Fri, 28 Mar 2025 09:28:30 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AF5C387B01A;
+ Fri, 28 Mar 2025 09:25:14 +0100 (CET)
+Received: from [10.252.6.4] (10.252.6.4) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 28 Mar
+ 2025 09:25:13 +0100
+Message-ID: <b37a11ae-931d-4399-8c73-705a386bcb5d@foss.st.com>
+Date: Fri, 28 Mar 2025 09:25:12 +0100
 MIME-Version: 1.0
-References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
- <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
- <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
- <CAFLszTgq25-E-n+UaJ_wRdimCLcAta-fetWpOW++NCOfN_eL5w@mail.gmail.com>
-In-Reply-To: <CAFLszTgq25-E-n+UaJ_wRdimCLcAta-fetWpOW++NCOfN_eL5w@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 27 Mar 2025 23:19:10 +0200
-X-Gm-Features: AQ5f1JqiGXoFSpP_OXtYKjDUwD54vMBuPRVxwH3aSr2qgWmMcAMsZ5ZpLTERIOE
-Message-ID: <CAC_iWjLS_yNPCMY2RhGZ0390ZysH=N5x5JZ-qOnNjX7nofPS4Q@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Peng Fan <peng.fan@nxp.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, u-boot@lists.denx.de,
- Wei Ming Chen <jj251510319013@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>, Tom Rini <trini@konsulko.com>,
- Udit Agarwal <udit.agarwal@nxp.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Manish Tomar <Manish.Tomar@nxp.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Wasim Khan <wasim.khan@nxp.com>,
- Mathew McBride <matt@traverse.com.au>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
- Tien Fong Chee <tien.fong.chee@altera.com>, e@freeshell.de,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Adriano Cordova <adrianox@gmail.com>, Ashish Kumar <Ashish.Kumar@nxp.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Robert Marko <robert.marko@sartura.hr>, Michal Simek <michal.simek@amd.com>,
- Mingkai Hu <mingkai.hu@nxp.com>, Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Tang Yuantian <andy.tang@nxp.com>,
- Priyanka Jain <priyanka.jain@nxp.com>, Maks Mishin <maks.mishinfz@gmail.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] efi_loader: remove EFI_BOUNCE_BUFFER
+User-Agent: Mozilla Thunderbird
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+References: <20250324180047.1571378-1-dario.binacchi@amarulasolutions.com>
+ <20250324180047.1571378-5-dario.binacchi@amarulasolutions.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250324180047.1571378-5-dario.binacchi@amarulasolutions.com>
+X-Originating-IP: [10.252.6.4]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-03-28_04,2025-03-27_02,2024-11-22_01
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Fabio Estevam <festevam@denx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, linux-amarula@amarulasolutions.com,
+ Kever Yang <kever.yang@rock-chips.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, Sumit Garg <sumit.garg@kernel.org>,
+ Tony Dinh <mibodhi@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, Adam Ford <aford173@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [Uboot-stm32] [PATCH 4/6] ARM: dts: add
+	stm32f769-disco-mb1166-reva09
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,76 +86,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Hi Simon
 
-On Thu, 27 Mar 2025 at 15:33, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Heinrich,
-> >
-> > On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >
-> > > On 17.03.25 14:38, Ilias Apalodimas wrote:
-> > >
-> > > %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
-> > >
-> > > > The EFI subsystem defines its own bounce buffer for devices that
-> > > > can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
-> > > > which can be reused instead of defining another symbol.
-> > > > The only limitation for EFI is that we don't know how big the file a user
-> > > > chooses to transfer is and as a result we can't depend on allocating the
-> > > > memory from the malloc area, which can prove too small.
-> > > >
-> > > > So allocate an EFI buffer of the correct size and pass it to the DM,
-> > > > which already supports bounce buffering via bounce_buffer_start_extalign()
-> > >
-> > > Looking at
-> > >
-> > >      if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
-> > >
-> > > in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
-> > > enabled by the device driver. Only the scsi drivers sets bb = true.
-> > >
-> > > Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
-> > > to blk_desc")
-> > >
-> > > Which device-drivers of the boards mentioned below do actually need
-> > > bounce buffering?
-> >
-> > Unfortunately, I don't have any of the hardware to test and I havent
-> > worked with that platform much.
-> > That 'bb' variable and the fact that EFI needs bigger allocations is
-> > why I ended up allocationg properly aligned memory from the EFI
-> > subsystem. But as Mark pointed out, the cache flush is a no go for
-> > now, so I'll drop this and see if I find time to rework the bounce
-> > buffer logic overall
->
-> There was quite a bit of discussion about all this in the context of
-> my attempt to just add a message to warn the user[1]
->
-> We might consider adding an event to reserve memory before relocation,
-> along with a way to discover (in board_r) where the memory was
-> allocated. That would make the solution more generic.
 
-I am not sure what you are trying to solve here. The EFI bounce buffer
-after the LMB patches can't overwrite memory, nor can it be
-overwritten.
+On 3/24/25 19:00, Dario Binacchi wrote:
+> [backport from Linux commit db4fc2c79c533986795a7750e9a12caf9d620b48]
+> 
+> As reported in the section 8.3 (i. e. Board revision history) of document
+> UM2033 (i. e. Discovery kit with STM32F769NI MCU) these are the changes
+> related to the board revision addressed by the patch:
+> - Board MB1166 revision A-09:
+>   - LCD FRIDA FRD397B25009-D-CTK replaced by FRIDA FRD400B25025-A-CTK
+> 
+> The patch adds the DTS support for the new display which belongs to the
+> the Novatek NT35510-based panel family.
+> 
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+> 
+>  arch/arm/dts/Makefile                               |  1 +
+>  .../dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi   |  6 ++++++
+>  arch/arm/dts/stm32f769-disco-mb1166-reva09.dts      | 13 +++++++++++++
+>  3 files changed, 20 insertions(+)
+>  create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09.dts
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 267b0179a5f2..8719b58152fd 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -523,6 +523,7 @@ dtb-$(CONFIG_STM32F4) += stm32f429-disco.dtb \
+>  
+>  dtb-$(CONFIG_STM32F7) += stm32f746-disco.dtb \
+>  	stm32f769-disco.dtb \
+> +	stm32f769-disco-mb1166-reva09.dtb \
+>  	stm32746g-eval.dtb
+>  dtb-$(CONFIG_STM32H7) += stm32h743i-disco.dtb \
+>  	stm32h743i-eval.dtb \
+> diff --git a/arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..43dd3b993d5e
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
+> @@ -0,0 +1,6 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +//
+> +// Copyright (c) 2025 Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> +//
+> +
+> +#include <stm32f769-disco-u-boot.dtsi>
+> diff --git a/arch/arm/dts/stm32f769-disco-mb1166-reva09.dts b/arch/arm/dts/stm32f769-disco-mb1166-reva09.dts
+> new file mode 100644
+> index 000000000000..ff7ff32371d0
+> --- /dev/null
+> +++ b/arch/arm/dts/stm32f769-disco-mb1166-reva09.dts
+> @@ -0,0 +1,13 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2023 Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> + */
+> +
+> +#include "stm32f769-disco.dts"
+> +
+> +&panel0 {
+> +	compatible = "frida,frd400b25025", "novatek,nt35510";
+> +	vddi-supply = <&vcc_3v3>;
+> +	vdd-supply = <&vcc_3v3>;
+> +	/delete-property/power-supply;
+> +};
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
-/Ilias
-
->
-> For the <4GB case we could perhaps add generic support for that in
-> board_f, i.e. the ability to reserve a region for boards that need it.
->
-> Regards,
-> SImon
->
-> [1] https://lore.kernel.org/u-boot/?q=%22Show+the+location+of+the+bounce+buffer+when+debugging%22
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

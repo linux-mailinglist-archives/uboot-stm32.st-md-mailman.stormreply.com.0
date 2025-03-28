@@ -2,40 +2,66 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B47FA74E77
-	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Mar 2025 17:19:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D5B93A74E83
+	for <lists+uboot-stm32@lfdr.de>; Fri, 28 Mar 2025 17:25:47 +0100 (CET)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 24614C78F77;
-	Fri, 28 Mar 2025 16:19:47 +0000 (UTC)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8A5AFC78F77;
+	Fri, 28 Mar 2025 16:25:47 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com
+ [209.85.167.175])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 61189C78F75
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B2B87C78F75
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 28 Mar 2025 16:19:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1743178661; x=1743783461; i=xypron.glpk@gmx.de;
- bh=cWg3A5ISrGdswXEuTMTrP5/SOEdGzEW+NELvMdHAuok=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=eJ0a4BdpE+NS6znJmoa/ZfmaKvffmS09ewv+S/oNE7FcvVxNlpwBKQPR3x6JCrPq
- /Rf8OMbgTh1q+UGxEQkbaE1Al+X6f3fVz9tSPnqPc9p6MJNCDw/9K3faDIfxLeW16
- HRf3uV1jzZ1WpurqL53ct263o8VtuhAAqZrxfymEr62Ukk+NaKAKWNNUW3VraBN0k
- G41vYGRHqACKdohNS8fjlE6U4eVfnSODsPBa5jZbuW0jogB3Elsv8Q0Pnne2iV5La
- MwgoQ/TLK8t8T9qJV/s4UicjpX6JlLCqI8ViI7a5/VkkDe94WbxZ4iNLN1dzY94eu
- Kk1DdPUhrqeVzsww/g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MHoN2-1tsCeI3l6U-002LAS; Fri, 28
- Mar 2025 17:17:41 +0100
-Message-ID: <2c9efc39-b0b9-41e7-b42e-1d026bc286a7@gmx.de>
-Date: Fri, 28 Mar 2025 17:17:36 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tom Rini <trini@konsulko.com>
+ Fri, 28 Mar 2025 16:25:45 +0000 (UTC)
+Received: by mail-oi1-f175.google.com with SMTP id
+ 5614622812f47-3fefbbc7dd4so1306448b6e.2
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Fri, 28 Mar 2025 09:25:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1743179144; x=1743783944;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mmX1FcR1u8D62ThEtLHNz9rsGgBsilCqLZo46P1FPZc=;
+ b=C9RAfY3Qf58k7/7bVqyIlIW86HzVsgoh2+ImEmPMIY34yNvMKMSxvqV9DEHBo5afTD
+ FA73NV9ZCVKUGY8huhnUCPXtGWT3rJWPstaT7NOoYPHKnBBqHIURSZU/tJb6oYSN7/kI
+ +QmAFNEO8EqTTdkJCqWL1vuOgIUGE+zmonNO0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743179144; x=1743783944;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mmX1FcR1u8D62ThEtLHNz9rsGgBsilCqLZo46P1FPZc=;
+ b=D36YwmGCeFx7SZaIf3s4LsUvwiSUSV3fg1IGNHQboXOidhSe41dNJH19ljEEn1uyen
+ GUaDLARbyMwNp/n+Kjoa6ifdGrhMat1nbtH2oCYliubiU142Mw5OPJ2UdXly4PIlJ3ga
+ BI+h3ss9N5JWYSgq+70mctGLflw7OxJTpUw3ywMG3U3taWCP4PLSgOg7I2Ajlv4okD9z
+ 9e9gC6O4HXrySWqM+Du8WmWPdavY0hUWlgcFSKhcU9Mmw6/tH0+L1Q0tHGoODlByS4vk
+ 50jW4K4AZjhl+8wDyidFQy/vFhVKjCbndkZkj2p+8wyBDsiBWNrlFxFGpk5xHCgEGHsO
+ Jhtg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUEaxeuP9P7l/JBSoyXHllvgLBfsbjn4VFUUAQpY8A3p/Sopd2wXPj2SAMAQvpJVyEZWcPZAIjzAOjJEw==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YyQDEVo3EY/IUarWZgm3HhT7FWnUxcpBjPc39La3XRXOMhSXgcN
+ RIpfWZj+QTKbMcbdsia7PW0CRTQUUYXOxBO1yyKeUHyUtQKtzbsH5SbJfHHOvz8=
+X-Gm-Gg: ASbGnctAEMDIWyi/v63R8TLQvwxhvFPqgDlgAtkxsbF2ML9UT/OrxiLS6gnPRHgrnMm
+ gewLwQrbcbOiOfXpnlFIKVZw/RLSXnR2awSbFzfVWfi8KjSJixrdYK4Vy3vnbep036PG2pS48Pl
+ Y7CFcLL92FBUNMeoknDXraZEStFemEnj+vMciRFKKcCDF/JC1WYg/TDM4TGuAjlKUDcd+GKzOSJ
+ 9bv33BHoNAmGQQ2qHY6ppgpsu5w5JEIiKaCrXot96buXcG03ubyfbvfwu7zHFUX4lnEskT1rYKS
+ DeGmBkcNQHAl/bIs7vaXNhIgKtaAREpePQjOy08fezsi4g5BDPh8F2F7Mo0yD7xl9BGS0kgCgnZ
+ CldSN/A==
+X-Google-Smtp-Source: AGHT+IEtEp8Fltx6zSaCsl4n0w1dNtkTFm0SwzyRJqyrP3mLSjtFqMWcDDu7PYnE1buu4SCmFX1gOw==
+X-Received: by 2002:a05:6808:2e4b:b0:3fa:c549:d009 with SMTP id
+ 5614622812f47-3fefa4f387amr6523855b6e.2.1743179144163; 
+ Fri, 28 Mar 2025 09:25:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-205-42.totalplay.net.
+ [187.190.205.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3ff05279bb3sm383801b6e.31.2025.03.28.09.25.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Mar 2025 09:25:43 -0700 (PDT)
+Date: Fri, 28 Mar 2025 10:25:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Message-ID: <20250328162539.GC93000@bill-the-cat>
 References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
  <380f1f2c-59cd-4c52-a598-5e6f1ed1dcad@gmx.de>
  <CAC_iWj+DazCNrMktmwJQxt7bVPbu-qWCfjW4bgcv0cngiH03gw@mail.gmail.com>
@@ -44,39 +70,13 @@ References: <20250317133845.138061-1-ilias.apalodimas@linaro.org>
  <CAFLszThhK4-+Qh_eQLD0fuJZVodBkwit4rw5mOcGU58m6=5knw@mail.gmail.com>
  <CAC_iWj+2EsRUBT5ThAR7+wwxVkFSzrApCNDbTEEHQ-W658LwCw@mail.gmail.com>
  <20250328160419.GX93000@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250328160419.GX93000@bill-the-cat>
-X-Provags-ID: V03:K1:4NUy4chyS+kg65suL0KnwLHGbAyTf/H06weogu7zLawvkBcJKrl
- hHKr84K1V83n2vKHAyGem3d37Se9g5nY2g4oQ17y5ab1n3XowajBSTG9tZajOZUda1smqD+
- wEoFUtG2bi1efu8qlu2e/KDXMd5vl5WHdATu3A6wfPEAzvmMLKz8NNQinmcNrOU0NYnsZi8
- cfZldbRTYSfQRi+6vYz4A==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:Kdzq82JvEOE=;+m6C/VUgfE//HGb6337rfHmeIix
- AJEnuGdCqZyXOx0P1r/jaKDMMW/eGfd9ROVyqAGBFeV06zhgk1r1RUx3YPxEE4QWbFfFnnIXe
- OoxJuBSJoAWz5JVBvSjGm8mtr9fiur70SDW86woBWLHb1RlPRPtOY5mnxRE7VkF+fBFQQzNk4
- aqOJ+fWCQhicts4JVAhDKJNh6M30uFnDDjE5HROz/B/ipQOOxfSCRRCgW+Xz1b0uY/HSi+8Js
- O5yhYhiyY2aOwd3QRVT2pki8HWgaINFls/LkWeAUkM/oN3+hXKGevwZLHLOoJMPJRJzcXC2uR
- /HUmA1Vqj50QSLHEmp0Sh6VgjbGE81AEyljIwUzriKWCYCDIJl40fP2MBB9OCi2XBkSBTNQPa
- J2wK8oRBkImGuzQY7HAA20pyiDM8ayPVPYa/p2pYjWMiugkGaVJEzo34GSX9l5henjras2Uj9
- cSAmNstcgLT8PkUk+mMQXXBl70XaYaobRyvNonICgkTVCtnSPCyYPutXf5sccxBUjaYAz+rdS
- coPKIX7w18EEDR5FA6ni3Qc+NN7A+N6tKcE8XEQPcPzOLjqEG+DNwG3U8vx8NFlxTU6neyzM5
- 5mBdBX0dDQZxp1/yW8W0Y0pKZqHAuGv0ABYqJ+WGOIriep6z9sXMPyX0/BjhcbCLCOpeuG7Pm
- Kzy6z+t6cjeHdYRp5qqi76ThhqFVA/bsiFEPKjUFt02wtJXfr5TTMFIJXA/zqO124CV1DTfCi
- RM798G1Z8gi/cO+tq5x9RHkbmvInADQIp32kRaezi+5kl16qxzG+wBsRm76el8dYMSe2bhkEj
- MSk8cSqts8TSaMbpj04wwfTqZRh8RLyDbZdqlGTDGw8sLEvJAWzEqoPzIs96CJ03Ot+7aTwCj
- TYrfi+RCu73EsXwp4cpRYtVn5ykXlSLTxxLoWk6e4kmsrSzXHKvDmd2EnLaNYVMEiHMw2hvsh
- Et4El1nOBCSDqzB5Irl1oMpzvq+okhTlj7F6zBpiw/ywgiPaZygLvy9PzeCm6VCTW4QK5bB6W
- V8zOYBJ0DvvlG+o908L5AnL4gmeHC2qkAEn06o8y6o79TRcK6vmCf8x2fgjMa2MDvV7xCLFqL
- VRPYLCXfxq5aUOwetwNUG+laYS/EOcs60MFFWcPBFL56RKfsuIxUo0JB5qG4HoJK2lOpHGETs
- hUnhhGwiZ6vozR6HQztKRnwV4otYsKXU/xvtY6vxbGYHSaOK908zzdLPMTBJdgKuEtAXCO1tl
- R+xzn+QVBlazWdrOOSJPDWbWBgabwGshYeAQeggTbIhkQEriPC2oFlyWce67Bv8yz/VdiqY1q
- Ju+BAOsoB17+ny0X/IwbTyWrGGws3nwCH/Z5TvKMB2fdZGhvq6urvoG0j4cYdR9SyVUDEXUrE
- +teMX79PiqRCdfVE6F5YQP8wnd++VFvsIsy/32mx6XkGeC1NmAtvFjU6bZYkagzuqz53u7MJA
- +ijdth8RQHiJaUuw/ZBXotdTXqxo=
+ <2c9efc39-b0b9-41e7-b42e-1d026bc286a7@gmx.de>
+MIME-Version: 1.0
+In-Reply-To: <2c9efc39-b0b9-41e7-b42e-1d026bc286a7@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 Cc: Peng Fan <peng.fan@nxp.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, u-boot@lists.denx.de,
- Wei Ming Chen <jj251510319013@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ u-boot@lists.denx.de, Wei Ming Chen <jj251510319013@gmail.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Mark Kettenis <mark.kettenis@xs4all.nl>, Udit Agarwal <udit.agarwal@nxp.com>,
@@ -84,7 +84,7 @@ Cc: Peng Fan <peng.fan@nxp.com>,
  Manish Tomar <Manish.Tomar@nxp.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>, Wasim Khan <wasim.khan@nxp.com>,
  Mathew McBride <matt@traverse.com.au>,
- =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje.mihanovic@skole.hr>,
  Tien Fong Chee <tien.fong.chee@altera.com>, e@freeshell.de,
  Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Adriano Cordova <adrianox@gmail.com>, Ashish Kumar <Ashish.Kumar@nxp.com>,
@@ -111,117 +111,183 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: multipart/mixed; boundary="===============5259590234335575608=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On 28.03.25 17:04, Tom Rini wrote:
-> On Fri, Mar 28, 2025 at 02:26:39PM +0200, Ilias Apalodimas wrote:
->> On Fri, 28 Mar 2025 at 13:34, Simon Glass <sjg@chromium.org> wrote:
->>>
->>> Hi Ilias,
->>>
->>> On Thu, 27 Mar 2025 at 15:19, Ilias Apalodimas
->>> <ilias.apalodimas@linaro.org> wrote:
->>>>
->>>> Hi Simon
->>>>
->>>> On Thu, 27 Mar 2025 at 15:33, Simon Glass <sjg@chromium.org> wrote:
->>>>>
->>>>> Hi Ilias,
->>>>>
->>>>> On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
->>>>> <ilias.apalodimas@linaro.org> wrote:
->>>>>>
->>>>>> Hi Heinrich,
->>>>>>
->>>>>> On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>>>>>>
->>>>>>> On 17.03.25 14:38, Ilias Apalodimas wrote:
->>>>>>>
->>>>>>> %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
->>>>>>>
->>>>>>>> The EFI subsystem defines its own bounce buffer for devices that
->>>>>>>> can't transfer data > 4GB. U-Boot already has a generic BOUNCE_BUFFER
->>>>>>>> which can be reused instead of defining another symbol.
->>>>>>>> The only limitation for EFI is that we don't know how big the file a user
->>>>>>>> chooses to transfer is and as a result we can't depend on allocating the
->>>>>>>> memory from the malloc area, which can prove too small.
->>>>>>>>
->>>>>>>> So allocate an EFI buffer of the correct size and pass it to the DM,
->>>>>>>> which already supports bounce buffering via bounce_buffer_start_extalign()
->>>>>>>
->>>>>>> Looking at
->>>>>>>
->>>>>>>       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
->>>>>>>
->>>>>>> in drivers/block/blk-uclass.c the bounce buffer has to be explicitly
->>>>>>> enabled by the device driver. Only the scsi drivers sets bb = true.
->>>>>>>
->>>>>>> Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce buffer flag
->>>>>>> to blk_desc")
->>>>>>>
->>>>>>> Which device-drivers of the boards mentioned below do actually need
->>>>>>> bounce buffering?
->>>>>>
->>>>>> Unfortunately, I don't have any of the hardware to test and I havent
->>>>>> worked with that platform much.
->>>>>> That 'bb' variable and the fact that EFI needs bigger allocations is
->>>>>> why I ended up allocationg properly aligned memory from the EFI
->>>>>> subsystem. But as Mark pointed out, the cache flush is a no go for
->>>>>> now, so I'll drop this and see if I find time to rework the bounce
->>>>>> buffer logic overall
->>>>>
->>>>> There was quite a bit of discussion about all this in the context of
->>>>> my attempt to just add a message to warn the user[1]
->>>>>
->>>>> We might consider adding an event to reserve memory before relocation,
->>>>> along with a way to discover (in board_r) where the memory was
->>>>> allocated. That would make the solution more generic.
->>>>
->>>> I am not sure what you are trying to solve here. The EFI bounce buffer
->>>> after the LMB patches can't overwrite memory, nor can it be
->>>> overwritten.
->>>
->>> I am thinking of we can create a single implementation of the
->>> bouncebuf logic which also works for EFI.
->>>
->>> I think the two sane things to do are:
->>> - restrict U-Boot to using memory below 4GB for platforms which have
->>> the DMA limitation
->>
->> You don't need that. The bounce buf code has a callback you can use to
->> define the limitations
->>
->>> - create (in board_f) a special region below 4GB for use with the
->>> bouncebuf logic
->>
->> The only problem with EFI is that you don't know how much memory it
->> needs and we can't use the existing memalign calls. So if we replace
->> that memalign in the bounce buffer code, with an lmb reservation we
->> have everything we need.
->
-> It's not even an EFI problem is it? You could hit the same problem
-> reading a file from a filesystem outside of EFI too. These specific
-> SoCs just aren't heavily exercised is one of the challenges I think and
-> so it's possible that we have a few things to yet improve in the
-> bounce buffer code (which was added for other SoCs and done as generic
-> enough starting point for others).
->
 
-EFI or LMB allocate memory top down. So EFI applications have a good
-chance of loading files into high memory. Other file-system operations
-typically use predefined addresses line $loadaddr. This is why the
-problem became more visible in EFI.
+--===============5259590234335575608==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="QoykfpATO7cYb6pP"
+Content-Disposition: inline
 
-It is evident that the bounce-buffer functionality is not EFI specific
-per se.
 
-Best regards
+--QoykfpATO7cYb6pP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Heinrich
+On Fri, Mar 28, 2025 at 05:17:36PM +0100, Heinrich Schuchardt wrote:
+> On 28.03.25 17:04, Tom Rini wrote:
+> > On Fri, Mar 28, 2025 at 02:26:39PM +0200, Ilias Apalodimas wrote:
+> > > On Fri, 28 Mar 2025 at 13:34, Simon Glass <sjg@chromium.org> wrote:
+> > > >=20
+> > > > Hi Ilias,
+> > > >=20
+> > > > On Thu, 27 Mar 2025 at 15:19, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >=20
+> > > > > Hi Simon
+> > > > >=20
+> > > > > On Thu, 27 Mar 2025 at 15:33, Simon Glass <sjg@chromium.org> wrot=
+e:
+> > > > > >=20
+> > > > > > Hi Ilias,
+> > > > > >=20
+> > > > > > On Wed, 26 Mar 2025 at 02:37, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >=20
+> > > > > > > Hi Heinrich,
+> > > > > > >=20
+> > > > > > > On Mon, 24 Mar 2025 at 19:50, Heinrich Schuchardt <xypron.glp=
+k@gmx.de> wrote:
+> > > > > > > >=20
+> > > > > > > > On 17.03.25 14:38, Ilias Apalodimas wrote:
+> > > > > > > >=20
+> > > > > > > > %s/EFI_BOUNCE_BUFFER/CONFIG_EFI_LOADER_BOUNCE_BUFFER/
+> > > > > > > >=20
+> > > > > > > > > The EFI subsystem defines its own bounce buffer for devic=
+es that
+> > > > > > > > > can't transfer data > 4GB. U-Boot already has a generic B=
+OUNCE_BUFFER
+> > > > > > > > > which can be reused instead of defining another symbol.
+> > > > > > > > > The only limitation for EFI is that we don't know how big=
+ the file a user
+> > > > > > > > > chooses to transfer is and as a result we can't depend on=
+ allocating the
+> > > > > > > > > memory from the malloc area, which can prove too small.
+> > > > > > > > >=20
+> > > > > > > > > So allocate an EFI buffer of the correct size and pass it=
+ to the DM,
+> > > > > > > > > which already supports bounce buffering via bounce_buffer=
+_start_extalign()
+> > > > > > > >=20
+> > > > > > > > Looking at
+> > > > > > > >=20
+> > > > > > > >       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && desc->bb) {
+> > > > > > > >=20
+> > > > > > > > in drivers/block/blk-uclass.c the bounce buffer has to be e=
+xplicitly
+> > > > > > > > enabled by the device driver. Only the scsi drivers sets bb=
+ =3D true.
+> > > > > > > >=20
+> > > > > > > > Cf. 81bd22e935dc ("rockchip: block: blk-uclass: add bounce =
+buffer flag
+> > > > > > > > to blk_desc")
+> > > > > > > >=20
+> > > > > > > > Which device-drivers of the boards mentioned below do actua=
+lly need
+> > > > > > > > bounce buffering?
+> > > > > > >=20
+> > > > > > > Unfortunately, I don't have any of the hardware to test and I=
+ havent
+> > > > > > > worked with that platform much.
+> > > > > > > That 'bb' variable and the fact that EFI needs bigger allocat=
+ions is
+> > > > > > > why I ended up allocationg properly aligned memory from the E=
+FI
+> > > > > > > subsystem. But as Mark pointed out, the cache flush is a no g=
+o for
+> > > > > > > now, so I'll drop this and see if I find time to rework the b=
+ounce
+> > > > > > > buffer logic overall
+> > > > > >=20
+> > > > > > There was quite a bit of discussion about all this in the conte=
+xt of
+> > > > > > my attempt to just add a message to warn the user[1]
+> > > > > >=20
+> > > > > > We might consider adding an event to reserve memory before relo=
+cation,
+> > > > > > along with a way to discover (in board_r) where the memory was
+> > > > > > allocated. That would make the solution more generic.
+> > > > >=20
+> > > > > I am not sure what you are trying to solve here. The EFI bounce b=
+uffer
+> > > > > after the LMB patches can't overwrite memory, nor can it be
+> > > > > overwritten.
+> > > >=20
+> > > > I am thinking of we can create a single implementation of the
+> > > > bouncebuf logic which also works for EFI.
+> > > >=20
+> > > > I think the two sane things to do are:
+> > > > - restrict U-Boot to using memory below 4GB for platforms which have
+> > > > the DMA limitation
+> > >=20
+> > > You don't need that. The bounce buf code has a callback you can use to
+> > > define the limitations
+> > >=20
+> > > > - create (in board_f) a special region below 4GB for use with the
+> > > > bouncebuf logic
+> > >=20
+> > > The only problem with EFI is that you don't know how much memory it
+> > > needs and we can't use the existing memalign calls. So if we replace
+> > > that memalign in the bounce buffer code, with an lmb reservation we
+> > > have everything we need.
+> >=20
+> > It's not even an EFI problem is it? You could hit the same problem
+> > reading a file from a filesystem outside of EFI too. These specific
+> > SoCs just aren't heavily exercised is one of the challenges I think and
+> > so it's possible that we have a few things to yet improve in the
+> > bounce buffer code (which was added for other SoCs and done as generic
+> > enough starting point for others).
+> >=20
+>=20
+> EFI or LMB allocate memory top down. So EFI applications have a good
+> chance of loading files into high memory. Other file-system operations
+> typically use predefined addresses line $loadaddr. This is why the
+> problem became more visible in EFI.
+>=20
+> It is evident that the bounce-buffer functionality is not EFI specific
+> per se.
+
+Right. But it's not the destination address we're talking about but
+rather that for "fun" system design reasons we need to have the storage
+IP block read from device to one address and then bounce it over to the
+final address. Or have I missed understood which kind of bounce buffer
+we're needing something here for?
+
+--=20
+Tom
+
+--QoykfpATO7cYb6pP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfmzYMACgkQFHw5/5Y0
+tyy4xwv/Wu+SO6u6ygojfL6RYNylSVYwvp4tSMIrPLG5G13681TfgCBSbPajbCRx
+jgsrXXRwAI456zB+Fyjyvu+RrzruuOWVufcZeVaqXuijZiGmzwJugsxkuDkQpCOd
+IxFTo2BQ2r7rG/dVXw3pDYv9Wyk/re42lemex2u37OfeKdrlphpr0of2cYsBijy5
+fzMVMH6Admp83tj/OBaQjsvGsQvKHcM3NAG3Q/rUN4xZ/AlPoI3e4KVInmZX+uFh
+TGePLsMZ1AbKvqk717PpAJEQSWpdHddEhJn8G+EZSih3P+WYfAGS59uVXU95y0fR
++gGAR9vliEu4xxD47OeJB+/ePnaCbYuP9oHZ8Ll29RSel0A5c+Q+5NuGhaU15aMx
+4lOjdPrmaGuoUyewctIOScxxpKwKj/bwBW6kBN3s7hndNZioZObtn0Ibv9k3Ndci
+rGD3rILX59Eo8jFsedXMMzLmgOxo0lZDn7e53x8SREgGvzh35+wtPsrYpAapgyox
+pMpIUS/i
+=LzfY
+-----END PGP SIGNATURE-----
+
+--QoykfpATO7cYb6pP--
+
+--===============5259590234335575608==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
 https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============5259590234335575608==--

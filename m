@@ -2,85 +2,78 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF8C9A774DD
-	for <lists+uboot-stm32@lfdr.de>; Tue,  1 Apr 2025 09:01:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F21AEA774E0
+	for <lists+uboot-stm32@lfdr.de>; Tue,  1 Apr 2025 09:01:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8763C78034;
-	Tue,  1 Apr 2025 07:01:30 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
- [209.85.128.44])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B3085C78F98;
+	Tue,  1 Apr 2025 07:01:31 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CB0EBCFAC50
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id ED454C78F8F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue,  1 Apr 2025 07:01:29 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-43948021a45so52478345e9.1
+ Tue,  1 Apr 2025 07:01:30 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-43d0618746bso35446735e9.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 01 Apr 2025 00:01:29 -0700 (PDT)
+ Tue, 01 Apr 2025 00:01:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1743490889; x=1744095689;
+ d=amarulasolutions.com; s=google; t=1743490890; x=1744095690;
  darn=st-md-mailman.stormreply.com; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=H3eWv9TxtT4dAVKPSAGwi+x6nlozcvmF0C9mEuJ0A6o=;
- b=ps1L7IfWgPaeLMGesITaewdscnuwEiieiAhBrFZaiLBImrkpiOMhs8ikquPx/KpyVJ
- 7lCuB/lWgNGJRFJUOaC0/yYxNzoMFxJQwyiYTTsb/E3V4tBfneSFhbTqOv5sgNOu2zuq
- wqssWJCNT543jcU+bQt88K3PKeBH9wijROuok=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i044n2zFt+fwDjOmTfhSbZNrYh1Q9DyCsR3YROwfPZg=;
+ b=D1p7/dHytEnvpqIeV9MlGz9vR8bK1dchvj+amtuXtgwxDx6poywASQqswAOwLnwCtX
+ m74eSwdQgeHbGBD0pLg0sXnJ0OZZssN4RzhPoJr2E4GSAxBlVjylUOxfhoa/I81X9hz0
+ sUGq1fDwfxbmekx8xuP2fJDEof7jqu6SHd8B4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743490889; x=1744095689;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=H3eWv9TxtT4dAVKPSAGwi+x6nlozcvmF0C9mEuJ0A6o=;
- b=F+6N5SwI0/dO1gNfu4mmGS2gr0i8wAvtxL077bcgiY3RtCe+146S3xxgTfTggkIBNo
- V/LUGflPsiwyg9YiACYxSeJvKkY530dUxFWFtJ0QD13gcAN4RZRf1yGCrjY5hj/5IExD
- LMcXAbXsIg4lxUW70nnhEBiGsw8buTdhbuaAuwxBbfx3stnZiabZ3JVAWas2CSWPtkVd
- n7Xt+DctxNyiaHsbBWss11JgSWLg+7H05/Jlfnw6lfvEMtS9f6BxvoNyZua7fuHelV/O
- LREQRPZ4lnMQ0sxTaCwNzMDyDj6C/0Yn5RZFJq5xBQjlLGKwnm0kXWhcMESEB4owtpPb
- B58w==
+ d=1e100.net; s=20230601; t=1743490890; x=1744095690;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i044n2zFt+fwDjOmTfhSbZNrYh1Q9DyCsR3YROwfPZg=;
+ b=JV97OcuwcS2kul+3H0ZYVDl9bt9ytdp7M72T7tya0CA/DICbRInxdb2xAv+htXpPd3
+ yIJgxq3cfJV2G0jUnMeU/63rXXM/Iauc/5SFb0r5iGF/TmmDV9hxFbeunUXiCNNR4yKf
+ DPj5lTi2ma30gUzJ1TsK5h8mmgKT9vNonMLsED47WJK1QWx7N7AdCyavgaN8Ru/deH8B
+ RHdw1MI0ZXyK09EyW+vGAC5RbkxuTQp0hG4ZWzIP4rCwxMsIe52xPohMdn5yYVd6P6FR
+ 4m7JDBW632kv9Duf487BX6W9MMJsEeMg4TicLA1V/VXTxVR4fkDp/XjpnNwJd/5bd8gc
+ n2zA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBHyhH1rKllxmHoB+FFp0gCGSrPrpZ6PdzyxQiXZ6Bw3mYfPM8XnelqnbE0vXdGiByxmiNx2uRGXZHlA==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YzWHa4BCcX7kfVTaWMnQIMJV5IGdTjIM2pqMjgRMrJIEBMkpTwY
- p5p3OtwB+7pB/H3I9qsr2/CrtcL3FF93ZEUYjGdsrCRjYeoKa1KA9POi3EH6WKM=
-X-Gm-Gg: ASbGncsC73FhvpfeQ0HjwNTNDmuggPZ+ycosQamG41wtFgAzQdp0d/np7QT0J+jrk3g
- 4xevRF821Gox/ei1YlNCAn5JERlzs33wBXTYV5Kwz5OAMeJO8QizuzVZlANCFlpr+PKH0+JC27j
- yDN3Yr5vtc4BKrusUZZQ44C43DgjGdxsL4WkGGI43B0d8blY3qQET3M24AQOcVpOQ6t0Tq3UCPE
- uAaSD6dTCJIbORa8UdqN0DlAlCT81aeOvpEur45/i8VNVakdxW06InxDUzcYPn6srgnLQmYPB0B
- 0dI4fBFvALZnTIfwKDjYGrJV5l799FbFuKHkZwRaX7gSitSTpOQAsfUhpi3qg/05vRcfBW11fvi
- dR/UnNQWvZQtJXZl4v7Jg
-X-Google-Smtp-Source: AGHT+IHdZNgJW2L1yrBrvxg+AHOdLrqZccxn6TP9kt7tvpJHQTxU1OKwPpi10MvKB7CE1rNNzVZROw==
-X-Received: by 2002:a05:600c:314b:b0:43c:fe15:41cb with SMTP id
- 5b1f17b1804b1-43db6249672mr112519885e9.15.1743490889176; 
- Tue, 01 Apr 2025 00:01:29 -0700 (PDT)
+ AJvYcCVcKKwCbZs4J24MWxa72Y8zgb5JPpWPd9pWjkknJyUqi/nLL6dPPWoi/z7NRgWZvrhMF/1mYQgIjW12Fg==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YznBQZgdIrl+Bw7QxRQijLU4j6/pzvIdHZ+ki38o7IV5vlW70py
+ QckqKfLfhb5pLfWxu4GLD8JGIAA3ZdeKeSL70mTYEfu/WzR/cw4DVQXcRjRxHQPBGPpxd3c2PRX
+ n
+X-Gm-Gg: ASbGncsFlr/ORhCFfyM8IWSXRChQAVAyy4dBNj0oXR4BkIUuCyFJjL0hr9XskKqii5y
+ gZ9RI9vRiwq6Tvqoib9j5e9DLKT5dQ5rmvfHdOr3pW66n5AyRwsP4tX+BWojltkOk4evATnQ6gv
+ cgrdP7vCM33fJ9U8HIHDbSnag/6n0Hl14DtyIAYeYNM+bQkUXAWM+w8GxbsEm3SWfc8pjvoayGB
+ jCa6WN0zA5egJXFFKQ3IJvciadJ6tv6XSYcH9MvcpUnhcdpH+dRJDLPPp6wvEuAMPFkJjB6909F
+ 9mH52AKveb+Nqkn9uVvHTq4gS23xl4wmFDUeBM/ZuRohWcTxtkA0arDIqMMXmGz3Bzmn2aYVPRu
+ U4+u2rFNB2w==
+X-Google-Smtp-Source: AGHT+IGlvwzgkPuDKTDQIkOeCeOhyeM7o4vRhw5i/5zKLYdzpsXb4SMK0RjulavKgr5/jiL4Wzbqbg==
+X-Received: by 2002:a05:600c:83c4:b0:439:91dd:cf9c with SMTP id
+ 5b1f17b1804b1-43db6223feamr148997085e9.10.1743490890455; 
+ Tue, 01 Apr 2025 00:01:30 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.. ([2.196.40.230])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39c0b66b015sm13701760f8f.54.2025.04.01.00.01.27
+ ffacd0b85a97d-39c0b66b015sm13701760f8f.54.2025.04.01.00.01.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Apr 2025 00:01:28 -0700 (PDT)
+ Tue, 01 Apr 2025 00:01:30 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Tue,  1 Apr 2025 09:00:51 +0200
-Message-ID: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
+Date: Tue,  1 Apr 2025 09:00:52 +0200
+Message-ID: <20250401070125.3705126-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
+References: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Anton Bambura <jenneron@protonmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Vikas Manocha <vikas.manocha@st.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Jonas Karlman <jonas@kwiboo.se>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Andre Przywara <andre.przywara@arm.com>, Sumit Garg <sumit.garg@kernel.org>,
- Prasad Kummari <prasad.kummari@amd.com>, Adam Ford <aford173@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+Cc: Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH v2 0/6] Support NT35510 panel controller on
-	stm32f769i-disco board
+Subject: [Uboot-stm32] [PATCH v2 1/6] ARM: dts: stm32: add DSI support on
+	stm32f769
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,45 +90,118 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The series, inspired by some of my patches already merged into Linux,
-adds support for the Novatek NT35510 panel on the stm32f769i-disco
-board. Indeed, the MB1166 board comes in different hardware revisions.
-The MB1166-A09 is utilizing a NT35510 panel controller while prior
-versions are utilizing an OTM8009a controller.
+[backport from Linux commit a995fd2e8b3c6defd1dcdd3fb350c224e41ea1d0]
+
+Add support for MIPI DSI Host controller. Since MIPI DSI is not
+available on stm32f746, the patch adds the "stm32f769.dtsi" file
+containing the dsi node inside.
+
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+---
 
 Changes in v2:
 - Add Reviewed-by tag of Patrice Chotard
-- Add Reviewed-by tag of Patrice Chotard
-- Add Reviewed-by tag of Patrice Chotard
-- Add Reviewed-by tag of Patrice Chotard
-- Replace board with configs in the commit title
-- Add Reviewed-by tag of Patrice Chotard
 
-Dario Binacchi (6):
-  ARM: dts: stm32: add DSI support on stm32f769
-  ARM: dts: stm32: rename mmc_vcard to vcc-3v3 on stm32f769-disco
-  ARM: dts: stm32: add display support on stm32f769-disco
-  ARM: dts: add stm32f769-disco-mb1166-reva09
-  video: support FRIDA FRD400B25025-A-CTK
-  configs: stm32f769-disco: support FRD400B25025-A-CTK display
-
- arch/arm/dts/Makefile                         |    1 +
- .../stm32f769-disco-mb1166-reva09-u-boot.dtsi |    6 +
- .../arm/dts/stm32f769-disco-mb1166-reva09.dts |   13 +
- arch/arm/dts/stm32f769-disco-u-boot.dtsi      |   53 +-
- arch/arm/dts/stm32f769-disco.dts              |   66 +-
- arch/arm/dts/stm32f769.dtsi                   |   20 +
- configs/stm32f769-disco_defconfig             |    2 +
- configs/stm32f769-disco_spl_defconfig         |    2 +
- drivers/video/Kconfig                         |    7 +
- drivers/video/Makefile                        |    1 +
- drivers/video/novatek-nt35510.c               | 1253 +++++++++++++++++
- 11 files changed, 1374 insertions(+), 50 deletions(-)
- create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09-u-boot.dtsi
- create mode 100644 arch/arm/dts/stm32f769-disco-mb1166-reva09.dts
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi | 41 +++++++++++-------------
+ arch/arm/dts/stm32f769-disco.dts         |  2 +-
+ arch/arm/dts/stm32f769.dtsi              | 20 ++++++++++++
+ 3 files changed, 39 insertions(+), 24 deletions(-)
  create mode 100644 arch/arm/dts/stm32f769.dtsi
- create mode 100644 drivers/video/novatek-nt35510.c
 
+diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+index add55c96e21f..c5ae753debe6 100644
+--- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+@@ -44,30 +44,25 @@
+ 			};
+ 		};
+ 	};
++};
+ 
+-	soc {
+-		dsi: dsi@40016c00 {
+-			compatible = "st,stm32-dsi";
+-			reg = <0x40016c00 0x800>;
+-			resets = <&rcc STM32F7_APB2_RESET(DSI)>;
+-			clocks = <&rcc 0 STM32F7_APB2_CLOCK(DSI)>,
+-				  <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>,
+-				  <&clk_hse>;
+-			clock-names = "pclk", "px_clk", "ref";
+-			bootph-all;
+-			status = "okay";
+-
+-			ports {
+-				port@0 {
+-					dsi_out: endpoint {
+-						remote-endpoint = <&panel_in>;
+-					};
+-				};
+-				port@1 {
+-					dsi_in: endpoint {
+-						remote-endpoint = <&dp_out>;
+-					};
+-				};
++&dsi {
++	clocks = <&rcc 0 STM32F7_APB2_CLOCK(DSI)>,
++		 <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>,
++		 <&clk_hse>;
++	clock-names = "pclk", "px_clk", "ref";
++	bootph-all;
++	status = "okay";
++
++	ports {
++		port@0 {
++			dsi_out: endpoint {
++				remote-endpoint = <&panel_in>;
++			};
++		};
++		port@1 {
++			dsi_in: endpoint {
++				remote-endpoint = <&dp_out>;
+ 			};
+ 		};
+ 	};
+diff --git a/arch/arm/dts/stm32f769-disco.dts b/arch/arm/dts/stm32f769-disco.dts
+index d63cd2ba7eb4..ad1b442055e1 100644
+--- a/arch/arm/dts/stm32f769-disco.dts
++++ b/arch/arm/dts/stm32f769-disco.dts
+@@ -5,7 +5,7 @@
+  */
+ 
+ /dts-v1/;
+-#include "stm32f746.dtsi"
++#include "stm32f769.dtsi"
+ #include "stm32f769-pinctrl.dtsi"
+ #include <dt-bindings/input/input.h>
+ #include <dt-bindings/gpio/gpio.h>
+diff --git a/arch/arm/dts/stm32f769.dtsi b/arch/arm/dts/stm32f769.dtsi
+new file mode 100644
+index 000000000000..4e7d9032149c
+--- /dev/null
++++ b/arch/arm/dts/stm32f769.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2023 Dario Binacchi <dario.binacchi@amarulasolutions.com>
++ */
++
++#include "stm32f746.dtsi"
++
++/ {
++	soc {
++		dsi: dsi@40016c00 {
++			compatible = "st,stm32-dsi";
++			reg = <0x40016c00 0x800>;
++			clocks = <&rcc 1 CLK_F769_DSI>, <&clk_hse>;
++			clock-names = "pclk", "ref";
++			resets = <&rcc STM32F7_APB2_RESET(DSI)>;
++			reset-names = "apb";
++			status = "disabled";
++		};
++	};
++};
 -- 
 2.43.0
 

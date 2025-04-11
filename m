@@ -2,67 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id D95A7A8556E
-	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Apr 2025 09:28:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E00DBA8580B
+	for <lists+uboot-stm32@lfdr.de>; Fri, 11 Apr 2025 11:29:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 79E06C78F89;
-	Fri, 11 Apr 2025 07:28:10 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 92FADC78F89;
+	Fri, 11 Apr 2025 09:29:46 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 206A2C78F80
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2308BC640E5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Fri, 11 Apr 2025 07:28:09 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53B2pxYN005418;
- Fri, 11 Apr 2025 09:27:55 +0200
+ Fri, 11 Apr 2025 09:29:44 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53B9Snk7023534;
+ Fri, 11 Apr 2025 11:29:29 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- wGhkrdElYTVJfT+bVO9EDkCrEWwv3l//900VI2ZTRRk=; b=TN0Z821S2qenJt3I
- lv4BHK1xDprlUe9e2FWzl2OGUZrgDSzdEd1PCxgPJJg7yr1HcYEZyMk9fGmIaq1a
- i/pwIu0lxboSy1oeDPEo50oj6mNAMGnSzLWMvvv2xyYWgy+Q1YtUoaGE9z7aQ0cY
- nKpmhihWPnglRK37RoIsHFWBSSg1/u/rGne3S4ZXL3fuz8K9nFz6HzybwXjNH8xX
- /nwo051WXc9rtLcQ5rX5XLssfHa63wtedbJIyqL98t7V3MyymhdYQH2IZvyjyIN9
- Nisu7ziX2Iq5yuHM2MRHsM3jfLG1w1F0/jerKe2A+6duG2vltV6vkS0qjpoK7Thc
- YsNVGA==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=mjuS0K188lu31W5lg/oB8j
+ GIinih1XD0PQpx6M4anWQ=; b=DtGsjTOiZvAaz2t6hWZyXlNLzIQv9L9sZCw8Il
+ X0PY+MwzDs2/zEY6ZVlFa33wnIxbp/tjKOgIZOOEM1bUT/kNnjvlwdlXVBCttL6i
+ e4yItMcYiL0+gZfYsh4QnXRspwiLtuAYfGcXYdN6VMekYFQcAtqRdOjLYy4yNZaj
+ 2G2VScVuwnQJslJ8wTWE3dDwJ9IBs6GrNYbLE8HJC2mCvY7TuIyQ5qVVYWEn3A8O
+ GQEZBlrAIQ0jlDI1UHKIWV/kXEmuYtS9iMBOgI2V37ih00ga9WtLGpvu4+aYvvJn
+ PheD9gn3w8iy2GPl0vsxQKeW1TDQ3NQsQ2wD+EzXeHSJCgmg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45uffn21y7-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 45xgpduppk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 11 Apr 2025 09:27:54 +0200 (MEST)
+ Fri, 11 Apr 2025 11:29:29 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3773A4002D;
- Fri, 11 Apr 2025 09:26:23 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D772940045;
+ Fri, 11 Apr 2025 11:28:09 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1FD634ED60B;
- Fri, 11 Apr 2025 09:24:14 +0200 (CEST)
-Received: from [10.252.25.37] (10.252.25.37) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0661C9B40B5;
+ Fri, 11 Apr 2025 11:27:24 +0200 (CEST)
+Received: from localhost (10.252.25.37) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 11 Apr
- 2025 09:24:13 +0200
-Message-ID: <fa360159-299f-4083-bcef-96df4915d0c3@foss.st.com>
-Date: Fri, 11 Apr 2025 09:24:12 +0200
+ 2025 11:27:23 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Fri, 11 Apr 2025 11:27:20 +0200
+Message-ID: <20250411092721.331518-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Pascal Zimmermann <pzimmermann@dh-electronics.com>, <u-boot@lists.denx.de>
-References: <20250327143843.19358-1-pzimmermann@dh-electronics.com>
- <20250327143843.19358-3-pzimmermann@dh-electronics.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250327143843.19358-3-pzimmermann@dh-electronics.com>
 X-Originating-IP: [10.252.25.37]
 X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-11_02,2025-04-10_01,2024-11-22_01
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [RESEND PATCH 2/2] ARM: stm32: env: Enable scan
- and start for AB schema on STM32MP15 DHSOM
+ definitions=2025-04-11_03,2025-04-10_01,2024-11-22_01
+Cc: Erik Schumacher <erik.schumacher@iris-sensing.com>,
+ Marek Vasut <marex@denx.de>, Greg Malysa <malysagreg@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Heesub Shin <heesub@gmail.com>,
+ Philip Oberfichtner <pro@denx.de>,
+ Christophe Roullier <christophe.roullier@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH] net: dwc_eth_qos: add support of stm32mp2
+	platform
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,103 +79,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+From: Christophe Roullier <christophe.roullier@foss.st.com>
 
+Add compatible "st,stm32mp25-dwmac" to manage STM32MP2 boards
 
-On 3/27/25 15:38, Pascal Zimmermann wrote:
-> For the STM32MP15 DHSOM, change the default environment so an AB schema
-> on a device can be detected.
-> 
-> For this the define "SCAN_DEV_FOR_BOOT_PARTS" is overwritten and
-> appended.
-> 
-> The detection works by looking for the partitions with specific lables.
-> The name of those partitions are in the variables and its defaults:
-> * dh_ab_partname_primary=rootfs-a
-> * dh_ab_partname_secondary=rootfs-b
-> 
-> To prevent being hanging at bootcmd, enable "CONFIG_BOOT_RETRY" and
-> "CONFIG_RESET_TO_RETRY", but the timer will only be activated, if the AB
-> partitions are detected.
-> 
-> Signed-off-by: Pascal Zimmermann <pzimmermann@dh-electronics.com>
-> ---
-> Cc: Marek Vasut <marex@denx.de>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> Cc: u-boot@lists.denx.de
-> ---
->  configs/stm32mp15_dhsom.config       |  3 +++
->  include/configs/stm32mp15_dh_dhsom.h | 33 ++++++++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
-> 
-> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-> index 7e5b5aa67ef..c84116482f6 100644
-> --- a/configs/stm32mp15_dhsom.config
-> +++ b/configs/stm32mp15_dhsom.config
-> @@ -10,6 +10,9 @@ CONFIG_BOARD_EARLY_INIT_F=y
->  CONFIG_BOARD_SIZE_LIMIT=1441792
->  CONFIG_BOOTCOUNT_BOOTLIMIT=3
->  CONFIG_BOOTDELAY=1
-> +CONFIG_BOOTRETRY=y
-> +CONFIG_RESET_TO_RETRY=y
-> +CONFIG_BOOT_RETRY_TIME=-1
->  CONFIG_CMD_ADC=y
->  CONFIG_CMD_REMOTEPROC=y
->  CONFIG_CMD_STBOARD=y
-> diff --git a/include/configs/stm32mp15_dh_dhsom.h b/include/configs/stm32mp15_dh_dhsom.h
-> index c004a8cec82..267e3446779 100644
-> --- a/include/configs/stm32mp15_dh_dhsom.h
-> +++ b/include/configs/stm32mp15_dh_dhsom.h
-> @@ -17,7 +17,40 @@
->  			" 0x800000\0"
->  #endif
->  
-> +/* Add the search for AB partitons */
-> +#define SCAN_DEV_FOR_BOOT_PARTS						\
-> +	"run dh_check_if_ab; "						\
-> +	"if test -z \"${devplist}\"; "					\
-> +		"then "							\
-> +		"part list ${devtype} ${devnum} -bootable devplist; "	\
-> +	"fi; "
-> +
->  #define STM32MP_BOARD_EXTRA_ENV						\
-> +	"altbootcmd= "							\
-> +	"setenv dh_ab_get_partnames "					\
-> +		"'setenv dh_ab_partnames ${dh_ab_partname_secondary} "	\
-> +			"${dh_ab_partname_primary}' && "		\
-> +		"run bootcmd\0"						\
-> +	"dh_check_if_ab= " /* Sets devplist if AB partitions*/		\
-> +		"echo test for AB on ${devtype} ${devnum} && "		\
-> +		"run dh_ab_get_partnames && "				\
-> +		"setenv devplist && "					\
-> +		"for partname in ${dh_ab_partnames}; do "		\
-> +			"setenv partnum && "				\
-> +			"if part number ${devtype} ${devnum} ${partname} partnum; "\
-> +				"then "					\
-> +				"setenv devplist \"${devplist} ${partnum}\" && "\
-> +				"setenv bootretry 60 ;"			\
-> +			"fi; "						\
-> +		"done ; "						\
-> +		"if test -n \"${devplist}\"; "				\
-> +			"then echo AB partitions found! ; "		\
-> +		"fi\0"							\
-> +	"dh_ab_get_partnames= " /* Sets dh_ab_partnames */		\
-> +		"setenv dh_ab_partnames ${dh_ab_partname_primary} "	\
-> +			"${dh_ab_partname_secondary}\0"			\
-> +	"dh_ab_partname_primary=rootfs-a\0" /* Names of AB partitions */\
-> +	"dh_ab_partname_secondary=rootfs-b\0"				\
->  	"dh_preboot="							\
->  		"run dh_testbench_backward_compat\0"			\
->  	"dh_update_sd_to_emmc=" /* Install U-Boot from SD to eMMC */	\
+Signed-off-by: Christophe Roullier <christophe.roullier@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ drivers/net/dwc_eth_qos.c       |  4 ++++
+ drivers/net/dwc_eth_qos.h       |  1 +
+ drivers/net/dwc_eth_qos_stm32.c | 11 +++++++++++
+ 3 files changed, 16 insertions(+)
 
-Thanks
-Patrice
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index b4ec3614696..6605de6e036 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1599,6 +1599,10 @@ static const struct udevice_id eqos_ids[] = {
+ 		.compatible = "st,stm32mp1-dwmac",
+ 		.data = (ulong)&eqos_stm32mp15_config
+ 	},
++	{
++		.compatible = "st,stm32mp25-dwmac",
++		.data = (ulong)&eqos_stm32mp25_config
++	},
+ #endif
+ #if IS_ENABLED(CONFIG_DWC_ETH_QOS_IMX)
+ 	{
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index 403e8203974..c239a5c7aca 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -301,5 +301,6 @@ extern struct eqos_config eqos_rockchip_config;
+ extern struct eqos_config eqos_qcom_config;
+ extern struct eqos_config eqos_stm32mp13_config;
+ extern struct eqos_config eqos_stm32mp15_config;
++extern struct eqos_config eqos_stm32mp25_config;
+ extern struct eqos_config eqos_jh7110_config;
+ extern struct eqos_config eqos_adi_config;
+diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
+index f3a973f3774..7a28f2a3e83 100644
+--- a/drivers/net/dwc_eth_qos_stm32.c
++++ b/drivers/net/dwc_eth_qos_stm32.c
+@@ -350,3 +350,14 @@ struct eqos_config __maybe_unused eqos_stm32mp15_config = {
+ 	.interface = dev_read_phy_mode,
+ 	.ops = &eqos_stm32_ops
+ };
++
++struct eqos_config __maybe_unused eqos_stm32mp25_config = {
++	.reg_access_always_ok = false,
++	.mdio_wait = 10000,
++	.swr_wait = 50,
++	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
++	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
++	.axi_bus_width = EQOS_AXI_WIDTH_64,
++	.interface = dev_read_phy_mode,
++	.ops = &eqos_stm32_ops
++};
+-- 
+2.25.1
+
+base-commit: cb7555e93075114fe4af0adb806877ac4d4ef80d
+branch: upstream_net_add_stm32mp25_support
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

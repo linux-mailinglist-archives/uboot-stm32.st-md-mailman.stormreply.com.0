@@ -2,67 +2,68 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AE11A961CF
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Apr 2025 10:34:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 40084A961F9
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Apr 2025 10:38:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B853FC78F68;
-	Tue, 22 Apr 2025 08:34:09 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 077D9C78F68;
+	Tue, 22 Apr 2025 08:38:52 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 75FE8C78F67
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5910DC78F67
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Apr 2025 08:34:08 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53M7NXdt000447;
- Tue, 22 Apr 2025 10:34:05 +0200
+ Tue, 22 Apr 2025 08:38:50 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53M74ncB031449;
+ Tue, 22 Apr 2025 10:38:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- OTYSlPip3RGajy5OqZ5JhW41rwRUXJHRLVLTzEUFSko=; b=y0K1pgrOAm0ASrRH
- C+lwmbfcK5oLCyGZtXNY2CBRAgpwb+4lJvdTSpHxjHxmLmEOGcP/TtCCzhBo001B
- 21ptBAi0aHPFYvdyhN07G+25mVONH3XyPV8IZn3l0gmPp5FjbrkzYVdxOZSdc91Y
- kb+3yNme9wdLcgTNJ9t5jEc9gp4VrfG9jaJ9Tg3t93MxVO/3h5PqKGaqBc44QAsL
- AGjfsRf0wnnP6OHWD18pN5yPOwlvj7XH3udP1O0fXiL0hyGDPX/dcW8OFGfHupkC
- WY6AvqNHa0zNrpW6C+i/1BMZu1vqL3ej1zRcTEKT2AXxYGtmR2Nrw0ppYSWb0FEv
- B1sVeg==
+ zZdOn+MOqxQHSWa23m81VucdrT2YHYdpPJwbHNa0HCE=; b=oZA8A5HfIA6b1Hea
+ kMvpsaT5XJ0mOW4VJCA0iv0MGoltDIreIZCt2BWtzzioQaKwNZNWTaC/tAIQmLS+
+ BhFVE3H5osrBceXggU7Lk7/yvLrCZ/k99s53ppW8uiDtvmkAL6oSFKrdA4gh4zWb
+ vOuGw9fzjV9TlfYcQB37dP+TbtYz+NWoCPTtl6QP2YKzTECWYOdy1D0zD/uIGPtZ
+ 9Wty+pwk6tP2On1RAdqihEBOYOzIcn0ajVBRGo1I7NF3t1DOe3xrnh+x37VY0WaA
+ BhaqGZtK3Iy8igaVI6U9uOVVmHPrclfEElyjUWywAEAeUv9PUaaUSCtTqtPaeUqb
+ TWEv0A==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46418m9eq4-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 464nd3y1v6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Apr 2025 10:34:05 +0200 (MEST)
+ Tue, 22 Apr 2025 10:38:45 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 67C4040066;
- Tue, 22 Apr 2025 10:33:16 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 707E340053;
+ Tue, 22 Apr 2025 10:37:51 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C46459D2849;
- Tue, 22 Apr 2025 10:32:59 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E669F9D6F69;
+ Tue, 22 Apr 2025 10:37:30 +0200 (CEST)
 Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Apr
- 2025 10:32:59 +0200
-Message-ID: <30e35d4b-e3a3-4369-8fc2-df804923d804@foss.st.com>
-Date: Tue, 22 Apr 2025 10:32:58 +0200
+ 2025 10:37:30 +0200
+Message-ID: <7886acd9-7849-4b06-9eb1-0fe4ca19413e@foss.st.com>
+Date: Tue, 22 Apr 2025 10:37:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
 References: <20250401131413.387139-1-patrice.chotard@foss.st.com>
- <20250401131413.387139-11-patrice.chotard@foss.st.com>
+ <20250401131413.387139-12-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250401131413.387139-11-patrice.chotard@foss.st.com>
+In-Reply-To: <20250401131413.387139-12-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.126]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-04-22_04,2025-04-21_02,2024-11-22_01
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Marek Vasut <marex@denx.de>, Lionel Debieve <lionel.debieve@foss.st.com>,
- Gatien Chevallier <gatien.chevallier@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH 10/13] ARM: dts: stm32: add ETZPC as a
- system bus for STM32MP1x boards
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH 11/13] stm32mp: fdt: remove ETZPC
+	peripheral cleanup
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,23 +85,17 @@ Hi,
 On 4/1/25 15:14, Patrice Chotard wrote:
 > From: Lionel Debieve <lionel.debieve@foss.st.com>
 >
-> The STM32 System Bus is an internal bus on which devices are connected.
-> ETZPC is a peripheral overseeing the firewall bus that configures
-> and control access to the peripherals connected on it.
->
-> For more information on which peripheral is securable, please read
-> the STM32MP13 or STM32MP15 reference manual.
+> Due to feature domains management, there is no more
+> need to maintain the fdt cleanup.
 >
 > Signed-off-by: Lionel Debieve <lionel.debieve@foss.st.com>
-> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->   arch/arm/dts/stm32mp13-u-boot.dtsi | 4 ++++
->   arch/arm/dts/stm32mp15-u-boot.dtsi | 4 ++++
->   2 files changed, 8 insertions(+)
+>   arch/arm/mach-stm32mp/Kconfig        |   8 -
+>   arch/arm/mach-stm32mp/stm32mp1/fdt.c | 258 ---------------------------
+>   2 files changed, 266 deletions(-)
 >
-
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 

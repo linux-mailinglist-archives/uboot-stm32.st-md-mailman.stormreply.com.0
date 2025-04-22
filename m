@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id E13E7A95FFC
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Apr 2025 09:52:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DC4BA96004
+	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Apr 2025 09:53:00 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A71EFC78F68;
-	Tue, 22 Apr 2025 07:52:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C7B4EC78F68;
+	Tue, 22 Apr 2025 07:52:59 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 9E4C5C78F62
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 572D2C78F62
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Apr 2025 07:52:30 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53M1HC9t005995;
- Tue, 22 Apr 2025 09:52:26 +0200
+ Tue, 22 Apr 2025 07:52:58 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53M7ZhNJ022804;
+ Tue, 22 Apr 2025 09:52:52 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- djsS9zp5QZQfsnexjbwIFnvnh/aP571WzHj9URudI4M=; b=Pmwu8OL5i+xWcO+a
- 0RtdhPq793ORQlKIrOlJ1WNH7l5Vy9u4jlQ4DQuFerk/cUQlj3tnC0MJkClMX+Ku
- hSIXkJ9drXYTb6uZcIJ6WuFKFEPHK5tm0uliGhkUH3GdO66svorBXc/roFGmJPAA
- c+Rr/auzPBUCASe/jHr9AKiTqrvDWkN9sHmkIx8JWcaAhvl33n0erPu6lTn1auZ9
- c8KnYv4Nd85EO0YIocdBHx+YtyBE8OWXrozbxiYuwtuLLy22UuwMLRXFJqW0VzkK
- jkyZLfydbuAsFXD34/AoSjB1AgBIaHS2bgC5hcPM02uOOoU7lJ0PJpL5dIl0R2rA
- LaaH2Q==
+ nPJMC4KaEziAF1daYEVAl6vPCmgWhKsu/FnZkRLeyrY=; b=tWHrvQ3BROo5yxxb
+ JLI1tcIhNNnXVw7+3tOiqmztRI/b+OkWebENihxmttXGOesqwBB2vYHHvC/TG+kG
+ bcgmJUM2fpGoGyY+sslqqvLn2R+V9r/Zr5T3j/BDNma6en+UlGp3Ltrb50dw40du
+ fvGksc6zudJkvBNj8Jg1LZUKcBWP0gE7j6+8F7fP0JUqV+mnbLU/OTepIyMGexRv
+ TmwJYvwpT3sfnB+lW0Y+/a7na38AnxpT+ilNvx7XlNvXyvSjrgYnaHNEcqDf0V2J
+ Ne8URU3hk5Qv3MN/Q4rzILloPyTmfO53q2TA5occEFIavbwD8And6nwI3kRuPpcp
+ Aj838w==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 464nd3xta3-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46418m97yf-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Apr 2025 09:52:26 +0200 (MEST)
+ Tue, 22 Apr 2025 09:52:52 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7980540067;
- Tue, 22 Apr 2025 09:51:26 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A45D54007C;
+ Tue, 22 Apr 2025 09:51:53 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 26AA099A189;
- Tue, 22 Apr 2025 09:51:10 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F2BCA9C1D0A;
+ Tue, 22 Apr 2025 09:51:29 +0200 (CEST)
 Received: from [10.48.87.126] (10.48.87.126) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Apr
- 2025 09:51:09 +0200
-Message-ID: <b92d998d-dc41-4d1f-b796-782f74aa81ed@foss.st.com>
-Date: Tue, 22 Apr 2025 09:51:08 +0200
+ 2025 09:51:29 +0200
+Message-ID: <48b97d99-6e7d-4761-9aa4-e0df4b5fb364@foss.st.com>
+Date: Tue, 22 Apr 2025 09:51:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
 References: <20250401135132.395518-1-patrice.chotard@foss.st.com>
- <20250401135132.395518-4-patrice.chotard@foss.st.com>
+ <20250401135132.395518-5-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20250401135132.395518-4-patrice.chotard@foss.st.com>
+In-Reply-To: <20250401135132.395518-5-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.126]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
  (10.75.129.71)
@@ -58,10 +58,11 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-04-22_04,2025-04-21_02,2024-11-22_01
 Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Subject: Re: [Uboot-stm32] [PATCH 3/6] configs: stm32f769-disco: Fix console
-	cmdline
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kamil Lulko <kamil.lulko@gmail.com>
+Subject: Re: [Uboot-stm32] [PATCH 4/6] configs: stm32f729-discovery: Fix
+	console cmdline
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,22 +88,22 @@ On 4/1/25 15:51, Patrice Chotard wrote:
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->   configs/stm32f746-disco_defconfig | 2 +-
+>   configs/stm32f429-discovery_defconfig | 2 +-
 >   1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
-> index 2d18d777a00..24bf6e6a086 100644
-> --- a/configs/stm32f746-disco_defconfig
-> +++ b/configs/stm32f746-disco_defconfig
-> @@ -18,7 +18,7 @@ CONFIG_AUTOBOOT_KEYED=y
->   CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
->   CONFIG_AUTOBOOT_STOP_STR=" "
+> diff --git a/configs/stm32f429-discovery_defconfig b/configs/stm32f429-discovery_defconfig
+> index 59416cb7e43..36e57edbb4d 100644
+> --- a/configs/stm32f429-discovery_defconfig
+> +++ b/configs/stm32f429-discovery_defconfig
+> @@ -15,7 +15,7 @@ CONFIG_ENV_ADDR=0x8040000
+>   CONFIG_ENV_VARS_UBOOT_CONFIG=y
+>   CONFIG_BOOTDELAY=3
 >   CONFIG_USE_BOOTARGS=y
 > -CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
 > +CONFIG_BOOTARGS="console=ttySTM0,115200 earlyprintk consoleblank=0 ignore_loglevel"
->   CONFIG_DEFAULT_FDT_FILE="stm32f746-disco"
 >   CONFIG_SYS_PBSIZE=1050
 >   # CONFIG_DISPLAY_CPUINFO is not set
+>   # CONFIG_DISPLAY_BOARDINFO is not set
 
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>

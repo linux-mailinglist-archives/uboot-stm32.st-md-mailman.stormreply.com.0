@@ -2,65 +2,95 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB93DA96C35
-	for <lists+uboot-stm32@lfdr.de>; Tue, 22 Apr 2025 15:13:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B4FE6A9834E
+	for <lists+uboot-stm32@lfdr.de>; Wed, 23 Apr 2025 10:29:29 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 83ABDC78034;
-	Tue, 22 Apr 2025 13:13:58 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 432EEC7128A;
+	Wed, 23 Apr 2025 08:29:29 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com
+ [209.85.167.41])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C7D7C6C83D
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4D67DC69063
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 22 Apr 2025 13:13:57 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53MBcKvi003475;
- Tue, 22 Apr 2025 15:13:53 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- cgG4LWpeIFX4vIUQuwOicGIJ1gww+/MNWhd6rv7dWoU=; b=QcyZTBf9FMWLJcF6
- gM4u3XLly5HIh1EIAvLVRZ/8VfjfVcX0B8baAT5fr6kzXXOlyaz+UcuuirQn6TSJ
- 2n4q2tZ82PBiDdub5uTmBF/Kdq+0K2/7/0GK+4xNaCKOvm3mnyZ3+Lt5hgdQtgk6
- DJTefxA7WbbpVfxAERYq0/ydYzK1R7Bx/aRYpiUvDPhMjiK9t2rTIi6LdTUR9o++
- lfpNPa5eBd5a7yUWmSAR9O5BIyfFt9v2VXkZXQlZLlIdPTDe5XzxWjZg5SHcsnV+
- OeV5arW9fX5en8nT82QVikWasvt0KRjhqdLHbGYQpUTdlfD87jsD068KpZmIClG5
- odtF5w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4642qga829-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 22 Apr 2025 15:13:53 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E182240050;
- Tue, 22 Apr 2025 15:13:01 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2B6406F4714;
- Tue, 22 Apr 2025 15:12:46 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 22 Apr
- 2025 15:12:45 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Tue, 22 Apr 2025 15:12:29 +0200
-Message-ID: <20250422131229.415020-14-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
-References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+ Wed, 23 Apr 2025 08:29:28 +0000 (UTC)
+Received: by mail-lf1-f41.google.com with SMTP id
+ 2adb3069b0e04-54d65cb6e8aso7254589e87.1
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Wed, 23 Apr 2025 01:29:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745396967; x=1746001767;
+ darn=st-md-mailman.stormreply.com; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=86Tp9HDGpQ6Qip75ZShju/ejL1p8J736aXBEEMWZSdY=;
+ b=r33k2BvH80lyLuTaOzvceeX6bCReQ1xd9e2zZxaab9FHpkdHk4UCHIpLCUNwEYARBU
+ d/lpVMX1kZEcONtOVxSd6uYYI+1TIKmX9dLLaiCxG0eamF5uHPvn23swSZTsaENZzsWD
+ pH1Usx8Ax437BMJwcYoZSJATe2Ut1tjcPUcYjBRNGMXbCD/sxBtkg7cGkWBiqFTQp4Gf
+ O0znSsuZPRXUhOe1IAqwf2vnoCySelzRViIsJCjIeVwabV3cG/gpFMwp64HW4kH89kMp
+ jVYXhMOU/95ceXg1DWk+tiNy0Bfz+jklL3cnUOt4eRHF7aJaEeBcUkA/w3IdUVs17Dka
+ btlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745396967; x=1746001767;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=86Tp9HDGpQ6Qip75ZShju/ejL1p8J736aXBEEMWZSdY=;
+ b=mxjzAQ+22mlb7RqRGhPUEYexIdhnftgKUr+PT58XOwsvunI/LllrqVGdPR6za7kRr1
+ Ez+tox36GOzOC4DxpLFkRMqpsX5bbTaujWCZd9/u8Fa02wpE4AVuPhxnUE/O2bDZw5MH
+ M0VcGVCyFg1jfzoYZ3Tkx+8WMuS+4QmX9JZlH9fq2iphgXAARHajqEefkVoGXTb/mip/
+ dwnmGIP6Ut0JtYSbP/8YF0hlHvcHB7hISrcQ3OoXK/lAs+Uw08Wqs59I6MrkwLhfd0aV
+ l47vi3aQL2S+Bqo2G4V/WgPmae/KdsRegYaXh0KgdY4ZtrJivHMyw3ILliOdppHIaVHA
+ okcw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3hMKYU4nbqw9aw1IFAlnCKjSebBQOZ9vPMd6AGdKhpegjXWx4NPzUuhfoKFo9PllF5Q/ru4CxZ+U6EQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzrNK4/WwUZGabRAMxL1hVrH1+VpEliMEOgGeYND4TiomMQHzNy
+ OfZWcJh0kAFXtC3yQ4yFpHPg8iT3alAsAw5dzzTBj6Apgw6272cmuFGT4kuhjzMDnycGkQB0NFS
+ VecW0J9BJHk5YiJd2aoSP/tn2fxVEKXVPgSkElg==
+X-Gm-Gg: ASbGncuYo2NtVmNd5g/7+Wg0jzWDDE5uKb/DRfqAx9eIJXJheQ132c5m1vmhRFaoWoU
+ YirvEhs0FcNRODPbhAH2afOJiqxnmM6XXMyNZxx3fUE2ZHQQhkWc5iLCI0IW8FvgZov7KaiktSi
+ ZO+5pMEvMegMvWdBqjjZj7ZQ==
+X-Google-Smtp-Source: AGHT+IHWkooQn8ZHHQpbjQ5KfSGh14xpiPKiV9QQfwKQBUboGW/7rhBWyE/COaowaCGv/y/DELyg6+iknL8+B82XQbU=
+X-Received: by 2002:a05:6512:4022:b0:549:6759:3982 with SMTP id
+ 2adb3069b0e04-54d6e658f33mr5624841e87.37.1745396967369; Wed, 23 Apr 2025
+ 01:29:27 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-22_06,2025-04-21_02,2024-11-22_01
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+References: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20250422131229.415020-1-patrice.chotard@foss.st.com>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Wed, 23 Apr 2025 10:29:16 +0200
+X-Gm-Features: ATxdqUGL3n04T9zIzfkeS3zXpw2W5UyPXwQNVDlJl4EYzFfqqUxDugUTjuR1DHU
+Message-ID: <CACRpkdZY946nqABY+4hdWJvK8gJrs-ra_iVYp-uVnMBUQvSm3A@mail.gmail.com>
+To: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Fabio Estevam <festevam@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
+ Michal Simek <michal.simek@amd.com>, Lukasz Majewski <lukma@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Matteo Lisi <matteo.lisi@engicam.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Prasad Kummari <prasad.kummari@amd.com>,
+ Dillon Min <dillon.minfei@gmail.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Kamil Lulko <kamil.lulko@gmail.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [Uboot-stm32] [PATCH v2 13/13] ARM: stm32mp: add RIFSC system bus
-	driver for STM32MP25
+ Christophe Roullier <christophe.roullier@st.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 00/13] Enable OF_UPSTREAM for STM32 and
+	STi platforms
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,455 +102,20 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-This driver is checking the access rights of the different
-peripherals connected to the RIFSC bus. If access is denied,
-the associated device is not binded.
-
-Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
----
-
-Changes in v2:
-  - Replace LOG_CATEGORY UCLASS_SIMPLE_BUS by UCLASS_NOP in both
-    /arch/arm/mach-stm32mp/stm32mp2/rifsc.c and
-    /arch/arm/mach-stm32mp/stm32mp1/etzpc.c.
-  - Update board/st/stm32mp1/MAINTAINERS.
-  - Fix DSI clock ssetting.
-
- arch/arm/mach-stm32mp/include/mach/rif.h |  26 ++
- arch/arm/mach-stm32mp/stm32mp2/Makefile  |   1 +
- arch/arm/mach-stm32mp/stm32mp2/rifsc.c   | 364 +++++++++++++++++++++++
- 3 files changed, 391 insertions(+)
- create mode 100644 arch/arm/mach-stm32mp/include/mach/rif.h
- create mode 100644 arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-
-diff --git a/arch/arm/mach-stm32mp/include/mach/rif.h b/arch/arm/mach-stm32mp/include/mach/rif.h
-new file mode 100644
-index 00000000000..10b22108120
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/include/mach/rif.h
-@@ -0,0 +1,26 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause */
-+/*
-+ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#ifndef MACH_RIF_H
-+#define MACH_RIF_H
-+
-+#include <linux/types.h>
-+
-+/**
-+ * stm32_rifsc_check_access - Check RIF accesses for given device node
-+ *
-+ * @device_node		Node of the device for which the accesses are checked
-+ */
-+int stm32_rifsc_check_access(ofnode device_node);
-+
-+/**
-+ * stm32_rifsc_check_access - Check RIF accesses for given id
-+ *
-+ * @device_node		Node of the device to get a reference on RIFSC
-+ * @id			ID of the resource to check
-+ */
-+int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id);
-+
-+#endif /* MACH_RIF_H*/
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/Makefile b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-index b579ce5a800..5dbf75daa76 100644
---- a/arch/arm/mach-stm32mp/stm32mp2/Makefile
-+++ b/arch/arm/mach-stm32mp/stm32mp2/Makefile
-@@ -5,5 +5,6 @@
- 
- obj-y += cpu.o
- obj-y += arm64-mmu.o
-+obj-y += rifsc.o
- obj-$(CONFIG_OF_SYSTEM_SETUP) += fdt.o
- obj-$(CONFIG_STM32MP25X) += stm32mp25x.o
-diff --git a/arch/arm/mach-stm32mp/stm32mp2/rifsc.c b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-new file mode 100644
-index 00000000000..50dececf77b
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/stm32mp2/rifsc.c
-@@ -0,0 +1,364 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#define LOG_CATEGORY UCLASS_NOP
-+
-+#include <dm.h>
-+#include <asm/io.h>
-+#include <dm/device.h>
-+#include <dm/device_compat.h>
-+#include <dm/lists.h>
-+#include <linux/bitfield.h>
-+#include <mach/rif.h>
-+
-+/* RIFSC offset register */
-+#define RIFSC_RISC_SECCFGR0(id)		(0x10 + 0x4 * (id))
-+#define RIFSC_RISC_PER0_CIDCFGR(id)	(0x100 + 0x8 * (id))
-+#define RIFSC_RISC_PER0_SEMCR(id)	(0x104 + 0x8 * (id))
-+
-+/*
-+ * SEMCR register
-+ */
-+#define SEMCR_MUTEX			BIT(0)
-+
-+/* RIFSC miscellaneous */
-+#define RIFSC_RISC_SCID_MASK		GENMASK(6, 4)
-+#define RIFSC_RISC_SEMWL_MASK		GENMASK(23, 16)
-+
-+#define IDS_PER_RISC_SEC_PRIV_REGS	32
-+
-+/*
-+ * CIDCFGR register fields
-+ */
-+#define CIDCFGR_CFEN			BIT(0)
-+#define CIDCFGR_SEMEN			BIT(1)
-+
-+#define SEMWL_SHIFT			16
-+
-+#define STM32MP25_RIFSC_ENTRIES		178
-+
-+/* Compartiment IDs */
-+#define RIF_CID0			0x0
-+#define RIF_CID1			0x1
-+
-+/*
-+ * struct stm32_rifsc_plat: Information about RIFSC device
-+ *
-+ * @base: Base address of RIFSC
-+ */
-+struct stm32_rifsc_plat {
-+	void *base;
-+};
-+
-+/*
-+ * struct stm32_rifsc_child_plat: Information about each child
-+ *
-+ * @domain_id: Domain id
-+ */
-+struct stm32_rifsc_child_plat {
-+	u32 domain_id;
-+};
-+
-+static bool stm32_rif_is_semaphore_available(void *base, u32 id)
-+{
-+	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-+
-+	return !(readl(addr) & SEMCR_MUTEX);
-+}
-+
-+static int stm32_rif_acquire_semaphore(void *base, u32 id)
-+{
-+	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-+
-+	/* Check that the semaphore is available */
-+	if (!stm32_rif_is_semaphore_available(base, id))
-+		return -EACCES;
-+
-+	setbits_le32(addr, SEMCR_MUTEX);
-+
-+	/* Check that CID1 has the semaphore */
-+	if (stm32_rif_is_semaphore_available(base, id) ||
-+	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) != RIF_CID1))
-+		return -EACCES;
-+
-+	return 0;
-+}
-+
-+static int stm32_rif_release_semaphore(void *base, u32 id)
-+{
-+	void *addr = base + RIFSC_RISC_PER0_SEMCR(id);
-+
-+	if (stm32_rif_is_semaphore_available(base, id))
-+		return 0;
-+
-+	clrbits_le32(addr, SEMCR_MUTEX);
-+
-+	/* Ok if another compartment takes the semaphore before the check */
-+	if (!stm32_rif_is_semaphore_available(base, id) &&
-+	    FIELD_GET(RIFSC_RISC_SCID_MASK, (readl(addr)) == RIF_CID1))
-+		return -EACCES;
-+
-+	return 0;
-+}
-+
-+static int rifsc_parse_access_controller(ofnode node, struct ofnode_phandle_args *args)
-+{
-+	int ret;
-+
-+	ret = ofnode_parse_phandle_with_args(node, "access-controllers",
-+					     "#access-controller-cells", 0,
-+					     0, args);
-+	if (ret) {
-+		log_debug("failed to parse access-controller (%d)\n", ret);
-+		return ret;
-+	}
-+
-+	if (args->args_count != 1) {
-+		log_debug("invalid domain args_count: %d\n", args->args_count);
-+		return -EINVAL;
-+	}
-+
-+	if (args->args[0] >= STM32MP25_RIFSC_ENTRIES) {
-+		log_err("Invalid sys bus ID for %s\n", ofnode_get_name(node));
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int rifsc_check_access(void *base, u32 id)
-+{
-+	u32 reg_offset, reg_id, sec_reg_value, cid_reg_value, sem_reg_value;
-+
-+	/*
-+	 * RIFSC_RISC_PRIVCFGRx and RIFSC_RISC_SECCFGRx both handle configuration access for
-+	 * 32 peripherals. On the other hand, there is one _RIFSC_RISC_PERx_CIDCFGR register
-+	 * per peripheral
-+	 */
-+	reg_id = id / IDS_PER_RISC_SEC_PRIV_REGS;
-+	reg_offset = id % IDS_PER_RISC_SEC_PRIV_REGS;
-+	sec_reg_value = readl(base + RIFSC_RISC_SECCFGR0(reg_id));
-+	cid_reg_value = readl(base + RIFSC_RISC_PER0_CIDCFGR(id));
-+	sem_reg_value = readl(base + RIFSC_RISC_PER0_SEMCR(id));
-+
-+	/*
-+	 * First check conditions for semaphore mode, which doesn't take into
-+	 * account static CID.
-+	 */
-+	if (cid_reg_value & CIDCFGR_SEMEN)
-+		goto skip_cid_check;
-+
-+	/*
-+	 * Skip cid check if CID filtering isn't enabled or filtering is enabled on CID0, which
-+	 * corresponds to whatever CID.
-+	 */
-+	if (!(cid_reg_value & CIDCFGR_CFEN) ||
-+	    FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) == RIF_CID0)
-+		goto skip_cid_check;
-+
-+	/* Coherency check with the CID configuration */
-+	if (FIELD_GET(RIFSC_RISC_SCID_MASK, cid_reg_value) != RIF_CID1) {
-+		log_debug("Invalid CID configuration for peripheral %d\n", id);
-+		return -EACCES;
-+	}
-+
-+	/* Check semaphore accesses */
-+	if (cid_reg_value & CIDCFGR_SEMEN) {
-+		if (!(FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-+			log_debug("Not in semaphore whitelist for peripheral %d\n", id);
-+			return -EACCES;
-+		}
-+		if (!stm32_rif_is_semaphore_available(base, id) &&
-+		    !(FIELD_GET(RIFSC_RISC_SCID_MASK, sem_reg_value) & BIT(RIF_CID1))) {
-+			log_debug("Semaphore unavailable for peripheral %d\n", id);
-+			return -EACCES;
-+		}
-+	}
-+
-+skip_cid_check:
-+	/* Check security configuration */
-+	if (sec_reg_value & BIT(reg_offset)) {
-+		log_debug("Invalid security configuration for peripheral %d\n", id);
-+		return -EACCES;
-+	}
-+
-+	return 0;
-+}
-+
-+int stm32_rifsc_check_access_by_id(ofnode device_node, u32 id)
-+{
-+	struct ofnode_phandle_args args;
-+	int err;
-+
-+	if (id >= STM32MP25_RIFSC_ENTRIES)
-+		return -EINVAL;
-+
-+	err = rifsc_parse_access_controller(device_node, &args);
-+	if (err)
-+		return err;
-+
-+	return rifsc_check_access((void *)ofnode_get_addr(args.node), id);
-+}
-+
-+int stm32_rifsc_check_access(ofnode device_node)
-+{
-+	struct ofnode_phandle_args args;
-+	int err;
-+
-+	err = rifsc_parse_access_controller(device_node, &args);
-+	if (err)
-+		return err;
-+
-+	return rifsc_check_access((void *)ofnode_get_addr(args.node), args.args[0]);
-+}
-+
-+static int stm32_rifsc_child_pre_probe(struct udevice *dev)
-+{
-+	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
-+	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-+	u32 cid_reg_value;
-+	int err;
-+	u32 id = child_plat->domain_id;
-+
-+	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
-+
-+	/*
-+	 * If the peripheral is in semaphore mode, take the semaphore so that
-+	 * the CID1 has the ownership.
-+	 */
-+	if (cid_reg_value & CIDCFGR_SEMEN &&
-+	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-+		err = stm32_rif_acquire_semaphore(plat->base, id);
-+		if (err) {
-+			dev_err(dev, "Couldn't acquire RIF semaphore for peripheral %d (%d)\n",
-+				id, err);
-+			return err;
-+		}
-+		dev_dbg(dev, "Acquiring semaphore for peripheral %d\n", id);
-+	}
-+
-+	return 0;
-+}
-+
-+static int stm32_rifsc_child_post_remove(struct udevice *dev)
-+{
-+	struct stm32_rifsc_plat *plat = dev_get_plat(dev->parent);
-+	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-+	u32 cid_reg_value;
-+	int err;
-+	u32 id = child_plat->domain_id;
-+
-+	cid_reg_value = readl(plat->base + RIFSC_RISC_PER0_CIDCFGR(id));
-+
-+	/*
-+	 * If the peripheral is in semaphore mode, release the semaphore so that
-+	 * there's no ownership.
-+	 */
-+	if (cid_reg_value & CIDCFGR_SEMEN &&
-+	    (FIELD_GET(RIFSC_RISC_SEMWL_MASK, cid_reg_value) & BIT(RIF_CID1))) {
-+		err = stm32_rif_release_semaphore(plat->base, id);
-+		if (err)
-+			dev_err(dev, "Couldn't release rif semaphore for peripheral %d (%d)\n",
-+				id, err);
-+	}
-+
-+	return 0;
-+}
-+
-+static int stm32_rifsc_child_post_bind(struct udevice *dev)
-+{
-+	struct stm32_rifsc_child_plat *child_plat = dev_get_parent_plat(dev);
-+	struct ofnode_phandle_args args;
-+	int ret;
-+
-+	if (!dev_has_ofnode(dev))
-+		return -EPERM;
-+
-+	ret = rifsc_parse_access_controller(dev_ofnode(dev), &args);
-+	if (ret)
-+		return ret;
-+
-+	child_plat->domain_id = args.args[0];
-+
-+	return 0;
-+}
-+
-+static int stm32_rifsc_bind(struct udevice *dev)
-+{
-+	struct stm32_rifsc_plat *plat = dev_get_plat(dev);
-+	struct ofnode_phandle_args args;
-+	int ret = 0, err = 0;
-+	ofnode node;
-+
-+	plat->base = dev_read_addr_ptr(dev);
-+	if (!plat->base) {
-+		dev_err(dev, "can't get registers base address\n");
-+		return -ENOENT;
-+	}
-+
-+	for (node = ofnode_first_subnode(dev_ofnode(dev));
-+	     ofnode_valid(node);
-+	     node = ofnode_next_subnode(node)) {
-+		const char *node_name = ofnode_get_name(node);
-+
-+		if (!ofnode_is_enabled(node))
-+			continue;
-+
-+		err = rifsc_parse_access_controller(node, &args);
-+		if (err) {
-+			dev_dbg(dev, "%s failed to parse child on bus (%d)\n", node_name, err);
-+			continue;
-+		}
-+
-+		err = rifsc_check_access(plat->base, args.args[0]);
-+		if (err) {
-+			dev_info(dev, "%s not allowed on bus (%d)\n", node_name, err);
-+			continue;
-+		}
-+
-+		err = lists_bind_fdt(dev, node, NULL, NULL,
-+				     gd->flags & GD_FLG_RELOC ? false : true);
-+		if (err && !ret) {
-+			ret = err;
-+			dev_err(dev, "%s failed to bind on bus (%d)\n", node_name, ret);
-+		}
-+	}
-+
-+	if (ret)
-+		dev_err(dev, "Some child failed to bind (%d)\n", ret);
-+
-+	return ret;
-+}
-+
-+static int stm32_rifsc_remove(struct udevice *bus)
-+{
-+	struct udevice *dev;
-+
-+	/* Deactivate all child devices not yet removed */
-+	for (device_find_first_child(bus, &dev); dev; device_find_next_child(&dev))
-+		if (device_active(dev))
-+			stm32_rifsc_child_post_remove(dev);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id stm32_rifsc_ids[] = {
-+	{ .compatible = "st,stm32mp25-rifsc" },
-+	{},
-+};
-+
-+U_BOOT_DRIVER(stm32_rifsc) = {
-+	.name = "stm32_rifsc",
-+	.id = UCLASS_NOP,
-+	.of_match = stm32_rifsc_ids,
-+	.bind = stm32_rifsc_bind,
-+	.remove = stm32_rifsc_remove,
-+	.child_post_bind = stm32_rifsc_child_post_bind,
-+	.child_pre_probe = stm32_rifsc_child_pre_probe,
-+	.child_post_remove = stm32_rifsc_child_post_remove,
-+	.plat_auto = sizeof(struct stm32_rifsc_plat),
-+	.per_child_plat_auto = sizeof(struct stm32_rifsc_child_plat),
-+	.flags = DM_FLAG_OS_PREPARE,
-+};
--- 
-2.25.1
-
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+T24gVHVlLCBBcHIgMjIsIDIwMjUgYXQgMzoxNuKAr1BNIFBhdHJpY2UgQ2hvdGFyZAo8cGF0cmlj
+ZS5jaG90YXJkQGZvc3Muc3QuY29tPiB3cm90ZToKCj4gVGhpcyBzZXJpZXMgaXMgZW5hYmxpbmcg
+T0ZfVVBTVFJFQU0gZmxhZyBmb3IgU1RNMzIgTUNVJ3MsIE1QVSdzIGFuZAo+IFNUaSBwbGF0Zm9y
+bXMuCj4gRm9yIHNvbWUgYm9hcmRzLCBzb21lIGRlZmNvbmZpZyBhbmQgRFQgdXBkYXRlIGFyZSBu
+ZWVkZWQgdG8ga2VlcCB0aGUKPiBzYW1lIGZ1bmN0aW9uYWwgbGV2ZWwuCj4KPiBUaGUgbWFqb3Ig
+aW1wYWN0IGNvbmNlcm5zIE1QVSdzIHBsYXRmb3JtIHdpdGggaW50cm9kdWN0aW9uIG9mIFNUTTMy
+Cj4gU3lzdGVtIEJ1cy4KCkV4Y2VsbGVudCB3b3JrIGFzIGFsd2F5cyBQYXRyaWNlLApSZXZpZXdl
+ZC1ieTogTGludXMgV2FsbGVpaiA8bGludXMud2FsbGVpakBsaW5hcm8ub3JnPgoKWW91cnMsCkxp
+bnVzIFdhbGxlaWoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0LW1kLW1haWxtYW4uc3Rv
+cm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVwbHkuY29tL21haWxtYW4v
+bGlzdGluZm8vdWJvb3Qtc3RtMzIK

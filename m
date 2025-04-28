@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DA82A9F235
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Apr 2025 15:24:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81F47A9F237
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Apr 2025 15:24:56 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 34BCCC78F67;
-	Mon, 28 Apr 2025 13:24:43 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 497C8C78F67;
+	Mon, 28 Apr 2025 13:24:56 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 7DBF7C78F6F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 1AC69C78F63
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Apr 2025 13:24:42 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9MEp1012700;
- Mon, 28 Apr 2025 15:24:40 +0200
+ Mon, 28 Apr 2025 13:24:55 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9WhTh010761;
+ Mon, 28 Apr 2025 15:24:54 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- q2lvrHpGoPU/frwRUzOODzfYeI6eJXaQGOoYN1ST5/s=; b=GUjWDtqcJ0OduCPk
- oB0gLwK2pVX108shebRmPxrqGleWIA3lpQ9T/7Y/1JFTsWeEs3cjt88H8AMwwYDC
- KEUkTnC+k6lysQPxkSHSS41iv/oFogIENPPHCtR/8DTKxHJ+VhoPvHYQXSw1gtsS
- XL1HS4w8UiIHD1j3sxqwUMAkgY9zQKMkjMRVHZ+6TxjGJD1PkWgAry1tb+LyeURV
- CZfN/wZPYSO03XBh99fZF/HEaxcsfemRPekwTVp7AIeUoqvh3XtH0Dog9YNa0KkD
- rHLfeUWnTPSKkU8nPb2uqt/694TAleo1pbDxBdGeK0fY8fYfTYrwPp3pf6VsD30A
- AfP3uQ==
+ vmvcWTo/bdapMmDCuJ60yI81JjdJgywqx0zV5nOh9QM=; b=Mbx78hfAD/pKfZnY
+ m4DbLqFGf35s8ae9CNSrP8cFPJV8hGB7a4YbwL9TC20Eg2/lgqWbNLa2ZTpn1+/w
+ mBlbKckPYw3sWaRdOlI3RagZxHdW340BYEe77sxxMe6w9jmGwd05PhcNyx/Fn2ka
+ 1yBNolVIr0N9vMZC6XvQX82ZqOT8hM3vGQU2wB8tvKLiQNZj2p92oTBqu6fuuEat
+ EEF2TdXEM/7c8guEyFFcibwQydRKtAwOEBlPCPHdO0+3tv4o1Jp6t69fj3buU2Xy
+ ZDMOv/U9m6QQ5+5Ofwy2NNU0+I5mUl1DO33C9cT8HKC3c9pubr/ucKG2iTzPFgVC
+ uwklDg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mwky7b6-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pcg6qp9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:40 +0200 (MEST)
+ Mon, 28 Apr 2025 15:24:54 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4C33140045;
- Mon, 28 Apr 2025 15:24:06 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 146154004C;
+ Mon, 28 Apr 2025 15:24:11 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 97110A7AD21;
- Mon, 28 Apr 2025 15:23:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D20BEA7E604;
+ Mon, 28 Apr 2025 15:23:58 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:23:54 +0200
-Message-ID: <fe2b89bc-9a06-4c01-acf4-a4dfb0d0fdf9@foss.st.com>
-Date: Mon, 28 Apr 2025 15:23:53 +0200
+ 2025 15:23:58 +0200
+Message-ID: <9d85d045-67b3-477e-9d97-303d92705de0@foss.st.com>
+Date: Mon, 28 Apr 2025 15:23:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: <u-boot@lists.denx.de>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-17-patrice.chotard@foss.st.com>
+ <20250425131533.392747-18-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-17-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-18-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -60,8 +60,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 16/22] arm: stm32mp: implement new
- STM32MP25 revision ID system
+Subject: Re: [Uboot-stm32] [PATCH v2 17/22] arm: stm32mp: fix package IDs
+	for stm32mp25
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,114 +81,66 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 4/25/25 15:15, Patrice Chotard wrote:
-> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Fix package IDs for stm32mp25.
 > 
-> The STM32MP25 revision ID are now defined with the OTP102, this patch
-> implements this new system.
-> 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Signed-off-by: Patrice CHOTARD <patrice.chotard@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  arch/arm/mach-stm32mp/include/mach/stm32.h    |  1 +
->  .../arm/mach-stm32mp/include/mach/sys_proto.h | 11 +++++++++-
->  arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c   | 21 ++++++++++++++-----
->  3 files changed, 27 insertions(+), 6 deletions(-)
+>  arch/arm/mach-stm32mp/include/mach/sys_proto.h |  6 +++---
+>  arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c    | 10 +++++-----
+>  2 files changed, 8 insertions(+), 8 deletions(-)
 > 
-> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index 156009f51e3..a9ac49bc5d2 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -212,6 +212,7 @@ enum forced_boot_mode {
->  #ifdef CONFIG_STM32MP25X
->  #define BSEC_OTP_SERIAL	5
->  #define BSEC_OTP_RPN	9
-> +#define BSEC_OTP_REVID	102
->  #define BSEC_OTP_PKG	122
->  #define BSEC_OTP_BOARD	246
->  #define BSEC_OTP_MAC	247
 > diff --git a/arch/arm/mach-stm32mp/include/mach/sys_proto.h b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> index 2a65efc0a50..0770f0a0cf6 100644
+> index 0770f0a0cf6..bf1c39742c1 100644
 > --- a/arch/arm/mach-stm32mp/include/mach/sys_proto.h
 > +++ b/arch/arm/mach-stm32mp/include/mach/sys_proto.h
-> @@ -58,6 +58,7 @@ u32 get_cpu_type(void);
->  /* return CPU_DEV constants */
->  u32 get_cpu_dev(void);
+> @@ -89,9 +89,9 @@ u32 get_cpu_package(void);
 >  
-> +/* Silicon revision = REV_ID[15:0] of Device Version */
->  #define CPU_REV1	0x1000
->  #define CPU_REV1_1	0x1001
->  #define CPU_REV1_2	0x1003
-> @@ -65,7 +66,15 @@ u32 get_cpu_dev(void);
->  #define CPU_REV2_1	0x2001
->  #define CPU_REV2_2	0x2003
+>  /* package used for STM32MP25x */
+>  #define STM32MP25_PKG_CUSTOM		0
+> -#define STM32MP25_PKG_AL_TBGA361	3
+> -#define STM32MP25_PKG_AK_TBGA424	4
+> -#define STM32MP25_PKG_AI_TBGA436	5
+> +#define STM32MP25_PKG_AL_VFBGA361	1
+> +#define STM32MP25_PKG_AK_VFBGA424	3
+> +#define STM32MP25_PKG_AI_TFBGA436	5
+>  #define STM32MP25_PKG_UNKNOWN		7
 >  
-> -/* return Silicon revision = REV_ID[15:0] of Device Version */
-> +/* OTP revision ID = 6 bits : 3 for Major / 3 for Minor */
-> +#define OTP_REVID_1	0b001000
-> +#define OTP_REVID_1_1	0b001001
-> +#define OTP_REVID_1_2	0b001010
-> +#define OTP_REVID_2	0b010000
-> +#define OTP_REVID_2_1	0b010001
-> +#define OTP_REVID_2_2	0b010010
-> +
-> +/* return SoC revision = Silicon revision (STM32MP1) or OTP revision ID (STM32MP2)*/
->  u32 get_cpu_rev(void);
->  
->  /* Get Package options from OTP */
+>  /* Get SOC name */
 > diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-> index 7f896a0d65d..ac229bdf7cc 100644
+> index ac229bdf7cc..12b43ea5cdf 100644
 > --- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
 > +++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
-> @@ -15,8 +15,10 @@
->  #define SYSCFG_DEVICEID_OFFSET		0x6400
->  #define SYSCFG_DEVICEID_DEV_ID_MASK	GENMASK(11, 0)
->  #define SYSCFG_DEVICEID_DEV_ID_SHIFT	0
-> -#define SYSCFG_DEVICEID_REV_ID_MASK	GENMASK(31, 16)
-> -#define SYSCFG_DEVICEID_REV_ID_SHIFT	16
-> +
-> +/* Revision ID = OTP102[5:0] 6 bits : 3 for Major / 3 for Minor*/
-> +#define REVID_SHIFT	0
-> +#define REVID_MASK	GENMASK(5, 0)
+> @@ -26,8 +26,8 @@
 >  
->  /* Device Part Number (RPN) = OTP9 */
->  #define RPN_SHIFT	0
-> @@ -46,7 +48,7 @@ u32 get_cpu_dev(void)
->  
->  u32 get_cpu_rev(void)
->  {
-> -	return (read_deviceid() & SYSCFG_DEVICEID_REV_ID_MASK) >> SYSCFG_DEVICEID_REV_ID_SHIFT;
-> +	return get_otp(BSEC_OTP_REVID, REVID_SHIFT, REVID_MASK);
->  }
->  
->  /* Get Device Part Number (RPN) from OTP */
-> @@ -164,12 +166,21 @@ void get_soc_name(char name[SOC_NAME_SIZE])
->  		}
->  		/* REVISION */
->  		switch (get_cpu_rev()) {
-> -		case CPU_REV1:
-> +		case OTP_REVID_1:
->  			cpu_r = "A";
+>  /* Package = bit 0:2 of OTP122 => STM32MP25_PKG defines
+>   * - 000: Custom package
+> - * - 011: TFBGA361 => AL = 10x10, 361 balls pith 0.5mm
+> - * - 100: TFBGA424 => AK = 14x14, 424 balls pith 0.5mm
+> + * - 001: VFBGA361 => AL = 10x10, 361 balls pith 0.5mm
+> + * - 011: VFBGA424 => AK = 14x14, 424 balls pith 0.5mm
+>   * - 101: TFBGA436 => AI = 18x18, 436 balls pith 0.5mm
+>   * - others: Reserved
+>   */
+> @@ -189,13 +189,13 @@ void get_soc_name(char name[SOC_NAME_SIZE])
+>  		case STM32MP25_PKG_CUSTOM:
+>  			package = "XX";
 >  			break;
-> -		case CPU_REV2:
-> +		case OTP_REVID_1_1:
-> +			cpu_r = "Z";
-> +			break;
-> +		case OTP_REVID_2:
->  			cpu_r = "B";
+> -		case STM32MP25_PKG_AL_TBGA361:
+> +		case STM32MP25_PKG_AL_VFBGA361:
+>  			package = "AL";
 >  			break;
-> +		case OTP_REVID_2_1:
-> +			cpu_r = "Y";
-> +			break;
-> +		case OTP_REVID_2_2:
-> +			cpu_r = "X";
-> +			break;
+> -		case STM32MP25_PKG_AK_TBGA424:
+> +		case STM32MP25_PKG_AK_VFBGA424:
+>  			package = "AK";
+>  			break;
+> -		case STM32MP25_PKG_AI_TBGA436:
+> +		case STM32MP25_PKG_AI_TFBGA436:
+>  			package = "AI";
+>  			break;
 >  		default:
->  			break;
->  		}
 Applied to u-boot-stm32/master
 
 Thanks

@@ -2,55 +2,55 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D6AAA9F22C
-	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Apr 2025 15:24:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16FFCA9F22A
+	for <lists+uboot-stm32@lfdr.de>; Mon, 28 Apr 2025 15:24:26 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id E72B9C78034;
-	Mon, 28 Apr 2025 13:24:31 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D660AC78F8C;
+	Mon, 28 Apr 2025 13:24:25 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 028B6CFAC47
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 45E82CFAC47
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 28 Apr 2025 13:24:30 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9OB44021866;
- Mon, 28 Apr 2025 15:24:28 +0200
+ Mon, 28 Apr 2025 13:24:25 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53S9MJka009718;
+ Mon, 28 Apr 2025 15:24:23 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- YJOEJ2Qfcj3EMA/q9SyGgj9cdC6HKB31k/YZWHAXpOU=; b=vfFWWveO0Kn4Wz1D
- wdNTYzgMzK2yHjDS0aRWJHYXUbIPh7jDNiXSEPE5jxVn9iNSq8Lntop//S0OjtUc
- a4Sd+TkkPD5izCiAqArMMR8NGfoinLdh6ZokLm2u4WGuwJEAuS99XwjgQ/qIWfKR
- qjbQctHvLcN5KSgjKMwBcWvjhu4lWyr8vA5Zql1C22spPPlIch/jkw85C7pMhTxo
- qppjYOlfTTStULbw2caOpHARws4zB5CXAwjtZtUmd8GngqjyEH0Ooozx5dXahldK
- DvpE6lQ/RKinrURDsj2KxRqUobeSyQajgjVFufrw7ByacZKg/81oI00jBKdS5dzg
- hMwN0Q==
+ j6wnyvvEV4fBFvKVwO0ZElzHdF7lSGZthjViw6VNBBI=; b=iKnUEDsrNKZSt2KL
+ cVSjNy9PnZE/xE8pPeiWErGmiYLtNvmmm2ptzAJWPvAoZQNdtd94Fkdme6SmkJ+J
+ 1rVW16k//czEwDfmNriEMcsYb2//HjSj3kyZVyQgi8ZPO8MfBQELqcIHyDx7L6KC
+ UT2r+St8qY7UyDJDzYEGtnElsrAZ3PTAsN5BFnaT5DIm3HbY/zOCAk0Z8k59OfyD
+ YttxQ5YLCOOPtU9b/uVVQ3fE/xYqmW+OZAaPnrKlBSMR5GWTMEdl9LZzyEf9MV8M
+ fKw8QJUQxPITOvuGCt83E1AiVv9qEPRzEy86Sv+j0nsJiiSAg6Qq4s2pRYx+xlZ/
+ l7ezSQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468mm9ex51-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 468pcg6qm5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 28 Apr 2025 15:24:28 +0200 (MEST)
+ Mon, 28 Apr 2025 15:24:23 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 3880940070;
- Mon, 28 Apr 2025 15:23:51 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 33BD24006D;
+ Mon, 28 Apr 2025 15:23:52 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D52E9A74D43;
- Mon, 28 Apr 2025 15:23:31 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2D0D3A6FB4E;
+ Mon, 28 Apr 2025 15:23:37 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 28 Apr
- 2025 15:23:31 +0200
-Message-ID: <76c51b75-3317-4c2e-84c2-53a1044eaf9a@foss.st.com>
-Date: Mon, 28 Apr 2025 15:23:31 +0200
+ 2025 15:23:36 +0200
+Message-ID: <5e9116ba-df0e-4728-a0e8-a8f4ca4871fa@foss.st.com>
+Date: Mon, 28 Apr 2025 15:23:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: <u-boot@lists.denx.de>
 References: <20250425131533.392747-1-patrice.chotard@foss.st.com>
- <20250425131533.392747-13-patrice.chotard@foss.st.com>
+ <20250425131533.392747-14-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250425131533.392747-13-patrice.chotard@foss.st.com>
+In-Reply-To: <20250425131533.392747-14-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -60,8 +60,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
  Tom Rini <trini@konsulko.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 12/22] configs: stm32mp25: add PXE boot
-	support
+Subject: Re: [Uboot-stm32] [PATCH v2 13/22] ARM: dts: stm32: add sdmmc1
+ fixed clock for stm32mp257f-ev1-u-boot
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,45 +81,45 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 4/25/25 15:15, Patrice Chotard wrote:
-> Configure the required configuration to allow PXE boot,
-> without autoload support by default.
+> Add sdmmc1 temporary fixed clock for stm32mp257f-ev1-u-boot
 > 
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 > 
 > (no changes since v1)
 > 
->  include/configs/stm32mp25_common.h | 9 ++++++++-
->  1 file changed, 8 insertions(+), 1 deletion(-)
+>  arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
 > 
-> diff --git a/include/configs/stm32mp25_common.h b/include/configs/stm32mp25_common.h
-> index 481b25a1f02..b42316fd8ac 100644
-> --- a/include/configs/stm32mp25_common.h
-> +++ b/include/configs/stm32mp25_common.h
-> @@ -25,6 +25,12 @@
->  #ifdef CONFIG_DISTRO_DEFAULTS
->  /*****************************************************************************/
+> diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> index a9bd5e042fa..d778b8d8d05 100644
+> --- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+> @@ -18,6 +18,12 @@
+>  			clock-frequency = <64000000>;
+>  		};
 >  
-> +#ifdef CONFIG_NET
-> +#define BOOT_TARGET_PXE(func)	func(PXE, pxe, na)
-> +#else
-> +#define BOOT_TARGET_PXE(func)
-> +#endif
+> +		ck_flexgen_51: ck-flexgen-51 {
+> +			#clock-cells = <0>;
+> +			compatible = "fixed-clock";
+> +			clock-frequency = <200000000>;
+> +		};
 > +
->  #ifdef CONFIG_CMD_MMC
->  #define BOOT_TARGET_MMC0(func)	func(MMC, mmc, 0)
->  #define BOOT_TARGET_MMC1(func)	func(MMC, mmc, 1)
-> @@ -52,7 +58,8 @@
->  	BOOT_TARGET_UBIFS(func)		\
->  	BOOT_TARGET_MMC0(func)		\
->  	BOOT_TARGET_MMC2(func)		\
-> -	BOOT_TARGET_USB(func)
-> +	BOOT_TARGET_USB(func)		\
-> +	BOOT_TARGET_PXE(func)
+>  		ck_icn_ls_mcu: ck-icn-ls-mcu {
+>  			#clock-cells = <0>;
+>  			compatible = "fixed-clock";
+> @@ -74,6 +80,11 @@
+>  	clocks = <&ck_icn_ls_mcu>;
+>  };
 >  
->  /*
->   * default bootcmd for stm32mp25:
+> +&sdmmc1 {
+> +	clocks = <&ck_flexgen_51>;
+> +	/delete-property/resets;
+> +};
+> +
+>  &usart2 {
+>  	bootph-all;
+>  	clocks = <&ck_flexgen_08>;
 Applied to u-boot-stm32/master
 
 Thanks

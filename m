@@ -2,67 +2,71 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C161AA946F
-	for <lists+uboot-stm32@lfdr.de>; Mon,  5 May 2025 15:24:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF578AA9495
+	for <lists+uboot-stm32@lfdr.de>; Mon,  5 May 2025 15:31:03 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D3F83C78F63;
-	Mon,  5 May 2025 13:24:33 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 619DFC78F63;
+	Mon,  5 May 2025 13:31:03 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A601AC78039
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A7243C78F62
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  5 May 2025 13:24:32 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545DE4wv027012;
- Mon, 5 May 2025 15:24:30 +0200
+ Mon,  5 May 2025 13:31:01 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 545B3Itx025904;
+ Mon, 5 May 2025 15:30:48 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- c5RsN2XLeEnVe5JWUSK9L3pfFqZItslsZB1XKeymGIE=; b=uzOJh7lidpjCTKrI
- UcI4Cn42BT2DehVS5B8bVBcGiPgqJbFHnSOIZu7Nc0/+wkm1otD3Bh4z53WaCzfJ
- PFT3HH50hriWTdf6rbZtzveyqFX+CnTOWu9AGyBFaU6GvQT2DSzIJWu1n1WUjDoe
- R9RWWJdSG1tLu2XEfwOKoFdxhtEJn9uRhduHfLBhTLFp1s+UfmS1kQxRw9MnvEbP
- juTvPQL9iXoNW/L8OGhSMIX/RE+NDXLzvuk0TUl/Aal9TlXBe8fkphIBtZ3OcS1T
- TQnyUobjcFbaLCZqPP/Trdf7dmyIA45Bl5t7/GvG+UGM/DfYVRMd749/kIYbxoCS
- ufOd7g==
+ 1NuI3+dnIC0odN7Fmh/oPgsIP3b5c1GPYh6jvuLfVyc=; b=xWuWr+snhM7dspId
+ 037QVts56EsXZjiz8Yk5f5lHwFGhAJ+isVyyynB+0xb5PT2GGVhJfaHYdnsL8g7k
+ m5lnZChn94zjLVEZs/xx6vknBjul/bw8gRxIE2q7V+nP7YXSkkGMV6O4rDIH5B5b
+ g1DvFlHxFK3cYHHD53w3EClZI+vUfe3cVUFGwtk0K2aA0g+6r+QCC6YJYnyKDQGm
+ YBYNIqb6NoG7PisMpymMm14LYP9AAwe/MqugYYZ7bt1OrMYK8ImTLOBxbr2H2kXC
+ eeh30w7bWgnYUC90gWv9ivdq9N6CE1uf51oiRGlJBSGUSwPL+V/i7MIkohKx6z9R
+ aOpdlQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dbf36gn0-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46dvq3vuwy-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 05 May 2025 15:24:29 +0200 (MEST)
+ Mon, 05 May 2025 15:30:48 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 6E1F840045;
- Mon,  5 May 2025 15:23:36 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2014D4002D;
+ Mon,  5 May 2025 15:29:38 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1D08DB1380F;
- Mon,  5 May 2025 15:23:15 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E4B26ABE7B5;
+ Mon,  5 May 2025 15:28:57 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 5 May
- 2025 15:23:14 +0200
-Message-ID: <91eefe5e-bde3-4372-8a20-2a707838f298@foss.st.com>
-Date: Mon, 5 May 2025 15:23:14 +0200
+ 2025 15:28:57 +0200
+Message-ID: <f345a3e0-7e14-41c7-9bfc-ac6aa042959a@foss.st.com>
+Date: Mon, 5 May 2025 15:28:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-References: <20250401070125.3705126-1-dario.binacchi@amarulasolutions.com>
- <20250401070125.3705126-4-dario.binacchi@amarulasolutions.com>
-Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250401070125.3705126-4-dario.binacchi@amarulasolutions.com>
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ <u-boot@lists.denx.de>
+References: <20250407170529.893307-1-vincent.stehle@arm.com>
+ <20250407170529.893307-3-vincent.stehle@arm.com>
+ <0e7b0b06-d100-4db5-aa84-9eb9767f4e0d@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <0e7b0b06-d100-4db5-aa84-9eb9767f4e0d@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-05_06,2025-05-05_01,2025-02-21_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, uboot-stm32@st-md-mailman.stormreply.com,
- linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH v2 3/6] ARM: dts: stm32: add display
- support on stm32f769-disco
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Jassi Brar <jaswinder.singh@linaro.org>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [Uboot-stm32] [PATCH 2/5] board: st: common: fix dfu alt buffer
+	clearing
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,180 +78,40 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-
-On 4/1/25 09:00, Dario Binacchi wrote:
-> [backport from Linux commit 598e5adfeb6062f5d4d352c0ef888b2b29d7e215]
-> 
-> The patch adds display support on the stm32f769-disco board.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Add Reviewed-by tag of Patrice Chotard
-> 
->  arch/arm/dts/stm32f769-disco-u-boot.dtsi | 34 --------------
->  arch/arm/dts/stm32f769-disco.dts         | 58 ++++++++++++++++++++++++
->  2 files changed, 58 insertions(+), 34 deletions(-)
-> 
-> diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> index c5ae753debe6..16a9eecd4a99 100644
-> --- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> @@ -32,18 +32,6 @@
->  		compatible = "st,led1";
->  		led-gpio = <&gpioj 5 0>;
->  	};
-> -
-> -	panel: panel {
-> -		compatible = "orisetech,otm8009a";
-> -		reset-gpios = <&gpioj 15 1>;
-> -		status = "okay";
-> -
-> -		port {
-> -			panel_in: endpoint {
-> -				remote-endpoint = <&dsi_out>;
-> -			};
-> -		};
-> -	};
->  };
->  
->  &dsi {
-> @@ -52,33 +40,11 @@
->  		 <&clk_hse>;
->  	clock-names = "pclk", "px_clk", "ref";
->  	bootph-all;
-> -	status = "okay";
-> -
-> -	ports {
-> -		port@0 {
-> -			dsi_out: endpoint {
-> -				remote-endpoint = <&panel_in>;
-> -			};
-> -		};
-> -		port@1 {
-> -			dsi_in: endpoint {
-> -				remote-endpoint = <&dp_out>;
-> -			};
-> -		};
-> -	};
->  };
->  
->  &ltdc {
->  	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
->  	bootph-all;
-> -
-> -	ports {
-> -		port@0 {
-> -			dp_out: endpoint {
-> -				remote-endpoint = <&dsi_in>;
-> -			};
-> -		};
-> -	};
->  };
->  
->  &fmc {
-> diff --git a/arch/arm/dts/stm32f769-disco.dts b/arch/arm/dts/stm32f769-disco.dts
-> index b4e240a8e3eb..3fd5140ec5eb 100644
-> --- a/arch/arm/dts/stm32f769-disco.dts
-> +++ b/arch/arm/dts/stm32f769-disco.dts
-> @@ -24,6 +24,19 @@
->  		reg = <0xC0000000 0x1000000>;
->  	};
->  
-> +	reserved-memory {
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		ranges;
-> +
-> +		linux,dma {
-> +			compatible = "shared-dma-pool";
-> +			linux,dma-default;
-> +			no-map;
-> +			size = <0x100000>;
-> +		};
-> +	};
-> +
->  	aliases {
->  		serial0 = &usart1;
->  	};
-> @@ -78,6 +91,45 @@
->  	clock-frequency = <25000000>;
->  };
->  
-> +&dsi {
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +	status = "okay";
-> +
-> +	ports {
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +
-> +		port@0 {
-> +			reg = <0>;
-> +			dsi_in: endpoint {
-> +				remote-endpoint = <&ltdc_out_dsi>;
-> +			};
-> +		};
-> +
-> +		port@1 {
-> +			reg = <1>;
-> +			dsi_out: endpoint {
-> +				remote-endpoint = <&dsi_panel_in>;
-> +			};
-> +		};
-> +	};
-> +
-> +	panel0: panel@0 {
-> +		compatible = "orisetech,otm8009a";
-> +		reg = <0>; /* dsi virtual channel (0..3) */
-> +		reset-gpios = <&gpioj 15 GPIO_ACTIVE_LOW>;
-> +		power-supply = <&vcc_3v3>;
-> +		status = "okay";
-> +
-> +		port {
-> +			dsi_panel_in: endpoint {
-> +				remote-endpoint = <&dsi_out>;
-> +			};
-> +		};
-> +	};
-> +};
-> +
->  &i2c1 {
->  	pinctrl-0 = <&i2c1_pins_b>;
->  	pinctrl-names = "default";
-> @@ -88,6 +140,12 @@
->  
->  &ltdc {
->  	status = "okay";
-> +
-> +	port {
-> +		ltdc_out_dsi: endpoint {
-> +			remote-endpoint = <&dsi_in>;
-> +		};
-> +	};
->  };
->  
->  &rtc {
-Hi Dario
-
-For information, stm32f769-disco.dts update 
-has been dropped due to OF_UPSTREAM now available on stm32 platforms.
-
-Applied to u-boot-stm32/master
-
-Thanks
-Patrice
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+CgpPbiA0LzIyLzI1IDA5OjMyLCBQYXRyaWNlIENIT1RBUkQgd3JvdGU6Cj4gCj4gCj4gT24gNC83
+LzI1IDE5OjA1LCBWaW5jZW50IFN0ZWhsw6kgd3JvdGU6Cj4+IFRoZSBzZXRfZGZ1X2FsdF9pbmZv
+KCkgZnVuY3Rpb24gY2FsbHMgdGhlIEFMTE9DX0NBQ0hFX0FMSUdOX0JVRkZFUigpCj4+IG1hY3Jv
+IHRvIGRlY2xhcmUgYSBgYnVmJyB2YXJpYWJsZSBwb2ludGVyIGludG8gYW4gYXJyYXkgYWxsb2Nh
+dGVkIG9uIHRoZQo+PiBzdGFjay4gSXQgdGhlbiBjYWxscyB0aGUgbWVtc2V0KCkgZnVuY3Rpb24g
+dG8gY2xlYXIgdGhlIHVzZWFibGUgcG9ydGlvbgo+PiBvZiB0aGUgYXJyYXkgdXNpbmcgdGhlIGlk
+aW9tYXRpYyBleHByZXNzaW9uIGBzaXplb2YoYnVmKScuCj4+Cj4+IFdoaWxlIHRoaXMgd291bGQg
+aW5kZWVkIHdvcmsgZmluZSBmb3IgYW4gYXJyYXksIGluIHRoZSBwcmVzZW50IGNhc2Ugd2UKPj4g
+ZW5kIHVwIGNsZWFyaW5nIG9ubHkgdGhlIHNpemUgb2YgYSBwb2ludGVyLgo+PiBGaXggdGhpcyBi
+eSBzcGVjaWZ5aW5nIHRoZSBleHBsaWNpdCBzaXplIGBERlVfQUxUX0JVRl9MRU4nIGluc3RlYWQu
+Cj4+Cj4+IEZpeGVzOiBlYzI5MzNlNTQzZGYgKCJib2FyZDogc3RtMzJtcDE6IG1vdmUgc2V0X2Rm
+dV9hbHRfaW5mbyBpbiBzdCBjb21tb24gZGlyZWN0b3J5IikKPj4gU2lnbmVkLW9mZi1ieTogVmlu
+Y2VudCBTdGVobMOpIDx2aW5jZW50LnN0ZWhsZUBhcm0uY29tPgo+PiBDYzogUGF0cmljayBEZWxh
+dW5heSA8cGF0cmljay5kZWxhdW5heUBmb3NzLnN0LmNvbT4KPj4gQ2M6IFBhdHJpY2UgQ2hvdGFy
+ZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+PiBDYzogVG9tIFJpbmkgPHRyaW5pQGtv
+bnN1bGtvLmNvbT4KPj4gQ2M6IE1hcmVrIFZhc3V0IDxtYXJleEBkZW54LmRlPgo+PiAtLS0KPj4g
+IGJvYXJkL3N0L2NvbW1vbi9zdG0zMm1wX2RmdS5jIHwgMiArLQo+PiAgMSBmaWxlIGNoYW5nZWQs
+IDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9ib2FyZC9z
+dC9jb21tb24vc3RtMzJtcF9kZnUuYyBiL2JvYXJkL3N0L2NvbW1vbi9zdG0zMm1wX2RmdS5jCj4+
+IGluZGV4IDFkYjhlNDU0ODBlLi44YzFmODBiNjc4YSAxMDA2NDQKPj4gLS0tIGEvYm9hcmQvc3Qv
+Y29tbW9uL3N0bTMybXBfZGZ1LmMKPj4gKysrIGIvYm9hcmQvc3QvY29tbW9uL3N0bTMybXBfZGZ1
+LmMKPj4gQEAgLTEwNSw3ICsxMDUsNyBAQCB2b2lkIHNldF9kZnVfYWx0X2luZm8oY2hhciAqaW50
+ZXJmYWNlLCBjaGFyICpkZXZzdHIpCj4+ICAJaWYgKGVudl9nZXQoImRmdV9hbHRfaW5mbyIpKQo+
+PiAgCQlyZXR1cm47Cj4+ICAKPj4gLQltZW1zZXQoYnVmLCAwLCBzaXplb2YoYnVmKSk7Cj4+ICsJ
+bWVtc2V0KGJ1ZiwgMCwgREZVX0FMVF9CVUZfTEVOKTsKPj4gIAo+PiAgCXNucHJpbnRmKGJ1Ziwg
+REZVX0FMVF9CVUZfTEVOLAo+PiAgCQkgInJhbSAwPSVzIiwgQ09ORklHX0RGVV9BTFRfUkFNMCk7
+Cj4gCj4gSGkgVmluY2VudCwKPiAKPiBSZXZpZXdlZC1ieTogUGF0cmljZSBDaG90YXJkIDxwYXRy
+aWNlLmNob3RhcmRAZm9zcy5zdC5jb20+Cj4gCj4gVGhhbmtzCkFwcGxpZWQgdG8gdS1ib290LXN0
+bTMyL21hc3RlcgoKVGhhbmtzClBhdHJpY2UKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KVWJvb3Qtc3RtMzIgbWFpbGluZyBsaXN0ClVib290LXN0bTMyQHN0
+LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20KaHR0cHM6Ly9zdC1tZC1tYWlsbWFuLnN0b3JtcmVw
+bHkuY29tL21haWxtYW4vbGlzdGluZm8vdWJvb3Qtc3RtMzIK

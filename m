@@ -2,42 +2,45 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7493FAB2190
-	for <lists+uboot-stm32@lfdr.de>; Sat, 10 May 2025 08:53:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E0097AB2B3D
+	for <lists+uboot-stm32@lfdr.de>; Sun, 11 May 2025 22:57:37 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 086A1C7A82A;
-	Sat, 10 May 2025 06:53:25 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5FF73C78F7B;
+	Sun, 11 May 2025 20:57:37 +0000 (UTC)
 Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3266CC7A827
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id B06DEC78F69
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 10 May 2025 06:53:23 +0000 (UTC)
+ Sun, 11 May 2025 20:57:36 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1D69E1048C2EC; 
- Sat, 10 May 2025 08:53:18 +0200 (CEST)
+ with ESMTPSA id 1338B1048C2EC; 
+ Sun, 11 May 2025 22:57:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1746860001; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=NEh//dowW1jPWMv1h+gaF6OZx0be15GKB1n3eRXb/cg=;
- b=G30QAzlPLKWz5TC5VBsnsbxUHymNdaao+nTiZL3jVB6LCBD7XVsSmzGuT0OLECY+SBXkc2
- kaiGbi8OTUmrupE7G9y77UYFDojnsAiaBgr9MH4l16LQ817cnrCnZFF4RC+iAyNJYi/ABk
- /Oj3ZTUKL+wQ5CqtY3jpB/kOjtnyvc8V/3GDNVBHxmT31yc69+lrfRJHJo602M5JxqjJIU
- RAX44rGJf5RSD4aeK7U6bTARr03z4S8aHTc6b4aFOzBc/f3/ctv/KKZdUK6ELZnJhIoViJ
- oDDgDmY8DunreVQPpsaehDjJFGS4ytbitp9PlQ31MJTjIyprLRpN9mp3XGHt8Q==
-From: Lukasz Majewski <lukma@denx.de>
-To: Tom Rini <trini@konsulko.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Marek Vasut <marex@denx.de>
-Date: Sat, 10 May 2025 08:52:56 +0200
-Message-Id: <20250510065256.267546-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.5
+ t=1746997055; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=/Ax/yWIt7J3hg262AYPPHS0aJ9MZFZcgFTYlpssnv/o=;
+ b=JOW2e356S0P+pS5vplrI76WcyfwfwTJSJ5lS5Q/y4TfTk2mwsBXnn+WOSKu13+l9Jp+OZq
+ DAL/31MyV+6PGuS2Re2rQZXOcwJ03+YwbLO3b7C3C7pjQujyBTnG+PYJGZeZXEHF/TpJ9k
+ j4ZvVDpU+PJkheMwD7mSKBgyU+z9K10WIC++QYVZWxt0Khg+A2FBYbzP/tDLrU8SkXCnRM
+ A4SC6I4lj3foOhp0dIjksY5aiDfQLj+DSc72D+y4dsbVAJxhgX+dqIIpdMCGTG16uiYxXH
+ vReCjpWCGQgpQSCQq7nnslzPwSs0jPOmHp/jncGq5TiLMsUVOGbETsyisewJEg==
+Message-ID: <831cd958-018d-4f39-91ed-5a9c44853bc2@denx.de>
+Date: Sun, 11 May 2025 22:57:32 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+References: <20250510065256.267546-1-lukma@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250510065256.267546-1-lukma@denx.de>
 X-Last-TLS-Session-Version: TLSv1.3
 Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [Uboot-stm32] [PATCH] ARM: stm32mp: Correct sign extension for
-	memory address in dram_bank_mmu_setup()
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32mp: Correct sign extension for
+ memory address in dram_bank_mmu_setup()
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -49,58 +52,17 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-On a system based on stm32mp157c, with 1GiB SDRAM (starting from
-0xC0000000) and CONFIG_PHYS_64BIT enabled (so the phys_addr_t becomes
-'unsigned long long') the mainline u-boot hangs.
+On 5/10/25 8:52 AM, Lukasz Majewski wrote:
+> On a system based on stm32mp157c, with 1GiB SDRAM (starting from
+> 0xC0000000) and CONFIG_PHYS_64BIT enabled
 
-It is caused by marking for this memory region the TLB entry as invalid
-in the dram_bank_mmu_setup().
-
-To be more specific the condition of 'addr >= gd->ram_top' is met
-in this case.
-
-The reason for it is that the 'addr' variable in that function has sign
-extension from 'int' typed i automatic variable:
-addr = i << MMU_SECTION_SHIFT;
-
-For example i = 0xc01 causes addr = 0xffffffffc0000000 as int typed i
-variable (with MSB bit set) is sign extended to unsigned long long addr.
-
-The proposed fix is to change i type from 'int' to 'unsigned int', so the
-sign extension will not take place and addr = 0xc0000000, which is smaller
-than gd->ram_top = 0x100000000.
-
-This change shall be safe as i shall not be negative as it represents the
-SDRAM areas (in granularity of 1MiB areas).
-
-Fixes: 25fb58e88aba ("ARM: stm32mp: Fix dram_bank_mmu_setup() for LMB located above ram_top")
-
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index d5eaf6711b6..0ed5eda47d0 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -51,7 +51,7 @@ u32 get_bootauth(void)
- void dram_bank_mmu_setup(int bank)
- {
- 	struct bd_info *bd = gd->bd;
--	int	i;
-+	unsigned int i;
- 	phys_addr_t start;
- 	phys_addr_t addr;
- 	phys_size_t size;
--- 
-2.39.5
-
+STM32MP15xx does not have 64bit PA range , why is CONFIG_PHYS_64BIT 
+enabled ?
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

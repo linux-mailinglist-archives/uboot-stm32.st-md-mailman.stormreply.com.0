@@ -2,59 +2,57 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id F16A3AB3DF1
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 18:44:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F0B1EAB3DF6
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 18:45:08 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id A8C99C7A82D;
-	Mon, 12 May 2025 16:44:33 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BABB3C7A82D;
+	Mon, 12 May 2025 16:45:08 +0000 (UTC)
 Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 577DFC7A82A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 71EEBC7A82A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 May 2025 16:44:32 +0000 (UTC)
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ Mon, 12 May 2025 16:45:07 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Zx56l5QBNz9slv;
- Mon, 12 May 2025 18:44:31 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Zx57R10rrz9sy9;
+ Mon, 12 May 2025 18:45:07 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747068271;
+ s=mail20150812; t=1747068307;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=7tU9C4G36M3TmoqXvgky5u+kJa+6BteBh7IdA2hKN7s=;
- b=eDba/7ahGzmycA8OVglFNBXHEKpChyudmRacJl3PAeGVqr0ZpEhAyfMsbcLokV/wZoH9RZ
- mPg2AR83ddCQNjHeH0Uhu2UFwfflaR0HV/bRxz3SRgf8r2cp7QqqenkdRyFEw6WalY2vDU
- Oe0mNE88rbbO6oylwtvCdYa3aK637lTYmrM+ufw2XqY8yanfIOPiHAR3Vy8MDXiaMHZ/WV
- tpEXx49tWYQHyfZiG7U0cbjqmoEu+I7ICrBp0tdh5iMvY6210tYa5ZEZ/ItoFU5KGthJFT
- T11JluS/gaUezh0lWVwUyR10Min6wJqnYQV07Vc30umwlGj0fqMr0sz0A2BBHA==
+ bh=aczK3CBUG8ChsLDwMgi0hgIR1BnC6epYbhlJBR4C9iw=;
+ b=gs0qV7cNNwz4264/kUzlA8DnmQhewDRowmPyxz5xaWRsOdCNylOj5u65FRf6wFjZKGAc4T
+ SAZ+R7NkMKMB5KJAZaqjAhYZMor7jI0tjxetyaKmdQEK+MaObVNxI0AVRhYTRuslr0BpX5
+ oIKyzoezBk1yd1MkQpICPF9oryeRTHLY34CStBV3SYScya0HqArl8iDilSC6jzn6P7yZRp
+ HvtJEjKs6PH5dhh8UEEhtFcPqUqKvZQDqdQcfPSIlEfdgG4u8Q9+FZP7q8leHVA9sMbrpb
+ /bY4s5QMaOg6d+xwB7MXyPgfkCBymntJmJozNzw+C1kK8g9vcFQnDNAi0c9Bng==
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747068270;
+ s=mail20150812; t=1747068305;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=7tU9C4G36M3TmoqXvgky5u+kJa+6BteBh7IdA2hKN7s=;
- b=diXDsmsdEmTCLXjS5ug3lPjS4oDOFJKMR9hNeNav0bNz5HxeCS6OXORFIxnsQuE/AFDYH5
- +UBPBRSOnOa7ugwdSglVMqVnx5R8bGVupMXHTcM8bP84UMwSzwWIKnrERSMAgZ/jJB6BcM
- FlHuJXc3vwLXSWczu3DCviMwH2X5NYWc0OgOiw9AxtiCGJa4kpyASahFePQHQkIosjmsqO
- 97qYcDonWbum0lYWniVwNltH4pLdYwRw+fy2VT5CdkKdYdsTKNPutGFUqOzUb1tdiB1c5l
- puaZUsArfTspB7xl4sfmj/JmnUs0ZeRdU29WgvwKUWzEGYkvgybx15OWLtKrnQ==
+ bh=aczK3CBUG8ChsLDwMgi0hgIR1BnC6epYbhlJBR4C9iw=;
+ b=HrOejWc+SFx8wEb7xa1b0NsI0tYkjZwk5w1nYSsGTxBJNyzoXGTM75l/nmtoEvX6fFMe5x
+ EvR5kjkoMuuSeHHGLgUAuiZvUAxUiEM2hMuhE1rhTbydL7zmlBc0gRsq/1FOVGm4m+paeu
+ BeiK8g3fTjivtfMpGrmQa3tcKvbUKDtq8mdhIUP2NXuQhJmVH/2brOPRPtE+QQzbN4XkYm
+ K99tj9uYO8RBlftOou8dad6GelNj+3mrEFMIDyGvmIA3qKPcDj0EJNvn5ySfUVjc9A0r04
+ wi49SYwPTbBIj5bQrDKLO8tqb+L8RXUvd0xfIxgCssug6H7k/6XmPKnW98T3iQ==
 To: u-boot@lists.denx.de
-Date: Mon, 12 May 2025 18:44:04 +0200
-Message-ID: <20250512164418.147714-1-marek.vasut@mailbox.org>
+Date: Mon, 12 May 2025 18:44:53 +0200
+Message-ID: <20250512164456.147764-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-ID: d71e54a9b6fc67e18af
-X-MBO-RS-META: m63g6musfdrxnxibtinqmbojqgguggif
-X-Rspamd-Queue-Id: 4Zx56l5QBNz9slv
+X-MBO-RS-META: xapnii7n1d3nyxwh86pp5s5hns88diz3
+X-MBO-RS-ID: 130eaad637865cf2d4c
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marek.vasut@mailbox.org>,
  Simon Glass <sjg@chromium.org>, uboot-stm32@st-md-mailman.stormreply.com,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH] ARM: stm32: Fix SYSRAM size on STM32MP13xx
+Subject: [Uboot-stm32] [PATCH] ARM: stm32: Fix DBGMCU macro on STM32MP13xx
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,10 +69,9 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The STM32MP13xx has only 128 kiB of SYSRAM starting at address 0x2ffe0000 .
-The STM32MP15xx has 256 kiB of SYSRAM starting at address 0x2ffc0000 . Make
-sure both SoCs configure ARMV7_SECURE_BASE correctly . Define the SYSRAM
-base in stm32.h to be consistent with the STM32MP15xx macro.
+The DBGMCU block is available at address 0x50081000 both on STM32MP13xx
+and on STM32MP15xx . There is no reason to limit the DBGMCU macro being
+set only on STM32MP15xx , remove the ifdeffery.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
@@ -86,40 +83,23 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/cpu/armv7/Kconfig                 | 3 ++-
- arch/arm/mach-stm32mp/include/mach/stm32.h | 5 +++++
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ arch/arm/mach-stm32mp/include/mach/stm32.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/arch/arm/cpu/armv7/Kconfig b/arch/arm/cpu/armv7/Kconfig
-index 4eb34b7b449..ab86d642eee 100644
---- a/arch/arm/cpu/armv7/Kconfig
-+++ b/arch/arm/cpu/armv7/Kconfig
-@@ -36,7 +36,8 @@ config ARMV7_SECURE_BASE
- 	hex "Base address for secure mode memory"
- 	depends on HAS_ARMV7_SECURE_BASE
- 	default 0xfff00000 if TEGRA124
--	default 0x2ffc0000 if ARCH_STM32MP
-+	default 0x2ffe0000 if STM32MP13X
-+	default 0x2ffc0000 if STM32MP15X
- 	default 0x2f000000 if ARCH_MX7ULP
- 	default 0x10010000 if ARCH_LS1021A
- 	default 0x00900000 if ARCH_MX7
 diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-index a9ac49bc5d2..47b459b75d1 100644
+index 47b459b75d1..dfba57e7dc4 100644
 --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
 +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-@@ -110,6 +110,11 @@ enum forced_boot_mode {
- #define STM32_SDMMC2_BASE		0x58007000
- #define STM32_SDMMC3_BASE		0x48004000
- 
-+#ifdef CONFIG_STM32MP13X
-+#define STM32_SYSRAM_BASE		0x2FFE0000
-+#define STM32_SYSRAM_SIZE		SZ_128K
-+#endif
-+
- #ifdef CONFIG_STM32MP15X
- #define STM32_SYSRAM_BASE		0x2FFC0000
- #define STM32_SYSRAM_SIZE		SZ_256K
+@@ -78,9 +78,7 @@ enum forced_boot_mode {
+ #define STM32_RCC_BASE			0x50000000
+ #define STM32_PWR_BASE			0x50001000
+ #define STM32_SYSCFG_BASE		0x50020000
+-#ifdef CONFIG_STM32MP15X
+ #define STM32_DBGMCU_BASE		0x50081000
+-#endif
+ #define STM32_FMC2_BASE			0x58002000
+ #define STM32_IWDG2_BASE		0x5A002000
+ #define STM32_DDRCTRL_BASE		0x5A003000
 -- 
 2.47.2
 

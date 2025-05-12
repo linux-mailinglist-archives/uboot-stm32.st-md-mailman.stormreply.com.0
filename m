@@ -2,58 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB6E1AB3EE3
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 19:22:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC433AB3EE4
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 19:22:23 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9355FC7A82D;
-	Mon, 12 May 2025 17:22:21 +0000 (UTC)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9F9B8C7A82D;
+	Mon, 12 May 2025 17:22:23 +0000 (UTC)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 853D4C7A82A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 78C8AC7A82F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 May 2025 17:22:20 +0000 (UTC)
+ Mon, 12 May 2025 17:22:22 +0000 (UTC)
 Received: from smtp1.mailbox.org (smtp1.mailbox.org
  [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Zx5yN1CTfz9stq;
- Mon, 12 May 2025 19:22:20 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Zx5yP6h1Hz9smH;
+ Mon, 12 May 2025 19:22:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1747070542;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wlQeXKprmnnpWWXsbmVTnZIw+/Hde1MGFbCAtnDBLh8=;
+ b=DnI7LuXsx30Wx0vR4JOTto/nBhemQLxb+MjFRi2+/2U/Wkdw/OR2kH/f44e5cjEc4m/oS9
+ zuD16xsARV6mjCPDG4gs7wGUuL/Cx7KsIa1igBY7u6Iw3WQpE9cHgGR87fBr+UWHryxc9n
+ 6FqPiN6n8n+b2p+mePuaiSFGwNv6K377U7BnT0cBUP6aU0zbGO8o5oq1zpqe5+TLR0Cy5o
+ TRH5hbo6jOQDM8Wu6wDixpnxu9TnTBQrQusWnJZU9UMP+noizkQtIV2l9oTR20nccQGWoi
+ 4+RmGE8pzcKKn/dzQZf5Z6Z5up9x5pvPy9uywIhGaVBKksDxhk9D13EDp7+BjA==
+From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1747070540;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=m4kZ0qrokejhOL6UjdNJuLAqzDXaaJnV7J7MVFW6APU=;
- b=XO52Zbc1SHxn86MH6zfrK0u59Y2no/sBvH0J21C9OPG5t9NFdHzA/icWoWlrOj/F9aSuNG
- JSuLAwvRE+COpi66Ran7xWeQ0JbgoQrAMIeCSgUxRuh+PwQMOR6l75vaZ+kncIdO7XMN/e
- mMiGSU7wMBCv/AD7Y0zyeO95o9IrLRL/ZlOVmzIaen4OcpW1eS5yYNhH1Rs1v3peM4zuHb
- PbRYZdj5iBLl9P+2jDq0nVghYaFCHNZDkwG9XMq+xUhvCw++VWBCRAzytosIGS5kNjKsZS
- EzPkmNTt+0N+4ZhHRaAgx4+Ew9bU5tpqLptlRaxWrN6skciOYyy/LEcXCmbtwQ==
-From: Marek Vasut <marek.vasut@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747070538;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=m4kZ0qrokejhOL6UjdNJuLAqzDXaaJnV7J7MVFW6APU=;
- b=iw48QphqR+WglhaQ9gvX4YGjcL/+7bMb5skPpLqNAVN1neeeecJCxNUpIG6GTSYQe0iRCv
- m0b9sgNJXTf9xGhfrI3CQ/ifAPrwBGVsys6ZK6VpWWkFhtPss4iJM9K2/pynBrUBPDmUmV
- z4+r+ihOb6cFopwcxCHR8d7KO1S6lCOoZIe6cQakON4iZNjGrRPqPUKz5KqUjVsyPsR05L
- pw6evJvrfjPcCxFJ22rDWZMTPqrSMnjb5K8qG/B39jvsQkRTBtTZG3ebRuMtqVYRzPVzTW
- V4gD3lbS0YLh8LN64UaL2cHyP/CXd4TURFoH+44Afi43pytbWsVmoL+EL9AUqg==
+ bh=wlQeXKprmnnpWWXsbmVTnZIw+/Hde1MGFbCAtnDBLh8=;
+ b=QOEsUC9prl9igi3lWua7lUBxjFUP6nf8lYDW2kgaNlQ99kVFrgn8DvbktV4woGDwhjduGX
+ za694O4YGa3CQMbm0t/Aw/frOgN/IYkRzM+oqXAT1BrGV6BqB9+60erjpi7mQKRRsSxhKP
+ xhbjXgMz+kJYw4Do17+4ts2LQLNttuY919e9dflzk4jUsnMCiS7IPQMSrLWXTzLdIxWhZu
+ wu+XDxvhzZ1h5r4cC1zoqJtSzUfygOGS82MrnLRgjvjnv58nJw92kUIioT3B35Qo8AAXg/
+ CdPFO4xZkyQuuczqfDV32+p5Ob/twwGxhHqz54qJoUneZjDPUmWOgPjKw85H/Q==
 To: u-boot@lists.denx.de
-Date: Mon, 12 May 2025 19:21:30 +0200
-Message-ID: <20250512172149.150214-4-marek.vasut@mailbox.org>
+Date: Mon, 12 May 2025 19:21:31 +0200
+Message-ID: <20250512172149.150214-5-marek.vasut@mailbox.org>
 In-Reply-To: <20250512172149.150214-1-marek.vasut@mailbox.org>
 References: <20250512172149.150214-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-ID: 2d17c81c8ac6c85ab4c
-X-MBO-RS-META: wmdkcry3rq3tzrfe7j4tz38c66xgu1mu
-X-Rspamd-Queue-Id: 4Zx5yN1CTfz9stq
+X-MBO-RS-ID: ee551b5348d262a5161
+X-MBO-RS-META: swqn8niaunyarxayx3iotuteoggjj6jm
+X-Rspamd-Queue-Id: 4Zx5yP6h1Hz9smH
 Cc: Tom Rini <trini@konsulko.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>, u-boot@dh-electronics.com,
  Marek Vasut <marek.vasut@mailbox.org>,
@@ -64,8 +64,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Lionel Debieve <lionel.debieve@foss.st.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>
-Subject: [Uboot-stm32] [PATCH 03/10] ARM: stm32: Limit early cache
-	enablement in SPL to STM32MP15xx
+Subject: [Uboot-stm32] [PATCH 04/10] ARM: stm32: Add STM32MP13xx PMIC
+	initialization for DDR3 DRAM type
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,10 +82,9 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The STM32MP13xx SRAM size is half that the SRAM size on STM32MP15xx,
-disable early dcache start on STM32MP13xx as the TLB itself takes
-about a quarter of the SPL size. The dcache will be enabled later,
-once DRAM is available and TLB can be placed in DRAM.
+The STM32MP13xx PMIC initialization for DDR3 DRAM type is similar
+to the STM32MP15xx PMIC initialization, except the VTT rail is not
+enabled. Fill in the STM32MP13xx support.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
@@ -103,64 +102,87 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- arch/arm/mach-stm32mp/stm32mp1/cpu.c | 9 ++++++---
- arch/arm/mach-stm32mp/stm32mp1/spl.c | 3 ++-
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ board/st/common/stpmic1.c | 51 ++++++++++++++++++++++++++-------------
+ 1 file changed, 34 insertions(+), 17 deletions(-)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-index 9ab5a3ede52..1ae82489a4b 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-@@ -28,7 +28,9 @@
-  * early TLB into the .data section so that it not get cleared
-  * with 16kB allignment (see TTBR0_BASE_ADDR_MASK)
-  */
-+#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
- u8 early_tlb[PGTABLE_SIZE] __section(".data") __aligned(0x4000);
-+#endif
+diff --git a/board/st/common/stpmic1.c b/board/st/common/stpmic1.c
+index 45c2bb5bcea..b46f89dacb9 100644
+--- a/board/st/common/stpmic1.c
++++ b/board/st/common/stpmic1.c
+@@ -14,8 +14,19 @@
+ #include <power/pmic.h>
+ #include <power/stpmic1.h>
  
- u32 get_bootmode(void)
++static bool is_stm32mp13xx(void)
++{
++	if (!IS_ENABLED(CONFIG_STM32MP13X))
++		return false;
++
++	return of_machine_is_compatible("st,stm32mp131") ||
++	       of_machine_is_compatible("st,stm32mp133") ||
++	       of_machine_is_compatible("st,stm32mp135");
++}
++
+ int board_ddr_power_init(enum ddr_type ddr_type)
  {
-@@ -95,18 +97,19 @@ void dram_bank_mmu_setup(int bank)
-  */
- static void early_enable_caches(void)
- {
-+#if (!IS_ENABLED(CONFIG_XPL_BUILD) || !IS_ENABLED(CONFIG_STM32MP13X))
- 	/* I-cache is already enabled in start.S: cpu_init_cp15 */
++	bool is_mp13 = is_stm32mp13xx();
+ 	struct udevice *dev;
+ 	bool buck3_at_1800000v = false;
+ 	int ret;
+@@ -30,18 +41,21 @@ int board_ddr_power_init(enum ddr_type ddr_type)
+ 	switch (ddr_type) {
+ 	case STM32MP_DDR3:
+ 		/* VTT = Set LDO3 to sync mode */
+-		ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
+-		if (ret < 0)
+-			return ret;
 -
- 	if (CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
- 		return;
+-		ret &= ~STPMIC1_LDO3_MODE;
+-		ret &= ~STPMIC1_LDO12356_VOUT_MASK;
+-		ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
+-
+-		ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+-				     ret);
+-		if (ret < 0)
+-			return ret;
++		if (!is_mp13) {
++			/* Enable VTT only on STM32MP15xx */
++			ret = pmic_reg_read(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3));
++			if (ret < 0)
++				return ret;
++
++			ret &= ~STPMIC1_LDO3_MODE;
++			ret &= ~STPMIC1_LDO12356_VOUT_MASK;
++			ret |= STPMIC1_LDO_VOUT(STPMIC1_LDO3_DDR_SEL);
++
++			ret = pmic_reg_write(dev, STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
++					     ret);
++			if (ret < 0)
++				return ret;
++		}
  
- #if !(CONFIG_IS_ENABLED(SYS_ICACHE_OFF) && CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
--		gd->arch.tlb_size = PGTABLE_SIZE;
--		gd->arch.tlb_addr = (unsigned long)&early_tlb;
-+	gd->arch.tlb_size = PGTABLE_SIZE;
-+	gd->arch.tlb_addr = (unsigned long)&early_tlb;
- #endif
+ 		/* VDD_DDR = Set BUCK2 to 1.35V */
+ 		ret = pmic_clrsetbits(dev,
+@@ -69,11 +83,14 @@ int board_ddr_power_init(enum ddr_type ddr_type)
+ 		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
  
- 	/* enable MMU (default configuration) */
- 	dcache_enable();
-+#endif
- }
+ 		/* Enable VTT = LDO3 */
+-		ret = pmic_clrsetbits(dev,
+-				      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
+-				      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
+-		if (ret < 0)
+-			return ret;
++		if (!is_mp13) {
++			/* Enable VTT only on STM32MP15xx */
++			ret = pmic_clrsetbits(dev,
++					      STPMIC1_LDOX_MAIN_CR(STPMIC1_LDO3),
++					      STPMIC1_LDO_ENA, STPMIC1_LDO_ENA);
++			if (ret < 0)
++				return ret;
++		}
  
- /*
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-index 9c4fafbf478..e63bdaaf42f 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-@@ -220,10 +220,11 @@ void board_init_f(ulong dummy)
- 	 * activate cache on DDR only when DDR is fully initialized
- 	 * to avoid speculative access and issue in get_ram_size()
- 	 */
--	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF))
-+	if (!CONFIG_IS_ENABLED(SYS_DCACHE_OFF) && !IS_ENABLED(CONFIG_STM32MP13X)) {
- 		mmu_set_region_dcache_behaviour(STM32_DDR_BASE,
- 						CONFIG_DDR_CACHEABLE_SIZE,
- 						DCACHE_DEFAULT_OPTION);
-+	}
- }
+ 		mdelay(STPMIC1_DEFAULT_START_UP_DELAY_MS);
  
- void spl_board_prepare_for_boot(void)
 -- 
 2.47.2
 

@@ -2,56 +2,58 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0964DAB3EE7
-	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 19:22:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 111FEAB3EE8
+	for <lists+uboot-stm32@lfdr.de>; Mon, 12 May 2025 19:22:31 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C2A57C7A82D;
-	Mon, 12 May 2025 17:22:28 +0000 (UTC)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CB8C3C7A82D;
+	Mon, 12 May 2025 17:22:30 +0000 (UTC)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C03F1C7A82F
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 66DFAC7A82F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 12 May 2025 17:22:27 +0000 (UTC)
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ Mon, 12 May 2025 17:22:29 +0000 (UTC)
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Zx5yW2LvBz9sp5;
- Mon, 12 May 2025 19:22:27 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Zx5yY0V68z9tV1;
+ Mon, 12 May 2025 19:22:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1747070549;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=E4ap557lfCQgYh5td6+jBPw28mHLUWYcaVFKktofZXI=;
+ b=SSRsQEGxBzsfp/jpFDye+0kkM7z64s/eD1KCNj1sqNYBhBuQj9ZhJ/3shSURSzxviwgR2A
+ A6Xm8fEMTO/M/3HL0ISq63xkjxqkpPlogIiGU8QlbQtzmL2yAYHwfgMi2g0B5hZ9PE1bnN
+ E1jf2w3M3SoIoR1VgbUWfNcD/jfbDU5DH9Z/JcgHVQvp1L7dPTHgDkVO2+WJJbuHdhvb9O
+ hzy5NPDC6zHMQtwZV2Blg9YgNQu7WKbfpUrNP0VpMIs/JdrME23IP7ouS6VkBsFuo290LV
+ tCWrVf1zjDCai4gmC3UsYtS3ADydE/23Ph6G62F1avsj/soLe+KCKbji6YBBpg==
+From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1747070547;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vQugVOrMmc749j1pQUYvqKF1EIb00U7wlYZo4aTe1v0=;
- b=u0vlH0VZbKa8aQeTvYFChULHmCnaW4G3Aw2mvv8e2Edl306BbfMQSKSkl1Nyh3EMQxo58l
- lVpmZ0Nb1TxunLJSeu1NwfhBzqUEBctyn04Vie3CTp8UvhpAg0KK7TjXkCMV/QXqfPhst9
- aRRgQ8fek6Bx8TPV5l9F2arKUk0xsqedIdVFv7HnL3LAB7JAYoRsK6XygpQhtPYPv8og0h
- b1R4y9/ob8nARy6PBxtmVtgDCSpA1cwOSiqxOLkG/FlyAipCiyK1TayuE/hmDDwRqDciEq
- Mzoy4R8ZWD/AHN5j17ogMXQoQHGDgixGFOOTdZhP5ys2nR1rH4B8c6/XeH8F8Q==
-From: Marek Vasut <marek.vasut@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1747070545;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=vQugVOrMmc749j1pQUYvqKF1EIb00U7wlYZo4aTe1v0=;
- b=a91Fu4qezVyghxISXVyQLzanIErknucasl1sv3kFZgBdCQAmoh9SveKrvuO1/sCSJVh/BG
- /A268BzIy1LpbsYoFUf2vCc+cKM8WQDnz6KEKAAnjeMmhqpqgEoDjI1hVicQHj+XNG7NIt
- +p+84inxHyOYeXMQ3yzNbkBN5zMh/ncXZiTIjchavtU7SvySnlDwgn8AwoHzc3d0fP9JP3
- HHDa9jsvb/3YBeitEc/V31Y1HCVY3MVCVB+Rd8Pc9IX6b31/RXe/l0RaR0J05BkLQ+Jgoz
- UYnhomURQvRvtpMZ5dwDiXyzopYZLDrnb8KuS9fx/tg39VnrK1IFwrT9EZeefg==
+ bh=E4ap557lfCQgYh5td6+jBPw28mHLUWYcaVFKktofZXI=;
+ b=obkVuu+LhVw+akKpcjtYhdrYA5sAl1UP0JNUoiNotEradEA81nT3Jz0ptRMM1T5mguH6Rj
+ 11QsyyJfpOYJUEPlprSJ6F2N1tLQhznhaAqV+uwGOBT5c5OsKI9W23DRmPaP5UZZsdhLDj
+ qgtInk1s9AaMePg0sOZhQuceelS4gCuJCPhGYdrLndJ4Ap/DpUZlclwIuJ6gKnn/a386Te
+ YEFFAoF3Rd5StFv2dBvxVBsz77PH0hRv+l+K3L+12P5mcO9fxC5GggH2QJRXm+MM5sz6Un
+ HVyB6hZ/HKh9rBR0UK6+Ytbc335C80jNozNVRl0XkR4Qi/FLpC+cD0FounQHCA==
 To: u-boot@lists.denx.de
-Date: Mon, 12 May 2025 19:21:34 +0200
-Message-ID: <20250512172149.150214-8-marek.vasut@mailbox.org>
+Date: Mon, 12 May 2025 19:21:35 +0200
+Message-ID: <20250512172149.150214-9-marek.vasut@mailbox.org>
 In-Reply-To: <20250512172149.150214-1-marek.vasut@mailbox.org>
 References: <20250512172149.150214-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
-X-MBO-RS-ID: 0a484705edb4b2d55d5
-X-MBO-RS-META: ge95mew3oc8xcuaou4bnwyq1igfi6ghr
+X-MBO-RS-ID: 3757f4041f8e38d1ded
+X-MBO-RS-META: buqzk47xma3oruqisbksijxkmktsexex
+X-Rspamd-Queue-Id: 4Zx5yY0V68z9tV1
 Cc: Tom Rini <trini@konsulko.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>, u-boot@dh-electronics.com,
  Marek Vasut <marek.vasut@mailbox.org>,
@@ -62,8 +64,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Lionel Debieve <lionel.debieve@foss.st.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>
-Subject: [Uboot-stm32] [PATCH 07/10] ARM: dts: stm32: Add 512 MiB DRAM
-	settings for DH STM32MP13xx DHCOR DHSBC
+Subject: [Uboot-stm32] [PATCH 08/10] ARM: dts: stm32: Add STM32MP13x SPL
+	specific DT additions
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,7 +82,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Add DRAM settings for 512 MiB of DRAM variant of DH STM32MP13xx DHCOR DHSBC.
+Add DT additions required by U-Boot SPL to bring up the hardware.
+This includes binman node to generate STM32 Image v2.0 which can be
+booted by the BootROM, clock entries used by the SPL clock driver
+during clock tree initialization, and syscon-reboot node so U-Boot
+can reset the system without having to rely on PSCI call.
 
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
@@ -98,129 +104,123 @@ Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- .../stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi | 100 ++++++++++++++++++
- arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi    |   1 +
- 2 files changed, 101 insertions(+)
- create mode 100644 arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
+ arch/arm/dts/stm32mp13-u-boot.dtsi | 89 ++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
 
-diff --git a/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
-new file mode 100644
-index 00000000000..7b344541c3e
---- /dev/null
-+++ b/arch/arm/dts/stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi
-@@ -0,0 +1,100 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2025, DH electronics - All Rights Reserved
-+ *
-+ * STM32MP13xx DHSOM configuration
-+ * 1x DDR3L 1Gb, 16-bit, 533MHz, Single Die Package in flyby topology.
-+ * Reference used W631GU6MB15I from Winbond
-+ *
-+ * DDR type / Platform	DDR3/3L
-+ * freq		533MHz
-+ * width	16
-+ * datasheet	0  = W631GU6MB15I / DDR3-1333
-+ * DDR density	2
-+ * timing mode	optimized
-+ * address mapping : RBC
-+ * Tc > + 85C : J
-+ */
-+#define DDR_MEM_COMPATIBLE ddr3l-dhsom-1066-888-bin-g-1x2gb-533mhz
-+#define DDR_MEM_NAME	"DDR3-DDR3L 16bits 533000kHz"
-+#define DDR_MEM_SPEED	533000
-+#define DDR_MEM_SIZE	0x20000000
-+
-+#define DDR_MSTR 0x00040401
-+#define DDR_MRCTRL0 0x00000010
-+#define DDR_MRCTRL1 0x00000000
-+#define DDR_DERATEEN 0x00000000
-+#define DDR_DERATEINT 0x00800000
-+#define DDR_PWRCTL 0x00000000
-+#define DDR_PWRTMG 0x00400010
-+#define DDR_HWLPCTL 0x00000000
-+#define DDR_RFSHCTL0 0x00210000
-+#define DDR_RFSHCTL3 0x00000000
-+#define DDR_RFSHTMG 0x0081008B
-+#define DDR_CRCPARCTL0 0x00000000
-+#define DDR_DRAMTMG0 0x121B2414
-+#define DDR_DRAMTMG1 0x000A041B
-+#define DDR_DRAMTMG2 0x0607080F
-+#define DDR_DRAMTMG3 0x0050400C
-+#define DDR_DRAMTMG4 0x07040607
-+#define DDR_DRAMTMG5 0x06060403
-+#define DDR_DRAMTMG6 0x02020002
-+#define DDR_DRAMTMG7 0x00000202
-+#define DDR_DRAMTMG8 0x00001005
-+#define DDR_DRAMTMG14 0x000000A0
-+#define DDR_ZQCTL0 0xC2000040
-+#define DDR_DFITMG0 0x02050105
-+#define DDR_DFITMG1 0x00000202
-+#define DDR_DFILPCFG0 0x07000000
-+#define DDR_DFIUPD0 0xC0400003
-+#define DDR_DFIUPD1 0x00000000
-+#define DDR_DFIUPD2 0x00000000
-+#define DDR_DFIPHYMSTR 0x00000000
-+#define DDR_ADDRMAP1 0x00080808
-+#define DDR_ADDRMAP2 0x00000000
-+#define DDR_ADDRMAP3 0x00000000
-+#define DDR_ADDRMAP4 0x00001F1F
-+#define DDR_ADDRMAP5 0x07070707
-+#define DDR_ADDRMAP6 0x0F070707
-+#define DDR_ADDRMAP9 0x00000000
-+#define DDR_ADDRMAP10 0x00000000
-+#define DDR_ADDRMAP11 0x00000000
-+#define DDR_ODTCFG 0x06000600
-+#define DDR_ODTMAP 0x00000001
-+#define DDR_SCHED 0x00000F01
-+#define DDR_SCHED1 0x00000000
-+#define DDR_PERFHPR1 0x00000001
-+#define DDR_PERFLPR1 0x04000200
-+#define DDR_PERFWR1 0x08000400
-+#define DDR_DBG0 0x00000000
-+#define DDR_DBG1 0x00000000
-+#define DDR_DBGCMD 0x00000000
-+#define DDR_POISONCFG 0x00000000
-+#define DDR_PCCFG 0x00000010
-+#define DDR_PCFGR_0 0x00000000
-+#define DDR_PCFGW_0 0x00000000
-+#define DDR_PCFGQOS0_0 0x00100009
-+#define DDR_PCFGQOS1_0 0x00000020
-+#define DDR_PCFGWQOS0_0 0x01100B03
-+#define DDR_PCFGWQOS1_0 0x01000200
-+#define DDR_PGCR 0x01442E02
-+#define DDR_PTR0 0x0022AA5B
-+#define DDR_PTR1 0x04841104
-+#define DDR_PTR2 0x042DA068
-+#define DDR_ACIOCR 0x10400812
-+#define DDR_DXCCR 0x00000C40
-+#define DDR_DSGCR 0xF200011F
-+#define DDR_DCR 0x0000000B
-+#define DDR_DTPR0 0x36D477D0
-+#define DDR_DTPR1 0x098B00D8
-+#define DDR_DTPR2 0x10023600
-+#define DDR_MR0 0x00000830
-+#define DDR_MR1 0x00000000
-+#define DDR_MR2 0x00000208
-+#define DDR_MR3 0x00000000
-+#define DDR_ODTCR 0x00010000
-+#define DDR_ZQ0CR1 0x00000038
-+#define DDR_DX0GCR 0x0000CE81
-+#define DDR_DX1GCR 0x0000CE81
-+
-+#include "stm32mp13-ddr.dtsi"
-diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-index 9ff42ab8248..6117da10bbf 100644
---- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
-@@ -4,6 +4,7 @@
-  */
+diff --git a/arch/arm/dts/stm32mp13-u-boot.dtsi b/arch/arm/dts/stm32mp13-u-boot.dtsi
+index 1fe6966781c..ad63d5027b2 100644
+--- a/arch/arm/dts/stm32mp13-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13-u-boot.dtsi
+@@ -17,6 +17,7 @@
+ 		pinctrl0 = &pinctrl;
+ 	};
  
- #include "stm32mp13-u-boot.dtsi"
-+#include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
++#if defined(CONFIG_TFABOOT)
+ 	firmware {
+ 		optee {
+ 			bootph-all;
+@@ -27,6 +28,86 @@
+ 	psci {
+ 		bootph-some-ram;
+ 	};
++#else
++	binman: binman {
++		multiple-images;
++
++		spl-stm32 {
++			filename = "u-boot-spl.stm32";
++			mkimage {
++				args = "-T stm32imagev2 -a 0x2ffe0000 -e 0x2ffe0000";
++				u-boot-spl {
++					no-write-symbols;
++				};
++			};
++		};
++	};
++
++	clocks {
++		bootph-all;
++
++		clk_hse: ck_hse {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <24000000>;
++		};
++
++		clk_hsi: ck_hsi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <64000000>;
++		};
++
++		clk_lse: ck_lse {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <32768>;
++		};
++
++		clk_lsi: ck_lsi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <32000>;
++		};
++
++		clk_csi: ck_csi {
++			bootph-all;
++			#clock-cells = <0>;
++			compatible = "fixed-clock";
++			clock-frequency = <4000000>;
++		};
++	};
++
++	cpu0_opp_table: cpu0-opp-table {
++		compatible = "operating-points-v2";
++		opp-shared;
++		bootph-pre-ram;
++		opp-650000000 {
++			bootph-pre-ram;
++			opp-hz = /bits/ 64 <650000000>;
++			opp-microvolt = <1200000>;
++			opp-supported-hw = <0x1>;
++		};
++		opp-1000000000 {
++			bootph-pre-ram;
++			opp-hz = /bits/ 64 <1000000000>;
++			opp-microvolt = <1350000>;
++			opp-supported-hw = <0x2>;
++		};
++	};
++
++	reboot {
++		bootph-all;
++		compatible = "syscon-reboot";
++		regmap = <&rcc>;
++		offset = <0x114>;
++		mask = <0x1>;
++	};
++#endif
  
- / {
- 	aliases {
+ 	soc {
+ 		bootph-all;
+@@ -52,6 +133,14 @@
+ 	bootph-all;
+ };
+ 
++#if !defined(CONFIG_TFABOOT)
++&cpu0 {
++	nvmem-cells = <&part_number_otp>;
++	nvmem-cell-names = "part_number";
++	operating-points-v2 = <&cpu0_opp_table>;
++};
++#endif
++
+ &gpioa {
+ 	bootph-all;
+ };
 -- 
 2.47.2
 

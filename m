@@ -2,70 +2,63 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FC19ABBA62
-	for <lists+uboot-stm32@lfdr.de>; Mon, 19 May 2025 11:57:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B6DAABBC4B
+	for <lists+uboot-stm32@lfdr.de>; Mon, 19 May 2025 13:25:24 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 00041C78F9B;
-	Mon, 19 May 2025 09:57:30 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 09978C7803C;
+	Mon, 19 May 2025 11:25:24 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C50B0C7803C
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 839F9C6C83D
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon, 19 May 2025 09:57:29 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54J9Krnk006605;
- Mon, 19 May 2025 11:57:24 +0200
+ Mon, 19 May 2025 11:25:22 +0000 (UTC)
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54JAP7xD020562;
+ Mon, 19 May 2025 13:25:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- Pg/12hQngtmTV8OXAQJrLcgRmWk6cIuDXCGxViOGFfc=; b=HpimUmB5IaHMrcNi
- GSQXlAG7ZsrQUzijHuPZTgjCDJ0m5LxJq7AvUHjkKulnEKI9pWwXJfzY1okq4a8D
- niBcsrBztiG1uyGy6bw2YnqCgFACGA2wjyzLcIWrKEjj9yUuzGZX/Q3WTw891H+0
- KHYjUdgU/PkuFZq9QfkymAJRaWgBqraXDOmgEwVahci3bxJD5pvyJtRc/QTRWbZb
- AmbGCh618nhP1OtvgC07yAKhdp2OhXchOAotl7z9s1zvf696isvK2MusX+HSXwde
- x+eINETwN7gq1YIfDviOqasb7N+kG0vs3mvcILyrPsVgGaDdebEvnpHBsjYylzyF
- XL5Jhw==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=9D9PlUgJF23yt28bCoapDQ
+ HoHDzv4eFVqPPNiSpYaJs=; b=SlTfyaui6gXsbMyp3nVI6Zwx+7bsZM723j5iFK
+ huPn6sBOj7pg9JY05XG9pzRDEv+b75CZas049V+qGFPzSyEQxiXCLtWISpsIfLma
+ wVAmy0zx5cqkM5HFzbqfvvWMPKrYj5x/HGIiPRAPZ0ZW2bwDFesPoX+X8rlUXyzM
+ A6LjZVUR/Vs+alY05bbAqZV/09Sm66xo3GzfwnqfUYup/PuVmRzae2oEJDQS3N1J
+ ADtuaS4kR1z/zohDDh6EVopz+8NmQOdfDqqvk06SPVWwTCHhfWxho6jArqdbos15
+ LG9IBeX4ReFLFw9JS+hB9rN8tNEc1SUHZpOOE6CtLCEm7O/Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46phbgeap1-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46pht1q75f-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 19 May 2025 11:57:23 +0200 (MEST)
+ Mon, 19 May 2025 13:25:11 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1C71F4004C;
- Mon, 19 May 2025 11:56:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 61FA0AB62BE;
- Mon, 19 May 2025 11:55:30 +0200 (CEST)
-Received: from [10.48.86.182] (10.48.86.182) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 024EA4005D;
+ Mon, 19 May 2025 13:24:17 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 808D0AD313A;
+ Mon, 19 May 2025 13:23:57 +0200 (CEST)
+Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 19 May
- 2025 11:55:29 +0200
-Message-ID: <9d8fe91a-bb27-4fda-a3e3-c7af2eb184fc@foss.st.com>
-Date: Mon, 19 May 2025 11:55:28 +0200
+ 2025 13:23:57 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+Date: Mon, 19 May 2025 13:23:54 +0200
+Message-ID: <20250519112355.1190332-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jerome Forissier <jerome.forissier@linaro.org>, <u-boot@lists.denx.de>
-References: <20250519090421.470942-1-patrick.delaunay@foss.st.com>
- <20250519110417.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
- <71947acc-d77c-4cd2-9a15-d679a0e53a8c@linaro.org>
-Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <71947acc-d77c-4cd2-9a15-d679a0e53a8c@linaro.org>
-X-Originating-IP: [10.48.86.182]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
- (10.75.129.71)
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-19_04,2025-05-16_03,2025-03-28_01
-Cc: Tom Rini <trini@konsulko.com>, caleb.connolly@linaro.org,
- Casey Connolly <casey.connolly@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- ilias.apalodimas@linaro.org,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [Uboot-stm32] [PATCH 1/3] lib/uuid.c: restore support of system
- partition type for ESP
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Lionel Debieve <lionel.debieve@foss.st.com>
+Subject: [Uboot-stm32] [PATCH v4] stm32mp: Add tamp_nvram driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,250 +70,753 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-SGksCgpPbiA1LzE5LzI1IDExOjIzLCBKZXJvbWUgRm9yaXNzaWVyIHdyb3RlOgo+IEhpIFBhdHJp
-Y2ssCj4KPiBPbiA1LzE5LzI1IDEwOjA0LCBQYXRyaWNrIERlbGF1bmF5IHdyb3RlOgo+PiBBZGQg
-c3VwcG9ydCBvZiBzaG9ydG5hbWUgZm9yIHR5cGUgcGFyYW1ldGVyIGFuZCByZXN0b3JlICJzeXN0
-ZW0iCj4+IGFzIHNob3J0IG5hbWUgZm9yIEVGSSBTeXN0ZW0gUGFydGl0aW9uIChFU1ApIGZvciBm
-aWxlZCAidHlwZSIgb2YgdGhlCj4+ICJncHQgd3JpdGUiIGNvbW1hbmQuCj4+Cj4+IEZpeGVzOiBk
-NTRlMTAwNGI4YjEgKCJsaWIvdXVpZC5jOiB1c2UgdW5pcXVlIG5hbWUgZm9yIFBBUlRJVElPTl9T
-WVNURU1fR1VJRCIpCj4+IFNpZ25lZC1vZmYtYnk6IFBhdHJpY2sgRGVsYXVuYXkgPHBhdHJpY2su
-ZGVsYXVuYXlAZm9zcy5zdC5jb20+Cj4+IC0tLQo+Pgo+PiAgIGxpYi91dWlkLmMgfCAxNDggKysr
-KysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4gICAx
-IGZpbGUgY2hhbmdlZCwgNzYgaW5zZXJ0aW9ucygrKSwgNzIgZGVsZXRpb25zKC0pCj4+Cj4+IGRp
-ZmYgLS1naXQgYS9saWIvdXVpZC5jIGIvbGliL3V1aWQuYwo+PiBpbmRleCA2YWJiY2YyN2IxZjMu
-LmVlMDJmYTRkNjAwZCAxMDA2NDQKPj4gLS0tIGEvbGliL3V1aWQuYwo+PiArKysgYi9saWIvdXVp
-ZC5jCj4+IEBAIC02MiwxODQgKzYyLDE4NSBAQCBpbnQgdXVpZF9zdHJfdmFsaWQoY29uc3QgY2hh
-ciAqdXVpZCkKPj4gICAJcmV0dXJuIDE7Cj4+ICAgfQo+PiAgIAo+PiArLyogTGlzdCBvZiBrbm93
-biBHVUlEIGZvciBHUFQgcGFydGl0aW9uIHR5cGUgKi8KPj4gICBzdGF0aWMgY29uc3Qgc3RydWN0
-IHsKPj4gLQljb25zdCBjaGFyICpzdHJpbmc7Cj4+ICsJY29uc3QgY2hhciAqc3RyaW5nOyAgICAg
-LyogbmFtZSBmb3IgdHlwZSBwYXJhbWV0ZXIgb2YgZ3B0IGNvbW1hbmQgKi8KPiBjb25zdCBjaGFy
-ICp0eXBlPwoKCnllcyBpdCBpcyBwb3NzaWJsZS4uLgoKSSBkb24ndCBjaGFuZ2UgZXhpc3Rpbmcg
-bmFtZSBqdXN0IHRvIGF2b2lkIHRvIGNoYW5nZSB0b28gbWFueSBwYXJ0IG9mIAp0aGUgZXhpc3Rp
-bmcgY29kZS4KCgo+Cj4+ICsJY29uc3QgY2hhciAqZGVzY3JpcHRpb247LyogZGVzY3JpcHRpb24g
-dXNlZCBmb3IgJXBVcyAqLwo+PiAgIAllZmlfZ3VpZF90IGd1aWQ7Cj4+ICAgfSBsaXN0X2d1aWRb
-XSA9IHsKPj4gICAjaWZuZGVmIFVTRV9IT1NUQ0MKPj4gLSNpZiBkZWZpbmVkKENPTkZJR19QQVJU
-SVRJT05fVFlQRV9HVUlEKSB8fCBkZWZpbmVkKENPTkZJR19DTURfRUZJREVCVUcpIHx8IFwKPj4g
-LQlkZWZpbmVkKENPTkZJR19FRkkpCj4+IC0JeyJFRkkgU3lzdGVtIFBhcnRpdGlvbiIsIFBBUlRJ
-VElPTl9TWVNURU1fR1VJRH0sCj4+IC0jZW5kaWYKPj4gLSNpZmRlZiBDT05GSUdfUEFSVElUSU9O
-X1RZUEVfR1VJRAo+PiAtCXsibWJyIiwJCUxFR0FDWV9NQlJfUEFSVElUSU9OX0dVSUR9LAo+PiAt
-CXsibXNmdCIsCVBBUlRJVElPTl9NU0ZUX1JFU0VSVkVEX0dVSUR9LAo+PiAtCXsiZGF0YSIsCVBB
-UlRJVElPTl9CQVNJQ19EQVRBX0dVSUR9LAo+PiAtCXsibGludXgiLAlQQVJUSVRJT05fTElOVVhf
-RklMRV9TWVNURU1fREFUQV9HVUlEfSwKPj4gLQl7InJhaWQiLAlQQVJUSVRJT05fTElOVVhfUkFJ
-RF9HVUlEfSwKPj4gLQl7InN3YXAiLAlQQVJUSVRJT05fTElOVVhfU1dBUF9HVUlEfSwKPj4gLQl7
-Imx2bSIsCQlQQVJUSVRJT05fTElOVVhfTFZNX0dVSUR9LAo+PiAtCXsidS1ib290LWVudiIsCVBB
-UlRJVElPTl9VX0JPT1RfRU5WSVJPTk1FTlR9LAo+PiAtCXsiY3Jvcy1rZXJuIiwJUEFSVElUSU9O
-X0NST1NfS0VSTkVMfSwKPj4gLQl7ImNyb3Mtcm9vdCIsCVBBUlRJVElPTl9DUk9TX1JPT1R9LAo+
-PiAtCXsiY3Jvcy1mdyIsCVBBUlRJVElPTl9DUk9TX0ZJUk1XQVJFfSwKPj4gLQl7ImNyb3MtcnNy
-diIsCVBBUlRJVElPTl9DUk9TX1JFU0VSVkVEfSwKPj4gLSNlbmRpZgo+PiArI2lmIENPTkZJR19J
-U19FTkFCTEVEKEVGSV9QQVJUSVRJT04pCj4+ICsJeyJtYnIiLAkJTlVMTCwJTEVHQUNZX01CUl9Q
-QVJUSVRJT05fR1VJRH0sCj4+ICsJeyJtc2Z0IiwJTlVMTCwJUEFSVElUSU9OX01TRlRfUkVTRVJW
-RURfR1VJRH0sCj4+ICsJeyJkYXRhIiwJTlVMTCwJUEFSVElUSU9OX0JBU0lDX0RBVEFfR1VJRH0s
-Cj4+ICsJeyJsaW51eCIsCU5VTEwsCVBBUlRJVElPTl9MSU5VWF9GSUxFX1NZU1RFTV9EQVRBX0dV
-SUR9LAo+PiArCXsicmFpZCIsCU5VTEwsCVBBUlRJVElPTl9MSU5VWF9SQUlEX0dVSUR9LAo+PiAr
-CXsic3dhcCIsCU5VTEwsCVBBUlRJVElPTl9MSU5VWF9TV0FQX0dVSUR9LAo+PiArCXsibHZtIiwJ
-CU5VTEwsCVBBUlRJVElPTl9MSU5VWF9MVk1fR1VJRH0sCj4+ICsJeyJ1LWJvb3QtZW52IiwJTlVM
-TCwJUEFSVElUSU9OX1VfQk9PVF9FTlZJUk9OTUVOVH0sCj4+ICsJeyJjcm9zLWtlcm4iLAlOVUxM
-LAlQQVJUSVRJT05fQ1JPU19LRVJORUx9LAo+PiArCXsiY3Jvcy1yb290IiwJTlVMTCwJUEFSVElU
-SU9OX0NST1NfUk9PVH0sCj4+ICsJeyJjcm9zLWZ3IiwJTlVMTCwJUEFSVElUSU9OX0NST1NfRklS
-TVdBUkV9LAo+PiArCXsiY3Jvcy1yc3J2IiwJTlVMTCwJUEFSVElUSU9OX0NST1NfUkVTRVJWRUR9
-LAo+PiAgICNpZiBkZWZpbmVkKENPTkZJR19DTURfRUZJREVCVUcpIHx8IGRlZmluZWQoQ09ORklH
-X0VGSSkKPj4gICAJewo+PiAtCQkiRGV2aWNlIFBhdGgiLAo+PiArCQkic3lzdGVtIiwgIkVGSSBT
-eXN0ZW0gUGFydGl0aW9uIiwKPj4gKwkJUEFSVElUSU9OX1NZU1RFTV9HVUlELAo+PiArCX0sCj4g
-VGhlIHBhdGNoIGFkZHMgcXVpdGUgbWFueSBOVUxMcyB0byB0aGUgbGlzdF9ndWlkW10gb25seSBm
-b3IgdGhpcyB2ZXJ5Cj4gc3BlY2lhbCBjYXNlLiBXZSB3b3VsZCBiZSBiZXR0ZXIgb2ZmIGhhcmRj
-b2RpbmcgdGhlICJzeXN0ZW0iIGNhc2UgaW50bwo+IHV1aWRfZ3VpZF9nZXRfYmluKCkgSSB0aGlu
-ay4KCkkgZG9uJ3QgbGlrZSB0aGUgaGFyZGNvZGVkIHNvbHV0aW9uIGluIGxpYgoKb3IgdGhlIG90
-aGVyIHBvc3NpYmxlIHdvcmthcm91bmQ6CgojaWYgZGVmaW5lZChDT05GSUdfUEFSVElUSU9OX1RZ
-UEVfR1VJRCkgfHwgZGVmaW5lZChDT05GSUdfQ01EX0VGSURFQlVHKSAKfHwgXAogwqDCoMKgwqBk
-ZWZpbmVkKENPTkZJR19FRkkpCiDCoMKgIMKgwqAgeyJFRkkgU3lzdGVtIFBhcnRpdGlvbiIsIFBB
-UlRJVElPTl9TWVNURU1fR1VJRH0sCivCoMKgwqAgeyJzeXN0ZW0iLMKgwqDCoCBQQVJUSVRJT05f
-U1lTVEVNX0dVSUR9LAojZW5kaWYKCgogwqDCoMKgIHdpdGggdGhpcyBzaW1wbGUgbW9kaWZpY2F0
-aW9uCiDCoMKgwqAgLSBmaXJzdCBvY2N1cnJlbmNlIGlzIHVzZWQgdG8gZGlzcGxheSBpbmZvcm1h
-dGlvbiAobG9uZyBuYW1lID0gCnV1aWRfZ3VpZF9nZXRfc3RyKQogwqDCoMKgIC0gc2Vjb25kIG9j
-Y3VycmVuY2UgcyB1c2VkIGZvciBncHQgY29tbWFuZCBwYXJhbWV0ZXIgJ3R5cGU9c3lzdGVtJ8Kg
-IAp3aXRoICggdXVpZF9zdHJfdG9fYmluID0+IHV1aWRfZ3VpZF9nZXRfYmluKQoKCkFuZCBpdCBp
-cyBub3QgT05MWSBmb3IgInN5c3RlbSIuLi4uwqAgYnV0IGFsc28gZm9yICJtYnIiLCAidS1ib290
-LWVudiIuLi4KCm15IHByb3Bvc2FsIGF2b2lkcyBjb25mdXNpb24gZm9yCgotIHNob3J0IG5hbWUg
-KHdpdGggbGltaXRlZCBzaXplIGFuZCB3aXRob3V0IFNQQUNFKSB3aXRoIGNhbiBiZSB1c2VkIGZv
-ciAKc2hvcnQgaW4gJ3R5cGU9JyBwYXJhbWV0ZXIKCiDCoCBhbHNvIHVzZWQgYXMgZGVzY3JpcHRp
-b24gd2hlbiBkZXNjcmlwdGlvbiBpcyBhYnNlbnQKCi0gbG9uZyBkZXNjcmlwdGlvbiBmb3IgcGFy
-dGl0aW9uIChvbmx5IHVzZWQgZm9yIGluZm9ybWF0aW9uKSwgd2l0aG91dCAKbGltaXRhdGlvbiAo
-c2l6ZSwgc3BhY2UpLi4uLi4KCgphbmQgcHJlcGFyZSBhZGRpdGlvbiBmb3IgbmV3IHNob3J0IG5h
-bWUgZm9yIG90aGVyIGtud29uIHR5cGUgVUlECgoKUFM6IG9ubHkgdGhlIGxhc3QgYWRkZWQgRUZJ
-IHBhcnRpdGlvbnMgZG9uJ3QgcmVzcGVjdGVkIHRoZSBmaXJzdCAKcmVzdHJpY3Rpb24uLi4KCiDC
-oMKgwqDCoCBidXQgc29tZW9uZSBjYW4gYmUgYWRkZWQgc2hvcnQgbmFtZSBmb3IgRUZJIHBhcnRp
-dG9ucywgd2l0aG91dCAKY2hhbmdlIGxvbmcgZGVzY3JpcHRpb24KCiDCoMKgwqDCoCBmb3IgZXhh
-bXBsZQoKKwkJImR0YiIsICJkZXZpY2UgdHJlZSIsCisJCSJkdGJvIiwgIkRldmljZS1UcmVlIEZp
-eHVwIiwKCgpXZSBtdXN0IGhhdmUgbGltaXRlZCBzaXplIGluIHNob3J0IG5hbWUgYmVjYXVzZSBp
-biBjbWQvZ3B0LmM6NTMzIHdlIGhhdmUKCgojaWZkZWYgQ09ORklHX1BBUlRJVElPTl9UWVBFX0dV
-SUQKIMKgwqAgwqDCoMKgwqAgLyogZ3VpZCAqLwogwqDCoCDCoMKgwqDCoCB2YWwgPSBleHRyYWN0
-X3ZhbCh0b2ssICJ0eXBlIik7CiDCoMKgIMKgwqDCoMKgIGlmICh2YWwpIHsKIMKgwqAgwqDCoMKg
-wqAgwqDCoMKgIC8qICd0eXBlJyBpcyBvcHRpb25hbCAqLwogwqDCoCDCoMKgwqDCoCDCoMKgwqAg
-aWYgKGV4dHJhY3RfZW52KHZhbCwgJnApKQogwqDCoCDCoMKgwqDCoCDCoMKgwqAgwqDCoMKgIHAg
-PSB2YWw7CiDCoMKgIMKgwqDCoMKgIMKgwqDCoCBpZiAoc3RybmxlbihwLCBtYXhfc3RyX3BhcnQp
-ID49IHNpemVvZihwYXJ0c1tpXS50eXBlX2d1aWQpKSB7CiDCoMKgIMKgwqDCoMKgIMKgwqDCoCDC
-oMKgwqAgcHJpbnRmKCJXcm9uZyB0eXBlIGd1aWQgZm9ybWF0IGZvciBwYXJ0aXRpb24gJWRcbiIs
-CiDCoMKgIMKgwqDCoMKgIMKgwqDCoCDCoMKgwqAgwqDCoMKgwqDCoMKgIGkpOwogwqDCoCDCoMKg
-wqDCoCDCoMKgwqAgwqDCoMKgIGVycm5vID0gLTQ7CiDCoMKgIMKgwqDCoMKgIMKgwqDCoCDCoMKg
-wqAgZ290byBlcnI7CiDCoMKgIMKgwqDCoMKgIMKgwqDCoCB9CiDCoMKgIMKgwqDCoMKgIMKgwqDC
-oCBzdHJuY3B5KChjaGFyICopcGFydHNbaV0udHlwZV9ndWlkLCBwLCBtYXhfc3RyX3BhcnQpOwog
-wqDCoCDCoMKgwqDCoCDCoMKgwqAgZnJlZSh2YWwpOwogwqDCoCDCoMKgwqDCoCB9CiNlbmRpZgoK
-ClNvIGZvciBTVFJJTkcgcGFyYW1ldGVyLCB1c2VkIGFzIHNob3J0IGN1dCkgaW4gJ3R5cGU9JyBp
-cyBhbHNvIGNvcGllZCBpbiAKcGFydHNbaV0udHlwZV9ndWlkCgo9PiBzaG9yIG5hbWUgc2l6ZSBp
-cyBsaW1pdGVkIGF0IDM2CgoKPgo+PiArCXsKPj4gKwkJTlVMTCwgIkRldmljZSBQYXRoIiwKPj4g
-ICAJCUVGSV9ERVZJQ0VfUEFUSF9QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0J
-CSJEZXZpY2UgUGF0aCBUbyBUZXh0IiwKPj4gKwkJTlVMTCwgIkRldmljZSBQYXRoIFRvIFRleHQi
-LAo+PiAgIAkJRUZJX0RFVklDRV9QQVRIX1RPX1RFWFRfUFJPVE9DT0xfR1VJRCwKPj4gICAJfSwK
-Pj4gICAJewo+PiAtCQkiRGV2aWNlIFBhdGggVXRpbGl0aWVzIiwKPj4gKwkJTlVMTCwgIkRldmlj
-ZSBQYXRoIFV0aWxpdGllcyIsCj4+ICAgCQlFRklfREVWSUNFX1BBVEhfVVRJTElUSUVTX1BST1RP
-Q09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlVuaWNvZGUgQ29sbGF0aW9uIDIiLAo+
-PiArCQlOVUxMLCAiVW5pY29kZSBDb2xsYXRpb24gMiIsCj4+ICAgCQlFRklfVU5JQ09ERV9DT0xM
-QVRJT05fUFJPVE9DT0wyX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkRyaXZlciBCaW5k
-aW5nIiwKPj4gKwkJTlVMTCwgIkRyaXZlciBCaW5kaW5nIiwKPj4gICAJCUVGSV9EUklWRVJfQklO
-RElOR19QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJTaW1wbGUgVGV4dCBJ
-bnB1dCIsCj4+ICsJCU5VTEwsICJTaW1wbGUgVGV4dCBJbnB1dCIsCj4+ICAgCQlFRklfU0lNUExF
-X1RFWFRfSU5QVVRfUFJPVE9DT0xfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQkiU2ltcGxl
-IFRleHQgSW5wdXQgRXgiLAo+PiArCQlOVUxMLCAiU2ltcGxlIFRleHQgSW5wdXQgRXgiLAo+PiAg
-IAkJRUZJX1NJTVBMRV9URVhUX0lOUFVUX0VYX1BST1RPQ09MX0dVSUQsCj4+ICAgCX0sCj4+ICAg
-CXsKPj4gLQkJIlNpbXBsZSBUZXh0IE91dHB1dCIsCj4+ICsJCU5VTEwsICJTaW1wbGUgVGV4dCBP
-dXRwdXQiLAo+PiAgIAkJRUZJX1NJTVBMRV9URVhUX09VVFBVVF9QUk9UT0NPTF9HVUlELAo+PiAg
-IAl9LAo+PiAgIAl7Cj4+IC0JCSJCbG9jayBJTyIsCj4+ICsJCU5VTEwsICJCbG9jayBJTyIsCj4+
-ICAgCQlFRklfQkxPQ0tfSU9fUFJPVE9DT0xfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQki
-RGlzayBJTyIsCj4+ICsJCU5VTEwsICJEaXNrIElPIiwKPj4gICAJCUVGSV9ESVNLX0lPX1BST1RP
-Q09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlNpbXBsZSBGaWxlIFN5c3RlbSIsCj4+
-ICsJCU5VTEwsICJTaW1wbGUgRmlsZSBTeXN0ZW0iLAo+PiAgIAkJRUZJX1NJTVBMRV9GSUxFX1NZ
-U1RFTV9QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJMb2FkZWQgSW1hZ2Ui
-LAo+PiArCQlOVUxMLCAiTG9hZGVkIEltYWdlIiwKPj4gICAJCUVGSV9MT0FERURfSU1BR0VfUFJP
-VE9DT0xfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQkiTG9hZGVkIEltYWdlIERldmljZSBQ
-YXRoIiwKPj4gKwkJTlVMTCwgIkxvYWRlZCBJbWFnZSBEZXZpY2UgUGF0aCIsCj4+ICAgCQlFRklf
-TE9BREVEX0lNQUdFX0RFVklDRV9QQVRIX1BST1RPQ09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsK
-Pj4gLQkJIkdyYXBoaWNzIE91dHB1dCIsCj4+ICsJCU5VTEwsICJHcmFwaGljcyBPdXRwdXQiLAo+
-PiAgIAkJRUZJX0dSQVBISUNTX09VVFBVVF9QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7
-Cj4+IC0JCSJISUkgU3RyaW5nIiwKPj4gKwkJTlVMTCwgIkhJSSBTdHJpbmciLAo+PiAgIAkJRUZJ
-X0hJSV9TVFJJTkdfUFJPVE9DT0xfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQkiSElJIERh
-dGFiYXNlIiwKPj4gKwkJTlVMTCwgIkhJSSBEYXRhYmFzZSIsCj4+ICAgCQlFRklfSElJX0RBVEFC
-QVNFX1BST1RPQ09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkhJSSBDb25maWcgQWNj
-ZXNzIiwKPj4gKwkJTlVMTCwgIkhJSSBDb25maWcgQWNjZXNzIiwKPj4gICAJCUVGSV9ISUlfQ09O
-RklHX0FDQ0VTU19QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJISUkgQ29u
-ZmlnIFJvdXRpbmciLAo+PiArCQlOVUxMLCAiSElJIENvbmZpZyBSb3V0aW5nIiwKPj4gICAJCUVG
-SV9ISUlfQ09ORklHX1JPVVRJTkdfUFJPVE9DT0xfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAt
-CQkiTG9hZCBGaWxlIiwKPj4gKwkJTlVMTCwgIkxvYWQgRmlsZSIsCj4+ICAgCQlFRklfTE9BRF9G
-SUxFX1BST1RPQ09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkxvYWQgRmlsZTIiLAo+
-PiArCQlOVUxMLCAiTG9hZCBGaWxlMiIsCj4+ICAgCQlFRklfTE9BRF9GSUxFMl9QUk9UT0NPTF9H
-VUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJSYW5kb20gTnVtYmVyIEdlbmVyYXRvciIsCj4+
-ICsJCU5VTEwsICJSYW5kb20gTnVtYmVyIEdlbmVyYXRvciIsCj4+ICAgCQlFRklfUk5HX1BST1RP
-Q09MX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlNpbXBsZSBOZXR3b3JrIiwKPj4gKwkJ
-TlVMTCwgIlNpbXBsZSBOZXR3b3JrIiwKPj4gICAJCUVGSV9TSU1QTEVfTkVUV09SS19QUk9UT0NP
-TF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJQWEUgQmFzZSBDb2RlIiwKPj4gKwkJTlVM
-TCwgIlBYRSBCYXNlIENvZGUiLAo+PiAgIAkJRUZJX1BYRV9CQVNFX0NPREVfUFJPVE9DT0xfR1VJ
-RCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQkiRGV2aWNlLVRyZWUgRml4dXAiLAo+PiArCQlOVUxM
-LCAiRGV2aWNlLVRyZWUgRml4dXAiLAo+PiAgIAkJRUZJX0RUX0ZJWFVQX1BST1RPQ09MX0dVSUQs
-Cj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlRDRzIiLAo+PiArCQlOVUxMLCAiVENHMiIsCj4+ICAg
-CQlFRklfVENHMl9QUk9UT0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJGaXJtd2Fy
-ZSBNYW5hZ2VtZW50IiwKPj4gKwkJTlVMTCwgIkZpcm13YXJlIE1hbmFnZW1lbnQiLAo+PiAgIAkJ
-RUZJX0ZJUk1XQVJFX01BTkFHRU1FTlRfUFJPVE9DT0xfR1VJRAo+PiAgIAl9LAo+PiAgICNpZiBJ
-U19FTkFCTEVEKENPTkZJR19FRklfSFRUUF9QUk9UT0NPTCkKPj4gICAJewo+PiAtCQkiSFRUUCIs
-Cj4+ICsJCU5VTEwsICJIVFRQIiwKPj4gICAJCUVGSV9IVFRQX1BST1RPQ09MX0dVSUQsCj4+ICAg
-CX0sCj4+ICAgCXsKPj4gLQkJIkhUVFAgU2VydmljZSBCaW5kaW5nIiwKPj4gKwkJTlVMTCwgIkhU
-VFAgU2VydmljZSBCaW5kaW5nIiwKPj4gICAJCUVGSV9IVFRQX1NFUlZJQ0VfQklORElOR19QUk9U
-T0NPTF9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJJUHY0IENvbmZpZzIiLAo+PiArCQlO
-VUxMLCAiSVB2NCBDb25maWcyIiwKPj4gICAJCUVGSV9JUDRfQ09ORklHMl9QUk9UT0NPTF9HVUlE
-LAo+PiAgIAl9LAo+PiAgICNlbmRpZgo+PiAgIAkvKiBDb25maWd1cmF0aW9uIHRhYmxlIEdVSURz
-ICovCj4+ICAgCXsKPj4gLQkJIkFDUEkgdGFibGUiLAo+PiArCQlOVUxMLCAiQUNQSSB0YWJsZSIs
-Cj4+ICAgCQlFRklfQUNQSV9UQUJMRV9HVUlELAo+PiAgIAl9LAo+PiAgIAl7Cj4+IC0JCSJFRkkg
-U3lzdGVtIFJlc291cmNlIFRhYmxlIiwKPj4gKwkJTlVMTCwgIkVGSSBTeXN0ZW0gUmVzb3VyY2Ug
-VGFibGUiLAo+PiAgIAkJRUZJX1NZU1RFTV9SRVNPVVJDRV9UQUJMRV9HVUlELAo+PiAgIAl9LAo+
-PiAgIAl7Cj4+IC0JCSJkZXZpY2UgdHJlZSIsCj4+ICsJCU5VTEwsICJkZXZpY2UgdHJlZSIsCj4+
-ICAgCQlFRklfRkRUX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlNNQklPUyB0YWJsZSIs
-Cj4+ICsJCU5VTEwsICJTTUJJT1MgdGFibGUiLAo+PiAgIAkJU01CSU9TX1RBQkxFX0dVSUQsCj4+
-ICAgCX0sCj4+ICAgCXsKPj4gLQkJIlNNQklPUzMgdGFibGUiLAo+PiArCQlOVUxMLCAiU01CSU9T
-MyB0YWJsZSIsCj4+ICAgCQlTTUJJT1MzX1RBQkxFX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4g
-LQkJIlJ1bnRpbWUgcHJvcGVydGllcyIsCj4+ICsJCU5VTEwsICJSdW50aW1lIHByb3BlcnRpZXMi
-LAo+PiAgIAkJRUZJX1JUX1BST1BFUlRJRVNfVEFCTEVfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+
-PiAtCQkiVENHMiBGaW5hbCBFdmVudHMgVGFibGUiLAo+PiArCQlOVUxMLCAiVENHMiBGaW5hbCBF
-dmVudHMgVGFibGUiLAo+PiAgIAkJRUZJX1RDRzJfRklOQUxfRVZFTlRTX1RBQkxFX0dVSUQsCj4+
-ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkVGSSBDb25mb3JtYW5jZSBQcm9maWxlcyBUYWJsZSIsCj4+
-ICsJCU5VTEwsICJFRkkgQ29uZm9ybWFuY2UgUHJvZmlsZXMgVGFibGUiLAo+PiAgIAkJRUZJX0NP
-TkZPUk1BTkNFX1BST0ZJTEVTX1RBQkxFX0dVSUQsCj4+ICAgCX0sCj4+ICAgI2lmZGVmIENPTkZJ
-R19FRklfUklTQ1ZfQk9PVF9QUk9UT0NPTAo+PiAgIAl7Cj4+IC0JCSJSSVNDLVYgQm9vdCIsCj4+
-ICsJCU5VTEwsICJSSVNDLVYgQm9vdCIsCj4+ICAgCQlSSVNDVl9FRklfQk9PVF9QUk9UT0NPTF9H
-VUlELAo+PiAgIAl9LAo+PiAgICNlbmRpZgo+PiBAQCAtMjQ3LDM1ICsyNDgsMzYgQEAgc3RhdGlj
-IGNvbnN0IHN0cnVjdCB7Cj4+ICAgI2lmZGVmIENPTkZJR19DTURfTlZFRElUX0VGSQo+PiAgIAkv
-KiBzaWduYXR1cmUgZGF0YWJhc2UgKi8KPj4gICAJewo+PiAtCQkiRUZJX0dMT0JBTF9WQVJJQUJM
-RV9HVUlEIiwKPj4gKwkJTlVMTCwgIkVGSV9HTE9CQUxfVkFSSUFCTEVfR1VJRCIsCj4+ICAgCQlF
-RklfR0xPQkFMX1ZBUklBQkxFX0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkVGSV9JTUFH
-RV9TRUNVUklUWV9EQVRBQkFTRV9HVUlEIiwKPj4gKwkJTlVMTCwgIkVGSV9JTUFHRV9TRUNVUklU
-WV9EQVRBQkFTRV9HVUlEIiwKPj4gICAJCUVGSV9JTUFHRV9TRUNVUklUWV9EQVRBQkFTRV9HVUlE
-LAo+PiAgIAl9LAo+PiAgIAkvKiBjZXJ0aWZpY2F0ZSB0eXBlcyAqLwo+PiAgIAl7Cj4+IC0JCSJF
-RklfQ0VSVF9TSEEyNTZfR1VJRCIsCj4+ICsJCU5VTEwsICJFRklfQ0VSVF9TSEEyNTZfR1VJRCIs
-Cj4+ICAgCQlFRklfQ0VSVF9TSEEyNTZfR1VJRCwKPj4gICAJfSwKPj4gICAJewo+PiAtCQkiRUZJ
-X0NFUlRfWDUwOV9HVUlEIiwKPj4gKwkJTlVMTCwgIkVGSV9DRVJUX1g1MDlfR1VJRCIsCj4+ICAg
-CQlFRklfQ0VSVF9YNTA5X0dVSUQsCj4+ICAgCX0sCj4+ICAgCXsKPj4gLQkJIkVGSV9DRVJUX1RZ
-UEVfUEtDUzdfR1VJRCIsCj4+ICsJCU5VTEwsICJFRklfQ0VSVF9UWVBFX1BLQ1M3X0dVSUQiLAo+
-PiAgIAkJRUZJX0NFUlRfVFlQRV9QS0NTN19HVUlELAo+PiAgIAl9LAo+PiAgICNlbmRpZgo+PiAg
-ICNpZiBkZWZpbmVkKENPTkZJR19DTURfRUZJREVCVUcpIHx8IGRlZmluZWQoQ09ORklHX0VGSSkK
-Pj4gLQl7ICJFRklfTFpNQV9DT01QUkVTU0VEIiwgRUZJX0xaTUFfQ09NUFJFU1NFRCB9LAo+PiAt
-CXsgIkVGSV9EWEVfU0VSVklDRVMiLCBFRklfRFhFX1NFUlZJQ0VTIH0sCj4+IC0JeyAiRUZJX0hP
-Ql9MSVNUIiwgRUZJX0hPQl9MSVNUIH0sCj4+IC0JeyAiRUZJX01FTU9SWV9UWVBFIiwgRUZJX01F
-TU9SWV9UWVBFIH0sCj4+IC0JeyAiRUZJX01FTV9TVEFUVVNfQ09ERV9SRUMiLCBFRklfTUVNX1NU
-QVRVU19DT0RFX1JFQyB9LAo+PiAtCXsgIkVGSV9HVUlEX0VGSV9BQ1BJMSIsIEVGSV9HVUlEX0VG
-SV9BQ1BJMSB9LAo+PiArCXsgTlVMTCwgIkVGSV9MWk1BX0NPTVBSRVNTRUQiLCBFRklfTFpNQV9D
-T01QUkVTU0VEIH0sCj4+ICsJeyBOVUxMLCAiRUZJX0RYRV9TRVJWSUNFUyIsIEVGSV9EWEVfU0VS
-VklDRVMgfSwKPj4gKwl7IE5VTEwsICJFRklfSE9CX0xJU1QiLCBFRklfSE9CX0xJU1QgfSwKPj4g
-Kwl7IE5VTEwsICJFRklfTUVNT1JZX1RZUEUiLCBFRklfTUVNT1JZX1RZUEUgfSwKPj4gKwl7IE5V
-TEwsICJFRklfTUVNX1NUQVRVU19DT0RFX1JFQyIsIEVGSV9NRU1fU1RBVFVTX0NPREVfUkVDIH0s
-Cj4+ICsJeyBOVUxMLCAiRUZJX0dVSURfRUZJX0FDUEkxIiwgRUZJX0dVSURfRUZJX0FDUEkxIH0s
-CgoKaGVyZSB3ZSBjYW4gdXNlIGV4aXN0aW5nIGFzIHNob3J0IG5hbWUvZGVzY3JpcHRpb24gYXMg
-c3RyaW5nIGhhdmUgbm8gCnNwYWNlIGFuZCBzaXplIDwgMzYuLi4uCgorCXsgIkVGSV9MWk1BX0NP
-TVBSRVNTRUQiLCBOVUxMLCBFRklfTFpNQV9DT01QUkVTU0VEIH0sCisJeyAiRUZJX0RYRV9TRVJW
-SUNFUyIsIE5VTEwsIEVGSV9EWEVfU0VSVklDRVMgfSwKKwl7ICJFRklfSE9CX0xJU1QiLCBOVUxM
-LCAgRUZJX0hPQl9MSVNUIH0sCisJeyAiRUZJX01FTU9SWV9UWVBFIiwgTlVMTCwgIEVGSV9NRU1P
-UllfVFlQRSB9LAorCXsgIkVGSV9NRU1fU1RBVFVTX0NPREVfUkVDIiwgTlVMTCwgRUZJX01FTV9T
-VEFUVVNfQ09ERV9SRUMgfSwKKwl7ICJFRklfR1VJRF9FRklfQUNQSTEiLCBOVUxMLCAgRUZJX0dV
-SURfRUZJX0FDUEkxIH0sCgoKCj4+ICAgI2VuZGlmCj4+ICsjZW5kaWYgLyogRUZJX1BBUlRJVElP
-TiAqLwo+PiAgICNlbmRpZiAvKiAhVVNFX0hPU1RDQyAqLwo+PiAgIH07Cj4+ICAgCj4+IEBAIC0y
-ODQsNyArMjg2LDggQEAgaW50IHV1aWRfZ3VpZF9nZXRfYmluKGNvbnN0IGNoYXIgKmd1aWRfc3Ry
-LCB1bnNpZ25lZCBjaGFyICpndWlkX2JpbikKPj4gICAJaW50IGk7Cj4+ICAgCj4+ICAgCWZvciAo
-aSA9IDA7IGkgPCBBUlJBWV9TSVpFKGxpc3RfZ3VpZCk7IGkrKykgewo+PiAtCQlpZiAoIXN0cmNt
-cChsaXN0X2d1aWRbaV0uc3RyaW5nLCBndWlkX3N0cikpIHsKPj4gKwkJaWYgKGxpc3RfZ3VpZFtp
-XS5zdHJpbmcgJiYKPj4gKwkJICAgICFzdHJjbXAobGlzdF9ndWlkW2ldLnN0cmluZywgZ3VpZF9z
-dHIpKSB7Cj4+ICAgCQkJbWVtY3B5KGd1aWRfYmluLCAmbGlzdF9ndWlkW2ldLmd1aWQsIDE2KTsK
-Pj4gICAJCQlyZXR1cm4gMDsKPj4gICAJCX0KPj4gQEAgLTI5OCw2ICszMDEsOCBAQCBjb25zdCBj
-aGFyICp1dWlkX2d1aWRfZ2V0X3N0cihjb25zdCB1bnNpZ25lZCBjaGFyICpndWlkX2JpbikKPiBT
-aG91bGQgdGhpcyBiZSBjYWxsZWQgdXVpZF9ndWlkX2dldF90eXBlKCkgaW5zdGVhZD8gJ3N0cicg
-b3IgJ3N0cmluZycgYXJlIGNvbmZ1c2luZy4KPiBXZSBzaG91bGQgaGF2ZSAndHlwZScgYW5kICdk
-ZWNyaXB0aW9uJyBJTU8uCj4KPj4gICAKPj4gICAJZm9yIChpID0gMDsgaSA8IEFSUkFZX1NJWkUo
-bGlzdF9ndWlkKTsgaSsrKSB7Cj4+ICAgCQlpZiAoIW1lbWNtcChsaXN0X2d1aWRbaV0uZ3VpZC5i
-LCBndWlkX2JpbiwgMTYpKSB7Cj4+ICsJCQlpZiAobGlzdF9ndWlkW2ldLmRlc2NyaXB0aW9uKQo+
-PiArCQkJCXJldHVybiBsaXN0X2d1aWRbaV0uZGVzY3JpcHRpb247Cj4+ICAgCQkJcmV0dXJuIGxp
-c3RfZ3VpZFtpXS5zdHJpbmc7Cj4gLmRlc2NyaXB0aW9uIGlzIG5ldmVyIChvciBzaG91bGQgbmV2
-ZXIgYmUpIE5VTEwuIE5vIG5lZWQgdG8gcmV0dXJuIC5zdHJpbmcgYXMgYSBmYWxsYmFjay4KCgpp
-dCBpcyB0aGUgY2FzZSBmb3IgQUxMIHRoZSBrbm93biB0eXBlIHdpdGggb25seSBzaG9ydCBkZXNj
-cmlwdGlvbiAuLi4uCgpub3QgbmVlZCB0byBoYXZlIGxvbmcgZGVzY3JpcHRpb24gaWYgc2hvcnQg
-c3RyaW5nIGlzIGVub3VnaC4uLi4KCisJeyJtYnIiLAkJTlVMTCwJTEVHQUNZX01CUl9QQVJUSVRJ
-T05fR1VJRH0sCisJeyJtc2Z0IiwJTlVMTCwJUEFSVElUSU9OX01TRlRfUkVTRVJWRURfR1VJRH0s
-CisJeyJkYXRhIiwJTlVMTCwJUEFSVElUSU9OX0JBU0lDX0RBVEFfR1VJRH0sCisJeyJsaW51eCIs
-CU5VTEwsCVBBUlRJVElPTl9MSU5VWF9GSUxFX1NZU1RFTV9EQVRBX0dVSUR9LAorCXsicmFpZCIs
-CU5VTEwsCVBBUlRJVElPTl9MSU5VWF9SQUlEX0dVSUR9LAorCXsic3dhcCIsCU5VTEwsCVBBUlRJ
-VElPTl9MSU5VWF9TV0FQX0dVSUR9LAorCXsibHZtIiwJCU5VTEwsCVBBUlRJVElPTl9MSU5VWF9M
-Vk1fR1VJRH0sCisJeyJ1LWJvb3QtZW52IiwJTlVMTCwJUEFSVElUSU9OX1VfQk9PVF9FTlZJUk9O
-TUVOVH0sCisJeyJjcm9zLWtlcm4iLAlOVUxMLAlQQVJUSVRJT05fQ1JPU19LRVJORUx9LAorCXsi
-Y3Jvcy1yb290IiwJTlVMTCwJUEFSVElUSU9OX0NST1NfUk9PVH0sCisJeyJjcm9zLWZ3IiwJTlVM
-TCwJUEFSVElUSU9OX0NST1NfRklSTVdBUkV9LAorCXsiY3Jvcy1yc3J2IiwJTlVMTCwJUEFSVElU
-SU9OX0NST1NfUkVTRVJWRUR9LAoKCj4KPj4gICAJCX0KPj4gICAJfQo+PiBAQCAtMzEyLDEwICsz
-MTcsOSBAQCBpbnQgdXVpZF9zdHJfdG9fYmluKGNvbnN0IGNoYXIgKnV1aWRfc3RyLCB1bnNpZ25l
-ZCBjaGFyICp1dWlkX2JpbiwKPj4gICAJdWludDY0X3QgdG1wNjQ7Cj4+ICAgCj4+ICAgCWlmICgh
-dXVpZF9zdHJfdmFsaWQodXVpZF9zdHIpKSB7Cj4+IC0jaWZkZWYgQ09ORklHX1BBUlRJVElPTl9U
-WVBFX0dVSUQKPj4gLQkJaWYgKCF1dWlkX2d1aWRfZ2V0X2Jpbih1dWlkX3N0ciwgdXVpZF9iaW4p
-KQo+PiArCQlpZiAoSVNfRU5BQkxFRChDT05GSUdfUEFSVElUSU9OX1RZUEVfR1VJRCkgJiYKPj4g
-KwkJICAgICF1dWlkX2d1aWRfZ2V0X2Jpbih1dWlkX3N0ciwgdXVpZF9iaW4pKQo+PiAgIAkJCXJl
-dHVybiAwOwo+PiAtI2VuZGlmCj4+ICAgCQlyZXR1cm4gLUVJTlZBTDsKPj4gICAJfQo+PiAgIAo+
-IFRoYW5rcywKCgpSZWdhcmRzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3QtbWQtbWFp
-bG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBseS5jb20v
-bWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+From: Simeon Marijon <simeon.marijon@foss.st.com>
+
+TAMP backup registers will be exposed as nvmem cells.
+
+Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
+exposed as nvmem cells under the nvram node in device tree
+
+Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+---
+
+Changes in v4:
+   - Replace stm32mp25 by stm32mp2
+   - Constify stm32_tamp_bkpreg_access field of stm32_tamp_nvram_priv struct
+   - Add get_access() callback in stm32_tamp_nvram_drvdata struct
+
+Changes in v3:
+   - Fix typo in SPDX-License-Identifier
+
+Changes in v2:
+   - Rename nvram.c to tamp_nvram.c
+
+ arch/arm/mach-stm32mp/Kconfig      |   9 +
+ arch/arm/mach-stm32mp/Makefile     |   2 +
+ arch/arm/mach-stm32mp/tamp_nvram.c | 667 +++++++++++++++++++++++++++++
+ 3 files changed, 678 insertions(+)
+ create mode 100644 arch/arm/mach-stm32mp/tamp_nvram.c
+
+diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+index 58250901101..09b7d5123ae 100644
+--- a/arch/arm/mach-stm32mp/Kconfig
++++ b/arch/arm/mach-stm32mp/Kconfig
+@@ -139,6 +139,15 @@ config STM32_ECDSA_VERIFY
+ 	  ROM API provided on STM32MP.
+ 	  The ROM API is only available during SPL for now.
+ 
++config STM32MP_TAMP_NVMEM
++	bool "STM32 TAMP backup registers via NVMEM API"
++	select NVMEM
++	default y
++	help
++	  Say y to enable the uclass driver for TAMP Backup registers using the
++	  NVMEM API. It allows to access to boot mode or others shared information
++	  between software components/execution levels.
++
+ config CMD_STM32KEY
+ 	bool "command stm32key to fuse public key hash"
+ 	depends on CMDLINE
+diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+index 103e3410ad9..ecd49fe668d 100644
+--- a/arch/arm/mach-stm32mp/Makefile
++++ b/arch/arm/mach-stm32mp/Makefile
+@@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
+ obj-$(CONFIG_STM32MP25X) += stm32mp2/
+ 
+ obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
++obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
++
+ obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
+ ifndef CONFIG_XPL_BUILD
+ obj-y += cmd_stm32prog/
+diff --git a/arch/arm/mach-stm32mp/tamp_nvram.c b/arch/arm/mach-stm32mp/tamp_nvram.c
+new file mode 100644
+index 00000000000..39cc2c111d8
+--- /dev/null
++++ b/arch/arm/mach-stm32mp/tamp_nvram.c
+@@ -0,0 +1,667 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
++ */
++#define LOG_CATEGORY UCLASS_MISC
++
++#include <clk.h>
++#include <dm.h>
++#include <log.h>
++#include <misc.h>
++#include <regmap.h>
++#include <tee.h>
++#include <asm/io.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <dm/devres.h>
++
++#define RIF_CID1			0x1
++#define CURRENT_CID			RIF_CID1
++#define NB_ZONES_STM32MP1		3
++#define NB_ZONES_STM32MP2		7
++
++#define _TAMP_SECCFGR			0x20U
++#define _TAMP_BKPRIFR(x)		(0x70U + 0x4U * ((x) - 1))
++#define _TAMP_RXCIDCFGR(x)		(0x80U + 0x4U * ((x)))
++
++#define BKPREG_PROTECTION_ZONE_1	0
++#define BKPREG_PROTECTION_ZONE_2	1
++#define BKPREG_PROTECTION_ZONE_3	2
++
++#define BKPREG_PROTECTION_ZONE_1_RIF1	0
++#define BKPREG_PROTECTION_ZONE_1_RIF2	1
++#define BKPREG_PROTECTION_ZONE_2_RIF1	2
++#define BKPREG_PROTECTION_ZONE_2_RIF2	3
++#define BKPREG_PROTECTION_ZONE_3_RIF1	4
++#define BKPREG_PROTECTION_ZONE_3_RIF0	5
++#define BKPREG_PROTECTION_ZONE_3_RIF2	6
++#define NB_COMPARTMENT_STM32MP2		3
++
++enum stm32_tamp_bkpreg_access {
++	BKP_READ_WRITE,
++	BKP_READ,
++	BKP_NO
++};
++
++struct stm32_tamp_nvram_plat {
++	void __iomem *base;
++	void __iomem *parent_base;
++	fdt_size_t size;
++	fdt_size_t parent_size;
++	unsigned int nb_total_regs;
++};
++
++struct stm32_tamp_nvram_priv {
++	int *idx_bkpreg_zones_end;
++	struct regmap *config_regmap;
++	struct regmap *bkpregs_regmap;
++	const enum stm32_tamp_bkpreg_access *bkpreg_access;
++};
++
++struct stm32_tamp_nvram_drvdata {
++	const unsigned int nb_zones;
++	const struct reg_field *reg_fields;
++	const enum stm32_tamp_bkpreg_access *(*get_access)(struct udevice *dev);
++};
++
++static const struct reg_field stm32mp1_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP1 - 1] = {
++	[BKPREG_PROTECTION_ZONE_1] = REG_FIELD(_TAMP_SECCFGR, 0, 7),
++	[BKPREG_PROTECTION_ZONE_2] = REG_FIELD(_TAMP_SECCFGR, 16, 23),
++};
++
++static const struct reg_field stm32mp2_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP2 - 1] = {
++	[BKPREG_PROTECTION_ZONE_1_RIF1] = REG_FIELD(_TAMP_BKPRIFR(1), 0,  7),
++	[BKPREG_PROTECTION_ZONE_1_RIF2] = REG_FIELD(_TAMP_SECCFGR,    0,  7),
++	[BKPREG_PROTECTION_ZONE_2_RIF1] = REG_FIELD(_TAMP_BKPRIFR(2), 0,  7),
++	[BKPREG_PROTECTION_ZONE_2_RIF2] = REG_FIELD(_TAMP_SECCFGR,   16, 23),
++	[BKPREG_PROTECTION_ZONE_3_RIF1] = REG_FIELD(_TAMP_BKPRIFR(3), 0,  7),
++	[BKPREG_PROTECTION_ZONE_3_RIF0] = REG_FIELD(_TAMP_BKPRIFR(3), 16, 23),
++};
++
++static const struct reg_field stm32mp2_tamp_nvram_rxcidcfg_cfen_fields[NB_COMPARTMENT_STM32MP2] = {
++	REG_FIELD(_TAMP_RXCIDCFGR(0), 0, 0),
++	REG_FIELD(_TAMP_RXCIDCFGR(1), 0, 0),
++	REG_FIELD(_TAMP_RXCIDCFGR(2), 0, 0),
++};
++
++static const struct reg_field stm32mp2_tamp_nvram_rxcidcfg_fields[NB_COMPARTMENT_STM32MP2] = {
++	REG_FIELD(_TAMP_RXCIDCFGR(0), 4, 6),
++	REG_FIELD(_TAMP_RXCIDCFGR(1), 4, 6),
++	REG_FIELD(_TAMP_RXCIDCFGR(2), 4, 6),
++};
++
++static const enum stm32_tamp_bkpreg_access stm32mp1_tamp_bkpreg_access[NB_ZONES_STM32MP1] = {
++	[BKPREG_PROTECTION_ZONE_1] = BKP_NO,
++	[BKPREG_PROTECTION_ZONE_2] = BKP_READ,
++	[BKPREG_PROTECTION_ZONE_3] = BKP_READ_WRITE,
++};
++
++static const enum stm32_tamp_bkpreg_access *stm32mp1_tamp_get_access_rights(struct udevice *dev)
++{
++	return stm32mp1_tamp_bkpreg_access;
++}
++
++static int stm32mp2_tamp_is_compartment_isolation_enabled(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	int nb_compartment_enabled = 0;
++	u32 cfen;
++	struct regmap_field *cfen_field;
++
++	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
++		cfen_field = devm_regmap_field_alloc(dev,
++						     priv->config_regmap,
++						     stm32mp2_tamp_nvram_rxcidcfg_cfen_fields[i]);
++		if (IS_ERR_OR_NULL(cfen_field)) {
++			dev_err(dev, "Can't allocate field for reading configuration\n");
++			return -ENOMEM;
++		}
++		if (regmap_field_read(cfen_field, &cfen) != 0) {
++			dev_err(dev, "Can't read field for registers zones\n");
++			devm_regmap_field_free(dev, cfen_field);
++			return -EINVAL;
++		}
++		nb_compartment_enabled += cfen;
++		devm_regmap_field_free(dev, cfen_field);
++	}
++
++	if (nb_compartment_enabled == 0)
++		return 0;
++	else if (nb_compartment_enabled == NB_COMPARTMENT_STM32MP2)
++		return 1;
++	else
++		return -EINVAL;
++}
++
++static bool *stm32mp2_tamp_get_compartment_owner(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	struct regmap_field *cid_field;
++	u32 cid_per_zone;
++	int isolation_enabled;
++	bool *compartment_owner;
++
++	isolation_enabled = stm32mp2_tamp_is_compartment_isolation_enabled(dev);
++	if (isolation_enabled < 0)
++		return NULL;
++
++	compartment_owner = devm_kcalloc(dev,
++					 NB_COMPARTMENT_STM32MP2,
++					 sizeof(*compartment_owner),
++					 GFP_KERNEL);
++	if (!compartment_owner)
++		return ERR_PTR(-ENOMEM);
++
++	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
++		if (isolation_enabled) {
++			cid_field = devm_regmap_field_alloc(dev,
++							    priv->config_regmap,
++							    stm32mp2_tamp_nvram_rxcidcfg_fields[i]
++							    );
++
++			if (regmap_field_read(cid_field, &cid_per_zone) != 0) {
++				dev_err(dev, "Can't read field for registers zones\n");
++				devm_regmap_field_free(dev, cid_field);
++				devm_kfree(dev, compartment_owner);
++				return ERR_PTR(-EINVAL);
++			}
++			if (cid_per_zone == CURRENT_CID)
++				compartment_owner[i] = true;
++			else
++				compartment_owner[i] = false;
++
++			devm_regmap_field_free(dev, cid_field);
++		} else {
++			compartment_owner[i] = true;
++		}
++	}
++
++	return compartment_owner;
++}
++
++static const enum stm32_tamp_bkpreg_access *stm32mp2_tamp_get_access_rights(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_drvdata *drvdata =
++		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
++	unsigned int nb_zones = drvdata->nb_zones;
++	bool *compartment_owner;
++	enum stm32_tamp_bkpreg_access *bkpreg_access;
++
++	compartment_owner = stm32mp2_tamp_get_compartment_owner(dev);
++	if (IS_ERR(compartment_owner))
++		return ERR_PTR(-ENODEV);
++
++	bkpreg_access = devm_kcalloc(dev,
++				     NB_ZONES_STM32MP2,
++				     sizeof(*bkpreg_access),
++				     GFP_KERNEL);
++
++	for (int protection_zone_idx = 0; protection_zone_idx < nb_zones;
++	     protection_zone_idx++) {
++		switch (protection_zone_idx) {
++		case BKPREG_PROTECTION_ZONE_1_RIF1:
++			bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_1_RIF2:
++			bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_2_RIF1:
++			if (compartment_owner[1] || compartment_owner[2])
++				bkpreg_access[protection_zone_idx] = BKP_READ;
++			else
++				bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_2_RIF2:
++			if (compartment_owner[1] || compartment_owner[2])
++				bkpreg_access[protection_zone_idx] = BKP_READ;
++			else
++				bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_3_RIF1:
++			if (compartment_owner[1])
++				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
++			else if (compartment_owner[0] || compartment_owner[2])
++				bkpreg_access[protection_zone_idx] = BKP_READ;
++			else
++				bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_3_RIF0:
++			if (compartment_owner[0])
++				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
++			else if (compartment_owner[1] || compartment_owner[2])
++				bkpreg_access[protection_zone_idx] = BKP_READ;
++			else
++				bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		case BKPREG_PROTECTION_ZONE_3_RIF2:
++			if (compartment_owner[2])
++				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
++			else if (compartment_owner[0] || compartment_owner[1])
++				bkpreg_access[protection_zone_idx] = BKP_READ;
++			else
++				bkpreg_access[protection_zone_idx] = BKP_NO;
++			break;
++		default:
++			devm_kfree(dev, bkpreg_access);
++			return ERR_PTR(-ENODEV);
++		}
++	}
++
++	return bkpreg_access;
++}
++
++static const struct stm32_tamp_nvram_drvdata stm32mp1_tamp_nvram = {
++	.nb_zones = NB_ZONES_STM32MP1,
++	.reg_fields = stm32mp1_tamp_nvram_zone_cfg_fields,
++	.get_access = stm32mp1_tamp_get_access_rights,
++};
++
++static const struct stm32_tamp_nvram_drvdata stm32mp2_tamp_nvram = {
++	.nb_zones = NB_ZONES_STM32MP2,
++	.reg_fields = stm32mp2_tamp_nvram_zone_cfg_fields,
++	.get_access = stm32mp2_tamp_get_access_rights,
++};
++
++static int stm32_tamp_nvram_bkpreg_get_zone_idx(struct udevice *dev, int reg)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	struct stm32_tamp_nvram_drvdata *drvdata =
++		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
++	int *idx_bkpreg_zones_end = priv->idx_bkpreg_zones_end;
++	int nb_zones = drvdata->nb_zones;
++	int protection_zone_idx;
++
++	if (reg < 0)
++		return -1; // negative reg is the boundary of an empty zone
++
++	for (protection_zone_idx = 0; protection_zone_idx < nb_zones; protection_zone_idx++) {
++		if (reg <= idx_bkpreg_zones_end[protection_zone_idx])
++			break;
++	}
++
++	if (protection_zone_idx >= nb_zones)
++		return -1; // the reg is not a part of any zone
++
++	return protection_zone_idx;
++}
++
++static bool stm32_tamp_nvram_rights(struct udevice *dev, int reg, bool read_only)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	int protection_zone_idx = stm32_tamp_nvram_bkpreg_get_zone_idx(dev, reg);
++
++	if (protection_zone_idx < 0)
++		return false;
++
++	switch (priv->bkpreg_access[protection_zone_idx]) {
++	case BKP_READ_WRITE:
++		return true;
++	case BKP_READ:
++		return read_only;
++	case BKP_NO:
++		return false;
++	default:
++		dev_err(dev, "Can't get access rights for the zone\n");
++		return false;
++	}
++
++	return false;
++}
++
++static int stm32_tamp_nvram_write_byte(struct udevice *dev, u32 offset, u8 byte)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
++	int byte_in_word = offset - offset_aligned;
++	u32 read_value, to_be_writen_value;
++	u32 reg_idx = offset_aligned / sizeof(u32);
++
++	if (!stm32_tamp_nvram_rights(dev, reg_idx, false))
++		return -EIO;
++
++	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
++	to_be_writen_value = read_value & ~(0xFFUL << byte_in_word * 8);
++	to_be_writen_value |=  (u32)byte << (byte_in_word * 8);
++
++	return regmap_write(priv->bkpregs_regmap, offset_aligned, to_be_writen_value);
++}
++
++static int stm32_tamp_nvram_read_byte(struct udevice *dev, unsigned int offset, u8 *byte)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
++	int byte_in_word = offset - offset_aligned;
++	u32 read_value;
++	u32 reg_idx = offset_aligned / sizeof(u32);
++
++	if (!stm32_tamp_nvram_rights(dev, reg_idx, true))
++		return -EIO;
++
++	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
++	*byte = (read_value >> (byte_in_word * 8)) & 0xFF;
++
++	return 0;
++}
++
++static int stm32_tamp_nvram_read(struct udevice *dev, int offset, void *buf, int size)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	u8 byte;
++	u8 *buf_u8 = buf;
++	u32 temp_u32;
++	int i, ret;
++	int total = offset + size;
++	u32 reg_idx;
++
++	i = offset;
++	while (i < total)  {
++		reg_idx = i / sizeof(u32);
++		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
++			if (!stm32_tamp_nvram_rights(dev, reg_idx, true)) {
++				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
++					reg_idx);
++				temp_u32 = 0;
++			} else {
++				regmap_read(priv->bkpregs_regmap, i, &temp_u32);
++			}
++			memcpy(buf_u8, &temp_u32, sizeof(u32));
++			buf_u8 += sizeof(u32);
++			i += sizeof(u32);
++		} else {
++			ret = stm32_tamp_nvram_read_byte(dev, i, &byte);
++			if (ret != 0) {
++				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
++					reg_idx);
++				byte = 0;
++			}
++			*buf_u8 = byte;
++			i++;
++			buf_u8++;
++		}
++	}
++
++	return size;
++}
++
++static int stm32_tamp_nvram_write(struct udevice *dev, int offset, const void *buf, int size)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	u8 *buf_u8 = (u8 *)buf;
++	u32 temp_u32;
++	size_t total = offset + size;
++	int i, ret;
++	u32 reg_idx;
++
++	i = offset;
++	while (i < total)  {
++		reg_idx = i / sizeof(u32);
++		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
++			if (stm32_tamp_nvram_rights(dev, reg_idx, false)) {
++				memcpy(&temp_u32, buf_u8, sizeof(u32));
++				regmap_write(priv->bkpregs_regmap, i, temp_u32);
++			} else {
++				dev_dbg(dev, "Backup register %u is not allowed to be written",
++					reg_idx);
++			}
++			buf_u8 += sizeof(u32);
++			i += sizeof(u32);
++		} else {
++			ret = stm32_tamp_nvram_write_byte(dev, i, *buf_u8);
++			if (ret != 0)
++				dev_dbg(dev, "Backup register %u is not allowed to be written",
++					reg_idx);
++			i++;
++			buf_u8++;
++		}
++	}
++
++	return size;
++}
++
++static const struct misc_ops stm32_tamp_nvram_ops = {
++	.read = stm32_tamp_nvram_read,
++	.write = stm32_tamp_nvram_write,
++};
++
++static u32 *stm32_tamp_nvram_get_backup_zones(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	const struct stm32_tamp_nvram_drvdata *drvdata =
++		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
++	int nb_zones = drvdata->nb_zones;
++	int zone_idx;
++	int *idx_bkpreg_zones_end;
++	struct regmap *tamp_regmap = priv->config_regmap;
++	u32 offset_field;
++
++	idx_bkpreg_zones_end = devm_kcalloc(dev,
++					    sizeof(*idx_bkpreg_zones_end),
++					    nb_zones,
++					    GFP_KERNEL);
++	if (IS_ERR_OR_NULL(idx_bkpreg_zones_end)) {
++		dev_err(dev, "Can't allocate registers zones\n");
++		return ERR_PTR(-ENOMEM);
++	}
++
++	//Get the n-1 frontiers of zone within the tamp configuration registers
++	for (zone_idx = 0; zone_idx < nb_zones - 1; zone_idx++) {
++		const struct reg_field reg_field = drvdata->reg_fields[zone_idx];
++		struct regmap_field *field = devm_regmap_field_alloc(dev,
++								     tamp_regmap,
++								     reg_field);
++
++		if (IS_ERR_OR_NULL(field)) {
++			dev_err(dev, "Can't allocate registers zones\n");
++			devm_kfree(dev, idx_bkpreg_zones_end);
++			return ERR_PTR(-ENOMEM);
++		}
++		if (regmap_field_read(field, &offset_field) != 0) {
++			dev_err(dev, "Can't read field for registers zones\n");
++			devm_kfree(dev, idx_bkpreg_zones_end);
++			return ERR_PTR(-EIO);
++		}
++
++		idx_bkpreg_zones_end[zone_idx] = offset_field - 1;
++	}
++
++	//The last zone end is defined by the number of registers in TAMP
++	idx_bkpreg_zones_end[zone_idx] = plat->nb_total_regs - 1;
++
++	return idx_bkpreg_zones_end;
++}
++
++static void stm32_tamp_nvram_print_zones(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	int *zones_end = priv->idx_bkpreg_zones_end;
++
++	if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
++		dev_dbg(dev,
++			"\n"
++			"Zone 1-RIF1 %3d - %3d %c%c\n"
++			"Zone 1-RIF2 %3d - %3d %c%c\n"
++			"Zone 2-RIF1 %3d - %3d %c%c\n"
++			"Zone 2-RIF2 %3d - %3d %c%c\n"
++			"Zone 3-RIF1 %3d - %3d %c%c\n"
++			"Zone 3-RIF0 %3d - %3d %c%c\n"
++			"Zone 3-RIF2 %3d - %3d %c%c\n",
++			0, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_1_RIF1] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
++						false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
++						true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
++						false) ?
++				'W' :
++				'-');
++	} else if (device_is_compatible(dev, "st,stm32mp15-tamp-nvram")) {
++		dev_dbg(dev,
++			"\n"
++			"Zone 1 %3d - %3d %c%c\n"
++			"Zone 2 %3d - %3d %c%c\n"
++			"Zone 3 %3d - %3d %c%c\n",
++			0, zones_end[BKPREG_PROTECTION_ZONE_1],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_1] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_2],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], false) ?
++				'W' :
++				'-',
++			zones_end[BKPREG_PROTECTION_ZONE_2] + 1,
++			zones_end[BKPREG_PROTECTION_ZONE_3],
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], true) ?
++				'R' :
++				'-',
++			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], false) ?
++				'W' :
++				'-');
++	}
++}
++
++static int stm32_tamp_nvram_of_to_plat(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
++	fdt_addr_t addr = dev_read_addr_size_index(dev, 0, &plat->size);
++	fdt_addr_t parent_addr = dev_read_addr_size_index(dev->parent, 0, &plat->parent_size);
++
++	if (addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++	plat->base = (void __iomem *)addr;
++
++	if (parent_addr == FDT_ADDR_T_NONE)
++		return -EINVAL;
++	plat->parent_base = (void __iomem *)parent_addr;
++
++	if (plat->size == FDT_ADDR_T_NONE)
++		return -EOPNOTSUPP;
++
++	plat->nb_total_regs =  plat->size / sizeof(uint32_t);
++
++	return 0;
++}
++
++static int stm32_tamp_nvram_probe(struct udevice *dev)
++{
++	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
++	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
++	struct regmap_config config_regmap;
++	struct regmap_config bckreg_regmap;
++	const struct stm32_tamp_nvram_drvdata *drvdata =
++		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
++
++	config_regmap.r_start = (ulong)(plat->parent_base);
++	config_regmap.r_size = plat->parent_size;
++	config_regmap.reg_offset_shift = 0;
++	config_regmap.width = REGMAP_SIZE_32;
++	priv->config_regmap = devm_regmap_init(dev, NULL, NULL, &config_regmap);
++
++	bckreg_regmap.r_start = (ulong)(plat->base);
++	bckreg_regmap.r_size = plat->size;
++	bckreg_regmap.reg_offset_shift = 0;
++	bckreg_regmap.width = REGMAP_SIZE_32;
++	priv->bkpregs_regmap = devm_regmap_init(dev, NULL, NULL, &bckreg_regmap);
++
++	priv->idx_bkpreg_zones_end = stm32_tamp_nvram_get_backup_zones(dev);
++	if (IS_ERR_OR_NULL(priv->idx_bkpreg_zones_end)) {
++		dev_err(dev, "Failed to get the backup zone from tamp regs\n\n");
++		return -ENODEV;
++	}
++
++	priv->bkpreg_access = drvdata->get_access(dev);
++	stm32_tamp_nvram_print_zones(dev);
++
++	return 0;
++}
++
++static int stm32_tamp_nvram_remove(struct udevice *dev)
++{
++	return 0;
++}
++
++static const struct udevice_id stm32_tamp_nvram_ids[] = {
++	{ .compatible = "st,stm32mp15-tamp-nvram", .data = (ulong)&stm32mp1_tamp_nvram },
++	{ .compatible = "st,stm32mp25-tamp-nvram", .data = (ulong)&stm32mp2_tamp_nvram },
++	{},
++};
++
++U_BOOT_DRIVER(stm32_tamp_nvram) = {
++	.name = "stm32_tamp_nvram",
++	.id = UCLASS_MISC,
++	.of_match = stm32_tamp_nvram_ids,
++	.priv_auto = sizeof(struct stm32_tamp_nvram_priv),
++	.plat_auto = sizeof(struct stm32_tamp_nvram_plat),
++	.ops = &stm32_tamp_nvram_ops,
++	.of_to_plat = of_match_ptr(stm32_tamp_nvram_of_to_plat),
++	.probe = stm32_tamp_nvram_probe,
++	.remove = stm32_tamp_nvram_remove,
++};
++
+-- 
+2.25.1
+
+base-commit: 4c26de2eea6bcf5f27b13da0372d27d767cd38e3
+branch: upstream_nvram_driver_v4
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

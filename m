@@ -2,68 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84D2FABF676
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 15:43:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4972AABF696
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 15:50:36 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 4ACC0C7A826;
-	Wed, 21 May 2025 13:43:54 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id EC5F9C78F6B;
+	Wed, 21 May 2025 13:50:35 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6E3D3C7A825
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id CA3C0C7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 May 2025 13:43:53 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LD9Qgh019398;
- Wed, 21 May 2025 15:43:47 +0200
+ Wed, 21 May 2025 13:50:34 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LB4KqQ002761;
+ Wed, 21 May 2025 15:50:12 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- Q0wOfnsDt30vmK1YnodQHfQb9Kp9ehPLaoSBeZtwD7E=; b=cnOV52UFb+2j1mgw
- gted2uDMtZ46zuUF/RNQAcjDqSJRdDztaj7nvhDSfSE/hzS+1/w4ic/8V4S75DdQ
- ACtXol7xI7TjWB9PlmcSRw7FkRgAbRhI/aWoss/U0x1lZdAgxDmKNbEMyxCKx6eS
- aGvIv8JBJMX2cnPBYHJJrhSIzWD0e9+JZ8X2+U8IhsAmMzlBICDkwhC3ML9U2JOI
- r8IGjufuj3nbqc/FaWHlTN/3zW033rE5/VhnapWTrd90Lq7RZMRzQa83yTNSr1rx
- ext257x/eSOQh0uFEXBseS9xoSkzcqzR9R2LR6GnzmQq0bYDym3MnfC+tFAusJTi
- gAhwxA==
+ pvYCaqUnNUj5EQ06Tf9lhmadRYx+hCAAKc3VNig9U1k=; b=Bhc9MAIwWk85qV/f
+ Ih7ZlQbtpSjgApDOV3EcT22oWwXocXeAaHLQzsB7U6sjTiySEu//UPlvDkU3EegO
+ KTaE8ytNoWnuEFjrXCPIAU2SQCAp/m26Y2JeNO9dC6PSp4XM/GeEdsd+ElC+/ow4
+ HepIHkRSwnJL7MCQq7NeRdyyzJJEMdcjJERG5uh2mw9sx68wx18YHC9WUP7v7bJx
+ U+Ai5xxUEXUzNVVZ4jS/8C/gdgaI7Ph1jPm848QXfypC3Kul0z+iswRE/3C+FgfW
+ K9wNuQW8dk3iuydv+vQR00RfmGlbkDTMKvdfMb44AT675dH2TLIv0lfik/+D8CBG
+ 48Wnng==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwface7b-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwf44fxh-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 May 2025 15:43:47 +0200 (MEST)
+ Wed, 21 May 2025 15:50:12 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A7E6940053;
- Wed, 21 May 2025 15:42:43 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 19EA54004C;
+ Wed, 21 May 2025 15:49:19 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A7BB2B2CB7D;
- Wed, 21 May 2025 15:41:41 +0200 (CEST)
-Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0A2AAB97312;
+ Wed, 21 May 2025 15:47:42 +0200 (CEST)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 15:41:41 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-Date: Wed, 21 May 2025 15:41:17 +0200
-Message-ID: <20250521134117.2828335-14-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
-References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
+ 2025 15:47:41 +0200
+Message-ID: <131f183e-8cf2-4669-91d2-d191156b8153@foss.st.com>
+Date: Wed, 21 May 2025 15:47:40 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+References: <20250512161146.146658-1-marek.vasut@mailbox.org>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250512161146.146658-1-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-21_04,2025-05-20_03,2025-03-28_01
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: [Uboot-stm32] [PATCH v1 13/13] configs: stm32mp25: increase
-	SYS_MALLOC_F_LEN to 0x60000
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Drop unnecessary space
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,40 +76,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-Due activation of SCMI, we need to increase SYS_MALLOC_F_LEN value
-to avoid following message:
 
-U-Boot 2025.04-01224-g75b77a2a6d31-dirty (Apr 25 2025 - 11:23:30 +0200)
 
-alloc space exhausted ptr 400040 limit 400000
-alloc space exhausted ptr 400020 limit 400000
-alloc space exhausted ptr 400060 limit 400000
-alloc space exhausted ptr 400060 limit 400000
+On 5/12/25 18:11, Marek Vasut wrote:
+> Drop a space after tab, no functional change.
+> 
+> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> index 4f1d783649b..caeeeca863c 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> @@ -67,7 +67,7 @@
+>  #define BOOTROM_PARAM_ADDR	0x2FFC0078
+>  #define BOOTROM_MODE_MASK	GENMASK(15, 0)
+>  #define BOOTROM_MODE_SHIFT	0
+> -#define BOOTROM_INSTANCE_MASK	 GENMASK(31, 16)
+> +#define BOOTROM_INSTANCE_MASK	GENMASK(31, 16)
+>  #define BOOTROM_INSTANCE_SHIFT	16
+>  
+>  /* Device Part Number (RPN) = OTP_DATA1 lower 8 bits */
 
-Set SYS_MALLOC_F_LEN to 0x60000 to fix this issue.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
----
-
- configs/stm32mp25_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
-index 317a6d5ecd6..acb48f4ec72 100644
---- a/configs/stm32mp25_defconfig
-+++ b/configs/stm32mp25_defconfig
-@@ -1,6 +1,6 @@
- CONFIG_ARM=y
- CONFIG_ARCH_STM32MP=y
--CONFIG_SYS_MALLOC_F_LEN=0x400000
-+CONFIG_SYS_MALLOC_F_LEN=0x600000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x90000000
- CONFIG_ENV_OFFSET=0x900000
- CONFIG_ENV_SECT_SIZE=0x40000
--- 
-2.25.1
-
+Thanks
+Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

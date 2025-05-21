@@ -2,66 +2,64 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1EAB6ABF6FF
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 16:03:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0445FABF928
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 17:24:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C02FCC78F6B;
-	Wed, 21 May 2025 14:03:17 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8EC0EC7A82D;
+	Wed, 21 May 2025 15:24:51 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2CF48C7128A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 60ED7C78F97
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 May 2025 14:03:16 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LCS3te008942;
- Wed, 21 May 2025 16:02:58 +0200
+ Wed, 21 May 2025 12:29:08 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LC0f19017098;
+ Wed, 21 May 2025 14:29:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- mfd+MpjUvGHJ94zIKp0E5d39bJM/EHxJVM9UUql5Px0=; b=hmNA/kUhBR+bsAUg
- 6LxnLRmVS9FvPsgaJuVQkUwCVcXsLYQPLac0sFEfRUQgc8TqAG013QCObzLeON2p
- yExyr1y54SI4KoBKHPHgwSemf0KGm9qa49EC73JSdrV7JRq/YRSWH+204xmU7vUf
- 91SgSftZGqwgiu3rZBn3n3RHr/d4RPsE1wu5e2ijMCqDqKw/l4yWtn0HN2ykdldC
- 45MNZ1xyU+5qItSnsWpmTP3ninxkzjUzByaj79XhhzcPrMVR35IfVIXQzBAi4Tjg
- gO4x4BZaZe5CN+TShdgUX9zz+sSPaoznbyys1EV4Qw7zIkgzkbETm4SAbQmapIHw
- lDCYUQ==
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=selector1; bh=W7/zcALgui6R9BdBkaPxe3
+ ZPckl7A/FufUkxvtoZ+Sw=; b=f0925c1YaKQG5n5Kkvn9cgFsOh09PutlWsFS78
+ o3CTHmSFn5qXD2KpZ5QWocn4/IuIyDC55qrLcEy5pkj886uMdww9BVv4AmZwn4IL
+ 0wXP3emT0EUnjmEfcnVgVwR+jYZmCP40jn0fCYyUZwWLrV+8RZr5vt2U3IGZUM9p
+ M/ZEve/2E5ZZsjCk7qAn9dOHrlEdeIgmA16JNZ1DRpCE/cSxjXHUngtcw7sPk5Ef
+ 7XYdFL7KfaqI8sZArQVX9Om82kSw8jZQw/ZOvMHVjvfYtK+HnTy4LmCa/RgC3N3k
+ DdxY+TMtGeO/D1FJBoqzim73mKOTQz8yOGVX/DqnEcKIgmmQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfachfp-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfc3wjr-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 May 2025 16:02:58 +0200 (MEST)
+ Wed, 21 May 2025 14:29:03 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5D41140047;
- Wed, 21 May 2025 16:01:44 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 11FAB40049;
+ Wed, 21 May 2025 14:28:23 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E005AB74038;
- Wed, 21 May 2025 15:59:26 +0200 (CEST)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 6C2EFBDE792;
+ Wed, 21 May 2025 14:28:09 +0200 (CEST)
+Received: from localhost (10.252.16.84) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 15:59:26 +0200
-Message-ID: <9a39e3d0-315b-43ee-b288-92860e8c4762@foss.st.com>
-Date: Wed, 21 May 2025 15:59:25 +0200
+ 2025 14:28:08 +0200
+From: Antonio Borneo <antonio.borneo@foss.st.com>
+To: <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Date: Wed, 21 May 2025 14:27:51 +0200
+Message-ID: <20250521122755.265760-1-antonio.borneo@foss.st.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20250512164456.147764-1-marek.vasut@mailbox.org>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250512164456.147764-1-marek.vasut@mailbox.org>
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+X-Originating-IP: [10.252.16.84]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-21_04,2025-05-20_03,2025-03-28_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Fix DBGMCU macro on
-	STM32MP13xx
+X-Mailman-Approved-At: Wed, 21 May 2025 15:24:50 +0000
+Cc: uboot-stm32@st-md-mailman.stormreply.com,
+ Antonio Borneo <antonio.borneo@foss.st.com>,
+ =?UTF-8?q?Cl=C3=A9ment=20Le=20Goffic?= <clement.legoffic@foss.st.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>
+Subject: [Uboot-stm32] [PATCH 0/4] watchdog for STM32MP family
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,51 +71,43 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-
-
-On 5/12/25 18:44, Marek Vasut wrote:
-> The DBGMCU block is available at address 0x50081000 both on STM32MP13xx
-> and on STM32MP15xx . There is no reason to limit the DBGMCU macro being
-> set only on STM32MP15xx , remove the ifdeffery.
-> 
-> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/include/mach/stm32.h | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index 47b459b75d1..dfba57e7dc4 100644
-> --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
-> +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -78,9 +78,7 @@ enum forced_boot_mode {
->  #define STM32_RCC_BASE			0x50000000
->  #define STM32_PWR_BASE			0x50001000
->  #define STM32_SYSCFG_BASE		0x50020000
-> -#ifdef CONFIG_STM32MP15X
->  #define STM32_DBGMCU_BASE		0x50081000
-> -#endif
->  #define STM32_FMC2_BASE			0x58002000
->  #define STM32_IWDG2_BASE		0x5A002000
->  #define STM32_DDRCTRL_BASE		0x5A003000
-
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
-_______________________________________________
-Uboot-stm32 mailing list
-Uboot-stm32@st-md-mailman.stormreply.com
-https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+VGhpcyBzZXJpZXMgYWRkcmVzc2VzIHRoZSB0d28gd2F0Y2hkb2cgZHJpdmVycyB1c2VkIG9uIFNU
+TTMyTVB4eApmYW1pbHkgcGxhdGZvcm1zLgoKT24gdGhlIGdlbmVyaWMgd2F0Y2hkb2cgZnJhbWV3
+b3JrLCBpdCBhZGRzIGEgbmV3IG1ldGhvZAp3ZHRfc2V0X2ZvcmNlX2F1dG9zdGFydCgpIHVzZWQg
+YnkgdGhlIHdhdGNoZG9nIGRyaXZlcnMgdG8gZm9yY2UKdGhlIGF1dG9zdGFydCBzdGF0dXMgb2Yg
+dGhlIHdhdGNoZG9nLgpUaGlzIGlzIHVzZWQgd2hlbiB0aGUgZHJpdmVyIGRldGVjdHMgdGhhdCB0
+aGUgd2F0Y2hkb2cgaGFzIGFscmVhZHkKYmVlbiBzdGFydGVkIGJ5IGEgcHJldmlvdXMgYm9vdCBz
+dGFnZSAoZS5nLiBIVywgYm9vdHJvbSwgU2VjdXJlCk9TLCAuLi4pIGFuZCBuZWVkcyB0byBiZSBr
+aWNrZWQgYnkgVS1Cb290IHJlZ2FyZGxlc3Mgb2YgdGhlCmF1dG9zdGFydCBmbGFnIHNldCBpbiBE
+VCBvciBpbiBjb25maWcuCgpPbiB0aGUgZHJpdmVyIGFybV9zbWNfd2R0LCBpdCBhZGRzIHRoZSBB
+UEkgdG8gcXVlcnkgdGhlIFNlY3VyZSBPUwphYm91dCB0aGUgc3RhdGUgb2YgdGhlIHdhdGNoZG9n
+LCBhbmQgaWYgYXQgcHJvYmUgdGhlIHdhdGNoZG9nIGlzCmFscmVhZHkgc3RhcnRlZCBpdCBpbnZv
+a2VzIHdkdF9zZXRfZm9yY2VfYXV0b3N0YXJ0KCkuCgpPbiB0aGUgZHJpdmVyIHN0bTMybXBfd2R0
+LCBpdCBhZGRzIHRoZSBjb2RlIHRvIGRldGVjdCB0aGUgc3RhdGUgb2YKdGhlIHdhdGNoZG9nLCBh
+bmQgaWYgYXQgcHJvYmUgdGhlIHdhdGNoZG9nIGlzIGFscmVhZHkgc3RhcnRlZCBpdAppbnZva2Vz
+IHdkdF9zZXRfZm9yY2VfYXV0b3N0YXJ0KCkuCgpBdCBsYXN0LCBzaW5jZSBhbGwgdGhlIHdhdGNo
+ZG9nIGRyaXZlcnMgdXNlZCBvbiBTVE0zMk1QeHggZmFtaWx5CnBsYXRmb3JtcyBjYW4gcXVlcnkg
+dGhlIHN0YXR1cyBvZiB0aGUgd2F0Y2hkb2cgYW5kIHVzZSBpdApjb25zZXF1ZW50bHksIHNldCBX
+QVRDSERPR19BVVRPU1RBUlQgZGVmYXVsdCB0byAnbicgb24gc3VjaApwbGF0Zm9ybXMuIFRoaXMg
+aW1wbGllcyB0aGF0IFUtQm9vdCwgYnkgZGVmYXVsdCwgd2lsbCByZXNwZWN0IHRoZQpzdGF0dXMg
+b2YgdGhlIHdhdGNoZG9nIHNldCBieSBhIHByZXZpb3VzIGJvb3Qgc3RhZ2UuCgoKQW50b25pbyBC
+b3JuZW8gKDIpOgogIHdhdGNoZG9nOiB3ZHQtdWNsYXNzLmM6IGFkZCB3ZHRfc2V0X2ZvcmNlX2F1
+dG9zdGFydCgpIGhlbHBlcgogIHdhdGNoZG9nOiBhcm1fc21jX3dkdDogZ2V0IHdkdCBzdGF0dXMg
+dGhyb3VnaCBTTUNXRF9HRVRfVElNRUxFRlQKCkNsw6ltZW50IExlIEdvZmZpYyAoMSk6CiAgd2F0
+Y2hkb2c6IHN0bTMybXA6IGNoZWNrIHRoZSB3YXRjaGRvZyBzdGF0dXMKClBhdHJpY2UgQ2hvdGFy
+ZCAoMSk6CiAgd2F0Y2hkb2c6IGRvbid0IGF1dG9zdGFydCB3YXRjaGRvZyBvbiBTVE0zMk1QIGJv
+YXJkcwoKIGRyaXZlcnMvd2F0Y2hkb2cvS2NvbmZpZyAgICAgICB8ICAxICsKIGRyaXZlcnMvd2F0
+Y2hkb2cvYXJtX3NtY193ZHQuYyB8IDE3ICsrKysrKysrKysrKysrKysrCiBkcml2ZXJzL3dhdGNo
+ZG9nL3N0bTMybXBfd2R0LmMgfCAzMyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysK
+IGRyaXZlcnMvd2F0Y2hkb2cvd2R0LXVjbGFzcy5jICB8ICA5ICsrKysrKysrKwogaW5jbHVkZS93
+ZHQuaCAgICAgICAgICAgICAgICAgIHwgIDkgKysrKysrKysrCiA1IGZpbGVzIGNoYW5nZWQsIDY5
+IGluc2VydGlvbnMoKykKCgpiYXNlLWNvbW1pdDogMGJjOWIyODhmYWIzZDlkMTQzMDY2ZGI3MTI5
+OWE0YzA0N2JlMzhiOQotLSAKMi4zNC4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QKVWJvb3Qtc3RtMzJAc3Qt
+bWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1haWxtYW4uc3Rvcm1yZXBs
+eS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=

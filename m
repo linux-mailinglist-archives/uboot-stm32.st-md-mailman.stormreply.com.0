@@ -2,54 +2,54 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 756A9ABF6A6
-	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 15:54:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EAB6ABF6FF
+	for <lists+uboot-stm32@lfdr.de>; Wed, 21 May 2025 16:03:18 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 35F79C78F6B;
-	Wed, 21 May 2025 13:54:17 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C02FCC78F6B;
+	Wed, 21 May 2025 14:03:17 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C39D0C7128A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2CF48C7128A
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 21 May 2025 13:54:15 +0000 (UTC)
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LCYTHH025517;
- Wed, 21 May 2025 15:53:55 +0200
+ Wed, 21 May 2025 14:03:16 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54LCS3te008942;
+ Wed, 21 May 2025 16:02:58 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- UQtPC2XLQLdfYg0LfpCKUv9f06QITH3EvI4e5v4K6Zg=; b=gj3UXeUzvtw9Xiri
- le2SgK65G35c3A7rhVZWgvk+Ex+sL8Y0P8qARnDaP2jUY+UAtzp5Dpxqbu0jdLOx
- oWskeLJOa179aKtETDJA/C1dy4v9spMnEJL/XrpZwK+uoA20SobFjfkgt1RLoCkw
- 9OOPFUGd4QgTAtEfvs09zSkFVPhRKhzDSKK5geSsl5rBMWdKb0StCtl9fgO7SAcf
- qbKbHCEfLiFMU0tZSUo6qEy0lhVWivijJjuEEJtURPsVNnNxD7+l3njwesv5YOVw
- kpkGoQmXGHvQPAQD/YFECBfQEUvGAUvFvPj+nxXwGBs3e/Kn1YFYrMmtf+LrtCq+
- f0cQ3w==
+ mfd+MpjUvGHJ94zIKp0E5d39bJM/EHxJVM9UUql5Px0=; b=hmNA/kUhBR+bsAUg
+ 6LxnLRmVS9FvPsgaJuVQkUwCVcXsLYQPLac0sFEfRUQgc8TqAG013QCObzLeON2p
+ yExyr1y54SI4KoBKHPHgwSemf0KGm9qa49EC73JSdrV7JRq/YRSWH+204xmU7vUf
+ 91SgSftZGqwgiu3rZBn3n3RHr/d4RPsE1wu5e2ijMCqDqKw/l4yWtn0HN2ykdldC
+ 45MNZ1xyU+5qItSnsWpmTP3ninxkzjUzByaj79XhhzcPrMVR35IfVIXQzBAi4Tjg
+ gO4x4BZaZe5CN+TShdgUX9zz+sSPaoznbyys1EV4Qw7zIkgzkbETm4SAbQmapIHw
+ lDCYUQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwff4fnt-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46rwfachfp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 21 May 2025 15:53:55 +0200 (MEST)
+ Wed, 21 May 2025 16:02:58 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 85ED140066;
- Wed, 21 May 2025 15:52:12 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5D41140047;
+ Wed, 21 May 2025 16:01:44 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 47177B5B64F;
- Wed, 21 May 2025 15:50:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E005AB74038;
+ Wed, 21 May 2025 15:59:26 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 21 May
- 2025 15:50:53 +0200
-Message-ID: <3eca3ca5-60ef-4780-8dce-de77f6f10e02@foss.st.com>
-Date: Wed, 21 May 2025 15:50:53 +0200
+ 2025 15:59:26 +0200
+Message-ID: <9a39e3d0-315b-43ee-b288-92860e8c4762@foss.st.com>
+Date: Wed, 21 May 2025 15:59:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20250512164418.147714-1-marek.vasut@mailbox.org>
+References: <20250512164456.147764-1-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250512164418.147714-1-marek.vasut@mailbox.org>
+In-Reply-To: <20250512164456.147764-1-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -60,7 +60,8 @@ Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Fix SYSRAM size on STM32MP13xx
+Subject: Re: [Uboot-stm32] [PATCH] ARM: stm32: Fix DBGMCU macro on
+	STM32MP13xx
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,10 +81,9 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 5/12/25 18:44, Marek Vasut wrote:
-> The STM32MP13xx has only 128 kiB of SYSRAM starting at address 0x2ffe0000 .
-> The STM32MP15xx has 256 kiB of SYSRAM starting at address 0x2ffc0000 . Make
-> sure both SoCs configure ARMV7_SECURE_BASE correctly . Define the SYSRAM
-> base in stm32.h to be consistent with the STM32MP15xx macro.
+> The DBGMCU block is available at address 0x50081000 both on STM32MP13xx
+> and on STM32MP15xx . There is no reason to limit the DBGMCU macro being
+> set only on STM32MP15xx , remove the ifdeffery.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 > ---
@@ -95,40 +95,23 @@ On 5/12/25 18:44, Marek Vasut wrote:
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->  arch/arm/cpu/armv7/Kconfig                 | 3 ++-
->  arch/arm/mach-stm32mp/include/mach/stm32.h | 5 +++++
->  2 files changed, 7 insertions(+), 1 deletion(-)
+>  arch/arm/mach-stm32mp/include/mach/stm32.h | 2 --
+>  1 file changed, 2 deletions(-)
 > 
-> diff --git a/arch/arm/cpu/armv7/Kconfig b/arch/arm/cpu/armv7/Kconfig
-> index 4eb34b7b449..ab86d642eee 100644
-> --- a/arch/arm/cpu/armv7/Kconfig
-> +++ b/arch/arm/cpu/armv7/Kconfig
-> @@ -36,7 +36,8 @@ config ARMV7_SECURE_BASE
->  	hex "Base address for secure mode memory"
->  	depends on HAS_ARMV7_SECURE_BASE
->  	default 0xfff00000 if TEGRA124
-> -	default 0x2ffc0000 if ARCH_STM32MP
-> +	default 0x2ffe0000 if STM32MP13X
-> +	default 0x2ffc0000 if STM32MP15X
->  	default 0x2f000000 if ARCH_MX7ULP
->  	default 0x10010000 if ARCH_LS1021A
->  	default 0x00900000 if ARCH_MX7
 > diff --git a/arch/arm/mach-stm32mp/include/mach/stm32.h b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> index a9ac49bc5d2..47b459b75d1 100644
+> index 47b459b75d1..dfba57e7dc4 100644
 > --- a/arch/arm/mach-stm32mp/include/mach/stm32.h
 > +++ b/arch/arm/mach-stm32mp/include/mach/stm32.h
-> @@ -110,6 +110,11 @@ enum forced_boot_mode {
->  #define STM32_SDMMC2_BASE		0x58007000
->  #define STM32_SDMMC3_BASE		0x48004000
->  
-> +#ifdef CONFIG_STM32MP13X
-> +#define STM32_SYSRAM_BASE		0x2FFE0000
-> +#define STM32_SYSRAM_SIZE		SZ_128K
-> +#endif
-> +
->  #ifdef CONFIG_STM32MP15X
->  #define STM32_SYSRAM_BASE		0x2FFC0000
->  #define STM32_SYSRAM_SIZE		SZ_256K
+> @@ -78,9 +78,7 @@ enum forced_boot_mode {
+>  #define STM32_RCC_BASE			0x50000000
+>  #define STM32_PWR_BASE			0x50001000
+>  #define STM32_SYSCFG_BASE		0x50020000
+> -#ifdef CONFIG_STM32MP15X
+>  #define STM32_DBGMCU_BASE		0x50081000
+> -#endif
+>  #define STM32_FMC2_BASE			0x58002000
+>  #define STM32_IWDG2_BASE		0x5A002000
+>  #define STM32_DDRCTRL_BASE		0x5A003000
 
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 

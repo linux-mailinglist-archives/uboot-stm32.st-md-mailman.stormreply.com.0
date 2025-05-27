@@ -2,49 +2,52 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D235AC4FD0
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 15:33:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 990F8AC4FC0
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 15:29:40 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 191A8C36B1E;
-	Tue, 27 May 2025 13:33:20 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5CF75C36B1E;
+	Tue, 27 May 2025 13:29:40 +0000 (UTC)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 527A7C36B19
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AEDE7C36B19
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 May 2025 13:33:18 +0000 (UTC)
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RA6083027752;
- Tue, 27 May 2025 15:32:08 +0200
+ Tue, 27 May 2025 13:29:39 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RCungM001150;
+ Tue, 27 May 2025 15:29:34 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=KFifMdoiqpiJKtLluqrgKy
- ySZaW65kj6hjFXQckiV0s=; b=1XkPLW/6CobgWhpAndcD6JMQC0lmGeLmxeT/jf
- gbgJPK2qvDjwTQejBdcF2Bl/YiHTjK1TBquC7L0T3i0MUnWLh+FQbN+df0sLbpjZ
- hF7XDA9TLZMX9Q3hdgl26r9xoi82jNvqlZ9s9LDpw0z6WtyL3gFbGn+R/0kzRd5h
- ofb7N+AwQykXbWVUKZmOAZnzeUDWJuIJofblfM5AYDUuhs7/MtEEmKM2tue+0RmW
- oP2NaTpwdyM9wwKWtMMRq1qQeTzpMRp2okp0/OVnxq4iIUa4F+OB7w6KkF/yI8B7
- 8ofzVOlUyDMdXwI0d85knrbJSWlt0fzhHoYL7t+OEAGzRNHg==
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ xmfwORAjZqMGe2QqIep4GzCe9bdXMj8pmLCQnYLw8HY=; b=o/HJWu+lAoHlsHhg
+ 9nmwPIty2ZEJgZSXaxQDYYP3TOGR8aXipKEdU49g2dNfVLw0cTCAz0oDW1IgJeDU
+ E/aDDFC+NnjyV6gWpKcH43n7olQZmKE9rGKX+GI1j6aOuNXD7Fi+6XtLcKbjxRPt
+ aVrj8zE3PoQ6LM+WKtFYw11rhtJWS/eFLx1yAyMs+X0TX3omD0xfSphWB4jpe2+j
+ DFzmGYsninyfKrS7/N2cOJadUR6G1P3Vuqp2p6id/BXDjNya229OnZ51V6O9DELn
+ 1COK47Yh4rQE1J4TqUBALv45E5ohcqDKgbhxdFeQ/HjQPM5Tj53KolB0v2N3v5NA
+ WfDjUQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4j5jf-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk4hx7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:32:08 +0200 (MEST)
+ Tue, 27 May 2025 15:29:33 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D65C140049;
- Tue, 27 May 2025 15:29:20 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A7E0A4004A;
+ Tue, 27 May 2025 15:28:35 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E606CAE6C44;
- Tue, 27 May 2025 15:27:57 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DEB46AEB165;
+ Tue, 27 May 2025 15:27:58 +0200 (CEST)
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:27:57 +0200
+ 2025 15:27:58 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
-Date: Tue, 27 May 2025 15:27:42 +0200
-Message-ID: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+Date: Tue, 27 May 2025 15:27:43 +0200
+Message-ID: <20250527132755.2169508-2-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
+References: <20250527132755.2169508-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
@@ -52,35 +55,14 @@ X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-27_06,2025-05-27_01,2025-03-28_01
-Cc: Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Kongyang Liu <seashell11234455@gmail.com>, Alice Guo <alice.guo@nxp.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Kever Yang <kever.yang@rock-chips.com>,
- Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Casey Connolly <casey.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Joseph Chen <chenjh@rock-chips.com>,
- Ye Li <ye.li@nxp.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Huan Zhou <me@per1cycle.org>, Elaine Zhang <zhangqing@rock-chips.com>,
- Sumit Garg <sumit.garg@kernel.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Greg Malysa <malysagreg@gmail.com>,
- Alexander Dahl <ada@thorsis.com>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [Uboot-stm32] [PATCH v2 00/13] stm32mp25: Add clock and reset
-	drivers support
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Alice Guo <alice.guo@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Ye Li <ye.li@nxp.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Subject: [Uboot-stm32] [PATCH v2 01/13] clk: scmi: add compatibility with
+	clock protocol 2.0
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,97 +79,135 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
+From: Valentin Caron <valentin.caron@foss.st.com>
 
-Add clock and reset drivers support for STM32MP2 platforms:
-  - add SCMI clock protocol v2.0 support
-  - introduce CONFIG_CLK_AUTO_ID flag to support unique clk ID
-    when several clock providers are in use.
-  - add STM32MP2 clock  driver
-  - add STM32MP2 reset driver
-  - fix clock counter
+Since clock protocol 2.0, SCMI specification add an option field
+"clock_enable_delay" to CLOCK_ATTRIBUTES command.
 
-Tested with following components:
-  _ TF-A lts-v2.12.2.
-  _ SCP-firmware main branch (commit c914b3f0c756 "fwk: Refactor fwk_module_get_sub_element_count").
-  _ OP-TEE 4.6.0 + pull request https://github.com/OP-TEE/optee_os/pull/7324
+scmi_read_resp_from_smt() will return an error ("Buffer too small") as
+the message length coming from the SCMI server is not the same as expected.
 
+So implement a condition to SCMI clock protocol version to change the
+length of the expected message.
 
-Changes in v2:
-    - Rename GATE_USB2 into GATE_USBH
-    - Rename RCC_USB2CFGR to RCC_USBHCFGR
+Signed-off-by: Valentin Caron <valentin.caron@foss.st.com>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Lukasz Majewski <lukma@denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>
+---
 
-Gabriel Fernandez (4):
-  clk: stm32mp25: Add clock driver support
-  clk: stm32mp25: implement clock check security function
-  clk: stm32: fix clock counter
-  reset: stm32mp25: add stm32mp25 reset driver
+(no changes since v1)
 
-Patrice Chotard (2):
-  ARM: dts: stm32: switch from fixed to scmi clocks for stm32mp257f-ev1
-  configs: stm32mp25: increase SYS_MALLOC_F_LEN to 0x60000
+ drivers/clk/clk_scmi.c   | 54 +++++++++++++++++++++++++++++-----------
+ include/scmi_protocols.h | 15 +++++++++++
+ 2 files changed, 54 insertions(+), 15 deletions(-)
 
-Patrick Delaunay (6):
-  clk: add CONFIG_CLK_AUTO_ID
-  clk: sandbox: update driver for CONFIG_CLK_AUTO_ID support
-  sandbox: test: update for CONFIG_CLK_AUTO_ID support
-  clk: fixed_rate: configure clock ID with CONFIG_CLK_AUTO_ID
-  clk: scmi: manage properly the clk identifier with CCF
-  phy: stm32-usbphyc: manage properly the clk identifier with CCF
-
-Valentin Caron (1):
-  clk: scmi: add compatibility with clock protocol 2.0
-
- MAINTAINERS                              |   3 +-
- arch/arm/dts/stm32mp25-u-boot.dtsi       |   8 +
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  74 ---
- configs/stm32mp25_defconfig              |   2 +-
- drivers/clk/Kconfig                      |  11 +
- drivers/clk/clk-uclass.c                 |   9 +-
- drivers/clk/clk_fixed_rate.c             |   1 +
- drivers/clk/clk_sandbox.c                |  30 +-
- drivers/clk/clk_sandbox_ccf.c            |  48 +-
- drivers/clk/clk_scmi.c                   |  62 +-
- drivers/clk/stm32/Kconfig                |   9 +
- drivers/clk/stm32/Makefile               |   1 +
- drivers/clk/stm32/clk-stm32-core.c       |  73 ++-
- drivers/clk/stm32/clk-stm32-core.h       |   2 +-
- drivers/clk/stm32/clk-stm32mp13.c        |   2 +-
- drivers/clk/stm32/clk-stm32mp25.c        | 782 +++++++++++++++++++++++
- drivers/misc/stm32_rcc.c                 |  66 +-
- drivers/phy/phy-stm32-usbphyc.c          |  19 +
- drivers/reset/Kconfig                    |   9 +-
- drivers/reset/Makefile                   |   4 +-
- drivers/reset/stm32-reset.c              |  97 ---
- drivers/reset/stm32/Kconfig              |  23 +
- drivers/reset/stm32/Makefile             |   9 +
- drivers/reset/stm32/stm32-reset-core.c   |  92 +++
- drivers/reset/stm32/stm32-reset-core.h   |  31 +
- drivers/reset/stm32/stm32-reset-mp1.c    |  55 ++
- drivers/reset/stm32/stm32-reset-mp25.c   | 159 +++++
- drivers/reset/stm32/stm32-reset.c        |  43 ++
- include/clk.h                            |  24 +
- include/linux/clk-provider.h             |   9 +-
- include/scmi_protocols.h                 |  15 +
- include/stm32_rcc.h                      |   7 +-
- include/stm32mp25_rcc.h                  | 712 +++++++++++++++++++++
- test/dm/clk_ccf.c                        |  30 +-
- 34 files changed, 2227 insertions(+), 294 deletions(-)
- create mode 100644 drivers/clk/stm32/clk-stm32mp25.c
- delete mode 100644 drivers/reset/stm32-reset.c
- create mode 100644 drivers/reset/stm32/Kconfig
- create mode 100644 drivers/reset/stm32/Makefile
- create mode 100644 drivers/reset/stm32/stm32-reset-core.c
- create mode 100644 drivers/reset/stm32/stm32-reset-core.h
- create mode 100644 drivers/reset/stm32/stm32-reset-mp1.c
- create mode 100644 drivers/reset/stm32/stm32-reset-mp25.c
- create mode 100644 drivers/reset/stm32/stm32-reset.c
- create mode 100644 include/stm32mp25_rcc.h
-
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index af69850cdd8..e323a948780 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -84,26 +84,47 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 				 u32 *attr)
+ {
++	struct scmi_clock_priv *priv = dev_get_priv(dev);
+ 	struct scmi_clk_attribute_in in = {
+ 		.clock_id = clkid,
+ 	};
+-	struct scmi_clk_attribute_out out;
+-	struct scmi_msg msg = {
+-		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
+-		.message_id = SCMI_CLOCK_ATTRIBUTES,
+-		.in_msg = (u8 *)&in,
+-		.in_msg_sz = sizeof(in),
+-		.out_msg = (u8 *)&out,
+-		.out_msg_sz = sizeof(out),
+-	};
+ 	int ret;
+ 
+-	ret = devm_scmi_process_msg(dev, &msg);
+-	if (ret)
+-		return ret;
+-
+-	*name = strdup(out.clock_name);
+-	*attr = out.attributes;
++	if (priv->version >= 0x20000) {
++		struct scmi_clk_attribute_out_v2 out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	} else {
++		struct scmi_clk_attribute_out out;
++		struct scmi_msg msg = {
++			.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
++			.message_id = SCMI_CLOCK_ATTRIBUTES,
++			.in_msg = (u8 *)&in,
++			.in_msg_sz = sizeof(in),
++			.out_msg = (u8 *)&out,
++			.out_msg_sz = sizeof(out),
++		};
++
++		ret = devm_scmi_process_msg(dev, &msg);
++		if (ret)
++			return ret;
++
++		*name = strdup(out.clock_name);
++		*attr = out.attributes;
++	}
+ 
+ 	return 0;
+ }
+@@ -257,6 +278,9 @@ static int scmi_clk_probe(struct udevice *dev)
+ 	if (!CONFIG_IS_ENABLED(CLK_CCF))
+ 		return 0;
+ 
++	ret = scmi_generic_protocol_version(dev, SCMI_PROTOCOL_ID_CLOCK,
++					    &priv->version);
++
+ 	/* register CCF children: CLK UCLASS, no probed again */
+ 	if (device_get_uclass_id(dev->parent) == UCLASS_CLK)
+ 		return 0;
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index 9046de7e3e7..762a1032c37 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -782,6 +782,21 @@ struct scmi_clk_attribute_out {
+ 	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
+ };
+ 
++/**
++ * struct scmi_clk_get_nb_out_v2 - Response payload for SCMI_CLOCK_ATTRIBUTES command
++ * Clock management Protocol 2.0
++ * @status:	SCMI command status
++ * @attributes:	clock attributes
++ * @clock_name:	name of the clock
++ * @clock_enable_delay: delay incurred by the platform to enable the clock
++ */
++struct scmi_clk_attribute_out_v2 {
++	s32 status;
++	u32 attributes;
++	char clock_name[SCMI_CLOCK_NAME_LENGTH_MAX];
++	u32 clock_enable_delay;
++};
++
+ /**
+  * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
+  * @clock_id:	SCMI clock ID
 -- 
 2.25.1
 
-base-commit: cf37480bc8335494cf88b7180dc3f1eb8cf63a9d
-branch: upstream_scmi_clock_mp25_v2
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

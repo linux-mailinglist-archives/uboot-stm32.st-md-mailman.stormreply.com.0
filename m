@@ -2,56 +2,56 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11B94AC5061
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 15:59:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16535AC5068
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 16:01:00 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B7290C36B19;
-	Tue, 27 May 2025 13:59:51 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D1B39C36B19;
+	Tue, 27 May 2025 14:00:59 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 90A1BC36B17
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 3E632C36B17
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 May 2025 13:59:50 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RBga7T000339;
- Tue, 27 May 2025 15:59:48 +0200
+ Tue, 27 May 2025 14:00:58 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RCp2GM031311;
+ Tue, 27 May 2025 16:00:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- SkLMhHA8vn5MA7WR3D9loFZ9hWdDPSAn6hZipwKI99c=; b=TU9eUPN1ToD4rcv6
- IMggkwM3XOKIjRrx2nwrqcW1hv8W6c4pzPPDqx9tPJuxZkTl3S5LeY/KYWQmS7JG
- CH9JAcSDaP0Tlhi87DY831jeQOsztvxC+k652F/huYDDDlxM4xFPRLqT7mRt1MlK
- jOU75Pzp6JPdVodQNMZzZQT9Caa3k3c5sNSrU6tonRozvzIHWnzmPfYAkuinX7i2
- CtUK+ZoIRkU7UFDbTBTPEosHU8P7R/OmkdVd49yXAH6z3T62TEhRW/CoFvFjgA6O
- tFhuAsVgsZNwDZJbmW0Tplf1m4Yn+vY837Nvkxe855M7GKctUBWgVVdl0ZFT0KSM
- 436xig==
+ +IXXiuBfJ5lt87f7eGtIXDWVKw2bWU9jl0hJJM6VuuM=; b=cVaO2ySiidwPbZuV
+ htNmrjsS517/0mPUUHt31IawQb1ChLrCpcqpJtkcblPtLtPsBe5CJVpBkQGdEhWp
+ aJzX0FlzUnaeiGWPXJUrMSyNXNJeAME4+jH4KLG591tx1gTqWA8aH1h/AQ6Hn5jp
+ qWEKBtFx3ZMiyfjJtfiOqK9Iz9t9J0hC34nPIdVzth0b3OMzLQlSO+zqPbPLp9x8
+ gyhCJyMIBuhqBxDEh0coeL0Z7iza2tptKilzAreBJEz1860Qrm+dPy5VWHmMjOBp
+ fXi62SPj0AhcRQoG9cSsxiiKB/p8kDD2dF4lOlW7y6B5XJtmvoYHr1zX+3A6SZf5
+ +vMmQQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u50gm2ws-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4j9fq-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 15:59:48 +0200 (MEST)
+ Tue, 27 May 2025 16:00:56 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 08D594005F;
- Tue, 27 May 2025 15:59:08 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 32FA340063;
+ Tue, 27 May 2025 16:00:13 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 98146AFA926;
- Tue, 27 May 2025 15:58:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3827EAEEA6B;
+ Tue, 27 May 2025 15:59:37 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 15:58:54 +0200
-Message-ID: <9920c51f-24a2-4c8e-9787-2bd4b3f11d15@foss.st.com>
-Date: Tue, 27 May 2025 15:58:53 +0200
+ 2025 15:59:36 +0200
+Message-ID: <b2417a87-2f53-4b19-bdae-0a496a56634e@foss.st.com>
+Date: Tue, 27 May 2025 15:59:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Antonio Borneo <antonio.borneo@foss.st.com>, <u-boot@lists.denx.de>,
  Stefan Roese <sr@denx.de>, Patrick Delaunay <patrick.delaunay@foss.st.com>
 References: <20250521122755.265760-1-antonio.borneo@foss.st.com>
- <20250523094658.299730-2-antonio.borneo@foss.st.com>
+ <20250523094658.299730-3-antonio.borneo@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250523094658.299730-2-antonio.borneo@foss.st.com>
+In-Reply-To: <20250523094658.299730-3-antonio.borneo@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -61,8 +61,8 @@ X-Proofpoint-Virus-Version: vendor=baseguard
 Cc: uboot-stm32@st-md-mailman.stormreply.com,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  =?UTF-8?Q?Cl=C3=A9ment_Le_Goffic?= <clement.legoffic@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v2 1/4] watchdog: wdt-uclass.c: add
- wdt_set_force_autostart() helper
+Subject: Re: [Uboot-stm32] [PATCH v2 2/4] watchdog: arm_smc_wdt: get wdt
+ status through SMCWD_GET_TIMELEFT
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,64 +82,56 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 5/23/25 11:46, Antonio Borneo wrote:
-> The watchdog could have been already started by a previous boot
-> stage (e.g. bootrom or secure OS). U-Boot has to start and kick
-> the watchdog even when CONFIG_WATCHDOG_AUTOSTART is not enabled
-> or when the DT property u-boot,noautostart is present.
+> The optional SMCWD_GET_TIMELEFT command can be used to detect if
+> the watchdog has already been started.
+> See the implementation in OP-TEE secure OS [1].
 > 
-> Add the helper wdt_set_force_autostart() that can be called by the
-> driver's probe() when it detects that the watchdog has already
-> been started and is running.
+> At probe time, check if the watchdog is already started and then
+> call wdt_set_force_autostart(). This will keep U-Boot pinging the
+> watchdog even when the property 'u-boot,noautostart' is present.
 > 
-> Co-developed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Link: https://github.com/OP-TEE/optee_os/commit/a7f2d4bd8632 [1]
+> 
 > Signed-off-by: Antonio Borneo <antonio.borneo@foss.st.com>
 > ---
->  drivers/watchdog/wdt-uclass.c | 9 +++++++++
->  include/wdt.h                 | 9 +++++++++
->  2 files changed, 18 insertions(+)
+>  drivers/watchdog/arm_smc_wdt.c | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
 > 
-> diff --git a/drivers/watchdog/wdt-uclass.c b/drivers/watchdog/wdt-uclass.c
-> index 10be334e9ed..b32590069d9 100644
-> --- a/drivers/watchdog/wdt-uclass.c
-> +++ b/drivers/watchdog/wdt-uclass.c
-> @@ -46,6 +46,15 @@ struct wdt_priv {
->  	struct cyclic_info cyclic;
->  };
+> diff --git a/drivers/watchdog/arm_smc_wdt.c b/drivers/watchdog/arm_smc_wdt.c
+> index 0ea44445700..f6854aa9ac9 100644
+> --- a/drivers/watchdog/arm_smc_wdt.c
+> +++ b/drivers/watchdog/arm_smc_wdt.c
+> @@ -46,6 +46,8 @@ static int smcwd_call(struct udevice *dev, enum smcwd_call call,
+>  		return -ENODEV;
+>  	if (res->a0 == PSCI_RET_INVALID_PARAMS)
+>  		return -EINVAL;
+> +	if (res->a0 == PSCI_RET_DISABLED)
+> +		return -ENODATA;
+>  	if (res->a0 != PSCI_RET_SUCCESS)
+>  		return -EIO;
 >  
-> +int wdt_set_force_autostart(struct udevice *dev)
-> +{
-> +	struct wdt_priv *priv = dev_get_uclass_priv(dev);
-> +
-> +	priv->autostart = true;
-> +
-> +	return 0;
-> +}
-> +
->  static void wdt_cyclic(struct cyclic_info *c)
->  {
->  	struct wdt_priv *priv = container_of(c, struct wdt_priv, cyclic);
-> diff --git a/include/wdt.h b/include/wdt.h
-> index 5026f5a6db4..1ef656585c4 100644
-> --- a/include/wdt.h
-> +++ b/include/wdt.h
-> @@ -18,6 +18,15 @@ struct udevice;
->   * which typically include placing the system in a safe, known state.
->   */
+> @@ -99,6 +101,21 @@ static int smcwd_probe(struct udevice *dev)
+>  	priv->min_timeout = res.a1;
+>  	priv->max_timeout = res.a2;
 >  
-> +/*
-> + * Force watchdog start during init. Called by driver's probe when the watchdog
-> + * is detected as already started.
-> + *
-> + * @dev: WDT Device
-> + * @return: 0 if OK, -ve on error
-> + */
-> +int wdt_set_force_autostart(struct udevice *dev);
+> +	/* If already started, then force u-boot to use it */
+> +	err = smcwd_call(dev, SMCWD_GET_TIMELEFT, 0, NULL);
+> +	switch (err) {
+> +	case 0:
+> +		dev_dbg(dev, "Already started\n");
+> +		wdt_set_force_autostart(dev);
+> +		break;
+> +	case -ENODATA:
+> +		dev_dbg(dev, "Not already started\n");
+> +		break;
+> +	default:
+> +		/* Optional SMCWD_GET_TIMELEFT not implemented */
+> +		break;
+> +	}
 > +
->  /*
->   * Start the timer
->   *
-
+>  	return 0;
+>  }
+>  
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks

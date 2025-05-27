@@ -2,68 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0B2DAC4E28
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 14:03:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A92D0AC4EF4
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 14:54:01 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 681A0C36B1E;
-	Tue, 27 May 2025 12:03:48 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 5B6C4C36B1E;
+	Tue, 27 May 2025 12:54:01 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C013CC36B19
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id C7DF3C36B19
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 May 2025 12:03:46 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54R8tWia030822;
- Tue, 27 May 2025 14:03:41 +0200
+ Tue, 27 May 2025 12:53:59 +0000 (UTC)
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RA6007027752;
+ Tue, 27 May 2025 14:53:42 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- tBQShpcuc6wGv92S+q904eI1fNtkZcz9CHuQRA2G2MM=; b=O1Xq38y2tiauUCB+
- 904wRajnkfkXRBmMro0lNZYF021h6bKhf2itEwC3dWpr51EFT4sP6e374w7q/zPr
- x/Go8a0jR0zdSZzOmXddrRLlaYYbtppMfJiVIB8RrY4WMLpVwkTlZXa+DjrLRWjZ
- 99o3NB3mST+AlQAAqaOSXxoWTUusslKulprT2uAjnU4O7oOH1cI5gmgHohPJYgt1
- KD4zLxHYuzgew2DGz2AmmEJM4DKJB+X42uoCs/mugqMcy1SUH6DfPNQ19H+8g8j+
- zStpY9WBo6ezQpE6UlZRNVKuVrddaUreXFVkAfCGmdOzI3dtwAxCNJ8dGW6/yg07
- /4lIXQ==
+ t1pQoIE8KcVikeM3acNFGISGfAj+d3kPf6/wKCyOINE=; b=eXLDlwds51YauVJQ
+ vsJrEARDFJCbdhJ5Xv4yGCDpNOjN9HSJSyKY3esnYPPlnIb3UARVN98D2qqQPKkO
+ FyDmOnTdD+cyWJCNZD76ZnmWMUvzi68CShjDowbOMGXELSL1xV+r6p4wTE12zttN
+ 9maybeucB0MzRc+8l7MV6U/qbavQW/nmmc+uq5NMozClHDdp6WjdF2ERrTFUF2N9
+ i4zrPvqq7EtvmQWK3qVyji3UNLPb2v883ho7i04zBOUR+W/PCdlwjiri0QTaQoFU
+ p0WUfiq1HYWW8EkOyNO4dsZNmkq/mU0YPA7ortW/MUX4YDEoI98PJww6Xo0WhaGR
+ 2jy/Nw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46w54hjaun-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46uqp4hyv9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 14:03:40 +0200 (MEST)
+ Tue, 27 May 2025 14:53:42 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 0059340054;
- Tue, 27 May 2025 14:02:49 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DAEF24005B;
+ Tue, 27 May 2025 14:52:16 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8DEECA7F83A;
- Tue, 27 May 2025 14:02:28 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 17C7EAC6D85;
+ Tue, 27 May 2025 14:51:30 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 14:02:28 +0200
-Message-ID: <fb71475a-17df-4e53-96f5-2a33bd3fd79a@foss.st.com>
-Date: Tue, 27 May 2025 14:02:27 +0200
+ 2025 14:51:29 +0200
+Message-ID: <4d2afdb6-0091-45db-984d-ef8910f77a55@foss.st.com>
+Date: Tue, 27 May 2025 14:51:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Gabriel FERNANDEZ <gabriel.fernandez@foss.st.com>, <u-boot@lists.denx.de>
-References: <20250521134117.2828335-1-patrice.chotard@foss.st.com>
- <20250521134117.2828335-3-patrice.chotard@foss.st.com>
- <b4c857a8-141a-43d4-b2d3-15427997c3d0@foss.st.com>
+To: Patrick Delaunay <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+References: <20250523091140.149298-1-patrick.delaunay@foss.st.com>
+ <20250523111100.v2.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <b4c857a8-141a-43d4-b2d3-15427997c3d0@foss.st.com>
+In-Reply-To: <20250523111100.v2.1.Ie741b1ca358414a1d718dca0667ac44eefc9227b@changeid>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-05-27_06,2025-05-27_01,2025-03-28_01
-Cc: Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH v1 02/13] clk: stm32mp25: Add clock driver
-	support
+Cc: Tom Rini <trini@konsulko.com>, caleb.connolly@linaro.org,
+ jerome.forissier@linaro.org, Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Simon Glass <sjg@chromium.org>,
+ ilias.apalodimas@linaro.org,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: Re: [Uboot-stm32] [PATCH v2 1/3] lib/uuid.c: restore support of
+ system partition type for ESP
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,71 +77,385 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-CgpPbiA1LzIyLzI1IDA5OjA4LCBHYWJyaWVsIEZFUk5BTkRFWiB3cm90ZToKPiAKPiBPbiA1LzIx
-LzI1IDE1OjQxLCBQYXRyaWNlIENob3RhcmQgd3JvdGU6Cj4+IEZyb206IEdhYnJpZWwgRmVybmFu
-ZGV6IDxnYWJyaWVsLmZlcm5hbmRlekBmb3NzLnN0LmNvbT4KPj4KPj4gQWRkIGNsb2NrIGRyaXZl
-ciBzdXBwb3J0IGZvciBTVE0zMk1QMjUgU29Dcy4KPj4KPj4gU2lnbmVkLW9mZi1ieTogR2Ficmll
-bCBGZXJuYW5kZXogPGdhYnJpZWwuZmVybmFuZGV6QGZvc3Muc3QuY29tPgo+PiBTaWduZWQtb2Zm
-LWJ5OiBWYWxlbnRpbiBDYXJvbiA8dmFsZW50aW4uY2Fyb25AZm9zcy5zdC5jb20+Cj4+IFNpZ25l
-ZC1vZmYtYnk6IFBhdHJpY2UgQ2hvdGFyZCA8cGF0cmljZS5jaG90YXJkQGZvc3Muc3QuY29tPgo+
-PiBDYzogTHVrYXN6IE1hamV3c2tpIDxsdWttYUBkZW54LmRlPgo+PiBDYzogU2VhbiBBbmRlcnNv
-biA8c2VhbmdhMkBnbWFpbC5jb20+Cj4+IC0tLQoKWy4uLl0KCj4+ICvCoMKgwqAgR0FURV9VQVJU
-NywKPj4gK8KgwqDCoCBHQVRFX1VBUlQ4LAo+PiArwqDCoMKgIEdBVEVfVUFSVDksCj4+ICvCoMKg
-wqAgR0FURV9VU0FSVDEsCj4+ICvCoMKgwqAgR0FURV9VU0FSVDIsCj4+ICvCoMKgwqAgR0FURV9V
-U0FSVDMsCj4+ICvCoMKgwqAgR0FURV9VU0FSVDYsCj4+ICvCoMKgwqAgR0FURV9VU0IyLAo+IHBs
-ZWFzZSByZW5hbWUgR0FURV9VU0IyIGludG8gR0FURV9VU0JIIHRvIGJlIGNvbmZvcm0gd2l0aCBs
-YXN0IHJlZmVyZW5jZSBtYW51YWwKCk9rCgo+PiArwqDCoMKgIEdBVEVfVVNCMlBIWTEsCj4+ICvC
-oMKgwqAgR0FURV9VU0IyUEhZMiwKPj4gK8KgwqDCoCBHQVRFX1VTQjNEUiwKPj4gK8KgwqDCoCBH
-QVRFX1VTQjNQQ0lFUEhZLAo+PiArwqDCoMKgIEdBVEVfVVNCVEMsCj4+ICvCoMKgwqAgR0FURV9W
-REVDLAo+PiArwqDCoMKgIEdBVEVfVkVOQywKPj4gK8KgwqDCoCBHQVRFX1ZSRUYsCj4+ICvCoMKg
-wqAgR0FURV9XV0RHMSwKPj4gK8KgwqDCoCBHQVRFX1dXREcyLAoKWy4uLl0KCj4+ICvCoMKgwqAg
-R0FURV9DRkcoR0FURV9FVEgyLMKgwqDCoMKgwqDCoMKgIFJDQ19FVEgyQ0ZHUizCoMKgwqDCoMKg
-wqDCoCA1LMKgwqDCoCAwKSwKPj4gK8KgwqDCoCBHQVRFX0NGRyhHQVRFX0VUSDJUWCzCoMKgwqDC
-oMKgwqDCoCBSQ0NfRVRIMkNGR1IswqDCoMKgwqDCoMKgwqAgOCzCoMKgwqAgMCksCj4+ICvCoMKg
-wqAgR0FURV9DRkcoR0FURV9FVEgyUlgswqDCoMKgwqDCoMKgwqAgUkNDX0VUSDJDRkdSLMKgwqDC
-oMKgwqDCoMKgIDEwLMKgwqDCoCAwKSwKPj4gK8KgwqDCoCBHQVRFX0NGRyhHQVRFX1VTQjIswqDC
-oMKgwqDCoMKgwqAgUkNDX1VTQjJDRkdSLMKgwqDCoMKgwqDCoMKgIDEswqDCoMKgIDApLAo+IAo+
-IMKgwqDCoCBHQVRFX0NGRyhHQVRFX1VTQkgswqDCoMKgIMKgwqDCoCBSQ0NfVVNCSENGR1IswqDC
-oMKgIMKgwqDCoCAxLMKgwqDCoCAwKSwKCk9rCgo+IAo+PiArwqDCoMKgIEdBVEVfQ0ZHKEdBVEVf
-VVNCMlBIWTEswqDCoMKgwqDCoMKgwqAgUkNDX1VTQjJQSFkxQ0ZHUizCoMKgwqAgMSzCoMKgwqAg
-MCksCj4+ICvCoMKgwqAgR0FURV9DRkcoR0FURV9VU0IyUEhZMizCoMKgwqDCoMKgwqDCoCBSQ0Nf
-VVNCMlBIWTJDRkdSLMKgwqDCoCAxLMKgwqDCoCAwKSwKPj4gK8KgwqDCoCBHQVRFX0NGRyhHQVRF
-X1VTQjNEUizCoMKgwqDCoMKgwqDCoCBSQ0NfVVNCM0RSQ0ZHUizCoMKgwqDCoMKgwqDCoCAxLMKg
-wqDCoCAwKSwKPj4gK8KgwqDCoCBHQVRFX0NGRyhHQVRFX1VTQjNQQ0lFUEhZLMKgwqDCoCBSQ0Nf
-VVNCM1BDSUVQSFlDRkdSLMKgwqDCoCAxLMKgwqDCoCAwKSwKPj4gK8KgwqDCoCBHQVRFX0NGRyhH
-QVRFX1BDSUUswqDCoMKgwqDCoMKgwqAgUkNDX1BDSUVDRkdSLMKgwqDCoMKgwqDCoMKgIDEswqDC
-oMKgIDApLAoKWy4uLl0KCgo+PiArwqDCoMKgIFNUTTMyX0NPTVBPU0lURV9OT0RJVihDS19LRVJf
-VVNCMlBIWTEsICJja19rZXJfdXNiMnBoeTEiLCAwLAo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoCBTRUNGX05PTkUsIEdBVEVfVVNCMlBIWTEsIE1VWF9VU0IyUEhZMSksCj4+
-ICsKPj4gK8KgwqDCoCAvKiBVU0JIICovCj4+ICvCoMKgwqAgU1RNMzJfR0FURShDS19CVVNfVVNC
-Mk9IQ0ksICJja19pY25fbV91c2Iyb2hjaSIsICJja19pY25faHNsIiwgMCwgR0FURV9VU0IyLCBT
-RUNGX05PTkUpLAo+PiArwqDCoMKgIFNUTTMyX0dBVEUoQ0tfQlVTX1VTQjJFSENJLCAiY2tfaWNu
-X21fdXNiMmVoY2kiLCAiY2tfaWNuX2hzbCIsIDAsIEdBVEVfVVNCMiwgU0VDRl9OT05FKSwKPiAK
-PiBTVE0zMl9HQVRFKENLX0JVU19VU0IyT0hDSSwgImNrX2ljbl9tX3VzYjJvaGNpIiwgImNrX2lj
-bl9oc2wiLCAwLCBHQVRFX1VTQkgsIFNFQ0ZfTk9ORSksCj4gU1RNMzJfR0FURShDS19CVVNfVVNC
-MkVIQ0ksICJja19pY25fbV91c2IyZWhjaSIsICJja19pY25faHNsIiwgMCwgR0FURV9VU0JILCBT
-RUNGX05PTkUpLAo+IAo+PiArCj4+ICvCoMKgwqAgLyogVVNCMlBIWTIgKi8KPj4gK8KgwqDCoCBT
-VE0zMl9DT01QT1NJVEVfTk9ESVYoQ0tfS0VSX1VTQjJQSFkyRU4sICJja19rZXJfdXNiMnBoeTJf
-ZW4iLCAwLAo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBTRUNGX05PTkUs
-IEdBVEVfVVNCMlBIWTIsIE1VWF9VU0IyUEhZMiksCj4+ICsKPj4gK8KgwqDCoCAvKiBVU0IzIFBD
-SWUgQ09NQk9QSFkgKi8KClsuLi5dCgo+PiArI2RlZmluZSBSQ0NfQURDMTJDRkdSwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4N0U4Cj4+ICsjZGVmaW5lIFJDQ19BREMzQ0ZHUsKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDdFQwo+PiArI2RlZmluZSBSQ0NfRVRIMUNGR1LC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHg3RjAKPj4gKyNkZWZpbmUgUkNDX0VUSDJD
-RkdSwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIDB4N0Y0Cj4+ICsjZGVmaW5lIFJDQ19V
-U0IyQ0ZHUsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAweDdGQwo+IAo+ICNkZWZpbmUg
-UkNDX1VTQkhDRkdSCgoKT2sKCj4gCj4gQmVzdCByZWdhcmRzLAo+IAo+IEdhYnJpZWwKPiAKPj4g
-KyNkZWZpbmUgUkNDX1VTQjJQSFkxQ0ZHUsKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHg4MDAKPj4g
-KyNkZWZpbmUgUkNDX1VTQjJQSFkyQ0ZHUsKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHg4MDQKPj4g
-KyNkZWZpbmUgUkNDX1VTQjNEUkNGR1LCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMHg4
-MDgKPj4gKyNkZWZpbmUgUkNDX1VTQjNQQ0lFUEhZQ0ZHUsKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-MHg4MEMKPj4gKyNkZWZpbmUgUkNDX1BDSUVDRkdSwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIDB4ODEwCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-ClVib290LXN0bTMyIG1haWxpbmcgbGlzdApVYm9vdC1zdG0zMkBzdC1tZC1tYWlsbWFuLnN0b3Jt
-cmVwbHkuY29tCmh0dHBzOi8vc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbS9tYWlsbWFuL2xp
-c3RpbmZvL3Vib290LXN0bTMyCg==
+
+
+On 5/23/25 11:11, Patrick Delaunay wrote:
+> Add support of optional shortname for parameter 'type' of gpt
+> command (limited by UUID_STR_LEN) and a separate 'description'
+> for UID format "%pUs" used in 'part list' output.
+> 
+> When 'description' is absent in list_guid[], the optional
+> shortname is used as fallback.
+> 
+> Many partition types for EFI have no shortcut yet, but only
+> description as they are only used to display information.
+> 
+> This patch also restores the "system" as short name for EFI
+> System Partition (ESP).
+> 
+> Fixes: d54e1004b8b1 ("lib/uuid.c: use unique name for PARTITION_SYSTEM_GUID")
+> Tested-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> ---
+> 
+> Changes in v2:
+> - change 'string' to 'type' in struct for list_guid[]
+> - clarify the usage of struct field 'type' and 'description' in
+>   comment and in commit message
+> - use 'type' for EFI_XXX description as these string have
+>   no space and size is lower than 36 characters.
+> - update after V1 review
+> 
+>  lib/uuid.c | 158 ++++++++++++++++++++++++++++-------------------------
+>  1 file changed, 85 insertions(+), 73 deletions(-)
+> 
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 6abbcf27b1f3..ddecbb44656c 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -62,184 +62,193 @@ int uuid_str_valid(const char *uuid)
+>  	return 1;
+>  }
+>  
+> +/*
+> + * Array of string (short and long) for known GUID of GPT partition type
+> + * at least one string must be present, @type or @description
+> + *
+> + * @type        : short name for the parameter 'type' of gpt command (max size UUID_STR_LEN = 36,
+> + *                no space), also used as fallback description when the next field is absent
+> + * @description : long description associated to type GUID, used for %pUs
+> + * @guid        : known type GUID value
+> + */
+>  static const struct {
+> -	const char *string;
+> +	const char *type;
+> +	const char *description;
+>  	efi_guid_t guid;
+>  } list_guid[] = {
+>  #ifndef USE_HOSTCC
+> -#if defined(CONFIG_PARTITION_TYPE_GUID) || defined(CONFIG_CMD_EFIDEBUG) || \
+> -	defined(CONFIG_EFI)
+> -	{"EFI System Partition", PARTITION_SYSTEM_GUID},
+> -#endif
+> -#ifdef CONFIG_PARTITION_TYPE_GUID
+> -	{"mbr",		LEGACY_MBR_PARTITION_GUID},
+> -	{"msft",	PARTITION_MSFT_RESERVED_GUID},
+> -	{"data",	PARTITION_BASIC_DATA_GUID},
+> -	{"linux",	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
+> -	{"raid",	PARTITION_LINUX_RAID_GUID},
+> -	{"swap",	PARTITION_LINUX_SWAP_GUID},
+> -	{"lvm",		PARTITION_LINUX_LVM_GUID},
+> -	{"u-boot-env",	PARTITION_U_BOOT_ENVIRONMENT},
+> -	{"cros-kern",	PARTITION_CROS_KERNEL},
+> -	{"cros-root",	PARTITION_CROS_ROOT},
+> -	{"cros-fw",	PARTITION_CROS_FIRMWARE},
+> -	{"cros-rsrv",	PARTITION_CROS_RESERVED},
+> -#endif
+> +#if CONFIG_IS_ENABLED(EFI_PARTITION)
+> +	{"mbr",		NULL,	LEGACY_MBR_PARTITION_GUID},
+> +	{"msft",	NULL,	PARTITION_MSFT_RESERVED_GUID},
+> +	{"data",	NULL,	PARTITION_BASIC_DATA_GUID},
+> +	{"linux",	NULL,	PARTITION_LINUX_FILE_SYSTEM_DATA_GUID},
+> +	{"raid",	NULL,	PARTITION_LINUX_RAID_GUID},
+> +	{"swap",	NULL,	PARTITION_LINUX_SWAP_GUID},
+> +	{"lvm",		NULL,	PARTITION_LINUX_LVM_GUID},
+> +	{"u-boot-env",	NULL,	PARTITION_U_BOOT_ENVIRONMENT},
+> +	{"cros-kern",	NULL,	PARTITION_CROS_KERNEL},
+> +	{"cros-root",	NULL,	PARTITION_CROS_ROOT},
+> +	{"cros-fw",	NULL,	PARTITION_CROS_FIRMWARE},
+> +	{"cros-rsrv",	NULL,	PARTITION_CROS_RESERVED},
+>  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
+>  	{
+> -		"Device Path",
+> +		"system", "EFI System Partition",
+> +		PARTITION_SYSTEM_GUID,
+> +	},
+> +	{
+> +		NULL, "Device Path",
+>  		EFI_DEVICE_PATH_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device Path To Text",
+> +		NULL, "Device Path To Text",
+>  		EFI_DEVICE_PATH_TO_TEXT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device Path Utilities",
+> +		NULL, "Device Path Utilities",
+>  		EFI_DEVICE_PATH_UTILITIES_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Unicode Collation 2",
+> +		NULL, "Unicode Collation 2",
+>  		EFI_UNICODE_COLLATION_PROTOCOL2_GUID,
+>  	},
+>  	{
+> -		"Driver Binding",
+> +		NULL, "Driver Binding",
+>  		EFI_DRIVER_BINDING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Input",
+> +		NULL, "Simple Text Input",
+>  		EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Input Ex",
+> +		NULL, "Simple Text Input Ex",
+>  		EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Text Output",
+> +		NULL, "Simple Text Output",
+>  		EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Block IO",
+> +		NULL, "Block IO",
+>  		EFI_BLOCK_IO_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Disk IO",
+> +		NULL, "Disk IO",
+>  		EFI_DISK_IO_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple File System",
+> +		NULL, "Simple File System",
+>  		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Loaded Image",
+> +		NULL, "Loaded Image",
+>  		EFI_LOADED_IMAGE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Loaded Image Device Path",
+> +		NULL, "Loaded Image Device Path",
+>  		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Graphics Output",
+> +		NULL, "Graphics Output",
+>  		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII String",
+> +		NULL, "HII String",
+>  		EFI_HII_STRING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Database",
+> +		NULL, "HII Database",
+>  		EFI_HII_DATABASE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Config Access",
+> +		NULL, "HII Config Access",
+>  		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HII Config Routing",
+> +		NULL, "HII Config Routing",
+>  		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Load File",
+> +		NULL, "Load File",
+>  		EFI_LOAD_FILE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Load File2",
+> +		NULL, "Load File2",
+>  		EFI_LOAD_FILE2_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Random Number Generator",
+> +		NULL, "Random Number Generator",
+>  		EFI_RNG_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Simple Network",
+> +		NULL, "Simple Network",
+>  		EFI_SIMPLE_NETWORK_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"PXE Base Code",
+> +		NULL, "PXE Base Code",
+>  		EFI_PXE_BASE_CODE_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Device-Tree Fixup",
+> +		NULL, "Device-Tree Fixup",
+>  		EFI_DT_FIXUP_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"TCG2",
+> +		NULL, "TCG2",
+>  		EFI_TCG2_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"Firmware Management",
+> +		NULL, "Firmware Management",
+>  		EFI_FIRMWARE_MANAGEMENT_PROTOCOL_GUID
+>  	},
+>  #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
+>  	{
+> -		"HTTP",
+> +		NULL, "HTTP",
+>  		EFI_HTTP_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"HTTP Service Binding",
+> +		NULL, "HTTP Service Binding",
+>  		EFI_HTTP_SERVICE_BINDING_PROTOCOL_GUID,
+>  	},
+>  	{
+> -		"IPv4 Config2",
+> +		NULL, "IPv4 Config2",
+>  		EFI_IP4_CONFIG2_PROTOCOL_GUID,
+>  	},
+>  #endif
+>  	/* Configuration table GUIDs */
+>  	{
+> -		"ACPI table",
+> +		NULL, "ACPI table",
+>  		EFI_ACPI_TABLE_GUID,
+>  	},
+>  	{
+> -		"EFI System Resource Table",
+> +		NULL, "EFI System Resource Table",
+>  		EFI_SYSTEM_RESOURCE_TABLE_GUID,
+>  	},
+>  	{
+> -		"device tree",
+> +		NULL, "device tree",
+>  		EFI_FDT_GUID,
+>  	},
+>  	{
+> -		"SMBIOS table",
+> +		NULL, "SMBIOS table",
+>  		SMBIOS_TABLE_GUID,
+>  	},
+>  	{
+> -		"SMBIOS3 table",
+> +		NULL, "SMBIOS3 table",
+>  		SMBIOS3_TABLE_GUID,
+>  	},
+>  	{
+> -		"Runtime properties",
+> +		NULL, "Runtime properties",
+>  		EFI_RT_PROPERTIES_TABLE_GUID,
+>  	},
+>  	{
+> -		"TCG2 Final Events Table",
+> +		NULL, "TCG2 Final Events Table",
+>  		EFI_TCG2_FINAL_EVENTS_TABLE_GUID,
+>  	},
+>  	{
+> -		"EFI Conformance Profiles Table",
+> +		NULL, "EFI Conformance Profiles Table",
+>  		EFI_CONFORMANCE_PROFILES_TABLE_GUID,
+>  	},
+>  #ifdef CONFIG_EFI_RISCV_BOOT_PROTOCOL
+>  	{
+> -		"RISC-V Boot",
+> +		NULL, "RISC-V Boot",
+>  		RISCV_EFI_BOOT_PROTOCOL_GUID,
+>  	},
+>  #endif
+> @@ -247,35 +256,36 @@ static const struct {
+>  #ifdef CONFIG_CMD_NVEDIT_EFI
+>  	/* signature database */
+>  	{
+> -		"EFI_GLOBAL_VARIABLE_GUID",
+> +		"EFI_GLOBAL_VARIABLE_GUID", NULL,
+>  		EFI_GLOBAL_VARIABLE_GUID,
+>  	},
+>  	{
+> -		"EFI_IMAGE_SECURITY_DATABASE_GUID",
+> +		"EFI_IMAGE_SECURITY_DATABASE_GUID", NULL,
+>  		EFI_IMAGE_SECURITY_DATABASE_GUID,
+>  	},
+>  	/* certificate types */
+>  	{
+> -		"EFI_CERT_SHA256_GUID",
+> +		"EFI_CERT_SHA256_GUID", NULL,
+>  		EFI_CERT_SHA256_GUID,
+>  	},
+>  	{
+> -		"EFI_CERT_X509_GUID",
+> +		"EFI_CERT_X509_GUID", NULL,
+>  		EFI_CERT_X509_GUID,
+>  	},
+>  	{
+> -		"EFI_CERT_TYPE_PKCS7_GUID",
+> +		"EFI_CERT_TYPE_PKCS7_GUID", NULL,
+>  		EFI_CERT_TYPE_PKCS7_GUID,
+>  	},
+>  #endif
+>  #if defined(CONFIG_CMD_EFIDEBUG) || defined(CONFIG_EFI)
+> -	{ "EFI_LZMA_COMPRESSED", EFI_LZMA_COMPRESSED },
+> -	{ "EFI_DXE_SERVICES", EFI_DXE_SERVICES },
+> -	{ "EFI_HOB_LIST", EFI_HOB_LIST },
+> -	{ "EFI_MEMORY_TYPE", EFI_MEMORY_TYPE },
+> -	{ "EFI_MEM_STATUS_CODE_REC", EFI_MEM_STATUS_CODE_REC },
+> -	{ "EFI_GUID_EFI_ACPI1", EFI_GUID_EFI_ACPI1 },
+> +	{ "EFI_LZMA_COMPRESSED", NULL, EFI_LZMA_COMPRESSED },
+> +	{ "EFI_DXE_SERVICES", NULL, EFI_DXE_SERVICES },
+> +	{ "EFI_HOB_LIST", NULL, EFI_HOB_LIST },
+> +	{ "EFI_MEMORY_TYPE", NULL, EFI_MEMORY_TYPE },
+> +	{ "EFI_MEM_STATUS_CODE_REC", NULL, EFI_MEM_STATUS_CODE_REC },
+> +	{ "EFI_GUID_EFI_ACPI1", NULL, EFI_GUID_EFI_ACPI1 },
+>  #endif
+> +#endif /* EFI_PARTITION */
+>  #endif /* !USE_HOSTCC */
+>  };
+>  
+> @@ -284,7 +294,8 @@ int uuid_guid_get_bin(const char *guid_str, unsigned char *guid_bin)
+>  	int i;
+>  
+>  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
+> -		if (!strcmp(list_guid[i].string, guid_str)) {
+> +		if (list_guid[i].type &&
+> +		    !strcmp(list_guid[i].type, guid_str)) {
+>  			memcpy(guid_bin, &list_guid[i].guid, 16);
+>  			return 0;
+>  		}
+> @@ -298,7 +309,9 @@ const char *uuid_guid_get_str(const unsigned char *guid_bin)
+>  
+>  	for (i = 0; i < ARRAY_SIZE(list_guid); i++) {
+>  		if (!memcmp(list_guid[i].guid.b, guid_bin, 16)) {
+> -			return list_guid[i].string;
+> +			if (list_guid[i].description)
+> +				return list_guid[i].description;
+> +			return list_guid[i].type;
+>  		}
+>  	}
+>  	return NULL;
+> @@ -312,10 +325,9 @@ int uuid_str_to_bin(const char *uuid_str, unsigned char *uuid_bin,
+>  	uint64_t tmp64;
+>  
+>  	if (!uuid_str_valid(uuid_str)) {
+> -#ifdef CONFIG_PARTITION_TYPE_GUID
+> -		if (!uuid_guid_get_bin(uuid_str, uuid_bin))
+> +		if (IS_ENABLED(CONFIG_PARTITION_TYPE_GUID) &&
+> +		    !uuid_guid_get_bin(uuid_str, uuid_bin))
+>  			return 0;
+> -#endif
+>  		return -EINVAL;
+>  	}
+>  
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Thanks
+Patrice
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32

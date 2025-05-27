@@ -2,64 +2,70 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F47DAC5252
-	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 17:50:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B8F2AC529B
+	for <lists+uboot-stm32@lfdr.de>; Tue, 27 May 2025 18:02:33 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CB223C36B19;
-	Tue, 27 May 2025 15:50:00 +0000 (UTC)
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 8F056C36B19;
+	Tue, 27 May 2025 16:02:32 +0000 (UTC)
 Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id D994EC36B17
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id AC843C36B17
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Tue, 27 May 2025 15:49:59 +0000 (UTC)
+ Tue, 27 May 2025 16:02:31 +0000 (UTC)
 Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RFhNpU002330;
- Tue, 27 May 2025 17:49:42 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54RD3vka020807;
+ Tue, 27 May 2025 18:02:05 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- cSJes7UFWKm08mAVhcWgNJ1mV+pFvbd54u+Ef3RfxQU=; b=DCaM0V4kQbWyxYJl
- /J+Q2Iy6MZuauXuRgFWL+ChKPXPG5+o4RbGFkUSXGOhlbC0IGdoLxH8xWHXYWqx4
- IlwJQbGKo2Vd/WCO6g/A/FHZ38pA4cjDJ21MddxeBf3NxgXo3v2imG3YXFtIJnY5
- Vz3gKT2eXPz3Tj59uyJvswWqBB1oQnI79RKD8SREz1DRDYIAskpVOWOJejRUnQ9z
- /IurZdmX903ANbCnX+zNwAUFFCoczjUY21mUKVi+iUa6LnfitYMg92NNMw04vk18
- 1ZyTtC8BQz7FOWZd5MDV6esbk7HxPUC9MpbgIAQ3xECmMmRJ9/CXrOaAJEwB+bDg
- ezPPuw==
+ FYqe0JG+SQm8ZmCjT4AMw1oESx9ZxOa84YWalD9lF2I=; b=DU+bGbHqICU1TVzf
+ x+8j/VsUi3gda6T/bfa8L3k0b0qXrMpHXdlPLllFgpKjT3YNEL9rb3/G3FdagAOr
+ uTvVKf9xLZEcpRmYehs2n9K8wdiODhoZdulRFJAoAsPicwR9lK8fVTcHg2JWT+Er
+ HBpxdjYWJvX3h3CHm9sGd0esTo7EAdQParSCf9viipbUVwp9iudBzQxCg72D9iFd
+ WaJu9/f7ZQQzqbo60stegWq6z6/4YaGweVmjfnNEnCUE+RJnSu7I9OvG5z/MY4qI
+ iS38cvpR7wBKnOcjLgg4y1vL/PQGYAJD8kZJMRvXglVgEMQG/bFUJ8s+w6Zi8sAA
+ Xg7dZQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46w54hka9f-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46w54hkbr4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 27 May 2025 17:49:42 +0200 (MEST)
+ Tue, 27 May 2025 18:02:05 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A4E844004B;
- Tue, 27 May 2025 17:48:54 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 4495840059;
+ Tue, 27 May 2025 18:00:45 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5583BB20C26;
- Tue, 27 May 2025 17:48:33 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 55572B11150;
+ Tue, 27 May 2025 17:59:42 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 27 May
- 2025 17:48:32 +0200
-Message-ID: <dc51afcd-4818-4860-9944-be973e5a01ff@foss.st.com>
-Date: Tue, 27 May 2025 17:48:32 +0200
+ 2025 17:59:41 +0200
+Message-ID: <02f308bf-032a-4e97-a8dc-3a1169b75c71@foss.st.com>
+Date: Tue, 27 May 2025 17:59:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20250512170928.149211-1-marek.vasut@mailbox.org>
+References: <20250512171016.149233-1-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250512170928.149211-1-marek.vasut@mailbox.org>
+In-Reply-To: <20250512171016.149233-1-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-27_07,2025-05-27_01,2025-03-28_01
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [Uboot-stm32] [PATCH] ram: stm32mp1: Add STM32MP13xx support
+ definitions=2025-05-27_08,2025-05-27_01,2025-03-28_01
+Cc: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ uboot-stm32@st-md-mailman.stormreply.com,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: Re: [Uboot-stm32] [PATCH] tools: stm32image: Add support for STM32
+	Image V2.0
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,15 +85,11 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 5/12/25 19:09, Marek Vasut wrote:
-> Add support for configuring DRAM controller on STM32MP13xx SoC.
-> The DRAM controller is basically identical to the DWC controller
-> on STM32MP15xx SoC, except the bus width is reduced from 32bit to
-> 16bit and a few registers and bits are therefore not present.
-> 
-> Handle the difference by factoring these parts out. Use IS_ENABLE()
-> as much as possible to assure code which is not enabled on builds
-> for a single SoC gets compiled out. Handle the different offset of
-> RCC_DDRITFCR register and missing DDRC2 clock the same way.
+> Add support for generating STM32 Image V2.0, which is used by STM32MP13xx.
+> The image header layout is similar to STM32MP15xx STM32 Image V1.0, but is
+> different enough to justify duplicate functions to generate the v2 image.
+> This code at least attempts to align the V1 and V2 image handling where
+> possible.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 
@@ -97,309 +99,351 @@ Thanks
 Patrice
 
 > ---
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Julien Masson <jmasson@baylibre.com>
+> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
 > Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Paul HENRYS <paul.henrys_ext@softathome.com>
+> Cc: Raymond Mao <raymond.mao@linaro.org>
 > Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->  drivers/ram/stm32mp1/stm32mp1_ddr.c | 95 +++++++++++++++++++++++------
->  drivers/ram/stm32mp1/stm32mp1_ddr.h |  6 ++
->  drivers/ram/stm32mp1/stm32mp1_ram.c |  5 ++
->  3 files changed, 87 insertions(+), 19 deletions(-)
+>  boot/image.c       |   1 +
+>  include/image.h    |   1 +
+>  tools/stm32image.c | 215 +++++++++++++++++++++++++++++++++------------
+>  3 files changed, 163 insertions(+), 54 deletions(-)
 > 
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.c b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> index 0e37ea93fbc..b275407d4ac 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.c
-> @@ -12,6 +12,7 @@
->  #include <timer.h>
->  #include <asm/io.h>
->  #include <asm/arch/ddr.h>
-> +#include <dm/device.h>
->  #include <linux/bitops.h>
->  #include <linux/delay.h>
->  #include <linux/iopoll.h>
-> @@ -19,7 +20,8 @@
->  #include "stm32mp1_ddr.h"
->  #include "stm32mp1_ddr_regs.h"
->  
-> -#define RCC_DDRITFCR		0xD8
-> +#define RCC_DDRITFCR_STM32MP13xx	0x5c0
-> +#define RCC_DDRITFCR_STM32MP15xx	0xd8
->  
->  #define RCC_DDRITFCR_DDRCAPBRST		(BIT(14))
->  #define RCC_DDRITFCR_DDRCAXIRST		(BIT(15))
-> @@ -66,9 +68,19 @@ struct reg_desc {
->  #define DDRCTL_REG_REG_SIZE	25	/* st,ctl-reg */
->  #define DDRCTL_REG_TIMING_SIZE	12	/* st,ctl-timing */
->  #define DDRCTL_REG_MAP_SIZE	9	/* st,ctl-map */
-> -#define DDRCTL_REG_PERF_SIZE	17	/* st,ctl-perf */
->  
-> -#define DDRPHY_REG_REG_SIZE	11	/* st,phy-reg */
-> +#define DDRCTL_REG_PERF_SIZE_STM32MP13xx	11	/* st,ctl-perf */
-> +#define DDRCTL_REG_PERF_SIZE_STM32MP15xx	17	/* st,ctl-perf */
-> +#define DDRCTL_REG_PERF_SIZE		\
-> +	(IS_ENABLED(CONFIG_STM32MP15X) ? DDRCTL_REG_PERF_SIZE_STM32MP15xx : \
-> +					 DDRCTL_REG_PERF_SIZE_STM32MP13xx)
-> +
-> +#define DDRPHY_REG_REG_SIZE_STM32MP13xx		9	/* st,phy-reg */
-> +#define DDRPHY_REG_REG_SIZE_STM32MP15xx		11	/* st,phy-reg */
-> +#define DDRPHY_REG_REG_SIZE	\
-> +	(IS_ENABLED(CONFIG_STM32MP15X) ? DDRPHY_REG_REG_SIZE_STM32MP15xx : \
-> +					 DDRPHY_REG_REG_SIZE_STM32MP13xx)
-> +
->  #define	DDRPHY_REG_TIMING_SIZE	10	/* st,phy-timing */
->  
->  #define DDRCTL_REG_REG(x)	DDRCTL_REG(x, stm32mp1_ddrctrl_reg)
-> @@ -142,12 +154,14 @@ static const struct reg_desc ddr_perf[DDRCTL_REG_PERF_SIZE] = {
->  	DDRCTL_REG_PERF(pcfgqos1_0),
->  	DDRCTL_REG_PERF(pcfgwqos0_0),
->  	DDRCTL_REG_PERF(pcfgwqos1_0),
-> +#if IS_ENABLED(CONFIG_STM32MP15X)
->  	DDRCTL_REG_PERF(pcfgr_1),
->  	DDRCTL_REG_PERF(pcfgw_1),
->  	DDRCTL_REG_PERF(pcfgqos0_1),
->  	DDRCTL_REG_PERF(pcfgqos1_1),
->  	DDRCTL_REG_PERF(pcfgwqos0_1),
->  	DDRCTL_REG_PERF(pcfgwqos1_1),
-> +#endif
+> diff --git a/boot/image.c b/boot/image.c
+> index 139c5bd035a..abac2c7034b 100644
+> --- a/boot/image.c
+> +++ b/boot/image.c
+> @@ -184,6 +184,7 @@ static const table_entry_t uimage_type[] = {
+>  	{	IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
+>  	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
+>  	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
+> +	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
+>  	{	-1,		    "",		  "",			},
 >  };
 >  
->  #define DDRPHY_REG_REG(x)	DDRPHY_REG(x, stm32mp1_ddrphy_reg)
-> @@ -161,8 +175,10 @@ static const struct reg_desc ddrphy_reg[DDRPHY_REG_REG_SIZE] = {
->  	DDRPHY_REG_REG(zq0cr1),
->  	DDRPHY_REG_REG(dx0gcr),
->  	DDRPHY_REG_REG(dx1gcr),
-> +#if IS_ENABLED(CONFIG_STM32MP15X)
->  	DDRPHY_REG_REG(dx2gcr),
->  	DDRPHY_REG_REG(dx3gcr),
-> +#endif
+> diff --git a/include/image.h b/include/image.h
+> index f09862b636f..37506c81cdb 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -233,6 +233,7 @@ enum image_type_t {
+>  	IH_TYPE_RENESAS_SPKG,		/* Renesas SPKG image */
+>  	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
+>  	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
+> +	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
+>  
+>  	IH_TYPE_COUNT,			/* Number of image types */
+>  };
+> diff --git a/tools/stm32image.c b/tools/stm32image.c
+> index 5c6991f35de..3cc80651fa9 100644
+> --- a/tools/stm32image.c
+> +++ b/tools/stm32image.c
+> @@ -8,58 +8,74 @@
+>  
+>  /* magic ='S' 'T' 'M' 0x32 */
+>  #define HEADER_MAGIC be32_to_cpu(0x53544D32)
+> -#define VER_MAJOR_IDX	2
+> -#define VER_MINOR_IDX	1
+> -#define VER_VARIANT_IDX	0
+> +#define VER_MAJOR	2
+> +#define VER_MINOR	1
+> +#define VER_VARIANT	0
+>  #define HEADER_VERSION_V1	0x1
+> +#define HEADER_VERSION_V2	0x2
+>  /* default option : bit0 => no signature */
+>  #define HEADER_DEFAULT_OPTION	(cpu_to_le32(0x00000001))
+>  /* default binary type for U-Boot */
+>  #define HEADER_TYPE_UBOOT	(cpu_to_le32(0x00000000))
+> +#define PADDING_HEADER_MAGIC	(cpu_to_le32(0xFFFF5453))
+> +#define PADDING_HEADER_FLAG	(1ULL << 31)
+> +#define PADDING_HEADER_LENGTH	0x180
+>  
+> -struct stm32_header {
+> +struct stm32_header_v1 {
+>  	uint32_t magic_number;
+> -	uint32_t image_signature[64 / 4];
+> +	uint8_t image_signature[64];
+>  	uint32_t image_checksum;
+> -	uint8_t  header_version[4];
+> +	uint8_t header_version[4];
+>  	uint32_t image_length;
+>  	uint32_t image_entry_point;
+>  	uint32_t reserved1;
+>  	uint32_t load_address;
+>  	uint32_t reserved2;
+>  	uint32_t version_number;
+> +	/* V1.0 specific content */
+>  	uint32_t option_flags;
+>  	uint32_t ecdsa_algorithm;
+> -	uint32_t ecdsa_public_key[64 / 4];
+> -	uint32_t padding[83 / 4];
+> -	uint32_t binary_type;
+> +	uint8_t ecdsa_public_key[64];
+> +	uint8_t padding[83];
+> +	uint8_t binary_type;
 >  };
 >  
->  #define DDRPHY_REG_TIMING(x)	DDRPHY_REG(x, stm32mp1_ddrphy_timing)
-> @@ -211,6 +227,7 @@ static const struct reg_desc ddrphy_dyn[] = {
->  	DDRPHY_REG_DYN(dx1dllcr),
->  	DDRPHY_REG_DYN(dx1dqtr),
->  	DDRPHY_REG_DYN(dx1dqstr),
-> +#if IS_ENABLED(CONFIG_STM32MP15X)
->  	DDRPHY_REG_DYN(dx2gsr0),
->  	DDRPHY_REG_DYN(dx2gsr1),
->  	DDRPHY_REG_DYN(dx2dllcr),
-> @@ -221,6 +238,7 @@ static const struct reg_desc ddrphy_dyn[] = {
->  	DDRPHY_REG_DYN(dx3dllcr),
->  	DDRPHY_REG_DYN(dx3dqtr),
->  	DDRPHY_REG_DYN(dx3dqstr),
-> +#endif
->  };
+> -static struct stm32_header stm32image_header;
+> +struct stm32_header_v2 {
+> +	uint32_t magic_number;
+> +	uint8_t image_signature[64];
+> +	uint32_t image_checksum;
+> +	uint8_t header_version[4];
+> +	uint32_t image_length;
+> +	uint32_t image_entry_point;
+> +	uint32_t reserved1;
+> +	uint32_t load_address;
+> +	uint32_t reserved2;
+> +	uint32_t version_number;
+> +	/* V2.0 specific content */
+> +	uint32_t extension_flags;
+> +	uint32_t extension_headers_length;
+> +	uint32_t binary_type;
+> +	uint8_t padding[16];
+> +	uint32_t extension_header_type;
+> +	uint32_t extension_header_length;
+> +	uint8_t extension_padding[376];
+> +};
 >  
->  #define DDRPHY_REG_DYN_SIZE	ARRAY_SIZE(ddrphy_dyn)
-> @@ -287,6 +305,24 @@ const char *base_name[] = {
->  	[DDRPHY_BASE] = "phy",
->  };
+> -static void stm32image_default_header(struct stm32_header *ptr)
+> -{
+> -	if (!ptr)
+> -		return;
+> -
+> -	ptr->magic_number = HEADER_MAGIC;
+> -	ptr->header_version[VER_MAJOR_IDX] = HEADER_VERSION_V1;
+> -	ptr->option_flags = HEADER_DEFAULT_OPTION;
+> -	ptr->ecdsa_algorithm = cpu_to_le32(1);
+> -	ptr->binary_type = HEADER_TYPE_UBOOT;
+> -}
+> +static struct stm32_header_v1 stm32image_header_v1;
+> +static struct stm32_header_v2 stm32image_header_v2;
 >  
-> +bool is_stm32mp13_ddrc(const struct ddr_info *priv)
-> +{
-> +	if (IS_ENABLED(CONFIG_STM32MP13X) && !IS_ENABLED(CONFIG_STM32MP15X))
-> +		return true;		/* STM32MP13xx only build */
-> +	else if (!IS_ENABLED(CONFIG_STM32MP13X) && IS_ENABLED(CONFIG_STM32MP15X))
-> +		return false;	/* STM32MP15xx only build */
-> +
-> +	/* Combined STM32MP13xx and STM32MP15xx build */
-> +	return device_is_compatible(priv->dev, "st,stm32mp13-ddr");
-> +}
-> +
-> +static u32 get_rcc_ddritfcr(const struct ddr_info *priv)
-> +{
-> +	return priv->rcc + (is_stm32mp13_ddrc(priv) ?
-> +			    RCC_DDRITFCR_STM32MP13xx :
-> +			    RCC_DDRITFCR_STM32MP15xx);
-> +}
-> +
->  static u32 get_base_addr(const struct ddr_info *priv, enum base_type base)
+> -static uint32_t stm32image_checksum(void *start, uint32_t len)
+> +static uint32_t stm32image_checksum(void *start, uint32_t len,
+> +				    uint32_t header_size)
 >  {
->  	if (base == DDRPHY_BASE)
-> @@ -295,6 +331,21 @@ static u32 get_base_addr(const struct ddr_info *priv, enum base_type base)
->  		return (u32)priv->ctl;
+>  	uint32_t csum = 0;
+> -	uint32_t hdr_len = sizeof(struct stm32_header);
+>  	uint8_t *p;
+>  
+> -	if (len < hdr_len)
+> +	if (len < header_size) {
+>  		return 0;
+> +	}
+>  
+> -	p = start + hdr_len;
+> -	len -= hdr_len;
+> +	p = (unsigned char *)start + header_size;
+> +	len -= header_size;
+>  
+>  	while (len > 0) {
+>  		csum += *p;
+> @@ -70,24 +86,53 @@ static uint32_t stm32image_checksum(void *start, uint32_t len)
+>  	return csum;
 >  }
 >  
-> +static u32 get_type_size(const struct ddr_info *priv, enum reg_type type)
+> -static int stm32image_check_image_types(uint8_t type)
+> +static int stm32image_check_image_types_v1(uint8_t type)
+>  {
+>  	if (type == IH_TYPE_STM32IMAGE)
+>  		return EXIT_SUCCESS;
+>  	return EXIT_FAILURE;
+>  }
+>  
+> -static int stm32image_verify_header(unsigned char *ptr, int image_size,
+> -				    struct image_tool_params *params)
+> +static int stm32image_check_image_types_v2(uint8_t type)
 > +{
-> +	bool is_mp13 = is_stm32mp13_ddrc(priv);
-> +
-> +	if (type == REG_PERF)
-> +		return is_mp13 ? DDRCTL_REG_PERF_SIZE_STM32MP13xx :
-> +				 DDRCTL_REG_PERF_SIZE_STM32MP15xx;
-> +	else if (type == REGPHY_REG)
-> +		return is_mp13 ? DDRPHY_REG_REG_SIZE_STM32MP13xx :
-> +				 DDRPHY_REG_REG_SIZE_STM32MP15xx;
-> +
-> +	/* Everything else is the default size */
-> +	return ddr_registers[type].size;
+> +	if (type == IH_TYPE_STM32IMAGE_V2)
+> +		return EXIT_SUCCESS;
+> +	return EXIT_FAILURE;
 > +}
 > +
->  static void set_reg(const struct ddr_info *priv,
->  		    enum reg_type type,
->  		    const void *param)
-> @@ -304,9 +355,10 @@ static void set_reg(const struct ddr_info *priv,
->  	enum base_type base = ddr_registers[type].base;
->  	u32 base_addr = get_base_addr(priv, base);
->  	const struct reg_desc *desc = ddr_registers[type].desc;
-> +	u32 size = get_type_size(priv, type);
->  
->  	log_debug("init %s\n", ddr_registers[type].name);
-> -	for (i = 0; i < ddr_registers[type].size; i++) {
-> +	for (i = 0; i < size; i++) {
->  		ptr = (unsigned int *)(base_addr + desc[i].offset);
->  		if (desc[i].par_offset == INVALID_OFFSET) {
->  			log_err("invalid parameter offset for %s", desc[i].name);
-> @@ -656,12 +708,13 @@ static void stm32mp1_refresh_restore(struct stm32mp1_ddrctl *ctl,
->  static void stm32mp1_asr_enable(struct ddr_info *priv, const u32 pwrctl)
->  {
->  	struct stm32mp1_ddrctl *ctl = priv->ctl;
-> +	u32 rcc_ddritfcr = get_rcc_ddritfcr(priv);
->  
->  	/* SSR is the best we can do. */
->  	if (!(pwrctl & DDRCTRL_PWRCTL_EN_DFI_DRAM_CLK_DISABLE))
->  		return;
->  
-> -	clrsetbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCKMOD_MASK,
-> +	clrsetbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCKMOD_MASK,
->  			RCC_DDRITFCR_DDRCKMOD_ASR);
->  
->  	start_sw_done(ctl);
-> @@ -691,6 +744,7 @@ __maybe_unused
->  void stm32mp1_ddr_init(struct ddr_info *priv,
->  		       const struct stm32mp1_ddr_config *config)
->  {
-> +	u32 rcc_ddritfcr = get_rcc_ddritfcr(priv);
->  	u32 pir;
->  	int ret = -EINVAL;
->  	char bus_width;
-> @@ -732,12 +786,12 @@ start:
->   * 1.1 RESETS: presetn, core_ddrc_rstn, aresetn
->   */
->  	/* Assert All DDR part */
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCAPBRST);
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCAXIRST);
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCORERST);
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYAPBRST);
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYRST);
-> -	setbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYCTLRST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCAPBRST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCAXIRST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCORERST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYAPBRST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYRST);
-> +	setbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYCTLRST);
->  
->  /* 1.2. start CLOCK */
->  	if (stm32mp1_ddr_clk_enable(priv, config->info.speed))
-> @@ -746,12 +800,12 @@ start:
->  
->  /* 1.3. deassert reset */
->  	/* de-assert PHY rstn and ctl_rstn via DPHYRST and DPHYCTLRST */
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYRST);
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYCTLRST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYRST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYCTLRST);
->  	/* De-assert presetn once the clocks are active
->  	 * and stable via DDRCAPBRST bit
->  	 */
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCAPBRST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCAPBRST);
->  
->  /* 1.4. wait 128 cycles to permit initialization of end logic */
->  	udelay(2);
-> @@ -781,9 +835,9 @@ start:
->  		goto start;
->  
->  /*  2. deassert reset signal core_ddrc_rstn, aresetn and presetn */
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCORERST);
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DDRCAXIRST);
-> -	clrbits_le32(priv->rcc + RCC_DDRITFCR, RCC_DDRITFCR_DPHYAPBRST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCORERST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DDRCAXIRST);
-> +	clrbits_le32(rcc_ddritfcr, RCC_DDRITFCR_DPHYAPBRST);
->  
->  /*  3. start PHY init by accessing relevant PUBL registers
->   *    (DXGCR, DCR, PTR*, MR*, DTPR*)
-> @@ -854,9 +908,12 @@ start:
->  /* Enable auto-self-refresh, which saves a bit of power at runtime. */
->  	stm32mp1_asr_enable(priv, config->c_reg.pwrctl);
->  
-> -	/* enable uMCTL2 AXI port 0 and 1 */
-> +	/* enable uMCTL2 AXI port 0 */
->  	setbits_le32(&priv->ctl->pctrl_0, DDRCTRL_PCTRL_N_PORT_EN);
-> -	setbits_le32(&priv->ctl->pctrl_1, DDRCTRL_PCTRL_N_PORT_EN);
+> +static int stm32image_verify_header_v1(unsigned char *ptr, int image_size,
+> +				       struct image_tool_params *params)
+> +{
+> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
+> +	int i;
 > +
-> +	/* enable uMCTL2 AXI port 1 only on STM32MP15xx with 32bit DRAM bus */
-> +	if (!is_stm32mp13_ddrc(priv))
-> +		setbits_le32(&priv->ctl->pctrl_1, DDRCTRL_PCTRL_N_PORT_EN);
->  
->  	if (INTERACTIVE(STEP_DDR_READY))
->  		goto start;
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ddr.h b/drivers/ram/stm32mp1/stm32mp1_ddr.h
-> index 861efff92be..3621e6c9a1b 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ddr.h
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ddr.h
-> @@ -105,12 +105,14 @@ struct stm32mp1_ddrctrl_perf {
->  	u32 pcfgqos1_0;
->  	u32 pcfgwqos0_0;
->  	u32 pcfgwqos1_0;
-> +#if IS_ENABLED(CONFIG_STM32MP15X)
->  	u32 pcfgr_1;
->  	u32 pcfgw_1;
->  	u32 pcfgqos0_1;
->  	u32 pcfgqos1_1;
->  	u32 pcfgwqos0_1;
->  	u32 pcfgwqos1_1;
-> +#endif
->  };
->  
->  struct stm32mp1_ddrphy_reg {
-> @@ -123,8 +125,10 @@ struct stm32mp1_ddrphy_reg {
->  	u32 zq0cr1;
->  	u32 dx0gcr;
->  	u32 dx1gcr;
-> +#if IS_ENABLED(CONFIG_STM32MP15X)
->  	u32 dx2gcr;
->  	u32 dx3gcr;
-> +#endif
->  };
->  
->  struct stm32mp1_ddrphy_timing {
-> @@ -181,4 +185,6 @@ bool stm32mp1_ddr_interactive(
->  	enum stm32mp1_ddr_interact_step step,
->  	const struct stm32mp1_ddr_config *config);
->  
-> +bool is_stm32mp13_ddrc(const struct ddr_info *priv);
+> +	if (image_size < sizeof(struct stm32_header_v1))
+> +		return -1;
+> +	if (stm32hdr->magic_number != HEADER_MAGIC)
+> +		return -1;
+> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V1)
+> +		return -1;
+> +	if (stm32hdr->reserved1 || stm32hdr->reserved2)
+> +		return -1;
+> +	for (i = 0; i < (sizeof(stm32hdr->padding) / 4); i++) {
+> +		if (stm32hdr->padding[i] != 0)
+> +			return -1;
+> +	}
 > +
->  #endif
-> diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> index e9cd6229ec4..5f9b91d50e4 100644
-> --- a/drivers/ram/stm32mp1/stm32mp1_ram.c
-> +++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-> @@ -33,6 +33,7 @@ static const char *const clkname[] = {
->  
->  int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
+> +	return 0;
+> +}
+> +
+> +static int stm32image_verify_header_v2(unsigned char *ptr, int image_size,
+> +				       struct image_tool_params *params)
 >  {
-> +	bool is_mp13 = is_stm32mp13_ddrc(priv);
->  	unsigned long ddrphy_clk;
->  	unsigned long ddr_clk;
->  	struct clk clk;
-> @@ -40,6 +41,10 @@ int stm32mp1_ddr_clk_enable(struct ddr_info *priv, uint32_t mem_speed)
->  	unsigned int idx;
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
+>  	int i;
 >  
->  	for (idx = 0; idx < ARRAY_SIZE(clkname); idx++) {
-> +		/* DDRC2 clock are available only on STM32MP15xx */
-> +		if (is_mp13 && !strcmp(clkname[idx], "ddrc2"))
-> +			continue;
+> -	if (image_size < sizeof(struct stm32_header))
+> +	if (image_size < sizeof(struct stm32_header_v2))
+>  		return -1;
+>  	if (stm32hdr->magic_number != HEADER_MAGIC)
+>  		return -1;
+> -	if (stm32hdr->header_version[VER_MAJOR_IDX] != HEADER_VERSION_V1)
+> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V2)
+>  		return -1;
+>  	if (stm32hdr->reserved1 || stm32hdr->reserved2)
+>  		return -1;
+> @@ -101,38 +146,85 @@ static int stm32image_verify_header(unsigned char *ptr, int image_size,
+>  
+>  static void stm32image_print_header(const void *ptr, struct image_tool_params *params)
+>  {
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v1 *stm32hdr_v1 = (struct stm32_header_v1 *)ptr;
+> +	struct stm32_header_v2 *stm32hdr_v2 = (struct stm32_header_v2 *)ptr;
+>  
+>  	printf("Image Type   : STMicroelectronics STM32 V%d.%d\n",
+> -	       stm32hdr->header_version[VER_MAJOR_IDX],
+> -	       stm32hdr->header_version[VER_MINOR_IDX]);
+> +	       stm32hdr_v1->header_version[VER_MAJOR],
+> +	       stm32hdr_v1->header_version[VER_MINOR]);
+>  	printf("Image Size   : %lu bytes\n",
+> -	       (unsigned long)le32_to_cpu(stm32hdr->image_length));
+> +	       (unsigned long)le32_to_cpu(stm32hdr_v1->image_length));
+>  	printf("Image Load   : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->load_address));
+> +	       le32_to_cpu(stm32hdr_v1->load_address));
+>  	printf("Entry Point  : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->image_entry_point));
+> +	       le32_to_cpu(stm32hdr_v1->image_entry_point));
+>  	printf("Checksum     : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->image_checksum));
+> -	printf("Option     : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->option_flags));
+> -	printf("BinaryType : 0x%08x\n",
+> -	       le32_to_cpu(stm32hdr->binary_type));
+> +	       le32_to_cpu(stm32hdr_v1->image_checksum));
+> +	switch (stm32hdr_v1->header_version[VER_MAJOR]) {
+> +	case HEADER_VERSION_V1:
+> +		printf("Option     : 0x%08x\n",
+> +		       __le32_to_cpu(stm32hdr_v1->option_flags));
+> +		printf("BinaryType : 0x%08x\n",
+> +		       le32_to_cpu(stm32hdr_v1->binary_type));
+> +		break;
 > +
->  		ret = clk_get_by_name(priv->dev, clkname[idx], &clk);
+> +	case HEADER_VERSION_V2:
+> +		printf("Extension    : 0x%08x\n",
+> +		       __le32_to_cpu(stm32hdr_v2->extension_flags));
+> +		break;
+> +
+> +	default:
+> +		printf("Incorrect header version\n");
+> +	}
+>  }
 >  
->  		if (!ret)
+> -static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
+> -				  struct image_tool_params *params)
+> +static void stm32image_set_header_v1(void *ptr, struct stat *sbuf, int ifd,
+> +				     struct image_tool_params *params)
+>  {
+> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
+> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
+>  
+> -	stm32image_default_header(stm32hdr);
+> +	stm32hdr->magic_number = HEADER_MAGIC;
+> +	stm32hdr->version_number = cpu_to_le32(0);
+> +
+> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V1;
+> +	stm32hdr->option_flags = HEADER_DEFAULT_OPTION;
+> +	stm32hdr->ecdsa_algorithm = cpu_to_le32(1);
+> +	stm32hdr->binary_type = HEADER_TYPE_UBOOT;
+>  
+>  	stm32hdr->load_address = cpu_to_le32(params->addr);
+>  	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
+>  	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
+> -					     sizeof(struct stm32_header));
+> +					     sizeof(*stm32hdr));
+>  	stm32hdr->image_checksum =
+> -		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size));
+> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
+> +						sizeof(*stm32hdr)));
+> +}
+> +
+> +static void stm32image_set_header_v2(void *ptr, struct stat *sbuf, int ifd,
+> +				     struct image_tool_params *params)
+> +{
+> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
+> +
+> +	stm32hdr->magic_number = HEADER_MAGIC;
+> +	stm32hdr->version_number = cpu_to_le32(0);
+> +
+> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V2;
+> +	stm32hdr->extension_flags =
+> +		cpu_to_le32(PADDING_HEADER_FLAG);
+> +	stm32hdr->extension_headers_length =
+> +		cpu_to_le32(PADDING_HEADER_LENGTH);
+> +	stm32hdr->extension_header_type =
+> +		cpu_to_le32(PADDING_HEADER_MAGIC);
+> +	stm32hdr->extension_header_length =
+> +		cpu_to_le32(PADDING_HEADER_LENGTH);
+> +
+> +	stm32hdr->load_address = cpu_to_le32(params->addr);
+> +	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
+> +	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
+> +					     sizeof(*stm32hdr));
+> +	stm32hdr->image_checksum =
+> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
+> +						sizeof(*stm32hdr)));
+>  }
+>  
+>  /*
+> @@ -141,14 +233,29 @@ static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
+>  U_BOOT_IMAGE_TYPE(
+>  	stm32image,
+>  	"STMicroelectronics STM32MP Image support",
+> -	sizeof(struct stm32_header),
+> -	(void *)&stm32image_header,
+> +	sizeof(struct stm32_header_v1),
+> +	(void *)&stm32image_header_v1,
+> +	NULL,
+> +	stm32image_verify_header_v1,
+> +	stm32image_print_header,
+> +	stm32image_set_header_v1,
+> +	NULL,
+> +	stm32image_check_image_types_v1,
+> +	NULL,
+> +	NULL
+> +);
+> +
+> +U_BOOT_IMAGE_TYPE(
+> +	stm32imagev2,
+> +	"STMicroelectronics STM32MP Image V2.0 support",
+> +	sizeof(struct stm32_header_v2),
+> +	(void *)&stm32image_header_v2,
+>  	NULL,
+> -	stm32image_verify_header,
+> +	stm32image_verify_header_v2,
+>  	stm32image_print_header,
+> -	stm32image_set_header,
+> +	stm32image_set_header_v2,
+>  	NULL,
+> -	stm32image_check_image_types,
+> +	stm32image_check_image_types_v2,
+>  	NULL,
+>  	NULL
+>  );
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

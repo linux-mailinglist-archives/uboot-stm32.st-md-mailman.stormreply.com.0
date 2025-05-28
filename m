@@ -2,61 +2,61 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6DC30AC6254
-	for <lists+uboot-stm32@lfdr.de>; Wed, 28 May 2025 08:47:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DCEF9AC68F9
+	for <lists+uboot-stm32@lfdr.de>; Wed, 28 May 2025 14:15:52 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 2F26AC36B2B;
-	Wed, 28 May 2025 06:47:49 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 84161C36B35;
+	Wed, 28 May 2025 12:15:52 +0000 (UTC)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5EF9DC36B2A
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id E8DA4C36B31
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Wed, 28 May 2025 06:47:48 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54S10vKN023602;
- Wed, 28 May 2025 08:47:28 +0200
+ Wed, 28 May 2025 12:15:50 +0000 (UTC)
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54SBB0w5010137;
+ Wed, 28 May 2025 14:15:23 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- D4Zw0oBrwY6hPdKsddGl2+urmCVASXnKO30cEA4w/XM=; b=x6GmXwDUVzHrHRZC
- g9h3ub8IqaRYGfOka5yw92sUI7jWNE3l/E+5fpMOOKEs3R3Wqcx1aMjXR6QcvfSP
- PvLtTkHIkTWPpwvd3hOpQCvkrbvzMGTnH1TcNEyXfYP5CgcfmPeG1YiGEbc3YM8Z
- aDnbujM5wMrkakV5XofYJ8OTAsfuFUTuT8ca/JyR1KirmdD8j9JvQCSu8XvO3o7/
- MM9essX1a2qLw7eo+I/GvyzuGOawsiEjO8uVdQbj8uNvpPGDFZQ6+hdDdpa0jM7W
- xb4LlsuzVx9TkTD+8VOSXoasq1ByaFcmXyH4urZH+eIolC9yviJH1w6wg5lWvDa+
- S8I2Bw==
+ NBgbUYbtqALyYeCpNxQ29LjcJYnP3TtpmFQ4wOUCwLE=; b=TtUC1Mz7Y3HLEyJl
+ LtkXnhIqr/fWZcdwCOJIssa7/r/ZVpDzc7tD+MZDfHiBQ1D//szu7sDgE940Cksf
+ tTaEE1ebGrxm+MFurFTAgBMaeGoA7QbG3RDq0z6iYzErYIcpqBPSBOBq6a0pHJK3
+ fVQWXB0fSRpYnnxE33kqxmJrkWjUvhuLFxlxNd1v4GDNYQ4ZRlUSaoHqUabTQY4K
+ C6z6YXb7aWE9JeKnmthlE+2b9qLWntgdE2wyDAdMgcui2NdAUsfmNy0ovKBFCxTa
+ BC8RlKqcNibsbdcP4vfiDw2yOmWDMwwih5fq2cirxL6tb2qqW+UjCbn1y8afiKzS
+ zsN3VA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46u3hk7rw6-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 46w54hqhh4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 28 May 2025 08:47:28 +0200 (MEST)
+ Wed, 28 May 2025 14:15:23 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A4C22400B8;
- Wed, 28 May 2025 08:46:12 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 796DA40052;
+ Wed, 28 May 2025 14:14:17 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 67F76B6C3EA;
- Wed, 28 May 2025 08:45:10 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C71CB6D3F37;
+ Wed, 28 May 2025 14:13:43 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 28 May
- 2025 08:45:09 +0200
-Message-ID: <d1188c24-8830-4522-8f1c-ad7575e5c73b@foss.st.com>
-Date: Wed, 28 May 2025 08:45:08 +0200
+ 2025 14:13:43 +0200
+Message-ID: <2eff388b-45b3-46f6-8dda-374e15101017@foss.st.com>
+Date: Wed, 28 May 2025 14:13:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
 References: <20250512172149.150214-1-marek.vasut@mailbox.org>
- <20250512172149.150214-11-marek.vasut@mailbox.org>
+ <20250512172149.150214-10-marek.vasut@mailbox.org>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250512172149.150214-11-marek.vasut@mailbox.org>
+In-Reply-To: <20250512172149.150214-10-marek.vasut@mailbox.org>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-05-28_03,2025-05-27_01,2025-03-28_01
+ definitions=2025-05-28_06,2025-05-27_01,2025-03-28_01
 Cc: Tom Rini <trini@konsulko.com>,
  Gatien Chevallier <gatien.chevallier@foss.st.com>, u-boot@dh-electronics.com,
  Cheick Traore <cheick.traore@foss.st.com>,
@@ -67,8 +67,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Lionel Debieve <lionel.debieve@foss.st.com>,
  Pascal Zimmermann <pzimmermann@dh-electronics.com>,
  Simon Glass <sjg@chromium.org>
-Subject: Re: [Uboot-stm32] [PATCH 10/10] ARM: dts: stm32: Switch defconfig
- to SPL for DH STM32MP13xx DHCOR DHSBC
+Subject: Re: [Uboot-stm32] [PATCH 09/10] ARM: dts: stm32: Add SPL specifics
+ for DH STM32MP13xx DHCOR DHSBC
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,15 +88,91 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 On 5/12/25 19:21, Marek Vasut wrote:
-> Update defconfig to make use of U-Boot SPL to initialize DH STM32MP13xx
-> DHCOM DHSBC SoM and board. This is largely a move of SPL enablement from
-> DH STM32MP15xx DHSOM defconfigs into generic DH STM32MP1xx defconfig .
-> Support for SPI NOR chips which are not used on STM32MP13xx DHCOR are
-> moved into STM32MP15xx DHSOM defconfigs. Changes to STM32MP13xx DHCOR
-> defconfig then enable SPL support, CCF in SPL to configure clock, pin
-> configuration support in SPL, and OpTee OS start support in U-Boot.
+> Add SPL specific DT additions to DH STM32MP13xx DHCOR DHSBC . These
+> include I2C3 configuration which is required to access the PMIC,
+> PMIC regulator and QSPI NOR bootph-all properties to allow SPL to
+> configure PMIC buck regulators and load from QSPI NOR respectively,
+> etzpc bus switch to simple-bus to prevent interference from TFABOOT
+> specific configuration, and RCC configuration to define clock tree
+> configuration used by this platform.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+
+
+Hi Marek
+
+This patch is causing DT compilation errors when using stm32mp15_defconfig and 
+stm32mp15_trusted_defconfig, see below:
+
+
+./tools/buildman/buildman -j16 -e -d -V -v -E -m stm32mp
+
+Generating board list...Processing #include to produce configs/lager_defconfig
+Processing #include to produce configs/imx8mp_dhcom_pdk3_defconfig
+Processing #include to produce configs/j784s4_evm_a72_defconfig
+Processing #include to produce configs/stout_defconfig
+
+[...]
+
+Processing #include to produce configs/am62ax_evm_a53_defconfig
+Processing #include to produce configs/r8a779g0_whitehawk_defconfig
+Processing #include to produce configs/silk_defconfig
+Processing #include to produce configs/r8a77995_draak_defconfig
+Building current source for 19 boards (8 threads, 16 jobs per thread)
+       arm:  +   stm32mp15                                                            
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_hse"
++
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_hsi"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_csi"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_lse"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_lsi"
++ERROR: Input tree has errors, aborting (use -f to force output)
++make[3]: *** [scripts/Makefile.lib:396: dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb] Error 1
++make[2]: *** [dts/Makefile:60: arch-dtbs] Error 2
++make[1]: *** [Makefile:1168: dts/dt.dtb] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+       arm:  w+   stm32mp13_dhcor                     
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@1:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@2:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@3:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@1: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@1: Relying on default #size-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@2: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@2: Relying on default #size-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@3: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@3: Relying on default #size-cells value
+       arm:  +   stm32mp15_trusted                            
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_hse"
++
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_hsi"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_csi"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_lse"
++dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: ERROR (phandle_references): /soc/rcc@50000000: Reference to non-existent node or label "clk_lsi"
++ERROR: Input tree has errors, aborting (use -f to force output)
++make[3]: *** [scripts/Makefile.lib:396: dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb] Error 1
++make[2]: *** [dts/Makefile:60: arch-dtbs] Error 2
++make[1]: *** [Makefile:1168: dts/dt.dtb] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+       arm:  w+   stm32mp15_basic                             
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@1:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@2:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (reg_format): /soc/rcc@50000000/st,pll@3:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@1: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@1: Relying on default #size-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@2: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@2: Relying on default #size-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@3: Relying on default #address-cells value
+w+dts/upstream/src/arm/st/stm32mp135f-dhcor-dhsbc.dtb: Warning (avoid_default_addr_size): /soc/rcc@50000000/st,pll@3: Relying on default #size-cells value
+   15    2    2 /19             stm32mp15_basic
+Completed: 19 total built, 19 newly), duration 0:07:48, rate 0.04
+
+
+Thanks
+Patrice
+
+
+
+
 > ---
 > Cc: Cheick Traore <cheick.traore@foss.st.com>
 > Cc: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
@@ -112,242 +188,194 @@ On 5/12/25 19:21, Marek Vasut wrote:
 > Cc: u-boot@lists.denx.de
 > Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->  configs/stm32mp13_dhcor_defconfig | 30 +++++++++++++------
->  configs/stm32mp15_dhsom.config    | 48 +++++--------------------------
->  configs/stm32mp_dhsom.config      | 35 ++++++++++++++++++++--
->  3 files changed, 60 insertions(+), 53 deletions(-)
+>  arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 155 ++++++++++++++++++++-
+>  1 file changed, 154 insertions(+), 1 deletion(-)
 > 
-> diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
-> index 2da9287ea7b..0d70aab5e8f 100644
-> --- a/configs/stm32mp13_dhcor_defconfig
-> +++ b/configs/stm32mp13_dhcor_defconfig
-> @@ -2,7 +2,6 @@
+> diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> index 6117da10bbf..b5952637442 100644
+> --- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+> @@ -3,6 +3,7 @@
+>   * Copyright (C) 2024 Marek Vasut <marex@denx.de>
+>   */
 >  
->  CONFIG_ARM=y
->  CONFIG_ARCH_STM32MP=y
-> -CONFIG_TFABOOT=y
->  CONFIG_SYS_MALLOC_F_LEN=0x1c0000
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0400000
->  CONFIG_ENV_OFFSET=0x3E0000
-> @@ -12,11 +11,16 @@ CONFIG_DDR_CACHEABLE_SIZE=0x8000000
->  CONFIG_TARGET_ST_STM32MP13X=y
->  CONFIG_ENV_OFFSET_REDUND=0x3F0000
->  CONFIG_STM32MP15_PWR=y
-> -# CONFIG_ARMV7_NONSEC is not set
-> +CONFIG_ARMV7_NONSEC=y
-> +CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
-> +CONFIG_ARMV7_PSCI_NR_CPUS=2
-> +# CONFIG_ARMV7_LPAE is not set
->  CONFIG_SYS_MEMTEST_START=0xc0000000
->  CONFIG_SYS_MEMTEST_END=0xc4000000
-> +CONFIG_SYS_MEM_TOP_HIDE=0x2000000
->  CONFIG_BOOTSTAGE_RECORD_COUNT=100
->  CONFIG_BOOTDELAY=3
-> +CONFIG_BOOTM_OPTEE=y
->  CONFIG_SYS_CONSOLE_IS_IN_ENV=y
->  CONFIG_CMD_ASKENV=y
->  CONFIG_CMD_ERASEENV=y
-> @@ -31,20 +35,28 @@ CONFIG_ENV_IS_NOWHERE=y
->  CONFIG_ENV_IS_IN_MMC=y
->  CONFIG_ENV_MMC_USE_DT=y
->  CONFIG_ENV_SPI_MAX_HZ=50000000
-> -CONFIG_CLK_SCMI=y
->  CONFIG_SET_DFU_ALT_INFO=y
->  CONFIG_SYS_I2C_EEPROM_ADDR=0x50
->  CONFIG_SYS_MMC_ENV_DEV=0
->  CONFIG_SYS_MMC_ENV_PART=1
->  CONFIG_PHY_REALTEK=y
-> -CONFIG_DM_REGULATOR_SCMI=y
-> -CONFIG_RESET_SCMI=y
->  CONFIG_DM_RNG=y
->  CONFIG_RNG_STM32=y
-> -CONFIG_SYSRESET_PSCI=y
-> -CONFIG_TEE=y
-> -CONFIG_OPTEE=y
-> -# CONFIG_OPTEE_TA_AVB is not set
->  CONFIG_USB_ONBOARD_HUB=y
->  CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
->  CONFIG_ERRNO_STR=y
-> +CONFIG_OPTEE_LIB=y
-> +CONFIG_OPTEE_IMAGE=y
-> +CONFIG_OPTEE_TZDRAM_SIZE=0x02000000
-> +CONFIG_SPL_TEXT_BASE=0x2FFE0000
-> +CONFIG_SPL_CLK_CCF=y
-> +CONFIG_SPL_CLK_COMPOSITE_CCF=y
-> +# CONFIG_SPL_SHA1 is not set
-> +# CONFIG_SPL_SHA256 is not set
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_SPL_PINCTRL_GENERIC=y
-> +CONFIG_SPL_PINMUX=y
-> +CONFIG_SPL_PINCONF=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-> diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-> index c84116482f6..f7ff5db5943 100644
-> --- a/configs/stm32mp15_dhsom.config
-> +++ b/configs/stm32mp15_dhsom.config
-> @@ -2,10 +2,6 @@
+> +#include <dt-bindings/clock/stm32mp13-clksrc.h>
+>  #include "stm32mp13-u-boot.dtsi"
+>  #include "stm32mp13-ddr3-dhsom-1x2Gb-1066-binG.dtsi"
 >  
->  # CONFIG_ARMV7_VIRT is not set
->  # CONFIG_BINMAN_FDT is not set
-> -# CONFIG_SPL_DOS_PARTITION is not set
-> -# CONFIG_SPL_PARTITION_UUIDS is not set
-> -# CONFIG_SPL_PINCTRL_FULL is not set
-> -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_BOARD_EARLY_INIT_F=y
->  CONFIG_BOARD_SIZE_LIMIT=1441792
->  CONFIG_BOOTCOUNT_BOOTLIMIT=3
-> @@ -20,9 +16,7 @@ CONFIG_CMD_STM32PROG_OTP=y
->  CONFIG_CONSOLE_MUX=y
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
->  CONFIG_DM_HWSPINLOCK=y
-> -CONFIG_DM_REGULATOR_STM32_VREFBUF=y
->  CONFIG_HAS_BOARD_SIZE_LIMIT=y
-> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_HWSPINLOCK_STM32=y
->  CONFIG_KS8851_MLL=y
->  CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks access-controllers"
-> @@ -31,42 +25,7 @@ CONFIG_PINCTRL_STMFX=y
->  CONFIG_REMOTEPROC_STM32_COPRO=y
->  CONFIG_SERVERIP="192.168.1.1"
->  CONFIG_SF_DEFAULT_SPEED=50000000
-> -CONFIG_SPL=y
-> -CONFIG_SPL_BLOCK_CACHE=y
-> -CONFIG_SPL_BOOTCOUNT_LIMIT=y
-> -CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
-> -CONFIG_SPL_DFU=y
-> -CONFIG_SPL_DM_REGULATOR=y
-> -CONFIG_SPL_DM_REGULATOR_STPMIC1=y
-> -CONFIG_SPL_DM_SPI=y
-> -CONFIG_SPL_DM_SPI_FLASH=y
-> -CONFIG_SPL_DM_USB_GADGET=y
-> -CONFIG_SPL_ENV_IS_NOWHERE=y
-> -CONFIG_SPL_ENV_SUPPORT=y
-> -CONFIG_SPL_FOOTPRINT_LIMIT=y
-> -CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> -CONFIG_SPL_I2C=y
-> -CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-> -CONFIG_SPL_LOAD_FIT=y
-> -CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-> -CONFIG_SPL_MAX_FOOTPRINT=0x3db00
-> -CONFIG_SPL_MMC=y
-> -CONFIG_SPL_MTD=y
-> -CONFIG_SPL_PHY=y
-> -CONFIG_SPL_POWER=y
-> -CONFIG_SPL_RAM_DEVICE=y
-> -CONFIG_SPL_SPI=y
-> -CONFIG_SPL_SPI_FLASH_MTD=y
-> -CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> -CONFIG_SPL_HAVE_INIT_STACK=y
-> -CONFIG_SPL_STACK=0x30000000
-> -CONFIG_SPL_SYS_MALLOC=y
-> -CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
-> -CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> -CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> -CONFIG_SPL_USB_GADGET=y
->  CONFIG_STM32_ADC=y
-> -CONFIG_SYSRESET_SYSCON=y
->  CONFIG_SYS_BOOTCOUNT_ADDR=0x5C00A14C
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x3
->  CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
-> @@ -76,3 +35,10 @@ CONFIG_PREBOOT="run dh_preboot"
->  CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
->  CONFIG_TARGET_DH_STM32MP1_PDK2=y
->  CONFIG_USE_SERVERIP=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_SPANSION=y
-> +CONFIG_SPI_FLASH_STMICRO=y
-> +CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_SPL_TEXT_BASE=0x2FFC2500
-> +CONFIG_SPL_BLOCK_CACHE=y
-> +CONFIG_SPL_MMC=y
-> diff --git a/configs/stm32mp_dhsom.config b/configs/stm32mp_dhsom.config
-> index 01d65cfd893..13f9186b1cf 100644
-> --- a/configs/stm32mp_dhsom.config
-> +++ b/configs/stm32mp_dhsom.config
-> @@ -2,6 +2,10 @@
->  # CONFIG_CMD_EXPORTENV is not set
->  # CONFIG_EFI_LOADER is not set
->  # CONFIG_ISO_PARTITION is not set
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +# CONFIG_SPL_PARTITION_UUIDS is not set
-> +# CONFIG_SPL_PINCTRL_FULL is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_BOOTCOMMAND="run bootcmd_stm32mp"
->  CONFIG_BOOTCOUNT_LIMIT=y
->  CONFIG_CMD_BOOTCOUNT=y
-> @@ -38,6 +42,7 @@ CONFIG_DM_REGULATOR=y
->  CONFIG_DM_REGULATOR_FIXED=y
->  CONFIG_DM_REGULATOR_GPIO=y
->  CONFIG_DM_REGULATOR_STPMIC1=y
-> +CONFIG_DM_REGULATOR_STM32_VREFBUF=y
->  CONFIG_DM_RTC=y
->  CONFIG_DM_SPI=y
->  CONFIG_DM_SPI_FLASH=y
-> @@ -49,6 +54,7 @@ CONFIG_ENV_SIZE=0x4000
->  CONFIG_FAT_WRITE=y
->  CONFIG_FIT=y
->  CONFIG_GPIO_HOG=y
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->  CONFIG_I2C_EEPROM=y
->  CONFIG_IPV6=y
->  CONFIG_IP_DEFRAG=y
-> @@ -58,6 +64,7 @@ CONFIG_MTD=y
->  CONFIG_NET_RANDOM_ETHADDR=y
->  CONFIG_OF_LIVE=y
->  CONFIG_OF_UPSTREAM=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="interrupts interrupt-names interrupts-extended interrupt-controller \\\#interrupt-cells interrupt-parent dmas dma-names assigned-clocks assigned-clock-rates assigned-clock-parents hwlocks"
->  CONFIG_PHY=y
->  CONFIG_PHY_STM32_USBPHYC=y
->  CONFIG_PINCONF=y
-> @@ -66,17 +73,39 @@ CONFIG_PROT_TCP_SACK=y
->  CONFIG_RTC_STM32=y
->  CONFIG_SERIAL_RX_BUFFER=y
->  CONFIG_SPI=y
-> -CONFIG_SPI_FLASH_MACRONIX=y
->  CONFIG_SPI_FLASH_MTD=y
->  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> -CONFIG_SPI_FLASH_SPANSION=y
-> -CONFIG_SPI_FLASH_STMICRO=y
->  CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPL=y
-> +CONFIG_SPL_BOOTCOUNT_LIMIT=y
-> +CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xc0300000
-> +CONFIG_SPL_DFU=y
-> +CONFIG_SPL_DM_SPI=y
-> +CONFIG_SPL_DM_SPI_FLASH=y
-> +CONFIG_SPL_ENV_IS_NOWHERE=y
-> +CONFIG_SPL_ENV_SUPPORT=y
-> +CONFIG_SPL_FOOTPRINT_LIMIT=y
-> +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_LOAD_FIT_ADDRESS=0xc1000000
-> +CONFIG_SPL_MAX_FOOTPRINT=0x3db00
-> +CONFIG_SPL_MTD=y
-> +CONFIG_SPL_PHY=y
-> +CONFIG_SPL_POWER=y
-> +CONFIG_SPL_RAM_DEVICE=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SPL_SPI_FLASH_MTD=y
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_STACK=0x30000000
-> +CONFIG_SPL_SYS_MALLOC=y
-> +CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
->  CONFIG_STM32_FMC2_EBI=y
->  CONFIG_STM32_QSPI=y
->  CONFIG_STM32_SDMMC2=y
->  CONFIG_STM32_SPI=y
->  CONFIG_SUPPORT_EMMC_BOOT=y
-> +CONFIG_SYSRESET_SYSCON=y
->  CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
->  CONFIG_SYS_BOOTM_LEN=0x2000000
->  CONFIG_SYS_DISABLE_AUTOLOAD=y
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
-
-Thanks
-Patrice
+> @@ -19,8 +20,12 @@
+>  	};
+>  };
+>  
+> +&etzpc {
+> +	compatible = "simple-bus";
+> +};
+> +
+>  &flash0 {
+> -	bootph-pre-ram;
+> +	bootph-all;
+>  
+>  	partitions {
+>  		compatible = "fixed-partitions";
+> @@ -49,6 +54,134 @@
+>  	};
+>  };
+>  
+> +&i2c3 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c3_pins_a>;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +};
+> +
+> +&qspi_clk_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&qspi_bk1_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&qspi_cs1_pins_a {
+> +	bootph-all;
+> +	pins {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	bootph-all;
+> +	i2c3_pins_a: i2c3-0 {
+> +	        bootph-all;
+> +		pins {
+> +			bootph-all;
+> +			pinmux = <STM32_PINMUX('B', 8, AF5)>, /* I2C3_SCL */
+> +				 <STM32_PINMUX('H', 14, AF4)>; /* I2C3_SDA */
+> +			bias-disable;
+> +			drive-open-drain;
+> +			slew-rate = <0>;
+> +		};
+> +	};
+> +};
+> +
+> +&rcc {
+> +	clocks = <&clk_hse>, <&clk_hsi>, <&clk_csi>, <&clk_lse>, <&clk_lsi>;
+> +
+> +	st,clksrc = <
+> +		CLK_MPU_PLL1P
+> +		CLK_AXI_PLL2P
+> +		CLK_MLAHBS_PLL3
+> +		CLK_PLL12_HSE
+> +		CLK_PLL3_HSE
+> +		CLK_PLL4_HSE
+> +		CLK_CKPER_HSE
+> +		CLK_RTC_LSE
+> +		CLK_MCO1_LSI
+> +		CLK_MCO2_HSI
+> +	>;
+> +
+> +	st,clkdiv = <
+> +		0 /*AXI*/
+> +		0 /*MLHAB*/
+> +		1 /*APB1*/
+> +		1 /*APB2*/
+> +		1 /*APB3*/
+> +		1 /*APB4*/
+> +		2 /*APB5*/
+> +		1 /*APB6*/
+> +		0 /*RTC*/
+> +	>;
+> +
+> +	st,pkcs = <
+> +		CLK_I2C12_HSI
+> +		CLK_I2C3_HSI
+> +		CLK_QSPI_PLL3R
+> +		CLK_SAES_AXI
+> +		CLK_SDMMC1_PLL3R
+> +		CLK_SDMMC2_PLL3R
+> +		CLK_STGEN_HSE
+> +		CLK_UART2_HSI
+> +		CLK_UART4_HSI
+> +		CLK_USBO_USBPHY
+> +		CLK_USBPHY_HSE
+> +	>;
+> +
+> +	/*
+> +	 * cfg = < DIVM1 DIVN P Q R PQR(p,q,r) >;
+> +	 * frac = < f >;
+> +	 *
+> +	 * PRQ(p,q,r) ... for p,q,r: 0-output disabled / 1-output enabled
+> +	 * DIVN ... actually multiplier, but RCC_PLL1CFGR1 calls the field DIVN
+> +	 * m ... for PLL1,2: m=2 ; for PLL3,4: m=1
+> +	 * XTAL = 24 MHz
+> +	 *
+> +	 * VCO = ( XTAL / (DIVM1 + 1) ) * m * ( DIVN + 1 + ( f / 8192 ) )
+> +	 *   P = VCO / (P + 1)
+> +	 *   Q = VCO / (Q + 1)
+> +	 *   R = VCO / (R + 1)
+> +	 */
+> +
+> +	/* VCO = 1066.0 MHz => P = 266 (AXI), Q = 266, R = 533 (DDR) */
+> +	pll2: st,pll@1 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <1>;
+> +		cfg = < 2 65 1 1 0 PQR(1,1,1) >;
+> +		frac = < 0x1400 >;
+> +		bootph-all;
+> +	};
+> +
+> +	/* VCO = 600 MHz => P = 200, Q = 150, R = 200 */
+> +	pll3: st,pll@2 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <2>;
+> +		cfg = < 2 74 2 3 2 PQR(1,1,1) >;
+> +		bootph-all;
+> +	};
+> +
+> +	/* VCO = 750.0 MHz => P = 125, Q = 83, R = 75 */
+> +	pll4: st,pll@3 {
+> +		compatible = "st,stm32mp1-pll";
+> +		reg = <3>;
+> +		cfg = < 3 124 5 8 9 PQR(1,1,1) >;
+> +		bootph-all;
+> +	};
+> +};
+> +
+>  &sdmmc1 {
+>  	status = "disabled";
+>  };
+> @@ -56,3 +189,23 @@
+>  &usbotg_hs {
+>  	u-boot,force-b-session-valid;
+>  };
+> +
+> +&vddcpu {
+> +	bootph-all;
+> +};
+> +
+> +&vdd_ddr {
+> +	bootph-all;
+> +};
+> +
+> +&vdd {
+> +	bootph-all;
+> +};
+> +
+> +&vddcore {
+> +	bootph-all;
+> +};
+> +
+> +&vref_ddr {
+> +	bootph-all;
+> +};
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

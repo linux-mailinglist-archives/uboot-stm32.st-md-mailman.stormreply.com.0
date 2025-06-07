@@ -2,81 +2,81 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D1D5AD0C3E
-	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jun 2025 11:37:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A7A9AD0C3F
+	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jun 2025 11:37:45 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id CF468C36B29;
-	Sat,  7 Jun 2025 09:37:43 +0000 (UTC)
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com
- [209.85.218.49])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D8522C36B2A;
+	Sat,  7 Jun 2025 09:37:44 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com
+ [209.85.218.44])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 058ABC36B29
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 2EE82C36B1F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  7 Jun 2025 09:37:43 +0000 (UTC)
-Received: by mail-ej1-f49.google.com with SMTP id
- a640c23a62f3a-adb5cb6d8f1so451456266b.3
+ Sat,  7 Jun 2025 09:37:44 +0000 (UTC)
+Received: by mail-ej1-f44.google.com with SMTP id
+ a640c23a62f3a-ade33027bcfso124164466b.1
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 07 Jun 2025 02:37:43 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1749289062; x=1749893862;
+ d=amarulasolutions.com; s=google; t=1749289064; x=1749893864;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=W6rS7UWa700GAPh//bF3XK1aI5ctzfMLdfNA0NjnTUw=;
- b=CYOkn/xAM08HS9OVaVcV73094c8+1gGtFxYfI5QgV+xTcySfo+91xh9zal2qmNiGX3
- dJgcvKW3AUQ6bd8tCyoMHzIGxnRbE3MvFdS6EKO4Lt2gzh/pWNwYLb/FZ51Ks43CFjJY
- 35u/Z2+XYw5r02Bw8nLBZ3xOVUY64Gp92Tj18=
+ bh=9NO5t2sCjJwDY57c4qoGlRa7h3BkXE9AaZMo2w9AJr4=;
+ b=cb15j46HKZxVHP6iPAE67ZULXVVSWujC547suxzrt+ysJ9qw27gsHgl+QbZ5hgzqL/
+ /SMEmgF+WMWNRls30Mvj5pzFZcYqqR3rFULx65EpFm1AQDHWPTG1fspeE2ZbEH7/GV7w
+ 03eEUGL8HauiS3PcBqCsyIbmM6jZ+wkHRTOfs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749289062; x=1749893862;
+ d=1e100.net; s=20230601; t=1749289064; x=1749893864;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=W6rS7UWa700GAPh//bF3XK1aI5ctzfMLdfNA0NjnTUw=;
- b=hUfzn9PriFu/OO2KgZRmhlqf2DwxOKSBQtIsJ3jNNnCzWjPGXcl4Noo9bVHpuiv2SC
- 7MN2WwsHceJmZfKs/np9izSEFyp5JQv1KwPsU1zmQoOsqzOfgrqJic6awkViOscKexBd
- qWidv1jDUNxizVxyuImYgX/bid9SMtrf3KYuvRm8eYarypfxQe8mokx+82Kyu65ODobi
- FVwoEbuBlvzMaQfVtZJr9zYvhWY8KMQX2LBWLVr9k51ubbPI/ibzOgTExfsGLbZu2yPb
- bhgQxoxHpM6Ac8UiQe96P2r/5Ua3fNzAR8mnBmS85EaUZ449lHJ4vn6L7oqUNF+7MdzU
- 5U9A==
+ bh=9NO5t2sCjJwDY57c4qoGlRa7h3BkXE9AaZMo2w9AJr4=;
+ b=hxMjVj98ruICCVYcrRXtFpJh1Aa98llKT/Dkue5bsm4StFwl74yDai9aq/ZerbaugD
+ WaOvcmcn5VltGlI7+dT5geVjWd9aUUUPDcgxv4qRuRVa5jYKSQMz677ANuQou0sEvVOe
+ TiMpZScx27ma+yY6kiOWcnKH+Ue+8Nf80OU3LVGKMozwXNQ894sf6Nx/XJs3Q/qLb8Sa
+ OraTpYlwERObdLwbzZKkARplxgWuxT+l7tvZ6tMpEJRPNoZp8m6YUhkATj74ung9JbVE
+ /Le78x3dwqbETBRnRPePcnzOEDfwVQw2vlapomFCVGSeV44LIsio2x0FKybBfk12WNpW
+ Pb5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwelR5VbjSmLvOIcQGCqbPMElMS5Ph2AJAjAWH9p1RduK/twAGM3TOepwT5hxakFqmzwiE1oxDlF/UhQ==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwhGAMRkfcRtvxmwRZ09R3Bd5gosKxvcrwzfpLmBeT/V3uMtEtm
- gaLCT0M5ACMncTOHCEpb7HjQUrfE8IDj1RvrpLR7fvS8euE0ujxyyb5ZvTtYXhw/A5k=
-X-Gm-Gg: ASbGncv82zcNKrM/4UmOFDwyBSwJrjzlibd8jSbOHwEHsdFHtqab/XRxoAKZ190MnD/
- 1+hT/G8jZy6WwiD4lSdxIAEkOtM+AnOFOlyb8Vwy44vkyPGGzZ3X57dskP506f/wko9mo+/I0Jz
- vL7ccd7FhpdGRQsFU2irukyn1N2iTZhoH4Cu4ufH3Dd5jPl1dS+JBuFwt+Sw8915h0wVz1ds6H+
- T0IlTaJVOML23hobyFZ8nfDFHUYkwURGLTuaQtfah47QKHqrBOed7HsTxp4KSY2fXcd0k6uU4WY
- y8zG8hwo2Y7dtsnrNAqB4CEP/0L9g1d8qHjMuKNodh0IHG9Z7Xf7f8GJVVf7QACNzllvs4MnF/Z
- t2mxoVuOTg70Mf7n0fjqpX2X53u9XHiGPXvn1RVLGBy/CnPNBKc9rQ4Sfv6JqiyFsWYmPcluNp3
- 51Tgu0acncan23tVPzMlLhncU=
-X-Google-Smtp-Source: AGHT+IHKjcOEIFC2KqlB5t2Pr1+hi53vbbs6zAOup2OXPfqIHD5LBIetf9Zkm1pzcdTUZwodaQ6DIw==
-X-Received: by 2002:a17:907:7249:b0:ad8:8621:924f with SMTP id
- a640c23a62f3a-ade1abc5d45mr495562666b.56.1749289062442; 
- Sat, 07 Jun 2025 02:37:42 -0700 (PDT)
+ AJvYcCVL+IrnQe0BnvCwQQPEwjCdBC1/RBbO2wTXBDwl4HWQczGSb12+j8ALBWo5fPuoAHBXA+jSbnFoqKQxQQ==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0YzrVQHzTFK2KYuPLj7jzWSS67sOPodu1+FWKUu9QgWc3eBBAWRm
+ /YGxYX2k+7KVWG+9ZJ8NBlhf1oZe7sgP9bTZ1IOTzw1tdQTLq1hEChLEkcQTmb+G7Y4kFeGI/F6
+ vEdMa
+X-Gm-Gg: ASbGncttgxEEghg3d3CYj9c4LSxcZO8+prgiihzRIA0aA/D3r1MlLIPyjQvEnVk8FXL
+ pieQBUHhh9zPthvrnGPhQydd6hIOBzPn2LFK474rEZNv8ERbdIMTrzxl/vGOHA/5tFR4DGP3GuG
+ rEDt3zssjFOuVzTKBBoyuAQMlb83uH1wX9N3tZ7d0aK0KIr3h23Uz8e7gzmHkMKP22My6Y3Jiww
+ LH1gAqZPY/uHG0nRnUVtRh3yvYUrPGsCmOCBwHFUrcD2Qen64LJDdVbWEYYf+PjyBRYG0DiAmoH
+ rplVUVV1qR0lTpJqUKtsRAYlR8v1fuzYStH2sWc/NB+ES6MoKXolifGaBJBXR8L7urVFOVf35zK
+ IEyCx1UcWrcL1/BsEvFuMuU0i/3vHy22yWlFkw/j1RgV9XJ47cF1Tj5wkQMoAUqkHGDAovCEdKt
+ OdjaazGt+2WKSZ
+X-Google-Smtp-Source: AGHT+IEBowOeC9/dzflnqZN5u8XfRgr21rHywOKJFUnkT3+WO4E5ova2jAJIOXk6cSoELUV6dlioAg==
+X-Received: by 2002:a17:906:4794:b0:ad5:372d:87e3 with SMTP id
+ a640c23a62f3a-ade1aa157fcmr606984566b.27.1749289063562; 
+ Sat, 07 Jun 2025 02:37:43 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.41
+ a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 02:37:42 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:43 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sat,  7 Jun 2025 11:37:15 +0200
-Message-ID: <20250607093730.2249536-8-dario.binacchi@amarulasolutions.com>
+Date: Sat,  7 Jun 2025 11:37:16 +0200
+Message-ID: <20250607093730.2249536-9-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
-Cc: Tom Rini <trini@konsulko.com>,
- Alexandre Torgue <alexandre.torgue@foss.st.com>,
- uboot-stm32@st-md-mailman.stormreply.com, Sumit Garg <sumit.garg@kernel.org>,
+Cc: Tom Rini <trini@konsulko.com>, linux-amarula@amarulasolutions.com,
+ uboot-stm32@st-md-mailman.stormreply.com,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH 7/9] ARM: dts: stm32: support STM32h747i-disco
-	board
+ Dillon Min <dillon.minfei@gmail.com>
+Subject: [Uboot-stm32] [PATCH 8/9] ARM: dts: stm32: add
+	stm32h747i-disco-u-boot DTS file
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,172 +93,125 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The board includes an STM32H747XI SoC with the following resources:
- - 2 Mbytes Flash
- - 1 Mbyte SRAM
- - LCD-TFT controller
- - MIPI-DSI interface
- - FD-CAN
- - USB 2.0 high-speed/full-speed
- - Ethernet MAC
- - camera interface
-
-Detailed information can be found at:
-https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
+Add stm32h747i-disco-u-boot DTS file with FMC SDRAM node and its
+pinmux settings.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Link: https://lore.kernel.org/r/20250427074404.3278732-9-dario.binacchi@amarulasolutions.com
-Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
-
-[ backport upstream commit: 49ba8fc6eab63165639ffbb9f976222d39739cab ]
-
 ---
 
- dts/upstream/src/arm/st/stm32h747i-disco.dts | 136 +++++++++++++++++++
- 1 file changed, 136 insertions(+)
- create mode 100644 dts/upstream/src/arm/st/stm32h747i-disco.dts
+ arch/arm/dts/stm32h747i-disco-u-boot.dtsi | 104 ++++++++++++++++++++++
+ 1 file changed, 104 insertions(+)
+ create mode 100644 arch/arm/dts/stm32h747i-disco-u-boot.dtsi
 
-diff --git a/dts/upstream/src/arm/st/stm32h747i-disco.dts b/dts/upstream/src/arm/st/stm32h747i-disco.dts
+diff --git a/arch/arm/dts/stm32h747i-disco-u-boot.dtsi b/arch/arm/dts/stm32h747i-disco-u-boot.dtsi
 new file mode 100644
-index 000000000000..99f0255dae8e
+index 000000000000..ff297cc91fa8
 --- /dev/null
-+++ b/dts/upstream/src/arm/st/stm32h747i-disco.dts
-@@ -0,0 +1,136 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/arch/arm/dts/stm32h747i-disco-u-boot.dtsi
+@@ -0,0 +1,104 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright (C) 2025 Amarula Solutions, Dario Binacchi <dario.binacchi@amarulasolutions.com>
 + */
 +
-+/dts-v1/;
-+#include "stm32h743.dtsi"
-+#include "stm32h7-pinctrl.dtsi"
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
++#include <stm32h7-u-boot.dtsi>
 +
-+/ {
-+	model = "STMicroelectronics STM32H747i-Discovery board";
-+	compatible = "st,stm32h747i-disco", "st,stm32h747";
++&fmc {
 +
-+	chosen {
-+		bootargs = "root=/dev/ram";
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	memory@d0000000 {
-+		device_type = "memory";
-+		reg = <0xd0000000 0x2000000>;
-+	};
-+
-+	aliases {
-+		serial0 = &usart1;
-+		serial1 = &uart8;
-+	};
-+
-+	v3v3: regulator-v3v3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "v3v3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-always-on;
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		led-green {
-+			gpios = <&gpioi 12 GPIO_ACTIVE_LOW>;
-+			linux,default-trigger = "heartbeat";
-+		};
-+		led-orange {
-+			gpios = <&gpioi 13 GPIO_ACTIVE_LOW>;
-+		};
-+		led-red {
-+			gpios = <&gpioi 14 GPIO_ACTIVE_LOW>;
-+		};
-+		led-blue {
-+			gpios = <&gpioi 15 GPIO_ACTIVE_LOW>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		autorepeat;
-+		button-0 {
-+			label = "User";
-+			linux,code = <KEY_WAKEUP>;
-+			gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
-+		};
-+		button-1 {
-+			label = "JoySel";
-+			linux,code = <KEY_ENTER>;
-+			gpios = <&gpiok 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+		button-2 {
-+			label = "JoyDown";
-+			linux,code = <KEY_DOWN>;
-+			gpios = <&gpiok 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+		button-3 {
-+			label = "JoyUp";
-+			linux,code = <KEY_UP>;
-+			gpios = <&gpiok 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+		button-4 {
-+			label = "JoyLeft";
-+			linux,code = <KEY_LEFT>;
-+			gpios = <&gpiok 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+		button-5 {
-+			label = "JoyRight";
-+			linux,code = <KEY_RIGHT>;
-+			gpios = <&gpiok 5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
++	/*
++	 * Memory configuration from sdram datasheet IS42S32800G-6BLI
++	 * first bank is bank@0
++	 * second bank is bank@1
++	 */
++	bank1: bank@1 {
++		st,sdram-control = /bits/ 8 <NO_COL_9
++					     NO_ROW_12
++					     MWIDTH_32
++					     BANKS_4
++					     CAS_2
++					     SDCLK_3
++					     RD_BURST_EN
++					     RD_PIPE_DL_0>;
++		st,sdram-timing = /bits/ 8 <TMRD_1
++					    TXSR_1
++					    TRAS_1
++					    TRC_6
++					    TRP_2
++					    TWR_1
++					    TRCD_1>;
++		st,sdram-refcount = <1539>;
 +	};
 +};
 +
-+&clk_hse {
-+	clock-frequency = <25000000>;
-+};
++&pinctrl {
++	fmc_pins: fmc@0 {
++		pins {
++			pinmux = <STM32_PINMUX('D', 0, AF12)>,
++				 <STM32_PINMUX('D', 1, AF12)>,
++				 <STM32_PINMUX('D', 8, AF12)>,
++				 <STM32_PINMUX('D', 9, AF12)>,
++				 <STM32_PINMUX('D',10, AF12)>,
++				 <STM32_PINMUX('D',14, AF12)>,
++				 <STM32_PINMUX('D',15, AF12)>,
 +
-+&mac {
-+	status = "disabled";
-+	pinctrl-0 = <&ethernet_rmii>;
-+	pinctrl-names = "default";
-+	phy-mode = "rmii";
-+	phy-handle = <&phy0>;
++				 <STM32_PINMUX('E', 0, AF12)>,
++				 <STM32_PINMUX('E', 1, AF12)>,
++				 <STM32_PINMUX('E', 7, AF12)>,
++				 <STM32_PINMUX('E', 8, AF12)>,
++				 <STM32_PINMUX('E', 9, AF12)>,
++				 <STM32_PINMUX('E',10, AF12)>,
++				 <STM32_PINMUX('E',11, AF12)>,
++				 <STM32_PINMUX('E',12, AF12)>,
++				 <STM32_PINMUX('E',13, AF12)>,
++				 <STM32_PINMUX('E',14, AF12)>,
++				 <STM32_PINMUX('E',15, AF12)>,
 +
-+	mdio0 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		compatible = "snps,dwmac-mdio";
-+		phy0: ethernet-phy@0 {
-+			reg = <0>;
++				 <STM32_PINMUX('F', 0, AF12)>,
++				 <STM32_PINMUX('F', 1, AF12)>,
++				 <STM32_PINMUX('F', 2, AF12)>,
++				 <STM32_PINMUX('F', 3, AF12)>,
++				 <STM32_PINMUX('F', 4, AF12)>,
++				 <STM32_PINMUX('F', 5, AF12)>,
++				 <STM32_PINMUX('F',11, AF12)>,
++				 <STM32_PINMUX('F',12, AF12)>,
++				 <STM32_PINMUX('F',13, AF12)>,
++				 <STM32_PINMUX('F',14, AF12)>,
++				 <STM32_PINMUX('F',15, AF12)>,
++
++				 <STM32_PINMUX('G', 0, AF12)>,
++				 <STM32_PINMUX('G', 1, AF12)>,
++				 <STM32_PINMUX('G', 2, AF12)>,
++				 <STM32_PINMUX('G', 4, AF12)>,
++				 <STM32_PINMUX('G', 5, AF12)>,
++				 <STM32_PINMUX('G', 8, AF12)>,
++				 <STM32_PINMUX('G',15, AF12)>,
++
++				 <STM32_PINMUX('H', 5, AF12)>,
++				 <STM32_PINMUX('H', 6, AF12)>,
++				 <STM32_PINMUX('H', 7, AF12)>,
++				 <STM32_PINMUX('H', 8, AF12)>,
++				 <STM32_PINMUX('H', 9, AF12)>,
++				 <STM32_PINMUX('H',10, AF12)>,
++				 <STM32_PINMUX('H',11, AF12)>,
++				 <STM32_PINMUX('H',12, AF12)>,
++				 <STM32_PINMUX('H',13, AF12)>,
++				 <STM32_PINMUX('H',14, AF12)>,
++				 <STM32_PINMUX('H',15, AF12)>,
++
++				 <STM32_PINMUX('I', 0, AF12)>,
++				 <STM32_PINMUX('I', 1, AF12)>,
++				 <STM32_PINMUX('I', 2, AF12)>,
++				 <STM32_PINMUX('I', 3, AF12)>,
++				 <STM32_PINMUX('I', 4, AF12)>,
++				 <STM32_PINMUX('I', 5, AF12)>,
++				 <STM32_PINMUX('I', 6, AF12)>,
++				 <STM32_PINMUX('I', 7, AF12)>,
++				 <STM32_PINMUX('I', 9, AF12)>,
++				 <STM32_PINMUX('I',10, AF12)>;
++
++			slew-rate = <3>;
 +		};
 +	};
-+};
-+
-+&sdmmc1 {
-+	pinctrl-names = "default", "opendrain", "sleep";
-+	pinctrl-0 = <&sdmmc1_b4_pins_a>;
-+	pinctrl-1 = <&sdmmc1_b4_od_pins_a>;
-+	pinctrl-2 = <&sdmmc1_b4_sleep_pins_a>;
-+	cd-gpios = <&gpioi 8 GPIO_ACTIVE_LOW>;
-+	broken-cd;
-+	st,neg-edge;
-+	bus-width = <4>;
-+	vmmc-supply = <&v3v3>;
-+	status = "okay";
-+};
-+
-+&usart1 {
-+	pinctrl-0 = <&usart1_pins_b>;
-+	pinctrl-names = "default";
-+	status = "okay";
-+};
-+
-+&uart8 {
-+	pinctrl-0 = <&uart8_pins_a>;
-+	pinctrl-names = "default";
-+	status = "okay";
 +};
 -- 
 2.43.0

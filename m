@@ -2,70 +2,69 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD8C3AD0C39
-	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jun 2025 11:37:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8982AD0C3A
+	for <lists+uboot-stm32@lfdr.de>; Sat,  7 Jun 2025 11:37:39 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 943F1C36B2B;
-	Sat,  7 Jun 2025 09:37:37 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 9D8A7C36B20;
+	Sat,  7 Jun 2025 09:37:39 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com
+ [209.85.218.53])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 0AD23C36B2B
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4B779C36B1F
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat,  7 Jun 2025 09:37:37 +0000 (UTC)
-Received: by mail-ej1-f45.google.com with SMTP id
- a640c23a62f3a-ade30256175so209036366b.1
+ Sat,  7 Jun 2025 09:37:38 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-ade48b24c97so19489266b.2
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Sat, 07 Jun 2025 02:37:37 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1749289056; x=1749893856;
+ d=amarulasolutions.com; s=google; t=1749289058; x=1749893858;
  darn=st-md-mailman.stormreply.com; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vIZOBsaFYYEjxcHR9lV+uTimm4H/Ly/1YE4Yh6CRGkY=;
- b=pF2TQJUQnCypzvsjc9lFubKvC3RNqmXJXn92sCkEiLKv4Hp4i8pbeW+087wXhaAhMm
- c9Ot6dLi6XtfuN6JNiZerQu6hrqv2jshOnLB38y546L415r8a6LLHUoXZakhMO6to4S9
- Ieqp3BaK0XVhQ8wO7/MURwyz9iC+yBYFCxAWM=
+ bh=5EYlXTukM9iQeWq7o7TCfUj4K5UOPJ1hdlXX00ZZ8vA=;
+ b=bD8KUmA6YSF/ECMbf5jUrFdb+tRnaM8S0nOCpPdtYFD9kdaFUVaMF5wnsr77EjMtQu
+ Ed5dq2Mv1c/eMNOPUWcjECKtI6gNnd3vN/367iWgWuF2JxVoZ0jEH1o3Rg5FvA8lC0ZV
+ 2zGaZWu4sm2o4+kOfi52f1JX43d+wCYxBILfg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749289056; x=1749893856;
+ d=1e100.net; s=20230601; t=1749289058; x=1749893858;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vIZOBsaFYYEjxcHR9lV+uTimm4H/Ly/1YE4Yh6CRGkY=;
- b=fGL8RxUdj1agusnf3NYqk0DH4DXB/uK47vvoA2sHgY3/puCj/j8NzZGPvahkbefT1N
- cu6eTwbAc3WPG8rgMYWD5/6KxO8nfLTTN61ESU75vTPf8PVlpCZgAwJFPBbGNZBNNuCz
- +RR8zXQZLhvH2S4zz2aEgvhKGP3SUqZqnpK2dgwFXdgU/zNNx+ETJrEc4JjirdK1vuk+
- DpR3KT6ldXcHTKcCeRULe5LUcihebACYQUTEOQRhm/v2hIh/X8IYKAsssWLQQVM+aNeY
- og/Kn5LxzHlUzez6rzA1Jq+/dIf9zp9NLGraiUQ8b1fQAg4FIX2dV6Sa9xb5e494HFWh
- xZww==
+ bh=5EYlXTukM9iQeWq7o7TCfUj4K5UOPJ1hdlXX00ZZ8vA=;
+ b=Elj4bNaTUTCK2rXMkVeMIvA17ex/leUv4rR2PWTzoSm1lZy+xQpCJo2FOmWcESa7cM
+ VtylBXH7sn3QQWsB+poJ5cs25+m8ImKQU8YWM+aR5lWCpsBtEuWe+LY9smc25GvKYAqp
+ djZyW2+PiOFxAAJg9qnq9YGtrOPLSpFBaMlC152kmNic8ZmGlZyD/DQvM0jTywC7rxNB
+ plXmxMRWHvfIBm2LpU/fIQXl+rzv+Tkwyx9yyFjzSrJymHp8oDPbNoZQZCl68t7T6Bwk
+ QjctshMKmvdTpOXWqt/OiOoYqAIydOhuY5STg67NUQZWTFXQOuVgeYKYjB6r4RR/mK3p
+ 2IcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvDkZMkiKLdgHWB2iQp1FhWStFbh08b2zkAhqss2/3a4hixuPlh8sEdXRKZcVgxMIIAW4NKZqcx9HIOg==@st-md-mailman.stormreply.com
-X-Gm-Message-State: AOJu0YwilrUo0001OUTVykS/zqV4xWiYt+57HRG5QhzxcPagAPw0hLan
- ElH+7/wtlRnEvGVa3PuMMyUBfb5W/gmyPap2agZSVqEJaYgegvX6O4bCABXXLUnDx6qRvRdsdbL
- xv8Ms
-X-Gm-Gg: ASbGncsIuI/DuIGoIkIt1ufZ9uOwCqvwWwaK2xNIFSQEXZkWSWUubEtT5cHq5NLiZa6
- x99/LdTxAJTF5xa4a383FNgymOI/wEY0N6XabJv7Ko33/flDQcV310p/CCgiK7/WIBV/tNJe3Ud
- thDw54EGoWT0dG3IMDYjsRM/nGJL7EJ3mXzgTlFtNqQfjeEG7idjO6mttX3IIPwGpbcxOd8an/C
- mTe2CvO8zJx5Ft6CX3L6Msp/nJg4VZr9ovIaFDONAiHD2+t/wQadWwFB/zwkHmsNJeKv9VLaoqK
- ir/GQy5BtfRSPJce4CcJG4UHTz1pAo/qO2iBBHBiQ0tT1AMijxSEih4GYg5w654nHxfYg+nMLYQ
- q21Lo9ogaOEhXL4rrgUGrqpDqlkF1TYAnmNeFgf3cKwSVZALDFLly7xed+ekWV3v7I7Othl4Abn
- dVY/9pwR5P9yAh
-X-Google-Smtp-Source: AGHT+IFAdqnB+dLeUsyPjUsfpZI5jwFPAUcSwSLXQx8GQZPR2e3lgnPNhna3Qs6fUHoedNIahRsZhQ==
-X-Received: by 2002:a17:907:805:b0:ade:3bec:ea40 with SMTP id
- a640c23a62f3a-ade3becfd3bmr193018566b.10.1749289056123; 
- Sat, 07 Jun 2025 02:37:36 -0700 (PDT)
+ AJvYcCUwhUPfg3KTb3Sv0vydh5TRVXgASEFZF9+WzcAFjaKZdWk+Bk/2fVw7Dued4ANnYgPiX58XhFGCVU217A==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yzi+rUaoBNG8cnngnJuIaWBF7ahP8vVa/w+GOeBe+Jy7+7sGFih
+ cBTt0UHX5cFzVh+WKi2P2j2UBumU74EkXN2hSIz38rnWylN3DyIu43cBNMG9mMOrhGg=
+X-Gm-Gg: ASbGnctlgww2IovGpMatPzhDUQLvTtrQKVEfOiOIHxyhVr1mPLYeDRtEplHvRIgZwxP
+ XgZ7aBvBX4zCId+bGd5QQDFSR/sSdgBJ8b+vBVga4DsLK/1/Y6v64Y4qqwwnZNZgTh8c6kmb7oF
+ POHXQW4PSIBwJPifvvoJD9zYdTV999luDE6ejxlmyhAtmIwcMODB96tFbgUZ43NdiwFtNBj9UZX
+ P+JiEKLoKhkKSIc/p0uJXcosPI9xuT50zvj4H6bjusF7XF6oBtK2+lVCvclgXfLZNx2snMhjr8m
+ 9d79EaPr4t8PA6ZxL/zqUEL7+kqLDVCTJ2xozo4wErsVNzU7vyUZiRylkbUprjt8KfnTLOqdsaE
+ giTGFt0zKOIqmOp5WRDP33wMCbFwq6a8U99SxytHZxnwETg4h83obXM7g4hOAQjTeWOKxN7fJUX
+ QLeP2tLlQeofcH5+f11BaiLZA=
+X-Google-Smtp-Source: AGHT+IHBkrZFq8Z8CSmDTiG1wug9eS7FjYIuIGhMsLFN1qp3MnnUthlWFGGwra3brbDS0dZrY9jh5Q==
+X-Received: by 2002:a17:907:97d6:b0:ad5:c463:8d42 with SMTP id
+ a640c23a62f3a-ade1a9164acmr631631366b.12.1749289057793; 
+ Sat, 07 Jun 2025 02:37:37 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-87-5-95-99.retail.telecomitalia.it. [87.5.95.99])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.35
+ a640c23a62f3a-ade1dc38cffsm246524966b.124.2025.06.07.02.37.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Jun 2025 02:37:35 -0700 (PDT)
+ Sat, 07 Jun 2025 02:37:37 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
-Date: Sat,  7 Jun 2025 11:37:10 +0200
-Message-ID: <20250607093730.2249536-3-dario.binacchi@amarulasolutions.com>
+Date: Sat,  7 Jun 2025 11:37:11 +0200
+Message-ID: <20250607093730.2249536-4-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
@@ -78,8 +77,8 @@ Cc: Tom Rini <trini@konsulko.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  linux-amarula@amarulasolutions.com
-Subject: [Uboot-stm32] [PATCH 2/9] dt-bindings: arm: stm32: add compatible
-	for stm32h747i-disco board
+Subject: [Uboot-stm32] [PATCH 3/9] dt-bindings: clock: stm32h7: rename
+	USART{7, 8}_CK to UART{7, 8}_CK
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,46 +95,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-The board includes an STM32H747XI SoC with the following resources:
- - 2 Mbytes Flash
- - 1 MByte SRAM
- - LCD-TFT controller
- - MIPI-DSI interface
- - FD-CAN
- - USB 2.0 high-speed/full-speed
- - Ethernet MAC
- - camera interface
-
-Detailed information can be found at:
-https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
+As stated in the reference manual RM0433, the STM32H743 MCU has
+USART1/2/3/6, UART4/5/7/8, and LPUART1. The patches make all the clock
+macros for the serial ports consistent with the documentation.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-Link: https://lore.kernel.org/r/20250427074404.3278732-3-dario.binacchi@amarulasolutions.com
+Link: https://lore.kernel.org/r/20250427074404.3278732-5-dario.binacchi@amarulasolutions.com
 Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 
-[upstream commit: 815d49f61ea049075482161f897aa13e1ae30cbb ]
+[ upstream commit: ecab3c40fa49a2073c4c916ebff9496a6b5db7bd ]
 
 ---
 
- dts/upstream/Bindings/arm/stm32/stm32.yaml | 4 ++++
- 1 file changed, 4 insertions(+)
+ dts/upstream/include/dt-bindings/clock/stm32h7-clks.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/dts/upstream/Bindings/arm/stm32/stm32.yaml b/dts/upstream/Bindings/arm/stm32/stm32.yaml
-index b6c56d4ce6b9..a0660a0b494f 100644
---- a/dts/upstream/Bindings/arm/stm32/stm32.yaml
-+++ b/dts/upstream/Bindings/arm/stm32/stm32.yaml
-@@ -42,6 +42,10 @@ properties:
-               - st,stm32h743i-disco
-               - st,stm32h743i-eval
-           - const: st,stm32h743
-+      - items:
-+          - enum:
-+              - st,stm32h747i-disco
-+          - const: st,stm32h747
-       - items:
-           - enum:
-               - st,stm32h750i-art-pi
+diff --git a/dts/upstream/include/dt-bindings/clock/stm32h7-clks.h b/dts/upstream/include/dt-bindings/clock/stm32h7-clks.h
+index 6637272b3242..330b39c2c303 100644
+--- a/dts/upstream/include/dt-bindings/clock/stm32h7-clks.h
++++ b/dts/upstream/include/dt-bindings/clock/stm32h7-clks.h
+@@ -126,8 +126,8 @@
+ #define ADC3_CK 128
+ #define DSI_CK 129
+ #define LTDC_CK 130
+-#define USART8_CK 131
+-#define USART7_CK 132
++#define UART8_CK 131
++#define UART7_CK 132
+ #define HDMICEC_CK 133
+ #define I2C3_CK 134
+ #define I2C2_CK 135
 -- 
 2.43.0
 

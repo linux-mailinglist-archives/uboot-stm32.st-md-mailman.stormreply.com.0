@@ -2,71 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38526AD1A2A
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 11:00:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F2527AD1A79
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 11:26:15 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 01EF7C3F93A;
-	Mon,  9 Jun 2025 09:00:01 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 851C7C32E8E;
+	Mon,  9 Jun 2025 09:26:15 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 4D762C3F939
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 5C244C349C5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 Jun 2025 09:00:00 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m2Ji025293;
- Mon, 9 Jun 2025 10:59:45 +0200
+ Mon,  9 Jun 2025 09:26:14 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5599BoVx022000;
+ Mon, 9 Jun 2025 11:26:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- NTo6gZRQdGCMj5HkDqoUHsvm4U5cblf7AVVxJmaGmr0=; b=3gjzACo8Vl79UfTm
- EVgb/RyMVlUrH/D6x1sbHfs5GGzBETjX+QyS4IFLbMOhTgGPM98+Prfp4nFhpthR
- aG6GWB+Ql5eyVjBiEZYkmL08s0pxSmz4CDrWmO+cZ8ryEBN+El6j6Pc8QtsiwIou
- VNGNsjXf6+vl3VlotY5z7FwCVbqBSeG+YWbamyviUiPdNQSVMf53cPj7TEwhKH6M
- /OyAISGfjL6A+X4FdYFUTGoCxLbfWSuY4yzzbw5q8MMuLY47BScGEOcH7W1unJeL
- XNdEp3HTUqDhZJyqv2df3POVofT7Ctn9epOCQdtBuoV5u4dZFQUzlIdCMs+Kwxd0
- UsY3Gw==
+ gxZdVw3LhcIwTGhmk9xJxX6z6M4b7iWDh69bFbv6K4A=; b=fEUPdk4ctJkny8fK
+ fFi7h0DN65wEwvwnKN051nrBiN6GJibaBW/vIBm/uA0aX+OehTxRlGdLfhhILAKJ
+ DmQbXQPi449TAiRxT1TcYyh0mMx8lrpeXzdchpHCWwcVDon3l/7cALf+APtAtNHF
+ td35/QCXUgKNitN4F2uSIqDkfOSqiXVlc3NKW6OxzvXJiIxIPe5RbrWh9yYipr+w
+ AlC+Ze81bH/2U1NE6kqFja0UhqsL4S+7mBmQs9q7mPKwaM5NY/IApJAqcbKOhneM
+ ZnHTJvGUYBY8FZXWl9dToS7a8bcyEnP1ZWihk/DVT3YFElXMDxupjBei/SJ/FNsh
+ taMJDQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4750cnku4j-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474aum74bn-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 09 Jun 2025 10:59:45 +0200 (MEST)
+ Mon, 09 Jun 2025 11:26:02 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 527BD40057;
- Mon,  9 Jun 2025 10:58:26 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8EB104002D;
+ Mon,  9 Jun 2025 11:24:43 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 51640B64492;
- Mon,  9 Jun 2025 10:57:22 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3874FB89479;
+ Mon,  9 Jun 2025 11:22:03 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
- 2025 10:57:21 +0200
-Message-ID: <0c9174c3-fc9f-48e0-9a8f-f53c44a91cf6@foss.st.com>
-Date: Mon, 9 Jun 2025 10:57:21 +0200
+ 2025 11:22:02 +0200
+Message-ID: <00cce741-1c4a-40d9-bf2d-6ca58b12c9af@foss.st.com>
+Date: Mon, 9 Jun 2025 11:22:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-References: <20250512171016.149233-1-marek.vasut@mailbox.org>
- <02f308bf-032a-4e97-a8dc-3a1169b75c71@foss.st.com>
+To: Lukasz Majewski <lukma@denx.de>
+References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
+ <20250607093730.2249536-10-dario.binacchi@amarulasolutions.com>
+ <316dd0c7-c7b8-407d-b34a-b5b90f056b94@foss.st.com>
+ <20250609100727.56d7de7b@wsk>
+ <830e3e26-1936-45c0-9768-82d65757fcdc@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <02f308bf-032a-4e97-a8dc-3a1169b75c71@foss.st.com>
+In-Reply-To: <830e3e26-1936-45c0-9768-82d65757fcdc@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-09_03,2025-06-05_01,2025-03-28_01
-Cc: Julien Masson <jmasson@baylibre.com>, Tom Rini <trini@konsulko.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Simon Glass <sjg@chromium.org>,
+ definitions=2025-06-09_04,2025-06-05_01,2025-03-28_01
+Cc: Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
  uboot-stm32@st-md-mailman.stormreply.com,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-Subject: Re: [Uboot-stm32] [PATCH] tools: stm32image: Add support for STM32
-	Image V2.0
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ linux-amarula@amarulasolutions.com
+Subject: Re: [Uboot-stm32] [PATCH 9/9] board: stm32: add stm32h747-discovery
+ board support
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,375 +89,311 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 5/27/25 17:59, Patrice CHOTARD wrote:
+On 6/9/25 10:34, Patrice CHOTARD wrote:
 > 
 > 
-> On 5/12/25 19:09, Marek Vasut wrote:
->> Add support for generating STM32 Image V2.0, which is used by STM32MP13xx.
->> The image header layout is similar to STM32MP15xx STM32 Image V1.0, but is
->> different enough to justify duplicate functions to generate the v2 image.
->> This code at least attempts to align the V1 and V2 image handling where
->> possible.
+> On 6/9/25 10:07, Lukasz Majewski wrote:
+>> Hi Patrice,
 >>
->> Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
+>>> On 6/7/25 11:37, Dario Binacchi wrote:
+>>>> The board includes an STM32H747XI SoC with the following resources:
+>>>>  - 2 Mbytes Flash
+>>>>  - 1 Mbyte SRAM
+>>>>  - LCD-TFT controller
+>>>>  - MIPI-DSI interface
+>>>>  - FD-CAN
+>>>>  - USB 2.0 high-speed/full-speed
+>>>>  - Ethernet MAC
+>>>>  - camera interface
+>>>>
+>>>> Detailed information can be found at:
+>>>> https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
+>>>>
+>>>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>>
+>>>> ---
+>>>>
+>>>>  arch/arm/mach-stm32/stm32h7/Kconfig        |  4 +++
+>>>>  board/st/stm32h747-disco/Kconfig           | 15 ++++++++
+>>>>  board/st/stm32h747-disco/MAINTAINERS       |  7 ++++
+>>>>  board/st/stm32h747-disco/Makefile          |  6 ++++
+>>>>  board/st/stm32h747-disco/stm32h747-disco.c | 42
+>>>> ++++++++++++++++++++++ configs/stm32h747-disco_defconfig          |
+>>>> 35 ++++++++++++++++++ drivers/clk/stm32/clk-stm32h7.c            |
+>>>> 5 +++ include/configs/stm32h747-disco.h          | 32
+>>>> +++++++++++++++++ 8 files changed, 146 insertions(+)
+>>>>  create mode 100644 board/st/stm32h747-disco/Kconfig
+>>>>  create mode 100644 board/st/stm32h747-disco/MAINTAINERS
+>>>>  create mode 100644 board/st/stm32h747-disco/Makefile
+>>>>  create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
+>>>>  create mode 100644 configs/stm32h747-disco_defconfig
+>>>>  create mode 100644 include/configs/stm32h747-disco.h
+>>>>
+>>>> diff --git a/arch/arm/mach-stm32/stm32h7/Kconfig
+>>>> b/arch/arm/mach-stm32/stm32h7/Kconfig index
+>>>> 70233a4b23cd..72f20c477d04 100644 ---
+>>>> a/arch/arm/mach-stm32/stm32h7/Kconfig +++
+>>>> b/arch/arm/mach-stm32/stm32h7/Kconfig @@ -6,11 +6,15 @@ config
+>>>> TARGET_STM32H743_DISCO config TARGET_STM32H743_EVAL
+>>>>  	bool "STM32H743 Evaluation board"
+>>>>  
+>>>> +config TARGET_STM32H747_DISCO
+>>>> +	bool "STM32H747 Discovery board"
+>>>> +
+>>>>  config TARGET_STM32H750_ART_PI
+>>>>  	bool "STM32H750 ART Pi board"
+>>>>  
+>>>>  source "board/st/stm32h743-eval/Kconfig"
+>>>>  source "board/st/stm32h743-disco/Kconfig"
+>>>> +source "board/st/stm32h747-disco/Kconfig"
+>>>>  source "board/st/stm32h750-art-pi/Kconfig"
+>>>>  
+>>>>  endif
+>>>> diff --git a/board/st/stm32h747-disco/Kconfig
+>>>> b/board/st/stm32h747-disco/Kconfig new file mode 100644
+>>>> index 000000000000..a7b2c09a327f
+>>>> --- /dev/null
+>>>> +++ b/board/st/stm32h747-disco/Kconfig
+>>>> @@ -0,0 +1,15 @@
+>>>> +if TARGET_STM32H747_DISCO
+>>>> +
+>>>> +config SYS_BOARD
+>>>> +	default "stm32h747-disco"
+>>>> +
+>>>> +config SYS_VENDOR
+>>>> +	default "st"
+>>>> +
+>>>> +config SYS_SOC
+>>>> +	default "stm32h7"
+>>>> +
+>>>> +config SYS_CONFIG_NAME
+>>>> +	default "stm32h747-disco"
+>>>> +
+>>>> +endif
+>>>> diff --git a/board/st/stm32h747-disco/MAINTAINERS
+>>>> b/board/st/stm32h747-disco/MAINTAINERS new file mode 100644
+>>>> index 000000000000..d48649f773f3
+>>>> --- /dev/null
+>>>> +++ b/board/st/stm32h747-disco/MAINTAINERS
+>>>> @@ -0,0 +1,7 @@
+>>>> +STM32H747 DISCOVERY BOARD
+>>>> +M:	Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>>> +S:	Maintained
+>>>> +F:	board/st/stm32h747-disco
+>>>> +F:	include/configs/stm32h747-disco.h
+>>>> +F:	configs/stm32h747-disco_defconfig
+>>>> +F:	arch/arm/dts/stm32h747*
+>>>> diff --git a/board/st/stm32h747-disco/Makefile
+>>>> b/board/st/stm32h747-disco/Makefile new file mode 100644
+>>>> index 000000000000..e11f052cc88f
+>>>> --- /dev/null
+>>>> +++ b/board/st/stm32h747-disco/Makefile
+>>>> @@ -0,0 +1,6 @@
+>>>> +# SPDX-License-Identifier: GPL-2.0+
+>>>> +#
+>>>> +# Copyright (c) 2025 Dario Binacchi
+>>>> <dario.binacchi@amarulasolutions.com> +#
+>>>> +
+>>>> +obj-y	:= stm32h747-disco.o
+>>>> diff --git a/board/st/stm32h747-disco/stm32h747-disco.c
+>>>> b/board/st/stm32h747-disco/stm32h747-disco.c new file mode 100644
+>>>> index 000000000000..be0884bdeb4d
+>>>> --- /dev/null
+>>>> +++ b/board/st/stm32h747-disco/stm32h747-disco.c
+>>>> @@ -0,0 +1,42 @@
+>>>> +// SPDX-License-Identifier: GPL-2.0+
+>>>> +/*
+>>>> + * stm32h747i-disco support
+>>>> + *
+>>>> + * Copyright (C) 2025 Dario Binacchi
+>>>> <dario.binacchi@amarulasolutions.com>
+>>>> + */
+>>>> +
+>>>> +#include <dm.h>
+>>>> +#include <init.h>
+>>>> +#include <log.h>
+>>>> +#include <asm/global_data.h>
+>>>> +
+>>>> +DECLARE_GLOBAL_DATA_PTR;
+>>>> +
+>>>> +int dram_init(void)
+>>>> +{
+>>>> +	struct udevice *dev;
+>>>> +	int ret;
+>>>> +
+>>>> +	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+>>>> +	if (ret) {
+>>>> +		debug("DRAM init failed: %d\n", ret);
+>>>> +		return ret;
+>>>> +	}
+>>>> +
+>>>> +	if (fdtdec_setup_mem_size_base() != 0)
+>>>> +		ret = -EINVAL;
+>>>> +
+>>>> +	return ret;
+>>>> +}
+>>>> +
+>>>> +int dram_init_banksize(void)
+>>>> +{
+>>>> +	fdtdec_setup_memory_banksize();
+>>>> +
+>>>> +	return 0;
+>>>> +}
+>>>> +
+>>>> +int board_init(void)
+>>>> +{
+>>>> +	return 0;
+>>>> +}
+>>>> diff --git a/configs/stm32h747-disco_defconfig
+>>>> b/configs/stm32h747-disco_defconfig new file mode 100644
+>>>> index 000000000000..8a0c72450d1e
+>>>> --- /dev/null
+>>>> +++ b/configs/stm32h747-disco_defconfig
+>>>> @@ -0,0 +1,35 @@
+>>>> +CONFIG_ARM=y
+>>>> +CONFIG_ARCH_STM32=y
+>>>> +CONFIG_TEXT_BASE=0x08000000
+>>>> +CONFIG_SYS_MALLOC_LEN=0x100000
+>>>> +CONFIG_NR_DRAM_BANKS=1
+>>>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>>>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x24040000
+>>>> +CONFIG_ENV_SIZE=0x2000
+>>>> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32h747i-disco"
+>>>> +CONFIG_OF_LIBFDT_OVERLAY=y
+>>>> +CONFIG_SYS_LOAD_ADDR=0xd0400000
+>>>> +CONFIG_STM32H7=y
+>>>> +CONFIG_TARGET_STM32H747_DISCO=y
+>>>> +CONFIG_DISTRO_DEFAULTS=y
+>>
+>> I'm just wondering if there is any plan to move forward to use the new
+>> approach?
+>>
+>> As fair as I remember this is the "deprecated" option...
 > 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Hi Lukasz
+> 
+> I was not aware of deprecation of CONFIG_DISTRO_DEFAULTS .
+> Can you point to me the other alternative ?
 
-Applied to u-boot-stm32/next
+I found information in doc/develop/bootstd/overview.rst
+I add this to my todo list.
 
-Thanks
+Thanks for pointing this.
+
 Patrice
 
 > 
 > Thanks
 > Patrice
 > 
->> ---
->> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> Cc: Julien Masson <jmasson@baylibre.com>
->> Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Paul HENRYS <paul.henrys_ext@softathome.com>
->> Cc: Raymond Mao <raymond.mao@linaro.org>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>  boot/image.c       |   1 +
->>  include/image.h    |   1 +
->>  tools/stm32image.c | 215 +++++++++++++++++++++++++++++++++------------
->>  3 files changed, 163 insertions(+), 54 deletions(-)
 >>
->> diff --git a/boot/image.c b/boot/image.c
->> index 139c5bd035a..abac2c7034b 100644
->> --- a/boot/image.c
->> +++ b/boot/image.c
->> @@ -184,6 +184,7 @@ static const table_entry_t uimage_type[] = {
->>  	{	IH_TYPE_RENESAS_SPKG, "spkgimage", "Renesas SPKG Image" },
->>  	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
->>  	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
->> +	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
->>  	{	-1,		    "",		  "",			},
->>  };
->>  
->> diff --git a/include/image.h b/include/image.h
->> index f09862b636f..37506c81cdb 100644
->> --- a/include/image.h
->> +++ b/include/image.h
->> @@ -233,6 +233,7 @@ enum image_type_t {
->>  	IH_TYPE_RENESAS_SPKG,		/* Renesas SPKG image */
->>  	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
->>  	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
->> +	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
->>  
->>  	IH_TYPE_COUNT,			/* Number of image types */
->>  };
->> diff --git a/tools/stm32image.c b/tools/stm32image.c
->> index 5c6991f35de..3cc80651fa9 100644
->> --- a/tools/stm32image.c
->> +++ b/tools/stm32image.c
->> @@ -8,58 +8,74 @@
->>  
->>  /* magic ='S' 'T' 'M' 0x32 */
->>  #define HEADER_MAGIC be32_to_cpu(0x53544D32)
->> -#define VER_MAJOR_IDX	2
->> -#define VER_MINOR_IDX	1
->> -#define VER_VARIANT_IDX	0
->> +#define VER_MAJOR	2
->> +#define VER_MINOR	1
->> +#define VER_VARIANT	0
->>  #define HEADER_VERSION_V1	0x1
->> +#define HEADER_VERSION_V2	0x2
->>  /* default option : bit0 => no signature */
->>  #define HEADER_DEFAULT_OPTION	(cpu_to_le32(0x00000001))
->>  /* default binary type for U-Boot */
->>  #define HEADER_TYPE_UBOOT	(cpu_to_le32(0x00000000))
->> +#define PADDING_HEADER_MAGIC	(cpu_to_le32(0xFFFF5453))
->> +#define PADDING_HEADER_FLAG	(1ULL << 31)
->> +#define PADDING_HEADER_LENGTH	0x180
->>  
->> -struct stm32_header {
->> +struct stm32_header_v1 {
->>  	uint32_t magic_number;
->> -	uint32_t image_signature[64 / 4];
->> +	uint8_t image_signature[64];
->>  	uint32_t image_checksum;
->> -	uint8_t  header_version[4];
->> +	uint8_t header_version[4];
->>  	uint32_t image_length;
->>  	uint32_t image_entry_point;
->>  	uint32_t reserved1;
->>  	uint32_t load_address;
->>  	uint32_t reserved2;
->>  	uint32_t version_number;
->> +	/* V1.0 specific content */
->>  	uint32_t option_flags;
->>  	uint32_t ecdsa_algorithm;
->> -	uint32_t ecdsa_public_key[64 / 4];
->> -	uint32_t padding[83 / 4];
->> -	uint32_t binary_type;
->> +	uint8_t ecdsa_public_key[64];
->> +	uint8_t padding[83];
->> +	uint8_t binary_type;
->>  };
->>  
->> -static struct stm32_header stm32image_header;
->> +struct stm32_header_v2 {
->> +	uint32_t magic_number;
->> +	uint8_t image_signature[64];
->> +	uint32_t image_checksum;
->> +	uint8_t header_version[4];
->> +	uint32_t image_length;
->> +	uint32_t image_entry_point;
->> +	uint32_t reserved1;
->> +	uint32_t load_address;
->> +	uint32_t reserved2;
->> +	uint32_t version_number;
->> +	/* V2.0 specific content */
->> +	uint32_t extension_flags;
->> +	uint32_t extension_headers_length;
->> +	uint32_t binary_type;
->> +	uint8_t padding[16];
->> +	uint32_t extension_header_type;
->> +	uint32_t extension_header_length;
->> +	uint8_t extension_padding[376];
->> +};
->>  
->> -static void stm32image_default_header(struct stm32_header *ptr)
->> -{
->> -	if (!ptr)
->> -		return;
->> -
->> -	ptr->magic_number = HEADER_MAGIC;
->> -	ptr->header_version[VER_MAJOR_IDX] = HEADER_VERSION_V1;
->> -	ptr->option_flags = HEADER_DEFAULT_OPTION;
->> -	ptr->ecdsa_algorithm = cpu_to_le32(1);
->> -	ptr->binary_type = HEADER_TYPE_UBOOT;
->> -}
->> +static struct stm32_header_v1 stm32image_header_v1;
->> +static struct stm32_header_v2 stm32image_header_v2;
->>  
->> -static uint32_t stm32image_checksum(void *start, uint32_t len)
->> +static uint32_t stm32image_checksum(void *start, uint32_t len,
->> +				    uint32_t header_size)
->>  {
->>  	uint32_t csum = 0;
->> -	uint32_t hdr_len = sizeof(struct stm32_header);
->>  	uint8_t *p;
->>  
->> -	if (len < hdr_len)
->> +	if (len < header_size) {
->>  		return 0;
->> +	}
->>  
->> -	p = start + hdr_len;
->> -	len -= hdr_len;
->> +	p = (unsigned char *)start + header_size;
->> +	len -= header_size;
->>  
->>  	while (len > 0) {
->>  		csum += *p;
->> @@ -70,24 +86,53 @@ static uint32_t stm32image_checksum(void *start, uint32_t len)
->>  	return csum;
->>  }
->>  
->> -static int stm32image_check_image_types(uint8_t type)
->> +static int stm32image_check_image_types_v1(uint8_t type)
->>  {
->>  	if (type == IH_TYPE_STM32IMAGE)
->>  		return EXIT_SUCCESS;
->>  	return EXIT_FAILURE;
->>  }
->>  
->> -static int stm32image_verify_header(unsigned char *ptr, int image_size,
->> -				    struct image_tool_params *params)
->> +static int stm32image_check_image_types_v2(uint8_t type)
->> +{
->> +	if (type == IH_TYPE_STM32IMAGE_V2)
->> +		return EXIT_SUCCESS;
->> +	return EXIT_FAILURE;
->> +}
->> +
->> +static int stm32image_verify_header_v1(unsigned char *ptr, int image_size,
->> +				       struct image_tool_params *params)
->> +{
->> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
->> +	int i;
->> +
->> +	if (image_size < sizeof(struct stm32_header_v1))
->> +		return -1;
->> +	if (stm32hdr->magic_number != HEADER_MAGIC)
->> +		return -1;
->> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V1)
->> +		return -1;
->> +	if (stm32hdr->reserved1 || stm32hdr->reserved2)
->> +		return -1;
->> +	for (i = 0; i < (sizeof(stm32hdr->padding) / 4); i++) {
->> +		if (stm32hdr->padding[i] != 0)
->> +			return -1;
->> +	}
->> +
->> +	return 0;
->> +}
->> +
->> +static int stm32image_verify_header_v2(unsigned char *ptr, int image_size,
->> +				       struct image_tool_params *params)
->>  {
->> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
->> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
->>  	int i;
->>  
->> -	if (image_size < sizeof(struct stm32_header))
->> +	if (image_size < sizeof(struct stm32_header_v2))
->>  		return -1;
->>  	if (stm32hdr->magic_number != HEADER_MAGIC)
->>  		return -1;
->> -	if (stm32hdr->header_version[VER_MAJOR_IDX] != HEADER_VERSION_V1)
->> +	if (stm32hdr->header_version[VER_MAJOR] != HEADER_VERSION_V2)
->>  		return -1;
->>  	if (stm32hdr->reserved1 || stm32hdr->reserved2)
->>  		return -1;
->> @@ -101,38 +146,85 @@ static int stm32image_verify_header(unsigned char *ptr, int image_size,
->>  
->>  static void stm32image_print_header(const void *ptr, struct image_tool_params *params)
->>  {
->> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
->> +	struct stm32_header_v1 *stm32hdr_v1 = (struct stm32_header_v1 *)ptr;
->> +	struct stm32_header_v2 *stm32hdr_v2 = (struct stm32_header_v2 *)ptr;
->>  
->>  	printf("Image Type   : STMicroelectronics STM32 V%d.%d\n",
->> -	       stm32hdr->header_version[VER_MAJOR_IDX],
->> -	       stm32hdr->header_version[VER_MINOR_IDX]);
->> +	       stm32hdr_v1->header_version[VER_MAJOR],
->> +	       stm32hdr_v1->header_version[VER_MINOR]);
->>  	printf("Image Size   : %lu bytes\n",
->> -	       (unsigned long)le32_to_cpu(stm32hdr->image_length));
->> +	       (unsigned long)le32_to_cpu(stm32hdr_v1->image_length));
->>  	printf("Image Load   : 0x%08x\n",
->> -	       le32_to_cpu(stm32hdr->load_address));
->> +	       le32_to_cpu(stm32hdr_v1->load_address));
->>  	printf("Entry Point  : 0x%08x\n",
->> -	       le32_to_cpu(stm32hdr->image_entry_point));
->> +	       le32_to_cpu(stm32hdr_v1->image_entry_point));
->>  	printf("Checksum     : 0x%08x\n",
->> -	       le32_to_cpu(stm32hdr->image_checksum));
->> -	printf("Option     : 0x%08x\n",
->> -	       le32_to_cpu(stm32hdr->option_flags));
->> -	printf("BinaryType : 0x%08x\n",
->> -	       le32_to_cpu(stm32hdr->binary_type));
->> +	       le32_to_cpu(stm32hdr_v1->image_checksum));
->> +	switch (stm32hdr_v1->header_version[VER_MAJOR]) {
->> +	case HEADER_VERSION_V1:
->> +		printf("Option     : 0x%08x\n",
->> +		       __le32_to_cpu(stm32hdr_v1->option_flags));
->> +		printf("BinaryType : 0x%08x\n",
->> +		       le32_to_cpu(stm32hdr_v1->binary_type));
->> +		break;
->> +
->> +	case HEADER_VERSION_V2:
->> +		printf("Extension    : 0x%08x\n",
->> +		       __le32_to_cpu(stm32hdr_v2->extension_flags));
->> +		break;
->> +
->> +	default:
->> +		printf("Incorrect header version\n");
->> +	}
->>  }
->>  
->> -static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
->> -				  struct image_tool_params *params)
->> +static void stm32image_set_header_v1(void *ptr, struct stat *sbuf, int ifd,
->> +				     struct image_tool_params *params)
->>  {
->> -	struct stm32_header *stm32hdr = (struct stm32_header *)ptr;
->> +	struct stm32_header_v1 *stm32hdr = (struct stm32_header_v1 *)ptr;
->>  
->> -	stm32image_default_header(stm32hdr);
->> +	stm32hdr->magic_number = HEADER_MAGIC;
->> +	stm32hdr->version_number = cpu_to_le32(0);
->> +
->> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V1;
->> +	stm32hdr->option_flags = HEADER_DEFAULT_OPTION;
->> +	stm32hdr->ecdsa_algorithm = cpu_to_le32(1);
->> +	stm32hdr->binary_type = HEADER_TYPE_UBOOT;
->>  
->>  	stm32hdr->load_address = cpu_to_le32(params->addr);
->>  	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
->>  	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
->> -					     sizeof(struct stm32_header));
->> +					     sizeof(*stm32hdr));
->>  	stm32hdr->image_checksum =
->> -		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size));
->> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
->> +						sizeof(*stm32hdr)));
->> +}
->> +
->> +static void stm32image_set_header_v2(void *ptr, struct stat *sbuf, int ifd,
->> +				     struct image_tool_params *params)
->> +{
->> +	struct stm32_header_v2 *stm32hdr = (struct stm32_header_v2 *)ptr;
->> +
->> +	stm32hdr->magic_number = HEADER_MAGIC;
->> +	stm32hdr->version_number = cpu_to_le32(0);
->> +
->> +	stm32hdr->header_version[VER_MAJOR] = HEADER_VERSION_V2;
->> +	stm32hdr->extension_flags =
->> +		cpu_to_le32(PADDING_HEADER_FLAG);
->> +	stm32hdr->extension_headers_length =
->> +		cpu_to_le32(PADDING_HEADER_LENGTH);
->> +	stm32hdr->extension_header_type =
->> +		cpu_to_le32(PADDING_HEADER_MAGIC);
->> +	stm32hdr->extension_header_length =
->> +		cpu_to_le32(PADDING_HEADER_LENGTH);
->> +
->> +	stm32hdr->load_address = cpu_to_le32(params->addr);
->> +	stm32hdr->image_entry_point = cpu_to_le32(params->ep);
->> +	stm32hdr->image_length = cpu_to_le32((uint32_t)sbuf->st_size -
->> +					     sizeof(*stm32hdr));
->> +	stm32hdr->image_checksum =
->> +		cpu_to_le32(stm32image_checksum(ptr, sbuf->st_size,
->> +						sizeof(*stm32hdr)));
->>  }
->>  
->>  /*
->> @@ -141,14 +233,29 @@ static void stm32image_set_header(void *ptr, struct stat *sbuf, int ifd,
->>  U_BOOT_IMAGE_TYPE(
->>  	stm32image,
->>  	"STMicroelectronics STM32MP Image support",
->> -	sizeof(struct stm32_header),
->> -	(void *)&stm32image_header,
->> +	sizeof(struct stm32_header_v1),
->> +	(void *)&stm32image_header_v1,
->> +	NULL,
->> +	stm32image_verify_header_v1,
->> +	stm32image_print_header,
->> +	stm32image_set_header_v1,
->> +	NULL,
->> +	stm32image_check_image_types_v1,
->> +	NULL,
->> +	NULL
->> +);
->> +
->> +U_BOOT_IMAGE_TYPE(
->> +	stm32imagev2,
->> +	"STMicroelectronics STM32MP Image V2.0 support",
->> +	sizeof(struct stm32_header_v2),
->> +	(void *)&stm32image_header_v2,
->>  	NULL,
->> -	stm32image_verify_header,
->> +	stm32image_verify_header_v2,
->>  	stm32image_print_header,
->> -	stm32image_set_header,
->> +	stm32image_set_header_v2,
->>  	NULL,
->> -	stm32image_check_image_types,
->> +	stm32image_check_image_types_v2,
->>  	NULL,
->>  	NULL
->>  );
+>>>> +CONFIG_BOOTDELAY=3
+>>>> +CONFIG_AUTOBOOT_KEYED=y
+>>>> +CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop
+>>>> autoboot.\n" +CONFIG_AUTOBOOT_STOP_STR=" "
+>>>> +CONFIG_DEFAULT_FDT_FILE="stm32h747i-disco"
+>>>> +CONFIG_SYS_CBSIZE=256
+>>>> +CONFIG_SYS_PBSIZE=282
+>>>> +# CONFIG_DISPLAY_CPUINFO is not set
+>>>> +CONFIG_SYS_PROMPT="U-Boot > "
+>>>> +CONFIG_CMD_GPT=y
+>>>> +CONFIG_CMD_MMC=y
+>>>> +# CONFIG_CMD_SETEXPR is not set
+>>>> +CONFIG_CMD_CACHE=y
+>>>> +CONFIG_CMD_TIMER=y
+>>>> +CONFIG_CMD_EXT4_WRITE=y
+>>>> +# CONFIG_ISO_PARTITION is not set
+>>>> +CONFIG_OF_CONTROL=y
+>>>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>>> +CONFIG_NO_NET=y
+>>>> +CONFIG_STM32_SDMMC2=y
+>>>> +# CONFIG_PINCTRL_FULL is not set
+>>>> diff --git a/drivers/clk/stm32/clk-stm32h7.c
+>>>> b/drivers/clk/stm32/clk-stm32h7.c index 6acf2ff0a8fb..aa3be414a29f
+>>>> 100644 --- a/drivers/clk/stm32/clk-stm32h7.c
+>>>> +++ b/drivers/clk/stm32/clk-stm32h7.c
+>>>> @@ -114,6 +114,7 @@
+>>>>  #define		QSPISRC_PER_CK		3
+>>>>  
+>>>>  #define PWR_CR3				0x0c
+>>>> +#define PWR_CR3_LDOEN			BIT(1)
+>>>>  #define PWR_CR3_SCUEN			BIT(2)
+>>>>  #define PWR_D3CR			0x18
+>>>>  #define PWR_D3CR_VOS_MASK		GENMASK(15, 14)
+>>>> @@ -375,7 +376,11 @@ int configure_clocks(struct udevice *dev)
+>>>>  	clrsetbits_le32(pwr_base + PWR_D3CR, PWR_D3CR_VOS_MASK,
+>>>>  			VOS_SCALE_1 << PWR_D3CR_VOS_SHIFT);
+>>>>  	/* Lock supply configuration update */
+>>>> +#if IS_ENABLED(CONFIG_TARGET_STM32H747_DISCO)
+>>>> +	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_LDOEN);
+>>>> +#else
+>>>>  	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_SCUEN);
+>>>> +#endif
+>>>>  	while (!(readl(pwr_base + PWR_D3CR) & PWR_D3CR_VOSREADY))
+>>>>  		;
+>>>>  
+>>>> diff --git a/include/configs/stm32h747-disco.h
+>>>> b/include/configs/stm32h747-disco.h new file mode 100644
+>>>> index 000000000000..393445a8ae1f
+>>>> --- /dev/null
+>>>> +++ b/include/configs/stm32h747-disco.h
+>>>> @@ -0,0 +1,32 @@
+>>>> +/* SPDX-License-Identifier: GPL-2.0+ */
+>>>> +/*
+>>>> + * Copyright (C) 2025 Dario Binacchi
+>>>> <dario.binacchi@amarulasolutions.com>
+>>>> + */
+>>>> +
+>>>> +#ifndef __CONFIG_H
+>>>> +#define __CONFIG_H
+>>>> +
+>>>> +#include <config.h>
+>>>> +#include <linux/sizes.h>
+>>>> +
+>>>> +/* For booting Linux, use the first 16MB of memory */
+>>>> +#define CFG_SYS_BOOTMAPSZ		SZ_16M
+>>>> +
+>>>> +#define CFG_SYS_FLASH_BASE		0x08000000
+>>>> +
+>>>> +#define CFG_SYS_HZ_CLOCK		1000000
+>>>> +
+>>>> +#define BOOT_TARGET_DEVICES(func) \
+>>>> +	func(MMC, mmc, 0)
+>>>> +
+>>>> +#include <config_distro_bootcmd.h>
+>>>> +#define CFG_EXTRA_ENV_SETTINGS				\
+>>>> +			"kernel_addr_r=0xD0008000\0"
+>>>> 	\
+>>>> +			"fdtfile=stm32h747i-disco.dtb\0"	\
+>>>> +			"fdt_addr_r=0xD0408000\0"		\
+>>>> +			"scriptaddr=0xD0418000\0"		\
+>>>> +			"pxefile_addr_r=0xD0428000\0" \
+>>>> +			"ramdisk_addr_r=0xD0438000\0"
+>>>> 	\
+>>>> +			BOOTENV
+>>>> +
+>>>> +#endif /* __CONFIG_H */  
+>>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>>>
+>>> Thanks
+>>> Patrice
+>>
+>>
+>>
+>>
+>> Best regards,
+>>
+>> Lukasz Majewski
+>>
+>> --
+>>
+>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+>> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+> _______________________________________________
+> Uboot-stm32 mailing list
+> Uboot-stm32@st-md-mailman.stormreply.com
+> https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

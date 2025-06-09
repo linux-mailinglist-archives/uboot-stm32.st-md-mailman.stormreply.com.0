@@ -2,47 +2,47 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id C6AC7AD1A24
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 10:58:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 03213AD1A25
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 10:58:45 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id 90EF0C3F93A;
-	Mon,  9 Jun 2025 08:58:32 +0000 (UTC)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id BC96AC3F93A;
+	Mon,  9 Jun 2025 08:58:44 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 6775FC3F939
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A1F44C3F939
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 Jun 2025 08:58:31 +0000 (UTC)
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m2JO025293;
- Mon, 9 Jun 2025 10:58:23 +0200
+ Mon,  9 Jun 2025 08:58:43 +0000 (UTC)
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m21Z000320;
+ Mon, 9 Jun 2025 10:58:32 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- /Q9quetZcAiaxBaFU+Z2erb8yOveNXTyJ3AiEhH0dww=; b=vAFVbkqRJFvNM/9C
- pwAqg1DjR868/1Htiy8qnMIbEIpt2deIzpBZGCnPmKVfEVo130UVnvdwAcS4qv/K
- 0XyB/Ow4WbIgwNs5sh5mbqf1GhV9bLnbbyMkgcfm6Qljra6CGRnQApJz2P/lkDWV
- n+Lf+nkLOc99WLcDs9qMHkxg1pzV5OZFAtZN4XTXgWk+AACHz4aOnAs5sypdUdAx
- BnUSp2+HkRe+tEri+zHlnPvuHBtoV1yWgz14bFp9C4oSFd5Nv5Lw6wJFJrCUtiwG
- 8cUgLolcdVX+8nrh0XolsEfpK42zwKmAtpP6OzaQnRIMDlldR9H9TbUuTVKbtG8U
- ENqbzA==
+ ykuNx7gHqqycipq4meIY+OiMTphobA+3f5PQwsdgCl8=; b=miJ/tw+P5Ddr5rnh
+ IuVT/PHqeXiH+CH3SNRYlhlrznjovvNSeLaTLKPCFF0nHHh2YXcwiNE4+AfHFZLw
+ Nz7Z7ldz0k/0Ojrmi7hiIrJz/fHemlALlrlWWrlz3gICo17w69N3HkjXdI8w0hwZ
+ Le8GAvHdQLbUvQ2QNnycvfta6EZeqNwExCQwp7+6xrU26CbpyM8cnN9U25WcXW0o
+ DssW9nKHQrT9baXTTgfqU87nMrVMjT/gIpR7OeVESf/oFGeuLoGhPCfy0xcHjesC
+ 1gREuJHrxd/72L073FVtxfgKKn6D3x8gNb+npE6RXGvxnef3cXdG16z5LPdrvCk5
+ ySdoCA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4750cnktxa-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474aum70d9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 09 Jun 2025 10:58:22 +0200 (MEST)
+ Mon, 09 Jun 2025 10:58:32 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F418D40080;
- Mon,  9 Jun 2025 10:57:28 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9F6F540061;
+ Mon,  9 Jun 2025 10:57:43 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB742B64FDD;
- Mon,  9 Jun 2025 10:55:58 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 74F6AB7E3E0;
+ Mon,  9 Jun 2025 10:56:37 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
- 2025 10:55:58 +0200
-Message-ID: <7285ef48-a751-486e-99f2-afe303dcbb19@foss.st.com>
-Date: Mon, 9 Jun 2025 10:55:57 +0200
+ 2025 10:56:36 +0200
+Message-ID: <f996181d-a1a4-4c28-8202-8d11e2768e1b@foss.st.com>
+Date: Mon, 9 Jun 2025 10:56:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
@@ -99,6 +99,12 @@ On 5/27/25 17:47, Patrice CHOTARD wrote:
 > Huge work !!
 > 
 > Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Applied to u-boot-stm32/next
+
+Thanks
+Patrice
+
 > 
 > Thanks
 > Patrice
@@ -2133,10 +2139,6 @@ On 5/27/25 17:47, Patrice CHOTARD wrote:
 >> +#define LSEDRV_HIGHEST		3
 >> +
 >> +#endif
-Applied to u-boot-stm32/next
-
-Thanks
-Patrice
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com

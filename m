@@ -2,44 +2,75 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12B78AD2358
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 18:07:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AF85AD23B5
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 18:22:46 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5C02C32E92;
-	Mon,  9 Jun 2025 16:07:51 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.2 with cipher ADH-AES256-GCM-SHA384 (256/256 bits))
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id B42F2C32E92;
+	Mon,  9 Jun 2025 16:22:45 +0000 (UTC)
+Received: from mail-oa1-f50.google.com (mail-oa1-f50.google.com
+ [209.85.160.50])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id A5AB7C349C5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 73373C349C5
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 Jun 2025 16:07:50 +0000 (UTC)
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 66B9E5C49BF;
- Mon,  9 Jun 2025 16:05:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2AA8DC4CEEB;
- Mon,  9 Jun 2025 16:07:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1749485268;
- bh=VE4KYsfrrUSqUuDGGN5S6RtpApe/nEvN7R2vqN/eZ8U=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=adBcC2rYf331GDWr0c2Oe0QTkVYBjK5p1uM3PyJIC1wyLBS8QBV391X195fO0lXxV
- Ohp5MgZTqxe5oFIZXReI5wbWuUQf78SoQwn+JkpSKRuoZIDWPalHpveFuOuSHRWOsk
- ZJLpp0MOw+pfemT3J/nRmofUqp2zx20DGwzAS1qMkTFwwYbe/U41of7bFlXcFRLrDu
- AVooXTrSKhuaJlktHMU9u3byzemkqzg4dU5XrVVqiL6nQGV/FRNm+mc5k7jSH9wU50
- xtjArsl9ltOZwykVHdtfOJLvOgyMPmJVTU/gY8evUsM+MdQWPG1D+6WIdrE2Vnxs1W
- znnEYhlFJDT9A==
-Date: Mon, 9 Jun 2025 17:07:40 +0100
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Tom Rini <trini@konsulko.com>
-Message-ID: <aEcGzCbZXajCthrh@sumit-X1>
+ Mon,  9 Jun 2025 16:22:44 +0000 (UTC)
+Received: by mail-oa1-f50.google.com with SMTP id
+ 586e51a60fabf-2ea34731c5dso997096fac.0
+ for <uboot-stm32@st-md-mailman.stormreply.com>;
+ Mon, 09 Jun 2025 09:22:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1749486163; x=1750090963;
+ darn=st-md-mailman.stormreply.com; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/HDH5EqaoG2G/SeODK6F9H/o24tlGfFInDKDDAqDRnw=;
+ b=YFutloUBSIGvJqq6zhV0VJVd1RgaOfk8cik1dzRAxusJng2ZpWEl6mtNNnqITBrNgF
+ 4mYQIlwpnU2JxlAZMSkIiLgj3z1KB2JAPG/bDRQG9pri0rliCzhRWozFckKVhOTomhQG
+ u7+oVbG4LseWGkXKDUiJ7jybBu3km1GCx+ay0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749486163; x=1750090963;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/HDH5EqaoG2G/SeODK6F9H/o24tlGfFInDKDDAqDRnw=;
+ b=FCKj5KzMPrOoTwbSe+TvtWehUyDftQRhQkq/Tgj7QNfo6S8RsciBsfyEo1KHBtdDm5
+ 0DhwrTXiNSuauBz9TvJ0/hp+aR/Vdfl6xi/4KSvM7QWicynsXPO48fUKH0DezCMgnVgc
+ FjWXnUwWcChf6XP8qmHp20HgYZAiwtHFF326HKOS/5F+lNsqA3EetG/HCx7ShPAEgCSv
+ Xt6YanwdcgTQRVQCvqgLMIhGQhZgauL3kF5dUo2UyLhG5ocQJcTtNU49nb9+5434ydlG
+ BtXz8Uc4bsRbHqt6WoVZtBakTJXEMD8prha6jOKfCA0IYwMQvCBggajq0bEkM1/hA/Pr
+ 3OLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaWJJ5LX/4/7nCfHwjGuZR+0dKNnudoKhZsmxSzwouippQB0zlfUBvSGX2RBUmuzsSajCuuF6IqBS9Ng==@st-md-mailman.stormreply.com
+X-Gm-Message-State: AOJu0Yz7ATsnqwXeXwQI25JJEyv87QatHDOR9aagpx5/dmJtLCIFgmG5
+ qgFcwdLl8Zh5YtgHzdQ00G9gcYp4KteqmFtzSt4gjz4zJYvIk99OUMmoh6siSDvOK2A=
+X-Gm-Gg: ASbGncv/gEDxQoRUuebfq26vEtOy6m93VtRvmDMsorFiHCfdLa+ytYaPTlEu99JzD0R
+ qbtF+gK6+tUss+uBzKp/Xvmr9xfmCspT4lveTFV4aMEooLJnwnH+zylK3HZEDdxwUtypRltxrSz
+ kP6NK1M6OASAz2BWLaRVjdjEFVRGikNycoORCd3TkXAYtqE1b3Ms7lIcrr3B7k3kYj7W90oRLrd
+ FHs8ItDs8ieAJcCHpt13+i3AxjI1+Wy6WhnxAR/ugkH3XcuGljhoSBgM0QPIQtDxPImriR/XIq+
+ larAxRvkUUFZV9uSPXDqfi1FGR+xC4/h7ElW/+KpyLgmlAeEZ6jO+rUJHasAmNIdn+LK7gI/GL0
+ VW9NtMzXANe3e
+X-Google-Smtp-Source: AGHT+IGmcPgvaeafR4gDWPsdNmoJ3kkB3Pe9rmlI6BjAT/Yj1FLakMcekfw7bqllLknOyjTbPT3gdw==
+X-Received: by 2002:a05:6871:d101:b0:2d8:957a:5163 with SMTP id
+ 586e51a60fabf-2ea00817781mr8829799fac.10.1749486162990; 
+ Mon, 09 Jun 2025 09:22:42 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-100-42.totalplay.net.
+ [189.203.100.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2ea642a55b1sm329923fac.7.2025.06.09.09.22.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Jun 2025 09:22:42 -0700 (PDT)
+Date: Mon, 9 Jun 2025 10:22:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sumit Garg <sumit.garg@kernel.org>
+Message-ID: <20250609162239.GT1382132@bill-the-cat>
 References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
  <dc8bb4a3-c465-4ae0-a61d-bb2f74a42b64@foss.st.com>
  <aEbgxo0WUDPd-S8Z@sumit-X1>
  <CABGWkvox-1a1VSGjX8toQ=WsVTma0JcL8su=MGWaAwq4UZFkrQ@mail.gmail.com>
  <aEcAe80kh66cf0_c@sumit-X1> <20250609155019.GR1382132@bill-the-cat>
+ <aEcGzCbZXajCthrh@sumit-X1>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20250609155019.GR1382132@bill-the-cat>
+In-Reply-To: <aEcGzCbZXajCthrh@sumit-X1>
+X-Clacks-Overhead: GNU Terry Pratchett
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  linux-amarula@amarulasolutions.com,
@@ -64,74 +95,168 @@ List-Post: <mailto:uboot-stm32@st-md-mailman.stormreply.com>
 List-Help: <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=help>
 List-Subscribe: <https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32>, 
  <mailto:uboot-stm32-request@st-md-mailman.stormreply.com?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7392115171805294008=="
 Errors-To: uboot-stm32-bounces@st-md-mailman.stormreply.com
 Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
-T24gTW9uLCBKdW4gMDksIDIwMjUgYXQgMDk6NTA6MTlBTSAtMDYwMCwgVG9tIFJpbmkgd3JvdGU6
-Cj4gT24gTW9uLCBKdW4gMDksIDIwMjUgYXQgMDQ6NDA6NDNQTSArMDEwMCwgU3VtaXQgR2FyZyB3
-cm90ZToKPiA+IE9uIE1vbiwgSnVuIDA5LCAyMDI1IGF0IDAzOjQ2OjI3UE0gKzAyMDAsIERhcmlv
-IEJpbmFjY2hpIHdyb3RlOgo+ID4gPiBIaSBTdW1pdCwKPiA+ID4gCj4gPiA+IE9uIE1vbiwgSnVu
-IDksIDIwMjUgYXQgMzoyNeKAr1BNIFN1bWl0IEdhcmcgPHN1bWl0LmdhcmdAa2VybmVsLm9yZz4g
-d3JvdGU6Cj4gPiA+ID4KPiA+ID4gPiBIaSBQYXRyaWNlLAo+ID4gPiA+Cj4gPiA+ID4gT24gTW9u
-LCBKdW4gMDksIDIwMjUgYXQgMDM6MTU6MTRQTSArMDIwMCwgUGF0cmljZSBDSE9UQVJEIHdyb3Rl
-Ogo+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBPbiA2LzcvMjUgMTE6MzcsIERhcmlvIEJp
-bmFjY2hpIHdyb3RlOgo+ID4gPiA+ID4gPiBUaGUgc2VyaWVzIGFkZHMgc3VwcG9ydCBmb3Igc3Rt
-MzJoNzQ3LWRpc2NvdmVyeSBib2FyZC4KPiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gRGV0YWlsZWQg
-aW5mb3JtYXRpb24gY2FuIGJlIGZvdW5kIGF0Ogo+ID4gPiA+ID4gPiBodHRwczovL3d3dy5zdC5j
-b20vZW4vZXZhbHVhdGlvbi10b29scy9zdG0zMmg3NDdpLWRpc2NvLmh0bWwKPiA+ID4gPiA+ID4K
-PiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gRGFyaW8gQmluYWNjaGkgKDkpOgo+ID4gPiA+ID4gPiAg
-IEFSTTogZHRzOiBzdG0zMmg3LXBpbmN0cmw6IGFkZCBfYSBzdWZmaXggdG8gdVtzXWFydF9waW5z
-IHBoYW5kbGVzCj4gPiA+ID4gPiA+ICAgZHQtYmluZGluZ3M6IGFybTogc3RtMzI6IGFkZCBjb21w
-YXRpYmxlIGZvciBzdG0zMmg3NDdpLWRpc2NvIGJvYXJkCj4gPiA+ID4gPiA+ICAgZHQtYmluZGlu
-Z3M6IGNsb2NrOiBzdG0zMmg3OiByZW5hbWUgVVNBUlR7Nyw4fV9DSyB0byBVQVJUezcsOH1fQ0sK
-PiA+ID4gPiA+ID4gICBBUk06IGR0czogc3RtMzI6IGFkZCB1YXJ0OCBub2RlIGZvciBzdG0zMmg3
-NDMgTUNVCj4gPiA+ID4gPiA+ICAgQVJNOiBkdHM6IHN0bTMyOiBhZGQgcGluIG1hcCBmb3IgVUFS
-VDggY29udHJvbGxlciBvbiBzdG0zMmg3NDMKPiA+ID4gPiA+ID4gICBBUk06IGR0czogc3RtMzI6
-IGFkZCBhbiBleHRyYSBwaW4gbWFwIGZvciBVU0FSVDEgb24gc3RtMzJoNzQzCj4gPiA+ID4gPiA+
-ICAgQVJNOiBkdHM6IHN0bTMyOiBzdXBwb3J0IFNUTTMyaDc0N2ktZGlzY28gYm9hcmQKPiA+ID4g
-PiA+ID4gICBBUk06IGR0czogc3RtMzI6IGFkZCBzdG0zMmg3NDdpLWRpc2NvLXUtYm9vdCBEVFMg
-ZmlsZQo+ID4gPiA+ID4gPiAgIGJvYXJkOiBzdG0zMjogYWRkIHN0bTMyaDc0Ny1kaXNjb3Zlcnkg
-Ym9hcmQgc3VwcG9ydAo+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBIaSBEYXJpbwo+ID4g
-PiA+ID4KPiA+ID4gPiA+IEZvciB0aGUgd2hvbGUgc2VyaWVzCj4gPiA+ID4gPiBBcHBsaWVkIHRv
-IHUtYm9vdC1zdG0zMi9uZXh0Cj4gPiA+ID4KPiA+ID4gPiBQbGVhc2UgZ2l2ZSBzb21lIHRpbWUg
-Zm9yIG90aGVyIG1haW50YWluZXJzIHRvIHJldmlldyB0aGlzIHBhdGNoLXNldC4KPiA+ID4gPiBU
-aGUgZHRzL3Vwc3RyZWFtIHBhdGNoZXMgaW4gdGhpcyBzZXJpZXMgYXJlbid0IGNsZWFuIGNoZXJy
-eSBwaWNrIGZyb20KPiA+ID4gPiB1cHN0cmVhbS4KPiA+ID4gCj4gPiA+IEFsbCB0aGUgY29tbWl0
-cyBhcmUgYWxyZWFkeSBpbiB0aGUgbWFpbmxpbmUgTGludXgga2VybmVsLCBzcGVjaWZpY2FsbHkK
-PiA+ID4gaW4gdjYuMTYtcmMxLgo+ID4gPiBJZiB5b3UncmUgcmVmZXJyaW5nIHRvIHRoZSBmYWN0
-IHRoYXQgdGhlIHBhdGNoZXMgY2FuJ3QgYmUgYXBwbGllZAo+ID4gPiBjbGVhbmx5LCBJIGJlbGll
-dmUgaXQncwo+ID4gPiBiZWNhdXNlIHRoZSB0YXJnZXQgcGF0aCBpbiB0aGUgTGludXgga2VybmVs
-IGRvZXNuJ3QgbWF0Y2ggdGhlIG9uZSBpbiBVLUJvb3QuCj4gPiA+IEluIGZhY3QsIHRoZSBEVFMg
-ZmlsZXMgYXJlIGxvY2F0ZWQgaW4gdHdvIGRpZmZlcmVudCByZWxhdGl2ZSBwYXRocy4KPiA+IAo+
-ID4gVGhhdCdzIGV4YWN0bHkgd2h5IHdlIGhhdmUgKHJlZmVyIGhlcmUgWzFdKToKPiA+IAo+ID4g
-Li90b29scy91cGRhdGUtc3VidHJlZS5zaCBwaWNrIGR0cyA8Y29tbWl0LWlkLXRvLWJlLXBpY2tl
-ZD4KPiA+IAo+ID4gWW91IHNob3VsZCBoYXZlIHdhaXRlZCB2Ni4xNi1yYzEgdGFnIHRvIGJlIHN5
-bmNlZCBpbnRvCj4gPiBkZXZpY2V0cmVlLXJlYmFzaW5nIFsyXSBmb3IgdGhlIGNoZXJyeS1waWNr
-cyB0byB3b3JrLiBUaGlzIHdheSBvZgo+ID4gbWFudWFsbHkgcGF0Y2hpbmcgZHRzL3Vwc3RyZWFt
-IGlzIG5vdCBhbGxvd2VkIHNpbmNlIGl0IGlzIGdvaW5nIHRvIGJyZWFrCj4gPiBEVCBzeW5jcyBp
-biBvbmUgd2F5IG9yIGFub3RoZXIuCj4gPiAKPiA+IFNvIEkgd291bGQgc3VnZ2VzdCB5b3UgdG8g
-d2FpdCBmb3IgdjYuMTYtcmMxIHRvIGxhbmQgaW4gRFQgcmViYXNpbmcgdHJlZQo+ID4gYW5kIHRo
-ZW4gc2VuZCB2MiB3aXRoIHByb3BlciBjaGVycnkgcGlja2VkIHBhdGNoZXMuCj4gPiAKPiA+IFsx
-XSBodHRwczovL2RvY3MudS1ib290Lm9yZy9lbi9sYXRlc3QvZGV2ZWxvcC9kZXZpY2V0cmVlL2Nv
-bnRyb2wuaHRtbCNyZXN5bmNpbmctd2l0aC1kZXZpY2V0cmVlLXJlYmFzaW5nCj4gPiBbMl0gaHR0
-cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvZGV2aWNldHJlZS9k
-ZXZpY2V0cmVlLXJlYmFzaW5nLmdpdAo+IAo+IFRvIGJlIGhvbmVzdCwgSSBkb24ndCB0aGluayB0
-aGlzIGlzIGEgYmlnIGRlYWwuIEdpdCB3aWxsIGJlIG1lcmdpbmcKPiBiYXNlZCBvbiBjb250ZW50
-IGFuZCBub3Qgc3BlY2lmaWMgaGFzaGVzLiBBbmQgaW4gdGhlIGNhc2Ugb2YgY29uZmxpY3RzIEkK
-PiBqdXN0IGNvcHkgdGhlIGZpbGUgZnJvbSB0aGUgdGFnIHRvIG91ciB0cmVlLgoKVGhlIGVzc2Vu
-dGlhbCBwcm9ibGVtIGhlcmUgdG8gbWUgaXMgd2UgYXJlIGdvaW5nIHRvIGFsbG93IG1hbnVhbApw
-YXRjaGluZyBvZiBkdHMvdXBzdHJlYW0gdHJlZSBnaXZlbiB0aGlzIGV4YW1wbGU/IEhvdyBkbyB3
-ZSBrZWVwIHRyYWNrCmlmIGFsbCB0aGF0IG1hbnVhbCBwYXRjaGluZyBsYW5kZWQgaW4gTGludXgg
-RFQgbWFpbmxpbmU/IFRoZSBjaGVycnkKcGlja3MgZW5zdXJlZCB0aGF0IHdlIGFsd2F5cyBrZWVw
-IGluIHN5bmMgd2l0aCBtYWlubGluZS4KCkxldHMgdGFrZSBhbiBleGFtcGxlIHdoYXQgaWYgR2l0
-IGF1dG9tYXRpY2FsbHkgcmVzb2x2ZWQgYSBtZXJnZSBjb25mbGljdApmb3IgeW91IHdpdGggZHVw
-bGljYXRlZCBjb250ZW50IG9yIGlmIG1hbnVhbGx5IHBhdGNoaW5nIGEgRFRTIGZpbGUKZGl2ZXJn
-ZWQgZnJvbSB1cHN0cmVhbSBhbmQgZ2V0IHVubm90aWNlZCBkdXJpbmcgRFQgc3luY3M/CgpJTUhP
-LCB3ZSBzaG91bGQgdHJ5IHRvIGF2b2lkIG1hbnVhbCBwYXRjaGluZyBvZiBEVCBzdWJ0cmVlIG90
-aGVyd2lzZSBpdAppcyBoYXJkIHRvIHNldCBhIHBvbGljeSBhcyB0byB3aGF0IGxldmVsIG9mIG1h
-bnVhbCBwYXRjaGluZyBpcyBhbGxvd2VkCm9yIG5vdC4KCi1TdW1pdApfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpVYm9vdC1zdG0zMiBtYWlsaW5nIGxpc3QK
-VWJvb3Qtc3RtMzJAc3QtbWQtbWFpbG1hbi5zdG9ybXJlcGx5LmNvbQpodHRwczovL3N0LW1kLW1h
-aWxtYW4uc3Rvcm1yZXBseS5jb20vbWFpbG1hbi9saXN0aW5mby91Ym9vdC1zdG0zMgo=
+
+--===============7392115171805294008==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="O5az6EqOTJVqen05"
+Content-Disposition: inline
+
+
+--O5az6EqOTJVqen05
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jun 09, 2025 at 05:07:40PM +0100, Sumit Garg wrote:
+> On Mon, Jun 09, 2025 at 09:50:19AM -0600, Tom Rini wrote:
+> > On Mon, Jun 09, 2025 at 04:40:43PM +0100, Sumit Garg wrote:
+> > > On Mon, Jun 09, 2025 at 03:46:27PM +0200, Dario Binacchi wrote:
+> > > > Hi Sumit,
+> > > >=20
+> > > > On Mon, Jun 9, 2025 at 3:25=E2=80=AFPM Sumit Garg <sumit.garg@kerne=
+l.org> wrote:
+> > > > >
+> > > > > Hi Patrice,
+> > > > >
+> > > > > On Mon, Jun 09, 2025 at 03:15:14PM +0200, Patrice CHOTARD wrote:
+> > > > > >
+> > > > > >
+> > > > > > On 6/7/25 11:37, Dario Binacchi wrote:
+> > > > > > > The series adds support for stm32h747-discovery board.
+> > > > > > >
+> > > > > > > Detailed information can be found at:
+> > > > > > > https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
+> > > > > > >
+> > > > > > >
+> > > > > > > Dario Binacchi (9):
+> > > > > > >   ARM: dts: stm32h7-pinctrl: add _a suffix to u[s]art_pins ph=
+andles
+> > > > > > >   dt-bindings: arm: stm32: add compatible for stm32h747i-disc=
+o board
+> > > > > > >   dt-bindings: clock: stm32h7: rename USART{7,8}_CK to UART{7=
+,8}_CK
+> > > > > > >   ARM: dts: stm32: add uart8 node for stm32h743 MCU
+> > > > > > >   ARM: dts: stm32: add pin map for UART8 controller on stm32h=
+743
+> > > > > > >   ARM: dts: stm32: add an extra pin map for USART1 on stm32h7=
+43
+> > > > > > >   ARM: dts: stm32: support STM32h747i-disco board
+> > > > > > >   ARM: dts: stm32: add stm32h747i-disco-u-boot DTS file
+> > > > > > >   board: stm32: add stm32h747-discovery board support
+> > > > > >
+> > > > > >
+> > > > > > Hi Dario
+> > > > > >
+> > > > > > For the whole series
+> > > > > > Applied to u-boot-stm32/next
+> > > > >
+> > > > > Please give some time for other maintainers to review this patch-=
+set.
+> > > > > The dts/upstream patches in this series aren't clean cherry pick =
+=66rom
+> > > > > upstream.
+> > > >=20
+> > > > All the commits are already in the mainline Linux kernel, specifica=
+lly
+> > > > in v6.16-rc1.
+> > > > If you're referring to the fact that the patches can't be applied
+> > > > cleanly, I believe it's
+> > > > because the target path in the Linux kernel doesn't match the one i=
+n U-Boot.
+> > > > In fact, the DTS files are located in two different relative paths.
+> > >=20
+> > > That's exactly why we have (refer here [1]):
+> > >=20
+> > > ./tools/update-subtree.sh pick dts <commit-id-to-be-picked>
+> > >=20
+> > > You should have waited v6.16-rc1 tag to be synced into
+> > > devicetree-rebasing [2] for the cherry-picks to work. This way of
+> > > manually patching dts/upstream is not allowed since it is going to br=
+eak
+> > > DT syncs in one way or another.
+> > >=20
+> > > So I would suggest you to wait for v6.16-rc1 to land in DT rebasing t=
+ree
+> > > and then send v2 with proper cherry picked patches.
+> > >=20
+> > > [1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html=
+#resyncing-with-devicetree-rebasing
+> > > [2] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/device=
+tree-rebasing.git
+> >=20
+> > To be honest, I don't think this is a big deal. Git will be merging
+> > based on content and not specific hashes. And in the case of conflicts I
+> > just copy the file from the tag to our tree.
+>=20
+> The essential problem here to me is we are going to allow manual
+> patching of dts/upstream tree given this example? How do we keep track
+> if all that manual patching landed in Linux DT mainline? The cherry
+> picks ensured that we always keep in sync with mainline.
+>=20
+> Lets take an example what if Git automatically resolved a merge conflict
+> for you with duplicated content or if manually patching a DTS file
+> diverged from upstream and get unnoticed during DT syncs?
+>=20
+> IMHO, we should try to avoid manual patching of DT subtree otherwise it
+> is hard to set a policy as to what level of manual patching is allowed
+> or not.
+
+Part of the problem here is that from the standpoint of applying posted
+patches there's no functional difference between what Dario did here and
+what could be done once v6.16-rc1-dts is tagged (if it's not already).
+It's essentially a "manual patch" either way. We make it clear that
+dts/upstream/ *only* gets changes that are in Linus' tree. If someone
+tries to be sneaky and push something in that's not quite what's
+upstream, it will get stomped on later and there's not going to be any
+sympathy for the now broken platform.
+
+Yes, we document saying to use the cherry-pick script, and that's what
+people should do in general. But I don't think there's value in adding a
+further delay between "in Linus' tree" and "in devicetree-rebasing". In
+the linux kernel, there's thousands of people working on things and so
+strict rules can be understandable (someone will be running a bot to
+look for "(cherry pick from commit $hash)" and fail things where $hash
+doesn't exist, makes sense). Here if the ST custodians are happy just
+verifying the kernel commit, OK, that's fine. Or if they want to wait,
+that's fine too. We can be a little relaxed and let custodians do what
+they see as best.
+
+--=20
+Tom
+
+--O5az6EqOTJVqen05
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmhHCksACgkQFHw5/5Y0
+tywD1gwAo7WR+HUndyQw3xkLZTkSqBGtuUl223Tp/5yvx9jT/tsJ+iAnkzMTvSky
+iFfbNkr8g76UyXIg9AXfVlp0yOhJCRZ4YnN2UiPVzGAFeghYFNiIVvqGutY6ih+C
+U/XHgcIj3lGgBPHnr1y+BECtBexI3WWrytRAcUFvG0F3TjT9ETGuOPsPjrElqw1e
+VB7phj0VFuIdwLicVsexZ8hI5fSYs/RO1KRyC9gx/Zznn3taiMPkFUhDEeahWMET
+axv3ERP9nI6eFzXojon/ZFHrk11QKGTf0vSsPjYb/QBCCCTkmExqnGu/Wwohj6o4
+KS4z4wmtPmEWzMpyro3Al5pEVNnWxHmAaRo++ARS79dw7brcy7hg/imrWT3H6U1o
+qvPrc31KXucAE5SdSpAnbW8csOaagQZpHyIVrs4XU5pbqXcle+N0qT/zdGmbErVb
+bRjvLuHuY635+UEJbioRjYhj8WU1kO4O/zpvTDf8lyMn5Uc4ovhEhXp129/Ql2Pu
+8Wx+mcgy
+=Mzi/
+-----END PGP SIGNATURE-----
+
+--O5az6EqOTJVqen05--
+
+--===============7392115171805294008==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Uboot-stm32 mailing list
+Uboot-stm32@st-md-mailman.stormreply.com
+https://st-md-mailman.stormreply.com/mailman/listinfo/uboot-stm32
+
+--===============7392115171805294008==--

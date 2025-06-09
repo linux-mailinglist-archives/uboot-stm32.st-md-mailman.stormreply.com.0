@@ -2,74 +2,67 @@ Return-Path: <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 X-Original-To: lists+uboot-stm32@lfdr.de
 Delivered-To: lists+uboot-stm32@lfdr.de
 Received: from stm-ict-prod-mailman-01.stormreply.prv (st-md-mailman.stormreply.com [52.209.6.89])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FF38AD19EB
-	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 10:37:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 252C1AD1A11
+	for <lists+uboot-stm32@lfdr.de>; Mon,  9 Jun 2025 10:53:21 +0200 (CEST)
 Received: from ip-172-31-3-47.eu-west-1.compute.internal (localhost [127.0.0.1])
-	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id C5122C32E8E;
-	Mon,  9 Jun 2025 08:37:54 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+	by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTP id D5BA1C3F939;
+	Mon,  9 Jun 2025 08:53:20 +0000 (UTC)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 283A5C349C5
+ by stm-ict-prod-mailman-01.stormreply.prv (Postfix) with ESMTPS id 93E18C32E8E
  for <uboot-stm32@st-md-mailman.stormreply.com>;
- Mon,  9 Jun 2025 08:37:52 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m8Kd000428;
- Mon, 9 Jun 2025 10:37:38 +0200
+ Mon,  9 Jun 2025 08:53:19 +0000 (UTC)
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5597m31G016958;
+ Mon, 9 Jun 2025 10:53:14 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- L0RnS1U7mCVoGU6dJfAB6lg1L6dl6hL0+B207dI5NEI=; b=PNIHG63RoxosSsyL
- YXk4BKiUa+RBciBGyoJCxvQuqP7HmpWyzYaoPwaxHwJeFFmccGP4o//BwLu05Xjn
- uNgC+EbPJRQiXfbsUr1gY+x6LjIAIV2sRI14FKTqS/vh/iP0/nDSUgqyWPt8aOGM
- DXqF2H+oAHA6g0bppD4uklSp3Jk9AhwdRWuQBo41umlF2Ac4T6sEDnN3AVTNbBaS
- hSK7ZbIFTXt8nm7Jif32Ye9moWD0NTfpgMjOoeZNLOz2P84RJ7Z324Grw23Q2Nkd
- U0NkCLPCZMEJXudy+/uE8T9gpVQm7giy2k7k0zwzD9tTiF5d58gg97x2+aJ69/ck
- NF61ug==
+ QTG2HI1j2dDxJdgOc1K3vpbO7ceU7xnKmxC3HcMYqbM=; b=zGycxUywmEElsVwt
+ qbtYYhAhEmBD0D2sEn12oAJ+DU49LbEoyVWnyuyZDaqjB9rcaO5rvlnPs1wjOvSv
+ z0BT68+VjJl7Qu27Qasxsdk7lMK+2VA0uqf21JgRgCq2OjC0kB0+g0jQyHHWVpXa
+ WmLgbG0Zs8zV6GicIuCMi+VEY9cTGIV9nlReb14+raTTKcAZTRL08qT4AeIdbFz+
+ FAFeWQ53in72MxHMSmJyMzzz+atWyOHAHFT59zLPxEWDrtBbC+wENccxoBs2skq6
+ OSKWkuqkdgnjjbufL3WOXTPb6IW64URuSNWaovPGZossOsjzX6M9k3zmx/hA3kqQ
+ c+czEQ==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474aum6wfm-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 474cahe63s-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 09 Jun 2025 10:37:37 +0200 (MEST)
+ Mon, 09 Jun 2025 10:53:14 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A665940048;
- Mon,  9 Jun 2025 10:36:24 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9C75D4002D;
+ Mon,  9 Jun 2025 10:52:27 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D8D3CB64606;
- Mon,  9 Jun 2025 10:34:40 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 51A5CB7A718;
+ Mon,  9 Jun 2025 10:52:09 +0200 (CEST)
 Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 9 Jun
- 2025 10:34:40 +0200
-Message-ID: <830e3e26-1936-45c0-9768-82d65757fcdc@foss.st.com>
-Date: Mon, 9 Jun 2025 10:34:39 +0200
+ 2025 10:52:08 +0200
+Message-ID: <c3be0c7c-2abf-4f38-b10e-c8ab9ec0bf10@foss.st.com>
+Date: Mon, 9 Jun 2025 10:52:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Lukasz Majewski <lukma@denx.de>
-References: <20250607093730.2249536-1-dario.binacchi@amarulasolutions.com>
- <20250607093730.2249536-10-dario.binacchi@amarulasolutions.com>
- <316dd0c7-c7b8-407d-b34a-b5b90f056b94@foss.st.com>
- <20250609100727.56d7de7b@wsk>
+To: <u-boot@lists.denx.de>
+References: <20250519112355.1190332-1-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250609100727.56d7de7b@wsk>
+In-Reply-To: <20250519112355.1190332-1-patrice.chotard@foss.st.com>
 X-Originating-IP: [10.48.87.62]
 X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
  definitions=2025-06-09_03,2025-06-05_01,2025-03-28_01
-Cc: Tom Rini <trini@konsulko.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- uboot-stm32@st-md-mailman.stormreply.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- linux-amarula@amarulasolutions.com
-Subject: Re: [Uboot-stm32] [PATCH 9/9] board: stm32: add stm32h747-discovery
-	board support
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Cheick Traore <cheick.traore@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Lionel Debieve <lionel.debieve@foss.st.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [Uboot-stm32] [PATCH v4] stm32mp: Add tamp_nvram driver
 X-BeenThere: uboot-stm32@st-md-mailman.stormreply.com
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,296 +81,748 @@ Sender: "Uboot-stm32" <uboot-stm32-bounces@st-md-mailman.stormreply.com>
 
 
 
-On 6/9/25 10:07, Lukasz Majewski wrote:
-> Hi Patrice,
+On 5/19/25 13:23, Patrice Chotard wrote:
+> From: Simeon Marijon <simeon.marijon@foss.st.com>
 > 
->> On 6/7/25 11:37, Dario Binacchi wrote:
->>> The board includes an STM32H747XI SoC with the following resources:
->>>  - 2 Mbytes Flash
->>>  - 1 Mbyte SRAM
->>>  - LCD-TFT controller
->>>  - MIPI-DSI interface
->>>  - FD-CAN
->>>  - USB 2.0 high-speed/full-speed
->>>  - Ethernet MAC
->>>  - camera interface
->>>
->>> Detailed information can be found at:
->>> https://www.st.com/en/evaluation-tools/stm32h747i-disco.html
->>>
->>> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
->>>
->>> ---
->>>
->>>  arch/arm/mach-stm32/stm32h7/Kconfig        |  4 +++
->>>  board/st/stm32h747-disco/Kconfig           | 15 ++++++++
->>>  board/st/stm32h747-disco/MAINTAINERS       |  7 ++++
->>>  board/st/stm32h747-disco/Makefile          |  6 ++++
->>>  board/st/stm32h747-disco/stm32h747-disco.c | 42
->>> ++++++++++++++++++++++ configs/stm32h747-disco_defconfig          |
->>> 35 ++++++++++++++++++ drivers/clk/stm32/clk-stm32h7.c            |
->>> 5 +++ include/configs/stm32h747-disco.h          | 32
->>> +++++++++++++++++ 8 files changed, 146 insertions(+)
->>>  create mode 100644 board/st/stm32h747-disco/Kconfig
->>>  create mode 100644 board/st/stm32h747-disco/MAINTAINERS
->>>  create mode 100644 board/st/stm32h747-disco/Makefile
->>>  create mode 100644 board/st/stm32h747-disco/stm32h747-disco.c
->>>  create mode 100644 configs/stm32h747-disco_defconfig
->>>  create mode 100644 include/configs/stm32h747-disco.h
->>>
->>> diff --git a/arch/arm/mach-stm32/stm32h7/Kconfig
->>> b/arch/arm/mach-stm32/stm32h7/Kconfig index
->>> 70233a4b23cd..72f20c477d04 100644 ---
->>> a/arch/arm/mach-stm32/stm32h7/Kconfig +++
->>> b/arch/arm/mach-stm32/stm32h7/Kconfig @@ -6,11 +6,15 @@ config
->>> TARGET_STM32H743_DISCO config TARGET_STM32H743_EVAL
->>>  	bool "STM32H743 Evaluation board"
->>>  
->>> +config TARGET_STM32H747_DISCO
->>> +	bool "STM32H747 Discovery board"
->>> +
->>>  config TARGET_STM32H750_ART_PI
->>>  	bool "STM32H750 ART Pi board"
->>>  
->>>  source "board/st/stm32h743-eval/Kconfig"
->>>  source "board/st/stm32h743-disco/Kconfig"
->>> +source "board/st/stm32h747-disco/Kconfig"
->>>  source "board/st/stm32h750-art-pi/Kconfig"
->>>  
->>>  endif
->>> diff --git a/board/st/stm32h747-disco/Kconfig
->>> b/board/st/stm32h747-disco/Kconfig new file mode 100644
->>> index 000000000000..a7b2c09a327f
->>> --- /dev/null
->>> +++ b/board/st/stm32h747-disco/Kconfig
->>> @@ -0,0 +1,15 @@
->>> +if TARGET_STM32H747_DISCO
->>> +
->>> +config SYS_BOARD
->>> +	default "stm32h747-disco"
->>> +
->>> +config SYS_VENDOR
->>> +	default "st"
->>> +
->>> +config SYS_SOC
->>> +	default "stm32h7"
->>> +
->>> +config SYS_CONFIG_NAME
->>> +	default "stm32h747-disco"
->>> +
->>> +endif
->>> diff --git a/board/st/stm32h747-disco/MAINTAINERS
->>> b/board/st/stm32h747-disco/MAINTAINERS new file mode 100644
->>> index 000000000000..d48649f773f3
->>> --- /dev/null
->>> +++ b/board/st/stm32h747-disco/MAINTAINERS
->>> @@ -0,0 +1,7 @@
->>> +STM32H747 DISCOVERY BOARD
->>> +M:	Dario Binacchi <dario.binacchi@amarulasolutions.com>
->>> +S:	Maintained
->>> +F:	board/st/stm32h747-disco
->>> +F:	include/configs/stm32h747-disco.h
->>> +F:	configs/stm32h747-disco_defconfig
->>> +F:	arch/arm/dts/stm32h747*
->>> diff --git a/board/st/stm32h747-disco/Makefile
->>> b/board/st/stm32h747-disco/Makefile new file mode 100644
->>> index 000000000000..e11f052cc88f
->>> --- /dev/null
->>> +++ b/board/st/stm32h747-disco/Makefile
->>> @@ -0,0 +1,6 @@
->>> +# SPDX-License-Identifier: GPL-2.0+
->>> +#
->>> +# Copyright (c) 2025 Dario Binacchi
->>> <dario.binacchi@amarulasolutions.com> +#
->>> +
->>> +obj-y	:= stm32h747-disco.o
->>> diff --git a/board/st/stm32h747-disco/stm32h747-disco.c
->>> b/board/st/stm32h747-disco/stm32h747-disco.c new file mode 100644
->>> index 000000000000..be0884bdeb4d
->>> --- /dev/null
->>> +++ b/board/st/stm32h747-disco/stm32h747-disco.c
->>> @@ -0,0 +1,42 @@
->>> +// SPDX-License-Identifier: GPL-2.0+
->>> +/*
->>> + * stm32h747i-disco support
->>> + *
->>> + * Copyright (C) 2025 Dario Binacchi
->>> <dario.binacchi@amarulasolutions.com>
->>> + */
->>> +
->>> +#include <dm.h>
->>> +#include <init.h>
->>> +#include <log.h>
->>> +#include <asm/global_data.h>
->>> +
->>> +DECLARE_GLOBAL_DATA_PTR;
->>> +
->>> +int dram_init(void)
->>> +{
->>> +	struct udevice *dev;
->>> +	int ret;
->>> +
->>> +	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
->>> +	if (ret) {
->>> +		debug("DRAM init failed: %d\n", ret);
->>> +		return ret;
->>> +	}
->>> +
->>> +	if (fdtdec_setup_mem_size_base() != 0)
->>> +		ret = -EINVAL;
->>> +
->>> +	return ret;
->>> +}
->>> +
->>> +int dram_init_banksize(void)
->>> +{
->>> +	fdtdec_setup_memory_banksize();
->>> +
->>> +	return 0;
->>> +}
->>> +
->>> +int board_init(void)
->>> +{
->>> +	return 0;
->>> +}
->>> diff --git a/configs/stm32h747-disco_defconfig
->>> b/configs/stm32h747-disco_defconfig new file mode 100644
->>> index 000000000000..8a0c72450d1e
->>> --- /dev/null
->>> +++ b/configs/stm32h747-disco_defconfig
->>> @@ -0,0 +1,35 @@
->>> +CONFIG_ARM=y
->>> +CONFIG_ARCH_STM32=y
->>> +CONFIG_TEXT_BASE=0x08000000
->>> +CONFIG_SYS_MALLOC_LEN=0x100000
->>> +CONFIG_NR_DRAM_BANKS=1
->>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x24040000
->>> +CONFIG_ENV_SIZE=0x2000
->>> +CONFIG_DEFAULT_DEVICE_TREE="st/stm32h747i-disco"
->>> +CONFIG_OF_LIBFDT_OVERLAY=y
->>> +CONFIG_SYS_LOAD_ADDR=0xd0400000
->>> +CONFIG_STM32H7=y
->>> +CONFIG_TARGET_STM32H747_DISCO=y
->>> +CONFIG_DISTRO_DEFAULTS=y
+> TAMP backup registers will be exposed as nvmem cells.
 > 
-> I'm just wondering if there is any plan to move forward to use the new
-> approach?
+> Each registers ([0..127] for STM32MP2, [0..31] for STM32MP1) could be
+> exposed as nvmem cells under the nvram node in device tree
 > 
-> As fair as I remember this is the "deprecated" option...
+> Signed-off-by: Simeon Marijon <simeon.marijon@foss.st.com>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> 
+> ---
+> 
+> Changes in v4:
+>    - Replace stm32mp25 by stm32mp2
+>    - Constify stm32_tamp_bkpreg_access field of stm32_tamp_nvram_priv struct
+>    - Add get_access() callback in stm32_tamp_nvram_drvdata struct
+> 
+> Changes in v3:
+>    - Fix typo in SPDX-License-Identifier
+> 
+> Changes in v2:
+>    - Rename nvram.c to tamp_nvram.c
+> 
+>  arch/arm/mach-stm32mp/Kconfig      |   9 +
+>  arch/arm/mach-stm32mp/Makefile     |   2 +
+>  arch/arm/mach-stm32mp/tamp_nvram.c | 667 +++++++++++++++++++++++++++++
+>  3 files changed, 678 insertions(+)
+>  create mode 100644 arch/arm/mach-stm32mp/tamp_nvram.c
+> 
+> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
+> index 58250901101..09b7d5123ae 100644
+> --- a/arch/arm/mach-stm32mp/Kconfig
+> +++ b/arch/arm/mach-stm32mp/Kconfig
+> @@ -139,6 +139,15 @@ config STM32_ECDSA_VERIFY
+>  	  ROM API provided on STM32MP.
+>  	  The ROM API is only available during SPL for now.
+>  
+> +config STM32MP_TAMP_NVMEM
+> +	bool "STM32 TAMP backup registers via NVMEM API"
+> +	select NVMEM
+> +	default y
+> +	help
+> +	  Say y to enable the uclass driver for TAMP Backup registers using the
+> +	  NVMEM API. It allows to access to boot mode or others shared information
+> +	  between software components/execution levels.
+> +
+>  config CMD_STM32KEY
+>  	bool "command stm32key to fuse public key hash"
+>  	depends on CMDLINE
+> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
+> index 103e3410ad9..ecd49fe668d 100644
+> --- a/arch/arm/mach-stm32mp/Makefile
+> +++ b/arch/arm/mach-stm32mp/Makefile
+> @@ -13,6 +13,8 @@ obj-$(CONFIG_STM32MP13X) += stm32mp1/
+>  obj-$(CONFIG_STM32MP25X) += stm32mp2/
+>  
+>  obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
+> +obj-$(CONFIG_STM32MP_TAMP_NVMEM) += tamp_nvram.o
+> +
+>  obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
+>  ifndef CONFIG_XPL_BUILD
+>  obj-y += cmd_stm32prog/
+> diff --git a/arch/arm/mach-stm32mp/tamp_nvram.c b/arch/arm/mach-stm32mp/tamp_nvram.c
+> new file mode 100644
+> index 00000000000..39cc2c111d8
+> --- /dev/null
+> +++ b/arch/arm/mach-stm32mp/tamp_nvram.c
+> @@ -0,0 +1,667 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> +/*
+> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
+> + */
+> +#define LOG_CATEGORY UCLASS_MISC
+> +
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <log.h>
+> +#include <misc.h>
+> +#include <regmap.h>
+> +#include <tee.h>
+> +#include <asm/io.h>
+> +#include <dm/device.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/devres.h>
+> +
+> +#define RIF_CID1			0x1
+> +#define CURRENT_CID			RIF_CID1
+> +#define NB_ZONES_STM32MP1		3
+> +#define NB_ZONES_STM32MP2		7
+> +
+> +#define _TAMP_SECCFGR			0x20U
+> +#define _TAMP_BKPRIFR(x)		(0x70U + 0x4U * ((x) - 1))
+> +#define _TAMP_RXCIDCFGR(x)		(0x80U + 0x4U * ((x)))
+> +
+> +#define BKPREG_PROTECTION_ZONE_1	0
+> +#define BKPREG_PROTECTION_ZONE_2	1
+> +#define BKPREG_PROTECTION_ZONE_3	2
+> +
+> +#define BKPREG_PROTECTION_ZONE_1_RIF1	0
+> +#define BKPREG_PROTECTION_ZONE_1_RIF2	1
+> +#define BKPREG_PROTECTION_ZONE_2_RIF1	2
+> +#define BKPREG_PROTECTION_ZONE_2_RIF2	3
+> +#define BKPREG_PROTECTION_ZONE_3_RIF1	4
+> +#define BKPREG_PROTECTION_ZONE_3_RIF0	5
+> +#define BKPREG_PROTECTION_ZONE_3_RIF2	6
+> +#define NB_COMPARTMENT_STM32MP2		3
+> +
+> +enum stm32_tamp_bkpreg_access {
+> +	BKP_READ_WRITE,
+> +	BKP_READ,
+> +	BKP_NO
+> +};
+> +
+> +struct stm32_tamp_nvram_plat {
+> +	void __iomem *base;
+> +	void __iomem *parent_base;
+> +	fdt_size_t size;
+> +	fdt_size_t parent_size;
+> +	unsigned int nb_total_regs;
+> +};
+> +
+> +struct stm32_tamp_nvram_priv {
+> +	int *idx_bkpreg_zones_end;
+> +	struct regmap *config_regmap;
+> +	struct regmap *bkpregs_regmap;
+> +	const enum stm32_tamp_bkpreg_access *bkpreg_access;
+> +};
+> +
+> +struct stm32_tamp_nvram_drvdata {
+> +	const unsigned int nb_zones;
+> +	const struct reg_field *reg_fields;
+> +	const enum stm32_tamp_bkpreg_access *(*get_access)(struct udevice *dev);
+> +};
+> +
+> +static const struct reg_field stm32mp1_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP1 - 1] = {
+> +	[BKPREG_PROTECTION_ZONE_1] = REG_FIELD(_TAMP_SECCFGR, 0, 7),
+> +	[BKPREG_PROTECTION_ZONE_2] = REG_FIELD(_TAMP_SECCFGR, 16, 23),
+> +};
+> +
+> +static const struct reg_field stm32mp2_tamp_nvram_zone_cfg_fields[NB_ZONES_STM32MP2 - 1] = {
+> +	[BKPREG_PROTECTION_ZONE_1_RIF1] = REG_FIELD(_TAMP_BKPRIFR(1), 0,  7),
+> +	[BKPREG_PROTECTION_ZONE_1_RIF2] = REG_FIELD(_TAMP_SECCFGR,    0,  7),
+> +	[BKPREG_PROTECTION_ZONE_2_RIF1] = REG_FIELD(_TAMP_BKPRIFR(2), 0,  7),
+> +	[BKPREG_PROTECTION_ZONE_2_RIF2] = REG_FIELD(_TAMP_SECCFGR,   16, 23),
+> +	[BKPREG_PROTECTION_ZONE_3_RIF1] = REG_FIELD(_TAMP_BKPRIFR(3), 0,  7),
+> +	[BKPREG_PROTECTION_ZONE_3_RIF0] = REG_FIELD(_TAMP_BKPRIFR(3), 16, 23),
+> +};
+> +
+> +static const struct reg_field stm32mp2_tamp_nvram_rxcidcfg_cfen_fields[NB_COMPARTMENT_STM32MP2] = {
+> +	REG_FIELD(_TAMP_RXCIDCFGR(0), 0, 0),
+> +	REG_FIELD(_TAMP_RXCIDCFGR(1), 0, 0),
+> +	REG_FIELD(_TAMP_RXCIDCFGR(2), 0, 0),
+> +};
+> +
+> +static const struct reg_field stm32mp2_tamp_nvram_rxcidcfg_fields[NB_COMPARTMENT_STM32MP2] = {
+> +	REG_FIELD(_TAMP_RXCIDCFGR(0), 4, 6),
+> +	REG_FIELD(_TAMP_RXCIDCFGR(1), 4, 6),
+> +	REG_FIELD(_TAMP_RXCIDCFGR(2), 4, 6),
+> +};
+> +
+> +static const enum stm32_tamp_bkpreg_access stm32mp1_tamp_bkpreg_access[NB_ZONES_STM32MP1] = {
+> +	[BKPREG_PROTECTION_ZONE_1] = BKP_NO,
+> +	[BKPREG_PROTECTION_ZONE_2] = BKP_READ,
+> +	[BKPREG_PROTECTION_ZONE_3] = BKP_READ_WRITE,
+> +};
+> +
+> +static const enum stm32_tamp_bkpreg_access *stm32mp1_tamp_get_access_rights(struct udevice *dev)
+> +{
+> +	return stm32mp1_tamp_bkpreg_access;
+> +}
+> +
+> +static int stm32mp2_tamp_is_compartment_isolation_enabled(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	int nb_compartment_enabled = 0;
+> +	u32 cfen;
+> +	struct regmap_field *cfen_field;
+> +
+> +	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
+> +		cfen_field = devm_regmap_field_alloc(dev,
+> +						     priv->config_regmap,
+> +						     stm32mp2_tamp_nvram_rxcidcfg_cfen_fields[i]);
+> +		if (IS_ERR_OR_NULL(cfen_field)) {
+> +			dev_err(dev, "Can't allocate field for reading configuration\n");
+> +			return -ENOMEM;
+> +		}
+> +		if (regmap_field_read(cfen_field, &cfen) != 0) {
+> +			dev_err(dev, "Can't read field for registers zones\n");
+> +			devm_regmap_field_free(dev, cfen_field);
+> +			return -EINVAL;
+> +		}
+> +		nb_compartment_enabled += cfen;
+> +		devm_regmap_field_free(dev, cfen_field);
+> +	}
+> +
+> +	if (nb_compartment_enabled == 0)
+> +		return 0;
+> +	else if (nb_compartment_enabled == NB_COMPARTMENT_STM32MP2)
+> +		return 1;
+> +	else
+> +		return -EINVAL;
+> +}
+> +
+> +static bool *stm32mp2_tamp_get_compartment_owner(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	struct regmap_field *cid_field;
+> +	u32 cid_per_zone;
+> +	int isolation_enabled;
+> +	bool *compartment_owner;
+> +
+> +	isolation_enabled = stm32mp2_tamp_is_compartment_isolation_enabled(dev);
+> +	if (isolation_enabled < 0)
+> +		return NULL;
+> +
+> +	compartment_owner = devm_kcalloc(dev,
+> +					 NB_COMPARTMENT_STM32MP2,
+> +					 sizeof(*compartment_owner),
+> +					 GFP_KERNEL);
+> +	if (!compartment_owner)
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	for (int i = 0; i < NB_COMPARTMENT_STM32MP2; i++) {
+> +		if (isolation_enabled) {
+> +			cid_field = devm_regmap_field_alloc(dev,
+> +							    priv->config_regmap,
+> +							    stm32mp2_tamp_nvram_rxcidcfg_fields[i]
+> +							    );
+> +
+> +			if (regmap_field_read(cid_field, &cid_per_zone) != 0) {
+> +				dev_err(dev, "Can't read field for registers zones\n");
+> +				devm_regmap_field_free(dev, cid_field);
+> +				devm_kfree(dev, compartment_owner);
+> +				return ERR_PTR(-EINVAL);
+> +			}
+> +			if (cid_per_zone == CURRENT_CID)
+> +				compartment_owner[i] = true;
+> +			else
+> +				compartment_owner[i] = false;
+> +
+> +			devm_regmap_field_free(dev, cid_field);
+> +		} else {
+> +			compartment_owner[i] = true;
+> +		}
+> +	}
+> +
+> +	return compartment_owner;
+> +}
+> +
+> +static const enum stm32_tamp_bkpreg_access *stm32mp2_tamp_get_access_rights(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_drvdata *drvdata =
+> +		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
+> +	unsigned int nb_zones = drvdata->nb_zones;
+> +	bool *compartment_owner;
+> +	enum stm32_tamp_bkpreg_access *bkpreg_access;
+> +
+> +	compartment_owner = stm32mp2_tamp_get_compartment_owner(dev);
+> +	if (IS_ERR(compartment_owner))
+> +		return ERR_PTR(-ENODEV);
+> +
+> +	bkpreg_access = devm_kcalloc(dev,
+> +				     NB_ZONES_STM32MP2,
+> +				     sizeof(*bkpreg_access),
+> +				     GFP_KERNEL);
+> +
+> +	for (int protection_zone_idx = 0; protection_zone_idx < nb_zones;
+> +	     protection_zone_idx++) {
+> +		switch (protection_zone_idx) {
+> +		case BKPREG_PROTECTION_ZONE_1_RIF1:
+> +			bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_1_RIF2:
+> +			bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_2_RIF1:
+> +			if (compartment_owner[1] || compartment_owner[2])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ;
+> +			else
+> +				bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_2_RIF2:
+> +			if (compartment_owner[1] || compartment_owner[2])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ;
+> +			else
+> +				bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_3_RIF1:
+> +			if (compartment_owner[1])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
+> +			else if (compartment_owner[0] || compartment_owner[2])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ;
+> +			else
+> +				bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_3_RIF0:
+> +			if (compartment_owner[0])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
+> +			else if (compartment_owner[1] || compartment_owner[2])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ;
+> +			else
+> +				bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		case BKPREG_PROTECTION_ZONE_3_RIF2:
+> +			if (compartment_owner[2])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ_WRITE;
+> +			else if (compartment_owner[0] || compartment_owner[1])
+> +				bkpreg_access[protection_zone_idx] = BKP_READ;
+> +			else
+> +				bkpreg_access[protection_zone_idx] = BKP_NO;
+> +			break;
+> +		default:
+> +			devm_kfree(dev, bkpreg_access);
+> +			return ERR_PTR(-ENODEV);
+> +		}
+> +	}
+> +
+> +	return bkpreg_access;
+> +}
+> +
+> +static const struct stm32_tamp_nvram_drvdata stm32mp1_tamp_nvram = {
+> +	.nb_zones = NB_ZONES_STM32MP1,
+> +	.reg_fields = stm32mp1_tamp_nvram_zone_cfg_fields,
+> +	.get_access = stm32mp1_tamp_get_access_rights,
+> +};
+> +
+> +static const struct stm32_tamp_nvram_drvdata stm32mp2_tamp_nvram = {
+> +	.nb_zones = NB_ZONES_STM32MP2,
+> +	.reg_fields = stm32mp2_tamp_nvram_zone_cfg_fields,
+> +	.get_access = stm32mp2_tamp_get_access_rights,
+> +};
+> +
+> +static int stm32_tamp_nvram_bkpreg_get_zone_idx(struct udevice *dev, int reg)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	struct stm32_tamp_nvram_drvdata *drvdata =
+> +		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
+> +	int *idx_bkpreg_zones_end = priv->idx_bkpreg_zones_end;
+> +	int nb_zones = drvdata->nb_zones;
+> +	int protection_zone_idx;
+> +
+> +	if (reg < 0)
+> +		return -1; // negative reg is the boundary of an empty zone
+> +
+> +	for (protection_zone_idx = 0; protection_zone_idx < nb_zones; protection_zone_idx++) {
+> +		if (reg <= idx_bkpreg_zones_end[protection_zone_idx])
+> +			break;
+> +	}
+> +
+> +	if (protection_zone_idx >= nb_zones)
+> +		return -1; // the reg is not a part of any zone
+> +
+> +	return protection_zone_idx;
+> +}
+> +
+> +static bool stm32_tamp_nvram_rights(struct udevice *dev, int reg, bool read_only)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	int protection_zone_idx = stm32_tamp_nvram_bkpreg_get_zone_idx(dev, reg);
+> +
+> +	if (protection_zone_idx < 0)
+> +		return false;
+> +
+> +	switch (priv->bkpreg_access[protection_zone_idx]) {
+> +	case BKP_READ_WRITE:
+> +		return true;
+> +	case BKP_READ:
+> +		return read_only;
+> +	case BKP_NO:
+> +		return false;
+> +	default:
+> +		dev_err(dev, "Can't get access rights for the zone\n");
+> +		return false;
+> +	}
+> +
+> +	return false;
+> +}
+> +
+> +static int stm32_tamp_nvram_write_byte(struct udevice *dev, u32 offset, u8 byte)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
+> +	int byte_in_word = offset - offset_aligned;
+> +	u32 read_value, to_be_writen_value;
+> +	u32 reg_idx = offset_aligned / sizeof(u32);
+> +
+> +	if (!stm32_tamp_nvram_rights(dev, reg_idx, false))
+> +		return -EIO;
+> +
+> +	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
+> +	to_be_writen_value = read_value & ~(0xFFUL << byte_in_word * 8);
+> +	to_be_writen_value |=  (u32)byte << (byte_in_word * 8);
+> +
+> +	return regmap_write(priv->bkpregs_regmap, offset_aligned, to_be_writen_value);
+> +}
+> +
+> +static int stm32_tamp_nvram_read_byte(struct udevice *dev, unsigned int offset, u8 *byte)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	int offset_aligned = ALIGN_DOWN(offset, sizeof(u32));
+> +	int byte_in_word = offset - offset_aligned;
+> +	u32 read_value;
+> +	u32 reg_idx = offset_aligned / sizeof(u32);
+> +
+> +	if (!stm32_tamp_nvram_rights(dev, reg_idx, true))
+> +		return -EIO;
+> +
+> +	regmap_read(priv->bkpregs_regmap, offset_aligned, &read_value);
+> +	*byte = (read_value >> (byte_in_word * 8)) & 0xFF;
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_tamp_nvram_read(struct udevice *dev, int offset, void *buf, int size)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	u8 byte;
+> +	u8 *buf_u8 = buf;
+> +	u32 temp_u32;
+> +	int i, ret;
+> +	int total = offset + size;
+> +	u32 reg_idx;
+> +
+> +	i = offset;
+> +	while (i < total)  {
+> +		reg_idx = i / sizeof(u32);
+> +		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
+> +			if (!stm32_tamp_nvram_rights(dev, reg_idx, true)) {
+> +				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
+> +					reg_idx);
+> +				temp_u32 = 0;
+> +			} else {
+> +				regmap_read(priv->bkpregs_regmap, i, &temp_u32);
+> +			}
+> +			memcpy(buf_u8, &temp_u32, sizeof(u32));
+> +			buf_u8 += sizeof(u32);
+> +			i += sizeof(u32);
+> +		} else {
+> +			ret = stm32_tamp_nvram_read_byte(dev, i, &byte);
+> +			if (ret != 0) {
+> +				dev_dbg(dev, "Backup register %u is not allowed to be read\n",
+> +					reg_idx);
+> +				byte = 0;
+> +			}
+> +			*buf_u8 = byte;
+> +			i++;
+> +			buf_u8++;
+> +		}
+> +	}
+> +
+> +	return size;
+> +}
+> +
+> +static int stm32_tamp_nvram_write(struct udevice *dev, int offset, const void *buf, int size)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	u8 *buf_u8 = (u8 *)buf;
+> +	u32 temp_u32;
+> +	size_t total = offset + size;
+> +	int i, ret;
+> +	u32 reg_idx;
+> +
+> +	i = offset;
+> +	while (i < total)  {
+> +		reg_idx = i / sizeof(u32);
+> +		if (i + sizeof(u32) <= total && IS_ALIGNED(i, sizeof(u32))) {
+> +			if (stm32_tamp_nvram_rights(dev, reg_idx, false)) {
+> +				memcpy(&temp_u32, buf_u8, sizeof(u32));
+> +				regmap_write(priv->bkpregs_regmap, i, temp_u32);
+> +			} else {
+> +				dev_dbg(dev, "Backup register %u is not allowed to be written",
+> +					reg_idx);
+> +			}
+> +			buf_u8 += sizeof(u32);
+> +			i += sizeof(u32);
+> +		} else {
+> +			ret = stm32_tamp_nvram_write_byte(dev, i, *buf_u8);
+> +			if (ret != 0)
+> +				dev_dbg(dev, "Backup register %u is not allowed to be written",
+> +					reg_idx);
+> +			i++;
+> +			buf_u8++;
+> +		}
+> +	}
+> +
+> +	return size;
+> +}
+> +
+> +static const struct misc_ops stm32_tamp_nvram_ops = {
+> +	.read = stm32_tamp_nvram_read,
+> +	.write = stm32_tamp_nvram_write,
+> +};
+> +
+> +static u32 *stm32_tamp_nvram_get_backup_zones(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	const struct stm32_tamp_nvram_drvdata *drvdata =
+> +		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
+> +	int nb_zones = drvdata->nb_zones;
+> +	int zone_idx;
+> +	int *idx_bkpreg_zones_end;
+> +	struct regmap *tamp_regmap = priv->config_regmap;
+> +	u32 offset_field;
+> +
+> +	idx_bkpreg_zones_end = devm_kcalloc(dev,
+> +					    sizeof(*idx_bkpreg_zones_end),
+> +					    nb_zones,
+> +					    GFP_KERNEL);
+> +	if (IS_ERR_OR_NULL(idx_bkpreg_zones_end)) {
+> +		dev_err(dev, "Can't allocate registers zones\n");
+> +		return ERR_PTR(-ENOMEM);
+> +	}
+> +
+> +	//Get the n-1 frontiers of zone within the tamp configuration registers
+> +	for (zone_idx = 0; zone_idx < nb_zones - 1; zone_idx++) {
+> +		const struct reg_field reg_field = drvdata->reg_fields[zone_idx];
+> +		struct regmap_field *field = devm_regmap_field_alloc(dev,
+> +								     tamp_regmap,
+> +								     reg_field);
+> +
+> +		if (IS_ERR_OR_NULL(field)) {
+> +			dev_err(dev, "Can't allocate registers zones\n");
+> +			devm_kfree(dev, idx_bkpreg_zones_end);
+> +			return ERR_PTR(-ENOMEM);
+> +		}
+> +		if (regmap_field_read(field, &offset_field) != 0) {
+> +			dev_err(dev, "Can't read field for registers zones\n");
+> +			devm_kfree(dev, idx_bkpreg_zones_end);
+> +			return ERR_PTR(-EIO);
+> +		}
+> +
+> +		idx_bkpreg_zones_end[zone_idx] = offset_field - 1;
+> +	}
+> +
+> +	//The last zone end is defined by the number of registers in TAMP
+> +	idx_bkpreg_zones_end[zone_idx] = plat->nb_total_regs - 1;
+> +
+> +	return idx_bkpreg_zones_end;
+> +}
+> +
+> +static void stm32_tamp_nvram_print_zones(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	int *zones_end = priv->idx_bkpreg_zones_end;
+> +
+> +	if (device_is_compatible(dev, "st,stm32mp25-tamp-nvram")) {
+> +		dev_dbg(dev,
+> +			"\n"
+> +			"Zone 1-RIF1 %3d - %3d %c%c\n"
+> +			"Zone 1-RIF2 %3d - %3d %c%c\n"
+> +			"Zone 2-RIF1 %3d - %3d %c%c\n"
+> +			"Zone 2-RIF2 %3d - %3d %c%c\n"
+> +			"Zone 3-RIF1 %3d - %3d %c%c\n"
+> +			"Zone 3-RIF0 %3d - %3d %c%c\n"
+> +			"Zone 3-RIF2 %3d - %3d %c%c\n",
+> +			0, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF1],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_1_RIF1] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1_RIF2],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_1_RIF2] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF1],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_2_RIF1] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2_RIF2],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_2_RIF2] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF1],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_3_RIF1] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF0],
+> +						false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_3_RIF0] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
+> +						true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3_RIF2],
+> +						false) ?
+> +				'W' :
+> +				'-');
+> +	} else if (device_is_compatible(dev, "st,stm32mp15-tamp-nvram")) {
+> +		dev_dbg(dev,
+> +			"\n"
+> +			"Zone 1 %3d - %3d %c%c\n"
+> +			"Zone 2 %3d - %3d %c%c\n"
+> +			"Zone 3 %3d - %3d %c%c\n",
+> +			0, zones_end[BKPREG_PROTECTION_ZONE_1],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_1], false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_1] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_2],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_2], false) ?
+> +				'W' :
+> +				'-',
+> +			zones_end[BKPREG_PROTECTION_ZONE_2] + 1,
+> +			zones_end[BKPREG_PROTECTION_ZONE_3],
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], true) ?
+> +				'R' :
+> +				'-',
+> +			stm32_tamp_nvram_rights(dev, zones_end[BKPREG_PROTECTION_ZONE_3], false) ?
+> +				'W' :
+> +				'-');
+> +	}
+> +}
+> +
+> +static int stm32_tamp_nvram_of_to_plat(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
+> +	fdt_addr_t addr = dev_read_addr_size_index(dev, 0, &plat->size);
+> +	fdt_addr_t parent_addr = dev_read_addr_size_index(dev->parent, 0, &plat->parent_size);
+> +
+> +	if (addr == FDT_ADDR_T_NONE)
+> +		return -EINVAL;
+> +	plat->base = (void __iomem *)addr;
+> +
+> +	if (parent_addr == FDT_ADDR_T_NONE)
+> +		return -EINVAL;
+> +	plat->parent_base = (void __iomem *)parent_addr;
+> +
+> +	if (plat->size == FDT_ADDR_T_NONE)
+> +		return -EOPNOTSUPP;
+> +
+> +	plat->nb_total_regs =  plat->size / sizeof(uint32_t);
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_tamp_nvram_probe(struct udevice *dev)
+> +{
+> +	struct stm32_tamp_nvram_plat *plat = dev_get_plat(dev);
+> +	struct stm32_tamp_nvram_priv *priv = dev_get_priv(dev);
+> +	struct regmap_config config_regmap;
+> +	struct regmap_config bckreg_regmap;
+> +	const struct stm32_tamp_nvram_drvdata *drvdata =
+> +		(struct stm32_tamp_nvram_drvdata *)dev_get_driver_data(dev);
+> +
+> +	config_regmap.r_start = (ulong)(plat->parent_base);
+> +	config_regmap.r_size = plat->parent_size;
+> +	config_regmap.reg_offset_shift = 0;
+> +	config_regmap.width = REGMAP_SIZE_32;
+> +	priv->config_regmap = devm_regmap_init(dev, NULL, NULL, &config_regmap);
+> +
+> +	bckreg_regmap.r_start = (ulong)(plat->base);
+> +	bckreg_regmap.r_size = plat->size;
+> +	bckreg_regmap.reg_offset_shift = 0;
+> +	bckreg_regmap.width = REGMAP_SIZE_32;
+> +	priv->bkpregs_regmap = devm_regmap_init(dev, NULL, NULL, &bckreg_regmap);
+> +
+> +	priv->idx_bkpreg_zones_end = stm32_tamp_nvram_get_backup_zones(dev);
+> +	if (IS_ERR_OR_NULL(priv->idx_bkpreg_zones_end)) {
+> +		dev_err(dev, "Failed to get the backup zone from tamp regs\n\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	priv->bkpreg_access = drvdata->get_access(dev);
+> +	stm32_tamp_nvram_print_zones(dev);
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_tamp_nvram_remove(struct udevice *dev)
+> +{
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id stm32_tamp_nvram_ids[] = {
+> +	{ .compatible = "st,stm32mp15-tamp-nvram", .data = (ulong)&stm32mp1_tamp_nvram },
+> +	{ .compatible = "st,stm32mp25-tamp-nvram", .data = (ulong)&stm32mp2_tamp_nvram },
+> +	{},
+> +};
+> +
+> +U_BOOT_DRIVER(stm32_tamp_nvram) = {
+> +	.name = "stm32_tamp_nvram",
+> +	.id = UCLASS_MISC,
+> +	.of_match = stm32_tamp_nvram_ids,
+> +	.priv_auto = sizeof(struct stm32_tamp_nvram_priv),
+> +	.plat_auto = sizeof(struct stm32_tamp_nvram_plat),
+> +	.ops = &stm32_tamp_nvram_ops,
+> +	.of_to_plat = of_match_ptr(stm32_tamp_nvram_of_to_plat),
+> +	.probe = stm32_tamp_nvram_probe,
+> +	.remove = stm32_tamp_nvram_remove,
+> +};
+> +
 
-Hi Lukasz
-
-I was not aware of deprecation of CONFIG_DISTRO_DEFAULTS .
-Can you point to me the other alternative ?
+Applied to u-boot-stm32/next
 
 Thanks
 Patrice
-
-> 
->>> +CONFIG_BOOTDELAY=3
->>> +CONFIG_AUTOBOOT_KEYED=y
->>> +CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop
->>> autoboot.\n" +CONFIG_AUTOBOOT_STOP_STR=" "
->>> +CONFIG_DEFAULT_FDT_FILE="stm32h747i-disco"
->>> +CONFIG_SYS_CBSIZE=256
->>> +CONFIG_SYS_PBSIZE=282
->>> +# CONFIG_DISPLAY_CPUINFO is not set
->>> +CONFIG_SYS_PROMPT="U-Boot > "
->>> +CONFIG_CMD_GPT=y
->>> +CONFIG_CMD_MMC=y
->>> +# CONFIG_CMD_SETEXPR is not set
->>> +CONFIG_CMD_CACHE=y
->>> +CONFIG_CMD_TIMER=y
->>> +CONFIG_CMD_EXT4_WRITE=y
->>> +# CONFIG_ISO_PARTITION is not set
->>> +CONFIG_OF_CONTROL=y
->>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->>> +CONFIG_NO_NET=y
->>> +CONFIG_STM32_SDMMC2=y
->>> +# CONFIG_PINCTRL_FULL is not set
->>> diff --git a/drivers/clk/stm32/clk-stm32h7.c
->>> b/drivers/clk/stm32/clk-stm32h7.c index 6acf2ff0a8fb..aa3be414a29f
->>> 100644 --- a/drivers/clk/stm32/clk-stm32h7.c
->>> +++ b/drivers/clk/stm32/clk-stm32h7.c
->>> @@ -114,6 +114,7 @@
->>>  #define		QSPISRC_PER_CK		3
->>>  
->>>  #define PWR_CR3				0x0c
->>> +#define PWR_CR3_LDOEN			BIT(1)
->>>  #define PWR_CR3_SCUEN			BIT(2)
->>>  #define PWR_D3CR			0x18
->>>  #define PWR_D3CR_VOS_MASK		GENMASK(15, 14)
->>> @@ -375,7 +376,11 @@ int configure_clocks(struct udevice *dev)
->>>  	clrsetbits_le32(pwr_base + PWR_D3CR, PWR_D3CR_VOS_MASK,
->>>  			VOS_SCALE_1 << PWR_D3CR_VOS_SHIFT);
->>>  	/* Lock supply configuration update */
->>> +#if IS_ENABLED(CONFIG_TARGET_STM32H747_DISCO)
->>> +	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_LDOEN);
->>> +#else
->>>  	clrbits_le32(pwr_base + PWR_CR3, PWR_CR3_SCUEN);
->>> +#endif
->>>  	while (!(readl(pwr_base + PWR_D3CR) & PWR_D3CR_VOSREADY))
->>>  		;
->>>  
->>> diff --git a/include/configs/stm32h747-disco.h
->>> b/include/configs/stm32h747-disco.h new file mode 100644
->>> index 000000000000..393445a8ae1f
->>> --- /dev/null
->>> +++ b/include/configs/stm32h747-disco.h
->>> @@ -0,0 +1,32 @@
->>> +/* SPDX-License-Identifier: GPL-2.0+ */
->>> +/*
->>> + * Copyright (C) 2025 Dario Binacchi
->>> <dario.binacchi@amarulasolutions.com>
->>> + */
->>> +
->>> +#ifndef __CONFIG_H
->>> +#define __CONFIG_H
->>> +
->>> +#include <config.h>
->>> +#include <linux/sizes.h>
->>> +
->>> +/* For booting Linux, use the first 16MB of memory */
->>> +#define CFG_SYS_BOOTMAPSZ		SZ_16M
->>> +
->>> +#define CFG_SYS_FLASH_BASE		0x08000000
->>> +
->>> +#define CFG_SYS_HZ_CLOCK		1000000
->>> +
->>> +#define BOOT_TARGET_DEVICES(func) \
->>> +	func(MMC, mmc, 0)
->>> +
->>> +#include <config_distro_bootcmd.h>
->>> +#define CFG_EXTRA_ENV_SETTINGS				\
->>> +			"kernel_addr_r=0xD0008000\0"
->>> 	\
->>> +			"fdtfile=stm32h747i-disco.dtb\0"	\
->>> +			"fdt_addr_r=0xD0408000\0"		\
->>> +			"scriptaddr=0xD0418000\0"		\
->>> +			"pxefile_addr_r=0xD0428000\0" \
->>> +			"ramdisk_addr_r=0xD0438000\0"
->>> 	\
->>> +			BOOTENV
->>> +
->>> +#endif /* __CONFIG_H */  
->> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>
->> Thanks
->> Patrice
-> 
-> 
-> 
-> 
-> Best regards,
-> 
-> Lukasz Majewski
-> 
-> --
-> 
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 _______________________________________________
 Uboot-stm32 mailing list
 Uboot-stm32@st-md-mailman.stormreply.com
